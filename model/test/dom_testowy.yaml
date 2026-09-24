@@ -1,0 +1,232 @@
+# Model TESTOWY pipeline'u (nie jest projektem Domu LAMELA!).
+# Prosty dom 2-kondygnacyjny 10 x 8 m (w osiach): okna, drzwi, schody dwubiegowe ze spocznikiem,
+# dach płaski z attyką, płyta-wspornik (taras) na słupach nad miejscem postojowym, lamele na elewacji płd.
+# Zgodny z docs/SCHEMAT_MODELU.md. Używany przez tools/test_pipeline.py.
+meta: {nazwa: "Dom testowy pipeline'u 3D", wersja: "1.0", data: "2026-09-25"}
+uklad: {zero_abs: 101.65, azymut_osi_y: 0.0}
+osie:
+  x: {A: 0.00, B: 4.20, C: 7.00, D: 10.00}
+  y: {"1": 0.00, "2": 3.20, "3": 4.50, "4": 8.00}
+kondygnacje:
+  - {id: P0, nazwa: Parter, rzedna: 0.00, wys_kondygnacji: 3.06, wys_w_swietle: 2.70, podloga: POD-0}
+  - {id: P1, nazwa: Piętro, rzedna: 3.06, wys_kondygnacji: 2.91, wys_w_swietle: 2.70, podloga: POD-1}
+
+materialy:
+  TYNK_GIPS: {nazwa: "Tynk gipsowy maszynowy", lambda: 0.40, rho: 1300, cp: 840, mu: 10, kreskowanie: TYNK, kolor: "#f3f1ec"}
+  TYNK_SIL:  {nazwa: "Tynk silikonowy cienkowarstwowy, biały", lambda: 0.70, rho: 1800, cp: 840, mu: 60, kreskowanie: TYNK, kolor: "#f5f4f0"}
+  SIL18:     {nazwa: "Bloczek wapienno-piaskowy 18 cm, kl. 20", lambda: 0.77, rho: 1800, cp: 840, mu: 15, kreskowanie: MUR_SILIKAT, kolor: "#d9d4ca"}
+  SIL12:     {nazwa: "Bloczek wapienno-piaskowy 12 cm, kl. 15", lambda: 0.77, rho: 1800, cp: 840, mu: 15, kreskowanie: MUR_SILIKAT, kolor: "#d9d4ca"}
+  EPS031:    {nazwa: "Styropian grafitowy EPS 031", lambda: 0.031, rho: 15, cp: 1450, mu: 30, kreskowanie: IZOLACJA_MIEKKA, kolor: "#8f9296"}
+  XPS300:    {nazwa: "Polistyren ekstrudowany XPS 300", lambda: 0.035, rho: 30, cp: 1450, mu: 150, kreskowanie: IZOLACJA_TWARDA, kolor: "#9cc7a4"}
+  EPS_AKU:   {nazwa: "Styropian akustyczny EPS T", lambda: 0.040, rho: 12, cp: 1450, mu: 30, kreskowanie: IZOLACJA_MIEKKA, kolor: "#e9e7df"}
+  PIR:       {nazwa: "Płyty PIR (izolacja spadkowa)", lambda: 0.022, rho: 32, cp: 1400, mu: 60, kreskowanie: IZOLACJA_TWARDA, kolor: "#d8c98a"}
+  EPDM:      {nazwa: "Membrana EPDM 1,5 mm", lambda: 0.25, rho: 1150, cp: 1000, mu: 75000, kreskowanie: MEMBRANA, kolor: "#2f3032"}
+  PAROIZ:    {nazwa: "Paroizolacja bitumiczna", lambda: 0.23, rho: 1100, cp: 1000, mu: 50000, kreskowanie: MEMBRANA, kolor: "#3a3a3a"}
+  HYDRO:     {nazwa: "Hydroizolacja z pap termozgrzewalnych", lambda: 0.23, rho: 1100, cp: 1000, mu: 50000, kreskowanie: MEMBRANA, kolor: "#3a3a3a"}
+  ZB_C30:    {nazwa: "Żelbet C30/37", lambda: 2.30, rho: 2500, cp: 1000, mu: 130, kreskowanie: ZELBET, kolor: "#b9b6ae"}
+  ZB_C25:    {nazwa: "Beton C25/30 (płyta podkładowa)", lambda: 2.00, rho: 2400, cp: 1000, mu: 130, kreskowanie: BETON, kolor: "#b9b6ae"}
+  JASTRYCH:  {nazwa: "Jastrych cementowy", lambda: 1.00, rho: 2000, cp: 1000, mu: 50, kreskowanie: BETON, kolor: "#c9c5bb"}
+  PIASEK:    {nazwa: "Podsypka piaskowa zagęszczona", lambda: 2.00, rho: 1900, cp: 1000, mu: 50, kreskowanie: GRUNT_NASYPOWY, kolor: "#d8c7a0"}
+  GRES:      {nazwa: "Płytki gresowe 60x120", lambda: 1.30, rho: 2300, cp: 840, mu: 200, kreskowanie: BRAK, kolor: "#cfc9bf"}
+  DESKA_DEB: {nazwa: "Deska podłogowa dębowa", lambda: 0.18, rho: 700, cp: 1600, mu: 50, kreskowanie: DREWNO, kolor: "#b58a5a"}
+  DESKA_KOMP: {nazwa: "Deska tarasowa kompozytowa", lambda: 0.20, rho: 1200, cp: 1400, mu: 1000, kreskowanie: DREWNO, kolor: "#6d5a49"}
+  LEGARY:    {nazwa: "Legary tarasowe na wspornikach (pustka)", lambda: 0.20, rho: 300, cp: 1000, mu: 1, kreskowanie: BRAK, kolor: "#8a7a66"}
+  STAL_S355: {nazwa: "Stal konstrukcyjna S355, malowana proszkowo RAL 7016", lambda: 50, rho: 7850, cp: 450, mu: 1000000, kreskowanie: STAL, kolor: "#383e42"}
+  DREWNO_TERMO: {nazwa: "Drewno termojesion (lamele elewacyjne)", lambda: 0.13, rho: 600, cp: 1600, mu: 50, kreskowanie: DREWNO, kolor: "#9b6b41"}
+
+przegrody:
+  SZ1:
+    nazwa: "Ściana zewnętrzna nośna, silikat 18 + ETICS EPS 20"
+    typ: sciana_zewn
+    warstwy:
+      - {mat: TYNK_GIPS, d: 0.015}
+      - {mat: SIL18, d: 0.18, konstrukcyjna: true}
+      - {mat: EPS031, d: 0.20}
+      - {mat: TYNK_SIL, d: 0.007}
+  SW1:
+    nazwa: "Ściana wewnętrzna nośna, silikat 18"
+    typ: sciana_wewn_nosna
+    warstwy:
+      - {mat: TYNK_GIPS, d: 0.015}
+      - {mat: SIL18, d: 0.18, konstrukcyjna: true}
+      - {mat: TYNK_GIPS, d: 0.015}
+  SD1:
+    nazwa: "Ścianka działowa, silikat 12"
+    typ: scianka_dzialowa
+    warstwy:
+      - {mat: TYNK_GIPS, d: 0.015}
+      - {mat: SIL12, d: 0.12, konstrukcyjna: true}
+      - {mat: TYNK_GIPS, d: 0.015}
+  POD-0:
+    nazwa: "Podłoga na gruncie"
+    typ: podloga_na_gruncie
+    warstwy:
+      - {mat: GRES, d: 0.010}
+      - {mat: JASTRYCH, d: 0.065}
+      - {mat: XPS300, d: 0.150}
+      - {mat: ZB_C25, d: 0.120, konstrukcyjna: true}
+      - {mat: PIASEK, d: 0.150}
+  POD-1:
+    nazwa: "Podłoga na stropie (warstwy nad płytą)"
+    typ: strop
+    warstwy:
+      - {mat: DESKA_DEB, d: 0.015}
+      - {mat: JASTRYCH, d: 0.055}
+      - {mat: EPS_AKU, d: 0.080}
+  SD-D1:
+    nazwa: "Stropodach pełny, odwrócony spadek PIR"
+    typ: stropodach
+    warstwy:
+      - {mat: EPDM, d: 0.0015}
+      - {mat: PIR, d: 0.220}
+      - {mat: PAROIZ, d: 0.002}
+      - {mat: ZB_C30, d: 0.200, konstrukcyjna: true}
+      - {mat: TYNK_GIPS, d: 0.010}
+  TAR1:
+    nazwa: "Taras na płycie wspornikowej"
+    typ: taras
+    warstwy:
+      - {mat: DESKA_KOMP, d: 0.025}
+      - {mat: LEGARY, d: 0.045}
+      - {mat: HYDRO, d: 0.004}
+      - {mat: ZB_C30, d: 0.200, konstrukcyjna: true}
+
+sciany:
+  # --- P0 ---
+  - {id: S0-01, kond: P0, przegroda: SZ1, os: [[0.00, 0.00], [10.00, 0.00]], wnetrze: lewa, z_od: null, z_do: null}
+  - {id: S0-02, kond: P0, przegroda: SZ1, os: [[10.00, 0.00], [10.00, 8.00]], wnetrze: lewa, z_od: null, z_do: null}
+  - {id: S0-03, kond: P0, przegroda: SZ1, os: [[10.00, 8.00], [0.00, 8.00]], wnetrze: lewa, z_od: null, z_do: null}
+  - {id: S0-04, kond: P0, przegroda: SZ1, os: [[0.00, 8.00], [0.00, 0.00]], wnetrze: lewa, z_od: null, z_do: null}
+  - {id: S0-05, kond: P0, przegroda: SW1, os: [[4.20, 0.00], [4.20, 8.00]], wnetrze: srodek, z_od: null, z_do: null}
+  - {id: S0-06, kond: P0, przegroda: SD1, os: [[0.00, 4.50], [4.20, 4.50]], wnetrze: srodek, z_od: null, z_do: null}
+  # --- P1 ---
+  - {id: S1-01, kond: P1, przegroda: SZ1, os: [[0.00, 0.00], [10.00, 0.00]], wnetrze: lewa, z_od: null, z_do: null}
+  - {id: S1-02, kond: P1, przegroda: SZ1, os: [[10.00, 0.00], [10.00, 8.00]], wnetrze: lewa, z_od: null, z_do: null}
+  - {id: S1-03, kond: P1, przegroda: SZ1, os: [[10.00, 8.00], [0.00, 8.00]], wnetrze: lewa, z_od: null, z_do: null}
+  - {id: S1-04, kond: P1, przegroda: SZ1, os: [[0.00, 8.00], [0.00, 0.00]], wnetrze: lewa, z_od: null, z_do: null}
+  - {id: S1-05, kond: P1, przegroda: SW1, os: [[4.20, 0.00], [4.20, 8.00]], wnetrze: srodek, z_od: null, z_do: null}
+  - {id: S1-06, kond: P1, przegroda: SD1, os: [[0.00, 3.20], [4.20, 3.20]], wnetrze: srodek, z_od: null, z_do: null}
+  - {id: S1-07, kond: P1, przegroda: SD1, os: [[4.20, 4.50], [10.00, 4.50]], wnetrze: srodek, z_od: null, z_do: null}
+  - {id: S1-08, kond: P1, przegroda: SD1, os: [[7.00, 4.50], [7.00, 8.00]], wnetrze: srodek, z_od: null, z_do: null}
+
+otwory:
+  # --- P0 ---
+  - {id: O0-01, sciana: S0-01, symbol: HS1, typ: drzwi_przesuwne_HS, odl: 5.00, szer: 4.00, wys: 2.60, parapet: 0.00,
+     otwieranie: {strona: prawa, kierunek: do_wewn, rodzaj: HS}, oslona: screen_zip}
+  - {id: O0-02, sciana: S0-01, symbol: OP1, typ: okno, odl: 1.20, szer: 1.80, wys: 1.50, parapet: 0.90,
+     otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: RU}, oslona: zaluzja_zewn}
+  - {id: O0-03, sciana: S0-03, symbol: DZ1, typ: drzwi_zewn, odl: 6.30, szer: 1.10, wys: 2.30, parapet: 0.00,
+     otwieranie: {strona: lewa, kierunek: na_zewn, rodzaj: R}, oslona: brak}
+  - {id: O0-04, sciana: S0-03, symbol: OP2, typ: okno, odl: 1.00, szer: 1.60, wys: 1.20, parapet: 1.00,
+     otwieranie: {strona: prawa, kierunek: do_wewn, rodzaj: RU}, oslona: roleta_zewn}
+  - {id: O0-05, sciana: S0-02, symbol: OP1, typ: okno, odl: 2.00, szer: 1.50, wys: 1.50, parapet: 0.90,
+     otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: RU}, oslona: zaluzja_zewn}
+  - {id: O0-06, sciana: S0-05, symbol: OT1, typ: otwor, odl: 5.80, szer: 1.20, wys: 2.20, parapet: 0.00}
+  - {id: O0-07, sciana: S0-06, symbol: DW1, typ: drzwi, odl: 2.80, szer: 0.90, wys: 2.10, parapet: 0.00,
+     otwieranie: {strona: prawa, kierunek: do_wewn, rodzaj: R}}
+  - {id: O0-08, sciana: S0-02, symbol: FX1, typ: fix, odl: 5.00, szer: 2.00, wys: 1.00, parapet: 1.10, oslona: brak}
+  - {id: O0-09, sciana: S0-04, symbol: OP3, typ: okno, odl: 5.20, szer: 1.50, wys: 1.50, parapet: 0.90,
+     otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: RU}, oslona: zaluzja_zewn}
+  # --- P1 ---
+  - {id: O1-01, sciana: S1-01, symbol: OP4, typ: okno, odl: 1.00, szer: 2.40, wys: 1.60, parapet: 0.80,
+     otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: RU}, oslona: brak}
+  - {id: O1-02, sciana: S1-01, symbol: OP5, typ: okno, odl: 5.20, szer: 3.60, wys: 2.40, parapet: 0.00,
+     otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: RU}, oslona: brak}
+  - {id: O1-03, sciana: S1-02, symbol: HS2, typ: drzwi_przesuwne_HS, odl: 1.20, szer: 2.40, wys: 2.30, parapet: 0.00,
+     otwieranie: {strona: prawa, kierunek: do_wewn, rodzaj: HS}, oslona: screen_zip}
+  - {id: O1-04, sciana: S1-03, symbol: OP6, typ: okno, odl: 1.20, szer: 1.00, wys: 1.00, parapet: 1.30,
+     otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: U}, oslona: roleta_zewn}
+  - {id: O1-05, sciana: S1-03, symbol: OP3, typ: okno, odl: 3.80, szer: 1.60, wys: 1.50, parapet: 0.90,
+     otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: RU}, oslona: roleta_zewn}
+  - {id: O1-06, sciana: S1-03, symbol: OP7, typ: okno, odl: 7.20, szer: 1.80, wys: 1.50, parapet: 0.90,
+     otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: RU}, oslona: roleta_zewn}
+  - {id: O1-07, sciana: S1-04, symbol: OP8, typ: okno, odl: 5.60, szer: 1.40, wys: 1.50, parapet: 0.90,
+     otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: RU}, oslona: zaluzja_zewn}
+  - {id: O1-08, sciana: S1-05, symbol: DW1, typ: drzwi, odl: 3.40, szer: 0.90, wys: 2.10, parapet: 0.00,
+     otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}}
+  - {id: O1-09, sciana: S1-05, symbol: DW1, typ: drzwi, odl: 5.20, szer: 0.90, wys: 2.10, parapet: 0.00,
+     otwieranie: {strona: prawa, kierunek: do_wewn, rodzaj: R}}
+  - {id: O1-10, sciana: S1-06, symbol: DW1, typ: drzwi, odl: 2.60, szer: 0.90, wys: 2.10, parapet: 0.00,
+     otwieranie: {strona: prawa, kierunek: do_wewn, rodzaj: R}}
+  - {id: O1-11, sciana: S1-08, symbol: DW2, typ: drzwi, odl: 1.00, szer: 0.80, wys: 2.10, parapet: 0.00,
+     otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}}
+
+pomieszczenia:
+  - {id: "0.01", kond: P0, nazwa: Gabinet, punkt: [2.0, 2.0], wielobok: null, kategoria: podstawowa, pobyt_ludzi: true,
+     posadzka: DESKA_DEB, sciany_wyk: TYNK_GIPS, sufit: TYNK_GIPS, temp: 20, went: {wyw: 0, naw: 30}}
+  - {id: "0.02", kond: P0, nazwa: Hol ze schodami, punkt: [3.2, 6.0], wielobok: null, kategoria: ruchu, pobyt_ludzi: false,
+     posadzka: GRES, sciany_wyk: TYNK_GIPS, sufit: TYNK_GIPS, temp: 20, went: {wyw: 0, naw: 0}}
+  - {id: "0.03", kond: P0, nazwa: Salon, punkt: [7.0, 2.0], wielobok: [[4.20, 0.00], [10.00, 0.00], [10.00, 4.50], [4.20, 4.50]],
+     kategoria: podstawowa, pobyt_ludzi: true, posadzka: DESKA_DEB, sciany_wyk: TYNK_GIPS, sufit: TYNK_GIPS, temp: 20, went: {wyw: 0, naw: 60}}
+  - {id: "0.04", kond: P0, nazwa: Kuchnia z jadalnią, punkt: [7.0, 6.0], wielobok: [[4.20, 4.50], [10.00, 4.50], [10.00, 8.00], [4.20, 8.00]],
+     kategoria: podstawowa, pobyt_ludzi: true, posadzka: GRES, sciany_wyk: TYNK_GIPS, sufit: TYNK_GIPS, temp: 20, went: {wyw: 70, naw: 30}}
+  - {id: "1.01", kond: P1, nazwa: Sypialnia, punkt: [2.0, 1.5], wielobok: null, kategoria: podstawowa, pobyt_ludzi: true,
+     posadzka: DESKA_DEB, sciany_wyk: TYNK_GIPS, sufit: TYNK_GIPS, temp: 20, went: {wyw: 0, naw: 30}}
+  - {id: "1.02", kond: P1, nazwa: Hol, punkt: [3.2, 6.0], wielobok: null, kategoria: ruchu, pobyt_ludzi: false,
+     posadzka: DESKA_DEB, sciany_wyk: TYNK_GIPS, sufit: TYNK_GIPS, temp: 20, went: {wyw: 0, naw: 0}}
+  - {id: "1.03", kond: P1, nazwa: Pokój, punkt: [7.0, 2.0], wielobok: null, kategoria: podstawowa, pobyt_ludzi: true,
+     posadzka: DESKA_DEB, sciany_wyk: TYNK_GIPS, sufit: TYNK_GIPS, temp: 20, went: {wyw: 0, naw: 30}}
+  - {id: "1.04", kond: P1, nazwa: Garderoba, punkt: [8.5, 6.0], wielobok: null, kategoria: pomocnicza, pobyt_ludzi: false,
+     posadzka: DESKA_DEB, sciany_wyk: TYNK_GIPS, sufit: TYNK_GIPS, temp: 20, went: {wyw: 15, naw: 0}}
+  - {id: "1.05", kond: P1, nazwa: Sypialnia 2, punkt: [5.5, 6.0], wielobok: null, kategoria: podstawowa, pobyt_ludzi: true,
+     posadzka: DESKA_DEB, sciany_wyk: TYNK_GIPS, sufit: TYNK_GIPS, temp: 20, went: {wyw: 0, naw: 30}}
+
+stropy:
+  - {id: ST1, nad: P0, wierzch: 2.91, grubosc: 0.20,
+     obrys: [[-0.09, -0.09], [10.09, -0.09], [10.09, 8.09], [-0.09, 8.09]],
+     otwory: [[[0.105, 4.62], [2.305, 4.62], [2.305, 7.895], [0.105, 7.895]]],
+     podloga: POD-1, sufit: TYNK_GIPS}
+
+dachy:
+  - {id: D1, obrys: [[-0.09, -0.09], [10.09, -0.09], [10.09, 8.09], [-0.09, 8.09]], plyta: {wierzch: 5.97, grubosc: 0.20},
+     przegroda: SD-D1, spadek: 0.02, attyka: {wys_nad_pokryciem: 0.30, szer: 0.25}, wpusty: [[5.00, 4.00]], rzygacze: []}
+
+wsporniki_plyty:
+  - {id: PL-D, obrys: [[10.09, 0.00], [14.00, 0.00], [14.00, 5.00], [10.09, 5.00]], wierzch: 2.91, grubosc: 0.20,
+     przegroda: TAR1, lacznik_termiczny: true}
+
+slupy:
+  - {id: SL1, xy: [13.85, 4.85], przekroj: "RK 120x120x6", mat: STAL_S355, z_od: -0.30, z_do: 2.41}
+  - {id: SL2, xy: [13.85, 0.15], przekroj: "RK 120x120x6", mat: STAL_S355, z_od: -0.30, z_do: 2.71}
+
+belki:
+  - {id: B1, os: [[10.09, 4.85], [13.91, 4.85]], b: 0.20, h: 0.30, spod: 2.41, mat: ZB_C30}
+
+fundamenty:
+  typ: lawy
+  elementy:
+    - {id: L1, os: [[0.00, 0.00], [10.00, 0.00]], b: 0.60, h: 0.30, spod: -1.10}
+    - {id: L2, os: [[10.00, 0.00], [10.00, 8.00]], b: 0.60, h: 0.30, spod: -1.10}
+    - {id: L3, os: [[10.00, 8.00], [0.00, 8.00]], b: 0.60, h: 0.30, spod: -1.10}
+    - {id: L4, os: [[0.00, 8.00], [0.00, 0.00]], b: 0.60, h: 0.30, spod: -1.10}
+    - {id: L5, os: [[4.20, 0.00], [4.20, 8.00]], b: 0.50, h: 0.30, spod: -1.10}
+    - {id: F1, os: [[13.55, 4.85], [14.15, 4.85]], b: 0.60, h: 0.40, spod: -1.10}
+    - {id: F2, os: [[13.55, 0.15], [14.15, 0.15]], b: 0.60, h: 0.40, spod: -1.10}
+
+schody:
+  - id: SCH1
+    z_kond: P0
+    na_kond: P1
+    liczba_stopni: 18
+    wys_stopnia: 0.17
+    szer_stopnia: 0.28
+    biegi:
+      - {start: [0.605, 4.62], kierunek: [0, 1], szer: 1.00, stopni: 9}
+      - {start: [1.805, 6.86], kierunek: [0, -1], szer: 1.00, stopni: 9}
+    spoczniki:
+      - {obrys: [[0.105, 6.86], [2.305, 6.86], [2.305, 7.895], [0.105, 7.895]], rzedna: 1.53}
+
+balustrady:
+  - {id: BL1, polilinia: [[0.105, 4.62, 3.06], [1.305, 4.62, 3.06]], wys: 1.10, typ: "stal malowana, pręty pionowe"}
+  - {id: BL2, polilinia: [[2.305, 4.62, 3.06], [2.305, 7.895, 3.06]], wys: 1.10, typ: "szkło klejone VSG 44.2"}
+  - {id: BL3, polilinia: [[1.205, 4.62, 0.17], [1.205, 6.86, 1.53]], wys: 0.95, typ: "szkło klejone VSG 44.2"}
+  - {id: BL4, polilinia: [[10.297, 0.08, 2.984], [13.92, 0.08, 2.984], [13.92, 4.92, 2.984], [10.297, 4.92, 2.984]],
+     wys: 1.10, typ: "szkło klejone VSG 55.2, pochwyt stal nierdzewna"}
+
+lamele:
+  - {id: LAM-S, elewacja: S, linia: [[-0.297, -0.297], [10.297, -0.297]], z_od: 3.06, z_do: 6.45, rozstaw: 0.20, b: 0.05, h: 0.12,
+     odsuniecie: 0.12, mat: DREWNO_TERMO}
+
+tarasy:
+  - {id: T1, obrys: [[4.30, -3.30], [10.297, -3.30], [10.297, -0.297], [4.30, -0.297]], rzedna: -0.02,
+     nawierzchnia: "deska kompozytowa na legarach"}

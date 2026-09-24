@@ -116,6 +116,13 @@ def main(spec_path):
     imgs = [i for i in spec.get("images", []) if Path(ROOT / i["path"]).exists() or Path(i["path"]).exists()]
     if imgs:
         cols, rows = grid_shape(len(imgs))
+        asp = []
+        for it in imgs:
+            pp = Path(it["path"]) if Path(it["path"]).exists() else ROOT / it["path"]
+            with Image.open(pp) as _im:
+                asp.append(_im.width / _im.height)
+        if len(imgs) in (2, 3) and sum(asp) / len(asp) > 1.25:
+            cols, rows = 1, len(imgs)
         cw = (gx1 - gx0 - (cols - 1) * 20) // cols
         ch = (gy1 - gy0 - (rows - 1) * 20) // rows
         for k, it in enumerate(imgs[: cols * rows]):

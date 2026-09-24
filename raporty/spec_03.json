@@ -1,5 +1,6 @@
 {
- "title": "Korekta Inwestora: „S” z przesuniętych brył, garaż w parterze — panel koncepcji uruchomiony ponownie",
+ "nr": 3,
+ "title": "Kluczowe ustalenie prawne: projekt wg WT z 19.09.2026 na podstawie art. 102a Prawa budowlanego",
  "stages": [
   [
    "Analiza szkicu — interpretacja v2 („S” z brył, garaż)",
@@ -51,5 +52,15 @@
   "Nowego rozporządzenia WT dla budynków nie wydano (sprawdzono wykaz Dz.U. do poz. 1244 z 23.09.2026).",
   "Koncepcja v2: sylweta „S” z przesuniętych brył, głębokie płyty 0,8–1,2 m, garaż 2-stanowiskowy w parterze; działka 32×50 m.",
   "Rozporządzenie o zakresie projektu (Dz.U. 2020 poz. 1609) obowiązuje; zmiana Dz.U. 2026 poz. 597 uwzględniana (R2)."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/docs/10_podstawy_prawne/grafiki/os_czasu_WT.png",
+   "caption": "Oś czasu: WT 2002 → okres przejściowy art. 102a PB"
+  },
+  {
+   "path": "/home/user/aihouse/00_wejscie/interpretacja_szkicu_v2.png",
+   "caption": "Koncepcja v2 w opracowaniu (panel 3 wariantów)"
+  }
  ]
 }
