@@ -15,29 +15,42 @@ muszą zostać potwierdzone w rejestrze wymagań prawnych (`docs/10_podstawy_pra
 | E – płyta dachu parteru | 430…1145 | ≈500 | płyta wysunięta ok. 1,5 m poza lico na zachód i ok. 0,9 m na wschód |
 | B – bryła I piętra | 500…1050 | 240…500 | bryła pełna; lewa krawędź to ściana/słup w x=500 |
 | C – boks przeszklony (3 kwatery) | 705…1035; rama górna 680…1130 | 295…405 | przeszklony „wykusz/rama” na I piętrze |
-| D – płyta pozioma | 675…1370 | ≈405 | płyta na poziomie posadzki boksu C, wysunięta na wschód do słupa |
-| D – słup | ≈1378 | 370…590 | smukły słup do terenu (podpora płyty D) |
+| D – linia pozioma | 675…1370 | ≈405 | krawędź stropu nad parterem pod boksem C, biegnąca na wschód nad garażem (v2) |
+| D – pion | ≈1378 | 370…590 | wschodni narożnik bryły garażu do terenu (v2) |
 | A – bryła II piętra z lamelami | 455…1060; płyta 390…1075 | 80…200 (płyta 185…240) | długa bryła z pionowymi lamelami, wspornik na zachód |
 
 Skala pozioma: bryła B (500…1050 px) ≈ 12,0 m ⇒ ≈ 45,8 px/m. W tej skali: bryła A ≈ 13,2 m (wspornik ≈ 1,0 m na zachód,
 płyta ≈ 2,4 m), przeszklenie parteru ≈ 12,2 m (od +1,0 m do +13,2 m względem lica zach. bryły B), boks C ≈ 7,2 m (od +4,5 do +11,7 m),
-słup D w odległości ≈ 19,0 m od lica zach. bryły B ⇒ pod płytą D między ścianą wsch. parteru a słupem ≈ 5,5–6,0 m — **wiata na 2 samochody**.
+pion D w odległości ≈ 19,0 m od lica zach. bryły B ⇒ między ścianą wsch. części mieszkalnej parteru a pionem D ≈ 5,5–6,0 m — **garaż na 2 samochody** (wg interpretacji v2).
 
 Proporcje pionowe szkicu są umowne (pasmo B jest ~2× wyższe od pasm A i E) — wysokości przyjmujemy wg wymagań WT i racjonalnej
-konstrukcji; zachowujemy natomiast: 3 pasma, przesunięcia brył, wysunięcia płyt, rytm kwater, położenie płyty D i słupa.
+konstrukcji; zachowujemy natomiast: 3 pasma, przesunięcia brył, wysunięcia płyt, rytm kwater, położenie linii D i narożnika garażu (v2).
 
-### 1.2 Przyjęta interpretacja (do rozwinięcia w koncepcji)
-* 3 kondygnacje nadziemne, bez podpiwniczenia, dachy płaskie (stropodachy), układ „przesuniętych brył”.
-* **Parter (P0)** — strefa dzienna otwarta na ogród (południe), pełne przeszklenie elewacji ogrodowej, płyta dachu parteru wysunięta
-  (okap/zadaszenie tarasu, osłona przed słońcem letnim).
-* **I piętro (P1)** — bryła pełna, cofnięta; przeszklony boks C (np. pokój rodzinny/biblioteka) z wyjściem na **taras na płycie D**,
-  która na wschodzie przechodzi w zadaszenie **wiaty garażowej na 2 samochody** podpartej smukłymi słupami.
-* **II piętro (P2)** — długa bryła obłożona pionowymi lamelami (prywatność, osłona przeciwsłoneczna), wspornik na zachód.
-* Elewacja ze szkicu = **elewacja ogrodowa, południowa**. Dojazd od północy (droga gminna), wiata po stronie wschodniej.
+### 1.2 Przyjęta interpretacja — WERSJA 2 (po decyzji Inwestora z 25.09.2026, obowiązująca)
+Decyzje Inwestora: (1) **„elewacja w S-kę” — kształt S tworzą same przesunięte bryły** (bez osobnej wstęgi/ramy);
+(2) element D **nie jest płytą tarasową** (brak tarasu nad garażem); (3) krawędzie płyt **głęboko wysunięte 0,8–1,2 m**
+(czytelne poziome warstwy, okapy i osłony przeciwsłoneczne); (4) **garaż 2-stanowiskowy w bryle parteru**.
+Grafika: `00_wejscie/interpretacja_szkicu_v2.png`.
+* 3 kondygnacje nadziemne, bez podpiwniczenia, dachy płaskie (stropodachy).
+* Sylweta elewacji południowej to rytm przesunięć **zachód – wschód – zachód**, tworzący „S”:
+  * **A — II piętro (P2)**: długa bryła w pionowych lamelach, przesunięta na ZACHÓD (wspornik ≈ 1,0 m poza lico bryły B,
+    płyta stropu/dachu wysunięta dalej, ≈ 0,8–1,2 m poza lico bryły A);
+  * **B — I piętro (P1)**: bryła pełna, cofnięta od zachodu i przesunięta na WSCHÓD, z **C — przeszklonym boksem w ramie**
+    (3 kwatery, ≈ 7 m), rama wysunięta ≈ 0,8–1,2 m;
+  * **G — garaż 2-stanowiskowy** w bryle parteru na WSCHODZIE (od lica wsch. części mieszkalnej do x ≈ 19 m od lica zach. bryły B);
+    linia D ze szkicu = krawędź stropu nad parterem biegnąca na wschód i kończąca się narożnikiem garażu (pion do terenu = ściana
+    wschodnia garażu). **Dach garażu nieużytkowy** (np. dach zielony ekstensywny), bez tarasu;
+  * **E — parter (P0)**: przeszklona strefa dzienna (≈ 12 m, 5 kwater) przesunięta na ZACHÓD, płyta dachu wysunięta
+    ≈ 1,5 m na zachód i ≈ 0,8–1,2 m na południe (okap zacieniający przeszklenie latem).
+* Elewacja ze szkicu = **elewacja ogrodowa, południowa**. Dojazd od północy (droga gminna); brama garażowa od północy
+  (lub od wschodu, jeśli pozwalają odległości); wejście główne zadaszone od północy.
+* Pionowe proporcje szkicu są umowne — poziomy kondygnacji wg WT; stropy nad parterem części mieszkalnej i garażu na tym
+  samym poziomie konstrukcyjnym (racjonalność), różnice wysokości w szkicu oddajemy grubością/wysunięciem krawędzi płyt.
+* ~~Interpretacja v1 (płyta D jako taras nad wiatą na słupie)~~ — **odrzucona przez Inwestora**.
 
 ## 2. Przyjęta działka (przykładowa, fikcyjna) **[parametry do potwierdzenia w koncepcji]**
 * Lokalizacja: strefa podmiejska Poznania, woj. wielkopolskie (dane klimatyczne i obciążenia: Poznań). Nazwy, numery i uchwała — fikcyjne.
-* Działka nr 123/4, obręb 0005 „Przykładowo”, gm. Przykładowo; prostokąt **30,00 m (front od drogi) × 50,00 m = 1500 m²**.
+* Działka nr 123/4, obręb 0005 „Przykładowo”, gm. Przykładowo; prostokąt **32,00 m (front od drogi) × 50,00 m = 1600 m²**.
 * Droga dojazdowa gminna od północy — ul. Lipowa (fikcyjna), klasa D, w liniach rozgraniczających 10 m, symbol planu 1KDD.
 * Sąsiedzi: wschód i zachód — działki MN z budynkami jednorodzinnymi (≥ 8 m od granicy); południe — teren zieleni/rolny.
 * Teren: spadek ok. 0,6 % ku południu, ok. 0,5 % wzniesienie ku wschodowi. Rzędne narożników (PL-EVRF2007-NH):
@@ -64,12 +77,13 @@ Uchwała nr XII/123/2024 Rady Gminy Przykładowo z dnia 21.03.2024 r. — teren 
 ## 4. Program użytkowy (rodzina 4–5 osób, standard podwyższony)
 * **P0**: wiatrołap, hol ze schodami, WC gościnne, garderoba/szafa wejściowa, kuchnia z wyspą + spiżarnia, jadalnia, salon
   (przeszklenie na ogród, wyjście na taras), pokój gościnny/gabinet z dostępem do łazienki (pokój na parterze dla gościa/seniora),
-  pomieszczenie techniczne (pompa ciepła — jednostka wew./zasobnik CWU, rozdzielnica, przyłącze wody), schowek ogrodowo-rowerowy
-  od strony wiaty (dostęp z zewnątrz).
-* **P1**: hol, 2 pokoje dzieci (każdy ≥ 12 m²), łazienka, pralnia, pokój rodzinny/biblioteka w przeszklonym boksie z wyjściem na taras nad wiatą.
+  pomieszczenie techniczne (pompa ciepła — jednostka wew./zasobnik CWU, rozdzielnica, przyłącze wody), **garaż 2-stanowiskowy**
+  (wymiary w świetle ≥ 5,6 × 6,0 m, brama segmentowa, połączenie z domem przez przedsionek/strefę gospodarczą, miejsce na rowery
+  i sprzęt ogrodowy).
+* **P1**: hol, 2 pokoje dzieci (każdy ≥ 12 m²), łazienka, pralnia, pokój rodzinny/biblioteka w przeszklonym boksie C (bez tarasu nad garażem).
 * **P2**: sypialnia główna z garderobą i łazienką (apartament rodziców), gabinet/pokój, pomieszczenie techniczne rekuperacji
   (lub w P0 — decyzja projektowa), wyjście na dach techniczny (PV) — klapa/wyłaz.
-* **Zewnątrz**: wiata na 2 samochody (pod płytą D), 1 miejsce gościnne, taras ogrodowy przy salonie, miejsce na pojemniki na odpady,
+* **Zewnątrz**: 1–2 miejsca gościnne na podjeździe przed garażem, taras ogrodowy przy salonie, miejsce na pojemniki na odpady,
   zbiornik retencyjny wód opadowych + skrzynki rozsączające, ogród, zieleń izolacyjna, ogrodzenie z bramą przesuwną i furtką.
 * Docelowa powierzchnia użytkowa: ok. 230–270 m² (weryfikacja racjonalności — nie przewymiarować).
 
@@ -88,7 +102,7 @@ Uchwała nr XII/123/2024 Rady Gminy Przykładowo z dnia 21.03.2024 r. — teren 
 
 ## 6. Założenia konstrukcyjno-materiałowe (wstępne — do rozstrzygnięcia w PT)
 * Ściany nośne murowane (np. bloczki silikatowe 18/24 cm) + ETICS (EPS grafitowy / wełna), stropy żelbetowe monolityczne,
-  wsporniki (bryła P2, płyta D, okapy) — żelbet z łącznikami termoizolacyjnymi; słupy wiaty stalowe; posadowienie bezpośrednie
+  wsporniki (bryła P2, wysunięte krawędzie płyt 0,8–1,5 m, rama boksu C) — żelbet z łącznikami termoizolacyjnymi; posadowienie bezpośrednie
   (ławy lub płyta fundamentowa — rozstrzygnąć wielowariantowo). Stolarka aluminiowa/PVC z szybą 3-szybową, osłony zewnętrzne.
 * Instalacje: pompa ciepła powietrze–woda + ogrzewanie podłogowe, CWU z zasobnika, rekuperacja, PV ≤ 6,5 kWp,
   instalacja elektryczna TN-S, przyłącze nN kablowe, woda z sieci, ścieki do sieci, deszczówka — retencja + rozsączanie.

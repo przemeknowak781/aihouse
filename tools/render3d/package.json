@@ -1,0 +1,12 @@
+{
+  "name": "lamela-render3d",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Rendery wizualizacyjne modelu Dom LAMELA (three.js w headless Chromium)",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "n8ao": "^2.0.1",
+    "postprocessing": "^6.39.5",
+    "three": "^0.186.1"
+  }
+}
