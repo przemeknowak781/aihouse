@@ -1,0 +1,68 @@
+{
+ "nr": 2,
+ "title": "Korekta Inwestora wdrożona: sylweta „S” z przesuniętych brył + garaż; panel koncepcji ruszył ponownie",
+ "stages": [
+  [
+   "Analiza szkicu — interpretacja v2 („S” z brył, garaż)",
+   "done"
+  ],
+  [
+   "Brief projektowy, działka i MPZP (przykładowe)",
+   "done"
+  ],
+  [
+   "Rejestr wymagań prawnych i norm (8 domen + weryfikacja)",
+   "running"
+  ],
+  [
+   "Koncepcja: 3 warianty → 3 sędziów → synteza → audyt",
+   "running"
+  ],
+  [
+   "Silnik rysunkowy wg PN (arkusze, kreskowania, wymiary)",
+   "running"
+  ],
+  [
+   "Rdzeń modelu + pipeline 3D i wizualizacji",
+   "running"
+  ],
+  [
+   "PZT + PAB (rysunki i opis)",
+   "todo"
+  ],
+  [
+   "Projekt techniczny: konstrukcja, instalacje, elektryka",
+   "todo"
+  ],
+  [
+   "Obliczenia: U, EP, statyka, instalacje",
+   "todo"
+  ],
+  [
+   "Weryfikacja krzyżowa i zgodność z przepisami",
+   "todo"
+  ],
+  [
+   "Strona www — katalog projektu",
+   "todo"
+  ]
+ ],
+ "notes": [
+  "Decyzja Inwestora: sylwetę „S” tworzą same przesunięte bryły (zachód–wschód–zachód); linia D to krawędź stropu nad garażem, nie taras.",
+  "Płyty wysunięte głęboko 0,8–1,2 m (okapy, osłony przeciwsłoneczne). Garaż 2-stanowiskowy w bryle parteru od wschodu.",
+  "Działka powiększona do 32×50 m (1600 m²) — zapas na odległości od granic przy dłuższej bryle z garażem.",
+  "W rejestrze ELI rozporządzenie WT z 2002 r. ma status „uznany za uchylony” od 21.09.2026 — zespół R3 ustala stan prawny.",
+  "Rozporządzenie o zakresie projektu budowlanego zmienione 27.04.2026 (Dz.U. 2026 poz. 597) — uwzględniamy.",
+  "Prawo budowlane: t.j. Dz.U. 2026 poz. 524 + zmiany z 2025 i 2026 r."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/00_wejscie/interpretacja_szkicu_v2.png",
+   "caption": "Interpretacja v2 (obowiązująca): A–B/C–G–E"
+  },
+  {
+   "path": "/home/user/aihouse/00_wejscie/szkic_koncepcyjny.jpg",
+   "caption": "Szkic wejściowy"
+  }
+ ]
+}
