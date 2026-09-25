@@ -1,4 +1,5 @@
 {
+ "nr": 39,
  "title": "Runda 2, część 1 (funkcja) zakończona: 8/8 uwag istotnych i krytyczna przyjęte · część 2 (fizyka, woda, instalacje) w toku",
  "stages": [
   [
@@ -59,6 +60,13 @@
   "Nowe drzwi garaż → hol (DG2, stalowe ocieplone, szczelne, samozamykacz — WT § 106): codzienna trasa do schodów bez przejścia przez strefę roboczą kuchni.",
   "Garaż: przechowywanie rowerów ≤ 0,30 m przy ścianie — szerokość wolna 5,75 m ≥ 5,60 m; bryła G bez zmian (warunek wierności szkicowi).",
   "Łazienki: oś misek WC 0,42 m od ściany, pole przed miską ≥ 0,60 × 0,90, natrysk walk-in 1,79 × 0,90; centrala wentylacyjna za ścianą silikatową 18 cm + drzwi R_w ≥ 32 dB.",
-  "Odroczone z uzasadnieniem: pusta elewacja S garażu (decyzja estetyczna — rekomendacja w kolejnym kroku), okno otwierane w kuchni (brak danych systemu fasady), ścianka szklana pokoju rodzinnego."
+  "Odroczone z uzasadnieniem: pusta elewacja S garażu (decyzja estetyczna — rekomendacja w kolejnym kroku), okno otwierane w kuchni (brak danych systemu fasady), ścianka szklana pokoju rodzinnego.",
+  "NADZÓR (08:25): 4 agentów aktywnych, bez zastojów; najdłuższa bezczynność 0 min; zmiany w repo 0 min temu."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/docs/20_koncepcja/final/rzut_P0.png",
+   "caption": "Rzut parteru po rundzie 2 (funkcja): wyspa równoległa do zabudowy, drzwi garaż–hol, przechowywanie w garażu, przedpokój gościnny"
+  }
  ]
 }

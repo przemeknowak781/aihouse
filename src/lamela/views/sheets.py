@@ -667,7 +667,7 @@ def build_sheet(ctx: ViewContext, spec: dict, idx: int, total: int):
             return r
         ctx.note(f"arkusz {spec['nr']}", f"układ ekonomiczny: treść nie mieści się w formacie {fmt_req} — "
                                          "układ klasyczny")
-    return _arkusz_klasyczny(ctx, spec, idx, total, P, str(fmt_req) if tryb == "jawny" else "auto")
+    return _arkusz_klasyczny(ctx, spec, idx, total, P, _j[0] if tryb == "jawny" else "auto")
 
 
 def _tb_height(ctx, spec) -> float:

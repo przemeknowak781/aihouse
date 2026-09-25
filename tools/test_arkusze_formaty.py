@@ -326,6 +326,8 @@ def test_zgodnosc_wsteczna_arkusz():
     assert (sh.width, sh.height) == (700.0, 594.0) and sh.fmt_name == "700×594"
     sh, info = _build(dict(base, format="A4"))                # za mały → układ klasyczny z uwagą (jak dotąd)
     assert info["format"] == "A4"
+    sh, info = _build(dict(base, format=[297, 300]))          # [H, L] za mały → układ klasyczny, ten sam format
+    assert (sh.width, sh.height) == (300.0, 297.0) and info["uklad"]["tryb"] == "klasyczny"
 
 
 def test_arkusz_rzutu_z_modelu():
