@@ -494,7 +494,7 @@ class AnalizaTarczy:
                         z_ = q[0]
                     band = e.wsp - z_
                 comp = any((q[3] < 0 or q[4] < 0) for q in prof) if b["F"] > 0 else True
-                out.append({"x": float(x), "F": b["F"], "e": b["e"], "h": b["h"], "band": band, "sciskanie": comp})
+                out.append({"x": float(x), "F": b["F"], "e": b["e"], "h": b["h"], "band": band, "sciskanie": comp, "s0": b["s0"]})
         else:
             cz = 0.5 * (mes.gz[:-1] + mes.gz[1:])
             for z in cz[(cz > e.a) & (cz < e.b)]:
@@ -518,7 +518,7 @@ class AnalizaTarczy:
                             break
                         z_ = q[0]
                     band = e.wsp - z_
-                out.append({"x": float(z), "F": b["F"], "e": b["e"], "h": b["h"], "band": band, "sciskanie": True})
+                out.append({"x": float(z), "F": b["F"], "e": b["e"], "h": b["h"], "band": band, "sciskanie": True, "s0": b["s0"]})
         return out
 
     def _pasy_mes(self):
@@ -988,9 +988,7 @@ class AnalizaTarczy:
     def _ciegna(self):
         d, p, b, st = self.d, self.p, self.beton, self.stal
         grupy: dict = {}
-        wv_demand = 0.0      # wieszaki / pionowe cięgna środnika [kN/m]
-        wh_demand = 0.0
-        wd_demand = 0.0
+        wv_demand = wh_demand = wd_demand = 0.0      # cięgna środnika: gęstość sił [kN/m]
         if hasattr(self, "stm"):
             m = self.stm
             for n, F in m.F.items():
@@ -999,12 +997,13 @@ class AnalizaTarczy:
                     pa, pb = m.wezly[m.ii[k]], m.wezly[m.jj[k]]
                     typ, e = self._krawedz_preta(pa, pb, m.U[k])
                     if typ in ("h", "v"):
-                        g = grupy.setdefault(e.id, {"e": e, "F": 0.0, "k": "", "xs": [], "konce": {}})
+                        g = grupy.setdefault(e.id, {"e": e, "F": 0.0, "k": "", "prety": []})
                         if F[k] > g["F"]:
                             g["F"], g["k"] = float(F[k]), n
-                        g["xs"] += [pa, pb]
+                        ax = 0 if e.typ == "h" else 1
+                        g["prety"].append((min(pa[ax], pb[ax]), max(pa[ax], pb[ax]), float(F[k]),
+                                           float(0.5 * (abs(pa[1 - ax] - e.wsp) + abs(pb[1 - ax] - e.wsp)))))
                     else:
-                        # strefa środnika: gęstość sił na 1 m (rozstaw węzłów prostopadle)
                         wdt = self.dx_stm if typ == "wv" else self.dz_stm
                         dem = float(F[k]) / wdt
                         if typ == "wv":
@@ -1013,12 +1012,12 @@ class AnalizaTarczy:
                             wh_demand = max(wh_demand, dem)
                         else:
                             wd_demand = max(wd_demand, dem / math.sqrt(2))
-        # pasy z MES bez odpowiednika w STM
         for e in self.kraw:
             pm = self.pasy_mes.get(e.id)
             if pm and pm["F"] > 5.0 and e.id not in grupy:
-                grupy[e.id] = {"e": e, "F": 0.0, "k": "", "xs": [], "konce": {}}
+                grupy[e.id] = {"e": e, "F": 0.0, "k": "", "prety": []}
         fyd = st.f_yd
+        wmax = p.w_max.get(d.ekspozycja, 0.3)
         w = Wynik(nazwa="Cięgna (pasy rozciągane) — STM i całkowanie naprężeń MES (6.5.3, 7.3.2, 7.3.4, 8.4)")
         rows = []
         for key, g in grupy.items():
@@ -1026,55 +1025,72 @@ class AnalizaTarczy:
             pm = self.pasy_mes.get(key, {})
             pas = Pas(key, e.opis, e.typ, e, F_stm=g["F"], k_stm=g["k"], F_mes=pm.get("F", 0.0), k_mes=pm.get("k", ""),
                       x_mes=pm.get("x", 0.0), F_qp=pm.get("F_qp", 0.0))
-            xs = np.array(g["xs"]) if g["xs"] else None
-            if xs is not None and len(xs):
-                coord = 0 if e.typ == "h" else 1
-                pas.zakres = (float(xs[:, coord].min()), float(xs[:, coord].max()))
-                pas.a = float(np.median(np.abs(xs[:, 1 - coord] - e.wsp)))
+            if pas.F_Ed < 1.0:
+                continue
+            istotne = [q for q in g["prety"] if q[2] > 0.05 * max(g["F"], 1e-9)]
+            if istotne:
+                z0 = min(q[0] for q in istotne)
+                z1 = max(q[1] for q in istotne)
+                pas.a = float(np.median([q[3] for q in istotne]))
             else:
-                pas.zakres = (e.a, e.b)
+                z0, z1 = pm.get("zakres", (e.a, e.b))
                 pas.a = self.a_s
+            if pm.get("zakres"):
+                z0, z1 = min(z0, pm["zakres"][0]), max(z1, pm["zakres"][1])
+            pas.zakres = (max(z0, e.a), min(z1, e.b))
+            # siły na końcach cięgna (do zakotwienia)
+            F_lo = max([q[2] for q in istotne if abs(q[0] - z0) < 0.06] or [0.0])
+            F_hi = max([q[2] for q in istotne if abs(q[1] - z1) < 0.06] or [0.0])
+            if not istotne:
+                F_lo = F_hi = pas.F_Ed
+            pas.konce = [F_lo, F_hi]
             band = pm.get("band", 0.5)
             pas.h_t = pm.get("h", 0.0)
             pas.k_c = 0.4 if pm.get("sciskanie", True) else 1.0
-            if pas.F_Ed < 1.0:
-                continue
-            # zbrojenie minimalne ze względu na rysy (7.3.2) w strefie rozciąganej z MES
-            h_t = max(min(pas.h_t, band), 0.05)
-            hmm = h_t * 1000
-            kk = 1.0 if hmm <= 300 else (0.65 if hmm >= 800 else 1.0 - 0.35 * (hmm - 300) / 500)
-            As_min = pas.k_c * kk * b.f_ctm * (d.t * 1000 * hmm) / st.f_yk if pas.F_mes > 0 else 0.0
+            # zbrojenie minimalne (7.3.2) — gdy strefa rysuje się w kombinacji charakterystycznej (σ > f_ctm) [UPR]
+            s_char = pm.get("s_char", 0.0) / 1000
+            if pas.F_mes > 0 and s_char > b.f_ctm:
+                hmm = max(min(pas.h_t, band), 0.05) * 1000
+                kk = 1.0 if hmm <= 300 else (0.65 if hmm >= 800 else 1.0 - 0.35 * (hmm - 300) / 500)
+                As_min = pas.k_c * kk * b.f_ctm * (d.t * 1000 * hmm) / st.f_yk
+            else:
+                As_min = 0.0
             pas.As_min = As_min
             pas.As_req = pas.F_Ed * 1000 / fyd
             need = max(pas.As_req, As_min)
             u_band = max(2 * pas.a, 0.10)
-            n_face, fi = self._dobierz_ciegno(need, u_band)
-            pas.n, pas.fi = 2 * n_face, fi
-            pas.As_prov = 2 * n_face * pole_preta(fi)
-            # rysy (7.3.4) — σ_s z SLS quasi-stałej
-            if pas.F_qp > 0:
-                pas.sigma_s = pas.F_qp * 1000 / pas.As_prov
-                pas.w_k = self._wk(pas, band)
+            for n_face, fi in self._kandydaci_ciegna(need, u_band):
+                pas.n, pas.fi = 2 * n_face, fi
+                pas.As_prov = 2 * n_face * pole_preta(fi)
+                if pas.F_qp > 0:
+                    pas.sigma_s = pas.F_qp * 1000 / pas.As_prov
+                    pas.w_k = self._wk(pas, band)
+                    if pas.w_k <= wmax:
+                        break
+                else:
+                    break
             self.pasy.append(pas)
-            rows.append([pas.opis, (pas.F_stm, 1), (pas.F_mes, 1), (pas.F_Ed, 1), (pas.As_req, 0), (As_min, 0),
-                         f"{pas.n}φ{pas.fi} ({n_face} na pow.)", (pas.As_prov, 0), (pas.sigma_s, 0) if pas.F_qp > 0 else "—",
+            rows.append([pas.opis, (pas.F_stm, 1), (pas.F_mes, 1), (pas.F_Ed, 1), (pas.As_req, 0),
+                         (As_min, 0) if As_min > 0 else f"— (σ_char = {f(s_char, 2)} ≤ f_ctm)",
+                         f"{pas.n}φ{pas.fi} ({pas.n // 2}/pow.)", (pas.As_prov, 0), (pas.sigma_s, 0) if pas.F_qp > 0 else "—",
                          f(pas.w_k, 3) if pas.F_qp > 0 else "—"])
             w.warunek(f"Cięgno „{pas.opis}”: A_s ≥ max(F_Ed/f_yd; A_s,min)", need, pas.As_prov, "mm²", "6.5.3, 7.3.2", nd=0,
                       symbol_E="A_s,req", symbol_R="A_s,prov")
             if pas.F_qp > 0:
-                wmax = p.w_max.get(d.ekspozycja, 0.3)
                 w.warunek(f"Rysy — cięgno „{pas.opis}” (quasi-stała)", pas.w_k, wmax, "mm", "7.3.4, tabl. 7.1N", nd=3,
                           symbol_E="w_k", symbol_R="w_max")
             self._zakotwienie(pas, w)
         self.pasy.sort(key=lambda q: -q.F_Ed)
-        w.krok("Siły w cięgnach: F_Ed = max(F_STM; F_MES), F_MES — wypadkowa rozciągania w strefie przy krawędzi (całkowanie "
+        w.krok("Siły w cięgnach: F_Ed = max(F_STM; F_MES); F_MES — wypadkowa rozciągania w strefie przy krawędzi (całkowanie "
                "σ w przekrojach co element, obwiednia ULS); A_s,req = F_Ed/f_yd", "", "", "", zrodlo="6.5.3, 5.6.4(5)")
-        w.krok("Zbrojenie minimalne ze względu na rysy w strefie rozciąganej (h_t z MES)", "A_s,min = k_c·k·f_ct,eff·A_ct/σ_s",
-               "σ_s = f_yk, k_c = 0,4 (zginanie) / 1,0 (rozciąganie całego pasma)", "", zrodlo="(7.1)")
+        w.krok("Zbrojenie minimalne ze względu na rysy w strefie rozciąganej (h_t z MES), gdy σ_ct,char > f_ctm",
+               "A_s,min = k_c·k·f_ct,eff·A_ct/σ_s", "σ_s = f_yk, k_c = 0,4 (zginanie) / 1,0 (rozciąganie całego pasma)", "",
+               zrodlo="(7.1) [UPR]")
+        w.krok("Szerokość rys cięgna", "w_k = s_r,max·(ε_sm − ε_cm), σ_s = F_qp,MES/A_s, h_c,ef = min(2,5·(c + φ/2); h_pasma/2), "
+               "k₁ = 0,8, k₂ = 0,5 (zginanie) / 1,0, k_t = 0,4", "", "", zrodlo="(7.8)–(7.11)")
         self.tabele.append("**Cięgna (pasy rozciągane)** — siły ULS i dobór zbrojenia (pręty przy obu powierzchniach)\n\n" + tabela(
             ["Cięgno", "F_STM [kN]", "F_MES [kN]", "F_Ed [kN]", "A_s,req [mm²]", "A_s,min [mm²]", "Przyjęto", "A_s,prov [mm²]",
              "σ_s,qp [MPa]", "w_k [mm]"], rows))
-        # strefa środnika — wieszaki i siatka
         As_mesh2 = 2 * self.siatka_As
         cap = As_mesh2 * fyd / 1000        # kN/m
         if wv_demand > 0:
@@ -1089,14 +1105,12 @@ class AnalizaTarczy:
             w.krok("Ukośne cięgna środnika — składowa na kierunek siatki", "t_d/√2", "", wd_demand, "kN/m")
             w.warunek("Środnik: siatka (cięgna ukośne)", wd_demand, cap, "kN/m", "6.5.3", symbol_E="t_d,Ed", symbol_R="a_s·f_yd")
         self.sekcje.append(w)
-        if self.pasy:
-            self.T_max = max(q.F_Ed for q in self.pasy)
-        else:
-            self.T_max = 0.0
+        self.T_max = max((q.F_Ed for q in self.pasy), default=0.0)
 
-    def _dobierz_ciegno(self, As_req: float, u_band: float) -> tuple[int, int]:
-        """(liczba prętów na powierzchnię, φ) — najmniejsza masa; pręty w pasie u rozstawione ≥ max(φ; 20 mm; d_g + 5)."""
-        best = None
+    def _kandydaci_ciegna(self, As_req: float, u_band: float) -> list[tuple[int, int]]:
+        """Warianty zbrojenia cięgna (n na powierzchnię, φ) o A_s ≥ A_s,req, rosnąco wg pola; pręty w pasie u rozstawione
+        ≥ max(φ; 20 mm; d_g + 5) (8.2)."""
+        cand = []
         for fi in (12, 14, 16, 20, 25):
             smin = max(fi, 20, self.p.fi_kruszywa + 5)
             for n in (1, 2, 3, 4):
@@ -1104,13 +1118,9 @@ class AnalizaTarczy:
                     continue
                 A = 2 * n * pole_preta(fi)
                 if A >= As_req:
-                    cand = (A, -n, fi, n)
-                    if best is None or cand < best:
-                        best = cand
-                    break
-        if best is None:
-            return 4, 25
-        return best[3], best[2]
+                    cand.append((A, -n, fi, n))
+        cand.sort()
+        return [(c[3], c[2]) for c in cand] or [(4, 25)]
 
     def _wk(self, pas: Pas, band: float) -> float:
         p, b = self.p, self.beton
@@ -1127,43 +1137,43 @@ class AnalizaTarczy:
         return sr * de
 
     def _zakotwienie(self, pas: Pas, w: Wynik):
-        """Zakotwienie cięgna za skrajnymi węzłami (8.4): dostępna długość do krawędzi betonu wzdłuż cięgna."""
+        """Zakotwienie cięgna za skrajnymi węzłami (8.4, 6.5.4(7)): długość dostępna do krawędzi betonu wzdłuż cięgna;
+        σ_sd = F_koniec/A_s,prov. Gdy brak miejsca na pręt prosty lub z hakiem (α₁ = 0,7) — U-pręty (strzemiona
+        zamykające) na końcu, łączone z prętami cięgna na zakład l₀ (8.7) mierzony do wnętrza tarczy."""
         b, st = self.beton, self.stal
         e = pas.krawedz
         if e is None:
             return
-        # pręty poziome w górnej części elementu h > 250 mm (8.4.2(2), rys. 8.2) — warunki „inne”
         if e.typ == "h":
             z_osi = e.wsp + e.strona * pas.a
-            dobra = (z_osi - self.d.z0) < 0.5 * self.d.H or (self.d.z0 + self.d.H - z_osi) >= 0.30
+            # 8.4.2(2), rys. 8.2: pręty poziome w elemencie h > 600 mm leżące ≤ 300 mm od górnej powierzchni — warunki „inne”
+            dobra = not (self.d.H > 0.6 and (self.d.z0 + self.d.H - z_osi) < 0.30)
         else:
             dobra = True
-        sig = min(pas.F_Ed * 1000 / pas.As_prov, st.f_yd)
-        zk = zelbet.zakotwienie(pas.fi, b, st, sigma_sd=sig, dobra_przyczepnosc=dobra,
-                                nazwa=f"Zakotwienie cięgna „{pas.opis}” φ{pas.fi}")
-        lbd = zk.l_bd / 1000
-        lbd_hak = max(0.7 * zk.l_b_rqd / 1000, zk.l_bd / 1000 * 0.7, 10 * pas.fi / 1000)
-        for sgn in (-1, 1):
+        for sgn, F_end in ((-1, pas.konce[0] if pas.konce else pas.F_Ed), (1, pas.konce[1] if pas.konce else pas.F_Ed)):
+            sig = min(max(F_end, 0.0) * 1000 / pas.As_prov, st.f_yd)
+            zk = zelbet.zakotwienie(pas.fi, b, st, sigma_sd=max(sig, 1.0), dobra_przyczepnosc=dobra)
+            lbd = zk.l_bd / 1000
+            lbd_hak = max(0.7 * zk.l_bd / 1000, 10 * pas.fi / 1000, 0.1)
             x_end = pas.zakres[1] if sgn > 0 else pas.zakres[0]
             if e.typ == "h":
-                pnt = (x_end, e.wsp + e.strona * pas.a)
-                kier = (sgn, 0.0)
+                pnt, kier = (x_end, e.wsp + e.strona * pas.a), (sgn, 0.0)
             else:
-                pnt = (e.wsp + e.strona * pas.a, x_end)
-                kier = (0.0, sgn)
+                pnt, kier = (e.wsp + e.strona * pas.a, x_end), (0.0, sgn)
             l_av = _dl_promienia(self.P, pnt, kier) - self.c_nom
+            L_in = pas.zakres[1] - pas.zakres[0]
             if l_av >= lbd:
-                spos = "proste"
-                l_req = lbd
+                spos, E_, R_, sE, sR = "proste", lbd, l_av, "l_bd", "l_dost"
             elif l_av >= lbd_hak:
-                spos = "hak/odgięcie 90° (α₁ = 0,7)"
-                l_req = lbd_hak
+                spos, E_, R_, sE, sR = "hak 90° (α₁ = 0,7)", lbd_hak, l_av, "l_bd,h", "l_dost"
             else:
-                spos = "pętla (U-pręt) lub płytka kotwiąca"
-                l_req = lbd_hak
-            pas.zakotwienie.append({"strona": sgn, "l_av": l_av, "l_bd": lbd, "sposob": spos, "l_req": l_req})
-            w.warunek(f"Zakotwienie cięgna „{pas.opis}” — koniec {'prawy/górny' if sgn > 0 else 'lewy/dolny'} ({spos})",
-                      l_req * 1000, max(l_av, 0.0) * 1000, "mm", "8.4.4, 6.5.4(7)", nd=0, symbol_E="l_bd", symbol_R="l_dost")
+                zkU = zelbet.zakotwienie(pas.fi, b, st, sigma_sd=max(sig, 1.0), dobra_przyczepnosc=dobra, proc_laczonych=100)
+                spos, E_, R_, sE, sR = f"U-pręty φ{pas.fi} na końcu (zakład l₀)", zkU.l_0 / 1000, L_in + max(l_av, 0.0), "l₀", "l_cięgna"
+            pas.zakotwienie.append({"strona": sgn, "l_av": l_av, "l_bd": lbd, "sposob": spos, "l_req": E_, "F": F_end,
+                                    "dobra": dobra})
+            konc = "prawy/górny" if sgn > 0 else "lewy/dolny"
+            w.warunek(f"Zakotwienie „{pas.opis}” — koniec {konc}, F = {f(F_end, 1)} kN: {spos}", E_ * 1000, R_ * 1000, "mm",
+                      "8.4.4, 8.7.3, 6.5.4(7)", nd=0, symbol_E=sE, symbol_R=sR)
 
     # ---------------------------------------------------------------------------------------------
     # 6. Krzyżulce i węzły (6.5.2, 6.5.4)
@@ -1568,15 +1578,26 @@ class AnalizaTarczy:
             if pas.krawedz is None or pas.n == 0:
                 continue
             L_ = pas.zakres[1] - pas.zakres[0]
-            ext = sum(min(z_["l_req"], max(z_["l_av"], 0.0)) + (10 * pas.fi / 1000 if "hak" in z_["sposob"] or "pętla" in z_["sposob"] else 0.0)
-                      for z_ in pas.zakotwienie) if pas.zakotwienie else 2 * 40 * pas.fi / 1000
+            ext, u_bars = 0.0, []
+            for z_ in pas.zakotwienie:
+                if z_["sposob"] == "proste":
+                    ext += z_["l_req"]
+                elif z_["sposob"].startswith("hak"):
+                    ext += z_["l_req"] + 10 * pas.fi / 1000
+                else:
+                    ext += max(z_["l_av"], 0.0)
+                    u_bars.append(z_["l_req"])
             dl = round(L_ + ext, 2)
             ksz = "00" if all(z_["sposob"] == "proste" for z_ in pas.zakotwienie) else "11"
             prety.append(zelbet.Pret(el, nr, pas.fi, dl, pas.n, ksz, f"cięgno: {pas.opis}"))
             nr += 1
-            self.przyjeto.append(f"Cięgno „{pas.opis}”: {pas.n}φ{pas.fi} ({pas.n // 2} przy każdej powierzchni), oś w odległości "
-                                 f"{f(pas.a * 100, 0)} cm od krawędzi, zakres {f(pas.zakres[0], 2)}…{f(pas.zakres[1], 2)} m + zakotwienie "
-                                 f"({'; '.join(z_['sposob'] for z_ in pas.zakotwienie) or 'l_bd'}).")
+            for l0 in u_bars:
+                prety.append(zelbet.Pret(el, nr, pas.fi, round(2 * l0 + d.t - 2 * self.c_nom, 2), pas.n // 2, "21",
+                                         f"U-pręt końcowy cięgna: {pas.opis}"))
+                nr += 1
+            zak = "; ".join(z_["sposob"] for z_ in pas.zakotwienie) or "l_bd"
+            self.przyjeto.append(f"Cięgno „{pas.opis}”: {pas.n}φ{pas.fi} ({pas.n // 2} przy każdej powierzchni), oś {f(pas.a * 100, 0)} cm "
+                                 f"od krawędzi, na odcinku {f(pas.zakres[0], 2)}…{f(pas.zakres[1], 2)} m + zakotwienie ({zak}).")
         # siatki (liczba prętów zmniejszona proporcjonalnie do pola otworów — orientacyjnie)
         frac = self.P.area / (d.L * d.H)
         s = self.siatka_s / 1000

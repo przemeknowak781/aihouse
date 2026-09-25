@@ -1351,3 +1351,215 @@ for o in OT:
             o["prog"] = {"profil": "próg termiczny ≤ 0,02 m (HS/drzwi) na podwalinie progowej z XPS 300 / PUR-GF (λ ≤ 0,05) na płycie",
                          "odwodnienie_liniowe": s["kond"] == "P0" and s["przegroda"] == "SZ1",
                          "hydroizolacja": "wywinięcie membrany SBS płyty ≥ 0,15 m pod profil + taśma EPDM"}
+
+
+# =====================================================================================================================
+# 10. KATALOG WĘZŁÓW (`wezly`) — typy wg ALIASY_WEZLOW (mostki2d.katalog) / PSI_DOMYSLNE (fizyka.mostki); długości z geometrii
+# =====================================================================================================================
+def _dl_otworow():
+    osc = nad = pod = prog0 = 0.0
+    for o in OT:
+        s = _SC[o["sciana"]]
+        if s["przegroda"] not in ("SZ1", "SZ2", "SZL") or o["typ"] in ("otwor",):
+            continue
+        if o["typ"] == "brama":
+            continue
+        osc += 2 * o["wys"]
+        nad += o["szer"]
+        if o["parapet"] > 0.05:
+            pod += o["szer"]
+        else:
+            prog0 += o["szer"]
+    return osc, nad, pod, prog0
+
+
+def _naroza(poly_pts, h):
+    pg = orient(Polygon(poly_pts), 1.0)
+    c = list(pg.exterior.coords)[:-1]
+    n = 0
+    for i in range(len(c)):
+        a, b, d = c[i - 1], c[i], c[(i + 1) % len(c)]
+        cross = (b[0] - a[0]) * (d[1] - b[1]) - (b[1] - a[1]) * (d[0] - b[0])
+        n += 1 if cross > 0 else 0
+    return n * h
+
+
+_osc, _nad, _pod, _prog = _dl_otworow()
+OB_P0_OGRZ = P((-EXT, -EXT), (xF + EXT, -EXT), (xF + EXT, y2 + 0.10), (xE + 0.22, y2 + 0.10), (xE + 0.22, y4 + EXT), (-EXT, y4 + EXT))
+_obw_p0 = Polygon(OB_P0_OGRZ).length - (y4 + EXT - y2 - 0.10) - (xF - xE)          # bez odcinków przy garażu (wewn.)
+WEZLY = [
+    {"id": "WZ-R1", "nazwa": "Attyka stropodachu D1 (bryła A) — ściana SZ2 za lamelami, płyta wysunięta PL-3 na łączniku", "typ": "attyka",
+     "przegrody": ["SZ2", "SD1", "AT1"], "dlugosc": r(Polygon(OB_P2).length, 2), "parametry": {"h_nad_pokryciem": 0.25}},
+    {"id": "WZ-R2", "nazwa": "Attyka dachów D2/D3 nad P1 (styk ze ścianą P2 — cokolik izolacji ≥ 0,30 m ponad pokrycie)", "typ": "attyka",
+     "przegrody": ["SZ1", "SD2", "AT1"], "dlugosc": r(2 * (xB - EXT + EXT) + 2 * (y4 - y3) + (xE - xD), 2)},
+    {"id": "WZ-R3", "nazwa": "Attyka dachu zielonego D4 (garaż, pas gospodarczy) — linia D +3,85", "typ": "attyka",
+     "przegrody": ["SZ1", "DZ1", "AT1"], "dlugosc": r(Polygon(DACHY[3]["obrys"]).length - (y4 + EXT - (-EXT)), 2),
+     "parametry": {"h_nad_pokryciem": 0.545}},
+    {"id": "WZ-IF1", "nazwa": "Strop pośredni ST1/ST2 z wieńcem — ETICS ciągły", "typ": "strop_posredni", "przegrody": ["SZ1", "POD-1"],
+     "dlugosc": r(2 * (12.6 + 9.35) - 1.0 + Polygon(OB_P2).length - 13.6, 2)},
+    {"id": "WZ-B1", "nazwa": "Okap E (PL-E) — płyta 30 cm na łączniku termoizolacyjnym (ETA), spadek 2 % od budynku, okapnik", "typ": "plyta_wspornikowa_lacznik",
+     "przegrody": ["SZ1", "OK1"], "dlugosc": r((13.80 + EXT) + (y3 + EXT), 2), "parametry": {"wysieg": 1.5}},
+    {"id": "WZ-B2", "nazwa": "Krawędź ST2 (PL-2) pod bryłą A — łącznik termoizolacyjny", "typ": "plyta_wspornikowa_lacznik",
+     "przegrody": ["SZ1", "OK1"], "dlugosc": r((xE + EXT - X2o) + (y3 + 2 * EXT), 2), "parametry": {"wysieg": 1.1}},
+    {"id": "WZ-B3", "nazwa": "Krawędź stropodachu ST3 (PL-3) — łącznik termoizolacyjny, attyka cofnięta", "typ": "plyta_wspornikowa_lacznik",
+     "przegrody": ["SZ2", "OK1"], "dlugosc": r((xE + EXT - X2o) + 2 * (y3 + 2 * EXT), 2), "parametry": {"wysieg": 1.1}},
+    {"id": "WZ-B4", "nazwa": "Daszek nad wejściem PL-DA — łącznik termoizolacyjny", "typ": "plyta_wspornikowa_lacznik", "przegrody": ["SZ1", "OK1"],
+     "dlugosc": 2.30, "parametry": {"wysieg": 1.3}},
+    {"id": "WZ-B5", "nazwa": "Rama boksu C — konsole punktowe ze stali nierdzewnej z przekładką termiczną (2 pasy × 9 szt.)", "typ": "kotwa",
+     "przegrody": ["SZ1"], "liczba": 18},
+    {"id": "WZ-Z1", "nazwa": "Strop ST2Z nad powietrzem zewn. (wspornik bryły A) — styk ze ścianą osi A, docieplenie spodu 20 cm", "typ": "strop_zewn_krawedz",
+     "przegrody": ["SZ1", "SUF-ZEW"], "dlugosc": r(y3 + 2 * EXT + 2 * 1.0, 2)},
+    {"id": "WZ-C1", "nazwa": "Narożniki zewnętrzne ścian (wypukłe)", "typ": "naroznik_wypukly", "przegrody": ["SZ1"],
+     "dlugosc": r(_naroza(OB_P0_OGRZ, 3.00) + _naroza(OB_P1, 3.15) + _naroza(OB_P2, 3.15), 2)},
+    {"id": "WZ-W1", "nazwa": "Ościeża okien/drzwi — ciepły montaż (rama 5 cm w murze, 4 cm w izolacji, zakład izolacji 3 cm)", "typ": "oscieze",
+     "przegrody": ["SZ1"], "dlugosc": r(_osc, 2), "wariant": "czesciowo"},
+    {"id": "WZ-N1", "nazwa": "Nadproża — bez kaset osłon w ociepleniu (kasety w okapach / ramie C / nadstawne)", "typ": "nadproze",
+     "przegrody": ["SZ1"], "dlugosc": r(_nad, 2), "wariant": "czesciowo"},
+    {"id": "WZ-P1", "nazwa": "Podokienniki — parapet zewn. na profilu z XPS, okapnik", "typ": "podokiennik", "przegrody": ["SZ1"],
+     "dlugosc": r(_pod, 2), "wariant": "czesciowo"},
+    {"id": "WZ-T1", "nazwa": "Progi HS i drzwi na płycie P0 — profil progowy termoizolacyjny na podwalinie XPS/PUR-GF, odwodnienie liniowe",
+     "typ": "prog", "przegrody": ["SZ1", "POD-0"], "dlugosc": r(_prog, 2), "wariant": "grunt"},
+    {"id": "WZ-GF1", "nazwa": "Cokół — płyta fundamentowa na XPS 20 cm, XPS na czole płyty i cokole (izolacja ciągła)", "typ": "sciana_grunt",
+     "przegrody": ["SZ1", "POD-0"], "dlugosc": r(_obw_p0 - _prog, 2), "parametry": {"y_teren": -0.25}},
+    {"id": "WZ-G1", "nazwa": "Dom–garaż (pion): ściana SWG dochodzi do ściany zewn. — ETICS ciągły po zewnątrz całego P0, garaż buforem wewnątrz obudowy",
+     "typ": "polaczenie_nieogrz", "przegrody": ["SZ1", "SWG"], "dlugosc": 6.00, "parametry": {"przerwa_izolacji": False}},
+    {"id": "WZ-G2", "nazwa": "Dom–garaż (poziom): strop ST1/D4 ciągły nad ścianą SWG — docieplenie spodu stropu garażu pasem 1,0 m (SUF-G)",
+     "typ": "polaczenie_nieogrz", "przegrody": ["SZ1", "SWG", "SUF-G"], "dlugosc": r((y4 - y2) + (xF - xE), 2)},
+    {"id": "WZ-G3", "nazwa": "Dom–garaż (posadzka): dylatacja posadzki XPS 3 cm w osi SWG, płyta ciągła na XPS", "typ": "polaczenie_nieogrz",
+     "przegrody": ["SWG", "POD-0", "POD-G"], "dlugosc": r((y4 - y2) + (xF - xE), 2)},
+    {"id": "WZ-L1", "nazwa": "Konsole rusztu lamel (stal nierdzewna, przekładka termiczna)", "typ": "konsola_lamel", "przegrody": ["SZ2", "SZL"],
+     "liczba": int(2 * ((xE + EXT - X2o) + 2 * (y3 + 2 * EXT)) / 0.80)},
+    {"id": "WZ-S1", "nazwa": "Słupy stalowe fasady E w płaszczyźnie przeszklenia (w ciepłej strefie, obudowane profilem termicznym)", "typ": "slup",
+     "przegrody": ["SZ1"], "dlugosc": r(4 * (Z_SPOD_ST1 - 0.0) * 0.10, 2)},
+    {"id": "WZ-I1", "nazwa": "Przejścia instalacji przez przegrody zewn. (mankiety paroszczelne/EPDM)", "typ": "przejscie_instalacji",
+     "przegrody": ["SZ1", "SD1", "POD-0"], "liczba": 14},
+]
+
+
+# =====================================================================================================================
+# 11. ENERGIA, KONSTRUKCJA, GEOTECHNIKA, META
+# =====================================================================================================================
+Z_DACH_D1 = r(Z_ST3 + 0.002 + 0.22 + 0.004)            # wierzch warstw D1 (śr.) ≈ +9,526
+ENERGIA = {
+    "n50": 1.0, "osoby": 5, "pojemnosc": "ciezka", "chlodzenie": False, "psi_wariant": "domyslna",
+    "wezly_wyniki": "projekt/08_obliczenia/mostki2d/wyniki_mostki.json",
+    "grunt": {"typ": "piasek", "lambda": 2.0, "G_w": 1.0,
+              "izolacja_obwodowa": {"typ": "pozioma", "D": 1.00, "d_n": 0.10, "lam_n": 0.036}},
+    "wentylacja": {"centrala": "RVU_450", "czerpnia": [8.20, 2.90, 10.10], "wyrzutnia": [8.20, 2.90, 10.10], "wyrzut": "pionowy",
+                   "zestaw_zblokowany": True, "wywiewki_kanalizacyjne": [[4.30, 8.30]], "rzedna_terenu": -0.25,
+                   "uwagi": "czerpnio-wyrzutnia dachowa zblokowana (certyfikowana) ≥ 0,40 m nad pokryciem, ≥ 3,0 m od krawędzi dachu z oknami, "
+                            "6,7 m od wywiewki K1 (W-166/W-167); pion K2 — zawór napowietrzający (K1 wentylowany ponad dach)"},
+    "ogrzewanie": {"zrodlo": "PC_R290_monoblok", "temp_zasilania": 35, "pompy_W": 25,
+                   "uwagi": "monoblok R290 (W-155) — jednostka zewn. przy ścianie pd. pasa gospodarczego, 7,1 m od granicy E (W-024), "
+                            "strefa R290 1,0 m bez otworów (W-156); moduł hydrauliczny w pom. 0.12"},
+    "cwu": {"zasobnik": "Z250", "cyrkulacja": {"moc_W": 5.0, "h_doba": 6.0}, "dezynfekcja_kWh_rok": 272,
+            "uwagi": "projekt: zasobnik 300 dm³ (klasa B, strata ≤ 65 W) + bufor 100 dm³ — w EP dane przykładowe Z250 do wyboru wyrobu"},
+    "pv": {"moduly": 15, "P_modul_Wp": 430, "azymut": 180, "nachylenie": 12, "PR": 0.80, "autokonsumpcja": "symulacja",
+           "uwagi": "15 × 430 Wp = 6,45 kWp ≤ 6,5 kWp (W-194); stelaże niskie ≤ +9,78 (nie ponad attykę D1)"},
+    "garaz": {"stanowiska": 2, "otwory_went_m2": 0.10, "n_went": 0.5},
+}
+KONSTRUKCJA = {
+    "klasa_konsekwencji": "CC2", "klasa_niezawodnosci": "RC2", "K_FI": 1.0, "okres_uzytkowania": 50, "klasa_konstrukcji": "S4",
+    "eurokody": "1. generacja z NA (W-260)",
+    "beton": {"stropy_sciany_plyta": "C25/30 XC1/XC2", "krawedzie_wysuniete_attyki_belki": "C30/37 XC4+XF1", "stal": "B500SP (W-269)"},
+    "mur": "silikat kl. 20 gr. 1, zaprawa cienkowarstwowa, f_d = 4,50 MPa (klasa wykonania A, W-270)",
+    "sciezka_obciazen": [
+        "Stropy ST1/ST2 jednokierunkowe N–S (22 cm): oś 1 (B1 / ściana) – oś 3 – oś 4; rozpiętości 5,125 / 3,625 m; płyta ciągła.",
+        "Fasada pd. P0: belka odwrócona B1 25×107 na słupach RK120 SL1–SL4 (w szprosach) i ścianach A, E; przęsła ≤ 3,23 m.",
+        "Boks C: nadproże B2 na słupkach SL5/SL6 w jednej linii pionowej z SL3/SL4 (siły skupione nad podporami B1).",
+        "Wspornik bryły A (1,12 m w osi): belki wspornikowe ŻB B4 (oś 1) i B5 (oś 3) 18×80 w licu ścian P2 (pod parapetami), "
+        "zakotwione w przęśle A–B 3,875 m dociążonym ścianami P2 i stropem ST3; belka krawędziowa B3 (oś A') podparta na końcach B4/B5 "
+        "niesie lekką ścianę SZL (≤ 1,0 kN/m²) i okap PL-2; ST3 nad wspornikiem na belce B6. Brak ścian-tarcz — elementy prętowe "
+        "sprawdzalne (SCHEMAT p. 9). EQU: 1,10·G_dst + 1,5·Q_dst ≤ 0,90·G_stb (W-262), ugięcie końca ≤ l/125 (W-268).",
+        "Dach garażu D4: płyta 24 cm dwukierunkowa na ścianach E, F, oś 2 i oś 5 (6,375 × 6,50 m), l/d ≈ 27; zaspa przy uskoku do bryły B "
+        "μ_w ≤ 4,0 (W-264), sytuacja wyjątkowa B2, dach zielony nasycony ≈ 1,6 kN/m².",
+        "Trzon klatki: ściany C i D na P0 żelbetowe 18 cm (sztywność w kierunku x przy przeszklonej fasadzie pd. — J2), P1–P2 silikat.",
+        "Płyty wysunięte ≤ 1,50 m na łącznikach termoizolacyjnych z ETA (W-272); rama C lekka stalowa na konsolach punktowych.",
+    ],
+}
+GEOTECHNIKA = {"kategoria": "II", "grunt": {"rodzaj": "piasek średni, średniozagęszczony", "I_D": 0.6, "phi": 33.0, "gamma": 18.5, "M0": 80000},
+               "ZWG": -3.8, "h_z": 0.8, "humus": 0.4,
+               "uwagi": "opinia geotechniczna + dokumentacja badań (≥ 3 sondowania CPT/DPL do ≥ 6 m) + projekt geotechniczny (W-281/W-282)"}
+META = {"nazwa": "Dom LAMELA", "wersja": "2.0 — koncepcja ostateczna (synteza W2 + przeszczepy W1/W3 + poprawki J1–J3)", "data": "2026-09-25",
+        "autor": "Główny projektant — dane do uzupełnienia (brief §7 p. 4)", "zrodlo": "tools/buduj_model.py (model parametryczny)",
+        "stadium": "koncepcja", "podstawa_WT": "WT 2002 (t.j. Dz.U. 2022 poz. 1225 ze zm.) stosowane na podstawie art. 102a PB — W-A.1"}
+
+
+# =====================================================================================================================
+# 12. ZAPIS budynek.yaml
+# =====================================================================================================================
+class _Dumper(yaml.SafeDumper):
+    pass
+
+
+def _repr_float(dumper, v):
+    if v != v or v in (float("inf"), float("-inf")):
+        return dumper.represent_scalar("tag:yaml.org,2002:float", ".nan")
+    t = f"{v:.4f}".rstrip("0")
+    if t.endswith("."):
+        t += "0"
+    return dumper.represent_scalar("tag:yaml.org,2002:float", t)
+
+
+def _repr_list(dumper, v):
+    flow = all(not isinstance(x, (dict,)) for x in v) and (len(v) <= 12 or all(not isinstance(x, list) for x in v))
+    return dumper.represent_sequence("tag:yaml.org,2002:seq", v, flow_style=flow)
+
+
+_Dumper.add_representer(float, _repr_float)
+_Dumper.add_representer(list, _repr_list)
+
+
+def dump(path: Path, data: dict, naglowek: str):
+    txt = yaml.dump(data, Dumper=_Dumper, allow_unicode=True, sort_keys=False, width=180, default_flow_style=False)
+    path.write_text(naglowek + txt, encoding="utf-8")
+
+
+def budynek() -> dict:
+    materialy = {}
+    for kod, d, zr in MAT:
+        dd = dict(d)
+        dd["zrodlo"] = zr
+        materialy[kod] = dd
+    kond = [
+        {"id": "P0", "nazwa": "Parter", "rzedna": 0.0, "wys_kondygnacji": H_KOND, "wys_w_swietle": 2.77, "podloga": "POD-0"},
+        {"id": "P1", "nazwa": "I piętro", "rzedna": Z_P1, "wys_kondygnacji": H_KOND, "wys_w_swietle": 2.77, "podloga": "POD-1"},
+        {"id": "P2", "nazwa": "II piętro", "rzedna": Z_P2, "wys_kondygnacji": r(Z_ST3 - Z_P2), "wys_w_swietle": 2.77, "podloga": "POD-1"},
+    ]
+    return {
+        "meta": META,
+        "uklad": {"zero_abs": ZERO_ABS, "azymut_osi_y": 0.0, "uklad_wysokosci": "PL-EVRF2007-NH",
+                  "opis": "x → wschód, y → północ; (0,0) = oś A × oś 1; ±0,00 = posadzka P0"},
+        "osie": {"x": {k: r(v) for k, v in X.items()}, "y": {k: r(v) for k, v in Y.items()}},
+        "kondygnacje": kond,
+        "materialy": materialy,
+        "przegrody": PRZ,
+        "stolarka": STOLARKA,
+        "sciany": SC,
+        "otwory": OT,
+        "pomieszczenia": PM,
+        "stropy": STROPY,
+        "dachy": DACHY,
+        "wsporniki_plyty": WSP,
+        "slupy": SLUPY,
+        "belki": BELKI,
+        "fundamenty": FUND,
+        "schody": SCHODY,
+        "balustrady": BALUSTRADY,
+        "lamele": LAMELE,
+        "tarasy": TARASY,
+        "wezly": WEZLY,
+        "energia": ENERGIA,
+        "konstrukcja": KONSTRUKCJA,
+        "geotechnika": GEOTECHNIKA,
+    }
+
+
+NAGLOWEK_B = ("# Dom LAMELA — MODEL BUDYNKU (jedno źródło prawdy). PLIK GENEROWANY: tools/buduj_model.py — nie edytować ręcznie.\n"
+              "# Schemat: docs/SCHEMAT_MODELU.md; koncepcja: docs/20_koncepcja/koncepcja.md. Układ: x→E, y→N, (0,0)=A×1, ±0,00=101,65 m n.p.m.\n"
+              "# Wartości materiałowe — typowe (PN-EN ISO 10456, PN-EN 1745, DWU typowych wyrobów, „lub równoważne”) — pole `zrodlo`.\n")
+
+if __name__ == "__main__" and "--tylko-budynek" in __import__("sys").argv:
+    OUT.mkdir(exist_ok=True)
+    dump(OUT / "budynek.yaml", budynek(), NAGLOWEK_B)
+    print("zapisano", OUT / "budynek.yaml")
