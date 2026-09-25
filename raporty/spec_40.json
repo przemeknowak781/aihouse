@@ -1,4 +1,5 @@
 {
+ "nr": 40,
  "title": "Finisz: 8 równoległych strumieni — Tom I, 4 tomy PT, runda 2 poprawek, silnik arkuszy, konstrukcja, www",
  "stages": [
   [
@@ -58,6 +59,13 @@
   "Przyspieszenie na polecenie Inwestora: równolegle generatory tomu I (PZT § 14, PAB § 20 ust. 1 pkt 1–14, ZL: BIOZ, oświadczenia, art. 102a) i tomów PT-1 AR, PT-2 BO, PT-3 IS (z charakterystyką energetyczną), PT-4 IE — liczby wyłącznie z modelu/obliczeń, walidacja listami kontrolnymi RPB, weryfikacja adwersaryjna.",
   "Konstrukcja: kontrola zbrojenia 273/276 pozycji ✔ (było 267/282); arkusze BO już na formatach ekonomicznych (np. 400 × 297 = pas 210 + 190).",
   "Przegląd PT-BO-26 (schody): wykryty błąd konstrukcyjny — pręt dolny prowadzony po wklęsłym załamaniu bieg–spocznik górny (odspojenie otuliny) → zlecono pręty krzyżowane z zakotwieniem ≥ l_bd.",
-  "Decyzja Inwestora: zielona ściana na kratownicy + osłona PC z lamel (elewacja ogrodowa garażu) — do modelu przed wydaniem."
+  "Decyzja Inwestora: zielona ściana na kratownicy + osłona PC z lamel (elewacja ogrodowa garażu) — do modelu przed wydaniem.",
+  "NADZÓR (08:36): 8 agentów aktywnych, bez zastojów; najdłuższa bezczynność 9 min; zmiany w repo 0 min temu."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/projekt/04_PT_konstrukcja/rysunki/PT-BO-26_zbrojenie_schodow.png",
+   "caption": "PT-BO-26 — zbrojenie schodów 1:25 na formacie 400 × 297 (bieg 1: błąd w załamaniu — do poprawy)"
+  }
  ]
 }

@@ -1,27 +1,27 @@
 {
- "czas": "2026-09-25 08:35",
+ "czas": "2026-09-25 08:36",
  "aktywni": [
   {
    "id": "a82012b772f4804f3",
    "opis": "Build catalog website for LAMELA",
-   "idle_min": 3.2,
-   "bez_narzedzi_min": 3.3,
+   "idle_min": 0.0,
+   "bez_narzedzi_min": 0.0,
    "limity": 0,
    "powody": []
   },
   {
    "id": "a5045de9ee0554cc8",
    "opis": "Build structural drawings generator",
-   "idle_min": 8.6,
-   "bez_narzedzi_min": 8.6,
+   "idle_min": 9.2,
+   "bez_narzedzi_min": 9.2,
    "limity": 0,
    "powody": []
   },
   {
    "id": "ae8a033bfce42ab47",
    "opis": "wf_ce63599a-15f:opis:PZT_ZL",
-   "idle_min": 0.0,
-   "bez_narzedzi_min": 0.0,
+   "idle_min": 0.6,
+   "bez_narzedzi_min": 0.6,
    "limity": 0,
    "powody": []
   },
@@ -29,30 +29,30 @@
    "id": "aecd6e8f26140c2ed",
    "opis": "wf_ce63599a-15f:opis:PAB",
    "idle_min": 0.0,
-   "bez_narzedzi_min": 0.1,
+   "bez_narzedzi_min": 0.0,
    "limity": 0,
    "powody": []
   },
   {
    "id": "a348d2a8e7cf1f6c5",
    "opis": "wf_dad224e5-cd8:silnik",
-   "idle_min": 8.7,
-   "bez_narzedzi_min": 8.7,
+   "idle_min": 9.3,
+   "bez_narzedzi_min": 9.3,
    "limity": 0,
    "powody": []
   },
   {
    "id": "ae5de9b3855116702",
    "opis": "wf_10e1a801-dd6:poprawki:fizyka-woda",
-   "idle_min": 2.6,
-   "bez_narzedzi_min": 2.6,
+   "idle_min": 3.2,
+   "bez_narzedzi_min": 3.2,
    "limity": 0,
    "powody": []
   },
   {
    "id": "aa312e69fff4fc1f4",
    "opis": "wf_c5f7e298-4b9:PT:AR",
-   "idle_min": 0.0,
+   "idle_min": 0.1,
    "bez_narzedzi_min": 0.1,
    "limity": 0,
    "powody": []
@@ -60,8 +60,8 @@
   {
    "id": "ad07d221db9b5c09f",
    "opis": "wf_c5f7e298-4b9:PT:BO",
-   "idle_min": 1.6,
-   "bez_narzedzi_min": 1.6,
+   "idle_min": 2.2,
+   "bez_narzedzi_min": 2.2,
    "limity": 0,
    "powody": []
   }

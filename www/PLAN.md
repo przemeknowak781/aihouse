@@ -33,8 +33,8 @@ materiałów modelu (dane, nie dekoracja).
 Redakcyjna strona-arkusz: wyrównanie do lewej, siatka 12 kolumn z wąską kolumną „metryki” (etykieta sekcji + podstawa),
 szeroką kolumną treści. Hero: render od ogrodu na pełną szerokość (16:9 desktop, 4:3 telefon), nad nim odręczne litery
 A–G wskazujące pasma bryły (pozycje rzutowane z modelu przez kamerę renderu), pod nim nazwa w rozciągniętym kroju
-i pasek parametrów jak tabliczka rysunkowa. Separatory sekcji = trzy przesunięte kreski, których długości i przesunięcia
-są liczone z obrysów kondygnacji P0/P1/P2 (sylweta „S”). Rysunki (rzuty, elewacje, przekrój, przegrody, schemat
+i pasek parametrów jak tabliczka rysunkowa. Separatory sekcji = poziome pasma elewacji ogrodowej w skali (płyty
+wysunięte na południe z modelu: długość, przesunięcie W–E i kolejność pionowa — sylweta „S”). Rysunki (rzuty, elewacje, przekrój, przegrody, schemat
 działki) jako inline SVG na tokenach — działają w obu motywach. Jedno „ryzyko”: odręczna warstwa szkicu nałożona
 na fotorealistyczny render. Ruch minimalny (przejścia zakładek, hover), wyłączany przy `prefers-reduced-motion`.
 
@@ -43,3 +43,12 @@ na fotorealistyczny render. Ruch minimalny (przejścia zakładek, hover), wyłą
 Odrzucono: kremowe tło + serif + terakota (grunt jest chłodnym betonem, akcent to realny kolor drewna z modelu);
 Inter/Space Grotesk (→ Archivo expanded + Plex); centrowanie (wszystko do lewej, asymetria metryka/treść);
 numeracja 01/02/03 (sekcje nie są sekwencją — etykiety opisowe).
+
+## Rendery (uwagi orkiestratora uwzględnione)
+
+Ujęcia 3/4 z poziomu oczu 1,65 m (ogród: kamera ~26° od osi elewacji od południowego zachodu; ulica: ~28° od północnego
+wschodu, z drugiej strony drogi), ogniskowa 34–40 mm ekw., obiektyw przesuwny (piony bez zbieżności), Słońce z
+`lamela.sun` (21.06 17:00 dla ogrodu, 19:00 dla ulicy). Nakładka `src/lamela/www/render/render_www.js` na renderer
+pipeline'u (bez zmian w `tools/render3d`): stonowana trawa bez powtarzalnej tekstury, pas zieleni na horyzoncie,
+mocniejsze odbicia nieba w szkle; budynek bez retuszu. Drzewa z projektu zieleni stojące między kamerą a bryłą są
+w danym kadrze pomijane, a ich lista trafia do podpisu renderu. Cache renderów: klucz = treść modelu + kod.

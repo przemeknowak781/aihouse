@@ -61,8 +61,7 @@ def glowa(D: dict, tr: dict, css: str, W: dict) -> str:
     kol = {k: (D["model"].material(v).kolor if D["model"].material(v) else None) for k, v in LINIE_MAT.items()}
     dom = {"izolacja": "#D8C98A", "hydro": "#3F7FBF", "szczelnosc": "#2E7D32", "zewn": "#9B6B41"}
     linie = ";".join(f"--l-{k}:{kol.get(k) or dom[k]}" for k in dom)
-    opis = E(f'{W["nazwa"]} — projekt domu jednorodzinnego, PU {W["PU"]}, {W["kondygnacje"]} kondygnacje, dach płaski.')
-    return (f'<title>{E(W["nazwa"])}</title>\n<meta name="description" content="{opis}">\n'
+    return (f'<title>{E(W["nazwa"])}</title>\n'
             f'<link rel="preconnect" href="https://fonts.googleapis.com">\n'
             f'<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
             f'<link rel="stylesheet" href="{FONTY}">\n<style>\n{css}\n:root{{{linie}}}\n</style>\n')
@@ -322,8 +321,8 @@ def model3d(D: dict, tr: dict, W: dict, sep: str) -> str:
     from ..sun import sun_position, sun_vector
     az, el = sun_position("2026-06-21 15:00")
     sv = sun_vector(az, el, D["orientacja"]["azymut_osi_y"])
-    wid = {"ogrod": dict(poz=[c[0] - 4, y0 - 2.6 * R, 1.7], cel=[c[0], c[1], c[2] * 0.8]),
-           "ulica": dict(poz=[c[0] + 3, y1 + 2.4 * R, 1.7], cel=[c[0], c[1], c[2] * 0.8]),
+    wid = {"ogrod": dict(poz=[c[0] - 0.45 * R, y0 - 2.1 * R, 4.5], cel=[c[0], c[1], c[2] * 0.8]),
+           "ulica": dict(poz=[c[0] + 0.5 * R, y1 + 2.0 * R, 4.0], cel=[c[0], c[1], c[2] * 0.8]),
            "lotniczy": dict(poz=[x1 + 1.6 * R, y0 - 1.9 * R, 1.6 * R], cel=c),
            "gora": dict(poz=[c[0], c[1] - 0.01, 3.4 * R], cel=[c[0], c[1], 0])}
     cfg = dict(plik="assets/model.glb", srodek=c, promien=R, slonce=list(sv), widoki=wid, kolejnosc=ks + ["dach"],
@@ -575,7 +574,7 @@ def stopka(D: dict, tr: dict, W: dict, sep_svg: str, teraz: datetime) -> str:
             f'({E(str(meta.get("data", "")))}).</p></div><ul>{li}</ul></div></footer>')
 
 
-def zloz(D: dict, tr: dict, R: dict, szkic: dict, glb_mb: float, model_dir: Path, teraz: datetime) -> str:
+def zloz(D: dict, tr: dict, R: dict, szkic: dict, glb_mb: float, model_dir: Path, teraz: datetime) -> tuple[str, dict]:
     """Pełna treść index.html (bez szkieletu dokumentu)."""
     W = wartosci(D, tr, teraz)
     W["glb_mb"] = fm(glb_mb, 1)

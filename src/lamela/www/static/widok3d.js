@@ -9,7 +9,7 @@
   var stan = document.getElementById('v3d-stan');
   var ster = Array.prototype.slice.call(document.querySelectorAll('#v3d-ster button'));
   var ruch = !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  var T, renderer, scene, cam, ctl, grupy = {}, baza = {}, rozsun = 0, cel = 0, anim = null, lot = null, spoczynek = 0;
+  var envI = 1, T, renderer, scene, cam, ctl, grupy = {}, baza = {}, rozsun = 0, cel = 0, anim = null, lot = null, spoczynek = 0;
   function B2T(p) { return new T.Vector3(p[0], p[2], -p[1]); }
   function tokenTla() {
     var c = getComputedStyle(box).getPropertyValue('--d-tlo').trim();
@@ -30,7 +30,7 @@
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     renderer.outputEncoding = T.sRGBEncoding;
     renderer.toneMapping = T.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.0;
+    renderer.toneMappingExposure = 0.9;
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = T.PCFSoftShadowMap;
     scene = new T.Scene();
@@ -38,9 +38,10 @@
     if (T.RoomEnvironment) {
       var pm = new T.PMREMGenerator(renderer);
       scene.environment = pm.fromScene(new T.RoomEnvironment(), 0.04).texture;
+      envI = 0.45;
     }
-    scene.add(new T.HemisphereLight(0xdfe8f0, 0x6f6a58, 0.55));
-    var sun = new T.DirectionalLight(0xfff1dc, 2.4);
+    scene.add(new T.HemisphereLight(0xdfe8f0, 0x6f6a58, 0.35));
+    var sun = new T.DirectionalLight(0xfff1dc, 1.25);
     var s = cfg.slonce;
     sun.position.copy(B2T([cfg.srodek[0] + 60 * s[0], cfg.srodek[1] + 60 * s[1], 60 * s[2]]));
     sun.target.position.copy(B2T(cfg.srodek));
@@ -104,6 +105,7 @@
         if (m.transparent || m.opacity < 0.999) { m.depthWrite = false; m.side = T.DoubleSide; o.renderOrder = 10; }
         if (kod === 'SZKLO') { m.color.set(0x5d7682); m.roughness = 0.05; m.metalness = 0.3; m.opacity = 0.5; m.transparent = true; }
         if (m.map) m.map.anisotropy = renderer.capabilities.getMaxAnisotropy();
+        m.envMapIntensity = kod === 'SZKLO' ? 1.2 : envI;
       });
       if (ud.kind === 'terrain' || (o.parent && o.parent.userData && o.parent.userData.kind === 'terrain')) o.castShadow = false;
     });
