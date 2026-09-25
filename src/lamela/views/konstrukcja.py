@@ -1469,8 +1469,7 @@ def _czesc(lst: list, spec: dict) -> list:
     if not cz:
         return lst
     i, n = int(cz[0]), max(int(cz[1]), 1)
-    per = int(math.ceil(len(lst) / n))
-    return lst[(i - 1) * per: i * per]
+    return lst[(i - 1) * len(lst) // n: i * len(lst) // n]      # części równoliczne (±1)
 
 
 def widok_zbrojenie_belek(ctx: ViewContext, spec: dict, scale: float, opts: dict):
@@ -1516,6 +1515,9 @@ def widok_zbrojenie_belek(ctx: ViewContext, spec: dict, scale: float, opts: dict
         rows.append((B, pr))
         for bd in ([B] if el == "belki" else next(lst for nm, lst in KD.typy_nadprozy(D) if nm == ident)):
             KB.kontrola_belki(D, bd, pr, nr_ark)
+    if not bloki:                   # część pusta (mniej elementów niż części w konfiguracji arkuszy)
+        vp.text((0.0, 0.0), f"Brak {'belek' if el == 'belki' else 'nadproży'} w tej części zestawu — "
+                "zmniejszyć liczbę części (czesc) w konfiguracji arkuszy.", 2.5, layer=L_OPI)
     # układ w siatce: kolumny o szerokości maks. bloku, wiersze o wysokości maks. bloku
     cw = [0.0] * kol
     for i, (*_, bb) in enumerate(bloki):
