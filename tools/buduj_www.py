@@ -97,6 +97,33 @@ def podglad(html: str, dist: Path, cel: Path):
 
 
 
+
+def glb_na_gltf_json(glb: Path, cel: Path) -> Path:
+    """GLB → glTF (JSON) z buforem osadzonym jako data URI (base64). Platforma publikacji nie serwuje .glb, a serwuje
+    .json; GLTFLoader.parse() rozpoznaje JSON po braku nagłówka „glTF” i wczytuje go bez zmian w widoku 3D."""
+    import base64
+    import struct
+    b = glb.read_bytes()
+    magic, ver, dl = struct.unpack_from("<4sII", b, 0)
+    if magic != b"glTF":
+        raise ValueError("to nie jest plik GLB")
+    off, js, binb = 12, None, b""
+    while off < dl:
+        clen, ctyp = struct.unpack_from("<II", b, off)
+        chunk = b[off + 8: off + 8 + clen]
+        if ctyp == 0x4E4F534A:
+            js = json.loads(chunk.decode("utf-8"))
+        elif ctyp == 0x004E4942:
+            binb = chunk
+        off += 8 + clen
+    if js is None:
+        raise ValueError("brak części JSON w GLB")
+    if js.get("buffers"):
+        js["buffers"][0]["uri"] = "data:application/octet-stream;base64," + base64.b64encode(binb).decode("ascii")
+        js["buffers"][0]["byteLength"] = len(binb)
+    cel.write_text(json.dumps(js, separators=(",", ":")), encoding="utf-8")
+    return cel
+
 def wydziel_svg(html: str, assets: Path, prog: int = 6000) -> tuple[str, int]:
     """Duże rysunki SVG (rzuty, elewacje, przekroje, działka) → osobne pliki assets/svg/*.svg, wstawiane do strony
     skryptem (fetch → outerHTML), dzięki czemu zachowują tokeny CSS motywu jasnego/ciemnego, a index.html jest lekki
@@ -202,6 +229,10 @@ def _dalej(a, D, tr, glb, dist, assets, cache, teraz, t0) -> int:
     print("[5] rysunki SVG i index.html…", flush=True)
     html, W = ST.zloz(D, tr, R, szkic, (assets / "model.glb").stat().st_size / 1e6, Path(a.budynek).parent, teraz)
     html, n_svg = wydziel_svg(html, assets)
+    if (assets / "model.glb").exists():                     # publikacja: .glb nie jest serwowany → glTF JSON
+        glb_na_gltf_json(assets / "model.glb", assets / "model.gltf.json")
+        (assets / "model.glb").unlink()
+        html = html.replace('"assets/model.glb"', '"assets/model.gltf.json"')
     print(f"    rysunki SVG wydzielone do assets/svg: {n_svg}", flush=True)
     (dist / "index.html").write_text(html, encoding="utf-8")
     podglad(html, dist, cache / "podglad")
