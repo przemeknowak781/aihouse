@@ -194,6 +194,15 @@ class DanePTIE:
                     inne.setdefault(f"WLZ {m} (obliczenia: {self.obw.wlz['przewod']})", []).append(nr)
         for opis, nr in inne.items():
             self.rozb_rys.append(f"{', '.join(sorted(set(nr)))}: {opis}")
+        normy: dict = {}                                   # przywołania norm na arkuszach bez daty / wycofane
+        for nr, t in tx.items():
+            if re.search(r"60364-5-534|-443/-5-534", t):
+                normy.setdefault("PN-HD 60364-5-534 (wycofana; zastąpiona przez PN-HD 60364-5-53:2022-10)", []).append(nr)
+            if re.search(r"12464-1(?!:)", t):
+                normy.setdefault("PN-EN 12464-1 bez daty wydania (w tomie: PN-EN 12464-1:2012, powołana w WT)", []).append(nr)
+        for opis, nr in normy.items():
+            self.otwarte.append(f"Uwagi na arkuszach {', '.join(sorted(set(nr)))} przywołują {opis} — status i wydanie "
+                                "wg rozdz. „Przedmiot, zakres i podstawy opracowania”; poprawić uwagę w generatorze rysunków.")
         schemat = next((nr for nr, t in tx.items() if "SCHEMAT IDEOWY ROZDZIELNICY" in t.upper()), None)
         if schemat:
             wz = re.compile(r"((?:3P )?[BCD]\d+) \| 30mA \w+ \| (\S+ \d×[\d,]+)\s+L=\d+ m \| ∆U=[\d,]+% \| "

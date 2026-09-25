@@ -99,7 +99,7 @@ def rozdz_bilans(o: Opis, D: DanePTIE):
     hvac = [x for x in b.odbiorniki if x.grupa in ("pc", "grzalka", "went", "sterowanie")]
     o.tabela([{"Urządzenie": x.nazwa, "Obwód": x.id, "P_el [kW]": x.P, "Fazy": x.fazy} for x in hvac],
              tytul="Moc elektryczna urządzeń ogrzewczych i wentylacyjnych (§ 23 pkt 8 lit. b)",
-             formaty={"P_el [kW]": 2}, suma=["P_el [kW]"],
+             formaty={"P_el [kW]": 3}, suma=["P_el [kW]"],
              uwagi="Centrala wentylacyjna: moc wentylatorów P = SFP·V przy strumieniu projektowym — ta sama wartość "
                    "co w doborze centrali w PT-3 IS.",
              zrodlo="dobór urządzeń — PT-3 IS; bilans — PT-4")
