@@ -8,7 +8,7 @@
 
 ## Stan opracowania i sprawy otwarte — rejestr wymagań, sekcja E
 
-Tom opracowano automatycznie z modelu budynku (`model/*.yaml`, stan z 2026-09-25 08:02) i bibliotek obliczeniowych
+Tom opracowano automatycznie z modelu budynku (`model/*.yaml`, stan z 2026-09-25 10:33) i bibliotek obliczeniowych
 `lamela.obliczenia` (moduły `elektryka`, `energia`, `sanitarne`) uruchamianych przy każdym generowaniu tomu —
 każda liczba w tomie pochodzi z modelu albo z obliczeń. Działka, MPZP, warunki gruntowe i **warunki przyłączenia
 do sieci** są [DANE PRZYKŁADOWE – FIKCYJNE]; parametry urządzeń przyjęto z kart **wyrobów przykładowych** ([ZAŁ]) — dopuszcza się
@@ -102,7 +102,7 @@ z literatury (obciążalności wg PN-HD 60364-5-52 zał. B, spadki napięć wg N
 
 **Materiały wyjściowe:** PZT i PAB (tom I), PT-1 AR, PT-2 BO (zbrojenie i uziom), PT-3 IS (moc pompy ciepła,
 centrali, grzałki; charakterystyka energetyczna), model `model/budynek.yaml`, `dzialka.yaml`, `instalacje.yaml`,
-`wyposazenie.yaml` (stan z 2026-09-25 08:02); dane PVGIS 5.3 (JRC) dla Poznania. Warunki przyłączenia OSD — [DANE PRZYKŁADOWE – FIKCYJNE]
+`wyposazenie.yaml` (stan z 2026-09-25 10:33); dane PVGIS 5.3 (JRC) dla Poznania. Warunki przyłączenia OSD — [DANE PRZYKŁADOWE – FIKCYJNE]
 (moc przyłączeniowa i parametry sieci jako [ZAŁ], E-05).
 
 ## Zasilanie i powiązanie z siecią elektroenergetyczną — § 23 pkt 8 RPB; W-192, W-193
@@ -278,7 +278,7 @@ Konstrukcja PV uziemiona w jednym punkcie i połączona z GSU (712.444.5.5.101).
 
 **Produkcja energii** (PVGIS 5.3, Poznań): E = 5 610 kWh/rok; autokonsumpcja (bilans godzinowy)
 65,1 %, pokrycie zużycia 32,9 %; energia PV zużyta przez
-systemy techniczne (ogrzewanie, c.w.u., pomocnicze) 2 452
+systemy techniczne (ogrzewanie, c.w.u., pomocnicze) 2 453
 kWh/rok — wartości informacyjne doboru instalacji. Charakterystyka energetyczna (PT-3 IS) przyjmuje wg
 metodologii świadectw produkcję E_PV = 4 985 kWh/rok i energię zużytą przez systemy techniczne
 E_PV,sys = 2 339 kWh/rok (inne dane klimatyczne i model autokonsumpcji); dla wskaźnika EP
@@ -626,17 +626,17 @@ Uwagi generatora arkuszy (raport_widokow.json):
 
 | Nr | Tytuł | Skala | Format | Uwagi |
 |---|---|---|---|---|
-| PT-IE-01 | INSTALACJA OŚWIETLENIA — RZUT PARTERU | 1:50 | nst. 690×420 |  |
+| PT-IE-01 | INSTALACJA OŚWIETLENIA — RZUT PARTERU | 1:50 | nst. 594×440 |  |
 | PT-IE-02 | INSTALACJA OŚWIETLENIA — RZUT I PIĘTRA | 1:50 | nst. 690×297 |  |
-| PT-IE-03 | INSTALACJA OŚWIETLENIA — RZUT II PIĘTRA | 1:50 | nst. 690×297 |  |
-| PT-IE-04 | GNIAZDA I ZASILANIE URZĄDZEŃ — RZUT PARTERU | 1:50 | nst. 570×594 |  |
+| PT-IE-03 | INSTALACJA OŚWIETLENIA — RZUT II PIĘTRA | 1:50 | nst. 570×297 |  |
+| PT-IE-04 | GNIAZDA I ZASILANIE URZĄDZEŃ — RZUT PARTERU | 1:50 | nst. 594×500 |  |
 | PT-IE-05 | GNIAZDA I ZASILANIE URZĄDZEŃ — RZUT I PIĘTRA | 1:50 | A2 |  |
-| PT-IE-06 | GNIAZDA I ZASILANIE URZĄDZEŃ — RZUT II PIĘTRA | 1:50 | A2 |  |
-| PT-IE-07 | TELETECHNIKA — RZUT PARTERU | 1:50 | nst. 520×594 |  |
+| PT-IE-06 | GNIAZDA I ZASILANIE URZĄDZEŃ — RZUT II PIĘTRA | 1:50 | nst. 420×450 |  |
+| PT-IE-07 | TELETECHNIKA — RZUT PARTERU | 1:50 | nst. 594×470 |  |
 | PT-IE-08 | TELETECHNIKA — RZUT I PIĘTRA | 1:50 | nst. 690×297 |  |
-| PT-IE-09 | TELETECHNIKA — RZUT II PIĘTRA | 1:50 | nst. 690×297 |  |
-| PT-IE-10 | INSTALACJA FOTOWOLTAICZNA — RZUT DACHU | 1:50 | nst. 690×420 |  |
-| PT-IE-11 | INSTALACJA FOTOWOLTAICZNA — RZUT PARTERU (FALOWNIK, SPD) | 1:50 | nst. 690×420 |  |
-| PT-IE-12 | UZIOM I POŁĄCZENIA WYRÓWNAWCZE — RZUT PARTERU | 1:50 | nst. 720×420 |  |
-| PT-IE-13 | OCHRONA ODGROMOWA I WYRÓWNANIE POTENCJAŁÓW — RZUT DACHU | 1:50 | nst. 690×420 |  |
+| PT-IE-09 | TELETECHNIKA — RZUT II PIĘTRA | 1:50 | nst. 570×297 |  |
+| PT-IE-10 | INSTALACJA FOTOWOLTAICZNA — RZUT DACHU | 1:50 | nst. 594×440 |  |
+| PT-IE-11 | INSTALACJA FOTOWOLTAICZNA — RZUT PARTERU (FALOWNIK, SPD) | 1:50 | nst. 594×440 |  |
+| PT-IE-12 | UZIOM I POŁĄCZENIA WYRÓWNAWCZE — RZUT PARTERU | 1:50 | nst. 610×480 |  |
+| PT-IE-13 | OCHRONA ODGROMOWA I WYRÓWNANIE POTENCJAŁÓW — RZUT DACHU | 1:50 | nst. 594×440 |  |
 | PT-IE-14 | SCHEMAT ROZDZIELNICY GŁÓWNEJ RG | — | nst. 870×297 |  |

@@ -375,8 +375,8 @@ k_f = 1,0·10⁻⁴ m/s [ZAŁ] [DO UZUPEŁNIENIA: k_f z badań podłoża (E-04)]
 |---|---|---|---|---|
 | Powierzchnia zredukowana zlewni (dachy) | 210,01 m² | — | Aquanet 2024 tab. 2 | — |
 | Pojemność szczelnego zbiornika retencyjnego | 5,00 m³ | ≤ 5,0 m³ | PB art. 29 ust. 2 pkt 36 (5–15 m³ — zgłoszenie, ust. 1 pkt 38) [W-145] | spełnia |
-| Niecka chłonna 28,0 m² × 0,30 m — pojemność | 8,40 m³ | ≥ V_min = 1,2·V_obl = 5,71 m³ | Aquanet 2024 zał. C (1,1 przy przelewie awaryjnym) | spełnia |
-| Czas opróżniania niecki | 1,63 h | ≤ 24 h | Aquanet 2024 zał. C | spełnia |
+| Niecka chłonna 28,0 m² × 0,30 m — pojemność | 8,40 m³ | ≥ V_min = 1,2·V_obl = 5,08 m³ | Aquanet 2024 zał. C (1,1 przy przelewie awaryjnym) | spełnia |
+| Czas opróżniania niecki | 1,01 h | ≤ 24 h | Aquanet 2024 zał. C | spełnia |
 | Lokalizacja — zbiornik: odl. od granic / od budynku | min 10,60 / 5,70 m | ≥ 2,0 / ≥ 3,0 | założenie projektowe [ZAŁ] [W-144, W-145] | spełnia |
 | Lokalizacja — niecka chłonna: odl. od granic / od budynku | min 8,10 / 12,70 m | ≥ 2,0 / ≥ 3,0 | założenie projektowe [ZAŁ] [W-144, W-145] | spełnia |
 
@@ -424,6 +424,6 @@ niedrogowych (sprawdzenie geometryczne modelu — `tools/audyt_wt.py`).
 
 | Nr | Tytuł | Skala | Format |
 |---|---|---|---|
-| PZT-01 | PLAN ZAGOSPODAROWANIA DZIAŁKI | 1:500 | A2 |
-| PZT-02 | PLAN SZCZEGÓŁOWY — WYMIARY I RZĘDNE | 1:200 | nst. 400×594 |
-| PZT-03 | RYSUNEK KOORDYNACYJNY UZBROJENIA TERENU | 1:200 | nst. 620×420 |
+| PZT-01 | PLAN ZAGOSPODAROWANIA DZIAŁKI | 1:500 | nst. 420×530 |
+| PZT-02 | PLAN SZCZEGÓŁOWY — WYMIARY I RZĘDNE | 1:200 | nst. 594×430 |
+| PZT-03 | RYSUNEK KOORDYNACYJNY UZBROJENIA TERENU | 1:200 | nst. 610×450 |

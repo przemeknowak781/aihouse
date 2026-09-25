@@ -8,7 +8,7 @@
 
 ## Stan opracowania i sprawy otwarte — rejestr wymagań, sekcja E
 
-Tom opracowano automatycznie z modelu budynku (`model/*.yaml`, stan z 2026-09-25 08:02) i bibliotek obliczeniowych
+Tom opracowano automatycznie z modelu budynku (`model/*.yaml`, stan z 2026-09-25 10:33) i bibliotek obliczeniowych
 `lamela.obliczenia` uruchamianych przy każdym generowaniu tomu — każda liczba w tomie pochodzi z modelu albo
 z obliczeń. Działka, MPZP, warunki gruntowo-wodne i warunki przyłączenia są [DANE PRZYKŁADOWE – FIKCYJNE]; parametry urządzeń
 przyjęto z kart **wyrobów przykładowych** (oznaczenie [DANE PRZYKŁADOWE – FIKCYJNE] lub [ZAŁ]) — dopuszcza się wyroby równoważne
@@ -235,7 +235,7 @@ wg obliczeń); woda z podjazdu i garażu przez osadnik z separatorem — nie do 
 Skrzynki rozsączające — wyłącznie wariant opcjonalny po stanowisku PGW Wody Polskie (D-05).
 
 **Drenaż opaskowy: NIEWYMAGANY** (W1.1-E (wilgoć gruntowa, woda nienaporowa)).
-Grunt: piaski średnie, k_f = 3,00·10⁻⁴ m/s (wartość typowa [W]; wymagane badania — E-04) Zwierciadło wody gruntowej 3,80 m p.p.t.; spód fundamentu −0,85 m (wzgl. ±0,00), teren przy budynku średnio −0,29 m → głębokość posadowienia 0,56 m; ZWG 3,24 m poniżej spodu fundamentu. Pomieszczenia poniżej terenu: brak (budynek niepodpiwniczony, posadzka parteru nad terenem) Grunt silnie przepuszczalny (k_f > 10⁻⁴ m/s) i ZWG ≥ 0,5 m pod fundamentem — woda opadowa infiltruje pionowo, nie powstaje woda zastoiskowa przy ścianach; wystarcza izolacja przeciwwilgociowa. Zalecenia: Odwodnienie powierzchniowe: profilowanie terenu ze spadkiem ≥ 2 % od budynku na pasie ≥ 2,0 m (rzędne projektowane w dzialka.yaml: teren.punkty_projektowane) — wymagane niezależnie od drenażu. Opaska żwirowa szer. 0,5 m wokół budynku (żwir płukany 16/32 mm na geowłókninie, obrzeże), spadek od ściany; chroni cokół przed rozbryzgiem i ułatwia kontrolę izolacji [W].
+Grunt: piaski średnie, k_f = 3,00·10⁻⁴ m/s (wartość typowa [W]; wymagane badania — E-04) Zwierciadło wody gruntowej 3,80 m p.p.t.; spód fundamentu −1,05 m (wzgl. ±0,00), teren przy budynku średnio −0,29 m → głębokość posadowienia 0,76 m; ZWG 3,04 m poniżej spodu fundamentu. Pomieszczenia poniżej terenu: brak (budynek niepodpiwniczony, posadzka parteru nad terenem) Grunt silnie przepuszczalny (k_f > 10⁻⁴ m/s) i ZWG ≥ 0,5 m pod fundamentem — woda opadowa infiltruje pionowo, nie powstaje woda zastoiskowa przy ścianach; wystarcza izolacja przeciwwilgociowa. Zalecenia: Odwodnienie powierzchniowe: profilowanie terenu ze spadkiem ≥ 2 % od budynku na pasie ≥ 2,0 m (rzędne projektowane w dzialka.yaml: teren.punkty_projektowane) — wymagane niezależnie od drenażu. Opaska żwirowa szer. 0,5 m wokół budynku (żwir płukany 16/32 mm na geowłókninie, obrzeże), spadek od ściany; chroni cokół przed rozbryzgiem i ułatwia kontrolę izolacji [W].
 
 ## Powiązania instalacji z sieciami zewnętrznymi i punkty pomiarowe — § 23 pkt 8 RPB
 
@@ -574,14 +574,14 @@ Uwagi kontroli arkuszy (raport_widokow.json):
 
 | Nr | Tytuł | Skala | Format | Uwagi |
 |---|---|---|---|---|
-| PT-IS-01 | INSTALACJA WODOCIĄGOWA — RZUT PARTERU | 1:50 | nst. 790×420 |  |
+| PT-IS-01 | INSTALACJA WODOCIĄGOWA — RZUT PARTERU | 1:50 | nst. 610×510 |  |
 | PT-IS-02 | INSTALACJA WODOCIĄGOWA — RZUTY I PIĘTRA I II PIĘTRA | 1:50 | nst. 1130×297 |  |
-| PT-IS-03 | KANALIZACJA SANITARNA — RZUT PARTERU | 1:50 | nst. 710×420 |  |
+| PT-IS-03 | KANALIZACJA SANITARNA — RZUT PARTERU | 1:50 | nst. 594×480 |  |
 | PT-IS-04 | KANALIZACJA SANITARNA — RZUTY I PIĘTRA I II PIĘTRA | 1:50 | nst. 1130×297 |  |
-| PT-IS-05 | ODWODNIENIE DACHÓW — RZUT DACHU I RZUT PARTERU | 1:50 | nst. 590×841 |  |
-| PT-IS-06 | OGRZEWANIE — RZUT PARTERU | 1:50 | nst. 710×420 |  |
-| PT-IS-07 | OGRZEWANIE — RZUTY I PIĘTRA I II PIĘTRA | 1:50 | nst. 1320×297 |  |
-| PT-IS-08 | WENTYLACJA MECHANICZNA — RZUT PARTERU | 1:50 | nst. 710×420 |  |
-| PT-IS-09 | WENTYLACJA MECHANICZNA — RZUTY I PIĘTRA I II PIĘTRA | 1:50 | nst. 1320×297 |  |
+| PT-IS-05 | ODWODNIENIE DACHÓW — RZUT DACHU I RZUT PARTERU | 1:50 | nst. 594×810 |  |
+| PT-IS-06 | OGRZEWANIE — RZUT PARTERU | 1:50 | nst. 594×450 |  |
+| PT-IS-07 | OGRZEWANIE — RZUTY I PIĘTRA I II PIĘTRA | 1:50 | nst. 1310×297 |  |
+| PT-IS-08 | WENTYLACJA MECHANICZNA — RZUT PARTERU | 1:50 | nst. 594×450 |  |
+| PT-IS-09 | WENTYLACJA MECHANICZNA — RZUTY I PIĘTRA I II PIĘTRA | 1:50 | nst. 1310×297 |  |
 | PT-IS-10 | KANALIZACJA I WODOCIĄG — ROZWINIĘCIA | — | nst. 1410×297 |  |
-| PT-IS-11 | SCHEMAT POMPY CIEPŁA, C.O. I C.W.U. | — | A2 |  |
+| PT-IS-11 | SCHEMAT POMPY CIEPŁA, C.O. I C.W.U. | — | nst. 510×420 |  |

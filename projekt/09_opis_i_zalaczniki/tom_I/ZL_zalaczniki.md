@@ -11,7 +11,7 @@ bez podpiwniczenia, garaż w bryle parteru) — wraz z zagospodarowaniem działk
 
 1. roboty przygotowawcze: geodezyjne wytyczenie obiektu, ogrodzenie placu budowy, zaplecze, tablica informacyjna, zdjęcie warstwy ziemi urodzajnej (ok. 0,4 m);
 2. przyłącza wodociągowe, kanalizacyjne, elektroenergetyczne i telekomunikacyjne — wykopy wąskoprzestrzenne na działce i w pasie drogi 1KDD (włączenie do kanału sanitarnego na głębokości ok. 2,2 m p.p.t. [ZAŁ]);
-3. stan zerowy: wykop pod płytę fundamentową (głębokość ok. 0,7 m od terenu), płyta fundamentowa żelbetowa na izolacji termicznej, izolacje przeciwwilgociowe, uziom (PT-2 BO, PT-4 IE);
+3. stan zerowy: wykop pod płytę fundamentową (głębokość ok. 0,9 m od terenu), płyta fundamentowa żelbetowa na izolacji termicznej, izolacje przeciwwilgociowe, uziom (PT-2 BO, PT-4 IE);
 4. stan surowy: ściany, stropy oraz płyty wysunięte, okapy i wsporniki żelbetowe monolityczne (4 elementy: PL-E, PL-DA, PL-2, PL-3; deskowania i podparcia tymczasowe), słupy i rama stalowa przeszklenia, attyki;
 5. stropodachy (4 pola, w tym dach zielony garażu), instalacja fotowoltaiczna (15 modułów);
 6. stolarka zewnętrzna (w tym przeszklenia wielkoformatowe), elewacje, osłony elewacyjne z lamel (3 pola) — z rusztowań;

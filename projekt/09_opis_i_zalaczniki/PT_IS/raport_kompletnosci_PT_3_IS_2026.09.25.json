@@ -19,7 +19,7 @@
       "podstawa": "RPB § 2b ust. 3",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "3.04 MB (limit 150 MB)"
+      "szczegoly": "3.05 MB (limit 150 MB)"
     },
     {
       "id": "F-03",
@@ -38,6 +38,15 @@
       "status": "OK",
       "obowiazkowa": true,
       "szczegoly": "plik zawiera tylko tom PT"
+    },
+    {
+      "id": "F-06",
+      "element": "*",
+      "opis": "Tom ze stanu modelu = bieżący model (znacznik „stan modelu: SHA-256 …”, wspólny dla tomów PT)",
+      "podstawa": "PB art. 34 ust. 3c, ust. 3d pkt 3 (zgodność PT z PZT/PAB i między tomami)",
+      "status": "OSTRZEŻENIE",
+      "obowiazkowa": true,
+      "szczegoly": "brak znacznika „stan modelu: SHA-256 …” (bieżący model: 98826e2b39ab)"
     },
     {
       "id": "C2-01",
@@ -230,7 +239,7 @@
       "arkusze": 11
     }
   },
-  "rozmiar_mb": 3.041099,
+  "rozmiar_mb": 3.047332,
   "strony": 82,
   "podsumowanie": {
     "status": "PRZYKŁAD – NIE DO ZŁOŻENIA",
@@ -238,7 +247,7 @@
     "BRAK": 0,
     "DO UZUPEŁNIENIA": 2,
     "N/D": 0,
-    "OSTRZEŻENIE": 0,
+    "OSTRZEŻENIE": 1,
     "znaczniki_do_uzupelnienia": 91,
     "znaczniki_dokument_zewnetrzny": 0,
     "znaczniki_dane_przykladowe": 99

@@ -1,5 +1,5 @@
 {
- "model": "2026-09-25 08:02",
+ "model": "2026-09-25 10:33",
  "podglad": false,
  "sprawy_otwarte": [
   "Uwagi na arkuszach PT-IE-01, PT-IE-02, PT-IE-03 przywołują PN-EN 12464-1 bez daty wydania (w tomie: PN-EN 12464-1:2012, powołana w WT) — status i wydanie wg rozdz. „Przedmiot, zakres i podstawy opracowania”; poprawić uwagę w generatorze rysunków.",
@@ -43,15 +43,15 @@
    "autokonsumpcja": 0.651,
    "pokrycie": 0.329,
    "do_EP": {
-    "E_PV_uzyta_H_kWh_a": 350.0,
+    "E_PV_uzyta_H_kWh_a": 351.0,
     "E_PV_uzyta_W_kWh_a": 1574.0,
     "E_PV_uzyta_pom_kWh_a": 528.0,
     "E_PV_uzyta_H_W_pom_miesiecznie_kWh": [
      75.2,
-     148.5,
-     257.1,
-     332.0,
-     288.8,
+     148.6,
+     257.2,
+     332.2,
+     288.9,
      283.6,
      277.1,
      268.8,
