@@ -1,0 +1,457 @@
+{
+ "A_f": 262.3630249999999,
+ "V_netto": 721.1146592499999,
+ "U": {
+  "POD-0|podloga_grunt": {
+   "U": 0.10740681204382192,
+   "U_max": 0.3,
+   "U_cel": 0.2
+  },
+  "POD-G|podloga_grunt_nieogrz": {
+   "U": 0.10346321863462603,
+   "U_max": null,
+   "U_cel": null
+  },
+  "SZ1|sciana_zewn": {
+   "U": 0.16634117903013496,
+   "U_max": 0.2,
+   "U_cel": 0.15
+  },
+  "DZ12|sciana_wewn": {
+   "U": 2.1352313167259784,
+   "U_max": null,
+   "U_cel": null
+  },
+  "SGL|sciana_wewn": {
+   "U": 3.2258064516129035,
+   "U_max": null,
+   "U_cel": null
+  },
+  "SWG|sciana_nieogrz": {
+   "U": 0.2734978959191668,
+   "U_max": 0.3,
+   "U_cel": 0.25
+  },
+  "ST1|P1|gora|strop_wewn": {
+   "U": 0.3983422472200847,
+   "U_max": null,
+   "U_cel": null
+  },
+  "SWZB|sciana_wewn": {
+   "U": 2.41977906365071,
+   "U_max": null,
+   "U_cel": null
+  },
+  "SW18|sciana_wewn": {
+   "U": 1.869158878504673,
+   "U_max": null,
+   "U_cel": null
+  },
+  "SCZB15|sciana_wewn": {
+   "U": 3.0748663101604277,
+   "U_max": null,
+   "U_cel": null
+  },
+  "GK10|sciana_wewn": {
+   "U": 0.5352226146145412,
+   "U_max": null,
+   "U_cel": null
+  },
+  "DZ1|dach": {
+   "U": 0.12866252923804486,
+   "U_max": 0.15,
+   "U_cel": 0.12
+  },
+  "SWG|sciana_wewn": {
+   "U": 0.2614978959191668,
+   "U_max": null,
+   "U_cel": null
+  },
+  "ST2|P2|gora|strop_wewn": {
+   "U": 0.3983422472200847,
+   "U_max": null,
+   "U_cel": null
+  },
+  "SD2|dach": {
+   "U": 0.11871043415484357,
+   "U_max": 0.15,
+   "U_cel": 0.12
+  },
+  "ST1|P1|dol|strop_wewn": {
+   "U": 0.3983422472200847,
+   "U_max": null,
+   "U_cel": null
+  },
+  "SD1|dach": {
+   "U": 0.11383544577983264,
+   "U_max": 0.15,
+   "U_cel": 0.12
+  },
+  "SZ2|sciana_zewn": {
+   "U": 0.1703442846562915,
+   "U_max": 0.2,
+   "U_cel": 0.15
+  },
+  "SZL|sciana_zewn": {
+   "U": 0.09904073987670135,
+   "U_max": 0.2,
+   "U_cel": 0.15
+  },
+  "ST2Z|P2|zewn|strop_zewn": {
+   "U": 0.12654137132852422,
+   "U_max": 0.15,
+   "U_cel": null
+  },
+  "DZ18A|sciana_wewn": {
+   "U": 1.869158878504673,
+   "U_max": null,
+   "U_cel": null
+  },
+  "ST2|P2|dol|strop_wewn": {
+   "U": 0.3983422472200847,
+   "U_max": null,
+   "U_cel": null
+  }
+ },
+ "U_grunt": 0.10740681204382192,
+ "okna": {
+  "O0-09": {
+   "symbol": "DZ1",
+   "U_w": 0.9,
+   "A_w": 2.64
+  },
+  "O0-10": {
+   "symbol": "FX3",
+   "U_w": 0.8657380952380952,
+   "A_w": 0.84
+  },
+  "O0-24@0.02": {
+   "symbol": "DG1",
+   "U_w": 1.1,
+   "A_w": 1.8900000000000001
+  },
+  "O0-01": {
+   "symbol": "FX1",
+   "U_w": 0.6442243957642874,
+   "A_w": 4.9483999999999995
+  },
+  "O0-02": {
+   "symbol": "FX1",
+   "U_w": 0.6442243957642874,
+   "A_w": 4.9483999999999995
+  },
+  "O0-03": {
+   "symbol": "HS1",
+   "U_w": 0.8413636658240974,
+   "A_w": 6.1716
+  },
+  "O0-04": {
+   "symbol": "HS1",
+   "U_w": 0.8413636658240974,
+   "A_w": 6.1716
+  },
+  "O0-05": {
+   "symbol": "FX2",
+   "U_w": 0.6120390400965942,
+   "A_w": 7.950799999999999
+  },
+  "O0-11": {
+   "symbol": "HS2",
+   "U_w": 0.8242326139088731,
+   "A_w": 6.672
+  },
+  "O0-13": {
+   "symbol": "ON1",
+   "U_w": 0.8893645833333333,
+   "A_w": 0.48
+  },
+  "O0-12": {
+   "symbol": "OZ1",
+   "U_w": 0.8114666666666667,
+   "A_w": 2.7
+  },
+  "O0-22@0.11": {
+   "symbol": "DG1",
+   "U_w": 1.1,
+   "A_w": 1.8900000000000001
+  },
+  "O0-06": {
+   "symbol": "DZ3",
+   "U_w": 1.0,
+   "A_w": 2.484
+  },
+  "O0-22@0.13": {
+   "symbol": "DG1",
+   "U_w": 1.1,
+   "A_w": 1.8900000000000001
+  },
+  "O0-08": {
+   "symbol": "DZ2",
+   "U_w": 1.3,
+   "A_w": 2.1
+  },
+  "O0-07": {
+   "symbol": "BR1",
+   "U_w": 1.5,
+   "A_w": 11.25
+  },
+  "O0-24@0.13": {
+   "symbol": "DG1",
+   "U_w": 1.1,
+   "A_w": 1.8900000000000001
+  },
+  "O1-02": {
+   "symbol": "OE1",
+   "U_w": 0.7541155555555555,
+   "A_w": 2.25
+  },
+  "O1-01": {
+   "symbol": "BC1",
+   "U_w": 0.7750625909752549,
+   "A_w": 3.435
+  },
+  "O1-13": {
+   "symbol": "BC1",
+   "U_w": 0.7780476190476191,
+   "A_w": 3.3600000000000003
+  },
+  "O1-14": {
+   "symbol": "BC1",
+   "U_w": 0.7750625909752549,
+   "A_w": 3.435
+  },
+  "O1-06": {
+   "symbol": "OZ1",
+   "U_w": 0.8114666666666667,
+   "A_w": 2.7
+  },
+  "O1-05": {
+   "symbol": "OZ1",
+   "U_w": 0.8114666666666667,
+   "A_w": 2.7
+  },
+  "O1-03": {
+   "symbol": "ON2",
+   "U_w": 0.8782314814814814,
+   "A_w": 0.54
+  },
+  "O1-04": {
+   "symbol": "ON3",
+   "U_w": 0.8559652777777778,
+   "A_w": 0.72
+  },
+  "O2-01": {
+   "symbol": "OP1",
+   "U_w": 0.7143933333333333,
+   "A_w": 6.0
+  },
+  "O2-04": {
+   "symbol": "OP3",
+   "U_w": 0.7414916666666668,
+   "A_w": 4.8
+  },
+  "O2-02": {
+   "symbol": "OP2",
+   "U_w": 0.7672190476190476,
+   "A_w": 2.1
+  },
+  "O2-06": {
+   "symbol": "ON2",
+   "U_w": 0.8782314814814814,
+   "A_w": 0.54
+  },
+  "O2-03": {
+   "symbol": "OP3",
+   "U_w": 0.7414916666666668,
+   "A_w": 4.8
+  },
+  "O2-05": {
+   "symbol": "OP2",
+   "U_w": 0.7672190476190476,
+   "A_w": 2.1
+  },
+  "O2-07": {
+   "symbol": "ON4",
+   "U_w": 0.8214745098039216,
+   "A_w": 2.55
+  }
+ },
+ "H_TB": 30.628480000000007,
+ "Phi_HL_W": 7406.959690189091,
+ "pomieszczenia_Phi_HL_W": {
+  "0.01": 87.50082739290498,
+  "0.02": 204.36289421623684,
+  "0.03": 147.69187419107305,
+  "0.04": 101.78006131437876,
+  "0.05": -75.56480861164843,
+  "0.15": -86.63372988007657,
+  "0.16": -51.660819747338415,
+  "0.06": 1747.6074115393576,
+  "0.07": 33.276437090541116,
+  "0.08": -15.39237886990659,
+  "0.09": 369.4954670398577,
+  "0.10": 305.05339205605554,
+  "0.11": 389.7710658448257,
+  "0.12": 237.11672782097284,
+  "1.01": 61.92094675633619,
+  "1.02": 725.660357635636,
+  "1.03": 329.676205930705,
+  "1.04": 302.65653407112734,
+  "1.05": 304.4766241576041,
+  "1.06": -104.42631224475821,
+  "1.07": 288.38852986815556,
+  "1.08": 115.89621148004278,
+  "2.01": 76.96953366331505,
+  "2.02": 802.3031010656487,
+  "2.03": 209.3341155706871,
+  "2.04": 329.2997648190161,
+  "2.05": 670.0920146498644,
+  "2.06": 179.69920784468275,
+  "2.07": -69.01345967089098,
+  "0.14": -9.064380809060665,
+  "1.09": -10.250583515097684,
+  "2.08": -6.255661792821062
+ },
+ "wentylacja_m3h": 365.0,
+ "EP": {
+  "A: PC R290 + PV + rekuperacja": {
+   "EU": 41.15762106573418,
+   "EK": 23.139947614360292,
+   "EP": 35.584083877534944,
+   "spelnia": true,
+   "E_CO2_t": 2.0651116728175913,
+   "U_oze": 74.70747732473697,
+   "koszt_zl": 4461.098112944794
+  },
+  "A0: PC R290 + rekuperacja, bez PV": {
+   "EU": 41.15762106573418,
+   "EK": 23.139947614360292,
+   "EP": 57.84986903590073,
+   "spelnia": true,
+   "E_CO2_t": 3.3572998599081383,
+   "U_oze": 57.61717187506063,
+   "koszt_zl": 6914.619987167351
+  },
+  "B: kocioł gazowy kondensacyjny + rekuperacja": {
+   "EU": 41.15762106573418,
+   "EK": 70.53608326735417,
+   "EP": 88.24087574208453,
+   "spelnia": false,
+   "E_CO2_t": 4.441745194963568,
+   "U_oze": 0.0,
+   "koszt_zl": 9239.45956117797
+  },
+  "C: PC — wartości domyślne metodologii, bez PV": {
+   "EU": 41.15762106573418,
+   "EK": 32.671140419475755,
+   "EP": 81.67785104868938,
+   "spelnia": false,
+   "E_CO2_t": 4.740149674551344,
+   "U_oze": 47.80530057210157,
+   "koszt_zl": 9540.284192186096
+  }
+ },
+ "EP_projekt": 35.584083877534944,
+ "EP_max": 70.0,
+ "glaser": {
+  "SZ1": {
+   "kondensacja": false,
+   "wysycha": true,
+   "M_a_max_kg_m2": 0.0,
+   "sd_par_wym": 0.0
+  },
+  "SWG": {
+   "kondensacja": false,
+   "wysycha": true,
+   "M_a_max_kg_m2": 0.0,
+   "sd_par_wym": 0.0
+  },
+  "DZ1": {
+   "kondensacja": true,
+   "wysycha": true,
+   "M_a_max_kg_m2": 0.00024262862731326025,
+   "sd_par_wym": null
+  },
+  "SD2": {
+   "kondensacja": true,
+   "wysycha": true,
+   "M_a_max_kg_m2": 0.00029540197651085843,
+   "sd_par_wym": null
+  },
+  "SD1": {
+   "kondensacja": true,
+   "wysycha": true,
+   "M_a_max_kg_m2": 0.00033770161038144833,
+   "sd_par_wym": null
+  },
+  "SZ2": {
+   "kondensacja": false,
+   "wysycha": true,
+   "M_a_max_kg_m2": 0.0,
+   "sd_par_wym": 0.0
+  },
+  "SZL": {
+   "kondensacja": false,
+   "wysycha": true,
+   "M_a_max_kg_m2": 0.0,
+   "sd_par_wym": 0.0
+  },
+  "ST2Z|P2|zewn": {
+   "kondensacja": false,
+   "wysycha": true,
+   "M_a_max_kg_m2": 0.0,
+   "sd_par_wym": 0.0
+  }
+ },
+ "f_Rsi_wym": 0.72,
+ "ciaglosc_braki": {
+  "SZ1": [],
+  "SWG": [],
+  "POD-0L": [],
+  "POD-0": [],
+  "DZ1": [],
+  "SD2": [],
+  "SD1": [],
+  "SZ2": [],
+  "SZL": [],
+  "ST2Z|P2|zewn": []
+ },
+ "ostrzezenia": [
+  "0.01: po drugiej stronie ściany S0-06 brak pomieszczenia w obrysie kondygnacji — przyjęto powietrze zewnętrzne",
+  "0.01: krawędź 0.05 m bez ściany i bez sąsiedniego pomieszczenia (x=9.91, y=6.68) — pominięta",
+  "0.01: krawędź 0.03 m bez ściany i bez sąsiedniego pomieszczenia (x=9.88, y=6.67) — pominięta",
+  "0.02: krawędź 0.05 m bez ściany i bez sąsiedniego pomieszczenia (x=9.88, y=6.57) — pominięta",
+  "0.04: krawędź 0.08 m bez ściany i bez sąsiedniego pomieszczenia (x=7.12, y=5.07) — pominięta",
+  "0.04: krawędź 0.08 m bez ściany i bez sąsiedniego pomieszczenia (x=5.98, y=5.06) — pominięta",
+  "0.16: krawędź 0.15 m bez ściany i bez sąsiedniego pomieszczenia (x=7.19, y=7.47) — pominięta",
+  "0.07: krawędź 0.08 m bez ściany i bez sąsiedniego pomieszczenia (x=7.12, y=5.02) — pominięta",
+  "0.07: krawędź 0.08 m bez ściany i bez sąsiedniego pomieszczenia (x=5.94, y=5.02) — pominięta",
+  "0.11: odcinek 0.12 m ściany wewn. S0-17 bez pomieszczenia po drugiej stronie (wnętrze obrysu) — przyjęto przegrodę adiabatyczną",
+  "0.13: po drugiej stronie ściany S0-05 brak pomieszczenia w obrysie kondygnacji — przyjęto powietrze zewnętrzne",
+  "0.13: krawędź 0.12 m bez ściany i bez sąsiedniego pomieszczenia (x=12.16, y=8.75) — pominięta",
+  "1.01: krawędź 0.08 m bez ściany i bez sąsiedniego pomieszczenia (x=8.43, y=5.02) — pominięta",
+  "1.01: krawędź 0.08 m bez ściany i bez sąsiedniego pomieszczenia (x=5.94, y=5.02) — pominięta",
+  "1.05: krawędź 0.02 m bez ściany i bez sąsiedniego pomieszczenia (x=5.27, y=6.44) — pominięta",
+  "1.05: krawędź 0.04 m bez ściany i bez sąsiedniego pomieszczenia (x=5.29, y=6.45) — pominięta",
+  "1.06: krawędź 0.08 m bez ściany i bez sąsiedniego pomieszczenia (x=8.39, y=5.06) — pominięta",
+  "1.06: krawędź 0.08 m bez ściany i bez sąsiedniego pomieszczenia (x=5.98, y=5.06) — pominięta",
+  "2.01: odcinek 0.03 m ściany wewn. S2-15 bez pomieszczenia po drugiej stronie (wnętrze obrysu) — przyjęto przegrodę adiabatyczną",
+  "2.01: odcinek 0.03 m ściany wewn. S2-15 bez pomieszczenia po drugiej stronie (wnętrze obrysu) — przyjęto przegrodę adiabatyczną",
+  "2.01: krawędź 0.08 m bez ściany i bez sąsiedniego pomieszczenia (x=7.26, y=5.02) — pominięta",
+  "2.02: krawędź 0.04 m bez ściany i bez sąsiedniego pomieszczenia (x=-0.87, y=5.00) — pominięta",
+  "2.02: krawędź 0.04 m bez ściany i bez sąsiedniego pomieszczenia (x=-0.87, y=0.13) — pominięta",
+  "2.03: krawędź 0.03 m bez ściany i bez sąsiedniego pomieszczenia (x=5.79, y=2.62) — pominięta",
+  "2.03: po drugiej stronie ściany S2-07 brak pomieszczenia w obrysie kondygnacji — przyjęto powietrze zewnętrzne",
+  "2.04: po drugiej stronie ściany S2-06 brak pomieszczenia w obrysie kondygnacji — przyjęto powietrze zewnętrzne",
+  "2.04: krawędź 0.02 m bez ściany i bez sąsiedniego pomieszczenia (x=5.27, y=6.44) — pominięta",
+  "2.04: krawędź 0.04 m bez ściany i bez sąsiedniego pomieszczenia (x=5.29, y=6.45) — pominięta",
+  "2.05: po drugiej stronie ściany S2-03 brak pomieszczenia w obrysie kondygnacji — przyjęto powietrze zewnętrzne",
+  "2.05: krawędź 0.03 m bez ściany i bez sąsiedniego pomieszczenia (x=8.59, y=2.62) — pominięta",
+  "2.06: krawędź 0.15 m bez ściany i bez sąsiedniego pomieszczenia (x=7.19, y=7.47) — pominięta",
+  "2.06: odcinek 0.12 m ściany wewn. S2-11 bez pomieszczenia po drugiej stronie (wnętrze obrysu) — przyjęto przegrodę adiabatyczną",
+  "2.06: krawędź 0.08 m bez ściany i bez sąsiedniego pomieszczenia (x=7.26, y=5.07) — pominięta",
+  "2.06: krawędź 0.09 m bez ściany i bez sąsiedniego pomieszczenia (x=8.39, y=5.06) — pominięta",
+  "2.06: po drugiej stronie ściany S2-04 brak pomieszczenia w obrysie kondygnacji — przyjęto powietrze zewnętrzne",
+  "stolarka: symbol BC1 występuje w różnych wymiarach (2.24×1.50, 2.29×1.50) — ujednolicić zestawienie stolarki"
+ ]
+}

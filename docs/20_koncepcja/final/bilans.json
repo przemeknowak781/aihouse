@@ -361,23 +361,27 @@
  "intensywnosc": 0.248,
  "kubatura_brutto_m3": 1354.5,
  "PBC": {
-  "m2": 1281.57,
-  "proc": 80.1,
+  "m2": 1270.15,
+  "proc": 79.38,
   "rezerwa_dach_zielony_50proc_m2": 29.53,
-  "utwardzenia_tarasy_m2": 130.93
+  "utwardzenia_tarasy_m2": 130.41,
+  "zrodlo": "lamela.wskazniki"
  },
  "wysokosc": {
-  "attyka_max": 9.776,
+  "attyka_max": 9.876,
   "najwyzszy_punkt_z_instalacjami": 10.0,
-  "teren_obwod_min": -0.329,
-  "teren_obwod_max": -0.172,
-  "teren_sredni": -0.251,
-  "H_upzp_m": 10.25,
-  "H_upzp_od_min_m": 10.33,
+  "najwyzszy_element": "czerpnia wentylacji (dachowa)",
+  "teren_obwod_min": -0.36,
+  "teren_obwod_max": -0.175,
+  "teren_sredni": -0.267,
+  "H_upzp_m": 10.27,
+  "H_upzp_od_min_m": 10.36,
   "pokrycie_max_klin": 9.626,
-  "H_WT6_m": 9.95,
-  "teren_najnizsze_wejscie": -0.326,
-  "kondygnacje_nadziemne": 3
+  "H_WT6_m": 9.97,
+  "wejscie_WT6": "O0-03",
+  "teren_najnizsze_wejscie": -0.348,
+  "kondygnacje_nadziemne": 3,
+  "zrodlo": "lamela.wskazniki"
  },
  "okna_podloga": [
   {
@@ -632,7 +636,7 @@
   },
   {
    "element": "taras T2",
-   "W": 17.0,
+   "W": 17.4,
    "E": 12.7,
    "S": 41.75,
    "N_linia_zab": 0.95,

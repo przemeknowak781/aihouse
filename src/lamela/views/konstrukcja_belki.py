@@ -360,7 +360,7 @@ def _tory_pretow_zalamanych(pts: list, poly, a_c: float, l_bd: float, fi: float)
         r = d2 - d1
         if float(np.hypot(*r)) < 1e-3:
             continue
-        if not poly.contains(Point(*(P[i] + 0.03 * unit(r)))):
+        if not poly.contains(Point(*(P[i] + 2.5 * a_c * unit(r)))):
             zle.append(i)
     if not zle:
         return [[tuple(q) for q in P]]

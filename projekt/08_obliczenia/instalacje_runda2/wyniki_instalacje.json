@@ -1,0 +1,163 @@
+{
+ "woda": {
+  "q_obl_dm3s": 1.128,
+  "p_wym_kPa": 328.9,
+  "punkt_krytyczny": "PRY18 prysznic (c.w.u.)",
+  "wodomierz": "DN25 Q3=6.3",
+  "Q_d_sr_m3": 0.6,
+  "Q_h_max_m3": 0.15,
+  "cwu_V_d_l": 367.0,
+  "zasobnik_l": 400,
+  "cyrkulacja": "czasowa",
+  "eta_W_d": 0.8,
+  "Q_W_nd_kWh_a": 6320.0,
+  "dezynfekcja_kWh_a": 526.0
+ },
+ "kanalizacja": {
+  "sum_DU": 20.6,
+  "Q_ww_l_s": 2.27,
+  "przykanalik": "DN150 i=0.02",
+  "piony": {
+   "K1": "DN100",
+   "K2": "DN100",
+   "K3": "DN70"
+  }
+ },
+ "deszczowa": {
+  "A_dachow_m2": 249.0,
+  "Q_dachy_l_s": 11.46,
+  "A_red_m2": 210.0,
+  "V_zbiornika_m3": 5.0,
+  "niecka_A_m2": 19.5,
+  "niecka_V_min_m3": 5.71,
+  "pokrycie_podlewania": 1.0
+ },
+ "drenaz": {
+  "drenaz_opaskowy": "NIEWYMAGANY",
+  "klasa_oddzialywania_wody": "W1.1-E (wilgoć gruntowa, woda nienaporowa)",
+  "glebokosc_posadowienia_m": 0.56,
+  "ZWG_pod_fundamentem_m": 3.24
+ },
+ "ogrzewanie": {
+  "Phi_HL_kW": 7.41,
+  "zrodlo_Phi_HL": "moduł fizyki/energii (PN-EN 12831)",
+  "PC": "PC-R290-07 (przykład)",
+  "P_PC_theta_e_kW": 4.55,
+  "theta_biv": -9.7,
+  "udzial_grzalki": 0.0004,
+  "SCOP_dekl": 4.7,
+  "SCOP_obl_TMY": 4.09,
+  "theta_V_des": 35.0,
+  "bufor_l": 80,
+  "naczynie_co_l": 18,
+  "naczynie_cwu_l": 50,
+  "L_A_granica_dB": 26.4,
+  "do_EP": {
+   "eta_H_g_SCOP": 4.7,
+   "COP_cwu": 3.2,
+   "eta_H_e": 0.89,
+   "eta_H_d": 0.96,
+   "E_el_PC_kWh_a": 2735.0,
+   "E_grzalka_kWh_a": 4.0,
+   "Q_H_TMY_kWh_a": 11200.0
+  }
+ },
+ "bilans": {
+  "P_inst_kW": 71.4,
+  "P_szczyt_bez_DLM_kW": 41.3,
+  "P_szczyt_DLM_kW": 26.2,
+  "P_przylaczeniowa_kW": 27.0,
+  "I_zab_A": 40.0,
+  "fazy_kW": {
+   "L1": 8.74,
+   "L2": 8.74,
+   "L3": 8.73
+  },
+  "asymetria": 0.001
+ },
+ "obwody": {
+  "WLZ": "YKY 5×16",
+  "dU_WLZ_proc": 0.608,
+  "obwody": 35,
+  "dU_max_proc": 2.98,
+  "Z_s_max_ohm": 1.161,
+  "CRL": 315.0,
+  "PWP": "PROJEKTOWAĆ (rekomendacja D-04 — spełnia WT §183 ust. 2 i jest zgodne z ROPoż)"
+ },
+ "pv": {
+  "n_modulow": 15,
+  "P_kWp": 6.45,
+  "wariant": "EW10",
+  "E_PV_kWh_a": 5610.0,
+  "autokonsumpcja": 0.651,
+  "pokrycie": 0.33,
+  "do_EP": {
+   "E_PV_uzyta_H_kWh_a": 348.0,
+   "E_PV_uzyta_W_kWh_a": 1574.0,
+   "E_PV_uzyta_pom_kWh_a": 528.0,
+   "E_PV_uzyta_H_W_pom_miesiecznie_kWh": [
+    75.1,
+    148.3,
+    256.8,
+    331.5,
+    288.6,
+    283.6,
+    277.1,
+    268.8,
+    221.5,
+    162.1,
+    83.2,
+    54.0
+   ],
+   "w_PV": 0.0,
+   "metoda": "bilans godzinowy, przypisanie proporcjonalne [UPR]"
+  }
+ },
+ "odgromowa": {
+  "A_D_m2": 4281.0,
+  "N_D": 0.00771,
+  "N_L": 0.018,
+  "klasa_pozarowa": "zwykłe",
+  "decyzja_LPS": "LPS NIEWYMAGANY (R1 ≤ R_T przy SPD T1 dla obu klas obciążenia ogniowego)",
+  "uziom": "otokowy w gruncie",
+  "R_uziomu_ohm": 14.9
+ },
+ "do_EP": {
+  "cwu": {
+   "Q_W_nd_kWh_a": 6320.0,
+   "eta_W_d": 0.8,
+   "zasobnik_l": 400,
+   "dezynfekcja_kWh_a": 526.0
+  },
+  "ogrzewanie": {
+   "eta_H_g_SCOP": 4.7,
+   "COP_cwu": 3.2,
+   "eta_H_e": 0.89,
+   "eta_H_d": 0.96,
+   "E_el_PC_kWh_a": 2735.0,
+   "E_grzalka_kWh_a": 4.0,
+   "Q_H_TMY_kWh_a": 11200.0
+  },
+  "pv": {
+   "E_PV_uzyta_H_kWh_a": 348.0,
+   "E_PV_uzyta_W_kWh_a": 1574.0,
+   "E_PV_uzyta_pom_kWh_a": 528.0,
+   "E_PV_uzyta_H_W_pom_miesiecznie_kWh": [
+    75.1,
+    148.3,
+    256.8,
+    331.5,
+    288.6,
+    283.6,
+    277.1,
+    268.8,
+    221.5,
+    162.1,
+    83.2,
+    54.0
+   ],
+   "w_PV": 0.0,
+   "metoda": "bilans godzinowy, przypisanie proporcjonalne [UPR]"
+  }
+ }
+}

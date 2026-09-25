@@ -719,6 +719,15 @@ class PlytaFZ:
     gora: Warstwa | None = None
     niesp: list = field(default_factory=list)
     uwagi: list = field(default_factory=list)
+    czesci: list = field(default_factory=list)     # [(id, wielobok, h, spód)] — płyty składowe (np. dom / garaż)
+
+    def czesc(self, pt) -> tuple:
+        """(h, spód) płyty składowej zawierającej punkt (najbliższej) — uskoki płyt (garaż obniżony)."""
+        if not self.czesci:
+            return self.h, self.spod
+        q = Point(*pt)
+        _id, _P, h, sp = min(self.czesci, key=lambda c_: c_[1].distance(q))
+        return h, sp
 
 
 def _c_nom_modelu(m, klucz: str, domyslne: float) -> tuple[float, float]:
@@ -772,7 +781,20 @@ def _fundamenty(an, D):
             F.dol = Warstwa("xy", "dol", fi, s, F.As_req, As_min, As, F.M, "dobór modułu (dobierz_siatke)")
             F.gora = Warstwa("xy", "gora", fi, s, F.As_req, As_min, As, F.M, "dobór modułu (dobierz_siatke)")
             F.niesp = warunki_niespelnione(pz.wyniki)
-            D.plyta_f = F
+            F.czesci = [(F.id, F.poly, F.h, F.spod)]
+            if D.plyta_f is None:
+                D.plyta_f = F
+            else:                              # kilka płyt (np. dom + garaż obniżony) — jedna płyta z częściami
+                G = D.plyta_f
+                G.czesci += F.czesci
+                G.id, G.poz = f"{G.id}+{F.id}", f"{G.poz}, {F.poz}"
+                from shapely.ops import unary_union as _uu
+                G.poly = _uu([G.poly, F.poly]).buffer(1e-4, join_style=2).buffer(-1e-4, join_style=2)
+                G.As_req, G.As_min, G.M = max(G.As_req, F.As_req), max(G.As_min, F.As_min), max(G.M, F.M)
+                G.dol = max(G.dol, F.dol, key=lambda w_: w_.As_prov)
+                G.gora = max(G.gora, F.gora, key=lambda w_: w_.As_prov)
+                G.niesp += F.niesp
+                G.uwagi += [u for u in F.uwagi if u not in G.uwagi]
             D.c_fund = (c_top, c_bot)
             continue
         r = next((w for w in pz.wyniki if hasattr(w, "zbrojenie_poprz")), None)
@@ -1480,12 +1502,24 @@ def prety_fundamentu(D: DaneKonstr) -> dict:
         P = F.poly
         Pin = P.buffer(-c_bot / 1000.0, join_style=2)
         x0, y0, x1, y1 = Pin.bounds
+        czesci = F.czesci or [(F.id, P, F.h, F.spod)]
+        # płyty składowe na różnych poziomach (uskok dom/garaż nad żebrem): siatki osobno dla każdej części; dolne
+        # przedłużone w żebro uskoku (połowa szerokości żebra − c), górne kończą się przy krawędzi części [ZAŁ]
+        b_uskok = max((float(e_.get("b", 0.5)) for e_ in (m.fundamenty().get("elementy") or []) if "os" in e_
+                       and len(czesci) > 1 and any(LineString(e_["os"]).buffer(0.05).intersects(
+                           czesci[i][1].exterior.intersection(czesci[j][1].exterior))
+                           for i in range(len(czesci)) for j in range(i + 1, len(czesci)))), default=0.5)
         for warstwa, w in (("dol", F.dol), ("gora", F.gora)):
-            for kier in ("x", "y"):
-                t_lo, t_hi = (y0, y1) if kier == "x" else (x0, x1)
-                sk = skanuj(Pin, kier, t_lo, t_hi, w.s / 1000.0)
-                out[warstwa] += _grupy_z_skanu(sk, kier, warstwa, w.fi, w.s, F.id, "siatka", w, zest, "przeslo",
-                                               beton=F.beton)
+            for _cid, Pc, _hc, _sc in czesci:
+                ext = (b_uskok / 2 - c_bot / 1000.0) if (warstwa == "dol" and len(czesci) > 1) else -c_top / 1000.0
+                reg = Pc.buffer(ext, join_style=2).intersection(Pin) if len(czesci) > 1 else Pin
+                if reg.is_empty:
+                    continue
+                for kier in ("x", "y"):
+                    t_lo, t_hi = (y0, y1) if kier == "x" else (x0, x1)
+                    sk = skanuj(reg, kier, t_lo, t_hi, w.s / 1000.0)
+                    out[warstwa] += _grupy_z_skanu(sk, kier, warstwa, w.fi, w.s, F.id, "siatka", w, zest, "przeslo",
+                                                   beton=F.beton)
         if W is not None:
             siatki = {(wa, k_): getattr(F, wa) for wa in ("dol", "gora") for k_ in ("x", "y")}
             dz = dozbrojenia_fund(D, W, siatki)
