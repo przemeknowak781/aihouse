@@ -40,8 +40,9 @@ L = 210 + m·n, np. 190; 0 — tylko najmniejsza długość), ``max_wysokosc`` (
 ``kara_niestandard`` (0,03), ``kara_skladania`` ({dobre: 0, poprawne: 0,04, słabe: 0,10} — na kierunek),
 ``max_dlugosc`` (2400), ``wolne_obszary`` (true — bloki także w pustych narożnikach obwiedni widoków),
 ``odstep_widok_blok`` (10 mm), ``kara_czesci_uwag`` (0,02 — na każdą część uwag ponad jedną),
-``max_czesci_uwag`` (4), ``znaki_centrujace`` (``auto`` | ``rezerwuj`` — zawsze rezerwacja stref |
-``skracaj`` — bez rezerwacji, znaki skracane).
+``max_czesci_uwag`` (4), ``kolejnosc_uwag`` (``czytania`` | ``dowolna`` — dawny podział: najmniej papieru, bez
+warunku kolejności i bez przestawiania kolumn), ``znaki_centrujace`` (``auto`` | ``rezerwuj`` — zawsze
+rezerwacja stref | ``skracaj`` — bez rezerwacji, znaki skracane).
 """
 from __future__ import annotations
 
@@ -68,7 +69,7 @@ DOMYSLNE = dict(
     format="auto", wysokosci=[297, 420, 594, 841, 891], krok_dlugosci=10.0, modul_skladania="auto",
     kara_niestandard=0.03, kara_skladania={"dobre": 0.0, "poprawne": 0.04, "słabe": 0.10}, max_dlugosc=2400.0,
     max_wysokosc=914.0, wolne_obszary=True, odstep_widok_blok=GAP_VB, kara_czesci_uwag=0.02, max_czesci_uwag=4,
-    znaki_centrujace="auto",
+    znaki_centrujace="auto", kolejnosc_uwag="czytania",
 )
 TRYBY = ("auto", "ekonomiczny", "standardowy", "klasyczny")
 
@@ -601,7 +602,8 @@ def _umiesc_blok(wolne: Wolne, b: Blok, szer: float, wys: float):
 
 
 def pakuj(W: float, H: float, widoki: list[Widok], grupa: Grupa, bloki: list[Blok], tb_h: float,
-          przes: tuple = (0.0, 0.0), gap_vb: float = GAP_VB, znaki="auto", max_czesci: int = 4) -> Rozmieszczenie:
+          przes: tuple = (0.0, 0.0), gap_vb: float = GAP_VB, znaki="auto", max_czesci: int = 4,
+          kolejnosc: str = "czytania") -> Rozmieszczenie:
     """Rozmieszczenie na arkuszu W × H. ``przes`` — przesunięcie grupy widoków od lewego górnego rogu pola.
     ``znaki``: ``auto`` — z rezerwacją stref znaków centrujących, chyba że bez niej upakowanie jest lepsze (mniej
     części uwag / kolumn bloków; wtedy znaki skraca ``Sheet.przytnij_znaki_centrujace``); ``rezerwuj`` / True;
@@ -609,11 +611,11 @@ def pakuj(W: float, H: float, widoki: list[Widok], grupa: Grupa, bloki: list[Blo
     tr = str(znaki).lower()
     args = (W, H, widoki, grupa, bloki, tb_h, przes, gap_vb)
     if znaki is True or tr in ("rezerwuj", "tak"):
-        return _pakuj(*args, True, max_czesci)
+        return _pakuj(*args, True, max_czesci, kolejnosc)
     if znaki is False or tr in ("skracaj", "nie", "bez"):
-        return _pakuj(*args, False, max_czesci)
-    r1 = _pakuj(*args, True, max_czesci)
-    r0 = _pakuj(*args, False, max_czesci)
+        return _pakuj(*args, False, max_czesci, kolejnosc)
+    r1 = _pakuj(*args, True, max_czesci, kolejnosc)
+    r0 = _pakuj(*args, False, max_czesci, kolejnosc)
     if r1.ok and (not r0.ok or _jakosc(r1)[:2] <= _jakosc(r0)[:2]):
         return r1
     return r0 if r0.ok else r1
@@ -625,7 +627,8 @@ def _jakosc(R: Rozmieszczenie) -> tuple:
     return (R.dodatkowe_czesci, len(_kolumny(rb)), len(R.bloki), 0 if R.znaki else 1)
 
 
-def _pakuj(W, H, widoki, grupa, bloki, tb_h, przes, gap_vb, znaki: bool, max_czesci: int) -> Rozmieszczenie:
+def _pakuj(W, H, widoki, grupa, bloki, tb_h, przes, gap_vb, znaki: bool, max_czesci: int,
+           kolejnosc: str = "czytania") -> Rozmieszczenie:
     fx0, fy0, fx1, fy1 = rama(W, H)
     R = Rozmieszczenie(False, W, H, grupa, znaki=znaki)
     tb = (fx1 - TB_W, fy0, fx1, fy0 + tb_h)
@@ -674,7 +677,9 @@ def _pakuj(W, H, widoki, grupa, bloki, tb_h, przes, gap_vb, znaki: bool, max_cze
     kolejne = [b for b in bloki if not b.kotwica]
     for b in kolejne:
         if b.uwagi is not None:
-            if not _pakuj_uwagi(wolne, b, R, max_czesci):
+            ok = (_pakuj_uwagi_dowolnie(wolne, b, R) if kolejnosc == "dowolna"
+                  else _pakuj_uwagi(wolne, b, R, max_czesci))
+            if not ok:
                 R.brak = f"blok „{b.nazwa}” nie mieści się"
                 return R
             continue
@@ -684,7 +689,8 @@ def _pakuj(W, H, widoki, grupa, bloki, tb_h, przes, gap_vb, znaki: bool, max_cze
             return R
         _dodaj_blok(wolne, R, b, pos[0], pos[1])
     R.ok = True
-    _porzadek_czytania(R, baza, kolejne, n_b, n_p)
+    if kolejnosc != "dowolna":
+        _porzadek_czytania(R, baza, kolejne, n_b, n_p)
     return R
 
 
@@ -771,6 +777,27 @@ def _pakuj_uwagi(wolne: Wolne, b: Blok, R: Rozmieszczenie, max_czesci: int = 4) 
         _dodaj_blok(wolne, R, Blok(f"{b.nazwa}[{i0 + 1}–{i1}]", U.fn(i0, i1), U.w, U.wysokosc(i0, i1)), x0, y0)
     R.czesci_uwag += len(sol)
     R.bloki_uwag += 1
+    return True
+
+
+def _pakuj_uwagi_dowolnie(wolne: Wolne, b: Blok, R: Rozmieszczenie) -> bool:
+    """Dawny podział (``kolejnosc_uwag: dowolna``): kolejno najdłuższa część mieszcząca się w najlepszym miejscu —
+    bez warunku kolejności czytania i bez limitu części (najmniej papieru, części „(cd.)” mogą stać nad
+    poprzednimi)."""
+    U = b.uwagi
+    n, i0 = len(U.lines), 0
+    while i0 < n:
+        for k in range(n, i0, -1):
+            hh = U.wysokosc(i0, k)
+            pos = _umiesc_blok(wolne, b, U.w, hh)
+            if pos is not None:
+                _dodaj_blok(wolne, R, Blok(f"{b.nazwa}[{i0 + 1}–{k}]", U.fn(i0, k), U.w, hh), pos[0], pos[1])
+                R.czesci_uwag += 1
+                i0 = k
+                break
+        else:
+            return False
+    R.bloki_uwag += 1 if n else 0
     return True
 
 
@@ -912,6 +939,7 @@ def min_szerokosc(H: float, widoki, grupy, bloki, tb_h: float, o: dict):
     Wmax = float(o["max_dlugosc"])
     gap = float(o.get("odstep_widok_blok", GAP_VB))
     mc = int(o.get("max_czesci_uwag", 4))
+    ko = str(o.get("kolejnosc_uwag", "czytania"))
     Hf = H - 2 * MARG
     a_b = sum(b.szer * b.wys for b in bloki if b.uwagi is None)
     a_b += sum(b.uwagi.wysokosc(0, len(b.uwagi.lines)) * b.uwagi.w for b in bloki if b.uwagi is not None)
@@ -926,7 +954,7 @@ def min_szerokosc(H: float, widoki, grupy, bloki, tb_h: float, o: dict):
         W = math.ceil(lb / 5.0) * 5.0
         step, prev, r = 20.0, None, None
         while W <= Wmax + 1e-6:            # wykonalność: bez rezerwacji stref znaków (najluźniejszy wariant)
-            r = pakuj(W, H, widoki, g, bloki, tb_h, gap_vb=gap, znaki=False, max_czesci=mc)
+            r = pakuj(W, H, widoki, g, bloki, tb_h, gap_vb=gap, znaki=False, max_czesci=mc, kolejnosc=ko)
             if r.ok:
                 break
             prev, W = W, W + step
@@ -935,7 +963,7 @@ def min_szerokosc(H: float, widoki, grupy, bloki, tb_h: float, o: dict):
         if prev is not None:
             Wf = prev + 5.0
             while Wf < W - 1e-6:
-                rf = pakuj(Wf, H, widoki, g, bloki, tb_h, gap_vb=gap, znaki=False, max_czesci=mc)
+                rf = pakuj(Wf, H, widoki, g, bloki, tb_h, gap_vb=gap, znaki=False, max_czesci=mc, kolejnosc=ko)
                 if rf.ok:
                     W, r = Wf, rf
                     break
@@ -950,7 +978,8 @@ def _pakuj_wysrodkuj(W, H, widoki, g, bloki, tb_h, W_need, gap_vb: float = GAP_V
     nie pogarsza upakowania względem układu bez przesunięcia (``_jakosc``: części uwag, kolumny bloków, liczba
     bloków, rezerwacja znaków); inaczej układ bez przesunięcia. None — nic się nie mieści."""
     o = o or DOMYSLNE
-    kw = dict(znaki=o.get("znaki_centrujace", "auto"), max_czesci=int(o.get("max_czesci_uwag", 4)))
+    kw = dict(znaki=o.get("znaki_centrujace", "auto"), max_czesci=int(o.get("max_czesci_uwag", 4)),
+              kolejnosc=str(o.get("kolejnosc_uwag", "czytania")))
     extra = max(0.0, W - W_need)
     slack = max(0.0, (H - 2 * MARG) - PAD_V - PAD_B - g.h)
     r0 = pakuj(W, H, widoki, g, bloki, tb_h, (0.0, 0.0), gap_vb, **kw)
@@ -1026,7 +1055,7 @@ def rozmiesc(widoki: list[Widok], bloki: list[Blok], tb_h: float, o: dict | None
         best = None
         for g in grupy:                            # warianty ułożenia widoków: najlepsze upakowanie (_jakosc)
             if not pakuj(W, H, widoki, g, bloki, tb_h, gap_vb=gap, znaki=False,
-                         max_czesci=int(o["max_czesci_uwag"])).ok:
+                         max_czesci=int(o["max_czesci_uwag"]), kolejnosc=str(o["kolejnosc_uwag"])).ok:
                 continue
             need = _dociagnij(W, H, widoki, g, bloki, tb_h, gap)
             r = _pakuj_wysrodkuj(W, H, widoki, g, bloki, tb_h, need, gap, o)

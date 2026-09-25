@@ -777,11 +777,17 @@ class AnalizaKonstrukcji:
                     continue                  # ściana stoi na belkach (oparta_na) — obciążenie przejmują belki
                 if below is None:
                     pr = self.prof.get(w.id)
+                    wolne = [(0.0, w.L)]                    # odcinki poza belkami (oparta_na) — na płycie
+                    for _, a_, c_ in na_b:
+                        wolne = [q for s0_, s1_ in wolne for q in ((s0_, min(s1_, a_)), (max(s0_, c_), s1_)) if q[1] - q[0] > 0.05]
                     if pr is not None:
-                        for c in pr["dol"].przypadki():
-                            q = pr["dol"].calka(c) / w.L
-                            if abs(q) > 1e-9:
-                                g.linie.append((ln, c, q, f"ściana nośna {w.id} bez podparcia poniżej — średnio {f(q, 2)} kN/m ({c})"))
+                        for s0_, s1_ in wolne:
+                            ln_ = LineString([tuple(w.pt(s0_, 0.0)), tuple(w.pt(s1_, 0.0))])
+                            for c in pr["dol"].przypadki():
+                                q = pr["dol"].calka(c, s0_, s1_) / (s1_ - s0_)
+                                if abs(q) > 1e-9:
+                                    g.linie.append((ln_, c, q, f"ściana nośna {w.id} bez podparcia poniżej (odcinek {f(s0_)}–"
+                                                              f"{f(s1_)} m) — średnio {f(q, 2)} kN/m ({c})"))
                     self.log(f"Ściana nośna {w.id} stoi na płycie {g.nazwa} bez ściany poniżej — obciążenie liniowe płyty; "
                              "sprawdzić podciąg/żebro [WYMAGA ANALIZY].")
         for z, ln, RG, RQ, opis in getattr(self, "_pend_linie", []):
@@ -1299,6 +1305,11 @@ class AnalizaKonstrukcji:
                 vmax, v_sid = v_, s.id
         for s in g.podp_p:
             if c["rect"].buffer(0.05).contains(Point(*s.xy)):
+                lin = next((sp for sp in g.podp_l if sp.linia.distance(Point(*s.xy)) <= 0.25), None)
+                if lin is not None:        # słup w linii ściany/belki (trzpień w murze, podpora belki) — płyta oparta liniowo
+                    self.log(f"{e.id}: podpora punktowa {s.id} w linii podpory {lin.id} ({lin.rodzaj}) — przebicie płyty nie "
+                             "dotyczy (obwód kontrolny przecięty podporą liniową; docisk — pozycja słupa/belki).")
+                    continue
                 self.log(f"{e.id}: podpora punktowa {s.id} w polu {c['id']} — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]")
         sc = zelbet.scinanie_bez_zbrojenia(vmax, 1.0, dx, min(Ax, Agx if Agx > 0 else Ax), beton,
                                            nazwa=f"Pole {c['id']} — ścinanie (maks. reakcja podpory, [UPR] 0,6·r przy podporze pośredniej)")
