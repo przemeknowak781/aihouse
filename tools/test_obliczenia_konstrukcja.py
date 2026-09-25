@@ -339,6 +339,19 @@ def test_wspornik_swobodny_EQU():
     assert ug and "K = 0,4" in ug[0].nazwa
 
 
+def test_plyta_fundamentowa_bez_dzialki():
+    """Wariant: płyta fundamentowa zamiast ław, brak pliku działki (teren domyślny) — ścieżka Winklera i osiadania."""
+    import copy
+    import yaml
+    from lamela.model import Model
+    raw = copy.deepcopy(yaml.safe_load(B_TEST.read_text(encoding="utf-8")))
+    raw["fundamenty"] = {"typ": "plyta", "elementy": [{"id": "PF1", "obrys": [[-0.4, -0.4], [10.4, -0.4], [10.4, 8.4], [-0.4, 8.4]],
+                                                        "h": 0.30, "spod": -0.60}]}
+    an = AnalizaKonstrukcji(Model(raw, None), Parametry()).uruchom()
+    pf = next(pz for pz in an.pos_fund if pz.ident == "PF1")
+    assert any("Winkler" in w.nazwa for w in pf.wyniki) and any("Osiadanie" in w.nazwa for w in pf.wyniki)
+
+
 def test_mur_przesklepienie():
     m = Mur()
     r = murm.sciana_luk(1.33, 2.86, 0.18, m)

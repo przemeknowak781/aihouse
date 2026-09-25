@@ -47,15 +47,15 @@ Model: `dom_testowy.yaml` (wersja 1.0, 2026-09-25) · biblioteka `lamela.oblicze
 | 8.2 | `SL2` | Słup SL2 (RK 120x120x6, L = 3,01 m) | 12% | spełnione |
 | **9** |  | **Ściany murowe** |  |  |
 | 9.1 | `S1-01` | Ściana S1-01 (P1, zewnętrzna nośna) | 59% | spełnione |
-| 9.2 | `S1-02` | Ściana S1-02 (P1, zewnętrzna nośna) | 59% | spełnione |
+| 9.2 | `S1-02` | Ściana S1-02 (P1, zewnętrzna nośna) | 44% | spełnione |
 | 9.3 | `S1-03` | Ściana S1-03 (P1, zewnętrzna nośna) | 59% | spełnione |
-| 9.4 | `S1-04` | Ściana S1-04 (P1, zewnętrzna nośna) | 59% | spełnione |
+| 9.4 | `S1-04` | Ściana S1-04 (P1, zewnętrzna nośna) | 79% | spełnione |
 | 9.5 | `S1-05` | Ściana S1-05 (P1, wewnętrzna nośna) | 59% | spełnione |
 | 9.6 | `S0-01` | Ściana S0-01 (P0, zewnętrzna nośna) | 60% | spełnione |
 | 9.7 | `S0-02` | Ściana S0-02 (P0, zewnętrzna nośna) | 60% | spełnione |
-| 9.8 | `S0-03` | Ściana S0-03 (P0, zewnętrzna nośna) | 60% | spełnione |
-| 9.9 | `S0-04` | Ściana S0-04 (P0, zewnętrzna nośna) | 60% | spełnione |
-| 9.10 | `S0-05` | Ściana S0-05 (P0, wewnętrzna nośna) | 60% | spełnione |
+| 9.8 | `S0-03` | Ściana S0-03 (P0, zewnętrzna nośna) | 45% | spełnione |
+| 9.9 | `S0-04` | Ściana S0-04 (P0, zewnętrzna nośna) | 45% | spełnione |
+| 9.10 | `S0-05` | Ściana S0-05 (P0, wewnętrzna nośna) | 45% | spełnione |
 | **10** |  | **Fundamenty** |  |  |
 | 10.1 | `L1` | Ława fundamentowa L1 (B = 0,60 m, h = 0,30 m, L = 10,00 m) | 133% | **niespełnione** |
 | 10.2 | `L2` | Ława fundamentowa L2 (B = 0,60 m, h = 0,30 m, L = 8,00 m) | 118% | **niespełnione** |
@@ -243,11 +243,15 @@ Podpory: S1-01 (ściana), S1-02 (ściana), S1-03 (ściana), S1-04 (ściana), S1-
 - Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,024 ≤ 0,493 = **spełniony**
 - Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0238·1000·170·1,0·21,43/434,8 = **200** mm²
 - Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,9/500·1000·170; 0,0013·1000·170) = **256** mm² *((9.1N) + NA)*
-- Przyjęto: φ8 co 19 cm = **2,65** cm²/m
+- Przyjęto (z warunkiem rys): φ8 co 19 cm = **2,65** cm²/m
+- Naprężenie w stali (quasi-stała, przekrój zarysowany, α_e = 15): σ_s = α_e·M_qp·(d − x_II)/I_II = **235** MPa
+- Maksymalna średnica (w_max = 0,4 mm): φ_s = φ*_s·(f_ct,eff/2,9)·k_c·h_cr/(2(h − d)) = 21,5·(2,9/2,9)·0,4·100/(2·30) = **14,3** mm *(tabl. 7.2N, (7.6N))*
+- Maksymalny rozstaw prętów: s_max = (σ_s = 235 MPa) = **256** mm *(tabl. 7.3N)*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
 | Zbrojenie na zginanie | A_s,req = 256 mm²/m | A_s,prov = 265 mm²/m | 97% | spełniony | 6.1, (9.1N) |
+| Rysy: średnica prętów (tabl. 7.2N) | φ = 8 mm | φ_s,max = 14 mm | 56% | spełniony | 7.3.3(2) |
 
 ##### Pole P2 — zginanie dół, kierunek y
 
@@ -257,11 +261,15 @@ Podpory: S1-01 (ściana), S1-02 (ściana), S1-03 (ściana), S1-04 (ściana), S1-
 - Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,017 ≤ 0,493 = **spełniony**
 - Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0171·1000·160·1,0·21,43/434,8 = **135** mm²
 - Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,9/500·1000·160; 0,0013·1000·160) = **241** mm² *((9.1N) + NA)*
-- Przyjęto: φ8 co 20 cm = **2,51** cm²/m
+- Przyjęto (z warunkiem rys): φ8 co 20 cm = **2,51** cm²/m
+- Naprężenie w stali (quasi-stała, przekrój zarysowany, α_e = 15): σ_s = α_e·M_qp·(d − x_II)/I_II = **170** MPa
+- Maksymalna średnica (w_max = 0,4 mm): φ_s = φ*_s·(f_ct,eff/2,9)·k_c·h_cr/(2(h − d)) = 38,0·(2,9/2,9)·0,4·100/(2·40) = **19,0** mm *(tabl. 7.2N, (7.6N))*
+- Maksymalny rozstaw prętów: s_max = (σ_s = 170 MPa) = **300** mm *(tabl. 7.3N)*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
 | Zbrojenie na zginanie | A_s,req = 241 mm²/m | A_s,prov = 251 mm²/m | 96% | spełniony | 6.1, (9.1N) |
+| Rysy: średnica prętów (tabl. 7.2N) | φ = 8 mm | φ_s,max = 19 mm | 42% | spełniony | 7.3.3(2) |
 
 ##### Pole P2 — zginanie góra, x
 
@@ -271,11 +279,15 @@ Podpory: S1-01 (ściana), S1-02 (ściana), S1-03 (ściana), S1-04 (ściana), S1-
 - Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,046 ≤ 0,493 = **spełniony**
 - Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0464·1000·170·1,0·21,43/434,8 = **389** mm²
 - Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,9/500·1000·170; 0,0013·1000·170) = **256** mm² *((9.1N) + NA)*
-- Przyjęto: φ10 co 20 cm = **3,93** cm²/m
+- Przyjęto (z warunkiem rys): φ10 co 20 cm = **3,93** cm²/m
+- Naprężenie w stali (quasi-stała, przekrój zarysowany, α_e = 15): σ_s = α_e·M_qp·(d − x_II)/I_II = **219** MPa
+- Maksymalna średnica (w_max = 0,4 mm): φ_s = φ*_s·(f_ct,eff/2,9)·k_c·h_cr/(2(h − d)) = 26,2·(2,9/2,9)·0,4·100/(2·30) = **17,5** mm *(tabl. 7.2N, (7.6N))*
+- Maksymalny rozstaw prętów: s_max = (σ_s = 219 MPa) = **276** mm *(tabl. 7.3N)*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
 | Zbrojenie na zginanie | A_s,req = 389 mm²/m | A_s,prov = 393 mm²/m | 99% | spełniony | 6.1, (9.1N) |
+| Rysy: średnica prętów (tabl. 7.2N) | φ = 10 mm | φ_s,max = 17 mm | 57% | spełniony | 7.3.3(2) |
 
 ##### Pole P2 — zginanie góra, y
 
@@ -285,11 +297,15 @@ Podpory: S1-01 (ściana), S1-02 (ściana), S1-03 (ściana), S1-04 (ściana), S1-
 - Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,013 ≤ 0,493 = **spełniony**
 - Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0127·1000·160·1,0·21,43/434,8 = **100** mm²
 - Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,9/500·1000·160; 0,0013·1000·160) = **241** mm² *((9.1N) + NA)*
-- Przyjęto: φ8 co 20 cm = **2,51** cm²/m
+- Przyjęto (z warunkiem rys): φ8 co 20 cm = **2,51** cm²/m
+- Naprężenie w stali (quasi-stała, przekrój zarysowany, α_e = 15): σ_s = α_e·M_qp·(d − x_II)/I_II = **127** MPa
+- Maksymalna średnica (w_max = 0,4 mm): φ_s = φ*_s·(f_ct,eff/2,9)·k_c·h_cr/(2(h − d)) = 40,0·(2,9/2,9)·0,4·100/(2·40) = **20,0** mm *(tabl. 7.2N, (7.6N))*
+- Maksymalny rozstaw prętów: s_max = (σ_s = 127 MPa) = **300** mm *(tabl. 7.3N)*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
 | Zbrojenie na zginanie | A_s,req = 241 mm²/m | A_s,prov = 251 mm²/m | 96% | spełniony | 6.1, (9.1N) |
+| Rysy: średnica prętów (tabl. 7.2N) | φ = 8 mm | φ_s,max = 20 mm | 40% | spełniony | 7.3.3(2) |
 
 ##### Pole P2 — zbrojenie narożne (góra i dół, strefy 1,16 × 1,16 m)
 
@@ -340,16 +356,6 @@ Podpory: S1-01 (ściana), S1-02 (ściana), S1-03 (ściana), S1-04 (ściana), S1-
 | Ugięcie — graniczna smukłość l/d (7.4.2) | l/d = 34,1  | (l/d)_lim = 296,2  | 12% | spełniony | (7.16), tabl. 7.4N |
 
 > l/d spełnione — obliczenie (7.4.3) informacyjnie: w = 4,9 mm ≤? 23,2 mm.
-
-##### Pole P2 — rysy
-
-- Naprężenie w stali (quasi-stała, przekrój zarysowany, α_e = 15): σ_s = α_e·M_qp·(d − x_II)/I_II = **235** MPa
-- Maksymalna średnica (w_max = 0,4 mm): φ_s = φ*_s·(f_ct,eff/2,9)·k_c·h_cr/(2(h − d)) = 21,5·(2,9/2,9)·0,4·100/(2·30) = **14,3** mm *(tabl. 7.2N, (7.6N))*
-- Maksymalny rozstaw prętów: s_max = (σ_s = 235 MPa) = **256** mm *(tabl. 7.3N)*
-
-| Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
-|---|---|---|---|---|---|
-| Rysy: średnica prętów (tabl. 7.2N) | φ = 8 mm | φ_s,max = 14 mm | 56% | spełniony | 7.3.3(2) |
 
 #### Wymiarowanie — zestawienia
 
@@ -435,11 +441,15 @@ Podpory: S0-01 (ściana), S0-02 (ściana), S0-03 (ściana), S0-04 (ściana), S0-
 - Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,055 ≤ 0,493 = **spełniony**
 - Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0545·1000·170·1,0·17,86/434,8 = **381** mm²
 - Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,6/500·1000·170; 0,0013·1000·170) = **230** mm² *((9.1N) + NA)*
-- Przyjęto: φ8 co 13 cm = **3,87** cm²/m
+- Przyjęto (z warunkiem rys): φ8 co 13 cm = **3,87** cm²/m
+- Naprężenie w stali (quasi-stała, przekrój zarysowany, α_e = 15): σ_s = α_e·M_qp·(d − x_II)/I_II = **300** MPa
+- Maksymalna średnica (w_max = 0,4 mm): φ_s = φ*_s·(f_ct,eff/2,9)·k_c·h_cr/(2(h − d)) = 14,0·(2,6/2,9)·0,4·100/(2·30) = **8,3** mm *(tabl. 7.2N, (7.6N))*
+- Maksymalny rozstaw prętów: s_max = (σ_s = 300 MPa) = **174** mm *(tabl. 7.3N)*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
 | Zbrojenie na zginanie | A_s,req = 381 mm²/m | A_s,prov = 387 mm²/m | 98% | spełniony | 6.1, (9.1N) |
+| Rysy: średnica prętów (tabl. 7.2N) | φ = 8 mm | φ_s,max = 8 mm | 96% | spełniony | 7.3.3(2) |
 
 ##### Pole P2 — zginanie dół, kierunek y
 
@@ -449,11 +459,15 @@ Podpory: S0-01 (ściana), S0-02 (ściana), S0-03 (ściana), S0-04 (ściana), S0-
 - Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,040 ≤ 0,493 = **spełniony**
 - Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0405·1000·160·1,0·17,86/434,8 = **266** mm²
 - Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,6/500·1000·160; 0,0013·1000·160) = **216** mm² *((9.1N) + NA)*
-- Przyjęto: φ8 co 18 cm = **2,79** cm²/m
+- Przyjęto (z warunkiem rys): φ8 co 18 cm = **2,79** cm²/m
+- Naprężenie w stali (quasi-stała, przekrój zarysowany, α_e = 15): σ_s = α_e·M_qp·(d − x_II)/I_II = **293** MPa
+- Maksymalna średnica (w_max = 0,4 mm): φ_s = φ*_s·(f_ct,eff/2,9)·k_c·h_cr/(2(h − d)) = 14,7·(2,6/2,9)·0,4·100/(2·40) = **6,6** mm *(tabl. 7.2N, (7.6N))*
+- Maksymalny rozstaw prętów: s_max = (σ_s = 293 MPa) = **184** mm *(tabl. 7.3N)*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
 | Zbrojenie na zginanie | A_s,req = 266 mm²/m | A_s,prov = 279 mm²/m | 95% | spełniony | 6.1, (9.1N) |
+| Rysy: rozstaw prętów (tabl. 7.3N) | s = 180 mm | s_max = 184 mm | 98% | spełniony | 7.3.3(2) |
 
 ##### Pole P2 — zginanie góra, x
 
@@ -463,11 +477,15 @@ Podpory: S0-01 (ściana), S0-02 (ściana), S0-03 (ściana), S0-04 (ściana), S0-
 - Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,091 ≤ 0,493 = **spełniony**
 - Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0907·1000·170·1,0·17,86/434,8 = **633** mm²
 - Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,6/500·1000·170; 0,0013·1000·170) = **230** mm² *((9.1N) + NA)*
-- Przyjęto: φ14 co 24 cm = **6,41** cm²/m
+- Przyjęto (z warunkiem rys): φ10 co 12 cm = **6,54** cm²/m
+- Naprężenie w stali (quasi-stała, przekrój zarysowany, α_e = 15): σ_s = α_e·M_qp·(d − x_II)/I_II = **248** MPa
+- Maksymalna średnica (w_max = 0,4 mm): φ_s = φ*_s·(f_ct,eff/2,9)·k_c·h_cr/(2(h − d)) = 19,2·(2,6/2,9)·0,4·100/(2·30) = **11,5** mm *(tabl. 7.2N, (7.6N))*
+- Maksymalny rozstaw prętów: s_max = (σ_s = 248 MPa) = **240** mm *(tabl. 7.3N)*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Zbrojenie na zginanie | A_s,req = 633 mm²/m | A_s,prov = 641 mm²/m | 99% | spełniony | 6.1, (9.1N) |
+| Zbrojenie na zginanie | A_s,req = 633 mm²/m | A_s,prov = 654 mm²/m | 97% | spełniony | 6.1, (9.1N) |
+| Rysy: średnica prętów (tabl. 7.2N) | φ = 10 mm | φ_s,max = 11 mm | 87% | spełniony | 7.3.3(2) |
 
 ##### Pole P2 — zginanie góra, y
 
@@ -477,11 +495,15 @@ Podpory: S0-01 (ściana), S0-02 (ściana), S0-03 (ściana), S0-04 (ściana), S0-
 - Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,030 ≤ 0,493 = **spełniony**
 - Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0297·1000·160·1,0·17,86/434,8 = **195** mm²
 - Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,6/500·1000·160; 0,0013·1000·160) = **216** mm² *((9.1N) + NA)*
-- Przyjęto: φ8 co 23 cm = **2,19** cm²/m
+- Przyjęto (z warunkiem rys): φ8 co 22 cm = **2,28** cm²/m
+- Naprężenie w stali (quasi-stała, przekrój zarysowany, α_e = 15): σ_s = α_e·M_qp·(d − x_II)/I_II = **257** MPa
+- Maksymalna średnica (w_max = 0,4 mm): φ_s = φ*_s·(f_ct,eff/2,9)·k_c·h_cr/(2(h − d)) = 18,3·(2,6/2,9)·0,4·100/(2·40) = **8,2** mm *(tabl. 7.2N, (7.6N))*
+- Maksymalny rozstaw prętów: s_max = (σ_s = 257 MPa) = **229** mm *(tabl. 7.3N)*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Zbrojenie na zginanie | A_s,req = 216 mm²/m | A_s,prov = 219 mm²/m | 99% | spełniony | 6.1, (9.1N) |
+| Zbrojenie na zginanie | A_s,req = 216 mm²/m | A_s,prov = 228 mm²/m | 95% | spełniony | 6.1, (9.1N) |
+| Rysy: średnica prętów (tabl. 7.2N) | φ = 8 mm | φ_s,max = 8 mm | 97% | spełniony | 7.3.3(2) |
 
 ##### Pole P2 — zbrojenie narożne (góra i dół, strefy 1,16 × 1,16 m)
 
@@ -533,24 +555,14 @@ Podpory: S0-01 (ściana), S0-02 (ściana), S0-03 (ściana), S0-04 (ściana), S0-
 
 > l/d spełnione — obliczenie (7.4.3) informacyjnie: w = 8,7 mm ≤? 23,2 mm.
 
-##### Pole P2 — rysy
-
-- Naprężenie w stali (quasi-stała, przekrój zarysowany, α_e = 15): σ_s = α_e·M_qp·(d − x_II)/I_II = **300** MPa
-- Maksymalna średnica (w_max = 0,4 mm): φ_s = φ*_s·(f_ct,eff/2,9)·k_c·h_cr/(2(h − d)) = 14,0·(2,6/2,9)·0,4·100/(2·30) = **8,3** mm *(tabl. 7.2N, (7.6N))*
-- Maksymalny rozstaw prętów: s_max = (σ_s = 300 MPa) = **174** mm *(tabl. 7.3N)*
-
-| Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
-|---|---|---|---|---|---|
-| Rysy: średnica prętów (tabl. 7.2N) | φ = 8 mm | φ_s,max = 8 mm | 96% | spełniony | 7.3.3(2) |
-
 #### Wymiarowanie — zestawienia
 
 **Zestawienie wymiarowania pól płyty** (M [kNm/m] — obwiednia ULS, Wood–Armer, poza strefami narożnymi; „tabl.” — metoda tablic, jeżeli stosowalna; góra — nad podporami; naroża — strefy 0,2·l_min × 0,2·l_min przy narożach podpartych, zbrojenie górą i dołem na moment skręcający)
 
 | Pole | l_x × l_y [m] | Brzegi | M_x,dół [kNm/m] MES / tabl. | Zbroj. x dół | M_y,dół MES / tabl. | Zbroj. y dół | M_x,góra | Zbroj. x góra | M_y,góra | Zbroj. y góra | Naroża M / zbroj. | w / w_lim [mm] | η_max |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| P1 | 4,20 × 8,00 | SUSS | 27,10 / — | φ8 co 13 cm | 14,03 / — | φ8 co 23 cm | −37,81 | φ12 co 21 cm | −8,70 | φ8 co 23 cm | 16,07 / φ8 co 21 cm | 2,7 / 16,8 | 99% |
-| P2 | 5,80 × 8,00 | USSS | 27,38 / 23,46 | φ8 co 13 cm | 18,13 / 11,92 | φ8 co 18 cm | −44,67 | φ14 co 24 cm | −13,37 | φ8 co 23 cm | 21,61 / φ10 co 24 cm | 8,7 / 23,2 | 99% |
+| P1 | 4,20 × 8,00 | SUSS | 27,10 / — | φ8 co 13 cm | 14,03 / — | φ8 co 23 cm | −37,81 | φ8 co 9 cm | −8,70 | φ8 co 23 cm | 16,07 / φ8 co 21 cm | 2,7 / 16,8 | 99% |
+| P2 | 5,80 × 8,00 | USSS | 27,38 / 23,46 | φ8 co 13 cm | 18,13 / 11,92 | φ8 co 18 cm | −44,67 | φ10 co 12 cm | −13,37 | φ8 co 22 cm | 21,61 / φ10 co 24 cm | 8,7 / 23,2 | 98% |
 
 **Reakcje podporowe (charakterystyczne, cała grupa płyt)**
 
@@ -634,11 +646,15 @@ Podpory: S0-02 (ściana), B1 (belka), słupy: SL2
 - Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,070 ≤ 0,493 = **spełniony**
 - Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0697·1000·155·1,0·21,43/434,8 = **533** mm²
 - Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,9/500·1000·155; 0,0013·1000·155) = **234** mm² *((9.1N) + NA)*
-- Przyjęto: φ12 co 21 cm = **5,39** cm²/m
+- Przyjęto (z warunkiem rys): φ12 co 21 cm = **5,39** cm²/m
+- Naprężenie w stali (quasi-stała, przekrój zarysowany, α_e = 15): σ_s = α_e·M_qp·(d − x_II)/I_II = **228** MPa
+- Maksymalna średnica (w_max = 0,3 mm): φ_s = φ*_s·(f_ct,eff/2,9)·k_c·h_cr/(2(h − d)) = 18,7·(2,9/2,9)·0,4·100/(2·45) = **8,3** mm *(tabl. 7.2N, (7.6N))*
+- Maksymalny rozstaw prętów: s_max = (σ_s = 228 MPa) = **215** mm *(tabl. 7.3N)*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
 | Zbrojenie na zginanie | A_s,req = 533 mm²/m | A_s,prov = 539 mm²/m | 99% | spełniony | 6.1, (9.1N) |
+| Rysy: rozstaw prętów (tabl. 7.3N) | s = 210 mm | s_max = 215 mm | 98% | spełniony | 7.3.3(2) |
 
 ##### Pole P1 — zginanie dół, kierunek y
 
@@ -648,11 +664,15 @@ Podpory: S0-02 (ściana), B1 (belka), słupy: SL2
 - Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,083 ≤ 0,493 = **spełniony**
 - Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0827·1000·145·1,0·21,43/434,8 = **591** mm²
 - Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,9/500·1000·145; 0,0013·1000·145) = **219** mm² *((9.1N) + NA)*
-- Przyjęto: φ12 co 19 cm = **5,95** cm²/m
+- Przyjęto (z warunkiem rys): φ12 co 19 cm = **5,95** cm²/m
+- Naprężenie w stali (quasi-stała, przekrój zarysowany, α_e = 15): σ_s = α_e·M_qp·(d − x_II)/I_II = **230** MPa
+- Maksymalna średnica (w_max = 0,3 mm): φ_s = φ*_s·(f_ct,eff/2,9)·k_c·h_cr/(2(h − d)) = 18,3·(2,9/2,9)·0,4·100/(2·55) = **6,7** mm *(tabl. 7.2N, (7.6N))*
+- Maksymalny rozstaw prętów: s_max = (σ_s = 230 MPa) = **213** mm *(tabl. 7.3N)*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
 | Zbrojenie na zginanie | A_s,req = 591 mm²/m | A_s,prov = 595 mm²/m | 99% | spełniony | 6.1, (9.1N) |
+| Rysy: rozstaw prętów (tabl. 7.3N) | s = 190 mm | s_max = 213 mm | 89% | spełniony | 7.3.3(2) |
 
 ##### Pole P1 — zginanie góra, x
 
@@ -662,11 +682,15 @@ Podpory: S0-02 (ściana), B1 (belka), słupy: SL2
 - Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,047 ≤ 0,493 = **spełniony**
 - Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0474·1000·155·1,0·21,43/434,8 = **362** mm²
 - Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,9/500·1000·155; 0,0013·1000·155) = **234** mm² *((9.1N) + NA)*
-- Przyjęto: φ10 co 21 cm = **3,74** cm²/m
+- Przyjęto (z warunkiem rys): φ10 co 21 cm = **3,74** cm²/m
+- Naprężenie w stali (quasi-stała, przekrój zarysowany, α_e = 15): σ_s = α_e·M_qp·(d − x_II)/I_II = **223** MPa
+- Maksymalna średnica (w_max = 0,3 mm): φ_s = φ*_s·(f_ct,eff/2,9)·k_c·h_cr/(2(h − d)) = 19,8·(2,9/2,9)·0,4·100/(2·45) = **8,8** mm *(tabl. 7.2N, (7.6N))*
+- Maksymalny rozstaw prętów: s_max = (σ_s = 223 MPa) = **221** mm *(tabl. 7.3N)*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
 | Zbrojenie na zginanie | A_s,req = 362 mm²/m | A_s,prov = 374 mm²/m | 97% | spełniony | 6.1, (9.1N) |
+| Rysy: rozstaw prętów (tabl. 7.3N) | s = 210 mm | s_max = 221 mm | 95% | spełniony | 7.3.3(2) |
 
 ##### Pole P1 — zginanie góra, y
 
@@ -676,11 +700,15 @@ Podpory: S0-02 (ściana), B1 (belka), słupy: SL2
 - Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,049 ≤ 0,493 = **spełniony**
 - Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0491·1000·145·1,0·21,43/434,8 = **351** mm²
 - Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,9/500·1000·145; 0,0013·1000·145) = **219** mm² *((9.1N) + NA)*
-- Przyjęto: φ10 co 22 cm = **3,57** cm²/m
+- Przyjęto (z warunkiem rys): φ8 co 14 cm = **3,59** cm²/m
+- Naprężenie w stali (quasi-stała, przekrój zarysowany, α_e = 15): σ_s = α_e·M_qp·(d − x_II)/I_II = **225** MPa
+- Maksymalna średnica (w_max = 0,3 mm): φ_s = φ*_s·(f_ct,eff/2,9)·k_c·h_cr/(2(h − d)) = 19,4·(2,9/2,9)·0,4·100/(2·55) = **7,0** mm *(tabl. 7.2N, (7.6N))*
+- Maksymalny rozstaw prętów: s_max = (σ_s = 225 MPa) = **219** mm *(tabl. 7.3N)*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Zbrojenie na zginanie | A_s,req = 351 mm²/m | A_s,prov = 357 mm²/m | 98% | spełniony | 6.1, (9.1N) |
+| Zbrojenie na zginanie | A_s,req = 351 mm²/m | A_s,prov = 359 mm²/m | 98% | spełniony | 6.1, (9.1N) |
+| Rysy: rozstaw prętów (tabl. 7.3N) | s = 140 mm | s_max = 219 mm | 64% | spełniony | 7.3.3(2) |
 
 ##### Pole P1 — zbrojenie narożne (góra i dół, strefy 0,78 × 0,78 m)
 
@@ -732,16 +760,6 @@ Podpory: S0-02 (ściana), B1 (belka), słupy: SL2
 
 > l/d spełnione — obliczenie (7.4.3) informacyjnie: w = 5,5 mm ≤? 15,6 mm.
 
-##### Pole P1 — rysy
-
-- Naprężenie w stali (quasi-stała, przekrój zarysowany, α_e = 15): σ_s = α_e·M_qp·(d − x_II)/I_II = **228** MPa
-- Maksymalna średnica (w_max = 0,3 mm): φ_s = φ*_s·(f_ct,eff/2,9)·k_c·h_cr/(2(h − d)) = 18,7·(2,9/2,9)·0,4·100/(2·45) = **8,3** mm *(tabl. 7.2N, (7.6N))*
-- Maksymalny rozstaw prętów: s_max = (σ_s = 228 MPa) = **215** mm *(tabl. 7.3N)*
-
-| Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
-|---|---|---|---|---|---|
-| Rysy: rozstaw prętów (tabl. 7.3N) | s = 210 mm | s_max = 215 mm | 98% | spełniony | 7.3.3(2) |
-
 ##### Równowaga statyczna (EQU) — PL-D
 
 - Płyta podparta poza krawędzią zamocowania: **podpory: B1, SL2**
@@ -754,7 +772,7 @@ Podpory: S0-02 (ściana), B1 (belka), słupy: SL2
 
 | Pole | l_x × l_y [m] | Brzegi | M_x,dół [kNm/m] MES / tabl. | Zbroj. x dół | M_y,dół MES / tabl. | Zbroj. y dół | M_x,góra | Zbroj. x góra | M_y,góra | Zbroj. y góra | Naroża M / zbroj. | w / w_lim [mm] | η_max |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| P1 | 3,91 × 4,85 | SWWS | 34,66 / — | φ12 co 21 cm | 35,73 / — | φ12 co 19 cm | −23,81 | φ10 co 21 cm | −21,56 | φ10 co 22 cm | 17,31 / φ8 co 17 cm | 5,5 / 15,6 | 99% |
+| P1 | 3,91 × 4,85 | SWWS | 34,66 / — | φ12 co 21 cm | 35,73 / — | φ12 co 19 cm | −23,81 | φ10 co 21 cm | −21,56 | φ8 co 14 cm | 17,31 / φ8 co 17 cm | 5,5 / 15,6 | 99% |
 
 **Reakcje podporowe (charakterystyczne, cała grupa płyt)**
 
@@ -955,24 +973,12 @@ Belka żelbetowa b × h = 20 × 30 cm, oś (10,09, 4,85) → (13,91, 4,85), L = 
 - Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0131·849·459·1,0·21,43/434,8 = **251** mm²
 - Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,9/500·849·459; 0,0013·849·459) = **588** mm² *((9.1N) + NA)*
 - Strefa ściskana w półce: x_eff = ξ_eff·d ≤ h_f = 6 ≤ 200 = **przekrój pozornie teowy**
+- Zbrojenie minimalne (b_t = b_w — strefa rozciągana w środniku): A_s,min = max(0,26·f_ctm/f_yk·b_w·d; 0,0013·b_w·d) = **138** mm² *((9.1N))*
 - Przyjęto dołem: 2φ14 = **3,08** cm²
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
 | Zbrojenie dolne | A_s,req = 251 mm² | A_s,prov = 308 mm² | 81% | spełniony | 6.1 |
-
-##### B1 — zginanie nad podporą
-
-- Wysokość użyteczna: d = **459** mm
-- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 0,44·10⁶/(200·459²·1,0·21,43) = **0,0005** *(3.1.7(3))*
-- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0005) = **0,0005**
-- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,000 ≤ 0,493 = **spełniony**
-- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0005·200·459·1,0·21,43/434,8 = **2** mm²
-- Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,9/500·200·459; 0,0013·200·459) = **138** mm² *((9.1N) + NA)*
-
-| Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
-|---|---|---|---|---|---|
-| Zbrojenie górne | A_s,req = 138 mm² | A_s,prov = 226 mm² | 61% | spełniony | 6.1 |
 
 ##### B1 — ścinanie
 
@@ -2797,7 +2803,7 @@ Słup przegubowo zamocowany na obu końcach (układ usztywniony płytą połącz
 
 Ściana gr. konstrukcyjnej t = 18 cm, długość osi 10,00 m, wysokość h = 2,860 m (z 2,910 do 5,770); materiał: Bloczek wapienno-piaskowy 18 cm, kl. 20. Otwory: O1-01 (2,40 m), O1-02 (3,60 m).
 
-Sprawdzono 3 odcinków (filarki między otworami i pasma ściany) dla 14 kombinacji; poniżej przypadek miarodajny. Mimośród reakcji stropu e = t/6 (zewn.) / 0,3·t/6 (wewn., niesymetria) [UPR]; wiatr jako moment w połowie wysokości w·h²/8.
+Sprawdzono 3 odcinków (filarki ≤ 2 m między otworami — siła całkowita; dłuższe pasma — maks. średnia krocząca 1 m) dla 14 kombinacji; poniżej przypadek miarodajny. Mimośród reakcji stropu e = t/6 (zewn.) / 0,3·t/6 (wewn., niesymetria) [UPR]; wiatr jako moment w połowie wysokości w·h²/8.
 
 ![Ściana S1-01: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.](rys/sciana_S1-01.png)
 *Ściana S1-01: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.*
@@ -2825,31 +2831,31 @@ Sprawdzono 3 odcinków (filarki między otworami i pasma ściany) dla 14 kombina
 
 #### Obliczenia
 
-##### S1-01 — filarek 0,00–1,00 m (b = 1,00 m), 6.10a (wiodące: H)
+##### S1-01 — filarek 8,80–10,00 m (b = 1,20 m), 6.10a (wiodące: S1)
 
-- Pole przekroju filarka: A = b·t = 1,00·0,18 = **0,180** m²
-- Współczynnik η_A (A < 0,3 m²): η_A = (NA; interpolacja wg R5-63) = **1,29** *(NA do PN-EN 1996-1-1 [NZW])*
+- Pole przekroju filarka: A = b·t = 1,20·0,18 = **0,216** m²
+- Współczynnik η_A (A < 0,3 m²): η_A = (NA; interpolacja wg R5-63) = **1,21** *(NA do PN-EN 1996-1-1 [NZW])*
 - Wytrzymałość charakterystyczna muru: f_k = K·f_b^0,85 = 0,60·20^0,85 = **7,66** MPa *((3.2) + NA tabl. NA.5 (K = 0,60, Ap2:2014-09))*
-- Wytrzymałość obliczeniowa: f_d = f_k/γ_M · (1/η_A) = 7,66/1,7·0,772 = **3,48** MPa *(NA tabl. NA.1 (kat. I, zaprawa projektowana, klasa wykonania A))*
+- Wytrzymałość obliczeniowa: f_d = f_k/γ_M · (1/η_A) = 7,66/1,7·0,826 = **3,72** MPa *(NA tabl. NA.1 (kat. I, zaprawa projektowana, klasa wykonania A))*
 - Wysokość efektywna: h_ef = ρ₂·h = 1,000·2,86 = **2,860** m *((5.2), 5.5.1.2)*
 - Smukłość: h_ef/t_ef = 2,860/0,180 = **15,89**
 - Mimośród przypadkowy: e_init = h_ef/450 = 2860/450 = **6,4** mm *(5.5.1.1(4))*
-- Mimośród na górze: e_g = M_g/N_g + e_init ≥ 0,05t = 0,11/3,7 + 0,0064 = **36,4** mm *((6.5))*
-- Mimośród na dole: e_d = M_d/N_d + e_init ≥ 0,05t = 0,00/26,4 + 0,0064 = **9,0** mm *((6.5))*
+- Mimośród na górze: e_g = M_g/N_g + e_init ≥ 0,05t = 0,19/6,3 + 0,0064 = **36,4** mm *((6.5))*
+- Mimośród na dole: e_d = M_d/N_d + e_init ≥ 0,05t = 0,00/38,7 + 0,0064 = **9,0** mm *((6.5))*
 - Współczynnik redukcyjny — góra: Φ_g = 1 − 2e_g/t = 1 − 2·36,4/180 = **0,596** *((6.4))*
 - Współczynnik redukcyjny — dół: Φ_d = 1 − 2e_d/t = 1 − 2·9,0/180 = **0,900** *((6.4))*
-- Mimośród w połowie wysokości: e_m = (M_md + M_w)/N_m + e_init = (0,06 + 0,00)/15,1 + 0,0064 = **10,1** mm *((6.7))*
-- Mimośród od pełzania: e_k = 0,002·φ_∞·(h_ef/t_ef)·√(t·e_m) = 0,002·1,5·15,89·√(0,180·0,0101) = **2,0** mm *((6.8))*
-- Mimośród całkowity: e_mk = e_m + e_k ≥ 0,05t = **12,1** mm *((6.6))*
-- Współczynnik redukcyjny w połowie wysokości: Φ_m = A₁·exp(−u²/2), A₁ = 1 − 2e_mk/t, u = (λ − 0,063)/(0,73 − 1,17e_mk/t) = λ = 0,502, A₁ = 0,866, u = 0,675 = **0,689** *(zał. G (G.1–G.4), E = K_E·f_k)*
-- Nośność: N_Rd = Φ·t·f_d = (góra / środek / dół) 0,596 / 0,689 / 0,900 · 180 mm · 3,48 MPa = **373,1 / 431,6 / 563,4** kN/m *((6.2))*
+- Mimośród w połowie wysokości: e_m = (M_md + M_w)/N_m + e_init = (0,09 + 0,00)/22,5 + 0,0064 = **10,6** mm *((6.7))*
+- Mimośród od pełzania: e_k = 0,002·φ_∞·(h_ef/t_ef)·√(t·e_m) = 0,002·1,5·15,89·√(0,180·0,0106) = **2,1** mm *((6.8))*
+- Mimośród całkowity: e_mk = e_m + e_k ≥ 0,05t = **12,6** mm *((6.6))*
+- Współczynnik redukcyjny w połowie wysokości: Φ_m = A₁·exp(−u²/2), A₁ = 1 − 2e_mk/t, u = (λ − 0,063)/(0,73 − 1,17e_mk/t) = λ = 0,502, A₁ = 0,860, u = 0,678 = **0,683** *(zał. G (G.1–G.4), E = K_E·f_k)*
+- Nośność: N_Rd = Φ·t·f_d = (góra / środek / dół) 0,596 / 0,683 / 0,900 · 180 mm · 3,72 MPa = **399,3 / 457,5 / 603,0** kN/m *((6.2))*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
 | Smukłość ściany | h_ef/t_ef = 15,9  | 27 = 27,0  | 59% | spełniony | 5.5.1.4 |
-| Nośność — przekrój górny | N_Ed = 3,72 kN/m | N_Rd = 373,13 kN/m | 1% | spełniony | (6.2), (6.4) |
-| Nośność — połowa wysokości | N_Ed = 15,06 kN/m | N_Rd = 431,62 kN/m | 3% | spełniony | (6.2), zał. G |
-| Nośność — przekrój dolny | N_Ed = 26,40 kN/m | N_Rd = 563,41 kN/m | 5% | spełniony | (6.2), (6.4) |
+| Nośność — przekrój górny | N_Ed = 6,32 kN/m | N_Rd = 399,34 kN/m | 2% | spełniony | (6.2), (6.4) |
+| Nośność — połowa wysokości | N_Ed = 22,53 kN/m | N_Rd = 457,53 kN/m | 5% | spełniony | (6.2), zał. G |
+| Nośność — przekrój dolny | N_Ed = 38,74 kN/m | N_Rd = 602,99 kN/m | 6% | spełniony | (6.2), (6.4) |
 
 > Filarek liczony jako ściana podparta górą i dołem, ρ₂ = 1,0 (bezpiecznie); siły N na 1 m = N/b.
 
@@ -2861,19 +2867,29 @@ Sprawdzono 3 odcinków (filarki między otworami i pasma ściany) dla 14 kombina
 
 > Informacyjnie (dolne oszacowanie, bez efektu przesklepienia 6.3.2): Zginanie z płaszczyzny (pasmo pionowe — dolne oszacowanie): M_Ed = 1,361 ≤? M_Rd = 0,928 kNm/m (η = 147%). Ściana obciążona pionowo — miarodajne sprawdzenie 6.1.2 z mimośrodem e_hm od wiatru.
 
+##### S1-01 — wiatr: przesklepienie między stropami (6.3.2)
+
+- Smukłość łuku: l_a/t = 2,86/0,180 = **15,9**
+- Nośność na obciążenie poziome: q_lat,d = f_d·(t/l_a)² = 4,50·10³·(0,180/2,86)² = **17,84** kN/m² *((6.20) [NZW])*
+- Obliczeniowy rozpór łuku (przenoszony przez stropy/wieńce): N_ad = 1,5·f_d·t/10 = **121,6** kN/m *((6.19) [NZW])*
+
+| Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
+|---|---|---|---|---|---|
+| Obciążenie poziome — przesklepienie | W_Ed = 1,33 kN/m² | q_lat,d = 17,84 kN/m² | 7% | spełniony | PN-EN 1996-1-1 6.3.2 |
+
 #### Wnioski
 
 **Przyjęto:** Mur: Bloczek wapienno-piaskowy 18 cm, kl. 20, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7).  
 
 ### Poz. 9.2 — Ściana S1-02 (P1, zewnętrzna nośna)
 
-*Element modelu: `S1-02` · maks. wykorzystanie nośności η = 59% · wszystkie warunki spełnione*
+*Element modelu: `S1-02` · maks. wykorzystanie nośności η = 44% · wszystkie warunki spełnione*
 
 #### Opis i schemat statyczny
 
 Ściana gr. konstrukcyjnej t = 18 cm, długość osi 8,00 m, wysokość h = 2,860 m (z 2,910 do 5,770); materiał: Bloczek wapienno-piaskowy 18 cm, kl. 20. Otwory: O1-03 (2,40 m).
 
-Sprawdzono 2 odcinków (filarki między otworami i pasma ściany) dla 14 kombinacji; poniżej przypadek miarodajny. Mimośród reakcji stropu e = t/6 (zewn.) / 0,3·t/6 (wewn., niesymetria) [UPR]; wiatr jako moment w połowie wysokości w·h²/8.
+Sprawdzono 2 odcinków (filarki ≤ 2 m między otworami — siła całkowita; dłuższe pasma — maks. średnia krocząca 1 m) dla 14 kombinacji; poniżej przypadek miarodajny. Mimośród reakcji stropu e = t/6 (zewn.) / 0,3·t/6 (wewn., niesymetria) [UPR]; wiatr jako moment w połowie wysokości w·h²/8.
 
 ![Ściana S1-02: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.](rys/sciana_S1-02.png)
 *Ściana S1-02: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.*
@@ -2901,33 +2917,29 @@ Sprawdzono 2 odcinków (filarki między otworami i pasma ściany) dla 14 kombina
 
 #### Obliczenia
 
-##### S1-02 — filarek 0,00–1,20 m (b = 1,20 m), 6.10a (wiodące: H)
+##### S1-02 — ściana (odcinek 3,60–8,00 m), 6.10 G korzystne (wiodące: W)
 
-- Pole przekroju filarka: A = b·t = 1,20·0,18 = **0,216** m²
-- Współczynnik η_A (A < 0,3 m²): η_A = (NA; interpolacja wg R5-63) = **1,21** *(NA do PN-EN 1996-1-1 [NZW])*
 - Wytrzymałość charakterystyczna muru: f_k = K·f_b^0,85 = 0,60·20^0,85 = **7,66** MPa *((3.2) + NA tabl. NA.5 (K = 0,60, Ap2:2014-09))*
-- Wytrzymałość obliczeniowa: f_d = f_k/γ_M · (1/η_A) = 7,66/1,7·0,826 = **3,72** MPa *(NA tabl. NA.1 (kat. I, zaprawa projektowana, klasa wykonania A))*
-- Wysokość efektywna: h_ef = ρ₂·h = 1,000·2,86 = **2,860** m *((5.2), 5.5.1.2)*
-- Smukłość: h_ef/t_ef = 2,860/0,180 = **15,89**
-- Mimośród przypadkowy: e_init = h_ef/450 = 2860/450 = **6,4** mm *(5.5.1.1(4))*
-- Mimośród na górze: e_g = M_g/N_g + e_init ≥ 0,05t = 0,18/5,8 + 0,0064 = **36,4** mm *((6.5))*
-- Mimośród na dole: e_d = M_d/N_d + e_init ≥ 0,05t = 0,00/35,1 + 0,0064 = **9,0** mm *((6.5))*
-- Współczynnik redukcyjny — góra: Φ_g = 1 − 2e_g/t = 1 − 2·36,4/180 = **0,596** *((6.4))*
+- Wytrzymałość obliczeniowa: f_d = f_k/γ_M = 7,66/1,7 = **4,50** MPa *(NA tabl. NA.1 (kat. I, zaprawa projektowana, klasa wykonania A))*
+- Wysokość efektywna: h_ef = ρ₂·h = 0,750·2,86 = **2,145** m *((5.2), 5.5.1.2)*
+- Smukłość: h_ef/t_ef = 2,145/0,180 = **11,92**
+- Mimośród przypadkowy: e_init = h_ef/450 = 2145/450 = **4,8** mm *(5.5.1.1(4))*
+- Mimośród na górze: e_g = M_g/N_g + e_init ≥ 0,05t = 0,35/11,8 + 0,0048 = **34,8** mm *((6.5))*
+- Mimośród na dole: e_d = M_d/N_d + e_init ≥ 0,05t = 0,00/36,4 + 0,0048 = **9,0** mm *((6.5))*
+- Współczynnik redukcyjny — góra: Φ_g = 1 − 2e_g/t = 1 − 2·34,8/180 = **0,614** *((6.4))*
 - Współczynnik redukcyjny — dół: Φ_d = 1 − 2e_d/t = 1 − 2·9,0/180 = **0,900** *((6.4))*
-- Mimośród w połowie wysokości: e_m = (M_md + M_w)/N_m + e_init = (0,09 + 0,00)/20,5 + 0,0064 = **10,6** mm *((6.7))*
-- Mimośród od pełzania: e_k = 0,002·φ_∞·(h_ef/t_ef)·√(t·e_m) = 0,002·1,5·15,89·√(0,180·0,0106) = **2,1** mm *((6.8))*
-- Mimośród całkowity: e_mk = e_m + e_k ≥ 0,05t = **12,7** mm *((6.6))*
-- Współczynnik redukcyjny w połowie wysokości: Φ_m = A₁·exp(−u²/2), A₁ = 1 − 2e_mk/t, u = (λ − 0,063)/(0,73 − 1,17e_mk/t) = λ = 0,502, A₁ = 0,859, u = 0,679 = **0,682** *(zał. G (G.1–G.4), E = K_E·f_k)*
-- Nośność: N_Rd = Φ·t·f_d = (góra / środek / dół) 0,596 / 0,682 / 0,900 · 180 mm · 3,72 MPa = **399,3 / 456,9 / 603,0** kN/m *((6.2))*
+- Mimośród w połowie wysokości: e_m = (M_md + M_w)/N_m + e_init = (0,18 + 1,36)/24,1 + 0,0048 = **68,6** mm *((6.7))*
+- Mimośród od pełzania: e_k = 0 (h_ef/t_ef ≤ λ_c) = **0,0** mm *(6.1.2.2(2) [NZW NA])*
+- Mimośród całkowity: e_mk = e_m + e_k ≥ 0,05t = **68,6** mm *((6.6))*
+- Współczynnik redukcyjny w połowie wysokości: Φ_m = A₁·exp(−u²/2), A₁ = 1 − 2e_mk/t, u = (λ − 0,063)/(0,73 − 1,17e_mk/t) = λ = 0,377, A₁ = 0,238, u = 1,104 = **0,129** *(zał. G (G.1–G.4), E = K_E·f_k)*
+- Nośność: N_Rd = Φ·t·f_d = (góra / środek / dół) 0,614 / 0,129 / 0,900 · 180 mm · 4,50 MPa = **497,5 / 104,9 / 729,6** kN/m *((6.2))*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Smukłość ściany | h_ef/t_ef = 15,9  | 27 = 27,0  | 59% | spełniony | 5.5.1.4 |
-| Nośność — przekrój górny | N_Ed = 5,84 kN/m | N_Rd = 399,34 kN/m | 1% | spełniony | (6.2), (6.4) |
-| Nośność — połowa wysokości | N_Ed = 20,49 kN/m | N_Rd = 456,90 kN/m | 4% | spełniony | (6.2), zał. G |
-| Nośność — przekrój dolny | N_Ed = 35,14 kN/m | N_Rd = 602,99 kN/m | 6% | spełniony | (6.2), (6.4) |
-
-> Filarek liczony jako ściana podparta górą i dołem, ρ₂ = 1,0 (bezpiecznie); siły N na 1 m = N/b.
+| Smukłość ściany | h_ef/t_ef = 11,9  | 27 = 27,0  | 44% | spełniony | 5.5.1.4 |
+| Nośność — przekrój górny | N_Ed = 11,76 kN/m | N_Rd = 497,52 kN/m | 2% | spełniony | (6.2), (6.4) |
+| Nośność — połowa wysokości | N_Ed = 24,10 kN/m | N_Rd = 104,93 kN/m | 23% | spełniony | (6.2), zał. G |
+| Nośność — przekrój dolny | N_Ed = 36,44 kN/m | N_Rd = 729,61 kN/m | 5% | spełniony | (6.2), (6.4) |
 
 ##### S1-02 — zginanie z płaszczyzny (wiatr)
 
@@ -2936,6 +2948,16 @@ Sprawdzono 2 odcinków (filarki między otworami i pasma ściany) dla 14 kombina
 - Pasmo pionowe — nośność: M_Rd = (f_xk1/γ_M + σ_d)·Z = (0,20/1,7 + 0,077)·10³·0,00540 = **1,053** kNm/m *((6.15), 6.3.1(3) [NZW f_xk1])*
 
 > Informacyjnie (dolne oszacowanie, bez efektu przesklepienia 6.3.2): Zginanie z płaszczyzny (pasmo pionowe — dolne oszacowanie): M_Ed = 1,361 ≤? M_Rd = 1,053 kNm/m (η = 129%). Ściana obciążona pionowo — miarodajne sprawdzenie 6.1.2 z mimośrodem e_hm od wiatru.
+
+##### S1-02 — wiatr: przesklepienie między stropami (6.3.2)
+
+- Smukłość łuku: l_a/t = 2,86/0,180 = **15,9**
+- Nośność na obciążenie poziome: q_lat,d = f_d·(t/l_a)² = 4,50·10³·(0,180/2,86)² = **17,84** kN/m² *((6.20) [NZW])*
+- Obliczeniowy rozpór łuku (przenoszony przez stropy/wieńce): N_ad = 1,5·f_d·t/10 = **121,6** kN/m *((6.19) [NZW])*
+
+| Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
+|---|---|---|---|---|---|
+| Obciążenie poziome — przesklepienie | W_Ed = 1,33 kN/m² | q_lat,d = 17,84 kN/m² | 7% | spełniony | PN-EN 1996-1-1 6.3.2 |
 
 #### Wnioski
 
@@ -2949,7 +2971,7 @@ Sprawdzono 2 odcinków (filarki między otworami i pasma ściany) dla 14 kombina
 
 Ściana gr. konstrukcyjnej t = 18 cm, długość osi 10,00 m, wysokość h = 2,860 m (z 2,910 do 5,770); materiał: Bloczek wapienno-piaskowy 18 cm, kl. 20. Otwory: O1-04 (1,00 m), O1-05 (1,60 m), O1-06 (1,80 m).
 
-Sprawdzono 4 odcinków (filarki między otworami i pasma ściany) dla 14 kombinacji; poniżej przypadek miarodajny. Mimośród reakcji stropu e = t/6 (zewn.) / 0,3·t/6 (wewn., niesymetria) [UPR]; wiatr jako moment w połowie wysokości w·h²/8.
+Sprawdzono 4 odcinków (filarki ≤ 2 m między otworami — siła całkowita; dłuższe pasma — maks. średnia krocząca 1 m) dla 14 kombinacji; poniżej przypadek miarodajny. Mimośród reakcji stropu e = t/6 (zewn.) / 0,3·t/6 (wewn., niesymetria) [UPR]; wiatr jako moment w połowie wysokości w·h²/8.
 
 ![Ściana S1-03: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.](rys/sciana_S1-03.png)
 *Ściana S1-03: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.*
@@ -2977,31 +2999,31 @@ Sprawdzono 4 odcinków (filarki między otworami i pasma ściany) dla 14 kombina
 
 #### Obliczenia
 
-##### S1-03 — filarek 0,00–1,20 m (b = 1,20 m), 6.10a (wiodące: H)
+##### S1-03 — filarek 2,20–3,80 m (b = 1,60 m), 6.10a (wiodące: S1)
 
-- Pole przekroju filarka: A = b·t = 1,20·0,18 = **0,216** m²
-- Współczynnik η_A (A < 0,3 m²): η_A = (NA; interpolacja wg R5-63) = **1,21** *(NA do PN-EN 1996-1-1 [NZW])*
+- Pole przekroju filarka: A = b·t = 1,60·0,18 = **0,288** m²
+- Współczynnik η_A (A < 0,3 m²): η_A = (NA; interpolacja wg R5-63) = **1,03** *(NA do PN-EN 1996-1-1 [NZW])*
 - Wytrzymałość charakterystyczna muru: f_k = K·f_b^0,85 = 0,60·20^0,85 = **7,66** MPa *((3.2) + NA tabl. NA.5 (K = 0,60, Ap2:2014-09))*
-- Wytrzymałość obliczeniowa: f_d = f_k/γ_M · (1/η_A) = 7,66/1,7·0,826 = **3,72** MPa *(NA tabl. NA.1 (kat. I, zaprawa projektowana, klasa wykonania A))*
+- Wytrzymałość obliczeniowa: f_d = f_k/γ_M · (1/η_A) = 7,66/1,7·0,971 = **4,37** MPa *(NA tabl. NA.1 (kat. I, zaprawa projektowana, klasa wykonania A))*
 - Wysokość efektywna: h_ef = ρ₂·h = 1,000·2,86 = **2,860** m *((5.2), 5.5.1.2)*
 - Smukłość: h_ef/t_ef = 2,860/0,180 = **15,89**
 - Mimośród przypadkowy: e_init = h_ef/450 = 2860/450 = **6,4** mm *(5.5.1.1(4))*
-- Mimośród na górze: e_g = M_g/N_g + e_init ≥ 0,05t = 0,16/5,4 + 0,0064 = **36,4** mm *((6.5))*
-- Mimośród na dole: e_d = M_d/N_d + e_init ≥ 0,05t = 0,00/24,8 + 0,0064 = **9,0** mm *((6.5))*
+- Mimośród na górze: e_g = M_g/N_g + e_init ≥ 0,05t = 0,41/13,6 + 0,0064 = **36,4** mm *((6.5))*
+- Mimośród na dole: e_d = M_d/N_d + e_init ≥ 0,05t = 0,00/34,6 + 0,0064 = **9,0** mm *((6.5))*
 - Współczynnik redukcyjny — góra: Φ_g = 1 − 2e_g/t = 1 − 2·36,4/180 = **0,596** *((6.4))*
 - Współczynnik redukcyjny — dół: Φ_d = 1 − 2e_d/t = 1 − 2·9,0/180 = **0,900** *((6.4))*
-- Mimośród w połowie wysokości: e_m = (M_md + M_w)/N_m + e_init = (0,08 + 0,00)/15,1 + 0,0064 = **11,7** mm *((6.7))*
-- Mimośród od pełzania: e_k = 0,002·φ_∞·(h_ef/t_ef)·√(t·e_m) = 0,002·1,5·15,89·√(0,180·0,0117) = **2,2** mm *((6.8))*
-- Mimośród całkowity: e_mk = e_m + e_k ≥ 0,05t = **13,9** mm *((6.6))*
-- Współczynnik redukcyjny w połowie wysokości: Φ_m = A₁·exp(−u²/2), A₁ = 1 − 2e_mk/t, u = (λ − 0,063)/(0,73 − 1,17e_mk/t) = λ = 0,502, A₁ = 0,845, u = 0,687 = **0,667** *(zał. G (G.1–G.4), E = K_E·f_k)*
-- Nośność: N_Rd = Φ·t·f_d = (góra / środek / dół) 0,596 / 0,667 / 0,900 · 180 mm · 3,72 MPa = **399,3 / 447,2 / 603,0** kN/m *((6.2))*
+- Mimośród w połowie wysokości: e_m = (M_md + M_w)/N_m + e_init = (0,20 + 0,00)/24,1 + 0,0064 = **14,8** mm *((6.7))*
+- Mimośród od pełzania: e_k = 0,002·φ_∞·(h_ef/t_ef)·√(t·e_m) = 0,002·1,5·15,89·√(0,180·0,0148) = **2,5** mm *((6.8))*
+- Mimośród całkowity: e_mk = e_m + e_k ≥ 0,05t = **17,3** mm *((6.6))*
+- Współczynnik redukcyjny w połowie wysokości: Φ_m = A₁·exp(−u²/2), A₁ = 1 − 2e_mk/t, u = (λ − 0,063)/(0,73 − 1,17e_mk/t) = λ = 0,502, A₁ = 0,808, u = 0,712 = **0,627** *(zał. G (G.1–G.4), E = K_E·f_k)*
+- Nośność: N_Rd = Φ·t·f_d = (góra / środek / dół) 0,596 / 0,627 / 0,900 · 180 mm · 4,37 MPa = **469,1 / 493,7 / 708,4** kN/m *((6.2))*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
 | Smukłość ściany | h_ef/t_ef = 15,9  | 27 = 27,0  | 59% | spełniony | 5.5.1.4 |
-| Nośność — przekrój górny | N_Ed = 5,42 kN/m | N_Rd = 399,34 kN/m | 1% | spełniony | (6.2), (6.4) |
-| Nośność — połowa wysokości | N_Ed = 15,09 kN/m | N_Rd = 447,16 kN/m | 3% | spełniony | (6.2), zał. G |
-| Nośność — przekrój dolny | N_Ed = 24,75 kN/m | N_Rd = 602,99 kN/m | 4% | spełniony | (6.2), (6.4) |
+| Nośność — przekrój górny | N_Ed = 13,60 kN/m | N_Rd = 469,13 kN/m | 3% | spełniony | (6.2), (6.4) |
+| Nośność — połowa wysokości | N_Ed = 24,09 kN/m | N_Rd = 493,66 kN/m | 5% | spełniony | (6.2), zał. G |
+| Nośność — przekrój dolny | N_Ed = 34,57 kN/m | N_Rd = 708,36 kN/m | 5% | spełniony | (6.2), (6.4) |
 
 > Filarek liczony jako ściana podparta górą i dołem, ρ₂ = 1,0 (bezpiecznie); siły N na 1 m = N/b.
 
@@ -3013,19 +3035,29 @@ Sprawdzono 4 odcinków (filarki między otworami i pasma ściany) dla 14 kombina
 
 > Informacyjnie (dolne oszacowanie, bez efektu przesklepienia 6.3.2): Zginanie z płaszczyzny (pasmo pionowe — dolne oszacowanie): M_Ed = 1,361 ≤? M_Rd = 0,928 kNm/m (η = 147%). Ściana obciążona pionowo — miarodajne sprawdzenie 6.1.2 z mimośrodem e_hm od wiatru.
 
+##### S1-03 — wiatr: przesklepienie między stropami (6.3.2)
+
+- Smukłość łuku: l_a/t = 2,86/0,180 = **15,9**
+- Nośność na obciążenie poziome: q_lat,d = f_d·(t/l_a)² = 4,50·10³·(0,180/2,86)² = **17,84** kN/m² *((6.20) [NZW])*
+- Obliczeniowy rozpór łuku (przenoszony przez stropy/wieńce): N_ad = 1,5·f_d·t/10 = **121,6** kN/m *((6.19) [NZW])*
+
+| Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
+|---|---|---|---|---|---|
+| Obciążenie poziome — przesklepienie | W_Ed = 1,33 kN/m² | q_lat,d = 17,84 kN/m² | 7% | spełniony | PN-EN 1996-1-1 6.3.2 |
+
 #### Wnioski
 
 **Przyjęto:** Mur: Bloczek wapienno-piaskowy 18 cm, kl. 20, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7).  
 
 ### Poz. 9.4 — Ściana S1-04 (P1, zewnętrzna nośna)
 
-*Element modelu: `S1-04` · maks. wykorzystanie nośności η = 59% · wszystkie warunki spełnione*
+*Element modelu: `S1-04` · maks. wykorzystanie nośności η = 79% · wszystkie warunki spełnione*
 
 #### Opis i schemat statyczny
 
 Ściana gr. konstrukcyjnej t = 18 cm, długość osi 8,00 m, wysokość h = 2,860 m (z 2,910 do 5,770); materiał: Bloczek wapienno-piaskowy 18 cm, kl. 20. Otwory: O1-07 (1,40 m).
 
-Sprawdzono 2 odcinków (filarki między otworami i pasma ściany) dla 14 kombinacji; poniżej przypadek miarodajny. Mimośród reakcji stropu e = t/6 (zewn.) / 0,3·t/6 (wewn., niesymetria) [UPR]; wiatr jako moment w połowie wysokości w·h²/8.
+Sprawdzono 2 odcinków (filarki ≤ 2 m między otworami — siła całkowita; dłuższe pasma — maks. średnia krocząca 1 m) dla 14 kombinacji; poniżej przypadek miarodajny. Mimośród reakcji stropu e = t/6 (zewn.) / 0,3·t/6 (wewn., niesymetria) [UPR]; wiatr jako moment w połowie wysokości w·h²/8.
 
 ![Ściana S1-04: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.](rys/sciana_S1-04.png)
 *Ściana S1-04: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.*
@@ -3053,33 +3085,29 @@ Sprawdzono 2 odcinków (filarki między otworami i pasma ściany) dla 14 kombina
 
 #### Obliczenia
 
-##### S1-04 — filarek 0,00–5,60 m (b = 5,60 m), 6.10a (wiodące: H)
+##### S1-04 — ściana (odcinek 0,00–5,60 m), 6.10b (wiodące: W)
 
-- Pole przekroju filarka: A = b·t = 5,60·0,18 = **1,008** m²
-- Współczynnik η_A (A < 0,3 m²): η_A = (NA; interpolacja wg R5-63) = **1,00** *(NA do PN-EN 1996-1-1 [NZW])*
 - Wytrzymałość charakterystyczna muru: f_k = K·f_b^0,85 = 0,60·20^0,85 = **7,66** MPa *((3.2) + NA tabl. NA.5 (K = 0,60, Ap2:2014-09))*
 - Wytrzymałość obliczeniowa: f_d = f_k/γ_M = 7,66/1,7 = **4,50** MPa *(NA tabl. NA.1 (kat. I, zaprawa projektowana, klasa wykonania A))*
-- Wysokość efektywna: h_ef = ρ₂·h = 1,000·2,86 = **2,860** m *((5.2), 5.5.1.2)*
-- Smukłość: h_ef/t_ef = 2,860/0,180 = **15,89**
-- Mimośród przypadkowy: e_init = h_ef/450 = 2860/450 = **6,4** mm *(5.5.1.1(4))*
-- Mimośród na górze: e_g = M_g/N_g + e_init ≥ 0,05t = 0,29/9,6 + 0,0064 = **36,4** mm *((6.5))*
-- Mimośród na dole: e_d = M_d/N_d + e_init ≥ 0,05t = 0,00/24,6 + 0,0064 = **9,0** mm *((6.5))*
-- Współczynnik redukcyjny — góra: Φ_g = 1 − 2e_g/t = 1 − 2·36,4/180 = **0,596** *((6.4))*
+- Wysokość efektywna: h_ef = ρ₂·h = 0,750·2,86 = **2,145** m *((5.2), 5.5.1.2)*
+- Smukłość: h_ef/t_ef = 2,145/0,180 = **11,92**
+- Mimośród przypadkowy: e_init = h_ef/450 = 2145/450 = **4,8** mm *(5.5.1.1(4))*
+- Mimośród na górze: e_g = M_g/N_g + e_init ≥ 0,05t = 0,30/10,2 + 0,0048 = **34,8** mm *((6.5))*
+- Mimośród na dole: e_d = M_d/N_d + e_init ≥ 0,05t = 0,00/29,6 + 0,0048 = **9,0** mm *((6.5))*
+- Współczynnik redukcyjny — góra: Φ_g = 1 − 2e_g/t = 1 − 2·34,8/180 = **0,614** *((6.4))*
 - Współczynnik redukcyjny — dół: Φ_d = 1 − 2e_d/t = 1 − 2·9,0/180 = **0,900** *((6.4))*
-- Mimośród w połowie wysokości: e_m = (M_md + M_w)/N_m + e_init = (0,14 + 0,00)/17,1 + 0,0064 = **14,8** mm *((6.7))*
-- Mimośród od pełzania: e_k = 0,002·φ_∞·(h_ef/t_ef)·√(t·e_m) = 0,002·1,5·15,89·√(0,180·0,0148) = **2,5** mm *((6.8))*
-- Mimośród całkowity: e_mk = e_m + e_k ≥ 0,05t = **17,2** mm *((6.6))*
-- Współczynnik redukcyjny w połowie wysokości: Φ_m = A₁·exp(−u²/2), A₁ = 1 − 2e_mk/t, u = (λ − 0,063)/(0,73 − 1,17e_mk/t) = λ = 0,502, A₁ = 0,809, u = 0,711 = **0,628** *(zał. G (G.1–G.4), E = K_E·f_k)*
-- Nośność: N_Rd = Φ·t·f_d = (góra / środek / dół) 0,596 / 0,628 / 0,900 · 180 mm · 4,50 MPa = **483,2 / 509,1 / 729,6** kN/m *((6.2))*
+- Mimośród w połowie wysokości: e_m = (M_md + M_w)/N_m + e_init = (0,15 + 1,36)/19,9 + 0,0048 = **80,9** mm *((6.7))*
+- Mimośród od pełzania: e_k = 0 (h_ef/t_ef ≤ λ_c) = **0,0** mm *(6.1.2.2(2) [NZW NA])*
+- Mimośród całkowity: e_mk = e_m + e_k ≥ 0,05t = **80,9** mm *((6.6))*
+- Współczynnik redukcyjny w połowie wysokości: Φ_m = A₁·exp(−u²/2), A₁ = 1 − 2e_mk/t, u = (λ − 0,063)/(0,73 − 1,17e_mk/t) = λ = 0,377, A₁ = 0,101, u = 1,537 = **0,031** *(zał. G (G.1–G.4), E = K_E·f_k)*
+- Nośność: N_Rd = Φ·t·f_d = (góra / środek / dół) 0,614 / 0,031 / 0,900 · 180 mm · 4,50 MPa = **497,5 / 25,2 / 729,6** kN/m *((6.2))*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Smukłość ściany | h_ef/t_ef = 15,9  | 27 = 27,0  | 59% | spełniony | 5.5.1.4 |
-| Nośność — przekrój górny | N_Ed = 9,58 kN/m | N_Rd = 483,21 kN/m | 2% | spełniony | (6.2), (6.4) |
-| Nośność — połowa wysokości | N_Ed = 17,10 kN/m | N_Rd = 509,14 kN/m | 3% | spełniony | (6.2), zał. G |
-| Nośność — przekrój dolny | N_Ed = 24,61 kN/m | N_Rd = 729,61 kN/m | 3% | spełniony | (6.2), (6.4) |
-
-> Filarek liczony jako ściana podparta górą i dołem, ρ₂ = 1,0 (bezpiecznie); siły N na 1 m = N/b.
+| Smukłość ściany | h_ef/t_ef = 11,9  | 27 = 27,0  | 44% | spełniony | 5.5.1.4 |
+| Nośność — przekrój górny | N_Ed = 10,16 kN/m | N_Rd = 497,52 kN/m | 2% | spełniony | (6.2), (6.4) |
+| Nośność — połowa wysokości | N_Ed = 19,89 kN/m | N_Rd = 25,19 kN/m | 79% | spełniony | (6.2), zał. G |
+| Nośność — przekrój dolny | N_Ed = 29,62 kN/m | N_Rd = 729,61 kN/m | 4% | spełniony | (6.2), (6.4) |
 
 ##### S1-04 — zginanie z płaszczyzny (wiatr)
 
@@ -3088,6 +3116,16 @@ Sprawdzono 2 odcinków (filarki między otworami i pasma ściany) dla 14 kombina
 - Pasmo pionowe — nośność: M_Rd = (f_xk1/γ_M + σ_d)·Z = (0,20/1,7 + 0,065)·10³·0,00540 = **0,986** kNm/m *((6.15), 6.3.1(3) [NZW f_xk1])*
 
 > Informacyjnie (dolne oszacowanie, bez efektu przesklepienia 6.3.2): Zginanie z płaszczyzny (pasmo pionowe — dolne oszacowanie): M_Ed = 1,361 ≤? M_Rd = 0,986 kNm/m (η = 138%). Ściana obciążona pionowo — miarodajne sprawdzenie 6.1.2 z mimośrodem e_hm od wiatru.
+
+##### S1-04 — wiatr: przesklepienie między stropami (6.3.2)
+
+- Smukłość łuku: l_a/t = 2,86/0,180 = **15,9**
+- Nośność na obciążenie poziome: q_lat,d = f_d·(t/l_a)² = 4,50·10³·(0,180/2,86)² = **17,84** kN/m² *((6.20) [NZW])*
+- Obliczeniowy rozpór łuku (przenoszony przez stropy/wieńce): N_ad = 1,5·f_d·t/10 = **121,6** kN/m *((6.19) [NZW])*
+
+| Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
+|---|---|---|---|---|---|
+| Obciążenie poziome — przesklepienie | W_Ed = 1,33 kN/m² | q_lat,d = 17,84 kN/m² | 7% | spełniony | PN-EN 1996-1-1 6.3.2 |
 
 #### Wnioski
 
@@ -3101,7 +3139,7 @@ Sprawdzono 2 odcinków (filarki między otworami i pasma ściany) dla 14 kombina
 
 Ściana gr. konstrukcyjnej t = 18 cm, długość osi 8,00 m, wysokość h = 2,860 m (z 2,910 do 5,770); materiał: Bloczek wapienno-piaskowy 18 cm, kl. 20. Otwory: O1-08 (0,90 m), O1-09 (0,90 m).
 
-Sprawdzono 3 odcinków (filarki między otworami i pasma ściany) dla 9 kombinacji; poniżej przypadek miarodajny. Mimośród reakcji stropu e = t/6 (zewn.) / 0,3·t/6 (wewn., niesymetria) [UPR]; wiatr jako moment w połowie wysokości w·h²/8.
+Sprawdzono 3 odcinków (filarki ≤ 2 m między otworami — siła całkowita; dłuższe pasma — maks. średnia krocząca 1 m) dla 9 kombinacji; poniżej przypadek miarodajny. Mimośród reakcji stropu e = t/6 (zewn.) / 0,3·t/6 (wewn., niesymetria) [UPR]; wiatr jako moment w połowie wysokości w·h²/8.
 
 ![Ściana S1-05: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.](rys/sciana_S1-05.png)
 *Ściana S1-05: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.*
@@ -3128,31 +3166,31 @@ Sprawdzono 3 odcinków (filarki między otworami i pasma ściany) dla 9 kombinac
 
 #### Obliczenia
 
-##### S1-05 — filarek 0,00–3,40 m (b = 3,40 m), 6.10a (wiodące: H)
+##### S1-05 — filarek 4,30–5,20 m (b = 0,90 m), 6.10a (wiodące: S1)
 
-- Pole przekroju filarka: A = b·t = 3,40·0,18 = **0,612** m²
-- Współczynnik η_A (A < 0,3 m²): η_A = (NA; interpolacja wg R5-63) = **1,00** *(NA do PN-EN 1996-1-1 [NZW])*
+- Pole przekroju filarka: A = b·t = 0,90·0,18 = **0,162** m²
+- Współczynnik η_A (A < 0,3 m²): η_A = (NA; interpolacja wg R5-63) = **1,34** *(NA do PN-EN 1996-1-1 [NZW])*
 - Wytrzymałość charakterystyczna muru: f_k = K·f_b^0,85 = 0,60·20^0,85 = **7,66** MPa *((3.2) + NA tabl. NA.5 (K = 0,60, Ap2:2014-09))*
-- Wytrzymałość obliczeniowa: f_d = f_k/γ_M = 7,66/1,7 = **4,50** MPa *(NA tabl. NA.1 (kat. I, zaprawa projektowana, klasa wykonania A))*
+- Wytrzymałość obliczeniowa: f_d = f_k/γ_M · (1/η_A) = 7,66/1,7·0,749 = **3,37** MPa *(NA tabl. NA.1 (kat. I, zaprawa projektowana, klasa wykonania A))*
 - Wysokość efektywna: h_ef = ρ₂·h = 1,000·2,86 = **2,860** m *((5.2), 5.5.1.2)*
 - Smukłość: h_ef/t_ef = 2,860/0,180 = **15,89**
 - Mimośród przypadkowy: e_init = h_ef/450 = 2860/450 = **6,4** mm *(5.5.1.1(4))*
-- Mimośród na górze: e_g = M_g/N_g + e_init ≥ 0,05t = 0,32/35,1 + 0,0064 = **15,4** mm *((6.5))*
-- Mimośród na dole: e_d = M_d/N_d + e_init ≥ 0,05t = 0,00/54,7 + 0,0064 = **9,0** mm *((6.5))*
+- Mimośród na górze: e_g = M_g/N_g + e_init ≥ 0,05t = 0,45/50,1 + 0,0064 = **15,4** mm *((6.5))*
+- Mimośród na dole: e_d = M_d/N_d + e_init ≥ 0,05t = 0,00/107,5 + 0,0064 = **9,0** mm *((6.5))*
 - Współczynnik redukcyjny — góra: Φ_g = 1 − 2e_g/t = 1 − 2·15,4/180 = **0,829** *((6.4))*
 - Współczynnik redukcyjny — dół: Φ_d = 1 − 2e_d/t = 1 − 2·9,0/180 = **0,900** *((6.4))*
-- Mimośród w połowie wysokości: e_m = (M_md + M_w)/N_m + e_init = (0,16 + 0,00)/44,9 + 0,0064 = **9,9** mm *((6.7))*
-- Mimośród od pełzania: e_k = 0,002·φ_∞·(h_ef/t_ef)·√(t·e_m) = 0,002·1,5·15,89·√(0,180·0,0099) = **2,0** mm *((6.8))*
-- Mimośród całkowity: e_mk = e_m + e_k ≥ 0,05t = **11,9** mm *((6.6))*
-- Współczynnik redukcyjny w połowie wysokości: Φ_m = A₁·exp(−u²/2), A₁ = 1 − 2e_mk/t, u = (λ − 0,063)/(0,73 − 1,17e_mk/t) = λ = 0,502, A₁ = 0,868, u = 0,673 = **0,692** *(zał. G (G.1–G.4), E = K_E·f_k)*
-- Nośność: N_Rd = Φ·t·f_d = (góra / środek / dół) 0,829 / 0,692 / 0,900 · 180 mm · 4,50 MPa = **672,4 / 561,0 / 729,6** kN/m *((6.2))*
+- Mimośród w połowie wysokości: e_m = (M_md + M_w)/N_m + e_init = (0,23 + 0,00)/78,8 + 0,0064 = **9,2** mm *((6.7))*
+- Mimośród od pełzania: e_k = 0,002·φ_∞·(h_ef/t_ef)·√(t·e_m) = 0,002·1,5·15,89·√(0,180·0,0092) = **1,9** mm *((6.8))*
+- Mimośród całkowity: e_mk = e_m + e_k ≥ 0,05t = **11,2** mm *((6.6))*
+- Współczynnik redukcyjny w połowie wysokości: Φ_m = A₁·exp(−u²/2), A₁ = 1 − 2e_mk/t, u = (λ − 0,063)/(0,73 − 1,17e_mk/t) = λ = 0,502, A₁ = 0,876, u = 0,668 = **0,701** *(zał. G (G.1–G.4), E = K_E·f_k)*
+- Nośność: N_Rd = Φ·t·f_d = (góra / środek / dół) 0,829 / 0,701 / 0,900 · 180 mm · 3,37 MPa = **503,5 / 425,3 / 546,3** kN/m *((6.2))*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
 | Smukłość ściany | h_ef/t_ef = 15,9  | 27 = 27,0  | 59% | spełniony | 5.5.1.4 |
-| Nośność — przekrój górny | N_Ed = 35,06 kN/m | N_Rd = 672,37 kN/m | 5% | spełniony | (6.2), (6.4) |
-| Nośność — połowa wysokości | N_Ed = 44,88 kN/m | N_Rd = 561,00 kN/m | 8% | spełniony | (6.2), zał. G |
-| Nośność — przekrój dolny | N_Ed = 54,70 kN/m | N_Rd = 729,61 kN/m | 7% | spełniony | (6.2), (6.4) |
+| Nośność — przekrój górny | N_Ed = 50,14 kN/m | N_Rd = 503,46 kN/m | 10% | spełniony | (6.2), (6.4) |
+| Nośność — połowa wysokości | N_Ed = 78,81 kN/m | N_Rd = 425,30 kN/m | 19% | spełniony | (6.2), zał. G |
+| Nośność — przekrój dolny | N_Ed = 107,48 kN/m | N_Rd = 546,32 kN/m | 20% | spełniony | (6.2), (6.4) |
 
 > Filarek liczony jako ściana podparta górą i dołem, ρ₂ = 1,0 (bezpiecznie); siły N na 1 m = N/b.
 
@@ -3168,7 +3206,7 @@ Sprawdzono 3 odcinków (filarki między otworami i pasma ściany) dla 9 kombinac
 
 Ściana gr. konstrukcyjnej t = 18 cm, długość osi 10,00 m, wysokość h = 2,935 m (z −0,225 do 2,710); materiał: Bloczek wapienno-piaskowy 18 cm, kl. 20. Otwory: O0-02 (1,80 m), O0-01 (4,00 m).
 
-Sprawdzono 3 odcinków (filarki między otworami i pasma ściany) dla 44 kombinacji; poniżej przypadek miarodajny. Mimośród reakcji stropu e = t/6 (zewn.) / 0,3·t/6 (wewn., niesymetria) [UPR]; wiatr jako moment w połowie wysokości w·h²/8.
+Sprawdzono 3 odcinków (filarki ≤ 2 m między otworami — siła całkowita; dłuższe pasma — maks. średnia krocząca 1 m) dla 44 kombinacji; poniżej przypadek miarodajny. Mimośród reakcji stropu e = t/6 (zewn.) / 0,3·t/6 (wewn., niesymetria) [UPR]; wiatr jako moment w połowie wysokości w·h²/8.
 
 ![Ściana S0-01: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.](rys/sciana_S0-01.png)
 *Ściana S0-01: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.*
@@ -3199,31 +3237,31 @@ Sprawdzono 3 odcinków (filarki między otworami i pasma ściany) dla 44 kombina
 
 #### Obliczenia
 
-##### S0-01 — filarek 0,00–1,20 m (b = 1,20 m), 6.10a (wiodące: H)
+##### S0-01 — filarek 9,00–10,00 m (b = 1,00 m), 6.10a (wiodące: QA)
 
-- Pole przekroju filarka: A = b·t = 1,20·0,18 = **0,216** m²
-- Współczynnik η_A (A < 0,3 m²): η_A = (NA; interpolacja wg R5-63) = **1,21** *(NA do PN-EN 1996-1-1 [NZW])*
+- Pole przekroju filarka: A = b·t = 1,00·0,18 = **0,180** m²
+- Współczynnik η_A (A < 0,3 m²): η_A = (NA; interpolacja wg R5-63) = **1,29** *(NA do PN-EN 1996-1-1 [NZW])*
 - Wytrzymałość charakterystyczna muru: f_k = K·f_b^0,85 = 0,60·20^0,85 = **7,66** MPa *((3.2) + NA tabl. NA.5 (K = 0,60, Ap2:2014-09))*
-- Wytrzymałość obliczeniowa: f_d = f_k/γ_M · (1/η_A) = 7,66/1,7·0,826 = **3,72** MPa *(NA tabl. NA.1 (kat. I, zaprawa projektowana, klasa wykonania A))*
+- Wytrzymałość obliczeniowa: f_d = f_k/γ_M · (1/η_A) = 7,66/1,7·0,772 = **3,48** MPa *(NA tabl. NA.1 (kat. I, zaprawa projektowana, klasa wykonania A))*
 - Wysokość efektywna: h_ef = ρ₂·h = 1,000·2,94 = **2,935** m *((5.2), 5.5.1.2)*
 - Smukłość: h_ef/t_ef = 2,935/0,180 = **16,31**
 - Mimośród przypadkowy: e_init = h_ef/450 = 2935/450 = **6,5** mm *(5.5.1.1(4))*
-- Mimośród na górze: e_g = M_g/N_g + e_init ≥ 0,05t = 0,21/29,8 + 0,0065 = **13,7** mm *((6.5))*
-- Mimośród na dole: e_d = M_d/N_d + e_init ≥ 0,05t = 0,00/56,2 + 0,0065 = **9,0** mm *((6.5))*
-- Współczynnik redukcyjny — góra: Φ_g = 1 − 2e_g/t = 1 − 2·13,7/180 = **0,848** *((6.4))*
+- Mimośród na górze: e_g = M_g/N_g + e_init ≥ 0,05t = 0,23/43,2 + 0,0065 = **11,8** mm *((6.5))*
+- Mimośród na dole: e_d = M_d/N_d + e_init ≥ 0,05t = 0,00/99,0 + 0,0065 = **9,0** mm *((6.5))*
+- Współczynnik redukcyjny — góra: Φ_g = 1 − 2e_g/t = 1 − 2·11,8/180 = **0,869** *((6.4))*
 - Współczynnik redukcyjny — dół: Φ_d = 1 − 2e_d/t = 1 − 2·9,0/180 = **0,900** *((6.4))*
-- Mimośród w połowie wysokości: e_m = (M_md + M_w)/N_m + e_init = (0,11 + 0,00)/43,0 + 0,0065 = **9,0** mm *((6.7))*
-- Mimośród od pełzania: e_k = 0,002·φ_∞·(h_ef/t_ef)·√(t·e_m) = 0,002·1,5·16,31·√(0,180·0,0090) = **2,0** mm *((6.8))*
-- Mimośród całkowity: e_mk = e_m + e_k ≥ 0,05t = **11,0** mm *((6.6))*
-- Współczynnik redukcyjny w połowie wysokości: Φ_m = A₁·exp(−u²/2), A₁ = 1 − 2e_mk/t, u = (λ − 0,063)/(0,73 − 1,17e_mk/t) = λ = 0,516, A₁ = 0,878, u = 0,687 = **0,694** *(zał. G (G.1–G.4), E = K_E·f_k)*
-- Nośność: N_Rd = Φ·t·f_d = (góra / środek / dół) 0,848 / 0,694 / 0,900 · 180 mm · 3,72 MPa = **568,3 / 464,6 / 603,0** kN/m *((6.2))*
+- Mimośród w połowie wysokości: e_m = (M_md + M_w)/N_m + e_init = (0,11 + 0,00)/71,1 + 0,0065 = **8,1** mm *((6.7))*
+- Mimośród od pełzania: e_k = 0,002·φ_∞·(h_ef/t_ef)·√(t·e_m) = 0,002·1,5·16,31·√(0,180·0,0081) = **1,9** mm *((6.8))*
+- Mimośród całkowity: e_mk = e_m + e_k ≥ 0,05t = **10,0** mm *((6.6))*
+- Współczynnik redukcyjny w połowie wysokości: Φ_m = A₁·exp(−u²/2), A₁ = 1 − 2e_mk/t, u = (λ − 0,063)/(0,73 − 1,17e_mk/t) = λ = 0,516, A₁ = 0,889, u = 0,681 = **0,705** *(zał. G (G.1–G.4), E = K_E·f_k)*
+- Nośność: N_Rd = Φ·t·f_d = (góra / środek / dół) 0,869 / 0,705 / 0,900 · 180 mm · 3,48 MPa = **544,2 / 441,5 / 563,4** kN/m *((6.2))*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
 | Smukłość ściany | h_ef/t_ef = 16,3  | 27 = 27,0  | 60% | spełniony | 5.5.1.4 |
-| Nośność — przekrój górny | N_Ed = 29,84 kN/m | N_Rd = 568,35 kN/m | 5% | spełniony | (6.2), (6.4) |
-| Nośność — połowa wysokości | N_Ed = 43,00 kN/m | N_Rd = 464,64 kN/m | 9% | spełniony | (6.2), zał. G |
-| Nośność — przekrój dolny | N_Ed = 56,16 kN/m | N_Rd = 602,99 kN/m | 9% | spełniony | (6.2), (6.4) |
+| Nośność — przekrój górny | N_Ed = 43,20 kN/m | N_Rd = 544,24 kN/m | 8% | spełniony | (6.2), (6.4) |
+| Nośność — połowa wysokości | N_Ed = 71,11 kN/m | N_Rd = 441,54 kN/m | 16% | spełniony | (6.2), zał. G |
+| Nośność — przekrój dolny | N_Ed = 99,02 kN/m | N_Rd = 563,41 kN/m | 18% | spełniony | (6.2), (6.4) |
 
 > Filarek liczony jako ściana podparta górą i dołem, ρ₂ = 1,0 (bezpiecznie); siły N na 1 m = N/b.
 
@@ -3234,6 +3272,16 @@ Sprawdzono 3 odcinków (filarki między otworami i pasma ściany) dla 44 kombina
 - Pasmo pionowe — nośność: M_Rd = (f_xk1/γ_M + σ_d)·Z = (0,20/1,7 + 0,118)·10³·0,00540 = **1,275** kNm/m *((6.15), 6.3.1(3) [NZW f_xk1])*
 
 > Informacyjnie (dolne oszacowanie, bez efektu przesklepienia 6.3.2): Zginanie z płaszczyzny (pasmo pionowe — dolne oszacowanie): M_Ed = 1,434 ≤? M_Rd = 1,275 kNm/m (η = 112%). Ściana obciążona pionowo — miarodajne sprawdzenie 6.1.2 z mimośrodem e_hm od wiatru.
+
+##### S0-01 — wiatr: przesklepienie między stropami (6.3.2)
+
+- Smukłość łuku: l_a/t = 2,94/0,180 = **16,3**
+- Nośność na obciążenie poziome: q_lat,d = f_d·(t/l_a)² = 4,50·10³·(0,180/2,94)² = **16,94** kN/m² *((6.20) [NZW])*
+- Obliczeniowy rozpór łuku (przenoszony przez stropy/wieńce): N_ad = 1,5·f_d·t/10 = **121,6** kN/m *((6.19) [NZW])*
+
+| Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
+|---|---|---|---|---|---|
+| Obciążenie poziome — przesklepienie | W_Ed = 1,33 kN/m² | q_lat,d = 16,94 kN/m² | 8% | spełniony | PN-EN 1996-1-1 6.3.2 |
 
 #### Wnioski
 
@@ -3247,7 +3295,7 @@ Sprawdzono 3 odcinków (filarki między otworami i pasma ściany) dla 44 kombina
 
 Ściana gr. konstrukcyjnej t = 18 cm, długość osi 8,00 m, wysokość h = 2,935 m (z −0,225 do 2,710); materiał: Bloczek wapienno-piaskowy 18 cm, kl. 20. Otwory: O0-05 (1,50 m), O0-08 (2,00 m).
 
-Sprawdzono 3 odcinków (filarki między otworami i pasma ściany) dla 44 kombinacji; poniżej przypadek miarodajny. Mimośród reakcji stropu e = t/6 (zewn.) / 0,3·t/6 (wewn., niesymetria) [UPR]; wiatr jako moment w połowie wysokości w·h²/8.
+Sprawdzono 3 odcinków (filarki ≤ 2 m między otworami — siła całkowita; dłuższe pasma — maks. średnia krocząca 1 m) dla 44 kombinacji; poniżej przypadek miarodajny. Mimośród reakcji stropu e = t/6 (zewn.) / 0,3·t/6 (wewn., niesymetria) [UPR]; wiatr jako moment w połowie wysokości w·h²/8.
 
 ![Ściana S0-02: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.](rys/sciana_S0-02.png)
 *Ściana S0-02: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.*
@@ -3279,31 +3327,31 @@ Sprawdzono 3 odcinków (filarki między otworami i pasma ściany) dla 44 kombina
 
 #### Obliczenia
 
-##### S0-02 — filarek 0,00–2,00 m (b = 2,00 m), 6.10a (wiodące: H)
+##### S0-02 — filarek 3,50–5,00 m (b = 1,50 m), 6.10a (wiodące: QA)
 
-- Pole przekroju filarka: A = b·t = 2,00·0,18 = **0,360** m²
-- Współczynnik η_A (A < 0,3 m²): η_A = (NA; interpolacja wg R5-63) = **1,00** *(NA do PN-EN 1996-1-1 [NZW])*
+- Pole przekroju filarka: A = b·t = 1,50·0,18 = **0,270** m²
+- Współczynnik η_A (A < 0,3 m²): η_A = (NA; interpolacja wg R5-63) = **1,07** *(NA do PN-EN 1996-1-1 [NZW])*
 - Wytrzymałość charakterystyczna muru: f_k = K·f_b^0,85 = 0,60·20^0,85 = **7,66** MPa *((3.2) + NA tabl. NA.5 (K = 0,60, Ap2:2014-09))*
-- Wytrzymałość obliczeniowa: f_d = f_k/γ_M = 7,66/1,7 = **4,50** MPa *(NA tabl. NA.1 (kat. I, zaprawa projektowana, klasa wykonania A))*
+- Wytrzymałość obliczeniowa: f_d = f_k/γ_M · (1/η_A) = 7,66/1,7·0,930 = **4,19** MPa *(NA tabl. NA.1 (kat. I, zaprawa projektowana, klasa wykonania A))*
 - Wysokość efektywna: h_ef = ρ₂·h = 1,000·2,94 = **2,935** m *((5.2), 5.5.1.2)*
 - Smukłość: h_ef/t_ef = 2,935/0,180 = **16,31**
 - Mimośród przypadkowy: e_init = h_ef/450 = 2935/450 = **6,5** mm *(5.5.1.1(4))*
-- Mimośród na górze: e_g = M_g/N_g + e_init ≥ 0,05t = 0,82/48,6 + 0,0065 = **23,3** mm *((6.5))*
-- Mimośród na dole: e_d = M_d/N_d + e_init ≥ 0,05t = 0,00/78,6 + 0,0065 = **9,0** mm *((6.5))*
-- Współczynnik redukcyjny — góra: Φ_g = 1 − 2e_g/t = 1 − 2·23,3/180 = **0,741** *((6.4))*
+- Mimośród na górze: e_g = M_g/N_g + e_init ≥ 0,05t = 2,11/114,0 + 0,0065 = **25,0** mm *((6.5))*
+- Mimośród na dole: e_d = M_d/N_d + e_init ≥ 0,05t = 0,00/186,9 + 0,0065 = **9,0** mm *((6.5))*
+- Współczynnik redukcyjny — góra: Φ_g = 1 − 2e_g/t = 1 − 2·25,0/180 = **0,722** *((6.4))*
 - Współczynnik redukcyjny — dół: Φ_d = 1 − 2e_d/t = 1 − 2·9,0/180 = **0,900** *((6.4))*
-- Mimośród w połowie wysokości: e_m = (M_md + M_w)/N_m + e_init = (0,41 + 0,00)/63,6 + 0,0065 = **12,9** mm *((6.7))*
-- Mimośród od pełzania: e_k = 0,002·φ_∞·(h_ef/t_ef)·√(t·e_m) = 0,002·1,5·16,31·√(0,180·0,0129) = **2,4** mm *((6.8))*
-- Mimośród całkowity: e_mk = e_m + e_k ≥ 0,05t = **15,3** mm *((6.6))*
-- Współczynnik redukcyjny w połowie wysokości: Φ_m = A₁·exp(−u²/2), A₁ = 1 − 2e_mk/t, u = (λ − 0,063)/(0,73 − 1,17e_mk/t) = λ = 0,516, A₁ = 0,830, u = 0,718 = **0,641** *(zał. G (G.1–G.4), E = K_E·f_k)*
-- Nośność: N_Rd = Φ·t·f_d = (góra / środek / dół) 0,741 / 0,641 / 0,900 · 180 mm · 4,50 MPa = **600,6 / 520,0 / 729,6** kN/m *((6.2))*
+- Mimośród w połowie wysokości: e_m = (M_md + M_w)/N_m + e_init = (1,05 + 0,00)/150,4 + 0,0065 = **13,5** mm *((6.7))*
+- Mimośród od pełzania: e_k = 0,002·φ_∞·(h_ef/t_ef)·√(t·e_m) = 0,002·1,5·16,31·√(0,180·0,0135) = **2,4** mm *((6.8))*
+- Mimośród całkowity: e_mk = e_m + e_k ≥ 0,05t = **15,9** mm *((6.6))*
+- Współczynnik redukcyjny w połowie wysokości: Φ_m = A₁·exp(−u²/2), A₁ = 1 − 2e_mk/t, u = (λ − 0,063)/(0,73 − 1,17e_mk/t) = λ = 0,516, A₁ = 0,823, u = 0,723 = **0,634** *(zał. G (G.1–G.4), E = K_E·f_k)*
+- Nośność: N_Rd = Φ·t·f_d = (góra / środek / dół) 0,722 / 0,634 / 0,900 · 180 mm · 4,19 MPa = **544,5 / 477,9 / 678,7** kN/m *((6.2))*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
 | Smukłość ściany | h_ef/t_ef = 16,3  | 27 = 27,0  | 60% | spełniony | 5.5.1.4 |
-| Nośność — przekrój górny | N_Ed = 48,59 kN/m | N_Rd = 600,57 kN/m | 8% | spełniony | (6.2), (6.4) |
-| Nośność — połowa wysokości | N_Ed = 63,58 kN/m | N_Rd = 520,00 kN/m | 12% | spełniony | (6.2), zał. G |
-| Nośność — przekrój dolny | N_Ed = 78,57 kN/m | N_Rd = 729,61 kN/m | 11% | spełniony | (6.2), (6.4) |
+| Nośność — przekrój górny | N_Ed = 113,97 kN/m | N_Rd = 544,47 kN/m | 21% | spełniony | (6.2), (6.4) |
+| Nośność — połowa wysokości | N_Ed = 150,41 kN/m | N_Rd = 477,93 kN/m | 31% | spełniony | (6.2), zał. G |
+| Nośność — przekrój dolny | N_Ed = 186,85 kN/m | N_Rd = 678,71 kN/m | 28% | spełniony | (6.2), (6.4) |
 
 > Filarek liczony jako ściana podparta górą i dołem, ρ₂ = 1,0 (bezpiecznie); siły N na 1 m = N/b.
 
@@ -3314,6 +3362,16 @@ Sprawdzono 3 odcinków (filarki między otworami i pasma ściany) dla 44 kombina
 - Pasmo pionowe — nośność: M_Rd = (f_xk1/γ_M + σ_d)·Z = (0,20/1,7 + 0,229)·10³·0,00540 = **1,871** kNm/m *((6.15), 6.3.1(3) [NZW f_xk1])*
 
 > Informacyjnie (dolne oszacowanie, bez efektu przesklepienia 6.3.2): Zginanie z płaszczyzny (pasmo pionowe — dolne oszacowanie): M_Ed = 1,434 ≤? M_Rd = 1,871 kNm/m (η = 77%). Ściana obciążona pionowo — miarodajne sprawdzenie 6.1.2 z mimośrodem e_hm od wiatru.
+
+##### S0-02 — wiatr: przesklepienie między stropami (6.3.2)
+
+- Smukłość łuku: l_a/t = 2,94/0,180 = **16,3**
+- Nośność na obciążenie poziome: q_lat,d = f_d·(t/l_a)² = 4,50·10³·(0,180/2,94)² = **16,94** kN/m² *((6.20) [NZW])*
+- Obliczeniowy rozpór łuku (przenoszony przez stropy/wieńce): N_ad = 1,5·f_d·t/10 = **121,6** kN/m *((6.19) [NZW])*
+
+| Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
+|---|---|---|---|---|---|
+| Obciążenie poziome — przesklepienie | W_Ed = 1,33 kN/m² | q_lat,d = 16,94 kN/m² | 8% | spełniony | PN-EN 1996-1-1 6.3.2 |
 
 ##### S0-02 — docisk pod oparciem belki (s = 4,85 m)
 
@@ -3334,13 +3392,13 @@ Sprawdzono 3 odcinków (filarki między otworami i pasma ściany) dla 44 kombina
 
 ### Poz. 9.8 — Ściana S0-03 (P0, zewnętrzna nośna)
 
-*Element modelu: `S0-03` · maks. wykorzystanie nośności η = 60% · wszystkie warunki spełnione*
+*Element modelu: `S0-03` · maks. wykorzystanie nośności η = 45% · wszystkie warunki spełnione*
 
 #### Opis i schemat statyczny
 
 Ściana gr. konstrukcyjnej t = 18 cm, długość osi 10,00 m, wysokość h = 2,935 m (z −0,225 do 2,710); materiał: Bloczek wapienno-piaskowy 18 cm, kl. 20. Otwory: O0-04 (1,60 m), O0-03 (1,10 m).
 
-Sprawdzono 3 odcinków (filarki między otworami i pasma ściany) dla 44 kombinacji; poniżej przypadek miarodajny. Mimośród reakcji stropu e = t/6 (zewn.) / 0,3·t/6 (wewn., niesymetria) [UPR]; wiatr jako moment w połowie wysokości w·h²/8.
+Sprawdzono 3 odcinków (filarki ≤ 2 m między otworami — siła całkowita; dłuższe pasma — maks. średnia krocząca 1 m) dla 44 kombinacji; poniżej przypadek miarodajny. Mimośród reakcji stropu e = t/6 (zewn.) / 0,3·t/6 (wewn., niesymetria) [UPR]; wiatr jako moment w połowie wysokości w·h²/8.
 
 ![Ściana S0-03: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.](rys/sciana_S0-03.png)
 *Ściana S0-03: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.*
@@ -3371,33 +3429,29 @@ Sprawdzono 3 odcinków (filarki między otworami i pasma ściany) dla 44 kombina
 
 #### Obliczenia
 
-##### S0-03 — filarek 0,00–1,00 m (b = 1,00 m), 6.10a (wiodące: H)
+##### S0-03 — ściana (odcinek 2,60–6,30 m), 6.10b (wiodące: W)
 
-- Pole przekroju filarka: A = b·t = 1,00·0,18 = **0,180** m²
-- Współczynnik η_A (A < 0,3 m²): η_A = (NA; interpolacja wg R5-63) = **1,29** *(NA do PN-EN 1996-1-1 [NZW])*
 - Wytrzymałość charakterystyczna muru: f_k = K·f_b^0,85 = 0,60·20^0,85 = **7,66** MPa *((3.2) + NA tabl. NA.5 (K = 0,60, Ap2:2014-09))*
-- Wytrzymałość obliczeniowa: f_d = f_k/γ_M · (1/η_A) = 7,66/1,7·0,772 = **3,48** MPa *(NA tabl. NA.1 (kat. I, zaprawa projektowana, klasa wykonania A))*
-- Wysokość efektywna: h_ef = ρ₂·h = 1,000·2,94 = **2,935** m *((5.2), 5.5.1.2)*
-- Smukłość: h_ef/t_ef = 2,935/0,180 = **16,31**
-- Mimośród przypadkowy: e_init = h_ef/450 = 2935/450 = **6,5** mm *(5.5.1.1(4))*
-- Mimośród na górze: e_g = M_g/N_g + e_init ≥ 0,05t = 0,19/29,9 + 0,0065 = **12,9** mm *((6.5))*
-- Mimośród na dole: e_d = M_d/N_d + e_init ≥ 0,05t = 0,00/75,2 + 0,0065 = **9,0** mm *((6.5))*
-- Współczynnik redukcyjny — góra: Φ_g = 1 − 2e_g/t = 1 − 2·12,9/180 = **0,856** *((6.4))*
+- Wytrzymałość obliczeniowa: f_d = f_k/γ_M = 7,66/1,7 = **4,50** MPa *(NA tabl. NA.1 (kat. I, zaprawa projektowana, klasa wykonania A))*
+- Wysokość efektywna: h_ef = ρ₂·h = 0,750·2,94 = **2,201** m *((5.2), 5.5.1.2)*
+- Smukłość: h_ef/t_ef = 2,201/0,180 = **12,23**
+- Mimośród przypadkowy: e_init = h_ef/450 = 2201/450 = **4,9** mm *(5.5.1.1(4))*
+- Mimośród na górze: e_g = M_g/N_g + e_init ≥ 0,05t = 0,62/51,0 + 0,0049 = **17,1** mm *((6.5))*
+- Mimośród na dole: e_d = M_d/N_d + e_init ≥ 0,05t = 0,00/89,2 + 0,0049 = **9,0** mm *((6.5))*
+- Współczynnik redukcyjny — góra: Φ_g = 1 − 2e_g/t = 1 − 2·17,1/180 = **0,810** *((6.4))*
 - Współczynnik redukcyjny — dół: Φ_d = 1 − 2e_d/t = 1 − 2·9,0/180 = **0,900** *((6.4))*
-- Mimośród w połowie wysokości: e_m = (M_md + M_w)/N_m + e_init = (0,10 + 0,00)/52,5 + 0,0065 = **8,3** mm *((6.7))*
-- Mimośród od pełzania: e_k = 0,002·φ_∞·(h_ef/t_ef)·√(t·e_m) = 0,002·1,5·16,31·√(0,180·0,0083) = **1,9** mm *((6.8))*
-- Mimośród całkowity: e_mk = e_m + e_k ≥ 0,05t = **10,2** mm *((6.6))*
-- Współczynnik redukcyjny w połowie wysokości: Φ_m = A₁·exp(−u²/2), A₁ = 1 − 2e_mk/t, u = (λ − 0,063)/(0,73 − 1,17e_mk/t) = λ = 0,516, A₁ = 0,886, u = 0,682 = **0,702** *(zał. G (G.1–G.4), E = K_E·f_k)*
-- Nośność: N_Rd = Φ·t·f_d = (góra / środek / dół) 0,856 / 0,702 / 0,900 · 180 mm · 3,48 MPa = **536,1 / 439,6 / 563,4** kN/m *((6.2))*
+- Mimośród w połowie wysokości: e_m = (M_md + M_w)/N_m + e_init = (0,31 + 1,43)/70,1 + 0,0049 = **29,8** mm *((6.7))*
+- Mimośród od pełzania: e_k = 0 (h_ef/t_ef ≤ λ_c) = **0,0** mm *(6.1.2.2(2) [NZW NA])*
+- Mimośród całkowity: e_mk = e_m + e_k ≥ 0,05t = **29,8** mm *((6.6))*
+- Współczynnik redukcyjny w połowie wysokości: Φ_m = A₁·exp(−u²/2), A₁ = 1 − 2e_mk/t, u = (λ − 0,063)/(0,73 − 1,17e_mk/t) = λ = 0,387, A₁ = 0,669, u = 0,603 = **0,558** *(zał. G (G.1–G.4), E = K_E·f_k)*
+- Nośność: N_Rd = Φ·t·f_d = (góra / środek / dół) 0,810 / 0,558 / 0,900 · 180 mm · 4,50 MPa = **656,9 / 452,2 / 729,6** kN/m *((6.2))*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Smukłość ściany | h_ef/t_ef = 16,3  | 27 = 27,0  | 60% | spełniony | 5.5.1.4 |
-| Nośność — przekrój górny | N_Ed = 29,93 kN/m | N_Rd = 536,09 kN/m | 6% | spełniony | (6.2), (6.4) |
-| Nośność — połowa wysokości | N_Ed = 52,54 kN/m | N_Rd = 439,57 kN/m | 12% | spełniony | (6.2), zał. G |
-| Nośność — przekrój dolny | N_Ed = 75,15 kN/m | N_Rd = 563,41 kN/m | 13% | spełniony | (6.2), (6.4) |
-
-> Filarek liczony jako ściana podparta górą i dołem, ρ₂ = 1,0 (bezpiecznie); siły N na 1 m = N/b.
+| Smukłość ściany | h_ef/t_ef = 12,2  | 27 = 27,0  | 45% | spełniony | 5.5.1.4 |
+| Nośność — przekrój górny | N_Ed = 50,98 kN/m | N_Rd = 656,86 kN/m | 8% | spełniony | (6.2), (6.4) |
+| Nośność — połowa wysokości | N_Ed = 70,11 kN/m | N_Rd = 452,21 kN/m | 16% | spełniony | (6.2), zał. G |
+| Nośność — przekrój dolny | N_Ed = 89,25 kN/m | N_Rd = 729,61 kN/m | 12% | spełniony | (6.2), (6.4) |
 
 ##### S0-03 — zginanie z płaszczyzny (wiatr)
 
@@ -3407,19 +3461,29 @@ Sprawdzono 3 odcinków (filarki między otworami i pasma ściany) dla 44 kombina
 
 > Informacyjnie (dolne oszacowanie, bez efektu przesklepienia 6.3.2): Zginanie z płaszczyzny (pasmo pionowe — dolne oszacowanie): M_Ed = 1,434 ≤? M_Rd = 1,393 kNm/m (η = 103%). Ściana obciążona pionowo — miarodajne sprawdzenie 6.1.2 z mimośrodem e_hm od wiatru.
 
+##### S0-03 — wiatr: przesklepienie między stropami (6.3.2)
+
+- Smukłość łuku: l_a/t = 2,94/0,180 = **16,3**
+- Nośność na obciążenie poziome: q_lat,d = f_d·(t/l_a)² = 4,50·10³·(0,180/2,94)² = **16,94** kN/m² *((6.20) [NZW])*
+- Obliczeniowy rozpór łuku (przenoszony przez stropy/wieńce): N_ad = 1,5·f_d·t/10 = **121,6** kN/m *((6.19) [NZW])*
+
+| Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
+|---|---|---|---|---|---|
+| Obciążenie poziome — przesklepienie | W_Ed = 1,33 kN/m² | q_lat,d = 16,94 kN/m² | 8% | spełniony | PN-EN 1996-1-1 6.3.2 |
+
 #### Wnioski
 
 **Przyjęto:** Mur: Bloczek wapienno-piaskowy 18 cm, kl. 20, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7).  
 
 ### Poz. 9.9 — Ściana S0-04 (P0, zewnętrzna nośna)
 
-*Element modelu: `S0-04` · maks. wykorzystanie nośności η = 60% · wszystkie warunki spełnione*
+*Element modelu: `S0-04` · maks. wykorzystanie nośności η = 45% · wszystkie warunki spełnione*
 
 #### Opis i schemat statyczny
 
 Ściana gr. konstrukcyjnej t = 18 cm, długość osi 8,00 m, wysokość h = 2,935 m (z −0,225 do 2,710); materiał: Bloczek wapienno-piaskowy 18 cm, kl. 20. Otwory: O0-09 (1,50 m).
 
-Sprawdzono 2 odcinków (filarki między otworami i pasma ściany) dla 44 kombinacji; poniżej przypadek miarodajny. Mimośród reakcji stropu e = t/6 (zewn.) / 0,3·t/6 (wewn., niesymetria) [UPR]; wiatr jako moment w połowie wysokości w·h²/8.
+Sprawdzono 2 odcinków (filarki ≤ 2 m między otworami — siła całkowita; dłuższe pasma — maks. średnia krocząca 1 m) dla 44 kombinacji; poniżej przypadek miarodajny. Mimośród reakcji stropu e = t/6 (zewn.) / 0,3·t/6 (wewn., niesymetria) [UPR]; wiatr jako moment w połowie wysokości w·h²/8.
 
 ![Ściana S0-04: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.](rys/sciana_S0-04.png)
 *Ściana S0-04: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.*
@@ -3450,33 +3514,29 @@ Sprawdzono 2 odcinków (filarki między otworami i pasma ściany) dla 44 kombina
 
 #### Obliczenia
 
-##### S0-04 — filarek 0,00–5,20 m (b = 5,20 m), 6.10a (wiodące: H)
+##### S0-04 — ściana (odcinek 0,00–5,20 m), 6.10b (wiodące: W)
 
-- Pole przekroju filarka: A = b·t = 5,20·0,18 = **0,936** m²
-- Współczynnik η_A (A < 0,3 m²): η_A = (NA; interpolacja wg R5-63) = **1,00** *(NA do PN-EN 1996-1-1 [NZW])*
 - Wytrzymałość charakterystyczna muru: f_k = K·f_b^0,85 = 0,60·20^0,85 = **7,66** MPa *((3.2) + NA tabl. NA.5 (K = 0,60, Ap2:2014-09))*
 - Wytrzymałość obliczeniowa: f_d = f_k/γ_M = 7,66/1,7 = **4,50** MPa *(NA tabl. NA.1 (kat. I, zaprawa projektowana, klasa wykonania A))*
-- Wysokość efektywna: h_ef = ρ₂·h = 1,000·2,94 = **2,935** m *((5.2), 5.5.1.2)*
-- Smukłość: h_ef/t_ef = 2,935/0,180 = **16,31**
-- Mimośród przypadkowy: e_init = h_ef/450 = 2935/450 = **6,5** mm *(5.5.1.1(4))*
-- Mimośród na górze: e_g = M_g/N_g + e_init ≥ 0,05t = 0,27/32,8 + 0,0065 = **14,9** mm *((6.5))*
-- Mimośród na dole: e_d = M_d/N_d + e_init ≥ 0,05t = 0,00/51,0 + 0,0065 = **9,0** mm *((6.5))*
-- Współczynnik redukcyjny — góra: Φ_g = 1 − 2e_g/t = 1 − 2·14,9/180 = **0,835** *((6.4))*
+- Wysokość efektywna: h_ef = ρ₂·h = 0,750·2,94 = **2,201** m *((5.2), 5.5.1.2)*
+- Smukłość: h_ef/t_ef = 2,201/0,180 = **12,23**
+- Mimośród przypadkowy: e_init = h_ef/450 = 2201/450 = **4,9** mm *(5.5.1.1(4))*
+- Mimośród na górze: e_g = M_g/N_g + e_init ≥ 0,05t = 0,57/48,7 + 0,0049 = **16,6** mm *((6.5))*
+- Mimośród na dole: e_d = M_d/N_d + e_init ≥ 0,05t = 0,00/76,6 + 0,0049 = **9,0** mm *((6.5))*
+- Współczynnik redukcyjny — góra: Φ_g = 1 − 2e_g/t = 1 − 2·16,6/180 = **0,815** *((6.4))*
 - Współczynnik redukcyjny — dół: Φ_d = 1 − 2e_d/t = 1 − 2·9,0/180 = **0,900** *((6.4))*
-- Mimośród w połowie wysokości: e_m = (M_md + M_w)/N_m + e_init = (0,14 + 0,00)/41,9 + 0,0065 = **9,8** mm *((6.7))*
-- Mimośród od pełzania: e_k = 0,002·φ_∞·(h_ef/t_ef)·√(t·e_m) = 0,002·1,5·16,31·√(0,180·0,0098) = **2,1** mm *((6.8))*
-- Mimośród całkowity: e_mk = e_m + e_k ≥ 0,05t = **11,9** mm *((6.6))*
-- Współczynnik redukcyjny w połowie wysokości: Φ_m = A₁·exp(−u²/2), A₁ = 1 − 2e_mk/t, u = (λ − 0,063)/(0,73 − 1,17e_mk/t) = λ = 0,516, A₁ = 0,868, u = 0,693 = **0,683** *(zał. G (G.1–G.4), E = K_E·f_k)*
-- Nośność: N_Rd = Φ·t·f_d = (góra / środek / dół) 0,835 / 0,683 / 0,900 · 180 mm · 4,50 MPa = **676,5 / 553,6 / 729,6** kN/m *((6.2))*
+- Mimośród w połowie wysokości: e_m = (M_md + M_w)/N_m + e_init = (0,29 + 1,43)/62,7 + 0,0049 = **32,3** mm *((6.7))*
+- Mimośród od pełzania: e_k = 0 (h_ef/t_ef ≤ λ_c) = **0,0** mm *(6.1.2.2(2) [NZW NA])*
+- Mimośród całkowity: e_mk = e_m + e_k ≥ 0,05t = **32,3** mm *((6.6))*
+- Współczynnik redukcyjny w połowie wysokości: Φ_m = A₁·exp(−u²/2), A₁ = 1 − 2e_mk/t, u = (λ − 0,063)/(0,73 − 1,17e_mk/t) = λ = 0,387, A₁ = 0,641, u = 0,623 = **0,528** *(zał. G (G.1–G.4), E = K_E·f_k)*
+- Nośność: N_Rd = Φ·t·f_d = (góra / środek / dół) 0,815 / 0,528 / 0,900 · 180 mm · 4,50 MPa = **660,7 / 427,7 / 729,6** kN/m *((6.2))*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Smukłość ściany | h_ef/t_ef = 16,3  | 27 = 27,0  | 60% | spełniony | 5.5.1.4 |
-| Nośność — przekrój górny | N_Ed = 32,79 kN/m | N_Rd = 676,55 kN/m | 5% | spełniony | (6.2), (6.4) |
-| Nośność — połowa wysokości | N_Ed = 41,89 kN/m | N_Rd = 553,59 kN/m | 8% | spełniony | (6.2), zał. G |
-| Nośność — przekrój dolny | N_Ed = 51,00 kN/m | N_Rd = 729,61 kN/m | 7% | spełniony | (6.2), (6.4) |
-
-> Filarek liczony jako ściana podparta górą i dołem, ρ₂ = 1,0 (bezpiecznie); siły N na 1 m = N/b.
+| Smukłość ściany | h_ef/t_ef = 12,2  | 27 = 27,0  | 45% | spełniony | 5.5.1.4 |
+| Nośność — przekrój górny | N_Ed = 48,70 kN/m | N_Rd = 660,72 kN/m | 7% | spełniony | (6.2), (6.4) |
+| Nośność — połowa wysokości | N_Ed = 62,65 kN/m | N_Rd = 427,74 kN/m | 15% | spełniony | (6.2), zał. G |
+| Nośność — przekrój dolny | N_Ed = 76,60 kN/m | N_Rd = 729,61 kN/m | 10% | spełniony | (6.2), (6.4) |
 
 ##### S0-04 — zginanie z płaszczyzny (wiatr)
 
@@ -3486,19 +3546,29 @@ Sprawdzono 2 odcinków (filarki między otworami i pasma ściany) dla 44 kombina
 
 > Informacyjnie (dolne oszacowanie, bez efektu przesklepienia 6.3.2): Zginanie z płaszczyzny (pasmo pionowe — dolne oszacowanie): M_Ed = 1,434 ≤? M_Rd = 1,448 kNm/m (η = 99%). Ściana obciążona pionowo — miarodajne sprawdzenie 6.1.2 z mimośrodem e_hm od wiatru.
 
+##### S0-04 — wiatr: przesklepienie między stropami (6.3.2)
+
+- Smukłość łuku: l_a/t = 2,94/0,180 = **16,3**
+- Nośność na obciążenie poziome: q_lat,d = f_d·(t/l_a)² = 4,50·10³·(0,180/2,94)² = **16,94** kN/m² *((6.20) [NZW])*
+- Obliczeniowy rozpór łuku (przenoszony przez stropy/wieńce): N_ad = 1,5·f_d·t/10 = **121,6** kN/m *((6.19) [NZW])*
+
+| Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
+|---|---|---|---|---|---|
+| Obciążenie poziome — przesklepienie | W_Ed = 1,33 kN/m² | q_lat,d = 16,94 kN/m² | 8% | spełniony | PN-EN 1996-1-1 6.3.2 |
+
 #### Wnioski
 
 **Przyjęto:** Mur: Bloczek wapienno-piaskowy 18 cm, kl. 20, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7).  
 
 ### Poz. 9.10 — Ściana S0-05 (P0, wewnętrzna nośna)
 
-*Element modelu: `S0-05` · maks. wykorzystanie nośności η = 60% · wszystkie warunki spełnione*
+*Element modelu: `S0-05` · maks. wykorzystanie nośności η = 45% · wszystkie warunki spełnione*
 
 #### Opis i schemat statyczny
 
 Ściana gr. konstrukcyjnej t = 18 cm, długość osi 8,00 m, wysokość h = 2,935 m (z −0,225 do 2,710); materiał: Bloczek wapienno-piaskowy 18 cm, kl. 20. Otwory: O0-06 (1,20 m).
 
-Sprawdzono 2 odcinków (filarki między otworami i pasma ściany) dla 34 kombinacji; poniżej przypadek miarodajny. Mimośród reakcji stropu e = t/6 (zewn.) / 0,3·t/6 (wewn., niesymetria) [UPR]; wiatr jako moment w połowie wysokości w·h²/8.
+Sprawdzono 2 odcinków (filarki ≤ 2 m między otworami — siła całkowita; dłuższe pasma — maks. średnia krocząca 1 m) dla 34 kombinacji; poniżej przypadek miarodajny. Mimośród reakcji stropu e = t/6 (zewn.) / 0,3·t/6 (wewn., niesymetria) [UPR]; wiatr jako moment w połowie wysokości w·h²/8.
 
 ![Ściana S0-05: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.](rys/sciana_S0-05.png)
 *Ściana S0-05: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.*
@@ -3528,33 +3598,29 @@ Sprawdzono 2 odcinków (filarki między otworami i pasma ściany) dla 34 kombina
 
 #### Obliczenia
 
-##### S0-05 — filarek 0,00–5,80 m (b = 5,80 m), 6.10a (wiodące: H)
+##### S0-05 — ściana (odcinek 0,00–5,80 m), 6.10a (wiodące: QA)
 
-- Pole przekroju filarka: A = b·t = 5,80·0,18 = **1,044** m²
-- Współczynnik η_A (A < 0,3 m²): η_A = (NA; interpolacja wg R5-63) = **1,00** *(NA do PN-EN 1996-1-1 [NZW])*
 - Wytrzymałość charakterystyczna muru: f_k = K·f_b^0,85 = 0,60·20^0,85 = **7,66** MPa *((3.2) + NA tabl. NA.5 (K = 0,60, Ap2:2014-09))*
 - Wytrzymałość obliczeniowa: f_d = f_k/γ_M = 7,66/1,7 = **4,50** MPa *(NA tabl. NA.1 (kat. I, zaprawa projektowana, klasa wykonania A))*
-- Wysokość efektywna: h_ef = ρ₂·h = 1,000·2,94 = **2,935** m *((5.2), 5.5.1.2)*
-- Smukłość: h_ef/t_ef = 2,935/0,180 = **16,31**
-- Mimośród przypadkowy: e_init = h_ef/450 = 2935/450 = **6,5** mm *(5.5.1.1(4))*
-- Mimośród na górze: e_g = M_g/N_g + e_init ≥ 0,05t = 0,63/117,9 + 0,0065 = **11,9** mm *((6.5))*
-- Mimośród na dole: e_d = M_d/N_d + e_init ≥ 0,05t = 0,00/143,6 + 0,0065 = **9,0** mm *((6.5))*
-- Współczynnik redukcyjny — góra: Φ_g = 1 − 2e_g/t = 1 − 2·11,9/180 = **0,868** *((6.4))*
+- Wysokość efektywna: h_ef = ρ₂·h = 0,750·2,94 = **2,201** m *((5.2), 5.5.1.2)*
+- Smukłość: h_ef/t_ef = 2,201/0,180 = **12,23**
+- Mimośród przypadkowy: e_init = h_ef/450 = 2201/450 = **4,9** mm *(5.5.1.1(4))*
+- Mimośród na górze: e_g = M_g/N_g + e_init ≥ 0,05t = 0,82/187,6 + 0,0049 = **9,2** mm *((6.5))*
+- Mimośród na dole: e_d = M_d/N_d + e_init ≥ 0,05t = 0,00/210,9 + 0,0049 = **9,0** mm *((6.5))*
+- Współczynnik redukcyjny — góra: Φ_g = 1 − 2e_g/t = 1 − 2·9,2/180 = **0,897** *((6.4))*
 - Współczynnik redukcyjny — dół: Φ_d = 1 − 2e_d/t = 1 − 2·9,0/180 = **0,900** *((6.4))*
-- Mimośród w połowie wysokości: e_m = (M_md + M_w)/N_m + e_init = (0,31 + 0,00)/130,7 + 0,0065 = **8,9** mm *((6.7))*
-- Mimośród od pełzania: e_k = 0,002·φ_∞·(h_ef/t_ef)·√(t·e_m) = 0,002·1,5·16,31·√(0,180·0,0089) = **2,0** mm *((6.8))*
-- Mimośród całkowity: e_mk = e_m + e_k ≥ 0,05t = **10,9** mm *((6.6))*
-- Współczynnik redukcyjny w połowie wysokości: Φ_m = A₁·exp(−u²/2), A₁ = 1 − 2e_mk/t, u = (λ − 0,063)/(0,73 − 1,17e_mk/t) = λ = 0,516, A₁ = 0,879, u = 0,687 = **0,694** *(zał. G (G.1–G.4), E = K_E·f_k)*
-- Nośność: N_Rd = Φ·t·f_d = (góra / środek / dół) 0,868 / 0,694 / 0,900 · 180 mm · 4,50 MPa = **703,8 / 562,9 / 729,6** kN/m *((6.2))*
+- Mimośród w połowie wysokości: e_m = (M_md + M_w)/N_m + e_init = (0,41 + 0,00)/199,2 + 0,0049 = **6,9** mm *((6.7))*
+- Mimośród od pełzania: e_k = 0 (h_ef/t_ef ≤ λ_c) = **0,0** mm *(6.1.2.2(2) [NZW NA])*
+- Mimośród całkowity: e_mk = e_m + e_k ≥ 0,05t = **9,0** mm *((6.6))*
+- Współczynnik redukcyjny w połowie wysokości: Φ_m = A₁·exp(−u²/2), A₁ = 1 − 2e_mk/t, u = (λ − 0,063)/(0,73 − 1,17e_mk/t) = λ = 0,387, A₁ = 0,900, u = 0,482 = **0,801** *(zał. G (G.1–G.4), E = K_E·f_k)*
+- Nośność: N_Rd = Φ·t·f_d = (góra / środek / dół) 0,897 / 0,801 / 0,900 · 180 mm · 4,50 MPa = **727,4 / 649,6 / 729,6** kN/m *((6.2))*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Smukłość ściany | h_ef/t_ef = 16,3  | 27 = 27,0  | 60% | spełniony | 5.5.1.4 |
-| Nośność — przekrój górny | N_Ed = 117,91 kN/m | N_Rd = 703,81 kN/m | 17% | spełniony | (6.2), (6.4) |
-| Nośność — połowa wysokości | N_Ed = 130,74 kN/m | N_Rd = 562,92 kN/m | 23% | spełniony | (6.2), zał. G |
-| Nośność — przekrój dolny | N_Ed = 143,56 kN/m | N_Rd = 729,61 kN/m | 20% | spełniony | (6.2), (6.4) |
-
-> Filarek liczony jako ściana podparta górą i dołem, ρ₂ = 1,0 (bezpiecznie); siły N na 1 m = N/b.
+| Smukłość ściany | h_ef/t_ef = 12,2  | 27 = 27,0  | 45% | spełniony | 5.5.1.4 |
+| Nośność — przekrój górny | N_Ed = 187,60 kN/m | N_Rd = 727,37 kN/m | 26% | spełniony | (6.2), (6.4) |
+| Nośność — połowa wysokości | N_Ed = 199,24 kN/m | N_Rd = 649,57 kN/m | 31% | spełniony | (6.2), zał. G |
+| Nośność — przekrój dolny | N_Ed = 210,88 kN/m | N_Rd = 729,61 kN/m | 29% | spełniony | (6.2), (6.4) |
 
 #### Wnioski
 
@@ -3578,12 +3644,12 @@ Sprawdzono 2 odcinków (filarki między otworami i pasma ściany) dla 34 kombina
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
 | QA | 3,92 | 18,3 |
-| G | 49,85 | 244,2 |
-| QA_pB | 2,57 | 11,6 |
-| QA_pA | 1,51 | 6,7 |
 | S2 | 1,44 | 6,5 |
+| QA_pA | 1,51 | 6,7 |
+| G | 49,85 | 244,2 |
 | S1 | 1,44 | 6,5 |
 | H | 0,80 | 3,6 |
+| QA_pB | 2,57 | 11,6 |
 
 #### Obliczenia
 
@@ -3645,14 +3711,14 @@ Sprawdzono 2 odcinków (filarki między otworami i pasma ściany) dla 34 kombina
 
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
-| G | 90,48 | 377,4 |
-| QA_pA | 0,00 | 0,0 |
-| SB2 | 3,96 | 13,6 |
-| S1 | 4,55 | 15,9 |
+| S2 | 6,72 | 23,4 |
 | H | 1,52 | 5,5 |
 | QA | 17,03 | 61,5 |
+| QA_pA | 0,00 | 0,0 |
+| G | 90,48 | 377,4 |
+| S1 | 4,55 | 15,9 |
+| SB2 | 3,96 | 13,6 |
 | QA_pB | 7,35 | 29,1 |
-| S2 | 6,72 | 23,4 |
 
 #### Obliczenia
 
@@ -3715,12 +3781,12 @@ Sprawdzono 2 odcinków (filarki między otworami i pasma ściany) dla 34 kombina
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
 | QA | 3,90 | 27,7 |
-| G | 50,78 | 314,4 |
-| QA_pB | 3,74 | 11,7 |
-| QA_pA | 0,00 | 2,5 |
 | S2 | 1,34 | 6,5 |
+| QA_pA | 0,00 | 2,5 |
+| G | 50,78 | 314,4 |
 | S1 | 1,34 | 6,5 |
 | H | 0,74 | 3,6 |
+| QA_pB | 3,74 | 11,7 |
 
 #### Obliczenia
 
@@ -3783,12 +3849,12 @@ Sprawdzono 2 odcinków (filarki między otworami i pasma ściany) dla 34 kombina
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
 | QA | 4,40 | 14,4 |
-| G | 52,08 | 271,2 |
-| QA_pB | 0,00 | 0,0 |
-| QA_pA | 5,25 | 17,0 |
 | S2 | 1,46 | 7,4 |
+| QA_pA | 5,25 | 17,0 |
+| G | 52,08 | 271,2 |
 | S1 | 1,46 | 7,4 |
 | H | 0,81 | 4,1 |
+| QA_pB | 0,00 | 0,0 |
 
 #### Obliczenia
 
@@ -3851,12 +3917,12 @@ Sprawdzono 2 odcinków (filarki między otworami i pasma ściany) dla 34 kombina
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
 | QA | 16,31 | 83,8 |
-| G | 123,00 | 687,3 |
-| QA_pB | 8,68 | 46,4 |
-| QA_pA | 7,63 | 37,4 |
 | S2 | 5,23 | 29,4 |
+| QA_pA | 7,63 | 37,4 |
+| G | 123,00 | 687,3 |
 | S1 | 5,23 | 29,4 |
 | H | 2,90 | 16,4 |
+| QA_pB | 8,68 | 46,4 |
 
 #### Obliczenia
 
@@ -4032,18 +4098,18 @@ Kody kształtu wg PN-EN ISO 3766: 00 — pręt prosty, 11 — odgięty 90°, 21 
 | D1/P2 | 5 | 8 | 00 narożne góra i dół, 2 kierunki | 1,56 | 96 |  | 149,76 |  |  |  |
 | ST1/P1 | 1 | 8 | 00 dół x | 4,50 | 62 |  | 279,00 |  |  |  |
 | ST1/P1 | 2 | 8 | 00 dół y | 8,30 | 19 |  | 157,70 |  |  |  |
-| ST1/P1 | 3 | 12 | 00 góra x (nad podporami) | 2,82 | 39 |  |  |  | 109,98 |  |
+| ST1/P1 | 3 | 8 | 00 góra x (nad podporami) | 2,82 | 89 |  | 250,98 |  |  |  |
 | ST1/P1 | 4 | 8 | 00 góra y (nad podporami) | 5,10 | 19 |  | 96,90 |  |  |  |
 | ST1/P1 | 5 | 8 | 00 narożne góra i dół, 2 kierunki | 1,24 | 80 |  | 99,20 |  |  |  |
 | ST1/P2 | 1 | 8 | 00 dół x | 6,10 | 62 |  | 378,20 |  |  |  |
 | ST1/P2 | 2 | 8 | 00 dół y | 8,30 | 33 |  | 273,90 |  |  |  |
-| ST1/P2 | 3 | 14 | 00 góra x (nad podporami) | 3,78 | 34 |  |  |  |  | 128,52 |
-| ST1/P2 | 4 | 8 | 00 góra y (nad podporami) | 5,10 | 26 |  | 132,60 |  |  |  |
+| ST1/P2 | 3 | 10 | 00 góra x (nad podporami) | 3,78 | 67 |  |  | 253,26 |  |  |
+| ST1/P2 | 4 | 8 | 00 góra y (nad podporami) | 5,10 | 27 |  | 137,70 |  |  |  |
 | ST1/P2 | 5 | 10 | 00 narożne góra i dół, 2 kierunki | 1,56 | 80 |  |  | 124,80 |  |  |
 | PL-D/P1 | 1 | 12 | 00 dół x | 4,21 | 24 |  |  |  | 101,04 |  |
 | PL-D/P1 | 2 | 12 | 00 dół y | 5,15 | 21 |  |  |  | 108,15 |  |
 | PL-D/P1 | 3 | 10 | 00 góra x (nad podporami) | 2,65 | 24 |  |  | 63,60 |  |  |
-| PL-D/P1 | 4 | 10 | 00 góra y (nad podporami) | 3,21 | 18 |  |  | 57,78 |  |  |
+| PL-D/P1 | 4 | 8 | 00 góra y (nad podporami) | 3,21 | 28 |  | 89,88 |  |  |  |
 | PL-D/P1 | 5 | 8 | 00 narożne góra i dół, 2 kierunki | 1,18 | 20 |  | 23,60 |  |  |  |
 | SCH1 — bieg 1 | 1 | 10 | 00 dołem wzdłuż biegu (+ odgięcia w podporach) | 4,06 | 6 |  |  | 24,36 |  |  |
 | SCH1 — bieg 1 | 2 | 8 | 00 rozdzielcze | 0,95 | 10 |  | 9,50 |  |  |  |
@@ -4123,11 +4189,11 @@ Kody kształtu wg PN-EN ISO 3766: 00 — pręt prosty, 11 — odgięty 90°, 21 
 | L5 | 2 | 6 | 51 40×20 cm | 1,40 | 29 | 40,60 |  |  |  |  |
 | F1 | 1 | 12 | 21 z odgięciem 15 cm | 0,80 | 6 |  |  |  | 4,80 |  |
 | F2 | 1 | 12 | 21 z odgięciem 15 cm | 0,80 | 6 |  |  |  | 4,80 |  |
-| **Długość łączna [m]** |  |  |  |  |  | 734,8 | 2991,5 | 629,6 | 951,1 | 137,0 |
+| **Długość łączna [m]** |  |  |  |  |  | 734,8 | 3337,4 | 825,1 | 841,1 | 8,4 |
 | Masa 1 m [kg/m] |  |  |  |  |  | 0,222 | 0,395 | 0,617 | 0,888 | 1,208 |
-| **Masa [kg]** |  |  |  |  |  | 163,1 | 1180,4 | 388,2 | 844,4 | 165,5 |
+| **Masa [kg]** |  |  |  |  |  | 163,1 | 1316,9 | 508,7 | 746,8 | 10,2 |
 
-Masa całkowita stali B500SP: **2741,6 kg**.
+Masa całkowita stali B500SP: **2745,6 kg**.
 
 ## Uwagi, uproszczenia i dane do uzupełnienia
 

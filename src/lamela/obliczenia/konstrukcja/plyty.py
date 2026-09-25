@@ -19,14 +19,13 @@ Konwencja: w dodatnie w dół (zgodnie z obciążeniem), m dodatnie — rozciąg
 from __future__ import annotations
 
 import math
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from functools import lru_cache
 
 import numpy as np
 import scipy.sparse as sp
 import scipy.sparse.linalg as spla
-from shapely.geometry import LineString, Point, Polygon, box
-from shapely.ops import unary_union
+from shapely.geometry import LineString, Point, Polygon
 
 from .wspolne import BladDanych
 
@@ -455,6 +454,7 @@ class PlytaMES:
         return f
 
     def rozwiaz(self, f: np.ndarray) -> WynikMES:
+        """Rozwiązanie układu K·u = f: ugięcia, momenty (m_x, m_y, m_xy) w środkach elementów, reakcje węzłowe."""
         u = np.zeros(len(f))
         u[self.free] = self._lu.solve(f[self.free])
         R = f - self.K @ u                                  # reakcje (w górę dodatnie) w węzłach podpartych
@@ -474,6 +474,7 @@ class PlytaMES:
 
     # ---------------- wyniki pomocnicze ----------------
     def reakcja(self, wynik: WynikMES, pid: str) -> float:
+        """Wypadkowa reakcji podpory [kN] (węzły wspólne kilku podpór — dzielone po równo)."""
         nd = self.sup_nodes.get(pid, [])
         return float((wynik.R[nd] / self.udzial[nd]).sum()) if nd else 0.0
 

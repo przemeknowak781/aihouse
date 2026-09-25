@@ -19,10 +19,22 @@
      "eta": 0.969
     },
     {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 14.3125,
+     "eta": 0.559
+    },
+    {
      "opis": "Zbrojenie na zginanie",
      "E": 241.28,
      "R": 251.3274,
      "eta": 0.96
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 18.9993,
+     "eta": 0.4211
     },
     {
      "opis": "Zbrojenie na zginanie",
@@ -31,10 +43,22 @@
      "eta": 0.9905
     },
     {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 10.0,
+     "R": 17.4836,
+     "eta": 0.572
+    },
+    {
      "opis": "Zbrojenie na zginanie",
      "E": 241.28,
      "R": 251.3274,
      "eta": 0.96
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 20.0,
+     "eta": 0.4
     },
     {
      "opis": "Zbrojenie na zginanie",
@@ -55,22 +79,28 @@
      "eta": 0.1152
     },
     {
-     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
-     "E": 8.0,
-     "R": 14.3125,
-     "eta": 0.559
-    },
-    {
      "opis": "Zbrojenie na zginanie",
      "E": 256.36,
      "R": 264.5552,
      "eta": 0.969
     },
     {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 26.6667,
+     "eta": 0.3
+    },
+    {
      "opis": "Zbrojenie na zginanie",
      "E": 241.28,
      "R": 251.3274,
      "eta": 0.96
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 20.0,
+     "eta": 0.4
     },
     {
      "opis": "Zbrojenie na zginanie",
@@ -79,10 +109,22 @@
      "eta": 0.9672
     },
     {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 9.0059,
+     "eta": 0.8883
+    },
+    {
      "opis": "Zbrojenie na zginanie",
      "E": 241.28,
      "R": 251.3274,
      "eta": 0.96
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 20.0,
+     "eta": 0.4
     },
     {
      "opis": "Zbrojenie na zginanie",
@@ -103,22 +145,28 @@
      "eta": 0.0354
     },
     {
-     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
-     "E": 8.0,
-     "R": 26.6667,
-     "eta": 0.3
-    },
-    {
      "opis": "Zbrojenie na zginanie",
      "E": 256.36,
      "R": 264.5552,
      "eta": 0.969
     },
     {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 14.3125,
+     "eta": 0.559
+    },
+    {
      "opis": "Zbrojenie na zginanie",
      "E": 241.28,
      "R": 251.3274,
      "eta": 0.96
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 18.9993,
+     "eta": 0.4211
     },
     {
      "opis": "Zbrojenie na zginanie",
@@ -127,10 +175,22 @@
      "eta": 0.9905
     },
     {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 10.0,
+     "R": 17.4836,
+     "eta": 0.572
+    },
+    {
      "opis": "Zbrojenie na zginanie",
      "E": 241.28,
      "R": 251.3274,
      "eta": 0.96
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 20.0,
+     "eta": 0.4
     },
     {
      "opis": "Zbrojenie na zginanie",
@@ -149,12 +209,6 @@
      "E": 34.1176,
      "R": 296.1603,
      "eta": 0.1152
-    },
-    {
-     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
-     "E": 8.0,
-     "R": 14.3125,
-     "eta": 0.559
     }
    ],
    "dane": {
@@ -219,22 +273,46 @@
      "eta": 0.9848
     },
     {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 8.3427,
+     "eta": 0.9589
+    },
+    {
      "opis": "Zbrojenie na zginanie",
      "E": 266.0706,
      "R": 279.2527,
      "eta": 0.9528
     },
     {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 180.0,
+     "R": 183.8026,
+     "eta": 0.9793
+    },
+    {
      "opis": "Zbrojenie na zginanie",
      "E": 633.0274,
-     "R": 641.4085,
-     "eta": 0.9869
+     "R": 654.4985,
+     "eta": 0.9672
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 10.0,
+     "R": 11.4871,
+     "eta": 0.8705
     },
     {
      "opis": "Zbrojenie na zginanie",
      "E": 216.32,
-     "R": 218.5456,
-     "eta": 0.9898
+     "R": 228.4795,
+     "eta": 0.9468
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 8.2132,
+     "eta": 0.974
     },
     {
      "opis": "Zbrojenie na zginanie",
@@ -255,34 +333,52 @@
      "eta": 0.5207
     },
     {
-     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
-     "E": 8.0,
-     "R": 8.3427,
-     "eta": 0.9589
-    },
-    {
      "opis": "Zbrojenie na zginanie",
      "E": 376.8701,
      "R": 386.6576,
      "eta": 0.9747
     },
     {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 10.7316,
+     "eta": 0.7455
+    },
+    {
      "opis": "Zbrojenie na zginanie",
      "E": 216.32,
      "R": 218.5456,
      "eta": 0.9898
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 8.6909,
+     "eta": 0.9205
     },
     {
      "opis": "Zbrojenie na zginanie",
      "E": 531.8464,
-     "R": 538.5587,
-     "eta": 0.9875
+     "R": 558.5054,
+     "eta": 0.9523
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 8.8123,
+     "eta": 0.9078
     },
     {
      "opis": "Zbrojenie na zginanie",
      "E": 216.32,
      "R": 218.5456,
      "eta": 0.9898
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 16.0767,
+     "eta": 0.4976
     },
     {
      "opis": "Zbrojenie na zginanie",
@@ -303,16 +399,16 @@
      "eta": 0.3674
     },
     {
-     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
-     "E": 8.0,
-     "R": 10.7316,
-     "eta": 0.7455
-    },
-    {
      "opis": "Zbrojenie na zginanie",
      "E": 380.7658,
      "R": 386.6576,
      "eta": 0.9848
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 8.3427,
+     "eta": 0.9589
     },
     {
      "opis": "Zbrojenie na zginanie",
@@ -321,16 +417,34 @@
      "eta": 0.9528
     },
     {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 180.0,
+     "R": 183.8026,
+     "eta": 0.9793
+    },
+    {
      "opis": "Zbrojenie na zginanie",
      "E": 633.0274,
-     "R": 641.4085,
-     "eta": 0.9869
+     "R": 654.4985,
+     "eta": 0.9672
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 10.0,
+     "R": 11.4871,
+     "eta": 0.8705
     },
     {
      "opis": "Zbrojenie na zginanie",
      "E": 216.32,
-     "R": 218.5456,
-     "eta": 0.9898
+     "R": 228.4795,
+     "eta": 0.9468
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 8.2132,
+     "eta": 0.974
     },
     {
      "opis": "Zbrojenie na zginanie",
@@ -349,12 +463,6 @@
      "E": 34.1176,
      "R": 65.5189,
      "eta": 0.5207
-    },
-    {
-     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
-     "E": 8.0,
-     "R": 8.3427,
-     "eta": 0.9589
     }
    ],
    "dane": {
@@ -390,7 +498,7 @@
       "Ax": 386.65755736489757,
       "Ay": 279.2526803190927,
       "w": 8.66545185930425,
-      "eta": 0.9898164220771156,
+      "eta": 0.9847622692102966,
       "lx": 5.8,
       "ly": 8.0,
       "brzegi": "USSS",
@@ -419,10 +527,22 @@
      "eta": 0.9894
     },
     {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 210.0,
+     "R": 214.9601,
+     "eta": 0.9769
+    },
+    {
      "opis": "Zbrojenie na zginanie",
      "E": 591.2815,
      "R": 595.2491,
      "eta": 0.9933
+    },
+    {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 190.0,
+     "R": 212.7813,
+     "eta": 0.8929
     },
     {
      "opis": "Zbrojenie na zginanie",
@@ -431,10 +551,22 @@
      "eta": 0.9677
     },
     {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 210.0,
+     "R": 221.2335,
+     "eta": 0.9492
+    },
+    {
      "opis": "Zbrojenie na zginanie",
      "E": 350.5895,
-     "R": 356.9992,
-     "eta": 0.982
+     "R": 359.0392,
+     "eta": 0.9765
+    },
+    {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 140.0,
+     "R": 218.7389,
+     "eta": 0.64
     },
     {
      "opis": "Zbrojenie na zginanie",
@@ -453,12 +585,6 @@
      "E": 25.2258,
      "R": 32.4449,
      "eta": 0.7775
-    },
-    {
-     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
-     "E": 210.0,
-     "R": 214.9601,
-     "eta": 0.9769
     },
     {
      "opis": "Zbrojenie na zginanie",
@@ -467,10 +593,22 @@
      "eta": 0.9894
     },
     {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 210.0,
+     "R": 214.9601,
+     "eta": 0.9769
+    },
+    {
      "opis": "Zbrojenie na zginanie",
      "E": 591.2815,
      "R": 595.2491,
      "eta": 0.9933
+    },
+    {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 190.0,
+     "R": 212.7813,
+     "eta": 0.8929
     },
     {
      "opis": "Zbrojenie na zginanie",
@@ -479,10 +617,22 @@
      "eta": 0.9677
     },
     {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 210.0,
+     "R": 221.2335,
+     "eta": 0.9492
+    },
+    {
      "opis": "Zbrojenie na zginanie",
      "E": 350.5895,
-     "R": 356.9992,
-     "eta": 0.982
+     "R": 359.0392,
+     "eta": 0.9765
+    },
+    {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 140.0,
+     "R": 218.7389,
+     "eta": 0.64
     },
     {
      "opis": "Zbrojenie na zginanie",
@@ -501,12 +651,6 @@
      "E": 25.2258,
      "R": 32.4449,
      "eta": 0.7775
-    },
-    {
-     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
-     "E": 210.0,
-     "R": 214.9601,
-     "eta": 0.9769
     }
    ],
    "dane": {
@@ -627,12 +771,6 @@
      "E": 250.8027,
      "R": 307.8761,
      "eta": 0.8146
-    },
-    {
-     "opis": "Zbrojenie górne",
-     "E": 138.4344,
-     "R": 226.1947,
-     "eta": 0.612
     },
     {
      "opis": "Nośność krzyżulców betonowych",
@@ -1641,21 +1779,27 @@
     },
     {
      "opis": "Nośność — przekrój górny",
-     "E": 3.7218,
-     "R": 373.1323,
-     "eta": 0.01
+     "E": 6.3192,
+     "R": 399.344,
+     "eta": 0.0158
     },
     {
      "opis": "Nośność — połowa wysokości",
-     "E": 15.0589,
-     "R": 431.6154,
-     "eta": 0.0349
+     "E": 22.5318,
+     "R": 457.5258,
+     "eta": 0.0492
     },
     {
      "opis": "Nośność — przekrój dolny",
-     "E": 26.396,
-     "R": 563.4081,
-     "eta": 0.0469
+     "E": 38.7443,
+     "R": 602.9863,
+     "eta": 0.0643
+    },
+    {
+     "opis": "Obciążenie poziome — przesklepienie",
+     "E": 1.3316,
+     "R": 17.8398,
+     "eta": 0.0746
     }
    ],
    "dane": {}
@@ -1665,7 +1809,7 @@
    "id": "S1-02",
    "tytul": "Ściana S1-02 (P1, zewnętrzna nośna)",
    "rodzaj": "sciana",
-   "wykorzystanie": 0.5885,
+   "wykorzystanie": 0.4414,
    "ok": true,
    "przyjeto": [
     "Mur: Bloczek wapienno-piaskowy 18 cm, kl. 20, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
@@ -1673,27 +1817,33 @@
    "warunki": [
     {
      "opis": "Smukłość ściany",
-     "E": 15.8889,
+     "E": 11.9167,
      "R": 27.0,
-     "eta": 0.5885
+     "eta": 0.4414
     },
     {
      "opis": "Nośność — przekrój górny",
-     "E": 5.8446,
-     "R": 399.344,
-     "eta": 0.0146
+     "E": 11.7614,
+     "R": 497.5183,
+     "eta": 0.0236
     },
     {
      "opis": "Nośność — połowa wysokości",
-     "E": 20.4941,
-     "R": 456.901,
-     "eta": 0.0449
+     "E": 24.1028,
+     "R": 104.9294,
+     "eta": 0.2297
     },
     {
      "opis": "Nośność — przekrój dolny",
-     "E": 35.1436,
-     "R": 602.9863,
-     "eta": 0.0583
+     "E": 36.4442,
+     "R": 729.6135,
+     "eta": 0.0499
+    },
+    {
+     "opis": "Obciążenie poziome — przesklepienie",
+     "E": 1.3316,
+     "R": 17.8398,
+     "eta": 0.0746
     }
    ],
    "dane": {}
@@ -1717,21 +1867,27 @@
     },
     {
      "opis": "Nośność — przekrój górny",
-     "E": 5.4155,
-     "R": 399.344,
-     "eta": 0.0136
+     "E": 13.604,
+     "R": 469.1323,
+     "eta": 0.029
     },
     {
      "opis": "Nośność — połowa wysokości",
-     "E": 15.0851,
-     "R": 447.1648,
-     "eta": 0.0337
+     "E": 24.0876,
+     "R": 493.6642,
+     "eta": 0.0488
     },
     {
      "opis": "Nośność — przekrój dolny",
-     "E": 24.7547,
-     "R": 602.9863,
-     "eta": 0.0411
+     "E": 34.5711,
+     "R": 708.3626,
+     "eta": 0.0488
+    },
+    {
+     "opis": "Obciążenie poziome — przesklepienie",
+     "E": 1.3316,
+     "R": 17.8398,
+     "eta": 0.0746
     }
    ],
    "dane": {}
@@ -1741,7 +1897,7 @@
    "id": "S1-04",
    "tytul": "Ściana S1-04 (P1, zewnętrzna nośna)",
    "rodzaj": "sciana",
-   "wykorzystanie": 0.5885,
+   "wykorzystanie": 0.7894,
    "ok": true,
    "przyjeto": [
     "Mur: Bloczek wapienno-piaskowy 18 cm, kl. 20, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
@@ -1749,27 +1905,33 @@
    "warunki": [
     {
      "opis": "Smukłość ściany",
-     "E": 15.8889,
+     "E": 11.9167,
      "R": 27.0,
-     "eta": 0.5885
+     "eta": 0.4414
     },
     {
      "opis": "Nośność — przekrój górny",
-     "E": 9.5832,
-     "R": 483.2063,
-     "eta": 0.0198
+     "E": 10.156,
+     "R": 497.5183,
+     "eta": 0.0204
     },
     {
      "opis": "Nośność — połowa wysokości",
-     "E": 17.0963,
-     "R": 509.1414,
-     "eta": 0.0336
+     "E": 19.8866,
+     "R": 25.1921,
+     "eta": 0.7894
     },
     {
      "opis": "Nośność — przekrój dolny",
-     "E": 24.6095,
+     "E": 29.6172,
      "R": 729.6135,
-     "eta": 0.0337
+     "eta": 0.0406
+    },
+    {
+     "opis": "Obciążenie poziome — przesklepienie",
+     "E": 1.3316,
+     "R": 17.8398,
+     "eta": 0.0746
     }
    ],
    "dane": {}
@@ -1793,21 +1955,21 @@
     },
     {
      "opis": "Nośność — przekrój górny",
-     "E": 35.0561,
-     "R": 672.3653,
-     "eta": 0.0521
+     "E": 50.1434,
+     "R": 503.4559,
+     "eta": 0.0996
     },
     {
      "opis": "Nośność — połowa wysokości",
-     "E": 44.8768,
-     "R": 560.9957,
-     "eta": 0.08
+     "E": 78.8104,
+     "R": 425.2977,
+     "eta": 0.1853
     },
     {
      "opis": "Nośność — przekrój dolny",
-     "E": 54.6974,
-     "R": 729.6135,
-     "eta": 0.075
+     "E": 107.4773,
+     "R": 546.3223,
+     "eta": 0.1967
     }
    ],
    "dane": {}
@@ -1831,21 +1993,27 @@
     },
     {
      "opis": "Nośność — przekrój górny",
-     "E": 29.8433,
-     "R": 568.347,
-     "eta": 0.0525
+     "E": 43.2018,
+     "R": 544.2448,
+     "eta": 0.0794
     },
     {
      "opis": "Nośność — połowa wysokości",
-     "E": 43.0026,
-     "R": 464.6411,
-     "eta": 0.0926
+     "E": 71.1086,
+     "R": 441.5399,
+     "eta": 0.161
     },
     {
      "opis": "Nośność — przekrój dolny",
-     "E": 56.1619,
-     "R": 602.9863,
-     "eta": 0.0931
+     "E": 99.0155,
+     "R": 563.4081,
+     "eta": 0.1757
+    },
+    {
+     "opis": "Obciążenie poziome — przesklepienie",
+     "E": 1.3316,
+     "R": 16.9397,
+     "eta": 0.0786
     }
    ],
    "dane": {}
@@ -1869,21 +2037,27 @@
     },
     {
      "opis": "Nośność — przekrój górny",
-     "E": 48.5876,
-     "R": 600.566,
-     "eta": 0.0809
+     "E": 113.9672,
+     "R": 544.4699,
+     "eta": 0.2093
     },
     {
      "opis": "Nośność — połowa wysokości",
-     "E": 63.5781,
-     "R": 519.9976,
-     "eta": 0.1223
+     "E": 150.4088,
+     "R": 477.9283,
+     "eta": 0.3147
     },
     {
      "opis": "Nośność — przekrój dolny",
-     "E": 78.5687,
-     "R": 729.6135,
-     "eta": 0.1077
+     "E": 186.8505,
+     "R": 678.7102,
+     "eta": 0.2753
+    },
+    {
+     "opis": "Obciążenie poziome — przesklepienie",
+     "E": 1.3316,
+     "R": 16.9397,
+     "eta": 0.0786
     },
     {
      "opis": "Docisk",
@@ -1899,7 +2073,7 @@
    "id": "S0-03",
    "tytul": "Ściana S0-03 (P0, zewnętrzna nośna)",
    "rodzaj": "sciana",
-   "wykorzystanie": 0.6039,
+   "wykorzystanie": 0.4529,
    "ok": true,
    "przyjeto": [
     "Mur: Bloczek wapienno-piaskowy 18 cm, kl. 20, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
@@ -1907,27 +2081,33 @@
    "warunki": [
     {
      "opis": "Smukłość ściany",
-     "E": 16.3056,
+     "E": 12.2292,
      "R": 27.0,
-     "eta": 0.6039
+     "eta": 0.4529
     },
     {
      "opis": "Nośność — przekrój górny",
-     "E": 29.9293,
-     "R": 536.0921,
-     "eta": 0.0558
+     "E": 50.9787,
+     "R": 656.8591,
+     "eta": 0.0776
     },
     {
      "opis": "Nośność — połowa wysokości",
-     "E": 52.5417,
-     "R": 439.5747,
-     "eta": 0.1195
+     "E": 70.1123,
+     "R": 452.2085,
+     "eta": 0.155
     },
     {
      "opis": "Nośność — przekrój dolny",
-     "E": 75.1541,
-     "R": 563.4081,
-     "eta": 0.1334
+     "E": 89.246,
+     "R": 729.6135,
+     "eta": 0.1223
+    },
+    {
+     "opis": "Obciążenie poziome — przesklepienie",
+     "E": 1.3316,
+     "R": 16.9397,
+     "eta": 0.0786
     }
    ],
    "dane": {}
@@ -1937,7 +2117,7 @@
    "id": "S0-04",
    "tytul": "Ściana S0-04 (P0, zewnętrzna nośna)",
    "rodzaj": "sciana",
-   "wykorzystanie": 0.6039,
+   "wykorzystanie": 0.4529,
    "ok": true,
    "przyjeto": [
     "Mur: Bloczek wapienno-piaskowy 18 cm, kl. 20, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
@@ -1945,27 +2125,33 @@
    "warunki": [
     {
      "opis": "Smukłość ściany",
-     "E": 16.3056,
+     "E": 12.2292,
      "R": 27.0,
-     "eta": 0.6039
+     "eta": 0.4529
     },
     {
      "opis": "Nośność — przekrój górny",
-     "E": 32.7868,
-     "R": 676.5489,
-     "eta": 0.0485
+     "E": 48.7038,
+     "R": 660.7201,
+     "eta": 0.0737
     },
     {
      "opis": "Nośność — połowa wysokości",
-     "E": 41.8912,
-     "R": 553.5895,
-     "eta": 0.0757
+     "E": 62.6503,
+     "R": 427.7423,
+     "eta": 0.1465
     },
     {
      "opis": "Nośność — przekrój dolny",
-     "E": 50.9956,
+     "E": 76.5969,
      "R": 729.6135,
-     "eta": 0.0699
+     "eta": 0.105
+    },
+    {
+     "opis": "Obciążenie poziome — przesklepienie",
+     "E": 1.3316,
+     "R": 16.9397,
+     "eta": 0.0786
     }
    ],
    "dane": {}
@@ -1975,7 +2161,7 @@
    "id": "S0-05",
    "tytul": "Ściana S0-05 (P0, wewnętrzna nośna)",
    "rodzaj": "sciana",
-   "wykorzystanie": 0.6039,
+   "wykorzystanie": 0.4529,
    "ok": true,
    "przyjeto": [
     "Mur: Bloczek wapienno-piaskowy 18 cm, kl. 20, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
@@ -1983,27 +2169,27 @@
    "warunki": [
     {
      "opis": "Smukłość ściany",
-     "E": 16.3056,
+     "E": 12.2292,
      "R": 27.0,
-     "eta": 0.6039
+     "eta": 0.4529
     },
     {
      "opis": "Nośność — przekrój górny",
-     "E": 117.9091,
-     "R": 703.8074,
-     "eta": 0.1675
+     "E": 187.6023,
+     "R": 727.3665,
+     "eta": 0.2579
     },
     {
      "opis": "Nośność — połowa wysokości",
-     "E": 130.7359,
-     "R": 562.9191,
-     "eta": 0.2322
+     "E": 199.2402,
+     "R": 649.5708,
+     "eta": 0.3067
     },
     {
      "opis": "Nośność — przekrój dolny",
-     "E": 143.5627,
+     "E": 210.8781,
      "R": 729.6135,
-     "eta": 0.1968
+     "eta": 0.289
     }
    ],
    "dane": {}

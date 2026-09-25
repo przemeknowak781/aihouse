@@ -14,7 +14,7 @@ Jednostki argumentów: M [kNm], V [kN], wymiary [m]; wewnątrz przeliczane na N 
 from __future__ import annotations
 
 import math
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 import numpy as np
 
@@ -619,6 +619,7 @@ def zakotwienie(fi: float, beton: Beton, stal: StalZbrojeniowa | None = None, si
 
 
 def tabela_zakotwien(beton: Beton, srednice=(8, 10, 12, 16, 20), stal: StalZbrojeniowa | None = None) -> str:
+    """Tabela l_bd i l₀ (8.4, 8.7) dla typowych średnic — warunki dobre i „inne” (η₁ = 0,7)."""
     rows = []
     for fi in srednice:
         a = zakotwienie(fi, beton, stal)
@@ -756,6 +757,7 @@ def wykaz_stali(prety: list[Pret], zapas: float = 0.0) -> str:
 
 
 def masa_stali(prety: list[Pret]) -> float:
+    """Masa stali zbrojeniowej [kg] listy prętów (PN-EN ISO 3766 — masy jednostkowe ρ = 7850 kg/m³)."""
     return sum(p.masa for p in prety)
 
 

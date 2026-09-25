@@ -75,6 +75,7 @@ def _podpory(ax, g, lw=3.2):
 # Płyty
 # ==================================================================================================
 def rys_plyta(an, g, path: Path) -> list:
+    """Schemat statyczny płyty (pola, podpory, obciążenia liniowe) i mapy: M dół/góra (Wood–Armer), ugięcie SLS."""
     fe = g.fe
     out = []
     # (a) schemat
@@ -83,7 +84,6 @@ def rys_plyta(an, g, path: Path) -> list:
     for e in g.el:
         _ring(ax, e.poly_full, color=MUTED, lw=0.5, ls=":")
     for c in g.komorki:
-        x0, y0, x1, y1 = c["x0"], c["y0"], c["x1"], c["y1"]
         cx, cy = c["rect"].representative_point().coords[0]
         ax.text(cx, cy, f"{c['id']}\n{_pl(c['lx'])}×{_pl(c['ly'])} m\n{c['brzegi']}", ha="center", va="center",
                 fontsize=7, color=INK, bbox=dict(fc="white", ec=GRID, lw=0.5, boxstyle="round,pad=0.25"))
@@ -189,6 +189,7 @@ def _wykres(ax, x, vmax, vmin, jedn, tyt, odwr=True):
 
 
 def rys_belka(belka, pods, rozw, Ms, Vs, bid, path: Path) -> list:
+    """Schemat belki i obwiednie M, V."""
     x = belka.x
     L = belka.L
     fig, axs = plt.subplots(3, 1, figsize=(7.0, 5.6), sharex=True, gridspec_kw={"height_ratios": [0.8, 1.2, 1.2]})
@@ -207,6 +208,7 @@ def rys_belka(belka, pods, rozw, Ms, Vs, bid, path: Path) -> list:
 # Schody
 # ==================================================================================================
 def rys_schody(wyn, odc, path: Path) -> list:
+    """Widok boczny płyty schodowej i obwiednia M."""
     fig, axs = plt.subplots(2, 1, figsize=(7.0, 4.6), sharex=True, gridspec_kw={"height_ratios": [1.2, 1]})
     ax = axs[0]
     z = 0.0
@@ -242,6 +244,7 @@ def rys_schody(wyn, odc, path: Path) -> list:
 # Ściany
 # ==================================================================================================
 def rys_sciana(w, pr, path: Path) -> list:
+    """Widok ściany z otworami i profile obciążeń liniowych (góra/dół)."""
     fig, axs = plt.subplots(2, 1, figsize=(7.0, 4.8), sharex=True, gridspec_kw={"height_ratios": [1, 1.1]})
     ax = axs[0]
     ax.add_patch(Rectangle((0, w.z_od), w.L, w.z_do - w.z_od, fc=FILL, ec=INK, lw=1))
@@ -272,6 +275,7 @@ def rys_sciana(w, pr, path: Path) -> list:
 
 
 def rys_slup(cid, L, NEd, path: Path) -> list:
+    """Schemat słupa (przegubowo zamocowanego)."""
     fig, ax = plt.subplots(figsize=(2.6, 3.6))
     ax.plot([0, 0], [0, L], color=INK, lw=2.4)
     for yy, s in ((0, 1), (L, -1)):
@@ -290,6 +294,7 @@ def rys_slup(cid, L, NEd, path: Path) -> list:
 # Fundamenty
 # ==================================================================================================
 def rys_lawa(fid, B, h, tw, D, prof, path: Path) -> list:
+    """Przekrój ławy i rozkład obciążenia wzdłuż ławy."""
     fig, axs = plt.subplots(1, 2, figsize=(8.4, 3.2), gridspec_kw={"width_ratios": [1, 1.7]})
     ax = axs[0]
     ax.add_patch(Rectangle((-B / 2, 0), B, h, fc=FILL, ec=INK, lw=1.1))
@@ -321,6 +326,7 @@ def rys_lawa(fid, B, h, tw, D, prof, path: Path) -> list:
 
 
 def rys_fundamenty(an, path: Path) -> list:
+    """Rzut fundamentów z wykorzystaniem nośności."""
     m = an.m
     fig, ax = plt.subplots(figsize=(7.2, 5.4))
     k0 = m.kondygnacje[0].id if m.kondygnacje else None
@@ -367,6 +373,7 @@ def rys_fundamenty(an, path: Path) -> list:
 
 
 def rys_zaspy(sniegi: list, path: Path) -> list:
+    """Profile zasp śnieżnych s(x)."""
     if not sniegi:
         return []
     fig, ax = plt.subplots(figsize=(7.0, 3.2))

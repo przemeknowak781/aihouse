@@ -23,6 +23,7 @@ import math
 from dataclasses import dataclass, field
 from typing import Any, Sequence
 
+from shapely.affinity import affine_transform
 from shapely.geometry import Point, Polygon, box
 from shapely.geometry.base import BaseGeometry
 from shapely.ops import unary_union
@@ -112,6 +113,9 @@ MATERIALY_DOMYSLNE: dict[str, Material] = {m.kod: m for m in [
     _m("BET_KOM_400", 0.11, "Beton komórkowy 400 (blok termiczny)", "#e6e1d6"),
     _m("ALU", 160.0, "Aluminium (stop)", "#9aa3ab"),
     _m("STAL", 50.0, "Stal", "#555a60"),
+    _m("PARAPET_WEWN", 0.18, "Parapet wewnętrzny (MDF / drewno)", "#caa472", zrodlo="PN-EN ISO 10456:2009 [ZAŁ]"),
+    _m("PROG_TERM", 0.05, "Podwalina / profil progowy termiczny (twarda pianka PUR / kompozyt)", "#e3b04b",
+       zrodlo="[DANE PRZYKŁADOWE – FIKCYJNE] λ typowego profilu progowego do ciepłego montażu (do zastąpienia DoP)"),
 ]}
 
 # łącznik termoizolacyjny płyty wspornikowej — λ_eq modułu izolacyjnego z prętami (DANE PRZYKŁADOWE)
@@ -598,30 +602,67 @@ def wezel_attyka(warstwy_sciany: Sequence[Warstwa], warstwy_dachu: Sequence[Wars
                                  + (f"; blok termiczny {blok_attyki[0].kod} h = {blok_attyki[1]} m" if blok_attyki else "")})
 
 
-def _okno_model(rama: Obszar, szyba: Obszar, x0: float, x_cut: float, yf0: float, d_f: float, ti: float, te: float,
-                id: str) -> Wezel:
-    S = S_STREFY
+# ---- krawędzie otworów okiennych: ościeże (rzut), nadproże i podokiennik (przekroje pionowe) -------------------
+# Geometria budowana w układzie lokalnym (s, n): s — wzdłuż ściany (mur s < 0, otwór s > 0, krawędź otworu w murze
+# s = 0), n — w poprzek ściany (lico wewn. n = 0, wnętrze n < 0, lico zewn. n = D). Przekształcenie do układu węzła:
+_TRANSFORMACJE = {
+    "oscieze": (1.0, 0.0, 0.0, 1.0),      # rzut: x = s, y = n
+    "nadproze": (0.0, 1.0, -1.0, 0.0),    # przekrój pionowy: x = n (wnętrze x < 0), y = −s (mur nad otworem)
+    "podokiennik": (0.0, 1.0, 1.0, 0.0),  # przekrój pionowy: x = n, y = s (mur pod otworem)
+}
+
+
+def _tr(rodzaj: str):
+    a, b, d, e = _TRANSFORMACJE[rodzaj]
+
+    def f(obj):
+        if isinstance(obj, tuple):
+            s_, n_ = obj
+            return (a * s_ + b * n_, d * s_ + e * n_)
+        return affine_transform(obj, [a, b, d, e, 0.0, 0.0])
+    return f
+
+
+def U_w_okna(U_f: float, U_g: float, b_f: float, psi_g: float = 0.0, B: float = 1.23, H: float = 1.48) -> float:
+    """U_w okna jednodzielnego wg PN-EN ISO 10077-1 (okno referencyjne 1,23 × 1,48 m):
+    U_w = (A_g·U_g + A_f·U_f + l_g·ψ_g)/A_w."""
+    A_w = B * H
+    bg, hg = B - 2 * b_f, H - 2 * b_f
+    A_g = bg * hg
+    return (A_g * U_g + (A_w - A_g) * U_f + 2 * (bg + hg) * psi_g) / A_w
+
+
+def _okno_model(rama: Obszar, szyba: Obszar, ti: float, te: float, id: str, rodzaj: str = "oscieze",
+                S: float = S_STREFY) -> Wezel:
+    """Podmodel „okno bez ściany” (rama + szyba) — L_2D odniesienia ψ osadzenia. Rama i szyba podane w układzie
+    węzła; ramka obejmuje je w kierunku „w poprzek ściany” (±S), a w kierunku wzdłuż ściany kończy się na krawędzi
+    ramy (płaszczyzna adiabatyczna — odpowiednik krawędzi okna) i na cięciu szyby."""
     ob = [rama, szyba]
-    strefy = strefy_z_dopelnienia(ob, box(x0, yf0 - S, x_cut, yf0 + d_f + S), [
-        ((x_cut - 0.01, yf0 - S / 2), _nas("wnętrze", ti, "wewn")),
-        ((x_cut - 0.01, yf0 + d_f + S / 2), _nas("zewnętrze", te, "zewn"))])
+    minx, miny, maxx, maxy = unary_union([rama.wielobok, szyba.wielobok]).bounds
+    if rodzaj == "oscieze":        # wzdłuż x, w poprzek y
+        ramka = box(minx, miny - S, maxx, maxy + S)
+        nas_i, nas_e = (maxx - 0.01, miny - S / 2), (maxx - 0.01, maxy + S / 2)
+        przekroj = "poziomy"
+    else:                          # przekroje pionowe: wzdłuż y, w poprzek x
+        ramka = box(minx - S, miny, maxx + S, maxy)
+        yk = maxy - 0.01 if rodzaj == "podokiennik" else miny + 0.01
+        nas_i, nas_e = (minx - S / 2, yk), (maxx + S / 2, yk)
+        przekroj = "pionowy"
+    strefy = strefy_z_dopelnienia(ob, ramka, [(nas_i, _nas("wnętrze", ti, "wewn")), (nas_e, _nas("zewnętrze", te, "zewn"))])
     return Wezel(id + "-okno", "Okno bez ściany (rama + szyba) — L_2D odniesienia", "okno", ob, strefy,
-                 przekroj="poziomy")
+                 przekroj=przekroj)
 
 
-def wezel_oscieze_okna(warstwy_sciany: Sequence[Warstwa], U_f: float = 0.95, b_f: float = 0.115, d_f: float = 0.082,
-                       U_g: float = 0.50, d_g: float = 0.044, polozenie: str = "w_izolacji", x0: float | None = None,
-                       wsuniecie: float = 0.05, zaklad_izolacji: float = 0.03, szczelina: float = 0.015,
-                       L: float | None = None,
-                       L_g: float = 0.25, theta_i: float | None = None, theta_e: float | None = None,
-                       id: str = "WZ-W1", nazwa: str | None = None, zrodlo_okna: str = "") -> Wezel:
-    """Ościeże okna (rzut). Oś x wzdłuż ściany (mur do x = 0, otwór x > 0), oś y w poprzek (lico wewn. y = 0).
-    polozenie: 'w_izolacji' — rama przed licem muru w warstwie ocieplenia (ciepły montaż na konsolach, x0 = −0,03
-    — rama zachodzi na mur); 'w_murze' — rama w otworze muru, lico zewn. ramy w licu muru, szczelina z pianką;
-    'czesciowo' — rama wsunięta w otwór muru na głębokość `wsuniecie`, reszta w warstwie ocieplenia (konwencja
-    modelu: 5 cm w murze, 4 cm w izolacji).
-    Izolacja ościeża zachodzi na ramę o `zaklad_izolacji`. ψ_inst = L_2D − U_ściany·l − L_2D,okna (okno bez ściany)."""
+def _wezel_krawedz_okna(rodzaj: str, warstwy_sciany: Sequence[Warstwa], U_f: float, b_f: float, d_f: float,
+                        U_g: float, d_g: float, polozenie: str, x0: float | None, wsuniecie: float,
+                        zaklad_izolacji: float, szczelina: float, L: float | None, L_g: float,
+                        theta_i: float | None, theta_e: float | None, id: str, nazwa: str | None, zrodlo_okna: str,
+                        U_w: float | None, psi_g: float, nadproze: tuple[Material, float] | None = None,
+                        kaseta: tuple[float, float] | None = None,
+                        parapet_wewn: tuple[Material, float, float] | None = None,
+                        parapet_zewn: tuple[Material, float, float] | None = None) -> Wezel:
     ti, te = _temperatury(theta_i, theta_e)
+    T = _tr(rodzaj)
     st = _stos(warstwy_sciany, 0.0)
     ks = indeks_konstrukcyjnej(warstwy_sciany)
     y_s1 = st[ks][1]
@@ -629,7 +670,6 @@ def wezel_oscieze_okna(warstwy_sciany: Sequence[Warstwa], U_f: float = 0.95, b_f
     L = L or odl_ciecia(D)
     m_r = material_rama(U_f, d_f, zrodlo=zrodlo_okna)
     m_g = material_szyba(U_g, d_g, zrodlo=zrodlo_okna)
-    ob: list[Obszar] = []
     if polozenie == "w_izolacji":
         wsuniecie = 0.0
     elif polozenie == "w_murze":
@@ -642,40 +682,152 @@ def wezel_oscieze_okna(warstwy_sciany: Sequence[Warstwa], U_f: float = 0.95, b_f
     rama_g = box(x0, yf0, x0 + b_f, yf0 + d_f)
     yg0 = yf0 + (d_f - d_g) / 2
     x_cut = x0 + b_f + L_g
+    s_izol = x0 + zaklad_izolacji          # zasięg izolacji ościeża (zakład na ramę)
+    d_t0 = warstwy_sciany[0].d if ks > 0 else 0.0
+    ob: list[Obszar] = []
+    wneka = None
+    if kaseta is not None:                 # kaseta osłony (żaluzja/screen) w warstwie ocieplenia nad oknem
+        h_k, gl_k = kaseta
+        n_k = max(y_s1 + 0.01, D - gl_k)
+        wneka = box(-h_k, n_k, s_izol, D + 1.0)
     for k, (a, b, w) in enumerate(st):
-        if k < ks:
-            ob.append(_obsz(box(-L, a, 0.0, b), w))
-        elif k == ks:
+        if k <= ks:
             ob.append(_obsz(box(-L, a, 0.0, b), w))
         else:
-            ob.append(_obsz(box(-L, a, x0 + zaklad_izolacji, b).difference(rama_g), w))
-    if ks > 0:   # tynk wewn. na ościeżu
-        ob.append(_obsz(box(0.0, 0.0, warstwy_sciany[0].d, yf0), warstwy_sciany[0], "tynk ościeża"))
+            g = box(-L, a, s_izol, b).difference(rama_g)
+            if wneka is not None:
+                g = g.difference(wneka)
+            ob.append(_obsz(g, w))
+    if nadproze is not None:
+        a, b, w = st[ks]
+        ob.append(_obsz(box(-min(nadproze[1], L), a, 0.0, b), nadproze[0], "nadproże"))
+    if parapet_wewn is not None:           # parapet wewnętrzny zamiast tynku ościeża
+        mat_pw, d_pw, wys_pw = parapet_wewn
+        ob.append(_obsz(box(0.0, -wys_pw, d_pw, yf0), mat_pw, "parapet wewnętrzny"))
+    elif ks > 0:   # tynk wewn. na ościeżu
+        ob.append(_obsz(box(0.0, 0.0, d_t0, yf0), warstwy_sciany[0], "tynk ościeża"))
     if wsuniecie > 0 and x0 > 0:
         ob.append(_obsz(box(0.0, yf0, x0, y_s1), MATERIALY_DOMYSLNE["PIANKA_PU"], "szczelina — pianka PU"))
     rama = _obsz(rama_g, m_r, "rama")
     szyba = _obsz(box(x0 + b_f, yg0, x_cut, yg0 + d_g), m_g, "szyba")
     ob += [rama, szyba]
+    if parapet_zewn is not None:           # parapet zewnętrzny (obróbka) na izolacji, wysunięty poza lico elewacji
+        mat_pz, d_pz, wys_pz = parapet_zewn
+        ob.append(_obsz(box(s_izol, yf0 + d_f, s_izol + d_pz, D + wys_pz), mat_pz, "parapet zewnętrzny"))
     S = S_STREFY
-    strefy = strefy_z_dopelnienia(ob, box(-L, -S, x_cut, D + S), [
-        ((-L / 2, -S / 2), _nas("wnętrze", ti, "wewn")),
-        ((-L / 2, D + S / 2), _nas("zewnętrze", te, "zewn"))])
-    okno = _okno_model(rama, szyba, x0, x_cut, yf0, d_f, ti, te, id)
-    fl = [ElementFlankujacy("ściana", ("i", "e"), L + x0, L + x0, warstwy=list(warstwy_sciany)),
-          ElementFlankujacy("okno (L_2D ramy z szybą, model bez ściany)", ("i", "e"), 1.0, 1.0, wezel_ref=okno)]
+    ob_t = [Obszar(T(o.wielobok), o.mat, o.nazwa) for o in ob]
+    ramka = T(box(-L, -S, x_cut, D + S))
+    strefy = strefy_z_dopelnienia(ob_t, ramka, [
+        (T((-L / 2, -S / 2)), _nas("wnętrze", ti, "wewn")),
+        (T((-L / 2, D + S / 2)), _nas("zewnętrze", te, "zewn"))])
+    okno = _okno_model(ob_t[-2 if parapet_zewn is None else -3], ob_t[-1 if parapet_zewn is None else -2], ti, te, id,
+                       rodzaj)
+    Uw = U_w if U_w is not None else U_w_okna(U_f, U_g, b_f, psi_g)
+    # ψ_e/ψ_i: ściana do krawędzi ramy (x0), okno = L_2D ramy z szybą (ISO 14683/10077 — wymiary okna po ramie);
+    # ψ_oi (energia.bryla — pole okna w świetle otworu w murze): ściana do krawędzi otworu s = 0, a pas okna między
+    # krawędzią ramy a krawędzią otworu (x0 > 0: szczelina; x0 < 0: rama za murem) — korekta U_w·x0.
+    fl = [ElementFlankujacy("ściana", ("i", "e"), L + x0, L + x0, warstwy=list(warstwy_sciany), l_oi=L),
+          ElementFlankujacy("okno (L_2D ramy z szybą, model bez ściany)", ("i", "e"), 1.0, 1.0, wezel_ref=okno),
+          ElementFlankujacy("okno — pas krawędź ramy ↔ krawędź otworu w murze (tylko system oi, U_w)", ("i", "e"),
+                            0.0, 0.0, U=Uw, l_oi=x0, zrodlo="PN-EN ISO 10077-1 (U_w okna referencyjnego)")]
     opis_pol = {"w_izolacji": "w warstwie izolacji (ciepły montaż)", "w_murze": "w murze (lico zewn. muru)",
                 "czesciowo": f"wsunięta {wsuniecie * 100:.0f} cm w mur, reszta w izolacji"}[polozenie]
-    return Wezel(id, nazwa or f"Ościeże okna — rama {opis_pol}",
-                 "oscieze", ob, strefy, fl, przekroj="poziomy",
-                 punkty={"naroże ościeża (mur)": (0.0, 0.0), "styk rama–ościeże": (max(0.0, x0), yf0)},
-                 widok=(-0.6, -0.1, x_cut, D + 0.1), psi_domyslne="W_oscieze",
-                 dane={"warstwy ściany": dane_warstw(warstwy_sciany),
-                       "okno": f"U_f = {U_f}, b_f = {b_f} m, d_f = {d_f} m (λ_eq ramy = {m_r.lam:.4f}); "
-                               f"U_g = {U_g}, d_g = {d_g} m (λ_eq = {m_g.lam:.4f}); położenie: {opis_pol}, "
-                               f"x0 = {x0} m, zakład izolacji {zaklad_izolacji} m {zrodlo_okna}"},
-                 uwagi=["Rama i szyba jako materiały zastępcze (λ_eq z U_f, U_g); ψ osadzenia liczone względem "
-                        "modelu okna bez ściany, więc uproszczenie ramy wpływa na ψ w małym stopniu. Ψ_g ramki "
-                        "dystansowej — poza zakresem (U_w wg PN-EN ISO 10077-1)."])
+    dane = {"warstwy ściany": dane_warstw(warstwy_sciany),
+            "okno": f"U_f = {U_f}, b_f = {b_f} m, d_f = {d_f} m (λ_eq ramy = {m_r.lam:.4f}); "
+                    f"U_g = {U_g}, d_g = {d_g} m (λ_eq = {m_g.lam:.4f}); U_w = {Uw:.3f} (ISO 10077-1, okno 1,23×1,48); "
+                    f"położenie: {opis_pol}, x0 = {x0} m, zakład izolacji {zaklad_izolacji} m {zrodlo_okna}"}
+    uwagi = ["Rama i szyba jako materiały zastępcze (λ_eq z U_f, U_g); ψ osadzenia liczone względem modelu okna bez "
+             "ściany, więc uproszczenie ramy wpływa na ψ w małym stopniu. Ψ_g ramki dystansowej — poza zakresem "
+             "(U_w wg PN-EN ISO 10077-1)."]
+    punkty = {"naroże ościeża (mur)": T((0.0, 0.0)), "styk rama–ościeże": T((max(x0, d_t0), yf0))}
+    typ, psi_d = "oscieze", "W_oscieze"
+    if rodzaj == "nadproze":
+        typ = "nadproze"
+        nz = nazwa or f"Nadproże okna — rama {opis_pol}" + (" + kaseta osłony w ociepleniu" if kaseta else "")
+        if nadproze is not None:
+            dane["nadproże"] = f"{nadproze[0].kod} (λ = {nadproze[0].lam}), h = {nadproze[1]} m [ZAŁ]"
+        if kaseta is not None:
+            dane["kaseta osłony"] = (f"wys. {kaseta[0]} m, głęb. w ociepleniu {kaseta[1]} m — wnętrze kasety "
+                                     f"(szczelina prowadnicy) jako powietrze zewnętrzne [ZAŁ]")
+            uwagi.append("Kaseta żaluzji/screenu podtynkowa: izolacja za kasetą zmniejszona do "
+                         f"{max(0.01, D - kaseta[1] - y_s1):.2f} m; wariant zalecany — kaseta natynkowa albo "
+                         "kaseta systemowa z izolacją (deklarowane ψ/f_Rsi producenta).")
+        uwagi.append("Przekrój pionowy przez nadproże: sufit ościeża (podsufitka) — R_si wg kierunku strumienia "
+                     "(ISO 6946: 0,10 strumień w górę).")
+    elif rodzaj == "podokiennik":
+        typ = "podokiennik"
+        nz = nazwa or f"Podokiennik — rama {opis_pol}, parapet wewn. i zewn."
+        if parapet_wewn is not None:
+            dane["parapet wewnętrzny"] = (f"{parapet_wewn[0].kod} (λ = {parapet_wewn[0].lam}), d = {parapet_wewn[1]} m, "
+                                          f"wysięg do wnętrza {parapet_wewn[2]} m [ZAŁ]")
+        if parapet_zewn is not None:
+            dane["parapet zewnętrzny"] = (f"{parapet_zewn[0].kod} (λ = {parapet_zewn[0].lam}), d = {parapet_zewn[1]} m, "
+                                          f"okapnik {parapet_zewn[2]} m przed licem [ZAŁ]; spadek pominięty")
+            uwagi.append("Parapet zewnętrzny (odprowadzenie wody): obróbka na izolacji podparapetowej, wsunięta pod "
+                         "profil podparapetowy ramy, okapnik ≥ 3–4 cm przed licem elewacji, spadek ≥ 5 %, zaślepki "
+                         "boczne w ościeżach; izolacja pod parapetem ciągła do ramy (brak mostka).")
+        uwagi.append("Przekrój pionowy przez podokiennik; parapet wewnętrzny o małym λ (drewno/MDF) — wariant "
+                     "ostrożny dla f_Rsi (ogranicza dopływ ciepła do naroża pod parapetem).")
+    else:
+        nz = nazwa or f"Ościeże okna — rama {opis_pol}"
+    wid = T(box(-0.6, -0.1, x_cut, D + 0.1)).bounds
+    return Wezel(id, nz, typ, ob_t, strefy, fl, przekroj="poziomy" if rodzaj == "oscieze" else "pionowy",
+                 punkty=punkty, widok=wid, psi_domyslne=psi_d, dane=dane, uwagi=uwagi)
+
+
+def wezel_oscieze_okna(warstwy_sciany: Sequence[Warstwa], U_f: float = 0.95, b_f: float = 0.115, d_f: float = 0.082,
+                       U_g: float = 0.50, d_g: float = 0.044, polozenie: str = "w_izolacji", x0: float | None = None,
+                       wsuniecie: float = 0.05, zaklad_izolacji: float = 0.03, szczelina: float = 0.015,
+                       L: float | None = None,
+                       L_g: float = 0.25, theta_i: float | None = None, theta_e: float | None = None,
+                       id: str = "WZ-W1", nazwa: str | None = None, zrodlo_okna: str = "",
+                       U_w: float | None = None, psi_g: float = 0.0) -> Wezel:
+    """Ościeże okna (rzut). Oś x wzdłuż ściany (mur do x = 0, otwór x > 0), oś y w poprzek (lico wewn. y = 0).
+    polozenie: 'w_izolacji' — rama przed licem muru w warstwie ocieplenia (ciepły montaż na konsolach, x0 = −0,03
+    — rama zachodzi na mur); 'w_murze' — rama w otworze muru, lico zewn. ramy w licu muru, szczelina z pianką;
+    'czesciowo' — rama wsunięta w otwór muru na głębokość `wsuniecie`, reszta w warstwie ocieplenia (konwencja
+    modelu: 5 cm w murze, 4 cm w izolacji).
+    Izolacja ościeża zachodzi na ramę o `zaklad_izolacji`. ψ_inst = L_2D − U_ściany·l − L_2D,okna (okno bez ściany);
+    ψ_oi — z korektą U_w·x0 (pole okna w świetle otworu w murze, jak w `energia.bryla`)."""
+    return _wezel_krawedz_okna("oscieze", warstwy_sciany, U_f, b_f, d_f, U_g, d_g, polozenie, x0, wsuniecie,
+                               zaklad_izolacji, szczelina, L, L_g, theta_i, theta_e, id, nazwa, zrodlo_okna, U_w, psi_g)
+
+
+def wezel_nadproze(warstwy_sciany: Sequence[Warstwa], U_f: float = 0.95, b_f: float = 0.115, d_f: float = 0.082,
+                   U_g: float = 0.50, d_g: float = 0.044, polozenie: str = "czesciowo", x0: float | None = None,
+                   wsuniecie: float = 0.05, zaklad_izolacji: float = 0.03, szczelina: float = 0.015,
+                   nadproze: tuple[Material, float] | None = None, kaseta: tuple[float, float] | None = None,
+                   L: float | None = None, L_g: float = 0.25, theta_i: float | None = None,
+                   theta_e: float | None = None, id: str = "WZ-N1", nazwa: str | None = None, zrodlo_okna: str = "",
+                   U_w: float | None = None, psi_g: float = 0.0) -> Wezel:
+    """Nadproże okna (przekrój pionowy): mur nad otworem z nadprożem (materiał, wysokość; domyślnie żelbet 0,24 m
+    [ZAŁ]) w warstwie konstrukcyjnej, izolacja ościeża górnego z zakładem na ramę; opcjonalnie kaseta osłony
+    zewnętrznej (żaluzja/screen) w warstwie ocieplenia: (wysokość, głębokość) — izolacja za kasetą zmniejszona."""
+    if nadproze is None:
+        nadproze = (MATERIALY_DOMYSLNE["ZB"], 0.24)
+    return _wezel_krawedz_okna("nadproze", warstwy_sciany, U_f, b_f, d_f, U_g, d_g, polozenie, x0, wsuniecie,
+                               zaklad_izolacji, szczelina, L, L_g, theta_i, theta_e, id, nazwa, zrodlo_okna, U_w, psi_g,
+                               nadproze=nadproze, kaseta=kaseta)
+
+
+def wezel_podokiennik(warstwy_sciany: Sequence[Warstwa], U_f: float = 0.95, b_f: float = 0.115, d_f: float = 0.082,
+                      U_g: float = 0.50, d_g: float = 0.044, polozenie: str = "czesciowo", x0: float | None = None,
+                      wsuniecie: float = 0.05, zaklad_izolacji: float = 0.03, szczelina: float = 0.015,
+                      parapet_wewn: tuple[Material, float, float] | None = None,
+                      parapet_zewn: tuple[Material, float, float] | None = None,
+                      L: float | None = None, L_g: float = 0.25, theta_i: float | None = None,
+                      theta_e: float | None = None, id: str = "WZ-P1", nazwa: str | None = None, zrodlo_okna: str = "",
+                      U_w: float | None = None, psi_g: float = 0.0) -> Wezel:
+    """Podokiennik (przekrój pionowy): mur pod otworem, rama na podkładce/piance, parapet wewnętrzny (materiał,
+    grubość, wysięg do wnętrza; domyślnie MDF/drewno 0,025 m, 0,03 m [ZAŁ]) i parapet zewnętrzny — obróbka blacharska
+    (domyślnie aluminium 1,5 mm, okapnik 0,04 m przed licem [ZAŁ]) na izolacji podparapetowej."""
+    if parapet_wewn is None:
+        parapet_wewn = (MATERIALY_DOMYSLNE["PARAPET_WEWN"], 0.025, 0.03)
+    if parapet_zewn is None:
+        parapet_zewn = (MATERIALY_DOMYSLNE["ALU"], 0.0015, 0.04)
+    return _wezel_krawedz_okna("podokiennik", warstwy_sciany, U_f, b_f, d_f, U_g, d_g, polozenie, x0, wsuniecie,
+                               zaklad_izolacji, szczelina, L, L_g, theta_i, theta_e, id, nazwa, zrodlo_okna, U_w, psi_g,
+                               parapet_wewn=parapet_wewn, parapet_zewn=parapet_zewn)
 
 
 def U_podlogi_13370(B: float, w: float, R_f: float, lam: float = LAMBDA_GRUNTU, Rsi: float = RSI_DOL,

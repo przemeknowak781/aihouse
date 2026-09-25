@@ -89,6 +89,7 @@ def _pozycja_md(pz: Pozycja, out_dir: Path, poziom: int = 3) -> list[str]:
 
 
 def spis_pozycji(an: AnalizaKonstrukcji) -> str:
+    """Tabela spisu pozycji z maks. wykorzystaniem nośności η i stanem warunków."""
     rows = []
     for g in an.pozycje:
         rows.append([f"**{g.nr}**", "", f"**{g.tytul}**", "", ""])
@@ -223,6 +224,7 @@ OGRANICZENIA = [
 
 
 def wyniki_json(an: AnalizaKonstrukcji) -> dict:
+    """Wyniki pozycji (warunki, wykorzystanie, wnioski, dane liczbowe) do eksportu JSON."""
     out = {"pozycje": [], "uwagi": an.uwagi, "brak_danych": an.brak_danych}
     for g in an.pozycje:
         for pz in g.podpozycje:

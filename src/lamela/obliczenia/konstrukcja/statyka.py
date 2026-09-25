@@ -161,6 +161,7 @@ class Belka:
         return qi, qj
 
     def rozwiaz(self, obc: list) -> Rozwiazanie:
+        """Rozwiązanie MES dla listy obciążeń (ObcQ, ObcP): reakcje, M(x), V(x) z równowagi, ugięcia węzłów."""
         # węzły w punktach nieciągłości obciążeń
         extra = []
         for o in obc:

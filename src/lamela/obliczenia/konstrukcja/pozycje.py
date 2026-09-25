@@ -16,7 +16,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 import numpy as np
-from shapely.geometry import LineString, MultiLineString, Point, Polygon, box
+from shapely.geometry import LineString, Point, Polygon, box
 from shapely.ops import unary_union
 
 from . import fundamenty as fund
@@ -25,13 +25,13 @@ from . import schody as schm
 from . import stal as stalm
 from . import zelbet
 from .materialy import (TABL_BETON, Beton, Mur, StalKonstr, StalZbrojeniowa, klasa_betonu_z_nazwy, klasa_muru_z_nazwy,
-                        pole_preta, przekroj)
+                        przekroj)
 from .obciazenia import (Oddz, ZestawienieStale, ciezar_materialu, kombinacje, obciazenie_uzytkowe, snieg_attyka,
                          snieg_B2_attyka, snieg_B2_uskok, snieg_dach_plaski, snieg_uskok, wiatr_dach_plaski, wiatr_qp,
                          wiatr_sciany, zastepcze_dzialowe, zestawienie_przegrody)
-from .plyty import PlytaMES, PodporaLiniowa, PodporaPunktowa, PoleCiagle, WynikMES, wood_armer, wyrownaj_moment_podporowy
-from .statyka import Belka, ObcP, ObcQ, Podpora
-from .wspolne import BladDanych, Krok, Parametry, Warunek, Wynik, f, tabela
+from .plyty import PlytaMES, PodporaLiniowa, PodporaPunktowa, PoleCiagle, WynikMES, wood_armer
+from .statyka import Belka, ObcQ, Podpora
+from .wspolne import BladDanych, Parametry, Wynik, f, tabela
 
 TOL_Z = 0.06
 TYPY_NOSNE = ("sciana_zewn", "sciana_wewn_nosna")
@@ -629,7 +629,7 @@ class AnalizaKonstrukcji:
     # ---------------- obciążenia na grupie ----------------
     def _obc_na_grupie(self, g: Grupa):
         """Ścianki działowe i ściany nośne bez podparcia poniżej, słupy stojące na płycie — obciążenia grupy."""
-        m, p = self.m, self.p
+        m = self.m
         self._podpory_grupy(g)
         for w in m.sciany():
             if abs(w.z_od - g.wierzch) > TOL_Z:
@@ -768,7 +768,7 @@ class AnalizaKonstrukcji:
 
     # ---------------- MES grupy ----------------
     def _analiza_grupy(self, g: Grupa):
-        p, m = self.p, self.m
+        p = self.p
         self._komorki(g)
         e0 = max(g.el, key=lambda e: e.poly.area)
         E0 = e0.beton.E_cm * 1000
@@ -1424,7 +1424,6 @@ class AnalizaKonstrukcji:
                 sc = zelbet.scinanie_strzemiona(VEd, bw, d, As, beton, self.stal, 8, 2, nazwa=f"{bid} — ścinanie")
                 poz.wyniki.append(sc)
                 Mqp = float(qp.M.max())
-                EI = 1.0
                 ug = zelbet.ugiecie_komplet(L, 1.0, h_tot, d, zg.As_req, As, beton, Mqp, qp.w_max(), p, b=bw, stal=self.stal,
                                             teowy=bool(h_pl) and b_eff / bw > 3, nazwa=f"{bid} — ugięcie")
                 poz.wyniki.append(ug)
@@ -1465,7 +1464,7 @@ class AnalizaKonstrukcji:
     # 4. Ściany murowe
     # ============================================================================================
     def _sciana(self, w):
-        m, p = self.m, self.p
+        m = self.m
         pr = self.prof.setdefault(w.id, {"top_s": Profil(w.L), "top_a": Profil(w.L), "dol": Profil(w.L), "otw": []})
         # reakcje płyt
         for g in self.grupy:
@@ -1910,7 +1909,6 @@ class AnalizaKonstrukcji:
                     continue
                 if w.z_od > top + 1.5:
                     continue
-                lw = LineString([tuple(w.p1), tuple(w.p2)])
                 if ln.distance(Point(*w.p1)) > 0.1 or ln.distance(Point(*w.p2)) > 0.1:
                     continue
                 pv = self.prof[w.id]["dol"]
