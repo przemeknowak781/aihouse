@@ -26,7 +26,8 @@ def r12(pab, D, d):
     rows = []
     for (kod, rola), wu in ob.u.items():
         if rola in ROLE and (kod, rola) in ob.klucze_ogrz:
-            rows.append({"Przegroda": f"{kod} — {_krotko(D.m.przegroda(kod).nazwa if D.m.przegroda(kod) else wu.nazwa)}",
+            pk = D.m.przegroda(kod)
+            rows.append({"Przegroda": f"{kod} — {_krotko(pk.nazwa)}" if pk else f"{kod.split('|')[0]} — {ROLE[rola]}",
                          "Rodzaj": ROLE[rola], "U [W/(m²·K)]": wu.U, "U_max [W/(m²·K)]": wu.U_max,
                          "Ocena": ok(wu.U_max is None or wu.U <= wu.U_max + 1e-9)})
     for rola, opis in (("okno", "okna, drzwi balkonowe, przeszklenia"), ("drzwi", "drzwi zewnętrzne i do garażu")):
@@ -123,7 +124,7 @@ def r13(pab, D, d):
     ]
     pab.rozdzial(tyt("Dane dotyczące warunków ochrony przeciwpożarowej", 13))
     pab.tabela([{"Parametr": a, "Ustalenie": b, "Podstawa": c} for a, b, c in rows], tytul="Warunki ochrony przeciwpożarowej",
-               lp=True, klasa="zwarta", szerokosci=["48mm", None, "52mm"],
+               klasa="zwarta", szerokosci=["46mm", None, "50mm"],
                uwagi=[f"Budynek mieszkalny jednorodzinny o nie więcej niż {zw} kondygnacjach nadziemnych — zwolnienie z WT § 212 "
                       "i § 216 na podstawie § 213 pkt 1 lit. a (zastrzeżenia § 217 ust. 2 i § 271 ust. 8a nie dotyczą). "
                       "Klas odporności ogniowej nie oznacza się na rysunkach (W-219)."],

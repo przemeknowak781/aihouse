@@ -55,11 +55,15 @@ def test_pasy_skladania():
         zakresy, xr = _paczka(pasy)
         assert abs(xr - 210.0) < 1e-6, f"{W}: prawa krawędź arkusza w paczce {xr} ≠ 210 (tabliczka nie w rogu)"
         assert all(a >= -1e-6 and b <= 210.0 + 1e-6 for a, b in zakresy), f"{W}: pas poza paczką A4 {zakresy}"
-        if W > 590.5:
-            assert pasy[0] == 210.0, (W, pasy)
+        if pasy[0] < 210.0 - 1e-6:                       # rodzina B: pasy 2…N nie zasłaniają marginesu na oprawę
+            assert all(a >= 20.0 - 1e-6 for a, _b in zakresy[1:]), (W, zakresy)
+        else:                                            # rodzina A: pary równe (warunek zamknięcia harmonijki)
             mid = pasy[1:]
-            for i in range(0, len(mid), 2):              # pary równe (warunek zamknięcia harmonijki)
+            for i in range(0, len(mid), 2):
                 assert abs(mid[i] - mid[i + 1]) < 1e-6, (W, pasy)
+        oc0 = SK.ocena_pionowa(pasy, W)[0]
+        for c in SK.warianty_pasow(W):                   # wybrany wariant ma najlepszą ocenę spośród poprawnych
+            assert SK.RANK[SK.ocena_pionowa(c, W)[0]] <= SK.RANK[oc0], (W, c, pasy)
         oc = SK.ocena_skladania(W, 420.0)
         if oc["ocena_pion"] == "dobre" and W > 420.5:
             assert all(180.0 - 1e-6 <= p <= 210.0 + 1e-6 for p in pasy[1:-1]), (W, pasy)
@@ -78,7 +82,11 @@ def test_skladanie_formaty_standardowe():
     assert fold_positions(970, 297)[0] == [210.0, 400.0, 590.0, 780.0]
     for L in (590, 970, 1350, 1730):                                     # L = 210 + 190·n, n parzyste
         assert SK.ocena_skladania(L, 594)["ocena"] == "dobre", L
-    assert SK.ocena_skladania(780, 297)["ocena_pion"] == "słabe"          # n nieparzyste: para 95 mm
+    # n nieparzyste: rodzina A dałaby parę 95 mm (210 + 95 + 95 + 190 + 190); rodzina B — pasy 142,5 mm
+    assert SK.pasy_pionowe(780) == [162.5, 142.5, 142.5, 142.5, 190.0]
+    assert SK.ocena_skladania(780, 297)["ocena_pion"] == "poprawne"
+    assert SK.pasy_pionowe(690) == [140.0, 120.0, 120.0, 120.0, 190.0]
+    assert min(SK.pasy_pionowe(650)) >= 110.0 - 1e-6
     for W, H in ((630.0000037, 594.0000047), (629.9999962, 593.9999951), (419.9999881, 594.0000047)):
         assert SK.ocena_skladania(W, H)["pasy"] == SK.ocena_skladania(round(W), round(H))["pasy"], (W, H)  # z PDF
 

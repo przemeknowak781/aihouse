@@ -167,8 +167,8 @@ def plan_skladania(arkusze: list[Arkusz]) -> list[dict]:
 
     Wykorzystuje ``lamela.draft.skladanie`` (te same linie co znaki składania na arkuszach ``lamela.draft``):
     sposób „do wpięcia” wg praktyki DIN 824 forma A, uogólniony na formaty wydłużone i niestandardowe — harmonijka
-    o nieparzystej liczbie pasów w parach równych, pierwszy pas z marginesem 20 mm na oprawę, pas z tabliczką
-    (≥ 190 mm) na wierzchu; potem zgięcia poziome co 297 mm od dołu. Zwraca listę ``{nr, format, wymiary,
+    o nieparzystej liczbie pasów ≤ 210 mm (rodziny A i B, wariant o najlepszej ocenie), pierwszy pas z marginesem
+    20 mm na oprawę, pas z tabliczką (≥ 190 mm) na wierzchu; potem zgięcia poziome co 297 mm od dołu. Zwraca listę ``{nr, format, wymiary,
     zlozenia_pionowe, zlozenia_poziome, pasy, rzedy, warstwy, ocena, tabliczka_na_wierzchu, opis}``
     (ocena: „dobre” / „poprawne” / „słabe” — progi jak ``tools/metryki_arkuszy.py``)."""
     try:

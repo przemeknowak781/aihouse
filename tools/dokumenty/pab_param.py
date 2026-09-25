@@ -11,6 +11,8 @@ KOL_POM = ["Nr", "Pomieszczenie", "Kategoria", "h w świetle [m]", "Pow. netto [
 
 def _h(r) -> str:
     """Wysokość w świetle albo strefa wysokości (pomieszczenia pod biegiem schodów — audyt A1, próbkowanie 0,25 m)."""
+    if "klatka" in r["nazwa"].lower():
+        return "—"
     if r.get("schody"):
         st = r.get("strefy") or {}
         z = [k for k, v in st.items() if v > 1e-6]
@@ -132,19 +134,20 @@ def _wysokosc(pab, D):
         {"Parametr": "Długość × szerokość budynku", "Wartość [m]": f"{L(D.wymiary['dl'])} × {L(D.wymiary['szer'])}",
          "Sposób wyznaczenia": "obrys zewnętrzny ścian wszystkich kondygnacji (kierunek W–E × N–S); z płytami wysuniętymi "
          f"i okapami {L(D.wymiary['dl_calk'])} × {L(D.wymiary['szer_calk'])} m", "Podstawa": "lit. c; lamela.wskazniki"},
-        {"Parametr": "Liczba kondygnacji", "Wartość [m]": f"{w['kondygnacje_nadziemne']['wartosc']} nadziemne, 0 podziemnych",
-         "Sposób wyznaczenia": "kondygnacje niezagłębione poniżej terenu", "Podstawa": w["kondygnacje_nadziemne"]["podstawa"]},
+        {"Parametr": "Liczba kondygnacji nadziemnych / podziemnych", "Wartość [m]": f"{w['kondygnacje_nadziemne']['wartosc']} / 0",
+         "Sposób wyznaczenia": "kondygnacja nadziemna — niezagłębiona poniżej terenu o więcej niż połowę wysokości "
+         "w świetle; budynek niepodpiwniczony", "Podstawa": w["kondygnacje_nadziemne"]["podstawa"]},
     ], tytul="Wysokość, wymiary i liczba kondygnacji", wyrownanie={"Wartość [m]": "r"}, klasa="zwarta",
-        szerokosci=["30mm", "22mm", None, "40mm"],
+        szerokosci=["30mm", "25mm", None, "38mm"],
         uwagi=[f"Poziom ±0,000 = {L(z0, 2)} m n.p.m. (posadzka parteru). Rzędne terenu {DANE_PRZYKLADOWE} — wg mapy do "
                f"celów projektowych. Średnica — nie dotyczy."], zrodlo="lamela.wskazniki (upzp art. 2 pkt 30 lit. a; WT § 6)")
     pab.markdown("## Dane dotyczące usytuowania niezbędne do oceny wymagań ochrony przeciwpożarowej (lit. e)")
-    rows = [{"Budynek sąsiedni (działka)": f"{s['nr']} — {s['opis']}", "Odl. od ścian [m]": s["d"],
-             "Odl. od płyt wysuniętych [m]": s["d_pl"], "Wymaganie [m]": D.v("usytuowanie", "odl_ppoz_ZL_ZL"),
+    rows = [{"Budynek sąsiedni (działka)": f"{s['nr']} — {s['opis']}", "Od ścian [m]": s["d"],
+             "Od płyt [m]": s["d_pl"], "Wymaganie [m]": D.v("usytuowanie", "odl_ppoz_ZL_ZL"),
              "Ocena": "spełnia" if min(s["d"], s["d_pl"]) >= D.v("usytuowanie", "odl_ppoz_ZL_ZL") else "NIE SPEŁNIA"}
             for s in D.sasiedzi]
     pab.tabela(rows, tytul="Odległości od budynków na działkach sąsiednich", klasa="zwarta",
-               szerokosci=[None, "20mm", "24mm", "20mm", "18mm"], zrodlo="model/dzialka.yaml: sasiedzi " + DANE_PRZYKLADOWE,
+               szerokosci=[None, "18mm", "18mm", "22mm", "18mm"], zrodlo="model/dzialka.yaml: sasiedzi " + DANE_PRZYKLADOWE,
                uwagi=[f"Wymaganie: {D.zr('usytuowanie', 'odl_ppoz_ZL_ZL')}; ściany zewnętrzne i przekrycie dachu projektowane "
                       "jako nierozprzestrzeniające ognia (bez zwiększenia odległości wg WT § 271 ust. 2; W-213). Położenie "
                       f"budynków sąsiednich — do potwierdzenia na mapie do celów projektowych {INT}."])

@@ -122,9 +122,9 @@ def r11(pab, D, d):
     uzasadnione — okres zwrotu nakładów nie dłuższy niż 5 lat (ust. 9; W-152). Wymagania WT § 147 ust. 5–7 dotyczą
     instalacji klimatyzacji — {'dotyczą' if chl else '**nie dotyczy** (budynek bez instalacji chłodzenia; model: energia.chlodzenie)'}.
 
-    **Możliwość techniczna:** ogrzewanie wodne płaszczyznowe zasilane z pompy ciepła, z rozdzielaczami na każdej kondygnacji
-    ({len(og.rozdzielacze)} rozdzielacze) i {len(petle)} pętlami grzejnymi obsługującymi {len(pom_reg)} pomieszczeń oraz
-    {len(grz)} ścianami grzewczymi w łazienkach i przy klatce schodowej. Każda pętla (grupa pętli pomieszczenia) ma siłownik
+    **Możliwość techniczna:** ogrzewanie wodne płaszczyznowe zasilane z pompy ciepła, z rozdzielaczami na każdej kondygnacji (liczba rozdzielaczy:
+    {len(og.rozdzielacze)}; pętle grzejne: {len(petle)}; pomieszczenia z pętlami: {len(pom_reg)}; ściany grzewcze w łazienkach
+    i przy klatce schodowej: {len(grz)}). Każda pętla (grupa pętli pomieszczenia) ma siłownik
     termoelektryczny na rozdzielaczu sterowany termostatem pomieszczeniowym — **regulacja indywidualna w każdym
     pomieszczeniu ogrzewanym jest technicznie możliwa** (opinia: projektant instalacji sanitarnych
     {do_uzup('imię, nazwisko, nr uprawnień')}). Temperatura zasilania prowadzona pogodowo przez regulator pompy ciepła

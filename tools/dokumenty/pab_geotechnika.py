@@ -68,7 +68,7 @@ def opinia(pab, D, d):
     Program badań dla kategorii II (propozycja): co najmniej {D.v('geotechnika', 'badania_punkty_min')} punkty badawcze
     (sondowania CPT/DPL, wiercenia) w obrysie budynku do głębokości ≥ {L(D.v('geotechnika', 'badania_glebokosc_pod_posadowieniem_min'), 1)}
     m poniżej poziomu posadowienia, badania laboratoryjne uziarnienia, oznaczenie współczynnika filtracji k_{{f}} w miejscu
-    niecki chłonnej ({D.zr('geotechnika', 'badania_punkty_min')}; {ZAL}). Metryki wykonanych otworów i sondowań:
+    niecki chłonnej (W-282, PN-EN 1997-2; {ZAL}). Metryki wykonanych otworów i sondowań:
     {do_uzup('metryki otworów, protokoły sondowań, data badań')}.
 
     # Warunki gruntowo-wodne {DANE_PRZYKLADOWE}
@@ -103,8 +103,8 @@ def opinia(pab, D, d):
 
     1. W projekcie technicznym (PT-2 BO) opracować dokumentację badań podłoża gruntowego i projekt geotechniczny (§ 7
        ust. 2, § 9–10); dokumentacja geologiczno-inżynierska — nie jest wymagana (§ 7 ust. 3).
-    2. Parametry geotechniczne w kategorii II wyznaczyć z badań polowych lub laboratoryjnych ({D.zr('geotechnika', 'gamma_R_v')}
-       — podejście obliczeniowe DA2*); sprawdzić osiadania ({D.zr('geotechnika', 'osiadanie_max')}).
+    2. Parametry geotechniczne w kategorii II wyznaczyć z badań polowych lub laboratoryjnych (§ 6 ust. 3); nośność podłoża
+       sprawdzić wg {D.zr('geotechnika', 'gamma_R_v')}, osiadania — {D.zr('geotechnika', 'osiadanie_max')}.
     3. Podsypkę pod XPS wykonać z piasku zagęszczonego warstwami; podłoże chronić przed rozluźnieniem i zawilgoceniem;
        odbiór dna wykopu z udziałem autora opinii / geotechnika {do_uzup('osoba odbierająca podłoże')}.
     4. Drenaż opaskowy — {str(dr.get('drenaz_opaskowy', '—')).lower()} (warunki wodne jw.); wody opadowe odprowadzać od budynku

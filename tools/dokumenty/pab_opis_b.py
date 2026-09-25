@@ -4,7 +4,16 @@ from __future__ import annotations
 from lamela.dokumenty import DANE_PRZYKLADOWE, do_uzup, liczba as L
 from lamela.dokumenty.znaczniki import INT, ZAL
 
-from pab_opis_a import tyt
+import re
+
+from pab_opis_a import ok, tyt
+
+
+def czysc(txt: str) -> str:
+    """Usuwa z opisów modelu odsyłacze do wewnętrznych audytów (A1–A3, J1–J3, K-n); zostawia id rejestru W-xxx."""
+    t = re.sub(r"\b(?:A\d|J\d) [A-Z]-?\d+;?\s*", "", str(txt))
+    t = re.sub(r"\((?:\s*;?\s*)\)", "", t)
+    return re.sub(r"\s{2,}", " ", t).strip()
 
 
 def dane_posadowienia(D) -> dict:
@@ -55,7 +64,7 @@ def r05(pab, D, d):
     ## Sposób posadowienia
 
     Posadowienie bezpośrednie na **żelbetowej płycie fundamentowej** grubości {L(pl[0]['h'], 2) if pl else '—'} m
-    ({(D.m.material(pl[0]['mat']).nazwa if pl and D.m.material(pl[0]['mat']) else '—')}), ułożonej na warstwie polistyrenu
+    ({(D.m.material(pl[0]['mat']).nazwa.split(' (')[0] if pl and D.m.material(pl[0]['mat']) else '—')}), ułożonej na warstwie polistyrenu
     ekstrudowanego grubości {L(P['xps'].d, 2) if P['xps'] else '—'} m, z pogrubieniami (żebrami) pod ścianami nośnymi
     ({'; '.join(f'{L(b, 2)} × {L(h, 2)} m' for b, h in zb_b)}) i pod słupami fasady ({len(P['stopy'])} szt.; przebicie).
     Płyta pod garażem obniżona względem części mieszkalnej (uskok w linii ściany dom–garaż). Wokół płyty
@@ -111,7 +120,7 @@ def r09(pab, D, d):
     drz = D.Dz.get("drzewa") or []
     istn = [x for x in drz if x.get("istn")]
     wyc = [x for x in istn if x.get("do_wyciecia")]
-    ce = next((x.get("opis") for x in D.Wy if x.get("typ") == "rekuperator"), "")
+    ce = czysc(next((x.get("opis") for x in D.Wy if x.get("typ") == "rekuperator"), ""))
     rad = D.m.material("MEMB_SBS_POD")
     pab.rozdzial(tyt("Wpływ obiektu na środowisko, zdrowie ludzi i obiekty sąsiednie (charakterystyka ekologiczna)", 9))
     pab.markdown(f"""
@@ -147,9 +156,11 @@ def r09(pab, D, d):
     ## Akustyka, drgania, promieniowanie, pola elektromagnetyczne (lit. d)
 
     Źródłem hałasu jest jednostka zewnętrzna pompy ciepła: poziom mocy akustycznej L_{{WA}} = {L(pc.get('L_WA_dB'), 0)} dB(A)
-    (dane wyrobu przykładowego {DANE_PRZYKLADOWE}); poziom na granicy działki L_{{A}} = {L(og['L_A_granica_dB'], 1)} dB(A)
-    ≤ {L(D.v('usytuowanie', 'halas_LAeq_noc_max'), 0)} dB (pora nocy; {D.zr('usytuowanie', 'halas_LAeq_noc_max')}) i
-    ≤ {L(D.v('usytuowanie', 'halas_LAeq_dzien_max'), 0)} dB (pora dnia) — obliczenia `lamela.obliczenia.sanitarne.ogrzewanie`
+    (dane wyrobu przykładowego {DANE_PRZYKLADOWE}); poziom na granicy działki L_{{A}} = {L(og['L_A_granica_dB'], 1)} dB(A);
+    dopuszczalny poziom w porze nocy {L(D.v('usytuowanie', 'halas_LAeq_noc_max'), 0)} dB —
+    {ok(og['L_A_granica_dB'] <= D.v('usytuowanie', 'halas_LAeq_noc_max'))}, w porze dnia
+    {L(D.v('usytuowanie', 'halas_LAeq_dzien_max'), 0)} dB — {ok(og['L_A_granica_dB'] <= D.v('usytuowanie', 'halas_LAeq_dzien_max'))}
+    ({D.zr('usytuowanie', 'halas_LAeq_noc_max')}) — obliczenia `lamela.obliczenia.sanitarne.ogrzewanie`
     (propagacja w półprzestrzeni z kierunkowością). Centrala wentylacyjna w pomieszczeniu technicznym: {ce}.
     Drgania — brak źródeł poza urządzeniami na podkładkach antywibracyjnych. Promieniowanie jonizujące i pola
     elektromagnetyczne — brak źródeł poza instalacją elektryczną nN i instalacją fotowoltaiczną (falownik z deklaracją
@@ -157,8 +168,8 @@ def r09(pab, D, d):
 
     ## Drzewostan, powierzchnia ziemi, gleba, wody (lit. e)
 
-    Na działce {len(istn)} drzew(a) istniejących — {'do wycinki: ' + ', '.join(x['id'] for x in wyc) if wyc else 'wszystkie zachowane'};
-    projektuje się {len(drz) - len(istn)} nowych drzew (PZT) {DANE_PRZYKLADOWE}. Warstwa gleby (ok.
+    Drzewa istniejące na działce: {len(istn)} — {'do wycinki: ' + ', '.join(x['id'] for x in wyc) if wyc else 'wszystkie zachowane'};
+    nowe nasadzenia drzew: {len(drz) - len(istn)} (PZT) {DANE_PRZYKLADOWE}. Warstwa gleby (ok.
     {L((D.B.get('geotechnika') or {}).get('humus'), 2)} m) zdjęta pod budynkiem i utwardzeniami, składowana i wykorzystana
     do kształtowania zieleni. Powierzchnia biologicznie czynna {L(D.w['pbc']['wartosc'])} m²
     ({L(100 * D.w['udzial_pbc']['wartosc'])} % działki) oraz dach zielony (rezerwa {L(D.w['pbc_rezerwa_dach']['wartosc'])} m²).

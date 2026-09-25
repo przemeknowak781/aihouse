@@ -127,7 +127,7 @@ def _kolor(nazwa: str) -> tuple[str, str]:
     if "drewn" in n or "dęb" in n or "termojesion" in n:
         return "naturalny kolor drewna" + (" (olejowane)" if "olejow" in n else ""), "naturalne drewno"
     if "czarn" in n:
-        return "czarny", do_uzup("kolor czarny spoza palety MPZP — interpretacja: tło szczeliny za lamelami")
+        return "czarny (tło za lamelami)", do_uzup("interpretacja zgodności z MPZP")
     if "żwir" in n:
         return "naturalny (kruszywo)", "— (pokrycie dachu)"
     if "substrat" in n or "sedum" in n:
@@ -152,7 +152,11 @@ def wyroby_elewacji(D) -> list[dict]:
             dodaj(lm["mat"], "lamele", lm["id"])
     for wsp in m.wsporniki():
         p = m.przegroda(str(wsp.get("przegroda"))) if wsp.get("przegroda") else None
-        dodaj(p.warstwy[-1].mat if p else wsp.get("mat"), "płyty wysunięte, okapy, obudowy", wsp["id"])
+        mat = p.warstwy[-1].mat if p else wsp.get("mat")
+        mt = m.material(str(mat))
+        if mt is None or (mt.raw or {}).get("funkcja") == "izolacja" or str(mat).startswith("SZKLO"):
+            continue                    # warstwy ukryte (docieplenie spodu) i świetliki — poza wykończeniem elewacji
+        dodaj(mat, "płyty wysunięte, okapy, obudowy", wsp["id"])
     for sl in m.slupy():
         dodaj(sl.get("mat"), "słupy", sl["id"])
     for dh in m.dachy():
@@ -162,6 +166,9 @@ def wyroby_elewacji(D) -> list[dict]:
     rows = []
     for mat, (nazwa, kat) in uzyte.items():
         kol, pal = _kolor(nazwa)
+        if list(kat) == ["pokrycie dachu"]:
+            pal = "— (pokrycie dachu)"
+            kol = kol if not kol.startswith("[DO UZUP") else do_uzup("kolor pokrycia")
         el = "; ".join(f"{k}: {', '.join(v)}" for k, v in kat.items())
         rows.append({"Element": el, "Wyrób (model)": nazwa, "Kolorystyka": kol, "Paleta MPZP": pal})
     typy = sorted({str((D.B.get("stolarka") or {}).get(o.raw.get("symbol"), {}).get("wyrob", "")).split("_")[1]

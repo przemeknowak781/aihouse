@@ -76,7 +76,7 @@ class DanePAB:
     def zr(self, sekcja: str, klucz: str) -> str:
         """Podstawa wartości normatywnej z rejestru: „<zrodlo> [W-xxx]”."""
         x = (self.wym.get(sekcja) or {}).get(klucz) or {}
-        return f"{x.get('zrodlo', '')}" + (f" [{x['id']}]" if x.get("id") else "")
+        return f"{x.get('zrodlo', '')}".replace("*", "\\*") + (f" [{x['id']}]" if x.get("id") else "")
 
     # ------------------------------------------------------------------ audyt A1 (PU W-316, odległości)
     def _audyt(self):

@@ -83,6 +83,25 @@ def buduj_pab(d: dict, D: DanePAB, arkusze: list | None = None, data: str | None
     return pab
 
 
+def uzupelnij_otwarte(D) -> None:
+    """Sprawy wynikające z treści opisu (posadowienie, kolorystyka, normy) — dopisywane do ``D.otwarte``."""
+    P = B.dane_posadowienia(D)
+    hz = (P["geo"] or {}).get("h_z")
+    if P["gl_obw"] is not None and hz is not None and P["gl_obw"] < hz:
+        D.otwarte.append(f"Posadowienie: spód żeber obwodowych {P['gl_obw']:.2f} m p.p.t. < h_z = {hz:.2f} m — płytkie "
+                         "posadowienie z izolacją obwodową wymaga sprawdzenia wg PN-EN ISO 13793 w PT-2 BO (W-284).")
+    for r in A.wyroby_elewacji(D):
+        if "[DO UZUP" in str(r["Kolorystyka"]) + str(r["Paleta MPZP"]):
+            D.otwarte.append(f"Kolorystyka: {r['Element']} — {r['Wyrób (model)'][:70]}: kolor/zgodność z paletą MPZP do "
+                             "ustalenia (karta kolorystyki; decyzja Inwestora).")
+    D.otwarte.append("Kubatura i pow. zabudowy: algorytmy lamela.model powołują PN-ISO 9836:2015 — potwierdzić zgodność "
+                     "definicji z PN-ISO 9836:2022-07 (W-316).")
+    D.otwarte.append("Analiza ekonomiczna regulacji pomieszczeniowej (WT § 135 ust. 9 pkt 2): nakład K i oszczędność s — "
+                     "z ofert/danych producenta w PT-3 IS; opinia techniczna projektanta IS (imię, nr uprawnień).")
+    D.otwarte.append("Opinia geotechniczna: zastąpić opinią z badań (autor, kwalifikacje, metryki sondowań); hydrant "
+                     "i budynki sąsiednie potwierdzić na mapie do celów projektowych.")
+
+
 def lista_pab() -> dict:
     """Lista kontrolna TOM_I zawężona do elementu PAB (plik PAB_rrrr.mm.dd.pdf)."""
     t = LISTY_KONTROLNE["TOM_I"]
@@ -116,6 +135,7 @@ def main(argv=None) -> int:
     data = a.data or d.get("data")
     print("Dane PAB (model + obliczenia):")
     D = DanePAB()
+    uzupelnij_otwarte(D)
     pab = buduj_pab(d, D, data=data)
     tom = Tom("PAB", [pab], dane=d, rodzaj="PAB", data=data, strona_tytulowa=False, laczny_spis=False)
     w = tom.zloz(out)

@@ -138,14 +138,15 @@ bez następcy, przywołanie informacyjne], zgodnie ze znakami składania na arku
 (geometria: `lamela.draft.skladanie`):
 
 1. najpierw zgięcia **pionowe** w harmonijkę o **nieparzystej** liczbie pasów: pierwszy pas od lewej (z marginesem
-   20 mm na oprawę) leży na spodzie licem do góry, pas z tabliczką przy prawej krawędzi (≥ 190 mm) — na wierzchu;
-   pasy pośrednie w **parach równych** (≤ 210 mm), bo tylko wtedy prawa krawędź arkusza wraca do rogu paczki A4:
-   * szerokość ≤ 590 mm: trzy pasy w₁ + (w₁ − 20) + 190, w₁ = (W − 170)/2 (A3: 125 + 105 + 190 — margines na
-     krawędzi paczki);
-   * szerokość > 590 mm: 210 + p par — wszystkie równe (190–210 mm), inaczej para z tabliczką 190 mm i pozostałe
-     pary równe (A2: 210 + 192 + 192; A3×3: 210 + 150,5 + 150,5 + 190 + 190);
-   * „ładnie” (pasy 180–210 mm) składają się długości ≈ 570–630, 960–1050, 1330–1470, 1700–1890 mm …; długość
-     L = 210 + 190·n tylko dla parzystego n (590, 970, 1350 mm) — dla nieparzystego jedna para musi być węższa;
+   20 mm na oprawę) leży na spodzie licem do góry z marginesem przy lewej krawędzi paczki, pas z tabliczką przy
+   prawej krawędzi (≥ 190 mm) — na wierzchu; pozostałe pasy ≤ 210 mm, tak by prawa krawędź arkusza wróciła do
+   rogu paczki A4. Dwie rodziny (wybierany wariant z najlepszą oceną; przy remisie pierwszy pas 210 mm):
+   * **A** (praktyka DIN): 210 + pary równe — wszystkie 190–210 mm, inaczej para z tabliczką 190 mm i pozostałe
+     pary równe (A2: 210 + 192 + 192; A3×3: 210 + 150,5 + 150,5 + 190 + 190; A1: 210 + 125,5 + 125,5 + 190 + 190);
+   * **B**: (20 + m) + m × (2k − 1) + 190, m = (W − 210)/(2k) ≤ 190 — pasy 2…N w [20, 20 + m] paczki, margin
+     wolny; A3: 125 + 105 + 190; 690: 140 + 120 + 120 + 120 + 190 (w rodzinie A byłoby 210 + 50 + 50 + 190 + 190);
+   * „ładnie” (pasy pośrednie 180–210 mm, równe) składają się długości ≈ 570–630, 930–1050, 1300–1470 mm …;
+     L = 210 + 190·n daje same pasy 190 mm tylko dla parzystego n (590, 970, 1350 mm);
 2. potem zgięcia **poziome** co 297 mm od dołu (wysokości „ładne”: 297, 594, 891 mm; 420 mm → górny rząd 123 mm);
 3. tabliczka rysunkowa pozostaje na wierzchu w prawym dolnym rogu, lewy margines 20 mm do dziurkowania/oprawy;
    na marginesie arkusza znaki zgięć z numerami kolejności (pionowe od pasa z tabliczką, potem poziome).

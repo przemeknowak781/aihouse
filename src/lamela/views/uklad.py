@@ -12,8 +12,8 @@ wielokrotności A3, chociaż fajnie jak się ładnie będzie składało.”
    tylko jawnie.
 2. **Koszt**: pole arkusza × (1 + kara składania pionowego + kara składania poziomego) × (1 + ``kara_niestandard``
    dla formatu niestandardowego) — kary wg oceny ``lamela.draft.skladanie.ocena_skladania`` („dobre” / „poprawne”
-   / „słabe”, ``kara_skladania``). Długości „ładnie” składane (pasy harmonijki 180–210 mm w parach równych:
-   570–630, 960–1050, 1330–1470 … mm; wysokość 297 / 594 / 891 mm) wygrywają, gdy dopłata papieru jest mała.
+   / „słabe”, ``kara_skladania``). Długości „ładnie” składane (pasy pośrednie harmonijki 180–210 mm, równe:
+   570–630, 930–1050, 1300–1470 … mm; wysokość 297 / 594 / 891 mm) wygrywają, gdy dopłata papieru jest mała.
 3. **Upakowanie** (dla danego W × H): tabliczka w prawym dolnym rogu ramki (z tabelą zmian nad nią), widoki
    w grupie (wiersz / kolumna / siatka — wariant o najmniejszym polu), bloki kolumny opisowej (legendy, tabele,
    uwagi, róża + podziałka) rozmieszczane algorytmem wolnych prostokątów (MaxRects): najpierw kolumna nad tabliczką,
