@@ -272,7 +272,7 @@ elektryka:
   WLZ_obciazalnosc_min: {wartosc: 50, jedn: A, typ: min, id: W-185, status: niezweryfikowane, zrodlo: "N SEP-E-002 (źródło wtórne)"}
   CRL_prog: {wartosc: 1000, jedn: "-", typ: info, id: W-186, status: zweryfikowane, zrodlo: "PN-HD 60364-4-443:2016 p. 443.5 (CRL < 1000 ⇒ SPD)"}
   CRL_f_env: {wartosc: 170, jedn: "-", typ: info, id: W-186, status: niezweryfikowane, zrodlo: "443.5: 85·F, F = 2 (odsyłacz krajowy wg RST 2018)"}
-  Ng: {wartosc: 1.8, jedn: 1/(km2*rok), typ: info, id: W-186, status: niezweryfikowane, zrodlo: "PN-86/E-05003/01 wg SEP (na północ od 51°30′)"}
+  Ng: {wartosc: 1.8, jedn: 1/(km2*rok), typ: info, id: W-186, status: niezweryfikowane, zrodlo: "SEP (Boczkowski 2013) z mapy PN-86/E-05003/01 — norma wycofana, dane historyczne (na północ od 51°30′)"}
   SPD_T1_Iimp_min: {wartosc: 12.5, jedn: kA, typ: min, id: W-186, status: niezweryfikowane, zrodlo: "PN-HD 60364-5-534:2016 (obecnie 5-53:2022-10) wg RST"}
   SPD_Up_max: {wartosc: 2.5, jedn: kV, typ: max, id: W-186, status: zweryfikowane, zrodlo: "PN-HD 60364-4-443:2016 tabl. 443.2 (kategoria II); zalecane 1,5 kV"}
   uziom_otulina_min: {wartosc: 0.05, jedn: m, typ: min, id: W-187, status: zweryfikowane, zrodlo: "PN-HD 60364-5-54:2011 zał. C.3.2"}

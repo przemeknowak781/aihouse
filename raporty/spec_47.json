@@ -1,4 +1,5 @@
 {
+ "nr": 47,
  "title": "Prezentacja projektu gotowa (16 slajdów) · komplet AR na 5 arkuszach zamiast 10 (−42 % papieru) · wydanie: domknięcie modelu",
  "stages": [
   [
@@ -60,6 +61,17 @@
  ],
  "notes": [
   "AR: 5 arkuszy zamiast 10, papier −42 %, skala 1:50 bez zmian.",
-  "Wysokość zabudowy w modelu 10,47 m ≤ 11,0 m (do zamrożenia)."
+  "Wysokość zabudowy w modelu 10,47 m ≤ 11,0 m (do zamrożenia).",
+  "NADZÓR (09:56): 6 agentów aktywnych, bez zastojów; najdłuższa bezczynność 2 min; zmiany w repo 0 min temu."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/projekt/03_PAB/rysunki/PB-AR-01_rzut_parteru.png",
+   "caption": "PB-AR-01 rzut parteru, arkusz 630×594 mm (wypełnienie 93 %)"
+  },
+  {
+   "path": "/home/user/aihouse/projekt/03_PAB/rysunki/PB-AR-05_elewacje.png",
+   "caption": "PB-AR-05 elewacje S/E/N/W w jednym pasie 2050×297 mm"
+  }
  ]
 }

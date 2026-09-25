@@ -67,6 +67,9 @@ def test_model():
     ok(abs(h["wartosc"] - (h["z_top_abs"] - h["t_sr"])) < 1e-9, "H = z_top − t_śr (upzp art. 2 pkt 30 lit. a)")
     ok(abs(h["t_sr"] - (h["t_min"] + h["t_max"]) / 2) < 1e-9, "t_śr = (t_min + t_max) / 2")
     ok(w["kondygnacje_nadziemne"]["wartosc"] == len(m.kondygnacje), "kondygnacje nadziemne (pkt 34)")
+    went = ((m.raw.get("energia") or {}).get("wentylacja") or {})
+    zt = [max(float(went[k][2]), float(went.get(f"{k}_z_top") or went[k][2])) for k in ("czerpnia", "wyrzutnia") if went.get(k)]
+    ok(not zt or h["z_top"] >= max(zt) - 1e-9, "z_top ≥ maks. wysokość urządzeń dachowych (czerpnia/wyrzutnia z_top — V2 N-2)")
     print("\nWARTOŚCI:")
     for k, val, j, pod, _met in WS.tabela(w):
         vv = {kk: round(x, 2) for kk, x in val.items()} if isinstance(val, dict) else \

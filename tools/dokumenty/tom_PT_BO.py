@@ -319,9 +319,9 @@ def _f(txt) -> float | None:
 
 
 def zestawienie_obciazen(sek: str) -> str:
-    """Podsekcja „#### Zestawienie obciążeń” pozycji (do następnego nagłówka ####)."""
+    """Pozycje „#### Zestawienie obciążeń” (wiersze tabel i listy obciążeń, bez nagłówków z nazwą przegrody)."""
     m = re.search(r"^#### Zestawienie obciążeń\s*\n(.*?)(?=^#### |\Z)", sek, flags=re.M | re.S)
-    return m.group(1) if m else ""
+    return "\n".join(ln for ln in (m.group(1) if m else "").splitlines() if ln.startswith(("| ", "- ")))
 
 
 def kontrole_spojnosci(D: dict) -> list[dict]:
@@ -331,7 +331,10 @@ def kontrole_spojnosci(D: dict) -> list[dict]:
     obl, mes = D["obl_md"] or "", D["mes_md"] or ""
     sek = sekcje_pozycji(obl)
     # (a) przekrój podwójnie zbrojony: A_s2 > 0 wymaga warunku zbrojenia ściskanego (górnego) w pozycji
+    fund = {x["id"] for x in (D["wyniki"] or {}).get("pozycje", []) if x["rodzaj"] == "fundament"}
     for el, (nr, t) in sek.items():
+        if el in fund:                   # płyta fundamentowa — miarodajna analiza MES i kontrola zbrojenia (rozdz. 5–6)
+            continue
         as2 = [_f(x) for x in re.findall(r"A_s2 = [^\n]*?= \*\*([\d ,]+)\*\* mm²", t)]
         as2 = [x for x in as2 if x]
         if as2 and not re.search(r"^\| Zbrojenie (?:górne|ściskane)", t, flags=re.M):
@@ -352,8 +355,9 @@ def kontrole_spojnosci(D: dict) -> list[dict]:
                 zle.append(f"{nr} {el} (q_d = {L(qd)} < {L(q610b)} kN/m)")
     if zle:
         W.append(dict(obszar="Obliczenia statyczne", element=f"nadproża / wieńce ({len(zle)})", wynik="—", stan=NZ,
-                      opis="wypisane q_k nie odpowiadają kombinacji (suma przypadków, w tym wyjątkowego); 6.10b bez "
-                      "Σγ_Q·ψ₀·Q_k,i; kat. H łączona ze śniegiem (PN-EN 1991-1-1 p. 3.3.2) — poz. " + "; ".join(zle[:6])
+                      opis="q_d mniejsze niż 6.10b z wypisanych g_k i q_k — zestawienie niesprawdzalne: wypisywać q_k "
+                      "tylko z przypadków użytych w kombinacji, 6.10b uzupełnić o Σγ_Q·ψ₀·Q_k,i, nie łączyć kat. H "
+                      "ze śniegiem (PN-EN 1991-1-1 p. 3.3.2), przeliczyć — poz. " + "; ".join(zle[:6])
                       + (f" (i {len(zle) - 6} innych)" if len(zle) > 6 else ""), zrodlo="obliczenia statyczne"))
     # (c) dachy z polem PV — ciężar PV w zestawieniu obciążeń; (d) dach zielony — woda retencyjna warstw
     pv = {x.get("dach"): x.get("n") for x in ((b.get("energia") or {}).get("pv") or {}).get("pola", [])}
@@ -505,17 +509,19 @@ def rozdz_stan(o: Opis, D: dict, S: dict, ark_uwagi: list[str]):
     o.rozdzial("Stan opracowania i analiz konstrukcji", podstawa="§ 23 pkt 1 RPB; W-274")
     nz = S["n_nz"] + len(ark_uwagi)
     o.tekst(f"""
-    Zestawienie generowane automatycznie przy każdym złożeniu tomu z wyników obliczeń zespołu BO (model
-    `model/budynek.yaml` z {D['t_modelu']}). Pozycja **{NZ}** oznacza analizę nie domkniętą: niespełniony warunek
-    stanu granicznego, wymagane obliczeniowo zbrojenie nieujęte w kontroli rysunków, uwagę biblioteki
-    „[WYMAGA ANALIZY]” albo brak arkusza rysunkowego. Pozycja **ZASTĄPIONE** — wynik modelu uproszczonego zastąpiony
-    analizą dokładniejszą (wskazaną w opisie). Po domknięciu analiz i ponownym uruchomieniu generatora wiersze
-    znikają z zestawienia.
+    Zestawienie generowane automatycznie przy każdym złożeniu tomu z wyników obliczeń konstrukcji (model budynku
+    z {D['t_modelu']}). Pozycja niezamknięta to analiza nie domknięta: warunek stanu granicznego niespełniony,
+    zbrojenie wymagane obliczeniowo nieujęte w kontroli rysunków, obciążenie lub parametr niezgodny z modelem,
+    uwaga programu obliczeń wymagająca analizy, wynik starszy niż model albo arkusz rysunkowy z błędem. Pozycja
+    **ZASTĄPIONE** — wynik modelu uproszczonego zastąpiony analizą dokładniejszą (wskazaną w opisie). Po domknięciu
+    analiz i ponownym złożeniu tomu wiersze znikają z zestawienia.
     """)
     if nz:
         o.wniosek(f"**PROJEKT KONSTRUKCJI NIEZAMKNIĘTY — {nz} {odmiana(nz, 'pozycja', 'pozycje', 'pozycji')} {NZ}.** "
-                  "Przed domknięciem wszystkich pozycji z tabeli poniżej tom nie nadaje się do podpisania "
-                  "oświadczenia projektanta PT (art. 41 ust. 4a pkt 2 PB) ani do realizacji robót.",
+                  "Tom jest wersją roboczą. Do czasu domknięcia wszystkich pozycji z tabeli poniżej — zmiany modelu "
+                  "wg zaleceń zespołu konstrukcji, ponowna analiza (obliczenia statyczne, MES płyty fundamentowej, "
+                  "kontrola zbrojenia rysunków) na zamrożonej wersji modelu i ponowne złożenie tomu — **nie podpisywać** "
+                  "oświadczenia projektanta PT (art. 41 ust. 4a pkt 2 PB) i nie przekazywać tomu do realizacji robót.",
                   alarm=True)
     else:
         o.wniosek("Wszystkie analizy konstrukcji objęte zestawieniem są domknięte (brak pozycji NIEZAMKNIĘTYCH).")

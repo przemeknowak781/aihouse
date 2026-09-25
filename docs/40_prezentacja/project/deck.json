@@ -1,0 +1,20 @@
+{
+  "v": 4,
+  "createdOnFiles": {"v": 1, "at": "2026-09-25T07:52:00Z"},
+  "title": "Dom LAMELA — prezentacja projektu",
+  "order": ["cover", "zadanie", "interpretacja", "metoda", "przebieg", "koncepcja", "zgodnosc", "rzuty", "parametry", "woda", "mostki", "konstrukcja", "dokumentacja", "wizualizacje", "www", "stan"],
+  "sections": {
+    "s1": {"description": "Zadanie Inwestora i idea bryły ze szkicu", "start": "cover"},
+    "s2": {"description": "Jak powstaje projekt: jeden model, niezależne weryfikacje, jawny postęp", "start": "metoda"},
+    "s3": {"description": "Koncepcja: warianty, wybór, zgodność ze szkicem, funkcja i parametry", "start": "koncepcja"},
+    "s4": {"description": "Technika: woda, ciągłość izolacji, mostki cieplne i konstrukcja", "start": "woda"},
+    "s5": {"description": "Dokumentacja, wizualizacje i strona katalogowa", "start": "dokumentacja"},
+    "s6": {"description": "Stan prac i czynności przed złożeniem wniosku", "start": "stan"}
+  },
+  "faces": {
+    "archivo": {"family": "Archivo", "href": "https://fonts.googleapis.com/css2?family=Archivo:wght@500..900&display=swap"},
+    "ibm-plex-sans": {"family": "IBM Plex Sans", "href": "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap"},
+    "ibm-plex-mono": {"family": "IBM Plex Mono", "href": "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap"}
+  },
+  "designSystems": []
+}

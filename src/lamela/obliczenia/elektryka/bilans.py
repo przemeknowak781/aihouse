@@ -72,7 +72,7 @@ class ParametryBilans:
     ev: bool | None = None                  # None → gdy jest garaż
     ev_kW: float = 11.0
     grzalka_kW: float = 6.0
-    zapas_DLM: float = 0.10                 # zapas regulacji DLM: nastawa = (1 − zapas)·granica (histereza, czas reakcji) [ZAŁ]
+    zapas_DLM: float = 0.05                 # zapas regulacji DLM: nastawa = (1 − zapas)·granica (histereza, czas reakcji) [ZAŁ]
     k_j: dict = field(default_factory=lambda: {
         "oswietlenie": 0.7, "gniazda": 0.2, "gniazda_kuchnia": 0.5, "gniazda_lazienka": 0.3, "gotowanie": 0.6,
         "agd": 0.6, "pc": 1.0, "grzalka": 1.0, "went": 1.0, "sterowanie": 1.0, "ev": 1.0, "zewn": 0.3, "tele": 1.0,

@@ -143,6 +143,41 @@ def test_drenaz_decyzja():
     assert ocen_drenaz(d, ParametryDrenaz(grunt="gliny", k_f=1e-7)).decyzja.startswith("ZALECANY")
 
 
+def test_deszczowa_doplyw_i_przelewy_rynien():
+    """Wydanie (V2 N-7): rura spustowa z `do` = pole → dopływ do pola; `do` = rura → przepływ tylko tą rurą (trójnik); rura wspólna
+    kilku pól — przepływ łączny; przelewy awaryjne rynien ukrytych sprawdzane (Q_przel ≥ F_R·Q). Model docelowy, tylko odczyt."""
+    b = ROOT / "model" / "budynek.yaml"
+    if not b.exists():
+        return "pominięty (brak model/budynek.yaml)"
+    from lamela.obliczenia.inst_wspolne import dane_z_modelu
+    from lamela.obliczenia.sanitarne.deszczowa import oblicz_deszczowa
+    d = dane_z_modelu(b, ROOT / "model" / "dzialka.yaml")
+    W = oblicz_deszczowa(d)
+    P = {p.id: p for p in W.pola}
+    if not {"PL-2", "PL-3", "D4"} <= set(P):
+        return "pominięty (model bez płyt PL-2/PL-3)"
+    rury = {r["id"]: r["Q"] for p in W.pola for r in p.rury}
+    q2, q3 = P["PL-2"].Q, P["PL-3"].Q
+    blisko(rury["RS10"], q2 / 2 + q3 / 2, tol_rel=1e-6)          # RS10: wylot NE PL-2 + RS11 (trójnik z PL-3)
+    blisko(P["D4"].Q - 0.046 * P["D4"].A, rury["RS10"], tol_rel=0.02)   # RS10 → dach D4 (dopływ)
+    assert all(w.ok for w in W.warunki if "przelewy awaryjne rynny" in w.opis), "przelewy rynien"
+    assert any("przelewy awaryjne rynny" in w.opis for w in W.warunki)
+
+
+def test_drenaz_tin_cokol_model():
+    """Wydanie (V2 N-3/N-4/N-13a, V1-02): cokół i spadki na TIN rzędnych projektowanych co 0,10 m — model docelowy spełnia
+    cokół ≥ 0,30 m poza strefami progów z OL (szer. drzwi + 0,15 m) i spadek ≥ 2 % na wszystkich ścianach."""
+    b = ROOT / "model" / "budynek.yaml"
+    if not b.exists():
+        return "pominięty (brak model/budynek.yaml)"
+    from lamela.obliczenia.inst_wspolne import dane_z_modelu
+    from lamela.obliczenia.sanitarne.drenaz import ocen_drenaz
+    W = ocen_drenaz(dane_z_modelu(b, ROOT / "model" / "dzialka.yaml"))
+    niesp = [w.opis for w in W.warunki if w.ok is False]
+    assert not niesp, niesp
+    assert W.cokol_min >= 0.30 - 1e-6
+
+
 # ================================================================ ogrzewanie
 def test_halas_port_r6():
     """[PORT] 61 dB(A), 10 m, Q = 2 → 33 dB(A); [R6] §3.9: 55 dB(A), Q = 4: 4 m → 38,0; 8 m → 32,0; 60 dB(A), 6 m → 39,5."""

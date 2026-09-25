@@ -244,7 +244,9 @@ def _raport(w: WynikOdgrom) -> Raport:
     R.tab(["Element", "Miejsce", "Przekrój / uwagi"], w.wyrownawcze, "lll")
     R.h(2, "7. Sprawdzenia")
     R.war(w.warunki)
-    R.zrodlo("PN-EN 62305-2:2008/2012 (zał. A–C) — metodyka; PN-EN IEC 62305-2:2025-09 (EN) — do PT", "Rejestr R7: R7-K01…K05, R7-G01…G08; D-13",
-             "SEP (Boczkowski 2013) — N_G = 1,8 dla Poznania [W]", "PN-EN 1991-1-2 zał. E tabl. E.4 — gęstość obciążenia ogniowego [W]",
+    R.zrodlo("PN-EN 62305-2:2008 (wycofana; wydanie powołane w zał. 1 WT) i PN-EN 62305-2:2012 (wycofana), zał. A–C — metodyka "
+             "obliczeń; PN-EN IEC 62305-2:2025-09 (aktualna, wersja angielska) — sprawdzenie kontrolne nie wykonane, uzasadnienie "
+             "w części opisowej PT", "Rejestr R7: R7-A05, R7-K01…K05, R7-G01…G08; D-13",
+             "SEP (Boczkowski 2013) — N_G = 1,8 dla Poznania, z mapy PN-86/E-05003/01 (norma wycofana — dane historyczne) [W]", "PN-EN 1991-1-2 zał. E tabl. E.4 — gęstość obciążenia ogniowego [W]",
              "DEHN, Lightning Protection Guide — rezystancja uziomów otokowych/fundamentowych [W]")
     return R
