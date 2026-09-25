@@ -7,7 +7,8 @@
    "miejsce": "dozbrojenie D1 dół x",
    "poz": "MES-PF",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 2733.6,
    "As_min": 0.0,
@@ -25,7 +26,8 @@
    "miejsce": "dozbrojenie D1 dół y",
    "poz": "MES-PF",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 3665.8,
    "As_min": 0.0,
@@ -43,7 +45,8 @@
    "miejsce": "dozbrojenie D1 góra y",
    "poz": "MES-PF",
    "arkusze": [
-    "PT-BO-04"
+    "PT-BO-04",
+    "PT-BO-05"
    ],
    "As_req": 1689.7,
    "As_min": 0.0,
@@ -61,7 +64,8 @@
    "miejsce": "dozbrojenie D2 dół x",
    "poz": "MES-PF",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 1383.0,
    "As_min": 0.0,
@@ -79,7 +83,8 @@
    "miejsce": "dozbrojenie D2 dół y",
    "poz": "MES-PF",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 1125.5,
    "As_min": 0.0,
@@ -97,7 +102,8 @@
    "miejsce": "dozbrojenie D3 dół x",
    "poz": "MES-PF",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 1005.3,
    "As_min": 0.0,
@@ -115,7 +121,8 @@
    "miejsce": "dozbrojenie D3 dół y",
    "poz": "MES-PF",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 1958.0,
    "As_min": 0.0,
@@ -133,7 +140,8 @@
    "miejsce": "dozbrojenie D4 dół x",
    "poz": "MES-PF",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 1150.6,
    "As_min": 0.0,
@@ -151,7 +159,8 @@
    "miejsce": "dozbrojenie D4 dół y",
    "poz": "MES-PF",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 1444.7,
    "As_min": 0.0,
@@ -169,7 +178,8 @@
    "miejsce": "dozbrojenie D5 dół x",
    "poz": "MES-PF",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 1247.0,
    "As_min": 0.0,
@@ -187,7 +197,8 @@
    "miejsce": "dozbrojenie D6 dół x",
    "poz": "MES-PF",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 1016.7,
    "As_min": 0.0,
@@ -205,7 +216,8 @@
    "miejsce": "siatka dolna x (MES, poza dozbrojeniami)",
    "poz": "MES-PF",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 990.4,
    "As_min": 246.1,
@@ -223,7 +235,8 @@
    "miejsce": "siatka dolna y (MES, poza dozbrojeniami)",
    "poz": "MES-PF",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 984.0,
    "As_min": 246.1,
@@ -241,7 +254,8 @@
    "miejsce": "siatka górna x (MES, poza dozbrojeniami)",
    "poz": "MES-PF",
    "arkusze": [
-    "PT-BO-04"
+    "PT-BO-04",
+    "PT-BO-05"
    ],
    "As_req": 1043.3,
    "As_min": 246.1,
@@ -259,7 +273,8 @@
    "miejsce": "siatka górna y (MES, poza dozbrojeniami)",
    "poz": "MES-PF",
    "arkusze": [
-    "PT-BO-04"
+    "PT-BO-04",
+    "PT-BO-05"
    ],
    "As_req": 1187.1,
    "As_min": 246.1,
@@ -277,7 +292,8 @@
    "miejsce": "strefa S1 (płyta) — przekrój niewystarczający",
    "poz": "MES-PF",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 1.0,
    "As_min": 0.0,
@@ -295,7 +311,8 @@
    "miejsce": "pogrubienie — siatka dolna (MES)",
    "poz": "10.18",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 324.4,
    "As_min": 538.1,
@@ -313,7 +330,8 @@
    "miejsce": "pogrubienie — siatka dolna (MES)",
    "poz": "10.19",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 572.7,
    "As_min": 538.1,
@@ -331,7 +349,8 @@
    "miejsce": "pogrubienie — siatka dolna (MES)",
    "poz": "10.20",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 359.5,
    "As_min": 538.1,
@@ -349,7 +368,8 @@
    "miejsce": "pogrubienie — siatka dolna (MES)",
    "poz": "10.21",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 714.5,
    "As_min": 538.1,
@@ -367,7 +387,8 @@
    "miejsce": "żebro — dołem (MES: A_s,req·b)",
    "poz": "10.2",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 848.4,
    "As_min": 0.0,
@@ -385,7 +406,8 @@
    "miejsce": "żebro — górą (MES: A_s,req·b)",
    "poz": "10.2",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 1151.7,
    "As_min": 0.0,
@@ -403,7 +425,8 @@
    "miejsce": "żebro — dołem (MES: A_s,req·b)",
    "poz": "10.11",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 1125.8,
    "As_min": 0.0,
@@ -421,7 +444,8 @@
    "miejsce": "żebro — górą (MES: A_s,req·b)",
    "poz": "10.11",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 150.4,
    "As_min": 0.0,
@@ -439,7 +463,8 @@
    "miejsce": "żebro — dołem (MES: A_s,req·b)",
    "poz": "10.12",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 1899.2,
    "As_min": 0.0,
@@ -457,7 +482,8 @@
    "miejsce": "żebro — górą (MES: A_s,req·b)",
    "poz": "10.12",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 250.8,
    "As_min": 0.0,
@@ -475,7 +501,8 @@
    "miejsce": "żebro — dołem (MES: A_s,req·b)",
    "poz": "10.13",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 1895.7,
    "As_min": 0.0,
@@ -493,7 +520,8 @@
    "miejsce": "żebro — górą (MES: A_s,req·b)",
    "poz": "10.13",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 287.5,
    "As_min": 0.0,
@@ -511,7 +539,8 @@
    "miejsce": "żebro — dołem (MES: A_s,req·b)",
    "poz": "10.14",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 2249.2,
    "As_min": 0.0,
@@ -529,7 +558,8 @@
    "miejsce": "żebro — górą (MES: A_s,req·b)",
    "poz": "10.14",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 371.4,
    "As_min": 0.0,
@@ -547,7 +577,8 @@
    "miejsce": "żebro — dołem (MES: A_s,req·b)",
    "poz": "10.15",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 170.2,
    "As_min": 0.0,
@@ -565,7 +596,8 @@
    "miejsce": "żebro — górą (MES: A_s,req·b)",
    "poz": "10.15",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 721.2,
    "As_min": 0.0,
@@ -583,7 +615,8 @@
    "miejsce": "żebro — dołem (MES: A_s,req·b)",
    "poz": "10.16",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 983.1,
    "As_min": 0.0,
@@ -601,7 +634,8 @@
    "miejsce": "żebro — górą (MES: A_s,req·b)",
    "poz": "10.16",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 741.9,
    "As_min": 0.0,
@@ -619,7 +653,8 @@
    "miejsce": "żebro — dołem (MES: A_s,req·b)",
    "poz": "10.17",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 748.8,
    "As_min": 0.0,
@@ -637,7 +672,8 @@
    "miejsce": "żebro — górą (MES: A_s,req·b)",
    "poz": "10.17",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 569.4,
    "As_min": 0.0,
@@ -655,7 +691,8 @@
    "miejsce": "żebro — dołem (MES: A_s,req·b)",
    "poz": "10.3",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 435.2,
    "As_min": 0.0,
@@ -673,7 +710,8 @@
    "miejsce": "żebro — górą (MES: A_s,req·b)",
    "poz": "10.3",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 339.2,
    "As_min": 0.0,
@@ -691,7 +729,8 @@
    "miejsce": "żebro — dołem (MES: A_s,req·b)",
    "poz": "10.4",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 37.1,
    "As_min": 0.0,
@@ -709,7 +748,8 @@
    "miejsce": "żebro — górą (MES: A_s,req·b)",
    "poz": "10.4",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 322.5,
    "As_min": 0.0,
@@ -727,7 +767,8 @@
    "miejsce": "żebro — dołem (MES: A_s,req·b)",
    "poz": "10.5",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 100.3,
    "As_min": 0.0,
@@ -745,7 +786,8 @@
    "miejsce": "żebro — górą (MES: A_s,req·b)",
    "poz": "10.5",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 1030.3,
    "As_min": 0.0,
@@ -763,7 +805,8 @@
    "miejsce": "żebro — dołem (MES: A_s,req·b)",
    "poz": "10.6",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 3.2,
    "As_min": 0.0,
@@ -781,7 +824,8 @@
    "miejsce": "żebro — górą (MES: A_s,req·b)",
    "poz": "10.6",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 419.2,
    "As_min": 0.0,
@@ -799,7 +843,8 @@
    "miejsce": "żebro — dołem (MES: A_s,req·b)",
    "poz": "10.7",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 1767.1,
    "As_min": 0.0,
@@ -817,7 +862,8 @@
    "miejsce": "żebro — górą (MES: A_s,req·b)",
    "poz": "10.7",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 921.3,
    "As_min": 0.0,
@@ -835,7 +881,8 @@
    "miejsce": "żebro — dołem (MES: A_s,req·b)",
    "poz": "10.8",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 860.6,
    "As_min": 0.0,
@@ -853,7 +900,8 @@
    "miejsce": "żebro — górą (MES: A_s,req·b)",
    "poz": "10.8",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 1545.9,
    "As_min": 0.0,
@@ -871,7 +919,8 @@
    "miejsce": "żebro — dołem (MES: A_s,req·b)",
    "poz": "10.9",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 1292.5,
    "As_min": 0.0,
@@ -889,7 +938,8 @@
    "miejsce": "żebro — górą (MES: A_s,req·b)",
    "poz": "10.9",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 1238.0,
    "As_min": 0.0,
@@ -907,7 +957,8 @@
    "miejsce": "żebro — dołem (MES: A_s,req·b)",
    "poz": "10.10",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 1194.4,
    "As_min": 0.0,
@@ -925,7 +976,8 @@
    "miejsce": "żebro — górą (MES: A_s,req·b)",
    "poz": "10.10",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 55.7,
    "As_min": 0.0,
