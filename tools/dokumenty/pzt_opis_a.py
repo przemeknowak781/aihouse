@@ -167,3 +167,89 @@ def pkt3_ab(zp, z, d):
     zbiornika. Skropliny pompy ciepła — do studni chłonnej. Wody opadowe nie są odprowadzane na drogę ani
     na działki sąsiednie (odwodnienie liniowe przy bramie wjazdowej; spadki terenu — lit. f).
     """)
+
+
+def pkt3_cd(zp, z, d):
+    u1 = _poly(_utw(z, "U1").get("obrys"))
+    x0, y0, x1, y1 = u1.bounds if u1 is not None else (0, 0, 0, 0)
+    szer_min, _, _ = z.wym("usytuowanie", "dojazd_szer_min")
+    st_s, zr_st, _ = z.wym("usytuowanie", "stanowisko_szer")
+    st_d, _, _ = z.wym("usytuowanie", "stanowisko_dl")
+    gr_mp, zr_gr, _ = z.wym("usytuowanie", "parking_odl_granica_min")
+    br, fu = _brama(z, "przesuwna"), _brama(z, "furtka")
+    br_min, zr_br, _ = z.wym("usytuowanie", "brama_wjazdowa_szer_min")
+    fu_min, _, _ = z.wym("usytuowanie", "furtka_szer_min")
+    zj, zr_zj, _ = z.wym("usytuowanie", "zjazd_szer_zalozenie")
+    dr = z.droga()
+    zp.markdown(f"""
+    ## Układ komunikacyjny {{podstawa: § 14 pkt 3 lit. c}}
+    Wjazd bramą przesuwną w ogrodzeniu od drogi {dr['symbol']}; podjazd przed garażem szer. {L(x1 - x0)} m
+    i dł. {L(y1 - y0)} m (nawierzchnia: {_utw(z, 'U1').get('nawierzchnia', '—')}, spadek {L(100 * _utw(z, 'U1').get('spadek', 0), 1)} %
+    od budynku) — dojazd szerszy od wymaganego {L(szer_min)} m ({z.wym('usytuowanie', 'dojazd_szer_min')[1]}).
+    Dojście piesze od furtki do wejścia głównego: {_utw(z, 'U2').get('nawierzchnia', '—')}. Stanowiska postojowe:
+    """)
+    rows = [{"Stanowisko": i, "Rodzaj": "w garażu" if t == "garaz" else "naziemne, niezadaszone",
+             "Wymiary [m]": f"{L(a)} × {L(b)}", "Odl. od granic niedrogowych [m]": dd,
+             "Ocena": "spełnia" if (a >= st_s - 1e-6 and b >= st_d - 1e-6 and (t == "garaz" or dd >= gr_mp - 1e-6)) else "NIE SPEŁNIA"}
+            for i, t, (a, b), dd in z.mp_odleglosci()]
+    zp.tabela(rows, tytul="Stanowiska postojowe", lp=True, formaty={"Odl. od granic niedrogowych [m]": 2},
+              uwagi=[f"Stanowisko ≥ {L(st_s)} × {L(st_d)} m — {zr_st}; odległość stanowisk naziemnych od granicy działki "
+                     f"≥ {L(gr_mp)} m — {zr_gr}. Liczba stanowisk a MPZP — pkt 4."])
+    zp.markdown(f"""
+    ## Sposób dostępu do drogi publicznej {{podstawa: § 14 pkt 3 lit. d}}
+    Dostęp do drogi publicznej gminnej {dr['symbol']} ({dr['nazwa']}) — **projektowanym zjazdem indywidualnym**
+    w osi bramy wjazdowej, na podstawie zezwolenia zarządcy drogi na lokalizację zjazdu (u.d.p. art. 29 ust. 1;
+    zezwolenie dołącza się do wniosku o pozwolenie na budowę — art. 29 ust. 3a; ZL) {do_uzup('nr i data zezwolenia zarządcy drogi')}.
+    Parametry zjazdu przyjęto wstępnie: szerokość jezdni zjazdu {L(zj)} m {ZAL} ({zr_zj}); ostateczne — wg zezwolenia;
+    PZT w zakresie zjazdu podlega uzgodnieniu z zarządcą drogi (u.d.p. art. 29 ust. 3 pkt 2). Roboty w pasie drogowym
+    — po uzyskaniu zezwolenia zarządcy drogi na ich prowadzenie (u.d.p. art. 29 ust. 3 pkt 1 lit. b).
+    Brama przesuwna {L(br['szer'])} m ≥ {L(br_min)} m, furtka {L(fu['szer'])} m ≥ {L(fu_min)} m ({zr_br}).
+    """)
+
+
+def pkt3_ef(zp, z, d):
+    proj = (z.dz.get("uzbrojenie") or {}).get("projektowane") or []
+    naz = {"woda": "wodociąg", "kan_sanit": "kanalizacja sanitarna", "kan_deszcz": "kanalizacja deszczowa",
+           "en": "elektroenergetyczna nN", "tele": "telekomunikacyjna"}
+    zp.markdown("""
+    ## Parametry techniczne sieci i urządzeń uzbrojenia terenu {podstawa: § 14 pkt 3 lit. e}
+    Przebieg przyłączy i sieci na działce — rys. PZT-03 (rysunek koordynacyjny); parametry z modelu:
+    """)
+    zp.tabela([{"Branża": naz.get(p["branza"], p["branza"]), "Parametry (model)": p.get("opis", "—"),
+                "Długość [m]": p.get("dl")} for p in proj], tytul="Projektowane przyłącza i przewody na działce",
+              lp=True, formaty={"Długość [m]": 1}, szerokosci=["7mm", "32mm", None, "20mm"],
+              uwagi=["Średnice, spadki i rzędne w punktach załamania i włączenia — rys. PZT-03 oraz PT-3 IS / PT-4 IE; "
+                     "parametry przyłączy wg warunków przyłączenia " + do_uzup("warunki przyłączenia: ENEA Operator (nN), "
+                     "gestor wod.-kan., operator telekomunikacyjny — E-05") + "."],
+              zrodlo="model/dzialka.yaml — uzbrojenie.projektowane")
+    t, tp = z.teren_istn(), z.teren_proj()
+    sp_min, zr_sp, id_sp = z.wym("usytuowanie", "spadek_terenu_od_budynku_min")
+    tsr = z.W["wysokosc_zabudowy"].get("t_sr")
+    odw = z.dz.get("odwodnienia") or []
+    drn = next((o for o in odw if o.get("typ") == "drenaz_opaskowy"), None)
+    zp.markdown(f"""
+    ## Ukształtowanie terenu i układ zieleni {{podstawa: § 14 pkt 3 lit. f}}
+    Projektuje się niwelację terenu wyłącznie w otoczeniu budynku i utwardzeń: rzędne terenu projektowanego
+    {L(tp.get('z_min', 0))}–{L(tp.get('z_max', 0))} m n.p.m. (teren istniejący {L(t['z_min'])}–{L(t['z_max'])} m n.p.m.);
+    posadzka parteru ±0,00 = {L(z.zero)} m n.p.m., tj. {L(z.zero - tsr)} m ponad średni poziom terenu przy budynku.
+    Teren przy budynku ze spadkiem ≥ {L(100 * sp_min, 0)} % od ścian ({zr_sp}; {id_sp}), opaska żwirowa wokół budynku
+    ({L(z.w('pow_opaski'), 1)} m²), odwodnienia liniowe przy drzwiach bezprogowych, przed garażem i przy bramie;
+    na granicach działki rzędne projektowane równe istniejącym. Drenaż opaskowy: {(drn or {}).get('opis', '—')}.
+    Rzędne — rys. PZT-02.
+    """)
+    zp.tabela([{"Symbol": o["id"], "Rodzaj": o.get("typ", "—").replace("_", " "), "Opis": _kr(o.get("opis"), 1),
+                "Odbiornik": o.get("odbiornik", "—")} for o in odw if o.get("typ") != "drenaz_opaskowy"],
+              tytul="Odwodnienie powierzchniowe", szerokosci=["14mm", "20mm", None, "32mm"],
+              zrodlo="model/dzialka.yaml — odwodnienia")
+    zp_ = z.zielen_pow()
+    zp.markdown(f"""
+    Zieleń: trawniki (pozostała powierzchnia biologicznie czynna — pkt 4), żywopłoty na granicach bocznych i tylnej
+    ({L(zp_.get('zywoplot', 0), 1)} m²), rabaty ({L(zp_.get('rabata', 0), 1)} m²), niecka chłonna jako ogród deszczowy.
+    Drzewa:
+    """)
+    zp.tabela([{"Nr": t_["id"], "Gatunek": t_.get("gat"), "Stan": "istniejące — zachowane" if t_.get("istn") and not t_.get("do_wyciecia")
+                else ("do usunięcia" if t_.get("do_wyciecia") else "projektowane"),
+                "Średnica korony [m]": t_.get("sr_korony"), "Wysokość [m]": t_.get("wys")} for t_ in z.drzewa()],
+              tytul="Drzewa istniejące i projektowane", formaty={"Średnica korony [m]": 1, "Wysokość [m]": 1},
+              uwagi=["Przy drzewach zachowywanych — ochrona pni i systemu korzeniowego w zasięgu korony podczas robót. "
+                     "Obwody pni drzew istniejących " + do_uzup("obwód na wys. 5 cm — mapa do celów projektowych (u.o.p. art. 83f)") + "."])

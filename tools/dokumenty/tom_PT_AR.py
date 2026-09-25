@@ -36,8 +36,8 @@ REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO / "src"))
 
 from lamela.dokumenty import (Arkusz, Dokument, Tom, dane_obiektu, sprawdz_tom, LISTY_KONTROLNE,  # noqa: E402
-                              liczba, do_uzup, DANE_PRZYKLADOWE, ZAL, NZW, zamknij_przegladarke)
-from lamela.obliczenia.wspolne import wymaganie, orientacja  # noqa: E402
+                              liczba, DANE_PRZYKLADOWE, ZAL, NZW, zamknij_przegladarke)
+from lamela.obliczenia.wspolne import wymaganie  # noqa: E402
 
 KAT_MOSTKI = REPO / "projekt/08_obliczenia/mostki"
 KAT_DETALE = REPO / "projekt/10_PT_architektura/detale"
@@ -208,7 +208,7 @@ TYPY_PRZEGR = {"sciana_zewn": "ściana zewnętrzna", "sciana_wewn_nosna": "ścia
 
 
 def nazwa_przegrody(txt: str) -> str:
-    """Nazwa z modelu bez wtrąceń „(U = …)” — wartość U podaje wyłącznie obliczenie (rozdz. 4)."""
+    """Nazwa z modelu bez wtrąceń „(U = …)” — wartość U podaje wyłącznie obliczenie."""
     t = re.sub(r"\s*\((U[ _]?(stropu \S+ )?=|U_equiv)[^()]*(\([^()]*\)[^()]*)*\)", "", txt)
     return re.sub(r";\s*$", "", t).strip()
 
@@ -233,7 +233,7 @@ def rozdz_zakres(o: Opis, D: dict, kat_ar: Path | None):
     **Pozostałe punkty § 23 RPB — gdzie opracowano:** pkt 1–2 (konstrukcja, posadowienie) — PT-2 BO; pkt 3
     (dokumentacja geologiczno-inżynierska) — nie dotyczy (warunki proste, rejestr C.2); pkt 5 i 6 — nie dotyczy
     (obiekt mieszkalny, niebędący obiektem liniowym); pkt 7–9 i 11 — PT-3 IS i PT-4 IE (instalacje, charakterystyka
-    energetyczna); pkt 10 — w każdym tomie stosownie do zakresu (tu: rozdz. 8).
+    energetyczna); pkt 10 — w każdym tomie stosownie do zakresu (tu: rozdział „Dane dotyczące warunków ochrony przeciwpożarowej”).
 
     **Podstawy:** PB (t.j. Dz.U. 2026 poz. 524 ze zm.) art. 34 ust. 3 pkt 4; RPB (t.j. Dz.U. 2022 poz. 1679 ze zm.)
     § 23–24; WT 2002 (t.j. Dz.U. 2022 poz. 1225 ze zm.) stosowane na podstawie art. 102a PB; PN-EN ISO 6946:2017-10,
@@ -260,7 +260,7 @@ def rozdz_przegrody(o: Opis, D: dict):
     o.rozdzial("Rozwiązania konstrukcyjno-materiałowe przegród", """
     Przegrody zestawiono z modelu budynku (sekcje `przegrody` i `materialy`). Warstwy ścian podano od strony
     wewnętrznej, warstwy przegród poziomych — od góry. Grubości w milimetrach; λ — wartość obliczeniowa
-    [W/(m·K)]. Współczynniki U wyznaczono w rozdz. 4.1.
+    [W/(m·K)]. Współczynniki U wyznaczono w rozdziale „Obliczenia cieplno-wilgotnościowe przegród i węzłów”.
     """, podstawa="§ 23 pkt 4 RPB", nowa_strona=True)
     wiersze = []
     for kod, p in m.przegrody.items():
@@ -273,7 +273,7 @@ def rozdz_przegrody(o: Opis, D: dict):
                         or "—"})
     o.tabela(wiersze, tytul="Zestawienie przegród budowlanych", formaty={"U [W/(m²·K)]": 2, "Grubość [mm]": 0},
              szerokosci=["16mm", "24mm", None, "15mm", "15mm", "22mm"], wyrownanie={"Detale": "l"},
-             uwagi=["U — wartość z obliczenia wg PN-EN ISO 6946 / 13370 (rozdz. 4.1), zaokrąglona do 2 cyfr "
+             uwagi=["U — wartość z obliczenia wg PN-EN ISO 6946 / 13370 (obliczenia cieplno-wilgotnościowe), zaokrąglona do 2 cyfr "
                     "znaczących; „—” — przegroda wewnętrzna między pomieszczeniami ogrzewanymi (bez wymagań U).",
                     "Detale — detale PT-AR-D obejmujące węzły z udziałem przegrody (sekcja `wezly` modelu)."],
              zrodlo="model/budynek.yaml — przegrody; lamela.obliczenia.fizyka_energia")
@@ -588,7 +588,7 @@ def rozdz_wykonczenia(o: Opis, D: dict):
                      "Sufit": p.get("sufit") or "—", "θ_i [°C]": p.get("temp")})
     o.rozdzial("Zestawienie wykończeń wnętrz", """
     Wykończenia pomieszczeń wg modelu (kody materiałów — legenda w tabeli następnej; układ warstw podłóg i stropów —
-    rozdz. 2). Numeracja pomieszczeń jak na rzutach (parter = 1.xx).
+    rozdział „Rozwiązania konstrukcyjno-materiałowe przegród”). Numeracja pomieszczeń jak na rzutach (parter = 1.xx).
     """, podstawa="W-317", nowa_strona=True)
     o.tabela(rows, tytul="Wykończenia pomieszczeń", klasa="zwarta", formaty={"θ_i [°C]": 0},
              szerokosci=["10mm", None, "22mm", "22mm", "22mm", "20mm", "12mm"],
@@ -638,7 +638,7 @@ def rozdz_4linie(o: Opis, D: dict):
     2. **H — ochrona przed wodą (hydroizolacja, izolacja przeciwwilgociowa, wiatroizolacja):** {opis('hydro')};
     3. **S — szczelność powietrzna:** {opis('szczel')}; połączenia ze stolarką i przejścia instalacji — taśmy
        i mankiety systemowe; próba szczelności budynku PN-EN ISO 9972 (W-249);
-    4. **P — kontrola pary wodnej:** {opis('par')}; opór dyfuzyjny warstw maleje ku stronie zimnej (rozdz. 4.4).
+    4. **P — kontrola pary wodnej:** {opis('par')}; opór dyfuzyjny warstw maleje ku stronie zimnej (sprawdzenie — „Kondensacja międzywarstwowa”).
 
     Ocenę ciągłości w węzłach (karty mostków, PN-EN ISO 10211) i odesłania do detali zawiera tabela poniżej.
     """, podstawa="§ 24 pkt 2 RPB; W-248, W-249", nowa_strona=True)
@@ -658,3 +658,151 @@ def rozdz_4linie(o: Opis, D: dict):
              uwagi=["✓ — ciągłość zachowana; ! — uwaga wykonawcza (opis w kolumnie „Ciągłość / uwaga” i na karcie "
                     "węzła); ✗ — brak ciągłości."],
              zrodlo="projekt/08_obliczenia/mostki/zestawienie_mostkow.json — linie4")
+
+
+def _det_tyt(detale: dict, wzorzec: str) -> str:
+    tr = [f"{d} ({v['arkusz']})" for d, v in detale.items() if re.search(wzorzec, v["tytul"], re.I)]
+    return ", ".join(tr) or "—"
+
+
+def _rura(r: dict) -> str:
+    trasa = "wewn." if "wewn" in str(r.get("trasa", "")) else "zewn."
+    return f"{r['id']} DN{r.get('dn')} ({trasa}) → {r.get('do', '—')}"
+
+
+def rozdz_odwodnienie(o: Opis, D: dict):
+    m, det = D["m"], D["detale"]
+    sp_min, sp_zr = wym("wodkan", "spadek_dachu_min")
+    o.rozdzial("Odwodnienie dachów, tarasów i przyziemia", f"""
+    Każde pole dachu ma izolację spadkową (spadek ≥ {L(sp_min * 100 if sp_min < 1 else sp_min, 1)} % — {sp_zr}),
+    co najmniej jeden wpust z grzałką i przelew awaryjny w attyce. Obróbki attyk, wpustów i przelewów — detale
+    {_det_tyt(det, 'attyk|wpust|przelew')}; rury spustowe przy cokole — {_det_tyt(det, 'rura')}; progi z odwodnieniem
+    liniowym — {_det_tyt(det, 'próg')}. Wymiarowanie hydrauliczne i odbiorniki wód opadowych — PT-3 IS.
+    """, podstawa="PN-EN 12056-3; W-142", nowa_strona=False)
+    rows, prz = [], []
+    for d in m.raw.get("dachy") or []:
+        rows.append({"Dach": d["id"], "Przegroda": d.get("przegroda", "—"),
+                     "Spadek [%]": (d.get("spadek") or 0) * 100,
+                     "Wpusty": "; ".join(f"{w.get('opis', '').split(' — ')[0]} DN{w.get('dn')}"
+                                         + (" z grzałką" if w.get("podgrzewany") else "") for w in d.get("wpusty") or [])
+                     or "—",
+                     "Rury spustowe": "; ".join(_rura(r) for r in d.get("rury_spustowe") or []) or "—",
+                     "Attyka nad pokryciem [m]": (d.get("attyka") or {}).get("wys_nad_pokryciem")})
+        for p in d.get("przelewy_awaryjne") or []:
+            prz.append({"Przelew": p.get("opis", "").split(" — ")[0], "Dach": d["id"],
+                        "Wymiary [cm]": f"{round(p.get('szer', 0) * 100)} × {round(p.get('wys', 0) * 100)}",
+                        "Rzędna dna [m]": p.get("rzedna_dna"), "Rzędna pokrycia [m]": p.get("rzedna_pokrycia"),
+                        "Δh [mm]": (p["rzedna_dna"] - p["rzedna_pokrycia"]) * 1000
+                        if p.get("rzedna_dna") is not None and p.get("rzedna_pokrycia") is not None else None,
+                        "Opis": p.get("opis", "")})
+    o.tabela(rows, tytul="Odwodnienie dachów", klasa="zwarta", formaty={"Spadek [%]": 1, "Attyka nad pokryciem [m]": 2},
+             wyrownanie={"Wpusty": "l", "Rury spustowe": "l"}, szerokosci=["10mm", "16mm", "13mm", None, None, "17mm"],
+             zrodlo="model/budynek.yaml — dachy")
+    if prz:
+        o.tabela(prz, tytul="Przelewy awaryjne w attykach — rzędne", klasa="zwarta",
+                 formaty={"Rzędna dna [m]": 3, "Rzędna pokrycia [m]": 3, "Δh [mm]": 0}, wyrownanie={"Opis": "l"},
+                 szerokosci=["13mm", "10mm", "15mm", "16mm", "18mm", "12mm", None],
+                 uwagi=["Δh — wzniesienie dna przelewu ponad lokalną rzędną pokrycia (wierzch hydroizolacji); przelew "
+                        "działa po zablokowaniu wpustu, poniżej korony attyki. Rzędne względne: ±0,000 = posadzka "
+                        f"parteru = {L(m.zero_abs, 2)} m n.p.m. {DANE_PRZYKLADOWE}."],
+                 zrodlo="model/budynek.yaml — dachy.przelewy_awaryjne")
+    o.tekst("Przyziemie: nawierzchnie przy budynku ze spadkiem od ścian, odwodnienia liniowe przy progach drzwi HS, "
+            "drzwi zewnętrznych i bramy (tarasy i podesty — tabela „Lamele, balustrady, tarasy i podesty”); "
+            "hydroizolację płyty fundamentowej wywija się na cokół (detal "
+            f"{_det_tyt(det, 'cokół')}).")
+
+
+def rozdz_ppoz(o: Opis, D: dict):
+    m, w = D["m"], D["wsk"]
+    zl, zl_z = wym("ppoz", "kategoria_ZL")
+    gr, gr_z = wym("ppoz", "grupa_wysokosci")
+    kmax, k_z = wym("ppoz", "zwolnienie_213_kondygnacje_max")
+    kond = w["kondygnacje_nadziemne"]["wartosc"]
+    ei = [f"{k} — {nazwa_przegrody(p.nazwa)}" for k, p in m.przegrody.items() if re.search(r"\bE?I\s?\d{2}", p.nazwa)]
+    nro = [mt.nazwa for mt in m.materialy.values() if "NRO" in mt.nazwa]
+    o.rozdzial("Dane dotyczące warunków ochrony przeciwpożarowej", f"""
+    Dane w zakresie architektury (§ 23 pkt 10 RPB — stosownie do zakresu projektu; dane ogólne budynku — PAB,
+    § 20 ust. 1 pkt 13):
+
+    * kategoria zagrożenia ludzi **{zl}** ({zl_z}); grupa wysokości **{gr}** ({gr_z}), wysokość wg WT § 6 —
+      {L(w['wysokosc_WT6']['wartosc'])} m;
+    * {kond} kondygnacje nadziemne ≤ {kmax} — wymagań klasy odporności pożarowej budynku nie stawia się ({k_z});
+      budynek stanowi jedną strefę pożarową razem z garażem (W-212);
+    * ściany zewnętrzne i dach — nierozprzestrzeniające ognia (W-213): ETICS jako system z klasyfikacją NRO
+      ({'; '.join(nro) or 'wg deklaracji systemu'}); pokrycia dachów z klasyfikacją B_ROOF(t1) {ZAL};
+    * okładziny elewacyjne i lamele mocowane mechanicznie do konstrukcji (W-216);
+    * obudowy szachtów instalacyjnych: {'; '.join(ei) or 'nie występują'};
+    * przejścia instalacji przez przegrody zewnętrzne poniżej terenu — gazoszczelne (W-214), uszczelnienia
+      systemowe wg PT-3 IS i PT-4 IE;
+    * klasy odporności ogniowej podaje się na rysunkach wyłącznie dla elementów, dla których są wymagane (W-219).
+    """, podstawa="§ 23 pkt 10 RPB", nowa_strona=True)
+
+
+# ============================================================================================ składanie
+def buduj(D: dict, arkusze: list, kat_ar: Path | None, data: str) -> tuple[Dokument, Opis]:
+    d = dane_obiektu()
+    dok = Dokument("Projekt techniczny", "PT-AR", d, kod="PT-1 AR", branza="architektura", data=data,
+                   tom=(1, PT_TOMY), podtytul="Tom PT-1 — architektura (AR)")
+    dok.oswiadczenie_projektanta()           # PB art. 34 ust. 3d pkt 3 w brzmieniu art. 41 ust. 4a pkt 2 (PT)
+    o = Opis(dok)
+    o.md.append(f"<!-- wygenerowano: tools/dokumenty/tom_PT_AR.py; model: model/budynek.yaml ({data}) -->\n"
+                "# PT-1 AR — projekt techniczny, architektura (źródło części opisowej)")
+    rozdz_zakres(o, D, kat_ar)
+    rozdz_przegrody(o, D)
+    rozdz_akustyka(o, D)
+    rozdz_U(o, D)
+    rozdz_mostki(o, D)
+    rozdz_kondensacja(o, D)
+    rozdz_stolarka(o, D)
+    rozdz_wykonczenia(o, D)
+    rozdz_4linie(o, D)
+    rozdz_odwodnienie(o, D)
+    rozdz_ppoz(o, D)
+    zr = kat_ar.relative_to(REPO) if kat_ar else "—"
+    o.rozdzial("Wykaz rysunków — część rysunkowa", f"""
+    Część rysunkowa (§ 24 pkt 1–2 RPB) obejmuje rzuty wszystkich kondygnacji z rzutem dachu, przekroje i elewacje
+    w skali 1:50 (arkusze AR z katalogu `{zr}` — rysunki PAB dołączone jako podstawa rozwiązań PT; zmiany
+    względem PAB — brak) oraz detale cieplne i szczelności PT-AR-D w skalach 1:5 i 1:10. Wykaz rysunków z numerami,
+    skalami i formatami — karta części rysunkowej (generowana z tabliczek arkuszy).
+    """, podstawa="§ 24 RPB", nowa_strona=True)
+    o.tabela([{"Nr": a.nr, "Tytuł": a.tytul, "Skala": a.skala or "—", "Format": a.format or "—"} for a in arkusze],
+             tytul="Wykaz rysunków tomu PT-1 AR", klasa="zwarta", szerokosci=["24mm", None, "20mm", "16mm"])
+    dok.czesc_rysunkowa(arkusze)
+    return dok, o
+
+
+def main(argv=None) -> int:
+    ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    ap.add_argument("--wyjscie", default=str(KAT_WYDANIE))
+    ap.add_argument("--bez-arkuszy", action="store_true", help="bez dołączania arkuszy (szybki podgląd opisu)")
+    a = ap.parse_args(argv)
+    t0 = time.time()
+    out = Path(a.wyjscie)
+    out.mkdir(parents=True, exist_ok=True)
+    KAT_ZRODLA.mkdir(parents=True, exist_ok=True)
+    D = wczytaj_dane()
+    data = dane_obiektu()["data"]
+    arkusze, uw_ark, kat_ar = arkusze_branzy()
+    for u in uw_ark:
+        print("  ! arkusze:", u)
+    dok, o = buduj(D, [] if a.bez_arkuszy else arkusze, kat_ar, data)
+    o.zapisz(KAT_ZRODLA / "PT-1_AR_czesc_opisowa.md")
+    tom = Tom("PT-1 AR", [dok], dane=dok.dane, data=data, nr=1, symbol="AR", tom=(1, PT_TOMY),
+              strona_tytulowa=False, laczny_spis=False)
+    w = tom.zloz(out)
+    print(f"✓ {w.nazwa}: {w.strony} stron, {w.rozmiar_mb:.2f} MB → {w.sciezka}")
+    r = sprawdz_tom(w, LISTY_KONTROLNE["PT_AR"])
+    (KAT_ZRODLA / "raport_walidacji_PT_AR.txt").write_text(r.tekst(), encoding="utf-8")
+    r.zapisz_json(KAT_ZRODLA / "raport_walidacji_PT_AR.json")
+    s = r.podsumowanie()
+    print(f"  walidator PT_AR: {s['status']} — OK {s['OK']}, BRAK {s['BRAK']}, DO UZUPEŁNIENIA {s['DO UZUPEŁNIENIA']}, "
+          f"N/D {s['N/D']}, OSTRZ. {s['OSTRZEŻENIE']}; znaczniki [DO UZUPEŁNIENIA] ×{s['znaczniki_do_uzupelnienia']}")
+    for p in r.braki:
+        print(f"    ✗ {p.id} {p.opis} — {p.szczegoly}")
+    zamknij_przegladarke()
+    print(f"gotowe w {time.time() - t0:.1f} s")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -178,3 +178,38 @@ class DaneZag:
             d = min(g.distance(gr["line"]) for gr in self.granice if not gr["drogowa"])
             out.append((mp["id"], mp.get("typ"), (min(x1 - x0, y1 - y0), max(x1 - x0, y1 - y0)), d))
         return out
+
+    # ------------------------------------------------------------------ nasłonecznienie sąsiadów (WT § 60) — ocena uproszczona
+    def naslonecznienie_sasiadow(self, daty=("2027-03-21", "2026-09-23"), krok_min: int = 10) -> list[dict]:
+        """Czas [h] w godz. ``naslonecznienie_przedzial_godz`` (WT § 60 ust. 1), w którym cień projektowanego budynku
+        NIE dotyka rzutu budynku sąsiedniego. Założenia bezpieczne: wysokość cienia = z_top − t_min (najwyższy punkt
+        budynku ponad najniższy teren na obwodzie), cień jako otoczka wypukła rzutu i jego przesunięcia; każdy styk
+        z rzutem sąsiada liczony jako zacienienie całego budynku sąsiada."""
+        from shapely import affinity
+        from shapely.ops import unary_union
+        from lamela.sun import sun_position
+        (h0, h1), _, _ = self.wym("usytuowanie", "naslonecznienie_przedzial_godz")
+        wz = self.W["wysokosc_zabudowy"]
+        H = float(wz["z_top_abs"]) - float(wz["t_min"])
+        cz = [g for g in getattr(self.fp, "geoms", [self.fp])]
+        out = []
+        for s in self.dz.get("sasiedzi") or []:
+            zab = _poly(s.get("zabudowa"))
+            if zab is None:
+                continue
+            wyn = []
+            for dt in daty:
+                wolne = 0
+                for k in range(int((h1 - h0) * 60 / krok_min)):
+                    t = h0 * 60 + (k + 0.5) * krok_min
+                    az, el = sun_position(f"{dt} {int(t // 60):02d}:{int(t % 60):02d}")
+                    if el <= 0.5:
+                        continue                               # Słońce pod horyzontem — nie liczy się jako nasłonecznienie
+                    L_ = H / math.tan(math.radians(el))
+                    dx, dy = -L_ * math.sin(math.radians(az)), -L_ * math.cos(math.radians(az))
+                    cien = unary_union([unary_union([g, affinity.translate(g, dx, dy)]).convex_hull for g in cz])
+                    if not cien.intersects(zab):
+                        wolne += 1
+                wyn.append(wolne * krok_min / 60)
+            out.append(dict(nr=str(s.get("nr")), h_min=min(wyn), H=H, daty=daty, przedzial=(h0, h1)))
+        return out
