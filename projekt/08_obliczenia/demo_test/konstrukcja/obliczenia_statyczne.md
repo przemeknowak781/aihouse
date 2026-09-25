@@ -19,7 +19,7 @@ Model: `dom_testowy.yaml` (wersja 1.0, 2026-09-25) · biblioteka `lamela.oblicze
 | **4** |  | **Schody** |  |  |
 | 4.1 | `SCH1` | Schody SCH1 (P0 → P1) | 137% | **niespełnione** |
 | **5** |  | **Belki i podciągi** |  |  |
-| 5.1 | `B1` | Belka B1 | 81% | spełnione |
+| 5.1 | `B1` | Belka B1 | 75% | spełnione |
 | **6** |  | **Nadproża** |  |  |
 | 6.1 | `N-O0-01` | Nadproże N-O0-01 nad otworem O0-01 w ścianie S0-01 (światło 4,00 m) | 142% | **niespełnione** |
 | 6.2 | `N-O0-02` | Nadproże N-O0-02 nad otworem O0-02 w ścianie S0-01 (światło 1,80 m) | 73% | spełnione |
@@ -649,122 +649,122 @@ Podpory: S0-02 (ściana), B1 (belka), słupy: SL2
 ##### Pole P1 — zginanie dół, kierunek x
 
 - Wysokość użyteczna: d = **155** mm
-- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 34,66·10⁶/(1000·155²·1,0·21,43) = **0,0673** *(3.1.7(3))*
-- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0673) = **0,0697**
-- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,070 ≤ 0,493 = **spełniony**
-- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0697·1000·155·1,0·21,43/434,8 = **533** mm²
+- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 31,83·10⁶/(1000·155²·1,0·21,43) = **0,0618** *(3.1.7(3))*
+- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0618) = **0,0639**
+- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,064 ≤ 0,493 = **spełniony**
+- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0639·1000·155·1,0·21,43/434,8 = **488** mm²
 - Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,9/500·1000·155; 0,0013·1000·155) = **234** mm² *((9.1N) + NA)*
-- Przyjęto (z warunkiem rys): φ12 co 21 cm = **5,39** cm²/m
-- Naprężenie w stali (quasi-stała, przekrój zarysowany, α_e = 15): σ_s = α_e·M_qp·(d − x_II)/I_II = **228** MPa
-- Maksymalna średnica (w_max = 0,3 mm): φ_s = φ*_s·(f_ct,eff/2,9)·k_c·h_cr/(2(h − d)) = 18,7·(2,9/2,9)·0,4·100/(2·45) = **8,3** mm *(tabl. 7.2N, (7.6N))*
-- Maksymalny rozstaw prętów: s_max = (σ_s = 228 MPa) = **215** mm *(tabl. 7.3N)*
+- Przyjęto (z warunkiem rys): φ10 co 16 cm = **4,91** cm²/m
+- Naprężenie w stali (quasi-stała, przekrój zarysowany, α_e = 15): σ_s = α_e·M_qp·(d − x_II)/I_II = **249** MPa
+- Maksymalna średnica (w_max = 0,3 mm): φ_s = φ*_s·(f_ct,eff/2,9)·k_c·h_cr/(2(h − d)) = 15,1·(2,9/2,9)·0,4·100/(2·45) = **6,7** mm *(tabl. 7.2N, (7.6N))*
+- Maksymalny rozstaw prętów: s_max = (σ_s = 249 MPa) = **188** mm *(tabl. 7.3N)*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Zbrojenie na zginanie | A_s,req = 533 mm²/m | A_s,prov = 539 mm²/m | 99% | spełniony | 6.1, (9.1N) |
-| Rysy: rozstaw prętów (tabl. 7.3N) | s = 210 mm | s_max = 215 mm | 98% | spełniony | 7.3.3(2) |
+| Zbrojenie na zginanie | A_s,req = 488 mm²/m | A_s,prov = 491 mm²/m | 99% | spełniony | 6.1, (9.1N) |
+| Rysy: rozstaw prętów (tabl. 7.3N) | s = 160 mm | s_max = 188 mm | 85% | spełniony | 7.3.3(2) |
 
 ##### Pole P1 — zginanie dół, kierunek y
 
 - Wysokość użyteczna: d = **145** mm
-- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 35,73·10⁶/(1000·145²·1,0·21,43) = **0,0793** *(3.1.7(3))*
-- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0793) = **0,0827**
-- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,083 ≤ 0,493 = **spełniony**
-- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0827·1000·145·1,0·21,43/434,8 = **591** mm²
+- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 32,92·10⁶/(1000·145²·1,0·21,43) = **0,0731** *(3.1.7(3))*
+- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0731) = **0,0759**
+- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,076 ≤ 0,493 = **spełniony**
+- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0759·1000·145·1,0·21,43/434,8 = **543** mm²
 - Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,9/500·1000·145; 0,0013·1000·145) = **219** mm² *((9.1N) + NA)*
-- Przyjęto (z warunkiem rys): φ12 co 19 cm = **5,95** cm²/m
-- Naprężenie w stali (quasi-stała, przekrój zarysowany, α_e = 15): σ_s = α_e·M_qp·(d − x_II)/I_II = **230** MPa
-- Maksymalna średnica (w_max = 0,3 mm): φ_s = φ*_s·(f_ct,eff/2,9)·k_c·h_cr/(2(h − d)) = 18,3·(2,9/2,9)·0,4·100/(2·55) = **6,7** mm *(tabl. 7.2N, (7.6N))*
-- Maksymalny rozstaw prętów: s_max = (σ_s = 230 MPa) = **213** mm *(tabl. 7.3N)*
+- Przyjęto (z warunkiem rys): φ8 co 9 cm = **5,59** cm²/m
+- Naprężenie w stali (quasi-stała, przekrój zarysowany, α_e = 15): σ_s = α_e·M_qp·(d − x_II)/I_II = **244** MPa
+- Maksymalna średnica (w_max = 0,3 mm): φ_s = φ*_s·(f_ct,eff/2,9)·k_c·h_cr/(2(h − d)) = 15,6·(2,9/2,9)·0,4·100/(2·55) = **5,7** mm *(tabl. 7.2N, (7.6N))*
+- Maksymalny rozstaw prętów: s_max = (σ_s = 244 MPa) = **195** mm *(tabl. 7.3N)*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Zbrojenie na zginanie | A_s,req = 591 mm²/m | A_s,prov = 595 mm²/m | 99% | spełniony | 6.1, (9.1N) |
-| Rysy: rozstaw prętów (tabl. 7.3N) | s = 190 mm | s_max = 213 mm | 89% | spełniony | 7.3.3(2) |
+| Zbrojenie na zginanie | A_s,req = 543 mm²/m | A_s,prov = 559 mm²/m | 97% | spełniony | 6.1, (9.1N) |
+| Rysy: rozstaw prętów (tabl. 7.3N) | s = 90 mm | s_max = 195 mm | 46% | spełniony | 7.3.3(2) |
 
 ##### Pole P1 — zginanie góra, x
 
 - Wysokość użyteczna: d = **155** mm
-- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 23,81·10⁶/(1000·155²·1,0·21,43) = **0,0463** *(3.1.7(3))*
-- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0463) = **0,0474**
-- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,047 ≤ 0,493 = **spełniony**
-- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0474·1000·155·1,0·21,43/434,8 = **362** mm²
+- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 21,93·10⁶/(1000·155²·1,0·21,43) = **0,0426** *(3.1.7(3))*
+- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0426) = **0,0435**
+- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,044 ≤ 0,493 = **spełniony**
+- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0435·1000·155·1,0·21,43/434,8 = **333** mm²
 - Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,9/500·1000·155; 0,0013·1000·155) = **234** mm² *((9.1N) + NA)*
-- Przyjęto (z warunkiem rys): φ10 co 21 cm = **3,74** cm²/m
-- Naprężenie w stali (quasi-stała, przekrój zarysowany, α_e = 15): σ_s = α_e·M_qp·(d − x_II)/I_II = **223** MPa
-- Maksymalna średnica (w_max = 0,3 mm): φ_s = φ*_s·(f_ct,eff/2,9)·k_c·h_cr/(2(h − d)) = 19,8·(2,9/2,9)·0,4·100/(2·45) = **8,8** mm *(tabl. 7.2N, (7.6N))*
-- Maksymalny rozstaw prętów: s_max = (σ_s = 223 MPa) = **221** mm *(tabl. 7.3N)*
+- Przyjęto (z warunkiem rys): φ8 co 15 cm = **3,35** cm²/m
+- Naprężenie w stali (quasi-stała, przekrój zarysowany, α_e = 15): σ_s = α_e·M_qp·(d − x_II)/I_II = **248** MPa
+- Maksymalna średnica (w_max = 0,3 mm): φ_s = φ*_s·(f_ct,eff/2,9)·k_c·h_cr/(2(h − d)) = 15,2·(2,9/2,9)·0,4·100/(2·45) = **6,8** mm *(tabl. 7.2N, (7.6N))*
+- Maksymalny rozstaw prętów: s_max = (σ_s = 248 MPa) = **190** mm *(tabl. 7.3N)*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Zbrojenie na zginanie | A_s,req = 362 mm²/m | A_s,prov = 374 mm²/m | 97% | spełniony | 6.1, (9.1N) |
-| Rysy: rozstaw prętów (tabl. 7.3N) | s = 210 mm | s_max = 221 mm | 95% | spełniony | 7.3.3(2) |
+| Zbrojenie na zginanie | A_s,req = 333 mm²/m | A_s,prov = 335 mm²/m | 99% | spełniony | 6.1, (9.1N) |
+| Rysy: rozstaw prętów (tabl. 7.3N) | s = 150 mm | s_max = 190 mm | 79% | spełniony | 7.3.3(2) |
 
 ##### Pole P1 — zginanie góra, y
 
 - Wysokość użyteczna: d = **145** mm
-- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 21,56·10⁶/(1000·145²·1,0·21,43) = **0,0479** *(3.1.7(3))*
-- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0479) = **0,0491**
-- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,049 ≤ 0,493 = **spełniony**
-- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0491·1000·145·1,0·21,43/434,8 = **351** mm²
+- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 19,85·10⁶/(1000·145²·1,0·21,43) = **0,0441** *(3.1.7(3))*
+- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0441) = **0,0451**
+- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,045 ≤ 0,493 = **spełniony**
+- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0451·1000·145·1,0·21,43/434,8 = **322** mm²
 - Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,9/500·1000·145; 0,0013·1000·145) = **219** mm² *((9.1N) + NA)*
-- Przyjęto (z warunkiem rys): φ8 co 14 cm = **3,59** cm²/m
-- Naprężenie w stali (quasi-stała, przekrój zarysowany, α_e = 15): σ_s = α_e·M_qp·(d − x_II)/I_II = **225** MPa
-- Maksymalna średnica (w_max = 0,3 mm): φ_s = φ*_s·(f_ct,eff/2,9)·k_c·h_cr/(2(h − d)) = 19,4·(2,9/2,9)·0,4·100/(2·55) = **7,0** mm *(tabl. 7.2N, (7.6N))*
-- Maksymalny rozstaw prętów: s_max = (σ_s = 225 MPa) = **219** mm *(tabl. 7.3N)*
+- Przyjęto (z warunkiem rys): φ8 co 15 cm = **3,35** cm²/m
+- Naprężenie w stali (quasi-stała, przekrój zarysowany, α_e = 15): σ_s = α_e·M_qp·(d − x_II)/I_II = **240** MPa
+- Maksymalna średnica (w_max = 0,3 mm): φ_s = φ*_s·(f_ct,eff/2,9)·k_c·h_cr/(2(h − d)) = 16,0·(2,9/2,9)·0,4·100/(2·55) = **5,8** mm *(tabl. 7.2N, (7.6N))*
+- Maksymalny rozstaw prętów: s_max = (σ_s = 240 MPa) = **199** mm *(tabl. 7.3N)*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Zbrojenie na zginanie | A_s,req = 351 mm²/m | A_s,prov = 359 mm²/m | 98% | spełniony | 6.1, (9.1N) |
-| Rysy: rozstaw prętów (tabl. 7.3N) | s = 140 mm | s_max = 219 mm | 64% | spełniony | 7.3.3(2) |
+| Zbrojenie na zginanie | A_s,req = 322 mm²/m | A_s,prov = 335 mm²/m | 96% | spełniony | 6.1, (9.1N) |
+| Rysy: rozstaw prętów (tabl. 7.3N) | s = 150 mm | s_max = 199 mm | 75% | spełniony | 7.3.3(2) |
 
 ##### Pole P1 — zbrojenie narożne (góra i dół, strefy 0,78 × 0,78 m)
 
 - Wysokość użyteczna: d = **145** mm
-- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 17,31·10⁶/(1000·145²·1,0·21,43) = **0,0384** *(3.1.7(3))*
-- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0384) = **0,0392**
-- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,039 ≤ 0,493 = **spełniony**
-- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0392·1000·145·1,0·21,43/434,8 = **280** mm²
+- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 15,88·10⁶/(1000·145²·1,0·21,43) = **0,0352** *(3.1.7(3))*
+- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0352) = **0,0359**
+- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,036 ≤ 0,493 = **spełniony**
+- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0359·1000·145·1,0·21,43/434,8 = **256** mm²
 - Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,9/500·1000·145; 0,0013·1000·145) = **219** mm² *((9.1N) + NA)*
-- Przyjęto: φ8 co 17 cm = **2,96** cm²/m
+- Przyjęto: φ8 co 19 cm = **2,65** cm²/m
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Zbrojenie na zginanie | A_s,req = 280 mm²/m | A_s,prov = 296 mm²/m | 95% | spełniony | 6.1, (9.1N) |
+| Zbrojenie na zginanie | A_s,req = 256 mm²/m | A_s,prov = 265 mm²/m | 97% | spełniony | 6.1, (9.1N) |
 
 ##### Pole P1 — ścinanie (maks. reakcja podpory, [UPR] 0,6·r przy podporze pośredniej)
 
 - Współczynnik skali: k = 1 + √(200/d) ≤ 2,0 = 1 + √(200/155) = **2,000**
-- Stopień zbrojenia podłużnego: ρ_l = A_sl/(b_w·d) ≤ 0,02 = 374/(1000·155) = **0,00241**
-- Nośność na ścinanie: V_Rd,c = C_Rd,c·k·(100·ρ_l·f_ck)^(1/3)·b_w·d = 0,1286·2,000·(100·0,00241·30)^(1/3)·1000·155·10⁻³ = **77,10** kN *((6.2.a); C_Rd,c = 0,18/γ_c)*
+- Stopień zbrojenia podłużnego: ρ_l = A_sl/(b_w·d) ≤ 0,02 = 335/(1000·155) = **0,00216**
+- Nośność na ścinanie: V_Rd,c = C_Rd,c·k·(100·ρ_l·f_ck)^(1/3)·b_w·d = 0,1286·2,000·(100·0,00216·30)^(1/3)·1000·155·10⁻³ = **74,33** kN *((6.2.a); C_Rd,c = 0,18/γ_c)*
 - Wartość minimalna: V_Rd,c,min = v_min·b_w·d, v_min = 0,035·k^(3/2)·f_ck^(1/2) = 0,5422·1000·155·10⁻³ = **84,04** kN *((6.2.b), (6.3N))*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Ścinanie bez zbrojenia poprzecznego (6.2.2) | V_Ed = 61,03 kN | V_Rd,c = 84,04 kN | 73% | spełniony | PN-EN 1992-1-1 6.2.2 |
+| Ścinanie bez zbrojenia poprzecznego (6.2.2) | V_Ed = 56,00 kN | V_Rd,c = 84,04 kN | 67% | spełniony | PN-EN 1992-1-1 6.2.2 |
 
 ##### Pole P1 — ugięcie (l = 3,91 m, K = 1,0)
 
-- Stopień zbrojenia wymagany: ρ = A_s,req/(b·d) = 533/(1000·155) = **0,00344**
+- Stopień zbrojenia wymagany: ρ = A_s,req/(b·d) = 488/(1000·155) = **0,00315**
 - Wartość odniesienia: ρ₀ = √f_ck·10⁻³ = √30·10⁻³ = **0,00548**
-- Graniczne l/d (ρ ≤ ρ₀): K·[11 + 1,5·√f_ck·ρ₀/ρ + 3,2·√f_ck·(ρ₀/ρ − 1)^(3/2)] = 1,0·[11 + 1,5·5,477·1,593 + 3,2·5,477·(1,593 − 1)^1,5] = **32,1** *((7.16a))*
-- Mnożnik od naprężeń w stali: 310/σ_s ≈ 500/(f_yk·A_s,req/A_s,prov) ≤ 1,5 = 500/(500·533/539) = **1,011** *((7.17))*
+- Graniczne l/d (ρ ≤ ρ₀): K·[11 + 1,5·√f_ck·ρ₀/ρ + 3,2·√f_ck·(ρ₀/ρ − 1)^(3/2)] = 1,0·[11 + 1,5·5,477·1,740 + 3,2·5,477·(1,740 − 1)^1,5] = **36,5** *((7.16a))*
+- Mnożnik od naprężeń w stali: 310/σ_s ≈ 500/(f_yk·A_s,req/A_s,prov) ≤ 1,5 = 500/(500·488/491) = **1,006** *((7.17))*
 - Smukłość rzeczywista: l_eff/d = 3,91/0,155 = **25,2**
 - *Obliczenie ugięcia (7.4.3)*
 - Efektywny moduł sprężystości: E_c,eff = E_cm/(1 + φ) = 33000/(1 + 2,5) = **9429** MPa *((7.20))*
 - Stosunek modułów: α_e = E_s/E_c,eff = 200000/9429 = **21,21**
-- Przekrój niezarysowany: x_I; I_I = **103,0 mm; 699,4·10⁶ mm⁴**
-- Przekrój zarysowany: x_II; I_II = **49,2 mm; 167,6·10⁶ mm⁴**
-- Moment rysujący: M_cr = f_ctm·I_I/(h − x_I) = 2,9·699,4·10⁶/(200 − 103,0) = **20,90** kNm
+- Przekrój niezarysowany: x_I; I_I = **102,7 mm; 696,6·10⁶ mm⁴**
+- Przekrój zarysowany: x_II; I_II = **47,3 mm; 156,1·10⁶ mm⁴**
+- Moment rysujący: M_cr = f_ctm·I_I/(h − x_I) = 2,9·696,6·10⁶/(200 − 102,7) = **20,77** kNm
 - Współczynnik rozkładu: ζ = 1 − β·(M_cr/M_qp)², β = 0,5 = M_qp ≤ M_cr → 0 = **0,000** *((7.19))*
-- Ugięcie od obciążeń (quasi-stała): w_q = ζ·w_II + (1 − ζ)·w_I = 0,000·20,23 + 1,000·4,85 = **4,85** mm *((7.18))*
-- Ugięcie od skurczu: w_cs = k·(1/r_cs)·l², 1/r_cs = ε_cs·α_e·S/I = 0,125·0,340·10⁻⁶·3910² = **0,65** mm *((7.21))*
-- Ugięcie całkowite: w = w_q + w_cs = 4,85 + 0,65 = **5,50** mm
+- Ugięcie od obciążeń (quasi-stała): w_q = ζ·w_II + (1 − ζ)·w_I = 0,000·21,72 + 1,000·4,87 = **4,87** mm *((7.18))*
+- Ugięcie od skurczu: w_cs = k·(1/r_cs)·l², 1/r_cs = ε_cs·α_e·S/I = 0,125·0,313·10⁻⁶·3910² = **0,60** mm *((7.21))*
+- Ugięcie całkowite: w = w_q + w_cs = 4,87 + 0,60 = **5,46** mm
 - Ugięcie dopuszczalne: w_lim = L/250 = 3910/250 = **15,6** mm *(7.4.1(4))*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Ugięcie — graniczna smukłość l/d (7.4.2) | l/d = 25,2  | (l/d)_lim = 32,4  | 78% | spełniony | (7.16), tabl. 7.4N |
+| Ugięcie — graniczna smukłość l/d (7.4.2) | l/d = 25,2  | (l/d)_lim = 36,7  | 69% | spełniony | (7.16), tabl. 7.4N |
 
 > l/d spełnione — obliczenie (7.4.3) informacyjnie: w = 5,5 mm ≤? 15,6 mm.
 
@@ -780,7 +780,7 @@ Podpory: S0-02 (ściana), B1 (belka), słupy: SL2
 
 | Pole | l_x × l_y [m] | Brzegi | M_x,dół [kNm/m] MES / tabl. | Zbroj. x dół | M_y,dół MES / tabl. | Zbroj. y dół | M_x,góra | Zbroj. x góra | M_y,góra | Zbroj. y góra | Naroża M / zbroj. | w / w_lim [mm] | η_max |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| P1 | 3,91 × 4,85 | SWWS | 34,66 / — | φ12 co 21 cm | 35,73 / — | φ12 co 19 cm | −23,81 | φ10 co 21 cm | −21,56 | φ8 co 14 cm | 17,31 / φ8 co 17 cm | 5,5 / 15,6 | 99% |
+| P1 | 3,91 × 4,85 | SWWS | 31,83 / — | φ10 co 16 cm | 32,92 / — | φ8 co 9 cm | −21,93 | φ8 co 15 cm | −19,85 | φ8 co 15 cm | 15,88 / φ8 co 19 cm | 5,5 / 15,6 | 99% |
 
 **Reakcje podporowe (charakterystyczne, cała grupa płyt)**
 
@@ -945,7 +945,7 @@ Bieg 2: 9 podnóżków 17,0/28,0 cm, szer. 1,00 m, rozpiętość w rzucie L = 3,
 
 ### Poz. 5.1 — Belka B1
 
-Element modelu: `B1` · maks. wykorzystanie nośności η = 81% · wszystkie warunki spełnione
+Element modelu: `B1` · maks. wykorzystanie nośności η = 75% · wszystkie warunki spełnione
 
 #### Opis i schemat statyczny
 
@@ -971,17 +971,17 @@ Belka żelbetowa b × h = 20 × 30 cm, oś (10,09, 4,85) → (13,91, 4,85), L = 
 
 ##### Siły wewnętrzne — B1 (obwiednia kombinacji)
 
-- Moment przęsłowy maks.: M_Ed,max = **49,72** kNm
-- Moment podporowy (min.): M_Ed,min = **−0,44** kNm
-- Siła poprzeczna maks.: V_Ed = **78,07** kN
+- Moment przęsłowy maks.: M_Ed,max = **45,80** kNm
+- Moment podporowy (min.): M_Ed,min = **−0,41** kNm
+- Siła poprzeczna maks.: V_Ed = **72,22** kN
 
 ##### B1 — zginanie w przęśle (przekrój teowy)
 
 - Wysokość użyteczna: d = **459** mm
-- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 49,72·10⁶/(849·459²·1,0·21,43) = **0,0130** *(3.1.7(3))*
-- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0130) = **0,0131**
-- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,013 ≤ 0,493 = **spełniony**
-- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0131·849·459·1,0·21,43/434,8 = **251** mm²
+- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 45,80·10⁶/(849·459²·1,0·21,43) = **0,0119** *(3.1.7(3))*
+- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0119) = **0,0120**
+- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,012 ≤ 0,493 = **spełniony**
+- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0120·849·459·1,0·21,43/434,8 = **231** mm²
 - Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,9/500·849·459; 0,0013·849·459) = **588** mm² *((9.1N) + NA)*
 - Strefa ściskana w półce: x_eff = ξ_eff·d ≤ h_f = 6 ≤ 200 = **przekrój pozornie teowy**
 - Zbrojenie minimalne (b_t = b_w — strefa rozciągana w środniku): A_s,min = max(0,26·f_ctm/f_yk·b_w·d; 0,0013·b_w·d) = **138** mm² *((9.1N))*
@@ -989,7 +989,7 @@ Belka żelbetowa b × h = 20 × 30 cm, oś (10,09, 4,85) → (13,91, 4,85), L = 
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Zbrojenie dolne | A_s,req = 251 mm² | A_s,prov = 308 mm² | 81% | spełniony | 6.1 |
+| Zbrojenie dolne | A_s,req = 231 mm² | A_s,prov = 308 mm² | 75% | spełniony | 6.1 |
 
 ##### B1 — ścinanie
 
@@ -1000,7 +1000,7 @@ Belka żelbetowa b × h = 20 × 30 cm, oś (10,09, 4,85) → (13,91, 4,85), L = 
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·459 = **413** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 200·413·0,528·21,43/(2,00 + 0,500)·10⁻³ = **373,91** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 100,5·413·434,8·2,00/(78,07·10³) = **463** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 100,5·413·434,8·2,00/(72,22·10³) = **500** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·459 = **344** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 100,5/(0,00088·200) = **574** mm *((9.5N))*
 - Przyjęto strzemiona: φ8 2-cięte co s = **340** mm
@@ -1008,15 +1008,15 @@ Belka żelbetowa b × h = 20 × 30 cm, oś (10,09, 4,85) → (13,91, 4,85), L = 
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Nośność krzyżulców betonowych | V_Ed = 78,07 kN | V_Rd,max = 373,91 kN | 21% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 78,07 kN | V_Rd,s = 106,21 kN | 74% | spełniony | (6.8) |
+| Nośność krzyżulców betonowych | V_Ed = 72,22 kN | V_Rd,max = 373,91 kN | 19% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 72,22 kN | V_Rd,s = 106,21 kN | 68% | spełniony | (6.8) |
 
 ##### B1 — ugięcie
 
-- Stopień zbrojenia wymagany: ρ = A_s,req/(b·d) = 251/(200·459) = **0,00273**
+- Stopień zbrojenia wymagany: ρ = A_s,req/(b·d) = 231/(200·459) = **0,00251**
 - Wartość odniesienia: ρ₀ = √f_ck·10⁻³ = √30·10⁻³ = **0,00548**
-- Graniczne l/d (ρ ≤ ρ₀): K·[11 + 1,5·√f_ck·ρ₀/ρ + 3,2·√f_ck·(ρ₀/ρ − 1)^(3/2)] = 1,0·[11 + 1,5·5,477·2,005 + 3,2·5,477·(2,005 − 1)^1,5] = **45,1** *((7.16a))*
-- Mnożnik od naprężeń w stali: 310/σ_s ≈ 500/(f_yk·A_s,req/A_s,prov) ≤ 1,5 = 500/(500·251/308) = **1,228** *((7.17))*
+- Graniczne l/d (ρ ≤ ρ₀): K·[11 + 1,5·√f_ck·ρ₀/ρ + 3,2·√f_ck·(ρ₀/ρ − 1)^(3/2)] = 1,0·[11 + 1,5·5,477·2,178 + 3,2·5,477·(2,178 − 1)^1,5] = **51,3** *((7.16a))*
+- Mnożnik od naprężeń w stali: 310/σ_s ≈ 500/(f_yk·A_s,req/A_s,prov) ≤ 1,5 = 500/(500·231/308) = **1,334** *((7.17))*
 - Przekrój teowy b_eff/b_w > 3: × 0,8 = **0,80**
 - Smukłość rzeczywista: l_eff/d = 3,82/0,459 = **8,3**
 - *Obliczenie ugięcia (7.4.3)*
@@ -1033,7 +1033,7 @@ Belka żelbetowa b × h = 20 × 30 cm, oś (10,09, 4,85) → (13,91, 4,85), L = 
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Ugięcie — graniczna smukłość l/d (7.4.2) | l/d = 8,3  | (l/d)_lim = 44,3  | 19% | spełniony | (7.16), tabl. 7.4N |
+| Ugięcie — graniczna smukłość l/d (7.4.2) | l/d = 8,3  | (l/d)_lim = 54,7  | 15% | spełniony | (7.16), tabl. 7.4N |
 
 > l/d spełnione — obliczenie (7.4.3) informacyjnie: w = 2,1 mm ≤? 15,3 mm.
 
@@ -3667,13 +3667,13 @@ Element modelu: `L1` · maks. wykorzystanie nośności η = 133% · **WARUNKI NI
 
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
-| QA_pB | 2,57 | 11,6 |
-| S1 | 1,44 | 6,5 |
-| QA | 3,92 | 18,3 |
 | H | 0,80 | 3,6 |
 | QA_pA | 1,51 | 6,7 |
-| G | 49,85 | 244,2 |
+| QA | 3,92 | 18,3 |
+| QA_pB | 2,57 | 11,6 |
 | S2 | 1,44 | 6,5 |
+| S1 | 1,44 | 6,5 |
+| G | 49,85 | 244,2 |
 
 #### Obliczenia
 
@@ -3736,14 +3736,14 @@ Element modelu: `L2` · maks. wykorzystanie nośności η = 118% · **WARUNKI NI
 
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
+| QA_pA | 0,00 | 0,0 |
+| QA | 17,03 | 61,5 |
 | QA_pB | 7,35 | 29,1 |
 | SB2 | 3,96 | 13,6 |
-| QA | 17,03 | 61,5 |
-| QA_pA | 0,00 | 0,0 |
-| G | 90,48 | 377,4 |
 | S1 | 4,55 | 15,9 |
-| H | 1,52 | 5,5 |
+| G | 90,48 | 377,4 |
 | S2 | 6,72 | 23,4 |
+| H | 1,52 | 5,5 |
 
 #### Obliczenia
 
@@ -3806,13 +3806,13 @@ Element modelu: `L3` · maks. wykorzystanie nośności η = 119% · **WARUNKI NI
 
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
-| QA_pB | 3,74 | 11,7 |
-| S1 | 1,34 | 6,5 |
-| QA | 3,90 | 27,7 |
 | H | 0,74 | 3,6 |
 | QA_pA | 0,00 | 2,5 |
-| G | 50,78 | 314,4 |
+| QA | 3,90 | 27,7 |
+| QA_pB | 3,74 | 11,7 |
 | S2 | 1,34 | 6,5 |
+| S1 | 1,34 | 6,5 |
+| G | 50,78 | 314,4 |
 
 #### Obliczenia
 
@@ -3875,13 +3875,13 @@ Element modelu: `L4` · maks. wykorzystanie nośności η = 134% · **WARUNKI NI
 
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
-| QA_pB | 0,00 | 0,0 |
-| S1 | 1,46 | 7,4 |
-| QA | 4,40 | 14,4 |
 | H | 0,81 | 4,1 |
 | QA_pA | 5,25 | 17,0 |
-| G | 52,08 | 271,2 |
+| QA | 4,40 | 14,4 |
+| QA_pB | 0,00 | 0,0 |
 | S2 | 1,46 | 7,4 |
+| S1 | 1,46 | 7,4 |
+| G | 52,08 | 271,2 |
 
 #### Obliczenia
 
@@ -3944,13 +3944,13 @@ Element modelu: `L5` · maks. wykorzystanie nośności η = 96% · wszystkie war
 
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
-| QA_pB | 8,68 | 46,4 |
-| S1 | 5,23 | 29,4 |
-| QA | 16,31 | 83,8 |
 | H | 2,90 | 16,4 |
 | QA_pA | 7,63 | 37,4 |
-| G | 123,00 | 687,3 |
+| QA | 16,31 | 83,8 |
+| QA_pB | 8,68 | 46,4 |
 | S2 | 5,23 | 29,4 |
+| S1 | 5,23 | 29,4 |
+| G | 123,00 | 687,3 |
 
 #### Obliczenia
 
@@ -4009,7 +4009,7 @@ Spód stopy −1,100 m, teren −0,23 m → zagłębienie D = 0,87 m.
 ##### F1
 
 - Ciężar stopy i gruntu nad nią: G_f = B·L·h·25 + B·L·(D − h)·18 = **13,25** kN
-- Obciążenie obliczeniowe: V_d = max(6.10a; 6.10b) = **101,4** kN
+- Obciążenie obliczeniowe: V_d = max(6.10a; 6.10b) = **115,1** kN
 - *Nośność podłoża*
 - Parametry podłoża (charakterystyczne, M1: γ_φ = 1,0): φ'_k; c'_k; γ = **33,0°; 0,0 kPa; 18,5 kN/m³ — Piasek średni (Ps), średnio zagęszczony, I_D ≈ 0,6 [DANE PRZYKŁADOWE]**
 - Współczynnik nośności (nadkład): N_q = e^(π·tg φ')·tg²(45° + φ'/2) = **26,09** *((D.2))*
@@ -4022,26 +4022,26 @@ Spód stopy −1,100 m, teren −0,23 m → zagłębienie D = 0,87 m.
 - Opór graniczny: R_k = (R_k/A')·A' = 686,3·0,720 = **494,2** kN
 - Obliczeniowy opór graniczny (DA2*): R_d = R_k/γ_R;v = 494,2/1,40 = **353,0** kN *(NA.2.6 (Ap2:2010), tabl. A.5)*
 - *Osiadanie*
-- Nacisk pod fundamentem (SLS): q = **111,3** kPa
+- Nacisk pod fundamentem (SLS): q = **124,0** kPa
 - Moduł edometryczny: M₀ = **100** MPa *([ZAŁ — do badań])*
-- Zasięg strefy aktywnej: z_max: σ_z ≤ 0,2·σ'_v0 = (warstwy h_i = 0,150 m) = **1,95** m *(PN-EN 1997-1 6.6.2(6))*
-- Osiadanie: s = Σ σ_z,i·h_i/M₀ = Σ (13 warstw) = **0,8** mm
+- Zasięg strefy aktywnej: z_max: σ_z ≤ 0,2·σ'_v0 = (warstwy h_i = 0,150 m) = **2,10** m *(PN-EN 1997-1 6.6.2(6))*
+- Osiadanie: s = Σ σ_z,i·h_i/M₀ = Σ (14 warstw) = **0,9** mm
 - Przebicie — obwód kontrolny w odległości a = d: u = 4·c + 2π·a = 4·0,22 + 2π·0,348 = **3,067** m *(6.4.4(2))*
 - Siła przebijająca zredukowana o odpór: V_Ed,red = V_Ed − σ·A_in = **0,0** kN
 - Naprężenie: v_Ed = V_Ed,red/(u·d) = **0,000** MPa
 - Nośność (ρ_l = 0,2 % — min.): v_Rd = C_Rd,c·k·(100ρf_ck)^(1/3)·2d/a ≥ v_min·2d/a = **0,816** MPa *((6.50))*
 - *Zbrojenie dolne stopy*
 - Wysokość użyteczna: d = **348** mm
-- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 2,51·10⁶/(1200·348²·1,0·17,86) = **0,0010** *(3.1.7(3))*
-- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0010) = **0,0010**
+- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 2,93·10⁶/(1200·348²·1,0·17,86) = **0,0011** *(3.1.7(3))*
+- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0011) = **0,0011**
 - Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,001 ≤ 0,493 = **spełniony**
-- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0010·1200·348·1,0·17,86/434,8 = **17** mm²
+- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0011·1200·348·1,0·17,86/434,8 = **19** mm²
 - Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,6/500·1200·348; 0,0013·1200·348) = **565** mm² *((9.1N) + NA)*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Nośność podłoża (GEO, DA2*) | V_d = 101,4 kN | R_d = 353,0 kN | 29% | spełniony | PN-EN 1997-1 (6.1), NA.2.6 |
-| Osiadanie | s = 0,8 mm | s_max = 50,0 mm | 2% | spełniony | PN-EN 1997-1 NA.3 (tabl. NA.3) |
+| Nośność podłoża (GEO, DA2*) | V_d = 115,1 kN | R_d = 353,0 kN | 33% | spełniony | PN-EN 1997-1 (6.1), NA.2.6 |
+| Osiadanie | s = 0,9 mm | s_max = 50,0 mm | 2% | spełniony | PN-EN 1997-1 NA.3 (tabl. NA.3) |
 | Głębokość posadowienia | D_min = 1,00 m | D = 0,87 m | 115% | **NIESPEŁNIONY** | W-284 |
 | Przebicie stopy | v_Ed = 0,000 MPa | v_Rd = 0,816 MPa | 0% | spełniony | (6.50) |
 
@@ -4065,7 +4065,7 @@ Spód stopy −1,100 m, teren −0,28 m → zagłębienie D = 0,82 m.
 ##### F2
 
 - Ciężar stopy i gruntu nad nią: G_f = B·L·h·25 + B·L·(D − h)·18 = **12,68** kN
-- Obciążenie obliczeniowe: V_d = max(6.10a; 6.10b) = **78,0** kN
+- Obciążenie obliczeniowe: V_d = max(6.10a; 6.10b) = **88,7** kN
 - *Nośność podłoża*
 - Parametry podłoża (charakterystyczne, M1: γ_φ = 1,0): φ'_k; c'_k; γ = **33,0°; 0,0 kPa; 18,5 kN/m³ — Piasek średni (Ps), średnio zagęszczony, I_D ≈ 0,6 [DANE PRZYKŁADOWE]**
 - Współczynnik nośności (nadkład): N_q = e^(π·tg φ')·tg²(45° + φ'/2) = **26,09** *((D.2))*
@@ -4078,26 +4078,26 @@ Spód stopy −1,100 m, teren −0,28 m → zagłębienie D = 0,82 m.
 - Opór graniczny: R_k = (R_k/A')·A' = 659,0·0,720 = **474,5** kN
 - Obliczeniowy opór graniczny (DA2*): R_d = R_k/γ_R;v = 474,5/1,40 = **338,9** kN *(NA.2.6 (Ap2:2010), tabl. A.5)*
 - *Osiadanie*
-- Nacisk pod fundamentem (SLS): q = **85,7** kPa
+- Nacisk pod fundamentem (SLS): q = **95,6** kPa
 - Moduł edometryczny: M₀ = **100** MPa *([ZAŁ — do badań])*
-- Zasięg strefy aktywnej: z_max: σ_z ≤ 0,2·σ'_v0 = (warstwy h_i = 0,150 m) = **1,80** m *(PN-EN 1997-1 6.6.2(6))*
-- Osiadanie: s = Σ σ_z,i·h_i/M₀ = Σ (12 warstw) = **0,6** mm
+- Zasięg strefy aktywnej: z_max: σ_z ≤ 0,2·σ'_v0 = (warstwy h_i = 0,150 m) = **1,95** m *(PN-EN 1997-1 6.6.2(6))*
+- Osiadanie: s = Σ σ_z,i·h_i/M₀ = Σ (13 warstw) = **0,7** mm
 - Przebicie — obwód kontrolny w odległości a = d: u = 4·c + 2π·a = 4·0,22 + 2π·0,348 = **3,067** m *(6.4.4(2))*
 - Siła przebijająca zredukowana o odpór: V_Ed,red = V_Ed − σ·A_in = **0,0** kN
 - Naprężenie: v_Ed = V_Ed,red/(u·d) = **0,000** MPa
 - Nośność (ρ_l = 0,2 % — min.): v_Rd = C_Rd,c·k·(100ρf_ck)^(1/3)·2d/a ≥ v_min·2d/a = **0,816** MPa *((6.50))*
 - *Zbrojenie dolne stopy*
 - Wysokość użyteczna: d = **348** mm
-- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 1,83·10⁶/(1200·348²·1,0·17,86) = **0,0007** *(3.1.7(3))*
-- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0007) = **0,0007**
+- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 2,15·10⁶/(1200·348²·1,0·17,86) = **0,0008** *(3.1.7(3))*
+- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0008) = **0,0008**
 - Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,001 ≤ 0,493 = **spełniony**
-- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0007·1200·348·1,0·17,86/434,8 = **12** mm²
+- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0008·1200·348·1,0·17,86/434,8 = **14** mm²
 - Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,6/500·1200·348; 0,0013·1200·348) = **565** mm² *((9.1N) + NA)*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Nośność podłoża (GEO, DA2*) | V_d = 78,0 kN | R_d = 338,9 kN | 23% | spełniony | PN-EN 1997-1 (6.1), NA.2.6 |
-| Osiadanie | s = 0,6 mm | s_max = 50,0 mm | 1% | spełniony | PN-EN 1997-1 NA.3 (tabl. NA.3) |
+| Nośność podłoża (GEO, DA2*) | V_d = 88,7 kN | R_d = 338,9 kN | 26% | spełniony | PN-EN 1997-1 (6.1), NA.2.6 |
+| Osiadanie | s = 0,7 mm | s_max = 50,0 mm | 1% | spełniony | PN-EN 1997-1 NA.3 (tabl. NA.3) |
 | Głębokość posadowienia | D_min = 1,00 m | D = 0,82 m | 122% | **NIESPEŁNIONY** | W-284 |
 | Przebicie stopy | v_Ed = 0,000 MPa | v_Rd = 0,816 MPa | 0% | spełniony | (6.50) |
 
@@ -4134,10 +4134,10 @@ Kody kształtu wg PN-EN ISO 3766: 00 — pręt prosty, 11 — odgięty 90°, 21 
 | ST1/P2 | 3 | 10 | 00 góra x (nad podporami) | 3,78 | 67 |  |  | 253,26 |  |  |
 | ST1/P2 | 4 | 8 | 00 góra y (nad podporami) | 5,10 | 27 |  | 137,70 |  |  |  |
 | ST1/P2 | 5 | 10 | 00 narożne góra i dół, 2 kierunki | 1,56 | 80 |  |  | 124,80 |  |  |
-| PL-D/P1 | 1 | 12 | 00 dół x | 4,21 | 24 |  |  |  | 101,04 |  |
-| PL-D/P1 | 2 | 12 | 00 dół y | 5,15 | 21 |  |  |  | 108,15 |  |
-| PL-D/P1 | 3 | 10 | 00 góra x (nad podporami) | 2,65 | 24 |  |  | 63,60 |  |  |
-| PL-D/P1 | 4 | 8 | 00 góra y (nad podporami) | 3,21 | 28 |  | 89,88 |  |  |  |
+| PL-D/P1 | 1 | 10 | 00 dół x | 4,21 | 31 |  |  | 130,51 |  |  |
+| PL-D/P1 | 2 | 8 | 00 dół y | 5,15 | 44 |  | 226,60 |  |  |  |
+| PL-D/P1 | 3 | 8 | 00 góra x (nad podporami) | 2,65 | 33 |  | 87,45 |  |  |  |
+| PL-D/P1 | 4 | 8 | 00 góra y (nad podporami) | 3,21 | 27 |  | 86,67 |  |  |  |
 | PL-D/P1 | 5 | 8 | 00 narożne góra i dół, 2 kierunki | 1,18 | 20 |  | 23,60 |  |  |  |
 | SCH1 — bieg 1 | 1 | 10 | 00 dołem wzdłuż biegu (+ odgięcia w podporach) | 4,06 | 6 |  |  | 24,36 |  |  |
 | SCH1 — bieg 1 | 2 | 8 | 00 rozdzielcze | 0,95 | 10 |  | 9,50 |  |  |  |
@@ -4217,11 +4217,11 @@ Kody kształtu wg PN-EN ISO 3766: 00 — pręt prosty, 11 — odgięty 90°, 21 
 | L5 | 2 | 6 | 51 40×20 cm | 1,40 | 29 | 40,60 |  |  |  |  |
 | F1 | 1 | 12 | 21 z odgięciem 15 cm | 0,80 | 6 |  |  |  | 4,80 |  |
 | F2 | 1 | 12 | 21 z odgięciem 15 cm | 0,80 | 6 |  |  |  | 4,80 |  |
-| **Długość łączna [m]** |  |  |  |  |  | 734,8 | 3337,4 | 825,1 | 841,1 | 8,4 |
+| **Długość łączna [m]** |  |  |  |  |  | 734,8 | 3648,3 | 892,0 | 631,9 | 8,4 |
 | Masa 1 m [kg/m] |  |  |  |  |  | 0,222 | 0,395 | 0,617 | 0,888 | 1,208 |
-| **Masa [kg]** |  |  |  |  |  | 163,1 | 1316,9 | 508,7 | 746,8 | 10,2 |
+| **Masa [kg]** |  |  |  |  |  | 163,1 | 1439,6 | 549,9 | 561,0 | 10,2 |
 
-Masa całkowita stali B500SP: **2745,6 kg**.
+Masa całkowita stali B500SP: **2723,8 kg**.
 
 ## Uwagi, uproszczenia i dane do uzupełnienia
 

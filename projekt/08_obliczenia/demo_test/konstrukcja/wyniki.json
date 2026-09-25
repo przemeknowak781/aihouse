@@ -513,7 +513,7 @@
    "id": "PL-D",
    "tytul": "Płyta wspornikowa PL-D",
    "rodzaj": "plyta",
-   "wykorzystanie": 0.9933,
+   "wykorzystanie": 0.9938,
    "ok": true,
    "przyjeto": [
     "Płyta gr. 20 cm z betonu C30/37, stal B500SP, otulenie c_nom = 40 mm; zbrojenie wg zestawienia pól (dołem siatka w obu kierunkach, górą nad podporami).",
@@ -522,135 +522,135 @@
    "warunki": [
     {
      "opis": "Zbrojenie na zginanie",
-     "E": 532.8365,
-     "R": 538.5587,
-     "eta": 0.9894
+     "E": 487.832,
+     "R": 490.8739,
+     "eta": 0.9938
     },
     {
      "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
-     "E": 210.0,
-     "R": 214.9601,
-     "eta": 0.9769
+     "E": 160.0,
+     "R": 188.4766,
+     "eta": 0.8489
     },
     {
      "opis": "Zbrojenie na zginanie",
-     "E": 591.2815,
-     "R": 595.2491,
-     "eta": 0.9933
+     "E": 542.7454,
+     "R": 558.5054,
+     "eta": 0.9718
     },
     {
      "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
-     "E": 190.0,
-     "R": 212.7813,
-     "eta": 0.8929
+     "E": 90.0,
+     "R": 194.7529,
+     "eta": 0.4621
     },
     {
      "opis": "Zbrojenie na zginanie",
-     "E": 361.9071,
-     "R": 373.9991,
-     "eta": 0.9677
+     "E": 332.6456,
+     "R": 335.1032,
+     "eta": 0.9927
     },
     {
      "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
-     "E": 210.0,
-     "R": 221.2335,
-     "eta": 0.9492
+     "E": 150.0,
+     "R": 190.1071,
+     "eta": 0.789
     },
     {
      "opis": "Zbrojenie na zginanie",
-     "E": 350.5895,
-     "R": 359.0392,
-     "eta": 0.9765
+     "E": 322.1411,
+     "R": 335.1032,
+     "eta": 0.9613
     },
     {
      "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
-     "E": 140.0,
-     "R": 218.7389,
-     "eta": 0.64
+     "E": 150.0,
+     "R": 199.412,
+     "eta": 0.7522
     },
     {
      "opis": "Zbrojenie na zginanie",
-     "E": 280.0119,
-     "R": 295.6793,
-     "eta": 0.947
+     "E": 256.4963,
+     "R": 264.5552,
+     "eta": 0.9695
     },
     {
      "opis": "Ścinanie bez zbrojenia poprzecznego (6.2.2)",
-     "E": 61.0316,
+     "E": 55.997,
      "R": 84.0437,
-     "eta": 0.7262
+     "eta": 0.6663
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 25.2258,
-     "R": 32.4449,
-     "eta": 0.7775
+     "R": 36.6892,
+     "eta": 0.6876
     },
     {
      "opis": "Zbrojenie na zginanie",
-     "E": 532.8365,
-     "R": 538.5587,
-     "eta": 0.9894
+     "E": 487.832,
+     "R": 490.8739,
+     "eta": 0.9938
     },
     {
      "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
-     "E": 210.0,
-     "R": 214.9601,
-     "eta": 0.9769
+     "E": 160.0,
+     "R": 188.4766,
+     "eta": 0.8489
     },
     {
      "opis": "Zbrojenie na zginanie",
-     "E": 591.2815,
-     "R": 595.2491,
-     "eta": 0.9933
+     "E": 542.7454,
+     "R": 558.5054,
+     "eta": 0.9718
     },
     {
      "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
-     "E": 190.0,
-     "R": 212.7813,
-     "eta": 0.8929
+     "E": 90.0,
+     "R": 194.7529,
+     "eta": 0.4621
     },
     {
      "opis": "Zbrojenie na zginanie",
-     "E": 361.9071,
-     "R": 373.9991,
-     "eta": 0.9677
+     "E": 332.6456,
+     "R": 335.1032,
+     "eta": 0.9927
     },
     {
      "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
-     "E": 210.0,
-     "R": 221.2335,
-     "eta": 0.9492
+     "E": 150.0,
+     "R": 190.1071,
+     "eta": 0.789
     },
     {
      "opis": "Zbrojenie na zginanie",
-     "E": 350.5895,
-     "R": 359.0392,
-     "eta": 0.9765
+     "E": 322.1411,
+     "R": 335.1032,
+     "eta": 0.9613
     },
     {
      "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
-     "E": 140.0,
-     "R": 218.7389,
-     "eta": 0.64
+     "E": 150.0,
+     "R": 199.412,
+     "eta": 0.7522
     },
     {
      "opis": "Zbrojenie na zginanie",
-     "E": 280.0119,
-     "R": 295.6793,
-     "eta": 0.947
+     "E": 256.4963,
+     "R": 264.5552,
+     "eta": 0.9695
     },
     {
      "opis": "Ścinanie bez zbrojenia poprzecznego (6.2.2)",
-     "E": 61.0316,
+     "E": 55.997,
      "R": 84.0437,
-     "eta": 0.7262
+     "eta": 0.6663
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 25.2258,
-     "R": 32.4449,
-     "eta": 0.7775
+     "R": 36.6892,
+     "eta": 0.6876
     }
    ],
    "dane": {
@@ -658,21 +658,21 @@
     "pola": [
      {
       "pole": "P1",
-      "Mx": 34.65624500560766,
-      "My": 35.73435410171321,
+      "Mx": 31.825942134515817,
+      "My": 32.91724412220306,
       "Mx_tabl": null,
       "My_tabl": null,
-      "Mgx": -23.811675487366326,
-      "M_naroze": 17.307086045826313,
-      "Mgy": -21.560233682874767,
-      "Ax": 538.5587406153932,
-      "Ay": 595.2491343643819,
-      "w": 5.496568059916953,
-      "eta": 0.99333454493268,
+      "Mgx": -21.92935006760063,
+      "M_naroze": 15.880230742111324,
+      "Mgy": -19.85116148733033,
+      "Ax": 490.87385212340524,
+      "Ay": 558.5053606381854,
+      "w": 5.463385880430691,
+      "eta": 0.9938031528914566,
       "lx": 3.91,
       "ly": 4.85,
       "brzegi": "SWWS",
-      "V": 61.03161127759281
+      "V": 55.997044110208485
      }
     ],
     "pole_miarodajne": "P1"
@@ -760,7 +760,7 @@
    "id": "B1",
    "tytul": "Belka B1",
    "rodzaj": "belka",
-   "wykorzystanie": 0.8146,
+   "wykorzystanie": 0.7499,
    "ok": true,
    "przyjeto": [
     "Belka B1: 20×50 cm (z płytą), C30/37; dołem 2φ14, górą 2φ12, strzemiona φ8 co 34 cm (2-cięte)."
@@ -768,27 +768,27 @@
    "warunki": [
     {
      "opis": "Zbrojenie dolne",
-     "E": 250.8027,
+     "E": 230.8631,
      "R": 307.8761,
-     "eta": 0.8146
+     "eta": 0.7499
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 78.072,
+     "E": 72.2183,
      "R": 373.9145,
-     "eta": 0.2088
+     "eta": 0.1931
     },
     {
      "opis": "Nośność strzemion",
-     "E": 78.072,
+     "E": 72.2183,
      "R": 106.2131,
-     "eta": 0.7351
+     "eta": 0.6799
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 8.3224,
-     "R": 44.3146,
-     "eta": 0.1878
+     "R": 54.7322,
+     "eta": 0.1521
     },
     {
      "opis": "Rysy: średnica prętów (tabl. 7.2N)",
@@ -2422,15 +2422,15 @@
    "warunki": [
     {
      "opis": "Nośność podłoża (GEO, DA2*)",
-     "E": 101.3719,
+     "E": 115.1415,
      "R": 352.9728,
-     "eta": 0.2872
+     "eta": 0.3262
     },
     {
      "opis": "Osiadanie",
-     "E": 0.8327,
+     "E": 0.9424,
      "R": 50.0,
-     "eta": 0.0167
+     "eta": 0.0188
     },
     {
      "opis": "Głębokość posadowienia",
@@ -2460,15 +2460,15 @@
    "warunki": [
     {
      "opis": "Nośność podłoża (GEO, DA2*)",
-     "E": 77.9861,
+     "E": 88.7342,
      "R": 338.9092,
-     "eta": 0.2301
+     "eta": 0.2618
     },
     {
      "opis": "Osiadanie",
-     "E": 0.6298,
+     "E": 0.7156,
      "R": 50.0,
-     "eta": 0.0126
+     "eta": 0.0143
     },
     {
      "opis": "Głębokość posadowienia",
