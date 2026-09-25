@@ -1,5 +1,6 @@
 {
- "title": "Korekta Inwestora: „S” z przesuniętych brył, garaż w parterze — panel koncepcji uruchomiony ponownie",
+ "nr": 9,
+ "title": "Drugi wariant koncepcji (W2 — funkcja, ekonomia, konstrukcja) gotowy; silnik rysunkowy ukończony",
  "stages": [
   [
    "Analiza szkicu — interpretacja v2 („S” z brył, garaż)",
@@ -56,5 +57,23 @@
   "Silnik rysunkowy ukończony: 32 kreskowania PN-B-01030, 100+ symboli, kontrola skali w PDF, DXF bez błędów.",
   "Następnie: W3 (światło/ogród) → ocena 3 sędziów → synteza do modelu danych → audyt.",
   "Rejestr B (normy rysunkowe, konstrukcja, energia, elektryka) w weryfikacji."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/docs/20_koncepcja/W2/elewacja_S.png",
+   "caption": "W2: elewacja płd. vs szkic"
+  },
+  {
+   "path": "/home/user/aihouse/docs/20_koncepcja/W2/rzut_P0.png",
+   "caption": "W2: rzut parteru"
+  },
+  {
+   "path": "/home/user/aihouse/docs/20_koncepcja/W1/elewacja_S.png",
+   "caption": "W1: elewacja płd. vs szkic (porównanie)"
+  },
+  {
+   "path": "/home/user/aihouse/docs/20_koncepcja/W2/rzut_P1.png",
+   "caption": "W2: rzut I piętra"
+  }
  ]
 }
