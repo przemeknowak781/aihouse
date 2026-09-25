@@ -295,7 +295,6 @@ def _dl_promienia(P: Polygon, p, kier) -> float:
     p = np.asarray(p, float)
     d = np.asarray(kier, float) / np.hypot(*kier)
     ln = LineString([tuple(p), tuple(p + 50 * d)])
-    inter = ln.intersection(P.exterior)
     pts = []
     for ring in [P.exterior] + list(P.interiors):
         g = ln.intersection(ring)
@@ -308,7 +307,6 @@ def _dl_promienia(P: Polygon, p, kier) -> float:
             elif q.geom_type == "LineString":
                 for c in q.coords:
                     pts.append(np.hypot(c[0] - p[0], c[1] - p[1]))
-    del inter
     pts = [v for v in pts if v > 1e-6]
     return min(pts) if pts else 0.0
 
@@ -341,6 +339,9 @@ class AnalizaTarczy:
         self.a_s = self.c_nom + dane.fi_siatki / 1000 + 0.008     # oś pręta φ16 za siatką [m]
         if dane.przypadek_cw not in dane.przypadki:
             dane.przypadki[dane.przypadek_cw] = Oddz(dane.przypadek_cw, "G")
+        brak = sorted({o.przypadek for o in dane.obciazenia} - set(dane.przypadki))
+        if brak:
+            raise BladDanych(f"Tarcza {dane.id}: brak definicji przypadków obciążeń {brak} (DaneTarczy.przypadki)")
 
     # ---------------------------------------------------------------------------------------------
     def uruchom(self, stm: bool = True, sls: bool = True) -> "AnalizaTarczy":
@@ -352,7 +353,8 @@ class AnalizaTarczy:
         if stm:
             self._stm()
         self._siatki()
-        self._cięgna()
+        self._ciegna()
+        self._zal_F_kontrola()
         if stm:
             self._krzyzulce_wezly()
         self._otwory()
@@ -434,14 +436,13 @@ class AnalizaTarczy:
             c = mes.przekroj_pionowy(r, x)
             lewe = mes.nodes[:, 0] < x
             Vst = -float((fz[lewe] + Rz[lewe]).sum())          # siła poprzeczna (lewa część, w dół +)
-            # moment względem punktu (x, 0) od sił po lewej: M = Σ F_z·(x − x_i) (F_z w górę +) − ...
-            Mst = float(((fz[lewe] + Rz[lewe]) * (x - mes.nodes[lewe, 0])).sum()) - float((fx[lewe] * mes.nodes[lewe, 1]).sum())
-            # konwencja: M_MES = ∫σ_x·z dz (względem z = 0); statyka lewej części: moment wewn. = −ΣM_zewn
-            dv = abs(abs(c["V"]) - abs(Vst))
-            dm = abs(c["M"] + Mst)
+            # równowaga części lewej względem punktu (x, 0): M_MES = ∫σ_x·t·z dz = Σ[(x_i − x)·F_z,i − z_i·F_x,i]
+            Mst = float(((fz[lewe] + Rz[lewe]) * (mes.nodes[lewe, 0] - x)).sum()) - float((fx[lewe] * mes.nodes[lewe, 1]).sum())
+            dv = abs(c["V"] - Vst)
+            dm = abs(c["M"] - Mst)
             rel = max(dv / max(abs(Vst), 1.0), dm / max(abs(Mst), 1.0))
             err_max = max(err_max, rel)
-            rows.append([f(x, 2), (c["N"], 2), (Vst, 1), (c["V"], 1), (-Mst, 1), (c["M"], 1)])
+            rows.append([f(x, 2), (c["N"], 2), (Vst, 1), (c["V"], 1), (Mst, 1), (c["M"], 1)])
         self.tab_rownowaga = rows
         self.blad_przekrojow = err_max
         self.tabele.append("**Kontrola równowagi w przekrojach pionowych (kombinacja " + self.k_gov + ")** — siły z całkowania "
@@ -753,14 +754,13 @@ class AnalizaTarczy:
                         wa = 1.0 if abs(xb - xa) < 1e-9 else (xb - c) / (xb - xa)
                         best = (a, b, wa)
                 if best is None:
-                    for a in near:
-                        for b in near:
-                            if W[b, axis] - W[a, axis] >= 0.2:
-                                xa, xb = W[a, axis], W[b, axis]
-                                best = (a, b, (xb - c) / (xb - xa))
-                                break
-                        if best:
-                            break
+                    # ekstrapolacja liniowa: najbliższy węzeł a i najbliższy b o współrzędnej różnej o ≥ 0,3 m
+                    order = np.argsort(pen)
+                    a = order[0]
+                    far = order[np.abs(W[order, axis] - W[a, axis]) >= 0.3]
+                    b = far[0] if len(far) else order[1]
+                    xa, xb = W[a, axis], W[b, axis]
+                    best = (a, b, (xb - c) / (xb - xa) if abs(xb - xa) > 1e-9 else 1.0)
                 a, b, wa = best
                 if axis == 0:
                     rz += [a, b]
@@ -860,27 +860,45 @@ class AnalizaTarczy:
         w.krok("Przyjęto siatkę przy każdej powierzchni", f"φ{fi} co {s} mm (w obu kierunkach)", "", As_face, "mm²/m", nd=0)
         w.warunek("Siatka przy powierzchni ≥ A_s,dbmin (9.7) i połowa A_s,vmin (9.6)", max(Adb, Asv_min / 2), As_face, "mm²/m",
                   "9.6.2, 9.7(1)", nd=0, symbol_E="A_s,req", symbol_R="A_s,prov")
-        rxm = float(req_x[msk].max()) if msk.any() else 0.0
-        rzm = float(req_z[msk].max()) if msk.any() else 0.0
-        w.warunek("Zał. F: zbrojenie poziome wymagane (maks. poza narożami) ≤ 2 siatki", rxm, 2 * As_face, "mm²/m", "zał. F (F.2), (F.5)",
-                  nd=0, symbol_E="a_sx,req", symbol_R="a_sx,prov")
-        w.warunek("Zał. F: zbrojenie pionowe wymagane (maks. poza narożami) ≤ 2 siatki", rzm, 2 * As_face, "mm²/m", "zał. F (F.3), (F.6)",
-                  nd=0, symbol_E="a_sz,req", symbol_R="a_sz,prov")
-        nu = 0.6 * (1 - b.f_ck / 250)
-        sc_m = float(scd[msk].max()) / 1000 if msk.any() else 0.0
-        w.warunek("Zał. F: naprężenie w betonie σ_cd ≤ ν·f_cd", sc_m, nu * b.f_cd, "MPa", "zał. F (F.4), (F.7), (6.6N)",
-                  symbol_E="σ_cd", symbol_R="ν·f_cd")
-        if rxm > 2 * As_face or rzm > 2 * As_face:
-            w.uwaga("Lokalnie zbrojenie z pola naprężeń przekracza siatkę — pokrywają to cięgna pasów/wieszaki (poniżej) "
-                    "albo dodatkowe pręty w strefie (rysunek zbrojenia).")
-            # warunki informacyjne: nie blokują, jeżeli pokryte cięgnami — zostawiamy do oceny w tabeli cięgien
-            for wv in w.warunki[-3:-1]:
-                if not wv.ok:
-                    w.uwaga(f"{wv.opis}: {f(wv.E, 0)} > {f(wv.R, 0)} mm²/m — strefa lokalna (patrz mapa zał. F i cięgna STM).")
-            w.warunki = [wv for wv in w.warunki if "zał. F: zbrojenie" not in wv.opis.lower() or wv.ok]
         self.sekcje.append(w)
         self.przyjeto.append(f"Siatki przy obu powierzchniach: φ{fi} co {s} mm w obu kierunkach (A_s = {f(As_face, 0)} mm²/m "
                              f"na powierzchnię), otulina c_nom = {f(self.c_nom * 1000, 0)} mm ({d.ekspozycja}).")
+
+    def _zal_F_kontrola(self):
+        """Zał. F: zbrojenie z pola naprężeń poza strefami cięgien (pasma u przy krawędziach) i naroży otworów ≤ siatki."""
+        b = self.beton
+        mes = self.mes
+        msk = self._maska_nieosobliwa()
+        for pas in self.pasy:
+            e = pas.krawedz
+            if e is None:
+                continue
+            u = 2 * pas.a + 0.10
+            c = mes.el_c
+            if e.typ == "h":
+                z0, z1 = sorted((e.wsp, e.wsp + e.strona * u))
+                inb = (c[:, 1] > z0) & (c[:, 1] < z1) & (c[:, 0] > e.a - 0.1) & (c[:, 0] < e.b + 0.1)
+            else:
+                x0, x1 = sorted((e.wsp, e.wsp + e.strona * u))
+                inb = (c[:, 0] > x0) & (c[:, 0] < x1) & (c[:, 1] > e.a - 0.1) & (c[:, 1] < e.b + 0.1)
+            msk &= ~inb
+        self.maska_srodnika = msk
+        w = Wynik(nazwa="Zbrojenie z pola naprężeń MES (zał. F) — środnik poza cięgnami i narożami otworów")
+        cap = 2 * self.siatka_As
+        rxm = float(self.req_x[msk].max()) if msk.any() else 0.0
+        rzm = float(self.req_z[msk].max()) if msk.any() else 0.0
+        w.krok("Zbrojenie wymagane (ściskanie dodatnie; σ_Edx > σ_Edy): σ_Edx ≤ |τ| → f_tdx = |τ| − σ_Edx, f_tdy = |τ| − σ_Edy, "
+               "σ_cd = 2|τ|; σ_Edx > |τ| → f_tdx = 0, f_tdy = τ²/σ_Edx − σ_Edy, σ_cd = σ_Edx·(1 + (τ/σ_Edx)²); a_s = f_td·t/f_yd",
+               "", "", "", zrodlo="zał. F, (F.2)–(F.7) [P]")
+        w.warunek("Zbrojenie poziome środnika (maks.) ≤ siatki obu powierzchni", rxm, cap, "mm²/m", "zał. F", nd=0,
+                  symbol_E="a_sx,req", symbol_R="a_sx,prov")
+        w.warunek("Zbrojenie pionowe środnika (maks.) ≤ siatki obu powierzchni", rzm, cap, "mm²/m", "zał. F", nd=0,
+                  symbol_E="a_sz,req", symbol_R="a_sz,prov")
+        nu = 0.6 * (1 - b.f_ck / 250)
+        sc_m = float(self.scd[msk].max()) / 1000 if msk.any() else 0.0
+        w.warunek("Naprężenie w betonie σ_cd ≤ ν·f_cd", sc_m, nu * b.f_cd, "MPa", "zał. F (F.4), (F.7); (6.6N)",
+                  symbol_E="σ_cd", symbol_R="ν·f_cd")
+        self.sekcje.append(w)
 
     def _zal_F(self):
         """Zbrojenie wg zał. F (obwiednia ULS): a_sx, a_sz [mm²/m, łącznie], σ_cd [kPa] w elementach."""
@@ -959,7 +977,7 @@ class AnalizaTarczy:
             return ("v", best[1]) if best else ("wv", None)
         return ("d", None)
 
-    def _cięgna(self):
+    def _ciegna(self):
         d, p, b, st = self.d, self.p, self.beton, self.stal
         grupy: dict = {}
         wv_demand = 0.0      # wieszaki / pionowe cięgna środnika [kN/m]
@@ -1022,7 +1040,7 @@ class AnalizaTarczy:
             pas.As_req = pas.F_Ed * 1000 / fyd
             need = max(pas.As_req, As_min)
             u_band = max(2 * pas.a, 0.10)
-            n_face, fi = self._dobierz_cięgno(need, u_band)
+            n_face, fi = self._dobierz_ciegno(need, u_band)
             pas.n, pas.fi = 2 * n_face, fi
             pas.As_prov = 2 * n_face * pole_preta(fi)
             # rysy (7.3.4) — σ_s z SLS quasi-stałej
@@ -1068,7 +1086,7 @@ class AnalizaTarczy:
         else:
             self.T_max = 0.0
 
-    def _dobierz_cięgno(self, As_req: float, u_band: float) -> tuple[int, int]:
+    def _dobierz_ciegno(self, As_req: float, u_band: float) -> tuple[int, int]:
         """(liczba prętów na powierzchnię, φ) — najmniejsza masa; pręty w pasie u rozstawione ≥ max(φ; 20 mm; d_g + 5)."""
         best = None
         for fi in (12, 14, 16, 20, 25):
@@ -1106,8 +1124,6 @@ class AnalizaTarczy:
         e = pas.krawedz
         if e is None:
             return
-        dobra = not (e.typ == "h" and e.strona < 0 and e.wsp > self.d.z0 + self.d.H - 0.30 - 1e-9) and not (
-            e.typ == "h" and e.strona < 0 and self.d.H > 0.6)
         # pręty poziome w górnej części elementu h > 250 mm (8.4.2(2), rys. 8.2) — warunki „inne”
         if e.typ == "h":
             z_osi = e.wsp + e.strona * pas.a
@@ -1553,16 +1569,16 @@ class AnalizaTarczy:
             self.przyjeto.append(f"Cięgno „{pas.opis}”: {pas.n}φ{pas.fi} ({pas.n // 2} przy każdej powierzchni), oś w odległości "
                                  f"{f(pas.a * 100, 0)} cm od krawędzi, zakres {f(pas.zakres[0], 2)}…{f(pas.zakres[1], 2)} m + zakotwienie "
                                  f"({'; '.join(z_['sposob'] for z_ in pas.zakotwienie) or 'l_bd'}).")
-        # siatki
-        A = self.P.area
+        # siatki (liczba prętów zmniejszona proporcjonalnie do pola otworów — orientacyjnie)
+        frac = self.P.area / (d.L * d.H)
         s = self.siatka_s / 1000
-        n_h = int(math.ceil(d.H / s)) + 1
-        n_v = int(math.ceil(d.L / s)) + 1
+        n_h = int(round((int(math.ceil(d.H / s)) + 1) * frac))
+        n_v = int(round((int(math.ceil(d.L / s)) + 1) * frac))
         prety.append(zelbet.Pret(el, nr, self.siatka_fi, round(d.L - 2 * self.c_nom, 2), 2 * n_h, "00",
-                                 f"siatka pozioma co {self.siatka_s} (2 pow.; otwory — odliczyć)"))
+                                 f"siatka pozioma co {self.siatka_s} mm (2 pow.)"))
         nr += 1
         prety.append(zelbet.Pret(el, nr, self.siatka_fi, round(d.H - 2 * self.c_nom + 0.4, 2), 2 * n_v, "00",
-                                 f"siatka pionowa co {self.siatka_s} (2 pow., z zakładem 0,4 m)"))
+                                 f"siatka pionowa co {self.siatka_s} mm (2 pow., z zakładem 0,4 m)"))
         nr += 1
         fi = d.fi_otwory
         lbd = zelbet.zakotwienie(fi, self.beton, self.stal).l_bd / 1000
@@ -1573,10 +1589,6 @@ class AnalizaTarczy:
             nr += 1
             prety.append(zelbet.Pret(el, nr, fi, round(2 * lbd, 2), 16, "00", f"ukośne w narożach {o.id}"))
             nr += 1
-        # odliczenie siatki w otworach — orientacyjnie proporcjonalnie do pola
-        frac = A / (d.L * d.H)
-        prety[-3 * len(d.otwory) - 2].n = int(round(prety[-3 * len(d.otwory) - 2].n * frac))
-        prety[-3 * len(d.otwory) - 1].n = int(round(prety[-3 * len(d.otwory) - 1].n * frac))
         self.prety = prety
         self.masa_stali = zelbet.masa_stali(prety)
 

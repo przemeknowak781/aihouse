@@ -1,0 +1,67 @@
+# Wyposażenie „Dom LAMELA” (meble, sanitariaty, kuchnia, urządzenia) — PLIK GENEROWANY: tools/buduj_model.py.
+# Format: model/test/wyposazenie_testowe.yaml (xy — punkt na licu ściany w osi elementu; obrot — kierunek od ściany do pomieszczenia).
+wyposazenie:
+  # --- P0
+  - {kond: P0, typ: szafa, xy: [11.895, 7.67], obrot: 180, wym: [1.9, 0.6], opis: szafa wiatrołapu}
+  - {kond: P0, typ: szafa, xy: [11.895, 5.89], obrot: 180, wym: [1.3, 0.6], opis: szafa wejściowa}
+  - {kond: P0, typ: wc, xy: [9.2, 8.645], obrot: -90, wym: [0.4, 0.6]}
+  - {kond: P0, typ: umywalka, xy: [8.605, 7.6], obrot: 0, wym: [0.45, 0.3]}
+  - {kond: P0, typ: prysznic, xy: [3.98, 8.1], obrot: 0, wym: [1.0, 0.9]}
+  - {kond: P0, typ: wc, xy: [5.77, 7.2], obrot: 180, wym: [0.4, 0.6]}
+  - {kond: P0, typ: umywalka, xy: [5.77, 8.2], obrot: 180, wym: [0.6, 0.45]}
+  - {kond: P0, typ: lozko, xy: [2.2, 8.645], obrot: -90, wym: [1.6, 2.0]}
+  - {kond: P0, typ: biurko, xy: [0.105, 6.1], obrot: 0, wym: [1.2, 0.6]}
+  - {kond: P0, typ: szafa, xy: [1.9, 5.23], obrot: 90, wym: [1.8, 0.6]}
+  - {kond: P0, typ: sofa, xy: [2.3, 3.4], obrot: -90, wym: [2.8, 0.95], opis: salon — widok na ogród}
+  - {kond: P0, typ: stol, xy: [6.6, 2.1], obrot: 0, wym: [2.2, 1.0], krzesla: 8}
+  - {kond: P0, typ: wyspa, xy: [9.8, 2.7], obrot: 90, wym: [2.2, 1.0], opis: wyspa z płytą indukcyjną i okapem}
+  - {kond: P0, typ: blat, linia: [[11.895, 1.3], [11.895, 5.02]], gl: 0.6, strona: 1, gorne: true}
+  - {kond: P0, typ: zlew, xy: [11.895, 2.6], obrot: 180, wym: [0.8, 0.5]}
+  - {kond: P0, typ: zmywarka, xy: [11.895, 1.9], obrot: 180, wym: [0.6, 0.58]}
+  - {kond: P0, typ: plyta, xy: [10.3, 2.7], obrot: 90, wym: [0.8, 0.52], opis: płyta indukcyjna na wyspie}
+  - {kond: P0, typ: lodowka, xy: [11.895, 4.6], obrot: 180, wym: [0.6, 0.65]}
+  - {kond: P0, typ: urzadzenie, xy: [11.895, 3.9], obrot: 180, wym: [0.6, 0.6], opis: piekarnik + mikrofala w słupku}
+  - {kond: P0, typ: szafa, xy: [8.395, 6.2], obrot: 180, wym: [1.6, 0.4], opis: regały spiżarni}
+  - {kond: P0, typ: szafa, xy: [12.105, 2.0], obrot: 0, wym: [1.4, 0.6], opis: 'szafa przedsionka (odzież, obuwie)'}
+  - {kond: P0, typ: szafa, xy: [14.0, 0.105], obrot: 90, wym: [1.3, 0.35], opis: szafka na obuwie}
+  - {kond: P0, typ: pompa_ciepla, xy: [15.6, 2.77], obrot: -90, wym: [0.6, 0.4], opis: moduł hydrauliczny PC R290 (monoblok zewn.)}
+  - {kond: P0, typ: zasobnik, xy: [16.55, 2.77], obrot: -90, wym: [0.7, 0.7], opis: zasobnik CWU 300 dm³}
+  - {kond: P0, typ: zasobnik, xy: [17.5, 2.77], obrot: -90, wym: [0.55, 0.55], opis: bufor 100 dm³}
+  - {kond: P0, typ: urzadzenie, xy: [14.95, 0.9], obrot: 0, wym: [0.8, 0.25], opis: rozdzielnica główna RG}
+  - {kond: P0, typ: urzadzenie, xy: [18.27, 1.2], obrot: 180, wym: [0.4, 0.2], opis: wodomierz + zawór antyskażeniowy (PN-EN 1717)}
+  - {kond: P0, typ: urzadzenie, xy: [16.0, 0.105], obrot: 90, wym: [0.8, 0.15], opis: rozdzielacz ogrzewania podłogowego P0}
+  - {kond: P0, typ: zlewik, xy: [18.27, 2.2], obrot: 180, wym: [0.5, 0.4]}
+  - {kond: P0, typ: szafa, xy: [18.27, 8.0], obrot: 180, wym: [2.4, 0.6], opis: rowery i sprzęt ogrodowy — strefa przednia przy ścianie osi F (przeszczep J1)}
+  # --- P1
+  - {kond: P1, typ: lozko, xy: [3.8, 1.2], obrot: 180, wym: [0.9, 2.0]}
+  - {kond: P1, typ: biurko, xy: [0.105, 1.9], obrot: 0, wym: [1.4, 0.7]}
+  - {kond: P1, typ: szafa, xy: [1.2, 3.675], obrot: -90, wym: [1.8, 0.6]}
+  - {kond: P1, typ: lozko, xy: [2.6, 8.645], obrot: -90, wym: [0.9, 2.0]}
+  - {kond: P1, typ: biurko, xy: [0.105, 6.9], obrot: 0, wym: [1.4, 0.7]}
+  - {kond: P1, typ: szafa, xy: [3.77, 7.3], obrot: 180, wym: [1.8, 0.6]}
+  - {kond: P1, typ: sofa, xy: [7.2, 2.6], obrot: -90, wym: [2.6, 0.95], opis: pokój rodzinny — widok przez boks C}
+  - {kond: P1, typ: szafa, xy: [4.95, 3.675], obrot: -90, wym: [1.9, 0.4], opis: regał biblioteki}
+  - {kond: P1, typ: biurko, xy: [11.895, 1.95], obrot: 180, wym: [1.4, 0.7]}
+  - {kond: P1, typ: wanna, xy: [4.875, 8.645], obrot: -90, wym: [1.7, 0.75]}
+  - {kond: P1, typ: wc, xy: [5.55, 6.45], obrot: 90, wym: [0.4, 0.6]}
+  - {kond: P1, typ: umywalka_blat, xy: [3.98, 7.2], obrot: 0, wym: [0.9, 0.5]}
+  - {kond: P1, typ: prysznic, xy: [9.2, 8.645], obrot: -90, wym: [1.19, 0.9]}
+  - {kond: P1, typ: wc, xy: [9.8, 7.2], obrot: 180, wym: [0.4, 0.6]}
+  - {kond: P1, typ: umywalka, xy: [8.605, 6.4], obrot: 0, wym: [0.5, 0.35]}
+  - {kond: P1, typ: pralka, xy: [9.95, 8.2], obrot: 0, wym: [0.6, 0.6]}
+  - {kond: P1, typ: suszarka, xy: [9.95, 7.55], obrot: 0, wym: [0.6, 0.6]}
+  - {kond: P1, typ: zlewik, xy: [11.895, 8.2], obrot: 180, wym: [0.5, 0.4]}
+  - {kond: P1, typ: szafa, xy: [11.895, 6.4], obrot: 180, wym: [1.6, 0.6], opis: szafa gospodarcza}
+  - {kond: P1, typ: urzadzenie, xy: [11.895, 4.4], obrot: 180, wym: [0.8, 0.15], opis: rozdzielacz ogrzewania podłogowego P1 (w holu)}
+  # --- P2
+  - {kond: P2, typ: lozko, xy: [1.3, 5.02], obrot: -90, wym: [1.8, 2.0]}
+  - {kond: P2, typ: szafa, xy: [3.65, 2.0], obrot: 0, wym: [3.0, 0.6]}
+  - {kond: P2, typ: szafa, xy: [5.8, 2.0], obrot: 180, wym: [3.0, 0.6]}
+  - {kond: P2, typ: prysznic, xy: [4.875, 8.645], obrot: -90, wym: [1.79, 1.0]}
+  - {kond: P2, typ: wc, xy: [5.55, 6.45], obrot: 90, wym: [0.4, 0.6]}
+  - {kond: P2, typ: umywalka_blat, xy: [3.98, 7.1], obrot: 0, wym: [1.2, 0.5], opis: umywalka podwójna}
+  - {kond: P2, typ: biurko, xy: [10.2, 0.105], obrot: 90, wym: [1.8, 0.8]}
+  - {kond: P2, typ: szafa, xy: [8.575, 2.0], obrot: 0, wym: [2.4, 0.4], opis: regał}
+  - {kond: P2, typ: sofa, xy: [11.895, 3.8], obrot: 180, wym: [2.0, 0.9], opis: sofa rozkładana (pokój 5. osoby / gościa)}
+  - {kond: P2, typ: rekuperator, xy: [5.95, 1.3], obrot: 0, wym: [1.2, 0.7], opis: 'centrala wentylacyjna 450 m³/h, η_t 85 %'}
+  - {kond: P2, typ: urzadzenie, xy: [8.425, 1.3], obrot: 180, wym: [0.8, 0.15], opis: rozdzielacz ogrzewania podłogowego P2}

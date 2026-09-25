@@ -1,0 +1,248 @@
+# Działka 123/4 — model zagospodarowania (jedno źródło prawdy). PLIK GENEROWANY: tools/buduj_model.py — nie edytować ręcznie.
+# Układ działki: początek = narożnik SW działki, x → wschód, y → północ [m]; rzędne H bezwzględne [m n.p.m., PL-EVRF2007-NH].
+# Transformacja budynek → działka: p_d = p_b + [7.6, 32.7] (lico zach. P0 7,30 m od granicy W; linia zabudowy 6,00 m od drogi).
+
+uklad: {przesuniecie: [7.6, 32.7], obrot: 0.0}
+dzialka: {nr: 123/4, obreb: 0005 Przykładowo, gmina: Przykładowo (fikcyjna), adres: ul. Lipowa (fikcyjna), pow: 1600.0, obrys: [[0.0, 0.0], [32.0, 0.0], [32.0, 50.0], [0.0, 50.0]], mpzp: uchwała nr XII/123/2024 Rady Gminy Przykładowo z 21.03.2024 — teren 3MN (fikcyjny)}
+sasiedzi:
+  - {nr: 123/3, obrys: [[-32.0, 0.0], [0.0, 0.0], [0.0, 50.0], [-32.0, 50.0]], zabudowa: [[-20.0, 22.0], [-8.0, 22.0], [-8.0, 32.0], [-20.0, 32.0]], opis: 'dom jednorodzinny, 2 kondygnacje, dach dwuspadowy (≥ 8 m od granicy)', wys: 8.5}
+  - {nr: 123/5, obrys: [[32.0, 0.0], [64.0, 0.0], [64.0, 50.0], [32.0, 50.0]], zabudowa: [[40.0, 24.0], [52.0, 24.0], [52.0, 35.0], [40.0, 35.0]], opis: dom jednorodzinny parterowy z poddaszem (≥ 8 m od granicy), wys: 7.5}
+  - {nr: '130', obrys: [[-32.0, -40.0], [64.0, -40.0], [64.0, 0.0], [-32.0, 0.0]], zabudowa: [], opis: teren rolny (R IVb) — niezabudowany}
+  - {nr: 118/2, obrys: [[-10.0, 60.0], [22.0, 60.0], [22.0, 95.0], [-10.0, 95.0]], zabudowa: [[2.0, 70.0], [14.0, 70.0], [14.0, 80.0], [2.0, 80.0]], opis: 'dom jednorodzinny, dach płaski', wys: 6.8, dach: plaski}
+  - {nr: 118/3, obrys: [[22.0, 60.0], [54.0, 60.0], [54.0, 95.0], [22.0, 95.0]], zabudowa: [[30.0, 72.0], [42.0, 72.0], [42.0, 82.0], [30.0, 82.0]], opis: 'dom jednorodzinny, dach dwuspadowy', wys: 8.0}
+droga: {symbol: 1KDD, nazwa: 'ul. Lipowa (fikcyjna), klasa D', linie_rozgraniczajace: [[-40.0, 50.0], [72.0, 50.0], [72.0, 60.0], [-40.0, 60.0]], jezdnia: [[-40.0, 52.25], [72.0, 52.25], [72.0, 57.75], [-40.0, 57.75]], nawierzchnia: asfalt}
+linia_zabudowy: [[0.0, 44.0], [32.0, 44.0]]
+teren:
+  warstwice_co: 0.1
+  ZWG: 97.6
+  grunt: 0,0–0,4 ziemia urodzajna; piaski średnie I_D ≈ 0,6; ZWG ≈ 3,8 m p.p.t.
+  # teren istniejący (siatka 5 m + otoczenie)
+  punkty:
+    - [0.0, 0.0, 101.1]
+    - [5.0, 0.0, 101.12]
+    - [10.0, 0.0, 101.15]
+    - [15.0, 0.0, 101.17]
+    - [20.0, 0.0, 101.19]
+    - [25.0, 0.0, 101.22]
+    - [30.0, 0.0, 101.24]
+    - [32.0, 0.0, 101.25]
+    - [0.0, 5.0, 101.13]
+    - [5.0, 5.0, 101.15]
+    - [10.0, 5.0, 101.18]
+    - [15.0, 5.0, 101.2]
+    - [20.0, 5.0, 101.22]
+    - [25.0, 5.0, 101.25]
+    - [30.0, 5.0, 101.27]
+    - [32.0, 5.0, 101.28]
+    - [0.0, 10.0, 101.16]
+    - [5.0, 10.0, 101.18]
+    - [10.0, 10.0, 101.21]
+    - [15.0, 10.0, 101.23]
+    - [20.0, 10.0, 101.25]
+    - [25.0, 10.0, 101.28]
+    - [30.0, 10.0, 101.3]
+    - [32.0, 10.0, 101.31]
+    - [0.0, 15.0, 101.19]
+    - [5.0, 15.0, 101.21]
+    - [10.0, 15.0, 101.24]
+    - [15.0, 15.0, 101.26]
+    - [20.0, 15.0, 101.28]
+    - [25.0, 15.0, 101.31]
+    - [30.0, 15.0, 101.33]
+    - [32.0, 15.0, 101.34]
+    - [0.0, 20.0, 101.22]
+    - [5.0, 20.0, 101.24]
+    - [10.0, 20.0, 101.27]
+    - [15.0, 20.0, 101.29]
+    - [20.0, 20.0, 101.31]
+    - [25.0, 20.0, 101.34]
+    - [30.0, 20.0, 101.36]
+    - [32.0, 20.0, 101.37]
+    - [0.0, 25.0, 101.25]
+    - [5.0, 25.0, 101.27]
+    - [10.0, 25.0, 101.3]
+    - [15.0, 25.0, 101.32]
+    - [20.0, 25.0, 101.34]
+    - [25.0, 25.0, 101.37]
+    - [30.0, 25.0, 101.39]
+    - [32.0, 25.0, 101.4]
+    - [0.0, 30.0, 101.28]
+    - [5.0, 30.0, 101.3]
+    - [10.0, 30.0, 101.33]
+    - [15.0, 30.0, 101.35]
+    - [20.0, 30.0, 101.37]
+    - [25.0, 30.0, 101.4]
+    - [30.0, 30.0, 101.42]
+    - [32.0, 30.0, 101.43]
+    - [0.0, 35.0, 101.31]
+    - [5.0, 35.0, 101.33]
+    - [10.0, 35.0, 101.36]
+    - [15.0, 35.0, 101.38]
+    - [20.0, 35.0, 101.4]
+    - [25.0, 35.0, 101.43]
+    - [30.0, 35.0, 101.45]
+    - [32.0, 35.0, 101.46]
+    - [0.0, 40.0, 101.34]
+    - [5.0, 40.0, 101.36]
+    - [10.0, 40.0, 101.39]
+    - [15.0, 40.0, 101.41]
+    - [20.0, 40.0, 101.43]
+    - [25.0, 40.0, 101.46]
+    - [30.0, 40.0, 101.48]
+    - [32.0, 40.0, 101.49]
+    - [0.0, 45.0, 101.37]
+    - [5.0, 45.0, 101.39]
+    - [10.0, 45.0, 101.42]
+    - [15.0, 45.0, 101.44]
+    - [20.0, 45.0, 101.46]
+    - [25.0, 45.0, 101.49]
+    - [30.0, 45.0, 101.51]
+    - [32.0, 45.0, 101.52]
+    - [0.0, 50.0, 101.4]
+    - [5.0, 50.0, 101.42]
+    - [10.0, 50.0, 101.45]
+    - [15.0, 50.0, 101.47]
+    - [20.0, 50.0, 101.49]
+    - [25.0, 50.0, 101.52]
+    - [30.0, 50.0, 101.54]
+    - [32.0, 50.0, 101.55]
+    - [-10.0, 0.0, 101.05]
+    - [-10.0, 25.0, 101.2]
+    - [-10.0, 50.0, 101.35]
+    - [42.0, 0.0, 101.3]
+    - [42.0, 25.0, 101.45]
+    - [42.0, 50.0, 101.6]
+    - [-10.0, 60.0, 101.43]
+    - [16.0, 60.0, 101.55]
+    - [42.0, 60.0, 101.68]
+    - [16.0, 55.0, 101.55]
+  # rzędne projektowane: cokół ≥ 0,30 m, spadek ≥ 2 % od budynku (brief §9.6, W-019)
+  punkty_projektowane:
+    - [6.8, 31.9, 101.35]
+    - [6.8, 35.35, 101.35]
+    - [6.8, 38.8, 101.35]
+    - [6.8, 42.25, 101.35]
+    - [9.8, 42.25, 101.35]
+    - [12.8, 42.25, 101.35]
+    - [15.8, 42.25, 101.35]
+    - [18.8, 42.25, 101.35]
+    - [18.8, 42.88, 101.35]
+    - [22.79, 42.88, 101.47]
+    - [26.77, 42.88, 101.47]
+    - [26.77, 39.22, 101.47]
+    - [26.77, 35.56, 101.47]
+    - [26.77, 31.9, 101.47]
+    - [23.45, 31.9, 101.35]
+    - [20.12, 31.9, 101.35]
+    - [16.79, 31.9, 101.35]
+    - [13.46, 31.9, 101.35]
+    - [10.13, 31.9, 101.35]
+    - [5.3, 30.4, 101.32]
+    - [5.3, 33.74, 101.32]
+    - [5.3, 37.08, 101.32]
+    - [5.3, 40.41, 101.32]
+    - [5.3, 43.75, 101.32]
+    - [8.3, 43.75, 101.32]
+    - [11.3, 43.75, 101.32]
+    - [14.3, 43.75, 101.32]
+    - [17.3, 43.75, 101.32]
+    - [17.3, 44.38, 101.32]
+    - [20.96, 44.38, 101.44]
+    - [24.62, 44.38, 101.44]
+    - [28.27, 44.38, 101.44]
+    - [28.27, 40.88, 101.44]
+    - [28.27, 37.39, 101.44]
+    - [28.27, 33.89, 101.44]
+    - [28.27, 30.4, 101.44]
+    - [24.99, 30.4, 101.32]
+    - [21.71, 30.4, 101.32]
+    - [18.43, 30.4, 101.32]
+    - [15.15, 30.4, 101.32]
+    - [11.86, 30.4, 101.32]
+    - [8.58, 30.4, 101.32]
+    - [18.2, 42.3, 101.63]
+    - [18.2, 43.1, 101.6]
+    - [18.2, 46.2, 101.52]
+    - [18.2, 49.8, 101.47]
+    - [23.1, 42.65, 101.53]
+    - [23.1, 43.0, 101.5]
+    - [23.1, 46.2, 101.55]
+    - [23.1, 49.6, 101.47]
+    - [13.6, 32.1, 101.32]
+    - [13.6, 28.7, 101.28]
+    - [3.6, 34.7, 101.3]
+    - [24.4, 31.65, 101.4]
+    - [28.1, 37.2, 101.4]
+    - [12.6, 44.0, 101.31]
+utwardzenia:
+  - {id: U1, obrys: [[19.9, 42.375], [26.275, 42.375], [26.275, 50.0], [19.9, 50.0]], nawierzchnia: 'podjazd — kostka betonowa 8 cm grafit na podbudowie (2,5 t)', spadek: 0.015}
+  - {id: U2, obrys: [[17.55, 43.05], [18.85, 43.05], [18.85, 50.0], [17.55, 50.0]], nawierzchnia: 'dojście — płyty betonowe 60×60 cm, szer. 1,30 m', spadek: 0.02}
+  - {id: U3, obrys: [[18.85, 43.05], [19.9, 43.05], [19.9, 44.05], [18.85, 44.05]], nawierzchnia: łącznik dojście–podjazd — płyty betonowe, spadek: 0.02}
+  - {id: U4, obrys: [[14.0, 48.6], [17.2, 48.6], [17.2, 49.9], [14.0, 49.9]], nawierzchnia: stanowisko pojemników — płyty betonowe (osłona z lamel), spadek: 0.02}
+  - {id: U5, obrys: [[23.7, 31.25], [25.1, 31.25], [25.1, 32.05], [23.7, 32.05]], nawierzchnia: fundament jednostki zewn. PC na wibroizolacji, spadek: 0.0}
+  - {id: U6, obrys: [[21.0, 31.4], [22.0, 31.4], [22.0, 32.4], [21.0, 32.4]], nawierzchnia: 'ścieżka gospodarcza — płyty w trawie (ażur, poza PBC)', spadek: 0.02}
+zielen:
+  - {id: Z1, obrys: [[0.0, 0.0], [32.0, 0.0], [32.0, 50.0], [0.0, 50.0]], typ: trawnik}
+  - {id: Z2, obrys: [[0.3, 0.3], [1.3, 0.3], [1.3, 49.0], [0.3, 49.0]], typ: zywoplot, wys: 1.8}
+  - {id: Z3, obrys: [[30.7, 0.3], [31.7, 0.3], [31.7, 45.0], [30.7, 45.0]], typ: zywoplot, wys: 1.8}
+  - {id: Z4, obrys: [[1.3, 0.3], [30.7, 0.3], [30.7, 1.3], [1.3, 1.3]], typ: zywoplot, wys: 1.6}
+  - {id: Z5, obrys: [[8.6, 43.1], [17.2, 43.1], [17.2, 43.8], [8.6, 43.8]], typ: rabata}
+  - {id: Z6, obrys: [[0.8, 44.3], [13.8, 44.3], [13.8, 49.3], [0.8, 49.3]], typ: rabata, wys: 0.6}
+drzewa:
+  - {id: DR1, xy: [12.6, 13.7], gat: lipa drobnolistna (soliter na osi ogrodu), sr_korony: 7.0, istn: false, do_wyciecia: false, wys: 10.0}
+  - {id: DR2, xy: [2.6, 24.7], gat: klon polny (cień letni tarasu zach.), sr_korony: 5.0, istn: false, do_wyciecia: false, wys: 8.0}
+  - {id: DR3, xy: [3.1, 18.7], gat: grab pospolity, sr_korony: 4.5, istn: false, do_wyciecia: false, wys: 7.0}
+  - {id: DR4, xy: [23.6, 18.7], gat: jabłoń, sr_korony: 4.0, istn: false, do_wyciecia: false, wys: 5.0}
+  - {id: DR5, xy: [28.1, 6.7], gat: 'brzoza brodawkowata (istniejąca, zachowana)', sr_korony: 4.0, istn: true, do_wyciecia: false, wys: 12.0}
+  - {id: DR6, xy: [3.1, 5.7], gat: 'sosna zwyczajna (istniejąca, zachowana)', sr_korony: 4.5, istn: true, do_wyciecia: false, wys: 11.0}
+  - {id: DR7, xy: [29.1, 47.5], gat: grab kolumnowy (zieleń przy wjeździe), sr_korony: 2.0, istn: false, do_wyciecia: false, wys: 6.0}
+ogrodzenie:
+  - {linia: [[0.0, 50.0], [17.6, 50.0]], wys: 1.5, typ: 'od drogi: ażurowe, sztachety stalowe pionowe grafit, bez prefabrykatów betonowych (MPZP)'}
+  - {linia: [[18.6, 50.0], [20.3, 50.0]], wys: 1.5, typ: ażurowe; wnęka ZK w słupku stalowym}
+  - {linia: [[25.9, 50.0], [32.0, 50.0]], wys: 1.5, typ: ażurowe (tor najazdu bramy przesuwnej)}
+  - {linia: [[32.0, 50.0], [32.0, 0.0], [0.0, 0.0], [0.0, 50.0]], wys: 1.5, typ: panele siatkowe zgrzewane grafit z żywopłotem}
+bramy:
+  - {xy: [23.1, 50.0], szer: 5.6, typ: przesuwna, kierunek: [1.0, 0.0], wys: 1.5}
+  - {xy: [18.1, 50.0], szer: 1.0, typ: furtka, wys: 1.5}
+miejsca_postojowe:
+  - {id: MP1, obrys: [[20.0, 35.9], [22.7, 35.9], [22.7, 41.8], [20.0, 41.8]], typ: garaz}
+  - {id: MP2, obrys: [[22.9, 35.9], [25.6, 35.9], [25.6, 41.8], [22.9, 41.8]], typ: garaz}
+  - {id: MP3, obrys: [[20.5, 44.6], [23.0, 44.6], [23.0, 49.6], [20.5, 49.6]], typ: zewn, auto: false}
+  - {id: MP4, obrys: [[23.2, 44.6], [25.7, 44.6], [25.7, 49.6], [23.2, 49.6]], typ: zewn, auto: false}
+odpady: {obrys: [[14.0, 48.6], [17.2, 48.6], [17.2, 49.9], [14.0, 49.9]], opis: 'osłona z lamel na 4 pojemniki 240 l (segregacja), przy furtce; odległości wg WT §23 ust. 4 nieokreślone dla zabudowy jednorodzinnej (W-016)'}
+uzbrojenie:
+  istniejace:
+    - {branza: woda, linia: [[-40, 54.0], [72, 54.0]], opis: wodociąg PE 110 (ul. Lipowa)}
+    - {branza: kan_sanit, linia: [[-40, 55.6], [72, 55.6]], opis: 'kanalizacja sanitarna PVC 200, dno ≈ 99,20'}
+    - {branza: en, linia: [[-40, 51.0], [72, 51.0]], opis: 'kabel nN 0,4 kV (OSD)'}
+    - {branza: tele, linia: [[-40, 51.4], [72, 51.4]], opis: kanalizacja teletechniczna / światłowód}
+    - {branza: gaz, linia: [[-40, 58.5], [72, 58.5]], opis: gazociąg PE 63 — NIE wykorzystywany (dom all-electric)}
+  projektowane:
+    - {branza: woda, linia: [[23.0, 54.0], [23.0, 44.0], [23.0, 35.2]], opis: 'przyłącze PE 40, przykrycie ≥ 1,20 m (W-141), pod podjazdem i płytą garażu w rurze osłonowej, wodomierz w pom. 0.12', dl: 18.8}
+    - {branza: kan_sanit, linia: [[13.0, 41.75], [13.0, 43.8], [13.0, 55.6]], opis: 'przykanalik PVC-U 160, i ≥ 2 %, studzienka rewizyjna SR1 Ø425 (x 13,0; y 43,8) — wyjście z płyty pod ścianą pn. (piony K1, K2)', dl: 13.9}
+    - {branza: en, linia: [[19.4, 51.0], [19.4, 49.8], [19.4, 43.2], [24.6, 43.2], [24.6, 35.2]], opis: 'ZKP w linii ogrodzenia (pole odczytowe ≥ 0,48 m nad terenem) → WLZ YKY 5×16 do RG w pom. 0.12, rura osłonowa pod podjazdem/garażem', dl: 18.2}
+    - {branza: tele, linia: [[19.7, 51.4], [19.7, 43.5], [24.9, 43.5], [24.9, 35.2]], opis: 2 × HDPE Ø40 + mikrokabel światłowodowy (W-196), dl: 21.3}
+    - {branza: kan_deszcz, linia: [[16.8, 42.4], [4.0, 42.4], [4.0, 29.0], [11.6, 25.7]], opis: 'kolektor KD-W PVC 160 (RS3, RS4, RS1/RS2 z SI)', dl: 34.8}
+    - {branza: kan_deszcz, linia: [[26.4, 41.75], [27.2, 41.75], [27.2, 28.2], [11.6, 28.2], [11.6, 25.7]], opis: 'kolektor KD-E PVC 160 (RS5 dach garażu, RS6 z pom. technicznego)', dl: 31.6}
+    - {branza: kan_deszcz, linia: [[11.6, 25.7], [10.6, 22.0], [11.6, 19.7]], opis: przelew zbiornika DN160 do niecki chłonnej, dl: 6.2}
+  obiekty:
+    - {id: ZKP, xy: [19.4, 49.8], opis: 'złącze kablowo-pomiarowe we wnęce ogrodzenia, PWP przy wejściu (W-190)'}
+    - {id: SR1, xy: [13.0, 43.8], opis: studzienka rewizyjna kanalizacji Ø425 (poza garażem — W-118)}
+    - {id: PC-JZ, xy: [24.4, 31.65], opis: 'jednostka zewn. PC monoblok R290 w osłonie lamelowej z ekranem akustycznym od tarasu; 7,0 m od granicy E (≥ 6,0 — W-024); strefa R290 1,0 m bez otworów, wpustów i studzienek (W-156)'}
+    - {id: SK-PC, xy: [24.4, 29.8], opis: 'studnia chłonna skroplin PC (żwir, ≥ 0,8 m p.p.t.), poza strefą R290 (W-146)'}
+    - {id: HYDR, xy: [-30.0, 56.0], opis: 'najbliższy hydrant zewnętrzny DN80 (ul. Lipowa) — zaopatrzenie ppoż. (W-217) [do potwierdzenia]'}
+retencja:
+  zbiornik: {xy: [11.6, 25.7], V: 5.0, opis: 'szczelny zbiornik PE 5,0 m³ z osadnikiem i filtrem, pompa do podlewania, przelew DN160 do niecki; ≥ 3,0 m od budynku, ≥ 2,0 m od granic (W-145: wariant bazowy, nie jest urządzeniem wodnym)'}
+  rozsaczanie: {obrys: [[8.6, 15.7], [14.6, 15.7], [14.6, 19.7], [8.6, 19.7]], V: 7.2, typ: niecka, glebokosc: 0.3, opis: 'niecka chłonna (ogród deszczowy) 24 m², głęb. 0,30 m, ≥ 3,0 m od fundamentów, ≥ 2,0 m od granic, ≥ 1,0 m od drzew (W-144)'}
+odwodnienia:
+  - {id: OL-1, typ: liniowe, linia: [[20.1, 43.0], [26.075, 43.0]], spadek: 0.005, odbiornik: KD-E, opis: odwodnienie liniowe przed bramą garażu (W-019)}
+  - {id: OL-2, typ: liniowe, linia: [[7.9, 32.3], [19.3, 32.3]], spadek: 0.005, odbiornik: opaska / KD-W, opis: odwodnienie liniowe przy progach HS (bezprogowe) pod deską tarasu}
+  - {id: OL-2W, typ: liniowe, linia: [[7.2, 33.8], [7.2, 36.4]], spadek: 0.005, odbiornik: KD-W, opis: odwodnienie liniowe przy HS zach.}
+  - {id: OL-3, typ: liniowe, linia: [[17.1, 43.1], [19.2, 43.1]], spadek: 0.005, odbiornik: KD-W, opis: odwodnienie liniowe podestu wejścia}
+  - {id: OL-4, typ: liniowe, linia: [[20.1, 49.6], [26.075, 49.6]], spadek: 0.005, odbiornik: KD-E, opis: 'odwodnienie liniowe przy bramie wjazdowej — woda nie spływa na drogę (MPZP, u.d.p. art. 39)'}
+  - {id: OZ-1, typ: opaska_zwirowa, obrys: [[6.8, 31.9], [6.8, 42.25], [18.8, 42.25], [18.8, 42.875], [26.775, 42.875], [26.775, 31.9]], szer: 0.5, opis: 'opaska żwirowa 16/32 szer. 0,5 m na geowłókninie wokół budynku (poza tarasem, podestami i podjazdem)'}
+  - {id: NT-N, typ: niecka, linia: [[4.0, 44.0], [18.6, 44.0]], spadek: 0.005, odbiornik: KD-W, opis: 'płytka niecka trawiasta przed elewacją pn. (przechwyt spływu od drogi), spadek na zachód'}
+  - {id: NT-E, typ: niecka, linia: [[28.2, 41.7], [28.2, 28.7]], spadek: 0.006, odbiornik: ogród pd., opis: 'płytka niecka trawiasta wzdłuż elewacji wsch. garażu (teren od granicy E wyższy), spadek na południe'}
+  - {id: NCH-1, typ: niecka, obrys: [[8.6, 15.7], [14.6, 15.7], [14.6, 19.7], [8.6, 19.7]], odbiornik: 'grunt (piaski, ZWG 3,8 m p.p.t.)', opis: niecka chłonna — przelew zbiornika}
+  - {id: DR-0, typ: drenaz_opaskowy, linia: [], opis: 'NIE PROJEKTUJE SIĘ — piaski przepuszczalne, ZWG ≈ 3,8 m p.p.t., posadowienie ≈ 0,5 m p.p.t. (W-285); ochrona płyty: XPS + membrana SBS, opaska żwirowa i spadki terenu'}
+obszar_oddzialywania: {opis: 'Obszar oddziaływania obiektu mieści się w całości w granicach działki 123/4 (PB art. 3 pkt 20): odległości od granic ≥ 4,0 m (ściany z otworami ≥ 5,70 m, płyty ≥ 5,20 m), przesłanianie i nasłonecznienie sąsiednich budynków (≥ 8 m od granic) bez ograniczeń (WT §13, §60), hałas PC ≤ 40 dB(A) nocą na granicy (W-024), wody opadowe zagospodarowane na działce (PW art. 234), brak odprowadzania na drogę.'}

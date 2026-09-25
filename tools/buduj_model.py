@@ -901,7 +901,10 @@ KOND = [
 
 
 def fl(o) -> str:
-    return yaml.safe_dump(o, default_flow_style=True, allow_unicode=True, width=10 ** 6, sort_keys=False).strip()
+    t = yaml.safe_dump(o, default_flow_style=True, allow_unicode=True, width=10 ** 6, sort_keys=False).strip()
+    if t.endswith("\n..."):
+        t = t[:-4].strip()
+    return t
 
 
 def blk(o, ind=0) -> str:
@@ -1104,11 +1107,11 @@ DZIALKA.update({
              "dl": 18.2},
             {"branza": "tele", "linia": [[19.70, 51.4], [19.70, 43.50], [24.90, 43.50], [24.90, 35.20]], "opis": "2 × HDPE Ø40 + mikrokabel światłowodowy (W-196)",
              "dl": 21.3},
-            {"branza": "deszcz", "linia": [[16.80, 42.40], [4.00, 42.40], [4.00, 29.00], ZBIORNIK], "opis": "kolektor KD-W PVC 160 (RS3, RS4, RS1/RS2 z SI)",
+            {"branza": "kan_deszcz", "linia": [[16.80, 42.40], [4.00, 42.40], [4.00, 29.00], ZBIORNIK], "opis": "kolektor KD-W PVC 160 (RS3, RS4, RS1/RS2 z SI)",
              "dl": 34.8},
-            {"branza": "deszcz", "linia": [[26.40, 41.75], [27.20, 41.75], [27.20, 28.20], [ZBIORNIK[0], 28.20], ZBIORNIK],
+            {"branza": "kan_deszcz", "linia": [[26.40, 41.75], [27.20, 41.75], [27.20, 28.20], [ZBIORNIK[0], 28.20], ZBIORNIK],
              "opis": "kolektor KD-E PVC 160 (RS5 dach garażu, RS6 z pom. technicznego)", "dl": 31.6},
-            {"branza": "deszcz", "linia": [ZBIORNIK, [10.60, 22.00], d(4.00, -13.00)], "opis": "przelew zbiornika DN160 do niecki chłonnej", "dl": 6.2},
+            {"branza": "kan_deszcz", "linia": [ZBIORNIK, [10.60, 22.00], d(4.00, -13.00)], "opis": "przelew zbiornika DN160 do niecki chłonnej", "dl": 6.2},
         ],
         "obiekty": [
             {"id": "ZKP", "xy": [19.40, 49.80], "opis": "złącze kablowo-pomiarowe we wnęce ogrodzenia, PWP przy wejściu (W-190)"},
@@ -1151,3 +1154,135 @@ DZIALKA.update({
                              "bez ograniczeń (WT §13, §60), hałas PC ≤ 40 dB(A) nocą na granicy (W-024), wody opadowe zagospodarowane na działce "
                              "(PW art. 234), brak odprowadzania na drogę."},
 })
+
+
+# =====================================================================================================================
+# 12. WYPOSAŻENIE (meble, sanitariaty, kuchnia, urządzenia) i INSTALACJE (lokalizacje, piony) — format: model/test/*.yaml
+# =====================================================================================================================
+def F(kond, typ, xy, obrot, wym, **kw):
+    return {"kond": kond, "typ": typ, "xy": [r(xy[0]), r(xy[1])], "obrot": obrot, "wym": list(wym), **kw}
+
+
+XBS = XC_w     # lico wsch. łazienek pionu SI (5,77)
+WYP = [
+    # ---- P0
+    F("P0", "szafa", (XE_i, 7.67), 180, (1.90, 0.60), opis="szafa wiatrołapu"),
+    F("P0", "szafa", (XE_i, 5.89), 180, (1.30, 0.60), opis="szafa wejściowa"),
+    F("P0", "wc", (9.20, Y4_i), -90, (0.40, 0.60)), F("P0", "umywalka", (XD_e, 7.60), 0, (0.45, 0.30)),
+    F("P0", "prysznic", (XB_i := xB + INT, 8.10), 0, (1.00, 0.90)), F("P0", "wc", (XBS, 7.20), 180, (0.40, 0.60)),
+    F("P0", "umywalka", (XBS, 8.20), 180, (0.60, 0.45)),
+    F("P0", "lozko", (2.20, Y4_i), -90, (1.60, 2.00)), F("P0", "biurko", (XA_i, 6.10), 0, (1.20, 0.60)),
+    F("P0", "szafa", (1.90, Y3_n), 90, (1.80, 0.60)),
+    F("P0", "sofa", (2.30, 3.40), -90, (2.80, 0.95), opis="salon — widok na ogród"),
+    F("P0", "stol", (6.60, 2.10), 0, (2.20, 1.00), krzesla=8),
+    F("P0", "wyspa", (9.80, 2.70), 90, (2.20, 1.00), opis="wyspa z płytą indukcyjną i okapem"),
+    {"kond": "P0", "typ": "blat", "linia": [[XE_i, 1.30], [XE_i, Y3_s]], "gl": 0.6, "strona": 1, "gorne": True},
+    F("P0", "zlew", (XE_i, 2.60), 180, (0.80, 0.50)), F("P0", "zmywarka", (XE_i, 1.90), 180, (0.60, 0.58)),
+    F("P0", "plyta", (10.30, 2.70), 90, (0.80, 0.52), opis="płyta indukcyjna na wyspie"),
+    F("P0", "lodowka", (XE_i, 4.60), 180, (0.60, 0.65)), F("P0", "urzadzenie", (XE_i, 3.90), 180, (0.60, 0.60), opis="piekarnik + mikrofala w słupku"),
+    F("P0", "szafa", (XD_w, 6.20), 180, (1.60, 0.40), opis="regały spiżarni"),
+    F("P0", "szafa", (xE + INT, 2.00), 0, (1.40, 0.60), opis="szafa przedsionka (odzież, obuwie)"),
+    F("P0", "szafa", (14.00, Y1_i), 90, (1.30, 0.35), opis="szafka na obuwie"),
+    F("P0", "pompa_ciepla", (15.60, y2 - INT), -90, (0.60, 0.40), opis="moduł hydrauliczny PC R290 (monoblok zewn.)"),
+    F("P0", "zasobnik", (16.55, y2 - INT), -90, (0.70, 0.70), opis="zasobnik CWU 300 dm³"),
+    F("P0", "zasobnik", (17.50, y2 - INT), -90, (0.55, 0.55), opis="bufor 100 dm³"),
+    F("P0", "urzadzenie", (xP + FD, 0.90), 0, (0.80, 0.25), opis="rozdzielnica główna RG"),
+    F("P0", "urzadzenie", (xF - INT, 1.20), 180, (0.40, 0.20), opis="wodomierz + zawór antyskażeniowy (PN-EN 1717)"),
+    F("P0", "urzadzenie", (16.00, Y1_i), 90, (0.80, 0.15), opis="rozdzielacz ogrzewania podłogowego P0"),
+    F("P0", "zlewik", (xF - INT, 2.20), 180, (0.50, 0.40)),
+    F("P0", "szafa", (xF - INT, 8.00), 180, (2.40, 0.60), opis="rowery i sprzęt ogrodowy — strefa przednia przy ścianie osi F (przeszczep J1)"),
+    # ---- P1
+    F("P1", "lozko", (xB - FD, 1.20), 180, (0.90, 2.00)), F("P1", "biurko", (XA_i, 1.90), 0, (1.40, 0.70)),
+    F("P1", "szafa", (1.20, yH - FD), -90, (1.80, 0.60)),
+    F("P1", "lozko", (2.60, Y4_i), -90, (0.90, 2.00)), F("P1", "biurko", (XA_i, 6.90), 0, (1.40, 0.70)),
+    F("P1", "szafa", (xB - INT, 7.30), 180, (1.80, 0.60)),
+    F("P1", "sofa", (7.20, 2.60), -90, (2.60, 0.95), opis="pokój rodzinny — widok przez boks C"),
+    F("P1", "szafa", (4.95, yH - FD), -90, (1.90, 0.40), opis="regał biblioteki"),
+    F("P1", "biurko", (XE_i, 1.95), 180, (1.40, 0.70)),
+    F("P1", "wanna", (4.875, Y4_i), -90, (1.70, 0.75)), F("P1", "wc", (5.55, Y_SI + 0.05), 90, (0.40, 0.60)),
+    F("P1", "umywalka_blat", (XB_i, 7.20), 0, (0.90, 0.50)),
+    F("P1", "prysznic", (9.20, Y4_i), -90, (1.19, 0.90)), F("P1", "wc", (xD2 - FD, 7.20), 180, (0.40, 0.60)),
+    F("P1", "umywalka", (XD_e, 6.40), 0, (0.50, 0.35)),
+    F("P1", "pralka", (xD2 + FD, 8.20), 0, (0.60, 0.60)), F("P1", "suszarka", (xD2 + FD, 7.55), 0, (0.60, 0.60)),
+    F("P1", "zlewik", (XE_i, 8.20), 180, (0.50, 0.40)), F("P1", "szafa", (XE_i, 6.40), 180, (1.60, 0.60), opis="szafa gospodarcza"),
+    F("P1", "urzadzenie", (XE_i, 4.40), 180, (0.80, 0.15), opis="rozdzielacz ogrzewania podłogowego P1 (w holu)"),
+    # ---- P2
+    F("P2", "lozko", (1.30, Y3_s), -90, (1.80, 2.00)),
+    F("P2", "szafa", (X_BG + FD, 2.00), 0, (3.00, 0.60)), F("P2", "szafa", (xC - FD, 2.00), 180, (3.00, 0.60)),
+    F("P2", "prysznic", (4.875, Y4_i), -90, (1.79, 1.00)), F("P2", "wc", (5.55, Y_SI + 0.05), 90, (0.40, 0.60)),
+    F("P2", "umywalka_blat", (XB_i, 7.10), 0, (1.20, 0.50), opis="umywalka podwójna"),
+    F("P2", "biurko", (10.20, Y1_i), 90, (1.80, 0.80)), F("P2", "szafa", (xD + FD, 2.00), 0, (2.40, 0.40), opis="regał"),
+    F("P2", "sofa", (XE_i, 3.80), 180, (2.00, 0.90), opis="sofa rozkładana (pokój 5. osoby / gościa)"),
+    F("P2", "rekuperator", (xC + FD, 1.30), 0, (1.20, 0.70), opis="centrala wentylacyjna 450 m³/h, η_t 85 %"),
+    F("P2", "urzadzenie", (xD - FD, 1.30), 180, (0.80, 0.15), opis="rozdzielacz ogrzewania podłogowego P2"),
+]
+INSTAL = {
+    "osoby": 5,
+    "lokalizacje": {
+        "RG": [xP + FD + 0.1, 0.90, "P0"], "wodomierz": [xF - INT - 0.1, 1.20, "P0"], "zasobnik": [16.55, 2.40, "P0"],
+        "rozdzielacze_co": {"P0": [16.00, 0.30], "P1": [11.80, 4.40], "P2": [8.35, 1.30]},
+        "ZKP": [r(19.40 - T_DZ[0]), r(49.80 - T_DZ[1])], "studzienka": [r(13.00 - T_DZ[0]), r(43.80 - T_DZ[1])],
+        "czerpnia": [11.40, 1.00, 9.95], "wyrzutnia": [1.80, 3.00, 10.00],
+        "pompa_ciepla_jz": {"xy": [16.80, -1.05], "ustawienie": "wolnostojaca", "odl_granica_E": 7.0},
+    },
+    "piony": [{"id": "K1", "xy": [5.57, 6.20], "opis": "pion kanalizacyjny Ø110 w SI, wywiewka ponad dach D1"},
+              {"id": "K2", "xy": [9.70, 8.52], "opis": "pion Ø110 (WC P0, WC z natryskiem i pralnia P1), zawór napowietrzający PN-EN 12380"},
+              {"id": "RS1", "xy": [5.57, 5.45], "opis": "rura spustowa DN100 w SI"}, {"id": "RS2", "xy": [5.57, 5.85], "opis": "rura spustowa DN100 w SI"},
+              {"id": "RS6", "xy": [17.95, 0.35], "opis": "rura spustowa DN100 w pom. technicznym"}],
+    "przybory_dodatkowe": [{"kond": "P0", "typ": "zawor_ogrodowy", "xy": [1.00, -EXT], "obrot": -90},
+                           {"kond": "P0", "typ": "zawor_ogrodowy", "xy": [xF + EXT, 7.50], "obrot": 0},
+                           {"kond": "P0", "typ": "wpust_podlogowy", "xy": [16.00, 1.60], "obrot": 0}],
+    "wyroby": {},
+}
+
+
+# =====================================================================================================================
+# 13. ZAPIS
+# =====================================================================================================================
+def zapisz_dzialka(path: Path):
+    D = DZIALKA
+    L_ = ["# Działka 123/4 — model zagospodarowania (jedno źródło prawdy). PLIK GENEROWANY: tools/buduj_model.py — nie edytować ręcznie.",
+          "# Układ działki: początek = narożnik SW działki, x → wschód, y → północ [m]; rzędne H bezwzględne [m n.p.m., PL-EVRF2007-NH].",
+          f"# Transformacja budynek → działka: p_d = p_b + {list(T_DZ)} (lico zach. P0 7,30 m od granicy W; linia zabudowy 6,00 m od drogi).", ""]
+    L_ += ["uklad: " + fl(D["uklad"]), "dzialka: " + fl(D["dzialka"])]
+    L_ += lista("sasiedzi", D["sasiedzi"]) + ["droga: " + fl(D["droga"]), "linia_zabudowy: " + fl(D["linia_zabudowy"]), "teren:",
+                                               f"  warstwice_co: {D['teren']['warstwice_co']}", f"  ZWG: {D['teren']['ZWG']}",
+                                               f"  grunt: {fl(D['teren']['grunt'])}"]
+    L_ += ["  " + x for x in lista("punkty", D["teren"]["punkty"], kom="teren istniejący (siatka 5 m + otoczenie)")]
+    L_ += ["  " + x for x in lista("punkty_projektowane", D["teren"]["punkty_projektowane"],
+                                   kom="rzędne projektowane: cokół ≥ 0,30 m, spadek ≥ 2 % od budynku (brief §9.6, W-019)")]
+    for k in ("utwardzenia", "zielen", "drzewa", "ogrodzenie", "bramy", "miejsca_postojowe"):
+        L_ += lista(k, D[k])
+    L_ += ["odpady: " + fl(D["odpady"]), "uzbrojenie:"]
+    for k in ("istniejace", "projektowane", "obiekty"):
+        L_ += ["  " + x for x in lista(k, D["uzbrojenie"][k])]
+    L_ += ["retencja:", "  zbiornik: " + fl(D["retencja"]["zbiornik"]), "  rozsaczanie: " + fl(D["retencja"]["rozsaczanie"])]
+    L_ += lista("odwodnienia", D["odwodnienia"]) + ["obszar_oddzialywania: " + fl(D["obszar_oddzialywania"])]
+    path.write_text("\n".join(L_) + "\n", encoding="utf-8")
+
+
+def zapisz_wyposazenie(path: Path):
+    L_ = ["# Wyposażenie „Dom LAMELA” (meble, sanitariaty, kuchnia, urządzenia) — PLIK GENEROWANY: tools/buduj_model.py.",
+          "# Format: model/test/wyposazenie_testowe.yaml (xy — punkt na licu ściany w osi elementu; obrot — kierunek od ściany do pomieszczenia)."]
+    L_ += lista("wyposazenie", WYP, lambda e: e["kond"])
+    path.write_text("\n".join(L_) + "\n", encoding="utf-8")
+
+
+def zapisz_instalacje(path: Path):
+    L_ = ["# Dane instalacyjne „Dom LAMELA” (SCHEMAT p. 8) — PLIK GENEROWANY: tools/buduj_model.py. Współrzędne w układzie budynku.", "instalacje:"]
+    L_ += ["  " + ln for ln in blk(INSTAL).split("\n")]
+    path.write_text("\n".join(L_) + "\n", encoding="utf-8")
+
+
+def main():
+    OUT.mkdir(exist_ok=True)
+    zapisz_budynek(OUT / "budynek.yaml")
+    zapisz_dzialka(OUT / "dzialka.yaml")
+    zapisz_wyposazenie(OUT / "wyposazenie.yaml")
+    zapisz_instalacje(OUT / "instalacje.yaml")
+    print(f"zapisano: model/budynek.yaml ({len(SC)} ścian, {len(OT)} otworów, {len(PM)} pomieszczeń, {len(BELKI)} belek), "
+          f"model/dzialka.yaml, model/wyposazenie.yaml ({len(WYP)} el.), model/instalacje.yaml")
+
+
+if __name__ == "__main__":
+    main()
