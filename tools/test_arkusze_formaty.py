@@ -329,7 +329,8 @@ def test_znaki_centrujace_rezerwacja():
             assert not any(U._przec(r, z) for z in strefy.values()), (n, r)
     roza = [(b, r) for (b, *_x), (_k, _n, r) in zip(R.bloki, [p for p in R.prostokaty if p[0] == "blok"])
             if b.nazwa.startswith("róża")][0]
-    assert roza[0].w < U.TB_W and roza[1][1] < 297 / 2 < roza[1][3], roza   # zwężony, nadal nad tabliczką
+    zp = strefy["p"]
+    assert roza[0].w < U.TB_W and roza[1][3] > zp[1] and roza[1][2] <= zp[0] + 1e-6, roza   # zwężony, nad tabliczką
     assert abs(roza[1][0] - R.tabliczka[0]) < 1e-6
     assert not U.sprawdz_nakladanie(R)
     R.prostokaty.append(("blok", "test", (strefy["p"][0] - 5, 140.0, strefy["p"][2], 160.0)))
@@ -343,7 +344,7 @@ def test_znaki_centrujace_rezerwacja():
 
 def test_tytul_widoku_omija_znak():
     """[IS 1] Tytuł widoku trafiający na dolny znak centrujący — przesunięty w prawo za znak (w miejscu widoku)."""
-    v = [U.Widok("a", 200, 245, 120, 10.5), U.Widok("b", 300, 245, 150, 10.5)]
+    v = [U.Widok("a", 200, 255, 120, 10.5), U.Widok("b", 300, 255, 150, 10.5)]
     g = U._grupa_z_wierszy(v, [[0, 1]])
     W, H = 760.0, 297.0
     R0 = U.pakuj(W, H, v, g, [], 103.0, znaki=False)
@@ -395,9 +396,9 @@ def test_uwagi_kolejnosc_czytania():
         _sprawdz_czesci_uwag(u.roz, 12)
         assert u.roz.czesci_uwag <= 4
         n_split += u.roz.czesci_uwag > 1
-    u = U.rozmiesc([U.Widok("v", 700, 240, 100, 10.5)], [_blok_prosty(90), _uwagi(60)], 103.0,
+    u = U.rozmiesc([U.Widok("v", 700, 240, 100, 10.5)], [_blok_prosty(90), _uwagi(100)], 103.0,
                    {"wysokosci": [297], "max_wysokosc": 297, "max_czesci_uwag": 6})
-    _sprawdz_czesci_uwag(u.roz, 60)
+    _sprawdz_czesci_uwag(u.roz, 100)
     assert u.roz.czesci_uwag >= 2
 
 

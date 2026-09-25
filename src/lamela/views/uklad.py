@@ -853,7 +853,7 @@ def _uwagi_szukaj(wolne: Wolne, U, i0: int, prev, P: int, mp: int, budzet: list)
             if k - i0 < mp:
                 continue
         hh = U.wysokosc(i0, k)
-        xs = {round(f[2] - w, 6)}
+        xs = {round(f[2] - w, 6), round(f[0], 6)}     # przy prawej i przy lewej krawędzi pola (miejsce na „cd.”)
         if prev is not None and f[0] - 1e-6 <= prev[0] <= f[2] - w + 1e-6:
             xs.add(round(prev[0], 6))                     # wyrównanie pod poprzednią częścią
         for x in xs:

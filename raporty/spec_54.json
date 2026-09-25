@@ -1,4 +1,5 @@
 {
+ "nr": 54,
  "title": "Konstrukcja, runda 1 ►: pozycje ŻB i płyta fundamentowa · silnik arkuszy: poprawki ► · statystyki: kontrola źródeł ►",
  "stages": [
   [
@@ -52,6 +53,17 @@
  ],
  "notes": [
   "Konstrukcja: przeliczane pozycje żelbetowe i płyta fundamentowa.",
-  "Statystyki sesji: tokeny przeliczone niezależnie; trwa kontrola źródeł cen."
+  "Statystyki sesji: tokeny przeliczone niezależnie; trwa kontrola źródeł cen.",
+  "NADZÓR (11:11): 2 agentów aktywnych, bez zastojów; najdłuższa bezczynność 1 min; zmiany w repo 1 min temu."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/projekt/02_PZT/rysunki/PZT-01_plan_zagospodarowania_dzialki.png",
+   "caption": "PZT-01 projekt zagospodarowania terenu 1:500"
+  },
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/PT-AR-02.png",
+   "caption": "PT-AR-02 rzut I piętra (stadium PT)"
+  }
  ]
 }
