@@ -560,3 +560,171 @@ class RysG(RysE):
             "Wysokości montażu (od posadzki): gniazda 0,30 m; nad blatem 1,10 m; łazienki 1,20 m (IP44); garaż, "
             "pom. techniczne 1,10 m (IP44); łączniki 1,10 m.",
         ]
+
+
+# ================================================================================================ IE-T teletechnika
+def _box(c, pos, text, w_mm=5.0, h_mm=3.2, layer="E-TELETECH"):
+    k = c.k
+    P = np.asarray(pos, float)
+    c.fill([P + np.array([-w_mm, -h_mm]) * k / 2, P + np.array([w_mm, -h_mm]) * k / 2,
+            P + np.array([w_mm, h_mm]) * k / 2, P + np.array([-w_mm, h_mm]) * k / 2], layer, "#ffffff", z=24.4)
+    c.rect(P[0] - w_mm * k / 2, P[1] - h_mm * k / 2, P[0] + w_mm * k / 2, P[1] + h_mm * k / 2, layer, pen="srednia",
+           z=24.5)
+    c.text(P, text, 1.8, 0.0, "center", "middle", layer, z=24.6)
+
+
+class RysT(RysE):
+    kod = "IE-T"
+
+    def run(self):
+        self.prepare()
+        self.leg.line("E-TELETECH", "okablowanie strukturalne: skrętka kat. 6A U/FTP (LAN), koncentryk (TV/SAT), "
+                      "przewody SSWiN i wideodomofonu — w rurach osłonowych, gwiaździście od RACK", pen="cienka")
+        self.pion = self._pion_t()
+        pts = []
+        for r in self.rooms:
+            pts += self.pomieszczenie(r)
+        if self.kid == self.kids[0]:
+            pts += self.parter()
+        # trasy gwiaździste do RACK (parter) lub pionu teletechnicznego (piętra)
+        hub = self.rack if (self.kid == self.kids[0] and getattr(self, "rack", None) is not None) else self.pion
+        for q in sorted(pts, key=lambda p: -(abs(p[0] - hub[0]) + abs(p[1] - hub[1]))):
+            path = self.g.route(np.asarray(q, float), None if "T" in self.g.occ else hub, "T", reuse=0.25, other=1.0,
+                                targets=self.g.occ.get("T"), margin=4.0)
+            self.pipe(path, "WZ", layer="E-TELETECH", pen="b_cienka", lt="KRESKOWA_DROBNA")
+            self.g.mark(path, "T")
+        if self.kid != self.kids[0] or True:
+            i = self.kids.index(self.kid)
+            self.sym(S.riser, self.pion, None, "WZ", s_mm=2.6)
+            arrow = ("↑" if i < len(self.kids) - 1 else "") + ("↓" if i > 0 else "")
+            self.tag(self.pion, [f"{BRAK} pion teletechniczny T1 (proponowany) {arrow}",
+                                 "rury osłonowe 2 × Ø32 (LAN, TV, SSWiN)"], "I-BRAKI", color="#b0008a")
+            self.brak("Trasy teletechniczne (pion, RACK)", "brak w modelu pionu/tras teletechnicznych — przyjęto pion "
+                      "proponowany (wspólna lokalizacja z pionem wentylacyjnym)", "instalacje.piony: [{id: T1, xy, "
+                      "rodzaj: teletechnika}], lokalizacje: {RACK: [x, y, kond]}")
+        self.opisy()
+        return self.finish()
+
+    def _pion_t(self):
+        from .is_went import RysWM
+        c = getattr(self.ctx, "_inst_went_pion", None)
+        if c is None:
+            tmp = RysWM.__new__(RysWM)
+            tmp.ctx, tmp.m, tmp.kids, tmp.W = self.ctx, self.m, self.kids, self.W
+            rek = next((e for e in self.W.dane.wyposazenie if e.get("typ") == "rekuperator"), None)
+            tmp.rek_xy = np.asarray(rek["xy"], float) if rek else None
+            c = RysWM._pion(tmp)
+        return np.asarray(c[0], float) + np.array([0.0, -0.35])
+
+    def _naprzeciw(self, r, e):
+        """Punkt na ścianie naprzeciw mebla (łóżko/sofa) — gniazdo TV."""
+        xy = np.asarray(e["xy"], float)
+        d = dir_deg(float(e.get("obrot", 90)))
+        ray = LineString([xy + d * 0.3, xy + d * 20.0])
+        hit = ray.intersection(r.polygon.exterior)
+        pts = [np.asarray(g.coords[0]) for g in getattr(hit, "geoms", [hit]) if not g.is_empty]
+        if not pts:
+            return None
+        q = min(pts, key=lambda p: float(np.hypot(*(p - xy))))
+        return q, math.degrees(math.atan2(-d[1], -d[0]))
+
+    def pomieszczenie(self, r):
+        rd = self.rodzaj(r)
+        out = []
+        wy = [e for e in self.wyp() if e.get("xy") and r.polygon.buffer(0.35).contains(Point(e["xy"]))]
+        if rd in ("pokoj", "kuchnia"):
+            for e in wy:
+                if e.get("typ") == "biurko":
+                    rot = float(e.get("obrot", 90))
+                    q = np.asarray(e["xy"], float) - perp(dir_deg(rot)) * (float(e["wym"][0]) / 2 - 0.2)
+                    self.sym(S.data_outlet, q, rot, label="2×RJ45", s_mm=3.0)
+                    out.append(q)
+                if e.get("typ") in ("lozko", "sofa"):
+                    t = self._naprzeciw(r, e)
+                    if t:
+                        self.sym(S.data_outlet, t[0], t[1], label="TV+RJ45", s_mm=3.0)
+                        out.append(t[0])
+            if not out:
+                wl = self.wzdluz_scian(r, 1)
+                for q, rot in wl:
+                    self.sym(S.data_outlet, q, rot, label="2×RJ45", s_mm=3.0)
+                    out.append(q)
+            if r.kategoria == "podstawowa" and self.kid == self.kids[0]:
+                q = label_point(r.polygon) + np.array([0.6, 0.6])
+                self.sym(S.motion_sensor, q, 90.0, s_mm=3.0, label="PIR", layer="E-ALARM")
+                out.append(q)
+        if rd == "komunikacja" and r.pow_netto == max((x.pow_netto for x in self.rooms if self.rodzaj(x) ==
+                                                         "komunikacja"), default=0):
+            q = label_point(r.polygon)
+            _box_q = q + np.array([0.0, 0.5])
+            self.sym(_box, _box_q, "AP")
+            self.sym(S.tag, q - np.array([0.0, 0.5]), "CD", shape="circle", r_mm=2.0, h=1.8, layer="E-ALARM")
+            out += [_box_q, q - np.array([0.0, 0.5])]
+        return out
+
+    def parter(self):
+        W = self.W
+        out = []
+        rg = next((e for e in W.dane.wyposazenie if "rozdzielnica" in str(e.get("opis", "")).lower()), None)
+        self.rack = None
+        if rg is not None:
+            rot = float(rg.get("obrot", 90))
+            q = np.asarray(rg["xy"], float) + perp(dir_deg(rot)) * 0.75 + dir_deg(rot) * 0.2
+            self.sym(_box, q, "RACK", w_mm=8.0)
+            self.rack = q
+            self.tag(q, ["RACK 19\" 12U: ONT (światłowód), router, switch PoE, patch-panel kat. 6A,",
+                         "centrala SSWiN (CA), UPS; zasilanie obw. D14"], "E-OPISY", style="bold")
+            tl = self.linie_dzialki("tele")
+            if tl:
+                ln = LineString(tl[0][0]).intersection(self.pod.outline.buffer(2.0, join_style=2))
+                seg = max((np.asarray(g.coords) for g in getattr(ln, "geoms", [ln]) if not g.is_empty),
+                          key=len, default=None)
+                if seg is not None:
+                    self.pipe(seg, "WZ", layer="E-TELETECH", pen="srednia", lt="WIELOPUNKTOWA")
+                    path = self.g.route(seg[-1], q, "TW")
+                    self.pipe(path, "WZ", layer="E-TELETECH", pen="srednia", lt="WIELOPUNKTOWA")
+                    self.label(seg, "przyłącze światłowodowe 2 × HDPE Ø40 + mikrokabel (wg PZT)", "E-OPISY")
+            else:
+                self.brak("Przyłącze telekomunikacyjne", "brak trasy w dzialka.yaml", "uzbrojenie.projektowane: "
+                          "[{branza: tele, linia, opis}]")
+        # wideodomofon, manipulator SSWiN, sygnalizator — przy wejściu głównym
+        dz = [(w, o) for w in self.m.sciany(self.kid) if w.ext_side is not None for o in w.otwory if
+              o.typ == "drzwi_zewn"]
+        if dz:
+            w, o = dz[0]
+            si = w.sgn_int
+            rot_in = math.degrees(math.atan2(*(w.n * si)[::-1]))
+            s = o.s1 + 0.45 if o.s1 + 0.45 < w.L - 0.2 else o.s0 - 0.45
+            q_in = w.pt(s, w.face_t(si, "all"))
+            self.sym(S.videophone, q_in, rot_in, s_mm=3.2, label="WD")
+            q2 = w.pt(s + (0.35 if s > o.s1 else -0.35), w.face_t(si, "all"))
+            self.sym(_box, q2 + w.n * si * 0.15, "M", w_mm=3.6, layer="E-ALARM")
+            q_out = w.pt(o.s0 - 0.6 if o.s0 > 0.8 else o.s1 + 0.6, w.face_t(-si, "all")) - w.n * si * 0.15
+            self.sym(_box, q_out, "SZ", w_mm=4.0, layer="E-ALARM")
+            self.tag(q_in, ["WD — monitor wideodomofonu (panel wywołania przy furtce — wg PZT, obw. D13)"], "E-OPISY")
+            self.tag(q_out, ["SZ — sygnalizator zewnętrzny SSWiN (akustyczno-optyczny)"], "E-OPISY")
+            out += [q_in, q2]
+        self.leg.sym(lambda c, p: S.data_outlet(c, p - np.array([0, 1.5]), 90.0, label="RJ45", s_mm=3.0),
+                     "gniazdo teleinformatyczne (2×RJ45 kat. 6A; TV — gniazdo RTV/SAT + RJ45)")
+        self.leg.sym(lambda c, p: _box(c, p, "AP"), "AP — punkt dostępowy Wi-Fi (sufit, PoE)")
+        self.leg.sym(lambda c, p: S.motion_sensor(c, p - np.array([0, 1.5]), 90.0, s_mm=3.0, label="PIR",
+                                                  layer="E-ALARM"), "czujka ruchu SSWiN (PIR), h ≈ 2,2 m")
+        self.leg.sym(lambda c, p: S.tag(c, p, "CD", shape="circle", r_mm=2.0, h=1.8, layer="E-ALARM"),
+                     "CD — czujka dymu (autonomiczna/SSWiN) w komunikacji")
+        self.leg.sym(lambda c, p: S.videophone(c, p - np.array([0, 1.8]), 90.0, s_mm=3.2, label="WD"),
+                     "WD — monitor wideodomofonu")
+        self.leg.sym(lambda c, p: _box(c, p, "M", w_mm=3.6, layer="E-ALARM"),
+                     "M — manipulator SSWiN; SZ — sygnalizator zewnętrzny; RACK — szafa teleinformatyczna")
+        return out
+
+    def opisy(self):
+        self.notes += [
+            "Instalacje telekomunikacyjne wg WT § 192a–192c (instalacja telekomunikacyjna budynku, przyłącze "
+            "światłowodowe — art. 10 ustawy o wspieraniu rozwoju usług i sieci telekomunikacyjnych), PN-EN 50173-4 "
+            "(okablowanie strukturalne w domach), PN-EN 50174-2 (instalowanie), SSWiN wg PN-EN 50131-1 (stopień 2).",
+            "Punkty teleinformatyczne rozmieszczono algorytmicznie: przy biurkach 2×RJ45, na ścianie naprzeciw łóżek "
+            "i sofy (TV + RJ45), AP Wi-Fi w komunikacji każdej kondygnacji; czujki ruchu w pomieszczeniach parteru "
+            "z oknami/drzwiami zewnętrznymi. Okablowanie gwiaździste do RACK — trasy schematyczne.",
+            "Przewody teletechniczne prowadzić w odległości ≥ 0,1 m od przewodów elektroenergetycznych (lub z "
+            "przegrodą), w rurach osłonowych Ø20–Ø32; ekranowanie wg PN-EN 50174-2.",
+        ]
