@@ -1289,9 +1289,10 @@ def raport_md(a: AudytWT, A: Audyt, extra: str = "") -> str:
                  f"(50 %) {f2(pb['dach_zielony_50'])} m² (nie wliczona).")
     wy = inf.get("wysokosc", {})
     if wy:
-        L.append(f"Teren przy obwodzie parteru: istniejący {f2(wy['teren_istn'][0])}…{f2(wy['teren_istn'][1])}, projektowany "
-                 f"{f2(wy['teren_proj'][0])}…{f2(wy['teren_proj'][1])} m n.p.m.; ±0,00 = {f2(a.m.zero_abs)} m n.p.m. "
-                 f"Wejścia (teren niższy z istn./proj.): " + ", ".join(f"{o} {f2(t)}" for t, o in wy["wejscia"] if t is not None) + ".")
+        L.append(f"Teren na obwodzie ścian zewnętrznych (lamela.wskazniki — niższa z rzędnych istn./proj.): t_min {f2(wy['t_min'])}, "
+                 f"t_max {f2(wy['t_max'])}, t_śr {f2(wy['t_sr'])} m n.p.m.; ±0,00 = {f2(a.m.zero_abs)} m n.p.m.; najwyższy punkt: "
+                 f"{wy['el_top']} (+{f2(wy['z_top'], 3)}); wysokość zabudowy {f2(wy['H_upzp'])} m (informacyjnie od t_min "
+                 f"{f2(wy['H_upzp_od_t_min'])} m). WT §6: wejście {wy['wejscie']}, teren {f2(wy['t_wejscia'])} m n.p.m. → {f2(wy['H_WT'])} m.")
     # pomieszczenia
     L.append("\n## 3. Pomieszczenia — powierzchnie, wysokości, oświetlenie\n")
     L.append("| Nr | Nazwa | Kat. | Pobyt | Pow. netto [m²] | Pow. do PU [m²] | h w świetle [m] | h min / pod belką | Okna | A_ok/A_p (ościeżn.) |")

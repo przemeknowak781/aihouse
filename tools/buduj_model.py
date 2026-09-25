@@ -1329,7 +1329,14 @@ GEOTECHNIKA = {"kategoria": "II", "grunt": {"rodzaj": "piasek średni (MSa), śr
 # =====================================================================================================================
 META = {"nazwa": "Dom LAMELA", "wersja": "1.0", "data": "2026-09-25", "stadium": "koncepcja ostateczna (synteza W2 + przeszczepy W1/W3 + poprawki J1–J3)",
         "autor": "(do uzupełnienia — projektant z uprawnieniami bez ograniczeń)", "zrodlo": "tools/buduj_model.py (model parametryczny)",
-        "uwagi": "WT (t.j. Dz.U. 2022 poz. 1225 ze zm.) w brzmieniu do 19.09.2026, stosowane na podstawie art. 102a PB (oświadczenie Inwestora)"}
+        "uwagi": "WT (t.j. Dz.U. 2022 poz. 1225 ze zm.) w brzmieniu do 19.09.2026, stosowane na podstawie art. 102a PB (oświadczenie Inwestora)",
+        # runda 2 (weryfikacja §6 C3, C4): numeracja i definicja PU — dane dla opisów i tabel arkuszy (bez zmiany identyfikatorów modelu)
+        "numeracja_pomieszczen": {"model": "K.NN — K = numer kondygnacji od 0 (P0 parter = 0.xx, P1 = 1.xx, P2 = 2.xx)",
+                                  "arkusze_iso": "K+1.NN (parter 1.xx, I p. 2.xx, II p. 3.xx) — przy `numeracja_pomieszczen: iso` arkuszy",
+                                  "przejscie": "numer arkusza = (K + 1).NN; np. model 0.06 (salon) = arkusz 1.06, model 1.06 (klatka) = arkusz 2.06"},
+        "PU_definicja": "PU wg W-316 (RPB §20 / PN-ISO 9836:2022): pomieszczenia podstawowe i pomocnicze BEZ komunikacji wewn. (klatki 0.04, 1.06, "
+                        "2.06), BEZ garażu 0.13 i pom. technicznych/szachtów; strefy h 1,40–2,20 — 50 %, h < 1,40 — 0 %. „Użytkowa” rdzenia "
+                        "(zestawienie_powierzchni: podstawowa + pomocnicza) to wartość kontrolna Z GARAŻEM i bez ruchu — nie PU (podglad_modelu.py: bilans)"}
 KOND = [
     {"id": "P0", "nazwa": "Parter", "rzedna": 0.0, "wys_kondygnacji": H_KOND, "wys_w_swietle": r(Z_SPOD_ST1 - 0.01), "podloga": "POD-0"},
     {"id": "P1", "nazwa": "I piętro", "rzedna": Z_P1, "wys_kondygnacji": H_KOND, "wys_w_swietle": r(Z_ST2 - T_STR - Z_P1 - 0.01), "podloga": "POD-1"},
