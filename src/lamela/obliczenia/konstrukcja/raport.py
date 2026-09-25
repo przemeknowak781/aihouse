@@ -52,8 +52,8 @@ def _pozycja_md(pz: Pozycja, out_dir: Path, poziom: int = 3) -> list[str]:
     eta = pz.wykorzystanie
     L.append(f"{h} Poz. {pz.nr} — {pz.tytul}")
     L.append("")
-    L.append(f"*Element modelu: `{pz.ident}` · maks. wykorzystanie nośności η = {f(eta * 100, 0)}% · "
-             f"{'wszystkie warunki spełnione' if pz.ok else '**WARUNKI NIESPEŁNIONE**'}*")
+    L.append(f"Element modelu: `{pz.ident}` · maks. wykorzystanie nośności η = {f(eta * 100, 0)}% · "
+             f"{'wszystkie warunki spełnione' if pz.ok else '**WARUNKI NIESPEŁNIONE — patrz tabele warunków i wnioski**'}")
     L.append("")
     if pz.opis:
         L.append(f"{h}# Opis i schemat statyczny")
@@ -62,7 +62,8 @@ def _pozycja_md(pz: Pozycja, out_dir: Path, poziom: int = 3) -> list[str]:
     for p, cap in pz.rysunki:
         rel = os.path.relpath(p, out_dir)
         L.append(f"![{cap}]({rel})")
-        L.append(f"*{cap}*")
+        L.append("")
+        L.append(f"*Rys. {cap}*")
         L.append("")
     if pz.obciazenia:
         L.append(f"{h}# Zestawienie obciążeń")

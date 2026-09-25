@@ -844,9 +844,12 @@ class AnalizaKonstrukcji:
         g.q_el = {"G": qG, "QA": qA, "H": qH, "S1": s1, "S2": s2, "SB2": sb}
         # kombinacje
         odz = [Oddz("G", "G")]
+        # taras/dach użytkowy odsłonięty: obciążenie użytkowe nie łączone ze śniegiem (PN-EN 1991-1-1 p. 3.3.2(1), R5-23)
+        grp_qa = "dach" if all(e.odsloniety for e in g.el if e.kat_q in ("strop", "taras")) and any(
+            e.kat_q == "taras" for e in g.el) else "QA"
         for c in g.res:
             if c.startswith("QA"):
-                odz.append(Oddz(c, "Q", "A", "QA"))
+                odz.append(Oddz(c, "Q", "A", grp_qa))
             elif c == "H":
                 odz.append(Oddz("H", "Q", "H", "dach"))
             elif c in ("S1", "S2"):
@@ -1885,7 +1888,7 @@ class AnalizaKonstrukcji:
                     for cs, v in self.slupy_N.get(str(c["id"]), {}).items():
                         N[cs] = N.get(cs, 0.0) + v
                 Gk = N.get("G", 0.0)
-                Qk = max([N.get(c_, 0.0) for c_ in N if c_ != "G" and c_ != "SB2"] or [0.0])
+                Qk = N.get("QA", 0.0) + max(N.get("H", 0.0), N.get("S1", 0.0), N.get("S2", 0.0))   # [UPR] bezpiecznie
                 poz = Pozycja("", fid, f"Stopa fundamentowa {fid} ({f(B)} × {f(Lf)} × {f(hf)} m) pod słupem "
                               + ", ".join(str(c["id"]) for c in slupy), "fundament")
                 poz.opis.append(f"Spód stopy {f(spod, 3)} m, teren {f(zt, 2)} m → zagłębienie D = {f(D_ext, 2)} m.")

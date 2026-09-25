@@ -182,7 +182,7 @@ Kombinacje (PN-EN 1990 + NA): STR/GEO — mniej korzystne z 6.10a: Σ1,35·G_k +
 
 ### Poz. 1.1 — Stropodach / dach D1
 
-*Element modelu: `D1` · maks. wykorzystanie nośności η = 99% · wszystkie warunki spełnione*
+Element modelu: `D1` · maks. wykorzystanie nośności η = 99% · wszystkie warunki spełnione
 
 #### Opis i schemat statyczny
 
@@ -191,13 +191,16 @@ Płyta żelbetowa monolityczna gr. h = 20 cm, wierzch konstrukcji 5,970 m, beton
 Podpory: S1-01 (ściana), S1-02 (ściana), S1-03 (ściana), S1-04 (ściana), S1-05 (ściana)
 
 ![Rozkłady obciążenia śniegiem w zaspach (PN-EN 1991-1-3 p. 5.3.6, 6.2, zał. B).](rys/zaspy_D1.png)
-*Rozkłady obciążenia śniegiem w zaspach (PN-EN 1991-1-3 p. 5.3.6, 6.2, zał. B).*
+
+*Rys. Rozkłady obciążenia śniegiem w zaspach (PN-EN 1991-1-3 p. 5.3.6, 6.2, zał. B).*
 
 ![Schemat statyczny płyty D1: pola (P — wymiary, warunki brzegowe x=0/x=l_x/y=0/y=l_y: S — podparcie swobodne, U — ciągłość/utwierdzenie, W — brzeg swobodny/niepełny), podpory.](rys/plyta_0_D1_schemat.png)
-*Schemat statyczny płyty D1: pola (P — wymiary, warunki brzegowe x=0/x=l_x/y=0/y=l_y: S — podparcie swobodne, U — ciągłość/utwierdzenie, W — brzeg swobodny/niepełny), podpory.*
+
+*Rys. Schemat statyczny płyty D1: pola (P — wymiary, warunki brzegowe x=0/x=l_x/y=0/y=l_y: S — podparcie swobodne, U — ciągłość/utwierdzenie, W — brzeg swobodny/niepełny), podpory.*
 
 ![Płyta D1: momenty wymiarujące (obwiednia kombinacji 6.10a/b, obciążeń szachownicowych i sytuacji wyjątkowej) oraz ugięcie sprężyste od kombinacji quasi-stałej (bez zarysowania i pełzania — te w obliczeniach 7.4.3).](rys/plyta_0_D1_mapy.png)
-*Płyta D1: momenty wymiarujące (obwiednia kombinacji 6.10a/b, obciążeń szachownicowych i sytuacji wyjątkowej) oraz ugięcie sprężyste od kombinacji quasi-stałej (bez zarysowania i pełzania — te w obliczeniach 7.4.3).*
+
+*Rys. Płyta D1: momenty wymiarujące (obwiednia kombinacji 6.10a/b, obciążeń szachownicowych i sytuacji wyjątkowej) oraz ugięcie sprężyste od kombinacji quasi-stałej (bez zarysowania i pełzania — te w obliczeniach 7.4.3).*
 
 #### Zestawienie obciążeń
 
@@ -385,7 +388,7 @@ Podpory: S1-01 (ściana), S1-02 (ściana), S1-03 (ściana), S1-04 (ściana), S1-
 
 ### Poz. 2.1 — Strop ST1
 
-*Element modelu: `ST1` · maks. wykorzystanie nośności η = 99% · wszystkie warunki spełnione*
+Element modelu: `ST1` · maks. wykorzystanie nośności η = 99% · wszystkie warunki spełnione
 
 #### Opis i schemat statyczny
 
@@ -394,10 +397,12 @@ Płyta żelbetowa monolityczna gr. h = 20 cm, wierzch konstrukcji 2,910 m, beton
 Podpory: S0-01 (ściana), S0-02 (ściana), S0-03 (ściana), S0-04 (ściana), S0-05 (ściana)
 
 ![Schemat statyczny płyty ST1: pola (P — wymiary, warunki brzegowe x=0/x=l_x/y=0/y=l_y: S — podparcie swobodne, U — ciągłość/utwierdzenie, W — brzeg swobodny/niepełny), podpory.](rys/plyta_1_ST1_schemat.png)
-*Schemat statyczny płyty ST1: pola (P — wymiary, warunki brzegowe x=0/x=l_x/y=0/y=l_y: S — podparcie swobodne, U — ciągłość/utwierdzenie, W — brzeg swobodny/niepełny), podpory.*
+
+*Rys. Schemat statyczny płyty ST1: pola (P — wymiary, warunki brzegowe x=0/x=l_x/y=0/y=l_y: S — podparcie swobodne, U — ciągłość/utwierdzenie, W — brzeg swobodny/niepełny), podpory.*
 
 ![Płyta ST1: momenty wymiarujące (obwiednia kombinacji 6.10a/b, obciążeń szachownicowych i sytuacji wyjątkowej) oraz ugięcie sprężyste od kombinacji quasi-stałej (bez zarysowania i pełzania — te w obliczeniach 7.4.3).](rys/plyta_1_ST1_mapy.png)
-*Płyta ST1: momenty wymiarujące (obwiednia kombinacji 6.10a/b, obciążeń szachownicowych i sytuacji wyjątkowej) oraz ugięcie sprężyste od kombinacji quasi-stałej (bez zarysowania i pełzania — te w obliczeniach 7.4.3).*
+
+*Rys. Płyta ST1: momenty wymiarujące (obwiednia kombinacji 6.10a/b, obciążeń szachownicowych i sytuacji wyjątkowej) oraz ugięcie sprężyste od kombinacji quasi-stałej (bez zarysowania i pełzania — te w obliczeniach 7.4.3).*
 
 #### Zestawienie obciążeń
 
@@ -583,7 +588,7 @@ Podpory: S0-01 (ściana), S0-02 (ściana), S0-03 (ściana), S0-04 (ściana), S0-
 
 ### Poz. 3.1 — Płyta wspornikowa PL-D
 
-*Element modelu: `PL-D` · maks. wykorzystanie nośności η = 99% · wszystkie warunki spełnione*
+Element modelu: `PL-D` · maks. wykorzystanie nośności η = 99% · wszystkie warunki spełnione
 
 #### Opis i schemat statyczny
 
@@ -592,13 +597,16 @@ Płyta żelbetowa monolityczna gr. h = 20 cm, wierzch konstrukcji 2,910 m, beton
 Podpory: S0-02 (ściana), B1 (belka), słupy: SL2
 
 ![Rozkłady obciążenia śniegiem w zaspach (PN-EN 1991-1-3 p. 5.3.6, 6.2, zał. B).](rys/zaspy_PL-D.png)
-*Rozkłady obciążenia śniegiem w zaspach (PN-EN 1991-1-3 p. 5.3.6, 6.2, zał. B).*
+
+*Rys. Rozkłady obciążenia śniegiem w zaspach (PN-EN 1991-1-3 p. 5.3.6, 6.2, zał. B).*
 
 ![Schemat statyczny płyty PL-D: pola (P — wymiary, warunki brzegowe x=0/x=l_x/y=0/y=l_y: S — podparcie swobodne, U — ciągłość/utwierdzenie, W — brzeg swobodny/niepełny), podpory.](rys/plyta_2_PL-D_schemat.png)
-*Schemat statyczny płyty PL-D: pola (P — wymiary, warunki brzegowe x=0/x=l_x/y=0/y=l_y: S — podparcie swobodne, U — ciągłość/utwierdzenie, W — brzeg swobodny/niepełny), podpory.*
+
+*Rys. Schemat statyczny płyty PL-D: pola (P — wymiary, warunki brzegowe x=0/x=l_x/y=0/y=l_y: S — podparcie swobodne, U — ciągłość/utwierdzenie, W — brzeg swobodny/niepełny), podpory.*
 
 ![Płyta PL-D: momenty wymiarujące (obwiednia kombinacji 6.10a/b, obciążeń szachownicowych i sytuacji wyjątkowej) oraz ugięcie sprężyste od kombinacji quasi-stałej (bez zarysowania i pełzania — te w obliczeniach 7.4.3).](rys/plyta_2_PL-D_mapy.png)
-*Płyta PL-D: momenty wymiarujące (obwiednia kombinacji 6.10a/b, obciążeń szachownicowych i sytuacji wyjątkowej) oraz ugięcie sprężyste od kombinacji quasi-stałej (bez zarysowania i pełzania — te w obliczeniach 7.4.3).*
+
+*Rys. Płyta PL-D: momenty wymiarujące (obwiednia kombinacji 6.10a/b, obciążeń szachownicowych i sytuacji wyjątkowej) oraz ugięcie sprężyste od kombinacji quasi-stałej (bez zarysowania i pełzania — te w obliczeniach 7.4.3).*
 
 #### Zestawienie obciążeń
 
@@ -792,7 +800,7 @@ Podpory: S0-02 (ściana), B1 (belka), słupy: SL2
 
 ### Poz. 4.1 — Schody SCH1 (P0 → P1)
 
-*Element modelu: `SCH1` · maks. wykorzystanie nośności η = 137% · **WARUNKI NIESPEŁNIONE***
+Element modelu: `SCH1` · maks. wykorzystanie nośności η = 137% · **WARUNKI NIESPEŁNIONE — patrz tabele warunków i wnioski**
 
 #### Opis i schemat statyczny
 
@@ -801,10 +809,12 @@ Bieg 1: 9 podnóżków 17,0/28,0 cm, szer. 1,00 m, rozpiętość w rzucie L = 3,
 Bieg 2: 9 podnóżków 17,0/28,0 cm, szer. 1,00 m, rozpiętość w rzucie L = 3,380 m; podpory — dół: ściana S0-03; góra: krawędź stropu na poziomie 3,06 m.
 
 ![SCH1 — bieg 1: schemat statyczny płyty schodowej i obwiednia momentów zginających.](rys/schody_SCH1_1.png)
-*SCH1 — bieg 1: schemat statyczny płyty schodowej i obwiednia momentów zginających.*
+
+*Rys. SCH1 — bieg 1: schemat statyczny płyty schodowej i obwiednia momentów zginających.*
 
 ![SCH1 — bieg 2: schemat statyczny płyty schodowej i obwiednia momentów zginających.](rys/schody_SCH1_2.png)
-*SCH1 — bieg 2: schemat statyczny płyty schodowej i obwiednia momentów zginających.*
+
+*Rys. SCH1 — bieg 2: schemat statyczny płyty schodowej i obwiednia momentów zginających.*
 
 #### Obliczenia
 
@@ -935,14 +945,15 @@ Bieg 2: 9 podnóżków 17,0/28,0 cm, szer. 1,00 m, rozpiętość w rzucie L = 3,
 
 ### Poz. 5.1 — Belka B1
 
-*Element modelu: `B1` · maks. wykorzystanie nośności η = 81% · wszystkie warunki spełnione*
+Element modelu: `B1` · maks. wykorzystanie nośności η = 81% · wszystkie warunki spełnione
 
 #### Opis i schemat statyczny
 
 Belka żelbetowa b × h = 20 × 30 cm, oś (10,09, 4,85) → (13,91, 4,85), L = 3,820 m; podpory: ściana S0-02 (x = 0,00 m), słup SL1 (x = 3,76 m). Obciążenie: reakcje płyty z MES (rozkład wzdłuż belki) + ciężar własny.
 
 ![Belka B1: schemat statyczny i obwiednie sił wewnętrznych (M dodatni — rozciąganie dołem).](rys/belka_B1.png)
-*Belka B1: schemat statyczny i obwiednie sił wewnętrznych (M dodatni — rozciąganie dołem).*
+
+*Rys. Belka B1: schemat statyczny i obwiednie sił wewnętrznych (M dodatni — rozciąganie dołem).*
 
 #### Zestawienie obciążeń
 
@@ -1044,7 +1055,7 @@ Belka żelbetowa b × h = 20 × 30 cm, oś (10,09, 4,85) → (13,91, 4,85), L = 
 
 ### Poz. 6.1 — Nadproże N-O0-01 nad otworem O0-01 w ścianie S0-01 (światło 4,00 m)
 
-*Element modelu: `N-O0-01` · maks. wykorzystanie nośności η = 142% · **WARUNKI NIESPEŁNIONE***
+Element modelu: `N-O0-01` · maks. wykorzystanie nośności η = 142% · **WARUNKI NIESPEŁNIONE — patrz tabele warunków i wnioski**
 
 #### Obliczenia
 
@@ -1134,7 +1145,7 @@ Belka żelbetowa b × h = 20 × 30 cm, oś (10,09, 4,85) → (13,91, 4,85), L = 
 
 ### Poz. 6.2 — Nadproże N-O0-02 nad otworem O0-02 w ścianie S0-01 (światło 1,80 m)
 
-*Element modelu: `N-O0-02` · maks. wykorzystanie nośności η = 73% · wszystkie warunki spełnione*
+Element modelu: `N-O0-02` · maks. wykorzystanie nośności η = 73% · wszystkie warunki spełnione
 
 #### Obliczenia
 
@@ -1226,7 +1237,7 @@ Belka żelbetowa b × h = 20 × 30 cm, oś (10,09, 4,85) → (13,91, 4,85), L = 
 
 ### Poz. 6.3 — Nadproże N-O0-03 nad otworem O0-03 w ścianie S0-03 (światło 1,10 m)
 
-*Element modelu: `N-O0-03` · maks. wykorzystanie nośności η = 39% · wszystkie warunki spełnione*
+Element modelu: `N-O0-03` · maks. wykorzystanie nośności η = 39% · wszystkie warunki spełnione
 
 #### Obliczenia
 
@@ -1318,7 +1329,7 @@ Belka żelbetowa b × h = 20 × 30 cm, oś (10,09, 4,85) → (13,91, 4,85), L = 
 
 ### Poz. 6.4 — Nadproże N-O0-04 nad otworem O0-04 w ścianie S0-03 (światło 1,60 m)
 
-*Element modelu: `N-O0-04` · maks. wykorzystanie nośności η = 97% · wszystkie warunki spełnione*
+Element modelu: `N-O0-04` · maks. wykorzystanie nośności η = 97% · wszystkie warunki spełnione
 
 #### Obliczenia
 
@@ -1408,7 +1419,7 @@ Belka żelbetowa b × h = 20 × 30 cm, oś (10,09, 4,85) → (13,91, 4,85), L = 
 
 ### Poz. 6.5 — Nadproże N-O0-05 nad otworem O0-05 w ścianie S0-02 (światło 1,50 m)
 
-*Element modelu: `N-O0-05` · maks. wykorzystanie nośności η = 73% · wszystkie warunki spełnione*
+Element modelu: `N-O0-05` · maks. wykorzystanie nośności η = 73% · wszystkie warunki spełnione
 
 #### Obliczenia
 
@@ -1498,7 +1509,7 @@ Belka żelbetowa b × h = 20 × 30 cm, oś (10,09, 4,85) → (13,91, 4,85), L = 
 
 ### Poz. 6.6 — Nadproże N-O0-06 nad otworem O0-06 w ścianie S0-05 (światło 1,20 m)
 
-*Element modelu: `N-O0-06` · maks. wykorzystanie nośności η = 93% · wszystkie warunki spełnione*
+Element modelu: `N-O0-06` · maks. wykorzystanie nośności η = 93% · wszystkie warunki spełnione
 
 #### Obliczenia
 
@@ -1588,7 +1599,7 @@ Belka żelbetowa b × h = 20 × 30 cm, oś (10,09, 4,85) → (13,91, 4,85), L = 
 
 ### Poz. 6.7 — Nadproże N-O0-08 nad otworem O0-08 w ścianie S0-02 (światło 2,00 m)
 
-*Element modelu: `N-O0-08` · maks. wykorzystanie nośności η = 95% · wszystkie warunki spełnione*
+Element modelu: `N-O0-08` · maks. wykorzystanie nośności η = 95% · wszystkie warunki spełnione
 
 #### Obliczenia
 
@@ -1678,7 +1689,7 @@ Belka żelbetowa b × h = 20 × 30 cm, oś (10,09, 4,85) → (13,91, 4,85), L = 
 
 ### Poz. 6.8 — Nadproże N-O0-09 nad otworem O0-09 w ścianie S0-04 (światło 1,50 m)
 
-*Element modelu: `N-O0-09` · maks. wykorzystanie nośności η = 73% · wszystkie warunki spełnione*
+Element modelu: `N-O0-09` · maks. wykorzystanie nośności η = 73% · wszystkie warunki spełnione
 
 #### Obliczenia
 
@@ -1770,7 +1781,7 @@ Belka żelbetowa b × h = 20 × 30 cm, oś (10,09, 4,85) → (13,91, 4,85), L = 
 
 ### Poz. 6.9 — Nadproże N-O1-01 nad otworem O1-01 w ścianie S1-01 (światło 2,40 m)
 
-*Element modelu: `N-O1-01` · maks. wykorzystanie nośności η = 73% · wszystkie warunki spełnione*
+Element modelu: `N-O1-01` · maks. wykorzystanie nośności η = 73% · wszystkie warunki spełnione
 
 #### Obliczenia
 
@@ -1862,7 +1873,7 @@ Belka żelbetowa b × h = 20 × 30 cm, oś (10,09, 4,85) → (13,91, 4,85), L = 
 
 ### Poz. 6.10 — Nadproże N-O1-02 nad otworem O1-02 w ścianie S1-01 (światło 3,60 m)
 
-*Element modelu: `N-O1-02` · maks. wykorzystanie nośności η = 99% · wszystkie warunki spełnione*
+Element modelu: `N-O1-02` · maks. wykorzystanie nośności η = 99% · wszystkie warunki spełnione
 
 #### Obliczenia
 
@@ -1954,7 +1965,7 @@ Belka żelbetowa b × h = 20 × 30 cm, oś (10,09, 4,85) → (13,91, 4,85), L = 
 
 ### Poz. 6.11 — Nadproże N-O1-03 nad otworem O1-03 w ścianie S1-02 (światło 2,40 m)
 
-*Element modelu: `N-O1-03` · maks. wykorzystanie nośności η = 91% · wszystkie warunki spełnione*
+Element modelu: `N-O1-03` · maks. wykorzystanie nośności η = 91% · wszystkie warunki spełnione
 
 #### Obliczenia
 
@@ -2044,7 +2055,7 @@ Belka żelbetowa b × h = 20 × 30 cm, oś (10,09, 4,85) → (13,91, 4,85), L = 
 
 ### Poz. 6.12 — Nadproże N-O1-04 nad otworem O1-04 w ścianie S1-03 (światło 1,00 m)
 
-*Element modelu: `N-O1-04` · maks. wykorzystanie nośności η = 33% · wszystkie warunki spełnione*
+Element modelu: `N-O1-04` · maks. wykorzystanie nośności η = 33% · wszystkie warunki spełnione
 
 #### Obliczenia
 
@@ -2136,7 +2147,7 @@ Belka żelbetowa b × h = 20 × 30 cm, oś (10,09, 4,85) → (13,91, 4,85), L = 
 
 ### Poz. 6.13 — Nadproże N-O1-05 nad otworem O1-05 w ścianie S1-03 (światło 1,60 m)
 
-*Element modelu: `N-O1-05` · maks. wykorzystanie nośności η = 73% · wszystkie warunki spełnione*
+Element modelu: `N-O1-05` · maks. wykorzystanie nośności η = 73% · wszystkie warunki spełnione
 
 #### Obliczenia
 
@@ -2228,7 +2239,7 @@ Belka żelbetowa b × h = 20 × 30 cm, oś (10,09, 4,85) → (13,91, 4,85), L = 
 
 ### Poz. 6.14 — Nadproże N-O1-06 nad otworem O1-06 w ścianie S1-03 (światło 1,80 m)
 
-*Element modelu: `N-O1-06` · maks. wykorzystanie nośności η = 73% · wszystkie warunki spełnione*
+Element modelu: `N-O1-06` · maks. wykorzystanie nośności η = 73% · wszystkie warunki spełnione
 
 #### Obliczenia
 
@@ -2320,7 +2331,7 @@ Belka żelbetowa b × h = 20 × 30 cm, oś (10,09, 4,85) → (13,91, 4,85), L = 
 
 ### Poz. 6.15 — Nadproże N-O1-07 nad otworem O1-07 w ścianie S1-04 (światło 1,40 m)
 
-*Element modelu: `N-O1-07` · maks. wykorzystanie nośności η = 73% · wszystkie warunki spełnione*
+Element modelu: `N-O1-07` · maks. wykorzystanie nośności η = 73% · wszystkie warunki spełnione
 
 #### Obliczenia
 
@@ -2412,7 +2423,7 @@ Belka żelbetowa b × h = 20 × 30 cm, oś (10,09, 4,85) → (13,91, 4,85), L = 
 
 ### Poz. 6.16 — Nadproże N-O1-08 nad otworem O1-08 w ścianie S1-05 (światło 0,90 m)
 
-*Element modelu: `N-O1-08` · maks. wykorzystanie nośności η = 60% · wszystkie warunki spełnione*
+Element modelu: `N-O1-08` · maks. wykorzystanie nośności η = 60% · wszystkie warunki spełnione
 
 #### Obliczenia
 
@@ -2502,7 +2513,7 @@ Belka żelbetowa b × h = 20 × 30 cm, oś (10,09, 4,85) → (13,91, 4,85), L = 
 
 ### Poz. 6.17 — Nadproże N-O1-09 nad otworem O1-09 w ścianie S1-05 (światło 0,90 m)
 
-*Element modelu: `N-O1-09` · maks. wykorzystanie nośności η = 57% · wszystkie warunki spełnione*
+Element modelu: `N-O1-09` · maks. wykorzystanie nośności η = 57% · wszystkie warunki spełnione
 
 #### Obliczenia
 
@@ -2594,7 +2605,7 @@ Belka żelbetowa b × h = 20 × 30 cm, oś (10,09, 4,85) → (13,91, 4,85), L = 
 
 ### Poz. 7.1 — Wieńce pod płytą D1 (poziom 5,970 m)
 
-*Element modelu: `W-D1` · maks. wykorzystanie nośności η = 31% · wszystkie warunki spełnione*
+Element modelu: `W-D1` · maks. wykorzystanie nośności η = 31% · wszystkie warunki spełnione
 
 #### Opis i schemat statyczny
 
@@ -2625,7 +2636,7 @@ Wieńce żelbetowe na wszystkich ścianach nośnych pod płytą (łączna długo
 
 ### Poz. 7.2 — Wieńce pod płytą ST1 (poziom 2,910 m)
 
-*Element modelu: `W-ST1` · maks. wykorzystanie nośności η = 31% · wszystkie warunki spełnione*
+Element modelu: `W-ST1` · maks. wykorzystanie nośności η = 31% · wszystkie warunki spełnione
 
 #### Opis i schemat statyczny
 
@@ -2656,7 +2667,7 @@ Wieńce żelbetowe na wszystkich ścianach nośnych pod płytą (łączna długo
 
 ### Poz. 7.3 — Wieńce pod płytą PL-D (poziom 2,910 m)
 
-*Element modelu: `W-PL-D` · maks. wykorzystanie nośności η = 21% · wszystkie warunki spełnione*
+Element modelu: `W-PL-D` · maks. wykorzystanie nośności η = 21% · wszystkie warunki spełnione
 
 #### Opis i schemat statyczny
 
@@ -2689,14 +2700,15 @@ Wieńce żelbetowe na wszystkich ścianach nośnych pod płytą (łączna długo
 
 ### Poz. 8.1 — Słup SL1 (RK 120x120x6, L = 2,71 m)
 
-*Element modelu: `SL1` · maks. wykorzystanie nośności η = 15% · wszystkie warunki spełnione*
+Element modelu: `SL1` · maks. wykorzystanie nośności η = 15% · wszystkie warunki spełnione
 
 #### Opis i schemat statyczny
 
 Słup przegubowo zamocowany na obu końcach (układ usztywniony płytą połączoną z budynkiem) — L_cr = L = 2,71 m [ZAŁ]; siła osiowa z reakcji płyty/belek; wiatr na trzon słupa (c_f ≈ 1,0) jako obciążenie towarzyszące.
 
 ![Słup SL1: schemat statyczny (przegubowo-przesuwny, układ usztywniony).](rys/slup_SL1.png)
-*Słup SL1: schemat statyczny (przegubowo-przesuwny, układ usztywniony).*
+
+*Rys. Słup SL1: schemat statyczny (przegubowo-przesuwny, układ usztywniony).*
 
 #### Zestawienie obciążeń
 
@@ -2742,14 +2754,15 @@ Słup przegubowo zamocowany na obu końcach (układ usztywniony płytą połącz
 
 ### Poz. 8.2 — Słup SL2 (RK 120x120x6, L = 3,01 m)
 
-*Element modelu: `SL2` · maks. wykorzystanie nośności η = 12% · wszystkie warunki spełnione*
+Element modelu: `SL2` · maks. wykorzystanie nośności η = 12% · wszystkie warunki spełnione
 
 #### Opis i schemat statyczny
 
 Słup przegubowo zamocowany na obu końcach (układ usztywniony płytą połączoną z budynkiem) — L_cr = L = 3,01 m [ZAŁ]; siła osiowa z reakcji płyty/belek; wiatr na trzon słupa (c_f ≈ 1,0) jako obciążenie towarzyszące.
 
 ![Słup SL2: schemat statyczny (przegubowo-przesuwny, układ usztywniony).](rys/slup_SL2.png)
-*Słup SL2: schemat statyczny (przegubowo-przesuwny, układ usztywniony).*
+
+*Rys. Słup SL2: schemat statyczny (przegubowo-przesuwny, układ usztywniony).*
 
 #### Zestawienie obciążeń
 
@@ -2797,7 +2810,7 @@ Słup przegubowo zamocowany na obu końcach (układ usztywniony płytą połącz
 
 ### Poz. 9.1 — Ściana S1-01 (P1, zewnętrzna nośna)
 
-*Element modelu: `S1-01` · maks. wykorzystanie nośności η = 59% · wszystkie warunki spełnione*
+Element modelu: `S1-01` · maks. wykorzystanie nośności η = 59% · wszystkie warunki spełnione
 
 #### Opis i schemat statyczny
 
@@ -2806,7 +2819,8 @@ Słup przegubowo zamocowany na obu końcach (układ usztywniony płytą połącz
 Sprawdzono 3 odcinków (filarki ≤ 2 m między otworami — siła całkowita; dłuższe pasma — maks. średnia krocząca 1 m) dla 14 kombinacji; poniżej przypadek miarodajny. Mimośród reakcji stropu e = t/6 (zewn.) / 0,3·t/6 (wewn., niesymetria) [UPR]; wiatr jako moment w połowie wysokości w·h²/8.
 
 ![Ściana S1-01: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.](rys/sciana_S1-01.png)
-*Ściana S1-01: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.*
+
+*Rys. Ściana S1-01: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.*
 
 #### Zestawienie obciążeń
 
@@ -2883,7 +2897,7 @@ Sprawdzono 3 odcinków (filarki ≤ 2 m między otworami — siła całkowita; d
 
 ### Poz. 9.2 — Ściana S1-02 (P1, zewnętrzna nośna)
 
-*Element modelu: `S1-02` · maks. wykorzystanie nośności η = 44% · wszystkie warunki spełnione*
+Element modelu: `S1-02` · maks. wykorzystanie nośności η = 44% · wszystkie warunki spełnione
 
 #### Opis i schemat statyczny
 
@@ -2892,7 +2906,8 @@ Sprawdzono 3 odcinków (filarki ≤ 2 m między otworami — siła całkowita; d
 Sprawdzono 2 odcinków (filarki ≤ 2 m między otworami — siła całkowita; dłuższe pasma — maks. średnia krocząca 1 m) dla 14 kombinacji; poniżej przypadek miarodajny. Mimośród reakcji stropu e = t/6 (zewn.) / 0,3·t/6 (wewn., niesymetria) [UPR]; wiatr jako moment w połowie wysokości w·h²/8.
 
 ![Ściana S1-02: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.](rys/sciana_S1-02.png)
-*Ściana S1-02: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.*
+
+*Rys. Ściana S1-02: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.*
 
 #### Zestawienie obciążeń
 
@@ -2965,7 +2980,7 @@ Sprawdzono 2 odcinków (filarki ≤ 2 m między otworami — siła całkowita; d
 
 ### Poz. 9.3 — Ściana S1-03 (P1, zewnętrzna nośna)
 
-*Element modelu: `S1-03` · maks. wykorzystanie nośności η = 59% · wszystkie warunki spełnione*
+Element modelu: `S1-03` · maks. wykorzystanie nośności η = 59% · wszystkie warunki spełnione
 
 #### Opis i schemat statyczny
 
@@ -2974,7 +2989,8 @@ Sprawdzono 2 odcinków (filarki ≤ 2 m między otworami — siła całkowita; d
 Sprawdzono 4 odcinków (filarki ≤ 2 m między otworami — siła całkowita; dłuższe pasma — maks. średnia krocząca 1 m) dla 14 kombinacji; poniżej przypadek miarodajny. Mimośród reakcji stropu e = t/6 (zewn.) / 0,3·t/6 (wewn., niesymetria) [UPR]; wiatr jako moment w połowie wysokości w·h²/8.
 
 ![Ściana S1-03: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.](rys/sciana_S1-03.png)
-*Ściana S1-03: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.*
+
+*Rys. Ściana S1-03: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.*
 
 #### Zestawienie obciążeń
 
@@ -3051,7 +3067,7 @@ Sprawdzono 4 odcinków (filarki ≤ 2 m między otworami — siła całkowita; d
 
 ### Poz. 9.4 — Ściana S1-04 (P1, zewnętrzna nośna)
 
-*Element modelu: `S1-04` · maks. wykorzystanie nośności η = 79% · wszystkie warunki spełnione*
+Element modelu: `S1-04` · maks. wykorzystanie nośności η = 79% · wszystkie warunki spełnione
 
 #### Opis i schemat statyczny
 
@@ -3060,7 +3076,8 @@ Sprawdzono 4 odcinków (filarki ≤ 2 m między otworami — siła całkowita; d
 Sprawdzono 2 odcinków (filarki ≤ 2 m między otworami — siła całkowita; dłuższe pasma — maks. średnia krocząca 1 m) dla 14 kombinacji; poniżej przypadek miarodajny. Mimośród reakcji stropu e = t/6 (zewn.) / 0,3·t/6 (wewn., niesymetria) [UPR]; wiatr jako moment w połowie wysokości w·h²/8.
 
 ![Ściana S1-04: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.](rys/sciana_S1-04.png)
-*Ściana S1-04: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.*
+
+*Rys. Ściana S1-04: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.*
 
 #### Zestawienie obciążeń
 
@@ -3133,7 +3150,7 @@ Sprawdzono 2 odcinków (filarki ≤ 2 m między otworami — siła całkowita; d
 
 ### Poz. 9.5 — Ściana S1-05 (P1, wewnętrzna nośna)
 
-*Element modelu: `S1-05` · maks. wykorzystanie nośności η = 59% · wszystkie warunki spełnione*
+Element modelu: `S1-05` · maks. wykorzystanie nośności η = 59% · wszystkie warunki spełnione
 
 #### Opis i schemat statyczny
 
@@ -3142,7 +3159,8 @@ Sprawdzono 2 odcinków (filarki ≤ 2 m między otworami — siła całkowita; d
 Sprawdzono 3 odcinków (filarki ≤ 2 m między otworami — siła całkowita; dłuższe pasma — maks. średnia krocząca 1 m) dla 9 kombinacji; poniżej przypadek miarodajny. Mimośród reakcji stropu e = t/6 (zewn.) / 0,3·t/6 (wewn., niesymetria) [UPR]; wiatr jako moment w połowie wysokości w·h²/8.
 
 ![Ściana S1-05: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.](rys/sciana_S1-05.png)
-*Ściana S1-05: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.*
+
+*Rys. Ściana S1-05: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.*
 
 #### Zestawienie obciążeń
 
@@ -3200,7 +3218,7 @@ Sprawdzono 3 odcinków (filarki ≤ 2 m między otworami — siła całkowita; d
 
 ### Poz. 9.6 — Ściana S0-01 (P0, zewnętrzna nośna)
 
-*Element modelu: `S0-01` · maks. wykorzystanie nośności η = 60% · wszystkie warunki spełnione*
+Element modelu: `S0-01` · maks. wykorzystanie nośności η = 60% · wszystkie warunki spełnione
 
 #### Opis i schemat statyczny
 
@@ -3209,7 +3227,8 @@ Sprawdzono 3 odcinków (filarki ≤ 2 m między otworami — siła całkowita; d
 Sprawdzono 3 odcinków (filarki ≤ 2 m między otworami — siła całkowita; dłuższe pasma — maks. średnia krocząca 1 m) dla 44 kombinacji; poniżej przypadek miarodajny. Mimośród reakcji stropu e = t/6 (zewn.) / 0,3·t/6 (wewn., niesymetria) [UPR]; wiatr jako moment w połowie wysokości w·h²/8.
 
 ![Ściana S0-01: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.](rys/sciana_S0-01.png)
-*Ściana S0-01: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.*
+
+*Rys. Ściana S0-01: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.*
 
 #### Zestawienie obciążeń
 
@@ -3289,7 +3308,7 @@ Sprawdzono 3 odcinków (filarki ≤ 2 m między otworami — siła całkowita; d
 
 ### Poz. 9.7 — Ściana S0-02 (P0, zewnętrzna nośna)
 
-*Element modelu: `S0-02` · maks. wykorzystanie nośności η = 60% · wszystkie warunki spełnione*
+Element modelu: `S0-02` · maks. wykorzystanie nośności η = 60% · wszystkie warunki spełnione
 
 #### Opis i schemat statyczny
 
@@ -3298,7 +3317,8 @@ Sprawdzono 3 odcinków (filarki ≤ 2 m między otworami — siła całkowita; d
 Sprawdzono 3 odcinków (filarki ≤ 2 m między otworami — siła całkowita; dłuższe pasma — maks. średnia krocząca 1 m) dla 44 kombinacji; poniżej przypadek miarodajny. Mimośród reakcji stropu e = t/6 (zewn.) / 0,3·t/6 (wewn., niesymetria) [UPR]; wiatr jako moment w połowie wysokości w·h²/8.
 
 ![Ściana S0-02: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.](rys/sciana_S0-02.png)
-*Ściana S0-02: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.*
+
+*Rys. Ściana S0-02: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.*
 
 #### Zestawienie obciążeń
 
@@ -3392,7 +3412,7 @@ Sprawdzono 3 odcinków (filarki ≤ 2 m między otworami — siła całkowita; d
 
 ### Poz. 9.8 — Ściana S0-03 (P0, zewnętrzna nośna)
 
-*Element modelu: `S0-03` · maks. wykorzystanie nośności η = 45% · wszystkie warunki spełnione*
+Element modelu: `S0-03` · maks. wykorzystanie nośności η = 45% · wszystkie warunki spełnione
 
 #### Opis i schemat statyczny
 
@@ -3401,7 +3421,8 @@ Sprawdzono 3 odcinków (filarki ≤ 2 m między otworami — siła całkowita; d
 Sprawdzono 3 odcinków (filarki ≤ 2 m między otworami — siła całkowita; dłuższe pasma — maks. średnia krocząca 1 m) dla 44 kombinacji; poniżej przypadek miarodajny. Mimośród reakcji stropu e = t/6 (zewn.) / 0,3·t/6 (wewn., niesymetria) [UPR]; wiatr jako moment w połowie wysokości w·h²/8.
 
 ![Ściana S0-03: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.](rys/sciana_S0-03.png)
-*Ściana S0-03: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.*
+
+*Rys. Ściana S0-03: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.*
 
 #### Zestawienie obciążeń
 
@@ -3477,7 +3498,7 @@ Sprawdzono 3 odcinków (filarki ≤ 2 m między otworami — siła całkowita; d
 
 ### Poz. 9.9 — Ściana S0-04 (P0, zewnętrzna nośna)
 
-*Element modelu: `S0-04` · maks. wykorzystanie nośności η = 45% · wszystkie warunki spełnione*
+Element modelu: `S0-04` · maks. wykorzystanie nośności η = 45% · wszystkie warunki spełnione
 
 #### Opis i schemat statyczny
 
@@ -3486,7 +3507,8 @@ Sprawdzono 3 odcinków (filarki ≤ 2 m między otworami — siła całkowita; d
 Sprawdzono 2 odcinków (filarki ≤ 2 m między otworami — siła całkowita; dłuższe pasma — maks. średnia krocząca 1 m) dla 44 kombinacji; poniżej przypadek miarodajny. Mimośród reakcji stropu e = t/6 (zewn.) / 0,3·t/6 (wewn., niesymetria) [UPR]; wiatr jako moment w połowie wysokości w·h²/8.
 
 ![Ściana S0-04: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.](rys/sciana_S0-04.png)
-*Ściana S0-04: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.*
+
+*Rys. Ściana S0-04: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.*
 
 #### Zestawienie obciążeń
 
@@ -3562,7 +3584,7 @@ Sprawdzono 2 odcinków (filarki ≤ 2 m między otworami — siła całkowita; d
 
 ### Poz. 9.10 — Ściana S0-05 (P0, wewnętrzna nośna)
 
-*Element modelu: `S0-05` · maks. wykorzystanie nośności η = 45% · wszystkie warunki spełnione*
+Element modelu: `S0-05` · maks. wykorzystanie nośności η = 45% · wszystkie warunki spełnione
 
 #### Opis i schemat statyczny
 
@@ -3571,7 +3593,8 @@ Sprawdzono 2 odcinków (filarki ≤ 2 m między otworami — siła całkowita; d
 Sprawdzono 2 odcinków (filarki ≤ 2 m między otworami — siła całkowita; dłuższe pasma — maks. średnia krocząca 1 m) dla 34 kombinacji; poniżej przypadek miarodajny. Mimośród reakcji stropu e = t/6 (zewn.) / 0,3·t/6 (wewn., niesymetria) [UPR]; wiatr jako moment w połowie wysokości w·h²/8.
 
 ![Ściana S0-05: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.](rys/sciana_S0-05.png)
-*Ściana S0-05: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.*
+
+*Rys. Ściana S0-05: widok z otworami i rozkład obciążeń charakterystycznych wzdłuż osi.*
 
 #### Zestawienie obciążeń
 
@@ -3630,26 +3653,27 @@ Sprawdzono 2 odcinków (filarki ≤ 2 m między otworami — siła całkowita; d
 
 ### Poz. 10.1 — Ława fundamentowa L1 (B = 0,60 m, h = 0,30 m, L = 10,00 m)
 
-*Element modelu: `L1` · maks. wykorzystanie nośności η = 133% · **WARUNKI NIESPEŁNIONE***
+Element modelu: `L1` · maks. wykorzystanie nośności η = 133% · **WARUNKI NIESPEŁNIONE — patrz tabele warunków i wnioski**
 
 #### Opis i schemat statyczny
 
 Ława pod ścianami: S0-01; ściana fundamentowa h ≈ 0,58 m, t = 18 cm (ciężar jak beton 25 kN/m³ [UPR]). Spód ławy −1,100 m; teren przy ławie −0,35 m → D = 0,75 m (do nośności D_min = 0,75 m). Obciążenie miarodajne: maks. średnia krocząca na długości 2,0 m wzdłuż ławy (rozdział przez ścianę i ławę) [UPR].
 
 ![Ława L1: przekrój poprzeczny i rozkład obciążenia wzdłuż ławy.](rys/lawa_L1.png)
-*Ława L1: przekrój poprzeczny i rozkład obciążenia wzdłuż ławy.*
+
+*Rys. Ława L1: przekrój poprzeczny i rozkład obciążenia wzdłuż ławy.*
 
 #### Zestawienie obciążeń
 
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
-| QA | 3,92 | 18,3 |
-| S2 | 1,44 | 6,5 |
-| QA_pA | 1,51 | 6,7 |
-| H | 0,80 | 3,6 |
-| G | 49,85 | 244,2 |
 | QA_pB | 2,57 | 11,6 |
 | S1 | 1,44 | 6,5 |
+| QA | 3,92 | 18,3 |
+| H | 0,80 | 3,6 |
+| QA_pA | 1,51 | 6,7 |
+| G | 49,85 | 244,2 |
+| S2 | 1,44 | 6,5 |
 
 #### Obliczenia
 
@@ -3698,27 +3722,28 @@ Sprawdzono 2 odcinków (filarki ≤ 2 m między otworami — siła całkowita; d
 
 ### Poz. 10.2 — Ława fundamentowa L2 (B = 0,60 m, h = 0,30 m, L = 8,00 m)
 
-*Element modelu: `L2` · maks. wykorzystanie nośności η = 118% · **WARUNKI NIESPEŁNIONE***
+Element modelu: `L2` · maks. wykorzystanie nośności η = 118% · **WARUNKI NIESPEŁNIONE — patrz tabele warunków i wnioski**
 
 #### Opis i schemat statyczny
 
 Ława pod ścianami: S0-02; ściana fundamentowa h ≈ 0,58 m, t = 18 cm (ciężar jak beton 25 kN/m³ [UPR]). Spód ławy −1,100 m; teren przy ławie −0,25 m → D = 0,85 m (do nośności D_min = 0,85 m). Obciążenie miarodajne: maks. średnia krocząca na długości 2,0 m wzdłuż ławy (rozdział przez ścianę i ławę) [UPR].
 
 ![Ława L2: przekrój poprzeczny i rozkład obciążenia wzdłuż ławy.](rys/lawa_L2.png)
-*Ława L2: przekrój poprzeczny i rozkład obciążenia wzdłuż ławy.*
+
+*Rys. Ława L2: przekrój poprzeczny i rozkład obciążenia wzdłuż ławy.*
 
 #### Zestawienie obciążeń
 
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
-| QA | 17,03 | 61,5 |
+| QA_pB | 7,35 | 29,1 |
 | SB2 | 3,96 | 13,6 |
+| QA | 17,03 | 61,5 |
+| QA_pA | 0,00 | 0,0 |
 | G | 90,48 | 377,4 |
 | S1 | 4,55 | 15,9 |
-| QA_pA | 0,00 | 0,0 |
 | H | 1,52 | 5,5 |
 | S2 | 6,72 | 23,4 |
-| QA_pB | 7,35 | 29,1 |
 
 #### Obliczenia
 
@@ -3767,26 +3792,27 @@ Sprawdzono 2 odcinków (filarki ≤ 2 m między otworami — siła całkowita; d
 
 ### Poz. 10.3 — Ława fundamentowa L3 (B = 0,60 m, h = 0,30 m, L = 10,00 m)
 
-*Element modelu: `L3` · maks. wykorzystanie nośności η = 119% · **WARUNKI NIESPEŁNIONE***
+Element modelu: `L3` · maks. wykorzystanie nośności η = 119% · **WARUNKI NIESPEŁNIONE — patrz tabele warunków i wnioski**
 
 #### Opis i schemat statyczny
 
 Ława pod ścianami: S0-03; ściana fundamentowa h ≈ 0,58 m, t = 18 cm (ciężar jak beton 25 kN/m³ [UPR]). Spód ławy −1,100 m; teren przy ławie −0,26 m → D = 0,84 m (do nośności D_min = 0,84 m). Obciążenie miarodajne: maks. średnia krocząca na długości 2,0 m wzdłuż ławy (rozdział przez ścianę i ławę) [UPR].
 
 ![Ława L3: przekrój poprzeczny i rozkład obciążenia wzdłuż ławy.](rys/lawa_L3.png)
-*Ława L3: przekrój poprzeczny i rozkład obciążenia wzdłuż ławy.*
+
+*Rys. Ława L3: przekrój poprzeczny i rozkład obciążenia wzdłuż ławy.*
 
 #### Zestawienie obciążeń
 
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
-| QA | 3,90 | 27,7 |
-| S2 | 1,34 | 6,5 |
-| QA_pA | 0,00 | 2,5 |
-| H | 0,74 | 3,6 |
-| G | 50,78 | 314,4 |
 | QA_pB | 3,74 | 11,7 |
 | S1 | 1,34 | 6,5 |
+| QA | 3,90 | 27,7 |
+| H | 0,74 | 3,6 |
+| QA_pA | 0,00 | 2,5 |
+| G | 50,78 | 314,4 |
+| S2 | 1,34 | 6,5 |
 
 #### Obliczenia
 
@@ -3835,26 +3861,27 @@ Sprawdzono 2 odcinków (filarki ≤ 2 m między otworami — siła całkowita; d
 
 ### Poz. 10.4 — Ława fundamentowa L4 (B = 0,60 m, h = 0,30 m, L = 8,00 m)
 
-*Element modelu: `L4` · maks. wykorzystanie nośności η = 134% · **WARUNKI NIESPEŁNIONE***
+Element modelu: `L4` · maks. wykorzystanie nośności η = 134% · **WARUNKI NIESPEŁNIONE — patrz tabele warunków i wnioski**
 
 #### Opis i schemat statyczny
 
 Ława pod ścianami: S0-04; ściana fundamentowa h ≈ 0,58 m, t = 18 cm (ciężar jak beton 25 kN/m³ [UPR]). Spód ławy −1,100 m; teren przy ławie −0,35 m → D = 0,75 m (do nośności D_min = 0,75 m). Obciążenie miarodajne: maks. średnia krocząca na długości 2,0 m wzdłuż ławy (rozdział przez ścianę i ławę) [UPR].
 
 ![Ława L4: przekrój poprzeczny i rozkład obciążenia wzdłuż ławy.](rys/lawa_L4.png)
-*Ława L4: przekrój poprzeczny i rozkład obciążenia wzdłuż ławy.*
+
+*Rys. Ława L4: przekrój poprzeczny i rozkład obciążenia wzdłuż ławy.*
 
 #### Zestawienie obciążeń
 
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
-| QA | 4,40 | 14,4 |
-| S2 | 1,46 | 7,4 |
-| QA_pA | 5,25 | 17,0 |
-| H | 0,81 | 4,1 |
-| G | 52,08 | 271,2 |
 | QA_pB | 0,00 | 0,0 |
 | S1 | 1,46 | 7,4 |
+| QA | 4,40 | 14,4 |
+| H | 0,81 | 4,1 |
+| QA_pA | 5,25 | 17,0 |
+| G | 52,08 | 271,2 |
+| S2 | 1,46 | 7,4 |
 
 #### Obliczenia
 
@@ -3903,26 +3930,27 @@ Sprawdzono 2 odcinków (filarki ≤ 2 m między otworami — siła całkowita; d
 
 ### Poz. 10.5 — Ława fundamentowa L5 (B = 0,50 m, h = 0,30 m, L = 8,00 m)
 
-*Element modelu: `L5` · maks. wykorzystanie nośności η = 96% · wszystkie warunki spełnione*
+Element modelu: `L5` · maks. wykorzystanie nośności η = 96% · wszystkie warunki spełnione
 
 #### Opis i schemat statyczny
 
 Ława pod ścianami: S0-05; ściana fundamentowa h ≈ 0,58 m, t = 18 cm (ciężar jak beton 25 kN/m³ [UPR]). Spód ławy −1,100 m; ława wewnętrzna, posadzka −0,225 m → D = 0,88 m (do nośności D_min = 0,88 m). Obciążenie miarodajne: maks. średnia krocząca na długości 2,0 m wzdłuż ławy (rozdział przez ścianę i ławę) [UPR].
 
 ![Ława L5: przekrój poprzeczny i rozkład obciążenia wzdłuż ławy.](rys/lawa_L5.png)
-*Ława L5: przekrój poprzeczny i rozkład obciążenia wzdłuż ławy.*
+
+*Rys. Ława L5: przekrój poprzeczny i rozkład obciążenia wzdłuż ławy.*
 
 #### Zestawienie obciążeń
 
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
-| QA | 16,31 | 83,8 |
-| S2 | 5,23 | 29,4 |
-| QA_pA | 7,63 | 37,4 |
-| H | 2,90 | 16,4 |
-| G | 123,00 | 687,3 |
 | QA_pB | 8,68 | 46,4 |
 | S1 | 5,23 | 29,4 |
+| QA | 16,31 | 83,8 |
+| H | 2,90 | 16,4 |
+| QA_pA | 7,63 | 37,4 |
+| G | 123,00 | 687,3 |
+| S2 | 5,23 | 29,4 |
 
 #### Obliczenia
 
@@ -3970,7 +3998,7 @@ Sprawdzono 2 odcinków (filarki ≤ 2 m między otworami — siła całkowita; d
 
 ### Poz. 10.6 — Stopa fundamentowa F1 (0,60 × 1,20 × 0,40 m) pod słupem SL1
 
-*Element modelu: `F1` · maks. wykorzystanie nośności η = 115% · **WARUNKI NIESPEŁNIONE***
+Element modelu: `F1` · maks. wykorzystanie nośności η = 115% · **WARUNKI NIESPEŁNIONE — patrz tabele warunków i wnioski**
 
 #### Opis i schemat statyczny
 
@@ -4026,7 +4054,7 @@ Spód stopy −1,100 m, teren −0,23 m → zagłębienie D = 0,87 m.
 
 ### Poz. 10.7 — Stopa fundamentowa F2 (0,60 × 1,20 × 0,40 m) pod słupem SL2
 
-*Element modelu: `F2` · maks. wykorzystanie nośności η = 122% · **WARUNKI NIESPEŁNIONE***
+Element modelu: `F2` · maks. wykorzystanie nośności η = 122% · **WARUNKI NIESPEŁNIONE — patrz tabele warunków i wnioski**
 
 #### Opis i schemat statyczny
 
