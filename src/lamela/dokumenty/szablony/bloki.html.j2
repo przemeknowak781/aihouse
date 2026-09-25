@@ -1,0 +1,319 @@
+{#- Makra bloków opracowania. Dane przygotowuje lamela.dokumenty.dokument / bloki (słowniki). -#}
+
+{# ================================================================================ strona tytułowa elementu (RPB § 7 ust. 2) #}
+{% macro strona_tytulowa(d, s) %}
+<section class="st" id="strona-tytulowa">
+  <header class="st-gora">
+    <div class="st-prac">
+      <span class="et">Jednostka projektowa</span>
+      <div>{{ d.pracownia.nazwa }}</div>
+      <div class="mn">{{ d.pracownia.adres }}</div>
+    </div>
+    <div class="st-stadium">
+      <span class="et">Stadium</span>
+      <div class="b">{{ s.stadium }}</div>
+      <div class="mn">{{ s.stadium_opis }}</div>
+    </div>
+  </header>
+
+  <div class="st-element">
+    <div class="st-kod">{{ s.kod }}</div>
+    <div>
+      <div class="st-nazwa">{{ s.tytul }}</div>
+      {% if s.podtytul %}<div class="st-podtytul">{{ s.podtytul }}</div>{% endif %}
+      <div class="st-tom">{{ s.tom_opis }}</div>
+    </div>
+  </div>
+
+  {% if s.przyklad %}
+  <div class="st-status"><b>PRZYKŁAD – NIE DO ZŁOŻENIA</b>
+    <span>Działka, MPZP, warunki gruntowe i sieci: {{ znacznik_przykl }}. Dane osobowe, numery uprawnień,
+    podpisy i dokumenty organów — pola do uzupełnienia. Opracowanie jest szablonem zgodnym z RPB
+    i nie może zostać złożone bez danych rzeczywistych (rejestr wymagań, sekcja E).</span></div>
+  {% endif %}
+
+  <table class="st-dane">
+    <tr><th>Nazwa zamierzenia budowlanego</th><td class="duze">{{ d.nazwa_zamierzenia }}</td></tr>
+    <tr><th>Obiekt budowlany</th><td>{{ d.obiekt }}</td></tr>
+    <tr><th>Adres obiektu</th><td>{{ d.adres }}</td></tr>
+    <tr><th>Kategoria obiektu budowlanego</th><td><b>{{ d.kategoria }}</b> – budynki mieszkalne jednorodzinne
+        <span class="mn">(załącznik do ustawy – Prawo budowlane)</span></td></tr>
+    {% if s.pokaz_dzialke %}
+    <tr><th>Działka ewidencyjna</th><td>nr <b>{{ d.dzialka.nr }}</b>, obręb {{ d.dzialka.obreb }}, gm. {{ d.dzialka.gmina }},
+        jedn. ewid.: {{ d.dzialka.jedn_ewid }}<br>identyfikator działki ewidencyjnej: <b>{{ d.dzialka.identyfikator }}</b></td></tr>
+    {% endif %}
+    <tr><th>Inwestor</th><td>{{ d.inwestor.nazwa }}<br><span class="mn">adres:</span> {{ d.inwestor.adres }}</td></tr>
+  </table>
+
+  {% if s.autorzy %}
+  <table class="st-autorzy">
+    <caption>Opracowanie — autorzy (§ 7 ust. 2 pkt 3 RPB)</caption>
+    <thead><tr><th style="width:21mm">Funkcja</th><th style="width:32mm">Imię i nazwisko</th>
+      <th>Specjalność i nr uprawnień budowlanych</th><th style="width:40mm">Zakres opracowania</th><th style="width:28mm">Podpis</th></tr></thead>
+    <tbody>
+    {% for p in s.autorzy %}
+      <tr><td><b>{{ p.funkcja }}</b><br><span class="mn">{{ p.branza }}</span></td><td>{{ p.imie_nazwisko }}</td>
+          <td>{{ p.specjalnosc }}<br><span class="mn">nr upr.:</span> {{ p.nr_uprawnien }}</td><td>{{ p.zakres }}</td><td class="podpis"></td></tr>
+    {% endfor %}
+      <tr class="spr"><td>Sprawdzający</td><td colspan="4">{{ d.sprawdzajacy }}</td></tr>
+    </tbody>
+  </table>
+  {% endif %}
+
+  <div class="st-dol">
+    <div class="st-dol-siatka">
+      <div><span class="et">Data opracowania</span>{{ s.data }}</div>
+      <div><span class="et">Rewizja / plik</span>{{ s.rewizja }}{% if s.plik %} · {{ s.plik }}{% endif %}</div>
+      <div class="st-zawartosc"><span class="et">Zawartość tomu</span>
+        {% for z in s.zawartosc_tomu %}<span class="el">{% if z.biezacy %}<b>{{ z.kod }}</b>{% else %}{{ z.kod }}{% endif %} – {{ z.tytul }}</span>{% if not loop.last %}<br>{% endif %}{% endfor %}</div>
+    </div>
+    <p class="st-uwaga">Postać elektroniczna (RPB § 2b): plik PDF opatruje podpisem kwalifikowanym, osobistym albo zaufanym każda osoba
+      opracowująca daną część w zakresie objętym plikiem (§ 7 ust. 4a RPB); pole „Podpis” wypełnia się wyłącznie w postaci
+      papierowej (§ 7 ust. 2 pkt 4 RPB). {{ s.uwaga_dodatkowa }}</p>
+  </div>
+</section>
+{% endmacro %}
+
+{# ================================================================================ spis treści (RPB § 7 ust. 5) #}
+{% macro spis(s) %}
+<section class="spis" id="spis-tresci">
+  <div class="spis-tyt">{{ s.tytul }}</div>
+  {% if s.podstawa %}<div class="spis-podst">{{ s.podstawa }}</div>{% endif %}
+  {% for w in s.wpisy %}
+    {% if w.grupa_naglowek %}<div class="spis-grupa">{{ w.grupa_naglowek }}</div>{% endif %}
+    <a class="spis-w p{{ w.poziom }}{% if w.rys %} rys{% endif %}{% if w.el %} el{% endif %}" href="{{ w.href }}"><span class="nr">{{ w.numer }}</span><span class="t">{{ w.tytul }}</span><span class="kr"></span><span class="pg">{{ w.strona }}</span></a>
+  {% endfor %}
+  {% if s.legenda %}<div class="spis-legenda">{{ s.legenda }}</div>{% endif %}
+</section>
+{% endmacro %}
+
+{# ================================================================================ nagłówek numerowany #}
+{% macro naglowek(n) %}
+<{{ n.tag }} class="nagl {{ n.klasa }}" id="{{ n.id }}"><span class="nr">{{ n.numer }}</span><span class="t">{{ n.tytul }}</span>{% if n.podstawa %}<span class="podst">{{ n.podstawa }}</span>{% endif %}</{{ n.tag }}>
+{% endmacro %}
+
+{# ================================================================================ tabela #}
+{% macro tabela(t) %}
+<figure class="tabela" id="{{ t.id }}">
+  <table class="tab {{ t.klasa }}">
+    {% if t.tytul %}<caption><span class="et">Tabela {{ t.numer }}.</span>{{ t.tytul }}</caption>{% endif %}
+    {% if t.szerokosci %}<colgroup>{% for w in t.szerokosci %}<col{% if w %} style="width:{{ w }}"{% endif %}>{% endfor %}</colgroup>{% endif %}
+    <thead><tr>{% for k in t.kolumny %}<th class="{{ k.klasa }}">{{ k.naglowek }}{% if k.jedn %}<span class="jedn">{{ k.jedn }}</span>{% endif %}</th>{% endfor %}</tr></thead>
+    <tbody>
+    {% for w in t.wiersze %}<tr class="{{ w.klasa }}">{% for c in w.komorki %}<td class="{{ c.klasa }}"{% if c.colspan > 1 %} colspan="{{ c.colspan }}"{% endif %}>{{ c.tekst }}</td>{% endfor %}</tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% if t.uwagi or t.zrodlo %}<figcaption class="uwagi">{% for u in t.uwagi %}<p>{{ u }}</p>{% endfor %}{% if t.zrodlo %}<p>Źródło danych: {{ t.zrodlo }}</p>{% endif %}</figcaption>{% endif %}
+</figure>
+{% endmacro %}
+
+{# ================================================================================ ilustracja / wykres #}
+{% macro ilustracja(i) %}
+<figure class="ilustr" id="{{ i.id }}"><div style="{% if i.szerokosc %}width:{{ i.szerokosc }};{% endif %}margin:0 auto">{{ i.html }}</div>
+  {% if i.podpis %}<figcaption><span class="et">Ilustracja {{ i.numer }}.</span>{{ i.podpis }}</figcaption>{% endif %}
+</figure>
+{% endmacro %}
+
+{# ================================================================================ podpisy #}
+{% macro podpisy(osoby, jeden=False) %}
+<div class="podpisy{% if jeden %} jeden{% endif %}">
+  {% for o in osoby %}
+  <div class="karta-podpisu">
+    <div class="rola">{{ o.rola }}</div>
+    <div>{{ o.imie_nazwisko }}</div>
+    {% if o.opis %}<div class="mn">{{ o.opis }}</div>{% endif %}
+    <div class="pole-podpisu"></div>
+    <div class="opis-pola">{{ o.pole or "data i podpis" }}</div>
+  </div>
+  {% endfor %}
+</div>
+<p class="podpis-uwaga">Postać elektroniczna: podpis kwalifikowany, osobisty albo zaufany pliku (§ 7 ust. 4a RPB) — pola pozostają puste.
+Postać papierowa: podpis własnoręczny w polu.</p>
+{% endmacro %}
+
+{# ================================================================================ tabela danych zamierzenia (oświadczenia) #}
+{% macro dane_zamierzenia(d, element=None) %}
+<table class="osw-dane">
+  <tr><th>Zamierzenie budowlane</th><td>{{ d.nazwa_zamierzenia }}</td></tr>
+  <tr><th>Obiekt, kategoria</th><td>{{ d.obiekt }} — kategoria {{ d.kategoria }}</td></tr>
+  <tr><th>Adres, działka</th><td>{{ d.adres }}; {{ d.lokalizacja }}; identyfikator: {{ d.dzialka.identyfikator }}</td></tr>
+  <tr><th>Inwestor</th><td>{{ d.inwestor.nazwa }}, {{ d.inwestor.adres }}</td></tr>
+  {% if element %}<tr><th>Element projektu</th><td>{{ element }}</td></tr>{% endif %}
+</table>
+{% endmacro %}
+
+{# ================================================================================ oświadczenie projektanta (art. 34 ust. 3d pkt 3 PB) #}
+{% macro oswiadczenie_projektanta(o, d) %}
+<section class="osw" id="{{ o.id }}">
+  <div class="osw-miejsce">{{ o.miejscowosc }}, dnia {{ o.data }}</div>
+  <div class="osw-tyt">OŚWIADCZENIE PROJEKTANTA</div>
+  <div class="osw-podst">{{ o.podtytul }}</div>
+  {{ dane_zamierzenia(d, o.element_nazwa) }}
+  <div class="osw-tresc">
+    <p>{{ o.tresc }}</p>
+    {% if o.art102a %}<p>{{ o.art102a }}</p>{% endif %}
+  </div>
+  <div class="nagl g3"><span class="t">Osoby biorące udział w opracowaniu projektu (art. 34 ust. 3e pkt 1 PB)</span></div>
+  <table class="tab zwarta">
+    <thead><tr><th class="lp">Lp.</th><th>Imię i nazwisko</th><th>Specjalność uprawnień budowlanych</th><th>Nr uprawnień / decyzji</th><th>Zakres udziału</th></tr></thead>
+    <tbody>{% for p in o.osoby %}<tr><td class="lp">{{ loop.index }}.</td><td>{{ p.imie_nazwisko }}</td><td>{{ p.specjalnosc }}</td><td>{{ p.nr_uprawnien }}</td><td>{{ p.zakres }}</td></tr>{% endfor %}</tbody>
+  </table>
+  <p class="mn">Projektanci sprawdzający (art. 34 ust. 3e pkt 2 PB): {{ o.sprawdzajacy }}.</p>
+  <p class="mn">{{ o.kopie }}</p>
+  {{ podpisy(o.podpisy, jeden=(o.podpisy|length == 1)) }}
+</section>
+{% endmacro %}
+
+{# ================================================================================ oświadczenie o sieci ciepłowniczej (art. 33 ust. 2 pkt 10 PB) #}
+{% macro oswiadczenie_sieci(o, d) %}
+<section class="osw" id="{{ o.id }}">
+  <div class="osw-miejsce">{{ o.miejscowosc }}, dnia {{ o.data }}</div>
+  <div class="osw-tyt">OŚWIADCZENIE PROJEKTANTA</div>
+  <div class="osw-podst">dotyczące możliwości podłączenia projektowanego obiektu budowlanego do istniejącej sieci ciepłowniczej<br>
+    (art. 33 ust. 2 pkt 10 ustawy z dnia 7 lipca 1994 r. – Prawo budowlane, t.j. Dz.U. 2026 poz. 524 ze zm.,
+    w związku z art. 7b ustawy z dnia 10 kwietnia 1997 r. – Prawo energetyczne, t.j. Dz.U. 2026 poz. 43 ze zm.)</div>
+  {{ dane_zamierzenia(d) }}
+  <div class="osw-tresc">
+    <p>Ja, niżej podpisany(-a) <b>{{ o.projektant.imie_nazwisko }}</b>, posiadający(-a) uprawnienia budowlane
+      w specjalności {{ o.projektant.specjalnosc }} (art. 14 ust. 1 pkt 4 lit. b PB), nr uprawnień {{ o.projektant.nr_uprawnien }},
+      oświadczam, że w projektowanym obiekcie przewiduje się wykorzystywanie ciepła na potrzeby ogrzewania i podgrzewania
+      ciepłej wody użytkowej, a w zakresie możliwości jego podłączenia do istniejącej sieci ciepłowniczej, zgodnie z warunkami
+      określonymi w art. 7b ustawy – Prawo energetyczne:</p>
+    {% for w in o.warianty %}
+    <div class="wybor"><div class="pole">{{ "X" if w.wybrany else "" }}</div><div class="opis">{{ w.tekst }}</div></div>
+    {% endfor %}
+    <p>{{ o.zrodlo_ciepla }}</p>
+    {% if o.uzasadnienie %}<p class="mn">{{ o.uzasadnienie }}</p>{% endif %}
+  </div>
+  <div class="osw-klauzula">„Jestem świadomy(-ma) odpowiedzialności karnej za złożenie fałszywego oświadczenia.”</div>
+  {{ podpisy([o.podpis], jeden=True) }}
+  <div class="osw-pouczenie"><p>Oświadczenie składa się pod rygorem odpowiedzialności karnej wynikającej z art. 233 § 6 ustawy z dnia 6 czerwca 1997 r.
+    – Kodeks karny; klauzula zastępuje pouczenie organu (art. 33 ust. 2 pkt 10 PB). Oświadczenie jest załącznikiem do wniosku
+    o pozwolenie na budowę (art. 33 ust. 2 PB); organ sprawdza jego dołączenie (art. 35 ust. 1 pkt 3a lit. b PB).</p></div>
+</section>
+{% endmacro %}
+
+{# ================================================================================ oświadczenie Inwestora z art. 102a PB — WZÓR #}
+{% macro oswiadczenie_102a(o, d) %}
+<section class="osw" id="{{ o.id }}">
+  <div class="osw-wzor"><b>WZÓR</b> — brak urzędowego wzoru oświadczenia (stan prawny na {{ o.stan_prawny }}; rejestr wymagań D-02, E-09).
+    Treść opracowano na podstawie art. 102a ust. 1, 2 i 4 PB (Dz.U. 2026 poz. 1161); przed użyciem porównać z aktualnym wzorem
+    lub komunikatem organu (wzór PIIB z 22.09.2026 — źródło wtórne). Oświadczenie nie jest częścią projektu budowlanego:
+    składa je Inwestor (każdy współinwestor) organowi prowadzącemu postępowanie — w PB-1 w poz. „Inne (wymagane przepisami prawa)”.</div>
+  <div class="osw-miejsce">{{ o.miejscowosc }}, dnia {{ o.data }}</div>
+  <table class="osw-dane">
+    <tr><th>Inwestor</th><td>{{ d.inwestor.nazwa }}</td></tr>
+    <tr><th>Adres inwestora</th><td>{{ d.inwestor.adres }}</td></tr>
+    <tr><th>Organ</th><td>{{ o.organ }}</td></tr>
+  </table>
+  <div class="osw-tyt">OŚWIADCZENIE INWESTORA</div>
+  <div class="osw-podst">o stosowaniu przepisów wydanych na podstawie art. 7 ust. 2 pkt 1 ustawy – Prawo budowlane,
+    obowiązujących do dnia 19 września 2026 r.<br>(art. 102a ust. 1 ustawy z dnia 7 lipca 1994 r. – Prawo budowlane,
+    t.j. Dz.U. 2026 poz. 524 ze zm., w brzmieniu nadanym ustawą ogłoszoną w Dz.U. 2026 poz. 1161)</div>
+  <div class="osw-tresc">
+    <p>Na podstawie art. 102a ust. 1 ustawy – Prawo budowlane <b>oświadczam, że {{ o.zakres }} dla zamierzenia budowlanego</b>:</p>
+    {{ dane_zamierzenia(d) }}
+    <p><b>zostanie sporządzony zgodnie z przepisami wydanymi na podstawie art. 7 ust. 2 pkt 1 ustawy – Prawo budowlane,
+      obowiązującymi do dnia 19 września 2026 r.</b>, tj. zgodnie z rozporządzeniem Ministra Infrastruktury z dnia 12 kwietnia 2002 r.
+      w sprawie warunków technicznych, jakim powinny odpowiadać budynki i ich usytuowanie (t.j. Dz.U. 2022 poz. 1225 ze zm.),
+      i będzie dołączony do {{ o.postepowanie }}.</p>
+    <p>Przyjmuję do wiadomości, że w związku ze złożeniem niniejszego oświadczenia projekt techniczny sporządza się zgodnie z tymi
+      samymi przepisami (art. 102a ust. 2 PB), a przepisy te stosuje się do decyzji administracyjnych dotyczących całego
+      zamierzenia budowlanego (art. 102a ust. 4 PB).</p>
+  </div>
+  {{ podpisy([o.podpis], jeden=True) }}
+  <div class="osw-pouczenie">
+    <p>Termin: oświadczenie może dotyczyć wniosku złożonego w okresie 18 miesięcy od dnia 20 września 2026 r. (art. 102a ust. 1 PB) —
+      w projekcie przyjęto termin bezpieczny: najpóźniej <b>19.03.2028</b> (rejestr A.1 pkt 3).</p>
+    <p>Oświadczenie składa się organowi prowadzącemu postępowanie przed jego zakończeniem — zalecane: razem z wnioskiem PB-1;
+      kopię przekazać projektantom przed rozpoczęciem prac (rejestr D-02).</p>
+  </div>
+</section>
+{% endmacro %}
+
+{# ================================================================================ informacja: oświadczenie PB-5 #}
+{% macro informacja_pb5(o, d) %}
+<section class="osw" id="{{ o.id }}">
+  <div class="osw-tyt">OŚWIADCZENIE O POSIADANYM PRAWIE DO DYSPONOWANIA NIERUCHOMOŚCIĄ NA CELE BUDOWLANE</div>
+  <div class="osw-podst">formularz PB-5 — informacja o sposobie złożenia (art. 32 ust. 4 pkt 2 i art. 33 ust. 2 pkt 2 PB)</div>
+  <div class="ramka akcent">
+    <p><b>Oświadczenie składa się wyłącznie na urzędowym formularzu PB-5</b>, którego wzór określa rozporządzenie Ministra Rozwoju,
+      Pracy i Technologii z dnia 25 czerwca 2021 r. w sprawie wzoru oświadczenia o posiadanym prawie do dysponowania
+      nieruchomością na cele budowlane (Dz.U. 2021 poz. 1170). System dokumentacji <b>nie generuje formularza</b> —
+      pobiera się go z portalu e-Budownictwo lub od organu i wypełnia danymi rzeczywistymi.</p>
+    <p>Oświadczenie składa odrębnie każdy inwestor (współinwestor), pod rygorem odpowiedzialności karnej; jest załącznikiem
+      do wniosku o pozwolenie na budowę, nie częścią projektu budowlanego (rejestr C.0, W04).</p>
+  </div>
+  <div class="nagl g3"><span class="t">Dane nieruchomości do przeniesienia na formularz</span></div>
+  <table class="osw-dane">
+    <tr><th>Działka ewidencyjna</th><td>nr {{ d.dzialka.nr }}, obręb {{ d.dzialka.obreb }}, jedn. ewid.: {{ d.dzialka.jedn_ewid }}</td></tr>
+    <tr><th>Identyfikator działki</th><td>{{ d.dzialka.identyfikator }}</td></tr>
+    <tr><th>Położenie</th><td>{{ d.adres }}; gm. {{ d.dzialka.gmina }}, pow. {{ d.dzialka.powiat }}, woj. {{ d.dzialka.wojewodztwo }}</td></tr>
+    <tr><th>Tytuł prawny</th><td>{{ o.tytul_prawny }}</td></tr>
+    <tr><th>Inwestor / oświadczający</th><td>{{ d.inwestor.nazwa }}, {{ d.inwestor.adres }}</td></tr>
+  </table>
+</section>
+{% endmacro %}
+
+{# ================================================================================ informacja BIOZ — strona tytułowa (rozp. BIOZ § 2 ust. 2) #}
+{% macro bioz_tytulowa(o, d) %}
+<section class="bioz-st" id="{{ o.id }}">
+  <div class="tyt-duzy">
+    <div class="l1">INFORMACJA DOTYCZĄCA<br>BEZPIECZEŃSTWA I OCHRONY ZDROWIA</div>
+    <div class="l2">(informacja BIOZ)</div>
+    <div class="l3">art. 20 ust. 1 pkt 1b ustawy – Prawo budowlane; rozporządzenie Ministra Infrastruktury z dnia 23 czerwca 2003 r.
+      w sprawie informacji dotyczącej bezpieczeństwa i ochrony zdrowia oraz planu bezpieczeństwa i ochrony zdrowia
+      (Dz.U. 2003 nr 120 poz. 1126), § 2</div>
+  </div>
+  {% if o.przyklad %}<div class="st-status"><b>PRZYKŁAD – NIE DO ZŁOŻENIA</b><span>Dane działki i warunków gruntowych: {{ znacznik_przykl }}; dane osobowe — do uzupełnienia.</span></div>{% endif %}
+  <table class="st-dane">
+    <tr><th>Nazwa obiektu budowlanego <span class="mn">(§ 2 ust. 2 pkt 1)</span></th><td class="duze">{{ d.obiekt }}</td></tr>
+    <tr><th>Adres obiektu budowlanego <span class="mn">(§ 2 ust. 2 pkt 1)</span></th><td>{{ d.adres }}<br>{{ d.lokalizacja }}; identyfikator: {{ d.dzialka.identyfikator }}</td></tr>
+    <tr><th>Inwestor i jego adres <span class="mn">(§ 2 ust. 2 pkt 2)</span></th><td>{{ d.inwestor.nazwa }}<br>{{ d.inwestor.adres }}</td></tr>
+    <tr><th>Projektant sporządzający informację <span class="mn">(§ 2 ust. 2 pkt 3)</span></th><td>{{ o.projektant.imie_nazwisko }}<br>
+        <span class="mn">adres:</span> {{ o.projektant.adres }}<br><span class="mn">specjalność, nr uprawnień:</span> {{ o.projektant.specjalnosc }}, {{ o.projektant.nr_uprawnien }}</td></tr>
+    <tr><th>Data opracowania</th><td>{{ o.data }}</td></tr>
+  </table>
+  {{ podpisy([o.podpis], jeden=True) }}
+</section>
+{% endmacro %}
+
+{# ================================================================================ strona zastępcza dokumentu zewnętrznego #}
+{% macro dokument_zewnetrzny(o) %}
+<section class="zewn" id="{{ o.id }}">
+  <div class="zewn-box">
+    <div class="l1">DOKUMENT ZEWNĘTRZNY — STRONA ZASTĘPCZA</div>
+    <div class="l2">{{ o.nazwa }}</div>
+    <div class="l3">{{ o.znacznik }}</div>
+  </div>
+  <div class="info-siatka">
+    <div class="k">Wydaje</div><div>{{ o.organ }}</div>
+    <div class="k">Podstawa prawna</div><div>{{ o.podstawa }}</div>
+    <div class="k">Sygnatura, data</div><div>{{ o.sygnatura }}</div>
+    {% if o.uwagi %}<div class="k">Uwagi</div><div>{{ o.uwagi }}</div>{% endif %}
+  </div>
+  <p class="mn">W miejscu tej strony dołącza się dokument (lub jego kopię) w postaci otrzymanej od organu. Strona zastępcza blokuje
+    oznaczenie wersji jako „do złożenia” (rejestr wymagań, sekcja E.1).</p>
+</section>
+{% endmacro %}
+
+{# ================================================================================ karta części rysunkowej + wykaz rysunków #}
+{% macro karta_rysunkowa(o, d) %}
+<section class="karta-rys" id="{{ o.id }}">
+  <div class="nagl czesc"><span class="t">Część rysunkowa</span><span class="podst">{{ o.podstawa }}</span></div>
+  <div class="info-siatka">
+    <div class="k">Obiekt</div><div>{{ d.obiekt }}</div>
+    <div class="k">Element projektu</div><div>{{ o.element }}</div>
+    {% if o.branza %}<div class="k">Branża</div><div>{{ o.branza }}</div>{% endif %}
+    <div class="k">Autor rysunków</div><div>{% for p in o.autorzy %}{{ p.imie_nazwisko }}, {{ p.specjalnosc_krotka }}, nr upr. {{ p.nr_uprawnien }}{% if not loop.last %}<br>{% endif %}{% endfor %}</div>
+    <div class="k">Sprawdzający</div><div>{{ d.sprawdzajacy }}</div>
+    <div class="k">Data</div><div>{{ o.data }}</div>
+    <div class="k">Liczba rysunków</div><div>{{ o.liczba }}</div>
+    <div class="k">Postać</div><div>PDF wektorowy (RPB § 2b ust. 2); arkusze w formatach oryginalnych wg PN-EN ISO 5457.
+      W postaci papierowej arkusze składa się do formatu A4 „do wpięcia” (RPB § 2a) — tabliczka na wierzchu.</div>
+    <div class="k">Numeracja</div><div>rysunki identyfikuje numer rysunku w metryce (RPB § 6 ust. 3, § 10 ust. 1)</div>
+  </div>
+  {{ tabela(o.wykaz) }}
+</section>
+{% endmacro %}
