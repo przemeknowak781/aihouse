@@ -357,7 +357,62 @@ def test_plyta_fundamentowa_bez_dzialki():
                                                         "h": 0.30, "spod": -0.60}]}
     an = AnalizaKonstrukcji(Model(raw, None), Parametry()).uruchom()
     pf = next(pz for pz in an.pos_fund if pz.ident == "PF1")
-    assert any("Winkler" in w.nazwa for w in pf.wyniki) and any("Osiadanie" in w.nazwa for w in pf.wyniki)
+    # płyta z obrysem → pozycja z MES płyty na podłożu Winklera (k_s z geotechniki, osiadanie, docisk) — przyjęcie Z6
+    assert pf.dane.get("mes") and getattr(an, "fund_mes", None) is not None
+    assert any("Winkler" in w.nazwa for w in pf.wyniki) and any("osiadanie" in w.nazwa.lower() for w in pf.wyniki)
+    assert any(w_.opis.startswith("Docisk lokalny") for r in pf.wyniki for w_ in r.warunki)
+
+
+def test_slup_zelbetowy():
+    """Słup ŻB (trzpień): (1) nośność przy N ≈ 0 i A_s2 = 0 = M_Rd przekroju zginanego (zelbet.nosnosc_zginanie);
+    (2) N_Rd,max = η·f_cd·A_c + A_s·min(f_yd; E_s·2 ‰) (6.1, 3.1.7); (3) smukły słup — mimośród II rzędu > 0 i
+    M_Ed ≤ M_Rd dla dobranego zbrojenia; (4) mimośród minimalny e₀ = max(h/30; 20 mm) (6.1(4))."""
+    from lamela.obliczenia.konstrukcja.zelbet import _mrd_przekroju
+    p = Parametry()
+    bt = Beton.z_parametrow("C30/37", p)
+    st = zelbet.StalZbrojeniowa()
+    As = 3 * 113.1
+    d, d2, h, b = 0.134, 0.046, 0.18, 0.40
+    M0 = _mrd_przekroju(1e-3, b, h, As, 0.0, d, d2, bt, st)
+    close(M0, zelbet.nosnosc_zginanie(As, b, d, bt, st)[0], 0.01, "M_Rd(N≈0, A_s2 = 0) = M_Rd zginania (6.1)")
+    assert _mrd_przekroju(1e-3, b, h, As, As, d, d2, bt, st) >= M0 - 1e-6, "zbrojenie ściskane nie zmniejsza M_Rd"
+    r = zelbet.slup_zelbetowy(700.0, 0.40, 0.18, 2.93, bt, st, c_nom=30.0)
+    wm = next(w for w in r.warunki if w.opis.startswith("Nośność słupa"))
+    assert wm.ok and wm.E > 700.0 * 0.020, "M_Ed ≥ N·e₀ + efekt II rzędu"
+    e2 = next(k for k in r.kroki if k.opis.startswith("Mimośród II rzędu"))
+    assert float(e2.wynik) > 0.0
+    wn = next(w for w in r.warunki if w.opis.startswith("Nośność na ściskanie"))
+    close(wn.R, bt.eta * bt.f_cd * 1000 * b * h + r.n_pr * math.pi * r.fi ** 2 / 4 * 1e-6 * min(st.f_yd, 400.0) * 1000, 0.001,
+          "N_Rd,max")
+    r2 = zelbet.slup_zelbetowy(50.0, 0.40, 0.18, 1.0, bt, st)
+    assert any(k.opis.startswith("Efekty II rzędu") for k in r2.kroki), "krępy słup — bez efektów II rzędu"
+
+
+def test_equ_belki_wspornikowej():
+    """EQU belki ze wspornikiem (PN-EN 1990 tabl. A1.2(A)): siła na końcu wspornika P = 100 kN i q = 10 kN/m na całej
+    długości, podpory x = 1,0 i 4,875 m → R_EQU,koniec = 1,1·(−P·1,0 − q·1,0·0,5)/3,875 + 0,9·q·3,875/2 = −12,37 kN
+    (odrywanie); podpora — ściana → warunek niespełniony; zmienne na przęśle pominięte."""
+    from types import SimpleNamespace
+    L = 4.875
+    bel = Belka(L, [Podpora(1.0, "przegub"), Podpora(L, "przegub")], EI=1.0, dx=0.05)
+    obc_ = {"G": [ObcQ(10.0), ObcP(100.0, 0.0)], "QA": [ObcQ(5.0, 1.0, L, 5.0)]}
+    wall = SimpleNamespace(id="S-TEST")
+    ns = SimpleNamespace(p=Parametry(), stal=zelbet.StalZbrojeniowa())
+    ns._slup_zelbetowy = lambda c: False
+    w = AnalizaKonstrukcji._equ_belki(ns, "BT", bel, [(1.0, "sciana", wall), (L, "sciana", wall)], obc_, L)
+    R = [float(k.wynik) for k in w.kroki if k.opis.startswith("Reakcja EQU")]
+    close(R[1], 1.1 * (-100.0 * 1.0 - 10.0 * 1.0 * 0.5) / 3.875 + 0.9 * 10.0 * 3.875 / 2, 0.01, "R_EQU końca przęsła")
+    assert not all(x.ok for x in w.warunki), "odrywanie bez zakotwienia — warunek niespełniony"
+
+
+def test_prety_zebra():
+    """Pręty podłużne żebra płyty fundamentowej: jedna średnica, każda warstwa ≤ 2 rzędy (8.2(2))."""
+    from lamela.obliczenia.konstrukcja.pozycje import _prety_zebra
+    fi, nd, ng = _prety_zebra(3700.0, 1300.0, 0.60, 50.0)
+    a = math.pi * fi ** 2 / 4
+    assert nd * a >= 3700.0 and ng * a >= 1300.0
+    n_rz = int((600 - 100 - 20 + max(fi, 25)) // (fi + max(fi, 25)))
+    assert max(nd, ng) <= 2 * n_rz
 
 
 def test_sciana_nosna_na_stropie():

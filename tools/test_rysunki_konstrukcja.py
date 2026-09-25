@@ -177,6 +177,13 @@ def test_model_dane(sciezka=ROOT / "model" / "budynek.yaml"):
                 assert pole_preta(g.pret.fi) * 1000 / g.s + 1e-6 >= g.wym.As_req, (g.element, g.pole, g.rola)
 
 
+
+def test_arkusz_slupow_zarejestrowany():
+    """Typ k_zbrojenie obsługuje element „slupy” (arkusz zbrojenia słupów ŻB w murze — PT-BO-27)."""
+    from lamela.views import konstrukcja as K
+    assert "slupy" in K._ZBROJENIE
+    from lamela.views.konstrukcja_slupy import widok_zbrojenie_slupow  # noqa: F401
+
 def main(argv=None) -> int:
     argv = list(sys.argv[1:] if argv is None else argv)
     tests = [(n, f) for n, f in globals().items() if n.startswith("test_") and callable(f)]
