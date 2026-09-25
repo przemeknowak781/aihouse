@@ -447,3 +447,131 @@ deszcz: {r_rynny_l_s_m2: 0.046, model: "PANDa 2050 Poznań C10", fb: 1.2, kf_nn_
 11. **Dane klimatyczne do EP (BIP ministerstwa)** — aktualny zbiór i stacja: NIEZWERYFIKOWANE. Pobrać przy obliczeniach.
 12. ~~Prawo energetyczne po zmianie Dz.U. 2026 poz. 516~~ — **rozstrzygnięte przez weryfikację:** zmiany 2026 poz. 516, 607 i 900 nie dotyczą art. 7 ust. 8d4–8d6 (R6-79). Zgłoszenie mikroinstalacji do OSD bez zmian.
 13. **Filtry:** WT § 154 ust. 6 (G4 wg PN-EN 779, wycofanej) wobec klasyfikacji PN-EN ISO 16890 — brak oficjalnej tabeli przejścia. Przyjąć wyższą klasę (ISO ePM10/ePM1).
+
+---
+
+## Weryfikacja niezależna (2026-09-25)
+
+**Weryfikator:** niezależny agent-adwersarz, który nie korzystał z plików roboczych R6.
+
+**Źródła pobrane samodzielnie** (katalog `scratchpad/research/R6ver/`):
+* API ELI: metadane i PDF dla DU/2015/376, 2023/697, 2014/1200, 2024/101, 2022/1225, 2002/690, 2023/2442, 2024/474, 2024/726, 2022/1679, 2023/2405, 2024/473, 2026/597, 2026/524, 2014/112, 2026/68, 2026/43, 2026/516, 2026/607, 2026/900, 2026/912, 2025/960, 2017/1566, 2026/1156, 2026/605.
+* EUR-Lex (PDF, PL i EN): 2024/573, 813/2013, 1253/2014, 2024/1275.
+* Wyszukiwarka PKN, ponowne zapytania: `pknv*.json`.
+* Aquanet, Załącznik C (2024).
+* Próbka ISO 6946:2017 (iTeh).
+
+### A. Potwierdzone (źródło pierwotne, chyba że zaznaczono inaczej)
+
+**Status aktów i zakres projektu**
+* **R6-01:** ELI DU/2015/376 ma status „obowiązujący”. Akty zmieniające: 2017/22, 2019/1829, 2023/697 (28.04.2023). Podstawa: art. 15 UChEB.
+* **R6-02 / R6-03 / R6-04:**
+  * UChEB (DU/2014/1200): ostatni akt zmieniający to 2023/1762; t.j. 2024/101.
+  * art. 3 ust. 4 pkt 5 (< 50 m²), art. 14 (10 lat), art. 16a.
+  * PB t.j. 2026/524: art. 57 ust. 1 pkt 6a, art. 34 ust. 3 pkt 2 lit. g i pkt 3 lit. b.
+* **R6-05 do R6-08:** RPB § 20 ust. 1 pkt 10 lit. a–e i pkt 11, § 23 pkt 7, 8, 11 lit. a–d, § 24 pkt 2 i 4 — brzmienie zgodne. Rozp. 2026/597 zmienia w § 20 tylko pkt 8 i dodaje pkt 14, a w § 23 dodaje tylko pkt 12. Pkt 10–11 i 11 a–d bez zmian. Uwaga: 2024/473 zmienia rozporządzenie zmieniające 2023/2405, a nie samo RPB.
+* **R6-09 / R6-10:** WT § 328 ust. 1–2, § 329 ust. 1, 2 i 4: EP_H+W = 95 / **70**, ΔEP_C = 10 / **5**·A_f,C/A_f (tylko przy instalacji chłodzenia), ΔEP_L = 0. Akty 2023/2442, 2024/474 i 2024/726 nie zmieniają § 328–329 ani zał. 2. Zmieniają § 3, 12, 20, 39, 56, 76, 85a, 95, 98, 216, 232, 249, 326 oraz zał. 1 lp. 1a i 60a–67.
+* **R6-12:** EPBD art. 7 ust. 1–2, art. 10 ust. 3 lit. d, art. 35 ust. 1 (29.05.2026) — potwierdzone w tekście PL.
+
+**Metodologia EP**
+* **R6-13, R6-14:** tab. 1 w brzmieniu 2023/697: w_el = 2,50 (w tekście z 2015 r. 3,00), słoneczna 0,00, biomasa 0,20, biogaz 0,50, kogeneracja 0,80/0,15, ciepłownie 1,30/1,20, paliwa miejscowe 1,10, wartość ujemna → 0,00. Q_p,L „nie wyznacza się dla budynków mieszkalnych”.
+* **R6-16 / R6-17:**
+  * tab. 2 lp. 21 PC powietrze/woda: 2,60 / 3,00;
+  * tab. 9 lp. 11: 2,60;
+  * tab. 3 lp. 6a/6b: 0,76 / 0,89; lp. 7: 0,85;
+  * wzór (17): X = 1 dla podłogówki;
+  * tab. 6: 0,96 / 0,90;
+  * tab. 12 lp. 3.1: 0,60; 5.1a: 0,70; 6.1a: 0,80;
+  * tab. 14: 0,85.
+* **R6-18:** wzór (61), tab. 27 (V_Wi = 1,40, k_R = 0,90). Przeliczenie: Q_W,nd = 24,09 kWh/(m²·rok).
+* **R6-19 / R6-20:**
+  * tab. 26: q_int = 6,8 W/m²;
+  * tab. 20: 0,50 × 6700; 0,50 / 1,30 × 8760·β; 0,15 × 8760; 0,04 × 7300; 0,25 × 270; 0,20 × 580.
+* **R6-21:** dane klimatyczne z najbliższej stacji, publikowane w BIP (pkt 5.x metodologii).
+* **Szacunek EP w pkt 3.3:** przeliczony niezależnie. Wychodzi 99,0 (wartości domyślne) i 58,4 (dane producenta), zgodnie z R6.
+
+**Przegrody i wymagania energetyczne (WT)**
+* **R6-22 do R6-28:** zał. 2 pkt 1.1, 1.2, 1.4, 1.5, 2.1.1–2.1.4, 2.2.1–2.2.5, 2.3.1–2.3.4 — wszystkie wartości zgodne (poza uwagą o garażu, zob. B). Zał. 1 lp. 69–73 zgodne.
+
+**Obciążenie cieplne i ogrzewanie**
+* **R6-35 / R6-36:** WT § 134 ust. 2 (tabela temperatur), ust. 4–5 (wyłączenie domów jednorodzinnych) oraz § 135 ust. 5, 7–10 (okres zwrotu ≤ 5 lat) — zgodne.
+
+**Wentylacja**
+* **R6-37 do R6-46:** WT § 147–155, § 108 ust. 1 pkt 1–2, § 150 ust. 5, § 267 ust. 1a, zał. 1 lp. 26, 28, 32, 33 — zgodne. W tym SFP 1,60 / 1,00 (+0,3), czerpnie 8 m / 2 m / 0,4 m / 6 m, wyrzutnie 10 / 6 / 1 / 3 m, odzysk ciepła od 500 m³/h, filtr G4.
+* **R6-38:** wartości wywiewu zgodne z wyciągiem normy — źródło wtórne, treść PN niedostępna.
+* **R6-45:** 1253/2014 zał. II pkt 2: SEC ≤ −20, obejście w DSW, napęd wielobiegowy, sygnał filtra, L_WA systemów bezkanałowych ≤ 40 dB. Potwierdzone w tekście PL EUR-Lex (podniesiono do P).
+
+**Woda i c.w.u.**
+* **R6-48 / R6-49 / R6-52:** WT § 113 ust. 4 i 7, § 114–120 oraz zał. 1 lp. 4–9 — zgodne. W tym: 0,05–0,6 MPa; 55–60 °C; 70–80 °C; cyrkulacja nie jest wymagana w budynkach jednorodzinnych (§ 120 ust. 1); ciepła woda po lewej stronie.
+* **R6-53:** Dz.U. 2026/605: art. 4i ust. 10 wyłącza budynki jednorodzinne z ust. 1–9, także z „ogólnej analizy” w ust. 7. Rozdział 3b ustawy o PIS (art. 37ao–37ap) istnieje.
+
+**Kanalizacja i wody opadowe**
+* **R6-55, R6-56, R6-59, R6-60:** WT § 122, 124, 125, 28, 29, 126 ust. 3 oraz zał. 1 lp. 10–12 (PN-B-01707:1992 dla § 125 ust. 4) — zgodne.
+* **R6-62 do R6-64:** Aquanet 2024 (źródło wtórne, ale oryginalny dokument operatora):
+  * odległość 1,5·h + 0,5 m; zwierciadło wody ≥ 1 m pod dnem;
+  * k_f,nn = 0,5·k_f; f_b = 1,2 / 1,1; opróżnianie ≤ 24 h;
+  * C = 5 → C_z = 10;
+  * tab. 3: 464,59 / 305,83 / 239,48 / 157,64 / 91,00 / 52,53 / 38,09 / 30,32 / 21,99 / 12,69 / 7,33;
+  * tab. 2 (ψ) — zgodne.
+* **R6-66:** Prawo wodne t.j. 2025/960: art. 16 pkt 61 i pkt 65 lit. f, art. 33 ust. 4 pkt 2, art. 34 pkt 4, art. 269 ust. 1 pkt 1, art. 389 pkt 6; art. 394–395 bez zwolnienia dla rozsączania wód opadowych. Wykaz zmian po t.j. zgodny z ELI (2026/1156 wchodzi w życie 01.01.2027).
+* **R6-67:** PB art. 29 ust. 1 pkt 38 (zbiornik 5–15 m³ — zgłoszenie) i ust. 2 pkt 36 (≤ 5 m³ — bez zgłoszenia) — zgodne.
+
+**Pompa ciepła: F-gazy i hałas**
+* **R6-68 do R6-70:** rozp. 2024/573 zał. IV pkt 8 b–e i pkt 9 a–f (daty 2025 / 2027 / 2029 / 2030 / 2032 / 2033 / 2035), art. 3 pkt 38–39, R32 GWP 675 — zgodne. Tekst EN pkt 8 b potwierdza, że zakaz obejmuje „self-contained heat pumps ≤ 12 kW”; polskie tłumaczenie brzmi niezręcznie („typu plug-in”).
+* **R6-71:** 813/2013 zał. II: η_s 110% / 125% (od 26.09.2017); L_WA 60/65, 65/70, 70/78, 80/88 dB — zgodne (podniesiono do P).
+* **R6-72:** Dz.U. 2014/112 tab. 1 lp. 2a: 50 / 40 dB (8 h / 1 h) — zgodne.
+
+**PV i przyłączenie**
+* **R6-76 do R6-78:** PB art. 29 ust. 4 pkt 3 lit. c (150 kW, 30 kWh, 6,5 kW, plan dla ekip ratowniczych); art. 56 ust. 1a uchylony (przypis 81 → ustawa Dz.U. 2025 poz. 1847); ustawa OZE art. 2 pkt 19 (50 kW) i pkt 19b lit. b. Zmiany po t.j. (2026/516, 900, 912) nie dotyczą art. 2 pkt 19–19b.
+* **R6-79:** art. 7 ust. 8d4 — zgodne; zmiany opisano w części B.
+
+**Statusy norm w PKN** (ponowne zapytania 2026-09-25) — wszystkie statusy zgodne z R6:
+* aktualne:
+  * PN-EN 12831-1:2017-08 (tylko EN; brak NA w wynikach) i 12831-3:2017-08 (EN);
+  * PN-EN ISO 6946:2017-10, 13370:2017-09, 13788:2013-05, 13789:2017-10, 10077-1/-2:2017-10, 10211:2017-09, 14683:2017-09, 52016-1:2017-09, 9972:2015-10 (EN), 16890-1:2017-01;
+  * PN-EN 12207:2017-01 (EN);
+  * PN-EN 1717+A1:2026-09 (EN; wydanie 2026-01 wycofane);
+  * PN-EN 806-1 (PL), 806-2…-5 (EN);
+  * PN-EN 12056-2, -3, -4:2002 (PL); PN-EN 12380:2005; PN-EN 13564-1:2004; PN-EN 752:2017-06; PN-EN 1610:2015-10; PN-EN 1401-1+A1:2023-09;
+  * PN-EN 13141-7+A1:2026-05 (EN), 13141-8:2023-02 (EN); PN-EN 16798-1:2019-06; PN-EN 16941-1:2024-08 (EN);
+  * PN-EN 12102-1:2022-12, 14825:2022-11, 16147+A1:2023-06 (EN), 378-1+A1:2021-03 (EN), PN-EN IEC 60335-2-40:2025-02 (EN);
+  * PN-HD 60364-7-712:2016-05, PN-EN 62446-1:2016-08 (EN), PN-EN 50549-1:2019-02;
+  * PN-B-02151-2:2018-01.
+* wycofane bez zastępstwa: PN-B-03430:1983, PN-B-01706:1992, PN-B-01707:1992, PN-B-02403:1982, PN-B-02440:1976, PN-B-10720:1998.
+
+**Obliczenia przykładowe — przeliczone, zgodne:**
+* q = 0,682·Σq_n^0,45 − 0,14 (1,82 → 0,75; 3,3 → 1,03);
+* Q_ww (ΣDU = 17 → 2,06 l/s);
+* hałas: 38,0 / 32,0 / 39,5 dB;
+* suma wywiewu 332 m³/h;
+* r = 464,6 l/(s·ha) = 0,046 l/(s·m²).
+
+### B. Poprawione (było → jest)
+
+| ID | Było | Jest | Źródło |
+|---|---|---|---|
+| R6-02, pkt 1.4, pkt 3.3.4 | Świadectwo „z CEEB”, „w centralnym rejestrze CEEB” | Centralny rejestr charakterystyki energetycznej budynków (UChEB art. 4 ust. 3). CEEB to centralna ewidencja emisyjności budynków — odrębny rejestr z ustawy o wspieraniu termomodernizacji (art. 27a) | https://api.sejm.gov.pl/eli/acts/DU/2024/101/text.pdf ; PB t.j. 2026/524, art. 62a ust. 5 (odesłanie do CEEB) |
+| R6-22 (uwagi) | „Garaż nieogrzewany (t_i < 8 °C): ściany 0,90, dach 0,70, podłoga 1,50” | Przegrody zewnętrzne garażu nieogrzewanego nie podlegają U_C(max). Wymagane są tylko przegrody dom–garaż: ściana 0,30, strop 0,25, drzwi 1,3. Wartości 0,90/0,70/1,50 dotyczą garażu ogrzewanego do +5 °C | WT zał. 2 pkt 1.1 (definicja t_i i pomieszczenia ogrzewanego), pkt 1.2 lp. 5 — https://api.sejm.gov.pl/eli/acts/DU/2022/1225/text.pdf |
+| R6-69, pkt 1.13 | „R290: GWP 0,02” jako wartość z rozp. 2024/573 | R290 nie występuje w zał. I–III, więc nie jest F-gazem (P). GWP₁₀₀ = 0,02 pochodzi z IPCC AR6 (W) | https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32024R0573 ; https://naturalrefrigerants.com/news/ipcc-includes-gwps-for-hydrocarbons-in-new-report/ |
+| pkt 3.8 (przykład retencji) | Skrzynki 2,4 × 1,2 × 0,66 m (≈ 1,8 m³ netto), V_min = 6,8 m³ — sprzeczność | Skrzynki 4,8 × 2,4 × 0,66 m: A_inf = 16,27 m², Q_inf = 0,81 l/s, V_obl ≈ 4,2 m³, V_min ≈ 5,1 m³ ≤ 7,2 m³ netto, opróżnianie ≈ 1,7 h | Aquanet 2024, wzory (1)–(2), tab. 3 — https://www.aquanet.pl/wp-content/uploads/2024/08/Zalacznik-C-Metodyka-obliczania-niezbednej-objetosci-zbiornikow-detencyjno-retencyjnych-infiltracyjnych-wod-opadowych-i-.pdf |
+| pkt 3.5 (czerpnia/wyrzutnia) | „obie ≥ 6 m od wywiewek kanalizacyjnych” jako wymóg | WT wymaga 6 m tylko dla czerpni dachowej (§ 152 ust. 4). Dla wyrzutni to zalecenie projektowe | https://api.sejm.gov.pl/eli/acts/DU/2022/1225/text.pdf |
+| pkt 3.1 | „WT w brzmieniu z 19.09.2026” | „w brzmieniu obowiązującym do 20.09.2026” (repealDate w ELI: 21.09.2026) | https://api.sejm.gov.pl/eli/acts/DU/2002/690 |
+| R6-79, Nierozstrzygnięte 12 | Wpływ zmiany 2026/516 na art. 7 — NIEZWERYFIKOWANY; wymieniono tylko 516 | Po t.j. były zmiany 2026/516, 607 i 900. Żadna nie dotyczy ust. 8d4–8d6 — sprawdzono przeszukaniem tekstów aktów | https://api.sejm.gov.pl/eli/acts/DU/2026/43 ; …/DU/2026/516/text.pdf |
+| R6-71, Nierozstrzygnięte 9 | Źródło wtórne (legislation.gov.uk); status rewizji niezweryfikowany | Źródło pierwotne (EUR-Lex PL). 813/2013 „In force”, bez daty końca obowiązywania (EUR-Lex, 2026-09-25) | https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:32013R0813 |
+
+### C. Niemożliwe do weryfikacji w dostępnych źródłach (pozostają NIEZWERYFIKOWANE lub jako źródło wtórne)
+* **R6-15:** sposób bilansowania PV (krok czasowy, udział autokonsumpcji) — brak wytycznych ministerialnych.
+* **R6-29:** konkretne R_si 0,10 / 0,13 / 0,17 i ΔU'' — próbka ISO 6946 podaje tylko zakres R_si 0,1–0,2 oraz R_se = 0,04. Zał. F (współczynnik α) jest poza próbką.
+* **R6-30 i R6-32:** wzory ISO 13370, domyślne ψ z ISO 14683 zał. C.
+* **R6-34:** liczba stron i data zatwierdzenia PN-EN 12831-1. Status potwierdzony, szczegóły karty — nie.
+* **R6-35:** θ_m,e = 7,9 °C i strefa II — norma PN-B-02403 niedostępna (dane z R5).
+* **R6-38:** wartości PN-B-03430/Az3 — tylko wyciągi wtórne, ale zgodne ze sobą.
+* **R6-50:** q_n natrysku (0,07 lub 0,15) i płuczki — treść PN-B-01706 niedostępna.
+* **R6-51, R6-57, R6-58:** wartości LU (PN-EN 806-3), DU i K (PN-EN 12056-2), Q_a zaworów napowietrzających, średnice pionów — tylko źródła wtórne.
+* **R6-61:** zakres 0,010–0,060 l/(s·m²) w PN-EN 12056-3; zalecenie 0,03–0,05 (Rynek Instalacyjny).
+* **R6-65:** DWA-A 138-1 (10/2024) — nie weryfikowano.
+* **R6-73:** wzór PORT PC.
+* **R6-75:** strefa bezpieczeństwa R290 — dane producentów.
+* **Porowatość skrzynek rozsączających (~95%)** w poprawionym przykładzie — dana producentów.
+* **R6-11:** status projektu nowych WT (TRIS 2026/0422/PL) — domena R1/R3.
+* **Status WT po 21.09.2026 i stosowanie art. 102a PB** — domena R3; nie weryfikowano.
