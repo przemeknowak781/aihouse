@@ -1756,7 +1756,10 @@ class AnalizaKonstrukcji:
             for s_ in dane.podpory:
                 v = rr[s_.id]
                 if s_.dl > 1e-9 and len(v["x"]) > 1:
-                    dol.dodaj(c, v["x"], v["r"])
+                    tmp = Profil(L, dol.s[1] - dol.s[0])
+                    tmp.dodaj(c, v["x"], v["r"])
+                    I_ = tmp.calka(c)
+                    dol.q[c] = dol.get(c) + tmp.get(c) * (v["R"] / I_ if abs(I_) > 1e-9 else 0.0)   # zachowanie ΣR
                 elif abs(v["R"]) > 1e-9:
                     if s_.sciana in self.slupy_N or any(str(c_["id"]) == s_.sciana for c_ in m.slupy()):
                         d_ = self.slupy_N.setdefault(s_.sciana, {})
@@ -1912,8 +1915,8 @@ class AnalizaKonstrukcji:
         p, m = self.p, self.m
         wyniki = []
         for w in m.sciany():
-            if w.typ not in TYPY_NOSNE or w.id not in self.prof:
-                continue
+            if w.typ not in TYPY_NOSNE or w.id not in self.prof or self.prof[w.id].get("tarcza"):
+                continue            # ściany-tarcze: pasma nad otworami zwymiarowane w pozycji tarczowej
             pr = self.prof[w.id]
             t = w.warstwa_konstr.d
             gm2 = pr["gm2"]

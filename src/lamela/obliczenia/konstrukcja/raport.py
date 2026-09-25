@@ -43,6 +43,12 @@ METODY = [
     "Fundamenty: nośność wg PN-EN 1997-1 zał. D (DA2*), osiadanie — sumowanie warstw (Boussinesq), ławy niezbrojone "
     "poprzecznie wg PN-EN 1992-1-1 12.9.3; obciążenie ław — maks. średnia krocząca na 2,0 m.",
     "Ugięcia żelbetu: l/d (7.4.2), a gdy niespełnione — obliczenie z interpolacją ζ, pełzaniem φ = 2,5 i skurczem (7.4.3).",
+    "Ściany-tarcze żelbetowe (pole `tarcza` w modelu lub ściana żelbetowa bez ciągłej podpory poniżej): MES płaskiego stanu "
+    "naprężenia (element QM6, podpory sprężyste k = E·t/h ścian poniżej), obciążenia — reakcje płyt nad tarczą (krawędź "
+    "górna) i płyty podwieszonej poza ścianami poniżej (krawędź dolna), ściany wyżej, belki; model kratownicowy STM "
+    "generowany z pola naprężeń (programowanie liniowe, 5.6.4, 6.5), cięgna F = max(STM; całkowanie σ), węzły CCC/CCT/CTT, "
+    "siatki 9.6/9.7, otwory, rysy, ugięcia MES ze sztywnością zarysowaną, EQU wspornika; reakcje → ściany poniżej "
+    "(moduł `tarcze`, walidacja: tarcze_walidacja).",
 ]
 
 
@@ -211,7 +217,9 @@ def generuj_raport(an: AnalizaKonstrukcji, out_dir: str | Path, tytul: str | Non
 
 
 OGRANICZENIA = [
-    "ściany-tarcze z otworami, tarcze wieloprzęsłowe i wspornikowe (MES tarczowy / STM)",
+    "ściany-tarcze: analiza liniowo-sprężysta + STM (bez redystrybucji po zarysowaniu), otwory prostokątne, bez zginania "
+    "z płaszczyzny i stateczności strefy ściskanej; tarcze podparte na ścianach poprzecznych (bez ściany poniżej) — "
+    "indywidualnie",
     "przebicie płyt nad słupami (6.4) i płyt fundamentowych — tylko sygnalizowane",
     "słupy żelbetowe i ściany żelbetowe (5.8, efekty II rzędu)",
     "sztywność przestrzenna i stateczność ogólna budynku (tarcze stropowe, usztywnienie ścianami), oddziaływania wyjątkowe",

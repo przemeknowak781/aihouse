@@ -11,8 +11,8 @@ Generuje do docs/20_koncepcja/final/:
 
 Uruchomienie: PYTHONPATH=src python3 tools/podglad_modelu.py [--out docs/20_koncepcja/final] [--bez-koncepcji]
 """
-# KOORDYNACJA: patrz scratchpad/koncepcja/KOORDYNACJA.md — ten plik należy do Agenta B; druga połowa (od „elewacje”) napisana przez
-#   Agenta A — używa kolor(m, mat) = lamela.views.common.material_color (dodać, jeśli brak).
+# KOORDYNACJA: patrz scratchpad/koncepcja/KOORDYNACJA.md — od 04:10 plik kończy i utrzymuje Agent A (proszę nie nadpisywać);
+#   Agent B: działka/wyposażenie/instalacje, widoki i pipeline 3D.
 from __future__ import annotations
 
 import argparse
@@ -320,3 +320,202 @@ def elewacja_szkic(m, ir, out: Path):
     fig.savefig(out, dpi=140)
     plt.close(fig)
     return rows
+
+
+# ------------------------------------------------------------------------------------------------ przekroje pionowe
+def przekroj(m, ir, os_, c, out: Path, nazwa: str):
+    """os_='x' — płaszczyzna x = c (widok na wschód, u = −y); os_='y' — płaszczyzna y = c (widok na północ, u = x)."""
+    fig, ax = plt.subplots(figsize=(16, 9))
+    big = 200.0
+    line = LineString([(c, -big), (c, big)]) if os_ == "x" else LineString([(-big, c), (big, c)])
+
+    def U(v):
+        return -v if os_ == "x" else v
+    # widok za płaszczyzną (szary, malarz)
+    far = []
+    for p in ir.prisms:
+        if p.kind in POMIN or p.meta.get("group") == "otoczenie":
+            continue
+        xs, ys = zip(*p.polygon)
+        d0 = (min(xs) - c) if os_ == "x" else (min(ys) - c)
+        if d0 <= 0.001:
+            continue
+        u0, u1 = (min(U(y) for y in ys), max(U(y) for y in ys)) if os_ == "x" else (min(xs), max(xs))
+        far.append((d0, u0, u1, p))
+    far.sort(key=lambda t: -t[0])
+    for d0, u0, u1, p in far:
+        ax.add_patch(plt.Rectangle((u0, p.z0), u1 - u0, p.z1 - p.z0, fc="#f4f4f4" if p.kind != "glass" else "#e3f1f8", ec="#c8c8c8",
+                                   lw=0.2, zorder=1))
+    # elementy przecięte
+    for p in ir.prisms:
+        if p.kind in POMIN or p.meta.get("group") == "otoczenie":
+            continue
+        g = p.shape()
+        if not g.intersects(line):
+            continue
+        seg = g.intersection(line)
+        segs = [seg] if seg.geom_type == "LineString" else [s for s in getattr(seg, "geoms", []) if s.geom_type == "LineString"]
+        for s in segs:
+            vals = [U(q[1]) if os_ == "x" else q[0] for q in s.coords]
+            u0, u1 = min(vals), max(vals)
+            if u1 - u0 < 1e-4:
+                continue
+            fc = "#9fc9df" if p.kind == "glass" else kolor(m, p.material)
+            ax.add_patch(plt.Rectangle((u0, p.z0), u1 - u0, p.z1 - p.z0, fc=fc, ec="#111", lw=0.35, zorder=3))
+    if ir.terrain is not None:
+        ts = np.linspace(-45, 25, 300)
+        pts = [((U(t), ir.terrain.height_at(c, t)) if os_ == "x" else (t, ir.terrain.height_at(t, c))) for t in ts]
+        pts.sort()
+        u, z = zip(*pts)
+        ax.fill_between(u, [-2.0] * len(u), z, color="#e2d6bd", zorder=0.5)
+        ax.plot(u, z, color="#6b5a3c", lw=1.0, zorder=4)
+    for k in m.kondygnacje:
+        ax.axhline(k.rzedna, color="#c0392b", lw=0.3, ls=(0, (6, 4)), zorder=0.8)
+        ax.text(ax.get_xlim()[0], k.rzedna, f" {k.id} {k.rzedna:+.3f}", fontsize=6, color="#c0392b", va="bottom")
+    osie_ = m.raw["osie"]["y" if os_ == "x" else "x"]
+    for n_, v in osie_.items():
+        ax.axvline(U(v), color="#c0392b", lw=0.3, ls=(0, (8, 3, 1, 3)), zorder=0.8)
+        ax.text(U(v), 10.6, n_, ha="center", fontsize=7, color="#c0392b", bbox=dict(boxstyle="circle,pad=0.2", fc="w", ec="#c0392b", lw=0.5))
+    lo, hi = (-12.0, 5.0) if os_ == "x" else (-4.0, 21.0)
+    ax.set_xlim(lo, hi)
+    ax.set_ylim(-1.6, 11.3)
+    ax.set_aspect("equal")
+    ax.tick_params(labelsize=6)
+    if os_ == "x":
+        ax.set_xticks(range(-12, 6))
+        ax.set_xticklabels([str(-t) for t in range(-12, 6)])
+        ax.set_xlabel("y [m] (północ ← → południe)", fontsize=7)
+    else:
+        ax.set_xlabel("x [m] (zachód → wschód)", fontsize=7)
+    dachy = [sl for sl in m.plyty() if sl["typ"] == "dach"]
+    top = max((sl["top_attyki"] or sl["top"]) for sl in dachy)
+    ax.set_title(f"{nazwa}: płaszczyzna {os_} = {fmt(c)} m — elementy przecięte (kolor materiału), widok (szary), teren; "
+                 f"najwyższy punkt attyki {top:+.3f}", fontsize=9, loc="left")
+    fig.tight_layout()
+    fig.savefig(out, dpi=150)
+    plt.close(fig)
+
+
+# ------------------------------------------------------------------------------------------------ działka (PZT)
+def odleglosci(m):
+    """Najmniejsze odległości elementów od granic działki (układ budynku; granice z dzialka.yaml)."""
+    dz = m.dz
+    ob = dz.obrys
+    x0, y0, x1, y1 = ob.bounds
+    lz = dz.raw.get("linia_zabudowy") or []
+    y_lz = min(dz.do_budynku(p)[1] for p in lz) if lz else y1
+    wyn = []
+
+    def dodaj(nazwa, g, otwory):
+        b = g.bounds
+        wyn.append({"element": nazwa, "W": round(b[0] - x0, 2), "E": round(x1 - b[2], 2), "S": round(b[1] - y0, 2),
+                    "N_linia_zab": round(y_lz - b[3], 2), "otwory": otwory})
+    for k in m.kondygnacje:
+        dodaj(f"ściany {k.id} (lico ocieplenia)", m.obrys_kondygnacji(k.id), True)
+    for w in m.wsporniki():
+        dodaj(f"płyta {w['id']}", Polygon(w["obrys"]), False)
+    for t in m.tarasy():
+        dodaj(f"taras {t['id']}", Polygon(t["obrys"]), False)
+    for o in (dz.raw.get("uzbrojenie") or {}).get("obiekty") or []:
+        if o.get("id") == "PC-JZ":
+            x, y = dz.do_budynku(o["xy"])
+            dodaj("jednostka zewn. PC", Point(x, y).buffer(0.6, cap_style=3), False)
+    return wyn, y_lz
+
+
+def dzialka_png(m, ir, out: Path):
+    dz = m.dz
+    fig, ax = plt.subplots(figsize=(11, 15))
+    ob = dz.obrys
+    for s in dz.lista("sasiedzi"):
+        if s.get("obrys"):
+            fill(ax, dz.poly_bud(s["obrys"]), fc="#f7f7f2", ec="#999", lw=0.4, z=0)
+        zab = s.get("zabudowa")
+        if isinstance(zab, list) and len(zab) >= 3:
+            fill(ax, dz.poly_bud(zab), fc="#ddd", ec="#777", lw=0.5, z=1)
+    dr = dz.raw.get("droga") or {}
+    if dr.get("linie_rozgraniczajace"):
+        fill(ax, dz.poly_bud(dr["linie_rozgraniczajace"]), fc="#eeeeee", ec="#888", lw=0.4, z=0.5)
+    if dr.get("jezdnia"):
+        fill(ax, dz.poly_bud(dr["jezdnia"]), fc="#bdbdbd", ec="none", z=0.6)
+    fill(ax, ob, fc="#eef6e6", ec="#b22", lw=1.4, z=1)
+    for z_ in dz.lista("zielen"):
+        if z_.get("typ") == "trawnik":
+            continue
+        fill(ax, dz.poly_bud(z_["obrys"]), fc="#9cc98a" if z_["typ"] == "zywoplot" else "#c9e2b3", ec="#5b8a4a", lw=0.3, z=2)
+    for u in dz.lista("utwardzenia"):
+        fill(ax, dz.poly_bud(u["obrys"]), fc="#d4cfc6", ec="#777", lw=0.4, z=2)
+    for t in m.tarasy():
+        fill(ax, Polygon(t["obrys"]), fc="#c9b69c", ec="#6b5a3c", lw=0.4, z=2)
+    for mp in dz.lista("miejsca_postojowe"):
+        fill(ax, dz.poly_bud(mp["obrys"]), fc="none", ec="#333", lw=0.6, ls="--", z=4)
+    od = dz.raw.get("odpady") or {}
+    if od.get("obrys"):
+        fill(ax, dz.poly_bud(od["obrys"]), fc="#bbb", ec="#333", lw=0.5, z=4)
+    ret = dz.raw.get("retencja") or {}
+    if (ret.get("rozsaczanie") or {}).get("obrys"):
+        fill(ax, dz.poly_bud(ret["rozsaczanie"]["obrys"]), fc="#bfe0f2", ec="#2b7bb9", lw=0.6, z=3)
+    if (ret.get("zbiornik") or {}).get("xy"):
+        x, y = dz.do_budynku(ret["zbiornik"]["xy"])
+        ax.add_patch(plt.Circle((x, y), 1.1, fc="#8fc3e3", ec="#2b7bb9", zorder=4))
+        ax.text(x, y, f"Z {ret['zbiornik'].get('V', '')} m³", fontsize=6, ha="center", va="center", zorder=5)
+    kol = {"woda": "#1f77b4", "kan_sanit": "#8c564b", "en": "#d62728", "tele": "#9467bd", "gaz": "#e5ae00", "kan_deszcz": "#17becf"}
+    for zb in ("istniejace", "projektowane"):
+        for u in (dz.raw.get("uzbrojenie") or {}).get(zb) or []:
+            pts = [dz.do_budynku(p) for p in u.get("linia") or []]
+            if len(pts) >= 2:
+                xs, ys = zip(*pts)
+                ax.plot(xs, ys, color=kol.get(u["branza"], "#444"), lw=0.8 if zb == "projektowane" else 0.5,
+                        ls="-" if zb == "projektowane" else "--", zorder=3)
+    for o in (dz.raw.get("uzbrojenie") or {}).get("obiekty") or []:
+        x, y = dz.do_budynku(o["xy"])
+        ax.plot([x], [y], "s", ms=4, color="#333", zorder=6)
+        ax.text(x + 0.4, y, o["id"], fontsize=5.5, zorder=6)
+    for od_ in dz.lista("odwodnienia"):
+        if od_.get("linia"):
+            pts = [dz.do_budynku(p) for p in od_["linia"]]
+            if len(pts) >= 2:
+                xs, ys = zip(*pts)
+                ax.plot(xs, ys, color="#17becf", lw=1.4, zorder=4)
+    for f_ in dz.lista("ogrodzenie"):
+        pts = [dz.do_budynku(p) for p in f_["linia"]]
+        xs, ys = zip(*pts)
+        ax.plot(xs, ys, color="#333", lw=0.8, zorder=5)
+    for b_ in dz.lista("bramy"):
+        x, y = dz.do_budynku(b_["xy"])
+        ax.plot([x - b_["szer"] / 2, x + b_["szer"] / 2], [y, y], color="#e67e22", lw=2.2, zorder=6)
+    for d_ in dz.lista("drzewa"):
+        x, y = dz.do_budynku(d_["xy"])
+        ax.add_patch(plt.Circle((x, y), d_["sr_korony"] / 2, fc="#6aa84f" if not d_.get("istn") else "#38761d", ec="#274e13", alpha=0.45, zorder=6))
+    # budynek
+    fill(ax, m.obrys_kondygnacji("P0"), fc="#9e9e9e", ec="#111", lw=1.2, z=7)
+    for kid, ls in (("P1", "--"), ("P2", ":")):
+        outline(ax, m.obrys_kondygnacji(kid), color="#111", lw=0.9, ls=ls, zorder=8)
+    for w in m.wsporniki():
+        outline(ax, Polygon(w["obrys"]), color="#555", lw=0.5, ls=(0, (1, 2)), zorder=8)
+    lz = dz.raw.get("linia_zabudowy") or []
+    if lz:
+        pts = [dz.do_budynku(p) for p in lz]
+        xs, ys = zip(*pts)
+        ax.plot(xs, ys, color="#b22", lw=1.0, ls=(0, (10, 3, 2, 3)), zorder=9)
+        ax.text(xs[0] + 0.3, ys[0] + 0.3, "nieprzekraczalna linia zabudowy (6,00 m od 1KDD)", color="#b22", fontsize=7, zorder=9)
+    wyn, y_lz = odleglosci(m)
+    x0, y0, x1, y1 = ob.bounds
+    p0 = m.obrys_kondygnacji("P0").bounds
+    p2 = m.obrys_kondygnacji("P2").bounds
+    for (xa, xb, yy, txt) in ((x0, p2[0], 2.5, None), (p0[2], x1, 4.0, None)):
+        ax.annotate("", (xa, yy), (xb, yy), arrowprops=dict(arrowstyle="<->", lw=0.7, color="#b22"), zorder=10)
+        ax.text((xa + xb) / 2, yy + 0.3, f"{fmt(abs(xb - xa))} m", ha="center", fontsize=7, color="#b22", zorder=10)
+    ax.annotate("", (8.0, y0), (8.0, p0[1]), arrowprops=dict(arrowstyle="<->", lw=0.7, color="#b22"), zorder=10)
+    ax.text(8.3, (y0 + p0[1]) / 2, f"{fmt(p0[1] - y0)} m", fontsize=7, color="#b22", rotation=90, zorder=10)
+    ax.set_xlim(x0 - 4, x1 + 4)
+    ax.set_ylim(y0 - 3, y1 + 12)
+    ax.set_aspect("equal")
+    ax.tick_params(labelsize=6)
+    ax.set_title("Dom LAMELA — zagospodarowanie działki 123/4 (układ budynku; dane: model/dzialka.yaml + budynek.yaml)\n"
+                 "P0 — wypełnienie; P1 — kreska; P2 — kropki; płyty wysunięte — linia punktowa; retencja — niebieski; "
+                 "odwodnienia liniowe — turkus; bramy — pomarańcz", fontsize=8, loc="left")
+    fig.tight_layout()
+    fig.savefig(out, dpi=140)
+    plt.close(fig)
+    return wyn
