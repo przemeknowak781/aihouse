@@ -1,4 +1,5 @@
 {
+ "nr": 65,
  "title": "Tom PT-2 BO przebudowany: obliczenia 148/148, MES 13/13, zbrojenie 315/315 — zostały 4 pozycje części rysunkowej",
  "stages": [
   [
@@ -52,6 +53,17 @@
  ],
  "notes": [
   "Otwarte w BO: 11 kolizji napisów na PT-BO-01 i nieaktualny raport arkuszy.",
-  "Status PT-2: NIEKOMPLETNY do usunięcia kolizji i weryfikacji pętli."
+  "Status PT-2: NIEKOMPLETNY do usunięcia kolizji i weryfikacji pętli.",
+  "NADZÓR (13:12): 2 agentów aktywnych, bez zastojów; najdłuższa bezczynność 4 min; zmiany w repo 0 min temu."
+ ],
+ "images": [
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/bo_stan_1112.png",
+   "caption": "PT-2 BO s. 5: stan analiz — 4 pozycje niezamknięte (było 42)"
+  },
+  {
+   "path": "/home/user/aihouse/projekt/04_PT_konstrukcja/rysunki/PT-BO-01_rzut_fundamentow.png",
+   "caption": "PT-BO-01 rzut fundamentów — do usunięcia 11 kolizji napisów"
+  }
  ]
 }

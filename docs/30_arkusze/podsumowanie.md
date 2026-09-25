@@ -136,3 +136,57 @@ na marginesie arkusza.
 **Kontrola** (każde wywołanie generatora): `uklad.sprawdz_nakladanie` (nakładanie, wyjście poza ramkę, odstępy),
 `uklad.kolizje_znakow` (znaki centrujące a treść), wysokość tabliczki, `plot.qa`, pomiar W na PDF
 (`uklad.wypelnienie_pdf`). Testy silnika: `PYTHONPATH=src python3 tools/test_arkusze_formaty.py [--szybko]`.
+
+## 4. Pozostałe ograniczenia
+
+1. **Pasy harmonijki < 180 mm na 9 arkuszach.** Arkusze 1130 × 297 (PT-IS-02, -04: 135 mm), 1150 × 420 (PB-AR-04:
+   140 mm), 690 × 297 (PT-IE-02, -08: 120 mm), 870 × 297 (PT-IE-14: 140 mm) oraz klasyczne A3 420 × H (PZT-01,
+   PT-IE-06: 125 + 105 + 190 — praktyka DIN) i PT-IS-11 510 × 420 (170 + 150 + 190). Rzuty dwóch pięter w jednym wierszu
+   i przekroje mają długości w lukach między długościami „ładnymi” (930–1050, 1290–1470 mm). Dłuższy arkusz byłby
+   droższy niż kara 4 % za składanie „poprawne”. Wszystkie te arkusze składają się bez pasów węższych niż 105 mm,
+   z tabliczką na wierzchu.
+2. **Mniej ocen „dobre”** (8 zamiast 11). Arkusze „bokiem na rolkę” mają niepełny górny rząd (np. 297 + 143 mm).
+   To świadomy wybór kosztu: mniej papieru i cieńsza paczka (6 warstw zamiast 10). Gdyby wymagać pełnych rzędów,
+   trzeba podnieść `kara_skladania.poprawne`.
+3. **PZT: pismo 2,5 mm powiększyło bloki.** PZT-02 ma 594 × 430 (było 400 × 594, +7 % papieru), PZT-03 ma 610 × 450
+   (było 620 × 420, +5 %). Komplet PZT łącznie bez zmian (0,75 m²), bo PZT-01 zmalał. Tabliczka (PN-EN ISO 7200:
+   etykiety pól 1,8 mm) i oznaczenia marginesu (format, numery zgięć) mają 1,8 mm na wszystkich kompletach.
+   Tabliczka jest wspólna dla całej dokumentacji, więc W-312 odniesiono do treści rysunku i kolumny opisowej.
+   Do potwierdzenia przez projektanta.
+4. **PT-IE-13** (ochrona odgromowa — rzut dachu) ma teraz 594 × 440 i W 82 %. Nie połączono go z PT-IE-10 (PV,
+   ten sam podkład), bo generator rysuje jedną branżę na rzucie. Wspólny rzut PV + LPS wymaga zmiany w
+   `views/instalacje` (nakładanie branż IE-PV i IE-U). Oszczędność ok. 0,26 m² i 6 warstw A4.
+5. **Opisy warstw na przekrojach (PB-AR-04, PT-AR-04)** stoją częściowo nad pomieszczeniami przekroju. Mają białe tło:
+   linie ich nie przecinają, ale tło zasłania fragment przekroju pod tabelą (np. część biegu schodów na A-A).
+   Pełne wyniesienie opisów w pole obok przekroju wymaga osobnego pasa na opisy w generatorze `section.py`.
+   Arkusz ma 1150 × 420 (było 1130 × 420).
+6. **Opisy urządzeń w pom. 1.12 (PB-AR-01)** — pomieszczenie ma 8,85 m² i 7 urządzeń. Część opisów stoi poza obrysem
+   pomieszczenia (w garażu, pod ścianą zewnętrzną), z odnośnikiem przez ścianę. Odnośnik wodomierza biegnie wzdłuż
+   lica ściany.
+7. **PZT (C 2.12, drobne):** pojedyncze etykiety na planie (np. „L = 0,75 m (model: 0,80 m)”) mogą dotykać linii
+   sieci. Rozmieszczenie etykiet PZT (`site_draw.Labeler`) nie było w zakresie tej rundy.
+8. **Komplety BO i detale** nie zostały przegenerowane (prace innych zespołów). Po ich przegenerowaniu zmienią się
+   formaty (silnik wspólny) — patrz § 3.
+9. `test_podglad_www` (przeglądarka 3D) przy równoległym obciążeniu CPU może przekroczyć limit czasu kliknięcia
+   (weryfikacja M). W tej rundzie przeszedł (pełny `test_pipeline` 28/28). Nie dotyczy arkuszy.
+
+## 5. Pliki, testy, wydania
+
+* Silnik: `src/lamela/views/uklad.py` (kandydaci „szerokość = rolka”, `B_W`, odstępy tytułów, `pismo_min`),
+  `src/lamela/views/sheets.py` (bloki 177 mm, legendy razem, pismo uwag i podziałki), `src/lamela/draft/sheet.py`
+  (siatka odniesień, `table(h_naglowka=…)`).
+* Generatory: `views/plan.py` (opisy urządzeń, znaczniki stolarki, wymiary poza osiami, maski na dachu),
+  `views/section.py` + `views/common.py` (opisy warstw), `views/site.py` + `views/site_draw.py` (PZT: tabele,
+  legenda, pismo 2,5 mm), `views/instalacje/schematy.py`, `sch_kan.py` (legendy schematów, maski, średnice),
+  `obliczenia/elektryka/schemat_rg.py`, `obliczenia/sanitarne/schemat_pc.py` (parametr `legenda`, pełne nazwy obwodów),
+  `draft/symbols.py`, `draft/symbols_inst.py` (symbol bez opisu), `tools/metryki_arkuszy.py` (pusty prostokąt).
+* Konfiguracje: `model/arkusze.yaml` (komentarze), `model/arkusze_pzt.yaml` (`pismo_min: 2.5`, PZT-03 `auto`),
+  `model/arkusze_is.yaml` (bez `max_wysokosc` przy PT-IS-03/08), `model/arkusze_ie.yaml` (komentarze).
+* Testy: `tools/test_arkusze_formaty.py` 31/31 (nowe: `test_szerokosc_rolki`, `test_bloki_odsuniete_od_ramki`,
+  `test_siatka_formaty_niestandardowe`), `tools/test_pipeline.py` 28/28 (pełny) i 26/26 (`--szybko`).
+* Przegenerowane: `projekt/03_PAB/rysunki`, `projekt/02_PZT/rysunki`, `projekt/05_PT_instalacje_sanitarne/rysunki`,
+  `projekt/06_PT_instalacje_elektryczne/rysunki`, `projekt/10_PT_architektura/rysunki` (PT-AR, ten sam
+  `model/arkusze.yaml`). Wydania: `projekt/wydanie/PT_1_AR_…`, `PT_3_IS_…`, `PT_4_WB_…`, `PZT_PAB_ZL_…`,
+  `projekt/09_opis_i_zalaczniki/tom_I/PAB_…`, `PZT_…`, `ZL_…`, wykazy rysunków w `PT_IS_opis.md` i `PT_IE_opis.md`.
+  Formaty stron w PDF wydań PT-3 i PT-4 są zgodne z `raport_widokow.json`, arkusz po arkuszu.
+* Metryki: `docs/30_arkusze/metryki_po_poprawkach.md` / `.json`.
