@@ -189,6 +189,39 @@ def waliduj_przypadek2(h_min: float = 0.1e-3, h_max: float = 2e-3) -> WynikWalid
     return w
 
 
+SIATKI_PRZYPADKU2 = [(0.5e-3, 5e-3), (0.1e-3, 2e-3)]      # (h_min, h_max) [m] — siatka zgrubna i walidacyjna
+
+
+def waliduj_przypadek2_siatki(siatki=SIATKI_PRZYPADKU2) -> WynikWalidacji:
+    """Przypadek 2 na siatce zgrubnej (h_min = 0,5 mm) i walidacyjnej (0,1 mm): wynik nie może zależeć od siatki
+    (regresja uwagi 1 weryfikacji niezależnej — temperatura w wierzchołku G na styku aluminium/drewno/korek)."""
+    wz = wezel_przypadek2()
+    wiersze = []
+    mx = 0.0
+    ok = True
+    opis = []
+    for h_min, h_max in siatki:
+        s = siatka_dla_wezla(wz, h_min=h_min, h_max=h_max)
+        roz = ModelMOS(wz, s).rozwiaz()
+        for p in ("D", "G"):
+            x, y = PRZYPADEK2_PUNKTY[p]
+            t = roz.temperatura(x * 1e-3, y * 1e-3)
+            d = t - PRZYPADEK2_T[p]
+            mx = max(mx, abs(d))
+            ok &= abs(d) <= TOL_T
+            wiersze.append([p, f"h_min = {h_min * 1000:g} mm ({s.n} kom.)", PRZYPADEK2_T[p], t, d])
+        phi = roz.Phi_grup()["i"]
+        ok &= abs(phi - PRZYPADEK2_PHI) <= TOL_PHI
+        wiersze.append(["Φ [W/m]", f"h_min = {h_min * 1000:g} mm", PRZYPADEK2_PHI, phi, phi - PRZYPADEK2_PHI])
+        opis.append(s.opis())
+    w = WynikWalidacji("Przypadek 2 — niezależność od siatki (h_min = 0,5 i 0,1 mm; punkty D, G, Φ)", ok, mx, None,
+                       "Δθ w ± 0,1 K; ΔΦ w ± 0,1 W/m na każdej siatce", wiersze, siatka=" | ".join(opis))
+    w.uwagi.append("Niezależny solver węzłowy (weryfikator): G = 16,334 °C, D = 6,273 °C (zbieżne 13k–210k węzłów). "
+                   "Przed poprawką (średnia arytmetyczna rekonstrukcji z 4 komórek wokół wierzchołka) G zależało od "
+                   "siatki: 16,108 (h_min 0,5 mm — poza tolerancją) … 16,273 (siatka walidacyjna) … 16,313 °C.")
+    return w
+
+
 # --------------------------------------------------------------------------------------------------
 # A1 — ściana warstwowa 1D
 # --------------------------------------------------------------------------------------------------
@@ -267,7 +300,7 @@ def waliduj_naroze(t: float = 0.3, a: float = 1.2, h_min: float = 0.001, h_max: 
 # --------------------------------------------------------------------------------------------------
 def waliduj_wszystko() -> list[WynikWalidacji]:
     w1, w1a = waliduj_przypadek1()
-    return [w1, waliduj_przypadek2(), waliduj_1d(), w1a, waliduj_naroze()]
+    return [w1, waliduj_przypadek2(), waliduj_przypadek2_siatki(), waliduj_1d(), w1a, waliduj_naroze()]
 
 
 def raport_walidacji(wyniki: list[WynikWalidacji] | None = None, plik: str | Path | None = None) -> str:

@@ -394,7 +394,8 @@ def porownanie_reczne(an) -> list[dict]:
     qG = RG / L_line + bw * hb * 25
     qQ = RQ / L_line
     qS = RS / L_line
-    qd_b = max(1.35 * qG + 1.5 * 0.7 * qQ + 1.5 * 0.5 * qS, 0.85 * 1.35 * qG + 1.5 * qQ + 1.5 * 0.5 * qS)
+    # taras (kat. A) i śnieg nie są łączone (PN-EN 1991-1-1 p. 3.3.2(1)) — wiodące jedno z nich
+    qd_b = max(1.35 * qG + 1.5 * 0.7 * qQ, 0.85 * 1.35 * qG + 1.5 * qQ, 1.35 * qG + 1.5 * 0.5 * qS, 0.85 * 1.35 * qG + 1.5 * qS)
     Ls = 3.76                                         # rozstaw podpór: ściana S0-02 (x = 10,09 → 0) — słup SL1 (13,85)
     Mb = qd_b * Ls ** 2 / 8
     M_lib = b1.wyniki[0].kroki[0].wynik
