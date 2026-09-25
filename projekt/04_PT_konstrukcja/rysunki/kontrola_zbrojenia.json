@@ -1,5 +1,402 @@
 {
- "ok": 0,
- "razem": 0,
- "wiersze": []
+ "ok": 20,
+ "razem": 22,
+ "wiersze": [
+  {
+   "element": "PF1",
+   "miejsce": "siatka dolna x",
+   "poz": "10.1",
+   "arkusze": [
+    "PT-BO-05"
+   ],
+   "As_req": 6503.6,
+   "As_min": 273.1,
+   "As_prov": 314.2,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 25",
+   "s": 250.0,
+   "s_max": 250.0,
+   "ok": false,
+   "uwagi": "pasmo Winklera bez żeber — patrz uwagi arkusza [WYMAGA ANALIZY]",
+   "zapas": -0.952
+  },
+  {
+   "element": "PF1",
+   "miejsce": "siatka dolna y",
+   "poz": "10.1",
+   "arkusze": [
+    "PT-BO-05"
+   ],
+   "As_req": 6503.6,
+   "As_min": 273.1,
+   "As_prov": 314.2,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 25",
+   "s": 250.0,
+   "s_max": 250.0,
+   "ok": false,
+   "uwagi": "pasmo Winklera bez żeber — patrz uwagi arkusza [WYMAGA ANALIZY]",
+   "zapas": -0.952
+  },
+  {
+   "element": "SF1",
+   "miejsce": "pogrubienie — siatka dolna",
+   "poz": "10.18",
+   "arkusze": [
+    "PT-BO-05"
+   ],
+   "As_req": 2.4,
+   "As_min": 538.1,
+   "As_prov": 538.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø12 co 21",
+   "s": 210.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "Głębokość posadowienia (η = 185%)",
+   "zapas": 0.001
+  },
+  {
+   "element": "SF2",
+   "miejsce": "pogrubienie — siatka dolna",
+   "poz": "10.19",
+   "arkusze": [
+    "PT-BO-05"
+   ],
+   "As_req": 2.6,
+   "As_min": 538.1,
+   "As_prov": 538.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø12 co 21",
+   "s": 210.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "Głębokość posadowienia (η = 185%)",
+   "zapas": 0.001
+  },
+  {
+   "element": "SF3",
+   "miejsce": "pogrubienie — siatka dolna",
+   "poz": "10.20",
+   "arkusze": [
+    "PT-BO-05"
+   ],
+   "As_req": 2.4,
+   "As_min": 538.1,
+   "As_prov": 538.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø12 co 21",
+   "s": 210.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "Głębokość posadowienia (η = 186%)",
+   "zapas": 0.001
+  },
+  {
+   "element": "SF4",
+   "miejsce": "pogrubienie — siatka dolna",
+   "poz": "10.21",
+   "arkusze": [
+    "PT-BO-05"
+   ],
+   "As_req": 2.1,
+   "As_min": 538.1,
+   "As_prov": 538.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø12 co 21",
+   "s": 210.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "Głębokość posadowienia (η = 185%)",
+   "zapas": 0.001
+  },
+  {
+   "element": "ZF1",
+   "miejsce": "żebro — zbrojenie podłużne (dół + góra)",
+   "poz": "10.2",
+   "arkusze": [
+    "PT-BO-05"
+   ],
+   "As_req": 0.0,
+   "As_min": 452.4,
+   "As_prov": 452.4,
+   "jedn": "mm²",
+   "zbrojenie": "2+2 Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) (η = 254%)",
+   "zapas": 0.0
+  },
+  {
+   "element": "ZF10",
+   "miejsce": "żebro — zbrojenie podłużne (dół + góra)",
+   "poz": "10.11",
+   "arkusze": [
+    "PT-BO-05"
+   ],
+   "As_req": 0.0,
+   "As_min": 452.4,
+   "As_prov": 452.4,
+   "jedn": "mm²",
+   "zbrojenie": "2+2 Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "Nośność podłoża (GEO, DA2*) (η = 215%)",
+   "zapas": 0.0
+  },
+  {
+   "element": "ZF11",
+   "miejsce": "żebro — zbrojenie podłużne (dół + góra)",
+   "poz": "10.12",
+   "arkusze": [
+    "PT-BO-05"
+   ],
+   "As_req": 0.0,
+   "As_min": 452.4,
+   "As_prov": 452.4,
+   "jedn": "mm²",
+   "zbrojenie": "2+2 Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.0
+  },
+  {
+   "element": "ZF12",
+   "miejsce": "żebro — zbrojenie podłużne (dół + góra)",
+   "poz": "10.13",
+   "arkusze": [
+    "PT-BO-05"
+   ],
+   "As_req": 0.0,
+   "As_min": 452.4,
+   "As_prov": 452.4,
+   "jedn": "mm²",
+   "zbrojenie": "2+2 Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "Nośność podłoża (GEO, DA2*) (η = 311%)",
+   "zapas": 0.0
+  },
+  {
+   "element": "ZF13",
+   "miejsce": "żebro — zbrojenie podłużne (dół + góra)",
+   "poz": "10.14",
+   "arkusze": [
+    "PT-BO-05"
+   ],
+   "As_req": 0.0,
+   "As_min": 452.4,
+   "As_prov": 452.4,
+   "jedn": "mm²",
+   "zbrojenie": "2+2 Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "Nośność podłoża (GEO, DA2*) (η = 243%)",
+   "zapas": 0.0
+  },
+  {
+   "element": "ZF14",
+   "miejsce": "żebro — zbrojenie podłużne (dół + góra)",
+   "poz": "10.15",
+   "arkusze": [
+    "PT-BO-05"
+   ],
+   "As_req": 0.0,
+   "As_min": 452.4,
+   "As_prov": 452.4,
+   "jedn": "mm²",
+   "zbrojenie": "2+2 Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.0
+  },
+  {
+   "element": "ZF15",
+   "miejsce": "żebro — zbrojenie podłużne (dół + góra)",
+   "poz": "10.16",
+   "arkusze": [
+    "PT-BO-05"
+   ],
+   "As_req": 0.0,
+   "As_min": 452.4,
+   "As_prov": 452.4,
+   "jedn": "mm²",
+   "zbrojenie": "2+2 Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "Nośność podłoża (GEO, DA2*) (η = 130%)",
+   "zapas": 0.0
+  },
+  {
+   "element": "ZF16",
+   "miejsce": "żebro — zbrojenie podłużne (dół + góra)",
+   "poz": "10.17",
+   "arkusze": [
+    "PT-BO-05"
+   ],
+   "As_req": 0.0,
+   "As_min": 452.4,
+   "As_prov": 452.4,
+   "jedn": "mm²",
+   "zbrojenie": "2+2 Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.0
+  },
+  {
+   "element": "ZF2",
+   "miejsce": "żebro — zbrojenie podłużne (dół + góra)",
+   "poz": "10.3",
+   "arkusze": [
+    "PT-BO-05"
+   ],
+   "As_req": 0.0,
+   "As_min": 452.4,
+   "As_prov": 452.4,
+   "jedn": "mm²",
+   "zbrojenie": "2+2 Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) (η = 254%)",
+   "zapas": 0.0
+  },
+  {
+   "element": "ZF3",
+   "miejsce": "żebro — zbrojenie podłużne (dół + góra)",
+   "poz": "10.4",
+   "arkusze": [
+    "PT-BO-05"
+   ],
+   "As_req": 0.0,
+   "As_min": 452.4,
+   "As_prov": 452.4,
+   "jedn": "mm²",
+   "zbrojenie": "2+2 Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) (η = 198%)",
+   "zapas": 0.0
+  },
+  {
+   "element": "ZF4",
+   "miejsce": "żebro — zbrojenie podłużne (dół + góra)",
+   "poz": "10.5",
+   "arkusze": [
+    "PT-BO-05"
+   ],
+   "As_req": 0.0,
+   "As_min": 452.4,
+   "As_prov": 452.4,
+   "jedn": "mm²",
+   "zbrojenie": "2+2 Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) (η = 185%)",
+   "zapas": 0.0
+  },
+  {
+   "element": "ZF5",
+   "miejsce": "żebro — zbrojenie podłużne (dół + góra)",
+   "poz": "10.6",
+   "arkusze": [
+    "PT-BO-05"
+   ],
+   "As_req": 0.0,
+   "As_min": 452.4,
+   "As_prov": 452.4,
+   "jedn": "mm²",
+   "zbrojenie": "2+2 Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.0
+  },
+  {
+   "element": "ZF6",
+   "miejsce": "żebro — zbrojenie podłużne (dół + góra)",
+   "poz": "10.7",
+   "arkusze": [
+    "PT-BO-05"
+   ],
+   "As_req": 0.0,
+   "As_min": 452.4,
+   "As_prov": 452.4,
+   "jedn": "mm²",
+   "zbrojenie": "2+2 Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) (η = 254%)",
+   "zapas": 0.0
+  },
+  {
+   "element": "ZF7",
+   "miejsce": "żebro — zbrojenie podłużne (dół + góra)",
+   "poz": "10.8",
+   "arkusze": [
+    "PT-BO-05"
+   ],
+   "As_req": 0.0,
+   "As_min": 452.4,
+   "As_prov": 452.4,
+   "jedn": "mm²",
+   "zbrojenie": "2+2 Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "Nośność podłoża (GEO, DA2*) (η = 331%); Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) (η = 254%)",
+   "zapas": 0.0
+  },
+  {
+   "element": "ZF8",
+   "miejsce": "żebro — zbrojenie podłużne (dół + góra)",
+   "poz": "10.9",
+   "arkusze": [
+    "PT-BO-05"
+   ],
+   "As_req": 0.0,
+   "As_min": 452.4,
+   "As_prov": 452.4,
+   "jedn": "mm²",
+   "zbrojenie": "2+2 Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "Nośność podłoża (GEO, DA2*) (η = 278%)",
+   "zapas": 0.0
+  },
+  {
+   "element": "ZF9",
+   "miejsce": "żebro — zbrojenie podłużne (dół + góra)",
+   "poz": "10.10",
+   "arkusze": [
+    "PT-BO-05"
+   ],
+   "As_req": 0.0,
+   "As_min": 452.4,
+   "As_prov": 452.4,
+   "jedn": "mm²",
+   "zbrojenie": "2+2 Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.0
+  }
+ ]
 }

@@ -43,3 +43,8 @@ Lista generowana automatycznie przez `lamela.views.konstrukcja` z: (1) braków z
 - Biblioteka (uwaga analizy): PL-E: podpora punktowa SL2 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
 - Biblioteka (uwaga analizy): PL-E: podpora punktowa SL3 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
 - Biblioteka (uwaga analizy): PL-E: podpora punktowa SL4 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
+
+## Kontrola zbrojenia — pozycje niespełnione (szczegóły: raport kontroli zbrojenia)
+
+- PF1 / siatka dolna x (poz. 10.1): A_s,prov = 314 < max(A_s,req; A_s,min) = 6504 mm²/m pasmo Winklera bez żeber — patrz uwagi arkusza [WYMAGA ANALIZY]
+- PF1 / siatka dolna y (poz. 10.1): A_s,prov = 314 < max(A_s,req; A_s,min) = 6504 mm²/m pasmo Winklera bez żeber — patrz uwagi arkusza [WYMAGA ANALIZY]

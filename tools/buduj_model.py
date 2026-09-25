@@ -59,7 +59,7 @@ XA_i, XE_i = X["A"] + INT, X["E"] - INT                      # 0,105 / 11,895
 Y1_i, Y3_s, Y3_n, Y4_i = Y["1"] + INT, Y["3"] - INT, Y["3"] + INT, Y["4"] - INT   # 0,105 / 5,02 / 5,23 / 8,645
 XC_w, XC_e = X["C"] - INT, X["C"] + INT                      # 5,77 / 5,98
 XD_w, XD_e = X["D"] - INT, X["D"] + INT                      # 8,395 / 8,605
-XM_w, XM_e = X["M"] - 0.06, X["M"] + 0.06                    # 7,13 / 7,25 (ścianka środkowa 12 cm, bez tynku — silikat licowy)
+XM_w, XM_e = X["M"] - 0.075, X["M"] + 0.075                  # 7,115 / 7,265 (ściana środkowa ŻB 15 cm — audyt A2 I-2)
 
 # schody (identyczne SCH1 i SCH2, jedne nad drugimi) — WT §68–69, W-090/W-091
 H_ST, S_ST, N_BIEG = 0.175, 0.28, 9                       # h, s, liczba podnóżków w biegu
@@ -72,11 +72,13 @@ B2_X0, B2_X1 = XM_e, XD_w                                  # bieg 2 (pas wschodn
 SI = (5.370, Y3_n, 5.770, 6.350)
 
 # poziomy elementów zewnętrznych (krawędzie płyt — „warstwy” sylwety S)
-Z_OKAP_E = (2.75, 3.05)        # okap E (ST1) — płyta pogrubiona 30 cm
+# Po audycie A2 (I-4): wierzch płyt wysuniętych = wierzch płyty stropu (łącznik termoizolacyjny bez uskoku, spadek 2 % od budynku
+# bez progu przy ścianie); „gruba krawędź” (decyzja 3) uzyskana pogrubieniem od spodu.
+Z_OKAP_E = (2.70, 3.00)        # okap E (ST1) — płyta 30 cm, wierzch = ST1
 Z_RAMA_D = (3.65, 3.85)        # linia D: dolny pas ramy C = wierzch attyki garażu +3,85
 Z_RAMA_G = (5.35, 5.55)        # górny pas ramy C
-Z_OKAP_2 = (5.95, 6.25)        # krawędź ST2 (spód bryły A)
-Z_OKAP_3 = (9.08, 9.40)        # krawędź ST3 (stropodach bryły A)
+Z_OKAP_2 = (5.85, 6.15)        # krawędź ST2 (spód bryły A), wierzch = ST2
+Z_OKAP_3 = (8.98, 9.30)        # krawędź ST3 (stropodach bryły A), wierzch = płyta D1
 
 
 def r(v: float, n: int = 4) -> float:
@@ -234,8 +236,9 @@ PRZ = {
     "SWG": dict(nazwa="Ściana nośna dom–garaż nieogrzewany: silikat 18 + wełna 12 cm od strony garażu + tynk (U ≈ 0,24 ≤ 0,30; szczelna na spaliny)",
                 typ="sciana_wewn_nosna", warstwy=[
         L("TYNK_GIPS", 0.015), L("SIL18", 0.18, konstrukcyjna=True), L("WELNA_035", 0.12), L("TYNK_CW", 0.01)]),
-    "SC12": dict(nazwa="Ścianka środkowa klatki schodowej: silikat 12 licowy (P0–P2)", typ="scianka_dzialowa", warstwy=[
-        L("SIL12", 0.12, konstrukcyjna=True)]),
+    "SCZB15": dict(nazwa="Ściana środkowa klatki schodowej: żelbet C25/30 15 cm, monolityczna z płytami biegów i spoczników, ciągła P0–P2 "
+                         "(przez poziomy stropów), zakotwiona w podciągach B8/B9/B10 osi 3 (audyt A2 I-2)", typ="sciana_wewn_nosna", warstwy=[
+        L("ZB_C25", 0.15, konstrukcyjna=True)]),
     "DZ12": dict(nazwa="Ścianka działowa: silikat 12 + tynk gipsowy obustronnie (R'w ≥ 45 dB)", typ="scianka_dzialowa", warstwy=[
         L("TYNK_GIPS", 0.015), L("SIL12", 0.12, konstrukcyjna=True), L("TYNK_GIPS", 0.015)]),
     "GK10": dict(nazwa="Obudowa szachtu SI: 2 × GKF 12,5 + profil CW 50 z wełną + 2 × GKF 12,5 (EI 30)", typ="scianka_dzialowa", warstwy=[
@@ -325,7 +328,8 @@ W("S0-10", "P0", "SW18", (xD, y3), (xE, y3), uwagi="ściana grzbietowa (oś 3), 
 W("S0-11", "P0", "SW18", (xB, y3), (xB, y4), uwagi="oś B")
 W("S0-12", "P0", "SWZB", (xC, y3), (xC, y4), uwagi="oś C — ściana trzonu klatki, żelbet (sztywność P0 w kier. x)")
 W("S0-13", "P0", "SWZB", (xD, y3), (xD, y4), uwagi="oś D — ściana trzonu klatki, żelbet")
-W("S0-14", "P0", "SC12", (xM, y3), (xM, Y_SPOCZ), uwagi="ścianka środkowa schodów")
+W("S0-14", "P0", "SCZB15", (xM, y3), (xM, Y_SPOCZ), uwagi="ściana środkowa schodów ŻB 15, ciągła przez poziom ST1 (w otworze klatki)",
+  z_do=Z_ST1)
 W("S0-15", "P0", "SW18", (xE, y1), (xE, y2), uwagi="oś E — kuchnia / przedsionek gospodarczy")
 W("S0-16", "P0", "SWG", (xE, y2), (xE, y4), "lewa", "oś E — dom / garaż (izolacja od garażu, szczelna)")
 W("S0-17", "P0", "SWG", (xF, y2), (xE, y2), "lewa", "oś 2 — pas gospodarczy / garaż (izolacja od garażu, szczelna)")
@@ -346,7 +350,8 @@ W("S1-06", "P1", "SW18", (xD, y3), (xE, y3), uwagi="oś 3, odcinek wsch. (międz
 W("S1-07", "P1", "SW18", (xB, y3), (xB, y4), uwagi="oś B")
 W("S1-08", "P1", "SW18", (xC, y3), (xC, y4), uwagi="oś C — klatka")
 W("S1-09", "P1", "SW18", (xD, y3), (xD, y4), uwagi="oś D — klatka")
-W("S1-10", "P1", "SC12", (xM, y3), (xM, Y_SPOCZ), uwagi="ścianka środkowa schodów")
+W("S1-10", "P1", "SCZB15", (xM, y3), (xM, Y_SPOCZ), uwagi="ściana środkowa schodów ŻB 15, ciągła przez poziom ST2 (w otworze klatki)",
+  z_do=Z_ST2)
 W("S1-11", "P1", "DZ12", (xA, yH), (xE, yH), uwagi="hol / pokój dziecka 1 i pokój rodzinny")
 W("S1-12", "P1", "DZ12", (xB, y1), (xB, yH), uwagi="pokój dziecka 1 / pokój rodzinny")
 W("S1-13", "P1", "DZ12", (xD2, y3), (xD2, y4), uwagi="WC z natryskiem / pralnia (nad ścianką S0-22)")
@@ -364,7 +369,7 @@ W("S2-07", "P2", "SZ1", (xB, y3), (xA2, y3), "lewa", "ściana pn. bryły A nad d
 W("S2-08", "P2", "SZL", (xA2, y3), (xA2, y1), "lewa", "ściana zach. lekka na wsporniku (belka krawędziowa B3), za lamelami")
 W("S2-09", "P2", "SW18", (xB, y3), (xM, y3), uwagi="oś 3 — łazienka / garderoba; zamknięcie pustki nad biegiem 1")
 W("S2-10", "P2", "SW18", (xC, y3), (xC, y4), uwagi="oś C — klatka")
-W("S2-11", "P2", "SC12", (xM, y3), (xM, Y_SPOCZ), uwagi="ścianka środkowa schodów (do stropodachu)")
+W("S2-11", "P2", "SCZB15", (xM, y3), (xM, Y_SPOCZ), uwagi="ściana środkowa schodów ŻB 15 (do stropodachu D1 i podciągu B10)")
 W("S2-12", "P2", "DZ12", (X_BG, y1), (X_BG, y3), uwagi="sypialnia / garderoba")
 W("S2-13", "P2", "DZ12", (xC, y1), (xC, Y_TH), uwagi="garderoba / pom. techniczne")
 W("S2-18", "P2", "DZ12", (xC, Y_TH), (xC, y3), uwagi="garderoba / hol")
@@ -412,13 +417,18 @@ HS = ow("HS", "do_wewn", "prawa")
 RU = ow("RU")
 # ---- P0 — przeszklenie E: kwatery 1,90 / 1,90 / 2,34 / 2,34 / 2,92 (x 0,30–2,20–4,10–6,44–8,78–11,70); słupy SL1–SL4 w osiach
 #      podziałów; SL3/SL4 w jednej linii ze słupkami boksu C (przeszczep J2); HS w kwaterach 3 i 4 (bezprogowe)
+#      Po audycie A2 (I-6): kwatery między LICAMI słupów (słup RK 120 w filarku 0,12 m w osi podziału — fasada słupowo-ryglowa na
+#      słupach stalowych), wysokość otworów 2,78 = spód belki B1 (bez pasa muru 3 cm). Kwatery: 1,78 / 1,78 / 2,22 / 2,22 / 2,86 m.
 E_KW = [0.30, 2.20, 4.10, 6.44, 8.78, 11.70]
-O("O0-01", "S0-01", E_KW[0], E_KW[1], "fix", "FX1", 2.75, 0.0, oslona="screen_zip", uwagi="przeszklenie E — kwatera 1")
-O("O0-02", "S0-01", E_KW[1], E_KW[2], "fix", "FX1", 2.75, 0.0, oslona="screen_zip", uwagi="przeszklenie E — kwatera 2")
-O("O0-03", "S0-01", E_KW[2], E_KW[3], "drzwi_przesuwne_HS", "HS1", 2.75, 0.0, HS, "screen_zip", bezprogowe=True, uwagi="kwatera 3 — HS salon")
-O("O0-04", "S0-01", E_KW[3], E_KW[4], "drzwi_przesuwne_HS", "HS1", 2.75, 0.0, HS, "screen_zip", bezprogowe=True, uwagi="kwatera 4 — HS jadalnia")
-O("O0-05", "S0-01", E_KW[4], E_KW[5], "fix", "FX2", 2.75, 0.0, oslona="screen_zip", uwagi="przeszklenie E — kwatera 5 (kuchnia)")
-O("O0-06", "S0-02", 12.35, 13.25, "drzwi_zewn", "DZ3", 2.75, 0.0, ow("R", "na_zewn"), "screen_zip",
+H_E = r(Z_ST1 - T_STR)                  # 2,78 — spód B1/ST1
+SL_H = 0.06                             # połowa słupa RK 120
+_E = [(0.36, E_KW[1] - SL_H)] + [(E_KW[i] + SL_H, E_KW[i + 1] - SL_H) for i in range(1, 4)] + [(E_KW[4] + SL_H, E_KW[5])]
+O("O0-01", "S0-01", *_E[0], "fix", "FX1", H_E, 0.0, oslona="screen_zip", uwagi="przeszklenie E — kwatera 1 (między licami: ściana A / SL1)")
+O("O0-02", "S0-01", *_E[1], "fix", "FX1", H_E, 0.0, oslona="screen_zip", uwagi="przeszklenie E — kwatera 2 (SL1–SL2)")
+O("O0-03", "S0-01", *_E[2], "drzwi_przesuwne_HS", "HS1", H_E, 0.0, HS, "screen_zip", bezprogowe=True, uwagi="kwatera 3 — HS salon (SL2–SL3)")
+O("O0-04", "S0-01", *_E[3], "drzwi_przesuwne_HS", "HS1", H_E, 0.0, HS, "screen_zip", bezprogowe=True, uwagi="kwatera 4 — HS jadalnia (SL3–SL4)")
+O("O0-05", "S0-01", *_E[4], "fix", "FX2", H_E, 0.0, oslona="screen_zip", uwagi="przeszklenie E — kwatera 5 (kuchnia; SL4–ściana E)")
+O("O0-06", "S0-02", 12.35, 13.25, "drzwi_zewn", "DZ3", r(Z_DG - T_DG), 0.0, ow("R", "na_zewn"), "screen_zip",
   uwagi="drzwi gospodarcze przeszklone w systemie i podziale fasady E (przeszczep J2) — pas E czytany ≈ 12,85 m; pod okapem E")
 O("O0-07", "S0-04", 12.75, 17.75, "brama", "BR1", 2.25, -0.10, ow("segmentowa", "do_wewn"),
   uwagi="brama segmentowa 5,00 × 2,25 m w świetle, kratki went. ≥ 0,08 m² (W-111, W-115); posadzka garażu −0,10")
@@ -426,28 +436,36 @@ O("O0-08", "S0-03", 4.90, 5.90, "drzwi_zewn", "DZ2", 2.10, 0.0, ow("R", "na_zewn
 O("O0-09", "S0-06", 10.05, 11.15, "drzwi_zewn", "DZ1", 2.40, 0.0, ow("R", "do_wewn", "prawa"),
   uwagi="drzwi wejściowe 1,10 × 2,40 w murze (≥ 0,90 × 2,00 w świetle ościeżnicy), próg ≤ 0,02 (W-055); pod daszkiem")
 O("O0-10", "S0-06", 11.25, 11.60, "fix", "FX3", 2.40, 0.0, oslona="brak", uwagi="doświetle boczne drzwi wejściowych, VSG mleczne (przeszczep z W3)")
-O("O0-11", "S0-07", 1.20, 3.60, "drzwi_przesuwne_HS", "HS2", 2.75, 0.0, HS, "screen_zip", bezprogowe=True,
-  uwagi="HS salonu na taras zach. pod okapem 1,50 m (przeszczep J2 z W1/W3)")
-O("O0-12", "S0-07", 5.80, 7.60, "okno", "OZ1", 1.50, 0.90, RU, "zaluzja_zewn", uwagi="pokój gościnny — zachód")
+O("O0-11", "S0-07", 1.20, 3.60, "drzwi_przesuwne_HS", "HS2", H_E, 0.0, HS, "screen_zip", bezprogowe=True,
+  uwagi="HS salonu na taras zach. pod okapem 1,50 m (przeszczep J2 z W1/W3); nadproże = wieniec ST1")
+O("O0-12", "S0-07", 5.80, 7.60, "okno", "OZ1", 1.50, 0.90, RU, "zaluzja_zewn", uwagi="pokój gościnny — zachód (poza okapem PL-E: kaseta nadstawna)")
 O("O0-13", "S0-06", 4.30, 5.10, "okno", "ON1", 0.60, 1.60, ow("U"), "brak", uwagi="łazienka gościnna — okno wysokie")
 O("O0-14", "S0-08", 4.20, 5.10, "drzwi", "D1", 2.10, 0.0, ow("R", "do_wewn"), uwagi="salon → przedpokój gościnny")
 O("O0-15", "S0-11", 5.33, 6.23, "drzwi", "D1", 2.10, 0.0, ow("R", "do_wewn"), uwagi="przedpokój → pokój gościnny")
-O("O0-16", "S0-19", 4.20, 5.10, "drzwi", "D2P", 2.10, 0.0, ow("przesuwne", "na_zewn", przesuwne=True),
-  uwagi="łazienka gościnna — drzwi przesuwne naścienne (WT §79 ust. 1), podcięcie ≥ 0,022 m²")
+O("O0-16", "S0-19", 4.08, 4.88, "drzwi", "D2P", 2.10, 0.0, ow("przesuwne", "na_zewn", przesuwne=True, chowane=True),
+  uwagi="łazienka gościnna — drzwi przesuwne CHOWANE w kasecie ścianki S0-19 (przesuw na wschód do x 5,68; audyt A2 I-7), "
+        "światło 0,80 × 2,00 (WT §79), podcięcie ≥ 0,022 m²; brak skrzydła w przedpokoju")
 O("O0-17", "S0-09", 7.40, 8.20, "drzwi", "D3", 2.00, 0.0, ow("R", "do_wewn"), uwagi="spiżarnia pod biegiem 2 (przeszczep J2)")
 O("O0-18", "S0-10", 8.90, 10.40, "otwor", "OT1", 2.40, 0.0, uwagi="hol → pas komunikacyjny przy schodach / strefa dzienna")
 O("O0-19", "S0-20", 8.71, 9.61, "drzwi", "D2", 2.10, 0.0, ow("R", "na_zewn"), uwagi="WC gościnne — na zewnątrz, kratka ≥ 0,022 m²")
-O("O0-20", "S0-21", 10.15, 11.05, "drzwi", "DS1", 2.10, 0.0, ow("R", "do_wewn"), uwagi="drzwi szklane VSG w osi wejścia (x ≈ 10,60)")
+O("O0-20", "S0-21", 10.15, 11.05, "drzwi", "DS1", 2.10, 0.0, ow("R", "na_zewn"),
+  uwagi="drzwi szklane VSG w osi wejścia (x ≈ 10,60), otwierane do holu (audyt A2 D-4)")
 O("O0-21", "S0-15", 0.35, 1.25, "drzwi", "D1", 2.10, 0.0, ow("R", "do_wewn"),
   uwagi="przedsionek → kuchnia; przesunięte do fasady (przeszczep J1) — ciągła zabudowa kuchni y 1,40–5,02")
 O("O0-22", "S0-17", 13.60, 14.50, "drzwi", "DG1", 2.10, 0.0, ow("R", "do_wewn"),
   uwagi="garaż → przedsionek: szczelne, samozamykacz, U ≤ 1,3 (W-113, W-244)")
-O("O0-23", "S0-18", 1.60, 2.50, "drzwi", "D4", 2.10, 0.0, ow("R", "do_wewn"),
-  uwagi="pom. techniczne dostępne z domu przez przedsionek (poprawka J2)")
+O("O0-23", "S0-18", 1.60, 2.50, "drzwi", "D4", 2.10, 0.0, ow("R", "do_wewn", "prawa"),
+  uwagi="pom. techniczne dostępne z domu przez przedsionek (poprawka J2); zawias przy y 1,60 — skrzydło nie wchodzi na moduł PC (A2 D-2)")
 
 # ---- P1
-O("O1-01", "S1-01", 4.10, 11.12, "okno", "BC1", 1.50, 0.70, ow("RU"), "screen_zip", kwatery=3,
-  uwagi="boks C — 3 kwatery 2,34 m w ramie wysuniętej 1,00 m; dolna część stała VSG do 0,85 m (W-097); słupki SLC1/SLC2 nad SL3/SL4")
+# boks C: 3 kwatery między licami słupków SL5/SL6 (RK 100 w filarkach 0,10 m nad SL3/SL4 — audyt A2 I-6)
+_C = [(4.10, E_KW[3] - 0.05), (E_KW[3] + 0.05, E_KW[4] - 0.05), (E_KW[4] + 0.05, 11.12)]
+O("O1-01", "S1-01", *_C[0], "okno", "BC1", 1.50, 0.70, ow("F"), "screen_zip",
+  uwagi="boks C — kwatera zach. (stała) w ramie wysuniętej 1,00 m; dolna część stała VSG do 0,85 m (W-097)")
+O("O1-13", "S1-01", *_C[1], "okno", "BC1", 1.50, 0.70, ow("RU"), "screen_zip",
+  uwagi="boks C — kwatera środkowa RU (SL5–SL6); dolna część stała VSG do 0,85 m (W-097)")
+O("O1-14", "S1-01", *_C[2], "okno", "BC1", 1.50, 0.70, ow("F"), "screen_zip",
+  uwagi="boks C — kwatera wsch. (stała); dolna część stała VSG do 0,85 m (W-097)")
 O("O1-02", "S1-02", 1.20, 2.70, "okno", "OE1", 1.50, 0.85, RU, "zaluzja_zewn", uwagi="pokój rodzinny — wschód (parapet +4,00 > attyka garażu +3,85)")
 O("O1-03", "S1-03", 4.30, 5.20, "okno", "ON2", 0.60, 1.60, ow("U"), "brak", uwagi="łazienka dzieci")
 O("O1-04", "S1-03", 10.40, 11.60, "okno", "ON3", 0.60, 1.60, ow("U"), "brak", uwagi="pralnia")
