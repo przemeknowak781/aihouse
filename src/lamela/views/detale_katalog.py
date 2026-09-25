@@ -1538,3 +1538,110 @@ def _rura_opisy(det: Detal, g: dict) -> Detal:
     det.uwagi.append(f"{r.get('id', 'RS')}: {r.get('opis', '')}; odpływ do zbiornika — sieć KD wg PZT / PT-IS "
                      "(zagłębienie ≥ h_z 0,8 m lub w strefie izolacji obwodowej)")
     return det
+
+
+# ================================================================================================ D — próg DZ2 garażu
+def teren_projektowany(m, xy) -> float | None:
+    """Rzędna terenu projektowanego (względna) w punkcie układu budynku — z modelu działki (TIN), albo None."""
+    if getattr(m, "dz", None) is None:
+        return None
+    try:
+        from types import SimpleNamespace
+        from .site_data import SiteData
+        s = SiteData(SimpleNamespace(model=m, cfg={}))
+        h = s.H_proj(s.P([tuple(xy)]))
+        return None if h is None else float(h[0]) - s.zero_abs
+    except Exception:          # pragma: no cover — model działki niepełny
+        return None
+
+
+@rodzaj("prog_dz2", "DZ2")
+def detal_prog_dz2(m, opts: dict) -> Detal:
+    """Drzwi boczne garażu (nieogrzewany) przy terenie podniesionym: próg na podwalinie, uszczelnienie KMB/EPDM
+    wywinięte pod profil, odwodnienie liniowe przed drzwiami na całą szerokość, nawierzchnia ze spadkiem od budynku."""
+    sym = opts.get("symbol", "DZ2")
+    o = next((o for o in m.otwory() if o.raw.get("symbol") == sym), None)
+    sz = o.sciana.przegroda_kod if o is not None and o.sciana is not None else "SZ1"
+    gar = next((p for p in m.pomieszczenia("P0") if (p.raw or {}).get("rodzaj") == "garaz"), None)
+    z_f = float((gar.raw or {}).get("rzedna", -0.10)) if gar is not None else -0.10
+    pg = (gar.raw or {}).get("podloga", "POD-G") if gar is not None else "POD-G"
+    tz_abs = None
+    if o is not None and o.sciana is not None:
+        s_ = o.sciana
+        t_ = (s_.p2 - s_.p1) / max(s_.L, 1e-9)
+        mid = s_.p1 + t_ * (float(o.raw.get("odl", 0)) + float(o.szer) / 2)
+        n_out = s_.n * (1 if s_.wnetrze == "prawa" else -1)
+        tz_abs = teren_projektowany(m, mid + n_out * 0.6)
+    tz = (tz_abs if tz_abs is not None else teren(m)) - z_f          # teren wzgl. posadzki garażu (y = 0)
+    det = Detal(m, "D-15", f"Próg drzwi {sym} garażu — odwodnienie liniowe i uszczelnienie", (), 10, z0=z_f)
+    Ws = det.warstwy(sz)
+    ks = next(i for i, w in enumerate(Ws) if w["konstr"])
+    xs1 = sum(w["d"] for w in Ws[:ks + 1])
+    x_out = sum(w["d"] for w in Ws)
+    d_f, ws = osadzenie(m, sz)
+    xf0, xf1 = xs1 - ws, xs1 - ws + d_f
+    xL, xR, yT, yB = -0.30, 1.00, 0.35, -1.00
+    det.okno = (xL, yB, xR, yT)
+    P = plyta_fund(det, pg, xs1, xL, xR, yB, tz, x_podl=xf0, x_sbs=xs1)
+    y_pl = P["y_pl"]
+    xp1 = xf1 + 0.03
+    y_kr = min(tz, -0.03)                                    # ruszt odwodnienia (≥ 3 cm poniżej progu)
+    det.rect(xs1, P["y_zb"], xs1 + P["d_x"], y_pl, P["m_x"])                          # XPS na czole płyty
+    det.rect(xp1, y_pl, xs1 + P["d_x"], -0.005, P["m_x"])                             # XPS przed podwaliną
+    det.rect(xf0, y_pl, xp1, 0.0, "PODWALINA")
+    det.rect(xf0, 0.0, xf1, 0.08, "RAMA_ALU")
+    det.rect(xf0 + 0.015, 0.08, xf0 + 0.06, yT, "SKLEJKA")                               # skrzydło (przekrój)
+    xk0, xk1 = xs1 + P["d_x"] + 0.005, xs1 + P["d_x"] + 0.135
+    det.poly([(xk0, y_kr), (xk1, y_kr), (xk1, y_kr - 0.14), (xk0, y_kr - 0.14)], "KORYTKO")
+    det.otwor(xk0 + 0.012, y_kr - 0.125, xk1 - 0.012, y_kr - 0.004)
+    x_n = xk1 + 0.005
+    det.poly([(x_n, y_kr - 0.003), (xR + 0.1, y_kr - 0.003 - 0.02 * (xR + 0.1 - x_n)),
+              (xR + 0.1, y_kr - 0.053 - 0.02 * (xR + 0.1 - x_n)), (x_n, y_kr - 0.053)], "PLYTA_BET")
+    det.poly([(x_n, y_kr - 0.053), (xR + 0.1, y_kr - 0.053 - 0.02 * (xR + 0.1 - x_n)),
+              (xR + 0.1, y_kr - 0.33 - 0.02 * (xR + 0.1 - x_n)), (xs1 + P["d_x"], y_kr - 0.33),
+              (xs1 + P["d_x"], y_kr - 0.14), (x_n, y_kr - 0.14)], "KRUSZYWO")
+    return _prog_dz2_opisy(det, dict(P=P, sz=sz, pg=pg, sym=sym, o=o, xs1=xs1, x_out=x_out, xf0=xf0, xf1=xf1, xp1=xp1,
+                                     y_kr=y_kr, xk0=xk0, xk1=xk1, x_n=x_n, tz=tz, z_f=z_f, tz_abs=tz_abs,
+                                     xL=xL, xR=xR, yT=yT, yB=yB))
+
+
+def _prog_dz2_opisy(det: Detal, g: dict) -> Detal:
+    m = det.model
+    P, xs1, xf0, xf1, xp1, y_kr = g["P"], g["xs1"], g["xf0"], g["xf1"], g["xp1"], g["y_kr"]
+    xL, xR, yT, yB = g["xL"], g["xR"], g["yT"], g["yB"]
+    y_pl = P["y_pl"]
+    h_c = -g["tz"]                                                    # cokół: posadzka – teren (model)
+    det.linia("H", [(xs1 + 0.003, P["y_zb"]), (xs1 + 0.003, y_pl + 0.002), (xp1 + 0.002, y_pl + 0.002),
+                    (xp1 + 0.002, 0.0)], "KMB / taśma EPDM: czoło płyty → podwalina → pod profil progowy")
+    det.linia("T_out", [(xp1 + 0.003, -0.02), (xp1 + 0.003, 0.003), (xf1 + 0.002, 0.003), (xf1 + 0.002, 0.04)])
+    det.polaczenie("H", [(xf1, 0.003), (xf1, yT)])
+    det.linia("S", [(xL, y_pl - 0.004), (xf0 - 0.0015, y_pl - 0.004)])
+    det.linia("T_in", [(xf0 - 0.0015, 0.04), (xf0 - 0.0015, y_pl - 0.004)])
+    for p1, p2 in (((xf0, yT), (xf1 + 0.02, yT)), ((xL, yB), (xR, yB)), ((xL, 0.0), (xL, yB)), ((xR, y_kr), (xR, yB))):
+        det.przerwa(p1, p2)
+    o = g["o"]
+    det.opis([((xf0 + xf1) / 2, 0.25)], [f"drzwi {g['sym']} {o.szer:.2f} × {o.wys:.2f} m (garaż nieogrzewany), "
+                                         "próg z uszczelką szczotkową / opadającą".replace(".", ",") if o else "drzwi"])
+    det.opis([(xf1 + 0.002, 0.02)], ["taśma EPDM rama–podwalina, zakład ≥ 50 mm na KMB czoła płyty"])
+    det.opis([(xp1 - 0.03, y_pl / 2)], [f"podwalina progowa XPS 300 / PUR-GF — wys. {mm(-y_pl)} mm"])
+    det.opis([((g["xk0"] + g["xk1"]) / 2, y_kr - 0.03)],
+             ["odwodnienie liniowe przed drzwiami na całą szerokość (+ 0,20 m z każdej strony), ruszt klasy B125, "
+              f"≥ 30 mm poniżej progu, odpływ → kolektor KD-E (ZALECENIE — brak w modelu działki)"])
+    det.opis([(g["x_n"] + 0.35, y_kr - 0.03 - 0.02 * 0.35)],
+             ["nawierzchnia z płyt betonowych 50 mm na podsypce, spadek ≥ 2 % od budynku"])
+    det.opis([(g["x_n"] + 0.55, y_kr - 0.20)], ["podbudowa z kruszywa 0/31,5 (drenująca) na geowłókninie"])
+    det.opis([(xs1 + 0.003, P["y_zb"] + 0.05)], ["izolacja pionowa KMB na czole płyty (bez membrany na płycie "
+                                                 "garażu — POD-G)"])
+    det.opis_stosu(P["st"][:P["ki"] + 1], "x", -0.18, odwroc=True, wyjscie=(-0.18, yB - 0.03),
+                   tytul=f"{g['pg']} — posadzka garażu")
+    det.rzedna((xL + 0.06, 0.0), 0.0, "wyk", "right")
+    det.rzedna((xR - 0.05, g["tz"]), g["tz"], "wyk", "left",
+               tekst=None)
+    det.wymiar([(xp1 + 0.25, g["tz"]), (xp1 + 0.25, 0.0)], xp1 + 0.27, "v")
+    det.spadek((g["x_n"] + 0.10, y_kr + 0.02), (g["x_n"] + 0.30, y_kr + 0.016), 2.0)
+    zr = "teren projektowany z modelu działki (TIN)" if g["tz_abs"] is not None else "teren wg energia.rzedna_terenu"
+    det.uwagi.append(f"{g['sym']}: posadzka garażu {fmt_z(g['z_f'])}, {zr} {fmt_z(g['z_f'] + g['tz'])} → cokół "
+                     f"{mm(h_c)} mm < 150 mm (DIN 18533-1 / 18531-5: ≥ 150 mm; redukcja do ≥ 50 mm tylko z "
+                     "odwodnieniem liniowym przed drzwiami) — wymagane odwodnienie liniowe + spadek 2 % od budynku; "
+                     "alternatywa: obniżenie terenu przed DZ2 o ≥ 0,10 m (niecka NT-E) — REKOMENDACJE R-W4")
+    return det

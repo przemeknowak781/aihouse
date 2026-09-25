@@ -108,3 +108,16 @@ Lista generowana automatycznie przez `lamela.views.konstrukcja` z: (1) braków z
 - Biblioteka (uwaga analizy): PL-E: podpora punktowa SL2 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
 - Biblioteka (uwaga analizy): PL-E: podpora punktowa SL3 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
 - Biblioteka (uwaga analizy): PL-E: podpora punktowa SL4 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
+
+## Kontrola zbrojenia — pozycje niespełnione (szczegóły: raport kontroli zbrojenia)
+
+- PF1 / strefa S1 (płyta) — przekrój niewystarczający (poz. MES-PF): A_s,prov = 0 < max(A_s,req; A_s,min) = 1 — M_Ed = 251 kNm/m > M_lim — wymagana wysokość h ≥ 0.26 m (obecnie 0.25 m) [WYMAGA ZMIANY MODELU]
+- ST2Z / nad podporą S1-04 — góra x (poz. 2.2): A_s,prov = 2513 < max(A_s,req; A_s,min) = 15767 mm²/m Zbrojenie na zginanie (η = 588%); Rysy: średnica prętów (tabl. 7.2N) (η = 1600000000%)
+- ST2Z / nad podporą N16 — góra x (poz. 2.2): A_s,prov = 2513 < max(A_s,req; A_s,min) = 15767 mm²/m Zbrojenie na zginanie (η = 588%); Rysy: średnica prętów (tabl. 7.2N) (η = 1600000000%)
+- N-O0-02 / dołem (przęsło) (poz. 6.2): Nośność krzyżulców betonowych (η = 122%); Nośność strzemion (η = 216%); pręty dolne w 2 warstwach (3 + 3); A_s > A_s,max = 1584
+- N-O0-02 / górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) (poz. 6.2): A_s,prov = 157 < max(A_s,req; A_s,min) = 283 mm² 
+- N-O0-03 / dołem (przęsło) (poz. 6.3): Ugięcie długotrwałe (quasi-stała) ≤ L/250 (η = 146%); pręty dolne w 2 warstwach (3 + 1)
+- N-O0-11 / dołem (przęsło) (poz. 6.11): Nośność strzemion (η = 107%); Ugięcie długotrwałe (quasi-stała) ≤ L/250 (η = 216%); pręty dolne w 2 warstwach (3 + 3); A_s > A_s,max = 1584
+- N-O0-11 / górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) (poz. 6.11): A_s,prov = 157 < max(A_s,req; A_s,min) = 283 mm² 
+- N-O0-05 / dołem (przęsło) (poz. 6.5): Ugięcie długotrwałe (quasi-stała) ≤ L/250 (η = 228%); pręty dolne w 2 warstwach (3 + 2)
+- N-O0-05 / górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) (poz. 6.5): A_s,prov = 157 < max(A_s,req; A_s,min) = 236 mm² 

@@ -131,6 +131,13 @@ przegrody:
       - {mat: GK, d: 0.025}
       - {mat: WELNA_035, d: 0.075, konstrukcyjna: true}
       - {mat: GK, d: 0.025}
+  DZ18A:
+    nazwa: 'Ścianka działowa akustyczna pom. technicznego z centralą (P2): silikat 18 kl. 15 na zaprawie cienkowarstwowej, tynk gipsowy obustronnie, bez funkcji nośnej, styk ze stropem wypełniony elastycznie; cel R''A1 ≥ 50 dB do sprawdzenia w PT (audyt A3 I-8; W-066, W-230)'
+    typ: scianka_dzialowa
+    warstwy:
+      - {mat: TYNK_GIPS, d: 0.015}
+      - {mat: SIL18, d: 0.18, konstrukcyjna: true}
+      - {mat: TYNK_GIPS, d: 0.015}
   GK10:
     nazwa: 'Obudowa szachtu SI: 2 × GKF 12,5 + profil CW 50 z wełną + 2 × GKF 12,5 (EI 30)'
     typ: scianka_dzialowa
@@ -316,9 +323,9 @@ sciany:
   - {id: S2-10, kond: P2, przegroda: SW18, os: [[5.875, 5.125], [5.875, 8.75]], wnetrze: srodek, z_od: null, z_do: null, uwagi: oś C — klatka}
   - {id: S2-11, kond: P2, przegroda: SCZB15, os: [[7.19, 5.125], [7.19, 7.47]], wnetrze: srodek, z_od: null, z_do: null, uwagi: ściana środkowa schodów ŻB 15 (do stropodachu D1 i podciągu B10)}
   - {id: S2-12, kond: P2, przegroda: DZ12, os: [[3.575, 0.0], [3.575, 5.125]], wnetrze: srodek, z_od: null, z_do: null, uwagi: sypialnia / garderoba}
-  - {id: S2-13, kond: P2, przegroda: DZ12, os: [[5.875, 0.0], [5.875, 2.625]], wnetrze: srodek, z_od: null, z_do: null, uwagi: garderoba / pom. techniczne}
+  - {id: S2-13, kond: P2, przegroda: DZ18A, os: [[5.875, 0.0], [5.875, 2.625]], wnetrze: srodek, z_od: null, z_do: null, uwagi: garderoba / pom. techniczne — silikat 18 akustyczny (A3 I-8)}
   - {id: S2-18, kond: P2, przegroda: DZ12, os: [[5.875, 2.625], [5.875, 5.125]], wnetrze: srodek, z_od: null, z_do: null, uwagi: garderoba / hol}
-  - {id: S2-14, kond: P2, przegroda: DZ12, os: [[8.5, 0.0], [8.5, 2.625]], wnetrze: srodek, z_od: null, z_do: null, uwagi: pom. techniczne / gabinet}
+  - {id: S2-14, kond: P2, przegroda: DZ18A, os: [[8.5, 0.0], [8.5, 2.625]], wnetrze: srodek, z_od: null, z_do: null, uwagi: 'pom. techniczne / gabinet — silikat 18 akustyczny (A3 I-8: centrala pracuje całą dobę, gabinet może służyć do spania)'}
   - {id: S2-19, kond: P2, przegroda: DZ12, os: [[8.5, 2.625], [8.5, 5.125]], wnetrze: srodek, z_od: null, z_do: null, uwagi: hol / gabinet}
   - {id: S2-15, kond: P2, przegroda: DZ12, os: [[5.875, 2.625], [8.5, 2.625]], wnetrze: srodek, z_od: null, z_do: null, uwagi: pom. techniczne / hol}
   - {id: S2-16, kond: P2, przegroda: GK10, os: [[5.32, 5.125], [5.32, 6.4]], wnetrze: srodek, z_od: null, z_do: null, uwagi: obudowa szachtu SI}
@@ -345,11 +352,11 @@ otwory:
   - {id: O0-17, sciana: S0-09, symbol: D3, typ: drzwi, odl: 0.21, szer: 0.8, wys: 2.0, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: spiżarnia pod biegiem 2 (przeszczep J2)}
   - {id: O0-18, sciana: S0-10, symbol: OT1, typ: otwor, odl: 0.4, szer: 1.5, wys: 2.4, parapet: 0.0, uwagi: hol → pas komunikacyjny przy schodach / strefa dzienna}
   - {id: O0-19, sciana: S0-20, symbol: D2, typ: drzwi, odl: 0.21, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: na_zewn, rodzaj: R}, uwagi: 'WC gościnne — na zewnątrz, kratka ≥ 0,022 m²'}
-  - {id: O0-20, sciana: S0-21, symbol: DS1, typ: drzwi, odl: 0.275, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: na_zewn, rodzaj: R}, uwagi: 'drzwi szklane VSG w osi wejścia (x ≈ 10,60), otwierane do holu (audyt A2 D-4)'}
+  - {id: O0-20, sciana: S0-21, symbol: DS1, typ: drzwi, odl: 0.275, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: na_zewn, rodzaj: R}, uwagi: 'drzwi szklane VSG w osi wejścia (x ≈ 10,60), otwierane do holu (audyt A2 D-4, A3 D-2 — śluza wiatrołapu), zawias przy x 10,15 (łuk x 10,15–11,00 rozłączny z łukiem DG2 O0-24)'}
   - {id: O0-21, sciana: S0-15, symbol: D1, typ: drzwi, odl: 0.35, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: 'przedsionek → kuchnia; przesunięte do fasady (przeszczep J1) — ciągła zabudowa kuchni y 1,40–5,02'}
   - {id: O0-22, sciana: S0-17, symbol: DG1, typ: drzwi, odl: 3.875, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: 'garaż → przedsionek: szczelne, samozamykacz, U ≤ 1,3 (W-113, W-244)'}
   - {id: O0-24, sciana: S0-16, symbol: DG1, typ: drzwi, odl: 2.725, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: 'DG2 garaż → hol 0.02 (audyt A3 I-4, runda 2): codzienne wejście rodziny z garażu do holu i schodów z pominięciem strefy roboczej kuchni; stalowe ocieplone, szczelne, uszczelka obwodowa + próg, samozamykacz, U ≤ 1,3 (W-113, W-244); otwierane do holu (auto na MP1 nie blokuje skrzydła), zawias przy y 6,50 — otwarte skrzydło parkuje przy ściance szklanej S0-21'}
-  - {id: O0-23, sciana: S0-18, symbol: D4, typ: drzwi, odl: 1.6, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: prawa, kierunek: do_wewn, rodzaj: R}, uwagi: 'pom. techniczne dostępne z domu przez przedsionek (poprawka J2); zawias przy y 1,60 — skrzydło nie wchodzi na moduł PC (A2 D-2)'}
+  - {id: O0-23, sciana: S0-18, symbol: D4, typ: drzwi, odl: 1.6, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: 'pom. techniczne dostępne z domu przez przedsionek (poprawka J2); zawias przy y 1,60 (strona „lewa” wg konwencji rzutu — A3 D-8), skrzydło otwarte wzdłuż y 1,60 nad RG, moduł PC przesunięty do x 15,45–16,05 poza łuk'}
   # --- P1
   - {id: O1-01, sciana: S1-01, symbol: BC1, typ: okno, odl: 4.1, szer: 2.29, wys: 1.5, parapet: 0.7, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: F}, oslona: screen_zip, uwagi: 'boks C — kwatera zach. (stała) w ramie wysuniętej 1,00 m; dolna część stała VSG do 0,85 m (W-097)', montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)', oslona_montaz: 'screen ZIP — kaseta w pasie górnym ramy C (PL-C2), poza izolacją'}
   - {id: O1-13, sciana: S1-01, symbol: BC1, typ: okno, odl: 6.49, szer: 2.24, wys: 1.5, parapet: 0.7, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: RU}, oslona: screen_zip, uwagi: 'boks C — kwatera środkowa RU (SL5–SL6); dolna część stała VSG do 0,85 m (W-097)', montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)', oslona_montaz: 'screen ZIP — kaseta w pasie górnym ramy C (PL-C2), poza izolacją'}
@@ -363,7 +370,7 @@ otwory:
   - {id: O1-08, sciana: S1-11, symbol: OT2, typ: otwor, odl: 6.0, szer: 2.4, wys: 2.4, parapet: 0.0, uwagi: hol → pokój rodzinny (galeria przy schodach)}
   - {id: O1-09, sciana: S1-05, symbol: D1, typ: drzwi, odl: 2.6, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: pokój dziecka 2}
   - {id: O1-10, sciana: S1-05, symbol: D2, typ: drzwi, odl: 4.2, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: na_zewn, rodzaj: R}, uwagi: łazienka dzieci — na zewnątrz}
-  - {id: O1-11, sciana: S1-06, symbol: D2, typ: drzwi, odl: 0.21, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: na_zewn, rodzaj: R}, uwagi: WC z natryskiem — na zewnątrz (pion K2 nad WC P0)}
+  - {id: O1-11, sciana: S1-06, symbol: D2, typ: drzwi, odl: 0.21, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: prawa, kierunek: na_zewn, rodzaj: R}, uwagi: 'WC z natryskiem — na zewnątrz (pion K2 nad WC P0); zawias od wsch. (x 9,61) — otwarte skrzydło 1,2 m od wyjścia z biegu 2 (A3 D-5)'}
   - {id: O1-12, sciana: S1-06, symbol: D1, typ: drzwi, odl: 1.65, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: pralnia z suszarnią}
   # --- P2
   - {id: O2-01, sciana: S2-01, symbol: OP1, typ: okno, odl: 1.0, szer: 3.0, wys: 2.0, parapet: 0.6, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: RU}, oslona: screen_zip, uwagi: sypialnia — południe (za lamelami), montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)', oslona_montaz: 'screen ZIP w szczelinie wentylowanej za lamelami, kaseta nadstawna przed membraną pod okapem PL-3 (bez podcięcia wełny)'}
@@ -374,10 +381,10 @@ otwory:
   - {id: O2-06, sciana: S2-05, symbol: ON2, typ: okno, odl: 3.3, szer: 0.9, wys: 0.6, parapet: 1.6, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: U}, oslona: brak, uwagi: łazienka rodziców, montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)'}
   - {id: O2-07, sciana: S2-05, symbol: ON4, typ: okno, odl: 0.4, szer: 1.7, wys: 1.5, parapet: 0.9, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: U}, oslona: brak, uwagi: klatka schodowa — północ (nad biegami), montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)'}
   - {id: O2-08, sciana: S2-12, symbol: D1, typ: drzwi, odl: 3.9, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: garderoba → sypialnia}
-  - {id: O2-09, sciana: S2-18, symbol: D1, typ: drzwi, odl: 1.275, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: hol → garderoba (przedpokój apartamentu)}
+  - {id: O2-09, sciana: S2-18, symbol: D1, typ: drzwi, odl: 1.275, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: na_zewn, rodzaj: R}, uwagi: hol → garderoba (przedpokój apartamentu); otwierane do holu 2.01 — łuk poza łukiem O2-10 i poza wyjściem z biegu 2 (A3 D-3)}
   - {id: O2-10, sciana: S2-09, symbol: D2, typ: drzwi, odl: 0.325, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: na_zewn, rodzaj: R}, uwagi: garderoba → łazienka rodziców (na zewnątrz)}
   - {id: O2-11, sciana: S2-19, symbol: D1, typ: drzwi, odl: 1.275, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: hol → gabinet}
-  - {id: O2-12, sciana: S2-15, symbol: D4, typ: drzwi, odl: 0.325, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: na_zewn, rodzaj: R}, uwagi: 'hol → pom. techniczne (centrala reku, wyłaz na dach); otwierane do holu — front serwisowy centrali i drabina wolne (A2 D-3)'}
+  - {id: O2-12, sciana: S2-15, symbol: D4A, typ: drzwi, odl: 0.325, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: na_zewn, rodzaj: R}, uwagi: 'hol → pom. techniczne (centrala reku, wyłaz na dach); otwierane do holu — front serwisowy centrali i drabina wolne (A2 D-3)'}
 
 pomieszczenia:
   # --- P0
@@ -410,7 +417,7 @@ pomieszczenia:
   - {id: '2.02', kond: P2, nazwa: Sypialnia rodziców, punkt: [1.3, 2.4], wielobok: null, kategoria: podstawowa, pobyt_ludzi: true, posadzka: DESKA_DEB, sciany_wyk: TYNK_GIPS, sufit: TYNK_GIPS, temp: 20, went: {naw: 50, wyw: 0}, rodzaj: pokoj, uwagi: naroże S+W nad wspornikiem; okna za lamelami}
   - {id: '2.03', kond: P2, nazwa: Garderoba (przedpokój apartamentu), punkt: [4.7, 2.4], wielobok: null, kategoria: pomocnicza, pobyt_ludzi: false, posadzka: DESKA_DEB, sciany_wyk: TYNK_GIPS, sufit: TYNK_GIPS, temp: 20, went: {naw: 0, wyw: 0}, rodzaj: pomocnicze}
   - {id: '2.04', kond: P2, nazwa: Łazienka rodziców, punkt: [4.6, 7.5], wielobok: null, kategoria: pomocnicza, pobyt_ludzi: false, posadzka: GRES, sciany_wyk: PLYTKI_SC, sufit: SUF_GK, temp: 24, went: {naw: 0, wyw: 50}, rodzaj: lazienka, podloga: POD-1L, uwagi: nad łazienkami P1 i P0 (pion SI)}
-  - {id: '2.05', kond: P2, nazwa: Gabinet / pokój, punkt: [10.2, 2.4], wielobok: null, kategoria: podstawowa, pobyt_ludzi: true, posadzka: DESKA_DEB, sciany_wyk: TYNK_GIPS, sufit: TYNK_GIPS, temp: 20, went: {naw: 40, wyw: 0}, rodzaj: pokoj}
+  - {id: '2.05', kond: P2, nazwa: Gabinet / pokój gościnny okazjonalny, punkt: [10.2, 2.4], wielobok: null, kategoria: podstawowa, pobyt_ludzi: true, posadzka: DESKA_DEB, sciany_wyk: TYNK_GIPS, sufit: TYNK_GIPS, temp: 20, went: {naw: 40, wyw: 0}, rodzaj: pokoj, uwagi: bez sanitariatu na P2 poza apartamentem — stały 5. mieszkaniec w pokoju 0.10 z łazienką 0.09 (A3 D-7)}
   - {id: '2.06', kond: P2, nazwa: 'Klatka schodowa (wyjście z biegu 2, pustka)', punkt: null, wielobok: [[5.98, 5.23], [7.265, 5.23], [7.265, 5.02], [8.395, 5.02], [8.395, 8.645], [5.98, 8.645]], kategoria: ruchu, pobyt_ludzi: false, posadzka: DESKA_DEB, sciany_wyk: TYNK_GIPS, sufit: TYNK_GIPS, temp: 20, went: {naw: 0, wyw: 0}, rodzaj: komunikacja, uwagi: 'świetlik SW1 nad spocznikiem, okno pn. ON4; wyłączona z PU'}
   - {id: '2.07', kond: P2, nazwa: 'Pom. techniczne (centrala rekuperacyjna, wyłaz na dach)', punkt: [7.2, 1.3], wielobok: null, kategoria: techniczna, pobyt_ludzi: false, posadzka: GRES, sciany_wyk: TYNK_GIPS, sufit: TYNK_GIPS, temp: 16, went: {naw: 0, wyw: 0}, rodzaj: techniczne, podloga: POD-1L, uwagi: 'centrala 450 m³/h; wyłaz 0,90 × 0,90 m z drabiną (W-065)'}
   # --- P0
@@ -570,6 +577,7 @@ stolarka:
   D1P: {opis: 'drzwi przesuwne naścienne 0,90 × 2,10 (salon → przedpokój gościnny), prowadnica natynkowa po stronie salonu, skrzydło 1,00 × 2,15 z zakładem, uszczelka szczotkowa'}
   D3: {opis: 'drzwi spiżarni 0,80 × 2,00 z kratką'}
   D4: {opis: 'drzwi pom. technicznego 0,90 × 2,10 z kratką, akustyczne R_w ≥ 32 dB'}
+  D4A: {opis: 'drzwi pom. technicznego z centralą (P2) 0,90 × 2,10, akustyczne R_w ≥ 32 dB, BEZ kratki, uszczelka obwodowa i próg z uszczelką opadającą (A3 I-8; W-230)'}
   DS1: {opis: 'drzwi szklane VSG 0,90 × 2,10 w ściance wiatrołapu, oznakowane (W-067)'}
   OT1: {opis: 'otwór 1,50 × 2,40 bez stolarki'}
   OT2: {opis: 'otwór 2,40 × 2,40 bez stolarki'}
