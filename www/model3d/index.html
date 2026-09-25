@@ -303,7 +303,8 @@ function onLoaded(gltf) {
   ground.position.y = (tb && !tb.isEmpty() ? tb.min.y : bbox.min.y) - 0.3;
   // światła pomieszczeń (tryb wieczorny)
   roomLights.clear();
-  for (const r of meta.pomieszczenia || []) {
+  const rooms = [...(meta.pomieszczenia || [])].sort((a, b) => (b.pow || 0) - (a.pow || 0)).slice(0, 16);
+  for (const r of rooms) {
     const L = new THREE.PointLight(0xffc88a, 6, 9, 1.6);
     L.position.copy(B2T([r.xy[0], r.xy[1], r.z + Math.min(2.2, (r.wys || 2.6) - 0.3)]));
     L.userData.level = r.kond;

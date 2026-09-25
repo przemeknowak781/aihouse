@@ -1,5 +1,6 @@
 {
- "title": "Korekta Inwestora: „S” z przesuniętych brył, garaż w parterze — panel koncepcji uruchomiony ponownie",
+ "nr": 8,
+ "title": "Rejestr prawny A zweryfikowany; interaktywna przeglądarka 3D działa; koncepcja w toku",
  "stages": [
   [
    "Analiza szkicu — interpretacja v2 („S” z brył, garaż)",
@@ -52,5 +53,19 @@
   "Ostrożnie wg § 271 WT: odległości przeciwpożarowe zwiększone; PWP jeśli kubatura > 1000 m³ (§ 183).",
   "Interaktywna przeglądarka 3D działa (warstwy, przekrój, dzień/wieczór) — na modelu testowym; docelowo dla Domu LAMELA na stronie www.",
   "Koncepcja: W1 gotowy, W2 w toku, W3 w kolejce."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/docs/20_koncepcja/podglad_www_3d_test.png",
+   "caption": "Przeglądarka 3D www (model testowy)"
+  },
+  {
+   "path": "/home/user/aihouse/docs/20_koncepcja/W1/rzut_P1.png",
+   "caption": "W1: rzut I piętra"
+  },
+  {
+   "path": "/home/user/aihouse/docs/10_podstawy_prawne/grafiki/os_czasu_WT.png",
+   "caption": "Podstawa prawna WT (art. 102a PB)"
+  }
  ]
 }
