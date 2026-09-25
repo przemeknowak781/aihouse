@@ -37,6 +37,7 @@
   --d-ter: #3B352B; --d-gr: #2C312C; --d-bey: #252B2E; --d-lab: #E7E6E0; --d-lab2: #AAB0AB; --d-hi: #D9A774;
 }
 *, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 body {
   margin: 0; background: var(--grunt); color: var(--ink);

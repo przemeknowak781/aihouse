@@ -2,7 +2,7 @@
 
 Wygenerowano: 2026-09-25 skryptem `tools/audyt_wt.py` (uruchomienie: `python3 tools/audyt_wt.py`). Model: `model/budynek.yaml` (wersja 1.0, stadium: koncepcja ostateczna (synteza W2 + przeszczepy W1/W3 + poprawki J1–J3)), `model/dzialka.yaml`; wartości progowe z `docs/10_podstawy_prawne/wymagania.yaml` (418 wpisów). Model nie był modyfikowany.
 
-**Wynik kontroli automatycznych:** 0 × NIEZGODNE, 4 × UWAGA, 165 × OK, 2 × INFO.
+**Wynik kontroli automatycznych:** 0 × NIEZGODNE, 4 × UWAGA, 166 × OK, 2 × INFO.
 
 
 ## 1. Niezgodności i uwagi (z kontroli automatycznych)
@@ -22,7 +22,7 @@ Wygenerowano: 2026-09-25 skryptem `tools/audyt_wt.py` (uruchomienie: `python3 to
 | pow. zabudowy (1) obrys ścian zewn. wszystkich kondygnacji — A_z | 187,50 m² (11,7 %) | ≤ 480,00 m² | OK |
 | pow. zabudowy (2) kontrolnie z płytami wysuniętymi — A_z+ | 217,86 m² (13,6 %) | ≤ 480,00 m² | OK |
 | intensywność zabudowy — Σ pow. kondygnacji nadziemnych / pow. działki | 396,39 / 1600,00 = 0,248 | 0,05–0,80 | OK |
-| pow. biologicznie czynna (teren) — PBC | 1268,19 m² (79,3 %) | ≥ 800,00 m² | OK |
+| pow. biologicznie czynna (teren) — PBC | 1268,51 m² (79,3 %) | ≥ 800,00 m² | OK |
 | miejsca postojowe — liczba (garaż + zewn.) | 4 (2 w garażu) | ≥ 2 | OK |
 | kondygnacje nadziemne — liczba | 3 | ≤ 3 | OK |
 | D1 — spadek dachu | 2,0 % (1,1°) | ≤ 12° | OK |
@@ -32,12 +32,12 @@ Wygenerowano: 2026-09-25 skryptem `tools/audyt_wt.py` (uruchomienie: `python3 to
 | ogrodzenie [0.0, 50.0]→[17.6, 50.0] — wysokość (od drogi) | 1,50 | ≤ 1,60; ażurowe | OK |
 | ogrodzenie [18.6, 50.0]→[20.3, 50.0] — wysokość (od drogi) | 1,50 | ≤ 1,60; ażurowe | OK |
 | ogrodzenie [25.9, 50.0]→[32.0, 50.0] — wysokość (od drogi) | 1,50 | ≤ 1,60; ażurowe | OK |
-| wysokość zabudowy (upzp art. 2 pkt 30) — od najniższego terenu 101,32 do wyrzutnia (+10,000) | 10,33 m (od średniej 101,40: 10,25 m) | ≤ 11,00 (z rezerwą ≤ 10,70) | OK |
-| wysokość budynku wg WT §6 — teren przy wejściu O0-04: 101,32 → wierzch D1 z izol. (+9,626) | 9,96 m | ≤ 12,00 (N); ≤ 11,00 (MPZP) | OK |
+| wysokość zabudowy (upzp art. 2 pkt 30 lit. a — lamela.wskazniki) — od średniej t_śr = (101,29 + 101,48)/2 = 101,38 do czerpnia wentylacji (dachowa) (+10,000) | 10,27 m (informacyjnie od t_min 101,29: 10,36 m) | ≤ 11,00 (z rezerwą ≤ 10,70) | OK |
+| wysokość budynku wg WT §6 (lamela.wskazniki) — teren przy wejściu O0-03: 101,30 → wierzch D1 z izol. (+9,626) | 9,97 m | ≤ 12,00 (N); ≤ 11,00 (MPZP) | OK |
 
 Powierzchnie kondygnacji (obrys zewnętrzny): P0 181,78 m², P1 117,81 m², P2 96,80 m².
-PBC: teren 1268,19 m²; powierzchnie wyłączone 331,81 m²; rezerwa — dach zielony (50 %) 29,53 m² (nie wliczona).
-Teren przy obwodzie parteru: istniejący 101,33…101,48, projektowany 101,32…101,63 m n.p.m.; ±0,00 = 101,65 m n.p.m. Wejścia (teren niższy z istn./proj.): O0-03 101,35, O0-04 101,32, O0-06 101,35, O0-07 101,46, O0-08 101,46, O0-09 101,44, O0-11 101,34.
+PBC: teren 1268,51 m²; powierzchnie wyłączone 331,49 m²; rezerwa — dach zielony (50 %) 29,53 m² (nie wliczona).
+Teren na obwodzie ścian zewnętrznych (lamela.wskazniki — niższa z rzędnych istn./proj.): t_min 101,29, t_max 101,48, t_śr 101,38 m n.p.m.; ±0,00 = 101,65 m n.p.m.; najwyższy punkt: czerpnia wentylacji (dachowa) (+10,000); wysokość zabudowy 10,27 m (informacyjnie od t_min 10,36 m). WT §6: wejście O0-03, teren 101,30 m n.p.m. → 9,97 m.
 
 ## 3. Pomieszczenia — powierzchnie, wysokości, oświetlenie
 
@@ -57,7 +57,7 @@ Teren przy obwodzie parteru: istniejący 101,33…101,48, projektowany 101,32…
 | 0.10 | Pokój gościnny / gabinet | podstawowa | tak | 12,52 | 12,52 | 2,77 | — | O0-12 | 0,176 |
 | 0.11 | Przedsionek gospodarczy | ruchu | — | 7,18 | 7,18 | 2,75 | — | — | — |
 | 0.12 | Pomieszczenie techniczne | techniczna | — | 8,85 | 8,85 | 2,75 | — | — | — |
-| 0.13 | Garaż 2-stanowiskowy | pomocnicza | — | 37,42 | 37,42 | 2,85 | — | — | — |
+| 0.13 | Garaż 2-stanowiskowy | pomocnicza | — | 37,42 | 37,42 | 2,70 | — | — | — |
 | 1.01 | Hol | ruchu | — | 14,09 | 14,09 | 2,77 | — | — | — |
 | 1.02 | Pokój rodzinny / biblioteka (boks C) | podstawowa | tak | 28,36 | 28,36 | 2,77 | — | O1-01, O1-13, O1-14, O1-02 | 0,363 |
 | 1.03 | Pokój dziecka 1 | podstawowa | tak | 13,19 | 13,19 | 2,77 | — | O1-06 | 0,167 |
@@ -95,8 +95,8 @@ PU mieszkalna (podstawowa 158,71 + pomocnicza bez garażu 40,16 + komunikacja be
 | RS5 | rura spustowa zewn. | E | 5,61 | 4,00 |
 | S0-03 | ściana zewn. P0 (z otworami) | E | 5,73 | 4,00 |
 | PL-D | płyta wysunięta/okap/daszek | E | 5,73 | 4,00 |
-| D4/przelew@[18.465, 6.5] | przelew awaryjny (rzygacz ~0,15 m) | E | 5,79 | 4,00 |
-| D4/przelew@[18.465, 2.4] | przelew awaryjny (rzygacz ~0,15 m) | E | 5,79 | 4,00 |
+| D4/przelew@[18.465, 8.6] | przelew awaryjny (rzygacz ~0,15 m) | E | 5,79 | 4,00 |
+| D4/przelew@[18.465, 0.9] | przelew awaryjny (rzygacz ~0,15 m) | E | 5,79 | 4,00 |
 | D4 | dach z attyką | E | 5,94 | 4,00 |
 | PL-E | płyta wysunięta/okap/daszek | E | 10,60 | 4,00 |
 | T3 | taras naziemny/podest | E | 10,90 | 1,50 |
@@ -127,14 +127,14 @@ PU mieszkalna (podstawowa 158,71 + pomocnicza bez garażu 40,16 + komunikacja be
 | S0-07 | ściana zewn. P0 (z otworami) | W | 7,30 | 4,00 |
 | S1-04 | ściana zewn. P1 (z otworami) | W | 7,30 | 4,00 |
 | OB-A2 | płyta wysunięta/okap/daszek | W | 7,30 | 4,00 |
-| D2/przelew@[-0.09, 7.2] | przelew awaryjny (rzygacz ~0,15 m) | W | 7,36 | 4,00 |
+| D2/przelew@[-0.09, 8.2] | przelew awaryjny (rzygacz ~0,15 m) | W | 7,36 | 4,00 |
 | D2 | dach z attyką | W | 7,51 | 4,00 |
 | RS3 | rura spustowa zewn. | W | 7,94 | 4,00 |
-| D1/przelew@[2.0, 5.215] | przelew awaryjny (rzygacz ~0,15 m) | W | 9,45 | 4,00 |
 | SL1 | słup | W | 9,74 | 4,00 |
 | S2-06 | ściana zewn. P2 (bez otworów) | W | 11,18 | 3,00 |
 | PL-C1 | płyta wysunięta/okap/daszek | W | 11,20 | 4,00 |
 | PL-C2 | płyta wysunięta/okap/daszek | W | 11,20 | 4,00 |
+| D1/przelew@[3.785, 5.7] | przelew awaryjny (rzygacz ~0,15 m) | W | 11,24 | 4,00 |
 | SL7 | słup | W | 11,55 | 4,00 |
 | SL2 | słup | W | 11,64 | 4,00 |
 | S0-05 | ściana zewn. P0 (bez otworów) | W | 19,30 | 3,00 |
@@ -154,7 +154,7 @@ Najbardziej wysunięty ku drodze element budynku leży 0,95 m przed nieprzekracz
 | Wysokości | 0.09 Łazienka gościnna (natrysk) | h w świetle | 2,53 | ≥ 2,20 (went. mech.) | OK | WT §77 ust. 3 [W-052] |
 | Wysokości | 0.10 Pokój gościnny / gabinet | h w świetle | 2,77 | ≥ 2,50 (cel 2,70–2,80) | OK | WT §72 ust. 1 [W-050] |
 | Wysokości | 0.12 Pomieszczenie techniczne | h w świetle | 2,75 | ≥ 2,00 | OK | WT §97 ust. 1 [W-053] |
-| Wysokości | 0.13 Garaż 2-stanowiskowy | h w świetle | 2,85 | ≥ 2,20 | OK | WT §102 pkt 1 [W-110] |
+| Wysokości | 0.13 Garaż 2-stanowiskowy | h w świetle | 2,70 | ≥ 2,20 | OK | WT §102 pkt 1 [W-110] |
 | Wysokości | 1.02 Pokój rodzinny / biblioteka (boks C) | h w świetle | 2,77 | ≥ 2,50 (cel 2,70–2,80) | OK | WT §72 ust. 1 [W-050] |
 | Wysokości | 1.03 Pokój dziecka 1 | h w świetle | 2,77 | ≥ 2,50 (cel 2,70–2,80) | OK | WT §72 ust. 1 [W-050] |
 | Wysokości | 1.04 Pokój dziecka 2 | h w świetle | 2,77 | ≥ 2,50 (cel 2,70–2,80) | OK | WT §72 ust. 1 [W-050] |
@@ -247,17 +247,17 @@ Najbardziej wysunięty ku drodze element budynku leży 0,95 m przed nieprzekracz
 | Odległości | SL1 | słup → granica W | 9,74 m | ≥ 4,00 (założenie proj.); WT ≥ 1,50 | OK | WT §12 ust. 6 pkt 1 (płyty wysunięte traktowane jak okapy — interpretacja) [W-004]; TWARDE ZAŁOŻENIA |
 | Odległości | SL2 | słup → granica W | 11,64 m | ≥ 4,00 (założenie proj.); WT ≥ 1,50 | OK | WT §12 ust. 6 pkt 1 (płyty wysunięte traktowane jak okapy — interpretacja) [W-004]; TWARDE ZAŁOŻENIA |
 | Odległości | SL7 | słup → granica W | 11,55 m | ≥ 4,00 (założenie proj.); WT ≥ 1,50 | OK | WT §12 ust. 6 pkt 1 (płyty wysunięte traktowane jak okapy — interpretacja) [W-004]; TWARDE ZAŁOŻENIA |
-| Odległości | D1/przelew@[2.0, 5.215] | przelew awaryjny (rzygacz ~0,15 m) → granica W | 9,45 m | ≥ 4,00 (założenie proj.); WT ≥ 1,50 | OK | WT §12 ust. 6 pkt 1 (płyty wysunięte traktowane jak okapy — interpretacja) [W-004]; TWARDE ZAŁOŻENIA |
+| Odległości | D1/przelew@[3.785, 5.7] | przelew awaryjny (rzygacz ~0,15 m) → granica W | 11,24 m | ≥ 4,00 (założenie proj.); WT ≥ 1,50 | OK | WT §12 ust. 6 pkt 1 (płyty wysunięte traktowane jak okapy — interpretacja) [W-004]; TWARDE ZAŁOŻENIA |
 | Odległości | RS3 | rura spustowa zewn. → granica W | 7,94 m | ≥ 4,00 (założenie proj.); WT ≥ 1,50 | OK | WT §12 ust. 6 pkt 1 (płyty wysunięte traktowane jak okapy — interpretacja) [W-004]; TWARDE ZAŁOŻENIA |
-| Odległości | D2/przelew@[-0.09, 7.2] | przelew awaryjny (rzygacz ~0,15 m) → granica W | 7,36 m | ≥ 4,00 (założenie proj.); WT ≥ 1,50 | OK | WT §12 ust. 6 pkt 1 (płyty wysunięte traktowane jak okapy — interpretacja) [W-004]; TWARDE ZAŁOŻENIA |
+| Odległości | D2/przelew@[-0.09, 8.2] | przelew awaryjny (rzygacz ~0,15 m) → granica W | 7,36 m | ≥ 4,00 (założenie proj.); WT ≥ 1,50 | OK | WT §12 ust. 6 pkt 1 (płyty wysunięte traktowane jak okapy — interpretacja) [W-004]; TWARDE ZAŁOŻENIA |
 | Odległości | RS5 | rura spustowa zewn. → granica E | 5,61 m | ≥ 4,00 (założenie proj.); WT ≥ 1,50 | OK | WT §12 ust. 6 pkt 1 (płyty wysunięte traktowane jak okapy — interpretacja) [W-004]; TWARDE ZAŁOŻENIA |
-| Odległości | D4/przelew@[18.465, 6.5] | przelew awaryjny (rzygacz ~0,15 m) → granica E | 5,79 m | ≥ 4,00 (założenie proj.); WT ≥ 1,50 | OK | WT §12 ust. 6 pkt 1 (płyty wysunięte traktowane jak okapy — interpretacja) [W-004]; TWARDE ZAŁOŻENIA |
-| Odległości | D4/przelew@[18.465, 2.4] | przelew awaryjny (rzygacz ~0,15 m) → granica E | 5,79 m | ≥ 4,00 (założenie proj.); WT ≥ 1,50 | OK | WT §12 ust. 6 pkt 1 (płyty wysunięte traktowane jak okapy — interpretacja) [W-004]; TWARDE ZAŁOŻENIA |
+| Odległości | D4/przelew@[18.465, 8.6] | przelew awaryjny (rzygacz ~0,15 m) → granica E | 5,79 m | ≥ 4,00 (założenie proj.); WT ≥ 1,50 | OK | WT §12 ust. 6 pkt 1 (płyty wysunięte traktowane jak okapy — interpretacja) [W-004]; TWARDE ZAŁOŻENIA |
+| Odległości | D4/przelew@[18.465, 0.9] | przelew awaryjny (rzygacz ~0,15 m) → granica E | 5,79 m | ≥ 4,00 (założenie proj.); WT ≥ 1,50 | OK | WT §12 ust. 6 pkt 1 (płyty wysunięte traktowane jak okapy — interpretacja) [W-004]; TWARDE ZAŁOŻENIA |
 | MPZP | linia zabudowy | najdalej wysunięty element (+ = przekroczenie) | -0,95 m (T2) | ≤ 0,00 | OK | MPZP 3MN (fikcyjny) — nieprzekraczalna linia zabudowy od 1KDD; żaden element jej nie przekracza [W-006] |
 | MPZP | pow. zabudowy (1) obrys ścian zewn. wszystkich kondygnacji | A_z | 187,50 m² (11,7 %) | ≤ 480,00 m² | OK | MPZP 3MN × 1600,00 m² [W-030] |
 | MPZP | pow. zabudowy (2) kontrolnie z płytami wysuniętymi | A_z+ | 217,86 m² (13,6 %) | ≤ 480,00 m² | OK | rejestr D-06 |
 | MPZP | intensywność zabudowy | Σ pow. kondygnacji nadziemnych / pow. działki | 396,39 / 1600,00 = 0,248 | 0,05–0,80 | OK | MPZP 3MN; upzp art. 2 pkt 31–33 (nadziemna) [W-032] |
-| MPZP | pow. biologicznie czynna (teren) | PBC | 1268,19 m² (79,3 %) | ≥ 800,00 m² | OK | MPZP 3MN × 1600,00 m² [W-031]; opaska żwirowa wyłączona z PBC (ostrożnie); teren nad zbiornikiem ≈ 3,1 m² wyłączony (W-031) |
+| MPZP | pow. biologicznie czynna (teren) | PBC | 1268,51 m² (79,3 %) | ≥ 800,00 m² | OK | MPZP 3MN × 1600,00 m² [W-031]; opaska żwirowa wyłączona z PBC (ostrożnie); teren nad zbiornikiem ≈ 3,1 m² wyłączony (W-031) |
 | MPZP | miejsca postojowe | liczba (garaż + zewn.) | 4 (2 w garażu) | ≥ 2 | OK | MPZP 3MN; WT §18 ust. 2 [W-036] |
 | MPZP | kondygnacje nadziemne | liczba | 3 | ≤ 3 | OK | MPZP 3MN; warunek WT §213 pkt 1 lit. a [W-034] |
 | MPZP | D1 | spadek dachu | 2,0 % (1,1°) | ≤ 12° | OK | MPZP 3MN [W-035] |
@@ -269,8 +269,8 @@ Najbardziej wysunięty ku drodze element budynku leży 0,95 m przed nieprzekracz
 | MPZP | ogrodzenie [25.9, 50.0]→[32.0, 50.0] | wysokość (od drogi) | 1,50 | ≤ 1,60; ażurowe | OK | MPZP 3MN (ażurowe, bez prefabrykatów betonowych) [W-038] |
 | Zagospodarowanie | przesuwna @ [23.1, 50.0] | szerokość w świetle | 5,60 | ≥ 2,40 | OK | WT §43 [W-017] |
 | Zagospodarowanie | furtka @ [18.1, 50.0] | szerokość w świetle | 1,00 | ≥ 0,90 | OK | WT §43 [W-017] |
-| MPZP | wysokość zabudowy (upzp art. 2 pkt 30) | od najniższego terenu 101,32 do wyrzutnia (+10,000) | 10,33 m (od średniej 101,40: 10,25 m) | ≤ 11,00 (z rezerwą ≤ 10,70) | OK | MPZP 3MN; upzp art. 2 pkt 30 [W-033]; rejestr D-15 |
-| WT | wysokość budynku wg WT §6 | teren przy wejściu O0-04: 101,32 → wierzch D1 z izol. (+9,626) | 9,96 m | ≤ 12,00 (N); ≤ 11,00 (MPZP) | OK | WT §8 pkt 1 (lub ≤ 4 kondygnacje mieszkalne) [W-063]; [W-063] |
+| MPZP | wysokość zabudowy (upzp art. 2 pkt 30 lit. a — lamela.wskazniki) | od średniej t_śr = (101,29 + 101,48)/2 = 101,38 do czerpnia wentylacji (dachowa) (+10,000) | 10,27 m (informacyjnie od t_min 101,29: 10,36 m) | ≤ 11,00 (z rezerwą ≤ 10,70) | OK | MPZP 3MN; upzp art. 2 pkt 30 [W-033]; upzp (t.j. Dz.U. 2026 poz. 538) art. 2 pkt 30 lit. a; rejestr D-15 |
+| WT | wysokość budynku wg WT §6 (lamela.wskazniki) | teren przy wejściu O0-03: 101,30 → wierzch D1 z izol. (+9,626) | 9,97 m | ≤ 12,00 (N); ≤ 11,00 (MPZP) | OK | WT §8 pkt 1 (lub ≤ 4 kondygnacje mieszkalne) [W-063]; [W-063] |
 | Garaż | 0.13 | wymiary w świetle | 6,05 × 6,17 m | ≥ 5,60 × 6,00 | OK | WT §104 + §21 ust. 1 (0,3 + 2×2,5 + 0,3) [W-112]; brief §4 |
 | Garaż | O0-07 | brama w świetle | 5,00 × 2,25 | ≥ 2,30 × 2,00 | OK | WT §102 pkt 2 [W-111] |
 | Garaż | MP1 | stanowisko | 2,50 × 5,90 m | ≥ 2,50 × 5,00 | OK | WT §21 ust. 1 pkt 1 [W-014] |
@@ -302,6 +302,7 @@ Najbardziej wysunięty ku drodze element budynku leży 0,95 m przed nieprzekracz
 | Wentylacja | czerpnia dachowa | wysokość nad pokryciem (lokalnie, klin) | 0,424 m (pokrycie ≈ +9,576) | ≥ 0,40 | OK | WT §152 ust. 4 [W-166] |
 | Wentylacja | wyrzutnia dachowa | wysokość nad pokryciem (lokalnie, klin) | 0,495 m | ≥ 0,40 | OK | WT §152 ust. 7 (także nad punktami w promieniu 10 m) [W-167] |
 | Wentylacja | czerpnia ↔ wywiewka kanalizacyjna | odległość | 7,96 m | ≥ 6,00 | OK | WT §152 ust. 4 [W-166] |
+| Wentylacja | czerpnia ↔ wywiewka kanalizacyjna | odległość | 6,59 m | ≥ 6,00 | OK | WT §152 ust. 4 [W-166] |
 | Wentylacja | czerpnia ↔ wyrzutnia (dach) | odległość / wyrzutnia wyżej o | 10,15 m / 0,00 m | ≥ 10,00 m, albo ≥ 6,00 m przy wyrzutni ≥ 1,00 m wyżej (lub zestaw zblokowany) | OK | WT §152 ust. 10 [W-167]; R6-43 |
 | Wentylacja | wyrzutnia ↔ okno w dachu SW1 | odległość / wylot ponad oknem | 5,29 m / 0,25 m | 3–10 m ⇒ wylot ≥ 1,00 m nad górną krawędzią okna (≥ +10,75) | UWAGA | WT §152 ust. 12 [W-167]; R6-43 |
 | Wentylacja | wyrzutnia ↔ krawędź dachu nad oknami | odległość | 3,00 m | ≥ 3,00 | OK | WT §152 ust. 12 [W-167] |
@@ -309,10 +310,10 @@ Najbardziej wysunięty ku drodze element budynku leży 0,95 m przed nieprzekracz
 | Zagospodarowanie | PC-JZ (jedn. zewn. PC) | elewacja, przy której stoi jednostka | S (x 24,40, y 31,65 w ukł. działki; 0,75 m od lica) | N lub E (TWARDE ZAŁOŻENIA) | UWAGA | TWARDE ZAŁOŻENIA (energia i światło); W-024 (hałas) |
 | Zagospodarowanie | PC-JZ strefa R290 | otwory/wpusty/studzienki w strefie 1,0 m | brak | brak | OK | dane producentów (DTR); PN-EN 378-1+A1:2021-03 [W-156] |
 | Zagospodarowanie | retencja/zbiornik | odl. od granic / od budynku | min 10,60 / 5,70 m | ≥ 2,0 / ≥ 3,0 | OK | R8 3.5 [W-144] [W-144, W-145] |
-| Zagospodarowanie | retencja/rozsaczanie | odl. od granic / od budynku | min 8,60 / 12,70 m | ≥ 2,0 / ≥ 3,0 | OK | R8 3.5 [W-144] [W-144, W-145] |
+| Zagospodarowanie | retencja/rozsaczanie | odl. od granic / od budynku | min 8,10 / 12,70 m | ≥ 2,0 / ≥ 3,0 | OK | R8 3.5 [W-144] [W-144, W-145] |
 | Zagospodarowanie | miejsce na pojemniki | odl. od granic | S 48,60, E 14,80, N 0,10, W 14,00 | zabudowa jednorodzinna — odległości nieustalone (WT §23 ust. 4) | INFO | WT §22, §23 ust. 4 [W-016] |
-| Sąsiedztwo | dz. 123/3 | odl. budynek–budynek sąsiedni | 14,31 m | ≥ 8,00 (ppoż.); ≥ H = 10,33 (przesłanianie, uproszcz.) | OK | WT §271 ust. 1 [W-010]; WT §13, §60 |
-| Sąsiedztwo | dz. 123/5 | odl. budynek–budynek sąsiedni | 13,72 m | ≥ 8,00 (ppoż.); ≥ H = 10,33 (przesłanianie, uproszcz.) | OK | WT §271 ust. 1 [W-010]; WT §13, §60 |
-| Sąsiedztwo | dz. 118/2 | odl. budynek–budynek sąsiedni | 28,13 m | ≥ 8,00 (ppoż.); ≥ H = 10,33 (przesłanianie, uproszcz.) | OK | WT §271 ust. 1 [W-010]; WT §13, §60 |
-| Sąsiedztwo | dz. 118/3 | odl. budynek–budynek sąsiedni | 29,86 m | ≥ 8,00 (ppoż.); ≥ H = 10,33 (przesłanianie, uproszcz.) | OK | WT §271 ust. 1 [W-010]; WT §13, §60 |
+| Sąsiedztwo | dz. 123/3 | odl. budynek–budynek sąsiedni | 14,31 m | ≥ 8,00 (ppoż.); ≥ H = 10,27 (przesłanianie, uproszcz.) | OK | WT §271 ust. 1 [W-010]; WT §13, §60 |
+| Sąsiedztwo | dz. 123/5 | odl. budynek–budynek sąsiedni | 13,72 m | ≥ 8,00 (ppoż.); ≥ H = 10,27 (przesłanianie, uproszcz.) | OK | WT §271 ust. 1 [W-010]; WT §13, §60 |
+| Sąsiedztwo | dz. 118/2 | odl. budynek–budynek sąsiedni | 28,13 m | ≥ 8,00 (ppoż.); ≥ H = 10,27 (przesłanianie, uproszcz.) | OK | WT §271 ust. 1 [W-010]; WT §13, §60 |
+| Sąsiedztwo | dz. 118/3 | odl. budynek–budynek sąsiedni | 29,86 m | ≥ 8,00 (ppoż.); ≥ H = 10,27 (przesłanianie, uproszcz.) | OK | WT §271 ust. 1 [W-010]; WT §13, §60 |
 | WT | kubatura brutto (lamela, PN-ISO 9836) | V | 1354,5 m³ | > 1000 m³ ⇒ PWP (W-190); uprawnienia bez ogr. | INFO | WT §3 pkt 24; PB art. 15a [W-069] |

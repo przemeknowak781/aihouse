@@ -140,7 +140,7 @@
     ctl.update();
     rysuj();
     if (dalej) spoczynek = 0;
-    anim = (dalej || (ctl.enableDamping && spoczynek++ < 90)) ? requestAnimationFrame(petla) : null;
+    anim = (dalej || (ctl.enableDamping && spoczynek++ < 40)) ? requestAnimationFrame(petla) : null;
   }
   function budz() { spoczynek = 0; if (!anim) anim = requestAnimationFrame(petla); }
   ['pointerdown', 'wheel', 'touchstart'].forEach(function (ev) {
