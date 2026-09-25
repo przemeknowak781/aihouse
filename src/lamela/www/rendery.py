@@ -21,7 +21,7 @@ HERE = Path(__file__).resolve().parent / "render"
 # ujęcie → typ: '34' (3/4 z poziomu oczu) albo klucz widoku render.build_views; az — azymut kamery od środka
 # bryły [°]; obszar — gdzie może stać kamera ('dzialka' | 'droga'); data/godz — Słońce; f — ogniskowa [mm ekw.]
 UJECIA = {
-    "ogrod": dict(typ="34", az=212.0, obszar="dzialka", data="2026-06-21", godz="17:00", f=40.0),
+    "ogrod": dict(typ="34", az=206.0, obszar="dzialka", data="2026-06-21", godz="17:00", f=40.0),
     "ulica": dict(typ="34", az=28.0, obszar="droga", data="2026-06-21", godz="19:00", f=40.0),
     "lotniczy": dict(typ="a", data="2026-05-20", godz="12:30"),
     "aksonometria": dict(typ="e", data="2026-03-21", godz="12:00"),
@@ -151,10 +151,10 @@ def kamera_34(pkt: list, az: float, f_mm: float, W: int, H: int, obszar, z_ter: 
             if min(dep) <= 1.0:
                 continue
             tan_top = max((p[2] - ze) / q for p, q in zip(pkt, dep))
-            s = max(0.0, min(0.36, (tan_top * 1.14 / math.tan(math.radians(vfov) / 2) - 1) / 2))
+            s = max(0.0, min(0.42, (tan_top * 1.14 / math.tan(math.radians(vfov) / 2) - 1) / 2))
             cam["shift"] = round(s, 3)
             pr = rzut_punktow(cam, W, H, pkt)
-            if all(px is not None and 0.07 * W <= px <= 0.93 * W and 0.05 * H <= py <= 0.97 * H for px, py, _ok in pr):
+            if all(px is not None and 0.06 * W <= px <= 0.94 * W and 0.04 * H <= py <= 0.985 * H for px, py, _ok in pr):
                 cam["fov"] = round(vfov, 3)
                 cam["ogniskowa_mm"] = f
                 return cam

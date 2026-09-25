@@ -136,7 +136,9 @@ def _dalej(a, D, tr, glb, dist, assets, cache, teraz, t0) -> int:
     m = D["model"]
     pkt = punkty_bryly(D["ir"])
     z_ter = float(((D["ir"].meta or {}).get("dzialka") or {}).get("teren_z_budynek") or 0.0)
-    obszary = {"dzialka": m.dz.obrys.buffer(-1.8), "droga": m.dz.poly_bud(m.dz.raw["droga"]["linie_rozgraniczajace"]).buffer(-0.4)}
+    # kamera: na działce ≥ 1,8 m od granic (żywopłoty) albo po drugiej stronie ulicy (pas drogi + 4,6 m, poza działką)
+    droga = m.dz.poly_bud(m.dz.raw["droga"]["linie_rozgraniczajace"])
+    obszary = {"dzialka": m.dz.obrys.buffer(-1.8), "droga": droga.buffer(4.6).difference(m.dz.obrys.buffer(0.5))}
     plan = RN.plan_ujec(RN.UJECIA, RN.PROPORCJE, pkt, obszary, D["drzewa_bud"], z_ter)
     kam = {k: [v["cam"], [t[0] for t in v["pomin"]]] for k, v in plan.items()}
     klucz = RN.klucz_cache(wej, RN.UJECIA, RN.PROPORCJE, ss, extra=kam)
