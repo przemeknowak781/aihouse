@@ -1048,6 +1048,16 @@ Belka żelbetowa b × h = 20 × 30 cm, oś (10,09, 4,85) → (13,91, 4,85), L = 
 |---|---|---|---|---|---|
 | Rysy: średnica prętów (tabl. 7.2N) | φ = 14 mm | φ_s,max = 39 mm | 36% | spełniony | 7.3.3(2) |
 
+##### Równowaga statyczna (EQU) — belka B1 ze wspornikiem
+
+- Wsporniki belki: x < x₁ lub x > x_n = **x₁ = 0,00 m, x_n = 3,76 m, L = 3,82 m**
+- Reakcja EQU podpory S0-02 (x = 0,00 m): R = Σ(1,10·R_G⁻ + 0,90·R_G⁺) + 1,5·ΣR_Q⁻ (wsporniki i przęsła osobno) = **17,4** kN *(PN-EN 1990 tabl. A1.2(A) + NA)*
+- Reakcja EQU podpory SL1 (x = 3,76 m): R = Σ(1,10·R_G⁻ + 0,90·R_G⁺) + 1,5·ΣR_Q⁻ (wsporniki i przęsła osobno) = **35,6** kN *(PN-EN 1990 tabl. A1.2(A) + NA)*
+
+| Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
+|---|---|---|---|---|---|
+| EQU — brak odrywania podpór (R_EQU ≥ 0) | R_odr = 0,0 kN | R_EQU,min = 17,4 kN | 0% | spełniony | PN-EN 1990 tabl. A1.2(A) |
+
 #### Wnioski
 
 **Przyjęto:** Belka B1: 20×50 cm (z płytą), C30/37; dołem 2φ14, górą 2φ12, strzemiona φ8 co 34 cm (2-cięte).  
@@ -2751,7 +2761,7 @@ Słup przegubowo zamocowany na obu końcach (układ usztywniony płytą połącz
 | Interakcja N + M (6.61) | Σ = 0,147  | 1,0 = 1,000  | 15% | spełniony | (6.61) |
 | Interakcja N + M (6.62) | Σ = 0,146  | 1,0 = 1,000  | 15% | spełniony | (6.62) |
 
-> Połączenia (blacha podstawy, kotwy, głowica) — dobór w projekcie wykonawczym; przemieszczenie poziome ≤ H/150 (R5-71) przy układzie nieusztywnionym.
+> Kotwy blach (głowica, podstawa) i spoiny — dobór w projekcie wykonawczym (ETA/EN 1993-1-8); przemieszczenie poziome ≤ H/150 (R5-71) przy układzie nieusztywnionym.
 
 #### Wnioski
 
@@ -2805,7 +2815,7 @@ Słup przegubowo zamocowany na obu końcach (układ usztywniony płytą połącz
 | Interakcja N + M (6.61) | Σ = 0,119  | 1,0 = 1,000  | 12% | spełniony | (6.61) |
 | Interakcja N + M (6.62) | Σ = 0,118  | 1,0 = 1,000  | 12% | spełniony | (6.62) |
 
-> Połączenia (blacha podstawy, kotwy, głowica) — dobór w projekcie wykonawczym; przemieszczenie poziome ≤ H/150 (R5-71) przy układzie nieusztywnionym.
+> Kotwy blach (głowica, podstawa) i spoiny — dobór w projekcie wykonawczym (ETA/EN 1993-1-8); przemieszczenie poziome ≤ H/150 (R5-71) przy układzie nieusztywnionym.
 
 #### Wnioski
 
@@ -3672,13 +3682,13 @@ Element modelu: `L1` · maks. wykorzystanie nośności η = 133% · **WARUNKI NI
 
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
-| QA_pA | 1,51 | 6,7 |
+| G | 49,85 | 244,2 |
 | QA_pB | 2,57 | 11,6 |
 | QA | 3,92 | 18,3 |
-| S2 | 1,44 | 6,5 |
-| G | 49,85 | 244,2 |
 | H | 0,80 | 3,6 |
 | S1 | 1,44 | 6,5 |
+| S2 | 1,44 | 6,5 |
+| QA_pA | 1,51 | 6,7 |
 
 #### Obliczenia
 
@@ -3741,14 +3751,14 @@ Element modelu: `L2` · maks. wykorzystanie nośności η = 118% · **WARUNKI NI
 
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
+| G | 90,48 | 377,4 |
 | QA_pB | 7,35 | 29,1 |
 | QA | 17,03 | 61,5 |
-| S2 | 6,72 | 23,4 |
-| SB2 | 3,96 | 13,6 |
-| QA_pA | 0,00 | 0,0 |
-| G | 90,48 | 377,4 |
 | H | 1,52 | 5,5 |
 | S1 | 4,55 | 15,9 |
+| S2 | 6,72 | 23,4 |
+| QA_pA | 0,00 | 0,0 |
+| SB2 | 3,96 | 13,6 |
 
 #### Obliczenia
 
@@ -3811,13 +3821,13 @@ Element modelu: `L3` · maks. wykorzystanie nośności η = 119% · **WARUNKI NI
 
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
-| QA_pA | 0,00 | 2,5 |
+| G | 50,78 | 314,4 |
 | QA_pB | 3,74 | 11,7 |
 | QA | 3,90 | 27,7 |
-| S2 | 1,34 | 6,5 |
-| G | 50,78 | 314,4 |
 | H | 0,74 | 3,6 |
 | S1 | 1,34 | 6,5 |
+| S2 | 1,34 | 6,5 |
+| QA_pA | 0,00 | 2,5 |
 
 #### Obliczenia
 
@@ -3880,13 +3890,13 @@ Element modelu: `L4` · maks. wykorzystanie nośności η = 134% · **WARUNKI NI
 
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
-| QA_pA | 5,25 | 17,0 |
+| G | 52,08 | 271,2 |
 | QA_pB | 0,00 | 0,0 |
 | QA | 4,40 | 14,4 |
-| S2 | 1,46 | 7,4 |
-| G | 52,08 | 271,2 |
 | H | 0,81 | 4,1 |
 | S1 | 1,46 | 7,4 |
+| S2 | 1,46 | 7,4 |
+| QA_pA | 5,25 | 17,0 |
 
 #### Obliczenia
 
@@ -3949,13 +3959,13 @@ Element modelu: `L5` · maks. wykorzystanie nośności η = 96% · wszystkie war
 
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
-| QA_pA | 7,63 | 37,4 |
+| G | 123,00 | 687,3 |
 | QA_pB | 8,68 | 46,4 |
 | QA | 16,31 | 83,8 |
-| S2 | 5,23 | 29,4 |
-| G | 123,00 | 687,3 |
 | H | 2,90 | 16,4 |
 | S1 | 5,23 | 29,4 |
+| S2 | 5,23 | 29,4 |
+| QA_pA | 7,63 | 37,4 |
 
 #### Obliczenia
 

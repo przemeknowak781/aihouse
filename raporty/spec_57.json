@@ -1,4 +1,5 @@
 {
+ "nr": 57,
  "title": "Konstrukcja, runda 1 — przeliczenie: 147 pozycji, 0 niespełnionych; docisk do podłoża 91 % (było 114 %) → weryfikacja pętli",
  "stages": [
   [
@@ -52,6 +53,17 @@
  ],
  "notes": [
   "Wynik przeliczenia rundy 1 czeka na niezależną weryfikację pętli.",
-  "Nowe słupy ŻB SL10–SL13; osiadanie 35 mm ≤ 50 mm."
+  "Nowe słupy ŻB SL10–SL13; osiadanie 35 mm ≤ 50 mm.",
+  "NADZÓR (11:44): 2 agentów aktywnych, bez zastojów; najdłuższa bezczynność 2 min; zmiany w repo 1 min temu."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/projekt/04_PT_konstrukcja/rysunki/PT-BO-07_rzut_konstrukcji_stropu_nad_i_pietrem.png",
+   "caption": "PT-BO-07 rzut konstrukcji stropu nad I piętrem (runda 1)"
+  },
+  {
+   "path": "/home/user/aihouse/projekt/04_PT_konstrukcja/rysunki/PT-BO-12_zbrojenie_dolne_stropu_nad_i_pietrem.png",
+   "caption": "PT-BO-12 zbrojenie dolne stropu nad I piętrem (runda 1)"
+  }
  ]
 }

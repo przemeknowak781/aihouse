@@ -800,6 +800,12 @@
      "E": 14.0,
      "R": 38.5518,
      "eta": 0.3631
+    },
+    {
+     "opis": "EQU — brak odrywania podpór (R_EQU ≥ 0)",
+     "E": 0.0,
+     "R": 17.3539,
+     "eta": 0.0
     }
    ],
    "dane": {
