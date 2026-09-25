@@ -447,10 +447,10 @@ Obszar oddziaływania mieści się w całości na działce (W-012).
 | garaż (osobno) / pom. techniczne (osobno) / klatki | 37,42 / 16,10 / 3,51 m² | — | — |
 | strefa dzienna salon + jadalnia + kuchnia | 54,44 m² | ≥ 50 m² | ✓ |
 | powierzchnia zabudowy (obrysy kondygnacji) | 187,50 m² (11,72 %); z płytami 218,08 m² | ≤ 480 m² (30 %) | ✓ |
-| powierzchnia biologicznie czynna | 1 270,15 m² (79,38 %); rezerwa 50 % dachu zielonego 29,53 m² | ≥ 800 m² (50 %) | ✓ |
+| powierzchnia biologicznie czynna | 1 270,23 m² (79,39 %); rezerwa 50 % dachu zielonego 29,53 m² | ≥ 800 m² (50 %) | ✓ |
 | intensywność zabudowy (Σ brutto kondygnacji / działka) | 0,248 | 0,05–0,80 | ✓ |
-| kubatura brutto | 1 354,5 m³ | — (> 1000 m³ → PWP, W-190) | — |
-| wysokość zabudowy (upzp art. 2 pkt 30 lit. a; `lamela.wskazniki`): najwyższy punkt 10,000 (czerpnia wentylacji (dachowa)) − średnia z min./maks. terenu na obwodzie (-0,360 / -0,175 → -0,267; niższa z rzędnych istn./proj. — D-15); informacyjnie od t_min: 10,36 m | **10,27 m** | ≤ 11,00 m (rezerwa → 10,70) | ✓ |
+| kubatura brutto | 1 354,4 m³ | — (> 1000 m³ → PWP, W-190) | — |
+| wysokość zabudowy (upzp art. 2 pkt 30 lit. a; `lamela.wskazniki`): najwyższy punkt 10,200 (wyrzutnia wentylacji (dachowa, szczyt urządzenia)) − średnia z min./maks. terenu na obwodzie (-0,360 / -0,172 → -0,266; niższa z rzędnych istn./proj. — D-15); informacyjnie od t_min: 10,56 m | **10,47 m** | ≤ 11,00 m (rezerwa → 10,70) | ✓ |
 | wysokość budynku wg WT §6 (`lamela.wskazniki`): do najwyższego punktu pokrycia z klinem 9,626 − teren przy najniższym wejściu O0-03 -0,348 | 9,97 m | grupa N ≤ 12 m | ✓ |
 | kondygnacje nadziemne | 3 | ≤ 3 | ✓ |
 | miejsca postojowe (garaż + podjazd) | 4 | ≥ 2 | ✓ |
@@ -478,8 +478,8 @@ Obszar oddziaływania mieści się w całości na działce (W-012).
 | płyta WYL1 | 14,70 | 16,20 | 33,50 | 9,40 |
 | płyta PL-D | 20,20 | 5,72 | 31,40 | 11,60 |
 | taras T1 | 4,30 | 12,10 | 29,40 | 6,17 |
-| taras T2 | 17,40 | 12,70 | 41,75 | 0,95 |
-| taras T3 | 19,80 | 10,90 | 31,40 | 11,60 |
+| taras T2 | 17,50 | 12,70 | 41,75 | 0,95 |
+| taras T3 | 19,90 | 10,90 | 31,40 | 11,60 |
 | jednostka zewn. PC | 23,80 | 7,00 | 31,05 | 11,75 |
 
 **Okna / podłoga w pomieszczeniach na pobyt ludzi** (w świetle ościeżnic ≈ (szer − 0,14)(wys − 0,14); WT §57, W-080 ≥ 1/8):
