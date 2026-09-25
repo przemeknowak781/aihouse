@@ -71,3 +71,27 @@ Lista generowana automatycznie przez `lamela.views.konstrukcja` z: (1) braków z
 - Biblioteka (uwaga analizy): ST1: podpora punktowa SL4 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
 - Biblioteka (uwaga analizy): Grupa płyt PL-E: MES niewykonalny (MES płyty: za mało podpór) — pominięto
 - Biblioteka (uwaga analizy): Grupa płyt PL-DA: MES niewykonalny (MES płyty: za mało podpór) — pominięto
+
+## Kontrola zbrojenia — pozycje niespełnione (szczegóły: raport kontroli zbrojenia)
+
+- PF1 / strefa S1 (ZF1) — przekrój niewystarczający (poz. MES-PF): A_s,prov = 0 < max(A_s,req; A_s,min) = 1 — M_Ed = 2295 kNm/m > M_lim — wymagana wysokość h ≥ 0.65 m (obecnie 0.55 m) [WYMAGA ZMIANY MODELU]
+- PF1 / strefa S2 (SF2, SF3, ZF1, ZF7, ZF8, płyta) — przekrój niewystarczający (poz. MES-PF): A_s,prov = 0 < max(A_s,req; A_s,min) = 1 — M_Ed = 4758 kNm/m > M_lim — wymagana wysokość h ≥ 0.91 m (obecnie 0.70 m) [WYMAGA ZMIANY MODELU]
+- PF1 / strefa S3 (płyta) — przekrój niewystarczający (poz. MES-PF): A_s,prov = 0 < max(A_s,req; A_s,min) = 1 — M_Ed = 234 kNm/m > M_lim — wymagana wysokość h ≥ 0.25 m (obecnie 0.25 m) [WYMAGA ZMIANY MODELU]
+- PF1 / strefa S4 (płyta) — przekrój niewystarczający (poz. MES-PF): A_s,prov = 0 < max(A_s,req; A_s,min) = 1 — M_Ed = 387 kNm/m > M_lim — wymagana wysokość h ≥ 0.30 m (obecnie 0.25 m) [WYMAGA ZMIANY MODELU]
+- PF1 / strefa S5 (płyta) — przekrój niewystarczający (poz. MES-PF): A_s,prov = 0 < max(A_s,req; A_s,min) = 1 — M_Ed = 278 kNm/m > M_lim — wymagana wysokość h ≥ 0.27 m (obecnie 0.25 m) [WYMAGA ZMIANY MODELU]
+- SF1 / pogrubienie — siatka dolna (MES) (poz. 10.18): A_s,prov = 539 < max(A_s,req; A_s,min) = 8118 mm²/m MES: A_s,req = 8119 mm²/m — nie do rozmieszczenia (φ ≤ 20, s ≥ 7 cm); przekrój pogrubienia niewystarczający [WYMAGA ZMIANY MODELU]
+- SF2 / pogrubienie — siatka dolna (MES) (poz. 10.19): A_s,prov = 539 < max(A_s,req; A_s,min) = 7155 mm²/m MES: A_s,req = 7155 mm²/m — nie do rozmieszczenia (φ ≤ 20, s ≥ 7 cm); przekrój pogrubienia niewystarczający [WYMAGA ZMIANY MODELU]
+- ZF1 / żebro — dołem (MES: A_s,req·b) (poz. 10.2): w strefie żebra μ > μ_lim — pogłębić/poszerzyć żebro [WYMAGA ZMIANY MODELU]
+- ZF1 / żebro — górą (MES: A_s,req·b) (poz. 10.2): w strefie żebra μ > μ_lim — pogłębić/poszerzyć żebro [WYMAGA ZMIANY MODELU]
+- ZF7 / żebro — dołem (MES: A_s,req·b) (poz. 10.8): w strefie żebra μ > μ_lim — pogłębić/poszerzyć żebro [WYMAGA ZMIANY MODELU]
+- ZF7 / żebro — górą (MES: A_s,req·b) (poz. 10.8): w strefie żebra μ > μ_lim — pogłębić/poszerzyć żebro [WYMAGA ZMIANY MODELU]
+- ZF8 / żebro — dołem (MES: A_s,req·b) (poz. 10.9): w strefie żebra μ > μ_lim — pogłębić/poszerzyć żebro [WYMAGA ZMIANY MODELU]
+- ZF8 / żebro — górą (MES: A_s,req·b) (poz. 10.9): w strefie żebra μ > μ_lim — pogłębić/poszerzyć żebro [WYMAGA ZMIANY MODELU]
+- ST2 / pole P2 — dół x (poz. 2.1): A_s,prov = 2513 < max(A_s,req; A_s,min) = 3344 mm²/m Zbrojenie na zginanie (η = 1594%); Rysy: średnica prętów (tabl. 7.2N) (η = 1600000000%)
+- ST2Z / pole P1 — dół x (poz. 2.2): A_s,prov = 2513 < max(A_s,req; A_s,min) = 66351 mm²/m Zbrojenie na zginanie (η = 2475%); Rysy: średnica prętów (tabl. 7.2N) (η = 1600000000%)
+- ST2Z / pole P1 — dół y (poz. 2.2): A_s,prov = 2513 < max(A_s,req; A_s,min) = 34316 mm²/m Zbrojenie na zginanie (η = 2475%); Rysy: średnica prętów (tabl. 7.2N) (η = 1600000000%)
+- PL-2 / pole P1 — dół x (poz. 3.1): A_s,prov = 2513 < max(A_s,req; A_s,min) = 38241 mm²/m Zbrojenie na zginanie (η = 1426%); Rysy: średnica prętów (tabl. 7.2N) (η = 1600000000%)
+- PL-2 / pole P1 — dół y (poz. 3.1): A_s,prov = 2513 < max(A_s,req; A_s,min) = 9501 mm²/m Zbrojenie na zginanie (η = 1426%); Rysy: średnica prętów (tabl. 7.2N) (η = 1600000000%)
+- ST2Z / nad podporą S1-03 — góra y (poz. 2.2): A_s,prov = 2513 < max(A_s,req; A_s,min) = 28097 mm²/m Zbrojenie na zginanie (η = 2475%); Rysy: średnica prętów (tabl. 7.2N) (η = 1600000000%)
+- PL-2 / wspornik — góra y (poz. 3.1): A_s,prov = 2513 < max(A_s,req; A_s,min) = 8770 mm²/m Zbrojenie na zginanie (η = 1426%); Rysy: średnica prętów (tabl. 7.2N) (η = 1600000000%)
+- B9 / dołem (przęsło) (poz. 5.8): Nośność krzyżulców betonowych (η = 103%); Nośność strzemion (η = 142%); 8Ø12 nie mieści się w jednej warstwie przy b = 25 cm (odstęp w świetle ≥ 21 mm — 8.2(2))

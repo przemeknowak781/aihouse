@@ -1,4 +1,5 @@
 {
+ "nr": 33,
  "title": "Runda 1 poprawek zakończona (A1/A2: 0 niezgodności WT/MPZP) · wykryto pominięcie audytu A3 → runda 2 uruchomiona · rysunki instalacji IS/IE gotowe (31 arkuszy)",
  "stages": [
   [
@@ -59,6 +60,17 @@
   "BŁĄD PROCESU wykryty przy kontroli: uwagi audytu A3 (funkcja; 1 krytyczna — wyspa kuchenna przed zlewem, 8 istotnych) nie trafiły do poprawek — lista w poleceniu była ucinana do 40 000 znaków (A1+A2 = 43 tys.). Runda 2 czyta raporty z plików w całości.",
   "Runda 2 (przepływ 6 agentów): funkcja (A3) → fizyka/woda/instalacje (weryfikacja §6, katalog mostków, K-1…K-11) → 3 niezależne weryfikacje → domknięcie.",
   "Instalacje IS/IE: 31 arkuszy wektorowych 1:50 (woda, kanalizacja, deszczówka, CO, wentylacja; oświetlenie, gniazda, teletechnika, PV, uziemienie, schematy RG/PC). Wykryto: PV mieści się 10 z 15 modułów → EP do ponownego wykazania; bilans wentylacji w modelu bez nawiewu do salonu; 5 pomieszczeń z niedoborem mocy podłogówki.",
-  "Analiza ryzyka piorunowego: LPS nie jest wymagany; uziom otokowy R ≈ 14,9 Ω; zasilanie 27 kW / 40 A, YKY 5×16, ΔU ≤ 2,98 %."
+  "Analiza ryzyka piorunowego: LPS nie jest wymagany; uziom otokowy R ≈ 14,9 Ω; zasilanie 27 kW / 40 A, YKY 5×16, ΔU ≤ 2,98 %.",
+  "NADZÓR (07:20): 4 agentów aktywnych, bez zastojów; najdłuższa bezczynność 1 min; zmiany w repo 1 min temu."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-14_schemat_rozdzielnicy_glownej_rg.png",
+   "caption": "PT-IE-14 — schemat ideowy rozdzielnicy RG (35 obwodów, RCBO 30 mA, SPD T1+T2, PWP)"
+  },
+  {
+   "path": "/home/user/aihouse/projekt/05_PT_instalacje_sanitarne/rysunki/PT-IS-07_odwodnienie_dachow_rzut_dachu.png",
+   "caption": "PT-IS-07 — odwodnienie dachów: wpusty, przelewy, rury spustowe; na fioletowo — braki modelu (odwodnienie płyt wysuniętych) → runda 2"
+  }
  ]
 }

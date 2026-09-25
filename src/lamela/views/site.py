@@ -324,7 +324,8 @@ def _labels_project(lab, s, W, used, detail=False, utilities=True):
         lz = s.linia_zabudowy
         a0 = np.asarray(lz.interpolate(min(1.0, lz.length * 0.05)).coords[0])
         lab.label(a0, ["nieprzekraczalna linia", "zabudowy (MPZP)"], h, "Z-LZ", color="#c00000",
-                  dists=(3.0, 6.0, 10.0, 15.0, 20.0), dirs=[(-1, 1), (-1, -1), (-1, 0), (0, -1), (1, -1)],
+                  dists=(3.0, 6.0, 10.0, 15.0, 20.0),
+                  dirs=None if detail else [(-1, 1), (-1, -1), (-1, 0), (0, -1), (1, -1)],
                   leader_from=2.0, leader_color="#c00000")
     for t in s.tarasy:
         pg = t["poly"].difference(s.p0)
@@ -346,7 +347,7 @@ def _labels_project(lab, s, W, used, detail=False, utilities=True):
                   dists=(1.0, 2.5, 4.0, 6.0, 9.0, 12.0))
     if s.pc is not None:
         L(np.asarray(s.pc["body"].centroid.coords[0]),
-                  ["PC — jedn. zewn.", f"strefa R290 r = {mm(s.pc['r'])} m"], h, dot=True)
+          ["PC (R290)"] if detail else ["PC — jedn. zewn.", f"strefa R290 r = {mm(s.pc['r'])} m"], h, dot=True)
     if s.zbiornik:
         V = s.zbiornik.get("V")
         L(s.zbiornik["xy"], [f"zbiornik retencyjny V = {fmt.num(float(V), 1)} m³" if V else "zbiornik"], h,
@@ -657,12 +658,8 @@ def _drain_labels(lab, s):
             (_line(o["pts"]) if o["typ"] == "opaska_zwirowa" else None)
         if g is None or g.is_empty:
             continue
-        if o["typ"] == "liniowe":
-            txt = [f"{o['id']} odwodn. liniowe", f"i = {fmt.num(float(o['spadek'] or 0) * 100, 1)}% → {o['odb']}"]
-        elif o["typ"] == "niecka" and o["geom"] is not None:
-            txt = [f"{o['id']} niecka trawiasta", f"i = {fmt.num(float(o['spadek'] or 0) * 100, 1)}%"]
-        elif o["typ"] == "opaska_zwirowa":
-            txt = [f"{o['id']} opaska żwirowa {fmt.num(float(o['szer'] or 0.5), 2)} m"]
+        if o["typ"] in ("liniowe", "opaska_zwirowa") or (o["typ"] == "niecka" and o["geom"] is not None):
+            txt = [o["id"]]           # typ, długość, spadek i odbiornik — w tabeli „Odwodnienie powierzchniowe”
         else:
             continue
         anchors = [np.asarray(g.interpolate(f, normalized=True).coords[0]) if hasattr(g, "interpolate") else
@@ -1000,6 +997,10 @@ def view_uzbrojenie(ctx, spec, scale, opts):
         if r["d"] < r["req"] + 2.0:
             a, b = nearest_points(r["a"].geom, Point(r["t"]["xy"]))
             D.place_dim(lab, (a.x, a.y), (b.x, b.y), shifts=[0.0])
+    for r in K.get("budynek", []):
+        if r["d"] < 2.0 and r["d"] > 0.05:
+            D.place_dim(lab, r["p1"], r["p2"], on_a=r["a"].geom, on_b=s.footprint.boundary, span=3.0, step=0.25,
+                        max_cost=10.0)
     _util_labels(lab, s, used)
     for o in s.obiekty.values():
         if win.contains(Point(o.xy)) and not o.id.upper().startswith("PC"):
@@ -1084,6 +1085,8 @@ def _tab_koord(K):
     for r in K["drzewa"]:
         rows.append([f"{_sid(r['a'])} – {r['t']['id']} (pień)", mm(r["d"]), mm(r["req"]), "od pnia*",
                      "TAK" if r["ok"] else "NIE"])
+    for r in K.get("budynek", []):
+        rows.append([f"{_sid(r['a'])} – budynek", mm(r["d"]), "—", "informacyjnie (lico ściany)", "—"])
     if not rows:
         rows.append(["—", "", "", "brak zbliżeń < 3 m", ""])
     return dict(title="KOORDYNACJA — ODLEGŁOŚCI POZIOME MIĘDZY SIECIAMI",

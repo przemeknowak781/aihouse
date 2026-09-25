@@ -796,6 +796,16 @@ def koordynacja(s: SiteData, odl_min: dict | None = None, retencja_min: dict | N
                 if not r["ok"]:
                     kol.append(dict(typ="sieć–drzewo", opis=f"{A.lit}–{t['id']}: {d:.2f} m < {rq_t[0]:.2f} m",
                                     p=np.asarray(nearest_points(A.geom, Point(t["xy"]))[0].coords[0]), src=rq_t[1]))
+    # sieć–budynek (informacyjnie): najmniejsza odległość poza strefą wejścia przewodu do budynku
+    bud = []
+    for A in proj:
+        g = A.geom.difference(s.footprint.buffer(0.6)) if A.geom.intersects(s.footprint) else A.geom
+        if g.is_empty:
+            continue
+        d = float(g.distance(s.footprint))
+        if d < 3.0:
+            q1, q2 = nearest_points(g, s.footprint)
+            bud.append(dict(a=A, d=d, p1=np.asarray(q1.coords[0]), p2=np.asarray(q2.coords[0])))
     # strefa R290: studzienki, wpusty, odwodnienia, rury spustowe, otwory parteru
     r290 = []
     if s.pc is not None:
@@ -833,4 +843,4 @@ def koordynacja(s: SiteData, odl_min: dict | None = None, retencja_min: dict | N
             if d < req - 1e-6:
                 kol.append(dict(typ="retencja", opis=f"{nm}–{what}: {d:.2f} m < {req:.2f} m", src="założenie proj.",
                                 p=np.asarray(nearest_points(g, other)[0].coords[0])))
-    return dict(pary=pary, skrzyzowania=skrz, kolizje=kol, drzewa=drz, r290=r290, retencja=ret)
+    return dict(pary=pary, skrzyzowania=skrz, kolizje=kol, drzewa=drz, r290=r290, retencja=ret, budynek=bud)

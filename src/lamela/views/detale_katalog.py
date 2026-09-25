@@ -856,14 +856,14 @@ def detal_wspornik_A(m, opts: dict) -> Detal:
     det.opis_stosu(det_stos_pod(det, suf, t, y_w), "x", -0.30, odwroc=False, wyjscie=(-0.30, yB - 0.02),
                    tytul=f"{suf} — sufit nad powietrzem zewnętrznym")
     det.opis([(0.65, (y_ps - t_w) / 2 - 0.05)], ["podsufitka jedna płaszczyzna pod wspornikiem A i pasem PL-2, "
-                                                  "czoło PL-2 obudowane blendą do spodu podsufitki (audyt A2 I-5)"])
+                                                  f"spód {fmt_z(det.z0 + y_ps)}; czoło PL-2 obudowane blendą do "
+                                                  "spodu podsufitki (audyt A2 I-5)"])
     det.opis_stosu([(a, b, w) for a, b, w in det_stos_pod(det, pod, y_f, 0.0)][:kp + 1], "x", -0.20,
                    wyjscie=(-0.20, yT + 0.03), tytul=f"{pod} — podłoga")
     det.wymiar([(a, yT) for a, _b, _w in sc] + [(sc[-1][1], yT)], yT + 0.05, "h")
     det.wymiar([(xL + 0.03, -t), (xL + 0.03, y_w), (xL + 0.03, y_ps)], xL - 0.03, "v")
     det.rzedna((xL + 0.06, y_f), y_f, "wyk", "right")
     det.rzedna((xL + 0.06, 0.0), 0.0, "konstr", "right")
-    det.rzedna((0.60, y_ps), y_ps, "wyk", "right")
     det.uwagi.append("wspornik bryły A: ocieplenie spodu stropu ST2Z ciągłe od ETICS ściany P1 do lica ocieplenia ściany "
                      "lekkiej, podsufitka wentylowana (szczelina 40 mm, kratki na obwodzie)")
     return det
