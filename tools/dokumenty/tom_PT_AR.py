@@ -772,8 +772,16 @@ def buduj(D: dict, arkusze: list, kat_ar: Path | None, data: str) -> tuple[Dokum
     względem PAB — brak) oraz detale cieplne i szczelności PT-AR-D w skalach 1:5 i 1:10. Wykaz rysunków z numerami,
     skalami i formatami — karta części rysunkowej (generowana z tabliczek arkuszy).
     """, podstawa="§ 24 RPB", nowa_strona=True)
-    o.tabela([{"Nr": a.nr, "Tytuł": a.tytul, "Skala": a.skala or "—", "Format": a.format or "—"} for a in arkusze],
-             tytul="Wykaz rysunków tomu PT-1 AR", klasa="zwarta", szerokosci=["24mm", None, "20mm", "16mm"])
+    rys = [{"Nr rysunku": a.nr, "Tytuł": a.tytul, "Skala": a.skala or "—", "Format": a.format or "—"}
+           for a in arkusze if not a.nr.startswith("PT-AR-D")]
+    if rys:
+        o.tabela(rys, tytul="Rzuty, przekroje i elewacje (§ 24 pkt 1 RPB)", klasa="zwarta",
+                 szerokosci=["24mm", None, "18mm", "16mm"])
+    o.tabela([{"Detal": dd, "Tytuł detalu": v["tytul"], "Arkusz": v["arkusz"], "Skala": v["skala"] or "—",
+               "Węzły (karty mostków)": ", ".join(v["wezly"]) or "—"} for dd, v in D["detale"].items()],
+             tytul="Detale cieplne i szczelności (§ 24 pkt 2 RPB) — indeks detali", klasa="zwarta",
+             szerokosci=["13mm", None, "22mm", "16mm", "30mm"],
+             zrodlo="raport_widokow.json katalogu detali; model/arkusze_detale.yaml; lamela.views.detale_katalog")
     dok.czesc_rysunkowa(arkusze)
     return dok, o
 

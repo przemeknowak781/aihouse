@@ -491,3 +491,79 @@ def elementy_konstrukcji(D: dict) -> list[dict]:
                       m=_mat(D, "ZB_C25"), p=nr([p["id"] for p in zb])))
     return [{"Element": r["e"], "Identyfikatory (model)": r["ids"], "Wymiary": r["w"], "Materiał": r["m"],
              "Poz. obliczeń": r["p"]} for r in R]
+
+
+def podsekcja_md(tekst: str, naglowek: str) -> str:
+    """Treść podsekcji „### naglowek…” (do następnego „### ” lub „## ”)."""
+    m = re.search(rf"^### {re.escape(naglowek)}[^\n]*\n(.*?)(?=^#{{2,3}} |\Z)", tekst or "", flags=re.M | re.S)
+    return m.group(1).strip() if m else ""
+
+
+def rozdz_konstrukcja(o: Opis, D: dict):
+    """3. Rozwiązania konstrukcyjne, schematy statyczne, założenia i obciążenia, materiały (§ 23 pkt 1 RPB)."""
+    b, p, obl = D["bud"], D["p"], D["obl_md"] or ""
+    k = b.get("konstrukcja", {})
+    kond = b.get("kondygnacje", [])
+    fund = b.get("fundamenty", {})
+    o.rozdzial("Rozwiązania konstrukcyjne obiektu", podstawa="§ 23 pkt 1 RPB", nowa_strona=True)
+    o.tekst(f"""
+    ## Układ konstrukcyjny
+    Budynek mieszkalny jednorodzinny, {len(kond)} kondygnacje nadziemne ({', '.join(x['nazwa'] for x in kond)}),
+    bez podpiwniczenia; wysokości kondygnacji {', '.join(L(x['wys_kondygnacji']) for x in kond)} m. Konstrukcja
+    ścianowo-płytowa: ściany nośne murowane ({k.get('mur', '—')}), stropy i stropodachy — płyty żelbetowe
+    monolityczne krzyżowo zbrojone, lokalnie podciągi i belki żelbetowe (w tym belki odwrócone w licu ścian),
+    płyty wspornikowe (okapy, daszek) z łącznikami termoizolacyjnymi, słupy stalowe fasady. Posadowienie
+    bezpośrednie: {'płyta fundamentowa z żebrami pod ścianami nośnymi' if fund.get('typ') == 'plyta' else fund.get('typ', '—')}
+    ({fund.get('uwagi', '—')}). Klasa konsekwencji {k.get('klasa_konsekwencji', '—')}, klasa niezawodności
+    {k.get('klasa_niezawodnosci', '—')}, projektowy okres użytkowania {k.get('okres_uzytkowania', '—')} lat, klasa
+    konstrukcji {k.get('klasa_konstrukcji', '—')} (PN-EN 1990, PN-EN 1992-1-1 tabl. 4.3N). Sztywność przestrzenną
+    zapewniają tarcze stropowe współpracujące ze ścianami murowymi w dwóch kierunkach [ZAŁ].
+
+    Ścieżki obciążeń elementów nietypowych (wg modelu): wsporniki — {k.get('wsporniki', '—')}; bryła A —
+    {k.get('sciezka_obciazen_wspornika_A', '—')}.
+    """)
+    o.tabela(elementy_konstrukcji(D), tytul="Zestawienie elementów konstrukcji (generowane z modelu)", klasa="zwarta",
+             wyrownanie={"Element": "l", "Identyfikatory (model)": "l", "Wymiary": "l", "Materiał": "l"},
+             szerokosci=["34mm", "30mm", "34mm", None, "20mm"], zrodlo="model/budynek.yaml; wyniki.json")
+    o.rozdzial("Schematy statyczne i metody obliczeń", poziom=2)
+    o.tekst("Zastosowane schematy statyczne (konstrukcyjne) i modele obliczeniowe biblioteki "
+            "`lamela.obliczenia.konstrukcja`; schemat statyczny każdego elementu podano w jego pozycji obliczeń "
+            "(rozdz. 4, podrozdział „Opis i schemat statyczny” z rysunkiem schematu).\n\n"
+            + "\n".join(f"* {t}" for t in D["RAP"].METODY))
+    o.rozdzial("Założenia do obliczeń i obciążenia", poziom=2, podstawa="PN-EN 1990, PN-EN 1991 + NA")
+    obc = k.get("obciazenia", {})
+    s_d = wartosc_md(obl, "Obciążenie śniegiem")
+    qp = wartosc_md(obl, "Szczytowe ciśnienie prędkości")
+    o.tabela([
+        {"Oddziaływanie": "śnieg (PN-EN 1991-1-3 + NA)", "Założenie": obc.get("snieg", "—"),
+         "Wartość": f"s_k = {L(p.s_k)} kN/m²; C_e = {L(p.C_e)}, C_t = {L(p.C_t)}; s (dach płaski) = {s_d or '—'} kN/m²"},
+        {"Oddziaływanie": "wiatr (PN-EN 1991-1-4 + NA)", "Założenie": obc.get("wiatr", "—"),
+         "Wartość": f"v_b,0 = {L(p.v_b0, 1)} m/s, teren kat. {p.kategoria_terenu}; q_p = {qp or '—'} kN/m²"},
+        {"Oddziaływanie": "użytkowe (PN-EN 1991-1-1 + NA)", "Założenie": obc.get("uzytkowe", "—"),
+         "Wartość": f"stropy q_k = {L(p.q_strop)} kN/m² (Q_k = {L(p.Q_strop, 1)} kN); schody {L(p.q_schody)}; "
+                    f"tarasy {L(p.q_taras)}; dach H {L(p.q_dach_H)}; garaż kat. F {L(p.q_garaz)} kN/m² (Q_k = {L(p.Q_garaz, 0)} kN)"},
+        {"Oddziaływanie": "stałe (ciężar własny, warstwy)", "Założenie": obc.get("dach_zielony", "—"),
+         "Wartość": f"żelbet {L(p.ciezar_zelbetu, 1)} kN/m³; warstwy przegród z modelu (materiały, grubości)"},
+        {"Oddziaływanie": "kombinacje (PN-EN 1990 + NA)", "Założenie": f"{p.klasa_konsekwencji}, K_FI = {L(p.K_FI, 1)}",
+         "Wartość": f"STR/GEO 6.10a/6.10b: γ_G = {L(p.gG_sup)}, ξ = {L(p.xi)}, γ_Q = {L(p.gQ)}; EQU: "
+                    f"{L(p.EQU_gG_dst)}·G_dst + {L(p.EQU_gQ)}·Q_dst ≤ {L(p.EQU_gG_stb)}·G_stb"},
+    ], tytul="Założenia i obciążenia", klasa="zwarta", wyrownanie={"Założenie": "l", "Wartość": "l"},
+        szerokosci=["34mm", None, "72mm"],
+        zrodlo="model/budynek.yaml (konstrukcja.obciazenia); Parametry.z_wymagan (wymagania.yaml W-261…W-265); "
+               "obliczenia statyczne poz. 0.4")
+    o.tekst("Wyprowadzenie wartości śniegu (zaspy przy uskokach, sytuacja wyjątkowa B2) i wiatru (strefy ścian "
+            "i dachu) — obliczenia statyczne, poz. 0.4 (rozdz. 4).")
+    o.rozdzial("Materiały, klasy ekspozycji i otulenia", poziom=2, podstawa="PN-EN 1992-1-1 4.4.1; PN-EN 1996-1-1")
+    bet = k.get("beton", {})
+    o.tekst(f"""
+    * beton: {'; '.join(f'{kk.replace("_", " ")} — {vv}' for kk, vv in bet.items()) or '—'};
+    * stal zbrojeniowa {k.get('stal_zbrojeniowa', p.stal_zbr)} (klasa ciągliwości C), f_yk = {L(p.f_yk, 0)} MPa,
+      f_yd = {L(p.f_yd, 1)} MPa; stal konstrukcyjna {p.stal_konstr};
+    * mur: {k.get('mur', '—')};
+    * klasy ekspozycji wg roli elementu: {'; '.join(f'{r} {x} ({p.beton_ekspozycja.get(x, "—")})' for r, x in p.ekspozycja.items())}.
+    """)
+    tab03 = podsekcja_md(obl, "0.3 Materiały")
+    if tab03:
+        o.tekst(tab03)
+    else:
+        o.wniosek(f"Brak podsekcji 0.3 w obliczeniach statycznych — tabela otulin {NZ}.", alarm=True)

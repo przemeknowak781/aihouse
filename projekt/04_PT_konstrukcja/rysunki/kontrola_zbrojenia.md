@@ -2,7 +2,7 @@
 
 Plik generowany automatycznie przez `lamela.views.konstrukcja` (moduł `konstrukcja_dane.rejestruj`) przy rysowaniu arkuszy. A_s,req, A_s,min — z obiektów wyników biblioteki `lamela.obliczenia.konstrukcja` (pozycje obliczeń statycznych); A_s,prov — zbrojenie NARYSOWANE na arkuszach (φ/s lub n·φ). Warunki: PN-EN 1992-1-1 6.1, 9.2.1.1(1) (9.1N) + NA, 9.2.1.1(3) (A_s,max = 0,04·A_c), 9.3.1.1(3) (s_max).
 
-**Wynik: 223/225 pozycji spełnia warunek A_s,prov ≥ A_s,req** (2 niespełnionych — kolumna „Uwagi”).
+**Wynik: 273/275 pozycji spełnia warunek A_s,prov ≥ A_s,req** (2 niespełnionych — kolumna „Uwagi”).
 
 | Element | Miejsce | Poz. obl. | A_s,req | A_s,min | A_s,prov | Jedn. | Zbrojenie | Zapas | Wynik | Arkusze | Uwagi |
 |---|---|---|---:|---:|---:|---|---|---:|---|---|---|
@@ -88,6 +88,52 @@ Plik generowany automatycznie przez `lamela.views.konstrukcja` (moduł `konstruk
 | D4 | pole P4 — naroże (dół y) | 1.4 | 196 | 270 | 279 | mm²/m | Ø8 co 18 | +3% | ✓ | PT-BO-09, PT-BO-11 |  |
 | D4 | pole P4 — naroże (góra x) | 1.4 | 196 | 270 | 279 | mm²/m | Ø8 co 18 | +3% | ✓ | PT-BO-10, PT-BO-11 |  |
 | D4 | pole P4 — naroże (góra y) | 1.4 | 196 | 270 | 279 | mm²/m | Ø8 co 18 | +3% | ✓ | PT-BO-10, PT-BO-11 |  |
+| N-O0-06 | dołem (przęsło) | 6.1 | 35 | 49 | 157 | mm² | 2Ø10 | +218% | ✓ | PT-BO-23 |  |
+| N-O0-06 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.1 | 24 | 0 | 157 | mm² | 2Ø10 | +567% | ✓ | PT-BO-23 |  |
+| N-O0-08 | dołem (przęsło) | 6.2 | 45 | 52 | 157 | mm² | 2Ø10 | +203% | ✓ | PT-BO-24 |  |
+| N-O0-08 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.2 | 24 | 0 | 157 | mm² | 2Ø10 | +567% | ✓ | PT-BO-24 |  |
+| N-O0-09 | dołem (przęsło) | 6.3 | 86 | 52 | 157 | mm² | 2Ø10 | +83% | ✓ | PT-BO-24 |  |
+| N-O0-09 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.3 | 24 | 0 | 157 | mm² | 2Ø10 | +567% | ✓ | PT-BO-24 |  |
+| N-O0-10 | dołem (przęsło) | 6.4 | 5 | 52 | 157 | mm² | 2Ø10 | +203% | ✓ | PT-BO-23 |  |
+| N-O0-10 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.4 | 24 | 0 | 157 | mm² | 2Ø10 | +567% | ✓ | PT-BO-23 |  |
+| N-O0-11 | dołem (przęsło) | 6.5 | 699 | 93 | 770 | mm² | 5Ø14 | +10% | ✓ | PT-BO-25 | pręty dolne w 2 warstwach (3 + 2) |
+| N-O0-11 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.5 | 116 | 0 | 157 | mm² | 2Ø10 | +36% | ✓ | PT-BO-25 |  |
+| N-O0-12 | dołem (przęsło) | 6.6 | 155 | 52 | 157 | mm² | 2Ø10 | +2% | ✓ | PT-BO-25 |  |
+| N-O0-12 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.6 | 24 | 0 | 157 | mm² | 2Ø10 | +567% | ✓ | PT-BO-25 |  |
+| N-O0-13 | dołem (przęsło) | 6.7 | 20 | 52 | 157 | mm² | 2Ø10 | +203% | ✓ | PT-BO-23 |  |
+| N-O0-13 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.7 | 24 | 0 | 157 | mm² | 2Ø10 | +567% | ✓ | PT-BO-23 |  |
+| N-O0-14 | dołem (przęsło) | 6.8 | 210 | 52 | 226 | mm² | 2Ø12 | +8% | ✓ | PT-BO-24 |  |
+| N-O0-14 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.8 | 34 | 0 | 157 | mm² | 2Ø10 | +363% | ✓ | PT-BO-24 |  |
+| N-O0-15 | dołem (przęsło) | 6.9 | 78 | 52 | 157 | mm² | 2Ø10 | +101% | ✓ | PT-BO-23 |  |
+| N-O0-15 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.9 | 24 | 0 | 157 | mm² | 2Ø10 | +567% | ✓ | PT-BO-23 |  |
+| N-O0-17 | dołem (przęsło) | 6.10 | 116 | 52 | 157 | mm² | 2Ø10 | +35% | ✓ | PT-BO-23 |  |
+| N-O0-17 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.10 | 24 | 0 | 157 | mm² | 2Ø10 | +567% | ✓ | PT-BO-23 |  |
+| N-O0-18 | dołem (przęsło) | 6.11 | 1012 | 52 | 1206 | mm² | 6Ø16 | +19% | ✓ | PT-BO-25 | pręty dolne w 2 warstwach (3 + 3) |
+| N-O0-18 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.11 | 181 | 0 | 226 | mm² | 2Ø12 | +25% | ✓ | PT-BO-25 |  |
+| N-O0-21 | dołem (przęsło) | 6.12 | 220 | 52 | 226 | mm² | 2Ø12 | +3% | ✓ | PT-BO-24 |  |
+| N-O0-21 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.12 | 34 | 0 | 157 | mm² | 2Ø10 | +363% | ✓ | PT-BO-24 |  |
+| N-O0-22 | dołem (przęsło) | 6.13 | 61 | 52 | 157 | mm² | 2Ø10 | +156% | ✓ | PT-BO-23 |  |
+| N-O0-22 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.13 | 24 | 0 | 157 | mm² | 2Ø10 | +567% | ✓ | PT-BO-23 |  |
+| N-O0-24 | dołem (przęsło) | 6.14 | 153 | 52 | 157 | mm² | 2Ø10 | +2% | ✓ | PT-BO-23 |  |
+| N-O0-24 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.14 | 24 | 0 | 157 | mm² | 2Ø10 | +567% | ✓ | PT-BO-23 |  |
+| N-O1-02 | dołem (przęsło) | 6.15 | 227 | 52 | 236 | mm² | 3Ø10 | +4% | ✓ | PT-BO-25 |  |
+| N-O1-02 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.15 | 35 | 0 | 157 | mm² | 2Ø10 | +344% | ✓ | PT-BO-25 |  |
+| N-O1-03 | dołem (przęsło) | 6.16 | 30 | 52 | 157 | mm² | 2Ø10 | +203% | ✓ | PT-BO-23 |  |
+| N-O1-03 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.16 | 24 | 0 | 157 | mm² | 2Ø10 | +567% | ✓ | PT-BO-23 |  |
+| N-O1-04 | dołem (przęsło) | 6.17 | 33 | 52 | 157 | mm² | 2Ø10 | +203% | ✓ | PT-BO-25 |  |
+| N-O1-04 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.17 | 24 | 0 | 157 | mm² | 2Ø10 | +567% | ✓ | PT-BO-25 |  |
+| N-O1-09 | dołem (przęsło) | 6.20 | 190 | 52 | 226 | mm² | 2Ø12 | +19% | ✓ | PT-BO-24 |  |
+| N-O1-09 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.20 | 34 | 0 | 157 | mm² | 2Ø10 | +363% | ✓ | PT-BO-24 |  |
+| N-O1-10 | dołem (przęsło) | 6.21 | 595 | 52 | 603 | mm² | 3Ø16 | +1% | ✓ | PT-BO-24 |  |
+| N-O1-10 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.21 | 90 | 0 | 157 | mm² | 2Ø10 | +74% | ✓ | PT-BO-24 |  |
+| N-O1-11 | dołem (przęsło) | 6.22 | 522 | 52 | 550 | mm² | 7Ø10 | +5% | ✓ | PT-BO-24 | pręty dolne w 2 warstwach (4 + 3) |
+| N-O1-11 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.22 | 82 | 0 | 157 | mm² | 2Ø10 | +90% | ✓ | PT-BO-24 |  |
+| N-O1-12 | dołem (przęsło) | 6.23 | 146 | 52 | 157 | mm² | 2Ø10 | +8% | ✓ | PT-BO-23 |  |
+| N-O1-12 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.23 | 24 | 0 | 157 | mm² | 2Ø10 | +567% | ✓ | PT-BO-23 |  |
+| N-O2-06 | dołem (przęsło) | 6.28 | 15 | 52 | 157 | mm² | 2Ø10 | +203% | ✓ | PT-BO-23 |  |
+| N-O2-06 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.28 | 24 | 0 | 157 | mm² | 2Ø10 | +567% | ✓ | PT-BO-23 |  |
+| N-O2-10 | dołem (przęsło) | 6.30 | 210 | 52 | 226 | mm² | 2Ø12 | +8% | ✓ | PT-BO-24 |  |
+| N-O2-10 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.30 | 34 | 0 | 157 | mm² | 2Ø10 | +363% | ✓ | PT-BO-24 |  |
 | N16 | dołem (przęsło) | 5.13 | 20 | 121 | 226 | mm² | 2Ø12 | +86% | ✓ | PT-BO-21 |  |
 | N16 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 5.13 | 34 | 0 | 226 | mm² | 2Ø12 | +567% | ✓ | PT-BO-21 |  |
 | N17 | dołem (przęsło) | 5.14 | 102 | 121 | 226 | mm² | 2Ø12 | +86% | ✓ | PT-BO-22 |  |
@@ -135,6 +181,10 @@ Plik generowany automatycznie przez `lamela.views.konstrukcja` (moduł `konstruk
 | PL-E | pole P1 — dół y | 3.3 | 94 | 377 | 387 | mm²/m | Ø8 co 13 | +3% | ✓ | PT-BO-09, PT-BO-11 |  |
 | PL-E | wspornik — góra x | 3.3 | 252 | 392 | 393 | mm²/m | Ø10 co 20 | +0% | ✓ | PT-BO-10, PT-BO-11 |  |
 | PL-E | wspornik — góra y | 3.3 | 159 | 377 | 387 | mm²/m | Ø8 co 13 | +3% | ✓ | PT-BO-10, PT-BO-11 |  |
+| SCH1/bieg 1 | płyta biegu — dołem (główne) | 4.1 | 386 | 201 | 393 | mm²/m | Ø10 co 20 | +2% | ✓ | PT-BO-26 |  |
+| SCH1/bieg 2 | płyta biegu — dołem (główne) | 4.1 | 386 | 201 | 393 | mm²/m | Ø10 co 20 | +2% | ✓ | PT-BO-26 |  |
+| SCH2/bieg 1 | płyta biegu — dołem (główne) | 4.2 | 386 | 201 | 393 | mm²/m | Ø10 co 20 | +2% | ✓ | PT-BO-26 |  |
+| SCH2/bieg 2 | płyta biegu — dołem (główne) | 4.2 | 386 | 201 | 393 | mm²/m | Ø10 co 20 | +2% | ✓ | PT-BO-26 |  |
 | SF1 | pogrubienie — siatka dolna (MES) | 10.20 | 1534 | 538 | 1539 | mm²/m | Ø14 co 10 | +0% | ✓ | PT-BO-03, PT-BO-05 |  |
 | SF2 | pogrubienie — siatka dolna (MES) | 10.21 | 1931 | 538 | 1964 | mm²/m | Ø20 co 16 | +2% | ✓ | PT-BO-03, PT-BO-05 |  |
 | SF3 | pogrubienie — siatka dolna (MES) | 10.22 | 899 | 538 | 905 | mm²/m | Ø12 co 12.5 | +1% | ✓ | PT-BO-03, PT-BO-05 |  |

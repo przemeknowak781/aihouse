@@ -198,7 +198,8 @@ def pkt8(zp, z, d):
     odrębnych, wprowadzających związane z tym obiektem ograniczenia w zabudowie tego terenu) określono na podstawie
     przepisów wymienionych w tabeli (§ 18 pkt 1 RPB) oraz: WT § 23 (miejsca gromadzenia odpadów — dla zabudowy
     jednorodzinnej odległości nieustalone), WT § 28 (wody opadowe — zagospodarowane na działce), ustawy – Prawo
-    wodne (zakaz zmiany stanu wody na gruncie ze szkodą dla gruntów sąsiednich), ustaleń MPZP (linia zabudowy,
+    wodne (t.j. Dz.U. 2025 poz. 960 ze zm.) art. 234 ust. 1 (zakaz zmiany kierunku i natężenia odpływu wód opadowych
+    ze szkodą dla gruntów sąsiednich i odprowadzania wód na grunty sąsiednie), ustaleń MPZP (linia zabudowy,
     wskaźniki — pkt 4). Wartości — minimum dla wszystkich elementów budynku i granic niedrogowych (audyt A1).
     """, podstawa="§ 14 pkt 8, § 18 RPB")
     zp.tabela([{"Przepis": a, "Ograniczenie": b, "Projekt (min.) [m]": c, "Wymaganie": e,
