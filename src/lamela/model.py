@@ -532,6 +532,7 @@ def wsp_wysokosci(h: float | None) -> float:
 # Specyfikacja pól (walidacja zgodności ze schematem)
 # --------------------------------------------------------------------------------------------------
 # typy: str, num, num?, bool, dict, dict?, list, pt, pt3, seg, ring, ring?, rings, polyline3, enum:<a,b>, any
+TYPY_ELEMENTOW_ZEWN = ("kratownica_pnacza", "oslona_lamelowa")
 F = {
     "kondygnacje": {"id": (1, "str"), "nazwa": (0, "str"), "rzedna": (1, "num"), "wys_kondygnacji": (1, "num"),
                     "wys_w_swietle": (0, "num"), "podloga": (0, "str?")},
@@ -566,11 +567,17 @@ F = {
                "rozstaw": (1, "num"), "b": (1, "num"), "h": (1, "num"), "odsuniecie": (1, "num"), "mat": (1, "str")},
     "tarasy": {"id": (1, "str"), "obrys": (1, "ring"), "rzedna": (1, "num"), "nawierzchnia": (0, "str?"),
                "grubosc": (0, "num?")},
+    # wyposażenie zewnętrzne elewacji (wydanie, decyzja Inwestora K-13): kratownica na pnącza na konsolach, osłona lamelowa urządzenia
+    "elementy_zewn": {"id": (1, "str"), "typ": (1, "enum:" + ",".join(TYPY_ELEMENTOW_ZEWN)), "linia": (1, "polyline"),
+                      "z_od": (1, "num"), "z_do": (1, "num"), "mat": (1, "str"), "elewacja": (0, "str?"), "sciana": (0, "str?"),
+                      "odsuniecie": (0, "num?"), "oczko": (0, "num?"), "pret": (0, "num?"), "rama": (0, "num?"),
+                      "rozstaw": (0, "num?"), "b": (0, "num?"), "h": (0, "num?"), "konsole": (0, "dict?"),
+                      "pnacza": (0, "dict?"), "urzadzenie": (0, "dict?"), "obiekt": (0, "str?"), "uwagi": (0, "str?")},
 }
 SEKCJE_BUDYNEK = {"meta": "dict", "uklad": "dict", "osie": "dict", "kondygnacje": "list", "materialy": "dict",
                   "przegrody": "dict", "sciany": "list", "otwory": "list", "pomieszczenia": "list", "stropy": "list",
                   "dachy": "list", "wsporniki_plyty": "list", "slupy": "list", "belki": "list", "fundamenty": "dict",
-                  "schody": "list", "balustrady": "list", "lamele": "list", "tarasy": "list"}
+                  "schody": "list", "balustrady": "list", "lamele": "list", "tarasy": "list", "elementy_zewn": "list"}
 WYMAGANE_BUDYNEK = ("uklad", "kondygnacje", "materialy", "przegrody", "sciany")
 ID_WZORCE = {"sciany": r"^S\d+-\d+[A-Za-z]?$", "otwory": r"^O\d+-\d+[A-Za-z]?$", "pomieszczenia": r"^\d+\.\d+[A-Za-z]?$",
              "stropy": r"^ST\d+", "dachy": r"^D\d+", "slupy": r"^SL\d+", "belki": r"^(B|N|W)\d+", "schody": r"^SCH\d+"}
@@ -914,7 +921,8 @@ class Model:
         self._kond = {k.id: k for k in ks}
 
         # pozostałe sekcje — walidacja pól i odwołań
-        for sek in ("stropy", "dachy", "wsporniki_plyty", "slupy", "belki", "schody", "balustrady", "lamele", "tarasy"):
+        for sek in ("stropy", "dachy", "wsporniki_plyty", "slupy", "belki", "schody", "balustrady", "lamele", "tarasy",
+                    "elementy_zewn"):
             lst = r.get(sek) or []
             if not isinstance(lst, list):
                 continue
@@ -1031,10 +1039,24 @@ class Model:
             if w.get("mat") and str(w["mat"]) not in mats:
                 self._err(loc, f"odwołanie do nieistniejącego materiału '{w['mat']}'")
             self._check_poly(loc, "obrys", w.get("obrys"))
-        for sek in ("slupy", "belki", "lamele"):
+        for sek in ("slupy", "belki", "lamele", "elementy_zewn"):
             for i, it in enumerate(r.get(sek) or []):
                 if isinstance(it, dict) and it.get("mat") is not None and str(it["mat"]) not in mats:
                     self._err(self._loc(sek, i, it), f"odwołanie do nieistniejącego materiału '{it['mat']}'")
+        sc_ids = {str(w.get("id")) for w in (r.get("sciany") or []) if isinstance(w, dict)}
+        for i, it in enumerate(r.get("elementy_zewn") or []):
+            if not isinstance(it, dict):
+                continue
+            loc = self._loc("elementy_zewn", i, it)
+            if _is_num(it.get("z_od")) and _is_num(it.get("z_do")) and it["z_do"] <= it["z_od"]:
+                self._err(loc, "z_do musi być większe od z_od")
+            if it.get("sciana") is not None and str(it["sciana"]) not in sc_ids:
+                self._err(loc, f"odwołanie do nieistniejącej ściany '{it['sciana']}'")
+            if it.get("typ") == "kratownica_pnacza" and not (_is_num(it.get("odsuniecie")) and it["odsuniecie"] > 0):
+                self._err(loc, "kratownica_pnacza: wymagane 'odsuniecie' > 0 (od lica ocieplenia — bez styku z ETICS)")
+            if it.get("typ") == "oslona_lamelowa" and _is_num(it.get("rozstaw")) and _is_num(it.get("b")) \
+                    and it["rozstaw"] <= it["b"]:
+                self._err(loc, "oslona_lamelowa: rozstaw ≤ b — osłona pełna (wymagana ażurowa: przepływ powietrza, R290)")
         for i, it in enumerate(r.get("slupy") or []):
             if isinstance(it, dict) and _is_num(it.get("z_od")) and _is_num(it.get("z_do")) and it["z_do"] <= it["z_od"]:
                 self._err(self._loc("slupy", i, it), "z_do musi być większe od z_od")
@@ -1844,6 +1866,10 @@ class Model:
 
     def tarasy(self) -> list[dict]:
         return self._lst("tarasy")
+
+    def elementy_zewn(self) -> list[dict]:
+        """Wyposażenie zewnętrzne elewacji (kratownice na pnącza, osłony lamelowe urządzeń) — SCHEMAT §2."""
+        return self._lst("elementy_zewn")
 
     def plyty(self) -> list[dict]:
         """Wszystkie płyty (stropy/dachy/wsporniki) z wyliczonym spodem i wierzchem."""
