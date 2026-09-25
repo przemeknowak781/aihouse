@@ -540,10 +540,53 @@ class Rozmieszczenie:
     prostokaty: list = field(default_factory=list)   # [(rodzaj, nazwa, rect)] — kontrola nakładania
     tabliczka: tuple = ()
     brak: str = ""
+    tytuly_dx: list = field(default_factory=list)    # odsunięcia tytułów widoków od lewej krawędzi treści [mm]
+    znaki: bool = False                              # strefy znaków centrujących zarezerwowane
+    czesci_uwag: int = 0                             # części uwag (wszystkich bloków uwag)
+    bloki_uwag: int = 0
+
+    @property
+    def dodatkowe_czesci(self) -> int:
+        """Części uwag ponad jedną na blok uwag (rozdrobnienie — kara w koszcie)."""
+        return max(0, self.czesci_uwag - self.bloki_uwag)
 
 
 def rama(W: float, H: float) -> tuple:
     return (MARG_L, MARG, W - MARG, H - MARG)
+
+
+def strefy_znakow(W: float, H: float, odst: float = ZNAK_CENTR_ODSTEP) -> dict:
+    """Strefy znaków centrujących w polu rysunkowym (linia 0,7 mm na osi arkusza, 10 mm za ramkę + odstęp):
+    {strona: (x0, y0, x1, y1)} — ``g``, ``d`` (oś W/2), ``l``, ``p`` (oś H/2); jak ``draft.sheet.znaki_centrujace``."""
+    fx0, fy0, fx1, fy1 = rama(W, H)
+    a = ZNAK_CENTR_GR / 2.0 + odst
+    d = ZNAK_CENTR_DL + odst
+    cx, cy = W / 2.0, H / 2.0
+    return {"g": (cx - a, fy1 - d, cx + a, fy1), "d": (cx - a, fy0, cx + a, fy0 + d),
+            "l": (fx0, cy - a, fx0 + d, cy + a), "p": (fx1 - d, cy - a, fx1, cy + a)}
+
+
+def _tytuly_od_znakow(widoki, grupa, ox: float, oy: float, strefy: dict) -> list:
+    """Odsunięcia tytułów widoków: tytuł trafiający na strefę znaku centrującego — przesunięty w prawo za znak,
+    jeśli mieści się w szerokości miejsca widoku (poza nim mógłby wejść na sąsiedni widok); inaczej 2 mm."""
+    out = []
+    for v, (x, y) in zip(widoki, grupa.poz):
+        vx, vy = ox + x, oy + y
+
+        def trafia(dx):
+            t = v.tytul_rect(dx)
+            tr = (vx + t[0], vy + t[1], vx + t[2], vy + t[3])
+            return [z for z in strefy.values() if _przec(tr, z)]
+        dx = 2.0
+        hit = trafia(dx)
+        if hit:
+            for z in sorted(hit, key=lambda z: z[2]):
+                nd = z[2] + 1.0 - vx
+                if nd + v.tytul_w <= v.slot_w + 1e-6 and not trafia(nd):
+                    dx = nd
+                    break
+        out.append(dx)
+    return out
 
 
 def _umiesc_blok(wolne: Wolne, b: Blok, szer: float, wys: float):
@@ -558,56 +601,111 @@ def _umiesc_blok(wolne: Wolne, b: Blok, szer: float, wys: float):
 
 
 def pakuj(W: float, H: float, widoki: list[Widok], grupa: Grupa, bloki: list[Blok], tb_h: float,
-          przes: tuple = (0.0, 0.0), gap_vb: float = GAP_VB) -> Rozmieszczenie:
-    """Rozmieszczenie na arkuszu W × H. ``przes`` — przesunięcie grupy widoków od lewego górnego rogu pola."""
+          przes: tuple = (0.0, 0.0), gap_vb: float = GAP_VB, znaki="auto", max_czesci: int = 4) -> Rozmieszczenie:
+    """Rozmieszczenie na arkuszu W × H. ``przes`` — przesunięcie grupy widoków od lewego górnego rogu pola.
+    ``znaki``: ``auto`` — z rezerwacją stref znaków centrujących, chyba że bez niej upakowanie jest lepsze (mniej
+    części uwag / kolumn bloków; wtedy znaki skraca ``Sheet.przytnij_znaki_centrujace``); ``rezerwuj`` / True;
+    ``skracaj`` / False."""
+    tr = str(znaki).lower()
+    args = (W, H, widoki, grupa, bloki, tb_h, przes, gap_vb)
+    if znaki is True or tr in ("rezerwuj", "tak"):
+        return _pakuj(*args, True, max_czesci)
+    if znaki is False or tr in ("skracaj", "nie", "bez"):
+        return _pakuj(*args, False, max_czesci)
+    r1 = _pakuj(*args, True, max_czesci)
+    r0 = _pakuj(*args, False, max_czesci)
+    if r1.ok and (not r0.ok or _jakosc(r1)[:2] <= _jakosc(r0)[:2]):
+        return r1
+    return r0 if r0.ok else r1
+
+
+def _jakosc(R: Rozmieszczenie) -> tuple:
+    """Ocena upakowania (mniej = lepiej): części uwag, kolumny bloków, liczba bloków, brak rezerwacji znaków."""
+    rb = [r for k, _n, r in R.prostokaty if k == "blok"]
+    return (R.dodatkowe_czesci, len(_kolumny(rb)), len(R.bloki), 0 if R.znaki else 1)
+
+
+def _pakuj(W, H, widoki, grupa, bloki, tb_h, przes, gap_vb, znaki: bool, max_czesci: int) -> Rozmieszczenie:
     fx0, fy0, fx1, fy1 = rama(W, H)
-    R = Rozmieszczenie(False, W, H, grupa)
+    R = Rozmieszczenie(False, W, H, grupa, znaki=znaki)
     tb = (fx1 - TB_W, fy0, fx1, fy0 + tb_h)
     R.tabliczka = tb
     if tb[3] > fy1 - PAD_B or fx1 - fx0 < TB_W:
         R.brak = "tabliczka nie mieści się w ramce"
         return R
     R.prostokaty.append(("tabliczka", "tabliczka", tb))
+    strefy = strefy_znakow(W, H) if znaki else {}
     ox = fx0 + PAD_V + przes[0]
     oy = fy1 - PAD_V - grupa.h - przes[1]
     if grupa.poz:
         if ox + grupa.w > fx1 - PAD_B + 1e-6 or oy < fy0 + PAD_B - 1e-6:
             R.brak = "widoki nie mieszczą się w ramce"
             return R
-        vr = grupa.prostokaty(widoki, ox, oy)
+        tdx = _tytuly_od_znakow(widoki, grupa, ox, oy, strefy) if strefy else [2.0] * len(widoki)
+        vr = grupa.prostokaty(widoki, ox, oy, tdx)
         tbz = _napompuj(tb, gap_vb, 0, 0, gap_vb)
         if any(_przec(r, tbz) for r in vr):
             R.brak = "widoki kolidują z tabliczką"
             return R
-        for v, (x, y) in zip(widoki, grupa.poz):
+        R.tytuly_dx = tdx
+        for i, (v, (x, y)) in enumerate(zip(widoki, grupa.poz)):
             R.widoki.append((ox + x, oy + y))
-            for r in v.prostokaty():               # zajętość (pasy treści + tytuł) — bloki mogą wejść w kieszenie
-                R.prostokaty.append(("widok", v.nazwa, (ox + x + r[0], oy + y + r[1], ox + x + r[2], oy + y + r[3])))
+            rs = v.prostokaty(tdx[i])              # zajętość (pasy treści + tytuł) — bloki mogą wejść w kieszenie
+            for j, r in enumerate(rs):
+                R.prostokaty.append(("tytul" if j == len(rs) - 1 else "widok", v.nazwa,
+                                     (ox + x + r[0], oy + y + r[1], ox + x + r[2], oy + y + r[3])))
     wolne = Wolne((fx0 + PAD_B, fy0 + PAD_B, fx1, fy1 - PAD_B))
     wolne.zajmij(_napompuj(tb, GAP_C, GAP_B, 0, GAP_B))
     if grupa.poz:
         for r in vr:
             wolne.zajmij(_napompuj(r, gap_vb, gap_vb, gap_vb, gap_vb))
-    for b in bloki:
+    for st, z in strefy.items():
+        wolne.zajmij(z)
+        R.prostokaty.append(("znak", st, z))
+    for b in bloki:                                # wiersz nad tabliczką (róża, podziałka) — przed pozostałymi
+        if not b.kotwica:
+            continue
+        pos, bb = _umiesc_kotwice(wolne, b, tb, fx1)
+        if pos is None:
+            R.brak = f"blok „{b.nazwa}” ({b.szer:.0f}×{b.wys:.0f} mm) nie mieści się"
+            return R
+        _dodaj_blok(wolne, R, bb, pos[0], pos[1])
+    baza, n_b, n_p = wolne.kopia(), len(R.bloki), len(R.prostokaty)
+    kolejne = [b for b in bloki if not b.kotwica]
+    for b in kolejne:
         if b.uwagi is not None:
-            if not _pakuj_uwagi(wolne, b, R):
+            if not _pakuj_uwagi(wolne, b, R, max_czesci):
                 R.brak = f"blok „{b.nazwa}” nie mieści się"
                 return R
             continue
-        szer, wys = b.szer, b.wys
-        pos = None
-        if b.kotwica == "nad_tabliczka":
-            r = (fx1 - szer, tb[3] + GAP_B, fx1, tb[3] + GAP_B + wys)
-            if wolne.miesci(r):
-                pos = (r[0], r[1])
+        pos = _umiesc_blok(wolne, b, b.szer, b.wys)
         if pos is None:
-            pos = _umiesc_blok(wolne, b, szer, wys)
-        if pos is None:
-            R.brak = f"blok „{b.nazwa}” ({szer:.0f}×{wys:.0f} mm) nie mieści się"
+            R.brak = f"blok „{b.nazwa}” ({b.szer:.0f}×{b.wys:.0f} mm) nie mieści się"
             return R
         _dodaj_blok(wolne, R, b, pos[0], pos[1])
     R.ok = True
+    _porzadek_czytania(R, baza, kolejne, n_b, n_p)
     return R
+
+
+def _umiesc_kotwice(wolne: Wolne, b: Blok, tb: tuple, fx1: float):
+    """Wiersz bezpośrednio nad tabliczką (prawa krawędź przy ramce); gdy zajęty z prawej (np. strefa znaku
+    centrującego) — węższy wariant bloku (``w_min``) z lewą krawędzią jak tabliczka; inaczej najlepsze wolne miejsce."""
+    y0 = tb[3] + GAP_B
+    r = (fx1 - b.szer, y0, fx1, y0 + b.wys)
+    if wolne.miesci(r):
+        return (r[0], r[1]), b
+    if b.w_min > 0:
+        xo = fx1 - b.szer + b.dx0                  # początek rysowania jak w pełnym wariancie
+        w = b.w - 2.5
+        while w >= b.w_min - 1e-6:
+            bn = _wezszy(b, w)
+            r = (xo - bn.dx0, y0, xo - bn.dx0 + bn.szer, y0 + bn.wys)
+            if wolne.miesci(r):
+                return (r[0], r[1]), bn
+            w -= 2.5
+    pos = _umiesc_blok(wolne, b, b.szer, b.wys)
+    return pos, b
 
 
 def _dodaj_blok(wolne: Wolne, R: Rozmieszczenie, b: Blok, x0: float, y0: float):
@@ -617,25 +715,197 @@ def _dodaj_blok(wolne: Wolne, R: Rozmieszczenie, b: Blok, x0: float, y0: float):
     R.prostokaty.append(("blok", b.nazwa, rect))
 
 
-def _pakuj_uwagi(wolne: Wolne, b: Blok, R: Rozmieszczenie) -> bool:
-    """Uwagi: w całości, a gdy się nie mieszczą — częściami (najdłuższa część mieszcząca się w najlepszym miejscu)."""
+def _po(a, b, eps: float = 0.5) -> bool:
+    """Prostokąt ``b`` stoi po ``a`` w kolejności czytania: w kolumnie na prawo albo pod ``a`` w tej samej kolumnie."""
+    if b[0] >= a[2] - eps:
+        return True
+    ov = min(a[2], b[2]) - max(a[0], b[0])
+    return ov > 0.5 * min(a[2] - a[0], b[2] - b[0]) and b[3] <= a[1] + eps
+
+
+def _kolumny(rects) -> list:
+    """Kolumny prostokątów (nakładanie w poziomie > 50 % węższego) od lewej: [[x0, x1, [indeksy]]]."""
+    cols = []
+    for i, r in enumerate(rects):
+        for c in cols:
+            if min(c[1], r[2]) - max(c[0], r[0]) > 0.5 * min(c[1] - c[0], r[2] - r[0]):
+                c[0], c[1] = min(c[0], r[0]), max(c[1], r[2])
+                c[2].append(i)
+                break
+        else:
+            cols.append([r[0], r[2], [i]])
+    return sorted(cols, key=lambda c: c[0])
+
+
+def _max_k(U, i0: int, hmax: float) -> int:
+    """Największe k: uwagi i0…k-1 mieszczą się w wysokości ``hmax`` (i0 — gdy nawet jedna się nie mieści)."""
+    k = i0
+    while k < len(U.lines) and U.wysokosc(i0, k + 1) <= hmax + 1e-6:
+        k += 1
+    return k
+
+
+def _pakuj_uwagi(wolne: Wolne, b: Blok, R: Rozmieszczenie, max_czesci: int = 4) -> bool:
+    """Uwagi w całości (najlepsze miejsce jak inne bloki), a gdy się nie mieszczą — w najmniejszej liczbie części
+    (≤ ``max_czesci``; najpierw ≥ 2 pozycje w części) w kolejności czytania (``_po``): część k+1 pod częścią k
+    w tej samej kolumnie albo w kolumnie na prawo. Przeszukiwanie z nawrotami (budżet węzłów)."""
     U = b.uwagi
     n = len(U.lines)
-    i0 = 0
-    while i0 < n:
-        placed = False
-        for k in range(n, i0, -1):
-            hh = U.wysokosc(i0, k)
-            pos = _umiesc_blok(wolne, b, U.w, hh)
-            if pos is not None:
-                part = Blok(f"{b.nazwa}[{i0 + 1}–{k}]", U.fn(i0, k), U.w, hh)
-                _dodaj_blok(wolne, R, part, pos[0], pos[1])
-                i0 = k
-                placed = True
-                break
-        if not placed:
-            return False
+    if n == 0:
+        return True
+    h = U.wysokosc(0, n)
+    pos = _umiesc_blok(wolne, b, U.w, h)
+    sol = [(0, n, pos[0], pos[1])] if pos is not None else None
+    budzet = [300]
+    for P in range(2, min(max_czesci, n) + 1):
+        if sol:
+            break
+        for mp in (2, 1):
+            if mp * P <= n:
+                sol = _uwagi_szukaj(wolne, U, 0, None, P, mp, budzet)
+                if sol:
+                    break
+    if not sol:
+        return False
+    for i0, i1, x0, y0 in sol:
+        _dodaj_blok(wolne, R, Blok(f"{b.nazwa}[{i0 + 1}–{i1}]", U.fn(i0, i1), U.w, U.wysokosc(i0, i1)), x0, y0)
+    R.czesci_uwag += len(sol)
+    R.bloki_uwag += 1
     return True
+
+
+def _uwagi_szukaj(wolne: Wolne, U, i0: int, prev, P: int, mp: int, budzet: list):
+    """Części uwag i0…n w co najwyżej P częściach po prostokącie ``prev``: [(i0, i1, x0, y0)] albo None."""
+    n, w = len(U.lines), U.w
+    if i0 >= n:
+        return []
+    if P <= 0 or budzet[0] <= 0:
+        return None
+    budzet[0] -= 1
+    usable = [f for f in wolne.free if f[2] - f[0] >= w - 1e-6]
+    hs = sorted((f[3] - f[1] for f in usable), reverse=True)
+    if sum(hs[:P]) < U.wysokosc(i0, n) - 1e-6:           # ograniczenie: nawet P najwyższych pól nie wystarczy
+        return None
+    cands = []
+    for f in usable:
+        k = _max_k(U, i0, f[3] - f[1])
+        if k <= i0 or (P == 1 and k < n):
+            continue
+        if k < n:
+            if n - k < mp:
+                k = n - mp
+            if k - i0 < mp:
+                continue
+        hh = U.wysokosc(i0, k)
+        xs = {round(f[2] - w, 6)}
+        if prev is not None and f[0] - 1e-6 <= prev[0] <= f[2] - w + 1e-6:
+            xs.add(round(prev[0], 6))                     # wyrównanie pod poprzednią częścią
+        for x in xs:
+            rect = (x, f[3] - hh, x + w, f[3])
+            if prev is not None and not _po(prev, rect):
+                continue
+            ciag = prev is not None and abs(x - prev[0]) < 0.5 and prev[1] - rect[3] < GAP_B + 5.0
+            key = (-(k - i0), not ciag, -round(f[2] / 5.0), -round(f[3] / 5.0), -f[2], -f[3], x)
+            cands.append((key, x, rect[1], k, rect))
+    cands.sort(key=lambda c: c[0])
+    seen, tried = set(), 0
+    for _key, x, y, k, rect in cands:
+        sig = (round(x, 1), round(y, 1), k)
+        if sig in seen:
+            continue
+        seen.add(sig)
+        wl = wolne.kopia()
+        wl.zajmij(_napompuj(rect, GAP_C, GAP_B, GAP_C, GAP_B))
+        sub = _uwagi_szukaj(wl, U, k, rect, P - 1, mp, budzet)
+        if sub is not None:
+            return [(i0, k, x, y)] + sub
+        tried += 1
+        if tried >= 3 or budzet[0] <= 0:
+            break
+    return None
+
+
+def _porzadek_czytania(R: Rozmieszczenie, baza: Wolne, kolejne: list, n_b: int, n_p: int):
+    """Gdy bloki (bez wiersza nad tabliczką) zajmują kilka kolumn, a kolejność listy nie czyta się kolumnami od
+    lewej i w kolumnie od góry — ponowne ułożenie w tych samych kolumnach: bloki listy kolejno od lewej kolumny,
+    w kolumnie od góry, uwagi „płyną” przez kolumny (≥ 2 pozycje w części). Przyjmowane, gdy wszystko się mieści,
+    a części uwag nie przybywa; inaczej układ bez zmian."""
+    wpisy = R.bloki[n_b:]
+    rects = [r for k, _n, r in R.prostokaty[n_p:] if k == "blok"]
+    if len(rects) < 2 or len(rects) != len(wpisy):
+        return
+    cols = _kolumny(rects)
+    if len(cols) < 2:
+        return
+    ci = {i: c for c, col in enumerate(cols) for i in col[2]}
+    if all(ci[i + 1] > ci[i] or (ci[i + 1] == ci[i] and _po(rects[i], rects[i + 1])) for i in range(len(rects) - 1)):
+        return
+    sloty = []                                     # (x0, x1, y_bot, y_top) — kolumny od lewej, w kolumnie od góry
+    for x0, x1, idx in cols:
+        y_lo = min(rects[i][1] for i in idx)
+        y_hi = max(rects[i][3] for i in idx)
+        segs = sorted((f[1], f[3]) for f in baza.free if f[0] <= x0 + 1e-6 and f[2] >= x1 - 1e-6)
+        scal = []
+        for a, b in segs:
+            if scal and a <= scal[-1][1] + 1e-6:
+                scal[-1][1] = max(scal[-1][1], b)
+            else:
+                scal.append([a, b])
+        for a, b in sorted(scal, key=lambda t: -t[1]):
+            if b > y_lo + 1e-6 and a < y_hi - 1e-6:
+                sloty.append((x0, x1, a, b))
+    wl = baza.kopia()
+    nowe = []                                      # (Blok, x0, y0)
+    si, kursor = 0, (sloty[0][3] if sloty else 0.0)
+    czesci = 0
+
+    def wstaw(szer, wys):
+        nonlocal si, kursor
+        while si < len(sloty):
+            x0, x1, a, b = sloty[si]
+            top = min(kursor, b)
+            r = (x1 - szer, top - wys, x1, top)
+            if szer <= x1 - x0 + 1e-6 and r[1] >= a - 1e-6 and wl.miesci(r):
+                wl.zajmij(_napompuj(r, GAP_C, GAP_B, GAP_C, GAP_B))
+                kursor = r[1] - GAP_B
+                return r
+            si += 1
+            kursor = sloty[si][3] if si < len(sloty) else 0.0
+        return None
+    for b in kolejne:
+        if b.uwagi is None:
+            r = wstaw(b.szer, b.wys)
+            if r is None:
+                return
+            nowe.append((b, r[0], r[1]))
+            continue
+        U = b.uwagi
+        n, i0 = len(U.lines), 0
+        while i0 < n:
+            if si >= len(sloty):
+                return
+            x0, x1, a, bb = sloty[si]
+            k = _max_k(U, i0, min(kursor, bb) - a)
+            if k < n and n - k < 2 and k - i0 >= 3:
+                k = n - 2
+            if k <= i0 or (k - i0 < 2 and n - i0 >= 2 and k < n):
+                si += 1
+                kursor = sloty[si][3] if si < len(sloty) else 0.0
+                continue
+            r = wstaw(U.w, U.wysokosc(i0, k))
+            if r is None:
+                return
+            nowe.append((Blok(f"{b.nazwa}[{i0 + 1}–{k}]", U.fn(i0, k), U.w, U.wysokosc(i0, k)), r[0], r[1]))
+            czesci += 1
+            i0 = k
+    if czesci > R.czesci_uwag:
+        return
+    R.bloki = R.bloki[:n_b]
+    R.prostokaty = R.prostokaty[:n_p]
+    for b, x0, y0 in nowe:
+        R.bloki.append((b, x0 + b.dx0, y0 + b.h, b.w))
+        R.prostokaty.append(("blok", b.nazwa, (x0, y0, x0 + b.szer, y0 + b.wys)))
+    R.czesci_uwag = czesci if any(b.uwagi is not None for b in kolejne) else R.czesci_uwag
 
 
 # ================================================================================================ dobór formatu

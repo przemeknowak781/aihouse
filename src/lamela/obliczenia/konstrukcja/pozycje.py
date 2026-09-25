@@ -563,10 +563,24 @@ class AnalizaKonstrukcji:
             ln = LineString([tuple(w.p1), tuple(w.p2)])
             if ln.distance(g.poly) > t / 2 + 0.02:
                 continue
-            for k, piece in enumerate(self._snap_linia(ln, g.poly)):
-                sid = w.id if k == 0 else f"{w.id}#{k + 1}"
-                g.podp_l.append(PodporaLiniowa(sid, piece, "przegub", "sciana"))
-                g.sciany_pod.append((sid, w))
+            # belki w koronie ściany (pole modelu belka_w_koronie): odcinek pod belką nie jest podporą płyty — płyta
+            # opiera się na belce (podpora liniowa „belka”), belka na swoich podporach (słupy, ściany)
+            linie = [ln]
+            kor = self._odcinki_na_belkach(w, "belka_w_koronie")
+            if kor:
+                wolne = [(0.0, w.L)]
+                for _, a_, c_ in kor:
+                    wolne = [q for s0_, s1_ in wolne for q in ((s0_, min(s1_, a_)), (max(s0_, c_), s1_)) if q[1] - q[0] > 0.10]
+                linie = [LineString([tuple(w.pt(s0_, 0.0)), tuple(w.pt(s1_, 0.0))]) for s0_, s1_ in wolne]
+                self.log(f"{w.id}: odcinki pod belkami w koronie ({', '.join(str(b_['id']) for b_, _, _ in kor)}) wyłączone z "
+                         f"podparcia płyty {g.nazwa} — płyta oparta na belce (model: belka_w_koronie).")
+            k = 0
+            for ln_ in linie:
+                for piece in self._snap_linia(ln_, g.poly):
+                    sid = w.id if k == 0 else f"{w.id}#{k + 1}"
+                    k += 1
+                    g.podp_l.append(PodporaLiniowa(sid, piece, "przegub", "sciana"))
+                    g.sciany_pod.append((sid, w))
         # ściany-tarcze stojące na płycie: płyta podwieszona do tarczy poza odcinkami podpartymi ścianą poniżej [UPR]
         g.tarcze_pod = []
         for w in m.sciany():
@@ -745,6 +759,9 @@ class AnalizaKonstrukcji:
                     g.linie.append((None, "QA", eq, f"ścianka działowa {w.id}: {f(gl, 2)} kN/m → zastępcze {f(eq, 1)} kN/m² (6.3.1.2(8))"))
             else:
                 below = self._sciana_ponizej(w)
+                na_b = self._odcinki_na_belkach(w, "oparta_na")
+                if below is None and sum(c_ - a_ for _, a_, c_ in na_b) >= 0.9 * w.L:
+                    continue                  # ściana stoi na belkach (oparta_na) — obciążenie przejmują belki
                 if below is None:
                     pr = self.prof.get(w.id)
                     if pr is not None:
@@ -758,12 +775,75 @@ class AnalizaKonstrukcji:
             if abs(z - g.wierzch) < 0.35 and ln.distance(g.poly) < 0.05:
                 g.linie.append((ln, "G", RG, f"{opis}: {f(RG, 2)} kN/m (G)"))
                 g.linie.append((ln, "QA", RQ, f"{opis}: {f(RQ, 2)} kN/m (Q)"))
-        for sid, N in self.slupy_N.items():
-            c = next((c for c in m.slupy() if str(c["id"]) == sid), None)
-            if c is None or abs(float(c["z_od"]) - g.wierzch) > TOL_Z or not g.poly.contains(Point(*c["xy"])):
+        for c in m.slupy():
+            sid = str(c["id"])
+            N = dict(self.slupy_N.get(sid) or {})
+            if abs(float(c["z_od"]) - g.wierzch) > TOL_Z or not g.poly.buffer(0.05).contains(Point(*c["xy"])):
+                continue
+            c2 = self._slup_ponizej(c)
+            if c2 is not None:
+                # słup kontynuowany poniżej (trzpień w murze, ciągłość zbrojenia przez wieniec/belkę) — siła osiowa
+                # przekazana bezpośrednio na słup niższej kondygnacji (z ciężarem własnym), nie na płytę
+                d_ = self.slupy_N.setdefault(str(c2["id"]), {})
+                for cs, v in N.items():
+                    d_[cs] = d_.get(cs, 0.0) + v
+                d_["G"] = d_.get("G", 0.0) + self._ciezar_slupa(c)
+                self.slupy_przekazane = getattr(self, "slupy_przekazane", {}) | {sid: str(c2["id"])}
+                continue
+            if not g.poly.contains(Point(*c["xy"])):
                 continue
             for cs, v in N.items():
                 g.punkty.append((tuple(c["xy"]), cs, v, f"słup {sid}"))
+
+    def _odcinki_na_belkach(self, w, pole: str) -> list:
+        """[(belka, s0, s1)] — odcinki osi ściany ``w`` (współrzędne ściany) pokryte belkami wskazanymi w polu modelu ``pole``
+        (``oparta_na`` — ściana stoi na belce; ``belka_w_koronie`` — belka w koronie ściany podpiera płytę zamiast muru);
+        odcinki rozłączne (pierwsza belka listy ma pierwszeństwo)."""
+        ids = (getattr(w, "raw", {}) or {}).get(pole) or []
+        out = []
+        for bid in ids:
+            b = next((b_ for b_ in self.m.belki() if str(b_["id"]) == str(bid)), None)
+            if b is None:
+                continue
+            (sa, ta), (sb, tb) = w.st(b["os"][0]), w.st(b["os"][1])
+            if max(abs(ta), abs(tb)) > w.grubosc / 2 + 0.05:
+                self.log(f"{w.id}: {pole} — belka {bid} nie leży w osi ściany (pominięto) [WYMAGA ANALIZY].")
+                continue
+            s0, s1 = max(min(sa, sb), 0.0), min(max(sa, sb), w.L)
+            for _, a, c in out:
+                if s0 < c and s1 > a:
+                    if s0 >= a:
+                        s0 = max(s0, c)
+                    else:
+                        s1 = min(s1, a)
+            if s1 - s0 > 0.05:
+                out.append((b, s0, s1))
+        return out
+
+    def _ciezar_slupa(self, c) -> float:
+        """Ciężar własny słupa [kN]: stalowy — masa profilu; żelbetowy — A_c·25·L."""
+        L = float(c["z_do"]) - float(c["z_od"])
+        mat = self.m.material(str(c.get("mat"))) if c.get("mat") else None
+        kr = (mat.kreskowanie or "").upper() if mat is not None else ""
+        try:
+            if kr == "STAL":
+                return przekroj(str(c.get("przekroj"))).masa * 9.81 / 1000 * L
+            if "ZELBET" in kr or klasa_betonu_z_nazwy(mat.nazwa if mat else "") is not None:
+                a, b = _wymiary_slupa(str(c.get("przekroj")))
+                return a * b * self.p.ciezar_zelbetu * L
+        except Exception:  # noqa: BLE001
+            return 0.0
+        return 0.0
+
+    def _slup_ponizej(self, c):
+        """Słup kontynuowany poniżej (ta sama oś pionowa ±5 cm, góra ≤ 0,7 m pod spodem słupa ``c``) albo None."""
+        z0 = float(c["z_od"])
+        for c2 in self.m.slupy():
+            if c2 is c or str(c2["id"]) == str(c["id"]):
+                continue
+            if math.hypot(c2["xy"][0] - c["xy"][0], c2["xy"][1] - c["xy"][1]) <= 0.05 and z0 - 0.7 <= float(c2["z_do"]) <= z0 + TOL_Z:
+                return c2
+        return None
 
     def _sciana_ponizej(self, w):
         for v in self.m.sciany():
@@ -1502,6 +1582,72 @@ class AnalizaKonstrukcji:
                      + ", ".join(sorted({(o.id if t == 'sciana' else str(o['id'])) for _, t, o in out})) + " [ZAŁ].")
         return out
 
+    def _podpory_jawne(self, b) -> list:
+        """Podpory z pola modelu ``belki[].podpory`` ([{typ: sciana|slup|belka, id, s}]) → [(s, typ, obiekt)] albo []."""
+        out = []
+        for q in b.get("podpory") or []:
+            t, oid, s_ = str(q.get("typ")), str(q.get("id")), float(q.get("s", 0.0))
+            if t == "sciana":
+                o = next((w for w in self.m.sciany() if w.id == oid), None)
+            elif t == "slup":
+                o = next((c for c in self.m.slupy() if str(c["id"]) == oid), None)
+            else:
+                o = next((b2 for b2 in self.m.belki() if str(b2["id"]) == oid), None)
+            if o is None:
+                self.log(f"Belka {b['id']}: podpora jawna {q} — brak elementu w modelu [WYMAGA ANALIZY].")
+                return []
+            out.append((s_, t, o))
+        if out:
+            self.log(f"Belka {b['id']}: schemat podparcia z modelu (belki[].podpory): "
+                     + ", ".join(f"{t} {(o.id if t == 'sciana' else o['id'])} (s = {f(s_, 3)} m)" for s_, t, o in out) + ".")
+        return sorted(out, key=lambda q: q[0])
+
+    def _obc_scian_i_slupow_na_belce(self, b, p0, u, L: float, top: float, bw: float, obc: dict) -> list:
+        """Obciążenia belki od ścian stojących na niej (pole ``oparta_na`` ściany — profil dolny ściany na odcinku nad
+        belką, liniowo zmienny) i od słupów stojących na belce (bez kontynuacji słupem poniżej) — dopisuje do ``obc``."""
+        x0, y0 = p0
+        ux, uy = u
+        bid = str(b["id"])
+        opis = []
+
+        def pr(pt):
+            return min(max((pt[0] - x0) * ux + (pt[1] - y0) * uy, 0.0), L)
+        for v in self.m.sciany():
+            if v.id not in self.prof or bid not in [str(q) for q in ((getattr(v, "raw", {}) or {}).get("oparta_na") or [])]:
+                continue
+            pv = self.prof[v.id]["dol"]
+            for b_, a_, c_ in self._odcinki_na_belkach(v, "oparta_na"):
+                if str(b_["id"]) != bid:
+                    continue
+                msk = (pv.s >= a_ - 1e-9) & (pv.s <= c_ + 1e-9)
+                ss = pv.s[msk]
+                if len(ss) < 2:
+                    continue
+                xs = np.array([pr(v.pt(s_, 0.0)) for s_ in ss])
+                o_ = np.argsort(xs)
+                xs = xs[o_]
+                for cs in pv.przypadki():
+                    q = pv.get(cs)[msk][o_]
+                    lst = [ObcQ(float(q[k]), float(xs[k]), float(xs[k + 1]), float(q[k + 1])) for k in range(len(xs) - 1)
+                           if xs[k + 1] - xs[k] > 1e-6 and (q[k] or q[k + 1])]
+                    if lst:
+                        obc.setdefault(cs, []).extend(lst)
+                opis.append(f"ściana {v.id} stojąca na belce (odcinek {f(a_)}–{f(c_)} m ściany; profil obciążenia dolnego ściany)")
+        for c in self.m.slupy():
+            if abs(float(c["z_od"]) - top) > TOL_Z or self._slup_ponizej(c) is not None:
+                continue
+            cx, cy = c["xy"]
+            s_ = (cx - x0) * ux + (cy - y0) * uy
+            if not (-0.05 <= s_ <= L + 0.05) or abs(-(cx - x0) * uy + (cy - y0) * ux) > bw / 2 + 0.1:
+                continue
+            N = dict(self.slupy_N.get(str(c["id"])) or {})
+            N["G"] = N.get("G", 0.0) + self._ciezar_slupa(c)
+            for cs, v in N.items():
+                if abs(v) > 1e-9:
+                    obc.setdefault(cs, []).append(ObcP(v, min(max(s_, 0.0), L)))
+            opis.append(f"słup {c['id']} stojący na belce (x = {f(s_, 2)} m)")
+        return opis
+
     def _na_belce(self, b) -> bool:
         """Koniec belki oparty na innej belce (bez ściany/słupa przy tym końcu) — belkę liczyć przed podpierającą."""
         m = self.m
@@ -1523,7 +1669,8 @@ class AnalizaKonstrukcji:
         p, m, fe = self.p, self.m, g.fe
         if not hasattr(self, "pending_belki"):
             self.pending_belki = {}         # id belki → [(przypadek, P [kN], współrzędna/punkt)] — reakcje belek opartych
-        for sid, b in sorted(g.belki, key=lambda sb: 0 if self._na_belce(sb[1]) else 1):
+        for sid, b in sorted(g.belki, key=lambda sb: 0 if (any(str((q or {}).get("typ")) == "belka" for q in sb[1].get("podpory") or [])
+                                                             or self._na_belce(sb[1])) else 1):
             if "#" in sid:
                 continue
             bid = str(b["id"])
@@ -1552,6 +1699,9 @@ class AnalizaKonstrukcji:
                 if -0.2 <= s <= L + 0.2 and dperp <= bw / 2 + 0.1:
                     pods.append((min(max(s, 0.0), L), "slup", c))
             pods = sorted({round(s, 3): (s, t, o) for s, t, o in pods}.values(), key=lambda q: q[0])
+            jawne = self._podpory_jawne(b)
+            if jawne:
+                pods = jawne                       # jawny schemat podparcia z modelu (belki[].podpory)
             if len(pods) < 2:
                 pods = self._podpory_belki_rozszerzone(b, (x0, y0), (ux, uy), L, spod, pods)
                 # w tym samym punkcie (naroże ścian) — podpora na murze współliniowym (belka leży na nim)
@@ -1583,6 +1733,7 @@ class AnalizaKonstrukcji:
             obc["G"] = obc.get("G", []) + [ObcQ(gw)]
             for cs, P_, xy in self.pending_belki.get(bid, []):        # reakcje belek opartych na tej belce
                 obc.setdefault(cs, []).append(ObcP(P_, min(max((xy[0] - x0) * ux + (xy[1] - y0) * uy, 0.0), L)))
+            opis_dod = self._obc_scian_i_slupow_na_belce(b, (x0, y0), (ux, uy), L, spod + hb, bw, obc)
             # wspólna siatka węzłów dla wszystkich przypadków (rozwiaz() dogęszcza siatkę w punktach nieciągłości
             # obciążeń — bez tego wektory M(x) przypadków mają różne długości i obwiednia się nie składa)
             belka.dodaj_punkty([t for v in obc.values() for q in v if isinstance(q, ObcQ)
@@ -1601,7 +1752,7 @@ class AnalizaKonstrukcji:
                                         f"(x = {f(s, 2)} m)" for s, t, o in pods)
                             + ". Obciążenie: reakcje płyty z MES (rozkład wzdłuż belki) + ciężar własny"
                             + (" + reakcje belek opartych na końcach (siły skupione)" if self.pending_belki.get(bid) else "")
-                            + ".")
+                            + "".join(f" + {t_}" for t_ in opis_dod) + ".")
             rows = [[cs, (sum(q.q0 * ((q.x1 or L) - (q.x0 or 0)) for q in v if isinstance(q, ObcQ))
                           + sum(q.P for q in v if isinstance(q, ObcP)), 1)] for cs, v in obc.items()]
             poz.obciazenia.append("**Obciążenia belki (charakterystyczne, wypadkowe przypadków)**\n\n" +
@@ -2506,6 +2657,14 @@ def _m_usrednione(fe, vals: np.ndarray, mask: np.ndarray, os_usr: str, b: float)
             continue
         best = min(best, float((vv[row] * w).sum() / w.sum()))
     return best
+
+
+def _wymiary_slupa(txt: str) -> tuple[float, float]:
+    """„180x400” [mm] → (0,18; 0,40) [m] (b_x × b_y)."""
+    m_ = re.search(r"(\d+(?:[.,]\d+)?)\s*[x×]\s*(\d+(?:[.,]\d+)?)", txt or "")
+    if not m_:
+        raise BladDanych(f"nieczytelny przekrój słupa: {txt!r}")
+    return float(m_.group(1).replace(",", ".")) / 1000.0, float(m_.group(2).replace(",", ".")) / 1000.0
 
 
 def _slug(s: str) -> str:
