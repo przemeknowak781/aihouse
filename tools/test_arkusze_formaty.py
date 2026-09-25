@@ -550,6 +550,26 @@ def test_odcinek_kontrolny_a_znak():
                 assert not (b[1] < cy + 0.35 and b[3] > cy - 0.35 and b[0] < xb and b[2] > xa), (fmt_, b)
 
 
+def test_metryka_skladowe():
+    """[AR 4] ``tools/metryki_arkuszy.py``: W skł. rozbija składową wklęsłą (bloki sklejone domknięciem 6 mm
+    w „L”) i pokazuje puste pole, które W obw. zamyka w jednej obwiedni."""
+    import importlib.util
+    import tempfile
+    spec = importlib.util.spec_from_file_location("_metryki_test", ROOT / "tools" / "metryki_arkuszy.py")
+    M = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(M)
+    sh = Sheet("600x420")
+    for x0, y0, x1, y1 in ((30, 200, 400, 400), (406, 20, 580, 400)):     # „L”: odstęp 6 mm, puste pole w rogu
+        sh.rect(x0, y0, x1, y1, layer="R-OPISY")
+        for k in range(1, 8):
+            sh.line((x0, y0 + k * (y1 - y0) / 8), (x1, y0 + k * (y1 - y0) / 8), layer="R-OPISY")
+    with tempfile.TemporaryDirectory() as d:
+        files = sh.save(Path(d) / "L", formats=("pdf",))
+        r = M.analyze_pdf(Path(files["pdf"]))
+    assert r["wypelnienie"] > 0.95 and r["wypelnienie_skl"] < r["wypelnienie"] - 0.2, (r["wypelnienie"],
+                                                                                      r["wypelnienie_skl"])
+
+
 # ================================================================================================ arkusze z modelu
 _CTX = None
 
