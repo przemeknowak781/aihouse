@@ -266,6 +266,10 @@ class Wezel:
     dane: dict = field(default_factory=dict)      # dane wejściowe do raportu
     uwagi: list[str] = field(default_factory=list)
     dopusc_pustki: bool = False                   # True — celowe wcięcia adiabatyczne (wyłącza kontrolę szczelin)
+    # warstwy cienkie i elementy odprowadzenia wody — TYLKO do rysunku (zasada „4 linii”, brief pkt 9.1): pomijalne
+    # cieplnie (membrany, taśmy, obróbki) albo poza modelem (drenaż, rura spustowa); [{rodzaj, xy, opis}], rodzaj
+    # z `RODZAJE_LINII`
+    linie: list[dict] = field(default_factory=list)
 
     # ---- pomocnicze
     def materialy(self) -> list[Material]:
@@ -287,6 +291,26 @@ class Wezel:
     def bounds(self) -> tuple[float, float, float, float]:
         geoms = [o.wielobok for o in self.obszary] + [s.wielobok for s in self.strefy]
         return unary_union(geoms).bounds
+
+
+# rodzaje linii schematycznych (`Wezel.linie`) — kolory zasady „4 linii” (brief sekcja 9 pkt 1)
+RODZAJE_LINII = {
+    "hydro": "hydroizolacja / izolacja przeciwwodna",
+    "przeciwwilg": "izolacja przeciwwilgociowa (pozioma)",
+    "paro": "paroizolacja / warstwa szczelności powietrznej",
+    "tasma_wewn": "taśma paroszczelna (wewn.)",
+    "tasma_zewn": "taśma paroprzepuszczalna / uszczelnienie zewn.",
+    "obrobka": "obróbka blacharska / parapet z okapnikiem",
+    "woda": "kierunek spływu wody (spadek)",
+    "drenaz": "drenaż opaskowy / opaska żwirowa",
+    "rura": "rura spustowa",
+}
+
+
+def _ln(rodzaj: str, xy, opis: str = "") -> dict:
+    if rodzaj not in RODZAJE_LINII:
+        raise ValueError(rodzaj)
+    return {"rodzaj": rodzaj, "xy": [(float(a), float(b)) for a, b in xy], "opis": opis}
 
 
 # --------------------------------------------------------------------------------------------------
