@@ -181,6 +181,18 @@ class Labeler:
             self.failed.append(lines)
         return pos, cost
 
+    def label_in(self, region, *a, **kw):
+        """Opis najpierw w obszarze ``region`` (np. działka), a gdy się nie mieści — w całym oknie rzutni."""
+        old = self.bounds
+        mc = kw.pop("max_cost", None)
+        self.bounds = region if old is None else region.intersection(old)
+        pos, c = self.label(*a, max_cost=6.0 if mc is None else min(mc, 6.0), **kw)
+        self.bounds = old
+        if pos is None:
+            self.failed.pop()
+            pos, c = self.label(*a, max_cost=mc, **kw)
+        return pos, c
+
     def _mute(self, own, buf_mm=0.6):
         """Tymczasowo zeruje wagę przeszkód liniowych należących do ``own`` (np. opis na własnej linii)."""
         if own is None:
@@ -325,11 +337,12 @@ def label_base_map(c, s, lab: Labeler, win: Polygon, used: set, opts: dict, spot
             continue
         for ls in (g.geoms if hasattr(g, "geoms") else [g]):
             lab.along(ls, sx.lit, H, "Z-SIECI-IST", sx.kolor, n=3, max_cost=10.0, mask=0.2)
-            short = sx.opis.split("(")[0].split(",")[0].strip()
-            anchors = [np.asarray(ls.interpolate(f, normalized=True).coords[0]) for f in (0.2, 0.3, 0.12, 0.4, 0.8)]
+            short = short_desc(sx.opis)
+            anchors = [np.asarray(ls.interpolate(f, normalized=True).coords[0])
+                       for f in (0.2, 0.3, 0.12, 0.06, 0.4, 0.8, 0.9, 0.95)]
             lab.label(anchors, [f"{sx.lit} — {short}"], H, "Z-SIECI-IST", color=sx.kolor,
-                      dists=(6.0, 9.0, 12.0, 16.0), dirs=[(0, 1), (1, 1), (-1, 1), (0, -1), (1, -1)], leader_from=2.0,
-                      dot=True, max_cost=12.0)
+                      dists=(6.0, 9.0, 12.0, 16.0, 20.0), dirs=[(0, 1), (1, 1), (-1, 1), (0, -1), (1, -1), (-1, -1)],
+                      leader_from=2.0, dot=True, max_cost=12.0)
     if contours:
         bb = win.bounds
         for pts, Hh in s.contours(bb):
@@ -339,6 +352,15 @@ def label_base_map(c, s, lab: Labeler, win: Polygon, used: set, opts: dict, spot
                 continue
             for part in (g.geoms if hasattr(g, "geoms") else [g]):
                 lab.along(part, f"{Hh:.2f}".replace(".", ","), H, "Z-RZEDNE", None, n=1, max_cost=2.5)
+
+
+def short_desc(opis: str, n=40) -> str:
+    """Krótki opis sieci: do nawiasu / myślnika / przecinka ze spacją (nie przecinka dziesiętnego)."""
+    import re as _re
+    t = _re.split(r"\s\(|\s—\s|,\s|;", str(opis or ""))[0].strip()
+    if _re.search(r"nie\s+wykorzyst", str(opis or ""), _re.I):
+        t += " (nie wykorzystywany)"
+    return t if len(t) <= n else t[:n - 1].rstrip() + "…"
 
 
 def road_name(c, s, lab: Labeler, win, h=2.5):
@@ -738,7 +760,7 @@ def draw_retention(c, s, used: set):
             g = box(x - w / 2, y - h / 2, x + w / 2, y + h / 2)
         fill_white(c, g, z=9.8)
         draw_geom(c, g, "Z-ODWODNIENIE", pen=0.5, lt="CIAGLA")
-        c.text(zb["xy"], "ZB", H, 0.0, "center", "middle", "Z-ODWODNIENIE")
+        c.text(zb["xy"], "ZB", H, 0.0, "center", "middle", "Z-ODWODNIENIE", mask=0.3)
         zb["draw_poly"] = g
         used.add("zbiornik")
 

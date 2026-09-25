@@ -75,7 +75,10 @@ def _labels_building(lab, s, W, h=D.H):
     rom = ["", "I", "II", "III", "IV", "V", "VI"][min(6, W["n_kond"])]
     inner = s.p0.buffer(-3.0 * k)
     from .common import label_point, spiral
-    c0 = label_point(s.p0)
+    gar = [q["poly"] for q in s.miejsca if q["poly"].difference(s.p0).area < 0.1]
+    main = s.p0.difference(unary_union(gar).convex_hull.buffer(0.3)) if gar else s.p0
+    main = max(getattr(main, "geoms", [main]), key=lambda q: q.area)
+    c0 = label_point(main)
     cands = [p for p in spiral(c0, 1.2 * k * 2, 6, 8) if inner.contains(Point(p))] or [tuple(c0)]
 
     def fn(cv, p):
@@ -98,7 +101,8 @@ def _label_garage(lab, s):
 
 
 def _label_function(lab, s, anchor, lines=("budynek mieszkalny jednorodzinny", "— projektowany")):
-    lab.label(anchor, list(lines), D.H, dists=(9.0, 12.0, 15.0, 19.0, 24.0), leader_from=2.0, dot=True)
+    lab.label_in(s.plot.buffer(-0.5), anchor, list(lines), D.H, dists=(9.0, 12.0, 15.0, 19.0, 24.0), leader_from=2.0,
+                 dot=True)
 
 
 def _frame_and_note(vp, win_b, used):
@@ -160,13 +164,16 @@ def view_plan(ctx, spec, scale, opts):
         if g is not None:
             D.utility(vp, g, sx, pen=0.5, flow=False)
             used.add(f"proj_{sx.branza}")
+            for q in (sx.geom.coords[0], sx.geom.coords[-1]):
+                if any(E.istn and E.branza == sx.branza and E.geom.distance(Point(q)) < 0.05 for E in s.sieci):
+                    D.cross_mark(vp, q, color=sx.kolor)
+                    used.add("wlaczenie")
     D.draw_objects(vp, s, used, win)
     D.draw_building(vp, s, used, slab_lt=str(opts.get("linia_plyt", "PUNKTOWA")).upper())
     D.register_all(lab)
     # --- opisy i wymiary (kolejność = priorytet)
     c0 = _labels_building(lab, s, W)
     used.add("zero")
-    _label_garage(lab, s)
     lab.area(s.footprint, 3.0)
     _dims_plan(lab, s, used)
     _label_function(lab, s, c0)
@@ -280,10 +287,12 @@ def _labels_project(lab, s, W, used, detail=False):
     """Opisy elementów projektu (priorytet przed opisami podkładu)."""
     k = lab.k
     h = D.H
+    R = s.plot.buffer(0.3)
+    L = lambda *a_, **kw: lab.label_in(R, *a_, **kw)      # noqa: E731 — opisy projektu najpierw w działce
     # działka: numer i powierzchnia
     free = s.plot.difference(s.footprint.buffer(4.0)).buffer(-3.0)
     anchor = np.asarray((free if not free.is_empty else s.plot).representative_point().coords[0])
-    lab.label(anchor, [f"dz. nr {s.nr}", f"P = {m2(s.plot.area)}"], 3.5, "Z-OPISY", ["bold", "normal"],
+    L(anchor, [f"dz. nr {s.nr}", f"P = {m2(s.plot.area)}"], 3.5, "Z-OPISY", ["bold", "normal"],
               dists=(0.0, 3.0, 6.0, 10.0, 15.0, 22.0), leader_from=99)
     if s.linia_zabudowy is not None:
         lz = s.linia_zabudowy
@@ -294,36 +303,36 @@ def _labels_project(lab, s, W, used, detail=False):
     for t in s.tarasy:
         pg = t["poly"].difference(s.p0)
         if pg.area > 4.0:
-            lab.label(np.asarray(pg.representative_point().coords[0]), ["taras" if "desk" in t["naw"] else
+            L(np.asarray(pg.representative_point().coords[0]), ["taras" if "desk" in t["naw"] else
                                                                         "podest"], h, dists=(0.0, 1.5, 4.0, 8.0))
     for u in s.utwardzenia:
         nm = _short(u["raw"].get("nawierzchnia"), 22)
         if u["poly"].area < (3.0 if not detail else 1.0) or "fundament" in nm or "pojemnik" in nm:
             continue
-        lab.label(np.asarray(u["poly"].representative_point().coords[0]), [nm], h, dists=(0.0, 1.5, 4.0, 8.0, 12.0))
+        L(np.asarray(u["poly"].representative_point().coords[0]), [nm], h, dists=(0.0, 1.5, 4.0, 8.0, 12.0))
     for q in s.miejsca:
         if q["poly"].difference(s.p0).area < 0.1:
             continue
-        lab.label(np.asarray(q["poly"].centroid.coords[0]), ["P"], h, style="bold", dists=(0.0, 1.0, 2.5),
+        L(np.asarray(q["poly"].centroid.coords[0]), ["P"], h, style="bold", dists=(0.0, 1.0, 2.5),
                   own=q["poly"].exterior)
     if s.odpady and s.odpady["poly"] is not None:
-        lab.label(np.asarray(s.odpady["poly"].centroid.coords[0]), ["odpady"], h, dot=True,
+        L(np.asarray(s.odpady["poly"].centroid.coords[0]), ["odpady"], h, dot=True,
                   dists=(1.0, 2.5, 4.0, 6.0, 9.0, 12.0))
     if s.pc is not None:
-        lab.label(np.asarray(s.pc["body"].centroid.coords[0]),
+        L(np.asarray(s.pc["body"].centroid.coords[0]),
                   ["PC — jedn. zewn.", f"strefa R290 r = {mm(s.pc['r'])} m"], h, dot=True)
     if s.zbiornik:
         V = s.zbiornik.get("V")
-        lab.label(s.zbiornik["xy"], [f"zbiornik retencyjny V = {fmt.num(float(V), 1)} m³" if V else "zbiornik"], h,
+        L(s.zbiornik["xy"], [f"zbiornik retencyjny V = {fmt.num(float(V), 1)} m³" if V else "zbiornik"], h,
                   dot=True, dists=(3.0, 5.0, 8.0, 12.0))
     if s.rozsaczanie and s.rozsaczanie["poly"] is not None:
         r = s.rozsaczanie
         txt = ["niecka chłonna", f"{m2(r['poly'].area)}" + (f", V = {fmt.num(float(r['V']), 1)} m³" if r["V"] else "")]
-        lab.label(np.asarray(r["poly"].centroid.coords[0]), txt, h, dists=(0.0, 3.0, 6.0, 10.0))
+        L(np.asarray(r["poly"].centroid.coords[0]), txt, h, dists=(0.0, 3.0, 6.0, 10.0))
     for t in s.drzewa:
         nm = t["id"] + " " + t["gat"].split()[0] + (" (istn.)" if t["istn"] else "")
         r_mm = t["d"] / 2.0 / k
-        lab.label(t["xy"], [nm], h, dists=(0.8, 2.0, r_mm * 0.75, r_mm + 1.0, r_mm + 3.0, r_mm + 6.0, r_mm + 10.0),
+        L(t["xy"], [nm], h, dists=(0.8, 2.0, r_mm * 0.75, r_mm + 1.0, r_mm + 3.0, r_mm + 6.0, r_mm + 10.0),
                   leader_from=2.5, own=Point(t["xy"]).buffer(t["d"] / 2.0).exterior)
     for o in s.obiekty.values():
         idu = o.id.upper()
@@ -335,10 +344,10 @@ def _labels_project(lab, s, W, used, detail=False):
         else:
             txt = [o.id]
         if lab.bounds is None or lab.bounds.contains(Point(o.xy)):
-            lab.label(o.xy, txt, h, dot=False, dists=(1.5, 3.0, 5.0, 8.0, 12.0))
+            L(o.xy, txt, h, dot=False, dists=(1.5, 3.0, 5.0, 8.0, 12.0))
     for b in s.bramy if detail else []:
         nm = "furtka" if b["typ"] == "furtka" else "brama przesuwna"
-        lab.label(b["xy"], [f"{nm} {mm(b['szer'])}"], h, dists=(3.0, 5.0, 8.0, 12.0), leader_from=2.5,
+        L(b["xy"], [f"{nm} {mm(b['szer'])}"], h, dists=(3.0, 5.0, 8.0, 12.0), leader_from=2.5,
                   dirs=[(0, -1), (1, -1), (-1, -1), (1, 0), (-1, 0)])
     for sx in [x for x in s.sieci if not x.istn]:
         g = sx.geom.difference(s.p0) if not s.p0.is_empty else sx.geom

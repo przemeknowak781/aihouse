@@ -1,4 +1,5 @@
 {
+ "nr": 30,
  "title": "Rysunki PT: zbrojenie płyty fundamentowej (ISO 3766 + zestawienie stali), oświetlenie · katalog mostków rzeczywistego budynku",
  "stages": [
   [
@@ -59,6 +60,17 @@
   "PT-IE-01: oświetlenie parteru 1:50 z obwodami (ΔU ≤ 1,03 %, RCBO 30 mA), WLZ YKY 5×16, SPD T1+T2.",
   "Katalog mostków dla modelu (ISO 10211): wszystkie węzły f_Rsi ≥ 0,760 (wym. 0,72). Do poprawy: łączniki wsporników 80→120 mm (ψ 0,22→0,13), attyka z okapem (ψ 0,385 → 0,203 z blokiem termoizolacyjnym), styk z garażem ψ 0,616 → 0,299 (XPS pod posadzką garażu + blok u podstawy ściany).",
   "Woda: rzędne przelewów awaryjnych odnoszone do pokrycia średniego zamiast przy wpuście (7 przelewów do korekty); okapy bez odbioru wody → rynny ukryte za blendą + rury spustowe do kanalizacji deszczowej.",
-  "Poprawki modelu po audytach A1–A3 w toku; zalecenia z weryfikacji i katalogu mostków — druga runda."
+  "Poprawki modelu po audytach A1–A3 w toku; zalecenia z weryfikacji i katalogu mostków — druga runda.",
+  "NADZÓR (06:49): 5 agentów aktywnych, bez zastojów; najdłuższa bezczynność 0 min; zmiany w repo 0 min temu."
+ ],
+ "images": [
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/bo/out/PT-BO-05_zbrojenie_dolne_plyty_fundamentowej.png",
+   "caption": "PT-BO-05 — zbrojenie dolne płyty fundamentowej 1:50 (robocze)"
+  },
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/inst/PT-IE-01.png",
+   "caption": "PT-IE-01 — instalacja oświetlenia, parter 1:50 (robocze)"
+  }
  ]
 }

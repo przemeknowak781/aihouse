@@ -251,7 +251,8 @@ def wezly_stropu_zewn(model, e: dict):
                 continue
             w = D.wezel_przegroda_w_linii(_W(model, k["sciana"]), t, mat, ("wewn", pod), ("wewn", pod),
                                           ("wewn", []), ("zewn", suf), id=wid, typ="strop_zewn_krawedz",
-                                          nazwa=f"{e.get('nazwa')} — krawędź nad ścianą {k['sciana']} niższej kondygnacji")
+                                          nazwa=f"Krawędź stropu {st['id']} nad ścianą {k['sciana']} niższej "
+                                                f"kondygnacji (ocieplenie spodu {st.get('sufit')})")
         else:
             if not k["sciana"]:
                 continue
@@ -267,9 +268,10 @@ def wezly_stropu_zewn(model, e: dict):
             w = D.wezel_wspornik_ogolny(_W(model, k["sciana"]), None, t, mat, podloga=pod, sufit=suf, pod="zewn",
                                         belka=(bl[0], bl[1]) if bl else None,
                                         mat_belki=_mat(model, bl[2]) if bl else None, id=wid, **kw,
-                                        nazwa=f"{e.get('nazwa')} — ściana {k['sciana']} na krawędzi"
-                                              + (f", belka {bl[3]}" if bl else "")
-                                              + (f", płyta {ws['id']} (łącznik)" if ws is not None else ""))
+                                        nazwa=f"Krawędź stropu {st['id']} nad powietrzem: ściana {k['sciana']}"
+                                              + (f" na belce {bl[3]}" if bl else "")
+                                              + (f" + płyta {ws['id']} (łącznik)" if ws is not None else ""))
+        w.dane["wpis sekcji wezly"] = f"{e['id']}: {e.get('nazwa')}"
         w.dane["geometria z modelu"] = (f"strop {st['id']} (sufit {st.get('sufit')}); krawędzie typu "
                                         f"{'ściana na krawędzi' if k['typ'] == 'a' else 'nad ścianą niższej kondygnacji'}"
                                         f" — łącznie {k['L']:.2f} m")

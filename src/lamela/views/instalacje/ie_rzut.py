@@ -489,3 +489,74 @@ class RysG(RysE):
                 self._dedyk("piekarnik", xy, rot)
             elif t == "lodowka" and g:
                 self.sym(S.socket, xy, rot, n=1, s_mm=3.0)
+
+    def zewnetrzne(self):
+        W = self.W
+        o14 = next((o for o in self.obw if o.odb.grupa == "zewn"), None)
+        pts = []
+        for w in self.m.sciany(self.kid):
+            if w.ext_side is None:
+                continue
+            for o in w.otwory:
+                if o.typ == "drzwi_przesuwne_HS" and len(pts) < 2:
+                    es = w.ext_side
+                    s = o.s0 - 0.4 if o.s0 > 0.6 else o.s1 + 0.4
+                    rot = math.degrees(math.atan2(*(w.n * es)[::-1]))
+                    pts.append((w.pt(s, w.face_t(es, "all")), rot))
+        for q, rot in pts:
+            self.sym(S.socket, q, rot, n=2, ip44=True, s_mm=3.0)
+        if pts and o14 is not None:
+            self.circuit_tag(pts[0][0], o14.odb.id, "gniazda zewnętrzne IP44/IP54")
+        lok = W.dane.inst.get("lokalizacje") or {}
+        jz = (lok.get("pompa_ciepla_jz") or {}).get("xy")
+        if jz:
+            self._dedyk("pc", np.asarray(jz, float) + np.array([0.7, 0.0]),
+                        txt="PC — jedn. zewn., wyłącznik serwisowy IP65 przy urządzeniu")
+        for grupa, txt in (("napedy", None), ("pompa", None)):
+            for o in self.obw:
+                if o.odb.grupa != grupa or o.odb.lok is None or "osłon" in o.odb.nazwa or "bramy gar" in o.odb.nazwa:
+                    continue
+                q = np.asarray(o.odb.lok[:2], float)
+                x0, y0, x1, y1 = self.pod.outline.bounds
+                qc = np.array([min(max(q[0], x0 - 1.5), x1 + 1.5), min(max(q[1], y0 - 1.5), y1 + 1.5)])
+                self.sym(S.junction_box, qc, s_mm=1.8)
+                self.circuit_tag(qc, o.odb.id, f"{o.odb.nazwa} — YKY w ziemi, dalej wg PZT")
+
+    def oslony(self):
+        o16 = next((o for o in self.obw if "osłon" in o.odb.nazwa.lower()), None)
+        n = 0
+        first = None
+        for o in self.m.otwory(kond=self.kid):
+            if (o.oslona or "brak") in ("brak", None):
+                continue
+            w = o.sciana
+            es = w.ext_side or 1
+            q = w.pt((o.s0 + o.s1) / 2, w.face_t(-es, "all")) - w.n * es * 0.12
+            n0 = len(self.vp.prims)
+            self.vp.rect(q[0] - 0.07, q[1] - 0.07, q[0] + 0.07, q[1] + 0.07, "E-GNIAZDA", pen="cienka")
+            self.vp.text(q, "M", 1.8, 0.0, "center", "middle", "E-GNIAZDA")
+            self.reg(n0)
+            first = first if first is not None else q
+            n += 1
+        if n and o16 is not None:
+            self.circuit_tag(first, o16.odb.id, f"napędy osłon ({n} szt. na kondygnacji)")
+            self.leg.sym(lambda c, p: (c.rect(p[0] - 1.6, p[1] - 1.6, p[0] + 1.6, p[1] + 1.6, "E-GNIAZDA", pen="cienka"),
+                                       c.text(p, "M", 1.8, 0.0, "center", "middle", "E-GNIAZDA")),
+                         "M — zasilanie napędu osłony przeciwsłonecznej (żaluzja/screen) przy oknie")
+
+    def opisy(self):
+        b = self.W.bilans
+        self.notes += [
+            "Instalacja gniazd wtyczkowych i zasilania urządzeń wg PN-HD 60364-4-41 (samoczynne wyłączenie, RCD "
+            "30 mA dla gniazd ≤ 32 A — p. 411.3.3), PN-HD 60364-5-52 (przewody), PN-HD 60364-7-701 (łazienki), "
+            "PN-HD 60364-7-722 (ładowanie EV); WT § 180–188 (obwody gniazd oddzielne od oświetlenia, gniazda ze "
+            "stykiem ochronnym).",
+            f"Bilans mocy (lamela.obliczenia.elektryka.bilans): P_inst = {num(b.P_inst, 1)} kW, P_szczyt z DLM = "
+            f"{num(b.P_s_dlm, 1)} kW ≤ P_przył = {num(b.P_przyl, 0)} kW, zabezpieczenie przedlicznikowe "
+            f"{num(b.I_zab, 0)} A.",
+            "Liczbę i rozmieszczenie gniazd wyznaczono algorytmicznie (praktyka branżowa, DIN 18015-2): przy łóżkach, "
+            "biurkach, sofach, nad blatem kuchennym co ok. 1,1 m, przy umywalkach (poza strefami 0–2), pozostałe "
+            "równomiernie wzdłuż ścian bez otworów; urządzenia stałe — wypusty/gniazda dedykowane wg obwodów D.",
+            "Wysokości montażu (od posadzki): gniazda 0,30 m; nad blatem 1,10 m; łazienki 1,20 m (IP44); garaż, "
+            "pom. techniczne 1,10 m (IP44); łączniki 1,10 m.",
+        ]
