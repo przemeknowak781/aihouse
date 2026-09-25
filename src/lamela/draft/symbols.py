@@ -650,7 +650,8 @@ def appliance(c, pos, rot=0.0, w=0.60, d=0.60, label="LOD", layer="A-SANITARNE",
     with c.on(layer):
         _poly(c, xf, rect_pts(-w / 2, 0.0, w / 2, d), pen="cienka")
         _pl(c, xf, [(-w / 2, d - 0.04), (w / 2, d - 0.04)], pen="b_cienka")
-        c.text(xf.pt(0, d * 0.5), label, h, 0.0, "center", "middle")
+        if label:
+            c.text(xf.pt(0, d * 0.5), label, h, 0.0, "center", "middle")
 
 
 def fridge(c, pos, rot=0.0, w=0.60, d=0.65, layer="A-SANITARNE"):

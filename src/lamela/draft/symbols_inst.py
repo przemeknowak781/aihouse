@@ -393,7 +393,8 @@ def tank(c, pos, d: float = 0.65, label: str = "CWU 300 l", layer: str = "S-URZA
     with c.on(layer):
         c.circle(pos, d / 2, pen="srednia")
         c.circle(pos, d / 2 - 0.04, pen="b_cienka")
-        c.text(pos, label, h, 0.0, "center", "middle")
+        if label:
+            c.text(pos, label, h, 0.0, "center", "middle")
 
 
 def heat_pump(c, pos, rot=0.0, w: float = 1.10, d: float = 0.45, label: str = "PC", layer: str = "S-URZADZENIA",

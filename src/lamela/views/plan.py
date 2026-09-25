@@ -27,7 +27,7 @@ import numpy as np
 from shapely.geometry import LineString, Point, Polygon, box
 from shapely.ops import unary_union
 
-from ..draft import dims, elements as E, symbols as S
+from ..draft import dims, elements as E, symbols as S, text as T
 from ..draft.geom import lines_of, perp, polygons_of, unit
 from . import hlr
 from .common import (NO_HATCH, Placer, ViewContext, clean, cut_kind, draw_lines, hatch_code,
@@ -772,14 +772,46 @@ class PlanBuilder:
     def furniture(self):
         vp = self.vp
         n0 = len(vp.prims)
+        self._equip_labels = []     # opisy urządzeń do rozmieszczenia odnośnikiem (annotate → equipment_labels)
         for it in self.ctx.furniture:
             if str(it.get("kond")) != self.kid:
                 continue
             try:
+                ext = equipment_label(it, vp.scale)
+                if ext is not None:
+                    self._equip_labels.append(ext)
+                    it = dict(it, _bez_opisu=True)
                 draw_furniture(vp, it)
             except Exception as ex:
                 self.ctx.note("wyposazenie.yaml", f"element {it}: {ex}")
         self.placer.add_prims(vp.prims[n0:], w_text=1.0, w_line=0.3)
+
+    def equipment_labels(self):
+        """Opisy urządzeń dłuższe niż symbol (wodomierz, rozdzielnice, rozdzielacze, zasobniki, centrala
+        wentylacyjna) — w wolnym miejscu pomieszczenia z odnośnikiem do symbolu, z kontrolą kolizji ze ścianami,
+        wymiarami i innymi opisami (weryfikacja C 2.1)."""
+        vp = self.vp
+        for anchor, lines in getattr(self, "_equip_labels", []):
+            room = next((r.polygon for r in self.rooms if r.polygon.buffer(0.05).contains(Point(anchor))), None)
+            bounds = room.buffer(-0.08) if room is not None else None
+            cands = [c for c in spiral(anchor, 0.2, 12, 8)
+                     if bounds is None or bounds.contains(Point(c))] or [tuple(anchor)]
+
+            def fn(cv, pos, a=np.asarray(anchor, float), ls=lines):
+                k, h = cv.k, 1.8
+                lh = h * 1.45 * k
+                n = len(ls)
+                wm = max(T.width(t_, h) for t_ in ls) * k
+                for i, t_ in enumerate(ls):
+                    cv.text((pos[0], pos[1] + (n - 1) * lh / 2.0 - i * lh), t_, h, 0.0, "center", "middle",
+                            "A-OPISY")
+                x0, x1 = pos[0] - wm / 2.0 - 0.6 * k, pos[0] + wm / 2.0 + 0.6 * k
+                y0, y1 = pos[1] - n * lh / 2.0, pos[1] + n * lh / 2.0
+                q = np.array([min(max(a[0], x0), x1), min(max(a[1], y0), y1)])
+                if float(np.hypot(*(q - a))) > 2.5 * k:
+                    cv.line(a, q, "A-OPISY", pen=0.18)
+                    cv.dot(a, 0.8, "A-OPISY")
+            self.placer.place(vp, fn, cands, penalty_step=0.02, bounds=bounds)
 
     # ------------------------------------------------------------------ wejście
     def entrance(self):
@@ -827,6 +859,8 @@ class PlanBuilder:
         self.above_labels()
         # znaki przekrojów
         self.section_marks(axb)
+        # opisy urządzeń (odnośnikiem w wolne miejsce) — po wymiarach i opisach pomieszczeń
+        self.equipment_labels()
         self.res.extent = vp.extents()
 
     def room_tags(self):
@@ -1123,6 +1157,33 @@ FURN = {
 }
 
 
+def _opis_krotki(opis: str) -> str:
+    """Opis urządzenia na rysunek: do nawiasu, przecinka lub średnika (szczegóły — w opisie technicznym)."""
+    import re
+    return re.split(r"\s\(|,\s|;\s|\s—\s", str(opis or ""))[0].strip()
+
+
+def equipment_label(it: dict, scale: float):
+    """(punkt symbolu, [wiersze]) opisu urządzenia rysowanego odnośnikiem poza symbolem — gdy opis nie mieści się
+    w symbolu (urządzenie, zasobnik) albo symbol ma opis nad sobą (centrala wentylacyjna); None — opis w symbolu."""
+    from ..draft.sheet import wrap
+    typ = str(it.get("typ", "")).lower()
+    if typ not in ("urzadzenie", "zasobnik", "rekuperator") or not (it.get("opis") or typ == "rekuperator"):
+        return None
+    pos = np.asarray(it.get("xy") or it.get("pos"), float)
+    rot = math.radians(float(it.get("obrot", 90.0)))
+    wym = it.get("wym") or []
+    w = float(wym[0]) if len(wym) > 0 else 0.6
+    d = float(wym[1]) if len(wym) > 1 else w
+    txt = _opis_krotki(it.get("opis")) or ("REKUPERATOR" if typ == "rekuperator" else "")
+    if typ == "rekuperator":
+        txt = txt or "REKUPERATOR"
+    if typ == "urzadzenie" and T.width(txt, 1.8) <= w * 1000.0 / scale - 1.0:
+        return None                                    # krótki kod (LOD, ZM …) — w symbolu
+    c = pos + np.array([math.cos(rot), math.sin(rot)]) * d / 2.0
+    return c, wrap(txt, 42.0, 1.8)
+
+
 def draw_furniture(vp, it: dict):
     """Element wyposażenia: {typ, xy, obrot (kierunek „od ściany do pomieszczenia” [°]), wym: [w, d], opis?}.
     Typ ``blat``: {linia: [[x,y],…], gl: 0.6, strona: 1|-1, gorne: bool} — blat wzdłuż lica ściany."""
@@ -1145,7 +1206,11 @@ def draw_furniture(vp, it: dict):
         for p, v in zip(pnames, wym):
             kw[p] = float(v)
     if typ == "urzadzenie" and it.get("opis"):
-        kw["label"] = str(it["opis"])
+        kw["label"] = "" if it.get("_bez_opisu") else str(it["opis"])
+    if typ == "zasobnik":                    # opis z modelu (dawniej zawsze „CWU 300 l” — weryfikacja C 2.1)
+        kw["label"] = "" if it.get("_bez_opisu") else _opis_krotki(it.get("opis")) or "CWU"
+    if typ == "rekuperator" and it.get("_bez_opisu"):
+        kw["label"] = None
     pos = it.get("xy") or it.get("pos")
     rot = float(it.get("obrot", 90.0))
     if fname in ("table_chairs", "kitchen_island"):
