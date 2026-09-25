@@ -19,7 +19,7 @@
       "podstawa": "RPB § 2b ust. 3; W-300",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "3.46 MB (limit 150 MB)"
+      "szczegoly": "3.42 MB (limit 150 MB)"
     },
     {
       "id": "F-03",
@@ -127,7 +127,7 @@
       "podstawa": "RPB § 6 ust. 1",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "7 stron numerowanych"
+      "szczegoly": "6 stron numerowanych"
     },
     {
       "id": "C1-1-09",
@@ -289,7 +289,7 @@
       "podstawa": "RPB § 6 ust. 1",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "8 stron numerowanych"
+      "szczegoly": "7 stron numerowanych"
     },
     {
       "id": "C1-2-06",
@@ -572,9 +572,9 @@
     }
   ],
   "znaczniki": {
-    "DO UZUPEŁNIENIA": 137,
+    "DO UZUPEŁNIENIA": 122,
     "DOKUMENT ZEWNĘTRZNY": 2,
-    "DANE PRZYKŁADOWE": 63,
+    "DANE PRZYKŁADOWE": 61,
     "ZAŁ": 6,
     "NZW": 1,
     "INT": 0,
@@ -582,13 +582,13 @@
     "lista": {
       "[DO UZUPEŁNIENIA: nazwa pracowni projektowej]": 4,
       "[DO UZUPEŁNIENIA: adres pracowni]": 4,
-      "[DANE PRZYKŁADOWE – FIKCYJNE]": 63,
+      "[DANE PRZYKŁADOWE – FIKCYJNE]": 61,
       "[DO UZUPEŁNIENIA: jednostka ewidencyjna — kod TERYT WWPPGG_R i nazwa]": 4,
       "[DO UZUPEŁNIENIA: kod TERYT jedn. ewid. WWPPGG_R]": 8,
       "[DO UZUPEŁNIENIA: imię i nazwisko lub nazwa inwestora]": 8,
       "[DO UZUPEŁNIENIA: adres inwestora]": 8,
-      "[DO UZUPEŁNIENIA: imię i nazwisko]": 39,
-      "[DO UZUPEŁNIENIA: nr uprawnień budowlanych]": 39,
+      "[DO UZUPEŁNIENIA: imię i nazwisko]": 32,
+      "[DO UZUPEŁNIENIA: nr uprawnień budowlanych]": 32,
       "[DO UZUPEŁNIENIA: miejscowość]": 3,
       "[DO UZUPEŁNIENIA: data złożenia oświadczenia z art. 102a PB]": 2,
       "[DO UZUPEŁNIENIA: potwierdzenie wpisu w e-CRUB albo dołączenie kopii]": 2,
@@ -597,7 +597,6 @@
       "[DO UZUPEŁNIENIA: lokalizacja i wydajność najbliższego hydrantu wg gestora]": 1,
       "[DO UZUPEŁNIENIA: mapa do celów projektowych z klauzulą (E-01)]": 2,
       "[DO UZUPEŁNIENIA: arkusz do wygenerowania z modelu]": 4,
-      "[DO UZUPEŁNIENIA: z modelu — AUD-WT]": 1,
       "[DO UZUPEŁNIENIA: z modelu]": 1,
       "[DOKUMENT ZEWNĘTRZNY – do dołączenia: opinia geotechniczna, geotechnik z uprawnieniami, rozp. 2012/463 § 8]": 1,
       "[DO UZUPEŁNIENIA: dane wyrobu E-13]": 1,
@@ -613,25 +612,25 @@
   "elementy": {
     "PZT": {
       "od": 4,
-      "do": 14,
-      "strony_opisu": 8,
+      "do": 13,
+      "strony_opisu": 7,
       "arkusze": 3
     },
     "PAB": {
-      "od": 15,
-      "do": 35,
-      "strony_opisu": 9,
+      "od": 14,
+      "do": 33,
+      "strony_opisu": 8,
       "arkusze": 12
     },
     "ZL": {
-      "od": 36,
-      "do": 44,
+      "od": 34,
+      "do": 42,
       "strony_opisu": 9,
       "arkusze": 0
     }
   },
-  "rozmiar_mb": 3.463298797607422,
-  "strony": 44,
+  "rozmiar_mb": 3.424783706665039,
+  "strony": 42,
   "podsumowanie": {
     "status": "PRZYKŁAD – NIE DO ZŁOŻENIA",
     "OK": 54,
@@ -639,8 +638,8 @@
     "DO UZUPEŁNIENIA": 8,
     "N/D": 1,
     "OSTRZEŻENIE": 0,
-    "znaczniki_do_uzupelnienia": 137,
+    "znaczniki_do_uzupelnienia": 122,
     "znaczniki_dokument_zewnetrzny": 2,
-    "znaczniki_dane_przykladowe": 63
+    "znaczniki_dane_przykladowe": 61
   }
 }

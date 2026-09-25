@@ -117,7 +117,7 @@
 {% macro tabela(t) %}
 <figure class="tabela" id="{{ t.id }}">
   {% if t.tytul %}<div class="tab-tyt"><span class="et">Tabela {{ t.numer }}.</span>{{ t.tytul }}</div>{% endif %}
-  <table class="tab {{ t.klasa }}">
+  <table class="tab {{ t.klasa }}{% if t.szerokosci %} stala{% endif %}">
     {% if t.szerokosci %}<colgroup>{% for w in t.szerokosci %}<col{% if w %} style="width:{{ w }}"{% endif %}>{% endfor %}</colgroup>{% endif %}
     <thead><tr>{% for k in t.kolumny %}<th class="{{ k.klasa }}">{{ k.naglowek }}{% if k.jedn %}<span class="jedn">{{ k.jedn }}</span>{% endif %}</th>{% endfor %}</tr></thead>
     <tbody>
@@ -176,13 +176,13 @@ Postać papierowa: podpis własnoręczny w polu.</p>
     {% if o.art102a %}<p>{{ o.art102a }}</p>{% endif %}
   </div>
   <div class="nagl g3"><span class="t">Osoby biorące udział w opracowaniu projektu (art. 34 ust. 3e pkt 1 PB)</span></div>
-  <table class="tab zwarta">
-    <thead><tr><th class="lp">Lp.</th><th style="width:36mm">Imię i nazwisko</th><th style="width:40mm">Specjalność uprawnień budowlanych</th><th style="width:36mm">Nr uprawnień / decyzji</th><th>Zakres udziału</th></tr></thead>
-    <tbody>{% for p in o.osoby %}<tr><td class="lp">{{ loop.index }}.</td><td>{{ p.imie_nazwisko }}</td><td>{{ p.specjalnosc }}</td><td>{{ p.nr_uprawnien }}</td><td>{{ p.zakres }}</td></tr>{% endfor %}</tbody>
+  <table class="tab zwarta stala">
+    <thead><tr><th class="lp">Lp.</th><th style="width:28mm">Imię i nazwisko</th><th style="width:34mm">Specjalność uprawnień budowlanych</th><th style="width:26mm">Nr uprawnień / decyzji</th><th>Zakres udziału</th><th style="width:22mm">Data i podpis</th></tr></thead>
+    <tbody>{% for p in o.osoby %}<tr><td class="lp">{{ loop.index }}.</td><td>{{ p.imie_nazwisko }}</td><td>{{ p.specjalnosc }}</td><td>{{ p.nr_uprawnien }}</td><td>{{ p.zakres }}</td><td class="pole-podpisu-t"></td></tr>{% endfor %}</tbody>
   </table>
   <p class="mn">Projektanci sprawdzający (art. 34 ust. 3e pkt 2 PB): {{ o.sprawdzajacy }}.</p>
   <p class="mn">{{ o.kopie }}</p>
-  {{ podpisy(o.podpisy, jeden=(o.podpisy|length == 1)) }}
+  <p class="podpis-uwaga">Podpisy: postać elektroniczna — podpis kwalifikowany, osobisty albo zaufany pliku (§ 7 ust. 4a RPB), kolumna „Data i podpis” pozostaje pusta; postać papierowa — podpis własnoręczny każdego z projektantów.</p>
 </section>
 {% endmacro %}
 

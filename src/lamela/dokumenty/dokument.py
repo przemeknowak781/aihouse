@@ -824,19 +824,19 @@ def _svg_inline(s: str) -> str:
 
 
 def stempluj_arkusz(page: pymupdf.Page, tekst: str = STATUS_PRZYKLAD, drugi: str = DANE_PRZYKLADOWE):
-    """Znak statusu w górnym marginesie arkusza (poza ramką; wektorowo, czcionka osadzona)."""
-    W = page.rect.width
-    fb = pymupdf.Font(fontfile=FONT_BOLD)
-    fr = pymupdf.Font(fontfile=FONT_REG)
+    """Znak statusu na arkuszu — pionowo w lewym marginesie na oprawę (pas 0–8 mm od krawędzi), w górnej części
+    arkusza: poza ramką, siatką odniesień (litery ~13–17 mm), odcinkiem kontrolnym i znakiem centrującym
+    (wektorowo, czcionka osadzona)."""
+    H = page.rect.height
     page.insert_font(fontname="lsb", fontfile=FONT_BOLD)
     page.insert_font(fontname="lsr", fontfile=FONT_REG)
-    s1, s2 = 8.5, 6.5
-    w1 = fb.text_length(tekst, s1)
-    w2 = fr.text_length(drugi, s2)
-    x = W - 12 * MM - w1 - 3 * MM - w2
-    y = 6.6 * MM
-    page.insert_text((x, y), tekst, fontname="lsb", fontsize=s1, color=(0.64, 0.15, 0.16))
-    page.insert_text((x + w1 + 3 * MM, y), drugi, fontname="lsr", fontsize=s2, color=(0.52, 0.10, 0.11))
+    fb, fr = pymupdf.Font(fontfile=FONT_BOLD), pymupdf.Font(fontfile=FONT_REG)
+    s1, s2 = 8.0, 6.2
+    w1, w2 = fb.text_length(tekst, s1), fr.text_length(drugi, s2)
+    x = 6.2 * MM
+    y0 = min(14 * MM + w1 + 3 * MM + w2, H / 2 - 12 * MM)   # koniec tekstu nad znakiem centrującym
+    page.insert_text((x, y0), tekst, fontname="lsb", fontsize=s1, color=(0.64, 0.15, 0.16), rotate=90)
+    page.insert_text((x, y0 - w1 - 3 * MM), drugi, fontname="lsr", fontsize=s2, color=(0.52, 0.10, 0.11), rotate=90)
 
 
 def _strony_zastepcze(arkusze: list[Arkusz], dok: Dokument) -> bytes:

@@ -116,7 +116,7 @@ MATERIALY_DOMYSLNE: dict[str, Material] = {m.kod: m for m in [
 
 # łącznik termoizolacyjny płyty wspornikowej — λ_eq modułu izolacyjnego z prętami (DANE PRZYKŁADOWE)
 LACZNIK_PRZYKLAD = Material(
-    "LACZNIK_80", 0.13, "Łącznik termoizolacyjny 80 mm (moduł izolacyjny + pręty nierdzewne), λ_eq", "#d1495b",
+    "LACZNIK_80", 0.09, "Łącznik termoizolacyjny 80 mm (moduł izolacyjny + pręty nierdzewne), λ_eq", "#d1495b",
     zrodlo="[DANE PRZYKŁADOWE – FIKCYJNE] λ_eq typowej deklaracji (ETA) łącznika 80 mm do płyt 20–22 cm; "
            "do zastąpienia wartością z ETA wybranego wyrobu (W-272)")
 
@@ -584,12 +584,15 @@ def _okno_model(rama: Obszar, szyba: Obszar, x0: float, x_cut: float, yf0: float
 
 def wezel_oscieze_okna(warstwy_sciany: Sequence[Warstwa], U_f: float = 0.95, b_f: float = 0.115, d_f: float = 0.082,
                        U_g: float = 0.50, d_g: float = 0.044, polozenie: str = "w_izolacji", x0: float | None = None,
-                       zaklad_izolacji: float = 0.03, szczelina: float = 0.015, L: float | None = None,
+                       wsuniecie: float = 0.05, zaklad_izolacji: float = 0.03, szczelina: float = 0.015,
+                       L: float | None = None,
                        L_g: float = 0.25, theta_i: float | None = None, theta_e: float | None = None,
                        id: str = "WZ-W1", nazwa: str | None = None, zrodlo_okna: str = "") -> Wezel:
     """Ościeże okna (rzut). Oś x wzdłuż ściany (mur do x = 0, otwór x > 0), oś y w poprzek (lico wewn. y = 0).
     polozenie: 'w_izolacji' — rama przed licem muru w warstwie ocieplenia (ciepły montaż na konsolach, x0 = −0,03
-    — rama zachodzi na mur); 'w_murze' — rama w otworze muru, lico zewn. ramy w licu muru, szczelina z pianką.
+    — rama zachodzi na mur); 'w_murze' — rama w otworze muru, lico zewn. ramy w licu muru, szczelina z pianką;
+    'czesciowo' — rama wsunięta w otwór muru na głębokość `wsuniecie`, reszta w warstwie ocieplenia (konwencja
+    modelu: 5 cm w murze, 4 cm w izolacji).
     Izolacja ościeża zachodzi na ramę o `zaklad_izolacji`. ψ_inst = L_2D − U_ściany·l − L_2D,okna (okno bez ściany)."""
     ti, te = _temperatury(theta_i, theta_e)
     st = _stos(warstwy_sciany, 0.0)
@@ -601,13 +604,14 @@ def wezel_oscieze_okna(warstwy_sciany: Sequence[Warstwa], U_f: float = 0.95, b_f
     m_g = material_szyba(U_g, d_g, zrodlo=zrodlo_okna)
     ob: list[Obszar] = []
     if polozenie == "w_izolacji":
-        x0 = -0.03 if x0 is None else x0
-        yf0 = y_s1
+        wsuniecie = 0.0
     elif polozenie == "w_murze":
-        x0 = szczelina if x0 is None else x0
-        yf0 = y_s1 - d_f
-    else:
+        wsuniecie = d_f
+    elif polozenie != "czesciowo":
         raise ValueError(polozenie)
+    if x0 is None:
+        x0 = szczelina if wsuniecie > 0 else -0.03
+    yf0 = y_s1 - wsuniecie
     rama_g = box(x0, yf0, x0 + b_f, yf0 + d_f)
     yg0 = yf0 + (d_f - d_g) / 2
     x_cut = x0 + b_f + L_g
@@ -620,7 +624,7 @@ def wezel_oscieze_okna(warstwy_sciany: Sequence[Warstwa], U_f: float = 0.95, b_f
             ob.append(_obsz(box(-L, a, x0 + zaklad_izolacji, b).difference(rama_g), w))
     if ks > 0:   # tynk wewn. na ościeżu
         ob.append(_obsz(box(0.0, 0.0, warstwy_sciany[0].d, yf0), warstwy_sciany[0], "tynk ościeża"))
-    if polozenie == "w_murze" and x0 > 0:
+    if wsuniecie > 0 and x0 > 0:
         ob.append(_obsz(box(0.0, yf0, x0, y_s1), MATERIALY_DOMYSLNE["PIANKA_PU"], "szczelina — pianka PU"))
     rama = _obsz(rama_g, m_r, "rama")
     szyba = _obsz(box(x0 + b_f, yg0, x_cut, yg0 + d_g), m_g, "szyba")
@@ -632,13 +636,15 @@ def wezel_oscieze_okna(warstwy_sciany: Sequence[Warstwa], U_f: float = 0.95, b_f
     okno = _okno_model(rama, szyba, x0, x_cut, yf0, d_f, ti, te, id)
     fl = [ElementFlankujacy("ściana", ("i", "e"), L + x0, L + x0, warstwy=list(warstwy_sciany)),
           ElementFlankujacy("okno (L_2D ramy z szybą, model bez ściany)", ("i", "e"), 1.0, 1.0, wezel_ref=okno)]
-    return Wezel(id, nazwa or f"Ościeże okna — rama {'w warstwie izolacji' if polozenie == 'w_izolacji' else 'w murze'}",
+    opis_pol = {"w_izolacji": "w warstwie izolacji (ciepły montaż)", "w_murze": "w murze (lico zewn. muru)",
+                "czesciowo": f"wsunięta {wsuniecie * 100:.0f} cm w mur, reszta w izolacji"}[polozenie]
+    return Wezel(id, nazwa or f"Ościeże okna — rama {opis_pol}",
                  "oscieze", ob, strefy, fl, przekroj="poziomy",
                  punkty={"naroże ościeża (mur)": (0.0, 0.0), "styk rama–ościeże": (max(0.0, x0), yf0)},
                  widok=(-0.6, -0.1, x_cut, D + 0.1), psi_domyslne="W_oscieze",
                  dane={"warstwy ściany": dane_warstw(warstwy_sciany),
                        "okno": f"U_f = {U_f}, b_f = {b_f} m, d_f = {d_f} m (λ_eq ramy = {m_r.lam:.4f}); "
-                               f"U_g = {U_g}, d_g = {d_g} m (λ_eq = {m_g.lam:.4f}); położenie: {polozenie}, "
+                               f"U_g = {U_g}, d_g = {d_g} m (λ_eq = {m_g.lam:.4f}); położenie: {opis_pol}, "
                                f"x0 = {x0} m, zakład izolacji {zaklad_izolacji} m {zrodlo_okna}"},
                  uwagi=["Rama i szyba jako materiały zastępcze (λ_eq z U_f, U_g); ψ osadzenia liczone względem "
                         "modelu okna bez ściany, więc uproszczenie ramy wpływa na ψ w małym stopniu. Ψ_g ramki "

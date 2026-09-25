@@ -115,7 +115,8 @@ def agenci():
             if not j.exists():
                 continue
             zak, t_tool, lim, mt = analiza_transkryptu(j)
-            wyn.append(dict(id=aid, opis=f"{wf.name}:{label}", zrodlo="workflow", aktywny=not zak, t_tool=t_tool, limity=lim, mtime=mt))
+            # dla agentów przepływów rozstrzyga dziennik (brak wpisu "result" = agent pracuje), nie ostatni wpis transkryptu
+            wyn.append(dict(id=aid, opis=f"{wf.name}:{label}", zrodlo="workflow", aktywny=True, t_tool=t_tool, limity=lim, mtime=mt))
     return wyn
 
 

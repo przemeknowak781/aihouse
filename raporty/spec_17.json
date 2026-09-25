@@ -1,5 +1,6 @@
 {
- "title": "Korekta Inwestora: „S” z przesuniętych brył, garaż w parterze — panel koncepcji uruchomiony ponownie",
+ "nr": 17,
+ "title": "W3 postępuje po restarcie; nadzór poprawiony; solver mostków w walidacji",
  "stages": [
   [
    "Analiza szkicu — interpretacja v2 („S” z brył, garaż)",
@@ -55,9 +56,20 @@
   ]
  ],
  "notes": [
+  "NADZÓR (04:25): 6 agentów aktywnych, bez zastojów; najdłuższa bezczynność 1 min; zmiany w repo 0 min temu.",
   "W3 po restarcie pracuje prawidłowo (przyrostowo): zapisuje geometrię kondygnacji P0/P1/P2 w osobnych plikach.",
   "Nadzór: wykryto i poprawiono błąd w samym nadzorze (agent przepływu uznany za zakończony na podstawie ostatniego wpisu) — rozstrzyga dziennik przepływu.",
   "Solver mostków 2D: gotowe moduły geometria/siatka/solver/walidacja/wyniki/katalog — trwa walidacja wg ISO 10211 zał. C.",
   "Biblioteki obliczeń i składanie tomów — w toku."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/docs/10_podstawy_prawne/grafiki/klimat_poznan.png",
+   "caption": "Dane klimatyczne (TRM MIiR, PVGIS)"
+  },
+  {
+   "path": "/home/user/aihouse/docs/20_koncepcja/porownanie_W1_W2.png",
+   "caption": "Porównanie W1/W2 (W3 w toku)"
+  }
  ]
 }

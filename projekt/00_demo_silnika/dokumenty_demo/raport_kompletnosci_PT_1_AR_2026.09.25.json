@@ -82,7 +82,7 @@
       "podstawa": "RPB § 6 ust. 2",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "6 stron numerowanych"
+      "szczegoly": "5 stron numerowanych"
     },
     {
       "id": "C2-06",
@@ -167,9 +167,9 @@
     }
   ],
   "znaczniki": {
-    "DO UZUPEŁNIENIA": 22,
+    "DO UZUPEŁNIENIA": 20,
     "DOKUMENT ZEWNĘTRZNY": 0,
-    "DANE PRZYKŁADOWE": 18,
+    "DANE PRZYKŁADOWE": 17,
     "ZAŁ": 4,
     "NZW": 1,
     "INT": 0,
@@ -177,13 +177,13 @@
     "lista": {
       "[DO UZUPEŁNIENIA: nazwa pracowni projektowej]": 1,
       "[DO UZUPEŁNIENIA: adres pracowni]": 1,
-      "[DANE PRZYKŁADOWE – FIKCYJNE]": 18,
+      "[DANE PRZYKŁADOWE – FIKCYJNE]": 17,
       "[DO UZUPEŁNIENIA: jednostka ewidencyjna — kod TERYT WWPPGG_R i nazwa]": 1,
       "[DO UZUPEŁNIENIA: kod TERYT jedn. ewid. WWPPGG_R]": 2,
       "[DO UZUPEŁNIENIA: imię i nazwisko lub nazwa inwestora]": 2,
       "[DO UZUPEŁNIENIA: adres inwestora]": 2,
-      "[DO UZUPEŁNIENIA: imię i nazwisko]": 4,
-      "[DO UZUPEŁNIENIA: nr uprawnień budowlanych]": 4,
+      "[DO UZUPEŁNIENIA: imię i nazwisko]": 3,
+      "[DO UZUPEŁNIENIA: nr uprawnień budowlanych]": 3,
       "[DO UZUPEŁNIENIA: miejscowość]": 1,
       "[DO UZUPEŁNIENIA: nr i data decyzji o pozwoleniu na budowę, organ]": 1,
       "[DO UZUPEŁNIENIA: data złożenia oświadczenia z art. 102a PB]": 1,
@@ -196,13 +196,13 @@
   "elementy": {
     "PT": {
       "od": 1,
-      "do": 16,
-      "strony_opisu": 7,
+      "do": 15,
+      "strony_opisu": 6,
       "arkusze": 9
     }
   },
-  "rozmiar_mb": 1.4944114685058594,
-  "strony": 16,
+  "rozmiar_mb": 1.4870338439941406,
+  "strony": 15,
   "podsumowanie": {
     "status": "NIEKOMPLETNY",
     "OK": 14,
@@ -210,8 +210,8 @@
     "DO UZUPEŁNIENIA": 2,
     "N/D": 1,
     "OSTRZEŻENIE": 0,
-    "znaczniki_do_uzupelnienia": 22,
+    "znaczniki_do_uzupelnienia": 20,
     "znaczniki_dokument_zewnetrzny": 0,
-    "znaczniki_dane_przykladowe": 18
+    "znaczniki_dane_przykladowe": 17
   }
 }
