@@ -142,9 +142,9 @@ def section_AA(ax):
         ax.plot([c, c], [-1.7, 10.5], color="#c04040", lw=0.3, ls=(0, (8, 2, 1, 2)), zorder=1)
         ax.text(c, 10.6, n, fontsize=7, color="#c04040", ha="center", va="bottom",
                 bbox=dict(boxstyle="circle,pad=0.25", facecolor="white", edgecolor="#c04040", lw=0.6))
-    ax.text(-5.8, 10.6, "PRZEKRÓJ A-A (x = 6,70; widok na zachód)   S ←  → N", fontsize=9.5, fontweight="bold", ha="left")
+    ax.text(-5.8, 11.25, "PRZEKRÓJ A-A (x = 6,70; widok na zachód)   S ←  → N", fontsize=9.5, fontweight="bold", ha="left")
     ax.set_xlim(-6.2, 13.8)
-    ax.set_ylim(-2.4, 11.3)
+    ax.set_ylim(-2.4, 11.8)
     ax.set_aspect("equal")
     ax.axis("off")
 
@@ -186,7 +186,7 @@ def section_BB(ax):
     slab(ax, -2.40, 12.30, 5.95, 6.15)
     R(ax, -2.40, -2.30, 5.95, 6.25, SLAB, "black", 0.4, 6)
     # --- P2
-    R(ax, -1.30, -0.70, 6.15, 9.10, "#b0a58c", "black", 0.4, 6, hatch="////")
+    R(ax, -1.30, -0.895, 6.15, 9.10, "#b0a58c", "black", 0.4, 6, hatch="////")
     opening(ax, -1.0, 6.30 + 0.60, 6.30 + 2.60, w=0.65)
     R(ax, 3.675 - 0.075, 3.675 + 0.075, 6.15, 9.10, "#9a9a9a", "black", 0.3, 6)
     R(ax, 6.125 - 0.075, 6.125 + 0.075, 6.15, 9.10, "#9a9a9a", "black", 0.3, 6)
@@ -195,7 +195,7 @@ def section_BB(ax):
     opening(ax, 12.05, 6.30 + 0.85, 6.30 + 2.60, w=0.45)
     # sciana-tarcza zelbetowa (widok, os 3) x -1,0..2,0
     R(ax, -1.30, 2.0, 6.15, 9.10, "none", "#b00020", 0.8, 3, hatch="\\\\")
-    ax.text(0.35, 6.55, "ściana-tarcza ŻB (oś 3, widok)\nprzenosi wspornik bryły A", fontsize=5.6, color="#b00020", ha="center", zorder=13,
+    ax.text(0.9, 8.55, "ściana-tarcza ŻB (oś 3, widok)\nprzenosi wspornik bryły A", fontsize=5.6, color="#b00020", ha="center", zorder=13,
             bbox=dict(facecolor="white", edgecolor="none", pad=0.3, alpha=0.85))
     # --- ST3 + dach P2
     slab(ax, -2.40, 12.60, 9.10, 9.32)
@@ -220,9 +220,9 @@ def section_BB(ax):
         ax.plot([c, c], [-1.7, 10.5], color="#c04040", lw=0.3, ls=(0, (8, 2, 1, 2)), zorder=1)
         ax.text(c, 10.6, n, fontsize=7, color="#c04040", ha="center", va="bottom",
                 bbox=dict(boxstyle="circle,pad=0.25", facecolor="white", edgecolor="#c04040", lw=0.6))
-    ax.text(-7.3, 10.6, "PRZEKRÓJ B-B (y = 2,00; widok na północ)   W ←  → E", fontsize=9.5, fontweight="bold", ha="left")
+    ax.text(-7.3, 11.25, "PRZEKRÓJ B-B (y = 2,00; widok na północ)   W ←  → E", fontsize=9.5, fontweight="bold", ha="left")
     ax.set_xlim(-7.6, 25.0)
-    ax.set_ylim(-2.4, 11.3)
+    ax.set_ylim(-2.4, 11.8)
     ax.set_aspect("equal")
     ax.axis("off")
 

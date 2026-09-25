@@ -48,7 +48,7 @@ def main():
     # dzialki sasiednie
     for x0, x1, t in ((-11.5, Z["xw"], "dz. sąsiednia MN\n(budynek ≥ 8 m od granicy)"), (Z["xe"], 28.5, "dz. sąsiednia MN\n(budynek ≥ 8 m od granicy)")):
         ax.add_patch(Rectangle((x0, Z["ys"]), x1 - x0, Z["yn"] - Z["ys"], facecolor="#f6f6f1", edgecolor="none", zorder=0))
-        ax.text((x0 + x1) / 2, -8, t, fontsize=6.5, rotation=90, ha="center", va="center", color="#777")
+        ax.text((x0 + x1) / 2 + (0.8 if x0 > 0 else 0), 8, t, fontsize=6.5, rotation=90, ha="center", va="center", color="#777")
     ax.text(8.5, -34.2, "teren rolny / zieleni (R)", fontsize=7, ha="center", color="#777")
     # dzialka
     ax.add_patch(Rectangle((Z["xw"], Z["ys"]), Z["xe"] - Z["xw"], Z["yn"] - Z["ys"], facecolor="#eef6e4", edgecolor="black", lw=1.6,
@@ -104,8 +104,8 @@ def main():
     ax.plot([b1, Z["xe"]], [Z["yn"] - 0.1] * 2, color="#333", lw=2.2, zorder=5)
     ax.plot([b0, b1], [Z["yn"] - 0.25] * 2, color="#333", lw=1.0, ls=(0, (3, 2)), zorder=5)
     ax.annotate("", xy=(b1 + 5.4, Z["yn"] - 0.6), xytext=(b1 + 0.3, Z["yn"] - 0.6), arrowprops=dict(arrowstyle="->", lw=0.8), zorder=5)
-    ax.text((b0 + b1) / 2, Z["yn"] - 0.9, "brama przesuwna 5,60 m (odjazd na E)", fontsize=5.8, ha="center", va="top", zorder=5)
-    ax.text((f0 + f1) / 2, Z["yn"] + 0.3, "furtka 1,0", fontsize=5.5, ha="center", va="bottom", zorder=5)
+    ax.text(b1 + 0.4, Z["yn"] - 0.9, "brama przesuwna 5,60 m (odjazd na E)", fontsize=5.8, ha="left", va="top", zorder=5)
+    ax.text((f0 + f1) / 2 - 0.6, Z["yn"] - 0.8, "furtka 1,0", fontsize=5.5, ha="center", va="top", zorder=5)
     ax.add_patch(Rectangle((M.ZK[0], Z["yn"] - 0.45), M.ZK[1] - M.ZK[0], 0.45, facecolor="#d62728", edgecolor="black", lw=0.5, zorder=6))
     ax.text(M.ZK[0] - 0.1, Z["yn"] + 0.3, "ZK", fontsize=6, ha="right", va="bottom", color="#d62728", zorder=6)
     ax.text(Z["xe"] - 0.2, Z["yn"] + 0.25, "ogrodzenie od drogi ażurowe h = 1,50 m", fontsize=6, ha="right", va="bottom")
@@ -128,7 +128,7 @@ def main():
     D.dim_v(ax, Z["ys"], -1.30, 22.0, "31,40 (okap)", fs=6.5, left=False)
     D.dim_v(ax, Z["ys"], -4.30, 13.0, "28,40 (taras)", fs=6.2)
     D.dim_h(ax, Z["xw"], Z["xe"], -33.9 + 0.6, "32,00", fs=7)
-    D.dim_v(ax, Z["ys"], Z["yn"], 26.3, "50,00", fs=7, left=False)
+    D.dim_v(ax, Z["ys"], Z["yn"], 25.0, "50,00", fs=7, left=False)
     D.north_arrow(ax, 31.0, 26.5, 1.3)
     # skala
     for i in range(5):

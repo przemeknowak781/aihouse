@@ -69,11 +69,11 @@ def furniture(ax, kond):
         f(ax, 5.09, 7.395, 5.99, 8.295, "natrysk", 4.5); f(ax, 3.98, 7.55, 4.60, 8.25, "WC", 4.5); f(ax, 3.98, 6.45, 4.50, 7.05, "umyw.", 4.2)
         f(ax, 8.60, 7.60, 9.30, 8.25, "WC", 4.5); f(ax, 9.05, 6.50, 9.55, 6.95, "", 4)
         f(ax, 11.295, 6.45, 11.895, 8.295, "szafa", 4.5)
-        f(ax, 12.80, 3.50, 14.70, 8.30, "auto 1"); f(ax, 15.60, 3.50, 17.50, 8.30, "auto 2")
-        f(ax, 17.70, 3.10, 18.25, 6.20, "rowery\nregał", 4.2)
+        f(ax, 12.80, 3.95, 14.70, 8.75, "auto 1"); f(ax, 15.40, 3.95, 17.30, 8.75, "auto 2")
+        f(ax, 17.75, 6.05, 18.25, 8.80, "rowery", 4.2); f(ax, 17.75, 2.90, 18.25, 4.85, "ogród", 4.2)
         fc(ax, 16.10, 1.30, 0.33, "CWU\n300 l", 4); f(ax, 16.60, 0.20, 17.40, 0.65, "PC wewn.", 4)
         f(ax, 17.55, 0.20, 18.25, 0.45, "RG", 4); f(ax, 17.55, 1.9, 18.25, 2.45, "bufor", 4)
-        f(ax, 12.2, 0.15, 14.15, 0.55, "ławka / szafy", 4.2); f(ax, 14.40, 0.15, 15.35, 0.55, "półki", 4)
+        f(ax, 13.60, 0.15, 14.20, 0.60, "buty", 4.2); f(ax, 14.40, 0.15, 15.35, 0.55, "półki", 4)
     if kond == "P1":
         f(ax, 2.80, 0.30, 3.80, 2.30, "łóżko\n90x200", 4.5); f(ax, 0.3, 0.2, 1.9, 0.8, "biurko", 4.5); f(ax, 0.2, 2.95, 2.55, 3.50, "szafa", 4.5)
         f(ax, 0.3, 5.3, 1.9, 7.3, "łóżko\n90x200", 4.5); f(ax, 3.17, 5.95, 3.77, 8.20, "szafa", 4.5); f(ax, 1.2, 7.7, 3.0, 8.25, "biurko", 4.5)
@@ -193,10 +193,10 @@ INFO = {
            "Fasada pd. (E): przeszklenie 5 kwater na słupach stalowych SL1-SL4 + belka B1 25x105 (+2,80...+3,85). "
            "Strop ST1 20 cm, rozpiętości 4,80 / 3,60 m (N-S); garaż: płyta 24 cm, rozp. 6,40 m (E-W)."),
     "P1": ("W2 - RZUT I PIĘTRA P1   (posadzka +3,15; h w świetle 2,80 m)",
-           "Bryla B 12,60 m; boks C (3 kwatery 2,33 m, parapet 0,70 z dolna częścią stała VSG do 0,85) w ramie wysuniętej 1,00 m. "
-           "Pokóje dzieci od zachodu (elewacja pd. bryły B pełna jak w szkicu). Pion SI (kanalizacja K1 + kanały rekuperacji) nad pionem P0 i pod P2."),
+           "Bryła B 12,60 m; boks C (3 kwatery 2,33 m, parapet 0,70 z dolną częścią stałą VSG do 0,85) w ramie wysuniętej 1,00 m. "
+           "Pokoje dzieci od zachodu (elewacja pd. bryły B pełna jak w szkicu). Pion SI (kanalizacja K1 + kanały rekuperacji) nad pionem P0 i pod P2."),
     "P2": ("W2 - RZUT II PIĘTRA P2   (posadzka +6,30; h w świetle 2,80 m)",
-           "Bryla A 13,60 m w lamelach, wspornik 1,00 m na zachod (ściany-tarcze żelbetowe w osiach 1 i 3 na odc. A'-B'), płyty ST2/ST3 wysunięte 1,00-1,10 m. "
+           "Bryła A 13,60 m w lamelach, wspornik 1,00 m na zachód (ściany-tarcze żelbetowe w osiach 1 i 3 na odc. A'–x 2,0), płyty ST2/ST3 wysunięte 1,00-1,10 m. "
            "Nadbudowa klatki schodówej i łazienki rodziców nad osiami B-D (niewidoczna od południa). Wyjście na dach: klapa 0,9x0,9 w pom. techn. 2.06."),
 }
 
@@ -226,8 +226,8 @@ def plan(kond):
         ax.text(1.8, 0.45, "salon", fontsize=7, ha="center", style="italic", color="#555", zorder=20)
         ax.text(6.2, 0.45, "jadalnia", fontsize=7, ha="center", style="italic", color="#555", zorder=20)
         ax.text(10.2, 0.45, "kuchnia", fontsize=7, ha="center", style="italic", color="#555", zorder=20)
-        ax.text(19.9, 1.1, "PC\njedn.\nzewn.", fontsize=5, ha="center", va="center", zorder=20)
-        ax.add_patch(Rectangle((19.10, 0.60), 1.0, 1.0, facecolor="#e8e8e8", edgecolor="black", lw=0.6))
+        ax.text(20.0, 1.1, "PC\njedn.\nzewn.", fontsize=5, ha="center", va="center", zorder=20)
+        ax.add_patch(Rectangle((19.60, 0.60), 0.80, 1.0, facecolor="#e8e8e8", edgecolor="black", lw=0.6))
     dims(ax, kond)
     names_x = [k for k in M.OSIE_X if not (kond != "P2" and k == "A'") and not (kond != "P0" and k == "F")]
     names_y = ["1", "3", "4"] + (["2", "5"] if kond == "P0" else [])

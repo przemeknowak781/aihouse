@@ -52,6 +52,9 @@ def elevation(ax, detail=True, color_override=None):
     rect(ax, -1.30, 12.30, 9.42, P["attyka_P2"], "#cfcfcf", "black", 0.5, 1.5)
     # --- bryla G + strefa gosp. (lico y=-0.30)
     rect(ax, 11.70, 18.70, 0.0, P["attyka_G"], C_WALL_G, "black", 0.8, 2)
+    # drzwi gospodarcze przedsionka (przeszklone) - poczatek pelnej sciany G przesuniety na x = 13,15
+    o = M.otwor("O0-19")
+    glazing(ax, o["a"], o["b"], 0.0, o["wys"], 1, z=2.6)
     # --- parter czesci mieszkalnej
     rect(ax, -0.30, 12.30, 0.0, 2.80, C_WALL, "black", 0.8, 2)
     glazing(ax, 0.30, 11.70, 0.0, 2.75, 5, z=3)
@@ -99,8 +102,8 @@ def levels(ax, xpos, items):
 
 
 def band_labels(ax):
-    tags = [("A", -2.9, 7.6, "#1f6fb4"), ("B", -1.4, 4.4, "#7b3fa0"), ("C", 7.6, 6.0, "#e07b00"),
-            ("D", 15.2, 4.35, "#333333"), ("G", 15.2, 1.8, "#c0392b"), ("E", -2.9, 1.4, "#1c8a4a")]
+    tags = [("A", -2.9, 7.6, "#1f6fb4"), ("B", -1.4, 4.4, "#7b3fa0"), ("C", 13.35, 4.6, "#e07b00"),
+            ("D", 17.9, 4.45, "#333333"), ("G", 15.2, 1.8, "#c0392b"), ("E", -2.9, 1.4, "#1c8a4a")]
     for t, x, z, c in tags:
         ax.add_patch(Circle((x, z), 0.42, facecolor="white", edgecolor=c, lw=1.4, zorder=15))
         ax.text(x, z, t, fontsize=9, fontweight="bold", color=c, ha="center", va="center", zorder=16)
@@ -127,7 +130,7 @@ def main():
     red = dict(fill=False, edgecolor="#d0021b", lw=1.6, zorder=5)
     for (x0, x1, z0, z1) in [(-2.40, 12.60, 9.10, 9.42), (-1.30, 12.30, 6.15, 9.10), (-2.40, 12.60, 5.95, 6.25),
                              (-0.30, 12.30, 3.00, 5.95), (4.10, 11.10, 3.85, 5.35), (3.60, 12.60, 3.65, 5.55),
-                             (-1.80, 12.60, 2.75, 3.05), (11.70, 18.70, 0.0, 3.85), (0.30, 11.70, 0.0, 2.75)]:
+                             (-1.80, 12.60, 2.75, 3.05), (13.15, 18.70, 0.0, 3.85), (0.30, 11.70, 0.0, 2.75)]:
         ax1.add_patch(Rectangle((x0, z0), x1 - x0, z1 - z0, **red))
     ax1.set_xlim(-6.5, 23.5)
     ax1.set_ylim(-1.2, 11.5)
@@ -144,20 +147,21 @@ def main():
     band_labels(ax2)
     levels(ax2, 22.2, [(0.0, "±0,00 = 101,65"), (2.80, "+2,80"), (3.15, "+3,15 P1"), (3.85, "+3,85 linia D / attyka G"),
                        (5.95, "+5,95"), (6.30, "+6,30 P2"), (9.10, "+9,10"), (P["attyka_P2"], "+9,80 attyka (maks.)"),
-                       (round(M.teren_wzgl(18.0, -0.3), 2), f"{D.fmt(M.teren_wzgl(18.0, -0.3))} teren")])
+                       (round(M.teren_wzgl(18.0, -0.3), 2) - 0.25, f"{D.fmt(M.teren_wzgl(18.0, -0.3))} teren przy G")])
     # wymiary poziome
     y0 = -1.05
     D.dim_chain_h(ax2, [-2.40, -1.30, -0.30, 0.30, 11.70, 12.30, 18.70], y0, fs=6)
     D.dim_h(ax2, -0.30, 18.70, y0 - 0.45, "19,00 (lico zach. B → pion D; szkic ≈ 19,0)", fs=6.5)
     D.dim_h(ax2, -1.30, 12.30, 10.35, "A = 13,60 (szkic ≈ 13,2)", fs=6.5)
     D.dim_h(ax2, 4.10, 11.10, 5.62, "C = 7,00 (3 kw.)", fs=6.0)
-    D.dim_h(ax2, 3.60, 18.70, 4.05, "linia D 15,10 (szkic 3,8→19,0)", fs=6.0)
+    D.dim_h(ax2, 3.60, 18.70, y0 - 0.95, "linia D 15,10 (szkic ≈ 3,8→19,0)", fs=6.0)
+    D.dim_h(ax2, 13.15, 18.70, 1.2, "G 5,55 (szkic ≈ 5,8)", fs=6.0)
     ax2.text(-2.3, 3.2, "okap E 1,50 ←", fontsize=6, ha="left", va="bottom")
     ax2.text(-2.3, 9.55, "wspornik A 1,00 + płyta 1,10", fontsize=6, ha="left", va="bottom")
-    ax2.text(15.2, 0.5, "garaż 2-st. (brama od pn.)\nściana pełna — dach zielony", fontsize=6.3, ha="center", va="center", color="#444", zorder=15)
+    ax2.text(15.9, 0.55, "garaż 2-st. (brama od pn.)\nściana pełna — dach zielony", fontsize=6.3, ha="center", va="center", color="#444", zorder=15)
     ax2.text(19.6, 1.35, "PC", fontsize=6, ha="center", zorder=15)
     ax2.set_xlim(-6.5, 23.5)
-    ax2.set_ylim(-2.0, 11.0)
+    ax2.set_ylim(-2.6, 11.0)
     ax2.set_aspect("equal")
     ax2.axis("off")
     ax2.set_title("W2 — ELEWACJA POŁUDNIOWA (ogrodowa), skala 1:100 w oryginale — rytm przesunięć brył zachód–wschód–zachód („S”)",
