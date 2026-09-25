@@ -380,25 +380,33 @@ def rys_ugiecia(an, path: Path) -> list:
     """Postać odkształcenia SLS (quasi-stała, t = ∞, zarysowanie) — przeskalowana, oraz rozkład reakcji podpór."""
     mes = an.mes
     r = getattr(an, "r_qp_II", None) or an.r_qp[an.k_qp_gov]
-    fig, axs = plt.subplots(2, 1, figsize=(10.5, 5.8), gridspec_kw={"height_ratios": [1.25, 1]})
+    x0, z0, x1, z1 = an.P.bounds
+    xr = (x1 - x0) + 0.8
+    yr = (z1 - z0) + 1.4
+    h_top = max(8.4 * yr / xr, 1.6)
+    fig, axs = plt.subplots(2, 1, figsize=(10.5, h_top + 3.6), gridspec_kw={"height_ratios": [h_top, 2.4]})
     ax = axs[0]
     umax = max(float(np.abs(r.u).max()), 1e-12)
-    L = an.P.bounds[2] - an.P.bounds[0]
-    sk = 0.06 * L / umax
+    L = x1 - x0
+    sk = _ladna(0.05 * L / umax)
     xy = mes.nodes + sk * np.stack([r.u[0::2], r.u[1::2]], axis=1)
     tri0 = _tri(mes)
     tri1 = Triangulation(xy[:, 0], xy[:, 1], tri0.triangles)
     wz = -r.u[1::2] * 1000
     cs = ax.tripcolor(tri1, wz, shading="gouraud", cmap=SEQ_BLUE)
     _obrys(ax, an.P, lw=0.6, color=MUTED)
+    _podpory(ax, an, h=0.10)
     cb = plt.colorbar(cs, ax=ax, fraction=0.025, pad=0.01)
     cb.set_label("w [mm] (w dół +)", fontsize=7)
-    _osie(ax, an, pad=0.2)
-    ax.set_aspect("equal", adjustable="datalim")
+    ax.grid(color=GRID, lw=0.4, zorder=-1)
+    ax.set_xlim(x0 - 0.4, x1 + 0.4)
+    ax.set_ylim(z0 - 0.9, z1 + 0.5)
+    ax.set_aspect("equal", adjustable="box")
+    ax.set_ylabel("z [m]")
     txt = "; ".join(f"{u_['opis']}: w = {_pl(u_['w_II'], 2)} mm (lim {_pl(u_['w_dop'], 1)})" for u_ in getattr(an, "ugiecia", []))
-    ax.set_title(f"Postać odkształcenia — SLS quasi-stała, t = ∞, sztywność zarysowana (skala ×{sk:.0f})", loc="left")
+    ax.set_title(f"Postać odkształcenia — SLS quasi-stała, t = ∞, sztywność zarysowana (przemieszczenia ×{sk:g})", loc="left")
     if txt:
-        ax.text(0.0, -0.32, txt, transform=ax.transAxes, fontsize=6.5, color=INK2, va="top")
+        ax.text(0.0, -0.08, txt, transform=ax.transAxes, fontsize=6.5, color=INK2, va="top")
     ax = axs[1]
     rg = mes.reakcje(an.r_uls[an.k_gov])
     rc = mes.reakcje(an.r_char[an.k_char_gov])
@@ -413,7 +421,7 @@ def rys_ugiecia(an, path: Path) -> list:
         else:
             ax.bar(a["x"], a["R"], width=0.1, color=INK)
     ax.axhline(0, color=INK2, lw=0.5)
-    ax.set_xlim(an.P.bounds[0] - 0.2, an.P.bounds[2] + 0.2)
+    ax.set_xlim(x0 - 0.4, x1 + 0.4)
     ax.set_ylabel("r [kN/m]")
     ax.set_xlabel("x [m]")
     ax.grid(color=GRID, lw=0.4)

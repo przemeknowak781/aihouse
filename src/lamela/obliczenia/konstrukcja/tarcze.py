@@ -494,7 +494,12 @@ class AnalizaTarczy:
                         z_ = q[0]
                     band = e.wsp - z_
                 comp = any((q[3] < 0 or q[4] < 0) for q in prof) if b["F"] > 0 else True
-                out.append({"x": float(x), "F": b["F"], "e": b["e"], "h": b["h"], "band": band, "sciskanie": comp, "s0": b["s0"]})
+                F_ = b["F"]
+                if F_ > 0 and b["h"] >= band - 1e-6 and band > 0:
+                    # całe pasmo rozciągane — udział cięgna tej krawędzi z reguły dźwigni (cięgna przy obu krawędziach)
+                    F_ = F_ * min(max(1.0 - b["e"] / band, 0.0), 1.0)
+                out.append({"x": float(x), "F": F_, "e": b["e"], "h": b["h"], "band": band, "sciskanie": comp, "s0": b["s0"],
+                            "F_blok": b["F"]})
         else:
             cz = 0.5 * (mes.gz[:-1] + mes.gz[1:])
             for z in cz[(cz > e.a) & (cz < e.b)]:
@@ -518,7 +523,12 @@ class AnalizaTarczy:
                             break
                         z_ = q[0]
                     band = e.wsp - z_
-                out.append({"x": float(z), "F": b["F"], "e": b["e"], "h": b["h"], "band": band, "sciskanie": True, "s0": b["s0"]})
+                F_ = b["F"]
+                comp = any((q[3] < 0 or q[4] < 0) for q in prof) if F_ > 0 else True
+                if F_ > 0 and b["h"] >= band - 1e-6 and band > 0:
+                    F_ = F_ * min(max(1.0 - b["e"] / band, 0.0), 1.0)
+                out.append({"x": float(z), "F": F_, "e": b["e"], "h": b["h"], "band": band, "sciskanie": comp, "s0": b["s0"],
+                            "F_blok": b["F"]})
         return out
 
     def _pasy_mes(self):
@@ -1089,7 +1099,8 @@ class AnalizaTarczy:
             self._zakotwienie(pas, w)
         self.pasy.sort(key=lambda q: -q.F_Ed)
         w.krok("Siły w cięgnach: F_Ed = max(F_STM; F_MES); F_MES — wypadkowa rozciągania w strefie przy krawędzi (całkowanie "
-               "σ w przekrojach co element, obwiednia ULS); A_s,req = F_Ed/f_yd", "", "", "", zrodlo="6.5.3, 5.6.4(5)")
+               "σ w przekrojach co element, obwiednia ULS; gdy rozciągane jest całe pasmo — udział krawędzi z reguły dźwigni "
+               "F·(1 − e/h_pasma)); A_s,req = F_Ed/f_yd", "", "", "", zrodlo="6.5.3, 5.6.4(5)")
         w.krok("Zbrojenie minimalne ze względu na rysy w strefie rozciąganej (h_t z MES), gdy σ_ct,char > f_ctm",
                "A_s,min = k_c·k·f_ct,eff·A_ct/σ_s", "σ_s = f_yk, k_c = 0,4 (zginanie) / 1,0 (rozciąganie całego pasma)", "",
                zrodlo="(7.1) [UPR]")
