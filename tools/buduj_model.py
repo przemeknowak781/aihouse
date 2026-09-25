@@ -911,6 +911,12 @@ for _pid, (_z, _pr, _Lw) in _RYN.items():
 #      ETA; W-248, W-272); płyta stropu do lica konstrukcji, łącznik w strefie izolacji (A2 K-1)
 LACZNIK = {"d": 0.12, "lambda_eq": 0.08, "opis": "łącznik termoizolacyjny (ETA) — moduł izolacyjny 120 mm, λ_eq ≤ 0,08 W/(m·K) "
                                                 "(wymaganie; zamiast przykładowego 80 mm / 0,09)"}
+# runda konstrukcyjna 1 (REKOMENDACJE_MODEL p. 4): elementy niekonstrukcyjne w wsporniki_plyty (podsufitki, obudowy, izolacja,
+# szkło, ramy stalowe okładzin) — jawnie „konstrukcyjny: false” (poza analizą płyt ŻB; ramy — osobne pozycje stalowe w PW)
+_WSP_NIEKONSTR = ("PS-A", "OB-A", "OB-A2", "IZ-ST2Z", "SW1", "WYL1", "PL-C1", "PL-C2", "PL-D")
+for _w in WSP:
+    if _w["id"] in _WSP_NIEKONSTR:
+        _w["konstrukcyjny"] = False
 for _w in WSP:
     if _w.get("lacznik_termiczny") and _w.get("przegroda"):
         _w["lacznik"] = dict(LACZNIK)
@@ -1056,7 +1062,7 @@ FUND_EL = [{"id": "PF1", "obrys": [[r(a), r(b)] for a, b in list(orient(_PF1, 1.
             "h": T_PLYTA_F, "mat": "ZB_C25",
             "uwagi": "płyta fundamentowa ŻB 25 cm C25/30 XC2 na XPS 300 20 cm (część ogrzewana); krawędź do lica konstrukcji, XPS pionowy 20 cm "
                      "na czole płyty"},
-           {"id": "PF2", "obrys": OB_PF2, "spod": r(Z_PLYTA_G - T_PLYTA_F), "h": T_PLYTA_F, "mat": "ZB_C25",
+           {"id": "PF2", "obrys": OB_PF2, "spod": r(Z_PLYTA_G - T_PLYTA_F), "h": T_PLYTA_F, "mat": "ZB_C25", "obciazenie_uzytkowe": "garaz",
             "uwagi": "płyta fundamentowa pod garażem obniżona (wierzch −0,30) — na płycie membrana SBS, XPS 10 cm i jastrych zbrojony (POD-G); "
                      "uskok 0,15 m w linii ścian SWG (osie E i 2), ciągłość zbrojenia przez żebro — PT-K / BO"}]
 _zi = 0
@@ -1078,7 +1084,17 @@ for s in SC:
         _zi += 1
         w_gar = s["przegroda"] != "SWG" and Polygon(OB_PF2).buffer(0.01).contains(Polygon([pa_, pb_, pb_]).buffer(0.001))
         z_pl = (Z_PLYTA_G if (w_gar or s["przegroda"] == "SWG") else Z_PLYTA_F) - T_PLYTA_F
-        FUND_EL.append({"id": f"ZF{_zi}", "os": [pa_, pb_], "b": 0.60 if zew else 0.50, "h": h_z, "spod": r(z_pl - h_z), "mat": "ZB_C25",
+        b_z = 0.60 if zew else 0.50
+        if zew:
+            # runda konstrukcyjna 1 (REKOMENDACJE_MODEL p. 5.1): lico zewn. żebra krawędziowego = krawędź płyty (0,10 m od osi
+            # ściany) — oś żebra przesunięta do wnętrza o b/2 − 0,10, końce przedłużone do krawędzi płyty (naroża)
+            _L = seg_len(pa_, pb_)
+            _u = ((pb_[0] - pa_[0]) / _L, (pb_[1] - pa_[1]) / _L)
+            _n = (-_u[1], _u[0]) if s["wnetrze"] == "lewa" else (_u[1], -_u[0])
+            _o = b_z / 2 - 0.10
+            pa_ = [r(pa_[0] + _n[0] * _o - _u[0] * 0.10), r(pa_[1] + _n[1] * _o - _u[1] * 0.10)]
+            pb_ = [r(pb_[0] + _n[0] * _o + _u[0] * 0.10), r(pb_[1] + _n[1] * _o + _u[1] * 0.10)]
+        FUND_EL.append({"id": f"ZF{_zi}", "os": [pa_, pb_], "b": b_z, "h": h_z, "spod": r(z_pl - h_z), "mat": "ZB_C25",
                         "uwagi": f"pogrubienie (żebro) płyty pod ścianą {s['id']}"
                                  + (" — pogłębione pod trzpieniami ŻB w osi 3 (przebicie)" if _os3 else "")
                                  + (" — krawędź z izolacją obwodową XPS (PN-EN ISO 13793)" if zew else "")
@@ -1097,8 +1113,11 @@ FUND_EL.append({"id": f"ZF{_zi}", "os": [[3.00, y3], [7.00, y3]], "b": 1.80, "h"
                 "mat": "ZB_C25", "uwagi": "pogrubienie pasmowe płyty w osi 3 pod trzpieniami ŻB B/3 i C/3 (1,80 × 4,00 m, h = 0,70 m)"})
 for sl in SLUPY[:4]:
     x, y = sl["xy"]
-    FUND_EL.append({"id": f"SF{sl['id'][2:]}", "os": [[r(x - 0.005), y], [r(x + 0.005), y]], "b": 1.00, "h": 0.45, "spod": r(Z_PLYTA_F - T_PLYTA_F - 0.45),
-                    "mat": "ZB_C25", "uwagi": f"pogrubienie płyty 1,0 × 1,0 m pod słupem {sl['id']} (przebicie)"})
+    # runda konstrukcyjna 1: pogrubienie w obrysie płyty (lico zewn. = krawędź płyty −0,10; słup przy krawędzi — przebicie
+    # z obwodem kontrolnym przyciętym krawędzią płyty)
+    FUND_EL.append({"id": f"SF{sl['id'][2:]}", "os": [[r(x - 0.005), r(y + 0.40)], [r(x + 0.005), r(y + 0.40)]], "b": 1.00, "h": 0.45,
+                    "spod": r(Z_PLYTA_F - T_PLYTA_F - 0.45),
+                    "mat": "ZB_C25", "uwagi": f"pogrubienie płyty 1,0 × 1,0 m pod słupem {sl['id']} (przebicie) — w obrysie płyty"})
 FUND = {"typ": "plyta", "elementy": FUND_EL,
         "izolacja_obwodowa": {"typ": "pozioma", "D": 1.00, "d_n": 0.10, "mat": "XPS300", "glebokosc": 0.45,
                               "opis": "izolacja przeciwprzemarzaniowa XPS 10 cm × 1,00 m (garaż 1,20 m) wokół płyty, spadek 2 % od budynku"},

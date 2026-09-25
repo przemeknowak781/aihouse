@@ -454,6 +454,9 @@ class AnalizaKonstrukcji:
     def _plyta_konstrukcyjna(self, pl: dict) -> bool:
         """Płyta konstrukcyjna: materiał żelbetowy/betonowy (pole ``mat`` lub warstwa konstrukcyjna przegrody); elementy
         z materiałów niekonstrukcyjnych (podsufitki, izolacje, szkło, ramy okładzin) — poza analizą płyt."""
+        flag = pl.get("konstrukcyjny", (pl.get("raw") or {}).get("konstrukcyjny"))
+        if flag is not None:                   # jawne oznaczenie w modelu (wsporniki_plyty[].konstrukcyjny)
+            return bool(flag)
         kod = pl.get("mat") or (pl.get("raw") or {}).get("mat")
         if not kod:
             return True

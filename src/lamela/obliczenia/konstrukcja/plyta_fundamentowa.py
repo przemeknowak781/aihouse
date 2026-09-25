@@ -331,6 +331,16 @@ def analiza_plyty_fundamentowej(an, siatka: float = 0.25, c_dol: float = 50.0, c
             g_pod = 1.5
     q_uz = obciazenie_uzytkowe("strop", p).q_k
     case_q = {"G": p.ciezar_zelbetu * h_el + g_pod, "QA": np.full(len(h_el), q_uz)}
+    # płyty składowe z inną kategorią obciążenia użytkowego (pole modelu obciazenie_uzytkowe, np. garaż — kat. F)
+    for e in pl_el:
+        kat = e.get("obciazenie_uzytkowe")
+        if not kat:
+            continue
+        uz = obciazenie_uzytkowe(str(kat), p)
+        msk = pl0.elementy_w(Polygon(e["obrys"]).buffer(0))
+        case_q["QA"] = np.where(msk, 0.0, case_q["QA"])
+        cs = f"Q{uz.kategoria}"
+        case_q[cs] = case_q.get(cs, np.zeros(len(h_el))) + np.where(msk, uz.q_k, 0.0)
     case_pts: dict = {}
     for w in m.sciany(k0):
         pr = an.prof.get(w.id)
@@ -367,6 +377,8 @@ def analiza_plyty_fundamentowej(an, siatka: float = 0.25, c_dol: float = 50.0, c
             continue
         if cs == "SB2":
             odz.append(Oddz(cs, "A", "S", "dach"))
+        elif cs == "QF":
+            odz.append(Oddz(cs, "Q", "F", "QF"))
         else:
             odz.append(Oddz(cs, "Q", {"QA": "A", "H": "H", "S1": "S", "S2": "S"}.get(cs, "A"),
                             "QA" if cs.startswith("QA") else ("dach" if cs in ("H", "S1", "S2") else "")))
@@ -519,9 +531,12 @@ def przebicie_slupow(an, W: WynikPlytyFund, plyty, fvec, kb_uls) -> list:
         vmin = 0.035 * k ** 1.5 * math.sqrt(bt.f_ck)
         pmin = 0.0                                 # bezpiecznie: bez redukcji odporem gruntu przy braku docisku
         best = None
+        rect = box(xy[0] - c1 / 2, xy[1] - c2 / 2, xy[0] + c1 / 2, xy[1] + c2 / 2)
         for a in np.linspace(0.1 * d, 2 * d, 20):
-            u = 2 * (c1 + c2) + 2 * math.pi * a
-            A = c1 * c2 + 2 * (c1 + c2) * a + math.pi * a * a
+            # obwód kontrolny przycięty krawędzią płyty (słup przy krawędzi/narożu — 6.4.2(4), rys. 6.15) [UPR]
+            kontur = rect.buffer(a, quad_segs=16)
+            u = kontur.exterior.intersection(W.obrys).length
+            A = kontur.intersection(W.obrys).area
             Vr = max(V - pmin * A, 0.0)
             vEd = Vr / (u * d) / 1000.0
             vRd = max(0.18 / bt.gamma_c * k * (100 * rho * bt.f_ck) ** (1 / 3), vmin) * 2 * d / a

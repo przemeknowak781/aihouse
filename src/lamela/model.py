@@ -556,7 +556,7 @@ F = {
               "otwory": (0, "rings?"), "mat": (0, "str?")},
     "wsporniki_plyty": {"id": (1, "str"), "obrys": (1, "ring"), "wierzch": (1, "num"), "grubosc": (1, "num"),
                         "przegroda": (0, "str?"), "lacznik_termiczny": (0, "bool"), "mat": (0, "str?"),
-                        "attyka": (0, "dict?")},
+                        "attyka": (0, "dict?"), "konstrukcyjny": (0, "any")},   # false — okładzina/rama/izolacja (poza obl. płyt)
     "slupy": {"id": (1, "str"), "xy": (1, "pt"), "przekroj": (1, "str"), "mat": (1, "str"), "z_od": (1, "num"),
               "z_do": (1, "num"), "blacha_gorna": (0, "dict?"), "blacha_dolna": (0, "dict?")},
     "belki": {"id": (1, "str"), "os": (1, "seg"), "b": (1, "num"), "h": (1, "num"), "spod": (1, "num"),

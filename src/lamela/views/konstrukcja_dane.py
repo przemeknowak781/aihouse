@@ -825,8 +825,9 @@ def _fundamenty(an, D):
         pl = [Polygon(x["obrys"]) for x in els.values() if "obrys" in x]
         if pl:
             from shapely.geometry import LineString as _LS
+            from shapely.ops import unary_union as _uu
             band = _LS(el["os"]).buffer(Z.b / 2, cap_style=2)
-            wyst = band.difference(pl[0].buffer(1e-3)).area
+            wyst = band.difference(_uu([q.buffer(1e-3) for q in pl])).area       # suma płyt składowych (PF1 + PF2)
             if wyst > 0.01:
                 D.braki.append(f"{Z.id}: żebro (b = {Z.b * 100:.0f} cm, oś {el['os']}) wystaje poza obrys płyty "
                                f"{next(iter(x['id'] for x in els.values() if 'obrys' in x))} o {wyst:.2f} m² w rzucie "
