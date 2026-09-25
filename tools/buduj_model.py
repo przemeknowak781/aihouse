@@ -954,18 +954,21 @@ _SLZ = [("A/1", (xA, 0.11), ((Z_PLYTA_F, Z_SPOD_ST1, "P0: podpora końca B1, pł
         ("A/3", (xA, y3), ((Z_PLYTA_F, Z_SPOD_ST1, "P0: płyta ST1"), (Z_ST1, Z_SPOD_ST2, "P1: podpora wspornika B5, płyta ST2"))),
         ("B/3", (xB, y3), ((Z_PLYTA_F, Z_SPOD_ST1, "P0: płyta ST1"), (Z_ST1, Z_SPOD_ST2, "P1: koniec przęsła zakotwienia B5, płyta ST2"),
                                      (Z_ST2, Z_SPOD_ST3, "P2: naroże wklęsłe stropodachu D1"))),
-        ("C/3", (r(xC - 0.105), y3), ((Z_PLYTA_F, r(Z_ST1 - 0.50), "P0: oparcie B8 (w ścianie ŻB S0-12)"), (Z_ST1, r(Z_ST2 - 0.50), "P1: oparcie B9"))),
-        ("D/3", (r(xD + 0.06), y3), ((Z_PLYTA_F, r(Z_ST1 - 0.50), "P0: oparcie B8 (w ścianie ŻB S0-13)"), (Z_ST1, r(Z_ST2 - 0.50), "P1: oparcie B9"))),
+        ("C/3", (r((5.10 + xC + 0.09) / 2), y3), ((Z_PLYTA_F, r(Z_ST1 - 0.50), "P0: oparcie B8 (filarek S0-08 przy ścianie ŻB S0-12)"), (Z_ST1, r(Z_ST2 - 0.50), "P1: oparcie B9"))),
+        ("D/3", (r(xD + 0.06), y3), ((Z_PLYTA_F, r(Z_ST1 - 0.50), "P0: oparcie B8 (filarki S0-09/S0-10 przy ścianie ŻB S0-13)"), (Z_ST1, r(Z_ST2 - 0.50), "P1: oparcie B9"))),
         ("E/1", (xE, 0.11), ((Z_PLYTA_F, Z_SPOD_ST1, "P0: podpora końca B1 (naroże E/1), płyta ST1"),))]
 # B/3, C/3, D/3 — trzpienie wydłużone w osi 3 (w filarkach ścian S0-08/S1-05, S0-09/S0-10/S1-06; w S0-11 otwór O0-15 przy węźle);
 # D/3: 30 cm — wypełnia filarek S1-06 (0,21 m) między węzłem a drzwiami O1-11 (filarek ŻB zamiast muru)
-_SLZ_PRZ = {"B/3": "400x180", "C/3": "400x180", "D/3": "300x180"}
+# C/3: filarek żelbetowy 18 × 86,5 cm — cały filarek S0-08/S1-05 między drzwiami O0-14/O1-10 a węzłem (x 5,10…5,965)
+_SLZ_PRZ = {"B/3": "400x180", "C/3": "865x180", "D/3": "300x180"}
 SLZ_WEZLY = {}                          # węzeł → [id słupów od dołu]
 for _wz, _xy, _odc in _SLZ:
     for _z0, _z1, _opis in _odc:
         _id = f"SL{len(SLUPY) + 1}"
-        SLUPY.append({"id": _id, "xy": [r(_xy[0]), r(_xy[1])], "przekroj": _SLZ_PRZ.get(_wz, "180x400"), "mat": "ZB_C30", "z_od": r(_z0), "z_do": r(_z1),
-                      "uwagi": f"słup żelbetowy w murze (trzpień 18 × 40 cm) w węźle {_wz} — {_opis}"})
+        _prz = _SLZ_PRZ.get(_wz, "180x400")
+        _dims = sorted(int(v_) / 10 for v_ in _prz.split("x"))
+        SLUPY.append({"id": _id, "xy": [r(_xy[0]), r(_xy[1])], "przekroj": _prz, "mat": "ZB_C30", "z_od": r(_z0), "z_do": r(_z1),
+                      "uwagi": f"słup żelbetowy w murze (trzpień {_dims[0]:g} × {_dims[1]:g} cm) w węźle {_wz} — {_opis}"})
         SLZ_WEZLY.setdefault(_wz, []).append(_id)
 
 BELKI = [
@@ -1020,6 +1023,8 @@ _B = {b_["id"]: b_ for b_ in BELKI}
 _B["B4"]["podpory"] = [{"typ": "slup", "id": SLZ_WEZLY["A/1"][1], "s": r(xA - xA2)}, {"typ": "sciana", "id": "S1-01", "s": r(xB - xA2)}]
 _B["B5"]["podpory"] = [{"typ": "slup", "id": SLZ_WEZLY["A/3"][1], "s": r(xA - xA2)}, {"typ": "slup", "id": SLZ_WEZLY["B/3"][1], "s": r(xB - xA2)}]
 _B["B3"]["podpory"] = [{"typ": "belka", "id": "B4", "s": 0.0}, {"typ": "belka", "id": "B5", "s": r(y3)}]
+for _bid, _k in (("B8", 0), ("B9", 1)):     # podciągi w osi 3 na słupach ŻB C/3 i D/3
+    _B[_bid]["podpory"] = [{"typ": "slup", "id": SLZ_WEZLY["C/3"][_k], "s": 0.0}, {"typ": "slup", "id": SLZ_WEZLY["D/3"][_k], "s": r(xD - xC)}]
 _B["B4"]["uwagi"] = ("belka wspornikowa w osi 1 (w licu ściany P2, pod parapetem O2-01 +6,90): wspornik 1,00 m na słupie ŻB A/1, przęsło "
                      "zakotwienia A–B 3,875 m dociążone ścianą S2-01 (oparta_na) — koniec na murze S1-01")
 _B["B5"]["uwagi"] = ("belka wspornikowa w osi 3 (w ścianie pn. P2): wspornik 1,00 m na słupie ŻB A/3, przęsło zakotwienia A–B na słupie ŻB B/3, "

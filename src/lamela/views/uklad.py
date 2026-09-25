@@ -40,7 +40,8 @@ L = 210 + m·n, np. 190; 0 — tylko najmniejsza długość), ``max_wysokosc`` (
 ``kara_niestandard`` (0,03), ``kara_skladania`` ({dobre: 0, poprawne: 0,04, słabe: 0,10} — na kierunek),
 ``max_dlugosc`` (2400), ``wolne_obszary`` (true — bloki także w pustych narożnikach obwiedni widoków),
 ``odstep_widok_blok`` (10 mm), ``kara_czesci_uwag`` (0,02 — na każdą część uwag ponad jedną),
-``max_czesci_uwag`` (4), ``kolejnosc_uwag`` (``czytania`` | ``dowolna`` — dawny podział: najmniej papieru, bez
+``max_czesci_uwag`` (4), ``kara_kolejnosci`` (0,01 — bloki, których nie da się ułożyć w kolejności czytania),
+``kolejnosc_uwag`` (``czytania`` | ``dowolna`` — dawny podział: najmniej papieru, bez
 warunku kolejności i bez przestawiania kolumn), ``znaki_centrujace`` (``auto`` | ``rezerwuj`` — zawsze
 rezerwacja stref | ``skracaj`` — bez rezerwacji, znaki skracane).
 """
@@ -69,7 +70,7 @@ DOMYSLNE = dict(
     format="auto", wysokosci=[297, 420, 594, 841, 891], krok_dlugosci=10.0, modul_skladania="auto",
     kara_niestandard=0.03, kara_skladania={"dobre": 0.0, "poprawne": 0.04, "słabe": 0.10}, max_dlugosc=2400.0,
     max_wysokosc=914.0, wolne_obszary=True, odstep_widok_blok=GAP_VB, kara_czesci_uwag=0.02, max_czesci_uwag=4,
-    znaki_centrujace="auto", kolejnosc_uwag="czytania",
+    znaki_centrujace="auto", kolejnosc_uwag="czytania", kara_kolejnosci=0.01,
 )
 TRYBY = ("auto", "ekonomiczny", "standardowy", "klasyczny")
 
@@ -708,8 +709,8 @@ def _pakuj(W, H, widoki, grupa, bloki, tb_h, przes, gap_vb, znaki: bool, max_cze
             _dodaj_blok(wl, R, b, pos[0], pos[1])
         else:
             R.brak, R.ok = "", True
-            R.kolejnosc_ok = _kolejnosc_ok([r for k, _n, r in R.prostokaty[n_p:n_p + len(R.bloki) - n_b]
-                                            if k == "blok"])
+            m = len(R.bloki) - n_b - len(odlozone)
+            R.kolejnosc_ok = _kolejnosc_ok([r for k, _n, r in R.prostokaty[n_p:n_p + m] if k == "blok"])
             return R
     return R
 
@@ -1070,7 +1071,8 @@ class Uklad:
                     pole_m2=round(self.W * self.H / 1e6, 4), standardowy=self.standard, tryb=self.tryb,
                     koszt=round(self.koszt, 4), wypelnienie_szac=round(self.wypelnienie_szac, 3),
                     uklad_widokow=self.roz.grupa.opis if self.roz.grupa else "", skladanie=self.skladanie,
-                    czesci_uwag=self.roz.czesci_uwag, znaki_rezerwowane=self.roz.znaki,
+                    czesci_uwag=self.roz.czesci_uwag, kolejnosc_czytania=self.roz.kolejnosc_ok,
+                    znaki_rezerwowane=self.roz.znaki,
                     kandydaci=self.kandydaci[:6])
 
 
@@ -1101,7 +1103,6 @@ def rozmiesc(widoki: list[Widok], bloki: list[Blok], tb_h: float, o: dict | None
     tryb, jawny = tryb_formatu(o["format"] if fmt is None else fmt)
     grupy = uklady_widokow(widoki)
     gap = float(o.get("odstep_widok_blok", GAP_VB))
-    kc = float(o.get("kara_czesci_uwag", 0.02))
     if tryb == "jawny":
         nm, W, H = jawny
         std = nazwa_standardowa(W, H)
@@ -1117,7 +1118,7 @@ def rozmiesc(widoki: list[Widok], bloki: list[Blok], tb_h: float, o: dict | None
         if best is None:
             return None
         k, oc = koszt(W, H, std is not None, o, tb_h)
-        k *= 1.0 + kc * best.dodatkowe_czesci
+        k *= _kara_ukladu(best, o)
         return Uklad(std[0] if std else nm, W, H, std[1] if std else None, std is not None, tryb, best, k, oc,
                      [], wypelnienie_ukladu(best))
     stdf = formaty_standardowe(float(o["max_wysokosc"]), float(o["max_dlugosc"]))
@@ -1150,7 +1151,7 @@ def rozmiesc(widoki: list[Widok], bloki: list[Blok], tb_h: float, o: dict | None
             r = _pakuj_wysrodkuj(L, H, widoki, g, bloki, tb_h, W_need, gap, o)
             if r is None:
                 continue
-            kt = k * (1.0 + kc * r.dodatkowe_czesci)
+            kt = k * _kara_ukladu(r, o)
             if best_h is None or kt < best_h.koszt - 1e-9:
                 best_h = Uklad(nm, L, H, ori, is_std, tryb, r, kt, oc)
         if best_h is not None:
@@ -1163,6 +1164,12 @@ def rozmiesc(widoki: list[Widok], bloki: list[Blok], tb_h: float, o: dict | None
                            pole_m2=round(u.W * u.H / 1e6, 4), skladanie=u.skladanie["ocena"]) for u in cands]
     best.wypelnienie_szac = wypelnienie_ukladu(best.roz)
     return best
+
+
+def _kara_ukladu(R: Rozmieszczenie, o: dict) -> float:
+    """Mnożnik kosztu za czytelność upakowania: dodatkowe części uwag i bloki poza kolejnością czytania."""
+    return (1.0 + float(o.get("kara_czesci_uwag", 0.02)) * R.dodatkowe_czesci
+            + (0.0 if R.kolejnosc_ok else float(o.get("kara_kolejnosci", 0.01))))
 
 
 def _dociagnij(W, H, widoki, g, bloki, tb_h, gap_vb: float = GAP_VB) -> float:
