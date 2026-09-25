@@ -331,7 +331,7 @@
   "znaczniki": {
     "DO UZUPEŁNIENIA": 95,
     "DOKUMENT ZEWNĘTRZNY": 1,
-    "DANE PRZYKŁADOWE": 47,
+    "DANE PRZYKŁADOWE": 46,
     "ZAŁ": 8,
     "NZW": 1,
     "INT": 0,
@@ -339,7 +339,7 @@
     "lista": {
       "[DO UZUPEŁNIENIA: nazwa pracowni projektowej]": 2,
       "[DO UZUPEŁNIENIA: adres pracowni]": 2,
-      "[DANE PRZYKŁADOWE – FIKCYJNE]": 47,
+      "[DANE PRZYKŁADOWE – FIKCYJNE]": 46,
       "[DO UZUPEŁNIENIA: jednostka ewidencyjna — kod TERYT WWPPGG_R i nazwa]": 2,
       "[DO UZUPEŁNIENIA: kod TERYT jedn. ewid. WWPPGG_R]": 6,
       "[DO UZUPEŁNIENIA: imię i nazwisko lub nazwa inwestora]": 8,
@@ -382,13 +382,13 @@
     },
     "ZL": {
       "od": 18,
-      "do": 27,
-      "strony_opisu": 10,
+      "do": 26,
+      "strony_opisu": 9,
       "arkusze": 0
     }
   },
-  "rozmiar_mb": 1.7875232696533203,
-  "strony": 27,
+  "rozmiar_mb": 1.7888031005859375,
+  "strony": 26,
   "podsumowanie": {
     "status": "PRZYKŁAD – NIE DO ZŁOŻENIA",
     "OK": 32,
@@ -398,6 +398,6 @@
     "OSTRZEŻENIE": 0,
     "znaczniki_do_uzupelnienia": 95,
     "znaczniki_dokument_zewnetrzny": 1,
-    "znaczniki_dane_przykladowe": 47
+    "znaczniki_dane_przykladowe": 46
   }
 }

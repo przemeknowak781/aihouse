@@ -2,11 +2,11 @@ RAPORT KOMPLETNOŚCI — PZT_ZL_2026.09.25.pdf
 Lista kontrolna: TOM I — kontrola elementów PZT i ZL (bez PAB)
 Status: PRZYKŁAD – NIE DO ZŁOŻENIA
 Pozycje: OK 32 · BRAK 0 · DO UZUPEŁNIENIA 3 · N/D 1 · OSTRZEŻENIE 0
-Znaczniki: [DO UZUPEŁNIENIA] ×95, [DOKUMENT ZEWNĘTRZNY] ×1, [DANE PRZYKŁADOWE] ×47
-Plik: 27 stron, 1.79 MB
+Znaczniki: [DO UZUPEŁNIENIA] ×95, [DOKUMENT ZEWNĘTRZNY] ×1, [DANE PRZYKŁADOWE] ×46
+Plik: 26 stron, 1.79 MB
 
   element PZT: strony 1–17 (opis 14, arkusze 3)
-  element ZL: strony 18–27 (opis 10, arkusze 0)
+  element ZL: strony 18–26 (opis 9, arkusze 0)
 
 ✓ F-02    [  *] OK               Rozmiar pliku ≤ 150 MB (RPB § 2b ust. 3; W-300) — 1.79 MB (limit 150 MB)
 ✓ F-03    [  *] OK               Część rysunkowa w postaci wektorowej (raster tylko jako podkład mapy) (RPB § 2b ust. 2; W-300) — 3 arkusze wektorowe

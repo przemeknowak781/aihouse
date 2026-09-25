@@ -6,8 +6,8 @@
 
 ## Opis techniczny do projektu zagospodarowania działki *(§ 14 RPB)*
 
-Opis sporządzono w zakresie określonym w § 14 rozporządzenia Ministra Rozwoju, Pracy i Technologii w sprawie
-szczegółowego zakresu i formy projektu budowlanego (t.j. Dz.U. 2022 poz. 1679, zm. Dz.U. 2023 poz. 2405
+Opis sporządzono w zakresie określonym w § 14 rozporządzenia Ministra Rozwoju z dnia 11 września 2020 r.
+w sprawie szczegółowego zakresu i formy projektu budowlanego (t.j. Dz.U. 2022 poz. 1679, zm. Dz.U. 2023 poz. 2405
 i Dz.U. 2026 poz. 597) — dalej **RPB**. Wymagania techniczno-budowlane przyjęto wg rozporządzenia Ministra
 Infrastruktury w sprawie warunków technicznych, jakim powinny odpowiadać budynki i ich usytuowanie (t.j. Dz.U. 2022
 poz. 1225 ze zm.) — dalej **WT** — w brzmieniu obowiązującym do 19.09.2026 r., stosowanego na podstawie art. 102a
@@ -24,7 +24,7 @@ uzbrojenia terenu, 1:200).
 ## 1. Przedmiot zamierzenia *(§ 14 pkt 1 RPB)*
 
 Przedmiotem zamierzenia budowlanego jest **budowa budynku mieszkalnego jednorodzinnego wolnostojącego
-„Dom LAMELA”** (PB art. 3 pkt 2a) — 3 kondygnacje nadziemne (parter, i piętro, ii piętro), bez podpiwniczenia, z garażem
+„Dom LAMELA”** (PB art. 3 pkt 2a) — 3 kondygnacje nadziemne (parter, I piętro, II piętro), bez podpiwniczenia, z garażem
 2-stanowiskowym w bryle parteru — wraz z zagospodarowaniem działki nr ewid. 123/4
 i urządzeniami budowlanymi związanymi z budynkiem (PB art. 3 pkt 9). Zamierzenie obejmuje jeden obiekt budowlany;
 zakres całego zamierzenia:
@@ -32,7 +32,7 @@ zakres całego zamierzenia:
 1. budynek mieszkalny jednorodzinny z garażem w bryle — obiekt kategorii I (załącznik do PB);
 2. zjazd z drogi publicznej 1KDD (ul. Lipowa (fikcyjna), klasa D) — w zakresie i na warunkach zezwolenia zarządcy drogi
    (u.d.p. art. 29 ust. 1, 3a; ZL);
-3. podjazd (podjazd — kostka betonowa 8 cm grafit na podbudowie (2,5 t)), dojście (dojście — płyty betonowe 60×60 cm, szer. 1,30 m),
+3. podjazd (kostka betonowa 8 cm grafit na podbudowie (2,5 t)), dojście (płyty betonowe 60×60 cm, szer. 1,30 m),
    2 stanowiska postojowe naziemne dla gości;
 4. tarasy i podesty naziemne (3 szt., łącznie 66,75 m²);
 5. stanowisko pojemników na odpady — osłona z lamel na 4 pojemniki 240 l (segregacja), przy furtce;
@@ -42,7 +42,7 @@ zakres całego zamierzenia:
 7. fundament jednostki zewnętrznej pompy ciepła i studnia chłonna skroplin SK-PC;
 8. ogrodzenie z bramą przesuwną (5,60 m) i furtką (1,00 m);
 9. przyłącza: wodociągowe, kanalizacji sanitarnej, elektroenergetyczne nN, telekomunikacyjne (kanalizacja kablowa ze światłowodem) — wg warunków przyłączenia gestorów sieci [DO UZUPEŁNIENIA: nr i data warunków przyłączenia (E-05)];
-   gazu nie przyłącza się (NIE wykorzystywany (dom all-electric));
+   przyłącza gazowego nie projektuje się — budynek bez instalacji gazowej (ogrzewanie i c.w.u. z pompy ciepła);
 10. zieleń: trawniki, żywopłoty, rabaty, 5 drzew projektowanych; zachowanie drzew istniejących.
 
 ## 2. Istniejący stan zagospodarowania działki *(§ 14 pkt 2 RPB)*
@@ -56,9 +56,9 @@ Grunt: 0,0–0,4 ziemia urodzajna; piaski średnie I_D ≈ 0,6; ZWG ≈ 3,8 m p.
 
 Otoczenie: od północy droga publiczna gminna 1KDD — ul. Lipowa (fikcyjna), klasa D, w liniach rozgraniczających
 10,00 m, jezdnia asfalt szer. 5,50 m;
-działka nr 123/3 — dom jednorodzinny, 2 kondygnacje, dach dwuspadowy (≥ 8 m od granicy); działka nr 123/5 — dom jednorodzinny parterowy z poddaszem (≥ 8 m od granicy); działka nr 130 — teren rolny (R IVb) — niezabudowany; 
+działka nr 123/3 — dom jednorodzinny, 2 kondygnacje, dach dwuspadowy (≥ 8 m od granicy); działka nr 123/5 — dom jednorodzinny parterowy z poddaszem (≥ 8 m od granicy); działka nr 130 — teren rolny (R IVb) — niezabudowany.
 
-Zieleń istniejąca: 2 drzewa (brzoza brodawkowata (istniejąca, zachowana); sosna zwyczajna (istniejąca, zachowana)),
+Zieleń istniejąca: 2 drzewa (brzoza brodawkowata; sosna zwyczajna),
 zachowywane; drzew i krzewów do usunięcia: brak. Uzbrojenie istniejące w pasie drogi
 1KDD: wodociąg PE 110 (ul. Lipowa); kanalizacja sanitarna PVC 200, dno ≈ 99,20; kabel nN 0,4 kV (OSD); kanalizacja teletechniczna / światłowód; gazociąg PE 63 — NIE wykorzystywany (dom all-electric) [DANE PRZYKŁADOWE – FIKCYJNE]. Stan istniejący — na mapie do celów
 projektowych [DO UZUPEŁNIENIA: mapa do celów projektowych z klauzulą urzędową lub oświadczeniem geodety (E-01)] (rys. PZT-01).
@@ -75,18 +75,18 @@ Urządzenia budowlane (PB art. 3 pkt 9) projektowane na działce — położenie
 
 | Element | Opis |
 |---|---|
-| ZKP | złącze kablowo-pomiarowe we wnęce ogrodzenia, PWP przy wejściu ; W-190) |
-| SR1 | studzienka rewizyjna kanalizacji Ø425 ; poza garażem — W-118) |
-| PC-JZ | jednostka zewn. PC monoblok R290 w osłonie lamelowej z ekranem akustycznym od tarasu;  7,0 m od granicy E |
-| SEP-1 | osadnik z separatorem substancji ropopochodnych ; mini, klasa I, PN-EN 858) dla OL-1/OL-4 |
-| SK-PC | studnia chłonna skroplin PC ; żwir, ≥ 0,8 m p.p.t.), poza strefą R290 |
-| zbiornik retencyjny | szczelny zbiornik PE 5,0 m³ z osadnikiem i filtrem, pompa do podlewania, przelew DN160 do niecki;  ≥ 3,0 m od budynku, ≥ 2,0 m od granic |
-| niecka chłonna | niecka chłonna |
+| ZKP | złącze kablowo-pomiarowe we wnęce ogrodzenia, PWP przy wejściu (W-190) |
+| SR1 | studzienka rewizyjna kanalizacji Ø425 (poza garażem — W-118) |
+| PC-JZ | jednostka zewn. PC monoblok R290 w osłonie lamelowej z ekranem akustycznym od tarasu; 7,0 m od granicy E (≥ 6,0 — W-024); strefa R290 1,0 m bez otworów, wpustów i studzienek (W-156) |
+| SEP-1 | osadnik z separatorem substancji ropopochodnych (mini, klasa I, PN-EN 858) dla OL-1/OL-4 (podjazd, posadzka garażu); odpływ do niecki NT-E, poza zbiornikiem retencyjnym (audyt A1, W-114) |
+| SK-PC | studnia chłonna skroplin PC (żwir, ≥ 0,8 m p.p.t.), poza strefą R290 (W-146) |
+| zbiornik retencyjny | szczelny zbiornik PE 5,0 m³ z osadnikiem i filtrem, pompa do podlewania, przelew DN160 do niecki; ≥ 3,0 m od budynku, ≥ 2,0 m od granic (W-145: wariant bazowy, nie jest urządzeniem wodnym) |
+| niecka chłonna | niecka chłonna (ogród deszczowy) 28 m² (powiększona — weryfikacja §6 B6), głęb. 0,30 m, ≥ 3,0 m od fundamentów, ≥ 2,0 m od granic, ≥ 1,0 m od rzutu korony dojrzałych drzew (W-144, K-2) |
 | ogrodzenie od drogi | od drogi: ażurowe; h = 1,50 m; łącznie 25,40 m |
 | ogrodzenie pozostałe | panele siatkowe zgrzewane grafit z żywopłotem, h = 1,50 m, 132,00 m |
 | przesuwna | szer. w świetle 5,60 m, h = 1,50 m |
 | furtka | szer. w świetle 1,00 m, h = 1,50 m |
-| stanowisko pojemników | osłona z lamel na 4 pojemniki 240 l |
+| stanowisko pojemników | osłona z lamel na 4 pojemniki 240 l (segregacja), przy furtce; odległości wg WT §23 ust. 4 nieokreślone dla zabudowy jednorodzinnej (W-016) |
 
 *Źródło: model/dzialka.yaml — uzbrojenie.obiekty, retencja, ogrodzenie, bramy, odpady*
 
@@ -96,7 +96,8 @@ Urządzenia budowlane (PB art. 3 pkt 9) projektowane na działce — położenie
 
 **Ścieki bytowe** — grawitacyjnie do sieci kanalizacji sanitarnej (kanalizacja sanitarna PVC 200, dno ≈ 99,20) w drodze
 1KDD: przykanalik PVC-U SN8 160 o spadku 2,0 %
-[ZAŁ — warunki gestora], przykanalik PVC-U 160, i ≥ 2 %, studzienka rewizyjna SR1 Ø425 ; x 13,0; długość trasy na rysunku 13,9 m.
+[ZAŁ — warunki gestora], ze studzienką rewizyjną SR1 (studzienka rewizyjna kanalizacji Ø425 (poza garażem — W-118)); długość trasy na działce
+i w pasie drogowym 13,9 m (rys. PZT-03).
 Ścieki przemysłowe nie powstają.
 
 **Wody opadowe i roztopowe** — zagospodarowane w całości w granicach działki (MPZP 3MN; WT § 28 ust. 2 [W-145]).
@@ -113,9 +114,9 @@ na działki sąsiednie (odwodnienie liniowe przy bramie wjazdowej; spadki terenu
 ### 3.3. Układ komunikacyjny *(§ 14 pkt 3 lit. c)*
 
 Wjazd bramą przesuwną w ogrodzeniu od drogi 1KDD; podjazd przed garażem szer. 6,38 m
-i dł. 7,62 m (nawierzchnia: podjazd — kostka betonowa 8 cm grafit na podbudowie (2,5 t), spadek 1,5 %
+i dł. 7,62 m (nawierzchnia: kostka betonowa 8 cm grafit na podbudowie (2,5 t), spadek 1,5 %
 od budynku) — dojazd szerszy od wymaganego 3,00 m (WT §14 ust. 1).
-Dojście piesze od furtki do wejścia głównego: dojście — płyty betonowe 60×60 cm, szer. 1,30 m. Stanowiska postojowe:
+Dojście piesze od furtki do wejścia głównego: płyty betonowe 60×60 cm, szer. 1,30 m. Stanowiska postojowe:
 
 **Tabela 2. Stanowiska postojowe**
 
@@ -175,7 +176,7 @@ Projektuje się niwelację terenu wyłącznie w otoczeniu budynku i utwardzeń: 
 posadzka parteru ±0,00 = 101,65 m n.p.m., tj. 0,27 m ponad średni poziom terenu przy budynku.
 Teren przy budynku ze spadkiem ≥ 2 % od ścian (WT §316 ust. 2 (wymóg spływu); 2 % — R8 3.5; W-019), opaska żwirowa wokół budynku
 (13,3 m²), odwodnienia liniowe przy drzwiach bezprogowych, przed garażem i przy bramie;
-na granicach działki rzędne projektowane równe istniejącym. Drenaż opaskowy: NIE PROJEKTUJE SIĘ — piaski przepuszczalne, ZWG ≈ 3,8 m p.p.t., posadowienie ≈ 0,5 m p.p.t. (W-285); ochrona płyty: XPS + membrana SBS, opaska żwirowa i spadki terenu.
+na granicach działki rzędne projektowane równe istniejącym. Drenażu opaskowego nie projektuje się — piaski przepuszczalne, ZWG ≈ 3,8 m p.p.t., posadowienie ≈ 0,5 m p.p.t. (W-285); ochrona płyty: XPS + membrana SBS, opaska żwirowa i spadki terenu.
 Rzędne — rys. PZT-02.
 
 **Tabela 4. Odwodnienie powierzchniowe**
@@ -208,8 +209,8 @@ Drzewa:
 | DR2 | klon polny (cień letni tarasu zach.) | projektowane | 5,00 | 8,00 |
 | DR3 | grab pospolity | projektowane | 4,50 | 7,00 |
 | DR4 | jabłoń | projektowane | 4,00 | 5,00 |
-| DR5 | brzoza brodawkowata (istniejąca, zachowana) | istniejące — zachowane | 4,00 | 12,00 |
-| DR6 | sosna zwyczajna (istniejąca, zachowana) | istniejące — zachowane | 4,50 | 11,00 |
+| DR5 | brzoza brodawkowata | istniejące — zachowane | 4,00 | 12,00 |
+| DR6 | sosna zwyczajna | istniejące — zachowane | 4,50 | 11,00 |
 | DR7 | grab kolumnowy (zieleń przy wjeździe) | projektowane | 2,00 | 6,00 |
 
 *Uwaga: Przy drzewach zachowywanych — ochrona pni i systemu korzeniowego w zasięgu korony podczas robót. Obwody pni drzew istniejących [DO UZUPEŁNIENIA: obwód na wys. 5 cm — mapa do celów projektowych (u.o.p. art. 83f)].*
@@ -248,9 +249,9 @@ z dokładnością do 0,01 m².
 | powierzchnia kondygnacji P2 (upzp art. 2 pkt 33) | 96,80 | — |
 | suma powierzchni kondygnacji nadziemnych (art. 2 pkt 32) | 396,39 | — |
 
-*Uwaga: suma rzutu poziomego budynku po zewnętrznym obrysie ścian zewnętrznych wszystkich kondygnacji nadziemnych (lico ocieplenia; wspornik bryły wyższej kondygnacji wliczony); tarasy naziemne, okapy, płyty wysunięte — nie wliczane.*
+*Uwaga: Powierzchnia zabudowy: suma rzutu poziomego budynku po zewnętrznym obrysie ścian zewnętrznych wszystkich kondygnacji nadziemnych (lico ocieplenia; wspornik bryły wyższej kondygnacji wliczony); tarasy naziemne, okapy, płyty wysunięte — nie wliczane.*
 
-*Uwaga: teren zieleni modelu (trawnik, rabaty, żywopłoty, niecka chłonna) minus: parter, tarasy, utwardzenia (także ażurowe), opaska żwirowa, pojemniki, teren nad zbiornikiem (rzut ZAŁOŻONY — brak wymiarów zbiornika).*
+*Uwaga: Powierzchnia biologicznie czynna: teren zieleni modelu (trawnik, rabaty, żywopłoty, niecka chłonna) minus: parter, tarasy, utwardzenia (także ażurowe), opaska żwirowa, pojemniki, teren nad zbiornikiem (rzut ZAŁOŻONY — brak wymiarów zbiornika).*
 
 *Źródło: lamela.wskazniki (model/budynek.yaml + model/dzialka.yaml)*
 
@@ -272,13 +273,13 @@ z dokładnością do 0,01 m².
 | Parametr | Wartość | Wymaganie | Podstawa | Ocena |
 |---|---|---|---|---|
 | Udział powierzchni zabudowy | 11,72 % | ≤ 30 % | MPZP 3MN; upzp art. 2 pkt 35 [W-030] | spełnia |
-| Udział powierzchni biologicznie czynnej (bez rezerwy dachu) | 79,38 % | ≥ 50 % | MPZP 3MN; upzp art. 2 pkt 28–29 [W-031] | spełnia |
+| Udział powierzchni biologicznie czynnej (bez rezerwy dachu zielonego) | 79,38 % | ≥ 50 % | MPZP 3MN; upzp art. 2 pkt 28–29 [W-031] | spełnia |
 | Intensywność zabudowy (nadziemna) | 0,248 | 0,05–0,80 | MPZP 3MN; upzp art. 2 pkt 31–33 (nadziemna) [W-032] | spełnia |
 | Wysokość zabudowy (czerpnia wentylacji (dachowa)) | 10,27 m | ≤ 11,00 m (rezerwa proj. 0,30 m) | MPZP 3MN; upzp art. 2 pkt 30 [W-033] | spełnia |
 | Liczba kondygnacji nadziemnych | 3 | ≤ 3 | MPZP 3MN; warunek WT §213 pkt 1 lit. a [W-034] | spełnia |
 | Spadek dachów (dachy płaskie) | 1,15 ° | ≤ 12° | MPZP 3MN [W-035] | spełnia |
 | Miejsca postojowe (garaż 2 + naziemne 2) | 4 szt. | ≥ 2 na lokal mieszkalny | MPZP 3MN; WT §18 ust. 2 [W-036] | spełnia |
-| Nieprzekraczalna linia zabudowy — element najbliższy (− = przed linią) | -0,95 m (T2) | 6,00 m od linii rozgraniczającej; brak przekroczeń | MPZP 3MN (fikcyjny) — nieprzekraczalna linia zabudowy od 1KDD; żaden element jej nie przekracza [W-006] | spełnia |
+| Nieprzekraczalna linia zabudowy — element najbliższy linii | 0,95 m przed linią (T2) | 6,00 m od linii rozgraniczającej; brak przekroczeń | MPZP 3MN (fikcyjny) — nieprzekraczalna linia zabudowy od 1KDD; żaden element jej nie przekracza [W-006] | spełnia |
 | Wysokość ogrodzenia od drogi (ażurowe) | 1,50 m | ≤ 1,60 m | MPZP 3MN (ażurowe, bez prefabrykatów betonowych) [W-038] | spełnia |
 
 *Uwaga: Ustalenia MPZP przykładowe [DANE PRZYKŁADOWE – FIKCYJNE]; wartości wymagań z `docs/10_podstawy_prawne/wymagania.yaml`. Wysokość zabudowy wg upzp art. 2 pkt 30 lit. a: H = z_top − t_śr = 111,65 − 101,38 m n.p.m. (H = z_top − t_śr; z_top — najwyższy punkt budynku na dachu/ścianie/attyce (wyłączenia zamknięte: komin, nadbudówka maszynowni dźwigu lub innego pomieszczenia technicznego, wyjście z klatki; czerpnia, wyrzutnia, wywiewka, PV, wyłaz, świetlik — wliczane); t_śr = (t_min + t_max) / 2 na obwodzie rzutu ścian zewnętrznych, w każdym punkcie niższa z rzędnych terenu istniejącego/projektowanego).*
@@ -289,7 +290,8 @@ z dokładnością do 0,01 m².
 
 ### 5.1. Ograniczenia i zakazy wynikające z aktów prawa miejscowego *(§ 14 pkt 5 lit. a)*
 
-Działka leży w terenie **3MN** — zabudowa mieszkaniowa jednorodzinna wolnostojąca — MPZP: uchwała nr XII/123/2024 Rady Gminy Przykładowo z 21.03.2024 — teren 3MN (fikcyjny)
+Działka leży na terenie objętym miejscowym planem zagospodarowania przestrzennego — uchwała nr XII/123/2024 Rady Gminy Przykładowo z 21.03.2024 — teren 3MN (fikcyjny),
+przeznaczenie: zabudowa mieszkaniowa jednorodzinna wolnostojąca
 [DANE PRZYKŁADOWE – FIKCYJNE] [DO UZUPEŁNIENIA: wypis i wyrys z MPZP (E-02)]. Ustalenia istotne dla zagospodarowania:
 nieprzekraczalna linia zabudowy 6,00 m od linii rozgraniczającej drogi 1KDD; wskaźniki
 powierzchni zabudowy, powierzchni biologicznie czynnej, intensywności, wysokości, liczby kondygnacji, geometrii
@@ -322,7 +324,7 @@ Dz.U. 2019 poz. 1839 ze zm., § 3 ust. 1 pkt 55 lit. a — progi powierzchni zab
 | Odpady | odpady komunalne segregowane w stanowisku pojemników przy ogrodzeniu | odbiór wg regulaminu gminy |
 | Zieleń | drzewa do usunięcia: brak; drzewa istniejące zachowane | zezwolenie / zgłoszenie usunięcia drzew nie dotyczy (u.o.p. art. 83f [W-023]) |
 | Grunty rolne | klasy gruntów [ZAŁ] — mineralne RIVb/RV [DO UZUPEŁNIENIA: wypis z EGiB (E-03)] | decyzja o wyłączeniu z produkcji nie dotyczy przy klasach IV–VI mineralnych [W-025] |
-| Czynnik chłodniczy R290 (propan) | strefa bezpieczeństwa wokół jednostki zewnętrznej bez otworów, wpustów, studzienek i źródeł zapłonu | brak (OK) [W-156] |
+| Czynnik chłodniczy R290 (propan) | strefa bezpieczeństwa wokół jednostki zewnętrznej bez otworów, wpustów, studzienek i źródeł zapłonu | elementy w strefie: brak — spełnia [W-156] |
 
 *Źródło: lamela.obliczenia.sanitarne.ogrzewanie (hałas: PORT PC p. 4.4); audyt A1; model/dzialka.yaml*
 
@@ -339,7 +341,7 @@ Dz.U. 2009 nr 124 poz. 1030, § 12 ust. 1). Dojście od drogi publicznej 1KDD �
 utwardzonym dojściem długości ok. 7,0 m do wejścia głównego (rys. PZT-01).
 
 **Przeciwpożarowe zaopatrzenie w wodę** — wymagana wydajność ≥ 10 dm³/s (rozp. Dz.U. 2009 nr 124 poz. 1030 §3 ust. 2 (5 dm³/s wg ust. 3); W-217) z sieci wodociągowej
-w drodze 1KDD: najbliższy hydrant zewnętrzny — najbliższy hydrant zewnętrzny DN80 (ul. Lipowa) — zaopatrzenie ppoż. (W-217) [do potwierdzenia], w odległości ok.
+w drodze 1KDD: najbliższy hydrant zewnętrzny DN80 (ul. Lipowa), w odległości ok.
 40 m od budynku [DANE PRZYKŁADOWE – FIKCYJNE]
 [DO UZUPEŁNIENIA: potwierdzenie lokalizacji i wydajności hydrantu przez gestora sieci].
 Przeciwpożarowy wyłącznik prądu — przy złączu kablowo-pomiarowym / wejściu (PT-4 IE).
@@ -381,7 +383,7 @@ k_f = 1,0·10⁻⁴ m/s [ZAŁ] [DO UZUPEŁNIENIA: k_f z badań podłoża (E-04)]
 Kategoria geotechniczna: **II** (opinia geotechniczna + dokumentacja badań podłoża (≥ 3 sondowania do 6 m) + projekt geotechniczny (W-280…W-282)); grunt: piasek średni (MSa), średniozagęszczony,
 zwierciadło wody gruntowej ok. 3,8 m p.p.t. [DANE PRZYKŁADOWE – FIKCYJNE]
 [DO UZUPEŁNIENIA: opinia geotechniczna (E-04)]. Instalacja fotowoltaiczna na dachach: 15 modułów,
-6,45 kWp ≤ 6,5 kWp (PB art. 29 ust. 4 pkt 3 lit. c (art. 56 ust. 1a uchylony); ustawa OZE art. 2 pkt 19b lit. b; W-194).
+6,45 kWp ≤ 6,5 kWp (PB art. 29 ust. 4 pkt 3 lit. c; W-194).
 
 ## 9. Informacja o obszarze oddziaływania obiektu *(§ 14 pkt 8, § 18 RPB)*
 
@@ -395,19 +397,19 @@ wskaźniki — pkt 4). Wartości — minimum dla wszystkich elementów budynku i
 
 **Tabela 11. Przepisy wyznaczające obszar oddziaływania i sprawdzenie**
 
-| Przepis | Ograniczenie | Projekt (min.) [m] | Wymaganie | Ocena | Element |
+| Przepis | Ograniczenie | Projekt | Wymaganie | Ocena | Element |
 |---|---|---|---|---|---|
-| WT § 12 ust. 1 pkt 1 | ściany z oknami/drzwiami od granicy | 5,73 | ≥ 4,00 m | spełnia | S0-03 |
-| WT § 12 ust. 1 pkt 2 | ściany bez otworów od granicy | 11,18 | ≥ 3,00 m | spełnia | S2-06 |
-| WT § 12 ust. 6 pkt 1 | okapy, płyty wysunięte, daszki od granicy | 5,18 | ≥ 1,50 m | spełnia | OB-A |
-| WT § 13 | przesłanianie budynków sąsiednich: odległość ≥ wysokość przesłaniania | 13,72 | ≥ 10,36 m (z_top − t_min) | spełnia | budynki sąsiednie |
-| WT § 60 | nasłonecznienie budynków sąsiednich w dniach równonocy (ocena uproszczona) | 10,00 | ≥ 3 h | spełnia | cień budynku |
-| WT § 19 ust. 2 | stanowiska postojowe naziemne od granicy | 6,30 | ≥ 3,00 m | spełnia | MP3, MP4 |
-| WT § 271 ust. 1 | odległość ścian budynków ZL od budynków sąsiednich | 13,72 | ≥ 8,00 m | spełnia | — |
-| u.d.p. art. 43 ust. 1 | budynek od zewnętrznej krawędzi jezdni drogi gminnej 1KDD | 9,88 | ≥ 6,00 m | spełnia | — |
-| POŚ art. 144 ust. 2; Dz.U. 2014 poz. 112 | hałas instalacji (PC) na granicy — pora nocy [dB(A)] | 27,40 | ≤ 40 | spełnia | działka sąsiednia 123/5 |
+| WT § 12 ust. 1 pkt 1 | ściany z oknami/drzwiami od granicy | 5,73 m | ≥ 4,00 m | spełnia | S0-03 |
+| WT § 12 ust. 1 pkt 2 | ściany bez otworów od granicy | 11,18 m | ≥ 3,00 m | spełnia | S2-06 |
+| WT § 12 ust. 6 pkt 1 | okapy, płyty wysunięte, daszki od granicy | 5,18 m | ≥ 1,50 m | spełnia | OB-A |
+| WT § 13 | przesłanianie budynków sąsiednich: odległość ≥ wysokość przesłaniania | 13,72 m | ≥ 10,36 m (z_top − t_min) | spełnia | budynki sąsiednie |
+| WT § 60 | nasłonecznienie budynków sąsiednich w dniach równonocy (ocena uproszczona) | 10,0 h | ≥ 3 h | spełnia | cień budynku |
+| WT § 19 ust. 2 | stanowiska postojowe naziemne od granicy | 6,30 m | ≥ 3,00 m | spełnia | MP3, MP4 |
+| WT § 271 ust. 1 | odległość ścian budynków ZL od budynków sąsiednich | 13,72 m | ≥ 8,00 m | spełnia | — |
+| u.d.p. art. 43 ust. 1 | budynek od zewnętrznej krawędzi jezdni drogi gminnej 1KDD | 9,88 m | ≥ 6,00 m | spełnia | — |
+| POŚ art. 144 ust. 2; Dz.U. 2014 poz. 112 | hałas instalacji (PC) na granicy — pora nocy | 27,4 dB(A) | ≤ 40 dB(A) | spełnia | działka sąsiednia 123/5 |
 
-*Uwaga: WT §12 ust. 1 pkt 1 i część wspólna (Dz.U. 2023 poz. 2442, 2024 poz. 726); każdy uskok = odrębna ściana [W-001]; WT §12 ust. 6 pkt 1 (płyty wysunięte traktowane jak okapy — interpretacja); WT §60 ust. 1 (równonoc) — 2027-03-21, 2026-09-23, godz. 7–17*
+*Uwaga: WT §12 ust. 1 pkt 1 i część wspólna (Dz.U. 2023 poz. 2442, 2024 poz. 726); każdy uskok = odrębna ściana [W-001]; WT §12 ust. 6 pkt 1 (płyty wysunięte traktowane jak okapy — interpretacja); WT §60 ust. 1 (równonoc) — 21.03.2027, 23.09.2026, godz. 7–17*
 
 > **Obszar oddziaływania obiektu mieści się w całości na działce nr ewid. 123/4, na której obiekt został zaprojektowany** (§ 18 pkt 2 RPB).
 

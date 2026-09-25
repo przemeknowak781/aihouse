@@ -160,7 +160,7 @@ def pkt3_ab(zp, z, d):
               f"łącznie {L(sum(o['dl'] for o in og if o['od_drogi']))} m"} if any(o["od_drogi"] for o in og) else {},
              {"Element": "ogrodzenie pozostałe", "Opis": "; ".join(f"{o['typ']}, h = {L(o['wys'])} m, {L(o['dl'])} m"
                                                            for o in og if not o["od_drogi"])}]
-    rows += [{"Element": f"{b['typ']}", "Opis": f"szer. w świetle {L(b['szer'])} m, h = {L(b['wys'])} m"}
+    rows += [{"Element": "furtka" if b["typ"] == "furtka" else f"brama {b['typ']}", "Opis": f"szer. w świetle {L(b['szer'])} m, h = {L(b['wys'])} m"}
              for b in z.dz.get("bramy") or []]
     rows += [{"Element": "stanowisko pojemników", "Opis": (z.dz.get("odpady") or {}).get("opis", "—")}]
     zp.markdown("## Urządzenia budowlane związane z budynkiem {podstawa: § 14 pkt 3 lit. a}\n"

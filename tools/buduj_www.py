@@ -39,10 +39,10 @@ HOSTY_OK = ("https://cdn.jsdelivr.net/npm/", "https://cdnjs.cloudflare.com/", "h
 LIMIT_STRONA, LIMIT_OBRAZ, LIMIT_RAZEM = 16e6, 15e6, 64e6
 
 
-def webp(src: Path, dst: Path, cel_kb: int = 380) -> int:
-    """PNG → WebP; jakość obniżana, aż plik ≤ cel_kb (min. q 62)."""
+def webp(src: Path, dst: Path, cel_kb: int = 400) -> int:
+    """PNG → WebP; wysoka jakość (q 92), obniżana tylko gdy plik > cel_kb (min. q 70)."""
     im = Image.open(src).convert("RGB")
-    for q in (84, 80, 76, 72, 68, 62):
+    for q in (92, 88, 84, 80, 75, 70):
         im.save(dst, "WEBP", quality=q, method=6)
         if dst.stat().st_size <= cel_kb * 1024:
             break

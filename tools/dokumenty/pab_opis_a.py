@@ -82,9 +82,10 @@ def r01(pab, D, d):
         {"Cecha": "Sprawdzenie projektu", "Ustalenie": d["sprawdzajacy"], "Podstawa / źródło": "PB art. 20 ust. 3 pkt 2"},
     ]
     pab.tabela(wiersze, tytul="Klasyfikacja obiektu", szerokosci=["52mm", None, "60mm"])
-    if D.kubatura > 1000.0:
-        pab.akapit(f"Kubatura brutto przekracza 1000 m³ — projekt sporządzają projektanci z uprawnieniami do projektowania "
-                   f"bez ograniczeń w odpowiednich specjalnościach (W-069).")
+    lim = D.v("procedura", "uprawnienia_ograniczone_kubatura_max")
+    if lim is not None and D.kubatura > lim:
+        pab.akapit(f"Kubatura brutto przekracza {L(lim, 0)} m³ — projekt sporządzają projektanci z uprawnieniami do "
+                   f"projektowania bez ograniczeń w odpowiednich specjalnościach ({D.zr('procedura', 'uprawnienia_ograniczone_kubatura_max')}).")
 
 
 def r02(pab, D, d):
