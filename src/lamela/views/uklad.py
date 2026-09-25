@@ -63,11 +63,16 @@ GAP_V = 12.0                        # widok ↔ widok
 GAP_VB = 10.0                       # widok ↔ blok / tabliczka
 GAP_B = 5.0                         # blok ↔ blok (w pionie)
 GAP_C = 6.0                         # blok ↔ blok (w poziomie)
-PAD_V = 6.0                         # ramka ↔ widok
-PAD_B = 3.0                         # ramka ↔ blok (góra, dół, lewo); z prawej bloki licują z ramką jak tabliczka
+PAD_V = 6.0                         # ramka ↔ widok (także tytuł widoku pod widokiem ↔ dolna ramka)
+PAD_B = 3.0                         # ramka ↔ blok (ze wszystkich stron — także z prawej: linia ramki bloku uwag
+                                    # nie może zlewać się z ramką arkusza; weryfikacja C 2.10)
+B_W = TB_W - PAD_B                  # szerokość bloku kolumny opisowej: lewa krawędź jak tabliczka, 3 mm od ramki
+ODST_TYTUL_ZNAK = 4.0               # tytuł widoku ↔ znak centrujący (weryfikacja C 2.10: ≥ 4 mm)
+ROLKI = [297, 420, 594, 610, 841, 914]   # szerokości rolek plotera [mm] (A-seria, 24″, 36″)
 
 DOMYSLNE = dict(
-    format="auto", wysokosci=[297, 420, 594, 841, 891], krok_dlugosci=10.0, modul_skladania="auto",
+    format="auto", wysokosci=[297, 420, 594, 610, 841, 891, 914], krok_dlugosci=10.0, modul_skladania="auto",
+    rolki=list(ROLKI), pismo_uwag=1.8,
     kara_niestandard=0.03, kara_skladania={"dobre": 0.0, "poprawne": 0.04, "słabe": 0.10}, max_dlugosc=2400.0,
     max_wysokosc=914.0, wolne_obszary=True, odstep_widok_blok=GAP_VB, kara_czesci_uwag=0.02, max_czesci_uwag=4,
     znaki_centrujace="auto", kolejnosc_uwag="czytania", kara_kolejnosci=0.01,
