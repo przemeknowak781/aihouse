@@ -1431,10 +1431,10 @@ class AnalizaKonstrukcji:
     # ============================================================================================
     def _podpory_belki_rozszerzone(self, b, p0, u, L: float, spod: float, pods: list) -> list:
         """Podpory belki bez dwóch podpór na końcach (np. belka wspornikowa w licu ściany kondygnacji wyższej, belka
-        krawędziowa oparta na końcach wsporników) [ZAŁ]: (1) ściana nośna pod belką współliniowa — podparcie ciągłe
-        modelowane podporami przegubowymi co ≤ 0,5 m na odcinkach muru poza otworami; (2) ściana przecinająca oś belki
-        w przęśle; (3) koniec belki oparty na innej belce — podpora „belka”, reakcja przekazywana jako siła skupiona na
-        belkę podpierającą (liczoną później)."""
+        krawędziowa oparta na końcach wsporników) [ZAŁ]: (1) ściana nośna pod belką współliniowa — podpory przegubowe
+        na końcach odcinka wspólnego (poza otworami): schemat belki ze wspornikiem i przęsłem zakotwienia; (2) ściana
+        przecinająca oś belki w przęśle; (3) koniec belki oparty na innej belce — podpora „belka”, reakcja przekazywana
+        jako siła skupiona na belkę podpierającą (liczoną później)."""
         m = self.m
         x0, y0 = p0
         ux, uy = u
@@ -1455,12 +1455,14 @@ class AnalizaKonstrukcji:
                 sa, sb = max(sa, 0.0), min(sb, L)
                 if sb - sa < 0.3:
                     continue
+                # podpory na końcach odcinka wspólnego (schemat belki ze wspornikiem; pośrednie podpory sztywne co
+                # kilkadziesiąt cm dawałyby sztuczną parę reakcji — moment utwierdzenia przenosi przęsło zakotwienia)
                 otw = sorted(tuple(sorted((pr(w.pt(o.s0, 0.0)), pr(w.pt(o.s1, 0.0))))) for o in m.otwory(sciana=w.id))
-                n_ = max(int(math.ceil((sb - sa) / 0.5)), 1)
-                for k in range(n_ + 1):
-                    s_ = sa + (sb - sa) * k / n_
-                    if not any(lo + 0.05 < s_ < hi - 0.05 for lo, hi in otw):
-                        out.append((s_, "sciana", w))
+                for s_ in (sa, sb):
+                    for lo, hi in otw:
+                        if lo + 0.05 < s_ < hi - 0.05:
+                            s_ = lo if s_ == sb else hi
+                    out.append((min(max(s_, 0.0), L), "sciana", w))
             else:                                                 # (2) poprzeczna / ściana dochodząca (T)
                 ip = lw.intersection(lnb)
                 if ip.is_empty or ip.geom_type != "Point":
@@ -1532,9 +1534,13 @@ class AnalizaKonstrukcji:
                 dperp = abs(-(cx - x0) * uy + (cy - y0) * ux)
                 if -0.2 <= s <= L + 0.2 and dperp <= bw / 2 + 0.1:
                     pods.append((min(max(s, 0.0), L), "slup", c))
+            pods = sorted({round(s, 3): (s, t, o) for s, t, o in pods}.values(), key=lambda q: q[0])
             if len(pods) < 2:
                 pods = self._podpory_belki_rozszerzone(b, (x0, y0), (ux, uy), L, spod, pods)
-            pods = sorted({round(s, 3): (s, t, o) for s, t, o in pods}.values(), key=lambda q: q[0])
+                # w tym samym punkcie (naroże ścian) — podpora na murze współliniowym (belka leży na nim)
+                pods = sorted(pods, key=lambda q: 1 if q[1] == "sciana" and abs(ux * q[2].u[0] + uy * q[2].u[1]) > 0.98
+                              else 0)
+                pods = sorted({round(s, 3): (s, t, o) for s, t, o in pods}.values(), key=lambda q: q[0])
             poz = Pozycja("", bid, f"Belka {bid}", "belka")
             if len(pods) < 2:
                 poz.uwagi.append(f"Belka {bid}: znaleziono {len(pods)} podpór — schemat niewyznaczalny automatycznie [WYMAGA ANALIZY].")
@@ -1641,12 +1647,8 @@ class AnalizaKonstrukcji:
             # reakcje → ściany / słupy
             for k, (s, t, o) in enumerate(pods):
                 szer = 0.25
-                if t == "sciana" and abs(ux * o.u[0] + uy * o.u[1]) > 0.98:     # mur współliniowy: szerokość wpływu
-                    ss_ = [q[0] for q in pods if q[1] == "sciana" and q[2].id == o.id]
-                    j_ = ss_.index(s)
-                    lo_ = ss_[j_ - 1] if j_ > 0 else s
-                    hi_ = ss_[j_ + 1] if j_ + 1 < len(ss_) else s
-                    szer = min(max((hi_ - lo_) / 2, 0.25), 1.0)
+                if t == "sciana" and abs(ux * o.u[0] + uy * o.u[1]) > 0.98:
+                    szer = min(max(hb, 0.25), 1.0)    # belka na murze współliniowym: rozkład na długości ≈ h belki [ZAŁ]
                 for cs, r in rozw.items():
                     R = float(r.R[k])
                     if t == "sciana":
