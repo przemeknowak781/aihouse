@@ -832,7 +832,7 @@
    "id": "N-O0-01",
    "tytul": "Nadproże N-O0-01 nad otworem O0-01 w ścianie S0-01 (światło 4,00 m)",
    "rodzaj": "nadproze",
-   "wykorzystanie": 0.9658,
+   "wykorzystanie": 0.9505,
    "ok": true,
    "przyjeto": [
     "N-O0-01: nadproże zespolone z płytą 18×51 cm, C25/30, dołem 2φ14, strzemiona φ6 co 35 cm (2-cięte), oparcie ≥ 25 cm."
@@ -840,39 +840,39 @@
    "warunki": [
     {
      "opis": "Zbrojenie dolne",
-     "E": 297.3425,
+     "E": 292.6395,
      "R": 307.8761,
-     "eta": 0.9658
+     "eta": 0.9505
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 51.8637,
+     "E": 51.0793,
      "R": 295.5574,
-     "eta": 0.1755
+     "eta": 0.1728
     },
     {
      "opis": "Nośność strzemion",
-     "E": 51.8637,
+     "E": 51.0793,
      "R": 59.8081,
-     "eta": 0.8672
+     "eta": 0.8541
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 8.9852,
-     "R": 27.2065,
-     "eta": 0.3303
+     "R": 28.212,
+     "eta": 0.3185
     },
     {
      "opis": "Docisk",
-     "E": 55.1052,
+     "E": 54.2717,
      "R": 279.2329,
-     "eta": 0.1973
+     "eta": 0.1944
     }
    ],
    "dane": {
     "L": 4.25,
-    "M": 58.54930641661707,
-    "q_d": 25.931872738155658
+    "M": 57.66371084406816,
+    "q_d": 25.539636636819118
    }
   },
   {
@@ -894,33 +894,33 @@
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 16.8214,
+     "E": 16.9838,
      "R": 295.5574,
-     "eta": 0.0569
+     "eta": 0.0575
     },
     {
      "opis": "Nośność strzemion",
-     "E": 16.8214,
+     "E": 16.9838,
      "R": 59.8081,
-     "eta": 0.2813
+     "eta": 0.284
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 4.334,
-     "R": 644.5148,
-     "eta": 0.0067
+     "R": 634.9754,
+     "eta": 0.0068
     },
     {
      "opis": "Docisk",
-     "E": 19.1577,
+     "E": 19.3427,
      "R": 286.1382,
-     "eta": 0.067
+     "eta": 0.0676
     }
    ],
    "dane": {
     "L": 2.05,
-    "M": 9.81832489652262,
-    "q_d": 18.690445966015698
+    "M": 9.913118845472304,
+    "q_d": 18.870898456580235
    }
   },
   {
@@ -928,7 +928,7 @@
    "id": "N-O0-03",
    "tytul": "Nadproże N-O0-03 nad otworem O0-03 w ścianie S0-03 (światło 1,10 m)",
    "rodzaj": "nadproze",
-   "wykorzystanie": 0.3672,
+   "wykorzystanie": 0.3608,
    "ok": true,
    "przyjeto": [
     "N-O0-03: nadproże żelbetowe 18×25 cm, C25/30, dołem 2φ10, strzemiona φ6 co 15 cm (2-cięte), oparcie ≥ 20 cm."
@@ -936,39 +936,39 @@
    "warunki": [
     {
      "opis": "Zbrojenie dolne",
-     "E": 57.6819,
+     "E": 56.6791,
      "R": 157.0796,
-     "eta": 0.3672
+     "eta": 0.3608
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 13.653,
+     "E": 13.42,
      "R": 133.0946,
-     "eta": 0.1026
+     "eta": 0.1008
     },
     {
      "opis": "Nośność strzemion",
-     "E": 13.653,
+     "E": 13.42,
      "R": 62.8428,
-     "eta": 0.2173
+     "eta": 0.2135
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 6.1033,
-     "R": 138.8838,
-     "eta": 0.0439
+     "R": 142.7924,
+     "eta": 0.0427
     },
     {
      "opis": "Docisk",
-     "E": 16.1354,
+     "E": 15.86,
      "R": 243.2045,
-     "eta": 0.0663
+     "eta": 0.0652
     }
    ],
    "dane": {
     "L": 1.3,
-    "M": 5.244010667152978,
-    "q_d": 24.823719134451963
+    "M": 5.154511290344603,
+    "q_d": 24.400053445418237
    }
   },
   {
@@ -976,7 +976,7 @@
    "id": "N-O0-04",
    "tytul": "Nadproże N-O0-04 nad otworem O0-04 w ścianie S0-03 (światło 1,60 m)",
    "rodzaj": "nadproze",
-   "wykorzystanie": 0.9421,
+   "wykorzystanie": 0.9229,
    "ok": true,
    "przyjeto": [
     "N-O0-04: nadproże żelbetowe 18×25 cm, C25/30, dołem 2φ12, strzemiona φ6 co 15 cm (2-cięte), oparcie ≥ 25 cm."
@@ -984,39 +984,39 @@
    "warunki": [
     {
      "opis": "Zbrojenie dolne",
-     "E": 213.1088,
+     "E": 208.7554,
      "R": 226.1947,
-     "eta": 0.9421
+     "eta": 0.9229
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 34.4081,
+     "E": 33.7552,
      "R": 133.0946,
-     "eta": 0.2585
+     "eta": 0.2536
     },
     {
      "opis": "Nośność strzemion",
-     "E": 34.4081,
+     "E": 33.7552,
      "R": 62.8428,
-     "eta": 0.5475
+     "eta": 0.5371
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 8.6854,
-     "R": 18.8363,
-     "eta": 0.4611
+     "R": 19.3815,
+     "eta": 0.4481
     },
     {
      "opis": "Docisk",
-     "E": 39.7843,
+     "E": 39.0294,
      "R": 279.2329,
-     "eta": 0.1425
+     "eta": 0.1398
     }
    ],
    "dane": {
     "L": 1.85,
-    "M": 18.40025875485789,
-    "q_d": 43.010100814861396
+    "M": 18.051102594831814,
+    "q_d": 42.19395785497575
    }
   },
   {
@@ -1038,33 +1038,33 @@
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 36.0933,
+     "E": 35.5696,
      "R": 295.5574,
-     "eta": 0.1221
+     "eta": 0.1203
     },
     {
      "opis": "Nośność strzemion",
-     "E": 36.0933,
+     "E": 35.5696,
      "R": 59.8081,
-     "eta": 0.6035
+     "eta": 0.5947
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 3.5941,
-     "R": 262.5983,
-     "eta": 0.0137
+     "R": 268.7789,
+     "eta": 0.0134
     },
     {
      "opis": "Docisk",
-     "E": 40.9058,
+     "E": 40.3123,
      "R": 243.2045,
-     "eta": 0.1682
+     "eta": 0.1658
     }
    ],
    "dane": {
     "L": 1.7,
-    "M": 17.384954348661175,
-    "q_d": 48.12444110356035
+    "M": 17.132710935253563,
+    "q_d": 47.42618944014828
    }
   },
   {
@@ -1072,7 +1072,7 @@
    "id": "N-O0-06",
    "tytul": "Nadproże N-O0-06 nad otworem O0-06 w ścianie S0-05 (światło 1,20 m)",
    "rodzaj": "nadproze",
-   "wykorzystanie": 0.9959,
+   "wykorzystanie": 0.9647,
    "ok": true,
    "przyjeto": [
     "N-O0-06: nadproże żelbetowe 18×25 cm, C25/30, dołem 5φ10, strzemiona φ6 co 13 cm (2-cięte), oparcie ≥ 20 cm."
@@ -1080,39 +1080,39 @@
    "warunki": [
     {
      "opis": "Zbrojenie dolne",
-     "E": 359.4066,
+     "E": 346.5831,
      "R": 392.6991,
-     "eta": 0.9152
+     "eta": 0.8826
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 72.21,
+     "E": 69.9537,
      "R": 133.0946,
-     "eta": 0.5425
+     "eta": 0.5256
     },
     {
      "opis": "Nośność strzemion",
-     "E": 72.21,
+     "E": 69.9537,
      "R": 72.5109,
-     "eta": 0.9959
+     "eta": 0.9647
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 6.5728,
-     "R": 16.3899,
-     "eta": 0.401
+     "R": 17.164,
+     "eta": 0.3829
     },
     {
      "opis": "Docisk",
-     "E": 84.245,
+     "E": 81.6126,
      "R": 224.7674,
-     "eta": 0.3748
+     "eta": 0.3631
     }
    ],
    "dane": {
     "L": 1.4,
-    "M": 29.485765615670324,
-    "q_d": 120.3500637374299
+    "M": 28.56441292003644,
+    "q_d": 116.58944048994466
    }
   },
   {
@@ -1120,47 +1120,47 @@
    "id": "N-O0-08",
    "tytul": "Nadproże N-O0-08 nad otworem O0-08 w ścianie S0-02 (światło 2,00 m)",
    "rodzaj": "nadproze",
-   "wykorzystanie": 0.9986,
+   "wykorzystanie": 0.9965,
    "ok": true,
    "przyjeto": [
-    "N-O0-08: nadproże żelbetowe 18×25 cm, C25/30, dołem 6φ10, strzemiona φ6 co 15 cm (2-cięte), oparcie ≥ 25 cm."
+    "N-O0-08: nadproże żelbetowe 18×25 cm, C25/30, dołem 3φ14, strzemiona φ6 co 15 cm (2-cięte), oparcie ≥ 25 cm."
    ],
    "warunki": [
     {
      "opis": "Zbrojenie dolne",
-     "E": 470.6014,
-     "R": 471.2389,
-     "eta": 0.9986
+     "E": 460.1985,
+     "R": 461.8141,
+     "eta": 0.9965
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 58.5789,
+     "E": 57.5064,
      "R": 133.0946,
-     "eta": 0.4401
+     "eta": 0.4321
     },
     {
      "opis": "Nośność strzemion",
-     "E": 58.5789,
+     "E": 57.5064,
      "R": 62.8428,
-     "eta": 0.9321
+     "eta": 0.9151
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 10.5634,
-     "R": 14.0742,
-     "eta": 0.7506
+     "R": 14.1738,
+     "eta": 0.7453
     },
     {
      "opis": "Docisk",
-     "E": 65.9012,
+     "E": 64.6947,
      "R": 279.2329,
-     "eta": 0.236
+     "eta": 0.2317
     }
    ],
    "dane": {
     "L": 2.25,
-    "M": 37.06945107010852,
-    "q_d": 58.57888564165297
+    "M": 36.39079109522256,
+    "q_d": 57.50643531096899
    }
   },
   {
@@ -1182,33 +1182,33 @@
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 26.5609,
+     "E": 26.4302,
      "R": 295.5574,
-     "eta": 0.0899
+     "eta": 0.0894
     },
     {
      "opis": "Nośność strzemion",
-     "E": 26.5609,
+     "E": 26.4302,
      "R": 59.8081,
-     "eta": 0.4441
+     "eta": 0.4419
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 3.5941,
-     "R": 426.4377,
+     "R": 429.7511,
      "eta": 0.0084
     },
     {
      "opis": "Docisk",
-     "E": 30.1023,
+     "E": 29.9542,
      "R": 233.0537,
-     "eta": 0.1292
+     "eta": 0.1285
     }
    ],
    "dane": {
     "L": 1.7,
-    "M": 12.793478735202505,
-    "q_d": 35.41447400748099
+    "M": 12.730544106565777,
+    "q_d": 35.24026050260423
    }
   },
   {
@@ -1230,33 +1230,33 @@
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 12.8281,
+     "E": 12.1253,
      "R": 295.5574,
-     "eta": 0.0434
+     "eta": 0.041
     },
     {
      "opis": "Nośność strzemion",
-     "E": 12.8281,
+     "E": 12.1253,
      "R": 59.8081,
-     "eta": 0.2145
+     "eta": 0.2027
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 5.6025,
-     "R": 691.3506,
-     "eta": 0.0081
+     "R": 754.3251,
+     "eta": 0.0074
     },
     {
      "opis": "Docisk",
-     "E": 14.1644,
+     "E": 13.3883,
      "R": 279.9119,
-     "eta": 0.0506
+     "eta": 0.0478
     }
    ],
    "dane": {
     "L": 2.65,
-    "M": 9.383923540901655,
-    "q_d": 10.690122937303416
+    "M": 8.869758598025198,
+    "q_d": 10.104388577315996
    }
   },
   {
@@ -1264,7 +1264,7 @@
    "id": "N-O1-02",
    "tytul": "Nadproże N-O1-02 nad otworem O1-02 w ścianie S1-01 (światło 3,60 m)",
    "rodzaj": "nadproze",
-   "wykorzystanie": 0.9041,
+   "wykorzystanie": 0.8472,
    "ok": true,
    "przyjeto": [
     "N-O1-02: nadproże zespolone z płytą 18×51 cm, C25/30, dołem 2φ10, strzemiona φ6 co 35 cm (2-cięte), oparcie ≥ 25 cm."
@@ -1272,39 +1272,39 @@
    "warunki": [
     {
      "opis": "Zbrojenie dolne",
-     "E": 142.0123,
+     "E": 133.0805,
      "R": 157.0796,
-     "eta": 0.9041
+     "eta": 0.8472
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 27.7966,
+     "E": 26.0822,
      "R": 295.5574,
-     "eta": 0.094
+     "eta": 0.0882
     },
     {
      "opis": "Nośność strzemion",
-     "E": 27.7966,
+     "E": 26.0822,
      "R": 59.8081,
-     "eta": 0.4648
+     "eta": 0.4361
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 8.1395,
-     "R": 87.0018,
-     "eta": 0.0936
+     "R": 102.877,
+     "eta": 0.0791
     },
     {
      "opis": "Docisk",
-     "E": 29.7269,
+     "E": 27.8935,
      "R": 286.9983,
-     "eta": 0.1036
+     "eta": 0.0972
     }
    ],
    "dane": {
     "L": 3.85,
-    "M": 28.61211087579751,
-    "q_d": 15.44252906098027
+    "M": 26.84749991163738,
+    "q_d": 14.490133195688921
    }
   },
   {
@@ -1312,7 +1312,7 @@
    "id": "N-O1-03",
    "tytul": "Nadproże N-O1-03 nad otworem O1-03 w ścianie S1-02 (światło 2,40 m)",
    "rodzaj": "nadproze",
-   "wykorzystanie": 0.8561,
+   "wykorzystanie": 0.7942,
    "ok": true,
    "przyjeto": [
     "N-O1-03: nadproże żelbetowe 18×25 cm, C25/30, dołem 2φ12, strzemiona φ6 co 15 cm (2-cięte), oparcie ≥ 25 cm."
@@ -1320,39 +1320,39 @@
    "warunki": [
     {
      "opis": "Zbrojenie dolne",
-     "E": 193.6562,
+     "E": 179.6395,
      "R": 226.1947,
-     "eta": 0.8561
+     "eta": 0.7942
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 23.0092,
+     "E": 21.445,
      "R": 133.0946,
-     "eta": 0.1729
+     "eta": 0.1611
     },
     {
      "opis": "Nośność strzemion",
-     "E": 23.0092,
+     "E": 21.445,
      "R": 62.8428,
-     "eta": 0.3661
+     "eta": 0.3412
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 12.4413,
-     "R": 21.5199,
-     "eta": 0.5781
+     "R": 24.2789,
+     "eta": 0.5124
     },
     {
      "opis": "Docisk",
-     "E": 25.406,
+     "E": 23.6789,
      "R": 286.9983,
-     "eta": 0.0885
+     "eta": 0.0825
     }
    ],
    "dane": {
     "L": 2.65,
-    "M": 16.83145737653252,
-    "q_d": 19.17431954606766
+    "M": 15.687255235203782,
+    "q_d": 17.870849680545426
    }
   },
   {
@@ -1374,33 +1374,33 @@
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 8.2427,
+     "E": 7.6947,
      "R": 133.0946,
-     "eta": 0.0619
+     "eta": 0.0578
     },
     {
      "opis": "Nośność strzemion",
-     "E": 8.2427,
+     "E": 7.6947,
      "R": 62.8428,
-     "eta": 0.1312
+     "eta": 0.1224
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 5.6338,
-     "R": 345.1318,
-     "eta": 0.0163
+     "R": 384.6839,
+     "eta": 0.0146
     },
     {
      "opis": "Docisk",
-     "E": 9.8912,
+     "E": 9.2336,
      "R": 231.0159,
-     "eta": 0.0428
+     "eta": 0.04
     }
    ],
    "dane": {
     "L": 1.2,
-    "M": 2.967357176618653,
-    "q_d": 16.485317647881406
+    "M": 2.77007613217695,
+    "q_d": 15.3893118454275
    }
   },
   {
@@ -1422,33 +1422,33 @@
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 6.6764,
+     "E": 6.3525,
      "R": 295.5574,
-     "eta": 0.0226
+     "eta": 0.0215
     },
     {
      "opis": "Nośność strzemion",
-     "E": 6.6764,
+     "E": 6.3525,
      "R": 59.8081,
-     "eta": 0.1116
+     "eta": 0.1062
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 3.9112,
-     "R": 3018.7303,
-     "eta": 0.0013
+     "R": 3253.6574,
+     "eta": 0.0012
     },
     {
      "opis": "Docisk",
-     "E": 7.7196,
+     "E": 7.3451,
      "R": 304.0056,
-     "eta": 0.0254
+     "eta": 0.0242
     }
    ],
    "dane": {
     "L": 1.85,
-    "M": 3.5702939676154193,
-    "q_d": 8.34546435089068
+    "M": 3.3970994878006198,
+    "q_d": 7.940626998511309
    }
   },
   {
@@ -1470,33 +1470,33 @@
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 10.8027,
+     "E": 10.1844,
      "R": 295.5574,
-     "eta": 0.0366
+     "eta": 0.0345
     },
     {
      "opis": "Nośność strzemion",
-     "E": 10.8027,
+     "E": 10.1844,
      "R": 59.8081,
-     "eta": 0.1806
+     "eta": 0.1703
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 4.334,
-     "R": 1274.0963,
-     "eta": 0.0034
+     "R": 1394.0202,
+     "eta": 0.0031
     },
     {
      "opis": "Docisk",
-     "E": 12.303,
+     "E": 11.5988,
      "R": 279.9119,
-     "eta": 0.044
+     "eta": 0.0414
     }
    ],
    "dane": {
     "L": 2.05,
-    "M": 6.30531010371403,
-    "q_d": 12.002969858349136
+    "M": 5.9444077067083345,
+    "q_d": 11.315945664168156
    }
   },
   {
@@ -1518,33 +1518,33 @@
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 10.6699,
+     "E": 10.014,
      "R": 295.5574,
-     "eta": 0.0361
+     "eta": 0.0339
     },
     {
      "opis": "Nośność strzemion",
-     "E": 10.6699,
+     "E": 10.014,
      "R": 59.8081,
-     "eta": 0.1784
+     "eta": 0.1674
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 3.3827,
-     "R": 1883.2531,
-     "eta": 0.0018
+     "R": 2073.3834,
+     "eta": 0.0016
     },
     {
      "opis": "Docisk",
-     "E": 12.1942,
+     "E": 11.4446,
      "R": 225.3468,
-     "eta": 0.0541
+     "eta": 0.0508
     }
    ],
    "dane": {
     "L": 1.5999999999999999,
-    "M": 4.877672182666031,
-    "q_d": 15.242725570831348
+    "M": 4.577838434251122,
+    "q_d": 14.305745107034758
    }
   },
   {
@@ -1552,7 +1552,7 @@
    "id": "N-O1-08",
    "tytul": "Nadproże N-O1-08 nad otworem O1-08 w ścianie S1-05 (światło 0,90 m)",
    "rodzaj": "nadproze",
-   "wykorzystanie": 0.5916,
+   "wykorzystanie": 0.5474,
    "ok": true,
    "przyjeto": [
     "N-O1-08: nadproże żelbetowe 18×25 cm, C25/30, dołem 2φ10, strzemiona φ6 co 15 cm (2-cięte), oparcie ≥ 20 cm."
@@ -1560,39 +1560,39 @@
    "warunki": [
     {
      "opis": "Zbrojenie dolne",
-     "E": 92.9284,
+     "E": 85.9852,
      "R": 157.0796,
-     "eta": 0.5916
+     "eta": 0.5474
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 24.849,
+     "E": 23.0447,
      "R": 133.0946,
-     "eta": 0.1867
+     "eta": 0.1731
     },
     {
      "opis": "Nośność strzemion",
-     "E": 24.849,
+     "E": 23.0447,
      "R": 62.8428,
-     "eta": 0.3954
+     "eta": 0.3667
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 5.1643,
-     "R": 66.0063,
-     "eta": 0.0782
+     "R": 74.2987,
+     "eta": 0.0695
     },
     {
      "opis": "Docisk",
-     "E": 30.371,
+     "E": 28.1657,
      "R": 243.2045,
-     "eta": 0.1249
+     "eta": 0.1158
     }
    ],
    "dane": {
     "L": 1.1,
-    "M": 8.352036830843799,
-    "q_d": 55.22007822045486
+    "M": 7.745572239367155,
+    "q_d": 51.2103949710225
    }
   },
   {
@@ -1600,7 +1600,7 @@
    "id": "N-O1-09",
    "tytul": "Nadproże N-O1-09 nad otworem O1-09 w ścianie S1-05 (światło 0,90 m)",
    "rodzaj": "nadproze",
-   "wykorzystanie": 0.5575,
+   "wykorzystanie": 0.5161,
    "ok": true,
    "przyjeto": [
     "N-O1-09: nadproże żelbetowe 18×25 cm, C25/30, dołem 2φ10, strzemiona φ6 co 15 cm (2-cięte), oparcie ≥ 20 cm."
@@ -1608,39 +1608,39 @@
    "warunki": [
     {
      "opis": "Zbrojenie dolne",
-     "E": 87.5792,
+     "E": 81.071,
      "R": 157.0796,
-     "eta": 0.5575
+     "eta": 0.5161
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 23.4596,
+     "E": 21.7625,
      "R": 133.0946,
-     "eta": 0.1763
+     "eta": 0.1635
     },
     {
      "opis": "Nośność strzemion",
-     "E": 23.4596,
+     "E": 21.7625,
      "R": 62.8428,
-     "eta": 0.3733
+     "eta": 0.3463
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 5.1643,
-     "R": 72.236,
-     "eta": 0.0715
+     "R": 81.3591,
+     "eta": 0.0635
     },
     {
      "opis": "Docisk",
-     "E": 28.6729,
+     "E": 26.5986,
      "R": 243.2045,
-     "eta": 0.1179
+     "eta": 0.1094
     }
    ],
    "dane": {
     "L": 1.1,
-    "M": 7.885048988275851,
-    "q_d": 52.13255529438578
+    "M": 7.314613822916664,
+    "q_d": 48.36108312672174
    }
   },
   {
