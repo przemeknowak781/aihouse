@@ -1,0 +1,5266 @@
+{
+ "pozycje": [
+  {
+   "nr": "1.1",
+   "id": "D1",
+   "tytul": "Stropodach / dach D1",
+   "rodzaj": "plyta",
+   "wykorzystanie": 3.0052,
+   "ok": false,
+   "przyjeto": [
+    "Płyta gr. 22 cm z betonu C25/30, stal B500SP, otulenie c_nom = 25 mm; zbrojenie wg zestawienia pól (dołem siatka w obu kierunkach, górą nad podporami).",
+    "Maks. ugięcie długotrwałe ≈ 3,7 mm."
+   ],
+   "warunki": [
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 25.1374,
+     "eta": 0.3183
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 334.3316,
+     "R": 335.1032,
+     "eta": 0.9977
+    },
+    {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 150.0,
+     "R": 155.3345,
+     "eta": 0.9657
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 12.107,
+     "eta": 0.6608
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 542.4427,
+     "R": 558.5054,
+     "eta": 0.9712
+    },
+    {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 90.0,
+     "R": 164.1361,
+     "eta": 0.5483
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Ścinanie bez zbrojenia poprzecznego (6.2.2)",
+     "E": 282.6282,
+     "R": 94.0452,
+     "eta": 3.0052
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 28.4722,
+     "R": 86.5218,
+     "eta": 0.3291
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 25.1374,
+     "eta": 0.3183
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 334.3316,
+     "R": 335.1032,
+     "eta": 0.9977
+    },
+    {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 150.0,
+     "R": 155.3345,
+     "eta": 0.9657
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 12.107,
+     "eta": 0.6608
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 542.4427,
+     "R": 558.5054,
+     "eta": 0.9712
+    },
+    {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 90.0,
+     "R": 164.1361,
+     "eta": 0.5483
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Ścinanie bez zbrojenia poprzecznego (6.2.2)",
+     "E": 282.6282,
+     "R": 94.0452,
+     "eta": 3.0052
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 28.4722,
+     "R": 86.5218,
+     "eta": 0.3291
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 24.5273,
+     "eta": 0.3262
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 16.4101,
+     "eta": 0.4875
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 17.1657,
+     "eta": 0.466
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 200.0,
+     "R": 201.6574,
+     "eta": 0.9918
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 486.5652,
+     "R": 490.8739,
+     "eta": 0.9912
+    },
+    {
+     "opis": "Ścinanie bez zbrojenia poprzecznego (6.2.2)",
+     "E": 282.6282,
+     "R": 94.0452,
+     "eta": 3.0052
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 20.1389,
+     "R": 443.032,
+     "eta": 0.0455
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 26.2989,
+     "eta": 0.3042
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 19.7241,
+     "eta": 0.4056
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 26.2989,
+     "eta": 0.3042
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 306.387,
+     "R": 314.1593,
+     "eta": 0.9753
+    },
+    {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 160.0,
+     "R": 164.2813,
+     "eta": 0.9739
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 382.4247,
+     "R": 386.6576,
+     "eta": 0.9891
+    },
+    {
+     "opis": "Ścinanie bez zbrojenia poprzecznego (6.2.2)",
+     "E": 282.6282,
+     "R": 94.0452,
+     "eta": 3.0052
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 10.5263,
+     "R": 806.7815,
+     "eta": 0.013
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 20.4627,
+     "eta": 0.391
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 19.7241,
+     "eta": 0.4056
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 12.7248,
+     "eta": 0.6287
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 428.0141,
+     "R": 456.9589,
+     "eta": 0.9367
+    },
+    {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 110.0,
+     "R": 177.819,
+     "eta": 0.6186
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Ścinanie bez zbrojenia poprzecznego (6.2.2)",
+     "E": 224.8084,
+     "R": 94.0452,
+     "eta": 2.3904
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 13.8158,
+     "R": 476.585,
+     "eta": 0.029
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 26.2989,
+     "eta": 0.3042
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 19.7241,
+     "eta": 0.4056
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 26.2989,
+     "eta": 0.3042
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 17.2552,
+     "eta": 0.4636
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 481.8261,
+     "R": 490.8739,
+     "eta": 0.9816
+    },
+    {
+     "opis": "Ścinanie bez zbrojenia poprzecznego (6.2.2)",
+     "E": 224.8084,
+     "R": 94.0452,
+     "eta": 2.3904
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 18.4211,
+     "R": 722.8583,
+     "eta": 0.0255
+    }
+   ],
+   "dane": {
+    "grupa": "D1",
+    "pola": [
+     {
+      "pole": "P1",
+      "Mx": 11.49989583068969,
+      "My": 25.573444287091586,
+      "Mx_tabl": 5.569258268659255,
+      "My_tabl": 15.895013715045469,
+      "Mgx": -17.427392479728482,
+      "M_naroze": 12.656741536898306,
+      "Mgy": -40.89459877476811,
+      "Ax": 264.55517082861417,
+      "Ay": 335.1032163829112,
+      "w": 3.669562086007411,
+      "eta": 3.0052383040195885,
+      "lx": 13.0,
+      "ly": 5.125,
+      "brzegi": "SSSU",
+      "V": 282.6282430525568
+     },
+     {
+      "pole": "P2",
+      "Mx": 11.815969072892731,
+      "My": 11.86752464267133,
+      "Mx_tabl": null,
+      "My_tabl": null,
+      "Mgx": -14.96047611509826,
+      "M_naroze": 36.825921571122436,
+      "Mgy": -17.082113576248446,
+      "Ax": 264.55517082861417,
+      "Ay": 251.32741228718342,
+      "w": 0.27825500515557144,
+      "eta": 3.0052383040195885,
+      "lx": 4.875,
+      "ly": 3.625,
+      "brzegi": "WUUW",
+      "V": 282.6282430525568
+     },
+     {
+      "pole": "P3",
+      "Mx": 9.886968752596152,
+      "My": 3.403997378607365,
+      "Mx_tabl": 1.469580781744845,
+      "My_tabl": 0.6327518710371888,
+      "Mgx": -8.020703161184603,
+      "M_naroze": 29.15479547983344,
+      "Mgy": -23.48124306496965,
+      "Ax": 264.55517082861417,
+      "Ay": 251.32741228718342,
+      "w": 0.13909382396623535,
+      "eta": 3.0052383040195885,
+      "lx": 2.0,
+      "ly": 3.625,
+      "brzegi": "UUUS",
+      "V": 282.6282430525568
+     },
+     {
+      "pole": "P4",
+      "Mx": 13.821896332455077,
+      "My": 6.7198642707691185,
+      "Mx_tabl": null,
+      "My_tabl": null,
+      "Mgx": -16.787293322979597,
+      "M_naroze": 0.9546336589317223,
+      "Mgy": -32.52709799306806,
+      "Ax": 264.55517082861417,
+      "Ay": 251.32741228718342,
+      "w": 0.26497898681902127,
+      "eta": 2.390429280912112,
+      "lx": 2.625,
+      "ly": 3.625,
+      "brzegi": "UUWS",
+      "V": 224.8084043458183
+     },
+     {
+      "pole": "P5",
+      "Mx": 9.678204813033934,
+      "My": 9.611316408359334,
+      "Mx_tabl": null,
+      "My_tabl": null,
+      "Mgx": -9.709952879674635,
+      "M_naroze": 36.479325606648004,
+      "Mgy": -11.342211822964224,
+      "Ax": 264.55517082861417,
+      "Ay": 251.32741228718342,
+      "w": 0.31014215572917303,
+      "eta": 2.390429280912112,
+      "lx": 3.5,
+      "ly": 3.625,
+      "brzegi": "UWUW",
+      "V": 224.8084043458183
+     }
+    ],
+    "pole_miarodajne": "P1"
+   }
+  },
+  {
+   "nr": "1.2",
+   "id": "D2",
+   "tytul": "Stropodach / dach D2",
+   "rodzaj": "plyta",
+   "wykorzystanie": 4.8455,
+   "ok": false,
+   "przyjeto": [
+    "Płyta gr. 22 cm z betonu C25/30, stal B500SP, otulenie c_nom = 25 mm; zbrojenie wg zestawienia pól (dołem siatka w obu kierunkach, górą nad podporami).",
+    "Maks. ugięcie długotrwałe ≈ 0,5 mm."
+   ],
+   "warunki": [
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 26.2989,
+     "eta": 0.3042
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 19.7241,
+     "eta": 0.4056
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 259.2049,
+     "R": 264.5552,
+     "eta": 0.9798
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 26.2989,
+     "eta": 0.3042
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 258.4352,
+     "R": 264.5552,
+     "eta": 0.9769
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 17.4245,
+     "eta": 0.4591
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Ścinanie bez zbrojenia poprzecznego (6.2.2)",
+     "E": 455.6999,
+     "R": 94.0452,
+     "eta": 4.8455
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 20.1389,
+     "R": 728.9641,
+     "eta": 0.0276
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 26.2989,
+     "eta": 0.3042
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 19.7241,
+     "eta": 0.4056
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 259.2049,
+     "R": 264.5552,
+     "eta": 0.9798
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 26.2989,
+     "eta": 0.3042
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 258.4352,
+     "R": 264.5552,
+     "eta": 0.9769
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 17.4245,
+     "eta": 0.4591
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Ścinanie bez zbrojenia poprzecznego (6.2.2)",
+     "E": 455.6999,
+     "R": 94.0452,
+     "eta": 4.8455
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 20.1389,
+     "R": 728.9641,
+     "eta": 0.0276
+    }
+   ],
+   "dane": {
+    "grupa": "ST2 + ST2Z + D2 + D3",
+    "pola": [
+     {
+      "pole": "P3",
+      "Mx": 3.8735762820069906,
+      "My": 4.192053780822467,
+      "Mx_tabl": 9.071588529427203,
+      "My_tabl": 8.63947716915607,
+      "Mgx": -21.056957959606372,
+      "M_naroze": 13.767991201853091,
+      "Mgy": -19.871852822436917,
+      "Ax": 264.55517082861417,
+      "Ay": 251.32741228718342,
+      "w": 0.4975981711786118,
+      "eta": 4.8455412892031235,
+      "lx": 3.875,
+      "ly": 3.625,
+      "brzegi": "UUUS",
+      "V": 455.6999088472863
+     }
+    ],
+    "pole_miarodajne": "P3"
+   }
+  },
+  {
+   "nr": "1.3",
+   "id": "D3",
+   "tytul": "Stropodach / dach D3",
+   "rodzaj": "plyta",
+   "wykorzystanie": 7.0518,
+   "ok": false,
+   "przyjeto": [
+    "Płyta gr. 22 cm z betonu C25/30, stal B500SP, otulenie c_nom = 25 mm; zbrojenie wg zestawienia pól (dołem siatka w obu kierunkach, górą nad podporami).",
+    "Maks. ugięcie długotrwałe ≈ 0,5 mm."
+   ],
+   "warunki": [
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 26.2989,
+     "eta": 0.3042
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 19.7241,
+     "eta": 0.4056
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 26.2989,
+     "eta": 0.3042
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 8.9951,
+     "eta": 0.8894
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Ścinanie bez zbrojenia poprzecznego (6.2.2)",
+     "E": 663.1908,
+     "R": 94.0452,
+     "eta": 7.0518
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 18.4211,
+     "R": 2693.6563,
+     "eta": 0.0068
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 26.2989,
+     "eta": 0.3042
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 19.7241,
+     "eta": 0.4056
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 26.2989,
+     "eta": 0.3042
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 8.9951,
+     "eta": 0.8894
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Ścinanie bez zbrojenia poprzecznego (6.2.2)",
+     "E": 663.1908,
+     "R": 94.0452,
+     "eta": 7.0518
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 18.4211,
+     "R": 2693.6563,
+     "eta": 0.0068
+    }
+   ],
+   "dane": {
+    "grupa": "ST2 + ST2Z + D2 + D3",
+    "pola": [
+     {
+      "pole": "P6",
+      "Mx": 2.9765102281803326,
+      "My": 3.9650784293593744,
+      "Mx_tabl": 4.10542588347464,
+      "My_tabl": 3.866351754830368,
+      "Mgx": -8.95438112753727,
+      "M_naroze": 15.49081959763803,
+      "Mgy": -16.896494943580187,
+      "Ax": 264.55517082861417,
+      "Ay": 251.32741228718342,
+      "w": 0.4523777596349823,
+      "eta": 7.051830101242566,
+      "lx": 3.5,
+      "ly": 3.625,
+      "brzegi": "USUS",
+      "V": 663.1907856204169
+     }
+    ],
+    "pole_miarodajne": "P6"
+   }
+  },
+  {
+   "nr": "1.4",
+   "id": "D4",
+   "tytul": "Stropodach / dach D4",
+   "rodzaj": "plyta",
+   "wykorzystanie": 2.624,
+   "ok": false,
+   "przyjeto": [
+    "Płyta gr. 24 cm z betonu C25/30, stal B500SP, otulenie c_nom = 25 mm; zbrojenie wg zestawienia pól (dołem siatka w obu kierunkach, górą nad podporami).",
+    "Maks. ugięcie długotrwałe ≈ 3,7 mm."
+   ],
+   "warunki": [
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 283.92,
+     "R": 295.6793,
+     "eta": 0.9602
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 27.3682,
+     "eta": 0.2923
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 270.4,
+     "R": 279.2527,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 19.0215,
+     "eta": 0.4206
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 362.533,
+     "R": 373.9991,
+     "eta": 0.9693
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 10.0,
+     "R": 28.6897,
+     "eta": 0.3486
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 376.0637,
+     "R": 386.6576,
+     "eta": 0.9726
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 18.4346,
+     "eta": 0.434
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 270.4,
+     "R": 279.2527,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Ścinanie bez zbrojenia poprzecznego (6.2.2)",
+     "E": 267.8403,
+     "R": 102.0716,
+     "eta": 2.624
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 30.3571,
+     "R": 511.6644,
+     "eta": 0.0593
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 283.92,
+     "R": 295.6793,
+     "eta": 0.9602
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 28.6897,
+     "eta": 0.2788
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 270.4,
+     "R": 279.2527,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 21.5172,
+     "eta": 0.3718
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 283.92,
+     "R": 295.6793,
+     "eta": 0.9602
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 28.6897,
+     "eta": 0.2788
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 270.4,
+     "R": 279.2527,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 9.8938,
+     "eta": 0.8086
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 270.4,
+     "R": 279.2527,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Ścinanie bez zbrojenia poprzecznego (6.2.2)",
+     "E": 207.8556,
+     "R": 102.0716,
+     "eta": 2.0364
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 14.375,
+     "R": 1163.7403,
+     "eta": 0.0124
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 283.92,
+     "R": 295.6793,
+     "eta": 0.9602
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 27.3682,
+     "eta": 0.2923
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 270.4,
+     "R": 279.2527,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 19.0215,
+     "eta": 0.4206
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 362.533,
+     "R": 373.9991,
+     "eta": 0.9693
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 10.0,
+     "R": 28.6897,
+     "eta": 0.3486
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 376.0637,
+     "R": 386.6576,
+     "eta": 0.9726
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 18.4346,
+     "eta": 0.434
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 270.4,
+     "R": 279.2527,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Ścinanie bez zbrojenia poprzecznego (6.2.2)",
+     "E": 267.8403,
+     "R": 102.0716,
+     "eta": 2.624
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 30.3571,
+     "R": 511.6644,
+     "eta": 0.0593
+    }
+   ],
+   "dane": {
+    "grupa": "ST1 + D4",
+    "pola": [
+     {
+      "pole": "P2",
+      "Mx": 8.161163692269513,
+      "My": 7.884270238750829,
+      "Mx_tabl": 2.338271976827735,
+      "My_tabl": 6.343605743091773,
+      "Mgx": -9.331575182383965,
+      "M_naroze": 9.689652363373584,
+      "Mgy": -19.809840853764225,
+      "Ax": 295.67930857315696,
+      "Ay": 279.2526803190927,
+      "w": 0.20871199735161852,
+      "eta": 2.03637111675374,
+      "lx": 6.375,
+      "ly": 2.875,
+      "brzegi": "USSU",
+      "V": 207.8556039063181
+     },
+     {
+      "pole": "P3",
+      "Mx": 14.535673509777242,
+      "My": 14.25149430006563,
+      "Mx_tabl": 14.742960190422453,
+      "My_tabl": 14.256756000586718,
+      "Mgx": -32.40517699404205,
+      "M_naroze": 17.90520174135772,
+      "Mgy": -31.952630435621124,
+      "Ax": 295.67930857315696,
+      "Ay": 279.2526803190927,
+      "w": 3.749733255980468,
+      "eta": 2.6240436897985338,
+      "lx": 6.375,
+      "ly": 6.5,
+      "brzegi": "USUS",
+      "V": 267.8402680789917
+     }
+    ],
+    "pole_miarodajne": "P3"
+   }
+  },
+  {
+   "nr": "2.1",
+   "id": "ST2",
+   "tytul": "Strop ST2",
+   "rodzaj": "plyta",
+   "wykorzystanie": 7.5171,
+   "ok": false,
+   "przyjeto": [
+    "Płyta gr. 22 cm z betonu C25/30, stal B500SP, otulenie c_nom = 25 mm; zbrojenie wg zestawienia pól (dołem siatka w obu kierunkach, górą nad podporami).",
+    "Maks. ugięcie długotrwałe ≈ 6,7 mm."
+   ],
+   "warunki": [
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 20.128,
+     "eta": 0.3975
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 612.0284,
+     "R": 615.7522,
+     "eta": 0.994
+    },
+    {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 250.0,
+     "R": 273.3453,
+     "eta": 0.9146
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 677.8288,
+     "R": 699.7184,
+     "eta": 0.9687
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 14.0,
+     "R": 23.268,
+     "eta": 0.6017
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 1294.565,
+     "R": 1340.4129,
+     "eta": 0.9658
+    },
+    {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 150.0,
+     "R": 188.9892,
+     "eta": 0.7937
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 380.3976,
+     "R": 386.6576,
+     "eta": 0.9838
+    },
+    {
+     "opis": "Ścinanie bez zbrojenia poprzecznego (6.2.2)",
+     "E": 706.9452,
+     "R": 94.0452,
+     "eta": 7.5171
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 28.4722,
+     "R": 35.5659,
+     "eta": 0.8005
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 20.128,
+     "eta": 0.3975
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 612.0284,
+     "R": 615.7522,
+     "eta": 0.994
+    },
+    {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 250.0,
+     "R": 273.3453,
+     "eta": 0.9146
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 677.8288,
+     "R": 699.7184,
+     "eta": 0.9687
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 14.0,
+     "R": 23.268,
+     "eta": 0.6017
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 1294.565,
+     "R": 1340.4129,
+     "eta": 0.9658
+    },
+    {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 150.0,
+     "R": 188.9892,
+     "eta": 0.7937
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 380.3976,
+     "R": 386.6576,
+     "eta": 0.9838
+    },
+    {
+     "opis": "Ścinanie bez zbrojenia poprzecznego (6.2.2)",
+     "E": 706.9452,
+     "R": 94.0452,
+     "eta": 7.5171
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 28.4722,
+     "R": 35.5659,
+     "eta": 0.8005
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 25.4871,
+     "eta": 0.3139
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 19.7241,
+     "eta": 0.4056
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 17.2847,
+     "eta": 0.4628
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 596.5114,
+     "R": 604.1524,
+     "eta": 0.9874
+    },
+    {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 130.0,
+     "R": 177.9857,
+     "eta": 0.7304
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 1086.935,
+     "R": 1099.5574,
+     "eta": 0.9885
+    },
+    {
+     "opis": "Ścinanie bez zbrojenia poprzecznego (6.2.2)",
+     "E": 706.9452,
+     "R": 94.0452,
+     "eta": 7.5171
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 10.5263,
+     "R": 546.0083,
+     "eta": 0.0193
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 24.9369,
+     "eta": 0.3208
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 18.2141,
+     "eta": 0.4392
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 11.8096,
+     "eta": 0.6774
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 265.2917,
+     "R": 279.2527,
+     "eta": 0.95
+    },
+    {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 180.0,
+     "R": 193.0101,
+     "eta": 0.9326
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 1402.0467,
+     "R": 1436.1566,
+     "eta": 0.9762
+    },
+    {
+     "opis": "Ścinanie bez zbrojenia poprzecznego (6.2.2)",
+     "E": 706.9452,
+     "R": 94.0452,
+     "eta": 7.5171
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 13.8158,
+     "R": 572.9316,
+     "eta": 0.0241
+    }
+   ],
+   "dane": {
+    "grupa": "ST2 + ST2Z + D2 + D3",
+    "pola": [
+     {
+      "pole": "P2",
+      "Mx": 14.31413739839027,
+      "My": 33.699973796615865,
+      "Mx_tabl": 16.592834318695353,
+      "My_tabl": 45.91522779927628,
+      "Mgx": -53.56266962657341,
+      "M_naroze": 29.00433912219168,
+      "Mgy": -92.44324185647226,
+      "Ax": 264.55517082861417,
+      "Ay": 615.7521601035994,
+      "w": 6.748283540553052,
+      "eta": 7.517078529242323,
+      "lx": 12.0,
+      "ly": 5.125,
+      "brzegi": "USSU",
+      "V": 706.9451679642931
+     },
+     {
+      "pole": "P4",
+      "Mx": 12.682214550450393,
+      "My": 4.126007149288913,
+      "Mx_tabl": 7.913699768971825,
+      "My_tabl": 3.4092072253586116,
+      "Mgx": -15.611254393925808,
+      "M_naroze": 78.8111775062387,
+      "Mgy": -44.800115334691306,
+      "Ax": 264.55517082861417,
+      "Ay": 251.32741228718342,
+      "w": 0.13283378127961684,
+      "eta": 7.517078529242323,
+      "lx": 2.0,
+      "ly": 3.625,
+      "brzegi": "UUUS",
+      "V": 706.9451679642931
+     },
+     {
+      "pole": "P5",
+      "Mx": 12.300735974623922,
+      "My": 11.372339710998599,
+      "Mx_tabl": null,
+      "My_tabl": null,
+      "Mgx": -18.693585628402786,
+      "M_naroze": 99.32075079620026,
+      "Mgy": -20.389438769996552,
+      "Ax": 264.55517082861417,
+      "Ay": 251.32741228718342,
+      "w": 0.19724079356870236,
+      "eta": 7.517078529242323,
+      "lx": 2.625,
+      "ly": 3.625,
+      "brzegi": "UUUS",
+      "V": 706.9451679642931
+     }
+    ],
+    "pole_miarodajne": "P2"
+   }
+  },
+  {
+   "nr": "2.2",
+   "id": "ST2Z",
+   "tytul": "Strop ST2Z",
+   "rodzaj": "plyta",
+   "wykorzystanie": 4.4852,
+   "ok": false,
+   "przyjeto": [
+    "Płyta gr. 22 cm z betonu C25/30, stal B500SP, otulenie c_nom = 25 mm; zbrojenie wg zestawienia pól (dołem siatka w obu kierunkach, górą nad podporami).",
+    "Maks. ugięcie długotrwałe ≈ 1,6 mm."
+   ],
+   "warunki": [
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 26.2989,
+     "eta": 0.3042
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 19.7241,
+     "eta": 0.4056
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 344.056,
+     "R": 356.9992,
+     "eta": 0.9637
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 10.0,
+     "R": 10.4014,
+     "eta": 0.9614
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 19.7241,
+     "eta": 0.4056
+    },
+    {
+     "opis": "Ścinanie bez zbrojenia poprzecznego (6.2.2)",
+     "E": 421.8134,
+     "R": 94.0452,
+     "eta": 4.4852
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 6.8421,
+     "R": 4315.5227,
+     "eta": 0.0016
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 26.2989,
+     "eta": 0.3042
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 19.7241,
+     "eta": 0.4056
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 344.056,
+     "R": 356.9992,
+     "eta": 0.9637
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 10.0,
+     "R": 10.4014,
+     "eta": 0.9614
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 19.7241,
+     "eta": 0.4056
+    },
+    {
+     "opis": "Ścinanie bez zbrojenia poprzecznego (6.2.2)",
+     "E": 421.8134,
+     "R": 94.0452,
+     "eta": 4.4852
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 6.8421,
+     "R": 4315.5227,
+     "eta": 0.0016
+    }
+   ],
+   "dane": {
+    "grupa": "ST2 + ST2Z + D2 + D3",
+    "pola": [
+     {
+      "pole": "P1",
+      "Mx": 3.0049210749827804,
+      "My": 6.421430706311171,
+      "Mx_tabl": null,
+      "My_tabl": null,
+      "Mgx": -27.79545913011088,
+      "M_naroze": 0.0,
+      "Mgy": -5.316520353949513,
+      "Ax": 264.55517082861417,
+      "Ay": 251.32741228718342,
+      "w": 1.6498591700979497,
+      "eta": 4.485219974435426,
+      "lx": 1.3,
+      "ly": 8.75,
+      "brzegi": "WUWW",
+      "V": 421.81341805187355
+     }
+    ],
+    "pole_miarodajne": "P1"
+   }
+  },
+  {
+   "nr": "2.3",
+   "id": "ST1",
+   "tytul": "Strop ST1",
+   "rodzaj": "plyta",
+   "wykorzystanie": 6.8209,
+   "ok": false,
+   "przyjeto": [
+    "Płyta gr. 22 cm z betonu C25/30, stal B500SP, otulenie c_nom = 25 mm; zbrojenie wg zestawienia pól (dołem siatka w obu kierunkach, górą nad podporami).",
+    "Maks. ugięcie długotrwałe ≈ 5,7 mm."
+   ],
+   "warunki": [
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 23.2015,
+     "eta": 0.3448
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 378.6325,
+     "R": 386.6576,
+     "eta": 0.9792
+    },
+    {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 130.0,
+     "R": 184.4678,
+     "eta": 0.7047
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 423.8387,
+     "R": 436.3323,
+     "eta": 0.9714
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 10.0,
+     "R": 10.2428,
+     "eta": 0.9763
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 1178.9694,
+     "R": 1182.7172,
+     "eta": 0.9968
+    },
+    {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 170.0,
+     "R": 180.8084,
+     "eta": 0.9402
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 254.9671,
+     "R": 264.5552,
+     "eta": 0.9638
+    },
+    {
+     "opis": "Ścinanie bez zbrojenia poprzecznego (6.2.2)",
+     "E": 641.4697,
+     "R": 94.0452,
+     "eta": 6.8209
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 28.4722,
+     "R": 72.5909,
+     "eta": 0.3922
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 23.2015,
+     "eta": 0.3448
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 378.6325,
+     "R": 386.6576,
+     "eta": 0.9792
+    },
+    {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 130.0,
+     "R": 184.4678,
+     "eta": 0.7047
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 423.8387,
+     "R": 436.3323,
+     "eta": 0.9714
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 10.0,
+     "R": 10.2428,
+     "eta": 0.9763
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 1178.9694,
+     "R": 1182.7172,
+     "eta": 0.9968
+    },
+    {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 170.0,
+     "R": 180.8084,
+     "eta": 0.9402
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 254.9671,
+     "R": 264.5552,
+     "eta": 0.9638
+    },
+    {
+     "opis": "Ścinanie bez zbrojenia poprzecznego (6.2.2)",
+     "E": 641.4697,
+     "R": 94.0452,
+     "eta": 6.8209
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 28.4722,
+     "R": 72.5909,
+     "eta": 0.3922
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 26.2989,
+     "eta": 0.3042
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 19.7241,
+     "eta": 0.4056
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 26.2989,
+     "eta": 0.3042
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 441.4063,
+     "R": 456.9589,
+     "eta": 0.966
+    },
+    {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 110.0,
+     "R": 186.5402,
+     "eta": 0.5897
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 737.3596,
+     "R": 753.9822,
+     "eta": 0.978
+    },
+    {
+     "opis": "Ścinanie bez zbrojenia poprzecznego (6.2.2)",
+     "E": 488.7328,
+     "R": 94.0452,
+     "eta": 5.1968
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 20.1389,
+     "R": 804.8456,
+     "eta": 0.025
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 17.4739,
+     "eta": 0.4578
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 19.7241,
+     "eta": 0.4056
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 19.1936,
+     "eta": 0.4168
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 572.8037,
+     "R": 604.1524,
+     "eta": 0.9481
+    },
+    {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 130.0,
+     "R": 192.6861,
+     "eta": 0.6747
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 1001.4295,
+     "R": 1005.3096,
+     "eta": 0.9961
+    },
+    {
+     "opis": "Ścinanie bez zbrojenia poprzecznego (6.2.2)",
+     "E": 641.4697,
+     "R": 94.0452,
+     "eta": 6.8209
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 10.5263,
+     "R": 371.0676,
+     "eta": 0.0284
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 26.2989,
+     "eta": 0.3042
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 19.7241,
+     "eta": 0.4056
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 18.1762,
+     "eta": 0.4401
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 8.699,
+     "eta": 0.9196
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 1289.1752,
+     "R": 1340.4129,
+     "eta": 0.9618
+    },
+    {
+     "opis": "Ścinanie bez zbrojenia poprzecznego (6.2.2)",
+     "E": 641.4697,
+     "R": 94.0452,
+     "eta": 6.8209
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 13.8158,
+     "R": 736.3399,
+     "eta": 0.0188
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 26.2989,
+     "eta": 0.3042
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 19.7241,
+     "eta": 0.4056
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 10.8928,
+     "eta": 0.7344
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 359.4225,
+     "R": 386.6576,
+     "eta": 0.9296
+    },
+    {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 130.0,
+     "R": 202.7045,
+     "eta": 0.6413
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 800.057,
+     "R": 804.2477,
+     "eta": 0.9948
+    },
+    {
+     "opis": "Ścinanie bez zbrojenia poprzecznego (6.2.2)",
+     "E": 545.1866,
+     "R": 94.0452,
+     "eta": 5.7971
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 18.4211,
+     "R": 1399.8742,
+     "eta": 0.0132
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 26.2989,
+     "eta": 0.3042
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 19.7241,
+     "eta": 0.4056
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 26.2989,
+     "eta": 0.3042
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 19.7241,
+     "eta": 0.4056
+    },
+    {
+     "opis": "Ścinanie bez zbrojenia poprzecznego (6.2.2)",
+     "E": 488.7328,
+     "R": 94.0452,
+     "eta": 5.1968
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 3.4722,
+     "R": 2479.0217,
+     "eta": 0.0014
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 26.2989,
+     "eta": 0.3042
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 19.7241,
+     "eta": 0.4056
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 26.2989,
+     "eta": 0.3042
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 19.7241,
+     "eta": 0.4056
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Ścinanie bez zbrojenia poprzecznego (6.2.2)",
+     "E": 545.1866,
+     "R": 94.0452,
+     "eta": 5.7971
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 3.4722,
+     "R": 1371.2888,
+     "eta": 0.0025
+    }
+   ],
+   "dane": {
+    "grupa": "ST1 + D4",
+    "pola": [
+     {
+      "pole": "P1",
+      "Mx": 13.189517809175733,
+      "My": 28.87328716108296,
+      "Mx_tabl": 9.954045496910108,
+      "My_tabl": 27.645883339101875,
+      "Mgx": -34.061932364250495,
+      "M_naroze": 19.60985989377552,
+      "Mgy": -84.91005848306578,
+      "Ax": 264.55517082861417,
+      "Ay": 386.65755736489757,
+      "w": 5.651255258369129,
+      "eta": 6.82086558225107,
+      "lx": 12.0,
+      "ly": 5.125,
+      "brzegi": "SUSU",
+      "V": 641.4696808006308
+     },
+     {
+      "pole": "P4",
+      "Mx": 11.316006427671493,
+      "My": 8.887304978807052,
+      "Mx_tabl": 4.041586413442784,
+      "My_tabl": 5.208915086528121,
+      "Mgx": -11.026940878814308,
+      "M_naroze": 54.82860223873305,
+      "Mgy": -33.51355456916867,
+      "Ax": 264.55517082861417,
+      "Ay": 251.32741228718342,
+      "w": 0.4984714505377899,
+      "eta": 5.196786306868278,
+      "lx": 3.875,
+      "ly": 3.625,
+      "brzegi": "SUUU",
+      "V": 488.73281744920587
+     },
+     {
+      "pole": "P5",
+      "Mx": 15.46549315510001,
+      "My": 4.286172547305501,
+      "Mx_tabl": 2.3659534421493893,
+      "My_tabl": 1.0159041212261108,
+      "Mgx": -15.349568262019368,
+      "M_naroze": 73.06459315464502,
+      "Mgy": -43.091460573517125,
+      "Ax": 264.55517082861417,
+      "Ay": 251.32741228718342,
+      "w": 0.13373299527459553,
+      "eta": 6.82086558225107,
+      "lx": 2.0,
+      "ly": 3.625,
+      "brzegi": "UUUS",
+      "V": 641.4696808006308
+     },
+     {
+      "pole": "P6",
+      "Mx": 10.482784408337942,
+      "My": 8.786107165983793,
+      "Mx_tabl": null,
+      "My_tabl": null,
+      "Mgx": -15.52488089195074,
+      "M_naroze": 92.095139514843,
+      "Mgy": -17.223878363309726,
+      "Ax": 264.55517082861417,
+      "Ay": 251.32741228718342,
+      "w": 0.19625384185085967,
+      "eta": 6.82086558225107,
+      "lx": 2.625,
+      "ly": 3.625,
+      "brzegi": "UUUS",
+      "V": 641.4696808006308
+     },
+     {
+      "pole": "P7",
+      "Mx": 6.925511117243561,
+      "My": 5.581743518220186,
+      "Mx_tabl": 4.713427287211695,
+      "My_tabl": 4.4241705397474655,
+      "Mgx": -19.492898410005324,
+      "M_naroze": 59.22514829957272,
+      "Mgy": -27.444943173220352,
+      "Ax": 264.55517082861417,
+      "Ay": 251.32741228718342,
+      "w": 0.5612462849141919,
+      "eta": 5.797069721701076,
+      "lx": 3.5,
+      "ly": 3.625,
+      "brzegi": "UUUU",
+      "V": 545.1865923930637
+     },
+     {
+      "pole": "P8",
+      "Mx": 3.7212228678903516,
+      "My": 3.892105309946121,
+      "Mx_tabl": null,
+      "My_tabl": null,
+      "Mgx": -2.6656280392216605,
+      "M_naroze": 0.0,
+      "Mgy": -2.747921710606592,
+      "Ax": 264.55517082861417,
+      "Ay": 251.32741228718342,
+      "w": 0.008271551877395108,
+      "eta": 5.196786306868278,
+      "lx": 3.875,
+      "ly": 0.625,
+      "brzegi": "WWUW",
+      "V": 488.73281744920587
+     },
+     {
+      "pole": "P9",
+      "Mx": 3.698571931830849,
+      "My": 5.739171338584566,
+      "Mx_tabl": null,
+      "My_tabl": null,
+      "Mgx": -6.197935777567352,
+      "M_naroze": 7.088949521244009,
+      "Mgy": -3.571955781690262,
+      "Ax": 264.55517082861417,
+      "Ay": 251.32741228718342,
+      "w": 0.01800400284290394,
+      "eta": 5.797069721701076,
+      "lx": 3.5,
+      "ly": 0.625,
+      "brzegi": "WUUW",
+      "V": 545.1865923930637
+     }
+    ],
+    "pole_miarodajne": "P1"
+   }
+  },
+  {
+   "nr": "3.1",
+   "id": "SCH1",
+   "tytul": "Schody SCH1 (P0 → P1)",
+   "rodzaj": "schody",
+   "wykorzystanie": 0.9834,
+   "ok": true,
+   "przyjeto": [
+    "Płyta schodowa gr. 18 cm, beton C25/30; zbrojenie wg wyników biegów."
+   ],
+   "warunki": [
+    {
+     "opis": "Zbrojenie główne",
+     "E": 386.1976,
+     "R": 392.6991,
+     "eta": 0.9834
+    },
+    {
+     "opis": "Ścinanie bez zbrojenia poprzecznego (6.2.2)",
+     "E": 28.4772,
+     "R": 73.7512,
+     "eta": 0.3861
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 23.6242,
+     "R": 40.466,
+     "eta": 0.5838
+    },
+    {
+     "opis": "Ugięcie długotrwałe (quasi-stała) ≤ L/250",
+     "E": 4.7588,
+     "R": 14.08,
+     "eta": 0.338
+    },
+    {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 200.0,
+     "R": 203.8112,
+     "eta": 0.9813
+    },
+    {
+     "opis": "Zbrojenie główne",
+     "E": 386.1877,
+     "R": 392.6991,
+     "eta": 0.9834
+    },
+    {
+     "opis": "Ścinanie bez zbrojenia poprzecznego (6.2.2)",
+     "E": 28.4772,
+     "R": 73.7512,
+     "eta": 0.3861
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 23.6242,
+     "R": 40.4686,
+     "eta": 0.5838
+    },
+    {
+     "opis": "Ugięcie długotrwałe (quasi-stała) ≤ L/250",
+     "E": 4.7587,
+     "R": 14.08,
+     "eta": 0.338
+    },
+    {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 200.0,
+     "R": 203.8209,
+     "eta": 0.9813
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "3.2",
+   "id": "SCH2",
+   "tytul": "Schody SCH2 (P1 → P2)",
+   "rodzaj": "schody",
+   "wykorzystanie": 0.9834,
+   "ok": true,
+   "przyjeto": [
+    "Płyta schodowa gr. 18 cm, beton C25/30; zbrojenie wg wyników biegów."
+   ],
+   "warunki": [
+    {
+     "opis": "Zbrojenie główne",
+     "E": 386.1976,
+     "R": 392.6991,
+     "eta": 0.9834
+    },
+    {
+     "opis": "Ścinanie bez zbrojenia poprzecznego (6.2.2)",
+     "E": 28.4772,
+     "R": 73.7512,
+     "eta": 0.3861
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 23.6242,
+     "R": 40.466,
+     "eta": 0.5838
+    },
+    {
+     "opis": "Ugięcie długotrwałe (quasi-stała) ≤ L/250",
+     "E": 4.7588,
+     "R": 14.08,
+     "eta": 0.338
+    },
+    {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 200.0,
+     "R": 203.8112,
+     "eta": 0.9813
+    },
+    {
+     "opis": "Zbrojenie główne",
+     "E": 386.1877,
+     "R": 392.6991,
+     "eta": 0.9834
+    },
+    {
+     "opis": "Ścinanie bez zbrojenia poprzecznego (6.2.2)",
+     "E": 28.4772,
+     "R": 73.7512,
+     "eta": 0.3861
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 23.6242,
+     "R": 40.4686,
+     "eta": 0.5838
+    },
+    {
+     "opis": "Ugięcie długotrwałe (quasi-stała) ≤ L/250",
+     "E": 4.7587,
+     "R": 14.08,
+     "eta": 0.338
+    },
+    {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 200.0,
+     "R": 203.8209,
+     "eta": 0.9813
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "4.1",
+   "id": "B6",
+   "tytul": "Belka B6",
+   "rodzaj": "belka",
+   "wykorzystanie": 0.8337,
+   "ok": true,
+   "przyjeto": [
+    "Belka B6: 20×40 cm, C30/37; dołem 2φ12, górą 2φ12, strzemiona φ8 co 26 cm (2-cięte)."
+   ],
+   "warunki": [
+    {
+     "opis": "Zbrojenie dolne",
+     "E": 188.588,
+     "R": 226.1947,
+     "eta": 0.8337
+    },
+    {
+     "opis": "Nośność krzyżulców betonowych",
+     "E": 20.6415,
+     "R": 292.4517,
+     "eta": 0.0706
+    },
+    {
+     "opis": "Nośność strzemion",
+     "E": 20.6415,
+     "R": 108.634,
+     "eta": 0.19
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 14.2758,
+     "R": 57.5116,
+     "eta": 0.2482
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 12.0,
+     "R": 16.2259,
+     "eta": 0.7396
+    }
+   ],
+   "dane": {
+    "reakcje": {
+     "S2-08": {
+      "G": 14.367951633275451,
+      "H": 0.6430364396292134,
+      "S1": 1.1574655913336755,
+      "S2": 1.1574655913336755
+     }
+    }
+   }
+  },
+  {
+   "nr": "4.2",
+   "id": "N6",
+   "tytul": "Belka N6",
+   "rodzaj": "belka",
+   "wykorzystanie": 0.4658,
+   "ok": true,
+   "przyjeto": [
+    "Belka N6: 18×40 cm (z płytą), C25/30; dołem 2φ12, górą 2φ12, strzemiona φ8 co 26 cm (2-cięte)."
+   ],
+   "warunki": [
+    {
+     "opis": "Zbrojenie dolne",
+     "E": 105.3567,
+     "R": 226.1947,
+     "eta": 0.4658
+    },
+    {
+     "opis": "Nośność krzyżulców betonowych",
+     "E": 20.3828,
+     "R": 224.3237,
+     "eta": 0.0909
+    },
+    {
+     "opis": "Nośność strzemion",
+     "E": 20.3828,
+     "R": 108.634,
+     "eta": 0.1876
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 9.4708,
+     "R": 97.8465,
+     "eta": 0.0968
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 12.0,
+     "R": 34.9874,
+     "eta": 0.343
+    }
+   ],
+   "dane": {
+    "reakcje": {
+     "S2-01": {
+      "G": 14.205873871937147,
+      "H": 0.8925107028494738,
+      "S1": 1.6065192651362736,
+      "S2": 1.6065192651362736
+     }
+    }
+   }
+  },
+  {
+   "nr": "4.3",
+   "id": "N7",
+   "tytul": "Belka N7",
+   "rodzaj": "belka",
+   "wykorzystanie": 0.3862,
+   "ok": true,
+   "przyjeto": [
+    "Belka N7: 18×40 cm (z płytą), C25/30; dołem 2φ12, górą 2φ12, strzemiona φ8 co 26 cm (2-cięte)."
+   ],
+   "warunki": [
+    {
+     "opis": "Zbrojenie dolne",
+     "E": 87.3662,
+     "R": 226.1947,
+     "eta": 0.3862
+    },
+    {
+     "opis": "Nośność krzyżulców betonowych",
+     "E": 15.4091,
+     "R": 224.3237,
+     "eta": 0.0687
+    },
+    {
+     "opis": "Nośność strzemion",
+     "E": 15.4091,
+     "R": 108.634,
+     "eta": 0.1418
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 7.7994,
+     "R": 214.9531,
+     "eta": 0.0363
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 12.0,
+     "R": 34.9874,
+     "eta": 0.343
+    }
+   ],
+   "dane": {
+    "reakcje": {
+     "S2-01": {
+      "G": 9.13620416249629,
+      "H": 0.5567170534766993,
+      "S1": 1.0020906962565674,
+      "S2": 1.0020906962565674
+     }
+    }
+   }
+  },
+  {
+   "nr": "4.4",
+   "id": "B2",
+   "tytul": "Belka B2",
+   "rodzaj": "belka",
+   "wykorzystanie": 0.9294,
+   "ok": true,
+   "przyjeto": [
+    "Belka B2: 25×80 cm, C30/37; dołem 2φ14, górą 2φ14, strzemiona φ8 co 40 cm (2-cięte)."
+   ],
+   "warunki": [
+    {
+     "opis": "Zbrojenie dolne",
+     "E": 286.143,
+     "R": 307.8761,
+     "eta": 0.9294
+    },
+    {
+     "opis": "Zbrojenie górne",
+     "E": 286.143,
+     "R": 307.8761,
+     "eta": 0.9294
+    },
+    {
+     "opis": "Nośność krzyżulców betonowych",
+     "E": 41.6713,
+     "R": 772.8789,
+     "eta": 0.0539
+    },
+    {
+     "opis": "Nośność strzemion",
+     "E": 41.6713,
+     "R": 149.2885,
+     "eta": 0.2791
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 9.9078,
+     "R": 2961.6441,
+     "eta": 0.0033
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 14.0,
+     "R": 78.0488,
+     "eta": 0.1794
+    }
+   ],
+   "dane": {
+    "reakcje": {
+     "S1-01": {
+      "G": 13.20606513910305,
+      "QA": 3.0405064734476843,
+      "QA_pA": 3.0397844587543745,
+      "QA_pB": 0.0,
+      "H": 0.0,
+      "S1": 0.0,
+      "S2": 0.0,
+      "SB2": 0.0
+     },
+     "SL5": {
+      "G": 46.889900357787994,
+      "QA": 9.364334975441976,
+      "QA_pA": 9.365442443888366,
+      "QA_pB": 0.0,
+      "H": 0.0,
+      "S1": 0.0,
+      "S2": 0.0,
+      "SB2": 0.0
+     },
+     "SL6": {
+      "G": 42.118142016798245,
+      "QA": 8.893062923162343,
+      "QA_pA": 8.898292541948535,
+      "QA_pB": 0.0,
+      "H": 0.0,
+      "S1": 0.0,
+      "S2": 0.0,
+      "SB2": 0.0
+     }
+    }
+   }
+  },
+  {
+   "nr": "4.5",
+   "id": "B9",
+   "tytul": "Belka B9",
+   "rodzaj": "belka",
+   "wykorzystanie": 0.9931,
+   "ok": true,
+   "przyjeto": [
+    "Belka B9: 25×50 cm, C25/30; dołem 5φ14, górą 2φ12, strzemiona φ8 co 5 cm (2-cięte)."
+   ],
+   "warunki": [
+    {
+     "opis": "Zbrojenie dolne",
+     "E": 699.1478,
+     "R": 769.6902,
+     "eta": 0.9083
+    },
+    {
+     "opis": "Nośność krzyżulców betonowych",
+     "E": 456.4563,
+     "R": 459.6305,
+     "eta": 0.9931
+    },
+    {
+     "opis": "Nośność strzemion",
+     "E": 456.4563,
+     "R": 541.6871,
+     "eta": 0.8427
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 5.719,
+     "R": 18.8857,
+     "eta": 0.3028
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 14.0,
+     "R": 17.3372,
+     "eta": 0.8075
+    }
+   ],
+   "dane": {
+    "reakcje": {
+     "S1-08": {
+      "G": 290.78526076547746,
+      "QA": 54.22645944929869,
+      "QA_pA": 52.35180953095064,
+      "QA_pB": 2.1238250962742313,
+      "H": 5.154400543817156,
+      "S1": 9.277921002719959,
+      "S2": 8.88372959884647,
+      "SB2": 0.0
+     },
+     "S1-09": {
+      "G": 227.08075430231398,
+      "QA": 56.90033446324459,
+      "QA_pA": 51.87496428695206,
+      "QA_pB": 4.776194669615506,
+      "H": 1.7960519659218335,
+      "S1": 3.2328935383875432,
+      "S2": 3.1042554068699246,
+      "SB2": 0.0
+     }
+    }
+   }
+  },
+  {
+   "nr": "4.6",
+   "id": "B7",
+   "tytul": "Belka B7",
+   "rodzaj": "belka",
+   "wykorzystanie": 0.9906,
+   "ok": true,
+   "przyjeto": [
+    "Belka B7: 25×85 cm, C30/37; dołem 2φ14, górą 2φ12, strzemiona φ8 co 40 cm (2-cięte)."
+   ],
+   "warunki": [
+    {
+     "opis": "Zbrojenie dolne",
+     "E": 304.993,
+     "R": 307.8761,
+     "eta": 0.9906
+    },
+    {
+     "opis": "Nośność krzyżulców betonowych",
+     "E": 54.964,
+     "R": 823.7931,
+     "eta": 0.0667
+    },
+    {
+     "opis": "Nośność strzemion",
+     "E": 54.964,
+     "R": 159.123,
+     "eta": 0.3454
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 6.7367,
+     "R": 281.88,
+     "eta": 0.0239
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 14.0,
+     "R": 49.8519,
+     "eta": 0.2808
+    }
+   ],
+   "dane": {
+    "reakcje": {
+     "S0-04": {
+      "G": 38.526828596101666,
+      "QA": 0.0,
+      "QA_pA": 0.02502283573923006,
+      "QA_pB": 0.0,
+      "H": 1.3155429839012747,
+      "S1": 2.36797737101621,
+      "S2": 3.9019213563955146,
+      "SB2": 4.282297568821277
+     }
+    }
+   }
+  },
+  {
+   "nr": "5.1",
+   "id": "W-D1",
+   "tytul": "Wieńce pod płytą D1 (poziom 9,300 m)",
+   "rodzaj": "wieniec",
+   "wykorzystanie": 0.3095,
+   "ok": true,
+   "przyjeto": [
+    "Wieniec: 4φ12 (B500SP), strzemiona φ6 co 25 cm, zakłady l₀ = 638 mm, beton C25/30."
+   ],
+   "warunki": [
+    {
+     "opis": "Ściąg obwodowy",
+     "E": 140.0,
+     "R": 452.3893,
+     "eta": 0.3095
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "5.2",
+   "id": "W-ST2_ST2Z_D2_D3",
+   "tytul": "Wieńce pod płytą ST2 + ST2Z + D2 + D3 (poziom 6,150 m)",
+   "rodzaj": "wieniec",
+   "wykorzystanie": 0.3095,
+   "ok": true,
+   "przyjeto": [
+    "Wieniec: 4φ12 (B500SP), strzemiona φ6 co 25 cm, zakłady l₀ = 638 mm, beton C25/30."
+   ],
+   "warunki": [
+    {
+     "opis": "Ściąg obwodowy",
+     "E": 140.0,
+     "R": 452.3893,
+     "eta": 0.3095
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "5.3",
+   "id": "W-ST1_D4",
+   "tytul": "Wieńce pod płytą ST1 + D4 (poziom 3,000 m)",
+   "rodzaj": "wieniec",
+   "wykorzystanie": 0.3095,
+   "ok": true,
+   "przyjeto": [
+    "Wieniec: 4φ12 (B500SP), strzemiona φ6 co 25 cm, zakłady l₀ = 638 mm, beton C25/30."
+   ],
+   "warunki": [
+    {
+     "opis": "Ściąg obwodowy",
+     "E": 140.0,
+     "R": 452.3893,
+     "eta": 0.3095
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "6.1",
+   "id": "SL1",
+   "tytul": "Słup SL1 (RK 120x120x8, L = 2,93 m)",
+   "rodzaj": "slup",
+   "wykorzystanie": 0.007,
+   "ok": true,
+   "przyjeto": [
+    "Słup RK 120x120x8 ze stali S355; N_Ed = 4,0 kN, N_b,Rd = 749,7 kN."
+   ],
+   "warunki": [
+    {
+     "opis": "Wyboczenie giętne",
+     "E": 4.0344,
+     "R": 749.6628,
+     "eta": 0.0054
+    },
+    {
+     "opis": "Interakcja N + M (6.61)",
+     "E": 0.007,
+     "R": 1.0,
+     "eta": 0.007
+    },
+    {
+     "opis": "Interakcja N + M (6.62)",
+     "E": 0.0063,
+     "R": 1.0,
+     "eta": 0.0063
+    }
+   ],
+   "dane": {
+    "N_Ed": 4.034403212954615
+   }
+  },
+  {
+   "nr": "6.2",
+   "id": "SL2",
+   "tytul": "Słup SL2 (RK 120x120x8, L = 2,93 m)",
+   "rodzaj": "slup",
+   "wykorzystanie": 0.0072,
+   "ok": true,
+   "przyjeto": [
+    "Słup RK 120x120x8 ze stali S355; N_Ed = 4,2 kN, N_b,Rd = 749,7 kN."
+   ],
+   "warunki": [
+    {
+     "opis": "Wyboczenie giętne",
+     "E": 4.208,
+     "R": 749.6628,
+     "eta": 0.0056
+    },
+    {
+     "opis": "Interakcja N + M (6.61)",
+     "E": 0.0072,
+     "R": 1.0,
+     "eta": 0.0072
+    },
+    {
+     "opis": "Interakcja N + M (6.62)",
+     "E": 0.0066,
+     "R": 1.0,
+     "eta": 0.0066
+    }
+   ],
+   "dane": {
+    "N_Ed": 4.207984436177029
+   }
+  },
+  {
+   "nr": "6.3",
+   "id": "SL3",
+   "tytul": "Słup SL3 (RK 120x120x8, L = 2,93 m)",
+   "rodzaj": "slup",
+   "wykorzystanie": 0.0067,
+   "ok": true,
+   "przyjeto": [
+    "Słup RK 120x120x8 ze stali S355; N_Ed = 3,9 kN, N_b,Rd = 749,7 kN."
+   ],
+   "warunki": [
+    {
+     "opis": "Wyboczenie giętne",
+     "E": 3.8749,
+     "R": 749.6628,
+     "eta": 0.0052
+    },
+    {
+     "opis": "Interakcja N + M (6.61)",
+     "E": 0.0067,
+     "R": 1.0,
+     "eta": 0.0067
+    },
+    {
+     "opis": "Interakcja N + M (6.62)",
+     "E": 0.0061,
+     "R": 1.0,
+     "eta": 0.0061
+    }
+   ],
+   "dane": {
+    "N_Ed": 3.8748581052399262
+   }
+  },
+  {
+   "nr": "6.4",
+   "id": "SL4",
+   "tytul": "Słup SL4 (RK 120x120x8, L = 2,93 m)",
+   "rodzaj": "slup",
+   "wykorzystanie": 0.0064,
+   "ok": true,
+   "przyjeto": [
+    "Słup RK 120x120x8 ze stali S355; N_Ed = 3,6 kN, N_b,Rd = 749,7 kN."
+   ],
+   "warunki": [
+    {
+     "opis": "Wyboczenie giętne",
+     "E": 3.5943,
+     "R": 749.6628,
+     "eta": 0.0048
+    },
+    {
+     "opis": "Interakcja N + M (6.61)",
+     "E": 0.0064,
+     "R": 1.0,
+     "eta": 0.0064
+    },
+    {
+     "opis": "Interakcja N + M (6.62)",
+     "E": 0.0057,
+     "R": 1.0,
+     "eta": 0.0057
+    }
+   ],
+   "dane": {
+    "N_Ed": 3.5942515332496554
+   }
+  },
+  {
+   "nr": "6.5",
+   "id": "SL5",
+   "tytul": "Słup SL5 (RK 100x100x6, L = 1,50 m)",
+   "rodzaj": "slup",
+   "wykorzystanie": 0.1155,
+   "ok": true,
+   "przyjeto": [
+    "Słup RK 100x100x6 ze stali S355; N_Ed = 73,5 kN, N_b,Rd = 639,9 kN."
+   ],
+   "warunki": [
+    {
+     "opis": "Wyboczenie giętne",
+     "E": 73.4724,
+     "R": 639.8536,
+     "eta": 0.1148
+    },
+    {
+     "opis": "Interakcja N + M (6.61)",
+     "E": 0.1155,
+     "R": 1.0,
+     "eta": 0.1155
+    },
+    {
+     "opis": "Interakcja N + M (6.62)",
+     "E": 0.1152,
+     "R": 1.0,
+     "eta": 0.1152
+    }
+   ],
+   "dane": {
+    "N_Ed": 73.47240734506519
+   }
+  },
+  {
+   "nr": "6.6",
+   "id": "SL6",
+   "tytul": "Słup SL6 (RK 100x100x6, L = 1,50 m)",
+   "rodzaj": "slup",
+   "wykorzystanie": 0.1046,
+   "ok": true,
+   "przyjeto": [
+    "Słup RK 100x100x6 ze stali S355; N_Ed = 66,5 kN, N_b,Rd = 639,9 kN."
+   ],
+   "warunki": [
+    {
+     "opis": "Wyboczenie giętne",
+     "E": 66.54,
+     "R": 639.8536,
+     "eta": 0.104
+    },
+    {
+     "opis": "Interakcja N + M (6.61)",
+     "E": 0.1046,
+     "R": 1.0,
+     "eta": 0.1046
+    },
+    {
+     "opis": "Interakcja N + M (6.62)",
+     "E": 0.1044,
+     "R": 1.0,
+     "eta": 0.1044
+    }
+   ],
+   "dane": {
+    "N_Ed": 66.5400261876922
+   }
+  },
+  {
+   "nr": "6.7",
+   "id": "SL7",
+   "tytul": "Słup SL7 (150x1000, L = 1,50 m)",
+   "rodzaj": "slup",
+   "wykorzystanie": 0.0,
+   "ok": true,
+   "przyjeto": [],
+   "warunki": [],
+   "dane": {}
+  },
+  {
+   "nr": "6.8",
+   "id": "SL8",
+   "tytul": "Słup SL8 (150x1000, L = 1,50 m)",
+   "rodzaj": "slup",
+   "wykorzystanie": 0.0,
+   "ok": true,
+   "przyjeto": [],
+   "warunki": [],
+   "dane": {}
+  },
+  {
+   "nr": "7.1",
+   "id": "S2-01",
+   "tytul": "Ściana S2-01 (P2, zewnętrzna nośna)",
+   "rodzaj": "sciana",
+   "wykorzystanie": 0.4522,
+   "ok": true,
+   "przyjeto": [
+    "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
+   ],
+   "warunki": [
+    {
+     "opis": "Smukłość ściany",
+     "E": 12.2083,
+     "R": 27.0,
+     "eta": 0.4522
+    },
+    {
+     "opis": "Nośność — przekrój górny",
+     "E": 22.3476,
+     "R": 496.4674,
+     "eta": 0.045
+    },
+    {
+     "opis": "Nośność — połowa wysokości",
+     "E": 31.7265,
+     "R": 130.0214,
+     "eta": 0.244
+    },
+    {
+     "opis": "Nośność — przekrój dolny",
+     "E": 41.1053,
+     "R": 729.6135,
+     "eta": 0.0563
+    },
+    {
+     "opis": "Obciążenie poziome — przesklepienie",
+     "E": 1.4637,
+     "R": 16.9976,
+     "eta": 0.0861
+    },
+    {
+     "opis": "Docisk",
+     "E": 23.1008,
+     "R": 276.6831,
+     "eta": 0.0835
+    },
+    {
+     "opis": "Docisk",
+     "E": 25.3363,
+     "R": 304.0056,
+     "eta": 0.0833
+    },
+    {
+     "opis": "Docisk",
+     "E": 19.1202,
+     "R": 304.0056,
+     "eta": 0.0629
+    },
+    {
+     "opis": "Docisk",
+     "E": 16.1752,
+     "R": 262.849,
+     "eta": 0.0615
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "7.2",
+   "id": "S2-02",
+   "tytul": "Ściana S2-02 (P2, zewnętrzna nośna)",
+   "rodzaj": "sciana",
+   "wykorzystanie": 0.7935,
+   "ok": true,
+   "przyjeto": [
+    "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
+   ],
+   "warunki": [
+    {
+     "opis": "Smukłość ściany",
+     "E": 12.2083,
+     "R": 27.0,
+     "eta": 0.4522
+    },
+    {
+     "opis": "Nośność — przekrój górny",
+     "E": 13.8833,
+     "R": 496.4674,
+     "eta": 0.028
+    },
+    {
+     "opis": "Nośność — połowa wysokości",
+     "E": 23.8437,
+     "R": 30.0504,
+     "eta": 0.7935
+    },
+    {
+     "opis": "Nośność — przekrój dolny",
+     "E": 33.8041,
+     "R": 729.6135,
+     "eta": 0.0463
+    },
+    {
+     "opis": "Obciążenie poziome — przesklepienie",
+     "E": 1.4637,
+     "R": 16.9976,
+     "eta": 0.0861
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "7.3",
+   "id": "S2-03",
+   "tytul": "Ściana S2-03 (P2, zewnętrzna nośna)",
+   "rodzaj": "sciana",
+   "wykorzystanie": 0.4522,
+   "ok": true,
+   "przyjeto": [
+    "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
+   ],
+   "warunki": [
+    {
+     "opis": "Smukłość ściany",
+     "E": 12.2083,
+     "R": 27.0,
+     "eta": 0.4522
+    },
+    {
+     "opis": "Nośność — przekrój górny",
+     "E": 138.8623,
+     "R": 496.4674,
+     "eta": 0.2797
+    },
+    {
+     "opis": "Nośność — połowa wysokości",
+     "E": 146.0074,
+     "R": 492.1657,
+     "eta": 0.2967
+    },
+    {
+     "opis": "Nośność — przekrój dolny",
+     "E": 153.1526,
+     "R": 729.6135,
+     "eta": 0.2099
+    },
+    {
+     "opis": "Obciążenie poziome — przesklepienie",
+     "E": 1.4637,
+     "R": 16.9976,
+     "eta": 0.0861
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "7.4",
+   "id": "S2-04",
+   "tytul": "Ściana S2-04 (P2, zewnętrzna nośna)",
+   "rodzaj": "sciana",
+   "wykorzystanie": 0.4522,
+   "ok": true,
+   "przyjeto": [
+    "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
+   ],
+   "warunki": [
+    {
+     "opis": "Smukłość ściany",
+     "E": 12.2083,
+     "R": 27.0,
+     "eta": 0.4522
+    },
+    {
+     "opis": "Nośność — przekrój górny",
+     "E": 0.001,
+     "R": 729.6135,
+     "eta": 0.0
+    },
+    {
+     "opis": "Nośność — połowa wysokości",
+     "E": 6.0734,
+     "R": 649.8778,
+     "eta": 0.0093
+    },
+    {
+     "opis": "Nośność — przekrój dolny",
+     "E": 12.1468,
+     "R": 729.6135,
+     "eta": 0.0166
+    },
+    {
+     "opis": "Obciążenie poziome — przesklepienie",
+     "E": 1.4637,
+     "R": 16.9976,
+     "eta": 0.0861
+    },
+    {
+     "opis": "Obciążenie poziome — przesklepienie",
+     "E": 1.4637,
+     "R": 16.9976,
+     "eta": 0.0861
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "7.5",
+   "id": "S2-05",
+   "tytul": "Ściana S2-05 (P2, zewnętrzna nośna)",
+   "rodzaj": "sciana",
+   "wykorzystanie": 0.6029,
+   "ok": true,
+   "przyjeto": [
+    "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
+   ],
+   "warunki": [
+    {
+     "opis": "Smukłość ściany",
+     "E": 16.2778,
+     "R": 27.0,
+     "eta": 0.6029
+    },
+    {
+     "opis": "Nośność — przekrój górny",
+     "E": 7.5043,
+     "R": 240.9026,
+     "eta": 0.0312
+    },
+    {
+     "opis": "Nośność — połowa wysokości",
+     "E": 20.6928,
+     "R": 265.5518,
+     "eta": 0.0779
+    },
+    {
+     "opis": "Nośność — przekrój dolny",
+     "E": 33.8813,
+     "R": 364.8067,
+     "eta": 0.0929
+    },
+    {
+     "opis": "Obciążenie poziome — przesklepienie",
+     "E": 1.4637,
+     "R": 16.9976,
+     "eta": 0.0861
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "7.6",
+   "id": "S2-06",
+   "tytul": "Ściana S2-06 (P2, zewnętrzna nośna)",
+   "rodzaj": "sciana",
+   "wykorzystanie": 0.4522,
+   "ok": true,
+   "przyjeto": [
+    "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
+   ],
+   "warunki": [
+    {
+     "opis": "Smukłość ściany",
+     "E": 12.2083,
+     "R": 27.0,
+     "eta": 0.4522
+    },
+    {
+     "opis": "Nośność — przekrój górny",
+     "E": 0.001,
+     "R": 729.6135,
+     "eta": 0.0
+    },
+    {
+     "opis": "Nośność — połowa wysokości",
+     "E": 6.0734,
+     "R": 649.8778,
+     "eta": 0.0093
+    },
+    {
+     "opis": "Nośność — przekrój dolny",
+     "E": 12.1468,
+     "R": 729.6135,
+     "eta": 0.0166
+    },
+    {
+     "opis": "Obciążenie poziome — przesklepienie",
+     "E": 1.4637,
+     "R": 16.9976,
+     "eta": 0.0861
+    },
+    {
+     "opis": "Obciążenie poziome — przesklepienie",
+     "E": 1.4637,
+     "R": 16.9976,
+     "eta": 0.0861
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "7.7",
+   "id": "S2-07",
+   "tytul": "Ściana S2-07 (P2, zewnętrzna nośna)",
+   "rodzaj": "sciana",
+   "wykorzystanie": 0.4522,
+   "ok": true,
+   "przyjeto": [
+    "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
+   ],
+   "warunki": [
+    {
+     "opis": "Smukłość ściany",
+     "E": 12.2083,
+     "R": 27.0,
+     "eta": 0.4522
+    },
+    {
+     "opis": "Nośność — przekrój górny",
+     "E": 141.5797,
+     "R": 496.4674,
+     "eta": 0.2852
+    },
+    {
+     "opis": "Nośność — połowa wysokości",
+     "E": 148.7249,
+     "R": 493.1595,
+     "eta": 0.3016
+    },
+    {
+     "opis": "Nośność — przekrój dolny",
+     "E": 155.8701,
+     "R": 729.6135,
+     "eta": 0.2136
+    },
+    {
+     "opis": "Obciążenie poziome — przesklepienie",
+     "E": 1.4637,
+     "R": 16.9976,
+     "eta": 0.0861
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "7.8",
+   "id": "S2-08",
+   "tytul": "Ściana S2-08 (P2, zewnętrzna nośna)",
+   "rodzaj": "sciana",
+   "wykorzystanie": 0.0,
+   "ok": true,
+   "przyjeto": [],
+   "warunki": [],
+   "dane": {}
+  },
+  {
+   "nr": "7.9",
+   "id": "S2-09",
+   "tytul": "Ściana S2-09 (P2, wewnętrzna nośna)",
+   "rodzaj": "sciana",
+   "wykorzystanie": 0.9805,
+   "ok": true,
+   "przyjeto": [
+    "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
+   ],
+   "warunki": [
+    {
+     "opis": "Smukłość ściany",
+     "E": 16.2778,
+     "R": 27.0,
+     "eta": 0.6029
+    },
+    {
+     "opis": "Nośność — przekrój górny",
+     "E": 201.8946,
+     "R": 335.4821,
+     "eta": 0.6018
+    },
+    {
+     "opis": "Nośność — połowa wysokości",
+     "E": 271.3342,
+     "R": 276.7353,
+     "eta": 0.9805
+    },
+    {
+     "opis": "Nośność — przekrój dolny",
+     "E": 340.7738,
+     "R": 364.8067,
+     "eta": 0.9341
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "7.10",
+   "id": "S2-10",
+   "tytul": "Ściana S2-10 (P2, wewnętrzna nośna)",
+   "rodzaj": "sciana",
+   "wykorzystanie": 0.4522,
+   "ok": true,
+   "przyjeto": [
+    "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
+   ],
+   "warunki": [
+    {
+     "opis": "Smukłość ściany",
+     "E": 12.2083,
+     "R": 27.0,
+     "eta": 0.4522
+    },
+    {
+     "opis": "Nośność — przekrój górny",
+     "E": 0.001,
+     "R": 729.6135,
+     "eta": 0.0
+    },
+    {
+     "opis": "Nośność — połowa wysokości",
+     "E": 7.1064,
+     "R": 649.8778,
+     "eta": 0.0109
+    },
+    {
+     "opis": "Nośność — przekrój dolny",
+     "E": 14.2127,
+     "R": 729.6135,
+     "eta": 0.0195
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "7.11",
+   "id": "S1-01",
+   "tytul": "Ściana S1-01 (P1, zewnętrzna nośna)",
+   "rodzaj": "sciana",
+   "wykorzystanie": 0.6029,
+   "ok": true,
+   "przyjeto": [
+    "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
+   ],
+   "warunki": [
+    {
+     "opis": "Smukłość ściany",
+     "E": 16.2778,
+     "R": 27.0,
+     "eta": 0.6029
+    },
+    {
+     "opis": "Nośność — przekrój górny",
+     "E": 69.7761,
+     "R": 473.6395,
+     "eta": 0.1473
+    },
+    {
+     "opis": "Nośność — połowa wysokości",
+     "E": 156.4771,
+     "R": 415.8207,
+     "eta": 0.3763
+    },
+    {
+     "opis": "Nośność — przekrój dolny",
+     "E": 243.1781,
+     "R": 543.0288,
+     "eta": 0.4478
+    },
+    {
+     "opis": "Obciążenie poziome — przesklepienie",
+     "E": 1.4637,
+     "R": 16.9976,
+     "eta": 0.0861
+    },
+    {
+     "opis": "Docisk",
+     "E": 41.0279,
+     "R": 304.0056,
+     "eta": 0.135
+    },
+    {
+     "opis": "Docisk",
+     "E": 26.9486,
+     "R": 270.8036,
+     "eta": 0.0995
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "7.12",
+   "id": "S1-02",
+   "tytul": "Ściana S1-02 (P1, zewnętrzna nośna)",
+   "rodzaj": "sciana",
+   "wykorzystanie": 0.4522,
+   "ok": true,
+   "przyjeto": [
+    "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
+   ],
+   "warunki": [
+    {
+     "opis": "Smukłość ściany",
+     "E": 12.2083,
+     "R": 27.0,
+     "eta": 0.4522
+    },
+    {
+     "opis": "Nośność — przekrój górny",
+     "E": 55.4011,
+     "R": 668.6947,
+     "eta": 0.0828
+    },
+    {
+     "opis": "Nośność — połowa wysokości",
+     "E": 73.3689,
+     "R": 446.5802,
+     "eta": 0.1643
+    },
+    {
+     "opis": "Nośność — przekrój dolny",
+     "E": 91.3368,
+     "R": 729.6135,
+     "eta": 0.1252
+    },
+    {
+     "opis": "Obciążenie poziome — przesklepienie",
+     "E": 1.4637,
+     "R": 16.9976,
+     "eta": 0.0861
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "7.13",
+   "id": "S1-03",
+   "tytul": "Ściana S1-03 (P1, zewnętrzna nośna)",
+   "rodzaj": "sciana",
+   "wykorzystanie": 0.4522,
+   "ok": true,
+   "przyjeto": [
+    "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
+   ],
+   "warunki": [
+    {
+     "opis": "Smukłość ściany",
+     "E": 12.2083,
+     "R": 27.0,
+     "eta": 0.4522
+    },
+    {
+     "opis": "Nośność — przekrój górny",
+     "E": 23.2282,
+     "R": 652.0869,
+     "eta": 0.0356
+    },
+    {
+     "opis": "Nośność — połowa wysokości",
+     "E": 24.8371,
+     "R": 61.6196,
+     "eta": 0.4031
+    },
+    {
+     "opis": "Nośność — przekrój dolny",
+     "E": 26.446,
+     "R": 729.6135,
+     "eta": 0.0362
+    },
+    {
+     "opis": "Obciążenie poziome — przesklepienie",
+     "E": 1.4637,
+     "R": 16.9976,
+     "eta": 0.0861
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "7.14",
+   "id": "S1-04",
+   "tytul": "Ściana S1-04 (P1, zewnętrzna nośna)",
+   "rodzaj": "sciana",
+   "wykorzystanie": 0.6029,
+   "ok": true,
+   "przyjeto": [
+    "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
+   ],
+   "warunki": [
+    {
+     "opis": "Smukłość ściany",
+     "E": 16.2778,
+     "R": 27.0,
+     "eta": 0.6029
+    },
+    {
+     "opis": "Nośność — przekrój górny",
+     "E": 101.4689,
+     "R": 372.0503,
+     "eta": 0.2727
+    },
+    {
+     "opis": "Nośność — połowa wysokości",
+     "E": 137.4823,
+     "R": 364.2597,
+     "eta": 0.3774
+    },
+    {
+     "opis": "Nośność — przekrój dolny",
+     "E": 173.4956,
+     "R": 563.4081,
+     "eta": 0.3079
+    },
+    {
+     "opis": "Obciążenie poziome — przesklepienie",
+     "E": 1.4637,
+     "R": 16.9976,
+     "eta": 0.0861
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "7.15",
+   "id": "S1-05",
+   "tytul": "Ściana S1-05 (P1, wewnętrzna nośna)",
+   "rodzaj": "sciana",
+   "wykorzystanie": 1.4335,
+   "ok": false,
+   "przyjeto": [
+    "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
+   ],
+   "warunki": [
+    {
+     "opis": "Smukłość ściany",
+     "E": 16.2778,
+     "R": 27.0,
+     "eta": 0.6029
+    },
+    {
+     "opis": "Nośność — przekrój górny",
+     "E": 416.9854,
+     "R": 473.6775,
+     "eta": 0.8803
+    },
+    {
+     "opis": "Nośność — połowa wysokości",
+     "E": 560.08,
+     "R": 390.7165,
+     "eta": 1.4335
+    },
+    {
+     "opis": "Nośność — przekrój dolny",
+     "E": 703.1745,
+     "R": 515.0819,
+     "eta": 1.3652
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "7.16",
+   "id": "S1-06",
+   "tytul": "Ściana S1-06 (P1, wewnętrzna nośna)",
+   "rodzaj": "sciana",
+   "wykorzystanie": 4.3007,
+   "ok": false,
+   "przyjeto": [
+    "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
+   ],
+   "warunki": [
+    {
+     "opis": "Smukłość ściany",
+     "E": 16.2778,
+     "R": 27.0,
+     "eta": 0.6029
+    },
+    {
+     "opis": "Nośność — przekrój górny",
+     "E": 864.3652,
+     "R": 349.7443,
+     "eta": 2.4714
+    },
+    {
+     "opis": "Nośność — połowa wysokości",
+     "E": 1216.6498,
+     "R": 283.6154,
+     "eta": 4.2898
+    },
+    {
+     "opis": "Nośność — przekrój dolny",
+     "E": 1568.9343,
+     "R": 364.8067,
+     "eta": 4.3007
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "7.17",
+   "id": "S1-07",
+   "tytul": "Ściana S1-07 (P1, wewnętrzna nośna)",
+   "rodzaj": "sciana",
+   "wykorzystanie": 0.4522,
+   "ok": true,
+   "przyjeto": [
+    "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
+   ],
+   "warunki": [
+    {
+     "opis": "Smukłość ściany",
+     "E": 12.2083,
+     "R": 27.0,
+     "eta": 0.4522
+    },
+    {
+     "opis": "Nośność — przekrój górny",
+     "E": 20.5388,
+     "R": 729.6135,
+     "eta": 0.0282
+    },
+    {
+     "opis": "Nośność — połowa wysokości",
+     "E": 27.6451,
+     "R": 649.8778,
+     "eta": 0.0425
+    },
+    {
+     "opis": "Nośność — przekrój dolny",
+     "E": 34.7515,
+     "R": 729.6135,
+     "eta": 0.0476
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "7.18",
+   "id": "S1-08",
+   "tytul": "Ściana S1-08 (P1, wewnętrzna nośna)",
+   "rodzaj": "sciana",
+   "wykorzystanie": 2.333,
+   "ok": false,
+   "przyjeto": [
+    "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
+   ],
+   "warunki": [
+    {
+     "opis": "Smukłość ściany",
+     "E": 12.2083,
+     "R": 27.0,
+     "eta": 0.4522
+    },
+    {
+     "opis": "Nośność — przekrój górny",
+     "E": 562.2923,
+     "R": 687.6756,
+     "eta": 0.8177
+    },
+    {
+     "opis": "Nośność — połowa wysokości",
+     "E": 569.3987,
+     "R": 647.8411,
+     "eta": 0.8789
+    },
+    {
+     "opis": "Nośność — przekrój dolny",
+     "E": 576.5051,
+     "R": 729.6135,
+     "eta": 0.7902
+    },
+    {
+     "opis": "Docisk",
+     "E": 590.5873,
+     "R": 253.1447,
+     "eta": 2.333
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "7.19",
+   "id": "S1-09",
+   "tytul": "Ściana S1-09 (P1, wewnętrzna nośna)",
+   "rodzaj": "sciana",
+   "wykorzystanie": 1.932,
+   "ok": false,
+   "przyjeto": [
+    "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
+   ],
+   "warunki": [
+    {
+     "opis": "Smukłość ściany",
+     "E": 12.2083,
+     "R": 27.0,
+     "eta": 0.4522
+    },
+    {
+     "opis": "Nośność — przekrój górny",
+     "E": 457.9776,
+     "R": 688.1561,
+     "eta": 0.6655
+    },
+    {
+     "opis": "Nośność — połowa wysokości",
+     "E": 465.084,
+     "R": 648.2065,
+     "eta": 0.7175
+    },
+    {
+     "opis": "Nośność — przekrój dolny",
+     "E": 472.1903,
+     "R": 729.6135,
+     "eta": 0.6472
+    },
+    {
+     "opis": "Docisk",
+     "E": 489.0861,
+     "R": 253.1447,
+     "eta": 1.932
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "7.20",
+   "id": "S0-01",
+   "tytul": "Ściana S0-01 (P0, zewnętrzna nośna)",
+   "rodzaj": "sciana",
+   "wykorzystanie": 1.4781,
+   "ok": false,
+   "przyjeto": [
+    "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
+   ],
+   "warunki": [
+    {
+     "opis": "Smukłość ściany",
+     "E": 16.2778,
+     "R": 27.0,
+     "eta": 0.6029
+    },
+    {
+     "opis": "Nośność — przekrój górny",
+     "E": 59.8396,
+     "R": 364.8067,
+     "eta": 0.164
+    },
+    {
+     "opis": "Nośność — połowa wysokości",
+     "E": 299.5239,
+     "R": 290.9276,
+     "eta": 1.0295
+    },
+    {
+     "opis": "Nośność — przekrój dolny",
+     "E": 539.2083,
+     "R": 364.8067,
+     "eta": 1.4781
+    },
+    {
+     "opis": "Obciążenie poziome — przesklepienie",
+     "E": 1.4637,
+     "R": 16.9976,
+     "eta": 0.0861
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "7.21",
+   "id": "S0-06",
+   "tytul": "Ściana S0-06 (P0, zewnętrzna nośna)",
+   "rodzaj": "sciana",
+   "wykorzystanie": 0.6029,
+   "ok": true,
+   "przyjeto": [
+    "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
+   ],
+   "warunki": [
+    {
+     "opis": "Smukłość ściany",
+     "E": 16.2778,
+     "R": 27.0,
+     "eta": 0.6029
+    },
+    {
+     "opis": "Nośność — przekrój górny",
+     "E": 41.2712,
+     "R": 361.966,
+     "eta": 0.114
+    },
+    {
+     "opis": "Nośność — połowa wysokości",
+     "E": 55.0554,
+     "R": 288.5135,
+     "eta": 0.1908
+    },
+    {
+     "opis": "Nośność — przekrój dolny",
+     "E": 68.8397,
+     "R": 364.8067,
+     "eta": 0.1887
+    },
+    {
+     "opis": "Obciążenie poziome — przesklepienie",
+     "E": 1.4637,
+     "R": 16.9976,
+     "eta": 0.0861
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "7.22",
+   "id": "S0-07",
+   "tytul": "Ściana S0-07 (P0, zewnętrzna nośna)",
+   "rodzaj": "sciana",
+   "wykorzystanie": 0.6029,
+   "ok": true,
+   "przyjeto": [
+    "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
+   ],
+   "warunki": [
+    {
+     "opis": "Smukłość ściany",
+     "E": 16.2778,
+     "R": 27.0,
+     "eta": 0.6029
+    },
+    {
+     "opis": "Nośność — przekrój górny",
+     "E": 161.1029,
+     "R": 602.0301,
+     "eta": 0.2676
+    },
+    {
+     "opis": "Nośność — połowa wysokości",
+     "E": 209.4924,
+     "R": 478.3478,
+     "eta": 0.4379
+    },
+    {
+     "opis": "Nośność — przekrój dolny",
+     "E": 257.8819,
+     "R": 602.9863,
+     "eta": 0.4277
+    },
+    {
+     "opis": "Obciążenie poziome — przesklepienie",
+     "E": 1.4637,
+     "R": 16.9976,
+     "eta": 0.0861
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "7.23",
+   "id": "S0-08",
+   "tytul": "Ściana S0-08 (P0, wewnętrzna nośna)",
+   "rodzaj": "sciana",
+   "wykorzystanie": 2.2716,
+   "ok": false,
+   "przyjeto": [
+    "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
+   ],
+   "warunki": [
+    {
+     "opis": "Smukłość ściany",
+     "E": 16.2778,
+     "R": 27.0,
+     "eta": 0.6029
+    },
+    {
+     "opis": "Nośność — przekrój górny",
+     "E": 890.8703,
+     "R": 522.898,
+     "eta": 1.7037
+    },
+    {
+     "opis": "Nośność — połowa wysokości",
+     "E": 940.9763,
+     "R": 414.2346,
+     "eta": 2.2716
+    },
+    {
+     "opis": "Nośność — przekrój dolny",
+     "E": 991.0823,
+     "R": 526.3692,
+     "eta": 1.8829
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "7.24",
+   "id": "S0-10",
+   "tytul": "Ściana S0-10 (P0, wewnętrzna nośna)",
+   "rodzaj": "sciana",
+   "wykorzystanie": 4.5337,
+   "ok": false,
+   "przyjeto": [
+    "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
+   ],
+   "warunki": [
+    {
+     "opis": "Smukłość ściany",
+     "E": 16.2778,
+     "R": 27.0,
+     "eta": 0.6029
+    },
+    {
+     "opis": "Nośność — przekrój górny",
+     "E": 1120.511,
+     "R": 364.8067,
+     "eta": 3.0715
+    },
+    {
+     "opis": "Nośność — połowa wysokości",
+     "E": 1311.799,
+     "R": 289.3428,
+     "eta": 4.5337
+    },
+    {
+     "opis": "Nośność — przekrój dolny",
+     "E": 1503.087,
+     "R": 364.8067,
+     "eta": 4.1202
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "7.25",
+   "id": "S0-11",
+   "tytul": "Ściana S0-11 (P0, wewnętrzna nośna)",
+   "rodzaj": "sciana",
+   "wykorzystanie": 0.6029,
+   "ok": true,
+   "przyjeto": [
+    "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
+   ],
+   "warunki": [
+    {
+     "opis": "Smukłość ściany",
+     "E": 16.2778,
+     "R": 27.0,
+     "eta": 0.6029
+    },
+    {
+     "opis": "Nośność — przekrój górny",
+     "E": 42.9786,
+     "R": 364.8067,
+     "eta": 0.1178
+    },
+    {
+     "opis": "Nośność — połowa wysokości",
+     "E": 96.6,
+     "R": 290.9276,
+     "eta": 0.332
+    },
+    {
+     "opis": "Nośność — przekrój dolny",
+     "E": 150.2214,
+     "R": 364.8067,
+     "eta": 0.4118
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "7.26",
+   "id": "S0-12",
+   "tytul": "Ściana S0-12 (P0, wewnętrzna nośna)",
+   "rodzaj": "sciana",
+   "wykorzystanie": 0.0,
+   "ok": true,
+   "przyjeto": [],
+   "warunki": [],
+   "dane": {}
+  },
+  {
+   "nr": "7.27",
+   "id": "S0-13",
+   "tytul": "Ściana S0-13 (P0, wewnętrzna nośna)",
+   "rodzaj": "sciana",
+   "wykorzystanie": 0.0,
+   "ok": true,
+   "przyjeto": [],
+   "warunki": [],
+   "dane": {}
+  },
+  {
+   "nr": "7.28",
+   "id": "S0-15",
+   "tytul": "Ściana S0-15 (P0, wewnętrzna nośna)",
+   "rodzaj": "sciana",
+   "wykorzystanie": 0.8072,
+   "ok": true,
+   "przyjeto": [
+    "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
+   ],
+   "warunki": [
+    {
+     "opis": "Smukłość ściany",
+     "E": 16.2778,
+     "R": 27.0,
+     "eta": 0.6029
+    },
+    {
+     "opis": "Nośność — przekrój górny",
+     "E": 77.4076,
+     "R": 351.3617,
+     "eta": 0.2203
+    },
+    {
+     "opis": "Nośność — połowa wysokości",
+     "E": 185.9397,
+     "R": 288.6758,
+     "eta": 0.6441
+    },
+    {
+     "opis": "Nośność — przekrój dolny",
+     "E": 294.4718,
+     "R": 364.8067,
+     "eta": 0.8072
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "7.29",
+   "id": "S0-16",
+   "tytul": "Ściana S0-16 (P0, wewnętrzna nośna)",
+   "rodzaj": "sciana",
+   "wykorzystanie": 0.4522,
+   "ok": true,
+   "przyjeto": [
+    "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
+   ],
+   "warunki": [
+    {
+     "opis": "Smukłość ściany",
+     "E": 12.2083,
+     "R": 27.0,
+     "eta": 0.4522
+    },
+    {
+     "opis": "Nośność — przekrój górny",
+     "E": 223.6222,
+     "R": 721.1965,
+     "eta": 0.3101
+    },
+    {
+     "opis": "Nośność — połowa wysokości",
+     "E": 226.4953,
+     "R": 649.8778,
+     "eta": 0.3485
+    },
+    {
+     "opis": "Nośność — przekrój dolny",
+     "E": 229.3684,
+     "R": 729.6135,
+     "eta": 0.3144
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "7.30",
+   "id": "S0-02",
+   "tytul": "Ściana S0-02 (P0, zewnętrzna nośna)",
+   "rodzaj": "sciana",
+   "wykorzystanie": 0.4491,
+   "ok": true,
+   "przyjeto": [
+    "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
+   ],
+   "warunki": [
+    {
+     "opis": "Smukłość ściany",
+     "E": 12.125,
+     "R": 27.0,
+     "eta": 0.4491
+    },
+    {
+     "opis": "Nośność — przekrój górny",
+     "E": 8.1622,
+     "R": 496.7677,
+     "eta": 0.0164
+    },
+    {
+     "opis": "Nośność — połowa wysokości",
+     "E": 14.1941,
+     "R": 33.2983,
+     "eta": 0.4263
+    },
+    {
+     "opis": "Nośność — przekrój dolny",
+     "E": 20.2261,
+     "R": 729.6135,
+     "eta": 0.0277
+    },
+    {
+     "opis": "Obciążenie poziome — przesklepienie",
+     "E": 1.4637,
+     "R": 17.232,
+     "eta": 0.0849
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "7.31",
+   "id": "S0-03",
+   "tytul": "Ściana S0-03 (P0, zewnętrzna nośna)",
+   "rodzaj": "sciana",
+   "wykorzystanie": 0.7376,
+   "ok": true,
+   "przyjeto": [
+    "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
+   ],
+   "warunki": [
+    {
+     "opis": "Smukłość ściany",
+     "E": 12.125,
+     "R": 27.0,
+     "eta": 0.4491
+    },
+    {
+     "opis": "Nośność — przekrój górny",
+     "E": 14.4218,
+     "R": 496.7677,
+     "eta": 0.029
+    },
+    {
+     "opis": "Nośność — połowa wysokości",
+     "E": 23.7548,
+     "R": 32.2074,
+     "eta": 0.7376
+    },
+    {
+     "opis": "Nośność — przekrój dolny",
+     "E": 33.0877,
+     "R": 729.6135,
+     "eta": 0.0453
+    },
+    {
+     "opis": "Obciążenie poziome — przesklepienie",
+     "E": 1.4637,
+     "R": 17.232,
+     "eta": 0.0849
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "7.32",
+   "id": "S0-04",
+   "tytul": "Ściana S0-04 (P0, zewnętrzna nośna)",
+   "rodzaj": "sciana",
+   "wykorzystanie": 0.5988,
+   "ok": true,
+   "przyjeto": [
+    "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
+   ],
+   "warunki": [
+    {
+     "opis": "Smukłość ściany",
+     "E": 16.1667,
+     "R": 27.0,
+     "eta": 0.5988
+    },
+    {
+     "opis": "Nośność — przekrój górny",
+     "E": 88.8938,
+     "R": 306.6489,
+     "eta": 0.2899
+    },
+    {
+     "opis": "Nośność — połowa wysokości",
+     "E": 112.2535,
+     "R": 296.3575,
+     "eta": 0.3788
+    },
+    {
+     "opis": "Nośność — przekrój dolny",
+     "E": 135.6133,
+     "R": 463.9831,
+     "eta": 0.2923
+    },
+    {
+     "opis": "Obciążenie poziome — przesklepienie",
+     "E": 1.4637,
+     "R": 17.232,
+     "eta": 0.0849
+    },
+    {
+     "opis": "Docisk",
+     "E": 60.2012,
+     "R": 266.3967,
+     "eta": 0.226
+    },
+    {
+     "opis": "Docisk",
+     "E": 69.8504,
+     "R": 263.7849,
+     "eta": 0.2648
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "7.33",
+   "id": "S0-17",
+   "tytul": "Ściana S0-17 (P0, wewnętrzna nośna)",
+   "rodzaj": "sciana",
+   "wykorzystanie": 0.4491,
+   "ok": true,
+   "przyjeto": [
+    "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
+   ],
+   "warunki": [
+    {
+     "opis": "Smukłość ściany",
+     "E": 12.125,
+     "R": 27.0,
+     "eta": 0.4491
+    },
+    {
+     "opis": "Nośność — przekrój górny",
+     "E": 32.6294,
+     "R": 685.9267,
+     "eta": 0.0476
+    },
+    {
+     "opis": "Nośność — połowa wysokości",
+     "E": 46.2869,
+     "R": 651.1009,
+     "eta": 0.0711
+    },
+    {
+     "opis": "Nośność — przekrój dolny",
+     "E": 59.9443,
+     "R": 729.6135,
+     "eta": 0.0822
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "8.1",
+   "id": "PF1",
+   "tytul": "Płyta fundamentowa PF1",
+   "rodzaj": "fundament",
+   "wykorzystanie": 0.0831,
+   "ok": true,
+   "przyjeto": [
+    "Płyta gr. 25 cm, C25/30; k_s = 10817 kN/m³ (z osiadania średniego) [UPR]."
+   ],
+   "warunki": [
+    {
+     "opis": "Osiadanie",
+     "E": 4.1526,
+     "R": 50.0,
+     "eta": 0.0831
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "8.2",
+   "id": "ZF1",
+   "tytul": "Ława fundamentowa ZF1 (B = 0,60 m, h = 0,30 m, L = 12,00 m)",
+   "rodzaj": "fundament",
+   "wykorzystanie": 2.5403,
+   "ok": false,
+   "przyjeto": [
+    "Ława 60×30 cm, C25/30; zbrojenie podłużne 4φ12 (A_s = 4,52 cm²), strzemiona φ6 co 30 cm; poprzecznie: nie wymaga zbrojenia poprzecznego (strzemiona konstrukcyjne φ6 co 30 cm)."
+   ],
+   "warunki": [
+    {
+     "opis": "Nośność podłoża (GEO, DA2*)",
+     "E": 114.2772,
+     "R": 158.9542,
+     "eta": 0.7189
+    },
+    {
+     "opis": "Osiadanie",
+     "E": 2.0442,
+     "R": 50.0,
+     "eta": 0.0409
+    },
+    {
+     "opis": "Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m)",
+     "E": 1.0,
+     "R": 0.3937,
+     "eta": 2.5403
+    },
+    {
+     "opis": "Ława betonowa — odsadzka (12.13)",
+     "E": 0.7453,
+     "R": 1.2143,
+     "eta": 0.6138
+    }
+   ],
+   "dane": {
+    "G_k": 70.21347235283736,
+    "Q_k": 12.553404631169238,
+    "D": 0.39365717583684934,
+    "sigma_d": 190.46207497271578
+   }
+  },
+  {
+   "nr": "8.3",
+   "id": "ZF2",
+   "tytul": "Ława fundamentowa ZF2 (B = 0,60 m, h = 0,30 m, L = 6,38 m)",
+   "rodzaj": "fundament",
+   "wykorzystanie": 2.5381,
+   "ok": false,
+   "przyjeto": [
+    "Ława 60×30 cm, C25/30; zbrojenie podłużne 4φ12 (A_s = 4,52 cm²), strzemiona φ6 co 30 cm; poprzecznie: nie wymaga zbrojenia poprzecznego (strzemiona konstrukcyjne φ6 co 30 cm)."
+   ],
+   "warunki": [
+    {
+     "opis": "Nośność podłoża (GEO, DA2*)",
+     "E": 33.4882,
+     "R": 159.0251,
+     "eta": 0.2106
+    },
+    {
+     "opis": "Osiadanie",
+     "E": 0.4826,
+     "R": 50.0,
+     "eta": 0.0097
+    },
+    {
+     "opis": "Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m)",
+     "E": 1.0,
+     "R": 0.394,
+     "eta": 2.5381
+    },
+    {
+     "opis": "Ława betonowa — odsadzka (12.13)",
+     "E": 0.4035,
+     "R": 1.2143,
+     "eta": 0.3323
+    }
+   ],
+   "dane": {
+    "G_k": 18.600880614639767,
+    "Q_k": 1.7902326755840163,
+    "D": 0.3939999999999884,
+    "sigma_d": 55.8137122274193
+   }
+  },
+  {
+   "nr": "8.4",
+   "id": "ZF3",
+   "tytul": "Ława fundamentowa ZF3 (B = 0,60 m, h = 0,30 m, L = 9,38 m)",
+   "rodzaj": "fundament",
+   "wykorzystanie": 1.9843,
+   "ok": false,
+   "przyjeto": [
+    "Ława 60×30 cm, C25/30; zbrojenie podłużne 4φ12 (A_s = 4,52 cm²), strzemiona φ6 co 30 cm; poprzecznie: nie wymaga zbrojenia poprzecznego (strzemiona konstrukcyjne φ6 co 30 cm)."
+   ],
+   "warunki": [
+    {
+     "opis": "Nośność podłoża (GEO, DA2*)",
+     "E": 51.2716,
+     "R": 181.7702,
+     "eta": 0.2821
+    },
+    {
+     "opis": "Osiadanie",
+     "E": 0.7996,
+     "R": 50.0,
+     "eta": 0.016
+    },
+    {
+     "opis": "Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m)",
+     "E": 1.0,
+     "R": 0.5039,
+     "eta": 1.9843
+    },
+    {
+     "opis": "Ława betonowa — odsadzka (12.13)",
+     "E": 0.4992,
+     "R": 1.2143,
+     "eta": 0.4111
+    }
+   ],
+   "dane": {
+    "G_k": 30.411317428756906,
+    "Q_k": 2.7463985930098898,
+    "D": 0.5039473684210474,
+    "sigma_d": 85.4526071928074
+   }
+  },
+  {
+   "nr": "8.5",
+   "id": "ZF4",
+   "tytul": "Ława fundamentowa ZF4 (B = 0,60 m, h = 0,30 m, L = 6,38 m)",
+   "rodzaj": "fundament",
+   "wykorzystanie": 1.8537,
+   "ok": false,
+   "przyjeto": [
+    "Ława 60×30 cm, C25/30; zbrojenie podłużne 4φ12 (A_s = 4,52 cm²), strzemiona φ6 co 30 cm; poprzecznie: nie wymaga zbrojenia poprzecznego (strzemiona konstrukcyjne φ6 co 30 cm)."
+   ],
+   "warunki": [
+    {
+     "opis": "Nośność podłoża (GEO, DA2*)",
+     "E": 52.9117,
+     "R": 189.1192,
+     "eta": 0.2798
+    },
+    {
+     "opis": "Osiadanie",
+     "E": 0.8227,
+     "R": 50.0,
+     "eta": 0.0165
+    },
+    {
+     "opis": "Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m)",
+     "E": 1.0,
+     "R": 0.5395,
+     "eta": 1.8537
+    },
+    {
+     "opis": "Ława betonowa — odsadzka (12.13)",
+     "E": 0.5072,
+     "R": 1.2143,
+     "eta": 0.4177
+    }
+   ],
+   "dane": {
+    "G_k": 31.450917148545134,
+    "Q_k": 2.5683234456458046,
+    "D": 0.5394719544259361,
+    "sigma_d": 88.18621706833699
+   }
+  },
+  {
+   "nr": "8.6",
+   "id": "ZF5",
+   "tytul": "Ława fundamentowa ZF5 (B = 0,60 m, h = 0,30 m, L = 0,62 m)",
+   "rodzaj": "fundament",
+   "wykorzystanie": 0.9091,
+   "ok": true,
+   "przyjeto": [
+    "Ława 60×30 cm, C25/30; zbrojenie podłużne 4φ12 (A_s = 4,52 cm²), strzemiona φ6 co 30 cm; poprzecznie: nie wymaga zbrojenia poprzecznego (strzemiona konstrukcyjne φ6 co 30 cm)."
+   ],
+   "warunki": [
+    {
+     "opis": "Nośność podłoża (GEO, DA2*)",
+     "E": 10.1453,
+     "R": 191.2972,
+     "eta": 0.053
+    },
+    {
+     "opis": "Osiadanie",
+     "E": 0.1064,
+     "R": 50.0,
+     "eta": 0.0021
+    },
+    {
+     "opis": "Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m)",
+     "E": 0.5,
+     "R": 0.55,
+     "eta": 0.9091
+    },
+    {
+     "opis": "Ława betonowa — odsadzka (12.13)",
+     "E": 0.2221,
+     "R": 1.2143,
+     "eta": 0.1829
+    }
+   ],
+   "dane": {
+    "G_k": 1.1249999999999998,
+    "Q_k": 0,
+    "D": 0.5499999999999999,
+    "sigma_d": 16.90875
+   }
+  },
+  {
+   "nr": "8.7",
+   "id": "ZF6",
+   "tytul": "Ława fundamentowa ZF6 (B = 0,60 m, h = 0,30 m, L = 12,00 m)",
+   "rodzaj": "fundament",
+   "wykorzystanie": 2.5381,
+   "ok": false,
+   "przyjeto": [
+    "Ława 60×30 cm, C25/30; zbrojenie podłużne 4φ12 (A_s = 4,52 cm²), strzemiona φ6 co 30 cm; poprzecznie: nie wymaga zbrojenia poprzecznego (strzemiona konstrukcyjne φ6 co 30 cm)."
+   ],
+   "warunki": [
+    {
+     "opis": "Nośność podłoża (GEO, DA2*)",
+     "E": 101.9377,
+     "R": 159.0251,
+     "eta": 0.641
+    },
+    {
+     "opis": "Osiadanie",
+     "E": 1.7762,
+     "R": 50.0,
+     "eta": 0.0355
+    },
+    {
+     "opis": "Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m)",
+     "E": 1.0,
+     "R": 0.394,
+     "eta": 2.5381
+    },
+    {
+     "opis": "Ława betonowa — odsadzka (12.13)",
+     "E": 0.7039,
+     "R": 1.2143,
+     "eta": 0.5797
+    }
+   ],
+   "dane": {
+    "G_k": 60.834041112932674,
+    "Q_k": 12.355618301990827,
+    "D": 0.3939999999999883,
+    "sigma_d": 169.89622473405018
+   }
+  },
+  {
+   "nr": "8.8",
+   "id": "ZF7",
+   "tytul": "Ława fundamentowa ZF7 (B = 0,60 m, h = 0,30 m, L = 8,75 m)",
+   "rodzaj": "fundament",
+   "wykorzystanie": 2.5381,
+   "ok": false,
+   "przyjeto": [
+    "Ława 60×30 cm, C25/30; zbrojenie podłużne 4φ12 (A_s = 4,52 cm²), strzemiona φ6 co 30 cm; poprzecznie: nie wymaga zbrojenia poprzecznego (strzemiona konstrukcyjne φ6 co 30 cm)."
+   ],
+   "warunki": [
+    {
+     "opis": "Nośność podłoża (GEO, DA2*)",
+     "E": 222.9703,
+     "R": 159.0251,
+     "eta": 1.4021
+    },
+    {
+     "opis": "Osiadanie",
+     "E": 4.3195,
+     "R": 50.0,
+     "eta": 0.0864
+    },
+    {
+     "opis": "Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m)",
+     "E": 1.0,
+     "R": 0.394,
+     "eta": 2.5381
+    },
+    {
+     "opis": "Ława betonowa — odsadzka (12.13)",
+     "E": 1.0411,
+     "R": 1.2143,
+     "eta": 0.8574
+    }
+   ],
+   "dane": {
+    "G_k": 144.6246886967278,
+    "Q_k": 21.6994305086151,
+    "D": 0.39399999999998836,
+    "sigma_d": 371.6171412471458
+   }
+  },
+  {
+   "nr": "8.9",
+   "id": "ZF8",
+   "tytul": "Ława fundamentowa ZF8 (B = 0,50 m, h = 0,25 m, L = 5,88 m)",
+   "rodzaj": "fundament",
+   "wykorzystanie": 4.4496,
+   "ok": false,
+   "przyjeto": [
+    "Ława 50×25 cm, C25/30; zbrojenie podłużne 4φ12 (A_s = 4,52 cm²), strzemiona φ6 co 30 cm; poprzecznie: φ10 co 25 cm."
+   ],
+   "warunki": [
+    {
+     "opis": "Nośność podłoża (GEO, DA2*)",
+     "E": 623.0662,
+     "R": 140.0283,
+     "eta": 4.4496
+    },
+    {
+     "opis": "Osiadanie",
+     "E": 13.4338,
+     "R": 50.0,
+     "eta": 0.2687
+    },
+    {
+     "opis": "Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m)",
+     "E": 0.5,
+     "R": 0.5,
+     "eta": 1.0
+    },
+    {
+     "opis": "Zbrojenie poprzeczne ławy",
+     "E": 181.8065,
+     "R": 314.1593,
+     "eta": 0.5787
+    }
+   ],
+   "dane": {
+    "G_k": 385.3839023844836,
+    "Q_k": 94.12746301224492,
+    "D": 0.5,
+    "sigma_d": 1246.1323704304891
+   }
+  },
+  {
+   "nr": "8.10",
+   "id": "ZF9",
+   "tytul": "Ława fundamentowa ZF9 (B = 0,50 m, h = 0,25 m, L = 3,50 m)",
+   "rodzaj": "fundament",
+   "wykorzystanie": 2.5651,
+   "ok": false,
+   "przyjeto": [
+    "Ława 50×25 cm, C25/30; zbrojenie podłużne 4φ12 (A_s = 4,52 cm²), strzemiona φ6 co 30 cm; poprzecznie: φ10 co 25 cm."
+   ],
+   "warunki": [
+    {
+     "opis": "Nośność podłoża (GEO, DA2*)",
+     "E": 359.1846,
+     "R": 140.0283,
+     "eta": 2.5651
+    },
+    {
+     "opis": "Osiadanie",
+     "E": 7.5361,
+     "R": 50.0,
+     "eta": 0.1507
+    },
+    {
+     "opis": "Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m)",
+     "E": 0.5,
+     "R": 0.5,
+     "eta": 1.0
+    },
+    {
+     "opis": "Zbrojenie poprzeczne ławy",
+     "E": 104.32,
+     "R": 314.1593,
+     "eta": 0.3321
+    }
+   ],
+   "dane": {
+    "G_k": 217.75333593780462,
+    "Q_k": 58.22948476980969,
+    "D": 0.5,
+    "sigma_d": 718.3691448878805
+   }
+  },
+  {
+   "nr": "8.11",
+   "id": "ZF10",
+   "tytul": "Ława fundamentowa ZF10 (B = 0,50 m, h = 0,25 m, L = 3,62 m)",
+   "rodzaj": "fundament",
+   "wykorzystanie": 1.0,
+   "ok": true,
+   "przyjeto": [
+    "Ława 50×25 cm, C25/30; zbrojenie podłużne 4φ12 (A_s = 4,52 cm²), strzemiona φ6 co 30 cm; poprzecznie: nie wymaga zbrojenia poprzecznego (strzemiona konstrukcyjne φ6 co 30 cm)."
+   ],
+   "warunki": [
+    {
+     "opis": "Nośność podłoża (GEO, DA2*)",
+     "E": 59.1015,
+     "R": 140.0283,
+     "eta": 0.4221
+    },
+    {
+     "opis": "Osiadanie",
+     "E": 0.9879,
+     "R": 50.0,
+     "eta": 0.0198
+    },
+    {
+     "opis": "Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m)",
+     "E": 0.5,
+     "R": 0.5,
+     "eta": 1.0
+    },
+    {
+     "opis": "Ława betonowa — odsadzka (12.13)",
+     "E": 0.5872,
+     "R": 1.3281,
+     "eta": 0.4421
+    }
+   ],
+   "dane": {
+    "G_k": 37.80693558203125,
+    "Q_k": 2.5325638552700953,
+    "D": 0.5,
+    "sigma_d": 118.20307185438952
+   }
+  },
+  {
+   "nr": "8.12",
+   "id": "ZF11",
+   "tytul": "Ława fundamentowa ZF11 (B = 0,50 m, h = 0,25 m, L = 3,62 m)",
+   "rodzaj": "fundament",
+   "wykorzystanie": 2.352,
+   "ok": false,
+   "przyjeto": [
+    "Ława 50×25 cm, C25/30; zbrojenie podłużne 4φ12 (A_s = 4,52 cm²), strzemiona φ6 co 30 cm; poprzecznie: φ10 co 25 cm."
+   ],
+   "warunki": [
+    {
+     "opis": "Nośność podłoża (GEO, DA2*)",
+     "E": 329.3435,
+     "R": 140.0283,
+     "eta": 2.352
+    },
+    {
+     "opis": "Osiadanie",
+     "E": 6.7649,
+     "R": 50.0,
+     "eta": 0.1353
+    },
+    {
+     "opis": "Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m)",
+     "E": 0.5,
+     "R": 0.5,
+     "eta": 1.0
+    },
+    {
+     "opis": "Zbrojenie poprzeczne ławy",
+     "E": 95.603,
+     "R": 314.1593,
+     "eta": 0.3043
+    }
+   ],
+   "dane": {
+    "G_k": 210.87183285928705,
+    "Q_k": 38.32397112215936,
+    "D": 0.5,
+    "sigma_d": 658.6869308050617
+   }
+  },
+  {
+   "nr": "8.13",
+   "id": "ZF12",
+   "tytul": "Ława fundamentowa ZF12 (B = 0,50 m, h = 0,25 m, L = 3,62 m)",
+   "rodzaj": "fundament",
+   "wykorzystanie": 1.9831,
+   "ok": false,
+   "przyjeto": [
+    "Ława 50×25 cm, C25/30; zbrojenie podłużne 4φ12 (A_s = 4,52 cm²), strzemiona φ6 co 30 cm; poprzecznie: nie wymaga zbrojenia poprzecznego (strzemiona konstrukcyjne φ6 co 30 cm)."
+   ],
+   "warunki": [
+    {
+     "opis": "Nośność podłoża (GEO, DA2*)",
+     "E": 277.688,
+     "R": 140.0283,
+     "eta": 1.9831
+    },
+    {
+     "opis": "Osiadanie",
+     "E": 5.6533,
+     "R": 50.0,
+     "eta": 0.1131
+    },
+    {
+     "opis": "Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m)",
+     "E": 0.5,
+     "R": 0.5,
+     "eta": 1.0
+    },
+    {
+     "opis": "Ława betonowa — odsadzka (12.13)",
+     "E": 1.2727,
+     "R": 1.3281,
+     "eta": 0.9583
+    }
+   ],
+   "dane": {
+    "G_k": 172.7066155813889,
+    "Q_k": 37.505640499819116,
+    "D": 0.5,
+    "sigma_d": 555.3759432262468
+   }
+  },
+  {
+   "nr": "8.14",
+   "id": "ZF13",
+   "tytul": "Ława fundamentowa ZF13 (B = 0,50 m, h = 0,25 m, L = 2,88 m)",
+   "rodzaj": "fundament",
+   "wykorzystanie": 1.0231,
+   "ok": false,
+   "przyjeto": [
+    "Ława 50×25 cm, C25/30; zbrojenie podłużne 4φ12 (A_s = 4,52 cm²), strzemiona φ6 co 30 cm; poprzecznie: nie wymaga zbrojenia poprzecznego (strzemiona konstrukcyjne φ6 co 30 cm)."
+   ],
+   "warunki": [
+    {
+     "opis": "Nośność podłoża (GEO, DA2*)",
+     "E": 143.2586,
+     "R": 140.0283,
+     "eta": 1.0231
+    },
+    {
+     "opis": "Osiadanie",
+     "E": 2.7342,
+     "R": 50.0,
+     "eta": 0.0547
+    },
+    {
+     "opis": "Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m)",
+     "E": 0.5,
+     "R": 0.5,
+     "eta": 1.0
+    },
+    {
+     "opis": "Ława betonowa — odsadzka (12.13)",
+     "E": 0.9142,
+     "R": 1.3281,
+     "eta": 0.6883
+    }
+   ],
+   "dane": {
+    "G_k": 85.35282838225453,
+    "Q_k": 21.08853209947717,
+    "D": 0.5,
+    "sigma_d": 286.5172239325708
+   }
+  },
+  {
+   "nr": "8.15",
+   "id": "ZF14",
+   "tytul": "Ława fundamentowa ZF14 (B = 0,50 m, h = 0,25 m, L = 5,88 m)",
+   "rodzaj": "fundament",
+   "wykorzystanie": 1.3102,
+   "ok": false,
+   "przyjeto": [
+    "Ława 50×25 cm, C25/30; zbrojenie podłużne 4φ12 (A_s = 4,52 cm²), strzemiona φ6 co 30 cm; poprzecznie: nie wymaga zbrojenia poprzecznego (strzemiona konstrukcyjne φ6 co 30 cm)."
+   ],
+   "warunki": [
+    {
+     "opis": "Nośność podłoża (GEO, DA2*)",
+     "E": 183.4686,
+     "R": 140.0283,
+     "eta": 1.3102
+    },
+    {
+     "opis": "Osiadanie",
+     "E": 3.5878,
+     "R": 50.0,
+     "eta": 0.0718
+    },
+    {
+     "opis": "Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m)",
+     "E": 0.5,
+     "R": 0.5,
+     "eta": 1.0
+    },
+    {
+     "opis": "Ława betonowa — odsadzka (12.13)",
+     "E": 1.0345,
+     "R": 1.3281,
+     "eta": 0.7789
+    }
+   ],
+   "dane": {
+    "G_k": 116.3400941769554,
+    "Q_k": 20.638166910526266,
+    "D": 0.5,
+    "sigma_d": 366.9371538517992
+   }
+  },
+  {
+   "nr": "8.16",
+   "id": "ZF15",
+   "tytul": "Ława fundamentowa ZF15 (B = 0,50 m, h = 0,25 m, L = 6,38 m)",
+   "rodzaj": "fundament",
+   "wykorzystanie": 1.0,
+   "ok": true,
+   "przyjeto": [
+    "Ława 50×25 cm, C25/30; zbrojenie podłużne 4φ12 (A_s = 4,52 cm²), strzemiona φ6 co 30 cm; poprzecznie: nie wymaga zbrojenia poprzecznego (strzemiona konstrukcyjne φ6 co 30 cm)."
+   ],
+   "warunki": [
+    {
+     "opis": "Nośność podłoża (GEO, DA2*)",
+     "E": 60.8402,
+     "R": 140.0283,
+     "eta": 0.4345
+    },
+    {
+     "opis": "Osiadanie",
+     "E": 1.0824,
+     "R": 50.0,
+     "eta": 0.0216
+    },
+    {
+     "opis": "Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m)",
+     "E": 0.5,
+     "R": 0.5,
+     "eta": 1.0
+    },
+    {
+     "opis": "Ława betonowa — odsadzka (12.13)",
+     "E": 0.5957,
+     "R": 1.3281,
+     "eta": 0.4486
+    }
+   ],
+   "dane": {
+    "G_k": 36.26544323611002,
+    "Q_k": 7.625468581377306,
+    "D": 0.5,
+    "sigma_d": 121.68039960956303
+   }
+  },
+  {
+   "nr": "8.17",
+   "id": "SF1",
+   "tytul": "Stopa fundamentowa SF1 (1,00 × 1,01 × 0,45 m) pod słupem SL1",
+   "rodzaj": "fundament",
+   "wykorzystanie": 1.8519,
+   "ok": false,
+   "przyjeto": [
+    "Stopa 100×101×45 cm, C25/30; siatka dołem φ12 co 21 cm w obu kierunkach."
+   ],
+   "warunki": [
+    {
+     "opis": "Nośność podłoża (GEO, DA2*)",
+     "E": 21.5826,
+     "R": 442.3322,
+     "eta": 0.0488
+    },
+    {
+     "opis": "Osiadanie",
+     "E": 0.1543,
+     "R": 50.0,
+     "eta": 0.0031
+    },
+    {
+     "opis": "Głębokość posadowienia",
+     "E": 1.0,
+     "R": 0.54,
+     "eta": 1.8519
+    },
+    {
+     "opis": "Przebicie stopy",
+     "E": 0.0003,
+     "R": 0.7819,
+     "eta": 0.0004
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "8.18",
+   "id": "SF2",
+   "tytul": "Stopa fundamentowa SF2 (1,00 × 1,01 × 0,45 m) pod słupem SL2",
+   "rodzaj": "fundament",
+   "wykorzystanie": 1.8519,
+   "ok": false,
+   "przyjeto": [
+    "Stopa 100×101×45 cm, C25/30; siatka dołem φ12 co 21 cm w obu kierunkach."
+   ],
+   "warunki": [
+    {
+     "opis": "Nośność podłoża (GEO, DA2*)",
+     "E": 21.7559,
+     "R": 442.3322,
+     "eta": 0.0492
+    },
+    {
+     "opis": "Osiadanie",
+     "E": 0.1553,
+     "R": 50.0,
+     "eta": 0.0031
+    },
+    {
+     "opis": "Głębokość posadowienia",
+     "E": 1.0,
+     "R": 0.54,
+     "eta": 1.8519
+    },
+    {
+     "opis": "Przebicie stopy",
+     "E": 0.0004,
+     "R": 0.7819,
+     "eta": 0.0005
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "8.19",
+   "id": "SF3",
+   "tytul": "Stopa fundamentowa SF3 (1,00 × 1,01 × 0,45 m) pod słupem SL3",
+   "rodzaj": "fundament",
+   "wykorzystanie": 1.8572,
+   "ok": false,
+   "przyjeto": [
+    "Stopa 100×101×45 cm, C25/30; siatka dołem φ12 co 21 cm w obu kierunkach."
+   ],
+   "warunki": [
+    {
+     "opis": "Nośność podłoża (GEO, DA2*)",
+     "E": 21.3841,
+     "R": 441.5008,
+     "eta": 0.0484
+    },
+    {
+     "opis": "Osiadanie",
+     "E": 0.1528,
+     "R": 50.0,
+     "eta": 0.0031
+    },
+    {
+     "opis": "Głębokość posadowienia",
+     "E": 1.0,
+     "R": 0.5384,
+     "eta": 1.8572
+    },
+    {
+     "opis": "Przebicie stopy",
+     "E": 0.0003,
+     "R": 0.7819,
+     "eta": 0.0004
+    }
+   ],
+   "dane": {}
+  },
+  {
+   "nr": "8.20",
+   "id": "SF4",
+   "tytul": "Stopa fundamentowa SF4 (1,00 × 1,01 × 0,45 m) pod słupem SL4",
+   "rodzaj": "fundament",
+   "wykorzystanie": 1.8519,
+   "ok": false,
+   "przyjeto": [
+    "Stopa 100×101×45 cm, C25/30; siatka dołem φ12 co 21 cm w obu kierunkach."
+   ],
+   "warunki": [
+    {
+     "opis": "Nośność podłoża (GEO, DA2*)",
+     "E": 21.1389,
+     "R": 442.3322,
+     "eta": 0.0478
+    },
+    {
+     "opis": "Osiadanie",
+     "E": 0.151,
+     "R": 50.0,
+     "eta": 0.003
+    },
+    {
+     "opis": "Głębokość posadowienia",
+     "E": 1.0,
+     "R": 0.54,
+     "eta": 1.8519
+    },
+    {
+     "opis": "Przebicie stopy",
+     "E": 0.0003,
+     "R": 0.7819,
+     "eta": 0.0004
+    }
+   ],
+   "dane": {}
+  }
+ ],
+ "uwagi": [
+  "PL-C2: płyta z łącznikiem termoizolacyjnym i własnymi podporami (belki/słupy) — łącznik przyjęto jako przegubowy (przenoszący siłę poprzeczną, typ „Q”), płyta liczona osobno, podparta na krawędzi przy ścianie [ZAŁ].",
+  "Grupa płyt SW1: MES niewykonalny (MES płyty: za mało podpór) — pominięto",
+  "Grupa płyt WYL1: MES niewykonalny (MES płyty: za mało podpór) — pominięto",
+  "Grupa płyt PL-3: MES niewykonalny (MES płyty: za mało podpór) — pominięto",
+  "Grupa płyt PL-2: MES niewykonalny (MES płyty: za mało podpór) — pominięto",
+  "Ściana nośna S2-07 stoi na płycie ST2 + ST2Z + D2 + D3 bez ściany poniżej — obciążenie liniowe płyty; sprawdzić podciąg/żebro [WYMAGA ANALIZY].",
+  "Ściana nośna S2-08 stoi na płycie ST2 + ST2Z + D2 + D3 bez ściany poniżej — obciążenie liniowe płyty; sprawdzić podciąg/żebro [WYMAGA ANALIZY].",
+  "Ściana nośna S2-09 stoi na płycie ST2 + ST2Z + D2 + D3 bez ściany poniżej — obciążenie liniowe płyty; sprawdzić podciąg/żebro [WYMAGA ANALIZY].",
+  "Grupa płyt IZ-ST2Z: MES niewykonalny (MES płyty: za mało podpór) — pominięto",
+  "Grupa płyt PL-C2: MES niewykonalny (MES płyty: za mało podpór) — pominięto",
+  "Grupa płyt PL-C1: MES niewykonalny (MES płyty: za mało podpór) — pominięto",
+  "Grupa płyt PL-E: MES niewykonalny (MES płyty: za mało podpór) — pominięto",
+  "Grupa płyt PL-DA: MES niewykonalny (MES płyty: za mało podpór) — pominięto",
+  "ST1: podpora punktowa SL1 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]",
+  "ST1: podpora punktowa SL2 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]",
+  "ST1: podpora punktowa SL3 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]",
+  "ST1: podpora punktowa SL4 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]",
+  "BŁĄD ANALIZY (belki pod ST1 + D4): ValueError: operands could not be broadcast together with shapes (78,) (79,)  [pozycje.py:1429] — pozycja pominięta/niekompletna [WYMAGA ANALIZY].",
+  "BŁĄD ANALIZY (ściana S0-05): ValueError: operands could not be broadcast together with shapes (12,) (18,)  [_function_base_impl.py:5041] — pozycja pominięta/niekompletna [WYMAGA ANALIZY].",
+  "BŁĄD ANALIZY (nadproża): KeyError: 'gm2' [pozycje.py:1922] — pozycja pominięta/niekompletna [WYMAGA ANALIZY]."
+ ],
+ "brak_danych": [
+  "PL-C1: brak przegrody — przyjęto płytę bez warstw",
+  "PL-C1: klasa betonu nie wynika z modelu (pole mat / materiał warstwy) — przyjęto C30/37 (XC3)",
+  "PL-C2: brak przegrody — przyjęto płytę bez warstw",
+  "PL-C2: klasa betonu nie wynika z modelu (pole mat / materiał warstwy) — przyjęto C30/37 (XC3)",
+  "IZ-ST2Z: brak przegrody — przyjęto płytę bez warstw",
+  "IZ-ST2Z: klasa betonu nie wynika z modelu (pole mat / materiał warstwy) — przyjęto C30/37 (XC3)",
+  "SW1: brak przegrody — przyjęto płytę bez warstw",
+  "SW1: klasa betonu nie wynika z modelu (pole mat / materiał warstwy) — przyjęto C30/37 (XC4)",
+  "WYL1: brak przegrody — przyjęto płytę bez warstw",
+  "WYL1: klasa betonu nie wynika z modelu (pole mat / materiał warstwy) — przyjęto C30/37 (XC4)"
+ ]
+}

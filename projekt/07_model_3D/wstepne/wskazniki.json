@@ -17,23 +17,23 @@
    "rzedna": 6.3
   }
  ],
- "pow_zabudowy_m2": 187.51,
+ "pow_zabudowy_m2": 187.5,
  "pow_zabudowy_z_plytami_m2": 212.99,
  "pow_brutto_kondygnacji_m2": {
   "P0": 181.78,
   "P1": 117.81,
-  "P2": 96.81
+  "P2": 96.8
  },
  "kubatura_brutto_m3": {
-  "razem": 1354.6,
+  "razem": 1354.5,
   "skladniki": {
    "P0": 578.05,
    "P1": 345.18,
-   "P2": 283.67,
+   "P2": 283.63,
    "plyta ST1": 26.83,
    "plyta ST2": 21.76,
    "plyta ST2Z": 1.8,
-   "plyta D1": 44.15,
+   "plyta D1": 44.14,
    "plyta D2": 8.43,
    "plyta D3": 7.69,
    "plyta D4": 37.03
@@ -310,11 +310,11 @@
     "kond": "P2",
     "nazwa": "Sypialnia rodziców",
     "kategoria": "podstawowa",
-    "pow_netto": 21.78,
+    "pow_netto": 21.19,
     "wysokosc": 2.77,
     "wsp": 1.0,
-    "pow_zaliczona": 21.78,
-    "obwod": 18.93,
+    "pow_zaliczona": 21.19,
+    "obwod": 18.69,
     "pobyt_ludzi": true
    },
    {
@@ -379,19 +379,19 @@
    }
   ],
   "sumy_kategorii": {
-   "podstawowa": 159.13,
+   "podstawowa": 158.54,
    "pomocnicza": 78.58,
    "ruchu": 43.85,
    "techniczna": 14.9
   },
-  "pow_uzytkowa_PU": 237.71,
+  "pow_uzytkowa_PU": 237.12,
   "pow_ruchu": 43.85,
   "pow_techniczna": 14.9,
-  "pow_netto_razem": 296.46,
+  "pow_netto_razem": 295.87,
   "per_kondygnacja": {
    "P0": 145.37,
    "P1": 84.88,
-   "P2": 66.21
+   "P2": 65.62
   }
  },
  "liczba": {

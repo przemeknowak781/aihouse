@@ -6,7 +6,7 @@ Biblioteka `lamela.obliczenia.konstrukcja` (moduły `tarcze`, `tarcze_mes`) · w
 
 > Obliczenia automatyczne. Oznaczenia: [NZW] — wartość zalecana/niezweryfikowana w NA, [UPR] — uproszczenie, [ZAŁ] — założenie, [P] — źródło przytoczone z pamięci. Wymagana weryfikacja projektanta z uprawnieniami.
 
-**Wynik:** maks. wykorzystanie η = 92% — wszystkie warunki spełnione; T_max = 123,3 kN, C_max = 106,6 kN, ugięcie miarodajne 0,71 mm (lim 12,0 mm), EQU η = 5%, stal ≈ 481 kg.
+**Wynik:** maks. wykorzystanie η = 92% — wszystkie warunki spełnione; T_max = 123,3 kN, C_max = 106,6 kN, ugięcie miarodajne 0,66 mm (lim 12,0 mm), EQU η = 5%, stal ≈ 481 kg.
 
 ## Poz. 1 — Ściana-tarcza żelbetowa T-P2-1
 
@@ -14,7 +14,7 @@ Element modelu: `T-P2-1` · maks. wykorzystanie nośności η = 92% · wszystkie
 
 ### Opis i schemat statyczny
 
-Ściana podłużna P2 (oś 1) wariantu W2 — tarcza wspornikowa przenosząca wysunięcie bryły II piętra o 1,50 m na zachód; ściany P1 poniżej z przerwami (otwory P1). Tarcza żelbetowa gr. t = 18 cm, długość L = 13,00 m (x = −1,50…11,50), wysokość H = 3,10 m; beton C30/37 (XC3, c_nom = 35 mm), stal B500SP (f_yd = 434,8 MPa). Otwory: O1 1,80×1,50 m (x = 0,50…2,30, z = 0,90…2,40), O4 3,20×2,40 m (x = 2,90…6,10, z = 0,30…2,70), O2 1,80×1,50 m (x = 6,80…8,60, z = 0,90…2,40), O3 1,80×1,50 m (x = 9,20…11,00, z = 0,90…2,40). Podpory (ściany/elementy poniżej): A: x = 0,00…2,90 m (ściana P1 (oś A → wsch.)), sprężysta k = 475 MN/m²; B: x = 4,40…7,60 m (ściana P1), sprężysta k = 475 MN/m²; C: x = 9,20…11,50 m (ściana P1), sprężysta k = 475 MN/m². Wsporniki: wspornik (zachód) l_k = 1,50 m.
+Ściana podłużna P2 (oś 1) wariantu W2 — tarcza wspornikowa przenosząca wysunięcie bryły II piętra o 1,50 m na zachód; ściany P1 poniżej z przerwami (otwory P1). Tarcza żelbetowa gr. t = 18 cm, długość L = 13,00 m (x = −1,50…11,50), wysokość H = 3,10 m; beton C30/37 (XC3, c_nom = 35 mm), stal B500SP (f_yd = 434,8 MPa). Otwory: O1 1,80×1,50 m (x = 0,50…2,30, z = 0,90…2,40), O4 3,20×2,40 m (x = 2,90…6,10, z = 0,30…2,70), O2 1,80×1,50 m (x = 6,80…8,60, z = 0,90…2,40), O3 1,80×1,50 m (x = 9,20…11,00, z = 0,90…2,40). Podpory (ściany/elementy poniżej): A: x = 0,00…2,90 m (ściana P1 (oś A → wsch.)), sprężysta k = 475 MN/m², tylko docisk; B: x = 4,40…7,60 m (ściana P1), sprężysta k = 475 MN/m², tylko docisk; C: x = 9,20…11,50 m (ściana P1), sprężysta k = 475 MN/m², tylko docisk. Wsporniki: wspornik (zachód) l_k = 1,50 m.
 
 Model MES: 2483 elementów QM6 (bok ≤ 10 cm), 10 kombinacji STR, SLS: 4 charakterystycznych, 1 quasi-stałych. Kombinacja miarodajna (maks. ΣF): 6.10a (wiodące: QA); ΣF_z = 883,9 kN, ΣR = 883,9 kN (błąd 1.7e-13). Naprężenia (obwiednia STR): σ₁,max = 3,82 MPa, σ₂,min = −4,38 MPa (f_ctm = 2,9, f_cd = 21,43 MPa).
 
@@ -205,16 +205,17 @@ Metoda: Wymiarowanie: cięgna F_Ed = max(STM; MES), krzyżulce 0,6·ν'·f_cd, w
 |---|---|---|---|---|---|
 | Zbrojenie poziome środnika (maks.) ≤ siatki obu powierzchni | a_sx,req = 286 mm²/m | a_sx,prov = 447 mm²/m | 64% | spełniony | zał. F |
 | Zbrojenie pionowe środnika (maks.) ≤ siatki obu powierzchni | a_sz,req = 285 mm²/m | a_sz,prov = 447 mm²/m | 64% | spełniony | zał. F |
-| Naprężenie w betonie σ_cd ≤ ν·f_cd | σ_cd = 2,14 MPa | ν·f_cd = 11,31 MPa | 19% | spełniony | zał. F (F.4), (F.7); (6.6N) |
+| Naprężenie w betonie σ_cd ≤ ν·f_cd (ściskanie dwuosiowe: ≤ f_cd) | σ_cd = 1,86 MPa | σ_Rd = 11,31 MPa | 16% | spełniony | zał. F (F.4), (F.7), F(3); (6.6N) |
 
 #### Model kratownicowy — krzyżulce ściskane (6.5.2)
 
-- Nośność krzyżulców w strefie zarysowanej: σ_Rd,max = 0,6·ν'·f_cd, ν' = 1 − f_ck/250 = 0,6·0,880·21,43 = **11,31** MPa *((6.56), (6.57N))*
+- Nośność krzyżulców w strefie zarysowanej (rozciąganie poprzeczne, σ₁ > f_ctd): σ_Rd,max = 0,6·ν'·f_cd, ν' = 1 − f_ck/250 = 0,6·0,880·21,43 = **11,31** MPa *((6.56), (6.57N))*
+- Krzyżulce bez rozciągania poprzecznego (σ₁ z MES ≤ f_ctd, np. pasy ściskane): σ_Rd,max = f_cd = **21,43** MPa *((6.55))*
 - Szerokość krzyżulca na końcu: w = l·sin θ + u·cos θ (węzeł na pasie: l — długość docisku/pasa, u = 2a); węzeł wewnętrzny: w = rozstaw węzłów [UPR] = ****
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Krzyżulec miarodajny (C = 57,6 kN, w = 102 mm) | σ_Ed = 3,14 MPa | σ_Rd,max = 11,31 MPa | 28% | spełniony | (6.56) |
+| Krzyżulec miarodajny (C = 57,6 kN, w = 102 mm, σ₁ = −0,08 MPa) | σ_Ed = 3,14 MPa | σ_Rd,max = 21,43 MPa | 15% | spełniony | (6.55) |
 
 #### Model kratownicowy — węzły (6.5.4) i docisk
 
@@ -261,10 +262,10 @@ Metoda: Wymiarowanie: cięgna F_Ed = max(STM; MES), krzyżulce 0,6·ν'·f_cd, w
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Ugięcie — wspornik (zachód) (quasi-stała, t = ∞, zarysowanie) | w = 0,71 mm | L/250 = 12,00 mm | 6% | spełniony | 7.4.1(4); L = 2·l_k dla wspornika (R5-56) |
-| Przyrost ugięcia — wspornik (zachód) (po wykonaniu wykończeń) | Δw = 0,50 mm | L/500 = 6,00 mm | 8% | spełniony | 7.4.1(5) [NZW] |
-| Ugięcie — przęsło między podporami A–B (quasi-stała, t = ∞, zarysowanie) | w = 0,13 mm | L/250 = 6,00 mm | 2% | spełniony | 7.4.1(4) |
-| Przyrost ugięcia — przęsło między podporami A–B (po wykonaniu wykończeń) | Δw = 0,10 mm | L/500 = 3,00 mm | 3% | spełniony | 7.4.1(5) [NZW] |
+| Ugięcie — wspornik (zachód) (quasi-stała, t = ∞, zarysowanie) | w = 0,66 mm | L/250 = 12,00 mm | 5% | spełniony | 7.4.1(4); L = 2·l_k dla wspornika (R5-56) |
+| Przyrost ugięcia — wspornik (zachód) (po wykonaniu wykończeń) | Δw = 0,45 mm | L/500 = 6,00 mm | 8% | spełniony | 7.4.1(5) [NZW] |
+| Ugięcie — przęsło między podporami A–B (quasi-stała, t = ∞, zarysowanie) | w = 0,11 mm | L/250 = 6,00 mm | 2% | spełniony | 7.4.1(4) |
+| Przyrost ugięcia — przęsło między podporami A–B (po wykonaniu wykończeń) | Δw = 0,08 mm | L/500 = 3,00 mm | 3% | spełniony | 7.4.1(5) [NZW] |
 | Ugięcie — przęsło między podporami B–C (quasi-stała, t = ∞, zarysowanie) | w = 0,06 mm | L/250 = 6,40 mm | 1% | spełniony | 7.4.1(4) |
 | Przyrost ugięcia — przęsło między podporami B–C (po wykonaniu wykończeń) | Δw = 0,04 mm | L/500 = 3,20 mm | 1% | spełniony | 7.4.1(5) [NZW] |
 
@@ -316,16 +317,16 @@ Metoda: Wymiarowanie: cięgna F_Ed = max(STM; MES), krzyżulce 0,6·ν'·f_cd, w
 
 **Krzyżulce ściskane — najbardziej wytężone (obwiednia kombinacji STR)**
 
-| Krzyżulec (x; z) [m] | kąt | C [kN] | w [mm] | σ_Ed [MPa] | σ_Rd,max [MPa] | η | Kombinacja |
-|---|---|---|---|---|---|---|---|
-| (5,00; 0,05)–(5,60; 0,05) | 0° | 57,6 | 102 | 3,14 | 11,31 | 28% | 6.10a (wiodące: QA) |
-| (6,69; 0,14)–(7,15; 0,14) | 0° | 31,4 | 68 | 2,55 | 11,31 | 23% | 6.10b (wiodące: QA) |
-| (6,21; 0,77)–(6,21; 0,89) | 90° | 85,9 | 210 | 2,27 | 11,31 | 20% | 6.10a (wiodące: QA) |
-| (6,21; 0,25)–(6,21; 0,77) | 90° | 85,9 | 210 | 2,27 | 11,31 | 20% | 6.10a (wiodące: QA) |
-| (6,21; 0,25)–(6,69; 0,14) | 13° | 44,3 | 114 | 2,16 | 11,31 | 19% | 6.10a (tylko G) |
-| (2,39; 0,05)–(2,81; 0,05) | 0° | 48,0 | 127 | 2,10 | 11,31 | 19% | 6.10a (wiodące: QA) |
-| (2,81; 2,28)–(2,90; 2,76) | 79° | 95,3 | 264 | 2,00 | 11,31 | 18% | 6.10a (wiodące: QA) |
-| (0,96; 0,14)–(2,39; 0,05) | 3° | 48,1 | 137 | 1,95 | 11,31 | 17% | 6.10a (wiodące: QA) |
+| Krzyżulec (x; z) [m] | kąt | C [kN] | w [mm] | σ₁ MES [MPa] | σ_Ed [MPa] | σ_Rd,max [MPa] | η | Kombinacja |
+|---|---|---|---|---|---|---|---|---|
+| (5,00; 0,05)–(5,60; 0,05) | 0° | 57,6 | 102 | −0,08 | 3,14 | 21,43 | 15% | 6.10a (wiodące: QA) |
+| (6,69; 0,14)–(7,15; 0,14) | 0° | 31,4 | 68 | −0,35 | 2,55 | 21,43 | 12% | 6.10b (wiodące: QA) |
+| (6,21; 0,77)–(6,21; 0,89) | 90° | 85,9 | 210 | 0,03 | 2,27 | 21,43 | 11% | 6.10a (wiodące: QA) |
+| (6,21; 0,25)–(6,21; 0,77) | 90° | 85,9 | 210 | −0,16 | 2,27 | 21,43 | 11% | 6.10a (wiodące: QA) |
+| (6,21; 0,25)–(6,69; 0,14) | 13° | 44,3 | 114 | 0,00 | 2,16 | 21,43 | 10% | 6.10a (tylko G) |
+| (2,39; 0,05)–(2,81; 0,05) | 0° | 48,0 | 127 | −0,41 | 2,10 | 21,43 | 10% | 6.10a (wiodące: QA) |
+| (2,81; 2,28)–(2,90; 2,76) | 79° | 95,3 | 264 | −0,09 | 2,00 | 21,43 | 9% | 6.10a (wiodące: QA) |
+| (0,96; 0,14)–(2,39; 0,05) | 3° | 48,1 | 137 | −0,45 | 1,95 | 21,43 | 9% | 6.10a (wiodące: QA) |
 
 **Węzły STM — najbardziej wytężone i podporowe** (σ_Ed — maks. z docisku i czół krzyżulców)
 
@@ -367,8 +368,8 @@ Metoda: Wymiarowanie: cięgna F_Ed = max(STM; MES), krzyżulce 0,6·ν'·f_cd, w
 
 | Miejsce | l [m] | L_ref [m] | w_I (qp, ∞) | w_II (qp, ∞, zarys.) | w_lim = L/250 | Δw | Δw_lim = L/500 |
 |---|---|---|---|---|---|---|---|
-| wspornik (zachód) | 1,50 | 3,00 | 0,71 | 0,71 | 12,0 | 0,50 | 6,0 |
-| przęsło między podporami A–B | 1,50 | 1,50 | 0,13 | 0,13 | 6,0 | 0,10 | 3,0 |
+| wspornik (zachód) | 1,50 | 3,00 | 0,66 | 0,66 | 12,0 | 0,45 | 6,0 |
+| przęsło między podporami A–B | 1,50 | 1,50 | 0,11 | 0,11 | 6,0 | 0,08 | 3,0 |
 | przęsło między podporami B–C | 1,60 | 1,60 | 0,06 | 0,06 | 6,4 | 0,04 | 3,2 |
 
 > [UPR/ZAŁ] analiza liniowo-sprężysta tarczy niezarysowanej (ULS: STM jako rozwiązanie dolne z obciążeniami i reakcjami z MES; redystrybucja reakcji po zarysowaniu — nieuwzględniona; SLS: sztywność zarysowana rysami rozmytymi [UPR])
@@ -441,12 +442,6 @@ Metoda: Wymiarowanie: cięgna F_Ed = max(STM; MES), krzyżulce 0,6·ν'·f_cd, w
 | **Masa [kg]** |  |  |  |  |  | 189,3 | 265,0 | 26,9 |
 
 Masa całkowita stali B500SP: **481,2 kg**.
-
-## Walidacja
-
-
-
-Szczegóły: [walidacja_tarcz.md](walidacja_tarcz.md) — (a) rozwiązanie ścisłe i belka-ściana, (b) wspornik smukły, (c) zbieżność siatki, (d) równowaga.
 
 ## Źródła
 

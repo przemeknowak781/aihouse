@@ -672,6 +672,10 @@ def bilans_md(B) -> str:
     pu = B["PU_W316_suma"]
     L.append(f"| PU wg RPB §20 / W-316 (bez klatek, garażu i techn.) | **{fmt(pu)} m²** (P0 {fmt(B['PU_W316'].get('P0', 0))}, "
              f"P1 {fmt(B['PU_W316'].get('P1', 0))}, P2 {fmt(B['PU_W316'].get('P2', 0))}) | 230–270 m² | {'✓' if 230 <= pu <= 270 else '✗'} |")
+    iso = B["PN_ISO_9836"]
+    L.append(f"| kontrolnie PN-ISO 9836 (rdzeń `lamela.model`, pipeline): podstawowa / pomocnicza z garażem / ruchu / techniczna | "
+             f"{fmt(iso['podstawowa'])} / {fmt(iso['pomocnicza (z garażem)'])} / {fmt(iso['ruchu'])} / {fmt(iso['techniczna'])} m² "
+             f"(„PU” rdzenia = podst. + pomocn. = {fmt(iso['podstawowa'] + iso['pomocnicza (z garażem)'])} m² — z garażem, bez komunikacji) | — | — |")
     L.append(f"| garaż (osobno) / pom. techniczne (osobno) / klatki | {fmt(B['garaz'])} / {fmt(B['techniczne'])} / {fmt(B['klatki'])} m² | — | — |")
     sd = next((r for r in B["pomieszczenia"] if r["id"] == "0.06"), None)
     if sd:

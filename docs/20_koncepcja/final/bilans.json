@@ -341,7 +341,7 @@
     "O0-11"
    ],
    "A_osciez": 33.83,
-   "stosunek": "1:1.6",
+   "stosunek": "1:1,6",
    "ok": true
   },
   {
@@ -352,7 +352,7 @@
     "O0-12"
    ],
    "A_osciez": 2.26,
-   "stosunek": "1:5.5",
+   "stosunek": "1:5,5",
    "ok": true
   },
   {
@@ -364,7 +364,7 @@
     "O1-02"
    ],
    "A_osciez": 11.21,
-   "stosunek": "1:2.5",
+   "stosunek": "1:2,5",
    "ok": true
   },
   {
@@ -372,11 +372,10 @@
    "nazwa": "Pokój dziecka 1",
    "A_podl": 13.19,
    "okna": [
-    "O1-01",
     "O1-06"
    ],
-   "A_osciez": 11.61,
-   "stosunek": "1:1.1",
+   "A_osciez": 2.26,
+   "stosunek": "1:5,8",
    "ok": true
   },
   {
@@ -387,7 +386,7 @@
     "O1-05"
    ],
    "A_osciez": 2.26,
-   "stosunek": "1:5.5",
+   "stosunek": "1:5,5",
    "ok": true
   },
   {
@@ -399,7 +398,7 @@
     "O2-04"
    ],
    "A_osciez": 9.52,
-   "stosunek": "1:2.2",
+   "stosunek": "1:2,2",
    "ok": true
   },
   {
@@ -411,7 +410,7 @@
     "O2-05"
    ],
    "A_osciez": 5.91,
-   "stosunek": "1:2.8",
+   "stosunek": "1:2,8",
    "ok": true
   }
  ],

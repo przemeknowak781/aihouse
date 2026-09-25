@@ -9,8 +9,8 @@
 | powierzchnia biologicznie czynna | 1 281,57 m² (80,10 %); rezerwa 50 % dachu zielonego 31,98 m² | ≥ 800 m² (50 %) | ✓ |
 | intensywność zabudowy (Σ brutto kondygnacji / działka) | 0,248 | 0,05–0,80 | ✓ |
 | kubatura brutto | 1 354,5 m³ | — (> 1000 m³ → PWP, W-190) | — |
-| wysokość zabudowy (upzp): najwyższy punkt +10.000 − śr. teren -0.251 | **10,25 m** | ≤ 11,00 m (rezerwa → 10,70) | ✓ |
-| wysokość budynku wg WT §6 (teren przy najniższym wejściu -0.326) | 9,85 m | grupa N ≤ 12 m | ✓ |
+| wysokość zabudowy (upzp): najwyższy punkt 10,000 − śr. teren -0,251 | **10,25 m** | ≤ 11,00 m (rezerwa → 10,70) | ✓ |
+| wysokość budynku wg WT §6 (teren przy najniższym wejściu -0,326) | 9,85 m | grupa N ≤ 12 m | ✓ |
 | kondygnacje nadziemne | 3 | ≤ 3 | ✓ |
 | miejsca postojowe (garaż + podjazd) | 4 | ≥ 2 | ✓ |
 | schody SCH1: 18 × h 0,175 / s 0,28; 2h+s; bieg | 2h+s = 0,630 m; bieg 1,150 / 1,145 m | h ≤ 0,19; 0,60–0,65; ≥ 1,00 (cel) | ✓ |
@@ -41,13 +41,13 @@
 
 | pomieszczenie | pow. [m²] | okna | A okien [m²] | stosunek | ocena |
 |---|---|---|---|---|---|
-| 0.06 Salon + jadalnia + kuchnia | 54,44 | O0-01, O0-02, O0-03, O0-04, O0-05, O0-11 | 33,83 | 1:1.6 | ✓ |
-| 0.10 Pokój gościnny / gabinet | 12,52 | O0-12 | 2,26 | 1:5.5 | ✓ |
-| 1.02 Pokój rodzinny / biblioteka (boks C) | 28,36 | O1-01, O1-02 | 11,21 | 1:2.5 | ✓ |
-| 1.03 Pokój dziecka 1 | 13,19 | O1-01, O1-06 | 11,61 | 1:1.1 | ✓ |
-| 1.04 Pokój dziecka 2 | 12,52 | O1-05 | 2,26 | 1:5.5 | ✓ |
-| 2.02 Sypialnia rodziców | 21,19 | O2-01, O2-04 | 9,52 | 1:2.2 | ✓ |
-| 2.05 Gabinet / pokój | 16,32 | O2-03, O2-05 | 5,91 | 1:2.8 | ✓ |
+| 0.06 Salon + jadalnia + kuchnia | 54,44 | O0-01, O0-02, O0-03, O0-04, O0-05, O0-11 | 33,83 | 1:1,6 | ✓ |
+| 0.10 Pokój gościnny / gabinet | 12,52 | O0-12 | 2,26 | 1:5,5 | ✓ |
+| 1.02 Pokój rodzinny / biblioteka (boks C) | 28,36 | O1-01, O1-02 | 11,21 | 1:2,5 | ✓ |
+| 1.03 Pokój dziecka 1 | 13,19 | O1-06 | 2,26 | 1:5,8 | ✓ |
+| 1.04 Pokój dziecka 2 | 12,52 | O1-05 | 2,26 | 1:5,5 | ✓ |
+| 2.02 Sypialnia rodziców | 21,19 | O2-01, O2-04 | 9,52 | 1:2,2 | ✓ |
+| 2.05 Gabinet / pokój | 16,32 | O2-03, O2-05 | 5,91 | 1:2,8 | ✓ |
 
 **Wierność szkicowi** (krawędzie elewacji S od lica zach. bryły B; szkic: brief §1.1, 45,8 px/m):
 

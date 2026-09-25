@@ -9,9 +9,9 @@
  },
  "glb": {
   "plik": "projekt/07_model_3D/wstepne/budynek.glb",
-  "bajty": 4959596,
+  "bajty": 4960792,
   "siatki": 515,
-  "trojkaty": 58662,
+  "trojkaty": 58654,
   "wezly": 734,
   "grupy": [
    "budynek",
@@ -26,6 +26,6 @@
   "materialy": 76
  },
  "obj": "projekt/07_model_3D/wstepne/obj/budynek.obj",
- "czas_s": 11.4,
+ "czas_s": 15.8,
  "status": "ok"
 }

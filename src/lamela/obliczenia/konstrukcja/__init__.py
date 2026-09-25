@@ -3,7 +3,8 @@
 Moduły: ``wspolne`` (kroki, wyniki, parametry projektu), ``materialy`` (beton, stal, mur, kształtowniki), ``obciazenia``
 (ciężary warstw, użytkowe, śnieg, wiatr, kombinacje), ``statyka`` (belki MES), ``plyty`` (tablice współczynników, MES
 płytowy), ``zelbet``, ``mur``, ``stal``, ``fundamenty``, ``schody``, ``pozycje`` (ścieżka obciążeń z modelu),
-``rysunki``, ``raport`` (lista ograniczeń: ``raport.OGRANICZENIA``).
+``rysunki``, ``raport`` (lista ograniczeń: ``raport.OGRANICZENIA``), ``tarcze`` / ``tarcze_mes`` / ``tarcze_rys`` /
+``tarcze_walidacja`` (ściany-tarcze: MES płaskiego stanu naprężenia + model kratownicowy STM).
 
 Szybki start::
 
@@ -16,9 +17,10 @@ Szybki start::
 from .wspolne import Grunt, Krok, Parametry, Warunek, Wynik  # noqa: F401
 
 __all__ = ["Grunt", "Krok", "Parametry", "Warunek", "Wynik", "Beton", "Mur", "StalKonstr", "StalZbrojeniowa", "przekroj",
-           "AnalizaKonstrukcji", "Pozycja", "generuj_raport"]
+           "AnalizaKonstrukcji", "Pozycja", "generuj_raport", "DaneTarczy", "oblicz_tarcze"]
 from .materialy import Beton, Mur, StalKonstr, StalZbrojeniowa, przekroj  # noqa: F401
 from .pozycje import AnalizaKonstrukcji, Pozycja  # noqa: F401
 from .raport import generuj_raport  # noqa: F401
+from .tarcze import DaneTarczy, oblicz_tarcze  # noqa: F401
 
 __version__ = "1.0"

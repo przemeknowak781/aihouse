@@ -61,7 +61,7 @@ Dom to trzy poziome warstwy przesunięte względem siebie w rytmie **zachód –
   garażu **18,975 m** od lica zachodniego bryły B (szkic ≈ 19,0 m). **Nie jest tarasem:** dach garażu jest ekstensywny i nieużytkowy, bez
   wyjścia i bez wiaty (decyzja Inwestora 2).
 * **G — garaż 2-stanowiskowy:** w bryle parteru, **w licu ogrodowym** (przeszczep J3/W1). W świetle ma 6,05 × 6,175 m. Brama od północy.
-* **E — parter:** ciągłe przeszklenie strefy dziennej w 5 kwaterach o narastającym rytmie 1,90 / 1,90 / 2,335 / 2,335 / 2,93 m (przeszczep z W3).
+* **E — parter:** ciągłe przeszklenie strefy dziennej w 5 kwaterach o narastającym rytmie 1,90 / 1,90 / 2,34 / 2,34 / 2,92 m (przeszczep z W3).
   Szósta kwatera to przeszklone drzwi gospodarcze w tym samym systemie, więc pas E czyta się na ok. 12,85 m. Nad nim płyta-okap E wystaje
   1,00 m na południe i 1,50 m na zachód (PL-E, +2,75…+3,05).
 
@@ -170,7 +170,7 @@ obsługuje łazienki P0, P1 i P2 ustawione jedna nad drugą (x 3,98–5,77).
 | J2 | mostki pasa gospodarczego pod dachem garażu | ciągły ETICS wokół całego P0 (garaż jako bufor wewnątrz obudowy); SWG z wełną 12 cm od garażu; docieplenie spodu stropu garażu pasem 1,0 m (SUF-G); węzły WZ-09 |
 | J2 | mimośród sztywności P0 (fasada na słupach) | ściany trzonu klatki C i D na P0 żelbetowe 18 cm (przegroda SWZB) |
 | J2 | wsporniki: EQU, ugięcia, łączniki z ETA, szczelina nad stolarką | `konstrukcja.sciezka_obciazen`; wszystkie płyty wysunięte `lacznik_termiczny: true` |
-| J2 (z W3) | słupy E w osiach ramy C (jedna linia pionowa) | SL3/SL4 (x 6,435 / 8,77) = SL5/SL6 boksu C; kwatery 1,90/1,90/2,335/2,335/2,93 |
+| J2 (z W3) | słupy E w osiach ramy C (jedna linia pionowa) | SL3/SL4 (x 6,44 / 8,78) = SL5/SL6 boksu C; kwatery 1,90/1,90/2,34/2,34/2,92 |
 | J2 (z W1) | lekka rama C na konsolach punktowych | PL-C1/PL-C2 z materiału RAMA_C (stal w okładzinie), węzeł χ WZ-14 |
 | J2 | HS na taras zach.; drzwi gospodarcze w systemie fasady E | O0-11 (HS2 2,40 × 2,75); O0-06 (DZ3) w podziale fasady |
 | J3 | garaż w licu ogrodowym, linia D jedną krawędzią do narożnika | bryła G x 12,30–18,675, lico y −0,30; linia D +3,85 do x 18,675 |
@@ -403,8 +403,8 @@ Obszar oddziaływania mieści się w całości na działce (W-012).
 | powierzchnia biologicznie czynna | 1 281,57 m² (80,10 %); rezerwa 50 % dachu zielonego 31,98 m² | ≥ 800 m² (50 %) | ✓ |
 | intensywność zabudowy (Σ brutto kondygnacji / działka) | 0,248 | 0,05–0,80 | ✓ |
 | kubatura brutto | 1 354,5 m³ | — (> 1000 m³ → PWP, W-190) | — |
-| wysokość zabudowy (upzp): najwyższy punkt +10.000 − śr. teren -0.251 | **10,25 m** | ≤ 11,00 m (rezerwa → 10,70) | ✓ |
-| wysokość budynku wg WT §6 (teren przy najniższym wejściu -0.326) | 9,85 m | grupa N ≤ 12 m | ✓ |
+| wysokość zabudowy (upzp): najwyższy punkt 10,000 − śr. teren -0,251 | **10,25 m** | ≤ 11,00 m (rezerwa → 10,70) | ✓ |
+| wysokość budynku wg WT §6 (teren przy najniższym wejściu -0,326) | 9,85 m | grupa N ≤ 12 m | ✓ |
 | kondygnacje nadziemne | 3 | ≤ 3 | ✓ |
 | miejsca postojowe (garaż + podjazd) | 4 | ≥ 2 | ✓ |
 | schody SCH1: 18 × h 0,175 / s 0,28; 2h+s; bieg | 2h+s = 0,630 m; bieg 1,150 / 1,145 m | h ≤ 0,19; 0,60–0,65; ≥ 1,00 (cel) | ✓ |
@@ -435,13 +435,13 @@ Obszar oddziaływania mieści się w całości na działce (W-012).
 
 | pomieszczenie | pow. [m²] | okna | A okien [m²] | stosunek | ocena |
 |---|---|---|---|---|---|
-| 0.06 Salon + jadalnia + kuchnia | 54,44 | O0-01, O0-02, O0-03, O0-04, O0-05, O0-11 | 33,83 | 1:1.6 | ✓ |
-| 0.10 Pokój gościnny / gabinet | 12,52 | O0-12 | 2,26 | 1:5.5 | ✓ |
-| 1.02 Pokój rodzinny / biblioteka (boks C) | 28,36 | O1-01, O1-02 | 11,21 | 1:2.5 | ✓ |
-| 1.03 Pokój dziecka 1 | 13,19 | O1-01, O1-06 | 11,61 | 1:1.1 | ✓ |
-| 1.04 Pokój dziecka 2 | 12,52 | O1-05 | 2,26 | 1:5.5 | ✓ |
-| 2.02 Sypialnia rodziców | 21,19 | O2-01, O2-04 | 9,52 | 1:2.2 | ✓ |
-| 2.05 Gabinet / pokój | 16,32 | O2-03, O2-05 | 5,91 | 1:2.8 | ✓ |
+| 0.06 Salon + jadalnia + kuchnia | 54,44 | O0-01, O0-02, O0-03, O0-04, O0-05, O0-11 | 33,83 | 1:1,6 | ✓ |
+| 0.10 Pokój gościnny / gabinet | 12,52 | O0-12 | 2,26 | 1:5,5 | ✓ |
+| 1.02 Pokój rodzinny / biblioteka (boks C) | 28,36 | O1-01, O1-02 | 11,21 | 1:2,5 | ✓ |
+| 1.03 Pokój dziecka 1 | 13,19 | O1-06 | 2,26 | 1:5,8 | ✓ |
+| 1.04 Pokój dziecka 2 | 12,52 | O1-05 | 2,26 | 1:5,5 | ✓ |
+| 2.02 Sypialnia rodziców | 21,19 | O2-01, O2-04 | 9,52 | 1:2,2 | ✓ |
+| 2.05 Gabinet / pokój | 16,32 | O2-03, O2-05 | 5,91 | 1:2,8 | ✓ |
 
 **Wierność szkicowi** (krawędzie elewacji S od lica zach. bryły B; szkic: brief §1.1, 45,8 px/m):
 

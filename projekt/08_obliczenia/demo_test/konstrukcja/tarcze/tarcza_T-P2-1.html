@@ -17,11 +17,11 @@ code{font-size:12.5px}
 <p><strong>DEMO — dane przykładowe typowe dla wariantu W2; nie jest pozycją projektu wykonawczego</strong></p>
 <p>Obliczenia automatyczne. Oznaczenia: [NZW] — wartość zalecana/niezweryfikowana w NA, [UPR] — uproszczenie, [ZAŁ] — założenie, [P] — źródło przytoczone z pamięci. Wymagana weryfikacja projektanta z uprawnieniami.</p>
 </blockquote>
-<p><strong>Wynik:</strong> maks. wykorzystanie η = 92% — wszystkie warunki spełnione; T_max = 123,3 kN, C_max = 106,6 kN, ugięcie miarodajne 0,71 mm (lim 12,0 mm), EQU η = 5%, stal ≈ 481 kg.</p>
+<p><strong>Wynik:</strong> maks. wykorzystanie η = 92% — wszystkie warunki spełnione; T_max = 123,3 kN, C_max = 106,6 kN, ugięcie miarodajne 0,66 mm (lim 12,0 mm), EQU η = 5%, stal ≈ 481 kg.</p>
 <h2>Poz. 1 — Ściana-tarcza żelbetowa T-P2-1</h2>
 <p>Element modelu: <code>T-P2-1</code> · maks. wykorzystanie nośności η = 92% · wszystkie warunki spełnione</p>
 <h3>Opis i schemat statyczny</h3>
-<p>Ściana podłużna P2 (oś 1) wariantu W2 — tarcza wspornikowa przenosząca wysunięcie bryły II piętra o 1,50 m na zachód; ściany P1 poniżej z przerwami (otwory P1). Tarcza żelbetowa gr. t = 18 cm, długość L = 13,00 m (x = −1,50…11,50), wysokość H = 3,10 m; beton C30/37 (XC3, c_nom = 35 mm), stal B500SP (f_yd = 434,8 MPa). Otwory: O1 1,80×1,50 m (x = 0,50…2,30, z = 0,90…2,40), O4 3,20×2,40 m (x = 2,90…6,10, z = 0,30…2,70), O2 1,80×1,50 m (x = 6,80…8,60, z = 0,90…2,40), O3 1,80×1,50 m (x = 9,20…11,00, z = 0,90…2,40). Podpory (ściany/elementy poniżej): A: x = 0,00…2,90 m (ściana P1 (oś A → wsch.)), sprężysta k = 475 MN/m²; B: x = 4,40…7,60 m (ściana P1), sprężysta k = 475 MN/m²; C: x = 9,20…11,50 m (ściana P1), sprężysta k = 475 MN/m². Wsporniki: wspornik (zachód) l_k = 1,50 m.</p>
+<p>Ściana podłużna P2 (oś 1) wariantu W2 — tarcza wspornikowa przenosząca wysunięcie bryły II piętra o 1,50 m na zachód; ściany P1 poniżej z przerwami (otwory P1). Tarcza żelbetowa gr. t = 18 cm, długość L = 13,00 m (x = −1,50…11,50), wysokość H = 3,10 m; beton C30/37 (XC3, c_nom = 35 mm), stal B500SP (f_yd = 434,8 MPa). Otwory: O1 1,80×1,50 m (x = 0,50…2,30, z = 0,90…2,40), O4 3,20×2,40 m (x = 2,90…6,10, z = 0,30…2,70), O2 1,80×1,50 m (x = 6,80…8,60, z = 0,90…2,40), O3 1,80×1,50 m (x = 9,20…11,00, z = 0,90…2,40). Podpory (ściany/elementy poniżej): A: x = 0,00…2,90 m (ściana P1 (oś A → wsch.)), sprężysta k = 475 MN/m², tylko docisk; B: x = 4,40…7,60 m (ściana P1), sprężysta k = 475 MN/m², tylko docisk; C: x = 9,20…11,50 m (ściana P1), sprężysta k = 475 MN/m², tylko docisk. Wsporniki: wspornik (zachód) l_k = 1,50 m.</p>
 <p>Model MES: 2483 elementów QM6 (bok ≤ 10 cm), 10 kombinacji STR, SLS: 4 charakterystycznych, 1 quasi-stałych. Kombinacja miarodajna (maks. ΣF): 6.10a (wiodące: QA); ΣF_z = 883,9 kN, ΣR = 883,9 kN (błąd 1.7e-13). Naprężenia (obwiednia STR): σ₁,max = 3,82 MPa, σ₂,min = −4,38 MPa (f_ctm = 2,9, f_cd = 21,43 MPa).</p>
 <p>Metoda: MES płaskiego stanu naprężenia: element prostokątny QM6 (biliniowy + 4 mody niekonforemne, kondensacja statyczna) na siatce ortogonalnej dopasowanej do krawędzi otworów, podpór i punktów przyłożenia obciążeń; beton niezarysowany E_cm, ν = 0,2; podpory sprężyste k = E·t/h ściany poniżej (lub sztywne). Walidacja: rozwiązanie ścisłe Timoshenki–Goodiera (belka-tarcza, obciążenie równomierne), wspornik smukły (teoria belek z odkształceniem postaciowym), zbieżność siatki, równowaga sił i przekrojów (tarcze_walidacja).</p>
 <p>Metoda: Siły w pasach: całkowanie naprężeń σ w przekrojach co element — wypadkowa strefy rozciąganej przylegającej do krawędzi (pas górny/dolny, nadproża, podokienniki, ościeża).</p>
@@ -838,18 +838,19 @@ code{font-size:12.5px}
 <td>zał. F</td>
 </tr>
 <tr>
-<td>Naprężenie w betonie σ_cd ≤ ν·f_cd</td>
-<td>σ_cd = 2,14 MPa</td>
-<td>ν·f_cd = 11,31 MPa</td>
-<td>19%</td>
+<td>Naprężenie w betonie σ_cd ≤ ν·f_cd (ściskanie dwuosiowe: ≤ f_cd)</td>
+<td>σ_cd = 1,86 MPa</td>
+<td>σ_Rd = 11,31 MPa</td>
+<td>16%</td>
 <td>spełniony</td>
-<td>zał. F (F.4), (F.7); (6.6N)</td>
+<td>zał. F (F.4), (F.7), F(3); (6.6N)</td>
 </tr>
 </tbody>
 </table>
 <h4>Model kratownicowy — krzyżulce ściskane (6.5.2)</h4>
 <ul>
-<li>Nośność krzyżulców w strefie zarysowanej: σ_Rd,max = 0,6·ν'·f_cd, ν' = 1 − f_ck/250 = 0,6·0,880·21,43 = <strong>11,31</strong> MPa <em>((6.56), (6.57N))</em></li>
+<li>Nośność krzyżulców w strefie zarysowanej (rozciąganie poprzeczne, σ₁ &gt; f_ctd): σ_Rd,max = 0,6·ν'·f_cd, ν' = 1 − f_ck/250 = 0,6·0,880·21,43 = <strong>11,31</strong> MPa <em>((6.56), (6.57N))</em></li>
+<li>Krzyżulce bez rozciągania poprzecznego (σ₁ z MES ≤ f_ctd, np. pasy ściskane): σ_Rd,max = f_cd = <strong>21,43</strong> MPa <em>((6.55))</em></li>
 <li>Szerokość krzyżulca na końcu: w = l·sin θ + u·cos θ (węzeł na pasie: l — długość docisku/pasa, u = 2a); węzeł wewnętrzny: w = rozstaw węzłów [UPR] = ****</li>
 </ul>
 <table>
@@ -865,12 +866,12 @@ code{font-size:12.5px}
 </thead>
 <tbody>
 <tr>
-<td>Krzyżulec miarodajny (C = 57,6 kN, w = 102 mm)</td>
+<td>Krzyżulec miarodajny (C = 57,6 kN, w = 102 mm, σ₁ = −0,08 MPa)</td>
 <td>σ_Ed = 3,14 MPa</td>
-<td>σ_Rd,max = 11,31 MPa</td>
-<td>28%</td>
+<td>σ_Rd,max = 21,43 MPa</td>
+<td>15%</td>
 <td>spełniony</td>
-<td>(6.56)</td>
+<td>(6.55)</td>
 </tr>
 </tbody>
 </table>
@@ -1072,15 +1073,15 @@ code{font-size:12.5px}
 <tbody>
 <tr>
 <td>Ugięcie — wspornik (zachód) (quasi-stała, t = ∞, zarysowanie)</td>
-<td>w = 0,71 mm</td>
+<td>w = 0,66 mm</td>
 <td>L/250 = 12,00 mm</td>
-<td>6%</td>
+<td>5%</td>
 <td>spełniony</td>
 <td>7.4.1(4); L = 2·l_k dla wspornika (R5-56)</td>
 </tr>
 <tr>
 <td>Przyrost ugięcia — wspornik (zachód) (po wykonaniu wykończeń)</td>
-<td>Δw = 0,50 mm</td>
+<td>Δw = 0,45 mm</td>
 <td>L/500 = 6,00 mm</td>
 <td>8%</td>
 <td>spełniony</td>
@@ -1088,7 +1089,7 @@ code{font-size:12.5px}
 </tr>
 <tr>
 <td>Ugięcie — przęsło między podporami A–B (quasi-stała, t = ∞, zarysowanie)</td>
-<td>w = 0,13 mm</td>
+<td>w = 0,11 mm</td>
 <td>L/250 = 6,00 mm</td>
 <td>2%</td>
 <td>spełniony</td>
@@ -1096,7 +1097,7 @@ code{font-size:12.5px}
 </tr>
 <tr>
 <td>Przyrost ugięcia — przęsło między podporami A–B (po wykonaniu wykończeń)</td>
-<td>Δw = 0,10 mm</td>
+<td>Δw = 0,08 mm</td>
 <td>L/500 = 3,00 mm</td>
 <td>3%</td>
 <td>spełniony</td>
@@ -1436,6 +1437,7 @@ code{font-size:12.5px}
 <th>kąt</th>
 <th>C [kN]</th>
 <th>w [mm]</th>
+<th>σ₁ MES [MPa]</th>
 <th>σ_Ed [MPa]</th>
 <th>σ_Rd,max [MPa]</th>
 <th>η</th>
@@ -1448,9 +1450,10 @@ code{font-size:12.5px}
 <td>0°</td>
 <td>57,6</td>
 <td>102</td>
+<td>−0,08</td>
 <td>3,14</td>
-<td>11,31</td>
-<td>28%</td>
+<td>21,43</td>
+<td>15%</td>
 <td>6.10a (wiodące: QA)</td>
 </tr>
 <tr>
@@ -1458,9 +1461,10 @@ code{font-size:12.5px}
 <td>0°</td>
 <td>31,4</td>
 <td>68</td>
+<td>−0,35</td>
 <td>2,55</td>
-<td>11,31</td>
-<td>23%</td>
+<td>21,43</td>
+<td>12%</td>
 <td>6.10b (wiodące: QA)</td>
 </tr>
 <tr>
@@ -1468,9 +1472,10 @@ code{font-size:12.5px}
 <td>90°</td>
 <td>85,9</td>
 <td>210</td>
+<td>0,03</td>
 <td>2,27</td>
-<td>11,31</td>
-<td>20%</td>
+<td>21,43</td>
+<td>11%</td>
 <td>6.10a (wiodące: QA)</td>
 </tr>
 <tr>
@@ -1478,9 +1483,10 @@ code{font-size:12.5px}
 <td>90°</td>
 <td>85,9</td>
 <td>210</td>
+<td>−0,16</td>
 <td>2,27</td>
-<td>11,31</td>
-<td>20%</td>
+<td>21,43</td>
+<td>11%</td>
 <td>6.10a (wiodące: QA)</td>
 </tr>
 <tr>
@@ -1488,9 +1494,10 @@ code{font-size:12.5px}
 <td>13°</td>
 <td>44,3</td>
 <td>114</td>
+<td>0,00</td>
 <td>2,16</td>
-<td>11,31</td>
-<td>19%</td>
+<td>21,43</td>
+<td>10%</td>
 <td>6.10a (tylko G)</td>
 </tr>
 <tr>
@@ -1498,9 +1505,10 @@ code{font-size:12.5px}
 <td>0°</td>
 <td>48,0</td>
 <td>127</td>
+<td>−0,41</td>
 <td>2,10</td>
-<td>11,31</td>
-<td>19%</td>
+<td>21,43</td>
+<td>10%</td>
 <td>6.10a (wiodące: QA)</td>
 </tr>
 <tr>
@@ -1508,9 +1516,10 @@ code{font-size:12.5px}
 <td>79°</td>
 <td>95,3</td>
 <td>264</td>
+<td>−0,09</td>
 <td>2,00</td>
-<td>11,31</td>
-<td>18%</td>
+<td>21,43</td>
+<td>9%</td>
 <td>6.10a (wiodące: QA)</td>
 </tr>
 <tr>
@@ -1518,9 +1527,10 @@ code{font-size:12.5px}
 <td>3°</td>
 <td>48,1</td>
 <td>137</td>
+<td>−0,45</td>
 <td>1,95</td>
-<td>11,31</td>
-<td>17%</td>
+<td>21,43</td>
+<td>9%</td>
 <td>6.10a (wiodące: QA)</td>
 </tr>
 </tbody>
@@ -1821,20 +1831,20 @@ code{font-size:12.5px}
 <td>wspornik (zachód)</td>
 <td>1,50</td>
 <td>3,00</td>
-<td>0,71</td>
-<td>0,71</td>
+<td>0,66</td>
+<td>0,66</td>
 <td>12,0</td>
-<td>0,50</td>
+<td>0,45</td>
 <td>6,0</td>
 </tr>
 <tr>
 <td>przęsło między podporami A–B</td>
 <td>1,50</td>
 <td>1,50</td>
-<td>0,13</td>
-<td>0,13</td>
+<td>0,11</td>
+<td>0,11</td>
 <td>6,0</td>
-<td>0,10</td>
+<td>0,08</td>
 <td>3,0</td>
 </tr>
 <tr>
@@ -2291,8 +2301,6 @@ code{font-size:12.5px}
 </tbody>
 </table>
 <p>Masa całkowita stali B500SP: <strong>481,2 kg</strong>.</p>
-<h2>Walidacja</h2>
-<p>Szczegóły: <a href="walidacja_tarcz.md">walidacja_tarcz.md</a> — (a) rozwiązanie ścisłe i belka-ściana, (b) wspornik smukły, (c) zbieżność siatki, (d) równowaga.</p>
 <h2>Źródła</h2>
 <ul>
 <li>PN-EN 1992-1-1:2008 + AC:2011 + NA — p. 5.6.4, 6.5, 7.3, 7.4, 8.4, 8.7, 9.6, 9.7, zał. F [wartości zalecane — NZW NA]</li>

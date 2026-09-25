@@ -361,6 +361,7 @@ class AnalizaTarczy:
         if sls:
             self._sls()
         self._equ()
+        self._smuklosc()
         self._zestawienie_stali()
         return self
 
@@ -1556,6 +1557,18 @@ class AnalizaTarczy:
             out[c] = (float(-M[M < 0].sum()), float(M[M > 0].sum()))
         return out
 
+    def _smuklosc(self):
+        """Uwaga dla elementów smukłych (l/h ≥ 3 we wszystkich przęsłach, wsporniki l/h ≥ 1,5) — belka, nie tarcza."""
+        pk = self.punkty_ugiec()
+        d = self.d
+        if not pk:
+            return
+        smukle = all((q["l"] / d.H >= 3.0) if q["typ"] == "przeslo" else (q["l"] / d.H >= 1.5) for q in pk)
+        if smukle:
+            self._uwaga(f"Element smukły (l/h ≥ 3 w przęsłach) — nie jest belką-ścianą (5.3.1(3)); sprężyste ramię sił "
+                        "wewnętrznych ≈ 2h/3 daje siły w cięgnach większe niż wymiarowanie belkowe (z ≈ 0,9d) — wynik bezpieczny, "
+                        "zalecane sprawdzenie belkowe (zelbet.zginanie_prostokat).")
+
     def _equ(self):
         p = self.p
         pk = [q for q in self.punkty_ugiec() if q["typ"] == "wspornik"]
@@ -1594,6 +1607,13 @@ class AnalizaTarczy:
             for sid, rr in self.mes.reakcje(r).items():
                 rmin.append((float(rr["Rw"].min()), sid, n, rr))
         mn = min(rmin, key=lambda t_: t_[0])
+        odl = [(n, len(r.odlaczone)) for n, r in self.r_uls.items() if r.odlaczone]
+        if odl:
+            n_, k_ = max(odl, key=lambda q: q[1])
+            w.krok("MES (podpory jednostronne): węzły podpór bez docisku (odrywanie krawędzi podpory)", "n_węzłów", f"({n_})", k_, "",
+                   nd=0)
+            w.uwaga("Odrywanie części podpory — tarcza nie jest zakotwiona na tym odcinku; przy wymaganym zakotwieniu (np. "
+                    "tylny koniec wspornika) przewidzieć pręty łączące z wieńcem/ścianą poniżej i ustawić podporę dwustronną.")
         if mn[0] < -1e-3:
             neg = float(-mn[3]["Rw"][mn[3]["Rw"] < 0].sum())
             w.uwaga(f"MES: reakcje rozciągające na podporze {mn[1]} ({mn[2]}): Σ = {f(neg, 1)} kN — wymagane zakotwienie tarczy "

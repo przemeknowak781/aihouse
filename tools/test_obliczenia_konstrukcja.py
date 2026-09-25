@@ -25,6 +25,10 @@ porownanie_reczne.md). Funkcje test_* są zgodne z pytest.
 [R5] Rejestr R5 projektu (docs/10_podstawy_prawne/R5_...): s = 0,72 kN/m²; attyka 0,6 m → 1,20 kN/m²; q_p(11 m, II) = 0,71,
      q_p(10,5 m, III) = 0,58 kN/m²; f_k = 7,66 MPa, f_d = 4,50 MPa; nośność ławy B = 0,6 m, D = 0,8 m, γ = 18,5:
      φ' = 32° → R_k/A' = 497, R_d/A' = 355 kPa; φ' = 33° → 567 / 405 kPa (sprawdzone niezależnie w weryfikacji R5).
+[TG] S. Timoshenko, J.N. Goodier, *Theory of Elasticity*, 3rd ed., McGraw-Hill 1970, §22 — belka-tarcza obciążona
+     równomiernie (rozwiązanie wielomianowe; wzory sprawdzane w teście: równowaga i warunki brzegowe) — test MES tarcz.
+[CEB] CEB-FIP / DAfStb Heft 240 — ramię sił wewnętrznych belki-ściany z = 0,2·(l + 2h) (1 ≤ l/h < 2), 0,6·l (l/h < 1);
+     wspornik — teoria belek Timoshenki (zginanie + ścinanie, κ = 5/6).
 Uwaga: wartości [M], [CC] przytoczone z pamięci autora testów — w każdym przypadku sprawdzone dodatkowo niezależnym
 rachunkiem ręcznym w teście (wzory zamknięte).
 """
@@ -382,6 +386,137 @@ def test_mur_przesklepienie():
 # ==================================================================================================
 # 6. Niezależne przeliczenie ręczne 3 pozycji (wzory zamknięte, bez funkcji biblioteki)
 # ==================================================================================================
+# ==================================================================================================
+# 5a. Ściany-tarcze (MES QM6 + STM) — moduły tarcze, tarcze_mes, tarcze_walidacja
+# ==================================================================================================
+def test_tarcza_mes_rozwiazanie_scisle():
+    from lamela.obliczenia.konstrukcja import tarcze_walidacja as tw
+    kw = tw.tg_kontrola_wzorow()
+    assert kw["rown_x"] < 1e-6 and kw["rown_z"] < 1e-6, "wzory T&G: równania równowagi"
+    close(kw["sz_gora"], -10.0, 1e-9, "σ_z(+c) = −q")
+    assert abs(kw["sz_dol"]) < 1e-9 and kw["tau_brzeg"] < 1e-9
+    close(kw["V_koniec"], kw["ql"], 1e-5, "∫τ dz = q·l")
+    assert abs(kw["N_koniec"]) < 1e-9 and abs(kw["M_koniec"]) < 1e-5
+    for l_, c_ in ((1.0, 1.0), (1.0, 0.5)):          # l/h = 1 (belka-ściana) i 2
+        r = tw.walidacja_tg(l_, c_, 100.0, 0.1 * c_)
+        assert r["err_sx"] < 0.006, f"σ_x: {r['err_sx']:.4f}"
+        assert r["err_tau"] < 0.01, f"τ: {r['err_tau']:.4f}"
+        assert r["err_sz"] < 0.03, f"σ_z: {r['err_sz']:.4f}"
+        assert r["R_resztkowe"] < 1e-6
+
+
+def test_tarcza_wspornik_teoria_belek():
+    from lamela.obliczenia.konstrukcja import tarcze_walidacja as tw
+    for lh, tol in ((10.0, 0.005), (5.0, 0.01), (1.0, 0.05)):
+        r = tw.walidacja_wspornik(lh * 0.5)
+        close(r["w_MES"], r["w_Timoshenko"], tol, f"wspornik l/h = {lh}")
+        close(r["R"], 100.0, 1e-9, "reakcja utwierdzenia")
+
+
+def test_tarcza_belka_sciana_vs_ceb():
+    from lamela.obliczenia.konstrukcja import tarcze_walidacja as tw
+    for lh in (1.0, 1.5):
+        r = tw.walidacja_belka_sciana(3.0, lh, 100.0, 0.2, 0.05, stm=True)
+        close(r["M_MES"], r["M_statyka"], 0.005, f"M z całkowania σ = statyka (l/h = {lh})")
+        close(r["z_MES"], r["z_CEB"], 0.06, f"ramię z: MES sprężyste vs CEB/DAfStb (l/h = {lh})")
+        close(r["T_MES"], r["T_belka_sciana"], 0.12, f"T: MES vs zelbet.belka_sciana (l/h = {lh})")
+        assert 0.5 * r["T_MES"] <= r["T_STM"] <= 1.15 * r["T_MES"], f"T_STM = {r['T_STM']:.1f} vs T_MES = {r['T_MES']:.1f}"
+
+
+def test_tarcza_demo_wspornik_W2():
+    """Tarcza wspornikowa demo (W2): równowaga MES i STM, reakcje wg przypadków = obciążenia, warunki spełnione."""
+    from lamela.obliczenia.konstrukcja import tarcze_walidacja as tw
+    from lamela.obliczenia.konstrukcja.tarcze import oblicz_tarcze
+    wt = oblicz_tarcze(tw.dane_demo(), Parametry(), siatka=0.10)
+    an = wt.an
+    assert wt.ok, [w.opis for w in wt.warunki if not w.ok]
+    assert wt.blad_rownowagi < 1e-9 and an.blad_przekrojow < 1e-3
+    # reakcje wg przypadków = wypadkowe obciążeń (bilans ścieżki obciążeń)
+    for c, rr in an.reakcje_przyp.items():
+        close(sum(v["R"] for v in rr.values()), float(-an.mes.wektor({c: 1.0})[1::2].sum()), 1e-8, f"ΣR przypadku {c}")
+    # STM: dokładna równowaga węzłów w każdej kombinacji
+    m = an.stm
+    for n, F in m.F.items():
+        res = np.array(m.P[n], dtype=float).copy()
+        np.add.at(res, m.ii, F[:, None] * m.U)
+        np.add.at(res, m.jj, -F[:, None] * m.U)
+        assert np.abs(res).max() < 1e-6 * max(np.abs(m.P[n]).max(), 1.0), f"STM {n}: niezrównoważenie {np.abs(res).max():.2e}"
+    pas = {q.opis.split(" (")[0]: q for q in an.pasy}
+    assert "krawędź górna" in pas and 60 < pas["krawędź górna"].F_Ed < 250
+    assert [q for q in an.punkty_ugiec() if q["typ"] == "wspornik"] and wt.eta_EQU < 0.5
+    assert 0 < wt.w_max < wt.w_dop and wt.masa_stali > 100
+    pz = __import__("lamela.obliczenia.konstrukcja.tarcze", fromlist=["x"]).pozycja_tarczy(wt)
+    assert pz.ok and pz.prety and pz.dane["reakcje_k"]
+
+
+def test_tarcza_zbieznosc_i_zarysowanie():
+    from lamela.obliczenia.konstrukcja import tarcze_walidacja as tw
+    from lamela.obliczenia.konstrukcja.obciazenia import Oddz
+    from lamela.obliczenia.konstrukcja.tarcze import AnalizaTarczy, DaneTarczy
+    from lamela.obliczenia.konstrukcja.tarcze_mes import ObcLiniowe, PodporaT
+    zb = tw.walidacja_zbieznosc((0.20, 0.10))
+    close(zb[0]["w_wsp"], zb[1]["w_wsp"], 0.05, "zbieżność: ugięcie wspornika")
+    close(zb[0]["R_A"], zb[1]["R_A"], 0.01, "zbieżność: reakcja A")
+    close(zb[0]["T_gora"], zb[1]["T_gora"], 0.08, "zbieżność: siła w pasie górnym")
+    # SLS: zarysowanie zwiększa ugięcie (tarcza smukła, silnie obciążona); uwaga o smukłości
+    d = DaneTarczy("SL", 6.4, 0.6, 0.25, podpory=[PodporaT("A", 0, 0.2, 0), PodporaT("B", 6.2, 6.4, 0)],
+                   obciazenia=[ObcLiniowe("G", 0, 6.4, 0.6, 25.0), ObcLiniowe("QA", 0, 6.4, 0.6, 15.0)],
+                   przypadki={"G": Oddz("G", "G"), "QA": Oddz("QA", "Q", "A")}, ekspozycja="XC1", beton="C25/30")
+    an = AnalizaTarczy(d, Parametry()).uruchom()
+    u = an.ugiecia[0]
+    assert an.n_rys > 0 and u["w_II"] > 1.1 * u["w_I"], (u["w_I"], u["w_II"])
+    assert any("smukły" in t for t in an.uwagi)
+    # podpory jednostronne: brak reakcji rozciągających
+    for r in an.r_uls.values():
+        assert min(float(v["Rw"].min()) for v in an.mes.reakcje(r).values()) > -1e-6
+
+
+def test_tarcza_w_modelu():
+    """Wariant modelu testowego: ściana S1-01 żelbetowa, wydłużona o 1,50 m poza ścianę parteru (wspornik), oparta na
+    filarkach S0-01 → automatycznie pozycja tarczowa (zamiast ostrzeżenia), reakcje → S0-01, równowaga globalna G."""
+    import copy
+    import yaml
+    from lamela.model import Model
+    raw = copy.deepcopy(yaml.safe_load(B_TEST.read_text(encoding="utf-8")))
+    raw["przegrody"]["SZ-ZB"] = {"nazwa": "Ściana zewnętrzna żelbetowa 18 cm + ETICS", "typ": "sciana_zewn", "warstwy": [
+        {"mat": "TYNK_GIPS", "d": 0.015}, {"mat": "ZB_C30", "d": 0.18, "konstrukcyjna": True}, {"mat": "EPS031", "d": 0.20},
+        {"mat": "TYNK_SIL", "d": 0.007}]}
+    for w in raw["sciany"]:
+        if w["id"] == "S1-01":
+            w["przegroda"], w["os"] = "SZ-ZB", [[-1.5, 0.0], [10.0, 0.0]]
+    for o in raw["otwory"]:
+        if o["sciana"] == "S1-01":
+            o["odl"] += 1.5
+    rawd = yaml.safe_load(D_TEST.read_text(encoding="utf-8"))
+    an = AnalizaKonstrukcji(Model(raw, rawd), Parametry()).uruchom(scisle=True)
+    assert an.tarcze_ids == {"S1-01"}
+    pz = next(p_ for p_ in an.pos_tarcze if p_.ident == "S1-01")
+    assert pz.ok, [w.opis for w in pz.warunki if not w.ok]
+    assert any(g.tytul == "Ściany-tarcze żelbetowe" for g in an.pozycje)
+    assert not any(pz_.ident.startswith("N-O1-0") for pz_ in an.pos_nadproza), "nadproża tarczy liczone w pozycji tarczowej"
+    wt = an.tarcze["S1-01"]
+    assert {s.sciana for s in wt.an.d.podpory} == {"S0-01"} and len(wt.an.d.podpory) == 3
+    RG = sum(v["R"] for v in wt.an.reakcje_przyp["G"].values())
+    close(an.prof["S1-01"]["dol"].calka("G"), RG, 1e-6, "profil dolny tarczy = ΣR_G")
+    close(an.prof["S0-01"]["top_a"].calka("G"), RG, 0.02, "reakcje tarczy → ściana S0-01")
+    Gf = sum(an.prof[w.id]["dol"].calka("G") for w in an.m.sciany("P0") if w.id in an.prof)
+    Gs = sum(an.slupy_N[c]["G"] for c in an.slupy_N)
+    Gpl = sum(g.res["G"].R.sum() for g in an.grupy)
+    Gsc = sum(an.prof[w.id]["gm2"] * (an.prof[w.id]["h"] * w.L - sum(o.szer * (o.z1 - o.z0) for o in an.prof[w.id]["otw"]))
+              for w in an.m.sciany() if w.id in an.prof)
+    Gb = sum(float(b["b"]) * float(b["h"]) * 25 * 3.82 for b in an.m.belki())
+    Gsch = sum(P for lst in an.pending_sciany.values() for cs, P, _, szer in lst if cs == "G" and szer > 0.5)
+    ratio = (Gf + Gs) / (Gpl + Gsc + Gb + Gsch)
+    assert 0.98 <= ratio <= 1.05, f"równowaga globalna G z tarczą: {ratio:.3f}"
+    # tarcza: false — wyłączenie (ściana żelbetowa jak dotąd: pozycja „poza zakresem”)
+    for w in raw["sciany"]:
+        if w["id"] == "S1-01":
+            w["tarcza"] = False
+    an2 = AnalizaKonstrukcji(Model(raw, rawd), Parametry())
+    an2.tarcze_ids = set()
+    assert not an2._czy_tarcza(next(w for w in an2.m.sciany() if w.id == "S1-01"))
+
+
 def porownanie_reczne(an) -> list[dict]:
     p = an.p
     out = []
@@ -493,6 +628,9 @@ def demo(lamela: bool = False):
                          status="PRZYKŁAD – MODEL TESTOWY PIPELINE'U (nie jest projektem Domu LAMELA) – NIE DO ZŁOŻENIA")
     zapisz_porownanie(an, DEMO / "porownanie_reczne.md")
     print(f"demo: {fmd}")
+    from lamela.obliczenia.konstrukcja import tarcze_walidacja
+    rt = tarcze_walidacja.demo(DEMO / "tarcze")
+    print(f"demo tarczy: {rt['raport']} (η = {rt['wynik']['wykorzystanie'] * 100:.0f}%, walidacja: {DEMO / 'tarcze' / 'walidacja_tarcz.md'})")
     if lamela:
         bud = ROOT / "model" / "budynek.yaml"
         dz = ROOT / "model" / "dzialka.yaml"
