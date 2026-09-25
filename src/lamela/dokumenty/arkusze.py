@@ -16,7 +16,7 @@ from pathlib import Path
 
 import pymupdf
 
-from .formaty import PT2MM, wykryj_format, rozmiar_formatu
+from .formaty import PT2MM, wykryj_format, rozmiar_formatu, odmiana
 from .znaczniki import do_uzup
 
 MM = 72.0 / 25.4
@@ -188,8 +188,11 @@ def plan_skladania(arkusze: list[Arkusz]) -> list[dict]:
         if not xs and not ys:
             opis = "bez składania (A4)"
         else:
-            opis = (f"{len(xs)} zgięć pionowych (harmonijka, pas 210 mm z marginesem do oprawy), "
-                    f"{len(ys)} zgięć poziomych; tabliczka na wierzchu")
+            nx, ny = len(xs), len(ys)
+            opis = (f"{nx} {odmiana(nx, 'zgięcie pionowe', 'zgięcia pionowe', 'zgięć pionowych')} (harmonijka, "
+                    "pas 210 mm z marginesem do oprawy)"
+                    + (f", {ny} {odmiana(ny, 'zgięcie poziome', 'zgięcia poziome', 'zgięć poziomych')}" if ny else "")
+                    + "; tabliczka na wierzchu")
         out.append({"nr": a.nr, "format": a.format, "wymiary": f"{round(W)}×{round(H)}",
                     "zlozenia_pionowe": [round(x, 1) for x in xs], "zlozenia_poziome": [round(y, 1) for y in ys],
                     "opis": opis})

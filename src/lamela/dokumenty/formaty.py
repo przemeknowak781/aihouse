@@ -126,3 +126,13 @@ def wykryj_format(szer_mm: float, wys_mm: float, tol: float = 2.5) -> str:
 
 def orientacja(szer_mm: float, wys_mm: float) -> str:
     return "pionowa" if wys_mm >= szer_mm else "pozioma"
+
+
+def odmiana(n: int, jeden: str, kilka: str, wiele: str) -> str:
+    """Forma rzeczownika po liczebniku: 1 strona, 2–4 strony, 5 stron (22 strony, 25 stron, 12 stron)."""
+    n = abs(int(n))
+    if n == 1:
+        return jeden
+    if n % 10 in (2, 3, 4) and n % 100 not in (12, 13, 14):
+        return kilka
+    return wiele
