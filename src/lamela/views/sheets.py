@@ -270,6 +270,8 @@ def _room_table(rows):
     def fn(sh, x, y, w):
         cols = [("Nr", 14.0), ("Nazwa pomieszczenia", 60.0), ("Posadzka", 46.0), ("Kat.", 18.0), ("Wys. [m]", 18.0),
                 ("Pow. [m²]", 22.0)]
+        f = min(1.0, w / 178.0)                  # blok węższy niż 178 mm (silnik: 177 mm) — kolumny proporcjonalnie
+        cols = [(n_, c_ * f) for n_, c_ in cols]
         data = []
         tot = pu = 0.0
         for r in rows:
@@ -660,13 +662,16 @@ def _bloki_ukladu(ctx, P) -> list:
             return yb
         # w_min: wiersz może być węższy (róża przesuwa się w lewo — np. gdy prawy znak centrujący H/2 wypada
         # nad tabliczką, arkusze H = 297); podziałka ≤ 125 mm + róża 14 mm
-        out.append(U.blok("róża i podziałka" if nfn and sfn else ("róża" if nfn else "podziałka"), ns,
+        out.append(U.blok("róża i podziałka" if nfn and sfn else ("róża" if nfn else "podziałka"), ns, U.B_W,
                           kotwica="nad_tabliczka", w_min=155.0 if sfn else 30.0))
     pary = [(nm, fn) for nm, fn in col.blocks if nm not in ("north", "scale", "notes")]
-    out += U.bloki_z_kolumny(pary, TB_W)      # pomiar sekwencyjny: bloki zależne od poprzednich — razem
+    # szerokość bloków U.B_W = 177 mm: lewa krawędź jak tabliczka, 3 mm od prawej ramki (weryfikacja C 2.10)
+    out += U.bloki_z_kolumny(pary, U.B_W)     # pomiar sekwencyjny: bloki zależne od poprzednich — razem
     if any(nm == "notes" for nm, _f in col.blocks):
-        b = U.Blok("uwagi", None, TB_W)
-        b.uwagi = U.BlokUwag(P["notes"], "OBJAŚNIENIA I UWAGI", h=1.8, w=TB_W)
+        b = U.Blok("uwagi", None, U.B_W)
+        # pismo uwag: ``pismo_uwag`` (domyślnie 1,8 mm; PZT — 2,5 mm, W-312)
+        b.uwagi = U.BlokUwag(P["notes"], "OBJAŚNIENIA I UWAGI", h=float(U.opcje(ctx.cfg).get("pismo_uwag", 1.8)),
+                             w=U.B_W)
         out.append(b)
     return out
 

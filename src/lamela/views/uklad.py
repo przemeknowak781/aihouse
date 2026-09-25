@@ -63,7 +63,7 @@ GAP_V = 12.0                        # widok ↔ widok
 GAP_VB = 10.0                       # widok ↔ blok / tabliczka
 GAP_B = 5.0                         # blok ↔ blok (w pionie)
 GAP_C = 6.0                         # blok ↔ blok (w poziomie)
-PAD_V = 6.0                         # ramka ↔ widok (także tytuł widoku pod widokiem ↔ dolna ramka)
+PAD_V = 6.0                         # ramka ↔ widok
 PAD_B = 3.0                         # ramka ↔ blok (ze wszystkich stron — także z prawej: linia ramki bloku uwag
                                     # nie może zlewać się z ramką arkusza; weryfikacja C 2.10)
 B_W = TB_W - PAD_B                  # szerokość bloku kolumny opisowej: lewa krawędź jak tabliczka, 3 mm od ramki
@@ -578,6 +578,8 @@ def _tytuly_od_znakow(widoki, grupa, ox: float, oy: float, strefy: dict) -> list
     """Odsunięcia tytułów widoków: tytuł trafiający na strefę znaku centrującego — przesunięty w prawo za znak,
     jeśli mieści się w szerokości miejsca widoku (poza nim mógłby wejść na sąsiedni widok); inaczej 2 mm."""
     out = []
+    e = max(0.0, ODST_TYTUL_ZNAK - ZNAK_CENTR_ODSTEP)      # tytuł ↔ znak ≥ 4 mm (strefa bloków: 1,5 mm)
+    strefy = {s_: (z[0] - e, z[1] - e, z[2] + e, z[3] + e) for s_, z in strefy.items()}
     for v, (x, y) in zip(widoki, grupa.poz):
         vx, vy = ox + x, oy + y
 
@@ -589,7 +591,7 @@ def _tytuly_od_znakow(widoki, grupa, ox: float, oy: float, strefy: dict) -> list
         hit = trafia(dx)
         if hit:
             for z in sorted(hit, key=lambda z: z[2]):
-                nd = z[2] + 1.0 - vx
+                nd = z[2] + 0.5 - vx
                 if nd + v.tytul_w <= v.slot_w + 1e-6 and not trafia(nd):
                     dx = nd
                     break
@@ -665,7 +667,7 @@ def _pakuj(W, H, widoki, grupa, bloki, tb_h, przes, gap_vb, znaki: bool, max_cze
             for j, r in enumerate(rs):
                 R.prostokaty.append(("tytul" if j == len(rs) - 1 else "widok", v.nazwa,
                                      (ox + x + r[0], oy + y + r[1], ox + x + r[2], oy + y + r[3])))
-    wolne = Wolne((fx0 + PAD_B, fy0 + PAD_B, fx1, fy1 - PAD_B))
+    wolne = Wolne((fx0 + PAD_B, fy0 + PAD_B, fx1 - PAD_B, fy1 - PAD_B))
     wolne.zajmij(_napompuj(tb, GAP_C, GAP_B, 0, GAP_B))
     if grupa.poz:
         for r in vr:
@@ -733,6 +735,7 @@ def _umiesc_kotwice(wolne: Wolne, b: Blok, tb: tuple, fx1: float):
     """Wiersz bezpośrednio nad tabliczką (prawa krawędź przy ramce); gdy zajęty z prawej (np. strefa znaku
     centrującego) — węższy wariant bloku (``w_min``) z lewą krawędzią jak tabliczka; inaczej (None, b)."""
     y0 = tb[3] + GAP_B
+    fx1 = fx1 - PAD_B                              # 3 mm od ramki (jak pozostałe bloki)
     r = (fx1 - b.szer, y0, fx1, y0 + b.wys)
     if wolne.miesci(r):
         return (r[0], r[1]), b
