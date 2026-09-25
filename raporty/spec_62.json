@@ -1,4 +1,5 @@
 {
+ "nr": 62,
  "title": "Konstrukcja, runda 1: kontrola zbrojenia 310/310 · spis tomów rysunków dzielony na strony (poprawka + test) · arkusze: poprawki ►",
  "stages": [
   [
@@ -52,6 +53,17 @@
  ],
  "notes": [
   "Spis PT-BO: tabela nie wchodzi już na tabliczkę (2 strony A4).",
-  "Art. 20 ust. 3 pkt 2 PB na tabliczkach — sprawdzone w Dz.U. 2026 poz. 524."
+  "Art. 20 ust. 3 pkt 2 PB na tabliczkach — sprawdzone w Dz.U. 2026 poz. 524.",
+  "NADZÓR (12:39): 2 agentów aktywnych, bez zastojów; najdłuższa bezczynność 0 min; zmiany w repo 0 min temu."
+ ],
+ "images": [
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/test_spis_0.png",
+   "caption": "Test poprawki spisu PT-BO, s. 1/2 (skale i formaty umowne)"
+  },
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/test_spis_1.png",
+   "caption": "Test poprawki spisu PT-BO, s. 2/2 (skale i formaty umowne)"
+  }
  ]
 }
