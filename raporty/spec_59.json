@@ -1,4 +1,5 @@
 {
+ "nr": 59,
  "title": "Weryfikacja układu arkuszy: −36 % papieru (16,47 → 10,48 m²), 424 → 252 warstw A4 · 4 uwagi → poprawki ►",
  "stages": [
   [
@@ -52,6 +53,17 @@
  ],
  "notes": [
   "PZT: pismo 1,8 mm < wymaganych 2,5 mm (W-312) — do poprawy.",
-  "Konstrukcja, runda 1: zestawienia stali przegenerowane."
+  "Konstrukcja, runda 1: zestawienia stali przegenerowane.",
+  "NADZÓR (12:05): 2 agentów aktywnych, bez zastojów; najdłuższa bezczynność 2 min; zmiany w repo 0 min temu."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/projekt/02_PZT/rysunki/PZT-02_plan_szczegolowy_wymiary_i_rzedne.png",
+   "caption": "PZT-02 plan szczegółowy — do korekty wysokości pisma"
+  },
+  {
+   "path": "/home/user/aihouse/projekt/04_PT_konstrukcja/rysunki/PT-BO-11_zestawienie_stali_strop_nad_parterem.png",
+   "caption": "PT-BO-11 zestawienie stali stropu nad parterem (runda 1)"
+  }
  ]
 }
