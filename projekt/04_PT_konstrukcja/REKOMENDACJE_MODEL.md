@@ -1,7 +1,8 @@
 # REKOMENDACJE ZMIAN MODELU — konstrukcja (PT-BO)
 
-Dokument zespołu rysunków konstrukcyjnych (generator `lamela.views.konstrukcja`). Model (`model/*.yaml`) **nie był
-edytowany** — poniżej zmiany do wprowadzenia przez właściciela modelu (`tools/buduj_model.py`), z uzasadnieniem
+Dokument zespołu rysunków konstrukcyjnych (generator `lamela.views.konstrukcja`). Rekomendacje p. 1–10 — stan przed rundą
+konstrukcyjną 1; **status każdej pozycji po wprowadzeniu zmian w modelu (`tools/buduj_model.py`) i bibliotece — p. S** (rejestr
+decyzji: `docs/20_koncepcja/koncepcja.md` §15.7). Poniżej (p. 0–10, historycznie) zmiany do wprowadzenia przez właściciela modelu, z uzasadnieniem
 z obliczeń (`lamela.obliczenia.konstrukcja`, raport `projekt/04_PT_konstrukcja/obliczenia/obliczenia_statyczne.md`)
 i kontroli zbrojenia rysunków (`projekt/04_PT_konstrukcja/rysunki/kontrola_zbrojenia.md`). Rysunki PT-BO są
 generowane z modelu — po zmianach zaktualizują się automatycznie (pozycje, zbrojenie, zestawienia stali).
@@ -9,7 +10,31 @@ generowane z modelu — po zmianach zaktualizują się automatycznie (pozycje, z
 Oznaczenia: **[ZAŁ]** — przyjęcie projektanta (jawne, do akceptacji), **[MODEL]** — zmiana danych modelu,
 **[BIBL]** — zmiana wprowadzona w bibliotece obliczeń w tej rundzie (opis w p. 9).
 
-## 0. Stan (model z 2026-09-25 06:24 — po 2. rundzie poprawek modelu; biblioteka wg p. 9)
+## S. Status po rundzie konstrukcyjnej 1 (2026-09-25)
+
+<!-- STAN:START -->
+<!-- STAN:END -->
+
+| Rekomendacja | Status | Rozwiązanie (model / biblioteka) |
+|---|---|---|
+| 1.1 jawny schemat podparcia B3–B5 | **wykonane** [MODEL] | `belki[].podpory` (B3 na B4/B5; B4: słup ŻB A/1 + słup ŻB B/1; B5: słupy ŻB A/3 i B/3); B8/B9 — na słupach C/3, D/3 |
+| 1.2 słupy ŻB w narożach A/1, A/3 | **wykonane** [MODEL] | trzpienie 18 × 40 cm C30/37 w murze S0-07/S1-04, P0–P1 (SL9–SL12), ciągłość przez wieniec; siły rozłożone w MES płyty fundamentowej |
+| 1.3 zakotwienie końca przęsła zakotwienia B4/B5 (odrywanie −52 kN) | **wykonane** [MODEL]+[BIBL] | ściany P2 stojące na belkach (`sciany[].oparta_na`: S2-01 → B4/B2, S2-07 → B5, S2-08 → B3) dociążają przęsła zakotwienia; B5 — koniec na słupie ŻB B/3 (EQU bez odrywania); B4 — koniec na słupie ŻB B/1 (SL21, P1, na belce B1): reakcja odrywająca EQU zakotwiona prętami słupa w B1 (pozycja 5.9, warunek „EQU — zakotwienie”) |
+| 1.4 ugięcie wspornika B4/B5 (L/500) | **sprawdzone** | pozycje 5.9/5.10 — ugięcie `ugiecie_komplet` spełnione (wspornik 1,0 m na słupie) |
+| 2 fasada S1-01 przez B1 | **wykonane** [MODEL]+[BIBL] | `S1-01.oparta_na: [B1]`, `S0-01.belka_w_koronie: [B1]`, `S1-01.belka_w_koronie: [B4, B2]`; słupki SL5/SL6 stojące na B1 obciążają B1 (wcześniej siła „znikała”); B1 na słupach SL1–SL4, trzpieniach A/1 (SL9) i E/1 (SL20) |
+| 3 filarki muru pod oparciami belek (C/3, D/3, B/3) | **wykonane** [MODEL] | trzpienie/filarki ŻB: B/3 18 × 70 cm (P0–P2), C/3 18 × 86,5 cm (cały filarek S0-08/S1-05), D/3 18 × 70 cm (P0) / 18 × 30 cm (P1, cały filarek S1-06); mur przerwany słupem — obciążenia korony w obrysie → słup [ZAŁ Z9] |
+| 4 elementy niekonstrukcyjne w `wsporniki_plyty` | **wykonane** [MODEL] | pole `konstrukcyjny: false` (PS-A, OB-A, OB-A2, IZ-ST2Z, SW1, WYL1, PL-C1, PL-C2, PL-D); biblioteka respektuje pole (priorytet nad kryterium materiału) |
+| 5.1 żebra poza obrysem płyty | **wykonane** [MODEL] | żebra krawędziowe licowane z krawędzią płyty (oś przesunięta do wnętrza o b/2 − 0,10 m, końce do krawędzi); pogrubienia SF1–SF4 w obrysie płyty; kontrola „wystaje poza obrys” na sumie PF1 + PF2 |
+| 5.2 stopy pod słupami (strefa S1 przy C/3) | **wykonane** [MODEL] | żebra osi 3 pogłębione (h = 0,45 m pod płytą, ZF9–ZF11), żebro łączące ZF18 (C–M), pogrubienie pasmowe ZF19 (1,80 × 4,00 m, h = 0,70 m) pod B/3 i C/3 |
+| 5.3 uskok PF1/PF2 (`uskok: true`) | **bez zmian** [ZAŁ] | MES na sumie obrysów (uskok 15 cm w żebrze) — przyjęcie jak w p. 5.3; przekrój uskoku na PT-BO-02 |
+| 5.4 docisk lokalny / osiadanie | **spełnione** | wyniki w p. S (tabela stanu) — MES z trzpieniami i pogrubieniami |
+| 5.5 kategoria obciążenia garażu (F) | **wykonane** [MODEL]+[BIBL] | `fundamenty.elementy[PF2].obciazenie_uzytkowe: garaz` — przypadek QF (kat. F, ψ wg NA) w MES płyty |
+| 6 naroże PL-2 | **spełnione** | poz. 3.2 PL-2 — wszystkie warunki (w tym SGU) spełnione po zmianach 2. rundy modelu (OB-A poza analizą) i podparciu B4 na słupie A/1; łączniki narożne — dobór wyrobu (BRAKI) |
+| 7 jednolita reprezentacja nadproży | **pozostawione** [ZAŁ] | biblioteka rozróżnia belkę-nadproże z własną pozycją (N16, N17, N22–N25, N27) od nadproża typowego — brak podwójnych pozycji (p. 9); zmiana schematu (`nadproza:`) bez wpływu na wyniki — poza zakresem wydania |
+| 8 blachy czołowe SL1–SL4 | **wykonane** [MODEL]+[BIBL] | `slupy[].blacha_gorna {0,18 × 0,18 × 0,015}`, `blacha_dolna {0,25 × 0,25 × 0,02}`; sprawdzenie docisku 6.7 w pozycjach 8.1–8.4; przebicie płyty ST1 nad słupami w linii B1 — nie dotyczy (komunikat biblioteki) |
+| 8a schody — załamania | bez zmian | jak p. 8a |
+
+## 0. Stan (model z 2026-09-25 06:24 — po 2. rundzie poprawek modelu; biblioteka wg p. 9) — HISTORYCZNY (przed rundą konstrukcyjną 1)
 
 | Zakres | Wynik | Uwagi |
 |---|---|---|
@@ -168,3 +193,29 @@ wymagania warstwy przeciwnej), zamiast oznaczenia „przekrój niewystarczający
 | Z6 | Pozycje ław/stóp izolowanych biblioteki (ZF, SF) zastąpione MES płyty z żebrami; głębokość posadowienia — izolacja obwodowa PN-EN ISO 13793 (W-284, wariant płyty) | koncepcja: płyta na XPS; warunek D ≥ 1,0 m dotyczy ław |
 | Z7 | Pręty górne belek i nadproży ≥ 0,15·A_s,dół | PN-EN 1992-1-1 9.2.1.2(1) (konstrukcja monolityczna z wieńcem) |
 | Z8 | Pręty płyt dobrane na rysunku (φ ≤ 25) gdy pręty przyjęte w bibliotece (φ ≤ 16) < A_s,req | A_s,req bez zmian; kontrola `kontrola_zbrojenia.md` |
+| Z9 | Słup/filarek ŻB w murze (trzpień) przejmuje obciążenia korony ściany w swoim obrysie (reakcje płyt — tylko wypadkowa dodatnia; oparcia belek; ściany wyżej; obciążenia przekazane znad sąsiednich otworów) — mur przerwany słupem | sztywność osiowa: E_cm (C30/37 ≈ 33 GPa, PN-EN 1992-1-1 tabl. 3.1) ≫ E muru = K_E·f_k ≈ 1000·7,66 MPa (PN-EN 1996-1-1 3.7.2 + NA); ujemne siły narożne płyty Kirchhoffa pozostają w profilu muru (wyrównanie jak dla ścian) — przyjęcie projektanta |
+| Z10 | Słup ŻB: układ usztywniony, l₀ = L (β = 1,0); φ_ef ≈ 0,7·φ(∞,t₀); λ_lim z A = 0,7, B = 1,1, C = 0,7; metoda nominalnej krzywizny (c = 10); mimośród e₀ = max(h/30; 20 mm) | PN-EN 1992-1-1 5.8.3.1(1), 5.8.3.2, 5.8.8, 6.1(4), 5.2(7) (wartości zalecane — [NZW NA]); β = 1,0 — zachowawczo (końce przegubowe) |
+| Z11 | Wiatr na trzpień w murze zewnętrznym — z pasma b + 2·0,25 m, oddziaływanie towarzyszące ψ₀ = 0,6 | przyjęcie projektanta (sztywny trzpień przejmuje parcie przyległego muru); PN-EN 1990 + NA (ψ₀ wiatru) |
+| Z12 | EQU belki ze wspornikiem: obciążenia stałe dzielone na część wspornikową i przęsłową, dla każdej podpory γ = 1,10 (wpływ niekorzystny) / 0,90 (korzystny), zmienne tylko niekorzystne × 1,5; reakcja odrywająca podpory na słupie ŻB — A_s ≥ \|R\|/f_yd porównane z A_s,min słupa (dolne oszacowanie zbrojenia ciągłego do belki podpierającej) | PN-EN 1990 tabl. A1.2(A) + NA; PN-EN 1992-1-1 8.4 |
+| Z13 | Siła poprzeczna pasma żebra płyty fundamentowej z MES: V = ΔM/Δs na bazie Δs = d (M — suma m·szerokość elementów przekroju żebra) | równowaga pasma belkowego (V = dM/ds); średnia na odcinku d — miarodajna w odległości ≥ d od lica obciążenia skupionego (PN-EN 1992-1-1 6.2.1(8)) [UPR] |
+| Z14 | Przebicie płyty/żebra pod słupem: obwód kontrolny przycięty krawędzią płyty, β = 1,15 / 1,4 / 1,5 (słup wewnętrzny / krawędziowy / narożny), długość czynna wydłużonego trzpienia ≤ 3·grubość | PN-EN 1992-1-1 6.4.2(4), 6.4.3(6) rys. 6.21N (wartości zalecane, układ usztywniony), 6.4.2(3) (analogicznie) |
+| Z15 | Filarki ŻB 18 × 70 / 86,5 cm (stosunek boków > 4 — ściana wg 9.6.1) sprawdzane jak słup (zasady konstrukcyjne słupa — ostrzejsze: strzemiona 9.5.3) | PN-EN 1992-1-1 9.5, 9.6 — przyjęcie po stronie bezpiecznej |
+| Z16 | Ściana szkieletowa A'' (SZL, bez funkcji nośnej): słupek KVH C24 45 × 200 mm co 0,625 m na wiatr (k_mod = 0,9, γ_M = 1,3) | PN-EN 1995-1-1 (6.11), 2.4.1 + NA; PN-EN 338 (C24); rozstaw i klasa drewna — przyjęcie do potwierdzenia w projekcie wykonawczym ściany |
+| Z17 | Ściany ŻB (klatka, SWZB/SCZB15) — pasmo 1,0 m jak słup (N_Ed — maks. średnia krocząca 1,0 m profilu dolnego), zbrojenie pionowe ≥ 0,002·A_c, poziome ≥ max(25 %; 0,001·A_c) | PN-EN 1992-1-1 5.8, 9.6.2, 9.6.3 |
+
+## 11. Zmiany w bibliotece i generatorze — runda konstrukcyjna 1 — [BIBL]
+
+`src/lamela/obliczenia/konstrukcja/pozycje.py`: jawne podpory belek (`belki[].podpory`), ściany na belkach (`oparta_na` —
+obciążenie belki profilem dolnym ściany; wyłączenie z przekazania ściana-na-ścianę i z obciążenia liniowego płyty), belki w koronie
+ścian (`belka_w_koronie` — odcinek poza podparciem płyty), trzpienie ŻB w murze (`_slupy_w_scianie` — Z9; segmenty filarków bez
+obrysu słupa), ciągłość słupów w pionie (`_slup_ponizej`), słupy stojące na belkach (SL5/SL6 → B1), pozycja słupa ŻB
+(`zelbet.slup_zelbetowy` — Z10/Z11), docisk blach słupów stalowych (6.7), EQU belek ze wspornikiem (`_equ_belki` — Z12), częściowe
+nakładanie osi ścian współliniowych (`_wspolliniowe`), ściany ŻB (Z17) i szkieletowe (Z16), przebicie płyty — pominięte dla słupów
+w linii podpory liniowej; fundament płytowy — pozycje z MES płyty (`_fundament_plytowy`: płyta, żebra — zginanie pasma, ścinanie Z13,
+docisk; pogrubienia — zginanie, przebicie Z14, docisk), zamiast ław/stóp izolowanych (Z6).
+`plyta_fundamentowa.py`: siły trzpieni rozłożone na długości, obwiednie docisku/osiadania w elementach, siły w pasmach żeber,
+kategoria obciążenia płyt składowych (garaż — F), obwód przebicia przycięty krawędzią i β (Z14).
+`views/konstrukcja_dane.py` — MES z pozycji obliczeń (bez ponownej analizy), kontrola żeber na sumie płyt; `views/konstrukcja.py` —
+trzpienie ŻB na rzucie fundamentów (kreskowanie, opis); nowy arkusz PT-BO-27 „Zbrojenie słupów żelbetowych w murze”
+(`views/konstrukcja_slupy.py`, rejestracja w kontroli zbrojenia). Testy: `test_obliczenia_konstrukcja.py` (słup ŻB, EQU belki,
+pręty żebra, płyta z MES), `test_rysunki_konstrukcja.py` (arkusz słupów).

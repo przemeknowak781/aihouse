@@ -940,3 +940,30 @@ Bryły A/B/C/G, linie D/E, sylweta „S”, funkcje pomieszczeń i przejścia �
 * `tools/audyt_wt.py` — WT §152 ust. 7 (wylot poziomy) i ust. 10 w brzmieniu dosłownym, czerpnia i wyrzutnia na różnych dachach;
   pow. zabudowy i PBC z `lamela.wskazniki` (V1-09). Testy: `test_pipeline` (3 × `elementy_zewn`), `test_obliczenia_instalacje`
   (dopływy/przelewy rynien, drenaż TIN), `test_wskazniki` (z_top).
+
+### 15.7 Konstrukcja — runda 1 (REKOMENDACJE_MODEL.md BO; stan każdej pozycji — `projekt/04_PT_konstrukcja/REKOMENDACJE_MODEL.md` p. S)
+Cel: wszystkie pozycje obliczeń statycznych i wszystkie wiersze kontroli zbrojenia spełnione, docisk ≤ nośność, osiadanie ≤ limit,
+EQU spełnione, brak odrywania bez zakotwienia. Architektura bez zmian: słupy i pogrubienia ukryte w ścianach/filarkach i pod posadzką,
+bryły, sylweta „S”, funkcje pomieszczeń, otwory i przejścia — bez zmian (audyt WT: 0 NIEZGODNE; rzuty P0–P2 sprawdzone — trzpienie
+w obrysie murów).
+
+| Uwaga (REKOMENDACJE) | Decyzja (model — `tools/buduj_model.py`) | Podstawa |
+|---|---|---|
+| p. 1, 3 — filarki muru pod oparciami belek, wsporniki B4/B5 na murze | **słupy żelbetowe monolityczne w murze (trzpienie) SL9–SL21** C30/37 w węzłach A/1, A/3 (P0–P1, 18 × 40), B/3 (P0–P2, 18 × 70 — cały filarek S1-05), C/3 (P0–P1, 18 × 86,5 — cały filarek S0-08/S1-05), D/3 (P0 18 × 70, P1 18 × 30 — cały filarek S1-06), E/1 (P0, 18 × 44), B/1 (P1, 18 × 40 na B1); przekrój w grubości muru 18 cm, wydłużony wzdłuż ściany, bez resztek muru < 0,20 m przy otworach | PN-EN 1992-1-1 5.8, 9.5; ZAŁ Z9–Z11 |
+| p. 1 — jawny schemat B3–B5, zakotwienie (odrywanie B4 −52 kN) | `belki[].podpory` (B3 na B4/B5, B4 na SL10/SL21, B5 na SL12/SL14, B8/B9 na trzpieniach C/3, D/3); ściany P2 na belkach (`oparta_na`) dociążają przęsła zakotwienia; reakcja odrywająca EQU B4 zakotwiona w trzpieniu B/1 (pręty ciągłe do B1) | PN-EN 1990 tabl. A1.2(A); ZAŁ Z12 |
+| p. 2 — fasada S1-01 nad przeszkleniem | `S1-01.oparta_na: [B1]`, `S0-01.belka_w_koronie: [B1]`, `S1-01.belka_w_koronie: [B4, B2]`; B1 na SL1–SL4 i trzpieniach A/1, E/1; słupki SL5/SL6 obciążają B1 | ścieżka obciążeń wg koncepcji (B1 = parapet boksu C) |
+| p. 4 — elementy niekonstrukcyjne w `wsporniki_plyty` | `konstrukcyjny: false` (9 elementów) | — |
+| p. 5 — płyta fundamentowa | żebra krawędziowe licowane z krawędzią płyty, pogrubienia SF1–SF4 w obrysie; żebra osi 3 pogłębione do 0,45 m, żebro łączące ZF18, pogrubienie pasmowe ZF19 (1,8 × 4,0 m, h 0,70 m) pod trzpieniami B/3, C/3; garaż PF2 — obciążenie użytkowe kat. F | MES płyty na podłożu sprężystym (Z4–Z6, Z13, Z14) |
+| p. 6 — naroże PL-2 | bez zmian geometrii — warunki spełnione (SGU) po wyłączeniu OB-A i podparciu B4 na słupie A/1 | poz. 3.2 |
+| p. 7 — nadproża | pozostawione (biblioteka bez podwójnych pozycji) | REKOMENDACJE p. S |
+| p. 8 — blachy SL1–SL4 | `blacha_gorna`, `blacha_dolna` — docisk 6.7 | PN-EN 1992-1-1 6.7 |
+
+<!-- KONSTR:START -->
+<!-- KONSTR:END -->
+
+Zmiany bibliotek i rdzenia: `lamela.model` — pola `sciany[].oparta_na`, `sciany[].belka_w_koronie`, `belki[].podpory`, `slupy[].blacha_*`,
+`wsporniki_plyty[].konstrukcyjny` (walidacja odwołań; `docs/SCHEMAT_MODELU.md` §10.3); `obliczenia.konstrukcja` (pozycje, zelbet, MES płyty
+fundamentowej — REKOMENDACJE p. 11); `views.konstrukcja*` (arkusz PT-BO-27, trzpienie na rzucie fundamentów). Uwaga dla branży
+fizyki: trzpienie ŻB w ścianach zewnętrznych (A/1, A/3, B/1, E/1) za ciągłym ETICS 20 cm — mostki punktowe/liniowe w warstwie
+konstrukcyjnej (do ujęcia w katalogu mostków przy jego aktualizacji); żebra krawędziowe licowane z krawędzią płyty (geometria węzła
+cokołu — izolacja obwodowa bez zmian).
