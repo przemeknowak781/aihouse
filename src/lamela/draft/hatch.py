@@ -430,7 +430,7 @@ def _membrane_center(poly, axis):
           "PN-B-01030:2000 poz. 13", kind="membrane")
 def _hydro(c, poly, layer, axis=None, **kw):
     a, b, t = _membrane_center(poly, axis)
-    membrane(c, [a, b], "przeciwwodna", width_mm=max(0.8, min(t / c.k, 1.4)))
+    membrane(c, [a, b], "przeciwwodna", width_mm=max(1.0, min(t / c.k, 1.4)))
 
 
 @register("IZOL_PRZECIWWILGOCIOWA", "Izolacja przeciwwilgociowa (cienka warstwa) — linia bardzo gruba",
@@ -664,10 +664,10 @@ def membrane(c, pts, kind: str = "przeciwwodna", layer: str = "A-IZOL-WODNA", wi
     pts = arr(pts)
     if kind == "przeciwwodna":
         # pas czarny z białymi prostokątami: czarny 3 mm / biały 1,5 mm (R4 pkt 3.8), szer. pasa ≥ 0,7 mm
-        w = max(0.7, width_mm or 0.9)
+        w = min((0.7, 1.0, 1.4), key=lambda x: abs(x - max(0.7, width_mm or 1.0)))  # szereg ISO 128-2
         c.polyline(pts, layer, pen=w, color="#000000")
         from .core import PLine
-        c.add(PLine(layer, max(0.25, w * 0.5), "HYDRO_OKNA", "#ffffff", 23.5, pts, False, 1.0))
+        c.add(PLine(layer, {0.7: 0.35, 1.0: 0.5, 1.4: 0.7}[w], "HYDRO_OKNA", "#ffffff", 23.5, pts, False, 1.0))
     elif kind == "przeciwwilgociowa":
         c.polyline(pts, layer, pen=width_mm or "b_gruba")
     elif kind == "paroizolacja":

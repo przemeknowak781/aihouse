@@ -2,7 +2,7 @@
 
 * separator dziesiętny: przecinek,
 * wymiary liniowe na rysunkach architektoniczno-budowlanych: centymetry, milimetry w indeksie górnym (np. 24⁵),
-* rzędne wysokościowe: metry, domyślnie 2 miejsca po przecinku, znak ±/+/− (PN-B-01025 dopuszcza 3 miejsca),
+* rzędne wysokościowe: metry, 3 miejsca po przecinku (PN-B-01025 pkt 3.5; PZT — 2 miejsca), znak ±/+/−,
 * powierzchnie: m² z 2 miejscami po przecinku.
 """
 from __future__ import annotations
@@ -11,6 +11,11 @@ import math
 
 MINUS = "−"  # znak minus (typograficzny) — obecny w Liberation Sans / DejaVu Sans
 PLUSMINUS = "±"
+
+# Liczba miejsc po przecinku rzędnych: PN-B-01025 pkt 3.5 — 3 miejsca (R4 pkt 3.6: rysunki arch.-bud. i konstrukcyjne);
+# PZT — 2 miejsca (PN-B-01027). Zmiana globalna: fmt.LEVEL_DECIMALS = 2.
+LEVEL_DECIMALS = 3
+LEVEL_DECIMALS_PZT = 2
 
 
 def num(x: float, nd: int = 2, minus: str = MINUS, strip: bool = False) -> str:

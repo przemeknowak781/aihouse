@@ -87,3 +87,81 @@ def add_control_marks(sheet: Sheet, length: float = 100.0):
     """Odcinek kontrolny w dolnym marginesie arkusza (sprawdzenie wydruku w skali 1:1)."""
     x0, y0, x1, y1 = sheet.frame
     control_segment(sheet, (x0 * 0.55, y0 + 8.0), length, vertical=True)
+
+
+# ------------------------------------------------------------------------------------------------ kontrola jakości
+def qa(sheet, kind: str | None = None) -> dict:
+    """Automatyczna kontrola arkusza wg R4 pkt 3.14.
+
+    kind: 'PZT' | 'PAB' | 'PT' | None (z pola ``stadium`` tabliczki). Zwraca {"ok", "errors", "warnings", "stats"}.
+    Sprawdza: pola metryki (§ 10 rozp.), obecność legendy (§ 9), podziałki minimalne (PAB/PT ≥ 1:100, PZT ≥ 1:500),
+    grubości linii z szeregu ISO 128-2, wysokości pisma z szeregu ISO 3098 (PZT ≥ 2,5 mm), zgodność sum łańcuchów
+    wymiarowych z wymiarem całkowitym (po zaokrągleniu do mm, tolerancja 0)."""
+    from . import styles, fmt as F
+    from .core import PArc, PFill, PLine, PText, text_items
+    errors, warnings = [], []
+    tb = sheet.tb
+    stad = (kind or (tb.stadium if tb else "") or "").upper()
+    # 1. metryka
+    if tb is None:
+        errors.append("brak tabliczki rysunkowej")
+    else:
+        for f, name in (("obiekt", "nazwa obiektu"), ("tytul", "tytuł rysunku"), ("skala", "skala"),
+                        ("nr_rysunku", "nr rysunku"), ("data", "data"), ("format", "format")):
+            if not getattr(tb, f):
+                errors.append(f"tabliczka: brak pola „{name}”")
+        proj = [o for o in tb.osoby if o.funkcja.lower().startswith("projektant")]
+        if not proj or not proj[0].imie_nazwisko or not proj[0].specjalnosc_uprawnienia:
+            warnings.append("tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)")
+    # 2. legenda
+    all_prims = [(None, sheet, p) for p in sheet.prims] + [(vp, vp, p) for vp in sheet.viewports for p in vp.prims]
+    if not any(p.layer == "R-LEGENDA" for _v, _c, p in all_prims):
+        warnings.append("brak legendy na arkuszu (R-LEGENDA) — wymagana dla oznaczeń spoza norm z zał. 2 rozp.")
+    # 3. podziałki
+    lim = 500 if "PZT" in stad else 100
+    for vp in sheet.viewports:
+        if vp.scale > lim + 1e-9 and stad:
+            errors.append(f"rzutnia „{vp.title}”: podziałka 1:{vp.scale:g} mniejsza niż dopuszczalna 1:{lim}")
+    # 4. grubości linii i 5. pismo
+    series_lw = set(round(x, 2) for x in styles.ISO_LINEWEIGHTS)
+    bad_lw, bad_h = {}, {}
+    min_h = 2.5 if "PZT" in stad else 1.8
+    n_txt = 0
+    for vp, canvas, p in all_prims:
+        if not styles.layer(p.layer).plot:
+            continue
+        if isinstance(p, (PLine, PArc)):
+            lw = round(canvas.pen_mm(p.pen, p.layer), 2)
+            if lw not in series_lw:
+                bad_lw[lw] = bad_lw.get(lw, 0) + 1
+        elif isinstance(p, PText):
+            for _xy, s, hh in text_items(p, canvas.k)[0]:
+                n_txt += 1
+                h2 = round(hh, 2)
+                if not any(abs(h2 - x) < 0.02 for x in styles.TEXT_SERIES) or h2 < min_h - 0.02:
+                    bad_h.setdefault(h2, []).append(s[:20])
+    for lw, n in sorted(bad_lw.items()):
+        errors.append(f"grubość linii {lw} mm spoza szeregu ISO 128-2 ({n}×)")
+    for h, ex in sorted(bad_h.items()):
+        errors.append(f"wysokość pisma {h} mm spoza szeregu ISO 3098 / poniżej minimum ({len(ex)}×, np. {ex[:3]})")
+    # 7. łańcuchy wymiarowe: suma zaokrąglonych odcinków = zaokrąglony wymiar całkowity
+    n_ch = 0
+    for vp in sheet.viewports:
+        chains = getattr(vp, "dim_chains", [])
+        for ch in chains:
+            t = ch["t"]
+            if len(t) < 3 or ch.get("labels"):
+                continue
+            for other in chains:
+                ot = other["t"]
+                if other is ch or len(ot) != 2 or other.get("labels"):
+                    continue
+                if abs(ot[0] - t[0]) < 1e-6 and abs(ot[1] - t[-1]) < 1e-6 and np.allclose(other["d"], ch["d"]):
+                    n_ch += 1
+                    parts = [F.round_half_up((b - a) * 1000) for a, b in zip(t[:-1], t[1:])]
+                    total = F.round_half_up((t[-1] - t[0]) * 1000)
+                    if sum(parts) != total:
+                        errors.append(f"rzutnia „{vp.title}”: łańcuch {[p_ / 10 for p_ in parts]} cm sumuje się do "
+                                      f"{sum(parts) / 10} cm ≠ wymiar całkowity {total / 10} cm")
+    return {"ok": not errors, "errors": errors, "warnings": warnings,
+            "stats": {"prymitywy": len(all_prims), "napisy": n_txt, "sprawdzone_lancuchy": n_ch}}

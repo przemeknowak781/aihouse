@@ -37,7 +37,7 @@ TB_COMMON = dict(
     lokalizacja="dz. nr ewid. 123/4, obręb 0005 Przykładowo, jedn. ewid. Przykładowo (dane fikcyjne)",
     kategoria="I",
     stadium="PB",
-    data="09.2026",
+    data="2026-09-25",
     rewizja="0",
 )
 
@@ -64,8 +64,9 @@ OPEN = {
 
 
 def demo_plan():
-    tb = TitleBlock(**TB_COMMON, branza="ARCHITEKTURA", tytul="RZUT PRÓBNY — FRAGMENT PARTERU", skala="1:50",
-                    nr_rysunku="DEMO-01", rewizje=[("0", "Wydanie do weryfikacji silnika rysunkowego", "2026-09-25")])
+    tb = TitleBlock(**TB_COMMON, branza="ARCHITEKTURA (AR)", tytul="RZUT PRÓBNY — FRAGMENT PARTERU", skala="1:50",
+                    nr_rysunku="DEMO-01", arkusz="1/3", rodzaj="rzut",
+                    rewizje=[("0", "Wydanie do weryfikacji silnika rysunkowego", "2026-09-25")])
     sh = Sheet("A3", title_block=tb)
     vp = sh.add_viewport(50, "RZUT PARTERU (FRAGMENT)")
     k = vp.k
@@ -128,46 +129,50 @@ def demo_plan():
     # ---------------------------------------------------------------- oznaczenia pomieszczeń
     x_b_in = AX["B"] - F_IN
     rooms = [
-        ("0.01", "Hol ze schodami", (1.95, 2.95), Polygon([(F_IN, Y_PART + 0.075), (x_b_in, Y_PART + 0.075),
+        ("1.01", "Hol ze schodami", (1.95, 2.95), Polygon([(F_IN, Y_PART + 0.075), (x_b_in, Y_PART + 0.075),
                                                          (x_b_in, AY["2"] - F_IN), (F_IN, AY["2"] - F_IN)]), "gres"),
-        ("0.02", "Łazienka", (2.45, 0.80), Polygon([(F_IN, F_IN), (x_b_in, F_IN), (x_b_in, Y_PART - 0.075),
+        ("1.02", "Łazienka", (2.45, 0.80), Polygon([(F_IN, F_IN), (x_b_in, F_IN), (x_b_in, Y_PART - 0.075),
                                                     (F_IN, Y_PART - 0.075)]), "gres"),
-        ("0.03", "Pokój", (5.75, 1.62), Polygon([(AX["B"] + F_IN, F_IN), (AX["C"] - F_IN, F_IN),
+        ("1.03", "Pokój", (5.75, 1.62), Polygon([(AX["B"] + F_IN, F_IN), (AX["C"] - F_IN, F_IN),
                                                  (AX["C"] - F_IN, AY["2"] - F_IN), (AX["B"] + F_IN, AY["2"] - F_IN)]),
          "deska"),
     ]
     for nr, name, pos, pg, floor in rooms:
-        S.room_tag(vp, pos, nr, name, pg.area, level_z=None if nr == "0.01" else (0.0 if nr != "0.02" else -0.02))
+        S.room_tag(vp, pos, nr, name, pg.area, level_z=None if nr == "1.01" else (0.0 if nr != "1.02" else -0.02))
     dims.level_plan(vp, (0.40, 3.22), 0.0, style="x")
 
     # ---------------------------------------------------------------- osie
     x_min, x_max = AX["A"] - F_EXT, AX["C"] + F_EXT
     y_min, y_max = AY["1"] - F_EXT, AY["2"] + F_EXT
-    c1, sp = 9.0 * k, 6.5 * k      # odległość 1. łańcucha od lica, rozstaw łańcuchów
-    y_ch = [y_min - c1, y_min - c1 - sp, y_min - c1 - 2 * sp]
-    x_ch = [x_min - c1, x_min - c1 - sp, x_min - c1 - 2 * sp]
-    y_ax_bot = y_ch[-1] - 6.5 * k
-    x_ax_left = x_ch[-1] - 6.5 * k
+    c1, sp = 10.0 * k, 7.0 * k     # 1. łańcuch 10 mm od obrysu, kolejne co 7 mm (R4 pkt 3.5)
+    y_ch = [y_min - c1 - i * sp for i in range(4)]
+    x_ch = [x_min - c1 - i * sp for i in range(4)]
+    y_ax_bot = y_ch[-1] - 5.0 * k
+    x_ax_left = x_ch[-1] - 5.0 * k
     y_top_ch = y_max + c1
     x_right_ch = [x_max + c1]
     for name, x in AX.items():
-        S.axis_line(vp, (x, y_ax_bot), (x, y_top_ch + 6.5 * k), name, "both", 4.0, 3.5)
-    vp.meta_axis = ((AX["B"], y_ax_bot), (AX["B"], y_top_ch + 6.5 * k))
+        S.axis_line(vp, (x, y_ax_bot), (x, y_top_ch + 5.0 * k), name, "both")
+    vp.meta_axis = ((AX["B"], y_ax_bot), (AX["B"], y_top_ch + 5.0 * k))
     for name, y in AY.items():
-        S.axis_line(vp, (x_ax_left, y), (x_right_ch[-1] + 4.0 * k, y), name, "start", 4.0, 3.5)
+        S.axis_line(vp, (x_ax_left, y), (x_right_ch[-1] + 4.0 * k, y), name, "start")
 
     # ---------------------------------------------------------------- wymiary zewnętrzne (PN-B-01029)
-    # południe: 1) otwory (wymiary murarskie), 2) ściany i pomieszczenia, 3) wymiar całkowity
+    # ciągi zewnętrzne (PN-B-01029 / R4 pkt 3.5), od obrysu: 1) otwory i filary, 2) osie otworów i ściany
+    # wewnętrzne dochodzące do ściany zewnętrznej, 3) osie konstrukcyjne, 4) wymiar całkowity
     o1, hs = OPEN["O1"], OPEN["HS1"]
     dims.dim_h(vp, [x_min, o1[1], o1[2], hs[1], hs[2], x_max], y_ch[0], y_min)
-    dims.dim_h(vp, [x_min, AX["A"] + F_STR, AX["B"] - F_STR, AX["B"] + F_STR, AX["C"] - F_STR, x_max], y_ch[1], y_min)
-    dims.dim_h(vp, [x_min, x_max], y_ch[2], y_min)
-    # zachód
+    dims.dim_h(vp, [x_min, AX["A"] + F_STR, (o1[1] + o1[2]) / 2, AX["B"] - F_STR, AX["B"] + F_STR,
+                    (hs[1] + hs[2]) / 2, AX["C"] - F_STR, x_max], y_ch[1], y_min)
+    dims.dim_h(vp, list(AX.values()), y_ch[2], y_min)
+    dims.dim_h(vp, [x_min, x_max], y_ch[3], y_min)
     o2 = OPEN["O2"]
     dims.dim_v(vp, [y_min, o2[1], o2[2], y_max], x_ch[0], x_min)
-    dims.dim_v(vp, [y_min, AY["1"] + F_STR, Y_PART - 0.06, Y_PART + 0.06, AY["2"] - F_STR, y_max], x_ch[1], x_min)
-    dims.dim_v(vp, [y_min, y_max], x_ch[2], x_min)
-    # wschód: otwory + całkowity; północ: osie
+    dims.dim_v(vp, [y_min, AY["1"] + F_STR, Y_PART - 0.06, Y_PART + 0.06, (o2[1] + o2[2]) / 2, AY["2"] - F_STR,
+                    y_max], x_ch[1], x_min)
+    dims.dim_v(vp, list(AY.values()), x_ch[2], x_min)
+    dims.dim_v(vp, [y_min, y_max], x_ch[3], x_min)
+    # wschód: otwory; północ: osie (ściana bez otworów — ciągi 1–2 pominięte)
     o3 = OPEN["O3"]
     dims.dim_v(vp, [y_min, o3[1], o3[2], y_max], x_right_ch[0], x_max)
     dims.dim_h(vp, list(AX.values()), y_top_ch, y_max)
@@ -187,7 +192,7 @@ def demo_plan():
     dims.opening_dim(vp, (AX["B"] - F_IN, 3.25), (0, 1), None, None, symbol="D2", side=1, axis_mm=4.0)
 
     # ---------------------------------------------------------------- przekrój, północ
-    S.section_mark(vp, (6.55, y_ax_bot - 2.0 * k), (6.55, y_top_ch + 14 * k), "A", look=1.0)
+    S.section_mark(vp, (6.55, y_ax_bot - 5.0 * k), (6.55, y_top_ch + 16 * k), "A", look=1.0)
 
     x0, y0, x1, y1 = sh.frame
     sh.place(vp, x0 + 3.0, y1 - 3.0, "tl")
@@ -204,21 +209,23 @@ def demo_plan():
         rows.append([nr, name, floor, fmt.area(pg.area, unit=False)])
     tot = sum(r[3].area for r in rooms)
     rows.append(["", "RAZEM", "", fmt.area(tot, unit=False)])
-    r = table(sh, colx, ytab - 4.0, [("Nr", 12), ("Nazwa pomieszczenia", 52), ("Posadzka", 26), ("Pow. [m²]", 22)],
-              rows, h=2.2, row_h=4.6, title="ZESTAWIENIE POMIESZCZEŃ", align=["center", "left", "left", "right"])
+    r = table(sh, colx, ytab - 4.0, [("Nr", 12), ("Nazwa pomieszczenia", 46), ("Posadzka", 24), ("Pow. [m²]", 22)],
+              rows, h=2.5, row_h=5.0, title="ZESTAWIENIE POMIESZCZEŃ", align=["center", "left", "left", "right"])
     rows2 = []
     for sym, (wall, a, b, h, sill) in OPEN.items():
         rows2.append([sym, fmt.dim_text(b - a), fmt.dim_text(h), "—" if sill is None else fmt.dim_text(sill)])
     r2 = table(sh, colx, r[1] - 10.0, [("Symbol", 16), ("Szer. [cm]", 20), ("Wys. [cm]", 20), ("Parapet [cm]", 22)],
-               rows2, h=2.2, row_h=4.6, title="ZESTAWIENIE OTWORÓW (w świetle muru)")
+               rows2, h=2.5, row_h=5.0, title="ZESTAWIENIE OTWORÓW (w świetle muru)")
     lg = hatch.legend(sh, colx, r2[1] - 4.0, ["MUR_SILIKAT", "MUR_CERAMIKA", "IZOL_TWARDA", "TYNK"], cols=2,
-                      col_w=(fx1 - colx) / 2.0, sw=(11.0, 5.5), h=2.0, title="OZNACZENIA MATERIAŁÓW",
+                      col_w=(fx1 - colx) / 2.0, sw=(11.0, 5.5), h=1.8, title="OZNACZENIA MATERIAŁÓW",
                       show_source=False, row_gap=1.6)
-    notes = ["Wymiary w cm (mm w indeksie górnym), rzędne w m. Rzędna ±0,00 = posadzka parteru = 101,65 m n.p.m.",
-             "Wymiary otworów w świetle muru: licznik — szerokość, mianownik — wysokość, w nawiasie wysokość parapetu.",
+    notes = ["Wymiary w cm (mm w indeksie górnym, np. 24⁵ = 24,5 cm), rzędne w m. ±0,000 = posadzka parteru = "
+             "101,650 m n.p.m. (PL-EVRF2007-NH).",
+             "Otwory: licznik — szerokość, mianownik — wysokość w świetle muru, w nawiasie wysokość parapetu.",
+             "Oznaczenia mur silikatowy i EPS/wełna — przyjęte (brak w PN-B-01030), objaśnione w legendzie.",
              "Rysunek testowy silnika — dane nie stanowią projektu."]
-    nb = notes_box(sh, fx0, lg[1] - 2.0, fx1 - fx0, notes, "UWAGI", h=2.0)
-    scale_bar(sh, (fx0 + 4.0, nb[1] - 9.0), 50, 5.0)
+    nb = notes_box(sh, fx0, lg[1] - 2.0, fx1 - fx0, notes, "OBJAŚNIENIA I UWAGI", h=1.8)
+    scale_bar(sh, (fx0 + 4.0, nb[1] - 9.0), 50, 3.0)
     plot.add_control_marks(sh)
     files = sh.save(OUT / "DEMO-01_rzut_1-50")
     return sh, vp, files

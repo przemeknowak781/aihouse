@@ -1,4 +1,27 @@
-# Koncepcja — WARIANT W1: „wierność szkicowi i zwartość”
+# -*- coding: utf-8 -*-
+"""Generuje docs/20_koncepcja/W1/opis.md i model_W1.json z modelu wariantu W1."""
+import json
+import os
+from shapely.geometry import mapping
+from model_w1 import *
+from tables_w1 import (md_rooms, md_openings, md_walls, md_windows, totals, dist_checks, ROOMS as _R)
+from draw_site import site_metrics
+from draw_common import fmt
+
+OUT = '/home/user/aihouse/docs/20_koncepcja/W1'
+t, tot = totals()
+m = site_metrics()
+H, zmin = building_height()
+win_md, win_rows = md_windows()
+room = {r['id']: r for r in ROOMS}
+A = lambda rid: fmt(room[rid]['poly'].area)
+PU_bud = tot['PU'] + tot['T']
+netto = tot['PU'] + tot['T'] + tot['S'] + tot['G']
+S = STAIR
+
+md = []
+w = md.append
+w(f"""# Koncepcja — WARIANT W1: „wierność szkicowi i zwartość”
 
 **Dom LAMELA** — dom jednorodzinny wolnostojący, 3 kondygnacje nadziemne (P0, P1, P2), bez podpiwniczenia, stropodachy.
 Działka 123/4 (fikc.), 32,00 × 50,00 m, droga od północy. Data: 2026-09-25. Opracowanie koncepcyjne (etap: warianty → ocena → synteza).
@@ -50,7 +73,7 @@ piętra to dwa prostokąty 12,00 × 7,90 i 13,00 × 7,90 m ustawione jeden nad d
 | D — pion (narożnik G) | 19,0–19,2 | 19,20 | 18,90 | lico wsch. garażu |
 | E — przeszklenie parteru | 1,0 … 13,2 (5 kwater) | 1,00 … 13,20 (lica); szkło 1,405 … 12,795 | 0,70 … 12,90 | 5 równych kwater 2,28 m (w szkicu nierówne) |
 | E — płyta dachu parteru | −1,5 … 14,1 | −1,50 … (ciągła do 19,20 jako D) | −1,80 … 18,90 | wysunięcie 1,50 m zach. poza B, 1,00 m płd. |
-| G — garaż | 13,2 … 19,2 | 13,20 … 19,20 | 12,90 … 18,90 | w świetle 5,68 × 6,49 m |
+| G — garaż | 13,2 … 19,2 | 13,20 … 19,20 | 12,90 … 18,90 | w świetle {fmt(AX['G'] - EXT_IN - AX['F'] - GAR_IN)} × {fmt(AY['4'] - EXT_IN - Y_GAR - H_BEAR)} m |
 
 Proporcje pionowe szkicu są umowne (pasmo B ~2× wyższe) — wysokości przyjęto wg WT. Linia D leży wyżej niż płyta E (jak w szkicu):
 wierzch pasa D = **+3,70** (dolna rama boksu C = siedzisko + attyka dachu garażu), krawędź płyty E = 2,70–3,05.
@@ -62,14 +85,14 @@ Porównanie graficzne: `elewacja_S.png` (górny panel — szkic skalibrowany w p
 
 | oś | x [m] | rola | | oś | y [m] | rola |
 |---|---|---|---|---|---|---|
-| A' | -1,00 | ściana zach. P2 (ŻB, na tarczach P2) | | 1 | 0,00 | płd.: ściany P1/P2, słupy SL1–SL4 + belka ukryta ST1 w P0, ściana płd. garażu |
-| A | 0,00 | ściana zach. P1 (ŻB, na tarczach P1) — **początek układu** | | 1a | 3,80 | ściana garaż / pom. gosp. |
-| B | 1,00 | ściana zach. P0 (ŻB — podpora wsporników) | | 2 | 4,80 | ściana płd. trzonu (ŻB) + ściany nośne P0 (salon/ zaplecze), P1/P2 (strefa wsch.) |
-| C | 3,70 | ściana zach. trzonu (ŻB) | | 3 | 7,30 | ściana płn. P1/P2 i trzonu; w P0 ściana wewn. nośna |
-| D | 8,50 | ściana wsch. trzonu (ŻB) | | 4 | 10,50 | ściana płn. P0 (skrzydło płn. + garaż) |
-| E | 11,40 | ściana wsch. P1/P2 (ŻB — ściana-tarcza nad kuchnią) | | | | |
-| F | 12,60 | ściana wsch. części mieszkalnej P0 / zach. garażu | | | | |
-| G | 18,60 | ściana wsch. garażu (narożnik „pionu D”) | | | | |
+| A' | {fmt(AX["A'"])} | ściana zach. P2 (ŻB, na tarczach P2) | | 1 | {fmt(AY['1'])} | płd.: ściany P1/P2, słupy SL1–SL4 + belka ukryta ST1 w P0, ściana płd. garażu |
+| A | {fmt(AX['A'])} | ściana zach. P1 (ŻB, na tarczach P1) — **początek układu** | | 1a | {fmt(Y_GAR)} | ściana garaż / pom. gosp. |
+| B | {fmt(AX['B'])} | ściana zach. P0 (ŻB — podpora wsporników) | | 2 | {fmt(AY['2'])} | ściana płd. trzonu (ŻB) + ściany nośne P0 (salon/ zaplecze), P1/P2 (strefa wsch.) |
+| C | {fmt(AX['C'])} | ściana zach. trzonu (ŻB) | | 3 | {fmt(AY['3'])} | ściana płn. P1/P2 i trzonu; w P0 ściana wewn. nośna |
+| D | {fmt(AX['D'])} | ściana wsch. trzonu (ŻB) | | 4 | {fmt(AY['4'])} | ściana płn. P0 (skrzydło płn. + garaż) |
+| E | {fmt(AX['E'])} | ściana wsch. P1/P2 (ŻB — ściana-tarcza nad kuchnią) | | | | |
+| F | {fmt(AX['F'])} | ściana wsch. części mieszkalnej P0 / zach. garażu | | | | |
+| G | {fmt(AX['G'])} | ściana wsch. garażu (narożnik „pionu D”) | | | | |
 
 ### 3.2 Poziomy (rzędne względne; ±0,00 = 101,65 m n.p.m.)
 
@@ -88,7 +111,7 @@ Porównanie graficzne: `elewacja_S.png` (górny panel — szkic skalibrowany w p
 | attyka / okap dachu P2 | **+9,85** (najwyższy punkt konstrukcji) |
 | wysokość kondygnacji / w świetle | 3,15 / **2,78 m** (wszystkie kondygnacje; garaż 2,93 m) |
 | ławy fundamentowe | spód −1,10 (strefa przemarzania 0,80 m od terenu ≈ −0,30) |
-| teren przy budynku | −0,22 (NE) … −0,34 (SW); najniższe wejście (HS salonu, W) -0,31 |
+| teren przy budynku | −0,22 (NE) … −0,34 (SW); najniższe wejście (HS salonu, W) {fmt(zmin)} |
 
 ### 3.3 Przegrody (typy)
 
@@ -100,195 +123,48 @@ Porównanie graficzne: `elewacja_S.png` (górny panel — szkic skalibrowany w p
 | SG1 — ściana dom/garaż (oś F) | tynk + SIL 18 + wełna 12 cm (garaż) + wyprawa; EI 60 | −0,105 / +0,22 |
 | przeszklenie E | aluminium z przekładką term., 3-szybowe, U_w ≤ 0,9, g ≤ 0,35 z osłoną ZIP w kasecie | pas y −0,25 … −0,10 |
 
-### 3.4 Obrysy zewnętrzne kondygnacji (lica zewnętrzne z ociepleniem)
+""")
+
+# ----- obrysy
+w("""### 3.4 Obrysy zewnętrzne kondygnacji (lica zewnętrzne z ociepleniem)
 
 | kondygnacja | obrys (x × y) | wymiary | pow. całkowita (brutto) |
 |---|---|---|---|
-| P0 (część mieszk. + garaż) | x 0,70 … 18,90, y -0,30 … 10,80 | 18,20 × 11,10 m | 202,02 m² |
-| P1 (bryła B) | x -0,30 … 11,70, y -0,30 … 7,60 | 12,00 × 7,90 m | 94,80 m² + boks C 7,75 m² |
-| P2 (bryła A) | x -1,30 … 11,70, y -0,30 … 7,60 | 13,00 × 7,90 m | 102,70 m² |
-| boks C (P1) | x 3,95 … 11,70, y -1,30 … -0,30 | 7,75 × 1,00 m | 7,75 m² (z +3,00 do +5,45) |
+""")
+for fl, lab in (('P0', 'P0 (część mieszk. + garaż)'), ('P1', 'P1 (bryła B)'), ('P2', 'P2 (bryła A)')):
+    b = OUTLINE[fl].bounds
+    extra = f" + boks C {fmt((C_BOX['x1'] - C_BOX['x0']) * 1.0)} m²" if fl == 'P1' else ''
+    w(f"| {lab} | x {fmt(b[0])} … {fmt(b[2])}, y {fmt(b[1])} … {fmt(b[3])} | {fmt(b[2] - b[0])} × {fmt(b[3] - b[1])} m | "
+      f"{fmt(OUTLINE[fl].area)} m²{extra} |\n")
+w(f"| boks C (P1) | x {fmt(C_BOX['x0'])} … {fmt(C_BOX['x1'])}, y {fmt(C_BOX['y0'])} … {fmt(C_BOX['y1'])} | 7,75 × 1,00 m | "
+  f"7,75 m² (z +3,00 do +5,45) |\n\n")
 
-### 3.5 PARTER P0 (±0,00)
+for fl, title in (('P0', 'PARTER P0 (±0,00)'), ('P1', 'I PIĘTRO P1 (+3,15)'), ('P2', 'II PIĘTRO P2 (+6,30)')):
+    w(f"### 3.{5 + ['P0', 'P1', 'P2'].index(fl)} {title}\n\n**Ściany** (oś warstwy konstrukcyjnej):\n\n")
+    w(md_walls(fl))
+    w("\n**Otwory** (położenie: zakres wzdłuż ściany w układzie budynku, w świetle muru; wysokość w świetle; parapet od posadzki kondygnacji):\n\n")
+    w(md_openings(fl))
+    w("\n**Pomieszczenia** (wieloboki netto w licach wykończonych):\n\n")
+    w(md_rooms(fl))
+    w(f"\nSuma {fl}: PU (mieszk.+pomocn.+komunik.) **{fmt(t[fl]['PU'])} m²**, pom. techniczne {fmt(t[fl]['T'])} m², "
+      f"schody/spoczniki {fmt(t[fl]['S'])} m²" + (f", garaż + pom. gosp. {fmt(t[fl]['G'])} m²" if t[fl]['G'] else '') + ".\n\n")
+    if fl == 'P0':
+        w("Funkcja: wejście od północy (daszek 1,50 m = wysunięcie ST1, x 6,60–10,00) → wiatrołap 0.01 → hol 0.02 → na osi wejścia "
+          "spocznik trzonu (przejście 1,20 m) → jadalnia i widok na ogród. Z holu: pokój gościnny 0.07 (z łazienką 0.08 en-suite, "
+          "drzwi 90 cm), garderoba 0.03; hol przechodzi w sień gospodarczą 0.06 → WC 0.04, schowek 0.05, pom. techniczne 0.11, "
+          "drzwi EI30 do garażu 0.13. Strefa dzienna 0.12 (salon/jadalnia/kuchnia z wyspą, spiżarnia 0.10) na całej elewacji "
+          "płd., wyjścia HS na taras płd. (E2, E4) i zach. (HS1, taras pod okapem ST1).\n\n")
+    if fl == 'P1':
+        w("Funkcja: ze spocznika trzonu (x 7,095–8,395) → hol-biblioteka 1.03 (otwarta przestrzeń rodzinna przed boksem C, "
+          "siedzisko-czytelnia 7,10 m w wykuszu) → pokoje dzieci 1.01 (SW) i 1.02 (NW), oba z oknami zach.; pralnia 1.04 z oknem "
+          "wsch.; łazienka 1.05 wejście bezpośrednio ze spocznika. Na wschód od bryły B — dach zielony ekstensywny parteru/garażu "
+          "(nieużytkowy, bez wyjścia, bez tarasu).\n\n")
+    if fl == 'P2':
+        w("Funkcja: apartament rodziców w części zach. (sypialnia 2.01 S+W za lamelami i nad wspornikiem, garderoba 2.02, łazienka 2.03), "
+          "gabinet 2.04 (S), pokój 2.06 (S+E — dla 5. członka rodziny / hobby / gość), pom. techniczne 2.07 z rekuperatorem i "
+          "wyłazem dachowym 90×120 (drabina stała) — wejście ze spocznika; nad pustką klatki świetlik 2,60 × 1,80 m.\n\n")
 
-**Ściany** (oś warstwy konstrukcyjnej):
-
-| typ | położenie (oś warstwy konstr.) | od–do | grubość / przegroda |
-|---|---|---|---|
-| zewn. SZ1 | prostokąt osi x 1,00–18,60, y 0,00–10,50 | obwód (bez przeszklenia E x 1,105–12,495 w osi 1) | 18 cm SIL/ŻB + 20 cm EPS/MW + tynki = 40,5 cm; oś B: ŻB 18 (podpora wsporników) |
-| wewn. | x = 3,70 | y 4,70–7,41 | ŻB 18 (trzon) |
-| wewn. | x = 8,50 | y 4,70–7,41 | ŻB 18 (trzon) |
-| wewn. | y = 4,80 | x 3,60–8,61 | ŻB 18 (trzon) |
-| wewn. | y = 4,80 | x 1,00–3,60 | SIL 18 nośna |
-| wewn. | y = 4,80 | x 8,60–12,60 | SIL 18 nośna |
-| wewn. | y = 7,30 | x 1,00–3,60 | SIL 18 nośna |
-| wewn. | y = 7,30 | x 3,60–8,61 | ŻB 18 (trzon) |
-| wewn. | y = 7,30 | x 8,60–12,60 | SIL 18 nośna |
-| wewn. | x = 9,75 | y 4,91–7,20 | SIL 12 działowa |
-| wewn. | x = 12,60 | y 0,00–10,50 | SIL 18 + MW 12 od garażu (EI 60) |
-| wewn. | y = 3,80 | x 12,82–18,50 | SIL 18 nośna |
-| wewn. | x = 4,80 | y 7,41–10,39 | SIL 12 działowa |
-| wewn. | y = 8,80 | x 4,88–12,49 | SIL 12 działowa |
-| wewn. | x = 6,80 | y 8,88–10,39 | SIL 12 działowa |
-| wewn. | x = 9,40 | y 8,88–10,39 | SIL 12 działowa |
-| wewn. | x = 11,00 | y 8,88–10,39 | SIL 12 działowa |
-
-**Otwory** (położenie: zakres wzdłuż ściany w układzie budynku, w świetle muru; wysokość w świetle; parapet od posadzki kondygnacji):
-
-| id | ściana / położenie | typ | szer. × wys. [m] | parapet [m] | symbol / uwagi |
-|---|---|---|---|---|---|
-| O0-01 | zach. (oś B), y 0,80–3,20 | drzwi HS | 2,40 × 2,60 | 0,00 | HS1 drzwi przesuwne na taras zach. |
-| O0-02 | zach. (oś B), y 5,50–6,40 | okno | 0,90 × 0,80 | 1,50 | OK3  |
-| O0-03 | zach. (oś B), y 8,20–9,80 | okno | 1,60 × 1,50 | 0,85 | OK1  |
-| O0-04 | płn. (oś 4), x 7,30–8,30 | drzwi zewn. | 1,00 × 2,20 | 0,00 | DZ1 drzwi wejściowe |
-| O0-05 | płn. (oś 4), x 8,40–8,90 | fix | 0,50 × 2,20 | 0,00 | FX1 doświetle boczne |
-| O0-06 | płn. (oś 4), x 9,90–10,50 | okno | 0,60 × 0,80 | 1,50 | OK4  |
-| O0-07 | płn. (oś 4), x 13,16–18,16 | brama | 5,00 × 2,25 | 0,00 | BG1 brama segmentowa 500x225 |
-| O0-08 | wsch. (oś G), y 0,80–1,80 | drzwi zewn. | 1,00 × 2,10 | 0,00 | DZ2 drzwi do ogrodu (pom. gosp.) |
-| O0-09 | wsch. (oś G), y 6,00–7,50 | okno | 1,50 × 0,80 | 1,40 | OK5  |
-| D0-01 | ściana y=4,80, x 7,15–8,35 | przejście | 1,20 × 2,05 | 0,00 |  przejście spocznik -> jadalnia |
-| D0-02 | ściana y=4,80, x 8,72–9,52 | drzwi | 0,80 × 2,05 | 0,00 |  otwierane na zewnątrz (półki) |
-| D0-03 | ściana y=4,80, x 5,95–6,75 | drzwi | 0,80 × 1,80 | 0,00 |  schowek pod schodami |
-| D0-04 | ściana y=7,30, x 1,95–2,85 | drzwi | 0,90 × 2,05 | 0,00 |  90 cm (senior) |
-| D0-05 | ściana y=7,30, x 7,15–8,35 | przejście | 1,20 × 2,05 | 0,00 |   |
-| D0-06 | ściana y=7,30, x 10,40–11,20 | drzwi | 0,80 × 2,05 | 0,00 |   |
-| D0-07 | ściana x=4,80, y 7,55–8,45 | drzwi | 0,90 × 2,05 | 0,00 |   |
-| D0-08 | ściana y=8,80, x 5,40–6,20 | drzwi | 0,80 × 2,05 | 0,00 |   |
-| D0-09 | ściana y=8,80, x 7,30–8,20 | drzwi | 0,90 × 2,05 | 0,00 |  drzwi szklane wiatrołapu |
-| D0-10 | ściana y=8,80, x 9,80–10,60 | drzwi | 0,80 × 2,05 | 0,00 |   |
-| D0-11 | ściana y=8,80, x 11,40–12,20 | drzwi | 0,80 × 2,05 | 0,00 |   |
-| D0-12 | ściana x=12,60, y 7,55–8,45 | drzwi | 0,90 × 2,05 | 0,00 |  EI30 samozamykające |
-| D0-13 | ściana y=3,80, x 16,50–17,40 | drzwi | 0,90 × 2,05 | 0,00 |   |
-| E1 | płd. (oś 1), x 1,10–3,38 | fix | 2,28 × 2,72 | 0,00 | przeszklenie strefy dziennej, słupek/słup SL w osi podziału |
-| E2 | płd. (oś 1), x 3,38–5,66 | drzwi HS | 2,28 × 2,72 | 0,00 | przeszklenie strefy dziennej, słupek/słup SL w osi podziału |
-| E3 | płd. (oś 1), x 5,66–7,94 | fix | 2,28 × 2,72 | 0,00 | przeszklenie strefy dziennej, słupek/słup SL w osi podziału |
-| E4 | płd. (oś 1), x 7,94–10,22 | drzwi HS | 2,28 × 2,72 | 0,00 | przeszklenie strefy dziennej, słupek/słup SL w osi podziału |
-| E5 | płd. (oś 1), x 10,22–12,49 | fix | 2,28 × 2,72 | 0,00 | przeszklenie strefy dziennej, słupek/słup SL w osi podziału |
-
-**Pomieszczenia** (wieloboki netto w licach wykończonych):
-
-| nr | pomieszczenie | kategoria | wymiary netto [m] (x × y) | pow. netto [m²] | wielobok (x,y) |
-|---|---|---|---|---|---|
-| 0.01 | Wiatrołap | komunikacja | 2,45 × 1,52 | **3,72** | (9,325, 8,875); (9,325, 10,395); (6,875, 10,395); (6,875, 8,875) |
-| 0.02 | Hol | komunikacja | 4,53 × 1,32 | **5,97** | (9,400, 7,405); (9,400, 8,725); (4,875, 8,725); (4,875, 7,405) |
-| 0.03 | Garderoba | pomocnicze | 1,85 × 1,52 | **2,81** | (6,725, 8,875); (6,725, 10,395); (4,875, 10,395); (4,875, 8,875) |
-| 0.04 | WC | pomocnicze | 1,45 × 1,52 | **2,20** | (10,925, 8,875); (10,925, 10,395); (9,475, 10,395); (9,475, 8,875) |
-| 0.05 | Schowek gosp. | pomocnicze | 1,42 × 1,52 | **2,16** | (12,495, 8,875); (12,495, 10,395); (11,075, 10,395); (11,075, 8,875) |
-| 0.06 | Sień gospodarcza | komunikacja | 3,09 × 1,32 | **4,09** | (12,495, 7,405); (12,495, 8,725); (9,400, 8,725); (9,400, 7,405) |
-| 0.07 | Pokój gościnny / gabinet | mieszk./pobyt | 3,62 × 2,99 | **10,82** | (4,725, 7,405); (4,725, 10,395); (1,105, 10,395); (1,105, 7,405) |
-| 0.08 | Łazienka (prysznic) | pomocnicze | 2,49 × 2,29 | **5,70** | (3,595, 4,905); (3,595, 7,195); (1,105, 7,195); (1,105, 4,905) |
-| 0.09 | Schody | schody (poza PU) | 4,59 × 2,29 | **10,51** | (8,395, 4,905); (8,395, 7,195); (3,805, 7,195); (3,805, 4,905) |
-| 0.10 | Spiżarnia | pomocnicze | 1,07 × 2,29 | **2,45** | (9,675, 4,905); (9,675, 7,195); (8,605, 7,195); (8,605, 4,905) |
-| 0.11 | Pom. techniczne | techniczne | 2,67 × 2,29 | **6,11** | (12,495, 4,905); (12,495, 7,195); (9,825, 7,195); (9,825, 4,905) |
-| 0.12 | Salon + jadalnia + kuchnia | mieszk./pobyt | 11,39 × 4,79 | **54,62** | (12,495, -0,100); (12,495, 4,695); (1,105, 4,695); (1,105, -0,100) |
-| 0.13 | Garaż 2-stanowiskowy | garaż / gosp. | 5,68 × 6,49 | **36,83** | (18,495, 3,905); (18,495, 10,395); (12,820, 10,395); (12,820, 3,905) |
-| 0.14 | Pom. gosp. (rowery, ogród) | garaż / gosp. | 5,68 × 3,59 | **20,37** | (18,495, 0,105); (18,495, 3,695); (12,820, 3,695); (12,820, 0,105) |
-
-Suma P0: PU (mieszk.+pomocn.+komunik.) **94,55 m²**, pom. techniczne 6,11 m², schody/spoczniki 10,51 m², garaż + pom. gosp. 57,20 m².
-
-Funkcja: wejście od północy (daszek 1,50 m = wysunięcie ST1, x 6,60–10,00) → wiatrołap 0.01 → hol 0.02 → na osi wejścia spocznik trzonu (przejście 1,20 m) → jadalnia i widok na ogród. Z holu: pokój gościnny 0.07 (z łazienką 0.08 en-suite, drzwi 90 cm), garderoba 0.03; hol przechodzi w sień gospodarczą 0.06 → WC 0.04, schowek 0.05, pom. techniczne 0.11, drzwi EI30 do garażu 0.13. Strefa dzienna 0.12 (salon/jadalnia/kuchnia z wyspą, spiżarnia 0.10) na całej elewacji płd., wyjścia HS na taras płd. (E2, E4) i zach. (HS1, taras pod okapem ST1).
-
-### 3.6 I PIĘTRO P1 (+3,15)
-
-**Ściany** (oś warstwy konstrukcyjnej):
-
-| typ | położenie (oś warstwy konstr.) | od–do | grubość / przegroda |
-|---|---|---|---|
-| zewn. SZ1 | prostokąt osi x 0,00–11,40, y 0,00–7,30 | obwód | 18 cm SIL/ŻB + 20 cm EPS/MW + tynki = 40,5 cm; osie A, E oraz N/S w strefie x ≤ 3,70–4,20: ŻB 18 (tarcze) |
-| wewn. | x = 3,70 | y 4,70–7,41 | ŻB 18 (trzon) |
-| wewn. | x = 8,50 | y 4,70–7,41 | ŻB 18 (trzon) |
-| wewn. | y = 4,80 | x 3,60–8,61 | ŻB 18 (trzon) |
-| wewn. | y = 4,80 | x 8,60–11,40 | SIL 18 nośna |
-| wewn. | x = 3,70 | y 0,10–4,70 | SIL 12 działowa |
-| wewn. | y = 3,60 | x 0,10–3,62 | SIL 12 działowa |
-| wewn. | y = 2,80 | x 8,43–11,29 | SIL 12 działowa |
-| wewn. | x = 8,50 | y 2,73–4,70 | SIL 12 działowa |
-
-**Otwory** (położenie: zakres wzdłuż ściany w układzie budynku, w świetle muru; wysokość w świetle; parapet od posadzki kondygnacji):
-
-| id | ściana / położenie | typ | szer. × wys. [m] | parapet [m] | symbol / uwagi |
-|---|---|---|---|---|---|
-| O1-01 | zach. (oś A), y 0,90–2,70 | okno | 1,80 × 1,60 | 0,85 | OK2  |
-| O1-02 | zach. (oś A), y 4,60–6,40 | okno | 1,80 × 1,60 | 0,85 | OK2  |
-| O1-03 | wsch. (oś E), y 3,30–4,30 | okno | 1,00 × 1,20 | 1,00 | OK6  |
-| O1-04 | wsch. (oś E), y 5,60–6,60 | okno | 1,00 × 0,80 | 1,40 | OK4  |
-| O1-05 | płn. (oś 3), x 7,35–8,15 | okno | 0,80 × 1,50 | 0,90 | OK7 okno klatki (nad dachem P0) |
-| O1-06 | płd. (oś 1), x 4,20–11,30 | otwór do boksu | 7,10 × 1,50 | 0,55 | C otwór do boksu C (siedzisko h=0,55) |
-| D1-01 | ściana x=3,70, y 2,60–3,40 | drzwi | 0,80 × 2,05 | 0,00 |   |
-| D1-02 | ściana x=3,70, y 3,80–4,60 | drzwi | 0,80 × 2,05 | 0,00 |   |
-| D1-03 | ściana x=8,50, y 3,10–3,90 | drzwi | 0,80 × 2,05 | 0,00 |   |
-| D1-04 | ściana x=8,50, y 5,20–6,00 | drzwi | 0,80 × 2,05 | 0,00 |   |
-| D1-05 | ściana y=4,80, x 7,15–8,35 | przejście | 1,20 × 2,05 | 0,00 |   |
-
-**Pomieszczenia** (wieloboki netto w licach wykończonych):
-
-| nr | pomieszczenie | kategoria | wymiary netto [m] (x × y) | pow. netto [m²] | wielobok (x,y) |
-|---|---|---|---|---|---|
-| 1.01 | Pokój dziecka 1 | mieszk./pobyt | 3,52 × 3,42 | **12,04** | (3,625, 0,105); (3,625, 3,525); (0,105, 3,525); (0,105, 0,105) |
-| 1.02 | Pokój dziecka 2 | mieszk./pobyt | 3,49 × 3,52 | **12,28** | (3,595, 3,675); (3,595, 7,195); (0,105, 7,195); (0,105, 3,675) |
-| 1.03 | Pokój rodzinny / biblioteka + hol | mieszk./pobyt | wielobok | **28,86** | (3,775, 0,105); (11,295, 0,105); (11,295, 2,725); (8,425, 2,725); (8,425, 4,695); (3,775, 4,695) |
-| 1.04 | Pralnia | pomocnicze | 2,72 × 1,82 | **4,95** | (11,295, 2,875); (11,295, 4,695); (8,575, 4,695); (8,575, 2,875) |
-| 1.05 | Łazienka | pomocnicze | 2,69 × 2,29 | **6,16** | (11,295, 4,905); (11,295, 7,195); (8,605, 7,195); (8,605, 4,905) |
-| 1.06 | Schody | schody (poza PU) | 4,59 × 2,29 | **10,51** | (8,395, 4,905); (8,395, 7,195); (3,805, 7,195); (3,805, 4,905) |
-
-Suma P1: PU (mieszk.+pomocn.+komunik.) **64,30 m²**, pom. techniczne 0,00 m², schody/spoczniki 10,51 m².
-
-Funkcja: ze spocznika trzonu (x 7,095–8,395) → hol-biblioteka 1.03 (otwarta przestrzeń rodzinna przed boksem C, siedzisko-czytelnia 7,10 m w wykuszu) → pokoje dzieci 1.01 (SW) i 1.02 (NW), oba z oknami zach.; pralnia 1.04 z oknem wsch.; łazienka 1.05 wejście bezpośrednio ze spocznika. Na wschód od bryły B — dach zielony ekstensywny parteru/garażu (nieużytkowy, bez wyjścia, bez tarasu).
-
-### 3.7 II PIĘTRO P2 (+6,30)
-
-**Ściany** (oś warstwy konstrukcyjnej):
-
-| typ | położenie (oś warstwy konstr.) | od–do | grubość / przegroda |
-|---|---|---|---|
-| zewn. SZ1 | prostokąt osi x -1,00–11,40, y 0,00–7,30 | obwód | 18 cm SIL/ŻB + 20 cm EPS/MW + tynki = 40,5 cm; osie A', E, S (cała) i N (x ≤ 3,70): ŻB 18 (tarcze) |
-| wewn. | x = 3,70 | y 4,70–7,41 | ŻB 18 (trzon) |
-| wewn. | x = 8,50 | y 4,70–7,41 | ŻB 18 (trzon) |
-| wewn. | y = 4,80 | x 3,60–8,61 | ŻB 18 (trzon) |
-| wewn. | y = 4,80 | x 8,60–11,40 | SIL 18 nośna |
-| wewn. | x = 3,70 | y 0,10–4,70 | SIL 12 działowa |
-| wewn. | y = 4,20 | x -0,90–3,62 | SIL 12 działowa |
-| wewn. | x = 1,30 | y 4,28–7,20 | SIL 12 działowa |
-| wewn. | y = 3,00 | x 3,77–8,43 | SIL 12 działowa |
-| wewn. | x = 8,50 | y 0,10–4,70 | SIL 12 działowa |
-
-**Otwory** (położenie: zakres wzdłuż ściany w układzie budynku, w świetle muru; wysokość w świetle; parapet od posadzki kondygnacji):
-
-| id | ściana / położenie | typ | szer. × wys. [m] | parapet [m] | symbol / uwagi |
-|---|---|---|---|---|---|
-| O2-01 | płd. (oś 1), x -0,30–2,70 | okno | 3,00 × 2,10 | 0,60 | OK8 za lamelami, dolna kwatera VSG do 1,10 |
-| O2-02 | płd. (oś 1), x 4,60–7,60 | okno | 3,00 × 2,10 | 0,60 | OK8  |
-| O2-03 | płd. (oś 1), x 8,90–10,90 | okno | 2,00 × 2,10 | 0,60 | OK9  |
-| O2-04 | zach. (oś A'), y 1,20–3,00 | okno | 1,80 × 1,60 | 0,90 | OK2  |
-| O2-05 | zach. (oś A'), y 5,40–6,40 | okno | 1,00 × 0,80 | 1,50 | OK3  |
-| O2-06 | wsch. (oś E), y 1,60–3,20 | okno | 1,60 × 1,60 | 0,90 | OK10  |
-| O2-07 | płn. (oś 3), x 1,90–2,90 | okno | 1,00 × 0,80 | 1,50 | OK4  |
-| D2-01 | ściana x=3,70, y 3,20–4,00 | drzwi | 0,80 × 2,05 | 0,00 |   |
-| D2-02 | ściana y=4,20, x 2,50–3,30 | drzwi | 0,80 × 2,05 | 0,00 |  łazienka |
-| D2-03 | ściana y=4,20, x -0,30–0,50 | drzwi | 0,80 × 2,05 | 0,00 |  garderoba |
-| D2-04 | ściana y=3,00, x 4,40–5,20 | drzwi | 0,80 × 2,05 | 0,00 |   |
-| D2-05 | ściana x=8,50, y 3,85–4,65 | drzwi | 0,80 × 2,05 | 0,00 |   |
-| D2-06 | ściana x=8,50, y 5,30–6,10 | drzwi | 0,80 × 2,05 | 0,00 |   |
-| D2-07 | ściana y=4,80, x 7,15–8,35 | przejście | 1,20 × 2,05 | 0,00 |   |
-
-**Pomieszczenia** (wieloboki netto w licach wykończonych):
-
-| nr | pomieszczenie | kategoria | wymiary netto [m] (x × y) | pow. netto [m²] | wielobok (x,y) |
-|---|---|---|---|---|---|
-| 2.01 | Sypialnia rodziców | mieszk./pobyt | 4,52 × 4,02 | **18,17** | (3,625, 0,105); (3,625, 4,125); (-0,895, 4,125); (-0,895, 0,105) |
-| 2.02 | Garderoba | pomocnicze | 2,12 × 2,92 | **6,19** | (1,225, 4,275); (1,225, 7,195); (-0,895, 7,195); (-0,895, 4,275) |
-| 2.03 | Łazienka rodziców | pomocnicze | 2,22 × 2,92 | **6,48** | (3,595, 4,275); (3,595, 7,195); (1,375, 7,195); (1,375, 4,275) |
-| 2.04 | Gabinet | mieszk./pobyt | 4,65 × 2,82 | **13,11** | (8,425, 0,105); (8,425, 2,925); (3,775, 2,925); (3,775, 0,105) |
-| 2.05 | Hol | komunikacja | 4,65 × 1,62 | **7,53** | (8,425, 3,075); (8,425, 4,695); (3,775, 4,695); (3,775, 3,075) |
-| 2.06 | Pokój (5. osoba / hobby) | mieszk./pobyt | 2,72 × 4,59 | **12,48** | (11,295, 0,105); (11,295, 4,695); (8,575, 4,695); (8,575, 0,105) |
-| 2.07 | Pom. techn. (rekuperator, wyłaz) | techniczne | 2,69 × 2,29 | **6,16** | (11,295, 4,905); (11,295, 7,195); (8,605, 7,195); (8,605, 4,905) |
-| 2.08 | Spocznik (pustka nad schodami) | schody (poza PU) | 1,30 × 2,29 | **2,98** | (8,395, 4,905); (8,395, 7,195); (7,095, 7,195); (7,095, 4,905) |
-
-Suma P2: PU (mieszk.+pomocn.+komunik.) **63,97 m²**, pom. techniczne 6,16 m², schody/spoczniki 2,98 m².
-
-Funkcja: apartament rodziców w części zach. (sypialnia 2.01 S+W za lamelami i nad wspornikiem, garderoba 2.02, łazienka 2.03), gabinet 2.04 (S), pokój 2.06 (S+E — dla 5. członka rodziny / hobby / gość), pom. techniczne 2.07 z rekuperatorem i wyłazem dachowym 90×120 (drabina stała) — wejście ze spocznika; nad pustką klatki świetlik 2,60 × 1,80 m.
-
-### 3.8 Płyty, wysunięcia, boks C, lamele
+w(f"""### 3.8 Płyty, wysunięcia, boks C, lamele
 
 | element | obrys (x × y) | rzędne | wysunięcie poza lico | uwagi |
 |---|---|---|---|---|
@@ -301,12 +177,12 @@ Funkcja: apartament rodziców w części zach. (sypialnia 2.01 S+W za lamelami i
 
 ### 3.9 Schody SCH1 (trzon ŻB, stos 3 kondygnacji, U-kształtne)
 
-* Trzon w świetle: x 3,805 … 8,395 (4,59 m), y 4,905 … 7,195 (2,29 m); ściany ŻB 18 cm w osiach C, D, 2, 3.
+* Trzon w świetle: x {fmt(S['x0'], 3)} … {fmt(S['x1'], 3)} (4,59 m), y {fmt(S['y0'], 3)} … {fmt(S['y1'], 3)} (2,29 m); ściany ŻB 18 cm w osiach C, D, 2, 3.
 * Na kondygnację: **18 podnóżków × 17,5 cm = 3,15 m**, stopnie **s = 28 cm**, **2h + s = 63 cm**, nachylenie 32°; 2 biegi po 9 podnóżków (8 stopni).
-* Bieg „a” (pasmo płn. y 6,105 … 7,195, szer. 1,09 m): pierwszy podnóżek x = 7,095, w górę **na zachód**
+* Bieg „a” (pasmo płn. y {fmt(S['lane_N'][0], 3)} … {fmt(S['lane_N'][1], 3)}, szer. 1,09 m): pierwszy podnóżek x = 7,095, w górę **na zachód**
   do x = 4,855 (linie krawędzi stopni x = 7,095 − k·0,28, k = 0…8), rzuty 2,24 m; Z → Z + 1,575.
 * Spocznik międzykondygnacyjny: x 3,805 … 4,855 (1,05 m ≥ szer. biegu), y 4,905 … 7,195; rzędne +1,575 i +4,725.
-* Bieg „b” (pasmo płd. y 4,905 … 5,995, szer. 1,09 m): z x = 4,855 w górę **na wschód** do x = 7,095; Z + 1,575 → Z + 3,15.
+* Bieg „b” (pasmo płd. y {fmt(S['lane_S'][0], 3)} … {fmt(S['lane_S'][1], 3)}, szer. 1,09 m): z x = 4,855 w górę **na wschód** do x = 7,095; Z + 1,575 → Z + 3,15.
 * Spocznik kondygnacyjny (wejście/wyjście na każdej kondygnacji): x 7,095 … 8,395 (1,30 m), y 4,905 … 7,195; przejścia w ścianie osi 2
   (x 7,15–8,35) do holi, w P0 także w ścianie osi 3 (do holu wejściowego); drzwi z podestu: P1 → łazienka 1.05, P2 → pom. techn. 2.07.
 * Między biegami „duszek” 11 cm — pełna ścianka szklana/stalowa (balustrada) na całą wysokość biegów; pochwyty obustronne h = 0,90 m.
@@ -320,15 +196,17 @@ Funkcja: apartament rodziców w części zach. (sypialnia 2.01 S+W za lamelami i
 
 | pion | xy | przebieg |
 |---|---|---|
-| K1 | (11,20; 6,25) | kan. + woda: łaz. P1, pralnia P1, skropliny rekuperatora P2 -> pom. techn. P0 |
-| K2 | (3,40; 7,05) | kan. + woda: łaz. P2 -> szacht 30x30 w narożu pok. 1.02 (przy trzonie) -> łaz. P0 |
-| W1 | (8,80; 7,00) | kanały wentylacji mech. (rekuperator P2) -> łaz. P1 -> spiżarnia/kuchnia P0 |
-
+""")
+for p in PIONY:
+    w(f"| {p['id']} | ({fmt(p['xy'][0])}; {fmt(p['xy'][1])}) | {p['opis']} |\n")
+w("""
 Kuchnia (blat przy osi F), WC 0.04 i łazienka 0.08 odprowadzane poziomo pod posadzką P0 do kolektora wzdłuż skrzydła płn. i wyjścia
 w osi x = 9,00 (studzienka rewizyjna przy granicy). Dach P2: wpusty + rury spustowe w narożach NE/NW (wewnątrz ocieplenia), dachy zielone
 P0/garażu: wpusty z przelewami awaryjnymi przez attykę.
 
-## 4. Koncepcja konstrukcji
+""")
+
+w(f"""## 4. Koncepcja konstrukcji
 
 **System:** ścianowo-płytowy; stropy żelbetowe monolityczne gr. 22 cm (C30/37, B500SP) pracujące jako płyty dwukierunkowe/ciągłe
 na ścianach; ściany nośne z bloczków silikatowych 18 cm (kl. 20) oraz **żelbetowe 18 cm** w: trzonie schodowym (wszystkie kondygnacje),
@@ -344,7 +222,7 @@ oraz ścianie płd. P2 (tarcza nad boksem C). Sztywność: trzon ŻB + tarcze + 
   pod nią ściana w osi 2 w P0) i 2,50 m.
 * Ścianki działowe P1/P2 nie są nośne (SIL 12 na stropie jako obciążenie liniowe, R5).
 
-**Słupy i belki:** SL1–SL4 — stal RK 120×120×8 (lub ŻB 25×25) w osi 1 za słupkami przeszklenia, x = 3,383, 5,661, 7,939, 10,217;
+**Słupy i belki:** SL1–SL4 — stal RK 120×120×8 (lub ŻB 25×25) w osi 1 za słupkami przeszklenia, x = {', '.join(fmt(c[0], 3) for c in COLUMNS)};
 na stopach 1,0×1,0 m. Belka ukryta ST1 w osi 1 (od ściany B do ściany F) przenosi krawędź stropu, parapet P1 i siły skupione z tarcz
 (z tarczy wsch. P1 w x = 11,40 — między SL4 a narożnikiem F, rozpiętość 2,38 m). Nadproże-tarcza nad otworem boksu C w ścianie P1
 (x 4,20–11,30, 7,10 m): ŻB 24 cm od +5,20 do +5,93 zespolone z płytą ST2 i ścianą płd. P2 (ŻB) — tarcza o wysokości ~3,7 m (z otworami
@@ -376,7 +254,7 @@ Wg R5: 3 kondygnacje i wsporniki → **II kategoria geotechniczna** (dokumentacj
 ## 5. Zagospodarowanie działki
 
 * **Położenie:** narożnik SW działki = (−7,30; −31,00) w układzie budynku; działka x −7,30 … 24,70, y −31,00 … 19,00
-  (granica z drogą y = 19,00; linia zabudowy y = 13,00).
+  (granica z drogą y = 19,00; linia zabudowy y = {fmt(BUILD_LINE_Y)}).
 * **Odległości:** zach. — płyta ST2 4,80 m, dach ST3 5,20 m, płyta ST1 5,50 m, ściana P2 z oknami 6,00 m, ściana P1 7,00 m, ściana P0 8,00 m;
   wsch. — ściana garażu z drzwiami i oknem 5,80 m, ściany P1/P2 13,00 m, jednostka PC 3,40 m; płn. — elewacja P0 8,20 m od granicy z drogą
   (2,20 m za linią zabudowy), daszek wejścia 6,70 m (0,70 m za linią); płd. — boks C/płyty 29,70 m, taras 26,70 m.
@@ -386,7 +264,7 @@ Wg R5: 3 kondygnacje i wsporniki → **II kategoria geotechniczna** (dokumentacj
 * **Dojście:** furtka 1,00 m (x 7,30–8,30) i chodnik 1,50 m w osi drzwi wejściowych; wejście bezprogowe (teren −0,23 → spocznik
   przed drzwiami −0,02, chodnik o spadku ≤ 5 %).
 * **Tarasy:** płd. x −1,80 … 12,90, y −4,30 … −0,30 + zach. pod okapem ST1 x −1,80 … 0,70, y −0,30 … 4,20; razem
-  70,0 m², poziom −0,02 (deska kompozytowa na legarach); > 35 m² — objęty
+  {fmt(SITE['terrace_S'].union(SITE['terrace_W']).area, 1)} m², poziom −0,02 (deska kompozytowa na legarach); > 35 m² — objęty
   projektem (art. 29 PB w brzmieniu z 2026 r.). Dojście boczne do ogrodu: płyty x −1,80 … 0,70, y 7,60 … 10,80 oraz ścieżka wzdłuż
   płd. i wsch. ściany garażu (drzwi do pom. gosp.).
 * **Pojemniki na odpady:** osłona 2,60 × 1,30 m przy podjeździe (x 9,30–11,90, y 14,60–15,90), **3,10 m od granicy z drogą**, dostęp od chodnika.
@@ -397,7 +275,7 @@ Wg R5: 3 kondygnacje i wsporniki → **II kategoria geotechniczna** (dokumentacj
   Szacunek: A_red ≈ 185 m² × 150 l/(s·ha) × 15 min ≈ 2,5 m³ — zapas. Zakaz odprowadzania na drogę (MPZP) ✔.
   Zbiornik bezodpływowy 5–15 m³ — w PB objęty projektem (zgłoszenie wg art. 29 PB, R1).
 * **Pompa ciepła:** jednostka zewn. powietrze–woda na fundamencie przy wsch. ścianie garażu (x 20,20–21,30, y 5,60–6,20),
-  **3,40 m od granicy wsch.** (≥ 3,0 m), z dala od sypialni (najbliższe okno pokoju: 2.06, okno wsch. — 8,8 m).
+  **3,40 m od granicy wsch.** (≥ 3,0 m), z dala od sypialni (najbliższe okno pokoju: 2.06, okno wsch. — {fmt(((20.20 - 11.70) ** 2 + (5.60 - 3.20) ** 2) ** 0.5, 1)} m).
 * **Przyłącza:** ZK w linii ogrodzenia przy bramie (x ≈ 12,4) → kabel YKY 5×16 do RG w pom. techn. 0.11; woda PE 40 z sieci PE 110
   (x = 11,20) do wodomierza w 0.11; kanalizacja PVC 160 z kolektora pod skrzydłem płn. (wyjście x = 9,00) przez studzienkę rewizyjną Ø425
   (1,40 m od granicy) do sieci PVC 200; światłowód do 0.11; gaz — nie przyłączany (dom all-electric).
@@ -406,7 +284,7 @@ Wg R5: 3 kondygnacje i wsporniki → **II kategoria geotechniczna** (dokumentacj
 
 ## 6. Orientacja, doświetlenie, energia
 
-* **Strefa dzienna na południe:** 5 kwater przeszklenia (33,71 m² w świetle ościeżnic z oknem zach., stosunek 1:1,6).
+* **Strefa dzienna na południe:** 5 kwater przeszklenia ({fmt(win_rows[1][2])} m² w świetle ościeżnic z oknem zach., stosunek 1:{fmt(win_rows[1][1] / win_rows[1][2], 1)}).
   Okap ST1 1,00 m nad +2,70: w południe 21.06 (wys. słońca ok. 61° dla φ = 52,4°) cień sięga 1,00·tg61° ≈ 1,80 m w dół —
   zacienia ok. 2/3 przeszklenia; w grudniu (14°) słońce wpada w pełni (zyski zimowe). Dodatkowo screeny ZIP w kasecie nad szkłem (g_c ≤ 0,35).
 * **Boks C** (P1) — 3 kwatery pod okapem ST2 (1,00 m) i ramą górną; screen ZIP. **Bryła A** — pionowe lamele (ok. 20 % zacienienia
@@ -417,7 +295,7 @@ Wg R5: 3 kondygnacje i wsporniki → **II kategoria geotechniczna** (dokumentacj
 * **Zwartość:** parter prostokąt 18,20 × 11,10 m, piętra prostokąty z licami płd./płn. w jednej płaszczyźnie; A/V_e (część ogrzewana,
   szacunek) ≈ 0,66 m⁻¹. Garaż poza strefą ogrzewaną (ściana SG1 z wełną 12 cm, drzwi EI30), jako bufor od NE.
 * **Instalacje:** PC powietrze–woda (monoblok/split) + ogrzewanie podłogowe, zasobnik CWU 300 l, RG, wodomierz w pom. techn. 0.11
-  (6,11 m² ≥ 6 m²); rekuperator w 2.07 (czerpnia/wyrzutnia przez dach), pion wentylacyjny W1 przy trzonie; PV ≤ 6,5 kWp
+  ({A('0.11')} m² ≥ 6 m²); rekuperator w 2.07 (czerpnia/wyrzutnia przez dach), pion wentylacyjny W1 przy trzonie; PV ≤ 6,5 kWp
   (~15 modułów, ~30 m²) na dachu P2, cofnięte ≥ 1,0 m od krawędzi, poniżej attyki; wyłaz dachowy z 2.07.
 
 ## 7. TABELA KONTROLNA
@@ -426,34 +304,23 @@ Wg R5: 3 kondygnacje i wsporniki → **II kategoria geotechniczna** (dokumentacj
 
 | pom. | pow. [m²] | minimum | wys. w świetle [m] | minimum | ocena |
 |---|---|---|---|---|---|
-| 0.12 Salon + jadalnia + kuchnia | 54,62 | 50,00 — strefa dzienna ≥ 50 (brief); pokój dzienny ≥ 16 (WT § 94) | 2,78 | 2,50 | ✔ |
-| 0.07 Pokój gościnny / gabinet | 10,82 | 8,00 — pokój ≥ 8 (WT § 94) | 2,78 | 2,50 | ✔ |
-| 1.01 Pokój dziecka 1 | 12,04 | 12,00 — pokój dziecka ≥ 12 (brief) | 2,78 | 2,50 | ✔ |
-| 1.02 Pokój dziecka 2 | 12,28 | 12,00 — pokój dziecka ≥ 12 (brief) | 2,78 | 2,50 | ✔ |
-| 1.03 Pokój rodzinny / biblioteka + hol | 28,86 | 16,00 — pokój dzienny rodzinny ≥ 16 | 2,78 | 2,50 | ✔ |
-| 2.01 Sypialnia rodziców | 18,17 | 14,00 — sypialnia rodziców ≥ 14 (brief) | 2,78 | 2,50 | ✔ |
-| 2.04 Gabinet | 13,11 | 8,00 — pokój ≥ 8 | 2,78 | 2,50 | ✔ |
-| 2.06 Pokój (5. osoba / hobby) | 12,48 | 8,00 — pokój ≥ 8 | 2,78 | 2,50 | ✔ |
-| 0.11 Pom. techniczne | 6,11 | 6,00 — pom. techniczne ≥ 6 (brief) | 2,78 | 2,20 | ✔ |
-| pomieszczenia pomocnicze, komunikacja (wszystkie) | — | — | 2,78 | 2,20 | ✔ |
-| garaż 0.13 (w świetle 5,68 × 6,49 m) | 36,83 | 5,60 × 6,00 m (brief) | 2,93 | 2,20 | ✔ |
+""")
+chk = [('0.12', 50.0, 'strefa dzienna ≥ 50 (brief); pokój dzienny ≥ 16 (WT § 94)'), ('0.07', 8.0, 'pokój ≥ 8 (WT § 94)'),
+       ('1.01', 12.0, 'pokój dziecka ≥ 12 (brief)'), ('1.02', 12.0, 'pokój dziecka ≥ 12 (brief)'),
+       ('1.03', 16.0, 'pokój dzienny rodzinny ≥ 16'), ('2.01', 14.0, 'sypialnia rodziców ≥ 14 (brief)'),
+       ('2.04', 8.0, 'pokój ≥ 8'), ('2.06', 8.0, 'pokój ≥ 8'), ('0.11', 6.0, 'pom. techniczne ≥ 6 (brief)')]
+for rid, mn, lab in chk:
+    a = room[rid]['poly'].area
+    hmin = '2,50' if room[rid]['pobyt'] else '2,20'
+    w(f"| {rid} {room[rid]['name']} | {fmt(a)} | {fmt(mn)} — {lab} | 2,78 | {hmin} | {'✔' if a >= mn else '✘'} |\n")
+w(f"| pomieszczenia pomocnicze, komunikacja (wszystkie) | — | — | 2,78 | 2,20 | ✔ |\n"
+  f"| garaż 0.13 (w świetle {fmt(AX['G'] - EXT_IN - AX['F'] - GAR_IN)} × {fmt(AY['4'] - EXT_IN - Y_GAR - H_BEAR)} m) | {A('0.13')} | 5,60 × 6,00 m (brief) | 2,93 | 2,20 | ✔ |\n\n")
 
-### 7.2 Oświetlenie dzienne (WT § 57: okna ≥ 1/8 pow. podłogi; kuchnia z oknem)
+w("### 7.2 Oświetlenie dzienne (WT § 57: okna ≥ 1/8 pow. podłogi; kuchnia z oknem)\n\n")
+w(win_md)
+w("\nKuchnia — kwatera E5 (x 10,22–12,50) w strefie kuchni ✔. Łazienki mogą być bez okien (wentylacja mechaniczna z odzyskiem ciepła); w projekcie 0.08, 1.05 i 2.03 mają małe okna.\n\n")
 
-| pom. | pow. podłogi [m²] | okna (symbol) | pow. okien w świetle ościeżnic [m²] | stosunek | wymóg ≥ 1:8 |
-|---|---|---|---|---|---|
-| 0.07 Pokój gościnny / gabinet | 10,82 | OK1 | 2,04 | 1:5,3 | ✔ |
-| 0.12 Salon + jadalnia + kuchnia | 54,62 | FX2, HS2, FX2, HS2, FX2, HS1 | 33,71 | 1:1,6 | ✔ |
-| 1.01 Pokój dziecka 1 | 12,04 | OK2 | 2,49 | 1:4,8 | ✔ |
-| 1.02 Pokój dziecka 2 | 12,28 | OK2 | 2,49 | 1:4,9 | ✔ |
-| 1.03 Pokój rodzinny / biblioteka + hol | 28,86 | C | 9,63 | 1:3,0 | ✔ |
-| 2.01 Sypialnia rodziców | 18,17 | OK8, OK2 | 8,19 | 1:2,2 | ✔ |
-| 2.04 Gabinet | 13,11 | OK8 | 5,70 | 1:2,3 | ✔ |
-| 2.06 Pokój (5. osoba / hobby) | 12,48 | OK9, OK10 | 5,91 | 1:2,1 | ✔ |
-
-Kuchnia — kwatera E5 (x 10,22–12,50) w strefie kuchni ✔. Łazienki mogą być bez okien (wentylacja mechaniczna z odzyskiem ciepła); w projekcie 0.08, 1.05 i 2.03 mają małe okna.
-
-### 7.3 Schody
+w(f"""### 7.3 Schody
 
 | parametr | projekt | wymóg | ocena |
 |---|---|---|---|
@@ -469,48 +336,38 @@ Kuchnia — kwatera E5 (x 10,22–12,50) w strefie kuchni ✔. Łazienki mogą b
 
 | element | odległość [m] | wymóg [m] | ocena |
 |---|---|---|---|
-| ściana zach. P2 z oknami (lico) | 6,00 | ≥ 4,0 | ✔ |
-| ściana zach. P1 z oknami (lico) | 7,00 | ≥ 4,0 | ✔ |
-| ściana zach. P0 z oknami/drzwiami (lico) | 8,00 | ≥ 4,0 | ✔ |
-| płyta ST2 wysunięta na zach. (krawędź) | 4,80 | ≥ 4,0 | ✔ |
-| płyta dachu ST3 (krawędź) | 5,20 | ≥ 4,0 | ✔ |
-| płyta ST1 wysunięta 1,50 m (krawędź) | 5,50 | ≥ 4,0 | ✔ |
-| ściana wsch. garażu z drzwiami i oknem (lico) | 5,80 | ≥ 4,0 | ✔ |
-| ściany wsch. P1/P2 z oknami (lico) | 13,00 | ≥ 4,0 | ✔ |
-| jednostka zewn. PC | 3,40 | ≥ 3,0 | ✔ |
-| elewacja płn. P0 od granicy z drogą | 8,20 | ≥ 6,0 | ✔ |
-| daszek nad wejściem od granicy z drogą | 6,70 | ≥ 6,0 | ✔ |
-| elewacja płd. / boks C od granicy tylnej | 29,70 | ≥ 4,0 | ✔ |
-| osłona pojemników od granicy z drogą | 3,10 | ≥ 3,0 | ✔ |
-| budynek względem nieprzekraczalnej linii zabudowy (y = 13,00) | elewacja 2,20 za linią, daszek 0,70 za linią | nie przekraczać | ✔ |
+""")
+for lab, d, req in dist_checks():
+    w(f"| {lab} | {fmt(d)} | ≥ {fmt(req, 1)} | {'✔' if d >= req - 1e-6 else '✘'} |\n")
+w(f"| budynek względem nieprzekraczalnej linii zabudowy (y = {fmt(BUILD_LINE_Y)}) | elewacja 2,20 za linią, daszek 0,70 za linią | nie przekraczać | ✔ |\n\n")
 
-### 7.5 Wskaźniki MPZP 3MN, wysokość, PU
+w(f"""### 7.5 Wskaźniki MPZP 3MN, wysokość, PU
 
 | wskaźnik | projekt | wymóg | ocena |
 |---|---|---|---|
-| pow. zabudowy (rzut brył zamkniętych: P0 ∪ P1 ∪ P2 ∪ boks C) | 225,6 m² = 14,1 % | ≤ 30 % (480 m²) | ✔ |
-| pow. zabudowy zachowawczo (z płytami, okapami, daszkiem) | 253,8 m² = 15,9 % | ≤ 30 % | ✔ |
-| pow. biologicznie czynna (bez dachów zielonych) | 1241 m² = 77,5 % (+ ok. 58 m² jako 50 % dachów zielonych — nie wliczono) | ≥ 50 % (800 m²) | ✔ |
-| intensywność zabudowy (pow. całkowita kondygnacji nadz. 407,3 m² / 1600 m²) | 0,25 | 0,05–0,80 | ✔ |
+| pow. zabudowy (rzut brył zamkniętych: P0 ∪ P1 ∪ P2 ∪ boks C) | {fmt(m['enclosed'], 1)} m² = {fmt(100 * m['enclosed'] / m['plot'], 1)} % | ≤ 30 % (480 m²) | ✔ |
+| pow. zabudowy zachowawczo (z płytami, okapami, daszkiem) | {fmt(m['all_proj'], 1)} m² = {fmt(100 * m['all_proj'] / m['plot'], 1)} % | ≤ 30 % | ✔ |
+| pow. biologicznie czynna (bez dachów zielonych) | {fmt(m['pbc'], 0)} m² = {fmt(100 * m['pbc'] / m['plot'], 1)} % (+ ok. {fmt(0.5 * m['green_roof'], 0)} m² jako 50 % dachów zielonych — nie wliczono) | ≥ 50 % (800 m²) | ✔ |
+| intensywność zabudowy (pow. całkowita kondygnacji nadz. {fmt(m['gfa'], 1)} m² / 1600 m²) | {fmt(m['intens'], 2)} | 0,05–0,80 | ✔ |
 | liczba kondygnacji nadziemnych | 3 | ≤ 3 | ✔ |
-| **wysokość budynku** (WT § 6: od terenu przy najniżej położonym wejściu -0,31 do attyki +9,85) | **10,16 m** (od wejścia głównego: 10,08 m) | ≤ 11,0 m | ✔ |
+| **wysokość budynku** (WT § 6: od terenu przy najniżej położonym wejściu {fmt(zmin)} do attyki +9,85) | **{fmt(H)} m** (od wejścia głównego: {fmt(ATTIC_TOP + 0.228)} m) | ≤ 11,0 m | ✔ |
 | dach | płaski, spadek 2 % | ≤ 12° | ✔ |
 | miejsca postojowe | 2 (garaż) + 2 gościnne | ≥ 2 | ✔ |
 | ogrodzenie od drogi | ażurowe 1,50 m | ≤ 1,60, bez prefabrykatów betonowych | ✔ |
-| PU budynku (bez garażu, bez schodów) | **235,09 m²** | 230–270 m² (brief) | ✔ |
+| PU budynku (bez garażu, bez schodów) | **{fmt(PU_bud)} m²** | 230–270 m² (brief) | ✔ |
 
 ### 7.6 Zestawienie powierzchni
 
 | kondygnacja | PU mieszk.+pomocn.+komunik. | pom. techniczne | schody/spoczniki (poza PU) | garaż + pom. gosp. | pow. całkowita (brutto) |
 |---|---|---|---|---|---|
-| P0 | 94,55 | 6,11 | 10,51 | 57,20 | 202,02 |
-| P1 | 64,30 | 0,00 | 10,51 | 0,00 | 102,55 |
-| P2 | 63,97 | 6,16 | 2,98 | 0,00 | 102,70 |
-| **razem** | **222,82** | **12,27** | **24,00** | **57,20** | **407,27** |
-
-* **PU budynku mieszkalnego = 222,82 + 12,27 = 235,09 m²** (wartość do porównania z celem 230–270 m²;
+""")
+for fl in ('P0', 'P1', 'P2'):
+    gross = OUTLINE[fl].area + ((C_BOX['x1'] - C_BOX['x0']) * 1.0 if fl == 'P1' else 0)
+    w(f"| {fl} | {fmt(t[fl]['PU'])} | {fmt(t[fl]['T'])} | {fmt(t[fl]['S'])} | {fmt(t[fl]['G'])} | {fmt(gross)} |\n")
+w(f"| **razem** | **{fmt(tot['PU'])}** | **{fmt(tot['T'])}** | **{fmt(tot['S'])}** | **{fmt(tot['G'])}** | **{fmt(m['gfa'])}** |\n\n")
+w(f"""* **PU budynku mieszkalnego = {fmt(tot['PU'])} + {fmt(tot['T'])} = {fmt(PU_bud)} m²** (wartość do porównania z celem 230–270 m²;
   bez garażu z pom. gosp. i bez schodów).
-* PU łącznie z garażem i pom. gosp.: 292,30 m²; powierzchnia netto wszystkich pomieszczeń (z klatką): 316,30 m².
+* PU łącznie z garażem i pom. gosp.: {fmt(PU_bud + tot['G'])} m²; powierzchnia netto wszystkich pomieszczeń (z klatką): {fmt(netto)} m².
 * Boks C (siedzisko h = 0,55) nie jest wliczany do PU. Kubatura brutto (szacunek): ≈ 1 380 m³.
 
 ## 8. Samokontrola — odstępstwa, słabości, ryzyka
@@ -526,7 +383,7 @@ Odstępstwa od szkicu/założeń (z uzasadnieniem):
 2. Linia D i płyta E na tym samym poziomie konstrukcyjnym (+3,00); różnicę wysokości ze szkicu oddaje pas D 2,70–3,70 (attyka dachu
    garażu + dolna rama boksu C). Na wschód od x = 3,95 płyta E „wtapia się” w pas D (w szkicu dwie osobne linie).
 3. Rama górna C przedłużona do 13,45 (szkic ~13,6) jako lekka stal; boks C 7,10 m szkła (szkic 7,2).
-4. PU 235,09 m² — przy dolnej granicy celu (świadomie: wariant zwartości).
+4. PU {fmt(PU_bud)} m² — przy dolnej granicy celu (świadomie: wariant zwartości).
 
 Słabości / do weryfikacji w dalszych etapach:
 * Łazienka 1.05 i pom. techn. 2.07 dostępne bezpośrednio ze spocznika klatki (brak holu) — mniejsza prywatność łazienki dzieci.
@@ -538,7 +395,39 @@ Słabości / do weryfikacji w dalszych etapach:
   w strefie zakotwienia, EQU, ugięcia ≤ 8 mm, łączniki termoizolacyjne) — do obliczeń w PT.
 * Nadproże-tarcza 7,10 m nad boksem C lub słupki w ramie C — decyzja w PT; belka ukryta ST1 w osi 1 z siłą skupioną z tarczy wsch. P1.
 * Okna P2 za lamelami — współczynnik 1/8 spełniony geometrycznie, rzeczywiste natężenie światła do sprawdzenia (symulacja DF).
-* Wysokość 10,16 m — zapas 0,84 m do 11,0 m; moduły PV muszą pozostać poniżej attyki lub MPZP musi wyłączać urządzenia techniczne.
-* Garaż 5,68 m w świetle — minimalnie ponad 5,60 m (przejścia boczne 0,55–0,85 m).
+* Wysokość {fmt(H)} m — zapas 0,84 m do 11,0 m; moduły PV muszą pozostać poniżej attyki lub MPZP musi wyłączać urządzenia techniczne.
+* Garaż {fmt(AX['G'] - EXT_IN - AX['F'] - GAR_IN)} m w świetle — minimalnie ponad 5,60 m (przejścia boczne 0,55–0,85 m).
 * Jednostka PC 3,40 m od granicy — wymagana analiza akustyczna względem sąsiada (poziom hałasu nocą).
 * WT § 23 (pojemniki) i § 12 (nowelizacja 2023/2442) — do potwierdzenia po uzupełnieniu rejestru (R3).
+""")
+
+open(os.path.join(OUT, 'opis.md'), 'w').write(''.join(md))
+
+# ----------------------------------------------------------------- eksport modelu
+def poly_xy(p):
+    return [[round(x, 3), round(y, 3)] for x, y in list(p.exterior.coords)[:-1]]
+
+
+model = dict(
+    meta=dict(wariant='W1', nazwa='wierność szkicowi i zwartość', data='2026-09-25', uklad='x->E, y->N, (0,0)=A/1, ±0,00=101,65'),
+    osie=dict(x=AX, y=dict(**AY, **{'1a': Y_GAR})), poziomy=dict(FFL=FFL, stropy=SLABS, attyka=ATTIC_TOP, linia_D=D_TOP,
+                                                                 dach_zielony=GREEN_TOP, krawedzie=EDGE),
+    obrysy={k: poly_xy(v) for k, v in OUTLINE.items()},
+    plyty=dict(ST1=poly_xy(ST1_POLY), ST2=poly_xy(ST2_POLY), ST3=poly_xy(ST3_POLY), otwor_schodow=poly_xy(STAIR_HOLE),
+               swietlik=poly_xy(SKYLIGHT)),
+    boks_C=C_BOX, lamele=LAMELE, schody=STAIR, slupy=COLUMNS, szprosy_E=MULLIONS,
+    sciany_wewn=[dict(fl=wl['fl'], typ=wl['kind'], prostokat=poly_xy(wl['poly'])) for wl in IWALLS],
+    strefy_zelbetowe={k: [poly_xy(z) for z in v] for k, v in RC_ZONES.items()},
+    otwory=[{k: v for k, v in o.items()} for o in OPENINGS],
+    pomieszczenia=[dict(id=r['id'], fl=r['fl'], nazwa=r['name'], kat=r['kat'], pobyt=r['pobyt'],
+                        pow=round(r['poly'].area, 2), wielobok=poly_xy(r['poly'])) for r in ROOMS],
+    piony=PIONY,
+    dzialka=dict(obrys=poly_xy(PLOT), linia_zabudowy_y=BUILD_LINE_Y,
+                 elementy={k: (poly_xy(v) if hasattr(v, 'exterior') else [poly_xy(g) for g in v] if isinstance(v, list) else v) for k, v in SITE.items()}),
+    bilans=dict(PU_mieszk_pomocn_komunik=round(tot['PU'], 2), pom_techniczne=round(tot['T'], 2),
+                schody=round(tot['S'], 2), garaz_gosp=round(tot['G'], 2), PU_budynku=round(PU_bud, 2),
+                pow_zabudowy=round(m['enclosed'], 2), pow_zabudowy_zachowawczo=round(m['all_proj'], 2),
+                pbc=round(m['pbc'], 2), intensywnosc=round(m['intens'], 3), wysokosc=round(H, 2)),
+)
+json.dump(model, open(os.path.join(OUT, 'model_W1.json'), 'w'), ensure_ascii=False, indent=1)
+print('PU_bud', round(PU_bud, 2), 'H', round(H, 3), 'footprint', round(m['enclosed'], 2))
