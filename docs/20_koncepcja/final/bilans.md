@@ -2,9 +2,9 @@
 
 | wskaźnik | wartość | wymaganie | ocena |
 |---|---|---|---|
-| PU wg RPB §20 / W-316 (bez klatek, garażu i techn.) | **240,50 m²** (P0 96,29, P1 84,88, P2 59,33) | 230–270 m² | ✓ |
-| kontrolnie PN-ISO 9836 (rdzeń `lamela.model`, pipeline): podstawowa / pomocnicza z garażem / ruchu / techniczna | 158,54 / 78,58 / 43,85 / 14,90 m² („PU” rdzenia = podst. + pomocn. = 237,12 m² — z garażem, bez komunikacji) | — | — |
-| garaż (osobno) / pom. techniczne (osobno) / klatki | 37,42 / 14,90 / 3,06 m² | — | — |
+| PU wg RPB §20 / W-316 (bez klatek, garażu i techn.) | **240,24 m²** (P0 96,29, P1 84,39, P2 59,57) | 230–270 m² | ✓ |
+| kontrolnie PN-ISO 9836 (rdzeń `lamela.model`, pipeline): podstawowa / pomocnicza z garażem / ruchu / techniczna | 158,78 / 78,58 / 43,85 / 16,24 m² („PU” rdzenia = podst. + pomocn. = 237,36 m² — z garażem, bez komunikacji) | — | — |
+| garaż (osobno) / pom. techniczne (osobno) / klatki | 37,42 / 16,24 / 3,55 m² | — | — |
 | strefa dzienna salon + jadalnia + kuchnia | 54,44 m² | ≥ 50 m² | ✓ |
 | powierzchnia zabudowy (obrysy kondygnacji) | 187,50 m² (11,72 %); z płytami 212,99 m² | ≤ 480 m² (30 %) | ✓ |
 | powierzchnia biologicznie czynna | 1 281,57 m² (80,10 %); rezerwa 50 % dachu zielonego 31,98 m² | ≥ 800 m² (50 %) | ✓ |
@@ -47,7 +47,7 @@
 | 1.02 Pokój rodzinny / biblioteka (boks C) | 28,36 | O1-01, O1-02 | 11,21 | 1:2,5 | ✓ |
 | 1.03 Pokój dziecka 1 | 13,19 | O1-06 | 2,26 | 1:5,8 | ✓ |
 | 1.04 Pokój dziecka 2 | 12,52 | O1-05 | 2,26 | 1:5,5 | ✓ |
-| 2.02 Sypialnia rodziców | 21,19 | O2-01, O2-04 | 9,52 | 1:2,2 | ✓ |
+| 2.02 Sypialnia rodziców | 21,43 | O2-01, O2-04 | 9,52 | 1:2,3 | ✓ |
 | 2.05 Gabinet / pokój | 16,32 | O2-03, O2-05 | 5,91 | 1:2,8 | ✓ |
 
 **Wierność szkicowi** (krawędzie elewacji S od lica zach. bryły B; szkic: brief §1.1, 45,8 px/m):
@@ -81,18 +81,21 @@
 | 0.11 | Przedsionek gospodarczy | ruchu | 7,18 | 2,76 | 7,18 |
 | 0.12 | Pomieszczenie techniczne | techniczna | 8,85 | 2,76 | 8,85 |
 | 0.13 | Garaż 2-stanowiskowy | pomocnicza | 37,42 | 2,76 | 37,42 |
-| 1.01 | Hol | ruchu | 14,58 | 2,77 | 14,58 |
+| 1.01 | Hol | ruchu | 14,09 | 2,77 | 14,09 |
 | 1.02 | Pokój rodzinny / biblioteka (boks C) | podstawowa | 28,36 | 2,77 | 28,36 |
 | 1.03 | Pokój dziecka 1 | podstawowa | 13,19 | 2,77 | 13,19 |
 | 1.04 | Pokój dziecka 2 | podstawowa | 12,52 | 2,77 | 12,52 |
 | 1.05 | Łazienka dzieci (wanna) | pomocnicza | 5,50 | 2,77 | 5,50 |
-| 1.06 | Klatka schodowa | ruchu | 0,00 | 2,77 | 0,00 |
+| 1.06 | Klatka schodowa | ruchu | 0,49 | 2,77 | 0,49 |
 | 1.07 | WC z natryskiem | pomocnicza | 4,08 | 2,77 | 4,08 |
 | 1.08 | Pralnia z suszarnią | pomocnicza | 6,64 | 2,77 | 6,64 |
 | 2.01 | Hol | ruchu | 5,74 | 2,77 | 5,74 |
-| 2.02 | Sypialnia rodziców | podstawowa | 21,19 | 2,77 | 21,19 |
+| 2.02 | Sypialnia rodziców | podstawowa | 21,43 | 2,77 | 21,43 |
 | 2.03 | Garderoba (przedpokój apartamentu) | pomocnicza | 10,57 | 2,77 | 10,57 |
 | 2.04 | Łazienka rodziców | pomocnicza | 5,51 | 2,77 | 5,51 |
 | 2.05 | Gabinet / pokój | podstawowa | 16,32 | 2,77 | 16,32 |
 | 2.06 | Klatka schodowa (wyjście z biegu 2, pustka) | ruchu | 0,24 | 2,77 | 0,24 |
 | 2.07 | Pom. techniczne (centrala rekuperacyjna, wyłaz na dach) | techniczna | 6,05 | 2,77 | 6,05 |
+| 0.14 | Szacht instalacyjny SI | techniczna | 0,45 | 2,77 | 0,45 |
+| 1.09 | Szacht instalacyjny SI | techniczna | 0,45 | 2,77 | 0,45 |
+| 2.08 | Szacht instalacyjny SI | techniczna | 0,45 | 2,77 | 0,45 |

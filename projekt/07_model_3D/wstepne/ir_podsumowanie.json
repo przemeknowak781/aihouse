@@ -6,10 +6,10 @@
   "context": 5,
   "door_leaf": 30,
   "fence": 440,
-  "footing": 20,
+  "footing": 21,
   "frame": 199,
   "glass": 34,
-  "insulation": 207,
+  "insulation": 214,
   "lamella": 246,
   "landing": 2,
   "mesh:context": 6,
@@ -20,12 +20,12 @@
   "railing": 188,
   "road": 76,
   "roof": 23,
-  "slab": 126,
+  "slab": 115,
   "stair_step": 32,
   "terrace": 6,
   "terrain_triangles": 8522,
   "vegetation": 132,
-  "wall": 757
+  "wall": 761
  },
  "meta": {
   "dzialka": {
@@ -151,7 +151,7 @@
     "kond": "P0",
     "xy": [
      6.555,
-     6.268
+     6.252
     ],
     "z": 0.0,
     "wys": 2.77,
@@ -285,7 +285,7 @@
     ],
     "z": 3.15,
     "wys": 2.77,
-    "pow": 14.58,
+    "pow": 14.09,
     "kategoria": "ruchu"
    },
    {
@@ -346,11 +346,11 @@
     "kond": "P1",
     "xy": [
      6.555,
-     6.35
+     6.297
     ],
     "z": 3.15,
     "wys": 2.77,
-    "pow": 0.0,
+    "pow": 0.49,
     "kategoria": "ruchu"
    },
    {
@@ -397,12 +397,12 @@
     "nazwa": "Sypialnia rodziców",
     "kond": "P2",
     "xy": [
-     1.345,
+     1.32,
      2.562
     ],
     "z": 6.3,
     "wys": 2.77,
-    "pow": 21.19,
+    "pow": 21.43,
     "kategoria": "podstawowa"
    },
    {
@@ -468,6 +468,45 @@
     "z": 6.3,
     "wys": 2.77,
     "pow": 6.05,
+    "kategoria": "techniczna"
+   },
+   {
+    "id": "0.14",
+    "nazwa": "Szacht instalacyjny SI",
+    "kond": "P0",
+    "xy": [
+     5.57,
+     5.79
+    ],
+    "z": 0.0,
+    "wys": 2.77,
+    "pow": 0.45,
+    "kategoria": "techniczna"
+   },
+   {
+    "id": "1.09",
+    "nazwa": "Szacht instalacyjny SI",
+    "kond": "P1",
+    "xy": [
+     5.57,
+     5.79
+    ],
+    "z": 3.15,
+    "wys": 2.77,
+    "pow": 0.45,
+    "kategoria": "techniczna"
+   },
+   {
+    "id": "2.08",
+    "nazwa": "Szacht instalacyjny SI",
+    "kond": "P2",
+    "xy": [
+     5.57,
+     5.79
+    ],
+    "z": 6.3,
+    "wys": 2.77,
+    "pow": 0.45,
     "kategoria": "techniczna"
    }
   ],

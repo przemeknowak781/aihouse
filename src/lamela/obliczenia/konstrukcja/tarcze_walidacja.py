@@ -93,7 +93,7 @@ def walidacja_tg(l: float = 1.0, c: float = 0.5, q: float = 100.0, h: float = 0.
     cut = m.przekroj_pionowy(r, xc)
     zp = np.array([0.5 * (p_[0] + p_[1]) for p_ in cut["prof"]])
     sp = np.array([0.5 * (p_[3] + p_[4]) for p_ in cut["prof"]])
-    return {"l_h": l / c / 2, "h": h, "ne": m.ne,
+    return {"l_h": l / c, "h": h, "ne": m.ne,
             "err_sx": float(np.abs(r.sig[:, 0] - sx).max() / np.abs(sx).max()),
             "err_sz": float(np.abs(r.sig[:, 1] - sz).max() / q),
             "err_tau": float(np.abs(r.sig[:, 2] - tz).max() / np.abs(tz).max()),
@@ -273,10 +273,10 @@ def raport_walidacji(out_dir: str | Path, zbieznosc: bool = True) -> dict:
         for h in (0.2, 0.1, 0.05):
             r = walidacja_tg(l_, c_, 100.0, h * c_)
             tg_res.append(r)
-            rows.append([f(l_ / c_, 1), f(h * c_ * 2 / (2 * c_), 3), r["ne"], f"{r['err_sx'] * 100:.2f} %", f"{r['err_sz'] * 100:.2f} %",
+            rows.append([f(l_ / c_, 1), f(h / 2, 3), r["ne"], f"{r['err_sx'] * 100:.2f} %", f"{r['err_sz'] * 100:.2f} %",
                          f"{r['err_tau'] * 100:.2f} %", f"{r['R_resztkowe']:.1e}"])
     res["tg"] = tg_res
-    L += [tabela(["l/h (rozpiętość/wysokość)", "h_el/h", "n_el", "max|Δσ_x|/max|σ_x|", "max|Δσ_z|/q", "max|Δτ|/max|τ|",
+    L += [tabela(["l/h (rozpiętość 2l / wysokość 2c)", "h_el/h", "n_el", "max|Δσ_x|/max|σ_x|", "max|Δσ_z|/q", "max|Δτ|/max|τ|",
                   "reakcje resztkowe [kN]"], rows), ""]
     L += ["Błędy mierzone w środkach wszystkich elementów (także przy krawędziach obciążonych). Zbieżność liniowa w h dla σ_z "
           "(obciążenie krawędziowe), dla σ_x — błąd < 0,5 % już przy 10 elementach na wysokości.", ""]

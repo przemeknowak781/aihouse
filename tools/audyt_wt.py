@@ -228,7 +228,7 @@ class AudytWT:
             ang = math.degrees(math.atan2(nrm[1], nrm[0]))
             kier = {0: "E", 90: "N", 180: "W", -180: "W", -90: "S"}.get(int(round(ang / 90.0)) * 90, f"{ang:.0f}°")
             line = LineString([tuple(a), tuple(b)])
-            drogowa = road is not None and line.distance(road) < 0.05
+            drogowa = road is not None and line.intersection(road.buffer(0.05)).length > 0.5 * line.length
             self.granice.append({"kier": kier, "line": line, "n": nrm, "drogowa": drogowa})
 
     # ------------------------------------------------------------------ narzędzia
@@ -373,6 +373,9 @@ class AudytWT:
             nad_schodami = any(poly.intersects(b["footprint"]) and b["z0"] >= z_pod - 0.01 and
                                b["z0"] + b["n"] * b["h"] > z_pod + 1.0 for b in biegi) or \
                 any(poly.intersects(sp["poly"]) and sp["z"] > z_pod + 0.5 for sp in spocz)
+            if "klatka" in r.nazwa.lower():
+                nad_schodami = False
+            h_max = h_sw
             if nad_schodami and h_sw is not None:
                 minx, miny, maxx, maxy = poly.bounds
                 xs = np.arange(minx + KROK / 2, maxx, KROK)
@@ -394,6 +397,7 @@ class AudytWT:
                         key = "≥2,20" if hh >= 2.20 - 1e-9 else ("1,40–2,20" if hh >= 1.40 - 1e-9 else "<1,40")
                         strefy[key] += a_cell
                         h_min = min(h_min, hh)
+                        h_max = hh if h_max == h_sw else max(h_max, hh)
                 pow_zal = strefy["≥2,20"] + 0.5 * strefy["1,40–2,20"]
                 pow_net = sum(strefy.values())
             else:
@@ -412,7 +416,8 @@ class AudytWT:
             row = dict(id=r.id, kond=r.kond, nazwa=r.nazwa, kat=r.kategoria, pobyt=r.pobyt_ludzi,
                        rodzaj=r.raw.get("rodzaj"), pow_model=round(r.pow_netto, 2), pow=round(pow_net, 2),
                        pow_zal=round(pow_zal, 2), h=None if h_sw is None else round(h_sw, 3),
-                       h_min=None if h_min is None else round(h_min, 3), plyta=sid, strefy=strefy, schody=nad_schodami,
+                       h_min=None if h_min is None else round(h_min, 3), plyta=sid,
+                       h_max=None if h_max is None else round(h_max, 3), strefy=strefy, schody=nad_schodami,
                        h_belka=h_belka, belka=b_id, poly=poly, poly_full=r.polygon, z_pod=z_pod)
             rows.append(row)
         self.rooms = {r["id"]: r for r in rows}
@@ -604,8 +609,14 @@ class AudytWT:
             glab = (mxy - mny) if abs(d[1]) > abs(d[0]) else (mxx - mnx)
             A.add("Schody", sp["id"], "głębokość spocznika", f2(glab, 3), f"≥ szer. biegu {f2(w_max, 3)}",
                   chk(glab >= w_max - 1e-6), R.zr("spocznik_szer_min", "WT §68 ust. 1") + "; brief §5")
-            zz, eid = self.nad_punktem(sp["poly"].centroid.x, sp["poly"].centroid.y, sp["z"] + 0.01)
-            A.add("Schody", sp["id"], "prześwit nad spocznikiem", f"{f2(zz - sp['z'], 3)} ({eid})", "≥ 2,00",
+            zz, eid = math.inf, "świetlik/otwarta przestrzeń"
+            mnx, mny, mxx, mxy = sp["poly"].bounds
+            for x in np.arange(mnx + 0.05, mxx, 0.10):
+                for y in np.arange(mny + 0.05, mxy, 0.10):
+                    z1, e1 = self.nad_punktem(x, y, sp["z"] + 0.01)
+                    if z1 < zz:
+                        zz, eid = z1, e1
+            A.add("Schody", sp["id"], "prześwit nad spocznikiem (min.)", f"{f2(zz - sp['z'], 3)} ({eid})", "≥ 2,00",
                   chk(zz - sp["z"] >= 2.0), "R3 K-22")
             # spójność: koniec biegu = krawędź spocznika
             for b in sch_b:
@@ -690,7 +701,7 @@ class AudytWT:
                 d = ds[gr["kier"]]
                 if d > 12.0:
                     continue
-                lim_proj = ODL_OKAP_PROJEKT
+                lim_proj = l_okap if rodz.startswith("taras") else ODL_OKAP_PROJEKT
                 st = "OK" if d >= lim_proj - 1e-6 else ("UWAGA" if d >= l_okap else "NIEZGODNE")
                 rows.append(dict(el=eid, rodzaj=rodz, kier=gr["kier"], d=d, lim=lim_proj))
                 A.add("Odległości", eid, f"{rodz} → granica {gr['kier']}", f"{f2(d)} m",
@@ -1102,7 +1113,8 @@ class AudytWT:
                 c1 = np.array(o.p1) + np.array(o.kierunek_zewn) * abs(o.sciana.face_t(o.sciana.ext_side))
                 seg = LineString([tuple(c0), tuple(c1)])
                 ev = np.array(e.coords[1]) - np.array(e.coords[0])
-                par = abs(np.cross(ev / np.hypot(*ev), o.sciana.u)) < 0.05
+                evn = ev / np.hypot(*ev)
+                par = abs(evn[0] * o.sciana.u[1] - evn[1] * o.sciana.u[0]) < 0.05
                 if par and e.distance(seg) < 0.7 and e.buffer(0.7).intersection(seg).length > 0.1:
                     out.append(e)
                     break
@@ -1166,10 +1178,11 @@ class AudytWT:
                   "N lub E (TWARDE ZAŁOŻENIA)", "OK" if strona in ("N", "E") else "UWAGA",
                   "TWARDE ZAŁOŻENIA (energia i światło); W-024 (hałas)",
                   "" if strona in ("N", "E") else
-                  "przenieść jednostkę na elewację wsch. garażu (np. x ≈ 27,6; y ≈ 36,0 w ukł. działki — 1,3 m od lica, "
-                  "4,4 m od granicy E: < 6,0 m wg W-024 → wymaga obliczenia hałasu) albo na pn. przy pom. technicznym niemożliwe "
-                  "(podjazd) — jeśli pozostaje od S: uzasadnić w opisie (krótkie przewody do pom. 0.12, ekran akustyczny, "
-                  "odległość od tarasu T1 ≥ 4 m) i wykazać L_Aeq,N ≤ 40 dB na granicy E")
+                  "wariant E: przy ścianie wsch. pom. techn. 0.12 / garażu (jednostka gł. ≈ 0,6 m, 0,3 m od lica ⇒ x_dz ≈ 26,6–27,2, "
+                  "≈ 4,8 m od granicy E: ≥ 3,0 wg założeń, lecz < 6,0 wg W-024 — wymaga obliczenia hałasu L_Aeq,N ≤ 40 dB); "
+                  "elewacja N zajęta przez podjazd i wejście. Jeśli jednostka zostaje od S — wpisać do koncepcji uzasadnienie "
+                  "odstępstwa (W-024: ≥ 6,0 m od granicy E; krótkie przewody do 0.12), ekran akustyczny od tarasu T1/T3 "
+                  "i obliczenie hałasu na tarasie i granicy E")
             # strefa R290 1,0 m — otwory w ścianach
             U5 = next((make_polygon(u["obrys"]) for u in D.get("utwardzenia") or [] if "PC" in str(u.get("nawierzchnia", ""))), None)
             if U5 is not None:
@@ -1287,8 +1300,9 @@ def raport_md(a: AudytWT, A: Audyt, extra: str = "") -> str:
     for r in A.tabele.get("pomieszczenia", []):
         o = ok_by.get(r["id"], {})
         hb = (f"{f2(r['h_min'])}" if r["schody"] else "") + (f" / {f2(r['h_belka'])} ({r['belka']})" if r["h_belka"] else "")
+        hs = f"zmienna {f2(r['h_min'])}…{f2(r['h_max'])}" if r["schody"] else ("otwarta (pustka)" if "klatka" in r["nazwa"].lower() else f2(r["h"]))
         L.append(f"| {r['id']} | {r['nazwa']} | {r['kat']} | {'tak' if r['pobyt'] else '—'} | {f2(r['pow'])} | {f2(r['pow_zal'])} | "
-                 f"{f2(r['h'])} | {hb or '—'} | {o.get('okna') or '—'} | {f2(o.get('k_osc'), 3) if o.get('okna') else '—'} |")
+                 f"{hs} | {hb or '—'} | {o.get('okna') or '—'} | {f2(o.get('k_osc'), 3) if o.get('okna') else '—'} |")
     pu = inf.get("PU", {})
     if pu:
         L.append(f"\nPU mieszkalna (podstawowa {f2(pu['podstawowa'])} + pomocnicza bez garażu {f2(pu['pomocnicza_bez_garazu'])} + "

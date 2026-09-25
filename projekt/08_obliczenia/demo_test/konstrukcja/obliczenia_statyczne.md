@@ -177,6 +177,7 @@ Kombinacje (PN-EN 1990 + NA): STR/GEO — mniej korzystne z 6.10a: Σ1,35·G_k +
 - Ściany murowe: profile obciążeń wzdłuż osi (reakcje płyt z MES + ściany wyżej), przekazanie obciążeń znad otworów na filarki (po 0,5 m z każdej strony), nośność wg PN-EN 1996-1-1 6.1.2 + zał. G, filarki z η_A.
 - Fundamenty: nośność wg PN-EN 1997-1 zał. D (DA2*), osiadanie — sumowanie warstw (Boussinesq), ławy niezbrojone poprzecznie wg PN-EN 1992-1-1 12.9.3; obciążenie ław — maks. średnia krocząca na 2,0 m.
 - Ugięcia żelbetu: l/d (7.4.2), a gdy niespełnione — obliczenie z interpolacją ζ, pełzaniem φ = 2,5 i skurczem (7.4.3).
+- Ściany-tarcze żelbetowe (pole `tarcza` w modelu lub ściana żelbetowa bez ciągłej podpory poniżej): MES płaskiego stanu naprężenia (element QM6, podpory sprężyste k = E·t/h ścian poniżej), obciążenia — reakcje płyt nad tarczą (krawędź górna) i płyty podwieszonej poza ścianami poniżej (krawędź dolna), ściany wyżej, belki; model kratownicowy STM generowany z pola naprężeń (programowanie liniowe, 5.6.4, 6.5), cięgna F = max(STM; całkowanie σ), węzły CCC/CCT/CTT, siatki 9.6/9.7, otwory, rysy, ugięcia MES ze sztywnością zarysowaną, EQU wspornika; reakcje → ściany poniżej (moduł `tarcze`, walidacja: tarcze_walidacja).
 
 ## Poz. 1 — Dachy i stropodachy
 
@@ -3667,13 +3668,13 @@ Element modelu: `L1` · maks. wykorzystanie nośności η = 133% · **WARUNKI NI
 
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
-| S2 | 1,44 | 6,5 |
-| QA_pB | 2,57 | 11,6 |
 | G | 49,85 | 244,2 |
-| H | 0,80 | 3,6 |
-| S1 | 1,44 | 6,5 |
-| QA_pA | 1,51 | 6,7 |
+| S2 | 1,44 | 6,5 |
 | QA | 3,92 | 18,3 |
+| QA_pB | 2,57 | 11,6 |
+| S1 | 1,44 | 6,5 |
+| H | 0,80 | 3,6 |
+| QA_pA | 1,51 | 6,7 |
 
 #### Obliczenia
 
@@ -3736,14 +3737,14 @@ Element modelu: `L2` · maks. wykorzystanie nośności η = 118% · **WARUNKI NI
 
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
-| S2 | 6,72 | 23,4 |
-| SB2 | 3,96 | 13,6 |
-| S1 | 4,55 | 15,9 |
-| QA_pB | 7,35 | 29,1 |
 | G | 90,48 | 377,4 |
-| H | 1,52 | 5,5 |
+| S2 | 6,72 | 23,4 |
+| QA_pB | 7,35 | 29,1 |
+| SB2 | 3,96 | 13,6 |
 | QA_pA | 0,00 | 0,0 |
 | QA | 17,03 | 61,5 |
+| H | 1,52 | 5,5 |
+| S1 | 4,55 | 15,9 |
 
 #### Obliczenia
 
@@ -3806,13 +3807,13 @@ Element modelu: `L3` · maks. wykorzystanie nośności η = 119% · **WARUNKI NI
 
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
-| S2 | 1,34 | 6,5 |
-| QA_pB | 3,74 | 11,7 |
 | G | 50,78 | 314,4 |
-| H | 0,74 | 3,6 |
-| S1 | 1,34 | 6,5 |
-| QA_pA | 0,00 | 2,5 |
+| S2 | 1,34 | 6,5 |
 | QA | 3,90 | 27,7 |
+| QA_pB | 3,74 | 11,7 |
+| S1 | 1,34 | 6,5 |
+| H | 0,74 | 3,6 |
+| QA_pA | 0,00 | 2,5 |
 
 #### Obliczenia
 
@@ -3875,13 +3876,13 @@ Element modelu: `L4` · maks. wykorzystanie nośności η = 134% · **WARUNKI NI
 
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
-| S2 | 1,46 | 7,4 |
-| QA_pB | 0,00 | 0,0 |
 | G | 52,08 | 271,2 |
-| H | 0,81 | 4,1 |
-| S1 | 1,46 | 7,4 |
-| QA_pA | 5,25 | 17,0 |
+| S2 | 1,46 | 7,4 |
 | QA | 4,40 | 14,4 |
+| QA_pB | 0,00 | 0,0 |
+| S1 | 1,46 | 7,4 |
+| H | 0,81 | 4,1 |
+| QA_pA | 5,25 | 17,0 |
 
 #### Obliczenia
 
@@ -3944,13 +3945,13 @@ Element modelu: `L5` · maks. wykorzystanie nośności η = 96% · wszystkie war
 
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
-| S2 | 5,23 | 29,4 |
-| QA_pB | 8,68 | 46,4 |
 | G | 123,00 | 687,3 |
-| H | 2,90 | 16,4 |
-| S1 | 5,23 | 29,4 |
-| QA_pA | 7,63 | 37,4 |
+| S2 | 5,23 | 29,4 |
 | QA | 16,31 | 83,8 |
+| QA_pB | 8,68 | 46,4 |
+| S1 | 5,23 | 29,4 |
+| H | 2,90 | 16,4 |
+| QA_pA | 7,63 | 37,4 |
 
 #### Obliczenia
 
@@ -4229,4 +4230,4 @@ Masa całkowita stali B500SP: **2723,8 kg**.
 - ST1: klasa betonu nie wynika z modelu (pole mat / materiał warstwy) — przyjęto C25/30 (XC1)
 - SCH1: brak grubości płyty schodowej (pole schody[].plyta.grubosc) — przyjęto 0,15 m
 
-**Zakres wymagający osobnej analizy:** ściany-tarcze z otworami, tarcze wieloprzęsłowe i wspornikowe (MES tarczowy / STM); przebicie płyt nad słupami (6.4) i płyt fundamentowych — tylko sygnalizowane; słupy żelbetowe i ściany żelbetowe (5.8, efekty II rzędu); sztywność przestrzenna i stateczność ogólna budynku (tarcze stropowe, usztywnienie ścianami), oddziaływania wyjątkowe; drgania stropów i wsporników (PN-B-02171); łączniki termoizolacyjne (ETA) — dobór wg producenta na siły z pozycji; połączenia stalowe (blachy podstaw, kotwy) — tylko śruby/spoiny podstawowe; ugięcia z uwzględnieniem kolejności wznoszenia, obrotu podpór wsporników i sztywności ścian; płyta fundamentowa — tylko model Winklera pasma; osiadania — bez wpływu fundamentów sąsiednich; stateczność skarp/wykopów, wypór wody, parcie gruntu na ściany piwnic
+**Zakres wymagający osobnej analizy:** ściany-tarcze: analiza liniowo-sprężysta + STM (bez redystrybucji po zarysowaniu), otwory prostokątne, bez zginania z płaszczyzny i stateczności strefy ściskanej; tarcze podparte na ścianach poprzecznych (bez ściany poniżej) — indywidualnie; przebicie płyt nad słupami (6.4) i płyt fundamentowych — tylko sygnalizowane; słupy żelbetowe i ściany żelbetowe (5.8, efekty II rzędu); sztywność przestrzenna i stateczność ogólna budynku (tarcze stropowe, usztywnienie ścianami), oddziaływania wyjątkowe; drgania stropów i wsporników (PN-B-02171); łączniki termoizolacyjne (ETA) — dobór wg producenta na siły z pozycji; połączenia stalowe (blachy podstaw, kotwy) — tylko śruby/spoiny podstawowe; ugięcia z uwzględnieniem kolejności wznoszenia, obrotu podpór wsporników i sztywności ścian; płyta fundamentowa — tylko model Winklera pasma; osiadania — bez wpływu fundamentów sąsiednich; stateczność skarp/wykopów, wypór wody, parcie gruntu na ściany piwnic

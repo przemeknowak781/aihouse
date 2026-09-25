@@ -584,3 +584,284 @@ def _tin(pts: np.ndarray):
             z[bad] = coef[0] * xy[bad, 0] + coef[1] * xy[bad, 1] + coef[2]
         return z
     return f
+
+
+# ================================================================================================ analizy
+def opaska(s: SiteData):
+    """Pas opaski żwirowej (odwodnienia typu opaska_zwirowa): między obrysem przyziemia a linią 'obrys'
+    odsuniętą o 'szer', bez tarasów, podestów i utwardzeń."""
+    out = []
+    for o in s.odwodnienia:
+        if o["typ"] != "opaska_zwirowa" or not o["pts"]:
+            continue
+        w = float(o["szer"] or 0.5)
+        band = s.p0.buffer(w + 0.01, join_style=2).difference(s.p0)
+        ln = line(o["pts"])
+        if ln is not None:
+            band = band.intersection(ln.buffer(w * 1.05, cap_style=2, join_style=2))
+        cut = [t["poly"] for t in s.tarasy] + [u["poly"] for u in s.utwardzenia]
+        if cut:
+            band = band.difference(unary_union(cut))
+        band = unary_union([p for p in polygons_of(band) if p.area > 0.05])
+        out.append(dict(id=o["id"], poly=band, opis=o["opis"]))
+    return out
+
+
+def green_roofs(s: SiteData):
+    """Dachy zielone (warstwa substratu / „ziel” w nazwie przegrody) — pow. w rzucie [(id, Polygon)]."""
+    from ..model import make_polygon
+    out = []
+    for d in s.m.dachy():
+        p = s.m.przegroda(str(d.get("przegroda")))
+        name = (p.nazwa if p else "").lower()
+        mats = [w.mat for w in p.warstwy] if p else []
+        sub = any("SUBSTR" in str(mc).upper() or "substrat" in (s.m.material(mc).nazwa.lower()
+                                                                  if s.m.material(mc) else "") for mc in mats)
+        if (sub or "ziel" in name) and ring(d.get("obrys")):
+            out.append((str(d.get("id")), s.G(make_polygon(d["obrys"], d.get("otwory") or []))))
+    return out
+
+
+def wskazniki(s: SiteData) -> dict:
+    """Wskaźniki zagospodarowania liczone z geometrii modelu (shapely)."""
+    A = float(s.plot.area)
+    zab = float(s.footprint.area)
+    zab_pl = float(unary_union([s.footprint, s.slab_union]).area) if not s.slab_union.is_empty else zab
+    opas = opaska(s)
+    utw = unary_union([u["poly"] for u in s.utwardzenia]) if s.utwardzenia else Polygon()
+    tar = unary_union([t["poly"] for t in s.tarasy]).difference(s.p0) if s.tarasy else Polygon()
+    op = unary_union([o["poly"] for o in opas]) if opas else Polygon()
+    cover = unary_union([s.p0, utw, tar, op] + ([s.pc["body"]] if s.pc else []))
+    zielone = [z["poly"] for z in s.zielen if str(z["raw"].get("typ", "")) in ("trawnik", "rabata", "zywoplot",
+                                                                              "łąka", "laka", "ogrod")]
+    green = unary_union(zielone).intersection(s.plot) if zielone else s.plot
+    if s.rozsaczanie and s.rozsaczanie["poly"] is not None:
+        green = unary_union([green, s.rozsaczanie["poly"].intersection(s.plot)])
+    pbc_teren = float(green.difference(cover).area)
+    gr = [(i, g) for i, g in green_roofs(s) if g.area >= 10.0]
+    pbc_dach = 0.5 * sum(g.area for _i, g in gr)
+    kond = {k: float(g.area) for k, g in s.storeys.items()}
+    suma_k = sum(kond.values())
+    # wysokość zabudowy (upzp art. 2 pkt 30): najwyższy punkt − średnia z min./maks. rzędnej terenu na obwodzie
+    top_abs, top_src = None, ""
+    try:
+        bp = s.ctx.building_prisms if s.ctx.ir is not None else []
+        if bp:
+            p = max(bp, key=lambda q: q.z1)
+            top_abs, top_src = s.zero_abs + float(p.z1), f"{p.id} ({p.kind})"
+    except Exception:  # noqa: BLE001
+        pass
+    if top_abs is None:
+        tops = [(float(sl.get("top_attyki") or sl["top"]), str(sl["id"])) for sl in s.m.plyty()]
+        if tops:
+            z, i = max(tops)
+            top_abs, top_src = s.zero_abs + z, f"{i} (attyka)"
+    ring_pts = np.asarray(shapely.segmentize(s.p0.exterior, 0.25).coords) if not s.p0.is_empty else np.zeros((0, 2))
+    H = {}
+    for nm, fn in (("ist", s.H_ist), ("proj", s.H_proj)):
+        h = fn(ring_pts) if len(ring_pts) else None
+        if h is not None and len(h):
+            hm = (float(np.min(h)) + float(np.max(h))) / 2.0
+            H[nm] = dict(min=float(np.min(h)), max=float(np.max(h)), sr=hm,
+                         wys=(top_abs - hm) if top_abs is not None else None)
+    wys = max((v["wys"] for v in H.values() if v.get("wys") is not None), default=None)
+    wt = None
+    try:
+        if s.ctx.ir is not None:
+            from .section import building_height
+            wt = building_height(s.ctx)
+    except Exception:  # noqa: BLE001
+        wt = None
+    miejsca = dict(garaz=sum(1 for q in s.miejsca if str(q["raw"].get("typ")) in ("garaz", "wiata")),
+                   zewn=sum(1 for q in s.miejsca if str(q["raw"].get("typ")) == "zewn"))
+    spadki = [float(d.get("spadek") or 0.0) for d in s.m.dachy()]
+    return dict(A=A, zab=zab, zab_pl=zab_pl, zab_p0=float(s.p0.area), udzial_zab=zab / A if A else 0.0,
+                utw=float(utw.difference(s.p0).area), tarasy=float(tar.area), opaska=float(op.area),
+                pbc=pbc_teren, pbc_udzial=pbc_teren / A if A else 0.0, pbc_dach=pbc_dach,
+                pbc_z_dachem=(pbc_teren + pbc_dach) / A if A else 0.0, dachy_ziel=[i for i, _g in gr],
+                kond=kond, suma_kond=suma_k, intens=suma_k / A if A else 0.0, n_kond=len(s.storeys),
+                top_abs=top_abs, top_src=top_src, H_teren=H, wys_zab=wys, wt=wt, miejsca=miejsca,
+                dach_spadek_deg=math.degrees(math.atan(max(spadki))) if spadki else None,
+                cover=cover, green=green.difference(cover))
+
+
+def odleglosci(s: SiteData, req_otw=4.0, req_bez=3.0, req_wys=1.5) -> list[dict]:
+    """Odległości od granic (WT § 12 ust. 1, 6, 10; § 9 — w miejscu najmniejszego oddalenia, w poziomie).
+    Dla każdej granicy: ściany z otworami, ściany bez otworów (każda płaszczyzna osobno), okapy/płyty/tarasy/daszki.
+    Zwraca wiersze {granica, strona, sasiad, droga, typ, element, d, wym, ok, p_el, p_gr}."""
+    rows = []
+    over = [(x["id"], x["poly"]) for x in s.slabs] + [(t["id"], t["poly"]) for t in s.tarasy]
+    for g in s.granice:
+        seg = g["seg"]
+        best = {}
+        for f in s.lica:
+            a, b = nearest_points(f["seg"], seg)
+            v = np.array([b.x - a.x, b.y - a.y])
+            L = float(np.hypot(*v))
+            if L < 1e-6 or float(v @ f["n"]) / L < 0.7:
+                continue
+            key = "otw" if f["otwory"] else "bez"
+            if key not in best or L < best[key]["d"]:
+                best[key] = dict(d=L, el=f"ściana {f['kond']}" + (" z otworami" if f["otwory"] else " bez otworów"),
+                                 p_el=np.array([a.x, a.y]), p_gr=np.array([b.x, b.y]))
+        for eid, pg in over:
+            part = pg.difference(s.footprint.buffer(0.01))
+            if part.is_empty:
+                continue
+            a, b = nearest_points(part, seg)
+            L = a.distance(b)
+            if "wys" not in best or L < best["wys"]["d"]:
+                best["wys"] = dict(d=L, el=eid, p_el=np.array([a.x, a.y]), p_gr=np.array([b.x, b.y]))
+        for key, req in (("otw", req_otw), ("bez", req_bez), ("wys", req_wys)):
+            if key not in best:
+                continue
+            r = dict(granica=g["i"], strona=g["strona"], sasiad=g["sasiad"] or "", droga=g["droga"], typ=key,
+                     **best[key])
+            if g["droga"]:
+                r["wym"], r["ok"] = None, True          # § 12 ust. 10 — działka drogowa: nie dotyczy
+            else:
+                r["wym"], r["ok"] = req, best[key]["d"] >= req - 1e-6
+            rows.append(r)
+    return rows
+
+
+def linia_zabudowy_spr(s: SiteData) -> dict:
+    """Położenie budynku względem nieprzekraczalnej linii zabudowy: odległość lica ścian, elementy przekraczające."""
+    lz = s.linia_zabudowy
+    if lz is None or s.footprint.is_empty:
+        return {}
+    a, b = np.asarray(lz.coords[0]), np.asarray(lz.coords[-1])
+    d = (b - a) / (np.hypot(*(b - a)) or 1.0)
+    n = np.array([-d[1], d[0]])
+    c = np.asarray(s.footprint.centroid.coords[0])
+    if float((c - a) @ n) < 0:
+        n = -n                                            # n → strona terenu zabudowy
+    far = 1e3
+    half = Polygon([a - d * far, b + d * far, b + d * far + n * far, a - d * far + n * far])
+    over = []
+    for nm, pg in [("obrys ścian", s.footprint)] + [(x["id"], x["poly"]) for x in s.slabs] + \
+            [(t["id"], t["poly"]) for t in s.tarasy]:
+        ex = pg.difference(half)
+        if ex.area > 1e-4:
+            over.append((nm, float(max(0.0, -min(float((np.asarray(q) - a) @ n)
+                                                 for q in np.asarray(pg.exterior.coords))))))
+    dmin = float(s.footprint.distance(lz))
+    near = nearest_points(s.footprint, lz)
+    return dict(d=dmin, p_b=np.array([near[0].x, near[0].y]), p_l=np.array([near[1].x, near[1].y]),
+                przekroczenia=over, ok=not any(nm == "obrys ścian" for nm, _v in over), n=n)
+
+
+def punkty_tyczenia(s: SiteData, tol=0.01) -> list[tuple[str, np.ndarray]]:
+    """Narożniki obrysu zewnętrznego ścian przyziemia (bez punktów współliniowych), od narożnika NW zgodnie
+    z ruchem wskazówek zegara."""
+    if s.p0.is_empty:
+        return []
+    pg = max(polygons_of(s.p0), key=lambda q: q.area)
+    C = np.asarray(shapely.geometry.polygon.orient(pg, -1.0).exterior.coords)[:-1]   # CW
+    keep = []
+    n = len(C)
+    for i in range(n):
+        p0, p1, p2 = C[i - 1], C[i], C[(i + 1) % n]
+        cr = (p1[0] - p0[0]) * (p2[1] - p1[1]) - (p1[1] - p0[1]) * (p2[0] - p1[0])
+        if abs(cr) > tol * max(1e-9, np.hypot(*(p1 - p0)) + np.hypot(*(p2 - p1))) * 0.5:
+            keep.append(p1)
+    K = np.asarray(keep)
+    i0 = int(np.argmin(K[:, 0] - K[:, 1] * 1.0001))   # NW: min x, maks. y
+    K = np.roll(K, -i0, axis=0)
+    return [(f"T{i + 1}", p) for i, p in enumerate(K)]
+
+
+def _req(odl: dict, a: str, b: str):
+    for k in (f"{a}-{b}", f"{b}-{a}", f"{a}-*", f"{b}-*"):
+        if k in odl:
+            v = odl[k]
+            return (float(v[0]), str(v[1])) if isinstance(v, (list, tuple)) else (float(v), "konfiguracja")
+    return None
+
+
+def koordynacja(s: SiteData, odl_min: dict | None = None, retencja_min: dict | None = None) -> dict:
+    """Koordynacja uzbrojenia: odległości poziome między sieciami różnych branż (poza otoczeniem skrzyżowań),
+    skrzyżowania, odległości od drzew, strefa R290, odległości urządzeń retencji. Zwraca słownik list."""
+    odl = dict(ODL_MIN_DOMYSLNE)
+    odl.update(odl_min or {})
+    pary, skrz, kol = [], [], []
+    proj = [x for x in s.sieci if not x.istn]
+    allx = list(s.sieci)
+    seen = set()
+    for A in proj:
+        for B in allx:
+            if A is B or A.branza == B.branza or (B.id, A.id) in seen:
+                continue
+            seen.add((A.id, B.id))
+            rq = _req(odl, A.lit, B.lit)
+            if rq is None:
+                continue
+            req, src = rq
+            X = A.geom.intersection(B.geom)
+            pts = [np.asarray(p.coords[0]) for p in getattr(X, "geoms", [X]) if isinstance(p, Point)] \
+                if not X.is_empty else []
+            for p in pts:
+                skrz.append(dict(a=A, b=B, p=p))
+            a2, b2 = A.geom, B.geom
+            if pts:
+                cut = unary_union([Point(p).buffer(req + 0.05) for p in pts])
+                a2, b2 = a2.difference(cut), b2.difference(cut)
+            if a2.is_empty or b2.is_empty:
+                continue
+            d = float(a2.distance(b2))
+            if d > max(3.0, 3 * req):
+                continue
+            q1, q2 = nearest_points(a2, b2)
+            r = dict(a=A, b=B, d=d, req=req, src=src, ok=d >= req - 1e-6,
+                     p=(np.asarray(q1.coords[0]) + np.asarray(q2.coords[0])) / 2)
+            pary.append(r)
+            if not r["ok"]:
+                kol.append(dict(typ="zbliżenie sieci", opis=f"{A.lit}–{B.lit}: {d:.2f} m < {req:.2f} m", p=r["p"],
+                                src=src))
+    # drzewa (od pnia)
+    drz = []
+    rq_t = _req(odl, "drzewo", "drzewo") or (2.0, "")
+    for A in proj:
+        for t in s.drzewa:
+            d = float(A.geom.distance(Point(t["xy"])))
+            if d < max(rq_t[0], t["d"] / 2) + 2.0:
+                r = dict(a=A, t=t, d=d, req=rq_t[0], ok=d >= rq_t[0] - 1e-6, korona=d >= t["d"] / 2)
+                drz.append(r)
+                if not r["ok"]:
+                    kol.append(dict(typ="sieć–drzewo", opis=f"{A.lit}–{t['id']}: {d:.2f} m < {rq_t[0]:.2f} m",
+                                    p=np.asarray(nearest_points(A.geom, Point(t["xy"]))[0].coords[0]), src=rq_t[1]))
+    # strefa R290: studzienki, wpusty, odwodnienia, rury spustowe, otwory parteru
+    r290 = []
+    if s.pc is not None:
+        Z = s.pc["strefa"]
+        cand = [(o.id, Point(o.xy)) for o in s.obiekty.values() if o.id != s.pc["obj"].id]
+        cand += [(o["id"], o["geom"]) for o in s.odwodnienia if o["geom"] is not None and o["typ"] == "liniowe"]
+        cand += [(r["id"], Point(r["xy"])) for r in s.rury if r["trasa"] == "zewn"]
+        for o in s.m.otwory():
+            if o.kond == s.k0 and o.sciana is not None and o.sciana.ext_side is not None:
+                cand.append((o.id, s.G(o.footprint)))
+        for nm, g in cand:
+            if g is not None and g.intersects(Z):
+                r290.append(nm)
+                kol.append(dict(typ="strefa R290", opis=f"{nm} w strefie R290 PC", src="W-156",
+                                p=np.asarray(g.centroid.coords[0])))
+    # urządzenia retencji: od budynku, granic, drzew
+    rm = dict(dict(budynek=3.0, granica=2.0, drzewo=1.0), **(retencja_min or {}))
+    ret = []
+    for nm, g in (("zbiornik", Point(s.zbiornik["xy"]).buffer(float(s.zbiornik.get("sr") or 0) / 2)
+                   if s.zbiornik else None),
+                  ("niecka", s.rozsaczanie["poly"] if s.rozsaczanie else None)):
+        if g is None:
+            continue
+        crowns = [Point(t["xy"]).buffer(t["d"] / 2) for t in s.drzewa if not t["usun"]]
+        for what, other, req in (("budynek", s.footprint, rm["budynek"]),
+                                 ("granica", s.plot.exterior, rm["granica"]),
+                                 ("korona drzewa", unary_union(crowns) if crowns else None, rm["drzewo"])):
+            if other is None or other.is_empty:
+                continue
+            d = float(g.distance(other))
+            ret.append(dict(el=nm, od=what, d=d, req=req, ok=d >= req - 1e-6))
+            if d < req - 1e-6:
+                kol.append(dict(typ="retencja", opis=f"{nm}–{what}: {d:.2f} m < {req:.2f} m", src="założenie proj.",
+                                p=np.asarray(nearest_points(g, other)[0].coords[0])))
+    return dict(pary=pary, skrzyzowania=skrz, kolizje=kol, drzewa=drz, r290=r290, retencja=ret)

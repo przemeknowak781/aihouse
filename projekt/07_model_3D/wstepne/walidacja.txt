@@ -1,4 +1,4 @@
-Walidacja: 0 błędów, 0 ostrzeżeń, 286 informacji
+Walidacja: 0 błędów, 0 ostrzeżeń, 294 informacji
   [INFO] budynek.yaml: stolarka: sekcja spoza schematu — ignorowana przez rdzeń modelu
   [INFO] budynek.yaml: wezly: sekcja spoza schematu — ignorowana przez rdzeń modelu
   [INFO] budynek.yaml: energia: sekcja spoza schematu — ignorowana przez rdzeń modelu
@@ -119,10 +119,12 @@ Walidacja: 0 błędów, 0 ostrzeżeń, 286 informacji
   [INFO] budynek.yaml: sciany[48] (S2-11): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu
   [INFO] budynek.yaml: sciany[49] (S2-12): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu
   [INFO] budynek.yaml: sciany[50] (S2-13): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu
-  [INFO] budynek.yaml: sciany[51] (S2-14): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu
-  [INFO] budynek.yaml: sciany[52] (S2-15): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu
-  [INFO] budynek.yaml: sciany[53] (S2-16): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu
-  [INFO] budynek.yaml: sciany[54] (S2-17): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu
+  [INFO] budynek.yaml: sciany[51] (S2-18): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu
+  [INFO] budynek.yaml: sciany[52] (S2-14): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu
+  [INFO] budynek.yaml: sciany[53] (S2-19): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu
+  [INFO] budynek.yaml: sciany[54] (S2-15): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu
+  [INFO] budynek.yaml: sciany[55] (S2-16): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu
+  [INFO] budynek.yaml: sciany[56] (S2-17): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu
   [INFO] budynek.yaml: otwory[0] (O0-01): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu
   [INFO] budynek.yaml: otwory[0] (O0-01): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu
   [INFO] budynek.yaml: otwory[0] (O0-01): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu
@@ -284,4 +286,10 @@ Walidacja: 0 błędów, 0 ostrzeżeń, 286 informacji
   [INFO] budynek.yaml: pomieszczenia[27] (2.07): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu
   [INFO] budynek.yaml: pomieszczenia[27] (2.07): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu
   [INFO] budynek.yaml: pomieszczenia[27] (2.07): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu
+  [INFO] budynek.yaml: pomieszczenia[28] (0.14): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu
+  [INFO] budynek.yaml: pomieszczenia[28] (0.14): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu
+  [INFO] budynek.yaml: pomieszczenia[29] (1.09): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu
+  [INFO] budynek.yaml: pomieszczenia[29] (1.09): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu
+  [INFO] budynek.yaml: pomieszczenia[30] (2.08): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu
+  [INFO] budynek.yaml: pomieszczenia[30] (2.08): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu
   [INFO] dzialka.yaml: odwodnienia: sekcja spoza schematu — ignorowana przez rdzeń modelu

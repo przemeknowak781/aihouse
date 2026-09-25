@@ -443,6 +443,12 @@ Metoda: Wymiarowanie: cięgna F_Ed = max(STM; MES), krzyżulce 0,6·ν'·f_cd, w
 
 Masa całkowita stali B500SP: **481,2 kg**.
 
+## Walidacja
+
+
+
+Szczegóły: [walidacja_tarcz.md](walidacja_tarcz.md) — (a) rozwiązanie ścisłe i belka-ściana, (b) wspornik smukły, (c) zbieżność siatki, (d) równowaga.
+
 ## Źródła
 
 - PN-EN 1992-1-1:2008 + AC:2011 + NA — p. 5.6.4, 6.5, 7.3, 7.4, 8.4, 8.7, 9.6, 9.7, zał. F [wartości zalecane — NZW NA]

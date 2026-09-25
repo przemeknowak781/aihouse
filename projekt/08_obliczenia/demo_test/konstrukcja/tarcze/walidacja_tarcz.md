@@ -30,13 +30,15 @@ Rozpiętość l = 3,0 m (osie podpór), podpory szer. 0,1·l, obciążenie q = 1
 
 | l/h | h [m] | x_R [m] | M_MES [kNm] | M_statyka [kNm] | q(l²−a²)/8 [kNm] | z_MES [m] | z_CEB [m] | Δz | T_MES [kN] | T belka_sciana [kN] | T_STM [kN] | h_rozc/h |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 0,75 | 4,00 | 0,215 | 100,6 | 100,6 | 111,4 | 1,763 | 1,800 | -2.0 % | 57,0 | 62,5 | 42,0 | 0,200 |
-| 1,00 | 3,00 | 0,215 | 100,6 | 100,6 | 111,4 | 1,722 | 1,800 | -4.3 % | 58,4 | 62,5 | 39,3 | 0,271 |
-| 1,50 | 2,00 | 0,218 | 100,1 | 100,1 | 111,4 | 1,358 | 1,400 | -3.0 % | 73,7 | 80,4 | 64,9 | 0,421 |
-| 2,00 | 1,50 | 0,229 | 98,3 | 98,3 | 111,4 | 1,019 | 1,200 | -15.1 % | 96,5 | 93,7 | 91,4 | 0,482 |
-| 3,00 | 1,00 | 0,276 | 90,4 | 90,5 | 111,4 | 0,673 | 1,000 | -32.7 % | 134,4 | 131,6 | 129,3 | 0,500 |
+| 0,75 | 4,00 | 0,215 | 100,6 | 100,6 | 111,4 | 1,763 | 1,800 | −2,0 % | 57,0 | 62,5 | 42,0 | 0,200 |
+| 1,00 | 3,00 | 0,215 | 100,6 | 100,6 | 111,4 | 1,722 | 1,800 | −4,3 % | 58,4 | 62,5 | 39,3 | 0,271 |
+| 1,50 | 2,00 | 0,218 | 100,1 | 100,1 | 111,4 | 1,358 | 1,400 | −3,0 % | 73,7 | 80,4 | 64,9 | 0,421 |
+| 2,00 | 1,50 | 0,229 | 98,3 | 98,3 | 111,4 | 1,019 | 1,200 | −15,1 % | 96,5 | 93,7 | 91,4 | 0,482 |
+| 3,00 | 1,00 | 0,265 | 92,3 | 92,4 | 111,4 | 0,673 | 1,000 | −32,7 % | 137,2 | 131,6 | 132,0 | 0,500 |
 
-x_R — środek reakcji podpory A z MES (podpora sztywna szer. 0,3 m: reakcja skupia się przy krawędzi wewnętrznej, stąd M < q(l² − a²)/8 liczone dla reakcji w osi podpory). Wnioski: M z całkowania naprężeń = M ze statyki (z reakcji MES). Sprężyste ramię z_MES odpowiada regule CEB/DAfStb w granicach podanych w tabeli — reguła jest zaokrągleniem wyników sprężystych (dla l/h ≈ 1 tarcza „przestaje” zginać się jak belka — strefa rozciągana ≈ 0,15–0,25·h przy krawędzi dolnej, zgodnie z rozkładami Leonhardta [P]). Dla l/h = 3 (granica belki-ściany wg 5.3.1(3)) z_MES zbliża się do ramienia belkowego ≈ 0,67·h (rozkład liniowy). STM (dolne rozwiązanie plastyczne, węzły pasów wg MES) daje siłę w ściągu tego samego rzędu.
+x_R — środek reakcji podpory A z MES (podpora sztywna szer. 0,3 m: reakcja skupia się przy krawędzi wewnętrznej, stąd M < q(l² − a²)/8 liczone dla reakcji w osi podpory); M_statyka — z reakcji MES = M z całkowania naprężeń.
+
+Wnioski: dla l/h = 0,75…1,5 sprężyste ramię sił wewnętrznych z_MES różni się od reguły CEB-FIP/DAfStb o ≤ 4,3 % (reguła jest zaokrągleniem analiz sprężystych Leonhardta [P]); dla l/h = 2 reguła daje ramię 0,80·h wobec sprężystego 0,68·h. Siła w ściągu z `zelbet.belka_sciana` (M = q·l²/8 dla osi podpór) różni się od sprężystej wypadkowej T_MES o ≤ 8,7 % dla l/h ≤ 2. Dla l/h = 3 (granica belki-ściany, 5.3.1(3)) z_MES → 0,67·h (liniowy rozkład σ_x — teoria belek). Strefa rozciągana przy krawędzi dolnej: 0,20·h (l/h = 0,75) … 0,5·h (l/h = 3) — por. rozkłady Leonhardta [P]. STM (dolne rozwiązanie plastyczne) daje ściąg mniejszy od sprężystego dla tarcz krępych (większe ramię), dla l/h ≥ 2 — zbliżony.
 
 ![Rozkład σ_x w belce-ścianie](rys/walidacja_belka_sciana.png)
 
@@ -60,13 +62,13 @@ Dla wspornika smukłego (l/h ≥ 5) MES = teoria belek z dokładnością ≈ 1�
 
 ## (c) Zbieżność siatki — tarcza demo (kombinacja miarodajna STR)
 
-| h_el [m] | n_el | w_wspornika [mm] | T pasa górnego (MES) [kN] | R_A [kN] | M przy podporze [kNm] | σ₁,max [MPa] | czas [s] |
+| h_el [m] | n_el | w_wspornika [mm] | T pasa górnego (MES) [kN] | R_A [kN] | r_A,max [kN/m] | σ₁,max [MPa] | czas [s] |
 |---|---|---|---|---|---|---|---|
-| 0,20 | 719 | 0,3154 | 102,69 | 413,89 | 94,86 | 2,785 | 0,8 |
-| 0,10 | 2483 | 0,3218 | 107,82 | 413,84 | 88,57 | 3,823 | 2,6 |
-| 0,05 | 9808 | 0,3244 | 109,61 | 413,79 | 90,06 | 4,491 | 10,0 |
+| 0,20 | 719 | 0,3154 | 102,69 | 413,89 | 262,1 | 2,785 | 0,8 |
+| 0,10 | 2483 | 0,3218 | 107,82 | 413,84 | 264,1 | 3,823 | 2,8 |
+| 0,05 | 9808 | 0,3244 | 109,61 | 413,79 | 265,0 | 4,491 | 10,2 |
 
-Ekstrapolacja Richardsona: w_wsp → 0,3263 mm (rząd 1,27), T → 110,58 kN (rząd 1,52), R_A → 413,15 kN (rząd 0,11). Wielkości całkowe (ugięcie, reakcje, momenty, siły w pasach) zbieżne — różnica h = 0,10 vs 0,05 m < 1–2 %; σ₁,max rośnie z zagęszczaniem (osobliwość w narożach wklęsłych otworów — dlatego wymiarowanie opiera się na wypadkowych, nie na wartościach szczytowych).
+Ekstrapolacja Richardsona: w_wsp → 0,3263 mm (rząd 1,27), T → 110,58 kN (rząd 1,52), R_A → 413,15 kN (rząd 0,11). Wielkości całkowe (ugięcie, reakcje, momenty, siły w pasach) zbieżne — różnica h = 0,10 vs 0,05 m ≤ 2 %; σ₁,max i szczyt reakcji r_A,max rosną z zagęszczaniem (osobliwość w narożach wklęsłych otworów — dlatego wymiarowanie opiera się na wypadkowych, nie na wartościach szczytowych).
 
 ## (d) Równowaga
 

@@ -86,7 +86,7 @@
     "wysokosc": 2.77,
     "wsp": 1.0,
     "pow_zaliczona": 2.82,
-    "obwod": 7.22,
+    "obwod": 7.19,
     "pobyt_ludzi": false
    },
    {
@@ -202,11 +202,11 @@
     "kond": "P1",
     "nazwa": "Hol",
     "kategoria": "ruchu",
-    "pow_netto": 14.58,
+    "pow_netto": 14.09,
     "wysokosc": 2.77,
     "wsp": 1.0,
-    "pow_zaliczona": 14.58,
-    "obwod": 26.6,
+    "pow_zaliczona": 14.09,
+    "obwod": 25.97,
     "pobyt_ludzi": false
    },
    {
@@ -262,11 +262,11 @@
     "kond": "P1",
     "nazwa": "Klatka schodowa",
     "kategoria": "ruchu",
-    "pow_netto": 0.0,
+    "pow_netto": 0.49,
     "wysokosc": 2.77,
     "wsp": 1.0,
-    "pow_zaliczona": 0.0,
-    "obwod": 16.14,
+    "pow_zaliczona": 0.49,
+    "obwod": 17.01,
     "pobyt_ludzi": false
    },
    {
@@ -310,11 +310,11 @@
     "kond": "P2",
     "nazwa": "Sypialnia rodziców",
     "kategoria": "podstawowa",
-    "pow_netto": 21.19,
+    "pow_netto": 21.43,
     "wysokosc": 2.77,
     "wsp": 1.0,
-    "pow_zaliczona": 21.19,
-    "obwod": 18.69,
+    "pow_zaliczona": 21.43,
+    "obwod": 18.65,
     "pobyt_ludzi": true
    },
    {
@@ -376,27 +376,63 @@
     "pow_zaliczona": 6.05,
     "obwod": 9.84,
     "pobyt_ludzi": false
+   },
+   {
+    "id": "0.14",
+    "kond": "P0",
+    "nazwa": "Szacht instalacyjny SI",
+    "kategoria": "techniczna",
+    "pow_netto": 0.45,
+    "wysokosc": 2.77,
+    "wsp": 1.0,
+    "pow_zaliczona": 0.45,
+    "obwod": 3.04,
+    "pobyt_ludzi": false
+   },
+   {
+    "id": "1.09",
+    "kond": "P1",
+    "nazwa": "Szacht instalacyjny SI",
+    "kategoria": "techniczna",
+    "pow_netto": 0.45,
+    "wysokosc": 2.77,
+    "wsp": 1.0,
+    "pow_zaliczona": 0.45,
+    "obwod": 3.04,
+    "pobyt_ludzi": false
+   },
+   {
+    "id": "2.08",
+    "kond": "P2",
+    "nazwa": "Szacht instalacyjny SI",
+    "kategoria": "techniczna",
+    "pow_netto": 0.45,
+    "wysokosc": 2.77,
+    "wsp": 1.0,
+    "pow_zaliczona": 0.45,
+    "obwod": 3.04,
+    "pobyt_ludzi": false
    }
   ],
   "sumy_kategorii": {
-   "podstawowa": 158.54,
+   "podstawowa": 158.78,
    "pomocnicza": 78.58,
    "ruchu": 43.85,
-   "techniczna": 14.9
+   "techniczna": 16.24
   },
-  "pow_uzytkowa_PU": 237.12,
+  "pow_uzytkowa_PU": 237.36,
   "pow_ruchu": 43.85,
-  "pow_techniczna": 14.9,
-  "pow_netto_razem": 295.87,
+  "pow_techniczna": 16.24,
+  "pow_netto_razem": 297.46,
   "per_kondygnacja": {
-   "P0": 145.37,
-   "P1": 84.88,
-   "P2": 65.62
+   "P0": 145.82,
+   "P1": 85.33,
+   "P2": 66.31
   }
  },
  "liczba": {
-  "sciany": 55,
+  "sciany": 57,
   "otwory": 47,
-  "pomieszczenia": 28
+  "pomieszczenia": 31
  }
 }
