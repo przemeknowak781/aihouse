@@ -18,7 +18,7 @@ from ...draft.geom import dir_deg
 from ..common import label_point
 from .baza import Rysunek
 from .is_co import paski
-from .wspolne import BRAK, H_S, num, table_block
+from .wspolne import BRAK, num, table_block
 
 SZEREG = (75, 90, 100, 125, 160, 200, 250, 315)
 
@@ -171,7 +171,6 @@ class RysWM(Rysunek):
         return out
 
     def terminale(self):
-        vp = self.vp
         pts = []
         for r in self.m.pomieszczenia(self.kid):
             n, w = self.went.get(r.id, (0.0, 0.0))

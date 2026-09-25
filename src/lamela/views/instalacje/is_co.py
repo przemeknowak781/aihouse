@@ -7,10 +7,8 @@ lokalizacje z ``instalacje.yaml`` (rozdzielacze_co, pompa_ciepla_jz, zasobnik) i
 from __future__ import annotations
 
 import numpy as np
-from shapely.geometry import LineString, Point, Polygon, box
-from shapely.ops import unary_union
+from shapely.geometry import LineString, box
 
-from ...draft import hatch as Hh
 from ...draft import symbols as S
 from ...draft.geom import dir_deg, polygons_of
 from ...obliczenia.sanitarne.woda import RURY_WIELOWARSTWOWE, dobierz_rure
@@ -106,7 +104,6 @@ class RysCO(Rysunek):
                 pg = max(polygons_of(pg.buffer(-0.04, join_style=2)) or [pg], key=lambda g: g.area)
                 if pg.is_empty:
                     continue
-                n0 = len(vp.prims)
                 vp.geom(pg, "S-OGRZ", pen=0.18, lt="KRESKOWA_DROBNA")
                 self._meander(pg, p.T)
                 self.pl.add(pg.boundary.buffer(0.3 * self.k), "line", 0.2)

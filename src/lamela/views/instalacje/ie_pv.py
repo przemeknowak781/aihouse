@@ -10,14 +10,13 @@ from __future__ import annotations
 import math
 
 import numpy as np
-from shapely.geometry import LineString, Point, Polygon, box
+from shapely.geometry import Point, Polygon, box
 from shapely.ops import unary_union
 
-from ...draft import fmt, symbols as S
+from ...draft import symbols as S
 from ...draft.geom import polygons_of
-from .baza import Rysunek
 from .ie_rzut import RysE, _box
-from .wspolne import BRAK, H_S, num, table_block
+from .wspolne import BRAK, num, table_block
 
 
 def uklad_modulow(pole, n, dl, sz, wariant="EW10", przerwa=0.60):
@@ -154,7 +153,6 @@ class RysPV(RysE):
         rg = self.W.obwody.rg_xy
         if mods and rg is not None:
             c = np.mean([np.asarray(r.centroid.coords[0]) for r, _s in mods], axis=0)
-            poly = Polygon(d["obrys"])
             tgt = np.asarray(rg[:2], float)
             path = self.g.route(c, tgt, "DC", turn=0.5, margin=10.0)
             self.pipe(path, "WZ", layer="E-PV", pen="srednia", lt="KRESKOWA")
@@ -307,7 +305,6 @@ class RysU(RysE):
                 p2 = self.g.route(gsu, q, "PE", margin=4.0)
                 self.pipe(p2, "WZ", layer="E-ODGROM", pen="cienka", lt="CIAGLA")
                 self.tag(q, [f"połączenie wyrównawcze ≥ 6 mm² Cu — {txt}"], "E-OPISY")
-        tech = self.room_at(rg)
         self.tag(gsu, ["GSU — główna szyna uziemiająca: PE z RG, uziom, zbrojenie płyty, wodociąg, c.o., RACK, "
                        "kanały went., konstrukcja PV (PN-HD 60364-5-54, WT § 183 ust. 1a)"], "E-OPISY", style="bold")
         self.leg.sym(lambda c, p: _box(c, p, "GSU", w_mm=6.0, layer="E-ODGROM"), "GSU — główna szyna uziemiająca")

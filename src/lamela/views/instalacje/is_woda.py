@@ -15,7 +15,7 @@ from ...draft import symbols as S
 from ...draft.geom import dir_deg, perp
 from ...obliczenia.sanitarne.woda import RURY_WIELOWARSTWOWE, dobierz_rure
 from .baza import Rysunek
-from .wspolne import BRAK, H_M, H_S, num, rura_krotko, table_block
+from .wspolne import num, rura_krotko, table_block
 
 OFF = {"ZW": np.array([-0.10, 0.16]), "CWU": np.array([0.03, 0.16]), "CYRK": np.array([0.16, 0.16])}
 MED = {"ZW": "WZ", "CWU": "WC", "CYRK": "CYRK"}
@@ -37,7 +37,7 @@ class RysW(Rysunek):
     kod = "IS-W"
 
     def run(self):
-        W, vp = self.W, self.vp
+        W = self.W
         wo = W.woda
         self.podklad(meble=False)
         k0 = self.kids[0]
@@ -100,7 +100,7 @@ class RysW(Rysunek):
 
     # --------------------------------------------------------------------------------------------- urządzenia
     def urzadzenia(self):
-        W, vp, k = self.W, self.vp, self.k
+        W, vp = self.W, self.vp
         wo = W.woda
         wz = wo.wezly
         wod = np.asarray(wz["WOD"][:2], float)

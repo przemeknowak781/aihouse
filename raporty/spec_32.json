@@ -1,4 +1,5 @@
 {
+ "nr": 32,
  "title": "PZT-02 plan szczegółowy 1:200 (tyczenie, rzędne, odwodnienie) · detal progu HS bezprogowego z odwodnieniem liniowym",
  "stages": [
   [
@@ -58,6 +59,17 @@
   "PZT-02 (1:200): punkty tyczenia T1–T6 we współrzędnych działki, rzędne charakterystyczne, odwodnienie powierzchniowe (odwodnienia liniowe OL-1…4 → separator/niecki, niecki trawiaste), odległości retencji i strefy R290 od budynku/granic/drzew.",
   "Detal D-03 (1:10): próg HS bezprogowy — podwalina XPS/PUR-GF, taśmy ciepłego montażu, odwodnienie liniowe przed progiem na całą szerokość; ψ = 0,076, f_Rsi = 0,845 ≥ 0,72.",
   "Krytycznie z przeglądu PZT-02: cokół tylko 0,17–0,33 m nad terenem (posadzka 101,65; teren na obwodzie 101,32–101,48) → teren ≤ −0,30 m przy ścianach; niecka chłonna pod koroną drzewa DR1 → przesunięcie. Oba punkty w rundzie 2 poprawek.",
-  "Runda 1 poprawek modelu (po audytach A1–A3) w toku; lista rundy 2 zebrana w docs/20_koncepcja/poprawki_runda2_wejscie.md."
+  "Runda 1 poprawek modelu (po audytach A1–A3) w toku; lista rundy 2 zebrana w docs/20_koncepcja/poprawki_runda2_wejscie.md.",
+  "NADZÓR (07:10): 5 agentów aktywnych, bez zastojów; najdłuższa bezczynność 1 min; zmiany w repo 0 min temu."
+ ],
+ "images": [
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/pzt/PZT-02.png",
+   "caption": "PZT-02 — plan szczegółowy: wymiary, tyczenie, rzędne, odwodnienie 1:200 (robocze)"
+  },
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/detale/PT-AR-D-T3_detal_test_prog.png",
+   "caption": "Detal D-03 — próg HS bezprogowy z odwodnieniem liniowym 1:10 (test)"
+  }
  ]
 }

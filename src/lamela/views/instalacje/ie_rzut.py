@@ -11,16 +11,16 @@ from __future__ import annotations
 import math
 
 import numpy as np
-from shapely.geometry import LineString, Point, Polygon
+from shapely.geometry import LineString, Point
 from shapely.geometry.polygon import orient
-from shapely.ops import substring, unary_union
+from shapely.ops import unary_union
 
 from ...draft import symbols as S
 from ...draft.geom import dir_deg, perp, polygons_of
 from ..common import label_point
 from .baza import Rysunek
 from .is_co import paski
-from .wspolne import BRAK, H_S, num, table_block
+from .wspolne import BRAK, num, table_block
 
 MOKRE = ("lazienka", "wc")
 
@@ -207,7 +207,7 @@ class RysE(Rysunek):
         w, d = (e.get("wym") or [0.8, 0.25])[:2]
         self.sym(S.panel, np.asarray(e["xy"], float), rot, w=float(w), d=float(d), label="RG")
         wl = self.W.obwody.wlz
-        self.tag(np.asarray(e["xy"], float), [f"RG — rozdzielnica główna (schemat — arkusz schematu RG), TN-S",
+        self.tag(np.asarray(e["xy"], float), ["RG — rozdzielnica główna (schemat — arkusz schematu RG), TN-S",
                                                f"WLZ {wl['przewod']} z ZKP, L = {num(wl['L'], 1)} m, "
                                                f"∆U = {num(wl['dU'], 2)} %; SPD T1+T2"], "E-OPISY", style="bold")
         self.leg.sym(lambda c, p: S.panel(c, p - np.array([0, 1.5]), 90.0, w=8.0, d=3.0, label=""),

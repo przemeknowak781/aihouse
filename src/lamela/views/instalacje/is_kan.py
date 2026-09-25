@@ -4,18 +4,17 @@ zawory napowietrzające), przewody odpływowe pod posadzką z rzędnymi dna, prz
 Dane: ``lamela.obliczenia.sanitarne.kanalizacja`` (piony, odcinki z DN, spadkami, rzędne, wentylacja, studzienka)."""
 from __future__ import annotations
 
-import math
 
 import numpy as np
-from shapely.geometry import LineString, Point
+from shapely.geometry import Point
 
-from ...draft import dims, fmt, symbols as S
+from ...draft import fmt, symbols as S
 from ...draft.dims import arrowhead
-from ...draft.geom import circle_pts, dir_deg
+from ...draft.geom import dir_deg
 from ...obliczenia.sanitarne.przybory import KATALOG
 from .baza import Rysunek
 from .trasy import Siatka
-from .wspolne import H_S, num, table_block
+from .wspolne import num, table_block
 
 
 def punkt_odplywu(p, rot):
@@ -132,7 +131,7 @@ class RysK(Rysunek):
     def kolektor(self):
         from shapely.ops import nearest_points
         kn = self.W.kanalizacja
-        vp, k = self.vp, self.k
+        vp = self.vp
         st = kn.studzienka or {}
         s_xy = np.asarray(st.get("xy", (0.0, 0.0)), float)
         ob = self.W.dane.obrysy.get(self.kids[0]) or self.pod.outline

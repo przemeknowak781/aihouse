@@ -15,9 +15,9 @@ from matplotlib import colors as mcolors
 
 from ...draft import styles
 from ...draft import text as T
-from ...draft.core import PText, Viewport, text_items
+from ...draft.core import PText, Viewport
 from ..common import Placer
-from .wspolne import InstResult, braki_of
+from .wspolne import InstResult
 
 styles.LAYERS.setdefault("I-SCHEMAT", styles.LayerDef("I-SCHEMAT", "Schematy instalacji (odtworzone z bibliotek "
                                                      "obliczeniowych)", "cienka", aci=7, z=20))
@@ -237,6 +237,5 @@ def _mpl(vp, W, kind, res):
                       "Aparatura modułowa wg PN-EN 60898-1, PN-EN 61009-1, PN-EN 61008-1; rozdzielnica wg "
                       "PN-EN IEC 61439-3; PWP wg WT § 183 (przycisk przy wejściu, oznakowany)."]
     else:
-        og = W.ogrzewanie
         res.notes += ["Ogrzewanie wg PN-EN 1264, PN-EN 12828 (zabezpieczenie instalacji wodnych), c.w.u. wg "
                       "PN-EN 806 i WT § 120; naczynia wzbiorcze i zawory bezpieczeństwa z obliczeń."]

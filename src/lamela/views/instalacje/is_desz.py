@@ -7,8 +7,7 @@ from __future__ import annotations
 import re
 
 import numpy as np
-from shapely.geometry import LineString, Point, Polygon
-from shapely.ops import nearest_points
+from shapely.geometry import LineString, Polygon
 
 from ...draft import dims, fmt, symbols as S
 from ...draft.dims import arrowhead

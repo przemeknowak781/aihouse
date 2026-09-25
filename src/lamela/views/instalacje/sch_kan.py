@@ -5,9 +5,8 @@ Oś pionowa — rzędne w skali rzutni (rzędne rzeczywiste względem ±0,000), 
 rysunkowych). Wartości (DN, spadki, rzędne dna, wentylacja, średnice, przepływy) z ``lamela.obliczenia``."""
 from __future__ import annotations
 
-import numpy as np
 
-from ...draft import dims, fmt, symbols as S
+from ...draft import fmt, symbols as S
 from ...draft.dims import arrowhead
 from ...obliczenia.sanitarne.przybory import KATALOG
 from ..common import Placer
@@ -44,8 +43,6 @@ def rozwiniecie_kan(vp, ctx, W, res):
     dx = 6.0
     xs = {p.id: 2.0 + i * dx for i, p in enumerate(order)}
     x_end = 2.0 + len(order) * dx
-    z_top = max([w.get("z_wylotu") or 0.0 for w in kn.wentylacja] + [kk.rzedna + kk.wys_kondygnacji for kk in
-                                                                     m.kondygnacje])
     teren = float(st.get("teren", -0.3))
     _poziomy(vp, pl, m, 0.0, x_end + 3.0, [(teren, f"teren przy studzience {fmt.level(teren)}")])
     leg = Legenda()

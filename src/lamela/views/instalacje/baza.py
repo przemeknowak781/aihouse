@@ -2,18 +2,16 @@
 opisy pomieszczeń, osie, uwagi — wspólne dla branż IS-* i IE-*."""
 from __future__ import annotations
 
-import math
 
 import numpy as np
-from shapely.geometry import LineString, Point, Polygon
+from shapely.geometry import LineString, Point
 from shapely.ops import unary_union
 
 from ...draft import symbols as S
-from ...draft.geom import dir_deg, perp
-from ..common import clean
+from ...draft.geom import perp
 from . import podklad as P
 from .trasy import siatka_kondygnacji
-from .wspolne import BRAK, H_S, InstResult, Legenda, braki_of, label_along, tag_leader, text_collisions
+from .wspolne import H_S, InstResult, Legenda, braki_of, label_along, tag_leader, text_collisions
 
 
 ZRODLA_OZN = {

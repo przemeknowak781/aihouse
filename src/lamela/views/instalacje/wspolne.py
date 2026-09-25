@@ -8,7 +8,6 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 import numpy as np
-from shapely.geometry import LineString, Point
 
 from ...draft import styles
 from ...draft import text as T

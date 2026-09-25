@@ -9,13 +9,13 @@ import copy
 from dataclasses import dataclass, field
 
 import numpy as np
-from shapely.geometry import Point, Polygon, box
+from shapely.geometry import Point, Polygon
 from shapely.ops import unary_union
 
 from ...draft import symbols as S
 from ...draft.core import PArc, PFill, PLine, PText, Viewport
 from ..common import Placer, clean, label_point, room_label
-from .wspolne import H_M, H_S, text_block
+from .wspolne import H_M, H_S
 
 KEEP_STRUCT = {"A-SCIANY-KONSTR", "A-STROPY", "A-FUNDAMENTY", "A-SCIANY-DZIAL"}
 KEEP_LAYERS = {"A-SCIANY-IZOL", "A-SCIANY-WYK", "A-WARSTWY", "A-IZOL-WODNA"}
