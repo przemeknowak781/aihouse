@@ -11,7 +11,7 @@ Biblioteka `lamela.obliczenia.sanitarne` i `lamela.obliczenia.elektryka`. Model:
 | [Kanalizacja sanitarna](02_kanalizacja.md) | 19 | 19 | 0 | — |
 | [Odwodnienie dachów, retencja](03_deszczowa.md) | 16 | 16 | 0 | — |
 | [Drenaż i odwodnienie powierzchniowe](04_drenaz.md) | 5 | 0 | 5 | W-019 Spadek terenu od budynku, ściana 1 (śr. 5,0; −0,3); W-019 Spadek terenu od budynku, ściana 2 (śr. 10,3; 4,0); W-019 Spadek terenu od budynku, ściana 3 (śr. 5,0; 8,3); W-019 Spadek terenu od budynku, ściana 4 (śr. −0,3; 4,0); W-019 Wysokość cokołu (posadzka parteru − teren), minimum na obwodzie |
-| [Pompa ciepła, ogrzewanie podłogowe, hałas](05_ogrzewanie.md) | 35 | 34 | 1 | W-153 1.04 Garderoba: moc podłogi przy θ_V,des (T = 10 cm) ≥ Φ_HL |
+| [Pompa ciepła, ogrzewanie podłogowe, hałas](05_ogrzewanie.md) | 36 | 35 | 1 | W-153 1.04 Garderoba: moc podłogi przy θ_V,des (T = 10 cm) ≥ Φ_HL |
 | [Bilans mocy](06_bilans_mocy.md) | 7 | 7 | 0 | — |
 | [Obwody, zabezpieczenia, SPD, PWP](07_obwody.md) | 84 | 83 | 0 | — |
 | [Fotowoltaika](08_pv.md) | 12 | 12 | 0 | — |

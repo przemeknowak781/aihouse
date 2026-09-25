@@ -49,6 +49,7 @@ Dobrano: **PC-R290-05 (przykład)** — monoblok powietrze–woda, czynnik R290;
 * Energia z grzałki (godziny z P_PC < Φ): Q_grz = Σ max(0, Φ − P_PC) = **1** kWh/a
 * Udział grzałki: Q_grz/Q_H = **0,01** % — _≤ 5 % [ZAŁ]_
 * Sezonowy COP z obliczenia godzinowego (informacyjnie; do EP — SCOP deklarowany): SCOP = ΣQ_PC/ΣE_el = **4,10**
+* Uwaga: TMY Poznań — min. θ_e = −14,6 °C (rok typowy nie zawiera temperatury obliczeniowej −18 °C); w latach mroźnych udział grzałki większy — pokrycie mocy przy θ_e sprawdzono niżej
 
 ## 3. Ogrzewanie podłogowe (PN-EN 1264)
 
@@ -134,6 +135,7 @@ Rozdzielacze z przepływomierzami i zaworami termostatycznymi pod siłowniki; te
 | ID | Warunek | Wartość | Wymaganie | Wynik | Podstawa / uwagi |
 |:---|:---|---:|---:|:---|:---|
 | W-155 | Punkt biwalentny | −11,1 °C | ≤ −7,0 °C | SPEŁNIONY | VDI 4645 / praktyka [ZAŁ] |
+| W-155 | Pokrycie mocy przy θ_e (układ monoenergetyczny): P_PC(θ_e) + P_grzałki ≥ Φ_HL + Φ_W | 9,30 kW | ≥ 5,88 kW | SPEŁNIONY | PN-EN 12831 / VDI 4645 [W] |
 | W-155 | Udział grzałki w pokryciu Q_H | 0,000 | ≤ 0,050 | SPEŁNIONY | [ZAŁ] |
 | W-155 | Moc nominalna PC (zakaz F-gazów dotyczy ≤ 12 kW — czynnik R290, GWP₁₀₀ = 0,02) | 5,20 kW | ≤ 12,00 kW | SPEŁNIONY | rozp. (UE) 2024/573 zał. IV pkt 8 lit. b |
 | W-155 | Sezonowa efektywność η_s (35 °C) | 1,89 | ≥ 1,25 | SPEŁNIONY | rozp. (UE) 813/2013 zał. II |
@@ -185,7 +187,7 @@ Rozdzielacze z przepływomierzami i zaworami termostatycznymi pod siłowniki; te
 
 ## Podsumowanie sprawdzeń
 
-Warunków: 35; spełnionych: 34; niespełnionych: 1; informacyjnych: 0.
+Warunków: 36; spełnionych: 35; niespełnionych: 1; informacyjnych: 0.
 
 Niespełnione:
 

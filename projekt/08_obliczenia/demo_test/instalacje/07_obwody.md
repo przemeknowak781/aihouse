@@ -74,32 +74,13 @@ Rezerwa: ≥ 20 % miejsca w RG; obwody rezerwowe na drugi punkt ładowania EV (r
 
 ## 5. Selektywność (WT §183 ust. 1 pkt 5)
 
-| Obw. | Zabezp. | Zabezp. przedlicznikowe | Przeciążeniowa (I_n ratio ≥ 1,6) | Zwarciowa | Ocena |
+| Zabezp. | Obwody | Zabezp. przedlicznikowe | Przeciążeniowa (I_n,ZKP/I_n ≥ 1,6) | Zwarciowa | Ocena |
 |:---|:---|:---|:---|:---|:---|
-| L1 | B10 | C40 | tak | do 200 A (I_k,max ≈ 1485 A) | częściowa |
-| L2 | B10 | C40 | tak | do 200 A (I_k,max ≈ 1485 A) | częściowa |
-| L3 | B10 | C40 | tak | do 200 A (I_k,max ≈ 1485 A) | częściowa |
-| G1 | B16 | C40 | tak | do 200 A (I_k,max ≈ 1485 A) | częściowa |
-| G2 | B16 | C40 | tak | do 200 A (I_k,max ≈ 1485 A) | częściowa |
-| G3 | B16 | C40 | tak | do 200 A (I_k,max ≈ 1485 A) | częściowa |
-| G4 | B16 | C40 | tak | do 200 A (I_k,max ≈ 1485 A) | częściowa |
-| G5 | B16 | C40 | tak | do 200 A (I_k,max ≈ 1485 A) | częściowa |
-| G6 | B16 | C40 | tak | do 200 A (I_k,max ≈ 1485 A) | częściowa |
-| G7 | B16 | C40 | tak | do 200 A (I_k,max ≈ 1485 A) | częściowa |
-| G8 | B16 | C40 | tak | do 200 A (I_k,max ≈ 1485 A) | częściowa |
-| D1 | 3P B16 | C40 | tak | do 200 A (I_k,max ≈ 1485 A) | częściowa |
-| D2 | B16 | C40 | tak | do 200 A (I_k,max ≈ 1485 A) | częściowa |
-| D3 | B16 | C40 | tak | do 200 A (I_k,max ≈ 1485 A) | częściowa |
-| D4 | B16 | C40 | tak | do 200 A (I_k,max ≈ 1485 A) | częściowa |
-| D5 | C16 | C40 | tak | do 200 A (I_k,max ≈ 1485 A) | częściowa |
-| D6 | 3P B10 | C40 | tak | do 200 A (I_k,max ≈ 1485 A) | częściowa |
-| D7 | B10 | C40 | tak | do 200 A (I_k,max ≈ 1485 A) | częściowa |
-| D8 | B10 | C40 | tak | do 200 A (I_k,max ≈ 1485 A) | częściowa |
-| D9 | 3P B16 | C40 | tak | do 200 A (I_k,max ≈ 1485 A) | częściowa |
-| D10 | B16 | C40 | tak | do 200 A (I_k,max ≈ 1485 A) | częściowa |
-| D11 | B16 | C40 | tak | do 200 A (I_k,max ≈ 1485 A) | częściowa |
-| D12 | B16 | C40 | tak | do 200 A (I_k,max ≈ 1485 A) | częściowa |
-| D13 | B10 | C40 | tak | do 200 A (I_k,max ≈ 1485 A) | częściowa |
+| B10 | L1, L2, L3, D7, D8, D13 | C40 | tak (4,0) | do 200 A (I_k,max w RG ≈ 1485 A) | częściowa |
+| B16 | G1, G2, G3, G4, G5, G6, G7, G8, D2, D3, D4, D10, D11, D12 | C40 | tak (2,5) | do 200 A (I_k,max w RG ≈ 1485 A) | częściowa |
+| 3P B16 | D1, D9 | C40 | tak (2,5) | do 200 A (I_k,max w RG ≈ 1485 A) | częściowa |
+| C16 | D5 | C40 | tak (2,5) | do 200 A (I_k,max w RG ≈ 1485 A) | częściowa |
+| 3P B10 | D6 | C40 | tak (4,0) | do 200 A (I_k,max w RG ≈ 1485 A) | częściowa |
 
 Selektywność zwarciowa wyłączników B/C za wyłącznikiem C40 w ZKP jest częściowa — do granicy I_s z tabel producenta (zachowawczo I_s = 5·I_n,C40 = 200 A; dla wyłączników klasy ograniczania 3 typowo 0,3–0,6 kA). Rozwiązania: aparat główny RG jako rozłącznik (nie wyzwala), RCBO w obwodach odbiorczych; w warunkach przyłączenia zapytać OSD o bezpieczniki gG zamiast wyłącznika C (poprawa selektywności) [ZAŁ].
 
