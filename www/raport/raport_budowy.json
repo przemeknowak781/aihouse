@@ -1,6 +1,6 @@
 {
  "pliki": {
-  "index.html": 800218,
+  "index.html": 801671,
   "assets/ulica_169.webp": 54052,
   "assets/lotniczy_169.webp": 105514,
   "assets/aksonometria_169.webp": 64134,
@@ -8,10 +8,10 @@
   "assets/ogrod_169.webp": 65352,
   "assets/ogrod_43.webp": 59408,
   "assets/aksonometria_43.webp": 71428,
-  "assets/model.glb": 5146548,
+  "assets/model.glb": 5150656,
   "assets/ulica_43.webp": 53392,
   "assets/szkic.png": 91505
  },
- "razem": 6616909,
+ "razem": 6622470,
  "bledy": []
 }

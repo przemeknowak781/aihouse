@@ -25,7 +25,9 @@ def fm(v, n: int = 2) -> str:
     """Liczba w zapisie polskim: separator tysięcy — wąska spacja niełamiąca, przecinek dziesiętny."""
     if v is None:
         return "—"
-    s = f"{float(v):,.{n}f}".replace(",", "X").replace(".", ",").replace("X", NBSP)
+    v = float(v)
+    v += 1e-9 if v >= 0 else -1e-9          # 21,15 → „21,2” (a nie 21,1 z zapisu binarnego)
+    s = f"{v:,.{n}f}".replace(",", "X").replace(".", ",").replace("X", NBSP)
     return s.replace("-", "−")
 
 

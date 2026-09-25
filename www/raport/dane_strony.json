@@ -1,5 +1,5 @@
 {
- "wygenerowano": "2026-09-25T06:13:47",
+ "wygenerowano": "2026-09-25T06:21:37",
  "model": {
   "nazwa": "Dom LAMELA",
   "wersja": "1.0",
@@ -14,11 +14,11 @@
   "PU": "239,13 m²",
   "zabudowa": "187,50 m²",
   "kubatura": "1 354,5 m³",
-  "wys_zab": "10,29 m",
+  "wys_zab": "10,27 m",
   "kondygnacje": "3",
   "garaz_st": "2",
   "garaz_A": "37,42 m²",
-  "EP": "55,6",
+  "EP": "56,1",
   "EP_max": "70",
   "pv_kWp": "6,45",
   "dz_szer": "28,20",
@@ -30,7 +30,7 @@
   "niecka_A": "28 m²",
   "wt_uwagi": "WT (t.j. Dz.U. 2022 poz. 1225 ze zm.) w brzmieniu do 19.09.2026, stosowane na podstawie art. 102a PB (oświadczenie Inwestora)",
   "data": "25.09.2026",
-  "glb_mb": "5,1"
+  "glb_mb": "5,2"
  },
  "PU": 239.13,
  "PU_kond": {
@@ -71,7 +71,7 @@
    "pow": 1600.0
   }
  },
- "EP": 55.60821218749498,
+ "EP": 56.079198085027045,
  "EP_max": 70.0,
  "rendery": {
   "ogrod_169": {

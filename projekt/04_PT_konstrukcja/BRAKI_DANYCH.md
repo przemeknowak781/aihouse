@@ -65,3 +65,8 @@ Lista generowana automatycznie przez `lamela.views.konstrukcja` z: (1) braków z
 - Biblioteka (uwaga analizy): PL-E: podpora punktowa SL2 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
 - Biblioteka (uwaga analizy): PL-E: podpora punktowa SL3 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
 - Biblioteka (uwaga analizy): PL-E: podpora punktowa SL4 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
+
+## Kontrola zbrojenia — pozycje niespełnione (szczegóły: raport kontroli zbrojenia)
+
+- PF1 / dozbrojenie D1 dół y (poz. MES-PF): A_s,prov = 4299 < max(A_s,req; A_s,min) = 5252 mm²/m wymagane zbrojenie niewykonalne w grubości płyty (rozstaw w świetle 8.2(2)) — obciążenie skupione węzła ścian/belek: pogrubienie płyty (stopa) pod węzłem — REKOMENDACJE_MODEL.md [WYMAGA ZMIANY MODELU]
+- PF1 / strefa S1 (płyta) — podwójnie zbrojona, najniekorz. el. (dół y) (poz. MES-PF): A_s,prov = 4299 < max(A_s,req; A_s,min) = 5252 mm²/m zbrojenie wymagane niewykonalne w grubości płyty — pogrubienie (stopa) pod węzłem, REKOMENDACJE_MODEL.md [WYMAGA ZMIANY MODELU]; A_s2,max = 1840 mm²/m; A_s1 + A_s2 = 7092 ≤ A_s,max = 10000 mm²/m; płyta: pręty ściskane usztywnione siatką poprzeczną s = 7.5 cm ≤ 15φ [ZAŁ]

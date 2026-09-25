@@ -681,6 +681,14 @@ def bilans(m, wyn_odl, fidelity):
     d4 = [Polygon(d["obrys"]).area for d in m.dachy() if "DZ" in str(d.get("przegroda", ""))]
     B["PBC"] = {"m2": round(A_dz - nb.area, 2), "proc": round(100 * (A_dz - nb.area) / A_dz, 2),
                 "rezerwa_dach_zielony_50proc_m2": round(0.5 * sum(d4), 2), "utwardzenia_tarasy_m2": round(nb.area - zab["budynek"], 2)}
+    # runda 2 (K-3): wskaźniki MPZP — WYŁĄCZNIE z lamela.wskazniki (wartości powyżej — kontrolne, nadpisane)
+    from lamela.wskazniki import wskazniki as _wsk0
+    _W0 = _wsk0(m)
+    B["zabudowa"] = {"m2": round(float(_W0["pow_zabudowy"]["wartosc"]), 2), "proc": round(100 * float(_W0["udzial_zabudowy"]["wartosc"]), 2),
+                     "z_plytami_m2": zab["z_plytami"]}
+    B["intensywnosc"] = round(float(_W0["intensywnosc"]["wartosc"]), 3)
+    B["PBC"].update({"m2": round(float(_W0["pbc"]["wartosc"]), 2), "proc": round(100 * float(_W0["udzial_pbc"]["wartosc"]), 2),
+                     "rezerwa_dach_zielony_50proc_m2": round(float(_W0["pbc_rezerwa_dach"]["wartosc"]), 2), "zrodlo": "lamela.wskazniki"})
     # wysokości — WYŁĄCZNIE z lamela.wskazniki (runda 2, K-3/K-11: upzp art. 2 pkt 30 lit. a — od ŚREDNIEJ z t_min/t_max na obwodzie,
     # urządzenia dachowe wliczane; WT §6 — od terenu przy najniżej położonym wejściu); wariant od t_min — tylko informacyjnie
     from lamela.wskazniki import wskazniki as _wsk

@@ -151,14 +151,14 @@ def _opisy(ark: Arkusz, pokoje):
         duzy = r.pow_netto >= 6.0 and (x1 - x0) >= 1.9 and (y1 - y0) >= 1.3
         if duzy:
             ark.raw(f'<g class="lb" data-pom="{r.id}">')
-            ark.text(c.x, c.y, r.id, "lb-nr", dy=-14)
+            ark.text(c.x, c.y, r.id, "lb-nr", dy=-27)
             nazwa = r.nazwa.split("(")[0].strip()
-            ark.text(c.x, c.y, nazwa, "lb-nz", dy=12)
-            ark.text(c.x, c.y, f"{fm(r.pow_netto)} m²", "lb-pw", dy=36)
+            ark.text(c.x, c.y, nazwa, "lb-nz", dy=9)
+            ark.text(c.x, c.y, f"{fm(r.pow_netto)} m²", "lb-pw", dy=42)
             ark.raw("</g>")
         elif r.pow_netto >= 0.8:
             ark.raw(f'<g class="lb lb-m" data-pom="{r.id}">')
-            ark.text(c.x, c.y, r.id, "lb-nr", dy=8)
+            ark.text(c.x, c.y, r.id, "lb-nr", dy=9)
             ark.raw("</g>")
 
 
@@ -174,6 +174,6 @@ def _polnoc_skala(ark: Arkusz):
     for i in range(5):
         ark.rect(x0 + i, v + 0.1, x0 + i + 1, v + 0.28, "an-s" + (" an-s2" if i % 2 else ""))
     for i in (0, 1, 5):
-        ark.text(x0 + i, v - 0.28, f"{i}", "an-t2")
-    ark.text(x0 + 5.35, v - 0.28, "m", "an-t2", anchor="start")
+        ark.text(x0 + i, v - 0.35, f"{i}", "an-t2")
+    ark.text(x0 + 5.35, v - 0.35, "m", "an-t2", anchor="start")
     ark.raw("</g>")

@@ -46,7 +46,7 @@ a { color: var(--akcent-tekst); text-underline-offset: 0.18em; text-decoration-t
 a:hover { text-decoration-thickness: 2px; }
 :focus-visible { outline: 3px solid var(--fokus); outline-offset: 3px; border-radius: 2px; }
 h1, h2, h3 { font-family: var(--f-disp); font-stretch: 125%; line-height: 1.02; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
-h2 { font-size: clamp(1.9rem, 1.2rem + 2.6vw, 3.1rem); font-weight: 760; }
+h2 { font-size: clamp(1.75rem, 1.1rem + 1.7vw, 2.6rem); font-weight: 760; font-stretch: 118%; }
 h3 { font-size: 1.2rem; font-weight: 680; font-stretch: 112%; line-height: 1.2; }
 p { margin: 0; max-width: 66ch; }
 .num, table { font-variant-numeric: tabular-nums lining-nums; }
@@ -64,7 +64,7 @@ p { margin: 0; max-width: 66ch; }
 .marka span { font-size: 0.85rem; color: var(--ink-2); }
 .chip { font: 500 0.68rem/1 var(--f-mono); letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid var(--akcent);
   color: var(--akcent-tekst); padding: 0.32rem 0.45rem; border-radius: 2px; white-space: nowrap; }
-.nav { display: flex; gap: 0.2rem 1.1rem; flex-wrap: wrap; margin-left: auto; font-size: 0.92rem; }
+.nav { display: flex; gap: 0.2rem 0.95rem; flex-wrap: wrap; margin-left: auto; font-size: 0.88rem; }
 .nav a { color: var(--ink); text-decoration: none; padding-block: 0.2rem; border-bottom: 1px solid transparent; }
 .nav a:hover { border-bottom-color: var(--akcent); }
 @media (max-width: 860px) {
@@ -120,7 +120,7 @@ p { margin: 0; max-width: 66ch; }
 
 /* ---------- sekcje: metryka + treść ---------- */
 .sek { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.2rem 3rem; }
-@media (min-width: 980px) { .sek { grid-template-columns: minmax(0, 3fr) minmax(0, 9fr); } }
+@media (min-width: 980px) { .sek { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); } }
 .metryka { display: flex; flex-direction: column; gap: 0.9rem; align-self: start; }
 @media (min-width: 980px) { .metryka { position: sticky; top: 5.2rem; } }
 .metryka h2 { margin-top: 0.2rem; }
@@ -138,6 +138,7 @@ th, td { text-align: left; padding: 0.5rem 0.6rem; border-bottom: 1px solid var(
 th { font: 500 0.72rem/1.3 var(--f-mono); letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink-2); }
 td.l, th.l { text-align: right; white-space: nowrap; }
 td.pod { font: 400 0.76rem/1.45 var(--f-mono); color: var(--ink-2); min-width: 14rem; }
+tbody td:first-child { min-width: 7.5rem; }
 tr.suma td { font-weight: 600; border-top: 1.5px solid var(--ink); }
 tr.grupa td { font: 500 0.72rem/1.3 var(--f-mono); letter-spacing: 0.07em; text-transform: uppercase; color: var(--akcent-tekst);
   padding-top: 1rem; }
@@ -153,7 +154,6 @@ tbody tr[data-pom]:hover, tbody tr[data-pom].hi { background: color-mix(in srgb,
 .zakl button:hover { color: var(--ink); }
 .panel[hidden] { display: none; }
 .uklad-rzut { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.4rem; margin-top: 1.2rem; }
-@media (min-width: 1180px) { .uklad-rzut { grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); } }
 
 /* ---------- rysunki (inline SVG na tokenach) ---------- */
 .rys-box { background: var(--d-tlo); border: 1px solid var(--linia); border-radius: var(--r); overflow-x: auto; }
@@ -176,24 +176,25 @@ tbody tr[data-pom]:hover, tbody tr[data-pom].hi { background: color-mix(in srgb,
 .dr-skrz { fill: none; stroke: var(--d-wall); stroke-width: 1.8; vector-effect: non-scaling-stroke; }
 .dr-luk { fill: none; stroke: var(--d-line); stroke-width: 0.8; stroke-dasharray: 4 3; vector-effect: non-scaling-stroke; }
 .lb text { paint-order: stroke; stroke: var(--d-tlo); stroke-width: 5px; stroke-linejoin: round; }
-.lb-nr { font: 600 21px var(--f-mono); fill: var(--akcent-tekst); }
-.lb-nz { font: 500 23px var(--f-txt); fill: var(--d-lab); }
-.lb-pw { font: 400 20px var(--f-mono); fill: var(--d-lab2); }
+.lb-nr { font: 600 29px var(--f-mono); fill: var(--akcent-tekst); }
+.lb-nz { font: 500 33px var(--f-txt); fill: var(--d-lab); }
+.lb-pw { font: 400 28px var(--f-mono); fill: var(--d-lab2); }
+.lb-m .lb-nr { font-size: 25px; }
 .lb.hi .lb-nr { fill: var(--d-lab); }
-.an-n { fill: var(--d-lab); } .an-t { font: 700 30px var(--f-disp); fill: var(--d-lab); }
+.an-n { fill: var(--d-lab); } .an-t { font: 700 44px var(--f-disp); fill: var(--d-lab); }
 .an-s { fill: var(--d-tlo); stroke: var(--d-lab); stroke-width: 1.4; vector-effect: non-scaling-stroke; } .an-s2 { fill: var(--d-lab); }
-.an-t2 { font: 400 19px var(--f-mono); fill: var(--d-lab2); }
+.an-t2 { font: 400 30px var(--f-mono); fill: var(--d-lab2); }
 .e { stroke: var(--d-line); stroke-width: 0.45; stroke-opacity: 0.55; vector-effect: non-scaling-stroke; }
 .e-lam { stroke: none; }
 .e-gl { fill: var(--d-glass); stroke: var(--d-line); stroke-width: 0.5; vector-effect: non-scaling-stroke; }
 .gr { fill: var(--d-gr); } .gr-l { fill: none; stroke: var(--d-lab); stroke-width: 1.6; vector-effect: non-scaling-stroke; }
 .lv { fill: none; stroke: var(--akcent); stroke-width: 0.9; stroke-dasharray: 9 6; vector-effect: non-scaling-stroke; opacity: .8; }
-.lv-t { font: 500 22px var(--f-mono); fill: var(--akcent-tekst); }
+.lv-t { font: 500 38px var(--f-mono); fill: var(--akcent-tekst); }
 .bey { fill: var(--d-bey); stroke: var(--d-line2); stroke-width: 0.5; vector-effect: non-scaling-stroke; }
 .bey-gl { fill: color-mix(in srgb, var(--d-glass) 35%, var(--d-bey)); stroke: var(--d-line2); stroke-width: 0.5; vector-effect: non-scaling-stroke; }
 .ct { fill: var(--d-wall); } .ct-ins { fill: var(--l-izolacja, var(--d-ins)); } .ct-gl { fill: var(--d-glass); }
 .ct-fr { fill: var(--d-line); } .ct-ter { fill: var(--akcent); }
-.prz-h { font: 400 21px var(--f-mono); fill: var(--d-lab2); }
+.prz-h { font: 400 36px var(--f-mono); fill: var(--d-lab2); }
 .legenda { display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; font-size: 0.85rem; color: var(--ink-2); margin: 0; padding: 0; list-style: none; }
 .legenda i { display: inline-block; width: 0.9rem; height: 0.9rem; border-radius: 2px; vertical-align: -0.12rem; margin-right: 0.4rem;
   border: 1px solid var(--linia); }
@@ -261,7 +262,8 @@ dialog.lupa img { width: 100%; max-height: 82vh; object-fit: contain; background
 .warstwy li[data-linia="hydro"] .wn { box-shadow: inset 0 -3px 0 var(--l-hydro); }
 .warstwy li[data-linia="szczelnosc"] .wn { box-shadow: inset 0 -3px 0 var(--l-szczelnosc); }
 .warstwy li[data-linia="zewn"] .wn { box-shadow: inset 0 -3px 0 var(--l-zewn); }
-.linie4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); gap: 1rem; margin: 0; padding: 0; list-style: none; }
+.linie4 { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.2rem 1.6rem; margin: 0; padding: 0; list-style: none; }
+@media (min-width: 700px) { .linie4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .linie4 li { border-top: 5px solid var(--k); padding-top: 0.7rem; display: flex; flex-direction: column; gap: 0.35rem; }
 .linie4 b { font: 700 1.02rem/1.2 var(--f-disp); font-stretch: 112%; }
 .linie4 p { font-size: 0.9rem; color: var(--ink-2); }
@@ -284,6 +286,7 @@ dialog.lupa img { width: 100%; max-height: 82vh; object-fit: contain; background
 .tomy li { padding: 0.9rem 1rem 1rem 0; border-bottom: 1px solid var(--linia); display: flex; flex-direction: column; gap: 0.35rem; }
 .tomy .kod { font: 600 0.8rem var(--f-mono); color: var(--akcent-tekst); letter-spacing: 0.06em; }
 .tomy p { font-size: 0.9rem; color: var(--ink-2); }
+.tomy .etk { font-size: 0.7rem; }
 .adapt { counter-reset: a; list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.8rem; }
 .adapt li { padding-left: 1.6rem; position: relative; max-width: 72ch; }
 .adapt li::before { content: ""; position: absolute; left: 0; top: 0.72em; width: 1rem; height: 2px; background: var(--akcent); }
@@ -314,7 +317,7 @@ form.zap .pelna { grid-column: 1 / -1; }
 .pole textarea { min-height: 7.5rem; resize: vertical; }
 .pole [aria-invalid="true"] { border-bottom-color: var(--ostrz); }
 .blad { font-size: 0.82rem; color: var(--ostrz); min-height: 1.1em; }
-.zgoda { display: flex; gap: 0.6rem; align-items: flex-start; font-size: 0.92rem; }
+.pole label.zgoda { display: flex; gap: 0.6rem; align-items: flex-start; font: 400 0.95rem/1.45 var(--f-txt); color: var(--ink); letter-spacing: 0; }
 .zgoda input { width: 1.15rem; height: 1.15rem; margin-top: 0.2rem; accent-color: var(--akcent-tekst); }
 .demo { border-left: 4px solid var(--akcent); background: var(--arkusz); padding: 0.8rem 1rem; font-size: 0.92rem; }
 .wynik { border: 1.5px solid var(--sedum); background: var(--arkusz); padding: 1rem 1.1rem; border-radius: var(--r); }
@@ -338,3 +341,15 @@ form.zap .pelna { grid-column: 1 / -1; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }
+
+/* ---------- schemat działki, przegrody w siatce ---------- */
+.dz-droga { fill: var(--d-bey); stroke: var(--d-line2); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.dz-gr { fill: none; stroke: var(--akcent); stroke-width: 2.2; stroke-dasharray: 16 6 3 6; vector-effect: non-scaling-stroke; }
+.dz-el { fill: var(--d-room3); stroke: var(--d-line); stroke-width: 0.9; vector-effect: non-scaling-stroke; }
+.dz-bud { fill: var(--d-wall); }
+.dz-wym { fill: none; stroke: var(--d-line); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.dz-t { font: 400 50px var(--f-mono); fill: var(--d-lab2); paint-order: stroke; stroke: var(--d-tlo); stroke-width: 8px; }
+.dz-tw { fill: var(--d-lab); } .dz-tb { font: 600 58px var(--f-mono); fill: var(--akcent-tekst); }
+.rys-dz { max-height: 78vh; }
+@media (min-width: 700px) { .przeg-siatka { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .przeg-siatka > :last-child:nth-child(odd) { grid-column: 1 / -1; } }

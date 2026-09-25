@@ -41,8 +41,7 @@ def pasy_pionowe(W: float) -> list[float]:
     if W <= A4_W + 0.5:
         return [W]
     if W <= PAS_OPRAWY + 2 * PAS_TABLICZKI + 0.5:                  # ≤ 590: 3 pasy, margines na krawędzi paczki
-        w1 = (W - (PAS_TABLICZKI - MARGINES_OPRAWY)) / 2.0
-        w1 = max(w1, MARGINES_OPRAWY + 1.0)
+        w1 = (W - (PAS_TABLICZKI - MARGINES_OPRAWY)) / 2.0         # pas 2 = w1 − 20 > 0 dla W > 210
         return [w1, W - w1 - PAS_TABLICZKI, PAS_TABLICZKI]
     rest = W - PAS_OPRAWY
     for p in range(1, 200):               # najmniejsza liczba par = najmniej warstw i najszersze pasy

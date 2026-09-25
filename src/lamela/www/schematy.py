@@ -45,7 +45,25 @@ def separator_svg(m) -> str:
             f'focusable="false">{"".join(lines)}</svg>')
 
 
-def przegroda_html(p: dict, skala: float = 900.0) -> str:
+def grubosc_cm(d: float) -> str:
+    v = d * 100
+    return fm(v, 0) if abs(v - round(v)) < 0.05 else fm(v, 1)
+
+
+def krotka_nazwa(n: str) -> str:
+    """Nazwa materiału bez dopisków: „ETICS: warstwa zbrojona + tynk silikonowy 1,5 mm (…)” → „Warstwa zbrojona + tynk
+    silikonowy”; „Tynk gipsowy maszynowy 1,5 cm” → „Tynk gipsowy maszynowy”."""
+    import re
+    n = n.split(" (")[0]
+    if ":" in n:
+        a, b = n.split(":", 1)
+        n = b if len(a) < 12 else a
+    n = re.split(r",\s(?=\D)", n)[0]
+    n = re.sub(r"\s\d+([,.]\d+)?\s?(cm|mm)$", "", n.strip()).strip(" —-")
+    return n[:1].upper() + n[1:]
+
+
+def przegroda_html(p: dict, skala: float = 900.0, d_max: float | None = None) -> str:
     """Pasek warstw w skali grubości (1 m = ``skala`` j.) + lista warstw; ``data-linia`` = przynależność do 4 linii."""
     x = 0.0
     rects, marks = [], []
@@ -56,11 +74,12 @@ def przegroda_html(p: dict, skala: float = 900.0) -> str:
         if w["linia"] in LINIE:
             marks.append(f'<rect class="ln ln-{w["linia"]}" x="{x:.1f}" y="66" width="{dw:.1f}" height="8"/>')
         x += dw
-    svg = (f'<svg class="przeg-bar" viewBox="0 0 {x:.0f} 76" preserveAspectRatio="xMinYMid meet" role="img" '
+    vb = max(x, (d_max or 0) * skala)
+    svg = (f'<svg class="przeg-bar" viewBox="0 0 {vb:.0f} 76" preserveAspectRatio="xMinYMid meet" role="img" '
            f'aria-label="Warstwy przegrody {escape(p["kod"])} w skali grubości">{"".join(rects)}{"".join(marks)}</svg>')
     li = "".join(f'<li data-linia="{w["linia"]}"><span class="sw" style="background:{w["kolor"]}"></span>'
                  f'<span class="wn">{escape(w["nazwa"].split(" (")[0])}</span>'
-                 f'<span class="wd">{fm(w["d"] * 100, 1)} cm</span></li>' for w in p["warstwy"])
+                 f'<span class="wd">{grubosc_cm(w["d"])} cm</span></li>' for w in p["warstwy"])
     return f'{svg}<ol class="warstwy">{li}</ol>'
 
 

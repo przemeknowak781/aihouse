@@ -5,6 +5,7 @@ marka:
   nazwa: "Pasmo i Cień"
   podtytul: "katalog domów autorskich"
   oznaczenie: "marka przykładowa — strona demonstracyjna"
+  oznaczenie_krotkie: "marka przykładowa · demo"
   adres_tekst: "zapytania@pasmo-i-cien.example"   # domena .example (RFC 2606) — adres nie istnieje
   kod_projektu: "PC-LAMELA"
 

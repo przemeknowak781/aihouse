@@ -109,3 +109,272 @@ def test_arkusz_niestandardowy():
     txt = [p.string for p in sh.prims if hasattr(p, "runs")]
     assert any("format niestandardowy" in t for t in txt)
     assert not Sheet("A3x3").custom and Sheet("A3x3").fmt_name == "A3×3"
+
+
+# ================================================================================================ upakowanie
+def _blok_prosty(h, w=U.TB_W):
+    def fn(sh, x, y, ww):
+        sh.rect(x, y - h, x + ww, y)
+        sh.text((x + 2, y - 5), "BLOK", 2.5)
+        return y - h
+    return U.blok(f"blok{h:.0f}", fn, w)
+
+
+def _uwagi(n=12):
+    b = U.Blok("uwagi", None, U.TB_W)
+    b.uwagi = U.BlokUwag([f"Uwaga numer {i + 1}: " + "tekst uwagi do zawinięcia w kolumnie " * (1 + i % 4)
+                          for i in range(n)])
+    return b
+
+
+def _przypadki(seed=7, n=40):
+    rnd = random.Random(seed)
+    out = [([(600, 330)], [110, 40, 30]), ([(680, 210)], [60, 14]), ([(150, 100)], [30]),
+           ([(300, 200), (250, 180), (200, 150)], [60, 80]), ([(900, 560)], [300, 200, 120]),
+           ([(120, 90)] * 7, [40, 40, 40])]
+    for _ in range(n):
+        nv = rnd.randint(1, 4)
+        out.append(([(rnd.uniform(60, 700), rnd.uniform(50, 420)) for _ in range(nv)],
+                    [rnd.uniform(10, 160) for _ in range(rnd.randint(0, 5))]))
+    return out
+
+
+def _sprawdz_uklad(u, widoki, tb_h):
+    R = u.roz
+    assert R.ok, R.brak
+    bl = U.sprawdz_nakladanie(R)
+    assert not bl, bl
+    tb = R.tabliczka
+    fx0, fy0, fx1, fy1 = U.rama(u.W, u.H)
+    assert abs(tb[2] - fx1) < 1e-6 and abs(tb[1] - fy0) < 1e-6, "tabliczka poza prawym dolnym rogiem"
+    rects = [(k, n, r) for k, n, r in R.prostokaty]
+    for i, (k1, n1, a) in enumerate(rects):              # minimalne odstępy
+        for k2, n2, b in rects[i + 1:]:
+            if n1 == n2 and k1 == k2 == "widok":
+                continue
+            dx = max(b[0] - a[2], a[0] - b[2])
+            dy = max(b[1] - a[3], a[1] - b[3])
+            gap = max(dx, dy)
+            need = U.GAP_VB if "widok" in (k1, k2) else min(U.GAP_B, U.GAP_C)
+            if {k1, k2} == {"widok"}:
+                need = min(need, U.GAP_V)
+            assert gap >= need - 0.05, f"odstęp {gap:.1f} < {need} mm: {k1} {n1} ↔ {k2} {n2}"
+    ok = SK.ocena_skladania(u.W, u.H, tb_h)
+    assert ok["tabliczka_na_wierzchu"], (u.nazwa, ok)
+    assert tb[0] >= u.W - ok["pasy"][-1] - 1e-6 and tb[3] <= ok["rzedy"][0] + 1e-6, "tabliczka poza pasem wierzchnim"
+
+
+def test_brak_nakladania():
+    for views, blocks in _przypadki():
+        widoki = [U.Widok(f"v{i}", w, h, min(w, 140.0), 10.5) for i, (w, h) in enumerate(views)]
+        bloki = [_blok_prosty(h) for h in blocks] + [_uwagi(8)]
+        u = U.rozmiesc(widoki, bloki, 103.0, {})
+        if u is None:
+            continue
+        _sprawdz_uklad(u, widoki, 103.0)
+        assert u.W <= 2400 + 1e-6 and u.H <= 914 + 1e-6
+
+
+def test_kieszenie_widoku():
+    """Blok w pustym narożniku obwiedni widoku (kształt L) — bez kolizji z zajętością widoku."""
+    v = U.Widok("L", 500, 300, 120, 10.5, False, [(0, 0, 500, 150), (0, 150, 250, 300)])
+    u = U.rozmiesc([v], [_blok_prosty(100), _blok_prosty(40)], 103.0, {})
+    _sprawdz_uklad(u, [v], 103.0)
+    uz = U.rozmiesc([U.Widok("P", 500, 300, 120, 10.5)], [_blok_prosty(100), _blok_prosty(40)], 103.0, {})
+    assert u.W * u.H <= uz.W * uz.H + 1e-6
+
+
+def test_uwagi_dzielone():
+    U_ = U.BlokUwag([f"Uwaga {i}: " + "długi tekst uwagi " * (i % 5 + 1) for i in range(9)])
+    for i0, i1 in ((0, 9), (0, 4), (4, 9), (3, 5)):
+        sh = Sheet("A0", draw_frame=False)
+        r = notes_box(sh, 50.0, 700.0, U.TB_W, U_.lines[i0:i1], "T", h=1.8, start=i0 + 1)
+        assert abs((700.0 - r[1]) - U_.wysokosc(i0, i1)) < 0.05, (i0, i1, 700 - r[1], U_.wysokosc(i0, i1))
+        nums = [p.string for p in sh.prims if hasattr(p, "runs") and p.string.rstrip().endswith(".")
+                and p.string.strip()[:-1].isdigit()]
+        assert nums[0].strip() == f"{i0 + 1}.", nums
+    # wysoka kolumna uwag na niskim arkuszu → podział na części z ciągłą numeracją
+    u = U.rozmiesc([U.Widok("v", 700, 240, 100, 10.5)], [_uwagi(40)], 103.0, {"wysokosci": [297]},
+                   fmt="ekonomiczny")
+    czesci = [b for b, *_ in u.roz.bloki if b.nazwa.startswith("uwagi[")]
+    assert len(czesci) >= 2, [b.nazwa for b, *_ in u.roz.bloki]
+    _sprawdz_uklad(u, [], 103.0)
+
+
+def test_tryby_i_opcje():
+    assert U.tryb_formatu("auto")[0] == "ekonomiczny" and U.tryb_formatu(None)[0] == "ekonomiczny"
+    assert U.tryb_formatu("klasyczny")[0] == "klasyczny" and U.tryb_formatu("standardowy")[0] == "standardowy"
+    assert U.tryb_formatu([594, 780]) == ("jawny", ("780×594", 780.0, 594.0))
+    assert U.tryb_formatu("780x594")[1][1:] == (780.0, 594.0)
+    assert U.tryb_formatu("A3x3")[1][1:] == (891, 420)
+    o = U.opcje({"kara_niestandard": 0.05, "kara_skladania": {"słabe": 0.2}}, {"wysokosci": [594]})
+    assert o["kara_niestandard"] == 0.05 and o["wysokosci"] == [594]
+    assert o["kara_skladania"]["słabe"] == 0.2 and o["kara_skladania"]["poprawne"] == 0.04
+    assert U.dlugosci_kandydaci(700, dict(o, modul_skladania=190)) == [780.0, 970.0, 1160.0]
+    assert U.dlugosci_kandydaci(700, dict(o, modul_skladania=0)) == [700.0]
+    assert U.nazwa_standardowa(594, 420) == ("A2", "landscape") and U.nazwa_standardowa(420, 594)[1] == "portrait"
+    assert U.nazwa_standardowa(780, 594) is None
+
+
+def test_format_jawny_i_standardowy():
+    v = [U.Widok("v", 600, 330, 150, 10.5)]
+    b = [_blok_prosty(110), _blok_prosty(40)]
+    u = U.rozmiesc(v, b, 103.0, {}, fmt="A1")
+    assert (u.nazwa, u.W, u.H, u.standard) == ("A1", 841, 594, True)
+    _sprawdz_uklad(u, v, 103.0)
+    u = U.rozmiesc(v, b, 103.0, {}, fmt=[594, 780])
+    assert (u.W, u.H, u.standard) == (780.0, 594.0, False)
+    assert U.rozmiesc(v, b, 103.0, {}, fmt="A3") is None          # nie mieści się → sheets.py: układ klasyczny
+    u = U.rozmiesc(v, b, 103.0, {}, fmt="standardowy")
+    assert u.standard and U.nazwa_standardowa(u.W, u.H) is not None
+    ue = U.rozmiesc(v, b, 103.0, {})
+    assert ue.koszt <= u.koszt + 1e-9                               # ekonomiczny nie gorszy niż standardowy
+
+
+def test_determinizm():
+    for views, blocks in _przypadki(seed=11, n=8):
+        mk = (lambda: ([U.Widok(f"v{i}", w, h, 100.0, 10.5) for i, (w, h) in enumerate(views)],
+                       [_blok_prosty(h) for h in blocks] + [_uwagi(6)]))
+        a = U.rozmiesc(*mk(), 103.0, {})
+        b = U.rozmiesc(*mk(), 103.0, {})
+        if a is None:
+            assert b is None
+            continue
+        assert (a.nazwa, a.W, a.H) == (b.nazwa, b.W, b.H)
+        assert [r for _k, _n, r in a.roz.prostokaty] == [r for _k, _n, r in b.roz.prostokaty]
+
+
+# ================================================================================================ arkusze z modelu
+_CTX = None
+
+
+def _ctx():
+    global _CTX
+    if _CTX is None:
+        from lamela.ir import build_ir
+        from lamela.model import load_model
+        from lamela.views.sheets import load_config, make_context
+        m = load_model(B_TEST, D_TEST, strict=False)
+        ir = build_ir(m, otoczenie=True, auta=False)
+        cfg = load_config(ROOT / "model" / "test" / "arkusze_testowe.yaml", m)
+        _CTX = make_context(m, ir, cfg, [], src=str(B_TEST))
+    return _CTX
+
+
+def _rejestruj_widok_testowy():
+    """Widok rejestrowany (kontrakt ``register_view``) z blokami kolumny, uwagą jednostek i schematem bez skali."""
+    from types import SimpleNamespace
+
+    from lamela.draft.core import Viewport
+    from lamela.views.sheets import register_view
+
+    def blk(h):
+        def fn(sh, x, y, w):
+            with sh.on("R-LEGENDA"):
+                sh.text((x, y - 3.5), f"LEGENDA TESTOWA {h}", 3.5, style="bold")
+                sh.rect(x, y - h, x + w, y - 6)
+            return y - h
+        return fn
+
+    def widok(ctx, spec, scale, opts):
+        vp = Viewport(scale, spec.get("tytul_widoku") or "SCHEMAT TESTOWY")
+        L = float(opts.get("dl", 12.0))
+        with vp.on("A-WIDOK"):
+            vp.rect(0, 0, L, 6.0)
+            vp.line((0, 0), (L, 6.0))
+            vp.text((0.2, 6.5), "opis", 2.5)
+        res = SimpleNamespace(column_blocks=[("leg1", blk(60)), ("leg2", blk(45))],
+                              notes=["Uwaga widoku testowego."], units_note="Jednostki testowe: wymiary w m.",
+                              bez_skali=bool(opts.get("bez_skali", False)), north=False)
+        return vp, res, vp.title
+
+    register_view("test_uklad", widok, rodzaj="rysunek testowy", qa="PZT")
+
+
+def _build(spec):
+    from lamela.views.sheets import build_sheet
+    return build_sheet(_ctx(), dict(spec), 1, 1)
+
+
+def test_widok_rejestrowany():
+    _rejestruj_widok_testowy()
+    sh, info = _build({"nr": "T-U-01", "tytul": "TEST", "typ": "test_uklad", "skala": 100,
+                       "opcje": {"bez_skali": True, "dl": 30.0}})
+    assert info["qa_kind"] == "PZT" and info["skala"] == "—" and sh.tb.skala == "—"
+    assert info["uklad"]["tryb"] == "ekonomiczny" and not info["uklad"]["kolizje"], info["uklad"]
+    assert (round(sh.width, 1), round(sh.height, 1)) == tuple(info["wymiary_mm"])
+    assert info["skladanie"]["tabliczka_na_wierzchu"]
+    names = [n for n, _r in info["uklad"]["bloki"]]
+    assert "leg1" in names and "leg2" in names and any(n.startswith("uwagi") for n in names), names
+    assert not any(n.startswith("róża") or n == "podziałka" for n in names), "schemat bez skali — bez podziałki"
+    txt = " ".join(p.string for p in sh.prims if hasattr(p, "runs"))
+    assert "Jednostki testowe" in txt and "Uwaga widoku testowego" in txt
+
+
+def test_zgodnosc_wsteczna_arkusz():
+    """Format jawny działa jak dotąd; tryb klasyczny = dawny algorytm; format [H, L] — niestandardowy."""
+    from lamela.views.sheets import FORMATS
+    _rejestruj_widok_testowy()
+    base = {"nr": "T-U-02", "tytul": "TEST", "typ": "test_uklad", "skala": 50, "opcje": {"dl": 20.0}}
+    sh, info = _build(dict(base, format="A2"))
+    assert info["format"] == "A2" and (sh.width, sh.height) == (594, 420)
+    sh, info = _build(dict(base, format="A3x3"))
+    assert info["format"] == "A3×3" and (sh.width, sh.height) == (891, 420)
+    sh, info = _build(dict(base, format="klasyczny"))
+    assert info["uklad"]["tryb"] == "klasyczny" and info["format"] in FORMATS
+    sh, info = _build(dict(base, format=[594, 700]))
+    assert (sh.width, sh.height) == (700.0, 594.0) and sh.fmt_name == "700×594"
+    sh, info = _build(dict(base, format="A4"))                # za mały → układ klasyczny z uwagą (jak dotąd)
+    assert info["format"] == "A4"
+
+
+def test_arkusz_rzutu_z_modelu():
+    """Rzut parteru modelu testowego: układ ekonomiczny bez kolizji, QA bez błędów, tabliczka na wierzchu."""
+    from lamela.draft import plot
+    ctx = _ctx()
+    spec = next(s for s in ctx_cfg_arkusze() if s["nr"] == "T-AR-01")
+    sh, info = _build(spec)
+    assert not info["uklad"]["kolizje"], info["uklad"]["kolizje"]
+    qa = plot.qa(sh, kind=info.get("qa_kind"))
+    assert qa["ok"], qa["errors"][:5]
+    assert info["skladanie"]["tabliczka_na_wierzchu"]
+    assert info["uklad"]["wypelnienie_szac"] > 0.45, info["uklad"]
+    tb = sh.tb_rect
+    assert abs(tb[2] - sh.frame[2]) < 1e-6 and abs(tb[1] - sh.frame[1]) < 1e-6
+    sh2, info2 = _build(spec)                                    # determinizm
+    assert info2["uklad"]["bloki"] == info["uklad"]["bloki"] and info2["format"] == info["format"]
+
+
+def ctx_cfg_arkusze():
+    from lamela.views.sheets import load_config
+    return load_config(ROOT / "model" / "test" / "arkusze_testowe.yaml", _ctx().model)["arkusze"]
+
+
+# ==================================================================================================
+def main(argv=None):
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--szybko", action="store_true", help="bez arkuszy z modelu testowego")
+    a = ap.parse_args(argv)
+    tests = [(n, f) for n, f in globals().items() if n.startswith("test_") and callable(f)]
+    if a.szybko:
+        tests = [(n, f) for n, f in tests if n not in ("test_widok_rejestrowany", "test_zgodnosc_wsteczna_arkusz",
+                                                       "test_arkusz_rzutu_z_modelu")]
+    ok = fail = 0
+    t0 = time.time()
+    for n, f in tests:
+        t1 = time.time()
+        try:
+            f()
+            ok += 1
+            print(f"PASS  {n}  ({time.time() - t1:.1f} s)", flush=True)
+        except Exception as e:  # noqa: BLE001
+            fail += 1
+            print(f"FAIL  {n}: {e}", flush=True)
+            traceback.print_exc(limit=4)
+    print(f"\n{ok} zaliczonych, {fail} niezaliczonych, czas {time.time() - t0:.0f} s")
+    return 1 if fail else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -3,6 +3,7 @@ Strona bez <!DOCTYPE>/<html>/<head>/<body> (szkielet dodaje platforma Artifact):
 from __future__ import annotations
 
 import json
+import re
 from datetime import datetime
 from html import escape as E
 from pathlib import Path
@@ -91,7 +92,7 @@ def naglowek(tr: dict, W: dict) -> str:
     linki = "".join(f'<a href="#{a}">{E(b)}</a>' for a, b in nav)
     return (f'<a class="pomin" href="#tresc">Przejdź do treści</a><header class="gora"><div class="wrap">'
             f'<a class="marka" href="#top"><b>{E(mk["nazwa"])}</b><span>{E(mk["podtytul"])}</span></a>'
-            f'<span class="chip">{E(mk["oznaczenie"])}</span>'
+            f'<span class="chip">{E(mk.get("oznaczenie_krotkie") or mk["oznaczenie"])}</span>'
             f'<nav class="nav" aria-label="Sekcje strony">{linki}</nav></div></header>')
 
 
@@ -206,7 +207,7 @@ def litery(D: dict) -> list[tuple]:
 
 def idea(D: dict, tr: dict, W: dict, szkic: dict, sep: str) -> str:
     t = tr["idea"]
-    li = "".join(f'<li><span class="lt" aria-hidden="true">{E(a)}</span><div><p><b>{E(a)} · {E(b)}</b></p>'
+    li = "".join(f'<li><span class="lt">{E(a)}</span><div><p><b>{E(b)}</b></p>'
                  f'<p class="num">{E(c)}</p></div></li>' for a, b, c in litery(D))
     ar = f'{szkic["W"]} / {szkic["H"]}'
     body = (f'<p class="lead">{tx(t["tekst"], W)}</p>'
@@ -232,10 +233,10 @@ def galeria(D: dict, tr: dict, W: dict, R: dict, sep: str) -> str:
         if _pominiete(R, f"{u}_169"):
             sl += ". " + _pominiete(R, f"{u}_169")
         opis = f"{tyt} — {op}. {sl}"
-        fig += (f'<figure class="{"szer" if i == 0 else ""}"><button type="button" data-duzy="assets/{u}_169.webp" '
+        fig += (f'<figure class="{"szer" if i in (0, len(GAL) - 1) else ""}"><button type="button" data-duzy="assets/{u}_169.webp" '
                 f'data-opis="{E(opis)}" aria-label="Powiększ: {E(tyt)}"><picture>'
                 f'<source media="(max-width: 700px)" srcset="assets/{u}_43.webp">'
-                f'<img src="assets/{u}_169.webp" width="1920" height="1080" loading="lazy" alt="{E(tyt)}: {E(op)}">'
+                f'<img src="assets/{u}_169.webp" width="1920" height="1080" decoding="async" alt="{E(tyt)}: {E(op)}">'
                 f'</picture></button><figcaption><b>{E(tyt)}</b> · {E(op)}. {E(sl)}</figcaption></figure>')
     dlg = ('<dialog class="lupa" id="lupa" aria-label="Powiększenie wizualizacji"><img id="lupa-img" src="" alt="">'
            '<div class="lupa-pasek"><p id="lupa-opis"></p><button type="button" id="lupa-poprz">Poprzednia</button>'
@@ -352,13 +353,15 @@ def unary_bounds(m):
 def technologia(D: dict, tr: dict, W: dict, sep: str) -> str:
     en = D["en"] or {}
     karty = ""
+    d_max = max(p["d"] for p in D["przegrody"])
     for p in D["przegrody"]:
         nz = p["nazwa"].split(":")[0].split("(")[0].strip()
         u = (f'<span class="u">U = {fm(p["U"], 3)}<small> W/(m²·K)</small></span>'
              + (f'<span class="etk">wymaganie ≤ {fm(p["U_max"])}</span>' if p.get("U_max") else "")) if p.get("U") else \
             '<span class="etk">U — nie dotyczy</span>'
         karty += (f'<div class="karta przeg"><div class="przeg-gl"><h3><span class="nr">{E(p["kod"])}</span> {E(nz)}</h3>{u}</div>'
-                  f'{SC.przegroda_html(p)}<p class="etk">grubość {fm(p["d"] * 100, 1)} cm</p></div>')
+                  f'{SC.przegroda_html(p, d_max=d_max)}<p class="etk">grubość {fm(p["d"] * 100, 1)} cm · pasek w jednej skali '
+                  f'dla wszystkich przegród</p></div>')
     k, f, g, st = D["konstr"], D["fund"], D["geo"], D["stolarka"]
     ok = [v for v in st.values() if isinstance(v, dict) and str(v.get("wyrob", "")).startswith(("okno", "fix", "HS"))]
     beton = k.get("beton") or {}
@@ -375,7 +378,7 @@ def technologia(D: dict, tr: dict, W: dict, sep: str) -> str:
             ("Klasy konstrukcji", f'{E(str(k.get("klasa_konsekwencji", "")))}/{E(str(k.get("klasa_niezawodnosci", "")))}, '
                                   f'okres użytkowania {E(str(k.get("okres_uzytkowania", "")))} lat')]
     tab = "".join(f'<tr><th scope="row">{a}</th><td>{b}</td></tr>' for a, b in rows)
-    body = (f'<p class="lead">{tx(tr["technologia"]["lead"], W)}</p><div class="siatka-2">{karty}</div>'
+    body = (f'<p class="lead">{tx(tr["technologia"]["lead"], W)}</p><div class="przeg przeg-siatka">{karty}</div>'
             f'<h3>Konstrukcja i stolarka</h3><div class="tab-wrap"><table>{tab}</table></div>')
     return sekcja("technologia", "Przegrody z U", tr["technologia"]["tytul"],
                   f'<p class="nota">U: {E(en.get("zrodlo", ""))}. Kolory warstw — kolory materiałów w modelu; pasek pod '
@@ -388,12 +391,10 @@ def jakosc(D: dict, tr: dict, W: dict, prz_svg: str, sep: str) -> str:
     for p in D["przegrody"]:
         for w in p["warstwy"]:
             if w["linia"] in zb:
-                nz = w["nazwa"].split(" (")[0].split(",")[0].split(":")[-1].strip()
-                zb[w["linia"]].setdefault(nz, set()).add(w["d"])
+                zb[w["linia"]].setdefault(SC.krotka_nazwa(w["nazwa"]), set()).add(w["d"])
     li = ""
     for k, nazwa in SC.LINIE.items():
-        el = "; ".join(f'{n} {"/".join(fm(d * 100, 1 if d < 0.01 else 0) for d in sorted(ds))} cm'
-                       for n, ds in list(zb[k].items())[:5])
+        el = "; ".join(f'{n} {"/".join(SC.grubosc_cm(d) for d in sorted(ds))} cm' for n, ds in list(zb[k].items())[:5])
         li += f'<li style="--k:var(--l-{k})"><b>{E(nazwa.capitalize())}</b><p>{E(el)}</p></li>'
     en = D["en"] or {}
     br = en.get("ciaglosc_braki") or {}
@@ -469,6 +470,7 @@ def dzialka(D: dict, tr: dict, W: dict, sep: str) -> str:
         rows += (f'<tr><td>{nz[k]}</td><td>{E(str(q["el"]))}</td><td class="l">{fm(q["d"])} m</td>'
                  f'<td class="pod">{E(pod)}</td></tr>')
     ref = dm.get("referencyjna") or {}
+    metoda = re.sub(r"^Metoda:\s*", "", dm["metoda"])
     body = (f'<p class="lead">{tx(tr["dzialka"]["lead"], W)}</p>'
             f'<div class="tabliczka"><div><span class="etk">Szerokość min.</span><span class="w">{fm(dm["szer"])}<small>m</small></span>'
             f'<span class="p">granice boczne W–E</span></div><div><span class="etk">Głębokość min.</span><span class="w">{fm(dm["gl"])}'
@@ -479,7 +481,7 @@ def dzialka(D: dict, tr: dict, W: dict, sep: str) -> str:
             f'<div class="rys-box">{SC.dzialka_svg(D)}</div>'
             f'<div class="tab-wrap"><table><thead><tr><th>Strona</th><th>Element decydujący</th><th class="l">Odległość</th>'
             f'<th>Podstawa</th></tr></thead><tbody>{rows}</tbody></table></div>'
-            f'<p><b>Metoda.</b> {E(dm["metoda"])}</p>'
+            f'<p><b>Metoda.</b> {E(metoda)}</p>'
             f'<p>Działka referencyjna w modelu projektu (fikcyjna): {fm(ref.get("szer"))} × {fm(ref.get("gl"))} m, '
             f'{fm_m2(ref.get("pow"), 0)}. Na działce węższej niż minimum zmiana usytuowania wymaga zgody autora i ponownego '
             f'sprawdzenia przepisów przez projektanta adaptującego (np. ściana bez okien może stanąć bliżej granicy).</p>')
@@ -497,7 +499,7 @@ def dokumentacja(D: dict, tr: dict, W: dict, model_dir: Path, sep: str) -> str:
         if c.get("arkusze") and (model_dir / c["arkusze"]).exists():
             n = len((yaml.safe_load((model_dir / c["arkusze"]).read_text(encoding="utf-8")) or {}).get("arkusze") or [])
         li += (f'<li><span class="kod">{E(c["kod"])}</span><b>{E(c["nazwa"])}</b><p>{E(c["opis"])}</p>'
-               + (f'<p class="etk">{n} arkuszy rysunkowych w konfiguracji modelu</p>' if n else "") + '</li>')
+               + (f'<span class="etk">{n} arkuszy rysunkowych w konfiguracji modelu</span>' if n else "") + '</li>')
     ad = "".join(f'<li>{tx(p, W)}</li>' for p in a["punkty"])
     body = (f'<p class="lead">{tx(t["lead"], W)}</p><ul class="tomy">{li}</ul><p>{tx(t["uwaga"], W)}</p>'
             f'<h3 id="adaptacja">{E(a["tytul"])}</h3><ul class="adapt">{ad}</ul><p class="demo">{tx(a["zastrzezenie"], W)}</p>')
@@ -510,8 +512,8 @@ def pakiety(tr: dict, W: dict, sep: str) -> str:
     karty = "".join(f'<div class="pakiet{" wyr" if p.get("wyroznij") else ""}"><h3>{E(p["nazwa"])}</h3><p>{E(p["dla"])}</p>'
                     f'<p class="cena num">{E(p["cena"])}<small>cena przykładowa</small></p>'
                     f'<ul>{"".join(f"<li>{E(z)}</li>" for z in p["zawiera"])}</ul>'
-                    f'<a class="btn{" btn-g" if p.get("wyroznij") else ""}" href="#zapytanie" data-pakiet="{E(p["nazwa"])}">'
-                    f'Zapytaj o pakiet {E(p["nazwa"])}</a></div>' for p in t["lista"])
+                    f'<a class="btn{" btn-g" if p.get("wyroznij") else ""}" href="#zapytanie" data-pakiet="{E(p["nazwa"])}" '
+                    f'aria-label="Zapytaj o pakiet {E(p["nazwa"])}">Zapytaj o ten pakiet</a></div>' for p in t["lista"])
     op = "".join(f'<tr><td>{E(o["nazwa"])}</td><td class="l">{E(o["cena"])}</td></tr>' for o in t["opcje"])
     body = (f'<p class="baner">{E(t["etykieta"])}</p><div class="pakiety">{karty}</div><h3>{E(t["opcje_tytul"])}</h3>'
             f'<div class="tab-wrap"><table class="opcje"><thead><tr><th>Opcja</th><th class="l">Cena przykładowa</th></tr></thead>'
