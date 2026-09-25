@@ -1,0 +1,69 @@
+{
+ "nr": 50,
+ "title": "Model domknięty → pętla konstrukcyjna, runda 1 · arkusze IE ✔ (−32 % papieru) · PT-3 IS: 0 braków",
+ "stages": [
+  [
+   "Analiza szkicu — interpretacja v2 („S” z brył, garaż)",
+   "done"
+  ],
+  [
+   "Brief, działka i MPZP (przykładowe)",
+   "done"
+  ],
+  [
+   "Rejestr wymagań: 207 pozycji",
+   "done"
+  ],
+  [
+   "Koncepcja: rundy poprawek 1–2 ✔, model domknięty w wydaniu ✔",
+   "done"
+  ],
+  [
+   "Narzędzia: silnik rysunkowy PN, rdzeń modelu, 3D, widoki HLR",
+   "done"
+  ],
+  [
+   "Składanie tomów PDF (RPB)",
+   "done"
+  ],
+  [
+   "Biblioteki obliczeń ✔ (ściany-tarcze: 28/28 testów)",
+   "done"
+  ],
+  [
+   "Mostki 2D ISO 10211 ✔ (22 węzły, f_Rsi ≥ 0,82), woda, detale ✔",
+   "done"
+  ],
+  [
+   "Układ arkuszy: AR −42 %, PZT ✔, IS −41 %, IE −32 % ✔; poprawki silnika ►",
+   "running"
+  ],
+  [
+   "Tomy: Tom I ✔ roboczo; PT-3, PT-4 ✔ po poprawkach; PT-1, PT-2 poprawki ►; wydanie ► konstrukcja: runda 1",
+   "running"
+  ],
+  [
+   "Strona www — opublikowana wersja robocza ► wersja końcowa po wydaniu",
+   "running"
+  ],
+  [
+   "Prezentacja projektu: 16 slajdów (do .pptx / Prezentacji Google) ✔",
+   "done"
+  ]
+ ],
+ "notes": [
+  "EP dla zaprojektowanych wyrobów: 40,3; bez PV 63,0 ≤ 70.",
+  "Wysokość wg WT § 6 = 9,97 m — już jednakowa w opisie i na rysunkach.",
+  "NADZÓR (10:29): 3 agentów aktywnych, bez zastojów; najdłuższa bezczynność 3 min; zmiany w repo 0 min temu."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-10_instalacja_fotowoltaiczna_rzut_dachu.png",
+   "caption": "PT-IE-10 instalacja fotowoltaiczna — rzut dachu (15 × 430 Wp)"
+  },
+  {
+   "path": "/home/user/aihouse/projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-14_schemat_rozdzielnicy_glownej_rg.png",
+   "caption": "PT-IE-14 schemat rozdzielnicy głównej RG"
+  }
+ ]
+}

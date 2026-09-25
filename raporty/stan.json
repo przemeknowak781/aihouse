@@ -1,5 +1,5 @@
 {
- "title": "Arkusze IS ✔ (11 zamiast 17, −41 % papieru) · PT-4 po poprawkach: 0 braków w walidatorze",
+ "title": "Model domknięty → pętla konstrukcyjna, runda 1 · arkusze IE ✔ (−32 % papieru) · PT-3 IS: 0 braków",
  "stages": [
   [
    "Analiza szkicu — interpretacja v2 („S” z brył, garaż)",
@@ -14,19 +14,11 @@
    "done"
   ],
   [
-   "Koncepcja: rundy poprawek 1–2 ✔ → domknięcie w przepływie wydania",
+   "Koncepcja: rundy poprawek 1–2 ✔, model domknięty w wydaniu ✔",
    "done"
   ],
   [
-   "Silnik rysunkowy wg PN",
-   "done"
-  ],
-  [
-   "Rdzeń modelu + pipeline 3D",
-   "done"
-  ],
-  [
-   "Generatory rzutów/przekrojów/elewacji (HLR)",
+   "Narzędzia: silnik rysunkowy PN, rdzeń modelu, 3D, widoki HLR",
    "done"
   ],
   [
@@ -38,15 +30,15 @@
    "done"
   ],
   [
-   "Mostki 2D ISO 10211 ✔ (22 węzły, H_TB 30,6 W/K po rundzie 2), woda, detale ✔",
+   "Mostki 2D ISO 10211 ✔ (22 węzły, f_Rsi ≥ 0,82), woda, detale ✔",
    "done"
   ],
   [
-   "Produkcja rysunków ✔; układ arkuszy: AR ✔ (−42 %), PZT ✔, IS ✔ (−41 %), IE ►",
+   "Układ arkuszy: AR −42 %, PZT ✔, IS −41 %, IE −32 % ✔; poprawki silnika ►",
    "running"
   ],
   [
-   "Tomy: Tom I ✔ roboczo; PT-4 ✔ po poprawkach; PT-2 BO, PT-3 IS poprawki ►; wydanie ► (model: domknięcie)",
+   "Tomy: Tom I ✔ roboczo; PT-3, PT-4 ✔ po poprawkach; PT-1, PT-2 poprawki ►; wydanie ► konstrukcja: runda 1",
    "running"
   ],
   [
@@ -59,7 +51,7 @@
   ]
  ],
  "notes": [
-  "PT-4: WLZ YKY 5×25 — spadek napięcia 0,37 % ≤ 0,5 %.",
-  "PT-4 obejmuje też telekomunikację → plik PT_4_WB (RPB zał. 1)."
+  "EP dla zaprojektowanych wyrobów: 40,3; bez PV 63,0 ≤ 70.",
+  "Wysokość wg WT § 6 = 9,97 m — już jednakowa w opisie i na rysunkach."
  ]
 }
