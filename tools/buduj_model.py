@@ -23,7 +23,7 @@ import math
 from pathlib import Path
 
 import yaml
-from shapely.geometry import Polygon, box
+from shapely.geometry import Point, Polygon, box
 from shapely.geometry.polygon import orient
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -1506,7 +1506,7 @@ def teren_projekt():
     * dalej — ogród pd. i pas zach. ze spadkiem ≈ 0,5 % ku niecce NCH-1; przed elewacją pn. powrót do terenu istniejącego (skarpa
       niecki ≤ 1:8); na granicach E, W, S i przy drodze rzędne istniejące (W-019). Jednostka PC na fundamencie (U5) — nie jest terenem."""
     H0, I = 101.32, 0.03
-    stref = {"T2": (box(9.75, 9.04, 11.70, 11.60), 2.31), "BR1": (box(11.70, 9.66, 18.05, 12.20), 2.31),
+    stref = {"T2": (box(9.75, 9.04, 11.70, 11.60), 2.31), "BR1": (box(11.70, 9.66, 19.00, 12.20), 2.31),
              "DZ2": (box(18.66, 4.60, 20.10, 6.20), 1.49), "T3": (box(12.20, -1.70, 13.50, -0.29), 1.31)}
     P_ = []
     for dd in (0.0, 0.3, 0.8, 1.5, 2.3):
@@ -1525,7 +1525,7 @@ def teren_projekt():
         spec += [((x, 9.10), 101.63), ((x, 9.70), 101.62), ((x, 10.30), 101.61), ((x, 10.40), 101.60)]
     for x in (9.95, 10.60, 11.25):                                                 # dojście U2 (spadek do posesji)
         spec += [((x, 11.50), 101.58), ((x, 13.50), 101.52), ((x, 17.10), 101.47)]
-    for x in (11.90, 12.80, 14.00, 15.19, 16.50, 17.70):                           # BR1 — fartuch, OL-1, grzbiet, OL-4
+    for x in (11.90, 12.80, 14.00, 15.19, 16.50, 17.70, 18.30, 18.90):             # BR1 — fartuch (cała szer. garażu), OL-1, grzbiet, OL-4
         spec += [((x, 9.70), 101.53), ((x, 9.975), 101.525), ((x, 10.90), 101.50), ((x, 11.975), 101.47), ((x, 13.00), 101.50),
                  ((x, 14.00), 101.52), ((x, 15.50), 101.50), ((x, 16.90), 101.47)]
     for y in (4.95, 5.40, 5.85):                                                   # DZ2 — podest, OL-5, stopień 0,15
@@ -1542,6 +1542,17 @@ def teren_projekt():
         spec.append(((x, 13.0), H_ist(x + T_DZ[0], 13.0 + T_DZ[1])))
     for y in (8.0, 4.0, 0.0):                                                      # za niecką NT-E — teren istniejący
         spec.append(((23.0, y), H_ist(23.0 + T_DZ[0], y + T_DZ[1])))
+    # wydanie (weryfikacja V2 N-4): krawędzie podestów i fartucha jako STOPIEŃ/obrzeże — punkty 0,03 m za krawędzią na rzędnej pierścienia
+    # (H0 − I·d od lica P0), aby TIN nie „rozmywał” podestu (−0,02/−0,12) na teren przy licu poza strefą (cokół ≥ 0,30, spadek ≥ 2 %)
+    _P0 = Polygon(OB_P0)
+    kraw = [((9.72, y), None) for y in (9.10, 9.35, 9.60, 9.85, 10.10, 10.35)]                    # T2 — krawędź zach.
+    kraw += [((13.53, y), None) for y in (-0.33, -0.60, -0.85, -1.10, -1.35, -1.55)]           # T3 — krawędź wsch. (ścieżka U6)
+    kraw += [((x, y), None) for x in (19.05, 19.40, 19.75, 20.05) for y in (4.57, 6.23)]         # DZ2 — krawędzie pd. i pn. podestu
+    kraw += [((19.00, y), None) for y in (9.75, 10.20, 10.90, 11.60)]                          # BR1 — obrzeże wsch. fartucha
+    for (x, y), _ in kraw:
+        dd = _P0.exterior.distance(Point(x, y))
+        if dd <= 2.3 and not _P0.contains(Point(x, y)):
+            P_.append([r(x + T_DZ[0], 2), r(y + T_DZ[1], 2), r(H0 - I * dd, 3)])
     for (x, y), h in spec:
         P_.append([r(x + T_DZ[0], 2), r(y + T_DZ[1], 2), r(h, 3)])
     return P_
@@ -1643,6 +1654,8 @@ DZIALKA.update({
              "opis": "RS7 (rynny zach. PL-E i PL-2) → KD-W, PVC 110", "dl": 3.2},
             {"branza": "kan_deszcz", "linia": [d(13.70, -EXT - 0.06), [r(13.70 + T_DZ[0], 3), 28.20]],
              "opis": "RS8 (rynny PL-E pd. i PL-D) + OL-6 (próg DZ3) → KD-E, PVC 110", "dl": 4.1},
+            {"branza": "kan_deszcz", "linia": [d(xF + EXT - 0.05, y5 + EXT + 0.125), d(19.80, 11.975)],
+             "opis": "OL-7 / OL-7a (próg bramy, filarki, wnęka wejścia) → separator SEP-1, PVC 110 (wydanie, V1-02)", "dl": 2.3},
             {"branza": "kan_deszcz", "linia": [d(18.85, 5.40), [27.20, r(5.40 + T_DZ[1], 3)]],
              "opis": "OL-5 (próg DZ2 garażu) → KD-E, PVC 110 (woda czysta z podestu — nie z posadzki garażu)", "dl": 0.8},
         ],
@@ -1673,6 +1686,17 @@ DZIALKA.update({
         {"id": "OL-2W", "typ": "liniowe", "linia": [d(-EXT - 0.10, 1.10), d(-EXT - 0.10, 3.70)], "spadek": 0.005, "odbiornik": "KD-W",
          "opis": "odwodnienie liniowe przy HS zach."},
         {"id": "OL-3", "typ": "liniowe", "linia": [d(9.85, 10.40), d(11.60, 10.40)], "spadek": 0.005, "odbiornik": "KD-W", "opis": "odwodnienie liniowe podestu wejścia"},
+        # wydanie (weryfikacja V1-02, V2 N-3, N-5): korytko przy licu ściany pn. garażu — próg bramy BR1 na całą szerokość z filarkami
+        # (x 11,70…18,975) i boczna ściana wnęki wejścia S0-05 (x 11,70); nawierzchnia −0,12 / podest −0,02 przy licu; uszczelnienie
+        # cokołu (KMB / membrana EPDM) ≥ 0,15 m nad nawierzchnią, połączone z membraną PF2 przez belkę progową (PT-AR-D-03/-14)
+        {"id": "OL-7", "typ": "liniowe", "linia": [d(11.80, y5 + EXT + 0.125), d(xF + EXT - 0.05, y5 + EXT + 0.125)], "spadek": 0.005,
+         "odbiornik": "SEP-1 → NT-E", "przy_licu": True,
+         "opis": "korytko odwodnienia liniowego w progu bramy garażu i przy filarkach (ściana S0-04 na całej długości, 0,125 m od lica); "
+                 "próg bramy — belka progowa z betonu wodoszczelnego z membraną wywiniętą (N-5); woda z podjazdu → separator SEP-1"},
+        {"id": "OL-7a", "typ": "liniowe", "linia": [d(xE - EXT - 0.10, y4 + EXT + 0.05), d(xE - EXT - 0.10, y5 + EXT + 0.125)], "spadek": 0.005,
+         "odbiornik": "OL-7 → SEP-1", "przy_licu": True,
+         "opis": "korytko przy bocznej ścianie wnęki wejścia (S0-05, 0,10 m od lica) — podest T2 ze spadkiem od ściany do korytka "
+                 "(weryfikacja V2 N-3); uszczelnienie cokołu ≥ 0,15 m nad podestem"},
         {"id": "OL-4", "typ": "liniowe", "linia": [d(xE + EXT + 0.2, 16.90), d(xF + EXT - 0.2, 16.90)], "spadek": 0.005, "odbiornik": "SEP-1 → NT-E",
          "opis": "odwodnienie liniowe przy bramie wjazdowej — woda nie spływa na drogę (MPZP, u.d.p. art. 39)"},
         {"id": "OZ-1", "typ": "opaska_zwirowa", "obrys": [[r(x + T_DZ[0], 3), r(y + T_DZ[1], 3)] for x, y in
