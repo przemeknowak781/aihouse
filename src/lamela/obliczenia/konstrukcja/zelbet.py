@@ -665,7 +665,7 @@ def belka_sciana(l: float, h: float, b: float, q_d: float, beton: Beton, a_podp:
     z = 0,6·l dla l/h < 1 (CEB-FIP; dla 2 ≤ l/h < 3: z = min(0,2·(l+2h); 0,9·d) [UPR]); ściąg T = q_d·l²/(8z);
     węzeł podporowy CCT σ ≤ k₂·ν'·f_cd (6.61, k₂ = 0,85, ν' = 1 − f_ck/250); krzyżulec σ ≤ 0,6·ν'·f_cd (6.56);
     siatka przy obu powierzchniach ρ ≥ 0,1 %, ≥ 150 mm²/m (9.7 [NZW NA]).
-    OGRANICZENIE: tarcze z otworami, wieloprzęsłowe, wspornikowe lub obciążone od dołu — analiza MES/STM indywidualna."""
+    OGRANICZENIE: tarcze z otworami, wieloprzęsłowe, wspornikowe lub obciążone od dołu — moduł :mod:`.tarcze` (MES + STM)."""
     stal = stal or StalZbrojeniowa()
     w = BelkaSciana(nazwa=nazwa)
     r = l / h
@@ -706,7 +706,7 @@ def belka_sciana(l: float, h: float, b: float, q_d: float, beton: Beton, a_podp:
            zrodlo="9.7(1) [NZW NA]")
     w.z, w.T, w.As_req, w.As_siatka = z, T, As, As_s
     w.uwaga("Model kratownicowy uproszczony — tarcze z otworami, wieloprzęsłowe, wspornikowe lub z obciążeniem podwieszonym "
-            "wymagają analizy MES (tarcza) lub indywidualnego modelu STM.")
+            "liczyć modułem `tarcze` (MES + STM).")
     return w
 
 

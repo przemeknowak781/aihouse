@@ -536,7 +536,8 @@ F = {
     "kondygnacje": {"id": (1, "str"), "nazwa": (0, "str"), "rzedna": (1, "num"), "wys_kondygnacji": (1, "num"),
                     "wys_w_swietle": (0, "num"), "podloga": (0, "str?")},
     "sciany": {"id": (1, "str"), "kond": (1, "str"), "przegroda": (1, "str"), "os": (1, "seg"),
-               "wnetrze": (1, "enum:" + ",".join(WNETRZE)), "z_od": (0, "num?"), "z_do": (0, "num?")},
+               "wnetrze": (1, "enum:" + ",".join(WNETRZE)), "z_od": (0, "num?"), "z_do": (0, "num?"),
+               "tarcza": (0, "any")},   # obliczenia konstrukcyjne: ściana-tarcza żelbetowa (bool lub słownik opcji)
     "otwory": {"id": (1, "str"), "sciana": (1, "str"), "symbol": (0, "str?"), "typ": (1, "enum:" + ",".join(TYPY_OTWOROW)),
                "odl": (1, "num"), "szer": (1, "num"), "wys": (1, "num"), "parapet": (1, "num"),
                "otwieranie": (0, "dict?"), "oslona": (0, "str?"), "kwatery": (0, "num?")},

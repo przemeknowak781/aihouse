@@ -42,8 +42,8 @@
    "running"
   ],
   [
-   "Produkcja: PZT, PAB, PT (AR, BO, IS, IE), model 3D LAMELA",
-   "todo"
+   "Produkcja: generatory PZT / instalacje IS-IE / konstrukcja BO / detale 1:10 w budowie ►; potem tomy PZT+PAB, PT",
+   "running"
   ],
   [
    "Weryfikacja krzyżowa i zgodność z przepisami",
@@ -55,6 +55,7 @@
   ]
  ],
  "notes": [
+  "Start produkcji: 4 agenty budują generatory rysunków (PZT 1:500/1:200, rzuty instalacji IS/IE, rysunki konstrukcyjne ze zbrojeniem ISO 3766, detale 1:10/1:5 z 4 liniami ciągłości) — wspólny rejestr typów widoków w sheets.py.",
   "Synteza: baza W2 + 15 przeszczepów z W1/W3 (m.in. PC R290 7,0 m od granicy, zbiornik 5 m³ + niecka 24 m², fasada E w osiach boksu C, pralnia + osobne WC, klatka poszerzona).",
   "Wskaźniki wg syntezy (do weryfikacji w audycie): PU 241,07 m², pow. zabudowy 187,51 m², wysokość 10,02 m od śr. terenu (limit MPZP 11,0 m).",
   "Fundament: płyta na XPS z żebrami (ciągłość izolacji, ISO 13793) — do potwierdzenia opinią geotechniczną (kat. II).",

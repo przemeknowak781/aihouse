@@ -519,3 +519,229 @@ def dzialka_png(m, ir, out: Path):
     fig.savefig(out, dpi=140)
     plt.close(fig)
     return wyn
+
+
+# ------------------------------------------------------------------------------------------------ bilans
+KLATKI_SLOWA = ("klatka schodowa",)
+
+
+def _teren_interp(m, klucz):
+    from scipy.interpolate import griddata
+    pts = (m.dz.raw.get("teren") or {}).get(klucz) or []
+    if len(pts) < 3:
+        return None
+    arr = np.asarray(pts, float)
+    xy = m.dz.do_budynku(arr[:, :2])
+    z = arr[:, 2] - m.dz.zero_abs
+
+    def f(q):
+        q = np.atleast_2d(q)
+        v = griddata(xy, z, q, method="linear")
+        if np.any(np.isnan(v)):
+            v2 = griddata(xy, z, q, method="nearest")
+            v = np.where(np.isnan(v), v2, v)
+        return v
+    return f
+
+
+def bilans(m, wyn_odl, fidelity):
+    B = {}
+    wiersze, pu, gar, tech, klat = [], {}, 0.0, 0.0, 0.0
+    for r in m.pomieszczenia():
+        rodz = r.raw.get("rodzaj") or ""
+        nm = r.nazwa.lower()
+        wiersze.append({"id": r.id, "kond": r.kond, "nazwa": r.nazwa, "kat": r.kategoria, "A": round(r.pow_netto, 2),
+                        "h": round(r.wysokosc or 0, 2), "wsp": r.wsp_wysokosci, "A_zal": round(r.pow_zaliczona, 2)})
+        if any(s in nm for s in KLATKI_SLOWA):
+            klat += r.pow_netto
+            continue
+        if rodz == "garaz" or "garaż" in nm:
+            gar += r.pow_netto
+            continue
+        if r.kategoria == "techniczna":
+            tech += r.pow_netto
+            continue
+        pu[r.kond] = pu.get(r.kond, 0.0) + r.pow_zaliczona
+    zp = m.zestawienie_powierzchni()
+    B["pomieszczenia"] = wiersze
+    B["PU_W316"] = {k: round(v, 2) for k, v in pu.items()}
+    B["PU_W316_suma"] = round(sum(pu.values()), 2)
+    B["garaz"], B["techniczne"], B["klatki"] = round(gar, 2), round(tech, 2), round(klat, 2)
+    B["PN_ISO_9836"] = {"podstawowa": zp["sumy_kategorii"].get("podstawowa"), "pomocnicza (z garażem)": zp["sumy_kategorii"].get("pomocnicza"),
+                        "ruchu": zp["pow_ruchu"], "techniczna": zp["pow_techniczna"], "netto razem": zp["pow_netto_razem"]}
+    dz = m.dz
+    ob = dz.obrys
+    A_dz = float(ob.area)
+    zab = m.pow_zabudowy()
+    brutto = m.pow_brutto_kondygnacji()
+    B["dzialka_m2"] = round(A_dz, 2)
+    B["zabudowa"] = {"m2": zab["budynek"], "proc": round(100 * zab["budynek"] / A_dz, 2), "z_plytami_m2": zab["z_plytami"]}
+    B["brutto_kondygnacji"] = brutto
+    B["intensywnosc"] = round(sum(brutto.values()) / A_dz, 3)
+    B["kubatura_brutto_m3"] = m.kubatura_brutto()["razem"]
+    nie_bc = [m.obrys_kondygnacji(m.kondygnacje[0].id)] + [dz.poly_bud(u["obrys"]) for u in dz.lista("utwardzenia")]
+    nie_bc += [Polygon(t["obrys"]) for t in m.tarasy()]
+    od = dz.raw.get("odpady") or {}
+    if od.get("obrys"):
+        nie_bc.append(dz.poly_bud(od["obrys"]))
+    ret = dz.raw.get("retencja") or {}
+    if (ret.get("zbiornik") or {}).get("xy"):
+        x, y = dz.do_budynku(ret["zbiornik"]["xy"])
+        nie_bc.append(Point(x, y).buffer(1.2))
+    nb = unary_union(nie_bc).intersection(ob)
+    d4 = [Polygon(d["obrys"]).area for d in m.dachy() if "DZ" in str(d.get("przegroda", ""))]
+    B["PBC"] = {"m2": round(A_dz - nb.area, 2), "proc": round(100 * (A_dz - nb.area) / A_dz, 2),
+                "rezerwa_dach_zielony_50proc_m2": round(0.5 * sum(d4), 2), "utwardzenia_tarasy_m2": round(nb.area - zab["budynek"], 2)}
+    # wysokości
+    dachy = [sl for sl in m.plyty() if sl["typ"] == "dach"]
+    top_att = max((sl["top_attyki"] or sl["top"]) for sl in dachy)
+    en = (m.raw.get("energia") or {}).get("wentylacja") or {}
+    top_inst = max([top_att] + [float(p[2]) for p in (en.get("czerpnia"), en.get("wyrzutnia")) if isinstance(p, list) and len(p) == 3])
+    ob0 = m.obrys_kondygnacji(m.kondygnacje[0].id)
+    per = [ob0.exterior.interpolate(t, normalized=True) for t in np.linspace(0, 1, 120, endpoint=False)]
+    q = np.array([[p.x, p.y] for p in per])
+    f_ist, f_proj = _teren_interp(m, "punkty"), _teren_interp(m, "punkty_projektowane")
+    zi = f_ist(q) if f_ist else np.zeros(len(q))
+    zp_ = f_proj(q) if f_proj else zi
+    zt = np.minimum(zi, zp_)
+    sr = (float(zt.min()) + float(zt.max())) / 2
+    wej = [o for o in m.otwory(kond=m.kondygnacje[0].id) if o.typ in ("drzwi_zewn", "drzwi_przesuwne_HS") and o.sciana.typ == "sciana_zewn"]
+    zw = [float(min(f_proj(np.array([o.srodek[:2]]))[0] if f_proj else 0.0, (f_ist(np.array([o.srodek[:2]]))[0] if f_ist else 0.0)))
+          for o in wej]
+    d1 = max(dachy, key=lambda sl: sl["top"])
+    B["wysokosc"] = {"attyka_max": round(top_att, 3), "najwyzszy_punkt_z_instalacjami": round(top_inst, 3),
+                     "teren_obwod_min": round(float(zt.min()), 3), "teren_obwod_max": round(float(zt.max()), 3), "teren_sredni": round(sr, 3),
+                     "H_upzp_m": round(top_inst - sr, 2), "H_WT6_m": round(d1["top"] - min(zw), 2) if zw else None,
+                     "teren_najnizsze_wejscie": round(min(zw), 3) if zw else None,
+                     "kondygnacje_nadziemne": len(m.kondygnacje)}
+    # okna / podłoga
+    okna = []
+    for r in m.pomieszczenia():
+        if not r.pobyt_ludzi or r.polygon is None:
+            continue
+        A_m = A_o = 0.0
+        ids = []
+        for o in m.otwory(kond=r.kond):
+            if o.typ in ("otwor", "drzwi", "brama") or o.sciana.typ != "sciana_zewn":
+                continue
+            if o.footprint.buffer(0.05).intersects(r.polygon.buffer(0.35)):
+                A_m += o.szer * o.wys
+                A_o += max(0.0, o.szer - 0.14) * max(0.0, o.wys - 0.14)
+                ids.append(o.id)
+        okna.append({"id": r.id, "nazwa": r.nazwa, "A_podl": round(r.pow_netto, 2), "okna": ids, "A_osciez": round(A_o, 2),
+                     "stosunek": f"1:{r.pow_netto / A_o:.1f}" if A_o > 0 else "—", "ok": A_o >= r.pow_netto / 8})
+    B["okna_podloga"] = okna
+    # schody
+    B["schody"] = [{"id": s["id"], "h": s["wys_stopnia"], "s": s["szer_stopnia"], "2h+s": round(2 * s["wys_stopnia"] + s["szer_stopnia"], 3),
+                    "biegi_szer": [b["szer"] for b in s["biegi"]], "n": s["liczba_stopni"]} for s in m.schody()]
+    B["miejsca_postojowe"] = len(dz.lista("miejsca_postojowe"))
+    B["odleglosci"] = wyn_odl
+    B["wiernosc_szkicowi"] = fidelity
+    return B
+
+
+def bilans_md(B) -> str:
+    L = []
+    w = B["wysokosc"]
+    L += ["| wskaźnik | wartość | wymaganie | ocena |", "|---|---|---|---|"]
+    pu = B["PU_W316_suma"]
+    L.append(f"| PU wg RPB §20 / W-316 (bez klatek, garażu i techn.) | **{fmt(pu)} m²** (P0 {fmt(B['PU_W316'].get('P0', 0))}, "
+             f"P1 {fmt(B['PU_W316'].get('P1', 0))}, P2 {fmt(B['PU_W316'].get('P2', 0))}) | 230–270 m² | {'✓' if 230 <= pu <= 270 else '✗'} |")
+    L.append(f"| garaż (osobno) / pom. techniczne (osobno) / klatki | {fmt(B['garaz'])} / {fmt(B['techniczne'])} / {fmt(B['klatki'])} m² | — | — |")
+    sd = next((r for r in B["pomieszczenia"] if r["id"] == "0.06"), None)
+    if sd:
+        L.append(f"| strefa dzienna salon + jadalnia + kuchnia | {fmt(sd['A'])} m² | ≥ 50 m² | {'✓' if sd['A'] >= 50 else '✗'} |")
+    z = B["zabudowa"]
+    L.append(f"| powierzchnia zabudowy (obrysy kondygnacji) | {fmt(z['m2'])} m² ({fmt(z['proc'])} %); z płytami {fmt(z['z_plytami_m2'])} m² | ≤ 480 m² (30 %) | "
+             f"{'✓' if z['m2'] <= 480 else '✗'} |")
+    p = B["PBC"]
+    L.append(f"| powierzchnia biologicznie czynna | {fmt(p['m2'])} m² ({fmt(p['proc'])} %); rezerwa 50 % dachu zielonego {fmt(p['rezerwa_dach_zielony_50proc_m2'])} m² "
+             f"| ≥ 800 m² (50 %) | {'✓' if p['m2'] >= 800 else '✗'} |")
+    L.append(f"| intensywność zabudowy (Σ brutto kondygnacji / działka) | {fmt(B['intensywnosc'], 3)} | 0,05–0,80 | "
+             f"{'✓' if 0.05 <= B['intensywnosc'] <= 0.8 else '✗'} |")
+    L.append(f"| kubatura brutto | {fmt(B['kubatura_brutto_m3'], 1)} m³ | — (> 1000 m³ → PWP, W-190) | — |")
+    L.append(f"| wysokość zabudowy (upzp): najwyższy punkt {w['najwyzszy_punkt_z_instalacjami']:+.3f} − śr. teren {w['teren_sredni']:+.3f} | "
+             f"**{fmt(w['H_upzp_m'])} m** | ≤ 11,00 m (rezerwa → 10,70) | {'✓' if w['H_upzp_m'] <= 10.70 else '✗'} |")
+    if w.get("H_WT6_m") is not None:
+        L.append(f"| wysokość budynku wg WT §6 (teren przy najniższym wejściu {w['teren_najnizsze_wejscie']:+.3f}) | {fmt(w['H_WT6_m'])} m | grupa N ≤ 12 m | "
+                 f"{'✓' if w['H_WT6_m'] <= 12 else '✗'} |")
+    L.append(f"| kondygnacje nadziemne | {w['kondygnacje_nadziemne']} | ≤ 3 | ✓ |")
+    L.append(f"| miejsca postojowe (garaż + podjazd) | {B['miejsca_postojowe']} | ≥ 2 | {'✓' if B['miejsca_postojowe'] >= 2 else '✗'} |")
+    for s in B["schody"]:
+        L.append(f"| schody {s['id']}: {s['n']} × h {fmt(s['h'], 3)} / s {fmt(s['s'], 2)}; 2h+s; bieg | 2h+s = {fmt(s['2h+s'], 3)} m; bieg "
+                 f"{' / '.join(fmt(b, 3) for b in s['biegi_szer'])} m | h ≤ 0,19; 0,60–0,65; ≥ 1,00 (cel) | ✓ |")
+    L += ["", "**Odległości od granic działki i linii zabudowy** (lica zewnętrzne; WT §12: ściana z otworami ≥ 4,00 m, bez otworów ≥ 3,00 m; "
+          "okapy/płyty ≥ 1,50 m — przyjęto ≥ 4,00 m):", "", "| element | W | E | S | do linii zabudowy |", "|---|---|---|---|---|"]
+    for d in B["odleglosci"]:
+        L.append(f"| {d['element']} | {fmt(d['W'])} | {fmt(d['E'])} | {fmt(d['S'])} | {fmt(d['N_linia_zab'])} |")
+    L += ["", "**Okna / podłoga w pomieszczeniach na pobyt ludzi** (w świetle ościeżnic ≈ (szer − 0,14)(wys − 0,14); WT §57, W-080 ≥ 1/8):", "",
+          "| pomieszczenie | pow. [m²] | okna | A okien [m²] | stosunek | ocena |", "|---|---|---|---|---|---|"]
+    for o in B["okna_podloga"]:
+        L.append(f"| {o['id']} {o['nazwa']} | {fmt(o['A_podl'])} | {', '.join(o['okna'])} | {fmt(o['A_osciez'])} | {o['stosunek']} | {'✓' if o['ok'] else '✗'} |")
+    L += ["", "**Wierność szkicowi** (krawędzie elewacji S od lica zach. bryły B; szkic: brief §1.1, 45,8 px/m):", "",
+          "| element | szkic [m] | model [m] | odchyłka [m] |", "|---|---|---|---|"]
+    for r in B["wiernosc_szkicowi"]:
+        L.append(f"| {r['element']} | {fmt(r['szkic'][0])} … {fmt(r['szkic'][1])} | {fmt(r['model'][0])} … {fmt(r['model'][1])} | {fmt(r['odchylka'])} |")
+    L += ["", "**Zestawienie pomieszczeń** (PN-ISO 9836:2022; h — wysokość w świetle; zaliczenie 100/50/0 % wg W-316):", "",
+          "| nr | pomieszczenie | kategoria | pow. netto [m²] | h [m] | zaliczona [m²] |", "|---|---|---|---|---|---|"]
+    for r in B["pomieszczenia"]:
+        L.append(f"| {r['id']} | {r['nazwa']} | {r['kat']} | {fmt(r['A'])} | {fmt(r['h'])} | {fmt(r['A_zal'])} |")
+    return "\n".join(L)
+
+
+# ------------------------------------------------------------------------------------------------ main
+def wstaw_do_koncepcji(md: str, sciezka: Path):
+    if not sciezka.exists():
+        return False
+    s = sciezka.read_text(encoding="utf-8")
+    a, b = "<!-- BILANS:START -->", "<!-- BILANS:END -->"
+    if a not in s or b not in s:
+        return False
+    i, j = s.index(a) + len(a), s.index(b)
+    blok = ("\n*Blok generowany przez `tools/podglad_modelu.py` z `model/budynek.yaml` + `model/dzialka.yaml` — nie edytować ręcznie.*\n\n"
+            + md + "\n")
+    sciezka.write_text(s[:i] + blok + s[j:], encoding="utf-8")
+    return True
+
+
+def main(argv=None):
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--budynek", default=str(ROOT / "model" / "budynek.yaml"))
+    ap.add_argument("--dzialka", default=str(ROOT / "model" / "dzialka.yaml"))
+    ap.add_argument("--out", default=str(ROOT / "docs" / "20_koncepcja" / "final"))
+    ap.add_argument("--koncepcja", default=str(ROOT / "docs" / "20_koncepcja" / "koncepcja.md"))
+    ap.add_argument("--bez-koncepcji", action="store_true")
+    ap.add_argument("--tylko", default=None, help="lista: rzuty,elewacje,szkic,przekroje,dzialka,bilans")
+    a = ap.parse_args(argv)
+    out = Path(a.out)
+    out.mkdir(parents=True, exist_ok=True)
+    m = load_model(a.budynek, a.dzialka, strict=True)
+    print(f"Model: {len(m.sciany())} ścian, {len(m.otwory())} otworów, {len(m.pomieszczenia())} pomieszczeń; walidacja: "
+          f"{len(m.bledy)} błędów, {len(m.ostrzezenia)} ostrzeżeń")
+    ir = build_ir(m, otoczenie=True, auta=False)
+    co = set((a.tylko or "rzuty,elewacje,szkic,przekroje,dzialka,bilans").split(","))
+    if "rzuty" in co:
+        for k in m.kondygnacje:
+            rzut(m, ir, k.id, out / f"rzut_{k.id}.png")
+    if "elewacje" in co:
+        elewacje(m, ir, out / "elewacje.png")
+    fid = elewacja_szkic(m, ir, out / "elewacja_S_szkic.png") if "szkic" in co else wiernosc(m)[0]
+    if "przekroje" in co:
+        przekroj(m, ir, "x", 6.55, out / "przekroj_AA.png", "Przekrój A-A (przez schody, boks C i bryłę A; widok na wschód)")
+        przekroj(m, ir, "y", 1.50, out / "przekroj_BB.png", "Przekrój B-B (przez wspornik bryły A, strefę dzienną i pas gospodarczy; widok na północ)")
+    wyn = dzialka_png(m, ir, out / "dzialka.png") if "dzialka" in co else odleglosci(m)[0]
+    B = bilans(m, wyn, fid)
+    md = bilans_md(B)
+    (out / "bilans.json").write_text(json.dumps(B, ensure_ascii=False, indent=1, default=str), encoding="utf-8")
+    (out / "bilans.md").write_text("# Dom LAMELA — bilans powierzchni i wskaźniki (generowany z modelu)\n\n" + md + "\n", encoding="utf-8")
+    if not a.bez_koncepcji and wstaw_do_koncepcji(md, Path(a.koncepcja)):
+        print(f"Wstawiono bilans do {a.koncepcja}")
+    w = B["wysokosc"]
+    print(f"PU (W-316) = {B['PU_W316_suma']} m²; zabudowa {B['zabudowa']['m2']} m² ({B['zabudowa']['proc']} %); PBC {B['PBC']['m2']} m² "
+          f"({B['PBC']['proc']} %); intensywność {B['intensywnosc']}; H upzp {w['H_upzp_m']} m; H WT §6 {w['H_WT6_m']} m; "
+          f"maks. odchyłka od szkicu {max(r['odchylka'] for r in fid)} m")
+    print(f"Zapisano: {out}")
+
+
+if __name__ == "__main__":
+    main()

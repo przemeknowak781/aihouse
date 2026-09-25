@@ -207,6 +207,11 @@ Pełna lista: docstring `src/lamela/obliczenia/energia/__init__.py`. Braki są r
   phi, gamma, M0, I_D}, ZWG: -3.8}` (propozycja R5 pkt 3.11).
 * **Posadowienie:** zagłębienie ław/stóp **D ≥ 1,0 m** poniżej terenu (W-284) i ≥ h_z = 0,8 m — sprawdzić przy rzędnych terenu projektowanego;
   alternatywnie płyta fundamentowa na XPS z uzasadnieniem.
-* **Ściany-tarcze i wsporniki tarczowe** (wspornik P2) — biblioteka ich nie liczy (poza jednoprzęsłową tarczą pełną): w PT-BO wymagana osobna analiza
-  (model kratownicowy STM wg PN-EN 1992-1-1 p. 5.6.4/6.5 lub MES tarczowy) — preferuj rozwiązania, które da się zweryfikować (np. belki/podciągi
-  żelbetowe lub stalowe przenoszące wspornik, ograniczenie otworów w tarczach).
+* **Ściany-tarcze i wsporniki tarczowe** (wspornik P2) — moduł `lamela.obliczenia.konstrukcja.tarcze` (MES płaskiego stanu naprężenia +
+  model kratownicowy STM wg PN-EN 1992-1-1 p. 5.6.4/6.5). Ściana jest liczona jako tarcza, gdy ma pole `tarcza: true` albo automatycznie:
+  warstwa konstrukcyjna żelbetowa i pod ścianą brak ciągłej podpory (ściany poniżej bez otworów + słupy < 95 % długości). `tarcza: false`
+  wyłącza. Opcje (słownik): `tarcza: {beton: C30/37, ekspozycja: XC3, siatka: 0.10, tylko_docisk: false}`. Dane pobierane z modelu:
+  oś, z_od/z_do, grubość i materiał warstwy konstrukcyjnej (klasa betonu z nazwy materiału, np. „Żelbet C30/37”), otwory ściany,
+  podpory = współliniowe ściany nośne poniżej (z_do w zakresie z_od − 0,6 … z_od; odcinki bez ich otworów; sztywność k = E·t/h) i słupy
+  pod osią; obciążenia = reakcje płyt nad tarczą (krawędź górna), płyty pod tarczą poza ścianami poniżej (płyta podwieszona — krawędź
+  dolna), ściany wyżej, belki oparte na ścianie. Tarcze podparte wyłącznie na ścianach poprzecznych — poza zakresem (analiza indywidualna).
