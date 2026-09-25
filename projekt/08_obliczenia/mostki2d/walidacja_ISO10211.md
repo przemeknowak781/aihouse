@@ -164,12 +164,12 @@ Pakiet sprawdzili dwaj niezależni weryfikatorzy: (A) numeryczno-fizyczny — w�
 | 2 | szczelina między wielobokami 0,2 µm / 0,1 mm (ściana SIL 18 + EPS 20) | 0,2 µm → U_2D = 0,1459 (1D: 0,1459; przyciąganie do 1 µm); 0,1 mm → ValueError (szczelina wykryta) | **OK** |
 | 5 | podzial(0; 20 m; h = 3 mm) | 6667 komórek, max 3,000 mm (wcześniej OverflowError) | **OK** |
 | 3 | θ_si,min naroża wewn. (h_min 2 mm vs 0,25 mm; odniesienie 10,737 °C) | 10,736 / 10,737 °C (wcześniej 10,810 / 10,747 — środki ścian komórek) | **OK** |
-| 4 | płaskownik stalowy 2 mm przez izolację 0,2 m (półmodel), ψ vs niezależny solver 0,03472 | ψ = 0,03449 (−0,7 %; wcześniej −1,5 % po akceptacji siatki), siatki 2640, 10560, zbieżność Φ i ψ: True | **OK** |
+| 4 | płaskownik stalowy 2 mm przez izolację 0,2 m (półmodel), ψ vs niezależny solver 0,03472 | ψ = 0,03449 (−0,7 %; wcześniej −1,5 % po akceptacji siatki), siatki 2640, 10560, zbieżność Φ i ψ: tak | **OK** |
 | 7 | attyka z warstwą dobrze wentylowaną | ValueError (wariant nieobsługiwany — brak niespójności U/2D) | **OK** |
 
 Wynik punktu G przypadku 2 **zależał od siatki** przed poprawką 1 (tolerancja ± 0,1 K spełniona na siatce walidacyjnej h_min = 0,1 mm częściowo dzięki zaokrągleniu wartości odniesienia 16,3); po poprawce G = 16,334 °C niezależnie od siatki (0,5 mm → 0,025 mm), zgodnie z niezależnym solverem. Odchyłki A (−0,036 K) i B (−0,039 K) są identyczne w obu solverach — wynikają z zaokrąglenia wartości odniesienia.
 
-Wpływ poprawek na katalog (model testowy): f_Rsi zmienia się o ≤ 0,002 (wierzchołki), ψ o ≤ 0,001 W/(m·K) (siatka), cokół WZ-GF1 z B' = 4,74 m: ψ_oi = ψ_i ≈ 0,21 zamiast 0,20 W/(m·K). Wszystkie węzły z ciągłą izolacją spełniają f_Rsi ≥ 0,72; wariant porównawczy WZ-B0 (płyta bez łącznika) — f_Rsi ≈ 0,746 (na granicy, ψ ≈ 0,75 W/(m·K)).
+Wpływ poprawek na katalog (model testowy `model/test/dom_testowy.yaml`, 17 węzłów): f_Rsi zmienia się o ≤ 0,002 (wierzchołki), ψ o ≤ 0,001 W/(m·K) (siatka); cokół WZ-GF1 z B' = 4,74 m: ψ_oi = ψ_i ≈ 0,213 zamiast 0,203 W/(m·K). Nowe węzły: nadproże WZ-N1 ψ_oi ≈ 0,008, z kasetą osłony WZ-N2 ≈ 0,083, podokiennik WZ-P1 ≈ 0,005, próg na gruncie WZ-T1 ≈ 0,21 (f_Rsi ≈ 0,748 — najmniejszy zapas wśród węzłów projektowych), próg na stropie WZ-T2 ≈ 0,023, próg na płycie wspornikowej z łącznikiem WZ-T3 ≈ 0,17 W/(m·K). H_TB modelu testowego = Σ ψ_oi·l_oi ≈ 17,6 W/K (długości oi, tylko otwory w ścianach zewnętrznych); poprzednie 9,28 W/K (ψ_e, inne długości) — nieporównywalne. Wszystkie węzły z ciągłą izolacją spełniają f_Rsi ≥ 0,72; wariant porównawczy WZ-B0 (płyta bez łącznika) — f_Rsi ≈ 0,746, ψ ≈ 0,75 W/(m·K).
 
 ## Źródła danych referencyjnych
 

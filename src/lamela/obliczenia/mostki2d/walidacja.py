@@ -360,7 +360,7 @@ def kontrole_poprawek() -> list[list]:
     d = (w.psi_glowne.psi_e - PSI_FIN_REF) / PSI_FIN_REF
     out.append(["4", "płaskownik stalowy 2 mm przez izolację 0,2 m (półmodel), ψ vs niezależny solver 0,03472",
                 f"ψ = {_f(w.psi_glowne.psi_e, 5)} ({_f(100 * d, 1, znak=True)} %; wcześniej −1,5 % po akceptacji siatki), "
-                f"siatki {', '.join(str(h[1]) for h in w.siatki)}, zbieżność Φ i ψ: {w.zbieznosc_ok}",
+                f"siatki {', '.join(str(h[1]) for h in w.siatki)}, zbieżność Φ i ψ: {'tak' if w.zbieznosc_ok else 'NIE'}",
                 abs(d) < 0.01 and w.zbieznosc_ok])
     # 7 — przegroda wentylowana w attyce → błąd; 'legary' nie są pustką wentylowaną
     wd = [Warstwa(Material("DESKOW", 0.13), 0.025),
@@ -481,8 +481,12 @@ def sekcja_weryfikacji() -> list[str]:
           "walidacyjnej h_min = 0,1 mm częściowo dzięki zaokrągleniu wartości odniesienia 16,3); po poprawce G = "
           "16,334 °C niezależnie od siatki (0,5 mm → 0,025 mm), zgodnie z niezależnym solverem. Odchyłki A (−0,036 K) "
           "i B (−0,039 K) są identyczne w obu solverach — wynikają z zaokrąglenia wartości odniesienia.", "",
-          "Wpływ poprawek na katalog (model testowy): f_Rsi zmienia się o ≤ 0,002 (wierzchołki), ψ o ≤ 0,001 W/(m·K) "
-          "(siatka), cokół WZ-GF1 z B' = 4,74 m: ψ_oi = ψ_i ≈ 0,21 zamiast 0,20 W/(m·K). Wszystkie węzły z ciągłą "
-          "izolacją spełniają f_Rsi ≥ 0,72; wariant porównawczy WZ-B0 (płyta bez łącznika) — f_Rsi ≈ 0,746 "
-          "(na granicy, ψ ≈ 0,75 W/(m·K))."]
+          "Wpływ poprawek na katalog (model testowy `model/test/dom_testowy.yaml`, 17 węzłów): f_Rsi zmienia się o "
+          "≤ 0,002 (wierzchołki), ψ o ≤ 0,001 W/(m·K) (siatka); cokół WZ-GF1 z B' = 4,74 m: ψ_oi = ψ_i ≈ 0,213 "
+          "zamiast 0,203 W/(m·K). Nowe węzły: nadproże WZ-N1 ψ_oi ≈ 0,008, z kasetą osłony WZ-N2 ≈ 0,083, "
+          "podokiennik WZ-P1 ≈ 0,005, próg na gruncie WZ-T1 ≈ 0,21 (f_Rsi ≈ 0,748 — najmniejszy zapas wśród węzłów "
+          "projektowych), próg na stropie WZ-T2 ≈ 0,023, próg na płycie wspornikowej z łącznikiem WZ-T3 ≈ 0,17 W/(m·K). "
+          "H_TB modelu testowego = Σ ψ_oi·l_oi ≈ 17,6 W/K (długości oi, tylko otwory w ścianach zewnętrznych); "
+          "poprzednie 9,28 W/K (ψ_e, inne długości) — nieporównywalne. Wszystkie węzły z ciągłą izolacją spełniają "
+          "f_Rsi ≥ 0,72; wariant porównawczy WZ-B0 (płyta bez łącznika) — f_Rsi ≈ 0,746, ψ ≈ 0,75 W/(m·K)."]
     return L
