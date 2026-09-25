@@ -753,6 +753,16 @@ def _fundamenty(an, D):
                    eta=pz.wykorzystanie, niesp=warunki_niespelnione(pz.wyniki), opis=str(el.get("uwagi") or ""))
         Z.ids = [pp] if pp else []
         D.zebra.append(Z)
+        pl = [Polygon(x["obrys"]) for x in els.values() if "obrys" in x]
+        if pl:
+            from shapely.geometry import LineString as _LS
+            band = _LS(el["os"]).buffer(Z.b / 2, cap_style=2)
+            wyst = band.difference(pl[0].buffer(1e-3)).area
+            if wyst > 0.01:
+                D.braki.append(f"{Z.id}: żebro (b = {Z.b * 100:.0f} cm, oś {el['os']}) wystaje poza obrys płyty "
+                               f"{next(iter(x['id'] for x in els.values() if 'obrys' in x))} o {wyst:.2f} m² w rzucie "
+                               "— niespójność modelu (krawędź płyty a lico żebra); na przekrojach żebro przycięte do "
+                               "lica płyty. Uzgodnić obrys płyty/osie żeber (audyt A2).")
 
 
 # ================================================================================================ agregat

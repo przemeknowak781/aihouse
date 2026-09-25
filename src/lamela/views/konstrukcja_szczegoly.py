@@ -21,7 +21,7 @@ from shapely.ops import unary_union
 from ..draft import dims, elements as E, fmt, hatch as H, symbols as S
 from ..draft.core import Viewport
 from . import konstrukcja_dane as KD
-from .common import Placer, cut_kind, hatch_code, klasa_mat, material_name
+from .common import Placer, clean, cut_kind, hatch_code, klasa_mat, material_name
 
 L_ZBR = "K-ZBROJENIE"
 L_OPI = "K-ZBROJENIE-OPIS"
@@ -213,7 +213,8 @@ def szczegol_fundamentu(ctx, spec, vp, res, placer):
     x_in = -1.3 if not stopa else -(B / 2 + 0.7)
     x_out = x_edge if obw else (-x_in)
     cs = E.CutSet()
-    beton = unary_union([box(x_in, sp_p, x_out, top), box(-B / 2, sp_r, B / 2, sp_p)])
+    # żebro przycięte do lica płyty (model: żebro obwodowe może wystawać poza obrys płyty — zgłaszane w BRAKI_DANYCH)
+    beton = unary_union([box(x_in, sp_p, x_out, top), box(-B / 2, sp_r, min(B / 2, x_out), sp_p)])
     cs.add(beton, "ZELBET", "fund")
     k0 = m.kondygnacje[0].id
     pod = _podloga(m, k0)
@@ -228,7 +229,9 @@ def szczegol_fundamentu(ctx, spec, vp, res, placer):
             sh = sh.difference(box(x_in - 1, sp_p - 1e-6, x_out - 1e-6 if obw else x_out + 1, top + 5))
             sh = sh.intersection(box(x_in, -50, (x_out + w.d + 0.4) if obw else x_out, top))
             hc = hatch_code(m, w.mat)
-            cs.add(sh, hc, cut_kind(hc, klasa_mat(m, w.mat)))
+            sh = clean(sh)
+            if not sh.is_empty:
+                cs.add(sh, hc, cut_kind(hc, klasa_mat(m, w.mat)))
             pod_w.append((w.mat, w.d))
             prev = prev.union(sh)
     t_v = sum(d for mat, d in pod_w[:1])          # izolacja pionowa czoła = pierwsza warstwa pod płytą (XPS)
@@ -271,15 +274,21 @@ def szczegol_fundamentu(ctx, spec, vp, res, placer):
         _urw(vp, (x_wall_in - 0.05, top + 0.7), (x_wall_out + 0.05, top + 0.7))
     # zbrojenie
     _zbrojenie_fund(vp, placer, D, PF, F, e, R, B, sp_r, sp_p, top, x_in, x_out, obw, stopa, u)
-    # wymiary i rzędne
-    ch = sorted({round(v, 4) for v in ([-B / 2, B / 2] + ([x_edge] if obw else []))})
-    dims.dim_h(vp, ch, (sp_r if not obw else min(sp_r, (z_t or sp_r) - 1.0)) - 0.25, None, layer="K-WYMIARY")
+    # wymiary i rzędne (poza obrysem rysunku — łańcuchy pod spodem, rzędne z lewej)
+    z_dn = sp_r - sum(d for _m, d in pod_w) - 0.12
+    if obw and z_t is not None and iz:
+        z_dn = min(z_dn, z_t - float(iz.get("glebokosc", 0.45)) - float(iz.get("d_n", 0.1)) - 0.12)
+    ch = sorted({round(v, 4) for v in [-B / 2, min(B / 2, x_out)] + ([x_edge] if obw else [])})
+    dims.dim_h(vp, ch, z_dn - 0.05, None, layer="K-WYMIARY")
+    if obw and iz:
+        ch2 = [x_edge, x_edge + t_v, x_edge + t_v + float(iz.get("D", 1.0))]
+        dims.dim_h(vp, ch2, z_dn - 0.05 - 7 * vp.k, None, layer="K-WYMIARY")
     zs = sorted({round(v, 4) for v in (sp_r, sp_p, top)})
-    dims.dim_v(vp, zs, x_in - 0.18, None, layer="K-WYMIARY")
+    dims.dim_v(vp, zs, x_in - 0.12, None, layer="K-WYMIARY")
     lv = [(top, "konstr"), (sp_p, "konstr"), (sp_r, "konstr")]
     if pod is not None:
         lv.append((top + sum(w_.d for w_ in pod.warstwy[:pod.idx_konstr]), "wyk"))
-    dims.levels(vp, x_in + 0.05, lv, side="left")
+    dims.levels(vp, x_in - 0.12 - 9 * vp.k, lv, side="left")
     if z_t is not None:
         dims.level_section(vp, (x_out + t_v + float(iz.get("D", 1.0)) + 0.2, z_t), z_t, "wyk", "right")
     nazwa = (f"POGRUBIENIE {eid}" if stopa else f"ŻEBRO {eid}")
@@ -310,12 +319,9 @@ def _zbrojenie_fund(vp, placer, D, PF, F, e, R, B, sp_r, sp_p, top, x_in, x_out,
         z2 = z_lin + sg * 1.5 * fi
         pret_linia(vp, [(x_in, z1), (x_end, z1)])
         rzad_kropek(vp, x_in + 0.05, x_end - 0.02, z2, w.fi, w.s)
-        if gl is not None:
-            opis(vp, placer, (x_in + 0.35, z1), f"{gl.pret.fi and 'Ø' + str(gl.pret.fi)} co {w.s / 10:g}", gl.pret.nr,
-                 "lewo", 9.0 if warstwa == "gora" else -9.0)
-        if gk is not None:
-            opis(vp, placer, (x_in + 0.35 + w.s / 1000.0 * 2, z2), f"Ø{gk.pret.fi} co {w.s / 10:g}", gk.pret.nr,
-                 "lewo", 16.0 if warstwa == "gora" else -16.0)
+        nrs = "/".join(str(g.pret.nr) for g in (gl, gk) if g is not None)
+        opis(vp, placer, (x_in + 0.30, z1), f"poz. {nrs}: siatka {'górna' if warstwa == 'gora' else 'dolna'} "
+             f"Ø{w.fi} co {w.s / 10:g}", None, "prawo", 12.0 if warstwa == "gora" else -12.0, h=1.8)
     if stopa:
         st = PF["stopy"].get(eid)
         S_ = next((s_ for s_ in D.stopy if s_.id == eid), None)

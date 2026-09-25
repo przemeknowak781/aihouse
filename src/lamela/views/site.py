@@ -81,9 +81,14 @@ def _labels_building(lab, s, W, h=D.H):
     c0 = label_point(main)
     cands = [p for p in spiral(c0, 1.2 * k * 2, 6, 8) if inner.contains(Point(p))] or [tuple(c0)]
 
+    c1 = label_point(s.p0)
+    cands = [p for p in spiral(c1, 1.0 * k * 2, 6, 8) if inner.contains(Point(p))] or [tuple(c1)]
+
     def fn(cv, p):
         S.building_label(cv, p, s.zero_abs, rom, h=h, layer="Z-OPISY")
-    lab.pl.place(lab.vp, fn, cands, penalty_step=0.01)
+        cv.text(np.asarray(p) + np.array([0.0, h * 1.6 * k]), "bud. mieszk. jednorodz.", h, 0.0, "center",
+                "baseline", "Z-OPISY")
+    lab.pl.place(lab.vp, fn, cands, penalty_step=0.01, bounds=s.p0.buffer(-1.0 * k))
     return c0
 
 
@@ -176,7 +181,6 @@ def view_plan(ctx, spec, scale, opts):
     used.add("zero")
     lab.area(s.footprint, 3.0)
     _dims_plan(lab, s, used)
-    _label_function(lab, s, c0)
     _labels_project(lab, s, W, used, detail=False)
     if opts.get("podklad", True):
         D.label_base_map(vp, s, lab, win, used, opts, contours=opts.get("warstwice", True))
@@ -287,8 +291,9 @@ def _labels_project(lab, s, W, used, detail=False):
     """Opisy elementów projektu (priorytet przed opisami podkładu)."""
     k = lab.k
     h = D.H
-    R = s.plot.buffer(0.3)
-    L = lambda *a_, **kw: lab.label_in(R, *a_, **kw)   # noqa: E731 — opisy projektu w granicach działki
+    R = s.plot.buffer(0.3) if detail else (lab.bounds.difference(s.droga["pas"].buffer(0.3))
+                                            if lab.bounds is not None and s.droga["pas"] is not None else s.plot)
+    L = lambda *a_, **kw: lab.label_in(R, *a_, **kw)   # noqa: E731 — opisy projektu poza pasem drogowym
     # działka: numer i powierzchnia
     free = s.plot.difference(s.footprint.buffer(4.0)).buffer(-3.0)
     anchor = np.asarray((free if not free.is_empty else s.plot).representative_point().coords[0])
@@ -344,7 +349,8 @@ def _labels_project(lab, s, W, used, detail=False):
         else:
             txt = [o.id]
         if lab.bounds is None or lab.bounds.contains(Point(o.xy)):
-            L(o.xy, txt, h, dot=False, dists=(1.5, 3.0, 5.0, 8.0, 12.0))
+            (L if s.plot.buffer(1.0).contains(Point(o.xy)) else lab.label)(o.xy, txt, h, dot=False,
+                                                                          dists=(1.5, 3.0, 5.0, 8.0, 12.0))
     for b in s.bramy if detail else []:
         nm = "furtka" if b["typ"] == "furtka" else "brama przesuwna"
         L(b["xy"], [f"{nm} {mm(b['szer'])}"], h, dists=(3.0, 5.0, 8.0, 12.0), leader_from=2.5,

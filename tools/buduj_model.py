@@ -745,10 +745,11 @@ SLUPY += [{"id": f"SL{7 + i}", "xy": [r(x), -0.80], "przekroj": "150x1000", "mat
            "uwagi": "bok ramy boksu C (płaskownik w okładzinie) przy krawędzi przeszklenia"} for i, x in enumerate((4.025, 11.195))]
 
 BELKI = [
-    {"id": "B1", "os": [[0.0, 0.0], [xE, 0.0]], "b": 0.25, "h": 1.07, "spod": Z_SPOD_ST1, "mat": "ZB_C30",
-     "uwagi": "podciąg fasady E, odwrócony (+2,78…+3,85 = parapet boksu C); przęsła 2,20/1,90/2,34/2,34/3,22 na SL1–SL4 i ścianach A, E"},
-    {"id": "B2", "os": [[3.85, 0.0], [11.37, 0.0]], "b": 0.25, "h": r(Z_ST2 - Z_RAMA_G[0]), "spod": Z_RAMA_G[0], "mat": "ZB_C30",
-     "uwagi": "nadproże boksu C 25×80, 3 przęsła 2,34 m na słupkach SL5/SL6"},
+    {"id": "B1", "os": [[0.0, 0.0], [xE, 0.0]], "b": 0.18, "h": 1.07, "spod": Z_SPOD_ST1, "mat": "ZB_C30",
+     "uwagi": "podciąg fasady E, odwrócony (+2,78…+3,85 = parapet boksu C), 18 × 107 w licu muru (ETICS ciągły — A2 D-9); "
+              "przęsła 2,20/1,90/2,34/2,34/3,22 na SL1–SL4 i ścianach A, E"},
+    {"id": "B2", "os": [[3.85, 0.0], [11.37, 0.0]], "b": 0.18, "h": r(Z_ST2 - Z_RAMA_G[0]), "spod": Z_RAMA_G[0], "mat": "ZB_C30",
+     "uwagi": "nadproże boksu C 18×80 w licu muru, 3 przęsła 2,34 m na słupkach SL5/SL6"},
     {"id": "B3", "os": [[xA2, 0.0], [xA2, y3]], "b": 0.20, "h": 0.60, "spod": r(Z_ST2 - T_STR), "mat": "ZB_C30",
      "uwagi": "belka krawędziowa ST2 w osi A' (odwrócona, pod parapetem okna O2-04) — niesie lekką ścianę A' i okap PL-2; oparta na końcach B4/B5"},
     {"id": "B4", "os": [[xA2, 0.0], [xB, 0.0]], "b": 0.18, "h": 0.80, "spod": r(Z_ST2 - T_STR), "mat": "ZB_C30",
@@ -763,12 +764,17 @@ BELKI = [
      "uwagi": "podciąg ST1 w osi 3 nad wejściem na schody (C–D, 2,625 m); prześwit nad stopą biegu 1 ≥ 2,30 m"},
     {"id": "B9", "os": [[xC, y3], [xD, y3]], "b": 0.25, "h": 0.50, "spod": r(Z_ST2 - 0.50), "mat": "ZB_C25",
      "uwagi": "podciąg ST2 w osi 3 nad wyjściem ze schodów P1 (C–D)"},
+    {"id": "B10", "os": [[xC, y3], [xD, y3]], "b": 0.25, "h": 0.50, "spod": r(Z_ST3 - 0.50), "mat": "ZB_C25",
+     "uwagi": "podciąg stropodachu D1 w osi 3 (C–D, 2,625 m) oparty na ścianach S2-10 i S2-04 — podpora płyty D1 w przerwie ściany osi 3 "
+              "nad wyjściem z biegu 2 (audyt A2 I-1); zakotwienie ściany środkowej S2-11"},
 ]
-# nadproża otworów ≥ 1,50 m w ścianach murowanych (pozostałe — prefabrykowane nadproża systemowe / wieniec)
+# nadproża wszystkich otworów w ścianach murowanych nośnych/zewnętrznych (audyt A2 D-8); otwór z murem nad nim < 0,12 m — nadprożem
+# jest wieniec/płyta; ścianki działowe — nadproża systemowe (nie modelowane)
 _nadp = 0
 for o in OT:
     s = _SC[o["sciana"]]
-    if s["przegroda"] not in ("SZ1", "SZ2", "SW18", "SWG") or o["szer"] < 1.45 or o["id"] in ("O0-01", "O0-02", "O0-03", "O0-04", "O0-05", "O1-01", "O0-07"):
+    if s["przegroda"] not in ("SZ1", "SZ2", "SW18", "SWG") or o["id"] in ("O0-01", "O0-02", "O0-03", "O0-04", "O0-05", "O1-01", "O1-13", "O1-14",
+                                                                            "O0-07"):
         continue
     kz = {"P0": 0.0, "P1": Z_P1, "P2": Z_P2}[s["kond"]]
     top = kz + o["parapet"] + o["wys"]
@@ -778,7 +784,7 @@ for o in OT:
     (ax, ay), (bx, by) = s["os"]
     L_ = seg_len((ax, ay), (bx, by))
     ux, uy = (bx - ax) / L_, (by - ay) / L_
-    s0, s1 = o["odl"] - 0.20, o["odl"] + o["szer"] + 0.20
+    s0, s1 = max(0.0, o["odl"] - 0.20), min(L_, o["odl"] + o["szer"] + 0.20)
     _nadp += 1
     BELKI.append({"id": f"N{_nadp}", "os": [[r(ax + ux * s0), r(ay + uy * s0)], [r(ax + ux * s1), r(ay + uy * s1)]], "b": 0.18,
                   "h": r(min(0.24, spod_pl - top)), "spod": r(top), "mat": "ZB_C25", "uwagi": f"nadproże otworu {o['id']} ({o['szer']:.2f} m), oparcie 0,20 m"})
@@ -811,10 +817,12 @@ FUND = {"typ": "plyta", "elementy": FUND_EL,
 def schody(sid, z_k, na_k, z0):
     return {"id": sid, "z_kond": z_k, "na_kond": na_k, "liczba_stopni": 2 * N_BIEG, "wys_stopnia": H_ST, "szer_stopnia": S_ST,
             "biegi": [{"start": [r((B1_X0 + B1_X1) / 2), Y_SCH0], "kierunek": [0, 1], "szer": r(B1_X1 - B1_X0), "stopni": N_BIEG},
-                      {"start": [7.82, Y_SPOCZ], "kierunek": [0, -1], "szer": r(B2_X1 - B2_X0), "stopni": N_BIEG}],
+                      {"start": [r((B2_X0 + B2_X1) / 2), Y_SPOCZ], "kierunek": [0, -1], "szer": r(B2_X1 - B2_X0), "stopni": N_BIEG}],
             "spoczniki": [{"obrys": R(XC_e, Y_SPOCZ, XD_w, Y4_i), "rzedna": r(z0 + N_BIEG * H_ST)}],
             "plyta": {"grubosc": 0.18}, "mat": "ZB_C25",
-            "uwagi": "płyty biegów ŻB 18 cm oparte na ścianach C/D i ściance środkowej; stopnie dębowe; prześwit nad biegiem ≈ 2,75 m (≥ 2,00)"}
+            "uwagi": "płyty biegów ŻB 18 cm: dolny koniec na stropie/podciągu osi 3 (B8/B9/B10 — P0/P1/P2), górny na płycie spocznika; spocznik "
+                     "na ścianach C/D i ścianie środkowej ŻB 15 (monolitycznie, A2 I-2); stopnie dębowe; biegi 1,135 / 1,130 m w świetle ścian, "
+                     "prześwit nad biegiem ≥ 2,00"}
 
 
 SCHODY = [schody("SCH1", "P0", "P1", 0.0), schody("SCH2", "P1", "P2", Z_P1)]
@@ -835,11 +843,11 @@ def pochwyty(z0, n):
 BALUSTRADY = pochwyty(0.0, 1) + pochwyty(Z_P1, 2)
 
 LAMELE = [
-    {"id": "LAM-S", "elewacja": "S", "linia": [[X2o, -EXT], [xE + EXT, -EXT]], "z_od": Z_OKAP_2[1], "z_do": Z_OKAP_3[0], "rozstaw": 0.12, "b": 0.04,
+    {"id": "LAM-S", "elewacja": "S", "linia": [[X2o - 0.15, -EXT], [xE + EXT + 0.15, -EXT]], "z_od": Z_OKAP_2[1], "z_do": Z_OKAP_3[0], "rozstaw": 0.12, "b": 0.04,
      "h": 0.08, "odsuniecie": 0.15, "mat": "DREWNO_TERMO", "uwagi": "bryła A — pionowe lamele na 2 ryglach, konsole z przekładką (χ); stała osłona okien P2"},
-    {"id": "LAM-W", "elewacja": "W", "linia": [[X2o, -EXT], [X2o, y3 + EXT]], "z_od": Z_OKAP_2[1], "z_do": Z_OKAP_3[0], "rozstaw": 0.12, "b": 0.04,
+    {"id": "LAM-W", "elewacja": "W", "linia": [[X2o, -EXT - 0.15], [X2o, y3 + EXT]], "z_od": Z_OKAP_2[1], "z_do": Z_OKAP_3[0], "rozstaw": 0.12, "b": 0.04,
      "h": 0.08, "odsuniecie": 0.15, "mat": "DREWNO_TERMO", "uwagi": "czoło wspornika bryły A"},
-    {"id": "LAM-E", "elewacja": "E", "linia": [[xE + EXT, -EXT], [xE + EXT, y3 + EXT]], "z_od": 6.20, "z_do": Z_OKAP_3[0], "rozstaw": 0.12, "b": 0.04,
+    {"id": "LAM-E", "elewacja": "E", "linia": [[xE + EXT, -EXT - 0.15], [xE + EXT, y3 + EXT]], "z_od": Z_OKAP_2[1], "z_do": Z_OKAP_3[0], "rozstaw": 0.12, "b": 0.04,
      "h": 0.08, "odsuniecie": 0.15, "mat": "DREWNO_TERMO", "uwagi": "czoło wsch. bryły A"},
     {"id": "LAM-P0", "elewacja": "S", "linia": [[5.90, 3.80], [8.70, 3.80]], "z_od": 0.0, "z_do": 2.10, "rozstaw": 0.10, "b": 0.03, "h": 0.06,
      "odsuniecie": 0.0, "mat": "DAB_LAMELA", "uwagi": "ekran wewnętrzny P0 wydzielający pas komunikacyjny przy schodach (przeszczep J1 z W3)"},
@@ -985,20 +993,26 @@ WEZLY = [
      "dlugosc": r(4 * 3.15 + 2 * 3.15 + 4 * 3.15 + 6 * 3.00, 2)},
     {"id": "WZ-13", "nazwa": "Konsole rusztu lamel (przekładka termiczna)", "typ": "konsola_lamel", "przegrody": ["SZ2", "SZL"],
      "liczba": int(round(2 * (13.6 + 2 * (y3 + 2 * EXT)) / 1.0))},
-    {"id": "WZ-14", "nazwa": "Konsole ramy boksu C i pasa D (punktowe, przekładka termiczna)", "typ": "kotwa", "przegrody": ["SZ1"], "liczba": 10},
+    {"id": "WZ-14", "nazwa": "Konsole ramy boksu C i linii D (PL-C1/PL-C2/PL-D; punktowe, przekładka termiczna)", "typ": "kotwa", "przegrody": ["SZ1"],
+     "liczba": 17},
     {"id": "WZ-15", "nazwa": "Przejścia instalacji przez przegrody zewnętrzne (wywiewka K1, czerpnia, wyrzutnia, PC, wpusty, przyłącza)",
      "typ": "przejscie_instalacji", "przegrody": ["SD1", "DZ1", "SZ1", "POD-0"], "liczba": 16},
     {"id": "WZ-16", "nazwa": "Belki wspornikowe B4/B5 i belka B3 w linii izolacji wspornika bryły A (ciągłość wełny pod ST2Z)",
      "typ": "strop_zewn_krawedz", "przegrody": ["SZ1", "SZL", "SUF-ZEW"], "dlugosc": r(2 * (xA - xA2), 2)},
 ]
 
+CZERPNIA = [11.60, 1.00, 10.00]      # [x, y, z dolnej krawędzi wlotu] — audyt A1 (WT §152 ust. 4, 10)
+WYRZUTNIA = [1.90, 4.00, 10.00]     # [x, y, z wylotu] — 3,00 m od krawędzi konstrukcji D1 nad O2-04, 10,15 m od czerpni
 ENERGIA = {
     "n50": 1.0, "osoby": 5, "pojemnosc": "ciezka", "chlodzenie": False, "psi_wariant": "domyslna",
     "grunt": {"typ": "piasek", "lambda": 2.0, "izolacja_obwodowa": {"typ": "pozioma", "D": 1.0, "d_n": 0.10, "lam_n": 0.036}},
-    "wentylacja": {"centrala": "RVU_450", "czerpnia": [11.40, 1.00, 9.95], "wyrzutnia": [1.80, 3.00, 10.00], "wyrzut": "pionowy",
+    "wentylacja": {"centrala": "RVU_450", "czerpnia": CZERPNIA, "wyrzutnia": WYRZUTNIA, "wyrzut": "pionowy",
                    "zestaw_zblokowany": False, "wywiewki_kanalizacyjne": [[5.57, 6.20]], "rzedna_terenu": -0.25,
-                   "uwagi": "czerpnia i wyrzutnia dachowe ≥ 0,40 m nad pokryciem; czerpnia ≥ 6 m od wywiewki K1 (7,8 m) i ≥ 6 m od wyrzutni "
-                            "(9,8 m); wyrzutnia ≥ 3 m od krawędzi dachu (W-166, W-167); K2 zakończony zaworem napowietrzającym (W-139)"},
+                   "uwagi": "po audycie A1: czerpnia (11,60; 1,00) i wyrzutnia (1,90; 4,00) — odległość 10,15 m ≥ 10,00 m (WT §152 ust. 10, "
+                            "bez wymogu różnicy wysokości); dolna krawędź wlotu czerpni i wylot wyrzutni +10,00 ≥ pokrycie lokalne z klinem "
+                            "+ 0,40 (W-166); czerpnia 7,96 m od wywiewki K1 (≥ 6 m); wyrzutnia 3,00 m od krawędzi konstrukcji dachu nad "
+                            "oknem O2-04 (3,20 m od lica) i ≥ 4 m od krawędzi pd.; SW1 — świetlik stały (W-167 ust. 12 — okna otwierane); "
+                            "wysokość zabudowy bez zmian (≤ 11,0 m, MPZP); K2 zakończony zaworem napowietrzającym (W-139)"},
     "ogrzewanie": {"zrodlo": "PC_R290_monoblok", "temp_zasilania": 35,
                    "uwagi": "PC powietrze–woda monoblok R290 (W-155), moduł hydrauliczny w pom. 0.12; ogrzewanie podłogowe z regulacją pokojową (W-152)"},
     "cwu": {"zasobnik": "Z250", "V_projekt_dm3": 300, "cyrkulacja": False,
@@ -1216,8 +1230,9 @@ DZIALKA = {
     "bramy": [{"xy": [23.10, 50.0], "szer": 5.60, "typ": "przesuwna", "kierunek": [1.0, 0.0], "wys": 1.50},
               {"xy": [18.10, 50.0], "szer": 1.00, "typ": "furtka", "wys": 1.50}],
     "miejsca_postojowe": [
-        {"id": "MP1", "obrys": Rd(12.40, 3.20, 15.10, 9.10), "typ": "garaz"},
-        {"id": "MP2", "obrys": Rd(15.30, 3.20, 18.00, 9.10), "typ": "garaz"},
+        # stanowiska 2,50 × 5,90 (A1): MP1 0,30 od lica S0-16 (x 12,22), MP2 0,30 od frontu szafy na rowery (x 17,87) i 0,70 od lica S0-03
+        {"id": "MP1", "obrys": Rd(12.52, 3.20, 15.02, 9.10), "typ": "garaz"},
+        {"id": "MP2", "obrys": Rd(15.07, 3.20, 17.57, 9.10), "typ": "garaz"},
         {"id": "MP3", "obrys": Rd(12.90, 11.90, 15.40, 16.90), "typ": "zewn", "auto": False},
         {"id": "MP4", "obrys": Rd(15.60, 11.90, 18.10, 16.90), "typ": "zewn", "auto": False},
     ],
@@ -1251,12 +1266,16 @@ DZIALKA.update({
             {"branza": "kan_deszcz", "linia": [[26.40, 41.75], [27.20, 41.75], [27.20, 28.20], [ZBIORNIK[0], 28.20], ZBIORNIK],
              "opis": "kolektor KD-E PVC 160 (RS5 dach garażu, RS6 z pom. technicznego)", "dl": 31.6},
             {"branza": "kan_deszcz", "linia": [ZBIORNIK, [10.60, 22.00], d(4.00, -13.00)], "opis": "przelew zbiornika DN160 do niecki chłonnej", "dl": 6.2},
+            {"branza": "kan_deszcz", "linia": [d(xF + EXT - 0.2, 10.30), d(19.80, 10.30), d(20.60, 9.00)],
+             "opis": "OL-1 (i OL-4 kanałem wzdłuż podjazdu) → separator SEP-1 → niecka NT-E (PVC 160)", "dl": 2.9},
         ],
         "obiekty": [
             {"id": "ZKP", "xy": [19.40, 49.80], "opis": "złącze kablowo-pomiarowe we wnęce ogrodzenia, PWP przy wejściu (W-190)"},
             {"id": "SR1", "xy": [13.00, 43.80], "opis": "studzienka rewizyjna kanalizacji Ø425 (poza garażem — W-118)"},
             {"id": "PC-JZ", "xy": d(16.80, -1.05), "opis": "jednostka zewn. PC monoblok R290 w osłonie lamelowej z ekranem akustycznym od tarasu; "
              "7,0 m od granicy E (≥ 6,0 — W-024); strefa R290 1,0 m bez otworów, wpustów i studzienek (W-156)"},
+            {"id": "SEP-1", "xy": d(19.80, 10.30), "opis": "osadnik z separatorem substancji ropopochodnych (mini, klasa I, PN-EN 858) dla OL-1/OL-4 "
+             "(podjazd, posadzka garażu); odpływ do niecki NT-E, poza zbiornikiem retencyjnym (audyt A1, W-114)"},
             {"id": "SK-PC", "xy": d(16.80, -2.90), "opis": "studnia chłonna skroplin PC (żwir, ≥ 0,8 m p.p.t.), poza strefą R290 (W-146)"},
             {"id": "HYDR", "xy": [-30.0, 56.0], "opis": "najbliższy hydrant zewnętrzny DN80 (ul. Lipowa) — zaopatrzenie ppoż. (W-217) [do potwierdzenia]"},
         ],
@@ -1268,14 +1287,15 @@ DZIALKA.update({
                         "opis": "niecka chłonna (ogród deszczowy) 24 m², głęb. 0,30 m, ≥ 3,0 m od fundamentów, ≥ 2,0 m od granic, ≥ 1,0 m od drzew (W-144)"},
     },
     "odwodnienia": [
-        {"id": "OL-1", "typ": "liniowe", "linia": [d(xE + EXT + 0.2, 10.30), d(xF + EXT - 0.2, 10.30)], "spadek": 0.005, "odbiornik": "KD-E",
-         "opis": "odwodnienie liniowe przed bramą garażu (W-019)"},
+        {"id": "OL-1", "typ": "liniowe", "linia": [d(xE + EXT + 0.2, 10.30), d(xF + EXT - 0.2, 10.30)], "spadek": 0.005, "odbiornik": "SEP-1 → NT-E",
+         "opis": "odwodnienie liniowe przed bramą garażu (W-019); woda z posadzki garażu i podjazdu (węglowodory) przez osadnik-separator SEP-1 "
+                 "do niecki trawiastej NT-E — NIE do zbiornika retencyjnego (audyt A1)"},
         {"id": "OL-2", "typ": "liniowe", "linia": [d(0.30, -EXT - 0.10), d(11.70, -EXT - 0.10)], "spadek": 0.005, "odbiornik": "opaska / KD-W",
          "opis": "odwodnienie liniowe przy progach HS (bezprogowe) pod deską tarasu"},
         {"id": "OL-2W", "typ": "liniowe", "linia": [d(-EXT - 0.10, 1.10), d(-EXT - 0.10, 3.70)], "spadek": 0.005, "odbiornik": "KD-W",
          "opis": "odwodnienie liniowe przy HS zach."},
         {"id": "OL-3", "typ": "liniowe", "linia": [d(9.50, 10.40), d(11.60, 10.40)], "spadek": 0.005, "odbiornik": "KD-W", "opis": "odwodnienie liniowe podestu wejścia"},
-        {"id": "OL-4", "typ": "liniowe", "linia": [d(xE + EXT + 0.2, 16.90), d(xF + EXT - 0.2, 16.90)], "spadek": 0.005, "odbiornik": "KD-E",
+        {"id": "OL-4", "typ": "liniowe", "linia": [d(xE + EXT + 0.2, 16.90), d(xF + EXT - 0.2, 16.90)], "spadek": 0.005, "odbiornik": "SEP-1 → NT-E",
          "opis": "odwodnienie liniowe przy bramie wjazdowej — woda nie spływa na drogę (MPZP, u.d.p. art. 39)"},
         {"id": "OZ-1", "typ": "opaska_zwirowa", "obrys": [[r(x + T_DZ[0], 3), r(y + T_DZ[1], 3)] for x, y in
                                                           list(Polygon(OB_P0).buffer(0.5, join_style=2).exterior.coords)[:-1]],
@@ -1305,7 +1325,7 @@ def F(kond, typ, xy, obrot, wym, **kw):
 XBS = XC_w     # lico wsch. łazienek pionu SI (5,77)
 WYP = [
     # ---- P0
-    F("P0", "szafa", (XE_i, 7.67), 180, (1.90, 0.60), opis="szafa wiatrołapu"),
+    F("P0", "szafa", (XE_i, 7.36), 180, (1.28, 0.60), opis="szafa wiatrołapu (y 6,72–8,00 — doświetle FX3 odsłonięte, A2 D-4)"),
     F("P0", "szafa", (XE_i, 5.89), 180, (1.30, 0.60), opis="szafa wejściowa"),
     F("P0", "wc", (9.20, Y4_i), -90, (0.40, 0.60)), F("P0", "umywalka", (XD_e, 7.60), 0, (0.45, 0.30)),
     F("P0", "prysznic", (XB_i := xB + INT, 8.10), 0, (1.00, 0.90)), F("P0", "wc", (XBS, 7.20), 180, (0.40, 0.60)),
@@ -1319,7 +1339,7 @@ WYP = [
     F("P0", "zlew", (XE_i, 2.60), 180, (0.80, 0.50)), F("P0", "zmywarka", (XE_i, 1.90), 180, (0.60, 0.58)),
     F("P0", "plyta", (9.80, 2.70), 90, (0.80, 0.52), opis="płyta indukcyjna na wyspie"),
     F("P0", "lodowka", (XE_i, 4.60), 180, (0.60, 0.65)), F("P0", "urzadzenie", (XE_i, 3.90), 180, (0.60, 0.60), opis="piekarnik + mikrofala w słupku"),
-    F("P0", "szafa", (XD_w, 6.20), 180, (1.60, 0.40), opis="regały spiżarni"),
+    F("P0", "szafa", (XD_w, 6.80), 180, (1.20, 0.40), opis="regały spiżarni / schowka (y 6,20–7,40 — poza skrzydłem O0-17, A2 D-1)"),
     F("P0", "szafa", (xE + INT, 2.00), 0, (1.40, 0.60), opis="szafa przedsionka (odzież, obuwie)"),
     F("P0", "szafa", (14.00, Y1_i), 90, (1.30, 0.35), opis="szafka na obuwie"),
     F("P0", "pompa_ciepla", (15.60, y2 - INT), -90, (0.60, 0.40), opis="moduł hydrauliczny PC R290 (monoblok zewn.)"),
@@ -1329,7 +1349,8 @@ WYP = [
     F("P0", "urzadzenie", (xF - INT, 1.20), 180, (0.40, 0.20), opis="wodomierz + zawór antyskażeniowy (PN-EN 1717)"),
     F("P0", "urzadzenie", (16.00, Y1_i), 90, (0.80, 0.15), opis="rozdzielacz ogrzewania podłogowego P0"),
     F("P0", "zlew", (xF - INT, 2.20), 180, (0.50, 0.40), opis="zlewik gospodarczy"),
-    F("P0", "szafa", (xF - INT, 8.00), 180, (2.40, 0.60), opis="rowery i sprzęt ogrodowy — strefa przednia przy ścianie osi F (przeszczep J1)"),
+    F("P0", "szafa", (xF - INT, 7.65), 180, (2.40, 0.40), opis="rowery i sprzęt ogrodowy — szafa płytka 0,40 przy ścianie osi F, y 6,45–8,85 "
+                                                              "(poza prowadnicami bramy — A2 D-5); stanowisko MP2 ≥ 0,30 m od szafy"),
     # ---- P1
     F("P1", "lozko", (xB - FD, 1.20), 180, (0.90, 2.00)), F("P1", "biurko", (XA_i, 1.90), 0, (1.40, 0.70)),
     F("P1", "szafa", (1.20, yH - FD), -90, (1.80, 0.60)),
@@ -1361,7 +1382,7 @@ INSTAL = {
         "RG": [xP + FD + 0.1, 0.90, "P0"], "wodomierz": [xF - INT - 0.1, 1.20, "P0"], "zasobnik": [16.55, 2.40, "P0"],
         "rozdzielacze_co": {"P0": [16.00, 0.30], "P1": [11.80, 4.40], "P2": [8.35, 1.30]},
         "ZKP": [r(19.40 - T_DZ[0]), r(49.80 - T_DZ[1])], "studzienka": [r(13.00 - T_DZ[0]), r(43.80 - T_DZ[1])],
-        "czerpnia": [11.40, 1.00, 9.95], "wyrzutnia": [1.80, 3.00, 10.00],
+        "czerpnia": CZERPNIA, "wyrzutnia": WYRZUTNIA,
         "pompa_ciepla_jz": {"xy": [16.80, -1.05], "ustawienie": "wolnostojaca", "odl_granica_E": 7.0},
     },
     "piony": [{"id": "K1", "xy": [5.57, 6.20], "opis": "pion kanalizacyjny Ø110 w SI, wywiewka ponad dach D1"},

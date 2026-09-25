@@ -11,8 +11,8 @@ instalacje:
       P2: [8.35, 1.3]
     ZKP: [11.8, 17.1]
     studzienka: [5.4, 11.1]
-    czerpnia: [11.4, 1.0, 9.95]
-    wyrzutnia: [1.8, 3.0, 10.0]
+    czerpnia: [11.6, 1.0, 10.0]
+    wyrzutnia: [1.9, 4.0, 10.0]
     pompa_ciepla_jz:
       xy: [16.8, -1.05]
       ustawienie: wolnostojaca

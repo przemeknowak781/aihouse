@@ -340,7 +340,7 @@ def label_base_map(c, s, lab: Labeler, win: Polygon, used: set, opts: dict, spot
             lab.label(anchors, [f"{sx.lit} — {short}"], H, "Z-SIECI-IST", color=sx.kolor,
                       dists=(6.0, 9.0, 12.0, 16.0, 20.0, 25.0), dirs=[(0, 1), (1, 1), (-1, 1), (0, -1), (1, -1),
                                                                        (-1, -1)],
-                      leader_from=2.0, dot=True, max_cost=20.0)
+                      leader_from=2.0, dot=True, max_cost=40.0)
     if contours:
         bb = win.bounds
         for pts, Hh in s.contours(bb):

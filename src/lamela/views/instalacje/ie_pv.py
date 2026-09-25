@@ -101,3 +101,253 @@ class RysPV(RysE):
         if obst:
             pole = pole.difference(unary_union(obst))
         return d, pole
+
+    def dach_pv(self):
+        pv = self.W.pv
+        vp = self.vp
+        d, pole = self._pole()
+        if d is None:
+            self.brak("PV — dach", "brak dachu wskazanego w obliczeniach PV", "")
+            return
+        mod = pv.par.modul
+        n = int(pv.n_mod)
+        mods = uklad_modulow(pole, n, float(mod["dl"]), float(mod["szer"]), pv.wariant)
+        if len(mods) < n:
+            self.brak("PV — rozmieszczenie modułów", f"w polu użytkowym dachu {d.get('id')} zmieszczono {len(mods)} z {n} "
+                      "modułów (odsunięcia od krawędzi, otworów, czerpni/wyrzutni)", "energia.pv.pole: [[x, y], …] "
+                      "(jawne pole montażu) lub zmiana liczby modułów")
+        # łańcuchy
+        ln = pv.lancuchy or {}
+        n_str = int(ln.get("n_str", 1) or 1)
+        per = [n // n_str + (1 if i < n % n_str else 0) for i in range(n_str)]
+        order = sorted(range(len(mods)), key=lambda i: (round(mods[i][0].bounds[0], 1), mods[i][0].bounds[1]))
+        idx = 0
+        for si, cnt in enumerate(per):
+            grp = [order[j] for j in range(idx, min(idx + cnt, len(order)))]
+            idx += cnt
+            cs = []
+            for gi in grp:
+                r, side = mods[gi]
+                n0 = len(vp.prims)
+                vp.geom(r, "E-PV", pen="cienka", lt="CIAGLA")
+                x0, y0, x1, y1 = r.bounds
+                if side in ("E", "W"):
+                    xr = x1 if side == "W" else x0          # grzbiet (krawędź wyższa) po stronie środka pary
+                    vp.line((xr, y0), (xr, y1), "E-PV", pen="srednia", lt="CIAGLA")
+                vp.text(r.centroid.coords[0], f"{si + 1}.{len(cs) + 1}", 1.8, 0.0, "center", "middle", "E-PV")
+                self.reg(n0)
+                cs.append(np.asarray(r.centroid.coords[0]))
+            if len(cs) > 1:
+                vp.polyline(np.array(cs), "E-PV", pen="b_cienka", lt="KRESKOWA_DROBNA")
+            if cs:
+                self.tag(cs[0], [f"łańcuch S{si + 1}: {len(cs)} × {num(mod['P'], 0)} Wp"], "E-OPISY", style="bold")
+        # trasa DC: od pola PV do krawędzi dachu najbliżej falownika (RG), dalej po elewacji / dachu niższym
+        rg = self.W.obwody.rg_xy
+        if mods and rg is not None:
+            c = np.mean([np.asarray(r.centroid.coords[0]) for r, _s in mods], axis=0)
+            poly = Polygon(d["obrys"])
+            tgt = np.asarray(rg[:2], float)
+            path = self.g.route(c, tgt, "DC", turn=0.5, margin=10.0)
+            self.pipe(path, "WZ", layer="E-PV", pen="srednia", lt="KRESKOWA")
+            dc = pv.dc or {}
+            self.label(path, f"trasa DC: 2 × 2 × H1Z2Z2-K 1×{num(pv.par.s_DC, 0)} mm² w korycie/rurze metalowej, "
+                       f"L ≈ {num(dc.get('L', 0), 1)} m, ∆U = {num(dc.get('dU', 0), 2)} %", "E-OPISY")
+            self.tag(tgt, [f"{BRAK} przepust DC do pom. technicznego (falownik przy RG) — trasa proponowana"],
+                     "I-BRAKI", color="#b0008a")
+            self.brak("PV — trasa DC", "brak w modelu trasy przewodów DC i przepustu dachowego — przyjęto trasę po "
+                      "dachach (poza drogami ewakuacyjnymi) do pom. technicznego", "energia.pv.trasa_dc: [[x, y, z], …], "
+                      "przepust: [x, y]")
+        self.leg.sym(lambda c, p: (c.rect(p[0] - 5, p[1] - 3, p[0] + 5, p[1] + 3, "E-PV", pen="cienka", lt="CIAGLA"),
+                                   c.line((p[0] + 5, p[1] - 3), (p[0] + 5, p[1] + 3), "E-PV", pen="srednia",
+                                          lt="CIAGLA")),
+                     "moduł PV (wymiar rzeczywisty, układ wschód–zachód 10°; linia gruba — krawędź wyższa); "
+                     "<łańcuch>.<nr>")
+        self.leg.line("E-PV", "trasa przewodów DC (H1Z2Z2-K) w korytach/rurach metalowych", lt="KRESKOWA")
+
+    def parter_pv(self):
+        pv = self.W.pv
+        rg = self.rg()
+        if rg is None:
+            return
+        e = next((e for e in self.W.dane.wyposazenie if "rozdzielnica" in str(e.get("opis", "")).lower()), None)
+        from ...draft.geom import dir_deg, perp
+        rot = float(e.get("obrot", 90))
+        q = rg - perp(dir_deg(rot)) * 0.8 + dir_deg(rot) * 0.15
+        self.sym(_box, q, "FAL", w_mm=7.0, layer="E-PV")
+        dc = pv.dc or {}
+        fal = pv.par.falownik
+        self.tag(q, [f"falownik {fal.get('model', '')} (dane przykładowe, lub równoważny): P_AC = "
+                     f"{num(fal.get('P_AC', 0), 1)} kW, {fal.get('n_mppt', 2)} MPPT",
+                     str(dc.get("SPD", "SPD DC typ 2"))[:90], str(dc.get("rozlacznik", "rozłącznik DC"))[:90]],
+                     "E-OPISY", style="bold")
+        q2 = q + dir_deg(rot) * 0.6
+        self.sym(S.riser, q2, None, "WZ", s_mm=2.4)
+        self.tag(q2, ["DC ↓ z dachu (przepust przez strop D4, rura metalowa) — trasa wg arkusza PV dachu"],
+                 "E-OPISY")
+        path = self.g.route(q2, q, "DC")
+        self.pipe(path, "WZ", layer="E-PV", pen="srednia", lt="KRESKOWA")
+        path = self.g.route(q, rg, "AC")
+        self.pipe(path, "WZ", layer="E-TRASY", pen="cienka", lt="CIAGLA")
+        o = next((o for o in self.obw if o.odb.grupa == "pv"), None)
+        if o is not None:
+            self.circuit_tag((q + rg) / 2, o.odb.id, f"AC {o.przewod}, {o.zab}, {o.odb.rcd.split(' (')[0]}")
+        # tabliczki ostrzegawcze PWP / DC
+        self.notes.append("Przy RG, przycisku PWP i falowniku — tabliczki ostrzegawcze: „instalacja PV — strona DC pod "
+                          "napięciem po wyłączeniu PWP” (WT § 183, PN-HD 60364-7-712).")
+        self.leg.sym(lambda c, p: _box(c, p, "FAL", w_mm=7.0, layer="E-PV"), "falownik PV (SPD DC typ 2, rozłącznik DC)")
+        self.leg.sym(lambda c, p: S.riser(c, p, None, "WZ", s_mm=2.4), "przepust / pion przewodów DC")
+
+    def opisy(self):
+        pv = self.W.pv
+        ln = pv.lancuchy or {}
+        self.notes += [
+            "Instalacja fotowoltaiczna wg PN-HD 60364-7-712, PN-EN 62446-1 (dokumentacja, badania), WT § 184 i "
+            f"art. 29 ust. 4 pkt 3 lit. c PB (moc ≤ 6,5 kWp): {pv.n_mod} × {num(pv.par.modul['P'], 0)} Wp = "
+            f"{num(pv.P_kWp, 2)} kWp, układ {pv.wariant}, E ≈ {num(pv.E_y, 0)} kWh/a (PVGIS; obliczenia lamela.obliczenia."
+            "elektryka.pv).",
+            f"Łańcuchy: {ln.get('n_str', '?')} × do {ln.get('Ns', '?')} modułów; U_oc,max = {num(ln.get('Uoc_max', 0), 0)} V, "
+            f"U_mpp {num(ln.get('Umpp_min', 0), 0)}–{num(ln.get('Umpp_max', 0), 0)} V, I_sc = {num(ln.get('I_sc', 0), 1)} A "
+            "(obliczenia) — sprawdzić z DTR wybranych modułów i falownika (dane przykładowe, lub równoważne).",
+            "Rozmieszczenie modułów wyznaczono algorytmicznie w polu użytkowym dachu (odsunięcie ≥ 1,0 m od krawędzi, "
+            "odstępy od otworów, wpustów, czerpni, wyrzutni i wywiewek); konstrukcja balastowa niskoprofilowa — "
+            "górna krawędź ≤ wierzchu attyki; obciążenia i balast wg PN-EN 1991-1-4 (projekt konstrukcji).",
+            "Konstrukcję wsporczą PV połączyć z GSU przewodem wyrównawczym ≥ 6 mm² Cu (712.444.5.5.101); odstęp "
+            "separacyjny od ewentualnych zwodów wg PN-EN IEC 62305-3.",
+        ]
+        bad = [w for w in pv.warunki if w.ok is False]
+        for w in bad[:3]:
+            self.notes.append(f"SPRAWDZENIE NIESPEŁNIONE (obliczenia): {w.opis} ({w.podstawa}) — do korekty.")
+        if self.dach:
+            rows = [["moduły", f"{pv.n_mod} × {pv.par.modul['model']}"], ["moc", f"{num(pv.P_kWp, 2)} kWp"],
+                    ["falownik", pv.par.falownik.get("model", "")], ["energia roczna", f"{num(pv.E_y, 0)} kWh/a"],
+                    ["pole dachu / użytkowe", f"{num(pv.dach['A'], 1)} / {num(pv.dach['A_uz'], 1)} m²"]]
+            self.res.column_blocks.append(("pv", table_block("WYNIKI OBLICZEŃ — PV (lamela.obliczenia.elektryka.pv)",
+                                                             [("Wielkość", 60), ("Wartość", 120)], rows,
+                                                             align=["left", "left"])))
+
+
+# ================================================================================================ IE-U
+class RysU(RysE):
+    kod = "IE-U"
+
+    def run(self):
+        if self.dach:
+            self.podklad()
+            self.siatka(extra_pts=[], sciany=0.0, przy_scianie=1.0, poza=0.0)
+            self.obw = self.W.obwody.obwody
+            self.circuits_used = set()
+            self.dach_u()
+        else:
+            self.prepare()
+            self.parter_u()
+        self.opisy()
+        return self.finish(rooms=not self.dach)
+
+    def _otok(self):
+        og = self.W.odgromowa
+        ob = unary_union([self.m.obrys_kondygnacji(self.kids[0])])
+        off = float(getattr(og.par, "otok_odsuniecie", 1.0))
+        ring = ob.buffer(off, join_style=2)
+        ring = max(polygons_of(ring), key=lambda g: g.area)
+        return ring, off
+
+    def parter_u(self):
+        og = self.W.odgromowa
+        vp = self.vp
+        uz = og.uziom or {}
+        ring, off = self._otok()
+        otok = "otokow" in str(uz.get("typ", "")).lower()
+        n0 = len(vp.prims)
+        if otok:
+            vp.polygon(np.asarray(ring.exterior.coords)[:-1], "E-ODGROM", pen="gruba", lt="CIAGLA")
+        else:
+            ob = self.m.obrys_kondygnacji(self.kids[0]).buffer(-0.35, join_style=2)
+            vp.polygon(np.asarray(max(polygons_of(ob), key=lambda g: g.area).exterior.coords)[:-1], "E-ODGROM",
+                       pen="gruba", lt="KRESKOWA")
+        self.reg(n0)
+        self.label(np.asarray(ring.exterior.coords), f"uziom {'otokowy' if otok else 'fundamentowy'}: "
+                   f"{str(uz.get('material', ''))[:70]}", "E-OPISY")
+        self.leg.line("E-ODGROM", f"uziom {'otokowy w gruncie (≥ 0,5 m p.p.t., ≥ 1,0 m od ścian)' if otok else 'fundamentowy'}"
+                      f" — R_obl ≈ {num(uz.get('R', 0), 1)} Ω", pen="gruba", lt="CIAGLA")
+        # wyprowadzenia w narożnikach
+        cs = np.asarray(ring.exterior.coords)[:-1]
+        x0, y0, x1, y1 = ring.bounds
+        corners = []
+        for tgt in ((x0, y0), (x1, y0), (x1, y1), (x0, y1)):
+            corners.append(min(cs, key=lambda p: abs(p[0] - tgt[0]) + abs(p[1] - tgt[1])))
+        for q in corners:
+            self.sym(S.earth, q, -90.0, s_mm=3.0)
+        self.tag(corners[0], ["wyprowadzenia uziomu w narożnikach — złącza kontrolne (rezerwa pod przewody "
+                              "odprowadzające LPS, h = 0,5 m nad terenem)"], "E-OPISY")
+        # GSU i połączenia wyrównawcze
+        rg = self.rg()
+        if rg is None:
+            return
+        gsu = rg + np.array([0.0, 0.45])
+        self.sym(_box, gsu, "GSU", w_mm=6.0, layer="E-ODGROM")
+        near = min(cs, key=lambda p: abs(p[0] - gsu[0]) + abs(p[1] - gsu[1]))
+        path = self.g.route(near, gsu, "PE", margin=4.0)
+        self.pipe(path, "WZ", layer="E-ODGROM", pen="srednia", lt="CIAGLA")
+        self.label(path, "przewód uziemiający ≥ 16 mm² Cu (W-188)", "E-OPISY")
+        lok = self.W.dane.inst.get("lokalizacje") or {}
+        cele = [("wodomierz", "wodociąg (mostek na wodomierzu)"), ("zasobnik", "zasobnik, bufor, rury c.o./c.w.u.")]
+        for key, txt in cele:
+            if lok.get(key) and (len(lok[key]) < 3 or str(lok[key][2]) == self.kid):
+                q = np.asarray(lok[key][:2], float)
+                p2 = self.g.route(gsu, q, "PE", margin=4.0)
+                self.pipe(p2, "WZ", layer="E-ODGROM", pen="cienka", lt="CIAGLA")
+                self.tag(q, [f"połączenie wyrównawcze ≥ 6 mm² Cu — {txt}"], "E-OPISY")
+        tech = self.room_at(rg)
+        self.tag(gsu, ["GSU — główna szyna uziemiająca: PE z RG, uziom, zbrojenie płyty, wodociąg, c.o., RACK, "
+                       "kanały went., konstrukcja PV (PN-HD 60364-5-54, WT § 183 ust. 1a)"], "E-OPISY", style="bold")
+        self.leg.sym(lambda c, p: _box(c, p, "GSU", w_mm=6.0, layer="E-ODGROM"), "GSU — główna szyna uziemiająca")
+        self.leg.sym(lambda c, p: S.earth(c, p + np.array([0, 1.5]), -90.0, s_mm=3.0),
+                     "wyprowadzenie uziomu / złącze kontrolne (PN-EN 60617 02-15-01)")
+        rows = [[a, b, c] for a, b, c in og.wyrownawcze]
+        self.res.column_blocks.append(("wyr", table_block(
+            "POŁĄCZENIA WYRÓWNAWCZE (obliczenia — lamela.obliczenia.elektryka.odgromowa)",
+            [("Element", 70), ("Miejsce", 50), ("Przewód / uwagi", 60)], rows, align=["left", "left", "left"])))
+
+    def dach_u(self):
+        og = self.W.odgromowa
+        lps = "NIEWYMAGANY" not in str(og.decyzja).upper()
+        vp = self.vp
+        if lps:
+            info = og.lps or {}
+            for d in self.m.dachy():
+                poly = Polygon(d["obrys"]).buffer(-0.12, join_style=2)
+                n0 = len(vp.prims)
+                vp.polygon(np.asarray(poly.exterior.coords)[:-1], "E-ODGROM", pen="srednia", lt="CIAGLA")
+                self.reg(n0)
+            self.tag(np.asarray(Polygon(self.m.dachy()[0]["obrys"]).exterior.coords[0]),
+                     [f"LPS klasy {info.get('klasa', 'IV')}: zwody na attykach, oczka {info.get('oczko', '')}, "
+                      f"przewody odprowadzające {info.get('n_odpr', {}).get(info.get('klasa', 'IV'), 3)} szt."],
+                     "E-OPISY", style="bold")
+            self.leg.line("E-ODGROM", "zwody poziome LPS na attykach (PN-EN IEC 62305-3)", pen="srednia", lt="CIAGLA")
+        # połączenie konstrukcji PV
+        d, pole = RysPV._pole(self)
+        if d is not None and pole is not None and not pole.is_empty:
+            c = np.asarray(pole.representative_point().coords[0])
+            rg = self.W.obwody.rg_xy
+            if rg is not None:
+                path = self.g.route(c, np.asarray(rg[:2], float), "PE", margin=10.0)
+                self.pipe(path, "WZ", layer="E-ODGROM", pen="cienka", lt="KRESKOWA")
+                self.label(path, "przewód wyrównawczy konstrukcji PV ≥ 6 mm² Cu do GSU (712.444)", "E-OPISY")
+            self.tag(c, [f"konstrukcja PV — {'w strefie ochronnej LPS, odstęp s ≥ ' + num(og.lps['s'], 2) + ' m' if lps else 'uziemienie funkcjonalne (jeden punkt)'}"],
+                     "E-OPISY")
+        self.leg.line("E-ODGROM", "przewód wyrównawczy (konstrukcja PV → GSU)", pen="cienka", lt="KRESKOWA")
+
+    def opisy(self):
+        og = self.W.odgromowa
+        self.notes += [
+            f"Ochrona odgromowa — analiza ryzyka wg PN-EN IEC 62305-2 (obliczenia lamela.obliczenia.elektryka.odgromowa): "
+            f"A_D = {num(og.A_D, 0)} m², N_D = {num(og.N_D, 4)} 1/a; decyzja: {og.decyzja}. Ochrona przepięciowa: "
+            "SPD T1+T2 w RG, SPD DC przy falowniku (WT § 184, PN-HD 60364-4-443/-5-534).",
+            f"Uziom: {og.uziom.get('typ', '')}; R ≈ {num(og.uziom.get('R', 0), 1)} Ω (ρ = {num(og.par.rho_gruntu, 0)} Ωm) — "
+            "pomiar rezystancji po wykonaniu; połączenia w gruncie zgrzewane/zaciskowe z ochroną antykorozyjną "
+            "(PN-EN 62561-1/-2).",
+            "Połączenia wyrównawcze główne i miejscowe wg PN-HD 60364-4-41 p. 411.3.1.2 i PN-HD 60364-5-54; "
+            "w łazienkach — wg PN-HD 60364-7-701 (przy rurach z tworzyw zwykle niewymagane).",
+            "Przebiegi przewodów wyznaczono algorytmicznie (uziom — obrys parteru odsunięty o wartość z obliczeń); "
+            "wyprowadzenia i miejsca złączy — do koordynacji z projektem konstrukcji i PZT.",
+        ]
