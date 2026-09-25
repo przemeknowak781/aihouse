@@ -95,3 +95,17 @@ Lista generowana automatycznie przez `lamela.views.konstrukcja` z: (1) braków z
 - ST2Z / nad podporą S1-03 — góra y (poz. 2.2): A_s,prov = 2513 < max(A_s,req; A_s,min) = 28097 mm²/m Zbrojenie na zginanie (η = 2475%); Rysy: średnica prętów (tabl. 7.2N) (η = 1600000000%)
 - PL-2 / wspornik — góra y (poz. 3.1): A_s,prov = 2513 < max(A_s,req; A_s,min) = 8770 mm²/m Zbrojenie na zginanie (η = 1426%); Rysy: średnica prętów (tabl. 7.2N) (η = 1600000000%)
 - B9 / dołem (przęsło) (poz. 5.8): Nośność krzyżulców betonowych (η = 103%); Nośność strzemion (η = 142%); 8Ø12 nie mieści się w jednej warstwie przy b = 25 cm (odstęp w świetle ≥ 21 mm — 8.2(2))
+- N-O1-10 / dołem (przęsło) (poz. 6.27): Nośność strzemion (η = 167%); 4Ø16 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2))
+- N-O0-18 / dołem (przęsło) (poz. 6.17): Nośność krzyżulców betonowych (η = 101%); Nośność strzemion (η = 179%); 6Ø16 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2))
+- N-O0-18 / górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) (poz. 6.17): A_s,prov = 157 < max(A_s,req; A_s,min) = 181 mm² 
+- N-O0-02 / dołem (przęsło) (poz. 6.2): Nośność krzyżulców betonowych (η = 114%); Nośność strzemion (η = 200%); 5Ø20 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2))
+- N-O0-02 / górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) (poz. 6.2): A_s,prov = 157 < max(A_s,req; A_s,min) = 236 mm² 
+- N-O0-01 / dołem (przęsło) (poz. 6.1): Nośność krzyżulców betonowych (η = 541%); Nośność strzemion (η = 954%); 24Ø20 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2)); A_s > A_s,max = 1584
+- N-O0-01 / górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) (poz. 6.1): A_s,prov = 157 < max(A_s,req; A_s,min) = 1131 mm² 
+- N-O0-03 / dołem (przęsło) (poz. 6.3): 5Ø14 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2))
+- N-O0-04 / dołem (przęsło) (poz. 6.4): 7Ø10 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2))
+- N-O1-13 / dołem (przęsło) (poz. 6.30): 4Ø14 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2))
+- N-O1-01 / dołem (przęsło) (poz. 6.20): 7Ø10 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2))
+- N-O0-11 / dołem (przęsło) (poz. 6.11): Ugięcie długotrwałe (quasi-stała) ≤ L/250 (η = 159%); 6Ø14 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2))
+- N-O0-05 / dołem (przęsło) (poz. 6.5): Ugięcie długotrwałe (quasi-stała) ≤ L/250 (η = 207%); 5Ø16 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2))
+- N-O0-07 / dołem (przęsło) (poz. 6.7): Ugięcie długotrwałe (quasi-stała) ≤ L/250 (η = 220%); 7Ø10 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2))

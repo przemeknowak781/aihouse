@@ -2,7 +2,7 @@
 
 Plik generowany automatycznie przez `lamela.views.konstrukcja` (moduł `konstrukcja_dane.rejestruj`) przy rysowaniu arkuszy. A_s,req, A_s,min — z obiektów wyników biblioteki `lamela.obliczenia.konstrukcja` (pozycje obliczeń statycznych); A_s,prov — zbrojenie NARYSOWANE na arkuszach (φ/s lub n·φ). Warunki: PN-EN 1992-1-1 6.1, 9.2.1.1(1) (9.1N) + NA, 9.2.1.1(3) (A_s,max = 0,04·A_c), 9.3.1.1(3) (s_max).
 
-**Wynik: 220/241 pozycji spełnia warunek A_s,prov ≥ A_s,req** (21 niespełnionych — kolumna „Uwagi”).
+**Wynik: 272/307 pozycji spełnia warunek A_s,prov ≥ A_s,req** (35 niespełnionych — kolumna „Uwagi”).
 
 | Element | Miejsce | Poz. obl. | A_s,req | A_s,min | A_s,prov | Jedn. | Zbrojenie | Zapas | Wynik | Arkusze | Uwagi |
 |---|---|---|---:|---:|---:|---|---|---:|---|---|---|
@@ -90,6 +90,72 @@ Plik generowany automatycznie przez `lamela.views.konstrukcja` (moduł `konstruk
 | D4 | pole P3 — naroże (dół y) | 1.4 | 196 | 270 | 279 | mm²/m | Ø8 co 18 | +3% | ✓ | PT-BO-08 | Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 240%); Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 207%) |
 | D4 | pole P3 — naroże (góra x) | 1.4 | 196 | 270 | 279 | mm²/m | Ø8 co 18 | +3% | ✓ | PT-BO-09 | Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 240%); Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 207%) |
 | D4 | pole P3 — naroże (góra y) | 1.4 | 196 | 270 | 279 | mm²/m | Ø8 co 18 | +3% | ✓ | PT-BO-09 | Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 240%); Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 207%) |
+| N-O0-01 | dołem (przęsło) | 6.1 | 7482 | 44 | 7540 | mm² | 24Ø20 | +1% | ✗ | PT-BO-19 | Nośność krzyżulców betonowych (η = 541%); Nośność strzemion (η = 954%); 24Ø20 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2)); A_s > A_s,max = 1584 |
+| N-O0-01 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.1 | 1131 | 0 | 157 | mm² | 2Ø10 | -86% | ✗ | PT-BO-19 |  |
+| N-O0-02 | dołem (przęsło) | 6.2 | 1553 | 44 | 1571 | mm² | 5Ø20 | +1% | ✗ | PT-BO-19 | Nośność krzyżulców betonowych (η = 114%); Nośność strzemion (η = 200%); 5Ø20 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2)) |
+| N-O0-02 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.2 | 236 | 0 | 157 | mm² | 2Ø10 | -33% | ✗ | PT-BO-19 |  |
+| N-O0-03 | dołem (przęsło) | 6.3 | 716 | 44 | 770 | mm² | 5Ø14 | +8% | ✗ | PT-BO-19 | 5Ø14 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2)) |
+| N-O0-03 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.3 | 116 | 0 | 157 | mm² | 2Ø10 | +36% | ✓ | PT-BO-19 |  |
+| N-O0-04 | dołem (przęsło) | 6.4 | 490 | 44 | 550 | mm² | 7Ø10 | +12% | ✗ | PT-BO-20 | 7Ø10 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2)) |
+| N-O0-04 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.4 | 82 | 0 | 157 | mm² | 2Ø10 | +90% | ✓ | PT-BO-20 |  |
+| N-O0-05 | dołem (przęsło) | 6.5 | 975 | 44 | 1005 | mm² | 5Ø16 | +3% | ✗ | PT-BO-20 | Ugięcie długotrwałe (quasi-stała) ≤ L/250 (η = 207%); 5Ø16 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2)) |
+| N-O0-05 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.5 | 151 | 0 | 157 | mm² | 2Ø10 | +4% | ✓ | PT-BO-20 |  |
+| N-O0-06 | dołem (przęsło) | 6.6 | 7 | 49 | 157 | mm² | 2Ø10 | +218% | ✓ | PT-BO-18 |  |
+| N-O0-06 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.6 | 24 | 0 | 157 | mm² | 2Ø10 | +567% | ✓ | PT-BO-18 |  |
+| N-O0-07 | dołem (przęsło) | 6.7 | 475 | 52 | 550 | mm² | 7Ø10 | +16% | ✗ | PT-BO-20 | Ugięcie długotrwałe (quasi-stała) ≤ L/250 (η = 220%); 7Ø10 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2)) |
+| N-O0-07 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.7 | 82 | 0 | 157 | mm² | 2Ø10 | +90% | ✓ | PT-BO-20 |  |
+| N-O0-08 | dołem (przęsło) | 6.8 | 47 | 52 | 157 | mm² | 2Ø10 | +203% | ✓ | PT-BO-19 |  |
+| N-O0-08 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.8 | 24 | 0 | 157 | mm² | 2Ø10 | +567% | ✓ | PT-BO-19 |  |
+| N-O0-09 | dołem (przęsło) | 6.9 | 64 | 52 | 157 | mm² | 2Ø10 | +147% | ✓ | PT-BO-19 |  |
+| N-O0-09 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.9 | 24 | 0 | 157 | mm² | 2Ø10 | +567% | ✓ | PT-BO-19 |  |
+| N-O0-10 | dołem (przęsło) | 6.10 | 6 | 52 | 157 | mm² | 2Ø10 | +203% | ✓ | PT-BO-18 |  |
+| N-O0-10 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.10 | 24 | 0 | 157 | mm² | 2Ø10 | +567% | ✓ | PT-BO-18 |  |
+| N-O0-11 | dołem (przęsło) | 6.11 | 854 | 44 | 924 | mm² | 6Ø14 | +8% | ✗ | PT-BO-20 | Ugięcie długotrwałe (quasi-stała) ≤ L/250 (η = 159%); 6Ø14 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2)) |
+| N-O0-11 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.11 | 138 | 0 | 157 | mm² | 2Ø10 | +13% | ✓ | PT-BO-20 |  |
+| N-O0-12 | dołem (przęsło) | 6.12 | 112 | 52 | 157 | mm² | 2Ø10 | +40% | ✓ | PT-BO-19 |  |
+| N-O0-12 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.12 | 24 | 0 | 157 | mm² | 2Ø10 | +567% | ✓ | PT-BO-19 |  |
+| N-O0-13 | dołem (przęsło) | 6.13 | 21 | 52 | 157 | mm² | 2Ø10 | +203% | ✓ | PT-BO-18 |  |
+| N-O0-13 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.13 | 24 | 0 | 157 | mm² | 2Ø10 | +567% | ✓ | PT-BO-18 |  |
+| N-O0-14 | dołem (przęsło) | 6.14 | 274 | 52 | 308 | mm² | 2Ø14 | +12% | ✓ | PT-BO-18 |  |
+| N-O0-14 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.14 | 46 | 0 | 157 | mm² | 2Ø10 | +240% | ✓ | PT-BO-18 |  |
+| N-O0-15 | dołem (przęsło) | 6.15 | 63 | 52 | 157 | mm² | 2Ø10 | +148% | ✓ | PT-BO-18 |  |
+| N-O0-15 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.15 | 24 | 0 | 157 | mm² | 2Ø10 | +567% | ✓ | PT-BO-18 |  |
+| N-O0-17 | dołem (przęsło) | 6.16 | 133 | 52 | 157 | mm² | 2Ø10 | +18% | ✓ | PT-BO-18 |  |
+| N-O0-17 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.16 | 24 | 0 | 157 | mm² | 2Ø10 | +567% | ✓ | PT-BO-18 |  |
+| N-O0-18 | dołem (przęsło) | 6.17 | 1158 | 52 | 1206 | mm² | 6Ø16 | +4% | ✗ | PT-BO-19 | Nośność krzyżulców betonowych (η = 101%); Nośność strzemion (η = 179%); 6Ø16 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2)) |
+| N-O0-18 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.17 | 181 | 0 | 157 | mm² | 2Ø10 | -13% | ✗ | PT-BO-19 |  |
+| N-O0-21 | dołem (przęsło) | 6.18 | 244 | 52 | 308 | mm² | 2Ø14 | +26% | ✓ | PT-BO-18 |  |
+| N-O0-21 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.18 | 46 | 0 | 157 | mm² | 2Ø10 | +240% | ✓ | PT-BO-18 |  |
+| N-O0-22 | dołem (przęsło) | 6.19 | 58 | 52 | 157 | mm² | 2Ø10 | +171% | ✓ | PT-BO-18 |  |
+| N-O0-22 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.19 | 24 | 0 | 157 | mm² | 2Ø10 | +567% | ✓ | PT-BO-18 |  |
+| N-O1-01 | dołem (przęsło) | 6.20 | 494 | 52 | 550 | mm² | 7Ø10 | +11% | ✗ | PT-BO-20 | 7Ø10 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2)) |
+| N-O1-01 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.20 | 82 | 0 | 157 | mm² | 2Ø10 | +90% | ✓ | PT-BO-20 |  |
+| N-O1-02 | dołem (przęsło) | 6.21 | 204 | 52 | 226 | mm² | 2Ø12 | +11% | ✓ | PT-BO-19 |  |
+| N-O1-02 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.21 | 34 | 0 | 157 | mm² | 2Ø10 | +363% | ✓ | PT-BO-19 |  |
+| N-O1-03 | dołem (przęsło) | 6.22 | 34 | 52 | 157 | mm² | 2Ø10 | +203% | ✓ | PT-BO-18 |  |
+| N-O1-03 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.22 | 24 | 0 | 157 | mm² | 2Ø10 | +567% | ✓ | PT-BO-18 |  |
+| N-O1-04 | dołem (przęsło) | 6.23 | 37 | 52 | 157 | mm² | 2Ø10 | +203% | ✓ | PT-BO-19 |  |
+| N-O1-04 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.23 | 24 | 0 | 157 | mm² | 2Ø10 | +567% | ✓ | PT-BO-19 |  |
+| N-O1-09 | dołem (przęsło) | 6.26 | 422 | 52 | 452 | mm² | 4Ø12 | +7% | ✓ | PT-BO-18 |  |
+| N-O1-09 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.26 | 68 | 0 | 157 | mm² | 2Ø10 | +132% | ✓ | PT-BO-18 |  |
+| N-O1-10 | dołem (przęsło) | 6.27 | 798 | 52 | 804 | mm² | 4Ø16 | +1% | ✗ | PT-BO-18 | Nośność strzemion (η = 167%); 4Ø16 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2)) |
+| N-O1-10 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.27 | 121 | 0 | 157 | mm² | 2Ø10 | +30% | ✓ | PT-BO-18 |  |
+| N-O1-11 | dołem (przęsło) | 6.28 | 624 | 52 | 628 | mm² | 2Ø20 | +1% | ✓ | PT-BO-18 |  |
+| N-O1-11 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.28 | 94 | 0 | 157 | mm² | 2Ø10 | +67% | ✓ | PT-BO-18 |  |
+| N-O1-12 | dołem (przęsło) | 6.29 | 162 | 52 | 226 | mm² | 2Ø12 | +39% | ✓ | PT-BO-18 |  |
+| N-O1-12 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.29 | 34 | 0 | 157 | mm² | 2Ø10 | +363% | ✓ | PT-BO-18 |  |
+| N-O1-13 | dołem (przęsło) | 6.30 | 610 | 52 | 616 | mm² | 4Ø14 | +1% | ✗ | PT-BO-20 | 4Ø14 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2)) |
+| N-O1-13 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.30 | 92 | 0 | 157 | mm² | 2Ø10 | +70% | ✓ | PT-BO-20 |  |
+| N-O1-14 | dołem (przęsło) | 6.31 | 279 | 52 | 308 | mm² | 2Ø14 | +10% | ✓ | PT-BO-20 |  |
+| N-O1-14 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.31 | 46 | 0 | 157 | mm² | 2Ø10 | +240% | ✓ | PT-BO-20 |  |
+| N-O2-04 | dołem (przęsło) | 6.35 | 56 | 98 | 157 | mm² | 2Ø10 | +60% | ✓ | PT-BO-20 |  |
+| N-O2-04 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.35 | 24 | 0 | 157 | mm² | 2Ø10 | +567% | ✓ | PT-BO-20 |  |
+| N-O2-06 | dołem (przęsło) | 6.37 | 17 | 52 | 157 | mm² | 2Ø10 | +203% | ✓ | PT-BO-18 |  |
+| N-O2-06 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.37 | 24 | 0 | 157 | mm² | 2Ø10 | +567% | ✓ | PT-BO-18 |  |
+| N-O2-07 | dołem (przęsło) | 6.38 | 31 | 52 | 157 | mm² | 2Ø10 | +203% | ✓ | PT-BO-19 |  |
+| N-O2-07 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.38 | 24 | 0 | 157 | mm² | 2Ø10 | +567% | ✓ | PT-BO-19 |  |
+| N-O2-10 | dołem (przęsło) | 6.39 | 276 | 52 | 308 | mm² | 2Ø14 | +12% | ✓ | PT-BO-18 |  |
+| N-O2-10 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 6.39 | 46 | 0 | 157 | mm² | 2Ø10 | +240% | ✓ | PT-BO-18 |  |
 | N15 | dołem (przęsło) | 5.9 | 10 | 121 | 226 | mm² | 2Ø12 | +86% | ✓ | PT-BO-17 |  |
 | N15 | górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) | 5.9 | 34 | 0 | 226 | mm² | 2Ø12 | +567% | ✓ | PT-BO-17 |  |
 | N16 | dołem (przęsło) | 5.10 | 170 | 121 | 226 | mm² | 2Ø12 | +34% | ✓ | PT-BO-17 |  |
