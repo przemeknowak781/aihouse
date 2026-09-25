@@ -164,3 +164,106 @@ Sprzeczności między rejestrami (wybrano wartość zweryfikowaną lub bezpieczn
 | S-11 | koniec okresu art. 102a: 19.03 vs 20.03.2028 | 19.03.2028 |
 | S-12 | numeracja: model P0/„0.01” vs PN-B-01025 (parter = 1) | model bez zmian; na rysunkach 1/2/3 i `1.01…` (W-314) |
 | S-13 | PU: próg PN-ISO 9836 (1,90 m) vs RPB §20 (2,20/1,40 m) | do PU wg RPB (W-316) |
+
+---
+
+## B. Wymagania projektowe
+
+Kolumna „Podstawa” podaje akt/normę z jednostką redakcyjną, a w nawiasie kwadratowym identyfikatory w rejestrach domenowych. „WT” = stosowane na podstawie art. 102a PB (A.1).
+
+### B.1 Usytuowanie i działka
+
+| ID | Wymaganie | Podstawa | Gdzie | Sprawdzenie |
+|---|---|---|---|---|
+| W-001 | Ściana z oknami lub drzwiami ≥ **4,00 m** od granicy działki; **każda płaszczyzna uskoku/załamania = odrębna ściana** (bryły „S”, wspornik A, boks C wymiarować osobno) | WT §12 ust. 1 pkt 1 i część wspólna (Dz.U. 2023 poz. 2442, 2024 poz. 726), zał. 1a [R3 U-01; R8-18] | PZT, PAB | AUD-PZT |
+| W-002 | Ściana bez okien i drzwi ≥ **3,00 m** od granicy | WT §12 ust. 1 pkt 2 [R3 U-01] | PZT | AUD-PZT |
+| W-003 | Ściana nierównoległa do granicy 3,00–4,00 m tylko przy krawędzi okna/drzwi ≥ 4,00 m — w projekcie nie korzystamy (ściany równoległe) | WT §12 ust. 1a [R3 U-02; R8-18] | PZT | KR |
+| W-004 | Okap, gzyms, balkon, daszek nad wejściem, taras, schody zewnętrzne, rampa, pochylnia ≥ **1,50 m** od granicy; okno w dachu ≥ 4,00 m. Płyty wysunięte 0,8–1,2 m (płyta P0 na zachód ≈ 1,5 m) traktowane jak okapy/gzymsy [INT] | WT §12 ust. 6 pkt 1–2 [R3 U-04; R8-19] | PZT | AUD-PZT |
+| W-005 | Od granicy z działką drogową (1KDD) odległości z §12 nie obowiązują — obowiązuje linia zabudowy (W-006) | WT §12 ust. 10 [R3 U-05] | PZT | KR |
+| W-006 | Nieprzekraczalna linia zabudowy **6,00 m** od linii rozgraniczającej 1KDD; zalecenie: **żaden element** (płyty, daszek wejścia, schody) jej nie przekracza | MPZP 3MN; upzp art. 15 ust. 2 pkt 6 [R8-09, R8 3.1] [PROG] | PZT | AUD-PZT |
+| W-007 | Obiekt ≥ **6,0 m** od zewnętrznej krawędzi jezdni drogi gminnej (teren zabudowy; poza nim 15 m) | u.d.p. art. 43 ust. 1 tab. lp. 3 lit. c [R8-44] | PZT | AUD-PZT |
+| W-008 | Przesłanianie: w poziomym kącie **60°** od osi okna pomieszczenia na pobyt ludzi brak obiektu (także części własnego budynku, garażu) bliżej niż jego wysokość przesłaniania (mierzona od dolnej krawędzi najniższego okna) | WT §13 ust. 1–2 [R3 U-07; R8-20] | PZT, PAB | AUD-WT |
+| W-009 | Nasłonecznienie pokoi ≥ **3 h** w dniach równonocy w godz. **7:00–17:00** (mieszkanie wielopokojowe: ≥ 1 pokój); sprawdzić też okna sąsiadów E/W (obszar oddziaływania) | WT §60 ust. 1–2 [R3 U-08; R8-21] | PAB, OPIS | SUN |
+| W-010 | Odległość ścian budynków ZL–ZL ≥ **8,0 m** (+50 % / +100 % przy ścianie lub dachu rozprzestrzeniającym ogień); ściany i dach **NRO**; sąsiedzi ≥ 8 m od granic + LAMELA ≥ 4 m ⇒ ≥ 12 m; ryzyko §271 ust. 4–5 — D-03 | WT §271 ust. 1–2 [R3 P-09, P-10; R8-31] | PZT, PAB | AUD-PZT |
+| W-011 | Od granicy działki niezabudowanej (S, teren rolny R) dom ze ścianami i dachem NRO sytuuje się jak w §12; odległości od lasu nie dotyczą | WT §272 ust. 2; §271 ust. 8–8a [R3 P-11, P-12] | PZT | KR |
+| W-012 | Obszar oddziaływania **w całości na działce 123/4**; PZT wskazuje przepisy: WT §12, 13, 19, 23, 28–29, 60, 271; u.d.p. art. 43; POŚ art. 144 ust. 2 z Dz.U. 2014 poz. 112; PW art. 234; MPZP | PB art. 3 pkt 20, art. 20 ust. 1 pkt 1c, art. 34 ust. 3 pkt 1 lit. e; RPB §14 pkt 8, §18 [R1-09; R2 Z10; R8-46, R8 3.6] | PZT (opis) | KR |
+| W-013 | Dojazd: jezdnia ≥ **3,00 m** (zalecane 5,0–6,0 m przed garażem); nawierzchnia dla pojazdów do 2,5 t | WT §14 ust. 1, §15 ust. 2 [R3 Z-01, Z-03; R8-22] | PZT | AUD-PZT |
+| W-014 | Stanowisko postojowe **2,50 × 5,00 m**, nawierzchnia utwardzona lub gruntowa stabilizowana, ze spadkiem | WT §21 ust. 1 pkt 1, ust. 3 [R3 Z-08; R8-23] | PZT | AUD-PZT |
+| W-015 | Miejsca gościnne: maks. **2 niezadaszone** przy budynku (zwolnienie z 7 m od okien); **≥ 3,00 m od granic E i W**; przy granicy z 1KDD odległość niewymagana | WT §19 ust. 1 pkt 1 lit. a, ust. 2 pkt 1 lit. a, ust. 5–7 [R3 Z-06, Z-07; R8-24] | PZT | AUD-PZT |
+| W-016 | Miejsce na pojemniki do segregacji (osłona), utwardzone dojście do miejsca odbioru; odległości od okien i granic nieokreślone (zabudowa jednorodzinna) | WT §22 ust. 1–3, §23 ust. 4 [R3 Z-09, Z-10; R8-25] | PZT | KR |
+| W-017 | Ogrodzenie bez ostrych zakończeń i drutu kolczastego poniżej **1,80 m**; brama i furtka nie otwierają się na zewnątrz działki (brama przesuwna); brama ≥ **2,40 m** (zalecane ≥ 4,0 m), furtka ≥ **0,90 m** w świetle | WT §41 ust. 1–2, §42 ust. 1, §43 [R3 Z-15…Z-17; R8-28] | PZT | AUD-PZT |
+| W-018 | Wody opadowe na własny teren nieutwardzony, do dołów chłonnych lub zbiorników retencyjnych (budynek niski, brak sieci); zakaz zmiany spływu na działki sąsiednie i odprowadzania na drogę / do rowu | WT §28 ust. 2, §29; PW art. 234 ust. 1; u.d.p. art. 39 ust. 1 pkt 9; MPZP [R3 Z-12; R8-27, R8-58] | PZT, PT-IS | KR |
+| W-019 | Teren ze spadkiem od budynku (≥ 2 % [ZAŁ]); na granicach E, W, S rzędne projektowane = istniejące; podjazd ze spadkiem ku działce, odwodnienie liniowe przed bramą | WT §316 ust. 2; PW art. 234; u.d.p. art. 39 [R3 Z-18; R8 3.5] | PZT | AUD-PZT |
+| W-020 | Zjazd: decyzja zarządcy drogi o lokalizacji zjazdu (załącznik wniosku o PnB; wygasa po **3 latach** bez budowy); parametry wg decyzji (założenie: jezdnia zjazdu 5,00 m [ZAŁ]); poza koronami drzew przydrożnych | u.d.p. art. 29 ust. 1, 3, 3a, 5; art. 39 ust. 1 pkt 12; rozp. Dz.U. 2022 poz. 1518 §54–56 [R1-38; R8-42, R8-44b] | PZT, WN | DOK |
+| W-021 | Możliwość przyłączenia do sieci wodociągowej, kanalizacyjnej, elektroenergetycznej; indywidualne źródło ciepła (PC) równorzędne z siecią ciepłowniczą | WT §26 ust. 1–2 [R3 Z-11; R8-26] | PZT, PAB | KR |
+| W-022 | PZT na aktualnej **mapie do celów projektowych** (klauzula urzędowa albo oświadczenie geodety), 1:500, PL-2000 strefa 6 (18°E), PL-EVRF2007-NH; budynek ≤ 4 m od granicy (bez danych I grupy) ⇒ pomiar punktów granicznych — zalecane lica ścian ≥ **4,50 m** od granic E/W | PB art. 34 ust. 3 pkt 1, art. 34b; PGiK art. 2 pkt 7a, 12b; rozp. Dz.U. 2022 poz. 1670 §31–33 [R2 Z11; R8-32…R8-38] | PZT | DOK |
+| W-023 | Drzewa: osoba fizyczna, cel niegospodarczy — bez zezwolenia, ale **zgłoszenie** przy obwodzie na wys. 5 cm > **80 / 65 / 50 cm** (oględziny 21 dni, sprzeciw 14 dni); prace przy drzewach zachowywanych w sposób najmniej szkodliwy | u.o.p. art. 83f ust. 1 pkt 3, 3a, ust. 4–8; art. 87a [R8-48…R8-50] | PZT | KR |
+| W-024 | Hałas na granicy działek MN (E, W): L_Aeq,D ≤ **50 dB** (6:00–22:00), L_Aeq,N ≤ **40 dB** (22:00–6:00); cel ≤ **35 dB(A)** nocą [ZAŁ]; jednostka PC ≥ **6,0 m** od granicy E [ZAŁ], nie pod oknami sypialni | rozp. MŚ, t.j. Dz.U. 2014 poz. 112, tab. 1 lp. 2a; POŚ art. 112a, 144 ust. 2 [R3 H-11; R6-72, R6-73; R8-51…R8-53, R8 3.4] | PZT, PT-IS | OBL-IS |
+| W-025 | Decyzja o wyłączeniu gruntów z produkcji rolnej tylko dla klas I–IIIb i IV–VI organicznych (przed PnB, załącznik wniosku); bez opłat do 0,05 ha. Założono RIVb/RV mineralne ⇒ nie dotyczy | u.o.g.r.l. art. 11 ust. 1, 4, 4a; art. 12a pkt 1 [R8-61, R8-62] | WN | DOK |
+| W-026 | DŚU niewymagana (zabudowa mieszkaniowa w MPZP od 2/4 ha; garaże od 0,5/1,0 ha pow. użytkowej) — adnotacja w opisie | rozp. RM Dz.U. 2019 poz. 1839 §3 ust. 1 pkt 55 lit. a, pkt 58 [R8-63] | OPIS | KR |
+
+### B.2 Wskaźniki MPZP (fikcyjny MPZP, uchwała XII/123/2024, teren 3MN; działka 1600,00 m²)
+
+| ID | Wymaganie | Podstawa | Gdzie | Sprawdzenie |
+|---|---|---|---|---|
+| W-030 | Udział powierzchni zabudowy ≤ **30 %** ⇒ ≤ **480,00 m²**; rzut po zewnętrznym obrysie ścian zewnętrznych (wspornik A i boks C wliczone); wariant kontrolny z rzutem płyt wysuniętych (D-06) | MPZP; upzp art. 2 pkt 35; RPB §14 pkt 4 lit. a; PN-ISO 9836:2022-07 p. 5.1.2 [R8-06; R4-P03] [PROG] | PZT | AUD-PZT |
+| W-031 | Pow. biologicznie czynna ≥ **50 %** ⇒ ≥ **800,00 m²**; bez nawierzchni ażurowych i terenu nad skrzynkami; dach zielony garażu (≥ 10 m², liczony w 50 %) tylko jako rezerwa | MPZP; upzp art. 2 pkt 28–29; WT §3 pkt 22 [R8-01, R8-02, R8-30] [PROG] | PZT | AUD-PZT |
+| W-032 | (Nadziemna) intensywność zabudowy **0,05–0,80** ⇒ Σ pow. kondygnacji nadziemnych **80,00–1280,00 m²** (po zewnętrznym obrysie ścian, bez balkonów, loggii, tarasów; garaż wliczony) | MPZP; upzp art. 2 pkt 31–34, art. 15 ust. 2 pkt 6 [R8-04, R8-05, R8-08] [PROG] | PZT | AUD-PZT |
+| W-033 | Wysokość zabudowy ≤ **11,00 m**: od średniej z min. i maks. rzędnej terenu na obwodzie ścian do najwyższego punktu (attyka, balustrady, PV, wyłaz — wliczane); rezerwa ≥ 0,30 m ⇒ ≤ **10,70 m**; PV nie ponad attykę; liczyć od niższej rzędnej (istniejąca/projektowana) | MPZP; upzp art. 2 pkt 30 [R8-03, R8 3.2, R8-R5] [PROG] | PZT, PAB | AUD-PZT |
+| W-034 | Maks. **3 kondygnacje nadziemne** — warunek także zwolnienia ppoż. (W-211) | MPZP; upzp art. 2 pkt 34; WT §3 pkt 16 [R8 3.1; R3 D-03] [PROG] | PAB | AUD-WT |
+| W-035 | Dachy płaskie o spadku ≤ **12°** | MPZP [PROG] | PAB | AUD-WT |
+| W-036 | ≥ **2 miejsca postojowe** na lokal (wliczając garaż); liczba miejsc wg MPZP | MPZP; WT §18 ust. 2 [R3 Z-05; R8-23] [PROG] | PZT | AUD-PZT |
+| W-037 | Kolorystyka elewacji: biele, szarości, grafit, naturalne drewno, beton architektoniczny — wykazać w opisie i na elewacjach | MPZP; RPB §20 ust. 1 pkt 3 [R2 A03] [PROG] | PAB | KR |
+| W-038 | Ogrodzenie od drogi ażurowe, wys. ≤ **1,60 m**, bez prefabrykatów betonowych (ZKP we wnęce murka/słupka) | MPZP [R7 3.1] [PROG] | PZT | AUD-PZT |
+| W-039 | Ogrzewanie ze źródeł niskoemisyjnych/OZE (PC powietrze–woda); PV na dachu dopuszczalna | MPZP; upzp art. 15 ust. 4 [R8-14] [PROG] | PAB | KR |
+| W-040 | Fikcyjny MPZP uzupełnić o § „Definicje” (art. 2 pkt 28–35 upzp; art. 67 ust. 3 pkt 1 u.zm.upzp) i definicję linii zabudowy z dopuszczalnymi wysunięciami | u.zm.upzp (Dz.U. 2023 poz. 1688) art. 67 ust. 2–3 [R8-07, R8-09, R8 3.1] | OPIS | DOK |
+| W-041 | Zestawienie powierzchni w PZT: zabudowy (bez tarasów naziemnych i podpartych słupami, gzymsów, balkonów, loggii), dróg i placów, PBC, pozostałe wskaźniki MPZP (intensywność, wysokość, miejsca, odległość od linii zabudowy); m² z 2 miejscami | RPB §14 pkt 4 lit. a–d (lit. a wg Dz.U. 2023 poz. 2405) [R2 Z05; R8-45] | PZT (opis) | AUD-PZT |
+
+### B.3 Pomieszczenia, wysokości, drzwi
+
+| ID | Wymaganie | Podstawa | Gdzie | Sprawdzenie |
+|---|---|---|---|---|
+| W-050 | Wysokość w świetle pokoi ≥ **2,50 m** (kuchnię przyjęto 2,50 m) | WT §72 ust. 1 [R3 B-10] | PAB | AUD-WT |
+| W-051 | Pomieszczenia na czasowy pobyt ludzi ≥ **2,20 m** | WT §72 ust. 1 [R3 B-10] | PAB | AUD-WT |
+| W-052 | Łazienki i WC ≥ **2,50 m**; **2,20 m** dopuszczalne przy wentylacji mechanicznej | WT §77 ust. 2–3 [R3 B-13] | PAB | AUD-WT |
+| W-053 | Pomieszczenia techniczne i gospodarcze (garderoby, spiżarnia) ≥ **2,00 m**; przejścia pod przewodami ≥ **1,90 m** | WT §97 ust. 1–2 [R3 B-21] | PAB | AUD-WT |
+| W-054 | Podłoga pomieszczeń na stały pobyt ≥ poziomu terenu przy budynku (±0,00 ≈ 0,30 m nad terenem) | WT §73 ust. 1 [R3 B-11] | PAB | AUD-WT |
+| W-055 | Drzwi wejściowe ≥ **0,90 × 2,00 m** w świetle ościeżnicy (skrzydło główne ≥ 0,90 m); próg ≤ **0,02 m** | WT §62 ust. 1, 3 [R3 B-06, B-07] | PAB, PT-AR | AUD-WT |
+| W-056 | Wejście chronione przed zimnym powietrzem — wiatrołap | WT §63 [R3 B-08] | PAB | KR |
+| W-057 | Daszek nad wejściem (budynek > 2 kondygnacji): szerokość ≥ szerokość drzwi + **1,0 m**, wysięg ≥ **1,0 m**; przenosi obciążenie od spadających szyb i okładzin; ≥ 1,50 m od granic (W-004), bez przekraczania linii zabudowy (W-006) | WT §292 ust. 1–2 [R3 K-12] | PAB, PT-BO | AUD-WT |
+| W-058 | Drzwi do pokoi i kuchni ≥ **0,80 × 2,00 m**, bez progów | WT §75 ust. 1, 3 [R3 B-12] | PAB | AUD-WT |
+| W-059 | Drzwi do łazienek i WC otwierane **na zewnątrz** (lub przesuwne), ≥ **0,80 × 2,00 m**, otwory w dolnej części ≥ **0,022 m²** | WT §79 ust. 1–2 [R3 B-15] | PAB | AUD-WT |
+| W-060 | Wydzielony WC: szerokość ≥ **0,90 m**, pole przed miską **0,60 × 0,90 m** | WT §83 [R3 B-17] | PAB | AUD-WT |
+| W-061 | Ściany łazienek zmywalne i odporne na wilgoć do **2,0 m**; posadzki łazienek, WC, pralni zmywalne, nienasiąkliwe, nieśliskie; kabina natryskowa murowana do stropu ≥ 1,5 m², szer. ≥ 0,9 m, z wywiewem mechanicznym | WT §78, §81 ust. 2 [R3 B-14, B-16] | PT-AR | KR |
+| W-062 | Wymiary z WT rozumiane z wykończeniem; szerokość drzwi w świetle ościeżnicy (skrzydło jej nie zmniejsza); odległości mierzone poziomo w miejscu najmniejszego oddalenia, od lica ocieplenia/okładziny | WT §9 ust. 1–4 [R3 D-08, D-09; R4-F15] | wszystkie | AUD-WT |
+| W-063 | Wysokość budynku wg WT (od terenu przy najniższym wejściu do górnej powierzchni najwyższego stropu z izolacją lub najwyższego punktu stropodachu nad pomieszczeniami) — grupa **N** (≤ 12 m lub ≤ 4 kondygnacje); wykazać obok wysokości wg upzp (W-033) | WT §6, §8 pkt 1, §3 pkt 15 [R3 D-01, D-02; R8-29] | PAB | AUD-WT |
+| W-064 | Na dachu brak przestrzeni technicznej o średniej wysokości w świetle > **2,0 m** (byłaby kondygnacją — utrata W-211) | WT §3 pkt 16 [R3 D-03; R5 3.9] | PAB | AUD-WT |
+| W-065 | Wyjście na dach: klapa ≥ **0,80 × 0,80 m** (lub drzwi 0,80 × 1,90 m); drabina szer. ≥ **0,50 m**, szczeble co ≤ **0,30 m**, obręcze od 3,0 m, ≥ 0,15 m od ściany | WT §308 ust. 1, 3; §101 ust. 2–3 [R3 K-20, K-21] | PAB, PT-AR | AUD-WT |
+| W-066 | Pomieszczenie techniczne z urządzeniami hałaśliwymi (PC, centrala) obok pomieszczeń na stały pobyt — przegrody i posadowienie chroniące przed hałasem i drganiami | WT §96 ust. 1–2; PN-B-02171:2017-06 (zał. 1 lp. 2) [R3 B-20; R5-04] | PT-AR, PT-IS | KR |
+| W-067 | Nawierzchnie dojść, schodów i podłóg (także garażu) nieśliskie; przezroczyste skrzydła drzwi oznakowane, szkło bezpieczne; wycieraczka wpuszczana, kratki na przejściu ≤ **20 mm** | WT §305 ust. 1, §295, §294 ust. 2–3 [R3 K-14, K-15, K-19] | PT-AR | KR |
+| W-068 | Program Inwestora (nie WT): pokój ≥ 8 m², pokoje dzieci ≥ 12 m², PU ≈ 230–270 m², kuchnia z oknem, pokój gościnny na P0 | brief §4–5; dawny §94 ust. 2 uchylony (Dz.U. 2017 poz. 2285) [R3 B-18, B-19] [PROG] | PAB | AUD-WT |
+| W-069 | Kubatura brutto (WT §3 pkt 24; PN-ISO 9836) liczona z modelu, m³ z 2 miejscami — rozstrzyga o PWP (W-190) i o zakresie uprawnień (> 1000 m³) | WT §3 pkt 24; PB art. 15a [R3 D-06; R1-32] | PAB (opis) | AUD-WT |
+
+### B.4 Oświetlenie
+
+| ID | Wymaganie | Podstawa | Gdzie | Sprawdzenie |
+|---|---|---|---|---|
+| W-080 | Okna w pomieszczeniu na pobyt ludzi ≥ **1/8** powierzchni podłogi (w świetle ościeżnic, nie szkło); w innych pomieszczeniach z wymaganym światłem dziennym ≥ **1/12** | WT §57 ust. 2 [R3 B-04] | PAB | AUD-WT |
+| W-081 | Wyłącznie sztuczne oświetlenie tylko w przypadkach z §58 (garderoby, spiżarnia, techniczne — nie są na pobyt ludzi) | WT §58 ust. 1 [R3 B-05] | PAB | KR |
+| W-082 | Elektryczne oświetlenie zewnętrzne wejścia i oświetlenie garażu; oświetlenia dojść i dojazdów nie wymaga się | WT §64, §102 pkt 3, §14 ust. 4 [R3 B-09, Z-02; R7-B12, B13] | PT-IE | KR |
+
+### B.5 Schody, balustrady, okna (bezpieczeństwo użytkowania)
+
+| ID | Wymaganie | Podstawa | Gdzie | Sprawdzenie |
+|---|---|---|---|---|
+| W-090 | Schody wewnętrzne: bieg ≥ **0,80 m**, spocznik ≥ **0,80 m**, wysokość stopnia ≤ **0,19 m**; projekt: bieg 1,00 m, spocznik ≥ 1,00 m, h ≈ 0,175 m, s ≈ 0,28 m | WT §68 ust. 1 [R3 K-01] | PAB, PT-AR | AUD-WT |
+| W-091 | **2h + s = 0,60–0,65 m** (projekt 0,63 m); limit 17 stopni w biegu nie dotyczy; szerokość użytkowa mierzona między poręczami | WT §69 ust. 2, 4; §68 ust. 4 [R3 K-03, K-05, K-06] | PT-AR | AUD-WT |
+| W-092 | Stopnie wachlarzowe ≥ **0,25 m**, mierzone w odległości 0,40 m od poręczy wewnętrznej | WT §69 ust. 6 [R3 K-07] | PT-AR | AUD-WT |
+| W-093 | Schody zewnętrzne do budynku: szerokość ≥ **1,20 m**, ≤ **10 stopni** w biegu (projekt h ≈ 0,15 m); schody techniczne: 0,80 / 0,80 / h ≤ 0,20 m | WT §68 ust. 1, 3; §69 ust. 3 [R3 K-02, K-04, K-05] | PAB, PZT | AUD-WT |
+| W-094 | Balustrada od strony otwartej przy różnicy poziomów > **0,50 m**; w domu jednorodzinnym schody ≤ 1,0 m bez balustrady, gdy obustronnie szersze od drzwi o ≥ 0,5 m (wejście ≈ 0,30 m — bez balustrady) | WT §296 ust. 1–2 [R3 K-09] | PAB | AUD-WT |
+| W-095 | Balustrady (dom jednorodzinny) ≥ **0,90 m** do wierzchu poręczy; prześwit nieregulowany (zalecane ≤ 0,12 m [ZAŁ]); siły poziome wg PN-EN 1990/1991; szkło o podwyższonej wytrzymałości, bez ostrych elementów | WT §298 ust. 1–2, zał. 1 lp. 59 [R3 K-10] | PAB, PT-AR, PT-BO | AUD-WT |
+| W-096 | Poręcze ≥ **0,05 m** od ściany; poręcze schodów zewnętrznych przedłużone o **0,30 m** | WT §298 ust. 5–6 [R3 K-11] | PT-AR | KR |
+| W-097 | Podokiennik ≥ **0,85 m** nad podłogą (poza przyziemiem) albo balustrada ≥ 0,90 m lub dolna część stała ze szkła o podwyższonej wytrzymałości (boks C, okna od podłogi na P1 i P2) | WT §301 ust. 1, 3 [R3 K-17] | PAB, PT-AR | AUD-WT |
+| W-098 | Okna na P2 (powyżej 2. kondygnacji nadziemnej) i okna nad przejściami otwierane do wewnątrz; uchylne na zewnątrz o osi poziomej — wychylenie ≤ **0,60 m**, szkło bezpieczne; okna HS na P2 — D-17 | WT §299 ust. 1–2 [R3 K-16] | PT-AR (zestawienie stolarki) | AUD-WT |
+| W-099 | Pochylnie: piesze zewnętrzne ≤ 15 % (h ≤ 0,15 m) / 8 % (h ≤ 0,5 m) / 6 %; wewnętrzne 15 / 10 / 8 %; samochodowa w garażu indywidualnym ≤ **25 %** | WT §70 [R3 K-08] | PZT, PAB | AUD-WT |
+| W-100 | Prześwit nad biegiem schodów ≥ **2,00 m** (dobra praktyka, brak wymogu WT) | [R3 K-22] [ZAŁ] | PT-AR | AUD-WT |

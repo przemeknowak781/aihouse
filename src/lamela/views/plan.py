@@ -1036,8 +1036,9 @@ class PlanBuilder:
                 continue
             segs.sort(key=lambda t: -t[0])
             ob = self.outline.buffer(-0.02) if not self.outline.is_empty else None
-            inside = [s_ for s_ in segs if ob is not None and ob.contains(Point((s_[1] + s_[2]) / 2))]
-            outside = [s_ for s_ in segs if s_ not in inside]
+            flags = [ob is not None and ob.contains(Point((s_[1] + s_[2]) / 2)) for s_ in segs]
+            inside = [s_ for s_, f in zip(segs, flags) if f]
+            outside = [s_ for s_, f in zip(segs, flags) if not f]
             if str(elem).startswith("bryła"):
                 text, use = f"obrys {elem.replace('bryła ', 'bryły ')} nad", outside
             elif outside:
