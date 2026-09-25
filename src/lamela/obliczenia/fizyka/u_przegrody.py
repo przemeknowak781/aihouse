@@ -25,7 +25,7 @@ from typing import Any, Sequence
 
 import numpy as np
 
-from ..wspolne import (INT, NZW, PRZYKL, ZAL, Zalozenia, fmt, fmt_r, fmt_u, naglowek_raportu, ok, tabela_md,
+from ..wspolne import (NZW, PRZYKL, ZAL, Zalozenia, fmt, fmt_r, fmt_u, naglowek_raportu, ok, tabela_md,
                        wymaganie, wyrob, zaokr_znaczace)
 from .warstwy import GRUNT_FUNKCJE, MatProp, funkcja_warstwy, mat_props
 
@@ -369,7 +369,7 @@ def u_klin_wielobok(wielobok, R0: float, lam_klin: float, *, d_add_fn=None, wpus
     domyślnie spadek·(odległość do najbliższego wpustu) — model „lejów” do wpustów [ZAŁ — przybliżenie układu płyt
     spadkowych; dla projektu wykonawczego — wg rysunku układu płyt producenta].
     """
-    from shapely.geometry import Point, Polygon
+    from shapely.geometry import Polygon
     P = wielobok if hasattr(wielobok, "bounds") else Polygon(wielobok)
     x0, y0, x1, y1 = P.bounds
     xs = np.arange(x0 + krok / 2, x1, krok)

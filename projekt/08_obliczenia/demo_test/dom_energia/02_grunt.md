@@ -37,6 +37,8 @@ Miesięczny strumień ciepła przez grunt (PN-EN ISO 13370 zał. C, θ_i = const
 | Φ_m [W] | 164 | 162 | 172 | 149 | 120 | 96 | 76 | 69 | 68 | 93 | 127 | 152 |
 | Q [kWh] | 122 | 109 | 128 | 107 | 90 | 69 | 57 | 51 | 49 | 69 | 91 | 113 |
 
+Porównanie rocznych strat przez grunt: PN-EN ISO 13370 (miesięcznie, z bezwładnością gruntu) ≈ 1 056 kWh/rok; metoda metodologii EP (H_T,ig wg PN-EN 12831 × (θ_int − θ_e,n)) ≈ 503 kWh/rok. Do EP stosuje się wartość wymaganą metodologią (pkt 5.2.3.1.1); różnica — informacyjnie (metodologia nie przewiduje miesięcznej metody ISO 13370).
+
 ## Przenikanie ciepła przez grunt — pomieszczenia nieogrzewane (garaż) (PN-EN ISO 13370:2017)
 
 **Podstawa:** PN-EN ISO 13370:2017-09 p. 5.2 wzór (1), p. 7 (podłoga na gruncie), zał. B/C [NZW — wzory wg wyd. 2007]; PN-EN 12831:2006 p. 7.1.3 (H_T,ig); WT zał. 2 pkt 1.1 i 1.4
@@ -69,6 +71,8 @@ Miesięczny strumień ciepła przez grunt (PN-EN ISO 13370 zał. C, θ_i = const
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
 | Φ_m [W] | 129 | 119 | 179 | 39 | −132 | −278 | −399 | −443 | −447 | −296 | −94 | 57 |
 | Q [kWh] | 96 | 80 | 133 | 28 | −98 | −201 | −297 | −330 | −322 | −220 | −67 | 42 |
+
+Porównanie rocznych strat przez grunt: PN-EN ISO 13370 (miesięcznie, z bezwładnością gruntu) ≈ −1 155 kWh/rok; metoda metodologii EP (H_T,ig wg PN-EN 12831 × (θ_int − θ_e,n)) ≈ 213 kWh/rok. Do EP stosuje się wartość wymaganą metodologią (pkt 5.2.3.1.1); różnica — informacyjnie (metodologia nie przewiduje miesięcznej metody ISO 13370).
 * brak zdefiniowanej izolacji obwodowej — wymaganie WT zał. 2 pkt 1.4 (R ≥ 2,0 m²K/W) do wykazania (przy płycie fundamentowej: izolacja pod płytą ciągła z izolacją ściany/cokołu)
 
 ---

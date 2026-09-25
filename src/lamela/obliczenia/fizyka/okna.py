@@ -19,13 +19,13 @@
 from __future__ import annotations
 
 import math
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any, Sequence
 
 import numpy as np
 
-from ..wspolne import (INT, NZW, PRZYKL, ZAL, Zalozenia, fmt, fmt_u, miesiace_pl, naglowek_raportu, ok,
-                       orientacja, tabela_md, wym, wymaganie, wyrob, zaokr_znaczace)
+from ..wspolne import (INT, NZW, Zalozenia, fmt, fmt_u, miesiace_pl, naglowek_raportu, ok, orientacja, tabela_md, wym,
+                       wyrob, zaokr_znaczace)
 
 # WT zał. 2 pkt 2.1.3 — f_C: {typ: {przepuszczalność: (wewnętrzna, zewnętrzna)}}
 FC_WT = {

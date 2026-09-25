@@ -18,11 +18,9 @@ from __future__ import annotations
 import math
 import re
 from dataclasses import dataclass, field
-from typing import Any
-
 import numpy as np
 
-from ..wspolne import NZW, PRZYKL, ZAL, Zalozenia, fmt, naglowek_raportu, ok, tabela_md, wym, wymaganie, wyrob
+from ..wspolne import ZAL, Zalozenia, fmt, naglowek_raportu, ok, tabela_md, wym, wyrob
 
 RODZAJE = [
     (r"gara[zż]", "garaz"),
@@ -275,7 +273,7 @@ def sprawdz_czerpnie_wyrzutnie(m, wc: dict) -> list[tuple[str, str, bool | None]
         try:
             dr = dz.raw.get("droga") or {}
             if dr.get("jezdnia"):
-                from shapely.geometry import Point, Polygon
+                from shapely.geometry import Polygon
                 J = Polygon(dz.ring_bud(dr["jezdnia"]))
                 zrodla.append(("jezdnia drogi", J))
             od = dz.raw.get("odpady") or {}

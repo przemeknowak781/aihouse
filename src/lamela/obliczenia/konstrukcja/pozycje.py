@@ -905,9 +905,11 @@ class AnalizaKonstrukcji:
             if e.odsloniety:
                 txt.append(f"Śnieg: s = {f(self.snieg_rown.s1, 3)} kN/m² (przypadek równomierny) oraz zaspy (poniżej).")
             poz.obciazenia.append("\n".join(f"- {t}" for t in txt))
-            for sn in g.snieg:
-                if e.id in sn.nazwa:
-                    poz.wyniki.append(sn)
+            sn_e = [sn for sn in g.snieg if e.id in sn.nazwa]
+            poz.wyniki += sn_e
+            if sn_e and self.rys_dir:
+                from . import rysunki
+                poz.rysunki += rysunki.rys_zaspy(sn_e, self.rys(f"zaspy_{_slug(e.id)}.png"))
             if rys_plan:
                 poz.rysunki += rys_plan
             # komórki elementu

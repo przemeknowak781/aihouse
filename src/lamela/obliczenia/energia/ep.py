@@ -23,14 +23,13 @@ PV — `energia.pv` (autokonsumpcja miesięczna). Dane klimatyczne — TMY Pozna
 """
 from __future__ import annotations
 
-import math
 from dataclasses import dataclass, field
 from typing import Any
 
 import numpy as np
 
 from ..wspolne import (GODZINY_MIES, DNI_MIES, INT, NZW, PRZYKL, RHO_C_WH, ZAL, Zalozenia, fmt, miesiace_pl,
-                       naglowek_raportu, ok, tabela_md, wym, wymaganie, wyrob)
+                       naglowek_raportu, ok, tabela_md, wym, wyrob)
 from .klimat import klimat_miesieczny, opis_zrodla
 from .pv import DanePV, autokonsumpcja, dane_pv, produkcja_miesieczna
 
@@ -217,7 +216,6 @@ def system_gazowy(A_f: float, went, cfg: dict | None = None) -> System:
     z zasobnikiem), ogrzewanie podłogowe, wentylacja z odzyskiem, bez PV; sprawności i energia pomocnicza — wartości
     tabelaryczne metodologii (tab. 2 lp. 16a, 9 lp. 5a, 20 lp. 2, 6a, 7a)."""
     k = wyrob("kociol_gazowy", "kondensacyjny_20kW")
-    a = min(A_f, 250.0)
     pom = [Pomocnicze("pompa obiegowa ogrzewania podłogowego (tab. 20 lp. 2: 0,50 W/m² × 6700 h)", 0.50 * A_f, 6700.0, "H", "sezon"),
            Pomocnicze("napęd i regulacja kotła — ogrzewanie (tab. 20 lp. 7a: 0,50 W/m² × 2520 h)",
                       (0.50 if A_f <= 250 else 0.15) * A_f, 2520.0 if A_f <= 250 else 3900.0, "H", "sezon"),

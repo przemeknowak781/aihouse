@@ -18,7 +18,7 @@ from ..fizyka import mostki as MB
 from ..fizyka import okna as OK
 from ..fizyka.u_przegrody import WynikU, oblicz_u, poprawki_domyslne, u_przegrody_modelu, warstwy_przegrody
 from ..fizyka.warstwy import WynikCiaglosci, sprawdz_ciaglosc
-from ..wspolne import NZW, ROOT, ZAL, Zalozenia, wym
+from ..wspolne import ROOT, ZAL, Zalozenia
 from .bryla import Bryla, Element, buduj_bryle
 from .klimat import klimat_miesieczny
 

@@ -18,16 +18,15 @@ Dane klimatyczne: TMY Poznań (WMO 12330) — średnie miesięczne θ_e i p_e (�
 """
 from __future__ import annotations
 
-import math
 from dataclasses import dataclass, field
 from typing import Any, Sequence
 
 import numpy as np
 
-from ..wspolne import (NZW, ZAL, Zalozenia, fmt, miesiace_pl, naglowek_raportu, ok, tabela_md, wym, GODZINY_MIES)
+from ..wspolne import (Zalozenia, fmt, miesiace_pl, naglowek_raportu, ok, tabela_md, wym, GODZINY_MIES)
 from ..energia.klimat import klimat_miesieczny, p_sat, theta_z_psat
 from .u_przegrody import RSI, RSE, _warstwy_we, r_pustki
-from .warstwy import GRUNT_FUNKCJE, MatProp, funkcja_warstwy, mat_props, sd_warstwy
+from .warstwy import GRUNT_FUNKCJE, funkcja_warstwy, mat_props, sd_warstwy
 
 DELTA0 = 2.0e-10               # kg/(m·s·Pa) — przepuszczalność pary wodnej powietrza (PN-EN ISO 13788 p. 3.?)
 KLASY_DP = {1: 270.0, 2: 540.0, 3: 810.0, 4: 1080.0, 5: 1350.0}   # zał. A — Δp przy θ_e ≤ 0 °C [Pa]
@@ -398,7 +397,6 @@ def wykres_glaser(r: WynikGlaser, plik, miesiac: int | None = None) -> str:
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
     m = (miesiac - 1) if miesiac else int(np.argmin(klimat_miesieczny().theta_e))
-    n = len(r.warstwy)
     d = np.array([w.d for w in r.warstwy])
     xd = np.concatenate([[0.0], np.cumsum(d)]) * 100.0
     sd = np.array([w.sd for w in r.warstwy])
@@ -428,7 +426,6 @@ def wykres_glaser(r: WynikGlaser, plik, miesiac: int | None = None) -> str:
     ax2.set_ylabel("ciśnienie pary wodnej [Pa]")
     ax2.set_title(f"Ciśnienie pary — miesiąc {miesiace_pl()[m]}", fontsize=9)
     ax2.legend(fontsize=7, loc="upper right")
-    ymax = max(float(np.max(r.psat[m])), float(np.max(r.p[m])))
     for ax, xx in ((ax1, xd), (ax2, xs)):
         lo, hi = ax.get_ylim()
         for i, w in enumerate(r.warstwy):

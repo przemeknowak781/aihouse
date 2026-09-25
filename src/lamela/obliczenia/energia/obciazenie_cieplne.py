@@ -20,11 +20,9 @@ Dobór pompy ciepła: moc przy θ_e, punkt biwalentny i udział grzałki z rozk�
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Any
-
 import numpy as np
 
-from ..wspolne import NZW, PRZYKL, RHO_C_WH, ZAL, Zalozenia, fmt, naglowek_raportu, ok, tabela_md, wym, wyrob
+from ..wspolne import NZW, RHO_C_WH, ZAL, Zalozenia, fmt, naglowek_raportu, tabela_md, wym, wyrob
 from .klimat import klimat_godzinowy
 from .wentylacja import WynikWent
 
@@ -281,7 +279,7 @@ def raport_obciazenie(r: WynikObc, zal: Zalozenia | None = None, szczegoly: bool
             ["Moc PC przy A−7/W35 (deklaracja)", f"{fmt(d['P_PC_Am7_kW'], 1)} kW"],
             [f"Moc PC przy θ_e = {fmt(r.theta_e, 0)} °C (ekstrapolacja)", f"{fmt(d['P_PC_te_kW'], 2)} kW"],
             ["Punkt biwalentny (P_PC = Φ(θ))", f"{fmt(d['biwalentny_C'], 1)} °C" if d['biwalentny_C'] is not None
-             else f"brak — P_PC(θ_e) ≥ Φ_HL (praca monowalentna)"],
+             else "brak — P_PC(θ_e) ≥ Φ_HL (praca monowalentna)"],
             ["Udział grzałki w cieple sezonowym (TMY Poznań, θ < 15 °C)", f"{fmt(d['udzial_grzalki'] * 100, 2)} %"],
             ["Wymagana moc grzałki przy θ_e", f"{fmt(d['moc_grzalki_wym_kW'], 2)} kW (zainstalowana {fmt(d['moc_grzalki_kW'], 1)} kW)"],
         ], "ll"))

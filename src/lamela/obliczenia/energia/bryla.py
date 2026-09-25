@@ -22,12 +22,11 @@ from dataclasses import dataclass, field
 from typing import Any
 
 import numpy as np
-from shapely.geometry import LineString, Point, Polygon
+from shapely.geometry import LineString, Point
 from shapely.geometry.polygon import orient
-from shapely.ops import unary_union
 
 from ..fizyka.okna import Lamele, Okap
-from ..fizyka.u_przegrody import warstwy_przegrody, warstwy_stropu
+from ..fizyka.u_przegrody import warstwy_stropu
 
 TOL_LICO = 0.02
 KROK = 0.02
@@ -133,11 +132,22 @@ def _polys(g):
     return [x for x in getattr(g, "geoms", []) if x.geom_type == "Polygon"]
 
 
-def czy_ogrzewane(raw: dict) -> bool:
+def czy_ogrzewane(raw: dict, nazwa: str = "", kategoria: str = "") -> bool:
+    """Pomieszczenie ogrzewane: `ogrzewane: false` → nie; `temp` podane → temp ≥ 8 °C; brak `temp` → tak, chyba że
+    rodzaj „garaż” (temperatura domyślna — `theta_domyslna`)."""
     if raw.get("ogrzewane") is False:
         return False
     t = raw.get("temp")
-    return t is not None and float(t) >= 8.0
+    if t is not None:
+        return float(t) >= 8.0
+    from .wentylacja import rodzaj_pomieszczenia
+    return rodzaj_pomieszczenia(nazwa or str(raw.get("nazwa", "")), kategoria, raw) != "garaz"
+
+
+def theta_domyslna(nazwa: str, kategoria: str = "", raw: dict | None = None) -> float:
+    """θ_int wg WT § 134 ust. 2 (rejestr W-150): łazienki 24 °C, pozostałe pomieszczenia mieszkania 20 °C."""
+    from .wentylacja import rodzaj_pomieszczenia
+    return 24.0 if rodzaj_pomieszczenia(nazwa, kategoria, raw) == "lazienka" else 20.0
 
 
 def buduj_bryle(m) -> Bryla:
@@ -149,10 +159,14 @@ def buduj_bryle(m) -> Bryla:
         if r.polygon is None or r.polygon.is_empty:
             ostrz.append(f"pomieszczenie {r.id}: brak wieloboku — pominięte")
             continue
-        og = czy_ogrzewane(r.raw)
+        og = czy_ogrzewane(r.raw, r.nazwa, r.kategoria)
         h = r.wysokosc or 2.5
-        P[r.id] = PomE(r.id, r.nazwa, r.kond, float(r.temp) if r.temp is not None else None, og, r.pow_netto,
-                       r.pow_netto * h, h, r.kategoria, r.pobyt_ludzi, r.went, r.raw)
+        th = float(r.temp) if r.temp is not None else None
+        if og and th is None:
+            th = theta_domyslna(r.nazwa, r.kategoria, r.raw)
+            ostrz.append(f"pomieszczenie {r.id} ({r.nazwa}): brak `temp` — przyjęto θ_int = {th:.0f} °C wg WT § 134 ust. 2")
+        P[r.id] = PomE(r.id, r.nazwa, r.kond, th, og, r.pow_netto, r.pow_netto * h, h, r.kategoria, r.pobyt_ludzi,
+                       r.went, r.raw)
     polys = {r.id: orient(r.polygon, 1.0) for r in m.pomieszczenia() if r.id in P}
     kond_ids = [k.id for k in m.kondygnacje]
     elems: list[Element] = []
@@ -338,7 +352,6 @@ def buduj_bryle(m) -> Bryla:
         _pp = m.pomieszczenie(pm.id).polygon_podlogi
         fpoly = _pp if (_pp is not None and not _pp.is_empty) else pg
         i = kond_ids.index(kid)
-        dl_zewn = sum(kr["dl"] for kr in pm.krawedzie if kr.get("zewn") or kr.get("rola") == "sciana_nieogrz")
         if i == 0:
             pp = m.przegroda(pod) if pod else None
             rola = "podloga_grunt" if (pp is None or pp.typ in ("podloga_na_gruncie", "plyta_fund")) else "strop_zewn"
@@ -508,11 +521,11 @@ def buduj_bryle(m) -> Bryla:
 
 def _strop_pod(m, kid_below: str, region) -> dict | None:
     """Element `stropy` nad kondygnacją `kid_below` pokrywający region (największe przecięcie)."""
+    from lamela.model import make_polygon
     best, ba = None, 0.0
     for st in m.stropy():
         if str(st.get("nad")) != kid_below:
             continue
-        from lamela.model import make_polygon
         try:
             P = make_polygon(st["obrys"])
         except Exception:  # noqa: BLE001
@@ -523,7 +536,6 @@ def _strop_pod(m, kid_below: str, region) -> dict | None:
     if best is None:
         # wspornik pod pomieszczeniem (płyta wspornikowa jako podłoga)
         for w in m.wsporniki():
-            from lamela.model import make_polygon
             P = make_polygon(w["obrys"])
             a = P.intersection(region).area
             if a > ba:

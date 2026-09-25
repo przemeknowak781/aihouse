@@ -18,7 +18,7 @@ from dataclasses import dataclass
 
 import numpy as np
 
-from ..wspolne import GODZINY_MIES, ZAL, fmt, wyrob
+from ..wspolne import wyrob
 from .klimat import klimat_godzinowy, klimat_miesieczny
 
 

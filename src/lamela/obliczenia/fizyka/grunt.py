@@ -24,7 +24,7 @@ import math
 from dataclasses import dataclass, field
 from typing import Sequence
 
-from ..wspolne import (NZW, ZAL, Zalozenia, fmt, fmt_u, naglowek_raportu, ok, tabela_md, wym, wymaganie,
+from ..wspolne import (NZW, Zalozenia, fmt, fmt_u, naglowek_raportu, ok, tabela_md, wym, wymaganie,
                        zaokr_znaczace, miesiace_pl, GODZINY_MIES)
 
 GRUNTY = {"glina": (1.5, 3.0e6), "piasek": (2.0, 2.0e6), "skala": (3.5, 2.0e6)}
@@ -225,6 +225,15 @@ def raport_grunt(r: WynikGrunt, nazwa: str = "Podłoga na gruncie", zal: Zalozen
         s.append("")
         s.append(tabela_md(["Miesiąc"] + miesiace_pl(), [["Φ_m [W]"] + [fmt(x, 0) for x in r.Phi_mies],
                                                          ["Q [kWh]"] + [fmt(x * h / 1000, 0) for x, h in zip(r.Phi_mies, GODZINY_MIES)]]))
+        from ..energia.klimat import klimat_miesieczny
+        te = klimat_miesieczny().theta_e
+        q13370 = sum(x * h / 1000 for x, h in zip(r.Phi_mies, GODZINY_MIES))
+        q12831 = sum(r.H_g_12831 * (r.theta_int - t) * h / 1000 for t, h in zip(te, GODZINY_MIES))
+        s.append("")
+        s.append(f"Porównanie rocznych strat przez grunt: PN-EN ISO 13370 (miesięcznie, z bezwładnością gruntu) ≈ "
+                 f"{fmt(q13370, 0)} kWh/rok; metoda metodologii EP (H_T,ig wg PN-EN 12831 × (θ_int − θ_e,n)) ≈ "
+                 f"{fmt(q12831, 0)} kWh/rok. Do EP stosuje się wartość wymaganą metodologią (pkt 5.2.3.1.1); "
+                 "różnica — informacyjnie (metodologia nie przewiduje miesięcznej metody ISO 13370).")
     for u in r.uwagi:
         s.append(f"* {u}")
     s.append("")

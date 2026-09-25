@@ -32,6 +32,8 @@ Miesięczny strumień ciepła przez grunt (PN-EN ISO 13370 zał. C, θ_i = const
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
 | Φ_m [W] | 211 | 209 | 223 | 190 | 150 | 116 | 88 | 77 | 77 | 112 | 159 | 194 |
 | Q [kWh] | 157 | 140 | 166 | 137 | 112 | 83 | 65 | 58 | 55 | 83 | 115 | 144 |
+
+Porównanie rocznych strat przez grunt: PN-EN ISO 13370 (miesięcznie, z bezwładnością gruntu) ≈ 1 315 kWh/rok; metoda metodologii EP (H_T,ig wg PN-EN 12831 × (θ_int − θ_e,n)) ≈ 605 kWh/rok. Do EP stosuje się wartość wymaganą metodologią (pkt 5.2.3.1.1); różnica — informacyjnie (metodologia nie przewiduje miesięcznej metody ISO 13370).
 * brak zdefiniowanej izolacji obwodowej — wymaganie WT zał. 2 pkt 1.4 (R ≥ 2,0 m²K/W) do wykazania (przy płycie fundamentowej: izolacja pod płytą ciągła z izolacją ściany/cokołu)
 
 ---
