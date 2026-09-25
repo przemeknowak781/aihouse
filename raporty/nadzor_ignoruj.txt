@@ -16,3 +16,4 @@ a3a8ae3b05a6e1fbd  # synteza — zakończona
 a31322d115de1ad9a  # weryfikacja koncepcji + podglądy — zakończony
 a68a8b74f8ab79b44  # rysunki instalacji IS/IE — zakończony
 wf_44634517-034  # przepływ koncepcji — zakończony
+a076389c324f1eb11  # generator PZT — zakończony
