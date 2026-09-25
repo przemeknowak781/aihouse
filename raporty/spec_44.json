@@ -1,4 +1,5 @@
 {
+ "nr": 44,
  "title": "Strona katalogowa opublikowana (wersja robocza) · przepływ WYDANIA uruchomiony: domknięcie modelu → pętla konstrukcyjna → zamrożenie",
  "stages": [
   [
@@ -58,6 +59,17 @@
   "Strona „Dom LAMELA” (marka przykładowa „Pasmo i Cień”) opublikowana jako artefakt prywatny: parametry z modelu z podstawami prawnymi, szkic Inwestora z literami A–G, rendery z pozycją słońca dla Poznania, rzuty z podświetlaniem pomieszczeń, model 3D, przegrody z U, „4 linie”, energia (EP 35,6; bez PV 57,8), działka minimalna, pakiety z CENAMI PRZYKŁADOWYMI, formularz DEMO.",
   "Przed publikacją: przegląd całej treści strony, skryptów i rysunków; duże SVG wydzielone do plików, model 3D jako glTF JSON (platforma nie serwuje .glb).",
   "Do poprawy w wersji końcowej: kolizje etykiet na rzutach www, liczba modułów PV, wymiar zachodni na schemacie działki.",
-  "Przepływ wydania: etap domknięcia modelu (zielona ściana K-13, uwagi weryfikacji V1/V2, kontrola funkcji) w toku; następnie pętla konstrukcyjna do 100 % pozycji."
+  "Przepływ wydania: etap domknięcia modelu (zielona ściana K-13, uwagi weryfikacji V1/V2, kontrola funkcji) w toku; następnie pętla konstrukcyjna do 100 % pozycji.",
+  "NADZÓR (09:17): 5 agentów aktywnych, bez zastojów; najdłuższa bezczynność 4 min; zmiany w repo 0 min temu."
+ ],
+ "images": [
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/www_c0.jpg",
+   "caption": "Strona katalogowa — nagłówek i parametry (1440 px)"
+  },
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/www_c1.jpg",
+   "caption": "Strona — idea ze szkicu i wizualizacje"
+  }
  ]
 }
