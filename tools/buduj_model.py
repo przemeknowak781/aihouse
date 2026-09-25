@@ -885,3 +885,78 @@ KONSTRUKCJA = {
 GEOTECHNIKA = {"kategoria": "II", "grunt": {"rodzaj": "piasek średni (MSa), średniozagęszczony", "I_D": 0.6, "phi": 33, "gamma": 18.5, "M0": 80000},
                "ZWG": -3.8, "h_z": 0.8, "humus": 0.4,
                "uwagi": "opinia geotechniczna + dokumentacja badań podłoża (≥ 3 sondowania do 6 m) + projekt geotechniczny (W-280…W-282)"}
+
+
+# =====================================================================================================================
+# 10. ZŁOŻENIE budynek.yaml + zapis (czytelny YAML: sekcje blokowo, elementy w stylu flow, komentarze źródłowe)
+# =====================================================================================================================
+META = {"nazwa": "Dom LAMELA", "wersja": "1.0", "data": "2026-09-25", "stadium": "koncepcja ostateczna (synteza W2 + przeszczepy W1/W3 + poprawki J1–J3)",
+        "autor": "(do uzupełnienia — projektant z uprawnieniami bez ograniczeń)", "zrodlo": "tools/buduj_model.py (model parametryczny)",
+        "uwagi": "WT (t.j. Dz.U. 2022 poz. 1225 ze zm.) w brzmieniu do 19.09.2026, stosowane na podstawie art. 102a PB (oświadczenie Inwestora)"}
+KOND = [
+    {"id": "P0", "nazwa": "Parter", "rzedna": 0.0, "wys_kondygnacji": H_KOND, "wys_w_swietle": r(Z_SPOD_ST1 - 0.01), "podloga": "POD-0"},
+    {"id": "P1", "nazwa": "I piętro", "rzedna": Z_P1, "wys_kondygnacji": H_KOND, "wys_w_swietle": r(Z_ST2 - T_STR - Z_P1 - 0.01), "podloga": "POD-1"},
+    {"id": "P2", "nazwa": "II piętro", "rzedna": Z_P2, "wys_kondygnacji": r(Z_ST3 - Z_P2), "wys_w_swietle": r(Z_ST3 - T_STR - Z_P2 - 0.01), "podloga": "POD-1"},
+]
+
+
+def fl(o) -> str:
+    return yaml.safe_dump(o, default_flow_style=True, allow_unicode=True, width=10 ** 6, sort_keys=False).strip()
+
+
+def blk(o, ind=0) -> str:
+    t = yaml.safe_dump(o, default_flow_style=None, allow_unicode=True, width=150, sort_keys=False)
+    return "\n".join((" " * ind + ln) if ln else ln for ln in t.rstrip().split("\n"))
+
+
+def lista(nazwa, elementy, grupuj=None, kom=None) -> list[str]:
+    out = [f"{nazwa}:"] if elementy else [f"{nazwa}: []"]
+    if kom:
+        out.insert(0, f"# {kom}")
+    last = object()
+    for e in elementy:
+        g = grupuj(e) if grupuj else None
+        if g != last and g is not None:
+            out.append(f"  # --- {g}")
+        last = g
+        out.append(f"  - {fl(e)}")
+    return out
+
+
+def zapisz_budynek(path: Path):
+    L_ = ["# Model budynku „Dom LAMELA” — KONCEPCJA OSTATECZNA (jedno źródło prawdy; schemat: docs/SCHEMAT_MODELU.md).",
+          "# PLIK GENEROWANY skryptem tools/buduj_model.py — NIE EDYTOWAĆ RĘCZNIE (zmiany wprowadzać w parametrach skryptu).",
+          "# Układ: x → wschód, y → północ, z → góra; (0,0) = oś A × oś 1; ±0,00 = posadzka P0. Wymiary w m.", ""]
+    L_ += ["meta: " + fl(META), "uklad: " + fl({"zero_abs": ZERO_ABS, "azymut_osi_y": 0.0}), "osie:",
+           "  x: " + fl({k: r(v) for k, v in X.items()}) + "   # A' = oś lekkiej ściany wspornika; M = ścianka środkowa schodów; D' = ścianka WC",
+           "  y: " + fl({k: r(v) for k, v in Y.items()}) + "   # H = ścianka holu P1", ""]
+    L_ += lista("kondygnacje", KOND) + [""]
+    L_ += ["# Materiały — wartości typowe (λ obliczeniowa, ρ, c_p, μ lub sd); źródło w komentarzu każdej pozycji", "materialy:"]
+    for k, d, zr in MAT:
+        L_.append(f"  {k}: {fl(d)}   # {zr}")
+    L_ += ["", "# Przegrody — ściany od wnętrza do zewnątrz; poziome od góry do dołu (brief §9: pełne warstwy)", "przegrody:"]
+    for k, d in PRZ.items():
+        L_.append(f"  {k}:")
+        L_.append(f"    nazwa: {fl(d['nazwa'])}")
+        L_.append(f"    typ: {d['typ']}")
+        L_.append("    warstwy:")
+        for w in d["warstwy"]:
+            L_.append(f"      - {fl(w)}")
+    L_ += [""] + lista("sciany", SC, lambda e: e["kond"])
+    L_ += [""] + lista("otwory", OT, lambda e: e["id"][:2].replace("O", "P"))
+    L_ += [""] + lista("pomieszczenia", PM, lambda e: e["kond"])
+    L_ += [""] + lista("stropy", STROPY)
+    L_ += [""] + lista("dachy", DACHY, kom="odsłonięte fragmenty stropów = dachy (SCHEMAT p. 5.1); D1 — stropodach bryły A (pierwszy = dach główny)")
+    L_ += [""] + lista("wsporniki_plyty", WSP)
+    L_ += [""] + lista("slupy", SLUPY) + [""] + lista("belki", BELKI)
+    L_ += ["", "fundamenty:", f"  typ: {FUND['typ']}", f"  izolacja_obwodowa: {fl(FUND['izolacja_obwodowa'])}", f"  uwagi: {fl(FUND['uwagi'])}"]
+    L_ += ["  " + x for x in lista("elementy", FUND["elementy"])]
+    L_ += [""] + lista("schody", SCHODY) + [""] + lista("balustrady", BALUSTRADY) + [""] + lista("lamele", LAMELE) + [""] + lista("tarasy", TARASY)
+    L_ += ["", "# Stolarka — dane PRZYKŁADOWE typowych wyrobów (klucze: src/lamela/obliczenia/dane/wyroby_przykladowe.yaml), „lub równoważne”",
+           "stolarka:"] + [f"  {k}: {fl(v)}" for k, v in STOLARKA.items()]
+    L_ += ["", "# Katalog węzłów cieplno-wilgotnościowych (brief §9.2; symulacja PN-EN ISO 10211 — src/lamela/obliczenia/mostki2d)"]
+    L_ += lista("wezly", WEZLY)
+    L_ += ["", "energia:"] + ["  " + ln for ln in blk(ENERGIA).split("\n")]
+    L_ += ["", "konstrukcja:"] + ["  " + ln for ln in blk(KONSTRUKCJA).split("\n")]
+    L_ += ["", "geotechnika:"] + ["  " + ln for ln in blk(GEOTECHNIKA).split("\n")]
+    path.write_text("\n".join(L_) + "\n", encoding="utf-8")
