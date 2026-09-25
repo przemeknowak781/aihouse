@@ -133,7 +133,7 @@ def demo_plan():
                                                          (x_b_in, AY["2"] - F_IN), (F_IN, AY["2"] - F_IN)]), "gres"),
         ("1.02", "Łazienka", (2.45, 0.80), Polygon([(F_IN, F_IN), (x_b_in, F_IN), (x_b_in, Y_PART - 0.075),
                                                     (F_IN, Y_PART - 0.075)]), "gres"),
-        ("1.03", "Pokój", (5.55, 1.62), Polygon([(AX["B"] + F_IN, F_IN), (AX["C"] - F_IN, F_IN),
+        ("1.03", "Pokój", (5.75, 1.75), Polygon([(AX["B"] + F_IN, F_IN), (AX["C"] - F_IN, F_IN),
                                                  (AX["C"] - F_IN, AY["2"] - F_IN), (AX["B"] + F_IN, AY["2"] - F_IN)]),
          "deska"),
     ]
@@ -178,7 +178,7 @@ def demo_plan():
     dims.dim_h(vp, list(AX.values()), y_top_ch, y_max)
     # wewnętrzne
     dims.dim_h(vp, [AX["B"] + F_STR, AX["C"] - F_STR], 2.45, 2.2, ext="short")
-    dims.dim_v(vp, [AY["1"] + F_STR, AY["2"] - F_STR], 6.55, 6.75, ext="short")
+    dims.dim_v(vp, [AY["1"] + F_STR, AY["2"] - F_STR], 6.40, 6.60, ext="short")
     dims.dim_h(vp, [AX["A"] + F_STR, 2.90, 3.80, AX["B"] - F_STR], Y_PART + 0.34, Y_PART + 0.1, ext="short")
 
     # ---------------------------------------------------------------- oznaczenia otworów (symbol + ułamek)
@@ -186,7 +186,7 @@ def demo_plan():
     dims.opening_dim(vp, (5.80, F_IN), (1, 0), 2.00, 2.40, None, side=1, symbol="HS1", axis_mm=10.0,
                      symbol_shape="ellipse")
     dims.opening_dim(vp, (F_IN, 4.50), (0, 1), 1.20, 1.50, 0.90, side=-1, symbol="O2", axis_mm=8.0)
-    dims.opening_dim(vp, (AX["C"] - F_IN, 1.60), (0, 1), 1.40, 1.50, 0.85, side=1, symbol="O3", axis_mm=8.0)
+    dims.opening_dim(vp, (AX["C"] - F_IN, 1.60), (0, 1), None, None, symbol="O3", side=1, axis_mm=3.0)
     # drzwi: tylko symbol (wymiary w zestawieniu otworów — PN-B-01029)
     dims.opening_dim(vp, (3.35, Y_PART - 0.075), (1, 0), None, None, symbol="D1", side=-1, axis_mm=3.0)
     dims.opening_dim(vp, (AX["B"] - F_IN, 3.25), (0, 1), None, None, symbol="D2", side=1, axis_mm=4.0)
@@ -195,8 +195,8 @@ def demo_plan():
     S.section_mark(vp, (6.30, y_ax_bot - 5.0 * k), (6.30, y_top_ch + 16 * k), "A", look=1.0)
 
     x0, y0, x1, y1 = sh.frame
-    sh.place(vp, x0 + 3.0, y1 - 3.0, "tl")
-    sh.view_title(vp, "RZUT PARTERU — FRAGMENT", dx=2.0)
+    sh.place(vp, x0 + 1.0, y1 - 3.0, "tl")
+    sh.view_title(vp, "RZUT PARTERU — FRAGMENT", dx=4.0)
 
     # ---------------------------------------------------------------- kolumna prawa: północ, legendy, zestawienia
     fx0, fy0, fx1, fy1 = sh.free_above_title_block()
@@ -330,7 +330,7 @@ def draw_section(vp, detail: bool = False):
         dims.levels(vp, x_r + 0.25, [(z0, "zero", 101.65), (z_p1, "wyk"), (z_p1_slab_bot, "konstr"),
                                      (z_d, "konstr"), (z_top, "wyk"), (slab_bot - 0.10, "konstr")])
         dims.level_section(vp, (x_l + 0.35, z_ground), z_ground, "wyk", stub_mm=0)
-        dims.level_section(vp, (x_ins_o - 0.35, z_attic_top), z_attic_top, "wyk", side="left", stub_mm=0)
+        dims.level_section(vp, (x_ax + 0.45, z_attic_top), z_attic_top, "wyk", side="right", stub_mm=6.0)
         # wymiary pionowe (po lewej): kondygnacje i wysokość całkowita
         xd = x_l - 0.2
         dims.dim_v(vp, [slab_bot - 0.10, z0, z_p1, z_d, z_top, z_attic_top], xd, x_l + 0.5)
@@ -344,13 +344,13 @@ def draw_section(vp, detail: bool = False):
         dims.slope(vp, (1.95, z_top + 0.22), (0.75, z_top + 0.22), 2.0)
         # opisy warstw — odnośniki "drabinkowe"
         xl = 2.2
-        S.layer_callout(vp, (xl, z_d - 0.12), (xl, z_top + 0.45), ROOF_TXT, h=2.0, row_mm=4.0,
+        S.layer_callout(vp, (xl, z_d - 0.12), (xl, z_top + 0.45), ROOF_TXT, h=1.8, row_mm=4.0,
                         title="STROPODACH SD1", marks=[(xl, z_top - 0.03), (xl, z_top - 0.16), (xl, z_d - 0.1)])
-        S.layer_callout(vp, (xl, z_p1_slab_bot + 0.05), (xl, z_p1 + 0.35), FLOOR_P1_TXT, h=2.0, row_mm=4.0,
+        S.layer_callout(vp, (xl, z_p1_slab_bot + 0.05), (xl, z_p1 + 0.35), FLOOR_P1_TXT, h=1.8, row_mm=4.0,
                         title="STROP ST1 / PODŁOGA P1", marks=[(xl, z_p1 - 0.04), (xl, z_p1 - 0.12)])
-        S.layer_callout(vp, (xl, slab_bot - 0.22), (xl, z0 + 0.30), FLOOR_P0_TXT, h=2.0, row_mm=4.0,
+        S.layer_callout(vp, (xl, slab_bot - 0.22), (xl, z0 + 0.30), FLOOR_P0_TXT, h=1.8, row_mm=4.0,
                         title="PODŁOGA NA GRUNCIE P0", marks=[(xl, z0 - 0.04), (xl, z0 - 0.15), (xl, z0 - 0.4)])
-        S.layer_callout(vp, (x_in - 0.005, 4.75), (-0.65, 4.75), list(reversed(WALL_TXT)), side="left", h=2.0,
+        S.layer_callout(vp, (x_in - 0.005, 4.75), (-0.65, 4.75), list(reversed(WALL_TXT)), side="left", h=1.8,
                         row_mm=4.0, title="ŚCIANA SZ1", marks=[(x_ax, 4.75), (x_ins_o + 0.1, 4.75)])
         S.detail_callout(vp, (x_ax - 0.02, z_attic_top - 0.28), 12.0, "A", leader_to=(x_l + 0.5, z_attic_top + 0.85))
     else:
@@ -363,31 +363,36 @@ def draw_section(vp, detail: bool = False):
 
 
 def demo_section():
-    tb = TitleBlock(**TB_COMMON, branza="ARCHITEKTURA", tytul="PRZEKRÓJ PRÓBNY A-A", skala="1:50, 1:20",
-                    nr_rysunku="DEMO-02")
+    tb = TitleBlock(**TB_COMMON, branza="ARCHITEKTURA (AR)", tytul="PRZEKRÓJ PRÓBNY A-A", skala="1:50",
+                    nr_rysunku="DEMO-02", arkusz="2/3", rodzaj="przekrój")
     sh = Sheet("A3", title_block=tb)
     vp = sh.add_viewport(50, "PRZEKRÓJ A-A")
     g = draw_section(vp)
     x0, y0, x1, y1 = sh.frame
-    sh.place(vp, x0 + 3.0, y1 - 3.0, "tl")
-    sh.view_title(vp, "PRZEKRÓJ A-A (FRAGMENT)")
+    sh.place(vp, x0 + 3.0, y1 - 11.0, "tl")
+    sh.view_title(vp, "PRZEKRÓJ A-A (FRAGMENT)", where="above", dx=4.0)   # ISO 128-3: nad przekrojem
     # detal A 1:20 — druga rzutnia, ten sam rysunek z adnotacjami w skali detalu
     vd = sh.add_viewport(20, "DETAL A")
     draw_section(vd, detail=True)
     fx0, fy0, fx1, fy1 = sh.free_above_title_block()
     fx0 = max(fx0, vp.clip[2] + 2.0)
-    clip = (g["x_ins_o"] - 0.80, g["z_d"] - 0.45, g["x_ins_o"] + 2.3, g["z_attic_top"] + 0.6)
+    clip = (g["x_ins_o"] - 0.80, g["z_d"] - 0.28, g["x_ins_o"] + 2.3, g["z_attic_top"] + 0.48)
     sh.place(vd, fx0 + 4.0, fy1 - 10.0, "tl", clip_model=clip)
     vd_frame = vd.clip
     sh.rect(*vd_frame, layer="R-OPISY", pen=0.25)
     sh.view_title(vd, "DETAL A — ATTYKA", where="above", dx=0.0)
-    notes = ["Rzędne w m względem ±0,00 = 101,65 m n.p.m.; wymiary w cm.",
-             "Trójkąt zaczerniony — rzędna wykończenia, niezaczerniony — rzędna konstrukcji, "
-             "w połowie zaczerniony — poziom ±0,00 z rzędną bezwzględną.",
+    lg = hatch.legend(sh, fx0 + 2.0, vd_frame[1] - 6.0,
+                      ["ZELBET", "BETON", "MUR_SILIKAT", "IZOL_TWARDA", "IZOL_XPS", "IZOL_PIR", "IZOL_PRZECIWWODNA",
+                       "PAROIZOLACJA", "JASTRYCH", "TYNK", "PIASEK", "NASYP", "ZWIR", "GRUNT_RODZIMY"],
+                      cols=2, col_w=(fx1 - fx0 - 4.0) / 2.0, sw=(10.0, 5.0), h=1.8, row_gap=1.4,
+                      title="OZNACZENIA MATERIAŁÓW", show_source=False)
+    notes = ["Wymiary w cm (mm w indeksie górnym), rzędne w m względem ±0,000 = 101,650 m n.p.m.",
+             "Rzędne: trójkąt zaczerniony — wykończenie, niezaczerniony — konstrukcja, w połowie zaczerniony — "
+             "poziom zerowy z rzędną bezwzględną (PN-B-01025).",
              "Rysunek testowy silnika — dane nie stanowią projektu."]
-    nb = notes_box(sh, fx0, vd_frame[1] - 12.0, fx1 - fx0, notes, "UWAGI", h=2.0)
-    b1 = scale_bar(sh, (fx0 + 4.0, nb[1] - 9.0), 50, 5.0)
-    scale_bar(sh, (fx0 + 4.0, b1[1] - 13.0), 20, 2.0)
+    nb = notes_box(sh, fx0, lg[1] - 1.0, fx1 - fx0, notes, "OBJAŚNIENIA I UWAGI", h=1.8)
+    b1 = scale_bar(sh, (fx0 + 4.0, nb[1] - 8.0), 50, 3.0)
+    scale_bar(sh, (b1[2] + 10.0, nb[1] - 8.0), 20, 1.0)
     plot.add_control_marks(sh)
     files = sh.save(OUT / "DEMO-02_przekroj_1-50")
     return sh, vp, files

@@ -211,7 +211,7 @@ def room_tag(c, pos, number: str, name: str | None, area_m2: float | None = None
             y -= hh * gap * k
 
 
-def layer_callout(c, p_start, p_end, texts: list[str], side: str = "right", h: float = 2.2, row_mm: float = 4.6,
+def layer_callout(c, p_start, p_end, texts: list[str], side: str = "right", h: float = 1.8, row_mm: float = 4.0,
                   marks=None, layer: str = "A-OPISY", numbered: bool = False, width_mm: float | None = None,
                   title: str | None = None):
     """Opis warstw — odnośnik elementu wielowarstwowego („drabinka”, PN-B-01025).
