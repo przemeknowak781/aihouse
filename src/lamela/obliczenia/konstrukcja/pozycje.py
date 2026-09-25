@@ -1034,7 +1034,7 @@ class AnalizaKonstrukcji:
         dk = dx if kier == "x" else dy
         br = c["brzegi"]
         kb_ = br[:2] if kier == "x" else br[2:]
-        wsp = e.typ == "wspornik" and "W" in br
+        wsp = e.typ == "wspornik" and "W" in br and not self._ma_wlasne_podpory(e)
         if wsp:
             K, L_ref, ksk = 0.4, p.wspornik_L_mnoznik * lmin, 0.5
         else:
@@ -1293,7 +1293,7 @@ class AnalizaKonstrukcji:
                 lst = []
                 for k in range(len(ss) - 1):
                     a, bb = ss[k] + s0, ss[k + 1] + s0
-                    q0, q1 = np.nan_to_num(rr[k]), np.nan_to_num(rr[k + 1])
+                    q0, q1 = max(np.nan_to_num(rr[k]), 0.0), max(np.nan_to_num(rr[k + 1]), 0.0)   # [UPR] bez odrywania
                     lst.append(ObcQ(float(q0), float(min(max(a, 0), L)), float(min(max(bb, 0), L)), float(q1)))
                 obc[cs] = lst
             h_pl = next((e.h for e in g.el if abs(spod + hb - e.spod) < TOL_Z), 0.0)
@@ -1404,7 +1404,8 @@ class AnalizaKonstrukcji:
                     ss, rr = g.fe.reakcje_liniowe(r, sid)
                     if len(ss):
                         sw = [w.st(ln.interpolate(s_).coords[0])[0] for s_ in ss]
-                        pr["top_s"].dodaj(cs, sw, rr)
+                        # reakcje ujemne (odrywanie naroży płyty) pominięte — bezpiecznie dla ścian ściskanych [UPR]
+                        pr["top_s"].dodaj(cs, sw, np.maximum(np.nan_to_num(rr), 0.0) if cs != "G" or True else rr)
         # obciążenia skupione (belki, schody)
         for cs, P, s_c, szer in self.pending_sciany.get(w.id, []):
             pr["top_s"].dodaj_skupiona(cs, P, s_c, szer)

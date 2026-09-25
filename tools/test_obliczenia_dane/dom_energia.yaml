@@ -1,0 +1,209 @@
+# Model TESTOWY biblioteki lamela.obliczenia (fizyka budowli / energia) — NIE jest projektem Domu LAMELA.
+# Cechy sprawdzane: garaż nieogrzewany (b_u), łazienki 24 °C (powietrze transferowe), wspornik bryły P1 nad powietrzem
+# zewnętrznym (strop_zewn z ociepleniem spodu), strop nad garażem z ociepleniem, odsłonięty stropodach zielony nad P0,
+# płyta dachu wysunięta na południe (okap), izolacja obwodowa, węzły `wezly`, sekcja `energia`, `stolarka`.
+meta: {nazwa: "Dom testowy — energia", wersja: "1.0", data: "2026-09-25"}
+uklad: {zero_abs: 101.65, azymut_osi_y: 0.0}
+osie:
+  x: {A: 0.0, B: 3.0, C: 6.0, D: 9.0, E: 10.0, F: 13.0, G: 16.0}
+  y: {"0": -1.0, "1": 0.0, "2": 3.0, "3": 8.0}
+kondygnacje:
+  - {id: P0, nazwa: Parter, rzedna: 0.00, wys_kondygnacji: 3.10, wys_w_swietle: 2.70, podloga: POD-0}
+  - {id: P1, nazwa: Piętro, rzedna: 3.10, wys_kondygnacji: 2.90, wys_w_swietle: 2.70, podloga: POD-1}
+
+materialy:
+  TYNK_GIPS: {nazwa: "Tynk gipsowy", lambda: 0.40, rho: 1300, cp: 840, mu: 10, kreskowanie: TYNK, kolor: "#f3f1ec"}
+  TYNK_CEM:  {nazwa: "Tynk cementowo-wapienny", lambda: 0.82, rho: 1850, cp: 840, mu: 15, kreskowanie: TYNK, kolor: "#e8e6e0"}
+  TYNK_SIL:  {nazwa: "Tynk silikonowy cienkowarstwowy", lambda: 0.70, rho: 1800, cp: 840, mu: 60, kreskowanie: TYNK, kolor: "#f5f4f0"}
+  SIL18:     {nazwa: "Bloczek wapienno-piaskowy 18 cm", lambda: 0.77, rho: 1800, cp: 840, mu: 15, kreskowanie: MUR_SILIKAT, kolor: "#d9d4ca"}
+  SIL24:     {nazwa: "Bloczek wapienno-piaskowy 24 cm", lambda: 0.77, rho: 1800, cp: 840, mu: 15, kreskowanie: MUR_SILIKAT, kolor: "#d9d4ca"}
+  SIL12:     {nazwa: "Bloczek wapienno-piaskowy 12 cm", lambda: 0.77, rho: 1800, cp: 840, mu: 15, kreskowanie: MUR_SILIKAT, kolor: "#d9d4ca"}
+  EPS031:    {nazwa: "Styropian grafitowy EPS 031", lambda: 0.031, rho: 15, cp: 1450, mu: 30, kreskowanie: IZOL_TWARDA, kolor: "#8f9296"}
+  XPS300:    {nazwa: "Polistyren ekstrudowany XPS 300", lambda: 0.035, rho: 30, cp: 1450, mu: 150, kreskowanie: IZOL_XPS, kolor: "#9cc7a4"}
+  EPS_AKU:   {nazwa: "Styropian akustyczny EPS T", lambda: 0.040, rho: 12, cp: 1450, mu: 30, kreskowanie: IZOL_TWARDA, kolor: "#e9e7df"}
+  PIR:       {nazwa: "Płyty PIR", lambda: 0.022, rho: 32, cp: 1400, mu: 60, kreskowanie: IZOL_PIR, kolor: "#d8c98a"}
+  EPDM:      {nazwa: "Membrana EPDM 1,5 mm (odporna na przerastanie korzeni)", lambda: 0.25, rho: 1150, cp: 1000, mu: 75000, kreskowanie: IZOL_PRZECIWWODNA, kolor: "#2f3032"}
+  PAROIZ:    {nazwa: "Paroizolacja bitumiczna z wkładką Al", lambda: 0.23, rho: 1100, cp: 1000, sd: 1500, kreskowanie: PAROIZOLACJA, kolor: "#3a3a3a"}
+  PAPA_PW:   {nazwa: "Izolacja przeciwwilgociowa — papa termozgrzewalna", lambda: 0.23, rho: 1100, cp: 1000, mu: 50000, kreskowanie: IZOL_PRZECIWWILGOCIOWA, kolor: "#3a3a3a"}
+  FOLIA_PE:  {nazwa: "Folia PE 0,2 mm (warstwa rozdzielająca)", lambda: 0.35, rho: 950, cp: 1800, sd: 50, kreskowanie: PAROIZOLACJA, kolor: "#bbbbbb"}
+  SUBSTRAT:  {nazwa: "Substrat dachu zielonego (rozchodniki)", lambda: 0.60, rho: 1100, cp: 1000, mu: 2, kreskowanie: HUMUS, kolor: "#6b8e23"}
+  DREN:      {nazwa: "Mata drenażowa kubełkowa HDPE", lambda: 0.30, rho: 60, cp: 1500, mu: 50, funkcja: drenaz, kreskowanie: TWORZYWO, kolor: "#333333"}
+  GEO:       {nazwa: "Geowłóknina filtracyjna", lambda: 0.20, rho: 200, cp: 1500, mu: 10, kreskowanie: TWORZYWO, kolor: "#dddddd"}
+  ZB_C30:    {nazwa: "Żelbet C30/37", lambda: 2.30, rho: 2500, cp: 1000, mu: 130, kreskowanie: ZELBET, kolor: "#b9b6ae"}
+  ZB_C25:    {nazwa: "Beton C25/30", lambda: 2.00, rho: 2400, cp: 1000, mu: 130, kreskowanie: BETON, kolor: "#b9b6ae"}
+  JASTRYCH:  {nazwa: "Jastrych cementowy", lambda: 1.00, rho: 2000, cp: 1000, mu: 50, kreskowanie: JASTRYCH, kolor: "#c9c5bb"}
+  PIASEK:    {nazwa: "Podsypka piaskowa", lambda: 2.00, rho: 1900, cp: 1000, mu: 50, kreskowanie: PIASEK, kolor: "#d8c7a0"}
+  GRES:      {nazwa: "Płytki gresowe", lambda: 1.30, rho: 2300, cp: 840, mu: 200, kreskowanie: PLYTKI, kolor: "#cfc9bf"}
+  DESKA_DEB: {nazwa: "Deska podłogowa dębowa", lambda: 0.18, rho: 700, cp: 1600, mu: 50, kreskowanie: DREWNO_WZDL, kolor: "#b58a5a"}
+
+przegrody:
+  SZ1:
+    nazwa: "Ściana zewnętrzna, silikat 18 + ETICS EPS 20"
+    typ: sciana_zewn
+    warstwy:
+      - {mat: TYNK_GIPS, d: 0.015}
+      - {mat: SIL18, d: 0.18, konstrukcyjna: true}
+      - {mat: EPS031, d: 0.20}
+      - {mat: TYNK_SIL, d: 0.007}
+  SWG:
+    nazwa: "Ściana dom–garaż, silikat 18 + EPS 12 od garażu"
+    typ: sciana_wewn_nosna
+    warstwy:
+      - {mat: TYNK_GIPS, d: 0.015}
+      - {mat: SIL18, d: 0.18, konstrukcyjna: true}
+      - {mat: EPS031, d: 0.12}
+      - {mat: TYNK_SIL, d: 0.007}
+  SZG:
+    nazwa: "Ściana zewnętrzna garażu nieogrzewanego, silikat 24"
+    typ: sciana_zewn
+    warstwy:
+      - {mat: TYNK_CEM, d: 0.015}
+      - {mat: SIL24, d: 0.24, konstrukcyjna: true}
+      - {mat: TYNK_SIL, d: 0.007}
+  SD1:
+    nazwa: "Ścianka działowa, silikat 12"
+    typ: scianka_dzialowa
+    warstwy:
+      - {mat: TYNK_GIPS, d: 0.015}
+      - {mat: SIL12, d: 0.12, konstrukcyjna: true}
+      - {mat: TYNK_GIPS, d: 0.015}
+  POD-0:
+    nazwa: "Podłoga na gruncie (izolacja pod jastrychem, papa na płycie)"
+    typ: podloga_na_gruncie
+    warstwy:
+      - {mat: GRES, d: 0.010}
+      - {mat: JASTRYCH, d: 0.065}
+      - {mat: FOLIA_PE, d: 0.0002}
+      - {mat: XPS300, d: 0.180}
+      - {mat: PAPA_PW, d: 0.004}
+      - {mat: ZB_C25, d: 0.120, konstrukcyjna: true}
+      - {mat: PIASEK, d: 0.150}
+  POD-G:
+    nazwa: "Posadzka garażu na gruncie"
+    typ: podloga_na_gruncie
+    warstwy:
+      - {mat: ZB_C25, d: 0.150, konstrukcyjna: true}
+      - {mat: PIASEK, d: 0.150}
+  POD-1:
+    nazwa: "Podłoga na stropie (warstwy nad płytą)"
+    typ: strop
+    warstwy:
+      - {mat: DESKA_DEB, d: 0.015}
+      - {mat: JASTRYCH, d: 0.055}
+      - {mat: EPS_AKU, d: 0.130}
+  SUF-G:
+    nazwa: "Ocieplenie spodu stropu nad garażem (EPS 20 + tynk)"
+    typ: strop
+    warstwy:
+      - {mat: EPS031, d: 0.20}
+      - {mat: TYNK_SIL, d: 0.007}
+  SUF-Z:
+    nazwa: "Ocieplenie spodu wspornika nad powietrzem zewnętrznym (EPS 25 + tynk)"
+    typ: strop
+    warstwy:
+      - {mat: EPS031, d: 0.25}
+      - {mat: TYNK_SIL, d: 0.007}
+  SD-D1:
+    nazwa: "Stropodach PIR 24 cm, EPDM"
+    typ: stropodach
+    warstwy:
+      - {mat: EPDM, d: 0.0015}
+      - {mat: PIR, d: 0.240, klin: {d_min: 0.24, d_max: 0.36, ksztalt: prostokat}}
+      - {mat: PAROIZ, d: 0.004}
+      - {mat: ZB_C30, d: 0.200, konstrukcyjna: true}
+      - {mat: TYNK_GIPS, d: 0.010}
+  DZ-P0:
+    nazwa: "Stropodach zielony ekstensywny nad parterem"
+    typ: stropodach
+    warstwy:
+      - {mat: SUBSTRAT, d: 0.080}
+      - {mat: GEO, d: 0.002}
+      - {mat: DREN, d: 0.025}
+      - {mat: EPDM, d: 0.0015}
+      - {mat: PIR, d: 0.220}
+      - {mat: PAROIZ, d: 0.004}
+      - {mat: ZB_C30, d: 0.200, konstrukcyjna: true}
+      - {mat: TYNK_GIPS, d: 0.010}
+  SD-G:
+    nazwa: "Dach garażu (nieogrzewany)"
+    typ: stropodach
+    warstwy:
+      - {mat: EPDM, d: 0.0015}
+      - {mat: ZB_C30, d: 0.200, konstrukcyjna: true}
+
+sciany:
+  - {id: S0-01, kond: P0, przegroda: SZ1, os: [[0.0, 0.0], [10.0, 0.0]], wnetrze: lewa}
+  - {id: S0-02, kond: P0, przegroda: SWG, os: [[10.0, 0.0], [10.0, 8.0]], wnetrze: lewa}
+  - {id: S0-03, kond: P0, przegroda: SZ1, os: [[10.0, 8.0], [0.0, 8.0]], wnetrze: lewa}
+  - {id: S0-04, kond: P0, przegroda: SZ1, os: [[0.0, 8.0], [0.0, 0.0]], wnetrze: lewa}
+  - {id: S0-05, kond: P0, przegroda: SZG, os: [[10.0, 0.0], [16.0, 0.0]], wnetrze: lewa}
+  - {id: S0-06, kond: P0, przegroda: SZG, os: [[16.0, 0.0], [16.0, 8.0]], wnetrze: lewa}
+  - {id: S0-07, kond: P0, przegroda: SZG, os: [[16.0, 8.0], [10.0, 8.0]], wnetrze: lewa}
+  - {id: S0-08, kond: P0, przegroda: SD1, os: [[6.0, 0.0], [6.0, 8.0]], wnetrze: srodek}
+  - {id: S0-09, kond: P0, przegroda: SD1, os: [[6.0, 3.0], [10.0, 3.0]], wnetrze: srodek}
+  - {id: S1-01, kond: P1, przegroda: SZ1, os: [[3.0, -1.0], [13.0, -1.0]], wnetrze: lewa}
+  - {id: S1-02, kond: P1, przegroda: SZ1, os: [[13.0, -1.0], [13.0, 8.0]], wnetrze: lewa}
+  - {id: S1-03, kond: P1, przegroda: SZ1, os: [[13.0, 8.0], [3.0, 8.0]], wnetrze: lewa}
+  - {id: S1-04, kond: P1, przegroda: SZ1, os: [[3.0, 8.0], [3.0, -1.0]], wnetrze: lewa}
+  - {id: S1-05, kond: P1, przegroda: SD1, os: [[9.0, -1.0], [9.0, 8.0]], wnetrze: srodek}
+  - {id: S1-06, kond: P1, przegroda: SD1, os: [[9.0, 3.0], [13.0, 3.0]], wnetrze: srodek}
+
+otwory:
+  - {id: O0-01, sciana: S0-01, symbol: OP1, typ: okno, odl: 1.00, szer: 3.00, wys: 2.30, parapet: 0.20, oslona: zaluzja_zewn}
+  - {id: O0-02, sciana: S0-01, symbol: OP2, typ: okno, odl: 7.50, szer: 0.80, wys: 0.60, parapet: 1.50, oslona: brak}
+  - {id: O0-03, sciana: S0-03, symbol: OP3, typ: okno, odl: 1.00, szer: 1.50, wys: 1.20, parapet: 1.00, oslona: roleta_zewn}
+  - {id: O0-04, sciana: S0-04, symbol: OP4, typ: okno, odl: 2.00, szer: 1.20, wys: 1.50, parapet: 0.90, oslona: zaluzja_zewn}
+  - {id: O0-05, sciana: S0-03, symbol: DZ1, typ: drzwi_zewn, odl: 6.00, szer: 1.00, wys: 2.10, parapet: 0.00}
+  - {id: O0-06, sciana: S0-02, symbol: DG1, typ: drzwi, odl: 5.50, szer: 0.90, wys: 2.10, parapet: 0.00}
+  - {id: O0-07, sciana: S0-07, symbol: BR1, typ: brama, odl: 0.50, szer: 5.00, wys: 2.10, parapet: 0.00}
+  - {id: O1-01, sciana: S1-01, symbol: OP5, typ: okno, odl: 1.00, szer: 4.00, wys: 2.30, parapet: 0.20, oslona: brak}
+  - {id: O1-02, sciana: S1-01, symbol: OP2, typ: okno, odl: 8.00, szer: 0.80, wys: 0.60, parapet: 1.50, oslona: brak}
+  - {id: O1-03, sciana: S1-02, symbol: OP4, typ: okno, odl: 5.00, szer: 1.20, wys: 1.50, parapet: 0.90, oslona: roleta_zewn}
+
+pomieszczenia:
+  - {id: "0.01", kond: P0, nazwa: Pokój dzienny, punkt: [3.0, 4.0], kategoria: podstawowa, pobyt_ludzi: true, temp: 20}
+  - {id: "0.02", kond: P0, nazwa: Łazienka, punkt: [8.0, 1.5], kategoria: pomocnicza, pobyt_ludzi: false, temp: 24}
+  - {id: "0.03", kond: P0, nazwa: Kuchnia, punkt: [8.0, 5.5], kategoria: podstawowa, pobyt_ludzi: true, temp: 20}
+  - {id: "0.04", kond: P0, nazwa: Garaż, punkt: [13.0, 4.0], kategoria: pomocnicza, pobyt_ludzi: false, temp: null,
+     ogrzewane: false, podloga: POD-G}
+  - {id: "1.01", kond: P1, nazwa: Sypialnia, punkt: [6.0, 4.0], kategoria: podstawowa, pobyt_ludzi: true, temp: 20}
+  - {id: "1.02", kond: P1, nazwa: Łazienka, punkt: [11.0, 1.0], kategoria: pomocnicza, pobyt_ludzi: false, temp: 24}
+  - {id: "1.03", kond: P1, nazwa: Pokój, punkt: [11.0, 5.5], kategoria: podstawowa, pobyt_ludzi: true, temp: 20}
+
+stropy:
+  - {id: ST1, nad: P0, wierzch: 2.90, grubosc: 0.20, obrys: [[2.91, -0.09], [10.0, -0.09], [10.0, 8.09], [2.91, 8.09]],
+     podloga: POD-1, sufit: TYNK_GIPS, mat: ZB_C30}
+  - {id: ST2, nad: P0, wierzch: 2.90, grubosc: 0.20, obrys: [[10.0, -0.09], [13.09, -0.09], [13.09, 8.12], [10.0, 8.12]],
+     podloga: POD-1, sufit: SUF-G, mat: ZB_C30}
+  - {id: ST3, nad: P0, wierzch: 2.90, grubosc: 0.20, obrys: [[2.91, -1.09], [13.09, -1.09], [13.09, -0.09], [2.91, -0.09]],
+     podloga: POD-1, sufit: SUF-Z, mat: ZB_C30}
+
+dachy:
+  - {id: D1, obrys: [[2.91, -2.20], [13.09, -2.20], [13.09, 8.09], [2.91, 8.09]], plyta: {wierzch: 6.00, grubosc: 0.20},
+     przegroda: SD-D1, spadek: 0.02, attyka: {wys_nad_pokryciem: 0.30, szer: 0.25}, wpusty: [[8.0, 3.5]]}
+  - {id: D2, obrys: [[-0.09, -0.09], [2.91, -0.09], [2.91, 8.09], [-0.09, 8.09]], plyta: {wierzch: 2.90, grubosc: 0.20},
+     przegroda: DZ-P0, spadek: 0.02, attyka: {wys_nad_pokryciem: 0.30, szer: 0.25}, wpusty: [[1.5, 4.0]]}
+  - {id: D3, obrys: [[13.09, -0.12], [16.12, -0.12], [16.12, 8.12], [13.09, 8.12]], plyta: {wierzch: 2.90, grubosc: 0.20},
+     przegroda: SD-G, spadek: 0.02, attyka: {wys_nad_pokryciem: 0.20, szer: 0.25}, wpusty: [[14.5, 4.0]]}
+
+wezly:
+  - {id: WZ-R1, nazwa: "Attyka stropodachu D1", typ: R_attyka, przegrody: [SD-D1, SZ1], dlugosc: 36.0}
+  - {id: WZ-C1, nazwa: "Narożnik zewnętrzny", typ: C_naroze_zewn, przegrody: [SZ1, SZ1], dlugosc: 17.0}
+  - {id: WZ-G1, nazwa: "Cokół — ściana/podłoga na gruncie", typ: GF_cokol, przegrody: [SZ1, POD-0], dlugosc: 22.0}
+  - {id: WZ-W1, nazwa: "Ościeża okien", typ: W_oscieze, przegrody: [SZ1], dlugosc: 45.0}
+  - {id: WZ-S1, nazwa: "Wspornik bryły P1 — krawędź stropu nad powietrzem", typ: strop_zewn_krawedz, przegrody: [SZ1], dlugosc: 12.0}
+  - {id: WZ-GA, nazwa: "Połączenie ściany dom–garaż ze ścianą zewnętrzną", typ: polaczenie_nieogrz, przegrody: [SWG, SZ1, SZG], dlugosc: 5.8}
+  - {id: WZ-L1, nazwa: "Konsole lamel", typ: konsola_lamel, liczba: 20}
+
+stolarka:
+  OP1: {wyrob: okno_ALU_3sz}
+  OP5: {wyrob: okno_ALU_3sz, U_g: 0.5, U_f: 1.0}
+
+energia:
+  n50: 1.0
+  osoby: 4
+  pojemnosc: ciezka
+  grunt: {typ: piasek, izolacja_obwodowa: {typ: pionowa, D: 1.0, d_n: 0.15, lam_n: 0.035, opis: "XPS 15 cm na cokole do głębokości 1,0 m"}}
+  wentylacja: {czerpnia: [5.0, 4.0, 6.70], wyrzutnia: [11.5, 4.0, 7.80], wyrzut: pionowy}
+  pv: {moduly: 10, P_modul_Wp: 430, azymut: 180, nachylenie: 30}
+  garaz: {stanowiska: 2, otwory_went_m2: 0.10, n_went: 3.0}
