@@ -643,6 +643,13 @@ class SectionBuilder:
 def _callout(cv, ps, pe, texts, side, marks, title):
     """Opis warstw z maskami pod napisami (czytelność na tle linii widoku)."""
     from ..draft.core import PText
+    from ..draft import text as TT
+    wmax = max(TT.width(t, 1.8) for t in texts) + 6.0
+    if title and TT.width(title, 1.8, "bold") > wmax:
+        words = title.split()
+        while len(words) > 2 and TT.width(" ".join(words) + "…", 1.8, "bold") > wmax:
+            words.pop()
+        title = " ".join(words).rstrip(",;:—-") + "…"
     n0 = len(cv.prims)
     S.layer_callout(cv, ps, pe, texts, side=side, h=1.8, row_mm=3.6, marks=marks, title=title)
     for p in cv.prims[n0:]:

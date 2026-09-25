@@ -1242,8 +1242,8 @@ def draw_roof_plan(vp, ctx: ViewContext, opts: dict | None = None) -> PlanResult
         def fn3(cv, pos, z=float(w["wierzch"])):
             dims.level_plan(cv, pos, z, style="x")
         placer.place(vp, fn3, [p for p in spiral(c, 0.3, 4, 8) if pg.contains(Point(p))] or [tuple(c)])
-    # wymiary i osie
-    ext = outline.bounds if not outline.is_empty else m.bbox()
+    # wymiary i osie — poza całym narysowanym obszarem
+    ext = vp.extents() or (outline.bounds if not outline.is_empty else m.bbox())
     offs = exterior_dims(vp, ctx, outline, [], ext, openings=False, placer=placer)
     axb = draw_axes(vp, ctx, ext, offs, walls_out.bounds if not walls_out.is_empty else ext)
     for sid, sec in ctx.sections.items():
