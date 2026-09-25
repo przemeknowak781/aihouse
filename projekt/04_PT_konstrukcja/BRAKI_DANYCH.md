@@ -2,6 +2,17 @@
 
 Lista generowana automatycznie przez `lamela.views.konstrukcja` z: (1) braków zgłoszonych przez bibliotekę obliczeń (`AnalizaKonstrukcji.brak_danych`, uwagi „WYMAGA ANALIZY”), (2) elementów modelu bez wyników wymiarowania, (3) danych niezbędnych do rysunków wykonawczych, których model nie zawiera. Uzupełnienie — w `tools/buduj_model.py` (model generowany) lub w bibliotece obliczeń.
 
+## Dane do uzupełnienia w modelu / uzgodnienia międzybranżowe
+
+- Łączniki termoizolacyjne płyt wspornikowych (PL-*): model nie określa wyrobu (typ, wysokość, klasa odporności ogniowej, ETA) — rysunki podają siły m_Ed, v_Ed z obliczeń; dobór wyrobu „lub równoważnego” i sprawdzenie ugięcia z podatnością łącznika — przed wydaniem PT.
+- Uziom fundamentowy: brak danych branży E (położenie GSU, potrzeba i klasa LPS wg analizy ryzyka PN-EN 62305-2, liczba przewodów odprowadzających) — trasa otoku, połączenia i wyprowadzenia na rzucie fundamentów są propozycją do uzgodnienia.
+- Izolacja obwodowa przeciwprzemarzaniowa: brak w modelu danych klimatycznych do obliczenia wg PN-EN ISO 13793 (wskaźnik mrozowy F_d / F_n, średnia roczna temperatura) — wymiary D = 1,00 m (garaż 1,20 m), d_n = 10 cm przyjęte z modelu bez sprawdzenia.
+- Przejścia instalacyjne przez płytę: instalacje.yaml zawiera tylko położenia pionów i przyborów — brak średnic tulei, rzędnych i spadków podejść kanalizacji pod płytą (projekt branży S).
+- Geotechnika: parametry gruntu w modelu przykładowe (brief) — wymagana dokumentacja badań podłoża / projekt geotechniczny (kat. II) przed wydaniem PT; k_s płyty wyznaczono z M₀ modelu z obwiednią ×0,5/×2.
+- Obciążenie posadzki garażu i pasa gospodarczego (kat. F / sprzęt techniczny) — model nie przypisuje kategorii obciążenia użytkowego do płyty fundamentowej; w MES płyty przyjęto kat. A (2,0 kN/m²) na całej powierzchni.
+- Obrysy stropów/dachów w modelu po licu ocieplenia (płyty nad warstwą EPS) — do korekty w audycie A2 (lico warstwy konstrukcyjnej); rysunki są generowane z modelu i zaktualizują się automatycznie.
+- Beton krawędzi wysuniętych: model XC4 + XF1 (C30/37, c_nom 40 mm) — biblioteka wymiaruje dla XC4 (c_nom 40 mm, zgodne); klasa XF1 wymaga napowietrzenia/w/c wg PN-B-06265 — wpisać w specyfikacji betonu.
+
 ## Wyniki obliczeń — elementy bez wymiarowania lub z niespełnionymi warunkami
 
 - Płyta(y) SW1: brak wyników MES w bibliotece (model MES niewykonalny) — zbrojenie nie może być narysowane z obliczeń [WYMAGA ANALIZY].
@@ -60,19 +71,3 @@ Lista generowana automatycznie przez `lamela.views.konstrukcja` z: (1) braków z
 - Biblioteka (uwaga analizy): ST1: podpora punktowa SL4 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
 - Biblioteka (uwaga analizy): Grupa płyt PL-E: MES niewykonalny (MES płyty: za mało podpór) — pominięto
 - Biblioteka (uwaga analizy): Grupa płyt PL-DA: MES niewykonalny (MES płyty: za mało podpór) — pominięto
-
-## Kontrola zbrojenia — pozycje niespełnione (szczegóły: raport kontroli zbrojenia)
-
-- PF1 / strefa S1 (ZF1) — przekrój niewystarczający (poz. MES-PF): A_s,prov = 0 < max(A_s,req; A_s,min) = 1 — M_Ed = 2295 kNm/m > M_lim — wymagana wysokość h ≥ 0.65 m (obecnie 0.55 m) [WYMAGA ZMIANY MODELU]
-- PF1 / strefa S2 (SF2, SF3, ZF1, ZF7, ZF8, płyta) — przekrój niewystarczający (poz. MES-PF): A_s,prov = 0 < max(A_s,req; A_s,min) = 1 — M_Ed = 4758 kNm/m > M_lim — wymagana wysokość h ≥ 0.91 m (obecnie 0.70 m) [WYMAGA ZMIANY MODELU]
-- PF1 / strefa S3 (płyta) — przekrój niewystarczający (poz. MES-PF): A_s,prov = 0 < max(A_s,req; A_s,min) = 1 — M_Ed = 234 kNm/m > M_lim — wymagana wysokość h ≥ 0.25 m (obecnie 0.25 m) [WYMAGA ZMIANY MODELU]
-- PF1 / strefa S4 (płyta) — przekrój niewystarczający (poz. MES-PF): A_s,prov = 0 < max(A_s,req; A_s,min) = 1 — M_Ed = 387 kNm/m > M_lim — wymagana wysokość h ≥ 0.30 m (obecnie 0.25 m) [WYMAGA ZMIANY MODELU]
-- PF1 / strefa S5 (płyta) — przekrój niewystarczający (poz. MES-PF): A_s,prov = 0 < max(A_s,req; A_s,min) = 1 — M_Ed = 278 kNm/m > M_lim — wymagana wysokość h ≥ 0.27 m (obecnie 0.25 m) [WYMAGA ZMIANY MODELU]
-- SF1 / pogrubienie — siatka dolna (MES) (poz. 10.18): A_s,prov = 539 < max(A_s,req; A_s,min) = 8118 mm²/m MES: A_s,req = 8119 mm²/m — nie do rozmieszczenia (φ ≤ 20, s ≥ 7 cm); przekrój pogrubienia niewystarczający [WYMAGA ZMIANY MODELU]
-- SF2 / pogrubienie — siatka dolna (MES) (poz. 10.19): A_s,prov = 539 < max(A_s,req; A_s,min) = 7155 mm²/m MES: A_s,req = 7155 mm²/m — nie do rozmieszczenia (φ ≤ 20, s ≥ 7 cm); przekrój pogrubienia niewystarczający [WYMAGA ZMIANY MODELU]
-- ZF1 / żebro — dołem (MES: A_s,req·b) (poz. 10.2): w strefie żebra μ > μ_lim — pogłębić/poszerzyć żebro [WYMAGA ZMIANY MODELU]
-- ZF1 / żebro — górą (MES: A_s,req·b) (poz. 10.2): w strefie żebra μ > μ_lim — pogłębić/poszerzyć żebro [WYMAGA ZMIANY MODELU]
-- ZF7 / żebro — dołem (MES: A_s,req·b) (poz. 10.8): w strefie żebra μ > μ_lim — pogłębić/poszerzyć żebro [WYMAGA ZMIANY MODELU]
-- ZF7 / żebro — górą (MES: A_s,req·b) (poz. 10.8): w strefie żebra μ > μ_lim — pogłębić/poszerzyć żebro [WYMAGA ZMIANY MODELU]
-- ZF8 / żebro — dołem (MES: A_s,req·b) (poz. 10.9): w strefie żebra μ > μ_lim — pogłębić/poszerzyć żebro [WYMAGA ZMIANY MODELU]
-- ZF8 / żebro — górą (MES: A_s,req·b) (poz. 10.9): w strefie żebra μ > μ_lim — pogłębić/poszerzyć żebro [WYMAGA ZMIANY MODELU]

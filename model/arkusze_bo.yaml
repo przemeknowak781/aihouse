@@ -1,6 +1,8 @@
 # Konfiguracja arkuszy rysunków KONSTRUKCJI (projekt techniczny, PT-BO) — generator lamela.views.konstrukcja.
 # Plik NIE zawiera danych budynku: geometria z model/budynek.yaml, zbrojenie z obliczeń lamela.obliczenia.konstrukcja
-# (analiza uruchamiana przy generowaniu). Uruchomienie:
+# (analiza uruchamiana przy generowaniu; płyta fundamentowa — MES na podłożu sprężystym, moduł plyta_fundamentowa).
+# Poziomy płyt wskazywane kondygnacją POD płytą (kond: P0 → strop nad parterem) — odporne na zmiany identyfikatorów.
+# Uruchomienie:
 #   PYTHONPATH=src python3 tools/generuj_widoki.py --arkusze model/arkusze_bo.yaml --out projekt/04_PT_konstrukcja/rysunki
 wspolne:
   pracownia: "PRACOWNIA PROJEKTOWA — nazwa do uzupełnienia"
@@ -17,18 +19,44 @@ wspolne:
   skala: 50
   format: auto
   plik_tomu: "tom_PT-BO.pdf"
+  # raporty modułu (aktualizowane przy każdym arkuszu): kontrola A_s,prov ≥ A_s,req, MES płyty fundamentowej, braki
   raport_zbrojenia: projekt/04_PT_konstrukcja/rysunki/kontrola_zbrojenia.md
+  raport_mes_fundamentu: projekt/04_PT_konstrukcja/obliczenia/plyta_fundamentowa_MES.md
   braki_danych: projekt/04_PT_konstrukcja/BRAKI_DANYCH.md
+  braki_danych_stale:
+    - "Łączniki termoizolacyjne płyt wspornikowych (PL-*): model nie określa wyrobu (typ, wysokość, klasa odporności ogniowej, ETA) — rysunki podają siły m_Ed, v_Ed z obliczeń; dobór wyrobu „lub równoważnego” i sprawdzenie ugięcia z podatnością łącznika — przed wydaniem PT."
+    - "Uziom fundamentowy: brak danych branży E (położenie GSU, potrzeba i klasa LPS wg analizy ryzyka PN-EN 62305-2, liczba przewodów odprowadzających) — trasa otoku, połączenia i wyprowadzenia na rzucie fundamentów są propozycją do uzgodnienia."
+    - "Izolacja obwodowa przeciwprzemarzaniowa: brak w modelu danych klimatycznych do obliczenia wg PN-EN ISO 13793 (wskaźnik mrozowy F_d / F_n, średnia roczna temperatura) — wymiary D = 1,00 m (garaż 1,20 m), d_n = 10 cm przyjęte z modelu bez sprawdzenia."
+    - "Przejścia instalacyjne przez płytę: instalacje.yaml zawiera tylko położenia pionów i przyborów — brak średnic tulei, rzędnych i spadków podejść kanalizacji pod płytą (projekt branży S)."
+    - "Geotechnika: parametry gruntu w modelu przykładowe (brief) — wymagana dokumentacja badań podłoża / projekt geotechniczny (kat. II) przed wydaniem PT; k_s płyty wyznaczono z M₀ modelu z obwiednią ×0,5/×2."
+    - "Obciążenie posadzki garażu i pasa gospodarczego (kat. F / sprzęt techniczny) — model nie przypisuje kategorii obciążenia użytkowego do płyty fundamentowej; w MES płyty przyjęto kat. A (2,0 kN/m²) na całej powierzchni."
+    - "Obrysy stropów/dachów w modelu po licu ocieplenia (płyty nad warstwą EPS) — do korekty w audycie A2 (lico warstwy konstrukcyjnej); rysunki są generowane z modelu i zaktualizują się automatycznie."
+    - "Beton krawędzi wysuniętych: model XC4 + XF1 (C30/37, c_nom 40 mm) — biblioteka wymiaruje dla XC4 (c_nom 40 mm, zgodne); klasa XF1 wymaga napowietrzenia/w/c wg PN-B-06265 — wpisać w specyfikacji betonu."
   uwagi: []
 arkusze:
+  # --- fundamenty
   - {nr: PT-BO-01, tytul: "RZUT FUNDAMENTÓW", typ: k_fundamenty}
-  - {nr: PT-BO-06, tytul: "PRZEKROJE FUNDAMENTU", typ: k_przekroj, skala: 20, widoki: [{typ: k_przekroj, detal: zebro, przekroj: "1", skala: 20}, {typ: k_przekroj, detal: zebro, przekroj: "2", skala: 20}, {typ: k_przekroj, detal: stopa, przekroj: "3", skala: 20}]}
-  - {nr: PT-BO-20, tytul: "SZCZEGÓŁY STROPÓW — WSPORNIK, WIENIEC, OPARCIE", typ: k_przekroj, skala: 20, widoki: [{typ: k_przekroj, detal: wspornik, poziom: ST1, element: PL-E, skala: 20}, {typ: k_przekroj, detal: wieniec, poziom: ST1, skala: 20}, {typ: k_przekroj, detal: oparcie, poziom: ST1, skala: 20}]}
-  - {nr: PT-BO-30, tytul: "ZBROJENIE BELEK (1)", typ: k_zbrojenie, element: belki, skala: 25, czesc: [1, 2], kolumny: 2}
-  - {nr: PT-BO-31, tytul: "ZBROJENIE BELEK (2)", typ: k_zbrojenie, element: belki, skala: 25, czesc: [2, 2], kolumny: 2}
-  - {nr: PT-BO-32, tytul: "ZBROJENIE NADPROŻY (1)", typ: k_zbrojenie, element: nadproza, skala: 25, czesc: [1, 3], kolumny: 3}
-  - {nr: PT-BO-35, tytul: "ZBROJENIE SCHODÓW", typ: k_zbrojenie, element: schody, skala: 25}
-  - {nr: PT-BO-05, tytul: "ZBROJENIE DOLNE PŁYTY FUNDAMENTOWEJ", typ: k_zbrojenie, element: fundament, warstwa: dolna}
-  - {nr: PT-BO-02, tytul: "RZUT KONSTRUKCJI STROPU NAD PARTEREM", typ: k_strop, poziom: ST1}
-  - {nr: PT-BO-10, tytul: "ZBROJENIE DOLNE STROPU NAD PARTEREM", typ: k_zbrojenie, element: strop, poziom: ST1, warstwa: dolna}
-  - {nr: PT-BO-11, tytul: "ZBROJENIE GÓRNE STROPU NAD PARTEREM", typ: k_zbrojenie, element: strop, poziom: ST1, warstwa: gorna}
+  - {nr: PT-BO-02, tytul: "PRZEKROJE CHARAKTERYSTYCZNE FUNDAMENTU", typ: k_przekroj, skala: 20, widoki: [{typ: k_przekroj, detal: zebro, przekroj: "1", skala: 20}, {typ: k_przekroj, detal: zebro, przekroj: "2", skala: 20}, {typ: k_przekroj, detal: stopa, przekroj: "3", skala: 20}]}
+  - {nr: PT-BO-03, tytul: "ZBROJENIE DOLNE PŁYTY FUNDAMENTOWEJ", typ: k_zbrojenie, element: fundament, warstwa: dolna}
+  - {nr: PT-BO-04, tytul: "ZBROJENIE GÓRNE PŁYTY FUNDAMENTOWEJ", typ: k_zbrojenie, element: fundament, warstwa: gorna}
+  # --- rzuty konstrukcji stropów
+  - {nr: PT-BO-05, tytul: "RZUT KONSTRUKCJI STROPU NAD PARTEREM", typ: k_strop, kond: P0}
+  - {nr: PT-BO-06, tytul: "RZUT KONSTRUKCJI STROPU NAD I PIĘTREM", typ: k_strop, kond: P1}
+  - {nr: PT-BO-07, tytul: "RZUT KONSTRUKCJI STROPODACHU", typ: k_strop, kond: P2}
+  # --- zbrojenie płyt (warstwy dolne i górne na osobnych arkuszach)
+  - {nr: PT-BO-08, tytul: "ZBROJENIE DOLNE STROPU NAD PARTEREM", typ: k_zbrojenie, element: strop, kond: P0, warstwa: dolna}
+  - {nr: PT-BO-09, tytul: "ZBROJENIE GÓRNE STROPU NAD PARTEREM", typ: k_zbrojenie, element: strop, kond: P0, warstwa: gorna}
+  - {nr: PT-BO-10, tytul: "ZBROJENIE DOLNE STROPU NAD I PIĘTREM", typ: k_zbrojenie, element: strop, kond: P1, warstwa: dolna}
+  - {nr: PT-BO-11, tytul: "ZBROJENIE GÓRNE STROPU NAD I PIĘTREM", typ: k_zbrojenie, element: strop, kond: P1, warstwa: gorna}
+  - {nr: PT-BO-12, tytul: "ZBROJENIE DOLNE STROPODACHU", typ: k_zbrojenie, element: stropodach, kond: P2, warstwa: dolna}
+  - {nr: PT-BO-13, tytul: "ZBROJENIE GÓRNE STROPODACHU", typ: k_zbrojenie, element: stropodach, kond: P2, warstwa: gorna}
+  # --- szczegóły 1:20
+  - {nr: PT-BO-14, tytul: "WĘZŁY WSPORNIKÓW Z ŁĄCZNIKAMI TERMOIZOLACYJNYMI", typ: k_przekroj, skala: 20, widoki: [{typ: k_przekroj, detal: wspornik, kond: P0, element: PL-E, skala: 20}, {typ: k_przekroj, detal: wspornik, kond: P1, element: PL-2, skala: 20}, {typ: k_przekroj, detal: wspornik, kond: P2, element: PL-3, skala: 20}]}
+  - {nr: PT-BO-15, tytul: "WIENIEC I OPARCIE STROPU NA MURZE SILIKATOWYM", typ: k_przekroj, skala: 20, widoki: [{typ: k_przekroj, detal: wieniec, kond: P0, skala: 20}, {typ: k_przekroj, detal: oparcie, kond: P0, skala: 20}]}
+  # --- belki, nadproża, schody
+  - {nr: PT-BO-16, tytul: "ZBROJENIE BELEK (1)", typ: k_zbrojenie, element: belki, skala: 25, czesc: [1, 2], kolumny: 2}
+  - {nr: PT-BO-17, tytul: "ZBROJENIE BELEK (2)", typ: k_zbrojenie, element: belki, skala: 25, czesc: [2, 2], kolumny: 2}
+  - {nr: PT-BO-18, tytul: "ZBROJENIE NADPROŻY (1)", typ: k_zbrojenie, element: nadproza, skala: 25, czesc: [1, 3], kolumny: 3}
+  - {nr: PT-BO-19, tytul: "ZBROJENIE NADPROŻY (2)", typ: k_zbrojenie, element: nadproza, skala: 25, czesc: [2, 3], kolumny: 3}
+  - {nr: PT-BO-20, tytul: "ZBROJENIE NADPROŻY (3)", typ: k_zbrojenie, element: nadproza, skala: 25, czesc: [3, 3], kolumny: 3}
+  - {nr: PT-BO-21, tytul: "ZBROJENIE SCHODÓW", typ: k_zbrojenie, element: schody, skala: 25}
