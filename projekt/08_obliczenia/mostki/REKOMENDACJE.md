@@ -10,13 +10,14 @@ Kryterium: ψ_oi > dobra praktyka + 0,03 W/(m·K) [ZAŁ] albo ocena „ZŁY” (
 
 | węzeł | ψ_oi | dobra pr. | ocena | wariant policzony | ψ_oi wariantu | f_Rsi wariantu |
 |---|---|---|---|---|---|---|
-| WZ-09a | +0,406 | 0,10 | ZŁY | XPS 10 cm na płycie pod posadzką garażu | +0,240 | 0,887 |
-|  |  |  |  | XPS 10 cm pod posadzką garażu + blok z betonu komórkowego 400 (24 cm) u podstawy ściany | +0,216 | 0,931 |
+| WZ-09a | +0,406 | 0,10 | ZŁY | bez bloku u podstawy ściany (odniesienie) | +0,527 | 0,791 |
+|  |  |  |  | blok z betonu komórkowego 600 (24 cm) u podstawy ściany | +0,438 | 0,868 |
+|  |  |  |  | nośny blok termoizolacyjny (λ ≤ 0,045, 24 cm) + przerwa termiczna PF2 przy żebrze (XPS 10 cm na grubości płyty) | +0,385 | 0,906 |
 | WZ-09b | +0,071 | 0,10 | ZŁY | — (patrz opis) | — | — |
 | WZ-09c | +0,081 | 0,10 | ZŁY | — (patrz opis) | — | — |
 | WZ-16a | +0,189 | 0,15 | BEZMOSTKOWY | — (patrz opis) | — | — |
 
-* **WZ-09a, WZ-09b, WZ-09c** — Połączenie z garażem na ciągłej płycie: płyta fundamentowa jest ciągła pod ścianą SWG (XPS tylko pod płytą) — ciepło z domu przepływa płytą do posadzki garażu (ψ_iu duże). Zalecane: **XPS ≥ 10 cm na płycie pod posadzką garażu** (cała posadzka albo pas ≥ 1,5–2,0 m przy SWG; jastrych garażu zbrojony, z dylatacją obwodową) + blok termoizolacyjny w 1. warstwie muru SWG (nośność — PT-K). Pod stropem (WZ-09b/c) pas docieplenia SUF-G 1,0 m ogranicza mostek (f_Rsi spełnione); ocena „ZŁY” wynika z testu ołówka (płyta ŻB dochodzi do przestrzeni nieogrzewanej) — akceptowalne przy ψ_ie ≤ 0,10; alternatywa: docieplenie całego spodu stropu garażu przy ścianach E i 2 pasem 1,5 m.
+* **WZ-09a, WZ-09b, WZ-09c** — Połączenie z garażem na ciągłej płycie: płyta fundamentowa jest ciągła pod ścianą SWG (uskok PF1/PF2 i żebro pod ścianą — geometria modelu) — ciepło z domu przepływa płytą i żebrem do płyty garażu i przez posadzkę do garażu (ψ_iu duże). W modelu (wydanie): XPS 10 cm na płycie pod posadzką garażu, nośny blok termoizolacyjny w 1. warstwie muru SWG (nośność — PT-K), wełna SWG po czole uskoku; przerwa termiczna PF2 przy żebrze daje niewielką poprawę (warianty) — ścieżka przez żebro i grunt. Ocena „ZŁY” przy spełnionym f_Rsi przyjęta świadomie (koncepcja §15.2). Pod stropem (WZ-09b/c) pas docieplenia SUF-G 1,0 m ogranicza mostek (f_Rsi spełnione); ocena „ZŁY” wynika z testu ołówka (płyta ŻB dochodzi do przestrzeni nieogrzewanej) — akceptowalne przy ψ_ie ≤ 0,10; alternatywa: docieplenie całego spodu stropu garażu przy ścianach E i 2 pasem 1,5 m.
 * **WZ-16a** — Krawędź stropu nad powietrzem z płytą PL-2: jak wyżej — łącznik 120 mm; belki odwrócone B3/B4/B5 w linii ściany obłożyć ociepleniem ściany na całą wysokość (wełna elewacji A ciągła do podsufitki); podsufitka jedna płaszczyzna pod wspornikiem A i pasem zach. PL-2 (audyt A2 I-5) — ψ < dobra praktyka możliwe dopiero przy łączniku 120 mm.
 
 ## B. Woda, hydroizolacja, detale (weryfikacja koncepcji / audyt A2 — uwzględnione w detalach PT-AR-D)

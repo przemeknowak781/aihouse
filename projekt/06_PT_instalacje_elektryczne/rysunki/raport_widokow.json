@@ -230,7 +230,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 38.1,
+      "czas_s": 37.9,
       "png_kontrola": {
         "px": [
           4075,
@@ -468,7 +468,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 33.3,
+      "czas_s": 4.3,
       "png_kontrola": {
         "px": [
           4075,
@@ -694,7 +694,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.8,
+      "czas_s": 4.1,
       "png_kontrola": {
         "px": [
           3367,
@@ -916,7 +916,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 5.1,
+      "czas_s": 5.0,
       "png_kontrola": {
         "px": [
           3367,
@@ -1152,7 +1152,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.9,
+      "czas_s": 2.8,
       "png_kontrola": {
         "px": [
           3508,
@@ -1399,7 +1399,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.6,
+      "czas_s": 3.2,
       "png_kontrola": {
         "px": [
           4312,
@@ -1616,7 +1616,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.9,
+      "czas_s": 4.1,
       "png_kontrola": {
         "px": [
           3071,
@@ -1845,7 +1845,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.3,
+      "czas_s": 2.0,
       "png_kontrola": {
         "px": [
           4075,
@@ -2307,7 +2307,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 8.7,
+      "czas_s": 9.4,
       "png_kontrola": {
         "px": [
           4075,
@@ -2543,7 +2543,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.1,
+      "czas_s": 3.2,
       "png_kontrola": {
         "px": [
           4075,
@@ -2788,7 +2788,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.6,
+      "czas_s": 3.7,
       "png_kontrola": {
         "px": [
           4193,
@@ -3015,7 +3015,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 1.8,
+      "czas_s": 2.0,
       "png_kontrola": {
         "px": [
           4075,
@@ -3287,5 +3287,5 @@
     },
     "wypelnienie_wazone": 0.843
   },
-  "czas_s": 134.6
+  "czas_s": 107.4
 }

@@ -417,9 +417,16 @@ def warstwy_stropu(m, strop: dict, kond_nad: str | None, *, mat_plyty: str | Non
     opis = []
     kn = m.kondygnacja(kond_nad) if kond_nad else None
     pod = strop.get("podloga") or (kn.podloga if kn else None)
+    pod_dol: list[dict] = []               # warstwy podłogi pod jej płytą (np. tynk) — tylko gdy strop nie ma sufitu
     if pod and m.przegroda(pod) is not None:
-        ws += warstwy_przegrody(m, pod)
-        opis.append(f"podłoga {pod}")
+        wp = warstwy_przegrody(m, pod)
+        i_k = next((i for i, w in enumerate(wp) if w.get("konstrukcyjna")), None)
+        if i_k is None:                    # podłoga bez płyty — same warstwy wykończeniowe
+            ws += wp
+        else:                              # podłoga z płytą (np. POD-1): płytę i sufit podaje strop — bez dublowania
+            ws += wp[:i_k]
+            pod_dol = wp[i_k + 1:]
+        opis.append(f"podłoga {pod}" + (" (warstwy nad płytą)" if i_k is not None else ""))
     mat = strop.get("mat") or mat_plyty
     if mat is None:
         mats = m.materialy
@@ -434,6 +441,10 @@ def warstwy_stropu(m, strop: dict, kond_nad: str | None, *, mat_plyty: str | Non
         elif m.material(suf) is not None:
             ws.append({"mat": suf, "d": 0.01})
             opis.append(f"sufit {suf} 1 cm")
+        else:
+            ws += pod_dol
+    else:
+        ws += pod_dol
     return ws, " + ".join(opis)
 
 

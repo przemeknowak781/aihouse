@@ -8,7 +8,7 @@
 
 ## Stan opracowania i sprawy otwarte — rejestr wymagań, sekcja E
 
-Tom opracowano automatycznie z modelu budynku (`model/*.yaml`, stan z 2026-09-25 06:48) i bibliotek obliczeniowych
+Tom opracowano automatycznie z modelu budynku (`model/*.yaml`, stan z 2026-09-25 08:02) i bibliotek obliczeniowych
 `lamela.obliczenia` uruchamianych przy każdym generowaniu tomu — każda liczba w tomie pochodzi z modelu albo
 z obliczeń. Działka, MPZP, warunki gruntowo-wodne i warunki przyłączenia są [DANE PRZYKŁADOWE – FIKCYJNE]; parametry urządzeń
 przyjęto z kart **wyrobów przykładowych** (oznaczenie [DANE PRZYKŁADOWE – FIKCYJNE] lub [ZAŁ]) — dopuszcza się wyroby równoważne
@@ -20,9 +20,9 @@ spełniające parametry wymagane podane w rozdziale „Zasadnicze urządzenia”
 |---|---|---|---|---|
 | Instalacja wodociągowa i c.w.u. | 12 | 12 | 0 | 0 |
 | Kanalizacja sanitarna | 33 | 33 | 0 | 0 |
-| Wody opadowe i retencja | 64 | 64 | 0 | 0 |
-| Drenaż i odwodnienie powierzchniowe | 18 | 7 | 0 | 11 |
-| Ogrzewanie (PC, podłogówka, bufor, naczynia, hałas) | 67 | 61 | 0 | 6 |
+| Wody opadowe i retencja | 120 | 120 | 0 | 0 |
+| Drenaż i odwodnienie powierzchniowe | 20 | 6 | 0 | 14 |
+| Ogrzewanie (PC, podłogówka, bufor, naczynia, hałas) | 68 | 62 | 0 | 6 |
 | Wentylacja mechaniczna (bilans, centrala, czerpnia/wyrzutnia) | 12 | 12 | 0 | 0 |
 | Charakterystyka energetyczna (EP ≤ EP_max; wariant z PV i bez PV) | 2 | 2 | 0 | 0 |
 
@@ -30,14 +30,12 @@ Warunki informacyjne — wartości podawane bez kryterium (np. moc ścian grzewc
 
 *Źródło: lamela.obliczenia.sanitarne, lamela.obliczenia.energia — uruchomienie przy generowaniu tomu*
 
+Numeracja pomieszczeń w tomie — jak na arkuszach i w PT-1 AR (PN-B-01025, W-314): numer kondygnacji (parter = 1, I piętro = 2, II piętro = 3), kropka, numer kolejny. Identyfikatory modelu (`model/budynek.yaml`) mają parter = 0 — numer w tomie = identyfikator modelu + 1 w części przed kropką.
+
 **Sprawy otwarte** (do zamknięcia przed wydaniem tomu do realizacji; po uzupełnieniu modelu status aktualizuje się przy ponownym generowaniu):
 
-1. Rysunki PT-IS-09, PT-IS-17 podają pompę ciepła PC-R290-12, a bieżące obliczenia — PC-R290-07 (przykład) — rysunki nieaktualne wobec obliczeń; wygenerować ponownie przed wydaniem.
-2. Rysunki PT-IS-07, PT-IS-08, PT-IS-09, PT-IS-10, PT-IS-11 zawierają uwagi „SPRAWDZENIE NIESPEŁNIONE” z poprzedniej wersji obliczeń, a bieżące obliczenia nie wykazują warunków niespełnionych — wygenerować ponownie.
-3. Arkusze IS wygenerowano przed ostatnią zmianą modelu — przed wydaniem wygenerować ponownie (tools/generuj_widoki.py --arkusze model/arkusze_is.yaml).
-4. Pompa ciepła — dwa różne zestawy danych przykładowych: moduł energii (dobór, EP) P(A−7/W35) = 8,0 kW, SCOP₃₅ = 4,50; moduł ogrzewania (PC-R290-07 (przykład)) P(A−7/W35) = 6,2 kW, SCOP₃₅ = 4,70, L_WA = 57 dB — ujednolicić w `instalacje.wyroby.PC` (DTR/DWU wybranego wyrobu) i przeliczyć EP, punkt biwalentny i hałas.
-5. `instalacje.wyroby` w modelu puste — obliczenia na danych przykładowych bibliotek (PC, centrala wentylacyjna, wodomierz Δp(Q3), zawór EA k_v, wpusty) [DANE PRZYKŁADOWE – FIKCYJNE]; zastąpić danymi DTR/DWU wyrobów wybranych przez wykonawcę (wyroby równoważne).
-6. Dane osobowe (Inwestor, projektanci, nr uprawnień, pracownia) — brak sekcji `projekt:` w model/budynek.yaml; pola oznaczone jako do uzupełnienia (strona tytułowa, oświadczenie).
+1. `instalacje.wyroby` w modelu puste — obliczenia na danych przykładowych bibliotek (PC, centrala wentylacyjna, wodomierz Δp(Q3), zawór EA k_v, wpusty) [DANE PRZYKŁADOWE – FIKCYJNE]; zastąpić danymi DTR/DWU wyrobów wybranych przez wykonawcę (wyroby równoważne).
+2. Dane osobowe (Inwestor, projektanci, nr uprawnień, pracownia) — brak sekcji `projekt:` w model/budynek.yaml; pola oznaczone jako do uzupełnienia (strona tytułowa, oświadczenie).
 
 ## Przedmiot, zakres i podstawy opracowania — § 23 RPB
 
@@ -87,7 +85,7 @@ dotyczącymi zamierzenia budowlanego (oświadczenie projektanta).
 
 ### Źródło ciepła i instalacja ogrzewcza z automatyczną regulacją temperatury — § 23 pkt 7 lit. a RPB; W-150…W-156
 
-**Obciążenie cieplne.** Projektowe obciążenie cieplne budynku Φ_HL = **7,41 kW**
+**Obciążenie cieplne.** Projektowe obciążenie cieplne budynku Φ_HL = **7,46 kW**
 (PN-EN 12831, θ_e = −18 °C, średnia roczna θ_m,e = 7,9 °C; W-150, W-151),
 z dodatkiem na c.w.u. Φ_W = 1,25 kW. Temperatury wewnętrzne wg WT § 134 ust. 2 (model
 `pomieszczenia[].temp`); garaż nieogrzewany (θ_u = −10,6 °C).
@@ -96,17 +94,17 @@ z dodatkiem na c.w.u. Φ_W = 1,25 kW. Temperatury wewnętrzne wg WT § 134 ust. 
 dane urządzenia przykładowego „PC-R290-07 (przykład)” [DANE PRZYKŁADOWE – FIKCYJNE]: moc grzewcza P(A−7/W35) =
 6,2 kW, SCOP (35 °C) = 4,70, η_s = 185 %,
 poziom mocy akustycznej L_WA = 57 dB (tryb nocny 52 dB). Układ
-monoenergetyczny: punkt biwalentny θ_biv = **−9,7 °C**, grzałka elektryczna
+monoenergetyczny: punkt biwalentny θ_biv = **−9,6 °C**, grzałka elektryczna
 6,0 kW pokrywa 0,04 % rocznego zapotrzebowania (bilans godzinowy
-TMY Poznań). Jednostka zewnętrzna: jednostka zewn. PC monoblok R290 w osłonie lamelowej z ekranem akustycznym od tarasu; 7,0 m od granicy E (≥ 6,0 — W-024); strefa R290 1,0 m bez otworów, wpustów i studzienek (W-156). Skropliny —
+TMY Poznań). Jednostka zewnętrzna: jednostka zewn. PC monoblok R290 w osłonie lamelowej z ekranem akustycznym od tarasu; strefa R290 1,0 m bez otworów, wpustów i studzienek (W-156); odległość od granicy (działka sąsiednia 123/5) **7,60 m** (geometria modelu — ta sama wartość w obliczeniu hałasu i w sprawdzeniu odległości). Skropliny —
 studnia chłonna skroplin PC (żwir, ≥ 0,8 m p.p.t.), poza strefą R290 (W-146). Moduł hydrauliczny, zasobnik c.w.u. i bufor —
 pomieszczenie techniczne parteru.
 
 **Instalacja ogrzewcza.** Ogrzewanie podłogowe wodne niskotemperaturowe: θ_V = **35 °C**,
 Δθ = 5 K, rura 16×2,0 mm (PE-X/PE-RT z barierą
-antydyfuzyjną), 26 pętli w 22 pomieszczeniach (długość pętli ≤ 100 m,
-Δp pętli ≤ 25 kPa). Rozdzielacze kondygnacyjne: P0: 1 rozdzielacz, 12 pętli, 649 kg/h, Δp_max 24,1 kPa; P1: 1 rozdzielacz, 7 pętli, 290 kg/h, Δp_max 23,0 kPa; P2: 1 rozdzielacz, 7 pętli, 497 kg/h, Δp_max 15,4 kPa.
-Uzupełniające ściany grzewcze wodne (model `instalacje.grzejniki`): 0.03 — 80 W, 0.09 — 280 W, 1.05 — 150 W, 1.07 — 180 W, 2.04 — 180 W, 2.06 — 200 W.
+antydyfuzyjną), 27 pętli w 22 pomieszczeniach (długość pętli ≤ 100 m,
+Δp pętli ≤ 25 kPa). Rozdzielacze kondygnacyjne: P0: 2 rozdzielacz, 13 pętli, 674 kg/h, Δp_max 14,3 kPa; P1: 1 rozdzielacz, 7 pętli, 296 kg/h, Δp_max 23,5 kPa; P2: 1 rozdzielacz, 7 pętli, 522 kg/h, Δp_max 16,3 kPa.
+Uzupełniające ściany grzewcze wodne (model `instalacje.grzejniki`): 1.03 — 80 W, 1.09 — 280 W, 2.05 — 150 W, 2.07 — 180 W, 3.04 — 180 W, 3.06 — 200 W.
 Bufor szeregowy 80 dm³ (odszranianie i minimalny czas pracy sprężarki przy zamkniętych
 pętlach), naczynie wzbiorcze przeponowe c.o. 18 dm³, zawór bezpieczeństwa
 3,0 bar. Przewody PC ↔ budynek: PE-RT/Al/PE-RT 32×3,0, izolacja wewnątrz
@@ -132,33 +130,33 @@ przepływ powietrza przez podcięcia/kratki drzwi. Bilans: strumienie z modelu (
 wydajność nominalna 450 m³/h (maks. 500 m³/h), sprawność odzysku
 η_t = 85 %, SFP = 0,50 kW/(m³/s) (limit WT 1,90),
 klasa SEC A (SEC = −40 kWh/(m²·a); (UE) 1253/2014), filtry
-ISO ePM1 50 % (nawiew), ISO Coarse 60 % (wywiew), moc wentylatorów 102 W. Lokalizacja: P2 — centrala wentylacyjna 450 m³/h, η_t 85 % — na podstawie antywibracyjnej, połączenia elastyczne, tłumiki na 4 króćcach; L w pokojach ≤ wartości PN-B-02151-2 do sprawdzenia w PT-IS (A3 I-8; W-232).
+ISO ePM1 50 % (nawiew), ISO Coarse 60 % (wywiew), moc wentylatorów 102 W. Lokalizacja: P2 — centrala wentylacyjna 450 m³/h, η_t 85 %, 0,15 m od ściany (króćce ODA/ETA — V3) — na podstawie antywibracyjnej, połączenia elastyczne, tłumiki na 4 króćcach; L w pokojach ≤ wartości PN-B-02151-2 do sprawdzenia w PT-IS (A3 I-8; W-232).
 Kanał główny Ø250 mm; przewody powietrza zewnętrznego i wyrzutowego izolowane cieplnie
 z paroizolacją (W-168); tłumiki akustyczne na króćcach centrali; skropliny do kanalizacji przez syfon
-z zamknięciem wodnym. Czerpnia na wys. 10,0 m, wyrzutnia na wys.
+z zamknięciem wodnym. Czerpnia na wys. 6,9 m, wyrzutnia na wys.
 10,0 m (odległości wg WT § 152 — sprawdzenia w obliczeniach).
-Garaż — wentylacja naturalna, bez połączenia z centralą (Garaż 0.13: otwory wentylacji naturalnej ≥ 0,04 m²/stanowisko (WT § 108 ust. 1 pkt 1); Garaż 0.13: bez podłączenia do rekuperacji (R6 3.5)).
+Garaż — wentylacja naturalna, bez połączenia z centralą (Garaż 1.13: otwory wentylacji naturalnej ≥ 0,04 m²/stanowisko (WT § 108 ust. 1 pkt 1); Garaż 1.13: bez podłączenia do rekuperacji (R6 3.5)).
 
 **Tabela 2. Strumienie powietrza wentylacji mechanicznej**
 
 | Pomieszczenie | Nawiew [m³/h] | Wywiew [m³/h] | Podstawa |
 |---|---|---|---|
-| 0.03 WC gościnne | 0,00 | 30,00 | wydzielony WC |
-| 0.05 Spiżarnia | 0,00 | 15,00 | pomieszczenie pomocnicze bezokienne |
-| 0.06 Salon + jadalnia + kuchnia | 90,00 | 50,00 | kuchnia z kuchenką elektryczną, > 3 osób |
-| 0.09 Łazienka gościnna (natrysk) | 0,00 | 50,00 | łazienka |
-| 0.10 Pokój gościnny / gabinet | 40,00 | 0,00 | pokój — rozdział nawiewu |
-| 0.12 Pomieszczenie techniczne | 0,00 | 15,00 | pomieszczenie pomocnicze bezokienne |
-| 1.02 Pokój rodzinny / biblioteka (boks C) | 50,00 | 0,00 | pokój — rozdział nawiewu |
-| 1.03 Pokój dziecka 1 | 40,00 | 0,00 | pokój — rozdział nawiewu |
-| 1.04 Pokój dziecka 2 | 40,00 | 0,00 | pokój — rozdział nawiewu |
-| 1.05 Łazienka dzieci (wanna) | 0,00 | 50,00 | łazienka |
-| 1.07 WC z natryskiem | 0,00 | 50,00 | łazienka |
-| 1.08 Pralnia z suszarnią | 0,00 | 40,00 | pralnia ≥ 2 h⁻¹ |
-| 2.02 Sypialnia rodziców | 60,00 | 0,00 | pokój — rozdział nawiewu |
-| 2.04 Łazienka rodziców | 0,00 | 50,00 | łazienka |
-| 2.05 Gabinet / pokój gościnny okazjonalny | 45,00 | 0,00 | pokój — rozdział nawiewu |
-| 2.07 Pom. techniczne (centrala rekuperacyjna, wyłaz na dach) | 0,00 | 15,00 | pomieszczenie pomocnicze bezokienne |
+| 1.03 WC gościnne | 0,00 | 30,00 | wydzielony WC |
+| 1.05 Spiżarnia | 0,00 | 15,00 | pomieszczenie pomocnicze bezokienne |
+| 1.06 Salon + jadalnia + kuchnia | 90,00 | 50,00 | kuchnia z kuchenką elektryczną, > 3 osób |
+| 1.09 Łazienka gościnna (natrysk) | 0,00 | 50,00 | łazienka |
+| 1.10 Pokój gościnny / gabinet | 40,00 | 0,00 | pokój — rozdział nawiewu |
+| 1.12 Pomieszczenie techniczne | 0,00 | 15,00 | pomieszczenie pomocnicze bezokienne |
+| 2.02 Pokój rodzinny / biblioteka (boks C) | 50,00 | 0,00 | pokój — rozdział nawiewu |
+| 2.03 Pokój dziecka 1 | 40,00 | 0,00 | pokój — rozdział nawiewu |
+| 2.04 Pokój dziecka 2 | 40,00 | 0,00 | pokój — rozdział nawiewu |
+| 2.05 Łazienka dzieci (wanna) | 0,00 | 50,00 | łazienka |
+| 2.07 WC z natryskiem | 0,00 | 50,00 | łazienka |
+| 2.08 Pralnia z suszarnią | 0,00 | 40,00 | pralnia ≥ 2 h⁻¹ |
+| 3.02 Sypialnia rodziców | 60,00 | 0,00 | pokój — rozdział nawiewu |
+| 3.04 Łazienka rodziców | 0,00 | 50,00 | łazienka |
+| 3.05 Gabinet / pokój gościnny okazjonalny | 45,00 | 0,00 | pokój — rozdział nawiewu |
+| 3.07 Pom. techniczne (centrala rekuperacyjna, wyłaz na dach) | 0,00 | 15,00 | pomieszczenie pomocnicze bezokienne |
 | Razem | 365,00 | 365,00 | bilans ±10 % |
 
 *Źródło: model/budynek.yaml (pomieszczenia[].went); lamela.obliczenia.energia.wentylacja*
@@ -212,9 +210,12 @@ PVC-U lite SN8 pod posadzką i na przykanaliku (przykładowe — lub równoważn
 
 ### Odprowadzenie i zagospodarowanie wód opadowych, drenaż — § 23 pkt 7 lit. e RPB; W-142…W-146, W-018, W-019
 
-**Odwodnienie dachów** (PN-EN 12056-3, r = 0,046 l/(s·m²); W-142): 9 pól dachowych
-o łącznej powierzchni **249,0 m²**, Q = **11,46 l/s**; 14 wpustów
-dachowych (podgrzewane) i przelewy awaryjne w attykach; dach zielony ekstensywny
+**Odwodnienie dachów** (PN-EN 12056-3, r = 0,046 l/(s·m²); W-142): 9 pól odwadnianych o łącznej
+powierzchni **249,0 m²**, Q = **12,51 l/s**:
+dachy z attyką (D1, D2, D3, D4) — wpusty dachowe podgrzewane, razem 6 szt.,
+i przelewy awaryjne w attykach; płyty okapowe i wspornikowe (PL-E, PL-DA, PL-2, PL-3, PL-D) — rynny
+ukryte za blendą czołową (PT-1 AR), wyloty rynien podgrzewane, razem 8 szt., i przelewy (rzygacze)
+w blendzie. Dach zielony ekstensywny
 (D4 59,1 m²). Rury spustowe wewnętrzne
 (szacht SI) i zewnętrzne → kolektory deszczowe PVC-U: kolektor KD-W PVC 160 (RS3, RS4, RS1/RS2 z SI); kolektor KD-E PVC 160 (RS5 dach garażu, RS6 z pom. technicznego); przelew zbiornika DN160 do niecki chłonnej.
 
@@ -222,10 +223,11 @@ dachowych (podgrzewane) i przelewy awaryjne w attykach; dach zielony ekstensywny
 jest urządzeniem wodnym) z osadnikiem i filtrem, pompą do podlewania ogrodu (pokrycie zapotrzebowania
 na podlewanie 100 %; bilans IMGW 1991–2020) i przelewem do niecki chłonnej
 (ogród deszczowy). Powierzchnia zredukowana zlewni A_red = 210,0 m²; wymagana objętość niecki
-(PANDa 2050, C = 10 lat, f_b = 1,2; W-143) V_min = **5,71 m³**; niecka w modelu
-(dzialka.yaml): 8,4 m³, głębokość 0,30 m — czas opróżniania
-1,6 h (≤ 24 h). Deszczówka — instalacja odrębna, bez połączenia z wodociągiem (W-136).
-Odwodnienia liniowe przy drzwiach bez progu i przed bramą garażu (14 korytek
+(PANDa 2050, C = 10 lat, f_b = 1,2; W-143) V_min = **5,08 m³**. Niecka przyjęta
+(model (dzialka.yaml: retencja.rozsaczanie)): A_n = **28,0 m²**, głębokość
+0,30 m, V = **8,40 m³** ≥ V_min (minimalna powierzchnia
+z doboru 19,5 m²) — czas opróżniania 1,0 h (≤ 24 h). Deszczówka — instalacja odrębna, bez połączenia z wodociągiem (W-136).
+Odwodnienia liniowe przy drzwiach bez progu i przed bramą garażu (16 korytek
 wg obliczeń); woda z podjazdu i garażu przez osadnik z separatorem — nie do zbiornika retencyjnego.
 Skrzynki rozsączające — wyłącznie wariant opcjonalny po stanowisku PGW Wody Polskie (D-05).
 
@@ -238,7 +240,7 @@ Grunt: piaski średnie, k_f = 3,00·10⁻⁴ m/s (wartość typowa [W]; wymagane
 
 | Medium | Sieć zewnętrzna / odbiornik | Przyłącze / przewód | Długość [m] |
 |---|---|---|---|
-| woda | wodociąg PE 110 (ul. Lipowa) | przyłącze PE 40, przykrycie ≥ 1,20 m (W-141), pod podjazdem i płytą garażu w rurze osłonowej, wodomierz w pom. 0.12 | 18,80 |
+| woda | wodociąg PE 110 (ul. Lipowa) | przyłącze PE 40, przykrycie ≥ 1,20 m (W-141), pod podjazdem i płytą garażu w rurze osłonowej, wodomierz w pom. 1.12 | 18,80 |
 | ścieki bytowe | kanalizacja sanitarna PVC 200, dno ≈ 99,20 | przykanalik PVC-U 160, i ≥ 2 %, studzienka rewizyjna SR1 Ø425 (x 13,0; y 43,8) — wyjście z płyty pod ścianą pn. (piony K1, K2) | 13,90 |
 | wody opadowe | zagospodarowanie na działce (retencja) | kolektor KD-W PVC 160 (RS3, RS4, RS1/RS2 z SI) | 34,80 |
 | wody opadowe | zagospodarowanie na działce (retencja) | kolektor KD-E PVC 160 (RS5 dach garażu, RS6 z pom. technicznego) | 31,60 |
@@ -246,6 +248,7 @@ Grunt: piaski średnie, k_f = 3,00·10⁻⁴ m/s (wartość typowa [W]; wymagane
 | wody opadowe | zagospodarowanie na działce (retencja) | OL-1 (i OL-4 kanałem wzdłuż podjazdu) → separator SEP-1 → niecka NT-E (PVC 160) | 3,30 |
 | wody opadowe | zagospodarowanie na działce (retencja) | RS7 (rynny zach. PL-E i PL-2) → KD-W, PVC 110 | 3,20 |
 | wody opadowe | zagospodarowanie na działce (retencja) | RS8 (rynny PL-E pd. i PL-D) + OL-6 (próg DZ3) → KD-E, PVC 110 | 4,10 |
+| wody opadowe | zagospodarowanie na działce (retencja) | OL-7 / OL-7a (próg bramy, filarki, wnęka wejścia) → separator SEP-1, PVC 110 (wydanie, V1-02) | 2,30 |
 | wody opadowe | zagospodarowanie na działce (retencja) | OL-5 (próg DZ2 garażu) → KD-E, PVC 110 (woda czysta z podestu — nie z posadzki garażu) | 0,80 |
 
 *Źródło: model/dzialka.yaml — uzbrojenie istniejące i projektowane*
@@ -264,7 +267,7 @@ potwierdzenia w warunkach przyłączenia gestorów sieci (D-23): ciśnienie dysp
 
 Klimat zewnętrzny: θ_e = −18 °C (strefa II, W-150), θ_m,e = 7,9 °C; dane
 godzinowe TMY Poznań (WMO 12330) do bilansu pompy ciepła i charakterystyki energetycznej. Klimat wewnętrzny
-(WT § 134 ust. 2; model `pomieszczenia[].temp`): **16 °C** — 6 pomieszczeń: 0.01, 0.05, 0.15, 0.16, 0.12, 2.07; **20 °C** — 22 pomieszczeń: 0.02, 0.03, 0.04, 0.06, 0.07, 0.08, 0.10, 0.11, 1.01, 1.02, 1.03, 1.04, 1.06, 1.08, 2.01, 2.02, 2.03, 2.05, 2.06, 0.14, 1.09, 2.08; **24 °C** — 0.09 Łazienka gościnna (natrysk), 1.05 Łazienka dzieci (wanna), 1.07 WC z natryskiem, 2.04 Łazienka rodziców. Powietrze zewnętrzne ≥ 20 m³/h na osobę
+(WT § 134 ust. 2; model `pomieszczenia[].temp`): **16 °C** — 6 pomieszczeń: 1.01, 1.05, 1.15, 1.16, 1.12, 3.07; **20 °C** — 22 pomieszczeń: 1.02, 1.03, 1.04, 1.06, 1.07, 1.08, 1.10, 1.11, 2.01, 2.02, 2.03, 2.04, 2.06, 2.08, 3.01, 3.02, 3.03, 3.05, 3.06, 1.14, 2.09, 3.08; **24 °C** — 1.09 Łazienka gościnna (natrysk), 2.05 Łazienka dzieci (wanna), 2.07 WC z natryskiem, 3.04 Łazienka rodziców. Powietrze zewnętrzne ≥ 20 m³/h na osobę
 (5 os.), wywiew wg PN-83/B-03430/Az3 (W-161, W-162). Szczelność budynku n50 = 1,0 h⁻¹ [ZAŁ]
 (cel projektowy — potwierdzić próbą ciśnieniową, W-249); sprawność odzysku ciepła η_v = 0,85.
 
@@ -272,10 +275,10 @@ godzinowe TMY Poznań (WMO 12330) do bilansu pompy ciepła i charakterystyki ene
 
 **Podstawowe wyniki** (tabela w PDF):
 
-* Projektowe obciążenie cieplne budynku Φ_HL: 7,41 kW (—; PN-EN 12831 [W-151])
+* Projektowe obciążenie cieplne budynku Φ_HL: 7,46 kW (—; PN-EN 12831 [W-151])
 * Pompa ciepła PC-R290-07 (przykład): moc P(A−7/W35): 6,2 kW (—; [DANE PRZYKŁADOWE – FIKCYJNE])
-* Pokrycie mocy przy θ_e: P_PC + P_grzałki ≥ Φ_HL + Φ_W: 10,55 kW (≥ 8,66 kW; PN-EN 12831 / VDI 4645 [W] [W-155])
-* Punkt biwalentny: −9,7 °C (≤ −7,0 °C; VDI 4645 / praktyka [ZAŁ] [W-155])
+* Pokrycie mocy przy θ_e: P_PC + P_grzałki ≥ Φ_HL + Φ_W: 10,55 kW (≥ 8,71 kW; PN-EN 12831 / VDI 4645 [W] [W-155])
+* Punkt biwalentny: −9,6 °C (≤ −7,0 °C; VDI 4645 / praktyka [ZAŁ] [W-155])
 * Udział grzałki w pokryciu Q_H: 0,0004  (≤ 0,0500; [ZAŁ] [W-155])
 * Sezonowa efektywność η_s (35 °C): 1,85  (≥ 1,25; rozp. (UE) 813/2013 zał. II [W-155])
 * Moc nominalna PC (R290 — rozp. (UE) 2024/573): 7,4 kW (≤ 12,0 kW; rozp. (UE) 2024/573 zał. IV pkt 8 lit. b [W-155])
@@ -298,10 +301,10 @@ godzinowe TMY Poznań (WMO 12330) do bilansu pompy ciepła i charakterystyki ene
 * Przykanalik: napełnienie h/d: 0,21  (≤ 0,70; PN-EN 12056-2 zał. B (tabl. B.2) [W-138])
 * Przykanalik: prędkość przy Q_ww (samooczyszczanie): 0,83 m/s (≥ 0,70 m/s; praktyka [ZAŁ] — informacyjnie przy małych Q (spłukiwanie miską ustępową) [W-138])
 * Najniższy wpust/przybór powyżej poziomu piętrzenia (teren przy kanale w ulicy): 0,00 m (> −0,31 m; WT §124; PN-EN 12056-1 — inaczej zamknięcie przeciwzalewowe PN-EN 13564-1 lub przepompownia PN-EN 12056-4 [W-140])
-* Dachy: A / Q (r = 0,046 l/(s·m²)): 249,0 m² / 11,46 l/s  (—; PN-EN 12056-3 [W-142])
+* Dachy: A / Q (r = 0,046 l/(s·m²)): 249,0 m² / 12,51 l/s  (—; PN-EN 12056-3 [W-142])
 * Pojemność szczelnego zbiornika (bez zgłoszenia): 5,0 m³ (≤ 5,0 m³; W-145: PB art. 29 ust. 2 pkt 36 (5–15 m³ — zgłoszenie, ust. 1 pkt 38) [W-145])
-* Niecka: pojemność ≥ V_min (zbiornik pełny — bez zaliczenia): 5,85 m³ (≥ 5,71 m³; Aquanet 2024 wzór (1), f_b [W-143])
-* Niecka: czas opróżniania: 1,6 h (≤ 24,0 h; W-143: Aquanet 2024 zał. C [zalozenie] [W-143])
+* Niecka: pojemność ≥ V_min (zbiornik pełny — bez zaliczenia): 8,40 m³ (≥ 5,08 m³; Aquanet 2024 wzór (1), f_b [W-143])
+* Niecka: czas opróżniania: 1,0 h (≤ 24,0 h; W-143: Aquanet 2024 zał. C [zalozenie] [W-143])
 
 ### Obliczenia: obciążenie cieplne pomieszczeń i budynku — PN-EN 12831; W-150, W-151
 
@@ -337,9 +340,12 @@ Charakterystykę energetyczną opracowano wg metodologii (Dz.U. 2015 poz. 376 ze
 dla A_f = 262,4 m² (bez garażu nieogrzewanego), metodą miesięczną z danymi klimatycznymi Poznań.
 Wariant projektowy **A** obejmuje instalację fotowoltaiczną (projektowaną w PT-4 IE); ponieważ energia z PV
 liczona jest tylko w części autokonsumowanej, a instalacja PV może nie zostać wykonana razem z budynkiem,
-**wariant A0 bez PV podano jawnie** — oba warianty sprawdzono względem EP_max. Dane urządzeń (SCOP, η_t,
-moce pomocnicze) z kart wyrobów przykładowych [DANE PRZYKŁADOWE – FIKCYJNE] — przed wydaniem do realizacji zastąpić danymi
-deklarowanymi wybranych wyrobów (W-242) i przeliczyć.
+**wariant A0 bez PV podano jawnie** — oba warianty sprawdzono względem EP_max. EP policzono dla urządzeń
+zaprojektowanych w tym tomie — pompy ciepła PC-R290-07 (przykład) (dobór w obliczeniach ogrzewania) i zasobnika
+c.w.u. 400 dm³ z dezynfekcją termiczną (obliczenia wody); dane liczbowe tych
+urządzeń (SCOP, COP_cwu, strata postojowa), centrali (η_t, SFP) i moce pomocnicze są danymi wyrobów
+przykładowych [DANE PRZYKŁADOWE – FIKCYJNE] — po wyborze wyrobów zastąpić danymi deklarowanymi (W-242), a generator tomu
+przeliczy EP, punkt biwalentny i hałas.
 
 ### Bilans mocy urządzeń elektrycznych i zużywających inne rodzaje energii — § 23 pkt 11 lit. a RPB
 
@@ -348,18 +354,18 @@ deklarowanymi wybranych wyrobów (W-242) i przeliczyć.
 | Odbiornik | Grupa | P [kW] | Faz |
 |---|---|---|---|
 | Oświetlenie P0 | oswietlenie | 0,56 | 1 |
-| Gniazda P0: 0.10 Pokój gościnny / gabinet, 0.08 Przedpokój gościnny, 0.14 Szacht instalacyjny SI, 0.04 Klatka schodowa, 0.16 Schowek pod spocznikiem (h < 1,40), 0.07 Pas komunikacyjny przy schodach, 0.05 Spiżarnia, 0.15 Schowek pod schodami (h 1,40–2,20), 0.02 Hol, 0.01 Wiatrołap, 0.11 Przedsionek gospodarczy | gniazda | 2,00 | 1 |
-| Gniazda P1: 1.04 Pokój dziecka 2, 1.03 Pokój dziecka 1, 1.09 Szacht instalacyjny SI, 1.01 Hol, 1.06 Klatka schodowa | gniazda | 2,00 | 1 |
-| Gniazda P1: 1.02 Pokój rodzinny / biblioteka (boks C) | gniazda | 2,00 | 1 |
-| Gniazda P2: 2.02 Sypialnia rodziców, 2.03 Garderoba (przedpokój apartamentu), 2.08 Szacht instalacyjny SI, 2.06 Klatka schodowa (wyjście z biegu 2, pustka), 2.01 Hol | gniazda | 2,00 | 1 |
-| Gniazda P2: 2.05 Gabinet / pokój gościnny okazjonalny | gniazda | 2,00 | 1 |
-| Gniazda kuchenne 1 (0.06 Salon + jadalnia + kuchnia) | gniazda_kuchnia | 2,00 | 1 |
-| Gniazda kuchenne 2 (0.06 Salon + jadalnia + kuchnia) | gniazda_kuchnia | 2,00 | 1 |
-| Gniazda łazienki (0.03 WC gościnne) | gniazda_lazienka | 2,00 | 1 |
-| Gniazda łazienki (0.09 Łazienka gościnna (natrysk)) | gniazda_lazienka | 2,00 | 1 |
-| Gniazda łazienki (1.05 Łazienka dzieci (wanna)) | gniazda_lazienka | 2,00 | 1 |
-| Gniazda łazienki (1.07 WC z natryskiem) | gniazda_lazienka | 2,00 | 1 |
-| Gniazda łazienki (2.04 Łazienka rodziców) | gniazda_lazienka | 2,00 | 1 |
+| Gniazda P0: 1.10 Pokój gościnny / gabinet, 1.08 Przedpokój gościnny, 1.14 Szacht instalacyjny SI, 1.04 Klatka schodowa, 1.16 Schowek pod spocznikiem (h < 1,40), 1.07 Pas komunikacyjny przy schodach, 1.05 Spiżarnia, 1.15 Schowek pod schodami (h 1,40–2,20), 1.02 Hol, 1.01 Wiatrołap, 1.11 Przedsionek gospodarczy | gniazda | 2,00 | 1 |
+| Gniazda P1: 2.04 Pokój dziecka 2, 2.03 Pokój dziecka 1, 2.09 Szacht instalacyjny SI, 2.01 Hol, 2.06 Klatka schodowa | gniazda | 2,00 | 1 |
+| Gniazda P1: 2.02 Pokój rodzinny / biblioteka (boks C) | gniazda | 2,00 | 1 |
+| Gniazda P2: 3.02 Sypialnia rodziców, 3.03 Garderoba (przedpokój apartamentu), 3.08 Szacht instalacyjny SI, 3.06 Klatka schodowa (wyjście z biegu 2, pustka), 3.01 Hol | gniazda | 2,00 | 1 |
+| Gniazda P2: 3.05 Gabinet / pokój gościnny okazjonalny | gniazda | 2,00 | 1 |
+| Gniazda kuchenne 1 (1.06 Salon + jadalnia + kuchnia) | gniazda_kuchnia | 2,00 | 1 |
+| Gniazda kuchenne 2 (1.06 Salon + jadalnia + kuchnia) | gniazda_kuchnia | 2,00 | 1 |
+| Gniazda łazienki (1.03 WC gościnne) | gniazda_lazienka | 2,00 | 1 |
+| Gniazda łazienki (1.09 Łazienka gościnna (natrysk)) | gniazda_lazienka | 2,00 | 1 |
+| Gniazda łazienki (2.05 Łazienka dzieci (wanna)) | gniazda_lazienka | 2,00 | 1 |
+| Gniazda łazienki (2.07 WC z natryskiem) | gniazda_lazienka | 2,00 | 1 |
+| Gniazda łazienki (3.04 Łazienka rodziców) | gniazda_lazienka | 2,00 | 1 |
 | Gniazda garażu / pom. technicznego (IP44) | gniazda | 2,00 | 1 |
 | Gniazda zewnętrzne (taras, ogród; IP44/IP54) | zewn | 2,00 | 1 |
 | Płyta indukcyjna | gotowanie | 7,40 | 3 |
@@ -373,8 +379,8 @@ deklarowanymi wybranych wyrobów (W-242) i przeliczyć.
 | Brama wjazdowa, furtka, wideodomofon (linia ogrodzenia) | napedy | 0,50 | 1 |
 | Pompa zbiornika wody deszczowej (podlewanie) | pompa | 0,80 | 1 |
 | Napędy osłon przeciwsłonecznych (19 szt.) | napedy | 1,90 | 1 |
-| Moc zainstalowana (wszystkie odbiorniki) |  | 71,43 |  |
-| Moc szczytowa z układem ograniczania mocy (DLM) |  | 26,21 |  |
+| Moc zainstalowana (wszystkie odbiorniki) |  | 71,34 |  |
+| Moc szczytowa z układem ograniczania mocy (DLM) |  | 24,85 |  |
 
 Moc przyłączeniowa 27 kW, zabezpieczenie przedlicznikowe 40 A — PT-4 IE. Budynek nie ma urządzeń zużywających paliwa (gaz, olej, biomasa) ani urządzeń technologicznych.
 
@@ -414,7 +420,7 @@ Moc przyłączeniowa 27 kW, zabezpieczenie przedlicznikowe 40 A — PT-4 IE. Bud
 | OP3 | okno (okno) | 0,74 | 0,90 | tak |
 | OZ1 | okno (okno) | 0,81 | 0,90 | tak |
 
-Stolarka — największe U_w/U_D danego symbolu (wymiary z modelu). Mostki cieplne: H_TB = 30,7 W/K (Ψ z symulacji PN-EN ISO 10211 — projekt/08_obliczenia/mostki); U podłogi na gruncie wg PN-EN ISO 13370.
+Stolarka — największe U_w/U_D danego symbolu (wymiary z modelu). Mostki cieplne: H_TB = 32,0 W/K (Ψ z symulacji PN-EN ISO 10211 — projekt/08_obliczenia/mostki); U podłogi na gruncie wg PN-EN ISO 13370.
 
 *Źródło: lamela.obliczenia.energia.obudowa; WT zał. 2 pkt 1.1–1.2*
 
@@ -424,16 +430,18 @@ Stolarka — największe U_w/U_D danego symbolu (wymiary z modelu). Mostki ciepl
 
 | Instalacja | Wytwarzanie η_g | Akumulacja η_s | Przesył η_d | Regulacja η_e | Łącznie η_tot |
 |---|---|---|---|---|---|
-| Ogrzewanie | 4,50 | 1,00 | 0,96 | 0,89 | 3,84 |
-| Ciepła woda użytkowa | 3,20 | 0,93 | 0,60 | — | 1,78 |
+| Ogrzewanie | 4,09 | 1,00 | 0,96 | 0,89 | 3,49 |
+| Ciepła woda użytkowa | 3,20 | 0,91 | 0,60 | — | 1,74 |
 
-Źródło ogrzewania: SCOP = 4,50 (PN-EN 14825, dane przykładowe z karty katalogowej typowej pompy ciepła powietrze–woda R290 klasy A+++ (35 °C) 7–8 kW (lub równoważna)); η_H,e = 0,89 (tab. 3 lp. 6b), η_H,d = 0,96 (tab. 6 lp. 3a), η_H,s = 1,00 (tab. 8 lp. 3)
+Źródło ogrzewania: SCOP = 4,09 (PN-EN 14825, PC-R290-07 (przykład) — dobór w module ogrzewania; do EP min(SCOP deklarowany 4,70; SCOP z bilansu godzinowego TMY 4,09)); η_H,e = 0,89 (tab. 3 lp. 6b), η_H,d = 0,96 (tab. 6 lp. 3a), η_H,s = 1,00 (tab. 8 lp. 3)
 
-C.w.u.: COP_cwu = 3,20 (PN-EN 16147); η_W,s = 0,929 (strata zasobnika 55 W); η_W,d = 0,60 (tab. 12 lp. 6.1a — cyrkulacja z ograniczeniem czasu pracy)
+C.w.u.: COP_cwu = 3,20 (PN-EN 16147); η_W,s = 0,906 (zasobnik 400 dm³, strata postojowa 75 W); η_W,d = 0,60 (bez cyrkulacji w EP — `energia.cwu.cyrkulacja` modelu; wartość zachowawcza)
 
 Wentylacja: odzysk ciepła η_oc = 0,85; pomocnicze: pompa obiegowa ogrzewania podłogowego (EC) 25 W; sterownik/grzałka tacy PC (poza SCOP) 15 W; wentylatory centrali (P = SFP·q) 102 W
 
-Moduł ogrzewania (bilans godzinowy TMY): SCOP obliczeniowy 4,09 (deklarowany 4,70), η_H,e = 0,89, η_H,d = 0,96 — do ujednolicenia z EP po wyborze wyrobu.
+Pompa ciepła w EP — urządzenie z projektu (PC-R290-07 (przykład), moduł ogrzewania): η_H,g = SCOP = 4,09 = min(SCOP₃₅ deklarowany 4,70; SCOP z bilansu godzinowego TMY 4,09) — wartość ostrożna; udział grzałki 0,04 % (ten sam bilans godzinowy).
+
+Zasobnik c.w.u. w EP — z projektu (moduł wody): V = 400 dm³, strata postojowa 75 W (strata postojowa ≤ 75 W — przeskalowana z danych przykładowych 250 dm³ / 55 W wg V^(2/3) [ZAŁ]; wymaganie dla wyrobu); dezynfekcja termiczna 526 kWh/rok (moduł wody: co 7 dni, zasobnik 400 dm³ do 75 °C + pętla) — energia elektryczna grzałki doliczona do c.w.u.
 
 *Źródło: lamela.obliczenia.energia.ep — metodologia tab. 2, 3, 6, 8, 12, 14*
 
@@ -443,17 +451,17 @@ Moduł ogrzewania (bilans godzinowy TMY): SCOP obliczeniowy 4,09 (deklarowany 4,
 
 | Wariant | EU | EK | EP | EP_max | U_OZE [%] | E_CO2 [t/rok] | EP ≤ EP_max |
 |---|---|---|---|---|---|---|---|
-| A: PC R290 + PV + rekuperacja | 41,17 | 23,14 | 35,59 | 70,00 | 74,71 | 2,07 | tak |
-| A0: PC R290 + rekuperacja, bez PV | 41,17 | 23,14 | 57,85 | 70,00 | 57,62 | 3,36 | tak |
-| B: kocioł gazowy kondensacyjny + rekuperacja | 41,17 | 70,55 | 88,25 | 70,00 | 0,00 | 4,44 | NIE |
-| C: PC — wartości domyślne metodologii, bez PV | 41,17 | 32,67 | 81,69 | 70,00 | 47,81 | 4,74 | NIE |
-| A (n50 = 4 h⁻¹ — brak próby szczelności) | 55,13 | 26,85 | 44,14 | 70,00 | 74,96 | 2,56 | tak |
+| A: PC R290 + PV + rekuperacja | 41,51 | 25,17 | 40,24 | 70,00 | 73,96 | 2,34 | tak |
+| A0: PC R290 + rekuperacja, bez PV | 41,51 | 25,17 | 62,93 | 70,00 | 58,27 | 3,65 | tak |
+| B: kocioł gazowy kondensacyjny + rekuperacja | 41,51 | 70,97 | 88,72 | 70,00 | 0,00 | 4,46 | NIE |
+| C: PC — wartości domyślne metodologii, bez PV | 41,51 | 32,81 | 82,02 | 70,00 | 47,88 | 4,76 | NIE |
+| A (n50 = 4 h⁻¹ — brak próby szczelności) | 55,52 | 29,25 | 49,69 | 70,00 | 74,09 | 2,88 | tak |
 
 A — wariant projektowy (z PV); A0 — ten sam budynek i instalacje bez PV; B, C — analiza alternatyw (RPB § 20 ust. 1 pkt 10, PAB); ostatnie wiersze — wrażliwość (szczelność, Ψ).
 
 *Źródło: lamela.obliczenia.energia.ep (metodologia Dz.U. 2015 poz. 376 ze zm.)*
 
-> Wariant projektowy A: EP = **35,6** kWh/(m²·rok) ≤ EP_max = 70,0 — wymaganie spełnione. Wariant A0 bez PV: EP = **57,9** kWh/(m²·rok) ≤ EP_max — wymaganie spełnione także bez instalacji PV.
+> Wariant projektowy A: EP = **40,2** kWh/(m²·rok) ≤ EP_max = 70,0 — wymaganie spełnione. Wariant A0 bez PV: EP = **62,9** kWh/(m²·rok) ≤ EP_max — wymaganie spełnione także bez instalacji PV.
 
 ### Obliczenia: charakterystyka energetyczna — wariant A — W-240…W-242
 
@@ -467,15 +475,21 @@ Budynek mieszkalny jednorodzinny: kategoria zagrożenia ludzi **ZL IV** (WT §20
 **N** (WT §8 pkt 1), 3 kondygnacje nadziemne — zwolniony
 z wymagań klasy odporności pożarowej (WT §213 pkt 1 lit. a; W-211). W zakresie PT-3 IS:
 
-* przejścia instalacji przez stropy i ściany — bez wymagań odporności ogniowej przepustów (brak wymagań
-  klasy odporności elementów, jw.); przejścia uszczelnione akustycznie i szczelnie powietrznie (W-249);
+* izolacje cieplne i akustyczne instalacji wodociągowej, kanalizacyjnej i ogrzewczej wykonać w sposób
+  zapewniający **nierozprzestrzenianie ognia** (WT § 267 ust. 8; W-215): otuliny przewodów wody zimnej,
+  c.w.u., cyrkulacji i c.o. (także przewodów PC ↔ budynek wewnątrz budynku), izolacja akustyczna pionów
+  kanalizacyjnych i rur spustowych w szachcie. Zwolnienie z § 213 WT obejmuje tylko wymagania § 212 i § 216,
+  więc tego wymagania nie znosi;
+* przejścia instalacji przez stropy i ściany — przepusty bez wymaganej klasy odporności ogniowej (EI), bo
+  elementy budynku nie mają wymaganej klasy odporności ogniowej (zwolnienie jw.); przejścia uszczelnić
+  akustycznie i szczelnie powietrznie (W-249) materiałami nierozprzestrzeniającymi ognia. Uwaga na arkuszach PT-IS-03, PT-IS-04, PT-IS-05 „… ppoż. wg klasy stropu” oznacza w tym budynku: stropy nie mają wymaganej klasy odporności ogniowej, więc przepusty ogniochronne (opaski, kołnierze) nie są wymagane; obowiązuje uszczelnienie jak wyżej.
 * przewody wentylacyjne z materiałów palnych dopuszczalne w budynku jednorodzinnym jednolokalowym (W-168);
   centrala w wydzielonym pomieszczeniu technicznym;
 * pompa ciepła z czynnikiem palnym R290 (klasa A3 wg PN-EN 378-1+A1:2021-03): jednostka zewnętrzna poza
   budynkiem, strefa bezpieczeństwa wg DTR (typowo 1,0 m) wolna od otworów, wpustów, studzienek i źródeł
   zapłonu (W-156) — sprawdzenie w obliczeniach ogrzewania; instalacja wewnętrzna wyłącznie wodna (monoblok);
 * brak instalacji gazowej i urządzeń spalania paliw — nie występują przewody spalinowe;
-* zaopatrzenie w wodę do zewnętrznego gaszenia pożaru: najbliższy hydrant zewnętrzny DN80 (ul. Lipowa) — zaopatrzenie ppoż. (W-217) [do potwierdzenia] (dane PZT) — instalacja
+* zaopatrzenie w wodę do zewnętrznego gaszenia pożaru: najbliższy hydrant zewnętrzny DN80 (ul. Lipowa) — zaopatrzenie ppoż. (W-217) [do potwierdzenia] [DANE PRZYKŁADOWE – FIKCYJNE] (dane PZT) — instalacja
   wodociągowa budynku nie pełni funkcji przeciwpożarowej (brak hydrantów wewnętrznych — nie wymagane).
 
 ## Zasadnicze urządzenia — parametry wymagane — § 23 pkt 9 RPB; PB art. 10
@@ -489,11 +503,11 @@ ponownego przeliczenia EP, punktu biwalentnego i hałasu (generator tomu przelic
 
 | Urządzenie | Parametry wymagane | Podstawa |
 |---|---|---|
-| Pompa ciepła powietrze–woda, monoblok | czynnik naturalny R290 (GWP < 150); P(A−15/W35) ≥ 5,0 kW (jak urządzenie przyjęte w obliczeniach) i pokrycie Φ_HL + Φ_W = 8,66 kW przy θ_e z grzałką ≤ 6 kW; SCOP₃₅ ≥ 4,7; η_s ≥ 125 %; L_WA ≤ 57 dB (tryb nocny niżej); regulacja pogodowa, sterowanie zależne od zapotrzebowania | W-155, W-156, W-024; (UE) 2024/573, 813/2013 |
-| Zasobnik c.w.u. z wężownicą | V ≥ 400 dm³, wężownica ≥ 1,8 m² (dla PC), grzałka do dezynfekcji, grupa bezpieczeństwa, izolacja fabryczna | W-133, W-134; PN-EN 16147+A1:2023-06 |
+| Pompa ciepła powietrze–woda, monoblok | czynnik naturalny R290 (GWP < 150); P(A−15/W35) ≥ 5,0 kW (jak urządzenie przyjęte w obliczeniach) i pokrycie Φ_HL + Φ_W = 8,71 kW przy θ_e z grzałką ≤ 6 kW; SCOP₃₅ ≥ 4,7; η_s ≥ 125 %; L_WA ≤ 57 dB (tryb nocny niżej); regulacja pogodowa, sterowanie zależne od zapotrzebowania | W-155, W-156, W-024; (UE) 2024/573, 813/2013 |
+| Zasobnik c.w.u. z wężownicą | V ≥ 400 dm³, wężownica ≥ 1,8 m² (dla PC), strata postojowa ≤ 75 W (wartość przyjęta w EP), grzałka do dezynfekcji, grupa bezpieczeństwa, izolacja fabryczna | W-133, W-134; PN-EN 16147+A1:2023-06 |
 | Bufor c.o. (szeregowy) | V ≥ 80 dm³, izolowany | obliczenia ogrzewania |
 | Naczynia wzbiorcze przeponowe | c.o. ≥ 18 dm³ (p₀ 0,83 bar); c.w.u. ≥ 50 dm³ (p₀ 3,8 bar), przepływowe | PN-B-02414:1999 (powołana w WT) [W-154] |
-| Rozdzielacze ogrzewania podłogowego | P0: 12 obwodów, przepływomierze, siłowniki 230 V/24 V NC; P1: 7 obwodów, przepływomierze, siłowniki 230 V/24 V NC; P2: 7 obwodów, przepływomierze, siłowniki 230 V/24 V NC | W-152, W-154 |
+| Rozdzielacze ogrzewania podłogowego | P0: 13 obwodów, przepływomierze, siłowniki 230 V/24 V NC; P1: 7 obwodów, przepływomierze, siłowniki 230 V/24 V NC; P2: 7 obwodów, przepływomierze, siłowniki 230 V/24 V NC | W-152, W-154 |
 | Centrala wentylacyjna z odzyskiem ciepła | V_max ≥ 435 m³/h przy sprężu instalacji; η_t ≥ 85 %; SFP ≤ 1,90 kW/(m³/s); SEC klasa ≥ A; by-pass 100 %; filtry ISO ePM1 50 % (nawiew), ISO Coarse (wywiew); L_WA wg PN-B-02151-2 w pokojach | W-160…W-169; (UE) 1253/2014; PN-EN 13141-7+A1:2026-05 |
 | Zestaw wodomierzowy | wodomierz DN25, Q3 = 6,3 m³/h (lub wg warunków gestora), zawory, filtr, EA; reduktor ciśnienia wymagany | W-131, W-130; PN-EN 1717 |
 | Zbiornik retencyjny wód opadowych | szczelny, V = 5,0 m³ (≤ 5 m³), osadnik, filtr, pompa zatapialna do podlewania, przelew do niecki, właz z zabezpieczeniem | W-145; PW art. 16 pkt 65 lit. f |
@@ -539,27 +553,11 @@ Uzgodnienia: PT-1 AR (przejścia przez przegrody, szachty, wyłaz), PT-2 BO (prz
 
 | Lp. | Element | Brak / stan w modelu | Arkusze |
 |---|---|---|---|
-| 1 | Odwodnienie powierzchni IZ-ST2Z | wspornik, A = 5,7 m² — brak wpustów/rzygaczy w modelu; w obliczeniach przyjęto wpust propozycyjny | PT-IS-07 |
-| 2 | Odwodnienie powierzchni PL-2 | taras, A = 23,0 m² — brak wpustów/rzygaczy w modelu; w obliczeniach przyjęto wpust propozycyjny | PT-IS-07 |
-| 3 | Odwodnienie powierzchni PL-3 | taras, A = 23,0 m² — brak wpustów/rzygaczy w modelu; w obliczeniach przyjęto wpust propozycyjny | PT-IS-07 |
-| 4 | Odwodnienie powierzchni PL-C1 | wspornik, A = 9,0 m² — brak wpustów/rzygaczy w modelu; w obliczeniach przyjęto wpust propozycyjny | PT-IS-07 |
-| 5 | Odwodnienie powierzchni PL-C2 | wspornik, A = 9,8 m² — brak wpustów/rzygaczy w modelu; w obliczeniach przyjęto wpust propozycyjny | PT-IS-07 |
-| 6 | Odwodnienie powierzchni PL-D | wspornik, A = 6,1 m² — brak wpustów/rzygaczy w modelu; w obliczeniach przyjęto wpust propozycyjny | PT-IS-07 |
-| 7 | Odwodnienie powierzchni PL-DA | taras, A = 3,0 m² — brak wpustów/rzygaczy w modelu; w obliczeniach przyjęto wpust propozycyjny | PT-IS-07 |
-| 8 | Odwodnienie powierzchni PL-E | taras, A = 23,7 m² — brak wpustów/rzygaczy w modelu; w obliczeniach przyjęto wpust propozycyjny | PT-IS-07 |
-| 9 | Odwodnienie powierzchni PS-A | wspornik, A = 14,1 m² — brak wpustów/rzygaczy w modelu; w obliczeniach przyjęto wpust propozycyjny | PT-IS-07 |
-| 10 | Odwodnienie powierzchni SW1 | wspornik, A = 2,8 m² — brak wpustów/rzygaczy w modelu; w obliczeniach przyjęto wpust propozycyjny | PT-IS-07 |
-| 11 | Odwodnienie powierzchni WYL1 | wspornik, A = 1,2 m² — brak wpustów/rzygaczy w modelu; w obliczeniach przyjęto wpust propozycyjny | PT-IS-07 |
-| 12 | Ogrzewanie — pomieszczenia z niedoborem mocy podłogi | 0.03 WC gościnne: gęstość strumienia ≤ q_G (θ_F ≤ 29 °C); 0.03 WC gościnne: moc podłogi przy θ_V,des (T = 10 cm) ≥ Φ_HL; 0.06 Salon + jadalnia + kuchnia: moc podłogi przy θ_V,des (T = 10 cm) ≥ Φ_HL; 0.09 Łazienka gościnna (natrysk): gęstość strumienia ≤ q_G (θ_F ≤ 33 °C); 0.09 Łazienka gościnna (natrysk): moc podłogi przy θ_V,des (T = 10 cm) ≥ Φ_HL; 0.10 Pokój gościnny / gabinet: moc podłogi przy θ_V,des (T = 10 cm) ≥ Φ_HL; 0.11 Przedsionek gospodarczy: moc podłogi przy θ_V,des (T = 10 cm) ≥ Φ_HL; 0.12 Pomieszczenie techniczne: gęstość strumienia ≤ q_G (θ_F ≤ 25 °C) | PT-IS-09…11 |
-| 13 | Ogrzewanie — pompa ciepła | sprawdzenie niespełnione: Moc nominalna PC (zakaz F-gazów dotyczy ≤ 12 kW — czynnik R290, GWP₁₀₀ = 0,02) (rozp. (UE) 2024/573 zał. IV pkt 8 lit. b) | PT-IS-09…11 |
-| 14 | Pion/szacht wentylacyjny (SUP, ETA) | brak w modelu szachtu wentylacyjnego (szacht SI zajęty przez piony wod.-kan. i deszczowe) — przyjęto lokalizację proponowaną algorytmicznie | PT-IS-12…14 |
-| 15 | Piony c.o. (zasilanie rozdzielaczy P1, P2) | brak tras pionów c.o. w instalacje.yaml — przyjęto pion proponowany przy rozdzielaczu R-P1 | PT-IS-09…11 |
-| 16 | Przelewy awaryjne / wpusty | sprawdzenie niespełnione: Pole D1: dno przelewu nad pokryciem (odpływ normalny przez wpusty) | PT-IS-07, PT-IS-08 |
-| 17 | Strumienie powietrza pomieszczeń (went) | rozbieżność modelu z bilansem wentylacji (moduł energii, PN-83/B-03430/Az3), nawiew/wywiew [m³/h]: 0.15: model 0/0 → bilans 0/15; 0.16: model 0/0 → bilans 0/15; 0.10: model 40/0 → bilans 52/0; 1.02: model 40/0 → bilans 119/0; 1.03: model 40/0 → bilans 55/0; 1.04: model 40/0 → bilans 52/0; 2.02: model 50/0 → bilans 90/0; 2.05: model 40/0 → bilans 68/0; 2.07: model 0/0 → bilans 0/15 — na rysunku przyjęto wartości większe | PT-IS-12…14 |
-| 18 | Trasy przewodów (woda, kanalizacja, c.o., wentylacja) | model nie zawiera przebiegów przewodów — trasy wyznaczono algorytmicznie (ortogonalnie, przy ścianach, z pionów/rozdzielaczy do przyborów) | PT-IS-01…14 |
-| 19 | Zasobnik c.w.u. — pojemność | wyposazenie.yaml: 300 dm³, obliczenia (PN-EN 12831-3 / zapotrzebowanie): 400 dm³ — na rysunku wartość z obliczeń | PT-IS-01…03 |
-| 20 | instalacje.piony — rodzaj pionu | lista pionów zawiera rury spustowe (RS…) bez pola rodzaj; biblioteka grupowania pionów traktowała je jako piony wod.-kan. — w obliczeniach do rysunków odfiltrowane | PT-IS-01…14 |
-| 21 | instalacje.wyroby | brak danych wyrobów (DTR/DWU) — obliczenia na danych przykładowych bibliotek (PC, wodomierz ∆p(Q3), EA k_v, wpusty, centrala went., moduł PV, falownik) | PT-IS-01…14 |
+| 1 | Pion/szacht wentylacyjny (SUP, ETA) | brak w modelu szachtu wentylacyjnego (szacht SI zajęty przez piony wod.-kan. i deszczowe) — przyjęto lokalizację proponowaną algorytmicznie | PT-IS-08, PT-IS-09 |
+| 2 | Piony c.o. (zasilanie rozdzielaczy P1, P2) | brak tras pionów c.o. w instalacje.yaml — przyjęto pion proponowany przy rozdzielaczu R-P1 | PT-IS-06, PT-IS-07 |
+| 3 | Trasy przewodów (woda, kanalizacja, c.o., wentylacja) | model nie zawiera przebiegów przewodów — trasy wyznaczono algorytmicznie (ortogonalnie, przy ścianach, z pionów/rozdzielaczy do przyborów) | PT-IS-01…09 |
+| 4 | instalacje.piony — rodzaj pionu | lista pionów zawiera rury spustowe (RS…) bez pola rodzaj; biblioteka grupowania pionów traktowała je jako piony wod.-kan. — w obliczeniach do rysunków odfiltrowane | PT-IS-01…09 |
+| 5 | instalacje.wyroby | brak danych wyrobów (DTR/DWU) — obliczenia na danych przykładowych bibliotek (PC, wodomierz ∆p(Q3), EA k_v, wpusty, centrala went., moduł PV, falownik) | PT-IS-01…09 |
 
 Pozycje wyznaczone algorytmicznie są na rysunkach oznaczone znacznikiem braku danych (linia kreskowa purpurowa, warstwa I-BRAKI). Pozycje nieaktualne wobec bieżących obliczeń — patrz „Stan opracowania i sprawy otwarte”.
 
@@ -573,20 +571,14 @@ Uwagi kontroli arkuszy (raport_widokow.json):
 
 | Nr | Tytuł | Skala | Format | Uwagi |
 |---|---|---|---|---|
-| PT-IS-01 | INSTALACJA WODOCIĄGOWA — RZUT PARTERU | 1:50 | A3×3 |  |
-| PT-IS-02 | INSTALACJA WODOCIĄGOWA — RZUT I PIĘTRA | 1:50 | A3×3 |  |
-| PT-IS-03 | INSTALACJA WODOCIĄGOWA — RZUT II PIĘTRA | 1:50 | A3×3 |  |
-| PT-IS-04 | KANALIZACJA SANITARNA — RZUT PARTERU | 1:50 | A3×3 |  |
-| PT-IS-05 | KANALIZACJA SANITARNA — RZUT I PIĘTRA | 1:50 | A3×3 |  |
-| PT-IS-06 | KANALIZACJA SANITARNA — RZUT II PIĘTRA | 1:50 | A3×3 |  |
-| PT-IS-07 | ODWODNIENIE DACHÓW — RZUT DACHU | 1:50 | A3×3 |  |
-| PT-IS-08 | ODWODNIENIE DACHÓW — RZUT PARTERU (RURY SPUSTOWE) | 1:50 | A3×3 |  |
-| PT-IS-09 | OGRZEWANIE — RZUT PARTERU | 1:50 | A1 |  |
-| PT-IS-10 | OGRZEWANIE — RZUT I PIĘTRA | 1:50 | A3×3 |  |
-| PT-IS-11 | OGRZEWANIE — RZUT II PIĘTRA | 1:50 | A3×3 |  |
-| PT-IS-12 | WENTYLACJA MECHANICZNA — RZUT PARTERU | 1:50 | A3×3 |  |
-| PT-IS-13 | WENTYLACJA MECHANICZNA — RZUT I PIĘTRA | 1:50 | A3×3 |  |
-| PT-IS-14 | WENTYLACJA MECHANICZNA — RZUT II PIĘTRA | 1:50 | A3×3 |  |
-| PT-IS-15 | KANALIZACJA SANITARNA — ROZWINIĘCIE PIONÓW | — | A3×3 |  |
-| PT-IS-16 | INSTALACJA WODOCIĄGOWA — ROZWINIĘCIE (AKSONOMETRIA) | — | A3×3 |  |
-| PT-IS-17 | SCHEMAT POMPY CIEPŁA, C.O. I C.W.U. | — | A3×3 |  |
+| PT-IS-01 | INSTALACJA WODOCIĄGOWA — RZUT PARTERU | 1:50 | nst. 790×420 |  |
+| PT-IS-02 | INSTALACJA WODOCIĄGOWA — RZUTY I PIĘTRA I II PIĘTRA | 1:50 | nst. 1130×297 |  |
+| PT-IS-03 | KANALIZACJA SANITARNA — RZUT PARTERU | 1:50 | nst. 710×420 |  |
+| PT-IS-04 | KANALIZACJA SANITARNA — RZUTY I PIĘTRA I II PIĘTRA | 1:50 | nst. 1130×297 |  |
+| PT-IS-05 | ODWODNIENIE DACHÓW — RZUT DACHU I RZUT PARTERU | 1:50 | nst. 590×841 |  |
+| PT-IS-06 | OGRZEWANIE — RZUT PARTERU | 1:50 | nst. 710×420 |  |
+| PT-IS-07 | OGRZEWANIE — RZUTY I PIĘTRA I II PIĘTRA | 1:50 | nst. 1320×297 |  |
+| PT-IS-08 | WENTYLACJA MECHANICZNA — RZUT PARTERU | 1:50 | nst. 710×420 |  |
+| PT-IS-09 | WENTYLACJA MECHANICZNA — RZUTY I PIĘTRA I II PIĘTRA | 1:50 | nst. 1320×297 |  |
+| PT-IS-10 | KANALIZACJA I WODOCIĄG — ROZWINIĘCIA | — | nst. 1410×297 |  |
+| PT-IS-11 | SCHEMAT POMPY CIEPŁA, C.O. I C.W.U. | — | A2 |  |
