@@ -1,4 +1,5 @@
 {
+ "nr": 38,
  "title": "Render 3/4 od południowego zachodu (z modelu) · silnik arkuszy i runda 2 poprawek w toku",
  "stages": [
   [
@@ -58,6 +59,13 @@
   "Render po korekcie ujęcia: widok 3/4 od SW pokazuje wspornik bryły A (1,0 m) nad bryłą B, boks C w ramie, linię D przechodzącą w attykę garażu i przeszklenie E pod okapem 1,5 m — rytm „S” czytelny.",
   "Krytycznie (wizualnie): czoło obudowy pod wspornikiem A (antracyt) czyta się jako ciężki ciemny klocek; budynek sąsiedni jako biały prostopadłościan zaburza tło; roślinność uproszczona — do poprawy w renderach katalogowych (bez zmiany geometrii budynku).",
   "Silnik układu arkuszy — implementacja; runda 2 poprawek — etap fizyka/woda/instalacje; rysunki konstrukcji — domykanie kontroli ścinania i zbrojenia.",
-  "Nadzór: 5 aktywnych agentów/przepływów, bez zastojów."
+  "Nadzór: 5 aktywnych agentów/przepływów, bez zastojów.",
+  "NADZÓR (08:15): 4 agentów aktywnych, bez zastojów; najdłuższa bezczynność 2 min; zmiany w repo 1 min temu."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/build/www/rendery/e129fe20265c9a7c/ogrod_169.png",
+   "caption": "Render roboczy — widok 3/4 od południowego zachodu (model LAMELA, przed rundą 2 poprawek)"
+  }
  ]
 }

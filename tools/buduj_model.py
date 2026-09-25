@@ -985,7 +985,7 @@ TARASY = [
      "grubosc": 0.08, "uwagi": "podest wejścia głównego pod daszkiem (x 9,80–11,70: DZ1 + FX3 + 0,25 m), bez stopni, odwodnienie liniowe OL-3 "
                                  "przy krawędzi pn.; poza podestem teren −0,32 (cokół ≥ 0,30 — runda 2, K-1)"},
     {"id": "T3", "obrys": R(12.20, -1.30, 13.50, -EXT), "rzedna": -0.02, "nawierzchnia": "płyty betonowe 60×60, spadek 2 % od drzwi", "grubosc": 0.08,
-     "uwagi": "podest drzwi gospodarczych pod okapem E"},
+     "uwagi": "podest drzwi gospodarczych pod okapem E; odwodnienie liniowe OL-6 przy progu (→ RS8/KD-E), 2 stopnie do ogrodu (teren −0,34)"},
 ]
 
 
@@ -1285,13 +1285,14 @@ def teren_punkty():
 def teren_projekt():
     """Rzędne projektowane (bezwzględne) — runda 2 (K-1, weryfikacja §6 A2/A5, R-W4; W-019, brief §9 pkt 4 i 6; DIN 18533-1 pomocniczo):
     * pas 0–2,3 m od lic P0: pierścienie d = 0; 0,3; 0,8; 1,5; 2,3 m, H = H0 − 0,03·d (spadek 3 % od budynku ≥ 2 % z zapasem na
-      wykonanie), H0 = 101,33 (−0,32: cokół ≥ 0,30 m nad terenem; przy garażu 0,22 m nad posadzką −0,10 ≥ 0,15 — DIN 18533-1);
+      wykonanie), H0 = 101,32 (−0,33: cokół ≥ 0,30 m nad terenem z zapasem na interpolację; przy garażu 0,23 m nad posadzką −0,10 ≥ 0,15
+      — DIN 18533-1);
       pierścień 2,3 m = dno niecek trawiastych NT-N / NT-E (przechwyt spływu, spadek podłużny ≥ 0,5 % do ogrodu pd.);
     * strefy drzwi (pierścienie pominięte): podest T2 wejścia −0,02 (OL-3), fartuch bramy −0,12 → OL-1 2,3 m od bramy (spadek 2,4 %),
       podest DZ2 −0,12 z OL-5 przy progu i stopniem 0,15 m, podest T3 drzwi DZ3 −0,02 z OL-6 przy progu i 2 stopniami;
     * dalej — ogród pd. i pas zach. ze spadkiem ≈ 0,5 % ku niecce NCH-1; przed elewacją pn. powrót do terenu istniejącego (skarpa
       niecki ≤ 1:8); na granicach E, W, S i przy drodze rzędne istniejące (W-019). Jednostka PC na fundamencie (U5) — nie jest terenem."""
-    H0, I = 101.33, 0.03
+    H0, I = 101.32, 0.03
     stref = {"T2": (box(9.75, 9.04, 11.70, 11.60), 2.31), "BR1": (box(11.70, 9.66, 18.05, 12.20), 2.31),
              "DZ2": (box(18.66, 4.60, 20.10, 6.20), 1.49), "T3": (box(12.20, -1.70, 13.50, -0.29), 1.31)}
     P_ = []
