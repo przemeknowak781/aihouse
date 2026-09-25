@@ -252,7 +252,7 @@ def pkt3_cd(zp, z, d):
     w osi bramy wjazdowej, na podstawie zezwolenia zarządcy drogi na lokalizację zjazdu (u.d.p. art. 29 ust. 1;
     zezwolenie dołącza się do wniosku o pozwolenie na budowę — art. 29 ust. 3a; ZL) {do_uzup('nr i data zezwolenia zarządcy drogi')}.
     Parametry zjazdu przyjęto wstępnie: szerokość jezdni zjazdu {L(zj)} m {ZAL} ({zr_zj}); ostateczne — wg zezwolenia;
-    PZT w zakresie zjazdu podlega uzgodnieniu z zarządcą drogi (u.d.p. art. 29 ust. 3 pkt 2). Roboty w pasie drogowym
+    PZT w zakresie zjazdu podlega uzgodnieniu z zarządcą drogi (u.d.p. art. 29 ust. 3 pkt 2; strona zastępcza — ZL). Roboty w pasie drogowym
     — po uzyskaniu zezwolenia zarządcy drogi na ich prowadzenie (u.d.p. art. 29 ust. 3 pkt 1 lit. b).
     Brama przesuwna {L(br['szer'])} m ≥ {L(br_min)} m, furtka {L(fu['szer'])} m ≥ {L(fu_min)} m ({zr_br}).
     """)

@@ -422,7 +422,7 @@ def wezel_garaz_plyta(sciana: Sequence[Warstwa], podloga_lewa: Sequence[Warstwa]
                       L: float | None = None, theta_i: float | None = None, theta_e: float | None = None,
                       id: str = "WZ-GP", nazwa: str = "Ściana dom–garaż na ciągłej płycie fundamentowej",
                       uskok: float = 0.0, zebro: tuple[float, float] | None = None, x_os: float | None = None,
-                      przerwa: tuple[Material, float] | None = None) -> Wezel:
+                      przerwa: tuple[Material, float] | None = None, izolacja_czola: bool = False) -> Wezel:
     """Ściana (lico lewe = dom x = 0, prawe = garaż) na płycie fundamentowej ciągłej pod domem i garażem.
     podloga_lewa / prawa — warstwy podłóg od góry z płytą (konstrukcyjna) i warstwami pod płytą (XPS, podsypka).
     ``uskok`` — obniżenie płyty garażu względem płyty domu [m] (uskok w osi warstwy konstrukcyjnej ściany ``x_os``; beton pod
@@ -463,8 +463,14 @@ def wezel_garaz_plyta(sciana: Sequence[Warstwa], podloga_lewa: Sequence[Warstwa]
         for y0, y1, w in _stos(podloga_prawa[:kp], y_pp, -1):
             ob.append(_obsz(box(D, y0, D + L, y1), w))
         beton = [box(-L, y_w - t_pl, xo, y_w), box(xo, yg - t_pl, D + L, yg)]
+        x_k = st[kk][1]                                                  # lico warstwy konstrukcyjnej od garażu
         if uskok > 1e-6:
-            beton.append(box(xo, yg, D, y_w))                            # beton pod ścianą do lica od garażu (uskok)
+            # beton pod ścianą: do lica konstrukcji (izolacja_czola — warstwy ściany od garażu, np. wełna 12 cm, sprowadzone po
+            # czole uskoku do wierzchu płyty garażu: ciągła linia izolacji ściana → posadzka garażu; wydanie, V2 N-6) albo do lica
+            beton.append(box(xo, yg, x_k if izolacja_czola else D, y_w))
+            if izolacja_czola:
+                for a_, b_, w_ in st[kk + 1:]:
+                    ob.append(_obsz(box(a_, yg, b_, y_w), w_, "izolacja czoła uskoku (warstwy ściany od garażu)"))
         if zebro is not None:
             bz, gz = zebro
             beton.append(box(xo - bz / 2, y_w - gz, xo + bz / 2, y_w))

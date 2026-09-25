@@ -38,11 +38,16 @@ arkusze:
     tytul: "PLAN ZAGOSPODAROWANIA DZIAŁKI"
     typ: pzt_plan
     skala: 500
+    # format auto → A2 pionowo (420×594, składanie dobre); tabele w rzutni obok mapy — wariant „tabele: kolumna” daje
+    # ten sam format (mapa 1:500 z opisem podkładu ma 285 mm wysokości — nie mieści się w H = 297)
     opcje: {podklad: true, warstwice: true, pikiety_co: 9.0, linia_plyt: PUNKTOWA}
   - nr: PZT-02
     tytul: "PLAN SZCZEGÓŁOWY — WYMIARY I RZĘDNE"
     typ: pzt_szczegoly
     skala: 200
+    # format auto → 400×594 (0,24 m², pasy 115+95+190 / rzędy 2×297); „tabele: kolumna” dałby 610×420 (0,26 m²).
+    # Rzędne projektowane opisywane z przerzedzeniem (rzedne_proj_co 2,0 m / rzedne_proj_co_rowne 5,0 m — domyślne):
+    # model ma gęsty TIN (1078 pkt, pierścienie co 0,25 m).
     opcje: {warstwice: true, warstwice_projektowane: false}
   - nr: PZT-03
     tytul: "RYSUNEK KOORDYNACYJNY UZBROJENIA TERENU"

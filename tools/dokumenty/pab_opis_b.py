@@ -70,7 +70,7 @@ def r05(pab, D, d):
     pab.markdown(f"""
     ## Opinia geotechniczna
 
-    Opinię geotechniczną (rozp. Dz.U. 2012 poz. 463 § 7 ust. 1, § 8) dołączono jako **załącznik nr 1** do opisu
+    Opinię geotechniczną (rozp. Dz.U. 2012 poz. 463 § 7 ust. 1, § 8) przedstawiono w **pkt 5.3** opisu
     {DANE_PRZYKLADOWE}. Ustalenia opinii: podłoże — {gr.get('rodzaj', '—')} (I_{{D}} ≈ {L(gr.get('I_D'), 2)}), pod warstwą
     gleby o miąższości ok. {L(g.get('humus'), 2)} m; zwierciadło wody gruntowej ok. {L(P['zwg'], 2)} m p.p.t., poniżej
     poziomu posadowienia; warunki gruntowe proste (§ 4 ust. 2 pkt 1); grunty przydatne do bezpośredniego posadowienia.

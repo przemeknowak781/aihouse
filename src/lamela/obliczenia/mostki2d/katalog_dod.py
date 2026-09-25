@@ -393,7 +393,7 @@ def wezly_garazu(model, e: dict):
         usk, zeb = _uskok_zebro(model, sciany)            # wydanie (V2 N-6): uskok PF1/PF2 i żebro pod ścianą z modelu
         w = D.wezel_garaz_plyta(_W(model, kg), _W(model, pod_dom), _W(model, pod_gar), blok=blok, id=f"{e['id']}a",
                                 nazwa=f"Ściana dom–garaż ({kg}) na płycie fundamentowej ({pod_dom} / {pod_gar})",
-                                uskok=usk, zebro=zeb)
+                                uskok=usk, zebro=zeb, izolacja_czola=bool(e.get("izolacja_czola_uskoku")))
         if usk > 1e-6 or zeb:
             w.dane["uskok / żebro"] = (f"uskok płyty garażu {usk:.2f} m" + (f"; żebro b = {zeb[0]:.2f} m, spód {zeb[1]:.2f} m pod "
                                                                             f"wierzchem płyty domu" if zeb else ""))

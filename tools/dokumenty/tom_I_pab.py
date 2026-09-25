@@ -5,8 +5,8 @@ Uruchomienie::
     PYTHONPATH=src python3 tools/dokumenty/tom_I_pab.py [--wyjscie KATALOG] [--data RRRR-MM-DD] [--png]
 
 Skład elementu: strona tytułowa (RPB § 7 ust. 2), spis treści (§ 7 ust. 5), oświadczenie projektanta (PB art. 34 ust. 3d
-pkt 3, ust. 3e), część opisowa wg § 20 ust. 1 pkt 1–14 i ust. 2 (rozdział = punkt przepisu), załącznik nr 1 — opinia
-geotechniczna (rozp. Dz.U. 2012 poz. 463 § 7 ust. 1, § 8), część rysunkowa (§ 21 pkt 1) z arkuszami z
+pkt 3, ust. 3e), część opisowa wg § 20 ust. 1 pkt 1–14 i ust. 2 (rozdział = punkt przepisu; opinia
+geotechniczna — pkt 5.3) (rozp. Dz.U. 2012 poz. 463 § 7 ust. 1, § 8), część rysunkowa (§ 21 pkt 1) z arkuszami z
 ``projekt/03_PAB/rysunki/raport_widokow.json`` albo — gdy kompletu jeszcze nie ma — z arkuszami zastępczymi wg
 ``model/arkusze.yaml``. Wszystkie liczby pochodzą z modelu i obliczeń (``pab_dane.DanePAB``) przy każdym uruchomieniu.
 
@@ -74,6 +74,7 @@ def buduj_pab(d: dict, D: DanePAB, arkusze: list | None = None, data: str | None
     A.r03(pab, D, d)
     pab_param.r04(pab, D, d)
     B.r05(pab, D, d)
+    pab_geotechnika.opinia(pab, D, d)          # pkt 5.3 — część opisu (§ 20 ust. 1 pkt 5), nie załącznik
     B.r06_08(pab, D, d)
     B.r09(pab, D, d)
     C.r10(pab, D, d)
@@ -81,8 +82,7 @@ def buduj_pab(d: dict, D: DanePAB, arkusze: list | None = None, data: str | None
     E.r12(pab, D, d)
     E.r13(pab, D, d)
     E.r14_15(pab, D, d)
-    pab_geotechnika.opinia(pab, D, d)
-    pab.czesc_rysunkowa(arkusze if arkusze is not None else arkusze_pab(D))
+    pab.czesc_rysunkowa(arkusze if arkusze is not None else arkusze_pab(D), podstawa="§ 21 pkt 1 RPB")
     return pab
 
 

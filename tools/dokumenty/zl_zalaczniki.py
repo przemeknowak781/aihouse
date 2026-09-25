@@ -6,6 +6,8 @@ from __future__ import annotations
 
 from lamela.dokumenty import DANE_PRZYKLADOWE, NZW, ZAL, do_uzup, liczba
 
+from redakcja import LEGENDA, odmiana
+
 
 def L(v, nd=2):
     return liczba(v, nd)
@@ -14,6 +16,26 @@ def L(v, nd=2):
 def _siec(s) -> str:
     """Opis sieci z modelu bez komentarza po myślniku („gazociąg PE 63 — NIE wykorzystywany …” → „gazociąg PE 63”)."""
     return str(s.get("opis", "—")).split(" — ")[0]
+
+
+def _siec_krotko(s) -> str:
+    """Rodzaj sieci do wyliczenia: bez nawiasu i bez członów po przecinku z odstępem („kabel nN 0,4 kV, YAKY …” →
+    „kabel nN 0,4 kV”); przecinek dziesiętny nie dzieli opisu."""
+    import re
+    return re.split(r",\s", _siec(s).split(" (")[0])[0]
+
+
+def _zelbetowe(z) -> list:
+    """Płyty wysunięte, okapy i wsporniki żelbetowe monolityczne (materiał modelu: żelbet/beton; bez ram stalowych,
+    podsufitek, izolacji i szkła)."""
+    out = []
+    for w in z.m.wsporniki():
+        mat = str(w.get("mat") or "")
+        mt = z.m.material(mat) if mat else None
+        naz = (mt.nazwa if mt is not None else "").lower()
+        if mat.upper().startswith(("ZB", "ZELB", "BET")) or "żelbet" in naz or "beton" in naz:
+            out.append(w)
+    return out
 
 
 def _bez_naw(t: str) -> str:
@@ -37,10 +59,11 @@ def bioz_tresc(z, d) -> tuple[dict, list]:
     w15, zr15, _ = z.wym("procedura", "plan_BIOZ_wykop_pionowy")
     ret = dz.get("retencja") or {}
     zb = ret.get("zbiornik") or {}
-    wsp = list(z.m.wsporniki())
+    wsp = _zelbetowe(z)
     dachy = list(z.m.dachy())
     pv = (b.get("energia") or {}).get("pv") or {}
-    lam = list(z.m.lamele()) if hasattr(z.m, "lamele") else []
+    lam = [x for x in (z.m.lamele() if hasattr(z.m, "lamele") else [])
+           if "wewn" not in str(x.get("uwagi", "")).lower()]         # osłony elewacyjne (bez ekranu wewnętrznego)
     ist = (dz.get("uzbrojenie") or {}).get("istniejace") or []
     sas = [s for s in z.sasiedzi() if s["przylega"] and s["odl_granicy"] is not None]
     drz = [t for t in z.drzewa() if t.get("istn") and not t.get("do_wyciecia")]
@@ -51,15 +74,15 @@ bez podpiwniczenia, garaż w bryle parteru) — wraz z zagospodarowaniem działk
 1. roboty przygotowawcze: geodezyjne wytyczenie obiektu, ogrodzenie placu budowy, zaplecze, tablica informacyjna, zdjęcie warstwy ziemi urodzajnej (ok. {L(geo.get('humus', 0), 1)} m);
 2. przyłącza wodociągowe, kanalizacyjne, elektroenergetyczne i telekomunikacyjne — wykopy wąskoprzestrzenne na działce i w pasie drogi {dr['symbol']} (włączenie do kanału sanitarnego na głębokości ok. {L(gl_k, 1)} m p.p.t. {ZAL});
 3. stan zerowy: wykop pod płytę fundamentową (głębokość ok. {L(gl_f, 1)} m od terenu), płyta fundamentowa żelbetowa na izolacji termicznej, izolacje przeciwwilgociowe, uziom (PT-2 BO, PT-4 IE);
-4. stan surowy: ściany, stropy oraz płyty wysunięte, okapy i wsporniki żelbetowe monolityczne ({len(wsp)} elementów) (deskowania i podparcia tymczasowe), słupy i rama stalowa przeszklenia, attyki;
+4. stan surowy: ściany, stropy oraz płyty wysunięte, okapy i wsporniki żelbetowe monolityczne ({len(wsp)} {odmiana(len(wsp), 'element', 'elementy', 'elementów')}: {', '.join(w['id'] for w in wsp)}; deskowania i podparcia tymczasowe), słupy i rama stalowa przeszklenia, attyki;
 5. stropodachy ({len(dachy)} pola, w tym dach zielony garażu), instalacja fotowoltaiczna ({pv.get('moduly', '—')} modułów);
-6. stolarka zewnętrzna (w tym przeszklenia wielkoformatowe), elewacje, osłony z lamel ({len(lam)} pól) — z rusztowań;
+6. stolarka zewnętrzna (w tym przeszklenia wielkoformatowe), elewacje, osłony elewacyjne z lamel ({len(lam)} {odmiana(len(lam), 'pole', 'pola', 'pól')}) — z rusztowań;
 7. instalacje wewnętrzne i roboty wykończeniowe;
 8. zagospodarowanie terenu: zbiornik retencyjny {L(zb.get('V', 0), 1)} m³, niecka chłonna, separator, utwardzenia, ogrodzenie z bramą i furtką, zieleń."""
     t[2] = (f"Działka nr ewid. {d['dzialka']['nr']} jest niezabudowana — **brak istniejących obiektów budowlanych** na działce "
             f"{DANE_PRZYKLADOWE}. W pasie drogi {dr['symbol']} znajdują się sieci: " + "; ".join(_siec(s) for s in ist) + ". "
             + " ".join(f"Działka {s['nr']}: {_bez_naw(s['opis'])} — {L(s['odl_granicy'], 1)} m od granicy." for s in sas))
-    t[3] = f"""* uzbrojenie terenu w pasie drogowym {dr['symbol']} ({', '.join(_siec(s).split(' (')[0].split(',')[0] for s in ist)}) w rejonie wykopów pod przyłącza;
+    t[3] = f"""* uzbrojenie terenu w pasie drogowym {dr['symbol']} ({', '.join(_siec_krotko(s) for s in ist)}) w rejonie wykopów pod przyłącza;
 * ruch pojazdów na drodze {dr['symbol']} przy wjeździe na plac budowy i przy robotach w pasie drogowym;
 * wykopy otwarte (fundament, przyłącza, zbiornik retencyjny) oraz składowiska materiałów;
 * drzewa istniejące zachowywane ({len(drz)} szt.) — ryzyko uszkodzenia systemu korzeniowego i koron przez sprzęt."""
@@ -102,7 +125,9 @@ def tresc_6(z) -> str:
 * **zabezpieczenie wykopów**: skarpy o bezpiecznym nachyleniu albo obudowa ścian wykopów pionowych; zejścia do wykopów; składowanie urobku poza klinem odłamu;
 * lokalizacja sieci podziemnych przed robotami ziemnymi, przekopy kontrolne ręcznie w pobliżu gazociągu i kabli; roboty w pasie drogowym wg zezwolenia zarządcy drogi i zatwierdzonej organizacji ruchu (u.d.p. art. 29 ust. 3 pkt 1 lit. b);
 * nadzór nad pracą żurawia/HDS i pompy do betonu (sygnalista, strefa pod ładunkiem wyłączona z ruchu, zawiesia z ważnymi badaniami); deskowania i podparcia płyt wysuniętych wg projektu technologicznego, rozdeskowanie po osiągnięciu wymaganej wytrzymałości;
-* **komunikacja umożliwiająca szybką ewakuację**: utwardzona droga dojazdowa od drogi {dr['symbol']}, wolne od składowania przejścia, oznakowane drogi ewakuacyjne; gaśnice przy pracach z otwartym ogniem, apteczka, telefony alarmowe na tablicy informacyjnej."""
+* **komunikacja umożliwiająca szybką ewakuację**: utwardzona droga dojazdowa od drogi {dr['symbol']}, wolne od składowania przejścia, oznakowane drogi ewakuacyjne; gaśnice przy pracach z otwartym ogniem, apteczka, telefony alarmowe na tablicy informacyjnej.
+
+{LEGENDA}"""
 
 
 def buduj_zl(zp, z, d):
@@ -119,9 +144,19 @@ def buduj_zl(zp, z, d):
             podstawa="art. 29 ust. 1 i 3a ustawy o drogach publicznych (t.j. Dz.U. 2025 poz. 889 ze zm.); PB art. 33 ust. 2 pkt 1",
             uwagi="Zezwolenie określa miejsce lokalizacji i parametry techniczne zjazdu (u.d.p. art. 29 ust. 3); decyzja wygasa, "
                   "jeżeli w ciągu 3 lat od jej wydania zjazd nie został wybudowany (art. 29 ust. 5).")
+    zp.blok("Strona zastępcza — uzgodnienie z zarządcą drogi PZT i PAB w zakresie zjazdu", "dokument_zewnetrzny",
+            f"Uzgodnienie z zarządcą drogi gminnej {dr['symbol']} projektu zagospodarowania działki oraz projektu "
+            "architektoniczno-budowlanego zjazdu",
+            organ=f"Wójt (burmistrz) Gminy {d['dzialka']['gmina']} — zarządca drogi gminnej (u.d.p. art. 19 ust. 2 pkt 4)",
+            podstawa="art. 29 ust. 3 pkt 2 ustawy o drogach publicznych (t.j. Dz.U. 2025 poz. 889 ze zm.)",
+            uwagi="O obowiązku uzgodnienia poucza zezwolenie na lokalizację zjazdu (u.d.p. art. 29 ust. 3); uzgodnienie "
+                  "uzyskuje się przed rozpoczęciem robót budowlanych — dołącza się je do projektu, jeżeli zostało "
+                  "uzyskane przed złożeniem wniosku o pozwolenie na budowę.")
     zp.blok("Oświadczenie projektanta instalacji sanitarnych o możliwości przyłączenia do sieci ciepłowniczej",
             "oswiadczenie_sieci_cieplowniczej",
-            zalacznik="Oświadczenie projektanta dotyczące sieci ciepłowniczej (art. 33 ust. 2 pkt 10 PB)",
+            zalacznik="Oświadczenie projektanta dotyczące sieci ciepłowniczej (art. 33 ust. 2 pkt 10 PB) — dokument "
+                      "dołączany do wniosku, poza zakresem załączników projektu (RPB § 5 ust. 1 pkt 4); zamieszczony "
+                      "informacyjnie",
             uzasadnienie=("Stan uzbrojenia terenu wg modelu (dzialka.yaml): w drodze " + dr["symbol"] + " — "
                           + "; ".join(_siec(s) for s in (z.dz.get("uzbrojenie") or {}).get("istniejace") or [])
                           + "; sieci ciepłowniczej brak " + DANE_PRZYKLADOWE + ". "
@@ -129,4 +164,5 @@ def buduj_zl(zp, z, d):
                                     "przedsiębiorstwa energetycznego") + "."))
     zp.blok("Wzór oświadczenia Inwestora (art. 102a ust. 1, 2, 4 PB; Dz.U. 2026 poz. 1161)", "oswiadczenie_inwestora_102a",
             zalacznik="Oświadczenie Inwestora o stosowaniu przepisów techniczno-budowlanych w brzmieniu obowiązującym "
-                      "do 19.09.2026 r. (art. 102a ust. 1 PB) — wzór")
+                      "do 19.09.2026 r. (art. 102a ust. 1 PB) — wzór; dokument Inwestora dołączany do wniosku, poza "
+                      "zakresem załączników projektu (RPB § 5 ust. 1 pkt 4); zamieszczony informacyjnie")

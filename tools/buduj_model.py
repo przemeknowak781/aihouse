@@ -1243,8 +1243,10 @@ WEZLY = [
     {"id": "WZ-09", "nazwa": "Połączenia dom–garaż nieogrzewany (ściany osi E i 2 z płytą i stropem; docieplenie pasem 1,0 m — SUF-G)",
      "typ": "polaczenie_nieogrz", "przegrody": ["SWG", "POD-0", "DZ1", "SUF-G"], "dlugosc": L_GAR,
      # runda 2 (REKOMENDACJE mostków A — WZ-09a): XPS 10 cm pod posadzką garażu (POD-G, płyta PF2 obniżona) + blok termiczny w 1. warstwie
-     # muru SWG — beton komórkowy odm. 600 (λ 0,16), h 0,24 m; nośność 1. warstwy — PT-K (naprężenia pod ścianą dom–garaż)
-     "blok_u_podstawy": {"mat": "BET_KOM_600", "h": 0.24}},
+     # muru SWG; wydanie (V1-01, V2 N-6): węzeł 2D z uskokiem PF1/PF2 i żebrem z modelu; blok z betonu komórkowego 600 (λ 0,16) →
+     # NOŚNY BLOK TERMOIZOLACYJNY (BLOK_TERM, λ ≤ 0,045 — element z ETA, lub równoważny; nośność 1. warstwy muru SWG — PT-K);
+     # wełna ściany SWG od garażu sprowadzona po czole uskoku do wierzchu PF2 (posadzka garażu nie styka się z ciepłym betonem)
+     "blok_u_podstawy": {"mat": "BLOK_TERM", "h": 0.24}, "izolacja_czola_uskoku": True},
     {"id": "WZ-10", "nazwa": "Strop pośredni ST1/ST2 – ściana zewn. z ETICS ciągłym (wieniec)", "typ": "strop_posredni", "przegrody": ["POD-1", "SZ1"],
      "dlugosc": r(2 * (12.6 + 9.35) - 12.6 - 5.425 + 2 * (xE - xD + y4 - y3) + 2 * (xB + y4 - y3), 2)},
     {"id": "WZ-11", "nazwa": "Ościeża okien/drzwi — ciepły montaż (rama 5 cm w murze, 4 cm w izolacji, zakład izolacji 3 cm na ramę)", "typ": "oscieze",

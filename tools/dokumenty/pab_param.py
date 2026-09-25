@@ -76,7 +76,7 @@ def r04(pab, D, d):
     rows += [{"_klasa": "pod", "Pozycja": f"   w tym {D.wym_kond[k]['nazwa']}", "Powierzchnia [m²]": v,
               "Podstawa / reguła": "obrys ścian zewnętrznych kondygnacji"} for k, v in pk.items()]
     rows += [{"Pozycja": "Powierzchnia netto pomieszczeń (Σ)", "Powierzchnia [m²]": S["netto_razem"],
-              "Podstawa / reguła": "lica ścian wykończonych (audyt A1)"},
+              "Podstawa / reguła": "lica ścian wykończonych (geometria modelu)"},
              {"_klasa": "suma", "Pozycja": "POWIERZCHNIA UŻYTKOWA lokalu mieszkalnego (PU)", "Powierzchnia [m²]": S["pu"],
               "Podstawa / reguła": "PN-ISO 9836:2022 z modyfikacjami RPB § 20 ust. 1 pkt 4 lit. b (W-316)"},
              {"_klasa": "pod", "Pozycja": "   w tym pomieszczenia podstawowe", "Powierzchnia [m²]": S["s"]["podstawowa"],

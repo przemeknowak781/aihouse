@@ -33,7 +33,7 @@ def wstep(pab, D, d):
     {RPB} — dalej RPB; {WT} — dalej WT, w brzmieniu stosowanym na podstawie art. 102a PB w związku z oświadczeniem
     Inwestora z dnia {do_uzup('data oświadczenia Inwestora (art. 102a ust. 1 PB)')}; miejscowy plan zagospodarowania
     przestrzennego: {mp} {DANE_PRZYKLADOWE}; mapa do celów projektowych {do_uzup('nr ewidencyjny PZGiK i data')};
-    opinia geotechniczna — załącznik nr 1 do niniejszego opisu {DANE_PRZYKLADOWE}.
+    opinia geotechniczna — pkt 5.3 niniejszego opisu {DANE_PRZYKLADOWE}.
 
     **Dane źródłowe wartości liczbowych:** model budynku i działki (`model/budynek.yaml`, `dzialka.yaml`,
     `instalacje.yaml`, `wyposazenie.yaml`; wersja modelu {D.B.get('meta', {}).get('wersja', '—')} z dnia
@@ -68,8 +68,8 @@ def r01(pab, D, d):
          "Podstawa / źródło": "PB art. 3 pkt 2a"},
         {"Cecha": "Kategoria obiektu budowlanego", "Ustalenie": f"kategoria {d['kategoria']}",
          "Podstawa / źródło": "załącznik do PB"},
-        {"Cecha": "Kategoria geotechniczna", "Ustalenie": f"{geo.get('kategoria', do_uzup('kategoria'))} — rozdz. 5 "
-         "i opinia geotechniczna (rozdz. 5)", "Podstawa / źródło": D.zr("geotechnika", "kategoria_geotechniczna")},
+        {"Cecha": "Kategoria geotechniczna", "Ustalenie": f"{geo.get('kategoria', do_uzup('kategoria'))} — opinia geotechniczna, "
+         "rozdz. 5", "Podstawa / źródło": D.zr("geotechnika", "kategoria_geotechniczna")},
         {"Cecha": "Liczba kondygnacji nadziemnych / podziemnych", "Ustalenie": f"{kn} / 0",
          "Podstawa / źródło": czysc(D.w["kondygnacje_nadziemne"]["podstawa"])},
         {"Cecha": "Grupa wysokości", "Ustalenie": f"niski ({wt6.get('grupa')}) — H = {L(wt6['wartosc'])} m",

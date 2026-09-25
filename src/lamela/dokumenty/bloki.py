@@ -62,6 +62,16 @@ def _zal(dok, tytul, zalacznik):
 
 
 # ------------------------------------------------------------------------------------ oświadczenie projektanta
+def _kto(osoby) -> str:
+    """Składający oświadczenie (PB art. 34 ust. 3d pkt 3): projektant albo projektanci wymienieni w tabeli."""
+    return ("Projektant wymieniony w tabeli poniżej" if len(osoby) <= 1 else
+            "Projektanci wymienieni w tabeli poniżej, każdy w zakresie określonym w kolumnie „Zakres udziału”")
+
+
+def _czas(osoby) -> str:
+    return "oświadcza" if len(osoby) <= 1 else "oświadczają"
+
+
 def kontekst_oswiadczenia_projektanta(dok, *, projektant=None, osoby=None, techniczny=False, art102a=True,
                                       pnb=None, podpisuja=None) -> dict:
     osoby = list(osoby or dok.projektanci)
@@ -69,7 +79,8 @@ def kontekst_oswiadczenia_projektanta(dok, *, projektant=None, osoby=None, techn
     zakres_pt = f" w zakresie: {dok.branza}" if dok.branza else ""
     if techniczny:
         tresc = Markup(
-            f"Działając na podstawie art. 34 ust. 3d pkt 3 {PB}, <b>oświadczam, że projekt techniczny{escape(zakres_pt)}</b> "
+            f"{escape(_kto(osoby))}, działając na podstawie art. 34 ust. 3d pkt 3 {PB}, <b>{_czas(osoby)}, że projekt "
+            f"techniczny{escape(zakres_pt)}</b> "
             "dotyczący wyżej wymienionego zamierzenia budowlanego <b>został sporządzony zgodnie z obowiązującymi "
             "przepisami, zasadami wiedzy technicznej, projektem zagospodarowania działki lub terenu oraz projektem "
             "architektoniczno-budowlanym oraz rozstrzygnięciami dotyczącymi zamierzenia budowlanego</b> "
@@ -80,7 +91,8 @@ def kontekst_oswiadczenia_projektanta(dok, *, projektant=None, osoby=None, techn
                     f"(art. 34 ust. 3d pkt 3 i art. 41 ust. 4a pkt 2 {PB})")
     else:
         tresc = Markup(
-            f"Działając na podstawie art. 34 ust. 3d pkt 3 {PB}, <b>oświadczam, że {escape(el_b)}</b> dla wyżej "
+            f"{escape(_kto(osoby))}, działając na podstawie art. 34 ust. 3d pkt 3 {PB}, <b>{_czas(osoby)}, że "
+            f"{escape(el_b)}</b> dla wyżej "
             "wymienionego zamierzenia budowlanego <b>został sporządzony zgodnie z obowiązującymi przepisami "
             "oraz zasadami wiedzy technicznej</b>.")
         podtytul = (f"o sporządzeniu {ELEMENTY.get(dok.czesc, ('', '', 'projektu'))[2]} zgodnie z obowiązującymi przepisami "
