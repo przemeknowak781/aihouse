@@ -1210,6 +1210,7 @@ zielen:
   - {id: Z4, obrys: [[1.3, 0.3], [30.7, 0.3], [30.7, 1.3], [1.3, 1.3]], typ: zywoplot, wys: 1.6}
   - {id: Z5, obrys: [[8.6, 43.1], [17.2, 43.1], [17.2, 43.8], [8.6, 43.8]], typ: rabata}
   - {id: Z6, obrys: [[0.8, 44.3], [13.8, 44.3], [13.8, 49.3], [0.8, 49.3]], typ: rabata, wys: 0.6}
+  - {id: Z7, obrys: [[22.05, 31.75], [22.7, 31.75], [22.7, 32.4], [22.05, 32.4]], typ: rabata, wys: 0.3, opis: 'pas gruntu pnączy (K-13): ziemia urodzajna 0,50 m na warstwie drenażowej żwiru 0,15 m i geowłókninie (rozsączanie w piaski, bez wpustów); od cokołu: XPS + membrana kubełkowa wywinięta 0,15 m nad teren + obrzeże — bez przebić hydroizolacji; teren przy licu −0,33 (spadek 3 % od budynku zachowany)'}
 drzewa:
   - {id: DR1, xy: [11.6, 10.7], gat: lipa drobnolistna (soliter na osi ogrodu), sr_korony: 7.0, istn: false, do_wyciecia: false, wys: 10.0}
   - {id: DR2, xy: [2.6, 24.7], gat: klon polny (cień letni tarasu zach.), sr_korony: 5.0, istn: false, do_wyciecia: false, wys: 8.0}

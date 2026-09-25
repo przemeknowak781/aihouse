@@ -14,7 +14,7 @@ wyposazenie:
   - {kond: P0, typ: szafa, xy: [1.9, 5.23], obrot: 90, wym: [1.8, 0.6], opis: 'szafa z drzwiami PRZESUWNYMI (do łóżka 0,815 m — A3 D-9)'}
   - {kond: P0, typ: sofa, xy: [2.3, 3.4], obrot: -90, wym: [2.8, 0.95], opis: salon — widok na ogród}
   - {kond: P0, typ: stol, xy: [6.3, 2.35], obrot: 90, wym: [2.2, 1.0], krzesla: 8, opis: stół 6–8 os. (3 + 3 + 2 szczytowe)}
-  - {kond: P0, typ: wyspa, xy: [9.6, 2.9], obrot: 0, wym: [2.2, 1.0], opis: 'wyspa z płytą indukcyjną i okapem (bez hokerów — przejście do jadalni ≥ 1,10 m)'}
+  - {kond: P0, typ: wyspa, xy: [9.6, 2.9], obrot: 0, wym: [2.2, 1.0], opis: 'wyspa z płytą indukcyjną i okapem (bez hokerów — przejście do jadalni ≥ 1,10 m)', hokery: 0, plyta_strona: E}
   - {kond: P0, typ: blat, linia: [[11.895, 1.4], [11.895, 5.02]], gl: 0.6, strona: 1, gorne: true}
   - {kond: P0, typ: zlew, xy: [11.895, 2.6], obrot: 180, wym: [0.8, 0.5]}
   - {kond: P0, typ: zmywarka, xy: [11.895, 1.9], obrot: 180, wym: [0.6, 0.58]}

@@ -172,6 +172,9 @@ def wezly_z_modelu(m=None, wyniki_symulacji: dict | None = None, *, wezly_auto: 
         if w.get("psi") is not None and wz.psi is None:
             wz.psi = float(w["psi"])
             wz.zrodlo_psi = str(w.get("zrodlo_psi", "model (wartość wpisana)"))
+        if w.get("chi") is not None and wz.chi is None and wz.psi is None:     # węzeł punktowy — χ z modelu (wymaganie)
+            wz.chi = float(w["chi"])
+            wz.zrodlo_psi = str(w.get("zrodlo_chi", "model (wartość wpisana)"))
         if w.get("f_rsi") is not None and wz.f_rsi is None:
             wz.f_rsi = float(w["f_rsi"])
             wz.zrodlo_frsi = str(w.get("zrodlo_frsi", "model (wartość wpisana)"))

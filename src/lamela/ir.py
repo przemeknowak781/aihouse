@@ -19,6 +19,8 @@ import re
 from dataclasses import dataclass, field
 from typing import Any, Callable
 
+import zlib
+
 import numpy as np
 import shapely
 from shapely.geometry import LineString, MultiPoint, MultiPolygon, Point, Polygon, box
@@ -298,6 +300,7 @@ class _Builder:
         self._schody()
         self._balustrady()
         self._lamele()
+        self._elementy_zewn()
         self._tarasy()
         if self.otoczenie and m.dz is not None:
             self._otoczenie()
@@ -949,6 +952,90 @@ class _Builder:
                 poly = Polygon([tuple(A + n * max(od - 0.04, 0.005)), tuple(B + n * max(od - 0.04, 0.005)),
                                 tuple(B + n * od), tuple(A + n * od)])
                 self.add(lid, "lamella", poly, zc - 0.03, zc + 0.03, M_STAL_BAL, lvl, part="rygiel")
+
+    def _elementy_zewn(self):
+        """Wyposażenie zewnętrzne elewacji (SCHEMAT §2 `elementy_zewn`; decyzja Inwestora K-13):
+        * ``kratownica_pnacza`` — siatka prętów (pion/poziom co ``oczko``) z ramą obwodową w płaszczyźnie ``odsuniecie`` przed linią
+          (lico ocieplenia), konsole od lica do kratownicy (``konsole.xz``), pnącza jako warstwa roślinności (kind vegetation, grupa
+          otoczenie — w 3D; elewacje pokazują kratownicę);
+        * ``oslona_lamelowa`` — lamele pionowe b × h co ``rozstaw`` wzdłuż polilinii + rygle; ``urzadzenie`` — bryła osłanianego
+          urządzenia (kind context, grupa otoczenie)."""
+        dirs = {"S": (0, -1), "N": (0, 1), "E": (1, 0), "W": (-1, 0)}
+        for e in self.m.elementy_zewn():
+            pts = e.get("linia")
+            if not (isinstance(pts, list) and len(pts) >= 2 and _is_num(e.get("z_od")) and _is_num(e.get("z_do"))):
+                continue
+            eid, typ, mat = str(e["id"]), str(e.get("typ")), str(e.get("mat") or M_STAL_BAL)
+            z0, z1 = float(e["z_od"]), float(e["z_do"])
+            lvl = self.m.kond_poziomu(max(z0, 0.0) + 0.3)
+            P = [np.asarray(q[:2], float) for q in pts]
+            if typ == "kratownica_pnacza":
+                od = float(e.get("odsuniecie") or 0.15)
+                ok, pr, rm = float(e.get("oczko") or 0.30), float(e.get("pret") or 0.012), float(e.get("rama") or 0.04)
+                for A, B in zip(P[:-1], P[1:]):
+                    L = float(np.hypot(*(B - A)))
+                    if L < 1e-6:
+                        continue
+                    u = (B - A) / L
+                    n = np.array([-u[1], u[0]])
+                    dv = dirs.get(str(e.get("elewacja", "")).upper())
+                    if dv is not None and float(np.asarray(dv, float) @ n) < 0:
+                        n = -n
+                    band = lambda s0, s1, t0, t1: Polygon([tuple(A + u * s0 + n * t0), tuple(A + u * s1 + n * t0),  # noqa: E731
+                                                           tuple(A + u * s1 + n * t1), tuple(A + u * s0 + n * t1)])
+                    t0, t1 = od, od + rm
+                    for s0 in (0.0, L - rm):                                             # rama — słupki
+                        self.add(eid, "railing", band(s0, s0 + rm, t0, t1), z0, z1, mat, lvl, part="rama")
+                    for zz in (z0, z1 - rm):                                               # rama — rygle
+                        self.add(eid, "railing", band(0.0, L, t0, t1), zz, zz + rm, mat, lvl, part="rama")
+                    nv = max(1, int(round(L / ok)))
+                    for i in range(1, nv):                                                 # pręty pionowe
+                        sc = L * i / nv
+                        self.add(eid, "railing", band(sc - pr / 2, sc + pr / 2, t0, t0 + pr), z0 + rm, z1 - rm, mat, lvl,
+                                 part="pret")
+                    nz = max(1, int(round((z1 - z0) / ok)))
+                    for i in range(1, nz):                                                 # pręty poziome
+                        zc = z0 + (z1 - z0) * i / nz
+                        self.add(eid, "railing", band(rm, L - rm, t0 + pr, t0 + 2 * pr), zc - pr / 2, zc + pr / 2, mat, lvl,
+                                 part="pret")
+                    for xz in ((e.get("konsole") or {}).get("xz") or []):                   # konsole (lico → kratownica)
+                        # pierwsza współrzędna konsoli = x (linia wzdłuż x) albo y (linia wzdłuż y) w układzie budynku
+                        sc = (float(xz[0]) - A[0]) / u[0] if abs(u[0]) >= abs(u[1]) else (float(xz[0]) - A[1]) / u[1]
+                        if -0.05 <= sc <= L + 0.05:
+                            self.add(eid, "railing", band(sc - 0.03, sc + 0.03, 0.0, od), float(xz[1]) - 0.04,
+                                     float(xz[1]) + 0.04, mat, lvl, part="konsola")
+                    if e.get("pnacza"):                                                    # pnącza (3D): pasy o różnej wysokości
+                        rng = np.random.default_rng(zlib.crc32(eid.encode()))              # deterministycznie
+                        s0 = 0.0
+                        while s0 < L - 0.05:
+                            w = min(L - s0, float(rng.uniform(0.25, 0.55)))
+                            ztop = z0 + (z1 - z0) * float(rng.uniform(0.55, 0.98))
+                            self.add(eid, "vegetation", band(s0, s0 + w, t1 + 0.01, t1 + 0.09), z0 + 0.02, ztop,
+                                     "ZIELEN_PNACZA", lvl, group="otoczenie", part="pnacza")
+                            s0 += w + float(rng.uniform(0.0, 0.12))
+            elif typ == "oslona_lamelowa":
+                bw, hh, rs = float(e.get("b") or 0.04), float(e.get("h") or 0.06), float(e.get("rozstaw") or 0.10)
+                for A, B in zip(P[:-1], P[1:]):
+                    L = float(np.hypot(*(B - A)))
+                    if L < 1e-6:
+                        continue
+                    u = (B - A) / L
+                    n = np.array([-u[1], u[0]])
+                    cnt = int(math.floor((L - bw) / rs + 1e-9)) + 1
+                    mg = (L - bw - (cnt - 1) * rs) / 2
+                    for j in range(cnt):
+                        sc = mg + j * rs
+                        q0, q1 = A + u * sc, A + u * (sc + bw)
+                        self.add(eid, "lamella", Polygon([tuple(q0 - n * hh / 2), tuple(q1 - n * hh / 2), tuple(q1 + n * hh / 2),
+                                                          tuple(q0 + n * hh / 2)]), z0, z1, mat, lvl, nr=j + 1)
+                    for zc in (z0 + 0.12, z1 - 0.12):
+                        self.add(eid, "lamella", Polygon([tuple(A - n * (hh / 2 + 0.03)), tuple(B - n * (hh / 2 + 0.03)),
+                                                          tuple(B - n * hh / 2), tuple(A - n * hh / 2)]), zc - 0.03, zc + 0.03,
+                                 M_STAL_BAL, lvl, part="rygiel")
+                ur = e.get("urzadzenie") or {}
+                if _is_ring(ur.get("obrys")) and _is_num(ur.get("z_od")) and _is_num(ur.get("z_do")):
+                    self.add(f"{eid}-U", "context", make_polygon(ur["obrys"]), float(ur["z_od"]), float(ur["z_do"]),
+                             "PC_OBUDOWA", None, group="otoczenie", part="urzadzenie")
 
     def _tarasy(self):
         for t in self.m.tarasy():

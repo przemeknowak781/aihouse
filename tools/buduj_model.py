@@ -119,6 +119,9 @@ MAT = [
                    kreskowanie="MUR_SILIKAT", kolor="#dcd7cd", ciezar=18.0), "jw."),
     ("STAL_S355", dict(nazwa="Stal konstrukcyjna S355 (słupy RK, rama boksu C), cynkowana ogniowo + malowana proszkowo RAL 7016", **{"lambda": 50.0},
                        rho=7850, cp=450, mu=1000000, kreskowanie="STAL", kolor="#383e42", ciezar=78.5), "PN-EN ISO 10456 tab. 3: stal λ 50"),
+    ("STAL_OCYNK", dict(nazwa="Stal S235 ocynkowana ogniowo, malowana proszkowo RAL 7016 — kratownica pnączy (pręty ⌀12 w siatce 0,30 m, rama 40×40)",
+                        **{"lambda": 50.0}, rho=7850, cp=450, mu=1000000, kreskowanie="STAL", kolor="#4a5055", ciezar=78.5),
+     "PN-EN ISO 10456 tab. 3: stal λ 50 (wydanie, K-13)"),
     ("RAMA_C", dict(nazwa="Rama boksu C: ruszt stalowy ocynkowany w okładzinie z blachy aluminiowej RAL 7016 (pusta w środku)", **{"lambda": 50.0},
                     rho=1200, cp=450, mu=1000000, kreskowanie="STAL", kolor="#3b4044", ciezar=6.0), "lekka rama — przeszczep J2 z W1; ρ zastępcza przekroju"),
     ("DREWNO_KVH", dict(nazwa="Drewno konstrukcyjne KVH C24 (szkielet lekkiej ściany A')", **{"lambda": 0.13}, rho=450, cp=1600, mu=50,
@@ -1077,6 +1080,43 @@ TARASY = [
      "uwagi": "podest drzwi gospodarczych pod okapem E; odwodnienie liniowe OL-6 przy progu (→ RS8/KD-E), 2 stopnie do ogrodu (teren −0,34); od x 12,30 (bez nakładania na T1 — V1-11)"},
 ]
 
+# ---- wydanie — DECYZJA INWESTORA K-13 (brief §10, 25.09.2026 ok. 08:27): elewacja ogrodowa bryły G (ściana S0-02) — zielona ściana z pnączy
+#      na lekkiej kratownicy stalowej + ażurowa osłona z lamel wokół jednostki zewnętrznej PC; bryła i linie szkicu bez zmian.
+#      * kratownica odsunięta od lica ETICS na konsolach z przekładką termiczną (mostki punktowe χ — węzeł WZ-17 w H_TB); konsole ≥ 0,40 m
+#        nad posadzką (≈ 0,70 m nad terenem) — poza strefą uszczelnienia cokołu; dolna krawędź kratownicy wolna (bez kotwienia w gruncie)
+#        → brak przebić hydroizolacji cokołu (brief §9 pkt 1);
+#      * za jednostką PC kratownica tylko powyżej +1,50 (KR-2) — wolna przestrzeń zasysania z tyłu urządzenia (DTR);
+#      * pas gruntu Z7 (dzialka.zielen) na zach. od strefy R290 — między ścieżką U6 a strefą; pnącza WIJĄCE/OWIJAJĄCE (bez przylg i korzeni
+#        czepnych — ETICS), prowadzone poziomo po KR-2; separacja od cokołu: XPS + membrana kubełkowa + obrzeże; odwodnienie: warstwa
+#        drenażowa żwiru na geowłókninie → rozsączanie w podłoże (piaski, ZWG 3,8 m p.p.t.) — bez wpustów i bez połączenia z KD;
+#      * osłona PC: lamele pionowe ażurowe (≈ 60 % prześwitu) z 3 stron (W, S, E), od ściany otwarta, bez dachu (PL-D nad), prześwit
+#        ≥ 0,10 m nad terenem (R290 cięższy od powietrza — brak „kieszeni”), odstępy od urządzenia wg DTR; strefa R290 1,0 m wolna od
+#        otworów, wpustów, studzienek i zagłębień (W-156) — osłona nie jest zagłębieniem ani zamknięciem.
+Z_KONS = (0.40, 1.90, 3.30)                      # rzędy konsol [m, wzgl. ±0,00]
+ELEM_ZEWN = [
+    {"id": "KR-1", "typ": "kratownica_pnacza", "elewacja": "S", "sciana": "S0-02", "linia": [[14.45, -EXT], [15.95, -EXT]],
+     "z_od": 0.05, "z_do": 3.45, "odsuniecie": 0.15, "oczko": 0.30, "pret": 0.012, "rama": 0.04, "mat": "STAL_OCYNK",
+     "konsole": {"xz": [[x_, z_] for x_ in (14.55, 15.85) for z_ in Z_KONS], "wezel": "WZ-17",
+                 "opis": "konsola stalowa (stal nierdzewna A4) z przekładką termiczną, kotwa chemiczna w murze SIL18 przez ETICS "
+                         "(tuleja dystansowa, uszczelnienie przejścia w tynku); χ — węzeł WZ-17; obciążenia (wiatr + masa roślin) — PT"},
+     "pnacza": {"pas_gruntu": "Z7", "rodzaj": "pnącza wijące / owijające (bez przylg i korzeni czepnych), dobór gatunków — arch. krajobrazu "
+                                               "[DO UZUPEŁNIENIA]", "prowadzenie": "pionowo po KR-1, dalej poziomo po KR-2"},
+     "uwagi": "zielona ściana (K-13) — panel zach., pełna wysokość; płaszczyzna kratownicy 0,15 m przed licem ETICS, poniżej PL-D (+3,65)"},
+    {"id": "KR-2", "typ": "kratownica_pnacza", "elewacja": "S", "sciana": "S0-02", "linia": [[15.95, -EXT], [xF + EXT - 0.12, -EXT]],
+     "z_od": 1.50, "z_do": 3.45, "odsuniecie": 0.15, "oczko": 0.30, "pret": 0.012, "rama": 0.04, "mat": "STAL_OCYNK",
+     "konsole": {"xz": [[x_, z_] for x_ in (17.25, xF + EXT - 0.22) for z_ in Z_KONS[1:]], "wezel": "WZ-17",
+                 "opis": "jak KR-1; krawędź zach. przykręcona do ramy KR-1"},
+     "pnacza": {"pas_gruntu": "Z7", "prowadzenie": "poziomo z KR-1"},
+     "uwagi": "zielona ściana (K-13) — panel nad jednostką PC (od +1,50): przestrzeń zasysania za urządzeniem wolna"},
+    {"id": "OS-PC", "typ": "oslona_lamelowa", "obiekt": "PC-JZ", "linia": [[15.60, -0.70], [15.60, -2.30], [18.00, -2.30], [18.00, -0.70]],
+     "z_od": -0.26, "z_do": 1.20, "rozstaw": 0.10, "b": 0.04, "h": 0.06, "mat": "DREWNO_TERMO",
+     "urzadzenie": {"obrys": R(16.20, -1.275, 17.40, -0.825), "z_od": -0.15, "z_do": 0.75,
+                    "opis": "jednostka zewn. PC monoblok R290 — obrys przykładowy 1,20 × 0,45 m [DO UZUPEŁNIENIA wg DTR wybranego urządzenia]"},
+     "uwagi": "ażurowa osłona z lamel (K-13): 3 strony (W, S, E), otwarta od ściany i od góry, prześwit ≥ 0,10 m nad terenem; odstęp od "
+              "wylotu (S) 1,0 m, od boków 0,6 m — do potwierdzenia wg DTR (przepływ powietrza, serwis); lamele nie wchodzą w strefę "
+              "wyrzutu; ekran akustyczny od tarasu — pas wsch./zach. osłony z wkładem dźwiękochłonnym [DO UZUPEŁNIENIA wg obliczeń hałasu]"},
+]
+
 
 # =====================================================================================================================
 # 9. STOLARKA (dane przykładowe typowych wyrobów, „lub równoważne”), WĘZŁY (katalog do symulacji ISO 10211), ENERGIA,
@@ -1221,6 +1261,10 @@ WEZLY = [
      "liczba": int(round(2 * (13.6 + 2 * (y3 + 2 * EXT)) / 1.0))},
     {"id": "WZ-14", "nazwa": "Konsole ramy boksu C i linii D (PL-C1/PL-C2/PL-D; punktowe, przekładka termiczna)", "typ": "kotwa", "przegrody": ["SZ1"],
      "liczba": 17},
+    {"id": "WZ-17", "nazwa": "Konsole kratownicy zielonej ściany S0-02 (K-13; punktowe, przekładka termiczna)", "typ": "kotwa", "przegrody": ["SZ1"],
+     "liczba": sum(len(e_["konsole"]["xz"]) for e_ in ELEM_ZEWN if e_.get("konsole")), "chi": 0.010,
+     "zrodlo_chi": "WYMAGANIE: χ ≤ 0,010 W/K na konsolę (= wartość przyjęta w H_TB, fizyka.mostki CHI_DOMYSLNE „kotwa”) — potwierdzić "
+                   "deklaracją producenta konsoli lub obliczeniem 3D wg PN-EN ISO 10211"},
     {"id": "WZ-15", "nazwa": "Przejścia instalacji przez przegrody zewnętrzne (wywiewka K1, czerpnia, wyrzutnia, PC, wpusty, przyłącza)",
      "typ": "przejscie_instalacji", "przegrody": ["SD1", "DZ1", "SZ1", "POD-0"], "liczba": 16},
     {"id": "WZ-16", "nazwa": "Belki wspornikowe B4/B5 i belka B3 w linii izolacji wspornika bryły A (ciągłość wełny pod ST2Z)",
@@ -1452,6 +1496,8 @@ def zapisz_budynek(path: Path):
         L_.append(f"  {k}:")
         L_.append(f"    nazwa: {fl(d['nazwa'])}")
         L_.append(f"    typ: {d['typ']}")
+        if d.get("uwagi"):
+            L_.append(f"    uwagi: {fl(d['uwagi'])}")
         L_.append("    warstwy:")
         for w in d["warstwy"]:
             L_.append(f"      - {fl(w)}")
@@ -1465,6 +1511,7 @@ def zapisz_budynek(path: Path):
     L_ += ["", "fundamenty:", f"  typ: {FUND['typ']}", f"  izolacja_obwodowa: {fl(FUND['izolacja_obwodowa'])}", f"  uwagi: {fl(FUND['uwagi'])}"]
     L_ += ["  " + x for x in lista("elementy", FUND["elementy"])]
     L_ += [""] + lista("schody", SCHODY) + [""] + lista("balustrady", BALUSTRADY) + [""] + lista("lamele", LAMELE) + [""] + lista("tarasy", TARASY)
+    L_ += [""] + lista("elementy_zewn", ELEM_ZEWN, kom="wyposażenie zewnętrzne elewacji — decyzja Inwestora K-13 (SCHEMAT §2)")
     L_ += ["", "# Stolarka — dane PRZYKŁADOWE typowych wyrobów (klucze: src/lamela/obliczenia/dane/wyroby_przykladowe.yaml), „lub równoważne”",
            "stolarka:"] + [f"  {k}: {fl(v)}" for k, v in STOLARKA.items()]
     L_ += ["", "# Katalog węzłów cieplno-wilgotnościowych (brief §9.2; symulacja PN-EN ISO 10211 — src/lamela/obliczenia/mostki2d)"]
@@ -1602,6 +1649,11 @@ DZIALKA = {
         {"id": "Z4", "obrys": R(1.3, 0.3, 30.7, 1.3), "typ": "zywoplot", "wys": 1.6},
         {"id": "Z5", "obrys": Rd(1.00, 10.40, 9.60, 11.10), "typ": "rabata"},
         {"id": "Z6", "obrys": Rd(-6.80, 11.60, 6.20, 16.60), "typ": "rabata", "wys": 0.6},
+        # wydanie (K-13): pas gruntu pnączy zielonej ściany S0-02 — poza strefą R290 (x ≤ 15,10), między ścieżką U6 a strefą
+        {"id": "Z7", "obrys": Rd(14.45, -0.95, 15.10, -EXT), "typ": "rabata", "wys": 0.3,
+         "opis": "pas gruntu pnączy (K-13): ziemia urodzajna 0,50 m na warstwie drenażowej żwiru 0,15 m i geowłókninie (rozsączanie w piaski, "
+                 "bez wpustów); od cokołu: XPS + membrana kubełkowa wywinięta 0,15 m nad teren + obrzeże — bez przebić hydroizolacji; teren "
+                 "przy licu −0,33 (spadek 3 % od budynku zachowany)"},
     ],
     "drzewa": [
         # K-2 (runda 2): lipa przesunięta poza niecką NCH-1 — rzut dojrzałej korony (r 3,5 m) ≥ 1,0 m od krawędzi niecki (W-144,

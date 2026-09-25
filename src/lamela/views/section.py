@@ -547,7 +547,11 @@ class SectionBuilder:
                 done.add(w.przegroda_kod)
                 self._place_wall(w, its, left)
         if self.skipped:
-            self.res.notes.append("Opisy warstw pominięte na rysunku (brak miejsca w podziałce "
+            nm = str(self.sec.get("nazwa") or "").strip()      # arkusz z kilkoma przekrojami — do którego uwaga
+            if nm.upper().startswith("PRZEKRÓJ "):
+                nm = "Przekrój " + nm[9:].strip()
+            self.res.notes.append((f"{nm}: o" if nm else "O") + "pisy warstw pominięte na rysunku (brak miejsca w "
+                                  "podziałce "
                                   f"1:{int(vp.scale)}): {', '.join(self.skipped)} — układ warstw wg zestawienia "
                                   "przegród w części opisowej / przekroju 1:50.")
 
