@@ -19,7 +19,7 @@
       "podstawa": "RPB § 2b ust. 3",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "11.32 MB (limit 150 MB)"
+      "szczegoly": "10.91 MB (limit 150 MB)"
     },
     {
       "id": "F-03",
@@ -28,7 +28,7 @@
       "podstawa": "RPB § 2b ust. 2",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "26 arkuszy wektorowych"
+      "szczegoly": "27 arkuszy wektorowych"
     },
     {
       "id": "F-05",
@@ -38,6 +38,15 @@
       "status": "OK",
       "obowiazkowa": true,
       "szczegoly": "plik zawiera tylko tom PT"
+    },
+    {
+      "id": "F-06",
+      "element": "*",
+      "opis": "Tom ze stanu modelu = bieżący model (znacznik „stan modelu: SHA-256 …”, wspólny dla tomów PT)",
+      "podstawa": "PB art. 34 ust. 3c, ust. 3d pkt 3 (zgodność PT z PZT/PAB i między tomami)",
+      "status": "OSTRZEŻENIE",
+      "obowiazkowa": true,
+      "szczegoly": "brak znacznika „stan modelu: SHA-256 …” (bieżący model: 4be0ae5e6789)"
     },
     {
       "id": "C2-01",
@@ -82,7 +91,7 @@
       "podstawa": "RPB § 6 ust. 2",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "343 stron numerowanych"
+      "szczegoly": "372 stron numerowanych"
     },
     {
       "id": "C2-06",
@@ -109,7 +118,7 @@
       "podstawa": "RPB § 9 ust. 3",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "22 rysunki w skali nie mniejszej niż 1:100"
+      "szczegoly": "23 rysunki w skali nie mniejszej niż 1:100"
     },
     {
       "id": "C2-09",
@@ -127,7 +136,7 @@
       "podstawa": "RPB § 10 ust. 1 pkt 3; W-305, W-320",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "26 tabliczek z wypełnioną metryką"
+      "szczegoly": "27 tabliczek z wypełnioną metryką"
     },
     {
       "id": "C2-BO-01",
@@ -181,26 +190,26 @@
       "podstawa": "PB art. 34 ust. 3 pkt 3 lit. a, art. 41 ust. 4a pkt 2; RPB § 23 pkt 1",
       "status": "BRAK",
       "obowiazkowa": true,
-      "szczegoly": "tom zawiera znaczniki niedomkniętych analiz: „NIESPEŁNION” ×76, „WYMAGA ANALIZY” ×27, „NIEZAMKNIĘT” ×15"
+      "szczegoly": "tom zawiera znaczniki niedomkniętych analiz: „NIEZAMKNIĘT” ×7"
     }
   ],
   "znaczniki": {
-    "DO UZUPEŁNIENIA": 183,
+    "DO UZUPEŁNIENIA": 189,
     "DOKUMENT ZEWNĘTRZNY": 1,
-    "DANE PRZYKŁADOWE": 400,
-    "ZAŁ": 33,
+    "DANE PRZYKŁADOWE": 413,
+    "ZAŁ": 81,
     "NZW": 74,
     "INT": 0,
     "PROG": 0,
     "lista": {
       "[DO UZUPEŁNIENIA: nazwa pracowni projektowej]": 1,
       "[DO UZUPEŁNIENIA: adres pracowni]": 1,
-      "[DANE PRZYKŁADOWE – FIKCYJNE]": 377,
+      "[DANE PRZYKŁADOWE – FIKCYJNE]": 407,
       "[DO UZUPEŁNIENIA: jednostka ewidencyjna — kod TERYT WWPPGG_R i nazwa]": 1,
       "[DO UZUPEŁNIENIA: kod TERYT jedn. ewid. WWPPGG_R]": 2,
       "[DO UZUPEŁNIENIA: imię i nazwisko lub nazwa inwestora]": 2,
       "[DO UZUPEŁNIENIA: adres inwestora]": 2,
-      "[DO UZUPEŁNIENIA: imię i nazwisko]": 81,
+      "[DO UZUPEŁNIENIA: imię i nazwisko]": 3,
       "[DO UZUPEŁNIENIA: nr uprawnień budowlanych]": 3,
       "[DO UZUPEŁNIENIA: miejscowość]": 1,
       "[DO UZUPEŁNIENIA: nr i data decyzji o pozwoleniu na budowę, organ]": 1,
@@ -208,33 +217,33 @@
       "[DO UZUPEŁNIENIA: potwierdzenie wpisu w e-CRUB albo dołączenie kopii]": 1,
       "[DO UZUPEŁNIENIA: status w katalogu PKN — poza rejestrem wymagań A.3]": 4,
       "[DO UZUPEŁNIENIA: rok wydania — poza rejestrem wymagań A.3]": 3,
-      "[ZAŁ]": 33,
+      "[ZAŁ]": 81,
       "[NZW]": 74,
       "[DO UZUPEŁNIENIA: imię i nazwisko, specjalność, nr uprawnień]": 1,
-      "[DANE PRZYKŁADOWE]": 23,
-      "[DOKUMENT ZEWNĘTRZNY – do dołączenia: dokumentacja badań podłoża gruntowego, geotechnik z uprawnieniami (E- 04)]": 1,
-      "[DO UZUPEŁNIENIA: specjalność, nr uprawnień]": 78
+      "[DANE PRZYKŁADOWE]": 6,
+      "[DOKUMENT ZEWNĘTRZNY – do dołączenia: dokumentacja badań podłoża gruntowego, geotechnik z uprawnieniami (E-04)]": 1,
+      "[DO UZUPEŁNIENIA]": 162
     }
   },
   "elementy": {
     "PT": {
       "od": 1,
-      "do": 370,
-      "strony_opisu": 344,
-      "arkusze": 26
+      "do": 400,
+      "strony_opisu": 373,
+      "arkusze": 27
     }
   },
-  "rozmiar_mb": 11.317224,
-  "strony": 370,
+  "rozmiar_mb": 10.909336,
+  "strony": 400,
   "podsumowanie": {
     "status": "NIEKOMPLETNY",
     "OK": 15,
     "BRAK": 1,
     "DO UZUPEŁNIENIA": 3,
     "N/D": 1,
-    "OSTRZEŻENIE": 0,
-    "znaczniki_do_uzupelnienia": 183,
+    "OSTRZEŻENIE": 1,
+    "znaczniki_do_uzupelnienia": 189,
     "znaczniki_dokument_zewnetrzny": 1,
-    "znaczniki_dane_przykladowe": 400
+    "znaczniki_dane_przykladowe": 413
   }
 }

@@ -1087,6 +1087,11 @@ class PlanBuilder:
         for sa in self.stair_areas:
             if ln.intersects(sa):
                 pen += 1.0
+        # linia wymiarowa na osi konstrukcyjnej (lub ≤ 3 mm od niej) zlewa się z osią — liczba „wisi” bez
+        # widocznej linii (weryfikacja C 2.1: „1182”/„857” w pasie 1.07)
+        osie = (self.m.osie.get("y") if axis == "h" else self.m.osie.get("x")) or {}
+        if any(abs(float(v) - c) < 3.0 * k for v in osie.values()):
+            pen += 3.0
         score = len(covered) * 4.0 - cost * 0.35 - pen
         return dict(score=score, c=c, chains=out_ch, covered=covered)
 
