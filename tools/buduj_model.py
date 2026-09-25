@@ -762,3 +762,126 @@ TARASY = [
     {"id": "T3", "obrys": R(12.10, -1.30, 13.40, -EXT), "rzedna": -0.02, "nawierzchnia": "płyty betonowe 60×60, spadek 2 % od drzwi", "grubosc": 0.08,
      "uwagi": "podest drzwi gospodarczych pod okapem E"},
 ]
+
+
+# =====================================================================================================================
+# 9. STOLARKA (dane przykładowe typowych wyrobów, „lub równoważne”), WĘZŁY (katalog do symulacji ISO 10211), ENERGIA,
+#    KONSTRUKCJA, GEOTECHNIKA
+# =====================================================================================================================
+STOLARKA = {
+    "FX1": {"wyrob": "fix_ALU_3sz", "opis": "przeszklenie stałe ALU 3-szybowe, 1,90 × 2,75 m, VSG od wewn. (strefa uderzeń)", "U_w": 0.75, "g_n": 0.50},
+    "FX2": {"wyrob": "fix_ALU_3sz", "opis": "przeszklenie stałe ALU 3-szybowe, 2,93 × 2,75 m", "U_w": 0.73, "g_n": 0.50},
+    "FX3": {"wyrob": "fix_ALU_3sz", "opis": "doświetle drzwi wejściowych 0,545 × 2,40 m, VSG mleczne", "U_w": 0.85, "g_n": 0.40},
+    "HS1": {"wyrob": "HS_ALU_3sz", "opis": "drzwi podnoszono-przesuwne ALU 2,335 × 2,75 m, próg termiczny bezprogowy, odwodnienie liniowe", "U_w": 0.85, "g_n": 0.50},
+    "HS2": {"wyrob": "HS_ALU_3sz", "opis": "drzwi HS ALU 2,40 × 2,75 m (taras zach.)", "U_w": 0.85, "g_n": 0.50},
+    "BC1": {"wyrob": "okno_ALU_3sz", "opis": "boks C: 3 kwatery 2,335 × 1,50 m (środkowa RU), dolna część stała VSG do 0,85 m", "U_w": 0.80, "g_n": 0.50},
+    "OZ1": {"wyrob": "okno_ALU_3sz", "opis": "okno RU 1,80 × 1,50 m", "U_w": 0.80, "g_n": 0.50},
+    "OE1": {"wyrob": "okno_ALU_3sz", "opis": "okno RU 1,50 × 1,50 m", "U_w": 0.80, "g_n": 0.50},
+    "ON1": {"wyrob": "okno_PVC_3sz", "opis": "okno uchylne 0,80 × 0,60 m, szkło mleczne", "U_w": 0.90, "g_n": 0.50},
+    "ON2": {"wyrob": "okno_PVC_3sz", "opis": "okno uchylne 0,90 × 0,60 m, szkło mleczne", "U_w": 0.90, "g_n": 0.50},
+    "ON3": {"wyrob": "okno_PVC_3sz", "opis": "okno uchylne 1,20 × 0,60 m", "U_w": 0.88, "g_n": 0.50},
+    "ON4": {"wyrob": "okno_ALU_3sz", "opis": "okno klatki 1,70 × 1,50 m (P2), uchylne do wewn.", "U_w": 0.80, "g_n": 0.50},
+    "OP1": {"wyrob": "okno_ALU_3sz", "opis": "okno P2 3,00 × 2,00 m, parapet 0,60 — dolna część stała VSG do 0,85, skrzydła do wewn. (W-097/098)",
+            "U_w": 0.78, "g_n": 0.50},
+    "OP2": {"wyrob": "okno_ALU_3sz", "opis": "okno P2 1,20 × 1,75 m, skrzydło RU do wewn.", "U_w": 0.82, "g_n": 0.50},
+    "OP3": {"wyrob": "okno_ALU_3sz", "opis": "okno P2 2,40 × 2,00 m, parapet 0,60 — dolna część stała VSG do 0,85", "U_w": 0.79, "g_n": 0.50},
+    "DZ1": {"wyrob": "drzwi_zewn", "opis": "drzwi wejściowe ALU ocieplone 1,10 × 2,40 w murze (światło ościeżnicy ≥ 0,96 × 2,33), próg ≤ 2 cm", "U_D": 0.90},
+    "DZ2": {"wyrob": "drzwi_zewn", "opis": "drzwi boczne garażu 1,00 × 2,10 (garaż nieogrzewany)", "U_D": 1.30},
+    "DZ3": {"wyrob": "drzwi_zewn", "opis": "drzwi gospodarcze przeszklone ALU 0,90 × 2,75 w systemie fasady E, otwierane na zewn.", "U_D": 1.00},
+    "BR1": {"wyrob": "brama_segmentowa", "opis": "brama segmentowa ocieplona 5,00 × 2,25 m, napęd, kratki went. ≥ 0,08 m²", "U_D": 1.50},
+    "DG1": {"wyrob": "drzwi_dom_garaz", "opis": "drzwi garaż–dom stalowe ocieplone, szczelne, z samozamykaczem 0,90 × 2,10", "U_D": 1.10},
+    "D1": {"opis": "drzwi wewnętrzne pełne 0,90 × 2,10 w murze (światło ościeżnicy ≥ 0,80 × 2,00), bez progu"},
+    "D2": {"opis": "drzwi łazienkowe/WC 0,90 × 2,10, otwierane na zewnątrz, z tuleją/podcięciem ≥ 0,022 m²"},
+    "D2P": {"opis": "drzwi przesuwne naścienne 0,90 × 2,10 (łazienka gościnna), szczelina ≥ 0,022 m²"},
+    "D3": {"opis": "drzwi spiżarni 0,80 × 2,00 z kratką"},
+    "D4": {"opis": "drzwi pom. technicznego 0,90 × 2,10 z kratką, akustyczne R_w ≥ 32 dB"},
+    "DS1": {"opis": "drzwi szklane VSG 0,90 × 2,10 w ściance wiatrołapu, oznakowane (W-067)"},
+    "OT1": {"opis": "otwór 1,50 × 2,40 bez stolarki"}, "OT2": {"opis": "otwór 2,40 × 2,40 bez stolarki"},
+}
+
+# ---- długości węzłów z geometrii
+_hot = Polygon(R(-EXT, -EXT, xE + EXT, y4 + EXT)).union(Polygon(R(xE + EXT, -EXT, xF + EXT, y2)))
+_gar = Polygon(R(xE - EXT, y2, xF + EXT, y5 + EXT))
+L_COKOL = r(_hot.exterior.difference(_gar.buffer(0.05)).length, 2)
+L_GAR = r(2 * ((y4 - y2) + (xF - xE)), 2)
+L_ATT_D1 = r(Polygon(OB_P2).exterior.length, 2)
+L_ATT_P1 = r((y4 - y3) * 2 + (xB - EXT + EXT) + (xE + EXT - xD - EXT), 2)
+L_ATT_D4 = r((xF - xE) + (y2 + EXT), 2)
+
+
+def _obwod_otw(zewn_only=True):
+    tot = 0.0
+    for o in OT:
+        s = _SC[o["sciana"]]
+        if zewn_only and s["przegroda"] not in ("SZ1", "SZ2", "SZL"):
+            continue
+        if o["typ"] in ("otwor", "brama") or s["id"] in ("S0-03", "S0-04", "S0-05"):
+            continue
+        tot += 2 * (o["szer"] + o["wys"])
+    return r(tot, 2)
+
+
+WEZLY = [
+    {"id": "WZ-01", "nazwa": "Attyka stropodachu bryły A (D1)", "typ": "attyka", "przegrody": ["SD1", "AT1", "SZ2", "SZ1"], "dlugosc": L_ATT_D1},
+    {"id": "WZ-02", "nazwa": "Attyki dachów P1 (D2, D3) — poza ścianami bryły A", "typ": "attyka", "przegrody": ["SD2", "AT1", "SZ1"], "dlugosc": L_ATT_P1},
+    {"id": "WZ-03", "nazwa": "Attyka dachu zielonego nad pasem gospodarczym (linia D, część ogrzewana)", "typ": "attyka", "przegrody": ["DZ1", "AT1", "SZ1"],
+     "dlugosc": L_ATT_D4},
+    {"id": "WZ-04", "nazwa": "Okap E (PL-E) i daszek wejścia — łącznik termoizolacyjny", "typ": "plyta_wspornikowa_lacznik", "przegrody": ["OK1", "POD-1", "SZ1"],
+     "dlugosc": r(12.6 + 5.425 + 1.5 + 2.30, 2)},
+    {"id": "WZ-05", "nazwa": "Krawędź ST2 (PL-2) — łącznik termoizolacyjny pod bryłą A", "typ": "plyta_wspornikowa_lacznik", "przegrody": ["OK1", "POD-1", "SZ2"],
+     "dlugosc": r(12.6 + 1.0 + (y3 + 2 * EXT), 2)},
+    {"id": "WZ-06", "nazwa": "Krawędź ST3 (PL-3) — łącznik termoizolacyjny przy attyce bryły A", "typ": "plyta_wspornikowa_lacznik",
+     "przegrody": ["OK1", "SD1", "SZ2"], "dlugosc": r(13.6 + 2 * (y3 + 2 * EXT), 2)},
+    {"id": "WZ-07", "nazwa": "Strop P2 nad powietrzem zewnętrznym (ST2Z) — krawędzie wspornika bryły A", "typ": "strop_zewn_krawedz",
+     "przegrody": ["POD-1", "SUF-ZEW", "SZL", "SZ1"], "dlugosc": r(2 * (y3 + 2 * EXT) + 2.0, 2)},
+    {"id": "WZ-08", "nazwa": "Cokół: ściana zewn. – płyta fundamentowa na XPS (część ogrzewana)", "typ": "sciana_grunt", "przegrody": ["SZ1", "POD-0"],
+     "dlugosc": L_COKOL},
+    {"id": "WZ-09", "nazwa": "Połączenia dom–garaż nieogrzewany (ściany osi E i 2 z płytą i stropem; docieplenie pasem 1,0 m — SUF-G)",
+     "typ": "polaczenie_nieogrz", "przegrody": ["SWG", "POD-0", "DZ1", "SUF-G"], "dlugosc": L_GAR},
+    {"id": "WZ-10", "nazwa": "Strop pośredni ST1/ST2 – ściana zewn. z ETICS ciągłym (wieniec)", "typ": "strop_posredni", "przegrody": ["POD-1", "SZ1"],
+     "dlugosc": r(2 * (12.6 + 9.35) - 12.6 - 5.425 + 2 * (xE - xD + y4 - y3) + 2 * (xB + y4 - y3), 2)},
+    {"id": "WZ-11", "nazwa": "Ościeża, nadproża, podokienniki i progi — ciepły montaż w warstwie izolacji", "typ": "oscieze", "przegrody": ["SZ1", "SZ2", "SZL"],
+     "dlugosc": _obwod_otw()},
+    {"id": "WZ-12", "nazwa": "Narożniki wypukłe ścian zewnętrznych", "typ": "naroznik_wypukly", "przegrody": ["SZ1", "SZ2"],
+     "dlugosc": r(4 * 3.15 + 2 * 3.15 + 4 * 3.15 + 6 * 3.00, 2)},
+    {"id": "WZ-13", "nazwa": "Konsole rusztu lamel (przekładka termiczna)", "typ": "konsola_lamel", "przegrody": ["SZ2", "SZL"],
+     "liczba": int(round(2 * (13.6 + 2 * (y3 + 2 * EXT)) / 1.0))},
+    {"id": "WZ-14", "nazwa": "Konsole ramy boksu C i pasa D (punktowe, przekładka termiczna)", "typ": "kotwa", "przegrody": ["SZ1"], "liczba": 10},
+    {"id": "WZ-15", "nazwa": "Przejścia instalacji przez przegrody zewnętrzne (wywiewka K1, czerpnia, wyrzutnia, PC, wpusty, przyłącza)",
+     "typ": "przejscie_instalacji", "przegrody": ["SD1", "DZ1", "SZ1", "POD-0"], "liczba": 16},
+    {"id": "WZ-16", "nazwa": "Belki wspornikowe B4/B5 i belka B3 w linii izolacji wspornika bryły A (ciągłość wełny pod ST2Z)",
+     "typ": "strop_zewn_krawedz", "przegrody": ["SZ1", "SZL", "SUF-ZEW"], "dlugosc": r(2 * 1.12, 2)},
+]
+
+ENERGIA = {
+    "n50": 1.0, "osoby": 5, "pojemnosc": "ciezka", "chlodzenie": False, "psi_wariant": "domyslna",
+    "grunt": {"typ": "piasek", "lambda": 2.0, "izolacja_obwodowa": {"typ": "pozioma", "D": 1.0, "d_n": 0.10, "lam_n": 0.036}},
+    "wentylacja": {"centrala": "RVU_450", "czerpnia": [11.40, 1.00, 9.95], "wyrzutnia": [1.80, 3.00, 10.00], "wyrzut": "pionowy",
+                   "zestaw_zblokowany": False, "wywiewki_kanalizacyjne": [[5.57, 6.20]], "rzedna_terenu": -0.25,
+                   "uwagi": "czerpnia i wyrzutnia dachowe ≥ 0,40 m nad pokryciem; czerpnia ≥ 6 m od wywiewki K1 (7,8 m) i ≥ 6 m od wyrzutni "
+                            "(9,8 m); wyrzutnia ≥ 3 m od krawędzi dachu (W-166, W-167); K2 zakończony zaworem napowietrzającym (W-139)"},
+    "ogrzewanie": {"zrodlo": "PC_R290_monoblok", "temp_zasilania": 35,
+                   "uwagi": "PC powietrze–woda monoblok R290 (W-155), moduł hydrauliczny w pom. 0.12; ogrzewanie podłogowe z regulacją pokojową (W-152)"},
+    "cwu": {"zasobnik": "Z250", "V_projekt_dm3": 300, "cyrkulacja": False,
+            "uwagi": "projektowo zasobnik 300 dm³ (brief) — w bibliotece dane przykładowe Z250; zastąpić DWU wyrobu"},
+    "pv": {"moduly": 15, "P_modul_Wp": 430, "azymut": 180, "nachylenie": 10, "PR": 0.80,
+           "uwagi": "Σ 6,45 kWp ≤ 6,5 kWp (W-194, art. 29 ust. 4 pkt 3 lit. c PB); niskie stelaże na D1, górna krawędź ≤ +9,78 (nie ponad attykę)"},
+    "garaz": {"stanowiska": 2, "otwory_went_m2": 0.10, "n_went": 1.0},
+}
+
+KONSTRUKCJA = {
+    "klasa_konsekwencji": "CC2", "klasa_niezawodnosci": "RC2", "K_FI": 1.0, "okres_uzytkowania": 50, "klasa_konstrukcji": "S4",
+    "beton": {"stropy_sciany": "C25/30 XC1 c_nom 25 mm", "fundament": "C25/30 XC2 c_nom 35 mm (50 mm od gruntu)",
+              "krawedzie_wysuniete": "C30/37 XC4+XF1 c_nom 40 mm"},
+    "stal_zbrojeniowa": "B500SP", "mur": "silikat kl. 20 gr. 1, zaprawa cienkowarstwowa, kat. wykonania A (f_d = 4,50 MPa, W-270)",
+    "obciazenia": {"snieg": "strefa 2, s_k = 0,90 kN/m², zaspy przy uskokach (D4 przy P1, D2/D3 przy P2) + sytuacja wyjątkowa B2 (W-264)",
+                   "wiatr": "strefa 1, q_p(h ≤ 11 m) = 0,71 kN/m² (W-265)", "dach_zielony": "substrat nasycony ≈ 1,4 kN/m² (stałe)",
+                   "uzytkowe": "stropy kat. A 2,0 kN/m², schody 4,0 kN/m², dachy kat. H 0,4 kN/m² (W-263)"},
+    "wsporniki": "EQU: 1,10·G_dst + 1,5·Q_dst ≤ 0,90·G_stb (W-262); ugięcie końca ≤ wysięg/125 (W-268); łączniki termoizolacyjne z ETA (W-272); "
+                 "szczelina dylatacyjna nad stolarką pod krawędzią okapu E i ramy C",
+    "sciezka_obciazen_wspornika_A": "lekka ściana A' → belka B3 → końce belek wspornikowych B4/B5 (osie 1 i 3, w licu ścian P2) → ściana A P1 "
+                                     "(podpora) i przęsło zakotwienia A–B dociążone ścianami P2 i stropem; ST3 w osi A' na belce B6 opartej na narożach ścian",
+}
+GEOTECHNIKA = {"kategoria": "II", "grunt": {"rodzaj": "piasek średni (MSa), średniozagęszczony", "I_D": 0.6, "phi": 33, "gamma": 18.5, "M0": 80000},
+               "ZWG": -3.8, "h_z": 0.8, "humus": 0.4,
+               "uwagi": "opinia geotechniczna + dokumentacja badań podłoża (≥ 3 sondowania do 6 m) + projekt geotechniczny (W-280…W-282)"}
