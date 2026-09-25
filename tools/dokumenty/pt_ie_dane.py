@@ -158,3 +158,108 @@ class DanePTIE:
         """Numery arkuszy, których tytuł zawiera wszystkie ``slowa`` (bez rozróżniania wielkości liter)."""
         nr = [a.nr for a in self.arkusze if all(s.lower() in (a.tytul or "").lower() for s in slowa)]
         return ", ".join(nr) if nr else "—"
+
+    # ------------------------------------------------------------------ aktualność arkuszy wobec obliczeń
+    def _tekst_arkusza(self, a) -> str:
+        import pymupdf
+        with pymupdf.open(a.plik) as doc:
+            return " | ".join(ln for pg in doc for ln in pg.get_text().split("\n") if ln.strip())
+
+    def _aktualnosc_rysunkow(self):
+        """Porównanie treści arkuszy z bieżącymi obliczeniami: obwody na schemacie RG (zabezpieczenie, przewód, faza),
+        WLZ, model PC, strumień centrali wentylacyjnej, moc PV. Rozbieżności → ``otwarte`` i ``rozb_rys``."""
+        tx = {a.nr: self._tekst_arkusza(a) for a in self.arkusze if a.istnieje}
+        pc = next((o.odb.nazwa for o in self.obw.obwody if o.odb.grupa == "pc"), "")
+        pc_id = (re.search(r"PC-R290-\d+", pc) or [None])[0]
+        went = next((o.odb.nazwa for o in self.obw.obwody if o.odb.grupa == "went"), "")
+        V_obl = (re.search(r"V ≈ (\d+) m³/h", went) or [None, None])[1]
+        inne: dict = {}
+        for nr, t in tx.items():
+            for m in set(re.findall(r"PC-R290-\d+", t)):
+                if pc_id and m != pc_id:
+                    inne.setdefault(f"model PC {m} (obliczenia: {pc_id})", []).append(nr)
+            for m in set(re.findall(r"V ≈ (\d+) m³/h", t)):
+                if V_obl and m != V_obl:
+                    inne.setdefault(f"strumień centrali {m} m³/h (obliczenia: {V_obl} m³/h)", []).append(nr)
+            for m in set(re.findall(r"WLZ (YKY \d×\d+)", t)):
+                if m != self.obw.wlz["przewod"]:
+                    inne.setdefault(f"WLZ {m} (obliczenia: {self.obw.wlz['przewod']})", []).append(nr)
+        for opis, nr in inne.items():
+            self.rozb_rys.append(f"{', '.join(sorted(set(nr)))}: {opis}")
+        schemat = next((nr for nr, t in tx.items() if "SCHEMAT IDEOWY ROZDZIELNICY" in t.upper()), None)
+        if schemat:
+            wz = re.compile(r"((?:3P )?[BCD]\d+) \| 30mA \w+ \| (\S+ \d×[\d,]+)\s+L=\d+ m \| ∆U=[\d,]+% \| "
+                            r"([LGD]\d+) \| (L[123]|3f)")
+            rys = {m.group(3): (m.group(1), m.group(2), m.group(4)) for m in wz.finditer(tx[schemat])}
+            rozn = []
+            for o in self.obw.obwody:
+                obl = (o.zab, o.przewod, "3f" if o.odb.fazy == 3 else o.odb.faza)
+                r = rys.get(o.odb.id)
+                if r is None:
+                    rozn.append(f"{o.odb.id} brak na schemacie")
+                elif r != obl:
+                    rozn.append(f"{o.odb.id}: rysunek {' / '.join(r)}, obliczenia {' / '.join(obl)}")
+            rozn += [f"{k} na schemacie, brak w obliczeniach" for k in rys if self.obwod(k) is None]
+            if rozn:
+                self.rozb_rys.append(f"{schemat} (schemat RG) — {len(rozn)} "
+                                     f"{'obwód niezgodny' if len(rozn) == 1 else 'obwody niezgodne' if len(rozn) < 5 else 'obwodów niezgodnych'}"
+                                     f" z bieżącymi obliczeniami (zabezpieczenie / przewód / faza): " + "; ".join(rozn))
+        if self.rozb_rys:
+            self.otwarte.append("Arkusze nieaktualne wobec bieżących obliczeń — przed wydaniem wygenerować ponownie "
+                                "(rozdz. „Część rysunkowa — zgodność z obliczeniami”): "
+                                + ", ".join(sorted({n for r in self.rozb_rys for n in re.findall(r"PT-IE-\d+", r)}))
+                                + f" ({len(self.rozb_rys)} {'rozbieżność' if len(self.rozb_rys) == 1 else 'rozbieżności'}).")
+
+    # ------------------------------------------------------------------ kontrole spójności → „otwarte”
+    def _przekroj(self, dU: float, s: float, lim: float) -> tuple[float, float] | None:
+        """Najmniejszy przekrój z szeregu, przy którym ∆U ∝ 1/s spełnia limit (rezystancja żył odwrotnie
+        proporcjonalna do przekroju; reaktancja pominięta — dla s ≤ 50 mm² Cu/Al pomijalna)."""
+        for s2 in SZEREG_S:
+            if s2 > s and dU * s / s2 <= lim:
+                return s2, dU * s / s2
+        return None
+
+    def _kontrole(self):
+        for mod, x in self.niespelnione():
+            prop = None
+            if mod == "obwody" and x.opis.startswith("WLZ: spadek"):
+                prop = self._przekroj(x.wartosc, self.obw.par.WLZ_przekroj, x.limit)
+                co = f"WLZ YKY {self.obw.par.WLZ_zyly}×{{s}} mm²"
+            elif mod == "pv" and "DC" in x.opis and "Spadek" in x.opis:
+                prop = self._przekroj(x.wartosc, self.pv.par.s_DC, x.limit)
+                co = "przewody DC H1Z2Z2-K {s} mm²"
+            opis = (f"Obliczenia ({NAZWY_MOD[mod]}) — warunek niespełniony: {x.opis}: {L(x.wartosc, 2)} {x.jedn} "
+                    f"(wymaganie {x.op} {L(x.limit, 2)} {x.jedn}; {x.podstawa})")
+            if prop:
+                s2, dU2 = prop
+                roz = co.format(s=L(s2, 0))
+                self.propozycje.append(dict(warunek=x.opis, modul=mod, wartosc=x.wartosc, limit=x.limit, jedn=x.jedn,
+                                            rozwiazanie=roz, wartosc_po=dU2))
+                opis += (f" — rozwiązanie: {roz} (∆U ≈ {L(dU2, 2)} {x.jedn} ≤ {L(x.limit, 2)} {x.jedn}; przeliczenie "
+                         "proporcjonalne do przekroju); zmienić w parametrach obliczeń i przeliczyć")
+            self.otwarte.append(opis + ".")
+        if not (self.I.get("wyroby") or {}):
+            self.otwarte.append("`instalacje.wyroby` w modelu puste — moduł PV, falownik, pompa ciepła i aparatura przyjęte "
+                                "z danych przykładowych bibliotek [DANE PRZYKŁADOWE – FIKCYJNE]; zastąpić danymi DTR/DWU wyrobów "
+                                "wybranych przez wykonawcę (wyroby równoważne spełniające parametry wymagane — rozdz. „Wyroby”).")
+        if not self.B.get("projekt"):
+            self.otwarte.append("Dane osobowe (Inwestor, projektanci, nr uprawnień, pracownia) — brak sekcji "
+                                "`projekt:` w model/budynek.yaml; pola oznaczone jako do uzupełnienia (strona tytułowa, oświadczenie).")
+        self.otwarte.append("Warunki przyłączenia OSD [DOKUMENT ZEWNĘTRZNY] — moc przyłączeniowa, typ zabezpieczenia "
+                            "przedlicznikowego, impedancja pętli zwarcia Z_Q i prąd zwarciowy w ZKP, rozdział PEN "
+                            "przyjęte jako [ZAŁ]; po otrzymaniu warunków przeliczyć obwody (D-12, W-192, E-05).")
+        self.otwarte += self.ark_braki
+
+    # ------------------------------------------------------------------ BRAKI_DANYCH.md (tabela)
+    def braki_tabela(self) -> list[dict]:
+        wiersze = []
+        for ln in self.braki_md.splitlines():
+            c = [x.strip() for x in ln.strip().strip("|").split("|")]
+            if len(c) >= 5 and c[0].isdigit():
+                wiersze.append({"Lp.": int(c[0]), "Element": c[1].replace("`", ""),
+                                "Brak / stan w modelu": c[2].replace("`", ""), "Arkusze": c[-1]})
+        return wiersze
+
+
+def sqrt3() -> float:
+    return math.sqrt(3.0)
