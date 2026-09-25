@@ -791,11 +791,12 @@ class PlanBuilder:
         wentylacyjna) — w wolnym miejscu pomieszczenia z odnośnikiem do symbolu, z kontrolą kolizji ze ścianami,
         wymiarami i innymi opisami (weryfikacja C 2.1)."""
         vp = self.vp
+        self.placer.mnoznik_linii = 4.0             # napis na linii wymiarowej / symbolu — wyraźnie gorszy
         for anchor, lines in getattr(self, "_equip_labels", []):
-            room = next((r.polygon for r in self.rooms if r.polygon.buffer(0.05).contains(Point(anchor))), None)
-            bounds = room.buffer(-0.08) if room is not None else None
-            cands = [c for c in spiral(anchor, 0.2, 12, 8)
-                     if bounds is None or bounds.contains(Point(c))] or [tuple(anchor)]
+            # kandydaci: najpierw blisko symbolu, potem dalej (także poza pomieszczeniem — odnośnik może przeciąć
+            # ścianę, napis nie: ściany przecięte są przeszkodą „area”)
+            cands = spiral(anchor, 0.25, 18, 8)
+            bounds = None
 
             def fn(cv, pos, a=np.asarray(anchor, float), ls=lines):
                 k, h = cv.k, 1.8
@@ -811,7 +812,8 @@ class PlanBuilder:
                 if float(np.hypot(*(q - a))) > 2.5 * k:
                     cv.line(a, q, "A-OPISY", pen=0.18)
                     cv.dot(a, 0.8, "A-OPISY")
-            self.placer.place(vp, fn, cands, penalty_step=0.02, bounds=bounds)
+            self.placer.place(vp, fn, cands, penalty_step=0.01, bounds=bounds)
+        self.placer.mnoznik_linii = 1.0
 
     # ------------------------------------------------------------------ wejście
     def entrance(self):

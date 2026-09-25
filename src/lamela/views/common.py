@@ -340,6 +340,7 @@ class Placer:
         self.w: list = []
         self._tree = None
         self._n_tree = 0
+        self.mnoznik_linii = 1.0      # waga kolizji napis–linia (np. 4 — opisy urządzeń nie na wymiarach/ścianach)
 
     def add(self, geom, cat: str = "area", w: float = 1.0):
         for g in polygons_of(geom) if not isinstance(geom, (LineString, MultiLineString)) else [geom.buffer(0.3 * self.k)]:
@@ -384,7 +385,8 @@ class Placer:
                     a = gi.intersection(g).area / k2
                     if a < 0.02:
                         continue
-                    c += (base[self.cat[i]] + a * (3.0 if self.cat[i] == "text" else 1.0)) * self.w[i]
+                    c += ((base[self.cat[i]] + a * (3.0 if self.cat[i] == "text" else 1.0)) * self.w[i]
+                          * (self.mnoznik_linii if self.cat[i] == "line" else 1.0))
         for g in list(lines) + list(fills):
             for i in self._query(g):
                 if self.cat[i] != "text":
