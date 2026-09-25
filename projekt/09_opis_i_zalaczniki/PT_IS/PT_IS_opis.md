@@ -88,7 +88,7 @@ dotyczącymi zamierzenia budowlanego (oświadczenie projektanta).
 
 ### Źródło ciepła i instalacja ogrzewcza z automatyczną regulacją temperatury — § 23 pkt 7 lit. a RPB; W-150…W-156
 
-**Obciążenie cieplne.** Projektowe obciążenie cieplne budynku Φ_HL = **7,46 kW**
+**Obciążenie cieplne.** Projektowe obciążenie cieplne budynku Φ_HL = **7,48 kW**
 (PN-EN 12831, θ_e = −18 °C, średnia roczna θ_m,e = 7,9 °C; W-150, W-151),
 z dodatkiem na c.w.u. Φ_W = 1,25 kW. Temperatury wewnętrzne wg WT § 134 ust. 2 (model
 `pomieszczenia[].temp`); garaż nieogrzewany (θ_u = −10,6 °C).
@@ -106,7 +106,7 @@ pomieszczenie techniczne parteru.
 **Instalacja ogrzewcza.** Ogrzewanie podłogowe wodne niskotemperaturowe: θ_V = **35 °C**,
 Δθ = 5 K, rura 16×2,0 mm (PE-X/PE-RT z barierą
 antydyfuzyjną), 27 pętli w 22 pomieszczeniach (długość pętli ≤ 100 m,
-Δp pętli ≤ 25 kPa). Rozdzielacze kondygnacyjne: P0: 2 rozdzielacz, 13 pętli, 674 kg/h, Δp_max 14,3 kPa; P1: 1 rozdzielacz, 7 pętli, 297 kg/h, Δp_max 23,6 kPa; P2: 1 rozdzielacz, 7 pętli, 523 kg/h, Δp_max 16,3 kPa.
+Δp pętli ≤ 25 kPa). Rozdzielacze kondygnacyjne: P0: 2 rozdzielacz, 13 pętli, 674 kg/h, Δp_max 14,3 kPa; P1: 1 rozdzielacz, 7 pętli, 297 kg/h, Δp_max 23,6 kPa; P2: 1 rozdzielacz, 7 pętli, 560 kg/h, Δp_max 17,9 kPa.
 Uzupełniające ściany grzewcze wodne (model `instalacje.grzejniki`): 1.03 — 80 W, 1.09 — 280 W, 2.05 — 150 W, 2.07 — 180 W, 3.04 — 180 W, 3.06 — 200 W.
 Bufor szeregowy 80 dm³ (odszranianie i minimalny czas pracy sprężarki przy zamkniętych
 pętlach), naczynie wzbiorcze przeponowe c.o. 18 dm³, zawór bezpieczeństwa
@@ -227,7 +227,7 @@ jest urządzeniem wodnym) z osadnikiem i filtrem, pompą do podlewania ogrodu (p
 na podlewanie 100 %; bilans IMGW 1991–2020) i przelewem do niecki chłonnej
 (ogród deszczowy). Powierzchnia zredukowana zlewni A_red = 210,0 m²; wymagana objętość niecki
 (PANDa 2050, C = 10 lat, f_b = 1,2; W-143) V_min = **5,08 m³**. Niecka przyjęta
-(model (dzialka.yaml: retencja.rozsaczanie)): A_n = **28,0 m²**, głębokość
+— model (dzialka.yaml: retencja.rozsaczanie): A_n = **28,0 m²**, głębokość
 0,30 m, V = **8,40 m³** ≥ V_min (minimalna powierzchnia
 z doboru 19,5 m²) — czas opróżniania 1,0 h (≤ 24 h). Deszczówka — instalacja odrębna, bez połączenia z wodociągiem (W-136).
 Odwodnienia liniowe przy drzwiach bez progu i przed bramą garażu (16 korytek
@@ -278,9 +278,9 @@ godzinowe TMY Poznań (WMO 12330) do bilansu pompy ciepła i charakterystyki ene
 
 **Podstawowe wyniki** (tabela w PDF):
 
-* Projektowe obciążenie cieplne budynku Φ_HL: 7,46 kW (—; PN-EN 12831 [W-151])
+* Projektowe obciążenie cieplne budynku Φ_HL: 7,48 kW (—; PN-EN 12831 [W-151])
 * Pompa ciepła PC-R290-07 (przykład): moc P(A−7/W35): 6,2 kW (—; [DANE PRZYKŁADOWE – FIKCYJNE])
-* Pokrycie mocy przy θ_e: P_PC + P_grzałki ≥ Φ_HL + Φ_W: 10,55 kW (≥ 8,71 kW; PN-EN 12831 / VDI 4645 [W] [W-155])
+* Pokrycie mocy przy θ_e: P_PC + P_grzałki ≥ Φ_HL + Φ_W: 10,55 kW (≥ 8,73 kW; PN-EN 12831 / VDI 4645 [W] [W-155])
 * Punkt biwalentny: −9,6 °C (≤ −7,0 °C; VDI 4645 / praktyka [ZAŁ] [W-155])
 * Udział grzałki w pokryciu Q_H: 0,0004  (≤ 0,0500; [ZAŁ] [W-155])
 * Sezonowa efektywność η_s (35 °C): 1,85  (≥ 1,25; rozp. (UE) 813/2013 zał. II [W-155])
@@ -401,9 +401,9 @@ Moc przyłączeniowa 27 kW, zabezpieczenie przedlicznikowe 40 A — PT-4 IE. Bud
 | POD-0 | podloga grunt | 0,11 | 0,30 | tak |
 | SWG | sciana nieogrz | 0,27 | 0,30 | tak |
 | SZ1 | sciana zewn | 0,17 | 0,20 | tak |
-| SZ2 | sciana zewn | 0,17 | 0,20 | tak |
-| SZL | sciana zewn | 0,10 | 0,20 | tak |
-| ST2Z | strop zewn | 0,13 | 0,15 | tak |
+| SZ2 | sciana zewn | 0,18 | 0,20 | tak |
+| SZL | sciana zewn | 0,11 | 0,20 | tak |
+| ST2Z | strop zewn | 0,14 | 0,15 | tak |
 | BC1 | okno (okno) | 0,78 | 0,90 | tak |
 | DG1 | drzwi (drzwi) | 1,10 | 1,30 | tak |
 | DZ1 | drzwi (drzwi_zewn) | 0,90 | 1,30 | tak |
@@ -454,17 +454,17 @@ Zasobnik c.w.u. w EP — z projektu (moduł wody): V = 400 dm³, strata postojow
 
 | Wariant | EU | EK | EP | EP_max | U_OZE [%] | E_CO2 [t/rok] | EP ≤ EP_max |
 |---|---|---|---|---|---|---|---|
-| A: PC R290 + PV + rekuperacja | 41,51 | 25,17 | 40,24 | 70,00 | 73,96 | 2,34 | tak |
-| A0: PC R290 + rekuperacja, bez PV | 41,51 | 25,17 | 62,93 | 70,00 | 58,27 | 3,65 | tak |
-| B: kocioł gazowy kondensacyjny + rekuperacja | 41,51 | 70,98 | 88,72 | 70,00 | 0,00 | 4,47 | NIE |
-| C: PC — wartości domyślne metodologii, bez PV | 41,51 | 32,81 | 82,02 | 70,00 | 47,88 | 4,76 | NIE |
-| A (n50 = 4 h⁻¹ — brak próby szczelności) | 55,52 | 29,25 | 49,69 | 70,00 | 74,09 | 2,88 | tak |
+| A: PC R290 + PV + rekuperacja | 41,64 | 25,21 | 40,32 | 70,00 | 73,96 | 2,34 | tak |
+| A0: PC R290 + rekuperacja, bez PV | 41,64 | 25,21 | 63,02 | 70,00 | 58,30 | 3,66 | tak |
+| B: kocioł gazowy kondensacyjny + rekuperacja | 41,64 | 71,13 | 88,90 | 70,00 | 0,00 | 4,47 | NIE |
+| C: PC — wartości domyślne metodologii, bez PV | 41,64 | 32,86 | 82,15 | 70,00 | 47,91 | 4,77 | NIE |
+| A (n50 = 4 h⁻¹ — brak próby szczelności) | 55,67 | 29,29 | 49,79 | 70,00 | 74,09 | 2,89 | tak |
 
 A — wariant projektowy (z PV); A0 — ten sam budynek i instalacje bez PV; B, C — analiza alternatyw (RPB § 20 ust. 1 pkt 10, PAB); ostatnie wiersze — wrażliwość (szczelność, Ψ).
 
 *Źródło: lamela.obliczenia.energia.ep (metodologia Dz.U. 2015 poz. 376 ze zm.)*
 
-> Wariant projektowy A: EP = **40,2** kWh/(m²·rok) ≤ EP_max = 70,0 — wymaganie spełnione. Wariant A0 bez PV: EP = **62,9** kWh/(m²·rok) ≤ EP_max — wymaganie spełnione także bez instalacji PV.
+> Wariant projektowy A: EP = **40,3** kWh/(m²·rok) ≤ EP_max = 70,0 — wymaganie spełnione. Wariant A0 bez PV: EP = **63,0** kWh/(m²·rok) ≤ EP_max — wymaganie spełnione także bez instalacji PV.
 
 ### Obliczenia: charakterystyka energetyczna — wariant A — W-240…W-242
 
@@ -506,7 +506,7 @@ ponownego przeliczenia EP, punktu biwalentnego i hałasu (generator tomu przelic
 
 | Urządzenie | Parametry wymagane | Podstawa |
 |---|---|---|
-| Pompa ciepła powietrze–woda, monoblok | czynnik naturalny R290 (GWP < 150); P(A−15/W35) ≥ 5,0 kW (jak urządzenie przyjęte w obliczeniach) i pokrycie Φ_HL + Φ_W = 8,71 kW przy θ_e z grzałką ≤ 6 kW; SCOP₃₅ ≥ 4,7; η_s ≥ 125 %; L_WA ≤ 57 dB (tryb nocny niżej); regulacja pogodowa, sterowanie zależne od zapotrzebowania | W-155, W-156, W-024; (UE) 2024/573, 813/2013 |
+| Pompa ciepła powietrze–woda, monoblok | czynnik naturalny R290 (GWP < 150); P(A−15/W35) ≥ 5,0 kW (jak urządzenie przyjęte w obliczeniach) i pokrycie Φ_HL + Φ_W = 8,73 kW przy θ_e z grzałką ≤ 6 kW; SCOP₃₅ ≥ 4,7; η_s ≥ 125 %; L_WA ≤ 57 dB (tryb nocny niżej); regulacja pogodowa, sterowanie zależne od zapotrzebowania | W-155, W-156, W-024; (UE) 2024/573, 813/2013 |
 | Zasobnik c.w.u. z wężownicą | V ≥ 400 dm³, wężownica ≥ 1,8 m² (dla PC), strata postojowa ≤ 75 W (wartość przyjęta w EP), grzałka do dezynfekcji, grupa bezpieczeństwa, izolacja fabryczna | W-133, W-134; PN-EN 16147+A1:2023-06 |
 | Bufor c.o. (szeregowy) | V ≥ 80 dm³, izolowany | obliczenia ogrzewania |
 | Naczynia wzbiorcze przeponowe | c.o. ≥ 18 dm³ (p₀ 0,83 bar); c.w.u. ≥ 50 dm³ (p₀ 3,8 bar), przepływowe | PN-B-02414:1999 (powołana w WT) [W-154] |

@@ -149,7 +149,7 @@ class WynikGlaser:
         if not self.kondensacja:
             return "brak kondensacji międzywarstwowej"
         if self.wysycha and self.M_a_max <= self.kryterium_kg_m2:
-            return (f"kondensacja okresowa, M_a,max = {fmt(self.M_a_max * 1000, 0)} g/m² — wysycha w okresie letnim "
+            return (f"kondensacja okresowa, M_a,max = {fmt(self.M_a_max * 1000, 3 if self.M_a_max < 0.01 else 0)} g/m² — wysycha w okresie letnim "
                     "(dopuszczalna wg WT zał. 2 pkt 2.2.5)")
         if self.wysycha:
             return (f"kondensacja okresowa M_a,max = {fmt(self.M_a_max * 1000, 0)} g/m² > "

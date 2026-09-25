@@ -79,7 +79,8 @@ def oblicz_wszystko(m, *, wyniki_symulacji: dict | None = None, wariant_psi: str
         if rola in ("sciana_nieogrz", "strop_nieogrz", "strop_nieogrz_gora") and e.sasiad in obc.b_u:
             b = obc.b_u[e.sasiad]
             te = list(20.0 - b * (20.0 - k.theta_e))
-            uw.append(f"strona zimna — przestrzeń nieogrzewana {e.sasiad}: θ_u,n = 20 − b_u·(20 − θ_e,n), b_u = "
+            nz = next((p.nazwa for p in m.pomieszczenia() if p.id == e.sasiad), None)
+            uw.append(f"strona zimna — przestrzeń nieogrzewana ({nz or 'pom. nieogrzewane'}): θ_u,n = 20 − b_u·(20 − θ_e,n), b_u = "
                       f"{fmt(b, 2)}; ciśnienie pary jak na zewnątrz")
         r = KD.glaser(warstwy, Rsi, Rse, theta_i=20.0, klasa=klasa_wilgotnosci, kod=kod,
                       nazwa=(m.przegroda(kod).nazwa if m.przegroda(kod) else wu.nazwa), rola=rola, theta_e=te)

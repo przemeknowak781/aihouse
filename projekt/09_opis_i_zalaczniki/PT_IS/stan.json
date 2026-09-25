@@ -6,8 +6,8 @@
   "Dane osobowe (Inwestor, projektanci, nr uprawnień, pracownia) — brak sekcji `projekt:` w model/budynek.yaml; pola oznaczone jako do uzupełnienia (strona tytułowa, oświadczenie)."
  ],
  "arkusze_braki": [],
- "EP": 40.2,
- "EP_bez_PV": 62.9,
+ "EP": 40.3,
+ "EP_bez_PV": 63.0,
  "EP_max": 70.0,
  "niespelnione": []
 }
