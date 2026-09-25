@@ -98,6 +98,27 @@ class Profil:
         inside = (self.s >= s_pts[0] - 1e-6) & (self.s <= s_pts[-1] + 1e-6)
         self.q[c] = self.get(c) + np.where(inside, val, 0.0)
 
+    def dodaj_wygladzone(self, c: str, s_pts, q_pts, okno: float = 1.0):
+        """Dodaje rozkład reakcji wygładzony średnią kroczącą (okno [m]) z zachowaniem sumy: lokalne wartości ujemne
+        (odrywanie naroży płyt — siły narożne Kirchhoffa) są wyrównywane z sąsiednimi dodatnimi; pozostałe ujemne
+        obcięte i rozkład przeskalowany do pierwotnej wypadkowej [UPR]."""
+        tmp = Profil(self.L, self.s[1] - self.s[0])
+        tmp.dodaj(c, s_pts, q_pts)
+        arr = tmp.get(c)
+        tot = float(np.trapezoid(arr, self.s))
+        ds = self.s[1] - self.s[0]
+        n = max(int(round(okno / ds)), 1)
+        k = np.ones(n)
+        num = np.convolve(arr, k, mode="same")
+        den = np.convolve(np.ones_like(arr), k, mode="same")
+        sm = np.clip(num / den, 0.0, None)
+        ts = float(np.trapezoid(sm, self.s))
+        if tot > 0 and ts > 0:
+            sm = sm * tot / ts
+        elif tot <= 0:
+            sm = np.zeros_like(sm)
+        self.q[c] = self.get(c) + sm
+
     def dodaj_stale(self, c: str, val: float, s0: float = 0.0, s1: float | None = None):
         s1 = self.L if s1 is None else s1
         self.q[c] = self.get(c) + np.where((self.s >= s0 - 1e-9) & (self.s <= s1 + 1e-9), val, 0.0)
@@ -1324,17 +1345,17 @@ class AnalizaKonstrukcji:
             belka = Belka(L, [Podpora(s, "przegub", nazwa=(o.id if t == "sciana" else str(o["id"]))) for s, t, o in pods], EI=1.0, dx=0.05)
             # obciążenia z MES (reakcje liniowe wzdłuż linii belki)
             obc = {}
+            lnb = next(sp for sp in g.podp_l if sp.id == sid).linia
+            s0 = LineString([(x0, y0), (x1, y1)]).project(Point(*lnb.coords[0]))
             for cs, r in g.res.items():
                 ss, rr = fe.reakcje_liniowe(r, sid)
                 if not len(ss):
                     continue
-                s0 = LineString([(x0, y0), (x1, y1)]).project(Point(*next(sp for sp in g.podp_l if sp.id == sid).linia.coords[0]))
-                lst = []
-                for k in range(len(ss) - 1):
-                    a, bb = ss[k] + s0, ss[k + 1] + s0
-                    q0, q1 = max(np.nan_to_num(rr[k]), 0.0), max(np.nan_to_num(rr[k + 1]), 0.0)   # [UPR] bez odrywania
-                    lst.append(ObcQ(float(q0), float(min(max(a, 0), L)), float(min(max(bb, 0), L)), float(q1)))
-                obc[cs] = lst
+                pb = Profil(L, 0.1)
+                pb.dodaj_wygladzone(cs, np.clip(ss + s0, 0, L), np.nan_to_num(rr), 0.5)
+                q = pb.get(cs)
+                obc[cs] = [ObcQ(float(q[k]), float(pb.s[k]), float(pb.s[k + 1]), float(q[k + 1]))
+                           for k in range(len(pb.s) - 1) if q[k] or q[k + 1]]
             h_pl = next((e.h for e in g.el if abs(spod + hb - e.spod) < TOL_Z), 0.0)
             gw = bw * hb * p.ciezar_zelbetu if not stalowa else 0.0
             obc["G"] = obc.get("G", []) + [ObcQ(gw)]
@@ -1443,8 +1464,8 @@ class AnalizaKonstrukcji:
                     ss, rr = g.fe.reakcje_liniowe(r, sid)
                     if len(ss):
                         sw = [w.st(ln.interpolate(s_).coords[0])[0] for s_ in ss]
-                        # reakcje ujemne (odrywanie naroży płyty) pominięte — bezpiecznie dla ścian ściskanych [UPR]
-                        pr["top_s"].dodaj(cs, sw, np.maximum(np.nan_to_num(rr), 0.0) if cs != "G" or True else rr)
+                        # wygładzenie 1,0 m z zachowaniem wypadkowej (siły narożne płyty) [UPR]
+                        pr["top_s"].dodaj_wygladzone(cs, sw, np.nan_to_num(rr), 1.0)
         # obciążenia skupione (belki, schody)
         for cs, P, s_c, szer in self.pending_sciany.get(w.id, []):
             pr["top_s"].dodaj_skupiona(cs, P, s_c, szer)

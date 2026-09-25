@@ -295,8 +295,10 @@ def test_model_przeplyw_obciazen():
     Gpl = sum(g.res["G"].R.sum() for g in an.grupy)
     Gsc = sum(an.prof[w.id]["gm2"] * an.prof[w.id]["h"] * w.L - sum(o.szer * (o.z1 - o.z0) for o in an.prof[w.id]["otw"])
               * an.prof[w.id]["gm2"] for w in an.m.sciany() if w.id in an.prof)
-    ratio = (Gf + Gs) / (Gpl + Gsc)
-    assert 0.97 <= ratio <= 1.15, f"równowaga globalna G: {ratio:.3f}"
+    Gb = sum(float(b["b"]) * float(b["h"]) * 25 * 3.82 for b in an.m.belki())                  # ciężar B1
+    Gsch = sum(P for lst in an.pending_sciany.values() for cs, P, _, szer in lst if cs == "G" and szer > 0.5)  # schody → ściana
+    ratio = (Gf + Gs) / (Gpl + Gsc + Gb + Gsch)
+    assert 0.98 <= ratio <= 1.05, f"równowaga globalna G: {ratio:.3f}"
 
 
 def test_model_wyniki_rozsadne():

@@ -236,7 +236,12 @@ def test_integracja_model_testowy(out: Path | None = None):
     from lamela.obliczenia.instalacje import RAPORTY, oblicz_wszystko
     import tempfile
     tmp = Path(out) if out else Path(tempfile.mkdtemp())
-    wyn = oblicz_wszystko(B, DZ, WY, IN, out=tmp)
+    try:                                    # Φ_HL i wentylacja z modułu energii (gdy dostępny) — pełny łańcuch
+        from lamela.obliczenia.instalacje import z_modulu_energii
+        obc, went = z_modulu_energii(B, DZ)
+    except ImportError:
+        obc, went = None, None
+    wyn = oblicz_wszystko(B, DZ, WY, IN, phi_hl=obc, wentylacja=went, out=tmp)
     for _, plik, _ in RAPORTY:
         t = (tmp / plik).read_text(encoding="utf-8")
         assert t.startswith("# ") and "## Źródła" in t, plik

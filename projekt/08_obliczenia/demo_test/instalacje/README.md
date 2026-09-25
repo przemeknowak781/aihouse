@@ -11,7 +11,7 @@ Biblioteka `lamela.obliczenia.sanitarne` i `lamela.obliczenia.elektryka`. Model:
 | [Kanalizacja sanitarna](02_kanalizacja.md) | 19 | 19 | 0 | — |
 | [Odwodnienie dachów, retencja](03_deszczowa.md) | 16 | 16 | 0 | — |
 | [Drenaż i odwodnienie powierzchniowe](04_drenaz.md) | 5 | 0 | 5 | W-019 Spadek terenu od budynku, ściana 1 (śr. 5,0; −0,3); W-019 Spadek terenu od budynku, ściana 2 (śr. 10,3; 4,0); W-019 Spadek terenu od budynku, ściana 3 (śr. 5,0; 8,3); W-019 Spadek terenu od budynku, ściana 4 (śr. −0,3; 4,0); W-019 Wysokość cokołu (posadzka parteru − teren), minimum na obwodzie |
-| [Pompa ciepła, ogrzewanie podłogowe, hałas](05_ogrzewanie.md) | 36 | 35 | 1 | W-153 1.04 Garderoba: moc podłogi przy θ_V,des (T = 10 cm) ≥ Φ_HL |
+| [Pompa ciepła, ogrzewanie podłogowe, hałas](05_ogrzewanie.md) | 43 | 40 | 3 | W-153 1.01 Sypialnia: moc podłogi przy θ_V,des (T = 10 cm) ≥ Φ_HL; W-153 1.02 Hol: moc podłogi przy θ_V,des (T = 10 cm) ≥ Φ_HL; W-153 1.04 Garderoba: moc podłogi przy θ_V,des (T = 10 cm) ≥ Φ_HL |
 | [Bilans mocy](06_bilans_mocy.md) | 7 | 7 | 0 | — |
 | [Obwody, zabezpieczenia, SPD, PWP](07_obwody.md) | 84 | 83 | 0 | — |
 | [Fotowoltaika](08_pv.md) | 12 | 12 | 0 | — |
@@ -25,10 +25,10 @@ Schematy: [schemat ideowy RG](schemat_RG.png), [schemat PC / c.w.u.](schemat_PC_
 * Kanalizacja: ΣDU = 8,7 l/s, Q_ww = 2,00 l/s, przykanalik DN150 i=0.02.
 * Wody opadowe: dachy 102,8 m², Q = 4,73 l/s; zbiornik 5,0 m³ + niecka 9,0 m² (V_min 2,66 m³); pokrycie podlewania 85 %.
 * Drenaż opaskowy: NIEWYMAGANY (W1.1-E (wilgoć gruntowa, woda nienaporowa)).
-* Ogrzewanie: Φ_HL = 4,88 kW (WSKAŹNIKOWE ZASTĘPCZE [ZAŁ] — do zastąpienia wynikami PN-EN 12831 (moduł energii)); PC PC-R290-05 (przykład), θ_biv = −11,1 °C; θ_V = 34,2 °C; bufor 50 dm³; hałas na granicy 24,6 dB(A).
+* Ogrzewanie: Φ_HL = 5,71 kW (moduł fizyki/energii (PN-EN 12831)); PC PC-R290-05 (przykład), θ_biv = −8,4 °C; θ_V = 35,0 °C; bufor 40 dm³; hałas na granicy 24,6 dB(A).
 * Bilans mocy: P_inst = 43,0 kW, P_szczyt (DLM) = 24,0 kW ≤ P_przył = 27 kW / 40 A.
 * Obwody: 24; WLZ YKY 5×16 (∆U = 0,38 %); maks. ∆U = 2,37 %; CRL = 315 → SPD T1+2; PWP: PROJEKTOWAĆ (rekomendacja D-04 — spełnia WT §183 ust. 2 i jest zgodne z ROPoż).
-* PV: 15 × moduł = 6,45 kWp (EW10), E = 5610 kWh/a, autokonsumpcja 51 %.
+* PV: 15 × moduł = 6,45 kWp (EW10), E = 5610 kWh/a, autokonsumpcja 49 %.
 * Odgromowa: A_D = 2165 m²; LPS NIEWYMAGANY (R1 ≤ R_T przy SPD T1 dla obu klas obciążenia ogniowego); uziom: fundamentowy w ławach.
 
 ## Dane przekazywane do charakterystyki energetycznej (moduł energii)
@@ -46,27 +46,27 @@ Schematy: [schemat ideowy RG](schemat_RG.png), [schemat PC / c.w.u.](schemat_PC_
   "COP_cwu": 3.3,
   "eta_H_e": 0.89,
   "eta_H_d": 0.96,
-  "E_el_PC_kWh_a": 1802.0,
-  "E_grzalka_kWh_a": 1.0,
-  "Q_H_TMY_kWh_a": 7384.0
+  "E_el_PC_kWh_a": 2104.0,
+  "E_grzalka_kWh_a": 7.0,
+  "Q_H_TMY_kWh_a": 8633.0
  },
  "pv": {
-  "E_PV_uzyta_H_kWh_a": 282.0,
-  "E_PV_uzyta_W_kWh_a": 997.0,
-  "E_PV_uzyta_pom_kWh_a": 349.0,
+  "E_PV_uzyta_H_kWh_a": 329.0,
+  "E_PV_uzyta_W_kWh_a": 999.0,
+  "E_PV_uzyta_pom_kWh_a": 187.0,
   "E_PV_uzyta_H_W_pom_miesiecznie_kWh": [
    66.4,
-   129.8,
-   192.0,
-   211.0,
-   174.4,
-   157.6,
-   157.0,
-   154.9,
-   137.6,
-   126.5,
-   72.7,
-   48.3
+   131.4,
+   189.0,
+   203.7,
+   158.4,
+   135.3,
+   135.1,
+   134.7,
+   123.1,
+   117.9,
+   71.4,
+   48.4
   ],
   "w_PV": 0.0,
   "metoda": "bilans godzinowy, przypisanie proporcjonalne [UPR]"
@@ -76,7 +76,7 @@ Schematy: [schemat ideowy RG](schemat_RG.png), [schemat PC / c.w.u.](schemat_PC_
 
 ## Założenia ogólne i uwagi
 
-* Wentylacja (moc rekuperatora, profil zużycia): 210 m³/h = max(Σnawiew, Σwywiew) — model (pola went pomieszczeń).
+* Wentylacja (moc rekuperatora, profil zużycia): 100 m³/h = max(Σnawiew, Σwywiew) — moduł wentylacji.
 
 ## Dane wymagane od modelu / wyposażenia (do uzupełnienia w `model/`)
 

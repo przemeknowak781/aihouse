@@ -223,7 +223,7 @@ class Klasyfikacja:
     lam: np.ndarray         # (ny, nx) λ (nan poza materiałem)
 
 
-def klasyfikuj(wezel: Wezel, s: Siatka) -> Klasyfikacja:
+def klasyfikuj(wezel: Wezel, s: Siatka, kontrola_pustek: bool = True) -> Klasyfikacja:
     xc, yc = s.xc, s.yc
     mat_id = np.full((s.ny, s.nx), -1, dtype=np.int32)
     strefa_id = np.full((s.ny, s.nx), -1, dtype=np.int32)
@@ -258,4 +258,61 @@ def klasyfikuj(wezel: Wezel, s: Siatka) -> Klasyfikacja:
         blok[m & wolne] = k
     lamv = np.array([m.lam for m in mats] + [np.nan])
     lam = lamv[mat_id]           # −1 → ostatni (nan)
-    return Klasyfikacja(mat_id, strefa_id, mats, lam)
+    kl = Klasyfikacja(mat_id, strefa_id, mats, lam)
+    if kontrola_pustek:
+        kontroluj_pustki(wezel, s, kl)
+    return kl
+
+
+T_SZCZELINY = 1e-3      # [m] — pustka węższa niż 1 mm między materiałami/strefami = szczelina numeryczna
+
+
+def kontroluj_pustki(wezel: Wezel, s: Siatka, kl: Klasyfikacja, t_szczeliny: float = T_SZCZELINY) -> None:
+    """Wykrywa przypadkowe pustki (komórki ani materiału, ani strefy), które działałyby jak adiabatyczne szczeliny:
+    (a) spójne składowe pustki nie stykające się z brzegiem ramki (pustka wewnętrzna — zamknięta wnęka bez
+    materiału; pustki powietrzne modeluje się materiałem λ_eq wg ISO 6946 zał. D);
+    (b) ciągi komórek pustki w wierszu/kolumnie węższe niż t_szczeliny, ograniczone z obu stron materiałem lub
+    strefą (szczelina między wielobokami, np. niedomknięte sumy współrzędnych).
+    Pustki przy brzegu ramki (za płaszczyznami odcięcia) są dozwolone. Błąd → ValueError z położeniem."""
+    from scipy import ndimage
+    pusta = (kl.mat_id < 0) & (kl.strefa_id < 0)
+    if not pusta.any():
+        return
+    xc, yc = s.xc, s.yc
+    lab, n = ndimage.label(pusta)
+    if n:
+        brzeg = np.unique(np.concatenate([lab[0, :], lab[-1, :], lab[:, 0], lab[:, -1]]))
+        wewn = sorted(set(range(1, n + 1)) - set(int(v) for v in brzeg))
+        if wewn:
+            jj, ii = np.nonzero(lab == wewn[0])
+            raise ValueError(
+                f"Węzeł {wezel.id}: {len(wewn)} zamknięta(-e) pustka(-i) wewnątrz przekroju (adiabatyczna wnęka), "
+                f"np. x ∈ [{s.x[ii.min()]:.6f}; {s.x[ii.max() + 1]:.6f}], y ∈ [{s.y[jj.min()]:.6f}; "
+                f"{s.y[jj.max() + 1]:.6f}] m — domknij geometrię albo wypełnij wnękę materiałem (pustka powietrzna: "
+                f"material_pustki wg ISO 6946 zał. D)")
+    for os_, M, d, e in ((1, pusta, s.dx, s.x), (0, pusta.T, s.dy, s.y)):
+        # os_ = 1: przebieg wzdłuż x (wiersze); 0: wzdłuż y (kolumny)
+        for r_ in range(M.shape[0]):
+            wiersz = M[r_]
+            if not wiersz.any():
+                continue
+            k = 0
+            nk = len(wiersz)
+            while k < nk:
+                if not wiersz[k]:
+                    k += 1
+                    continue
+                k0 = k
+                while k < nk and wiersz[k]:
+                    k += 1
+                if k0 == 0 or k == nk:
+                    continue        # ciąg dochodzi do brzegu ramki
+                szer = float(d[k0:k].sum())
+                if szer < t_szczeliny:
+                    if os_ == 1:
+                        opis = f"x ∈ [{e[k0]:.7f}; {e[k]:.7f}], y = {yc[r_]:.5f}"
+                    else:
+                        opis = f"y ∈ [{e[k0]:.7f}; {e[k]:.7f}], x = {xc[r_]:.5f}"
+                    raise ValueError(
+                        f"Węzeł {wezel.id}: szczelina (pustka adiabatyczna) szerokości {szer * 1000:.4g} mm między "
+                        f"obszarami: {opis} m — wieloboki materiałów/stref nie stykają się (sprawdź współrzędne)")

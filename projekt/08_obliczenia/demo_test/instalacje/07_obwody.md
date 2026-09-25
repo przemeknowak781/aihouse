@@ -44,7 +44,7 @@ WLZ: **YKY 5×16**, L = 17,7 m, w ziemi ≥ 0,7 m w piasku z taśmą niebieską,
 | D5 | Pompa ciepła — jednostka zewnętrzna (PC-R290-05 (przykład)) | L2 | 1,90 | 8,7 | C16 | YDYp 3×2,5 | C | 21,6 | 8,8 | 0,50 | 0,88 | 0,495 | 442 | 160 | RCD typ F/B 30 mA wg DTR (falownik sprężarki) | R7 D6; PN-HD 60364-5-53 (typ RCD wg DTR) |
 | D6 | Grzałka rezerwowa PC / zasobnika c.w.u. (6,0 kW) | L1L2L3 | 6,00 | 8,7 | 3P B10 | YDYp 5×2,5 | C | 19,2 | 4,9 | 0,15 | 0,53 | 0,428 | 510 | 50 | RCD 4P 40 A/30 mA typ A | R7 D7 — blokada w systemie zarządzania mocą (DLM) |
 | D7 | Sterowanie PC, pompy obiegowe, listwy ogrzewania podłogowego | L1 | 0,30 | 1,4 | B10 | YDYp 3×1,5 | C | 15,6 | 4,9 | 0,07 | 0,45 | 0,481 | 454 | 50 | RCBO typ A 30 mA | WT §188 ust. 2 |
-| D8 | Rekuperator (V ≈ 210 m³/h) | L3 | 0,15 | 0,7 | B10 | YDYp 3×1,5 | C | 15,6 | 3,0 | 0,02 | 0,40 | 0,428 | 511 | 50 | RCBO typ A 30 mA | R7 D9; moc wentylatorów ≈ 0,5 W/(m³/h) [ZAŁ] |
+| D8 | Rekuperator (V ≈ 100 m³/h) | L3 | 0,15 | 0,7 | B10 | YDYp 3×1,5 | C | 15,6 | 3,0 | 0,02 | 0,40 | 0,428 | 511 | 50 | RCBO typ A 30 mA | R7 D9; moc wentylatorów ≈ 0,5 W/(m³/h) [ZAŁ] |
 | D9 | Falownik PV 3f (6,0 kW AC) | L1L2L3 | 6,00 | 8,7 | 3P B16 | YDYp 5×2,5 | C | 19,2 | 3,0 | 0,09 | 0,47 | 0,396 | 552 | 80 | RCD typ B 30 mA (lub wg 712.530.3.101 — DTR falownika) | PN-HD 60364-7-712; R7-I06 |
 | D10 | Brama wjazdowa, furtka, wideodomofon (linia ogrodzenia) | L2 | 0,50 | 2,3 | B16 | YKY 3×2,5 | D1 | 23,2 | 26,3 | 0,37 | 0,75 | 0,798 | 274 | 80 | RCBO typ A 30 mA | R7 D14 |
 | D11 | Teletechnika: ONT, router, szafka RACK, SSWiN | L1 | 0,20 | 0,9 | B16 | YDYp 3×2,5 | C | 21,6 | 3,0 | 0,02 | 0,40 | 0,396 | 552 | 80 | RCBO typ A 30 mA | R7 D17; GIA art. 10 |

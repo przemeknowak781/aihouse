@@ -1,5 +1,6 @@
 {
- "title": "Korekta Inwestora: „S” z przesuniętych brył, garaż w parterze — panel koncepcji uruchomiony ponownie",
+ "nr": 20,
+ "title": "Panel sędziów: W2 jako baza z przeszczepami z W1 i W3; biblioteka fizyki/EP ukończona",
  "stages": [
   [
    "Analiza szkicu — interpretacja v2 („S” z brył, garaż)",
@@ -55,9 +56,24 @@
   ]
  ],
  "notes": [
+  "NADZÓR (04:56): 4 agentów aktywnych, bez zastojów; najdłuższa bezczynność 0 min; zmiany w repo 0 min temu.",
   "Sędziowie J1 i J2 niezależnie wskazali W2 jako bazę; J2: W2 76 / W1 66 / W3 57 pkt. Przeszczepy z W1 i W3 (jedn. PC ≥ 6 m od granicy, retencja, rytm kwater szkicu, lekka rama C, HS na taras zachodni).",
   "Sędziowie przeliczyli wszystko samodzielnie i wykryli błędy deklaracji wariantów (PU z klatką schodową, PC za blisko granicy, odwodnienie dachu P2) — trafią do syntezy jako obowiązkowe poprawki.",
   "Biblioteka fizyki/EP ukończona (24/24 testów). Biblioteka instalacji: schematy RG i PC/CWU gotowe.",
   "Solver mostków: etap poprawek po niezależnej weryfikacji."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/docs/20_koncepcja/ocena_panel.png",
+   "caption": "Ocena panelu sędziów"
+  },
+  {
+   "path": "/home/user/aihouse/projekt/08_obliczenia/demo_test/instalacje/schemat_RG.png",
+   "caption": "Demo: schemat rozdzielnicy RG"
+  },
+  {
+   "path": "/home/user/aihouse/projekt/08_obliczenia/demo_test/instalacje/schemat_PC_CWU.png",
+   "caption": "Demo: schemat PC + CWU"
+  }
  ]
 }

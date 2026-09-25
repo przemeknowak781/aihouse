@@ -32,7 +32,7 @@ Obiekt: Dom testowy pipeline'u 3D. Dane przykładowe oznaczono [ZAŁ].
 | D5 | Pompa ciepła — jednostka zewnętrzna (PC-R290-05 (przykład)) | pc | 1,90 | 1 | 0,95 | 1,00 | 1,90 | — | L2 |
 | D6 | Grzałka rezerwowa PC / zasobnika c.w.u. (6,0 kW) | grzalka | 6,00 | 3 | 1,00 | 1,00 | 6,00 | tak | L1L2L3 |
 | D7 | Sterowanie PC, pompy obiegowe, listwy ogrzewania podłogowego | sterowanie | 0,30 | 1 | 0,95 | 1,00 | 0,30 | — | L1 |
-| D8 | Rekuperator (V ≈ 210 m³/h) | went | 0,15 | 1 | 0,95 | 1,00 | 0,15 | — | L3 |
+| D8 | Rekuperator (V ≈ 100 m³/h) | went | 0,15 | 1 | 0,95 | 1,00 | 0,15 | — | L3 |
 | D9 | Falownik PV 3f (6,0 kW AC) | pv | 6,00 | 3 | 1,00 | 0,00 | gen. | — | L1L2L3 |
 | D10 | Brama wjazdowa, furtka, wideodomofon (linia ogrodzenia) | napedy | 0,50 | 1 | 0,95 | 0,30 | 0,15 | — | L2 |
 | D11 | Teletechnika: ONT, router, szafka RACK, SSWiN | tele | 0,20 | 1 | 0,95 | 1,00 | 0,20 | — | L1 |
