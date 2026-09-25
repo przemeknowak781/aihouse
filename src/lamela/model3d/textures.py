@@ -98,10 +98,11 @@ def texture(name: str, color: str) -> Image.Image:
         b = _noise(n, 1.6, 52)
         rgb = _shade(base, 0.6 * a + 0.4 * b, 0.16)
     elif name == "sedum":
-        a = _noise(n, 1.2, 61)
-        b = _noise(n, 2.2, 62)
-        rgb = _shade(base, 0.5 * a + 0.4 * b, 0.25)
-        red = np.clip(b - 0.9, 0, 3)[..., None] * np.array([0.25, -0.1, -0.05])
+        a = _noise(n, 0.6, 61)
+        b = _noise(n, 1.4, 62)
+        c = _noise(n, 0.9, 63)
+        rgb = _shade(base, 0.6 * a + 0.4 * b, 0.12)
+        red = np.clip(c - 1.4, 0, 3)[..., None] * np.array([0.18, -0.02, -0.03])
         rgb = rgb + red
     elif name in ("kostka", "kostka_jasna"):     # kostka 20×10 cm, wiązanie półcegiełkowe (1 m = 5×10)
         kx, ky = 5, 10

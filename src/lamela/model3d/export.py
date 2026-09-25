@@ -230,6 +230,8 @@ def ir_to_scene(ir: IR, model=None, textures: bool = True, explode: dict | None 
     for key, items in buckets.items():
         group, elem, matcode = key
         pm, pb = mats.get(matcode)
+        if not pb.visible:
+            continue
         Vs, Ns, Us, Fs = [], [], [], []
         off = 0
         for typ, obj in items:

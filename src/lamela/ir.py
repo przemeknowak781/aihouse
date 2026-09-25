@@ -670,7 +670,14 @@ class _Builder:
                 if m.kond_z_od(k.id) < pl["wierzch"] - 0.5:
                     below = k.id
                     break
-            self._roof_like(rid, poly, pl["wierzch"], pl["grubosc"], prz, d.get("attyka"), "roof", below, "dach",
+            # dach na poziomie stropu wyższej kondygnacji (np. dach garażu, taras) → grupa tej kondygnacji;
+            # dach nad najwyższą kondygnacją → grupa „dach”
+            grp = "dach"
+            for k in m.kondygnacje:
+                if abs(m.kond_z_od(k.id) - pl["wierzch"]) < 0.30:
+                    grp = k.id
+            lvl = grp if grp != "dach" else below
+            self._roof_like(rid, poly, pl["wierzch"], pl["grubosc"], prz, d.get("attyka"), "roof", lvl, grp,
                             below_kond=below, slab_mat=d.get("mat"))
 
     def _wsporniki(self):

@@ -21,6 +21,7 @@ class PBR:
     double_sided: bool = False
     cast_shadow: bool = True
     emissive: str | None = None
+    visible: bool = True            # False — warstwa nie eksportowana do 3D (np. pustka powietrzna)
 
 
 # kody pomocnicze (IR) — ustalone
@@ -69,6 +70,7 @@ FIXED: dict[str, PBR] = {
 }
 
 RULES: list[tuple[str, PBR]] = [
+    (r"PUSTK|SZCZELIN|POWIETRZ|^AIR", PBR("#ffffff", 1.0, visible=False)),
     (r"SZKL|GLASS|SZYB", FIXED["SZKLO"]),
     (r"^TYNK.*(SIL|ZEW|ELEW|AKR|MINER)|ELEWAC", PBR("#f3f2ee", 0.92, texture="tynk", uv=2.0)),
     (r"TYNK|GLAD|GŁAD|GK|FARB|MALOW", PBR("#f4f2ee", 0.9)),
@@ -76,7 +78,7 @@ RULES: list[tuple[str, PBR]] = [
     (r"KOMPOZ|DESKA_KOMP|WPC", PBR("#6d5a49", 0.75, texture="deski", uv=1.0)),
     (r"DESKA|PARKIET|DEB|DĄB|PODLOG|PANEL", PBR("#b58a5a", 0.55, texture="parkiet", uv=1.0)),
     (r"GRES|PLYTK|PŁYTK|TERAKOT|KAMIEN|KAMIEŃ|KONGL", PBR("#cdc7bd", 0.45, texture="plyty", uv=1.2)),
-    (r"ZIELON|SEDUM|ROZCHOD|SUBSTRAT|EKSTENS", PBR("#6e7d3e", 0.95, texture="sedum", uv=2.0)),
+    (r"ZIELON|SEDUM|ROZCHOD|SUBSTRAT|EKSTENS", PBR("#6e7d3e", 0.95, texture="sedum", uv=3.0)),
     (r"ZWIR|ŻWIR|OTOCZ|GRYS", PBR("#a39d91", 0.95, texture="zwir", uv=1.0)),
     (r"^(ZB|ZELBET|ŻELBET|BET|C\d\d)|BETON", PBR("#bdb9b1", 0.85, texture="beton", uv=2.0)),
     (r"JASTRYCH|WYLEW|ANHYDR", PBR("#c9c5bb", 0.9)),
@@ -93,6 +95,7 @@ RULES: list[tuple[str, PBR]] = [
 
 # dopasowanie po NAZWIE materiału (gdy kod nic nie mówi) — kolejność: przegrody techniczne przed wykończeniem
 NAME_RULES: list[tuple[str, PBR]] = [
+    (r"PUSTK|SZCZELIN|POWIETRZ|^AIR", PBR("#ffffff", 1.0, visible=False)),
     (r"SZKŁ|SZKL", FIXED["SZKLO"]),
     (r"PAPA|PAP |MEMBRAN|HYDROIZ|PAROIZ|FOLI|EPDM|TPO", PBR("#303133", 0.8)),
     (r"STYROPIAN|POLISTYREN|WEŁN|WELN|PIANK|PIR|PUR", PBR("#dedcd5", 0.95)),
