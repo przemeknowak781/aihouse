@@ -665,13 +665,14 @@ def _pakuj(W, H, widoki, grupa, bloki, tb_h, przes, gap_vb, znaki: bool, max_cze
     for st, z in strefy.items():
         wolne.zajmij(z)
         R.prostokaty.append(("znak", st, z))
+    odlozone = []
     for b in bloki:                                # wiersz nad tabliczką (róża, podziałka) — przed pozostałymi
         if not b.kotwica:
             continue
         pos, bb = _umiesc_kotwice(wolne, b, tb, fx1)
-        if pos is None:
-            R.brak = f"blok „{b.nazwa}” ({b.szer:.0f}×{b.wys:.0f} mm) nie mieści się"
-            return R
+        if pos is None:                            # miejsce nad tabliczką zajęte — na końcu, w wolnym miejscu
+            odlozone.append(b)                     # (nie zabiera najlepszych pól blokom czytanym po kolei)
+            continue
         _dodaj_blok(wolne, R, bb, pos[0], pos[1])
     baza, n_b, n_p = wolne.kopia(), len(R.bloki), len(R.prostokaty)
     kolejne = [b for b in bloki if not b.kotwica]
@@ -688,15 +689,21 @@ def _pakuj(W, H, widoki, grupa, bloki, tb_h, przes, gap_vb, znaki: bool, max_cze
             R.brak = f"blok „{b.nazwa}” ({b.szer:.0f}×{b.wys:.0f} mm) nie mieści się"
             return R
         _dodaj_blok(wolne, R, b, pos[0], pos[1])
-    R.ok = True
     if kolejnosc != "dowolna":
-        _porzadek_czytania(R, baza, kolejne, n_b, n_p)
+        wolne = _porzadek_czytania(R, baza, kolejne, n_b, n_p) or wolne
+    for b in odlozone:
+        pos = _umiesc_blok(wolne, b, b.szer, b.wys)
+        if pos is None:
+            R.brak = f"blok „{b.nazwa}” ({b.szer:.0f}×{b.wys:.0f} mm) nie mieści się"
+            return R
+        _dodaj_blok(wolne, R, b, pos[0], pos[1])
+    R.ok = True
     return R
 
 
 def _umiesc_kotwice(wolne: Wolne, b: Blok, tb: tuple, fx1: float):
     """Wiersz bezpośrednio nad tabliczką (prawa krawędź przy ramce); gdy zajęty z prawej (np. strefa znaku
-    centrującego) — węższy wariant bloku (``w_min``) z lewą krawędzią jak tabliczka; inaczej najlepsze wolne miejsce."""
+    centrującego) — węższy wariant bloku (``w_min``) z lewą krawędzią jak tabliczka; inaczej (None, b)."""
     y0 = tb[3] + GAP_B
     r = (fx1 - b.szer, y0, fx1, y0 + b.wys)
     if wolne.miesci(r):
@@ -710,8 +717,7 @@ def _umiesc_kotwice(wolne: Wolne, b: Blok, tb: tuple, fx1: float):
             if wolne.miesci(r):
                 return (r[0], r[1]), bn
             w -= 2.5
-    pos = _umiesc_blok(wolne, b, b.szer, b.wys)
-    return pos, b
+    return None, b
 
 
 def _dodaj_blok(wolne: Wolne, R: Rozmieszczenie, b: Blok, x0: float, y0: float):
@@ -855,7 +861,8 @@ def _porzadek_czytania(R: Rozmieszczenie, baza: Wolne, kolejne: list, n_b: int, 
     lewej i w kolumnie od góry — ponowne ułożenie w tych samych kolumnach (sloty: wolne odcinki kolumn od lewej,
     w kolumnie od góry): kolejne bloki listy i pozycje uwag dzielone na sloty w kolejności tak, aby najbardziej
     wypełniony slot był jak najmniej wypełniony (kolumny wyrównane, bez pustej kolumny obok przepełnionej); część
-    uwag „(cd.)” obciążona karą. Przyjmowane, gdy wszystko się mieści, a części uwag nie przybywa."""
+    uwag „(cd.)” obciążona karą. Przyjmowane, gdy wszystko się mieści, a części uwag przybywa najwyżej jedna
+    (koszt formatu uwzględnia ją karą ``kara_czesci_uwag``). Zwraca nowy stan wolnych pól albo None (bez zmian)."""
     wpisy = R.bloki[n_b:]
     rects = [r for k, _n, r in R.prostokaty[n_p:] if k == "blok"]
     if len(rects) < 2 or len(rects) != len(wpisy):
@@ -948,7 +955,7 @@ def _porzadek_czytania(R: Rozmieszczenie, baza: Wolne, kolejne: list, n_b: int, 
             wl.zajmij(_napompuj(r, GAP_C, GAP_B, GAP_C, GAP_B))
             nowe.append((b, r[0], r[1]))
             top = r[1] - GAP_B
-    if czesci > R.czesci_uwag:
+    if czesci > R.czesci_uwag + 1:                  # kolejność czytania wobec co najwyżej jednej części „(cd.)” więcej
         return
     R.bloki = R.bloki[:n_b]
     R.prostokaty = R.prostokaty[:n_p]
@@ -957,6 +964,7 @@ def _porzadek_czytania(R: Rozmieszczenie, baza: Wolne, kolejne: list, n_b: int, 
         R.prostokaty.append(("blok", b.nazwa, (x0, y0, x0 + b.szer, y0 + b.wys)))
     if any(b.uwagi is not None for b in kolejne):
         R.czesci_uwag = czesci
+    return wl
 
 
 # ================================================================================================ dobór formatu
