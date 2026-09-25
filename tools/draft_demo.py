@@ -401,11 +401,11 @@ def demo_section():
 # ==================================================================================================== (c) legendy
 def demo_legend():
     tb = TitleBlock(**TB_COMMON, branza="WIELOBRANŻOWY", tytul="TABLICA OZNACZEŃ: MATERIAŁY I SYMBOLE",
-                    skala="—", nr_rysunku="DEMO-03")
+                    skala="bez skali", nr_rysunku="DEMO-03", arkusz="3/3", rodzaj="legenda")
     sh = Sheet("A2", title_block=tb)
     x0, y0, x1, y1 = sh.frame
     codes = list(hatch.PATTERNS)
-    lg = hatch.legend(sh, x0 + 8.0, y1 - 8.0, codes, cols=3, col_w=92.0, sw=(18.0, 9.0), h=2.2,
+    lg = hatch.legend(sh, x0 + 8.0, y1 - 14.0, codes, cols=3, col_w=92.0, sw=(16.0, 8.0), h=1.8, row_gap=1.8,
                       title="OZNACZENIA MATERIAŁÓW W PRZEKROJACH (PN-B-01030:2000 + oznaczenia przyjęte)")
     # symbole — siatka komórek
     cells = []
@@ -452,23 +452,23 @@ def demo_legend():
                                                                h=2.0, total_steps=18, label_values=(0.175, 0.28)))
     # elektryka (PN-EN 60617) — rozmiar ×1,6
     z = 1.6
-    cell("Gniazdo 1f / 2× / IP44 / 3f", lambda c, p: (S.socket(c, p + (-21, -6), 90, s_mm=3 * z),
+    cell("11-13-04 gniazdo z st. ochr. / ×2 / IP44 / 3~", lambda c, p: (S.socket(c, p + (-21, -6), 90, s_mm=3 * z),
                                                         S.socket(c, p + (-7, -6), 90, n=2, s_mm=3 * z),
                                                         S.socket(c, p + (7, -6), 90, ip44=True, s_mm=3 * z),
                                                         S.socket(c, p + (19, -6), 90, phases=3, s_mm=3 * z)))
-    cell("Łącznik 1-bieg. / 2-bieg. / schodowy", lambda c, p: (S.switch(c, p + (-16, -6), 90, "1", s_mm=3 * z),
+    cell("11-14-03/-04/-06 łącznik 1-b. / 2-b. / schodowy", lambda c, p: (S.switch(c, p + (-16, -6), 90, "1", s_mm=3 * z),
                                                                 S.switch(c, p + (0, -6), 90, "2", s_mm=3 * z),
                                                                 S.switch(c, p + (16, -6), 90, "schodowy", s_mm=3 * z)))
-    cell("Oprawa ogólna / kinkiet / ścienna / liniowa", lambda c, p: (
+    cell("11-15-03 oprawa / -02 kinkiet / ścienna / -04 liniowa", lambda c, p: (
         S.light(c, p + (-21, 0), s_mm=4 * z), S.light(c, p + (-11, -6), "kinkiet", 90, s_mm=4 * z),
         S.light(c, p + (-1, -6), "sciana", 90, s_mm=3.4 * z), S.light_linear(c, p + (9, 0), p + (26, 0), 2.4)))
-    cell("Rozdzielnica / puszka / uziemienie", lambda c, p: (S.panel(c, p + (-15, -6), 90, 14, 4.5, "RG"),
+    cell("11-12-07 rozdzielnica / puszka / 02-15-01 uziemienie", lambda c, p: (S.panel(c, p + (-15, -6), 90, 14, 4.5, "RG"),
                                                               S.junction_box(c, p + (2, 0), 2.4),
                                                               S.earth(c, p + (16, 4), s_mm=3 * z)))
     cell("Czujnik ruchu / dzwonek / wideodomofon", lambda c, p: (S.motion_sensor(c, p + (-16, -6), s_mm=3.2 * z),
                                                                    S.bell(c, p + (0, -6), s_mm=3 * z),
                                                                    S.videophone(c, p + (16, -6), s_mm=3.6 * z)))
-    cell("Gniazdo RJ45 / TV / SPD", lambda c, p: (S.data_outlet(c, p + (-19, -6), s_mm=3 * z),
+    cell("11-13-09 gniazdo tele (RJ45, TV) / SPD", lambda c, p: (S.data_outlet(c, p + (-19, -6), s_mm=3 * z),
                                                    S.data_outlet(c, p + (-6, -6), label="TV", s_mm=3 * z),
                                                    S.spd(c, p + (8, -3), s_mm=3.5 * z)))
     # sanitarne
@@ -479,11 +479,9 @@ def demo_legend():
     cell("Wodomierz / filtr / pompa", lambda c, p: (c.line(p + (-26, 0), p + (26, 0), "S-WODA"),
                                                      S.water_meter(c, p + (-14, 0), 6.0), S.filter_(c, p + (0, 0), 5.5),
                                                      S.pump(c, p + (14, 0), 6.0)))
-    cell("Rury: W / C / Cy / K", lambda c, p: [S.pipe(c, [p + (-24, 7 - 4.4 * i), p + (24, 7 - 4.4 * i)], m,
-                                                      label={"W": "W — woda zimna", "C": "C — CWU",
-                                                             "CY": "Cy — cyrkulacja", "K": "K — kanalizacja"}[m],
-                                                      h=1.8, label_at=0.5)
-                                               for i, m in enumerate(["W", "C", "CY", "K"])])
+    cell("Przewody: Wz / Wc / Cyrk / Ks", lambda c, p: [S.pipe(c, [p + (-24, 7 - 4.4 * i), p + (24, 7 - 4.4 * i)], m,
+                                                              label=S.media(m)[1], h=1.8, label_at=0.5)
+                                                       for i, m in enumerate(["WZ", "WC", "CYRK", "KS"])])
     cell("Rozdzielacz / zasobnik / pompa ciepła", lambda c, p: (S.manifold(c, p + (-27, -2), n=3, pitch_mm=3.0),
                                                                  S.tank(c, p + (-1, 0), 11.0, "CWU", h=2.0),
                                                                  S.heat_pump(c, p + (17, -4), 0, 13, 8, "PC")))
@@ -493,43 +491,55 @@ def demo_legend():
     cell("Kratka / anemostat N / W", lambda c, p: (S.grille(c, p + (-18, 0), 0, 10, 4),
                                                     S.anemostat(c, p + (-2, 0), 6, "N"),
                                                     S.anemostat(c, p + (14, 0), 6, "W")))
-    cell("Czerpnia / wyrzutnia", lambda c, p: (S.air_terminal(c, p + (-6, -2), 180, "czerpnia", 8),
+    cell("Czerpnia ODA / wyrzutnia EHA", lambda c, p: (S.air_terminal(c, p + (-6, -2), 180, "czerpnia", 8),
                                                S.air_terminal(c, p + (6, -2), 0, "wyrzutnia", 8)))
-    cell("Rekuperator", lambda c, p: S.recuperator(c, p + (0, -3), 0, 20, 10, label=None))
+    cell("Rekuperator (ODA / EHA / ETA / SUP)", lambda c, p: S.recuperator(c, p + (0, -3), 0, 20, 10, label=None))
     cell("Grzejnik / ogrzewanie podłogowe", lambda c, p: (S.radiator(c, p + (-26, 3), p + (-10, 3), 2.5),
                                                           S.floor_heating(c, box(p[0] - 4, p[1] - 8, p[0] + 24,
                                                                                  p[1] + 6), 1.6, 0.8)))
     # teren
-    cell("Drzewo istn. / proj. / do wycinki", lambda c, p: (S.tree(c, p + (-17, 0), 11), S.tree(c, p + (0, 0), 11, False),
-                                                            S.tree(c, p + (17, 0), 11, remove=True)))
+    # zagospodarowanie terenu (PN-B-01027, symbole w skali 1:500 — k arkusza = 1 mm)
+    cell("Drzewo istn. / proj. / do usunięcia", lambda c, p: (S.tree(c, p + (-17, 0), 11), S.tree(c, p + (0, 0), 11, False),
+                                                              S.tree(c, p + (17, 0), 11, remove=True)))
     cell("Drzewo iglaste / krzew / żywopłot", lambda c, p: (S.tree(c, p + (-17, 0), 11, conifer=True),
                                                             S.shrub(c, p + (-3, 0), 6),
-                                                            S.hedge(c, [p + (6, 0), p + (26, 0)], 4)))
-    cell("Trawnik / kostka / deska", lambda c, p: (S.lawn(c, box(p[0] - 27, p[1] - 7, p[0] - 10, p[1] + 7), 30,
-                                                          outline=True),
-                                                   S.paving(c, box(p[0] - 8, p[1] - 7, p[0] + 8, p[1] + 7)),
-                                                   S.paving(c, box(p[0] + 10, p[1] - 7, p[0] + 27, p[1] + 7), "deska")))
-    cell("Słup en. / oświetl. / hydrant / studzienka", lambda c, p: (S.pole(c, p + (-20, 0), s_mm=3),
-                                                                     S.pole(c, p + (-10, 0), "osw", s_mm=3),
-                                                                     S.hydrant(c, p + (2, 0), 4.0),
-                                                                     S.manhole(c, p + (14, 0), 4.0, "Sk")))
-    cell("Złącze ZK / skrzynka", lambda c, p: (S.cable_box(c, p + (-10, -3), 0, 12, 4.5, "ZK"),
-                                               S.utility_box(c, p + (10, -3), 0, 9, 4, "SW")))
-    cell("Granica działki, punkty graniczne", lambda c, p: S.plot_boundary(c, [p + (-24, -6), p + (20, -6),
-                                                                               p + (18, 6)], closed=False,
-                                                                           point_labels=["12", "13", "14"]))
-    cell("Linia zabudowy", lambda c, p: S.building_line(c, p + (-26, -2), p + (26, -2),
-                                                         "nieprzekraczalna linia zabudowy"))
-    cell("Warstwice / pkt wysokościowe", lambda c, p: (S.contours(c, [([p + (-26, -7), p + (-8, -3), p + (6, -6)],
-                                                                         101.5)], label_every=20),
-                                                       S.spot_height(c, p + (10, 3), 101.43),
-                                                       S.spot_height(c, p + (-16, 4), 101.65, existing=False)))
-    cell("Brama przesuwna / furtka", lambda c, p: (S.gate(c, p + (-24, -4), p + (-2, -4)),
-                                                   S.gate(c, p + (6, -6), p + (18, -6), "furtka")))
+                                                            S.hedge(c, [p + (6, 0), p + (26, 0)], 3.0)))
+    cell("Trawnik / nawierzchnia drobna / duża", lambda c, p: (
+        S.lawn(c, box(p[0] - 27, p[1] - 7, p[0] - 10, p[1] + 7), outline=True),
+        S.paving(c, box(p[0] - 8, p[1] - 7, p[0] + 8, p[1] + 7), band_mm=4.0),
+        S.paving(c, box(p[0] + 10, p[1] - 7, p[0] + 27, p[1] + 7), "duze")))
+    cell("Słup / punkt świetlny / hydrant / studz.", lambda c, p: (S.pole(c, p + (-22, 0)),
+                                                                   S.pole(c, p + (-12, 0), "osw"),
+                                                                   S.hydrant(c, p + (-1, 0), 4.0, underground=True),
+                                                                   S.manhole(c, p + (15, 0), 4.0, "Sk")))
+    cell("Złącze ZK / studzienka wodomierzowa SW", lambda c, p: (S.cable_box(c, p + (-10, -3), 0, 12, 4.5, "ZK"),
+                                                                 S.utility_box(c, p + (10, -3), 0, 9, 4, "SW")))
+    cell("Granica działki (narożniki A, B, C)", lambda c, p: S.plot_boundary(c, [p + (-22, -6), p + (18, -6),
+                                                                                 p + (16, 6)], closed=False,
+                                                                             corner_labels=["A", "B", "C"]))
+    cell("Linia zabudowy nieprzekr. / obowiązująca", lambda c, p: (
+        S.building_line(c, p + (-26, 2), p + (26, 2), "nieprzekraczalna", side=-1),
+        S.building_line(c, p + (-26, -7), p + (26, -7), "obowiazujaca", side=-1)))
+    cell("Linia rozgraniczająca / ogrodzenie", lambda c, p: (S.boundary_line(c, [p + (-26, 3), p + (26, 3)]),
+                                                             S.fence(c, [p + (-26, -5), p + (26, -5)])))
+    cell("Sieci: woda / Ks / Kd", lambda c, p: [S.utility_line(c, [p + (-26, 7 - 6.5 * i), p + (26, 7 - 6.5 * i)], kd,
+                                                               every_mm=26.0)
+                                                for i, kd in enumerate(["woda", "kan_sanit", "kan_deszcz"])])
+    cell("Sieci: e / t / g / c", lambda c, p: [S.utility_line(c, [p + (-26, 8 - 5.0 * i), p + (26, 8 - 5.0 * i)], kd,
+                                                              every_mm=26.0)
+                                               for i, kd in enumerate(["energ", "tele", "gaz", "cieplo"])])
+    cell("Warstwice istn. / proj., pkt wysokościowe", lambda c, p: (
+        S.contours(c, [([p + (-26, -7), p + (-8, -3), p + (6, -6)], 101.5)], label_every=20),
+        S.contours(c, [([p + (-26, 1), p + (-10, 3), p + (4, 1)], 101.6)], step_label=0.1, label_every=20,
+                   projected=True),
+        S.spot_height(c, p + (10, 3), 101.43), S.spot_height(c, p + (8, -7), 101.65, existing=False)))
+    cell("Budynek (±0,00=…, III) / wejście / brama", lambda c, p: (
+        S.building_label(c, p + (-16, 1), 101.65, "III"), S.site_entrance(c, p + (-1, -3), 90.0),
+        S.gate(c, p + (6, -6), p + (26, -6))))
 
     # rozmieszczenie siatki symboli
     top = lg[1] - 10.0
-    sh.text((x0 + 8.0, top), "SYMBOLE GRAFICZNE (PN-B-01025, PN-EN 60617, PN-EN ISO 10628, PN-EN ISO 11091)", 3.5,
+    sh.text((x0 + 8.0, top), "SYMBOLE GRAFICZNE (PN-B-01025, IEC 60617, praktyka instalacyjna, PN-B-01027)", 3.5,
             style="bold", layer="R-LEGENDA")
     cw, ch = 66.0, 29.0
     ncol = int((x1 - x0 - 16.0) // cw)
@@ -538,7 +548,7 @@ def demo_legend():
         cx = x0 + 8.0 + cc * cw
         cy = top - 4.0 - (r + 1) * ch
         sh.rect(cx, cy, cx + cw, cy + ch, layer="R-LEGENDA", pen=0.18)
-        sh.text((cx + 1.5, cy + ch - 3.5), title, 2.0, layer="R-LEGENDA")
+        sh.text((cx + 1.5, cy + ch - 3.5), title, 1.8, layer="R-LEGENDA")
         fn(sh, np.array([cx + cw / 2, cy + ch / 2 - 2.5]))
     ll = lines_legend(sh, lg[2] + 8.0, y1 - 14.0)
     lettering_sample(sh, lg[2] + 8.0, ll[1] - 10.0, heights=(1.8, 2.5, 3.5, 5.0))
