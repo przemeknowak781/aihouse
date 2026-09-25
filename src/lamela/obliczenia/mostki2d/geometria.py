@@ -253,6 +253,7 @@ class Wezel:
     opis: str = ""
     dane: dict = field(default_factory=dict)      # dane wejściowe do raportu
     uwagi: list[str] = field(default_factory=list)
+    dopusc_pustki: bool = False                   # True — celowe wcięcia adiabatyczne (wyłącza kontrolę szczelin)
 
     # ---- pomocnicze
     def materialy(self) -> list[Material]:
