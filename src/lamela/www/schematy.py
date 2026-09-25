@@ -24,7 +24,7 @@ def pasma_poludniowe(m) -> list[dict]:
             continue
         x0, y0, x1, y1 = g.bounds
         if y0 < -0.5 and x1 - x0 >= 3.0 and w.get("wierzch") is not None:
-            out.append(dict(id=w.get("id"), x0=x0, x1=x1, z=float(w["wierzch"]), t=float(w.get("grubosc") or 0.2)))
+            out.append(dict(id=w.get("id"), x0=x0, x1=x1, y0=y0, z=float(w["wierzch"]), t=float(w.get("grubosc") or 0.2)))
     return sorted(out, key=lambda b: -b["z"])
 
 
@@ -98,7 +98,8 @@ def kotwice_szkicu(D: dict) -> dict:
     lam = next((q for q in m.lamele() if str(q.get("elewacja")) == "S" and float(q.get("z_od", 0)) > 3), None)
     if lam:
         xs = [p[0] for p in lam["linia"]]
-        out["A"] = ((min(xs) + max(xs)) / 2 - 2.5, lam["linia"][0][1] - 0.3, (lam["z_od"] + lam["z_do"]) / 2)
+        off = float(lam.get("odsuniecie") or 0.0) + float(lam.get("h") or 0.0)
+        out["A"] = ((min(xs) + max(xs)) / 2 - 2.5, lam["linia"][0][1] - off, (lam["z_od"] + lam["z_do"]) / 2)
     ks = m.kondygnacje
     if len(ks) > 1:
         g = m.obrys_kondygnacji(ks[1].id)
@@ -108,10 +109,10 @@ def kotwice_szkicu(D: dict) -> dict:
     ram = [q for q in b.values() if str(q["id"]).startswith("PL-C")]
     if len(ram) >= 2:
         lo, hi = min(ram, key=lambda q: q["z"]), max(ram, key=lambda q: q["z"])
-        out["C"] = ((lo["x0"] + lo["x1"]) / 2 + 1.2, -1.3, (lo["z"] + hi["z"] - hi["t"]) / 2)
+        out["C"] = ((lo["x0"] + lo["x1"]) / 2 + 1.2, lo["y0"], (lo["z"] + hi["z"] - hi["t"]) / 2)
     if "PL-D" in b:
         q = b["PL-D"]
-        out["D"] = ((q["x0"] + q["x1"]) / 2, -1.3, q["z"] - q["t"] / 2)
+        out["D"] = ((q["x0"] + q["x1"]) / 2, q["y0"], q["z"] - q["t"] / 2)
     s0 = [o for o in m.otwory(kond=ks[0].id) if o.kierunek_zewn is not None and o.kierunek_zewn[1] < -0.9
           and o.typ in ("fix", "okno", "drzwi_przesuwne_HS")]
     if s0:

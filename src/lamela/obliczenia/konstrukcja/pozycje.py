@@ -12,6 +12,7 @@ spoczniki), attyki dachów (zaspy), działka (teren → głębokość posadowien
 from __future__ import annotations
 
 import math
+import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -453,7 +454,7 @@ class AnalizaKonstrukcji:
     def _plyta_konstrukcyjna(self, pl: dict) -> bool:
         """Płyta konstrukcyjna: materiał żelbetowy/betonowy (pole ``mat`` lub warstwa konstrukcyjna przegrody); elementy
         z materiałów niekonstrukcyjnych (podsufitki, izolacje, szkło, ramy okładzin) — poza analizą płyt."""
-        kod = pl.get("mat")
+        kod = pl.get("mat") or (pl.get("raw") or {}).get("mat")
         if not kod:
             return True
         mt = self.m.material(str(kod))
@@ -466,7 +467,8 @@ class AnalizaKonstrukcji:
         els = []
         for pl in self.m.plyty():
             if not self._plyta_konstrukcyjna(pl):
-                self.log(f"{pl['id']}: element płytowy z materiału niekonstrukcyjnego ({pl.get('mat')}) — pominięty w analizie "
+                self.log(f"{pl['id']}: element płytowy z materiału niekonstrukcyjnego "
+                         f"({pl.get('mat') or (pl.get('raw') or {}).get('mat')}) — pominięty w analizie "
                          "płyt (ciężar ujęty w warstwach przegród / do sprawdzenia w pozycji elementu nośnego).")
                 continue
             els.append(self._element_plyty(pl))
@@ -1990,13 +1992,19 @@ class AnalizaKonstrukcji:
             gm2 = pr["gm2"]
             for o in pr["otw"]:
                 gap = w.z_do - o.z1
+                # belka modelu nad otworem: nadproże modelu tego otworu (uwagi „…otworu O…”) — pozycja nadproża liczona
+                # niżej; belka/podciąg z własną pozycją obliczeniową (np. podciąg fasady) — nadproże pominięte
                 bel = None
+                z_bel = {pz_.ident for pz_ in self.pos_belki}
                 for b in m.belki():
                     lb = LineString([tuple(b["os"][0]), tuple(b["os"][1])])
                     if (lb.distance(LineString([tuple(o.p0), tuple(o.p1)])) < 0.15 and float(b["spod"]) >= o.z1 - 0.1
                             and lb.buffer(0.15).contains(LineString([tuple(o.p0), tuple(o.p1)]).buffer(0.01))):
-                        bel = b
-                        break
+                        if re.search(rf"otworu {re.escape(o.id)}\b", str(b.get("uwagi") or "")):
+                            bel = None
+                            break
+                        if str(b["id"]) in z_bel and bel is None:
+                            bel = b
                 if bel is not None:
                     self.log(f"Otwór {o.id} ({w.id}): nadprożem jest belka modelu {bel['id']} — pozycja nadproża pominięta "
                              "(belka wymiarowana w pozycji belek).")
