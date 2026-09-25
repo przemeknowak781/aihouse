@@ -50,6 +50,16 @@ TOL_XY = 0.45      # [m] odległość osi ściany od krawędzi płyty (oś — l
 TOL_STYK = 0.50    # [m] styk płyta stropu ↔ płyta wspornikowa (między nimi strefa łącznika / ocieplenia, A2 K-1)
 
 
+def blok_attyki_z_modelu(att: dict | None):
+    """(materiał, h) bloku termoizolacyjnego u podstawy attyki z `dachy[].attyka.blok_termoizolacyjny` {h, lambda} albo None."""
+    b = (att or {}).get("blok_termoizolacyjny") if isinstance(att, dict) else None
+    if not isinstance(b, dict) or not b.get("h") or not b.get("lambda"):
+        return None
+    return (G.Material("BLOK_TERM_MODEL", float(b["lambda"]), f"Blok termoizolacyjny nośny u podstawy attyki, λ = "
+                       f"{float(b['lambda']):.3f} W/(m·K) (model)", "#e3b04b",
+                       zrodlo="model: dachy[].attyka.blok_termoizolacyjny (wymaganie — do potwierdzenia ETA/DoP)"), float(b["h"]))
+
+
 def _dy(wsp: dict, z: float) -> float:
     return 0.0 if WIERZCH_WSPORNIKA_ZROWNANY else round(float(wsp["wierzch"]) - z, 4)
 
@@ -183,7 +193,8 @@ def wezel_plyty_wspornikowej(model, e: dict):
         if not sc_dol or not att.get("przegroda"):
             return None
         w = D.wezel_attyka_wspornik(_W(model, sc_dol), _W(model, plyta["przegroda"]), _W(model, att["przegroda"]),
-                                    h_nad_pokryciem=float(att.get("wys_nad_pokryciem", 0.30)), **kw)
+                                    h_nad_pokryciem=float(att.get("wys_nad_pokryciem", 0.30)),
+                                    blok_attyki=blok_attyki_z_modelu(att), **kw)
         opis = f"{wsp['id']} przy dachu {plyta['id']} ({plyta['przegroda']}), attyka {att['przegroda']}, ściana {sc_dol}"
     else:
         if not sc_gora:

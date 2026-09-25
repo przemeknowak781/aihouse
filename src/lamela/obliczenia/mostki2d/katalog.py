@@ -453,9 +453,10 @@ def wezly_z_sekcji(model, y_teren: float = -0.30) -> tuple[list[G.Wezel], dict[s
                 kod_d = pierwsza(kody, "stropodach", "dach")
                 d = next((x for x in model.dachy() if x.get("przegroda") == kod_d), (model.dachy() or [{}])[0])
                 att = d.get("attyka") or {}
+                from .katalog_dod import blok_attyki_z_modelu
                 w = G.wezel_attyka(sz, G.warstwy_z_modelu(model, kod_d),
                                    h_nad_pokryciem=par.pop("h_nad_pokryciem", att.get("wys_nad_pokryciem", 0.30)),
-                                   **par, **kw)
+                                   blok_attyki=blok_attyki_z_modelu(att), **par, **kw)
             elif rodz == "naroze":
                 w = G.wezel_naroznik_zewnetrzny(sz, **par, **kw)
             elif rodz in ("strop", "wspornik", "wspornik_bez"):

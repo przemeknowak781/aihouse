@@ -257,7 +257,7 @@ def _kadr(page, R, info, pl: dict, cfg: dict, ss: int, plik: Path, meta: dict, k
             cam["target"] = [cam["target"][0], cam["target"][1], z + OKO]
         x0, y0, z0, x1, y1, z1 = info["bbox_budynek"]
         v = {"key": k, "width": W, "height": H, "camera": cam, "groups": {g: True for g in info["groups"]},
-             "bg": "sky", "fog": True, "fogNear": 90, "fogFar": 700, "exposure": 1.0,
+             "bg": "sky", "fog": True, "fogNear": 140, "fogFar": 1500, "exposure": 1.0,
              "shadowBox": [x0 - 22, y0 - 22, z0 - 1, x1 + 22, y1 + 22, z1 + 1]}
     else:
         v = next(x for x in R.build_views(info, W, H, cfg["typ"]) if x["key"] == cfg["typ"])

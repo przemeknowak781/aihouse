@@ -180,7 +180,8 @@ def zmierz_blok(fn, w: float = TB_W) -> tuple[float, float, float, float]:
     if e is None:
         return max(0.0, Y - yb), 0.0, 0.0, 0.0
     h = max(Y - yb, Y - float(e[1]))
-    return h, max(0.0, X - float(e[0])), max(0.0, float(e[2]) - X - w), max(0.0, float(e[3]) - Y)
+    snap = (lambda v: v if v >= 0.5 else 0.0)          # wystawanie < 0,5 mm (grubość linii) — pomijalne
+    return h, snap(X - float(e[0])), snap(float(e[2]) - X - w), snap(float(e[3]) - Y)
 
 
 def blok(nazwa: str, fn, w: float = TB_W, kotwica: str = "") -> Blok:
@@ -328,8 +329,8 @@ def widok_z_rzutni(nazwa: str, vp, w: float, h: float, tytul: str, skala: bool, 
     if skala:
         tw += 3.0 + T.width(fmt.scale_str(vp.scale), 3.5)
     th = 10.0 if nad else (14.0 if podtytul else 10.5)
-    zaj = obrys_widoku(vp) if kieszenie else []
-    return Widok(nazwa, w, h, tw, th, nad, zaj)
+    zaj = [tuple(float(v) for v in r) for r in obrys_widoku(vp)] if kieszenie else []
+    return Widok(nazwa, float(w), float(h), float(tw), th, nad, zaj)
 
 
 # ================================================================================================ wolne prostokąty
@@ -482,7 +483,7 @@ def _umiesc_blok(wolne: Wolne, b: Blok, szer: float, wys: float):
     w lewo, w kolumnie od góry)."""
     best = None
     for x0, y0, f in wolne.pozycje(szer, wys):
-        key = (-round(f[2], 3), -round(f[3], 3), round(x0, 3), round(y0, 3))
+        key = (-round(f[2] / 5.0), -round(f[3] / 5.0), -f[2], -f[3], round(x0, 3), round(y0, 3))
         if best is None or key < best[0]:
             best = (key, x0, y0)
     return None if best is None else best[1:]

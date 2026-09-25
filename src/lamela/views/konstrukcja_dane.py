@@ -232,7 +232,7 @@ def dobierz_siatke(As_req: float, As_min: float, h: float, s_max: float | None =
     need = max(As_req, As_min, 1e-9)
     As_max = 0.04 * 1000.0 * h * 1000.0
     best = None
-    for fi in SREDNICE_PL:
+    for fi in SREDNICE_PL + (25,):
         if fi < fi_min or fi > fi_max:
             continue
         s_min_cl = max(fi, d_g + 5.0, 20.0) + fi
@@ -395,12 +395,22 @@ _WARSTWY_RE = (("dol_x", "dół, kierunek x"), ("dol_y", "dół, kierunek y"), (
                ("gora_y", "góra, y"), ("naroze", "zbrojenie narożne"))
 
 
-def _warstwa_z_wyniku(zg, klucz: str) -> Warstwa | None:
+def _warstwa_z_wyniku(zg, klucz: str, h: float | None = None) -> Warstwa | None:
+    """Warstwa zbrojenia pola z wyniku wymiarowania biblioteki. Gdy pręty przyjęte w bibliotece (φ ≤ 16) nie pokrywają
+    A_s,req — dobór rysunku ``dobierz_siatke`` z φ ≤ 25 mm (A_s,req bez zmian; opis „dobór rysunku”)."""
     fs = fi_s(getattr(zg, "zbrojenie", ""))
     if fs is None:
         return None
-    return Warstwa(klucz.split("_")[-1] if "_" in klucz else "xy", klucz.split("_")[0], fs[0], fs[1],
-                   float(zg.As_req), float(zg.As_min), float(zg.As_prov), float(getattr(zg, "M_Ed", 0.0)))
+    fi, s_, Apr = fs[0], fs[1], float(zg.As_prov)
+    opis = ""
+    if h is not None and Apr + 1e-6 < max(float(zg.As_req), float(zg.As_min)):
+        try:
+            fi, s_, Apr = dobierz_siatke(float(zg.As_req), float(zg.As_min), h, fi_min=10, fi_max=25)
+            opis = f"dobór rysunku (biblioteka: φ{fs[0]} co {fs[1] / 10:g} < A_s,req)"
+        except ValueError:
+            pass
+    return Warstwa(klucz.split("_")[-1] if "_" in klucz else "xy", klucz.split("_")[0], fi, s_,
+                   float(zg.As_req), float(zg.As_min), Apr, float(getattr(zg, "M_Ed", 0.0)), opis)
 
 
 def _obszar_pola(c: dict, poly):
@@ -457,7 +467,7 @@ def _plyty(an, D):
                     nm = getattr(zg, "nazwa", "")
                     for klucz, frag in _WARSTWY_RE:
                         if frag in nm and hasattr(zg, "As_prov"):
-                            w = _warstwa_z_wyniku(zg, klucz)
+                            w = _warstwa_z_wyniku(zg, klucz, float(e.h))
                             if w is not None:
                                 pol.warstwy[klucz] = w
                 pol.eta = max((w.eta for r_ in sp.wyniki for w in r_.warunki), default=0.0)

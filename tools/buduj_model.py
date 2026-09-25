@@ -192,6 +192,15 @@ MAT = [
                          kreskowanie="IZOL_PRZECIWWODNA", kolor="#3f7fbf", funkcja="hydroizolacja"), "PN-EN 14891, DWU"),
     ("PLYTKI_SC", dict(nazwa="Płytki ścienne ceramiczne (łazienki, WC, pralnia — do 2,0 m / do sufitu w natryskach)", **{"lambda": 1.30}, rho=2300, cp=840,
                        mu=200, kreskowanie="PLYTKI", kolor="#e3ded6"), "jw."),
+    ("JASTRYCH_G", dict(nazwa="Jastrych cementowy CT-C30-F5 zbrojony (siatka/włókna), dylatacja obwodowa — posadzka garażu na XPS",
+                        **{"lambda": 1.20}, rho=2000, cp=1000, mu=50, kreskowanie="JASTRYCH", kolor="#c4c0b6", ciezar=22.0),
+     "PN-EN ISO 10456 tab. 3: jastrych 2000 kg/m³ λ 1,35 → 1,20 (DWU); PN-EN 13813"),
+    ("BLOK_TERM", dict(nazwa="Blok termoizolacyjny nośny u podstawy attyki (szkło piankowe / element z ETA), λ ≤ 0,045", **{"lambda": 0.045},
+                       rho=165, cp=840, mu=1000000, kreskowanie="IZOL_TWARDA", kolor="#e3b04b", funkcja="izolacja"),
+     "PN-EN 13167: szkło piankowe λ_D 0,040–0,050 (typowe) — wymaganie λ ≤ 0,045; nośność wg PT-K (ETA/DoP wybranego wyrobu)"),
+    ("BET_KOM_600", dict(nazwa="Bloczek z betonu komórkowego odm. 600, kl. 4 MPa — 1. warstwa muru ściany dom–garaż (blok termiczny)",
+                         **{"lambda": 0.16}, rho=600, cp=1000, mu=10, kreskowanie="BETON_KOMORKOWY", kolor="#e6e1d6"),
+     "PN-EN 1745 zał. A: beton komórkowy 600 kg/m³ λ_10,dry ≈ 0,15 (P = 50 %) → 0,16 z zapasem na wilgotność; PN-EN 771-4"),
     ("ZYWICA", dict(nazwa="Posadzka żywiczna epoksydowa antypoślizgowa R11 (garaż)", **{"lambda": 0.20}, rho=1400, cp=1000, mu=10000,
                     kreskowanie="TWORZYWO", kolor="#8c8f91"), "DWU typowej posadzki żywicznej"),
     ("SUF_GK", dict(nazwa="Sufit podwieszany GK (strefy kanałów wentylacji)", **{"lambda": 0.25}, rho=700, cp=1000, mu=10, kreskowanie="PLYTA_GK",
@@ -263,10 +272,15 @@ PRZ = {
     "POD-0L": dict(nazwa="Podłoga na płycie (P0) — łazienki, WC, przedsionek, pom. techniczne: gres na hydroizolacji podpłytkowej", typ="podloga_na_gruncie",
                    warstwy=[L("GRES", 0.012), L("HYDRO_PODPL", 0.003), L("JASTRYCH", 0.065), L("EPS038", 0.065), L("MEMB_SBS_POD", 0.005),
                             L("ZB_C25", 0.25, konstrukcyjna=True), L("XPS300", 0.20), L("FOLIA_PE", 0.0002), L("PIASEK", 0.20)]),
-    "POD-G": dict(nazwa="Posadzka garażu (nieogrzewany): żywica R11 na warstwie wyrównawczej, spadek 0,8 % do bramy (−0,05 przy drzwiach "
-                        "do domu → −0,10 przy bramie), płyta ŻB 25 cm na XPS 20 cm",
+    # runda 2 (REKOMENDACJE mostków A — WZ-09a ψ 0,62 „ZŁY”; K-12: brak membrany, niespójna grubość jastrychu i rzędna −0,05):
+    # XPS 10 cm NA płycie pod posadzką garażu + membrana SBS; płyta garażu obniżona (wierzch −0,30, element PF2); jastrych zbrojony
+    # 9–14 cm ze spadkiem 0,8 % (−0,05 przy drzwiach DG1/DG2 → −0,10 przy bramie; próg dom–garaż 5 cm ≥ 3 cm — W-114)
+    "POD-G": dict(nazwa="Posadzka garażu (nieogrzewany): żywica R11, jastrych cementowy zbrojony 9–14 cm (spadek 0,8 % do bramy: −0,05 przy "
+                        "drzwiach do domu → −0,10 przy bramie), folia PE, XPS 300 10 cm, membrana SBS (przeciwwilgociowa, przeciwradonowa), "
+                        "płyta ŻB 25 cm obniżona (wierzch −0,30) na XPS 20 cm",
                   typ="podloga_na_gruncie", warstwy=[
-        L("ZYWICA", 0.003), L("JASTRYCH", 0.047), L("ZB_C25", 0.25, konstrukcyjna=True), L("XPS300", 0.20), L("FOLIA_PE", 0.0002), L("PIASEK", 0.20)]),
+        L("ZYWICA", 0.003), L("JASTRYCH_G", 0.092), L("FOLIA_PE", 0.0002), L("XPS300", 0.10), L("MEMB_SBS_POD", 0.005),
+        L("ZB_C25", 0.25, konstrukcyjna=True), L("XPS300", 0.20), L("FOLIA_PE", 0.0002), L("PIASEK", 0.20)]),
     "POD-1": dict(nazwa="Strop międzykondygnacyjny: deska dębowa, jastrych z ogrzewaniem podł., EPS 100, EPS T (akustyczny), płyta ŻB 22 cm, tynk",
                   typ="strop", warstwy=[
         L("DESKA_DEB", 0.015), L("JASTRYCH", 0.065), L("EPS038", 0.040), L("EPS_T", 0.030), L("ZB_C25", 0.22, konstrukcyjna=True), L("TYNK_GIPS", 0.010)]),
@@ -923,17 +937,37 @@ for o in OT:
 # ---- fundamenty: PŁYTA FUNDAMENTOWA na XPS (uzasadnienie — koncepcja.md p. 5.4)
 OB_P0 = P((-EXT, -EXT), (xF + EXT, -EXT), (xF + EXT, y5 + EXT), (xE - EXT, y5 + EXT), (xE - EXT, y4 + EXT), (-EXT, y4 + EXT))
 OB_PF = P((-0.10, -0.10), (xF + 0.10, -0.10), (xF + 0.10, y5 + 0.10), (xE - 0.10, y5 + 0.10), (xE - 0.10, y4 + 0.10), (-0.10, y4 + 0.10))
-FUND_EL = [{"id": "PF1", "obrys": OB_PF, "spod": r(Z_PLYTA_F - T_PLYTA_F), "h": T_PLYTA_F, "mat": "ZB_C25",
-            "uwagi": "płyta fundamentowa ŻB 25 cm C25/30 XC2 na XPS 300 20 cm; krawędź do lica konstrukcji, XPS pionowy 20 cm na czole płyty"}]
+# runda 2 (REKOMENDACJE mostków A, WZ-09a): płyta pod garażem OBNIŻONA o 0,15 m (PF2, wierzch −0,30) — miejsce na XPS 10 cm i membranę
+# pod posadzką garażu (POD-G) przy posadzce −0,10/−0,05; uskok płyty w linii ścian dom–garaż SWG (żebra ZF pod SWG i ścianami garażu do −0,85).
+# Zmiana geometrii płyty — DO UZGODNIENIA z BO (K-5: MES płyty z żebrami na podłożu sprężystym).
+Z_PLYTA_G = -0.30                      # wierzch płyty fundamentowej pod garażem
+OB_PF2 = P((xE, y2), (xF + 0.10, y2), (xF + 0.10, y5 + 0.10), (xE - 0.10, y5 + 0.10), (xE - 0.10, y4 + 0.10), (xE, y4 + 0.10))
+_PF1 = Polygon(OB_PF).difference(Polygon(OB_PF2))
+FUND_EL = [{"id": "PF1", "obrys": [[r(a), r(b)] for a, b in list(orient(_PF1, 1.0).exterior.coords)[:-1]], "spod": r(Z_PLYTA_F - T_PLYTA_F),
+            "h": T_PLYTA_F, "mat": "ZB_C25",
+            "uwagi": "płyta fundamentowa ŻB 25 cm C25/30 XC2 na XPS 300 20 cm (część ogrzewana); krawędź do lica konstrukcji, XPS pionowy 20 cm "
+                     "na czole płyty"},
+           {"id": "PF2", "obrys": OB_PF2, "spod": r(Z_PLYTA_G - T_PLYTA_F), "h": T_PLYTA_F, "mat": "ZB_C25",
+            "uwagi": "płyta fundamentowa pod garażem obniżona (wierzch −0,30) — na płycie membrana SBS, XPS 10 cm i jastrych zbrojony (POD-G); "
+                     "uskok 0,15 m w linii ścian SWG (osie E i 2), ciągłość zbrojenia przez żebro — PT-K / BO"}]
 _zi = 0
 for s in SC:
     if s["kond"] != "P0" or s["przegroda"] not in ("SZ1", "SW18", "SWZB", "SWG"):
         continue
-    _zi += 1
     zew = s["przegroda"] == "SZ1"
-    FUND_EL.append({"id": f"ZF{_zi}", "os": s["os"], "b": 0.60 if zew else 0.50, "h": 0.30 if zew else 0.25,
-                    "spod": r(Z_PLYTA_F - T_PLYTA_F - (0.30 if zew else 0.25)), "mat": "ZB_C25",
-                    "uwagi": f"pogrubienie (żebro) płyty pod ścianą {s['id']}" + (" — krawędź z izolacją obwodową XPS (PN-EN ISO 13793)" if zew else "")})
+    h_z = 0.30 if zew else (0.30 if s["przegroda"] == "SWG" else 0.25)
+    (xa, ya), (xb, yb) = s["os"]
+    odc = [s["os"]]
+    if s["id"] == "S0-03":                   # ściana wsch.: pas gospodarczy (płyta −0,15) | garaż (płyta −0,30)
+        odc = [[[xa, ya], [xa, y2]], [[xa, y2], [xb, yb]]]
+    for (pa_, pb_) in odc:
+        _zi += 1
+        w_gar = s["przegroda"] != "SWG" and Polygon(OB_PF2).buffer(0.01).contains(Polygon([pa_, pb_, pb_]).buffer(0.001))
+        z_pl = (Z_PLYTA_G if (w_gar or s["przegroda"] == "SWG") else Z_PLYTA_F) - T_PLYTA_F
+        FUND_EL.append({"id": f"ZF{_zi}", "os": [pa_, pb_], "b": 0.60 if zew else 0.50, "h": h_z, "spod": r(z_pl - h_z), "mat": "ZB_C25",
+                        "uwagi": f"pogrubienie (żebro) płyty pod ścianą {s['id']}"
+                                 + (" — krawędź z izolacją obwodową XPS (PN-EN ISO 13793)" if zew else "")
+                                 + (" — uskok płyty dom/garaż" if s["przegroda"] == "SWG" else "") + (" (garaż)" if w_gar else "")})
 for sl in SLUPY[:4]:
     x, y = sl["xy"]
     FUND_EL.append({"id": f"SF{sl['id'][2:]}", "os": [[r(x - 0.005), y], [r(x + 0.005), y]], "b": 1.00, "h": 0.45, "spod": r(Z_PLYTA_F - T_PLYTA_F - 0.45),

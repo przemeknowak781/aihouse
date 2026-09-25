@@ -1419,6 +1419,9 @@ def _kontrola_fund(D, F, PF, warstwa: str, nr_ark: str):
                     s_p = min(F.dol.s, F.gora.s)
                     uw.append(f"płyta: pręty ściskane usztywnione siatką poprzeczną s = {s_p / 10:g} cm "
                               f"{'≤' if s_p <= 15 * F.gora.fi else '>'} 15φ [ZAŁ]")
+            if pv + 1e-6 < rq:
+                uw.insert(0, "zbrojenie wymagane niewykonalne w grubości płyty — pogrubienie (stopa) pod węzłem, "
+                             "REKOMENDACJE_MODEL.md [WYMAGA ZMIANY MODELU]")
             KD.rejestruj(D, F.id, f"strefa S{i} ({', '.join(strefy)[:30]}) — podwójnie zbrojona, najniekorz. el. "
                                   f"({'dół' if wa == 'dol' else 'góra'} {kier})", "MES-PF", rq, 0.0, pv,
                          "siatka + dozbr./żebro", arkusz=nr_ark, wymuszone_ok=ok, uwagi="; ".join(uw))

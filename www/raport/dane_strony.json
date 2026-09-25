@@ -1,5 +1,5 @@
 {
- "wygenerowano": "2026-09-25T06:04:36",
+ "wygenerowano": "2026-09-25T06:13:47",
  "model": {
   "nazwa": "Dom LAMELA",
   "wersja": "1.0",
@@ -14,7 +14,7 @@
   "PU": "239,13 m²",
   "zabudowa": "187,50 m²",
   "kubatura": "1 354,5 m³",
-  "wys_zab": "10,28 m",
+  "wys_zab": "10,29 m",
   "kondygnacje": "3",
   "garaz_st": "2",
   "garaz_A": "37,42 m²",
@@ -27,7 +27,7 @@
   "droga": "północy",
   "ogrod": "południa",
   "zbiornik_V": "5,0",
-  "niecka_A": "24 m²",
+  "niecka_A": "28 m²",
   "wt_uwagi": "WT (t.j. Dz.U. 2022 poz. 1225 ze zm.) w brzmieniu do 19.09.2026, stosowane na podstawie art. 102a PB (oświadczenie Inwestora)",
   "data": "25.09.2026",
   "glb_mb": "5,1"
@@ -76,47 +76,51 @@
  "rendery": {
   "ogrod_169": {
    "slonce": {
-    "az": 248.79,
-    "el": 44.5,
+    "az": 262.6,
+    "el": 35.65,
     "data": "2026-06-21",
-    "godz": "16:00"
+    "godz": "17:00"
    },
    "W": 1920,
    "H": 1080,
-   "czas_s": 21.4
+   "czas_s": 51.1,
+   "ogniskowa_mm": 34.0
   },
   "ogrod_43": {
    "slonce": {
-    "az": 248.79,
-    "el": 44.5,
+    "az": 262.6,
+    "el": 35.65,
     "data": "2026-06-21",
-    "godz": "16:00"
+    "godz": "17:00"
    },
    "W": 1600,
    "H": 1200,
-   "czas_s": 24.6
+   "czas_s": 50.1,
+   "ogniskowa_mm": 40.0
   },
   "ulica_169": {
    "slonce": {
-    "az": 291.44,
-    "el": 13.25,
+    "az": 285.89,
+    "el": 17.56,
     "data": "2026-06-21",
-    "godz": "19:30"
+    "godz": "19:00"
    },
    "W": 1920,
    "H": 1080,
-   "czas_s": 33.5
+   "czas_s": 31.1,
+   "ogniskowa_mm": 36.0
   },
   "ulica_43": {
    "slonce": {
-    "az": 291.44,
-    "el": 13.25,
+    "az": 285.89,
+    "el": 17.56,
     "data": "2026-06-21",
-    "godz": "19:30"
+    "godz": "19:00"
    },
    "W": 1600,
    "H": 1200,
-   "czas_s": 32.0
+   "czas_s": 16.3,
+   "ogniskowa_mm": 40.0
   },
   "lotniczy_169": {
    "slonce": {
@@ -127,7 +131,8 @@
    },
    "W": 1920,
    "H": 1080,
-   "czas_s": 31.9
+   "czas_s": 20.2,
+   "ogniskowa_mm": null
   },
   "lotniczy_43": {
    "slonce": {
@@ -138,7 +143,8 @@
    },
    "W": 1600,
    "H": 1200,
-   "czas_s": 28.2
+   "czas_s": 14.5,
+   "ogniskowa_mm": null
   },
   "aksonometria_169": {
    "slonce": {
@@ -149,7 +155,8 @@
    },
    "W": 1920,
    "H": 1080,
-   "czas_s": 17.8
+   "czas_s": 12.3,
+   "ogniskowa_mm": null
   },
   "aksonometria_43": {
    "slonce": {
@@ -160,62 +167,63 @@
    },
    "W": 1600,
    "H": 1200,
-   "czas_s": 10.9
+   "czas_s": 11.6,
+   "ogniskowa_mm": null
   }
  },
  "kotwice": {
   "ogrod_169": {
    "A": {
-    "x": 39.17,
-    "y": 31.39
+    "x": 40.68,
+    "y": 39.83
    },
    "B": {
-    "x": 31.95,
-    "y": 47.02
+    "x": 31.83,
+    "y": 57.38
    },
    "C": {
-    "x": 59.61,
-    "y": 47.73
+    "x": 62.49,
+    "y": 61.7
    },
    "D": {
-    "x": 80.47,
-    "y": 52.71
+    "x": 79.47,
+    "y": 68.53
    },
    "E": {
-    "x": 42.47,
-    "y": 67.64
+    "x": 43.91,
+    "y": 82.94
    },
    "G": {
-    "x": 78.16,
-    "y": 65.38
+    "x": 76.29,
+    "y": 80.77
    }
   },
   "ogrod_43": {
    "A": {
-    "x": 39.09,
-    "y": 40.27
+    "x": 39.04,
+    "y": 35.13
    },
    "B": {
-    "x": 31.8,
-    "y": 52.08
+    "x": 28.63,
+    "y": 50.62
    },
    "C": {
-    "x": 59.67,
-    "y": 52.65
+    "x": 64.7,
+    "y": 54.43
    },
    "D": {
-    "x": 80.65,
-    "y": 56.4
+    "x": 84.67,
+    "y": 60.46
    },
    "E": {
-    "x": 42.41,
-    "y": 67.67
+    "x": 42.84,
+    "y": 73.17
    },
    "G": {
-    "x": 78.39,
-    "y": 65.96
+    "x": 80.93,
+    "y": 71.26
    }
   }
  },
- "cache_renderow": "build/www/rendery/4fd8b4088d911cf1"
+ "cache_renderow": "build/www/rendery/e129fe20265c9a7c"
 }

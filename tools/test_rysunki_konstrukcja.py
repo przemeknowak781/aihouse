@@ -144,6 +144,23 @@ def test_kontakt_jednostronny():
     assert float(r.p.min()) >= 0.0
 
 
+def test_usrednianie_momentow_wspornika():
+    """Średnia krocząca momentów w oknie 1,0 m (siatka 0,25 m): osobliwość −100 w jednym elemencie wiersza
+    → −100·0,25/1,0 = −25 (przy krawędzi okno obcięte do długości dostępnej, bez rozcieńczania)."""
+    import numpy as np
+    from lamela.obliczenia.konstrukcja.pozycje import _m_usrednione
+
+    class _FE:
+        el_c = np.array([(0.125 + 0.25 * i, 0.125 + 0.25 * j) for j in range(2) for i in range(8)])
+        el_ab = np.full((16, 2), 0.25)
+    v = np.zeros(16)
+    v[3] = -100.0                                   # wiersz y = 0,125, x = 0,875
+    m = np.ones(16, bool)
+    assert abs(_m_usrednione(_FE, v, m, "x", 1.0) - (-25.0)) < 1e-9
+    v2 = np.full(16, -10.0)
+    assert abs(_m_usrednione(_FE, v2, m, "x", 1.0) - (-10.0)) < 1e-9     # pole równomierne — bez zmian
+
+
 def test_model_dane(sciezka=ROOT / "model" / "budynek.yaml"):
     """Dane z modelu: poziomy płyt z polami i zbrojeniem, pręty poziomu z numeracją, zbrojenie ≥ wymagane."""
     from lamela.model import load_model

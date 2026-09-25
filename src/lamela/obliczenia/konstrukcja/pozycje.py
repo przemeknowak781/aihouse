@@ -2497,11 +2497,14 @@ def _m_usrednione(fe, vals: np.ndarray, mask: np.ndarray, os_usr: str, b: float)
     ab = fe.el_ab[idx]
     k, kp = (0, 1) if os_usr == "x" else (1, 0)
     best = 0.0
+    vv = vals[idx]
     for j in range(len(idx)):
-        row = (np.abs(c[:, kp] - c[j, kp]) < 0.5 * ab[j, kp]) & (np.abs(c[:, k] - c[j, k]) <= b / 2)
-        w = ab[row, k]
-        v = float((vals[idx][row] * w).sum() / w.sum())
-        best = min(best, v)
+        row = np.abs(c[:, kp] - c[j, kp]) < 0.5 * ab[j, kp]
+        lo, hi = c[j, k] - b / 2, c[j, k] + b / 2           # waga = długość części wspólnej elementu i okna
+        w = np.clip(np.minimum(c[row, k] + ab[row, k] / 2, hi) - np.maximum(c[row, k] - ab[row, k] / 2, lo), 0.0, None)
+        if w.sum() <= 0:
+            continue
+        best = min(best, float((vv[row] * w).sum() / w.sum()))
     return best
 
 

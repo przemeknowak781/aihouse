@@ -41,20 +41,28 @@ diffuseColor.rgb *= 0.86 + 0.26 * n;`);
 }
 
 function pasZieleni(c, zGrunt) {
+  // drzewa tła: po 3 bryły korony na drzewo, pierścień 80–175 m, ciemniejsza zieleń (mgła rozjaśnia dalszy plan)
   const r = rng(20260925);
-  const n = 260;
-  const geo = new THREE.IcosahedronGeometry(1, 1);
-  const mat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 1, metalness: 0, flatShading: false });
-  const im = new THREE.InstancedMesh(geo, mat, n);
+  const nd = 210, nb = 3;
+  const geo = new THREE.IcosahedronGeometry(1, 2);
+  const mat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 1, metalness: 0 });
+  const im = new THREE.InstancedMesh(geo, mat, nd * nb);
   const m4 = new THREE.Matrix4(), q = new THREE.Quaternion(), col = new THREE.Color();
-  for (let i = 0; i < n; i++) {
-    const a = r() * Math.PI * 2, R = 85 + r() * 85;
-    const rx = 3.5 + r() * 4.5, ry = 4 + r() * 6;
-    const p = new THREE.Vector3(c.x + Math.cos(a) * R, zGrunt + ry * 0.9, c.z + Math.sin(a) * R);
-    m4.compose(p, q, new THREE.Vector3(rx, ry, rx));
-    im.setMatrixAt(i, m4);
-    col.setHSL(0.24 + r() * 0.06, 0.28 + r() * 0.12, 0.2 + r() * 0.1);
-    im.setColorAt(i, col);
+  let k = 0;
+  for (let i = 0; i < nd; i++) {
+    const a = r() * Math.PI * 2, R = 80 + r() * 95;
+    const h = 8 + r() * 9, rx = 3.2 + r() * 3.6;
+    const x = c.x + Math.cos(a) * R, z = c.z + Math.sin(a) * R;
+    const hue = 0.22 + r() * 0.07, sat = 0.22 + r() * 0.14, lum = 0.14 + r() * 0.09;
+    for (let j = 0; j < nb; j++) {
+      const ox = (r() - 0.5) * rx * 1.1, oz = (r() - 0.5) * rx * 1.1, s = 0.62 + r() * 0.38;
+      m4.compose(new THREE.Vector3(x + ox, zGrunt + h * (0.55 + 0.25 * r()), z + oz), q,
+                 new THREE.Vector3(rx * s, h * 0.42 * s, rx * s));
+      im.setMatrixAt(k, m4);
+      col.setHSL(hue, sat, lum * (0.9 + 0.2 * r()));
+      im.setColorAt(k, col);
+      k++;
+    }
   }
   im.castShadow = false;
   im.receiveShadow = false;
