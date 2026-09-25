@@ -208,6 +208,16 @@ def osadzenie(m, kod_sz: str) -> tuple[float, float]:
         return 0.09, 0.05
 
 
+def opis_stolarki(m, o) -> str:
+    if o is None:
+        return "stolarka"
+    sym = (getattr(o, "raw", None) or {}).get("symbol")
+    st = ((m.raw.get("stolarka") or {}).get(sym) or {}) if sym else {}
+    u = st.get("U_w") or st.get("U_D")
+    return (f"{sym or o.typ} {o.szer:.2f}×{o.wys:.2f} m".replace(".", ",")
+            + (f", U = {u:.2f} W/(m²K)".replace(".", ",") if u else "") + " — wyrób przykładowy")
+
+
 @rodzaj("okno", "WZ-11N", "WZ-11P", "WZ-11")
 def detal_okno(m, opts: dict) -> Detal:
     """Osadzenie okna w ścianie z ETICS — ciepły montaż: podokiennik (dół) i nadproże (góra), przekrój pionowy
@@ -278,8 +288,7 @@ def detal_okno(m, opts: dict) -> Detal:
                    ((0.0, y0), (x_out, y0)), ((0.0, yH + 0.34), (x_out, yH + 0.34))):
         det.przerwa(p1, p2)
     # opisy
-    det.opis([(xg, y1 - 0.03)], [f"okno {getattr(o, 'raw', {}).get('stolarka') or 'ALU 3-szybowe'} "
-                                 f"{o.szer:.2f}×{o.wys:.2f} m".replace(".", ",") if o is not None else "okno",
+    det.opis([(xg, y1 - 0.03)], [opis_stolarki(m, o),
                                  f"rama {mm(d_f)} mm: {mm(ws)} mm w murze, {mm(d_f - ws)} mm w ociepleniu (ciepły montaż)"])
     det.opis([(x_out + 0.02, 0.027)], ["parapet zewn. — blacha powlekana / Al 1,0 mm, spadek ≥ 5 %, okapnik 40 mm "
                                        "przed licem, zaślepki boczne na taśmie"])

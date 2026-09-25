@@ -199,6 +199,9 @@ class WynikPlytyFund:
     kombinacje: int = 0
 
 
+OKNO_SCIANY = 1.0     # [m] rozdział obciążeń ścian na płytę (średnia krocząca)
+
+
 def _klasa(model, mat, p):
     from .materialy import klasa_betonu_z_nazwy
     m = model.material(str(mat)) if mat else None
@@ -280,7 +283,13 @@ def analiza_plyty_fundamentowej(an, siatka: float = 0.25, c_dol: float = 50.0, c
         for cs in dol.przypadki():
             if cs in ("QA_pA", "QA_pB"):
                 continue
-            q = dol.get(cs)
+            q0 = dol.get(cs)
+            # rozdział obciążenia skupionego przez ścianę i żebro — średnia krocząca 1,0 m z zachowaniem wypadkowej
+            # [UPR; biblioteka dla ław przyjmuje 2,0 m] — piki profilu (oparcia belek, filarki) nie są osobliwościami
+            q = dol.srednia_ruchoma(q0, OKNO_SCIANY) if dol.L > OKNO_SCIANY else np.full_like(q0, q0.mean())
+            I0, I1 = float(np.trapezoid(q0, dol.s)), float(np.trapezoid(q, dol.s))
+            if abs(I1) > 1e-9:
+                q = q * I0 / I1
             for s_, qq in zip(dol.s, q):
                 if abs(qq) > 1e-9:
                     wgt = ds / 2 if (s_ <= 1e-9 or s_ >= dol.L - 1e-9) else ds
@@ -330,7 +339,8 @@ def _obwiednia(pl0, plyty, pod, fvec, kb_uls, kb_chr, e0, P, h, spod, beton, h_e
             f_ = sum(a * fvec[c] for c, a in kb.wsp.items() if c in fvec and a)
             r = pl.rozwiaz_kontakt(f_)
             p_k = max(p_k, float(r.p.max()))
-            w_k = max(w_k, float(r.wynik.w.max()))
+            if abs(kk - pod.k_s) < 1e-6:            # osiadanie — dla k_s nominalnego (warianty — obwiednia sił)
+                w_k = max(w_k, float(r.wynik.w.max()))
             V_k = max(V_k, float(f_[0::3].sum()))
     # wymiarowanie na zginanie (pasmo b = 1 m, d wg grubości elementu)
     fcd, fyd = beton.f_cd, StalZbrojeniowa(f_yk=p.f_yk, gamma_s=p.gamma_s).f_yd
@@ -372,7 +382,7 @@ def _obwiednia(pl0, plyty, pod, fvec, kb_uls, kb_chr, e0, P, h, spod, beton, h_e
     wo.krok("Udział powierzchni bez kontaktu (maks. po kombinacjach ULS i wariantach k_s)", "A_oder/A", "", odr * 100, "%",
             nd=1)
     wo.krok("Maks. docisk charakterystyczny (SLS)", "p_k,max", "", p_k, "kPa", nd=1)
-    wo.krok("Maks. osiadanie sprężyste (SLS, k_s,min)", "w_k,max", "", w_k * 1000, "mm", nd=1)
+    wo.krok("Maks. osiadanie sprężyste (SLS, k_s nominalne)", "w_k,max", "", w_k * 1000, "mm", nd=1)
     wo.warunek("Osiadanie (PN-EN 1997-1 zał. H: s ≤ 50 mm dla fundamentów bezpośrednich)", w_k * 1000, 50.0, "mm",
                "PN-EN 1997-1 zał. H", nd=1, symbol_E="w_k", symbol_R="s_dop")
     wyniki.append(wo)

@@ -213,19 +213,36 @@ def rysuj_opisy(vp: Viewport, det: Detal, bbox, szer_mm: float = 62.0) -> list:
             for t in o.teksty:
                 wiersze += [(t, j) for j, t in enumerate(_zawin(t, szer_mm))]
             y_w = (o.wyjscie[1] if o.wyjscie else o.pts[0][1])
+            x_w = (o.wyjscie[0] if o.wyjscie else o.pts[0][0])
             n = len(wiersze) + (1 if o.tytul else 0)
-            bloki.append(dict(o=o, wiersze=wiersze, y=y_w, h=n * WIERSZ * k))
-        bloki.sort(key=lambda b: -b["y"])
+            bloki.append(dict(o=o, wiersze=wiersze, y=y_w, x=x_w, h=n * WIERSZ * k))
+        sgx = 1.0 if strona == "R" else -1.0
+        bloki.sort(key=lambda b: (-round(b["y"] / (2.2 * k)), sgx * b["x"]))
+        # kolana odnośników rozsunięte (≥ 2,2 mm) w tej samej kolejności co wyjścia — brak nakładania poziomych
+        # odcinków odnośników o bliskich rzędnych
+        yk = []
+        for b in bloki:
+            y = b["y"]
+            if yk and y > yk[-1] - 2.2 * k:
+                y = yk[-1] - 2.2 * k
+            yk.append(y)
+        if yk:
+            sr = float(np.mean([b["y"] - y for b, y in zip(bloki, yk)]))
+            yk = [y + max(0.0, sr) for y in yk]
+            for i in range(1, len(yk)):
+                yk[i] = min(yk[i], yk[i - 1] - 2.2 * k)
+        for b, y in zip(bloki, yk):
+            b["yk"] = y
         # układ 1D: góra bloku = y wyjścia + pół wiersza, bez nakładania — przesuwanie w dół, potem korekta w górę
         gap = 1.2 * k
         tops = []
         for b in bloki:
-            t = b["y"] + 0.5 * WIERSZ * k
+            t = b["yk"] + 0.5 * WIERSZ * k
             if tops and t > tops[-1] - bloki[len(tops) - 1]["h"] - gap:
                 t = tops[-1] - bloki[len(tops) - 1]["h"] - gap
             tops.append(t)
         # przesunięcie całej kolumny w górę, gdy średnio poniżej wyjść (równoważenie)
-        sr = float(np.mean([tops[i] - (b["y"] + 0.5 * WIERSZ * k) for i, b in enumerate(bloki)]))
+        sr = float(np.mean([tops[i] - (b["yk"] + 0.5 * WIERSZ * k) for i, b in enumerate(bloki)]))
         if sr < 0:
             lift = min(-sr, max(0.0, (y1 + 4 * k) - tops[0]))
             tops = [t + lift for t in tops]
@@ -245,7 +262,9 @@ def rysuj_opisy(vp: Viewport, det: Detal, bbox, szer_mm: float = 62.0) -> list:
                 if o.wyjscie is not None:
                     path.append(np.asarray(o.wyjscie, float))
                 y_e = path[-1][1]
-                path.append(np.array([x_k, y_e]))
+                if abs(b["yk"] - y_e) > 1e-9:          # kolano rozsunięte — odcinek do kolana ukośny
+                    path.append(np.array([x_k - sg * 2.0 * k, y_e]))
+                path.append(np.array([x_k, b["yk"]]))
                 y_txt = top - (1.0 + (1 if o.tytul else 0)) * WIERSZ * k + 0.9 * k
                 path.append(np.array([x_c - sg * 1.5 * k, y_txt + 0.5 * H_OPIS * k]))
                 path.append(np.array([x_c, y_txt + 0.5 * H_OPIS * k]))

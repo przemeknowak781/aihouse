@@ -356,18 +356,32 @@ class RysG(RysE):
                      "gniazdo bryzgoszczelne IP44 (łazienki h = 1,20 m, garaż, pom. techniczne, zewnętrzne)")
         self.leg.sym(lambda c, p: S.junction_box(c, p, s_mm=1.8), "wypust / puszka przyłączeniowa urządzenia "
                      "zasilanego na stałe (opis: obwód, urządzenie, moc)")
+        self.oslony()
         for r in self.rooms:
             self.pomieszczenie(r)
         if self.kid == self.kids[0]:
             self.zewnetrzne()
             self.rg()
-        self.oslony()
         self.opisy()
         self.tabela_obwodow(("gniazda", "staly"))
         return self.finish()
 
+    def _wolne(self, q, rot, d=0.4):
+        """Przesunięcie punktu wzdłuż ściany, gdy w pobliżu jest już inny osprzęt (także po drugiej stronie ściany)."""
+        if not hasattr(self, "_zajete"):
+            self._zajete = []
+        t = perp(dir_deg(rot))
+        q = np.asarray(q, float)
+        for i in range(8):
+            if all(float(np.hypot(*(q - z))) >= d for z in self._zajete):
+                break
+            q = q + t * d * (1 if i % 2 == 0 else -2)
+        self._zajete.append(q)
+        return q
+
     def _gn(self, pts, r, oid, ip44=False, n=2, label=None):
         out = []
+        pts = [(self._wolne(q, rot), rot) for q, rot in pts]
         for q, rot in pts:
             self.sym(S.socket, q, rot, n=n, ip44=ip44, s_mm=3.0)
             out.append(q + dir_deg(rot) * 0.08)
@@ -536,6 +550,9 @@ class RysG(RysE):
             w = o.sciana
             es = w.ext_side or 1
             q = w.pt((o.s0 + o.s1) / 2, w.face_t(-es, "all")) - w.n * es * 0.12
+            if not hasattr(self, "_zajete"):
+                self._zajete = []
+            self._zajete.append(q)
             n0 = len(self.vp.prims)
             self.vp.rect(q[0] - 0.07, q[1] - 0.07, q[0] + 0.07, q[1] + 0.07, "E-GNIAZDA", pen="cienka")
             self.vp.text(q, "M", 1.8, 0.0, "center", "middle", "E-GNIAZDA")

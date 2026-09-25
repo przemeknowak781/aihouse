@@ -52,6 +52,17 @@ class RysD(Rysunek):
                 continue
             did = str(d.get("id", ""))
             pole = self.pola.get(did)
+            for sp in d.get("spadki") or []:
+                a, b = np.asarray(sp["od"], float), np.asarray(sp["do"], float)
+                L = float(np.hypot(*(b - a)))
+                if L < 1.0:
+                    continue
+                u = (b - a) / L
+                c = a + (b - a) * 0.45
+                n0 = len(self.vp.prims)
+                dims.slope(self.vp, c - u * 0.8, c + u * 0.8, float(sp.get("spadek", d.get("spadek", 0.02))) * 100,
+                           layer="S-OPISY", h=1.8)
+                self.reg(n0)
             wp = [w if isinstance(w, dict) else {"xy": w} for w in (d.get("wpusty") or [])]
             if not wp:
                 self.brak(f"Dach {did}: wpusty", "brak wpustów w modelu (dachy[].wpusty)",
@@ -70,17 +81,6 @@ class RysD(Rysunek):
                           "przelewy_awaryjne: [{xy, sciana_attyki: N|S|E|W, szer, wys, rzedna_dna}]")
             for r in d.get("rury_spustowe") or []:
                 self.rura(d, r, wp)
-            for sp in d.get("spadki") or []:
-                a, b = np.asarray(sp["od"], float), np.asarray(sp["do"], float)
-                L = float(np.hypot(*(b - a)))
-                if L < 1.0:
-                    continue
-                u = (b - a) / L
-                c = a + (b - a) * 0.45
-                n0 = len(self.vp.prims)
-                dims.slope(self.vp, c - u * 0.8, c + u * 0.8, float(sp.get("spadek", d.get("spadek", 0.02))) * 100,
-                           layer="S-OPISY", h=1.8)
-                self.reg(n0)
             if pole is not None:
                 inner = poly.buffer(-0.3, join_style=2)
                 from ..common import label_point
