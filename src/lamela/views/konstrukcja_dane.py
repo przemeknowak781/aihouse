@@ -1176,18 +1176,42 @@ def odcinki_proste(g) -> list:
 LACZNIK_T = 0.08      # grubość korpusu izolacji łącznika termoizolacyjnego [m] (typowo 80 mm; 120 mm — wyroby „XT”)
 
 
+GAP_LT = 0.36        # maks. szczelina łącznika termoizolacyjnego (strefa izolacji ściany) [m]
+
+
+def korzenie(el, lv) -> list:
+    """Linie zamocowania wspornika: odcinki brzegu ``el`` równoległe do brzegu innej płyty poziomu w odległości
+    ≤ GAP_LT (styk lub szczelina łącznika w strefie izolacji). Zwraca [(odcinek, szczelina [m], normalna do wspornika)]."""
+    from shapely.geometry import Point as _P
+    from shapely.ops import unary_union as _uu
+    inne = _uu([e.poly for e in lv.elementy if e is not el])
+    if inne.is_empty:
+        return []
+    near = el.poly.boundary.intersection(inne.buffer(GAP_LT, join_style=2))
+    out = []
+    for sg in odcinki_proste(near):
+        if sg.length <= 0.3:
+            continue
+        a, b = _P(sg.coords[0]), _P(sg.coords[-1])
+        da, db = a.distance(inne), b.distance(inne)
+        if abs(da - db) > 0.02:
+            continue                      # krawędź prostopadła do styku
+        mid = sg.interpolate(0.5, normalized=True)
+        (xa, ya), (xb, yb) = sg.coords[0], sg.coords[-1]
+        nrm = np.array([-(yb - ya), xb - xa]) / sg.length
+        if not el.poly.buffer(-0.005).contains(_P(mid.x + nrm[0] * 0.05, mid.y + nrm[1] * 0.05)):
+            nrm = -nrm
+        out.append((sg, float(mid.distance(inne)), nrm))
+    return out
+
+
 def _gora_wsporniki(D, lv, zest, gora, Ping, h_lv, cmax):
     """Zbrojenie górne płyt wspornikowych: od krawędzi swobodnej (odgięcie) przez linię zamocowania do przęsła
     zaplecza na długość max(l_c; l_bd) za najbliższą podporą (ściana/belka ≤ 1,6 m od zamocowania — wspornik wielostopniowy, np. ST2Z + PL-2)."""
     from shapely.geometry import LineString, Point, box
     from shapely.ops import unary_union
     for el in [e for e in lv.elementy if e.typ == "wspornik"]:
-        inne = unary_union([e.poly for e in lv.elementy if e is not el])
-        if inne.is_empty:
-            continue
-        root = el.poly.boundary.intersection(inne.buffer(0.02))
-        segs = [g for g in odcinki_proste(root) if g.length > 0.3]
-        for sg in segs:
+        for sg, gap, _nrm in korzenie(el, lv):
             (xa, ya), (xb, yb) = sg.coords[0], sg.coords[-1]
             if abs(ya - yb) < 1e-3:
                 kier, r = "y", ya
@@ -1224,13 +1248,14 @@ def _gora_wsporniki(D, lv, zest, gora, Ping, h_lv, cmax):
             back = _ceil5(d_s + max(l_c, _lbd(w.fi, el.beton)))
             a, b = sorted((r - strona * back, r + strona * (l_c + 0.5)))
             reg = (box(t0, a, t1, b) if kier == "y" else box(a, t0, b, t1)).intersection(Ping)
-            if el.lacznik:
+            if el.lacznik and gap < 0.03:
                 # łącznik termoizolacyjny: pręty NIE przechodzą przez korpus izolacji (8 cm po stronie płyty zaplecza) —
                 # część wspornikowa (od krawędzi do łącznika) i część w płycie zaplecza zakładkowane z prętami łącznika
                 korp = (box(t0 - 1, min(r, r - strona * (LACZNIK_T + 0.02)), t1 + 1, max(r, r - strona * (LACZNIK_T + 0.02)))
                         if kier == "y" else
                         box(min(r, r - strona * (LACZNIK_T + 0.02)), t0 - 1, max(r, r - strona * (LACZNIK_T + 0.02)), t1 + 1))
                 reg = reg.difference(korp)
+            # szczelina (strefa izolacji) — obszar poza płytami: pręty urywają się na licach, zakład z prętami łącznika
             sk = skanuj(reg, kier, t0 + el.c_nom / 1000, t1 - el.c_nom / 1000, w.s / 1000.0)
             bnd = el.poly.buffer(-el.c_nom / 1000.0, join_style=2).boundary
 

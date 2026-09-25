@@ -799,12 +799,20 @@ def koordynacja(s: SiteData, odl_min: dict | None = None, retencja_min: dict | N
     # sieć–budynek (informacyjnie): najmniejsza odległość poza strefą wejścia przewodu do budynku
     bud = []
     for A in proj:
-        g = A.geom.difference(s.footprint.buffer(0.6)) if A.geom.intersects(s.footprint) else A.geom
+        # poza budynkiem, bez otoczenia punktów wejścia do budynku i końców przy ścianie (podłączenia rur spustowych)
+        X = A.geom.intersection(s.footprint.exterior)
+        pts = [q for q in getattr(X, "geoms", [X]) if isinstance(q, Point)] if not X.is_empty else []
+        pts += [Point(q) for q in (A.geom.coords[0], A.geom.coords[-1]) if Point(q).distance(s.footprint) < 1.0]
+        g = A.geom.difference(s.footprint)
+        if pts:
+            g = g.difference(unary_union([q.buffer(1.0) for q in pts]))
         if g.is_empty:
             continue
         d = float(g.distance(s.footprint))
         if d < 3.0:
             q1, q2 = nearest_points(g, s.footprint)
+            if pts and min(q1.distance(q) for q in pts) < 1.05:
+                continue                      # minimum na granicy wyłączenia (wejście/podłączenie) — nie przebieg
             bud.append(dict(a=A, d=d, p1=np.asarray(q1.coords[0]), p2=np.asarray(q2.coords[0])))
     # strefa R290: studzienki, wpusty, odwodnienia, rury spustowe, otwory parteru
     r290 = []

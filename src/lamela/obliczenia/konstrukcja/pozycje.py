@@ -457,6 +457,7 @@ class AnalizaKonstrukcji:
             return i
         oddzielne = {i for i, e in enumerate(els) if e.typ == "wspornik" and e.raw.get("lacznik_termiczny")
                      and self._ma_wlasne_podpory(e)}
+        mostki = []
         for i in range(n):
             for j in range(i + 1, n):
                 if i in oddzielne or j in oddzielne:
@@ -465,8 +466,12 @@ class AnalizaKonstrukcji:
                 # (typy łączników z uskokiem ≤ ok. 15 cm) — łącznik przenosi m_Ed i v_Ed, więc płyty liczone wspólnie
                 lt = any(e.typ == "wspornik" and e.raw.get("lacznik_termiczny") for e in (els[i], els[j]))
                 tol_w = 0.15 if lt else 0.03
-                if abs(els[i].wierzch - els[j].wierzch) < tol_w and els[i].poly_full.distance(els[j].poly_full) < 0.05:
+                gap = els[i].poly_full.distance(els[j].poly_full)
+                # łącznik w strefie izolacji ściany: szczelina ≤ 0,36 m między wspornikiem a płytą zaplecza
+                if abs(els[i].wierzch - els[j].wierzch) < tol_w and (gap < 0.05 or (lt and gap <= 0.36)):
                     par[fnd(i)] = fnd(j)
+                    if gap >= 0.005:
+                        mostki.append((i, j, gap))
         for i in oddzielne:
             self.log(f"{els[i].id}: płyta z łącznikiem termoizolacyjnym i własnymi podporami (belki/słupy) — łącznik przyjęto "
                      "jako przegubowy (przenoszący siłę poprzeczną, typ „Q”), płyta liczona osobno, podparta na krawędzi przy ścianie [ZAŁ].")
@@ -475,7 +480,18 @@ class AnalizaKonstrukcji:
             grp.setdefault(fnd(i), []).append(els[i])
         for k, el in enumerate(sorted(grp.values(), key=lambda L: -L[0].wierzch)):
             g = Grupa(k, el)
-            g.poly = unary_union([e.poly for e in el]).buffer(0)
+            # łączniki termoizolacyjne w szczelinie izolacji — pas łączący (ciągłość m, v w modelu MES) [ZAŁ]
+            ids = {id(e) for e in el}
+            pasy = []
+            for i, j, gap in mostki:
+                if id(els[i]) in ids and id(els[j]) in ids:
+                    d = gap + 0.02
+                    A = els[i].poly_full.buffer(d, join_style=2).intersection(els[j].poly_full.buffer(d, join_style=2))
+                    pasy.append(A.difference(els[i].poly_full.union(els[j].poly_full)))
+                    self.log(f"{els[i].id} – {els[j].id}: szczelina {f(gap * 100, 0)} cm (łącznik termoizolacyjny w strefie "
+                             "izolacji) — w MES pas ciągły o grubości płyty (łącznik przenosi m_Ed, v_Ed; podatność łącznika "
+                             "pominięta) [ZAŁ].")
+            g.poly = unary_union([e.poly for e in el] + pasy).buffer(0)
             if not isinstance(g.poly, Polygon):
                 g.poly = max(g.poly.geoms, key=lambda q: q.area)
                 self.log(f"Grupa płyt {g.nazwa}: obszar niespójny — analizowana największa część")

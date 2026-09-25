@@ -345,10 +345,17 @@ def ocena_linii(det: Detal, info: dict, wyniki: dict, k: float) -> dict:
                 op.append(f"obrys izolacji: {n} części (w tym warstwy dodatkowe, np. izolacja podłogi)")
         else:
             ls = list(info["linie"].get(L, [])) + [LineString(P) for r_, P in det.polaczenia if r_ == L]
-            if L in "SP":        # taśma paroszczelna łączy warstwę szczelną / paroizolację z ramą
-                ls += list(info["linie"].get("T_in", []))
-            if L == "H":
-                ls += list(info["linie"].get("T_out", []))
+            # taśmy (T_in — paroszczelna dla S/P, T_out — paroprzepuszczalna dla H) łączą linię z ramą; taśma, która
+            # nie styka się z linią (np. nadproże osłonięte okapem), jest osobnym elementem — nie przerwą linii
+            tasmy = list(info["linie"].get("T_in" if L in "SP" else "T_out", []))
+            dod = True
+            while dod and ls:
+                dod = False
+                for t_ in list(tasmy):
+                    if any(t_.distance(x) <= 1.5 * k for x in ls):
+                        ls.append(t_)
+                        tasmy.remove(t_)
+                        dod = True
             n = _skladowe(ls, 1.5 * k) if info["linie"].get(L) else 0
             if n > 1:
                 op.append(f"linia na rysunku — {n} odcinki (przerwa?)")
