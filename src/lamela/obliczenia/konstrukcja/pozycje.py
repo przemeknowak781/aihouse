@@ -375,6 +375,20 @@ class AnalizaKonstrukcji:
         e.ekspozycja = ex
         return e
 
+    def _ma_wlasne_podpory(self, e: ElementPlyty) -> bool:
+        """Czy płyta ma podpory we własnym obrysie (belki, słupy, ściany pod wnętrzem płyty)."""
+        wn = e.poly_full.buffer(-0.1)
+        for b in self.m.belki():
+            if abs(float(b["spod"]) + float(b["h"]) - e.spod) < TOL_Z and LineString([tuple(b["os"][0]), tuple(b["os"][1])]).intersects(wn):
+                return True
+        for c in self.m.slupy():
+            if abs(float(c["z_do"]) - e.spod) < TOL_Z and e.poly_full.buffer(0.05).contains(Point(*c["xy"])):
+                return True
+        for w in self.m.sciany():
+            if w.typ in TYPY_NOSNE and abs(w.z_do - e.spod) < TOL_Z and LineString([tuple(w.p1), tuple(w.p2)]).intersects(wn):
+                return True
+        return False
+
     def _przykryty(self, e: ElementPlyty) -> bool:
         c = e.poly_full.representative_point()
         for pl in self.m.plyty():
@@ -394,10 +408,17 @@ class AnalizaKonstrukcji:
                 par[i] = par[par[i]]
                 i = par[i]
             return i
+        oddzielne = {i for i, e in enumerate(els) if e.typ == "wspornik" and e.raw.get("lacznik_termiczny")
+                     and self._ma_wlasne_podpory(e)}
         for i in range(n):
             for j in range(i + 1, n):
+                if i in oddzielne or j in oddzielne:
+                    continue
                 if abs(els[i].wierzch - els[j].wierzch) < 0.03 and els[i].poly_full.distance(els[j].poly_full) < 0.05:
                     par[fnd(i)] = fnd(j)
+        for i in oddzielne:
+            self.log(f"{els[i].id}: płyta z łącznikiem termoizolacyjnym i własnymi podporami (belki/słupy) — łącznik przyjęto "
+                     "jako przegubowy (przenoszący siłę poprzeczną, typ „Q”), płyta liczona osobno, podparta na krawędzi przy ścianie [ZAŁ].")
         grp = {}
         for i in range(n):
             grp.setdefault(fnd(i), []).append(els[i])
@@ -1515,7 +1536,16 @@ class AnalizaKonstrukcji:
         if zewn and wk:
             nmin = float(np.mean(top.get("G") + pr["top_a"].get("G"))) + pr["gm2"] * h / 2   # średnio [UPR]
             sig = max(nmin, 0) / t / 1000 * p.gG_inf
-            poz.wyniki.append(murm.sciana_wiatr(p.gQ * wk, h, t, mur, sigma_d=sig, p=p, nazwa=f"{w.id} — zginanie z płaszczyzny (wiatr)"))
+            rw = murm.sciana_wiatr(p.gQ * wk, h, t, mur, sigma_d=sig, p=p, nazwa=f"{w.id} — zginanie z płaszczyzny (wiatr)")
+            if nmin > 5.0:
+                # ściana obciążona pionowo — miarodajne sprawdzenie 6.1.2 z mimośrodem od wiatru e_hm (wyżej); pasmo
+                # zginane bez udziału ściskania — informacyjnie (PN-EN 1996-1-1 6.3.1(3)–(4)) [UPR]
+                for wv in rw.warunki:
+                    rw.uwaga(f"Informacyjnie (dolne oszacowanie, bez efektu przesklepienia 6.3.2): {wv.opis}: M_Ed = "
+                             f"{f(wv.E, 3)} ≤? M_Rd = {f(wv.R, 3)} kNm/m (η = {f(wv.eta * 100, 0)}%). Ściana obciążona pionowo — "
+                             "miarodajne sprawdzenie 6.1.2 z mimośrodem e_hm od wiatru.")
+                rw.warunki = []
+            poz.wyniki.append(rw)
         # docisk pod belkami i schodami
         for cs, P, s_c, szer in self.pending_sciany.get(w.id, []):
             if cs != "G" or szer > 0.5:
@@ -1803,14 +1833,15 @@ class AnalizaKonstrukcji:
                 self.pos_fund.append(poz)
                 continue
             tw = max(tk for _, _, tk in sciany)
-            G = prof.srednia_ruchoma(prof.get("G"), 1.0)
-            i_max = int(np.argmax(G + sum(prof.srednia_ruchoma(prof.get(c), 1.0) for c in prof.przypadki() if c != "G")))
+            OKNO = 2.0     # rozdział obciążenia przez ścianę i ławę [UPR]
+            G = prof.srednia_ruchoma(prof.get("G"), OKNO)
+            i_max = int(np.argmax(G + sum(prof.srednia_ruchoma(prof.get(c), OKNO) for c in prof.przypadki() if c != "G")))
             Gk = float(G[i_max])
             Ql = []
             for cs in prof.przypadki():
                 if cs in ("G", "SB2", "QA_pA", "QA_pB"):
                     continue
-                v = float(prof.srednia_ruchoma(prof.get(cs), 1.0)[i_max])
+                v = float(prof.srednia_ruchoma(prof.get(cs), OKNO)[i_max])
                 if v > 1e-6:
                     Ql.append((v, p.psi_of({"QA": "A", "H": "H", "S1": "S", "S2": "S"}.get(cs, "A"))[0], cs))
             # śnieg/H — tylko wiodący z grupy dachu (maks.)
@@ -1821,9 +1852,10 @@ class AnalizaKonstrukcji:
                             f"{f(max(hf_ for _, hf_, _ in sciany), 2)} m, t = {f(tw * 100, 0)} cm (ciężar jak beton 25 kN/m³ [UPR]). "
                             f"Spód ławy {f(spod, 3)} m; {'teren przy ławie ' + f(zt, 2) + ' m' if zewn else 'ława wewnętrzna, posadzka ' + f(z_posadzki, 3) + ' m'}"
                             f" → D = {f(D_ext if zewn else D_int, 2)} m (do nośności D_min = {f(D, 2)} m). "
-                            "Obciążenie miarodajne: maks. średnia krocząca 1,0 m wzdłuż ławy.")
+                            "Obciążenie miarodajne: maks. średnia krocząca na długości 2,0 m wzdłuż ławy (rozdział przez ścianę "
+                            "i ławę) [UPR].")
             poz.obciazenia.append(tabela(["Przypadek", "q_k [kN/m] (miarodajne)", "Σ na ławie [kN]"],
-                                         [[cs, (float(prof.srednia_ruchoma(prof.get(cs), 1.0)[i_max]), 2), (prof.calka(cs), 1)]
+                                         [[cs, (float(prof.srednia_ruchoma(prof.get(cs), OKNO)[i_max]), 2), (prof.calka(cs), 1)]
                                           for cs in prof.przypadki()]))
             r = fund.lawa(fid, B, hf, tw, D, Gk, [(q, ps) for q, ps, _ in Ql], p.grunt, beton, p, dlugosc=Lax + B, zewnetrzna=zewn,
                           stal=self.stal)

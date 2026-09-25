@@ -62,69 +62,64 @@ def rysuj_schemat_rg(wynik, plik, tytul: str | None = None, dpi: int = 200) -> s
     obw = wynik.obwody
     n = len(obw) + 2                      # + rezerwa
     dx = 11.0
-    x0 = 95.0
-    W = x0 + n * dx + 20
-    H = 150.0
+    x0 = 100.0
+    W = x0 + n * dx + 12
+    H = 200.0
     fig_w = max(12.0, W / 25.4 * 0.95)
-    fig, ax = plt.subplots(figsize=(fig_w, H / 25.4 * 1.05))
+    fig, ax = plt.subplots(figsize=(fig_w, H / 25.4 * 0.95))
     ax.set_xlim(0, W)
     ax.set_ylim(0, H)
     ax.set_aspect("equal")
     ax.axis("off")
-    yb = 118.0                            # szyna RG
+    yb = 160.0                            # szyna RG
     # --- ZKP
-    ax.add_patch(Rectangle((4, 70), 36, 62, fill=False, lw=LW, ls="--"))
-    ax.text(22, 129.5, "ZKP (ZK1x-1P) — OSD", ha="center", fontsize=6.5, weight="bold")
-    xz = 22
-    ax.plot([xz, xz], [136, 126], "k-", lw=LW)
-    ax.text(xz + 2, 134, "sieć nN 0,4 kV TN-C", fontsize=5.5)
-    ax.add_patch(Rectangle((xz - 1.2, 120), 2.4, 6, fill=False, lw=LW))      # bezpiecznik/rozłącznik bezp.
-    ax.plot([xz, xz], [120, 126], "k-", lw=0.6)
-    ax.text(xz + 2, 122.5, "rozł. bezp. gG", fontsize=5.5)
-    ax.plot([xz, xz], [120, 114], "k-", lw=LW)
-    ax.add_patch(Rectangle((xz - 4, 106), 8, 8, fill=False, lw=LW))
-    ax.text(xz, 110, "Wh", ha="center", va="center", fontsize=6)
-    ax.text(xz + 5, 110, "licznik 3f\n(dwukierunkowy)", fontsize=5, va="center")
-    ax.plot([xz, xz], [106, 102], "k-", lw=LW)
-    _zestyk(ax, xz, 102, 8, "wylacznik")
-    ax.text(xz + 3.5, 98, f"3P {wynik.par.zab_przedlicznikowe}40\n(przedlicznikowe)", fontsize=5.5, va="center")
-    ax.plot([xz, xz], [94, 76], "k-", lw=LW)
-    ax.text(xz + 1.5, 86, "PEN", fontsize=5.5)
-    _uziemienie(ax, xz - 8, 80)
-    ax.plot([xz - 8, xz], [80, 80], "k-", lw=0.6)
+    ax.add_patch(Rectangle((4, 103), 42, 63, fill=False, lw=LW, ls="--"))
+    ax.text(6, 168, "ZKP (ZK1x-1P) — własność OSD", fontsize=6.5, weight="bold")
+    xz = 20
+    ax.plot([xz, xz], [178, 158], "k-", lw=LW)
+    ax.text(xz + 2, 176, "sieć nN 0,4 kV (TN-C)", fontsize=5.5)
+    ax.add_patch(Rectangle((xz - 1.2, 152), 2.4, 6, fill=False, lw=LW))
+    ax.plot([xz, xz], [152, 158], "k-", lw=0.6)
+    ax.text(xz + 2.5, 155, "rozłącznik bezp. gG", fontsize=5.5, va="center")
+    ax.plot([xz, xz], [152, 146], "k-", lw=LW)
+    ax.add_patch(Rectangle((xz - 4, 138), 8, 8, fill=False, lw=LW))
+    ax.text(xz, 142, "Wh", ha="center", va="center", fontsize=6)
+    ax.text(xz + 5, 142, "licznik 3f\n(dwukierunkowy)", fontsize=5, va="center")
+    ax.plot([xz, xz], [138, 134], "k-", lw=LW)
+    _zestyk(ax, xz, 134, 8, "wylacznik")
+    ax.text(xz + 3.5, 130, f"3P {wynik.par.zab_przedlicznikowe}40\n(przedlicznikowe)", fontsize=5.5, va="center")
+    ax.plot([xz, xz], [126, 104], "k-", lw=LW)
+    ax.text(xz + 1.5, 118, "PEN", fontsize=5.5)
+    ax.plot([xz - 8, xz], [112, 112], "k-", lw=0.6)
+    _uziemienie(ax, xz - 8, 112)
     # --- WLZ
-    ax.plot([xz, xz, 55], [76, 72, 72], "k-", lw=LW * 1.6)
-    ax.text(38, 73.5, f"WLZ {wynik.wlz['przewod']}\nL = {f(wynik.wlz['L'], 1)} m, ∆U = {f(wynik.wlz['dU'], 2)} %", fontsize=5.5)
+    ax.plot([xz, xz, 58], [104, 100, 100], "k-", lw=LW * 1.6)
+    ax.text(22, 88, f"WLZ {wynik.wlz['przewod']}, L = {f(wynik.wlz['L'], 1)} m\n∆U = {f(wynik.wlz['dU'], 2)} % (ziemia, D1)", fontsize=5.5)
     # --- RG
-    ax.add_patch(Rectangle((50, 8), W - 55, 130, fill=False, lw=LW * 1.4))
-    ax.text(52, 134.5, "RG — rozdzielnica główna (PN-EN IEC 61439-3), TN-S", fontsize=7, weight="bold")
-    xr = 60
-    ax.plot([55, xr, xr], [72, 72, 80], "k-", lw=LW * 1.6)
-    _zestyk(ax, xr, 88, 8, "rozlacznik")
-    ax.plot([xr, xr], [80, 80], "k-")
-    ax.add_patch(Rectangle((xr + 4, 83), 7, 4, fill=False, lw=LW))
-    ax.text(xr + 7.5, 85, "PWP", ha="center", va="center", fontsize=5.5)
-    ax.plot([xr + 1.5, xr + 4], [85, 85], "k--", lw=0.6)
-    ax.text(xr - 1, 92, "Q0: rozłącznik 3P 63 A\nz wyzwalaczem (PWP)", fontsize=5.5, ha="right")
-    ax.plot([xr, xr, x0 - 5], [88, yb, yb], "k-", lw=LW)
-    _spd(ax, 75, yb, "SPD T1+T2\nI_imp ≥ 12,5 kA\nU_p ≤ 1,5 kV")
-    ax.plot([75, 75], [yb, yb], "k-")
-    # szyny PE / N
-    ax.plot([55, W - 8], [14, 14], "g-", lw=1.2)
-    ax.text(56, 15.5, "PE (GSU, uziom)", fontsize=5.5, color="g")
-    _uziemienie(ax, 56, 14)
-    # szyna główna
+    ax.add_patch(Rectangle((54, 8), W - 58, 178, fill=False, lw=LW * 1.4))
+    ax.text(56, 181, "RG — rozdzielnica główna (PN-EN IEC 61439-3), układ TN-S", fontsize=7, weight="bold")
+    xr = 64
+    ax.plot([58, xr, xr], [100, 100, 108], "k-", lw=LW * 1.6)
+    _zestyk(ax, xr, 116, 8, "rozlacznik")
+    ax.add_patch(Rectangle((xr + 4, 111), 7, 4, fill=False, lw=LW))
+    ax.text(xr + 7.5, 113, "PWP", ha="center", va="center", fontsize=5.5)
+    ax.plot([xr + 1.5, xr + 4], [113, 113], "k--", lw=0.6)
+    ax.text(xr + 12, 113, "Q0: rozłącznik 3P 63 A\nz wyzwalaczem PWP", fontsize=5.5, va="center")
+    ax.plot([xr, xr, x0 - 5], [116, yb, yb], "k-", lw=LW)
+    _spd(ax, 80, yb, "SPD T1+T2\nI_imp ≥ 12,5 kA\nU_p ≤ 1,5 kV")
+    ax.plot([58, W - 8], [14, 14], "g-", lw=1.2)
+    ax.text(60, 15.5, "PE — szyna PE / GSU → uziom", fontsize=5.5, color="g")
+    _uziemienie(ax, 58, 14)
     ax.plot([x0 - 5, x0 + n * dx], [yb, yb], "k-", lw=2.2)
     ax.text(x0 - 4, yb + 1.5, "L1 L2 L3 N", fontsize=5.5)
     for i, o in enumerate(obw + [None, None]):
         x = x0 + i * dx + dx / 2
         ax.plot([x, x], [yb, yb - 4], "k-", lw=LW)
-        if o is None:
-            _zestyk(ax, x, yb - 4, 10, "wylacznik")
-            ax.plot([x, x], [yb - 14, yb - 50], "k:", lw=0.6)
-            ax.text(x, yb - 52, "rezerwa", rotation=90, fontsize=5.5, ha="center", va="top")
-            continue
         _zestyk(ax, x, yb - 4, 10, "wylacznik")
+        if o is None:
+            ax.plot([x, x], [yb - 14, yb - 58], "k:", lw=0.6)
+            ax.text(x, yb - 60, "rezerwa", rotation=90, fontsize=5.5, ha="center", va="top")
+            continue
         rc = o.odb.rcd
         if "RC" in rc:
             _rcd(ax, x, yb - 9.5, 10)
@@ -134,23 +129,23 @@ def rysuj_schemat_rg(wynik, plik, tytul: str | None = None, dpi: int = 200) -> s
             lab += f"\n30mA {typ}"
         ax.text(x - 0.5, yb - 16, lab, fontsize=4.8, ha="right", va="top", rotation=90)
         ax.plot([x, x], [yb - 14, yb - 58], "k-", lw=LW)
-        if o.odb.fazy == 3:
-            for k in (-1, 0, 1):
-                ax.plot([x - 0.9 + k * 0.5, x + 0.9 + k * 0.5], [yb - 40 - 0.9, yb - 40 + 0.9], "k-", lw=0.6)
-        else:
-            ax.plot([x - 0.9, x + 0.9], [yb - 40 - 0.9, yb - 40 + 0.9], "k-", lw=0.6)
-        ax.text(x + 0.9, yb - 20, f"{o.przewod}  L={f(o.L, 0)} m", fontsize=4.6, rotation=90, va="top")
+        nf = 3 if o.odb.fazy == 3 else 1
+        for k in range(nf):
+            dxk = (k - (nf - 1) / 2) * 0.6
+            ax.plot([x - 0.9 + dxk, x + 0.9 + dxk], [yb - 42 - 0.9, yb - 42 + 0.9], "k-", lw=0.6)
+        ax.text(x + 0.9, yb - 16, f"{o.przewod}  L={f(o.L, 0)} m", fontsize=4.6, rotation=90, va="top")
         ax.text(x + 0.9, yb - 45, f"∆U={f(o.dU_calk, 1)}%", fontsize=4.4, rotation=90, va="top")
-        ax.text(x, yb - 60, f"{o.odb.id}  {o.odb.faza}", fontsize=5.2, ha="center", va="top", weight="bold")
-        ax.text(x, yb - 64, o.odb.nazwa[:52], fontsize=4.6, rotation=90, ha="center", va="top")
-    # legenda
-    lx, ly = W - 60, 132
+        ax.text(x, yb - 60, o.odb.id, fontsize=5.4, ha="center", va="top", weight="bold")
+        ax.text(x, yb - 64.5, o.odb.faza.replace("L1L2L3", "3f"), fontsize=4.8, ha="center", va="top")
+        nazwa = o.odb.nazwa if len(o.odb.nazwa) <= 46 else o.odb.nazwa[:45] + "…"
+        ax.text(x, yb - 69, nazwa, fontsize=4.6, rotation=90, ha="center", va="top")
+    lx, ly = W - 74, 178
     ax.text(lx, ly, "Legenda (PN-EN 60617, uproszczone):", fontsize=5.5, weight="bold")
-    items = ["⨯ na zestyku — wyłącznik nadprądowy (B/C, I_n)", "owal na torze — człon różnicowoprądowy (RCBO/RCD 30 mA, typ)",
-             "kreska na zestyku — rozłącznik izolacyjny", "/ , /// na torze — liczba faz (1f / 3f)", "prostokąt ze skosem — SPD"]
+    items = ["× na zestyku — wyłącznik nadprądowy (B/C I_n)", "owal na torze — człon różnicowoprądowy 30 mA (typ A/F/B)",
+             "kreska na zestyku — rozłącznik izolacyjny", "kreski na torze — liczba faz (1f / 3f)", "prostokąt ze skosem — SPD (warystor)"]
     for i, t in enumerate(items):
-        ax.text(lx, ly - 3.5 * (i + 1), t, fontsize=5)
-    ax.text(52, 3, tytul or f"Schemat ideowy RG — {wynik.dane.nazwa}. Dane przykładowe [ZAŁ]; wartości z obliczeń obwodów "
+        ax.text(lx, ly - 3.2 * (i + 1), t, fontsize=5)
+    ax.text(56, 3, tytul or f"Schemat ideowy RG — {wynik.dane.nazwa}. Dane przykładowe [ZAŁ]; wartości z obliczeń obwodów "
             "(lamela.obliczenia.elektryka.obwody).", fontsize=6)
     fig.savefig(plik, dpi=dpi, bbox_inches="tight")
     plt.close(fig)

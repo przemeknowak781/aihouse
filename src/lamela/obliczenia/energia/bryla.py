@@ -216,21 +216,26 @@ def buduj_bryle(m) -> Bryla:
             u = (q - p) / L
             nout = np.array([u[1], -u[0]])            # CCW → na prawo = na zewnątrz pomieszczenia
             ns = max(2, int(math.ceil(L / KROK)))
+            # kandydaci: ściany równoległe, których lico leży na linii krawędzi i których zakres pokrywa krawędź
+            kand = []
+            for w in walls:
+                if abs(u[0] * w.u[1] - u[1] * w.u[0]) > 0.02:
+                    continue
+                sa_, ta_ = w.st(p)
+                sb_, tb_ = w.st(q)
+                if max(sa_, sb_) < -TOL_LICO or min(sa_, sb_) > w.L + TOL_LICO:
+                    continue
+                for side, tf in ((+1, w.t_max), (-1, w.t_min)):
+                    if abs(ta_ - tf) < TOL_LICO and abs(tb_ - tf) < TOL_LICO:
+                        kand.append((w, side, sa_, sb_))
             klas = []
             for j in range(ns):
-                x = p + u * ((j + 0.5) / ns * L)
+                f = (j + 0.5) / ns
                 hit = None
-                for w in walls:
-                    if abs(u[0] * w.u[1] - u[1] * w.u[0]) > 0.02:
-                        continue
-                    s, t = w.st(x)
-                    if s < -TOL_LICO or s > w.L + TOL_LICO:
-                        continue
-                    if abs(t - w.t_max) < TOL_LICO:
-                        hit = (w.id, +1)
-                        break
-                    if abs(t - w.t_min) < TOL_LICO:
-                        hit = (w.id, -1)
+                for w, side, sa_, sb_ in kand:
+                    s_ = sa_ + (sb_ - sa_) * f
+                    if -TOL_LICO <= s_ <= w.L + TOL_LICO:
+                        hit = (w.id, side)
                         break
                 klas.append(hit)
             # grupowanie
@@ -295,7 +300,8 @@ def buduj_bryle(m) -> Bryla:
                         rodz, rol = "drzwi", "drzwi"
                     if sas != "zewn" and P.get(sas) is not None and P[sas].ogrzewane and pm.ogrzewane:
                         continue                               # drzwi wewnętrzne między pom. ogrzewanymi
-                    el = Element(o.id, rodz, rol, pm.id, sas, Ao, az, 90.0, o.symbol or o.typ, None, None, o, w.id,
+                    oid = o.id if sas == "zewn" else f"{o.id}@{pm.id}"   # otwór w ścianie wewn. — element z obu stron
+                    el = Element(oid, rodz, rol, pm.id, sas, Ao, az, 90.0, o.symbol or o.typ, None, None, o, w.id,
                                  o.szer, o.wys)
                     if sas == "zewn" and rodz == "okno":
                         el.zacienienie = _zacienienie_okna(m, w, o, plyty)
@@ -329,7 +335,8 @@ def buduj_bryle(m) -> Bryla:
                     add_w("naroznik_wklesly", H, "narożnik wewnętrzny (wklęsły) ścian zewnętrznych")
         # --- podłoga ---
         pod = pm.raw.get("podloga") or k.podloga
-        fpoly = pm.raw and (m.pomieszczenie(pm.id).polygon_podlogi or pg)
+        _pp = m.pomieszczenie(pm.id).polygon_podlogi
+        fpoly = _pp if (_pp is not None and not _pp.is_empty) else pg
         i = kond_ids.index(kid)
         dl_zewn = sum(kr["dl"] for kr in pm.krawedzie if kr.get("zewn") or kr.get("rola") == "sciana_nieogrz")
         if i == 0:
