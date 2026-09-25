@@ -593,10 +593,11 @@ class SectionBuilder:
             suf = raw.get("sufit")
             if suf:
                 sp = m.przegroda(str(suf))
-                if sp is not None:
-                    texts += [layer_text(m, w.mat, w.d) for w in sp.warstwy]
-                else:
-                    texts.append(layer_text(m, str(suf), 0.01))
+                # warstwy sufitu bez powtórzeń warstw już opisanych w podłodze stropu (weryfikacja C 2.2)
+                for t_ in ([layer_text(m, w.mat, w.d) for w in sp.warstwy] if sp is not None
+                           else [layer_text(m, str(suf), 0.01)]):
+                    if t_ not in texts:
+                        texts.append(t_)
             code = f"{raw.get('id')}/{pk}"
             title = f"STROP {raw.get('id')}" + (f" + {p.kod} — {p.nazwa}" if p is not None else "")
             return code, title, texts
@@ -623,7 +624,7 @@ class SectionBuilder:
             ztop = here[0]["z1"]
             marks = [(s, (it["z0"] + it["z1"]) / 2) for it in here[:-1]]
             pstart = (s, (here[-1]["z0"] + here[-1]["z1"]) / 2)
-            for rise in (6.0, 10.0, 16.0, 24.0):
+            for rise in (6.0, 10.0, 16.0, 24.0, 34.0, 46.0, 60.0):
                 for side in ("right", "left"):
                     cands.append((pstart, (s, ztop + rise * k), side, marks))
 
@@ -659,7 +660,7 @@ class SectionBuilder:
             outer = here[0] if left else here[-1]
             ps = ((outer["s0"] + outer["s1"]) / 2, z)
             marks = [((it["s0"] + it["s1"]) / 2, z) for it in here]
-            for dx in (10.0, 16.0, 24.0, 34.0, 46.0):
+            for dx in (10.0, 16.0, 24.0, 34.0, 46.0, 60.0, 76.0):
                 pe = (sb + dx * k, z) if left else (sa - dx * k, z)
                 cands.append((ps, pe, "right" if left else "left", marks))
 
@@ -674,17 +675,24 @@ def _callout(cv, ps, pe, texts, side, marks, title):
     """Opis warstw z maskami pod napisami (czytelność na tle linii widoku)."""
     from ..draft.core import PText
     from ..draft import text as TT
-    wmax = max(TT.width(t, 1.8) for t in texts) + 6.0
+    wr = max(TT.width(t, 1.8) for t in texts) + 2.0
+    wmax = max(wr + 4.0, 1.6 * wr)                  # tytuł do 1,6 × szerokości wierszy — bez „…” (weryf. C 2.2)
     if title and TT.width(title, 1.8, "bold") > wmax:
         words = title.split()
         while len(words) > 2 and TT.width(" ".join(words) + "…", 1.8, "bold") > wmax:
             words.pop()
         title = " ".join(words).rstrip(",;:—-") + "…"
+    wt = TT.width(title, 1.8, "bold") + 2.0 if title else 0.0
     n0 = len(cv.prims)
-    S.layer_callout(cv, ps, pe, texts, side=side, h=1.8, row_mm=3.6, marks=marks, title=title)
+    r = S.layer_callout(cv, ps, pe, texts, side=side, h=1.8, row_mm=3.6, marks=marks, title=title,
+                        width_mm=max(wr, wt))
     for p in cv.prims[n0:]:
         if isinstance(p, PText):
             p.mask = 0.35
+    # białe tło pod całym opisem warstw: linie przekroju (osie, wymiary) nie przechodzą przez tabelę (weryf. C 2.2)
+    k = cv.k
+    cv.fill([(r[0] - 0.8 * k, r[1] + 0.3 * k), (r[2] + 0.8 * k, r[1] + 0.3 * k), (r[2] + 0.8 * k, r[3] + 0.6 * k),
+             (r[0] - 0.8 * k, r[3] + 0.6 * k)], "A-OPISY", "#ffffff", z=25.9)
 
 
 def _cls(p):

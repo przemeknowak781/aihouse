@@ -160,6 +160,9 @@ def layer_text(model, code: str, d: float) -> str:
         dt = fmt.num(d * 1000.0, 1, strip=True) + " mm"
     if re.search(r"\b" + re.escape(dt.split()[0]) + r"\s*" + dt.split()[1] + r"\b", name):
         return name
+    # nazwa materiału kończąca się inną grubością („Tynk gipsowy maszynowy 1,5 cm”) — grubość warstwy z przegrody
+    # zastępuje ją (bez „1,5 cm 1 cm” — weryfikacja C 2.2)
+    name = re.sub(r"\s+\d+(?:[,.]\d+)?\s*(?:cm|mm)$", "", name)
     return f"{name} {dt}"
 
 
