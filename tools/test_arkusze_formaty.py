@@ -710,6 +710,54 @@ def test_widoki_nr_i_scalanie_blokow():
     assert not info["uklad"]["kolizje"] and set(info["uklad"]["znaki_centrujace"]) == set("gdlp")
 
 
+# ================================================================================================ poprawki po weryfikacji
+# (docs/30_arkusze/weryfikacja_M.md § 3, weryfikacja_C.md 2.7, 2.10)
+def test_szerokosc_rolki():
+    """[M § 3] Kandydaci „szerokość = rolka, wysokość docięta”: treść ~560×400 mm dostaje 594×H (pasy 210 + 192 +
+    192), a nie 690×420 (pasy 140 + 120 + 120 + 120 + 190); bez rolek (``rolki: []``) koszt nie jest mniejszy."""
+    v = [U.Widok("v", 400, 300, 150, 10.5)]
+    mk = lambda: [_blok_prosty(90), _uwagi(8)]          # noqa: E731
+    u = U.rozmiesc(v, mk(), 103.0, {})
+    assert (u.W, u.H) == (594.0, 440.0), (u.nazwa, u.kandydaci)
+    assert u.skladanie["pasy"] == [210.0, 192.0, 192.0], u.skladanie
+    _sprawdz_uklad(u, v, 103.0)
+    u0 = U.rozmiesc(v, mk(), 103.0, {"rolki": []})
+    assert u0.koszt >= u.koszt - 1e-9 and u0.W * u0.H >= u.W * u.H, (u0.nazwa, u.nazwa)
+    # max_wysokosc ogranicza także wysokość arkusza „bokiem na rolkę”
+    u1 = U.rozmiesc(v, mk(), 103.0, {"max_wysokosc": 420})
+    assert u1.H <= 420.0 + 1e-6, u1.nazwa
+    h = U.min_wysokosc(594.0, v, U.uklady_widokow(v), mk(), 103.0, U.opcje({}))
+    assert h is not None and h[2].ok and h[0] <= 440.0, h
+
+
+def test_bloki_odsuniete_od_ramki():
+    """[C 2.10] Bloki kolumny opisowej ≥ 3 mm od prawej ramki (szer. 177 mm, lewa krawędź jak tabliczka); tytuł
+    widoku ≥ 4 mm od znaku centrującego."""
+    v = [U.Widok("v", 300, 200, 120, 10.5)]
+    for u in (U.rozmiesc(v, [_blok_roza(), _blok_prosty(60), _uwagi(6)], 103.0, {}),
+              U.rozmiesc(v, [_blok_prosty(150), _blok_prosty(120), _uwagi(20)], 103.0, {"wysokosci": [297],
+                                                                                          "rolki": []})):
+        fx0, fy0, fx1, fy1 = U.rama(u.W, u.H)
+        for k, n, r in u.roz.prostokaty:
+            if k == "blok":
+                assert r[2] <= fx1 - U.PAD_B + 1e-6, (n, r, fx1)
+        _sprawdz_uklad(u, v, 103.0)
+    w = [U.Widok("a", 200, 150, 150, 10.5), U.Widok("b", 200, 150, 150, 10.5)]
+    g = U._grupa_z_wierszy(w, [[0, 1]])
+    W, H = 2 * (U.MARG_L + U.PAD_V) + g.w, 297.0
+    ox = W / 2.0 - (g.poz[1][0] + 1.0)                   # tytuł widoku „b” tuż za znakiem dolnym (oś W/2)
+    dx = U._tytuly_od_znakow(w, g, ox, U.MARG + U.PAD_B, U.strefy_znakow(W, H))
+    x_t = ox + g.poz[1][0] + dx[1]
+    assert dx[1] > 2.0 and x_t - (W / 2.0 + 0.35) >= U.ODST_TYTUL_ZNAK - 1e-6, (dx, x_t, W / 2.0)
+
+
+def test_siatka_formaty_niestandardowe():
+    """[C 2.7] Siatka odniesień na wszystkich arkuszach o dłuższym boku > 420 mm (także 690×297, 580×420)."""
+    for f, jest in (("690x297", True), ("580x420", True), ("A3", False), ("A2", True), ("420x477", True)):
+        sh = Sheet(f)
+        assert bool(getattr(sh, "_siatka_dol", False)) == jest, f
+
+
 def ctx_cfg_arkusze():
     from lamela.views.sheets import load_config
     return load_config(ROOT / "model" / "test" / "arkusze_testowe.yaml", _ctx().model)["arkusze"]
