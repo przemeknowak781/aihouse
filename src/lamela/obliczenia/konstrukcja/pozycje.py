@@ -1000,6 +1000,36 @@ class AnalizaKonstrukcji:
             g_dz = gl / c["rect"].intersection(g.poly).area if gl else 0.0
             gk += g_dz
             qk = float(np.mean(g.q_el["QA"][msk])) + float(np.mean(np.maximum(g.q_el["H"][msk], g.q_el["S2"][msk])))
+            psi0 = 0.7
+            a = (p.gG_sup * gk, p.gQ * psi0 * qk)
+            b = (p.xi * p.gG_sup * gk, p.gQ * qk)
+            gd, qd = a if sum(a) >= sum(b) else b
+            pc = PoleCiagle(c["lx"], c["ly"], c["brzegi"], gd, qd, p.nu_beton)
+            Mx_t, My_t = pc.mx, pc.my
+            tab_wyn = Wynik(nazwa=f"Sprawdzenie metodą tablic — pole {c['id']} ({f(c['lx'])} × {f(c['ly'])} m, brzegi {c['brzegi']})")
+            if g_dz:
+                tab_wyn.krok("Obciążenie liniowe ścianek na polu jako równomierne zastępcze [UPR — tylko porównanie]",
+                             "g_dz = Σ(g_l·l)/A", "", g_dz, "kN/m²", nd=3)
+            tab_wyn.krok("Obciążenia obliczeniowe (miarodajne z 6.10a/6.10b)", "g_d; q_d", f"g_k = {f(gk, 3)}, q_k = {f(qk, 3)} kN/m²",
+                         f"{f(gd, 3)}; {f(qd, 3)}", "kN/m²")
+            ar, ss = pc.wsp_rzecz, pc.wsp_ssss
+            tab_wyn.krok(f"Współczynniki (brzegi {c['brzegi']}; x=0, x=l_x, y=0, y=l_y; S — podparta, U — utwierdzona)",
+                         "α_x; α_y; β_x; β_y", "", f"{f(ar.alfa_x, 4)}; {f(ar.alfa_y, 4)}; {f(min(ar.beta_x), 4)}; {f(min(ar.beta_y), 4)}",
+                         zrodlo="MRS (odpowiednik tablic Czernego), ν = " + f(p.nu_beton, 1))
+            tab_wyn.krok("Współczynniki płyty swobodnie podpartej (SSSS)", "α_x⁰; α_y⁰", "", f"{f(ss.alfa_x, 4)}; {f(ss.alfa_y, 4)}")
+            tab_wyn.krok("Moment przęsłowy x", "M_x = [α_x·(g_d + q_d/2) + α_x⁰·q_d/2]·l_x²",
+                         f"[{f(ar.alfa_x, 4)}·{f(gd + qd / 2, 3)} + {f(ss.alfa_x, 4)}·{f(qd / 2, 3)}]·{f(c['lx'])}²", Mx_t, "kNm/m")
+            tab_wyn.krok("Moment przęsłowy y", "M_y = [α_y·(g_d + q_d/2) + α_y⁰·q_d/2]·l_x²",
+                         f"[{f(ar.alfa_y, 4)}·{f(gd + qd / 2, 3)} + {f(ss.alfa_y, 4)}·{f(qd / 2, 3)}]·{f(c['lx'])}²", My_t, "kNm/m")
+            mxp = min(pc.mx_podp)
+            myp = min(pc.my_podp)
+            if mxp < 0 or myp < 0:
+                tab_wyn.krok("Momenty podporowe (utwierdzenie, g_d + q_d)", "M_x,p; M_y,p", "", f"{f(mxp, 2)}; {f(myp, 2)}", "kNm/m")
+            tab_wyn.krok("Porównanie z MES (M_x; M_y dół, poza narożami)", "M_MES/M_tabl", "",
+                         f"{f(Mx / Mx_t if Mx_t else 0, 2)}; {f(My / My_t if My_t else 0, 2)}")
+            tab_wyn.krok("Przyjęto do wymiarowania", "M_Ed = max(M_MES; M_tabl)", "", f"{f(max(Mx, Mx_t), 2)}; {f(max(My, My_t), 2)}", "kNm/m")
+            Mgx = min(Mgx, mxp)
+            Mgy = min(Mgy, myp)
         MxD = max(Mx, Mx_t or 0)
         MyD = max(My, My_t or 0)
         smax = zelbet.smax_plyta(h, True, True)
