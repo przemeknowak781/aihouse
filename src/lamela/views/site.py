@@ -941,7 +941,7 @@ def view_uzbrojenie(ctx, spec, scale, opts):
     k = vp.k
     s = _site(ctx, opts)
     used = set()
-    wb = util_window(s, opts)
+    wb = detail_window(s, opts, 2.5)
     win = box(*wb)
     lab = D.Labeler(vp, bounds=win)
     K = koordynacja(s, opts.get("odleglosci_min"), opts.get("retencja_min"))
@@ -1020,6 +1020,91 @@ def _dim_between(lab, ga, gb, a, b):
     D.place_dim(lab, (a.x, a.y), (b.x, b.y), on_a=ga, on_b=gb, span=4.0, step=0.25)
 
 
+def _tab_przylacza(s):
+    rows = []
+    for x in [q for q in s.sieci if not q.istn]:
+        L = x.geom.length
+        rows.append([x.lit, BRANZE.get(x.branza, ("", x.branza))[1].split(" / ")[-1], D.short_desc(x.opis, 30),
+                     mm(L), mm(float(x.dl)) if x.dl is not None else "—"])
+    return dict(title="SIECI I PRZYŁĄCZA PROJEKTOWANE", cols=[("Ozn.", 0), ("Sieć", 0), ("Opis", 0), ("L [m]", 0),
+                                                               ("L model [m]", 0)],
+                rows=rows, align=["center", "left", "left", "right", "right"], max_w_mm=150.0,
+                notes=["L — długość trasy w rzucie (z częścią pod budynkiem, linia kreskowa); średnice, spadki i "
+                       f"rzędne dna przewodów {D_TODO} (RPB § 15 ust. 2 pkt 11 — brak w modelu)."])
+
+
+def _tab_koord(K):
+    rows = []
+    for r in K["pary"]:
+        st = "TAK" if r["ok"] else ("warunk." if r.get("warunkowo") else "NIE")
+        nm = f"{r['a'].lit} – {r['b'].lit}" + (" (istn.)" if r["b"].istn else "")
+        rows.append([nm, mm(r["d"]), mm(r["req"]), str(r["src"]).replace(" [SPRAWDŹ]", "*"), st])
+    for r in K["drzewa"]:
+        rows.append([f"{r['a'].lit} – {r['t']['id']} (pień)", mm(r["d"]), mm(r["req"]), "od pnia*",
+                     "TAK" if r["ok"] else "NIE"])
+    if not rows:
+        rows.append(["—", "", "", "brak zbliżeń < 3 m", ""])
+    return dict(title="KOORDYNACJA — ODLEGŁOŚCI POZIOME MIĘDZY SIECIAMI",
+                cols=[("Para sieci", 0), ("d [m]", 0), ("min [m]", 0), ("Źródło wymagania", 0), ("Zgodność", 0)],
+                rows=rows, align=["left", "right", "right", "left", "center"], max_w_mm=150.0,
+                notes=["* wartości minimalne wg zasad wiedzy technicznej (N SEP-E-004, praktyka projektowa) — NIE są "
+                       "przepisem: WT § 26–28 określają tylko wymagania ogólne uzbrojenia działki; do potwierdzenia w "
+                       "warunkach przyłączenia gestorów [SPRAWDŹ]. „warunk.” — dopuszczalne przy rurach osłonowych."])
+
+
+def _tab_skrzyz(K):
+    rows = [[f"S{i + 1}", f"{x['a'].lit} × {x['b'].lit}" + (" (istn.)" if x["b"].istn else ""), mm(x["p"][0]),
+             mm(x["p"][1])] for i, x in enumerate(K["skrzyzowania"])]
+    if not rows:
+        rows = [["—", "brak skrzyżowań", "", ""]]
+    return dict(title="SKRZYŻOWANIA SIECI", cols=[("Nr", 0), ("Sieci", 0), ("x [m]", 0), ("y [m]", 0)], rows=rows,
+                align=["center", "left", "right", "right"], max_w_mm=150.0,
+                notes=[f"Odstępy pionowe na skrzyżowaniach — wg warunków gestorów sieci {D_TODO} (brak rzędnych "
+                       "przewodów w modelu); kable w rurach osłonowych w obrębie skrzyżowań."])
+
+
+def _tab_kolizje(K):
+    rows = [[f"K{i + 1}", c_["typ"], c_["opis"].replace(".", ","), "warunk." if c_.get("warunkowo") else "KOLIZJA"]
+            for i, c_ in enumerate(K["kolizje"])]
+    notes = [f"K{i + 1}: {c_.get('uwaga') or c_.get('src', '')}" for i, c_ in enumerate(K["kolizje"])]
+    if not rows:
+        rows = [["—", "brak kolizji", "", ""]]
+    return dict(title="KOLIZJE I ZBLIŻENIA", cols=[("Nr", 0), ("Rodzaj", 0), ("Opis", 0), ("Ocena", 0)], rows=rows,
+                align=["center", "left", "left", "center"], notes=notes, max_w_mm=150.0)
+
+
+def _tab_retencja(K, s):
+    rows = [[r["el"], r["od"], mm(r["d"]), mm(r["req"]), "TAK" if r["ok"] else "NIE"] for r in K["retencja"]]
+    if s.pc is not None:
+        rows.append(["strefa R290", "otwory, wpusty, studzienki", "—", f"r = {mm(s.pc['r'])}",
+                     "TAK" if not K["r290"] else "NIE"])
+    return dict(title="ODLEGŁOŚCI URZĄDZEŃ RETENCJI I PC", cols=[("Element", 0), ("Od", 0), ("d [m]", 0),
+                                                                  ("min [m]", 0), ("Zgodność", 0)],
+                rows=rows, align=["left", "left", "right", "right", "center"], max_w_mm=150.0,
+                notes=["Wymagania retencji — założenia projektowe (R8 pkt 3.5, W-144/W-145; nie przepis); zbiornik "
+                       "— odległość od środka (brak wymiarów w modelu); strefa R290 — W-156 (wytyczne producenta)."])
+
+
+def _notes_uzbrojenie(s, K, zj_todo):
+    out = ["Oznaczenia sieci — kolory i litery wg mapy zasadniczej (zał. 4 rozp. w sprawie BDOT500 i mapy zasadniczej, "
+           "Dz.U. 2021 poz. 1385): w — wodociąg, ks — kanalizacja sanitarna, kd — kanalizacja deszczowa, "
+           "e — elektroenergetyczna, t — telekomunikacyjna, g — gazowa; istniejące — linia cienka (wg mapy), "
+           "projektowane — gruba; w budynku/pod płytą — kreskowa; „×” — włączenie do sieci.",
+           "Przyłącza w granicach działki nie podlegają naradzie koordynacyjnej ZUD (PGiK art. 28b); roboty w pasie "
+           "drogowym 1KDD — za zezwoleniem zarządcy drogi (u.d.p. art. 40).",
+           f"Skrzyżowań: {len(K['skrzyzowania'])}; zbliżeń poniżej wartości minimalnych: "
+           f"{sum(1 for c_ in K['kolizje'] if c_['typ'] == 'zbliżenie sieci')} (tabela „Kolizje i zbliżenia”).",
+           "Wody opadowe: rury spustowe RS → kolektory kd → zbiornik ZB → przelew do niecki chłonnej NCH; "
+           "odwodnienia liniowe OL → kolektory kd (WT § 28 ust. 2)."]
+    for o in s.odwodnienia:
+        if o["typ"] == "drenaz_opaskowy":
+            out.append(f"Drenaż opaskowy {o['id']}: {o['opis']}")
+    if s.braki:
+        out.append(f"Braki danych modelu ({len(s.braki)} poz.) — {D_TODO}; wykaz: projekt/02_PZT/BRAKI_DANYCH.md.")
+    return out
+
+
 # ================================================================================================ rejestracja
 register_view("pzt_plan", view_plan, "plan zagospodarowania", qa="PZT")
 register_view("pzt_szczegoly", view_szczegoly, "plan szczegółowy", qa="PZT")
+register_view("pzt_uzbrojenie", view_uzbrojenie, "rysunek koordynacyjny", qa="PZT")

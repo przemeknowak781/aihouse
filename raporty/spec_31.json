@@ -1,4 +1,5 @@
 {
+ "nr": 31,
  "title": "Detal 1:10 z zasadą „4 linii” i wynikiem ISO 10211 · PZT-01 po korekcie formatu · wskaźniki z jednego modułu",
  "stages": [
   [
@@ -58,6 +59,17 @@
   "Detal D-01 (cokół — ściana na płycie fundamentowej, 1:10): 4 linie ciągłości oznaczone kolorami (hydroizolacja, szczelność powietrzna, paroizolacja, izolacja cieplna), ψ_e = 0,058 W/(m·K), f_Rsi = 0,903 ≥ 0,72 — węzeł „dobry”. Do poprawy: podziałka liniowa wychodzi poza ramkę (zgłoszone).",
   "PZT-01 po korekcie: A3×3, szerszy kadr mapy z otoczeniem, tabela wskaźników z modułu lamela.wskazniki (wysokość zabudowy 10,28 m wg art. 2 pkt 30 upzp — od średniej min./maks. terenu 101,40 m n.p.m., z wywiewką kanalizacyjną), odległości od granic wg WT § 12.",
   "Krytycznie (PZT-01): opisy przy budynku w skali 1:500 gęste — szczegóły przeniesione na PZT-02 1:200 (w budowie).",
-  "Poprawki modelu po audytach — w toku (agent przepływu aktywny, bez zastojów)."
+  "Poprawki modelu po audytach — w toku (agent przepływu aktywny, bez zastojów).",
+  "NADZÓR (06:59): 5 agentów aktywnych, bez zastojów; najdłuższa bezczynność 2 min; zmiany w repo 0 min temu."
+ ],
+ "images": [
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/detale/PT-AR-D-T1_detal_test_cokol.png",
+   "caption": "Detal D-01 cokół 1:10 — 4 linie ciągłości, ψ i f_Rsi z symulacji 2D (test generatora)"
+  },
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/pzt/PZT-01_small.png",
+   "caption": "PZT-01 po korekcie formatu (A3×3) — wskaźniki z modułu lamela.wskazniki"
+  }
  ]
 }
