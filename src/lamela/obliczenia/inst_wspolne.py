@@ -604,7 +604,8 @@ def dane_z_modelu(budynek, dzialka=None, wyposazenie=None, instalacje=None, stri
                           typ=("taras" if (prz is not None and prz.typ == "taras") else "wspornik"),
                           przegroda=str(w.get("przegroda")), przegroda_nazwa=(prz.nazwa if prz else ""),
                           rzedna=wierzch, attyka_wys=None, spadek=w.get("spadek"),
-                          wpusty=[{"xy": tuple(x.get("xy")), "dn": x.get("dn"), "podgrzewany": x.get("podgrzewany")}
+                          wpusty=[{"xy": tuple(x.get("xy")), "dn": x.get("dn"), "podgrzewany": x.get("podgrzewany"),
+                                   "rzedna_pokrycia": x.get("rzedna_pokrycia")}      # rynna ukryta: dno korytka przy wylocie (wydanie)
                                   if isinstance(x, dict) else {"xy": tuple(x), "dn": None, "podgrzewany": None}
                                   for x in (w.get("wpusty") or [])],
                           przelewy=list(w.get("przelewy_awaryjne") or []), rury_spustowe=list(w.get("rury_spustowe") or []),

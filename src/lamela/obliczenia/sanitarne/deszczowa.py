@@ -204,12 +204,47 @@ def oblicz_deszczowa(dane: DaneBudynku, par: ParametryDeszcz | None = None, podl
            f"Przepustowość wpustów przy 35 mm spiętrzenia: " + ", ".join(f"DN{k} {f(v, 1)} l/s" for k, v in WPUST_Q.items()) +
            " [NZW — przyjąć z karty wyrobu wg PN-EN 1253-2]."]
     pola = []
+    # dopływy między polami (wydanie, weryfikacja V2 N-7): rura spustowa z `do` = id innego pola (lub „dach <id>”) → woda wchodzi
+    # na to pole (wpusty, przelewy, rury); `do` = id innej rury → woda płynie tylko tą rurą (trójnik, z pominięciem rynny).
+    # Przepływ w rurze = Σ po wszystkich polach, które ją zasilają (rura wspólna kilku pól liczona raz, łącznie).
+    ids = {dd.id for dd in dane.dachy if dd.pole >= 1.0}
+    q_pola = {dd.id: r * dd.pole * par.C_wymiarowanie for dd in dane.dachy if dd.pole >= 1.0}
+    rury_id = {str(rr.get("id")) for dd in dane.dachy if dd.pole >= 1.0 for rr in dd.rury_spustowe}
+    dop_pole: dict[str, float] = {}
+    q_rury: dict[str, float] = {}
+    for dd in dane.dachy:
+        if dd.id not in ids or not dd.rury_spustowe:
+            continue
+        for rr in dd.rury_spustowe:
+            q_rury[str(rr.get("id"))] = q_rury.get(str(rr.get("id")), 0.0) + q_pola[dd.id] / len(dd.rury_spustowe)
+    for _ in range(3):                                   # kaskady (PL-3 → rura → pole niżej) — kilka przejść
+        dop_pole = {}
+        for dd in dane.dachy:
+            if dd.id not in ids or not dd.rury_spustowe:
+                continue
+            for rr in dd.rury_spustowe:
+                cel = str(rr.get("do") or "").replace("dach ", "").strip()
+                qr = q_pola[dd.id] / len(dd.rury_spustowe) + dop_pole.get(dd.id, 0.0) / len(dd.rury_spustowe)
+                if cel in ids and cel != dd.id:
+                    dop_pole[cel] = dop_pole.get(cel, 0.0) + qr
+                elif cel in rury_id:
+                    q_rury[cel] = q_rury.get(cel, 0.0)
+        # rury zasilane rurą z innego pola (trójnik)
+    for dd in dane.dachy:
+        if dd.id not in ids:
+            continue
+        for rr in dd.rury_spustowe:
+            cel = str(rr.get("do") or "").strip()
+            if cel in rury_id:
+                q_rury[cel] = q_rury.get(cel, 0.0) + q_pola[dd.id] / len(dd.rury_spustowe)
     for dd in dane.dachy:
         if dd.pole < 1.0:
             continue
         A = dd.pole
         psi = psi_tab.get(dd.typ, 0.95)
-        Q = r * A * par.C_wymiarowanie
+        Q_wl = r * A * par.C_wymiarowanie
+        Q_dop = dop_pole.get(dd.id, 0.0)
+        Q = Q_wl + Q_dop
         wp = list(dd.wpusty)
         uw = []
         if not wp:
@@ -224,7 +259,7 @@ def oblicz_deszczowa(dane: DaneBudynku, par: ParametryDeszcz | None = None, podl
         sp = float(dd.spadek) if dd.spadek is not None else None
         dh = (sp if sp else spadek_min) * L_spl
         # przelewy awaryjne
-        Q_aw = par.F_R * r * A * par.C_wymiarowanie
+        Q_aw = par.F_R * Q
         prz = list(dd.przelewy)
         h_dop = par.wywiniecie_hydroiz - par.rezerwa_wywiniecia - par.h0_przelewu
         at = dd.attyka_wys
@@ -286,7 +321,7 @@ def oblicz_deszczowa(dane: DaneBudynku, par: ParametryDeszcz | None = None, podl
             di = dict(RURY_SPUSTOWE).get(dn, dn - 4.0)
             qcap = przepustowosc_rury_spustowej(di)
             n_obsl = max(1, sum(1 for x in rs if True))
-            q_r = Q / n_obsl
+            q_r = q_rury.get(str(rr.get("id")), Q / n_obsl) if not rr.get("propozycja") else Q / n_obsl
             rury.append({**rr, "d_i": di, "Q_RWP": qcap, "Q": q_r})
             war.append(Warunek(f"Rura spustowa {rr.get('id')}: Q ≤ Q_RWP(DN{dn}, f = 0,33)", q_r, "<=", qcap, "l/s",
                                "PN-EN 12056-3 (rury spustowe) [NZW]", "W-142"))
@@ -300,6 +335,11 @@ def oblicz_deszczowa(dane: DaneBudynku, par: ParametryDeszcz | None = None, podl
         if dd.typ in ("plaski", "zielony") and not podg:
             uw.append("wpusty: rozważyć podgrzewanie (wpust w strefie zacienionej / odpływ przez przestrzeń nieogrzewaną) [ZAŁ]")
         war.append(Warunek(f"Pole {dd.id}: przepustowość wpustów ≥ Q", Qw, ">=", Q, "l/s", "PN-EN 12056-3 p. 6", "W-142"))
+        if Q_dop > 0:
+            uw.append(f"dopływ z innych pól (rury spustowe z `do` = {dd.id}): {f(Q_dop, 2)} l/s — wliczony do Q, Q_aw i rur")
+        if dd.typ in ("taras", "wspornik") and prz and not any(p.get("propozycja") for p in prz):
+            war.append(Warunek(f"Pole {dd.id}: przelewy awaryjne rynny (Q_przel ≥ F_R·Q)", Qp, ">=", Q_aw, "l/s",
+                               "PN-EN 12056-3 p. 7, tabl. 2 [NZW]; brief §9 pkt 3", "W-142"))
         if dd.typ in ("plaski", "zielony"):
             war.append(Warunek(f"Pole {dd.id}: spadek połaci", sp if sp is not None else 0.0, ">=", spadek_min, "",
                                wym_zrodlo("wodkan", "spadek_dachu_min"), "W-142", nd=3,

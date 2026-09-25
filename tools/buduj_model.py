@@ -846,22 +846,51 @@ _ODW = {
               "rury_spustowe": [_RS("RS4", (9.20, y4 + EXT + 0.06), "zbiornik", "wspólna z D3 (pion zewn. na elewacji pn., 0,20 m na zach. "
                                     "od daszka); łącznik DN70 w podsufitce daszka", dn=100)]},
     "PL-2": {"odwodnienie": {"typ": "rynna_ukryta", "opis": _RYNNA + "; rynna pd. i pas wsch. → wylot NE (spływ na D4), rynna zach. → wylot NW; "
-                             "przyjmuje wodę z PL-3 (rury w szczelinie za lamelami)"},
+                             "rury PL-3 (RS11/RS12) przechodzą przez płytę w tulejach i łączą się trójnikiem z RS10/RS7 — rynna PL-2 odbiera "
+                             "wyłącznie własną wodę (wydanie, V2 N-7)"},
              "wpusty": [{"xy": [12.50, 5.30], "dn": 70, "podgrzewany": True, "opis": "wylot NE (pas wsch. 0,30 m)"},
                         {"xy": [-2.30, 5.30], "dn": 70, "podgrzewany": True, "opis": "wylot NW (pas zach.)"}],
              "rury_spustowe": [_RS("RS10", (xE + EXT + 0.06, 5.30), "dach D4", "ściana wsch. bryły B (P1), z = +5,85 → +3,40, wylot "
                                    "z kolanem na opaskę żwirową dachu D4 (WP5/WP6 — zapas przepustowości)"),
                                _RS("RS7", (-EXT - 0.06, 5.25), "zbiornik", "łącznik w podsufitce PS-A do ściany P1, dalej jak PL-E", od=1)]},
-    "PL-3": {"odwodnienie": {"typ": "rynna_ukryta", "opis": _RYNNA + "; wyloty NE/NW → rury DN70 w szczelinie za lamelami LAM-E / LAM-W "
-                             "do rynny PL-2"},
+    "PL-3": {"odwodnienie": {"typ": "rynna_ukryta", "opis": _RYNNA + "; wyloty NE/NW → rury DN70 w szczelinie za lamelami LAM-E / LAM-W, "
+                             "przez PL-2 (tuleja) do RS10 / RS7"},
              "wpusty": [{"xy": [12.50, 5.30], "dn": 70, "podgrzewany": True, "opis": "wylot NE"},
                         {"xy": [-2.30, 5.30], "dn": 70, "podgrzewany": True, "opis": "wylot NW"}],
-             "rury_spustowe": [_RS("RS11", (xE + EXT + 0.08, 5.20), "PL-2", "w szczelinie za lamelami LAM-E, +8,98 → +6,15", dn=70),
-                               _RS("RS12", (X2o - 0.08, 5.20), "PL-2", "w szczelinie za lamelami LAM-W, +8,98 → +6,15", dn=70, od=1)]},
+             "rury_spustowe": [_RS("RS11", (xE + EXT + 0.08, 5.20), "RS10", "w szczelinie za lamelami LAM-E, +8,98 → +6,15, przez PL-2 w tulei, trójnik do RS10", dn=70),
+                               _RS("RS12", (X2o - 0.08, 5.20), "RS7", "w szczelinie za lamelami LAM-W, +8,98 → +6,15, przez PL-2 w tulei, w pustce PS-A do RS7",
+                                   dn=70, od=1)]},
     "PL-D": {"odwodnienie": {"typ": "rynna_ukryta", "opis": _RYNNA + "; spadek do wylotu W — linia kapania NIE nad jednostką PC"},
              "wpusty": [{"xy": [13.90, -1.20], "dn": 70, "podgrzewany": True, "opis": "wylot rynny linii D (W)"}],
              "rury_spustowe": [_RS("RS8", (13.70, -EXT - 0.06), "zbiornik", "wspólna z PL-E")]},
 }
+# ---- wydanie (weryfikacja V2 N-7; brief §9 pkt 3; W-142): PRZELEW AWARYJNY każdej rynny ukrytej — obniżenie blendy czołowej (rzygacz
+#      0,15 × 0,05 m z okapnikiem) z dnem na krawędzi płyty przy czole (= górna krawędź korytka): przy zatkanym wylocie woda przelewa się
+#      przed czoło, NIE cofa się na płytę pod ścianę i próg (płyta 2 % ku czołu — krawędź przy ścianie wyżej o 0,02·L; wywinięcie przy
+#      ścianie ≥ 0,15 m); przelewy przy wylotach i na końcach biegów rynien. Pokrycie przy wpuście = dno korytka przy wylocie.
+H_RYNNY = 0.10                         # głębokość korytka pod krawędzią płyty [m]
+F_R_RYNNY, R_DESZCZ = 2.0, 0.046       # PN-EN 12056-3 tabl. 2 (ryzyko przecieku do budynku) [NZW]; r [l/(s·m²)] — W-142
+_czolo = lambda z, L: r(z - 0.02 * L, 3)   # noqa: E731 — rzędna krawędzi płyty przy czole (spadek 2 % od budynku)
+_RYN = {   # płyta: (wierzch przy ścianie, przelewy [(x, y, strona blendy, L wysunięcia)], L wysunięcia przy wylotach (kolejność wpustów))
+    "PL-E": (Z_OKAP_E[1], [(13.55, -1.30, "S", 1.00), (-1.55, -1.30, "S", 1.50), (-1.80, 4.85, "W", 1.50)], [1.00, 1.50]),
+    "PL-DA": (Z_ST1, [(9.65, 10.35, "N", 1.30), (11.45, 10.35, "N", 1.30)], [1.30]),
+    "PL-2": (Z_OKAP_2[1], [(12.60, 5.10, "E", 0.30), (5.00, -1.30, "S", 1.00), (-2.15, -1.30, "S", 1.10), (-2.40, 5.10, "W", 1.10)], [0.30, 1.10]),
+    "PL-3": (Z_OKAP_3[1], [(12.60, 5.10, "E", 0.30), (5.00, -1.30, "S", 1.00), (-2.15, -1.30, "S", 1.10), (-2.40, 5.10, "W", 1.10)], [0.30, 1.10]),
+    "PL-D": (Z_RAMA_D[1], [(13.85, -1.30, "S", 1.00), (xF + EXT, -0.80, "E", 1.00)], [1.00]),
+}
+for _pid, (_z, _pr, _Lw) in _RYN.items():
+    _o = _ODW[_pid]
+    for _wp, _L in zip(_o["wpusty"], _Lw):
+        _wp["rzedna_pokrycia"] = r(_czolo(_z, _L) - H_RYNNY, 3)
+    _o["przelewy_awaryjne"] = [{"xy": [r(x_), r(y_)], "sciana_attyki": sc_, "typ": "rzygacz_w_blendzie", "szer": 0.15, "wys": 0.05,
+                                "rzedna_dna": _czolo(_z, L_), "rzedna_pokrycia": _czolo(_z, L_),
+                                "opis": f"przelew rynny ukrytej — obniżenie blendy ({sc_}) do krawędzi płyty, rzygacz z okapnikiem"}
+                               for x_, y_, sc_, L_ in _pr]
+    _o["odwodnienie"]["przelew"] = ("obniżenie blendy czołowej (rzygacz 0,15 × 0,05 m z okapnikiem) z dnem na krawędzi płyty = górna "
+                                    "krawędź korytka — przy zatkanym wylocie woda przelewa się przed czoło, nie cofa się pod ścianę/próg")
+    _o["odwodnienie"]["rzedna_wywiniecia_przy_scianie"] = r(_z + 0.15, 3)
+
+
 # ---- runda 2 — MOSTKI (REKOMENDACJE mostków, część A; WZ-04…07, WZ-16): łącznik termoizolacyjny płyt wspornikowych z modułem
 #      izolacyjnym 120 mm w warstwie ocieplenia 20 cm, λ_eq ≤ 0,08 W/(m·K) wg ETA wybranego wyrobu (WYMAGANIE — wartości do potwierdzenia
 #      ETA; W-248, W-272); płyta stropu do lica konstrukcji, łącznik w strefie izolacji (A2 K-1)
@@ -873,6 +902,8 @@ for _w in WSP:
     _o = _ODW.get(_w["id"])
     if _o:
         _w.update(_o, spadek=0.02)
+        if _w["id"] in _RYN:     # wymagana przepustowość korytka na wylot (sprawdzenie wg PN-EN 12056-3 dla wybranego systemu — PT-IS)
+            _w["odwodnienie"]["Q_rynny_min_ls"] = r(F_R_RYNNY * R_DESZCZ * Polygon(_w["obrys"]).area / len(_w["wpusty"]), 2)
     elif _w["id"] in ("PL-C1", "PL-C2"):
         _w.update(spadek=0.02, odwodnienie={"typ": "na_powierzchnie", "odbiornik": "PL-E / PL-D",
                                             "opis": "obróbka ramy C ze spadkiem 2 % od budynku, okapnik ≥ 3 cm — spływ na płytę PL-E / PL-D z rynną"})

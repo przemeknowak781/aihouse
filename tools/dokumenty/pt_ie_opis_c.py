@@ -6,6 +6,8 @@ from __future__ import annotations
 from pt_ie_dane import KAT_ZRODLA, L, DanePTIE, Opis
 from pt_is_opis_b import OPS, wstaw_raport
 
+from lamela.obliczenia.elektryka.bilans import U0
+
 FIKCJA = "[DANE PRZYKŁADOWE – FIKCYJNE]"
 
 
@@ -46,7 +48,7 @@ def rozdz_ochrona(o: Opis, D: DanePTIE):
     różnicowoprądowe I_∆n ≤ {L(_e(D, 'RCD_IDn_max'), 0)} mA w obwodach gniazd ≤ {L(_e(D, 'RCD_gniazda_In_do'), 0)} A,
     oświetlenia, łazienek i urządzeń na zewnątrz (411.3.3–411.3.4, W-181); typ AC niedopuszczalny.
     Zastosowane rodzaje: {'; '.join(f'{k} — {len(v)} {"obwód" if len(v) == 1 else "obwody" if len(v) < 5 else "obwodów"}' for k, v in rcd.items())}.
-    Połączenia wyrównawcze główne — rozdz. 8.3.
+    Połączenia wyrównawcze — rozdz. „Instalacja piorunochronna, uziom i połączenia wyrównawcze”.
 
     **Selektywność** (WT § 183 ust. 1 pkt 5): przeciążeniowa zapewniona (I_n zabezpieczenia przedlicznikowego / I_n
     obwodu ≥ 1,6); zwarciowa — częściowa, do granicy wynikającej z tabel producenta aparatów (zestawienie w obliczeniach
@@ -98,6 +100,86 @@ def rozdz_bilans(o: Opis, D: DanePTIE):
     {L(b.sep, 1)} kW [NZW]. Moc przyłączeniowa {L(b.P_przyl, 0)} kW ≤ {L(_e(D, 'grupa_przylaczeniowa_V_moc_max'), 0)} kW
     (grupa V) — do wniosku o warunki przyłączenia.
     """)
-    o.tabela([{"Faza": k, "P_s [kW]": v, "I [A]": v * 1000 / (230 * b.par.cosphi_sr)} for k, v in b.fazy.items()],
+    o.tabela([{"Faza": k, "P_s [kW]": v, "I [A]": v * 1000 / (U0 * b.par.cosphi_sr)} for k, v in b.fazy.items()],
              tytul="Podział mocy szczytowej (z DLM) na fazy", formaty={"P_s [kW]": 2, "I [A]": 1},
              uwagi=f"Asymetria (max − min)/średnia = {L(100 * b.asymetria, 1)} %; cos φ = {L(b.par.cosphi_sr, 2)}.")
+
+
+def rozdz_obliczenia(o: Opis, D: DanePTIE):
+    """11. Obliczenia — zestawienie wyników i pełne obliczenia bibliotek."""
+    ob = D.obw.obwody
+    du = max(ob, key=lambda x: x.dU_calk)
+    kr = min(ob, key=lambda x: x.I_k1 / x.I_a)
+    zaw = min(ob, key=lambda x: x.I_z - x.I_n)
+    wybor = [
+        ("bilans", "Moc szczytowa z DLM", None), ("bilans", "Prąd szczytowy", None),
+        ("bilans", "Najbardziej obciążona faza", None), ("bilans", "Moc przyłączeniowa ≤ 40 kW", None),
+        ("obwody", "WLZ: I_n", None), ("obwody", "WLZ: obciążalność", None), ("obwody", "WLZ: spadek", None),
+        ("obwody", f"{zaw.odb.id}: I_B ≤ I_n ≤ I_z", f"{zaw.odb.id}: I_B ≤ I_n ≤ I_z (najmniejszy zapas I_z − I_n)"),
+        ("obwody", f"{du.odb.id}: ∆U", f"{du.odb.id}: ∆U ZKP → odbiornik (największy spadek)"),
+        ("obwody", f"{kr.odb.id}: samoczynne", f"{kr.odb.id}: samoczynne wyłączenie (najmniejszy zapas I_k1/I_a)"),
+        ("obwody", "Prąd zwarciowy w RG", None), ("obwody", "SPD wymagany", None), ("obwody", "U_p SPD", None),
+        ("obwody", "PWP", None), ("pv", "Moc zainstalowana PV", None), ("pv", "Moc falownika", None),
+        ("pv", "U_oc,max", None), ("pv", "Spadek napięcia po stronie DC", None),
+        ("odgromowa", "klasa „zwykłe”", None), ("odgromowa", "klasa „wysokie”", None)]
+    wiersze = []
+    for mod, frag, par in wybor:
+        x = _w(D, mod, frag)
+        if x is not None:
+            wiersze.append(wiersz(x, par, miejsca=7 if mod == "odgromowa" else 2))
+    n_all = sum(len(D.warunki(k)) for k in ("bilans", "obwody", "pv", "odgromowa"))
+    o.rozdzial("Obliczenia", podstawa="§ 23 pkt 8 RPB — założenia, wyniki, dobór", nowa_strona=True)
+    o.tekst(f"""
+    Obliczenia wykonano bibliotekami `lamela.obliczenia.elektryka` na bieżącym modelu (łącznie {n_all} warunków
+    sprawdzających). Zestawienie wyników rozstrzygających — tabela poniżej; w obwodach odbiorczych pokazano obwód
+    z najmniejszym zapasem dla każdego kryterium. Pełne obliczenia z wzorami, danymi i wszystkimi warunkami — kolejne podrozdziały.
+    """)
+    o.dok.tabela_wynikow(wiersze, tytul="Zestawienie wyników sprawdzeń rozstrzygających",
+                         uwagi="Warunek niespełniony — rozwiązanie w rozdz. 1 (tabela rozwiązań) i w sprawach otwartych.")
+    o.md.append("*[Tabela wyników sprawdzeń rozstrzygających — w PDF]*")
+    for k, tyt, pod in (("bilans", "Obliczenia: bilans mocy", "§ 23 pkt 11 lit. a RPB"),
+                        ("obwody", "Obliczenia: WLZ, obwody, zabezpieczenia, spadki napięć, samoczynne wyłączenie, SPD, PWP",
+                         "PN-HD 60364-4-41, -4-43, -4-443, -5-52"),
+                        ("pv", "Obliczenia: instalacja fotowoltaiczna", "PN-HD 60364-7-712"),
+                        ("odgromowa", "Obliczenia: ocena ryzyka piorunowego, uziom", "PN-EN 62305-2")):
+        wstaw_raport(o, D.W[k].raport_md(), tytul=tyt, podstawa=pod, katalog=KAT_ZRODLA,
+                     zrodlo=f"lamela.obliczenia.elektryka.{k}")
+
+
+def rozdz_ppoz(o: Opis, D: DanePTIE):
+    """12. Dane dotyczące warunków ochrony przeciwpożarowej (§ 23 pkt 10) — PWP (WT § 183 ust. 2–4)."""
+    prog = _e(D, "PWP_kubatura_strefy_prog", 1000)
+    V = D.kubatura
+    pv = D.pv
+    skl = ", ".join(f"{k} {L(v, 2)}" for k, v in D.kubatura_skl.items())
+    o.rozdzial("Dane dotyczące warunków ochrony przeciwpożarowej",
+               podstawa="§ 23 pkt 10 RPB; WT § 183 ust. 2–4; ROPoż § 4 ust. 2 pkt 2, § 28a", nowa_strona=True)
+    o.tekst(f"""
+    **Klasyfikacja** (PAB): budynek mieszkalny jednorodzinny, kategoria zagrożenia ludzi ZL IV, grupa wysokości N;
+    jedną strefę pożarową tworzy cały budynek z garażem (WT § 226 ust. 1; W-212).
+
+    **Przeciwpożarowy wyłącznik prądu — sprawdzenie warunku WT § 183 ust. 2.** Przepis wymaga PWP „w strefach
+    pożarowych o kubaturze przekraczającej 1000 m³ lub zawierających strefy zagrożone wybuchem” (brzmienie z t.j.
+    Dz.U. 2022 poz. 1225). Kubatura strefy = kubatura brutto budynku z modelu (PN-ISO 9836; W-069):
+    V = {L(V, 2)} m³ ({skl}); próg {L(prog, 0)} m³ → warunek **{'spełniony — PWP wymagany' if V > prog else 'niespełniony — PWP nie jest wymagany przez WT'}**;
+    stref zagrożonych wybuchem brak. ROPoż § 4 ust. 2 pkt 2 wyłącza z obowiązku wyposażania obiektów w PWP
+    właścicieli budynków mieszkalnych jednorodzinnych — rozbieżność interpretacyjna (D-04). **Decyzja: PWP
+    projektuje się** (spełnia obie interpretacje, W-190).
+
+    **Rozwiązanie PWP:** przycisk w obudowie z szybką, przy wejściu głównym do budynku lub przy ZKP, oznakowany znakiem
+    „Przeciwpożarowy wyłącznik prądu” (WT § 183 ust. 3); działa na wyzwalacz aparatu głównego RG (rozłącznik
+    z wyzwalaczem wzrostowym z kontrolą ciągłości obwodu albo wyzwalaczem zanikowym [ZAŁ]) i odcina wszystkie obwody
+    budynku, w tym stronę AC falownika PV — w budynku nie ma instalacji, których funkcjonowanie jest niezbędne podczas
+    pożaru. Zadziałanie PWP nie powoduje samoczynnego załączenia innego źródła energii (WT § 183 ust. 4); falownik PV
+    wyłącza się po zaniku napięcia sieci (zabezpieczenie przed pracą wyspową). Strona DC PV pozostaje pod napięciem —
+    oznakowanie ostrzegawcze przy RG, PWP i falowniku oraz informacja dla służb ratowniczych przy ZKP.
+
+    **Pozostałe dane ppoż. w zakresie tomu:** mikroinstalacja PV {L(pv.P_kWp, 2)} kWp ≤
+    {L(_e(D, 'PV_moc_modulow_max'), 1)} kWp — bez obowiązku uzgodnienia z rzeczoznawcą ds. zabezpieczeń
+    przeciwpożarowych i zawiadomienia PSP (W-194, W-218); autonomiczne czujki dymu (PN-EN 14604) — co najmniej
+    {L(_e(D, 'czujki_dymu_min'), 0)} w lokalu (ROPoż § 28a ust. 1; Dz.U. 2024 poz. 1716), w projekcie w komunikacji
+    każdej kondygnacji i w sypialniach [ZAŁ] (W-197); czujka tlenku węgla — nie dotyczy (brak spalania paliw,
+    § 28a ust. 3); przejścia instalacji przez ściany zewnętrzne i płytę poniżej terenu gazoszczelne (W-214); osprzęt
+    nie montowany bezpośrednio na podłożu palnym bez osłony (ROPoż § 4 ust. 1 pkt 10); rozdzielnice i PWP dostępne
+    (ROPoż § 4 ust. 1 pkt 18 lit. f). Instalacje ochrony przeciwpożarowej (§ 23 pkt 7 lit. j) — nie występują.
+    """)
