@@ -93,7 +93,7 @@ class Dokument:
                  tom: tuple[int, int] | None = None, stadium: str = "PROJEKT BUDOWLANY", stadium_opis: str | None = None,
                  strona_tytulowa: bool = True, spis_tresci: bool = True, znak_wodny: bool | None = None,
                  spis_poziom: int = 2, pokaz_dzialke: bool = True, tytul_spisu: str | None = None,
-                 miejscowosc: str | None = None):
+                 miejscowosc: str | None = None, grupa_poczatkowa: str = "opisowa"):
         self.dane = dane if dane is not None else dane_obiektu()
         self.tytul = tytul
         self.czesc = czesc.upper()
@@ -123,7 +123,7 @@ class Dokument:
         self._wpisy: list[dict] = []
         self._licz = [0, 0, 0, 0, 0]
         self._przes = 0
-        self._grupa = "opisowa"
+        self._grupa = grupa_poczatkowa
         self._n_tab = 0
         self._n_ilu = 0
         self._n_zal = 0
@@ -153,8 +153,8 @@ class Dokument:
         self._bloki.append(("czesc", dict(id=id_, tytul=tytul, podstawa=podstawa, nowa_strona=nowa_strona)))
         return self
 
-    def zalacznik(self, tytul: str, *, podstawa: str | None = None, nowa_strona: bool = True):
-        """Numerowany załącznik (element ZL): „Załącznik nr N. tytuł”; numeracja rozdziałów od 1 w załączniku."""
+    def _zalacznik_wpis(self, tytul: str) -> tuple[str, str]:
+        """Rejestruje załącznik w spisie (bez nagłówka) — zwraca (id kotwicy, „Załącznik nr N.”)."""
         self._grupa = "zalaczniki"
         self._n_zal += 1
         self._licz = [0, 0, 0, 0, 0]
@@ -162,6 +162,11 @@ class Dokument:
         id_ = self._nowe_id("zal")
         numer = f"Załącznik nr {self._n_zal}."
         self._wpis(id_, tytul, 1, numer)
+        return id_, numer
+
+    def zalacznik(self, tytul: str, *, podstawa: str | None = None, nowa_strona: bool = True):
+        """Numerowany załącznik (element ZL): „Załącznik nr N. tytuł”; numeracja rozdziałów od 1 w załączniku."""
+        id_, numer = self._zalacznik_wpis(tytul)
         self._bloki.append(("naglowek", dict(id=id_, tag="h1", klasa="zal", numer=numer, tytul=tytul,
                                               podstawa=podstawa, nowa_strona=nowa_strona)))
         return self
@@ -424,12 +429,16 @@ class Dokument:
 
     # ------------------------------------------------------------------------------------------ bloki formalne
     def _osw_w_spisie(self, id_, tytul, w_spisie):
-        if w_spisie:
-            g = self._grupa
-            if g == "opisowa" and not any(b[0] == "czesc" for b in self._bloki):
-                self._grupa = "dolaczone"
+        """Oświadczenia przed częścią opisową trafiają do grupy „Dokumenty dołączone” spisu treści."""
+        if not w_spisie:
+            return
+        g = self._grupa
+        if g == "opisowa" and not any(b[0] == "czesc" for b in self._bloki):
+            self._grupa = "dolaczone"
             self._wpis(id_, tytul, 1 + self._przes)
-            self._grupa = g if g != "opisowa" or any(b[0] == "czesc" for b in self._bloki) else g
+            self._grupa = g
+        else:
+            self._wpis(id_, tytul, 1 + self._przes)
 
     def oswiadczenie_projektanta(self, *, projektant: Projektant | None = None, osoby: list | None = None,
                                  techniczny: bool | None = None, art102a: bool = True, pnb: str | None = None,
@@ -448,15 +457,16 @@ class Dokument:
 
     def oswiadczenie_sieci_cieplowniczej(self, *, projektant: Projektant | None = None, wariant: str = "brak_sieci",
                                          zrodlo_ciepla: str | None = None, uzasadnienie: str | None = None,
-                                         w_spisie: bool = True):
+                                         w_spisie: bool = True, zalacznik: bool | str = False):
         """Oświadczenie projektanta instalacji sanitarnych o możliwości podłączenia do sieci ciepłowniczej
         (art. 33 ust. 2 pkt 10 PB, art. 7b Prawa energetycznego) z klauzulą o odpowiedzialności karnej.
         ``wariant``: 'brak_sieci' | 'zrodlo_indywidualne' | 'przylaczenie'."""
         from .bloki import kontekst_oswiadczenia_sieci
         o = kontekst_oswiadczenia_sieci(self, projektant=projektant, wariant=wariant, zrodlo_ciepla=zrodlo_ciepla,
-                                        uzasadnienie=uzasadnienie)
-        self._osw_w_spisie(o["id"], "Oświadczenie projektanta dotyczące sieci ciepłowniczej (art. 33 ust. 2 pkt 10 PB)",
-                           w_spisie)
+                                        uzasadnienie=uzasadnienie, zalacznik=zalacznik)
+        if not zalacznik:
+            self._osw_w_spisie(o["id"], "Oświadczenie projektanta dotyczące sieci ciepłowniczej "
+                                        "(art. 33 ust. 2 pkt 10 PB)", w_spisie)
         self._bloki.append(("oswiadczenie_sieci", o))
         return self
 
@@ -560,7 +570,7 @@ class Dokument:
                 e["strona"] = "rys."
             else:
                 e["href"] = "#" + w["id"]
-                s = strones = strony.get(w["id"])
+                s = strony.get(w["id"])
                 e["strona"] = str(s) if s else ""
             out.append(e)
         return out

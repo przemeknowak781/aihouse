@@ -225,12 +225,14 @@ def dodaj_informacje_bioz(dok, *, tresc=None, projektant=None, zagrozenia=None, 
     t.update(tresc or {})
     p = projektant or next((x for x in dok.dane.get("projektanci", []) if x.branza == "AR"), Projektant("AR"))
     tytul = "Informacja dotycząca bezpieczeństwa i ochrony zdrowia (informacja BIOZ)"
+    numer = None
     if jako_zalacznik:
         id_, numer = dok._zalacznik_wpis(tytul)
     else:
         id_ = dok._nowe_id("bioz")
         dok._wpis(id_, tytul, 1 + dok._przes)
-    dok._bloki.append(("bioz_tytulowa", dict(id=id_, projektant=_proj_dict(p), data=data_slownie(dok.data),
+    dok._bloki.append(("bioz_tytulowa", dict(id=id_, etykieta_zal=numer.rstrip(".") if numer else None,
+                                             projektant=_proj_dict(p), data=data_slownie(dok.data),
                                              przyklad=dok.przyklad, podpis=karty_podpisow([p])[0])))
     dok.rozdzial("Zakres robót dla całego zamierzenia budowlanego oraz kolejność realizacji obiektów",
                  t[1], podstawa="§ 2 ust. 3 pkt 1")

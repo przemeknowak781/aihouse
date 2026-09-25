@@ -168,6 +168,7 @@ Postać papierowa: podpis własnoręczny w polu.</p>
 {# ================================================================================ oświadczenie o sieci ciepłowniczej (art. 33 ust. 2 pkt 10 PB) #}
 {% macro oswiadczenie_sieci(o, d) %}
 <section class="osw" id="{{ o.id }}">
+  {% if o.etykieta_zal %}<div class="zal-etykieta">{{ o.etykieta_zal }}</div>{% endif %}
   <div class="osw-miejsce">{{ o.miejscowosc }}, dnia {{ o.data }}</div>
   <div class="osw-tyt">OŚWIADCZENIE PROJEKTANTA</div>
   <div class="osw-podst">dotyczące możliwości podłączenia projektowanego obiektu budowlanego do istniejącej sieci ciepłowniczej<br>
@@ -212,12 +213,13 @@ Postać papierowa: podpis własnoręczny w polu.</p>
     obowiązujących do dnia 19 września 2026 r.<br>(art. 102a ust. 1 ustawy z dnia 7 lipca 1994 r. – Prawo budowlane,
     t.j. Dz.U. 2026 poz. 524 ze zm., w brzmieniu nadanym ustawą ogłoszoną w Dz.U. 2026 poz. 1161)</div>
   <div class="osw-tresc">
-    <p>Na podstawie art. 102a ust. 1 ustawy – Prawo budowlane <b>oświadczam, że {{ o.zakres }} dla zamierzenia budowlanego</b>:</p>
+    <p>Na podstawie art. 102a ust. 1 ustawy – Prawo budowlane <b>oświadczam, że do {{ o.zakres }}</b> dla zamierzenia
+      budowlanego:</p>
     {{ dane_zamierzenia(d) }}
-    <p><b>zostanie sporządzony zgodnie z przepisami wydanymi na podstawie art. 7 ust. 2 pkt 1 ustawy – Prawo budowlane,
-      obowiązującymi do dnia 19 września 2026 r.</b>, tj. zgodnie z rozporządzeniem Ministra Infrastruktury z dnia 12 kwietnia 2002 r.
-      w sprawie warunków technicznych, jakim powinny odpowiadać budynki i ich usytuowanie (t.j. Dz.U. 2022 poz. 1225 ze zm.),
-      i będzie dołączony do {{ o.postepowanie }}.</p>
+    <p>dołączonych do {{ o.postepowanie }}, <b>stosuję przepisy wydane na podstawie art. 7 ust. 2 pkt 1 ustawy – Prawo
+      budowlane, obowiązujące do dnia 19 września 2026 r.</b>, tj. rozporządzenie Ministra Infrastruktury z dnia
+      12 kwietnia 2002 r. w sprawie warunków technicznych, jakim powinny odpowiadać budynki i ich usytuowanie
+      (t.j. Dz.U. 2022 poz. 1225 ze zm.).</p>
     <p>Przyjmuję do wiadomości, że w związku ze złożeniem niniejszego oświadczenia projekt techniczny sporządza się zgodnie z tymi
       samymi przepisami (art. 102a ust. 2 PB), a przepisy te stosuje się do decyzji administracyjnych dotyczących całego
       zamierzenia budowlanego (art. 102a ust. 4 PB).</p>
@@ -259,6 +261,7 @@ Postać papierowa: podpis własnoręczny w polu.</p>
 {# ================================================================================ informacja BIOZ — strona tytułowa (rozp. BIOZ § 2 ust. 2) #}
 {% macro bioz_tytulowa(o, d) %}
 <section class="bioz-st" id="{{ o.id }}">
+  {% if o.etykieta_zal %}<div class="zal-etykieta">{{ o.etykieta_zal }}</div>{% endif %}
   <div class="tyt-duzy">
     <div class="l1">INFORMACJA DOTYCZĄCA<br>BEZPIECZEŃSTWA I OCHRONY ZDROWIA</div>
     <div class="l2">(informacja BIOZ)</div>
