@@ -765,7 +765,7 @@ def _normalizuj(dane, kolumny):
     except ImportError:
         pass
     dane = list(dane)
-    if dane and isinstance(dane[0], dict) and kolumny is None:
+    if kolumny is None and any(isinstance(r, dict) for r in dane):
         cols = []
         for r in dane:
             if isinstance(r, dict):

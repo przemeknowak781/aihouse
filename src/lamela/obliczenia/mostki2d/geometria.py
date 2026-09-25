@@ -372,3 +372,458 @@ def pomin_pustki_wentylowane(warstwy: Sequence[Warstwa], zewn_na_poczatku: bool 
             continue
         out.append(w)
     return out if zewn_na_poczatku else list(reversed(out))
+
+
+# ==================================================================================================
+# Budowa typowych węzłów (przekroje 2D) z przegród modelu
+# ==================================================================================================
+def _temperatury(theta_i: float | None, theta_e: float | None) -> tuple[float, float]:
+    """θ_i, θ_e: argumenty albo wymagania.yaml (W-150: +20 °C / −18 °C)."""
+    ti, te = 20.0, -18.0
+    try:
+        from ..wspolne import wym
+        ti = float(wym("ogrzewanie", "theta_i_pokoj_hol_kuchnia", 20.0))
+        te = float(wym("ogrzewanie", "theta_e", -18.0))
+    except Exception:   # pragma: no cover — biblioteka wspólna niedostępna
+        pass
+    return (ti if theta_i is None else theta_i), (te if theta_e is None else theta_e)
+
+
+def _nas(nazwa: str, theta: float, rodzaj: str, grupa: str | None = None, Rs=None) -> dict:
+    d: dict[str, Any] = {"nazwa": nazwa, "theta": theta, "rodzaj": rodzaj}
+    if grupa:
+        d["grupa"] = grupa
+    if Rs is not None:
+        d["Rs"] = Rs
+    return d
+
+
+def _obsz(geom, w_or_mat, nazwa: str = "") -> Obszar:
+    mat = w_or_mat.mat if isinstance(w_or_mat, Warstwa) else w_or_mat
+    return Obszar(geom, mat, nazwa or mat.nazwa)
+
+
+def _izolacja_najlepsza(warstwy: Sequence[Warstwa]) -> Material:
+    return min(warstwy, key=lambda w: w.mat.lam).mat
+
+
+def wezel_sciana_1d(warstwy: Sequence[Warstwa], H: float = 1.0, theta_i: float | None = None,
+                    theta_e: float | None = None, id: str = "SC-1D", nazwa: str | None = None) -> Wezel:
+    """Ściana warstwowa (przekrój poziomy, pas wysokości H) — test spójności (ψ ≈ 0)."""
+    ti, te = _temperatury(theta_i, theta_e)
+    ob = [_obsz(box(a, 0, b, H), w) for a, b, w in _stos(warstwy, 0.0)]
+    D = grubosc(warstwy)
+    S = S_STREFY
+    strefy = strefy_z_dopelnienia(ob, box(-S, 0, D + S, H),
+                                  [((-S / 2, H / 2), _nas("wnętrze", ti, "wewn")),
+                                   ((D + S / 2, H / 2), _nas("zewnętrze", te, "zewn"))])
+    fl = [ElementFlankujacy("ściana", ("i", "e"), H, H, warstwy=list(warstwy), Rsi=RSI_POZIOMO)]
+    return Wezel(id, nazwa or "Ściana warstwowa (1D)", "sciana", ob, strefy, fl, przekroj="poziomy",
+                 dane={"warstwy ściany": dane_warstw(warstwy)})
+
+
+def wezel_naroznik_zewnetrzny(warstwy: Sequence[Warstwa], L: float | None = None, theta_i: float | None = None,
+                              theta_e: float | None = None, id: str = "WZ-C1",
+                              nazwa: str = "Narożnik zewnętrzny ścian (rzut)") -> Wezel:
+    """Naroże zewnętrzne dwóch jednakowych ścian (rzut). Naroże wewnętrzne w (0, 0), wnętrze x < 0, y < 0.
+    Warstwy łączone „na kwadrat” (offset Czebyszewa) — ETICS ciągły, konstrukcja w L."""
+    ti, te = _temperatury(theta_i, theta_e)
+    D = grubosc(warstwy)
+    L = L or (odl_ciecia(D) + D)
+    ob = []
+    for a, b, w in _stos(warstwy, 0.0):
+        g = box(-L, -L, b, b).difference(box(-L - 1, -L - 1, a, a))
+        ob.append(_obsz(g, w))
+    S = S_STREFY
+    strefy = strefy_z_dopelnienia(ob, box(-L, -L, D + S, D + S),
+                                  [((-L / 2, -L / 2), _nas("wnętrze", ti, "wewn")),
+                                   ((D + S / 2, -L / 2), _nas("zewnętrze", te, "zewn"))])
+    fl = [ElementFlankujacy("ściana A (oś x)", ("i", "e"), L + D, L, warstwy=list(warstwy)),
+          ElementFlankujacy("ściana B (oś y)", ("i", "e"), L + D, L, warstwy=list(warstwy))]
+    return Wezel(id, nazwa, "naroze", ob, strefy, fl, przekroj="poziomy",
+                 punkty={"naroże wewn.": (0.0, 0.0), "naroże zewn.": (D, D)},
+                 widok=(-min(L, 1.2), -min(L, 1.2), D + 0.1, D + 0.1), psi_domyslne="C_naroze_zewn",
+                 opis="Rzut naroża zewnętrznego; płaszczyzny odcięcia adiabatyczne w odległości L od naroża wewn.",
+                 dane={"warstwy ściany": dane_warstw(warstwy), "L odcięcia [m]": L})
+
+
+def wezel_wspornik(warstwy_sciany: Sequence[Warstwa], t_plyty: float = 0.20, mat_plyty: Material | None = None,
+                   warstwy_podlogi: Sequence[Warstwa] = (), warstwy_sufitu: Sequence[Warstwa] = (),
+                   wysieg: float = 1.5, lacznik: Material | None = LACZNIK_PRZYKLAD, d_lacznika: float = 0.08,
+                   H: float | None = None, L_in: float | None = None, theta_i: float | None = None,
+                   theta_e: float | None = None, id: str = "WZ-B1", nazwa: str | None = None) -> Wezel:
+    """Ściana warstwowa + strop przechodzący przez ścianę (przekrój pionowy). wysieg > 0 — płyta wspornikowa
+    (balkon/taras/okap) wysunięta poza lico elewacji, w płaszczyźnie izolacji łącznik termoizolacyjny (λ_eq,
+    grubość d_lacznika) albo płyta ciągła (lacznik=None); wysieg = 0 — strop pośredni z wieńcem (izolacja ciągła).
+    Wnętrze x < 0 (lico wewn. ściany x = 0), płyta konstrukcyjna y ∈ [0, t_plyty]."""
+    ti, te = _temperatury(theta_i, theta_e)
+    mat_plyty = mat_plyty or MATERIALY_DOMYSLNE["ZB"]
+    st = _stos(warstwy_sciany, 0.0)
+    ks = indeks_konstrukcyjnej(warstwy_sciany)
+    x_s0, x_s1 = st[ks][0], st[ks][1]
+    x_out = st[-1][1]
+    t = t_plyty
+    t_pod, t_suf = grubosc(warstwy_podlogi), grubosc(warstwy_sufitu)
+    H = H or odl_ciecia(x_out)
+    L_in = L_in or odl_ciecia(t)
+    x_end = x_s1 if wysieg <= 0 else x_out + wysieg
+    ob: list[Obszar] = []
+    for k, (a, b, w) in enumerate(st):
+        if k <= ks:
+            ob.append(_obsz(box(a, -H, b, 0.0), w))
+            ob.append(_obsz(box(a, t, b, t + H), w))
+        else:
+            ob.append(_obsz(box(a, -H, b, t + H), w))
+    for y0, y1, w in _stos(warstwy_podlogi, t + t_pod, -1):
+        ob.append(_obsz(box(-L_in, y0, 0.0, y1), w))
+    for y0, y1, w in _stos(warstwy_sufitu, 0.0, -1):
+        ob.append(_obsz(box(-L_in, y0, 0.0, y1), w))
+    ob.append(_obsz(box(-L_in, 0.0, x_end, t), mat_plyty, "płyta stropu" + (" / wspornik" if wysieg > 0 else "")))
+    if wysieg > 0 and lacznik is not None:
+        ob.append(_obsz(box(x_s1, 0.0, x_s1 + d_lacznika, t), lacznik))
+    S = S_STREFY
+    ramka = box(-L_in, -H, max(x_end, x_out) + S, t + H)
+    strefy = strefy_z_dopelnienia(ob, ramka, [
+        ((-L_in / 2, -H / 2), _nas("pomieszczenie dolne", ti, "wewn")),
+        ((-L_in / 2, t + t_pod + (H - t_pod) / 2), _nas("pomieszczenie górne", ti, "wewn")),
+        ((x_out + S / 2, -H / 2), _nas("zewnętrze", te, "zewn"))])
+    fl = [ElementFlankujacy("ściana dolna", ("i", "e"), H + t / 2, H - t_suf, warstwy=list(warstwy_sciany)),
+          ElementFlankujacy("ściana górna", ("i", "e"), H + t / 2, H - t_pod, warstwy=list(warstwy_sciany))]
+    if wysieg > 0:
+        typ, psi_d = "wspornik", ("B_balkon" if lacznik is None else None)
+        nazwa = nazwa or ("Płyta wspornikowa " + ("z łącznikiem termoizolacyjnym" if lacznik else "ciągła (bez przerwy)"))
+    else:
+        typ, psi_d = "strop_posredni", "IF_strop"
+        nazwa = nazwa or "Strop pośredni z wieńcem w ścianie z ETICS"
+    psi_dekl = None
+    if wysieg > 0 and lacznik is LACZNIK_PRZYKLAD:
+        try:
+            from ..wspolne import wyrob
+            wr = wyrob("laczniki", "wspornik_termiczny")
+            if wr:
+                psi_dekl = {"psi": wr.get("psi"), "f_Rsi": wr.get("f_Rsi"),
+                            "zrodlo": f"{wr.get('status', '')} {wr.get('zrodlo', '')}".strip()}
+        except Exception:   # pragma: no cover
+            pass
+    dane = {"warstwy ściany": dane_warstw(warstwy_sciany), "płyta": f"{mat_plyty.kod}, t = {t} m, wysięg = {wysieg} m",
+            "warstwy podłogi": dane_warstw(warstwy_podlogi), "warstwy sufitu": dane_warstw(warstwy_sufitu)}
+    if wysieg > 0:
+        dane["łącznik"] = (f"{lacznik.nazwa}: λ_eq = {lacznik.lam} W/(m·K), d = {d_lacznika} m — {lacznik.zrodlo}"
+                           if lacznik else "brak (płyta ciągła przez izolację)")
+    return Wezel(id, nazwa, typ, ob, strefy, fl, przekroj="pionowy",
+                 punkty={"naroże sufit": (0.0, -t_suf), "naroże podłoga": (0.0, t + t_pod)},
+                 widok=(-min(L_in, 1.0), -min(H, 1.0), max(x_end, x_out) + 0.1, t + min(H, 1.0)),
+                 psi_domyslne=psi_d, psi_deklarowane=psi_dekl, dane=dane,
+                 opis="Przekrój pionowy; pomieszczenia nad i pod stropem ogrzewane (grupa „i”).")
+
+
+def wezel_attyka(warstwy_sciany: Sequence[Warstwa], warstwy_dachu: Sequence[Warstwa], h_nad_pokryciem: float = 0.30,
+                 izol_attyki: Material | None = None, d_izol_wewn: float = 0.10, d_izol_gora: float = 0.05,
+                 mat_attyki: Material | None = None, blok_attyki: tuple[Material, float] | None = None,
+                 H: float | None = None, L: float | None = None, theta_i: float | None = None,
+                 theta_e: float | None = None, id: str = "WZ-R1",
+                 nazwa: str = "Attyka stropodachu — ściana zewnętrzna") -> Wezel:
+    """Attyka (przekrój pionowy): ściana warstwowa, płyta stropodachu na ścianie, warstwy dachu nad płytą, attyka
+    (konstrukcja ściany ponad płytę) obłożona izolacją od wewnątrz (d_izol_wewn), od góry (d_izol_gora) i od zewnątrz
+    (ETICS ściany). blok_attyki — opcjonalny blok termiczny u podstawy attyki (materiał, wysokość)."""
+    ti, te = _temperatury(theta_i, theta_e)
+    st = _stos(warstwy_sciany, 0.0)
+    ks = indeks_konstrukcyjnej(warstwy_sciany)
+    x_s0, x_s1 = st[ks][0], st[ks][1]
+    x_out = st[-1][1]
+    kd = indeks_konstrukcyjnej(warstwy_dachu)
+    nad, plyta, pod = list(warstwy_dachu[:kd]), warstwy_dachu[kd], list(warstwy_dachu[kd + 1:])
+    t = plyta.d
+    t_suf = grubosc(pod)
+    y_top = t + grubosc(nad)
+    y_cap = y_top + h_nad_pokryciem
+    y_p = y_cap - d_izol_gora
+    izol = izol_attyki or (_izolacja_najlepsza(nad) if nad else MATERIALY_DOMYSLNE["XPS"])
+    mat_att = mat_attyki or warstwy_sciany[ks].mat
+    H = H or odl_ciecia(x_out)
+    L = L or odl_ciecia(grubosc(warstwy_dachu))
+    ob: list[Obszar] = []
+    for k, (a, b, w) in enumerate(st):
+        ob.append(_obsz(box(a, -H, b, 0.0 if k <= ks else y_p), w))
+    for y0, y1, w in _stos(pod, 0.0, -1):
+        ob.append(_obsz(box(-L, y0, 0.0, y1), w))
+    ob.append(_obsz(box(-L, 0.0, x_s1, t), plyta, "płyta stropodachu"))
+    for y0, y1, w in _stos(list(reversed(nad)), t, +1):
+        ob.append(_obsz(box(-L, y0, x_s0 - d_izol_wewn, y1), w))
+    ob.append(_obsz(box(x_s0, t, x_s1, y_p), mat_att, "attyka"))
+    if blok_attyki:
+        ob.append(_obsz(box(x_s0, t, x_s1, t + blok_attyki[1]), blok_attyki[0], "blok termiczny attyki"))
+    ob.append(_obsz(box(x_s0 - d_izol_wewn, t, x_s0, y_p), izol, "izolacja attyki (wewn.)"))
+    ob.append(_obsz(box(x_s0 - d_izol_wewn, y_p, x_out, y_cap), izol, "izolacja korony attyki"))
+    S = S_STREFY
+    strefy = strefy_z_dopelnienia(ob, box(-L, -H, x_out + S, y_cap + S), [
+        ((-L / 2, -H / 2), _nas("pomieszczenie", ti, "wewn")),
+        ((x_out + S / 2, -H / 2), _nas("zewnętrze", te, "zewn"))])
+    fl = [ElementFlankujacy("ściana", ("i", "e"), H + y_top, H - t_suf, warstwy=list(warstwy_sciany)),
+          ElementFlankujacy("stropodach", ("i", "e"), L + x_out, L, warstwy=pomin_pustki_wentylowane(warstwy_dachu),
+                            Rsi=RSI_GORA)]
+    return Wezel(id, nazwa, "attyka", ob, strefy, fl, przekroj="pionowy",
+                 punkty={"naroże sufit–ściana": (0.0, -t_suf)},
+                 widok=(-min(L, 1.0), -min(H, 1.0), x_out + 0.1, y_cap + 0.1), psi_domyslne="R_attyka",
+                 dane={"warstwy ściany": dane_warstw(warstwy_sciany), "warstwy dachu": dane_warstw(warstwy_dachu),
+                       "attyka": f"{mat_att.kod}, wys. nad pokryciem {h_nad_pokryciem} m; izolacja {izol.kod}: "
+                                 f"wewn. {d_izol_wewn} m, korona {d_izol_gora} m"
+                                 + (f"; blok termiczny {blok_attyki[0].kod} h = {blok_attyki[1]} m" if blok_attyki else "")})
+
+
+def _okno_model(rama: Obszar, szyba: Obszar, x0: float, x_cut: float, yf0: float, d_f: float, ti: float, te: float,
+                id: str) -> Wezel:
+    S = S_STREFY
+    ob = [rama, szyba]
+    strefy = strefy_z_dopelnienia(ob, box(x0, yf0 - S, x_cut, yf0 + d_f + S), [
+        ((x_cut - 0.01, yf0 - S / 2), _nas("wnętrze", ti, "wewn")),
+        ((x_cut - 0.01, yf0 + d_f + S / 2), _nas("zewnętrze", te, "zewn"))])
+    return Wezel(id + "-okno", "Okno bez ściany (rama + szyba) — L_2D odniesienia", "okno", ob, strefy,
+                 przekroj="poziomy")
+
+
+def wezel_oscieze_okna(warstwy_sciany: Sequence[Warstwa], U_f: float = 0.95, b_f: float = 0.115, d_f: float = 0.082,
+                       U_g: float = 0.50, d_g: float = 0.044, polozenie: str = "w_izolacji", x0: float | None = None,
+                       zaklad_izolacji: float = 0.03, szczelina: float = 0.015, L: float | None = None,
+                       L_g: float = 0.25, theta_i: float | None = None, theta_e: float | None = None,
+                       id: str = "WZ-W1", nazwa: str | None = None, zrodlo_okna: str = "") -> Wezel:
+    """Ościeże okna (rzut). Oś x wzdłuż ściany (mur do x = 0, otwór x > 0), oś y w poprzek (lico wewn. y = 0).
+    polozenie: 'w_izolacji' — rama przed licem muru w warstwie ocieplenia (ciepły montaż na konsolach, x0 = −0,03
+    — rama zachodzi na mur); 'w_murze' — rama w otworze muru, lico zewn. ramy w licu muru, szczelina z pianką.
+    Izolacja ościeża zachodzi na ramę o `zaklad_izolacji`. ψ_inst = L_2D − U_ściany·l − L_2D,okna (okno bez ściany)."""
+    ti, te = _temperatury(theta_i, theta_e)
+    st = _stos(warstwy_sciany, 0.0)
+    ks = indeks_konstrukcyjnej(warstwy_sciany)
+    y_s0, y_s1 = st[ks][0], st[ks][1]
+    D = st[-1][1]
+    L = L or odl_ciecia(D)
+    m_r = material_rama(U_f, d_f, zrodlo=zrodlo_okna)
+    m_g = material_szyba(U_g, d_g, zrodlo=zrodlo_okna)
+    ob: list[Obszar] = []
+    if polozenie == "w_izolacji":
+        x0 = -0.03 if x0 is None else x0
+        yf0 = y_s1
+    elif polozenie == "w_murze":
+        x0 = szczelina if x0 is None else x0
+        yf0 = y_s1 - d_f
+    else:
+        raise ValueError(polozenie)
+    rama_g = box(x0, yf0, x0 + b_f, yf0 + d_f)
+    yg0 = yf0 + (d_f - d_g) / 2
+    x_cut = x0 + b_f + L_g
+    for k, (a, b, w) in enumerate(st):
+        if k < ks:
+            ob.append(_obsz(box(-L, a, 0.0, b), w))
+        elif k == ks:
+            ob.append(_obsz(box(-L, a, 0.0, b), w))
+        else:
+            ob.append(_obsz(box(-L, a, x0 + zaklad_izolacji, b).difference(rama_g), w))
+    if ks > 0:   # tynk wewn. na ościeżu
+        ob.append(_obsz(box(0.0, 0.0, warstwy_sciany[0].d, yf0), warstwy_sciany[0], "tynk ościeża"))
+    if polozenie == "w_murze" and x0 > 0:
+        ob.append(_obsz(box(0.0, yf0, x0, y_s1), MATERIALY_DOMYSLNE["PIANKA_PU"], "szczelina — pianka PU"))
+    rama = _obsz(rama_g, m_r, "rama")
+    szyba = _obsz(box(x0 + b_f, yg0, x_cut, yg0 + d_g), m_g, "szyba")
+    ob += [rama, szyba]
+    S = S_STREFY
+    strefy = strefy_z_dopelnienia(ob, box(-L, -S, x_cut, D + S), [
+        ((-L / 2, -S / 2), _nas("wnętrze", ti, "wewn")),
+        ((-L / 2, D + S / 2), _nas("zewnętrze", te, "zewn"))])
+    okno = _okno_model(rama, szyba, x0, x_cut, yf0, d_f, ti, te, id)
+    fl = [ElementFlankujacy("ściana", ("i", "e"), L + x0, L + x0, warstwy=list(warstwy_sciany)),
+          ElementFlankujacy("okno (L_2D ramy z szybą, model bez ściany)", ("i", "e"), 1.0, 1.0, wezel_ref=okno)]
+    return Wezel(id, nazwa or f"Ościeże okna — rama {'w warstwie izolacji' if polozenie == 'w_izolacji' else 'w murze'}",
+                 "oscieze", ob, strefy, fl, przekroj="poziomy",
+                 punkty={"naroże ościeża (mur)": (0.0, 0.0), "styk rama–ościeże": (max(0.0, x0), yf0)},
+                 widok=(-0.6, -0.1, x_cut, D + 0.1), psi_domyslne="W_oscieze",
+                 dane={"warstwy ściany": dane_warstw(warstwy_sciany),
+                       "okno": f"U_f = {U_f}, b_f = {b_f} m, d_f = {d_f} m (λ_eq ramy = {m_r.lam:.4f}); "
+                               f"U_g = {U_g}, d_g = {d_g} m (λ_eq = {m_g.lam:.4f}); położenie: {polozenie}, "
+                               f"x0 = {x0} m, zakład izolacji {zaklad_izolacji} m {zrodlo_okna}"},
+                 uwagi=["Rama i szyba jako materiały zastępcze (λ_eq z U_f, U_g); ψ osadzenia liczone względem "
+                        "modelu okna bez ściany, więc uproszczenie ramy wpływa na ψ w małym stopniu. Ψ_g ramki "
+                        "dystansowej — poza zakresem (U_w wg PN-EN ISO 10077-1)."])
+
+
+def U_podlogi_13370(B: float, w: float, R_f: float, lam: float = LAMBDA_GRUNTU, Rsi: float = RSI_DOL,
+                    Rse: float = RSE) -> tuple[float, float]:
+    """U podłogi na gruncie wg PN-EN ISO 13370:2017 p. 7.2 [NZW — wzory poza próbką normy, rejestr R6-30]:
+    d_t = w + λ(R_si + R_f + R_se); d_t < B': U = 2λ/(πB' + d_t)·ln(πB'/d_t + 1); d_t ≥ B': U = λ/(0,457B' + d_t)."""
+    dt = w + lam * (Rsi + R_f + Rse)
+    if dt < B:
+        U = 2 * lam / (math.pi * B + dt) * math.log(math.pi * B / dt + 1)
+    else:
+        U = lam / (0.457 * B + dt)
+    return U, dt
+
+
+def wezel_cokol(warstwy_sciany: Sequence[Warstwa], warstwy_podlogi: Sequence[Warstwa], fundament: str = "lawa",
+                lawa: tuple[float, float, float] = (0.60, 0.30, -1.10), mat_lawy: Material | None = None,
+                sciana_fund: tuple[Material, float] | None = None, izol_obwodowa: Material | None = None,
+                hydro: tuple[Material, float] | None = None, glebokosc_izol: float | None = None,
+                y_teren: float = -0.30, h_cokolu: float = 0.30, blok_termiczny: tuple[Material, float] | None = None,
+                b: float = B_DOMYSLNE, H: float | None = None, theta_i: float | None = None,
+                theta_e: float | None = None, id: str = "WZ-GF1", nazwa: str | None = None) -> Wezel:
+    """Cokół: ściana zewnętrzna – podłoga na gruncie – fundament (ława z murem fundamentowym albo płyta fundamentowa)
+    z gruntem (λ = 2,0). Przekrój pionowy; lico wewn. ściany x = 0, posadzka ±0,00 = y 0, teren y_teren.
+    Obszar gruntu wg ISO 10211 (model 2D z podłogą): wewnątrz 0,5·b od lica zewn., na zewnątrz 2,5·b, w głąb 2,5·b
+    poniżej terenu (b — szerokość budynku; 8 m, gdy nieznana) [NZW]; płaszczyzny odcięcia w gruncie adiabatyczne.
+    ψ_g = L_2D − U_ściany·h − U_podłogi(ISO 13370, B' = b)·l_podłogi (wymiary zewn.: l = 0,5·b; wewn.: 0,5·b − w)."""
+    ti, te = _temperatury(theta_i, theta_e)
+    st = _stos(warstwy_sciany, 0.0)
+    ks = indeks_konstrukcyjnej(warstwy_sciany)
+    x_s0, x_s1 = st[ks][0], st[ks][1]
+    x_out = st[-1][1]
+    fl_st = _stos(warstwy_podlogi, 0.0, -1)
+    kf = indeks_konstrukcyjnej(warstwy_podlogi)
+    y_w0 = fl_st[kf][1]
+    y_fb = fl_st[-1][0]
+    H = H or odl_ciecia(x_out)
+    mat_lawy = mat_lawy or MATERIALY_DOMYSLNE["ZB"]
+    sciana_fund = sciana_fund or (MATERIALY_DOMYSLNE["BET_FUND"], max(0.24, x_s1 - x_s0))
+    izol = izol_obwodowa or MATERIALY_DOMYSLNE["XPS"]
+    hydro = hydro if hydro is not None else (MATERIALY_DOMYSLNE["HYDRO"], 0.004)
+    y_prz = y_teren + h_cokolu
+    x_in = x_out - 0.5 * b
+    x_pr = x_out + 2.5 * b
+    y_dol = y_teren - 2.5 * b
+    grunt = MATERIALY_DOMYSLNE["GRUNT"]
+    ob: list[Obszar] = [_obsz(box(x_in, y_dol, x_pr, y_teren), grunt, "grunt")]
+    if y_fb > y_teren:
+        ob.append(_obsz(box(x_in, y_teren, x_s1, y_fb), grunt, "grunt pod podłogą"))
+    d_fw = sciana_fund[1]
+    if fundament == "lawa":
+        b_l, h_l, spod = lawa
+        y_lt = spod + h_l
+        xc = x_s1 - d_fw / 2
+        ob.append(_obsz(box(xc - b_l / 2, spod, xc + b_l / 2, y_lt), mat_lawy, "ława fundamentowa"))
+        ob.append(_obsz(box(x_s1 - d_fw, y_lt, x_s1, y_w0), sciana_fund[0], "ściana fundamentowa"))
+        x_pod = x_s1 - d_fw
+        y_izol_dol = y_lt if glebokosc_izol is None else max(y_lt, y_teren - glebokosc_izol)
+        for k, (y0, y1, w) in enumerate(fl_st):
+            ob.append(_obsz(box(x_in, y0, x_s0 if k < kf else x_pod, y1), w))
+        opis_f = f"ława {b_l}×{h_l} m (spód {spod}), mur fundamentowy {sciana_fund[0].kod} {d_fw} m"
+    elif fundament == "plyta":
+        for k, (y0, y1, w) in enumerate(fl_st):
+            x_k = x_s0 if k < kf else (x_s1 if k == kf else x_out)
+            ob.append(_obsz(box(x_in, y0, x_k, y1), w))
+        y_izol_dol = fl_st[kf][0]          # spód płyty — izolacja pod płytą (warstwy niżej) sięga do lica zewn.
+        spod = y_fb
+        opis_f = f"płyta fundamentowa {warstwy_podlogi[kf].mat.kod} {warstwy_podlogi[kf].d} m"
+    else:
+        raise ValueError(fundament)
+    # ściana nad fundamentem
+    for k, (a, bb, w) in enumerate(st):
+        if k < ks:
+            ob.append(_obsz(box(a, 0.0, bb, H), w))
+        elif k == ks:
+            ob.append(_obsz(box(a, y_w0, bb, H), w))
+        else:
+            ob.append(_obsz(box(a, y_prz, bb, H), w))
+    if blok_termiczny:
+        ob.append(_obsz(box(x_s0, y_w0, x_s1, y_w0 + blok_termiczny[1]), blok_termiczny[0], "blok termiczny"))
+    # izolacja obwodowa + hydroizolacja (strefa cokołu i poniżej terenu)
+    d_h = hydro[1] if hydro else 0.0
+    if hydro:
+        ob.append(_obsz(box(x_s1, y_izol_dol, x_s1 + d_h, y_prz), hydro[0], "hydroizolacja pionowa"))
+    ob.append(_obsz(box(x_s1 + d_h, y_izol_dol, x_out, y_prz), izol, "izolacja obwodowa (cokół)"))
+    S = S_STREFY
+    strefy = strefy_z_dopelnienia(ob, box(x_in, y_dol, x_pr, H), [
+        ((-0.5, H / 2), _nas("pomieszczenie", ti, "wewn")),
+        ((x_out + 1.0, y_teren + (H - y_teren) / 2), _nas("zewnętrze", te, "zewn"))])
+    R_f = R_warstw(warstwy_podlogi)
+    U_fl, d_t = U_podlogi_13370(b, x_out, R_f)
+    fl = [ElementFlankujacy("ściana (od poziomu posadzki)", ("i", "e"), H, H, warstwy=list(warstwy_sciany)),
+          ElementFlankujacy(f"podłoga na gruncie (U wg ISO 13370, B' = {b} m, d_t = {d_t:.2f} m)", ("i", "e"),
+                            0.5 * b, 0.5 * b - x_out, U=U_fl, zrodlo="PN-EN ISO 13370:2017 [NZW]")]
+    return Wezel(id, nazwa or f"Cokół — ściana / podłoga na gruncie / {'ława' if fundament == 'lawa' else 'płyta'}",
+                 "cokol", ob, strefy, fl, przekroj="pionowy",
+                 punkty={"naroże ściana–posadzka": (0.0, 0.0)},
+                 siatka={"h_min": 0.003, "h_max": 0.40, "r": 1.25},
+                 widok=(-1.2, min(spod, y_fb) - 0.4, x_out + 1.0, 1.0), psi_domyslne="GF_cokol",
+                 dane={"warstwy ściany": dane_warstw(warstwy_sciany), "warstwy podłogi": dane_warstw(warstwy_podlogi),
+                       "fundament": opis_f, "izolacja obwodowa": f"{izol.kod} do rzędnej {y_izol_dol:.2f}, "
+                       f"cokół do {y_prz:.2f} (teren {y_teren:.2f})",
+                       "grunt": f"λ = {grunt.lam} W/(m·K); obszar: wewn. 0,5·b = {0.5 * b} m od lica zewn., "
+                                f"zewn. 2,5·b = {2.5 * b} m, głęb. 2,5·b = {2.5 * b} m (b = {b} m)",
+                       "U podłogi (ISO 13370)": f"R_f = {R_f:.3f} m²K/W, d_t = {d_t:.3f} m, U = {U_fl:.4f} W/(m²K)"}
+                 | ({"blok termiczny": f"{blok_termiczny[0].kod} h = {blok_termiczny[1]} m"} if blok_termiczny else {}),
+                 uwagi=["Ściana liczona od poziomu posadzki (±0,00) w obu systemach wymiarów; podłoga wg PN-EN ISO "
+                        "13370 z B' = b (pas nieskończony) [INT]."])
+
+
+def wezel_garaz(warstwy_sciany: Sequence[Warstwa], warstwy_sciany_garazu: Sequence[Warstwa],
+                przerwa_izolacji: bool = False, L: float | None = None, L_g: float | None = None,
+                theta_u: float | None = None, b_u: float = 0.8, theta_i: float | None = None,
+                theta_e: float | None = None, id: str = "WZ-G1", nazwa: str | None = None) -> Wezel:
+    """Połączenie ściany zewnętrznej domu ze ścianą zewnętrzną garażu nieogrzewanego (rzut, 3 temperatury).
+    Ściana domu wzdłuż osi x (wnętrze y < 0); ściana garażu prostopadła, lico od garażu x = 0 (garaż x > 0,
+    zewnętrze x < −d_g). przerwa_izolacji=False — ściana garażu dochodzi do lica ETICS (izolacja domu ciągła);
+    True — konstrukcja ściany garażu wchodzi w warstwę ocieplenia aż do muru domu (mostek).
+    θ_u: zadana albo z b_u: θ_u = θ_e + (1 − b_u)(θ_i − θ_e) [ZAŁ]."""
+    ti, te = _temperatury(theta_i, theta_e)
+    tu = theta_u if theta_u is not None else te + (1 - b_u) * (ti - te)
+    st = _stos(warstwy_sciany, 0.0)
+    ks = indeks_konstrukcyjnej(warstwy_sciany)
+    y_s1, y_out = st[ks][1], st[-1][1]
+    sg = _stos(warstwy_sciany_garazu, 0.0, -1)
+    kg = indeks_konstrukcyjnej(warstwy_sciany_garazu)
+    d_g = grubosc(warstwy_sciany_garazu)
+    L = L or (odl_ciecia(max(y_out, d_g)) + d_g)
+    L_g = L_g or odl_ciecia(y_out)
+    ob: list[Obszar] = [_obsz(box(-L, a, L, b), w) for a, b, w in st]
+    for k, (a, b, w) in enumerate(sg):
+        y0 = y_s1 if (przerwa_izolacji and k == kg) else y_out
+        ob.append(_obsz(box(a, y0, b, y_out + L_g), w))
+    S = S_STREFY
+    strefy = strefy_z_dopelnienia(ob, box(-L, -S, L, y_out + L_g), [
+        ((0.0, -S / 2), _nas("dom (ogrzewany)", ti, "wewn")),
+        ((-(L + d_g) / 2, y_out + L_g / 2), _nas("zewnętrze", te, "zewn")),
+        (((L) / 2, y_out + L_g / 2), _nas("garaż nieogrzewany", tu, "nieogrz"))])
+    fl = [ElementFlankujacy("ściana domu → zewnętrze", ("i", "e"), L - d_g, L - d_g, warstwy=list(warstwy_sciany)),
+          ElementFlankujacy("ściana domu → garaż", ("i", "u"), L + d_g, L + d_g, warstwy=list(warstwy_sciany),
+                            Rse=RSI_POZIOMO),
+          ElementFlankujacy("ściana garażu", ("u", "e"), L_g, L_g, warstwy=list(warstwy_sciany_garazu))]
+    return Wezel(id, nazwa or ("Dom – garaż nieogrzewany: ściana garażu " +
+                               ("przerywa ocieplenie" if przerwa_izolacji else "dochodzi do lica ETICS")),
+                 "garaz", ob, strefy, fl, przekroj="poziomy",
+                 punkty={"naroże dom (lico wewn.)": (0.0, 0.0)},
+                 widok=(-1.2, -0.3, 1.2, y_out + 1.0),
+                 dane={"warstwy ściany domu": dane_warstw(warstwy_sciany),
+                       "warstwy ściany garażu (od garażu)": dane_warstw(warstwy_sciany_garazu),
+                       "θ_u garażu": f"{tu:.1f} °C" + (" (zadana)" if theta_u is not None
+                                                        else f" z b_u = {b_u} [ZAŁ]")},
+                 uwagi=["Podział ściany domu na część „do zewnętrza” i „do garażu” w licu zewnętrznym ściany garażu "
+                        "(jedyny system wymiarów — strona ogrzewana jest płaska, ψ_e = ψ_i).",
+                        "Po stronie garażu R_s = 0,13 (ISO 6946 — przegroda do przestrzeni nieogrzewanej)."])
+
+
+def wezel_rura_spustowa(warstwy_sciany: Sequence[Warstwa], szer_wneki: float = 0.16, d_pozostala: float = 0.06,
+                        L: float | None = None, theta_i: float | None = None, theta_e: float | None = None,
+                        id: str = "WZ-RS1", nazwa: str = "Rura spustowa we wnęce ocieplenia (rzut)") -> Wezel:
+    """Wnęka w ETICS na rurę spustową (DN100): izolacja zredukowana do d_pozostala na szerokości szer_wneki; wnęka
+    otwarta do powietrza zewnętrznego (rura z wodą ~ θ_e). Ocena ryzyka ścienienia izolacji za rurą."""
+    ti, te = _temperatury(theta_i, theta_e)
+    st = _stos(warstwy_sciany, 0.0)
+    ks = indeks_konstrukcyjnej(warstwy_sciany)
+    y_s1, D = st[ks][1], st[-1][1]
+    L = L or odl_ciecia(D)
+    wneka = box(-szer_wneki / 2, y_s1 + d_pozostala, szer_wneki / 2, D + 1)
+    ob = []
+    for k, (a, b, w) in enumerate(st):
+        g = box(-L, a, L, b)
+        if k > ks:
+            g = g.difference(wneka)
+        if not g.is_empty:
+            ob.append(_obsz(g, w))
+    S = S_STREFY
+    strefy = strefy_z_dopelnienia(ob, box(-L, -S, L, D + S), [
+        ((0.0, -S / 2), _nas("wnętrze", ti, "wewn")),
+        ((0.0, D + S / 2), _nas("zewnętrze (z wnęką)", te, "zewn"))])
+    fl = [ElementFlankujacy("ściana", ("i", "e"), 2 * L, 2 * L, warstwy=list(warstwy_sciany))]
+    return Wezel(id, nazwa, "rura_spustowa", ob, strefy, fl, przekroj="poziomy",
+                 punkty={"lico wewn. za wnęką": (0.0, 0.0)}, widok=(-0.6, -0.1, 0.6, D + 0.1),
+                 dane={"warstwy ściany": dane_warstw(warstwy_sciany),
+                       "wnęka": f"szer. {szer_wneki} m, pozostała izolacja {d_pozostala} m"},
+                 uwagi=["Wariant zalecany: rura przed licem ETICS na obejmach dystansowych (bez wnęki) albo "
+                        "wewnętrzna w izolowanym szachcie — ψ ≈ 0."])

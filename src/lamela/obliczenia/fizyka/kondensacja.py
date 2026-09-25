@@ -74,6 +74,11 @@ class WynikFRsi:
     f_Rsi_WT: float
     elementy: list[dict] = field(default_factory=list)   # {id, opis, f_Rsi, zrodlo, ok}
 
+    @property
+    def f_Rsi_wym(self) -> float:
+        """Wartość do sprawdzeń: max(obliczona dla miesiąca krytycznego, 0,72 wg WT) — zachowawczo."""
+        return max(self.f_Rsi_kryt, self.f_Rsi_WT)
+
 
 def f_rsi_min(theta_i: float = 20.0, *, klasa: int | None = None, phi_i: float | None = 0.50,
               phi_si_max: float = 0.80) -> WynikFRsi:
@@ -285,7 +290,7 @@ def glaser(warstwy: list[WarstwaG], Rsi: float, Rse: float, *, theta_i: float = 
                           list(range(12)), False, True, 0.0, None, [], kryterium_kg_m2=kryterium_kg_m2)
         _uzup_par(res, warstwy)
         return res
-    start = next(m for m in range(12) if kond0[m] and not kond0[(m - 1) % 12])
+    start = next((m for m in range(12) if kond0[m] and not kond0[(m - 1) % 12]), 9)   # wszystkie mies. — od X
     kol = [(start + j) % 12 for j in range(12)]
     Ma = np.zeros(n + 1)
     plaszcz = set()
@@ -434,13 +439,13 @@ def raport_frsi(fr: WynikFRsi, zal: Zalozenia | None = None) -> str:
                         "f_Rsi,min"], rows))
     s.append("")
     s.append(f"Miesiąc krytyczny: **{miesiace_pl()[fr.miesiac_kryt - 1]}**, f_Rsi,max = **{fmt(fr.f_Rsi_kryt, 3)}**; "
-             f"wartość dopuszczona przez WT: {fmt(fr.f_Rsi_WT, 2)}. Do sprawdzeń przyjęto "
-             f"f_Rsi,wym = max(f_Rsi,max; 0,72)?: {fmt(max(fr.f_Rsi_kryt, 0.0), 3)} (obliczone) / {fmt(fr.f_Rsi_WT, 2)} (WT).")
+             f"wartość dopuszczona przez WT: {fmt(fr.f_Rsi_WT, 2)}. Do sprawdzeń przyjęto zachowawczo "
+             f"f_Rsi,wym = max(f_Rsi,max; {fmt(fr.f_Rsi_WT, 2)}) = **{fmt(fr.f_Rsi_wym, 3)}**.")
     s.append("")
     if fr.elementy:
         rows = [[e["id"], e["opis"], fmt(e["f_Rsi"], 3) if e.get("f_Rsi") is not None else "—", e.get("zrodlo", ""),
                  ok(e.get("ok"))] for e in fr.elementy]
-        s.append(tabela_md(["Element", "Opis", "f_Rsi", "Źródło", f"f_Rsi ≥ {fmt(max(fr.f_Rsi_kryt, fr.f_Rsi_WT), 3)}"],
+        s.append(tabela_md(["Element", "Opis", "f_Rsi", "Źródło", f"f_Rsi ≥ {fmt(fr.f_Rsi_wym, 3)}"],
                            rows, "llrll"))
         s.append("")
     if zal:
