@@ -151,3 +151,22 @@ elewacje (rzut prostokątny z usuwaniem linii niewidocznych), kontrolę kolizji.
 6. Numeracja pomieszczeń na rysunkach: parter = 1.xx, I piętro = 2.xx, II piętro = 3.xx (R4 / PN-EN ISO 4157) — identyfikatory w modelu
    mogą pozostać 0.xx/1.xx/2.xx; generator przenumeruje (przełącznik `numeracja_pomieszczen`).
 7. Rzędne na rysunkach AR z 3 miejscami po przecinku (PN-B-01025); PZT — 2 miejsca, wymiary w PZT z dokładnością 0,01 m.
+
+## 6. Rozszerzenia dla wody, izolacji i mostków (wymaganie Inwestora 25.09.2026 — obowiązkowe)
+```yaml
+dachy:
+  - id: D1
+    ...
+    wpusty: [{xy: [x, y], dn: 100, podgrzewany: true}]
+    przelewy_awaryjne: [{xy: [x, y], sciana_attyki: N|S|E|W, szer: 0.20, wys: 0.10, rzedna_dna: 9.45}]
+    rury_spustowe: [{id: RS1, od_wpustu: 0, trasa: wewn_szacht|zewn, xy_pion: [x, y], dn: 100, do: zbiornik|niecka|kanal}]
+    spadki: [{od: [x, y], do: [x, y], spadek: 0.02}]     # izolacja spadkowa — kierunki do wpustów
+przegrody:
+  # KAŻDA przegroda zewnętrzna ma pełne warstwy: paroizolacja / szczelność powietrzna, hydroizolacja (gdzie dotyczy),
+  # warstwy spadkowe, drenażowe, geowłóknina, bariera przeciwkorzenna (dach zielony) — z materiałem i grubością.
+wezly:            # katalog węzłów cieplno-wilgotnościowych (do detali i symulacji ISO 10211)
+  - {id: WZ-01, nazwa: "Attyka stropodachu D1", typ: attyka, przegrody: [SD1, SZ1], polozenie: [[x, y, z], ...], dlugosc: 38.4}
+dzialka.yaml:
+  odwodnienia: [{id: OL1, typ: liniowe|opaska_zwirowa|drenaz_opaskowy|niecka, linia/obrys: [...], spadek: 0.01, odbiornik: ...}]
+  teren: {punkty_projektowane: [[x, y, H], ...]}          # rzędne projektowane terenu (spadki od budynku ≥ 2 %)
+```

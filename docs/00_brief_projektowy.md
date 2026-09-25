@@ -128,3 +128,32 @@ Szczegóły i podstawy: `docs/10_podstawy_prawne/00_rejestr_wymagan.md` (sekcja 
 * Wody opadowe (wariant bazowy): szczelny zbiornik ≤ 5 m³ z przelewem do niecki/ogrodu (rozsączanie skrzynkowe tylko po stanowisku PGW WP — ryzyko pozwolenia wodnoprawnego).
 * EP liczone na **deklarowanych parametrach urządzeń** (wartości domyślne metodologii dają EP ≈ 99 > 70).
 * Beton: specyfikacja wg PN-EN 206+A2 / PN-B-06265 jako wiedza techniczna (normy wycofane, zastępcze PN-EN 206-1/-2:2026-09 tylko po angielsku) — potwierdzić z wytwórnią.
+
+## 9. Wymagania Inwestora z 25.09.2026 (2) — FIZYKA BUDOWLI I WODA (nadrzędne, obowiązkowe we wszystkich etapach)
+Inwestor wymaga szczególnej staranności w zakresie: **odprowadzenia wody, ciągłości izolacji, mostków termicznych, rur spustowych,
+hydroizolacji, paroizolacji i drenażu** oraz **symulacji numerycznej mostków termicznych**. Wymagania projektowe:
+1. **Ciągłość warstw (zasada „4 linii” na każdym przekroju i detalu):** izolacja termiczna (linia czerwona), hydroizolacja /
+   izolacja przeciwwodna i przeciwwilgociowa (niebieska), paroizolacja / warstwa szczelności powietrznej (zielona), warstwa
+   wiatroizolacji/tynku zewnętrznego — każda musi dać się obrysować „bez odrywania ołówka” wokół całej kubatury ogrzewanej
+   (przekroje A-A, B-B i wszystkie detale). Weryfikacja: kontrola na rysunkach + audyt ciągłości w modelu.
+2. **Mostki termiczne:** katalog wszystkich węzłów (attyki, wsporniki P2 i płyt wysuniętych — łączniki termoizolacyjne,
+   ościeża i nadproża, montaż stolarki w warstwie izolacji („ciepły montaż”), cokół/połączenie ściana–płyta/ława, narożniki,
+   połączenie z garażem nieogrzewanym, przejścia instalacji, mocowania lamel). Dla każdego: **symulacja 2D wg PN-EN ISO 10211**
+   (walidowany solver — przypadki referencyjne normy), ψ, f_Rsi ≥ f_Rsi,min (PN-EN ISO 13788 / WT), mapa temperatur;
+   H_TB do obliczeń EP z wartości symulowanych.
+3. **Odprowadzenie wody z dachów:** spadki min. 2 % (izolacja spadkowa), wpusty dachowe z podgrzewaniem wg potrzeby,
+   **przelewy awaryjne (rzygacze bezpieczeństwa) w attykach** dla każdego pola dachu, rury spustowe (lokalizacja — wewnętrzne w
+   szachtach izolowanych lub zewnętrzne z czyszczakami; zgodność z elewacją), obliczenie wg PN-EN 12056-3, połączenie do
+   zbiornika retencyjnego/niecki; dach zielony garażu — warstwa drenażowa, bariera przeciwkorzenna, opaska żwirowa przy
+   attyce.
+4. **Hydroizolacja:** fundamenty/płyta (izolacja przeciwwilgociowa lub przeciwwodna wg warunków gruntowych), cokół (≥ 30 cm
+   nad terenem lub rozwiązanie z odwodnieniem liniowym przy drzwiach bezprogowych HS), progi drzwi tarasowych i wejściowych
+   (odwodnienie liniowe, spadek od budynku), łazienki (hydroizolacja podpłytkowa w strefach mokrych), attyki (wywinięcia
+   ≥ 15 cm ponad warstwę wierzchnią), obróbki blacharskie, parapety zewnętrzne z okapnikami.
+5. **Paroizolacja i szczelność powietrzna:** stropodachy (paroizolacja na płycie), ciągłość szczelności przy oknach (taśmy
+   paroszczelne wewn./paroprzepuszczalne zewn.), przejścia instalacyjne (mankiety), cel n50 ≤ 1,0 h⁻¹ (test PN-EN ISO 9972).
+6. **Drenaż i wody gruntowe/powierzchniowe:** decyzja o drenażu opaskowym na podstawie warunków gruntowych (piaski, ZWG ≈ 3,8 m
+   p.p.t.) z uzasadnieniem; odwodnienie powierzchniowe: spadki terenu ≥ 2 % od budynku na odcinku ≥ 1,5–2 m, opaska żwirowa,
+   odwodnienia liniowe przy HS i przed garażem, zagospodarowanie wód na działce (zbiornik ≤ 5 m³ + niecka/rozsączanie).
+Skutki dla modelu: przegrody z pełnymi warstwami (paroizolacja, hydroizolacja, warstwy spadkowe, drenażowe), dachy z wpustami,
+przelewami awaryjnymi i rurami spustowymi, działka z odwodnieniami i spadkami terenu, katalog węzłów z symulacją.
