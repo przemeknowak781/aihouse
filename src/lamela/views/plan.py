@@ -911,11 +911,13 @@ class PlanBuilder:
                     x0, y0, x1, y1 = r.polygon.bounds
                     for f in (0.3, 0.22, 0.38, 0.62, 0.7, 0.78, 0.15, 0.85, 0.1, 0.9, 0.45, 0.55):
                         c = (y0 + f * (y1 - y0)) if axis == "h" else (x0 + f * (x1 - x0))
-                        ev = self._eval_line(axis, c, todo, rooms, S_, (X0, Y0, X1, Y1))
-                        if ev is None:
-                            continue
-                        if best is None or ev["score"] > best["score"]:
-                            best = ev
+                        for only in (None, r):
+                            ev = self._eval_line(axis, c, todo, [r] if only is not None else rooms, S_,
+                                                 (X0, Y0, X1, Y1))
+                            if ev is None:
+                                continue
+                            if best is None or ev["score"] > best["score"]:
+                                best = ev
                 if best is None or best["score"] <= -1.0:
                     break
                 n0 = len(vp.prims)
