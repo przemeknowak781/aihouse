@@ -1690,21 +1690,21 @@ class AnalizaKonstrukcji:
                         out.append(ObcQ(qa, s0, s1, qb))
             return out
         R = np.zeros(len(pods))
-        Rmin_q = np.zeros(len(pods))
         for cs, lst in obc.items():
-            r_dst = belka.rozwiaz(utnij(lst, a, b, False)).R if utnij(lst, a, b, False) else np.zeros(len(pods))
-            if cs == "G":
-                r_stb = belka.rozwiaz(utnij(lst, a, b, True)).R if utnij(lst, a, b, True) else np.zeros(len(pods))
-                R = R + p.EQU_gG_dst * np.minimum(r_dst, 0.0) + p.EQU_gG_stb * np.maximum(r_dst, 0.0) * 0 \
-                    + p.EQU_gG_dst * np.maximum(r_dst, 0.0) * 0 + np.where(r_dst < 0, 0.0, p.EQU_gG_stb * r_dst) + p.EQU_gG_stb * r_stb
-            else:
-                Rmin_q = Rmin_q + p.EQU_gQ * np.minimum(r_dst, 0.0)
-        R = R + Rmin_q
+            for wew in (False, True):              # części: wsporniki | przęsła — wpływ na reakcję każdej podpory osobno
+                czesc = utnij(lst, a, b, wew)
+                if not czesc:
+                    continue
+                r_ = belka.rozwiaz(czesc).R
+                if cs == "G":                      # stałe: niekorzystne (R ↓) × 1,10, korzystne × 0,90
+                    R = R + np.where(r_ < 0, p.EQU_gG_dst * r_, p.EQU_gG_stb * r_)
+                else:                              # zmienne: tylko niekorzystne × 1,5
+                    R = R + p.EQU_gQ * np.minimum(r_, 0.0)
         w = Wynik(nazwa=f"Równowaga statyczna (EQU) — belka {bid} ze wspornikiem")
         w.krok("Wsporniki belki", "x < x₁ lub x > x_n", "", f"x₁ = {f(a, 2)} m, x_n = {f(b, 2)} m, L = {f(L, 2)} m")
         for k, (s_, t, o) in enumerate(pods):
             nm = o.id if t == "sciana" else str(o["id"])
-            w.krok(f"Reakcja EQU podpory {nm} (x = {f(s_, 2)} m)", "R = Σ[1,10·R_G,dst⁻ + 0,90·(R_G,dst⁺ + R_G,stb)] + 1,5·ΣR_Q,dst⁻",
+            w.krok(f"Reakcja EQU podpory {nm} (x = {f(s_, 2)} m)", "R = Σ(1,10·R_G⁻ + 0,90·R_G⁺) + 1,5·ΣR_Q⁻ (wsporniki i przęsła osobno)",
                    "", R[k], "kN", nd=1, zrodlo="PN-EN 1990 tabl. A1.2(A) + NA")
         k_min = int(np.argmin(R))
         s_, t, o = pods[k_min]
