@@ -1,18 +1,18 @@
 {
- "czas": "2026-09-25 10:44",
+ "czas": "2026-09-25 10:47",
  "aktywni": [
   {
    "id": "abfdfaca2ef13a7b4",
    "opis": "wf_a8783476-2a1:konstrukcja:1",
-   "idle_min": 0.1,
-   "bez_narzedzi_min": 0.2,
+   "idle_min": 0.7,
+   "bez_narzedzi_min": 0.7,
    "limity": 0,
    "powody": []
   },
   {
    "id": "a2e2d61b96c7d28ef",
    "opis": "wf_dad224e5-cd8:silnik:poprawki",
-   "idle_min": 0.0,
+   "idle_min": 0.1,
    "bez_narzedzi_min": 0.1,
    "limity": 0,
    "powody": []
@@ -20,5 +20,5 @@
  ],
  "zakonczeni": 0,
  "zastoje": [],
- "repo_bez_zmian_min": 0.0
+ "repo_bez_zmian_min": 1.9
 }

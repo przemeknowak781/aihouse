@@ -114,7 +114,7 @@ def test_arkusz_niestandardowy():
     ticks = [p for p in sh.prims if getattr(p, "pts", None) is not None and len(p.pts) == 2
              and abs(p.pts[0][1]) < 1e-9 and abs(p.pts[1][1] - 5.0) < 1e-9]
     assert sorted(round(float(p.pts[0][0]), 1) for p in ticks) == [round(x, 1) for x in xs]
-    labels = [p.string for p in sh.prims if hasattr(p, "runs") and p.pos[1] < 3.0]
+    labels = [p.string for p in sh.prims if hasattr(p, "runs") and p.pos[1] < 3.0 and not p.string.startswith("nst.")]
     assert sorted(labels) == [str(i + 1) for i in range(len(xs))], labels
     txt = [p.string for p in sh.prims if hasattr(p, "runs")]
     assert "nst. 780×594" in txt
@@ -176,6 +176,22 @@ def _sprawdz_uklad(u, widoki, tb_h):
     assert tb[0] >= u.W - ok["pasy"][-1] - 1e-6 and tb[3] <= ok["rzedy"][0] + 1e-6, "tabliczka poza pasem wierzchnim"
 
 
+def _sprawdz_czesci_uwag(R, n):
+    """Części uwag: numeracja ciągła 1…n, kolejność czytania (część k+1 pod k w kolumnie albo w kolumnie na
+    prawo), ≥ 2 pozycje w części (gdy n ≥ 2 i jest więcej niż jedna część)."""
+    import re
+    parts = [(b.nazwa, r) for (b, *_x), (k, nm, r) in zip(R.bloki, [p for p in R.prostokaty if p[0] == "blok"])
+             if b.nazwa.startswith("uwagi[")]
+    zakresy = [tuple(int(v) for v in re.findall(r"\d+", nm)) for nm, _r in parts]
+    assert zakresy[0][0] == 1 and zakresy[-1][1] == n, zakresy
+    for (a0, a1), (b0, b1) in zip(zakresy, zakresy[1:]):
+        assert b0 == a1 + 1, zakresy
+    for (_n1, r1), (_n2, r2) in zip(parts, parts[1:]):
+        assert U._po(r1, r2), f"część „{_n2}” {r2} przed „{_n1}” {r1} w kolejności czytania"
+    if len(parts) > 1:
+        assert all(a1 - a0 + 1 >= 2 for a0, a1 in zakresy), zakresy
+
+
 def test_brak_nakladania():
     for views, blocks in _przypadki():
         widoki = [U.Widok(f"v{i}", w, h, min(w, 140.0), 10.5) for i, (w, h) in enumerate(views)]
@@ -205,12 +221,13 @@ def test_uwagi_dzielone():
         nums = [p.string for p in sh.prims if hasattr(p, "runs") and p.string.rstrip().endswith(".")
                 and p.string.strip()[:-1].isdigit()]
         assert nums[0].strip() == f"{i0 + 1}.", nums
-    # wysoka kolumna uwag na niskim arkuszu → podział na części z ciągłą numeracją
-    u = U.rozmiesc([U.Widok("v", 700, 240, 100, 10.5)], [_uwagi(40)], 103.0, {"wysokosci": [297]},
-                   fmt="ekonomiczny")
-    czesci = [b for b, *_ in u.roz.bloki if b.nazwa.startswith("uwagi[")]
+    # wysoka kolumna uwag na niskim arkuszu → podział na części z ciągłą numeracją (w kolejności czytania)
+    u = U.rozmiesc([U.Widok("v", 700, 240, 100, 10.5)], [_uwagi(70)], 103.0,
+                   {"wysokosci": [297], "max_wysokosc": 297, "max_czesci_uwag": 8}, fmt="ekonomiczny")
+    czesci = [(b, x, y) for b, x, y, _w in u.roz.bloki if b.nazwa.startswith("uwagi[")]
     assert len(czesci) >= 2, [b.nazwa for b, *_ in u.roz.bloki]
     _sprawdz_uklad(u, [], 103.0)
+    _sprawdz_czesci_uwag(u.roz, 70)
 
 
 def test_bloki_zalezne_od_arkusza():
