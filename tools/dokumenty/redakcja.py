@@ -33,7 +33,7 @@ PODSTAWY = {
 _ROBOCZE = re.compile(
     r"^(?:audyt\w*\s+[AJ]\d.*|[AJ]\d(?:/[AJ]\d)*(?:\s+[A-Z]-?\d+)?|K-\d+|B\d+|S-\d+|D-\d+\s*\(roboc.*|brief.*|"
     r"R\d(?:[ -][\w.]+)*|R\d-\d+|runda.*|BRAKI.*|weryfikacj.*|powiększon.*|sprzeczno\w* S-\d+|"
-    r"TWARDE ZAŁOŻENIA.*|przeszczep.*|poprawion\w* po audycie.*)$", re.I)
+    r"TWARDE ZAŁOŻENIA.*|przeszczep.*|poprawion\w* po audycie.*|wydanie|V\d+-\d+|V\d+ N-\d+)$", re.I)
 _NAWIAS = re.compile(r"\(([^()]*)\)")
 
 
@@ -45,9 +45,16 @@ def _czysc_nawias(m: re.Match) -> str:
     return f"({', '.join(zostaw)})" if zostaw else ""
 
 
+def popraw_cytaty(t: str) -> str:
+    """Poprawki cytatów sprawdzonych w tekście urzędowym: upzp art. 2 pkt 35 nie dzieli się na litery; RPB — ze zmianą
+    Dz.U. 2026 poz. 597."""
+    t = re.sub(r"(art\. 2 pkt 35) lit\. a", r"\1", t)
+    return re.sub(r"(Dz\.U\. 2022 poz\. 1679, zm\. Dz\.U\. 2023 poz\. 2405)(?! i Dz\.U\. 2026)", r"\1 i Dz.U. 2026 poz. 597", t)
+
+
 def czysc(txt) -> str:
     """Usuwa adnotacje robocze z opisu pochodzącego z modelu lub rejestru; zapis liczb — przecinek dziesiętny."""
-    t = str(txt if txt is not None else "")
+    t = popraw_cytaty(str(txt if txt is not None else ""))
     t = _NAWIAS.sub(_czysc_nawias, t)
     t = re.sub(r"\s*[—–-]\s*(?:sprzeczno\w* S-\d+|runda \d+)", "", t)
     t = re.sub(r"\s*[—–-]\s*(?:R\d [\d.]+|R\d-\d+|audyt\w* [AJ]\d[^;,)]*)", "", t)

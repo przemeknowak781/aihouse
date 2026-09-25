@@ -1458,7 +1458,17 @@ class Model:
         s._ext_dol_wolne = True     # czy warstwy zewnętrzne można obniżyć w narożu (harmonizacja) — nie, gdy pod nimi jest
         #                             ocieplenie ściany niższej (lico w linii) albo płyta ciągła przed licem (uskok bryły)
         if prev is None:
+            # najniższa kondygnacja: ocieplenie cokołu do spodu płyty fundamentowej pod ścianą (fundamenty typu „plyta”; wydanie —
+            # weryfikacja V1-06: dół izolacji = wierzch żebra, bez kolizji z żebrem), inaczej 0,30 m poniżej wierzchu konstrukcji
             z_bot = s.z_od - 0.30
+            fu = self.raw.get("fundamenty") if isinstance(self.raw.get("fundamenty"), dict) else {}
+            if fu.get("typ") == "plyta":
+                for e in fu.get("elementy") or []:
+                    if isinstance(e, dict) and _is_ring(e.get("obrys")) and _is_num(e.get("spod")) and _is_num(e.get("h")) \
+                            and abs(float(e["spod"]) + float(e["h"]) - s.z_od) <= 0.20 \
+                            and make_polygon(e["obrys"]).buffer(0.05).contains(Point(tuple(probe_in))):
+                        z_bot = float(e["spod"])
+                        break
         else:
             below = [x for x in self._sciany if x.kond == prev.id and x.ext_side is not None]
             aligned = False

@@ -7,6 +7,7 @@ from shapely.geometry import LineString
 from lamela.dokumenty import DANE_PRZYKLADOWE, ZAL, do_uzup, liczba
 
 from pzt_dane import _poly
+from redakcja import LEGENDA, czysc
 
 
 def L(v, nd=2):
@@ -29,12 +30,36 @@ def _gat(t):
 
 
 def _drenaz(o):
+    """Decyzja o drenażu z modelu; wartości głębokości z opisu roboczego pomija się — głębokość posadowienia
+    (z definicją) podaje PAB, rozdz. 5, a zwierciadło wody — pkt „Warunki gruntowe” niniejszego opisu."""
+    import re
     if not o:
         return "Drenażu opaskowego nie przewiduje się"
-    op = str(o.get("opis", ""))
+    op = czysc(o.get("opis", ""))
+    op = re.sub(r",?\s*(?:ZWG|posadowienie)\s*≈\s*[\d,]+\s*m\s*p\.p\.t\.", "", op)
     if "NIE PROJEKTUJE" in op.upper():
-        return "Drenażu opaskowego nie projektuje się — " + (op.split("—", 1)[1].strip() if "—" in op else "")
+        return ("Drenażu opaskowego nie projektuje się — " + (op.split("—", 1)[1].strip() if "—" in op else "")
+                + " (zwierciadło wody gruntowej poniżej poziomu posadowienia — warunki gruntowe w rozdziale opisu wg § 14 pkt 7 RPB; posadowienie — PAB, rozdz. 5)")
     return "Drenaż opaskowy: " + op
+
+
+def dl_trasy(p) -> float | None:
+    """Długość trasy przyłącza z geometrii modelu (jak na rys. PZT-03); pole ``dl`` — tylko gdy brak geometrii."""
+    ln = p.get("linia") or []
+    return LineString(ln).length if len(ln) >= 2 else p.get("dl")
+
+
+def opis_obiektu(z, o) -> str:
+    """Opis urządzenia z modelu bez adnotacji roboczych; odległości od granic liczone z geometrii (układ działki)."""
+    import re
+    from shapely.geometry import Point
+    t = czysc(o.get("opis", "—"))
+    if o.get("xy"):
+        def odl(m):
+            g = next((g for g in z.granice if g["kier"] == m.group(2)), None)
+            return f"{L(Point(*o['xy']).distance(g['line']))} m od granicy {m.group(2)}" if g else m.group(0)
+        t = re.sub(r"(\d+(?:,\d+)?) m od granicy ([NESW])\b", odl, t)
+    return t
 
 
 def _brama(z, typ):
@@ -57,6 +82,8 @@ def wstep(zp, z, d):
     Rzędne w układzie wysokościowym PL-EVRF2007-NH; ±0,00 = {L(z.zero)} m n.p.m. Rysunki: PZT-01 (plan
     zagospodarowania, 1:500), PZT-02 (plan szczegółowy — wymiary i rzędne, 1:200), PZT-03 (rysunek koordynacyjny
     uzbrojenia terenu, 1:200).
+
+    {LEGENDA}
     """)
 
 
@@ -152,9 +179,9 @@ def pkt3(zp, z, d):
 def pkt3_ab(zp, z, d):
     ob = [o for o in (z.dz.get("uzbrojenie") or {}).get("obiekty") or [] if o.get("id") != "HYDR"]
     ret = z.dz.get("retencja") or {}
-    rows = [{"Element": o["id"], "Opis": o.get("opis", "—")} for o in ob]
-    rows += [{"Element": "zbiornik retencyjny", "Opis": (ret.get("zbiornik") or {}).get("opis", "—")},
-             {"Element": "niecka chłonna", "Opis": (ret.get("rozsaczanie") or {}).get("opis", "—")}]
+    rows = [{"Element": o["id"], "Opis": opis_obiektu(z, o)} for o in ob]
+    rows += [{"Element": "zbiornik retencyjny", "Opis": czysc((ret.get("zbiornik") or {}).get("opis", "—"))},
+             {"Element": "niecka chłonna", "Opis": czysc((ret.get("rozsaczanie") or {}).get("opis", "—"))}]
     og = z.ogrodzenie_od_drogi()
     rows += [{"Element": "ogrodzenie od drogi", "Opis": f"{og[0]['typ'].split(',')[0]}; h = {L(max(o['wys'] for o in og if o['od_drogi']))} m; "
               f"łącznie {L(sum(o['dl'] for o in og if o['od_drogi']))} m"} if any(o["od_drogi"] for o in og) else {},
@@ -162,7 +189,7 @@ def pkt3_ab(zp, z, d):
                                                            for o in og if not o["od_drogi"])}]
     rows += [{"Element": "furtka" if b["typ"] == "furtka" else f"brama {b['typ']}", "Opis": f"szer. w świetle {L(b['szer'])} m, h = {L(b['wys'])} m"}
              for b in z.dz.get("bramy") or []]
-    rows += [{"Element": "stanowisko pojemników", "Opis": (z.dz.get("odpady") or {}).get("opis", "—")}]
+    rows += [{"Element": "stanowisko pojemników", "Opis": czysc((z.dz.get("odpady") or {}).get("opis", "—"))}]
     zp.markdown("## Urządzenia budowlane związane z budynkiem {podstawa: § 14 pkt 3 lit. a}\n"
                 "Urządzenia budowlane (PB art. 3 pkt 9) projektowane na działce — położenie na rys. PZT-01 i PZT-03:")
     zp.tabela([r for r in rows if r], tytul="Urządzenia budowlane (z modelu `dzialka.yaml`)", lp=True,
@@ -178,15 +205,15 @@ def pkt3_ab(zp, z, d):
     ## Sposób odprowadzania ścieków i wód opadowych {{podstawa: § 14 pkt 3 lit. b}}
     **Ścieki bytowe** — grawitacyjnie do sieci kanalizacji sanitarnej ({ks_ist.get('opis', '—')}) w drodze
     {z.droga()['symbol']}: przykanalik {prz.rura if prz else '—'} o spadku {L(100 * prz.i, 1) if prz else '—'} %
-    [ZAŁ — warunki gestora], ze studzienką rewizyjną SR1 ({sr.get('opis', '—')}); długość trasy na działce
-    i w pasie drogowym {L(ks.get('dl', 0), 1)} m (rys. PZT-03).
+    [ZAŁ — warunki gestora], ze studzienką rewizyjną SR1 ({czysc(sr.get('opis', '—'))}); długość trasy na działce
+    i w pasie drogowym {L(dl_trasy(ks) or 0, 1)} m (rys. PZT-03).
     Ścieki przemysłowe nie powstają.
 
     **Wody opadowe i roztopowe** — zagospodarowane w całości w granicach działki (MPZP 3MN; WT § 28 ust. 2 [W-145]).
     Dachy o łącznej powierzchni rzutu {L(dsz.do_dict()['A_dachow_m2'], 1)} m² (przepływ obliczeniowy
     {L(dsz.do_dict()['Q_dachy_l_s'])} l/s, PN-EN 12056-3) odwadniane rurami spustowymi do kolektorów kanalizacji
-    deszczowej na działce ({len(kd)} odcinków, łącznie {L(sum(p.get('dl', 0) for p in kd), 1)} m) i dalej do szczelnego
-    zbiornika retencyjnego z przelewem do niecki chłonnej (obliczenie — pkt 7). Wody z podjazdu i posadzki garażu
+    deszczowej na działce ({len(kd)} odcinków, łącznie {L(sum(dl_trasy(p) or 0 for p in kd), 1)} m) i dalej do szczelnego
+    zbiornika retencyjnego z przelewem do niecki chłonnej (obliczenie retencji — rozdział opisu wg § 14 pkt 7 RPB). Wody z podjazdu i posadzki garażu
     (możliwe węglowodory) — odwodnieniami liniowymi przez osadnik z separatorem do niecki trawiastej, z pominięciem
     zbiornika. Skropliny pompy ciepła — do studni chłonnej. Wody opadowe nie są odprowadzane na drogę ani
     na działki sąsiednie (odwodnienie liniowe przy bramie wjazdowej; spadki terenu — lit. f).
@@ -239,12 +266,13 @@ def pkt3_ef(zp, z, d):
     ## Parametry techniczne sieci i urządzeń uzbrojenia terenu {podstawa: § 14 pkt 3 lit. e}
     Przebieg przyłączy i sieci na działce — rys. PZT-03 (rysunek koordynacyjny); parametry z modelu:
     """)
-    zp.tabela([{"Branża": naz.get(p["branza"], p["branza"]), "Parametry (model)": p.get("opis", "—"),
-                "Długość [m]": p.get("dl")} for p in proj], tytul="Projektowane przyłącza i przewody na działce",
+    zp.tabela([{"Branża": naz.get(p["branza"], p["branza"]), "Parametry (model)": czysc(p.get("opis", "—")),
+                "Długość [m]": dl_trasy(p)} for p in proj], tytul="Projektowane przyłącza i przewody na działce",
               lp=True, formaty={"Długość [m]": 1}, szerokosci=["9mm", "30mm", None, "20mm"],
               uwagi=["Średnice, spadki i rzędne w punktach załamania i włączenia — rys. PZT-03 oraz PT-3 IS / PT-4 IE; "
                      "parametry przyłączy wg warunków przyłączenia " + do_uzup("warunki przyłączenia: ENEA Operator (nN), "
-                     "gestor wod.-kan., operator telekomunikacyjny — E-05") + "."],
+                     "gestor wod.-kan., operator telekomunikacyjny — E-05") + ". Długości — z geometrii tras w modelu "
+                     "(rys. PZT-03), w granicach działki i w pasie drogowym do punktu włączenia."],
               zrodlo="model/dzialka.yaml — uzbrojenie.projektowane")
     t, tp = z.teren_istn(), z.teren_proj()
     sp_min, zr_sp, id_sp = z.wym("usytuowanie", "spadek_terenu_od_budynku_min")
@@ -261,7 +289,7 @@ def pkt3_ef(zp, z, d):
     na granicach działki rzędne projektowane równe istniejącym. {_drenaz(drn)}.
     Rzędne — rys. PZT-02.
     """)
-    zp.tabela([{"Symbol": o["id"], "Rodzaj": o.get("typ", "—").replace("_", " "), "Opis": _kr(o.get("opis"), 1),
+    zp.tabela([{"Symbol": o["id"], "Rodzaj": o.get("typ", "—").replace("_", " "), "Opis": czysc(_kr(o.get("opis"), 1)),
                 "Odbiornik": o.get("odbiornik", "—")} for o in odw if o.get("typ") != "drenaz_opaskowy"],
               tytul="Odwodnienie powierzchniowe", szerokosci=["14mm", "20mm", None, "32mm"],
               zrodlo="model/dzialka.yaml — odwodnienia")

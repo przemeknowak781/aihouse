@@ -546,7 +546,36 @@ class _Builder:
         if p is None or region.is_empty:
             return
         rooms = m.pomieszczenia(k.id)
-        self._stack_layers(f"POD-{k.id}", region, k.rzedna, p.warstwy, k.id, rooms=rooms)
+        fu = m.fundamenty()
+        plyty = [e for e in (fu.get("elementy") or []) if isinstance(e, dict) and _is_ring(e.get("obrys"))] \
+            if fu.get("typ") == "plyta" else []
+        if not plyty:
+            self._stack_layers(f"POD-{k.id}", region, k.rzedna, p.warstwy, k.id, rooms=rooms)
+            return
+        # płyta fundamentowa jest elementem `fundamenty` — warstwy konstrukcyjnej podłogi nie dublujemy (wydanie, weryfikacja V1-06:
+        # podwójna bryła ŻB do przedmiarów); warstwy pod płytą (XPS, podsypka) przycięte do obrysu poza żebrami (żebro przechodzi
+        # przez nie do swojego spodu)
+        zebra = unary_union([self._rect_along(e["os"][0], e["os"][1], e["b"], ext=e["b"] / 2)
+                             for e in (fu.get("elementy") or []) if isinstance(e, dict) and "os" in e and _is_num(e.get("b"))])
+        z = k.rzedna
+        ki = next((i for i, l in enumerate(p.warstwy) if l.konstrukcyjna), None)
+        if ki is None:
+            self._stack_layers(f"POD-{k.id}", region, k.rzedna, p.warstwy, k.id, rooms=rooms)
+            return
+        z = self._stack_layers(f"POD-{k.id}", region, z, p.warstwy[:ki], k.id, rooms=rooms)
+        if ki + 1 < len(p.warstwy):
+            for e in plyty:                               # pod każdą płytą od jej spodu (PF1, PF2 obniżona pod garażem)
+                if not _is_num(e.get("spod")):
+                    continue
+                pod = clean_geom(region.intersection(make_polygon(e["obrys"]).buffer(0.30, join_style=2)))
+                if not zebra.is_empty:
+                    pod = clean_geom(pod.difference(zebra))
+                for q in plyty:                           # bez nakładania na sąsiednią płytę
+                    if q is not e:
+                        pod = clean_geom(pod.difference(make_polygon(q["obrys"])))
+                if not pod.is_empty:
+                    self._stack_layers(f"POD-{k.id}", pod, float(e["spod"]), p.warstwy[ki + 1:], k.id, rooms=None,
+                                       part="pod_plyta")
 
     def _level_above(self, kid):
         ids = self.kondy

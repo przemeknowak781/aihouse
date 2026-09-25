@@ -17,7 +17,9 @@ Opcje widoku (``opcje`` w konfiguracji arkusza — wszystkie opcjonalne):
 ``warstwice: true``, ``warstwice_projektowane: false`` (PZT-02), ``mpzp: {...}`` (limity, gdy brak w modelu; także
 ``wspolne.mpzp``), ``odleglosci_min: {"e-t": [0.5, "źródło"]}`` i ``retencja_min: {budynek: 3.0, granica: 2.0,
 drzewo: 1.0}`` (PZT-03/PZT-02), ``podklad: true``, ``zielen: true``, ``szer_tabel`` [mm] (PZT-01).
-Tabele zestawień rysowane są w rzutni obok rysunku (pismo 2,5 mm), legenda i uwagi — w kolumnie opisowej arkusza.
+Tabele zestawień (pismo 2,5 mm): ``tabele: rzutnia`` (domyślnie) — w rzutni obok rysunku; ``tabele: kolumna`` —
+jako bloki kolumny opisowej, które silnik układu arkusza (``lamela.views.uklad``) ustawia ekonomicznie obok rysunku.
+Legenda i uwagi — w kolumnie opisowej arkusza.
 Wskaźniki MPZP — wyłącznie z ``lamela.wskazniki`` (jedno źródło). Braki danych: ``braki_md`` /
 ``python3 -m lamela.views.site --braki projekt/02_PZT/BRAKI_DANYCH.md``.
 Konfiguracja arkuszy: ``model/arkusze_pzt.yaml``; CLI: ``tools/generuj_widoki.py --arkusze model/arkusze_pzt.yaml``.
@@ -120,6 +122,29 @@ def _label_garage(lab, s):
     lab.bounds = old_b
 
 
+def _tabele(vp, opts, tabs, x, y_top, gap=6.0) -> list:
+    """Tabele zestawień obok rysunku; ``tabs`` = [(nazwa, argumenty ``vp_table``)]. Opcja widoku ``tabele``:
+
+    * ``rzutnia`` (domyślnie) — kolumna tabel w rzutni przy prawej krawędzi okna (widok = rysunek + tabele),
+    * ``kolumna`` — każda tabela jako blok kolumny opisowej arkusza (pismo 2,5 mm bez zmian); silnik układu
+      (``lamela.views.uklad``) ustawia je ekonomicznie obok rysunku: w kolumnach, w pasie pod rysunkiem i w wolnych
+      narożnikach obwiedni widoku.
+
+    Zwraca bloki kolumny opisowej [(nazwa, fn)] (pusta lista dla ``rzutnia``)."""
+    if str(opts.get("tabele", "rzutnia")).strip().lower() == "kolumna":
+        out = []
+        for nm, t in tabs:
+            def fn(sh, x_, y_, w_, t=t):
+                return D.vp_table(sh, x_, y_, **t)[1]
+            out.append((nm, fn))
+        return out
+    y = y_top
+    for _nm, t in tabs:
+        r = D.vp_table(vp, x, y, **t)
+        y = r[1] - gap * vp.k
+    return []
+
+
 def _frame_and_note(vp, win_b, used):
     """Ramka podkładu i opis „PODKŁAD PRZYKŁADOWY…” nad ramką (poza treścią mapy)."""
     from ..draft.sheet import wrap
@@ -204,14 +229,13 @@ def view_plan(ctx, spec, scale, opts):
     top = _frame_and_note(vp, wb, used)
     # --- tabele obok mapy (w rzutni — pismo 2,5 mm)
     x_t = wb[2] + 8.0 * k
-    t1 = _tab_wskazniki(s, W)
-    r1 = D.vp_table(vp, x_t, top, t1["cols"], t1["rows"], t1["title"], align=t1["align"], notes=t1["notes"],
-                    max_w_mm=float(opts.get("szer_tabel", 176.0)))
-    t2 = _tab_odleglosci(s)
-    D.vp_table(vp, x_t, r1[1] - 6.0 * k, t2["cols"], t2["rows"], t2["title"], align=t2["align"], notes=t2["notes"],
-               max_w_mm=float(opts.get("szer_tabel", 176.0)))
+    sz = float(opts.get("szer_tabel", 176.0))
+    tabs = [(nm, dict(cols=t["cols"], rows=t["rows"], title=t["title"], align=t["align"], notes=t["notes"],
+                      max_w_mm=sz)) for nm, t in (("tab_wskazniki", _tab_wskazniki(s, W)),
+                                                  ("tab_odleglosci", _tab_odleglosci(s)))]
+    tb = _tabele(vp, opts, tabs, x_t, top)
     res = SiteResult(site=s, braki=s.braki)
-    res.column_blocks = [("legenda", D.legend_block(used, order=LEGEND_ORDER_PLAN)), ("oo", _block_oo(s))]
+    res.column_blocks = [("legenda", D.legend_block(used, order=LEGEND_ORDER_PLAN)), ("oo", _block_oo(s))] + tb
     res.notes = _notes_plan(s, W, zj_todo, lab)
     res.dane = dict(wskazniki={k_: v for k_, v in W.items() if k_ not in ("cover", "green")}, okno=wb)
     if lab.failed:
@@ -844,14 +868,12 @@ def view_szczegoly(ctx, spec, scale, opts):
     lab.fix_overlaps()
     # tabele obok rysunku
     x_t = wb[2] + 8.0 * k
-    r1 = D.vp_table(vp, x_t, wb[3], **_tab_tyczenie(s, tycz))
-    r2 = D.vp_table(vp, x_t, r1[1] - 6.0 * k, **_tab_rzedne(s, W))
-    r3 = D.vp_table(vp, x_t, r2[1] - 6.0 * k, **_tab_odwodnienie(s))
-    r3 = D.vp_table(vp, x_t, r3[1] - 6.0 * k, **_tab_nawierzchnie(s))
-    D.vp_table(vp, x_t, r3[1] - 6.0 * k, **_tab_retencja(koordynacja(s, opts.get("odleglosci_min"),
-                                                                     opts.get("retencja_min")), s))
+    tabs = [("tab_tyczenie", _tab_tyczenie(s, tycz)), ("tab_rzedne", _tab_rzedne(s, W)),
+            ("tab_odwodnienie", _tab_odwodnienie(s)), ("tab_nawierzchnie", _tab_nawierzchnie(s)),
+            ("tab_retencja", _tab_retencja(koordynacja(s, opts.get("odleglosci_min"), opts.get("retencja_min")), s))]
+    tb = _tabele(vp, opts, tabs, x_t, wb[3])
     res = SiteResult(site=s, braki=s.braki)
-    res.column_blocks = [("legenda", D.legend_block(used))]
+    res.column_blocks = [("legenda", D.legend_block(used))] + tb
     res.notes = _notes_szczegoly(s, zj_todo)
     if lab.failed:
         ctx.note("PZT-02", f"nie umieszczono {len(lab.failed)} opisów: {[f[0] for f in lab.failed][:8]}")
@@ -1058,12 +1080,12 @@ def view_uzbrojenie(ctx, spec, scale, opts):
             lab.label(t["xy"], [t["id"]], D.H, dists=(0.8, 2.0, 4.0), leader_from=2.5, max_cost=6.0)
     lab.fix_overlaps()
     x_t = wb[2] + 8.0 * k
-    y = wb[3]
-    for t in (_tab_przylacza(s), _tab_obiekty(s, win), _tab_koord(K), _tab_skrzyz(K), _tab_kolizje(K)):
-        r = D.vp_table(vp, x_t, y, **t)
-        y = r[1] - 5.0 * k
+    tabs = [("tab_przylacza", _tab_przylacza(s)), ("tab_obiekty", _tab_obiekty(s, win)),
+            ("tab_koordynacja", _tab_koord(K)), ("tab_skrzyzowania", _tab_skrzyz(K)),
+            ("tab_kolizje", _tab_kolizje(K))]
+    tb = _tabele(vp, opts, tabs, x_t, wb[3], gap=5.0)
     res = SiteResult(site=s, braki=s.braki)
-    res.column_blocks = [("legenda", D.legend_block(used))]
+    res.column_blocks = [("legenda", D.legend_block(used))] + tb
     res.notes = _notes_uzbrojenie(s, K, zj_todo)
     res.dane = dict(koordynacja=dict(pary=[(r["a"].lit, r["b"].lit, round(r["d"], 3), r["req"], r["ok"])
                                            for r in K["pary"]], kolizje=[c_["opis"] for c_ in kol],

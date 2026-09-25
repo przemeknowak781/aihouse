@@ -142,3 +142,62 @@ Na tabliczkach (np. PT-AR-01, PT-AR-D-05, PT-BO-03, PT-IS-01, PT-IE-14) pola „
 Naruszone: RPB § 10 ust. 1 pkt 3, W-305 („nie dotyczy (art. 20 ust. 3 pkt 2 PB)”) i W-320.
 Walidator sprawdza znaczniki tylko na stronie tytułowej, więc tego nie wykrywa.
 Poprawka: wypełnić tabliczki znacznikami z modelu (sekcja projekt) i dodać kontrolę tabliczek w AUD-RYS.
+
+### DROBNE
+
+**D-1. PT-1 AR — w części rysunkowej są arkusze stadium PAB (PB-AR-01…10, tabliczka „PB”), takie same jak w tomie I.**
+§ 24 pkt 1 RPB wymaga rysunków „niezawartych” w PAB. Kopie nie są niezgodne z przepisem, ale po zmianie PnB
+(art. 36a PB) mogą się rozejść z tomem I.
+Poprawka: odesłać do tomu I albo wygenerować arkusze PT-AR (stadium PT). To samo zgłosił zespół.
+
+**D-2. W treści PT są ścieżki lokalne i identyfikatory kodu.**
+- PT-3 IS, s. 31: `/home/user/aihouse/model/budynek.yaml`;
+- PT-4 IE: „ParametryObwody.WLZ_przekroj, ParametryPV.s_DC”, „tools/generuj_widoki.py”;
+- PT-2 BO: „wyniki.json”, „BRAKI_DANYCH.md”, „lamela.views.konstrukcja”.
+Są to informacje wewnętrzne, niepotrzebne czytelnikowi PT (kierownikowi budowy); pogarszają zrozumiałość opisu.
+Poprawka: zastąpić opisem źródła, np. „model budynku, wersja z dnia …”.
+
+**D-3. PT-2 BO — czytelność i porządek.**
+- W wykazie rysunków (tab. 10, s. 306) kolumna „Format” jest za wąska („540×5 / 94”), a numery Lp. się łamią („10 / .”).
+- Formaty „nst.” (230×594, 250×594, 510×594 mm itd.) nie są formatami PN-EN ISO 5457 (W-313).
+- Strona 8 jest prawie pusta.
+- Rozdz. 9 zawiera uwagi o kolizjach napisów. Numery lub tytuły w tych uwagach (PT-BO-05, -11, -14) nie zgadzają się
+  z wykazem rysunków (np. PT-BO-05 to w wykazie „ZESTAWIENIE STALI — FUNDAMENT”) — uwagi pochodzą z nieaktualnego
+  `raport_widokow.json`. Kolizje napisów trzeba usunąć przed wydaniem.
+
+**D-4. Zakres opracowania na stronie tytułowej i w oświadczeniu PT wykracza poza tom.**
+Wymieniono „PZT i PAB…; informacja BIOZ” (AR), „oświadczenie z art. 33 ust. 2 pkt 10 PB” (IS), „PZT — zasilanie nN” (IE).
+§ 7 ust. 2 pkt 3 RPB dotyczy zakresu opracowania w danym elemencie, więc w tomie PT należy podać tylko zakres PT.
+
+**D-5. Normy bez wydania lub statusu w PT-1 AR i PT-3 IS (W-319).**
+- AR: „klasa ≥ 3 (WT zał. 2 pkt 2.3.2 (PN-EN 12207))” — powinno być „PN-EN 12207:2001, wycofana, powołana w WT”;
+  PN-EN ISO 9972 bez roku (:2015-10); PN-EN ISO 15927-4:2007 — nie ma jej w rejestrze A.3.
+- IS: PN-EN ISO 13790:2008 (wycofana, zastąpiona przez PN-EN ISO 52016-1) — bez statusu; jako źródło treści normy
+  podano „próbkę normy (iTeh, SIST EN 806-3:2006)”, co nie jest źródłem powołania w PT.
+- IE: PN-EN 12464-1 bez roku.
+
+**D-6. Oznaczenie danych fikcyjnych.**
+W PT-3 IS (rozdz. 7) hydrant „DN80 (ul. Lipowa) [do potwierdzenia]” leży przy ulicy fikcyjnej, a nie ma znacznika
+[DANE PRZYKŁADOWE – FIKCYJNE] (rejestr E.1).
+
+**D-7. Metadane PDF i raporty.**
+- Pole keywords: „RPB Dz.U. 2022 poz. 1679” bez „ze zm.”.
+- Raporty walidacji podają rozmiar w MiB, ale z jednostką „MB” (BO: „10.62 MB”, a plik ma 11,13 MB).
+
+**D-8. Tabliczki PT-IS i PT-IE (format A3×3).**
+Numer pola siatki „18” nakłada się na napis formatu „A3×3 (891×420)”.
+
+## 4. Wniosek
+
+Warstwa formalna jest poprawna: nazwy plików, osobne tomy, wektorowość, rozmiar, strona tytułowa, spis treści,
+dosłowne brzmienie oświadczenia, znaczniki danych osobowych i fikcyjnych, rozdziały ppoż.
+
+Tomy nie są gotowe do podpisu oświadczenia projektanta:
+- K-1: każdy tom powstał z innego, nieaktualnego stanu modelu;
+- K-2: PT-2 BO ma niespełnione warunki i 31 niezamkniętych analiz;
+- K-3: rysunki IS i IE są sprzeczne z obliczeniami.
+Przed ostatnim złożeniem trzeba też poprawić podstawę PT w PT-2 BO (I-1), § 23 pkt 12 (I-2) i uprawnienia
+telekomunikacyjne w PT-4 IE (I-3).
+
+Walidator `sprawdz_tom` daje dziś wynik „OK” mimo K-2, K-3, I-7 i I-9. Listy kontrolne trzeba uzupełnić
+o te warunki.
