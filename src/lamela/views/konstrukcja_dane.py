@@ -881,3 +881,283 @@ def zapisz_raporty(D: DaneKonstr, ctx):
         p = Path(bp)
         p.parent.mkdir(parents=True, exist_ok=True)
         p.write_text("\n".join(L) + "\n", encoding="utf-8")
+
+
+# ================================================================================================ pręty płyt (rzut)
+@dataclass
+class GrupaPr:
+    """Grupa jednakowych prętów w rzucie: pozycja zestawienia, reprezentatywny pręt i linia rozkładu."""
+    pret: Pret
+    n: int
+    s: float | None
+    linia: tuple               # ((x, y), (x, y)) — pręt reprezentatywny
+    rozklad: tuple             # ((x, y), (x, y)) — zasięg rozkładu (prostopadle do prętów)
+    warstwa: str               # dol | gora
+    kier: str                  # x | y
+    element: str
+    pole: str
+    wym: Warstwa | None = None
+    zakres: object = None      # strefa (wielobok) — zbrojenie narożne
+    haki: tuple = (False, False)
+    rola: str = ""             # przeslo | podpora | wspornik | naroze | brzeg
+
+
+def _seg_linii(region, kier: str, t: float, lo: float, hi: float):
+    from shapely.geometry import LineString
+    ln = LineString([(lo, t), (hi, t)]) if kier == "x" else LineString([(t, lo), (t, hi)])
+    g = ln.intersection(region)
+    out = []
+    for gg in getattr(g, "geoms", [g]):
+        if gg.is_empty or gg.geom_type != "LineString" or gg.length < 0.15:
+            continue
+        cs = list(gg.coords)
+        a = min(c[0] if kier == "x" else c[1] for c in cs)
+        b = max(c[0] if kier == "x" else c[1] for c in cs)
+        out.append((round(a, 2), round(b, 2)))
+    return out
+
+
+def skanuj(region, kier: str, t_lo: float, t_hi: float, s_m: float) -> list[tuple]:
+    """Rozmieszczenie prętów kierunku ``kier`` w obszarze: pozycje poprzeczne t_k = t_lo + (k + ½)·Δ, Δ ≤ s;
+    zwraca grupy (a, b, [t…]) — pręty o jednakowych końcach (zaokr. 1 cm) i ciągłym rozkładzie."""
+    if region is None or region.is_empty or t_hi - t_lo < 0.05:
+        return []
+    x0, y0, x1, y1 = region.bounds
+    lo, hi = (x0 - 1.0, x1 + 1.0) if kier == "x" else (y0 - 1.0, y1 + 1.0)
+    n = max(int(math.ceil((t_hi - t_lo) / s_m - 1e-6)), 1)
+    dt = (t_hi - t_lo) / n
+    groups: dict = {}
+    order = []
+    for k in range(n):
+        t = t_lo + (k + 0.5) * dt
+        for ab in _seg_linii(region, kier, t, lo, hi):
+            lst = groups.get(ab)
+            if lst and t - lst[-1][-1] > 1.6 * dt:
+                lst.append([t])
+            elif lst:
+                lst[-1].append(t)
+            else:
+                groups[ab] = [[t]]
+                order.append(ab)
+    out = []
+    for ab in order:
+        for run in groups[ab]:
+            out.append((ab[0], ab[1], run))
+    return out
+
+
+def _rozciagnij(poly, kier: str, ext: float):
+    """Suma przesunięć wieloboku wzdłuż kierunku (przybliżenie sumy Minkowskiego z odcinkiem ±ext)."""
+    from shapely.affinity import translate
+    from shapely.ops import unary_union
+    ds = [-ext, -ext / 2, 0.0, ext / 2, ext]
+    return unary_union([translate(poly, d, 0) if kier == "x" else translate(poly, 0, d) for d in ds]).buffer(0)
+
+
+def _grupy_z_skanu(skan, kier, warstwa, fi, s_mm, element, pole, wym, zest, rola, haki_fn=None, h_leg=0.0):
+    out = []
+    for a, b, ts in skan:
+        L = (b - a) * 1000.0
+        hk = haki_fn(a, b, ts) if haki_fn else (False, False)
+        if hk[0] and hk[1]:
+            pr = Pret(fi, "21", (h_leg * 1000, L, h_leg * 1000), len(ts), element)
+        elif hk[0] or hk[1]:
+            pr = Pret(fi, "11", (L, h_leg * 1000), len(ts), element)
+        else:
+            pr = Pret(fi, "00", (L,), len(ts), element)
+        n = pr.n
+        pr = zest.dodaj(pr)
+        tm = ts[len(ts) // 2]
+        lin = ((a, tm), (b, tm)) if kier == "x" else ((tm, a), (tm, b))
+        am = (a + b) / 2 + (0.18 * (b - a) if rola == "przeslo" and kier == "y" else 0.0)
+        am = min(max(am, a + 0.1), b - 0.1)
+        t0, t1 = ts[0], ts[-1]
+        roz = ((am, t0), (am, t1)) if kier == "x" else ((t0, am), (t1, am))
+        out.append(GrupaPr(pr, n, s_mm, lin, roz, warstwa, kier, element, pole, wym, haki=hk, rola=rola))
+    return out
+
+
+def _lbd(fi: int, beton: str) -> float:
+    """Obliczeniowa długość zakotwienia l_bd [m] (8.4, warunki dobre, pręty proste) — z biblioteki."""
+    from ..obliczenia.konstrukcja import zelbet
+    from ..obliczenia.konstrukcja.materialy import Beton
+    return zelbet.zakotwienie(fi, Beton.z_parametrow(beton)).l_bd / 1000.0
+
+
+def _ceil5(x: float) -> float:
+    return math.ceil(x * 20.0 - 1e-9) / 20.0
+
+
+def prety_poziomu(D: DaneKonstr, lv: Poziom) -> dict:
+    """Pręty płyt poziomu (grupa MES): {'dol': [GrupaPr], 'gora': [GrupaPr], 'zest': Zestawienie} — numeracja
+    wspólna dla warstw dolnej i górnej (cache)."""
+    key = ("poziom", lv.idx)
+    if key in D.cache:
+        return D.cache[key]
+    from shapely.geometry import LineString, Point, box
+    from shapely.ops import unary_union
+    zest = Zestawienie()
+    dol, gora = [], []
+    # ---------------------------------------------------------------- dołem: siatki pól
+    for el in lv.elementy:
+        c = el.c_nom / 1000.0
+        Pin = el.poly.buffer(-c, join_style=2)
+        for pol in el.pola:
+            for kier in ("x", "y"):
+                w = pol.warstwy.get("dol_" + kier)
+                if w is None or pol.poly.is_empty:
+                    continue
+                ext = max(10 * w.fi / 1000.0, 0.10)
+                reg = _rozciagnij(pol.poly, kier, ext).intersection(Pin)
+                bx = pol.poly.intersection(Pin).bounds
+                if not bx or len(bx) < 4:
+                    continue
+                t_lo, t_hi = (bx[1], bx[3]) if kier == "x" else (bx[0], bx[2])
+                sk = skanuj(reg, kier, t_lo, t_hi, w.s / 1000.0)
+                dol += _grupy_z_skanu(sk, kier, "dol", w.fi, w.s, el.id, pol.pole, w, zest, "przeslo")
+    # ---------------------------------------------------------------- górą: nad podporami
+    Pg = lv.poly
+    cmax = max(e.c_nom for e in lv.elementy) / 1000.0
+    Ping = Pg.buffer(-cmax, join_style=2)
+    wsp = [e for e in lv.elementy if e.typ == "wspornik"]
+    pola = [(el, pol) for el in lv.elementy if el.typ != "wspornik" for pol in el.pola]
+    h_lv = max(e.h for e in lv.elementy)
+    for sid, ln, rodz in lv.podpory:
+        (xa, ya), (xb, yb) = ln.coords[0], ln.coords[-1]
+        if abs(xa - xb) < 1e-3:
+            kier, xs, r0, r1 = "x", xa, min(ya, yb), max(ya, yb)
+        elif abs(ya - yb) < 1e-3:
+            kier, xs, r0, r1 = "y", ya, min(xa, xb), max(xa, xb)
+        else:
+            continue
+        i0, i1 = (0, 2) if kier == "x" else (1, 3)       # indeksy rect: x0/x1 lub y0/y1 (strona podpory)
+        j0, j1 = (1, 3) if kier == "x" else (0, 2)       # zakres wzdłuż podpory
+        lewe = [(el, p) for el, p in pola if abs(p.rect[i1] - xs) < 0.05 and p.brzegi[1 if kier == "x" else 3] != "W"]
+        prawe = [(el, p) for el, p in pola if abs(p.rect[i0] - xs) < 0.05 and p.brzegi[0 if kier == "x" else 2] != "W"]
+        cuts = sorted({r0, r1} | {min(max(p.rect[j], r0), r1) for _, p in lewe + prawe for j in (j0, j1)})
+        for t0, t1 in zip(cuts[:-1], cuts[1:]):
+            if t1 - t0 < 0.15:
+                continue
+            tm = (t0 + t1) / 2
+
+            def pokrywa(p):
+                return p.rect[j0] - 1e-6 <= tm <= p.rect[j1] + 1e-6
+            L_ = next(((el, p) for el, p in lewe if pokrywa(p)), None)
+            R_ = next(((el, p) for el, p in prawe if pokrywa(p)), None)
+            if L_ is None and R_ is None:
+                continue
+            # wspornik przy podporze (≤ 0,6 m) — zbrojenie górne wspornika przechodzi nad podporą
+            probe = box(xs - 0.6, t0, xs + 0.6, t1) if kier == "x" else box(t0, xs - 0.6, t1, xs + 0.6)
+            if any(e.poly.intersects(probe) for e in wsp):
+                continue
+            ws = [x[1].warstwy.get("gora_" + kier) for x in (L_, R_) if x is not None and x[1].warstwy.get("gora_" + kier)]
+            if not ws:
+                continue
+            w = max(ws, key=lambda q: (q.As_prov, q.fi))
+            beton = (L_ or R_)[0].beton
+            lbd = _lbd(w.fi, beton)
+            # przęsło: 0,3·l (każda strona podpory pośredniej; ≥ 0,2·l od lica przy skrajnej — 9.3.1.2(2)), ≥ l_bd;
+            # strona bez pola (krawędź płyty) — do krawędzi z odgięciem (obcięcie obszarem płyty)
+            la = _ceil5(max(0.30 * (L_[1].lx if kier == "x" else L_[1].ly), lbd)) if L_ else 1.0
+            ra = _ceil5(max(0.30 * (R_[1].lx if kier == "x" else R_[1].ly), lbd)) if R_ else 1.0
+            reg = (box(xs - la, t0, xs + ra, t1) if kier == "x" else box(t0, xs - la, t1, xs + ra)).intersection(Ping)
+            sk = skanuj(reg, kier, t0, t1, w.s / 1000.0)
+            bnd = Ping.boundary
+
+            def haki(a, b, ts, _k=kier):
+                t = ts[len(ts) // 2]
+                pa = Point(a, t) if _k == "x" else Point(t, a)
+                pb = Point(b, t) if _k == "x" else Point(t, b)
+                return (pa.distance(bnd) < 0.02, pb.distance(bnd) < 0.02)
+            gora += _grupy_z_skanu(sk, kier, "gora", w.fi, w.s, (L_ or R_)[0].id, sid, w, zest, "podpora", haki,
+                                   h_lv - 2 * cmax)
+    D.cache[key] = dict(dol=dol, gora=gora, zest=zest)
+    _gora_wsporniki(D, lv, zest, gora, Ping, h_lv, cmax)
+    _naroza(D, lv, zest, dol, gora)
+    return D.cache[key]
+
+
+def _gora_wsporniki(D, lv, zest, gora, Ping, h_lv, cmax):
+    """Zbrojenie górne płyt wspornikowych: od krawędzi swobodnej (odgięcie) przez linię zamocowania do przęsła
+    zaplecza na długość max(l_c; l_bd) za najbliższą podporą (ściana/belka ≤ 0,6 m od zamocowania)."""
+    from shapely.geometry import LineString, Point, box
+    from shapely.ops import unary_union
+    for el in [e for e in lv.elementy if e.typ == "wspornik"]:
+        inne = unary_union([e.poly for e in lv.elementy if e is not el])
+        if inne.is_empty:
+            continue
+        root = el.poly.boundary.intersection(inne.buffer(0.02))
+        segs = [g for g in getattr(root, "geoms", [root]) if g.geom_type == "LineString" and g.length > 0.3]
+        for sg in segs:
+            (xa, ya), (xb, yb) = sg.coords[0], sg.coords[-1]
+            if abs(ya - yb) < 1e-3:
+                kier, r = "y", ya
+                t0, t1 = sorted((xa, xb))
+            elif abs(xa - xb) < 1e-3:
+                kier, r = "x", xa
+                t0, t1 = sorted((ya, yb))
+            else:
+                continue
+            probe = box(t0, r - 0.05, t1, r + 0.05) if kier == "y" else box(r - 0.05, t0, r + 0.05, t1)
+            strona = 1.0 if el.poly.intersection(probe.buffer(0.3)).centroid.coords[0][1 if kier == "y" else 0] > r \
+                else -1.0                                       # strona wspornika względem linii zamocowania
+            pol = max(el.pola, key=lambda p: p.poly.area) if el.pola else None
+            if pol is None:
+                continue
+            w = pol.warstwy.get("gora_" + kier)
+            if w is None:
+                continue
+            ext = el.poly.bounds
+            l_c = (ext[3] - ext[1] if kier == "y" else ext[2] - ext[0])
+            l_c = min(l_c, max(abs(v - r) for v in ((ext[1], ext[3]) if kier == "y" else (ext[0], ext[2]))))
+            podp = [ln for _, ln, _r in lv.podpory
+                    if (kier == "y" and abs(ln.coords[0][1] - ln.coords[-1][1]) < 1e-3 and 0 < -strona * (ln.coords[0][1] - r) < 0.6)
+                    or (kier == "x" and abs(ln.coords[0][0] - ln.coords[-1][0]) < 1e-3 and 0 < -strona * (ln.coords[0][0] - r) < 0.6)]
+            d_s = min((abs((ln.coords[0][1] if kier == "y" else ln.coords[0][0]) - r) for ln in podp), default=0.0)
+            back = _ceil5(d_s + max(l_c, _lbd(w.fi, el.beton)))
+            a, b = sorted((r - strona * back, r + strona * (l_c + 0.5)))
+            reg = (box(t0, a, t1, b) if kier == "y" else box(a, t0, b, t1)).intersection(Ping)
+            sk = skanuj(reg, kier, t0 + el.c_nom / 1000, t1 - el.c_nom / 1000, w.s / 1000.0)
+            bnd = el.poly.buffer(-el.c_nom / 1000.0, join_style=2).boundary
+
+            def haki(a_, b_, ts, _k=kier):
+                t = ts[len(ts) // 2]
+                pa = Point(t, a_) if _k == "y" else Point(a_, t)
+                pb = Point(t, b_) if _k == "y" else Point(b_, t)
+                return (pa.distance(bnd) < 0.02, pb.distance(bnd) < 0.02)
+            gora += _grupy_z_skanu(sk, kier, "gora", w.fi, w.s, el.id, pol.pole, w, zest, "wspornik", haki,
+                                   el.h - 2 * el.c_nom / 1000.0)
+
+
+def _naroza(D, lv, zest, dol, gora):
+    """Zbrojenie stref narożnych pól (0,2·l_min × 0,2·l_min, górą i dołem, 2 kierunki) — wymagane przez bibliotekę
+    (moment skręcający; PN-EN 1992-1-1 9.3.1.3) w narożach pól między krawędziami podpartymi, z których co najmniej
+    jedna jest swobodnie podparta (przy dwóch krawędziach ciągłych naroże pokrywa zbrojenie podporowe)."""
+    from shapely.geometry import box
+    for el in lv.elementy:
+        Pin = el.poly.buffer(-el.c_nom / 1000.0, join_style=2)
+        for pol in el.pola:
+            w = pol.warstwy.get("naroze")
+            if w is None or el.typ == "wspornik":
+                continue
+            x0, y0, x1, y1 = pol.rect
+            br = pol.brzegi
+            a_n = 0.2 * min(pol.lx, pol.ly)
+            for (xx, bx_), (yy, by_) in (((x0, br[0]), (y0, br[2])), ((x1, br[1]), (y0, br[2])),
+                                         ((x1, br[1]), (y1, br[3])), ((x0, br[0]), (y1, br[3]))):
+                if not (bx_ in "SU" and by_ in "SU") or "S" not in bx_ + by_:
+                    continue
+                zone = box(xx - a_n, yy - a_n, xx + a_n, yy + a_n).intersection(pol.poly)
+                if zone.area < 0.01:
+                    continue
+                ext = max(10 * w.fi / 1000.0, 0.15)
+                for warstwa, lst in (("dol", dol), ("gora", gora)):
+                    for kier in ("x", "y"):
+                        reg = _rozciagnij(zone, kier, ext).intersection(Pin)
+                        bx = zone.bounds
+                        t_lo, t_hi = (bx[1], bx[3]) if kier == "x" else (bx[0], bx[2])
+                        gs = _grupy_z_skanu(skanuj(reg, kier, t_lo, t_hi, w.s / 1000.0), kier, warstwa, w.fi, w.s,
+                                            el.id, pol.pole, w, zest, "naroze")
+                        for g in gs:
+                            g.zakres = zone
+                        lst += gs

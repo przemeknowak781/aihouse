@@ -824,3 +824,279 @@ def draw_utilities(c, s, used: set, win=None, inside=None, marks=True):
                 if any(E.istn and E.branza == sx.branza and E.geom.distance(Point(q)) < 0.05 for E in s.sieci):
                     cross_mark(c, q, color=sx.kolor)
                     used.add("wlaczenie")
+
+
+# ================================================================================================ wymiary i rzędne
+def dim_pts(c, a, b, h=H, label=None, layer="Z-WYMIARY"):
+    """Wymiar odcinka a–b w m (2 miejsca — RPB § 15 ust. 3), linie 0,18 (PN-B-01027 poz. 4.1)."""
+    from ..draft import dims
+    a, b = np.asarray(a, float), np.asarray(b, float)
+    ang = math.degrees(math.atan2(b[1] - a[1], b[0] - a[0]))
+    return dims.dim_chain(c, [a, b], a, ang, layer=layer, h=h, unit_="m", tick_pen=0.18, ext_len=(1.5, 1.5),
+                          overshoot_mm=1.5, tick_mm=2.5, labels=[label] if label else None, mask=0.3)
+
+
+def place_dim(lab: Labeler, a, b, el=None, bnd=None, span=8.0, step=0.25, label=None, max_cost=None,
+              prefer=0.0):
+    """Wymiar odległości a–b (np. lico ściany – granica) przesuwany równolegle (wzdłuż lica) w miejsce o
+    najmniejszej kolizji; ``el``/``bnd`` — geometrie, na których muszą leżeć końce po przesunięciu."""
+    a, b = np.asarray(a, float), np.asarray(b, float)
+    if np.hypot(*(b - a)) < 1e-3:
+        return None
+    t = perp(unit(b - a))
+    shifts = sorted(np.arange(-span, span + 1e-9, step), key=lambda v: abs(v - prefer))
+    cands = []
+    for sh in shifts:
+        a2, b2 = a + t * sh, b + t * sh
+        if el is not None and el.distance(Point(a2)) > 0.02:
+            continue
+        if bnd is not None and bnd.distance(Point(b2)) > 0.02:
+            continue
+        if el is not None and not isinstance(el, LineString):
+            seg = LineString([a2 + unit(b2 - a2) * 0.02, b2])
+            if el.buffer(-0.005).intersects(seg):
+                continue
+        cands.append(sh)
+    if not cands:
+        cands = [0.0]
+
+    def fn(cv, sh):
+        dim_pts(cv, a + t * sh, b + t * sh, label=label)
+    pos, _c = lab.pl.place(lab.vp, fn, cands, penalty_step=0.01, max_cost=max_cost)
+    return pos
+
+
+def spot(lab: Labeler, p, Hh, projected=False, max_cost=None, dists=(0.6, 1.5, 3.0, 5.0), dirs=None,
+         color=None, h=H):
+    """Rzędna terenu (m n.p.m., 2 miejsca): istniejąca — krzyżyk + wartość kursywą; projektowana — kropka +
+    wartość w ramce (PN-B-01025, praktyka PZT)."""
+    c = lab.vp
+    k = c.k
+    P = np.asarray(p, float)
+    txt = f"{Hh:.2f}".replace(".", ",")
+    n0 = lab.mark()
+    if projected:
+        c.dot(P, 0.9, "Z-RZEDNE-PROJ")
+        layer, style = "Z-RZEDNE-PROJ", "normal"
+    else:
+        s_ = 0.8 * k
+        c.line(P + [-s_, 0], P + [s_, 0], "Z-RZEDNE", pen=0.18, color=color or "#6b4423")
+        c.line(P + [0, -s_], P + [0, s_], "Z-RZEDNE", pen=0.18, color=color or "#6b4423")
+        layer, style = "Z-RZEDNE", "italic"
+    lab.reg(n0, w_fill=0.6, w_line=0.6)
+    return lab.label(P, [txt], h, layer, style, color or (None if projected else "#6b4423"), mask=0.4,
+                     dists=dists, dirs=dirs, frame=projected, leader_from=2.5, max_cost=max_cost)
+
+
+def slope_arrow(lab: Labeler, poly, direction, pct, length_mm=10.0, max_cost=None, text=None):
+    """Strzałka spadku w polu ``poly`` (grot w kierunku spadku) z wartością w % (PN-B-01025)."""
+    from ..draft import dims
+    c = lab.vp
+    k = c.k
+    d = unit(direction)
+    L = length_mm * k
+    P0 = np.asarray(poly.representative_point().coords[0])
+    inner = poly.buffer(-1.0 * k)
+    cands = []
+    for r in (0.0, 2.0, 4.0, 6.0, 9.0):
+        for i in range(8 if r else 1):
+            a = 2 * math.pi * i / 8
+            q = P0 + np.array([math.cos(a), math.sin(a)]) * r * k
+            A, B = q - d * L / 2, q + d * L / 2
+            if inner.is_empty or inner.contains(LineString([A, B])):
+                cands.append((A, B))
+    if not cands:
+        cands = [(P0 - d * L / 2, P0 + d * L / 2)]
+    lbl = text or (f"{pct * 100:.1f}%".replace(".", ","))
+
+    def fn(cv, ab):
+        dims.slope(cv, ab[0], ab[1], text=lbl, h=H, layer="Z-ODWODNIENIE")
+    return lab.pl.place(c, fn, cands, penalty_step=0.02, max_cost=max_cost)
+
+
+# ================================================================================================ legenda (arkusz)
+def _lg_line(pen, lt=None, color=None, layer="R-LEGENDA"):
+    def f(sh, x, y):
+        sh.line((x + 1, y), (x + 15, y), layer, pen=pen, lt=lt or "CIAGLA", color=color)
+    return f
+
+
+def _lg_util(branza, existing):
+    def f(sh, x, y):
+        from .site_data import BRANZE, Siec
+        sx = Siec(branza, LineString([(x + 1, y), (x + 15, y)]), "", existing)
+        utility(sh, sx.geom, sx, existing=existing, flow=False)
+        sh.text((x + 8, y + 0.9), BRANZE[branza][0], 1.8, 0.0, "center", "bottom", "R-LEGENDA", color=sx.kolor)
+    return f
+
+
+def _lg_rect(kind):
+    def f(sh, x, y):
+        from ..draft import symbols as S
+        from ..draft.hatch import _dots, _rng
+        r = box(x + 1, y - 1.8, x + 15, y + 1.8)
+        if kind == "jezdnia":
+            sh.fill(r, "Z-DROGA", "#e6e6e6")
+        elif kind == "bud_sasiedni":
+            from ..draft.hatch import _parallel
+            for ln in _parallel(r, 45.0, 1.5):
+                sh.polyline(ln, "Z-MAPA", pen=0.13, color="#8a8a8a")
+            sh.polygon(np.asarray(r.exterior.coords)[:-1], "Z-MAPA", pen=0.35, color="#3a3a3a")
+            sh.text((x + 8, y), "m2", 1.8, 0, "center", "middle", "R-LEGENDA", style="italic", mask=0.3)
+            return
+        elif kind in ("drobne", "duze", "deska"):
+            S.paving(sh, r, kind, outline=False, band_mm=1.2 if kind == "drobne" else None)
+        elif kind == "azur":
+            S.paving(sh, r, "duze", outline=False)
+            _dots(sh, r, 0.15, _rng(r, 3), "Z-ZIELEN", 0.14, pen=0.25)
+        elif kind == "opaska":
+            _dots(sh, r, 0.35, _rng(r, 4), "Z-UTWARDZENIA", 0.3, pen=0.25)
+        elif kind == "trawnik":
+            S.lawn(sh, r, 3.0, seed=5)
+            return
+        elif kind == "niecka":
+            for yy in (y - 0.8, y + 0.8):
+                sh.polyline([(x + 2 + i * 0.6, yy + (0.25 if i % 2 else -0.25)) for i in range(21)], "Z-ODWODNIENIE",
+                            pen=0.18)
+            sh.polygon(np.asarray(r.exterior.coords)[:-1], "Z-ODWODNIENIE", pen=0.5)
+            return
+        elif kind == "strefa":
+            from ..draft.hatch import _parallel
+            for ln in _parallel(r, 45.0, 1.2):
+                sh.polyline(ln, "Z-STREFY", pen=0.13)
+            sh.polygon(np.asarray(r.exterior.coords)[:-1], "Z-STREFY", pen=0.25, lt="KRESKOWA")
+            b = box(x + 5.5, y - 0.9, x + 10.5, y + 0.9)
+            sh.fill(b, "Z-TLO", "#ffffff", z=20)
+            sh.polygon(np.asarray(b.exterior.coords)[:-1], "Z-UZBROJENIE", pen=0.5)
+            sh.line((x + 5.5, y - 0.9), (x + 10.5, y + 0.9), "Z-UZBROJENIE", pen=0.18)
+            return
+        elif kind == "zbiornik":
+            b = box(x + 4.5, y - 2.0, x + 11.5, y + 2.0)
+            sh.polygon(np.asarray(b.exterior.coords)[:-1], "Z-ODWODNIENIE", pen=0.5)
+            sh.text((x + 8, y), "ZB", 1.8, 0, "center", "middle", "Z-ODWODNIENIE")
+            return
+        elif kind == "zjazd":
+            sh.polygon(np.asarray(r.exterior.coords)[:-1], "Z-UTWARDZENIA", pen=0.35, lt="KRESKOWA")
+            return
+        pen = 0.35 if kind != "jezdnia" else 0.25
+        sh.polygon(np.asarray(r.exterior.coords)[:-1], "Z-UTWARDZENIA", pen=pen)
+    return f
+
+
+def _lg_sym(kind):
+    def f(sh, x, y):
+        from ..draft import symbols as S
+        from ..draft.dims import arrowhead, slope
+        p = np.array([x + 8.0, y])
+        if kind == "granica":
+            sh.line((x + 1, y), (x + 15, y), "Z-DZIALKA", pen=0.35, lt="CIAGLA", color="#000000")
+            sh.dot((x + 1, y), 1.0, "Z-DZIALKA")
+            sh.dot((x + 15, y), 1.0, "Z-DZIALKA")
+            sh.fill(circle_pts(p, 2.0, 24), "Z-DZIALKA", "#ffffff", z=26.2)
+            sh.circle(p, 2.0, "Z-DZIALKA", pen=0.25, z=26.3)
+            sh.text(p, "A", 1.8, 0, "center", "middle", "Z-DZIALKA")
+        elif kind == "linia_zabudowy":
+            col = styles.layer("Z-LZ").plot_rgb
+            sh.line((x + 1, y), (x + 15, y), "Z-LZ", pen=0.35, lt="CIAGLA", color=col)
+            for xx in (x + 4.5, x + 11.5):
+                sh.polygon([(xx - 1, y), (xx + 1, y), (xx, y - 1.73)], "Z-LZ", pen=0.25, lt="CIAGLA", color=col)
+        elif kind == "wejscie":
+            S.site_entrance(sh, (x + 10, y), 0.0, layer="Z-BUDYNEK")
+        elif kind == "wjazd":
+            sh.line((x + 2, y), (x + 13, y), "Z-BUDYNEK", pen=0.35)
+            arrowhead(sh, (x + 14, y), (1, 0), 2.5, 14, False, "Z-BUDYNEK", pen=0.35)
+        elif kind == "zywoplot":
+            S.hedge(sh, [(x + 1, y), (x + 15, y)], width=1.6)
+        elif kind == "rabata":
+            sh.polygon(np.asarray(box(x + 1, y - 1.8, x + 15, y + 1.8).exterior.coords)[:-1], "Z-ZIELEN", pen=0.25,
+                       lt="KRESKOWA")
+            for xx in (x + 4.5, x + 8, x + 11.5):
+                S.shrub(sh, (xx, y), 2.2)
+        elif kind in ("drzewo_proj", "drzewo_ist", "drzewo_usun"):
+            S.tree(sh, p, 5.0, existing=kind != "drzewo_proj", remove=kind == "drzewo_usun")
+        elif kind == "ogrodzenie":
+            S.fence(sh, [(x + 1, y), (x + 15, y)], "Z-OGRODZENIE")
+        elif kind == "brama":
+            S.gate(sh, (x + 2, y - 1.5), (x + 14, y - 1.5), "przesuwna", "Z-OGRODZENIE")
+        elif kind == "furtka":
+            sh.line((x + 1, y - 1.5), (x + 5, y - 1.5), "Z-OGRODZENIE", pen=0.35)
+            S.gate(sh, (x + 5, y - 1.5), (x + 9, y - 1.5), "furtka", "Z-OGRODZENIE")
+        elif kind == "parking":
+            sh.polygon(np.asarray(box(x + 3, y - 2.0, x + 13, y + 2.0).exterior.coords)[:-1], "Z-UTWARDZENIA",
+                       pen=0.25)
+            sh.text(p, "P", 1.8, 0, "center", "middle", "R-LEGENDA", style="bold")
+        elif kind == "odpady":
+            sh.polygon(np.asarray(box(x + 2, y - 1.5, x + 14, y + 1.5).exterior.coords)[:-1], "Z-OGRODZENIE",
+                       pen=0.35)
+            for xx in (x + 4, x + 7, x + 10, x + 12.5):
+                sh.polygon(np.asarray(box(xx - 0.9, y - 0.9, xx + 0.9, y + 0.9).exterior.coords)[:-1],
+                           "Z-OGRODZENIE", pen=0.18)
+        elif kind == "odw_liniowe":
+            for off in (-0.45, 0.45):
+                sh.line((x + 1, y + off), (x + 15, y + off), "Z-ODWODNIENIE", pen=0.25)
+            for xx in np.arange(x + 1.5, x + 15, 1.0):
+                sh.line((xx, y - 0.45), (xx, y + 0.45), "Z-ODWODNIENIE", pen=0.18)
+        elif kind == "odw_niecka":
+            sh.line((x + 1, y), (x + 15, y), "Z-ODWODNIENIE", pen=0.35, lt="KRESKA_DLUGA")
+            arrowhead(sh, (x + 12, y), (1, 0), 2.5, 12, True, "Z-ODWODNIENIE", pen=0.25)
+        elif kind == "rura_spustowa":
+            sh.circle((x + 5, y), 0.9, "Z-ODWODNIENIE", pen=0.35)
+            sh.dot((x + 5, y), 0.5, "Z-ODWODNIENIE")
+            sh.circle((x + 11, y), 0.9, "Z-ODWODNIENIE", pen=0.35, lt="KRESKOWA_DROBNA")
+            sh.dot((x + 11, y), 0.5, "Z-ODWODNIENIE")
+        elif kind == "wlaczenie":
+            sh.line((x + 1, y), (x + 8, y), "Z-SIECI-IST", pen=0.35, color="#0050c8")
+            sh.line((x + 8, y), (x + 8, y - 2), "Z-SIECI-PROJ", pen=0.5, color="#0050c8")
+            cross_mark(sh, (x + 8, y), color="#0050c8")
+        elif kind == "zkp":
+            q = [(x + 5, y - 1), (x + 11, y - 1), (x + 11, y + 1), (x + 5, y + 1)]
+            sh.polygon(q, "Z-UZBROJENIE", pen=0.5, color=BRANZE_COL("en"))
+            sh.line(q[0], q[2], "Z-UZBROJENIE", pen=0.25, color=BRANZE_COL("en"))
+        elif kind == "studzienka":
+            sh.circle(p, 1.2, "Z-UZBROJENIE", pen=0.35, color=BRANZE_COL("kan_sanit"))
+            sh.dot(p, 0.5, "Z-UZBROJENIE", color=BRANZE_COL("kan_sanit"))
+        elif kind == "studnia_chlonna":
+            sh.circle(p, 1.4, "Z-ODWODNIENIE", pen=0.35)
+            sh.circle(p, 0.7, "Z-ODWODNIENIE", pen=0.18)
+        elif kind == "hydrant":
+            sh.circle(p, 1.5, "Z-SIECI-IST", pen=0.35, color=BRANZE_COL("woda"))
+            sh.dot(p, 0.8, "Z-SIECI-IST", color=BRANZE_COL("woda"))
+        elif kind == "spot_ist":
+            sh.line((x + 2, y), (x + 3.6, y), "Z-RZEDNE", pen=0.18, color="#6b4423")
+            sh.line((x + 2.8, y - 0.8), (x + 2.8, y + 0.8), "Z-RZEDNE", pen=0.18, color="#6b4423")
+            sh.text((x + 4.2, y + 0.3), "101,25", 1.8, 0, "left", "baseline", "Z-RZEDNE", style="italic",
+                    color="#6b4423")
+        elif kind == "spot_proj":
+            sh.dot((x + 2.8, y), 0.9, "Z-RZEDNE-PROJ")
+            sh.text((x + 4.4, y + 0.3), "101,35", 1.8, 0, "left", "baseline", "Z-RZEDNE-PROJ")
+            sh.rect(x + 3.9, y - 0.4, x + 4.4 + T.width("101,35", 1.8) + 0.5, y + 2.4, "Z-RZEDNE-PROJ", pen=0.18)
+        elif kind in ("spadek", "splyw"):
+            slope(sh, (x + 1, y - 0.6), (x + 15, y - 0.6), text="2,0%" if kind == "spadek" else "i", h=1.8,
+                  layer="Z-ODWODNIENIE")
+        elif kind == "zero":
+            sh.text((x + 8, y + 0.2), "±0,00=101,65", 1.8, 0, "center", "baseline", "R-LEGENDA")
+        elif kind == "wymiar":
+            dim_pts(sh, (x + 1, y - 1.2), (x + 15, y - 1.2), h=1.8, label="4,30", layer="R-LEGENDA")
+        elif kind == "tyczenie":
+            tyczenie_mark(sh, p, "T1")
+        elif kind == "kolizja":
+            sh.circle(p, 2.0, "Z-KOLIZJE", pen=0.5)
+            sh.text(p, "K1", 1.8, 0, "center", "middle", "Z-KOLIZJE", style="bold")
+        elif kind == "skrzyzowanie":
+            sh.line((x + 2, y), (x + 14, y), "Z-SIECI-PROJ", pen=0.5, color="#0050c8")
+            sh.line((p[0], y - 2), (p[0], y + 2), "Z-SIECI-PROJ", pen=0.7, color="#d00000")
+            sh.circle(p, 1.0, "Z-KOLIZJE", pen=0.25)
+        elif kind == "mapa_ramka":
+            sh.rect(x + 1, y - 1.8, x + 15, y + 1.8, "Z-MAPA-RAMKA", pen=0.5)
+    return f
+
+
+def tyczenie_mark(c, p, label=None, layer="Z-TYCZENIE"):
+    """Punkt tyczenia: kółko Ø2 mm z krzyżem (współrzędne w wykazie)."""
+    k = c.k
+    P = np.asarray(p, float)
+    c.circle(P, 1.0 * k, layer, pen=0.25)
+    c.line(P + [-1.6 * k, 0], P + [1.6 * k, 0], layer, pen=0.18)
+    c.line(P + [0, -1.6 * k], P + [0, 1.6 * k], layer, pen=0.18)
+    if label and c.k == 1.0:
+        c.text(P + [2.2, 0.4], label, 1.8, 0, "left", "baseline", layer)

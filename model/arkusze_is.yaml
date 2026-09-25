@@ -1,0 +1,46 @@
+# Konfiguracja arkuszy PROJEKTU TECHNICZNEGO — INSTALACJE SANITARNE (RPB Dz.U. 2020 poz. 1609 ze zm., § 23–24).
+# Generator: lamela.views.instalacje (typy inst_rzut / inst_schemat); CLI:
+#   PYTHONPATH=src python3 tools/generuj_widoki.py --arkusze model/arkusze_is.yaml --out projekt/05_PT_instalacje_sanitarne/rysunki
+# Plik NIE zawiera danych budynku ani instalacji — tylko układ arkuszy. Treść: model/budynek.yaml (dachy § 6, pomieszczenia),
+# model/instalacje.yaml, model/wyposazenie.yaml, model/dzialka.yaml + wyniki lamela.obliczenia (uruchamiane przy generowaniu).
+wspolne:
+  pracownia: "PRACOWNIA PROJEKTOWA — nazwa do uzupełnienia"
+  pracownia_adres: "adres pracowni do uzupełnienia"
+  inwestor: "(do uzupełnienia)"
+  obiekt: "Budynek mieszkalny jednorodzinny wolnostojący „Dom LAMELA”"
+  lokalizacja: null            # null → z dzialka.yaml
+  kategoria: "I"
+  stadium: "PT"
+  branza: "INSTALACJE SANITARNE (IS)"
+  prefiks_nr: "PT-IS"
+  data: null                   # null → meta.data modelu
+  rewizja: "0"
+  skala: 50                    # RPB § 9 ust. 3: rzuty instalacji 1:50 (dopuszczalne 1:100)
+  format: auto
+  numeracja_pomieszczen: iso
+  wysokosc_ciecia: 1.10
+  plik_tomu: tom_PT-IS.pdf
+  tytul_tomu: "Projekt techniczny — instalacje sanitarne (rysunki)"
+  braki_danych: projekt/05_PT_instalacje_sanitarne/BRAKI_DANYCH.md
+  instalacje: null             # null → model/instalacje.yaml (obok budynek.yaml)
+  wyposazenie: null
+  uwagi:
+    - "Rysunki instalacji na podkładzie rzutów architektury (PB-AR); podkład — linie cienkie szare (warstwy I-PODKLAD*)."
+arkusze:
+  - {nr: PT-IS-01, tytul: "INSTALACJA WODOCIĄGOWA — RZUT PARTERU", typ: inst_rzut, branza: IS-W, kond: P0}
+  - {nr: PT-IS-02, tytul: "INSTALACJA WODOCIĄGOWA — RZUT I PIĘTRA", typ: inst_rzut, branza: IS-W, kond: P1}
+  - {nr: PT-IS-03, tytul: "INSTALACJA WODOCIĄGOWA — RZUT II PIĘTRA", typ: inst_rzut, branza: IS-W, kond: P2}
+  - {nr: PT-IS-04, tytul: "KANALIZACJA SANITARNA — RZUT PARTERU", typ: inst_rzut, branza: IS-K, kond: P0}
+  - {nr: PT-IS-05, tytul: "KANALIZACJA SANITARNA — RZUT I PIĘTRA", typ: inst_rzut, branza: IS-K, kond: P1}
+  - {nr: PT-IS-06, tytul: "KANALIZACJA SANITARNA — RZUT II PIĘTRA", typ: inst_rzut, branza: IS-K, kond: P2}
+  - {nr: PT-IS-07, tytul: "ODWODNIENIE DACHÓW — RZUT DACHU", typ: inst_rzut, branza: IS-D, kond: dach}
+  - {nr: PT-IS-08, tytul: "ODWODNIENIE DACHÓW — RZUT PARTERU (RURY SPUSTOWE)", typ: inst_rzut, branza: IS-D, kond: P0}
+  - {nr: PT-IS-09, tytul: "OGRZEWANIE — RZUT PARTERU", typ: inst_rzut, branza: IS-CO, kond: P0}
+  - {nr: PT-IS-10, tytul: "OGRZEWANIE — RZUT I PIĘTRA", typ: inst_rzut, branza: IS-CO, kond: P1}
+  - {nr: PT-IS-11, tytul: "OGRZEWANIE — RZUT II PIĘTRA", typ: inst_rzut, branza: IS-CO, kond: P2}
+  - {nr: PT-IS-12, tytul: "WENTYLACJA MECHANICZNA — RZUT PARTERU", typ: inst_rzut, branza: IS-WM, kond: P0}
+  - {nr: PT-IS-13, tytul: "WENTYLACJA MECHANICZNA — RZUT I PIĘTRA", typ: inst_rzut, branza: IS-WM, kond: P1}
+  - {nr: PT-IS-14, tytul: "WENTYLACJA MECHANICZNA — RZUT II PIĘTRA", typ: inst_rzut, branza: IS-WM, kond: P2}
+  - {nr: PT-IS-15, tytul: "KANALIZACJA SANITARNA — ROZWINIĘCIE PIONÓW", typ: inst_schemat, schemat: kanalizacja}
+  - {nr: PT-IS-16, tytul: "INSTALACJA WODOCIĄGOWA — ROZWINIĘCIE (AKSONOMETRIA)", typ: inst_schemat, schemat: woda}
+  - {nr: PT-IS-17, tytul: "SCHEMAT POMPY CIEPŁA, C.O. I C.W.U.", typ: inst_schemat, schemat: pc}

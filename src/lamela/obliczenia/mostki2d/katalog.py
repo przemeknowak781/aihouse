@@ -420,6 +420,22 @@ def wezly_z_sekcji(model, y_teren: float = -0.30) -> tuple[list[G.Wezel], dict[s
         kody = [str(k) for k in (e.get("przegrody") or [])]
         par = {k: v for k, v in (e.get("parametry") or {}).items() if isinstance(v, (int, float, str, bool))}
         nz = e.get("nazwa")
+        # węzły budowane z geometrii modelu (katalog_dod: wsporniki, strop nad powietrzem, garaż) — podwęzły a, b, …
+        try:
+            from .katalog_dod import zbuduj
+            dod = zbuduj(model, e, y_teren=y_teren)
+        except ValueError as ex:
+            pom.append(f"{wid}: nie zbudowano węzła z geometrii modelu ({ex}) — obsługa ogólna")
+            dod = None
+        if dod:
+            L_geo = sum(L for _w, L in dod) or 1.0
+            for w, L in dod:
+                out.append(w)
+                kody_w[w.id] = kody
+                w.dane["długość z geometrii modelu [m]"] = round(L, 2)
+                if e.get("dlugosc") is not None:     # długość wpisu modelu dzielona proporcjonalnie do geometrii
+                    dl[w.id] = round(float(e["dlugosc"]) * L / L_geo, 3)
+            continue
         if rodz is None:
             pom.append(f"{wid}: typ „{typ}” nieobsługiwany w modelu 2D (mostek punktowy χ / węzeł 3D) — pominięty")
             continue
