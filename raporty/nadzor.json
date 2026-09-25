@@ -1,19 +1,19 @@
 {
- "czas": "2026-09-25 12:14",
+ "czas": "2026-09-25 12:17",
  "aktywni": [
   {
    "id": "abfdfaca2ef13a7b4",
    "opis": "wf_a8783476-2a1:konstrukcja:1",
-   "idle_min": 0.8,
-   "bez_narzedzi_min": 0.8,
+   "idle_min": 3.8,
+   "bez_narzedzi_min": 3.8,
    "limity": 0,
    "powody": []
   },
   {
    "id": "aa50b84b155499c75",
    "opis": "wf_dad224e5-cd8:poprawki",
-   "idle_min": 1.3,
-   "bez_narzedzi_min": 1.3,
+   "idle_min": 0.1,
+   "bez_narzedzi_min": 0.1,
    "limity": 0,
    "powody": []
   }
