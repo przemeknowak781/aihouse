@@ -179,32 +179,61 @@ def ocen_drenaz(dane: DaneBudynku, par: ParametryDrenaz | None = None) -> WynikD
                        zalecenia=zal)
 
 
-def _strefy_drzwi_z_odwodnieniem(dane: DaneBudynku) -> list:
-    """[(strefa — bufor 0,30 m wokół otworu drzwiowego parteru na licu, opis)] dla drzwi zewnętrznych / HS / bramy z parapetem
-    ≤ 5 cm, przed którymi w modelu działki jest odwodnienie liniowe (typ 'liniowe') w odległości ≤ 2,5 m (fartuch bramy ze spadkiem do OL)."""
+def _teren_tin(dane: DaneBudynku):
+    """Funkcja xy (układ budynku) → rzędna względna terenu projektowanego: TIN liniowy `teren.punkty_projektowane`
+    (``lamela.wskazniki.Teren.projekt``); poza zasięgiem punktów projektowanych — ``dane.teren_z`` (IDW)."""
+    m = dane.model
+    dz = getattr(m, "dz", None) if m is not None else None
+    teren = ((dane.dzialka.get("raw") or {}).get("teren") or {})
+    if dz is None or not teren.get("punkty_projektowane"):
+        return (lambda xy: dane.teren_z(xy)), "teren z punktów działki (IDW)"
+    from ...wskazniki import Teren
+    T = Teren(teren)
+    z_abs = float(((m.raw or {}).get("uklad") or {}).get("zero_abs", 0.0))
+
+    def fz(xy):
+        q = dz.do_dzialki(np.asarray([xy], float))[0]
+        z = float(T.projekt([q])[0])
+        return z - z_abs if np.isfinite(z) else dane.teren_z(xy)
+    return fz, "rzędne projektowane — TIN (dzialka.yaml: teren.punkty_projektowane)"
+
+
+def _strefy_drzwi_z_odwodnieniem(dane: DaneBudynku, par: ParametryDrenaz | None = None) -> list:
+    """[(strefa, opis)] zwolnione z cokołu ≥ 0,30 m (brief §9 pkt 4 „lub odwodnienie liniowe przy drzwiach bezprogowych”):
+    * próg drzwi zewnętrznych / HS / bramy / przeszklenia do posadzki (parapet ≤ 5 cm) parteru, przed którym jest odwodnienie liniowe
+      ≤ ``par.odl_OL_max`` m od progu — strefa: szerokość otworu + ``par.strefa_poza_drzwiami`` z każdej strony, 0,30 m od lica;
+    * odcinek lica wzdłuż korytka odwodnienia liniowego oznaczonego ``przy_licu: true`` (≤ 0,30 m od lica: filarki przy bramie,
+      boczna ściana wnęki wejścia) — rzut korytka na lico, bez przedłużenia."""
     from shapely.geometry import LineString
+    par = par or ParametryDrenaz()
     m = dane.model
     dz = getattr(m, "dz", None)
     if m is None or dz is None:
         return []
-    ol = []
+    ol, lico = [], []
     for o in dane.dzialka.get("odwodnienia") or []:
         if str(o.get("typ")) == "liniowe" and len(o.get("linia") or []) >= 2:
-            ol.append((str(o.get("id")), LineString([tuple(p) for p in dz.do_budynku(np.asarray(o["linia"], float)[:, :2])])))
+            g = LineString([tuple(p) for p in dz.do_budynku(np.asarray(o["linia"], float)[:, :2])])
+            ol.append((str(o.get("id")), g))
+            if o.get("przy_licu"):
+                lico.append((str(o.get("id")), g))
     if not ol:
         return []
     k0 = dane.kondygnacje[0]["id"]
     out = []
+    ext = par.strefa_poza_drzwiami
     for o in m.otwory(kond=k0):
         if o.typ not in ("drzwi_zewn", "drzwi_przesuwne_HS", "brama", "fix") or float(o.parapet or 0.0) > 0.05:
             continue
         es = o.sciana.ext_side      # odcinek otworu na licu zewnętrznym ściany
         tf = o.sciana.face_t(es) if es is not None else 0.0
         seg = LineString([tuple(o.sciana.pt(o.s0, tf)), tuple(o.sciana.pt(o.s1, tf))])
-        bl = [i for i, g in ol if g.distance(seg) <= 2.5]
+        bl = [i for i, g in ol if g.distance(seg) <= par.odl_OL_max]
         if bl:
-            # brama — cały fartuch przed bramą (± 1,0 m), pozostałe ± 0,30 m (przeszklenia stałe do posadzki z progiem jak drzwi)
-            out.append((seg.buffer(1.0 if o.typ == "brama" else 0.30), f"{o.id} ({o.symbol or o.typ}; {', '.join(bl)})"))
+            segx = LineString([tuple(o.sciana.pt(o.s0 - ext, tf)), tuple(o.sciana.pt(o.s1 + ext, tf))])
+            out.append((segx.buffer(0.30, cap_style=2), f"{o.id} ({o.symbol or o.typ}; {', '.join(bl)})"))
+    for i, g in lico:
+        out.append((g.buffer(0.30, cap_style=2), f"korytko {i} przy licu"))
     return out
 
 
