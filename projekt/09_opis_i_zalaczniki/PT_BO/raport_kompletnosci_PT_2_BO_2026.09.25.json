@@ -19,7 +19,7 @@
       "podstawa": "RPB § 2b ust. 3",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "10.91 MB (limit 150 MB)"
+      "szczegoly": "10.92 MB (limit 150 MB)"
     },
     {
       "id": "F-03",
@@ -46,7 +46,7 @@
       "podstawa": "PB art. 34 ust. 3c, ust. 3d pkt 3 (zgodność PT z PZT/PAB i między tomami)",
       "status": "OSTRZEŻENIE",
       "obowiazkowa": true,
-      "szczegoly": "brak znacznika „stan modelu: SHA-256 …” (bieżący model: 4be0ae5e6789)"
+      "szczegoly": "brak znacznika „stan modelu: SHA-256 …” (bieżący model: 98826e2b39ab)"
     },
     {
       "id": "C2-01",
@@ -91,7 +91,7 @@
       "podstawa": "RPB § 6 ust. 2",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "372 stron numerowanych"
+      "szczegoly": "370 stron numerowanych"
     },
     {
       "id": "C2-06",
@@ -190,14 +190,14 @@
       "podstawa": "PB art. 34 ust. 3 pkt 3 lit. a, art. 41 ust. 4a pkt 2; RPB § 23 pkt 1",
       "status": "BRAK",
       "obowiazkowa": true,
-      "szczegoly": "tom zawiera znaczniki niedomkniętych analiz: „NIEZAMKNIĘT” ×7"
+      "szczegoly": "tom zawiera znaczniki niedomkniętych analiz: „NIEZAMKNIĘT” ×5"
     }
   ],
   "znaczniki": {
     "DO UZUPEŁNIENIA": 189,
     "DOKUMENT ZEWNĘTRZNY": 1,
     "DANE PRZYKŁADOWE": 413,
-    "ZAŁ": 81,
+    "ZAŁ": 83,
     "NZW": 74,
     "INT": 0,
     "PROG": 0,
@@ -217,7 +217,7 @@
       "[DO UZUPEŁNIENIA: potwierdzenie wpisu w e-CRUB albo dołączenie kopii]": 1,
       "[DO UZUPEŁNIENIA: status w katalogu PKN — poza rejestrem wymagań A.3]": 4,
       "[DO UZUPEŁNIENIA: rok wydania — poza rejestrem wymagań A.3]": 3,
-      "[ZAŁ]": 81,
+      "[ZAŁ]": 83,
       "[NZW]": 74,
       "[DO UZUPEŁNIENIA: imię i nazwisko, specjalność, nr uprawnień]": 1,
       "[DANE PRZYKŁADOWE]": 6,
@@ -228,13 +228,13 @@
   "elementy": {
     "PT": {
       "od": 1,
-      "do": 400,
-      "strony_opisu": 373,
+      "do": 398,
+      "strony_opisu": 371,
       "arkusze": 27
     }
   },
-  "rozmiar_mb": 10.909336,
-  "strony": 400,
+  "rozmiar_mb": 10.924572,
+  "strony": 398,
   "podsumowanie": {
     "status": "NIEKOMPLETNY",
     "OK": 15,
