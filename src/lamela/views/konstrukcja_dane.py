@@ -802,3 +802,82 @@ def dane(ctx) -> DaneKonstr:
                 if "WYMAGA ANALIZY" in u or "BŁĄD" in u or "niewykonalny" in u]
     ctx._konstr_dane = D
     return D
+
+
+# ================================================================================================ kontrola A_s
+def rejestruj(D: DaneKonstr, element: str, miejsce: str, poz: str, As_req: float, As_min: float, As_prov: float,
+              zbrojenie: str, jedn: str = "mm²/m", s: float | None = None, s_max: float | None = None,
+              As_max: float | None = None, arkusz: str = "", uwagi: str = "", wymuszone_ok: bool | None = None):
+    """Rejestruje zbrojenie NARYSOWANE (φ, s / n·φ) wraz z wymaganiem z obliczeń — do raportu kontroli
+    A_s,prov ≥ max(A_s,req; A_s,min), s ≤ s_max, A_s ≤ A_s,max (PN-EN 1992-1-1 9.2.1.1, 9.3.1.1)."""
+    need = max(As_req, As_min)
+    ok = As_prov + 1e-6 >= need
+    if s is not None and s_max is not None and s > s_max + 1e-6:
+        ok = False
+        uwagi = (uwagi + "; " if uwagi else "") + f"s = {s:.0f} > s_max = {s_max:.0f} mm"
+    if As_max is not None and As_prov > As_max + 1e-6:
+        ok = False
+        uwagi = (uwagi + "; " if uwagi else "") + f"A_s > A_s,max = {As_max:.0f}"
+    if wymuszone_ok is not None:
+        ok = ok and wymuszone_ok
+    k = (element, miejsce)
+    row = D.rys.get(k) or dict(element=element, miejsce=miejsce, poz=poz, arkusze=[])
+    row.update(As_req=round(As_req, 1), As_min=round(As_min, 1), As_prov=round(As_prov, 1), jedn=jedn,
+               zbrojenie=zbrojenie, s=s, s_max=s_max, ok=bool(ok), uwagi=uwagi,
+               zapas=round(As_prov / need - 1.0, 3) if need > 1e-9 else None)
+    if arkusz and arkusz not in row["arkusze"]:
+        row["arkusze"].append(arkusz)
+    D.rys[k] = row
+    return row
+
+
+def zapisz_raporty(D: DaneKonstr, ctx):
+    """Zapisuje raport kontroli zbrojenia (MD + JSON) i listę braków danych — ścieżki z konfiguracji arkuszy
+    (``wspolne.raport_zbrojenia``, ``wspolne.braki_danych``); brak pól = nic nie jest zapisywane."""
+    import json
+    cfg = ctx.cfg
+    rp = cfg.get("raport_zbrojenia")
+    if rp:
+        rows = sorted(D.rys.values(), key=lambda r: (r["element"], r["miejsce"]))
+        n_ok = sum(1 for r in rows if r["ok"])
+        L = ["# Kontrola zbrojenia rysunków PT-BO — A_s,prov ≥ max(A_s,req; A_s,min)", "",
+             "Plik generowany automatycznie przez `lamela.views.konstrukcja` (moduł `konstrukcja_dane.rejestruj`) przy "
+             "rysowaniu arkuszy. A_s,req, A_s,min — z obiektów wyników biblioteki `lamela.obliczenia.konstrukcja` "
+             "(pozycje obliczeń statycznych); A_s,prov — zbrojenie NARYSOWANE na arkuszach (φ/s lub n·φ). Warunki: "
+             "PN-EN 1992-1-1 6.1, 9.2.1.1(1) (9.1N) + NA, 9.2.1.1(3) (A_s,max = 0,04·A_c), 9.3.1.1(3) (s_max).", "",
+             f"**Wynik: {n_ok}/{len(rows)} pozycji spełnia warunek A_s,prov ≥ A_s,req** "
+             f"({len(rows) - n_ok} niespełnionych — kolumna „Uwagi”).", "",
+             "| Element | Miejsce | Poz. obl. | A_s,req | A_s,min | A_s,prov | Jedn. | Zbrojenie | Zapas | Wynik | "
+             "Arkusze | Uwagi |", "|---|---|---|---:|---:|---:|---|---|---:|---|---|---|"]
+        for r in rows:
+            zp = f"{r['zapas'] * 100:+.0f}%" if r.get("zapas") is not None else "—"
+            L.append(f"| {r['element']} | {r['miejsce']} | {r['poz']} | {r['As_req']:.0f} | {r['As_min']:.0f} | "
+                     f"{r['As_prov']:.0f} | {r['jedn']} | {r['zbrojenie']} | {zp} | {'✓' if r['ok'] else '✗'} | "
+                     f"{', '.join(r['arkusze'])} | {r['uwagi']} |")
+        p = Path(rp)
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text("\n".join(L) + "\n", encoding="utf-8")
+        p.with_suffix(".json").write_text(json.dumps(dict(ok=n_ok, razem=len(rows), wiersze=rows), indent=1,
+                                                     ensure_ascii=False, default=str), encoding="utf-8")
+    bp = cfg.get("braki_danych")
+    if bp:
+        stale = cfg.get("braki_danych_stale") or []
+        L = ["# BRAKI DANYCH — projekt techniczny konstrukcji (PT-BO)", "",
+             "Lista generowana automatycznie przez `lamela.views.konstrukcja` z: (1) braków zgłoszonych przez bibliotekę "
+             "obliczeń (`AnalizaKonstrukcji.brak_danych`, uwagi „WYMAGA ANALIZY”), (2) elementów modelu bez wyników "
+             "wymiarowania, (3) danych niezbędnych do rysunków wykonawczych, których model nie zawiera. Uzupełnienie — "
+             "w `tools/buduj_model.py` (model generowany) lub w bibliotece obliczeń.", ""]
+        if stale:
+            L += ["## Dane do uzupełnienia w modelu / uzgodnienia międzybranżowe", ""] + [f"- {s}" for s in stale] + [""]
+        L += ["## Wyniki obliczeń — elementy bez wymiarowania lub z niespełnionymi warunkami", ""]
+        L += [f"- {b}" for b in dict.fromkeys(D.braki)]
+        bad = [r for r in D.rys.values() if not r["ok"]]
+        if bad:
+            L += ["", "## Kontrola zbrojenia — pozycje niespełnione (szczegóły: raport kontroli zbrojenia)", ""]
+            L += [f"- {r['element']} / {r['miejsce']} (poz. {r['poz']}): A_s,prov = {r['As_prov']:.0f} < "
+                  f"max(A_s,req; A_s,min) = {max(r['As_req'], r['As_min']):.0f} {r['jedn']} {r['uwagi']}"
+                  if r['As_prov'] < max(r['As_req'], r['As_min']) else
+                  f"- {r['element']} / {r['miejsce']} (poz. {r['poz']}): {r['uwagi']}" for r in bad]
+        p = Path(bp)
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text("\n".join(L) + "\n", encoding="utf-8")

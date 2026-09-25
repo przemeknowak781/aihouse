@@ -1,35 +1,35 @@
 {
- "czas": "2026-09-25 06:23",
+ "czas": "2026-09-25 06:26",
  "aktywni": [
   {
    "id": "a26849570eda26834",
    "opis": "Build RC wall-beam FEM/STM module",
-   "idle_min": 0.0,
-   "bez_narzedzi_min": 0.0,
-   "limity": 0,
-   "powody": []
-  },
-  {
-   "id": "a076389c324f1eb11",
-   "opis": "Build PZT site-plan generator",
    "idle_min": 0.1,
    "bez_narzedzi_min": 0.1,
    "limity": 0,
    "powody": []
   },
   {
-   "id": "a9f2ed8bb74c2c0d9",
-   "opis": "Build construction details generator",
+   "id": "a076389c324f1eb11",
+   "opis": "Build PZT site-plan generator",
    "idle_min": 0.3,
    "bez_narzedzi_min": 0.3,
    "limity": 0,
    "powody": []
   },
   {
+   "id": "a9f2ed8bb74c2c0d9",
+   "opis": "Build construction details generator",
+   "idle_min": 0.5,
+   "bez_narzedzi_min": 0.5,
+   "limity": 0,
+   "powody": []
+  },
+  {
    "id": "a31322d115de1ad9a",
    "opis": "Write koncepcja.md + final previews",
-   "idle_min": 0.0,
-   "bez_narzedzi_min": 0.0,
+   "idle_min": 0.1,
+   "bez_narzedzi_min": 0.1,
    "limity": 0,
    "powody": []
   },
@@ -37,31 +37,23 @@
    "id": "a68a8b74f8ab79b44",
    "opis": "Build MEP installation drawings",
    "idle_min": 0.1,
-   "bez_narzedzi_min": 0.6,
+   "bez_narzedzi_min": 0.1,
    "limity": 0,
    "powody": []
   },
   {
    "id": "a5045de9ee0554cc8",
    "opis": "Build structural drawings generator",
-   "idle_min": 0.0,
-   "bez_narzedzi_min": 1.1,
-   "limity": 0,
-   "powody": []
-  },
-  {
-   "id": "a160d071c58d17dd8",
-   "opis": "wf_44634517-034:audyt:A1",
-   "idle_min": 0.6,
-   "bez_narzedzi_min": 0.7,
+   "idle_min": 0.2,
+   "bez_narzedzi_min": 0.2,
    "limity": 0,
    "powody": []
   },
   {
    "id": "a50e0a2cf661f1fa2",
    "opis": "wf_44634517-034:audyt:A3",
-   "idle_min": 0.6,
-   "bez_narzedzi_min": 0.6,
+   "idle_min": 2.4,
+   "bez_narzedzi_min": 2.5,
    "limity": 0,
    "powody": []
   }

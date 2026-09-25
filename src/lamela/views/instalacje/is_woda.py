@@ -1,0 +1,162 @@
+"""IS-W — rzut instalacji wodociągowej: woda zimna (Wz), ciepła (Wc), cyrkulacja (Cyrk), zestaw wodomierzowy,
+rozdzielacze w pomieszczeniu technicznym, zasobnik c.w.u., piony, zawory, podejścia do przyborów.
+
+Dane: sieć węzłów i odcinków z ``lamela.obliczenia.sanitarne.woda`` (średnice, przepływy, wodomierz, zasobnik,
+cyrkulacja, izolacje) + położenia przyborów z ``wyposazenie.yaml``/``instalacje.yaml``. Trasy — algorytm
+``trasy.Siatka`` (model nie zawiera przebiegów przewodów)."""
+from __future__ import annotations
+
+import math
+import re
+
+import numpy as np
+
+from ...draft import symbols as S
+from ...draft.geom import dir_deg, perp
+from ...obliczenia.sanitarne.woda import RURY_WIELOWARSTWOWE, dobierz_rure
+from .baza import Rysunek
+from .wspolne import BRAK, H_M, H_S, num, rura_krotko, table_block
+
+OFF = {"ZW": np.array([-0.10, 0.16]), "CWU": np.array([0.03, 0.16]), "CYRK": np.array([0.16, 0.16])}
+MED = {"ZW": "WZ", "CWU": "WC", "CYRK": "CYRK"}
+SKROT = {"ZW": "Wz", "CWU": "Wc", "CYRK": "Cyrk"}
+
+
+def obroty(W) -> dict:
+    """(kond, x, y) → obrót przyboru (kierunek od ściany do pomieszczenia) z wyposażenia / przyborów dodatkowych."""
+    out = {}
+    src = list(W.dane.wyposazenie) + list(W.dane.inst.get("przybory_dodatkowe") or [])
+    for e in src:
+        if e.get("xy"):
+            out[(str(e.get("kond", "P0")), round(float(e["xy"][0]), 3), round(float(e["xy"][1]), 3))] = \
+                float(e.get("obrot", 90.0))
+    return out
+
+
+def punkt_przyboru(p, rot: float, medium: str) -> np.ndarray:
+    """Punkt podłączenia: 0,08 m od lica ściany; c.w.u. po lewej stronie armatury (WT §120 ust. 5), woda zimna
+    po prawej (±0,07 m wzdłuż ściany)."""
+    d = dir_deg(rot)
+    t = perp(d)                      # w lewo patrząc od ściany do pomieszczenia
+    q = np.asarray(p.xy, float) + d * 0.08
+    if p.t.qn_cw > 0 and p.t.qn_zw > 0:
+        q = q + (t * 0.07 if medium == "ZW" else -t * 0.07)
+    return q
+
+
+class RysW(Rysunek):
+    kod = "IS-W"
+
+    def run(self):
+        W, vp = self.W, self.vp
+        wo = W.woda
+        self.podklad(meble=False)
+        self.rot = obroty(W)
+        k0 = self.kids[0]
+        wz = wo.wezly
+        on = {n for n, v in wz.items() if v[3] == self.kid}
+        pts = [v[:2] for n, v in wz.items() if n in on]
+        self.siatka(extra_pts=pts)
+        self.cyrk = wo.cwu.get("cyrkulacja", "brak") != "brak"
+        q_c = float(wo.cwu.get("V_cyrk_dm3h", 0.0)) / 3600.0
+        r = dobierz_rure(q_c, 0.5, RURY_WIELOWARSTWOWE, 16) if self.cyrk else None
+        self.cyrk_rura = f"{r[0]}×{num(r[1], 1)}" if r else ""
+        self.przyb = {p.id: p for p in wo.przybory}
+        self.piony = {pn.id: pn for pn in wo.piony}
+        self.leg.line("S-WODA", "Wz — woda zimna (PE-RT/Al/PE-RT lub równoważne), średnica d_z×s wg obliczeń",
+                      lt=None)
+        self.leg.line("S-CWU", "Wc — ciepła woda użytkowa (c.w.u.), izolowana wg WT zał. 2 pkt 1.5", lt="KRESKOWA")
+        if self.cyrk:
+            self.leg.line("S-CYRK", f"Cyrk — cyrkulacja c.w.u. {self.cyrk_rura} (praca czasowa)", lt="PUNKTOWA_KROTKA")
+        self.pos = {}
+        if self.kid == k0:
+            self.urzadzenia()
+        self.mains()
+        self.pionowe()
+        self.pomieszczenia()
+        self.opisy()
+        self.room_extra = {}
+        return self.finish()
+
+    # --------------------------------------------------------------------------------------------- węzły
+    def xy(self, name: str, medium: str) -> np.ndarray:
+        wz = self.W.woda.wezly
+        m = re.match(r"^(.+?)([ZC])@(P\w+)$", name)
+        if m:                                        # węzeł pionu
+            base = np.asarray(self.piony[m.group(1)].xy, float)
+            return base + OFF["ZW" if m.group(2) == "Z" else "CWU"]
+        m = re.match(r"^([A-Z]{3}\d{2})([ZC])$", name)
+        if m and m.group(1) in self.przyb:
+            p = self.przyb[m.group(1)]
+            rot = self.rot.get((p.kond, round(p.xy[0], 3), round(p.xy[1], 3)), 90.0)
+            return punkt_przyboru(p, rot, "ZW" if m.group(2) == "Z" else "CWU")
+        if name in self.przyb:
+            p = self.przyb[name]
+            rot = self.rot.get((p.kond, round(p.xy[0], 3), round(p.xy[1], 3)), 90.0)
+            return punkt_przyboru(p, rot, "ZW")
+        if name in self.pos:
+            return self.pos[name]
+        return np.asarray(wz[name][:2], float)
+
+    # --------------------------------------------------------------------------------------------- urządzenia
+    def urzadzenia(self):
+        W, vp, k = self.W, self.vp, self.k
+        wo = W.woda
+        wz = wo.wezly
+        wod = np.asarray(wz["WOD"][:2], float)
+        t0 = np.asarray(wz["T0"][:2], float)
+        wej = np.asarray(wz["WEJ"][:2], float)
+        siec = np.asarray(wz["SIEC"][:2], float)
+        # rozdzielacz Wz (T0) — 0,35 m od wodomierza w głąb pomieszczenia technicznego
+        tech = self.room_at(wod)
+        c = np.asarray(tech.polygon.centroid.coords[0]) if tech is not None else t0
+        d = c - wod
+        d = np.array([np.sign(d[0]) or 1.0, 0.0]) if abs(d[0]) >= abs(d[1]) else np.array([0.0, np.sign(d[1]) or 1.0])
+        self.pos["WOD"] = wod
+        self.pos["T0"] = wod + d * 0.45
+        # przyłącze: od wejścia do budynku w kierunku sieci (odcinek 2 m poza lico) — dalej wg PZT
+        u = siec - wej
+        u = np.array([0.0, np.sign(u[1])]) if abs(u[1]) >= abs(u[0]) else np.array([np.sign(u[0]), 0.0])
+        out = wej + u * 1.8
+        prz = next((o for o in wo.odcinki if o.typ == "przylacze"), None)
+        path = self.g.route(wej, wod, "ZW:WEJ")
+        self.pipe([out, wej], "WZ", pen="gruba")
+        self.pipe(path, "WZ", pen="gruba")
+        self.g.mark(path, "ZW:WEJ")
+        n0 = len(vp.prims)
+        S.pipe(vp, [out + u * 0.6, out], "WZ")
+        from ...draft.dims import arrowhead
+        arrowhead(vp, out, -u, 2.5, 12, True, "S-WODA")
+        self.reg(n0)
+        if prz is not None:
+            self.tag(out, [f"Przyłącze wodociągowe {prz.rura}, L = {num(prz.L, 1)} m",
+                           "z sieci Ø110 — trasa i rzędne wg PZT; przejście szczelne przez płytę/ścianę w rurze "
+                           "osłonowej"], "S-OPISY", style="bold")
+        # zestaw wodomierzowy
+        self.sym(S.water_meter, wod, 0.0, s_mm=4.0, label="WM")
+        seg = self.g.route(wod, self.pos["T0"], "ZW:T0")
+        self.pipe(seg, "WZ", pen="gruba")
+        wm = wo.wodomierz
+        ur = wo.urzadzenia
+        self.tag(wod, [f"Zestaw wodomierzowy DN{ur.get('DN_arm', wm['DN'])}: ZO – F – WM – EA – RED – ZO",
+                       f"wodomierz DN{wm['DN']}, Q3 = {num(wm['Q3'], 1)} m³/h (q = {num(wm['q'], 2)} dm³/s, "
+                       f"∆p = {num(wm['dp'], 0)} kPa)",
+                       f"zawór antyskażeniowy EA DN{ur.get('DN_arm', 25)} (PN-EN 1717), reduktor "
+                       f"{num(0.40, 2)} MPa, filtr"], "S-OPISY", style="bold")
+        self.leg.sym(lambda c, p: S.water_meter(c, p, 0.0, s_mm=4.0, label="WM"),
+                     "WM — zestaw wodomierzowy: zawory odcinające (ZO), filtr (F), wodomierz, zawór antyskażeniowy "
+                     "EA (PN-EN 1717), reduktor ciśnienia (RED)")
+        # rozdzielacz Wz
+        self.sym(S.manifold, self.pos["T0"] - np.array([0.0, 0.03]), 0.0, n=3, label=None)
+        self.leg.sym(lambda c, p: S.manifold(c, p - np.array([6.0, 0.0]), 0.0, n=3, label=None),
+                     "rozdzielacz wody z zaworami odcinającymi na odejściach (pom. techniczne)")
+        # zasobnik c.w.u., TZM, pompa cyrkulacyjna
+        zas = np.asarray(wz["ZAS"][:2], float)
+        self.pos["ZAS"] = zas
+        dz = next((float(e["wym"][0]) for e in W.dane.wyposazenie if e.get("typ") == "zasobnik"
+                   and abs(e["xy"][0] - zas[0]) < 0.3), 0.7)
+        self.sym(S.tank, zas, d=dz, label="")
+        self.tag(zas, [f"Zasobnik c.w.u. {wo.cwu['V_zas']} dm³ (obl.)", f"wężownica ≥ {num(wo.cwu['A_wez'], 1)} m², "
+                       f"grzałka (dezynfekcja 70 °C)", "grupa bezpieczeństwa 6 bar + NW c.w.u."], "S-OPISY",
+                 style="bold")
+        self.leg.sym(lambda c, p: S.tank(c, p, d=7.0, label=""), "zasobnik c.w.u. / bufor (rzut, wymiar rzeczywisty)")

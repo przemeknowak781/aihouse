@@ -494,3 +494,243 @@ def draw_green(c, s, used: set, cover=None, lawn=True, trees=True, labels_lab=No
             used.add("drzewo_ist" if t["istn"] else "drzewo_proj")
             if t["usun"]:
                 used.add("drzewo_usun")
+
+
+def draw_building(c, s, used: set, slab_lt="PUNKTOWA", pen_outline=1.4):
+    """Budynek: obrys przyziemia 1,4 (PN-B-01027 poz. 1.1), obrys wyższych kondygnacji — kreskowa 0,7 (poz. 1.6d),
+    płyty/okapy/daszki wykraczające poza obrys — ``slab_lt`` 0,7 (poz. 1.6c: punktowa), wejście główne (poz. 1.7)."""
+    from ..draft import symbols as S
+    from ..draft.dims import arrowhead
+    k = c.k
+    fill_white(c, s.p0, z=9.6)
+    draw_geom(c, s.upper_lines, "Z-BUDYNEK-NAD", pen=0.7, lt="KRESKOWA")
+    if not s.upper_lines.is_empty:
+        used.add("bud_wyzsze")
+    draw_geom(c, s.slab_lines, "Z-BUDYNEK-NAD", pen=0.7 if slab_lt == "PUNKTOWA" else 0.5, lt=slab_lt)
+    if not s.slab_lines.is_empty:
+        used.add("bud_plyty")
+    draw_geom(c, s.p0, "Z-BUDYNEK", pen=pen_outline, lt="CIAGLA")
+    used.add("budynek")
+    e = s.wejscie_gl
+    if e is not None:
+        ang = math.degrees(math.atan2(-e["out"][1], -e["out"][0]))
+        S.site_entrance(c, e["pt"], ang, layer="Z-BUDYNEK")
+        used.add("wejscie")
+    for w in s.wjazdy:
+        a = w["pt"] + w["out"] * 9.0 * k
+        b = w["pt"] + w["out"] * 1.2 * k
+        c.line(a, b, "Z-BUDYNEK", pen=0.35)
+        arrowhead(c, b, b - a, 2.5, 14, False, "Z-BUDYNEK", pen=0.35)
+        used.add("wjazd")
+
+
+def draw_building_line(c, s, used: set, win=None):
+    """Nieprzekraczalna linia zabudowy (PN-B-01027 poz. 2.2): ciągła 0,35 z niezaczernionymi trójkątami 2 mm
+    (rytm 12·2·12) po stronie terenu zabudowy."""
+    from .site_data import linia_zabudowy_spr
+    lz = s.linia_zabudowy
+    if lz is None:
+        return
+    g = clip(lz, win) if win is not None else lz
+    if g is None:
+        return
+    k = c.k
+    spr = linia_zabudowy_spr(s)
+    n = spr.get("n", np.array([0.0, -1.0]))
+    col = styles.layer("Z-LZ").plot_rgb
+    for a in lines_of(g):
+        c.polyline(a, "Z-LZ", pen=0.35, lt="CIAGLA", color=col)
+        ls = LineString(a)
+        L = ls.length
+        d = unit(a[-1] - a[0])
+        side = 1.0 if float(perp(d) @ n) > 0 else -1.0
+        t = 7.0 * k
+        while t < L:
+            p = np.asarray(ls.interpolate(t).coords[0])
+            s2 = 1.0 * k
+            tri = [p - d * s2, p + d * s2, p + perp(d) * side * 2.0 * k * 0.866]
+            c.polygon(tri, "Z-LZ", pen=0.25, lt="CIAGLA", color=col)
+            t += 14.0 * k
+    used.add("linia_zabudowy")
+
+
+def draw_plot_boundary(c, s, used: set, labels=True):
+    """Granica działki budowlanej (PN-B-01027 poz. 2.7): ciągła 0,35, punkty Ø1,0 mm, narożniki — kółko z literą."""
+    k = c.k
+    if s.plot.is_empty:
+        return []
+    C = s.corners
+    c.polyline(C, "Z-DZIALKA", closed=True, pen=0.35, lt="CIAGLA", color="#000000")
+    ctr = np.asarray(s.plot.centroid.coords[0])
+    out = []
+    for i, p in enumerate(C):
+        c.dot(p, 1.0, "Z-DZIALKA")
+        if labels:
+            q = p + unit(p - ctr) * 4.2 * k
+            lab = chr(ord("A") + i)
+            c.fill(circle_pts(q, 2.3 * k, 24), "Z-DZIALKA", "#ffffff", z=26.2)
+            c.circle(q, 2.3 * k, "Z-DZIALKA", pen=0.25, z=26.3)
+            c.text(q, lab, H, 0.0, "center", "middle", "Z-DZIALKA")
+            out.append((lab, p))
+    used.add("granica")
+    return out
+
+
+def _inward_offset(s, ls: LineString, d):
+    for sg in (1.0, -1.0):
+        o = ls.offset_curve(sg * d)
+        if o is not None and not o.is_empty and s.plot.buffer(1e-6).contains(o.interpolate(0.5, normalized=True)):
+            return o
+    return ls
+
+
+def draw_fence(c, s, used: set):
+    """Ogrodzenie (PN-B-01027 poz. 2.8 — 0,35 z kreskami; odsunięte 0,6 mm do wnętrza działki, gdy biegnie po
+    granicy), bramy i furtki (poz. 2.9) otwierane do wewnątrz działki (WT § 42)."""
+    from ..draft import symbols as S
+    k = c.k
+    for f in s.ogrodzenie:
+        g = f["geom"]
+        on_b = g.buffer(0.05).within(s.plot.exterior.buffer(0.1))
+        if on_b:
+            g = _inward_offset(s, g, 0.6 * k)
+        for a in lines_of(g):
+            if len(a) >= 2 and LineString(a).length > 0.2:
+                S.fence(c, a, "Z-OGRODZENIE")
+        used.add("ogrodzenie")
+    for b in s.bramy:
+        d = b["kier"]
+        p1, p2 = b["xy"] - d * b["szer"] / 2, b["xy"] + d * b["szer"] / 2
+        if b["typ"] == "furtka":
+            inside = s.plot.contains(Point(b["xy"] + perp(d) * 0.3))
+            if not inside:
+                p1, p2 = p2, p1
+            S.gate(c, p1, p2, "furtka", "Z-OGRODZENIE")
+            used.add("furtka")
+        else:
+            nin = perp(d)
+            if not s.plot.contains(Point(b["xy"] + nin * 0.3)):
+                p1, p2 = p2, p1
+            S.gate(c, p1, p2, "przesuwna", "Z-OGRODZENIE")
+            used.add("brama")
+
+
+def draw_parking(c, s, used: set):
+    """Miejsca postojowe (PN-B-01027 poz. 3.4: krawędzie 0,25, opis „P”); w garażu — tylko opis w budynku."""
+    for q in s.miejsca:
+        pg = q["poly"]
+        if pg.difference(s.p0).area < 0.1:
+            continue
+        draw_geom(c, pg, "Z-UTWARDZENIA", pen=0.25, lt="CIAGLA")
+        used.add("parking")
+
+
+def draw_bins(c, s, used: set):
+    """Miejsce na pojemniki na odpady (WT § 22): obrys osłony 0,35 + pojemniki."""
+    o = s.odpady
+    if not o or o["poly"] is None:
+        return
+    pg = o["poly"]
+    draw_geom(c, pg, "Z-OGRODZENIE", pen=0.35, lt="CIAGLA")
+    a, b, w = hedge_axis(pg)
+    n = max(1, min(6, int(round(np.hypot(*(b - a)) / 0.8))))
+    d = unit(b - a)
+    nn = perp(d)
+    L = np.hypot(*(b - a))
+    for i in range(n):
+        m = a + d * (L * (i + 0.5) / n)
+        q = [m - d * 0.3 - nn * 0.3, m + d * 0.3 - nn * 0.3, m + d * 0.3 + nn * 0.3, m - d * 0.3 + nn * 0.3]
+        c.polygon(q, "Z-OGRODZENIE", pen=0.18, lt="CIAGLA")
+    used.add("odpady")
+
+
+def draw_pc(c, s, used: set):
+    """Jednostka zewnętrzna pompy ciepła + strefa czynnika R290 (kreskowanie 45°, obrys kreskowy)."""
+    from ..draft.hatch import _parallel
+    if s.pc is None:
+        return
+    k = c.k
+    Z = s.pc["strefa"].difference(s.p0)
+    for ln in _parallel(Z.difference(s.pc["body"]), 45.0, 1.2 * k):
+        c.polyline(ln, "Z-STREFY", pen=0.13)
+    draw_geom(c, Z, "Z-STREFY", pen=0.25, lt="KRESKOWA")
+    fill_white(c, s.pc["body"], z=9.7)
+    draw_geom(c, s.pc["body"], "Z-UZBROJENIE", pen=0.5, lt="CIAGLA")
+    b = s.pc["body"].bounds
+    c.line((b[0], b[1]), (b[2], b[3]), "Z-UZBROJENIE", pen=0.18)
+    used.add("pc")
+
+
+def draw_retention(c, s, used: set):
+    """Zbiornik retencyjny (prostokąt ≥ 7×4 mm — jak osadnik, PN-B-01027 poz. 6) i niecka chłonna."""
+    from ..draft.hatch import _parallel
+    k = c.k
+    if s.rozsaczanie and s.rozsaczanie["poly"] is not None:
+        pg = s.rozsaczanie["poly"]
+        fill_white(c, pg, z=9.8)
+        for ln in _parallel(pg.buffer(-0.8 * k), 0.0, 1.6 * k):
+            L = LineString(ln)
+            pts = []
+            n = max(4, int(L.length / (0.6 * k)))
+            for i in range(n + 1):
+                p = np.asarray(L.interpolate(L.length * i / n).coords[0])
+                pts.append(p + np.array([0.0, 0.25 * k * (1 if i % 2 else -1)]))
+            c.polyline(pts, "Z-ODWODNIENIE", pen=0.18)
+        draw_geom(c, pg, "Z-ODWODNIENIE", pen=0.5, lt="CIAGLA")
+        used.add("niecka_chlonna")
+    zb = s.zbiornik
+    if zb:
+        if zb["poly"] is not None or zb.get("sr"):
+            g = zb["poly"] or Point(zb["xy"]).buffer(float(zb["sr"]) / 2)
+        else:
+            w, h = max(7.0 * k, 1.5), max(4.0 * k, 0.9)
+            x, y = zb["xy"]
+            g = box(x - w / 2, y - h / 2, x + w / 2, y + h / 2)
+        fill_white(c, g, z=9.8)
+        draw_geom(c, g, "Z-ODWODNIENIE", pen=0.5, lt="CIAGLA")
+        c.text(zb["xy"], "ZB", H, 0.0, "center", "middle", "Z-ODWODNIENIE")
+        zb["draw_poly"] = g
+        used.add("zbiornik")
+
+
+def draw_drainage(c, s, used: set, detail=False, lab: Labeler | None = None):
+    """Odwodnienie powierzchniowe: odwodnienia liniowe (linia 0,5 z kratką), niecki trawiaste z kierunkiem spływu."""
+    from ..draft.dims import arrowhead
+    k = c.k
+    for o in s.odwodnienia:
+        g = o["geom"]
+        if g is None or g.length < 0.05:
+            continue
+        if o["typ"] == "liniowe":
+            for off in (-0.45 * k, 0.45 * k):
+                c.polyline(np.asarray(g.offset_curve(off).coords), "Z-ODWODNIENIE", pen=0.25)
+            L = g.length
+            t = 0.6 * k
+            while t < L:
+                p = np.asarray(g.interpolate(t).coords[0])
+                q = np.asarray(g.interpolate(min(L, t + 0.01)).coords[0])
+                nn = perp(unit(q - p)) * 0.45 * k
+                c.line(p - nn, p + nn, "Z-ODWODNIENIE", pen=0.18)
+                t += 1.0 * k
+            used.add("odw_liniowe")
+        elif o["typ"] == "niecka":
+            c.polyline(np.asarray(g.coords), "Z-ODWODNIENIE", pen=0.35, lt="KRESKA_DLUGA")
+            a, b = np.asarray(g.coords[0]), np.asarray(g.coords[-1])
+            ha, hb = s.H_proj(a)[0], s.H_proj(b)[0]
+            lo, hi = (a, b) if ha <= hb else (b, a)
+            ls = LineString([hi, lo]) if len(g.coords) == 2 else (g if ha > hb else LineString(g.coords[::-1]))
+            L = ls.length
+            for f in (0.35, 0.8):
+                p = np.asarray(ls.interpolate(f * L).coords[0])
+                q = np.asarray(ls.interpolate(min(L, f * L + 3.0 * k)).coords[0])
+                arrowhead(c, q, q - p, 2.5, 12, True, "Z-ODWODNIENIE", pen=0.25)
+            used.add("odw_niecka")
+
+
+def draw_downpipes(c, s, used: set):
+    """Rury spustowe (budynek.yaml: dachy[].rury_spustowe) — kółko Ø1,5 mm; wewnętrzne (w szachcie) — kreskowe."""
+    k = c.k
+    for r in s.rury:
+        c.circle(r["xy"], 0.9 * k, "Z-ODWODNIENIE", pen=0.35, lt="CIAGLA" if r["trasa"] == "zewn" else "KRESKOWA_DROBNA")
+        c.dot(r["xy"], 0.5, "Z-ODWODNIENIE")
+        used.add("rura_spustowa")

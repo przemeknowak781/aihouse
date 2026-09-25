@@ -273,8 +273,8 @@ def raport_walidacji(out_dir: str | Path, zbieznosc: bool = True) -> dict:
         for h in (0.2, 0.1, 0.05):
             r = walidacja_tg(l_, c_, 100.0, h * c_)
             tg_res.append(r)
-            rows.append([f(l_ / c_, 1), f(h / 2, 3), r["ne"], f"{r['err_sx'] * 100:.2f} %", f"{r['err_sz'] * 100:.2f} %",
-                         f"{r['err_tau'] * 100:.2f} %", f"{r['R_resztkowe']:.1e}"])
+            rows.append([f(l_ / c_, 1), f(h / 2, 3), r["ne"], f(r["err_sx"] * 100, 2) + " %", f(r["err_sz"] * 100, 2) + " %",
+                         f(r["err_tau"] * 100, 2) + " %", f"{r['R_resztkowe']:.1e}"])
     res["tg"] = tg_res
     L += [tabela(["l/h (rozpiętość 2l / wysokość 2c)", "h_el/h", "n_el", "max|Δσ_x|/max|σ_x|", "max|Δσ_z|/q", "max|Δτ|/max|τ|",
                   "reakcje resztkowe [kN]"], rows), ""]
@@ -351,10 +351,13 @@ def raport_walidacji(out_dir: str | Path, zbieznosc: bool = True) -> dict:
                      f(r["stosunek"], 3), (r["R"], 2)])
     res["wspornik"] = ws_res
     L += [tabela(["l/h", "w_M [mm]", "w_V [mm]", "w_Timoshenko [mm]", "w_MES [mm]", "MES/belka", "R [kN]"], rows), ""]
-    L += ["Dla wspornika smukłego (l/h ≥ 5) MES = teoria belek z dokładnością ≈ 1–2 % (różnica — sztywne utwierdzenie całego "
-          "przekroju, które blokuje deplanację). Dla wsporników krótkich (l/h ≤ 1 — tarcze wspornikowe) teoria belek traci "
-          "ważność: podatność wynika głównie z odkształceń postaciowych i lokalnych przy utwierdzeniu, stosunek odbiega od 1 — "
-          "stąd analiza tarczowa zamiast belkowej.", ""]
+    sm = [r for r in ws_res if r["l_h"] >= 5]
+    kr = [r for r in ws_res if r["l_h"] <= 1]
+    L += [f"Wspornik smukły (l/h ≥ 5): MES = teoria belek z dokładnością {f(max(abs(r['stosunek'] - 1) for r in sm) * 100, 2)} % "
+          "(granica l/h → ∞ osiągnięta; reszta — sztywne utwierdzenie całego przekroju blokujące deplanację). Wsporniki krępe "
+          f"(l/h ≤ 1): odchylenie od belki Timoshenki ≤ {f(max(abs(r['stosunek'] - 1) for r in kr) * 100, 1)} %, ale udział "
+          "odkształceń postaciowych w ugięciu rośnie do ≈ 75 % (l/h = 0,5: teoria Eulera–Bernoulliego zaniża ugięcie ≈ 4×), a "
+          "rozkład naprężeń jest nieliniowy (D-obszar) — stąd wymiarowanie tarczy wspornikowej modelem STM, a nie belkowo.", ""]
     fig, ax = plt.subplots(figsize=(6.0, 3.4))
     ax.semilogx([r["l_h"] for r in ws_res], [r["stosunek"] for r in ws_res], "o-", color=INK, lw=1.2)
     ax.axhline(1.0, color=INK2, lw=0.6, ls="--")
@@ -371,14 +374,16 @@ def raport_walidacji(out_dir: str | Path, zbieznosc: bool = True) -> dict:
         res["zbieznosc"] = zb
         rows = [[f(r["h"], 2), r["ne"], (r["w_wsp"], 4), (r["T_gora"], 2), (r["R_A"], 2), (r["R_Amax"], 1), (r["s1_max"], 3),
                  f(r["czas"], 1)] for r in zb]
-        pw, ew = _richardson([r["w_wsp"] for r in zb])
-        pt, et = _richardson([r["T_gora"] for r in zb])
-        pr, er = _richardson([r["R_A"] for r in zb])
+        def rich(v):
+            if abs(v[2] - v[1]) <= 1e-3 * abs(v[2]):
+                return "zbieżne (zmiana < 0,1 %)"
+            p_, e_ = _richardson(v)
+            return f"→ {f(e_, 4 if abs(e_) < 10 else 2)} (rząd {f(p_, 2)})"
         L += ["## (c) Zbieżność siatki — tarcza demo (kombinacja miarodajna STR)", "",
               tabela(["h_el [m]", "n_el", "w_wspornika [mm]", "T pasa górnego (MES) [kN]", "R_A [kN]", "r_A,max [kN/m]",
                       "σ₁,max [MPa]", "czas [s]"], rows), "",
-              f"Ekstrapolacja Richardsona: w_wsp → {f(ew, 4)} mm (rząd {f(pw, 2)}), T → {f(et, 2)} kN (rząd {f(pt, 2)}), "
-              f"R_A → {f(er, 2)} kN (rząd {f(pr, 2)}). Wielkości całkowe (ugięcie, reakcje, momenty, siły w pasach) zbieżne — "
+              f"Ekstrapolacja Richardsona: w_wsp {rich([r['w_wsp'] for r in zb])} mm, T {rich([r['T_gora'] for r in zb])} kN, "
+              f"R_A {rich([r['R_A'] for r in zb])}. Wielkości całkowe (ugięcie, reakcje, momenty, siły w pasach) zbieżne — "
               "różnica h = 0,10 vs 0,05 m ≤ 2 %; σ₁,max i szczyt reakcji r_A,max rosną z zagęszczaniem (osobliwość w narożach wklęsłych otworów — "
               "dlatego wymiarowanie opiera się na wypadkowych, nie na wartościach szczytowych).", ""]
     # (d)

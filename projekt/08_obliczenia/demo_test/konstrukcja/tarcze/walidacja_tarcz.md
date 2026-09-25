@@ -8,17 +8,17 @@ Moduły `lamela.obliczenia.konstrukcja.tarcze_mes` (MES płaskiego stanu naprę�
 
 Kontrola wzorów: residua równań równowagi 2.2e-10 / 2.0e-09; σ_z(+c) = −10,000 (= −q = −10), σ_z(−c) = 0,000, τ(±c) = 0,000; ∫τ dz na końcu = 10,000 (= q·l = 10,000), ∫σ_x dz = 0,0000, ∫σ_x·z dz = 0,0000.
 
-| l/h (rozpiętość/wysokość) | h_el/h | n_el | max|Δσ_x|/max|σ_x| | max|Δσ_z|/q | max|Δτ|/max|τ| | reakcje resztkowe [kN] |
+| l/h (rozpiętość 2l / wysokość 2c) | h_el/h | n_el | max|Δσ_x|/max|σ_x| | max|Δσ_z|/q | max|Δτ|/max|τ| | reakcje resztkowe [kN] |
 |---|---|---|---|---|---|---|
-| 1,0 | 0,200 | 100 | 0.72 % | 1.58 % | 1.07 % | 5.2e-13 |
-| 1,0 | 0,100 | 400 | 0.40 % | 0.97 % | 0.50 % | 1.6e-12 |
-| 1,0 | 0,050 | 1600 | 0.21 % | 0.53 % | 0.24 % | 5.7e-12 |
-| 2,0 | 0,200 | 200 | 0.35 % | 3.74 % | 1.03 % | 5.9e-12 |
-| 2,0 | 0,100 | 800 | 0.21 % | 2.09 % | 0.48 % | 4.5e-12 |
-| 2,0 | 0,050 | 3200 | 0.12 % | 1.11 % | 0.24 % | 6.2e-12 |
-| 4,0 | 0,200 | 400 | 0.17 % | 8.07 % | 1.01 % | 9.7e-11 |
-| 4,0 | 0,100 | 1600 | 0.11 % | 4.34 % | 0.48 % | 1.5e-10 |
-| 4,0 | 0,050 | 6400 | 0.06 % | 2.25 % | 0.23 % | 1.0e-09 |
+| 1,0 | 0,100 | 100 | 0,72 % | 1,58 % | 1,07 % | 5.2e-13 |
+| 1,0 | 0,050 | 400 | 0,40 % | 0,97 % | 0,50 % | 1.6e-12 |
+| 1,0 | 0,025 | 1600 | 0,21 % | 0,53 % | 0,24 % | 5.7e-12 |
+| 2,0 | 0,100 | 200 | 0,35 % | 3,74 % | 1,03 % | 5.9e-12 |
+| 2,0 | 0,050 | 800 | 0,21 % | 2,09 % | 0,48 % | 4.5e-12 |
+| 2,0 | 0,025 | 3200 | 0,12 % | 1,11 % | 0,24 % | 6.2e-12 |
+| 4,0 | 0,100 | 400 | 0,17 % | 8,07 % | 1,01 % | 9.7e-11 |
+| 4,0 | 0,050 | 1600 | 0,11 % | 4,34 % | 0,48 % | 1.5e-10 |
+| 4,0 | 0,025 | 6400 | 0,06 % | 2,25 % | 0,23 % | 1.0e-09 |
 
 Błędy mierzone w środkach wszystkich elementów (także przy krawędziach obciążonych). Zbieżność liniowa w h dla σ_z (obciążenie krawędziowe), dla σ_x — błąd < 0,5 % już przy 10 elementach na wysokości.
 
@@ -56,7 +56,7 @@ Wspornik h = 0,5 m, t = 0,2 m, utwierdzony w ścianie poprzecznej (u_x = u_z = 0
 | 10,0 | 66,6667 | 0,4800 | 67,1467 | 67,0769 | 0,999 | 100,00 |
 | 20,0 | 533,3333 | 0,9600 | 534,2933 | 534,0394 | 1,000 | 100,00 |
 
-Dla wspornika smukłego (l/h ≥ 5) MES = teoria belek z dokładnością ≈ 1–2 % (różnica — sztywne utwierdzenie całego przekroju, które blokuje deplanację). Dla wsporników krótkich (l/h ≤ 1 — tarcze wspornikowe) teoria belek traci ważność: podatność wynika głównie z odkształceń postaciowych i lokalnych przy utwierdzeniu, stosunek odbiega od 1 — stąd analiza tarczowa zamiast belkowej.
+Wspornik smukły (l/h ≥ 5): MES = teoria belek z dokładnością 0,24 % (granica l/h → ∞ osiągnięta; reszta — sztywne utwierdzenie całego przekroju blokujące deplanację). Wsporniki krępe (l/h ≤ 1): odchylenie od belki Timoshenki ≤ 3,0 %, ale udział odkształceń postaciowych w ugięciu rośnie do ≈ 75 % (l/h = 0,5: teoria Eulera–Bernoulliego zaniża ugięcie ≈ 4×), a rozkład naprężeń jest nieliniowy (D-obszar) — stąd wymiarowanie tarczy wspornikowej modelem STM, a nie belkowo.
 
 ![Wspornik — MES vs belka](rys/walidacja_wspornik.png)
 
@@ -65,10 +65,10 @@ Dla wspornika smukłego (l/h ≥ 5) MES = teoria belek z dokładnością ≈ 1�
 | h_el [m] | n_el | w_wspornika [mm] | T pasa górnego (MES) [kN] | R_A [kN] | r_A,max [kN/m] | σ₁,max [MPa] | czas [s] |
 |---|---|---|---|---|---|---|---|
 | 0,20 | 719 | 0,3154 | 102,69 | 413,89 | 262,1 | 2,785 | 0,8 |
-| 0,10 | 2483 | 0,3218 | 107,82 | 413,84 | 264,1 | 3,823 | 2,8 |
-| 0,05 | 9808 | 0,3244 | 109,61 | 413,79 | 265,0 | 4,491 | 10,2 |
+| 0,10 | 2483 | 0,3218 | 107,82 | 413,84 | 264,1 | 3,823 | 2,5 |
+| 0,05 | 9808 | 0,3244 | 109,61 | 413,79 | 265,0 | 4,491 | 9,9 |
 
-Ekstrapolacja Richardsona: w_wsp → 0,3263 mm (rząd 1,27), T → 110,58 kN (rząd 1,52), R_A → 413,15 kN (rząd 0,11). Wielkości całkowe (ugięcie, reakcje, momenty, siły w pasach) zbieżne — różnica h = 0,10 vs 0,05 m ≤ 2 %; σ₁,max i szczyt reakcji r_A,max rosną z zagęszczaniem (osobliwość w narożach wklęsłych otworów — dlatego wymiarowanie opiera się na wypadkowych, nie na wartościach szczytowych).
+Ekstrapolacja Richardsona: w_wsp → 0,3263 (rząd 1,27) mm, T → 110,58 (rząd 1,52) kN, R_A zbieżne (zmiana < 0,1 %). Wielkości całkowe (ugięcie, reakcje, momenty, siły w pasach) zbieżne — różnica h = 0,10 vs 0,05 m ≤ 2 %; σ₁,max i szczyt reakcji r_A,max rosną z zagęszczaniem (osobliwość w narożach wklęsłych otworów — dlatego wymiarowanie opiera się na wypadkowych, nie na wartościach szczytowych).
 
 ## (d) Równowaga
 
