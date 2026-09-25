@@ -147,6 +147,7 @@ class DanePTIS:
         retencji/odwodnienia dachów na arkuszu różne od obliczeń. Lista niepusta → znacznik w tomie (walidator: BRAK)."""
         import pymupdf
         self.ark_nieaktualne: list[tuple[str, str]] = []
+        self.ark_uwaga_ppoz: list[str] = []
         zrodla = [self.p_bud, self.p_dz, self.p_inst, self.p_wyp, REPO / "model/arkusze_is.yaml"]
         t_mod = max(x.stat().st_mtime for x in zrodla if x.exists())
         if p_rap.exists() and p_rap.stat().st_mtime < t_mod:
@@ -164,6 +165,8 @@ class DanePTIS:
             for m in sorted(set(re.findall(r"PC-R290-\d+", tx))):
                 if pc_id and m != pc_id:
                     self.ark_nieaktualne.append((a.nr, f"pompa ciepła {m}, a w obliczeniach {pc}"))
+            if re.search(r"ppoż\.? wg klasy stropu", tx):
+                self.ark_uwaga_ppoz.append(a.nr)
             if "NIESPEŁNIONE" in tx.upper() and n_nok == 0:
                 self.ark_nieaktualne.append((a.nr, "uwaga „SPRAWDZENIE NIESPEŁNIONE” z poprzedniej wersji obliczeń"))
             if "ODWODNIENIE DACH" in (a.tytul or "").upper():

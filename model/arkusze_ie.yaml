@@ -21,7 +21,7 @@ wspolne:
   wysokosc_ciecia: 1.10
   osie_instalacji: zakres       # osie tylko w zasięgu treści rzutu (jak rzuty AR) — bez pustego pasa osi garażu na II p.
   plik_tomu: tom_PT-IE.pdf
-  tytul_tomu: "Projekt techniczny — instalacje elektryczne (rysunki)"
+  tytul_tomu: "PT — instalacje elektryczne (rysunki)"   # ≤ 172 mm pismem 5 mm: plot.volume nie łamie ani nie dopasowuje nagłówka spisu (zastosowanie_IE.md)
   braki_danych: projekt/06_PT_instalacje_elektryczne/BRAKI_DANYCH.md
   instalacje: null
   wyposazenie: null

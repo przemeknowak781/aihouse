@@ -173,10 +173,12 @@ def rekomendacje_md(m, dane) -> str:
                   "(element attykowy z ETA / szkło piankowe klasy nośności wg PT-K, h ≈ 15 cm) — ψ ≈ dobra praktyka "
                   "(wariant policzony); alternatywa: attyka lekka (rama drewniana/stalowa z przekładką) na płycie "
                   "ocieplonej z góry.",
-        "garaz": "Połączenie z garażem na ciągłej płycie: płyta fundamentowa jest ciągła pod ścianą SWG (XPS tylko "
-                 "pod płytą) — ciepło z domu przepływa płytą do posadzki garażu (ψ_iu duże). Zalecane: **XPS ≥ 10 cm "
-                 "na płycie pod posadzką garażu** (cała posadzka albo pas ≥ 1,5–2,0 m przy SWG; jastrych garażu "
-                 "zbrojony, z dylatacją obwodową) + blok termoizolacyjny w 1. warstwie muru SWG (nośność — PT-K). "
+        "garaz": "Połączenie z garażem na ciągłej płycie: płyta fundamentowa jest ciągła pod ścianą SWG (uskok PF1/PF2 "
+                 "i żebro pod ścianą — geometria modelu) — ciepło z domu przepływa płytą i żebrem do płyty garażu i przez "
+                 "posadzkę do garażu (ψ_iu duże). W modelu (wydanie): XPS 10 cm na płycie pod posadzką garażu, nośny blok "
+                 "termoizolacyjny w 1. warstwie muru SWG (nośność — PT-K), wełna SWG po czole uskoku; przerwa termiczna "
+                 "PF2 przy żebrze daje niewielką poprawę (warianty) — ścieżka przez żebro i grunt. Ocena „ZŁY” przy "
+                 "spełnionym f_Rsi przyjęta świadomie (koncepcja §15.2). "
                  "Pod stropem (WZ-09b/c) pas docieplenia SUF-G 1,0 m ogranicza mostek (f_Rsi spełnione); ocena „ZŁY” "
                  "wynika z testu ołówka (płyta ŻB dochodzi do przestrzeni nieogrzewanej) — akceptowalne przy ψ_ie "
                  "≤ 0,10; alternatywa: docieplenie całego spodu stropu garażu przy ścianach E i 2 pasem 1,5 m."}

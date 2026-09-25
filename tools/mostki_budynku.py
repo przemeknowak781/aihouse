@@ -82,15 +82,19 @@ def warianty(m, wezly, wyn, log=print) -> dict:
                 pd = next(k for k in e["przegrody"] if KD._typ_p(m, k) == "podloga_na_gruncie")
                 pg = next((k for k, p in m.przegrody.items() if p.typ == "podloga_na_gruncie" and k != pd
                            and "gara" in (p.nazwa or "").lower()), pd)
-                W = KD._W(m, pg)
-                ki = G.indeks_konstrukcyjnej(W)
-                xps = G.Warstwa(G.material_z_modelu(m, "XPS300") if "XPS300" in m.materialy
-                                else G.MATERIALY_DOMYSLNE["XPS"], 0.10)
-                W2 = W[:ki] + [xps] + W[ki:]
-                for op, blok in (("XPS 10 cm na płycie pod posadzką garażu", None),
-                                 ("XPS 10 cm pod posadzką garażu + blok z betonu komórkowego 400 (24 cm) u podstawy "
-                                  "ściany", (G.MATERIALY_DOMYSLNE["BET_KOM_400"], 0.24))):
-                    wv = D.wezel_garaz_plyta(KD._W(m, kg), KD._W(m, pd), W2, blok=blok, id=w.id + "v")
+                # wydanie (V2 N-6): warianty na geometrii modelu — uskok PF1/PF2 i żebro pod SWG (katalog_dod._uskok_zebro);
+                # posadzka garażu z modelu (POD-G ma już XPS 10 cm na płycie)
+                usk, zeb = KD._uskok_zebro(m, [s for s in m.sciany() if s.przegroda_kod == kg])
+                xps = G.material_z_modelu(m, "XPS300") if "XPS300" in m.materialy else G.MATERIALY_DOMYSLNE["XPS"]
+                for op, blok, prz in (("bez bloku u podstawy ściany (odniesienie)", None, None),
+                                      ("blok z betonu komórkowego 600 (24 cm) u podstawy ściany",
+                                       (KD._mat(m, "BET_KOM_600"), 0.24) if "BET_KOM_600" in m.materialy else None, None),
+                                      ("nośny blok termoizolacyjny (λ ≤ 0,045, 24 cm) + przerwa termiczna PF2 przy żebrze "
+                                       "(XPS 10 cm na grubości płyty)",
+                                       (KD._mat(m, "BLOK_TERM"), 0.24) if "BLOK_TERM" in m.materialy else None, (xps, 0.10))):
+                    wv = D.wezel_garaz_plyta(KD._W(m, kg), KD._W(m, pd), KD._W(m, pg), blok=blok, id=w.id + "v",
+                                             uskok=usk, zebro=zeb, przerwa=prz,
+                                             izolacja_czola=bool(e.get("izolacja_czola_uskoku")))
                     out.setdefault(w.id, []).append((op,) + run(wv))
         except Exception as ex:          # wariant pomocniczy — błąd nie przerywa zestawienia
             log(f"  wariant {w.id}: {type(ex).__name__}: {ex}")

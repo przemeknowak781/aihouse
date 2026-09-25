@@ -252,7 +252,7 @@ class WynikOgrzewanie:
                 "SCOP_obl_TMY": round(self.bin["SCOP"], 2), "theta_V_des": round(self.theta_V, 1),
                 "bufor_l": self.bufor["V_dob"], "naczynie_co_l": self.naczynie_co["V_dob"], "naczynie_cwu_l": self.naczynie_cwu["V_dob"],
                 "L_A_granica_dB": round(self.halas["L_A_granica"], 1),
-                "do_EP": {"eta_H_g_SCOP": self.pc["SCOP_35"], "COP_cwu": self.pc["COP_cwu"], "eta_H_e": 0.89, "eta_H_d": 0.96,
+                "do_EP": {"eta_H_g_SCOP": round(min(self.pc["SCOP_35"], self.bin["SCOP"]), 2), "COP_cwu": self.pc["COP_cwu"], "eta_H_e": 0.89, "eta_H_d": 0.96,
                           "E_el_PC_kWh_a": round(self.bin["E_el"], 0), "E_grzalka_kWh_a": round(self.bin["E_grz"], 0),
                           "Q_H_TMY_kWh_a": round(self.bin["Q_H"], 0)}}
 
@@ -397,11 +397,13 @@ def oblicz_ogrzewanie(dane: DaneBudynku, phi_hl=None, par: ParametryOgrz | None 
         Krok("Współczynnik strat budynku", "H = Φ_HL/(θ_i − θ_e)", f"{f(Phi, 0)}/({f(par.theta_i, 0)} − ({f(te, 0)}))", H, "W/K", "", 1),
         Krok("Moc PC przy θ_e (W35)", "P_PC(θ_e)", "interpolacja danych katalogowych", o["P_te"], "kW", "[ZAŁ]", 2),
         Krok("Punkt biwalentny (P_PC(θ) = H·(θ_i − θ))", "θ_biv", "bisekcja", tb, "°C", f"kryterium θ_biv ≤ {f(par.theta_biv_max, 0)} °C [ZAŁ]", 1),
-        Krok("Ciepło na ogrzewanie w roku typowym (TMY Poznań, granica grzania 15 °C)", "Q_H = Σ H·(15 − θ_e,h)", "", o["Q_H"], "kWh/a",
-             "PVGIS 5.3 TMY [UPR — bilans EP w module energii]", 0),
+        Krok("Ciepło do bilansu godzinowego PC — metoda uproszczona (stopniogodziny TMY Poznań, granica grzania 15 °C, "
+             "bez bilansu zysków ciepła; NIE jest to zapotrzebowanie Q_H,nd — to podaje charakterystyka energetyczna)",
+             "Q_H,PC = Σ H·(15 − θ_e,h)", "", o["Q_H"], "kWh/a",
+             "PVGIS 5.3 TMY [UPR — tylko do udziału grzałki i SCOP]", 0),
         Krok("Energia z grzałki (godziny z P_PC < Φ)", "Q_grz = Σ max(0, Φ − P_PC)", "", o["Q_grz"], "kWh/a", "", 0),
         Krok("Udział grzałki", "Q_grz/Q_H", "", 100 * o["udzial_grzalki"], "%", f"≤ {f(100 * par.udzial_grzalki_max, 0)} % [ZAŁ]", 2),
-        Krok("Sezonowy COP z obliczenia godzinowego (informacyjnie; do EP — SCOP deklarowany)", "SCOP = ΣQ_PC/ΣE_el", "", o["SCOP"], "",
+        Krok("Sezonowy COP z obliczenia godzinowego (do EP — mniejsza z wartości: ta albo SCOP deklarowany)", "SCOP = ΣQ_PC/ΣE_el", "", o["SCOP"], "",
              "", 2),
     ]
     kroki["biw"].append(Krok(f"Uwaga: TMY Poznań — min. θ_e = {f(float(T.min()), 1)} °C (rok typowy nie zawiera temperatury obliczeniowej "

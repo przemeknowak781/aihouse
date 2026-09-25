@@ -247,21 +247,34 @@ def rozdz_ppoz(o: Opis, D: DanePTIS):
     zl, gw, zw = (wymaganie("ppoz", k) for k in ("kategoria_ZL", "grupa_wysokosci", "zwolnienie_213_kondygnacje_max"))
     n_k = len(D.B.get("kondygnacje", []))
     hyd = next((x for x in ((D.Dz.get("uzbrojenie") or {}).get("obiekty") or []) if x.get("id") == "HYDR"), {})
+    hyd_op = hyd.get("opis", "wg PZT")
+    if hyd and FIKCJA not in hyd_op:
+        hyd_op += f" {FIKCJA}"                           # sieć i ulica z danych działki fikcyjnej (rejestr E.1)
+    ark = getattr(D, "ark_uwaga_ppoz", [])
+    uwaga_ark = (f" Uwaga na arkuszach {', '.join(ark)} „… ppoż. wg klasy stropu” oznacza w tym budynku: stropy nie "
+                 "mają wymaganej klasy odporności ogniowej, więc przepusty ogniochronne (opaski, kołnierze) nie są "
+                 "wymagane; obowiązuje uszczelnienie jak wyżej." if ark else "")
     o.rozdzial("Dane dotyczące warunków ochrony przeciwpożarowej", podstawa="§ 23 pkt 10 RPB", nowa_strona=True)
     o.tekst(f"""
     Budynek mieszkalny jednorodzinny: kategoria zagrożenia ludzi **{zl.wartosc}** ({zl.zrodlo}), grupa wysokości
     **{gw.wartosc}** ({gw.zrodlo}), {n_k} kondygnacje nadziemne — {'zwolniony' if n_k <= zw.wartosc else 'NIE zwolniony'}
     z wymagań klasy odporności pożarowej ({zw.zrodlo}; {zw.id}). W zakresie PT-3 IS:
 
-    * przejścia instalacji przez stropy i ściany — bez wymagań odporności ogniowej przepustów (brak wymagań
-      klasy odporności elementów, jw.); przejścia uszczelnione akustycznie i szczelnie powietrznie (W-249);
+    * izolacje cieplne i akustyczne instalacji wodociągowej, kanalizacyjnej i ogrzewczej wykonać w sposób
+      zapewniający **nierozprzestrzenianie ognia** (WT § 267 ust. 8; W-215): otuliny przewodów wody zimnej,
+      c.w.u., cyrkulacji i c.o. (także przewodów PC ↔ budynek wewnątrz budynku), izolacja akustyczna pionów
+      kanalizacyjnych i rur spustowych w szachcie. Zwolnienie z § 213 WT obejmuje tylko wymagania § 212 i § 216,
+      więc tego wymagania nie znosi;
+    * przejścia instalacji przez stropy i ściany — przepusty bez wymaganej klasy odporności ogniowej (EI), bo
+      elementy budynku nie mają wymaganej klasy odporności ogniowej (zwolnienie jw.); przejścia uszczelnić
+      akustycznie i szczelnie powietrznie (W-249) materiałami nierozprzestrzeniającymi ognia.{uwaga_ark}
     * przewody wentylacyjne z materiałów palnych dopuszczalne w budynku jednorodzinnym jednolokalowym (W-168);
       centrala w wydzielonym pomieszczeniu technicznym;
     * pompa ciepła z czynnikiem palnym R290 (klasa A3 wg PN-EN 378-1+A1:2021-03): jednostka zewnętrzna poza
       budynkiem, strefa bezpieczeństwa wg DTR (typowo 1,0 m) wolna od otworów, wpustów, studzienek i źródeł
       zapłonu (W-156) — sprawdzenie w obliczeniach ogrzewania; instalacja wewnętrzna wyłącznie wodna (monoblok);
     * brak instalacji gazowej i urządzeń spalania paliw — nie występują przewody spalinowe;
-    * zaopatrzenie w wodę do zewnętrznego gaszenia pożaru: {hyd.get('opis', 'wg PZT')} (dane PZT) — instalacja
+    * zaopatrzenie w wodę do zewnętrznego gaszenia pożaru: {hyd_op} (dane PZT) — instalacja
       wodociągowa budynku nie pełni funkcji przeciwpożarowej (brak hydrantów wewnętrznych — nie wymagane).
     """)
 
@@ -273,6 +286,8 @@ def rozdz_urzadzenia(o: Opis, D: DanePTIS):
     Pm15 = dict(zip(pc["T"], pc["P"])).get(-15)
     wymP = D.obc.Phi_HL / 1000 + og.Phi_W / 1000
     ret = D.Dz.get("retencja") or {}
+    zbw = ((D.R.get("ep_cfg") or {}).get("cwu") or {}).get("zasobnik") or {}
+    zbw = zbw if isinstance(zbw, dict) else {}
     o.rozdzial("Zasadnicze urządzenia — parametry wymagane", podstawa="§ 23 pkt 9 RPB; PB art. 10", nowa_strona=True)
     o.tekst("""
     Urządzenia określono **parametrami wymaganymi**. Wyroby przywołane w obliczeniach są przykładowe — dopuszcza
@@ -290,7 +305,8 @@ def rozdz_urzadzenia(o: Opis, D: DanePTIS):
          "Podstawa": "W-155, W-156, W-024; (UE) 2024/573, 813/2013"},
         {"Urządzenie": "Zasobnik c.w.u. z wężownicą",
          "Parametry wymagane": f"V ≥ {Wd['woda']['zasobnik_l']} dm³, wężownica ≥ {L(D.W['woda'].cwu.get('A_wez'), 1)} m² "
-                               "(dla PC), grzałka do dezynfekcji, grupa bezpieczeństwa, izolacja fabryczna",
+                               f"(dla PC), strata postojowa ≤ {L(zbw.get('strata_W'), 0)} W (wartość przyjęta w EP), "
+                               "grzałka do dezynfekcji, grupa bezpieczeństwa, izolacja fabryczna",
          "Podstawa": "W-133, W-134; PN-EN 16147+A1:2023-06"},
         {"Urządzenie": "Bufor c.o. (szeregowy)", "Parametry wymagane": f"V ≥ {Wd['ogrzewanie']['bufor_l']} dm³, izolowany",
          "Podstawa": "obliczenia ogrzewania"},
