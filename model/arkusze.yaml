@@ -26,14 +26,31 @@ wspolne:
 przekroje:
   - {id: A, x: 6.55, patrz: E}
   - {id: B, y: 3.30, patrz: N}
+# Układ kompletu PAB (ekonomiczne ustawienie na arkuszach — wymaganie inwestora; analiza: docs/30_arkusze/zastosowanie_AR.md).
+# Skala 1:50 bez zmian (RPB § 9: PAB ≥ 1:100). Widoki łączone na wspólnych arkuszach, format dobiera silnik (auto):
+# * PB-AR-03 — rzut II piętra nad rzutem dachu (ten sam zasięg bryły; 590×891 = 9 × A4, składanie dobre);
+# * PB-AR-04 — przekroje A-A i B-B w jednym wierszu (wspólna linia terenu i rzędne kondygnacji na jednej wysokości);
+#   max_wysokosc 594 wyklucza wariant pionowy 580×841 (więcej papieru, mniejsze wypełnienie, przekroje jeden pod drugim);
+# * PB-AR-05 — rozwinięcie elewacji S → E → N → W (sąsiednie elewacje stykają się tym samym narożnikiem budynku),
+#   wspólna legenda kolorystyki i materiałów, pasek 297 mm wysokości składany do A4 bez zgięć poziomych.
 arkusze:
   - {nr: PB-AR-01, tytul: "RZUT PARTERU", typ: rzut, kond: P0}
   - {nr: PB-AR-02, tytul: "RZUT I PIĘTRA", typ: rzut, kond: P1}
-  - {nr: PB-AR-03, tytul: "RZUT II PIĘTRA", typ: rzut, kond: P2}
-  - {nr: PB-AR-04, tytul: "RZUT DACHU", typ: dach}
-  - {nr: PB-AR-05, tytul: "PRZEKRÓJ A-A", typ: przekroj, przekroj: A}
-  - {nr: PB-AR-06, tytul: "PRZEKRÓJ B-B", typ: przekroj, przekroj: B}
-  - {nr: PB-AR-07, tytul: "ELEWACJA POŁUDNIOWA (OGRODOWA)", typ: elewacja, strona: S}
-  - {nr: PB-AR-08, tytul: "ELEWACJA PÓŁNOCNA (OD ULICY)", typ: elewacja, strona: N}
-  - {nr: PB-AR-09, tytul: "ELEWACJA WSCHODNIA", typ: elewacja, strona: E}
-  - {nr: PB-AR-10, tytul: "ELEWACJA ZACHODNIA", typ: elewacja, strona: W}
+  - nr: PB-AR-03
+    tytul: "RZUT II PIĘTRA I RZUT DACHU"
+    widoki:
+      - {typ: rzut, kond: P2}
+      - {typ: dach, opcje: {opis_dachu_szer: 90}}   # opisy przegród dachu zawijane do ≤ 90 mm (lamela.views.plan)
+  - nr: PB-AR-04
+    tytul: "PRZEKROJE A-A I B-B"
+    max_wysokosc: 594
+    widoki:
+      - {typ: przekroj, przekroj: A}
+      - {typ: przekroj, przekroj: B}
+  - nr: PB-AR-05
+    tytul: "ELEWACJE"
+    widoki:
+      - {typ: elewacja, strona: S, tytul_widoku: "ELEWACJA POŁUDNIOWA (OGRODOWA)"}
+      - {typ: elewacja, strona: E}
+      - {typ: elewacja, strona: N, tytul_widoku: "ELEWACJA PÓŁNOCNA (OD ULICY)"}
+      - {typ: elewacja, strona: W}

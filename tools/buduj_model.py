@@ -278,6 +278,9 @@ PRZ = {
     "POD-G": dict(nazwa="Posadzka garażu (nieogrzewany): żywica R11, jastrych cementowy zbrojony 9–14 cm (spadek 0,8 % do bramy: −0,05 przy "
                         "drzwiach do domu → −0,10 przy bramie), folia PE, XPS 300 10 cm, membrana SBS (przeciwwilgociowa, przeciwradonowa), "
                         "płyta ŻB 25 cm obniżona (wierzch −0,30) na XPS 20 cm",
+                  uwagi="w progach BR1 i DZ2 belka progowa z betonu wodoszczelnego na PF2 do rzędnej posadzki; membrana SBS wywinięta na "
+                        "belkę i połączona z uszczelnieniem cokołu ≥ 0,15 m nad nawierzchnią; XPS 10 cm i jastrych kończą się na belce "
+                        "(dylatacja obwodowa) — bez przerwy linii hydroizolacji na krawędzi PF2 (weryfikacja V2 N-5; otwory[].prog)",
                   typ="podloga_na_gruncie", warstwy=[
         L("ZYWICA", 0.003), L("JASTRYCH_G", 0.092), L("FOLIA_PE", 0.0002), L("XPS300", 0.10), L("MEMB_SBS_POD", 0.005),
         L("ZB_C25", 0.25, konstrukcyjna=True), L("XPS300", 0.20), L("FOLIA_PE", 0.0002), L("PIASEK", 0.20)]),
@@ -447,6 +450,13 @@ E_KW = [0.30, 2.20, 4.10, 6.44, 8.78, 11.70]
 H_E = r(Z_ST1 - T_STR)                  # 2,78 — spód B1/ST1
 SL_H = 0.06                             # połowa słupa RK 120
 _E = [(0.36, E_KW[1] - SL_H)] + [(E_KW[i] + SL_H, E_KW[i + 1] - SL_H) for i in range(1, 4)] + [(E_KW[4] + SL_H, E_KW[5])]
+# wydanie (weryfikacja V2 N-5; brief §9 pkt 1 i 4): progi garażu (posadzka −0,10, membrana SBS na PF2 ≈ −0,295, nawierzchnia −0,12) —
+# BELKA PROGOWA z betonu wodoszczelnego na PF2 w świetle otworu do rzędnej posadzki, membrana posadzki wywinięta na belkę i połączona
+# z uszczelnieniem cokołu (KMB / EPDM ≥ 0,15 m nad nawierzchnią); XPS i jastrych garażu kończą się na belce (bez „wanny” pod nawierzchnią);
+# korytko odwodnienia w progu / przed progiem (OL-7, OL-5). Geometrię belki (element konstrukcyjny na PF2) wymiaruje etap BO.
+PROG_GARAZ = {"typ": "belka_progowa", "mat": "ZB_C25 W8 (beton wodoszczelny)", "wierzch": -0.10, "szer": 0.25,
+              "hydroizolacja": "membrana SBS posadzki wywinięta na belkę + taśma EPDM / KMB na cokół ≥ 0,15 m nad nawierzchnią",
+              "detal": "PT-AR-D-03 / PT-AR-D-14"}
 O("O0-01", "S0-01", *_E[0], "fix", "FX1", H_E, 0.0, oslona="screen_zip", uwagi="przeszklenie E — kwatera 1 (między licami: ściana A / SL1)")
 O("O0-02", "S0-01", *_E[1], "fix", "FX1", H_E, 0.0, oslona="screen_zip", uwagi="przeszklenie E — kwatera 2 (SL1–SL2)")
 O("O0-03", "S0-01", *_E[2], "drzwi_przesuwne_HS", "HS1", H_E, 0.0, HS, "screen_zip", bezprogowe=True, uwagi="kwatera 3 — HS salon (SL2–SL3)")
@@ -455,8 +465,10 @@ O("O0-05", "S0-01", *_E[4], "fix", "FX2", H_E, 0.0, oslona="screen_zip", uwagi="
 O("O0-06", "S0-02", 12.35, 13.25, "drzwi_zewn", "DZ3", r(Z_DG - T_DG), 0.0, ow("R", "na_zewn"), "screen_zip",
   uwagi="drzwi gospodarcze przeszklone w systemie i podziale fasady E (przeszczep J2) — pas E czytany ≈ 12,85 m; pod okapem E")
 O("O0-07", "S0-04", 12.75, 17.75, "brama", "BR1", 2.25, -0.10, ow("segmentowa", "do_wewn"),
-  uwagi="brama segmentowa 5,00 × 2,25 m w świetle, kratki went. ≥ 0,08 m² (W-111, W-115); posadzka garażu −0,10")
-O("O0-08", "S0-03", 4.90, 5.90, "drzwi_zewn", "DZ2", 2.10, 0.0, ow("R", "na_zewn"), uwagi="drzwi boczne garażu (rowery, ogród) — 5,70 m od granicy E")
+  uwagi="brama segmentowa 5,00 × 2,25 m w świetle, kratki went. ≥ 0,08 m² (W-111, W-115); posadzka garażu −0,10",
+  prog=PROG_GARAZ | {"odwodnienie": "OL-7 (korytko w progu, cała szer. + filarki)", "nawierzchnia_przed": -0.12})
+O("O0-08", "S0-03", 4.90, 5.90, "drzwi_zewn", "DZ2", 2.10, 0.0, ow("R", "na_zewn"), uwagi="drzwi boczne garażu (rowery, ogród) — 5,70 m od granicy E",
+  prog=PROG_GARAZ | {"odwodnienie": "OL-5 (przed progiem, szer. drzwi + 0,15 m)", "nawierzchnia_przed": -0.12})
 O("O0-09", "S0-06", 10.05, 11.15, "drzwi_zewn", "DZ1", 2.40, 0.0, ow("R", "do_wewn", "prawa"),
   uwagi="drzwi wejściowe 1,10 × 2,40 w murze (≥ 0,90 × 2,00 w świetle ościeżnicy), próg ≤ 0,02 (W-055); pod daszkiem")
 O("O0-10", "S0-06", 11.25, 11.60, "fix", "FX3", 2.40, 0.0, oslona="brak", uwagi="doświetle boczne drzwi wejściowych, VSG mleczne (przeszczep z W3)")
@@ -1058,11 +1070,11 @@ TARASY = [
     {"id": "T1", "obrys": P((-3.30, -3.30), (xE + EXT, -3.30), (xE + EXT, -EXT), (-EXT, -EXT), (-EXT, y3), (-3.30, y3)), "rzedna": -0.02,
      "nawierzchnia": "deska kompozytowa na legarach i wspornikach regulowanych, szczeliny 5 mm; odwodnienie liniowe przy progach HS", "grubosc": 0.05,
      "uwagi": "taras ogrodowy w kształcie L (pd. przed E pod okapem 1,00 m, zach. pod okapem 1,50 m) — 4,30 m od granicy zach."},
-    {"id": "T2", "obrys": R(9.80, y4 + EXT, xE - EXT, 10.35), "rzedna": -0.02, "nawierzchnia": "płyty betonowe 60×60 na podsypce, spadek 2 % od drzwi",
-     "grubosc": 0.08, "uwagi": "podest wejścia głównego pod daszkiem (x 9,80–11,70: DZ1 + FX3 + 0,25 m), bez stopni, odwodnienie liniowe OL-3 "
-                                 "przy krawędzi pn.; poza podestem teren −0,32 (cokół ≥ 0,30 — runda 2, K-1)"},
-    {"id": "T3", "obrys": R(12.20, -1.30, 13.50, -EXT), "rzedna": -0.02, "nawierzchnia": "płyty betonowe 60×60, spadek 2 % od drzwi", "grubosc": 0.08,
-     "uwagi": "podest drzwi gospodarczych pod okapem E; odwodnienie liniowe OL-6 przy progu (→ RS8/KD-E), 2 stopnie do ogrodu (teren −0,34)"},
+    {"id": "T2", "obrys": R(9.90, y4 + EXT, xE - EXT, 10.35), "rzedna": -0.02, "nawierzchnia": "płyty betonowe 60×60 na podsypce, spadek 2 % od drzwi",
+     "grubosc": 0.08, "uwagi": "podest wejścia głównego pod daszkiem (x 9,90–11,70: DZ1 + FX3 ± 0,15 m — strefa progu, wydanie V2 N-4), bez stopni, odwodnienie liniowe OL-3 "
+                                 "przy krawędzi pn., korytko OL-7a przy ścianie S0-05; poza podestem teren −0,33 (cokół ≥ 0,30 — runda 2, K-1)"},
+    {"id": "T3", "obrys": R(xE + EXT, -1.30, 13.50, -EXT), "rzedna": -0.02, "nawierzchnia": "płyty betonowe 60×60, spadek 2 % od drzwi", "grubosc": 0.08,
+     "uwagi": "podest drzwi gospodarczych pod okapem E; odwodnienie liniowe OL-6 przy progu (→ RS8/KD-E), 2 stopnie do ogrodu (teren −0,34); od x 12,30 (bez nakładania na T1 — V1-11)"},
 ]
 
 
@@ -1506,8 +1518,8 @@ def teren_projekt():
     * dalej — ogród pd. i pas zach. ze spadkiem ≈ 0,5 % ku niecce NCH-1; przed elewacją pn. powrót do terenu istniejącego (skarpa
       niecki ≤ 1:8); na granicach E, W, S i przy drodze rzędne istniejące (W-019). Jednostka PC na fundamencie (U5) — nie jest terenem."""
     H0, I = 101.32, 0.03
-    stref = {"T2": (box(9.75, 9.04, 11.70, 11.60), 2.31), "BR1": (box(11.70, 9.66, 19.00, 12.20), 2.31),
-             "DZ2": (box(18.66, 4.60, 20.10, 6.20), 1.49), "T3": (box(12.20, -1.70, 13.50, -0.29), 1.31)}
+    stref = {"T2": (box(9.88, 9.04, 11.70, 11.60), 2.31), "BR1": (box(11.70, 9.66, 18.70, 12.20), 2.31),
+             "DZ2": (box(18.66, 4.75, 20.10, 6.05), 1.49), "T3": (box(12.20, -1.70, 13.50, -0.29), 1.31)}
     P_ = []
     for dd in (0.0, 0.3, 0.8, 1.5, 2.3):
         c = list(Polygon(OB_P0).buffer(dd, join_style=2).exterior.coords)[:-1] if dd > 0 else list(Polygon(OB_P0).exterior.coords)[:-1]
@@ -1521,11 +1533,11 @@ def teren_projekt():
                     continue
                 P_.append([r(x + T_DZ[0], 2), r(y + T_DZ[1], 2), r(H0 - I * dd, 3)])
     spec = []
-    for x in (9.85, 10.30, 10.75, 11.20, 11.65):                                   # T2 — podest wejścia pod daszkiem, OL-3
+    for x in (9.95, 10.35, 10.80, 11.25, 11.65):                                   # T2 — podest wejścia pod daszkiem, OL-3
         spec += [((x, 9.10), 101.63), ((x, 9.70), 101.62), ((x, 10.30), 101.61), ((x, 10.40), 101.60)]
     for x in (9.95, 10.60, 11.25):                                                 # dojście U2 (spadek do posesji)
         spec += [((x, 11.50), 101.58), ((x, 13.50), 101.52), ((x, 17.10), 101.47)]
-    for x in (11.90, 12.80, 14.00, 15.19, 16.50, 17.70, 18.30, 18.90):             # BR1 — fartuch (cała szer. garażu), OL-1, grzbiet, OL-4
+    for x in (11.90, 12.80, 14.00, 15.19, 16.50, 17.70, 18.60):                    # BR1 — fartuch (cała szer. garażu), OL-1, grzbiet, OL-4
         spec += [((x, 9.70), 101.53), ((x, 9.975), 101.525), ((x, 10.90), 101.50), ((x, 11.975), 101.47), ((x, 13.00), 101.50),
                  ((x, 14.00), 101.52), ((x, 15.50), 101.50), ((x, 16.90), 101.47)]
     for y in (4.95, 5.40, 5.85):                                                   # DZ2 — podest, OL-5, stopień 0,15
@@ -1545,10 +1557,11 @@ def teren_projekt():
     # wydanie (weryfikacja V2 N-4): krawędzie podestów i fartucha jako STOPIEŃ/obrzeże — punkty 0,03 m za krawędzią na rzędnej pierścienia
     # (H0 − I·d od lica P0), aby TIN nie „rozmywał” podestu (−0,02/−0,12) na teren przy licu poza strefą (cokół ≥ 0,30, spadek ≥ 2 %)
     _P0 = Polygon(OB_P0)
-    kraw = [((9.72, y), None) for y in (9.10, 9.35, 9.60, 9.85, 10.10, 10.35)]                    # T2 — krawędź zach.
+    kraw = [((9.87, y), None) for y in (9.10, 9.35, 9.60, 9.85, 10.10, 10.35)]                    # T2 — krawędź zach. (drzwi − 0,15)
+    kraw += [((9.92, y), None) for y in (10.60, 10.85, 11.10, 11.30)]                           # U2 — obrzeże zach. dojścia w pasie 0–2,3 m
     kraw += [((13.53, y), None) for y in (-0.33, -0.60, -0.85, -1.10, -1.35, -1.55)]           # T3 — krawędź wsch. (ścieżka U6)
-    kraw += [((x, y), None) for x in (19.05, 19.40, 19.75, 20.05) for y in (4.57, 6.23)]         # DZ2 — krawędzie pd. i pn. podestu
-    kraw += [((19.00, y), None) for y in (9.75, 10.20, 10.90, 11.60)]                          # BR1 — obrzeże wsch. fartucha
+    kraw += [((x, y), None) for x in (18.70, 19.05, 19.40, 19.75, 20.05) for y in (4.72, 6.08)]  # DZ2 — krawędzie podestu (drzwi ± 0,15)
+    kraw += [((18.70, y), None) for y in (9.75, 10.20, 10.90, 11.60)]                          # BR1 — obrzeże wsch. fartucha
     for (x, y), _ in kraw:
         dd = _P0.exterior.distance(Point(x, y))
         if dd <= 2.3 and not _P0.contains(Point(x, y)):
@@ -1654,7 +1667,7 @@ DZIALKA.update({
              "opis": "RS7 (rynny zach. PL-E i PL-2) → KD-W, PVC 110", "dl": 3.2},
             {"branza": "kan_deszcz", "linia": [d(13.70, -EXT - 0.06), [r(13.70 + T_DZ[0], 3), 28.20]],
              "opis": "RS8 (rynny PL-E pd. i PL-D) + OL-6 (próg DZ3) → KD-E, PVC 110", "dl": 4.1},
-            {"branza": "kan_deszcz", "linia": [d(xF + EXT - 0.05, y5 + EXT + 0.125), d(19.80, 11.975)],
+            {"branza": "kan_deszcz", "linia": [d(xF + EXT, y5 + EXT + 0.125), d(19.80, 11.975)],
              "opis": "OL-7 / OL-7a (próg bramy, filarki, wnęka wejścia) → separator SEP-1, PVC 110 (wydanie, V1-02)", "dl": 2.3},
             {"branza": "kan_deszcz", "linia": [d(18.85, 5.40), [27.20, r(5.40 + T_DZ[1], 3)]],
              "opis": "OL-5 (próg DZ2 garażu) → KD-E, PVC 110 (woda czysta z podestu — nie z posadzki garażu)", "dl": 0.8},
@@ -1689,7 +1702,7 @@ DZIALKA.update({
         # wydanie (weryfikacja V1-02, V2 N-3, N-5): korytko przy licu ściany pn. garażu — próg bramy BR1 na całą szerokość z filarkami
         # (x 11,70…18,975) i boczna ściana wnęki wejścia S0-05 (x 11,70); nawierzchnia −0,12 / podest −0,02 przy licu; uszczelnienie
         # cokołu (KMB / membrana EPDM) ≥ 0,15 m nad nawierzchnią, połączone z membraną PF2 przez belkę progową (PT-AR-D-03/-14)
-        {"id": "OL-7", "typ": "liniowe", "linia": [d(11.80, y5 + EXT + 0.125), d(xF + EXT - 0.05, y5 + EXT + 0.125)], "spadek": 0.005,
+        {"id": "OL-7", "typ": "liniowe", "linia": [d(11.80, y5 + EXT + 0.125), d(xF + EXT, y5 + EXT + 0.125)], "spadek": 0.005,
          "odbiornik": "SEP-1 → NT-E", "przy_licu": True,
          "opis": "korytko odwodnienia liniowego w progu bramy garażu i przy filarkach (ściana S0-04 na całej długości, 0,125 m od lica); "
                  "próg bramy — belka progowa z betonu wodoszczelnego z membraną wywiniętą (N-5); woda z podjazdu → separator SEP-1"},
@@ -1710,7 +1723,7 @@ DZIALKA.update({
         {"id": "OL-5", "typ": "liniowe", "linia": [d(18.85, 4.75), d(18.85, 6.05)], "spadek": 0.005, "odbiornik": "KD-E",
          "opis": "odwodnienie liniowe przed progiem DZ2 na szer. drzwi + 0,15 m z każdej strony (R-W4, detal PT-AR-D-14): podest −0,12 "
                  "ze spadkiem 2 % od drzwi, stopień 0,15 m do terenu; próg uszczelniony taśmą EPDM / KMB wywiniętą ≥ 0,15 m na ościeża"},
-        {"id": "OL-6", "typ": "liniowe", "linia": [d(12.20, -0.45), d(13.50, -0.45)], "spadek": 0.005, "odbiornik": "RS8 → KD-E",
+        {"id": "OL-6", "typ": "liniowe", "linia": [d(12.20, -0.45), d(13.50, -0.45)], "spadek": 0.005, "odbiornik": "RS8 → KD-E", "przy_licu": True,
          "opis": "odwodnienie liniowe przy progu DZ3 (podest T3 −0,02, spadek 2 % od drzwi, 2 stopnie do ogrodu) — brief §9 pkt 4"},
         {"id": "NCH-1", "typ": "niecka", "obrys": NIECKA, "odbiornik": "grunt (piaski, ZWG 3,8 m p.p.t.)", "opis": "niecka chłonna — przelew zbiornika"},
         {"id": "DR-0", "typ": "drenaz_opaskowy", "linia": [], "opis": "NIE PROJEKTUJE SIĘ — piaski przepuszczalne, ZWG ≈ 3,8 m p.p.t., posadowienie ≈ 0,5 m p.p.t. "
