@@ -106,7 +106,11 @@ class KlimatGodzinowy:
         return (1 - f) * self.kol[f"{ORIENTACJE[i0]}_{nachylenie}"] + f * self.kol[f"{ORIENTACJE[i1]}_{nachylenie}"]
 
     def pozycja_slonca(self):
-        """(azymut, wysokość) [°] w połowie każdej godziny (czas standardowy UTC+1) — `lamela.sun` (NOAA)."""
+        """(azymut, wysokość) [°] dla każdej godziny TMY — `lamela.sun` (NOAA).
+
+        Znacznik godziny H pliku TMY zinterpretowano empirycznie: środek przedziału = H + 1:00 czasu standardowego
+        (UTC+1) — przy tym przesunięciu tylko 3 z 8760 godzin mają promieniowanie > 0 przy Słońcu pod horyzontem
+        (przy H + 0:30 — 71 godzin); sprawdzenie w tools/test_obliczenia_fizyka.py."""
         return _pozycje_slonca(tuple(self.M.tolist()), tuple(self.D.tolist()), tuple(self.H.tolist()))
 
 
@@ -118,7 +122,7 @@ def _pozycje_slonca(M, D, H):
     az = np.zeros(len(M))
     el = np.zeros(len(M))
     for i, (m, d, h) in enumerate(zip(M, D, H)):
-        t = datetime(2026, int(m), int(d), int(h), 30, tzinfo=tz)
+        t = datetime(2026, int(m), int(d), int(h), 0, tzinfo=tz) + timedelta(hours=1)
         az[i], el[i] = sun_position(t, refraction=False)
     return az, el
 
