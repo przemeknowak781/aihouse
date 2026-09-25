@@ -1,4 +1,5 @@
 {
+ "nr": 37,
  "title": "Strona www: pierwsze rendery z modelu · silnik układu arkuszy w budowie · runda 2: fizyka, woda, instalacje",
  "stages": [
   [
@@ -58,6 +59,13 @@
   "Pierwszy render strony katalogowej (z modelu, pipeline 3D): elewacja ogrodowa — sylweta „S” (bryła A w lamelach ze wspornikiem, boks C, linia D, przeszklenie E z okapem). Krytycznie: ujęcie zbyt frontalne i płaskie → zlecono ujęcia 3/4, słońce z modułu astronomicznego dla Poznania, cienie, AO.",
   "Krytycznie (architektura, z audytu A3): od ogrodu pusta biała ściana garażu 6,4 × 3,85 m i pełne drzwi gospodarcze — do rozważenia w rundzie 2 (przeszklenie/pnącza/lamele) — ocena wizualna po poprawkach.",
   "Silnik ekonomicznego układu arkuszy: implementacja w toku (dobór najmniejszego formatu, harmonijka 210+190·n, tabele w wolnych polach).",
-  "Runda 2 poprawek modelu: etap fizyka/woda/instalacje (weryfikacja §6, REKOMENDACJE mostków, K-1…K-12) w toku."
+  "Runda 2 poprawek modelu: etap fizyka/woda/instalacje (weryfikacja §6, REKOMENDACJE mostków, K-1…K-12) w toku.",
+  "NADZÓR (08:04): 4 agentów aktywnych, bez zastojów; najdłuższa bezczynność 2 min; zmiany w repo 0 min temu."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/build/www/rendery/27fa83e9b672146f/ogrod_169.png",
+   "caption": "Render roboczy do strony katalogowej — elewacja ogrodowa (z modelu; do poprawy: ujęcie 3/4, słońce, cienie)"
+  }
  ]
 }

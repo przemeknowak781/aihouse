@@ -579,7 +579,8 @@ def dane_z_modelu(budynek, dzialka=None, wyposazenie=None, instalacje=None, stri
         wp = []
         for w in d.get("wpusty") or []:
             if isinstance(w, dict):
-                wp.append({"xy": tuple(w.get("xy", (0, 0))), "dn": w.get("dn"), "podgrzewany": w.get("podgrzewany")})
+                wp.append({"xy": tuple(w.get("xy", (0, 0))), "dn": w.get("dn"), "podgrzewany": w.get("podgrzewany"),
+                           "rzedna_pokrycia": w.get("rzedna_pokrycia")})
             else:
                 wp.append({"xy": tuple(w), "dn": None, "podgrzewany": None})
         dachy.append(Dach(id=str(d.get("id")), obrys=P, pole=float(P.area), typ=_typ_dachu(prz, mats),

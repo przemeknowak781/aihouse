@@ -70,6 +70,19 @@ def kontrola(dist: Path, html: str) -> dict:
     return dict(pliki=pliki, razem=razem, bledy=bledy)
 
 
+def podglad(html: str, dist: Path, cel: Path):
+    """Lokalny podgląd z minimalnym szkieletem dokumentu (jak dodaje platforma: charset, viewport) — tylko do testów:
+    python3 -m http.server --directory build/www/podglad."""
+    cel.mkdir(parents=True, exist_ok=True)
+    (cel / "index.html").write_text('<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="viewport" '
+                                    'content="width=device-width, initial-scale=1, viewport-fit=cover"></head><body>\n'
+                                    + html + '</body></html>\n', encoding="utf-8")
+    link = cel / "assets"
+    if link.is_symlink() or link.exists():
+        link.unlink() if link.is_symlink() else shutil.rmtree(link)
+    link.symlink_to((dist / "assets").resolve(), target_is_directory=True)
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--budynek", default=str(ROOT / "model" / "budynek.yaml"))
@@ -144,6 +157,7 @@ def _dalej(a, D, tr, glb, dist, assets, cache, teraz, t0) -> int:
     print("[5] rysunki SVG i index.html…", flush=True)
     html, W = ST.zloz(D, tr, R, szkic, (assets / "model.glb").stat().st_size / 1e6, Path(a.budynek).parent, teraz)
     (dist / "index.html").write_text(html, encoding="utf-8")
+    podglad(html, dist, cache / "podglad")
     dane = dict(wygenerowano=teraz.isoformat(timespec="seconds"), model=D["meta"], wartosci=W,
                 PU=D["pow"]["PU"], PU_kond=D["pow"]["PU_kond"], dzialka_min={k: v for k, v in D["dzialka_min"].items()
                                                                               if k != "metoda"},

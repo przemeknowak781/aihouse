@@ -1591,12 +1591,17 @@ def dozbrojenia_fund(D: DaneKonstr, W, siatki: dict) -> dict:
             need = float(req[inside].max()) if inside.any() else 0.0
             extra = need - w.As_prov
             fi_x, s_x = None, w.s
-            for fi in SREDNICE_PL:
-                if pole_preta(fi) * 1000.0 / s_x >= extra:
-                    fi_x = fi
+            # pręty dodatkowe między prętami siatki: rozstaw s siatki, a gdy nie wystarcza — s/2 (po 1 pręcie w każdym
+            # polu siatki); φ ≤ 25 mm; rozstaw w świetle ≥ max(φ; d_g + 5; 20 mm) (8.2(2))
+            for s_c in (w.s, w.s / 2):
+                for fi in SREDNICE_PL + (25,):
+                    if pole_preta(fi) * 1000.0 / s_c >= extra and s_c / 2 - (fi + w.fi) / 2 >= max(fi, 21, 20):
+                        fi_x, s_x = fi, s_c
+                        break
+                if fi_x is not None:
                     break
             if fi_x is None:
-                fi_x, s_x = 20, w.s / 2
+                fi_x, s_x = 25, w.s / 2
             prov = w.As_prov + pole_preta(fi_x) * 1000.0 / s_x
             lst.append((pg, fi_x, s_x, need, prov))
         out[key] = lst

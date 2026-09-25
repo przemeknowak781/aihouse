@@ -87,8 +87,10 @@ p { margin: 0; max-width: 66ch; }
 .hero-cap { display: flex; justify-content: space-between; gap: 0.5rem 1.5rem; flex-wrap: wrap; padding: 0.55rem 0 0;
   font: 400 0.8rem/1.4 var(--f-mono); color: var(--ink-2); }
 .hero-tyt { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.2rem 3rem; padding-block: clamp(1.4rem, 3vw, 2.6rem) 1.6rem; }
-@media (min-width: 980px) { .hero-tyt { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: end; } }
-.hero h1 { font-size: clamp(3.1rem, 1rem + 9.6vw, 9.2rem); font-weight: 820; font-stretch: 125%; line-height: 0.86;
+.hero-tyt h1 { grid-column: 1 / -1; }
+@media (min-width: 980px) { .hero-tyt { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: end; }
+  .hero-tyt .cta { justify-content: flex-end; margin-top: 0; } }
+.hero h1 { font-size: clamp(2.7rem, 0.9rem + 7.3vw, 8rem); font-weight: 820; font-stretch: 125%; line-height: 0.9;
   letter-spacing: -0.025em; }
 .hero h1 .kod { display: block; font: 500 0.8rem/1.4 var(--f-mono); letter-spacing: 0.1em; color: var(--akcent-tekst);
   margin-bottom: 0.9rem; text-transform: uppercase; }

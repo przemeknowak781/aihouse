@@ -119,9 +119,9 @@ def hero(D: dict, tr: dict, W: dict, R: dict, sep: str) -> str:
             f'<div class="hero-cap"><span>Widok od ogrodu, render z modelu 3D · {E(_slonce_txt(info))}. {E(_pominiete(R))}</span>'
             f'<span>A–G: litery ze szkicu Inwestora</span></div>'
             f'<div class="hero-tyt"><h1 id="h-nazwa"><span class="kod">Projekt {E(tr["marka"]["kod_projektu"])} · dom jednorodzinny</span>'
-            f'{E(h["naglowek"])}</h1><div><p class="lead">{tx(h["lead"], W)}</p><div class="cta">'
+            f'{E(h["naglowek"])}</h1><p class="lead">{tx(h["lead"], W)}</p><div class="cta">'
             f'<a class="btn btn-g" href="#rzuty">{E(h["cta_1"])}</a><a class="btn" href="#zapytanie">{E(h["cta_2"])}</a>'
-            f'</div></div></div><div class="tabliczka" aria-label="Kluczowe parametry">{tab}</div></section>')
+            f'</div></div><div class="tabliczka" aria-label="Kluczowe parametry">{tab}</div></section>')
 
 
 def _wiersz(a, b, c, cls=""):

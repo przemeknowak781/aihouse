@@ -65,3 +65,11 @@ Lista generowana automatycznie przez `lamela.views.konstrukcja` z: (1) braków z
 - Biblioteka (uwaga analizy): PL-E: podpora punktowa SL2 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
 - Biblioteka (uwaga analizy): PL-E: podpora punktowa SL3 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
 - Biblioteka (uwaga analizy): PL-E: podpora punktowa SL4 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
+
+## Kontrola zbrojenia — pozycje niespełnione (szczegóły: raport kontroli zbrojenia)
+
+- PF1 / dozbrojenie D1 dół y (poz. MES-PF): A_s,prov = 5215 < max(A_s,req; A_s,min) = 5252 mm²/m 
+- PF1 / strefa S1 (płyta) — podwójnie zbrojona, najniekorz. el. (dół y) (poz. MES-PF): A_s,prov = 5215 < max(A_s,req; A_s,min) = 5252 mm²/m A_s2,max = 1840 mm²/m; A_s1 + A_s2 = 7092 ≤ A_s,max = 10000 mm²/m; płyta: pręty ściskane usztywnione siatką poprzeczną s = 7.5 cm ≤ 15φ [ZAŁ]
+- PL-2 / pole P1 — dół y (poz. 3.2): A_s,prov = 2513 < max(A_s,req; A_s,min) = 3165 mm²/m Zbrojenie na zginanie (η = 118%); Zbrojenie na zginanie (η = 135%)
+- PL-2 / wspornik — góra x (poz. 3.2): A_s,prov = 2513 < max(A_s,req; A_s,min) = 3624 mm²/m Zbrojenie na zginanie (η = 118%); Zbrojenie na zginanie (η = 135%)
+- PL-2 / wspornik — góra y (poz. 3.2): A_s,prov = 2513 < max(A_s,req; A_s,min) = 5502 mm²/m Zbrojenie na zginanie (η = 118%); Zbrojenie na zginanie (η = 135%)

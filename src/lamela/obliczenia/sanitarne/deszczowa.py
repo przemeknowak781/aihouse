@@ -240,15 +240,22 @@ def oblicz_deszczowa(dane: DaneBudynku, par: ParametryDeszcz | None = None, podl
                       "nad pokryciem (uzupełnić `dachy[].przelewy_awaryjne`)")
         Qp = 0.0
         h_sp = 0.0
+        # odniesienie dna przelewów: rzędna pokrycia (wierzch hydroizolacji) przy wpuście, gdy model ją podaje
+        # (`dachy[].wpusty[].rzedna_pokrycia` — izolacja spadkowa: pokrycie przy wpuście < średnie); inaczej średnie
+        pw = [float(w["rzedna_pokrycia"]) for w in wp if w.get("rzedna_pokrycia") is not None]
+        z_ref = min(pw) if pw else dd.rzedna
         for p in prz:
             b = float(p.get("szer", 0.2))
             hw = float(p.get("wys", 0.1))
             dno = float(p.get("rzedna_dna", dd.rzedna + par.h0_przelewu))
             h_eff = min(hw, dd.rzedna + par.wywiniecie_hydroiz - par.rezerwa_wywiniecia - dno)
             Qp += przepustowosc_przelewu(b, h_eff)
-            h0 = dno - dd.rzedna
+            h0 = dno - z_ref
             war.append(Warunek(f"Pole {dd.id}: dno przelewu nad pokryciem (odpływ normalny przez wpusty)", h0, ">=", 0.03, "m",
-                               "[ZAŁ] ≥ 3 cm", "W-142"))
+                               "[ZAŁ] ≥ 3 cm" + (" — pokrycie przy wpuście (model)" if pw else ""), "W-142"))
+            if p.get("rzedna_pokrycia") is not None:
+                war.append(Warunek(f"Pole {dd.id}: dno przelewu ≥ pokrycie w miejscu przelewu", dno, ">=",
+                                   float(p["rzedna_pokrycia"]), "m", "izolacja spadkowa — pokrycie lokalne (model)", "W-142", nd=3))
             war.append(Warunek(f"Pole {dd.id}: dno przelewu poniżej wywinięcia hydroizolacji (− rezerwa)", dno, "<=",
                                dd.rzedna + par.wywiniecie_hydroiz - par.rezerwa_wywiniecia - 0.02, "m",
                                "brief §9 pkt 4 (wywinięcie ≥ 15 cm)", "W-142", nd=3))
