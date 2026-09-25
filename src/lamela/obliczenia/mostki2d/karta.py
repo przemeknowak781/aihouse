@@ -582,7 +582,7 @@ def rysuj_karte(w, plik: str | Path, ciag: Ciaglosc | None = None, ocena: dict |
     H_pl = float(np.clip(6.2 * asp, 3.6, 7.2))
     H_f = H_pl + 3.6
     fig = plt.figure(figsize=(15.0, H_f), dpi=130)
-    gs = fig.add_gridspec(3, 2, height_ratios=[H_pl, 1.95, 0.75], hspace=0.22, wspace=0.10,
+    gs = fig.add_gridspec(3, 2, height_ratios=[H_pl, 1.95, 0.75], hspace=0.55 / ((H_pl + 2.7) / 3), wspace=0.10,
                           left=0.05, right=0.97, top=1.0 - 0.75 / H_f, bottom=0.02)
     ax1, ax2 = fig.add_subplot(gs[0, 0]), fig.add_subplot(gs[0, 1])
     axl, axl2, axw = fig.add_subplot(gs[1, 0]), fig.add_subplot(gs[1, 1]), fig.add_subplot(gs[2, :])

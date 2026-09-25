@@ -304,8 +304,9 @@ POROWNANIA_DEMO = [
     ("Płyta wspornikowa: bez łącznika vs z łącznikiem termoizolacyjnym", ["WZ-B0", "WZ-B1"],
      "łącznik przerywa płytę w płaszczyźnie izolacji — linia izolacji ciągła, ψ spada kilkukrotnie"),
     ("Ościeże okna: montaż w murze vs „ciepły montaż” w warstwie izolacji", ["WZ-W0", "WZ-W1", "WZ-W2"],
-     "we wszystkich wariantach izolacja ościeża zachodzi na ramę (3 cm) — bez tego zakładu ψ montażu w murze "
-     "rośnie wielokrotnie"),
+     "porównywać ψ_e (ψ montażu, okno po ramie); ψ_oi zawiera korektę U_w·x0 (okno w świetle otworu w murze). We "
+     "wszystkich wariantach izolacja ościeża zachodzi na ramę 3 cm — bez zakładu ψ_e montażu w murze rośnie ok. "
+     "dwukrotnie (0,030 → 0,067 W/(m·K) dla okna domyślnego). f_Rsi wszystkich wariantów ≫ 0,72"),
     ("Cokół: płyta fundamentowa vs ława (z gruntem), blok termiczny", ["WZ-GF2", "WZ-GF1", "WZ-GF1B"],
      "przy ławie linia izolacji domyka się przez mur fundamentowy i grunt; blok termiczny u podstawy muru ją zamyka"),
     ("Dom – garaż nieogrzewany: izolacja ciągła vs ściana garażu w ociepleniu", ["WZ-G1", "WZ-G2"],

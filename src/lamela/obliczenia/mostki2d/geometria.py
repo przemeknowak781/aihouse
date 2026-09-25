@@ -831,8 +831,11 @@ def _wezel_krawedz_okna(rodzaj: str, warstwy_sciany: Sequence[Warstwa], U_f: flo
            ("tasma_zewn", [(x0 - 0.035, nf1 + 0.004), (x0 + 0.02, nf1 + 0.004)],
             "taśma paroprzepuszczalna od zewnątrz (pod izolacją ościeża)")]
     if rodzaj == "nadproze":
-        lin.append(("obrobka", [(s_izol - 0.06, D + 0.002), (s_izol + 0.002, D + 0.002), (s_izol + 0.014, D + 0.014)],
-                    "profil narożny z okapnikiem w ETICS nad oknem"))
+        n_f = D if kaseta is None else max(y_s1 + 0.01, D - kaseta[1])     # lico ocieplenia nad oknem / w kasecie
+        lin.append(("obrobka", [(s_izol - 0.06, n_f + 0.002), (s_izol + 0.002, n_f + 0.002),
+                                (s_izol + 0.014, n_f + 0.014)],
+                    "profil narożny z okapnikiem w ETICS nad oknem" if kaseta is None else
+                    "kaseta osłony: profil z okapnikiem, uszczelnienie prowadnic"))
     if rodzaj == "podokiennik" and parapet_zewn is not None:
         lin += [("tasma_zewn", [(s_izol - 0.004, nf1 - 0.01), (s_izol - 0.004, D - 0.01)],
                  "taśma / membrana pod parapetem (2. poziom uszczelnienia), wywinięta na ramę"),
