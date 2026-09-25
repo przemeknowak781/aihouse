@@ -176,8 +176,8 @@ Kolumna „pierw.”:
 |---|---|---|---|---|---|
 | R7-E01 | Przy przekroju ≤ 10 mm² tylko żyły Cu. Powyżej 10 mm² dopuszcza się Al | WT § 183 ust. 1 pkt 9 | https://api.sejm.gov.pl/eli/acts/DU/2022/1225/text.pdf | TAK | — |
 | R7-E02 | Minimalne przekroje w instalacjach stałych (tabl. 52.2): obwody siłowe i oświetleniowe **1,5 mm² Cu**; sygnalizacyjne i sterownicze **0,5 mm² Cu**; przewody gołe siłowe 10 mm² Cu | PN-HD 60364-5-52:2011, tabl. 52.2 | https://www.viessmann.edu.pl/wp-content/uploads/E6_2__RC_29_04_2021.pdf | NIE | Zgodne z IEC 60364-5-52:2009 |
-| R7-E03 | Zalecany spadek napięcia od złącza do odbiornika przy zasilaniu z publicznej sieci nN: **3 % dla oświetlenia, 5 % dla pozostałych** | PN-HD 60364-5-52:2011, zał. G (informacyjny), tabl. G.52.1 | https://elektryka.edu.pl/dopuszczalny-spadek-napiecia/ | NIE | Wartości nie cytuję z samej PN. **NIEZWERYFIKOWANE** w treści normy |
-| R7-E04 | N SEP-E-002: łączny spadek od licznika do odbiornika **≤ 3 %**. Dla wlz przy mocy ≤ 100 kVA ≤ 0,5 % | N SEP-E-002 | https://elektryka.edu.pl/dopuszczalny-spadek-napiecia/ | NIE | Tablica normy SEP: **NIEZWERYFIKOWANE**. Stosować jako kryterium projektowe (ostrzejsze niż R7-E03) |
+| R7-E03 | Zalecany spadek napięcia od złącza do odbiornika: **3 % dla oświetlenia, 5 % dla pozostałych**. Wydanie **PN-IEC 60364-5-52:2002, powołane w zał. 1 WT lp. 41**, podawało **4 %** od złącza do końca dowolnego obwodu w budynkach nieprzemysłowych | PN-HD 60364-5-52:2011, zał. G (informacyjny); PN-IEC 60364-5-52:2002 | https://elektryka.edu.pl/dopuszczalny-spadek-napiecia/ | NIE (A. Wrzosek, 15.05.2026) | W treści norm: **NIEZWERYFIKOWANE**. Tryb WT (norma datowana 2002) daje ≤ 4 %, wiedza techniczna ≤ 3 %/5 %. Kryterium projektowe z R7-E04 spełnia oba |
+| R7-E04 | N SEP-E-002: spadek **≤ 3 % od licznika do odbiornika** i **≤ 0,5 % między złączem a licznikiem** (wlz) | N SEP-E-002 | https://elektryka.edu.pl/dopuszczalny-spadek-napiecia/ | NIE | Tablica normy SEP: **NIEZWERYFIKOWANE**. W domu z licznikiem w ZKP kabel ZKP–RG leży za licznikiem, więc wchodzi w 3 %. Przyjmuję jako kryterium projektowe: ΔU(ZKP→odbiornik) ≤ 3 %, w tym kabel ZKP–RG ≤ 0,5 % |
 | R7-E05 | Przewody od wlz do rozdzielnicy mieszkaniowej: obciążalność **≥ 50 A** (≈ 10 mm² Cu) | N SEP-E-002 (wg wtórnego opracowania szkoleniowego) | https://www.viessmann.edu.pl/wp-content/uploads/E6_2__RC_29_04_2021.pdf | NIE | Przypisanie do N SEP-E-002: **NIEZWERYFIKOWANE** |
 | R7-E06 | Koordynacja przewód–zabezpieczenie przeciążeniowe: I_B ≤ I_n ≤ I_z oraz I₂ ≤ 1,45·I_z | PN-HD 60364-4-43:2024-04, 433.1 | — | — | Reguła powszechnie znana, ale jej brzmienia w wydaniu 2024 nie sprawdziłem: **NIEZWERYFIKOWANE** |
 | R7-E07 | Barwy izolacji: L — brązowy, czarny, szary; N — niebieski; PE — zielono-żółty. Obwody 1-fazowe trzyżyłowe, gniazda ze stykiem ochronnym | PN-HD 308 S2:2007 (aktualna, PKN); PN-EN IEC 60445:2022-04 | https://www.muratorplus.pl/technika/instalacje-elektryczne/zasady-rozmieszczania-wypustow-oswietleniowych-i-gniazd-wtyczkowych-w-budynkach-mieszkalnych-aa-XnJ9-i1FL-Yhg6.html | NIE (status PKN) | — |
@@ -214,7 +214,7 @@ Kolumna „pierw.”:
 | R7-H01 | Aktualna jest **PN-HD 60364-7-701:2025-02** (wersja angielska, HD 60364-7-701:2024, +A11:2025). PN-HD 60364-7-701:2010 powołana w WT jest wycofana | PKN | https://wiedza.pkn.pl/web/guest/wyszukiwarka-norm | PKN | Treści wydania 2025 nie miałem (bazą jest IEC 60364-7-701:2019). Zmiany stref: **NIEZWERYFIKOWANE** |
 | R7-H02 | **Wszystkie obwody** wprowadzone do pomieszczenia z wanną lub natryskiem objęte RCD **I_Δn ≤ 30 mA** | PN-HD 60364-7-701:2010 (i następne) | https://inzynierbudownictwa.pl/wymagania-stawiane-instalacji-elektrycznej-w-pomieszczeniach-kapielowych/ | NIE (E. Musiał) | — |
 | R7-H03 | Stopień ochrony w strefach 1 i 2: **co najmniej IPX4**. Dotyczy to też obwodów SELV/PELV ≤ AC 25 V. W strefie 1 nie montuje się gniazd (z wyjątkiem SELV), łączników ani puszek | PN-HD 60364-7-701:2010 | jw. | NIE | IPX5 przy strumieniach wody, IPX7 w strefie 0 i dozwolone gniazda golarkowe w strefie 2: **NIEZWERYFIKOWANE** |
-| R7-H04 | Geometria stref (wydanie 2010): strefa 0 — wnętrze wanny lub brodzika; **strefa 1 — nad strefą 0 do wysokości 2,25 m**; **strefa 2 — pas 0,6 m poza strefą 1**, do 2,25 m | PN-HD 60364-7-701:2010; IEC 60364-7-701 | https://www.electrical-installation.org/enwiki/Bathroom_electrical_installation | NIE | Natrysk bez brodzika (promień strefy 1 od wylewki) oraz zmiany w IEC 2019 / HD 2024: **NIEZWERYFIKOWANE**. W PT zweryfikować z PN-HD 60364-7-701:2025-02 |
+| R7-H04 | Geometria stref (wydanie 2010): strefa 0 — wnętrze wanny lub brodzika; **strefa 1 — nad strefą 0 do wysokości 2,25 m**; **strefa 2 — pas 0,6 m poza strefą 1**, do 2,25 m | PN-HD 60364-7-701:2010; IEC 60364-7-701 | https://www.electrical-installation.org/enwiki/Bathroom_electrical_installation | NIE | Wartości znam tylko ze streszczeń wyników wyszukiwania. Strony źródłowej nie pobrałem (HTTP 403), więc **NIEZWERYFIKOWANE**. Tak samo natrysk bez brodzika (promień strefy 1 od wylewki) i zmiany w IEC 2019 / HD 2024. W PT zweryfikować z PN-HD 60364-7-701:2025-02 |
 | R7-H05 | Miejscowe połączenia wyrównawcze: nowsze wydania nie wymagają łączenia metalowej wanny, jeżeli instalacje wod-kan wykonano z tworzyw | PN-HD 60364-7-701:2010, 701.415.2 | https://inzynierbudownictwa.pl/wymagania-stawiane-instalacji-elektrycznej-w-pomieszczeniach-kapielowych/ | NIE | Warunki pominięcia: **NIEZWERYFIKOWANE** w treści |
 | R7-H06 | Gniazda w łazience na osobnym obwodzie | WT § 188 ust. 2 | https://api.sejm.gov.pl/eli/acts/DU/2022/1225/text.pdf | TAK | — |
 
@@ -344,7 +344,9 @@ Wymiary budynku biorę z briefu. Ostateczne wartości (długości tras, kubatura
    * Obudowa wg PN-EN IEC 61439-3:2025-09 [R7-A06].
    * Rezerwa min. 20 % modułów (założenie).
 2. **Aparatura na wejściu RG:**
-   * rozłącznik główny 3P 63 A z wyzwalaczem wzrostowym sterowanym przyciskiem PWP (pkt 3.9);
+   * aparat główny z możliwością zdalnego wyłączenia przyciskiem PWP (pkt 3.9). Do wyboru w PT:
+     * rozłącznik 3P ≥ 63 A z napędem lub wyzwalaczem;
+     * wyłącznik z wyzwalaczem wzrostowym, selektywny względem zabezpieczenia przedlicznikowego C (selektywność sprawdzić tabelami producenta);
    * **SPD typu 1+2** (T1: I_imp ≥ 12,5 kA na biegun; U_p ≤ 1,5 kV, wymagane ≤ 2,5 kV) [R7-F01…F05], w układzie zgodnym z punktem rozdziału PEN;
    * zabezpieczenie SPD wg DTR;
    * rozłącznik lub bezpieczniki dla obwodu falownika;
@@ -491,7 +493,7 @@ Przekroje Cu [R7-E01, R7-E02]. Przewody YDYp lub YDY 450/750 V w tynku (≥ 5 mm
 
 1. **PWP (rekomendacja).**
    * Przycisk PWP przy wejściu głównym (strona północna) lub przy ZKP, oznakowany.
-   * Działa na wyzwalacz rozłącznika głównego RG i odcina wszystkie obwody, w tym obwód AC falownika.
+   * Działa na wyzwalacz lub napęd aparatu głównego RG i odcina wszystkie obwody, w tym obwód AC falownika.
    * Falownik z zabezpieczeniem przed pracą wyspową sam przestaje zasilać sieć domową. **Strona DC PV pozostaje pod napięciem** — oznakować.
    * Podstawa: WT § 183 ust. 2–4 (kubatura > 1000 m³, liczona z modelu). Uwaga o zwolnieniu z ROPoż § 4 ust. 2 pkt 2 [R7-B05, R7-M01].
 2. **Czujki dymu (obowiązek):**

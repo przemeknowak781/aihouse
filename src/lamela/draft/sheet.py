@@ -5,7 +5,6 @@ Wymiary w mm, początek układu = lewy dolny róg arkusza.
 """
 from __future__ import annotations
 
-import math
 import re
 from dataclasses import dataclass, field
 from pathlib import Path

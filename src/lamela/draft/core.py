@@ -11,11 +11,10 @@ from __future__ import annotations
 
 import contextlib
 import math
-from dataclasses import dataclass, field
-from typing import Iterable, Sequence
+from dataclasses import dataclass
+from typing import Sequence
 
 import numpy as np
-from shapely.geometry import MultiPolygon, Polygon
 from shapely.geometry.base import BaseGeometry
 
 from . import styles, text as T

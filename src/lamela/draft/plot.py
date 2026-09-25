@@ -7,8 +7,6 @@
 """
 from __future__ import annotations
 
-from pathlib import Path
-
 import numpy as np
 
 from . import render
@@ -98,7 +96,7 @@ def qa(sheet, kind: str | None = None) -> dict:
     grubości linii z szeregu ISO 128-2, wysokości pisma z szeregu ISO 3098 (PZT ≥ 2,5 mm), zgodność sum łańcuchów
     wymiarowych z wymiarem całkowitym (po zaokrągleniu do mm, tolerancja 0)."""
     from . import styles, fmt as F
-    from .core import PArc, PFill, PLine, PText, text_items
+    from .core import PArc, PLine, PText, text_items
     errors, warnings = [], []
     tb = sheet.tb
     stad = (kind or (tb.stadium if tb else "") or "").upper()
@@ -138,7 +136,8 @@ def qa(sheet, kind: str | None = None) -> dict:
             for _xy, s, hh in text_items(p, canvas.k)[0]:
                 n_txt += 1
                 h2 = round(hh, 2)
-                if not any(abs(h2 - x) < 0.02 for x in styles.TEXT_SERIES) or h2 < min_h - 0.02:
+                too_small = vp is not None and h2 < min_h - 0.02   # min. 2,5 mm na PZT — treść rysunku
+                if not any(abs(h2 - x) < 0.02 for x in styles.TEXT_SERIES) or too_small:
                     bad_h.setdefault(h2, []).append(s[:20])
     for lw, n in sorted(bad_lw.items()):
         errors.append(f"grubość linii {lw} mm spoza szeregu ISO 128-2 ({n}×)")

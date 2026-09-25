@@ -11,15 +11,14 @@ Wszystkie współrzędne w metrach modelu.
 """
 from __future__ import annotations
 
-import math
 from dataclasses import dataclass, field
 
 import numpy as np
-from shapely.geometry import LineString, MultiPolygon, Polygon, box
+from shapely.geometry import MultiPolygon, Polygon, box
 from shapely.ops import unary_union
 
 from . import hatch as H
-from .geom import arr, perp, polygons_of, rect_pts, unit
+from .geom import arr, perp, polygons_of, unit
 
 KIND_STYLE = {
     # rodzaj: (warstwa konturu, pióro, priorytet domyślny)
@@ -105,14 +104,18 @@ class CutSet:
             for i, (it, g) in enumerate(res):
                 if it.kind in ("membrana", "grunt") or thick[i] >= merge_thin_mm * k:
                     continue
-                best = None
+                best, best_key = None, None
+                tol = 1e-6 * max(1.0, k)
                 for j, (jt, jg) in enumerate(res):
                     if j == i or thick[j] < merge_thin_mm * k or jt.kind in ("membrana", "grunt"):
                         continue
-                    if g.distance(jg) > 1e-6 * max(1.0, k):
+                    if g.distance(jg) > tol:
                         continue
-                    if best is None or jt.priority > res[best][0].priority:
-                        best = j
+                    # sąsiad o najdłuższej wspólnej krawędzi (nie tylko styk w narożniku), potem priorytet
+                    shared = g.boundary.intersection(jg.buffer(tol * 10)).length
+                    key = (round(shared / max(k, 1e-12), 3), jt.priority)
+                    if best is None or key > best_key:
+                        best, best_key = j, key
                 if best is not None:
                     res[best][1] = res[best][1].union(g).buffer(1e-9 * k).buffer(-1e-9 * k)
                     res[i][1] = None

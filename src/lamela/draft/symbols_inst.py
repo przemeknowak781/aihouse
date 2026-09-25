@@ -14,10 +14,8 @@ from __future__ import annotations
 import math
 
 import numpy as np
-import shapely
-from shapely.geometry import LineString, MultiLineString, Polygon
+from shapely.geometry import LineString
 
-from . import text as T
 from .dims import arrowhead
 from .geom import Xf, arr, circle_pts, dir_deg, lines_of, perp, rect_c, rect_pts, to_polygon, unit
 

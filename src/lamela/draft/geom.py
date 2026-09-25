@@ -2,11 +2,10 @@
 from __future__ import annotations
 
 import math
-from typing import Iterable, Sequence
+from typing import Iterable
 
 import numpy as np
-from shapely.geometry import (GeometryCollection, LinearRing, LineString, MultiLineString, MultiPolygon,
-                              Point, Polygon, box)
+from shapely.geometry import GeometryCollection, LinearRing, LineString, MultiLineString, MultiPolygon, Polygon
 from shapely.geometry.base import BaseGeometry
 
 Pt = tuple[float, float]

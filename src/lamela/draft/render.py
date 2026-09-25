@@ -8,13 +8,12 @@
 """
 from __future__ import annotations
 
-import math
 from pathlib import Path as FsPath
 
 import matplotlib
 import numpy as np
 from matplotlib.backends.backend_pdf import FigureCanvasPdf, PdfPages
-from matplotlib.collections import LineCollection, PathCollection
+from matplotlib.collections import LineCollection
 from matplotlib.figure import Figure
 from matplotlib.font_manager import FontProperties
 from matplotlib.patches import PathPatch, Rectangle

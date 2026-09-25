@@ -23,7 +23,7 @@ from typing import Callable
 
 import numpy as np
 import shapely
-from shapely.geometry import LineString, MultiLineString, Point, Polygon
+from shapely.geometry import LineString, MultiLineString, Polygon
 from shapely.geometry.base import BaseGeometry
 
 from .geom import (arr, circle_pts, dir_deg, lines_of, perp, polygons_of, rect_pts, stable_seed, strip_frame,

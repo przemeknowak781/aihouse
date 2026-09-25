@@ -15,11 +15,11 @@ from __future__ import annotations
 import math
 
 import numpy as np
-from shapely.geometry import LineString, Polygon
+from shapely.geometry import LineString
 
 from . import fmt, text as T
 from .dims import arrowhead, dim_runs
-from .geom import Xf, arc_pts, arr, circle_pts, dir_deg, perp, readable_angle, rect_c, rect_pts, rot, unit
+from .geom import Xf, arr, circle_pts, dir_deg, perp, readable_angle, rect_c, rect_pts, rot, unit
 
 
 # ================================================================================================ narzędzia

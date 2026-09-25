@@ -14,10 +14,7 @@
 """
 from __future__ import annotations
 
-import math
-
 import ezdxf
-import numpy as np
 from ezdxf import colors as ezcolors
 from ezdxf.enums import TextEntityAlignment
 

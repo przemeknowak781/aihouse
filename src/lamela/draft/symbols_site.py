@@ -10,12 +10,11 @@ from __future__ import annotations
 import math
 
 import numpy as np
-from shapely.geometry import LineString, Polygon
+from shapely.geometry import LineString
 
 from . import fmt, text as T
 from .dims import arrowhead
-from .geom import (Xf, arr, circle_pts, dir_deg, lines_of, perp, polygons_of, readable_angle, rect_c, rect_pts,
-                   to_polygon, unit)
+from .geom import Xf, arr, circle_pts, dir_deg, perp, polygons_of, readable_angle, rect_pts, to_polygon, unit
 
 __all__ = [
     "tree", "shrub", "hedge", "lawn", "paving", "pole", "hydrant", "manhole", "cable_box", "utility_box",
@@ -248,9 +247,9 @@ def plot_boundary(c, pts, closed: bool = True, corner_labels=None, point_labels=
                 c.text(q, str(labels[i]), h, 0.0, "center", "middle")
                 if coords:
                     c.text(q + np.array([3.0 * k, -1.0 * k]),
-                           f"x {fmt.num(p[1], 2)}, y {fmt.num(p[0], 2)}", 1.8, 0.0, "left", "top")
+                           f"x {fmt.num(p[1], 2)}, y {fmt.num(p[0], 2)}", 2.5, 0.0, "left", "top")
             elif point_labels is not None and i < len(point_labels):
-                c.text(p + v * 2.2 * k, str(point_labels[i]), 1.8, 0.0, "center", "middle")
+                c.text(p + v * 2.2 * k, str(point_labels[i]), 2.5, 0.0, "center", "middle")
 
 
 def boundary_line(c, pts, label: str | None = None, layer: str = "Z-GRANICE"):
@@ -377,7 +376,7 @@ def site_entrance(c, pos, direction: float, layer: str = "Z-ZABUDOWA"):
     c.polygon(tri, layer, pen=0.25)
 
 
-def contours(c, lines, step_label: float = 0.5, layer: str = "Z-WARSTWICE", h: float = 1.8,
+def contours(c, lines, step_label: float = 0.5, layer: str = "Z-WARSTWICE", h: float = 2.5,
              nd: int | None = None, label_every: float = 60.0, projected: bool = False):
     """Warstwice (PN-B-01027 poz. 5.2): istniejące — ciągła 0,18, projektowane — ciągła 0,5; lines = [(punkty, H)].
     Opis wartości (co ``step_label``) wzdłuż warstwicy z maską."""

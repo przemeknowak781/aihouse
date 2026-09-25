@@ -9,7 +9,7 @@ Szereg grubości (PN-EN ISO 128-2): 0,13 · 0,18 · 0,25 · 0,35 · 0,5 · 0,7 �
 """
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 ISO_LINEWEIGHTS = (0.13, 0.18, 0.25, 0.35, 0.5, 0.7, 1.0, 1.4, 2.0)
 PEN_ROLES = ("b_cienka", "cienka", "srednia", "gruba", "b_gruba")

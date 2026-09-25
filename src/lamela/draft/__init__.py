@@ -19,10 +19,12 @@ Szybki start::
 """
 from . import dims, elements, fmt, hatch, plot, render, styles, symbols
 from .core import Canvas, PArc, PFill, PLine, PText, Viewport
-from .sheet import Osoba, Sheet, TitleBlock, control_segment, fold_positions, notes_box, scale_bar, sheet_size, table
+from .sheet import (Osoba, Sheet, TitleBlock, control_segment, fold_positions, lettering_sample, lines_legend,
+                    notes_box, scale_bar, sheet_size, table)
 
 __all__ = [
     "Sheet", "TitleBlock", "Osoba", "Viewport", "Canvas", "PLine", "PArc", "PFill", "PText",
     "dims", "elements", "fmt", "hatch", "plot", "render", "styles", "symbols",
-    "sheet_size", "fold_positions", "notes_box", "scale_bar", "table", "control_segment",
+    "sheet_size", "fold_positions", "notes_box", "scale_bar", "table", "control_segment", "lines_legend",
+    "lettering_sample",
 ]
