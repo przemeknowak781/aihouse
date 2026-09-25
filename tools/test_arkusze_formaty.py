@@ -126,7 +126,7 @@ def test_arkusz_niestandardowy():
 
 
 # ================================================================================================ upakowanie
-def _blok_prosty(h, w=U.TB_W):
+def _blok_prosty(h, w=U.B_W):
     def fn(sh, x, y, ww):
         sh.rect(x, y - h, x + ww, y)
         sh.text((x + 2, y - 5), "BLOK", 2.5)
@@ -135,7 +135,7 @@ def _blok_prosty(h, w=U.TB_W):
 
 
 def _uwagi(n=12):
-    b = U.Blok("uwagi", None, U.TB_W)
+    b = U.Blok("uwagi", None, U.B_W)
     b.uwagi = U.BlokUwag([f"Uwaga numer {i + 1}: " + "tekst uwagi do zawinięcia w kolumnie " * (1 + i % 4)
                           for i in range(n)])
     return b
@@ -220,7 +220,7 @@ def test_uwagi_dzielone():
     U_ = U.BlokUwag([f"Uwaga {i}: " + "długi tekst uwagi " * (i % 5 + 1) for i in range(9)])
     for i0, i1 in ((0, 9), (0, 4), (4, 9), (3, 5)):
         sh = Sheet("A0", draw_frame=False)
-        r = notes_box(sh, 50.0, 700.0, U.TB_W, U_.lines[i0:i1], "T", h=1.8, start=i0 + 1)
+        r = notes_box(sh, 50.0, 700.0, U.B_W, U_.lines[i0:i1], "T", h=1.8, start=i0 + 1)
         assert abs((700.0 - r[1]) - U_.wysokosc(i0, i1)) < 0.05, (i0, i1, 700 - r[1], U_.wysokosc(i0, i1))
         nums = [p.string for p in sh.prims if hasattr(p, "runs") and p.string.rstrip().endswith(".")
                 and p.string.strip()[:-1].isdigit()]
@@ -334,7 +334,7 @@ def test_znaki_centrujace_rezerwacja():
     roza = [(b, r) for (b, *_x), (_k, _n, r) in zip(R.bloki, [p for p in R.prostokaty if p[0] == "blok"])
             if b.nazwa.startswith("róża")][0]
     zp = strefy["p"]
-    assert roza[0].w < U.TB_W and roza[1][3] > zp[1] and roza[1][2] <= zp[0] + 1e-6, roza   # zwężony, nad tabliczką
+    assert roza[0].w < U.B_W and roza[1][3] > zp[1] and roza[1][2] <= zp[0] + 1e-6, roza   # zwężony, nad tabliczką
     assert abs(roza[1][0] - R.tabliczka[0]) < 1e-6
     assert not U.sprawdz_nakladanie(R)
     R.prostokaty.append(("blok", "test", (strefy["p"][0] - 5, 140.0, strefy["p"][2], 160.0)))

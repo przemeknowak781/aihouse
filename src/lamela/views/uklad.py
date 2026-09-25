@@ -174,7 +174,7 @@ class Blok:
     """Blok kolumny opisowej: ``fn(sh, x, y_top, w) -> y_bottom`` rysuje go na arkuszu; wymiary z pomiaru."""
     nazwa: str
     fn: object
-    w: float = TB_W                 # szerokość przekazywana do fn
+    w: float = B_W                  # szerokość przekazywana do fn
     h: float = 0.0                  # wysokość (od y_top w dół)
     dx0: float = 0.0                # wystawanie w lewo poza x
     dx1: float = 0.0                # wystawanie w prawo poza x + w
@@ -192,7 +192,7 @@ class Blok:
         return self.h + self.dy1
 
 
-def zmierz_blok(fn, w: float = TB_W) -> tuple[float, float, float, float]:
+def zmierz_blok(fn, w: float = B_W) -> tuple[float, float, float, float]:
     """(h, dx0, dx1, dy1) bloku — rysowanie na arkuszu próbnym i obwiednia prymitywów."""
     from ..draft.sheet import Sheet
     sh = Sheet("A0", draw_frame=False)
@@ -206,7 +206,7 @@ def zmierz_blok(fn, w: float = TB_W) -> tuple[float, float, float, float]:
     return h, snap(X - float(e[0])), snap(float(e[2]) - X - w), snap(float(e[3]) - Y)
 
 
-def blok(nazwa: str, fn, w: float = TB_W, kotwica: str = "", w_min: float = 0.0) -> Blok:
+def blok(nazwa: str, fn, w: float = B_W, kotwica: str = "", w_min: float = 0.0) -> Blok:
     h, dx0, dx1, dy1 = zmierz_blok(fn, w)
     return Blok(nazwa, fn, w, h, dx0, dx1, dy1, kotwica, w_min=w_min)
 
@@ -221,7 +221,7 @@ def _wezszy(b: Blok, w: float) -> Blok:
     return c[k]
 
 
-def bloki_z_kolumny(pary, w: float = TB_W, gap: float = GAP_B) -> list[Blok]:
+def bloki_z_kolumny(pary, w: float = B_W, gap: float = GAP_B) -> list[Blok]:
     """Bloki kolumny opisowej z listy ``(nazwa, fn)`` z pomiarem sekwencyjnym jak ``sheets.Column``: bloki zależne od
     poprzednich (stan arkusza — np. legenda rysowana raz na arkusz, ciąg dalszy wyników bez nagłówka w detalach) są
     łączone z poprzednim blokiem w jeden blok złożony, a bloki, które w sekwencji nic nie rysują — pomijane.
@@ -259,7 +259,7 @@ def bloki_z_kolumny(pary, w: float = TB_W, gap: float = GAP_B) -> list[Blok]:
 class BlokUwag:
     """Uwagi numerowane dzielone na części (kolumny): wysokości liczone jak w ``draft.sheet.notes_box``."""
 
-    def __init__(self, lines: list[str], title: str = "OBJAŚNIENIA I UWAGI", h: float = 1.8, w: float = TB_W):
+    def __init__(self, lines: list[str], title: str = "OBJAŚNIENIA I UWAGI", h: float = 1.8, w: float = B_W):
         self.lines, self.title, self.th, self.w = list(lines), title, h, w
 
     def _item_h(self, i: int) -> float:
@@ -740,7 +740,7 @@ def _umiesc_kotwice(wolne: Wolne, b: Blok, tb: tuple, fx1: float):
     if wolne.miesci(r):
         return (r[0], r[1]), b
     if b.w_min > 0:
-        xo = fx1 - b.szer + b.dx0                  # początek rysowania jak w pełnym wariancie
+        xo = tb[0] + b.dx0                         # lewa krawędź jak tabliczka
         w = b.w - 2.5
         while w >= b.w_min - 1e-6:
             bn = _wezszy(b, w)
@@ -1038,6 +1038,62 @@ def min_szerokosc(H: float, widoki, grupy, bloki, tb_h: float, o: dict):
     return best
 
 
+def min_wysokosc(W: float, widoki, grupy, bloki, tb_h: float, o: dict, h_min: float = 297.0):
+    """Najmniejsza wysokość arkusza o szerokości W (np. szerokość rolki plotera) mieszcząca treść — krok 5 mm,
+    H ≥ ``h_min``: (H, grupa, rozmieszczenie) lub None. Odpowiednik ``min_szerokosc`` dla arkusza „bokiem na
+    rolkę” (szerokość = rolka, wysokość odcinana)."""
+    Hmax = min(float(o["max_wysokosc"]), float(o["max_dlugosc"]))
+    gap = float(o.get("odstep_widok_blok", GAP_VB))
+    mc = int(o.get("max_czesci_uwag", 4))
+    ko = str(o.get("kolejnosc_uwag", "czytania"))
+    Wf = W - MARG_L - MARG
+    if Wf < TB_W - 1e-6:
+        return None
+    a_b = sum(b.szer * b.wys for b in bloki if b.uwagi is None)
+    a_b += sum(b.uwagi.wysokosc(0, len(b.uwagi.lines)) * b.uwagi.w for b in bloki if b.uwagi is not None)
+    best = None
+    for g in grupy:
+        if g.w + PAD_V + PAD_B > Wf + 1e-6:
+            continue
+        lb = max(h_min, 2 * MARG + PAD_V + g.h + PAD_B, 2 * MARG + tb_h + PAD_B,
+                 (g.w * g.h + a_b + TB_W * tb_h) / (Wf - PAD_B) + 2 * MARG)
+        if best is not None and lb >= best[0]:
+            continue
+        H = math.ceil(lb / 5.0) * 5.0
+        step, prev, r = 20.0, None, None
+        while H <= Hmax + 1e-6:
+            r = pakuj(W, H, widoki, g, bloki, tb_h, gap_vb=gap, znaki=False, max_czesci=mc, kolejnosc=ko)
+            if r.ok:
+                break
+            prev, H = H, H + step
+        if r is None or not r.ok or H > Hmax + 1e-6:
+            continue
+        if prev is not None:
+            Hf = prev + 5.0
+            while Hf < H - 1e-6:
+                rf = pakuj(W, Hf, widoki, g, bloki, tb_h, gap_vb=gap, znaki=False, max_czesci=mc, kolejnosc=ko)
+                if rf.ok:
+                    H, r = Hf, rf
+                    break
+                Hf += 5.0
+        if best is None or H < best[0] - 1e-6:
+            best = (H, g, r)
+    return best
+
+
+def wysokosci_kandydaci(H_need: float, o: dict) -> list[float]:
+    """Wysokości H ≥ H_need arkusza „bokiem na rolkę” (siatka ``krok_dlugosci``, do +35 %, ≤ ``max_wysokosc``) —
+    wybór kosztem: wysokość bliska wielokrotności 297 mm (pełne rzędy A4) wygrywa, gdy dopłata papieru jest mała."""
+    krok = max(1.0, float(o["krok_dlugosci"]))
+    Hmax = min(float(o["max_wysokosc"]), float(o["max_dlugosc"]))
+    H0 = math.ceil((H_need - 1e-6) / krok) * krok
+    out, H = [], H0
+    while H <= min(Hmax, H0 * 1.35) + 1e-6:
+        out.append(H)
+        H += krok
+    return out
+
+
 def _pakuj_wysrodkuj(W, H, widoki, g, bloki, tb_h, W_need, gap_vb: float = GAP_VB, o: dict | None = None):
     """Pakowanie na W × H z grupą widoków wyśrodkowaną w nadwyżce szerokości / wysokości — przyjmowane tylko, gdy
     nie pogarsza upakowania względem układu bez przesunięcia (``_jakosc``: części uwag, kolumny bloków, liczba
@@ -1136,7 +1192,31 @@ def rozmiesc(widoki: list[Widok], bloki: list[Blok], tb_h: float, o: dict | None
     heights = sorted({float(h) for h in o["wysokosci"] if float(h) <= float(o["max_wysokosc"]) + 1e-6}
                      | {f[2] for f in stdf})
     cands = []
-    for H in heights:
+
+    def ocen(opts, g, W_need):
+        """Kandydaci (koszt, nazwa, L, H, orientacja, standard, ocena składania) dla jednej grupy widoków: pakowanie
+        w kolejności kosztu papieru, do pierwszego, którego sam koszt papieru nie jest już lepszy; koszt pełny =
+        koszt papieru i składania × kara układu (części uwag, kolejność czytania) — znany po upakowaniu."""
+        opts.sort(key=lambda t: (round(t[0], 6), not t[5], t[2] * t[3]))
+        best_h = None
+        for k, nm, L, Hc, ori, is_std, oc in opts[:12]:
+            if best_h is not None and k >= best_h.koszt - 1e-9:
+                break
+            r = _pakuj_wysrodkuj(L, Hc, widoki, g, bloki, tb_h, min(W_need, L), gap, o)
+            if r is None:
+                continue
+            kt = k * _kara_ukladu(r, o)
+            if best_h is None or kt < best_h.koszt - 1e-9:
+                best_h = Uklad(nm, L, Hc, ori, is_std, tryb, r, kt, oc)
+        if best_h is not None:
+            cands.append(best_h)
+
+    def opcja(L, Hc):
+        std = nazwa_standardowa(L, Hc)
+        k, oc = koszt(L, Hc, std is not None, o, tb_h)
+        return (k, std[0] if std else f"{L:.0f}×{Hc:.0f}", L, Hc, std[1] if std else None, std is not None, oc)
+
+    for H in heights:                              # 1) wysokość = rolka / format, długość L docięta do treści
         mw = min_szerokosc(H, widoki, grupy, bloki, tb_h, o)
         if mw is None:
             continue
@@ -1145,28 +1225,25 @@ def rozmiesc(widoki: list[Widok], bloki: list[Blok], tb_h: float, o: dict | None
         for nm, Ws, Hs, ori in stdf:
             if abs(Hs - H) < 0.5 and Ws >= W_need - 1e-6:
                 k, oc = koszt(Ws, Hs, True, o, tb_h)
-                opts.append((k, nm, Ws, ori, True, oc))
+                opts.append((k, nm, Ws, Hs, ori, True, oc))
         if tryb == "ekonomiczny" and any(abs(float(h) - H) < 0.5 for h in o["wysokosci"]):
-            for L in dlugosci_kandydaci(W_need, o):
-                std = nazwa_standardowa(L, H)
-                k, oc = koszt(L, H, std is not None, o, tb_h)
-                opts.append((k, std[0] if std else f"{L:.0f}×{H:.0f}", L, std[1] if std else None, std is not None,
-                             oc))
-        opts.sort(key=lambda t: (round(t[0], 6), not t[4], t[2]))
-        # koszt pełny = koszt papieru i składania × (1 + kara za każdą dodatkową część uwag) — znany po upakowaniu;
-        # kandydaci w kolejności kosztu papieru, do pierwszego, którego sam koszt papieru nie jest już lepszy
-        best_h = None
-        for k, nm, L, ori, is_std, oc in opts[:12]:
-            if best_h is not None and k >= best_h.koszt - 1e-9:
-                break
-            r = _pakuj_wysrodkuj(L, H, widoki, g, bloki, tb_h, W_need, gap, o)
-            if r is None:
+            opts += [opcja(L, H) for L in dlugosci_kandydaci(W_need, o)]
+        ocen(opts, g, W_need)
+    if tryb == "ekonomiczny":                      # 2) szerokość = rolka, wysokość docięta do treści (weryf. M § 3)
+        k_best = min((u.koszt for u in cands), default=None)
+        for Wr in sorted({float(w) for w in (o.get("rolki") or [])}):
+            if Wr > float(o["max_dlugosc"]) + 1e-6 or Wr < MARG_L + TB_W + MARG - 1e-6:
                 continue
-            kt = k * _kara_ukladu(r, o)
-            if best_h is None or kt < best_h.koszt - 1e-9:
-                best_h = Uklad(nm, L, H, ori, is_std, tryb, r, kt, oc)
-        if best_h is not None:
-            cands.append(best_h)
+            if k_best is not None and Wr * 297.0 / 1e6 >= k_best:
+                continue                           # nawet najniższy arkusz tej szerokości jest droższy
+            mh = min_wysokosc(Wr, widoki, grupy, bloki, tb_h, o)
+            if mh is None:
+                continue
+            H_need, g, _r = mh
+            if k_best is not None and Wr * H_need / 1e6 >= k_best:
+                continue
+            ocen([opcja(Wr, Hc) for Hc in wysokosci_kandydaci(H_need, o)], g, Wr)
+            k_best = min((u.koszt for u in cands), default=None)
     if not cands:
         return None
     cands.sort(key=lambda u: (round(u.koszt, 6), not u.standard, u.W * u.H, u.W))

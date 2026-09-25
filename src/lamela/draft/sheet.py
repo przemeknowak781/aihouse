@@ -224,7 +224,9 @@ class Sheet(SheetBase):
                 for j, y in enumerate(ys):
                     self.text((0.8, y + 0.8), str(len(xs) + j + 1), 1.8)
             if grid_reference is None:
-                grid_reference = W * H >= 420 * 594 - 1   # R4 pkt 3.1: A2 i większe
+                # R4 pkt 3.1: A2 i większe — próg na dłuższym boku (> 420 mm), aby formaty niestandardowe
+                # i wydłużone (690×297, 580×420 …) miały siatkę jak pozostałe arkusze kompletu (weryfikacja C 2.7)
+                grid_reference = max(W, H) > 420.0 + 0.5
             if grid_reference:
                 self._grid_reference()
         # oznaczenie formatu w dolnym marginesie przy prawym rogu (PN-EN ISO 5457 / R4-B07)

@@ -8337,89 +8337,83 @@
    "id": "PF1",
    "tytul": "Płyta fundamentowa PF1+PF2 z żebrami i pogrubieniami — MES na podłożu sprężystym",
    "rodzaj": "fundament",
-   "wykorzystanie": 2.5948,
-   "ok": false,
+   "wykorzystanie": 0.8557,
+   "ok": true,
    "przyjeto": [
     "Płyta fundamentowa gr. 25 cm, C25/30, otulenie 50 mm (od gruntu) / 35 mm; siatki dół/góra i dozbrojenia — z A_s,req MES (rysunki PT-BO, kontrola zbrojenia)."
    ],
    "warunki": [
     {
      "opis": "Nośność podłoża (GEO, DA2*)",
-     "E": 13935.0935,
+     "E": 13975.6036,
      "R": 224314.1387,
-     "eta": 0.0621
+     "eta": 0.0623
     },
     {
      "opis": "Docisk lokalny do podłoża (pasmo pod żebrem)",
-     "E": 272.7738,
+     "E": 272.7517,
      "R": 318.7622,
      "eta": 0.8557
     },
     {
      "opis": "Osiadanie (PN-EN 1997-1 zał. H: s ≤ 50 mm dla fundamentów bezpośrednich)",
-     "E": 33.2152,
+     "E": 33.3744,
      "R": 50.0,
-     "eta": 0.6643
+     "eta": 0.6675
     },
     {
      "opis": "Przebicie — fundament (6.4.4(2), (6.51)–(6.53))",
-     "E": 0.9539,
-     "R": 0.3676,
-     "eta": 2.5948
+     "E": 0.5114,
+     "R": 0.6684,
+     "eta": 0.7651
     },
     {
      "opis": "Przebicie — fundament (6.4.4(2), (6.51)–(6.53))",
-     "E": 0.4082,
-     "R": 0.3676,
-     "eta": 1.1105
+     "E": 0.3726,
+     "R": 0.6859,
+     "eta": 0.5432
     },
     {
      "opis": "Przebicie — fundament (6.4.4(2), (6.51)–(6.53))",
-     "E": 0.2521,
-     "R": 0.3429,
-     "eta": 0.7352
+     "E": 0.3812,
+     "R": 0.6235,
+     "eta": 0.6113
     },
     {
      "opis": "Przebicie — fundament (6.4.4(2), (6.51)–(6.53))",
-     "E": 0.2784,
-     "R": 0.3429,
-     "eta": 0.8117
+     "E": 0.382,
+     "R": 0.6859,
+     "eta": 0.557
     },
     {
      "opis": "Przebicie — fundament (6.4.4(2), (6.51)–(6.53))",
-     "E": 0.2542,
-     "R": 0.3429,
-     "eta": 0.7413
-    },
-    {
-     "opis": "Przebicie — fundament (6.4.4(2), (6.51)–(6.53))",
-     "E": 0.2155,
-     "R": 0.3796,
-     "eta": 0.5677
+     "E": 0.2342,
+     "R": 0.6327,
+     "eta": 0.3701
     },
     {
      "opis": "Zbrojenie płyty dol x ≤ A_s,max (9.2.1.1(3))",
-     "E": 1737.2872,
+     "E": 1749.5239,
      "R": 10000.0,
-     "eta": 0.1737
+     "eta": 0.175
     },
     {
      "opis": "Zbrojenie płyty dol y ≤ A_s,max (9.2.1.1(3))",
-     "E": 3978.4841,
+     "E": 4019.1349,
      "R": 10000.0,
-     "eta": 0.3978
+     "eta": 0.4019
     },
     {
      "opis": "Zbrojenie płyty gora x ≤ A_s,max (9.2.1.1(3))",
-     "E": 1647.6071,
+     "E": 1675.1718,
      "R": 10000.0,
-     "eta": 0.1648
+     "eta": 0.1675
     },
     {
      "opis": "Zbrojenie płyty gora y ≤ A_s,max (9.2.1.1(3))",
-     "E": 2650.6246,
+     "E": 2644.4504,
      "R": 10000.0,
-     "eta": 0.2651
+     "eta": 0.2644
     }
    ],
    "dane": {
@@ -8431,7 +8425,7 @@
    "id": "PF2",
    "tytul": "Płyta fundamentowa PF2 — część płyty PF1+PF2 (MES wspólny — poz. PF1)",
    "rodzaj": "fundament",
-   "wykorzystanie": 0.211,
+   "wykorzystanie": 0.2111,
    "ok": true,
    "przyjeto": [
     "Płyta gr. 25 cm — zbrojenie jak poz. PF1 (MES wspólny)."
@@ -8439,9 +8433,9 @@
    "warunki": [
     {
      "opis": "Docisk do podłoża (obszar płyty)",
-     "E": 67.274,
+     "E": 67.3023,
      "R": 318.7622,
-     "eta": 0.211
+     "eta": 0.2111
     }
    ],
    "dane": {
@@ -8453,41 +8447,41 @@
    "id": "ZF1",
    "tytul": "Żebro płyty fundamentowej ZF1 (b = 0,60 m, h = 0,55 m, L = 12,20 m)",
    "rodzaj": "fundament",
-   "wykorzystanie": 0.9798,
+   "wykorzystanie": 0.972,
    "ok": true,
    "przyjeto": [
-    "Żebro 60×55 cm, C25/30; 33φ12 (dołem 10φ12, górą 23φ12), strzemiona φ8 co 13 cm."
+    "Żebro 60×55 cm, C25/30; 34φ12 (dołem 10φ12, górą 24φ12), strzemiona φ8 co 20 cm."
    ],
    "warunki": [
     {
      "opis": "Zbrojenie dolne żebra",
-     "E": 1075.7302,
+     "E": 1062.7539,
      "R": 1130.9734,
-     "eta": 0.9512
+     "eta": 0.9397
     },
     {
      "opis": "Zbrojenie górne żebra",
-     "E": 2548.5985,
-     "R": 2601.2387,
-     "eta": 0.9798
+     "E": 2638.3093,
+     "R": 2714.3361,
+     "eta": 0.972
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 281.489,
+     "E": 157.7949,
      "R": 1008.1029,
-     "eta": 0.2792
+     "eta": 0.1565
     },
     {
      "opis": "Nośność strzemion",
-     "E": 281.489,
-     "R": 292.9183,
-     "eta": 0.961
+     "E": 157.7949,
+     "R": 190.3969,
+     "eta": 0.8288
     },
     {
      "opis": "Docisk do podłoża pod żebrem",
-     "E": 240.9743,
+     "E": 209.0337,
      "R": 318.7622,
-     "eta": 0.756
+     "eta": 0.6558
     }
    ],
    "dane": {
@@ -8499,7 +8493,7 @@
    "id": "ZF2",
    "tytul": "Żebro płyty fundamentowej ZF2 (b = 0,60 m, h = 0,55 m, L = 6,58 m)",
    "rodzaj": "fundament",
-   "wykorzystanie": 0.9408,
+   "wykorzystanie": 0.9353,
    "ok": true,
    "przyjeto": [
     "Żebro 60×55 cm, C25/30; 13φ12 (dołem 7φ12, górą 6φ12), strzemiona φ8 co 20 cm."
@@ -8507,33 +8501,33 @@
    "warunki": [
     {
      "opis": "Zbrojenie dolne żebra",
-     "E": 744.8159,
+     "E": 740.4679,
      "R": 791.6813,
-     "eta": 0.9408
+     "eta": 0.9353
     },
     {
      "opis": "Zbrojenie górne żebra",
-     "E": 631.8483,
+     "E": 634.2634,
      "R": 678.584,
-     "eta": 0.9311
+     "eta": 0.9347
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 89.0474,
+     "E": 88.6058,
      "R": 1008.1029,
-     "eta": 0.0883
+     "eta": 0.0879
     },
     {
      "opis": "Nośność strzemion",
-     "E": 89.0474,
+     "E": 88.6058,
      "R": 190.3969,
-     "eta": 0.4677
+     "eta": 0.4654
     },
     {
      "opis": "Docisk do podłoża pod żebrem",
-     "E": 93.1262,
+     "E": 92.7477,
      "R": 318.7622,
-     "eta": 0.2921
+     "eta": 0.291
     }
    ],
    "dane": {
@@ -8545,7 +8539,7 @@
    "id": "ZF3",
    "tytul": "Żebro płyty fundamentowej ZF3 (b = 0,60 m, h = 0,55 m, L = 3,08 m)",
    "rodzaj": "fundament",
-   "wykorzystanie": 0.9299,
+   "wykorzystanie": 0.9331,
    "ok": true,
    "przyjeto": [
     "Żebro 60×55 cm, C25/30; 9φ12 (dołem 4φ12, górą 5φ12), strzemiona φ8 co 20 cm."
@@ -8559,27 +8553,27 @@
     },
     {
      "opis": "Zbrojenie górne żebra",
-     "E": 525.8305,
+     "E": 527.6414,
      "R": 565.4867,
-     "eta": 0.9299
+     "eta": 0.9331
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 108.3731,
+     "E": 108.5725,
      "R": 1008.1029,
-     "eta": 0.1075
+     "eta": 0.1077
     },
     {
      "opis": "Nośność strzemion",
-     "E": 108.3731,
+     "E": 108.5725,
      "R": 190.3969,
-     "eta": 0.5692
+     "eta": 0.5702
     },
     {
      "opis": "Docisk do podłoża pod żebrem",
-     "E": 46.3945,
+     "E": 46.3505,
      "R": 318.7622,
-     "eta": 0.1455
+     "eta": 0.1454
     }
    ],
    "dane": {
@@ -8591,7 +8585,7 @@
    "id": "ZF4",
    "tytul": "Żebro płyty fundamentowej ZF4 (b = 0,60 m, h = 0,55 m, L = 6,70 m)",
    "rodzaj": "fundament",
-   "wykorzystanie": 0.8925,
+   "wykorzystanie": 0.8943,
    "ok": true,
    "przyjeto": [
     "Żebro 60×55 cm, C25/30; 9φ12 (dołem 4φ12, górą 5φ12), strzemiona φ8 co 20 cm."
@@ -8605,25 +8599,25 @@
     },
     {
      "opis": "Zbrojenie górne żebra",
-     "E": 504.693,
+     "E": 505.6976,
      "R": 565.4867,
-     "eta": 0.8925
+     "eta": 0.8943
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 125.6141,
+     "E": 125.8014,
      "R": 1008.1029,
-     "eta": 0.1246
+     "eta": 0.1248
     },
     {
      "opis": "Nośność strzemion",
-     "E": 125.6141,
+     "E": 125.8014,
      "R": 190.3969,
-     "eta": 0.6597
+     "eta": 0.6607
     },
     {
      "opis": "Docisk do podłoża pod żebrem",
-     "E": 40.9417,
+     "E": 40.9411,
      "R": 318.7622,
      "eta": 0.1284
     }
@@ -8637,7 +8631,7 @@
    "id": "ZF5",
    "tytul": "Żebro płyty fundamentowej ZF5 (b = 0,60 m, h = 0,55 m, L = 6,58 m)",
    "rodzaj": "fundament",
-   "wykorzystanie": 0.9173,
+   "wykorzystanie": 0.9162,
    "ok": true,
    "przyjeto": [
     "Żebro 60×55 cm, C25/30; 12φ12 (dołem 4φ12, górą 8φ12), strzemiona φ8 co 20 cm."
@@ -8651,27 +8645,27 @@
     },
     {
      "opis": "Zbrojenie górne żebra",
-     "E": 829.9437,
+     "E": 828.9388,
      "R": 904.7787,
-     "eta": 0.9173
+     "eta": 0.9162
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 86.2055,
+     "E": 85.9667,
      "R": 1008.1029,
-     "eta": 0.0855
+     "eta": 0.0853
     },
     {
      "opis": "Nośność strzemion",
-     "E": 86.2055,
+     "E": 85.9667,
      "R": 190.3969,
-     "eta": 0.4528
+     "eta": 0.4515
     },
     {
      "opis": "Docisk do podłoża pod żebrem",
-     "E": 59.5821,
+     "E": 59.5074,
      "R": 318.7622,
-     "eta": 0.1869
+     "eta": 0.1867
     }
    ],
    "dane": {
@@ -8683,7 +8677,7 @@
    "id": "ZF6",
    "tytul": "Żebro płyty fundamentowej ZF6 (b = 0,60 m, h = 0,55 m, L = 0,82 m)",
    "rodzaj": "fundament",
-   "wykorzystanie": 0.9696,
+   "wykorzystanie": 0.9857,
    "ok": true,
    "przyjeto": [
     "Żebro 60×55 cm, C25/30; 10φ12 (dołem 4φ12, górą 6φ12), strzemiona φ8 co 20 cm."
@@ -8697,27 +8691,27 @@
     },
     {
      "opis": "Zbrojenie górne żebra",
-     "E": 657.9586,
+     "E": 668.8808,
      "R": 678.584,
-     "eta": 0.9696
+     "eta": 0.9857
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 111.1473,
+     "E": 112.4044,
      "R": 1008.1029,
-     "eta": 0.1103
+     "eta": 0.1115
     },
     {
      "opis": "Nośność strzemion",
-     "E": 111.1473,
+     "E": 112.4044,
      "R": 190.3969,
-     "eta": 0.5838
+     "eta": 0.5904
     },
     {
      "opis": "Docisk do podłoża pod żebrem",
-     "E": 67.2519,
+     "E": 67.2286,
      "R": 318.7622,
-     "eta": 0.211
+     "eta": 0.2109
     }
    ],
    "dane": {
@@ -8729,41 +8723,41 @@
    "id": "ZF7",
    "tytul": "Żebro płyty fundamentowej ZF7 (b = 0,60 m, h = 0,55 m, L = 12,20 m)",
    "rodzaj": "fundament",
-   "wykorzystanie": 0.9897,
+   "wykorzystanie": 0.9406,
    "ok": true,
    "przyjeto": [
-    "Żebro 60×55 cm, C25/30; 22φ12 (dołem 11φ12, górą 11φ12), strzemiona φ8 co 11 cm."
+    "Żebro 60×55 cm, C25/30; 23φ12 (dołem 11φ12, górą 12φ12), strzemiona φ8 co 11 cm."
    ],
    "warunki": [
     {
      "opis": "Zbrojenie dolne żebra",
-     "E": 1157.9575,
+     "E": 1161.421,
      "R": 1244.0707,
-     "eta": 0.9308
+     "eta": 0.9336
     },
     {
      "opis": "Zbrojenie górne żebra",
-     "E": 1231.2313,
-     "R": 1244.0707,
-     "eta": 0.9897
+     "E": 1276.4931,
+     "R": 1357.168,
+     "eta": 0.9406
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 324.46,
+     "E": 321.7898,
      "R": 1008.1029,
-     "eta": 0.3219
+     "eta": 0.3192
     },
     {
      "opis": "Nośność strzemion",
-     "E": 324.46,
+     "E": 321.7898,
      "R": 346.1762,
-     "eta": 0.9373
+     "eta": 0.9296
     },
     {
      "opis": "Docisk do podłoża pod żebrem",
-     "E": 111.2111,
+     "E": 111.11,
      "R": 318.7622,
-     "eta": 0.3489
+     "eta": 0.3486
     }
    ],
    "dane": {
@@ -8783,33 +8777,33 @@
    "warunki": [
     {
      "opis": "Zbrojenie dolne żebra",
-     "E": 1544.1382,
+     "E": 1528.4742,
      "R": 1608.4954,
-     "eta": 0.96
+     "eta": 0.9503
     },
     {
      "opis": "Zbrojenie górne żebra",
-     "E": 3020.7665,
+     "E": 3088.4513,
      "R": 3216.9909,
-     "eta": 0.939
+     "eta": 0.96
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 394.57,
+     "E": 382.8204,
      "R": 1008.1029,
-     "eta": 0.3914
+     "eta": 0.3797
     },
     {
      "opis": "Nośność strzemion",
-     "E": 394.57,
+     "E": 382.8204,
      "R": 423.1042,
-     "eta": 0.9326
+     "eta": 0.9048
     },
     {
      "opis": "Docisk do podłoża pod żebrem",
-     "E": 272.7738,
+     "E": 201.3138,
      "R": 318.7622,
-     "eta": 0.8557
+     "eta": 0.6315
     }
    ],
    "dane": {
@@ -8821,7 +8815,7 @@
    "id": "ZF9",
    "tytul": "Żebro płyty fundamentowej ZF9 (b = 0,50 m, h = 0,70 m, L = 5,88 m)",
    "rodzaj": "fundament",
-   "wykorzystanie": 0.9608,
+   "wykorzystanie": 0.9857,
    "ok": true,
    "przyjeto": [
     "Żebro 50×70 cm, C25/30; 16φ16 (dołem 3φ16, górą 13φ16), strzemiona φ8 co 9 cm."
@@ -8829,33 +8823,33 @@
    "warunki": [
     {
      "opis": "Zbrojenie dolne żebra",
-     "E": 498.0566,
+     "E": 516.6005,
      "R": 603.1858,
-     "eta": 0.8257
+     "eta": 0.8565
     },
     {
      "opis": "Zbrojenie górne żebra",
-     "E": 2511.4165,
+     "E": 2576.4923,
      "R": 2613.8051,
-     "eta": 0.9608
+     "eta": 0.9857
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 501.0327,
+     "E": 509.5893,
      "R": 1100.4429,
-     "eta": 0.4553
+     "eta": 0.4631
     },
     {
      "opis": "Nośność strzemion",
-     "E": 501.0327,
+     "E": 509.5893,
      "R": 554.2316,
-     "eta": 0.904
+     "eta": 0.9195
     },
     {
      "opis": "Docisk do podłoża pod żebrem",
-     "E": 132.0068,
+     "E": 131.6494,
      "R": 318.7622,
-     "eta": 0.4141
+     "eta": 0.413
     }
    ],
    "dane": {
@@ -8867,7 +8861,7 @@
    "id": "ZF10",
    "tytul": "Żebro płyty fundamentowej ZF10 (b = 0,50 m, h = 0,70 m, L = 1,31 m)",
    "rodzaj": "fundament",
-   "wykorzystanie": 0.999,
+   "wykorzystanie": 0.9978,
    "ok": true,
    "przyjeto": [
     "Żebro 50×70 cm, C25/30; 16φ16 (dołem 13φ16, górą 3φ16), strzemiona φ8 co 19 cm."
@@ -8875,9 +8869,9 @@
    "warunki": [
     {
      "opis": "Zbrojenie dolne żebra",
-     "E": 2611.1085,
+     "E": 2608.0205,
      "R": 2613.8051,
-     "eta": 0.999
+     "eta": 0.9978
     },
     {
      "opis": "Zbrojenie górne żebra",
@@ -8887,21 +8881,21 @@
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 251.4699,
+     "E": 251.5628,
      "R": 1100.4429,
-     "eta": 0.2285
+     "eta": 0.2286
     },
     {
      "opis": "Nośność strzemion",
-     "E": 251.4699,
+     "E": 251.5628,
      "R": 262.5307,
-     "eta": 0.9579
+     "eta": 0.9582
     },
     {
      "opis": "Docisk do podłoża pod żebrem",
-     "E": 123.2175,
+     "E": 123.2517,
      "R": 318.7622,
-     "eta": 0.3866
+     "eta": 0.3867
     }
    ],
    "dane": {
@@ -8913,7 +8907,7 @@
    "id": "ZF11",
    "tytul": "Żebro płyty fundamentowej ZF11 (b = 0,50 m, h = 0,70 m, L = 3,50 m)",
    "rodzaj": "fundament",
-   "wykorzystanie": 0.9862,
+   "wykorzystanie": 0.9849,
    "ok": true,
    "przyjeto": [
     "Żebro 50×70 cm, C25/30; 17φ16 (dołem 14φ16, górą 3φ16), strzemiona φ8 co 14 cm."
@@ -8921,9 +8915,9 @@
    "warunki": [
     {
      "opis": "Zbrojenie dolne żebra",
-     "E": 2704.6616,
+     "E": 2666.1034,
      "R": 2814.867,
-     "eta": 0.9608
+     "eta": 0.9472
     },
     {
      "opis": "Zbrojenie górne żebra",
@@ -8933,21 +8927,21 @@
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 351.3689,
+     "E": 350.9163,
      "R": 1100.4429,
-     "eta": 0.3193
+     "eta": 0.3189
     },
     {
      "opis": "Nośność strzemion",
-     "E": 351.3689,
+     "E": 350.9163,
      "R": 356.2917,
-     "eta": 0.9862
+     "eta": 0.9849
     },
     {
      "opis": "Docisk do podłoża pod żebrem",
-     "E": 117.1917,
+     "E": 117.2263,
      "R": 318.7622,
-     "eta": 0.3676
+     "eta": 0.3678
     }
    ],
    "dane": {
@@ -8959,7 +8953,7 @@
    "id": "ZF12",
    "tytul": "Żebro płyty fundamentowej ZF12 (b = 0,50 m, h = 0,50 m, L = 3,62 m)",
    "rodzaj": "fundament",
-   "wykorzystanie": 0.9905,
+   "wykorzystanie": 0.9873,
    "ok": true,
    "przyjeto": [
     "Żebro 50×50 cm, C25/30; 20φ12 (dołem 17φ12, górą 3φ12), strzemiona φ8 co 16 cm."
@@ -8967,9 +8961,9 @@
    "warunki": [
     {
      "opis": "Zbrojenie dolne żebra",
-     "E": 1852.7946,
+     "E": 1850.1772,
      "R": 1922.6547,
-     "eta": 0.9637
+     "eta": 0.9623
     },
     {
      "opis": "Zbrojenie górne żebra",
@@ -8979,21 +8973,21 @@
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 211.3739,
+     "E": 210.702,
      "R": 753.3,
-     "eta": 0.2806
+     "eta": 0.2797
     },
     {
      "opis": "Nośność strzemion",
-     "E": 211.3739,
+     "E": 210.702,
      "R": 213.4098,
-     "eta": 0.9905
+     "eta": 0.9873
     },
     {
      "opis": "Docisk do podłoża pod żebrem",
-     "E": 119.7304,
+     "E": 119.6948,
      "R": 318.7622,
-     "eta": 0.3756
+     "eta": 0.3755
     }
    ],
    "dane": {
@@ -9005,7 +8999,7 @@
    "id": "ZF13",
    "tytul": "Żebro płyty fundamentowej ZF13 (b = 0,50 m, h = 0,50 m, L = 3,62 m)",
    "rodzaj": "fundament",
-   "wykorzystanie": 0.9852,
+   "wykorzystanie": 0.9835,
    "ok": true,
    "przyjeto": [
     "Żebro 50×50 cm, C25/30; 17φ12 (dołem 14φ12, górą 3φ12), strzemiona φ8 co 17 cm."
@@ -9013,9 +9007,9 @@
    "warunki": [
     {
      "opis": "Zbrojenie dolne żebra",
-     "E": 1515.7337,
+     "E": 1510.6205,
      "R": 1583.3627,
-     "eta": 0.9573
+     "eta": 0.9541
     },
     {
      "opis": "Zbrojenie górne żebra",
@@ -9025,19 +9019,19 @@
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 197.8908,
+     "E": 197.5442,
      "R": 753.3,
-     "eta": 0.2627
+     "eta": 0.2622
     },
     {
      "opis": "Nośność strzemion",
-     "E": 197.8908,
+     "E": 197.5442,
      "R": 200.8562,
-     "eta": 0.9852
+     "eta": 0.9835
     },
     {
      "opis": "Docisk do podłoża pod żebrem",
-     "E": 126.1183,
+     "E": 126.0988,
      "R": 318.7622,
      "eta": 0.3956
     }
@@ -9051,7 +9045,7 @@
    "id": "ZF14",
    "tytul": "Żebro płyty fundamentowej ZF14 (b = 0,50 m, h = 0,50 m, L = 3,62 m)",
    "rodzaj": "fundament",
-   "wykorzystanie": 0.9938,
+   "wykorzystanie": 0.9847,
    "ok": true,
    "przyjeto": [
     "Żebro 50×50 cm, C25/30; 15φ16 (dołem 12φ16, górą 3φ16), strzemiona φ8 co 16 cm."
@@ -9059,31 +9053,31 @@
    "warunki": [
     {
      "opis": "Zbrojenie dolne żebra",
-     "E": 2397.7258,
+     "E": 2365.3658,
      "R": 2412.7432,
-     "eta": 0.9938
+     "eta": 0.9804
     },
     {
      "opis": "Zbrojenie górne żebra",
-     "E": 416.7838,
+     "E": 418.1007,
      "R": 603.1858,
-     "eta": 0.691
+     "eta": 0.6932
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 210.7611,
+     "E": 210.1449,
      "R": 753.3,
-     "eta": 0.2798
+     "eta": 0.279
     },
     {
      "opis": "Nośność strzemion",
-     "E": 210.7611,
+     "E": 210.1449,
      "R": 213.4098,
-     "eta": 0.9876
+     "eta": 0.9847
     },
     {
      "opis": "Docisk do podłoża pod żebrem",
-     "E": 120.6705,
+     "E": 120.6852,
      "R": 318.7622,
      "eta": 0.3786
     }
@@ -9097,10 +9091,10 @@
    "id": "ZF15",
    "tytul": "Żebro płyty fundamentowej ZF15 (b = 0,50 m, h = 0,50 m, L = 2,88 m)",
    "rodzaj": "fundament",
-   "wykorzystanie": 0.9991,
+   "wykorzystanie": 0.9341,
    "ok": true,
    "przyjeto": [
-    "Żebro 50×50 cm, C25/30; 12φ12 (dołem 3φ12, górą 9φ12), strzemiona φ8 co 14 cm."
+    "Żebro 50×50 cm, C25/30; 12φ12 (dołem 3φ12, górą 9φ12), strzemiona φ8 co 13 cm."
    ],
    "warunki": [
     {
@@ -9111,27 +9105,27 @@
     },
     {
      "opis": "Zbrojenie górne żebra",
-     "E": 921.1542,
+     "E": 923.519,
      "R": 1017.876,
-     "eta": 0.905
+     "eta": 0.9073
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 243.677,
+     "E": 245.344,
      "R": 753.3,
-     "eta": 0.3235
+     "eta": 0.3257
     },
     {
      "opis": "Nośność strzemion",
-     "E": 243.677,
-     "R": 243.8969,
-     "eta": 0.9991
+     "E": 245.344,
+     "R": 262.6582,
+     "eta": 0.9341
     },
     {
      "opis": "Docisk do podłoża pod żebrem",
-     "E": 92.4019,
+     "E": 92.028,
      "R": 318.7622,
-     "eta": 0.2899
+     "eta": 0.2887
     }
    ],
    "dane": {
@@ -9143,7 +9137,7 @@
    "id": "ZF16",
    "tytul": "Żebro płyty fundamentowej ZF16 (b = 0,50 m, h = 0,55 m, L = 5,88 m)",
    "rodzaj": "fundament",
-   "wykorzystanie": 0.9575,
+   "wykorzystanie": 0.9536,
    "ok": true,
    "przyjeto": [
     "Żebro 50×55 cm, C25/30; 14φ12 (dołem 6φ12, górą 8φ12), strzemiona φ8 co 25 cm."
@@ -9151,33 +9145,33 @@
    "warunki": [
     {
      "opis": "Zbrojenie dolne żebra",
-     "E": 617.2328,
+     "E": 609.0792,
      "R": 678.584,
-     "eta": 0.9096
+     "eta": 0.8976
     },
     {
      "opis": "Zbrojenie górne żebra",
-     "E": 866.3224,
+     "E": 862.8334,
      "R": 904.7787,
-     "eta": 0.9575
+     "eta": 0.9536
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 121.6584,
+     "E": 122.3094,
      "R": 840.0857,
-     "eta": 0.1448
+     "eta": 0.1456
     },
     {
      "opis": "Nośność strzemion",
-     "E": 121.6584,
+     "E": 122.3094,
      "R": 152.3175,
-     "eta": 0.7987
+     "eta": 0.803
     },
     {
      "opis": "Docisk do podłoża pod żebrem",
-     "E": 70.699,
+     "E": 70.7231,
      "R": 318.7622,
-     "eta": 0.2218
+     "eta": 0.2219
     }
    ],
    "dane": {
@@ -9189,7 +9183,7 @@
    "id": "ZF17",
    "tytul": "Żebro płyty fundamentowej ZF17 (b = 0,50 m, h = 0,55 m, L = 6,38 m)",
    "rodzaj": "fundament",
-   "wykorzystanie": 0.8482,
+   "wykorzystanie": 0.8485,
    "ok": true,
    "przyjeto": [
     "Żebro 50×55 cm, C25/30; 10φ12 (dołem 4φ12, górą 6φ12), strzemiona φ8 co 25 cm."
@@ -9197,33 +9191,33 @@
    "warunki": [
     {
      "opis": "Zbrojenie dolne żebra",
-     "E": 378.5746,
+     "E": 376.5982,
      "R": 452.3893,
-     "eta": 0.8368
+     "eta": 0.8325
     },
     {
      "opis": "Zbrojenie górne żebra",
-     "E": 575.5938,
+     "E": 575.7955,
      "R": 678.584,
-     "eta": 0.8482
+     "eta": 0.8485
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 82.685,
+     "E": 82.6368,
      "R": 840.0857,
      "eta": 0.0984
     },
     {
      "opis": "Nośność strzemion",
-     "E": 82.685,
+     "E": 82.6368,
      "R": 152.3175,
-     "eta": 0.5428
+     "eta": 0.5425
     },
     {
      "opis": "Docisk do podłoża pod żebrem",
-     "E": 66.1928,
+     "E": 66.1329,
      "R": 318.7622,
-     "eta": 0.2077
+     "eta": 0.2075
     }
    ],
    "dane": {
@@ -9243,9 +9237,9 @@
    "warunki": [
     {
      "opis": "Zbrojenie dolne żebra",
-     "E": 1048.8941,
+     "E": 1039.4474,
      "R": 1130.9734,
-     "eta": 0.9274
+     "eta": 0.9191
     },
     {
      "opis": "Zbrojenie górne żebra",
@@ -9267,9 +9261,9 @@
     },
     {
      "opis": "Docisk do podłoża pod żebrem",
-     "E": 123.4704,
+     "E": 123.5079,
      "R": 318.7622,
-     "eta": 0.3873
+     "eta": 0.3875
     }
    ],
    "dane": {
@@ -9281,41 +9275,41 @@
    "id": "ZF19",
    "tytul": "Żebro płyty fundamentowej ZF19 (b = 1,80 m, h = 0,70 m, L = 4,00 m)",
    "rodzaj": "fundament",
-   "wykorzystanie": 0.9876,
+   "wykorzystanie": 0.9883,
    "ok": true,
    "przyjeto": [
-    "Żebro 180×70 cm, C25/30; 56φ12 (dołem 33φ12, górą 23φ12), strzemiona φ8 co 6 cm."
+    "Żebro 180×70 cm, C25/30; 57φ12 (dołem 33φ12, górą 24φ12), strzemiona φ8 co 6 cm."
    ],
    "warunki": [
     {
      "opis": "Zbrojenie dolne żebra",
-     "E": 3685.988,
+     "E": 3688.5148,
      "R": 3732.2121,
-     "eta": 0.9876
+     "eta": 0.9883
     },
     {
      "opis": "Zbrojenie górne żebra",
-     "E": 2539.1358,
-     "R": 2601.2387,
-     "eta": 0.9761
+     "E": 2676.9429,
+     "R": 2714.3361,
+     "eta": 0.9862
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 668.4449,
+     "E": 668.2243,
      "R": 3961.5943,
      "eta": 0.1687
     },
     {
      "opis": "Nośność strzemion",
-     "E": 668.4449,
+     "E": 668.2243,
      "R": 831.3474,
-     "eta": 0.8041
+     "eta": 0.8038
     },
     {
      "opis": "Docisk do podłoża pod żebrem",
-     "E": 126.0876,
+     "E": 126.0833,
      "R": 318.7622,
-     "eta": 0.3956
+     "eta": 0.3955
     }
    ],
    "dane": {
@@ -9327,7 +9321,7 @@
    "id": "SF1",
    "tytul": "Stopa (pogrubienie płyty) SF1 (1,00 × 1,01 × 0,70 m) pod słupem SL1",
    "rodzaj": "fundament",
-   "wykorzystanie": 0.6151,
+   "wykorzystanie": 0.6314,
    "ok": true,
    "przyjeto": [
     "Pogrubienie 100×101×70 cm, C25/30; siatka dołem φ14 co 18 cm w obu kierunkach."
@@ -9335,21 +9329,21 @@
    "warunki": [
     {
      "opis": "Zbrojenie dolne pogrubienia (MES)",
-     "E": 355.1067,
+     "E": 321.9476,
      "R": 855.2113,
-     "eta": 0.4152
+     "eta": 0.3765
     },
     {
      "opis": "Docisk do podłoża pod pogrubieniem",
-     "E": 196.0636,
+     "E": 201.2823,
      "R": 318.7622,
-     "eta": 0.6151
+     "eta": 0.6314
     },
     {
      "opis": "Przebicie — fundament (6.4.4(2), (6.51)–(6.53))",
-     "E": 0.0661,
-     "R": 0.3429,
-     "eta": 0.1926
+     "E": 0.1893,
+     "R": 2.2863,
+     "eta": 0.0828
     }
    ],
    "dane": {
@@ -9361,7 +9355,7 @@
    "id": "SF2",
    "tytul": "Stopa (pogrubienie płyty) SF2 (1,00 × 1,01 × 0,70 m) pod słupem SL2",
    "rodzaj": "fundament",
-   "wykorzystanie": 0.9384,
+   "wykorzystanie": 0.9606,
    "ok": true,
    "przyjeto": [
     "Pogrubienie 100×101×70 cm, C25/30; siatka dołem φ14 co 18 cm w obu kierunkach."
@@ -9369,21 +9363,21 @@
    "warunki": [
     {
      "opis": "Zbrojenie dolne pogrubienia (MES)",
-     "E": 802.5275,
+     "E": 821.5032,
      "R": 855.2113,
-     "eta": 0.9384
+     "eta": 0.9606
     },
     {
      "opis": "Docisk do podłoża pod pogrubieniem",
-     "E": 152.4826,
+     "E": 153.6449,
      "R": 318.7622,
-     "eta": 0.4784
+     "eta": 0.482
     },
     {
      "opis": "Przebicie — fundament (6.4.4(2), (6.51)–(6.53))",
-     "E": 0.1595,
-     "R": 0.3429,
-     "eta": 0.4652
+     "E": 0.2847,
+     "R": 0.9799,
+     "eta": 0.2905
     }
    ],
    "dane": {
@@ -9395,29 +9389,29 @@
    "id": "SF3",
    "tytul": "Stopa (pogrubienie płyty) SF3 (1,00 × 1,01 × 0,70 m) pod słupem SL3",
    "rodzaj": "fundament",
-   "wykorzystanie": 0.9897,
+   "wykorzystanie": 0.9866,
    "ok": true,
    "przyjeto": [
-    "Pogrubienie 100×101×70 cm, C25/30; siatka dołem φ14 co 17 cm w obu kierunkach."
+    "Pogrubienie 100×101×70 cm, C25/30; siatka dołem φ12 co 13 cm w obu kierunkach."
    ],
    "warunki": [
     {
      "opis": "Zbrojenie dolne pogrubienia (MES)",
-     "E": 896.1753,
-     "R": 905.5179,
-     "eta": 0.9897
+     "E": 858.3039,
+     "R": 869.9795,
+     "eta": 0.9866
     },
     {
      "opis": "Docisk do podłoża pod pogrubieniem",
-     "E": 132.4759,
+     "E": 131.5306,
      "R": 318.7622,
-     "eta": 0.4156
+     "eta": 0.4126
     },
     {
      "opis": "Przebicie — fundament (6.4.4(2), (6.51)–(6.53))",
-     "E": 0.2048,
-     "R": 0.3429,
-     "eta": 0.5973
+     "E": 0.3454,
+     "R": 0.8574,
+     "eta": 0.4029
     }
    ],
    "dane": {
@@ -9429,7 +9423,7 @@
    "id": "SF4",
    "tytul": "Stopa (pogrubienie płyty) SF4 (1,00 × 1,01 × 0,70 m) pod słupem SL4",
    "rodzaj": "fundament",
-   "wykorzystanie": 0.9775,
+   "wykorzystanie": 0.9661,
    "ok": true,
    "przyjeto": [
     "Pogrubienie 100×101×70 cm, C25/30; siatka dołem φ14 co 8 cm w obu kierunkach."
@@ -9437,21 +9431,55 @@
    "warunki": [
     {
      "opis": "Zbrojenie dolne pogrubienia (MES)",
-     "E": 1880.902,
+     "E": 1859.0147,
      "R": 1924.2255,
-     "eta": 0.9775
+     "eta": 0.9661
     },
     {
      "opis": "Docisk do podłoża pod pogrubieniem",
-     "E": 123.606,
+     "E": 122.6181,
      "R": 318.7622,
-     "eta": 0.3878
+     "eta": 0.3847
     },
     {
      "opis": "Przebicie — fundament (6.4.4(2), (6.51)–(6.53))",
-     "E": 0.2349,
-     "R": 0.3429,
-     "eta": 0.6851
+     "E": 0.4234,
+     "R": 0.8574,
+     "eta": 0.4938
+    }
+   ],
+   "dane": {
+    "mes": true
+   }
+  },
+  {
+   "nr": "10.26",
+   "id": "SF9",
+   "tytul": "Stopa (pogrubienie płyty) SF9 (1,60 × 1,61 × 0,90 m) pod słupem SL9",
+   "rodzaj": "fundament",
+   "wykorzystanie": 0.8557,
+   "ok": true,
+   "przyjeto": [
+    "Pogrubienie 160×161×90 cm, C25/30; siatka dołem φ12 co 10 cm w obu kierunkach."
+   ],
+   "warunki": [
+    {
+     "opis": "Zbrojenie dolne pogrubienia (MES)",
+     "E": 763.595,
+     "R": 1130.9734,
+     "eta": 0.6752
+    },
+    {
+     "opis": "Docisk do podłoża pod pogrubieniem",
+     "E": 272.7517,
+     "R": 318.7622,
+     "eta": 0.8557
+    },
+    {
+     "opis": "Przebicie — fundament (6.4.4(2), (6.51)–(6.53))",
+     "E": 0.5225,
+     "R": 0.7272,
+     "eta": 0.7184
     }
    ],
    "dane": {

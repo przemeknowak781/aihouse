@@ -140,31 +140,32 @@ Model: `budynek.yaml` (wersja 1.0, 2026-09-25) · biblioteka `lamela.obliczenia.
 | 9.37 | `S0-05` | Ściana S0-05 (P0, zewnętrzna nośna) | 45% | spełnione |
 | 9.38 | `S0-17` | Ściana S0-17 (P0, wewnętrzna nośna) | 45% | spełnione |
 | **10** |  | **Fundamenty** |  |  |
-| 10.1 | `PF1` | Płyta fundamentowa PF1+PF2 z żebrami i pogrubieniami — MES na podłożu sprężystym | 259% | **niespełnione** |
+| 10.1 | `PF1` | Płyta fundamentowa PF1+PF2 z żebrami i pogrubieniami — MES na podłożu sprężystym | 86% | spełnione |
 | 10.2 | `PF2` | Płyta fundamentowa PF2 — część płyty PF1+PF2 (MES wspólny — poz. PF1) | 21% | spełnione |
-| 10.3 | `ZF1` | Żebro płyty fundamentowej ZF1 (b = 0,60 m, h = 0,55 m, L = 12,20 m) | 98% | spełnione |
+| 10.3 | `ZF1` | Żebro płyty fundamentowej ZF1 (b = 0,60 m, h = 0,55 m, L = 12,20 m) | 97% | spełnione |
 | 10.4 | `ZF2` | Żebro płyty fundamentowej ZF2 (b = 0,60 m, h = 0,55 m, L = 6,58 m) | 94% | spełnione |
 | 10.5 | `ZF3` | Żebro płyty fundamentowej ZF3 (b = 0,60 m, h = 0,55 m, L = 3,08 m) | 93% | spełnione |
 | 10.6 | `ZF4` | Żebro płyty fundamentowej ZF4 (b = 0,60 m, h = 0,55 m, L = 6,70 m) | 89% | spełnione |
 | 10.7 | `ZF5` | Żebro płyty fundamentowej ZF5 (b = 0,60 m, h = 0,55 m, L = 6,58 m) | 92% | spełnione |
-| 10.8 | `ZF6` | Żebro płyty fundamentowej ZF6 (b = 0,60 m, h = 0,55 m, L = 0,82 m) | 97% | spełnione |
-| 10.9 | `ZF7` | Żebro płyty fundamentowej ZF7 (b = 0,60 m, h = 0,55 m, L = 12,20 m) | 99% | spełnione |
+| 10.8 | `ZF6` | Żebro płyty fundamentowej ZF6 (b = 0,60 m, h = 0,55 m, L = 0,82 m) | 99% | spełnione |
+| 10.9 | `ZF7` | Żebro płyty fundamentowej ZF7 (b = 0,60 m, h = 0,55 m, L = 12,20 m) | 94% | spełnione |
 | 10.10 | `ZF8` | Żebro płyty fundamentowej ZF8 (b = 0,60 m, h = 0,55 m, L = 8,95 m) | 96% | spełnione |
-| 10.11 | `ZF9` | Żebro płyty fundamentowej ZF9 (b = 0,50 m, h = 0,70 m, L = 5,88 m) | 96% | spełnione |
+| 10.11 | `ZF9` | Żebro płyty fundamentowej ZF9 (b = 0,50 m, h = 0,70 m, L = 5,88 m) | 99% | spełnione |
 | 10.12 | `ZF10` | Żebro płyty fundamentowej ZF10 (b = 0,50 m, h = 0,70 m, L = 1,31 m) | 100% | spełnione |
-| 10.13 | `ZF11` | Żebro płyty fundamentowej ZF11 (b = 0,50 m, h = 0,70 m, L = 3,50 m) | 99% | spełnione |
+| 10.13 | `ZF11` | Żebro płyty fundamentowej ZF11 (b = 0,50 m, h = 0,70 m, L = 3,50 m) | 98% | spełnione |
 | 10.14 | `ZF12` | Żebro płyty fundamentowej ZF12 (b = 0,50 m, h = 0,50 m, L = 3,62 m) | 99% | spełnione |
-| 10.15 | `ZF13` | Żebro płyty fundamentowej ZF13 (b = 0,50 m, h = 0,50 m, L = 3,62 m) | 99% | spełnione |
-| 10.16 | `ZF14` | Żebro płyty fundamentowej ZF14 (b = 0,50 m, h = 0,50 m, L = 3,62 m) | 99% | spełnione |
-| 10.17 | `ZF15` | Żebro płyty fundamentowej ZF15 (b = 0,50 m, h = 0,50 m, L = 2,88 m) | 100% | spełnione |
-| 10.18 | `ZF16` | Żebro płyty fundamentowej ZF16 (b = 0,50 m, h = 0,55 m, L = 5,88 m) | 96% | spełnione |
+| 10.15 | `ZF13` | Żebro płyty fundamentowej ZF13 (b = 0,50 m, h = 0,50 m, L = 3,62 m) | 98% | spełnione |
+| 10.16 | `ZF14` | Żebro płyty fundamentowej ZF14 (b = 0,50 m, h = 0,50 m, L = 3,62 m) | 98% | spełnione |
+| 10.17 | `ZF15` | Żebro płyty fundamentowej ZF15 (b = 0,50 m, h = 0,50 m, L = 2,88 m) | 93% | spełnione |
+| 10.18 | `ZF16` | Żebro płyty fundamentowej ZF16 (b = 0,50 m, h = 0,55 m, L = 5,88 m) | 95% | spełnione |
 | 10.19 | `ZF17` | Żebro płyty fundamentowej ZF17 (b = 0,50 m, h = 0,55 m, L = 6,38 m) | 85% | spełnione |
 | 10.20 | `ZF18` | Żebro płyty fundamentowej ZF18 (b = 0,50 m, h = 0,70 m, L = 1,32 m) | 95% | spełnione |
 | 10.21 | `ZF19` | Żebro płyty fundamentowej ZF19 (b = 1,80 m, h = 0,70 m, L = 4,00 m) | 99% | spełnione |
-| 10.22 | `SF1` | Stopa (pogrubienie płyty) SF1 (1,00 × 1,01 × 0,70 m) pod słupem SL1 | 62% | spełnione |
-| 10.23 | `SF2` | Stopa (pogrubienie płyty) SF2 (1,00 × 1,01 × 0,70 m) pod słupem SL2 | 94% | spełnione |
+| 10.22 | `SF1` | Stopa (pogrubienie płyty) SF1 (1,00 × 1,01 × 0,70 m) pod słupem SL1 | 63% | spełnione |
+| 10.23 | `SF2` | Stopa (pogrubienie płyty) SF2 (1,00 × 1,01 × 0,70 m) pod słupem SL2 | 96% | spełnione |
 | 10.24 | `SF3` | Stopa (pogrubienie płyty) SF3 (1,00 × 1,01 × 0,70 m) pod słupem SL3 | 99% | spełnione |
-| 10.25 | `SF4` | Stopa (pogrubienie płyty) SF4 (1,00 × 1,01 × 0,70 m) pod słupem SL4 | 98% | spełnione |
+| 10.25 | `SF4` | Stopa (pogrubienie płyty) SF4 (1,00 × 1,01 × 0,70 m) pod słupem SL4 | 97% | spełnione |
+| 10.26 | `SF9` | Stopa (pogrubienie płyty) SF9 (1,60 × 1,61 × 0,90 m) pod słupem SL9 | 86% | spełnione |
 
 ## Poz. 0 — Podstawa opracowania, założenia i obciążenia ogólne
 
@@ -11849,7 +11850,7 @@ Sprawdzono 2 odcinków (filarki ≤ 2 m między otworami — siła całkowita; d
 
 ### Poz. 10.1 — Płyta fundamentowa PF1+PF2 z żebrami i pogrubieniami — MES na podłożu sprężystym
 
-Element modelu: `PF1` · maks. wykorzystanie nośności η = 259% · **WARUNKI NIESPEŁNIONE — patrz tabele warunków i wnioski**
+Element modelu: `PF1` · maks. wykorzystanie nośności η = 86% · wszystkie warunki spełnione
 
 #### Opis i schemat statyczny
 
@@ -11882,7 +11883,7 @@ Głębokość posadowienia: płyta na izolacji termicznej z izolacją obwodową 
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Nośność podłoża (GEO, DA2*) | V_d = 13935,1 kN | R_d = 224314,1 kN | 6% | spełniony | PN-EN 1997-1 (6.1), NA.2.6 |
+| Nośność podłoża (GEO, DA2*) | V_d = 13975,6 kN | R_d = 224314,1 kN | 6% | spełniony | PN-EN 1997-1 (6.1), NA.2.6 |
 
 > Parametry gruntu PRZYKŁADOWE (brief) — w II kat. geotechnicznej wymagane badania CPT/DPL (W-282, E-04).
 
@@ -11908,93 +11909,87 @@ Głębokość posadowienia: płyta na izolacji termicznej z izolacją obwodową 
 ##### Odrywanie płyty od podłoża i osiadanie (MES, kontakt jednostronny)
 
 - Udział powierzchni bez kontaktu (maks. po kombinacjach ULS i wariantach k_s): A_oder/A = **0,0** %
-- Maks. docisk charakterystyczny (SLS): p_k,max = **213,3** kPa
-- Maks. osiadanie sprężyste (SLS, k_s nominalne): w_k,max = **33,2** mm
+- Maks. docisk charakterystyczny (SLS): p_k,max = **213,0** kPa
+- Maks. osiadanie sprężyste (SLS, k_s nominalne): w_k,max = **33,4** mm
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Osiadanie (PN-EN 1997-1 zał. H: s ≤ 50 mm dla fundamentów bezpośrednich) | w_k = 33,2 mm | s_dop = 50,0 mm | 66% | spełniony | PN-EN 1997-1 zał. H |
-
-##### Przebicie płyty pod słupem SL9 (6.4.4(2))
-
-- Siła od słupa (obwiednia ULS): V_Ed = **661,8** kN
-- Wysokość użyteczna w strefie słupa: d = h = 0,55 m = **488** mm
-- Położenie słupa względem krawędzi płyty; współczynnik β: β (6.39), rys. 6.21N = słup narożny = **1,50** *(PN-EN 1992-1-1 6.4.3(6) [wartości zalecane])*
-- Obwód miarodajny (min v_Rd/v_Ed dla a ≤ 2d; przycięty krawędzią płyty; bez redukcji odporem): a; u = **0,976 m; 2,133 m**
-
-| Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
-|---|---|---|---|---|---|
-| Przebicie — fundament (6.4.4(2), (6.51)–(6.53)) | v_Ed = 0,954 MPa | v_Rd = 0,368 MPa | 259% | **NIESPEŁNIONY** | PN-EN 1992-1-1 6.4.4 |
+| Osiadanie (PN-EN 1997-1 zał. H: s ≤ 50 mm dla fundamentów bezpośrednich) | w_k = 33,4 mm | s_dop = 50,0 mm | 67% | spełniony | PN-EN 1997-1 zał. H |
 
 ##### Przebicie płyty pod słupem SL11 (6.4.4(2))
 
 - Siła od słupa (obwiednia ULS): V_Ed = **510,7** kN
 - Wysokość użyteczna w strefie słupa: d = h = 0,55 m = **488** mm
 - Położenie słupa względem krawędzi płyty; współczynnik β: β (6.39), rys. 6.21N = słup narożny = **1,50** *(PN-EN 1992-1-1 6.4.3(6) [wartości zalecane])*
-- Obwód miarodajny (min v_Rd/v_Ed dla a ≤ 2d; przycięty krawędzią płyty; bez redukcji odporem): a; u = **0,976 m; 3,845 m**
+- Kombinacja miarodajna: siła słupa i odpór netto w obwodzie (MES, grunt − 1,35·ciężar płyty): V_Ed; ΔV_Ed = **510,7 kN; 100,4 kN** *(6.4.4(2))*
+- Obwód miarodajny (maks. v_Ed/v_Rd dla a ≤ 2d; przycięty krawędzią płyty): a; u = **0,537 m; 2,466 m**
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Przebicie — fundament (6.4.4(2), (6.51)–(6.53)) | v_Ed = 0,408 MPa | v_Rd = 0,368 MPa | 111% | **NIESPEŁNIONY** | PN-EN 1992-1-1 6.4.4 |
+| Przebicie — fundament (6.4.4(2), (6.51)–(6.53)) | v_Ed = 0,511 MPa | v_Rd = 0,668 MPa | 77% | spełniony | PN-EN 1992-1-1 6.4.4 |
 
 ##### Przebicie płyty pod słupem SL13 (6.4.4(2))
 
 - Siła od słupa (obwiednia ULS): V_Ed = **1322,4** kN
 - Wysokość użyteczna w strefie słupa: d = h = 0,70 m = **638** mm
 - Położenie słupa względem krawędzi płyty; współczynnik β: β (6.39), rys. 6.21N = słup wewnętrzny = **1,15** *(PN-EN 1992-1-1 6.4.3(6) [wartości zalecane])*
-- Obwód miarodajny (min v_Rd/v_Ed dla a ≤ 2d; przycięty krawędzią płyty; bez redukcji odporem): a; u = **1,276 m; 9,454 m**
+- Kombinacja miarodajna: siła słupa i odpór netto w obwodzie (MES, grunt − 1,35·ciężar płyty): V_Ed; ΔV_Ed = **1322,4 kN; 196,6 kN** *(6.4.4(2))*
+- Obwód miarodajny (maks. v_Ed/v_Rd dla a ≤ 2d; przycięty krawędzią płyty): a; u = **0,638 m; 5,447 m**
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Przebicie — fundament (6.4.4(2), (6.51)–(6.53)) | v_Ed = 0,252 MPa | v_Rd = 0,343 MPa | 74% | spełniony | PN-EN 1992-1-1 6.4.4 |
+| Przebicie — fundament (6.4.4(2), (6.51)–(6.53)) | v_Ed = 0,373 MPa | v_Rd = 0,686 MPa | 54% | spełniony | PN-EN 1992-1-1 6.4.4 |
 
 ##### Przebicie płyty pod słupem SL16 (6.4.4(2))
 
 - Siła od słupa (obwiednia ULS): V_Ed = **1460,0** kN
 - Wysokość użyteczna w strefie słupa: d = h = 0,70 m = **638** mm
 - Położenie słupa względem krawędzi płyty; współczynnik β: β (6.39), rys. 6.21N = słup wewnętrzny = **1,15** *(PN-EN 1992-1-1 6.4.3(6) [wartości zalecane])*
-- Obwód miarodajny (min v_Rd/v_Ed dla a ≤ 2d; przycięty krawędzią płyty; bez redukcji odporem): a; u = **1,276 m; 9,454 m**
+- Kombinacja miarodajna: siła słupa i odpór netto w obwodzie (MES, grunt − 1,35·ciężar płyty): V_Ed; ΔV_Ed = **1460,0 kN; 223,3 kN** *(6.4.4(2))*
+- Obwód miarodajny (maks. v_Ed/v_Rd dla a ≤ 2d; przycięty krawędzią płyty): a; u = **0,702 m; 5,848 m**
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Przebicie — fundament (6.4.4(2), (6.51)–(6.53)) | v_Ed = 0,278 MPa | v_Rd = 0,343 MPa | 81% | spełniony | PN-EN 1992-1-1 6.4.4 |
+| Przebicie — fundament (6.4.4(2), (6.51)–(6.53)) | v_Ed = 0,381 MPa | v_Rd = 0,624 MPa | 61% | spełniony | PN-EN 1992-1-1 6.4.4 |
 
 ##### Przebicie płyty pod słupem SL18 (6.4.4(2))
 
 - Siła od słupa (obwiednia ULS): V_Ed = **1333,4** kN
 - Wysokość użyteczna w strefie słupa: d = h = 0,70 m = **638** mm
 - Położenie słupa względem krawędzi płyty; współczynnik β: β (6.39), rys. 6.21N = słup wewnętrzny = **1,15** *(PN-EN 1992-1-1 6.4.3(6) [wartości zalecane])*
-- Obwód miarodajny (min v_Rd/v_Ed dla a ≤ 2d; przycięty krawędzią płyty; bez redukcji odporem): a; u = **1,276 m; 9,454 m**
+- Kombinacja miarodajna: siła słupa i odpór netto w obwodzie (MES, grunt − 1,35·ciężar płyty): V_Ed; ΔV_Ed = **1333,4 kN; 179,0 kN** *(6.4.4(2))*
+- Obwód miarodajny (maks. v_Ed/v_Rd dla a ≤ 2d; przycięty krawędzią płyty): a; u = **0,638 m; 5,447 m**
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Przebicie — fundament (6.4.4(2), (6.51)–(6.53)) | v_Ed = 0,254 MPa | v_Rd = 0,343 MPa | 74% | spełniony | PN-EN 1992-1-1 6.4.4 |
+| Przebicie — fundament (6.4.4(2), (6.51)–(6.53)) | v_Ed = 0,382 MPa | v_Rd = 0,686 MPa | 56% | spełniony | PN-EN 1992-1-1 6.4.4 |
 
 ##### Przebicie płyty pod słupem SL20 (6.4.4(2))
 
 - Siła od słupa (obwiednia ULS): V_Ed = **241,1** kN
 - Wysokość użyteczna w strefie słupa: d = h = 0,50 m = **438** mm
 - Położenie słupa względem krawędzi płyty; współczynnik β: β (6.39), rys. 6.21N = słup narożny = **1,50** *(PN-EN 1992-1-1 6.4.3(6) [wartości zalecane])*
-- Obwód miarodajny (min v_Rd/v_Ed dla a ≤ 2d; przycięty krawędzią płyty; bez redukcji odporem): a; u = **0,876 m; 3,831 m**
+- Kombinacja miarodajna: siła słupa i odpór netto w obwodzie (MES, grunt − 1,35·ciężar płyty): V_Ed; ΔV_Ed = **241,1 kN; 54,4 kN** *(6.4.4(2))*
+- Obwód miarodajny (maks. v_Ed/v_Rd dla a ≤ 2d; przycięty krawędzią płyty): a; u = **0,526 m; 2,731 m**
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Przebicie — fundament (6.4.4(2), (6.51)–(6.53)) | v_Ed = 0,216 MPa | v_Rd = 0,380 MPa | 57% | spełniony | PN-EN 1992-1-1 6.4.4 |
+| Przebicie — fundament (6.4.4(2), (6.51)–(6.53)) | v_Ed = 0,234 MPa | v_Rd = 0,633 MPa | 37% | spełniony | PN-EN 1992-1-1 6.4.4 |
 
 ##### Zginanie płyty (MES, momenty Wood–Armer, obwiednia) — wymagane zbrojenie poza żebrami
 
-- Warstwa dol x: maks. moment / A_s,req: m_Ed; A_s,req = **130,6 kNm/m; 1737 mm²/m**
-- Warstwa dol y: maks. moment / A_s,req: m_Ed; A_s,req = **236,1 kNm/m; 3978 mm²/m**
-- Warstwa gora x: maks. moment / A_s,req: m_Ed; A_s,req = **135,3 kNm/m; 1648 mm²/m**
-- Warstwa gora y: maks. moment / A_s,req: m_Ed; A_s,req = **189,8 kNm/m; 2651 mm²/m**
+- Warstwa dol x: maks. moment / A_s,req: m_Ed; A_s,req = **131,4 kNm/m; 1750 mm²/m**
+- Warstwa dol y: maks. moment / A_s,req: m_Ed; A_s,req = **238,4 kNm/m; 4019 mm²/m**
+- Warstwa gora x: maks. moment / A_s,req: m_Ed; A_s,req = **137,4 kNm/m; 1675 mm²/m**
+- Warstwa gora y: maks. moment / A_s,req: m_Ed; A_s,req = **189,5 kNm/m; 2644 mm²/m**
 - Minimalne zbrojenie płyty: A_s,min = max(0,26·f_ctm/f_yk; 0,0013)·b·d = **246** mm²/m *((9.1N))*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Zbrojenie płyty dol x ≤ A_s,max (9.2.1.1(3)) | A_s,req = 1737 mm²/m | A_s,max = 10000 mm²/m | 17% | spełniony | PN-EN 1992-1-1 9.2.1.1(3) |
-| Zbrojenie płyty dol y ≤ A_s,max (9.2.1.1(3)) | A_s,req = 3978 mm²/m | A_s,max = 10000 mm²/m | 40% | spełniony | PN-EN 1992-1-1 9.2.1.1(3) |
-| Zbrojenie płyty gora x ≤ A_s,max (9.2.1.1(3)) | A_s,req = 1648 mm²/m | A_s,max = 10000 mm²/m | 16% | spełniony | PN-EN 1992-1-1 9.2.1.1(3) |
-| Zbrojenie płyty gora y ≤ A_s,max (9.2.1.1(3)) | A_s,req = 2651 mm²/m | A_s,max = 10000 mm²/m | 27% | spełniony | PN-EN 1992-1-1 9.2.1.1(3) |
+| Zbrojenie płyty dol x ≤ A_s,max (9.2.1.1(3)) | A_s,req = 1750 mm²/m | A_s,max = 10000 mm²/m | 17% | spełniony | PN-EN 1992-1-1 9.2.1.1(3) |
+| Zbrojenie płyty dol y ≤ A_s,max (9.2.1.1(3)) | A_s,req = 4019 mm²/m | A_s,max = 10000 mm²/m | 40% | spełniony | PN-EN 1992-1-1 9.2.1.1(3) |
+| Zbrojenie płyty gora x ≤ A_s,max (9.2.1.1(3)) | A_s,req = 1675 mm²/m | A_s,max = 10000 mm²/m | 17% | spełniony | PN-EN 1992-1-1 9.2.1.1(3) |
+| Zbrojenie płyty gora y ≤ A_s,max (9.2.1.1(3)) | A_s,req = 2644 mm²/m | A_s,max = 10000 mm²/m | 26% | spełniony | PN-EN 1992-1-1 9.2.1.1(3) |
 
 > 1 el. MES z μ > μ_lim — przekrój podwójnie zbrojony (A_s2 w warstwie przeciwnej ujęte w wymaganiu tej warstwy).
 
@@ -12027,7 +12022,7 @@ płyta fundamentowa pod garażem obniżona (wierzch −0,30) — na płycie memb
 
 ### Poz. 10.3 — Żebro płyty fundamentowej ZF1 (b = 0,60 m, h = 0,55 m, L = 12,20 m)
 
-Element modelu: `ZF1` · maks. wykorzystanie nośności η = 98% · wszystkie warunki spełnione
+Element modelu: `ZF1` · maks. wykorzystanie nośności η = 97% · wszystkie warunki spełnione
 
 #### Opis i schemat statyczny
 
@@ -12038,9 +12033,9 @@ pogrubienie (żebro) płyty pod ścianą S0-01 — krawędź z izolacją obwodow
 ##### ZF1 — MES płyty fundamentowej
 
 - Pasmo żebra w MES: b × h = **60 × 55 cm, L = 12,20 m**
-- Moment pasma żebra (Σ m·szer., obwiednia ULS): M_Ed,dół; M_Ed,góra = **104,8; −394,4 kNm**
-- Wymagane zbrojenie dolne (MES: maks. A_s,req × b): A_s,req,dół = **1076** mm²
-- Wymagane zbrojenie górne (MES: maks. A_s,req × b): A_s,req,góra = **2549** mm²
+- Moment pasma żebra (Σ m·szer., obwiednia ULS): M_Ed,dół; M_Ed,góra = **99,7; −410,1 kNm**
+- Wymagane zbrojenie dolne (MES: maks. A_s,req × b): A_s,req,dół = **1063** mm²
+- Wymagane zbrojenie górne (MES: maks. A_s,req × b): A_s,req,góra = **2638** mm²
 - Zbrojenie podłużne minimalne (każda warstwa): A_s,min = max(0,26·f_ctm/f_yk; 0,0013)·b·d = **393** mm² *((9.1N))*
 - *Ścinanie*
 - Współczynnik skali: k = 1 + √(200/d) ≤ 2,0 = 1 + √(200/484) = **1,643**
@@ -12050,26 +12045,26 @@ pogrubienie (żebro) płyty pod ścianą S0-01 — krawędź z izolacją obwodow
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·484 = **436** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 600·436·0,540·17,86/(2,00 + 0,500)·10⁻³ = **1008,10** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 100,5·436·434,8·2,00/(281,49·10³) = **135** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 100,5·436·434,8·2,00/(157,79·10³) = **241** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·484 = **363** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 100,5/(0,00080·600) = **209** mm *((9.5N))*
-- Przyjęto strzemiona: φ8 2-cięte co s = **130** mm
-- Nośność zbrojenia na ścinanie: V_Rd,s = A_sw/s·z·f_ywd·cot θ = 100,5/130·436·434,8·2,00·10⁻³ = **292,92** kN
-- Maks. docisk pod żebrem (MES): p_d,max = **241,0** kPa
+- Przyjęto strzemiona: φ8 2-cięte co s = **200** mm
+- Nośność zbrojenia na ścinanie: V_Rd,s = A_sw/s·z·f_ywd·cot θ = 100,5/200·436·434,8·2,00·10⁻³ = **190,40** kN
+- Maks. docisk pod żebrem (MES): p_d,max = **209,0** kPa
 - Zbrojenie podłużne: A_s,min (warstwa) = **393** mm²
-- Przyjęto zbrojenie podłużne: **33φ12 (dołem 10φ12, górą 23φ12), strzemiona φ8 co 13 cm**
+- Przyjęto zbrojenie podłużne: **34φ12 (dołem 10φ12, górą 24φ12), strzemiona φ8 co 20 cm**
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Zbrojenie dolne żebra | A_s,req = 1076 mm² | A_s,prov = 1131 mm² | 95% | spełniony | 6.1, 9.2.1.1 |
-| Zbrojenie górne żebra | A_s,req = 2549 mm² | A_s,prov = 2601 mm² | 98% | spełniony | 6.1, 9.2.1.1 |
-| Nośność krzyżulców betonowych | V_Ed = 281,49 kN | V_Rd,max = 1008,10 kN | 28% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 281,49 kN | V_Rd,s = 292,92 kN | 96% | spełniony | (6.8) |
-| Docisk do podłoża pod żebrem | p_d,max = 241,0 kPa | q_Rd = 318,8 kPa | 76% | spełniony | PN-EN 1997-1 6.5.2 |
+| Zbrojenie dolne żebra | A_s,req = 1063 mm² | A_s,prov = 1131 mm² | 94% | spełniony | 6.1, 9.2.1.1 |
+| Zbrojenie górne żebra | A_s,req = 2638 mm² | A_s,prov = 2714 mm² | 97% | spełniony | 6.1, 9.2.1.1 |
+| Nośność krzyżulców betonowych | V_Ed = 157,79 kN | V_Rd,max = 1008,10 kN | 16% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 157,79 kN | V_Rd,s = 190,40 kN | 83% | spełniony | (6.8) |
+| Docisk do podłoża pod żebrem | p_d,max = 209,0 kPa | q_Rd = 318,8 kPa | 66% | spełniony | PN-EN 1997-1 6.5.2 |
 
 #### Wnioski
 
-**Przyjęto:** Żebro 60×55 cm, C25/30; 33φ12 (dołem 10φ12, górą 23φ12), strzemiona φ8 co 13 cm.  
+**Przyjęto:** Żebro 60×55 cm, C25/30; 34φ12 (dołem 10φ12, górą 24φ12), strzemiona φ8 co 20 cm.  
 
 ### Poz. 10.4 — Żebro płyty fundamentowej ZF2 (b = 0,60 m, h = 0,55 m, L = 6,58 m)
 
@@ -12084,9 +12079,9 @@ pogrubienie (żebro) płyty pod ścianą S0-02 — krawędź z izolacją obwodow
 ##### ZF2 — MES płyty fundamentowej
 
 - Pasmo żebra w MES: b × h = **60 × 55 cm, L = 6,58 m**
-- Moment pasma żebra (Σ m·szer., obwiednia ULS): M_Ed,dół; M_Ed,góra = **48,2; −95,7 kNm**
-- Wymagane zbrojenie dolne (MES: maks. A_s,req × b): A_s,req,dół = **745** mm²
-- Wymagane zbrojenie górne (MES: maks. A_s,req × b): A_s,req,góra = **632** mm²
+- Moment pasma żebra (Σ m·szer., obwiednia ULS): M_Ed,dół; M_Ed,góra = **48,6; −96,0 kNm**
+- Wymagane zbrojenie dolne (MES: maks. A_s,req × b): A_s,req,dół = **740** mm²
+- Wymagane zbrojenie górne (MES: maks. A_s,req × b): A_s,req,góra = **634** mm²
 - Zbrojenie podłużne minimalne (każda warstwa): A_s,min = max(0,26·f_ctm/f_yk; 0,0013)·b·d = **393** mm² *((9.1N))*
 - *Ścinanie*
 - Współczynnik skali: k = 1 + √(200/d) ≤ 2,0 = 1 + √(200/484) = **1,643**
@@ -12096,22 +12091,22 @@ pogrubienie (żebro) płyty pod ścianą S0-02 — krawędź z izolacją obwodow
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·484 = **436** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 600·436·0,540·17,86/(2,00 + 0,500)·10⁻³ = **1008,10** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 100,5·436·434,8·2,00/(89,05·10³) = **428** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 100,5·436·434,8·2,00/(88,61·10³) = **430** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·484 = **363** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 100,5/(0,00080·600) = **209** mm *((9.5N))*
 - Przyjęto strzemiona: φ8 2-cięte co s = **200** mm
 - Nośność zbrojenia na ścinanie: V_Rd,s = A_sw/s·z·f_ywd·cot θ = 100,5/200·436·434,8·2,00·10⁻³ = **190,40** kN
-- Maks. docisk pod żebrem (MES): p_d,max = **93,1** kPa
+- Maks. docisk pod żebrem (MES): p_d,max = **92,7** kPa
 - Zbrojenie podłużne: A_s,min (warstwa) = **393** mm²
 - Przyjęto zbrojenie podłużne: **13φ12 (dołem 7φ12, górą 6φ12), strzemiona φ8 co 20 cm**
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Zbrojenie dolne żebra | A_s,req = 745 mm² | A_s,prov = 792 mm² | 94% | spełniony | 6.1, 9.2.1.1 |
-| Zbrojenie górne żebra | A_s,req = 632 mm² | A_s,prov = 679 mm² | 93% | spełniony | 6.1, 9.2.1.1 |
-| Nośność krzyżulców betonowych | V_Ed = 89,05 kN | V_Rd,max = 1008,10 kN | 9% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 89,05 kN | V_Rd,s = 190,40 kN | 47% | spełniony | (6.8) |
-| Docisk do podłoża pod żebrem | p_d,max = 93,1 kPa | q_Rd = 318,8 kPa | 29% | spełniony | PN-EN 1997-1 6.5.2 |
+| Zbrojenie dolne żebra | A_s,req = 740 mm² | A_s,prov = 792 mm² | 94% | spełniony | 6.1, 9.2.1.1 |
+| Zbrojenie górne żebra | A_s,req = 634 mm² | A_s,prov = 679 mm² | 93% | spełniony | 6.1, 9.2.1.1 |
+| Nośność krzyżulców betonowych | V_Ed = 88,61 kN | V_Rd,max = 1008,10 kN | 9% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 88,61 kN | V_Rd,s = 190,40 kN | 47% | spełniony | (6.8) |
+| Docisk do podłoża pod żebrem | p_d,max = 92,7 kPa | q_Rd = 318,8 kPa | 29% | spełniony | PN-EN 1997-1 6.5.2 |
 
 > V_Ed ≤ V_Rd,c = 110,47 kN — zbrojenie poprzeczne minimalne (9.2.2(5)).
 
@@ -12132,9 +12127,9 @@ pogrubienie (żebro) płyty pod ścianą S0-03 — krawędź z izolacją obwodow
 ##### ZF3 — MES płyty fundamentowej
 
 - Pasmo żebra w MES: b × h = **60 × 55 cm, L = 3,08 m**
-- Moment pasma żebra (Σ m·szer., obwiednia ULS): M_Ed,dół; M_Ed,góra = **0,0; −73,1 kNm**
+- Moment pasma żebra (Σ m·szer., obwiednia ULS): M_Ed,dół; M_Ed,góra = **0,0; −73,3 kNm**
 - Wymagane zbrojenie dolne (MES: maks. A_s,req × b): A_s,req,dół = **58** mm²
-- Wymagane zbrojenie górne (MES: maks. A_s,req × b): A_s,req,góra = **526** mm²
+- Wymagane zbrojenie górne (MES: maks. A_s,req × b): A_s,req,góra = **528** mm²
 - Zbrojenie podłużne minimalne (każda warstwa): A_s,min = max(0,26·f_ctm/f_yk; 0,0013)·b·d = **393** mm² *((9.1N))*
 - *Ścinanie*
 - Współczynnik skali: k = 1 + √(200/d) ≤ 2,0 = 1 + √(200/484) = **1,643**
@@ -12144,7 +12139,7 @@ pogrubienie (żebro) płyty pod ścianą S0-03 — krawędź z izolacją obwodow
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·484 = **436** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 600·436·0,540·17,86/(2,00 + 0,500)·10⁻³ = **1008,10** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 100,5·436·434,8·2,00/(108,37·10³) = **351** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 100,5·436·434,8·2,00/(108,57·10³) = **351** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·484 = **363** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 100,5/(0,00080·600) = **209** mm *((9.5N))*
 - Przyjęto strzemiona: φ8 2-cięte co s = **200** mm
@@ -12156,9 +12151,9 @@ pogrubienie (żebro) płyty pod ścianą S0-03 — krawędź z izolacją obwodow
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
 | Zbrojenie dolne żebra | A_s,req = 393 mm² | A_s,prov = 452 mm² | 87% | spełniony | 6.1, 9.2.1.1 |
-| Zbrojenie górne żebra | A_s,req = 526 mm² | A_s,prov = 565 mm² | 93% | spełniony | 6.1, 9.2.1.1 |
-| Nośność krzyżulców betonowych | V_Ed = 108,37 kN | V_Rd,max = 1008,10 kN | 11% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 108,37 kN | V_Rd,s = 190,40 kN | 57% | spełniony | (6.8) |
+| Zbrojenie górne żebra | A_s,req = 528 mm² | A_s,prov = 565 mm² | 93% | spełniony | 6.1, 9.2.1.1 |
+| Nośność krzyżulców betonowych | V_Ed = 108,57 kN | V_Rd,max = 1008,10 kN | 11% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 108,57 kN | V_Rd,s = 190,40 kN | 57% | spełniony | (6.8) |
 | Docisk do podłoża pod żebrem | p_d,max = 46,4 kPa | q_Rd = 318,8 kPa | 15% | spełniony | PN-EN 1997-1 6.5.2 |
 
 #### Wnioski
@@ -12178,9 +12173,9 @@ pogrubienie (żebro) płyty pod ścianą S0-03 — krawędź z izolacją obwodow
 ##### ZF4 — MES płyty fundamentowej
 
 - Pasmo żebra w MES: b × h = **60 × 55 cm, L = 6,70 m**
-- Moment pasma żebra (Σ m·szer., obwiednia ULS): M_Ed,dół; M_Ed,góra = **0,0; −70,6 kNm**
+- Moment pasma żebra (Σ m·szer., obwiednia ULS): M_Ed,dół; M_Ed,góra = **0,0; −70,7 kNm**
 - Wymagane zbrojenie dolne (MES: maks. A_s,req × b): A_s,req,dół = **0** mm²
-- Wymagane zbrojenie górne (MES: maks. A_s,req × b): A_s,req,góra = **505** mm²
+- Wymagane zbrojenie górne (MES: maks. A_s,req × b): A_s,req,góra = **506** mm²
 - Zbrojenie podłużne minimalne (każda warstwa): A_s,min = max(0,26·f_ctm/f_yk; 0,0013)·b·d = **393** mm² *((9.1N))*
 - *Ścinanie*
 - Współczynnik skali: k = 1 + √(200/d) ≤ 2,0 = 1 + √(200/484) = **1,643**
@@ -12190,7 +12185,7 @@ pogrubienie (żebro) płyty pod ścianą S0-03 — krawędź z izolacją obwodow
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·484 = **436** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 600·436·0,540·17,86/(2,00 + 0,500)·10⁻³ = **1008,10** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 100,5·436·434,8·2,00/(125,61·10³) = **303** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 100,5·436·434,8·2,00/(125,80·10³) = **303** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·484 = **363** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 100,5/(0,00080·600) = **209** mm *((9.5N))*
 - Przyjęto strzemiona: φ8 2-cięte co s = **200** mm
@@ -12202,9 +12197,9 @@ pogrubienie (żebro) płyty pod ścianą S0-03 — krawędź z izolacją obwodow
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
 | Zbrojenie dolne żebra | A_s,req = 393 mm² | A_s,prov = 452 mm² | 87% | spełniony | 6.1, 9.2.1.1 |
-| Zbrojenie górne żebra | A_s,req = 505 mm² | A_s,prov = 565 mm² | 89% | spełniony | 6.1, 9.2.1.1 |
-| Nośność krzyżulców betonowych | V_Ed = 125,61 kN | V_Rd,max = 1008,10 kN | 12% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 125,61 kN | V_Rd,s = 190,40 kN | 66% | spełniony | (6.8) |
+| Zbrojenie górne żebra | A_s,req = 506 mm² | A_s,prov = 565 mm² | 89% | spełniony | 6.1, 9.2.1.1 |
+| Nośność krzyżulców betonowych | V_Ed = 125,80 kN | V_Rd,max = 1008,10 kN | 12% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 125,80 kN | V_Rd,s = 190,40 kN | 66% | spełniony | (6.8) |
 | Docisk do podłoża pod żebrem | p_d,max = 40,9 kPa | q_Rd = 318,8 kPa | 13% | spełniony | PN-EN 1997-1 6.5.2 |
 
 #### Wnioski
@@ -12224,9 +12219,9 @@ pogrubienie (żebro) płyty pod ścianą S0-04 — krawędź z izolacją obwodow
 ##### ZF5 — MES płyty fundamentowej
 
 - Pasmo żebra w MES: b × h = **60 × 55 cm, L = 6,58 m**
-- Moment pasma żebra (Σ m·szer., obwiednia ULS): M_Ed,dół; M_Ed,góra = **0,0; −161,2 kNm**
-- Wymagane zbrojenie dolne (MES: maks. A_s,req × b): A_s,req,dół = **91** mm²
-- Wymagane zbrojenie górne (MES: maks. A_s,req × b): A_s,req,góra = **830** mm²
+- Moment pasma żebra (Σ m·szer., obwiednia ULS): M_Ed,dół; M_Ed,góra = **0,0; −160,7 kNm**
+- Wymagane zbrojenie dolne (MES: maks. A_s,req × b): A_s,req,dół = **93** mm²
+- Wymagane zbrojenie górne (MES: maks. A_s,req × b): A_s,req,góra = **829** mm²
 - Zbrojenie podłużne minimalne (każda warstwa): A_s,min = max(0,26·f_ctm/f_yk; 0,0013)·b·d = **393** mm² *((9.1N))*
 - *Ścinanie*
 - Współczynnik skali: k = 1 + √(200/d) ≤ 2,0 = 1 + √(200/484) = **1,643**
@@ -12236,22 +12231,22 @@ pogrubienie (żebro) płyty pod ścianą S0-04 — krawędź z izolacją obwodow
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·484 = **436** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 600·436·0,540·17,86/(2,00 + 0,500)·10⁻³ = **1008,10** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 100,5·436·434,8·2,00/(86,21·10³) = **442** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 100,5·436·434,8·2,00/(85,97·10³) = **443** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·484 = **363** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 100,5/(0,00080·600) = **209** mm *((9.5N))*
 - Przyjęto strzemiona: φ8 2-cięte co s = **200** mm
 - Nośność zbrojenia na ścinanie: V_Rd,s = A_sw/s·z·f_ywd·cot θ = 100,5/200·436·434,8·2,00·10⁻³ = **190,40** kN
-- Maks. docisk pod żebrem (MES): p_d,max = **59,6** kPa
+- Maks. docisk pod żebrem (MES): p_d,max = **59,5** kPa
 - Zbrojenie podłużne: A_s,min (warstwa) = **393** mm²
 - Przyjęto zbrojenie podłużne: **12φ12 (dołem 4φ12, górą 8φ12), strzemiona φ8 co 20 cm**
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
 | Zbrojenie dolne żebra | A_s,req = 393 mm² | A_s,prov = 452 mm² | 87% | spełniony | 6.1, 9.2.1.1 |
-| Zbrojenie górne żebra | A_s,req = 830 mm² | A_s,prov = 905 mm² | 92% | spełniony | 6.1, 9.2.1.1 |
-| Nośność krzyżulców betonowych | V_Ed = 86,21 kN | V_Rd,max = 1008,10 kN | 9% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 86,21 kN | V_Rd,s = 190,40 kN | 45% | spełniony | (6.8) |
-| Docisk do podłoża pod żebrem | p_d,max = 59,6 kPa | q_Rd = 318,8 kPa | 19% | spełniony | PN-EN 1997-1 6.5.2 |
+| Zbrojenie górne żebra | A_s,req = 829 mm² | A_s,prov = 905 mm² | 92% | spełniony | 6.1, 9.2.1.1 |
+| Nośność krzyżulców betonowych | V_Ed = 85,97 kN | V_Rd,max = 1008,10 kN | 9% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 85,97 kN | V_Rd,s = 190,40 kN | 45% | spełniony | (6.8) |
+| Docisk do podłoża pod żebrem | p_d,max = 59,5 kPa | q_Rd = 318,8 kPa | 19% | spełniony | PN-EN 1997-1 6.5.2 |
 
 > V_Ed ≤ V_Rd,c = 107,01 kN — zbrojenie poprzeczne minimalne (9.2.2(5)).
 
@@ -12261,7 +12256,7 @@ pogrubienie (żebro) płyty pod ścianą S0-04 — krawędź z izolacją obwodow
 
 ### Poz. 10.8 — Żebro płyty fundamentowej ZF6 (b = 0,60 m, h = 0,55 m, L = 0,82 m)
 
-Element modelu: `ZF6` · maks. wykorzystanie nośności η = 97% · wszystkie warunki spełnione
+Element modelu: `ZF6` · maks. wykorzystanie nośności η = 99% · wszystkie warunki spełnione
 
 #### Opis i schemat statyczny
 
@@ -12272,9 +12267,9 @@ pogrubienie (żebro) płyty pod ścianą S0-05 — krawędź z izolacją obwodow
 ##### ZF6 — MES płyty fundamentowej
 
 - Pasmo żebra w MES: b × h = **60 × 55 cm, L = 0,82 m**
-- Moment pasma żebra (Σ m·szer., obwiednia ULS): M_Ed,dół; M_Ed,góra = **0,0; −66,4 kNm**
+- Moment pasma żebra (Σ m·szer., obwiednia ULS): M_Ed,dół; M_Ed,góra = **0,0; −67,2 kNm**
 - Wymagane zbrojenie dolne (MES: maks. A_s,req × b): A_s,req,dół = **75** mm²
-- Wymagane zbrojenie górne (MES: maks. A_s,req × b): A_s,req,góra = **658** mm²
+- Wymagane zbrojenie górne (MES: maks. A_s,req × b): A_s,req,góra = **669** mm²
 - Zbrojenie podłużne minimalne (każda warstwa): A_s,min = max(0,26·f_ctm/f_yk; 0,0013)·b·d = **393** mm² *((9.1N))*
 - *Ścinanie*
 - Współczynnik skali: k = 1 + √(200/d) ≤ 2,0 = 1 + √(200/484) = **1,643**
@@ -12284,22 +12279,22 @@ pogrubienie (żebro) płyty pod ścianą S0-05 — krawędź z izolacją obwodow
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·484 = **436** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 600·436·0,540·17,86/(2,00 + 0,500)·10⁻³ = **1008,10** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 100,5·436·434,8·2,00/(111,15·10³) = **343** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 100,5·436·434,8·2,00/(112,40·10³) = **339** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·484 = **363** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 100,5/(0,00080·600) = **209** mm *((9.5N))*
 - Przyjęto strzemiona: φ8 2-cięte co s = **200** mm
 - Nośność zbrojenia na ścinanie: V_Rd,s = A_sw/s·z·f_ywd·cot θ = 100,5/200·436·434,8·2,00·10⁻³ = **190,40** kN
-- Maks. docisk pod żebrem (MES): p_d,max = **67,3** kPa
+- Maks. docisk pod żebrem (MES): p_d,max = **67,2** kPa
 - Zbrojenie podłużne: A_s,min (warstwa) = **393** mm²
 - Przyjęto zbrojenie podłużne: **10φ12 (dołem 4φ12, górą 6φ12), strzemiona φ8 co 20 cm**
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
 | Zbrojenie dolne żebra | A_s,req = 393 mm² | A_s,prov = 452 mm² | 87% | spełniony | 6.1, 9.2.1.1 |
-| Zbrojenie górne żebra | A_s,req = 658 mm² | A_s,prov = 679 mm² | 97% | spełniony | 6.1, 9.2.1.1 |
-| Nośność krzyżulców betonowych | V_Ed = 111,15 kN | V_Rd,max = 1008,10 kN | 11% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 111,15 kN | V_Rd,s = 190,40 kN | 58% | spełniony | (6.8) |
-| Docisk do podłoża pod żebrem | p_d,max = 67,3 kPa | q_Rd = 318,8 kPa | 21% | spełniony | PN-EN 1997-1 6.5.2 |
+| Zbrojenie górne żebra | A_s,req = 669 mm² | A_s,prov = 679 mm² | 99% | spełniony | 6.1, 9.2.1.1 |
+| Nośność krzyżulców betonowych | V_Ed = 112,40 kN | V_Rd,max = 1008,10 kN | 11% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 112,40 kN | V_Rd,s = 190,40 kN | 59% | spełniony | (6.8) |
+| Docisk do podłoża pod żebrem | p_d,max = 67,2 kPa | q_Rd = 318,8 kPa | 21% | spełniony | PN-EN 1997-1 6.5.2 |
 
 #### Wnioski
 
@@ -12307,7 +12302,7 @@ pogrubienie (żebro) płyty pod ścianą S0-05 — krawędź z izolacją obwodow
 
 ### Poz. 10.9 — Żebro płyty fundamentowej ZF7 (b = 0,60 m, h = 0,55 m, L = 12,20 m)
 
-Element modelu: `ZF7` · maks. wykorzystanie nośności η = 99% · wszystkie warunki spełnione
+Element modelu: `ZF7` · maks. wykorzystanie nośności η = 94% · wszystkie warunki spełnione
 
 #### Opis i schemat statyczny
 
@@ -12318,9 +12313,9 @@ pogrubienie (żebro) płyty pod ścianą S0-06 — krawędź z izolacją obwodow
 ##### ZF7 — MES płyty fundamentowej
 
 - Pasmo żebra w MES: b × h = **60 × 55 cm, L = 12,20 m**
-- Moment pasma żebra (Σ m·szer., obwiednia ULS): M_Ed,dół; M_Ed,góra = **185,6; −190,7 kNm**
-- Wymagane zbrojenie dolne (MES: maks. A_s,req × b): A_s,req,dół = **1158** mm²
-- Wymagane zbrojenie górne (MES: maks. A_s,req × b): A_s,req,góra = **1231** mm²
+- Moment pasma żebra (Σ m·szer., obwiednia ULS): M_Ed,dół; M_Ed,góra = **184,1; −193,6 kNm**
+- Wymagane zbrojenie dolne (MES: maks. A_s,req × b): A_s,req,dół = **1161** mm²
+- Wymagane zbrojenie górne (MES: maks. A_s,req × b): A_s,req,góra = **1276** mm²
 - Zbrojenie podłużne minimalne (każda warstwa): A_s,min = max(0,26·f_ctm/f_yk; 0,0013)·b·d = **393** mm² *((9.1N))*
 - *Ścinanie*
 - Współczynnik skali: k = 1 + √(200/d) ≤ 2,0 = 1 + √(200/484) = **1,643**
@@ -12330,26 +12325,26 @@ pogrubienie (żebro) płyty pod ścianą S0-06 — krawędź z izolacją obwodow
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·484 = **436** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 600·436·0,540·17,86/(2,00 + 0,500)·10⁻³ = **1008,10** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 100,5·436·434,8·2,00/(324,46·10³) = **117** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 100,5·436·434,8·2,00/(321,79·10³) = **118** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·484 = **363** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 100,5/(0,00080·600) = **209** mm *((9.5N))*
 - Przyjęto strzemiona: φ8 2-cięte co s = **110** mm
 - Nośność zbrojenia na ścinanie: V_Rd,s = A_sw/s·z·f_ywd·cot θ = 100,5/110·436·434,8·2,00·10⁻³ = **346,18** kN
-- Maks. docisk pod żebrem (MES): p_d,max = **111,2** kPa
+- Maks. docisk pod żebrem (MES): p_d,max = **111,1** kPa
 - Zbrojenie podłużne: A_s,min (warstwa) = **393** mm²
-- Przyjęto zbrojenie podłużne: **22φ12 (dołem 11φ12, górą 11φ12), strzemiona φ8 co 11 cm**
+- Przyjęto zbrojenie podłużne: **23φ12 (dołem 11φ12, górą 12φ12), strzemiona φ8 co 11 cm**
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Zbrojenie dolne żebra | A_s,req = 1158 mm² | A_s,prov = 1244 mm² | 93% | spełniony | 6.1, 9.2.1.1 |
-| Zbrojenie górne żebra | A_s,req = 1231 mm² | A_s,prov = 1244 mm² | 99% | spełniony | 6.1, 9.2.1.1 |
-| Nośność krzyżulców betonowych | V_Ed = 324,46 kN | V_Rd,max = 1008,10 kN | 32% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 324,46 kN | V_Rd,s = 346,18 kN | 94% | spełniony | (6.8) |
-| Docisk do podłoża pod żebrem | p_d,max = 111,2 kPa | q_Rd = 318,8 kPa | 35% | spełniony | PN-EN 1997-1 6.5.2 |
+| Zbrojenie dolne żebra | A_s,req = 1161 mm² | A_s,prov = 1244 mm² | 93% | spełniony | 6.1, 9.2.1.1 |
+| Zbrojenie górne żebra | A_s,req = 1276 mm² | A_s,prov = 1357 mm² | 94% | spełniony | 6.1, 9.2.1.1 |
+| Nośność krzyżulców betonowych | V_Ed = 321,79 kN | V_Rd,max = 1008,10 kN | 32% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 321,79 kN | V_Rd,s = 346,18 kN | 93% | spełniony | (6.8) |
+| Docisk do podłoża pod żebrem | p_d,max = 111,1 kPa | q_Rd = 318,8 kPa | 35% | spełniony | PN-EN 1997-1 6.5.2 |
 
 #### Wnioski
 
-**Przyjęto:** Żebro 60×55 cm, C25/30; 22φ12 (dołem 11φ12, górą 11φ12), strzemiona φ8 co 11 cm.  
+**Przyjęto:** Żebro 60×55 cm, C25/30; 23φ12 (dołem 11φ12, górą 12φ12), strzemiona φ8 co 11 cm.  
 
 ### Poz. 10.10 — Żebro płyty fundamentowej ZF8 (b = 0,60 m, h = 0,55 m, L = 8,95 m)
 
@@ -12364,9 +12359,9 @@ pogrubienie (żebro) płyty pod ścianą S0-07 — krawędź z izolacją obwodow
 ##### ZF8 — MES płyty fundamentowej
 
 - Pasmo żebra w MES: b × h = **60 × 55 cm, L = 8,95 m**
-- Moment pasma żebra (Σ m·szer., obwiednia ULS): M_Ed,dół; M_Ed,góra = **187,1; −398,2 kNm**
-- Wymagane zbrojenie dolne (MES: maks. A_s,req × b): A_s,req,dół = **1544** mm²
-- Wymagane zbrojenie górne (MES: maks. A_s,req × b): A_s,req,góra = **3021** mm²
+- Moment pasma żebra (Σ m·szer., obwiednia ULS): M_Ed,dół; M_Ed,góra = **180,9; −405,1 kNm**
+- Wymagane zbrojenie dolne (MES: maks. A_s,req × b): A_s,req,dół = **1528** mm²
+- Wymagane zbrojenie górne (MES: maks. A_s,req × b): A_s,req,góra = **3088** mm²
 - Zbrojenie podłużne minimalne (każda warstwa): A_s,min = max(0,26·f_ctm/f_yk; 0,0013)·b·d = **393** mm² *((9.1N))*
 - *Ścinanie*
 - Współczynnik skali: k = 1 + √(200/d) ≤ 2,0 = 1 + √(200/484) = **1,643**
@@ -12376,22 +12371,22 @@ pogrubienie (żebro) płyty pod ścianą S0-07 — krawędź z izolacją obwodow
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·484 = **436** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 600·436·0,540·17,86/(2,00 + 0,500)·10⁻³ = **1008,10** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 100,5·436·434,8·2,00/(394,57·10³) = **97** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 100,5·436·434,8·2,00/(382,82·10³) = **99** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·484 = **363** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 100,5/(0,00080·600) = **209** mm *((9.5N))*
 - Przyjęto strzemiona: φ8 2-cięte co s = **90** mm
 - Nośność zbrojenia na ścinanie: V_Rd,s = A_sw/s·z·f_ywd·cot θ = 100,5/90·436·434,8·2,00·10⁻³ = **423,10** kN
-- Maks. docisk pod żebrem (MES): p_d,max = **272,8** kPa
+- Maks. docisk pod żebrem (MES): p_d,max = **201,3** kPa
 - Zbrojenie podłużne: A_s,min (warstwa) = **393** mm²
 - Przyjęto zbrojenie podłużne: **24φ16 (dołem 8φ16, górą 16φ16), strzemiona φ8 co 9 cm**
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Zbrojenie dolne żebra | A_s,req = 1544 mm² | A_s,prov = 1608 mm² | 96% | spełniony | 6.1, 9.2.1.1 |
-| Zbrojenie górne żebra | A_s,req = 3021 mm² | A_s,prov = 3217 mm² | 94% | spełniony | 6.1, 9.2.1.1 |
-| Nośność krzyżulców betonowych | V_Ed = 394,57 kN | V_Rd,max = 1008,10 kN | 39% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 394,57 kN | V_Rd,s = 423,10 kN | 93% | spełniony | (6.8) |
-| Docisk do podłoża pod żebrem | p_d,max = 272,8 kPa | q_Rd = 318,8 kPa | 86% | spełniony | PN-EN 1997-1 6.5.2 |
+| Zbrojenie dolne żebra | A_s,req = 1528 mm² | A_s,prov = 1608 mm² | 95% | spełniony | 6.1, 9.2.1.1 |
+| Zbrojenie górne żebra | A_s,req = 3088 mm² | A_s,prov = 3217 mm² | 96% | spełniony | 6.1, 9.2.1.1 |
+| Nośność krzyżulców betonowych | V_Ed = 382,82 kN | V_Rd,max = 1008,10 kN | 38% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 382,82 kN | V_Rd,s = 423,10 kN | 90% | spełniony | (6.8) |
+| Docisk do podłoża pod żebrem | p_d,max = 201,3 kPa | q_Rd = 318,8 kPa | 63% | spełniony | PN-EN 1997-1 6.5.2 |
 
 #### Wnioski
 
@@ -12399,7 +12394,7 @@ pogrubienie (żebro) płyty pod ścianą S0-07 — krawędź z izolacją obwodow
 
 ### Poz. 10.11 — Żebro płyty fundamentowej ZF9 (b = 0,50 m, h = 0,70 m, L = 5,88 m)
 
-Element modelu: `ZF9` · maks. wykorzystanie nośności η = 96% · wszystkie warunki spełnione
+Element modelu: `ZF9` · maks. wykorzystanie nośności η = 99% · wszystkie warunki spełnione
 
 #### Opis i schemat statyczny
 
@@ -12410,9 +12405,9 @@ pogrubienie (żebro) płyty pod ścianą S0-08 — pogłębione pod trzpieniami 
 ##### ZF9 — MES płyty fundamentowej
 
 - Pasmo żebra w MES: b × h = **50 × 70 cm, L = 5,88 m**
-- Moment pasma żebra (Σ m·szer., obwiednia ULS): M_Ed,dół; M_Ed,góra = **0,0; −455,9 kNm**
-- Wymagane zbrojenie dolne (MES: maks. A_s,req × b): A_s,req,dół = **498** mm²
-- Wymagane zbrojenie górne (MES: maks. A_s,req × b): A_s,req,góra = **2511** mm²
+- Moment pasma żebra (Σ m·szer., obwiednia ULS): M_Ed,dół; M_Ed,góra = **0,0; −463,3 kNm**
+- Wymagane zbrojenie dolne (MES: maks. A_s,req × b): A_s,req,dół = **517** mm²
+- Wymagane zbrojenie górne (MES: maks. A_s,req × b): A_s,req,góra = **2576** mm²
 - Zbrojenie podłużne minimalne (każda warstwa): A_s,min = max(0,26·f_ctm/f_yk; 0,0013)·b·d = **429** mm² *((9.1N))*
 - *Ścinanie*
 - Współczynnik skali: k = 1 + √(200/d) ≤ 2,0 = 1 + √(200/634) = **1,562**
@@ -12422,22 +12417,22 @@ pogrubienie (żebro) płyty pod ścianą S0-08 — pogłębione pod trzpieniami 
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·634 = **571** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 500·571·0,540·17,86/(2,00 + 0,500)·10⁻³ = **1100,44** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 100,5·571·434,8·2,00/(501,03·10³) = **100** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 100,5·571·434,8·2,00/(509,59·10³) = **98** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·634 = **475** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 100,5/(0,00080·500) = **251** mm *((9.5N))*
 - Przyjęto strzemiona: φ8 2-cięte co s = **90** mm
 - Nośność zbrojenia na ścinanie: V_Rd,s = A_sw/s·z·f_ywd·cot θ = 100,5/90·571·434,8·2,00·10⁻³ = **554,23** kN
-- Maks. docisk pod żebrem (MES): p_d,max = **132,0** kPa
+- Maks. docisk pod żebrem (MES): p_d,max = **131,6** kPa
 - Zbrojenie podłużne: A_s,min (warstwa) = **429** mm²
 - Przyjęto zbrojenie podłużne: **16φ16 (dołem 3φ16, górą 13φ16), strzemiona φ8 co 9 cm**
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Zbrojenie dolne żebra | A_s,req = 498 mm² | A_s,prov = 603 mm² | 83% | spełniony | 6.1, 9.2.1.1 |
-| Zbrojenie górne żebra | A_s,req = 2511 mm² | A_s,prov = 2614 mm² | 96% | spełniony | 6.1, 9.2.1.1 |
-| Nośność krzyżulców betonowych | V_Ed = 501,03 kN | V_Rd,max = 1100,44 kN | 46% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 501,03 kN | V_Rd,s = 554,23 kN | 90% | spełniony | (6.8) |
-| Docisk do podłoża pod żebrem | p_d,max = 132,0 kPa | q_Rd = 318,8 kPa | 41% | spełniony | PN-EN 1997-1 6.5.2 |
+| Zbrojenie dolne żebra | A_s,req = 517 mm² | A_s,prov = 603 mm² | 86% | spełniony | 6.1, 9.2.1.1 |
+| Zbrojenie górne żebra | A_s,req = 2576 mm² | A_s,prov = 2614 mm² | 99% | spełniony | 6.1, 9.2.1.1 |
+| Nośność krzyżulców betonowych | V_Ed = 509,59 kN | V_Rd,max = 1100,44 kN | 46% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 509,59 kN | V_Rd,s = 554,23 kN | 92% | spełniony | (6.8) |
+| Docisk do podłoża pod żebrem | p_d,max = 131,6 kPa | q_Rd = 318,8 kPa | 41% | spełniony | PN-EN 1997-1 6.5.2 |
 
 #### Wnioski
 
@@ -12456,8 +12451,8 @@ pogrubienie (żebro) płyty pod ścianą S0-09 — pogłębione pod trzpieniami 
 ##### ZF10 — MES płyty fundamentowej
 
 - Pasmo żebra w MES: b × h = **50 × 70 cm, L = 1,31 m**
-- Moment pasma żebra (Σ m·szer., obwiednia ULS): M_Ed,dół; M_Ed,góra = **456,8; 0,0 kNm**
-- Wymagane zbrojenie dolne (MES: maks. A_s,req × b): A_s,req,dół = **2611** mm²
+- Moment pasma żebra (Σ m·szer., obwiednia ULS): M_Ed,dół; M_Ed,góra = **452,1; 0,0 kNm**
+- Wymagane zbrojenie dolne (MES: maks. A_s,req × b): A_s,req,dół = **2608** mm²
 - Wymagane zbrojenie górne (MES: maks. A_s,req × b): A_s,req,góra = **0** mm²
 - Zbrojenie podłużne minimalne (każda warstwa): A_s,min = max(0,26·f_ctm/f_yk; 0,0013)·b·d = **429** mm² *((9.1N))*
 - *Ścinanie*
@@ -12468,22 +12463,22 @@ pogrubienie (żebro) płyty pod ścianą S0-09 — pogłębione pod trzpieniami 
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·634 = **571** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 500·571·0,540·17,86/(2,00 + 0,500)·10⁻³ = **1100,44** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 100,5·571·434,8·2,00/(251,47·10³) = **198** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 100,5·571·434,8·2,00/(251,56·10³) = **198** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·634 = **475** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 100,5/(0,00080·500) = **251** mm *((9.5N))*
 - Przyjęto strzemiona: φ8 2-cięte co s = **190** mm
 - Nośność zbrojenia na ścinanie: V_Rd,s = A_sw/s·z·f_ywd·cot θ = 100,5/190·571·434,8·2,00·10⁻³ = **262,53** kN
-- Maks. docisk pod żebrem (MES): p_d,max = **123,2** kPa
+- Maks. docisk pod żebrem (MES): p_d,max = **123,3** kPa
 - Zbrojenie podłużne: A_s,min (warstwa) = **429** mm²
 - Przyjęto zbrojenie podłużne: **16φ16 (dołem 13φ16, górą 3φ16), strzemiona φ8 co 19 cm**
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Zbrojenie dolne żebra | A_s,req = 2611 mm² | A_s,prov = 2614 mm² | 100% | spełniony | 6.1, 9.2.1.1 |
+| Zbrojenie dolne żebra | A_s,req = 2608 mm² | A_s,prov = 2614 mm² | 100% | spełniony | 6.1, 9.2.1.1 |
 | Zbrojenie górne żebra | A_s,req = 429 mm² | A_s,prov = 603 mm² | 71% | spełniony | 6.1, 9.2.1.1 |
-| Nośność krzyżulców betonowych | V_Ed = 251,47 kN | V_Rd,max = 1100,44 kN | 23% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 251,47 kN | V_Rd,s = 262,53 kN | 96% | spełniony | (6.8) |
-| Docisk do podłoża pod żebrem | p_d,max = 123,2 kPa | q_Rd = 318,8 kPa | 39% | spełniony | PN-EN 1997-1 6.5.2 |
+| Nośność krzyżulców betonowych | V_Ed = 251,56 kN | V_Rd,max = 1100,44 kN | 23% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 251,56 kN | V_Rd,s = 262,53 kN | 96% | spełniony | (6.8) |
+| Docisk do podłoża pod żebrem | p_d,max = 123,3 kPa | q_Rd = 318,8 kPa | 39% | spełniony | PN-EN 1997-1 6.5.2 |
 
 #### Wnioski
 
@@ -12491,7 +12486,7 @@ pogrubienie (żebro) płyty pod ścianą S0-09 — pogłębione pod trzpieniami 
 
 ### Poz. 10.13 — Żebro płyty fundamentowej ZF11 (b = 0,50 m, h = 0,70 m, L = 3,50 m)
 
-Element modelu: `ZF11` · maks. wykorzystanie nośności η = 99% · wszystkie warunki spełnione
+Element modelu: `ZF11` · maks. wykorzystanie nośności η = 98% · wszystkie warunki spełnione
 
 #### Opis i schemat statyczny
 
@@ -12502,8 +12497,8 @@ pogrubienie (żebro) płyty pod ścianą S0-10 — pogłębione pod trzpieniami 
 ##### ZF11 — MES płyty fundamentowej
 
 - Pasmo żebra w MES: b × h = **50 × 70 cm, L = 3,50 m**
-- Moment pasma żebra (Σ m·szer., obwiednia ULS): M_Ed,dół; M_Ed,góra = **484,0; −20,1 kNm**
-- Wymagane zbrojenie dolne (MES: maks. A_s,req × b): A_s,req,dół = **2705** mm²
+- Moment pasma żebra (Σ m·szer., obwiednia ULS): M_Ed,dół; M_Ed,góra = **481,2; −20,2 kNm**
+- Wymagane zbrojenie dolne (MES: maks. A_s,req × b): A_s,req,dół = **2666** mm²
 - Wymagane zbrojenie górne (MES: maks. A_s,req × b): A_s,req,góra = **195** mm²
 - Zbrojenie podłużne minimalne (każda warstwa): A_s,min = max(0,26·f_ctm/f_yk; 0,0013)·b·d = **429** mm² *((9.1N))*
 - *Ścinanie*
@@ -12514,7 +12509,7 @@ pogrubienie (żebro) płyty pod ścianą S0-10 — pogłębione pod trzpieniami 
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·634 = **571** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 500·571·0,540·17,86/(2,00 + 0,500)·10⁻³ = **1100,44** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 100,5·571·434,8·2,00/(351,37·10³) = **142** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 100,5·571·434,8·2,00/(350,92·10³) = **142** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·634 = **475** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 100,5/(0,00080·500) = **251** mm *((9.5N))*
 - Przyjęto strzemiona: φ8 2-cięte co s = **140** mm
@@ -12525,10 +12520,10 @@ pogrubienie (żebro) płyty pod ścianą S0-10 — pogłębione pod trzpieniami 
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Zbrojenie dolne żebra | A_s,req = 2705 mm² | A_s,prov = 2815 mm² | 96% | spełniony | 6.1, 9.2.1.1 |
+| Zbrojenie dolne żebra | A_s,req = 2666 mm² | A_s,prov = 2815 mm² | 95% | spełniony | 6.1, 9.2.1.1 |
 | Zbrojenie górne żebra | A_s,req = 429 mm² | A_s,prov = 603 mm² | 71% | spełniony | 6.1, 9.2.1.1 |
-| Nośność krzyżulców betonowych | V_Ed = 351,37 kN | V_Rd,max = 1100,44 kN | 32% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 351,37 kN | V_Rd,s = 356,29 kN | 99% | spełniony | (6.8) |
+| Nośność krzyżulców betonowych | V_Ed = 350,92 kN | V_Rd,max = 1100,44 kN | 32% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 350,92 kN | V_Rd,s = 356,29 kN | 98% | spełniony | (6.8) |
 | Docisk do podłoża pod żebrem | p_d,max = 117,2 kPa | q_Rd = 318,8 kPa | 37% | spełniony | PN-EN 1997-1 6.5.2 |
 
 #### Wnioski
@@ -12548,9 +12543,9 @@ pogrubienie (żebro) płyty pod ścianą S0-11. Żebro w MES płyty (poz. PF1): 
 ##### ZF12 — MES płyty fundamentowej
 
 - Pasmo żebra w MES: b × h = **50 × 50 cm, L = 3,62 m**
-- Moment pasma żebra (Σ m·szer., obwiednia ULS): M_Ed,dół; M_Ed,góra = **244,6; −33,4 kNm**
-- Wymagane zbrojenie dolne (MES: maks. A_s,req × b): A_s,req,dół = **1853** mm²
-- Wymagane zbrojenie górne (MES: maks. A_s,req × b): A_s,req,góra = **265** mm²
+- Moment pasma żebra (Σ m·szer., obwiednia ULS): M_Ed,dół; M_Ed,góra = **243,4; −33,5 kNm**
+- Wymagane zbrojenie dolne (MES: maks. A_s,req × b): A_s,req,dół = **1850** mm²
+- Wymagane zbrojenie górne (MES: maks. A_s,req × b): A_s,req,góra = **270** mm²
 - Zbrojenie podłużne minimalne (każda warstwa): A_s,min = max(0,26·f_ctm/f_yk; 0,0013)·b·d = **293** mm² *((9.1N))*
 - *Ścinanie*
 - Współczynnik skali: k = 1 + √(200/d) ≤ 2,0 = 1 + √(200/434) = **1,679**
@@ -12560,7 +12555,7 @@ pogrubienie (żebro) płyty pod ścianą S0-11. Żebro w MES płyty (poz. PF1): 
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·434 = **391** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 500·391·0,540·17,86/(2,00 + 0,500)·10⁻³ = **753,30** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 100,5·391·434,8·2,00/(211,37·10³) = **162** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 100,5·391·434,8·2,00/(210,70·10³) = **162** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·434 = **326** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 100,5/(0,00080·500) = **251** mm *((9.5N))*
 - Przyjęto strzemiona: φ8 2-cięte co s = **160** mm
@@ -12571,10 +12566,10 @@ pogrubienie (żebro) płyty pod ścianą S0-11. Żebro w MES płyty (poz. PF1): 
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Zbrojenie dolne żebra | A_s,req = 1853 mm² | A_s,prov = 1923 mm² | 96% | spełniony | 6.1, 9.2.1.1 |
+| Zbrojenie dolne żebra | A_s,req = 1850 mm² | A_s,prov = 1923 mm² | 96% | spełniony | 6.1, 9.2.1.1 |
 | Zbrojenie górne żebra | A_s,req = 293 mm² | A_s,prov = 339 mm² | 86% | spełniony | 6.1, 9.2.1.1 |
-| Nośność krzyżulców betonowych | V_Ed = 211,37 kN | V_Rd,max = 753,30 kN | 28% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 211,37 kN | V_Rd,s = 213,41 kN | 99% | spełniony | (6.8) |
+| Nośność krzyżulców betonowych | V_Ed = 210,70 kN | V_Rd,max = 753,30 kN | 28% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 210,70 kN | V_Rd,s = 213,41 kN | 99% | spełniony | (6.8) |
 | Docisk do podłoża pod żebrem | p_d,max = 119,7 kPa | q_Rd = 318,8 kPa | 38% | spełniony | PN-EN 1997-1 6.5.2 |
 
 #### Wnioski
@@ -12583,7 +12578,7 @@ pogrubienie (żebro) płyty pod ścianą S0-11. Żebro w MES płyty (poz. PF1): 
 
 ### Poz. 10.15 — Żebro płyty fundamentowej ZF13 (b = 0,50 m, h = 0,50 m, L = 3,62 m)
 
-Element modelu: `ZF13` · maks. wykorzystanie nośności η = 99% · wszystkie warunki spełnione
+Element modelu: `ZF13` · maks. wykorzystanie nośności η = 98% · wszystkie warunki spełnione
 
 #### Opis i schemat statyczny
 
@@ -12594,9 +12589,9 @@ pogrubienie (żebro) płyty pod ścianą S0-12. Żebro w MES płyty (poz. PF1): 
 ##### ZF13 — MES płyty fundamentowej
 
 - Pasmo żebra w MES: b × h = **50 × 50 cm, L = 3,62 m**
-- Moment pasma żebra (Σ m·szer., obwiednia ULS): M_Ed,dół; M_Ed,góra = **230,4; −29,4 kNm**
-- Wymagane zbrojenie dolne (MES: maks. A_s,req × b): A_s,req,dół = **1516** mm²
-- Wymagane zbrojenie górne (MES: maks. A_s,req × b): A_s,req,góra = **179** mm²
+- Moment pasma żebra (Σ m·szer., obwiednia ULS): M_Ed,dół; M_Ed,góra = **229,1; −29,5 kNm**
+- Wymagane zbrojenie dolne (MES: maks. A_s,req × b): A_s,req,dół = **1511** mm²
+- Wymagane zbrojenie górne (MES: maks. A_s,req × b): A_s,req,góra = **180** mm²
 - Zbrojenie podłużne minimalne (każda warstwa): A_s,min = max(0,26·f_ctm/f_yk; 0,0013)·b·d = **293** mm² *((9.1N))*
 - *Ścinanie*
 - Współczynnik skali: k = 1 + √(200/d) ≤ 2,0 = 1 + √(200/434) = **1,679**
@@ -12606,7 +12601,7 @@ pogrubienie (żebro) płyty pod ścianą S0-12. Żebro w MES płyty (poz. PF1): 
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·434 = **391** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 500·391·0,540·17,86/(2,00 + 0,500)·10⁻³ = **753,30** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 100,5·391·434,8·2,00/(197,89·10³) = **173** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 100,5·391·434,8·2,00/(197,54·10³) = **173** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·434 = **326** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 100,5/(0,00080·500) = **251** mm *((9.5N))*
 - Przyjęto strzemiona: φ8 2-cięte co s = **170** mm
@@ -12617,10 +12612,10 @@ pogrubienie (żebro) płyty pod ścianą S0-12. Żebro w MES płyty (poz. PF1): 
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Zbrojenie dolne żebra | A_s,req = 1516 mm² | A_s,prov = 1583 mm² | 96% | spełniony | 6.1, 9.2.1.1 |
+| Zbrojenie dolne żebra | A_s,req = 1511 mm² | A_s,prov = 1583 mm² | 95% | spełniony | 6.1, 9.2.1.1 |
 | Zbrojenie górne żebra | A_s,req = 293 mm² | A_s,prov = 339 mm² | 86% | spełniony | 6.1, 9.2.1.1 |
-| Nośność krzyżulców betonowych | V_Ed = 197,89 kN | V_Rd,max = 753,30 kN | 26% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 197,89 kN | V_Rd,s = 200,86 kN | 99% | spełniony | (6.8) |
+| Nośność krzyżulców betonowych | V_Ed = 197,54 kN | V_Rd,max = 753,30 kN | 26% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 197,54 kN | V_Rd,s = 200,86 kN | 98% | spełniony | (6.8) |
 | Docisk do podłoża pod żebrem | p_d,max = 126,1 kPa | q_Rd = 318,8 kPa | 40% | spełniony | PN-EN 1997-1 6.5.2 |
 
 #### Wnioski
@@ -12629,7 +12624,7 @@ pogrubienie (żebro) płyty pod ścianą S0-12. Żebro w MES płyty (poz. PF1): 
 
 ### Poz. 10.16 — Żebro płyty fundamentowej ZF14 (b = 0,50 m, h = 0,50 m, L = 3,62 m)
 
-Element modelu: `ZF14` · maks. wykorzystanie nośności η = 99% · wszystkie warunki spełnione
+Element modelu: `ZF14` · maks. wykorzystanie nośności η = 98% · wszystkie warunki spełnione
 
 #### Opis i schemat statyczny
 
@@ -12640,9 +12635,9 @@ pogrubienie (żebro) płyty pod ścianą S0-13. Żebro w MES płyty (poz. PF1): 
 ##### ZF14 — MES płyty fundamentowej
 
 - Pasmo żebra w MES: b × h = **50 × 50 cm, L = 3,62 m**
-- Moment pasma żebra (Σ m·szer., obwiednia ULS): M_Ed,dół; M_Ed,góra = **240,7; −49,2 kNm**
-- Wymagane zbrojenie dolne (MES: maks. A_s,req × b): A_s,req,dół = **2398** mm²
-- Wymagane zbrojenie górne (MES: maks. A_s,req × b): A_s,req,góra = **417** mm²
+- Moment pasma żebra (Σ m·szer., obwiednia ULS): M_Ed,dół; M_Ed,góra = **239,7; −49,2 kNm**
+- Wymagane zbrojenie dolne (MES: maks. A_s,req × b): A_s,req,dół = **2365** mm²
+- Wymagane zbrojenie górne (MES: maks. A_s,req × b): A_s,req,góra = **418** mm²
 - Zbrojenie podłużne minimalne (każda warstwa): A_s,min = max(0,26·f_ctm/f_yk; 0,0013)·b·d = **293** mm² *((9.1N))*
 - *Ścinanie*
 - Współczynnik skali: k = 1 + √(200/d) ≤ 2,0 = 1 + √(200/434) = **1,679**
@@ -12652,7 +12647,7 @@ pogrubienie (żebro) płyty pod ścianą S0-13. Żebro w MES płyty (poz. PF1): 
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·434 = **391** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 500·391·0,540·17,86/(2,00 + 0,500)·10⁻³ = **753,30** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 100,5·391·434,8·2,00/(210,76·10³) = **162** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 100,5·391·434,8·2,00/(210,14·10³) = **162** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·434 = **326** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 100,5/(0,00080·500) = **251** mm *((9.5N))*
 - Przyjęto strzemiona: φ8 2-cięte co s = **160** mm
@@ -12663,10 +12658,10 @@ pogrubienie (żebro) płyty pod ścianą S0-13. Żebro w MES płyty (poz. PF1): 
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Zbrojenie dolne żebra | A_s,req = 2398 mm² | A_s,prov = 2413 mm² | 99% | spełniony | 6.1, 9.2.1.1 |
-| Zbrojenie górne żebra | A_s,req = 417 mm² | A_s,prov = 603 mm² | 69% | spełniony | 6.1, 9.2.1.1 |
-| Nośność krzyżulców betonowych | V_Ed = 210,76 kN | V_Rd,max = 753,30 kN | 28% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 210,76 kN | V_Rd,s = 213,41 kN | 99% | spełniony | (6.8) |
+| Zbrojenie dolne żebra | A_s,req = 2365 mm² | A_s,prov = 2413 mm² | 98% | spełniony | 6.1, 9.2.1.1 |
+| Zbrojenie górne żebra | A_s,req = 418 mm² | A_s,prov = 603 mm² | 69% | spełniony | 6.1, 9.2.1.1 |
+| Nośność krzyżulców betonowych | V_Ed = 210,14 kN | V_Rd,max = 753,30 kN | 28% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 210,14 kN | V_Rd,s = 213,41 kN | 98% | spełniony | (6.8) |
 | Docisk do podłoża pod żebrem | p_d,max = 120,7 kPa | q_Rd = 318,8 kPa | 38% | spełniony | PN-EN 1997-1 6.5.2 |
 
 #### Wnioski
@@ -12675,7 +12670,7 @@ pogrubienie (żebro) płyty pod ścianą S0-13. Żebro w MES płyty (poz. PF1): 
 
 ### Poz. 10.17 — Żebro płyty fundamentowej ZF15 (b = 0,50 m, h = 0,50 m, L = 2,88 m)
 
-Element modelu: `ZF15` · maks. wykorzystanie nośności η = 100% · wszystkie warunki spełnione
+Element modelu: `ZF15` · maks. wykorzystanie nośności η = 93% · wszystkie warunki spełnione
 
 #### Opis i schemat statyczny
 
@@ -12686,9 +12681,9 @@ pogrubienie (żebro) płyty pod ścianą S0-15. Żebro w MES płyty (poz. PF1): 
 ##### ZF15 — MES płyty fundamentowej
 
 - Pasmo żebra w MES: b × h = **50 × 50 cm, L = 2,88 m**
-- Moment pasma żebra (Σ m·szer., obwiednia ULS): M_Ed,dół; M_Ed,góra = **0,0; −160,7 kNm**
-- Wymagane zbrojenie dolne (MES: maks. A_s,req × b): A_s,req,dół = **221** mm²
-- Wymagane zbrojenie górne (MES: maks. A_s,req × b): A_s,req,góra = **921** mm²
+- Moment pasma żebra (Σ m·szer., obwiednia ULS): M_Ed,dół; M_Ed,góra = **0,0; −161,3 kNm**
+- Wymagane zbrojenie dolne (MES: maks. A_s,req × b): A_s,req,dół = **225** mm²
+- Wymagane zbrojenie górne (MES: maks. A_s,req × b): A_s,req,góra = **924** mm²
 - Zbrojenie podłużne minimalne (każda warstwa): A_s,min = max(0,26·f_ctm/f_yk; 0,0013)·b·d = **293** mm² *((9.1N))*
 - *Ścinanie*
 - Współczynnik skali: k = 1 + √(200/d) ≤ 2,0 = 1 + √(200/434) = **1,679**
@@ -12698,30 +12693,30 @@ pogrubienie (żebro) płyty pod ścianą S0-15. Żebro w MES płyty (poz. PF1): 
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·434 = **391** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 500·391·0,540·17,86/(2,00 + 0,500)·10⁻³ = **753,30** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 100,5·391·434,8·2,00/(243,68·10³) = **140** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 100,5·391·434,8·2,00/(245,34·10³) = **139** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·434 = **326** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 100,5/(0,00080·500) = **251** mm *((9.5N))*
-- Przyjęto strzemiona: φ8 2-cięte co s = **140** mm
-- Nośność zbrojenia na ścinanie: V_Rd,s = A_sw/s·z·f_ywd·cot θ = 100,5/140·391·434,8·2,00·10⁻³ = **243,90** kN
-- Maks. docisk pod żebrem (MES): p_d,max = **92,4** kPa
+- Przyjęto strzemiona: φ8 2-cięte co s = **130** mm
+- Nośność zbrojenia na ścinanie: V_Rd,s = A_sw/s·z·f_ywd·cot θ = 100,5/130·391·434,8·2,00·10⁻³ = **262,66** kN
+- Maks. docisk pod żebrem (MES): p_d,max = **92,0** kPa
 - Zbrojenie podłużne: A_s,min (warstwa) = **293** mm²
-- Przyjęto zbrojenie podłużne: **12φ12 (dołem 3φ12, górą 9φ12), strzemiona φ8 co 14 cm**
+- Przyjęto zbrojenie podłużne: **12φ12 (dołem 3φ12, górą 9φ12), strzemiona φ8 co 13 cm**
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
 | Zbrojenie dolne żebra | A_s,req = 293 mm² | A_s,prov = 339 mm² | 86% | spełniony | 6.1, 9.2.1.1 |
-| Zbrojenie górne żebra | A_s,req = 921 mm² | A_s,prov = 1018 mm² | 90% | spełniony | 6.1, 9.2.1.1 |
-| Nośność krzyżulców betonowych | V_Ed = 243,68 kN | V_Rd,max = 753,30 kN | 32% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 243,68 kN | V_Rd,s = 243,90 kN | 100% | spełniony | (6.8) |
-| Docisk do podłoża pod żebrem | p_d,max = 92,4 kPa | q_Rd = 318,8 kPa | 29% | spełniony | PN-EN 1997-1 6.5.2 |
+| Zbrojenie górne żebra | A_s,req = 924 mm² | A_s,prov = 1018 mm² | 91% | spełniony | 6.1, 9.2.1.1 |
+| Nośność krzyżulców betonowych | V_Ed = 245,34 kN | V_Rd,max = 753,30 kN | 33% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 245,34 kN | V_Rd,s = 262,66 kN | 93% | spełniony | (6.8) |
+| Docisk do podłoża pod żebrem | p_d,max = 92,0 kPa | q_Rd = 318,8 kPa | 29% | spełniony | PN-EN 1997-1 6.5.2 |
 
 #### Wnioski
 
-**Przyjęto:** Żebro 50×50 cm, C25/30; 12φ12 (dołem 3φ12, górą 9φ12), strzemiona φ8 co 14 cm.  
+**Przyjęto:** Żebro 50×50 cm, C25/30; 12φ12 (dołem 3φ12, górą 9φ12), strzemiona φ8 co 13 cm.  
 
 ### Poz. 10.18 — Żebro płyty fundamentowej ZF16 (b = 0,50 m, h = 0,55 m, L = 5,88 m)
 
-Element modelu: `ZF16` · maks. wykorzystanie nośności η = 96% · wszystkie warunki spełnione
+Element modelu: `ZF16` · maks. wykorzystanie nośności η = 95% · wszystkie warunki spełnione
 
 #### Opis i schemat statyczny
 
@@ -12732,9 +12727,9 @@ pogrubienie (żebro) płyty pod ścianą S0-16 — uskok płyty dom/garaż. Żeb
 ##### ZF16 — MES płyty fundamentowej
 
 - Pasmo żebra w MES: b × h = **50 × 55 cm, L = 5,88 m**
-- Moment pasma żebra (Σ m·szer., obwiednia ULS): M_Ed,dół; M_Ed,góra = **82,0; −114,5 kNm**
-- Wymagane zbrojenie dolne (MES: maks. A_s,req × b): A_s,req,dół = **617** mm²
-- Wymagane zbrojenie górne (MES: maks. A_s,req × b): A_s,req,góra = **866** mm²
+- Moment pasma żebra (Σ m·szer., obwiednia ULS): M_Ed,dół; M_Ed,góra = **82,0; −114,1 kNm**
+- Wymagane zbrojenie dolne (MES: maks. A_s,req × b): A_s,req,dół = **609** mm²
+- Wymagane zbrojenie górne (MES: maks. A_s,req × b): A_s,req,góra = **863** mm²
 - Zbrojenie podłużne minimalne (każda warstwa): A_s,min = max(0,26·f_ctm/f_yk; 0,0013)·b·d = **327** mm² *((9.1N))*
 - *Ścinanie*
 - Współczynnik skali: k = 1 + √(200/d) ≤ 2,0 = 1 + √(200/484) = **1,643**
@@ -12744,7 +12739,7 @@ pogrubienie (żebro) płyty pod ścianą S0-16 — uskok płyty dom/garaż. Żeb
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·484 = **436** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 500·436·0,540·17,86/(2,00 + 0,500)·10⁻³ = **840,09** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 100,5·436·434,8·2,00/(121,66·10³) = **313** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 100,5·436·434,8·2,00/(122,31·10³) = **311** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·484 = **363** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 100,5/(0,00080·500) = **251** mm *((9.5N))*
 - Przyjęto strzemiona: φ8 2-cięte co s = **250** mm
@@ -12755,10 +12750,10 @@ pogrubienie (żebro) płyty pod ścianą S0-16 — uskok płyty dom/garaż. Żeb
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Zbrojenie dolne żebra | A_s,req = 617 mm² | A_s,prov = 679 mm² | 91% | spełniony | 6.1, 9.2.1.1 |
-| Zbrojenie górne żebra | A_s,req = 866 mm² | A_s,prov = 905 mm² | 96% | spełniony | 6.1, 9.2.1.1 |
-| Nośność krzyżulców betonowych | V_Ed = 121,66 kN | V_Rd,max = 840,09 kN | 14% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 121,66 kN | V_Rd,s = 152,32 kN | 80% | spełniony | (6.8) |
+| Zbrojenie dolne żebra | A_s,req = 609 mm² | A_s,prov = 679 mm² | 90% | spełniony | 6.1, 9.2.1.1 |
+| Zbrojenie górne żebra | A_s,req = 863 mm² | A_s,prov = 905 mm² | 95% | spełniony | 6.1, 9.2.1.1 |
+| Nośność krzyżulców betonowych | V_Ed = 122,31 kN | V_Rd,max = 840,09 kN | 15% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 122,31 kN | V_Rd,s = 152,32 kN | 80% | spełniony | (6.8) |
 | Docisk do podłoża pod żebrem | p_d,max = 70,7 kPa | q_Rd = 318,8 kPa | 22% | spełniony | PN-EN 1997-1 6.5.2 |
 
 #### Wnioski
@@ -12778,8 +12773,8 @@ pogrubienie (żebro) płyty pod ścianą S0-17 — uskok płyty dom/garaż. Żeb
 ##### ZF17 — MES płyty fundamentowej
 
 - Pasmo żebra w MES: b × h = **50 × 55 cm, L = 6,38 m**
-- Moment pasma żebra (Σ m·szer., obwiednia ULS): M_Ed,dół; M_Ed,góra = **27,8; −104,5 kNm**
-- Wymagane zbrojenie dolne (MES: maks. A_s,req × b): A_s,req,dół = **379** mm²
+- Moment pasma żebra (Σ m·szer., obwiednia ULS): M_Ed,dół; M_Ed,góra = **27,9; −104,6 kNm**
+- Wymagane zbrojenie dolne (MES: maks. A_s,req × b): A_s,req,dół = **377** mm²
 - Wymagane zbrojenie górne (MES: maks. A_s,req × b): A_s,req,góra = **576** mm²
 - Zbrojenie podłużne minimalne (każda warstwa): A_s,min = max(0,26·f_ctm/f_yk; 0,0013)·b·d = **327** mm² *((9.1N))*
 - *Ścinanie*
@@ -12790,22 +12785,22 @@ pogrubienie (żebro) płyty pod ścianą S0-17 — uskok płyty dom/garaż. Żeb
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·484 = **436** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 500·436·0,540·17,86/(2,00 + 0,500)·10⁻³ = **840,09** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 100,5·436·434,8·2,00/(82,69·10³) = **461** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 100,5·436·434,8·2,00/(82,64·10³) = **461** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·484 = **363** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 100,5/(0,00080·500) = **251** mm *((9.5N))*
 - Przyjęto strzemiona: φ8 2-cięte co s = **250** mm
 - Nośność zbrojenia na ścinanie: V_Rd,s = A_sw/s·z·f_ywd·cot θ = 100,5/250·436·434,8·2,00·10⁻³ = **152,32** kN
-- Maks. docisk pod żebrem (MES): p_d,max = **66,2** kPa
+- Maks. docisk pod żebrem (MES): p_d,max = **66,1** kPa
 - Zbrojenie podłużne: A_s,min (warstwa) = **327** mm²
 - Przyjęto zbrojenie podłużne: **10φ12 (dołem 4φ12, górą 6φ12), strzemiona φ8 co 25 cm**
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Zbrojenie dolne żebra | A_s,req = 379 mm² | A_s,prov = 452 mm² | 84% | spełniony | 6.1, 9.2.1.1 |
+| Zbrojenie dolne żebra | A_s,req = 377 mm² | A_s,prov = 452 mm² | 83% | spełniony | 6.1, 9.2.1.1 |
 | Zbrojenie górne żebra | A_s,req = 576 mm² | A_s,prov = 679 mm² | 85% | spełniony | 6.1, 9.2.1.1 |
-| Nośność krzyżulców betonowych | V_Ed = 82,69 kN | V_Rd,max = 840,09 kN | 10% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 82,69 kN | V_Rd,s = 152,32 kN | 54% | spełniony | (6.8) |
-| Docisk do podłoża pod żebrem | p_d,max = 66,2 kPa | q_Rd = 318,8 kPa | 21% | spełniony | PN-EN 1997-1 6.5.2 |
+| Nośność krzyżulców betonowych | V_Ed = 82,64 kN | V_Rd,max = 840,09 kN | 10% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 82,64 kN | V_Rd,s = 152,32 kN | 54% | spełniony | (6.8) |
+| Docisk do podłoża pod żebrem | p_d,max = 66,1 kPa | q_Rd = 318,8 kPa | 21% | spełniony | PN-EN 1997-1 6.5.2 |
 
 > V_Ed ≤ V_Rd,c = 89,17 kN — zbrojenie poprzeczne minimalne (9.2.2(5)).
 
@@ -12827,7 +12822,7 @@ Element modelu: `ZF18` · maks. wykorzystanie nośności η = 95% · wszystkie w
 
 - Pasmo żebra w MES: b × h = **50 × 70 cm, L = 1,32 m**
 - Moment pasma żebra (Σ m·szer., obwiednia ULS): M_Ed,dół; M_Ed,góra = **0,0; 0,0 kNm**
-- Wymagane zbrojenie dolne (MES: maks. A_s,req × b): A_s,req,dół = **1049** mm²
+- Wymagane zbrojenie dolne (MES: maks. A_s,req × b): A_s,req,dół = **1039** mm²
 - Wymagane zbrojenie górne (MES: maks. A_s,req × b): A_s,req,góra = **0** mm²
 - Zbrojenie podłużne minimalne (każda warstwa): A_s,min = max(0,26·f_ctm/f_yk; 0,0013)·b·d = **429** mm² *((9.1N))*
 - *Ścinanie*
@@ -12849,7 +12844,7 @@ Element modelu: `ZF18` · maks. wykorzystanie nośności η = 95% · wszystkie w
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Zbrojenie dolne żebra | A_s,req = 1049 mm² | A_s,prov = 1131 mm² | 93% | spełniony | 6.1, 9.2.1.1 |
+| Zbrojenie dolne żebra | A_s,req = 1039 mm² | A_s,prov = 1131 mm² | 92% | spełniony | 6.1, 9.2.1.1 |
 | Zbrojenie górne żebra | A_s,req = 429 mm² | A_s,prov = 452 mm² | 95% | spełniony | 6.1, 9.2.1.1 |
 | Nośność krzyżulców betonowych | V_Ed = 0,00 kN | V_Rd,max = 1100,44 kN | 0% | spełniony | (6.9) |
 | Nośność strzemion | V_Ed = 0,00 kN | V_Rd,s = 199,52 kN | 0% | spełniony | (6.8) |
@@ -12874,42 +12869,42 @@ pogrubienie pasmowe płyty w osi 3 pod trzpieniami ŻB B/3 i C/3 (1,80 × 4,00 m
 ##### ZF19 — MES płyty fundamentowej
 
 - Pasmo żebra w MES: b × h = **180 × 70 cm, L = 4,00 m**
-- Moment pasma żebra (Σ m·szer., obwiednia ULS): M_Ed,dół; M_Ed,góra = **706,0; −151,0 kNm**
-- Wymagane zbrojenie dolne (MES: maks. A_s,req × b): A_s,req,dół = **3686** mm²
-- Wymagane zbrojenie górne (MES: maks. A_s,req × b): A_s,req,góra = **2539** mm²
+- Moment pasma żebra (Σ m·szer., obwiednia ULS): M_Ed,dół; M_Ed,góra = **695,2; −160,6 kNm**
+- Wymagane zbrojenie dolne (MES: maks. A_s,req × b): A_s,req,dół = **3689** mm²
+- Wymagane zbrojenie górne (MES: maks. A_s,req × b): A_s,req,góra = **2677** mm²
 - Zbrojenie podłużne minimalne (każda warstwa): A_s,min = max(0,26·f_ctm/f_yk; 0,0013)·b·d = **1543** mm² *((9.1N))*
 - *Ścinanie*
 - Współczynnik skali: k = 1 + √(200/d) ≤ 2,0 = 1 + √(200/634) = **1,562**
-- Stopień zbrojenia podłużnego: ρ_l = A_sl/(b_w·d) ≤ 0,02 = 2601/(1800·634) = **0,00228**
-- Nośność na ścinanie: V_Rd,c = C_Rd,c·k·(100·ρ_l·f_ck)^(1/3)·b_w·d = 0,1286·1,562·(100·0,00228·25)^(1/3)·1800·634·10⁻³ = **409,27** kN *((6.2.a); C_Rd,c = 0,18/γ_c)*
+- Stopień zbrojenia podłużnego: ρ_l = A_sl/(b_w·d) ≤ 0,02 = 2714/(1800·634) = **0,00238**
+- Nośność na ścinanie: V_Rd,c = C_Rd,c·k·(100·ρ_l·f_ck)^(1/3)·b_w·d = 0,1286·1,562·(100·0,00238·25)^(1/3)·1800·634·10⁻³ = **415,12** kN *((6.2.a); C_Rd,c = 0,18/γ_c)*
 - Wartość minimalna: V_Rd,c,min = v_min·b_w·d, v_min = 0,035·k^(3/2)·f_ck^(1/2) = 0,3415·1800·634·10⁻³ = **389,74** kN *((6.2.b), (6.3N))*
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·634 = **571** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 1800·571·0,540·17,86/(2,00 + 0,500)·10⁻³ = **3961,59** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 100,5·571·434,8·2,00/(668,44·10³) = **75** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 100,5·571·434,8·2,00/(668,22·10³) = **75** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·634 = **475** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 100,5/(0,00080·1800) = **70** mm *((9.5N))*
 - Przyjęto strzemiona: φ8 2-cięte co s = **60** mm
 - Nośność zbrojenia na ścinanie: V_Rd,s = A_sw/s·z·f_ywd·cot θ = 100,5/60·571·434,8·2,00·10⁻³ = **831,35** kN
 - Maks. docisk pod żebrem (MES): p_d,max = **126,1** kPa
 - Zbrojenie podłużne: A_s,min (warstwa) = **1543** mm²
-- Przyjęto zbrojenie podłużne: **56φ12 (dołem 33φ12, górą 23φ12), strzemiona φ8 co 6 cm**
+- Przyjęto zbrojenie podłużne: **57φ12 (dołem 33φ12, górą 24φ12), strzemiona φ8 co 6 cm**
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Zbrojenie dolne żebra | A_s,req = 3686 mm² | A_s,prov = 3732 mm² | 99% | spełniony | 6.1, 9.2.1.1 |
-| Zbrojenie górne żebra | A_s,req = 2539 mm² | A_s,prov = 2601 mm² | 98% | spełniony | 6.1, 9.2.1.1 |
-| Nośność krzyżulców betonowych | V_Ed = 668,44 kN | V_Rd,max = 3961,59 kN | 17% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 668,44 kN | V_Rd,s = 831,35 kN | 80% | spełniony | (6.8) |
+| Zbrojenie dolne żebra | A_s,req = 3689 mm² | A_s,prov = 3732 mm² | 99% | spełniony | 6.1, 9.2.1.1 |
+| Zbrojenie górne żebra | A_s,req = 2677 mm² | A_s,prov = 2714 mm² | 99% | spełniony | 6.1, 9.2.1.1 |
+| Nośność krzyżulców betonowych | V_Ed = 668,22 kN | V_Rd,max = 3961,59 kN | 17% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 668,22 kN | V_Rd,s = 831,35 kN | 80% | spełniony | (6.8) |
 | Docisk do podłoża pod żebrem | p_d,max = 126,1 kPa | q_Rd = 318,8 kPa | 40% | spełniony | PN-EN 1997-1 6.5.2 |
 
 #### Wnioski
 
-**Przyjęto:** Żebro 180×70 cm, C25/30; 56φ12 (dołem 33φ12, górą 23φ12), strzemiona φ8 co 6 cm.  
+**Przyjęto:** Żebro 180×70 cm, C25/30; 57φ12 (dołem 33φ12, górą 24φ12), strzemiona φ8 co 6 cm.  
 
 ### Poz. 10.22 — Stopa (pogrubienie płyty) SF1 (1,00 × 1,01 × 0,70 m) pod słupem SL1
 
-Element modelu: `SF1` · maks. wykorzystanie nośności η = 62% · wszystkie warunki spełnione
+Element modelu: `SF1` · maks. wykorzystanie nośności η = 63% · wszystkie warunki spełnione
 
 #### Opis i schemat statyczny
 
@@ -12919,25 +12914,26 @@ Pogrubienie płyty fundamentowej (łącznie h = 0,70 m) w MES płyty — poz. PF
 
 ##### SF1 — MES płyty fundamentowej
 
-- Wymagane zbrojenie rozciągane (MES, maks. w pogrubieniu, dół) × szerokość: A_s,req·B = **355** mm²
+- Wymagane zbrojenie rozciągane (MES, maks. w pogrubieniu, dół) × szerokość: A_s,req·B = **322** mm²
 - Zbrojenie minimalne × szerokość: A_s,min·B = **854** mm² *((9.1N))*
-- Maks. docisk pod pogrubieniem (MES): p_d,max = **196,1** kPa
+- Maks. docisk pod pogrubieniem (MES): p_d,max = **201,3** kPa
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Zbrojenie dolne pogrubienia (MES) | A_s,req = 355 mm²/m | A_s,prov = 855 mm²/m | 42% | spełniony | 6.1 |
-| Docisk do podłoża pod pogrubieniem | p_d,max = 196,1 kPa | q_Rd = 318,8 kPa | 62% | spełniony | PN-EN 1997-1 6.5.2 |
+| Zbrojenie dolne pogrubienia (MES) | A_s,req = 322 mm²/m | A_s,prov = 855 mm²/m | 38% | spełniony | 6.1 |
+| Docisk do podłoża pod pogrubieniem | p_d,max = 201,3 kPa | q_Rd = 318,8 kPa | 63% | spełniony | PN-EN 1997-1 6.5.2 |
 
 ##### Przebicie płyty pod słupem SL1 (6.4.4(2))
 
 - Siła od słupa (obwiednia ULS): V_Ed = **132,3** kN
 - Wysokość użyteczna w strefie słupa: d = h = 0,70 m = **638** mm
 - Położenie słupa względem krawędzi płyty; współczynnik β: β (6.39), rys. 6.21N = słup narożny = **1,50** *(PN-EN 1992-1-1 6.4.3(6) [wartości zalecane])*
-- Obwód miarodajny (min v_Rd/v_Ed dla a ≤ 2d; przycięty krawędzią płyty; bez redukcji odporem): a; u = **1,276 m; 4,707 m**
+- Kombinacja miarodajna: siła słupa i odpór netto w obwodzie (MES, grunt − 1,35·ciężar płyty): V_Ed; ΔV_Ed = **132,3 kN; 27,5 kN** *(6.4.4(2))*
+- Obwód miarodajny (maks. v_Ed/v_Rd dla a ≤ 2d; przycięty krawędzią płyty): a; u = **0,191 m; 1,301 m**
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Przebicie — fundament (6.4.4(2), (6.51)–(6.53)) | v_Ed = 0,066 MPa | v_Rd = 0,343 MPa | 19% | spełniony | PN-EN 1992-1-1 6.4.4 |
+| Przebicie — fundament (6.4.4(2), (6.51)–(6.53)) | v_Ed = 0,189 MPa | v_Rd = 2,286 MPa | 8% | spełniony | PN-EN 1992-1-1 6.4.4 |
 
 #### Wnioski
 
@@ -12945,7 +12941,7 @@ Pogrubienie płyty fundamentowej (łącznie h = 0,70 m) w MES płyty — poz. PF
 
 ### Poz. 10.23 — Stopa (pogrubienie płyty) SF2 (1,00 × 1,01 × 0,70 m) pod słupem SL2
 
-Element modelu: `SF2` · maks. wykorzystanie nośności η = 94% · wszystkie warunki spełnione
+Element modelu: `SF2` · maks. wykorzystanie nośności η = 96% · wszystkie warunki spełnione
 
 #### Opis i schemat statyczny
 
@@ -12955,25 +12951,26 @@ Pogrubienie płyty fundamentowej (łącznie h = 0,70 m) w MES płyty — poz. PF
 
 ##### SF2 — MES płyty fundamentowej
 
-- Wymagane zbrojenie rozciągane (MES, maks. w pogrubieniu, dół) × szerokość: A_s,req·B = **803** mm²
+- Wymagane zbrojenie rozciągane (MES, maks. w pogrubieniu, dół) × szerokość: A_s,req·B = **822** mm²
 - Zbrojenie minimalne × szerokość: A_s,min·B = **854** mm² *((9.1N))*
-- Maks. docisk pod pogrubieniem (MES): p_d,max = **152,5** kPa
+- Maks. docisk pod pogrubieniem (MES): p_d,max = **153,6** kPa
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Zbrojenie dolne pogrubienia (MES) | A_s,req = 803 mm²/m | A_s,prov = 855 mm²/m | 94% | spełniony | 6.1 |
-| Docisk do podłoża pod pogrubieniem | p_d,max = 152,5 kPa | q_Rd = 318,8 kPa | 48% | spełniony | PN-EN 1997-1 6.5.2 |
+| Zbrojenie dolne pogrubienia (MES) | A_s,req = 822 mm²/m | A_s,prov = 855 mm²/m | 96% | spełniony | 6.1 |
+| Docisk do podłoża pod pogrubieniem | p_d,max = 153,6 kPa | q_Rd = 318,8 kPa | 48% | spełniony | PN-EN 1997-1 6.5.2 |
 
 ##### Przebicie płyty pod słupem SL2 (6.4.4(2))
 
 - Siła od słupa (obwiednia ULS): V_Ed = **319,4** kN
 - Wysokość użyteczna w strefie słupa: d = h = 0,70 m = **638** mm
 - Położenie słupa względem krawędzi płyty; współczynnik β: β (6.39), rys. 6.21N = słup narożny = **1,50** *(PN-EN 1992-1-1 6.4.3(6) [wartości zalecane])*
-- Obwód miarodajny (min v_Rd/v_Ed dla a ≤ 2d; przycięty krawędzią płyty; bez redukcji odporem): a; u = **1,276 m; 4,707 m**
+- Kombinacja miarodajna: siła słupa i odpór netto w obwodzie (MES, grunt − 1,35·ciężar płyty): V_Ed; ΔV_Ed = **319,4 kN; 64,9 kN** *(6.4.4(2))*
+- Obwód miarodajny (maks. v_Ed/v_Rd dla a ≤ 2d; przycięty krawędzią płyty): a; u = **0,447 m; 2,102 m**
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Przebicie — fundament (6.4.4(2), (6.51)–(6.53)) | v_Ed = 0,160 MPa | v_Rd = 0,343 MPa | 47% | spełniony | PN-EN 1992-1-1 6.4.4 |
+| Przebicie — fundament (6.4.4(2), (6.51)–(6.53)) | v_Ed = 0,285 MPa | v_Rd = 0,980 MPa | 29% | spełniony | PN-EN 1992-1-1 6.4.4 |
 
 #### Wnioski
 
@@ -12991,33 +12988,34 @@ Pogrubienie płyty fundamentowej (łącznie h = 0,70 m) w MES płyty — poz. PF
 
 ##### SF3 — MES płyty fundamentowej
 
-- Wymagane zbrojenie rozciągane (MES, maks. w pogrubieniu, dół) × szerokość: A_s,req·B = **896** mm²
+- Wymagane zbrojenie rozciągane (MES, maks. w pogrubieniu, dół) × szerokość: A_s,req·B = **858** mm²
 - Zbrojenie minimalne × szerokość: A_s,min·B = **854** mm² *((9.1N))*
-- Maks. docisk pod pogrubieniem (MES): p_d,max = **132,5** kPa
+- Maks. docisk pod pogrubieniem (MES): p_d,max = **131,5** kPa
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Zbrojenie dolne pogrubienia (MES) | A_s,req = 896 mm²/m | A_s,prov = 906 mm²/m | 99% | spełniony | 6.1 |
-| Docisk do podłoża pod pogrubieniem | p_d,max = 132,5 kPa | q_Rd = 318,8 kPa | 42% | spełniony | PN-EN 1997-1 6.5.2 |
+| Zbrojenie dolne pogrubienia (MES) | A_s,req = 858 mm²/m | A_s,prov = 870 mm²/m | 99% | spełniony | 6.1 |
+| Docisk do podłoża pod pogrubieniem | p_d,max = 131,5 kPa | q_Rd = 318,8 kPa | 41% | spełniony | PN-EN 1997-1 6.5.2 |
 
 ##### Przebicie płyty pod słupem SL3 (6.4.4(2))
 
 - Siła od słupa (obwiednia ULS): V_Ed = **410,1** kN
 - Wysokość użyteczna w strefie słupa: d = h = 0,70 m = **638** mm
 - Położenie słupa względem krawędzi płyty; współczynnik β: β (6.39), rys. 6.21N = słup narożny = **1,50** *(PN-EN 1992-1-1 6.4.3(6) [wartości zalecane])*
-- Obwód miarodajny (min v_Rd/v_Ed dla a ≤ 2d; przycięty krawędzią płyty; bez redukcji odporem): a; u = **1,276 m; 4,707 m**
+- Kombinacja miarodajna: siła słupa i odpór netto w obwodzie (MES, grunt − 1,35·ciężar płyty): V_Ed; ΔV_Ed = **410,1 kN; 71,8 kN** *(6.4.4(2))*
+- Obwód miarodajny (maks. v_Ed/v_Rd dla a ≤ 2d; przycięty krawędzią płyty): a; u = **0,510 m; 2,303 m**
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Przebicie — fundament (6.4.4(2), (6.51)–(6.53)) | v_Ed = 0,205 MPa | v_Rd = 0,343 MPa | 60% | spełniony | PN-EN 1992-1-1 6.4.4 |
+| Przebicie — fundament (6.4.4(2), (6.51)–(6.53)) | v_Ed = 0,345 MPa | v_Rd = 0,857 MPa | 40% | spełniony | PN-EN 1992-1-1 6.4.4 |
 
 #### Wnioski
 
-**Przyjęto:** Pogrubienie 100×101×70 cm, C25/30; siatka dołem φ14 co 17 cm w obu kierunkach.  
+**Przyjęto:** Pogrubienie 100×101×70 cm, C25/30; siatka dołem φ12 co 13 cm w obu kierunkach.  
 
 ### Poz. 10.25 — Stopa (pogrubienie płyty) SF4 (1,00 × 1,01 × 0,70 m) pod słupem SL4
 
-Element modelu: `SF4` · maks. wykorzystanie nośności η = 98% · wszystkie warunki spełnione
+Element modelu: `SF4` · maks. wykorzystanie nośności η = 97% · wszystkie warunki spełnione
 
 #### Opis i schemat statyczny
 
@@ -13027,29 +13025,67 @@ Pogrubienie płyty fundamentowej (łącznie h = 0,70 m) w MES płyty — poz. PF
 
 ##### SF4 — MES płyty fundamentowej
 
-- Wymagane zbrojenie rozciągane (MES, maks. w pogrubieniu, dół) × szerokość: A_s,req·B = **1881** mm²
+- Wymagane zbrojenie rozciągane (MES, maks. w pogrubieniu, dół) × szerokość: A_s,req·B = **1859** mm²
 - Zbrojenie minimalne × szerokość: A_s,min·B = **854** mm² *((9.1N))*
-- Maks. docisk pod pogrubieniem (MES): p_d,max = **123,6** kPa
+- Maks. docisk pod pogrubieniem (MES): p_d,max = **122,6** kPa
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Zbrojenie dolne pogrubienia (MES) | A_s,req = 1881 mm²/m | A_s,prov = 1924 mm²/m | 98% | spełniony | 6.1 |
-| Docisk do podłoża pod pogrubieniem | p_d,max = 123,6 kPa | q_Rd = 318,8 kPa | 39% | spełniony | PN-EN 1997-1 6.5.2 |
+| Zbrojenie dolne pogrubienia (MES) | A_s,req = 1859 mm²/m | A_s,prov = 1924 mm²/m | 97% | spełniony | 6.1 |
+| Docisk do podłoża pod pogrubieniem | p_d,max = 122,6 kPa | q_Rd = 318,8 kPa | 38% | spełniony | PN-EN 1997-1 6.5.2 |
 
 ##### Przebicie płyty pod słupem SL4 (6.4.4(2))
 
 - Siła od słupa (obwiednia ULS): V_Ed = **470,4** kN
 - Wysokość użyteczna w strefie słupa: d = h = 0,70 m = **638** mm
 - Położenie słupa względem krawędzi płyty; współczynnik β: β (6.39), rys. 6.21N = słup narożny = **1,50** *(PN-EN 1992-1-1 6.4.3(6) [wartości zalecane])*
-- Obwód miarodajny (min v_Rd/v_Ed dla a ≤ 2d; przycięty krawędzią płyty; bez redukcji odporem): a; u = **1,276 m; 4,707 m**
+- Kombinacja miarodajna: siła słupa i odpór netto w obwodzie (MES, grunt − 1,35·ciężar płyty): V_Ed; ΔV_Ed = **470,4 kN; 55,7 kN** *(6.4.4(2))*
+- Obwód miarodajny (maks. v_Ed/v_Rd dla a ≤ 2d; przycięty krawędzią płyty): a; u = **0,510 m; 2,303 m**
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Przebicie — fundament (6.4.4(2), (6.51)–(6.53)) | v_Ed = 0,235 MPa | v_Rd = 0,343 MPa | 69% | spełniony | PN-EN 1992-1-1 6.4.4 |
+| Przebicie — fundament (6.4.4(2), (6.51)–(6.53)) | v_Ed = 0,423 MPa | v_Rd = 0,857 MPa | 49% | spełniony | PN-EN 1992-1-1 6.4.4 |
 
 #### Wnioski
 
 **Przyjęto:** Pogrubienie 100×101×70 cm, C25/30; siatka dołem φ14 co 8 cm w obu kierunkach.  
+
+### Poz. 10.26 — Stopa (pogrubienie płyty) SF9 (1,60 × 1,61 × 0,90 m) pod słupem SL9
+
+Element modelu: `SF9` · maks. wykorzystanie nośności η = 86% · wszystkie warunki spełnione
+
+#### Opis i schemat statyczny
+
+Pogrubienie płyty fundamentowej (łącznie h = 0,90 m) w MES płyty — poz. PF1; pogrubienie narożne 1,6 × 1,6 m (h = 0,90 m łącznie) pod trzpieniem ŻB A/1 (SL9) — przebicie przy narożu płyty
+
+#### Obliczenia
+
+##### SF9 — MES płyty fundamentowej
+
+- Wymagane zbrojenie rozciągane (MES, maks. w pogrubieniu, dół) × szerokość: A_s,req·B = **1222** mm²
+- Zbrojenie minimalne × szerokość: A_s,min·B = **1800** mm² *((9.1N))*
+- Maks. docisk pod pogrubieniem (MES): p_d,max = **272,8** kPa
+
+| Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
+|---|---|---|---|---|---|
+| Zbrojenie dolne pogrubienia (MES) | A_s,req = 764 mm²/m | A_s,prov = 1131 mm²/m | 68% | spełniony | 6.1 |
+| Docisk do podłoża pod pogrubieniem | p_d,max = 272,8 kPa | q_Rd = 318,8 kPa | 86% | spełniony | PN-EN 1997-1 6.5.2 |
+
+##### Przebicie płyty pod słupem SL9 (6.4.4(2))
+
+- Siła od słupa (obwiednia ULS): V_Ed = **661,8** kN
+- Wysokość użyteczna w strefie słupa: d = h = 0,90 m = **838** mm
+- Położenie słupa względem krawędzi płyty; współczynnik β: β (6.39), rys. 6.21N = słup narożny = **1,50** *(PN-EN 1992-1-1 6.4.3(6) [wartości zalecane])*
+- Kombinacja miarodajna: siła słupa i odpór netto w obwodzie (MES, grunt − 1,35·ciężar płyty): V_Ed; ΔV_Ed = **661,8 kN; 141,0 kN** *(6.4.4(2))*
+- Obwód miarodajny (maks. v_Ed/v_Rd dla a ≤ 2d; przycięty krawędzią płyty): a; u = **0,754 m; 1,784 m**
+
+| Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
+|---|---|---|---|---|---|
+| Przebicie — fundament (6.4.4(2), (6.51)–(6.53)) | v_Ed = 0,522 MPa | v_Rd = 0,727 MPa | 72% | spełniony | PN-EN 1992-1-1 6.4.4 |
+
+#### Wnioski
+
+**Przyjęto:** Pogrubienie 160×161×90 cm, C25/30; siatka dołem φ12 co 10 cm w obu kierunkach.  
 
 ## Zestawienie stali zbrojeniowej (orientacyjne — dane do rysunków zbrojenia, PN-EN ISO 3766)
 
