@@ -4,8 +4,8 @@
   {
    "id": "a82012b772f4804f3",
    "opis": "Build catalog website for LAMELA",
-   "idle_min": 0.6,
-   "bez_narzedzi_min": 0.6,
+   "idle_min": 1.0,
+   "bez_narzedzi_min": 1.0,
    "limity": 0,
    "powody": []
   },
@@ -13,47 +13,47 @@
    "id": "a80c6f35e28eacfc1",
    "opis": "wf_ce63599a-15f:tom:I",
    "idle_min": 0.0,
-   "bez_narzedzi_min": 0.1,
+   "bez_narzedzi_min": 0.0,
    "limity": 0,
    "powody": []
   },
   {
    "id": "a348d2a8e7cf1f6c5",
    "opis": "wf_dad224e5-cd8:silnik",
-   "idle_min": 6.9,
-   "bez_narzedzi_min": 6.9,
+   "idle_min": 7.3,
+   "bez_narzedzi_min": 7.3,
    "limity": 0,
    "powody": []
   },
   {
    "id": "a018fbab99b79a8e9",
    "opis": "wf_10e1a801-dd6:weryfikacja:V1",
-   "idle_min": 0.1,
-   "bez_narzedzi_min": 0.1,
+   "idle_min": 0.5,
+   "bez_narzedzi_min": 0.5,
    "limity": 0,
    "powody": []
   },
   {
    "id": "a82de0c2412aaa264",
    "opis": "wf_10e1a801-dd6:weryfikacja:V2",
-   "idle_min": 0.2,
-   "bez_narzedzi_min": 0.2,
+   "idle_min": 0.0,
+   "bez_narzedzi_min": 0.0,
    "limity": 0,
    "powody": []
   },
   {
    "id": "ad07d221db9b5c09f",
    "opis": "wf_c5f7e298-4b9:PT:BO",
-   "idle_min": 5.1,
-   "bez_narzedzi_min": 5.1,
+   "idle_min": 5.5,
+   "bez_narzedzi_min": 5.5,
    "limity": 0,
    "powody": []
   },
   {
    "id": "a40bbe274c6070548",
    "opis": "wf_c5f7e298-4b9:PT:IS",
-   "idle_min": 0.0,
-   "bez_narzedzi_min": 0.0,
+   "idle_min": 0.1,
+   "bez_narzedzi_min": 0.1,
    "limity": 0,
    "powody": []
   }

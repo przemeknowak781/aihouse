@@ -821,3 +821,20 @@ Raporty: `projekt/08_obliczenia/fizyka_energia_runda2/`, `projekt/08_obliczenia/
 * `docs/SCHEMAT_MODELU.md` — dopisać nowe pola (rdzeń je ignoruje — INFO walidacji): `wpusty/przelewy_awaryjne[].rzedna_pokrycia`,
   `dachy[].rzedna_pokrycia`, `attyka.blok_termoizolacyjny`, `wsporniki_plyty[].odwodnienie/lacznik/spadek`, `wezly[].psi/f_rsi/podwezly/
   blok_u_podstawy`, `energia.pv.pola/z_max`, `instalacje.piony[].rodzaj/kond`, `instalacje.grzejniki` (właściciel schematu).
+
+### 14.3 Weryfikacja niezależna V1 po rundzie 2 (WT/MPZP, geometria) — bez zmian modelu
+
+Pełny raport: `docs/20_koncepcja/weryfikacja_runda2_V1.md`. Wyniki kontroli: walidacja rdzenia 0/0; `audyt_wt.py` — 0 NIEZGODNE,
+4 UWAGI świadome; `test_wskazniki`, `test_pipeline --szybko`, `test_obliczenia_*` zaliczone; PB-AR-01…10 — QA OK.
+H zabudowy 10,27 m, WT §6 9,97 m (`lamela.wskazniki`).
+
+| uwaga V1 → decyzja (do rundy 3) | podstawa |
+|---|---|
+| V1-01 WZ-09a/b/c „ZŁY” (ψ 0,301, izolacja przerwana), brak w §14.2 F → dopisać do pozycji otwartych, blok u podstawy SWG o niższej λ, przeliczyć | brief §9 pkt 1–2; PN-EN ISO 14683/10211 |
+| V1-02 cokół 0,12 m na filarkach przy bramie BR1 → OL przy progu bramy + filarki albo obniżenie; zwolnienie w `drenaz.py` tylko szer. drzwi + 0,15 | brief §9 pkt 4; W-019 |
+| V1-03 przekroje/elewacje: WT §6 „9,79 m” z `views/section.py` → brać z `lamela.wskazniki` (zespół rysunków) | K-3; WT §6 |
+| V1-04 ST2Z do lica ETICS → przyciąć do lica konstrukcji, łącznik PL-2 w strefie izolacji | A2 K-1; R-W6; W-272 |
+| V1-05 wyspa z hokerami na PB-AR-01 → mapowanie `stools` w `views` + `hokery: 0` w modelu | A3 K-1 |
+| V1-06 żebra osiowe poza czołem płyty, warstwa ŻB POD-P0 = PF1 → licować (BO), usunąć dublowanie | K-12; PN-EN ISO 13793 |
+| V1-07 decyzja Inwestora K-13 (kratownica z pnączami, osłona PC) — niewprowadzona → wprowadzić | K-13; W-024 |
+| V1-08…V1-14 drobne (rzut dachu, PBC w audycie, filarki/słupy, obróbki attyk, stare wartości §12/§13, korona DR1, klatki) | raport V1 §7 |

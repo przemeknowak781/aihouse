@@ -122,7 +122,7 @@ def rozdz_ogrzewanie(o: Opis, D: DanePTIS):
     o.tekst(f"""
     **Obciążenie cieplne.** Projektowe obciążenie cieplne budynku Φ_HL = **{L(obc.Phi_HL / 1000, 2)} kW**
     (PN-EN 12831, θ_e = {L(obc.theta_e, 0)} °C, średnia roczna θ_m,e = {L(obc.theta_me, 1)} °C; W-150, W-151),
-    z dodatkiem na c.w.u. Φ_W = {L(og.Phi_W, 2)} kW. Temperatury wewnętrzne wg WT § 134 ust. 2 (model
+    z dodatkiem na c.w.u. Φ_W = {L(og.Phi_W / 1000, 2)} kW. Temperatury wewnętrzne wg WT § 134 ust. 2 (model
     `pomieszczenia[].temp`); garaż nieogrzewany (θ_u = {', '.join(L(v, 1) for v in obc.theta_u.values()) or '—'} °C).
 
     **Źródło ciepła.** Pompa ciepła powietrze–woda typu monoblok na czynniku naturalnym R290 (W-155) —

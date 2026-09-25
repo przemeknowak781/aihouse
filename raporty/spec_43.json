@@ -1,4 +1,5 @@
 {
+ "nr": 43,
  "title": "Tom I: PZT, PAB (32 s.) i ZL złożone roboczo — walidator RPB: 26 OK, 0 braków, 3 „do uzupełnienia” (dane osobowe)",
  "stages": [
   [
@@ -58,6 +59,13 @@
   "PAB: opis wg RPB § 20 ust. 1 pkt 1–14 (+ ust. 2), tabela programu użytkowego z modelu (PU 239 m²), kubatura 1354,45 m³, grupa wysokości N (H = 9,97 m wg WT § 6), ZL IV, CC2/RC2, analiza systemów alternatywnych (pkt 10) z wynikami EP, opinia geotechniczna kat. II jako załącznik (dane fikcyjne oznaczone).",
   "Walidator kompletności (lista TOM_I wg rejestru C.1): PAB 26 OK / 0 BRAK / 3 DO UZUPEŁNIENIA (inwestor, autorzy, nr uprawnień); PZT i ZL — raport osobny; znaczniki: [DO UZUPEŁNIENIA] ×73, [DANE PRZYKŁADOWE] ×56.",
   "Do weryfikacji prawnej (zlecona w przepływie): powołanie art. 15a PB przy kubaturze > 1000 m³ (uprawnienia bez ograniczeń) — sprawdzenie ustępów w ELI.",
-  "W toku: PT-2 BO, PT-3 IS, PT-4 IE; weryfikacje rundy 2 (V1, V2); silnik arkuszy; www."
+  "W toku: PT-2 BO, PT-3 IS, PT-4 IE; weryfikacje rundy 2 (V1, V2); silnik arkuszy; www.",
+  "NADZÓR (09:08): 7 agentów aktywnych, bez zastojów; najdłuższa bezczynność 7 min; zmiany w repo 0 min temu."
+ ],
+ "images": [
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/pab_pow.png",
+   "caption": "PAB — strona 6: parametry i program użytkowy według kondygnacji (liczby z modelu)"
+  }
  ]
 }

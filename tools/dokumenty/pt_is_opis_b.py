@@ -50,14 +50,18 @@ def wk(D: DanePTIS, modul: str, fragment: str, parametr: str | None = None, miej
 def rozdz_obliczenia(o: Opis, D: DanePTIS):
     """5. Założenia, obliczenia i dobór urządzeń (§ 23 pkt 8 lit. a–b) — zestawienie + pełne obliczenia."""
     obc, w, og, pc = D.obc, D.went, D.og, D.og.pc
-    temps = sorted({round(p.theta, 1) for p in obc.pomieszczenia})
+    grp: dict = {}
+    for p in obc.pomieszczenia:
+        grp.setdefault(round(p.theta, 1), []).append(p)
+    temps = "; ".join(f"**{L(t, 0)} °C** — " + (", ".join(f"{p.id} {p.nazwa}" for p in ps) if len(ps) <= 4
+                                                 else f"{len(ps)} pomieszczeń: " + ", ".join(p.id for p in ps))
+                      for t, ps in sorted(grp.items()))
     o.rozdzial("Założenia, obliczenia i dobór urządzeń", podstawa="§ 23 pkt 8 lit. a–b RPB", nowa_strona=True)
     o.rozdzial("Parametry klimatu zewnętrznego i wewnętrznego", poziom=2, podstawa="§ 23 pkt 8 lit. a RPB; W-150, W-161")
     o.tekst(f"""
     Klimat zewnętrzny: θ_e = {L(obc.theta_e, 0)} °C (strefa II, W-150), θ_m,e = {L(obc.theta_me, 1)} °C; dane
     godzinowe TMY Poznań (WMO 12330) do bilansu pompy ciepła i charakterystyki energetycznej. Klimat wewnętrzny
-    (WT § 134 ust. 2): temperatury obliczeniowe pomieszczeń {', '.join(L(t, 0) for t in temps)} °C (pokoje,
-    kuchnia, komunikacja 20 °C; łazienki 24 °C; wartości z modelu). Powietrze zewnętrzne ≥ 20 m³/h na osobę
+    (WT § 134 ust. 2; model `pomieszczenia[].temp`): {temps}. Powietrze zewnętrzne ≥ 20 m³/h na osobę
     ({w.osoby} os.), wywiew wg PN-83/B-03430/Az3 (W-161, W-162). Szczelność budynku n50 = {L(obc.n50, 1)} h⁻¹ [ZAŁ]
     (cel projektowy — potwierdzić próbą ciśnieniową, W-249); sprawność odzysku ciepła η_v = {L(obc.eta_v, 2)}.
     """)
@@ -87,7 +91,7 @@ def rozdz_obliczenia(o: Opis, D: DanePTIS):
             dict(parametr="Centrala: wydajność maks. ≥ strumień okresowy", wartosc=(w.centrala or {}).get("V_max_m3h"),
                  jedn="m³/h", miejsca=0, wymaganie=f"≥ {L(w.V_boost, 0)} m³/h", podstawa="PN-83/B-03430/Az3",
                  spelnia=((w.centrala or {}).get("V_max_m3h") or 0) >= w.V_boost),
-            dict(parametr="SFP nawiewu / wywiewu", wartosc=f"{L(w.SFP_naw, 2)} / {L(w.SFP_wyw, 2)}", jedn="kW/(m³/s)",
+            dict(parametr="SFP nawiewu / wywiewu [kW/(m³/s)]", wartosc=f"{L(w.SFP_naw, 2)} / {L(w.SFP_wyw, 2)}", jedn="",
                  wymaganie=f"≤ {L(w.SFP_lim_naw, 2)} / ≤ {L(w.SFP_lim_wyw, 2)}", podstawa="WT § 154 ust. 10–11 [W-164]",
                  spelnia=w.SFP_naw <= w.SFP_lim_naw and w.SFP_wyw <= w.SFP_lim_wyw),
             wk(D, "woda", "Przepływ obliczeniowy ≤ Q3", miejsca=2),
@@ -246,7 +250,7 @@ def rozdz_urzadzenia(o: Opis, D: DanePTIS):
     og, pc, w, Wd = D.og, D.og.pc, D.went, D.Wd
     c = w.centrala or {}
     Pm15 = dict(zip(pc["T"], pc["P"])).get(-15)
-    wymP = D.obc.Phi_HL / 1000 + og.Phi_W
+    wymP = D.obc.Phi_HL / 1000 + og.Phi_W / 1000
     ret = D.Dz.get("retencja") or {}
     o.rozdzial("Zasadnicze urządzenia — parametry wymagane", podstawa="§ 23 pkt 9 RPB; PB art. 10", nowa_strona=True)
     o.tekst("""
