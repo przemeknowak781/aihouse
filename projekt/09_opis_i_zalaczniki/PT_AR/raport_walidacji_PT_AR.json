@@ -19,7 +19,7 @@
       "podstawa": "RPB § 2b ust. 3",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "4.30 MB (limit 150 MB)"
+      "szczegoly": "4.29 MB (limit 150 MB)"
     },
     {
       "id": "F-03",
@@ -28,7 +28,7 @@
       "podstawa": "RPB § 2b ust. 2",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "16 arkuszy wektorowych"
+      "szczegoly": "11 arkuszy wektorowych"
     },
     {
       "id": "F-05",
@@ -38,6 +38,15 @@
       "status": "OK",
       "obowiazkowa": true,
       "szczegoly": "plik zawiera tylko tom PT"
+    },
+    {
+      "id": "F-06",
+      "element": "*",
+      "opis": "Tom ze stanu modelu = bieżący model (znacznik „stan modelu: SHA-256 …”, wspólny dla tomów PT)",
+      "podstawa": "PB art. 34 ust. 3c, ust. 3d pkt 3 (zgodność PT z PZT/PAB i między tomami)",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "stan modelu SHA-256 42ac7a811873 = bieżący model"
     },
     {
       "id": "C2-01",
@@ -109,7 +118,25 @@
       "podstawa": "RPB § 9 ust. 3",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "16 rysunków w skali nie mniejszej niż 1:100"
+      "szczegoly": "11 rysunków w skali nie mniejszej niż 1:100"
+    },
+    {
+      "id": "C2-09",
+      "element": "PT",
+      "opis": "Dane dotyczące warunków ochrony ludności (w PT — „nie dotyczy” z podstawą)",
+      "podstawa": "RPB § 23 pkt 12 (Dz.U. 2026 poz. 597 § 1 pkt 6)",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C2-10",
+      "element": "*",
+      "opis": "Metryki arkuszy: projektant (dane lub [DO UZUPEŁNIENIA]), sprawdzający (osoba lub „nie dotyczy (art. 20 ust. 3 pkt 2 PB)”)",
+      "podstawa": "RPB § 10 ust. 1 pkt 3; W-305, W-320",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "11 tabliczek z wypełnioną metryką"
     },
     {
       "id": "C2-AR-01",
@@ -154,7 +181,7 @@
       "podstawa": "RPB § 24 pkt 1",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "rysunków: 11 (wymagane ≥ 3)"
+      "szczegoly": "rysunków: 8 (wymagane ≥ 3)"
     },
     {
       "id": "C2-AR-06",
@@ -167,51 +194,53 @@
     }
   ],
   "znaczniki": {
-    "DO UZUPEŁNIENIA": 19,
+    "DO UZUPEŁNIENIA": 85,
     "DOKUMENT ZEWNĘTRZNY": 0,
-    "DANE PRZYKŁADOWE": 61,
+    "DANE PRZYKŁADOWE": 58,
     "ZAŁ": 15,
-    "NZW": 7,
+    "NZW": 8,
     "INT": 1,
     "PROG": 0,
     "lista": {
       "[DO UZUPEŁNIENIA: nazwa pracowni projektowej]": 1,
       "[DO UZUPEŁNIENIA: adres pracowni]": 1,
-      "[DANE PRZYKŁADOWE – FIKCYJNE]": 61,
+      "[DANE PRZYKŁADOWE – FIKCYJNE]": 58,
       "[DO UZUPEŁNIENIA: jednostka ewidencyjna — kod TERYT WWPPGG_R i nazwa]": 1,
       "[DO UZUPEŁNIENIA: kod TERYT jedn. ewid. WWPPGG_R]": 2,
       "[DO UZUPEŁNIENIA: imię i nazwisko lub nazwa inwestora]": 2,
       "[DO UZUPEŁNIENIA: adres inwestora]": 2,
-      "[DO UZUPEŁNIENIA: imię i nazwisko]": 3,
+      "[DO UZUPEŁNIENIA: imię i nazwisko]": 21,
       "[DO UZUPEŁNIENIA: nr uprawnień budowlanych]": 3,
       "[DO UZUPEŁNIENIA: miejscowość]": 1,
       "[DO UZUPEŁNIENIA: nr i data decyzji o pozwoleniu na budowę, organ]": 1,
       "[DO UZUPEŁNIENIA: data złożenia oświadczenia z art. 102a PB]": 1,
       "[DO UZUPEŁNIENIA: potwierdzenie wpisu w e-CRUB albo dołączenie kopii]": 1,
       "[ZAŁ]": 15,
-      "[NZW]": 7,
-      "[INT]": 1
+      "[NZW]": 8,
+      "[INT]": 1,
+      "[DO UZUPEŁNIENIA]": 30,
+      "[DO UZUPEŁNIENIA: specjalność, nr uprawnień]": 18
     }
   },
   "elementy": {
     "PT": {
       "od": 1,
-      "do": 49,
+      "do": 44,
       "strony_opisu": 33,
-      "arkusze": 16
+      "arkusze": 11
     }
   },
-  "rozmiar_mb": 4.295621871948242,
-  "strony": 49,
+  "rozmiar_mb": 4.285263,
+  "strony": 44,
   "podsumowanie": {
     "status": "PRZYKŁAD – NIE DO ZŁOŻENIA",
-    "OK": 15,
+    "OK": 18,
     "BRAK": 0,
     "DO UZUPEŁNIENIA": 2,
     "N/D": 1,
     "OSTRZEŻENIE": 0,
-    "znaczniki_do_uzupelnienia": 19,
+    "znaczniki_do_uzupelnienia": 85,
     "znaczniki_dokument_zewnetrzny": 0,
-    "znaczniki_dane_przykladowe": 61
+    "znaczniki_dane_przykladowe": 58
   }
 }

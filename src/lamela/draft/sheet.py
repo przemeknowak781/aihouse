@@ -74,6 +74,26 @@ def fold_positions(W: float, H: float):
     return _fp(W, H)
 
 
+# Znaki centrujące — ISO 5457:1999 p. 4.3 (PN-EN ISO 5457:2002; tekst sprawdzony na próbce normy, rejestr R4-B04):
+# cztery znaki na końcach osi symetrii arkusza obciętego (tolerancja 1 mm); „kształt znaków dowolny; zaleca się
+# linie ciągłe 0,7 mm od pola siatki odniesień, wchodzące 10 mm za ramkę pola rysunkowego”.
+ZNAK_CENTR_DL = 10.0          # zalecana długość wejścia za ramkę [mm]
+ZNAK_CENTR_GR = 0.7           # grubość linii [mm]
+ZNAK_CENTR_ODSTEP = 1.5       # najmniejszy odstęp treści od znaku [mm]
+ZNAK_CENTR_MIN = 2.0          # krótszego wejścia za ramkę nie rysuje się — znak kończy się na ramce
+
+
+def znaki_centrujace(W: float, H: float, frame, glebokosc: dict | None = None) -> dict:
+    """Odcinki znaków centrujących: {strona: (punkt na krawędzi arkusza, koniec za ramką)}; strony ``g`` (góra),
+    ``d`` (dół), ``l`` (lewo), ``p`` (prawo). ``glebokosc`` — wejście za ramkę [mm] dla stron (domyślnie 10)."""
+    x0, y0, x1, y1 = frame
+    g = {s: ZNAK_CENTR_DL for s in "gdlp"}
+    g.update({k: float(v) for k, v in (glebokosc or {}).items() if k in g})
+    cx, cy = W / 2.0, H / 2.0
+    return {"d": ((cx, 0.0), (cx, y0 + g["d"])), "g": ((cx, H), (cx, y1 - g["g"])),
+            "l": ((0.0, cy), (x0 + g["l"], cy)), "p": ((W, cy), (x1 - g["p"], cy))}
+
+
 # ------------------------------------------------------------------------------------------------ tabliczka
 DO_UZUP = "[DO UZUPEŁNIENIA]"                          # konwencja znaczników — rejestr wymagań, sekcja E.1
 SPRAWDZAJACY_ND = "nie dotyczy (art. 20 ust. 3 pkt 2 PB)"   # W-305: dom jednorodzinny — bez sprawdzającego
@@ -168,6 +188,7 @@ class Sheet(SheetBase):
         self.frame = (binding, margin, W - margin, H - margin)  # x0, y0, x1, y1
         self.tb = title_block
         self.tb_rect = None
+        self.znaki = {}                                          # znaki centrujące {strona: PLine}
         self.meta = {"title": title_block.tytul if title_block else "", "nr": title_block.nr_rysunku if title_block else ""}
         if draw_frame:
             self._draw_frame(fold_marks, centring_marks, grid_reference)
@@ -183,12 +204,11 @@ class Sheet(SheetBase):
         with self.on("R-RAMKA"):
             self.rect(x0, y0, x1, y1, pen=0.7)
             if centring_marks:  # PN-EN ISO 5457 4.3: na osiach symetrii arkusza, 0,7 mm, 10 mm za ramkę
-                cx = W / 2.0
-                cy = H / 2.0
-                self.line((cx, 0.0), (cx, y0 + 10.0), pen=0.7)
-                self.line((cx, H), (cx, y1 - 10.0), pen=0.7)
-                self.line((0.0, cy), (x0 + 10.0, cy), pen=0.7)
-                self.line((W, cy), (x1 - 10.0, cy), pen=0.7)
+                # (``centring_marks`` jako słownik {strona: mm} — krótsze wejście za ramkę; patrz
+                # ``przytnij_znaki_centrujace``)
+                gl = centring_marks if isinstance(centring_marks, dict) else None
+                for s, (p0, p1) in znaki_centrujace(W, H, self.frame, gl).items():
+                    self.znaki[s] = self.line(p0, p1, pen=ZNAK_CENTR_GR)
             if fold_marks:
                 xs, ys = fold_positions(W, H)
                 for x in xs:
@@ -278,6 +298,41 @@ class Sheet(SheetBase):
             return (x1 - TB_WIDTH, y0, x1, y1)
         tx0, ty0, tx1, ty1 = self.tb_rect
         return (tx0, ty1, tx1, y1)
+
+    # ------------------------------------------------------------------ znaki centrujące
+    def przytnij_znaki_centrujace(self, odstep: float = ZNAK_CENTR_ODSTEP, min_gl: float = ZNAK_CENTR_MIN) -> dict:
+        """Skraca wejście znaków centrujących za ramkę tak, aby nie dotykały treści (widoków, bloków, tabliczki):
+        koniec znaku stoi ``odstep`` przed najbliższym elementem w pasie znaku; wejście krótsze niż ``min_gl`` —
+        znak kończy się na ramce (część w marginesie zostaje; ISO 5457 4.3: kształt znaku dowolny, 10 mm za
+        ramką — zalecenie). Wywoływać po narysowaniu całej treści. Zwraca {strona: wejście za ramkę [mm]}."""
+        if not self.znaki:
+            return {}
+        x0, y0, x1, y1 = self.frame
+        a = ZNAK_CENTR_GR / 2.0 + odstep
+        L = ZNAK_CENTR_DL
+        cx, cy = self.width / 2.0, self.height / 2.0
+        pasy = {"g": (cx - a, y1 - L - odstep, cx + a, y1), "d": (cx - a, y0, cx + a, y0 + L + odstep),
+                "l": (x0, cy - a, x0 + L + odstep, cy + a), "p": (x1 - L - odstep, cy - a, x1, cy + a)}
+        pasy = {s: r for s, r in pasy.items() if s in self.znaki}
+        gl = {s: L for s in pasy}
+        for B in _obwiednie_w_pasach(self, pasy):          # (n, 4) obwiednie treści [mm arkusza]
+            for s, r in pasy.items():
+                m = (B[:, 0] < r[2]) & (B[:, 2] > r[0]) & (B[:, 1] < r[3]) & (B[:, 3] > r[1])
+                if not m.any():
+                    continue
+                Bm = B[m]
+                d = {"g": y1 - Bm[:, 3].max(), "d": Bm[:, 1].min() - y0, "l": Bm[:, 0].min() - x0,
+                     "p": x1 - Bm[:, 2].max()}[s] - odstep
+                gl[s] = min(gl[s], float(d))
+        out = {}
+        for s, d in gl.items():
+            d = d if d >= min_gl - 1e-9 else 0.0
+            out[s] = round(d, 1)
+            p = self.znaki[s]
+            end = {"g": (cx, y1 - d), "d": (cx, y0 + d), "l": (x0 + d, cy), "p": (x1 - d, cy)}[s]
+            p.pts = np.array([p.pts[0], end], float)
+        self.znaki_gl = out
+        return out
 
     # ------------------------------------------------------------------ tytuł rzutni
     def view_title(self, vp: Viewport, text: str | None = None, scale: bool = True, where: str = "below",
