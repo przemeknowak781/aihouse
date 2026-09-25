@@ -1,0 +1,195 @@
+# Dane PRZYKŁADOWE wyrobów i założenia eksploatacyjne dla biblioteki obliczeń „Dom LAMELA”.
+# Wszystkie wartości wyrobów są DANYMI PRZYKŁADOWYMI z kart katalogowych typowych wyrobów danej klasy — bez nazw
+# handlowych („lub równoważny”). Przed wydaniem PT należy je zastąpić deklaracjami właściwości użytkowych (DoP)
+# wybranych wyrobów. Status każdej grupy: pole `status`, źródło: pole `zrodlo`.
+# Model budynku może nadpisać każdą wartość (sekcje `stolarka`, `energia`, `instalacje` w budynek.yaml).
+
+stolarka:            # PN-EN ISO 10077-1:2017; U_g wg PN-EN 673, U_f wg PN-EN ISO 10077-2, psi_g — ramka dystansowa
+  okno_PVC_3sz:
+    opis: "Okno PVC, profil 6–7-komorowy ok. 82 mm, pakiet 3-szybowy 4/16/4/16/4 Ar, 2× low-e, ciepła ramka"
+    U_g: 0.50
+    U_f: 0.95
+    psi_g: 0.035
+    b_f: 0.115       # widoczna szerokość ramy + skrzydła na obwodzie [m]
+    b_s: 0.165       # szerokość słupka/ślemienia między kwaterami [m]
+    g_n: 0.50
+    tau_v: 0.70
+    klasa_szczelnosci: 4
+    status: "[DANE PRZYKŁADOWE – FIKCYJNE]"
+    zrodlo: "dane przykładowe z karty katalogowej typowego okna PVC 3-szybowego klasy U_w ≈ 0,8 (lub równoważne)"
+  okno_ALU_3sz:
+    opis: "Okno aluminiowe z przekładką termiczną (system ok. 90 mm), pakiet 3-szybowy 2× low-e, ciepła ramka"
+    U_g: 0.50
+    U_f: 1.10
+    psi_g: 0.040
+    b_f: 0.110
+    b_s: 0.150
+    g_n: 0.50
+    tau_v: 0.70
+    klasa_szczelnosci: 4
+    status: "[DANE PRZYKŁADOWE – FIKCYJNE]"
+    zrodlo: "dane przykładowe z karty katalogowej typowego systemu okien aluminiowych klasy U_w ≈ 0,8 (lub równoważne)"
+  fix_ALU_3sz:
+    opis: "Przeszklenie stałe aluminiowe, pakiet 3-szybowy, ciepła ramka"
+    U_g: 0.50
+    U_f: 1.10
+    psi_g: 0.040
+    b_f: 0.070
+    b_s: 0.090
+    g_n: 0.50
+    tau_v: 0.70
+    klasa_szczelnosci: 4
+    status: "[DANE PRZYKŁADOWE – FIKCYJNE]"
+    zrodlo: "dane przykładowe z karty katalogowej typowego systemu fasadowo-okiennego (lub równoważne)"
+  HS_ALU_3sz:
+    opis: "Drzwi podnoszono-przesuwne HS aluminiowe, pakiet 3-szybowy, próg termiczny"
+    U_g: 0.50
+    U_f: 1.40
+    psi_g: 0.040
+    b_f: 0.130
+    b_s: 0.200
+    g_n: 0.50
+    tau_v: 0.70
+    klasa_szczelnosci: 4
+    status: "[DANE PRZYKŁADOWE – FIKCYJNE]"
+    zrodlo: "dane przykładowe z karty katalogowej typowego systemu HS aluminiowego klasy U_w ≤ 0,9 (lub równoważne)"
+  drzwi_zewn:
+    opis: "Drzwi wejściowe aluminiowe/stalowe ocieplone, próg ≤ 2 cm"
+    U_D: 0.90
+    klasa_szczelnosci: 4
+    status: "[DANE PRZYKŁADOWE – FIKCYJNE]"
+    zrodlo: "dane przykładowe z deklaracji typowych drzwi wejściowych klasy U_D ≤ 1,0 (lub równoważne)"
+  drzwi_dom_garaz:
+    opis: "Drzwi stalowe ocieplone z uszczelką i samozamykaczem (garaż–dom)"
+    U_D: 1.10
+    status: "[DANE PRZYKŁADOWE – FIKCYJNE]"
+    zrodlo: "dane przykładowe z deklaracji typowych drzwi technicznych ocieplonych (lub równoważne)"
+  brama_segmentowa:
+    opis: "Brama segmentowa ocieplona 40 mm (garaż nieogrzewany — bez wymagań U)"
+    U_D: 1.50
+    status: "[DANE PRZYKŁADOWE – FIKCYJNE]"
+    zrodlo: "dane przykładowe z karty typowej bramy segmentowej 40 mm PUR (lub równoważna)"
+
+oslony:              # właściwości optyczne do PN-EN ISO 52022-1 (metoda uproszczona) i f_C wg WT zał. 2 pkt 2.1.3
+  zaluzja_zewn:
+    opis: "Żaluzja zewnętrzna o lamelach nastawnych, jasna (biała)"
+    polozenie: zewn
+    tau_e: 0.10
+    rho_e: 0.55
+    f_C_WT: 0.15     # WT zał. 2 pkt 2.1.3 lp. 1 (białe żaluzje, przepuszczalność 0,1, osłona zewnętrzna)
+    status: "[DANE PRZYKŁADOWE – FIKCYJNE]"
+    zrodlo: "WT zał. 2 pkt 2.1.3 tab. lp. 1; właściwości optyczne — dane przykładowe typowej żaluzji (lub równoważna)"
+  roleta_zewn:
+    opis: "Roleta zewnętrzna aluminiowa, pancerz jasnoszary"
+    polozenie: zewn
+    tau_e: 0.00
+    rho_e: 0.35
+    f_C_WT: null     # brak w tabeli WT — f_C z PN-EN ISO 52022-1
+    status: "[DANE PRZYKŁADOWE – FIKCYJNE]"
+    zrodlo: "dane przykładowe typowej rolety aluminiowej (lub równoważna); g_tot wg PN-EN ISO 52022-1"
+  screen_zip:
+    opis: "Screen tekstylny ZIP, tkanina szara"
+    polozenie: zewn
+    tau_e: 0.07
+    rho_e: 0.25
+    f_C_WT: null
+    status: "[DANE PRZYKŁADOWE – FIKCYJNE]"
+    zrodlo: "dane przykładowe typowej tkaniny screen (openness ≈ 5 %) (lub równoważna); g_tot wg PN-EN ISO 52022-1"
+  brak:
+    opis: "brak osłony"
+    polozenie: brak
+    tau_e: 1.0
+    rho_e: 0.0
+    f_C_WT: 1.0
+    status: ""
+    zrodlo: ""
+
+laczniki:
+  ETICS:
+    opis: "Łącznik talerzykowy ETICS z trzpieniem stalowym, montaż zagłębiony z zaślepką"
+    n_f_m2: 6.0          # średnio na m² (strefa środkowa 4–6, krawędziowa 8 — uśrednienie)
+    chi_p: 0.002         # W/K na łącznik (deklaracja ETA — wartość punktowa)
+    status: "[DANE PRZYKŁADOWE – FIKCYJNE]"
+    zrodlo: "dane przykładowe z ETA typowego łącznika ETICS z trzpieniem stalowym, χ_p = 0,002 W/K (lub równoważny)"
+  wspornik_termiczny:
+    opis: "Łącznik termoizolacyjny płyty wspornikowej (moduł izolacyjny 80–120 mm, pręty nierdzewne)"
+    psi: 0.15            # W/(m·K), płyta 20–22 cm, ściana z ETICS
+    f_Rsi: 0.82
+    status: "[DANE PRZYKŁADOWE – FIKCYJNE]"
+    zrodlo: "dane przykładowe z deklaracji typowego łącznika termoizolacyjnego do płyt wspornikowych (lub równoważny)"
+  lamele_wspornik:
+    opis: "Konsola mocowania rusztu lamel (stal nierdzewna, przekładka termiczna)"
+    chi: 0.010           # W/K na konsolę
+    status: "[DANE PRZYKŁADOWE – FIKCYJNE]"
+    zrodlo: "dane przykładowe z deklaracji typowej konsoli fasadowej z przekładką termiczną (lub równoważna)"
+
+pompa_ciepla:
+  PC_R290_monoblok:
+    opis: "Pompa ciepła powietrze–woda typu monoblok, czynnik R290, sterowanie inwerterowe"
+    P_Am7W35_kW: 8.0      # moc grzewcza A-7/W35 (PN-EN 14511)
+    P_Am15W35_kW: 6.4
+    P_A2W35_kW: 7.0
+    COP_A2W35: 4.6
+    SCOP_35: 4.5          # PN-EN 14825:2022, klimat umiarkowany, 35 °C (wartość obniżona wobec deklaracji ~5,0 z uwagi na klimat PL)
+    SCOP_55: 3.4
+    COP_cwu: 3.2          # PN-EN 16147+A1, profil L, A7
+    eta_s_35: 1.78        # sezonowa efektywność energetyczna (813/2013) — > 125 %
+    L_WA_dB: 55
+    moc_grzalki_kW: 6.0
+    P_pomocnicze_W: 15    # sterownik, grzanie tacy — poza SCOP
+    status: "[DANE PRZYKŁADOWE – FIKCYJNE]"
+    zrodlo: "dane przykładowe z karty katalogowej typowej pompy ciepła powietrze–woda R290 klasy A+++ (35 °C) 7–8 kW (lub równoważna)"
+
+centrala_wentylacyjna:
+  RVU_450:
+    opis: "Centrala nawiewno-wywiewna z przeciwprądowym wymiennikiem płytowym, wentylatory EC, by-pass 100 %"
+    V_nom_m3h: 450
+    V_max_m3h: 500
+    eta_t: 0.85           # PN-EN 13141-7+A1 (sprawność temperaturowa)
+    SFP_Wh_m3: 0.28       # moc właściwa całkowita (oba wentylatory) przy strumieniu projektowym i 100 Pa
+    SEC_klasa: "A"
+    SEC_kWh_m2a: -40
+    filtry: "ISO ePM1 50 % (nawiew), ISO Coarse 60 % (wywiew)"
+    L_WA_dB: 45
+    status: "[DANE PRZYKŁADOWE – FIKCYJNE]"
+    zrodlo: "dane przykładowe z karty katalogowej typowej centrali mieszkaniowej 450 m³/h klasy SEC A (lub równoważna)"
+
+kociol_gazowy:
+  kondensacyjny_20kW:
+    opis: "Gazowy kocioł kondensacyjny dwufunkcyjny z zasobnikiem, modulacja 1:10"
+    eta_H_g: 0.94         # metodologia tab. 2 lp. 16a (55/45 °C, ≤ 50 kW) — wartość domyślna
+    eta_W_g: 0.85         # metodologia tab. 9 lp. 5a
+    P_pomocnicze_W: 40
+    status: "wartość domyślna metodologii (Dz.U. 2015 poz. 376 tab. 2, 9)"
+    zrodlo: "metodologia tab. 2 lp. 16a, tab. 9 lp. 5a"
+
+zasobnik_cwu:
+  Z250:
+    opis: "Zasobnik c.w.u. 250 dm³ z wężownicą pod PC, klasa ErP B"
+    V_dm3: 250
+    strata_W: 55
+    status: "[DANE PRZYKŁADOWE – FIKCYJNE]"
+    zrodlo: "dane przykładowe z karty typowego zasobnika 250 dm³ klasy B (lub równoważny)"
+
+pv:
+  modul_430:
+    P_modul_Wp: 430
+    liczba: 15
+    PR: 0.80              # współczynnik wydajności instalacji (straty temperaturowe, falownik, okablowanie, zabrudzenie)
+    status: "[DANE PRZYKŁADOWE – FIKCYJNE]; PR — [ZAŁ]"
+    zrodlo: "dane przykładowe typowego modułu monokrystalicznego 430 Wp (lub równoważny); PR 0,80 — założenie wg literatury"
+
+emisje:              # metodologia pkt 6.1.2 — wskaźniki KOBiZE na rok sporządzenia
+  energia_elektryczna_kgCO2_MWh: 553
+  energia_elektryczna_zrodlo: "KOBiZE, „Wskaźniki emisyjności CO2 … dla energii elektrycznej … za 2024 rok”, grudzień 2025, tab. 2 (odbiorcy końcowi)"
+  gaz_ziemny_kgCO2_GJ: 56.16
+  gaz_ziemny_WO_MJ_m3: 37.17
+  gaz_ziemny_zrodlo: "KOBiZE, „Wartości opałowe (WO) i wskaźniki emisji CO2 (WE) w roku 2023 …”, grudzień 2025, tab. 15"
+
+ceny:                # [ZAŁ] — do aktualizacji wg taryf zatwierdzonych przez Prezesa URE na rok analizy
+  energia_elektryczna_zl_kWh: 1.05          # brutto, taryfa G11 (energia + dystrybucja, składniki zmienne)
+  energia_elektryczna_oplaty_stale_zl_mies: 45.0
+  gaz_zl_kWh: 0.36                          # brutto, grupa W-3.6 (paliwo + dystrybucja, składniki zmienne)
+  gaz_oplaty_stale_zl_mies: 55.0
+  status: "[ZAŁ]"
+  zrodlo: "założenie projektowe na IX 2026 (rząd wielkości taryf G11/W-3.6 dla Poznania); aktualizacja: bip.ure.gov.pl — taryfy energii elektrycznej i paliw gazowych"
