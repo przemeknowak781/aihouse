@@ -281,6 +281,16 @@ def buduj_bryle(m) -> Bryla:
                 if nb is None:
                     inside_out = outline[kid].buffer(-0.01).contains(Point(probe))
                     sas = "zewn"
+                    if inside_out and w.typ != "sciana_zewn":
+                        # ściana WEWNĘTRZNA, za którą (wewnątrz obrysu) nie ma pomieszczenia — styk z korpusem innej ściany lub
+                        # pustką klatki w strefie ogrzewanej: przegroda adiabatyczna, nie zewnętrzna (runda 2 — fałszywe „U ściany
+                        # zewn.” dla SWG/DZ12/SCZB15 na krótkich odcinkach przy narożach)
+                        ostrz.append(f"{pm.id}: odcinek {dl:.2f} m ściany wewn. {w.id} bez pomieszczenia po drugiej stronie "
+                                     f"(wnętrze obrysu) — przyjęto przegrodę adiabatyczną")
+                        pm.krawedzie.append({"dl": dl, "sasiad": "?", "sciana": w.id, "zewn": False, "a": xa, "b": xb,
+                                             "wirtualna": True})
+                        j = j2 + 1
+                        continue
                     if inside_out:
                         ostrz.append(f"{pm.id}: po drugiej stronie ściany {w.id} brak pomieszczenia w obrysie "
                                      f"kondygnacji — przyjęto powietrze zewnętrzne")

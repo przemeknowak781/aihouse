@@ -29,7 +29,8 @@ wielokrotności A3, chociaż fajnie jak się ładnie będzie składało.”
 Parametry (``wspolne`` lub arkusz, wszystkie opcjonalne): ``format``, ``wysokosci``, ``krok_dlugosci`` (10),
 ``modul_skladania`` (190 — docelowa szerokość pasa harmonijki; 0 — bez kandydatów „ładnych” długości),
 ``kara_niestandard`` (0,03), ``kara_skladania`` ({dobre: 0, poprawne: 0,04, słabe: 0,10} — na kierunek),
-``max_dlugosc`` (2400), ``wolne_obszary`` (true), ``odstep_kieszeni`` (12).
+``max_dlugosc`` (2400), ``wolne_obszary`` (true — bloki także w pustych narożnikach obwiedni widoków),
+``odstep_widok_blok`` (10 mm).
 """
 from __future__ import annotations
 
@@ -54,7 +55,7 @@ PAD_B = 3.0                         # ramka ↔ blok (góra, dół, lewo); z pra
 DOMYSLNE = dict(
     format="auto", wysokosci=[297, 420, 594, 841, 891], krok_dlugosci=10.0, modul_skladania="auto",
     kara_niestandard=0.03, kara_skladania={"dobre": 0.0, "poprawne": 0.04, "słabe": 0.10}, max_dlugosc=2400.0,
-    max_wysokosc=914.0, wolne_obszary=True, odstep_kieszeni=12.0,
+    max_wysokosc=914.0, wolne_obszary=True, odstep_widok_blok=GAP_VB,
 )
 TRYBY = ("auto", "ekonomiczny", "standardowy", "klasyczny")
 
@@ -490,7 +491,7 @@ def _umiesc_blok(wolne: Wolne, b: Blok, szer: float, wys: float):
 
 
 def pakuj(W: float, H: float, widoki: list[Widok], grupa: Grupa, bloki: list[Blok], tb_h: float,
-          przes: tuple = (0.0, 0.0)) -> Rozmieszczenie:
+          przes: tuple = (0.0, 0.0), gap_vb: float = GAP_VB) -> Rozmieszczenie:
     """Rozmieszczenie na arkuszu W × H. ``przes`` — przesunięcie grupy widoków od lewego górnego rogu pola."""
     fx0, fy0, fx1, fy1 = rama(W, H)
     R = Rozmieszczenie(False, W, H, grupa)
@@ -507,7 +508,7 @@ def pakuj(W: float, H: float, widoki: list[Widok], grupa: Grupa, bloki: list[Blo
             R.brak = "widoki nie mieszczą się w ramce"
             return R
         vr = grupa.prostokaty(widoki, ox, oy)
-        tbz = _napompuj(tb, GAP_VB, 0, 0, GAP_VB)
+        tbz = _napompuj(tb, gap_vb, 0, 0, gap_vb)
         if any(_przec(r, tbz) for r in vr):
             R.brak = "widoki kolidują z tabliczką"
             return R
@@ -519,7 +520,7 @@ def pakuj(W: float, H: float, widoki: list[Widok], grupa: Grupa, bloki: list[Blo
     wolne.zajmij(_napompuj(tb, GAP_C, GAP_B, 0, GAP_B))
     if grupa.poz:
         for r in vr:
-            wolne.zajmij(_napompuj(r, GAP_VB, GAP_VB, GAP_VB, GAP_VB))
+            wolne.zajmij(_napompuj(r, gap_vb, gap_vb, gap_vb, gap_vb))
     for b in bloki:
         if b.uwagi is not None:
             if not _pakuj_uwagi(wolne, b, R):
@@ -574,6 +575,7 @@ def _pakuj_uwagi(wolne: Wolne, b: Blok, R: Rozmieszczenie) -> bool:
 def min_szerokosc(H: float, widoki, grupy, bloki, tb_h: float, o: dict):
     """Najmniejsza szerokość arkusza o wysokości H mieszcząca treść: (W, grupa, rozmieszczenie) lub None."""
     Wmax = float(o["max_dlugosc"])
+    gap = float(o.get("odstep_widok_blok", GAP_VB))
     Hf = H - 2 * MARG
     a_b = sum(b.szer * b.wys for b in bloki if b.uwagi is None)
     a_b += sum(b.uwagi.wysokosc(0, len(b.uwagi.lines)) * b.uwagi.w for b in bloki if b.uwagi is not None)
@@ -588,7 +590,7 @@ def min_szerokosc(H: float, widoki, grupy, bloki, tb_h: float, o: dict):
         W = math.ceil(lb / 5.0) * 5.0
         step, prev, r = 20.0, None, None
         while W <= Wmax + 1e-6:
-            r = pakuj(W, H, widoki, g, bloki, tb_h)
+            r = pakuj(W, H, widoki, g, bloki, tb_h, gap_vb=gap)
             if r.ok:
                 break
             prev, W = W, W + step
@@ -597,7 +599,7 @@ def min_szerokosc(H: float, widoki, grupy, bloki, tb_h: float, o: dict):
         if prev is not None:
             Wf = prev + 5.0
             while Wf < W - 1e-6:
-                rf = pakuj(Wf, H, widoki, g, bloki, tb_h)
+                rf = pakuj(Wf, H, widoki, g, bloki, tb_h, gap_vb=gap)
                 if rf.ok:
                     W, r = Wf, rf
                     break
@@ -607,12 +609,12 @@ def min_szerokosc(H: float, widoki, grupy, bloki, tb_h: float, o: dict):
     return best
 
 
-def _pakuj_wysrodkuj(W, H, widoki, g, bloki, tb_h, W_need):
+def _pakuj_wysrodkuj(W, H, widoki, g, bloki, tb_h, W_need, gap_vb: float = GAP_VB):
     """Pakowanie na W × H z grupą widoków wyśrodkowaną w nadwyżce szerokości / wysokości (gdy się da)."""
     extra = max(0.0, W - W_need)
     slack = max(0.0, (H - 2 * MARG) - PAD_V - PAD_B - g.h)
     for p in ((extra / 2.0, slack / 2.0), (extra / 2.0, 0.0), (0.0, slack / 2.0), (0.0, 0.0)):
-        r = pakuj(W, H, widoki, g, bloki, tb_h, p)
+        r = pakuj(W, H, widoki, g, bloki, tb_h, p, gap_vb)
         if r.ok:
             return r
     return None
@@ -670,14 +672,15 @@ def rozmiesc(widoki: list[Widok], bloki: list[Blok], tb_h: float, o: dict | None
     o = opcje(o)
     tryb, jawny = tryb_formatu(o["format"] if fmt is None else fmt)
     grupy = uklady_widokow(widoki)
+    gap = float(o.get("odstep_widok_blok", GAP_VB))
     if tryb == "jawny":
         nm, W, H = jawny
         std = nazwa_standardowa(W, H)
         for g in grupy:
-            r = pakuj(W, H, widoki, g, bloki, tb_h)
+            r = pakuj(W, H, widoki, g, bloki, tb_h, gap_vb=gap)
             if r.ok:
-                need = _dociagnij(W, H, widoki, g, bloki, tb_h)
-                r = _pakuj_wysrodkuj(W, H, widoki, g, bloki, tb_h, need) or r
+                need = _dociagnij(W, H, widoki, g, bloki, tb_h, gap)
+                r = _pakuj_wysrodkuj(W, H, widoki, g, bloki, tb_h, need, gap) or r
                 k, oc = koszt(W, H, std is not None, o, tb_h)
                 return Uklad(std[0] if std else nm, W, H, std[1] if std else None, std is not None, tryb, r, k, oc,
                              [], wypelnienie_ukladu(r))
@@ -704,7 +707,7 @@ def rozmiesc(widoki: list[Widok], bloki: list[Blok], tb_h: float, o: dict | None
                              oc))
         opts.sort(key=lambda t: (round(t[0], 6), not t[4], t[2]))
         for k, nm, L, ori, is_std, oc in opts[:12]:
-            r = _pakuj_wysrodkuj(L, H, widoki, g, bloki, tb_h, W_need)
+            r = _pakuj_wysrodkuj(L, H, widoki, g, bloki, tb_h, W_need, gap)
             if r is not None:
                 cands.append(Uklad(nm, L, H, ori, is_std, tryb, r, k, oc))
                 break
@@ -718,11 +721,11 @@ def rozmiesc(widoki: list[Widok], bloki: list[Blok], tb_h: float, o: dict | None
     return best
 
 
-def _dociagnij(W, H, widoki, g, bloki, tb_h) -> float:
+def _dociagnij(W, H, widoki, g, bloki, tb_h, gap_vb: float = GAP_VB) -> float:
     """Najmniejsza szerokość ≤ W, przy której treść się mieści (do wyśrodkowania w formacie jawnym)."""
     lo = MARG_L + TB_W + MARG
     Wn = W
-    while Wn - 20.0 >= lo and pakuj(Wn - 20.0, H, widoki, g, bloki, tb_h).ok:
+    while Wn - 20.0 >= lo and pakuj(Wn - 20.0, H, widoki, g, bloki, tb_h, gap_vb=gap_vb).ok:
         Wn -= 20.0
     return Wn
 
@@ -741,3 +744,34 @@ def sprawdz_nakladanie(R: Rozmieszczenie, tol: float = 0.5) -> list[str]:
             if _przec(a, b, tol):
                 bledy.append(f"{k1} „{n1}” nakłada się na {k2} „{n2}”")
     return bledy
+
+
+# ================================================================================================ pomiar arkusza
+_METRYKI = None
+
+
+def wypelnienie_pdf(pdf) -> dict | None:
+    """Wypełnienie arkusza zmierzone na PDF tą samą metodą co ``tools/metryki_arkuszy.py`` (``analyze_pdf``:
+    obwiednie bloków treści z PyMuPDF, domknięcie 6 mm, tabliczka jako stały blok). None — narzędzie niedostępne."""
+    global _METRYKI
+    from pathlib import Path
+    if _METRYKI is None:
+        import importlib.util
+        p = Path(__file__).resolve().parents[3] / "tools" / "metryki_arkuszy.py"
+        if not p.exists():
+            _METRYKI = False
+        else:
+            spec = importlib.util.spec_from_file_location("_lamela_metryki_arkuszy", p)
+            mod = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(mod)
+            _METRYKI = mod
+    if not _METRYKI:
+        return None
+    r = _METRYKI.analyze_pdf(Path(pdf))
+    e = r["pusty_prostokat"]
+    return dict(wypelnienie=round(r["wypelnienie"], 3), wypelnienie_rys=round(r["wypelnienie_rys"], 3),
+                wypelnienie_kontur=round(r["wypelnienie_kontur"], 3), pole_arkusza_m2=round(r["pole_arkusza_m2"], 4),
+                pole_ramki_m2=round(r["pole_ramki_m2"], 4),
+                pusty_prostokat_mm=[round(e["w"]), round(e["h"])],
+                przyciety_mm=[round(min(r["przyciety"]["W"], r["W"])), round(min(r["przyciety"]["H"], r["H"]))],
+                metoda="tools/metryki_arkuszy.py (analyze_pdf)")

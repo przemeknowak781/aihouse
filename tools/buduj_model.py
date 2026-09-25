@@ -1175,7 +1175,43 @@ WEZLY = [
      "typ": "przejscie_instalacji", "przegrody": ["SD1", "DZ1", "SZ1", "POD-0"], "liczba": 16},
     {"id": "WZ-16", "nazwa": "Belki wspornikowe B4/B5 i belka B3 w linii izolacji wspornika bryły A (ciągłość wełny pod ST2Z)",
      "typ": "strop_zewn_krawedz", "przegrody": ["SZ1", "SZL", "SUF-ZEW"], "dlugosc": r(2 * (xA - xA2), 2)},
+    # runda 2 (REKOMENDACJE mostków D2): węzły wykryte w geometrii — dach – ściana zewn. wyższej kondygnacji (dotąd liczone jako WZ-10)
+    {"id": "WZ-X1", "nazwa": "Dachy D2/D3 (SD2) – ściana SZ1 bryły A wyższej kondygnacji na krawędzi (nad pomieszczeniami ogrzewanymi)",
+     "typ": "dach_sciana", "przegrody": ["SD2", "SZ1", "POD-1"], "dlugosc": 0.0},
+    {"id": "WZ-X2", "nazwa": "Dach D4 (DZ1) – ściana SZ1 bryły B na krawędzi (pas gospodarczy, pomieszczenia ogrzewane)",
+     "typ": "dach_sciana", "przegrody": ["DZ1", "SZ1", "POD-1"], "dlugosc": 0.0},
 ]
+
+# ---- runda 2 (K-4, K-12, REKOMENDACJE mostków D1): Ψ_oi i f_Rsi z KATALOGU MOSTKÓW BUDYNKU (tools/mostki_budynku.py — symulacja 2D
+#      PN-EN ISO 10211, moduł mostki2d; stan modelu po zmianach rundy 2: łącznik 120 mm/λ_eq 0,08, blok u podstawy attyki D1, XPS pod
+#      posadzką garażu + blok w SWG) i DŁUGOŚCI Z GEOMETRII (każdy odcinek raz — `mostki2d.zestawienie.dlugosci_geometryczne`; pole
+#      `dlugosc` liczyło część odcinków podwójnie). Węzły złożone (podwęzły a/b/c o różnej geometrii) — Ψ średnie ważone długością,
+#      składniki w `podwezly`. Połączenia z garażem (WZ-09): ψ_iu bez b_u (zachowawczo). PRZY ZMIANIE GEOMETRII WĘZŁÓW — PRZELICZYĆ katalog
+#      i zaktualizować tabelę. f_Rsi ≥ 0,72 we wszystkich węzłach (WT zał. 2 pkt 2.2.1, W-248).
+_SYM = {  # id: (Ψ_oi [W/(m·K)], f_Rsi, L_geom [m], podwęzły {id: (Ψ_oi, L)})
+    "WZ-01": (0.086, 0.932, 19.94, None), "WZ-02": (0.171, 0.900, 13.41, None), "WZ-03": (0.195, 0.890, 7.17, None),
+    "WZ-04": (0.128, 0.929, 22.47, None), "WZ-05": (0.134, 0.927, 18.71, None), "WZ-06": (0.205, 0.889, 24.30, None),
+    "WZ-07": (None, 0.851, None, {"WZ-07a": (0.152, 5.72), "WZ-07b": (-0.061, 5.72)}),
+    "WZ-08": (0.100, 0.903, 27.77, None),
+    "WZ-09": (None, 0.836, None, {"WZ-09a": (0.301, 12.25), "WZ-09b": (0.071, 6.38), "WZ-09c": (0.081, 5.88)}),
+    "WZ-10": (0.000, 0.963, 18.20, None), "WZ-11": (0.005, 0.930, 96.28, None), "WZ-11N": (0.008, 0.938, 45.03, None),
+    "WZ-11P": (0.006, 0.911, 29.42, None), "WZ-11T": (0.118, 0.845, 15.67, None), "WZ-12": (0.066, 0.926, 40.05, None),
+    "WZ-16": (None, 0.854, None, {"WZ-16a": (0.194, 1.01), "WZ-16b": (0.123, 1.01)}),
+    "WZ-X1": (0.022, 0.964, 13.79, None), "WZ-X2": (0.022, 0.964, 2.79, None),
+}
+for _e in WEZLY:
+    _s = _SYM.get(_e["id"])
+    if not _s:
+        continue
+    _psi, _f, _L, _pod = _s
+    if _pod:
+        _L = r(sum(L_ for _p, L_ in _pod.values()), 2)
+        _psi = r(sum(p_ * L_ for p_, L_ in _pod.values()) / _L, 3)
+        _e["podwezly"] = {k: {"psi_oi": p_, "dlugosc": L_} for k, (p_, L_) in _pod.items()}
+    _e.update(dlugosc=_L, psi=_psi, f_rsi=_f,
+              zrodlo_psi="katalog mostków budynku — tools/mostki_budynku.py (PN-EN ISO 10211, 2D), Ψ_oi"
+                         + ("; średnia ważona podwęzłów" if _pod else "") + " — runda 2, 25.09.2026",
+              zrodlo_frsi="katalog mostków budynku (PN-EN ISO 10211)" + ("; minimum podwęzłów" if _pod else ""))
 
 CZERPNIA = [11.60, 1.00, 10.00]      # [x, y, z dolnej krawędzi wlotu] — audyt A1 (WT §152 ust. 4, 10)
 WYRZUTNIA = [1.90, 4.00, 10.00]     # [x, y, z wylotu] — 3,00 m od krawędzi konstrukcji D1 nad O2-04, 10,15 m od czerpni

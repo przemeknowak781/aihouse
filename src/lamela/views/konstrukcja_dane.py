@@ -508,6 +508,7 @@ class BelkaZ:
     opis: str = ""
     sciana: str = ""
     oparcie: float = 0.2
+    podp_ids: list = field(default_factory=list)   # podpory wg obliczeń (ściany/słupy/belki — klucze reakcji)
     ids: list = field(default_factory=list)   # nadproża typowe: identyfikatory otworów danego typu
 
     @property
@@ -558,7 +559,8 @@ def _belki(an, D):
                    As_gora=((zt[0], 0.0, zt[1]) if zt else (0.0, 0.0, int(mm.group(3)) * pole_preta(int(mm.group(4))))),
                    strz=(fis[0], fis[1], 2), h_pl=max(h_tot - float(b["h"]), 0.0),
                    M=float(zgs[0].M_Ed) if zgs else 0.0, V=float(sc.V_Ed), eta=pz.wykorzystanie,
-                   niesp=warunki_niespelnione(pz.wyniki), opis=str(b.get("uwagi") or ""))
+                   niesp=warunki_niespelnione(pz.wyniki), opis=str(b.get("uwagi") or ""),
+                   podp_ids=list((pz.dane.get("reakcje") or {}).keys()))
         _gora_015(B)
         D.belki.append(B)
     got = {x.id for x in D.belki}

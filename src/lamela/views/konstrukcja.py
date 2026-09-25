@@ -1533,11 +1533,11 @@ def widok_zbrojenie_belek(ctx: ViewContext, spec: dict, scale: float, opts: dict
     if not bloki:                   # część pusta (mniej elementów niż części w konfiguracji arkuszy)
         vp.text((0.0, 0.0), f"Brak {'belek' if el == 'belki' else 'nadproży'} w tej części zestawu — "
                 "zmniejszyć liczbę części (czesc) w konfiguracji arkuszy.", 2.5, layer=L_OPI)
-    # układ zwarty (pakowanie półkowe, first-fit decreasing): szerokość docelowa ≥ najszerszy blok i ≈ √(1,6·ΣA)
-    # (proporcje arkusza poziomego) — bez pustych kolumn wymuszonych przez najdłuższą belkę
+    # układ zwarty (pakowanie półkowe, first-fit decreasing): szerokość docelowa ≥ najszerszy blok i ≈ √ΣA
+    # (rysunek zbliżony do kwadratu — obok kolumna zestawienia i uwag) — bez pustych kolumn od najdłuższej belki
     gx, gy = 20 * k, 10 * k
     wh = [(bb[2] - bb[0], bb[3] - bb[1]) for *_, bb in bloki]
-    W_doc = max([w_ for w_, _ in wh] + [math.sqrt(1.6 * sum((w_ + gx) * (h_ + gy) for w_, h_ in wh))]) if wh else 0.0
+    W_doc = max([w_ for w_, _ in wh] + [math.sqrt(sum((w_ + gx) * (h_ + gy) for w_, h_ in wh))]) if wh else 0.0
     polki = []                                  # [szerokość zajęta, wysokość, [indeksy]]
     for i in sorted(range(len(bloki)), key=lambda j: -wh[j][0]):
         w_, h_ = wh[i]

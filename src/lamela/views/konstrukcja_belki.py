@@ -104,12 +104,12 @@ def rysuj_belke(vp, placer: Placer, B: KD.BelkaZ, pr: dict, X0: float, Y0: float
     vp.geom(gs, L_OBR, pen="gruba")
     fs = B.strz[0] / 1000.0
     vp.rect(sx + c + fs / 2, y0 + c + fs / 2, sx + B.b - c - fs / 2, y1 - c - fs / 2, L_ZBR, pen=0.35)
-    n_row, rows = warstwy_pretow(B, cm)
     for n_, fi, zz, sg in ((B.dol[0], fd, zd, 1.0), (B.gora[0], fg, zg, -1.0)):
+        n_row, _rows = warstwy_pretow(B, cm, gora=sg < 0)
         left = n_
         r = 0
         while left > 0:
-            nn = min(left, n_row) if sg > 0 else left
+            nn = min(left, n_row)
             xx = np.linspace(sx + cm + fi / 2, sx + B.b - cm - fi / 2, max(nn, 2)) if nn > 1 else [sx + B.b / 2]
             for q in xx:
                 vp.fill(Point(q, zz + sg * r * (fi + max(fi / 1000, 0.021))).buffer(max(fi / 2, 0.45 * k), 16), L_ZBR,
@@ -181,6 +181,8 @@ def podpory_belki(m, B: KD.BelkaZ) -> list:
     for b2 in m.belki():                        # koniec oparty na innej belce (belka krawędziowa na wspornikach)
         if str(b2["id"]) == B.id or not (float(b2["spod"]) - 0.1 <= B.spod <= float(b2["spod"]) + float(b2["h"])):
             continue
+        if B.podp_ids and str(b2["id"]) not in B.podp_ids:
+            continue                            # wg obliczeń b2 nie jest podporą tej belki (np. b2 oparta na niej)
         l2 = LineString([tuple(b2["os"][0]), tuple(b2["os"][1])])
         for p in (Point(*B.p0), Point(*B.p1)):
             s_ = ln.project(p)
@@ -192,12 +194,13 @@ def podpory_belki(m, B: KD.BelkaZ) -> list:
     return sorted(uniq.values())
 
 
-def warstwy_pretow(B: KD.BelkaZ, cm_m: float) -> tuple[int, int]:
-    """(prętów w warstwie, liczba warstw) — odstęp w świetle ≥ max(φ; d_g + 5; 20 mm) (PN-EN 1992-1-1 8.2(2))."""
-    fi = B.dol[1]
+def warstwy_pretow(B: KD.BelkaZ, cm_m: float, gora: bool = False) -> tuple[int, int]:
+    """(prętów w warstwie, liczba warstw) prętów dolnych (``gora`` — górnych) — odstęp w świetle ≥ max(φ; d_g + 5;
+    20 mm) (PN-EN 1992-1-1 8.2(2))."""
+    n, fi = B.gora if gora else B.dol
     smin = max(fi, 16 + 5, 20)
     n_row = max(int((B.b * 1000 - 2 * cm_m * 1000 + smin) // (fi + smin)), 1)
-    return n_row, int(math.ceil(B.dol[0] / n_row))
+    return n_row, int(math.ceil(n / n_row))
 
 
 def kontrola_belki(D, B: KD.BelkaZ, pr: dict, arkusz: str):
@@ -214,8 +217,15 @@ def kontrola_belki(D, B: KD.BelkaZ, pr: dict, arkusz: str):
                                           f"{B.b * 100:.0f} cm (8.2(2))")
     KD.rejestruj(D, B.id, "dołem (przęsło)", B.poz, B.As_dol[0], B.As_dol[1], As_d, f"{B.dol[0]}Ø{B.dol[1]}", jedn="mm²",
                  As_max=0.04 * B.b * B.h * 1e6, arkusz=arkusz, uwagi=uw, wymuszone_ok=miesci and not B.niesp)
+    ng_row, rows_g = warstwy_pretow(B, pr["cm"], gora=True)
+    uw_g = ""
+    if rows_g == 2:
+        uw_g = f"pręty górne w 2 warstwach ({ng_row} + {B.gora[0] - ng_row})"
+    elif rows_g > 2:
+        uw_g = f"{B.gora[0]}Ø{B.gora[1]} nie mieści się w 2 warstwach przy b = {B.b * 100:.0f} cm (8.2(2))"
     KD.rejestruj(D, B.id, "górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1))", B.poz, max(B.As_gora[0], 0.15 * As_d), 0.0,
-                 As_g, f"{B.gora[0]}Ø{B.gora[1]}", jedn="mm²", arkusz=arkusz)
+                 As_g, f"{B.gora[0]}Ø{B.gora[1]}", jedn="mm²", As_max=0.04 * B.b * B.h * 1e6, arkusz=arkusz, uwagi=uw_g,
+                 wymuszone_ok=rows_g <= 2)
 
 
 # ================================================================================================ schody
