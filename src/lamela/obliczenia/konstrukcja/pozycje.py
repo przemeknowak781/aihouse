@@ -1584,6 +1584,190 @@ class AnalizaKonstrukcji:
         pr["gm2"], pr["zest"], pr["h"] = gm2, zest, h
         self._sprawdz_sciane(w, pr)
 
+    # ============================================================================================
+    # 4a. Ściany-tarcze żelbetowe (moduł tarcze)
+    # ============================================================================================
+    def _sciana_zelbetowa(self, w) -> bool:
+        mat = self.m.material(w.warstwa_konstr.mat)
+        if mat is None:
+            return False
+        kr = (mat.kreskowanie or "").upper()
+        return "ZELBET" in kr or "ŻELBET" in kr or klasa_betonu_z_nazwy(mat.nazwa) is not None or "żelbet" in (mat.nazwa or "").lower()
+
+    def _pod_tarcza(self, w) -> tuple[list, list]:
+        """Podpory ściany w od dołu: [(v, s0, s1)] współliniowe ściany nośne poniżej (odcinek wspólny bez otworów ściany v)
+        i [(słup, s)] słupy pod osią ściany."""
+        m = self.m
+        sciany, slupy = [], []
+        for v in m.sciany():
+            if v.typ not in TYPY_NOSNE or v.id == w.id or v.z_do > w.z_od + TOL_Z or v.z_do < w.z_od - 0.6:
+                continue
+            if self._wspolliniowe(w, v) < 0.10:
+                continue
+            a, b = sorted([w.st(v.p1)[0], w.st(v.p2)[0]])
+            a, b = max(a, 0.0), min(b, w.L)
+            cuts = []
+            for o in m.otwory(sciana=v.id):
+                oa, ob = sorted([w.st(v.pt(o.s0, 0.0))[0], w.st(v.pt(o.s1, 0.0))[0]])
+                cuts.append((oa, ob))
+            segs = [[a, b]]
+            for oa, ob in sorted(cuts):
+                nowe = []
+                for s0, s1 in segs:
+                    if ob <= s0 or oa >= s1:
+                        nowe.append([s0, s1])
+                        continue
+                    if oa > s0:
+                        nowe.append([s0, oa])
+                    if ob < s1:
+                        nowe.append([ob, s1])
+                segs = nowe
+            for s0, s1 in segs:
+                if s1 - s0 >= 0.10:
+                    sciany.append((v, s0, s1))
+        for c in m.slupy():
+            if not (w.z_od - 0.6 <= float(c["z_do"]) <= w.z_od + TOL_Z):
+                continue
+            s_, t_ = w.st(c["xy"])
+            if abs(t_) <= w.warstwa_konstr.d / 2 + 0.05 and -0.05 <= s_ <= w.L + 0.05:
+                slupy.append((c, min(max(s_, 0.0), w.L)))
+        return sciany, slupy
+
+    def _czy_tarcza(self, w) -> bool:
+        """Ściana-tarcza: pole ``tarcza: true`` (lub słownik opcji) w modelu albo automatycznie — ściana żelbetowa nośna,
+        pod którą brak ciągłej podpory (pokrycie ścianami poniżej bez otworów i słupami < 95 % długości). ``tarcza: false``
+        wyłącza."""
+        flag = (getattr(w, "raw", {}) or {}).get("tarcza")
+        if flag is False or w.typ not in TYPY_NOSNE:
+            return False
+        sc, sl = self._pod_tarcza(w)
+        if flag:
+            if not self._sciana_zelbetowa(w):
+                self.log(f"{w.id}: pole „tarcza” przy ścianie, której warstwa konstrukcyjna nie jest żelbetowa — obliczono jako "
+                         "tarczę żelbetową (sprawdzić materiał) [ZAŁ].")
+            return True
+        if not self._sciana_zelbetowa(w) or (not sc and not sl):
+            return False
+        pokr = sum(s1 - s0 for _, s0, s1 in sc) + 0.3 * len(sl)
+        return pokr < 0.95 * w.L
+
+    def _tarcza(self, w):
+        """Pozycja tarczowa: dane z modelu (obrys, otwory, podpory — ściany/słupy poniżej, obciążenia — reakcje płyt nad
+        i pod tarczą, ściany wyżej, belki), obliczenia :mod:`.tarcze`, reakcje → profil ``dol`` (ściany poniżej)."""
+        from . import tarcze as tz
+        from .tarcze_mes import ObcLiniowe as TL, ObcProfil, PodporaT
+        m, p = self.m, self.p
+        H = w.z_do - w.z_od
+        L = w.L
+        t = w.warstwa_konstr.d
+        opt = (w.raw.get("tarcza") if isinstance(w.raw.get("tarcza"), dict) else {}) or {}
+        top_s, top_a, dol_pl = Profil(L), Profil(L), Profil(L)
+        for g in self.grupy:
+            if g.fe is None:
+                continue
+            for lista, prof, okno in ((getattr(g, "sciany_pod", []), top_s, 1.0), (getattr(g, "tarcze_pod", []), dol_pl, 0.5)):
+                for sid, ww in lista:
+                    if ww.id != w.id:
+                        continue
+                    ln = next(sp.linia for sp in g.podp_l if sp.id == sid)
+                    for cs, r in g.res.items():
+                        ss, rr = g.fe.reakcje_liniowe(r, sid)
+                        if len(ss):
+                            sw = [w.st(ln.interpolate(s_).coords[0])[0] for s_ in ss]
+                            prof.dodaj_wygladzone(cs, sw, np.nan_to_num(rr), okno)
+        for v in m.sciany():
+            if v.id == w.id or v.id not in self.prof or v.typ not in TYPY_NOSNE:
+                continue
+            if abs(v.z_od - w.z_do) > 0.6 or v.z_od < w.z_do - TOL_Z or self._wspolliniowe(w, v) < 0.3:
+                continue
+            pv = self.prof[v.id]["dol"]
+            for cs in pv.przypadki():
+                top_a.dodaj(cs, [w.st(v.pt(s_, 0.0))[0] for s_ in pv.s], pv.get(cs))
+        obc = []
+        for prof, z, nazwa in ((top_s, H, "płyty nad tarczą"), (top_a, H, "ściany wyżej"), (dol_pl, 0.0, "płyta podwieszona")):
+            for cs in prof.przypadki():
+                q = prof.get(cs)
+                if np.abs(q).max() > 1e-6:
+                    obc.append(ObcProfil(cs, prof.s.copy(), q.copy(), z, opis=f"{nazwa} — reakcje ({cs})"))
+        for cs, P, s_c, szer in self.pending_sciany.get(w.id, []):
+            a_, b_ = max(s_c - szer / 2, 0.0), min(s_c + szer / 2, L)
+            if b_ - a_ < 0.02:
+                a_, b_ = max(L - 0.25, 0.0), L
+            obc.append(TL(cs, a_, b_, H, P / (b_ - a_), opis=f"oparcie belki/schodów (s = {f(s_c)} m)"))
+        # podpory
+        sc, sl = self._pod_tarcza(w)
+        pods = []
+        for k, (v, s0, s1) in enumerate(sc, 1):
+            mur = self._mur_sciany(v)
+            hv = max(v.z_do - v.z_od, 0.5)
+            tv = v.warstwa_konstr.d
+            if mur is not None:
+                E = mur.E * 1000
+            else:
+                mt = m.material(v.warstwa_konstr.mat)
+                kl = klasa_betonu_z_nazwy(mt.nazwa if mt else None) or "C25/30"
+                E = TABL_BETON[kl][6] * 1e6
+            pods.append(PodporaT(f"{v.id}" + (f"#{k}" if sum(1 for q in sc if q[0].id == v.id) > 1 else ""), s0, s1, 0.0,
+                                 k=E * tv / hv, opis=f"ściana {v.id}", sciana=v.id, tylko_docisk=bool(opt.get("tylko_docisk", False))))
+        for c, s_ in sl:
+            pods.append(PodporaT(str(c["id"]), s_, s_, 0.0, opis=f"słup {c['id']}", sciana=str(c["id"])))
+        if not pods:
+            raise BladDanych(f"{w.id}: ściana-tarcza bez podpór poniżej (ściany/słupy) — wymagana analiza indywidualna")
+        # przypadki
+        cases = sorted({o.przypadek for o in obc} | {"G"})
+        prz = {"G": Oddz("G", "G")}
+        for c in cases:
+            if c == "G":
+                continue
+            if c == "SB2":
+                prz[c] = Oddz(c, "A", "S", "dach")
+            else:
+                prz[c] = Oddz(c, "Q", {"QA": "A", "H": "H", "S1": "S", "S2": "S"}.get(c, "A"),
+                              "QA" if c.startswith("QA") else ("dach" if c in ("H", "S1", "S2") else ""))
+        gm2, zest = self._ciezar_sciany(w)
+        g_dod = max(gm2 - p.ciezar_zelbetu * t, 0.0)
+        mt = m.material(w.warstwa_konstr.mat)
+        ex = str(opt.get("ekspozycja") or "XC1")
+        kl = str(opt.get("beton") or klasa_betonu_z_nazwy(mt.nazwa if mt else None) or p.beton_ekspozycja.get(ex, "C25/30"))
+        if not opt.get("beton") and not klasa_betonu_z_nazwy(mt.nazwa if mt else None):
+            self.brak(f"{w.id}: klasa betonu ściany-tarczy nie wynika z modelu — przyjęto {kl} ({ex})")
+        otw = []
+        for o in m.otwory(sciana=w.id):
+            otw.append(tz.OtworT(o.id, max(o.s0, 0.0), min(o.s1, L), max(o.z0 - w.z_od, 0.0), min(o.z1 - w.z_od, H)))
+        u = w.u
+        kier = {(-1, 0): "zachód", (1, 0): "wschód", (0, -1): "południe", (0, 1): "północ"}
+
+        def nazwa_kier(v_):
+            k_ = (int(round(v_[0])), int(round(v_[1])))
+            return kier.get(k_, f"kierunek ({f(v_[0])}; {f(v_[1])})")
+        dane = tz.DaneTarczy(w.id, L, H, t, otwory=otw, podpory=pods, obciazenia=obc, przypadki=prz, beton=kl, ekspozycja=ex,
+                             g_dod=g_dod, fi_podpor=p.mur_fi_inf,
+                             kierunki=(nazwa_kier(-u), nazwa_kier(u)),
+                             opis=f"Ściana {w.id} ({w.kond}) — oś od ({f(w.p1[0])}; {f(w.p1[1])}) do ({f(w.p2[0])}; {f(w.p2[1])}), "
+                                  f"z = {f(w.z_od, 3)}…{f(w.z_do, 3)}.")
+        wt = tz.oblicz_tarcze(dane, p, self.stal, siatka=float(opt.get("siatka", 0.10)))
+        self.tarcze[w.id] = wt
+        pz = tz.pozycja_tarczy(wt, self.rys_dir, ident=w.id, tytul=f"Ściana-tarcza {w.id} ({w.kond})", metoda=False)
+        self.pos_tarcze.append(pz)
+        # reakcje → profil dolny (przekazanie na ściany/słupy poniżej)
+        dol = Profil(L)
+        an = wt.an
+        for c, rr in an.reakcje_przyp.items():
+            for s_ in dane.podpory:
+                v = rr[s_.id]
+                if s_.dl > 1e-9 and len(v["x"]) > 1:
+                    dol.dodaj(c, v["x"], v["r"])
+                elif abs(v["R"]) > 1e-9:
+                    if s_.sciana in self.slupy_N or any(str(c_["id"]) == s_.sciana for c_ in m.slupy()):
+                        d_ = self.slupy_N.setdefault(s_.sciana, {})
+                        d_[c] = d_.get(c, 0.0) + v["R"]
+                    else:
+                        dol.dodaj_skupiona(c, v["R"], s_.s0, 0.25)
+        pr = {"top_s": top_s, "top_a": top_a, "dol": dol, "otw": list(m.otwory(sciana=w.id)), "gm2": gm2, "zest": zest, "h": H,
+              "tarcza": True, "dol_plyta": dol_pl}
+        self.prof[w.id] = pr
+        return wt
+
     def _mur_sciany(self, w) -> Mur | None:
         kl = w.warstwa_konstr
         mat = self.m.material(kl.mat)
@@ -2052,7 +2236,8 @@ class AnalizaKonstrukcji:
         order = [("Dachy i stropodachy", [p_ for p_ in self.pos_plyty if p_.tytul.startswith("Stropodach")]),
                  ("Stropy", [p_ for p_ in self.pos_plyty if p_.tytul.startswith("Strop ")]),
                  ("Płyty wspornikowe", [p_ for p_ in self.pos_plyty if p_.tytul.startswith("Płyta wspornikowa")]),
-                 ("Schody", self.pos_schody), ("Belki i podciągi", self.pos_belki), ("Nadproża", self.pos_nadproza),
+                 ("Schody", self.pos_schody), ("Belki i podciągi", self.pos_belki),
+                 ("Ściany-tarcze żelbetowe", self.pos_tarcze), ("Nadproża", self.pos_nadproza),
                  ("Wieńce", self.pos_wience), ("Słupy", self.pos_slupy), ("Ściany murowe", self.pos_sciany),
                  ("Fundamenty", self.pos_fund)]
         self.pozycje = []

@@ -155,10 +155,41 @@ class ViewOut:
     h_mm: float = 0.0
 
 
+# ------------------------------------------------------------------------------------------------ rejestr typów
+# Dodatkowe typy widoków (PZT, instalacje, konstrukcja, detale) rejestrują się w osobnych modułach pakietu
+# ``lamela.views`` wywołaniem ``register_view`` — bez edycji ``make_view``/``build_sheet``. Funkcja widoku:
+#   fn(ctx: ViewContext, spec: dict, scale: float, opts: dict) -> (Viewport, wynik, tytuł)
+# Wynik może mieć atrybuty (wszystkie opcjonalne): ``notes`` (list[str] — uwagi na arkusz), ``column_blocks``
+# (list[(nazwa, fn(sh, x, y_top, w) -> y_bottom)] — bloki kolumny opisowej, np. legenda symboli instalacji),
+# ``north`` (bool — róża kierunków), ``hatch_mats`` (jak w rzutach), ``rooms`` (tabela pomieszczeń),
+# ``units_note`` (str — zastępuje domyślną uwagę „Wymiary w cm…”, np. dla PZT „wymiary i odległości w m”).
+# ``rodzaj`` — tekst pola „rodzaj rysunku” w tabliczce (np. „plan zagospodarowania”, „rzut instalacji”, „detal”).
+VIEW_TYPES: dict = {}
+VIEW_PLUGINS = ("site", "instalacje", "konstrukcja", "detale")   # moduły lamela.views ładowane przy nieznanym typie
+
+
+def register_view(typ: str, fn, rodzaj: str = "rysunek"):
+    VIEW_TYPES[typ] = dict(fn=fn, rodzaj=rodzaj)
+
+
+def _load_plugins():
+    import importlib
+    for mod in VIEW_PLUGINS:
+        try:
+            importlib.import_module(f"{__package__}.{mod}")
+        except ModuleNotFoundError as ex:
+            if ex.name != f"{__package__}.{mod}":
+                raise
+
+
 def make_view(ctx: ViewContext, spec: dict, scale: float) -> ViewOut:
     typ = spec.get("typ")
     opts = dict(spec.get("opcje") or {})
-    if typ == "rzut":
+    if typ not in ("rzut", "dach", "przekroj", "przekrój", "elewacja") and typ not in VIEW_TYPES:
+        _load_plugins()
+    if typ in VIEW_TYPES:
+        vp, res, title = VIEW_TYPES[typ]["fn"](ctx, spec, scale, opts)
+    elif typ == "rzut":
         kid = spec["kond"]
         title = spec.get("tytul_widoku") or spec.get("tytul") or storey_title(ctx.model, kid)
         vp = Viewport(scale, title)
@@ -182,7 +213,7 @@ def make_view(ctx: ViewContext, spec: dict, scale: float) -> ViewOut:
         vp = Viewport(scale, title)
         res = draw_elevation(vp, ctx, side, opts)
     else:
-        raise ValueError(f"nieznany typ widoku '{typ}' (rzut | dach | przekroj | elewacja)")
+        raise ValueError(f"nieznany typ widoku '{typ}' (rzut | dach | przekroj | elewacja | {' | '.join(VIEW_TYPES)})")
     e = vp.extents()
     pad = 3.0
     w = (e[2] - e[0]) / vp.k + 2 * pad
@@ -323,11 +354,12 @@ def _scalebar(scale):
     return fn
 
 
-def common_notes(ctx: ViewContext, kinds: set, extra=()) -> list[str]:
+def common_notes(ctx: ViewContext, kinds: set, extra=(), units: str | None = None) -> list[str]:
     m = ctx.model
     w = ctx.cfg
-    out = [f"Wymiary w cm (mm w indeksie górnym, np. 24⁵ = 24,5 cm), rzędne w m względem ±0,000 = "
-           f"{fmt.level_abs(m.zero_abs)} m n.p.m. (PL-EVRF2007-NH)."]
+    # ``units`` — własna uwaga o jednostkach z widoku rejestrowanego (np. PZT: wymiary w m z dokł. 0,01 m)
+    out = [units or (f"Wymiary w cm (mm w indeksie górnym, np. 24⁵ = 24,5 cm), rzędne w m względem ±0,000 = "
+                     f"{fmt.level_abs(m.zero_abs)} m n.p.m. (PL-EVRF2007-NH).")]
     if "rzut" in kinds:
         out.append(f"Rzuty: płaszczyzna cięcia +{fmt.num(float(w.get('wysokosc_ciecia', 1.1)), 2)} m nad posadzką "
                    "kondygnacji. Linią kreskową — elementy nad płaszczyzną cięcia (obrysy płyt i wsporników, brył "
@@ -401,14 +433,15 @@ def build_sheet(ctx: ViewContext, spec: dict, idx: int, total: int):
     kinds = {v.kind for v in views}
     # kolumna opisowa
     col = Column()
-    if kinds & {"rzut", "dach"}:
+    if kinds & {"rzut", "dach"} or any(getattr(v.result, "north", False) for v in views):
         col.add("north", _north(m))
-    rooms = [r for v in views if v.kind == "rzut" for r in v.result.rooms]
+    rooms = [r for v in views if v.kind == "rzut" or (v.kind in VIEW_TYPES and getattr(v.result, "rooms", None))
+             for r in (v.result.rooms or [])]
     if rooms:
         col.add("rooms", _room_table(rooms))
     hm = {}
     for v in views:
-        if v.kind in ("rzut", "przekroj"):
+        if v.kind in ("rzut", "przekroj") or v.kind in VIEW_TYPES:
             for hc, mats in (getattr(v.result, "hatch_mats", None) or {}).items():
                 hm.setdefault(hc, [])
                 for mc in mats:
@@ -431,10 +464,14 @@ def build_sheet(ctx: ViewContext, spec: dict, idx: int, total: int):
     if el_rows:
         el_rows = sorted(el_rows, key=lambda r: r[0])
         col.add("mats", _material_legend(el_rows, m))
+    for v in views:
+        for nm, fn in (getattr(v.result, "column_blocks", None) or []):
+            col.add(nm, fn)
     extra = list(spec.get("uwagi") or [])
     for v in views:
         extra += [n for n in (getattr(v.result, "notes", None) or []) if n not in extra]
-    notes = common_notes(ctx, kinds, extra)
+    units = next((getattr(v.result, "units_note", None) for v in views if getattr(v.result, "units_note", None)), None)
+    notes = common_notes(ctx, kinds, extra, units=units)
     col.add("notes", _notes(notes))
     col.add("scale", _scalebar(views[0].vp.scale))
     col_h = col.measure(TB_W)
@@ -460,7 +497,8 @@ def build_sheet(ctx: ViewContext, spec: dict, idx: int, total: int):
         chosen = (f, mode)
         ctx.note(f"arkusz {spec['nr']}", f"widok nie mieści się w formacie {f} — przycięty")
     f, mode = chosen
-    rodzaj = {"rzut": "rzut", "dach": "rzut", "przekroj": "przekrój", "elewacja": "elewacja"}[views[0].kind]
+    rodzaj = {"rzut": "rzut", "dach": "rzut", "przekroj": "przekrój", "elewacja": "elewacja",
+              **{k: v["rodzaj"] for k, v in VIEW_TYPES.items()}}[views[0].kind]
     scales = sorted({int(v.vp.scale) for v in views})
     scale_txt = "1:" + " / 1:".join(str(s) for s in scales)
     tb = _title_block(ctx, spec, idx, total, scale_txt, rodzaj)

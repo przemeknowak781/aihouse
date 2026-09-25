@@ -194,3 +194,239 @@ i sekcji `wezly`:
 7. **Rury spustowe.** Zewnętrzne RS3–RS5 przed licem na obejmach dystansowych. Wewnętrzne RS1/RS2 w izolowanym szachcie SI, RS6
    w pomieszczeniu technicznym. Żadna nie jest we wnęce ocieplenia.
 8. **Typy węzłów** wg `ALIASY_WEZLOW` (`mostki2d/katalog.py`), więc `tools/katalog_mostkow.py` policzy je automatycznie.
+
+## 5. Konstrukcja
+
+**System.** Ściany nośne są murowane z bloczków silikatowych 18 cm, kl. 20, na zaprawie cienkowarstwowej (f_d = 4,50 MPa przy klasie
+wykonania A, W-270). Stropy to płyty żelbetowe monolityczne C25/30 grubości 22 cm, jednokierunkowe N–S. Elementy wysunięte, attyki
+i belki są z betonu C30/37 XC4/XF1. Stal B500SP. Stosowane są Eurokody 1. generacji z NA (W-260), klasa CC2/RC2, okres użytkowania 50 lat.
+Budynek jest w **II kategorii geotechnicznej** (W-280).
+
+**Ściany nośne w pionie** (model: `sciany`):
+* oś A: P0–P1;
+* oś E: P0–P2;
+* oś 3 (grzbietowa): P0–P2;
+* oś 4: P0–P1 oraz P2 w nadbudowie;
+* osie B, C, D: P0–P1 i nadbudowa P2;
+* oś 1: P1–P2 na belce B1;
+* garaż i pas gospodarczy: osie E, F, 2, 5.
+
+**Ścieżki obciążeń** (`konstrukcja.sciezka_obciazen`):
+* **ST1 i ST2** (22 cm) pracują N–S jako płyty ciągłe dwuprzęsłowe o rozpiętości 5,125 / 3,625 m. Podpory: oś 1 (belka B1 / ściana), oś 3 i oś 4.
+  Nad wejściem na schody i nad wyjściem z nich płyty podpierają podciągi B8/B9 25 × 50 w osi 3 (C–D).
+* **Fasada E na parterze.** Belka odwrócona **B1 25 × 107 cm** (+2,78…+3,85, tworzy pas podokienny boksu C) leży na słupach RK 120×120×8
+  SL1–SL4 w szprosach przeszklenia oraz na ścianach A i E. Przęsła mają ≤ 3,23 m. B1 niesie ścianę pd. P1 i P2 i pas trzech stropów.
+  **Słupki boksu C SL5/SL6 stoją w jednej linii pionowej ze słupami SL3/SL4**, więc siły skupione nadproża B2 (25 × 80) trafiają nad podpory B1.
+* **Wspornik bryły A (1,00 m w osi).** Obciążenie przechodzi kolejno:
+  1. lekka ściana szkieletowa A' (SZL, ≤ 1,0 kN/m²);
+  2. belka krawędziowa B3 20 × 60 w osi A' (odwrócona, pod parapetem okna O2-04) wraz z okapem PL-2;
+  3. końce **belek wspornikowych B4 i B5** 18 × 80 cm w licach ścian P2 w osiach 1 i 3 (pod parapetami okien P2);
+  4. ściana A na P1 jako podpora, z zakotwieniem w przęśle A–B 3,875 m dociążonym ścianami P2 i stropem ST3.
+
+  Stropodach nad wspornikiem niesie belka B6 w osi A'. Nie ma ścian-tarcz: wszystkie elementy są prętowe i sprawdzalne w bibliotece
+  konstrukcji (SCHEMAT p. 9). Warunki: EQU 1,10·G_dst + 1,5·Q_dst ≤ 0,90·G_stb (W-262), ugięcie końca ≤ l/125 (W-268).
+* **Dach garażu D4.** Płyta 24 cm dwukierunkowa na ścianach E, F, osi 2 i osi 5 (6,375 × 6,50 m, l/d ≈ 27). Obciążenia:
+  * dach zielony w stanie nasyconym ≈ 1,6 kN/m² jako stałe;
+  * zaspa przy uskoku do bryły B, μ_w ≤ 4,0 (W-264);
+  * sytuacja wyjątkowa B2.
+* **Płyty wysunięte ≤ 1,50 m** (PL-E, PL-DA, PL-2, PL-3) są na łącznikach termoizolacyjnych z ETA (W-272). Rama C to lekki ruszt stalowy
+  w okładzinie na konsolach punktowych. Nad stolarką pod krawędziami okapu E i ramy C przewidziano szczelinę dylatacyjną.
+* **Usztywnienie.** Ściany w obu kierunkach i stropy jako tarcze. Przy przeszklonej fasadzie pd. parteru sztywność w kierunku x daje trzon
+  klatki z **żelbetowymi ścianami C i D na P0** (SWZB, poprawka J2) razem ze ścianami osi 3 i 4.
+* **Schody.** Płyty biegów i spoczników ŻB 18 cm oparte na ścianach C/D i ściance środkowej. Stopnie dębowe.
+
+**Posadowienie — płyta fundamentowa na XPS (decyzja).** Porównano ją z ławami W2 (60 × 35 cm, spód −1,10). Wybrano płytę ŻB 25 cm C25/30 XC2
+na XPS 300 20 cm, z pogrubieniami (żebrami) pod ścianami nośnymi (60 × 30 / 50 × 25 cm) i pod słupami SL1–SL4 (1,0 × 1,0 × 0,45 m).
+Uzasadnienie:
+1. **Ciągłość izolacji.** Węzeł cokołu z płytą na XPS jest „dobry”, a ława z murem fundamentowym zamyka izolację przez grunt, więc jest
+   „do poprawy” (katalog mostków WZ-GF1/GF2). To wymaganie Inwestora z briefu §9.
+2. **Grunt.** Piaski średnie I_D ≈ 0,6 i ZWG ≈ 3,8 m p.p.t. to warunki proste: drenaż zbędny (W-285), a posadowienie płytkie
+   z przeciwprzemarzaniową izolacją obwodową XPS 10 cm × 1,00 m wg PN-EN ISO 13793 (W-284 — wariant płyty).
+3. **Obciążenia.** Siły skupione ze słupów fasady E i obciążenia nierównomierne (wspornik, trzon) rozkładają się na płycie, co ogranicza
+   różnice osiadań (W-283: s ≤ 50 mm, Δ ≤ 10 mm).
+4. **Szczelność i uziom.** Płyta daje ciągłą membranę przeciwwilgociową i przeciwradonową, a uziom otokowy można ułożyć w gruncie pod XPS
+   (W-286).
+5. **Nośność XPS 300.** Naprężenia pod pogrubieniami ≈ 70–110 kPa, czyli poniżej dopuszczalnego ≈ 130 kPa (pełzanie 50 lat) — do wykazania w PT.
+
+Garaż stoi na tej samej płycie. Jego posadzka −0,10 ma spadek 1,5 % do bramy (W-114). Zakres badań podłoża: opinia geotechniczna,
+≥ 3 sondowania CPT/DPL do ≥ 6 m, projekt geotechniczny (W-281/W-282).
+
+## 6. Materiały, przegrody, fizyka budowli i woda
+
+Przegrody mają pełne warstwy w `przegrody`, a materiały opisują λ, ρ, c_p i μ lub sd ze źródłem w polu `zrodlo` (PN-EN ISO 10456, PN-EN 1745,
+DWU typowych wyrobów „lub równoważne”). U podano orientacyjnie wg PN-EN ISO 6946; dokładne wartości z mostkami liczy moduł fizyki.
+
+| kod | przegroda | U ≈ [W/(m²K)] | wymaganie |
+|---|---|---|---|
+| SZ1 | silikat 18 + ETICS EPS 031 20 cm | 0,15 | ≤ 0,20 (W-243) |
+| SZ2 | P2 za lamelami: silikat 18 + wełna fasadowa 20 cm + membrana UV, szczelina wentylowana, lamele | 0,16 | ≤ 0,20 |
+| SZL | ściana lekka A' na wsporniku: szkielet KVH z wełną, OSB (szczelność), DWD, wełna fasadowa 18 cm | 0,10 | ≤ 0,20 |
+| SWG | ściana dom–garaż: silikat 18 + wełna 12 cm od garażu | 0,26 | ≤ 0,30 |
+| SD1 | stropodach bryły A: TPO, PIR spadkowy 12–32 cm, paroizolacja z Al, ŻB 22 | 0,10 | ≤ 0,15 |
+| SD2 | dachy nad P1: żwir, TPO, PIR 14–26 cm, paroizolacja, ŻB 22 | 0,11 | ≤ 0,15 |
+| DZ1 | dach zielony ekstensywny garażu i pasa gosp.: substrat 8 cm, geowłóknina, mata drenażowa, bariera przeciwkorzenna, 2 × papa SBS, PIR 12–24 cm, paroizolacja, ŻB 24 | 0,12 | ≤ 0,15 nad pasem ogrzewanym |
+| POD-0 | płyta fundamentowa: posadzka, jastrych z ogrzewaniem, EPS 6,5 cm, membrana SBS, ŻB 25, XPS 20 cm | 0,13 | ≤ 0,30 |
+| POD-1 | strop międzykondygnacyjny: deska/gres, jastrych z wężownicą, EPS 100 + EPS T | — | akustyka R'w, L'n,w (W-230) |
+| SUF-ZEW | spód stropu nad powietrzem (wspornik A): wełna 20 cm + podsufitka wentylowana | 0,15 | ≤ 0,15 |
+| AT1 | attyka ŻB 18, izolowana z 3 stron (PIR 10 cm od dachu, ETICS, PIR na koronie) | — | f_Rsi ≥ 0,72 (W-248) |
+
+**Zasada „4 linii”** (brief §9.1) jest ciągła wokół całej obudowy ogrzewanej:
+* **izolacja:** XPS pod płytą → XPS cokołu → ETICS / wełna fasadowa → PIR na attykach i dachach → wełna pod wspornikiem; płyty wysunięte
+  przechodzą przez nią tylko łącznikami z ETA; garaż jest buforem wewnątrz ciągłego ETICS parteru;
+* **hydroizolacja:** membrana SBS na płycie → wywinięcie na cokół ≥ 0,30 m → pasy przy progach → membrany dachów z wywinięciem na attyki
+  ≥ 0,15 m; w łazienkach hydroizolacja podpłytkowa;
+* **szczelność powietrzna i paroizolacja:** tynk wewnętrzny → taśmy przy stolarce → paroizolacja z Al na płytach stropodachów → OSB ściany
+  SZL; cel n50 ≤ 1,0 h⁻¹ (W-249);
+* **warstwa zewnętrzna:** tynk ETICS / membrana UV za lamelami / obróbki.
+
+Katalog węzłów do symulacji PN-EN ISO 10211 jest w sekcji `wezly` modelu: attyki D1–D4, płyty wysunięte na łącznikach, strop nad powietrzem,
+ościeża, nadproża, podokienniki, progi, cokół, połączenia z garażem, konsole lamel i ramy C, przejścia instalacji.
+
+**Odwodnienie dachów** (W-142, PN-EN 12056-3, r = 0,046 l/(s·m²)). Każde pole dachu ma spadek ≥ 2 % na izolacji spadkowej, wpust i przelew
+awaryjny w attyce:
+* **D1** (≈ 97 m²; Q ≈ 4,5 l/s): wpusty WP1/WP2 DN100 z grzałką; rury RS1/RS2 w izolowanym szachcie SI; przelewy PA1–PA3;
+* **D2 i D3** (pola nad P1): wpusty attykowe WP3/WP4; rury zewnętrzne RS3/RS4 na elewacji pn. przed licem, z czyszczakami; przelewy PA4/PA5;
+* **D4** (dach zielony): wpusty WP5/WP6 w studzienkach kontrolnych w opasce żwirowej; RS5 zewnętrzna w narożu NE, RS6 w pomieszczeniu
+  technicznym; przelewy PA6/PA7.
+
+Wszystkie rury prowadzą kolektorami KD-W/KD-E do szczelnego zbiornika 5,0 m³. Jego przelew DN160 idzie do niecki chłonnej 24 m² (W-145).
+
+**Woda gruntowa i powierzchniowa.** Drenażu opaskowego się **nie projektuje**: piaski przepuszczalne, ZWG ≈ 3,8 m p.p.t., posadowienie
+≈ 0,5 m p.p.t. (W-285). Zamiast niego:
+* teren ze spadkiem ≥ 2 % od budynku na ≥ 1,5–2 m (`teren.punkty_projektowane`);
+* opaska żwirowa 0,5 m;
+* odwodnienia liniowe przed bramą, przy progach HS, przy wejściu i przy bramie wjazdowej;
+* niecki trawiaste od drogi i od granicy E.
+
+Woda nie spływa na drogę ani na działki sąsiednie (W-018, W-019).
+
+## 7. Energia i instalacje
+
+* **Orientacja i osłony.** Strefa dzienna ma przeszklenie E od południa pod okapem 1,00 m. W czerwcu w południe (h ≈ 61°) okap zacienia górną
+  część szkła, a resztę osłaniają screeny ZIP z kasetami w podsufitce okapu. Zimą (h ≈ 14°) słońce wpada na całą głębokość strefy. Pozostałe
+  osłony:
+  * boks C: rama wysunięta 1,00 m jako łamacz światła, screen w ramie;
+  * P2: stałe lamele pionowe i screeny w szczelinie za lamelami;
+  * okna zachodnie: żaluzje zewnętrzne z kasetą przed licem.
+
+  Wymaganie g ≤ 0,35 (W-247) spełniają osłony zewnętrzne. Od północy są tylko drzwi wejściowe, małe okna łazienek i pralni oraz okno klatki.
+  Pomieszczenia pomocnicze i komunikacja leżą od północy, sypialnie od E, S i W.
+* **Źródło ciepła.** Pompa ciepła powietrze–woda typu **monoblok R290** (W-155). Moduł hydrauliczny stoi w pomieszczeniu technicznym 0.12,
+  razem z:
+  * zasobnikiem CWU 300 dm³ i buforem 100 dm³;
+  * rozdzielaczami ogrzewania podłogowego 35/28 °C z regulacją w każdym pomieszczeniu (W-152);
+  * rozdzielnicą RG i wodomierzem z zabezpieczeniem przed przepływem zwrotnym (W-131).
+
+  Jednostka zewnętrzna stoi przy ścianie pd. pasa gospodarczego, **7,0 m od granicy E**, w osłonie lamelowej z ekranem od tarasu. Strefa R290
+  1,0 m jest wolna od otworów, wpustów i studzienek (W-156). Skropliny odprowadza studnia chłonna ≥ 0,8 m p.p.t. Szacunek hałasu:
+  L_WA ≈ 55 dB(A), Q = 4, r ≈ 7 m → L_p ≈ 55 + 10·log(4/(4π·7²)) ≈ 33 dB(A) na granicy. To mniej niż 40 dB (noc) i mniej niż cel 35 dB
+  (W-024); w PT potwierdzić DTR wyrobu.
+* **Wentylacja mechaniczna z odzyskiem ciepła.** Centrala ≈ 450 m³/h (η ≈ 0,85) stoi na P2 w pomieszczeniu 2.07. Czerpnia i wyrzutnia są dachowe
+  (W-166/W-167). Kanały biegną pionowo w szachcie SI, poziomo w sufitach podwieszanych holi i łazienek. Wywiew wg PN-83/B-03430/Az3
+  (`pomieszczenia[].went`, W-162):
+  * kuchnia 50 (okresowo 120) m³/h;
+  * łazienki i WC z natryskiem po 50 m³/h;
+  * WC 30 m³/h;
+  * pralnia 40 m³/h;
+  * pomieszczenia bezokienne 15 m³/h.
+
+  Nawiew do pokoi pokrywa ≥ 20 m³/h na osobę (W-161). Garaż nie jest podłączony do rekuperacji: wentylacja naturalna ≥ 0,08 m² przez
+  kratki bramy (W-115).
+* **Kanalizacja.**
+  * Pion K1 Ø110 w SI obsługuje łazienki P0/P1/P2 i jest wentylowany ponad dach nadbudowy.
+  * Pion K2 obsługuje WC P0 i WC z natryskiem na P1, z zaworem napowietrzającym (W-139).
+  * Wyjście pod płytą do studzienki SR1 przed elewacją pn. (poza garażem — W-118), przykanalik PVC 160.
+* **PV.** 15 modułów × 430 Wp = 6,45 kWp ≤ 6,5 kWp (art. 29 ust. 4 pkt 3 lit. c PB, W-194) na dachu D1, na niskich stelażach nie wyżej niż
+  attyka. Wyłaz na dach 0,90 × 0,90 m z drabiną (W-065).
+* **Energia pierwotna.** EP liczy moduł `lamela.obliczenia.fizyka_energia` z danych `energia` modelu na deklarowanych parametrach
+  urządzeń (W-242). Szacunek panelu (J2) dla bazy W2 wynosił EP ≈ 55–59 kWh/(m²·rok), czyli ≤ 70 (W-240).
+
+## 8. Zagospodarowanie działki
+
+Działka nr 123/4 ma 32,00 × 50,00 m = 1600 m². Droga 1KDD przebiega od północy. Transformacja budynek → działka: p_d = p_b + (7,60; 32,70).
+W układzie budynku granice to: W x = −7,60, E x = 24,40, S y = −32,70, droga y = 17,30. Nieprzekraczalna linia zabudowy biegnie
+w **y = 11,30**, czyli 6,00 m od drogi.
+
+**Odległości** (od lic zewnętrznych z ociepleniem, WT §12, W-001…W-006; komplet w bilansie §9):
+
+| strona | element | odległość |
+|---|---|---|
+| W | ściany P0/P1 z oknami | 7,30 m |
+| W | ściana P2 na wsporniku z oknem | 6,30 m |
+| W | płyty PL-2/PL-3 | 5,20 m |
+| W | okap PL-E | 5,80 m |
+| W | taras T1 | 4,30 m |
+| E | ściana wsch. garażu z drzwiami bocznymi | 5,725 m |
+| E | bryły A i B | 12,10 m |
+| E | jednostka zewnętrzna PC | 7,0 m |
+| S | elewacja ogrodowa | 32,40 m |
+| N (linia zabudowy) | daszek PL-DA | 0,95 m za linią |
+| N (linia zabudowy) | brama garażu | 1,625 m za linią |
+
+**Dojazd i parkowanie.**
+* Brama przesuwna 5,60 m (odsuwana na wschód wewnątrz działki) i furtka 1,00 m w osi wejścia (W-017).
+* Podjazd z kostki betonowej, szer. 6,375 m, dł. ≈ 7,6 m, ze spadkiem od garażu i odwodnieniem liniowym przed bramą garażu i przy bramie
+  wjazdowej.
+* **2 miejsca gościnne** 2,5 × 5,0 m na podjeździe (niezadaszone, ≥ 3 m od granicy E — W-015) i 2 w garażu, razem 4 (MPZP ≥ 2).
+
+**Pozostałe elementy.**
+* Dojście z płyt betonowych 1,30 m od furtki do podestu wejścia pod daszkiem.
+* Osłona z lamel na 4 pojemniki przy furtce, z dostępem od ulicy (WT §23 ust. 4 — odległości nieokreślone, W-016).
+* ZKP we wnęce ogrodzenia przy furtce (pole odczytowe ≥ 0,48 m), PWP przy wejściu (W-190).
+* Przyłącza od ul. Lipowej:
+  * woda PE 40, przykrycie ≥ 1,20 m, wodomierz w pom. 0.12;
+  * kanalizacja PVC 160 ze studzienką SR1;
+  * WLZ nN;
+  * 2 × HDPE Ø40 ze światłowodem;
+  * gazu nie przyłącza się (dom all-electric).
+
+**Ogród.**
+* Taras ogrodowy w kształcie litery L z deski kompozytowej pod okapami E (1,00 m) i zachodnim (1,50 m).
+* Oś widokowa ogrodu kończy się lipą-soliterem; zachowano istniejącą brzozę i sosnę.
+* Żywopłoty izolacyjne na granicach E, W i S.
+* Retencja: szczelny zbiornik 5,0 m³ z pompą do podlewania i niecka chłonna 24 m² × 0,30 m w ogrodzie pd.
+* Ogrodzenie od drogi ażurowe z grafitowych sztachet stalowych, h = 1,50 m (MPZP ≤ 1,60 m, bez prefabrykatów betonowych).
+
+Obszar oddziaływania mieści się w całości na działce (W-012).
+
+## 9. Bilans powierzchni i wskaźniki (generowany z modelu)
+
+<!-- BILANS:START -->
+*(blok generowany przez `tools/podglad_modelu.py` — uruchom: `PYTHONPATH=src python3 tools/podglad_modelu.py`)*
+<!-- BILANS:END -->
+
+## 10. Odstępstwa, ryzyka i dalsze kroki
+
+* **Świadome odstępstwa od szkicu:**
+  * bryła B ma 12,60 m w licach zamiast ≈ 12,0 m: moduł osi 12,00 m + ETICS, ściany w pionie;
+  * przeszklenie E zaczyna się ≈ 0,4 m bliżej zachodu niż w szkicu, bo słup narożny i ściana A są w osi A.
+* **Wspornik bryły A.** Belki B4/B5 w licach ścian P2 wymagają w PT obliczenia EQU, ugięć (z pełzaniem) i drgań. Wymagają też ciągłości
+  zbrojenia z wieńcem ST2 oraz koordynacji z oknami P2 (parapety +6,90 ponad belkami). Zalecane dobrowolne sprawdzenie PT-BO (W-275).
+* **Belka B1 i słupy fasady E.** Wymagają obliczenia ramy i sztywności w kierunku x razem z trzonem ŻB oraz sprawdzenia przebicia pogrubień
+  płyty. Ugięcie ≤ L/500 nad stolarką.
+* **Lamele P2** a przesłanianie (WT §13). Traktujemy je jako osłonę okna, nie obiekt przesłaniający; potwierdzić przy PAB. Wymóg 1/8
+  spełniony z zapasem.
+* **Stan prawny.** Wymagane oświadczenie z art. 102a PB. Wniosek o pozwolenie na budowę najpóźniej 19.03.2028 (W-A.1).
+* **Dalej:**
+  * katalog mostków z sekcji `wezly` (`tools/katalog_mostkow.py`);
+  * obliczenia fizyki i EP, instalacji i konstrukcji z modelu;
+  * opinia geotechniczna;
+  * warunki przyłączenia;
+  * DTR pompy ciepła (hałas, strefa R290);
+  * dobór stolarki i łączników z ETA.
+
+## 11. Pliki
+
+* `tools/buduj_model.py` — skrypt parametryczny, który generuje `model/budynek.yaml`, `model/dzialka.yaml`, `model/wyposazenie.yaml`
+  i `model/instalacje.yaml`.
+* Walidacja: `PYTHONPATH=src python3 -m lamela.model model/budynek.yaml model/dzialka.yaml` (0 błędów, 0 ostrzeżeń).
+* `tools/podglad_modelu.py` → `docs/20_koncepcja/final/`:
+  * rzuty P0–P2;
+  * elewacje S/N/E/W;
+  * elewacja S na tle szkicu;
+  * przekroje A-A i B-B;
+  * działka;
+  * `bilans.md` / `bilans.json`.
+* `tools/generuj_widoki.py` → `projekt/01_koncepcja/widoki/`: arkusze PB-AR-01…10 (DXF, PDF, PNG) i tom PDF.
+* `lamela.pipeline` → `projekt/07_model_3D/wstepne/`: model glTF/OBJ, wskaźniki, walidacja.
+* Oceny panelu: `docs/20_koncepcja/ocena_J1.md`, `ocena_J2.md`, `ocena_J3.md`; warianty: `docs/20_koncepcja/W1…W3/`.

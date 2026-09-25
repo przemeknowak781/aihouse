@@ -1737,7 +1737,8 @@ def _tabela_reakcji(an: AnalizaTarczy) -> str:
     return tabela(["Przypadek (charakt.)"] + [f"{s} — R [kN]" for s in pods] + ["Σ [kN]"], rows)
 
 
-def pozycja_tarczy(wt: WynikTarczy, rys_dir: str | Path | None = None, ident: str | None = None, tytul: str | None = None):
+def pozycja_tarczy(wt: WynikTarczy, rys_dir: str | Path | None = None, ident: str | None = None, tytul: str | None = None,
+                   metoda: bool = True):
     """Pozycja „Obliczeń statycznych” (:class:`.pozycje.Pozycja`) z wyniku tarczy; rysunki zapisywane w rys_dir."""
     from .pozycje import Pozycja
     an: AnalizaTarczy = wt.an
@@ -1760,7 +1761,11 @@ def pozycja_tarczy(wt: WynikTarczy, rys_dir: str | Path | None = None, ident: st
                    f"ΣR = {f(float(r.R[1::2].sum()), 1)} kN (błąd {an.blad_rownowagi:.1e}). Naprężenia (obwiednia STR): "
                    f"σ₁,max = {f(wt.sigma1_max)} MPa, σ₂,min = {f(wt.sigma2_min)} MPa (f_ctm = {f(an.beton.f_ctm, 1)}, "
                    f"f_cd = {f(an.beton.f_cd, 2)} MPa).")
-    pz.opis += [f"Metoda: {t}" for t in METODA_TARCZ]
+    if metoda:
+        pz.opis += [f"Metoda: {t}" for t in METODA_TARCZ]
+    else:
+        pz.opis.append("Metoda: MES tarczowy (QM6) → model kratownicowy STM z pola naprężeń → wymiarowanie wg PN-EN 1992-1-1 "
+                       "(szczegóły — p. 0.5 „Metody obliczeń”).")
     pz.obciazenia.append("**Obciążenia charakterystyczne tarczy**\n\n" + _tabela_obciazen(d))
     pz.obciazenia.append("**Kombinacje STR (PN-EN 1990 + NA)**\n\n" + tabela(["Kombinacja", "Współczynniki"],
                                                                                  [[k.nazwa, k.opis()] for k in an.k_uls + an.k_wyj]))
