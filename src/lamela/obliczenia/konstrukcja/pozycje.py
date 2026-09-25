@@ -1665,6 +1665,66 @@ class AnalizaKonstrukcji:
                      + ", ".join(sorted({(o.id if t == 'sciana' else str(o['id'])) for _, t, o in out})) + " [ZAŁ].")
         return out
 
+    def _equ_belki(self, bid: str, belka, pods: list, obc: dict, L: float) -> Wynik:
+        """EQU belki ze wspornikiem (PN-EN 1990 tabl. A1.2(A) + NA): obciążenia na wspornikach (x < x_pierwszej podpory,
+        x > x_ostatniej) destabilizujące — 1,10·G + 1,5·Q (zmienne tylko niekorzystne), w przęsłach — stabilizujące
+        0,90·G (zmienne pominięte); reakcje R_EQU wszystkich podpór ≥ 0 (brak odrywania). Podpora na słupie ŻB z
+        reakcją ujemną — zakotwienie: pręty słupa A_s·f_yd ≥ |R_EQU| [ZAŁ]."""
+        p = self.p
+        a, b = pods[0][0], pods[-1][0]
+
+        def utnij(lst, x0, x1, wew):
+            out = []
+            for o in lst:
+                if isinstance(o, ObcP):
+                    if (x0 - 1e-9 <= o.x <= x1 + 1e-9) == wew:
+                        out.append(o)
+                    continue
+                X0, X1 = (0.0 if o.x0 is None else o.x0), (L if o.x1 is None else o.x1)
+                q0, q1 = o.q0, (o.q0 if o.q1 is None else o.q1)
+                segs = [(max(X0, x0), min(X1, x1))] if wew else [(X0, min(X1, x0)), (max(X0, x1), X1)]
+                for s0, s1 in segs:
+                    if s1 - s0 > 1e-6:
+                        qa = q0 + (q1 - q0) * (s0 - X0) / max(X1 - X0, 1e-9)
+                        qb = q0 + (q1 - q0) * (s1 - X0) / max(X1 - X0, 1e-9)
+                        out.append(ObcQ(qa, s0, s1, qb))
+            return out
+        R = np.zeros(len(pods))
+        Rmin_q = np.zeros(len(pods))
+        for cs, lst in obc.items():
+            r_dst = belka.rozwiaz(utnij(lst, a, b, False)).R if utnij(lst, a, b, False) else np.zeros(len(pods))
+            if cs == "G":
+                r_stb = belka.rozwiaz(utnij(lst, a, b, True)).R if utnij(lst, a, b, True) else np.zeros(len(pods))
+                R = R + p.EQU_gG_dst * np.minimum(r_dst, 0.0) + p.EQU_gG_stb * np.maximum(r_dst, 0.0) * 0 \
+                    + p.EQU_gG_dst * np.maximum(r_dst, 0.0) * 0 + np.where(r_dst < 0, 0.0, p.EQU_gG_stb * r_dst) + p.EQU_gG_stb * r_stb
+            else:
+                Rmin_q = Rmin_q + p.EQU_gQ * np.minimum(r_dst, 0.0)
+        R = R + Rmin_q
+        w = Wynik(nazwa=f"Równowaga statyczna (EQU) — belka {bid} ze wspornikiem")
+        w.krok("Wsporniki belki", "x < x₁ lub x > x_n", "", f"x₁ = {f(a, 2)} m, x_n = {f(b, 2)} m, L = {f(L, 2)} m")
+        for k, (s_, t, o) in enumerate(pods):
+            nm = o.id if t == "sciana" else str(o["id"])
+            w.krok(f"Reakcja EQU podpory {nm} (x = {f(s_, 2)} m)", "R = Σ[1,10·R_G,dst⁻ + 0,90·(R_G,dst⁺ + R_G,stb)] + 1,5·ΣR_Q,dst⁻",
+                   "", R[k], "kN", nd=1, zrodlo="PN-EN 1990 tabl. A1.2(A) + NA")
+        k_min = int(np.argmin(R))
+        s_, t, o = pods[k_min]
+        if R[k_min] >= 0.0:
+            w.warunek("EQU — brak odrywania podpór (R_EQU ≥ 0)", 0.0, float(R[k_min]), "kN", "PN-EN 1990 tabl. A1.2(A)", nd=1,
+                      symbol_E="R_odr", symbol_R="R_EQU,min")
+        elif t == "slup" and self._slup_zelbetowy(o):
+            N_t = -float(R[k_min])
+            a_s, b_s = _wymiary_slupa(str(o.get("przekroj")))
+            As_min = max(0.002 * a_s * b_s * 1e6, 4 * 113.1)
+            w.krok("Odrywanie — zakotwienie w słupie ŻB (pręty podłużne ciągłe do fundamentu)", "A_s ≥ |R_EQU|/f_yd",
+                   f"{f(N_t, 1)}·10³/{f(self.stal.f_yd, 1)}", N_t * 1000 / self.stal.f_yd, "mm²", nd=0)
+            w.warunek("EQU — zakotwienie reakcji odrywającej w słupie ŻB", N_t * 1000 / self.stal.f_yd, As_min, "mm²",
+                      "PN-EN 1990 A1.2(A); PN-EN 1992-1-1 8.4", nd=0, symbol_E="A_s,req", symbol_R="A_s,min słupa")
+        else:
+            w.warunek("EQU — brak odrywania podpór (R_EQU ≥ 0)", -float(R[k_min]), 0.0, "kN", "PN-EN 1990 tabl. A1.2(A)", nd=1,
+                      symbol_E="R_odr", symbol_R="dop.")
+            w.uwaga("Podpora odrywana bez zakotwienia — wymagane zakotwienie (słup ŻB/kotwy) [WYMAGA ZMIANY MODELU].")
+        return w
+
     def _podpory_jawne(self, b) -> list:
         """Podpory z pola modelu ``belki[].podpory`` ([{typ: sciana|slup|belka, id, s}]) → [(s, typ, obiekt)] albo []."""
         out = []
@@ -1892,6 +1952,8 @@ class AnalizaKonstrukcji:
                              zelbet.Pret(bid, 2, fit, round(L + 0.4, 2), nt, "00", "górą"),
                              zelbet.Pret(bid, 3, 8, round(2 * (bw - 0.06) + 2 * (h_tot - 0.06) + 0.2, 2), ns, "51",
                                          f"{f((bw - 0.06) * 100, 0)}×{f((h_tot - 0.06) * 100, 0)} cm")]
+            if pods[0][0] > 0.05 or pods[-1][0] < L - 0.05:
+                poz.wyniki.append(self._equ_belki(bid, belka, pods, obc, L))
             if self.rys_dir:
                 from . import rysunki
                 poz.rysunki += rysunki.rys_belka(belka, pods, rozw, Ms, Vs, bid, self.rys(f"belka_{_slug(bid)}.png"))
