@@ -270,7 +270,11 @@ def kontrola_wody(wezel: Wezel, model=None, kontekst: dict | None = None) -> lis
     elif typ in ("cokol", "prog"):
         kod_p = _przegroda_typu(model, "podloga_na_gruncie", kody)
         fp = _funkcje_przegrody(model, kod_p)
-        if model is not None:
+        zal_pod = "[ZAŁ]" in str(wezel.dane.get("warstwy podłogi — źródło", ""))
+        if zal_pod:
+            add("INFO", "hydro", "warstwy płyty przyjęte w wariancie porównawczym [ZAŁ]: hydroizolacja pod płytą "
+                                 "(na XPS) wywinięta na krawędź płyty i połączona z uszczelnieniem strefy cokołu")
+        elif model is not None:
             iz = fp.get("przeciwwilgociowa", []) + fp.get("hydroizolacja", [])
             add("OK" if iz else "BRAK", "hydro", f"izolacja przeciwwilgociowa podłogi na gruncie {kod_p}: " +
                 (", ".join(iz) if iz else "BRAK w warstwach przegrody (np. papa / folia PE na płycie podkładowej, "
@@ -418,11 +422,18 @@ def _patch(geom, **kw):
     return PathPatch(MPath(verts, codes), **kw)
 
 
-def _widok(wezel: Wezel):
+def _widok(wezel: Wezel, asp_max: float = 1.25):
+    """Okno rysunku karty: `wezel.widok` (albo obrys materiałów), dla węzłów wysokich poszerzone symetrycznie do
+    proporcji wys./szer. ≤ asp_max (czytelny układ dwóch paneli)."""
     if wezel.widok:
-        return wezel.widok
-    from shapely.ops import unary_union
-    return unary_union([o.wielobok for o in wezel.obszary]).bounds
+        x0, y0, x1, y1 = wezel.widok
+    else:
+        from shapely.ops import unary_union
+        x0, y0, x1, y1 = unary_union([o.wielobok for o in wezel.obszary]).bounds
+    if (y1 - y0) > asp_max * (x1 - x0):
+        d = ((y1 - y0) / asp_max - (x1 - x0)) / 2
+        x0, x1 = x0 - d, x1 + d
+    return (x0, y0, x1, y1)
 
 
 def rysuj_przekroj(ax, wezel: Wezel, ciag: Ciaglosc | None = None, legenda_ax=None):

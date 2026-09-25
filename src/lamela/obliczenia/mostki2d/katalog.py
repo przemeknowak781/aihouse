@@ -356,6 +356,9 @@ def katalog_demonstracyjny(model, y_teren: float = -0.30) -> list[G.Wezel]:
             wz["WZ-GF2"] = G.wezel_cokol(sz, _warstwy_plyty_fundamentowej(model, kp), fundament="plyta", b=B,
                                          y_teren=y_teren, id="WZ-GF2",
                                          nazwa="Cokół — płyta fundamentowa na XPS (wariant porównawczy) [ZAŁ]")
+            wz["WZ-GF2"].dane["warstwy podłogi — źródło"] = (
+                "[ZAŁ] wariant porównawczy: wykończenie z przegrody " + kp + ", płyta ŻB 0,25 m na XPS 0,20 m "
+                "(hydroizolacja pod płytą na XPS — na detalu)")
         wz["WZ-GF1B"] = G.wezel_cokol(sz, G.warstwy_z_modelu(model, kp), fundament="lawa", lawa=lawa, b=B,
                                       y_teren=y_teren, id="WZ-GF1B",
                                       blok_termiczny=(G.MATERIALY_DOMYSLNE["BET_KOM_400"], 0.24),

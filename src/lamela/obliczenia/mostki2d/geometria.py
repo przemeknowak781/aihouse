@@ -1142,7 +1142,7 @@ def wezel_cokol(warstwy_sciany: Sequence[Warstwa], warstwy_podlogi: Sequence[War
     else:
         linie += [_ln("hydro", [(x_in, y_izol_dol - 0.002), (x_hd, y_izol_dol - 0.002), (x_hd, y_prz)],
                       "hydroizolacja pod płytą (na XPS) wywinięta na krawędź płyty — ciągła do strefy cokołu")]
-        x_dr, y_dr = x_out + 0.25, y_izol_dol - 0.05
+        x_dr, y_dr = x_out + 0.30, y_fb + 0.08
     linie += [_ln("hydro", [(x_out + 0.003, y_teren - 0.15), (x_out + 0.003, y_prz + 0.05)],
                   f"uszczelnienie strefy cokołu (masa/tynk mozaikowy) do {h_cokolu * 100:.0f} cm nad terenem"
                   f" ({'≥' if h_cokolu >= 0.30 - 1e-9 else '< WYMAGANE'} 30 cm)"),
