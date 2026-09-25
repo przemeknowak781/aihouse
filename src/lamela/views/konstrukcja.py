@@ -771,15 +771,9 @@ def widok_strop(ctx: ViewContext, spec: dict, scale: float, opts: dict):
         for pol in e.pola:
             root = None
             if e.typ == "wspornik":
-                inne = unary_union([x.poly for x in lv.elementy if x is not e])
-                segs = [q for q in KD.odcinki_proste(e.poly.boundary.intersection(inne.buffer(0.02))) if q.length > 0.3]
-                if segs:
-                    sg = max(segs, key=lambda q: q.length)
-                    (xa, ya), (xb, yb) = sg.coords[0], sg.coords[-1]
-                    nrm = np.array([-(yb - ya), xb - xa]) / sg.length
-                    if not e.poly.buffer(-0.01).contains(Point(*(np.asarray(sg.interpolate(0.5, normalized=True).coords[0]) + nrm * 0.1))):
-                        nrm = -nrm
-                    root = nrm
+                kz = KD.korzenie(e, lv)
+                if kz:
+                    root = max(kz, key=lambda t: t[0].length)[2]
             C = _strzalki_pola(vp, placer, pol, e.typ, root)
             etykieta(vp, placer, C + np.array([0.0, 0.35]), (1.0, 0.0), f"{pol.pole}", None, 2.5, offs=(0.0, 3.0, 6.0),
                      ts=(0.0, -0.4, 0.4), layer=L_OPS)
@@ -834,17 +828,13 @@ def widok_strop(ctx: ViewContext, spec: dict, scale: float, opts: dict):
 def _laczniki(vp, placer, D, lv, e: KD.ElementPl, res: KResult):
     """Łączniki termoizolacyjne wzdłuż linii zamocowania wspornika: pas (korpus izolacji ``LACZNIK_T``) po stronie
     płyty zaplecza (w płaszczyźnie izolacji ściany), opis z siłami m_Ed, v_Ed z obliczeń (pole wspornika)."""
-    inne = unary_union([x.poly for x in lv.elementy if x is not e])
-    segs = [q for q in KD.odcinki_proste(e.poly.boundary.intersection(inne.buffer(0.02))) if q.length >= 1.0]
+    segs = [t for t in KD.korzenie(e, lv) if t[0].length >= 1.0]
     pol = max(e.pola, key=lambda p: p.poly.area) if e.pola else None
-    for sg in segs:
+    for sg, gap, nrm in segs:
         (xa, ya), (xb, yb) = sg.coords[0], sg.coords[-1]
         kier = "y" if abs(ya - yb) < 1e-3 else "x"
         mid = np.asarray(sg.interpolate(0.5, normalized=True).coords[0])
-        nrm = np.array([-(yb - ya), xb - xa]) / sg.length
-        if not e.poly.buffer(-0.01).contains(Point(*(mid + nrm * 0.1))):
-            nrm = -nrm
-        tl = KD.LACZNIK_T
+        tl = gap if gap >= 0.03 else KD.LACZNIK_T
         band = Polygon([sg.coords[0], sg.coords[-1], tuple(np.asarray(sg.coords[-1]) - nrm * tl),
                         tuple(np.asarray(sg.coords[0]) - nrm * tl)])
         vp.fill(band, L_OBR, "#9a9a9a", z=21)

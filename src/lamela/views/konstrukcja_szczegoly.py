@@ -402,11 +402,12 @@ def _wybor_wezla(D, lv, rodzaj: str, element: str | None, m):
         a, b = np.asarray(g.linia[0]), np.asarray(g.linia[1])
         tip = a if g.haki[0] else b
         u = KD_unit(tip - (b if g.haki[0] else a))
-        inne = unary_union([x.poly for x in lv.elementy if x is not e])
-        root = [q for q in KD.odcinki_proste(e.poly.boundary.intersection(inne.buffer(0.02))) if q.length > 0.3]
-        rr = min(root, key=lambda q: q.distance(Point(*tip)) if abs(abs(float(KD_unit(np.subtract(q.coords[-1], q.coords[0])) @ u))) < 0.1 else 1e9)
+        kz = KD.korzenie(e, lv)
+        rr, gap, _n = min(kz, key=lambda t: t[0].distance(Point(*tip)) if abs(float(KD_unit(np.subtract(t[0].coords[-1],
+                                                                                                    t[0].coords[0])) @ u)) < 0.1 else 1e9)
         Q = np.asarray(rr.interpolate(rr.project(Point(*tip))).coords[0])
-        host = next((x for x in lv.elementy if x is not e and x.poly.buffer(0.01).contains(Point(*(Q - u * 0.2)))), None)
+        host = next((x for x in lv.elementy if x is not e and x.poly.buffer(0.01).contains(Point(*(Q - u * (gap + 0.2))))), None)
+        e._szczelina = gap
         wall = min((w for w in sc if abs(float(w.u @ u)) < 1e-3), key=lambda w: w.axis_line().distance(Point(*(Q - u * 0.3))),
                    default=None)
         return Q, u, wall, host, e, g
@@ -459,7 +460,10 @@ def szczegol_stropu(ctx, spec, vp, res, placer, rodzaj: str):
     ścianie zewnętrznej), ``oparcie`` (strop ciągły nad ścianą wewnętrzną)."""
     D = KD.dane(ctx)
     m = ctx.model
-    lv = D.poziom(spec.get("poziom") or spec.get("element") or spec.get("kond"))
+    lv = None
+    for key in ("poziom", "element", "kond"):
+        if spec.get(key) and lv is None:
+            lv = D.poziom(spec.get(key))
     if lv is None:
         raise KeyError(f"k_przekroj/{rodzaj}: brak poziomu płyt")
     P = KD.prety_poziomu(D, lv)
@@ -475,9 +479,12 @@ def szczegol_stropu(ctx, spec, vp, res, placer, rodzaj: str):
     xk = [(a, b) for a, b, mat, konstr, kl in wl if konstr]
     xk0, xk1 = xk[0] if xk else (-0.09, 0.09)
     x_in = xk0 - 1.3
+    tl = KD.LACZNIK_T
     if rodzaj == "wspornik":
         l_c = _promien(wsp.poly, Q + n * 0.01, n) + 0.01
-        x_edge_h = -KD.LACZNIK_T
+        gap = getattr(wsp, "_szczelina", 0.0)
+        tl = gap if gap >= 0.03 else KD.LACZNIK_T
+        x_edge_h = -tl
         x_out = l_c
     elif rodzaj == "wieniec":
         x_edge_h = _promien(host.poly, Q, n)
@@ -518,7 +525,7 @@ def szczegol_stropu(ctx, spec, vp, res, placer, rodzaj: str):
             dodaj_warstwy_poziome(cs, m, prz, 0.0, l_c, tc, True)
             dodaj_warstwy_poziome(cs, m, prz, 0.0, l_c, spc, False)
         zl0, zl1 = max(sp_h, spc), min(top_h, tc)
-        cs.add(box(-KD.LACZNIK_T, zl0, 0.0, zl1), "IZOL_TWARDA", "izol")
+        cs.add(box(-tl, zl0, 0.0, zl1), "IZOL_TWARDA", "izol")
     cs.draw(vp)
     if wall is not None:
         urwanie(vp, (xw0 - 0.05, z_bot), (xw1 + 0.05, z_bot))
@@ -630,7 +637,8 @@ def _zbrojenie_wezla(vp, placer, D, P, lv, host, wsp, gw, R, Q, n, rodzaj, x_in,
         opis(vp, placer, (x1 - fs, z0 + fs), f"wieniec {wn.dol[0] + wn.gora[0]}Ø{wn.dol[1]}, strz. Ø{wn.strz[0]} co "
              f"{wn.strz[1] / 10:g} (poz. obl. {wn.poz})", None, "prawo" if rodzaj != "wspornik" else "lewo", -14.0, h=1.8)
     if rodzaj == "wspornik" and wsp is not None:
-        tl = KD.LACZNIK_T
+        gap = getattr(wsp, "_szczelina", 0.0)
+        tl = gap if gap >= 0.03 else KD.LACZNIK_T
         c = wsp.c_nom / 1000.0
         zt = min(top_h, wsp.wierzch) - c - 0.006
         vp.line((-tl - 0.55, zt), (0.55, zt), L_ZBR, pen=0.35, lt="KRESKOWA", z=31)

@@ -1042,9 +1042,17 @@ def spot(lab: Labeler, p, Hh, projected=False, max_cost=None, dists=(0.6, 1.5, 3
         c.line(P + [-s_, 0], P + [s_, 0], "Z-RZEDNE", pen=0.18, color=color or "#6b4423")
         c.line(P + [0, -s_], P + [0, s_], "Z-RZEDNE", pen=0.18, color=color or "#6b4423")
         layer, style = "Z-RZEDNE", "italic"
+    n1 = lab.mark()
+    g0 = len(lab.pl.geoms)
     lab.reg(n0, w_fill=0.6, w_line=0.6)
-    return lab.label(P, [txt], h, layer, style, color or (None if projected else "#6b4423"), mask=0.4,
-                     dists=dists, dirs=dirs, frame=projected, leader_from=2.5, max_cost=max_cost)
+    pos, cost = lab.label(P, [txt], h, layer, style, color or (None if projected else "#6b4423"), mask=0.4,
+                          dists=dists, dirs=dirs, frame=projected, leader_from=2.5, max_cost=max_cost)
+    if pos is None and max_cost is not None:     # pikieta opcjonalna (podkład) — bez opisu nie rysujemy znaku
+        lab.failed.pop()
+        del c.prims[n0:n1]
+        for gi in range(g0, len(lab.pl.geoms)):
+            lab.pl.w[gi] = 0.0
+    return pos, cost
 
 
 def slope_arrow(lab: Labeler, poly, direction, pct, length_mm=10.0, max_cost=None, text=None):

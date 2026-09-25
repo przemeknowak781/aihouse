@@ -991,3 +991,164 @@ def detal_okap(m, opts: dict) -> Detal:
                      f"{mm(t_w)} mm za licem ocieplenia (nadproże HS na poziomie spodu stropu) — do potwierdzenia "
                      "w PT-K; symulacja WZ-04 z płytą o stałej grubości (wariant ostrożny)")
     return det
+
+
+# ================================================================================================ D — garaż (WZ-09)
+def wezly_garazu_id(m) -> dict:
+    """{'plyta'|'dach'|'dach_sciana': id węzła} — podwęzły WZ-09 wg `katalog_dod.wezly_garazu` (bez obliczeń)."""
+    from ..obliczenia.mostki2d.katalog_dod import wezly_garazu
+    out = {}
+    try:
+        lst = wezly_garazu(m, wpis(m, "WZ-09")) or []
+    except Exception:          # pragma: no cover — geometria nietypowa
+        lst = []
+    for w, _L in lst:
+        n = w.nazwa or ""
+        if "płycie fundamentowej" in n:
+            out.setdefault("plyta", w.id)
+        elif "+ ściana" in n:
+            out.setdefault("dach_sciana", w.id)
+        else:
+            out.setdefault("dach", w.id)
+    return out
+
+
+def pas_sufg(m, kod: str | None) -> float:
+    import re
+    n = (m.przegroda(kod).nazwa or "") if kod and m.przegroda(kod) else ""
+    r = re.search(r"pas\w*\s+(\d+(?:[.,]\d+)?)\s*m", n)
+    return float(r.group(1).replace(",", ".")) if r else 1.0
+
+
+@rodzaj("garaz_dach", "WZ-09c", "WZ-09")
+def detal_garaz_dach(m, opts: dict) -> Detal:
+    """Ściana dom–garaż (oś E) pod stropem ST1 / płytą dachu zielonego D4, ściana P1 domu nad dachem garażu:
+    wywinięcie hydroizolacji ≥ 15 cm ponad żwir, opaska żwirowa 0,5 m, XPS w strefie rozbryzgu, pas SUF-G."""
+    ids = wezly_garazu_id(m)
+    wid = ids.get("dach_sciana") or "WZ-09c"
+    e = wpis(m, "WZ-09")
+    kody = e.get("przegrody") or []
+    sg = next((k for k in kody if m.przegroda(k) and m.przegroda(k).typ.startswith("sciana")
+               and m.przegroda(k).typ != "sciana_zewn"), "SWG")
+    kd = next((k for k in kody if m.przegroda(k) and m.przegroda(k).typ in ("stropodach", "dach")), "DZ1")
+    ksuf = next((k for k in kody if m.przegroda(k) and m.przegroda(k).typ == "strop" and k != "POD-1"), None)
+    dach = dach_wg(m, kd)
+    s_g = max((s for s in m.sciany() if s.przegroda_kod == sg), key=lambda s: s.L)
+    st = next((s for s in m.stropy() if s["id"] == "ST1"), m.stropy()[0])
+    z0, t_L = float(st["wierzch"]), float(st["grubosc"])
+    t_R = float(dach["plyta"]["grubosc"])
+    det = Detal(m, "D-10", f"Ściana dom–garaż ({sg}) i dach zielony {dach['id']} przy ścianie domu", (wid,), 10, z0=z0)
+    sz = sciana_przy(m, tuple((s_g.p1 + s_g.p2) / 2), z0 + 1.0) or "SZ1"
+    Wg, Ws = det.warstwy(sg), det.warstwy(sz)
+    kg = next(i for i, w in enumerate(Wg) if w["konstr"])
+    ks = next(i for i, w in enumerate(Ws) if w["konstr"])
+    xs0 = sum(w["d"] for w in Wg[:kg])
+    xs1 = xs0 + Wg[kg]["d"]
+    xg_out = sum(w["d"] for w in Wg)
+    x_iz = sum(w["d"] for w in Ws[:ks + 2])                                # lico izolacji ściany P1
+    x_out = sum(w["d"] for w in Ws)
+    pod = st.get("podloga") or "POD-1"
+    Wp = det.warstwy(pod)
+    kp = next((i for i, w in enumerate(Wp) if w["konstr"]), len(Wp))
+    y_f = sum(w["d"] for w in Wp[:kp])
+    mid = (s_g.p1 + s_g.p2) / 2
+    d_kl, _pz = _klin_w(m, dach, tuple(mid - s_g.n * (1 if s_g.wnetrze != "prawa" else -1) * 0.5))
+    xL, xR, yB, yT = -0.40, 1.30, -0.80, 1.00
+    det.okno = (xL, yB, xR, yT)
+    # dach: warstwy nad płytą od lica izolacji ściany P1; substrat zastąpiony żwirem w pasie 0,5 m
+    Wd = det.warstwy(kd)
+    ksub = next((w["idx"] for w in Wd if "SUBSTR" in w["mat"]), None)
+    b_zw = 0.50
+    zak = {ksub: (x_iz + b_zw, xR + 0.05)} if ksub is not None else {}
+    stos, y_top, _pl = stos_dachu(det, kd, x_iz, xR + 0.05, d_kl, zakres=zak)
+    y_sub = next(((a, b) for a, b, w in stos if w["idx"] == ksub), (y_top, y_top - 0.08))
+    det.rect(x_iz, y_sub[1], x_iz + b_zw, y_sub[0], "ZWIR_16")
+    det.kontur([(x_iz + b_zw, y_sub[1]), (x_iz + b_zw, y_sub[0] + 0.01)], zamkniety=False, pen=0.5)
+    y_up = y_top + 0.15                                   # wywinięcie ≥ 15 cm ponad żwir/substrat (DAFA, FLL)
+    y_x = y_top + 0.30                                    # strefa rozbryzgu — XPS
+    # ściana P1 nad dachem (lico wewn. x = 0), izolacja od wierzchu płyty: XPS do y_x, dalej izolacja ściany
+    zs = {w["idx"]: ((y_f, yT) if i < ks else (0.0, yT) if i == ks else (y_x, yT)) for i, w in enumerate(Ws)}
+    sc = det.stos_v(sz, 0.0, 0.0, yT, zakres=zs)
+    det.rect(xs1, 0.0, x_iz, y_x, "XPS300" if "XPS300" in m.materialy else Ws[ks + 1]["mat"])
+    det.rect(x_iz, y_up + 0.005, x_out, y_x, Ws[-1]["mat"])                         # wyprawa mozaikowa cokołu
+    det.stos_h(pod, xL, 0.0, y_f, do=kp)
+    # płyta ciągła: strop ST1 (dom) / płyta dachu (garaż) — do lica konstrukcji ściany
+    det.poly([(xL, 0.0), (xR + 0.05, 0.0), (xR + 0.05, -t_R), (xs1, -t_R), (xs1, -t_L), (xL, -t_L)],
+             st.get("mat", "ZB_C25"), konstr=True)
+    det._rejestr(kd, next(w for w in Wd if w["konstr"]), t_R)
+    det.rect(xL, -t_L - 0.01, 0.0, -t_L, st.get("sufit") if st.get("sufit") in m.materialy else Wg[0]["mat"])
+    # ściana dom–garaż pod płytą: izolacja od strony garażu do płyty, pas docieplenia SUF-G
+    zg = {w["idx"]: ((yB, -t_L) if i <= kg else (yB, -t_R)) for i, w in enumerate(Wg)}
+    Wsg = det.warstwy(ksuf) if ksuf else []
+    d_sg = sum(w["d"] for w in Wsg)
+    if Wsg:
+        zg[Wg[-1]["idx"]] = (yB, -t_R - d_sg)
+    scg = det.stos_v(sg, 0.0, yB, -t_R, zakres=zg)
+    b_pas = pas_sufg(m, ksuf)
+    y = -t_R
+    for i, w in enumerate(Wsg):
+        xa = xg_out - Wg[-1]["d"] if i == 0 else xg_out
+        det.rect(xa, y - w["d"], min(xs1 + b_pas, xR + 0.05), y, w["mat"])
+        det._rejestr(ksuf, w, w["d"])
+        y -= w["d"]
+    return _garaz_dach_linie(det, dict(sc=sc, scg=scg, stos=stos, xs0=xs0, xs1=xs1, xg_out=xg_out, x_iz=x_iz,
+                                       x_out=x_out, y_f=y_f, kp=kp, pod=pod, t_L=t_L, t_R=t_R, y_top=y_top,
+                                       y_up=y_up, y_x=y_x, b_zw=b_zw, y_sub=y_sub, d_sg=d_sg, b_pas=b_pas,
+                                       ksuf=ksuf, kd=kd, sz=sz, sg=sg, xL=xL, xR=xR, yB=yB, yT=yT, d_kl=d_kl,
+                                       dach=dach))
+
+
+def _garaz_dach_linie(det: Detal, g: dict) -> Detal:
+    m = det.model
+    xL, xR, yB, yT = g["xL"], g["xR"], g["yB"], g["yT"]
+    xs1, x_iz, x_out = g["xs1"], g["x_iz"], g["x_out"]
+    stos, y_top, y_up = g["stos"], g["y_top"], g["y_up"]
+    y_memb = next(((a + b) / 2 for a, b, w in stos if w["funkcja"] == "hydroizolacja"), y_top)
+    y_par = next(((a + b) / 2 for a, b, w in stos if w["funkcja"] == "paroizolacja"), 0.002)
+    y_pir = next((a for a, b, w in stos if w["klin"] or w["mat"].startswith("PIR")), y_top)
+    # 4 linie
+    det.linia("H", [(xR + 0.05, y_memb), (x_iz + 0.002, y_memb), (x_iz + 0.002, y_up)],
+              "papa wierzchnia + bariera przeciwkorzenna wywinięte ≥ 15 cm ponad żwir")
+    det.obrobka([(x_iz + 0.002, y_up - 0.03), (x_iz + 0.012, y_up - 0.03), (x_iz + 0.012, y_up + 0.012),
+                 (x_iz + 0.004, y_up + 0.02)], kapinos=False)
+    det.linia("P", [(xR + 0.05, y_par), (xs1 + 0.002, y_par), (xs1 + 0.002, y_pir + 0.03)],
+              "paroizolacja wywinięta na mur ponad izolację dachu")
+    det.linia("S", [(0.0015, yT), (0.0015, 0.004), (xL, 0.004)])
+    det.linia("S", [(xL, -g["t_L"] - 0.012), (0.0015, -g["t_L"] - 0.012), (0.0015, yB)])
+    det.polaczenie("S", [(0.0015, 0.004), (0.0015, -g["t_L"] - 0.012)])
+    for p1, p2 in (((0.0, yT), (x_out, yT)), ((xL, yB), (g["xg_out"], yB)), ((xL, g["y_f"]), (xL, -g["t_L"] - 0.01)),
+                   ((xR, y_top), (xR, -g["t_R"]))):
+        det.przerwa(p1, p2)
+    # opisy
+    det.opis_stosu(g["sc"], "y", 0.80, odwroc=True, tytul=f"{g['sz']} — ściana P1 domu nad dachem garażu")
+    det.opis([(xs1 + 0.10, y_top + 0.24)], ["XPS 300 w strefie rozbryzgu do ≥ 30 cm ponad żwir, wyprawa mozaikowa "
+                                            "na masie uszczelniającej"])
+    det.opis([(x_iz + 0.008, y_up)], ["listwa dociskowa + uszczelniacz trwale elastyczny, fartuch z blachy nad "
+                                      "wywinięciem; wys. ≥ 15 cm ponad żwir (DAFA / FLL)"])
+    det.opis([(x_iz + g["b_zw"] / 2, (g["y_sub"][0] + g["y_sub"][1]) / 2)],
+             [f"opaska żwirowa 16/32 szer. {mm(g['b_zw'])} mm przy ścianie (strefa bez roślin), obrzeże perforowane"])
+    det.opis_stosu([(a, b, w) for a, b, w in stos], "x", xR - 0.12, odwroc=False,
+                   tytul=f"{g['kd']} — dach zielony ekstensywny {g['dach']['id']} (klin w przekroju "
+                         f"{mm(g['d_kl'] or 0)} mm)")
+    det.opis_stosu(g["scg"], "y", -0.62, odwroc=True, tytul=f"{g['sg']} — ściana dom–garaż (szczelna na spaliny)")
+    if g["ksuf"]:
+        det.opis([(xs1 + 0.55, -g["t_R"] - g["d_sg"] / 2)],
+                 [f"{g['ksuf']} — docieplenie spodu płyty pasem {g['b_pas']:.2f} m: ".replace(".", ",")
+                  + ", ".join(tekst(det, w["mat"], w["d"]) for w in det.warstwy(g["ksuf"]))])
+    det.opis_stosu(det_stos_pod(det, g["pod"], g["y_f"], 0.0)[:g["kp"] + 1], "x", -0.22,
+                   wyjscie=(-0.22, yT + 0.03), tytul=f"{g['pod']} — podłoga P1")
+    det.opis([(xs1 + 0.40, -g["t_R"] / 2)], ["płyta ŻB ciągła: strop ST1 (dom) / płyta dachu garażu — "
+                                             "mostek ograniczony pasem docieplenia (ψ_iu w karcie)"])
+    # wymiary, rzędne
+    det.wymiar([(x_iz + 0.6, y_top), (x_iz + 0.6, y_up), (x_iz + 0.6, g["y_x"])], x_iz + 0.62, "v")
+    det.wymiar([(x_iz, y_top + 0.02), (x_iz + g["b_zw"], y_top + 0.02)], y_top + 0.06, "h")
+    det.wymiar([(xs1, -g["t_R"] - g["d_sg"] - 0.05), (min(xs1 + g["b_pas"], xR), -g["t_R"] - g["d_sg"] - 0.05)],
+               -g["t_R"] - g["d_sg"] - 0.09, "h")
+    det.rzedna((xL + 0.05, g["y_f"]), g["y_f"], "wyk", "right")
+    det.rzedna((xL + 0.05, 0.0), 0.0, "konstr", "right")
+    det.rzedna((xR - 0.25, y_top), y_top, "wyk", "right")
+    det.uwagi.append("dach garażu nieużytkowy; wywinięcia hydroizolacji ≥ 15 cm ponad warstwę wierzchnią (żwir / "
+                     "substrat) — wytyczne DAFA (dachy płaskie) i FLL (dachy zielone); pas żwiru 50 cm przy ścianach, "
+                     "attykach i wpustach; paroizolacja i bariera przeciwkorzenna wywinięte na mur")
+    det.uwagi.append(f"garaż nieogrzewany: ψ_iu węzła (strona garażu) × b_u = 0,8 → H_U (zestawienie H_TB)")
+    return det

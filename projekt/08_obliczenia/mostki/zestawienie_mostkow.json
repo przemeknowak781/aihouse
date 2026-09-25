@@ -1,0 +1,1450 @@
+{
+ "model": "budynek.yaml",
+ "wezly": [
+  {
+   "id": "WZ-01",
+   "nazwa": "Attyka stropodachu bryły A (D1)",
+   "typ": "attyka",
+   "psi_e": 0.0627,
+   "psi_oi": 0.17422,
+   "f_rsi": 0.8987,
+   "ocena": "DOBRY",
+   "ref": [
+    0.75,
+    0.2,
+    "stropodach–ściana zewnętrzna z attyką (izolacja attyki z 3 stron)",
+    "attyka"
+   ],
+   "pary": {
+    "i-e": {
+     "psi_oi": 0.17422,
+     "psi_e": 0.0627,
+     "L2D": 0.50378
+    }
+   },
+   "theta": {
+    "i": 20.0,
+    "e": -18.0
+   },
+   "L_geo": 19.939487179487163,
+   "L_geo_opis": "attyki nad pomieszczeniami ogrzewanymi, bez odcinków z płytą wspornikową i ze ścianą wyższą: D1 19.94",
+   "L_model": 45.9,
+   "L_model_czesc": 45.9,
+   "linie4": {
+    "I": [
+     "OK",
+     "ciągła — brak drogi przez materiały λ > 0,12 z wnętrza na zewnątrz"
+    ],
+    "H": [
+     "OK",
+     "hydroizolacja (MEMB_TPO) wywinięta na attykę i koronę — 25 cm ponad pokrycie (≥ 15 cm)"
+    ],
+    "S": [
+     "OK",
+     "warstwa szczelna ciągła: paroizolacja, szczelnosc_powietrzna + płyta ŻB (połączenia taśmą)"
+    ],
+    "P": [
+     "OK",
+     "Glaser (PN-EN ISO 13788): SD1 — kondensacja okresowa, M_a,max = 0 g/m² — wysycha w okresie letnim (dopuszczalna wg WT zał. 2 pkt 2.2.5); SZ2 — brak kondensacji międzywarstwowej; SZ1 — brak kondensacji międzywarstwowej"
+    ],
+    "ciaglosc": "zachowana"
+   },
+   "przegrody": [
+    "SD1",
+    "AT1",
+    "SZ2",
+    "SZ1"
+   ]
+  },
+  {
+   "id": "WZ-02",
+   "nazwa": "Attyki dachów P1 (D2, D3) — poza ścianami bryły A",
+   "typ": "attyka",
+   "psi_e": 0.05853,
+   "psi_oi": 0.17142,
+   "f_rsi": 0.9001,
+   "ocena": "DOBRY",
+   "ref": [
+    0.75,
+    0.2,
+    "stropodach–ściana zewnętrzna z attyką (izolacja attyki z 3 stron)",
+    "attyka"
+   ],
+   "pary": {
+    "i-e": {
+     "psi_oi": 0.17142,
+     "psi_e": 0.05853,
+     "L2D": 0.50442
+    }
+   },
+   "theta": {
+    "i": 20.0,
+    "e": -18.0
+   },
+   "L_geo": 13.405555555555557,
+   "L_geo_opis": "attyki nad pomieszczeniami ogrzewanymi, bez odcinków z płytą wspornikową i ze ścianą wyższą: D2 7.08, D3 6.33",
+   "L_model": 14.62,
+   "L_model_czesc": 14.62,
+   "linie4": {
+    "I": [
+     "OK",
+     "ciągła — brak drogi przez materiały λ > 0,12 z wnętrza na zewnątrz"
+    ],
+    "H": [
+     "OK",
+     "hydroizolacja (MEMB_TPO) wywinięta na attykę i koronę — 25 cm ponad pokrycie (≥ 15 cm)"
+    ],
+    "S": [
+     "OK",
+     "warstwa szczelna ciągła: paroizolacja, szczelnosc_powietrzna + płyta ŻB (połączenia taśmą)"
+    ],
+    "P": [
+     "OK",
+     "Glaser (PN-EN ISO 13788): SD2 — kondensacja okresowa, M_a,max = 0 g/m² — wysycha w okresie letnim (dopuszczalna wg WT zał. 2 pkt 2.2.5); SZ1 — brak kondensacji międzywarstwowej"
+    ],
+    "ciaglosc": "zachowana"
+   },
+   "przegrody": [
+    "SD2",
+    "AT1",
+    "SZ1"
+   ]
+  },
+  {
+   "id": "WZ-03",
+   "nazwa": "Attyka dachu zielonego nad pasem gospodarczym (linia D, część ogrzewana)",
+   "typ": "attyka",
+   "psi_e": 0.06912,
+   "psi_oi": 0.19526,
+   "f_rsi": 0.8897,
+   "ocena": "DOBRY",
+   "ref": [
+    0.75,
+    0.2,
+    "stropodach–ściana zewnętrzna z attyką (izolacja attyki z 3 stron)",
+    "attyka"
+   ],
+   "pary": {
+    "i-e": {
+     "psi_oi": 0.19526,
+     "psi_e": 0.06912,
+     "L2D": 0.56113
+    }
+   },
+   "theta": {
+    "i": 20.0,
+    "e": -18.0
+   },
+   "L_geo": 7.169399838882919,
+   "L_geo_opis": "attyki nad pomieszczeniami ogrzewanymi, bez odcinków z płytą wspornikową i ze ścianą wyższą: D4 7.17",
+   "L_model": 9.55,
+   "L_model_czesc": 9.55,
+   "linie4": {
+    "I": [
+     "OK",
+     "ciągła — brak drogi przez materiały λ > 0,12 z wnętrza na zewnątrz"
+    ],
+    "H": [
+     "OK",
+     "hydroizolacja (PAPA_SBS) wywinięta na attykę i koronę — 55 cm ponad pokrycie (≥ 15 cm)"
+    ],
+    "S": [
+     "OK",
+     "warstwa szczelna ciągła: paroizolacja, szczelnosc_powietrzna + płyta ŻB (połączenia taśmą)"
+    ],
+    "P": [
+     "OK",
+     "Glaser (PN-EN ISO 13788): DZ1 — kondensacja okresowa, M_a,max = 0 g/m² — wysycha w okresie letnim (dopuszczalna wg WT zał. 2 pkt 2.2.5); SZ1 — brak kondensacji międzywarstwowej"
+    ],
+    "ciaglosc": "zachowana"
+   },
+   "przegrody": [
+    "DZ1",
+    "AT1",
+    "SZ1"
+   ]
+  },
+  {
+   "id": "WZ-04",
+   "nazwa": "Okap E (PL-E) i daszek wejścia — łącznik termoizolacyjny",
+   "typ": "wspornik",
+   "psi_e": 0.22043,
+   "psi_oi": 0.22043,
+   "f_rsi": 0.9033,
+   "ocena": "DO POPRAWY",
+   "ref": [
+    0.3,
+    0.15,
+    "płyta wspornikowa z łącznikiem termoizolacyjnym",
+    "plyta_wspornikowa_lacznik"
+   ],
+   "pary": {
+    "i-e": {
+     "psi_oi": 0.22043,
+     "psi_e": 0.22043,
+     "L2D": 0.60608
+    }
+   },
+   "theta": {
+    "i": 20.0,
+    "e": -18.0
+   },
+   "L_geo": 22.467627736243053,
+   "L_geo_opis": "styk płyt z obudową (bez krawędzi stropu nad powietrzem): PL-E 19.97, PL-DA 2.50",
+   "L_model": 21.82,
+   "L_model_czesc": 21.82,
+   "linie4": {
+    "I": [
+     "OK",
+     "ciągła — brak drogi przez materiały λ > 0,12 z wnętrza na zewnątrz"
+    ],
+    "H": [
+     "UWAGA",
+     "spadek płyty od budynku: nieokreślony w modelu (wymagany ≥ 1,5–2 %); odprowadzenie wody z krawędzi płyty (rynna / okapnik / rzygacz → rura spustowa) — nieokreślone w modelu; obróbka czoła płyty z okapnikiem ≥ 3 cm"
+    ],
+    "S": [
+     "OK",
+     "warstwa szczelna ciągła: szczelnosc_powietrzna + płyta ŻB (połączenia taśmą)"
+    ],
+    "P": [
+     "OK",
+     "Glaser (PN-EN ISO 13788): SZ1 — brak kondensacji międzywarstwowej"
+    ],
+    "ciaglosc": "uwaga — hydroizolacja / ochrona przed wodą: spadek płyty od budynku: nieokreślony w modelu (wymagany ≥ 1,5–2 %); odprowadzenie wody z krawędzi płyty (rynna / okapnik / rzygacz → rura spustowa) — nieokreślone w modelu; obróbka czoła płyty z okapnikiem ≥ 3 cm"
+   },
+   "przegrody": [
+    "OK1",
+    "POD-1",
+    "SZ1"
+   ]
+  },
+  {
+   "id": "WZ-05",
+   "nazwa": "Krawędź ST2 (PL-2) — łącznik termoizolacyjny pod bryłą A",
+   "typ": "wspornik",
+   "psi_e": 0.21824,
+   "psi_oi": 0.22621,
+   "f_rsi": 0.9021,
+   "ocena": "DO POPRAWY",
+   "ref": [
+    0.3,
+    0.15,
+    "płyta wspornikowa z łącznikiem termoizolacyjnym",
+    "plyta_wspornikowa_lacznik"
+   ],
+   "pary": {
+    "i-e": {
+     "psi_oi": 0.22621,
+     "psi_e": 0.21824,
+     "L2D": 0.62544
+    }
+   },
+   "theta": {
+    "i": 20.0,
+    "e": -18.0
+   },
+   "L_geo": 18.70627930682977,
+   "L_geo_opis": "styk płyt z obudową (bez krawędzi stropu nad powietrzem): PL-2 18.71",
+   "L_model": 19.32,
+   "L_model_czesc": 19.32,
+   "linie4": {
+    "I": [
+     "OK",
+     "ciągła — brak drogi przez materiały λ > 0,12 z wnętrza na zewnątrz"
+    ],
+    "H": [
+     "UWAGA",
+     "spadek płyty od budynku: nieokreślony w modelu (wymagany ≥ 1,5–2 %); odprowadzenie wody z krawędzi płyty (rynna / okapnik / rzygacz → rura spustowa) — nieokreślone w modelu; obróbka czoła płyty z okapnikiem ≥ 3 cm"
+    ],
+    "S": [
+     "OK",
+     "warstwa szczelna ciągła: szczelnosc_powietrzna + płyta ŻB (połączenia taśmą)"
+    ],
+    "P": [
+     "OK",
+     "Glaser (PN-EN ISO 13788): SZ2 — brak kondensacji międzywarstwowej"
+    ],
+    "ciaglosc": "uwaga — hydroizolacja / ochrona przed wodą: spadek płyty od budynku: nieokreślony w modelu (wymagany ≥ 1,5–2 %); odprowadzenie wody z krawędzi płyty (rynna / okapnik / rzygacz → rura spustowa) — nieokreślone w modelu; obróbka czoła płyty z okapnikiem ≥ 3 cm"
+   },
+   "przegrody": [
+    "OK1",
+    "POD-1",
+    "SZ2"
+   ]
+  },
+  {
+   "id": "WZ-06",
+   "nazwa": "Krawędź ST3 (PL-3) — łącznik termoizolacyjny przy attyce bryły A",
+   "typ": "attyka",
+   "psi_e": 0.27396,
+   "psi_oi": 0.38548,
+   "f_rsi": 0.8252,
+   "ocena": "DO POPRAWY",
+   "ref": [
+    0.75,
+    0.2,
+    "stropodach–ściana zewnętrzna z attyką (izolacja attyki z 3 stron)",
+    "attyka"
+   ],
+   "pary": {
+    "i-e": {
+     "psi_oi": 0.38548,
+     "psi_e": 0.27396,
+     "L2D": 0.71504
+    }
+   },
+   "theta": {
+    "i": 20.0,
+    "e": -18.0
+   },
+   "L_geo": 24.30051282051288,
+   "L_geo_opis": "styk płyt z obudową (bez krawędzi stropu nad powietrzem): PL-3 24.30",
+   "L_model": 25.05,
+   "L_model_czesc": 25.05,
+   "linie4": {
+    "I": [
+     "OK",
+     "ciągła — brak drogi przez materiały λ > 0,12 z wnętrza na zewnątrz"
+    ],
+    "H": [
+     "OK",
+     "hydroizolacja wywinięta na attykę i koronę — 25 cm ponad pokrycie (≥ 15 cm); membrana okapu wywinięta na izolację attyki ≥ 15 cm"
+    ],
+    "S": [
+     "OK",
+     "warstwa szczelna ciągła: paroizolacja, szczelnosc_powietrzna + płyta ŻB (połączenia taśmą)"
+    ],
+    "P": [
+     "OK",
+     "Glaser (PN-EN ISO 13788): SD1 — kondensacja okresowa, M_a,max = 0 g/m² — wysycha w okresie letnim (dopuszczalna wg WT zał. 2 pkt 2.2.5); SZ2 — brak kondensacji międzywarstwowej"
+    ],
+    "ciaglosc": "zachowana"
+   },
+   "przegrody": [
+    "OK1",
+    "SD1",
+    "SZ2"
+   ]
+  },
+  {
+   "id": "WZ-07a",
+   "nazwa": "Krawędź stropu ST2Z nad powietrzem: ściana SZL na belce B3 + płyta PL-2 (łącznik)",
+   "typ": "strop_zewn_krawedz",
+   "psi_e": 0.05763,
+   "psi_oi": 0.18214,
+   "f_rsi": 0.8373,
+   "ocena": "DO POPRAWY",
+   "ref": [
+    0.6,
+    0.15,
+    "strop nad powietrzem zewnętrznym – ściana (wspornik bryły)",
+    "strop_zewn_krawedz"
+   ],
+   "pary": {
+    "i-e": {
+     "psi_oi": 0.18214,
+     "psi_e": 0.05763,
+     "L2D": 0.56157
+    }
+   },
+   "theta": {
+    "i": 20.0,
+    "e": -18.0
+   },
+   "L_geo": 5.72,
+   "L_geo_opis": "strop ST2Z (sufit SUF-ZEW); krawędzie typu ściana na krawędzi — łącznie 5.72 m",
+   "L_model": 13.45,
+   "L_model_czesc": 6.725,
+   "linie4": {
+    "I": [
+     "OK",
+     "ciągła — brak drogi przez materiały λ > 0,12 z wnętrza na zewnątrz"
+    ],
+    "H": [
+     "OK",
+     "membrana płyty wspornikowej wywinięta na ścianę ≥ 15 cm ponad powierzchnię płyty"
+    ],
+    "S": [
+     "OK",
+     "warstwa szczelna ciągła: szczelnosc_powietrzna + płyta ŻB (połączenia taśmą)"
+    ],
+    "P": [
+     "OK",
+     "Glaser (PN-EN ISO 13788): SZL — brak kondensacji międzywarstwowej; SZ1 — brak kondensacji międzywarstwowej"
+    ],
+    "ciaglosc": "zachowana"
+   },
+   "przegrody": [
+    "POD-1",
+    "SUF-ZEW",
+    "SZL",
+    "SZ1"
+   ]
+  },
+  {
+   "id": "WZ-07b",
+   "nazwa": "Krawędź stropu ST2Z nad ścianą SZ1 niższej kondygnacji (ocieplenie spodu SUF-ZEW)",
+   "typ": "strop_zewn_krawedz",
+   "psi_e": -0.01439,
+   "psi_oi": -0.06066,
+   "f_rsi": 0.9518,
+   "ocena": "BEZMOSTKOWY",
+   "ref": [
+    0.6,
+    0.15,
+    "strop nad powietrzem zewnętrznym – ściana (wspornik bryły)",
+    "strop_zewn_krawedz"
+   ],
+   "pary": {
+    "i-e": {
+     "psi_oi": -0.06066,
+     "psi_e": -0.01439,
+     "L2D": 0.50063
+    }
+   },
+   "theta": {
+    "i": 20.0,
+    "e": -18.0
+   },
+   "L_geo": 5.72,
+   "L_geo_opis": "strop ST2Z (sufit SUF-ZEW); krawędzie typu nad ścianą niższej kondygnacji — łącznie 5.72 m",
+   "L_model": 13.45,
+   "L_model_czesc": 6.725,
+   "linie4": {
+    "I": [
+     "OK",
+     "ciągła — brak drogi przez materiały λ > 0,12 z wnętrza na zewnątrz"
+    ],
+    "H": [
+     "OK",
+     "węzeł poza strefą wody stojącej — wyprawa / okładzina elewacji ciągła"
+    ],
+    "S": [
+     "OK",
+     "warstwa szczelna ciągła: szczelnosc_powietrzna + płyta ŻB (połączenia taśmą)"
+    ],
+    "P": [
+     "OK",
+     "Glaser (PN-EN ISO 13788): SZL — brak kondensacji międzywarstwowej; SZ1 — brak kondensacji międzywarstwowej"
+    ],
+    "ciaglosc": "zachowana"
+   },
+   "przegrody": [
+    "POD-1",
+    "SUF-ZEW",
+    "SZL",
+    "SZ1"
+   ]
+  },
+  {
+   "id": "WZ-08",
+   "nazwa": "Cokół: ściana zewn. – płyta fundamentowa na XPS (część ogrzewana)",
+   "typ": "cokol",
+   "psi_e": 0.05752,
+   "psi_oi": 0.10023,
+   "f_rsi": 0.9032,
+   "ocena": "DOBRY",
+   "ref": [
+    0.8,
+    0.15,
+    "ściana zewnętrzna – podłoga na gruncie / płyta fundamentowa (cokół)",
+    "sciana_grunt"
+   ],
+   "pary": {
+    "i-e": {
+     "psi_oi": 0.10023,
+     "psi_e": 0.05752,
+     "L2D": 0.56544
+    }
+   },
+   "theta": {
+    "i": 20.0,
+    "e": -18.0
+   },
+   "L_geo": 27.772529304646373,
+   "L_geo_opis": "obwód parteru pomieszczeń ogrzewanych bez progów",
+   "L_model": 43.4,
+   "L_model_czesc": 43.4,
+   "linie4": {
+    "I": [
+     "OK",
+     "ciągła — brak drogi przez materiały λ > 0,12 z wnętrza na zewnątrz"
+    ],
+    "H": [
+     "OK",
+     "hydroizolacja pod płytą (na XPS) wywinięta na krawędź płyty — ciągła do strefy cokołu; uszczelnienie strefy cokołu (masa/tynk mozaikowy) do 30 cm nad terenem (≥ 30 cm)"
+    ],
+    "S": [
+     "OK",
+     "warstwa szczelna ciągła: szczelnosc_powietrzna"
+    ],
+    "P": [
+     "OK",
+     "Glaser (PN-EN ISO 13788): SZ1 — brak kondensacji międzywarstwowej"
+    ],
+    "ciaglosc": "zachowana"
+   },
+   "przegrody": [
+    "SZ1",
+    "POD-0"
+   ]
+  },
+  {
+   "id": "WZ-09a",
+   "nazwa": "Ściana dom–garaż (SWG) na płycie fundamentowej (POD-0 / POD-G)",
+   "typ": "garaz",
+   "psi_e": 0.61558,
+   "psi_oi": 0.61558,
+   "f_rsi": 0.7598,
+   "ocena": "ZŁY",
+   "ref": [
+    0.2,
+    0.1,
+    "połączenie przegród dom–garaż nieogrzewany (ściana/strop)",
+    "polaczenie_nieogrz"
+   ],
+   "pary": {
+    "i-u": {
+     "psi_oi": 0.61558,
+     "psi_e": 0.61558,
+     "L2D": 0.8695
+    }
+   },
+   "theta": {
+    "i": 20.0,
+    "u": -10.4
+   },
+   "L_geo": 12.25,
+   "L_geo_opis": "ściany S0-16, S0-17 (Σ 12.25 m) na płycie PF",
+   "L_model": 24.5,
+   "L_model_czesc": 12.25,
+   "linie4": {
+    "I": [
+     "UWAGA",
+     "przerwana: TYNK_GIPS → SIL18 → ZB_C25 → TYNK_CW (płyta ciągła do strefy nieogrzewanej — mostek konstrukcyjny)"
+    ],
+    "H": [
+     "OK",
+     "izolacja przeciwwilgociowa/przeciwradonowa na płycie — ciągła pod ścianą"
+    ],
+    "S": [
+     "OK",
+     "tynk ciągły po stronie domu + uszczelnienie styków z płytą (szczelność gazowa WT § 106)"
+    ],
+    "P": [
+     "OK",
+     "Glaser (PN-EN ISO 13788): SWG — brak kondensacji międzywarstwowej; DZ1 — kondensacja okresowa, M_a,max = 0 g/m² — wysycha w okresie letnim (dopuszczalna wg WT zał. 2 pkt 2.2.5)"
+    ],
+    "ciaglosc": "uwaga — izolacja cieplna: przerwana: TYNK_GIPS → SIL18 → ZB_C25 → TYNK_CW (płyta ciągła do strefy nieogrzewanej — mostek konstrukcyjny)"
+   },
+   "przegrody": [
+    "SWG",
+    "POD-0",
+    "DZ1",
+    "SUF-G"
+   ]
+  },
+  {
+   "id": "WZ-09b",
+   "nazwa": "Ściana SWG pod płytą: dom — D4, garaż — D4, pas docieplenia SUF-G 1.0 m",
+   "typ": "garaz",
+   "psi_e": 0.05222,
+   "psi_oi": 0.07101,
+   "f_rsi": 0.836,
+   "ocena": "ZŁY",
+   "ref": [
+    0.2,
+    0.1,
+    "połączenie przegród dom–garaż nieogrzewany (ściana/strop)",
+    "polaczenie_nieogrz"
+   ],
+   "pary": {
+    "i-u": {
+     "psi_oi": 0.31694,
+     "psi_e": 0.28647,
+     "L2D": 0.57086
+    },
+    "i-e": {
+     "psi_oi": 0.07101,
+     "psi_e": 0.05222,
+     "L2D": 0.29823
+    },
+    "u-e": {
+     "psi_oi": -0.04345,
+     "psi_e": -0.06224,
+     "L2D": 0.2994
+    }
+   },
+   "theta": {
+    "i": 20.0,
+    "u": -10.4,
+    "e": -18.0
+   },
+   "L_geo": 6.38,
+   "L_geo_opis": "ściany S0-17 (Σ 6.38 m)",
+   "L_model": 24.5,
+   "L_model_czesc": 6.375,
+   "linie4": {
+    "I": [
+     "UWAGA",
+     "przerwana: TYNK_GIPS → SIL18 → ZB_C25 (płyta ciągła do strefy nieogrzewanej — mostek konstrukcyjny)"
+    ],
+    "H": [
+     "OK",
+     "hydroizolacja dachu ciągła nad ścianą"
+    ],
+    "S": [
+     "OK",
+     "tynk ciągły po stronie domu + uszczelnienie styków z płytą (szczelność gazowa WT § 106)"
+    ],
+    "P": [
+     "OK",
+     "Glaser (PN-EN ISO 13788): SWG — brak kondensacji międzywarstwowej; DZ1 — kondensacja okresowa, M_a,max = 0 g/m² — wysycha w okresie letnim (dopuszczalna wg WT zał. 2 pkt 2.2.5)"
+    ],
+    "ciaglosc": "uwaga — izolacja cieplna: przerwana: TYNK_GIPS → SIL18 → ZB_C25 (płyta ciągła do strefy nieogrzewanej — mostek konstrukcyjny)"
+   },
+   "przegrody": [
+    "SWG",
+    "POD-0",
+    "DZ1",
+    "SUF-G"
+   ]
+  },
+  {
+   "id": "WZ-09c",
+   "nazwa": "Ściana SWG pod płytą: dom — ST1 + ściana SZ1, garaż — D4, pas docieplenia SUF-G 1.0 m",
+   "typ": "garaz",
+   "psi_e": 0.0704,
+   "psi_oi": 0.08132,
+   "f_rsi": 0.8853,
+   "ocena": "ZŁY",
+   "ref": [
+    0.2,
+    0.1,
+    "połączenie przegród dom–garaż nieogrzewany (ściana/strop)",
+    "polaczenie_nieogrz"
+   ],
+   "pary": {
+    "i-u": {
+     "psi_oi": 0.17777,
+     "psi_e": 0.30219,
+     "L2D": 0.63863
+    },
+    "i-e": {
+     "psi_oi": 0.08132,
+     "psi_e": 0.0704,
+     "L2D": 0.25813
+    },
+    "u-e": {
+     "psi_oi": -0.05371,
+     "psi_e": -0.0725,
+     "L2D": 0.28914
+    }
+   },
+   "theta": {
+    "i": 20.0,
+    "u": -10.4,
+    "e": -18.0
+   },
+   "L_geo": 5.88,
+   "L_geo_opis": "ściany S0-16 (Σ 5.88 m)",
+   "L_model": 24.5,
+   "L_model_czesc": 5.875,
+   "linie4": {
+    "I": [
+     "UWAGA",
+     "przerwana: TYNK_GIPS → SIL18 → ZB_C25 (płyta ciągła do strefy nieogrzewanej — mostek konstrukcyjny)"
+    ],
+    "H": [
+     "OK",
+     "hydroizolacja dachu wywinięta na ścianę ≥ 15 cm ponad warstwę wierzchnią (substrat / żwir)"
+    ],
+    "S": [
+     "OK",
+     "tynk ciągły po stronie domu + uszczelnienie styków z płytą (szczelność gazowa WT § 106)"
+    ],
+    "P": [
+     "OK",
+     "Glaser (PN-EN ISO 13788): SWG — brak kondensacji międzywarstwowej; DZ1 — kondensacja okresowa, M_a,max = 0 g/m² — wysycha w okresie letnim (dopuszczalna wg WT zał. 2 pkt 2.2.5)"
+    ],
+    "ciaglosc": "uwaga — izolacja cieplna: przerwana: TYNK_GIPS → SIL18 → ZB_C25 (płyta ciągła do strefy nieogrzewanej — mostek konstrukcyjny)"
+   },
+   "przegrody": [
+    "SWG",
+    "POD-0",
+    "DZ1",
+    "SUF-G"
+   ]
+  },
+  {
+   "id": "WZ-10",
+   "nazwa": "Strop pośredni ST1/ST2 – ściana zewn. z ETICS ciągłym (wieniec)",
+   "typ": "strop_posredni",
+   "psi_e": -1e-05,
+   "psi_oi": -1e-05,
+   "f_rsi": 0.9632,
+   "ocena": "BEZMOSTKOWY",
+   "ref": [
+    0.0,
+    0.0,
+    "strop pośredni – ściana zewnętrzna z izolacją ciągłą (ETICS); Ψ_oi = Ψ_e (wys. „od podłogi do podłogi”)",
+    "strop_posredni"
+   ],
+   "pary": {
+    "i-e": {
+     "psi_oi": -1e-05,
+     "psi_e": -1e-05,
+     "L2D": 0.38563
+    }
+   },
+   "theta": {
+    "i": 20.0,
+    "e": -18.0
+   },
+   "L_geo": 18.19798821310703,
+   "L_geo_opis": "ściana zewn. nad i pod stropem, bez płyt wspornikowych, dachów i garażu: ST1 13.47, ST2 4.73",
+   "L_model": 55.12,
+   "L_model_czesc": 55.12,
+   "linie4": {
+    "I": [
+     "OK",
+     "ciągła — brak drogi przez materiały λ > 0,12 z wnętrza na zewnątrz"
+    ],
+    "H": [
+     "OK",
+     "węzeł poza strefą wody stojącej — wyprawa / okładzina elewacji ciągła"
+    ],
+    "S": [
+     "OK",
+     "warstwa szczelna ciągła: szczelnosc_powietrzna"
+    ],
+    "P": [
+     "OK",
+     "Glaser (PN-EN ISO 13788): SZ1 — brak kondensacji międzywarstwowej"
+    ],
+    "ciaglosc": "zachowana"
+   },
+   "przegrody": [
+    "POD-1",
+    "SZ1"
+   ]
+  },
+  {
+   "id": "WZ-11",
+   "nazwa": "Ościeża okien/drzwi — ciepły montaż (rama 5 cm w murze, 4 cm w izolacji, zakład izolacji 3 cm na ramę)",
+   "typ": "oscieze",
+   "psi_e": 0.01405,
+   "psi_oi": 0.00532,
+   "f_rsi": 0.9301,
+   "ocena": "DOBRY",
+   "ref": [
+    0.1,
+    0.04,
+    "ościeża/nadproża/parapety — okno w warstwie izolacji („ciepły montaż”)",
+    "oscieze"
+   ],
+   "pary": {
+    "i-e": {
+     "psi_oi": 0.00532,
+     "psi_e": 0.01405,
+     "L2D": 0.43741
+    }
+   },
+   "theta": {
+    "i": 20.0,
+    "e": -18.0
+   },
+   "L_geo": 96.28,
+   "L_geo_opis": "2 × wysokość 26 otworów w ścianach zewn. części ogrzewanej",
+   "L_model": 96.28,
+   "L_model_czesc": 96.28,
+   "linie4": {
+    "I": [
+     "OK",
+     "ciągła — brak drogi przez materiały λ > 0,12 z wnętrza na zewnątrz"
+    ],
+    "H": [
+     "OK",
+     "węzeł poza strefą wody stojącej — wyprawa / okładzina elewacji ciągła"
+    ],
+    "S": [
+     "OK",
+     "tynk wewn. do ramy + taśma paroszczelna (od wewn.) na obwodzie ramy — wymaganie detalu"
+    ],
+    "P": [
+     "OK",
+     "Glaser (PN-EN ISO 13788): SZ1 — brak kondensacji międzywarstwowej; SZ2 — brak kondensacji międzywarstwowej; SZL — brak kondensacji międzywarstwowej"
+    ],
+    "ciaglosc": "zachowana"
+   },
+   "przegrody": [
+    "SZ1",
+    "SZ2",
+    "SZL"
+   ]
+  },
+  {
+   "id": "WZ-11N",
+   "nazwa": "Nadproża — BEZ kaset osłon w ociepleniu (kasety w okapach / ramie C / szczelinie lamel / nadstawne)",
+   "typ": "nadproze",
+   "psi_e": 0.01654,
+   "psi_oi": 0.00781,
+   "f_rsi": 0.9378,
+   "ocena": "DOBRY",
+   "ref": [
+    0.1,
+    0.04,
+    "ościeża/nadproża/parapety — okno w warstwie izolacji („ciepły montaż”)",
+    "oscieze"
+   ],
+   "pary": {
+    "i-e": {
+     "psi_oi": 0.00781,
+     "psi_e": 0.01654,
+     "L2D": 0.44044
+    }
+   },
+   "theta": {
+    "i": 20.0,
+    "e": -18.0
+   },
+   "L_geo": 45.03,
+   "L_geo_opis": "szerokości otworów",
+   "L_model": 45.03,
+   "L_model_czesc": 45.03,
+   "linie4": {
+    "I": [
+     "OK",
+     "ciągła — brak drogi przez materiały λ > 0,12 z wnętrza na zewnątrz"
+    ],
+    "H": [
+     "OK",
+     "węzeł poza strefą wody stojącej — wyprawa / okładzina elewacji ciągła"
+    ],
+    "S": [
+     "OK",
+     "tynk wewn. do ramy + taśma paroszczelna (od wewn.) na obwodzie ramy — wymaganie detalu"
+    ],
+    "P": [
+     "OK",
+     "Glaser (PN-EN ISO 13788): SZ1 — brak kondensacji międzywarstwowej; SZ2 — brak kondensacji międzywarstwowej; SZL — brak kondensacji międzywarstwowej"
+    ],
+    "ciaglosc": "zachowana"
+   },
+   "przegrody": [
+    "SZ1",
+    "SZ2",
+    "SZL"
+   ]
+  },
+  {
+   "id": "WZ-11P",
+   "nazwa": "Podokienniki — parapet zewn. z okapnikiem na profilu z XPS",
+   "typ": "podokiennik",
+   "psi_e": 0.01466,
+   "psi_oi": 0.00593,
+   "f_rsi": 0.9111,
+   "ocena": "DOBRY",
+   "ref": [
+    0.1,
+    0.04,
+    "ościeża/nadproża/parapety — okno w warstwie izolacji („ciepły montaż”)",
+    "oscieze"
+   ],
+   "pary": {
+    "i-e": {
+     "psi_oi": 0.00593,
+     "psi_e": 0.01466,
+     "L2D": 0.43746
+    }
+   },
+   "theta": {
+    "i": 20.0,
+    "e": -18.0
+   },
+   "L_geo": 29.419999999999995,
+   "L_geo_opis": "szerokości 17 okien z parapetem > 5 cm",
+   "L_model": 29.42,
+   "L_model_czesc": 29.42,
+   "linie4": {
+    "I": [
+     "OK",
+     "ciągła — brak drogi przez materiały λ > 0,12 z wnętrza na zewnątrz"
+    ],
+    "H": [
+     "OK",
+     "węzeł poza strefą wody stojącej — wyprawa / okładzina elewacji ciągła"
+    ],
+    "S": [
+     "OK",
+     "tynk wewn. do ramy + taśma paroszczelna (od wewn.) na obwodzie ramy — wymaganie detalu"
+    ],
+    "P": [
+     "OK",
+     "Glaser (PN-EN ISO 13788): SZ1 — brak kondensacji międzywarstwowej; SZ2 — brak kondensacji międzywarstwowej; SZL — brak kondensacji międzywarstwowej"
+    ],
+    "ciaglosc": "zachowana"
+   },
+   "przegrody": [
+    "SZ1",
+    "SZ2",
+    "SZL"
+   ]
+  },
+  {
+   "id": "WZ-11T",
+   "nazwa": "Progi HS / drzwi zewn. na płycie P0 — profil progowy termoizolacyjny na podwalinie XPS/PUR-GF, odwodnienie liniowe",
+   "typ": "prog",
+   "psi_e": 0.07574,
+   "psi_oi": 0.11846,
+   "f_rsi": 0.8447,
+   "ocena": "DOBRY",
+   "ref": [
+    0.8,
+    0.15,
+    "ściana zewnętrzna – podłoga na gruncie / płyta fundamentowa (cokół)",
+    "sciana_grunt"
+   ],
+   "pary": {
+    "i-e": {
+     "psi_oi": 0.11846,
+     "psi_e": 0.07574,
+     "L2D": 0.72855
+    }
+   },
+   "theta": {
+    "i": 20.0,
+    "e": -18.0
+   },
+   "L_geo": 15.669658195353605,
+   "L_geo_opis": "szerokości otworów drzwiowych/HS parteru (parapet ≤ 5 cm)",
+   "L_model": 15.61,
+   "L_model_czesc": 15.61,
+   "linie4": {
+    "I": [
+     "OK",
+     "ciągła — brak drogi przez materiały λ > 0,12 z wnętrza na zewnątrz"
+    ],
+    "H": [
+     "OK",
+     "hydroizolacja pod płytą (na XPS) wywinięta na krawędź płyty — ciągła do strefy cokołu; uszczelnienie strefy cokołu (masa/tynk mozaikowy) do 30 cm nad terenem (≥ 30 cm)"
+    ],
+    "S": [
+     "OK",
+     "tynk wewn. do ramy + taśma paroszczelna (od wewn.) na obwodzie ramy — wymaganie detalu"
+    ],
+    "P": [
+     "OK",
+     "Glaser (PN-EN ISO 13788): SZ1 — brak kondensacji międzywarstwowej"
+    ],
+    "ciaglosc": "zachowana"
+   },
+   "przegrody": [
+    "SZ1",
+    "POD-0"
+   ]
+  },
+  {
+   "id": "WZ-12",
+   "nazwa": "Narożniki wypukłe ścian zewnętrznych",
+   "typ": "naroze",
+   "psi_e": -0.05234,
+   "psi_oi": 0.06553,
+   "f_rsi": 0.9256,
+   "ocena": "BEZMOSTKOWY",
+   "ref": [
+    0.15,
+    0.06,
+    "narożnik zewnętrzny ścian (izolacja zewnętrzna)",
+    "naroznik_wypukly"
+   ],
+   "pary": {
+    "i-e": {
+     "psi_oi": 0.06553,
+     "psi_e": -0.05234,
+     "L2D": 0.53704
+    }
+   },
+   "theta": {
+    "i": 20.0,
+    "e": -18.0
+   },
+   "L_geo": 40.05,
+   "L_geo_opis": "naroża wypukłe obrysu ogrzewanego × wys. kondygnacji: P0: 3 × 3.15 m; P1: 4 × 3.15 m; P2: 6 × 3.00 m",
+   "L_model": 49.5,
+   "L_model_czesc": 49.5,
+   "linie4": {
+    "I": [
+     "OK",
+     "ciągła — brak drogi przez materiały λ > 0,12 z wnętrza na zewnątrz"
+    ],
+    "H": [
+     "OK",
+     "węzeł poza strefą wody stojącej — wyprawa / okładzina elewacji ciągła"
+    ],
+    "S": [
+     "OK",
+     "warstwa szczelna ciągła: szczelnosc_powietrzna"
+    ],
+    "P": [
+     "OK",
+     "Glaser (PN-EN ISO 13788): SZ1 — brak kondensacji międzywarstwowej; SZ2 — brak kondensacji międzywarstwowej"
+    ],
+    "ciaglosc": "zachowana"
+   },
+   "przegrody": [
+    "SZ1",
+    "SZ2"
+   ]
+  },
+  {
+   "id": "WZ-16a",
+   "nazwa": "Krawędź stropu ST2Z nad powietrzem: ściana SZ2 na belce B4 + płyta PL-2 (łącznik)",
+   "typ": "strop_zewn_krawedz",
+   "psi_e": 0.05678,
+   "psi_oi": 0.23646,
+   "f_rsi": 0.8399,
+   "ocena": "DO POPRAWY",
+   "ref": [
+    0.6,
+    0.15,
+    "strop nad powietrzem zewnętrznym – ściana (wspornik bryły)",
+    "strop_zewn_krawedz"
+   ],
+   "pary": {
+    "i-e": {
+     "psi_oi": 0.23646,
+     "psi_e": 0.05678,
+     "L2D": 0.66872
+    }
+   },
+   "theta": {
+    "i": 20.0,
+    "e": -18.0
+   },
+   "L_geo": 1.01,
+   "L_geo_opis": "strop ST2Z (sufit SUF-ZEW); krawędzie typu ściana na krawędzi — łącznie 1.01 m",
+   "L_model": 2.0,
+   "L_model_czesc": 1.0,
+   "linie4": {
+    "I": [
+     "OK",
+     "ciągła — brak drogi przez materiały λ > 0,12 z wnętrza na zewnątrz"
+    ],
+    "H": [
+     "OK",
+     "membrana płyty wspornikowej wywinięta na ścianę ≥ 15 cm ponad powierzchnię płyty"
+    ],
+    "S": [
+     "OK",
+     "warstwa szczelna ciągła: szczelnosc_powietrzna + płyta ŻB (połączenia taśmą)"
+    ],
+    "P": [
+     "OK",
+     "Glaser (PN-EN ISO 13788): SZ1 — brak kondensacji międzywarstwowej; SZL — brak kondensacji międzywarstwowej"
+    ],
+    "ciaglosc": "zachowana"
+   },
+   "przegrody": [
+    "SZ1",
+    "SZL",
+    "SUF-ZEW"
+   ]
+  },
+  {
+   "id": "WZ-16b",
+   "nazwa": "Krawędź stropu ST2Z nad powietrzem: ściana SZ1 na belce B5",
+   "typ": "strop_zewn_krawedz",
+   "psi_e": -0.04379,
+   "psi_oi": 0.12286,
+   "f_rsi": 0.8804,
+   "ocena": "BEZMOSTKOWY",
+   "ref": [
+    0.6,
+    0.15,
+    "strop nad powietrzem zewnętrznym – ściana (wspornik bryły)",
+    "strop_zewn_krawedz"
+   ],
+   "pary": {
+    "i-e": {
+     "psi_oi": 0.12286,
+     "psi_e": -0.04379,
+     "L2D": 0.54153
+    }
+   },
+   "theta": {
+    "i": 20.0,
+    "e": -18.0
+   },
+   "L_geo": 1.01,
+   "L_geo_opis": "strop ST2Z (sufit SUF-ZEW); krawędzie typu ściana na krawędzi — łącznie 1.01 m",
+   "L_model": 2.0,
+   "L_model_czesc": 1.0,
+   "linie4": {
+    "I": [
+     "OK",
+     "ciągła — brak drogi przez materiały λ > 0,12 z wnętrza na zewnątrz"
+    ],
+    "H": [
+     "OK",
+     "węzeł poza strefą wody stojącej — wyprawa / okładzina elewacji ciągła"
+    ],
+    "S": [
+     "OK",
+     "warstwa szczelna ciągła: szczelnosc_powietrzna + płyta ŻB (połączenia taśmą)"
+    ],
+    "P": [
+     "OK",
+     "Glaser (PN-EN ISO 13788): SZ1 — brak kondensacji międzywarstwowej; SZL — brak kondensacji międzywarstwowej"
+    ],
+    "ciaglosc": "zachowana"
+   },
+   "przegrody": [
+    "SZ1",
+    "SZL",
+    "SUF-ZEW"
+   ]
+  },
+  {
+   "id": "WZ-X1",
+   "nazwa": "Dach D2/D3 (SD2) – ściana SZ1 wyższej kondygnacji na krawędzi (pod spodem ściana SW18, pomieszczenia ogrzewane) — węzeł spoza sekcji `wezly`",
+   "typ": "attyka",
+   "psi_e": -0.00626,
+   "psi_oi": 0.02235,
+   "f_rsi": 0.9643,
+   "ocena": "BEZMOSTKOWY",
+   "ref": [
+    0.75,
+    0.2,
+    "stropodach–ściana zewnętrzna z attyką (izolacja attyki z 3 stron)",
+    "attyka"
+   ],
+   "pary": {
+    "i-e": {
+     "psi_oi": 0.02235,
+     "psi_e": -0.00626,
+     "L2D": 0.3936
+    }
+   },
+   "theta": {
+    "i": 20.0,
+    "e": -18.0
+   },
+   "L_geo": 13.79,
+   "L_geo_opis": "krawędzie dachów D2, D3 pod ścianą SZ1: Σ 13.79 m",
+   "L_model": null,
+   "L_model_czesc": null,
+   "linie4": {
+    "I": [
+     "OK",
+     "ciągła — brak drogi przez materiały λ > 0,12 z wnętrza na zewnątrz"
+    ],
+    "H": [
+     "OK",
+     "hydroizolacja dachu wywinięta na ścianę ≥ 15 cm ponad warstwę wierzchnią (substrat / żwir)"
+    ],
+    "S": [
+     "OK",
+     "warstwa szczelna ciągła: paroizolacja, szczelnosc_powietrzna + płyta ŻB (połączenia taśmą)"
+    ],
+    "P": [
+     "OK",
+     "Glaser (PN-EN ISO 13788): SZ1 — brak kondensacji międzywarstwowej; SW18 — brak kondensacji międzywarstwowej; SD2 — kondensacja okresowa, M_a,max = 0 g/m² — wysycha w okresie letnim (dopuszczalna wg WT zał. 2 pkt 2.2.5)"
+    ],
+    "ciaglosc": "zachowana"
+   },
+   "przegrody": [
+    "SZ1",
+    "SW18",
+    "SD2"
+   ]
+  },
+  {
+   "id": "WZ-X2",
+   "nazwa": "Dach D4 (DZ1) – ściana SZ1 wyższej kondygnacji na krawędzi (pod spodem ściana SW18, pomieszczenia ogrzewane) — węzeł spoza sekcji `wezly`",
+   "typ": "attyka",
+   "psi_e": -0.00116,
+   "psi_oi": 0.02186,
+   "f_rsi": 0.9643,
+   "ocena": "BEZMOSTKOWY",
+   "ref": [
+    0.75,
+    0.2,
+    "stropodach–ściana zewnętrzna z attyką (izolacja attyki z 3 stron)",
+    "attyka"
+   ],
+   "pary": {
+    "i-e": {
+     "psi_oi": 0.02186,
+     "psi_e": -0.00116,
+     "L2D": 0.40967
+    }
+   },
+   "theta": {
+    "i": 20.0,
+    "e": -18.0
+   },
+   "L_geo": 2.79,
+   "L_geo_opis": "krawędzie dachów D4 pod ścianą SZ1: Σ 2.79 m",
+   "L_model": null,
+   "L_model_czesc": null,
+   "linie4": {
+    "I": [
+     "OK",
+     "ciągła — brak drogi przez materiały λ > 0,12 z wnętrza na zewnątrz"
+    ],
+    "H": [
+     "OK",
+     "hydroizolacja dachu wywinięta na ścianę ≥ 15 cm ponad warstwę wierzchnią (substrat / żwir)"
+    ],
+    "S": [
+     "OK",
+     "warstwa szczelna ciągła: paroizolacja, szczelnosc_powietrzna + płyta ŻB (połączenia taśmą)"
+    ],
+    "P": [
+     "OK",
+     "Glaser (PN-EN ISO 13788): SZ1 — brak kondensacji międzywarstwowej; SW18 — brak kondensacji międzywarstwowej; DZ1 — kondensacja okresowa, M_a,max = 0 g/m² — wysycha w okresie letnim (dopuszczalna wg WT zał. 2 pkt 2.2.5)"
+    ],
+    "ciaglosc": "zachowana"
+   },
+   "przegrody": [
+    "SZ1",
+    "SW18",
+    "DZ1"
+   ]
+  }
+ ],
+ "chi": [
+  {
+   "id": "WZ-13",
+   "nazwa": "Konsole rusztu lamel (przekładka termiczna)",
+   "n": 51,
+   "chi": 0.01,
+   "zrodlo": "[DANE PRZYKŁADOWE – FIKCYJNE] dane przykładowe z deklaracji typowej konsoli fasadowej z przekładką termiczną (lub równoważna)",
+   "opis_n": "Σ długości linii lamel 25.65 m × 2 rygle / rozstaw konsol 1,0 m [ZAŁ] = 51"
+  },
+  {
+   "id": "WZ-14",
+   "nazwa": "Konsole ramy boksu C i linii D (PL-C1/PL-C2/PL-D; punktowe, przekładka termiczna)",
+   "n": 17.0,
+   "chi": 0.01,
+   "zrodlo": "fizyka.mostki.CHI_DOMYSLNE [NZW]",
+   "opis_n": "liczba z modelu (sekcja `wezly`)"
+  },
+  {
+   "id": "WZ-15",
+   "nazwa": "Przejścia instalacji przez przegrody zewnętrzne (wywiewka K1, czerpnia, wyrzutnia, PC, wpusty, przyłącza)",
+   "n": 16.0,
+   "chi": 0.005,
+   "zrodlo": "fizyka.mostki.CHI_DOMYSLNE [NZW]",
+   "opis_n": "liczba z modelu (sekcja `wezly`)"
+  }
+ ],
+ "warianty": {
+  "WZ-04": [
+   [
+    "łącznik 120 mm, λ_eq 0,08 (zamiast 80 mm / 0,09)",
+    0.128,
+    0.929,
+    {
+     "i-e": 0.128
+    }
+   ]
+  ],
+  "WZ-05": [
+   [
+    "łącznik 120 mm, λ_eq 0,08 (zamiast 80 mm / 0,09)",
+    0.134,
+    0.927,
+    {
+     "i-e": 0.134
+    }
+   ]
+  ],
+  "WZ-06": [
+   [
+    "łącznik 120 mm, λ_eq 0,08 (zamiast 80 mm / 0,09)",
+    0.305,
+    0.853,
+    {
+     "i-e": 0.305
+    }
+   ],
+   [
+    "łącznik 120 mm + blok termoizolacyjny nośny 15 cm u podstawy attyki",
+    0.203,
+    0.89,
+    {
+     "i-e": 0.203
+    }
+   ]
+  ],
+  "WZ-07a": [
+   [
+    "łącznik 120 mm, λ_eq 0,08 (zamiast 80 mm / 0,09)",
+    0.152,
+    0.851,
+    {
+     "i-e": 0.152
+    }
+   ]
+  ],
+  "WZ-09a": [
+   [
+    "XPS 10 cm na płycie pod posadzką garażu",
+    0.344,
+    0.852,
+    {
+     "i-u": 0.344
+    }
+   ],
+   [
+    "XPS 10 cm pod posadzką garażu + blok z betonu komórkowego 400 (24 cm) u podstawy ściany",
+    0.299,
+    0.911,
+    {
+     "i-u": 0.299
+    }
+   ]
+  ],
+  "WZ-16a": [
+   [
+    "łącznik 120 mm, λ_eq 0,08 (zamiast 80 mm / 0,09)",
+    0.194,
+    0.854,
+    {
+     "i-e": 0.194
+    }
+   ]
+  ]
+ },
+ "przelewy": [
+  {
+   "dach": "D1",
+   "opis": "przelew PA1 — attyka pn. nadbudowy (na dach D2/teren)",
+   "xy": [
+    5.0,
+    8.84
+   ],
+   "dno": 9.48,
+   "h": 0.1,
+   "pokrycie_wpust": 9.426,
+   "pokrycie_lok": 9.441493224325493,
+   "wierzch_lok": 9.441493224325493,
+   "korona": 9.776000000000002,
+   "dno_min": 9.456,
+   "dno_max": 9.476,
+   "ok": false,
+   "zalecane": 9.476
+  },
+  {
+   "dach": "D1",
+   "opis": "przelew PA2 — na dach D2 (pole zach., z własnym wpustem)",
+   "xy": [
+    2.0,
+    5.215
+   ],
+   "dno": 9.52,
+   "h": 0.1,
+   "pokrycie_wpust": 9.426,
+   "pokrycie_lok": 9.497554524664762,
+   "wierzch_lok": 9.497554524664762,
+   "korona": 9.776000000000002,
+   "dno_min": 9.497554524664762,
+   "dno_max": 9.497554524664762,
+   "ok": false,
+   "zalecane": 9.498
+  },
+  {
+   "dach": "D1",
+   "opis": "przelew PA3 — na dach D3 (pole wsch., z własnym wpustem)",
+   "xy": [
+    10.6,
+    5.215
+   ],
+   "dno": 9.52,
+   "h": 0.1,
+   "pokrycie_wpust": 9.426,
+   "pokrycie_lok": 9.526709731406653,
+   "wierzch_lok": 9.526709731406653,
+   "korona": 9.776000000000002,
+   "dno_min": 9.526709731406653,
+   "dno_max": 9.526709731406653,
+   "ok": false,
+   "zalecane": 9.527
+  },
+  {
+   "dach": "D2",
+   "opis": "przelew PA4 — attyka zach.",
+   "xy": [
+    -0.09,
+    7.2
+   ],
+   "dno": 6.46,
+   "h": 0.1,
+   "pokrycie_wpust": 6.2959999999999985,
+   "pokrycie_lok": 6.324723509534873,
+   "wierzch_lok": 6.378723509534872,
+   "korona": 6.659999999999999,
+   "dno_min": 6.325999999999999,
+   "dno_max": 6.345999999999998,
+   "ok": false,
+   "zalecane": 6.346
+  },
+  {
+   "dach": "D3",
+   "opis": "przelew PA5 — attyka wsch. (awaryjnie na dach D4)",
+   "xy": [
+    12.09,
+    7.2
+   ],
+   "dno": 6.46,
+   "h": 0.1,
+   "pokrycie_wpust": 6.2959999999999985,
+   "pokrycie_lok": 6.359795297632348,
+   "wierzch_lok": 6.413795297632348,
+   "korona": 6.659999999999999,
+   "dno_min": 6.359795297632348,
+   "dno_max": 6.359795297632348,
+   "ok": false,
+   "zalecane": 6.36
+  },
+  {
+   "dach": "D4",
+   "opis": "przelew PA6 — attyka wsch. (garaż)",
+   "xy": [
+    18.465,
+    6.5
+   ],
+   "dno": 3.36,
+   "h": 0.1,
+   "pokrycie_wpust": 3.1335,
+   "pokrycie_lok": 3.1851709783147175,
+   "wierzch_lok": 3.2966709783147174,
+   "korona": 3.85,
+   "dno_min": 3.1851709783147175,
+   "dno_max": 3.1851709783147175,
+   "ok": false,
+   "zalecane": 3.185
+  },
+  {
+   "dach": "D4",
+   "opis": "przelew PA7 — attyka wsch. (pas gosp.; > 1 m od jedn. PC)",
+   "xy": [
+    18.465,
+    2.4
+   ],
+   "dno": 3.36,
+   "h": 0.1,
+   "pokrycie_wpust": 3.1335,
+   "pokrycie_lok": 3.1757739872735,
+   "wierzch_lok": 3.2872739872734997,
+   "korona": 3.85,
+   "dno_min": 3.1757739872735,
+   "dno_max": 3.1835,
+   "ok": false,
+   "zalecane": 3.183
+  }
+ ],
+ "b_u": 0.8
+}

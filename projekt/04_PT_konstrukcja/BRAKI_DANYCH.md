@@ -17,14 +17,11 @@ Lista generowana automatycznie przez `lamela.views.konstrukcja` z: (1) braków z
 
 - Płyta(y) SW1: brak wyników MES w bibliotece (model MES niewykonalny) — zbrojenie nie może być narysowane z obliczeń [WYMAGA ANALIZY].
 - Płyta(y) WYL1: brak wyników MES w bibliotece (model MES niewykonalny) — zbrojenie nie może być narysowane z obliczeń [WYMAGA ANALIZY].
-- Płyta(y) PL-3: brak wyników MES w bibliotece (model MES niewykonalny) — zbrojenie nie może być narysowane z obliczeń [WYMAGA ANALIZY].
 - Płyta(y) IZ-ST2Z: brak wyników MES w bibliotece (model MES niewykonalny) — zbrojenie nie może być narysowane z obliczeń [WYMAGA ANALIZY].
 - Płyta(y) OB-A2: brak wyników MES w bibliotece (model MES niewykonalny) — zbrojenie nie może być narysowane z obliczeń [WYMAGA ANALIZY].
 - Płyta(y) PS-A: brak wyników MES w bibliotece (model MES niewykonalny) — zbrojenie nie może być narysowane z obliczeń [WYMAGA ANALIZY].
 - Płyta(y) PL-C2: brak wyników MES w bibliotece (model MES niewykonalny) — zbrojenie nie może być narysowane z obliczeń [WYMAGA ANALIZY].
 - Płyta(y) PL-C1 + PL-D: brak wyników MES w bibliotece (model MES niewykonalny) — zbrojenie nie może być narysowane z obliczeń [WYMAGA ANALIZY].
-- Płyta(y) PL-E: brak wyników MES w bibliotece (model MES niewykonalny) — zbrojenie nie może być narysowane z obliczeń [WYMAGA ANALIZY].
-- Płyta(y) PL-DA: brak wyników MES w bibliotece (model MES niewykonalny) — zbrojenie nie może być narysowane z obliczeń [WYMAGA ANALIZY].
 - Belka B1 (podciąg fasady E, odwrócony (+2,78…+3,85 = parapet boksu C),…): brak pozycji wymiarowania w bibliotece (belka nie jest podporą płyty w modelu MES — np. belka odwrócona/wspornikowa) — zbrojenie do obliczenia indywidualnego [WYMAGA ANALIZY].
 - Belka B3 (belka krawędziowa ST2 w osi A' (odwrócona, pod parapetem okn…): brak pozycji wymiarowania w bibliotece (belka nie jest podporą płyty w modelu MES — np. belka odwrócona/wspornikowa) — zbrojenie do obliczenia indywidualnego [WYMAGA ANALIZY].
 - Belka B4 (belka wspornikowa w osi 1 (w licu ściany P2, pod parapetem O…): brak pozycji wymiarowania w bibliotece (belka nie jest podporą płyty w modelu MES — np. belka odwrócona/wspornikowa) — zbrojenie do obliczenia indywidualnego [WYMAGA ANALIZY].
@@ -56,7 +53,6 @@ Lista generowana automatycznie przez `lamela.views.konstrukcja` z: (1) braków z
 - Biblioteka: PL-D: klasa betonu nie wynika z modelu (pole mat / materiał warstwy) — przyjęto C30/37 (XC4)
 - Biblioteka (uwaga analizy): Grupa płyt SW1: MES niewykonalny (MES płyty: za mało podpór) — pominięto
 - Biblioteka (uwaga analizy): Grupa płyt WYL1: MES niewykonalny (MES płyty: za mało podpór) — pominięto
-- Biblioteka (uwaga analizy): Grupa płyt PL-3: MES niewykonalny (MES płyty: za mało podpór) — pominięto
 - Biblioteka (uwaga analizy): Ściana nośna S2-07 stoi na płycie ST2 + ST2Z + D2 + D3 + PL-2 + OB-A bez ściany poniżej — obciążenie liniowe płyty; sprawdzić podciąg/żebro [WYMAGA ANALIZY].
 - Biblioteka (uwaga analizy): Ściana nośna S2-08 stoi na płycie ST2 + ST2Z + D2 + D3 + PL-2 + OB-A bez ściany poniżej — obciążenie liniowe płyty; sprawdzić podciąg/żebro [WYMAGA ANALIZY].
 - Biblioteka (uwaga analizy): Ściana nośna S2-09 stoi na płycie ST2 + ST2Z + D2 + D3 + PL-2 + OB-A bez ściany poniżej — obciążenie liniowe płyty; sprawdzić podciąg/żebro [WYMAGA ANALIZY].
@@ -69,43 +65,11 @@ Lista generowana automatycznie przez `lamela.views.konstrukcja` z: (1) braków z
 - Biblioteka (uwaga analizy): ST1: podpora punktowa SL2 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
 - Biblioteka (uwaga analizy): ST1: podpora punktowa SL3 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
 - Biblioteka (uwaga analizy): ST1: podpora punktowa SL4 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
-- Biblioteka (uwaga analizy): Grupa płyt PL-E: MES niewykonalny (MES płyty: za mało podpór) — pominięto
-- Biblioteka (uwaga analizy): Grupa płyt PL-DA: MES niewykonalny (MES płyty: za mało podpór) — pominięto
-
-## Kontrola zbrojenia — pozycje niespełnione (szczegóły: raport kontroli zbrojenia)
-
-- PF1 / strefa S1 (ZF1) — przekrój niewystarczający (poz. MES-PF): A_s,prov = 0 < max(A_s,req; A_s,min) = 1 — M_Ed = 2295 kNm/m > M_lim — wymagana wysokość h ≥ 0.65 m (obecnie 0.55 m) [WYMAGA ZMIANY MODELU]
-- PF1 / strefa S2 (SF2, SF3, ZF1, ZF7, ZF8, płyta) — przekrój niewystarczający (poz. MES-PF): A_s,prov = 0 < max(A_s,req; A_s,min) = 1 — M_Ed = 4758 kNm/m > M_lim — wymagana wysokość h ≥ 0.91 m (obecnie 0.70 m) [WYMAGA ZMIANY MODELU]
-- PF1 / strefa S3 (płyta) — przekrój niewystarczający (poz. MES-PF): A_s,prov = 0 < max(A_s,req; A_s,min) = 1 — M_Ed = 234 kNm/m > M_lim — wymagana wysokość h ≥ 0.25 m (obecnie 0.25 m) [WYMAGA ZMIANY MODELU]
-- PF1 / strefa S4 (płyta) — przekrój niewystarczający (poz. MES-PF): A_s,prov = 0 < max(A_s,req; A_s,min) = 1 — M_Ed = 387 kNm/m > M_lim — wymagana wysokość h ≥ 0.30 m (obecnie 0.25 m) [WYMAGA ZMIANY MODELU]
-- PF1 / strefa S5 (płyta) — przekrój niewystarczający (poz. MES-PF): A_s,prov = 0 < max(A_s,req; A_s,min) = 1 — M_Ed = 278 kNm/m > M_lim — wymagana wysokość h ≥ 0.27 m (obecnie 0.25 m) [WYMAGA ZMIANY MODELU]
-- SF1 / pogrubienie — siatka dolna (MES) (poz. 10.18): A_s,prov = 539 < max(A_s,req; A_s,min) = 8118 mm²/m MES: A_s,req = 8119 mm²/m — nie do rozmieszczenia (φ ≤ 20, s ≥ 7 cm); przekrój pogrubienia niewystarczający [WYMAGA ZMIANY MODELU]
-- SF2 / pogrubienie — siatka dolna (MES) (poz. 10.19): A_s,prov = 539 < max(A_s,req; A_s,min) = 7155 mm²/m MES: A_s,req = 7155 mm²/m — nie do rozmieszczenia (φ ≤ 20, s ≥ 7 cm); przekrój pogrubienia niewystarczający [WYMAGA ZMIANY MODELU]
-- ZF1 / żebro — dołem (MES: A_s,req·b) (poz. 10.2): w strefie żebra μ > μ_lim — pogłębić/poszerzyć żebro [WYMAGA ZMIANY MODELU]
-- ZF1 / żebro — górą (MES: A_s,req·b) (poz. 10.2): w strefie żebra μ > μ_lim — pogłębić/poszerzyć żebro [WYMAGA ZMIANY MODELU]
-- ZF7 / żebro — dołem (MES: A_s,req·b) (poz. 10.8): w strefie żebra μ > μ_lim — pogłębić/poszerzyć żebro [WYMAGA ZMIANY MODELU]
-- ZF7 / żebro — górą (MES: A_s,req·b) (poz. 10.8): w strefie żebra μ > μ_lim — pogłębić/poszerzyć żebro [WYMAGA ZMIANY MODELU]
-- ZF8 / żebro — dołem (MES: A_s,req·b) (poz. 10.9): w strefie żebra μ > μ_lim — pogłębić/poszerzyć żebro [WYMAGA ZMIANY MODELU]
-- ZF8 / żebro — górą (MES: A_s,req·b) (poz. 10.9): w strefie żebra μ > μ_lim — pogłębić/poszerzyć żebro [WYMAGA ZMIANY MODELU]
-- ST2 / pole P2 — dół x (poz. 2.1): A_s,prov = 2513 < max(A_s,req; A_s,min) = 3344 mm²/m Zbrojenie na zginanie (η = 1594%); Rysy: średnica prętów (tabl. 7.2N) (η = 1600000000%)
-- ST2Z / pole P1 — dół x (poz. 2.2): A_s,prov = 2513 < max(A_s,req; A_s,min) = 66351 mm²/m Zbrojenie na zginanie (η = 2475%); Rysy: średnica prętów (tabl. 7.2N) (η = 1600000000%)
-- ST2Z / pole P1 — dół y (poz. 2.2): A_s,prov = 2513 < max(A_s,req; A_s,min) = 34316 mm²/m Zbrojenie na zginanie (η = 2475%); Rysy: średnica prętów (tabl. 7.2N) (η = 1600000000%)
-- PL-2 / pole P1 — dół x (poz. 3.1): A_s,prov = 2513 < max(A_s,req; A_s,min) = 38241 mm²/m Zbrojenie na zginanie (η = 1426%); Rysy: średnica prętów (tabl. 7.2N) (η = 1600000000%)
-- PL-2 / pole P1 — dół y (poz. 3.1): A_s,prov = 2513 < max(A_s,req; A_s,min) = 9501 mm²/m Zbrojenie na zginanie (η = 1426%); Rysy: średnica prętów (tabl. 7.2N) (η = 1600000000%)
-- ST2Z / nad podporą S1-03 — góra y (poz. 2.2): A_s,prov = 2513 < max(A_s,req; A_s,min) = 28097 mm²/m Zbrojenie na zginanie (η = 2475%); Rysy: średnica prętów (tabl. 7.2N) (η = 1600000000%)
-- PL-2 / wspornik — góra y (poz. 3.1): A_s,prov = 2513 < max(A_s,req; A_s,min) = 8770 mm²/m Zbrojenie na zginanie (η = 1426%); Rysy: średnica prętów (tabl. 7.2N) (η = 1600000000%)
-- B9 / dołem (przęsło) (poz. 5.8): Nośność krzyżulców betonowych (η = 103%); Nośność strzemion (η = 142%); 8Ø12 nie mieści się w jednej warstwie przy b = 25 cm (odstęp w świetle ≥ 21 mm — 8.2(2))
-- N-O1-10 / dołem (przęsło) (poz. 6.27): Nośność strzemion (η = 167%); 4Ø16 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2))
-- N-O0-18 / dołem (przęsło) (poz. 6.17): Nośność krzyżulców betonowych (η = 101%); Nośność strzemion (η = 179%); 6Ø16 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2))
-- N-O0-18 / górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) (poz. 6.17): A_s,prov = 157 < max(A_s,req; A_s,min) = 181 mm² 
-- N-O0-02 / dołem (przęsło) (poz. 6.2): Nośność krzyżulców betonowych (η = 114%); Nośność strzemion (η = 200%); 5Ø20 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2))
-- N-O0-02 / górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) (poz. 6.2): A_s,prov = 157 < max(A_s,req; A_s,min) = 236 mm² 
-- N-O0-01 / dołem (przęsło) (poz. 6.1): Nośność krzyżulców betonowych (η = 541%); Nośność strzemion (η = 954%); 24Ø20 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2)); A_s > A_s,max = 1584
-- N-O0-01 / górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) (poz. 6.1): A_s,prov = 157 < max(A_s,req; A_s,min) = 1131 mm² 
-- N-O0-03 / dołem (przęsło) (poz. 6.3): 5Ø14 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2))
-- N-O0-04 / dołem (przęsło) (poz. 6.4): 7Ø10 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2))
-- N-O1-13 / dołem (przęsło) (poz. 6.30): 4Ø14 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2))
-- N-O1-01 / dołem (przęsło) (poz. 6.20): 7Ø10 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2))
-- N-O0-11 / dołem (przęsło) (poz. 6.11): Ugięcie długotrwałe (quasi-stała) ≤ L/250 (η = 159%); 6Ø14 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2))
-- N-O0-05 / dołem (przęsło) (poz. 6.5): Ugięcie długotrwałe (quasi-stała) ≤ L/250 (η = 207%); 5Ø16 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2))
-- N-O0-07 / dołem (przęsło) (poz. 6.7): Ugięcie długotrwałe (quasi-stała) ≤ L/250 (η = 220%); 7Ø10 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2))
+- Biblioteka (uwaga analizy): ST1: podpora punktowa SL1 w polu P2 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
+- Biblioteka (uwaga analizy): ST1: podpora punktowa SL2 w polu P2 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
+- Biblioteka (uwaga analizy): ST1: podpora punktowa SL3 w polu P2 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
+- Biblioteka (uwaga analizy): ST1: podpora punktowa SL4 w polu P2 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
+- Biblioteka (uwaga analizy): PL-E: podpora punktowa SL1 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
+- Biblioteka (uwaga analizy): PL-E: podpora punktowa SL2 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
+- Biblioteka (uwaga analizy): PL-E: podpora punktowa SL3 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
+- Biblioteka (uwaga analizy): PL-E: podpora punktowa SL4 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
