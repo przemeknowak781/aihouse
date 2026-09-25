@@ -178,6 +178,7 @@ class ParametryWoda:
     p_sieci_min: float = 0.35           # MPa — ciśnienie dyspozycyjne w sieci [ZAŁ, warunki gestora]
     p_sieci_max: float = 0.60           # MPa — maks. ciśnienie statyczne w sieci [ZAŁ]
     przykrycie_sieci: float = 1.40      # m — oś przewodu sieci pod terenem [ZAŁ]
+    przykrycie_przylacza: float = 1.40  # m — przykrycie przyłącza (do wierzchu rury) [ZAŁ]
     k_mm: float = 0.007
     udzial_miejscowych: float = 0.5     # Σ∆p_m = 0,5·Σ∆p_l [W — PWr]
     dp_podgrzewacz: float = 10.0        # kPa — zasobnik z wężownicą (strona wody użytkowej) [ZAŁ]
@@ -522,6 +523,9 @@ def oblicz_wode(dane: DaneBudynku, par: ParametryWoda | None = None) -> WynikWod
              "k_v [ZAŁ — karta wyrobu]", 1),
     ]
     war.append(Warunek("Przepływ obliczeniowy ≤ Q3 wodomierza", qh, "<=", q3, "m³/h", "PN-EN ISO 4064 / MID", "W-131"))
+    war.append(Warunek("Przykrycie przyłącza wodociągowego (ochrona przed przemarzaniem)", par.przykrycie_przylacza, ">=",
+                       float(wym("wodkan", "przykrycie_wodociagu_min", 1.2) or 1.2), "m", wym_zrodlo("wodkan", "przykrycie_wodociagu_min"),
+                       "W-141"))
     war.append(Warunek("Średnica wodomierza ≤ średnicy wewn. przewodu", dn, "<=", o_wod.dw, "mm", "praktyka (PWr)", "W-131"))
 
     # ---- punkty i ciśnienie wymagane

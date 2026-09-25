@@ -7,3 +7,4 @@ affb914430bd01f17      # rdzeń modelu i pipeline 3D — zakończony
 a15e57952f52b96b8      # generatory widoków — zakończony
 af72e8de1f1d66b66      # rejestr wymagań — zakończony
 a7447ed7be6bcdaf1      # składanie tomów — zakończony
+a87415027562c59a6      # biblioteka fizyki/EP — zakończony

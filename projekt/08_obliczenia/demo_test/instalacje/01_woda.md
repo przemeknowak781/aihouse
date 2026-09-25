@@ -226,6 +226,7 @@ Zestaw wodomierzowy (od strony sieci): zawór odcinający, wodomierz, zawór odc
 | ID | Warunek | Wartość | Wymaganie | Wynik | Podstawa / uwagi |
 |:---|:---|---:|---:|:---|:---|
 | W-131 | Przepływ obliczeniowy ≤ Q3 wodomierza | 2,83 m³/h | ≤ 4,00 m³/h | SPEŁNIONY | PN-EN ISO 4064 / MID |
+| W-141 | Przykrycie przyłącza wodociągowego (ochrona przed przemarzaniem) | 1,40 m | ≥ 1,20 m | SPEŁNIONY | W-141: h_z + 0,4 m; PN-B-10725:1997, PN-B-10736:1999 (wycof.) — wiedza techniczna [niezweryfikowane] |
 | W-131 | Średnica wodomierza ≤ średnicy wewn. przewodu | 20,00 mm | ≤ 33,00 mm | SPEŁNIONY | praktyka (PWr) |
 | W-130 | Wymagane ciśnienie w sieci ≤ ciśnienie dyspozycyjne | 0,297 MPa | ≤ 0,350 MPa | SPEŁNIONY | warunki gestora [ZAŁ p_dysp]; przy niespełnieniu — zestaw podnoszący ciśnienie (ZPC) |
 | W-130 | Nastawa reduktora ≥ ciśnienie wymagane za zestawem wodomierzowym (najniekorzystniejszy punkt) | 400 kPa | ≥ 186 kPa | SPEŁNIONY | kolejność: wodomierz, filtr, EA, reduktor |
@@ -256,7 +257,7 @@ Zestaw wodomierzowy (od strony sieci): zawór odcinający, wodomierz, zawór odc
 
 ## Podsumowanie sprawdzeń
 
-Warunków: 11; spełnionych: 11; niespełnionych: 0; informacyjnych: 0.
+Warunków: 12; spełnionych: 12; niespełnionych: 0; informacyjnych: 0.
 
 ## Źródła
 

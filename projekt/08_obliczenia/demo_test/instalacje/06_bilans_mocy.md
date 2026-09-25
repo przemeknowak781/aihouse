@@ -43,7 +43,8 @@ Obiekt: Dom testowy pipeline'u 3D. Dane przykładowe oznaczono [ZAŁ].
 
 * Moc zainstalowana (bez generacji PV): P_i = ΣP = **43,0** kW
 * Moc szczytowa bez zarządzania mocą: P_s = Σk_j·P = **24,0** kW — _k_j [ZAŁ]_
-* Moc szczytowa z DLM (odbiorniki sterowane ograniczone do mocy przyłączeniowej): P_s,DLM = P_nst + min(P_st; P_przył − P_nst) = 18,05 + min(6,00; 27,0 − 18,05) = **24,0** kW
+* Granica zarządzania mocą (moc przyłączeniowa i prąd zabezpieczenia przy cos φ): P_lim = min(P_przył; √3·U·I_zab·cos φ) = min(27,0; √3·400·40·0,95/1000) = **26,33** kW
+* Moc szczytowa z DLM (odbiorniki sterowane ograniczone): P_s,DLM = P_nst + min(P_st; P_lim − P_nst) = 18,05 + min(6,00; 26,33 − 18,05) = **24,0** kW
 * Prąd szczytowy: I_B = P_s/(√3·U·cos φ) = 24048/(√3·400·0,95) = **36,5** A
 * Kontrolnie N SEP-E-002: 30 kVA + ogrzewanie elektryczne (PC + grzałka): P = 30·cos φ + P_ogrz = 30·0,95 + 7,90 = **36,4** kW — _R7-L08 [W]_
 * Moc odpowiadająca zabezpieczeniu przedlicznikowemu: P = √3·400·I_zab = √3·400·40 = **27,7** kW — _R7-L09_

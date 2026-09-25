@@ -39,7 +39,7 @@ Obiekt: Dom testowy pipeline'u 3D. PN-EN 62305-2 (WT: 2008; aktualna PN-EN IEC 6
 * Uziom fundamentowy w ławach: średnica zastępcza: D = √(4A/π) = √(4·91,0/π) = **10,77** m
 * Rezystancja uziemienia (orientacyjnie, ρ = 400 Ω·m [ZAŁ]): R ≈ 2ρ/(πD) = 2·400/(π·10,77) = **23,7** Ω — _DEHN LPG [W]; pomiar po wykonaniu_
 
-* Typ: fundamentowy w ławach (zbrojenie + płaskownik/pręt w betonie) — WT §184 ust. 1; UWAGA: przy izolacji przeciwwodnej z folii > 0,5 mm lub XPS na ławach — uziom otokowy.
+* Typ: fundamentowy w ławach (zbrojenie + płaskownik/pręt w betonie) — WT §184 ust. 1; UWAGA: przy izolacji przeciwwodnej z folii > 0,5 mm lub XPS pod/na fundamencie — uziom otokowy (PN-HD 60364-5-54 zał. C.2).
 * Materiał: pręt stalowy Ø10 mm lub płaskownik 30×3,5 mm w betonie, otulina ≥ 5 cm, mocowany do zbrojenia co ≤ 2 m, bez drutu wiązałkowego (W-187).
 * Wyprowadzenia: GSU w pomieszczeniu technicznym (≥ 16 mm² Cu, W-188); ZKP / rozdział PEN (jeśli wymaga OSD); 4 wyprowadzenia w narożnikach/co ≤ 15 m pod przewody odprowadzające LPS (rezerwa); konstrukcja PV (połączenie wyrównawcze, jeden punkt).
 * TN-S: brak normowej wartości rezystancji uziemienia GSU; przy LPS zalecane R ≤ 10 Ω (PN-EN 62305-3) — sprawdzić pomiarem; OSD może określić wymagania dla uziemienia PEN w warunkach przyłączenia.

@@ -170,3 +170,21 @@ dzialka.yaml:
   odwodnienia: [{id: OL1, typ: liniowe|opaska_zwirowa|drenaz_opaskowy|niecka, linia/obrys: [...], spadek: 0.01, odbiornik: ...}]
   teren: {punkty_projektowane: [[x, y, H], ...]}          # rzędne projektowane terenu (spadki od budynku ≥ 2 %)
 ```
+
+## 7. Dane wymagane przez obliczenia fizyki budowli i EP (`lamela.obliczenia.fizyka_energia`) — uzupełnić w modelu
+Pełna lista: docstring `src/lamela/obliczenia/energia/__init__.py`. Braki są raportowane, ale projekt ma być KOMPLETNY:
+* **materialy:** `lambda` (obliczeniowa), `mu` lub `sd` (membrany), `rho`, `cp`; `funkcja` gdy klasyfikacja niejednoznaczna.
+* **przegrody (zewnętrzne — pełne warstwy):** paroizolacja na płycie stropodachu; izolacja przeciwwilgociowa/przeciwwodna podłogi na
+  gruncie / płyty; dach zielony: substrat, geowłóknina, warstwa drenażowa, bariera przeciwkorzenna (lub hydroizolacja odporna na
+  korzenie); izolacja spadkowa: `klin: {d_min, d_max}`; ruszty/warstwy niejednorodne: `frakcje`.
+* **pomieszczenia:** `temp` (°C; łazienki 24), garaż `ogrzewane: false`, `went: {naw, wyw}` [m³/h], `rodzaj`.
+* **stropy:** podział na części: nad ogrzewanym / nad garażem / nad powietrzem zewnętrznym; `sufit` = kod przegrody z ociepleniem spodu —
+  OBOWIĄZKOWY nad garażem i pod wspornikiem P2 (strop nad powietrzem).
+* **dachy:** przegroda z pełnymi warstwami, `wpusty`, `przelewy_awaryjne`, `rury_spustowe`, `spadek`.
+* **otwory:** `symbol`, `oslona`; sekcja **`stolarka.<symbol>`**: `wyrob`, `U_g`, `U_f`, `psi_g`, szer. ram, `g_n`, `U_D` (drzwi) — dane
+  przykładowe typowych wyrobów (bez nazw handlowych, „lub równoważny”); ten sam symbol = ten sam wymiar.
+* **wezly:** `id`, `typ` (aliasy mostki2d: R_attyka, GF_cokol, …), `dlugosc` lub `liczba`, `przegrody`.
+* **energia:** `n50`, `osoby`, `pojemnosc` (klasa), `wezly_wyniki` (plik z symulacji mostków), `grunt.izolacja_obwodowa {typ, D, d_n, lam_n}`,
+  `wentylacja {centrala, czerpnia: [x,y,z], wyrzutnia: [x,y,z], wywiewki_kanalizacyjne: [[x,y,z]]}`, `ogrzewanie {zrodlo: moce A−15/A−7/A2,
+  SCOP_35, COP_cwu}`, `cwu {zasobnik, cyrkulacja}`, `pv {moduly, P_modul_Wp (Σ ≤ 6,5 kWp), azymut, nachylenie}`, `garaz {stanowiska,
+  otwory_went_m2 ≥ 0,08}`, `capex_A`, `capex_B` (analiza alternatyw).

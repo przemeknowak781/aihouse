@@ -7,7 +7,7 @@ Biblioteka `lamela.obliczenia.sanitarne` i `lamela.obliczenia.elektryka`. Model:
 
 | Raport | Warunków | Spełnione | Niespełnione | Niespełnione (skrót) |
 |:---|---:|---:|---:|:---|
-| [Instalacja wodociągowa i c.w.u.](01_woda.md) | 11 | 11 | 0 | — |
+| [Instalacja wodociągowa i c.w.u.](01_woda.md) | 12 | 12 | 0 | — |
 | [Kanalizacja sanitarna](02_kanalizacja.md) | 19 | 19 | 0 | — |
 | [Odwodnienie dachów, retencja](03_deszczowa.md) | 16 | 16 | 0 | — |
 | [Drenaż i odwodnienie powierzchniowe](04_drenaz.md) | 5 | 0 | 5 | W-019 Spadek terenu od budynku, ściana 1 (śr. 5,0; −0,3); W-019 Spadek terenu od budynku, ściana 2 (śr. 10,3; 4,0); W-019 Spadek terenu od budynku, ściana 3 (śr. 5,0; 8,3); W-019 Spadek terenu od budynku, ściana 4 (śr. −0,3; 4,0); W-019 Wysokość cokołu (posadzka parteru − teren), minimum na obwodzie |
