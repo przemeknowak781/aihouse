@@ -1149,8 +1149,16 @@ def draw_furniture(vp, it: dict):
     pos = it.get("xy") or it.get("pos")
     rot = float(it.get("obrot", 90.0))
     if fname in ("table_chairs", "kitchen_island"):
-        if "krzesla" in it:
+        if fname == "table_chairs" and "krzesla" in it:
             kw["chairs"] = int(it["krzesla"])
+        if fname == "kitchen_island":        # wydanie (V1-05): liczba hokerów i strona płyty z modelu
+            if "hokery" in it or "krzesla" in it:
+                kw["stools"] = int(it.get("hokery", it.get("krzesla", 0)))
+            ps = str(it.get("plyta_strona") or "").upper()
+            if ps in ("N", "S", "E", "W"):
+                dv = {"N": (0.0, 1.0), "S": (0.0, -1.0), "E": (1.0, 0.0), "W": (-1.0, 0.0)}[ps]
+                a_ = math.radians(rot)          # lokalne +y symbolu (rot − 90°) → kierunek świata (cos rot, sin rot)
+                kw["hob_side"] = 1 if dv[0] * math.cos(a_) + dv[1] * math.sin(a_) > 0 else -1
         fn(vp, pos, rot - 90.0, **kw)
     elif fname == "tank":
         fn(vp, pos, **kw)

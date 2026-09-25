@@ -1765,7 +1765,8 @@ WYP = [
     # audyt A3 K-1 (runda 2): wyspa RÓWNOLEGLE do zabudowy osi E (x 9,10–10,10, y 1,80–4,00) — ciąg roboczy między wyspą a frontami
     # zabudowy (x 11,295) 1,195 m (1,00–1,20); od pn. do lica ściany osi 3 (y 5,02) 1,02 m; zlew, zmywarka, słupek piekarnika i lodówka
     # na ścianie E bez zmian, płyta indukcyjna na wyspie naprzeciw odcinka blatu roboczego między zlewem a słupkiem (trójkąt ≈ 5,8 m)
-    F("P0", "wyspa", (9.60, 2.90), 0, (2.20, 1.00), opis="wyspa z płytą indukcyjną i okapem (bez hokerów — przejście do jadalni ≥ 1,10 m)"),
+    F("P0", "wyspa", (9.60, 2.90), 0, (2.20, 1.00), opis="wyspa z płytą indukcyjną i okapem (bez hokerów — przejście do jadalni ≥ 1,10 m)",
+      hokery=0, plyta_strona="E"),
     {"kond": "P0", "typ": "blat", "linia": [[XE_i, 1.40], [XE_i, Y3_s]], "gl": 0.6, "strona": 1, "gorne": True},
     F("P0", "zlew", (XE_i, 2.60), 180, (0.80, 0.50)), F("P0", "zmywarka", (XE_i, 1.90), 180, (0.60, 0.58)),
     F("P0", "plyta", (10.10, 2.90), 180, (0.80, 0.52), opis="płyta indukcyjna na wyspie od strony ciągu roboczego (y 2,50–3,30), "

@@ -752,17 +752,22 @@ def desk(c, pos, rot=0.0, w=1.40, d=0.70, chair=True, layer="A-MEBLE"):
             c.line(cx.pt(-0.2, 0.40), cx.pt(0.2, 0.40), pen="b_cienka")
 
 
-def kitchen_island(c, center, rot=0.0, w=2.40, d=1.00, stools=3, hob_on=True, layer="A-MEBLE"):
-    """Wyspa kuchenna z hokerami po stronie +y (lokalnie) i opcjonalnie płytą grzejną."""
+def kitchen_island(c, center, rot=0.0, w=2.40, d=1.00, stools=3, hob_on=True, hob_side=-1, layer="A-MEBLE"):
+    """Wyspa kuchenna z hokerami po stronie +y (lokalnie; ``stools=0`` — bez hokerów) i opcjonalnie płytą grzejną po stronie
+    ``hob_side`` (−1: lokalne −y, +1: lokalne +y)."""
     xf = X(center, rot)
     with c.on(layer):
         _poly(c, xf, rect_pts(-w / 2, -d / 2, w / 2, d / 2), pen="cienka")
-        _pl(c, xf, [(-w / 2, d / 2 - 0.3), (w / 2, d / 2 - 0.3)], pen="b_cienka", lt="KRESKOWA_DROBNA")
+        if stools:
+            _pl(c, xf, [(-w / 2, d / 2 - 0.3), (w / 2, d / 2 - 0.3)], pen="b_cienka", lt="KRESKOWA_DROBNA")
         for i in range(stools):
             x = -w / 2 + w * (i + 0.5) / stools
             _circ(c, xf, x, d / 2 + 0.25, 0.18, pen="b_cienka")
     if hob_on:
-        hob(c, xf.pt(0.0, -d / 2), xf.angle + 90.0, 0.6, 0.5)
+        if hob_side > 0:
+            hob(c, xf.pt(0.0, d / 2), xf.angle - 90.0, 0.6, 0.5)
+        else:
+            hob(c, xf.pt(0.0, -d / 2), xf.angle + 90.0, 0.6, 0.5)
 
 
 # ------------------------------------------------------------------------------------------------ re-eksport
