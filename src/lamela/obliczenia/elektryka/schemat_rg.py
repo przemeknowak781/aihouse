@@ -146,8 +146,9 @@ def rysuj_schemat_rg(wynik, plik, tytul: str | None = None, dpi: int = 200, lege
         # bez ucinania „…” (weryfikacja arkuszy C 2.4)
         import textwrap
         ls = textwrap.wrap(o.odb.nazwa, 68, break_long_words=False) or [""]
-        if len(ls) > 2:
-            ls = [ls[0], " ".join(ls[1:])]
+        if len(ls) > 2:                   # lista pomieszczeń dłuższa niż 2 wiersze — odesłanie do tabeli obwodów
+            dop = " i in. (wg tabeli obwodów)"
+            ls = [ls[0], textwrap.shorten(" ".join(ls[1:]), 68 - len(dop), placeholder="").rstrip(",;") + dop]
         ax.text(x, yb - 69, "\n".join(ls), fontsize=4.6, rotation=90, ha="center", va="top", linespacing=1.05)
     if legenda:                          # arkusz rysunkowy: legenda w bloku OZNACZENIA kolumny opisowej
         lx, ly = W - 74, 178
