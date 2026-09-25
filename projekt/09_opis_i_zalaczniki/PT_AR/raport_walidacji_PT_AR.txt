@@ -3,15 +3,15 @@ Lista kontrolna: PT-1 AR — projekt techniczny, architektura (rejestr C.2)
 Status: PRZYKŁAD – NIE DO ZŁOŻENIA
 Pozycje: OK 18 · BRAK 0 · DO UZUPEŁNIENIA 2 · N/D 1 · OSTRZEŻENIE 0
 Znaczniki: [DO UZUPEŁNIENIA] ×85, [DOKUMENT ZEWNĘTRZNY] ×0, [DANE PRZYKŁADOWE] ×58
-Plik: 44 stron, 4.29 MB
+Plik: 44 stron, 4.30 MB
 
   element PT: strony 1–44 (opis 33, arkusze 11)
 
 ✓ F-01     [  *] OK               Nazwa pliku wg zał. 1 RPB (PT_x_y_rrrr.mm.dd.pdf) (RPB zał. 1; W-301) — nazwa zgodna z zał. 1 RPB (PT)
-✓ F-02     [  *] OK               Rozmiar pliku ≤ 150 MB (RPB § 2b ust. 3) — 4.29 MB (limit 150 MB)
+✓ F-02     [  *] OK               Rozmiar pliku ≤ 150 MB (RPB § 2b ust. 3) — 4.30 MB (limit 150 MB)
 ✓ F-03     [  *] OK               Część rysunkowa wektorowa (RPB § 2b ust. 2) — 11 arkuszy wektorowych
 ✓ F-05     [  *] OK               Tom PT w osobnym pliku (bez wspólnej oprawy z PZT/PAB/ZL) (RPB § 5 ust. 3) — plik zawiera tylko tom PT
-✓ F-06     [  *] OK               Tom ze stanu modelu = bieżący model (znacznik „stan modelu: SHA-256 …”, wspólny dla tomów PT) (PB art. 34 ust. 3c, ust. 3d pkt 3 (zgodność PT z PZT/PAB i między tomami)) — stan modelu SHA-256 42ac7a811873 = bieżący model
+✓ F-06     [  *] OK               Tom ze stanu modelu = bieżący model (znacznik „stan modelu: SHA-256 …”, wspólny dla tomów PT) (PB art. 34 ust. 3c, ust. 3d pkt 3 (zgodność PT z PZT/PAB i między tomami)) — stan modelu SHA-256 98826e2b39ab = bieżący model
 … C2-01    [ PT] DO UZUPEŁNIENIA  Strona tytułowa: „Projekt techniczny”, zamierzenie, kategoria I, inwestor (RPB § 7 ust. 2 pkt 1–2) — pola [DO UZUPEŁNIENIA] na stronie tytułowej
 ✓ C2-02    [ PT] OK               Strona tytułowa: nr tomu i liczba tomów PT (RPB § 7 ust. 6)
 … C2-03    [ PT] DO UZUPEŁNIENIA  Strona tytułowa: data, autorzy ze specjalnością, nr uprawnień i zakresem (RPB § 7 ust. 2 pkt 3) — pola [DO UZUPEŁNIENIA] na stronie tytułowej

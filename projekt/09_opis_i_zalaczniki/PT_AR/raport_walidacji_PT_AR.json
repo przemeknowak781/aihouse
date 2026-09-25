@@ -19,7 +19,7 @@
       "podstawa": "RPB § 2b ust. 3",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "4.29 MB (limit 150 MB)"
+      "szczegoly": "4.30 MB (limit 150 MB)"
     },
     {
       "id": "F-03",
@@ -46,7 +46,7 @@
       "podstawa": "PB art. 34 ust. 3c, ust. 3d pkt 3 (zgodność PT z PZT/PAB i między tomami)",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "stan modelu SHA-256 42ac7a811873 = bieżący model"
+      "szczegoly": "stan modelu SHA-256 98826e2b39ab = bieżący model"
     },
     {
       "id": "C2-01",
@@ -230,7 +230,7 @@
       "arkusze": 11
     }
   },
-  "rozmiar_mb": 4.285263,
+  "rozmiar_mb": 4.297479,
   "strony": 44,
   "podsumowanie": {
     "status": "PRZYKŁAD – NIE DO ZŁOŻENIA",

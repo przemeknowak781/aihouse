@@ -30,7 +30,7 @@ PN-EN ISO 13370:2017-09, PN-EN ISO 10077-1:2017-10, PN-EN ISO 10211:2017-09, PN-
 PN-EN ISO 14683:2017-09 (rejestr wymagań, W-243…W-250). Tom jest zgodny z PZT i PAB (PB art. 34 ust. 3c).
 
 **Stan modelu.** Część opisową, obliczenia i rysunki tomu wygenerowano z jednego stanu modelu budynku
-(stan modelu: SHA-256 42ac7a811873 (budynek, dzialka, instalacje, wyposazenie)). Zgodność tomów PT między sobą i z tomem I (PZT, PAB) wykazuje ten sam znacznik
+(stan modelu: SHA-256 98826e2b39ab (budynek, dzialka, instalacje, wyposazenie)). Zgodność tomów PT między sobą i z tomem I (PZT, PAB) wykazuje ten sam znacznik
 stanu modelu we wszystkich tomach; tom z innym znacznikiem jest nieaktualny i przed podpisaniem oświadczenia
 projektanta wymaga ponownego wygenerowania.
 
@@ -926,11 +926,11 @@ rysunkowej (generowana z tabliczek arkuszy).
 
 | Nr rysunku | Tytuł | Skala | Format |
 |---|---|---|---|
-| PT-AR-01 | RZUT PARTERU | 1:50 | nst. 630×594 |
-| PT-AR-02 | RZUT I PIĘTRA | 1:50 | nst. 770×420 |
+| PT-AR-01 | RZUT PARTERU | 1:50 | nst. 620×594 |
+| PT-AR-02 | RZUT I PIĘTRA | 1:50 | nst. 594×490 |
 | PT-AR-03 | RZUT II PIĘTRA I RZUT DACHU | 1:50 | nst. 590×891 |
-| PT-AR-04 | PRZEKROJE A-A I B-B | 1:50 | nst. 1130×420 |
-| PT-AR-05 | ELEWACJE | 1:50 | nst. 2130×297 |
+| PT-AR-04 | PRZEKROJE A-A I B-B | 1:50 | nst. 1150×420 |
+| PT-AR-05 | ELEWACJE | 1:50 | nst. 2120×297 |
 
 **Tabela 53. Detale cieplne i szczelności (§ 24 pkt 2 RPB) — indeks detali**
 
