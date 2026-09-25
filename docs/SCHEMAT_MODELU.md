@@ -199,3 +199,14 @@ Pełna lista: docstring `src/lamela/obliczenia/energia/__init__.py`. Braki są r
 * **dachy[]:** `wpusty`, `przelewy_awaryjne`, `rury_spustowe` (odbiornik: zbiornik/niecka), warstwy dachu zielonego.
 * **dzialka.yaml:** rzędne projektowane terenu, ZWG, rodzaj gruntu, położenie zbiornika i niecki; **otwory:** flaga `bezprogowe: true`
   dla HS, brama garażowa.
+
+## 9. Dane wymagane przez obliczenia konstrukcyjne (`lamela.obliczenia.konstrukcja`)
+* `schody[].plyta.grubosc` (demo: 15 cm nie przechodzi ugięcia — biblioteka wymaga ≥ 17 cm dla typowego biegu), `stropy[].mat` (klasa betonu),
+  `belki[].przekroj` (belki stalowe, np. „HEB 200”, „RK 120x120x6”), `materialy[].ciezar` [kN/m³] (opcjonalnie), `fundamenty.elementy[].mat`.
+* Sekcje w budynek.yaml: `konstrukcja: {klasa_konsekwencji: CC2, okres_uzytkowania: 50, ...}` i `geotechnika: {kategoria: II, grunt: {rodzaj,
+  phi, gamma, M0, I_D}, ZWG: -3.8}` (propozycja R5 pkt 3.11).
+* **Posadowienie:** zagłębienie ław/stóp **D ≥ 1,0 m** poniżej terenu (W-284) i ≥ h_z = 0,8 m — sprawdzić przy rzędnych terenu projektowanego;
+  alternatywnie płyta fundamentowa na XPS z uzasadnieniem.
+* **Ściany-tarcze i wsporniki tarczowe** (wspornik P2) — biblioteka ich nie liczy (poza jednoprzęsłową tarczą pełną): w PT-BO wymagana osobna analiza
+  (model kratownicowy STM wg PN-EN 1992-1-1 p. 5.6.4/6.5 lub MES tarczowy) — preferuj rozwiązania, które da się zweryfikować (np. belki/podciągi
+  żelbetowe lub stalowe przenoszące wspornik, ograniczenie otworów w tarczach).

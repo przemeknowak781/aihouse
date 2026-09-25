@@ -3,7 +3,7 @@
 Moduły: ``wspolne`` (kroki, wyniki, parametry projektu), ``materialy`` (beton, stal, mur, kształtowniki), ``obciazenia``
 (ciężary warstw, użytkowe, śnieg, wiatr, kombinacje), ``statyka`` (belki MES), ``plyty`` (tablice współczynników, MES
 płytowy), ``zelbet``, ``mur``, ``stal``, ``fundamenty``, ``schody``, ``pozycje`` (ścieżka obciążeń z modelu),
-``rysunki``, ``raport``. Szczegóły: ``README.md`` w tym katalogu.
+``rysunki``, ``raport`` (lista ograniczeń: ``raport.OGRANICZENIA``).
 
 Szybki start::
 

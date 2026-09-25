@@ -7,7 +7,7 @@ Kolejność (malejąco po rzędnej): grupy płyt (dach, stropy, wsporniki połą
 Dane z modelu (``lamela.model.Model``): stropy/dachy/wsporniki (obrys, otwory, grubość, rzędne, przegrody/podłogi →
 ciężary warstw ρ·g·d), ściany (oś, przegroda → grubość i materiał warstwy konstrukcyjnej, z_od/z_do, otwory),
 belki (oś, b, h, spod, mat), słupy (xy, przekrój, mat, z_od/z_do), fundamenty (oś/obrys, b, h, spod), schody (biegi,
-spoczniki), attyki dachów (zaspy), działka (teren → głębokość posadowienia). Szczegóły i ograniczenia: README.md pakietu.
+spoczniki), attyki dachów (zaspy), działka (teren → głębokość posadowienia). Ograniczenia: raport.OGRANICZENIA.
 """
 from __future__ import annotations
 
