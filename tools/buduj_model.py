@@ -960,3 +960,194 @@ def zapisz_budynek(path: Path):
     L_ += ["", "konstrukcja:"] + ["  " + ln for ln in blk(KONSTRUKCJA).split("\n")]
     L_ += ["", "geotechnika:"] + ["  " + ln for ln in blk(GEOTECHNIKA).split("\n")]
     path.write_text("\n".join(L_) + "\n", encoding="utf-8")
+
+
+# =====================================================================================================================
+# 11. DZIAŁKA (układ działki: początek = narożnik SW działki 123/4; budynek → działka: p_d = p_b + T)
+# =====================================================================================================================
+T_DZ = (7.60, 32.70)          # lico zach. P0 7,30 m od granicy W; linia zabudowy y_b = 11,30; ogród pd. ≈ 32 m
+DZ_W, DZ_H = 32.0, 50.0
+
+
+def d(x, y):
+    return [r(x + T_DZ[0], 3), r(y + T_DZ[1], 3)]
+
+
+def Rd(x0, y0, x1, y1):
+    return [d(*p) for p in R(x0, y0, x1, y1)]
+
+
+def H_ist(xp, yp):
+    """Teren istniejący (brief §2): płaszczyzna przez rzędne narożników SW 101,10; SE 101,25; NW 101,40; NE 101,55."""
+    return round(101.10 + 0.30 * yp / 50.0 + 0.15 * xp / 32.0, 2)
+
+
+def teren_punkty():
+    pts = []
+    xs = [0, 5, 10, 15, 20, 25, 30, 32]
+    ys = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
+    for yp in ys:
+        for xp in xs:
+            pts.append([xp, yp, H_ist(xp, yp)])
+    for xp, yp in [(-10, 0), (-10, 25), (-10, 50), (42, 0), (42, 25), (42, 50), (-10, 60), (16, 60), (42, 60), (16, 55)]:
+        pts.append([xp, yp, H_ist(max(-10, min(42, xp)), min(yp, 50)) + (0.08 if yp > 50 else 0.0)])
+    return [[r(a, 2), r(b, 2), r(c, 2)] for a, b, c in pts]
+
+
+def teren_projekt():
+    """Rzędne projektowane (bezwzględne): cokół ≥ 0,30 m (pierścień 0,5 m = 101,35) poza strefami drzwi; spadek ≥ 2 % na 1,5 m od budynku;
+    przy drzwiach — podesty −0,02 z odwodnieniem liniowym; na granicach E, W, S rzędne istniejące (W-019)."""
+    P_ = []
+    ring = Polygon(OB_P0).buffer(0.5, join_style=2)
+    ring2 = Polygon(OB_P0).buffer(2.0, join_style=2)
+    for poly, dz in ((ring, 0.0), (ring2, -0.03)):
+        c = list(poly.exterior.coords)[:-1]
+        dense = []
+        for (x0, y0), (x1, y1) in zip(c, c[1:] + c[:1]):
+            n = max(1, int(math.hypot(x1 - x0, y1 - y0) // 3.0))
+            dense += [(x0 + (x1 - x0) * k / n, y0 + (y1 - y0) * k / n) for k in range(n)]
+        for x, y in dense:
+            if x > xF + EXT + 0.2 or (y > y4 + EXT + 0.2 and x > xE - 0.5):       # garaż/podjazd — strefa wyższa (wjazd bez stopni)
+                h = 101.47
+            else:
+                h = 101.35
+            P_.append([r(x + T_DZ[0], 2), r(y + T_DZ[1], 2), r(h + dz, 2)])
+    spec = [((10.60, 9.60), 101.63, "podest wejścia"), ((10.60, 10.40), 101.60, "odwodnienie liniowe OL-3"),
+            ((10.60, 13.50), 101.52, "dojście"), ((10.60, 17.10), 101.47, "furtka (spadek do posesji)"),
+            ((15.50, 9.95), 101.53, "próg bramy / fartuch"), ((15.50, 10.30), 101.50, "odwodnienie liniowe OL-1"),
+            ((15.50, 13.50), 101.55, "grzbiet podjazdu"), ((15.50, 16.90), 101.47, "odwodnienie liniowe OL-4 przy bramie"),
+            ((6.00, -0.60), 101.32, "pod tarasem (żwir)"), ((6.00, -4.00), 101.28, "za tarasem"), ((-4.00, 2.00), 101.30, "za tarasem zach."),
+            ((16.80, -1.05), 101.40, "fundament jednostki PC"), ((20.50, 4.50), 101.40, "niecka trawiasta wsch. (odpływ na pd.)"),
+            ((5.00, 11.30), 101.31, "niecka trawiasta pn. (odpływ na zach.)")]
+    for (x, y), h, _ in spec:
+        P_.append([r(x + T_DZ[0], 2), r(y + T_DZ[1], 2), h])
+    return P_
+
+
+DZIALKA = {
+    "uklad": {"przesuniecie": [T_DZ[0], T_DZ[1]], "obrot": 0.0},
+    "dzialka": {"nr": "123/4", "obreb": "0005 Przykładowo", "gmina": "Przykładowo (fikcyjna)", "adres": "ul. Lipowa (fikcyjna)", "pow": 1600.0,
+                "obrys": R(0, 0, DZ_W, DZ_H), "mpzp": "uchwała nr XII/123/2024 Rady Gminy Przykładowo z 21.03.2024 — teren 3MN (fikcyjny)"},
+    "sasiedzi": [
+        {"nr": "123/3", "obrys": R(-32, 0, 0, 50), "zabudowa": R(-20, 22, -8, 32), "opis": "dom jednorodzinny, 2 kondygnacje, dach dwuspadowy (≥ 8 m od granicy)", "wys": 8.5},
+        {"nr": "123/5", "obrys": R(32, 0, 64, 50), "zabudowa": R(40, 24, 52, 35), "opis": "dom jednorodzinny parterowy z poddaszem (≥ 8 m od granicy)", "wys": 7.5},
+        {"nr": "130", "obrys": R(-32, -40, 64, 0), "zabudowa": [], "opis": "teren rolny (R IVb) — niezabudowany"},
+        {"nr": "118/2", "obrys": R(-10, 60, 22, 95), "zabudowa": R(2, 70, 14, 80), "opis": "dom jednorodzinny, dach płaski", "wys": 6.8, "dach": "plaski"},
+        {"nr": "118/3", "obrys": R(22, 60, 54, 95), "zabudowa": R(30, 72, 42, 82), "opis": "dom jednorodzinny, dach dwuspadowy", "wys": 8.0},
+    ],
+    "droga": {"symbol": "1KDD", "nazwa": "ul. Lipowa (fikcyjna), klasa D", "linie_rozgraniczajace": R(-40, 50, 72, 60), "jezdnia": R(-40, 52.25, 72, 57.75),
+              "nawierzchnia": "asfalt"},
+    "linia_zabudowy": [[0.0, 44.0], [32.0, 44.0]],
+    "teren": {"punkty": teren_punkty(), "warstwice_co": 0.10, "punkty_projektowane": teren_projekt(), "ZWG": 97.60,
+              "grunt": "0,0–0,4 ziemia urodzajna; piaski średnie I_D ≈ 0,6; ZWG ≈ 3,8 m p.p.t."},
+    "utwardzenia": [
+        {"id": "U1", "obrys": Rd(xE + EXT, y5 + EXT, xF + EXT, 17.30), "nawierzchnia": "podjazd — kostka betonowa 8 cm grafit na podbudowie (2,5 t)", "spadek": 0.015},
+        {"id": "U2", "obrys": Rd(9.95, 10.35, 11.25, 17.30), "nawierzchnia": "dojście — płyty betonowe 60×60 cm, szer. 1,30 m", "spadek": 0.02},
+        {"id": "U3", "obrys": Rd(11.25, 10.35, xE + EXT, 11.35), "nawierzchnia": "łącznik dojście–podjazd — płyty betonowe", "spadek": 0.02},
+        {"id": "U4", "obrys": Rd(6.40, 15.90, 9.60, 17.20), "nawierzchnia": "stanowisko pojemników — płyty betonowe (osłona z lamel)", "spadek": 0.02},
+        {"id": "U5", "obrys": Rd(16.10, -1.45, 17.50, -0.65), "nawierzchnia": "fundament jednostki zewn. PC na wibroizolacji", "spadek": 0.0},
+        {"id": "U6", "obrys": Rd(13.40, -1.30, 14.40, -0.30), "nawierzchnia": "ścieżka gospodarcza — płyty w trawie (ażur, poza PBC)", "spadek": 0.02},
+    ],
+    "zielen": [
+        {"id": "Z1", "obrys": R(0, 0, DZ_W, DZ_H), "typ": "trawnik"},
+        {"id": "Z2", "obrys": R(0.3, 0.3, 1.3, 49.0), "typ": "zywoplot", "wys": 1.8},
+        {"id": "Z3", "obrys": R(30.7, 0.3, 31.7, 45.0), "typ": "zywoplot", "wys": 1.8},
+        {"id": "Z4", "obrys": R(1.3, 0.3, 30.7, 1.3), "typ": "zywoplot", "wys": 1.6},
+        {"id": "Z5", "obrys": Rd(1.00, 10.40, 9.60, 11.10), "typ": "rabata"},
+        {"id": "Z6", "obrys": Rd(-6.80, 11.60, 6.20, 16.60), "typ": "rabata", "wys": 0.6},
+    ],
+    "drzewa": [
+        {"id": "DR1", "xy": d(5.0, -19.0), "gat": "lipa drobnolistna (soliter na osi ogrodu)", "sr_korony": 7.0, "istn": False, "do_wyciecia": False, "wys": 10.0},
+        {"id": "DR2", "xy": d(-5.0, -8.0), "gat": "klon polny (cień letni tarasu zach.)", "sr_korony": 5.0, "istn": False, "do_wyciecia": False, "wys": 8.0},
+        {"id": "DR3", "xy": d(-4.5, -14.0), "gat": "grab pospolity", "sr_korony": 4.5, "istn": False, "do_wyciecia": False, "wys": 7.0},
+        {"id": "DR4", "xy": d(16.0, -14.0), "gat": "jabłoń", "sr_korony": 4.0, "istn": False, "do_wyciecia": False, "wys": 5.0},
+        {"id": "DR5", "xy": d(20.5, -26.0), "gat": "brzoza brodawkowata (istniejąca, zachowana)", "sr_korony": 4.0, "istn": True, "do_wyciecia": False, "wys": 12.0},
+        {"id": "DR6", "xy": d(-4.5, -27.0), "gat": "sosna zwyczajna (istniejąca, zachowana)", "sr_korony": 4.5, "istn": True, "do_wyciecia": False, "wys": 11.0},
+        {"id": "DR7", "xy": d(21.5, 14.8), "gat": "grab kolumnowy (zieleń przy wjeździe)", "sr_korony": 2.0, "istn": False, "do_wyciecia": False, "wys": 6.0},
+    ],
+    "ogrodzenie": [
+        {"linia": [[0.0, 50.0], [17.60, 50.0]], "wys": 1.50, "typ": "od drogi: ażurowe, sztachety stalowe pionowe grafit, bez prefabrykatów betonowych (MPZP)"},
+        {"linia": [[18.60, 50.0], [20.30, 50.0]], "wys": 1.50, "typ": "ażurowe; wnęka ZK w słupku stalowym"},
+        {"linia": [[25.90, 50.0], [32.0, 50.0]], "wys": 1.50, "typ": "ażurowe (tor najazdu bramy przesuwnej)"},
+        {"linia": [[32.0, 50.0], [32.0, 0.0], [0.0, 0.0], [0.0, 50.0]], "wys": 1.50, "typ": "panele siatkowe zgrzewane grafit z żywopłotem"},
+    ],
+    "bramy": [{"xy": [23.10, 50.0], "szer": 5.60, "typ": "przesuwna", "kierunek": [1.0, 0.0], "wys": 1.50},
+              {"xy": [18.10, 50.0], "szer": 1.00, "typ": "furtka", "wys": 1.50}],
+    "miejsca_postojowe": [
+        {"id": "MP1", "obrys": Rd(12.40, 3.20, 15.10, 9.10), "typ": "garaz"},
+        {"id": "MP2", "obrys": Rd(15.30, 3.20, 18.00, 9.10), "typ": "garaz"},
+        {"id": "MP3", "obrys": Rd(12.90, 11.90, 15.40, 16.90), "typ": "zewn", "auto": False},
+        {"id": "MP4", "obrys": Rd(15.60, 11.90, 18.10, 16.90), "typ": "zewn", "auto": False},
+    ],
+    "odpady": {"obrys": Rd(6.40, 15.90, 9.60, 17.20), "opis": "osłona z lamel na 4 pojemniki 240 l (segregacja), przy furtce; odległości wg WT §23 ust. 4 "
+                                                             "nieokreślone dla zabudowy jednorodzinnej (W-016)"},
+}
+
+ZBIORNIK = d(4.00, -7.00)
+NIECKA = Rd(1.00, -17.00, 7.00, -13.00)
+DZIALKA.update({
+    "uzbrojenie": {
+        "istniejace": [
+            {"branza": "woda", "linia": [[-40, 54.0], [72, 54.0]], "opis": "wodociąg PE 110 (ul. Lipowa)"},
+            {"branza": "kan_sanit", "linia": [[-40, 55.6], [72, 55.6]], "opis": "kanalizacja sanitarna PVC 200, dno ≈ 99,20"},
+            {"branza": "en", "linia": [[-40, 51.0], [72, 51.0]], "opis": "kabel nN 0,4 kV (OSD)"},
+            {"branza": "tele", "linia": [[-40, 51.4], [72, 51.4]], "opis": "kanalizacja teletechniczna / światłowód"},
+            {"branza": "gaz", "linia": [[-40, 58.5], [72, 58.5]], "opis": "gazociąg PE 63 — NIE wykorzystywany (dom all-electric)"},
+        ],
+        "projektowane": [
+            {"branza": "woda", "linia": [[23.0, 54.0], [23.0, 44.0], [23.0, 35.2]], "opis": "przyłącze PE 40, przykrycie ≥ 1,20 m (W-141), pod podjazdem i płytą garażu "
+             "w rurze osłonowej, wodomierz w pom. 0.12", "dl": 18.8},
+            {"branza": "kan_sanit", "linia": [[13.0, 41.75], [13.0, 43.80], [13.0, 55.6]], "opis": "przykanalik PVC-U 160, i ≥ 2 %, studzienka rewizyjna SR1 Ø425 "
+             "(x 13,0; y 43,8) — wyjście z płyty pod ścianą pn. (piony K1, K2)", "dl": 13.9},
+            {"branza": "en", "linia": [[19.40, 51.0], [19.40, 49.80], [19.40, 43.20], [24.60, 43.20], [24.60, 35.20]],
+             "opis": "ZKP w linii ogrodzenia (pole odczytowe ≥ 0,48 m nad terenem) → WLZ YKY 5×16 do RG w pom. 0.12, rura osłonowa pod podjazdem/garażem",
+             "dl": 18.2},
+            {"branza": "tele", "linia": [[19.70, 51.4], [19.70, 43.50], [24.90, 43.50], [24.90, 35.20]], "opis": "2 × HDPE Ø40 + mikrokabel światłowodowy (W-196)",
+             "dl": 21.3},
+            {"branza": "deszcz", "linia": [[16.80, 42.40], [4.00, 42.40], [4.00, 29.00], ZBIORNIK], "opis": "kolektor KD-W PVC 160 (RS3, RS4, RS1/RS2 z SI)",
+             "dl": 34.8},
+            {"branza": "deszcz", "linia": [[26.40, 41.75], [27.20, 41.75], [27.20, 28.20], [ZBIORNIK[0], 28.20], ZBIORNIK],
+             "opis": "kolektor KD-E PVC 160 (RS5 dach garażu, RS6 z pom. technicznego)", "dl": 31.6},
+            {"branza": "deszcz", "linia": [ZBIORNIK, [10.60, 22.00], d(4.00, -13.00)], "opis": "przelew zbiornika DN160 do niecki chłonnej", "dl": 6.2},
+        ],
+        "obiekty": [
+            {"id": "ZKP", "xy": [19.40, 49.80], "opis": "złącze kablowo-pomiarowe we wnęce ogrodzenia, PWP przy wejściu (W-190)"},
+            {"id": "SR1", "xy": [13.00, 43.80], "opis": "studzienka rewizyjna kanalizacji Ø425 (poza garażem — W-118)"},
+            {"id": "PC-JZ", "xy": d(16.80, -1.05), "opis": "jednostka zewn. PC monoblok R290 w osłonie lamelowej z ekranem akustycznym od tarasu; "
+             "7,0 m od granicy E (≥ 6,0 — W-024); strefa R290 1,0 m bez otworów, wpustów i studzienek (W-156)"},
+            {"id": "SK-PC", "xy": d(16.80, -2.90), "opis": "studnia chłonna skroplin PC (żwir, ≥ 0,8 m p.p.t.), poza strefą R290 (W-146)"},
+            {"id": "HYDR", "xy": [-30.0, 56.0], "opis": "najbliższy hydrant zewnętrzny DN80 (ul. Lipowa) — zaopatrzenie ppoż. (W-217) [do potwierdzenia]"},
+        ],
+    },
+    "retencja": {
+        "zbiornik": {"xy": ZBIORNIK, "V": 5.0, "opis": "szczelny zbiornik PE 5,0 m³ z osadnikiem i filtrem, pompa do podlewania, przelew DN160 do niecki; "
+                     "≥ 3,0 m od budynku, ≥ 2,0 m od granic (W-145: wariant bazowy, nie jest urządzeniem wodnym)"},
+        "rozsaczanie": {"obrys": NIECKA, "V": 7.2, "typ": "niecka", "glebokosc": 0.30,
+                        "opis": "niecka chłonna (ogród deszczowy) 24 m², głęb. 0,30 m, ≥ 3,0 m od fundamentów, ≥ 2,0 m od granic, ≥ 1,0 m od drzew (W-144)"},
+    },
+    "odwodnienia": [
+        {"id": "OL-1", "typ": "liniowe", "linia": [d(xE + EXT + 0.2, 10.30), d(xF + EXT - 0.2, 10.30)], "spadek": 0.005, "odbiornik": "KD-E",
+         "opis": "odwodnienie liniowe przed bramą garażu (W-019)"},
+        {"id": "OL-2", "typ": "liniowe", "linia": [d(0.30, -EXT - 0.10), d(11.70, -EXT - 0.10)], "spadek": 0.005, "odbiornik": "opaska / KD-W",
+         "opis": "odwodnienie liniowe przy progach HS (bezprogowe) pod deską tarasu"},
+        {"id": "OL-2W", "typ": "liniowe", "linia": [d(-EXT - 0.10, 1.10), d(-EXT - 0.10, 3.70)], "spadek": 0.005, "odbiornik": "KD-W",
+         "opis": "odwodnienie liniowe przy HS zach."},
+        {"id": "OL-3", "typ": "liniowe", "linia": [d(9.50, 10.40), d(11.60, 10.40)], "spadek": 0.005, "odbiornik": "KD-W", "opis": "odwodnienie liniowe podestu wejścia"},
+        {"id": "OL-4", "typ": "liniowe", "linia": [d(xE + EXT + 0.2, 16.90), d(xF + EXT - 0.2, 16.90)], "spadek": 0.005, "odbiornik": "KD-E",
+         "opis": "odwodnienie liniowe przy bramie wjazdowej — woda nie spływa na drogę (MPZP, u.d.p. art. 39)"},
+        {"id": "OZ-1", "typ": "opaska_zwirowa", "obrys": [[r(x + T_DZ[0], 3), r(y + T_DZ[1], 3)] for x, y in
+                                                          list(Polygon(OB_P0).buffer(0.5, join_style=2).exterior.coords)[:-1]],
+         "szer": 0.50, "opis": "opaska żwirowa 16/32 szer. 0,5 m na geowłókninie wokół budynku (poza tarasem, podestami i podjazdem)"},
+        {"id": "NT-N", "typ": "niecka", "linia": [d(-3.60, 11.30), d(11.00, 11.30)], "spadek": 0.005, "odbiornik": "KD-W",
+         "opis": "płytka niecka trawiasta przed elewacją pn. (przechwyt spływu od drogi), spadek na zachód"},
+        {"id": "NT-E", "typ": "niecka", "linia": [d(20.60, 9.00), d(20.60, -4.00)], "spadek": 0.006, "odbiornik": "ogród pd.",
+         "opis": "płytka niecka trawiasta wzdłuż elewacji wsch. garażu (teren od granicy E wyższy), spadek na południe"},
+        {"id": "NCH-1", "typ": "niecka", "obrys": NIECKA, "odbiornik": "grunt (piaski, ZWG 3,8 m p.p.t.)", "opis": "niecka chłonna — przelew zbiornika"},
+        {"id": "DR-0", "typ": "drenaz_opaskowy", "linia": [], "opis": "NIE PROJEKTUJE SIĘ — piaski przepuszczalne, ZWG ≈ 3,8 m p.p.t., posadowienie ≈ 0,5 m p.p.t. "
+         "(W-285); ochrona płyty: XPS + membrana SBS, opaska żwirowa i spadki terenu"},
+    ],
+    "obszar_oddzialywania": {"opis": "Obszar oddziaływania obiektu mieści się w całości w granicach działki 123/4 (PB art. 3 pkt 20): odległości od granic "
+                             "≥ 4,0 m (ściany z otworami ≥ 5,70 m, płyty ≥ 5,20 m), przesłanianie i nasłonecznienie sąsiednich budynków (≥ 8 m od granic) "
+                             "bez ograniczeń (WT §13, §60), hałas PC ≤ 40 dB(A) nocą na granicy (W-024), wody opadowe zagospodarowane na działce "
+                             "(PW art. 234), brak odprowadzania na drogę."},
+})
