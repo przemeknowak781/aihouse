@@ -1,4 +1,5 @@
 {
+ "nr": 49,
  "title": "Arkusze IS ✔ (11 zamiast 17, −41 % papieru) · PT-4 po poprawkach: 0 braków w walidatorze",
  "stages": [
   [
@@ -60,6 +61,17 @@
  ],
  "notes": [
   "PT-4: WLZ YKY 5×25 — spadek napięcia 0,37 % ≤ 0,5 %.",
-  "PT-4 obejmuje też telekomunikację → plik PT_4_WB (RPB zał. 1)."
+  "PT-4 obejmuje też telekomunikację → plik PT_4_WB (RPB zał. 1).",
+  "NADZÓR (10:17): 4 agentów aktywnych, bez zastojów; najdłuższa bezczynność 7 min; zmiany w repo 0 min temu."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/projekt/05_PT_instalacje_sanitarne/rysunki/PT-IS-11_schemat_pompy_ciepla_c_o_i_c_w_u.png",
+   "caption": "PT-IS-11 schemat pompy ciepła, c.o. i c.w.u."
+  },
+  {
+   "path": "/home/user/aihouse/projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-08_teletechnika_rzut_i_pietra.png",
+   "caption": "PT-IE-08 teletechnika — rzut I piętra"
+  }
  ]
 }

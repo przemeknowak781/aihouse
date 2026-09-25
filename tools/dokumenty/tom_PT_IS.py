@@ -53,7 +53,7 @@ def buduj_pt_is(d: dict, D: DanePTIS, data: str) -> tuple[Dokument, Opis]:
     dok = Dokument("Projekt techniczny", "PT-IS", d, kod="PT-3 IS", branza="instalacje sanitarne",
                    data=data, tom=(PT_NR, PT_TOMY), podtytul=podt)
     dok.oswiadczenie_projektanta()
-    o = Opis(dok)
+    o = Opis(dok, renum=D.renum)
     o.md += [f"# Projekt techniczny — PT-3 IS (instalacje sanitarne) — tom {PT_NR} z {PT_TOMY}",
              "*Źródło Markdown części opisowej — generowane przez `tools/dokumenty/tom_PT_IS.py`; wersja wiążąca: PDF. "
              "Pełne obliczenia (raporty bibliotek `lamela.obliczenia`) — w PDF.*",

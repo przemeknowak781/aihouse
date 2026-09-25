@@ -32,6 +32,8 @@ KAT_ZRODLA = REPO / "projekt/09_opis_i_zalaczniki/PT_IS"
 P_MOSTKI = REPO / "projekt/08_obliczenia/mostki/wyniki_mostki.json"
 P_WYM = REPO / "docs/10_podstawy_prawne/wymagania.yaml"
 MODULY = ("woda", "kanalizacja", "deszczowa", "drenaz", "ogrzewanie")
+RE_POM = re.compile(r"(?<![\w.,/=`-])(\d\.\d\d[a-z]?)(?![\d,.]\d|\w)")
+ZNACZNIK_NIEAKTUALNE = "ARKUSZE NIEAKTUALNE"      # walidator (C2-IS-07): BRAK, gdy znacznik jest w tomie
 
 
 def L(v, n=2, pusty="—"):
@@ -77,8 +79,14 @@ class DanePTIS:
             self.z_cache = False
             if cache:
                 Path(cache).write_bytes(pickle.dumps((self.R, self.W)))
-        log(f"  obliczenia: {time.time() - t0:.0f} s")
+        from lamela.obliczenia import fizyka_energia as FE
+        from lamela.obliczenia.fizyka import mostki as MB
+        sym = MB.wczytaj_wyniki_symulacji(P_MOSTKI) if P_MOSTKI.exists() else None
+        self.ep_uwagi = FE.przelicz_ep_wyroby(self.R, self.W, self.m, sym)   # EP dla PC i zasobnika z projektu
+        log(f"  obliczenia: {time.time() - t0:.0f} s; EP na wyrobach zaprojektowanych: {self.R['ep'].EP:.1f}")
         self.Wd = {k: self.W[k].do_dict() for k in MODULY + ("bilans",)}
+        from lamela.views.common import room_label           # numer arkusza (K+1).NN — jak PT-1 AR i rysunki (W-314)
+        self.nr_pom = {p.id: room_label(self.m, p.id, "iso") for p in self.m.pomieszczenia()}
         self.ep = self.R["ep"]
         self.ep0 = next((w for w in self.R["ep_alt"] if w.system.pv is None and "bez PV" in w.system.nazwa), None)
         self.obc, self.went, self.og = self.R["obc"], self.R["went"], self.W["ogrzewanie"]
@@ -130,34 +138,51 @@ class DanePTIS:
             if not (a.get("qa") or {}).get("ok", True):
                 self.ark_braki.append(f"{a['nr']}: kontrola QA arkusza z błędami: {a['qa'].get('errors')}")
             self.arkusze.append(Arkusz.z_pdf(pdf))
-        self._aktualnosc_rysunkow()
-        if p.exists() and p.stat().st_mtime < self.p_bud.stat().st_mtime:
-            self.otwarte.append("Arkusze IS wygenerowano przed ostatnią zmianą modelu — przed wydaniem wygenerować "
-                                "ponownie (tools/generuj_widoki.py --arkusze model/arkusze_is.yaml).")
+        self._aktualnosc_rysunkow(p)
 
-    def _aktualnosc_rysunkow(self):
-        """Porównanie treści arkuszy z bieżącymi obliczeniami: model PC i „SPRAWDZENIE NIESPEŁNIONE” na rysunkach."""
+    def _aktualnosc_rysunkow(self, p_rap: Path):
+        """Arkusze nieaktualne wobec modelu i bieżących obliczeń → ``ark_nieaktualne`` [(nr, powód)]: czas generowania
+        starszy niż model, inny model PC, „SPRAWDZENIE NIESPEŁNIONE” przy braku warunków niespełnionych, wyniki
+        retencji/odwodnienia dachów na arkuszu różne od obliczeń. Lista niepusta → znacznik w tomie (walidator: BRAK)."""
         import pymupdf
+        self.ark_nieaktualne: list[tuple[str, str]] = []
+        zrodla = [self.p_bud, self.p_dz, self.p_inst, self.p_wyp, REPO / "model/arkusze_is.yaml"]
+        t_mod = max(x.stat().st_mtime for x in zrodla if x.exists())
+        if p_rap.exists() and p_rap.stat().st_mtime < t_mod:
+            self.ark_nieaktualne.append(("wszystkie", "wygenerowane przed ostatnią zmianą modelu"))
         pc = (self.W["ogrzewanie"].pc or {}).get("model", "")
         pc_id = (re.search(r"PC-R290-\d+", pc) or [None])[0] if pc else None
         n_nok = sum(1 for k in MODULY for x in self.warunki(k) if x.ok is False)
-        inne_pc, nok = {}, []
+        Dd = self.W["deszczowa"].do_dict()
+        oczek = {"niecka": f"niecka {L(Dd['niecka_A_m2'], 1)} m²", "Q = ": f"Q = {L(Dd['Q_dachy_l_s'], 2)} l/s"}
         for a in self.arkusze:
             if not a.istnieje:
                 continue
             with pymupdf.open(a.plik) as doc:
-                tx = " ".join(pg.get_text() for pg in doc)
-            for m in set(re.findall(r"PC-R290-\d+", tx)):
+                tx = re.sub(r"\s+", " ", " ".join(pg.get_text() for pg in doc))
+            for m in sorted(set(re.findall(r"PC-R290-\d+", tx))):
                 if pc_id and m != pc_id:
-                    inne_pc.setdefault(m, []).append(a.nr)
+                    self.ark_nieaktualne.append((a.nr, f"pompa ciepła {m}, a w obliczeniach {pc}"))
             if "NIESPEŁNIONE" in tx.upper() and n_nok == 0:
-                nok.append(a.nr)
-        for m, nr in inne_pc.items():
-            self.otwarte.append(f"Rysunki {', '.join(nr)} podają pompę ciepła {m}, a bieżące obliczenia — {pc} — "
-                                "rysunki nieaktualne wobec obliczeń; wygenerować ponownie przed wydaniem.")
-        if nok:
-            self.otwarte.append(f"Rysunki {', '.join(nok)} zawierają uwagi „SPRAWDZENIE NIESPEŁNIONE” z poprzedniej wersji "
-                                "obliczeń, a bieżące obliczenia nie wykazują warunków niespełnionych — wygenerować ponownie.")
+                self.ark_nieaktualne.append((a.nr, "uwaga „SPRAWDZENIE NIESPEŁNIONE” z poprzedniej wersji obliczeń"))
+            if "ODWODNIENIE DACH" in (a.tytul or "").upper():
+                for klucz, wz in oczek.items():
+                    if re.search(re.escape(klucz.strip()) + r"\s", tx) and wz not in tx:
+                        self.ark_nieaktualne.append((a.nr, f"wynik inny niż w obliczeniach (oczekiwano „{wz}”)"))
+        for nr, powod in self.ark_nieaktualne:
+            self.otwarte.append(f"{ZNACZNIK_NIEAKTUALNE}: {nr} — {powod}; wygenerować ponownie "
+                                "(tools/generuj_widoki.py --arkusze model/arkusze_is.yaml).")
+
+    def nr(self, pid: str) -> str:
+        """Identyfikator pomieszczenia modelu (parter 0.NN) → numer z arkuszy i PT-1 AR (parter 1.NN)."""
+        return self.nr_pom.get(str(pid), str(pid))
+
+    def renum(self, tekst):
+        """Zamiana identyfikatorów pomieszczeń modelu w tekście na numery z arkuszy (W-314); identyfikatory
+        elementów (np. SG-0.03), liczby dziesiętne i ułamki pozostają bez zmian."""
+        if not isinstance(tekst, str) or not self.nr_pom:
+            return tekst
+        return RE_POM.sub(lambda m: self.nr_pom.get(m.group(1), m.group(1)), tekst)
 
     @property
     def wodomierz(self) -> str:
@@ -257,29 +282,40 @@ def _zakresy(tekst: str) -> str:
 class Opis:
     """Zapis równoległy: bloki ``Dokument`` (PDF) i źródło Markdown (``projekt/09_opis_i_zalaczniki/PT_IS``)."""
 
-    def __init__(self, dok):
+    def __init__(self, dok, renum=None):
         self.dok = dok
         self.md: list[str] = []
         self.n_tab = 0
+        self.renum = renum or (lambda t: t)     # numeracja pomieszczeń z arkuszy (DanePTIS.renum)
+
+    def _r(self, v):
+        if isinstance(v, str):
+            return self.renum(v)
+        if isinstance(v, dict):
+            return {k: self._r(x) for k, x in v.items()}
+        if isinstance(v, (list, tuple)):
+            return type(v)(self._r(x) for x in v)
+        return v
 
     def czesc(self, tytul: str, podstawa: str | None = None):
         self.dok.czesc_opisowa(tytul, podstawa=podstawa)
         self.md.append(f"# {tytul}" + (f" ({podstawa})" if podstawa else ""))
 
     def rozdzial(self, tytul, tresc=None, *, poziom=1, podstawa=None, nowa_strona=False):
-        tresc = textwrap.dedent(tresc).strip() if tresc else None
+        tresc = self.renum(textwrap.dedent(tresc).strip()) if tresc else None
+        tytul = self.renum(tytul)
         self.dok.rozdzial(tytul, tresc, poziom=poziom, podstawa=podstawa, nowa_strona=nowa_strona)
         self.md.append(f"{'#' * (poziom + 1)} {tytul}" + (f" — {podstawa}" if podstawa else ""))
         if tresc:
             self.md.append(tresc)
 
     def tekst(self, tresc: str):
-        tresc = textwrap.dedent(tresc).strip()
+        tresc = self.renum(textwrap.dedent(tresc).strip())
         self.dok.markdown(tresc)
         self.md.append(tresc)
 
     def wniosek(self, tresc: str, alarm: bool = False):
-        t = textwrap.dedent(tresc).strip()
+        t = self.renum(textwrap.dedent(tresc).strip())
         self.dok.wniosek(t, alarm=alarm)
         self.md.append("> " + t.replace("\n", "\n> "))
 
@@ -288,6 +324,7 @@ class Opis:
         self.md.append(f"![{podpis}]({rel(plik)})")
 
     def tabela(self, wiersze: list, *, tytul: str, uwagi=None, zrodlo: str | None = None, **kw):
+        wiersze, uwagi, tytul = self._r(list(wiersze)), self._r(uwagi), self.renum(tytul)
         self.dok.tabela(wiersze, tytul=tytul, uwagi=uwagi, zrodlo=zrodlo, **kw)
         self.n_tab += 1
         kol = [k for k in (next((w for w in wiersze if isinstance(w, dict)), {}) or {}) if not k.startswith("_")]

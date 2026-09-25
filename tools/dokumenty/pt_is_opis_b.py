@@ -17,7 +17,7 @@ def wstaw_raport(o: Opis, tekst: str, *, tytul: str, podstawa: str | None = None
                  zrodlo: str = ""):
     """Raport Markdown biblioteki obliczeniowej jako podrozdział (poziom 2): „# …” → tytuł podrozdziału, „## n. …”
     → poziom 3 (numeracja z nagłówków usunięta — numeruje dokument), obrazy → ilustracje numerowane."""
-    tekst = re.sub(r"\A\s*#\s+[^\n]*\n", "", tekst)
+    tekst = o.renum(re.sub(r"\A\s*#\s+[^\n]*\n", "", tekst))       # numeracja pomieszczeń z arkuszy (W-314)
     tekst = re.sub(r"^(#{2,4})\s+\d+(?:\.\d+)*\.?\s+", r"\1 ", tekst, flags=re.M)
     tekst = re.sub(r"^(#{2,4})\s", lambda m: m.group(1)[1:] + " ", tekst, flags=re.M)   # ## → # (przesunięcie 2 → poziom 3)
     o.rozdzial(tytul, poziom=2, podstawa=podstawa, nowa_strona=True)
@@ -112,6 +112,7 @@ def rozdz_obliczenia(o: Opis, D: DanePTIS):
             wk(D, "deszczowa", "Niecka: pojemność", miejsca=2),
             wk(D, "deszczowa", "Niecka: czas opróżniania", miejsca=1)]
     o.rozdzial("Zestawienie wyników i dobór urządzeń", poziom=2, podstawa="§ 23 pkt 8 lit. b RPB")
+    rows = [o._r(r) for r in rows]
     o.dok.tabela_wynikow([r for r in rows if r], tytul="Podstawowe wyniki obliczeń i sprawdzeń PT-3 IS",
                          uwagi="Pełne sprawdzenia (wszystkie warunki) — w podrozdziałach obliczeń poniżej.",
                          zrodlo="lamela.obliczenia — uruchomienie przy generowaniu tomu")
