@@ -734,3 +734,93 @@ def draw_downpipes(c, s, used: set):
         c.circle(r["xy"], 0.9 * k, "Z-ODWODNIENIE", pen=0.35, lt="CIAGLA" if r["trasa"] == "zewn" else "KRESKOWA_DROBNA")
         c.dot(r["xy"], 0.5, "Z-ODWODNIENIE")
         used.add("rura_spustowa")
+
+
+def zjazd_poly(s, skos=1.0):
+    """Zjazd: z modelu (dzialka.yaml: zjazd.obrys) albo przedłużenie bramy wjazdowej do krawędzi jezdni ze skosami
+    ``skos`` [m] — geometria zastępcza [DO UZUPEŁNIENIA wg zezwolenia zarządcy drogi]."""
+    if s.zjazd and s.zjazd["poly"] is not None:
+        return s.zjazd["poly"], False
+    jez = s.droga["jezdnia"]
+    b = next((x for x in s.bramy if x["typ"] == "przesuwna"), None) or \
+        next((x for x in s.bramy if x["typ"] != "furtka"), None)
+    if b is None or jez is None:
+        return None, True
+    d = b["kier"]
+    u = perp(d)
+    if s.plot.contains(Point(b["xy"] + u * 0.3)):
+        u = -u
+    ray = LineString([b["xy"], b["xy"] + u * 60.0])
+    X = ray.intersection(jez)
+    if X.is_empty:
+        return None, True
+    t = min(np.hypot(*(np.asarray(q) - b["xy"])) for q in (X.coords if X.geom_type == "LineString" else
+                                                          [g.coords[0] for g in X.geoms]))
+    w = b["szer"] / 2
+    G = b["xy"]
+    pg = Polygon([G - d * w, G + d * w, G + d * (w + skos) + u * t, G - d * (w + skos) + u * t])
+    return pg, True
+
+
+def draw_objects(c, s, used: set, win=None):
+    """Obiekty uzbrojenia: ZK/ZKP (prostokąt z przekątną), studzienki (okrąg rzeczywisty ≥ 2 mm), studnia
+    chłonna, hydrant (PN-B-01027 poz. 6)."""
+    k = c.k
+    for o in s.obiekty.values():
+        if win is not None and not win.contains(Point(o.xy)):
+            continue
+        idu = o.id.upper()
+        t = o.opis.lower()
+        if idu.startswith("ZK"):
+            fence = next((f["geom"] for f in s.ogrodzenie if f["geom"].distance(Point(o.xy)) < 1.0), None)
+            ang = 0.0
+            if fence is not None:
+                q = fence.interpolate(fence.project(Point(o.xy)))
+                q2 = fence.interpolate(min(fence.length, fence.project(Point(o.xy)) + 0.1))
+                ang = math.degrees(math.atan2(q2.y - q.y, q2.x - q.x))
+            w, d = 0.9, 0.35
+            ca, sa = math.cos(math.radians(ang)), math.sin(math.radians(ang))
+            R = np.array([[ca, -sa], [sa, ca]])
+            q = (np.array([[-w / 2, -d / 2], [w / 2, -d / 2], [w / 2, d / 2], [-w / 2, d / 2]]) @ R.T) + o.xy
+            fill_white(c, Polygon(q), z=21.0)
+            c.polygon(q, "Z-UZBROJENIE", pen=0.5, color=BRANZE_COL("en"))
+            c.line(q[0], q[2], "Z-UZBROJENIE", pen=0.25, color=BRANZE_COL("en"))
+            used.add("zkp")
+        elif idu.startswith("HYD"):
+            c.circle(o.xy, 1.5 * k, "Z-SIECI-IST", pen=0.35, color=BRANZE_COL("woda"))
+            c.dot(o.xy, 0.8, "Z-SIECI-IST", color=BRANZE_COL("woda"))
+            used.add("hydrant")
+        elif idu.startswith("PC"):
+            continue
+        elif "studnia" in t or "chłonn" in t:
+            c.circle(o.xy, max(0.4, 1.2 * k), "Z-ODWODNIENIE", pen=0.35)
+            c.circle(o.xy, max(0.25, 0.6 * k), "Z-ODWODNIENIE", pen=0.18)
+            used.add("studnia_chlonna")
+        else:
+            dm = 0.425 if "425" in t else 1.0 if "1000" in t else 0.6
+            r = max(dm / 2, 1.0 * k)
+            col = BRANZE_COL("kan_sanit") if ("kanaliz" in t or "rewiz" in t) else None
+            fill_white(c, Point(o.xy).buffer(r), z=21.0)
+            c.circle(o.xy, r, "Z-UZBROJENIE", pen=0.35, color=col)
+            c.dot(o.xy, 0.5, "Z-UZBROJENIE", color=col or "#000000")
+            used.add("studzienka")
+
+
+def BRANZE_COL(b):
+    from .site_data import BRANZE
+    return BRANZE.get(b, ("", "", "#000000"))[2]
+
+
+def draw_utilities(c, s, used: set, win=None, inside=None, marks=True):
+    """Sieci projektowane (przyłącza, kolektory) z oznaczeniem miejsc włączenia „×”."""
+    for sx in [x for x in s.sieci if not x.istn]:
+        g = clip(sx.geom, win) if win is not None else sx.geom
+        if g is None:
+            continue
+        utility(c, g, sx, existing=False, inside=inside)
+        used.add(f"proj_{sx.branza}")
+        if marks:
+            for q in (sx.geom.coords[0], sx.geom.coords[-1]):
+                if any(E.istn and E.branza == sx.branza and E.geom.distance(Point(q)) < 0.05 for E in s.sieci):
+                    cross_mark(c, q, color=sx.kolor)
+                    used.add("wlaczenie")
