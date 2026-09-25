@@ -1,5 +1,6 @@
 {
- "title": "Korekta Inwestora: „S” z przesuniętych brył, garaż w parterze — panel koncepcji uruchomiony ponownie",
+ "nr": 11,
+ "title": "Rejestr norm zweryfikowany — kluczowy wniosek energetyczny (EP) i parametry instalacji; W2 kompletny",
  "stages": [
   [
    "Analiza szkicu — interpretacja v2 („S” z brył, garaż)",
@@ -55,5 +56,15 @@
   "EP: na wartościach domyślnych metodologii ≈ 99 > 70 — NIE spełnia; z danymi producenta PC (SCOP 4,5, COP CWU 3,2) i cyrkulacją czasową ≈ 58 — spełnia. Wniosek: w projekcie konkretne parametry urządzeń + analiza systemów alternatywnych (§ 20 RPB).",
   "Elektryka: moc przyłączeniowa 27 kW / 40 A 3f, RCBO typu A na obwodach, SPD 1+2, PV ≤ 6,5 kWp (bez uzgodnienia ppoż.).",
   "Koncepcja: W1 i W2 gotowe, W3 startuje; następnie sędziowie → synteza → audyt."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/docs/10_podstawy_prawne/grafiki/ep_szacunek.png",
+   "caption": "Szacunek EP: wartości domyślne vs dane producenta"
+  },
+  {
+   "path": "/home/user/aihouse/docs/20_koncepcja/W2/rzut_P2.png",
+   "caption": "W2: rzut II piętra"
+  }
  ]
 }
