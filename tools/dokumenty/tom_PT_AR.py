@@ -41,7 +41,8 @@ from lamela.obliczenia.wspolne import wymaganie  # noqa: E402
 
 KAT_MOSTKI = REPO / "projekt/08_obliczenia/mostki"
 KAT_DETALE = REPO / "projekt/10_PT_architektura/detale"
-KAT_AR = [REPO / "projekt/03_PAB/rysunki", REPO / "projekt/01_koncepcja/widoki"]   # pierwszy istniejący
+KAT_PT_RYS = REPO / "projekt/10_PT_architektura/rysunki"     # arkusze PT-AR-01… (stadium PT) — generowane tu
+KAT_AR = [KAT_PT_RYS, REPO / "projekt/03_PAB/rysunki", REPO / "projekt/01_koncepcja/widoki"]   # pierwszy istniejący
 KAT_ZRODLA = REPO / "projekt/09_opis_i_zalaczniki/PT_AR"
 KAT_WYDANIE = REPO / "projekt/wydanie"
 PT_TOMY = 4                                  # PT-1 AR, PT-2 BO, PT-3 IS, PT-4 IE (rejestr C.2)
@@ -240,6 +241,45 @@ def detale_wezla(detale: dict, wid: str) -> str:
     baza = re.sub(r"[a-z]$", "", wid) if re.match(r"WZ-\d+[a-z]$", wid) else wid
     tr = [f"{d} ({v['arkusz']})" for d, v in detale.items() if wid in v["wezly"] or baza in v["wezly"]]
     return ", ".join(tr) if tr else "—"
+
+
+def generuj_arkusze_pt(stan: dict, wymus: bool = False) -> str:
+    """Arkusze PT-AR (stadium PT) z tego samego układu co PAB (``model/arkusze.yaml``: rzuty z dachem, przekroje,
+    elewacje) — numery PT-AR-xx, tabliczka „PT”, uwaga o powiązaniu z PAB i detalami. Konfigurację zapisuje
+    w katalogu rysunków PT (nie w ``model/``); generacja pomijana, gdy arkusze powstały z bieżącego stanu modelu."""
+    import subprocess
+    import yaml
+    cfg = yaml.safe_load((REPO / "model/arkusze.yaml").read_text(encoding="utf-8")) or {}
+    ws = cfg.setdefault("wspolne", {})
+    pref0 = ws.get("prefiks_nr", "PB-AR")
+    nry = []
+    for a in cfg.get("arkusze") or []:
+        a["nr"] = str(a["nr"]).replace(pref0, "PT-AR")
+        nry.append(a["nr"])
+    ws.update(stadium="PT", prefiks_nr="PT-AR", uwagi=list(ws.get("uwagi") or []) + [
+        "Rysunek projektu technicznego (RPB § 24 pkt 1) wykonany z tego samego stanu modelu co rysunki "
+        f"{pref0}-xx projektu architektoniczno-budowlanego (tom I); {stan['tekst']}.",
+        "Układ warstw przegród, stolarka, wykończenia, odwodnienie — część opisowa PT-1 AR; węzły — detale PT-AR-D."])
+    KAT_PT_RYS.mkdir(parents=True, exist_ok=True)
+    p_cfg = KAT_PT_RYS / "arkusze_PT_AR.yaml"
+    tresc = ("# WYGENEROWANO (tools/dokumenty/tom_PT_AR.py) z model/arkusze.yaml — nie edytować ręcznie\n"
+             + yaml.safe_dump(cfg, allow_unicode=True, sort_keys=False, width=120))
+    p_stan = KAT_PT_RYS / "stan_modelu.json"
+    rap = KAT_PT_RYS / "raport_widokow.json"
+    aktualne = (not wymus and rap.exists() and p_cfg.exists() and p_cfg.read_text(encoding="utf-8") == tresc
+                and p_stan.exists() and json.loads(p_stan.read_text(encoding="utf-8")).get("skrot") == stan["skrot"])
+    if aktualne:
+        return f"arkusze PT-AR aktualne ({stan['skrot']}) — bez ponownej generacji"
+    p_cfg.write_text(tresc, encoding="utf-8")
+    t0 = time.time()
+    r = subprocess.run([sys.executable, str(REPO / "tools/generuj_widoki.py"), "--budynek", str(REPO / "model/budynek.yaml"),
+                        "--arkusze", str(p_cfg), "--out", str(KAT_PT_RYS), "--formaty", "dxf,pdf", "--bez-tomu"],
+                       cwd=REPO, capture_output=True, text=True, env={**__import__("os").environ,
+                                                                      "PYTHONPATH": str(REPO / "src")})
+    if r.returncode != 0:
+        raise SystemExit("generuj_widoki.py (arkusze PT-AR) — błąd:\n" + r.stdout[-2000:] + r.stderr[-3000:])
+    p_stan.write_text(json.dumps(stan, ensure_ascii=False), encoding="utf-8")
+    return f"arkusze PT-AR wygenerowane ({', '.join(nry)}) w {time.time() - t0:.0f} s"
 
 
 def arkusze_branzy() -> tuple[list[Arkusz], list[str], Path | None]:
@@ -447,27 +487,54 @@ def rozdz_U(o: Opis, D: dict):
     izolacja spadkowa — zał. C (U średnie po powierzchni). Wymagania U_C,max — WT zał. 2 pkt 1.1–1.2 (W-243, W-244);
     cele projektowe — W-245 {ZAL}. Założenia obliczeń: {zal}.
     """, poziom=2, podstawa="PN-EN ISO 6946:2017-10")
-    rows, szczeg = [], []
+    rows, szczeg, cel_nie = [], [], []
+    g = ob.grunt
+    rola_op = dict(ROLA_OPIS, podloga_grunt_nieogrz="podłoga na gruncie w pom. nieogrzewanym (garaż)")
+
+    def _cel(ok, kod):
+        if ok is None:
+            return "—"
+        if not ok:
+            cel_nie.append(kod)
+        return "osiągnięty" if ok else "nie osiągnięty"
     for (kod, rola), wu in ob.u.items():
         if rola in ROLE_WEWN:
             continue
+        if rola.startswith("podloga_grunt"):
+            if rola == "podloga_grunt" and g is not None:
+                continue                     # podłoga ogrzewana — wiersz wg PN-EN ISO 13370 poniżej (R_f, U_equiv)
+            R_T = wu.R_f if wu.R_f is not None else wu.R_T - wu.Rsi - wu.Rse
+        else:
+            R_T = wu.R_T
         ocena = "—" if wu.spelnia_WT is None else ("spełnia" if wu.spelnia_WT else "NIE SPEŁNIA")
-        rows.append({"Przegroda": kod.split("|")[0], "Rola": ROLA_OPIS.get(rola, rola), "R_T [m²·K/W]": wu.R_T,
+        rows.append({"Przegroda": kod.split("|")[0], "Rola": rola_op.get(rola, rola), "R_T / R_f [m²·K/W]": R_T,
                      "U₀ [W/(m²·K)]": wu.U0, "ΔU [W/(m²·K)]": wu.dU, "U [W/(m²·K)]": wu.U_zaokr,
-                     "U_max [W/(m²·K)]": wu.U_max, "U_cel [W/(m²·K)]": wu.U_cel, "Ocena": ocena})
+                     "U_max [W/(m²·K)]": wu.U_max, "Ocena WT": ocena, "U_cel [W/(m²·K)]": wu.U_cel,
+                     "Cel": _cel(wu.spelnia_cel, kod.split("|")[0])})
         szczeg.append((kod, rola, wu))
-    g = ob.grunt
     if g is not None:
-        rows.append({"Przegroda": "POD-0 (grunt)", "Rola": "podłoga na gruncie — U_equiv wg PN-EN ISO 13370",
-                     "R_T [m²·K/W]": g.R_f, "U₀ [W/(m²·K)]": g.U0, "ΔU [W/(m²·K)]": None, "U [W/(m²·K)]": g.U_zaokr,
-                     "U_max [W/(m²·K)]": g.U_max, "U_cel [W/(m²·K)]": g.U_cel,
-                     "Ocena": "—" if g.spelnia_WT is None else ("spełnia" if g.spelnia_WT else "NIE SPEŁNIA")})
+        rows.append({"Przegroda": "POD-0", "Rola": "podłoga na gruncie — U_equiv wg PN-EN ISO 13370",
+                     "R_T / R_f [m²·K/W]": g.R_f, "U₀ [W/(m²·K)]": g.U0, "ΔU [W/(m²·K)]": None,
+                     "U [W/(m²·K)]": g.U_zaokr, "U_max [W/(m²·K)]": g.U_max,
+                     "Ocena WT": "—" if g.spelnia_WT is None else ("spełnia" if g.spelnia_WT else "NIE SPEŁNIA"),
+                     "U_cel [W/(m²·K)]": g.U_cel, "Cel": _cel(g.spelnia_cel, "POD-0")})
     o.tabela(rows, tytul="Współczynniki przenikania ciepła przegród zewnętrznych — zestawienie",
-             formaty={"R_T [m²·K/W]": 2, "U₀ [W/(m²·K)]": 3, "ΔU [W/(m²·K)]": 3, "U [W/(m²·K)]": 2,
-                      "U_max [W/(m²·K)]": 2, "U_cel [W/(m²·K)]": 2}, klasa="zwarta", wyrownanie={"Ocena": "c"},
+             formaty={"R_T / R_f [m²·K/W]": 2, "U₀ [W/(m²·K)]": 3, "ΔU [W/(m²·K)]": 3, "U [W/(m²·K)]": 2,
+                      "U_max [W/(m²·K)]": 2, "U_cel [W/(m²·K)]": 2}, klasa="zwarta",
+             wyrownanie={"Ocena WT": "c", "Cel": "c"},
              uwagi=["U — wartość do bilansu (U₀ + ΔU; dla izolacji spadkowej — średnia wg zał. C), 2 cyfry znaczące. "
-                    "Dla podłogi na gruncie R_T oznacza R_f (bez R_si/R_se)."],
+                    "R_T — opór całkowity z R_si i R_se; dla podłóg na gruncie podano R_f — opór warstw podłogi bez "
+                    "R_si, R_se i gruntu (PN-EN ISO 13370).",
+                    f"Ocena WT — U ≤ U_max (WT zał. 2 pkt 1.1; W-243). U_cel — cel projektowy (W-245) {ZAL}, "
+                    "niebędący wymaganiem WT; „nie osiągnięty” nie narusza WT — skutek ujęto w charakterystyce "
+                    "energetycznej (PT-3 IS), liczonej z U z tej tabeli."],
              zrodlo="lamela.obliczenia.fizyka (u_przegrody, grunt); wymagania.yaml — sekcja energia")
+    if cel_nie:
+        wt_nie = [r["Przegroda"] for r in rows if r["Ocena WT"] == "NIE SPEŁNIA"]
+        o.tekst(f"Cel projektowy U_cel (W-245) nie jest osiągnięty dla: {', '.join(cel_nie)}. "
+                + (f"Wymagania WT (U ≤ U_max) są spełnione dla wszystkich przegród; cel nie jest wymaganiem, "
+                   "a jego nieosiągnięcie uwzględnia charakterystyka energetyczna." if not wt_nie else
+                   f"Wymagania WT NIE są spełnione dla: {', '.join(wt_nie)} — przegrody do zmiany przed wydaniem."))
     if g is not None:
         iz = g.izolacja
         o.tekst(f"""
@@ -511,8 +578,9 @@ def rozdz_mostki(o: Opis, D: dict):
     o.rozdzial("Mostki cieplne — ψ i f_Rsi (PN-EN ISO 10211, PN-EN ISO 13788)", f"""
     Węzły liniowe obliczono numerycznie w modelu 2D (PN-EN ISO 10211:2017-09; karty węzłów:
     `projekt/08_obliczenia/mostki/katalog_mostkow.md`). ψ_oi — w systemie wymiarów wewnętrznych całkowitych.
-    Do bilansu (H_TB) przyjęto wartości projektowe z sekcji `wezly` modelu (runda poprawek; węzły złożone —
-    średnia ważona podwęzłów). Mostki punktowe χ — wartości przykładowe {DANE_PRZYKLADOWE} do zastąpienia
+    Do bilansu (H_TB) przyjęto ψ_oi z obliczeń numerycznych węzłów (to samo źródło co charakterystyka
+    energetyczna w PT-3 IS); dla węzłów złożonych i węzłów bez obliczenia numerycznego — wartości projektowe
+    węzłów modelu budynku (węzły złożone — średnia ważona podwęzłów). Mostki punktowe χ — wartości przykładowe {DANE_PRZYKLADOWE} do zastąpienia
     deklaracją (ETA) wybranych łączników. Kryterium kondensacji powierzchniowej i pleśni:
     f_Rsi ≥ f_Rsi,wym = max(f_Rsi,kryt = {L(fr.f_Rsi_kryt, 3)} — miesiąc krytyczny {fr.miesiac_kryt + 1},
     {fr.opis_wilg}; {L(fr.f_Rsi_WT)} — WT zał. 2 pkt 2.2.1) = **{L(f_wym, 3)}**.
@@ -529,26 +597,25 @@ def rozdz_mostki(o: Opis, D: dict):
             rozbiezne.append(w.id)
         f_ocena = w.f_rsi if w.f_rsi is not None else fk
         rows.append({"Węzeł": w.id, "Opis": w.nazwa[:70] + ("…" if len(w.nazwa) > 70 else ""),
-                     "ψ_oi karta [W/(m·K)]": psi_k, "ψ projekt [W/(m·K)]": w.psi, "l [m]": w.dlugosc,
+                     "ψ_oi karta [W/(m·K)]": psi_k, "ψ bilans [W/(m·K)]": w.psi, "l [m]": w.dlugosc,
                      "ψ·l [W/K]": w.H, "f_Rsi [karta]": fk, "f_Rsi [projekt]": w.f_rsi,
                      "Ocena f_Rsi": "—" if f_ocena is None else ("tak" if f_ocena >= f_wym - 1e-9 else "NIE"),
                      "Detal": detale_wezla(D["detale"], w.id)})
     o.tabela(rows, tytul="Mostki cieplne liniowe — ψ, długości, f_Rsi",
-             formaty={"ψ projekt [W/(m·K)]": 3, "l [m]": 2, "ψ·l [W/K]": 2, "f_Rsi [karta]": 3, "f_Rsi [projekt]": 3},
+             formaty={"ψ bilans [W/(m·K)]": 3, "l [m]": 2, "ψ·l [W/K]": 2, "f_Rsi [karta]": 3, "f_Rsi [projekt]": 3},
              klasa="zwarta", wyrownanie={"Opis": "l", "Detal": "l", "ψ_oi karta [W/(m·K)]": "l", "Ocena f_Rsi": "c"},
              szerokosci=["14mm", None, "19mm", "14mm", "12mm", "11mm", "13mm", "13mm", "12mm", "21mm"],
-             uwagi=[f"Rozbieżność karty i wartości projektowej > 0,005 W/(m·K): {', '.join(rozbiezne)} — wartość "
-                    "projektowa pochodzi z rundy poprawek modelu; karty węzłów należy odświeżyć "
-                    "(tools/mostki_budynku.py) przed wydaniem."] if rozbiezne else None,
-             zrodlo="model/budynek.yaml — wezly; projekt/08_obliczenia/mostki/zestawienie_mostkow.json")
+             uwagi=[f"Rozbieżność karty węzła i ψ do bilansu > 0,005 W/(m·K): {', '.join(rozbiezne)} — karty węzłów "
+                    "do odświeżenia przed wydaniem."] if rozbiezne else None,
+             zrodlo="projekt/08_obliczenia/mostki — wyniki_mostki.json, zestawienie_mostkow.json; model — wezly")
     pkt = [{"Węzeł": w.id, "Opis": w.nazwa, "n [szt.]": w.liczba, "χ [W/K]": w.chi, "n·χ [W/K]": w.H,
             "Źródło χ": w.zrodlo_psi or w.status} for w in ob.wezly if w.chi is not None]
     if pkt:
         o.tabela(pkt, tytul="Mostki cieplne punktowe χ", formaty={"n [szt.]": 0, "χ [W/K]": 3, "n·χ [W/K]": 2},
                  klasa="zwarta", wyrownanie={"Źródło χ": "l"})
     o.tekst(f"""
-    Współczynnik strat przez mostki cieplne **H_TB = Σψ·l + Σχ = {L(ob.H_TB, 2)} W/K** (moduł energii, ψ projektowe
-    z modelu; do charakterystyki energetycznej w PT-3 IS).
+    Współczynnik strat przez mostki cieplne **H_TB = Σψ·l + Σχ = {L(ob.H_TB, 1)} W/K** — ta sama wartość
+    i to samo źródło ψ co w charakterystyce energetycznej (PT-3 IS){"" if D.get("sym") else " [brak wyników obliczeń numerycznych — ψ projektowe modelu]"}.
     """)
     # f_Rsi przegród
     el = [e for e in fr.elementy if not str(e["id"]).startswith("WZ")]
@@ -575,7 +642,7 @@ def rozdz_kondensacja(o: Opis, D: dict):
                      "s_d paroizolacji istn. [m]": g.sd_par_ist, "s_d wym. (brak kond.) [m]": g.sd_par_wym,
                      "Ocena": ("dopuszczalna" if g.dopuszczalna else "NIEDOPUSZCZALNA") + " — " + g.ocena})
     o.tabela(rows, tytul="Kondensacja międzywarstwowa — wyniki", klasa="zwarta",
-             formaty={"M_a,max [g/m²]": 1, "s_d paroizolacji istn. [m]": 1, "s_d wym. (brak kond.) [m]": 1},
+             formaty={"M_a,max [g/m²]": 3, "s_d paroizolacji istn. [m]": 1, "s_d wym. (brak kond.) [m]": 1},
              wyrownanie={"Ocena": "l"}, szerokosci=["16mm", "20mm", "15mm", "15mm", "13mm", "17mm", "17mm", None],
              uwagi=[u for g in gl for u in g.uwagi[:1]][:3] or None,
              zrodlo="lamela.obliczenia.fizyka.kondensacja — glaser, wymagane_sd_paroizolacji")
@@ -629,7 +696,7 @@ def rozdz_stolarka(o: Opis, D: dict):
         U_sym.setdefault(wo.symbol, []).append(wo)
     for x in ob.g_spr:
         g_sym.setdefault(x.symbol, []).append(x)
-    r1, r2, r3 = [], [], []
+    r1, r2, r3, u_przekr = [], [], [], []
     for sym, g in grupy.items():
         ot = g["o"]
         otw = ot.otwieranie or {}
@@ -653,8 +720,17 @@ def rozdz_stolarka(o: Opis, D: dict):
         dn = wos[0].dane if wos else None
         gs = g_sym.get(sym, [])
         ms = st.get(sym) or {}
+        u_wym = ms.get("U_w", ms.get("U_D"))
+        u_obl = max((w.U_w for w in wos), default=None)
+        if u_obl is None or u_wym is None:
+            oc_u = "—"
+        elif round(u_obl, 2) <= u_wym + 1e-9:
+            oc_u = "spełnia"
+        else:
+            oc_u = "NIE SPEŁNIA U_w wym."
+            u_przekr.append((sym, u_obl, u_wym, wos[0].U_max if wos else None))
         r2.append({"Symbol": sym, "U_w obl. [W/(m²·K)]": _zakres([w.U_w for w in wos]),
-                   "U_w wym. [W/(m²·K)]": ms.get("U_w", ms.get("U_D")),
+                   "U_w wym. [W/(m²·K)]": u_wym, "Ocena U_w": oc_u,
                    "U_max [W/(m²·K)]": wos[0].U_max if wos else None, "g_n": ms.get("g_n", dn.g_n if dn else None),
                    "f_C": _zakres([x.f_C for x in gs]), "g": _zakres([x.g for x in gs], 3),
                    "Ocena g": ("; ".join(sorted({x.zwolnienie for x in gs if x.zwolnienie != "—"})) or
@@ -666,12 +742,23 @@ def rozdz_stolarka(o: Opis, D: dict):
              szerokosci=["11mm", "19mm", None, "17mm", "8mm", "10mm", "17mm", "13mm", "12mm"],
              zrodlo="model/budynek.yaml — otwory, stolarka (grupowanie po symbolu)")
     o.tabela(r2, tytul="Zestawienie stolarki zewnętrznej i drzwi garaż–dom — parametry cieplne, g, szczelność", klasa="zwarta",
-             formaty={"U_w wym. [W/(m²·K)]": 2, "U_max [W/(m²·K)]": 1, "g_n": 2}, wyrownanie={"Ocena g": "l"},
+             formaty={"U_w wym. [W/(m²·K)]": 2, "U_max [W/(m²·K)]": 1, "g_n": 2},
+             wyrownanie={"Ocena g": "l", "Ocena U_w": "c"},
              uwagi=["U_w obl. — zakres dla otworów danego symbolu (PN-EN ISO 10077-1; drzwi — U_D z danych wyrobu). "
+                    "Ocena U_w — największe U_w obl. (2 miejsca po przecinku) ≤ U_w wym. (parametr wymagany wyrobu). "
                     "f_C — współczynnik redukcji osłony (WT zał. 2 pkt 2.1.3 lub PN-EN ISO 52022-1 metodą "
                     f"uproszczoną {NZW}). Deklarowane U_w, g, klasa szczelności wybranego wyrobu — do potwierdzenia "
                     "deklaracją właściwości użytkowych."],
              zrodlo="lamela.obliczenia.fizyka.okna — u_okna, sprawdz_g")
+    if u_przekr:
+        o.wniosek("**Stolarka — U_w obliczone większe od wymaganego:** " + "; ".join(
+            f"{s_}: U_w obl. = {L(uo, 2)} > U_w wym. = {L(uw, 2)} W/(m²·K)" + (f" (U_max WT = {L(um, 1)} — spełnia)"
+                                                                             if um and uo <= um else "")
+            for s_, uo, uw, um in u_przekr) + ". **Rozstrzygnięcie:** obowiązuje U_w wym. — parametr wymagany "
+            f"wyrobu. Przykładowe dane ramy i szyby {DANE_PRZYKLADOWE} go nie spełniają; należy dobrać wyrób "
+            "o lepszych parametrach (U_f, U_g, ψ_g — np. ramka ciepła, szyba o niższym U_g), wykazując U_w ≤ U_w wym. "
+            "deklaracją właściwości użytkowych dla wymiarów z zestawienia. Charakterystykę energetyczną (PT-3 IS) "
+            "policzono z U_w obl. (wartość większa) — po stronie bezpiecznej.")
     o.tabela([{"Kod": k, "Sposób montażu (osadzenia) stolarki": t, "Detal": detale_wezla(D["detale"], "WZ-11")}
               for t, k in montaze.items()], tytul="Montaż stolarki zewnętrznej", klasa="zwarta",
              wyrownanie={"Sposób montażu (osadzenia) stolarki": "l"}, szerokosci=["12mm", None, "36mm"])
@@ -786,15 +873,33 @@ def rozdz_odwodnienie(o: Opis, D: dict):
     {_det_tyt(det, 'attyk|wpust|przelew')}; rury spustowe przy cokole — {_det_tyt(det, 'rura')}; progi z odwodnieniem
     liniowym — {_det_tyt(det, 'próg')}. Wymiarowanie hydrauliczne i odbiorniki wód opadowych — PT-3 IS.
     """, podstawa="PN-EN 12056-3; W-142", nowa_strona=False)
-    rows, prz = [], []
+    from lamela.wskazniki import _pokrycie
+    pv = {p_.get("dach"): p_ for p_ in (((m.raw.get("energia") or {}).get("pv") or {}).get("pola") or [])}
+    uklad_pv = ((m.raw.get("energia") or {}).get("pv") or {}).get("uklad")
+    rows, prz, att = [], [], []
     for d in m.raw.get("dachy") or []:
+        zmin, zsr, zmax = _pokrycie(m, d)
+        a_ = d.get("attyka") or {}
+        if a_.get("wys_nad_pokryciem") is not None:
+            kor = zsr + float(a_["wys_nad_pokryciem"])
+            rp = d.get("rzedna_pokrycia") or {}
+            att.append({"Dach": d["id"], "Korona attyki [m]": kor, "Wierzch warstw dachu [m]": f"{L(zmin, 3)}…{L(zmax, 3)}",
+                        "h attyki [m]": f"{L(kor - zmax, 2)}…{L(kor - zmin, 2)}",
+                        "Hydroizolacja [m]": (f"{L(rp['przy_wpustach'], 3)}…{L(rp['maks'], 3)}"
+                                              if rp.get("przy_wpustach") is not None and rp.get("maks") is not None
+                                              else "—"),
+                        "h ponad hydroizolację [m]": (f"{L(kor - rp['maks'], 2)}…{L(kor - rp['przy_wpustach'], 2)}"
+                                                      if rp.get("przy_wpustach") is not None and rp.get("maks") is not None
+                                                      else "—")})
+        pp = pv.get(d["id"])
         rows.append({"Dach": d["id"], "Przegroda": d.get("przegroda", "—"),
                      "Spadek [%]": (d.get("spadek") or 0) * 100,
                      "Wpusty": "; ".join(f"{w.get('opis', '').split(' — ')[0]} DN{w.get('dn')}"
                                          + (" z grzałką" if w.get("podgrzewany") else "") for w in d.get("wpusty") or [])
                      or "—",
                      "Rury spustowe": "; ".join(_rura(r) for r in d.get("rury_spustowe") or []) or "—",
-                     "h attyki [m]": (d.get("attyka") or {}).get("wys_nad_pokryciem")})
+                     "PV [szt.]": (f"{pp.get('n')} ({pp.get('typ') and 'biosolarne' or uklad_pv or '—'})"
+                                   if pp else "—")})
         for p in d.get("przelewy_awaryjne") or []:
             mm = re.search(r"\bPA\d+\b", p.get("opis", ""))
             prz.append({"Przelew": mm.group(0) if mm else "—", "Dach": d["id"],
@@ -803,10 +908,19 @@ def rozdz_odwodnienie(o: Opis, D: dict):
                         "Δh [mm]": (p["rzedna_dna"] - p["rzedna_pokrycia"]) * 1000
                         if p.get("rzedna_dna") is not None and p.get("rzedna_pokrycia") is not None else None,
                         "Opis": p.get("opis", "")})
-    o.tabela(rows, tytul="Odwodnienie dachów", klasa="zwarta", formaty={"Spadek [%]": 1, "h attyki [m]": 2},
-             wyrownanie={"Wpusty": "l", "Rury spustowe": "l"}, szerokosci=["10mm", "16mm", "13mm", None, None, "14mm"],
-             uwagi=["h attyki — wysokość korony attyki ponad pokrycie (wierzch hydroizolacji)."],
-             zrodlo="model/budynek.yaml — dachy")
+    o.tabela(rows, tytul="Odwodnienie dachów i pola PV", klasa="zwarta", formaty={"Spadek [%]": 1},
+             wyrownanie={"Wpusty": "l", "Rury spustowe": "l"}, szerokosci=["10mm", "16mm", "13mm", None, None, "20mm"],
+             uwagi=["PV — liczba modułów fotowoltaicznych na dachu (jedyne źródło rozmieszczenia: pola PV modelu; "
+                    "instalacja — PT-4 IE, obciążenie dachu — PT-2 BO)."],
+             zrodlo="model/budynek.yaml — dachy; energia.pv.pola")
+    if att:
+        o.tabela(att, tytul="Attyki — rzędne korony i wysokość ponad dach (zakres wynikający ze spadków)",
+                 klasa="zwarta", formaty={"Korona attyki [m]": 3}, szerokosci=["12mm", "20mm", None, "20mm", None, "24mm"],
+                 uwagi=["h attyki — wysokość korony ponad wierzch warstw dachu (pokrycie, żwir, substrat): od punktu "
+                        "najwyższego (kalenica spadków) do najniższego (wpusty). h ponad hydroizolację — to samo "
+                        "względem wierzchu hydroizolacji. Do obliczenia zaspy śnieżnej przy attyce (PT-2 BO, W-264) "
+                        "przyjmuje się h,max — wartość górną zakresu „h attyki”."],
+                 zrodlo="model/budynek.yaml — dachy (attyka, płyta, warstwy, rzedna_pokrycia)")
     if prz:
         o.tabela(prz, tytul="Przelewy awaryjne w attykach — rzędne", klasa="zwarta",
                  formaty={"Dno [m]": 3, "Pokrycie [m]": 3, "Δh [mm]": 0}, wyrownanie={"Opis": "l"},
