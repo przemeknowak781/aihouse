@@ -126,3 +126,76 @@ class RysK(Rysunek):
         self.label(P, f"Ks Ø{rura.split()[-1]}, i = {num(100 * i, 1)} %", "S-OPISY")
         self.leg.sym(lambda c, p: arrowhead(c, p + np.array([3.0, 0.0]), np.array([1.0, 0.0]), 2.2, 14, True,
                                             "S-KANAL"), "kierunek przepływu (spadek przewodu)")
+
+    # --------------------------------------------------------------------------------------------- pod posadzką
+    def kolektor(self):
+        from shapely.ops import nearest_points
+        kn = self.W.kanalizacja
+        vp, k = self.vp, self.k
+        st = kn.studzienka or {}
+        s_xy = np.asarray(st.get("xy", (0.0, 0.0)), float)
+        ob = self.W.dane.obrysy.get(self.kids[0]) or self.pod.outline
+        E = nearest_points(ob.exterior, Point(*s_xy))[0]
+        E = np.array([E.x, E.y])
+        x0, y0, x1, y1 = ob.bounds
+        g2 = Siatka((min(x0, s_xy[0]) - 2, min(y0, s_xy[1]) - 2, max(x1, s_xy[0]) + 2, max(y1, s_xy[1]) + 2))
+        kol = sorted(kn.piony, key=lambda p: -(abs(p.xy[0] - E[0]) + abs(p.xy[1] - E[1])))
+        kols = [o for o in kn.odcinki if o.rodzaj == "poziom"]
+        for i, pn in enumerate(kol):
+            nxt = np.asarray(kol[i + 1].xy, float) if i + 1 < len(kol) else E
+            path = g2.route(np.asarray(pn.xy, float), nxt, "KOL", reuse=0.3, turn=1.5, margin=4.0)
+            g2.mark(path, "KOL")
+            self.pipe(path, "KS", pen="gruba", lt="KRESKOWA")
+            o = kols[i] if i < len(kols) else None
+            if o is not None:
+                self.label(path, f"{o.rura}, i = {num(100 * (o.i or 0.02), 1)} % (pod płytą)", "S-OPISY")
+        prz = next((o for o in kn.odcinki if o.rodzaj == "przykanalik"), None)
+        path = [E, np.array([E[0], s_xy[1]]), s_xy] if abs(E[0] - s_xy[0]) > 0.02 else [E, s_xy]
+        d = s_xy - np.asarray(path[-2], float)
+        dl = float(np.hypot(*d)) or 1.0
+        path[-1] = s_xy - d / dl * 0.2125
+        self.pipe(path, "KS", pen="gruba", lt="KRESKOWA")
+        n0 = len(vp.prims)
+        vp.circle(s_xy, 0.2125, "S-KANAL", pen="srednia")
+        vp.circle(s_xy, 0.16, "S-KANAL", pen="b_cienka")
+        self.reg(n0)
+        if prz is not None:
+            self.label(path, f"przykanalik {prz.rura}, i = {num(100 * prz.i, 1)} %", "S-OPISY")
+        self.tag(s_xy, [f"Studzienka rewizyjna SR1: {st.get('typ', 'PP DN425')}",
+                        f"dno wlotu {fmt.level(st.get('dno', 0.0))}, teren {fmt.level(st.get('teren', 0.0))}; "
+                        f"dalej do sieci wg PZT"], "S-OPISY", style="bold")
+        rz = kn.rzedne.get("wyjście z budynku")
+        if rz is not None:
+            self.tag(E, [f"wyjście z budynku: dno {fmt.level(rz)}", "przejście szczelne przez płytę (tuleja)"],
+                     "S-OPISY")
+        self.leg.line("S-KANAL", "przewody odpływowe pod płytą fundamentową i przykanalik PVC-U SN8 "
+                      "(PN-EN 1401-1) — linia kreskowa", lt="KRESKOWA", pen="gruba")
+        self.leg.sym(lambda c, p: (c.circle(p, 3.0, "S-KANAL", pen="srednia"), c.circle(p, 2.2, "S-KANAL",
+                                                                                          pen="b_cienka")),
+                     "studzienka rewizyjna (tworzywowa DN425)")
+
+    # --------------------------------------------------------------------------------------------- opisy
+    def opisy(self):
+        kn = self.W.kanalizacja
+        d = kn.do_dict()
+        self.notes += [
+            "Kanalizacja sanitarna wg PN-EN 12056-1, -2 (system I), -5 i WT § 122–124; obliczenia: lamela.obliczenia."
+            "sanitarne.kanalizacja (K = 0,5; ΣDU, Q_ww, napełnienia, wentylacja pionów).",
+            "Podejścia i piony: PP-HT (PN-EN 1451-1) lub równoważne; pod płytą i przykanalik: PVC-U SN8 lity "
+            "(PN-EN 1401-1). Spadki podejść ≥ 2 %, przewodów pod płytą 2 % (≤ DN100).",
+            "Trasy podejść wyznaczono algorytmicznie (ortogonalnie, przy ścianach, do pionów w szachcie SI) — "
+            "średnice i spadki z obliczeń; przebieg do weryfikacji na budowie.",
+            "Czyszczaki na pionach w najniższej kondygnacji 1,0 m nad posadzką; rewizje w studzience SR1. Piony w "
+            "szachcie izolowane akustycznie, przejścia przez stropy z opaskami/kołnierzami ppoż. wg klasy stropu.",
+            "Odpływ skroplin PC i zmywarki przez syfon; wpusty podłogowe z zamknięciem wodnym ≥ 50 mm.",
+        ]
+        if self.kid == self.kids[0]:
+            rows = [[o.id, o.opis[:44], f"Ø{o.rura.split()[-1]}", num(o.L, 2), num(o.sum_DU, 1), num(o.Q, 2),
+                     (num(100 * o.i, 1) if o.i else "—")] for o in kn.odcinki
+                    if o.rodzaj in ("pion", "poziom", "przykanalik", "podejscie_zbiorcze")]
+            self.res.column_blocks.append(("kan", table_block(
+                "WYNIKI OBLICZEŃ — KANALIZACJA (PN-EN 12056-2)",
+                [("Odcinek", 18), ("Opis", 74), ("DN", 16), ("L [m]", 16), ("ΣDU", 14), ("Q [l/s]", 18),
+                 ("i [%]", 14)], rows, align=["left", "left", "center", "right", "right", "right", "right"])))
+            self.notes.append(f"ΣDU = {num(d['sum_DU'], 1)} l/s, Q_ww = {num(d['Q_ww_l_s'], 2)} l/s; przykanalik "
+                              f"{d.get('przykanalik', '')}.")

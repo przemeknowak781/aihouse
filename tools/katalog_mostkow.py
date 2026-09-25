@@ -53,6 +53,8 @@ def main(argv=None) -> int:
     ap.add_argument("--demo", action="store_true", help="katalog demonstracyjny nawet przy sekcji `wezly`")
     ap.add_argument("--teren", type=float, default=-0.30, help="rzędna terenu przy cokole [m] [ZAŁ]")
     ap.add_argument("--bez-szczegolow", action="store_true", help="bez wykresów strumienia/θ_si i raportu szczegółów")
+    ap.add_argument("--dodatkowe", action="store_true",
+                    help="także węzły spoza sekcji `wezly` wykryte w geometrii modelu (WZ-X…: dach – ściana wyższa)")
     args = ap.parse_args(argv)
 
     from lamela.model import load_model
@@ -70,6 +72,14 @@ def main(argv=None) -> int:
         wezly, dl, pominiete, kody_w = wezly_z_sekcji(m, y_teren=args.teren)
         tryb = f"sekcja `wezly` modelu ({len(wezly)} węzłów)"
         porownania = None
+        if args.dodatkowe:
+            from lamela.obliczenia.mostki2d.katalog_dod import wezly_dodatkowe
+            dod = wezly_dodatkowe(m)
+            for w_, L_ in dod:
+                wezly.append(w_)
+                dl[w_.id] = round(L_, 3)
+                kody_w[w_.id] = []
+            tryb += f" + {len(dod)} węzły spoza sekcji wykryte w geometrii (WZ-X…, długości z geometrii)"
     else:
         wezly = katalog_demonstracyjny(m, y_teren=args.teren)
         dl, _ = dlugosci_z_modelu(m)
@@ -109,7 +119,7 @@ def main(argv=None) -> int:
         rel_bud = Path(bud)
     wstep = (f"Model: `{rel_bud}`; źródło węzłów: {tryb}. {B_prim(m)[1]}. Wygenerowano: "
              f"`PYTHONPATH=src python3 tools/katalog_mostkow.py" + (f" --budynek {rel_bud}" if args.budynek else "")
-             + (" --demo" if args.demo else "") + "`.")
+             + (" --demo" if args.demo else "") + (" --dodatkowe" if args.dodatkowe else "") + "`.")
     if testowy:
         wstep += (" **Model testowy pipeline'u — nie jest projektem Domu LAMELA**; katalog demonstruje metodę i "
                   "narzędzie; po utworzeniu `model/budynek.yaml` z sekcją `wezly` skrypt wygeneruje katalog "

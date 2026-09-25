@@ -330,41 +330,41 @@ def _ok(v):
     return "TAK" if v else "NIE"
 
 
-def _block_wskazniki(s, W):
+def _tab_wskazniki(s, W):
     L = s.mpzp or {}
     A = W["A"]
     rows = [["Powierzchnia działki nr " + s.nr, m2(A), "—", ""]]
     mz = L.get("max_udzial_zabudowy")
-    rows.append(["Pow. zabudowy (rzut ścian zewn.; upzp 2 pkt 35)", m2(W["zab"]),
+    rows.append(["Pow. zabudowy (upzp art. 2 pkt 35)", m2(W["zab"]),
                  f"≤ {m2(mz * A)}" if mz else "—", _ok(W["udzial_zab"] <= mz) if mz else ""])
-    rows.append(["Udział powierzchni zabudowy", fmt.percent(W["udzial_zab"] * 100, 2),
+    rows.append(["Udział pow. zabudowy", fmt.percent(W["udzial_zab"] * 100, 2),
                  f"≤ {fmt.percent(mz * 100, 0)}" if mz else "—", _ok(W["udzial_zab"] <= mz) if mz else ""])
-    rows.append(["  wariant kontrolny z płytami/okapami", f"{m2(W['zab_pl'])} ({fmt.percent(W['zab_pl'] / A * 100, 2)})",
+    rows.append(["– z płytami i okapami (kontrolnie)", f"{m2(W['zab_pl'])} ({fmt.percent(W['zab_pl'] / A * 100, 2)})",
                  "informacyjnie", _ok(W["zab_pl"] / A <= mz) if mz else ""])
-    rows.append(["Drogi, dojścia, place (RPB § 14 pkt 4 b)", m2(W["utw"]), "—", ""])
-    rows.append(["Tarasy naziemne i podesty", m2(W["tarasy"]), "—", ""])
+    rows.append(["Drogi, dojścia, place", m2(W["utw"]), "—", ""])
+    rows.append(["Tarasy naziemne, podesty", m2(W["tarasy"]), "—", ""])
     if W["opaska"]:
         rows.append(["Opaska żwirowa", m2(W["opaska"]), "—", ""])
     mp = L.get("min_udzial_pbc")
-    rows.append(["PBC — teren (upzp art. 2 pkt 28)", f"{m2(W['pbc'])} ({fmt.percent(W['pbc_udzial'] * 100, 2)})",
+    rows.append(["PBC (upzp art. 2 pkt 28)", f"{m2(W['pbc'])} ({fmt.percent(W['pbc_udzial'] * 100, 2)})",
                  f"≥ {m2(mp * A)} ({fmt.percent(mp * 100, 0)})" if mp else "—",
                  _ok(W["pbc_udzial"] >= mp) if mp else ""])
     if W["pbc_dach"]:
-        rows.append([f"  + 50 % dachu zielonego {', '.join(W['dachy_ziel'])} (rezerwa)",
+        rows.append([f"– z 50 % dachu ziel. {', '.join(W['dachy_ziel'])} (rezerwa)",
                      f"{m2(W['pbc'] + W['pbc_dach'])} ({fmt.percent(W['pbc_z_dachem'] * 100, 2)})", "informacyjnie", ""])
     it = L.get("intensywnosc")
     kk = "+".join(W["kond"])
-    rows.append([f"Suma pow. kondygnacji nadziemnych ({kk})", m2(W["suma_kond"]),
+    rows.append([f"Pow. kondygnacji nadz. ({kk})", m2(W["suma_kond"]),
                  f"{m2(it[0] * A)}–{m2(it[1] * A)}" if it else "—", ""])
     rows.append(["Nadziemna intensywność zabudowy", fmt.num(W["intens"], 3),
                  f"{fmt.num(it[0], 2)}–{fmt.num(it[1], 2)}" if it else "—",
                  _ok(it[0] <= W["intens"] <= it[1]) if it else ""])
     mh = L.get("max_wysokosc")
     if W["wys_zab"] is not None:
-        rows.append(["Wysokość zabudowy (upzp art. 2 pkt 30)", f"{mm(W['wys_zab'])} m", f"≤ {mm(mh)} m" if mh else "—",
+        rows.append(["Wysokość zabudowy (art. 2 pkt 30)", f"{mm(W['wys_zab'])} m", f"≤ {mm(mh)} m" if mh else "—",
                      _ok(W["wys_zab"] <= mh) if mh else ""])
     if W["wt"]:
-        rows.append(["Wysokość budynku wg WT § 6", f"{mm(W['wt']['H'])} m", "N: ≤ 12,00 m", _ok(W["wt"]["H"] <= 12.0)])
+        rows.append(["Wysokość budynku (WT § 6)", f"{mm(W['wt']['H'])} m", "N: ≤ 12,00 m", _ok(W["wt"]["H"] <= 12.0)])
     mk = L.get("max_kondygnacji")
     rows.append(["Kondygnacje nadziemne", str(W["n_kond"]), f"≤ {mk}" if mk else "—",
                  _ok(W["n_kond"] <= mk) if mk else ""])
@@ -378,9 +378,9 @@ def _block_wskazniki(s, W):
     spr = linia_zabudowy_spr(s)
     if spr:
         prz = ", ".join(nm_ for nm_, _v in spr["przekroczenia"]) or "brak"
-        rows.append(["Linia zabudowy — lico ścian za linią", f"{mm(spr['d'])} m", "nie przekraczać",
+        rows.append(["Lico ścian od linii zabudowy", f"{mm(spr['d'])} m", "nie przekraczać",
                      _ok(spr["ok"])])
-        rows.append(["  elementy wysunięte poza linię", prz, str(L.get("wysuniecia") or "—"), ""])
+        rows.append(["Elementy poza linią zabudowy", prz, str(L.get("wysuniecia") or "—"), ""])
     zr = {"model": "dzialka.yaml: dzialka.mpzp",
           "konfiguracja": "konfiguracja arkuszy (brief § 3) — BRAK W MODELU [DO UZUPEŁNIENIA]",
           "brak": "BRAK [DO UZUPEŁNIENIA]"}[s.mpzp_zrodlo]
@@ -392,29 +392,28 @@ def _block_wskazniki(s, W):
              "istniejącego i projektowanego." if W["top_abs"] else "",
              (f"WT § 6: od terenu projektowanego przy wejściu {W['wt']['wejscie']} ({mm(W['wt']['H_ent'])}) do "
               f"wierzchu stropodachu {W['wt']['dach']} (bez attyki)." if W["wt"] and "H_ent" in W["wt"] else "")]
-    return D.table_block("ZESTAWIENIE POWIERZCHNI I WSKAŹNIKÓW (RPB § 14 pkt 4; MPZP)",
-                         [("Wskaźnik / element", 74), ("Projekt", 42), ("MPZP / wymaganie", 44), ("Zgodność", 20)],
-                         rows, align=["left", "right", "left", "center"], notes=[n for n in notes if n])
+    return dict(title="ZESTAWIENIE POWIERZCHNI I WSKAŹNIKÓW ZAGOSPODAROWANIA (RPB § 14 pkt 4, MPZP)",
+                cols=[("Wskaźnik / element", 0), ("Projekt", 0), ("MPZP / wymaganie", 0), ("Zgodność", 0)],
+                rows=rows, align=["left", "right", "left", "center"], notes=[n for n in notes if n])
 
 
-def _block_odleglosci(s):
+def _tab_odleglosci(s):
     rows = []
     for r in odleglosci(s):
         gr = f"{r['strona']} ({r['sasiad']})" if r["sasiad"] else r["strona"]
-        el = r["el"] if r["typ"] != "wys" else f"{r['el']} (okap/płyta/taras)"
+        el = r["el"] if r["typ"] != "wys" else f"{r['el']} — okap/płyta/taras"
         if r["droga"]:
             wym, ok = "nie dot. (ust. 10)", "—"
         else:
             wym, ok = f"≥ {mm(r['wym'])}", _ok(r["ok"])
         rows.append([gr, el, mm(r["d"]), wym, ok])
-    return D.table_block("ODLEGŁOŚCI OD GRANIC DZIAŁKI (WT § 12)",
-                         [("Granica", 26), ("Element (każda płaszczyzna ściany osobno)", 72), ("Odl. [m]", 20),
-                          ("Wymagana [m]", 38), ("Zgodność", 20)], rows,
-                         align=["left", "left", "right", "left", "center"],
-                         notes=["WT § 12 ust. 1: 4,00 m — ściana z oknami/drzwiami, 3,00 m — bez otworów; ust. 6: 1,50 m "
-                                "— okap, gzyms, taras, daszek; ust. 10: od działki drogowej nie dotyczy. Odległość "
-                                "mierzona w poziomie w miejscu najmniejszego oddalenia (§ 9). WT stosowane na podstawie "
-                                "art. 102a PB (oświadczenie Inwestora)."])
+    return dict(title="ODLEGŁOŚCI OD GRANIC DZIAŁKI (WT § 12)",
+                cols=[("Granica", 0), ("Element (płaszczyzna ściany)", 0), ("Odl. [m]", 0), ("Wymagana [m]", 0),
+                      ("Zgodność", 0)], rows=rows, align=["left", "left", "right", "left", "center"],
+                notes=["WT § 12 ust. 1: 4,00 m — ściana z oknami/drzwiami, 3,00 m — bez otworów (każda płaszczyzna "
+                       "ściany osobno); ust. 6: 1,50 m — okap, taras, daszek; ust. 10: od działki drogowej — nie "
+                       "dotyczy. Odległość w poziomie w miejscu najmniejszego oddalenia (§ 9). WT stosowane na "
+                       "podstawie art. 102a PB."])
 
 
 def _block_oo(s):

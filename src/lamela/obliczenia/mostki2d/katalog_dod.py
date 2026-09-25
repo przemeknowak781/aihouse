@@ -375,3 +375,104 @@ def zbuduj(model, e: dict, y_teren: float = -0.30):
     except (KeyError, ValueError, TypeError, StopIteration) as ex:   # geometria nietypowa → obsługa ogólna
         raise ValueError(f"katalog_dod: {ex}") from ex
     return None
+
+
+# ---------------------------------------------------------------------------------------------- węzły dodatkowe
+def _pom_pod(model, xy, z_plyty: float):
+    """Pomieszczenie kondygnacji pod płytą (wierzch kondygnacji ≈ z_plyty) zawierające punkt rzutu (albo None)."""
+    from shapely.geometry import Point
+    for kid in kond_przy(model, z_plyty, "dol"):
+        for r in model.pomieszczenia(kid):
+            g = getattr(r, "polygon", None) or getattr(r, "wielobok", None)
+            try:
+                if g is not None and g.buffer(0.05).contains(Point(xy)):
+                    return r
+            except Exception:
+                continue
+    return None
+
+
+def nieogrzewane(r) -> bool:
+    """Pomieszczenie nieogrzewane (garaż, temp. < 8 °C w modelu)."""
+    if r is None:
+        return False
+    t = getattr(r, "temp", None)
+    try:
+        if t is not None and float(t) < 8.0:
+            return True
+    except (TypeError, ValueError):
+        pass
+    return "gara" in (r.nazwa or "").lower()
+
+
+def krawedzie_dach_sciana(model) -> list[dict]:
+    """Odcinki krawędzi dachów, na których stoi ściana zewnętrzna wyższej kondygnacji, nad pomieszczeniem
+    ogrzewanym (połączenie dach – ściana wyższa; bez garażu — WZ-09c). [{dach, sciana_gora, sciana_dol, L}]"""
+    out = []
+    for d in model.dachy():
+        pl = d.get("plyta") or {}
+        if not pl:
+            continue
+        z = float(pl["wierzch"])
+        k_gora = kond_przy(model, z, "gora")
+        P = Polygon(d["obrys"])
+        for ed in _krawedzie(P):
+            sg = _max(sciany_wzdluz(model, ed, k_gora, tol=0.35))
+            if not sg:
+                continue
+            # podział krawędzi wg pomieszczenia pod płytą (próbkowanie co 0,25 m, 0,6 m w głąb dachu)
+            import numpy as np
+            c = np.asarray(ed.coords)
+            u = (c[1] - c[0]) / ed.length
+            n_in = np.array([-u[1], u[0]])
+            if not P.contains(Polygon([tuple(c[0] + n_in * 0.6), tuple(c[1] + n_in * 0.6), tuple(c[1]),
+                                       tuple(c[0])]).centroid):
+                n_in = -n_in
+            N = max(1, int(ed.length / 0.25))
+            for k in range(N):
+                s0, s1 = k * ed.length / N, (k + 1) * ed.length / N
+                pm = c[0] + u * (s0 + s1) / 2
+                rs = [_pom_pod(model, pm + n_in * a + u * b, z) for a in (0.6, 1.0) for b in (0.0, -0.3, 0.3)]
+                rs = [r for r in rs if r is not None]
+                if not rs or nieogrzewane(rs[0]) or (len(rs) > 1 and sum(map(nieogrzewane, rs)) * 2 >= len(rs)):
+                    continue
+                seg = LineString([tuple(c[0] + u * s0), tuple(c[0] + u * s1)])
+                sd = _max(sciany_wzdluz(model, seg, kond_przy(model, z, "dol"), typy=(), tol=0.35))
+                out.append(dict(dach=d["id"], przegroda=d["przegroda"], sciana_gora=sg, sciana_dol=sd, L=seg.length,
+                                z=z, t=float(pl["grubosc"])))
+    return out
+
+
+def wezly_dodatkowe(model, prefiks: str = "WZ-X") -> list[tuple]:
+    """Węzły spoza sekcji `wezly` wykryte w geometrii: dach – ściana zewnętrzna wyższej kondygnacji (nad
+    pomieszczeniem ogrzewanym). Zwraca [(Wezel, długość)] — id: WZ-X1, WZ-X2…"""
+    grupy: dict[tuple, dict] = {}
+    for k in krawedzie_dach_sciana(model):
+        key = (k["przegroda"], k["sciana_gora"], round(k["z"], 2))
+        g = grupy.setdefault(key, dict(k, L=0.0, dachy=[], sd={}))
+        g["L"] += k["L"]
+        if k["sciana_dol"]:
+            g["sd"][k["sciana_dol"]] = g["sd"].get(k["sciana_dol"], 0.0) + k["L"]
+        if k["dach"] not in g["dachy"]:
+            g["dachy"].append(k["dach"])
+    out = []
+    for n, (key, g) in enumerate(sorted(grupy.items(), key=lambda it: -it[1]["L"])):
+        kod_d, sg, z = key
+        sd = _max(g["sd"])
+        st = next((s for s in model.stropy() if abs(float(s["wierzch"]) - z) <= TOL_Z), None)
+        if st is None or not sd:
+            continue
+        dach = _W(model, kod_d)
+        ki = G.indeks_konstrukcyjnej(dach)
+        w = D.wezel_przegroda_w_linii(_W(model, sd), float(st["grubosc"]), _mat(model, st.get("mat")),
+                                      ("wewn", _W(model, st.get("podloga"))), ("zewn", dach[:ki]),
+                                      ("wewn", _sufit(model, st.get("sufit"))), ("wewn", _sufit(model, st.get("sufit"))),
+                                      sciana_gora=_W(model, sg), t_plyty_prawa=float(dach[ki].d),
+                                      id=f"{prefiks}{n + 1}", typ="attyka",
+                                      nazwa=f"Dach {'/'.join(g['dachy'])} ({kod_d}) – ściana {sg} wyższej kondygnacji na "
+                                            f"krawędzi (pod spodem ściana {sd}, pomieszczenia ogrzewane) — węzeł spoza "
+                                            f"sekcji `wezly`")
+        w.dane["geometria z modelu"] = f"krawędzie dachów {', '.join(g['dachy'])} pod ścianą {sg}: Σ {g['L']:.2f} m"
+        w.dane["długość z geometrii modelu [m]"] = round(g["L"], 2)
+        out.append((w, g["L"]))
+    return out

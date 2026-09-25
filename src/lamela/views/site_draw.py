@@ -144,8 +144,9 @@ class Labeler:
 
     def label(self, anchor, lines, h=H, layer="Z-OPISY", style="normal", color=None, mask=0.5,
               dists=(0.8, 2.0, 4.0, 7.0, 11.0, 16.0, 22.0), dirs=None, leader_from=3.0, dot=False,
-              max_cost=None, frame=False, register=True, leader_color=None, penalty=0.02):
+              max_cost=None, frame=False, register=True, leader_color=None, penalty=0.02, own=None):
         k = self.k
+        saved = self._mute(own)
         W, Hh = block_size(lines, h, style)
         A = np.asarray(anchor, float)
         cands = []
@@ -173,12 +174,30 @@ class Labeler:
                         cv.dot(A, 0.7, layer, color=leader_color or color or "#000000")
         pos, cost = self.pl.place(self.vp, fn, cands, penalty_step=penalty, bounds=self.bounds, max_cost=max_cost,
                                   register=register)
+        self._unmute(saved)
         if pos is None:
             self.failed.append(lines)
         return pos, cost
 
+    def _mute(self, own, buf_mm=0.6):
+        """Tymczasowo zeruje wagę przeszkód liniowych należących do ``own`` (np. opis na własnej linii)."""
+        if own is None:
+            return []
+        ob = own.buffer(buf_mm * self.k)
+        saved = []
+        for i in self.pl._query(ob):
+            g = self.pl.geoms[i]
+            if self.pl.cat[i] == "line" and g.intersection(ob).area > 0.7 * g.area:
+                saved.append((i, self.pl.w[i]))
+                self.pl.w[i] = 0.0
+        return saved
+
+    def _unmute(self, saved):
+        for i, w in saved:
+            self.pl.w[i] = w
+
     def along(self, ls: LineString, text, h=H, layer="Z-OPISY", color=None, n=1, fracs=None, offset_mm=0.0,
-              max_cost=4.0, style="normal", mask=0.4, min_len_mm=12.0):
+              max_cost=4.0, style="normal", mask=0.4, min_len_mm=12.0, own=None):
         """Opis wzdłuż łamanej (np. warstwica, sieć) — ``n`` wystąpień w najlepszych miejscach."""
         k = self.k
         L = ls.length
@@ -211,7 +230,9 @@ class Labeler:
                 break
             mid = len(cands) // 2
             cands = [c_ for _i, c_ in sorted(enumerate(cands), key=lambda t: abs(t[0] - mid))]
+            saved = self._mute(own if own is not None else ls)
             pos, _c = self.pl.place(self.vp, fn, cands, penalty_step=0.01, bounds=self.bounds, max_cost=max_cost)
+            self._unmute(saved)
             if pos is None:
                 break
             used.append(ls.project(Point(pos[0])))
@@ -1277,3 +1298,68 @@ def register_all(lab: Labeler, n0=0, n1=None, min_len_mm=0.8, hatch_w=0.12):
             lab.pl.add(g, "line", w)
         for g in f:
             lab.pl.add(g, "area", w)
+
+
+# ================================================================================================ tabele w rzutni
+def vp_table(c, x, y_top, cols, rows, title=None, h=H, row_h=5.0, align=None, notes=(), max_w_mm=None,
+             layer="Z-OPISY", title_h=3.5, min_col=None):
+    """Tabela rysowana w rzutni (jednostki modelu; wymiary papierowe × k) — pismo ≥ 2,5 mm (PZT). Szerokości kolumn
+    dobierane do treści; nagłówki zawijane. ``cols`` = [(nagłówek, min. szer. mm)]. Zwraca (x0, y0, x1, y1)."""
+    from ..draft.sheet import wrap
+    k = c.k
+    pad = 1.2
+    ws = []
+    for j, (hd, wmin) in enumerate(cols):
+        wc = max([T.width(str(r[j]), h) for r in rows if j < len(r)] + [0.0]) + 2 * pad
+        wh = max(T.width(wd, h, "bold") for wd in str(hd).split()) + 2 * pad
+        ws.append(max(wc, wh, float(wmin or 0)))
+    Wt = sum(ws)
+    hdr = [wrap(str(hd), ws[j] - 2 * pad, h, "bold") for j, (hd, _w) in enumerate(cols)]
+    nh = max(len(x_) for x_ in hdr)
+    header_h = nh * h * 1.45 + 2.0
+    X = lambda v: x + v * k        # noqa: E731
+    y = y_top
+    if title:
+        tl = wrap(title, max(Wt, max_w_mm or 0), title_h, "bold")
+        for i, t_ in enumerate(tl):
+            c.text((x, y - (title_h + i * title_h * 1.4) * k), t_, title_h, 0.0, "left", "baseline", layer,
+                   style="bold")
+        y -= (len(tl) * title_h * 1.4 + 1.5) * k
+    top = y
+    c.fill(box(x, y - header_h * k, X(Wt), y), "Z-TLO", "#eeeeee", z=9.9)
+    xx = 0.0
+    for j, ls in enumerate(hdr):
+        for i, t_ in enumerate(ls):
+            yy = y - (header_h / 2.0 + (len(ls) - 1) * h * 0.725 - i * h * 1.45) * k
+            c.text((X(xx + ws[j] / 2.0), yy), t_, h, 0.0, "center", "middle", layer, style="bold")
+        xx += ws[j]
+    y -= header_h * k
+    c.line((x, y), (X(Wt), y), layer, pen=0.25)
+    for r in rows:
+        xx = 0.0
+        for j, v in enumerate(r):
+            a = (align[j] if align else ("left" if j == 0 else "right"))
+            st = "bold" if str(v) in ("NIE",) else "normal"
+            col = "#c00000" if str(v) in ("NIE", "KOLIZJA") else None
+            if a == "left":
+                c.text((X(xx + pad), y - row_h / 2.0 * k), str(v), h, 0.0, "left", "middle", layer, style=st, color=col)
+            elif a == "right":
+                c.text((X(xx + ws[j] - pad), y - row_h / 2.0 * k), str(v), h, 0.0, "right", "middle", layer,
+                       style=st, color=col)
+            else:
+                c.text((X(xx + ws[j] / 2.0), y - row_h / 2.0 * k), str(v), h, 0.0, "center", "middle", layer,
+                       style=st, color=col)
+            xx += ws[j]
+        y -= row_h * k
+        c.line((x, y), (X(Wt), y), layer, pen=0.13)
+    xx = 0.0
+    for j in range(len(ws) - 1):
+        xx += ws[j]
+        c.line((X(xx), y), (X(xx), top), layer, pen=0.13)
+    c.rect(x, y, X(Wt), top, layer, pen=0.35)
+    yb = y
+    for nt in notes:
+        for t_ in wrap(nt, max(Wt, max_w_mm or 0), h):
+            yb -= h * 1.45 * k
+            c.text((x, yb), t_, h, 0.0, "left", "baseline", layer)
+    return (x, yb - 1.0 * k, X(max(Wt, max_w_mm or 0)), y_top)
