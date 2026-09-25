@@ -18,9 +18,17 @@ wielokrotności A3, chociaż fajnie jak się ładnie będzie składało.”
    w grupie (wiersz / kolumna / siatka — wariant o najmniejszym polu), bloki kolumny opisowej (legendy, tabele,
    uwagi, róża + podziałka) rozmieszczane algorytmem wolnych prostokątów (MaxRects): najpierw kolumna nad tabliczką,
    potem kolejne kolumny w lewo, pas pod widokami i wolne obszary w obrysie widoków („kieszenie” przy krawędzi
-   obwiedni — zajętość widoku liczona pasami 5 mm z prymitywów rzutni, odstęp ≥ ``odstep_widok_blok``); uwagi dzielone na kolumny (numeracja ciągła, „cd.”); róża
-   kierunków i podziałka — jeden wiersz bezpośrednio nad tabliczką. Odstępy: widok–widok ≥ 12 mm, widok–blok
-   ≥ 10 mm, blok–blok ≥ 5 mm; nic się nie nakłada (``sprawdz_nakladanie``).
+   obwiedni — zajętość widoku liczona pasami 5 mm z prymitywów rzutni, odstęp ≥ ``odstep_widok_blok``); gdy bloki
+   zajmują kilka kolumn, są przestawiane tak, aby kolejność listy czytała się kolumnami od lewej, w kolumnie od góry.
+   Uwagi — w całości, a gdy się nie mieszczą — w najmniejszej liczbie części (≤ ``max_czesci_uwag``, ≥ 2 pozycje
+   w części, gdy się da; numeracja ciągła, „cd.”) ułożonych w kolejności czytania: część k+1 pod częścią k w tej
+   samej kolumnie albo w kolumnie na prawo; każda dodatkowa część podnosi koszt (``kara_czesci_uwag``). Róża
+   kierunków i podziałka — jeden wiersz bezpośrednio nad tabliczką (węższy, gdy trzeba ominąć znak centrujący).
+   **Znaki centrujące** (ISO 5457 4.3: osie arkusza, 10 mm za ramkę): strefy znaków są rezerwowane dla bloków,
+   tytuł widoku trafiający na znak jest przesuwany w prawo; gdy rezerwacja pogorszyłaby upakowanie (więcej części
+   uwag lub kolumn), bloki stoją jak bez niej, a znak jest skracany na arkuszu
+   (``Sheet.przytnij_znaki_centrujace`` — nigdy nie dotyka treści). Odstępy: widok–widok ≥ 12 mm, widok–blok
+   ≥ 10 mm, blok–blok ≥ 5 mm, treść–znak ≥ 1,5 mm; nic się nie nakłada (``sprawdz_nakladanie``).
 4. **Tryby** (``format`` w ``wspolne`` lub w arkuszu): ``auto`` = ``ekonomiczny`` (wszystkie kandydaty),
    ``standardowy`` (tylko ISO 216 + wydłużone, nowe upakowanie), ``klasyczny`` (dawny algorytm ``sheets.py``:
    pierwszy mieszczący się z listy FORMATS, kolumna 180 mm na całą wysokość), nazwa formatu (``A2``, ``A3x3`` —
@@ -31,7 +39,9 @@ Parametry (``wspolne`` lub arkusz, wszystkie opcjonalne): ``format``, ``wysokosc
 L = 210 + m·n, np. 190; 0 — tylko najmniejsza długość), ``max_wysokosc`` (914),
 ``kara_niestandard`` (0,03), ``kara_skladania`` ({dobre: 0, poprawne: 0,04, słabe: 0,10} — na kierunek),
 ``max_dlugosc`` (2400), ``wolne_obszary`` (true — bloki także w pustych narożnikach obwiedni widoków),
-``odstep_widok_blok`` (10 mm).
+``odstep_widok_blok`` (10 mm), ``kara_czesci_uwag`` (0,02 — na każdą część uwag ponad jedną),
+``max_czesci_uwag`` (4), ``znaki_centrujace`` (``auto`` | ``rezerwuj`` — zawsze rezerwacja stref |
+``skracaj`` — bez rezerwacji, znaki skracane).
 """
 from __future__ import annotations
 
@@ -41,7 +51,8 @@ from dataclasses import dataclass, field
 import numpy as np
 
 from ..draft import text as T
-from ..draft.sheet import ISO_A, ISO_ELONGATED, custom_size, sheet_size
+from ..draft.sheet import (ISO_A, ISO_ELONGATED, ZNAK_CENTR_DL, ZNAK_CENTR_GR, ZNAK_CENTR_ODSTEP, custom_size,
+                           sheet_size)
 from ..draft.skladanie import ocena_skladania
 
 MARG_L, MARG = 20.0, 10.0           # ramka: margines na oprawę 20 mm, pozostałe 10 mm
@@ -56,7 +67,8 @@ PAD_B = 3.0                         # ramka ↔ blok (góra, dół, lewo); z pra
 DOMYSLNE = dict(
     format="auto", wysokosci=[297, 420, 594, 841, 891], krok_dlugosci=10.0, modul_skladania="auto",
     kara_niestandard=0.03, kara_skladania={"dobre": 0.0, "poprawne": 0.04, "słabe": 0.10}, max_dlugosc=2400.0,
-    max_wysokosc=914.0, wolne_obszary=True, odstep_widok_blok=GAP_VB,
+    max_wysokosc=914.0, wolne_obszary=True, odstep_widok_blok=GAP_VB, kara_czesci_uwag=0.02, max_czesci_uwag=4,
+    znaki_centrujace="auto",
 )
 TRYBY = ("auto", "ekonomiczny", "standardowy", "klasyczny")
 
@@ -162,6 +174,7 @@ class Blok:
     dy1: float = 0.0                # wystawanie ponad y_top (np. tytuł tabeli)
     kotwica: str = ""               # "nad_tabliczka" — wiersz bezpośrednio nad tabliczką
     uwagi: object = None            # BlokUwag — blok dzielony na części (numeracja ciągła)
+    w_min: float = 0.0              # > 0: blok może być rysowany węższy (do w_min) — np. wiersz nad tabliczką
 
     @property
     def szer(self) -> float:
@@ -186,9 +199,19 @@ def zmierz_blok(fn, w: float = TB_W) -> tuple[float, float, float, float]:
     return h, snap(X - float(e[0])), snap(float(e[2]) - X - w), snap(float(e[3]) - Y)
 
 
-def blok(nazwa: str, fn, w: float = TB_W, kotwica: str = "") -> Blok:
+def blok(nazwa: str, fn, w: float = TB_W, kotwica: str = "", w_min: float = 0.0) -> Blok:
     h, dx0, dx1, dy1 = zmierz_blok(fn, w)
-    return Blok(nazwa, fn, w, h, dx0, dx1, dy1, kotwica)
+    return Blok(nazwa, fn, w, h, dx0, dx1, dy1, kotwica, w_min=w_min)
+
+
+def _wezszy(b: Blok, w: float) -> Blok:
+    """Wariant bloku rysowany z szerokością ``w`` (pomiar z pamięcią podręczną)."""
+    c = b.__dict__.setdefault("_wezsze", {})
+    k = round(float(w), 1)
+    if k not in c:
+        h, dx0, dx1, dy1 = zmierz_blok(b.fn, k)
+        c[k] = Blok(b.nazwa, b.fn, k, h, dx0, dx1, dy1, b.kotwica, w_min=b.w_min)
+    return c[k]
 
 
 def bloki_z_kolumny(pary, w: float = TB_W, gap: float = GAP_B) -> list[Blok]:
@@ -279,13 +302,16 @@ class Widok:
     def gora(self) -> float:         # treść + tytuł nad widokiem
         return self.h + (self.tytul_h if self.tytul_nad else 0.0)
 
-    def prostokaty(self) -> list[tuple]:
-        """Zajętość względem lewego dolnego rogu treści: pasy treści (lub cały prostokąt) + tytuł."""
-        r = list(self.zajete) or [(0.0, 0.0, self.w, self.h)]
+    def tytul_rect(self, dx: float = 2.0) -> tuple:
+        """Prostokąt tytułu względem lewego dolnego rogu treści (``dx`` — odsunięcie od lewej krawędzi)."""
         if self.tytul_nad:
-            r.append((2.0, self.h, 2.0 + self.tytul_w, self.h + self.tytul_h))
-        else:
-            r.append((2.0, -self.tytul_h, 2.0 + self.tytul_w, 0.0))
+            return (dx, self.h, dx + self.tytul_w, self.h + self.tytul_h)
+        return (dx, -self.tytul_h, dx + self.tytul_w, 0.0)
+
+    def prostokaty(self, dx: float = 2.0) -> list[tuple]:
+        """Zajętość względem lewego dolnego rogu treści: pasy treści (lub cały prostokąt) + tytuł (ostatni)."""
+        r = list(self.zajete) or [(0.0, 0.0, self.w, self.h)]
+        r.append(self.tytul_rect(dx))
         return r
 
 
@@ -410,6 +436,11 @@ class Wolne:
     def miesci(self, r) -> bool:
         return any(_zawiera(f, r) for f in self.free)
 
+    def kopia(self) -> "Wolne":
+        w = Wolne((0.0, 0.0, 0.0, 0.0))
+        w.free = list(self.free)
+        return w
+
     def pozycje(self, w: float, h: float):
         """Kandydaci (x0, y0) lewego dolnego rogu prostokąta w × h: prawy górny róg każdego wolnego prostokąta."""
         for f in self.free:
@@ -431,10 +462,10 @@ class Grupa:
     wiersze: list              # [[indeksy]]
     opis: str = ""
 
-    def prostokaty(self, widoki, ox: float, oy: float) -> list[tuple]:
+    def prostokaty(self, widoki, ox: float, oy: float, tdx=None) -> list[tuple]:
         out = []
-        for v, (x, y) in zip(widoki, self.poz):
-            for r in v.prostokaty():
+        for i, (v, (x, y)) in enumerate(zip(widoki, self.poz)):
+            for r in v.prostokaty(tdx[i] if tdx else 2.0):
                 out.append((ox + x + r[0], oy + y + r[1], ox + x + r[2], oy + y + r[3]))
         return out
 

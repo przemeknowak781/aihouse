@@ -939,6 +939,30 @@ SLUPY += [{"id": f"SL{5 + i}", "xy": [r(x), 0.0], "przekroj": "RK 100x100x6", "m
           for i, x in enumerate(E_KW[3:5])]
 SLUPY += [{"id": f"SL{7 + i}", "xy": [r(x), -0.80], "przekroj": "150x1000", "mat": "RAMA_C", "z_od": Z_RAMA_D[1], "z_do": Z_RAMA_G[0],
            "uwagi": "bok ramy boksu C (płaskownik w okładzinie) przy krawędzi przeszklenia"} for i, x in enumerate((4.025, 11.195))]
+# runda konstrukcyjna 1 (REKOMENDACJE_MODEL.md p. 8): blachy czołowe słupów fasady E — głowica pod B1 (docisk 6.7) i podstawa na
+# pogrubieniu płyty SF (docisk 6.7); wymiary [m]; kotwy — PW (dobór producenta, ETA)
+for _sl in SLUPY[:4]:
+    _sl["blacha_gorna"] = {"a": 0.18, "b": 0.18, "t": 0.015}
+    _sl["blacha_dolna"] = {"a": 0.25, "b": 0.25, "t": 0.02}
+# runda konstrukcyjna 1 (REKOMENDACJE_MODEL.md p. 1, 3): SŁUPY ŻELBETOWE MONOLITYCZNE W MURZE (trzpienie 18 × 40 cm, C30/37) w węzłach
+# obciążeń skupionych — podpory belek wspornikowych B4/B5 (A/1, A/3), koniec przęsła zakotwienia B5 i naroże wklęsłe stropodachu D1
+# (B/3), oparcia podciągów B8/B9 w osi 3 (C/3, D/3). Przekrój w grubości warstwy konstrukcyjnej muru (18 cm), wydłużony w ścianie
+# prostopadłej do osi 1/3 (ukryty w murze, bez zmian lic, brył i otworów); ciągłość w pionie przez wieńce/belki; pod słupami
+# pogrubienia płyty fundamentowej (SF). Kolejne kondygnacje — osobne odcinki (z_do = spód belki/płyty podpieranej).
+Z_SPOD_ST2, Z_SPOD_ST3 = r(Z_ST2 - T_STR), r(Z_ST3 - T_STR)          # 5,93; 9,08
+_SLZ = [("A/1", (xA, 0.11), ((Z_PLYTA_F, Z_SPOD_ST1, "P0: podpora końca B1, płyta ST1"), (Z_ST1, Z_SPOD_ST2, "P1: podpora wspornika B4, płyta ST2"))),
+        ("A/3", (xA, y3), ((Z_PLYTA_F, Z_SPOD_ST1, "P0: płyta ST1"), (Z_ST1, Z_SPOD_ST2, "P1: podpora wspornika B5, płyta ST2"))),
+        ("B/3", (xB, r(y3 + 0.11)), ((Z_PLYTA_F, Z_SPOD_ST1, "P0: płyta ST1"), (Z_ST1, Z_SPOD_ST2, "P1: koniec przęsła zakotwienia B5, płyta ST2"),
+                                     (Z_ST2, Z_SPOD_ST3, "P2: naroże wklęsłe stropodachu D1"))),
+        ("C/3", (xC, r(y3 + 0.11)), ((Z_PLYTA_F, r(Z_ST1 - 0.50), "P0: oparcie B8 (w ścianie ŻB S0-12)"), (Z_ST1, r(Z_ST2 - 0.50), "P1: oparcie B9"))),
+        ("D/3", (xD, r(y3 + 0.11)), ((Z_PLYTA_F, r(Z_ST1 - 0.50), "P0: oparcie B8 (w ścianie ŻB S0-13)"), (Z_ST1, r(Z_ST2 - 0.50), "P1: oparcie B9")))]
+SLZ_WEZLY = {}                          # węzeł → [id słupów od dołu]
+for _wz, _xy, _odc in _SLZ:
+    for _z0, _z1, _opis in _odc:
+        _id = f"SL{len(SLUPY) + 1}"
+        SLUPY.append({"id": _id, "xy": [r(_xy[0]), r(_xy[1])], "przekroj": "180x400", "mat": "ZB_C30", "z_od": r(_z0), "z_do": r(_z1),
+                      "uwagi": f"słup żelbetowy w murze (trzpień 18 × 40 cm) w węźle {_wz} — {_opis}"})
+        SLZ_WEZLY.setdefault(_wz, []).append(_id)
 
 BELKI = [
     {"id": "B1", "os": [[0.0, 0.0], [xE, 0.0]], "b": 0.18, "h": 1.07, "spod": Z_SPOD_ST1, "mat": "ZB_C30",
@@ -985,8 +1009,26 @@ for o in OT:
     BELKI.append({"id": f"N{_nadp}", "os": [[r(ax + ux * s0), r(ay + uy * s0)], [r(ax + ux * s1), r(ay + uy * s1)]], "b": 0.18,
                   "h": r(min(0.24, spod_pl - top)), "spod": r(top), "mat": "ZB_C25", "uwagi": f"nadproże otworu {o['id']} ({o['szer']:.2f} m), oparcie 0,20 m"})
 
+# runda konstrukcyjna 1 (REKOMENDACJE_MODEL.md p. 1, 2): JAWNA ŚCIEŻKA OBCIĄŻEŃ — schemat podparcia belek wspornikowych (podpory:
+# typ/id/s — odległość od początku osi belki [m]) oraz ściany stojące na belkach (oparta_na) i belki w koronie ścian (belka_w_koronie:
+# odcinek ściany pod belką nie jest podporą płyty — płyta opiera się na belce, belka na swoich podporach)
+_B = {b_["id"]: b_ for b_ in BELKI}
+_B["B4"]["podpory"] = [{"typ": "slup", "id": SLZ_WEZLY["A/1"][1], "s": r(xA - xA2)}, {"typ": "sciana", "id": "S1-01", "s": r(xB - xA2)}]
+_B["B5"]["podpory"] = [{"typ": "slup", "id": SLZ_WEZLY["A/3"][1], "s": r(xA - xA2)}, {"typ": "slup", "id": SLZ_WEZLY["B/3"][1], "s": r(xB - xA2)}]
+_B["B3"]["podpory"] = [{"typ": "belka", "id": "B4", "s": 0.0}, {"typ": "belka", "id": "B5", "s": r(y3)}]
+_B["B4"]["uwagi"] = ("belka wspornikowa w osi 1 (w licu ściany P2, pod parapetem O2-01 +6,90): wspornik 1,00 m na słupie ŻB A/1, przęsło "
+                     "zakotwienia A–B 3,875 m dociążone ścianą S2-01 (oparta_na) — koniec na murze S1-01")
+_B["B5"]["uwagi"] = ("belka wspornikowa w osi 3 (w ścianie pn. P2): wspornik 1,00 m na słupie ŻB A/3, przęsło zakotwienia A–B na słupie ŻB B/3, "
+                     "dociążone ścianą S2-07 (oparta_na)")
+for _sid, _pola in {"S0-01": {"belka_w_koronie": ["B1"]},
+                    "S1-01": {"oparta_na": ["B1"], "belka_w_koronie": ["B4", "B2"]},
+                    "S1-05": {"belka_w_koronie": ["B5"]},
+                    "S2-01": {"oparta_na": ["B4", "B2"]}, "S2-07": {"oparta_na": ["B5"]}, "S2-08": {"oparta_na": ["B3"]},
+                    "S2-09": {"oparta_na": ["B9"]}}.items():
+    _SC[_sid].update(_pola)
+
 # ---- fundamenty: PŁYTA FUNDAMENTOWA na XPS (uzasadnienie — koncepcja.md p. 5.4)
-OB_P0 = P((-EXT, -EXT), (xF + EXT, -EXT), (xF + EXT, y5 + EXT), (xE - EXT, y5 + EXT), (xE - EXT, y4 + EXT), (-EXT, y4 + EXT))
+OB_P0 =P((-EXT, -EXT), (xF + EXT, -EXT), (xF + EXT, y5 + EXT), (xE - EXT, y5 + EXT), (xE - EXT, y4 + EXT), (-EXT, y4 + EXT))
 OB_PF = P((-0.10, -0.10), (xF + 0.10, -0.10), (xF + 0.10, y5 + 0.10), (xE - 0.10, y5 + 0.10), (xE - 0.10, y4 + 0.10), (-0.10, y4 + 0.10))
 # runda 2 (REKOMENDACJE mostków A, WZ-09a): płyta pod garażem OBNIŻONA o 0,15 m (PF2, wierzch −0,30) — miejsce na XPS 10 cm i membranę
 # pod posadzką garażu (POD-G) przy posadzce −0,10/−0,05; uskok płyty w linii ścian dom–garaż SWG (żebra ZF pod SWG i ścianami garażu do −0,85).

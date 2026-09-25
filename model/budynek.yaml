@@ -279,7 +279,7 @@ przegrody:
 
 sciany:
   # --- P0
-  - {id: S0-01, kond: P0, przegroda: SZ1, os: [[0.0, 0.0], [12.0, 0.0]], wnetrze: lewa, z_od: null, z_do: null, uwagi: fasada pd. strefy dziennej — przeszklenie E (5 kwater) na słupach SL1–SL4 + belka B1}
+  - {id: S0-01, kond: P0, przegroda: SZ1, os: [[0.0, 0.0], [12.0, 0.0]], wnetrze: lewa, z_od: null, z_do: null, uwagi: fasada pd. strefy dziennej — przeszklenie E (5 kwater) na słupach SL1–SL4 + belka B1, belka_w_koronie: [B1]}
   - {id: S0-02, kond: P0, przegroda: SZ1, os: [[12.0, 0.0], [18.375, 0.0]], wnetrze: lewa, z_od: null, z_do: null, uwagi: 'ściana pd. pasa gospodarczego (bryła G, pełna) z drzwiami gospodarczymi w systemie fasady E'}
   - {id: S0-03, kond: P0, przegroda: SZ1, os: [[18.375, 0.0], [18.375, 9.375]], wnetrze: lewa, z_od: null, z_do: null, uwagi: 'ściana wsch. garażu = pion D (narożnik 18,975 m od lica zach. bryły B)'}
   - {id: S0-04, kond: P0, przegroda: SZ1, os: [[18.375, 9.375], [12.0, 9.375]], wnetrze: lewa, z_od: null, z_do: null, uwagi: ściana pn. garażu z bramą segmentową}
@@ -303,11 +303,11 @@ sciany:
   - {id: S0-22, kond: P0, przegroda: DZ12, os: [[9.875, 6.625], [9.875, 8.75]], wnetrze: srodek, z_od: null, z_do: null, uwagi: WC / wiatrołap}
   - {id: S0-23, kond: P0, przegroda: GK10, os: [[5.32, 5.125], [5.32, 6.425]], wnetrze: srodek, z_od: null, z_do: null, uwagi: obudowa szachtu SI}
   # --- P1
-  - {id: S1-01, kond: P1, przegroda: SZ1, os: [[0.0, 0.0], [12.0, 0.0]], wnetrze: lewa, z_od: null, z_do: null, uwagi: ściana pd. bryły B na belce B1; boks C (3 kwatery) w ramie}
+  - {id: S1-01, kond: P1, przegroda: SZ1, os: [[0.0, 0.0], [12.0, 0.0]], wnetrze: lewa, z_od: null, z_do: null, uwagi: ściana pd. bryły B na belce B1; boks C (3 kwatery) w ramie, oparta_na: [B1], belka_w_koronie: [B4, B2]}
   - {id: S1-02, kond: P1, przegroda: SZ1, os: [[12.0, 0.0], [12.0, 8.75]], wnetrze: lewa, z_od: null, z_do: null, uwagi: ściana wsch. (oś E)}
   - {id: S1-03, kond: P1, przegroda: SZ1, os: [[12.0, 8.75], [0.0, 8.75]], wnetrze: lewa, z_od: null, z_do: null, uwagi: ściana pn.}
   - {id: S1-04, kond: P1, przegroda: SZ1, os: [[0.0, 8.75], [0.0, 0.0]], wnetrze: lewa, z_od: null, z_do: null, uwagi: ściana zach. — okna pokoi dzieci}
-  - {id: S1-05, kond: P1, przegroda: SW18, os: [[0.0, 5.125], [5.875, 5.125]], wnetrze: srodek, z_od: null, z_do: null, uwagi: 'oś 3, odcinek zach.'}
+  - {id: S1-05, kond: P1, przegroda: SW18, os: [[0.0, 5.125], [5.875, 5.125]], wnetrze: srodek, z_od: null, z_do: null, uwagi: 'oś 3, odcinek zach.', belka_w_koronie: [B5]}
   - {id: S1-06, kond: P1, przegroda: SW18, os: [[8.5, 5.125], [12.0, 5.125]], wnetrze: srodek, z_od: null, z_do: null, uwagi: 'oś 3, odcinek wsch. (między C i D — otwarcie klatki, belka B9)'}
   - {id: S1-07, kond: P1, przegroda: SW18, os: [[3.875, 5.125], [3.875, 8.75]], wnetrze: srodek, z_od: null, z_do: null, uwagi: oś B}
   - {id: S1-08, kond: P1, przegroda: SW18, os: [[5.875, 5.125], [5.875, 8.75]], wnetrze: srodek, z_od: null, z_do: null, uwagi: oś C — klatka}
@@ -319,15 +319,15 @@ sciany:
   - {id: S1-14, kond: P1, przegroda: GK10, os: [[5.32, 5.125], [5.32, 6.4]], wnetrze: srodek, z_od: null, z_do: null, uwagi: obudowa szachtu SI}
   - {id: S1-15, kond: P1, przegroda: GK10, os: [[5.32, 6.4], [5.875, 6.4]], wnetrze: srodek, z_od: null, z_do: null, uwagi: obudowa szachtu SI}
   # --- P2
-  - {id: S2-01, kond: P2, przegroda: SZ2, os: [[-1.0, 0.0], [12.0, 0.0]], wnetrze: lewa, z_od: null, z_do: null, uwagi: ściana pd. bryły A za lamelami; odc. A'–A na wsporniku (belka B4)}
+  - {id: S2-01, kond: P2, przegroda: SZ2, os: [[-1.0, 0.0], [12.0, 0.0]], wnetrze: lewa, z_od: null, z_do: null, uwagi: ściana pd. bryły A za lamelami; odc. A'–A na wsporniku (belka B4), oparta_na: [B4, B2]}
   - {id: S2-02, kond: P2, przegroda: SZ2, os: [[12.0, 0.0], [12.0, 5.125]], wnetrze: lewa, z_od: null, z_do: null, uwagi: ściana wsch. bryły A za lamelami}
   - {id: S2-03, kond: P2, przegroda: SZ1, os: [[12.0, 5.125], [8.5, 5.125]], wnetrze: lewa, z_od: null, z_do: null, uwagi: ściana pn. bryły A nad dachem P1 (pole wsch.)}
   - {id: S2-04, kond: P2, przegroda: SZ1, os: [[8.5, 5.125], [8.5, 8.75]], wnetrze: lewa, z_od: null, z_do: null, uwagi: nadbudowa klatki i łazienki — ściana wsch.}
   - {id: S2-05, kond: P2, przegroda: SZ1, os: [[8.5, 8.75], [3.875, 8.75]], wnetrze: lewa, z_od: null, z_do: null, uwagi: 'nadbudowa — ściana pn. (okno klatki, okno łazienki)'}
   - {id: S2-06, kond: P2, przegroda: SZ1, os: [[3.875, 8.75], [3.875, 5.125]], wnetrze: lewa, z_od: null, z_do: null, uwagi: nadbudowa — ściana zach.}
-  - {id: S2-07, kond: P2, przegroda: SZ1, os: [[3.875, 5.125], [-1.0, 5.125]], wnetrze: lewa, z_od: null, z_do: null, uwagi: ściana pn. bryły A nad dachem P1 (pole zach.); odc. A'–A na wsporniku (belka B5)}
-  - {id: S2-08, kond: P2, przegroda: SZL, os: [[-1.0, 5.125], [-1.0, 0.0]], wnetrze: lewa, z_od: null, z_do: null, uwagi: 'ściana zach. lekka na wsporniku (belka krawędziowa B3), za lamelami'}
-  - {id: S2-09, kond: P2, przegroda: SW18, os: [[3.875, 5.125], [7.19, 5.125]], wnetrze: srodek, z_od: null, z_do: null, uwagi: oś 3 — łazienka / garderoba; zamknięcie pustki nad biegiem 1}
+  - {id: S2-07, kond: P2, przegroda: SZ1, os: [[3.875, 5.125], [-1.0, 5.125]], wnetrze: lewa, z_od: null, z_do: null, uwagi: ściana pn. bryły A nad dachem P1 (pole zach.); odc. A'–A na wsporniku (belka B5), oparta_na: [B5]}
+  - {id: S2-08, kond: P2, przegroda: SZL, os: [[-1.0, 5.125], [-1.0, 0.0]], wnetrze: lewa, z_od: null, z_do: null, uwagi: 'ściana zach. lekka na wsporniku (belka krawędziowa B3), za lamelami', oparta_na: [B3]}
+  - {id: S2-09, kond: P2, przegroda: SW18, os: [[3.875, 5.125], [7.19, 5.125]], wnetrze: srodek, z_od: null, z_do: null, uwagi: oś 3 — łazienka / garderoba; zamknięcie pustki nad biegiem 1, oparta_na: [B9]}
   - {id: S2-10, kond: P2, przegroda: SW18, os: [[5.875, 5.125], [5.875, 8.75]], wnetrze: srodek, z_od: null, z_do: null, uwagi: oś C — klatka}
   - {id: S2-11, kond: P2, przegroda: SCZB15, os: [[7.19, 5.125], [7.19, 7.47]], wnetrze: srodek, z_od: null, z_do: null, uwagi: ściana środkowa schodów ŻB 15 (do stropodachu D1 i podciągu B10)}
   - {id: S2-12, kond: P2, przegroda: DZ12, os: [[3.575, 0.0], [3.575, 5.125]], wnetrze: srodek, z_od: null, z_do: null, uwagi: sypialnia / garderoba}
@@ -463,21 +463,32 @@ wsporniki_plyty:
   - {id: PL-D, obrys: [[12.6, -1.3], [18.675, -1.3], [18.675, -0.3], [12.6, -0.3]], wierzch: 3.85, grubosc: 0.2, mat: RAMA_C, lacznik_termiczny: true, uwagi: 'linia D — głęboka krawędź 1,00 m na wschód od ramy C do narożnika garażu (x 18,675; audyt A2 I-8, decyzja Inwestora 3): lekka rama stalowa w okładzinie na konsolach punktowych z przekładką termiczną (jak PL-C1), okapnik; osłania drzwi DZ3 i jednostkę PC; dach garażu nieużytkowy — PL-D nie jest tarasem (decyzja 2)', odwodnienie: {typ: rynna_ukryta, opis: 'rynna ukryta za blendą czołową (korytko 100 mm, spadek 0,5 % do wylotu), kapinos ≥ 3 cm, podgrzewanie przewodem grzejnym przy wylocie; spadek do wylotu W — linia kapania NIE nad jednostką PC', przelew: 'obniżenie blendy czołowej (rzygacz 0,15 × 0,05 m z okapnikiem) z dnem na krawędzi płyty = górna krawędź korytka — przy zatkanym wylocie woda przelewa się przed czoło, nie cofa się pod ścianę/próg', rzedna_wywiniecia_przy_scianie: 4.0, Q_rynny_min_ls: 0.56}, wpusty: [{xy: [13.9, -1.2], dn: 70, podgrzewany: true, opis: wylot rynny linii D (W), rzedna_pokrycia: 3.73}], rury_spustowe: [{id: RS8, od_wpustu: 0, trasa: zewn, xy_pion: [13.7, -0.36], dn: 80, do: zbiornik, opis: wspólna z PL-E}], przelewy_awaryjne: [{xy: [13.85, -1.3], sciana_attyki: S, typ: rzygacz_w_blendzie, szer: 0.15, wys: 0.05, rzedna_dna: 3.83, rzedna_pokrycia: 3.83, opis: 'przelew rynny ukrytej — obniżenie blendy (S) do krawędzi płyty, rzygacz z okapnikiem'}, {xy: [18.675, -0.8], sciana_attyki: E, typ: rzygacz_w_blendzie, szer: 0.15, wys: 0.05, rzedna_dna: 3.83, rzedna_pokrycia: 3.83, opis: 'przelew rynny ukrytej — obniżenie blendy (E) do krawędzi płyty, rzygacz z okapnikiem'}], spadek: 0.02}
 
 slupy:
-  - {id: SL1, xy: [2.2, 0.0], przekroj: RK 120x120x8, mat: STAL_S355, z_od: -0.15, z_do: 2.78, uwagi: słup fasady E w szprosie przeszklenia; podpora belki B1}
-  - {id: SL2, xy: [4.1, 0.0], przekroj: RK 120x120x8, mat: STAL_S355, z_od: -0.15, z_do: 2.78, uwagi: słup fasady E w szprosie przeszklenia; podpora belki B1}
-  - {id: SL3, xy: [6.44, 0.0], przekroj: RK 120x120x8, mat: STAL_S355, z_od: -0.15, z_do: 2.78, uwagi: słup fasady E w szprosie przeszklenia; podpora belki B1}
-  - {id: SL4, xy: [8.78, 0.0], przekroj: RK 120x120x8, mat: STAL_S355, z_od: -0.15, z_do: 2.78, uwagi: słup fasady E w szprosie przeszklenia; podpora belki B1}
+  - {id: SL1, xy: [2.2, 0.0], przekroj: RK 120x120x8, mat: STAL_S355, z_od: -0.15, z_do: 2.78, uwagi: słup fasady E w szprosie przeszklenia; podpora belki B1, blacha_gorna: {a: 0.18, b: 0.18, t: 0.015}, blacha_dolna: {a: 0.25, b: 0.25, t: 0.02}}
+  - {id: SL2, xy: [4.1, 0.0], przekroj: RK 120x120x8, mat: STAL_S355, z_od: -0.15, z_do: 2.78, uwagi: słup fasady E w szprosie przeszklenia; podpora belki B1, blacha_gorna: {a: 0.18, b: 0.18, t: 0.015}, blacha_dolna: {a: 0.25, b: 0.25, t: 0.02}}
+  - {id: SL3, xy: [6.44, 0.0], przekroj: RK 120x120x8, mat: STAL_S355, z_od: -0.15, z_do: 2.78, uwagi: słup fasady E w szprosie przeszklenia; podpora belki B1, blacha_gorna: {a: 0.18, b: 0.18, t: 0.015}, blacha_dolna: {a: 0.25, b: 0.25, t: 0.02}}
+  - {id: SL4, xy: [8.78, 0.0], przekroj: RK 120x120x8, mat: STAL_S355, z_od: -0.15, z_do: 2.78, uwagi: słup fasady E w szprosie przeszklenia; podpora belki B1, blacha_gorna: {a: 0.18, b: 0.18, t: 0.015}, blacha_dolna: {a: 0.25, b: 0.25, t: 0.02}}
   - {id: SL5, xy: [6.44, 0.0], przekroj: RK 100x100x6, mat: STAL_S355, z_od: 3.85, z_do: 5.35, uwagi: 'słupek boksu C w szprosie (w jednej linii ze słupem fasady E — przeszczep J2), podpora nadproża B2'}
   - {id: SL6, xy: [8.78, 0.0], przekroj: RK 100x100x6, mat: STAL_S355, z_od: 3.85, z_do: 5.35, uwagi: 'słupek boksu C w szprosie (w jednej linii ze słupem fasady E — przeszczep J2), podpora nadproża B2'}
   - {id: SL7, xy: [4.025, -0.8], przekroj: 150x1000, mat: RAMA_C, z_od: 3.85, z_do: 5.35, uwagi: bok ramy boksu C (płaskownik w okładzinie) przy krawędzi przeszklenia}
   - {id: SL8, xy: [11.195, -0.8], przekroj: 150x1000, mat: RAMA_C, z_od: 3.85, z_do: 5.35, uwagi: bok ramy boksu C (płaskownik w okładzinie) przy krawędzi przeszklenia}
+  - {id: SL9, xy: [0.0, 0.11], przekroj: 180x400, mat: ZB_C30, z_od: -0.15, z_do: 2.78, uwagi: 'słup żelbetowy w murze (trzpień 18 × 40 cm) w węźle A/1 — P0: podpora końca B1, płyta ST1'}
+  - {id: SL10, xy: [0.0, 0.11], przekroj: 180x400, mat: ZB_C30, z_od: 3.0, z_do: 5.93, uwagi: 'słup żelbetowy w murze (trzpień 18 × 40 cm) w węźle A/1 — P1: podpora wspornika B4, płyta ST2'}
+  - {id: SL11, xy: [0.0, 5.125], przekroj: 180x400, mat: ZB_C30, z_od: -0.15, z_do: 2.78, uwagi: 'słup żelbetowy w murze (trzpień 18 × 40 cm) w węźle A/3 — P0: płyta ST1'}
+  - {id: SL12, xy: [0.0, 5.125], przekroj: 180x400, mat: ZB_C30, z_od: 3.0, z_do: 5.93, uwagi: 'słup żelbetowy w murze (trzpień 18 × 40 cm) w węźle A/3 — P1: podpora wspornika B5, płyta ST2'}
+  - {id: SL13, xy: [3.875, 5.235], przekroj: 180x400, mat: ZB_C30, z_od: -0.15, z_do: 2.78, uwagi: 'słup żelbetowy w murze (trzpień 18 × 40 cm) w węźle B/3 — P0: płyta ST1'}
+  - {id: SL14, xy: [3.875, 5.235], przekroj: 180x400, mat: ZB_C30, z_od: 3.0, z_do: 5.93, uwagi: 'słup żelbetowy w murze (trzpień 18 × 40 cm) w węźle B/3 — P1: koniec przęsła zakotwienia B5, płyta ST2'}
+  - {id: SL15, xy: [3.875, 5.235], przekroj: 180x400, mat: ZB_C30, z_od: 6.15, z_do: 9.08, uwagi: 'słup żelbetowy w murze (trzpień 18 × 40 cm) w węźle B/3 — P2: naroże wklęsłe stropodachu D1'}
+  - {id: SL16, xy: [5.875, 5.235], przekroj: 180x400, mat: ZB_C30, z_od: -0.15, z_do: 2.5, uwagi: 'słup żelbetowy w murze (trzpień 18 × 40 cm) w węźle C/3 — P0: oparcie B8 (w ścianie ŻB S0-12)'}
+  - {id: SL17, xy: [5.875, 5.235], przekroj: 180x400, mat: ZB_C30, z_od: 3.0, z_do: 5.65, uwagi: 'słup żelbetowy w murze (trzpień 18 × 40 cm) w węźle C/3 — P1: oparcie B9'}
+  - {id: SL18, xy: [8.5, 5.235], przekroj: 180x400, mat: ZB_C30, z_od: -0.15, z_do: 2.5, uwagi: 'słup żelbetowy w murze (trzpień 18 × 40 cm) w węźle D/3 — P0: oparcie B8 (w ścianie ŻB S0-13)'}
+  - {id: SL19, xy: [8.5, 5.235], przekroj: 180x400, mat: ZB_C30, z_od: 3.0, z_do: 5.65, uwagi: 'słup żelbetowy w murze (trzpień 18 × 40 cm) w węźle D/3 — P1: oparcie B9'}
 
 belki:
   - {id: B1, os: [[0.0, 0.0], [12.0, 0.0]], b: 0.18, h: 1.07, spod: 2.78, mat: ZB_C30, uwagi: 'podciąg fasady E, odwrócony (+2,78…+3,85 = parapet boksu C), 18 × 107 w licu muru (ETICS ciągły — A2 D-9); przęsła 2,20/1,90/2,34/2,34/3,22 na SL1–SL4 i ścianach A, E'}
   - {id: B2, os: [[3.85, 0.0], [11.37, 0.0]], b: 0.18, h: 0.8, spod: 5.35, mat: ZB_C30, uwagi: 'nadproże boksu C 18×80 w licu muru, 3 przęsła 2,34 m na słupkach SL5/SL6'}
-  - {id: B3, os: [[-1.0, 0.0], [-1.0, 5.125]], b: 0.2, h: 0.6, spod: 5.93, mat: ZB_C30, uwagi: 'belka krawędziowa ST2 w osi A'' (odwrócona, pod parapetem okna O2-04) — niesie lekką ścianę A'' i okap PL-2; oparta na końcach B4/B5'}
-  - {id: B4, os: [[-1.0, 0.0], [3.875, 0.0]], b: 0.18, h: 0.8, spod: 5.93, mat: ZB_C30, uwagi: 'belka wspornikowa w osi 1 (w licu ściany P2, pod parapetem O2-01 +6,90): wspornik 1,00 m na ścianie A, przęsło zakotwienia A–B 3,875 m'}
-  - {id: B5, os: [[-1.0, 5.125], [3.875, 5.125]], b: 0.18, h: 0.8, spod: 5.93, mat: ZB_C30, uwagi: 'belka wspornikowa w osi 3 (w ścianie pn. P2): wspornik 1,00 m, zakotwienie A–B'}
+  - {id: B3, os: [[-1.0, 0.0], [-1.0, 5.125]], b: 0.2, h: 0.6, spod: 5.93, mat: ZB_C30, uwagi: 'belka krawędziowa ST2 w osi A'' (odwrócona, pod parapetem okna O2-04) — niesie lekką ścianę A'' i okap PL-2; oparta na końcach B4/B5', podpory: [{typ: belka, id: B4, s: 0.0}, {typ: belka, id: B5, s: 5.125}]}
+  - {id: B4, os: [[-1.0, 0.0], [3.875, 0.0]], b: 0.18, h: 0.8, spod: 5.93, mat: ZB_C30, uwagi: 'belka wspornikowa w osi 1 (w licu ściany P2, pod parapetem O2-01 +6,90): wspornik 1,00 m na słupie ŻB A/1, przęsło zakotwienia A–B 3,875 m dociążone ścianą S2-01 (oparta_na) — koniec na murze S1-01', podpory: [{typ: slup, id: SL10, s: 1.0}, {typ: sciana, id: S1-01, s: 4.875}]}
+  - {id: B5, os: [[-1.0, 5.125], [3.875, 5.125]], b: 0.18, h: 0.8, spod: 5.93, mat: ZB_C30, uwagi: 'belka wspornikowa w osi 3 (w ścianie pn. P2): wspornik 1,00 m na słupie ŻB A/3, przęsło zakotwienia A–B na słupie ŻB B/3, dociążone ścianą S2-07 (oparta_na)', podpory: [{typ: slup, id: SL12, s: 1.0}, {typ: slup, id: SL14, s: 4.875}]}
   - {id: B6, os: [[-1.0, 0.0], [-1.0, 5.125]], b: 0.2, h: 0.4, spod: 8.9, mat: ZB_C30, uwagi: belka krawędziowa ST3 w osi A' (nad oknem O2-04) — okap zach. stropodachu; oparta na narożach ścian osi 1 i 3}
   - {id: B7, os: [[12.5, 9.375], [17.95, 9.375]], b: 0.25, h: 0.85, spod: 2.15, mat: ZB_C30, uwagi: 'nadproże bramy garażu (rozp. 5,00 m w świetle)'}
   - {id: B8, os: [[5.875, 5.125], [8.5, 5.125]], b: 0.25, h: 0.5, spod: 2.5, mat: ZB_C25, uwagi: 'podciąg ST1 w osi 3 nad wejściem na schody (C–D, 2,625 m); prześwit nad stopą biegu 1 ≥ 2,30 m'}

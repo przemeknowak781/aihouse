@@ -538,7 +538,9 @@ F = {
                     "wys_w_swietle": (0, "num"), "podloga": (0, "str?")},
     "sciany": {"id": (1, "str"), "kond": (1, "str"), "przegroda": (1, "str"), "os": (1, "seg"),
                "wnetrze": (1, "enum:" + ",".join(WNETRZE)), "z_od": (0, "num?"), "z_do": (0, "num?"),
-               "tarcza": (0, "any")},   # obliczenia konstrukcyjne: ściana-tarcza żelbetowa (bool lub słownik opcji)
+               "tarcza": (0, "any"),    # obliczenia konstrukcyjne: ściana-tarcza żelbetowa (bool lub słownik opcji)
+               "oparta_na": (0, "list?"),        # konstrukcja: ściana stojąca na belkach (id belek) — obciążenie → belka
+               "belka_w_koronie": (0, "list?")},  # konstrukcja: belki w koronie ściany — odcinek pod belką nie podpiera płyty
     "otwory": {"id": (1, "str"), "sciana": (1, "str"), "symbol": (0, "str?"), "typ": (1, "enum:" + ",".join(TYPY_OTWOROW)),
                "odl": (1, "num"), "szer": (1, "num"), "wys": (1, "num"), "parapet": (1, "num"),
                "otwieranie": (0, "dict?"), "oslona": (0, "str?"), "kwatery": (0, "num?")},
@@ -556,9 +558,9 @@ F = {
                         "przegroda": (0, "str?"), "lacznik_termiczny": (0, "bool"), "mat": (0, "str?"),
                         "attyka": (0, "dict?")},
     "slupy": {"id": (1, "str"), "xy": (1, "pt"), "przekroj": (1, "str"), "mat": (1, "str"), "z_od": (1, "num"),
-              "z_do": (1, "num")},
+              "z_do": (1, "num"), "blacha_gorna": (0, "dict?"), "blacha_dolna": (0, "dict?")},
     "belki": {"id": (1, "str"), "os": (1, "seg"), "b": (1, "num"), "h": (1, "num"), "spod": (1, "num"),
-              "mat": (1, "str")},
+              "mat": (1, "str"), "podpory": (0, "list?")},   # podpory: [{typ: sciana|slup|belka, id, s}] — jawny schemat
     "schody": {"id": (1, "str"), "z_kond": (1, "str"), "na_kond": (1, "str"), "liczba_stopni": (1, "num"),
                "wys_stopnia": (1, "num"), "szer_stopnia": (1, "num"), "biegi": (1, "list"),
                "spoczniki": (0, "list?"), "mat": (0, "str?")},
@@ -1060,6 +1062,23 @@ class Model:
         for i, it in enumerate(r.get("slupy") or []):
             if isinstance(it, dict) and _is_num(it.get("z_od")) and _is_num(it.get("z_do")) and it["z_do"] <= it["z_od"]:
                 self._err(self._loc("slupy", i, it), "z_do musi być większe od z_od")
+        # konstrukcja: jawna ścieżka obciążeń (oparta_na, belka_w_koronie, podpory belek) — odwołania do istniejących elementów
+        b_ids = {str(b.get("id")) for b in (r.get("belki") or []) if isinstance(b, dict)}
+        sl_ids = {str(c.get("id")) for c in (r.get("slupy") or []) if isinstance(c, dict)}
+        for i, w in enumerate(r.get("sciany") or []):
+            if not isinstance(w, dict):
+                continue
+            for pole in ("oparta_na", "belka_w_koronie"):
+                for bid in (w.get(pole) or []) if isinstance(w.get(pole), list) else []:
+                    if str(bid) not in b_ids:
+                        self._err(self._loc("sciany", i, w), f"{pole}: odwołanie do nieistniejącej belki '{bid}'")
+        for i, b in enumerate(r.get("belki") or []):
+            if not isinstance(b, dict) or not isinstance(b.get("podpory"), list):
+                continue
+            for q in b["podpory"]:
+                ids = {"sciana": sc_ids, "slup": sl_ids, "belka": b_ids}.get(str((q or {}).get("typ")))
+                if ids is None or str(q.get("id")) not in ids or not _is_num(q.get("s")):
+                    self._err(self._loc("belki", i, b), f"podpory: nieprawidłowa podpora {q!r} (typ sciana|slup|belka, id, s)")
         for i, sch in enumerate(r.get("schody") or []):
             if not isinstance(sch, dict):
                 continue
