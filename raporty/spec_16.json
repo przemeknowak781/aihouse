@@ -1,5 +1,6 @@
 {
- "title": "Korekta Inwestora: „S” z przesuniętych brył, garaż w parterze — panel koncepcji uruchomiony ponownie",
+ "nr": 16,
+ "title": "Dane urzędowe do obliczeń pobrane (klimat TRM Poznań, PVGIS, opady IMGW); nadzór postępu aktywny",
  "stages": [
   [
    "Analiza szkicu — interpretacja v2 („S” z brył, garaż)",
@@ -55,9 +56,20 @@
   ]
  ],
  "notes": [
+  "NADZÓR (04:14): 5 agentów aktywnych, bez zastojów; najdłuższa bezczynność 10 min; zmiany w repo 0 min temu.",
   "Pobrano urzędowe dane klimatyczne (typowy rok meteorologiczny MIiR, stacja Poznań-Ławica 12330, godzinowe) — podstawa EP i kondensacji wg metodologii Dz.U. 2015 poz. 376.",
   "Pobrano dane PVGIS 5.3 (JRC KE) dla PV oraz opady IMGW 1991–2020 (Poznań) — do wymiarowania odwodnienia dachów i przelewów awaryjnych.",
   "W3 (restart) na etapie analizy; nadzór pilnuje — decyzja o zamknięciu koncepcji bez W3, jeśli brak postępu do 04:25.",
   "Solver mostków 2D (ISO 10211) w budowie; biblioteki obliczeń i składanie tomów — postępują."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/docs/10_podstawy_prawne/grafiki/klimat_poznan.png",
+   "caption": "Klimat Poznania (TRM MIiR) i produkcja PV (PVGIS)"
+  },
+  {
+   "path": "/home/user/aihouse/docs/10_podstawy_prawne/grafiki/ep_szacunek.png",
+   "caption": "Szacunek EP (do weryfikacji obliczeniem)"
+  }
  ]
 }

@@ -428,72 +428,88 @@ class Kombinacja:
 
 
 def kombinacje(oddz: list[Oddz], p: Parametry | None = None, typ: str = "STR", G_korzystne: bool = False) -> list[Kombinacja]:
-    """Generator kombinacji. typ: 'STR' (6.10a i 6.10b dla każdego wiodącego Q), 'EQU', 'char', 'czesta', 'quasi', 'wyj'.
-    G_korzystne=True dodaje kombinacje z γ_G,inf = 1,0 (np. minimum siły osiowej, unoszenie)."""
+    """Generator kombinacji (PN-EN 1990 + NA). typ: 'STR' (6.10a i 6.10b dla każdego wiodącego Q), 'EQU' (tabl. A1.2(A):
+    1,10·G_dst + 1,5·Q_dst; G o rodzaju 'Gstb' ×0,90), 'char' (6.14b), 'czesta' (6.15b), 'quasi' (6.16b), 'wyj' (6.11b).
+    Oddziaływania z tej samej ``grupy`` wykluczają się (np. śnieg i obciążenie użytkowe dachu kat. H — PN-EN 1991-1-1
+    p. 3.3.2) — dla towarzyszących generowane są warianty. G_korzystne=True dodaje kombinacje z γ_G,inf = 1,0."""
     p = p or Parametry()
-    G = [o for o in oddz if o.rodzaj == "G"]
+    G = [o for o in oddz if o.rodzaj in ("G", "Gstb")]
     Q = [o for o in oddz if o.rodzaj == "Q"]
     A = [o for o in oddz if o.rodzaj == "A"]
-    out = []
+    out: list[Kombinacja] = []
+    seen = set()
 
-    def towarzyszace(lead):
-        return [o for o in Q if o is not lead and not (lead is not None and lead.grupa and o.grupa == lead.grupa)]
+    def add(nazwa, wsp, t):
+        key = tuple(sorted((k, round(v, 6)) for k, v in wsp.items() if v))
+        if key in seen:
+            return
+        seen.add(key)
+        out.append(Kombinacja(nazwa, wsp, t))
+
+    def warianty_tow(excl: list):
+        """Zbiory oddziaływań towarzyszących: z każdej grupy co najwyżej jedno (wszystkie warianty)."""
+        free = [o for o in Q if o not in excl and not any(e.grupa and o.grupa == e.grupa for e in excl)]
+        grupy: dict = {}
+        solo = []
+        for o in free:
+            (grupy.setdefault(o.grupa, []) if o.grupa else solo).append(o)
+        import itertools as _it
+        wyb = [g for g in grupy.values()]
+        if not wyb:
+            return [solo]
+        return [solo + list(c) for c in _it.product(*wyb)]
 
     leads = Q if Q else [None]
-    if typ == "STR":
-        for lead in leads:
-            ln = lead.nazwa if lead else "—"
-            # 6.10a
-            wsp = {g.nazwa: p.gG_sup for g in G}
-            if lead:
-                wsp[lead.nazwa] = p.gQ * p.psi_of(lead.kat)[0]
-            for o in towarzyszace(lead):
-                wsp[o.nazwa] = p.gQ * p.psi_of(o.kat)[0]
-            out.append(Kombinacja(f"6.10a ({ln})", wsp, "STR"))
-            # 6.10b
-            wsp = {g.nazwa: p.xi * p.gG_sup for g in G}
-            if lead:
-                wsp[lead.nazwa] = p.gQ
-            for o in towarzyszace(lead):
-                wsp[o.nazwa] = p.gQ * p.psi_of(o.kat)[0]
-            out.append(Kombinacja(f"6.10b (wiodące: {ln})", wsp, "STR"))
-            if G_korzystne:
-                wsp = {g.nazwa: p.gG_inf for g in G}
+    idx = {"char": 0, "czesta": 2, "quasi": 2}
+    for lead in leads:
+        ln = lead.nazwa if lead else "—"
+        excl = [lead] if lead else []
+        for tow in warianty_tow(excl):
+            if typ == "STR":
+                wa = {g.nazwa: p.gG_sup for g in G}
+                wb = {g.nazwa: p.xi * p.gG_sup for g in G}
                 if lead:
-                    wsp[lead.nazwa] = p.gQ
-                out.append(Kombinacja(f"6.10 G korzystne (wiodące: {ln})", wsp, "STR"))
-        # kombinacja tylko z G (np. gdy Q korzystne)
-        out.append(Kombinacja("6.10a (tylko G)", {g.nazwa: p.gG_sup for g in G}, "STR"))
-    elif typ == "EQU":
-        for lead in leads:
-            wsp = {g.nazwa: p.EQU_gG_dst for g in G}
-            if lead:
-                wsp[lead.nazwa] = p.EQU_gQ
-            out.append(Kombinacja(f"EQU (wiodące: {lead.nazwa if lead else '—'})", wsp, "EQU"))
-    elif typ in ("char", "czesta", "quasi"):
-        for lead in leads:
-            wsp = {g.nazwa: 1.0 for g in G}
-            if lead:
-                wsp[lead.nazwa] = {"char": 1.0, "czesta": p.psi_of(lead.kat)[1], "quasi": p.psi_of(lead.kat)[2]}[typ]
-            for o in towarzyszace(lead):
-                wsp[o.nazwa] = p.psi_of(o.kat)[0 if typ == "char" else 2]
-            out.append(Kombinacja(f"SLS {typ} (wiodące: {lead.nazwa if lead else '—'})", wsp, typ))
-            if typ == "quasi":
-                break
-    elif typ == "wyj":
+                    wa[lead.nazwa] = p.gQ * p.psi_of(lead.kat)[0]
+                    wb[lead.nazwa] = p.gQ
+                for o in tow:
+                    wa[o.nazwa] = wb[o.nazwa] = p.gQ * p.psi_of(o.kat)[0]
+                add(f"6.10a (wiodące: {ln})", wa, "STR")
+                add(f"6.10b (wiodące: {ln})", wb, "STR")
+                if G_korzystne and lead:
+                    wc = {g.nazwa: p.gG_inf for g in G}
+                    wc[lead.nazwa] = p.gQ
+                    add(f"6.10 G korzystne (wiodące: {ln})", wc, "STR")
+            elif typ == "EQU":
+                w = {g.nazwa: (p.EQU_gG_stb if g.rodzaj == "Gstb" else p.EQU_gG_dst) for g in G}
+                if lead:
+                    w[lead.nazwa] = p.EQU_gQ
+                add(f"EQU (wiodące: {ln})", w, "EQU")
+            elif typ in ("char", "czesta", "quasi"):
+                w = {g.nazwa: 1.0 for g in G}
+                if lead:
+                    w[lead.nazwa] = {"char": 1.0, "czesta": p.psi_of(lead.kat)[1], "quasi": p.psi_of(lead.kat)[2]}[typ]
+                for o in tow:
+                    w[o.nazwa] = p.psi_of(o.kat)[idx[typ]]
+                add(f"SLS {typ} (wiodące: {ln})", w, typ)
+            elif typ == "wyj":
+                for a in A:
+                    if lead and lead.grupa and lead.grupa == a.grupa:
+                        continue
+                    w = {g.nazwa: 1.0 for g in G}
+                    w[a.nazwa] = 1.0
+                    if lead:
+                        w[lead.nazwa] = p.psi_of(lead.kat)[1 if p.psi_wyjatkowa == "psi1" else 2]
+                    for o in tow:
+                        if not (o.grupa and o.grupa == a.grupa):
+                            w[o.nazwa] = p.psi_of(o.kat)[2]
+                    add(f"6.11b ({a.nazwa}; wiodące: {ln})", w, "wyj")
+            else:
+                raise BladDanych(f"typ kombinacji {typ}?")
+    if typ == "STR":
+        add("6.10a (tylko G)", {g.nazwa: p.gG_sup for g in G}, "STR")
+    if typ == "wyj" and not out:
         for a in A:
-            for lead in leads:
-                wsp = {g.nazwa: 1.0 for g in G}
-                wsp[a.nazwa] = 1.0
-                idx = 1 if p.psi_wyjatkowa == "psi1" else 2
-                if lead and not (lead.grupa and lead.grupa == a.grupa):
-                    wsp[lead.nazwa] = p.psi_of(lead.kat)[idx]
-                for o in towarzyszace(lead):
-                    if not (o.grupa and o.grupa == a.grupa):
-                        wsp[o.nazwa] = p.psi_of(o.kat)[2]
-                out.append(Kombinacja(f"6.11b ({a.nazwa})", wsp, "wyj"))
-    else:
-        raise BladDanych(f"typ kombinacji {typ}?")
+            add(f"6.11b ({a.nazwa})", {**{g.nazwa: 1.0 for g in G}, a.nazwa: 1.0}, "wyj")
     return out
 
 
