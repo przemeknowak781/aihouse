@@ -970,6 +970,7 @@ class Model:
         if self.raw_dz is not None:
             self._validate_dzialka()
             self.dz = Dzialka(self.raw_dz, self.zero_abs)
+            self._check_on_plot()
 
     def _validate_refs(self):
         r = self.raw
@@ -1679,6 +1680,25 @@ class Model:
                 self._warn(f"{self.src_b}: {a['typ']} {a['id']} / {b['typ']} {b['id']}",
                            f"płyty nakładają się w rzucie ({ov:.2f} m²) w tym samym zakresie rzędnych — zdublowana "
                            "geometria (np. strop i dach nad tą samą częścią); rozdziel obrysy")
+
+    def _check_on_plot(self):
+        try:
+            plot = self.dz.obrys
+        except Exception:  # noqa: BLE001
+            return
+        if plot is None or plot.is_empty:
+            return
+        geoms = [self.obrys_kondygnacji(k) for k in self._kond]
+        geoms += [make_polygon(x["obrys"]) for x in self.dachy() + self.wsporniki() + self.tarasy()
+                  if _is_ring(x.get("obrys"))]
+        geoms = [g for g in geoms if g is not None and not g.is_empty]
+        if not geoms:
+            return
+        U = unary_union(geoms)
+        out = U.difference(plot.buffer(1e-3)).area
+        if out > 0.01:
+            self._err(f"{self.src_d}: uklad", f"budynek wychodzi poza granice działki ({out:.2f} m² poza obrysem) — "
+                                              "sprawdź 'uklad.przesuniecie/obrot'")
 
     # ---------------- działka ----------------
     def _validate_dzialka(self):

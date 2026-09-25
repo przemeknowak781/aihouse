@@ -249,6 +249,13 @@ def test_walidacja_nakladajace_plyty():
     assert any("PL-D" in x and "ST1" in x and "nakładają się" in x for x in w), w
 
 
+def test_walidacja_budynek_poza_dzialka():
+    rb, rd = _base(), _load_raw(D_TEST)
+    rd["uklad"]["przesuniecie"] = [-3.0, 18.0]
+    m = Model(rb, rd)
+    assert any("poza granice działki" in str(p) for p in m.bledy), m.bledy
+
+
 def test_walidacja_strict_i_orientacja():
     raw = _base()
     raw["stropy"][0]["obrys"] = list(reversed(raw["stropy"][0]["obrys"]))
