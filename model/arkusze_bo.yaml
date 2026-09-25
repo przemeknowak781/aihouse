@@ -29,10 +29,10 @@ wspolne:
     - "Izolacja obwodowa przeciwprzemarzaniowa: brak w modelu danych klimatycznych do obliczenia wg PN-EN ISO 13793 (wskaźnik mrozowy F_d / F_n, średnia roczna temperatura) — wymiary D = 1,00 m (garaż 1,20 m), d_n = 10 cm przyjęte z modelu bez sprawdzenia."
     - "Przejścia instalacyjne przez płytę: instalacje.yaml zawiera tylko położenia pionów i przyborów — brak średnic tulei, rzędnych i spadków podejść kanalizacji pod płytą (projekt branży S)."
     - "Geotechnika: parametry gruntu w modelu przykładowe (brief) — wymagana dokumentacja badań podłoża / projekt geotechniczny (kat. II) przed wydaniem PT; k_s płyty wyznaczono z M₀ modelu z obwiednią ×0,5/×2."
-    - "Obciążenie posadzki garażu i pasa gospodarczego (kat. F / sprzęt techniczny) — model nie przypisuje kategorii obciążenia użytkowego do płyty fundamentowej; w MES płyty przyjęto kat. A (2,0 kN/m²) na całej powierzchni."
+    - "Obciążenie posadzki pasa gospodarczego (pomieszczenie techniczne — ciężar urządzeń wg PT-IS): w MES płyty kat. A (2,0 kN/m²); garaż (PF2) — kat. F wg modelu (fundamenty.elementy[PF2].obciazenie_uzytkowe)."
     - "Obrysy stropów/dachów w modelu po licu ocieplenia (płyty nad warstwą EPS) — do korekty w audycie A2 (lico warstwy konstrukcyjnej); rysunki są generowane z modelu i zaktualizują się automatycznie."
     - "Beton krawędzi wysuniętych: model XC4 + XF1 (C30/37, c_nom 40 mm) — biblioteka wymiaruje dla XC4 (c_nom 40 mm, zgodne); klasa XF1 wymaga napowietrzenia/w/c wg PN-B-06265 — wpisać w specyfikacji betonu."
-    - "Zmiany modelu wymagane do spełnienia wszystkich warunków (słupy ŻB w węzłach A/1, A/3, C/3, D/3 ze stopami, jawny schemat wsporników B3–B5, ścieżka obciążeń fasady S1-01 przez B1, naroże PL-2, elementy niekonstrukcyjne w wspornikach) — projekt/04_PT_konstrukcja/REKOMENDACJE_MODEL.md."
+    - "Trzpienie ŻB w murze (SL9–SL21): technologia wykonania (kolejność murowanie/betonowanie, strzępia, kotwy muru) i zakłady prętów przez wieńce — do potwierdzenia przez wykonawcę; status zmian modelu — projekt/04_PT_konstrukcja/REKOMENDACJE_MODEL.md."
   uwagi: []
 arkusze:
   # --- fundamenty
@@ -66,3 +66,5 @@ arkusze:
   - {nr: PT-BO-24, tytul: "ZBROJENIE NADPROŻY (2)", typ: k_zbrojenie, element: nadproza, skala: 25, czesc: [2, 3], kolumny: 3}
   - {nr: PT-BO-25, tytul: "ZBROJENIE NADPROŻY (3)", typ: k_zbrojenie, element: nadproza, skala: 25, czesc: [3, 3], kolumny: 3}
   - {nr: PT-BO-26, tytul: "ZBROJENIE SCHODÓW", typ: k_zbrojenie, element: schody, skala: 25}
+  # --- słupy żelbetowe w murze (trzpienie) — runda konstrukcyjna 1
+  - {nr: PT-BO-27, tytul: "ZBROJENIE SŁUPÓW ŻELBETOWYCH W MURZE", typ: k_zbrojenie, element: slupy, skala: 25}

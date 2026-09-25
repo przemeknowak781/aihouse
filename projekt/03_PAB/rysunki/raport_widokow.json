@@ -224,7 +224,7 @@
           "sprawdzone_lancuchy": 19
         }
       },
-      "czas_s": 45.0,
+      "czas_s": 45.7,
       "png_kontrola": {
         "px": [
           3721,
@@ -479,7 +479,7 @@
           "sprawdzone_lancuchy": 12
         }
       },
-      "czas_s": 19.7,
+      "czas_s": 18.9,
       "png_kontrola": {
         "px": [
           4548,
@@ -716,7 +716,7 @@
           "sprawdzone_lancuchy": 22
         }
       },
-      "czas_s": 24.8,
+      "czas_s": 24.3,
       "png_kontrola": {
         "px": [
           3485,
@@ -949,12 +949,12 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 7359,
+          "prymitywy": 7350,
           "napisy": 412,
           "sprawdzone_lancuchy": 2
         }
       },
-      "czas_s": 44.5,
+      "czas_s": 43.3,
       "png_kontrola": {
         "px": [
           6674,
@@ -974,7 +974,7 @@
         "wypelnienie": 0.738,
         "wypelnienie_rys": 0.727,
         "wypelnienie_skl": 0.65,
-        "wypelnienie_kontur": 0.457,
+        "wypelnienie_kontur": 0.458,
         "pole_arkusza_m2": 0.4746,
         "pole_ramki_m2": 0.44,
         "pusty_prostokat_mm": [
@@ -1228,7 +1228,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 44.2,
+      "czas_s": 43.2,
       "png_kontrola": {
         "px": [
           12107,
@@ -1277,5 +1277,5 @@
     },
     "wypelnienie_wazone": 0.845
   },
-  "czas_s": 196.2
+  "czas_s": 193.1
 }

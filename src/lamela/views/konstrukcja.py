@@ -968,7 +968,14 @@ def widok_fundamenty(ctx: ViewContext, spec: dict, scale: float, opts: dict):
         if float(c["z_od"]) < 0.5:
             a, b = _przekroj_slupa(c.get("przekroj"))
             x, y = c["xy"]
-            vp.fill(box(x - a / 2, y - b / 2, x + a / 2, y + b / 2), L_OBR, "#000000", z=23)
+            g_ = box(x - a / 2, y - b / 2, x + a / 2, y + b / 2)
+            mat_ = m.material(str(c.get("mat"))) if c.get("mat") else None
+            if mat_ is not None and (mat_.kreskowanie or "").upper() == "STAL":
+                vp.fill(g_, L_OBR, "#000000", z=23)
+            else:                               # słup ŻB (trzpień w murze) — kreskowanie żelbetu, opis
+                H.hatch(vp, g_, "ZELBET")
+                vp.geom(g_, L_OBR, pen="gruba")
+                vp.text((x + a / 2 + 0.05, y + b / 2 + 0.05), str(c["id"]), 2.0, 0, "left", "bottom", L_OPS)
     # płyta
     if P is not None:
         vp.geom(P, L_OBR, pen="gruba")
@@ -1736,9 +1743,14 @@ def widok_zbrojenie(ctx: ViewContext, spec: dict, scale: float, opts: dict):
     return fn(ctx, spec, scale, opts)
 
 
+def _widok_slupow(ctx, spec, scale, opts):
+    from .konstrukcja_slupy import widok_zbrojenie_slupow
+    return widok_zbrojenie_slupow(ctx, spec, scale, opts)
+
+
 _ZBROJENIE = {"strop": widok_zbrojenie_plyt, "plyta": widok_zbrojenie_plyt, "stropodach": widok_zbrojenie_plyt,
               "fundament": widok_zbrojenie_fundamentu, "belki": widok_zbrojenie_belek,
-              "nadproza": widok_zbrojenie_belek, "schody": widok_zbrojenie_schodow}
+              "nadproza": widok_zbrojenie_belek, "schody": widok_zbrojenie_schodow, "slupy": _widok_slupow}
 
 register_view("k_zbrojenie", widok_zbrojenie, "rysunek zbrojenia")
 
