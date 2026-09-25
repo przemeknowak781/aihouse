@@ -96,7 +96,9 @@ def _labels_building(lab, s, W, h=D.H):
         for i, t_ in enumerate(reversed(fun)):
             cv.text(np.asarray(p) + np.array([0.0, h * (1.6 + 1.45 * i) * k]), t_, h, 0.0, "center", "baseline",
                     "Z-OPISY")
+    g0 = len(lab.pl.geoms)
     lab.pl.place(lab.vp, fn, cands, penalty_step=0.01, bounds=s.p0.buffer(-1.0 * k))
+    lab.bump(g0)
     return c0
 
 
@@ -699,7 +701,9 @@ def _chains(lab, s):
                                tick_pen=0.18, ext_len=(1.5, 1.5), overshoot_mm=1.5, tick_mm=2.5, mask=0.3,
                                labels=[_lab_m(b - a) for a, b in zip(pts[:-1], pts[1:])])
         if len(pts) >= 2:
+            g0 = len(lab.pl.geoms)
             lab.pl.place(lab.vp, fn, [4.0, 6.0, 8.0, 10.0, 13.0, 16.0], penalty_step=0.3)
+            lab.bump(g0)
     chain(xs_s, "h", ymin_all, -1.0)
     chain(xs_n, "h", y1, +1.0)
     chain(ys_w, "v", xmin_all, -1.0)

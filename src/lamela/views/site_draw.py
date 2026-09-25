@@ -114,6 +114,7 @@ def block_size(lines, h=H, style="normal", gap=1.45):
     return W, h + (len(lines) - 1) * h * gap + 0.22 * h
 
 
+TEXT_W = 3.0     # waga napisów w rejestrze kolizji
 DIRS = [(1, 0), (1, 1), (0, 1), (-1, 0), (1, -1), (0, -1), (-1, 1), (-1, -1)]
 DIRS2 = [(1, 0.5), (0.5, 1), (-0.5, 1), (-1, 0.5), (1, -0.5), (0.5, -1), (-0.5, -1), (-1, -0.5)]
 
@@ -189,10 +190,18 @@ class Labeler:
         if pos is None:
             self.failed.append(lines)
         else:
+            self.bump(g0)
             self.entries.append(dict(prims=self.vp.prims[n0:], g=(g0, len(self.pl.geoms)), call=call))
         return pos, cost
 
-    def fix_overlaps(self, min_area_mm2=0.3, rounds=2):
+    def bump(self, g0, w_text=TEXT_W):
+        """Podniesienie wagi napisów zarejestrowanych od indeksu ``g0`` (kolizja napis–napis droższa niż
+        przecięcie wielu linii)."""
+        for gi in range(g0, len(self.pl.geoms)):
+            if self.pl.cat[gi] == "text" and self.pl.w[gi] > 0:
+                self.pl.w[gi] = max(self.pl.w[gi], w_text)
+
+    def fix_overlaps(self, min_area_mm2=0.3, rounds=4):
         """Poprawka kolizji napisów: opisy (``label``), których napisy nachodzą na inne napisy rzutni, są usuwane
         i umieszczane ponownie z szerszym zakresem położeń (odnośnik). Zwraca liczbę przeniesionych opisów."""
         import copy
@@ -311,8 +320,10 @@ class Labeler:
             mid = len(cands) // 2
             cands = [c_ for _i, c_ in sorted(enumerate(cands), key=lambda t: abs(t[0] - mid))]
             saved = self._mute(own if own is not None else ls)
+            g0 = len(self.pl.geoms)
             pos, _c = self.pl.place(self.vp, fn, cands, penalty_step=0.01, bounds=self.bounds, max_cost=max_cost)
             self._unmute(saved)
+            self.bump(g0)
             if pos is None:
                 break
             used.append(ls.project(Point(pos[0])))
@@ -1008,7 +1019,9 @@ def place_dim(lab: Labeler, a, b, on_a=None, on_b=None, avoid=None, span=8.0, st
 
     def fn(cv, sh):
         dim_pts(cv, a + t * sh, b + t * sh, label=label)
+    g0 = len(lab.pl.geoms)
     pos, _c = lab.pl.place(lab.vp, fn, cands, penalty_step=0.005, max_cost=max_cost)
+    lab.bump(g0)
     return pos
 
 
@@ -1057,7 +1070,10 @@ def slope_arrow(lab: Labeler, poly, direction, pct, length_mm=10.0, max_cost=Non
 
     def fn(cv, ab):
         dims.slope(cv, ab[0], ab[1], text=lbl, h=H, layer="Z-ODWODNIENIE")
-    return lab.pl.place(c, fn, cands, penalty_step=0.02, max_cost=max_cost)
+    g0 = len(lab.pl.geoms)
+    r = lab.pl.place(c, fn, cands, penalty_step=0.02, max_cost=max_cost)
+    lab.bump(g0)
+    return r
 
 
 # ================================================================================================ legenda (arkusz)
@@ -1426,7 +1442,7 @@ def register_all(lab: Labeler, n0=0, n1=None, min_len_mm=0.8, hatch_w=0.12):
                 continue
         t, l_, f = prim_shapes([p], k)
         for g in t:
-            lab.pl.add(g, "text", 1.0)
+            lab.pl.add(g, "text", TEXT_W)
         for g in l_:
             lab.pl.add(g, "line", w)
         for g in f:

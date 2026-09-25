@@ -780,8 +780,8 @@ def detal_wspornik_A(m, opts: dict) -> Detal:
     kr = [k for k in krawedzie_stropu_zewn(m, st) if k["typ"] == "a"]
     k = max(kr, key=lambda k_: (k_["belka_rodzaj"] == "krawedziowa", k_["L"]))
     z0, t = float(st["wierzch"]), float(st["grubosc"])
-    det = Detal(m, "D-08", f"Wspornik bryły A — krawędź stropu {st['id']} (ściana {k['sciana']}, płyta "
-                           f"{k['wsp']['id'] if k['wsp'] else '—'})", ("WZ-07a", "WZ-16a"), 10, z0=z0)
+    det = Detal(m, "D-08", f"Wspornik bryły A — krawędź {st['id']}"
+                           + (f" z płytą {k['wsp']['id']}" if k["wsp"] else ""), ("WZ-07a", "WZ-16a"), 10, z0=z0)
     sz, pod, suf = k["sciana"], st.get("podloga"), st.get("sufit")
     Ws = det.warstwy(sz)
     ks = next(i for i, w in enumerate(Ws) if w["konstr"])
@@ -790,7 +790,8 @@ def detal_wspornik_A(m, opts: dict) -> Detal:
     x_out = sum(w["d"] for w in Ws)
     bb, hb = (k["belka"][0], k["belka"][1]) if k["belka"] else (Ws[ks]["d"], 0.0)
     Wp = det.warstwy(pod)
-    y_f = sum(w["d"] for w in Wp)
+    kp = next((i for i, w in enumerate(Wp) if w["konstr"]), len(Wp))
+    y_f = sum(w["d"] for w in Wp[:kp])                                  # warstwy podłogi nad płytą
     xL, xR, yT, yB = -0.45, 1.00, 0.85, -0.56
     det.okno = (xL, yB, xR, yT)
     ws_ = k["wsp"]
@@ -800,7 +801,7 @@ def detal_wspornik_A(m, opts: dict) -> Detal:
     for i, w in enumerate(Ws):
         zak[w["idx"]] = (y_f, yT) if i < ks else ((hb, yT) if i == ks else (0.0, yT))
     sc = det.stos_v(sz, 0.0, 0.0, yT, zakres=zak)
-    det.stos_h(pod, xL, xs0, y_f)
+    det.stos_h(pod, xL, xs0, y_f, do=kp)
     det.rect(xL, -t, xs1, 0.0, st.get("mat", "ZB_C25"), konstr=True)
     det.rect(xs1 - bb, 0.0, xs1, hb, k["belka"][2] if k["belka"] else st.get("mat"), konstr=True, grupa="belka")
     lac_d = 0.08
@@ -819,6 +820,8 @@ def detal_wspornik_A(m, opts: dict) -> Detal:
         if "PUSTKA" in w["mat"] or "pustka" in det.mat_info(w["mat"])[0].lower():
             for xb in (xL + 0.10, 0.35, 0.80):
                 det.rect(xb, y - w["d"], xb + 0.05, y, "RUSZT")
+        elif w["d"] < 0.006:
+            det.cienka([(xL, y - w["d"] / 2), (xR + 0.05, y - w["d"] / 2)], w["mat"])
         else:
             det.rect(xL, y - w["d"], xR + 0.05, y, w["mat"])
         det._rejestr(suf, w, w["d"])
@@ -854,7 +857,7 @@ def detal_wspornik_A(m, opts: dict) -> Detal:
                    tytul=f"{suf} — sufit nad powietrzem zewnętrznym")
     det.opis([(0.65, (y_ps - t_w) / 2 - 0.05)], ["podsufitka jedna płaszczyzna pod wspornikiem A i pasem PL-2, "
                                                   "czoło PL-2 obudowane blendą do spodu podsufitki (audyt A2 I-5)"])
-    det.opis_stosu([(a, b, w) for a, b, w in det_stos_pod(det, pod, y_f, 0.0)], "x", -0.20,
+    det.opis_stosu([(a, b, w) for a, b, w in det_stos_pod(det, pod, y_f, 0.0)][:kp + 1], "x", -0.20,
                    wyjscie=(-0.20, yT + 0.03), tytul=f"{pod} — podłoga")
     det.wymiar([(a, yT) for a, _b, _w in sc] + [(sc[-1][1], yT)], yT + 0.05, "h")
     det.wymiar([(xL + 0.03, -t), (xL + 0.03, y_w), (xL + 0.03, y_ps)], xL - 0.03, "v")
@@ -873,3 +876,118 @@ def det_stos_pod(det: Detal, kod: str, y_top: float, y_bot: float) -> list:
         out.append((y, y - w["d"], w))
         y -= w["d"]
     return out
+
+
+# ================================================================================================ D — okap PL-E nad HS
+@rodzaj("okap", "WZ-04")
+def detal_okap(m, opts: dict) -> Detal:
+    """Płyta wysunięta (okap) nad przeszkleniem HS: łącznik termoizolacyjny, spadek 2 % od budynku, rynna ukryta
+    za blendą czołową z kapinosem, podsufitka z kasetą osłony (poza ociepleniem), nadproże HS."""
+    from ..obliczenia.mostki2d.katalog_dod import plyta_pod_wspornikiem, wspornik_z_nazwy
+    e = wpis(m, "WZ-04")
+    wsp = (wspornik_z_nazwy(m, e.get("nazwa", "PL-E")) or [m.wsporniki()[0]])[0]
+    st, _r = plyta_pod_wspornikiem(m, wsp)
+    z0 = float(st["wierzch"]) if st else float(wsp["wierzch"])
+    t = float(st["grubosc"]) if st else 0.22
+    t_w = float(wsp["grubosc"])
+    from shapely.geometry import Polygon as _P
+    P = _P(wsp["obrys"])
+    xs_ = [q[0] for q in wsp["obrys"]]
+    wys = round(max(0.5, min(2.0, (max(xs_) - min(xs_)) if max(xs_) - min(xs_) < 3 else 1.5)), 2)
+    wys = 1.5 if any(abs(q[0] - min(xs_)) < 1e-6 for q in wsp["obrys"]) else wys
+    sz = przegroda_typu(m, "WZ-04", "sciana_zewn", "SZ1")
+    pod = st.get("podloga") if st else "POD-1"
+    det = Detal(m, "D-09", f"Okap {wsp['id']} {wys:.2f} m nad przeszkleniem HS".replace(".", ","), ("WZ-04",), 10,
+                z0=z0)
+    Ws = det.warstwy(sz)
+    ks = next(i for i, w in enumerate(Ws) if w["konstr"])
+    xs1 = sum(w["d"] for w in Ws[:ks + 1])
+    x_out = sum(w["d"] for w in Ws)
+    d_f, ws_ = osadzenie(m, sz)
+    xf0, xf1 = xs1 - ws_, xs1 - ws_ + d_f
+    Wp = det.warstwy(pod)
+    kp = next(i for i, w in enumerate(Wp) if w["konstr"])
+    y_f = sum(w["d"] for w in Wp[:kp])
+    xL, yT, yB = -0.40, 0.75, -0.62
+    lac = 0.08
+    front = x_out + wys
+    D = front - 0.34 - 0.92                                   # przesunięcie części czołowej (przerwa widoku)
+    t_front = -0.02 * (front - xs1 - lac)
+    # ściana P1 nad okapem: XPS cokołowy 30 cm w strefie rozbryzgu
+    kx = next(i for i, w in enumerate(Ws) if i > ks and w["d"] >= 0.05)
+    zak = {w["idx"]: ((y_f, yT) if i < ks else (0.0, yT) if i == ks else (0.30, yT)) for i, w in enumerate(Ws)}
+    sc = det.stos_v(sz, 0.0, 0.0, yT, zakres=zak)
+    det.rect(xs1, 0.0, x_out, 0.30, "XPS300" if "XPS300" in m.materialy else Ws[kx]["mat"])
+    det.stos_h(pod, xL, 0.0, y_f, do=kp)
+    det.rect(xL, -t, xs1, 0.0, st.get("mat", "ZB_C25") if st else "ZB_C25", konstr=True)
+    det.rect(xL, -t - 0.01, xf0 - 0.004, -t, Ws[0]["mat"])                          # tynk sufitu P0
+    det.rect(xs1, -t, xs1 + lac, 0.0, "LACZNIK")
+    mw = wsp.get("mat", "ZB_C30")
+    x_cut = 0.92
+    det.poly([(xs1 + lac, 0.0), (x_cut, -0.02 * (x_cut - xs1 - lac)), (x_cut, -t_w), (x_out, -t_w), (x_out, -t),
+              (xs1 + lac, -t)], mw, konstr=True)
+    x0f = front - 0.34 - D
+    det.poly([(x0f, t_front + 0.02 * 0.34), (front - D, t_front), (front - D, -t_w), (x0f, -t_w)], mw, konstr=True)
+    # nadproże HS: rama, izolacja pod okapem, taśmy
+    yh = -t - 0.015
+    det.rect(xf0, yh - 0.11, xf1, yh, "RAMA_ALU")
+    xg = (xf0 + xf1) / 2
+    det.rect(xg - 0.024, yB, xg + 0.024, yh - 0.09, "SZYBA3")
+    det.rect(xf0, yh, xs1, -t, "PIANKA")
+    det.rect(xf1 - 0.03, -t_w - 0.05, x_out, -t, Ws[kx]["mat"])
+    det.rect(xs1, yh, xf1 + 0.001, -t, Ws[kx]["mat"])
+    det.obrobka([(xf1 - 0.03, -t_w - 0.052), (x_out + 0.004, -t_w - 0.052), (x_out + 0.004, -t_w - 0.03)],
+                kapinos=False)
+    det.linia("T_in", [(xf0 - 0.0015, yh - 0.03), (xf0 - 0.0015, -t - 0.012), (xf0 - 0.05, -t - 0.012)])
+    det.linia("T_out", [(xf1 + 0.0015, yh - 0.05), (xf1 + 0.0015, yh + 0.0015), (xs1 + 0.02, yh + 0.0015)])
+    # podsufitka z kasetą osłony, blenda, rynna ukryta
+    y_s = -t_w - 0.07
+    det.kontur([(x_out + 0.03, -t_w), (x_out + 0.03, y_s - 0.07), (x_out + 0.17, y_s - 0.07), (x_out + 0.17, -t_w)],
+               zamkniety=False, pen=0.35)
+    det.rect(x_out + 0.17, y_s - 0.012, x_cut, y_s, "CZOLO_WLOKNO")
+    det.rect(x0f, y_s - 0.012, front - D, y_s, "CZOLO_WLOKNO")
+    for xb in (x_out + 0.35, x_cut - 0.1, x0f + 0.1):
+        det.rect(xb, y_s, xb + 0.05, -t_w, "RUSZT")
+    xfr = front - D
+    det.rect(xfr, y_s - 0.012, xfr + 0.012, t_front + 0.11, "CZOLO_WLOKNO")
+    det.obrobka([(xfr - 0.13, t_front + 0.07), (xfr - 0.12, t_front + 0.003), (xfr - 0.015, t_front + 0.003),
+                 (xfr - 0.015, t_front + 0.10), (xfr + 0.02, t_front + 0.10 + 0.002), (xfr + 0.02, t_front + 0.07)],
+                strona=1)
+    det.obrobka([(xfr, y_s - 0.012), (xfr + 0.02, y_s - 0.012)], strona=1)
+    det.linia("H", [(xfr - 0.12, t_front + 0.004), (x0f, t_front + 0.02 * 0.34 + 0.002)])
+    det.linia("H", [(x_cut, -0.02 * (x_cut - xs1 - lac) + 0.002), (xs1 + lac, 0.002), (x_out + 0.002, 0.002),
+                    (x_out + 0.002, 0.17)], "membrana okapu wywinięta na ścianę ≥ 15 cm (pod XPS cokołowy)")
+    det.polaczenie("H", [(x_cut, -0.02 * (x_cut - xs1 - lac) + 0.002), (x0f, t_front + 0.02 * 0.34 + 0.002)])
+    det.linia("S", [(0.0015, yT), (0.0015, 0.003), (xL, 0.003)])
+    det.linia("S", [(xL, -t - 0.013), (xf0 - 0.05, -t - 0.013)])
+    det.polaczenie("S", [(0.0015, 0.003), (0.0015, -t - 0.013)])
+    for p1, p2 in (((0.0, yT), (x_out, yT)), ((x_cut, 0.02), (x_cut, y_s - 0.02)), ((x0f, 0.02), (x0f, y_s - 0.02)),
+                   ((xf0 - 0.02, yB), (xf1 + 0.02, yB)), ((xL, y_f), (xL, -t - 0.01))):
+        det.przerwa(p1, p2)
+    # opisy
+    det.opis_stosu(sc, "y", 0.55, odwroc=True, tytul=f"{sz} — ściana P1")
+    det.opis([(xs1 + 0.1, 0.15)], ["XPS 300 w strefie rozbryzgu 30 cm nad okapem, membrana pod XPS"])
+    det.opis([(xs1 + lac / 2, -t / 2)], [f"łącznik termoizolacyjny (ETA) wys. = grubość stropu {mm(t)} mm, "
+                                         "przykł. 80 mm; zalecany 120 mm (REKOMENDACJE A)"])
+    det.opis([(0.70, -0.15)], [f"okap {wsp['id']} ŻB C30/37 {mm(t_w)} mm (poza licem), wierzch = wierzch stropu, "
+                               "spadek 2 % od budynku, membrana TPO"])
+    det.opis([(xfr - 0.07, t_front + 0.02)], ["rynna ukryta (korytko ze stali nierdz. / blachy powlekanej 0,7 mm) za "
+                                              "blendą, spadek 0,5 % do rury spustowej → KD (REKOMENDACJE R-W1)"])
+    det.opis([(xfr + 0.006, y_s + 0.05)], ["blenda czołowa — płyta włóknocementowa 12 mm, obróbka korony "
+                                           "i okapnik (kapinos) na spodzie"])
+    det.opis([(x_out + 0.10, y_s - 0.035)], ["kaseta screenu ZIP w podsufitce okapu (poza warstwą izolacji)"])
+    det.opis([(x_out + 0.50, y_s - 0.006)], ["podsufitka włóknocementowa 12 mm na ruszcie, szczelina wentylowana"])
+    det.opis([(xf1 + 0.01, -t_w - 0.025)], ["izolacja nadproża z zakładem 30 mm na ramę HS, profil z okapnikiem"])
+    det.opis([(xg, yB + 0.08)], [opis_stolarki(m, next((o for o in m.otwory() if o.typ == "drzwi_przesuwne_HS"
+                                                        and o.sciana is not None and o.sciana.przegroda_kod == sz),
+                                                       None)), "taśmy: paroszczelna wewn. / paroprzepuszczalna zewn."])
+    det.opis_stosu(det_stos_pod(det, pod, y_f, 0.0)[:kp + 1], "x", -0.22, wyjscie=(-0.22, yT + 0.03),
+                   tytul=f"{pod} — podłoga P1")
+    det.wymiar([(x0f, 0.0), (front - D, 0.0)], 0.08, "h", labels=[f"… {mm(wys)} od lica"])
+    det.rzedna((xL + 0.05, y_f), y_f, "wyk", "right")
+    det.rzedna((xL + 0.05, 0.0), 0.0, "konstr", "right")
+    det.spadek((x_out + 0.10, 0.05), (x_out + 0.40, 0.044), 2.0)
+    det.uwagi.append(f"okap {wsp['id']}: w strefie łącznika grubość = grubość stropu ({mm(t)} mm), pogrubienie do "
+                     f"{mm(t_w)} mm za licem ocieplenia (nadproże HS na poziomie spodu stropu) — do potwierdzenia "
+                     "w PT-K; symulacja WZ-04 z płytą o stałej grubości (wariant ostrożny)")
+    return det
