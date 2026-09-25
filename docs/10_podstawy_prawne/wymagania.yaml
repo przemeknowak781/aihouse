@@ -1,0 +1,97 @@
+# wymagania.yaml — kluczowe wartości liczbowe wymagań dla „Dom LAMELA”
+# Źródło: docs/10_podstawy_prawne/00_rejestr_wymagan.md (rejestr skonsolidowany z R1…R8 po weryfikacji niezależnej).
+# Stan prawny: 2026-09-25 (Dz.U. 2026 do poz. 1244). WT stosowane na podstawie art. 102a PB (oświadczenie Inwestora).
+#
+# Format wpisu (klucze ASCII):
+#   klucz: {wartosc: <liczba | [lista] | tekst>, jedn: <jednostka>, typ: <min|max|rowne|zakres|info>,
+#           id: <W-xxx z rejestru>, status: <zweryfikowane|niezweryfikowane|interpretacja|zalozenie|program>,
+#           zrodlo: "<akt/norma + jednostka redakcyjna>"}
+#   typ: min — wartość w projekcie >= wartosc; max — <= wartosc; zakres — [dolna, górna] włącznie;
+#        rowne — wartość obowiązująca; info — parametr do obliczeń (nie kryterium).
+#   status: zalozenie = cel/założenie projektowe (nie przepis); program = MPZP fikcyjny lub program Inwestora.
+# Skróty w zrodlo: WT = rozp. MI z 12.04.2002 (t.j. Dz.U. 2022 poz. 1225 ze zm.), stosowane na podstawie art. 102a PB;
+#   RPB = rozp. w sprawie szczegółowego zakresu i formy projektu budowlanego (t.j. Dz.U. 2022 poz. 1679 ze zm.).
+
+meta:
+  projekt: "Dom LAMELA"
+  wersja: "1.0"
+  data: "2026-09-25"
+  rejestr: "docs/10_podstawy_prawne/00_rejestr_wymagan.md"
+  podstawa_WT: "WT t.j. Dz.U. 2022 poz. 1225, zm. 2023 poz. 2442, 2024 poz. 474, 2024 poz. 726 — w brzmieniu obowiązującym do 19.09.2026; art. 102a ust. 1, 2, 4 PB (Dz.U. 2026 poz. 1161)"
+  termin_wniosku_art_102a: "2028-03-19"
+  dzialka_pow_m2: 1600.0
+  dzialka_wymiary_m: [32.0, 50.0]
+  zero_abs_m_npm: 101.65
+
+procedura:
+  kategoria_obiektu: {wartosc: "I", jedn: "-", typ: rowne, id: W-303, status: zweryfikowane, zrodlo: "PB zał. „Kategorie obiektów budowlanych” (kat. I)"}
+  PnB_termin_decyzji: {wartosc: 65, jedn: dni, typ: info, id: null, status: zweryfikowane, zrodlo: "PB art. 35 ust. 6 pkt 1"}
+  PnB_wygasniecie: {wartosc: 3, jedn: lat, typ: info, id: null, status: zweryfikowane, zrodlo: "PB art. 37 ust. 1"}
+  istotne_odstapienie_pow_zabudowy: {wartosc: 0.05, jedn: "-", typ: max, id: null, status: zweryfikowane, zrodlo: "PB art. 36a ust. 5"}
+  istotne_odstapienie_wymiary: {wartosc: 0.02, jedn: "-", typ: max, id: null, status: zweryfikowane, zrodlo: "PB art. 36a ust. 5 (wysokość, długość, szerokość)"}
+  uprawnienia_ograniczone_kubatura_max: {wartosc: 1000.0, jedn: m3, typ: max, id: W-069, status: zweryfikowane, zrodlo: "PB art. 15a ust. 3, 5, 21, 23"}
+  uprawnienia_ograniczone_wysokosc_max: {wartosc: 12.0, jedn: m, typ: max, id: null, status: zweryfikowane, zrodlo: "PB art. 15a ust. 5"}
+  uprawnienia_ograniczone_kondygnacje_max: {wartosc: 3, jedn: "-", typ: max, id: null, status: zweryfikowane, zrodlo: "PB art. 15a ust. 5"}
+  uprawnienia_ograniczone_wys_kondygnacji_max: {wartosc: 4.8, jedn: m, typ: max, id: null, status: zweryfikowane, zrodlo: "PB art. 15a ust. 5"}
+  uprawnienia_ograniczone_posadowienie_max: {wartosc: 3.0, jedn: m, typ: max, id: null, status: zweryfikowane, zrodlo: "PB art. 15a ust. 5"}
+  uprawnienia_ograniczone_rozpietosc_max: {wartosc: 6.0, jedn: m, typ: max, id: null, status: zweryfikowane, zrodlo: "PB art. 15a ust. 5"}
+  uprawnienia_ograniczone_wspornik_max: {wartosc: 2.0, jedn: m, typ: max, id: null, status: zweryfikowane, zrodlo: "PB art. 15a ust. 5"}
+  plan_BIOZ_wysokosc_robot: {wartosc: 5.0, jedn: m, typ: info, id: null, status: zweryfikowane, zrodlo: "rozp. BIOZ (Dz.U. 2003 nr 120 poz. 1126) §6 pkt 1 lit. b; PB art. 21a"}
+  plan_BIOZ_wykop_pionowy: {wartosc: 1.5, jedn: m, typ: info, id: null, status: zweryfikowane, zrodlo: "rozp. BIOZ §6 pkt 1 lit. a"}
+  oplata_pelnomocnictwo: {wartosc: 17, jedn: zl, typ: rowne, id: null, status: zweryfikowane, zrodlo: "ustawa o opłacie skarbowej (t.j. Dz.U. 2025 poz. 1154) zał. cz. IV"}
+  sprzeciw_uzytkowanie: {wartosc: 14, jedn: dni, typ: info, id: null, status: zweryfikowane, zrodlo: "PB art. 54 ust. 1"}
+  PV_prog_obowiazkow_ppoz: {wartosc: 6.5, jedn: kWp, typ: max, id: W-194, status: zweryfikowane, zrodlo: "PB art. 29 ust. 4 pkt 3 lit. c (art. 56 ust. 1a uchylony); ustawa OZE art. 2 pkt 19b lit. b"}
+
+usytuowanie:
+  odl_granica_z_otworami: {wartosc: 4.0, jedn: m, typ: min, id: W-001, status: zweryfikowane, zrodlo: "WT §12 ust. 1 pkt 1 i część wspólna (Dz.U. 2023 poz. 2442, 2024 poz. 726); każdy uskok = odrębna ściana"}
+  odl_granica_z_otworami_zalecana: {wartosc: 4.5, jedn: m, typ: min, id: W-022, status: zalozenie, zrodlo: "rozp. Dz.U. 2022 poz. 1670 §31 (pomiar granic przy ≤ 4 m); R8 3.3"}
+  odl_granica_bez_otworow: {wartosc: 3.0, jedn: m, typ: min, id: W-002, status: zweryfikowane, zrodlo: "WT §12 ust. 1 pkt 2"}
+  odl_granica_okap_gzyms_balkon_schody: {wartosc: 1.5, jedn: m, typ: min, id: W-004, status: zweryfikowane, zrodlo: "WT §12 ust. 6 pkt 1 (płyty wysunięte traktowane jak okapy — interpretacja)"}
+  odl_granica_okno_dachowe: {wartosc: 4.0, jedn: m, typ: min, id: W-004, status: zweryfikowane, zrodlo: "WT §12 ust. 6 pkt 2"}
+  linia_zabudowy_od_linii_rozgraniczajacej: {wartosc: 6.0, jedn: m, typ: min, id: W-006, status: program, zrodlo: "MPZP 3MN (fikcyjny) — nieprzekraczalna linia zabudowy od 1KDD; żaden element jej nie przekracza"}
+  odl_krawedz_jezdni_gminnej: {wartosc: 6.0, jedn: m, typ: min, id: W-007, status: zweryfikowane, zrodlo: "u.d.p. art. 43 ust. 1 tab. lp. 3 lit. c (teren zabudowy)"}
+  przeslanianie_kat: {wartosc: 60, jedn: deg, typ: rowne, id: W-008, status: zweryfikowane, zrodlo: "WT §13 ust. 1"}
+  naslonecznienie_h_min: {wartosc: 3.0, jedn: h, typ: min, id: W-009, status: zweryfikowane, zrodlo: "WT §60 ust. 1 (równonoc)"}
+  naslonecznienie_przedzial_godz: {wartosc: [7, 17], jedn: h, typ: zakres, id: W-009, status: zweryfikowane, zrodlo: "WT §60 ust. 1"}
+  odl_ppoz_ZL_ZL: {wartosc: 8.0, jedn: m, typ: min, id: W-010, status: zweryfikowane, zrodlo: "WT §271 ust. 1"}
+  odl_ppoz_zwiekszenie_jedna_rozprzestrzeniajaca: {wartosc: 0.5, jedn: "-", typ: info, id: W-010, status: zweryfikowane, zrodlo: "WT §271 ust. 2 (+50 %)"}
+  odl_ppoz_zwiekszenie_obie_rozprzestrzeniajace: {wartosc: 1.0, jedn: "-", typ: info, id: W-010, status: zweryfikowane, zrodlo: "WT §271 ust. 2 (+100 %)"}
+  dojazd_szer_min: {wartosc: 3.0, jedn: m, typ: min, id: W-013, status: zweryfikowane, zrodlo: "WT §14 ust. 1"}
+  dojazd_szer_zalecana: {wartosc: 5.0, jedn: m, typ: min, id: W-013, status: zalozenie, zrodlo: "R8 3.3 (przed garażem 2-stanowiskowym)"}
+  stanowisko_szer: {wartosc: 2.5, jedn: m, typ: min, id: W-014, status: zweryfikowane, zrodlo: "WT §21 ust. 1 pkt 1"}
+  stanowisko_dl: {wartosc: 5.0, jedn: m, typ: min, id: W-014, status: zweryfikowane, zrodlo: "WT §21 ust. 1 pkt 1"}
+  parking_odl_granica_min: {wartosc: 3.0, jedn: m, typ: min, id: W-015, status: zweryfikowane, zrodlo: "WT §19 ust. 2 pkt 1 lit. a (nie dotyczy granicy z działką drogową, ust. 7)"}
+  parking_odl_okna_min: {wartosc: 7.0, jedn: m, typ: min, id: W-015, status: zweryfikowane, zrodlo: "WT §19 ust. 1 pkt 1 lit. a (zwolnienie ust. 5)"}
+  parking_niezadaszone_zwolnione_max: {wartosc: 2, jedn: szt, typ: max, id: W-015, status: zweryfikowane, zrodlo: "WT §19 ust. 5"}
+  brama_wjazdowa_szer_min: {wartosc: 2.4, jedn: m, typ: min, id: W-017, status: zweryfikowane, zrodlo: "WT §43"}
+  brama_wjazdowa_szer_zalecana: {wartosc: 4.0, jedn: m, typ: min, id: W-017, status: zalozenie, zrodlo: "R3 3.3 pkt 11; R8 3.3"}
+  furtka_szer_min: {wartosc: 0.9, jedn: m, typ: min, id: W-017, status: zweryfikowane, zrodlo: "WT §43"}
+  ogrodzenie_ostre_zakaz_ponizej: {wartosc: 1.8, jedn: m, typ: info, id: W-017, status: zweryfikowane, zrodlo: "WT §41 ust. 2"}
+  spadek_terenu_od_budynku_min: {wartosc: 0.02, jedn: "-", typ: min, id: W-019, status: zalozenie, zrodlo: "WT §316 ust. 2 (wymóg spływu); 2 % — R8 3.5"}
+  zjazd_szer_zalozenie: {wartosc: 5.0, jedn: m, typ: info, id: W-020, status: zalozenie, zrodlo: "rozp. Dz.U. 2022 poz. 1518 §54–56 (brak wartości); parametry wg decyzji zarządcy"}
+  zjazd_zezwolenie_waznosc: {wartosc: 3, jedn: lat, typ: info, id: W-020, status: zweryfikowane, zrodlo: "u.d.p. art. 29 ust. 5"}
+  drzewa_obwod_zgloszenie_topole_wierzby: {wartosc: 80, jedn: cm, typ: info, id: W-023, status: zweryfikowane, zrodlo: "u.o.p. art. 83f ust. 1 pkt 3 lit. a, ust. 4"}
+  drzewa_obwod_zgloszenie_kasztanowiec_robinia_platan: {wartosc: 65, jedn: cm, typ: info, id: W-023, status: zweryfikowane, zrodlo: "u.o.p. art. 83f ust. 1 pkt 3 lit. b, ust. 4"}
+  drzewa_obwod_zgloszenie_pozostale: {wartosc: 50, jedn: cm, typ: info, id: W-023, status: zweryfikowane, zrodlo: "u.o.p. art. 83f ust. 1 pkt 3 lit. c, ust. 4"}
+  halas_LAeq_dzien_max: {wartosc: 50, jedn: dB, typ: max, id: W-024, status: zweryfikowane, zrodlo: "rozp. MŚ t.j. Dz.U. 2014 poz. 112, tab. 1 lp. 2a (6:00–22:00, 8 h); POŚ art. 144 ust. 2"}
+  halas_LAeq_noc_max: {wartosc: 40, jedn: dB, typ: max, id: W-024, status: zweryfikowane, zrodlo: "rozp. MŚ t.j. Dz.U. 2014 poz. 112, tab. 1 lp. 2a (22:00–6:00, 1 h)"}
+  halas_noc_cel: {wartosc: 35, jedn: dB, typ: max, id: W-024, status: zalozenie, zrodlo: "R8 3.4 (zapas 5 dB)"}
+  pc_odl_granica_E_min: {wartosc: 6.0, jedn: m, typ: min, id: W-024, status: zalozenie, zrodlo: "R8 3.4"}
+  wylaczenie_gruntow_bez_oplat_max: {wartosc: 0.05, jedn: ha, typ: info, id: W-025, status: zweryfikowane, zrodlo: "u.o.g.r.l. art. 12a pkt 1"}
+
+mpzp:
+  udzial_pow_zabudowy_max: {wartosc: 0.30, jedn: "-", typ: max, id: W-030, status: program, zrodlo: "MPZP 3MN; upzp art. 2 pkt 35"}
+  pow_zabudowy_max: {wartosc: 480.0, jedn: m2, typ: max, id: W-030, status: program, zrodlo: "MPZP 3MN × 1600,00 m²"}
+  udzial_PBC_min: {wartosc: 0.50, jedn: "-", typ: min, id: W-031, status: program, zrodlo: "MPZP 3MN; upzp art. 2 pkt 28–29"}
+  PBC_min: {wartosc: 800.0, jedn: m2, typ: min, id: W-031, status: program, zrodlo: "MPZP 3MN × 1600,00 m²"}
+  PBC_dach_zielony_udzial: {wartosc: 0.5, jedn: "-", typ: rowne, id: W-031, status: zweryfikowane, zrodlo: "upzp art. 2 pkt 28; WT §3 pkt 22"}
+  PBC_dach_zielony_pow_min: {wartosc: 10.0, jedn: m2, typ: min, id: W-031, status: zweryfikowane, zrodlo: "upzp art. 2 pkt 28"}
+  intensywnosc_zakres: {wartosc: [0.05, 0.80], jedn: "-", typ: zakres, id: W-032, status: program, zrodlo: "MPZP 3MN; upzp art. 2 pkt 31–33 (nadziemna)"}
+  pow_kondygnacji_nadziemnych_zakres: {wartosc: [80.0, 1280.0], jedn: m2, typ: zakres, id: W-032, status: program, zrodlo: "MPZP 3MN × 1600,00 m²"}
+  wys_zabudowy_max: {wartosc: 11.0, jedn: m, typ: max, id: W-033, status: program, zrodlo: "MPZP 3MN; upzp art. 2 pkt 30"}
+  wys_zabudowy_rezerwa: {wartosc: 0.30, jedn: m, typ: min, id: W-033, status: zalozenie, zrodlo: "R8 3.2"}
+  kondygnacje_nadziemne_max: {wartosc: 3, jedn: "-", typ: max, id: W-034, status: program, zrodlo: "MPZP 3MN; warunek WT §213 pkt 1 lit. a"}
+  dach_plaski_spadek_max: {wartosc: 12, jedn: deg, typ: max, id: W-035, status: program, zrodlo: "MPZP 3MN"}
+  miejsca_postojowe_na_lokal_min: {wartosc: 2, jedn: szt, typ: min, id: W-036, status: program, zrodlo: "MPZP 3MN; WT §18 ust. 2"}
+  ogrodzenie_od_drogi_wys_max: {wartosc: 1.60, jedn: m, typ: max, id: W-038, status: program, zrodlo: "MPZP 3MN (ażurowe, bez prefabrykatów betonowych)"}
+  kolorystyka_elewacji: {wartosc: ["biele", "szarości", "grafit", "naturalne drewno", "beton architektoniczny"], jedn: "-", typ: info, id: W-037, status: program, zrodlo: "MPZP 3MN"}

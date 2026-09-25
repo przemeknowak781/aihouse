@@ -156,11 +156,15 @@ class ElevationBuilder:
         # oznaczenia materiałów
         rows = []
         mats = sorted(self.mats.items(), key=lambda kv: -kv[1]["area"])
-        nr = 0
+        numbering = self.opts.get("_mat_nr")
+        if numbering is None:
+            numbering = {}
         for code, e in mats:
             if e["area"] < float(self.opts.get("min_pow_materialu", 0.25)):
                 continue
-            nr += 1
+            if code not in numbering:
+                numbering[code] = len(numbering) + 1
+            nr = numbering[code]
             name = material_name(m, code)
             rows.append((nr, code, name, material_color(m, code), e["area"]))
             big = max((p for g in e["polys"] for p in polygons_of(g)), key=lambda p: p.area)

@@ -1,5 +1,6 @@
 {
- "title": "Korekta Inwestora: „S” z przesuniętych brył, garaż w parterze — panel koncepcji uruchomiony ponownie",
+ "nr": 13,
+ "title": "Generatory rysunków z modelu działają (test); rejestr wymagań skonsolidowany",
  "stages": [
   [
    "Analiza szkicu — interpretacja v2 („S” z brył, garaż)",
@@ -55,5 +56,19 @@
   "Rejestr wymagań scalony: identyfikatory W-xxx, podstawy prawne, sposób sprawdzenia (skrypty audytowe), spis wymaganych tomów wg RPB, lista danych niemożliwych do wytworzenia bez realnych źródeł.",
   "Koncepcja: W3 w opracowaniu (najdłuższy etap — iteracje rysunków kontrolnych); po nim ocena sędziów i synteza modelu.",
   "Uwaga: rysunki na kolażu to TEST generatorów na modelu roboczym — nie projekt ostateczny."
+ ],
+ "images": [
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/views/w1like/out1/PB-AR-07_elewacja_poludniowa.png",
+   "caption": "TEST: elewacja płd. 1:50 z modelu (HLR)"
+  },
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/views/w1like/out1/PB-AR-01_rzut_parteru.png",
+   "caption": "TEST: rzut parteru 1:50 z modelu"
+  },
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/views/w1like/out1/PB-AR-05_przekroj_a_a.png",
+   "caption": "TEST: przekrój A-A z modelu"
+  }
  ]
 }

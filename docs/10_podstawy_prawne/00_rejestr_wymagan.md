@@ -586,3 +586,49 @@ Każdy tom: strona tytułowa (§7 ust. 2), spis treści, **oświadczenie projekt
 | D-24 | **Pompa ciepła — zmiany regulacyjne**: zakaz F-gazów od 01.01.2027; rewizja ekoprojektu 813/2013 w toku. | PC na R290; dobór z aktualnych deklaracji w chwili zakupu; strefa bezpieczeństwa wg DTR wybranego modelu. | R6-68…R6-71, N-9 |
 | D-25 | **Aktualność mapy do celów projektowych** — brak terminu ustawowego (NSA II OSK 909/14 — źródło wtórne). | Zamówić mapę tuż przed finalizacją PZT (praktyka ≤ 12 miesięcy); przy zmianach w terenie aktualizacja. | R2 R-12; R8-34, R8-R7 |
 | D-26 | **Limity e-Budownictwa** (rozmiar i liczba plików, formaty podpisów) mogą być ostrzejsze niż 150 MB z RPB. | Pliki możliwie małe (wektor, bez rastrów poza mapą); sprawdzić przed złożeniem. | R2 R-13 |
+
+---
+
+## E. Elementy wymagające realnych danych — sposób oznaczania
+
+Działka, MPZP, dane gruntowe, sieci i uczestnicy procesu są **fikcyjne lub przykładowe** (brief §2–3, §7 pkt 4). Projekt jest kompletnym szablonem zgodnym z RPB, ale **nie może zostać złożony** bez poniższych danych. Nie wolno fabrykować danych realnych osób, numerów uprawnień, sygnatur decyzji, numerów zgłoszeń geodezyjnych, pieczęci ani podpisów. [R1 §4 pkt 7; R2 R-01; R8-R12]
+
+### E.1 Konwencja znaczników (stosowana w opisach, na rysunkach i w modelu)
+
+| Znacznik | Znaczenie | Gdzie |
+|---|---|---|
+| `[DO UZUPEŁNIENIA: <co>]` | pole bez danych; opis mówi, czego brakuje (np. `[DO UZUPEŁNIENIA: imię i nazwisko, specjalność, nr uprawnień]`) | strony tytułowe, metryki, oświadczenia, opisy |
+| `[DANE PRZYKŁADOWE – FIKCYJNE]` | wartość przyjęta dla przykładu (działka, MPZP, grunt, sieci) | nagłówek/stopka każdej strony opisu; pole „status dokumentu” tabliczki (ISO 7200): **„PRZYKŁAD – NIE DO ZŁOŻENIA”**; znak wodny na PZT |
+| `[DOKUMENT ZEWNĘTRZNY – do dołączenia: <nazwa, organ, podstawa>]` | strona zastępcza w miejscu dokumentu wydawanego przez organ lub gestora | ZL, pakiet wniosku |
+| `[ZAŁ]` / `[NZW]` | założenie projektowe / wartość niezweryfikowana (jak w sekcji B) | obliczenia, opisy |
+| `status:` w `model/*.yaml` (`fikcyjne`, `przykladowe`, `zalozenie`, `do_uzupelnienia`) | status danej wejściowej w jednym źródle prawdy | model |
+
+`AUD-RYS` wykazuje wszystkie znaczniki i blokuje oznaczenie wersji jako „do złożenia”, dopóki istnieje choć jedno pole `[DO UZUPEŁNIENIA]` lub `[DOKUMENT ZEWNĘTRZNY]`.
+
+### E.2 Lista elementów
+
+| # | Element | Kto dostarcza | Jak oznaczamy w projekcie |
+|---|---|---|---|
+| E-01 | **Mapa do celów projektowych** (klauzula urzędowa lub oświadczenie geodety; opis wg §33 rozp. Dz.U. 2022 poz. 1670; PL-2000 strefa 6, PL-EVRF2007-NH) | geodeta uprawniony | podkład PZT generowany z `model/dzialka.yaml` (rzędne narożników z briefu) opisany „MAPA PRZYKŁADOWA – FIKCYJNA, NIE JEST MAPĄ DO CELÓW PROJEKTOWYCH”; opis mapy z polami `[DO UZUPEŁNIENIA: identyfikator zgłoszenia prac, kierownik prac i nr uprawnień, data, klauzula/oświadczenie]` |
+| E-02 | **Wypis i wyrys z MPZP** (uchwała XII/123/2024 — fikcyjna) | gmina | ustalenia jako dane wejściowe `status: fikcyjne`; w opisie „MPZP przykładowy (fikcyjny)”; § „Definicje” wg W-040 |
+| E-03 | **Dane EGiB** (identyfikator działki, klasoużytki) | starostwo | dz. 123/4, obręb 0005 „Przykładowo” — `[DANE PRZYKŁADOWE – FIKCYJNE]`; klasy RIVb/RV — założenie (W-025), `[DO UZUPEŁNIENIA: wypis z EGiB]` |
+| E-04 | **Badania podłoża**: opinia geotechniczna, dokumentacja badań podłoża, projekt geotechniczny (kat. II) | geotechnik / geolog z uprawnieniami | opracowania oznaczone „PRZYKŁADOWE”; parametry z briefu jako założenia; obliczenia nośności i osiadań ilustracyjne; `[DO UZUPEŁNIENIA: wyniki CPT/DPL, parametry φ′, M₀, k_f, rzędna ZWG]` |
+| E-05 | **Warunki przyłączenia**: ENEA Operator (nN), gestor wod-kan, operator telekomunikacyjny | gestorzy sieci | w PZT „przyłącze wg warunków nr `[DO UZUPEŁNIENIA]`”; parametry (moc 27 kW/40 A, lokalizacja wodomierza, spadki, przykrycie) jako `[ZAŁ]` |
+| E-06 | **Decyzja zarządcy drogi o lokalizacji zjazdu** (u.d.p. art. 29) | zarządca drogi gminnej | strona zastępcza `[DOKUMENT ZEWNĘTRZNY – do dołączenia: decyzja zarządcy drogi gminnej o lokalizacji zjazdu, u.d.p. art. 29 ust. 3a]`; na PZT „zjazd wg zezwolenia nr `[DO UZUPEŁNIENIA]`”, szerokość 5,00 m `[ZAŁ]` |
+| E-07 | **Stanowisko / pozwolenie PGW Wody Polskie** (rozsączanie) | PGW WP (RZGW Poznań) | wariant bazowy bez skrzynek (W-145); przy skrzynkach `[DOKUMENT ZEWNĘTRZNY – …]` |
+| E-08 | **Decyzja o wyłączeniu gruntów z produkcji rolnej** (jeśli klasa I–IIIb) | starosta | „nie dotyczy przy założeniu RIVb/RV — do potwierdzenia w EGiB” |
+| E-09 | **Oświadczenie Inwestora z art. 102a PB** | Inwestor | szablon wg wzoru PIIB oznaczony „WZÓR”; dane i podpis `[DO UZUPEŁNIENIA]` (D-02) |
+| E-10 | **PB-1, PB-5, pełnomocnictwo** | Inwestor / pełnomocnik | formularze wypełnione wyłącznie danymi obiektu; dane osobowe i podpisy `[DO UZUPEŁNIENIA]` |
+| E-11 | **Dane Inwestora i projektantów**: imię, nazwisko, adres, specjalność, nr uprawnień, przynależność do izby, wpis e-CRUB, podpisy kwalifikowane/osobiste/zaufane | Inwestor, projektanci | pola `[DO UZUPEŁNIENIA]` na stronach tytułowych, w metrykach, oświadczeniach i informacji BIOZ; sprawdzający „nie dotyczy (art. 20 ust. 3 pkt 2 PB)”; kopie uprawnień: „dołączane tylko przy braku wpisu w e-CRUB” |
+| E-12 | **Oświadczenia projektantów** (art. 34 ust. 3d pkt 3, art. 33 ust. 2 pkt 10, art. 41 ust. 4a pkt 2 PB) | projektanci | treść wg przepisu gotowa; dane i podpis `[DO UZUPEŁNIENIA]` |
+| E-13 | **Dane wyrobów** (DWU/DTR/ETA): SCOP, COP c.w.u., L_WA i strefa R290 pompy ciepła; η_oc, SFP, SEC centrali; f_b bloków; łączniki termoizolacyjne (nośność, ψ/χ); U_w, g_n stolarki; moduły PV i falownik (certyfikat NC RfG); ciężar dachu zielonego | producenci (po wyborze wyrobów) | wartości przykładowe `[ZAŁ — do zastąpienia danymi wybranego wyrobu]`; EP liczyć ponownie po wyborze (D-07) |
+| E-14 | **Dane klimatyczne do EP** (BIP ministra, stacja Poznań), aktualne N_g, treść norm płatnych | ministerstwo, PKN, sieć detekcji wyładowań | w obliczeniach oznaczenie `[NZW]` przy wartościach niepotwierdzonych (D-19) |
+| E-15 | **Plan BIOZ, dziennik budowy, dane kierownika budowy** | kierownik budowy / Inwestor | poza projektem; informacja BIOZ wskazuje obowiązek sporządzenia planu |
+
+---
+
+## Podsumowanie
+
+* **207 wymagań projektowych** (W-001…W-320, 16 grup), **26 ryzyk** (D-01…D-26), **15 elementów wymagających realnych danych** (E-01…E-15), 10 korekt briefu (K-1…K-10) i 13 rozstrzygniętych sprzeczności między rejestrami (S-1…S-13).
+* Kluczowe wartości liczbowe w `wymagania.yaml` (klucze ASCII, pole `zrodlo`, `id` = W-xxx, `status`).
+* Przed wydaniem PT: przegląd wartości `[NZW]` (D-19) i ponowne sprawdzenie Dz.U. poz. > 1244 (nowe WT, D-01).

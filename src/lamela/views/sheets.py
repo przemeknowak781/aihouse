@@ -393,7 +393,11 @@ def build_sheet(ctx: ViewContext, spec: dict, idx: int, total: int):
     """Tworzy arkusz wg ``spec``. Zwraca (Sheet, info)."""
     m = ctx.model
     scale = float(spec.get("skala", ctx.cfg.get("skala", 50)))
-    vspecs = spec.get("widoki") or [spec]
+    vspecs = [dict(vs) for vs in (spec.get("widoki") or [spec])]
+    shared_nr = {}                      # wspólna numeracja materiałów elewacji na arkuszu
+    for vs in vspecs:
+        if vs.get("typ") == "elewacja":
+            vs["opcje"] = dict(vs.get("opcje") or {}, _mat_nr=shared_nr)
     views = [make_view(ctx, dict(vs, **({"skala": scale} if "skala" not in vs else {})),
                        float(vs.get("skala", scale))) for vs in vspecs]
     kinds = {v.kind for v in views}
@@ -427,9 +431,12 @@ def build_sheet(ctx: ViewContext, spec: dict, idx: int, total: int):
                 if r[1] not in [x[1] for x in el_rows]:
                     el_rows.append(r)
     if el_rows:
-        el_rows = [(i + 1,) + tuple(r[1:]) for i, r in enumerate(el_rows)] if len(views) > 1 else el_rows
+        el_rows = sorted(el_rows, key=lambda r: r[0])
         col.add("mats", _material_legend(el_rows, m))
-    notes = common_notes(ctx, kinds, spec.get("uwagi") or [])
+    extra = list(spec.get("uwagi") or [])
+    for v in views:
+        extra += [n for n in (getattr(v.result, "notes", None) or []) if n not in extra]
+    notes = common_notes(ctx, kinds, extra)
     col.add("notes", _notes(notes))
     col.add("scale", _scalebar(views[0].vp.scale))
     col_h = col.measure(TB_W)

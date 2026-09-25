@@ -517,6 +517,10 @@ class SectionBuilder:
     # ------------------------------------------------------------------ opis warstw
     def callouts(self):
         vp, k, m = self.vp, self.vp.k, self.m
+        if not self.opts.get("opisy_warstw", self.ctx.opt("opisy_warstw", True)):
+            return
+        self.max_callout = float(self.opts.get("max_kolizja_opisu", 60.0))
+        self.skipped = []
         done = set()
         # przegrody poziome
         horiz = []
@@ -543,6 +547,10 @@ class SectionBuilder:
                     continue
                 done.add(w.przegroda_kod)
                 self._place_wall(w, its, left)
+        if self.skipped:
+            self.res.notes.append("Opisy warstw pominięte na rysunku (brak miejsca w podziałce "
+                                  f"1:{int(vp.scale)}): {', '.join(self.skipped)} — układ warstw wg zestawienia "
+                                  "przegród w części opisowej / przekroju 1:50.")
 
     def _horiz_texts(self, typ, data):
         m = self.m
@@ -607,8 +615,8 @@ class SectionBuilder:
         def fn(cv, c):
             ps, pe, side, marks = c
             _callout(cv, ps, pe, texts, side, marks, title)
-        if cands:
-            self.placer.place(vp, fn, cands, penalty_step=0.05)
+        if not cands or self.placer.place(vp, fn, cands, penalty_step=0.05, max_cost=self.max_callout)[0] is None:
+            self.skipped.append(title.split(" — ")[0])
 
     def _place_wall(self, w, its, left):
         vp, k, m = self.vp, self.vp.k, self.m
@@ -643,8 +651,8 @@ class SectionBuilder:
         def fn(cv, c):
             ps, pe, side, marks = c
             _callout(cv, ps, pe, texts, side, marks, title)
-        if cands:
-            self.placer.place(vp, fn, cands, penalty_step=0.05)
+        if not cands or self.placer.place(vp, fn, cands, penalty_step=0.05, max_cost=self.max_callout)[0] is None:
+            self.skipped.append(w.przegroda_kod)
 
 
 def _callout(cv, ps, pe, texts, side, marks, title):
