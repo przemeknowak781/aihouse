@@ -37,7 +37,7 @@ def _grupy(D):
 
 
 def widok_zbrojenie_slupow(ctx, spec: dict, scale: float, opts: dict):
-    from .konstrukcja import KResult, blok_zestawienia, etykieta
+    from .konstrukcja import KResult, blok_legendy, blok_zestawienia, etykieta
     from ..obliczenia.konstrukcja.materialy import pole_preta
     D = KD.dane(ctx)
     nr_ark = spec.get("nr", "")
@@ -81,7 +81,7 @@ def widok_zbrojenie_slupow(ctx, spec: dict, scale: float, opts: dict):
         etykieta(vp, placer, (x0 + b / 2, y0 + 0.3 * L), (0, 1), f"Ø{fs[0]} co {fs[1] / 10:g} (przy końcach co {s_red / 10:g})",
                  p_s.nr, 2.5, offs=(b * 1000 / vp.scale + 4.0, 14.0))
         vp.text((x0, y0 + L + l0 + 6 * k), f"{ids} — słup ŻB {h * 100:.0f} × {b * 100:.0f} cm, L = {L:.2f} m (poz. {poz})".replace(".", ","),
-                3.0, 0, "left", "baseline", L_OPS, style="bold")
+                3.5, 0, "left", "baseline", L_OPS, style="bold")
         # przekrój A-A
         sx, sy = x0, y0 - 0.35 - 14 * k - h
         gs = box(sx, sy, sx + b, sy + h)
@@ -91,7 +91,7 @@ def widok_zbrojenie_slupow(ctx, spec: dict, scale: float, opts: dict):
         for xx in xs:
             for yb in (sy + c + fs[0] / 1000 + fi / 2000, sy + h - c - fs[0] / 1000 - fi / 2000):
                 vp.fill(Point(xx - x0 + sx, yb).buffer(max(fi / 2000, 0.45 * k), 16), L_ZBR, "#000000")
-        vp.text((sx + b / 2, sy - 6 * k), "A-A", 3.0, 0, "center", "baseline", L_OPS, style="bold")
+        vp.text((sx + b / 2, sy - 6 * k), "A-A", 3.5, 0, "center", "baseline", L_OPS, style="bold")
         placer.add(box(x0 - 2 * k, sy - 8 * k, x0 + b + 60 * k, y0 + L + l0 + 10 * k), "area", 1.0)
         As = n * pole_preta(fi)
         As_min = max(0.002 * h * b * 1e6, 4 * pole_preta(12))
@@ -100,6 +100,10 @@ def widok_zbrojenie_slupow(ctx, spec: dict, scale: float, opts: dict):
                          f"{n}Ø{fi}", jedn="mm²", As_max=0.04 * h * b * 1e6, arkusz=nr_ark,
                          uwagi="; ".join(KD.warunki_niespelnione(pz.wyniki)[:2]), wymuszone_ok=pz.ok)
         X += b + 75 * k
+    res.column_blocks.append(("legenda_k", blok_legendy([
+        ("pret", "pręt podłużny (widok), linia gruba — z zakładem/zakotwieniem poza obrysem słupa"),
+        ("poz", "numer pozycji pręta (zestawienie stali)"),
+        ("kreskowa", "przekrój A-A: strzemię (linia), pręty podłużne (punkty)")])))
     res.column_blocks.append(("zestawienie", blok_zestawienia(zest, "ZESTAWIENIE STALI — SŁUPY ŻB", [
         "Beton C30/37, XC1, c_nom = 30 mm; stal B500SP. Trzpienie betonowane po wymurowaniu ścian (strzępia muru, "
         "kotwy stalowe co 2 warstwy) lub w szalunku przed murowaniem; pręty podłużne ciągłe przez wieniec/belkę "

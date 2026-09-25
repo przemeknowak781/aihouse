@@ -975,7 +975,7 @@ def widok_fundamenty(ctx: ViewContext, spec: dict, scale: float, opts: dict):
             else:                               # słup ŻB (trzpień w murze) — kreskowanie żelbetu, opis
                 H.hatch(vp, g_, "ZELBET")
                 vp.geom(g_, L_OBR, pen="gruba")
-                vp.text((x + a / 2 + 0.05, y + b / 2 + 0.05), str(c["id"]), 2.0, 0, "left", "bottom", L_OPS)
+                vp.text((x + a / 2 + 0.05, y + b / 2 + 0.05), str(c["id"]), 2.5, 0, "left", "bottom", L_OPS)
     # płyta
     if P is not None:
         vp.geom(P, L_OBR, pen="gruba")

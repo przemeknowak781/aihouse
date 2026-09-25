@@ -248,7 +248,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 38.4,
+      "czas_s": 38.5,
       "png_kontrola": {
         "px": [
           4666,
@@ -499,7 +499,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 7.4,
+      "czas_s": 6.9,
       "png_kontrola": {
         "px": [
           6674,
@@ -715,7 +715,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 4.3,
+      "czas_s": 4.1,
       "png_kontrola": {
         "px": [
           4193,
@@ -1208,7 +1208,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 11.1,
+      "czas_s": 11.2,
       "png_kontrola": {
         "px": [
           3485,
@@ -1454,7 +1454,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 6.6,
+      "czas_s": 6.3,
       "png_kontrola": {
         "px": [
           4193,
@@ -1717,7 +1717,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 5.3,
+      "czas_s": 5.4,
       "png_kontrola": {
         "px": [
           7796,
@@ -1933,7 +1933,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 4.3,
+      "czas_s": 4.5,
       "png_kontrola": {
         "px": [
           4193,
@@ -2196,7 +2196,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 5.8,
+      "czas_s": 5.5,
       "png_kontrola": {
         "px": [
           7796,
@@ -2441,7 +2441,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.4,
+      "czas_s": 2.3,
       "png_kontrola": {
         "px": [
           8327,
@@ -2710,5 +2710,5 @@
     },
     "wypelnienie_wazone": 0.808
   },
-  "czas_s": 111.2
+  "czas_s": 110.2
 }
