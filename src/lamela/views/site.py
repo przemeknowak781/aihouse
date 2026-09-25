@@ -302,3 +302,151 @@ def _labels_project(lab, s, W, used, detail=False):
         if not parts or parts[0].is_empty:
             continue
         lab.along(parts[0], sx.lit, h, "Z-SIECI-PROJ", sx.kolor, n=1, max_cost=3.0)
+
+
+def _spots_map(lab, s, win, used, every=9.0):
+    """Pikiety terenu istniejącego na podkładzie (wybór co ≥ ``every`` m; narożniki działki w pierwszej kolejności)."""
+    P = s.pkt_ist
+    if not len(P):
+        return
+    corners = s.corners
+    pri = [0 if min(np.hypot(*(p[:2] - q)) for q in corners) < 0.05 else 1 for p in P]
+    order = sorted(range(len(P)), key=lambda i: (pri[i], P[i, 1], P[i, 0]))
+    chosen = []
+    for i in order:
+        p = P[i]
+        if not win.buffer(-2.0 * lab.k).contains(Point(p[:2])) or s.footprint.buffer(0.5).contains(Point(p[:2])):
+            continue
+        if any(np.hypot(*(p[:2] - q[:2])) < every - 1e-6 for q in chosen):
+            continue
+        chosen.append(p)
+    for p in chosen:
+        pos, _c = D.spot(lab, p[:2], p[2], projected=False, max_cost=3.0)
+        if pos is not None:
+            used.add("spot_ist")
+
+
+def _ok(v):
+    return "TAK" if v else "NIE"
+
+
+def _block_wskazniki(s, W):
+    L = s.mpzp or {}
+    A = W["A"]
+    rows = [["Powierzchnia działki nr " + s.nr, m2(A), "—", ""]]
+    mz = L.get("max_udzial_zabudowy")
+    rows.append(["Pow. zabudowy (rzut ścian zewn.; upzp 2 pkt 35)", m2(W["zab"]),
+                 f"≤ {m2(mz * A)}" if mz else "—", _ok(W["udzial_zab"] <= mz) if mz else ""])
+    rows.append(["Udział powierzchni zabudowy", fmt.percent(W["udzial_zab"] * 100, 2),
+                 f"≤ {fmt.percent(mz * 100, 0)}" if mz else "—", _ok(W["udzial_zab"] <= mz) if mz else ""])
+    rows.append(["  wariant kontrolny z płytami/okapami", f"{m2(W['zab_pl'])} ({fmt.percent(W['zab_pl'] / A * 100, 2)})",
+                 "informacyjnie", _ok(W["zab_pl"] / A <= mz) if mz else ""])
+    rows.append(["Drogi, dojścia, place (RPB § 14 pkt 4 b)", m2(W["utw"]), "—", ""])
+    rows.append(["Tarasy naziemne i podesty", m2(W["tarasy"]), "—", ""])
+    if W["opaska"]:
+        rows.append(["Opaska żwirowa", m2(W["opaska"]), "—", ""])
+    mp = L.get("min_udzial_pbc")
+    rows.append(["PBC — teren (upzp art. 2 pkt 28)", f"{m2(W['pbc'])} ({fmt.percent(W['pbc_udzial'] * 100, 2)})",
+                 f"≥ {m2(mp * A)} ({fmt.percent(mp * 100, 0)})" if mp else "—",
+                 _ok(W["pbc_udzial"] >= mp) if mp else ""])
+    if W["pbc_dach"]:
+        rows.append([f"  + 50 % dachu zielonego {', '.join(W['dachy_ziel'])} (rezerwa)",
+                     f"{m2(W['pbc'] + W['pbc_dach'])} ({fmt.percent(W['pbc_z_dachem'] * 100, 2)})", "informacyjnie", ""])
+    it = L.get("intensywnosc")
+    kk = "+".join(W["kond"])
+    rows.append([f"Suma pow. kondygnacji nadziemnych ({kk})", m2(W["suma_kond"]),
+                 f"{m2(it[0] * A)}–{m2(it[1] * A)}" if it else "—", ""])
+    rows.append(["Nadziemna intensywność zabudowy", fmt.num(W["intens"], 3),
+                 f"{fmt.num(it[0], 2)}–{fmt.num(it[1], 2)}" if it else "—",
+                 _ok(it[0] <= W["intens"] <= it[1]) if it else ""])
+    mh = L.get("max_wysokosc")
+    if W["wys_zab"] is not None:
+        rows.append(["Wysokość zabudowy (upzp art. 2 pkt 30)", f"{mm(W['wys_zab'])} m", f"≤ {mm(mh)} m" if mh else "—",
+                     _ok(W["wys_zab"] <= mh) if mh else ""])
+    if W["wt"]:
+        rows.append(["Wysokość budynku wg WT § 6", f"{mm(W['wt']['H'])} m", "N: ≤ 12,00 m", _ok(W["wt"]["H"] <= 12.0)])
+    mk = L.get("max_kondygnacji")
+    rows.append(["Kondygnacje nadziemne", str(W["n_kond"]), f"≤ {mk}" if mk else "—",
+                 _ok(W["n_kond"] <= mk) if mk else ""])
+    mpk = L.get("min_miejsc_postojowych")
+    nm = W["miejsca"]["garaz"] + W["miejsca"]["zewn"]
+    rows.append(["Miejsca postojowe (garaż + zewn.)", f"{W['miejsca']['garaz']} + {W['miejsca']['zewn']}",
+                 f"≥ {mpk}" if mpk else "—", _ok(nm >= mpk) if mpk else ""])
+    if W["dach_spadek_deg"] is not None:
+        rows.append(["Dach — kąt nachylenia", f"{fmt.num(W['dach_spadek_deg'], 1)}° (płaski)",
+                     str(L.get("dach") or "—"), _ok(W["dach_spadek_deg"] <= 12.0) if L.get("dach") else ""])
+    spr = linia_zabudowy_spr(s)
+    if spr:
+        prz = ", ".join(nm_ for nm_, _v in spr["przekroczenia"]) or "brak"
+        rows.append(["Linia zabudowy — lico ścian za linią", f"{mm(spr['d'])} m", "nie przekraczać",
+                     _ok(spr["ok"])])
+        rows.append(["  elementy wysunięte poza linię", prz, str(L.get("wysuniecia") or "—"), ""])
+    zr = {"model": "dzialka.yaml: dzialka.mpzp",
+          "konfiguracja": "konfiguracja arkuszy (brief § 3) — BRAK W MODELU [DO UZUPEŁNIENIA]",
+          "brak": "BRAK [DO UZUPEŁNIENIA]"}[s.mpzp_zrodlo]
+    notes = [f"MPZP: {s.mpzp_txt or '—'}. Limity: {zr}.",
+             "Liczone z geometrii modelu (shapely): PBC bez nawierzchni ażurowych, opaski i fundamentu PC; dach "
+             "zielony (≥ 10 m²) liczony w 50 % tylko jako rezerwa.",
+             f"Wysokość zabudowy: najwyższy punkt {mm(W['top_abs'] or 0)} m n.p.m. ({W['top_src']}) minus średnia "
+             "z najniższej i najwyższej rzędnej terenu na obwodzie ścian — przyjęto większą z wartości dla terenu "
+             "istniejącego i projektowanego." if W["top_abs"] else "",
+             (f"WT § 6: od terenu projektowanego przy wejściu {W['wt']['wejscie']} ({mm(W['wt']['H_ent'])}) do "
+              f"wierzchu stropodachu {W['wt']['dach']} (bez attyki)." if W["wt"] and "H_ent" in W["wt"] else "")]
+    return D.table_block("ZESTAWIENIE POWIERZCHNI I WSKAŹNIKÓW (RPB § 14 pkt 4; MPZP)",
+                         [("Wskaźnik / element", 74), ("Projekt", 42), ("MPZP / wymaganie", 44), ("Zgodność", 20)],
+                         rows, align=["left", "right", "left", "center"], notes=[n for n in notes if n])
+
+
+def _block_odleglosci(s):
+    rows = []
+    for r in odleglosci(s):
+        gr = f"{r['strona']} ({r['sasiad']})" if r["sasiad"] else r["strona"]
+        el = r["el"] if r["typ"] != "wys" else f"{r['el']} (okap/płyta/taras)"
+        if r["droga"]:
+            wym, ok = "nie dot. (ust. 10)", "—"
+        else:
+            wym, ok = f"≥ {mm(r['wym'])}", _ok(r["ok"])
+        rows.append([gr, el, mm(r["d"]), wym, ok])
+    return D.table_block("ODLEGŁOŚCI OD GRANIC DZIAŁKI (WT § 12)",
+                         [("Granica", 26), ("Element (każda płaszczyzna ściany osobno)", 72), ("Odl. [m]", 20),
+                          ("Wymagana [m]", 38), ("Zgodność", 20)], rows,
+                         align=["left", "left", "right", "left", "center"],
+                         notes=["WT § 12 ust. 1: 4,00 m — ściana z oknami/drzwiami, 3,00 m — bez otworów; ust. 6: 1,50 m "
+                                "— okap, gzyms, taras, daszek; ust. 10: od działki drogowej nie dotyczy. Odległość "
+                                "mierzona w poziomie w miejscu najmniejszego oddalenia (§ 9). WT stosowane na podstawie "
+                                "art. 102a PB (oświadczenie Inwestora)."])
+
+
+def _block_oo(s):
+    oo = (s.raw.get("obszar_oddzialywania") or {}).get("opis") if isinstance(s.raw.get("obszar_oddzialywania"),
+                                                                            dict) else None
+    lines = [oo or f"Opis obszaru oddziaływania — {D_TODO}.",
+             "Podstawa ustalenia (RPB § 18 pkt 1): WT § 12, 13, 19, 23, 28–29, 60, 271 (art. 102a PB); u.d.p. "
+             "art. 43; POŚ art. 144 ust. 2 i rozp. MŚ w sprawie dopuszczalnych poziomów hałasu (Dz.U. 2014 poz. 112); "
+             "PW art. 234; ustalenia MPZP."]
+    return D.text_block_col("OBSZAR ODDZIAŁYWANIA OBIEKTU (PB art. 3 pkt 20; RPB § 14 pkt 8)", lines)
+
+
+D_TODO = "[DO UZUPEŁNIENIA]"
+
+
+def _notes_plan(s, W, zj_todo, lab):
+    out = ["Układ współrzędnych: lokalny układ działki (x → wschód, y → północ, początek w narożniku A); w projekcie "
+           "rzeczywistym — układ PL-2000 strefa 6 z mapy do celów projektowych.",
+           "Obrys budynku — lico zewnętrzne ścian parteru na wys. 1,0 m nad terenem; wspornik bryły A (II piętro) — "
+           "obrys wyższych kondygnacji; płyty wspornikowe, okapy i daszek — przewieszenia (PN-B-01027 poz. 1.6).",
+           "Wody opadowe zagospodarowane w granicach działki: rury spustowe → kolektory KD → zbiornik retencyjny "
+           "szczelny → przelew do niecki chłonnej; odwodnienie liniowe przed bramą — brak spływu na drogę "
+           "(MPZP; u.d.p. art. 39 ust. 1 pkt 9; WT § 28–29).",
+           "Wymiary i rzędne szczegółowe — rys. PZT-02; uzbrojenie i koordynacja sieci — rys. PZT-03."]
+    if zj_todo:
+        out.append("Zjazd z drogi 1KDD pokazano jako przedłużenie bramy do krawędzi jezdni — geometria zastępcza "
+                   f"{D_TODO}: szerokość, skosy/łuki, nawierzchnia i przepust wg zezwolenia zarządcy drogi "
+                   "(u.d.p. art. 29 ust. 3a).")
+    if s.braki:
+        out.append(f"Braki danych modelu ({len(s.braki)} poz.) oznaczono {D_TODO}; wykaz: projekt/02_PZT/BRAKI_DANYCH.md.")
+    return out
+
+
+# ================================================================================================ rejestracja
+register_view("pzt_plan", view_plan, "plan zagospodarowania", qa="PZT")

@@ -164,12 +164,13 @@ class ViewOut:
 # ``north`` (bool — róża kierunków), ``hatch_mats`` (jak w rzutach), ``rooms`` (tabela pomieszczeń),
 # ``units_note`` (str — zastępuje domyślną uwagę „Wymiary w cm…”, np. dla PZT „wymiary i odległości w m”).
 # ``rodzaj`` — tekst pola „rodzaj rysunku” w tabliczce (np. „plan zagospodarowania”, „rzut instalacji”, „detal”).
+# ``qa`` — rodzaj kontroli ``plot.qa`` (np. „PZT”: podziałki do 1:500, pismo ≥ 2,5 mm); None — ze stadium tabliczki.
 VIEW_TYPES: dict = {}
 VIEW_PLUGINS = ("site", "instalacje", "konstrukcja", "detale")   # moduły lamela.views ładowane przy nieznanym typie
 
 
-def register_view(typ: str, fn, rodzaj: str = "rysunek"):
-    VIEW_TYPES[typ] = dict(fn=fn, rodzaj=rodzaj)
+def register_view(typ: str, fn, rodzaj: str = "rysunek", qa: str | None = None):
+    VIEW_TYPES[typ] = dict(fn=fn, rodzaj=rodzaj, qa=qa)
 
 
 def _load_plugins():
@@ -348,7 +349,7 @@ def _north(model):
 
 def _scalebar(scale):
     def fn(sh, x, y, w):
-        L = {20: 2.0, 25: 2.0, 50: 5.0, 100: 10.0}.get(int(scale), 5.0)
+        L = {20: 2.0, 25: 2.0, 50: 5.0, 100: 10.0, 200: 20.0, 250: 25.0, 500: 50.0}.get(int(scale), 5.0)
         r = scale_bar(sh, (x + 4.0, y - 8.0), scale, L)
         return r[1] - 5.0
     return fn
@@ -531,7 +532,8 @@ def build_sheet(ctx: ViewContext, spec: dict, idx: int, total: int):
     col.draw(sh, fx1 - TB_W, fy1 - 3.0, TB_W)
     plot.add_control_marks(sh)
     info = dict(nr=spec["nr"], tytul=spec.get("tytul"), format=f, typ=[v.kind for v in views],
-                skala=scale_txt, widoki=[v.title for v in views])
+                skala=scale_txt, widoki=[v.title for v in views],
+                qa_kind=next((VIEW_TYPES[v.kind].get("qa") for v in views if v.kind in VIEW_TYPES), None))
     for v in views:
         if v.kind == "przekroj" or v.kind == "elewacja":
             info["wysokosc_budynku"] = getattr(v.result, "height", None)
@@ -592,7 +594,7 @@ def generate(budynek, dzialka=None, arkusze=None, wyposazenie=None, out_dir="bui
             continue
         base = out / f"{spec['nr']}_{slug(spec.get('tytul') or info['widoki'][0])}"
         files = sh.save(base, formats=formats, dpi=dpi)
-        qa = plot.qa(sh)
+        qa = plot.qa(sh, kind=info.get("qa_kind"))
         info.update(pliki=files, qa=qa, czas_s=round(time.time() - t1, 1))
         if "png" in files:
             info["png_kontrola"] = plot.check_png(files["png"], sh, min_dpi=min(150, dpi))
@@ -609,7 +611,8 @@ def generate(budynek, dzialka=None, arkusze=None, wyposazenie=None, out_dir="bui
                             tytul="SPIS RYSUNKÓW", skala="—", nr_rysunku=f"{w.get('prefiks_nr', 'PB-AR')}-00",
                             data=str(w["data"]), rodzaj="spis", arkusz="—")
         tp = out / str(w.get("plik_tomu", "tom_widoki.pdf"))
-        plot.volume(sheets, tp, "Tom rysunków architektury — widoki z modelu", toc=True, toc_tb=toc_tb)
+        plot.volume(sheets, tp, str(w.get("tytul_tomu") or "Tom rysunków architektury — widoki z modelu"), toc=True,
+                    toc_tb=toc_tb)
         report["tom"] = str(tp)
     report["problemy"] = list(ctx.problems)
     report["czas_s"] = round(time.time() - t0, 1)

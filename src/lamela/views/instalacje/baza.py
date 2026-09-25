@@ -54,11 +54,76 @@ class Rysunek:
                 out.append(r.polygon)
         return out
 
-    def siatka(self, extra_pts=(), **kw):
+    def siatka(self, extra_pts=(), nieogrzewane: float = 0.0, **kw):
         pts = np.array([p for p in extra_pts] or [[0, 0]], float)
         eb = (pts[:, 0].min(), pts[:, 1].min(), pts[:, 0].max(), pts[:, 1].max()) if len(extra_pts) else None
         self.g = siatka_kondygnacji(self.pod, eb, szachty=self.szachty(), **kw)
+        if nieogrzewane and not self.dach:
+            for r in self.m.pomieszczenia(self.kid):
+                if r.polygon is not None and (r.raw.get("ogrzewane") is False or r.temp is None):
+                    self.g.add(r.polygon.buffer(-0.02), add=nieogrzewane)
         return self.g
+
+    # --------------------------------------------------------------------------------------------- dane modelu
+    def obroty(self) -> dict:
+        """(kond, x, y) → obrót przyboru/urządzenia (kierunek od ściany do pomieszczenia)."""
+        out = {}
+        d = self.W.dane
+        for e in list(d.wyposazenie) + list(d.inst.get("przybory_dodatkowe") or []):
+            if e.get("xy"):
+                out[(str(e.get("kond", "P0")), round(float(e["xy"][0]), 3), round(float(e["xy"][1]), 3))] = \
+                    float(e.get("obrot", 90.0))
+        return out
+
+    def obrot(self, kond, xy, default=90.0):
+        if not hasattr(self, "_rot"):
+            self._rot = self.obroty()
+        return self._rot.get((str(kond), round(float(xy[0]), 3), round(float(xy[1]), 3)), default)
+
+    def linie_dzialki(self, branza: str) -> list:
+        """Projektowane uzbrojenie z ``dzialka.yaml`` (branża woda|kan_sanit|kan_deszcz|en|tele) w układzie budynku."""
+        dz = self.W.dane.dzialka or {}
+        D = dz.get("transform")
+        out = []
+        if D is None:
+            return out
+        for u in (dz.get("uzbrojenie") or {}).get("projektowane", []) or []:
+            if u.get("branza") == branza and u.get("linia"):
+                out.append((np.array(D.ring_bud(u["linia"]), float), u))
+        return out
+
+    def sciany_union(self, kids):
+        key = ("sciany",) + tuple(kids)
+        c = getattr(self.ctx, "_inst_geom", None)
+        if c is None:
+            c = self.ctx._inst_geom = {}
+        if key not in c:
+            c[key] = unary_union([w.polygon for kid in kids for w in self.m.sciany(kid) if w.polygon is not None])
+        return c[key]
+
+    def pion_punkty(self, pid, xy, kids, n=3, step=0.12, avoid=()):
+        """Położenia n przewodów pionu obok punktu ``xy`` (np. Wz/Wc/Cyrk obok pionu kanalizacyjnego) — poza
+        ścianami wszystkich kondygnacji pionu, ≥ 0,12 m od innych pionów; wynik wspólny dla wszystkich arkuszy."""
+        c = getattr(self.ctx, "_inst_piony", None)
+        if c is None:
+            c = self.ctx._inst_piony = {}
+        key = (pid, n)
+        if key in c:
+            return c[key]
+        walls = self.sciany_union(kids).buffer(0.02)
+        xy = np.asarray(xy, float)
+        best = None
+        for d in ((0, 1), (0, -1), (1, 0), (-1, 0)):
+            d = np.array(d, float)
+            t = perp(d)
+            for dist in (0.16, 0.22, 0.30):
+                pts = [xy + d * dist + t * (i - (n - 1) / 2) * step for i in range(n)]
+                sc = sum(10.0 for q in pts if walls.contains(Point(q))) + dist
+                sc += sum(5.0 for q in pts for a in avoid if float(np.hypot(*(q - np.asarray(a)))) < 0.11)
+                if best is None or sc < best[0]:
+                    best = (sc, pts)
+        c[key] = best[1]
+        return best[1]
 
     # --------------------------------------------------------------------------------------------- pomocnicze
     def brak(self, element, opis, fmt_=""):

@@ -25,7 +25,16 @@ from . import geometria as G
 from . import wezly_dod as D
 
 TOL_Z = 0.35       # [m] tolerancja rzędnych (wierzch płyty ↔ poziom kondygnacji)
+# Konwencja docelowa modelu (audyt A2 poz. K-1, koordynator 25.09.2026): płyty stropów/dachów kończą się na licu
+# warstwy konstrukcyjnej ściany, płyty wspornikowe zaczynają się od lica konstrukcji z łącznikiem w strefie
+# ocieplenia, a ich WIERZCH jest zrównany z wierzchem stropu. True — wierzch wspornika = wierzch płyty (grubość
+# wspornika z modelu, nadwyżka w dół); False — różnica rzędnych wierzchów wg modelu.
+WIERZCH_WSPORNIKA_ZROWNANY = True
 TOL_XY = 0.45      # [m] odległość osi ściany od krawędzi płyty (oś — lico zewn. ≈ 0,30 m)
+
+
+def _dy(wsp: dict, z: float) -> float:
+    return 0.0 if WIERZCH_WSPORNIKA_ZROWNANY else round(float(wsp["wierzch"]) - z, 4)
 
 
 def _typ_p(model, kod):
@@ -150,7 +159,7 @@ def wezel_plyty_wspornikowej(model, e: dict):
     sc_dol = _max(sciany_wzdluz(model, P, k_dol))
     sc_gora = _max(sciany_wzdluz(model, P, k_gora))
     lac = G.LACZNIK_PRZYKLAD
-    kw = dict(t_wsp=float(wsp["grubosc"]), dy_wsp=round(float(wsp["wierzch"]) - z, 4),
+    kw = dict(t_wsp=float(wsp["grubosc"]), dy_wsp=_dy(wsp, z),
               mat_wsp=_mat(model, wsp.get("mat")), wysieg=wysieg, lacznik=lac, id=str(e["id"]), nazwa=e.get("nazwa"))
     if rodz == "dach":
         att = plyta.get("attyka") or {}
@@ -167,7 +176,9 @@ def wezel_plyty_wspornikowej(model, e: dict):
                                     sufit=_sufit(model, plyta.get("sufit")), pod="wewn" if sc_dol else "zewn", **kw)
         opis = f"{wsp['id']} przy stropie {plyta['id']}, ściana dolna {sc_dol}, górna {sc_gora}"
     w.dane["geometria z modelu"] = (f"{opis}; wysięg zastępczy A/L = {wysieg} m; styk z obrysem {L_styk:.2f} m; "
-                                    f"łącznik: dane przykładowe (ETA do uzupełnienia)")
+                                    f"łącznik: dane przykładowe (ETA do uzupełnienia)"
+                                    + ("; wierzch wspornika zrównany z wierzchem płyty (konwencja audytu A2 K-1) [ZAŁ]"
+                                       if WIERZCH_WSPORNIKA_ZROWNANY else ""))
     return [(w, L_styk)]
 
 
@@ -240,7 +251,7 @@ def wezly_stropu_zewn(model, e: dict):
             ws = k["wsp"]
             kw = {}
             if ws is not None:
-                kw = dict(t_wsp=float(ws["grubosc"]), dy_wsp=round(float(ws["wierzch"]) - z, 4),
+                kw = dict(t_wsp=float(ws["grubosc"]), dy_wsp=_dy(ws, z),
                           mat_wsp=_mat(model, ws.get("mat")), wysieg=1.0, lacznik=G.LACZNIK_PRZYKLAD)
             else:
                 kw = dict(wysieg=0.0)

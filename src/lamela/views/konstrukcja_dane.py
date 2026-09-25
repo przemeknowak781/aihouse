@@ -398,24 +398,14 @@ def _warstwa_z_wyniku(zg, klucz: str) -> Warstwa | None:
                    float(zg.As_req), float(zg.As_min), float(zg.As_prov), float(getattr(zg, "M_Ed", 0.0)))
 
 
-def _obszar_pola(g, k: int, poly):
-    """Obszar pola k grupy płyt = suma elementów skończonych MES przypisanych do komórki (``g.cell_of``) o środkach
-    w obrysie elementu płyty (prostokąt komórki biblioteki bywa obwiednią nieprostokątnego wspornika)."""
-    from shapely.geometry import Point, box
-    from shapely.ops import unary_union
-    import numpy as np
-    fe = g.fe
-    cell_of = getattr(g, "cell_of", None)
-    if fe is None or cell_of is None:
+def _obszar_pola(c: dict, poly):
+    """Obszar pola = scalone komórki siatki podpór biblioteki (``c['rect']`` — wielobok) ∩ obrys elementu płyty.
+    Pasy węższe niż 0,4 m (np. płyta poza osią ściany zewnętrznej) nie są osobnymi polami — obejmują je pręty pól
+    przyległych przedłużone do krawędzi."""
+    reg = c["rect"].intersection(poly)
+    if reg.is_empty or reg.area < 0.05 or reg.buffer(-0.2).is_empty:
         return None
-    idx = np.nonzero(np.asarray(cell_of) == k)[0]
-    P = poly.buffer(1e-6)
-    bs = [box(fe.el_c[i][0] - fe.el_ab[i][0] / 2, fe.el_c[i][1] - fe.el_ab[i][1] / 2,
-              fe.el_c[i][0] + fe.el_ab[i][0] / 2, fe.el_c[i][1] + fe.el_ab[i][1] / 2)
-          for i in idx if P.contains(Point(*fe.el_c[i]))]
-    if not bs:
-        return None
-    return unary_union(bs).buffer(1e-4, join_style=2).buffer(-1e-4, join_style=2).intersection(poly)
+    return reg
 
 
 def _plyty(an, D):
@@ -447,9 +437,9 @@ def _plyty(an, D):
                 c = kom.get(sp.ident)
                 if c is None:
                     continue
-                reg = _obszar_pola(g, list(kom).index(c["id"]), e.poly_full)
-                if reg is None or reg.area < 0.05:
-                    continue                          # pole bez elementów MES w obrysie tego elementu
+                reg = _obszar_pola(c, e.poly_full)
+                if reg is None:
+                    continue                          # pas krawędziowy — pokryty prętami pól przyległych
                 pol = PolePl(e.id, c["id"], (c["x0"], c["y0"], c["x1"], c["y1"]), reg,
                              float(c["lx"]), float(c["ly"]), str(c.get("brzegi", "SSSS")))
                 for zg in sp.wyniki:
@@ -1024,13 +1014,15 @@ def prety_poziomu(D: DaneKonstr, lv: Poziom) -> dict:
     for el in lv.elementy:
         c = el.c_nom / 1000.0
         Pin = el.poly.buffer(-c, join_style=2)
+        reszta = el.poly.difference(unary_union([p.poly for p in el.pola]).buffer(0.01)).buffer(0.01)
         for pol in el.pola:
             for kier in ("x", "y"):
                 w = pol.warstwy.get("dol_" + kier)
                 if w is None or pol.poly.is_empty:
                     continue
                 ext = max(10 * w.fi / 1000.0, 0.10)
-                reg = _rozciagnij(pol.poly, kier, ext).intersection(Pin)
+                reg = _rozciagnij(pol.poly, kier, ext).union(_rozciagnij(pol.poly, kier, 0.6).intersection(reszta))
+                reg = reg.intersection(Pin)
                 bx = pol.poly.intersection(Pin).bounds
                 if not bx or len(bx) < 4:
                     continue
@@ -1099,9 +1091,31 @@ def prety_poziomu(D: DaneKonstr, lv: Poziom) -> dict:
     return D.cache[key]
 
 
+def odcinki_proste(g) -> list:
+    """Odcinki proste geometrii liniowej (łamane rozbite w wierzchołkach, odcinki współliniowe scalone)."""
+    from shapely.geometry import LineString
+    out = []
+    for gg in getattr(g, "geoms", [g]):
+        if gg.is_empty or gg.geom_type not in ("LineString", "LinearRing"):
+            continue
+        cs = list(gg.coords)
+        cur = [cs[0]]
+        for a, b in zip(cs[:-1], cs[1:]):
+            if len(cur) >= 2:
+                (x0, y0), (x1, y1) = cur[-2], cur[-1]
+                cr = (x1 - x0) * (b[1] - a[1]) - (y1 - y0) * (b[0] - a[0])
+                if abs(cr) > 1e-9:
+                    out.append(LineString([cur[0], cur[-1]]))
+                    cur = [a]
+            cur.append(b)
+        if len(cur) >= 2:
+            out.append(LineString([cur[0], cur[-1]]))
+    return [o for o in out if o.length > 1e-6]
+
+
 def _gora_wsporniki(D, lv, zest, gora, Ping, h_lv, cmax):
     """Zbrojenie górne płyt wspornikowych: od krawędzi swobodnej (odgięcie) przez linię zamocowania do przęsła
-    zaplecza na długość max(l_c; l_bd) za najbliższą podporą (ściana/belka ≤ 0,6 m od zamocowania)."""
+    zaplecza na długość max(l_c; l_bd) za najbliższą podporą (ściana/belka ≤ 1,6 m od zamocowania — wspornik wielostopniowy, np. ST2Z + PL-2)."""
     from shapely.geometry import LineString, Point, box
     from shapely.ops import unary_union
     for el in [e for e in lv.elementy if e.typ == "wspornik"]:
@@ -1109,7 +1123,7 @@ def _gora_wsporniki(D, lv, zest, gora, Ping, h_lv, cmax):
         if inne.is_empty:
             continue
         root = el.poly.boundary.intersection(inne.buffer(0.02))
-        segs = [g for g in getattr(root, "geoms", [root]) if g.geom_type == "LineString" and g.length > 0.3]
+        segs = [g for g in odcinki_proste(root) if g.length > 0.3]
         for sg in segs:
             (xa, ya), (xb, yb) = sg.coords[0], sg.coords[-1]
             if abs(ya - yb) < 1e-3:
@@ -1139,8 +1153,8 @@ def _gora_wsporniki(D, lv, zest, gora, Ping, h_lv, cmax):
             l_c = (ab[3] - ab[1]) if kier == "y" else (ab[2] - ab[0])
             t0, t1 = (ab[0], ab[2]) if kier == "y" else (ab[1], ab[3])
             podp = [ln for _, ln, _r in lv.podpory
-                    if (kier == "y" and abs(ln.coords[0][1] - ln.coords[-1][1]) < 1e-3 and 0 < -strona * (ln.coords[0][1] - r) < 0.6)
-                    or (kier == "x" and abs(ln.coords[0][0] - ln.coords[-1][0]) < 1e-3 and 0 < -strona * (ln.coords[0][0] - r) < 0.6)]
+                    if (kier == "y" and abs(ln.coords[0][1] - ln.coords[-1][1]) < 1e-3 and 0 < -strona * (ln.coords[0][1] - r) < 1.6)
+                    or (kier == "x" and abs(ln.coords[0][0] - ln.coords[-1][0]) < 1e-3 and 0 < -strona * (ln.coords[0][0] - r) < 1.6)]
             if not podp:
                 continue                                        # styk bez podpory przy zamocowaniu — nie wspornik
             d_s = min(abs((ln.coords[0][1] if kier == "y" else ln.coords[0][0]) - r) for ln in podp)

@@ -22,17 +22,6 @@ MED = {"ZW": "WZ", "CWU": "WC", "CYRK": "CYRK"}
 SKROT = {"ZW": "Wz", "CWU": "Wc", "CYRK": "Cyrk"}
 
 
-def obroty(W) -> dict:
-    """(kond, x, y) → obrót przyboru (kierunek od ściany do pomieszczenia) z wyposażenia / przyborów dodatkowych."""
-    out = {}
-    src = list(W.dane.wyposazenie) + list(W.dane.inst.get("przybory_dodatkowe") or [])
-    for e in src:
-        if e.get("xy"):
-            out[(str(e.get("kond", "P0")), round(float(e["xy"][0]), 3), round(float(e["xy"][1]), 3))] = \
-                float(e.get("obrot", 90.0))
-    return out
-
-
 def punkt_przyboru(p, rot: float, medium: str) -> np.ndarray:
     """Punkt podłączenia: 0,08 m od lica ściany; c.w.u. po lewej stronie armatury (WT §120 ust. 5), woda zimna
     po prawej (±0,07 m wzdłuż ściany)."""
@@ -51,12 +40,18 @@ class RysW(Rysunek):
         W, vp = self.W, self.vp
         wo = W.woda
         self.podklad(meble=False)
-        self.rot = obroty(W)
         k0 = self.kids[0]
         wz = wo.wezly
         on = {n for n, v in wz.items() if v[3] == self.kid}
         pts = [v[:2] for n, v in wz.items() if n in on]
-        self.siatka(extra_pts=pts)
+        self.siatka(extra_pts=pts, nieogrzewane=4.0)
+        avoid = [np.asarray(x.get("xy"), float) for x in (W.dane.inst.get("piony_deszczowe") or []) if x.get("xy")]
+        avoid += [np.asarray(pn.xy, float) for pn in W.kanalizacja.piony]
+        self.ppos = {}
+        for pn in wo.piony:
+            top = max(self.kids.index(k) for k in pn.kondygnacje)
+            pp = self.pion_punkty(pn.id, pn.xy, self.kids[:top + 1], 3, avoid=avoid)
+            self.ppos[pn.id] = dict(zip(("ZW", "CWU", "CYRK"), pp))
         self.cyrk = wo.cwu.get("cyrkulacja", "brak") != "brak"
         q_c = float(wo.cwu.get("V_cyrk_dm3h", 0.0)) / 3600.0
         r = dobierz_rure(q_c, 0.5, RURY_WIELOWARSTWOWE, 16) if self.cyrk else None
@@ -83,17 +78,14 @@ class RysW(Rysunek):
         wz = self.W.woda.wezly
         m = re.match(r"^(.+?)([ZC])@(P\w+)$", name)
         if m:                                        # węzeł pionu
-            base = np.asarray(self.piony[m.group(1)].xy, float)
-            return base + OFF["ZW" if m.group(2) == "Z" else "CWU"]
+            return self.ppos[m.group(1)]["ZW" if m.group(2) == "Z" else "CWU"]
         m = re.match(r"^([A-Z]{3}\d{2})([ZC])$", name)
         if m and m.group(1) in self.przyb:
             p = self.przyb[m.group(1)]
-            rot = self.rot.get((p.kond, round(p.xy[0], 3), round(p.xy[1], 3)), 90.0)
-            return punkt_przyboru(p, rot, "ZW" if m.group(2) == "Z" else "CWU")
+            return punkt_przyboru(p, self.obrot(p.kond, p.xy), "ZW" if m.group(2) == "Z" else "CWU")
         if name in self.przyb:
             p = self.przyb[name]
-            rot = self.rot.get((p.kond, round(p.xy[0], 3), round(p.xy[1], 3)), 90.0)
-            return punkt_przyboru(p, rot, "ZW")
+            return punkt_przyboru(p, self.obrot(p.kond, p.xy), "ZW")
         if name in self.pos:
             return self.pos[name]
         return np.asarray(wz[name][:2], float)
@@ -114,24 +106,51 @@ class RysW(Rysunek):
         d = np.array([np.sign(d[0]) or 1.0, 0.0]) if abs(d[0]) >= abs(d[1]) else np.array([0.0, np.sign(d[1]) or 1.0])
         self.pos["WOD"] = wod
         self.pos["T0"] = wod + d * 0.45
-        # przyłącze: od wejścia do budynku w kierunku sieci (odcinek 2 m poza lico) — dalej wg PZT
-        u = siec - wej
-        u = np.array([0.0, np.sign(u[1])]) if abs(u[1]) >= abs(u[0]) else np.array([np.sign(u[0]), 0.0])
-        out = wej + u * 1.8
+        # przyłącze: trasa z dzialka.yaml (uzbrojenie projektowane) w obrębie 2 m od budynku, dalej wg PZT
         prz = next((o for o in wo.odcinki if o.typ == "przylacze"), None)
-        path = self.g.route(wej, wod, "ZW:WEJ")
-        self.pipe([out, wej], "WZ", pen="gruba")
-        self.pipe(path, "WZ", pen="gruba")
-        self.g.mark(path, "ZW:WEJ")
+        linie = self.linie_dzialki("woda")
+        outl = self.pod.outline
+        if linie and outl is not None and not outl.is_empty:
+            from shapely.geometry import LineString
+            ln = LineString(linie[0][0])
+            part = ln.intersection(outl.buffer(2.0, join_style=2))
+            seg = max((np.asarray(g.coords) for g in getattr(part, "geoms", [part]) if not g.is_empty),
+                      key=lambda a: len(a), default=None)
+            if seg is not None and len(seg) >= 2:
+                if outl.distance(__import__("shapely").geometry.Point(seg[0])) < outl.distance(
+                        __import__("shapely").geometry.Point(seg[-1])):
+                    seg = seg[::-1]
+                if outl.contains(__import__("shapely").geometry.Point(seg[0])):
+                    seg = seg[::-1]
+                out, inner = seg[0], seg[-1]
+                self.pipe(seg, "WZ", pen="gruba")
+                path = self.g.route(inner, wod, "ZW:WEJ")
+                self.pipe(path, "WZ", pen="gruba")
+                self.g.mark(path, "ZW:WEJ")
+                u = seg[0] - seg[1]
+                u = u / (np.hypot(*u) or 1.0)
+                wej = inner
+            else:
+                linie = []
+        if not linie:
+            u = siec - wej
+            u = np.array([0.0, np.sign(u[1])]) if abs(u[1]) >= abs(u[0]) else np.array([np.sign(u[0]), 0.0])
+            out = wej + u * 1.8
+            path = self.g.route(wej, wod, "ZW:WEJ")
+            self.pipe([out, wej], "WZ", pen="gruba")
+            self.pipe(path, "WZ", pen="gruba")
+            self.g.mark(path, "ZW:WEJ")
+            self.brak("Przyłącze wodociągowe", "brak trasy przyłącza w dzialka.yaml (uzbrojenie.projektowane, branza: woda)"
+                      " — narysowano odcinek do sieci wg obliczeń", "uzbrojenie: {projektowane: [{branza: woda, linia: "
+                      "[[x,y],…], opis, dl}]}")
         n0 = len(vp.prims)
-        S.pipe(vp, [out + u * 0.6, out], "WZ")
         from ...draft.dims import arrowhead
         arrowhead(vp, out, -u, 2.5, 12, True, "S-WODA")
         self.reg(n0)
         if prz is not None:
             self.tag(out, [f"Przyłącze wodociągowe {prz.rura}, L = {num(prz.L, 1)} m",
-                           "z sieci Ø110 — trasa i rzędne wg PZT; przejście szczelne przez płytę/ścianę w rurze "
-                           "osłonowej"], "S-OPISY", style="bold")
+                           "z sieci — trasa i rzędne wg PZT; pod płytą w rurze osłonowej, przejście szczelne"],
+                     "S-OPISY", style="bold")
         # zestaw wodomierzowy
         self.sym(S.water_meter, wod, 0.0, s_mm=4.0, label="WM")
         seg = self.g.route(wod, self.pos["T0"], "ZW:T0")
@@ -207,7 +226,7 @@ class RysW(Rysunek):
             m = re.match(r"^(.+?)C@", o.do)
             if med == "CWU" and self.cyrk and m:
                 pn = self.piony[m.group(1)]
-                c = np.asarray(pn.xy, float) + OFF["CYRK"]
+                c = self.ppos[pn.id]["CYRK"]
                 pc = self._route_pipe(b * 0 + a + np.array([0.12, 0.0]), c, "CYRK", f"CYRK:{pn.id}",
                                       companion=f"CWU:{o.do}")
                 self.label(pc, f"Cyrk {self.cyrk_rura}", "S-OPISY")
@@ -226,9 +245,8 @@ class RysW(Rysunek):
         i = self.kids.index(self.kid)
         for pn in wo.piony:
             top = max(self.kids.index(k) for k in pn.kondygnacje)
-            if i > top:
+            if i > top or top == 0:          # pion jednokondygnacyjny = węzeł podłączenia (bez symbolu pionu)
                 continue
-            base = np.asarray(pn.xy, float)
             lines = [f"Pion {pn.id}"]
             has_c = any(p.t.qn_cw > 0 for p in pn.przybory)
             for med in ("ZW", "CWU", "CYRK"):
@@ -236,8 +254,7 @@ class RysW(Rysunek):
                     continue
                 if med == "CYRK" and (not has_c or not self.cyrk):
                     continue
-                lt = S.media(MED[med])
-                self.sym(S.riser, base + OFF[med], None, MED[med], s_mm=2.0)
+                self.sym(S.riser, self.ppos[pn.id][med], None, MED[med], s_mm=2.0)
                 if med == "CYRK":
                     d = self.cyrk_rura
                 else:
@@ -247,7 +264,7 @@ class RysW(Rysunek):
                     d = rura_krotko((up or dn).rura) if (up or dn) else ""
                 arrow = ("↑" if i < top else "") + ("↓" if i > 0 else "")
                 lines.append(f"{SKROT[med]} {d} {arrow}".strip())
-            self.tag(base + OFF["CWU"], lines, "S-OPISY", style="bold", radii=(6.0, 9.0, 13.0, 18.0, 24.0))
+            self.tag(self.ppos[pn.id]["CWU"], lines, "S-OPISY", style="bold", radii=(6.0, 9.0, 13.0, 18.0, 24.0))
         self.leg.sym(lambda c, p: S.riser(c, p, None, "WZ", s_mm=2.4),
                      "pion instalacji (Wz / Wc / Cyrk); ↑ — prowadzony na kondygnację wyższą, ↓ — z kondygnacji niższej")
 

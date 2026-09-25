@@ -1,0 +1,61 @@
+# Konfiguracja arkuszy PROJEKTU ZAGOSPODAROWANIA DZIAŁKI (PZT) — stadium PB (lamela.views.site, tools/generuj_widoki.py).
+# Plik NIE zawiera geometrii — wszystkie dane działki i budynku pochodzą z model/dzialka.yaml + model/budynek.yaml.
+# Wyjątek: limity MPZP (sekcja wspolne.mpzp) — w modelu jest tylko tekst uchwały (dzialka.mpzp), więc do czasu
+# uzupełnienia modelu (projekt/02_PZT/BRAKI_DANYCH.md) wartości z briefu § 3 (fikcyjny MPZP 3MN) podaje się tutaj.
+# Generowanie:
+#   PYTHONPATH=src python3 tools/generuj_widoki.py --arkusze model/arkusze_pzt.yaml --out projekt/02_PZT/rysunki
+wspolne:
+  pracownia: "PRACOWNIA PROJEKTOWA — nazwa do uzupełnienia"
+  pracownia_adres: "adres pracowni do uzupełnienia"
+  inwestor: "(do uzupełnienia)"
+  obiekt: "Budynek mieszkalny jednorodzinny wolnostojący „Dom LAMELA” z zagospodarowaniem działki"
+  lokalizacja: null            # null → z dzialka.yaml (nr działki, obręb, adres/gmina)
+  kategoria: "I"
+  stadium: "PB"
+  branza: "ZAGOSPODAROWANIE TERENU"
+  prefiks_nr: "PZT"
+  data: null                   # null → meta.data z budynek.yaml
+  rewizja: "0"
+  skala: 500
+  format: auto                 # najmniejszy arkusz mieszczący widok i kolumnę opisową
+  plik_tomu: "tom_PZT.pdf"
+  tytul_tomu: "Projekt zagospodarowania działki — część rysunkowa"
+  uwagi: []
+  # [DO UZUPEŁNIENIA w dzialka.yaml: dzialka.mpzp] — fikcyjny MPZP (uchwała XII/123/2024, teren 3MN) wg briefu § 3
+  mpzp:
+    linia_zabudowy: 6.0
+    max_udzial_zabudowy: 0.30
+    min_udzial_pbc: 0.50
+    intensywnosc: [0.05, 0.80]
+    max_wysokosc: 11.0
+    max_kondygnacji: 3
+    dach: "płaski ≤ 12° lub 30–45°"
+    min_miejsc_postojowych: 2
+    ogrodzenie_max_wys: 1.60
+arkusze:
+  - nr: PZT-01
+    tytul: "PLAN ZAGOSPODAROWANIA DZIAŁKI"
+    typ: pzt_plan
+    skala: 500
+    opcje: {podklad: true, warstwice: true, pikiety_co: 9.0, linia_plyt: PUNKTOWA}
+  - nr: PZT-02
+    tytul: "PLAN SZCZEGÓŁOWY — WYMIARY I RZĘDNE"
+    typ: pzt_szczegoly
+    skala: 200
+    opcje: {warstwice: true, warstwice_projektowane: false}
+  - nr: PZT-03
+    tytul: "RYSUNEK KOORDYNACYJNY UZBROJENIA TERENU"
+    typ: pzt_uzbrojenie
+    skala: 200
+    opcje:
+      # minimalne odległości poziome między sieciami [m] — zasady wiedzy technicznej, NIE przepis (WT § 26–28 ich nie
+      # określają); do potwierdzenia w warunkach przyłączenia gestorów sieci
+      odleglosci_min:
+        w-ks: [1.50, "praktyka proj. (COBRTI INSTAL z. 3) [SPRAWDŹ]"]
+        w-kd: [1.50, "praktyka proj. (COBRTI INSTAL z. 3) [SPRAWDŹ]"]
+        w-e: [0.50, "N SEP-E-004:2014 [SPRAWDŹ]"]
+        w-t: [0.50, "praktyka proj. [SPRAWDŹ]"]
+        ks-kd: [1.00, "praktyka proj. [SPRAWDŹ]"]
+        e-t: [0.50, "N SEP-E-004:2014 [SPRAWDŹ]"]
+        drzewo: [2.00, "od pnia — N SEP-E-004 / praktyka [SPRAWDŹ]"]
+      retencja_min: {budynek: 3.0, granica: 2.0, drzewo: 1.0}   # W-144/W-145 (założenia projektowe, R8 pkt 3.5)
