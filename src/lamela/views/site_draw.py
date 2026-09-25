@@ -1319,7 +1319,7 @@ def text_block_col(title, lines, h=1.8):
 
 
 # ------------------------------------------------------------------------------------------------ rejestracja
-LAYER_W = {"Z-BUDYNEK": 1.2, "Z-DZIALKA": 0.9, "Z-SIECI-PROJ": 1.0, "Z-SIECI-IST": 0.8, "Z-WYMIARY": 0.9,
+LAYER_W = {"Z-BUDYNEK": 3.0, "Z-DZIALKA": 0.9, "Z-SIECI-PROJ": 1.0, "Z-SIECI-IST": 0.8, "Z-WYMIARY": 0.9,
            "Z-LZ": 0.8, "Z-DROGA": 0.5, "Z-MAPA": 0.3, "Z-RZEDNE": 0.35, "Z-ZIELEN": 0.35, "Z-UTWARDZENIA": 0.25,
            "Z-STREFY": 0.3, "Z-ODWODNIENIE": 0.8, "Z-OGRODZENIE": 0.6, "Z-BUDYNEK-NAD": 0.8, "Z-UZBROJENIE": 1.0,
            "Z-TLO": 0.0, "Z-KOLIZJE": 1.0, "Z-TYCZENIE": 1.0, "Z-RZEDNE-PROJ": 0.8}

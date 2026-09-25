@@ -190,38 +190,37 @@ def rysuj_bieg(vp, placer: Placer, b: KD.BiegZ, odc: list, hs: float, ss: float,
     c = b.c_nom / 1000.0
     alfa = math.atan2(hs, ss)
     ca = math.cos(alfa)
-    # linia wierzchu płyty (pod stopniami — linia wewnętrznych naroży) i spodu
+    # linia wierzchu płyty: poziomo na spocznikach, na biegu — linia wewnętrznych naroży stopni przedłużona do poziomu
+    # spocznika górnego (x_k + s); stopnie i = 1…n: prostokąty [x0 + (i−1)·s; x0 + i·s] × [.., z + i·h_s]
     top = [(X0 + odc[0].x0, Y0)]
-    z = Y0
-    for o in odc:
-        if o.typ == "bieg":
-            n = int(round((o.x1 - o.x0) / ss)) + 1
-            z1 = z + n * hs
-            top.append((X0 + o.x1, z1 - hs))
-            z = z1
-            top.append((X0 + o.x1, z)) if False else None
-        else:
-            top.append((X0 + o.x1, z))
-    top = [p for p in top if p is not None]
-    # spód: przesunięcie prostopadłe o h
-    from shapely.geometry import LineString as LS
-    tl = LS(top)
-    bl = tl.parallel_offset(h if True else 0, "right", join_style=2)
-    bot = list(bl.coords) if bl.geom_type == "LineString" else list(max(bl.geoms, key=lambda q: q.length).coords)
-    if np.hypot(*(np.subtract(bot[0], top[0]))) > np.hypot(*(np.subtract(bot[-1], top[0]))):
-        bot = bot[::-1]
-    poly = Polygon(top + bot[::-1]).buffer(0)
-    # stopnie
     z = Y0
     steps = []
     for o in odc:
         if o.typ == "bieg":
             n = int(round((o.x1 - o.x0) / ss)) + 1
-            for i in range(n):
-                x = X0 + o.x0 + i * ss
-                steps.append(box(x - ss if i else x - 0.001, z + i * hs, x, z + (i + 1) * hs))
+            top.append((X0 + o.x0, z))
+            top.append((X0 + o.x1 + ss, z + n * hs))
+            for i in range(1, n + 1):
+                steps.append(box(X0 + o.x0 + (i - 1) * ss, z - 1.0, X0 + o.x0 + i * ss, z + i * hs))
             z += n * hs
-    stp = unary_union([s_.difference(poly) for s_ in steps]).buffer(0)
+        else:
+            top.append((X0 + o.x1, z))
+    tt = [top[0]]
+    for q in top[1:]:
+        if q[0] > tt[-1][0] + 1e-6:
+            tt.append(q)
+        elif abs(q[0] - tt[-1][0]) <= 1e-6:
+            tt[-1] = (tt[-1][0], max(tt[-1][1], q[1]))
+    top = tt
+    from shapely.geometry import LineString as LS
+    tl = LS(top)
+    bl = tl.parallel_offset(h, "right", join_style=2)
+    bot = list(bl.coords) if bl.geom_type == "LineString" else list(max(bl.geoms, key=lambda q: q.length).coords)
+    if np.hypot(*(np.subtract(bot[0], top[0]))) > np.hypot(*(np.subtract(bot[-1], top[0]))):
+        bot = bot[::-1]
+    poly = Polygon(top + bot[::-1]).buffer(0)
+    nad = Polygon(top + [(top[-1][0], max(q[1] for q in top) + 5.0), (top[0][0], max(q[1] for q in top) + 5.0)]).buffer(0)
+    stp = unary_union([s_.intersection(nad).difference(poly) for s_ in steps]).buffer(0)
     H.hatch(vp, poly, "ZELBET")
     vp.geom(poly, L_OBR, pen="gruba")
     if not stp.is_empty:
@@ -262,6 +261,10 @@ def rysuj_bieg(vp, placer: Placer, b: KD.BiegZ, odc: list, hs: float, ss: float,
     for s0, s1 in ((0.0, lg - leg), (tl2.length - (lg - leg), tl2.length)):
         seg = [tl2.interpolate(t).coords[0] for t in np.linspace(s0, s1, 12)]
         vp.polyline(seg, L_ZBR, pen=0.5)
+    x0_, y0_, x1_, y1_ = poly.union(stp).bounds
+    vp.text((x0_, y1_ + 8 * k), tytul, 3.5, 0, "left", "baseline", L_OPS, style="bold")
+    from ..draft.text import width as _tw
+    placer.add(box(x0_, y1_ + 7 * k, x0_ + _tw(tytul, 3.5, "bold") * k, y1_ + 12 * k), "text", 2.0)
     etykieta(vp, placer, pts[len(pts) // 2], np.subtract(pts[-1], pts[0]),
              f"{p_gl.n if False else int(math.ceil(szer / (g.s / 1000))) + 1} Ø{g.fi} co {g.s / 10:g} l={p_gl.L_mm / 10:g}",
              p_gl.nr, 2.5, offs=(3.0, 7.0), ts=(0.0, -0.8, 0.8))
@@ -273,5 +276,4 @@ def rysuj_bieg(vp, placer: Placer, b: KD.BiegZ, odc: list, hs: float, ss: float,
              offs=(5.0, 9.0, 13.0), ts=(0.0, 0.5, -0.5))
     x0, y0, x1, y1 = poly.union(stp).bounds
     dims.dim_h(vp, [x0, x1], y0 - 8 * k, None, layer="K-WYMIARY")
-    vp.text((x0, y1 + 8 * k), tytul, 3.5, 0, "left", "baseline", L_OPS, style="bold")
     return (x0 - 10 * k, y0 - 16 * k, x1 + 30 * k, y1 + 14 * k), (p_gl, p_r, p_g)

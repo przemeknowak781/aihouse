@@ -346,8 +346,8 @@ def wiersze_opisu(det: Detal, wyniki: dict, oc: dict) -> list[tuple[str, str | N
                     f"f_Rsi = {fmt.num(fr, 3)} {'≥' if (fr or 0) >= 0.72 else '<'} 0,72 — {r.get('ocena')}", None))
     if not out:
         out.append(("Węzeł bez karty mostka 2D (mostek punktowy / element systemowy) — patrz uwagi", None))
-    sym = {"OK": "✓", "UWAGA": "!", "BRAK": "✗"}
-    txt = "  ".join(f"{L} {sym[oc[L][0]]}" for L in "HSPI")
+    sym = {"OK": "OK", "UWAGA": "uwaga", "BRAK": "BRAK"}
+    txt = ", ".join(f"{L} {sym[oc[L][0]]}" for L in "HSPI")
     zle = [f"{L}: {oc[L][1]}" for L in "HSPI" if oc[L][0] != "OK"]
     out.append((f"4 linie: {txt} — " + ("ciągłość zachowana" if not zle else "uwaga"),
                 "#1a7f37" if not zle else "#b7791f"))
@@ -443,7 +443,7 @@ def _blok_wyniki(det_id: str, wiersze: list):
         yy = y
         if not getattr(sh, "_det_wyniki", False):
             sh._det_wyniki = True
-            sh.text((x, yy - 3.5), "WYNIKI MOSTKÓW (PN-EN ISO 10211) I OCENA 4 LINII", 3.5, "R-LEGENDA",
+            sh.text((x, yy - 3.5), "WYNIKI MOSTKÓW (PN-EN ISO 10211) I OCENA 4 LINII", 3.5, layer="R-LEGENDA",
                     style="bold")
             yy -= 8.0
         ls = _zawin(f"{det_id}: " + wiersze[0][0], w - 2.0)

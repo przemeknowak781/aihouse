@@ -271,8 +271,9 @@ def _dims_plan(lab, s, used, detail=False):
     x0, y0, x1, y1 = s.p0.bounds
     k = lab.k
     offs = [-(v * k) for v in (7, 9, 11, 13, 15, 18)]
-    D.place_dim(lab, (x0, y0), (x1, y0), shifts=offs if lab.k > 0.3 else [-v for v in (1.5, 2, 2.5, 3, 3.5)])
-    D.place_dim(lab, (x1, y0), (x1, y1), shifts=offs if lab.k > 0.3 else [-v for v in (1.5, 2, 2.5, 3, 3.5)])
+    if not detail:            # na PZT-02 gabaryty w łańcuchach obrysu (_chains)
+        D.place_dim(lab, (x0, y0), (x1, y0), shifts=offs)
+        D.place_dim(lab, (x1, y0), (x1, y1), shifts=offs)
     # odległości od budynków sąsiednich (informacyjnie — WT § 271)
     side_nb = {g["sasiad"] for g in s.granice if not g["droga"]}
     for x in s.sasiedzi:
@@ -871,6 +872,152 @@ def _notes_szczegoly(s, zj_todo):
     if s.braki:
         out.append(f"Braki danych modelu oznaczono {D_TODO}; wykaz: projekt/02_PZT/BRAKI_DANYCH.md.")
     return out
+
+
+def util_window(s, opts, margin=2.5):
+    """Okno PZT-03: działka (szerokość ± margines) × zasięg sieci, obiektów i urządzeń retencji (+ pas drogowy)."""
+    if opts.get("okno"):
+        return tuple(float(v) for v in opts["okno"])
+    x0, y0, x1, y1 = detail_window(s, opts, margin)
+    geoms = [x.geom for x in s.sieci if not x.istn] + [Point(o.xy) for o in s.obiekty.values()
+                                                       if s.plot.buffer(1.0).contains(Point(o.xy))]
+    if s.rozsaczanie and s.rozsaczanie["poly"] is not None:
+        geoms.append(s.rozsaczanie["poly"])
+    geoms.append(s.footprint)
+    gy0 = unary_union(geoms).bounds[1]
+    return x0, max(y0, gy0 - 4.0), x1, y1
+
+
+def _util_labels(lab, s, used):
+    """Opisy sieci projektowanych (litera wzdłuż + opis z długością) i istniejących (w pasie drogowym)."""
+    h = D.H
+    for sx in [x for x in s.sieci if not x.istn]:
+        g = sx.geom.difference(s.p0) if not s.p0.is_empty else sx.geom
+        parts = sorted(getattr(g, "geoms", [g]), key=lambda q: -q.length)
+        if not parts or parts[0].is_empty:
+            continue
+        for part in parts[:2]:
+            lab.along(part, sx.lit, h, "Z-SIECI-PROJ", sx.kolor, n=2 if part.length > 8 else 1, max_cost=6.0,
+                      mask=0.25)
+        L = sx.geom.length
+        txt = [f"{sx.lit} — {D.short_desc(sx.opis, 34)}", f"L = {mm(L)} m" + (
+            f" (model: {mm(float(sx.dl))} m)" if sx.dl is not None and abs(float(sx.dl) - L) > 0.05 else "")]
+        anchors = [np.asarray(parts[0].interpolate(f, normalized=True).coords[0]) for f in (0.5, 0.35, 0.65, 0.2, 0.8)]
+        lab.label(anchors, txt, h, "Z-SIECI-PROJ", color=sx.kolor, dists=(3.0, 6.0, 9.0, 13.0, 18.0),
+                  leader_from=2.0, dot=True)
+    for sx in [x for x in s.sieci if x.istn]:
+        g = D.clip(sx.geom, lab.bounds)
+        if g is None:
+            continue
+        for part in getattr(g, "geoms", [g]):
+            lab.along(part, sx.lit, h, "Z-SIECI-IST", sx.kolor, n=2, max_cost=10.0, mask=0.2)
+            anchors = [np.asarray(part.interpolate(f, normalized=True).coords[0]) for f in (0.1, 0.9, 0.2, 0.8)]
+            lab.label(anchors, [f"{sx.lit} — {D.short_desc(sx.opis)} (istn.)"], h, "Z-SIECI-IST", color=sx.kolor,
+                      dists=(4.0, 7.0, 10.0, 14.0), dirs=[(0, 1), (1, 1), (-1, 1), (0, -1), (1, -1), (-1, -1)],
+                      leader_from=2.0, dot=True, max_cost=40.0)
+
+
+def _inst_points(vp, lab, s, used):
+    """Punkty instalacji w budynku (wodomierz, rozdzielnica) — symbol i opis."""
+    k = vp.k
+    names = {"wodomierz": ("WM", "wodomierz (w budynku)"), "RG": ("RG", "rozdzielnica główna RG")}
+    for key, (sym, txt) in names.items():
+        p = s.inst.get(key)
+        if p is None:
+            continue
+        from ..draft import text as T
+        a, b = (T.width(sym, D.H) / 2.0 + 0.6) * k, (D.H / 2.0 + 0.6) * k
+        D.fill_white(vp, box(p[0] - a, p[1] - b, p[0] + a, p[1] + b), z=21.0)
+        vp.rect(p[0] - a, p[1] - b, p[0] + a, p[1] + b, "Z-UZBROJENIE", pen=0.35)
+        vp.text(p, sym, D.H, 0.0, "center", "middle", "Z-UZBROJENIE")
+        used.add("inst_" + key)
+        lab.label(p, [txt], D.H, "Z-UZBROJENIE", dists=(3.0, 5.0, 8.0, 12.0), leader_from=2.0, dot=False)
+
+
+def view_uzbrojenie(ctx, spec, scale, opts):
+    """PZT-03: RYSUNEK KOORDYNACYJNY UZBROJENIA TERENU (1:200)."""
+    title = spec.get("tytul_widoku") or spec.get("tytul") or "RYSUNEK KOORDYNACYJNY UZBROJENIA TERENU"
+    vp = Viewport(scale, title)
+    k = vp.k
+    s = _site(ctx, opts)
+    used = set()
+    wb = util_window(s, opts)
+    win = box(*wb)
+    lab = D.Labeler(vp, bounds=win)
+    K = koordynacja(s, opts.get("odleglosci_min"), opts.get("retencja_min"))
+    zj_todo = _draw_context(vp, s, lab, win, used, hatch=False, lawn=False, zone=True, utilities_ist=True)
+    D.draw_drainage(vp, s, used, detail=True)
+    D.draw_downpipes(vp, s, used)
+    D.draw_building(vp, s, used, slab_lt=str(opts.get("linia_plyt", "PUNKTOWA")).upper(), pen_outline=1.0)
+    D.draw_utilities(vp, s, used, win, inside=s.p0)
+    D.draw_objects(vp, s, used, win)
+    for i, x in enumerate(K["skrzyzowania"]):
+        vp.circle(x["p"], 1.2 * k, "Z-KOLIZJE", pen=0.25)
+        used.add("skrzyzowanie")
+    kol = [c_ for c_ in K["kolizje"]]
+    for i, c_ in enumerate(kol):
+        vp.circle(c_["p"], 2.6 * k, "Z-KOLIZJE", pen=0.5)
+        used.add("kolizja")
+    vp.rect(*wb, "Z-MAPA-RAMKA", pen=0.25, lt="CIAGLA")
+    D.register_all(lab)
+    _labels_building(lab, s, wskazniki(s))
+    used.add("zero")
+    _inst_points(vp, lab, s, used)
+    for i, c_ in enumerate(kol):
+        lab.label(c_["p"], [f"K{i + 1}"], D.H, "Z-KOLIZJE", style="bold", dists=(3.0, 4.5, 6.5, 9.0),
+                  leader_from=3.5, leader_color=None)
+    for i, x in enumerate(K["skrzyzowania"]):
+        lab.label(x["p"], [f"S{i + 1}"], D.H, "Z-KOLIZJE", dists=(1.5, 3.0, 5.0, 8.0), leader_from=2.4)
+    # wymiary: odległości między sieciami (projektowane, < 3 m), sieć–drzewo, retencja
+    for r in K["pary"]:
+        if r["b"].istn or r["d"] > 3.0:
+            continue
+        a, b = nearest_points(r["a"].geom, r["b"].geom)
+        _dim_between(lab, r["a"].geom, r["b"].geom, a, b)
+        used.add("wymiar")
+    for r in K["drzewa"]:
+        if r["d"] < r["req"] + 2.0:
+            a, b = nearest_points(r["a"].geom, Point(r["t"]["xy"]))
+            D.place_dim(lab, (a.x, a.y), (b.x, b.y), shifts=[0.0])
+    _util_labels(lab, s, used)
+    for o in s.obiekty.values():
+        if win.contains(Point(o.xy)) and not o.id.upper().startswith("PC"):
+            txt = [o.id] + ([D.short_desc(o.opis, 30)] if not o.id.upper().startswith("ZK") else [])
+            lab.label(o.xy, txt, D.H, dists=(2.0, 4.0, 7.0, 10.0, 14.0), leader_from=1.8, dot=False)
+    if s.pc is not None:
+        lab.label(np.asarray(s.pc["body"].centroid.coords[0]), ["PC — jedn. zewn. (R290)",
+                                                                f"strefa r = {mm(s.pc['r'])} m"], D.H, dot=True,
+                  dists=(3.0, 6.0, 9.0, 13.0))
+    if s.zbiornik:
+        lab.label(s.zbiornik["xy"], [f"ZB — zbiornik {fmt.num(float(s.zbiornik['V'] or 0), 1)} m³",
+                                     f"wym. i rzędne {D_TODO}"], D.H, dot=True, dists=(4.0, 7.0, 10.0, 14.0))
+    if s.rozsaczanie and s.rozsaczanie["poly"] is not None:
+        lab.label(np.asarray(s.rozsaczanie["poly"].centroid.coords[0]), ["NCH — niecka chłonna"], D.H,
+                  dists=(0.0, 3.0, 6.0))
+    for r in s.rury:
+        lab.label(r["xy"], [r["id"]], D.H, "Z-ODWODNIENIE", dists=(1.2, 2.5, 4.0, 6.0), leader_from=2.4)
+    for t in s.drzewa:
+        if win.contains(Point(t["xy"])):
+            lab.label(t["xy"], [t["id"]], D.H, dists=(0.8, 2.0, 4.0), leader_from=2.5, max_cost=6.0)
+    x_t = wb[2] + 8.0 * k
+    y = wb[3]
+    for t in (_tab_przylacza(s), _tab_koord(K), _tab_skrzyz(K), _tab_kolizje(K), _tab_retencja(K, s)):
+        r = D.vp_table(vp, x_t, y, **t)
+        y = r[1] - 5.0 * k
+    res = SiteResult(site=s, braki=s.braki)
+    res.column_blocks = [("legenda", D.legend_block(used))]
+    res.notes = _notes_uzbrojenie(s, K, zj_todo)
+    res.dane = dict(koordynacja=dict(pary=[(r["a"].lit, r["b"].lit, round(r["d"], 3), r["req"], r["ok"])
+                                           for r in K["pary"]], kolizje=[c_["opis"] for c_ in kol],
+                                     skrzyzowania=len(K["skrzyzowania"])))
+    if lab.failed:
+        ctx.note("PZT-03", f"nie umieszczono {len(lab.failed)} opisów: {[f[0] for f in lab.failed][:8]}")
+    return vp, res, title
+
+
+def _dim_between(lab, ga, gb, a, b):
+    """Wymiar odległości między dwiema liniami (sieciami) w miejscu najmniejszego oddalenia (przesuwany wzdłuż)."""
+    D.place_dim(lab, (a.x, a.y), (b.x, b.y), on_a=ga, on_b=gb, span=4.0, step=0.25)
 
 
 # ================================================================================================ rejestracja

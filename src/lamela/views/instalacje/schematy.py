@@ -71,6 +71,8 @@ def odtworz(fig, vp, min_h=1.8, layer="I-SCHEMAT"):
     """Odtwarza osie figury w rzutni ``vp``. Zwraca współczynnik f [mm papieru na jednostkę danych]."""
     ax = fig.axes[0]
     tr = ax.transData
+    from matplotlib.backends.backend_agg import FigureCanvasAgg
+    renderer = FigureCanvasAgg(fig).get_renderer()
     ppu = abs(tr.transform((1, 0))[0] - tr.transform((0, 0))[0]) * 72.0 / fig.dpi   # pt na jednostkę danych
     cap = T.cap_ratio("normal")
     fs = [t.get_fontsize() for t in ax.texts if t.get_text().strip()]
@@ -115,6 +117,19 @@ def odtworz(fig, vp, min_h=1.8, layer="I-SCHEMAT"):
         lines = txt.split("\n")
         lh = h * 1.55
         n = len(lines)
+        r90 = round(rot) % 360
+        if r90 in (90, 270):
+            # rotation_mode='default': wyrównanie wg obwiedni po obrocie — odtworzenie z obwiedni renderowanej
+            bb = t.get_window_extent(renderer)
+            (bx0, by0), (bx1, by1) = tr.inverted().transform([[bb.x0, bb.y0], [bb.x1, bb.y1]])
+            order = range(n) if r90 == 90 else range(n - 1, -1, -1)
+            for j, i in enumerate(order):
+                if not lines[i].strip():
+                    continue
+                xc = bx0 + (j + 0.5) * (bx1 - bx0) / n
+                P = X([xc, by0 if r90 == 90 else by1])
+                vp.text(P, lines[i], h, float(r90), "left", "middle", layer, style=style, color=col, z=31.0)
+            continue
         if va == "top":
             offs = [-(i * lh) for i in range(n)]
         elif va == "bottom" or va == "baseline":
