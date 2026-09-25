@@ -803,6 +803,34 @@ STOLARKA = {
     "OT1": {"opis": "otwór 1,50 × 2,40 bez stolarki"}, "OT2": {"opis": "otwór 2,40 × 2,40 bez stolarki"},
 }
 
+# ---- montaż stolarki, osłony, progi — wytyczne z symulacji mostków 2D (koordynator; katalog projekt/08_obliczenia/demo_test/mostki):
+#      (1) ciepły montaż: rama wsunięta ≤ 5 cm w mur (konwencja rdzenia: 5 cm w murze, 4 cm w izolacji), izolacja ościeża z zakładem 3 cm
+#      na ramę (WZ-W1/W2); (2) BEZ kaset osłon w ociepleniu (WZ-N2 „do poprawy”) — kasety w podsufitce okapów, w ramie C, w szczelinie lamel
+#      albo nadstawne przed licem ETICS; (5) progi HS/wejścia na płycie P0: profil progowy termoizolacyjny na podwalinie XPS/PUR-GF
+#      + odwodnienie liniowe (WZ-T1, f_Rsi na granicy 0,748 w wariancie bez podwaliny).
+MONTAZ = ("ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna "
+          "od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)")
+OSL_MONTAZ = {
+    "S0-01": "screen ZIP — kaseta w podsufitce okapu PL-E (poza warstwą izolacji), prowadnice przy słupach fasady",
+    "S0-02": "screen ZIP — kaseta w podsufitce okapu PL-E",
+    "S0-07": "screen ZIP — kaseta w podsufitce okapu zach. PL-E (1,50 m)",
+    "S1-01": "screen ZIP — kaseta w pasie górnym ramy C (PL-C2), poza izolacją",
+    "S2-01": "screen ZIP w szczelinie wentylowanej za lamelami, kaseta nadstawna przed membraną pod okapem PL-3 (bez podcięcia wełny)",
+    "S2-02": "screen ZIP w szczelinie za lamelami (kaseta przed membraną)",
+    "S2-08": "screen ZIP w szczelinie za lamelami (kaseta przed membraną)",
+}
+for _o in OT:
+    _s = _SC[_o["sciana"]]
+    if _s["przegroda"] in ("SZ1", "SZ2", "SZL") and _o["typ"] not in ("otwor", "brama"):
+        _o["montaz"] = MONTAZ
+        if _o.get("oslona") and _o["oslona"] != "brak":
+            _o["oslona_montaz"] = OSL_MONTAZ.get(_s["id"], "kaseta elewacyjna nadstawna PRZED licem ETICS (bez kasety w ociepleniu), "
+                                                            "prowadnice na konsolach dystansowych z przekładką termiczną")
+        if _o["parapet"] <= 0.001 and _s["kond"] == "P0":
+            _o["prog"] = {"profil": "próg termiczny ≤ 0,02 m na podwalinie progowej XPS 300 / PUR-GF (λ ≤ 0,05) na płycie fundamentowej",
+                          "odwodnienie_liniowe": True,
+                          "hydroizolacja": "wywinięcie membrany SBS płyty ≥ 0,15 m pod profil + taśma EPDM; spadek nawierzchni 2 % od budynku"}
+
 # ---- długości węzłów z geometrii
 _hot = Polygon(R(-EXT, -EXT, xE + EXT, y4 + EXT)).union(Polygon(R(xE + EXT, -EXT, xF + EXT, y2)))
 _gar = Polygon(R(xE - EXT, y2, xF + EXT, y5 + EXT))
