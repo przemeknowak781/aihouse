@@ -2,6 +2,8 @@
  "model": "2026-09-25 08:02",
  "podglad": false,
  "sprawy_otwarte": [
+  "Uwagi na arkuszach PT-IE-01, PT-IE-02, PT-IE-03 przywołują PN-EN 12464-1 bez daty wydania (w tomie: PN-EN 12464-1:2012, powołana w WT) — status i wydanie wg rozdz. „Przedmiot, zakres i podstawy opracowania”; poprawić uwagę w generatorze rysunków.",
+  "Uwagi na arkuszach PT-IE-12, PT-IE-13 przywołują PN-HD 60364-5-534 (wycofana; zastąpiona przez PN-HD 60364-5-53:2022-10) — status i wydanie wg rozdz. „Przedmiot, zakres i podstawy opracowania”; poprawić uwagę w generatorze rysunków.",
   "Opis trasy WLZ w modelu działki (uzbrojenie projektowane „en”) podaje YKY 5×16, obliczenia — YKY 5×25; w tomie obowiązuje przekrój z obliczeń — poprawić opis w modelu i ponownie wygenerować rysunki PZT (tom I).",
   "`instalacje.wyroby` w modelu puste — moduł PV, falownik, pompa ciepła i aparatura przyjęte z danych przykładowych bibliotek [DANE PRZYKŁADOWE – FIKCYJNE]; zastąpić danymi DTR/DWU wyrobów wybranych przez wykonawcę (wyroby równoważne spełniające parametry wymagane — rozdz. „Wyroby”).",
   "Dane osobowe (Inwestor, projektanci, nr uprawnień, pracownia) — brak sekcji `projekt:` w model/budynek.yaml; pola oznaczone jako do uzupełnienia (strona tytułowa, oświadczenie).",

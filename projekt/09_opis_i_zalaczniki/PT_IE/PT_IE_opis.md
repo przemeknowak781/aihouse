@@ -29,10 +29,12 @@ Warunki informacyjne — wartości podawane bez kryterium (np. moc szczytowa bez
 
 **Sprawy otwarte** (do zamknięcia przed wydaniem tomu do realizacji; po uzupełnieniu modelu status aktualizuje się przy ponownym generowaniu):
 
-1. Opis trasy WLZ w modelu działki (uzbrojenie projektowane „en”) podaje YKY 5×16, obliczenia — YKY 5×25; w tomie obowiązuje przekrój z obliczeń — poprawić opis w modelu i ponownie wygenerować rysunki PZT (tom I).
-2. `instalacje.wyroby` w modelu puste — moduł PV, falownik, pompa ciepła i aparatura przyjęte z danych przykładowych bibliotek [DANE PRZYKŁADOWE – FIKCYJNE]; zastąpić danymi DTR/DWU wyrobów wybranych przez wykonawcę (wyroby równoważne spełniające parametry wymagane — rozdz. „Wyroby”).
-3. Dane osobowe (Inwestor, projektanci, nr uprawnień, pracownia) — brak sekcji `projekt:` w model/budynek.yaml; pola oznaczone jako do uzupełnienia (strona tytułowa, oświadczenie).
-4. Warunki przyłączenia OSD (E-05) — nieuzyskane; moc przyłączeniowa, typ zabezpieczenia przedlicznikowego, impedancja pętli zwarcia Z_Q i prąd zwarciowy w ZKP, rozdział PEN przyjęte jako [ZAŁ]; po otrzymaniu warunków przeliczyć obwody (D-12, W-192, E-05).
+1. Uwagi na arkuszach PT-IE-01, PT-IE-02, PT-IE-03 przywołują PN-EN 12464-1 bez daty wydania (w tomie: PN-EN 12464-1:2012, powołana w WT) — status i wydanie wg rozdz. „Przedmiot, zakres i podstawy opracowania”; poprawić uwagę w generatorze rysunków.
+2. Uwagi na arkuszach PT-IE-12, PT-IE-13 przywołują PN-HD 60364-5-534 (wycofana; zastąpiona przez PN-HD 60364-5-53:2022-10) — status i wydanie wg rozdz. „Przedmiot, zakres i podstawy opracowania”; poprawić uwagę w generatorze rysunków.
+3. Opis trasy WLZ w modelu działki (uzbrojenie projektowane „en”) podaje YKY 5×16, obliczenia — YKY 5×25; w tomie obowiązuje przekrój z obliczeń — poprawić opis w modelu i ponownie wygenerować rysunki PZT (tom I).
+4. `instalacje.wyroby` w modelu puste — moduł PV, falownik, pompa ciepła i aparatura przyjęte z danych przykładowych bibliotek [DANE PRZYKŁADOWE – FIKCYJNE]; zastąpić danymi DTR/DWU wyrobów wybranych przez wykonawcę (wyroby równoważne spełniające parametry wymagane — rozdz. „Wyroby”).
+5. Dane osobowe (Inwestor, projektanci, nr uprawnień, pracownia) — brak sekcji `projekt:` w model/budynek.yaml; pola oznaczone jako do uzupełnienia (strona tytułowa, oświadczenie).
+6. Warunki przyłączenia OSD (E-05) — nieuzyskane; moc przyłączeniowa, typ zabezpieczenia przedlicznikowego, impedancja pętli zwarcia Z_Q i prąd zwarciowy w ZKP, rozdział PEN przyjęte jako [ZAŁ]; po otrzymaniu warunków przeliczyć obwody (D-12, W-192, E-05).
 
 ## Przedmiot, zakres i podstawy opracowania — § 23 RPB
 
@@ -598,8 +600,10 @@ Wartość zmierzoną w temperaturze otoczenia porównać z Z_s,max z uwzględnie
 
 | Lp. | Element | Brak / stan w modelu | Arkusze |
 |---|---|---|---|
-| 1 | Punkty instalacji elektrycznych i teletechnicznych | model nie zawiera położeń opraw, łączników, gniazd i punktów teletechnicznych — rozmieszczenie algorytmiczne (opis w uwagach arkuszy) | PT-IE-01, PT-IE-02, PT-IE-03, PT-IE-04, PT-IE-05, PT-IE-06, PT-IE-07, PT-IE-08 |
-| 2 | Trasy teletechniczne (pion, RACK) | brak w modelu pionu/tras teletechnicznych — przyjęto pion proponowany (wspólna lokalizacja z pionem wentylacyjnym) | PT-IE-07, PT-IE-08 |
+| 1 | PV — rozmieszczenie modułów | w polu użytkowym dachu D1 zmieszczono 10 z 15 modułów (odsunięcia od krawędzi, otworów, czerpni/wyrzutni) | PT-IE-10 |
+| 2 | PV — trasa DC | brak w modelu trasy przewodów DC i przepustu dachowego — przyjęto trasę po dachach (poza drogami ewakuacyjnymi) do pom. technicznego | PT-IE-10 |
+| 3 | Punkty instalacji elektrycznych i teletechnicznych | model nie zawiera położeń opraw, łączników, gniazd i punktów teletechnicznych — rozmieszczenie algorytmiczne (opis w uwagach arkuszy) | PT-IE-01, PT-IE-02, PT-IE-03, PT-IE-04, PT-IE-05, PT-IE-06, PT-IE-07, PT-IE-08, PT-IE-09, PT-IE-11, PT-IE-12 |
+| 4 | Trasy teletechniczne (pion, RACK) | brak w modelu pionu/tras teletechnicznych — przyjęto pion proponowany (wspólna lokalizacja z pionem wentylacyjnym) | PT-IE-07, PT-IE-08, PT-IE-09 |
 
 **Założenia projektowe do potwierdzenia [ZAŁ]** (z obliczeń):
 

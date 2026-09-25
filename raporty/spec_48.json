@@ -1,4 +1,5 @@
 {
+ "nr": 48,
  "title": "Arkusze PZT ✔ · weryfikacja PT: tomy z różnych stanów modelu, BO z pozycjami otwartymi → poprawki",
  "stages": [
   [
@@ -60,6 +61,17 @@
  ],
  "notes": [
   "PT-2 BO: nadproże N-O0-18 i docisk do podłoża (η 114 %) do poprawy.",
-  "EP bez PV dla zaprojektowanej PC: ok. 62 ≤ 70 kWh/(m²·rok)."
+  "EP bez PV dla zaprojektowanej PC: ok. 62 ≤ 70 kWh/(m²·rok).",
+  "NADZÓR (10:05): 5 agentów aktywnych, bez zastojów; najdłuższa bezczynność 5 min; zmiany w repo 0 min temu."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/projekt/02_PZT/rysunki/PZT-03_rysunek_koordynacyjny_uzbrojenia_terenu.png",
+   "caption": "PZT-03 rysunek koordynacyjny uzbrojenia terenu, arkusz 620×420 mm"
+  },
+  {
+   "path": "/home/user/aihouse/projekt/05_PT_instalacje_sanitarne/rysunki/PT-IS-01_instalacja_wodociagowa_rzut_parteru.png",
+   "caption": "PT-IS-01 instalacja wodociągowa — rzut parteru"
+  }
  ]
 }
