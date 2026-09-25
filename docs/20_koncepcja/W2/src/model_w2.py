@@ -12,10 +12,10 @@ OSIE_Y = {"1": 0.000, "2": 2.600, "3": 4.800, "4": 8.400, "5": 9.000}
 
 # ------------------------------------------------------------------ typy scian: (odsuniecie lica po stronie 'lewej'/wnetrza, po stronie 'prawej')
 TYPY = {
-    "SZ1":  dict(nazwa="ściana zewn. nośna: tynk 1,5 + silikat 18 + EPS grafit/welna 20 + tynk 1 cm", L=0.105, R=0.300, kol="#8c8c8c"),
-    "SZL":  dict(nazwa="ściana zewn. lekka P2 (wspornik): szkielet stal/drewno + welna 20 + płyta, gr. 40,5 cm", L=0.105, R=0.300, kol="#b0a58c"),
+    "SZ1":  dict(nazwa="ściana zewn. nośna: tynk 1,5 + silikat 18 + EPS grafit/wełna 20 + tynk 1 cm", L=0.105, R=0.300, kol="#8c8c8c"),
+    "SZL":  dict(nazwa="ściana zewn. lekka P2 (wspornik): szkielet stal/drewno + wełna 20 + płyta, gr. 40,5 cm", L=0.105, R=0.300, kol="#b0a58c"),
     "SW18": dict(nazwa="ściana wewn. nośna: silikat 18 + 2x tynk 1,5", L=0.105, R=0.105, kol="#8c8c8c"),
-    "SWG":  dict(nazwa="ściana nośna dom/garaż: tynk 1,5 + silikat 18 + welna 12 + tynk 1 (U~0,28)", L=0.105, R=0.220, kol="#8c8c8c"),
+    "SWG":  dict(nazwa="ściana nośna dom/garaż: tynk 1,5 + silikat 18 + wełna 12 + tynk 1 (U~0,28)", L=0.105, R=0.220, kol="#8c8c8c"),
     "SC12": dict(nazwa="ścianka środkowa schodów: silikat 12 (fair-faced)", L=0.060, R=0.060, kol="#a9a9a9"),
     "DZ12": dict(nazwa="ścianka działowa: silikat 12 + 2x tynk 1,5", L=0.075, R=0.075, kol="#c8c8c8"),
 }
@@ -37,17 +37,17 @@ SCIANY = [
     W("S0-01", "P0", "SZ1", (0, 0), (12, 0), E, 0, "fasada pd. strefy dziennej: przeszklenie 5 kwater na słupach stalowych SL1-SL4 + belka B1"),
     W("S0-02", "P0", "SZ1", (12, 0), (18.4, 0), 0, E, "ściana pd. strefy gospodarczej (pełna - bryła G)"),
     W("S0-03", "P0", "SZ1", (18.4, 0), (18.4, 9.0), E, E, "ściana wsch. garażu (pion D)"),
-    W("S0-04", "P0", "SZ1", (18.4, 9.0), (12, 9.0), E, E, "ściana pn. garażu z brama"),
+    W("S0-04", "P0", "SZ1", (18.4, 9.0), (12, 9.0), E, E, "ściana pn. garażu z bramą"),
     W("S0-05", "P0", "SZ1", (12, 9.0), (12, 8.4), E, 0, "ściana zach. garażu - odcinek zewn."),
-    W("S0-06", "P0", "SZ1", (12, 8.4), (0, 8.4), 0, E, "ściana pn. częśći mieszkalnej"),
-    W("S0-07", "P0", "SZ1", (0, 8.4), (0, 0), E, E, "ściana zach. (os A)"),
-    W("S0-08", "P0", "SW18", (0, 4.8), (12, 4.8), 0, 0, "ściana grzbietowa (os 3)"),
-    W("S0-09", "P0", "SW18", (3.875, 4.8), (3.875, 8.4), 0, 0, "os B"),
-    W("S0-10", "P0", "SW18", (6.095, 4.8), (6.095, 8.4), 0, 0, "os C - klatka schodowa"),
-    W("S0-11", "P0", "SW18", (8.425, 4.8), (8.425, 8.4), 0, 0, "os D - klatka schodowa"),
-    W("S0-12", "P0", "SW18", (12, 0), (12, 2.6), 0, 0, "os E - kuchnia/przedsionek"),
-    W("S0-13", "P0", "SWG", (12, 2.6), (12, 8.4), 0, 0, "os E - dom/garaż (ocieplona od garażu)"),
-    W("S0-14", "P0", "SWG", (18.4, 2.6), (12, 2.6), 0, 0, "os 2 - strefa gosp./garaż"),
+    W("S0-06", "P0", "SZ1", (12, 8.4), (0, 8.4), 0, E, "ściana pn. części mieszkalnej"),
+    W("S0-07", "P0", "SZ1", (0, 8.4), (0, 0), E, E, "ściana zach. (oś A)"),
+    W("S0-08", "P0", "SW18", (0, 4.8), (12, 4.8), 0, 0, "ściana grzbietowa (oś 3)"),
+    W("S0-09", "P0", "SW18", (3.875, 4.8), (3.875, 8.4), 0, 0, "oś B"),
+    W("S0-10", "P0", "SW18", (6.095, 4.8), (6.095, 8.4), 0, 0, "oś C - klatka schodowa"),
+    W("S0-11", "P0", "SW18", (8.425, 4.8), (8.425, 8.4), 0, 0, "oś D - klatka schodowa"),
+    W("S0-12", "P0", "SW18", (12, 0), (12, 2.6), 0, 0, "oś E - kuchnia/przedsionek"),
+    W("S0-13", "P0", "SWG", (12, 2.6), (12, 8.4), 0, 0, "oś E - dom/garaż (ocieplona od garażu)"),
+    W("S0-14", "P0", "SWG", (18.4, 2.6), (12, 2.6), 0, 0, "oś 2 - strefa gosp./garaż"),
     W("S0-15", "P0", "SC12", (7.26, 4.8), (7.26, 7.145), 0, 0, "ścianka środkowa schodów"),
     W("S0-16", "P0", "DZ12", (3.875, 6.275), (6.095, 6.275)),
     W("S0-17", "P0", "DZ12", (8.425, 6.375), (12, 6.375)),
@@ -56,13 +56,13 @@ SCIANY = [
     W("S0-20", "P0", "DZ12", (15.475, 0), (15.475, 2.6)),
     # ---------------- P1
     W("S1-01", "P1", "SZ1", (0, 0), (12, 0), E, E, "ściana pd. bryły B, otwor boksu C na belce B1"),
-    W("S1-02", "P1", "SZ1", (12, 0), (12, 8.4), E, E, "ściana wsch. (os E)"),
+    W("S1-02", "P1", "SZ1", (12, 0), (12, 8.4), E, E, "ściana wsch. (oś E)"),
     W("S1-03", "P1", "SZ1", (12, 8.4), (0, 8.4), E, E, "ściana pn."),
-    W("S1-04", "P1", "SZ1", (0, 8.4), (0, 0), E, E, "ściana zach. (os A)"),
-    W("S1-05", "P1", "SW18", (0, 4.8), (12, 4.8), 0, 0, "ściana grzbietowa (os 3)"),
-    W("S1-06", "P1", "SW18", (3.875, 4.8), (3.875, 8.4), 0, 0, "os B"),
-    W("S1-07", "P1", "SW18", (6.095, 4.8), (6.095, 8.4), 0, 0, "os C"),
-    W("S1-08", "P1", "SW18", (8.425, 4.8), (8.425, 8.4), 0, 0, "os D"),
+    W("S1-04", "P1", "SZ1", (0, 8.4), (0, 0), E, E, "ściana zach. (oś A)"),
+    W("S1-05", "P1", "SW18", (0, 4.8), (12, 4.8), 0, 0, "ściana grzbietowa (oś 3)"),
+    W("S1-06", "P1", "SW18", (3.875, 4.8), (3.875, 8.4), 0, 0, "oś B"),
+    W("S1-07", "P1", "SW18", (6.095, 4.8), (6.095, 8.4), 0, 0, "oś C"),
+    W("S1-08", "P1", "SW18", (8.425, 4.8), (8.425, 8.4), 0, 0, "oś D"),
     W("S1-09", "P1", "SC12", (7.26, 4.8), (7.26, 7.145), 0, 0, "ścianka środkowa schodów"),
     W("S1-10", "P1", "DZ12", (3.875, 0), (3.875, 3.575), 0, 0.075),
     W("S1-11", "P1", "DZ12", (0, 3.575), (3.875, 3.575), 0, 0.075),
@@ -75,8 +75,8 @@ SCIANY = [
     W("S2-06", "P2", "SZ1", (3.875, 8.4), (3.875, 4.8), E, 0, "nadbudowa - ściana zach."),
     W("S2-07", "P2", "SZ1", (3.875, 4.8), (-1, 4.8), 0, E, "ściana pn. bryły A; odc. x -1,0...2,0 żelbetowa ściana-tarcza"),
     W("S2-08", "P2", "SZL", (-1, 4.8), (-1, 0), E, E, "ściana zach. na wsporniku 1,0 m (lekka)"),
-    W("S2-09", "P2", "SW18", (3.875, 4.8), (8.425, 4.8), 0, 0, "os 3 wewn."),
-    W("S2-10", "P2", "SW18", (6.095, 4.8), (6.095, 8.4), 0, 0, "os C"),
+    W("S2-09", "P2", "SW18", (3.875, 4.8), (8.425, 4.8), 0, 0, "oś 3 wewn."),
+    W("S2-10", "P2", "SW18", (6.095, 4.8), (6.095, 8.4), 0, 0, "oś C"),
     W("S2-11", "P2", "SC12", (7.26, 4.8), (7.26, 7.145), 0, 0, "ścianka środkowa schodów"),
     W("S2-12", "P2", "DZ12", (3.675, 0), (3.675, 4.8)),
     W("S2-13", "P2", "DZ12", (6.125, 0), (6.125, 4.8)),
@@ -94,10 +94,10 @@ OTWORY = [
     O("O0-01", "S0-01", 0.30, 11.70, "fasada", 2.75, 0.0, "FS1", uw="przeszklenie E: 5 kwater po 2,28 m (kw. 2 i 4 - drzwi HS), słupki SL1-SL4 w szprosach", kw=5),
     O("O0-02", "S0-07", 1.20, 3.60, "okno", 2.15, 0.45, "OZ1", uw="okno zach. salonu (siedzisko), pod okapem 1,5 m"),
     O("O0-03", "S0-07", 5.50, 7.30, "okno", 1.50, 0.90, "OZ2", uw="pokój gościnny"),
-    O("O0-04", "S0-06", 10.20, 11.30, "drzwi_zewn", 2.40, 0.0, "DZ1", "a", "-y", "drzwi wejściowe 110x240 (w świetle ościeżnicy >= 0,90x2,00), prog <= 2 cm"),
+    O("O0-04", "S0-06", 10.20, 11.30, "drzwi_zewn", 2.40, 0.0, "DZ1", "a", "-y", "drzwi wejściowe 110x240 (w świetle ościeżnicy >= 0,90x2,00), próg <= 2 cm"),
     O("O0-05", "S0-04", 12.75, 17.75, "brama", 2.25, 0.0, "BR1", uw="brama segmentowa 500x225, kratki went. >= 0,08 m2"),
     O("O0-06", "S0-03", 5.00, 5.90, "drzwi_zewn", 2.10, 0.0, "DZ2", "a", "-x", "drzwi boczne garażu (rowery, ogród)"),
-    O("O0-07", "S0-08", 4.20, 5.10, "otwor", 2.10, 0.0, "", uw="przejście do przedpokóju gościnnego"),
+    O("O0-07", "S0-08", 4.20, 5.10, "otwor", 2.10, 0.0, "", uw="przejście do przedpokoju gościnnego"),
     O("O0-08", "S0-08", 6.20, 7.20, "otwor", 2.55, 0.0, "", uw="wejście na bieg 1 schodów"),
     O("O0-09", "S0-08", 7.40, 8.20, "drzwi", 2.00, 0.0, "D3", "a", "+y", "schowek pod schodami"),
     O("O0-10", "S0-08", 8.80, 10.20, "otwor", 2.40, 0.0, "", uw="hol - strefa dzienna"),
@@ -280,7 +280,7 @@ def outline(kond):
     u = unary_union(polys)
     from shapely.geometry import Polygon as P
     ext = P(u.exterior) if u.geom_type == "Polygon" else P(max(u.geoms, key=lambda g: g.area).exterior)
-    return ext
+    return ext.simplify(0.001)
 
 def room_area(r):
     return round(r["poly"].area, 2)

@@ -129,7 +129,7 @@ Główne zasady:
 
 * **Konstrukcja:** siatka osi A–F × 1–5. Stropy ŻB 20 cm pracują jednokierunkowo (N–S) na rozpiętościach 4,80 i 3,60 m. Nad garażem strop 24 cm o rozpiętości 6,40 m. Wsporniki ≤ 1,50 m.
 * **Instalacje:** jeden szacht **SI** (x 5,59–5,99; y 4,905–5,605) łączy łazienki P0, P1 i P2 ustawione dokładnie jedna nad drugą. Drugi, krótki pion **K2** obsługuje pralnię P1 i WC P0. Pomieszczenie techniczne leży obok garażu, a jednostka zewnętrzna PC stoi przy ścianie wschodniej.
-* **Funkcja:** wejście i garaż są od północy, obok siebie. Z garażu przez przedsionek gospodarczy (ze spiżarnią) prowadzi droga prosto do kuchni, łącznie ok. 6 m. Strefa dzienna ma 11,4 m przeszklenia na południe. Pokoje dzieci są od zachodu, dzięki czemu elewacja bryły B pozostaje pełna jak w szkicu. Rodzice i gabinet mieszkają w bryle A za lamelami.
+* **Funkcja:** wejście i garaż są od północy, obok siebie. Z garażu przez przedsionek gospodarczy (ze spiżarnią) prowadzi droga prosto do kuchni, łącznie ok. 6 m. Strefa dzienna ma 11,4 m przeszklenia na południe. Pokoje dzieci są od zachodu, dzięki czemu elewacja bryły B pozostaje pełna jak w szkicu. Sypialnia rodziców i gabinet są w bryle A za lamelami.
 
 ## 2. Odczyt szkicu w W2 (porównanie ilościowe)
 
@@ -319,7 +319,7 @@ Wymagania (WT § 12 ust. 1 i 6, § 19, MPZP):
 * ściany z otworami ≥ 4,0 m od granicy;
 * okapy i płyty ≥ 1,5 m, tu utrzymane ≥ 4,0 m dla bezpieczeństwa;
 * każdy uskok elewacji sprawdzony osobno;
-* od strony drogi obowiązuje linia zabudowy. Przekracza jej żaden element, także daszek, który jest 1,30 m za linią.
+* od strony drogi obowiązuje linia zabudowy. Nie przekracza jej żaden element, także daszek, który jest 1,30 m za linią.
 
 * **Dojazd i parkowanie.**
   * Brama przesuwna 5,60 m (odjazd na wschód, wewnątrz działki, § 42) i furtka 1,00 m.
@@ -353,7 +353,7 @@ Wymagania (WT § 12 ust. 1 i 6, § 19, MPZP):
     ]))
     A(f"""
 ## 7. Orientacja, doświetlenie, energia
-* **Strefa dzienna** jest na południe: 11,40 m przeszklenia w 5 kwaterach, h = 2,75 m. Okap 1,00 m osłania ją latem przy wysokim słońcu (kąt odcięcia ≈ 70° dla dolnej krawędzi płyty +2,75). Zimą słońce wpada głęboko, na całą głębokość 4,6 m.
+* **Strefa dzienna** jest na południe: 11,40 m przeszklenia w 5 kwaterach, h = 2,75 m. Latem w południe (wysokość słońca ≈ 61°) okap 1,00 m zacienia górne ≈ 1,8 m przeszklenia; resztę osłaniają rolety screen ZIP. Zimą (≈ 14°) słońce wpada na całą głębokość strefy dziennej 4,6 m.
 * **Okno zach. salonu** jest pod okapem 1,50 m. Osłony zewnętrzne: rolety screen ZIP na przeszkleniach pd. i zach.
 * **Boks C** (P1, pd.) ma ramę wysuniętą 1,00 m, która działa jak łamacz światła nad oknem wys. 1,50 m.
 * **Sypialnie.**
@@ -425,7 +425,7 @@ PU obejmuje schowek pod schodami 0.05 w całości (2,24 m²). Po pomniejszeniu s
 6. **Klatka schodowa obudowana ścianami** (bez balustrad). Tanie wykonanie i dobra akustyka. Świetlik nad klatką doświetla wszystkie kondygnacje.
 
 **Słabości i ryzyka**
-1. Przeszklenie E ma 11,40 m zamiast ≈ 12,2 m i kończy się ok. 0,9 m wcześniej niż w szkicu. To świadoma cena ścian w pionie (oś E). Kompensują to przeszklone drzwi gospodarcze.
+1. Przeszklenie E ma 11,40 m zamiast ≈ 12,2 m: zaczyna się 0,4 m bardziej na zachód i kończy ok. 1,2 m wcześniej niż w szkicu. To świadoma cena ścian w pionie (oś E). Kompensują to przeszklone drzwi gospodarcze.
 2. Strefa dzienna ma głębokość 4,59 m, czyli jest wydłużona (11,8 m). Kuchnia z wyspą przy ścianie E jest wygodna, ale salon płytszy niż typowo.
 3. Nadbudowa klatki i łazienki na P2 (od północy) tworzy dodatkowy fragment stropodachu i attyki. Od południa jej nie widać.
 4. Pokój rodzinny P1 (31,9 m² z częścią komunikacji) jest duży jak na potrzeby. Działa jednak jako galeria/hol przy schodach.

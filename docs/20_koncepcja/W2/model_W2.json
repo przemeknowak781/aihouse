@@ -55,13 +55,13 @@
  },
  "typy_scian": {
   "SZ1": {
-   "nazwa": "ściana zewn. nośna: tynk 1,5 + silikat 18 + EPS grafit/welna 20 + tynk 1 cm",
+   "nazwa": "ściana zewn. nośna: tynk 1,5 + silikat 18 + EPS grafit/wełna 20 + tynk 1 cm",
    "L": 0.105,
    "R": 0.3,
    "kol": "#8c8c8c"
   },
   "SZL": {
-   "nazwa": "ściana zewn. lekka P2 (wspornik): szkielet stal/drewno + welna 20 + płyta, gr. 40,5 cm",
+   "nazwa": "ściana zewn. lekka P2 (wspornik): szkielet stal/drewno + wełna 20 + płyta, gr. 40,5 cm",
    "L": 0.105,
    "R": 0.3,
    "kol": "#b0a58c"
@@ -73,7 +73,7 @@
    "kol": "#8c8c8c"
   },
   "SWG": {
-   "nazwa": "ściana nośna dom/garaż: tynk 1,5 + silikat 18 + welna 12 + tynk 1 (U~0,28)",
+   "nazwa": "ściana nośna dom/garaż: tynk 1,5 + silikat 18 + wełna 12 + tynk 1 (U~0,28)",
    "L": 0.105,
    "R": 0.22,
    "kol": "#8c8c8c"
@@ -162,7 +162,7 @@
     0.3,
     0.3
    ],
-   "uw": "ściana pn. garażu z brama"
+   "uw": "ściana pn. garażu z bramą"
   },
   {
    "id": "S0-05",
@@ -198,7 +198,7 @@
     0,
     0.3
    ],
-   "uw": "ściana pn. częśći mieszkalnej"
+   "uw": "ściana pn. części mieszkalnej"
   },
   {
    "id": "S0-07",
@@ -216,7 +216,7 @@
     0.3,
     0.3
    ],
-   "uw": "ściana zach. (os A)"
+   "uw": "ściana zach. (oś A)"
   },
   {
    "id": "S0-08",
@@ -234,7 +234,7 @@
     0,
     0
    ],
-   "uw": "ściana grzbietowa (os 3)"
+   "uw": "ściana grzbietowa (oś 3)"
   },
   {
    "id": "S0-09",
@@ -252,7 +252,7 @@
     0,
     0
    ],
-   "uw": "os B"
+   "uw": "oś B"
   },
   {
    "id": "S0-10",
@@ -270,7 +270,7 @@
     0,
     0
    ],
-   "uw": "os C - klatka schodowa"
+   "uw": "oś C - klatka schodowa"
   },
   {
    "id": "S0-11",
@@ -288,7 +288,7 @@
     0,
     0
    ],
-   "uw": "os D - klatka schodowa"
+   "uw": "oś D - klatka schodowa"
   },
   {
    "id": "S0-12",
@@ -306,7 +306,7 @@
     0,
     0
    ],
-   "uw": "os E - kuchnia/przedsionek"
+   "uw": "oś E - kuchnia/przedsionek"
   },
   {
    "id": "S0-13",
@@ -324,7 +324,7 @@
     0,
     0
    ],
-   "uw": "os E - dom/garaż (ocieplona od garażu)"
+   "uw": "oś E - dom/garaż (ocieplona od garażu)"
   },
   {
    "id": "S0-14",
@@ -342,7 +342,7 @@
     0,
     0
    ],
-   "uw": "os 2 - strefa gosp./garaż"
+   "uw": "oś 2 - strefa gosp./garaż"
   },
   {
    "id": "S0-15",
@@ -486,7 +486,7 @@
     0.3,
     0.3
    ],
-   "uw": "ściana wsch. (os E)"
+   "uw": "ściana wsch. (oś E)"
   },
   {
    "id": "S1-03",
@@ -522,7 +522,7 @@
     0.3,
     0.3
    ],
-   "uw": "ściana zach. (os A)"
+   "uw": "ściana zach. (oś A)"
   },
   {
    "id": "S1-05",
@@ -540,7 +540,7 @@
     0,
     0
    ],
-   "uw": "ściana grzbietowa (os 3)"
+   "uw": "ściana grzbietowa (oś 3)"
   },
   {
    "id": "S1-06",
@@ -558,7 +558,7 @@
     0,
     0
    ],
-   "uw": "os B"
+   "uw": "oś B"
   },
   {
    "id": "S1-07",
@@ -576,7 +576,7 @@
     0,
     0
    ],
-   "uw": "os C"
+   "uw": "oś C"
   },
   {
    "id": "S1-08",
@@ -594,7 +594,7 @@
     0,
     0
    ],
-   "uw": "os D"
+   "uw": "oś D"
   },
   {
    "id": "S1-09",
@@ -810,7 +810,7 @@
     0,
     0
    ],
-   "uw": "os 3 wewn."
+   "uw": "oś 3 wewn."
   },
   {
    "id": "S2-10",
@@ -828,7 +828,7 @@
     0,
     0
    ],
-   "uw": "os C"
+   "uw": "oś C"
   },
   {
    "id": "S2-11",
@@ -979,7 +979,7 @@
    "sym": "DZ1",
    "zaw": "a",
    "kier": "-y",
-   "uw": "drzwi wejściowe 110x240 (w świetle ościeżnicy >= 0,90x2,00), prog <= 2 cm",
+   "uw": "drzwi wejściowe 110x240 (w świetle ościeżnicy >= 0,90x2,00), próg <= 2 cm",
    "kw": 1
   },
   {
@@ -1024,7 +1024,7 @@
    "sym": "",
    "zaw": null,
    "kier": null,
-   "uw": "przejście do przedpokóju gościnnego",
+   "uw": "przejście do przedpokoju gościnnego",
    "kw": 1
   },
   {

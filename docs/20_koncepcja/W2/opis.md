@@ -44,7 +44,7 @@ Główne zasady:
 
 * **Konstrukcja:** siatka osi A–F × 1–5. Stropy ŻB 20 cm pracują jednokierunkowo (N–S) na rozpiętościach 4,80 i 3,60 m. Nad garażem strop 24 cm o rozpiętości 6,40 m. Wsporniki ≤ 1,50 m.
 * **Instalacje:** jeden szacht **SI** (x 5,59–5,99; y 4,905–5,605) łączy łazienki P0, P1 i P2 ustawione dokładnie jedna nad drugą. Drugi, krótki pion **K2** obsługuje pralnię P1 i WC P0. Pomieszczenie techniczne leży obok garażu, a jednostka zewnętrzna PC stoi przy ścianie wschodniej.
-* **Funkcja:** wejście i garaż są od północy, obok siebie. Z garażu przez przedsionek gospodarczy (ze spiżarnią) prowadzi droga prosto do kuchni, łącznie ok. 6 m. Strefa dzienna ma 11,4 m przeszklenia na południe. Pokoje dzieci są od zachodu, dzięki czemu elewacja bryły B pozostaje pełna jak w szkicu. Rodzice i gabinet mieszkają w bryle A za lamelami.
+* **Funkcja:** wejście i garaż są od północy, obok siebie. Z garażu przez przedsionek gospodarczy (ze spiżarnią) prowadzi droga prosto do kuchni, łącznie ok. 6 m. Strefa dzienna ma 11,4 m przeszklenia na południe. Pokoje dzieci są od zachodu, dzięki czemu elewacja bryły B pozostaje pełna jak w szkicu. Sypialnia rodziców i gabinet są w bryle A za lamelami.
 
 ## 2. Odczyt szkicu w W2 (porównanie ilościowe)
 
@@ -96,9 +96,9 @@ Rytm przesunięć zachód–wschód–zachód jest zachowany, czyli kształt „
 | 5 | 9,000 | ściana pn. garażu (brama) |
 
 Obrys lica zewnętrznego (ocieplenie):
-* **P0** (bryła mieszkalna + garaż): (-0,30; -0,30) → (-0,30; 0,10) → (-0,30; 8,29) → (-0,30; 8,70) → (0,10; 8,70) → (11,70; 8,70) → (11,70; 8,89) → (11,70; 9,30) → (12,11; 9,30) → (18,29; 9,30) → (18,70; 9,30) → (18,70; 8,89) → (18,70; 0,10) → (18,70; -0,30) → (18,29; -0,30) → (12,00; -0,30) → (0,10; -0,30)
-* **P1**: (12,30; -0,30) → (11,89; -0,30) → (0,10; -0,30) → (-0,30; -0,30) → (-0,30; 0,10) → (-0,30; 8,29) → (-0,30; 8,70) → (0,10; 8,70) → (11,89; 8,70) → (12,30; 8,70) → (12,30; 8,29) → (12,30; 0,10)
-* **P2**: (12,30; -0,30) → (11,89; -0,30) → (-0,90; -0,30) → (-1,30; -0,30) → (-1,30; 0,10) → (-1,30; 4,69) → (-1,30; 5,10) → (-0,90; 5,10) → (3,58; 5,10) → (3,58; 8,29) → (3,58; 8,70) → (3,98; 8,70) → (8,32; 8,70) → (8,73; 8,70) → (8,73; 8,29) → (8,73; 5,10) → (11,89; 5,10) → (12,30; 5,10) → (12,30; 4,69) → (12,30; 0,10)
+* **P0** (bryła mieszkalna + garaż): (-0,30; -0,30) → (-0,30; 8,70) → (11,70; 8,70) → (11,70; 9,30) → (18,70; 9,30) → (18,70; -0,30)
+* **P1**: (12,30; -0,30) → (-0,30; -0,30) → (-0,30; 8,70) → (12,30; 8,70)
+* **P2**: (12,30; -0,30) → (-1,30; -0,30) → (-1,30; 5,10) → (3,58; 5,10) → (3,58; 8,70) → (8,73; 8,70) → (8,73; 5,10) → (12,30; 5,10)
 
 ### 3.2 Poziomy i grubości
 | element | rzędna / grubość |
@@ -118,10 +118,10 @@ Obrys lica zewnętrznego (ocieplenie):
 ### 3.3 Typy przegród pionowych
 | kod | opis | lico od osi: strona wnętrza / zewn. [m] |
 |---|---|---|
-| SZ1 | ściana zewn. nośna: tynk 1,5 + silikat 18 + EPS grafit/welna 20 + tynk 1 cm | 0,105 / 0,300 |
-| SZL | ściana zewn. lekka P2 (wspornik): szkielet stal/drewno + welna 20 + płyta, gr. 40,5 cm | 0,105 / 0,300 |
+| SZ1 | ściana zewn. nośna: tynk 1,5 + silikat 18 + EPS grafit/wełna 20 + tynk 1 cm | 0,105 / 0,300 |
+| SZL | ściana zewn. lekka P2 (wspornik): szkielet stal/drewno + wełna 20 + płyta, gr. 40,5 cm | 0,105 / 0,300 |
 | SW18 | ściana wewn. nośna: silikat 18 + 2x tynk 1,5 | 0,105 / 0,105 |
-| SWG | ściana nośna dom/garaż: tynk 1,5 + silikat 18 + welna 12 + tynk 1 (U~0,28) | 0,105 / 0,220 |
+| SWG | ściana nośna dom/garaż: tynk 1,5 + silikat 18 + wełna 12 + tynk 1 (U~0,28) | 0,105 / 0,220 |
 | SC12 | ścianka środkowa schodów: silikat 12 (fair-faced) | 0,060 / 0,060 |
 | DZ12 | ścianka działowa: silikat 12 + 2x tynk 1,5 | 0,075 / 0,075 |
 
@@ -134,17 +134,17 @@ Obrys lica zewnętrznego (ocieplenie):
 | S0-01 | (0,000; 0,000) → (12,000; 0,000) | 12,00 | SZ1 | 0,405 | fasada pd. strefy dziennej: przeszklenie 5 kwater na słupach stalowych SL1-SL4 + belka B1 |
 | S0-02 | (12,000; 0,000) → (18,400; 0,000) | 6,40 | SZ1 | 0,405 | ściana pd. strefy gospodarczej (pełna - bryła G) |
 | S0-03 | (18,400; 0,000) → (18,400; 9,000) | 9,00 | SZ1 | 0,405 | ściana wsch. garażu (pion D) |
-| S0-04 | (18,400; 9,000) → (12,000; 9,000) | 6,40 | SZ1 | 0,405 | ściana pn. garażu z brama |
+| S0-04 | (18,400; 9,000) → (12,000; 9,000) | 6,40 | SZ1 | 0,405 | ściana pn. garażu z bramą |
 | S0-05 | (12,000; 9,000) → (12,000; 8,400) | 0,60 | SZ1 | 0,405 | ściana zach. garażu - odcinek zewn. |
-| S0-06 | (12,000; 8,400) → (0,000; 8,400) | 12,00 | SZ1 | 0,405 | ściana pn. częśći mieszkalnej |
-| S0-07 | (0,000; 8,400) → (0,000; 0,000) | 8,40 | SZ1 | 0,405 | ściana zach. (os A) |
-| S0-08 | (0,000; 4,800) → (12,000; 4,800) | 12,00 | SW18 | 0,210 | ściana grzbietowa (os 3) |
-| S0-09 | (3,875; 4,800) → (3,875; 8,400) | 3,60 | SW18 | 0,210 | os B |
-| S0-10 | (6,095; 4,800) → (6,095; 8,400) | 3,60 | SW18 | 0,210 | os C - klatka schodowa |
-| S0-11 | (8,425; 4,800) → (8,425; 8,400) | 3,60 | SW18 | 0,210 | os D - klatka schodowa |
-| S0-12 | (12,000; 0,000) → (12,000; 2,600) | 2,60 | SW18 | 0,210 | os E - kuchnia/przedsionek |
-| S0-13 | (12,000; 2,600) → (12,000; 8,400) | 5,80 | SWG | 0,325 | os E - dom/garaż (ocieplona od garażu) |
-| S0-14 | (18,400; 2,600) → (12,000; 2,600) | 6,40 | SWG | 0,325 | os 2 - strefa gosp./garaż |
+| S0-06 | (12,000; 8,400) → (0,000; 8,400) | 12,00 | SZ1 | 0,405 | ściana pn. części mieszkalnej |
+| S0-07 | (0,000; 8,400) → (0,000; 0,000) | 8,40 | SZ1 | 0,405 | ściana zach. (oś A) |
+| S0-08 | (0,000; 4,800) → (12,000; 4,800) | 12,00 | SW18 | 0,210 | ściana grzbietowa (oś 3) |
+| S0-09 | (3,875; 4,800) → (3,875; 8,400) | 3,60 | SW18 | 0,210 | oś B |
+| S0-10 | (6,095; 4,800) → (6,095; 8,400) | 3,60 | SW18 | 0,210 | oś C - klatka schodowa |
+| S0-11 | (8,425; 4,800) → (8,425; 8,400) | 3,60 | SW18 | 0,210 | oś D - klatka schodowa |
+| S0-12 | (12,000; 0,000) → (12,000; 2,600) | 2,60 | SW18 | 0,210 | oś E - kuchnia/przedsionek |
+| S0-13 | (12,000; 2,600) → (12,000; 8,400) | 5,80 | SWG | 0,325 | oś E - dom/garaż (ocieplona od garażu) |
+| S0-14 | (18,400; 2,600) → (12,000; 2,600) | 6,40 | SWG | 0,325 | oś 2 - strefa gosp./garaż |
 | S0-15 | (7,260; 4,800) → (7,260; 7,145) | 2,34 | SC12 | 0,120 | ścianka środkowa schodów |
 | S0-16 | (3,875; 6,275) → (6,095; 6,275) | 2,22 | DZ12 | 0,150 | działowa |
 | S0-17 | (8,425; 6,375) → (12,000; 6,375) | 3,57 | DZ12 | 0,150 | działowa |
@@ -159,10 +159,10 @@ Obrys lica zewnętrznego (ocieplenie):
 | O0-01 | S0-01 | x 0,30…11,70 | 11,40 | 2,75 | 0,00 | fasada (5 kw.) | FS1 |  | przeszklenie E: 5 kwater po 2,28 m (kw. 2 i 4 - drzwi HS), słupki SL1-SL4 w szprosach |
 | O0-02 | S0-07 | y 1,20…3,60 | 2,40 | 2,15 | 0,45 | okno | OZ1 |  | okno zach. salonu (siedzisko), pod okapem 1,5 m |
 | O0-03 | S0-07 | y 5,50…7,30 | 1,80 | 1,50 | 0,90 | okno | OZ2 |  | pokój gościnny |
-| O0-04 | S0-06 | x 10,20…11,30 | 1,10 | 2,40 | 0,00 | drzwi_zewn | DZ1 | zawias a, na -y | drzwi wejściowe 110x240 (w świetle ościeżnicy >= 0,90x2,00), prog <= 2 cm |
+| O0-04 | S0-06 | x 10,20…11,30 | 1,10 | 2,40 | 0,00 | drzwi_zewn | DZ1 | zawias a, na -y | drzwi wejściowe 110x240 (w świetle ościeżnicy >= 0,90x2,00), próg <= 2 cm |
 | O0-05 | S0-04 | x 12,75…17,75 | 5,00 | 2,25 | 0,00 | brama | BR1 |  | brama segmentowa 500x225, kratki went. >= 0,08 m2 |
 | O0-06 | S0-03 | y 5,00…5,90 | 0,90 | 2,10 | 0,00 | drzwi_zewn | DZ2 | zawias a, na -x | drzwi boczne garażu (rowery, ogród) |
-| O0-07 | S0-08 | x 4,20…5,10 | 0,90 | 2,10 | 0,00 | otwor |  |  | przejście do przedpokóju gościnnego |
+| O0-07 | S0-08 | x 4,20…5,10 | 0,90 | 2,10 | 0,00 | otwor |  |  | przejście do przedpokoju gościnnego |
 | O0-08 | S0-08 | x 6,20…7,20 | 1,00 | 2,55 | 0,00 | otwor |  |  | wejście na bieg 1 schodów |
 | O0-09 | S0-08 | x 7,40…8,20 | 0,80 | 2,00 | 0,00 | drzwi | D3 | zawias a, na +y | schowek pod schodami |
 | O0-10 | S0-08 | x 8,80…10,20 | 1,40 | 2,40 | 0,00 | otwor |  |  | hol - strefa dzienna |
@@ -203,13 +203,13 @@ Obrys lica zewnętrznego (ocieplenie):
 | ID | oś warstwy konstr. (x; y) [m] | dł. osi | typ | grub. całk. | uwagi |
 |---|---|---|---|---|---|
 | S1-01 | (0,000; 0,000) → (12,000; 0,000) | 12,00 | SZ1 | 0,405 | ściana pd. bryły B, otwor boksu C na belce B1 |
-| S1-02 | (12,000; 0,000) → (12,000; 8,400) | 8,40 | SZ1 | 0,405 | ściana wsch. (os E) |
+| S1-02 | (12,000; 0,000) → (12,000; 8,400) | 8,40 | SZ1 | 0,405 | ściana wsch. (oś E) |
 | S1-03 | (12,000; 8,400) → (0,000; 8,400) | 12,00 | SZ1 | 0,405 | ściana pn. |
-| S1-04 | (0,000; 8,400) → (0,000; 0,000) | 8,40 | SZ1 | 0,405 | ściana zach. (os A) |
-| S1-05 | (0,000; 4,800) → (12,000; 4,800) | 12,00 | SW18 | 0,210 | ściana grzbietowa (os 3) |
-| S1-06 | (3,875; 4,800) → (3,875; 8,400) | 3,60 | SW18 | 0,210 | os B |
-| S1-07 | (6,095; 4,800) → (6,095; 8,400) | 3,60 | SW18 | 0,210 | os C |
-| S1-08 | (8,425; 4,800) → (8,425; 8,400) | 3,60 | SW18 | 0,210 | os D |
+| S1-04 | (0,000; 8,400) → (0,000; 0,000) | 8,40 | SZ1 | 0,405 | ściana zach. (oś A) |
+| S1-05 | (0,000; 4,800) → (12,000; 4,800) | 12,00 | SW18 | 0,210 | ściana grzbietowa (oś 3) |
+| S1-06 | (3,875; 4,800) → (3,875; 8,400) | 3,60 | SW18 | 0,210 | oś B |
+| S1-07 | (6,095; 4,800) → (6,095; 8,400) | 3,60 | SW18 | 0,210 | oś C |
+| S1-08 | (8,425; 4,800) → (8,425; 8,400) | 3,60 | SW18 | 0,210 | oś D |
 | S1-09 | (7,260; 4,800) → (7,260; 7,145) | 2,34 | SC12 | 0,120 | ścianka środkowa schodów |
 | S1-10 | (3,875; 0,000) → (3,875; 3,575) | 3,58 | DZ12 | 0,150 | działowa |
 | S1-11 | (0,000; 3,575) → (3,875; 3,575) | 3,88 | DZ12 | 0,150 | działowa |
@@ -258,8 +258,8 @@ Obrys lica zewnętrznego (ocieplenie):
 | S2-06 | (3,875; 8,400) → (3,875; 4,800) | 3,60 | SZ1 | 0,405 | nadbudowa - ściana zach. |
 | S2-07 | (3,875; 4,800) → (-1,000; 4,800) | 4,88 | SZ1 | 0,405 | ściana pn. bryły A; odc. x -1,0...2,0 żelbetowa ściana-tarcza |
 | S2-08 | (-1,000; 4,800) → (-1,000; 0,000) | 4,80 | SZL | 0,405 | ściana zach. na wsporniku 1,0 m (lekka) |
-| S2-09 | (3,875; 4,800) → (8,425; 4,800) | 4,55 | SW18 | 0,210 | os 3 wewn. |
-| S2-10 | (6,095; 4,800) → (6,095; 8,400) | 3,60 | SW18 | 0,210 | os C |
+| S2-09 | (3,875; 4,800) → (8,425; 4,800) | 4,55 | SW18 | 0,210 | oś 3 wewn. |
+| S2-10 | (6,095; 4,800) → (6,095; 8,400) | 3,60 | SW18 | 0,210 | oś C |
 | S2-11 | (7,260; 4,800) → (7,260; 7,145) | 2,34 | SC12 | 0,120 | ścianka środkowa schodów |
 | S2-12 | (3,675; 0,000) → (3,675; 4,800) | 4,80 | DZ12 | 0,150 | działowa |
 | S2-13 | (6,125; 0,000) → (6,125; 4,800) | 4,80 | DZ12 | 0,150 | działowa |
@@ -443,7 +443,7 @@ Wymagania (WT § 12 ust. 1 i 6, § 19, MPZP):
 * ściany z otworami ≥ 4,0 m od granicy;
 * okapy i płyty ≥ 1,5 m, tu utrzymane ≥ 4,0 m dla bezpieczeństwa;
 * każdy uskok elewacji sprawdzony osobno;
-* od strony drogi obowiązuje linia zabudowy. Przekracza jej żaden element, także daszek, który jest 1,30 m za linią.
+* od strony drogi obowiązuje linia zabudowy. Nie przekracza jej żaden element, także daszek, który jest 1,30 m za linią.
 
 * **Dojazd i parkowanie.**
   * Brama przesuwna 5,60 m (odjazd na wschód, wewnątrz działki, § 42) i furtka 1,00 m.
@@ -476,7 +476,7 @@ Wymagania (WT § 12 ust. 1 i 6, § 19, MPZP):
 | miejsca postojowe | 2 garaż + 2 gościnne | ≥ 2 | ✓ |
 
 ## 7. Orientacja, doświetlenie, energia
-* **Strefa dzienna** jest na południe: 11,40 m przeszklenia w 5 kwaterach, h = 2,75 m. Okap 1,00 m osłania ją latem przy wysokim słońcu (kąt odcięcia ≈ 70° dla dolnej krawędzi płyty +2,75). Zimą słońce wpada głęboko, na całą głębokość 4,6 m.
+* **Strefa dzienna** jest na południe: 11,40 m przeszklenia w 5 kwaterach, h = 2,75 m. Latem w południe (wysokość słońca ≈ 61°) okap 1,00 m zacienia górne ≈ 1,8 m przeszklenia; resztę osłaniają rolety screen ZIP. Zimą (≈ 14°) słońce wpada na całą głębokość strefy dziennej 4,6 m.
 * **Okno zach. salonu** jest pod okapem 1,50 m. Osłony zewnętrzne: rolety screen ZIP na przeszkleniach pd. i zach.
 * **Boks C** (P1, pd.) ma ramę wysuniętą 1,00 m, która działa jak łamacz światła nad oknem wys. 1,50 m.
 * **Sypialnie.**
@@ -564,7 +564,7 @@ PU obejmuje schowek pod schodami 0.05 w całości (2,24 m²). Po pomniejszeniu s
 6. **Klatka schodowa obudowana ścianami** (bez balustrad). Tanie wykonanie i dobra akustyka. Świetlik nad klatką doświetla wszystkie kondygnacje.
 
 **Słabości i ryzyka**
-1. Przeszklenie E ma 11,40 m zamiast ≈ 12,2 m i kończy się ok. 0,9 m wcześniej niż w szkicu. To świadoma cena ścian w pionie (oś E). Kompensują to przeszklone drzwi gospodarcze.
+1. Przeszklenie E ma 11,40 m zamiast ≈ 12,2 m: zaczyna się 0,4 m bardziej na zachód i kończy ok. 1,2 m wcześniej niż w szkicu. To świadoma cena ścian w pionie (oś E). Kompensują to przeszklone drzwi gospodarcze.
 2. Strefa dzienna ma głębokość 4,59 m, czyli jest wydłużona (11,8 m). Kuchnia z wyspą przy ścianie E jest wygodna, ale salon płytszy niż typowo.
 3. Nadbudowa klatki i łazienki na P2 (od północy) tworzy dodatkowy fragment stropodachu i attyki. Od południa jej nie widać.
 4. Pokój rodzinny P1 (31,9 m² z częścią komunikacji) jest duży jak na potrzeby. Działa jednak jako galeria/hol przy schodach.
