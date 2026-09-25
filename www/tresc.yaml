@@ -1,0 +1,179 @@
+# Treści marketingowe strony www „Dom LAMELA” (tools/buduj_www.py). NIE wpisywać tu liczb o budynku —
+# wszystkie wartości budynku wstawia skrypt z modelu przez znaczniki {klucz} (lista kluczy: www/dist/dane_strony.json).
+# Ceny i pakiety są PRZYKŁADOWE (strona demonstracyjna, marka fikcyjna).
+marka:
+  nazwa: "Pasmo i Cień"
+  podtytul: "katalog domów autorskich"
+  oznaczenie: "marka przykładowa — strona demonstracyjna"
+  adres_tekst: "zapytania@pasmo-i-cien.example"   # domena .example (RFC 2606) — adres nie istnieje
+  kod_projektu: "PC-LAMELA"
+
+hero:
+  naglowek: "Dom LAMELA"
+  lead: >-
+    Trzy poziome pasma przesunięte względem siebie jak litera S: parter otwarty na ogród, zwarte piętro
+    i najwyższa bryła w pionowych lamelach z drewna termo. {PU} powierzchni użytkowej, garaż na {garaz_st} auta,
+    płaski dach i ciepła obudowa bez przerw w izolacji.
+  cta_1: "Zobacz rzuty"
+  cta_2: "Zapytaj o projekt"
+
+idea:
+  tytul: "Z serwetki do modelu"
+  tekst: >-
+    Projekt zaczął się od szkicu Inwestora na serwetce: trzy pasma, pionowe kreski lameli, przeszklony parter.
+    Każda litera szkicu ma dziś swój element w modelu, a wymiary podane niżej są odczytane z tego samego modelu,
+    z którego powstają rysunki, rendery i obliczenia.
+
+galeria:
+  tytul: "Wizualizacje"
+  opis: >-
+    Rendery z modelu 3D projektu. Słońce ustawione astronomicznie dla Poznania w podanym dniu i godzinie.
+    Zieleń, auta i sąsiednie budynki są poglądowe.
+
+rzuty:
+  tytul: "Rzuty kondygnacji"
+  opis: >-
+    Rzuty z przykładowym umeblowaniem. Numer pomieszczenia na rzucie odpowiada wierszowi zestawienia obok.
+    Powierzchnie netto liczone z modelu po licach ścian wykończonych.
+
+elewacje:
+  tytul: "Elewacje i przekroje"
+  opis: >-
+    Rzuty prostokątne z modelu, kolory według materiałów projektu. Rzędne względem poziomu ±0,00 (posadzka parteru).
+
+widok3d:
+  tytul: "Model 3D"
+  opis: "Obracaj, przybliżaj i rozsuwaj kondygnacje. Model jest tym samym plikiem, z którego powstały rendery."
+  przycisk: "Wczytaj model 3D"
+
+technologia:
+  tytul: "Technologia i materiały"
+  lead: >-
+    Murowane ściany z silikatu, żelbetowe stropy i płyta fundamentowa na XPS. Wartości U policzył moduł fizyki
+    budowli na pełnych warstwach przegród, z uwzględnieniem mostków cieplnych.
+
+jakosc:
+  tytul: "Cztery linie obudowy"
+  lead: >-
+    Każda przegroda zewnętrzna ma cztery ciągłe warstwy funkcyjne: izolację termiczną, hydroizolację,
+    warstwę szczelności powietrznej i warstwę zewnętrzną. Ciągłość sprawdza moduł fizyki dla każdej przegrody,
+    a każde pole dachu ma spadek, wpust i przelew awaryjny.
+
+energia:
+  tytul: "Energia i instalacje"
+  lead: >-
+    Dom w pełni elektryczny: pompa ciepła powietrze–woda, ogrzewanie podłogowe niskotemperaturowe,
+    wentylacja z odzyskiem ciepła i instalacja fotowoltaiczna na dachu najwyższej bryły.
+
+dzialka:
+  tytul: "Jaka działka"
+  lead: >-
+    Minimalne wymiary działki wyliczone z gabarytów budynku i odległości od granic. To punkt wyjścia do rozmowy
+    o konkretnej działce, a nie gwarancja: plan miejscowy albo decyzja o warunkach zabudowy mogą wymagać więcej.
+
+dokumentacja:
+  tytul: "Co zawiera komplet"
+  lead: >-
+    Dokumentacja w układzie projektu budowlanego według rozporządzenia w sprawie szczegółowego zakresu i formy
+    projektu budowlanego (RPB, t.j. Dz.U. 2022 poz. 1679 ze zm.). Forma elektroniczna: pliki PDF, rysunki wektorowe.
+  czesci:
+    - {kod: "PZT", nazwa: "Projekt zagospodarowania działki", arkusze: "arkusze_pzt.yaml",
+       opis: "Wzorcowy PZT dla działki referencyjnej. Dla Twojej działki PZT wykonuje projektant adaptujący na mapie do celów projektowych."}
+    - {kod: "PAB", nazwa: "Projekt architektoniczno-budowlany", arkusze: "arkusze.yaml",
+       opis: "Opis techniczny z zestawieniem powierzchni, rzuty, przekroje i elewacje."}
+    - {kod: "PT · AR", nazwa: "Projekt techniczny — architektura", arkusze: null,
+       opis: "Opis przegród, detale cieplne i szczelności, zestawienia stolarki, lameli i balustrad."}
+    - {kod: "PT · BO", nazwa: "Projekt techniczny — konstrukcja", arkusze: "arkusze_bo.yaml",
+       opis: "Obliczenia statyczne, rysunki fundamentu, stropów, wsporników i zbrojenia."}
+    - {kod: "PT · IS", nazwa: "Projekt techniczny — instalacje sanitarne", arkusze: "arkusze_is.yaml",
+       opis: "Ogrzewanie, wentylacja z odzyskiem ciepła, woda, kanalizacja, deszczówka, projektowana charakterystyka energetyczna."}
+    - {kod: "PT · IE", nazwa: "Projekt techniczny — instalacje elektryczne", arkusze: "arkusze_ie.yaml",
+       opis: "Zasilanie, rozdzielnice, bilans mocy, fotowoltaika, instalacja odgromowa, teletechnika."}
+  uwaga: >-
+    Projekt techniczny nie jest dołączany do wniosku o pozwolenie na budowę. Inwestor zapewnia jego sporządzenie
+    przed rozpoczęciem robót i przekazuje go kierownikowi budowy (Prawo budowlane, art. 42 ust. 1 — orientacyjnie).
+
+adaptacja:
+  tytul: "Adaptacja do działki"
+  punkty:
+    - "Projekt gotowy nie jest projektem budowlanym dla konkretnej działki. Adaptację wykonuje projektant z uprawnieniami budowlanymi do projektowania w odpowiedniej specjalności, który przejmuje odpowiedzialność za projekt (Prawo budowlane, art. 12 i art. 20 — orientacyjnie)."
+    - "PZT sporządza się na aktualnej mapie do celów projektowych (Prawo budowlane, art. 34 ust. 3 pkt 1)."
+    - "Projekt dostosowuje się do ustaleń miejscowego planu albo decyzji o warunkach zabudowy: linii zabudowy, wysokości, geometrii dachu, wskaźników zabudowy i powierzchni biologicznie czynnej. Zgodność sprawdza organ przy pozwoleniu na budowę (art. 35 ust. 1)."
+    - "Warunki gruntowe potwierdza opinia geotechniczna, a w razie potrzeby dokumentacja badań podłoża (rozporządzenie w sprawie ustalania geotechnicznych warunków posadawiania, Dz.U. 2012 poz. 463). Posadowienie i konstrukcję weryfikuje projektant konstrukcji."
+    - "Przepisy techniczne: {wt_uwagi}. O przepisach właściwych w dniu adaptacji decyduje projektant adaptujący."
+  zastrzezenie: >-
+    Podstawy prawne podajemy informacyjnie, według stanu z dnia generowania strony ({data}). Nie są poradą prawną
+    i nie przesądzają o wyniku postępowania przed organem.
+
+pakiety:
+  tytul: "Pakiety"
+  etykieta: "CENY PRZYKŁADOWE — strona demonstracyjna, oferta nie istnieje"
+  lista:
+    - {nazwa: "Podstawowy", cena: "7 900 zł", dla: "Do adaptacji przez Twojego projektanta",
+       zawiera: ["PAB z opisem i rysunkami", "wzorcowy PZT dla działki referencyjnej", "PDF, rysunki wektorowe", "zgoda na adaptację i zmiany"]}
+    - {nazwa: "Pełny", cena: "12 900 zł", dla: "Komplet do pozwolenia i budowy", wyroznij: true,
+       zawiera: ["wszystko z pakietu Podstawowego", "PT: architektura, konstrukcja, instalacje sanitarne i elektryczne", "projektowana charakterystyka energetyczna", "model 3D (glTF) i pliki DXF rzutów"]}
+    - {nazwa: "Pełny z adaptacją", cena: "od 19 500 zł", dla: "Adaptacja przez współpracującego projektanta",
+       zawiera: ["wszystko z pakietu Pełnego", "PZT na mapie do celów projektowych", "dostosowanie do MPZP lub decyzji WZ", "komplet do wniosku o pozwolenie na budowę"]}
+  opcje_tytul: "Opcje dodatkowe (ceny przykładowe)"
+  opcje:
+    - {nazwa: "Lustrzane odbicie rzutów", cena: "900 zł"}
+    - {nazwa: "Kosztorys inwestorski", cena: "2 400 zł"}
+    - {nazwa: "Lamele kompozytowe zamiast drewna termo (zmiana w PT)", cena: "1 200 zł"}
+    - {nazwa: "Wizualizacje wnętrz strefy dziennej (3 ujęcia)", cena: "1 800 zł"}
+    - {nazwa: "Nadzór autorski — pakiet 5 wizyt", cena: "3 500 zł"}
+    - {nazwa: "Dodatkowy komplet wydruków", cena: "450 zł"}
+
+faq:
+  tytul: "Pytania"
+  lista:
+    - p: "Czy mogę budować na podstawie samego projektu z katalogu?"
+      o: >-
+        Nie. Projekt gotowy trzeba zaadaptować do działki: projektant z uprawnieniami sporządza PZT na mapie do celów
+        projektowych, dostosowuje projekt do planu miejscowego albo decyzji o warunkach zabudowy i do warunków
+        gruntowych, a następnie podpisuje projekt jako autor adaptacji.
+    - p: "Jak szeroka musi być działka?"
+      o: >-
+        Przy orientacji jak w projekcie (wjazd od {droga}, ogród od {ogrod}) minimum to {dz_szer} m szerokości
+        i {dz_gl} m głębokości. Liczymy to z gabarytów budynku i odległości od granic według § 12 warunków
+        technicznych, a od strony drogi przyjmujemy linię zabudowy {dz_lz} m. Metodę opisujemy w sekcji o działce.
+    - p: "Jaki jest wskaźnik EP i klasa energetyczna?"
+      o: >-
+        Moduł obliczeń projektu wyznacza EP = {EP} kWh/(m²·rok) przy wymaganiu {EP_max}. Klasy energetycznej moduł
+        nie wyznacza, więc jej nie podajemy. Świadectwo charakterystyki energetycznej sporządza się dla budynku
+        po zakończeniu budowy.
+    - p: "Czy można zmienić projekt?"
+      o: >-
+        Tak, w ramach adaptacji. Typowe zmiany to lustrzane odbicie, inny materiał lameli, zmiana podziału ścianek
+        działowych albo przeznaczenia pokoju na parterze. Zmiany konstrukcji, wysokości lub obrysu wymagają
+        zgody autora i sprawdzenia zgodności z przepisami na nowo.
+    - p: "Ile kosztuje budowa tego domu?"
+      o: >-
+        Nie podajemy kosztu budowy: zależy od regionu, wykonawcy, standardu wykończenia i warunków gruntowych.
+        Kosztorys inwestorski można zamówić jako opcję dodatkową.
+    - p: "W jakiej formie dostanę dokumentację?"
+      o: >-
+        W formie elektronicznej: pliki PDF z rysunkami wektorowymi, z podziałem na tomy PZT, PAB i PT.
+        Wydruki są opcją dodatkową.
+    - p: "Czy dom potrzebuje dużego terenu wokół?"
+      o: >-
+        Powierzchnia zabudowy to {zabudowa}. Garaż mieści się w bryle parteru. Wodę deszczową projekt zagospodarowuje
+        na działce: zbiornik {zbiornik_V} m³ do podlewania i niecka chłonna {niecka_A}. Na mniejszej działce
+        te elementy trzeba rozmieścić na nowo w PZT.
+
+formularz:
+  tytul: "Zapytaj o projekt"
+  demo: >-
+    DEMONSTRACJA: formularz nie wysyła danych. Po kliknięciu „Wyślij zapytanie” sprawdzimy pola i pokażemy
+    podsumowanie na tej stronie. Nic nie zostanie przesłane ani zapisane.
+  tematy: ["Zakup projektu gotowego", "Adaptacja do mojej działki", "Zmiany w projekcie", "Inne pytanie"]
+  zgoda: "Rozumiem, że to strona demonstracyjna i zapytanie nie zostanie nigdzie wysłane."
+  kontakt: "Adres do korespondencji (przykładowy, nie działa):"
+
+stopka:
+  zastrzezenia:
+    - "Strona demonstracyjna. „Pasmo i Cień” to marka przykładowa; oferta, ceny i dane kontaktowe są fikcyjne."
+    - "Działka referencyjna, adres, obręb i plan miejscowy w modelu projektu są fikcyjne."
+    - "Liczby o budynku generuje skrypt z modelu projektu; w razie rozbieżności rozstrzyga dokumentacja projektowa."
+    - "Wizualizacje mają charakter poglądowy: zieleń, otoczenie i wyposażenie mogą różnić się od stanu po realizacji."
+    - "Projekt wymaga adaptacji przez projektanta z uprawnieniami. Informacje prawne nie są poradą prawną."

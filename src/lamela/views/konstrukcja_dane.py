@@ -548,6 +548,7 @@ def _belki(an, D):
                    strz=(fis[0], fis[1], 2), h_pl=max(h_tot - float(b["h"]), 0.0),
                    M=float(zgs[0].M_Ed) if zgs else 0.0, V=float(sc.V_Ed), eta=pz.wykorzystanie,
                    niesp=warunki_niespelnione(pz.wyniki), opis=str(b.get("uwagi") or ""))
+        _gora_015(B)
         D.belki.append(B)
     got = {x.id for x in D.belki}
     for bid, b in bel.items():
@@ -555,6 +556,26 @@ def _belki(an, D):
             D.braki.append(f"Belka {bid} ({b.get('uwagi', '')[:60]}…): brak pozycji wymiarowania w bibliotece "
                            "(belka nie jest podporą płyty w modelu MES — np. belka odwrócona/wspornikowa) — "
                            "zbrojenie do obliczenia indywidualnego [WYMAGA ANALIZY].")
+
+
+def _gora_015(B) -> None:
+    """Pręty górne ≥ 0,15·A_s,dół (PN-EN 1992-1-1 9.2.1.2(1): utwierdzenie częściowe podpór w konstrukcji monolitycznej —
+    nadproża i belki betonowane razem z wieńcem/stropem). Gdy przyjęte w bibliotece pręty górne są mniejsze — dobór
+    najlżejszego układu n·φ (n = 2…3, φ 10…16) spełniającego warunek; zmiana zapisywana w uwagach pozycji."""
+    As_d = B.dol[0] * pole_preta(B.dol[1])
+    need = max(0.15 * As_d, B.As_gora[0])
+    if B.gora[0] * pole_preta(B.gora[1]) + 1e-6 >= need:
+        return
+    kand = sorted(((n * pole_preta(fi), n, fi) for n in (2, 3) for fi in (10, 12, 14, 16)
+                   if n * pole_preta(fi) >= need), key=lambda t: (t[0], t[1]))
+    if not kand:
+        return
+    A, n, fi = kand[0]
+    B.niesp = list(B.niesp)
+    B.opis = (B.opis + "; " if B.opis else "") + (f"pręty górne zwiększone do {n}Ø{fi} (≥ 0,15·A_s,dół = {need:.0f} mm² — "
+                                                  "9.2.1.2(1))")
+    B.gora = (n, fi)
+    B.As_gora = (B.As_gora[0], B.As_gora[1], A)
 
 
 def _nadproza(an, D):
@@ -584,6 +605,7 @@ def _nadproza(an, D):
                    M=float(pz.dane.get("M", 0.0)), eta=pz.wykorzystanie, niesp=warunki_niespelnione(pz.wyniki),
                    opis=f"nad otworem {oid} ({o.szer * 100:.0f} cm) w ścianie {w.id}", sciana=w.id, oparcie=a,
                    ids=[oid])
+        _gora_015(B)
         D.nadproza.append(B)
 
 

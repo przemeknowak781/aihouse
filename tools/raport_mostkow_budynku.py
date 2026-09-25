@@ -283,8 +283,9 @@ def _dz2_z_modelu(m) -> str:
         return ""
     if tz is None:
         return ""
-    return (f" Bieżący model: posadzka garażu {zf:+.2f}, teren projektowany przed DZ2 (TIN) {tz:+.3f} → cokół "
-            f"{zf - tz:.2f} m.").replace(".", ",")
+    txt = (f" Bieżący model: posadzka garażu {zf:+.2f}, teren projektowany przed DZ2 (TIN) {tz:+.3f} → cokół "
+           f"{zf - tz:.2f} m").replace(".", ",").replace("-", "−")
+    return txt + (" — poniżej 0,15 m." if zf - tz < 0.15 else ".")
 
 
 def rekomendacje_reszta_md(m, dane) -> str:

@@ -69,13 +69,13 @@ def k_s_z_geotechniki(B: float, L: float, M0: float, nu: float = 0.3, alfa: floa
            f"{f(M0, 0)}·(1+{f(nu, 2)})(1−2·{f(nu, 2)})/(1−{f(nu, 2)})", Es, "kPa", nd=0,
            zrodlo="teoria sprężystości (jednoosiowy stan odkształcenia); PN-EN 1997-2 zał. K")
     Ic = wsp_wplywu_prostokata(L / B)
-    w.krok("Współczynnik wpływu (środek prostokąta, m = L/B)", "I_c", f"m = {f(L / B, 3)}", Ic, nd=3,
+    w.krok("Współczynnik wpływu (środek prostokąta, m = L/B)", "I_c(m), m = L/B", f"I_c({f(L / B, 3)})", Ic, nd=3,
            zrodlo="Bowles (1996) (5-16a); PN-EN 1997-1 zał. F.2")
     k = Es / (alfa * B * (1 - nu ** 2) * Ic)
     w.krok("Współczynnik podatności (osiadanie średnie α·s_c)", "k_s = E_s/(α·B·(1−ν²)·I_c)",
            f"{f(Es, 0)}/({f(alfa, 2)}·{f(B, 2)}·(1−{f(nu, 2)}²)·{f(Ic, 3)})", k, "kN/m³", nd=0)
-    w.krok("Obwiednia wariantów (niepewność modelu Winklera)", "k_s,min; k_s,max = k_s/r; k_s·r",
-           f"r = {f(rozrzut, 1)}", f"{f(k / rozrzut, 0)}; {f(k * rozrzut, 0)}", "kN/m³", zrodlo="[ZAŁ] Bowles 9.7")
+    w.krok("Obwiednia wariantów (niepewność modelu Winklera)", "k_s,min = k_s/r; k_s,max = k_s·r",
+           f"{f(k, 0)}/{f(rozrzut, 1)}; {f(k, 0)}·{f(rozrzut, 1)}", f"{f(k / rozrzut, 0)}; {f(k * rozrzut, 0)}", "kN/m³", zrodlo="[ZAŁ] Bowles 9.7")
     w.k_s, w.k_min, w.k_max, w.E_s, w.I_c = k, k / rozrzut, k * rozrzut, Es, Ic
     return w
 
