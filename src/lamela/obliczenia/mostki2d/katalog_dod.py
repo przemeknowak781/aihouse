@@ -312,6 +312,7 @@ def wezly_garazu(model, e: dict):
     if pod_dom and (model.fundamenty() or {}).get("typ") == "plyta":
         w = D.wezel_garaz_plyta(_W(model, kg), _W(model, pod_dom), _W(model, pod_gar), id=f"{e['id']}a",
                                 nazwa=f"Ściana dom–garaż ({kg}) na płycie fundamentowej ({pod_dom} / {pod_gar})")
+        w.dane["geometria z modelu"] = f"ściany {', '.join(s.id for s in sciany)} (Σ {L_sc:.2f} m) na płycie PF"
         out.append((w, L_sc))
     # połączenia pod płytą — wg rodzaju płyty nad stroną domu (lewą) i garażu (prawą)
     warianty: dict[tuple, list] = {}
