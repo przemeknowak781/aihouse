@@ -921,17 +921,22 @@ def _inst_points(vp, lab, s, used):
     """Punkty instalacji w budynku (wodomierz, rozdzielnica) — symbol i opis."""
     k = vp.k
     names = {"wodomierz": ("WM", "wodomierz (w budynku)"), "RG": ("RG", "rozdzielnica główna RG")}
+    done = []
     for key, (sym, txt) in names.items():
         p = s.inst.get(key)
         if p is None:
             continue
+        n0 = lab.mark()
         from ..draft import text as T
         a, b = (T.width(sym, D.H) / 2.0 + 0.6) * k, (D.H / 2.0 + 0.6) * k
         D.fill_white(vp, box(p[0] - a, p[1] - b, p[0] + a, p[1] + b), z=21.0)
         vp.rect(p[0] - a, p[1] - b, p[0] + a, p[1] + b, "Z-UZBROJENIE", pen=0.35)
         vp.text(p, sym, D.H, 0.0, "center", "middle", "Z-UZBROJENIE")
         used.add("inst_" + key)
-        lab.label(p, [txt], D.H, "Z-UZBROJENIE", dists=(3.0, 5.0, 8.0, 12.0), leader_from=2.0, dot=False)
+        lab.reg(n0)
+        done.append((p, txt))
+    for p, txt in done:
+        lab.label(p, [txt], D.H, "Z-UZBROJENIE", dists=(4.0, 6.0, 9.0, 12.0), leader_from=2.0, dot=False)
 
 
 def view_uzbrojenie(ctx, spec, scale, opts):
@@ -970,7 +975,7 @@ def view_uzbrojenie(ctx, spec, scale, opts):
         lab.label(x["p"], [f"S{i + 1}"], D.H, "Z-KOLIZJE", dists=(1.5, 3.0, 5.0, 8.0), leader_from=2.4)
     # wymiary: odległości między sieciami (projektowane, < 3 m), sieć–drzewo, retencja
     for r in K["pary"]:
-        if r["b"].istn or r["d"] > 3.0:
+        if r["b"].istn or r["d"] > r["req"] + 1.0:
             continue
         a, b = nearest_points(r["a"].geom, r["b"].geom)
         _dim_between(lab, r["a"].geom, r["b"].geom, a, b)

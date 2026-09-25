@@ -127,8 +127,9 @@ class PlytaWinkler(PlytaMES):
             raise BladDanych(f"Płyta na podłożu: układ osobliwy (za mała strefa kontaktu?) ({e})") from e
         self._kn = kn
 
-    def rozwiaz_kontakt(self, f: np.ndarray, maks_iter: int = 30) -> WynikKontakt:
-        """Rozwiązanie z kontaktem jednostronnym: elementy o średnim ugięciu < 0 (w górę) bez sprężyn — iteracja."""
+    def rozwiaz_kontakt(self, f: np.ndarray, maks_iter: int = 30, jednostronny: bool = True) -> WynikKontakt:
+        """Rozwiązanie z kontaktem jednostronnym: elementy o średnim ugięciu < 0 (w górę) bez sprężyn — iteracja.
+        jednostronny=False — sprężyny dwustronne (model klasyczny Winklera, do weryfikacji analitycznej)."""
         self.aktywne = np.ones(len(self.els), bool)
         self._faktoryzuj()
         it = 0
@@ -136,6 +137,8 @@ class PlytaWinkler(PlytaMES):
             it += 1
             wyn = self.rozwiaz(f)
             w_el = wyn.w[self.el_nodes].mean(axis=1)
+            if not jednostronny:
+                break
             nowe = w_el > 0.0
             if np.array_equal(nowe, self.aktywne) or it >= maks_iter or not nowe.any():
                 break
@@ -152,7 +155,7 @@ def weryfikacja_hetenyi(L: float = 24.0, b: float = 1.0, h: float = 0.25, E: flo
     szerokości, λ = ⁴√(k/(4·E·I)), I = h³/12 (pasmo b = 1 m; ν = 0 — stan belkowy)."""
     pl = PlytaWinkler(box(0.0, 0.0, L, b), h, E, k, nu=0.0, siatka=siatka, linie_siatki=((L / 2,), ()))
     fv = pl.wektor(0.0, linie=[(LineString([(L / 2, 0.0), (L / 2, b)]), P)])
-    r = pl.rozwiaz_kontakt(fv)
+    r = pl.rozwiaz_kontakt(fv, jednostronny=False)
     EI = E * h ** 3 / 12
     lam = (k / (4 * EI)) ** 0.25
     w0 = P * lam / (2 * k)

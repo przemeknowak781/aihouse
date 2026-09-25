@@ -151,6 +151,16 @@ elewacje (rzut prostokątny z usuwaniem linii niewidocznych), kontrolę kolizji.
 6. Numeracja pomieszczeń na rysunkach: parter = 1.xx, I piętro = 2.xx, II piętro = 3.xx (R4 / PN-EN ISO 4157) — identyfikatory w modelu
    mogą pozostać 0.xx/1.xx/2.xx; generator przenumeruje (przełącznik `numeracja_pomieszczen`).
 7. Rzędne na rysunkach AR z 3 miejscami po przecinku (PN-B-01025); PZT — 2 miejsca, wymiary w PZT z dokładnością 0,01 m.
+8. **Obrysy płyt, dachów i attyk (audyt A2 K-1, 25.09.2026).** Krawędź `stropy`/`dachy` nad ścianą zewnętrzną niższej kondygnacji
+   = **lico warstwy konstrukcyjnej** tej ściany (nie lico ocieplenia) — rdzeń przedłuża warstwy zewnętrzne ściany (ETICS/wełna) na czoło
+   płyty i attyki, więc izolacja jest ciągła. Krawędź płyty/dachu przy ścianie **wyższej** kondygnacji (uskok bryły) = lico zewnętrzne
+   ściany wyższej (płyta ciągła pod jej ociepleniem; dach dochodzi do lica ocieplenia). Rdzeń nie przedłuża warstw zewnętrznych ściany
+   na wysokość płyty, jeśli płyta przechodzi przed licem w inny strop/dach na tym samym poziomie (wspornik stropu, dach przy uskoku).
+   `attyka.szer` = grubość warstwy konstrukcyjnej attyki (w osi muru); `attyka.przegroda` (np. AT1) podaje warstwy: przed konstrukcją —
+   izolacja od strony dachu (IR: pas „izolacja_attyki”), za konstrukcją — ocieplenie czoła (IR dodaje je tylko tam, gdzie ocieplenie
+   ściany nie dochodzi do korony). Końce attyki prostopadłe do ściany wyższej dochodzą do jej lica (usuwany jest tylko pas równoległy).
+   Płyty wysunięte `wsporniki_plyty` zaczynają się od lica ocieplenia; pas lico konstrukcji…lico ocieplenia = strefa łącznika
+   termoizolacyjnego (ETA) w płaszczyźnie izolacji ściany; wierzch płyty wysuniętej = wierzch stropu (pogrubienie od spodu).
 
 ## 6. Rozszerzenia dla wody, izolacji i mostków (wymaganie Inwestora 25.09.2026 — obowiązkowe)
 ```yaml
