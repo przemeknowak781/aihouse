@@ -44,6 +44,7 @@ class PlanResult:
     kond: str | None
     z_cut: float | None
     hatches: list = field(default_factory=list)       # kody kreskowań użyte w przekroju (legenda)
+    hatch_mats: dict = field(default_factory=dict)    # kod kreskowania → kody materiałów modelu
     rooms: list = field(default_factory=list)         # wiersze zestawienia pomieszczeń
     openings: list = field(default_factory=list)      # symbole stolarki na rzucie
     notes: list = field(default_factory=list)
@@ -148,7 +149,6 @@ def exterior_dims(vp, ctx: ViewContext, outline, walls=(), cut_extent=None, open
             base = X0
         else:
             base = X1
-        sg = N @ np.array([1.0, 1.0]) if side in ("prawo", "gora") else -1.0
         sg = 1.0 if side in ("prawo", "gora") else -1.0
         off = 10.0
         n0 = len(vp.prims)
@@ -157,9 +157,9 @@ def exterior_dims(vp, ctx: ViewContext, outline, walls=(), cut_extent=None, open
             if len(ch) < 2:
                 continue
             if side in ("dol", "gora"):
-                dims.dim_h(vp, ch, pos, base)
+                dims.dim_h(vp, ch, pos, base, mask=0.3)
             else:
-                dims.dim_v(vp, ch, pos, base)
+                dims.dim_v(vp, ch, pos, base, mask=0.3)
             off += 7.0
         out[side] = base + sg * (off - 7.0 + 4.0) * k
         if placer is not None:
@@ -251,6 +251,7 @@ class PlanBuilder:
     def cut(self):
         m, vp, z = self.m, self.vp, self.z_cut
         cs = E.CutSet()
+        self._hm = {}
         self.cut_walls, self.cut_walls_k = [], []
         struct = []
         voids = []
@@ -267,6 +268,7 @@ class PlanBuilder:
                 hc = hatch_code(m, l.mat)
                 kind = cut_kind(hc, l.klasa, l.konstrukcyjna, w.typ)
                 cs.add(l.polygon, hc, kind, axis=(tuple(w.p1), tuple(w.p2)))
+                self._hm.setdefault(hc, set()).add(l.mat)
                 if l.konstrukcyjna:
                     struct.append(l.polygon)
             for o in w.otwory:
@@ -291,12 +293,14 @@ class PlanBuilder:
             else:
                 kind = cut_kind(hc, None, False)
             cs.add(p.shape(), hc, kind)
+            self._hm.setdefault(hc, set()).add(p.material)
             if kind in ("konstr", "stal"):
                 struct.append(p.shape())
         n0 = len(vp.prims)
         res = cs.draw(vp)
         self.hatch_prims = (n0, len(vp.prims))
         self.res.hatches = sorted({it.mat for it, _g in res if it.mat != NO_HATCH})
+        self.res.hatch_mats = {hc: sorted(v) for hc, v in self._hm.items() if hc in self.res.hatches}
         self.cut_region = clean(unary_union([g for _it, g in res])) if res else Polygon()
         self.struct = clean(unary_union(struct)) if struct else Polygon()
         self.voids = unary_union(voids) if voids else Polygon()
@@ -357,16 +361,23 @@ class PlanBuilder:
             return (p.element if p.kind in ("slab", "roof", "canopy", "terrace", "beam", "parapet") else
                     f"bryła {p.level}", "x")
         groups = hlr.top_groups(cands, looking="up", key_fn=key)
-        # obszar „pod dachem” danej kondygnacji — linie wewnątrz pomieszczeń tylko dla otworów/belek
-        order = hlr.hidden_lines(groups, occluder=self.cut_region, tol=5e-4, min_len=0.05)
+        # zasłaniają: elementy przecięte i nadproża nad otworami (linie w świetle otworów pomijane)
+        occ = unary_union([self.cut_region, self.voids]) if not self.voids.is_empty else self.cut_region
+        order = hlr.hidden_lines(groups, occluder=occ, tol=5e-4, min_len=0.05)
         self.above_lines = {}
         allg = []
+        ob = self.outline.buffer(0.05, join_style=2) if not self.outline.is_empty else None
         for g in order:
             if g.lines is None or g.lines.is_empty:
                 continue
-            draw_lines(self.vp, g.lines, "A-NAD-CIECIEM", pen="cienka", lt="KRESKOWA", min_len=0.05)
-            self.above_lines.setdefault(g.material, []).append(g.lines)
-            allg.append(g.lines)
+            ln = g.lines
+            if str(g.material).startswith("bryła") and ob is not None:
+                ln = ln.difference(ob)          # bryły wyższe — tylko poza obrysem kondygnacji (wsporniki)
+                if ln.is_empty:
+                    continue
+            draw_lines(self.vp, ln, "A-NAD-CIECIEM", pen="cienka", lt="KRESKOWA", min_len=0.05)
+            self.above_lines.setdefault(g.material, []).append(ln)
+            allg.append(ln)
         if allg:
             self.placer.add_lines(unary_union(allg), w=0.15)
 
@@ -744,8 +755,8 @@ class PlanBuilder:
     # ------------------------------------------------------------------ opisy
     def annotate(self):
         vp, k = self.vp, self.vp.k
-        # wymiary zewnętrzne, osie
-        ext = self.cut_region.bounds if not self.cut_region.is_empty else self.outline.bounds
+        # wymiary zewnętrzne, osie — poza całym narysowanym obszarem (tarasy, płyty nad, słupy)
+        ext = vp.extents() or (self.cut_region.bounds if not self.cut_region.is_empty else self.outline.bounds)
         walls_k = [w for w in self.cut_walls_k if w.kond == self.kid] or self.cut_walls_k
         cols = [c for c in self.columns if not self.outline.buffer(0.05).contains(Point(c))]
         offs = exterior_dims(vp, self.ctx, self.outline, walls_k, ext, openings=True, columns=cols,
@@ -798,7 +809,8 @@ class PlanBuilder:
                     S.room_tag(cv, pos, num, var["name"], var["area"], floor=var["floor"], level_z=var["level_z"],
                                h=2.5, h_num=3.5)
                 last = vi == len(variants) - 1
-                pos, cost = self.placer.place(vp, fn, cands, bounds=bounds, max_cost=None if last else 1.5)
+                pos, cost = self.placer.place(vp, fn, cands, bounds=bounds, max_cost=None if last else 2.5,
+                                              penalty_step=0.004)
                 if pos is not None:
                     break
             self.res.rooms.append(dict(nr=num, id=r.id, nazwa=r.nazwa, pow=r.pow_netto, kategoria=r.kategoria,
@@ -877,21 +889,21 @@ class PlanBuilder:
                 best = None
                 for r in list(todo.values()):
                     x0, y0, x1, y1 = r.polygon.bounds
-                    for f in (0.3, 0.22, 0.38, 0.62, 0.7, 0.78, 0.15, 0.85):
+                    for f in (0.3, 0.22, 0.38, 0.62, 0.7, 0.78, 0.15, 0.85, 0.1, 0.9, 0.45, 0.55):
                         c = (y0 + f * (y1 - y0)) if axis == "h" else (x0 + f * (x1 - x0))
                         ev = self._eval_line(axis, c, todo, rooms, S_, (X0, Y0, X1, Y1))
                         if ev is None:
                             continue
                         if best is None or ev["score"] > best["score"]:
                             best = ev
-                if best is None or best["score"] < 0.5:
+                if best is None or best["score"] <= 0.0:
                     break
                 n0 = len(vp.prims)
                 for ch in best["chains"]:
                     if axis == "h":
-                        dims.dim_h(vp, ch, best["c"], best["c"] - 0.2, ext="short")
+                        dims.dim_h(vp, ch, best["c"], best["c"] - 0.2, ext="short", mask=0.3)
                     else:
-                        dims.dim_v(vp, ch, best["c"], best["c"] + 0.2, ext="short")
+                        dims.dim_v(vp, ch, best["c"], best["c"] + 0.2, ext="short", mask=0.3)
                 self.placer.add_prims(vp.prims[n0:], w_text=1.0, w_line=0.6)
                 for rid in best["covered"]:
                     todo.pop(rid, None)
@@ -975,7 +987,7 @@ class PlanBuilder:
         pen = 0.0
         if not self.voids.is_empty and ln.intersects(self.voids):
             pen += 4.0
-        score = len(covered) * 3.0 - cost * 0.6 - pen
+        score = len(covered) * 4.0 - cost * 0.35 - pen
         return dict(score=score, c=c, chains=out_ch, covered=covered)
 
     def _is_ext_wall_interval(self, axis, c, t0, t1):
@@ -1000,9 +1012,19 @@ class PlanBuilder:
             if not segs:
                 continue
             segs.sort(key=lambda t: -t[0])
-            text = f"obrys {elem} nad" if not str(elem).startswith("bryła") else f"obrys {elem} nad"
+            ob = self.outline.buffer(-0.02) if not self.outline.is_empty else None
+            inside = [s_ for s_ in segs if ob is not None and ob.contains(Point((s_[1] + s_[2]) / 2))]
+            outside = [s_ for s_ in segs if s_ not in inside]
+            if str(elem).startswith("bryła"):
+                text, use = f"obrys {elem.replace('bryła ', 'bryły ')} nad", outside
+            elif outside:
+                text, use = f"obrys płyty {elem} nad", outside
+            else:
+                text, use = f"otwór w stropie {elem} nad", inside
+            if not use:
+                continue
             cands = []
-            for L, p, q in segs[:4]:
+            for L, p, q in use[:4]:
                 d = unit(q - p)
                 for f in (0.5, 0.3, 0.7):
                     P = p + (q - p) * f

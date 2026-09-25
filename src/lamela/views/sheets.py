@@ -235,6 +235,27 @@ def _room_table(rows):
     return fn
 
 
+def legend_entries(model, hatch_mats: dict) -> list:
+    """Pozycje legendy kreskowań: (kod wzoru, „nazwy materiałów modelu — opis wzoru”)."""
+    from .common import material_name
+    out = []
+    for hc in sorted(hatch_mats):
+        pat = hatch.PATTERNS.get(hc)
+        if pat is None:
+            continue
+        desc = pat.name.split(" — ", 1)[1] if " — " in pat.name else ""
+        names = []
+        for mc in hatch_mats[hc]:
+            nm = "grunt rodzimy" if mc == "GRUNT" else material_name(model, mc)
+            if nm not in names:
+                names.append(nm)
+        lab = "; ".join(names[:4]) + ("…" if len(names) > 4 else "")
+        if desc:
+            lab += f" — {desc}"
+        out.append((hc, lab))
+    return out
+
+
 def _hatch_legend(codes):
     def fn(sh, x, y, w):
         if not codes:
@@ -383,7 +404,15 @@ def build_sheet(ctx: ViewContext, spec: dict, idx: int, total: int):
     rooms = [r for v in views if v.kind == "rzut" for r in v.result.rooms]
     if rooms:
         col.add("rooms", _room_table(rooms))
-    codes = sorted({c for v in views if v.kind in ("rzut", "przekroj") for c in (v.result.hatches or [])})
+    hm = {}
+    for v in views:
+        if v.kind in ("rzut", "przekroj"):
+            for hc, mats in (getattr(v.result, "hatch_mats", None) or {}).items():
+                hm.setdefault(hc, [])
+                for mc in mats:
+                    if mc not in hm[hc]:
+                        hm[hc].append(mc)
+    codes = legend_entries(m, hm)
     if codes:
         col.add("hatch", _hatch_legend(codes))
     if kinds & {"rzut", "dach"}:

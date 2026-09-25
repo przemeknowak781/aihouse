@@ -376,18 +376,25 @@ class Placer:
         """Koszt kolizji [mm² papieru] nowych napisów (z wszystkim) i linii/wypełnień (z napisami)."""
         k2 = self.k * self.k
         c = 0.0
+        base = {"text": 4.0, "area": 2.0, "line": 1.0}
         for g in texts:
             for i in self._query(g):
                 gi = self.geoms[i]
                 if gi.intersects(g):
-                    c += gi.intersection(g).area / k2 * self.w[i] * (3.0 if self.cat[i] == "text" else 1.0)
+                    a = gi.intersection(g).area / k2
+                    if a < 0.02:
+                        continue
+                    c += (base[self.cat[i]] + a * (3.0 if self.cat[i] == "text" else 1.0)) * self.w[i]
         for g in list(lines) + list(fills):
             for i in self._query(g):
                 if self.cat[i] != "text":
                     continue
                 gi = self.geoms[i]
                 if gi.intersects(g):
-                    c += gi.intersection(g).area / k2 * self.w[i] * 0.6
+                    a = gi.intersection(g).area / k2
+                    if a < 0.02:
+                        continue
+                    c += (1.0 + a) * self.w[i] * 0.6
         return c
 
     def trial_cost(self, vp: Viewport, draw_fn, cand, bounds=None) -> tuple[float, list]:

@@ -40,6 +40,7 @@ SEC_EXCL = {"furniture"}
 class SectionResult:
     sec: dict
     hatches: list = field(default_factory=list)
+    hatch_mats: dict = field(default_factory=dict)
     height: dict = field(default_factory=dict)
     extent: tuple | None = None
     notes: list = field(default_factory=list)
@@ -286,6 +287,11 @@ class SectionBuilder:
         n0 = len(vp.prims)
         res = cs.draw(vp)
         self.res.hatches = sorted({it.mat for it, _g in res if it.mat != NO_HATCH})
+        hm = {}
+        for it in self.items:
+            hm.setdefault(it["hc"], set()).add(it["p"].material)
+        hm.setdefault("GRUNT_RODZIMY", set()).add("GRUNT")
+        self.res.hatch_mats = {hc: sorted(v) for hc, v in hm.items() if hc in self.res.hatches}
         self.cut_region = clean(unary_union([g for it, g in res if it.kind != "grunt"]))
         self.ground_vis = clean(unary_union([g for it, g in res if it.kind == "grunt"]))
         self.placer.add(self.cut_region, "area", 1.0)
