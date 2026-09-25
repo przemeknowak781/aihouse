@@ -230,6 +230,7 @@ class AnalizaKonstrukcji:
         self.pos_obc: Pozycja | None = None
         self.q_p = None
         self.wiatr_sc = None
+        self.scisle = False
 
     # --------------------------------------------------------------------------------------------
     def log(self, tekst: str):
@@ -243,25 +244,41 @@ class AnalizaKonstrukcji:
     def rys(self, nazwa: str) -> Path | None:
         return (self.rys_dir / nazwa) if self.rys_dir else None
 
-    def uruchom(self) -> "AnalizaKonstrukcji":
+    def _bezp(self, fn, *args, opis: str = ""):
+        """Wykonuje etap analizy; błąd danych/obliczeń nie przerywa całości — trafia do uwag raportu („BŁĄD ANALIZY”)."""
+        try:
+            return fn(*args)
+        except Exception as ex:  # noqa: BLE001
+            if self.scisle:
+                raise
+            import traceback
+            tb = traceback.extract_tb(ex.__traceback__)[-1]
+            self.log(f"BŁĄD ANALIZY ({opis or fn.__name__}): {type(ex).__name__}: {ex} [{Path(tb.filename).name}:{tb.lineno}] "
+                     "— pozycja pominięta/niekompletna [WYMAGA ANALIZY].")
+            return None
+
+    def uruchom(self, scisle: bool = False) -> "AnalizaKonstrukcji":
+        """Pełna analiza (scisle=True — wyjątki przerywają obliczenia; domyślnie trafiają do uwag raportu)."""
+        self.scisle = scisle
         self._ogolne()
         self._grupy_plyt()
-        self._schody()
+        self._bezp(self._schody, opis="schody")
         zdarz = [(g.wierzch + 0.001, "g", g) for g in self.grupy]
         zdarz += [(w.z_do, "s", w) for w in self.m.sciany() if w.typ in TYPY_NOSNE]
         zdarz.sort(key=lambda t: -t[0])
         for _, typ, ob in zdarz:
             if typ == "g":
-                self._obc_na_grupie(ob)
-                self._analiza_grupy(ob)
-                self._belki_grupy(ob)
-                self._slupy_pod_grupa(ob)
+                if self._bezp(self._obc_na_grupie, ob, opis=f"obciążenia płyty {ob.nazwa}") is None and not hasattr(ob, "sciany_pod"):
+                    ob.sciany_pod, ob.belki = [], []
+                self._bezp(self._analiza_grupy, ob, opis=f"płyta {ob.nazwa}")
+                self._bezp(self._belki_grupy, ob, opis=f"belki pod {ob.nazwa}")
+                self._bezp(self._slupy_pod_grupa, ob, opis=f"słupy pod {ob.nazwa}")
             else:
-                self._sciana(ob)
-        self._nadproza()
-        self._wience()
-        self._slupy()
-        self._fundamenty()
+                self._bezp(self._sciana, ob, opis=f"ściana {ob.id}")
+        self._bezp(self._nadproza, opis="nadproża")
+        self._bezp(self._wience, opis="wieńce")
+        self._bezp(self._slupy, opis="słupy")
+        self._bezp(self._fundamenty, opis="fundamenty")
         self._numeruj()
         return self
 
@@ -1397,7 +1414,11 @@ class AnalizaKonstrukcji:
             w0.krok("Siła poprzeczna maks.", "V_Ed", "", VEd, "kN")
             poz.wyniki.append(w0)
             if stalowa:
-                prz = przekroj(str(b.get("przekroj") or f"PROST {bw * 1000:g}x{hb * 1000:g}"))
+                try:
+                    prz = przekroj(str(b.get("przekroj") or f"PROST {bw * 1000:g}x{hb * 1000:g}"))
+                except BladDanych as ex:
+                    poz.uwagi.append(f"{ex} — przyjęto przekrój pełny b×h [UPR]")
+                    prz = przekroj(f"PROST {bw * 1000:g}x{hb * 1000:g}")
                 st = StalKonstr(str(b.get("mat")) if "S" in str(b.get("mat")) else p.stal_konstr)
                 wk = float(max(np.abs(rozw["G"].w + sum(rozw[c].w for c in rozw if c != "G")))) / (st.E * prz.I_y * 1e-9) * 1000
                 poz.wyniki.append(stalm.belka_stalowa(prz, st, L, MEd, VEd, w_k=wk, p=p, nazwa=f"{bid} — nośność"))

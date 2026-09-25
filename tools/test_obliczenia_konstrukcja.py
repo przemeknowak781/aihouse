@@ -255,6 +255,7 @@ def analiza(rys_dir=None):
 
 def test_model_pozycje():
     an = analiza()
+    assert not [u for u in an.uwagi if u.startswith("BŁĄD")], [u for u in an.uwagi if u.startswith("BŁĄD")]
     ids = {pz.ident for g in an.pozycje for pz in g.podpozycje}
     for need in ("D1", "ST1", "PL-D", "SCH1", "B1", "SL1", "SL2", "S0-05", "S1-01", "L1", "L5", "F1", "F2", "N-O0-01"):
         assert need in ids, f"brak pozycji {need}"

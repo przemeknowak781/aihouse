@@ -32,7 +32,7 @@ from pathlib import Path
 
 from shapely.geometry import box
 
-from .geometria import Material, Obszar, Strefa, Warstwa, Wezel, U_warstw
+from .geometria import Material, Obszar, Strefa, Warstwa, Wezel, U_warstw  # noqa: F401
 from .siatka import siatka_dla_wezla
 from .solver import ModelMOS
 
@@ -303,7 +303,81 @@ def waliduj_wszystko() -> list[WynikWalidacji]:
     return [w1, waliduj_przypadek2(), waliduj_przypadek2_siatki(), waliduj_1d(), w1a, waliduj_naroze()]
 
 
-def raport_walidacji(wyniki: list[WynikWalidacji] | None = None, plik: str | Path | None = None) -> str:
+# --------------------------------------------------------------------------------------------------
+# Kontrole poprawek po weryfikacji niezależnej
+# --------------------------------------------------------------------------------------------------
+PSI_FIN_REF = 0.03472     # ψ (półmodel) płaskownika stalowego 2 mm w izolacji 0,2 m — niezależny solver węzłowy
+                          # weryfikatora (zbieżny: 0,034798 / 0,034746 / 0,034728) [odniesienie numeryczne, nie normowe]
+
+
+def kontrole_poprawek() -> list[list]:
+    """Kontrole numeryczne poprawek (uruchamiane przy każdym raporcie): [nr, zagadnienie, wynik kontroli, ok]."""
+    from .geometria import ElementFlankujacy, _nas, strefy_z_dopelnienia, wezel_attyka, wezel_naroznik_zewnetrzny
+    from .siatka import podzial
+    from .wyniki import fmt_liczba as _f
+    from .wyniki import oblicz_wezel
+    out = []
+    # 2 — szczeliny
+    M = Material
+    wyn = []
+    for gap in (2e-7, 1e-4):
+        ob = [Obszar(box(0, 0, 0.18, 1), M("SIL", 0.77)), Obszar(box(0.18 + gap, 0, 0.38, 1), M("EPS", 0.031))]
+        st = strefy_z_dopelnienia(ob, box(-0.05, 0, 0.43, 1), [((-0.025, 0.5), _nas("i", 20, "wewn")),
+                                                                ((0.405, 0.5), _nas("e", -18, "zewn"))])
+        wz = Wezel("szczelina", "t", "t", ob, st, przekroj="poziomy")
+        try:
+            r = ModelMOS(wz, siatka_dla_wezla(wz)).rozwiaz()
+            wyn.append(r.Phi_grup()["i"] / 38.0)
+        except ValueError:
+            wyn.append(None)
+    U1 = 1 / (0.13 + 0.18 / 0.77 + 0.2 / 0.031 + 0.04)
+    ok2 = wyn[0] is not None and abs(wyn[0] - U1) < 1e-4 and wyn[1] is None
+    out.append(["2", "szczelina między wielobokami 0,2 µm / 0,1 mm (ściana SIL 18 + EPS 20)",
+                f"0,2 µm → U_2D = {_f(wyn[0], 4)} (1D: {_f(U1, 4)}; przyciąganie do 1 µm); 0,1 mm → "
+                + ("ValueError (szczelina wykryta)" if wyn[1] is None else f"U_2D = {_f(wyn[1], 4)} — NIE WYKRYTO"), ok2])
+    # 5 — podział długich odcinków
+    try:
+        e = podzial(0.0, 20.0, 0.003, 0.003, 1.25, 2)
+        out.append(["5", "podzial(0; 20 m; h = 3 mm)", f"{len(e) - 1} komórek, max {_f(max(e[1:] - e[:-1]) * 1000, 3)}"
+                    " mm (wcześniej OverflowError)", True])
+    except OverflowError:   # pragma: no cover
+        out.append(["5", "podzial(0; 20 m; h = 3 mm)", "OverflowError", False])
+    # 3 — θ_si,min w wierzchołku (naroże słabo ocieplone: cegła 25 cm + EPS 5 cm, R_si = 0,25)
+    wl = [Warstwa(M("TG", 0.4), 0.015), Warstwa(M("CEG", 0.77), 0.25, True), Warstwa(M("EPS", 0.04), 0.05)]
+    wz = wezel_naroznik_zewnetrzny(wl, theta_i=20, theta_e=-18)
+    t_def = ModelMOS(wz, siatka_dla_wezla(wz), "fRsi").rozwiaz().theta_si_min()[0]
+    t_fin = ModelMOS(wz, siatka_dla_wezla(wz, h_min=0.00025), "fRsi").rozwiaz().theta_si_min()[0]
+    out.append(["3", "θ_si,min naroża wewn. (h_min 2 mm vs 0,25 mm; odniesienie 10,737 °C)",
+                f"{_f(t_def, 3)} / {_f(t_fin, 3)} °C (wcześniej 10,810 / 10,747 — środki ścian komórek)",
+                abs(t_def - 10.737) < 0.02 and abs(t_fin - 10.737) < 0.01])
+    # 4 — płaskownik stalowy w izolacji (ψ małe — różnica dużych liczb)
+    ins, pl = M("INS", 0.035), M("PL", 50.0)
+    ob = [Obszar(box(0, 0, 0.5, 0.2), ins), Obszar(box(0, 0, 0.001, 0.2), pl)]
+    st = [Strefa("i", box(0, -0.05, 0.5, 0), 20.0, "wewn", "i", Rs=0.13),
+          Strefa("e", box(0, 0.2, 0.5, 0.25), -18.0, "zewn", "e", Rs=0.04)]
+    fl = [ElementFlankujacy("izolacja", ("i", "e"), 0.5, 0.5, warstwy=[Warstwa(ins, 0.2)])]
+    w = oblicz_wezel(Wezel("fin", "płaskownik", "t", ob, st, fl, przekroj="poziomy"))
+    d = (w.psi_glowne.psi_e - PSI_FIN_REF) / PSI_FIN_REF
+    out.append(["4", "płaskownik stalowy 2 mm przez izolację 0,2 m (półmodel), ψ vs niezależny solver 0,03472",
+                f"ψ = {_f(w.psi_glowne.psi_e, 5)} ({_f(100 * d, 1, znak=True)} %; wcześniej −1,5 % po akceptacji siatki), "
+                f"siatki {', '.join(str(h[1]) for h in w.siatki)}, zbieżność Φ i ψ: {w.zbieznosc_ok}",
+                abs(d) < 0.01 and w.zbieznosc_ok])
+    # 7 — przegroda wentylowana w attyce → błąd; 'legary' nie są pustką wentylowaną
+    wd = [Warstwa(Material("DESKOW", 0.13), 0.025),
+          Warstwa(Material("PW", 0.5, "pustka wentylowana", rodzaj="powietrze_went"), 0.05),
+          Warstwa(Material("PIR", 0.022), 0.2), Warstwa(Material("ZB", 2.3), 0.2, True)]
+    try:
+        wezel_attyka(wl, wd)
+        ok7 = False
+    except ValueError:
+        ok7 = True
+    out.append(["7", "attyka z warstwą dobrze wentylowaną", "ValueError (wariant nieobsługiwany — brak niespójności "
+                "U/2D)" if ok7 else "brak błędu", ok7])
+    return out
+
+
+def raport_walidacji(wyniki: list[WynikWalidacji] | None = None, plik: str | Path | None = None,
+                     weryfikacja: bool = True) -> str:
     from .wyniki import fmt_liczba as f
     wyniki = wyniki or waliduj_wszystko()
     L = ["# Walidacja solvera mostków 2D (`lamela.obliczenia.mostki2d`) — PN-EN ISO 10211:2017 zał. C", "",
@@ -322,6 +396,8 @@ def raport_walidacji(wyniki: list[WynikWalidacji] | None = None, plik: str | Pat
             L.append(f"| {r[0]} | {r[1]} | {f(r[2], 4)} | {f(r[3], 4)} | {f(r[4], 4, znak=True)} |")
         for u in w.uwagi:
             L.append(f"\n{u}")
+    if weryfikacja:
+        L += sekcja_weryfikacji()
     L += ["", "## Źródła danych referencyjnych", ""]
     L += [f"* {n}: {u}" for n, u in ZRODLA]
     L += ["", "Tekst PN-EN ISO 10211:2017 nie był dostępny; dane przypadków 1 i 2 odczytano z rysunków normy "
@@ -333,3 +409,81 @@ def raport_walidacji(wyniki: list[WynikWalidacji] | None = None, plik: str | Pat
         Path(plik).parent.mkdir(parents=True, exist_ok=True)
         Path(plik).write_text(txt, encoding="utf-8")
     return txt
+
+
+UWAGI_WERYFIKACJI = [
+    ("1", "istotna", "Temperatura w wierzchołku siatki na styku materiałów (przypadek 2, punkt G: aluminium / drewno / "
+     "korek) liczona jako średnia arytmetyczna rekonstrukcji z 4 komórek — 1. rząd, zależna od siatki (h_min = 0,5 mm: "
+     "G = 16,108 °C, poza tolerancją).",
+     "`Rozwiazanie.temperatura`: średnia rekonstrukcji ważona λ komórek (dla jednego materiału — bez zmian). "
+     "Test regresji: przypadek 2 na siatkach h_min = 0,5 i 0,1 mm (tabela wyżej)."),
+    ("2", "istotna", "Szczeliny między wielobokami szersze niż tolerancja scalania (10⁻⁷ m) stawały się pustkami "
+     "adiabatycznymi bez ostrzeżenia; bilans energii tylko raportowany.",
+     "(a) `siatka.kontroluj_pustki` — ValueError dla zamkniętych pustek wewnętrznych i dla ciągów komórek pustki "
+     "ograniczonych z obu stron materiałem/strefą (położenie w komunikacie; `Wezel.dopusc_pustki` — wyjątek dla "
+     "celowych wcięć); (b) współrzędne wierzchołków przyciągane do siatki 1 µm; (c) `oblicz_wezel` odrzuca "
+     "rozwiązanie z bilansem ≥ 10⁻⁴ (ValueError)."),
+    ("3", "drobna", "θ_si,min i f_Rsi tylko w środkach ścian komórek — zawyżone o O(h_min) w narożu wewnętrznym i na "
+     "styku ościeża z ramą.",
+     "`theta_si_min` sprawdza też wierzchołki łamanej powierzchni (naroża, końce łańcuchów) — temperatura z rekonstrukcji "
+     "ważonej λ; współczynniki wagowe g (3 temperatury) w tym samym punkcie."),
+    ("4", "drobna", "Cienkie warstwy dobrze przewodzące (blachy, obróbki) — ψ zbieżne tylko w 1. rzędzie; kryterium 1 % "
+     "strumienia nie kontroluje błędu ψ.",
+     "h_min ≤ grubość najcieńszego obszaru o λ ≥ 1; iloraz sąsiednich komórek na liniach granicznych ≤ 2; dodatkowe "
+     "kryterium zbieżności |ΔL_2D| ≤ max(1 % |ψ|; 0,001 W/(m·K)) przy podwojeniu siatki (obok 1 % Φ wg ISO 10211)."),
+    ("5", "drobna", "`podzial` — OverflowError dla długich odcinków przy małym h_max (r**k przed ograniczeniem).",
+     "Wzrost komórek ograniczany przed potęgowaniem; resztę odcinka wypełniają komórki h_max liczone wprost."),
+    ("6", "drobna", "Model gruntu i U podłogi (ISO 13370) z b = 8 m zamiast B' budynku.",
+     "`katalog_z_modelu`: b = B' = A/(0,5·P) z obrysu zewnętrznego parteru (model testowy: 4,74 m) [INT]."),
+    ("7", "drobna", "Attyka: warstwy dachu nad pustką wentylowaną w modelu 2D, a w U pominięte; „legary” "
+     "klasyfikowane jako pustka.",
+     "Rozróżnienie 'powietrze' (niewentylowana, λ_eq — w U i w 2D) i 'powietrze_went' (nazwa „…wentylowana” lub pole "
+     "`wentylowana`); `wezel_attyka` z warstwą wentylowaną → ValueError (wariant nieobsługiwany); słowo „legar” nie "
+     "decyduje o klasyfikacji."),
+    ("8", "istotna", "System wymiarów ψ i H_TB niespójny z projektem (`energia.bryla`, `fizyka.mostki` — wymiary "
+     "wewnętrzne całkowite, okna w świetle otworu w murze); H_TB = 9,28 W/K liczone z ψ_e.",
+     "`ElementFlankujacy.l_oi`, `WynikPsi.psi_oi` (strop pośredni / wspornik / próg: ψ_oi = ψ_e — wysokości „od podłogi "
+     "do podłogi”; attyka: ściana do spodu płyty; okna: ściana do krawędzi otworu w murze + korekta U_w·x0 pasa między "
+     "krawędzią ramy a otworem); H_TB = Σ ψ_oi·l_oi z długościami w tym samym systemie; eksport "
+     "`eksport_wynikow` → {id: {psi_oi, psi_e, psi_i, f_rsi, dlugosc(_oi), typ}} (czytany przez "
+     "`fizyka.mostki.wczytaj_wyniki_symulacji` — pierwszeństwo psi_oi). Poprzednie H_TB = 9,28 W/K (ψ_e, długości "
+     "zewn., w tym otwory wewnętrzne) — NIEPORÓWNYWALNE, wycofane."),
+    ("9", "istotna", "Długość WZ-W1 obejmowała otwory w ścianach wewnętrznych/działowych; pominięte progi; nadproża i "
+     "podokienniki liczone jak ościeże.",
+     "`otwory_zewnetrzne` — tylko ściany o przegrodzie `sciana_zewn` (bez `typ: otwor`); nowe węzły 2D (przekroje "
+     "pionowe): WZ-N1 nadproże, WZ-N2 nadproże z kasetą osłony w ociepleniu (otwory z żaluzją/screenem), WZ-P1 "
+     "podokiennik z parapetem wewn. i obróbką zewn., WZ-T1 próg na płycie parteru (grunt), WZ-T2 próg okna do podłogi "
+     "na stropie, WZ-T3 próg drzwi na płycie wspornikowej z łącznikiem; długości: ościeża 2·wys, nadproża/podokienniki/"
+     "progi szer."),
+]
+
+
+def sekcja_weryfikacji() -> list[str]:
+    """Sekcja raportu „Weryfikacja niezależna i poprawki” (uwagi weryfikatorów, poprawki, kontrole numeryczne)."""
+    from .wyniki import fmt_liczba as f
+    L = ["", "## Weryfikacja niezależna i poprawki", "",
+         "Pakiet sprawdzili dwaj niezależni weryfikatorzy: (A) numeryczno-fizyczny — własny solver węzłowy MOS "
+         "(vertex-centred), szereg Fouriera przypadku 1 (4001 wyrazów), testy skrajnych kontrastów λ, skalowania, "
+         "szczelin, zbieżności katalogu; (B) zgodności z normami PN-EN ISO 10211:2017, 14683:2017, 13788:2013, "
+         "6946:2017, 13370:2017 (próbki norm iTeh, dane przypadku 2 z QuickField/SimScale/Physibel). Potwierdzone bez "
+         "zmian: przypadek 1 zbieżny w 2. rzędzie do rozwiązania Fouriera; przypadek 2 poza punktem G zgodny z "
+         "niezależnym solverem do 0,005 K, Φ = 9,4904 vs 9,4917 W/m; bilans 10⁻¹⁵…3·10⁻⁹; średnia harmoniczna λ i "
+         "warunki Robina (ściana 1D ze skrajnymi warstwami — błąd U ≤ 5·10⁻¹⁰); ΔS naroża 0,5587; kierunki R_si, "
+         "R_si = 0,25 w przebiegu f_Rsi, długości l_e/l_i; brak pustek w węzłach katalogu; obszar gruntu i "
+         "płaszczyzny odcięcia.", "",
+         "| Nr | Waga | Uwaga weryfikatora | Poprawka |", "|---|---|---|---|"]
+    for nr, waga, uw, pop in UWAGI_WERYFIKACJI:
+        L.append(f"| {nr} | {waga} | {uw} | {pop} |")
+    L += ["", "**Kontrole numeryczne poprawek** (uruchamiane przy generowaniu raportu):", "",
+          "| Uwaga | Kontrola | Wynik | Ocena |", "|---|---|---|---|"]
+    for nr, kontrola, wynik, ok in kontrole_poprawek():
+        L.append(f"| {nr} | {kontrola} | {wynik} | {'**OK**' if ok else '**BŁĄD**'} |")
+    L += ["", "Wynik punktu G przypadku 2 **zależał od siatki** przed poprawką 1 (tolerancja ± 0,1 K spełniona na siatce "
+          "walidacyjnej h_min = 0,1 mm częściowo dzięki zaokrągleniu wartości odniesienia 16,3); po poprawce G = "
+          "16,334 °C niezależnie od siatki (0,5 mm → 0,025 mm), zgodnie z niezależnym solverem. Odchyłki A (−0,036 K) "
+          "i B (−0,039 K) są identyczne w obu solverach — wynikają z zaokrąglenia wartości odniesienia.", "",
+          "Wpływ poprawek na katalog (model testowy): f_Rsi zmienia się o ≤ 0,002 (wierzchołki), ψ o ≤ 0,001 W/(m·K) "
+          "(siatka), cokół WZ-GF1 z B' = 4,74 m: ψ_oi = ψ_i ≈ 0,21 zamiast 0,20 W/(m·K). Wszystkie węzły z ciągłą "
+          "izolacją spełniają f_Rsi ≥ 0,72; wariant porównawczy WZ-B0 (płyta bez łącznika) — f_Rsi ≈ 0,746 "
+          "(na granicy, ψ ≈ 0,75 W/(m·K))."]
+    return L

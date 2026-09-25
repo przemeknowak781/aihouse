@@ -33,7 +33,7 @@ def ciezar_materialu(mat, p: Parametry | None = None) -> tuple[float, str]:
         return p.ciezar_zelbetu, "żelbet — PN-EN 1991-1-1 zał. A (24 + 1)"
     rho = getattr(mat, "rho", None)
     if rho is None:
-        raise BladDanych(f"materiał {getattr(mat, 'kod', '?')}: brak gęstości rho")
+        return 0.0, f"brak ρ materiału {getattr(mat, 'kod', '?')} — ciężar pominięty [DO UZUPEŁNIENIA]"
     return float(rho) * G_GRAV / 1000.0, f"ρ = {f(rho, 0)} kg/m³ × g"
 
 

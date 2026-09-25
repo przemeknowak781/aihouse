@@ -3667,13 +3667,13 @@ Element modelu: `L1` · maks. wykorzystanie nośności η = 133% · **WARUNKI NI
 
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
-| H | 0,80 | 3,6 |
+| S2 | 1,44 | 6,5 |
+| S1 | 1,44 | 6,5 |
 | QA_pA | 1,51 | 6,7 |
 | QA | 3,92 | 18,3 |
 | QA_pB | 2,57 | 11,6 |
-| S2 | 1,44 | 6,5 |
-| S1 | 1,44 | 6,5 |
 | G | 49,85 | 244,2 |
+| H | 0,80 | 3,6 |
 
 #### Obliczenia
 
@@ -3738,12 +3738,12 @@ Element modelu: `L2` · maks. wykorzystanie nośności η = 118% · **WARUNKI NI
 |---|---|---|
 | QA_pA | 0,00 | 0,0 |
 | QA | 17,03 | 61,5 |
-| QA_pB | 7,35 | 29,1 |
 | SB2 | 3,96 | 13,6 |
+| S2 | 6,72 | 23,4 |
+| QA_pB | 7,35 | 29,1 |
+| H | 1,52 | 5,5 |
 | S1 | 4,55 | 15,9 |
 | G | 90,48 | 377,4 |
-| S2 | 6,72 | 23,4 |
-| H | 1,52 | 5,5 |
 
 #### Obliczenia
 
@@ -3806,13 +3806,13 @@ Element modelu: `L3` · maks. wykorzystanie nośności η = 119% · **WARUNKI NI
 
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
-| H | 0,74 | 3,6 |
+| S2 | 1,34 | 6,5 |
+| S1 | 1,34 | 6,5 |
 | QA_pA | 0,00 | 2,5 |
 | QA | 3,90 | 27,7 |
 | QA_pB | 3,74 | 11,7 |
-| S2 | 1,34 | 6,5 |
-| S1 | 1,34 | 6,5 |
 | G | 50,78 | 314,4 |
+| H | 0,74 | 3,6 |
 
 #### Obliczenia
 
@@ -3875,13 +3875,13 @@ Element modelu: `L4` · maks. wykorzystanie nośności η = 134% · **WARUNKI NI
 
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
-| H | 0,81 | 4,1 |
+| S2 | 1,46 | 7,4 |
+| S1 | 1,46 | 7,4 |
 | QA_pA | 5,25 | 17,0 |
 | QA | 4,40 | 14,4 |
 | QA_pB | 0,00 | 0,0 |
-| S2 | 1,46 | 7,4 |
-| S1 | 1,46 | 7,4 |
 | G | 52,08 | 271,2 |
+| H | 0,81 | 4,1 |
 
 #### Obliczenia
 
@@ -3944,13 +3944,13 @@ Element modelu: `L5` · maks. wykorzystanie nośności η = 96% · wszystkie war
 
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
-| H | 2,90 | 16,4 |
+| S2 | 5,23 | 29,4 |
+| S1 | 5,23 | 29,4 |
 | QA_pA | 7,63 | 37,4 |
 | QA | 16,31 | 83,8 |
 | QA_pB | 8,68 | 46,4 |
-| S2 | 5,23 | 29,4 |
-| S1 | 5,23 | 29,4 |
 | G | 123,00 | 687,3 |
+| H | 2,90 | 16,4 |
 
 #### Obliczenia
 
