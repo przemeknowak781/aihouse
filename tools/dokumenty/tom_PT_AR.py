@@ -36,7 +36,7 @@ REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO / "src"))
 
 from lamela.dokumenty import (Arkusz, Dokument, Tom, dane_obiektu, sprawdz_tom, LISTY_KONTROLNE,  # noqa: E402
-                              liczba, DANE_PRZYKLADOWE, ZAL, NZW, zamknij_przegladarke)
+                              liczba, DANE_PRZYKLADOWE, ZAL, NZW, zamknij_przegladarke, stan_modelu)
 from lamela.obliczenia.wspolne import wymaganie  # noqa: E402
 
 KAT_MOSTKI = REPO / "projekt/08_obliczenia/mostki"
@@ -68,6 +68,64 @@ def wym(sekcja: str, klucz: str):
     return w.wartosc, f"{w.zrodlo}; {w.id}" if w.id else w.zrodlo
 
 
+REJESTR = REPO / "docs/10_podstawy_prawne/00_rejestr_wymagan.md"
+_NORMY: dict | None = None
+
+
+def rejestr_norm() -> dict:
+    """Rejestr A.3 (normy): numer bez wydania → (numer z wydaniem, status). Kol. 1 — normy ze statusem z kol. 2,
+    kol. 3 — normy zastępcze z wydaniem (aktualne). Pozycje zbiorcze („PN-EN ISO 6946:2017-10; 13370:2017-09”,
+    „10077-1/-2”, „12056-1…-5”) dziedziczą przedrostek poprzedniej pozycji."""
+    global _NORMY
+    if _NORMY is not None:
+        return _NORMY
+    _NORMY = {}
+    txt = REJESTR.read_text(encoding="utf-8") if REJESTR.exists() else ""
+    sek = txt.split("### A.3", 1)[-1].split("\n### ", 1)[0] if "### A.3" in txt else ""
+    for wiersz in sek.splitlines():
+        k = [c.strip() for c in wiersz.strip().strip("|").split("|")]
+        if len(k) < 3 or not k[0].startswith("PN"):
+            continue
+        for tekst, status in ((k[0], re.sub(r"\*", "", k[1])), (k[2], "aktualna (zastępcza)")):
+            prefiks = ""
+            for poz in re.split(r"[;,]", tekst):
+                poz = re.sub(r"\s*\(.*?\)|\s*—.*$", "", poz).strip()
+                mm = re.match(r"((?:PN-)?(?:EN |ISO |IEC |HD )*(?:ISO |IEC )?(?:[A-Z]-)?)?"
+                              r"(\d[\d-]*(?:/-\d+|…-\d+)?(?:\+A\d)?):(\S+)", poz)
+                if not mm:
+                    continue
+                prefiks = mm.group(1).strip() if (mm.group(1) or "").strip() else prefiks
+                if not prefiks.startswith("PN"):
+                    continue
+                r = re.match(r"(\d+)-(\d+)(?:/-(\d+)|…-(\d+))$", mm.group(2))
+                nry = ([f"{r.group(1)}-{i}" for i in range(int(r.group(2)), int(r.group(3) or r.group(4)) + 1)]
+                       if r else [mm.group(2)])
+                for n in nry:
+                    kod = (prefiks + n) if prefiks.endswith("-") else f"{prefiks} {n}"
+                    _NORMY.setdefault(kod, (f"{kod}:{mm.group(3)}", status))
+    return _NORMY
+
+
+def normy(t):
+    """Powołania norm bez wydania → wydanie i status z rejestru A.3 (W-319)."""
+    if not isinstance(t, str) or "PN-" not in t:
+        return t
+    rej = rejestr_norm()
+
+    def _zamien(mm):
+        kod = mm.group(1)
+        if kod not in rej:
+            return kod
+        pelny, st = rej[kod]
+        if "WYCOF" in st.upper():
+            return pelny + (" — wycofana, powołana w WT" if "WT" in st else " — wycofana")
+        return pelny
+    t = re.sub(r"(PN-(?:EN |ISO |IEC |HD )*(?:ISO |IEC )?(?:[A-Z]-)?\d[\d-]*\d)(?![\d:/+-])", _zamien, t)
+    t = t.replace("(PN-EN ISO 15927-4:2007)", "(metoda roku typowego wg ISO 15927-4 — norma spoza rejestru A.3; "
+                  f"źródło danych: statystyki MIiB) {NZW}")
+    return t
+
+
 def _md_komorka(v) -> str:
     if v is None:
         return "—"
@@ -92,22 +150,25 @@ class Opis:
 
     def rozdzial(self, tytul: str, tresc: str | None = None, *, poziom: int = 1, podstawa: str | None = None,
                  nowa_strona: bool = False):
-        tresc = textwrap.dedent(tresc).strip() if tresc else None
+        tresc = normy(textwrap.dedent(tresc).strip()) if tresc else None
         self.dok.rozdzial(tytul, tresc, poziom=poziom, podstawa=podstawa, nowa_strona=nowa_strona)
         self.md.append(f"{'#' * (poziom + 1)} {tytul}" + (f" — {podstawa}" if podstawa else ""))
         if tresc:
             self.md.append(tresc)
 
     def tekst(self, tresc: str):
-        tresc = textwrap.dedent(tresc).strip()
+        tresc = normy(textwrap.dedent(tresc).strip())
         self.dok.markdown(tresc)
         self.md.append(tresc)
 
     def wniosek(self, tresc: str, alarm: bool = False):
-        self.dok.wniosek(textwrap.dedent(tresc).strip(), alarm=alarm)
-        self.md.append("> " + textwrap.dedent(tresc).strip().replace("\n", "\n> "))
+        tresc = normy(textwrap.dedent(tresc).strip())
+        self.dok.wniosek(tresc, alarm=alarm)
+        self.md.append("> " + tresc.replace("\n", "\n> "))
 
     def tabela(self, wiersze: list, *, tytul: str, uwagi=None, zrodlo: str | None = None, **kw):
+        wiersze = [w if not isinstance(w, dict) else {k: normy(v) for k, v in w.items()} for w in wiersze]
+        uwagi = normy(uwagi) if isinstance(uwagi, str) else [normy(u) for u in uwagi] if uwagi else uwagi
         self.dok.tabela(wiersze, tytul=tytul, uwagi=uwagi, zrodlo=zrodlo, **kw)
         self.n_tab += 1
         kol = [k for k in (next((w for w in wiersze if isinstance(w, dict)), {}) or {}) if not k.startswith("_")]
@@ -138,10 +199,16 @@ def wczytaj_dane() -> dict:
     m = load_model(REPO / "model/budynek.yaml", REPO / "model/dzialka.yaml", strict=False)
     if m.bledy:
         raise SystemExit("Model z błędami walidacji:\n" + m.raport_walidacji())
-    R = oblicz_wszystko(m)                    # ψ węzłów: sekcja `wezly` modelu (runda poprawek — wartości projektowe)
+    # ψ węzłów — to samo źródło co charakterystyka energetyczna PT-3 IS: wyniki symulacji PN-EN ISO 10211
+    # (projekt/08_obliczenia/mostki/wyniki_mostki.json); węzły bez symulacji — wartości projektowe sekcji `wezly`
+    from lamela.obliczenia.fizyka import mostki as MB
+    sym = MB.wczytaj_wyniki_symulacji(KAT_MOSTKI / "wyniki_mostki.json") \
+        if (KAT_MOSTKI / "wyniki_mostki.json").exists() else None
+    R = oblicz_wszystko(m, wyniki_symulacji=sym)
     wsk = wskazniki(m)
     mostki = json.loads((KAT_MOSTKI / "zestawienie_mostkow.json").read_text(encoding="utf-8"))
-    return dict(m=m, R=R, ob=R["obudowa"], wsk=wsk, mostki=mostki, detale=mapa_detali())
+    return dict(m=m, R=R, ob=R["obudowa"], wsk=wsk, mostki=mostki, detale=mapa_detali(), sym=sym is not None,
+                stan=stan_modelu())
 
 
 def mapa_detali() -> OrderedDict:
@@ -234,12 +301,19 @@ def rozdz_zakres(o: Opis, D: dict, kat_ar: Path | None):
     **Pozostałe punkty § 23 RPB — gdzie opracowano:** pkt 1–2 (konstrukcja, posadowienie) — PT-2 BO; pkt 3
     (dokumentacja geologiczno-inżynierska) — nie dotyczy (warunki proste, rejestr C.2); pkt 5 i 6 — nie dotyczy
     (obiekt mieszkalny, niebędący obiektem liniowym); pkt 7–9 i 11 — PT-3 IS i PT-4 IE (instalacje, charakterystyka
-    energetyczna); pkt 10 — w każdym tomie stosownie do zakresu (tu: rozdział „Dane dotyczące warunków ochrony przeciwpożarowej”).
+    energetyczna); pkt 10 — w każdym tomie stosownie do zakresu (tu: rozdział „Dane dotyczące warunków ochrony przeciwpożarowej”);
+    § 23 pkt 12 (dane dotyczące warunków ochrony ludności, dodany Dz.U. 2026 poz. 597 § 1 pkt 6) — nie dotyczy:
+    PZT i PAB nie przewidują budowli ochronnej ani miejsca doraźnego schronienia (PAB § 20 ust. 1 pkt 14 — nie dotyczy).
 
     **Podstawy:** PB (t.j. Dz.U. 2026 poz. 524 ze zm.) art. 34 ust. 3 pkt 3 lit. c; RPB (t.j. Dz.U. 2022 poz. 1679 ze zm.)
     § 23–24; WT 2002 (t.j. Dz.U. 2022 poz. 1225 ze zm.) stosowane na podstawie art. 102a PB; PN-EN ISO 6946:2017-10,
     PN-EN ISO 13370:2017-09, PN-EN ISO 10077-1:2017-10, PN-EN ISO 10211:2017-09, PN-EN ISO 13788:2013-05,
     PN-EN ISO 14683:2017-09 (rejestr wymagań, W-243…W-250). Tom jest zgodny z PZT i PAB (PB art. 34 ust. 3c).
+
+    **Stan modelu.** Część opisową, obliczenia i rysunki tomu wygenerowano z jednego stanu modelu budynku
+    ({D['stan']['tekst']}). Zgodność tomów PT między sobą i z tomem I (PZT, PAB) wykazuje ten sam znacznik
+    stanu modelu we wszystkich tomach; tom z innym znacznikiem jest nieaktualny i przed podpisaniem oświadczenia
+    projektanta wymaga ponownego wygenerowania.
     """, podstawa="§ 23 RPB")
     o.tekst(f"""
     **Wyroby budowlane — zasada doboru (PB art. 10).** Wyroby określono **parametrami wymaganymi** (λ obliczeniowe, grubość, klasa reakcji na ogień, opór dyfuzyjny s_d,
@@ -278,6 +352,7 @@ def rozdz_przegrody(o: Opis, D: dict):
                     "znaczących; „—” — przegroda wewnętrzna między pomieszczeniami ogrzewanymi (bez wymagań U).",
                     "Detale — detale PT-AR-D obejmujące węzły z udziałem przegrody (sekcja `wezly` modelu)."],
              zrodlo="model/budynek.yaml — przegrody; lamela.obliczenia.fizyka_energia")
+    rozdz_plyty_wysuniete(o, D)
     grupy = [("Przegrody zewnętrzne i oddzielające od garażu", lambda p: p.typ in (
         "sciana_zewn", "attyka", "podloga_na_gruncie", "stropodach", "taras") or p.kod in ("SWG", "SUF-ZEW", "SUF-G")),
              ("Przegrody wewnętrzne", lambda p: True)]
@@ -307,6 +382,34 @@ def rozdz_przegrody(o: Opis, D: dict):
             o.tabela(rows, tytul=f"{kod} — {nazwa_przegrody(p.nazwa)}", formaty={"d [mm]": 1, "λ [W/(m·K)]": 3},
                      szerokosci=["8mm", None, "13mm", "15mm", "30mm", "34mm"], wyrownanie={"Uwagi": "l"},
                      klasa="zwarta")
+
+
+def rozdz_plyty_wysuniete(o: Opis, D: dict):
+    """Funkcja płyt wysuniętych (okapy, daszek, krawędzie stropów) — rozstrzygnięcie architektoniczne dla PT-2 BO."""
+    m = D["m"]
+    kody = {k for k, p in m.przegrody.items() if p.typ == "taras"}
+    pl = [w for w in (m.raw.get("wsporniki_plyty") or []) if w.get("przegroda") in kody]
+    if not pl:
+        return
+    q, q_zr = wym("konstrukcja", "q_k_dach_H")
+    Q, _ = wym("konstrukcja", "Q_k_dach_H")
+    bal = [b["id"] for b in (m.raw.get("balustrady") or []) if any(w["id"] in str(b) for w in pl)]
+    odw = sorted({(w.get("odwodnienie") or {}).get("typ", "—").replace("_", " ") for w in pl})
+    wiersze = [{"Płyta": w["id"], "Przegroda": w.get("przegroda"), "Wierzch [m]": w.get("wierzch"),
+                "Funkcja (AR)": re.split(r"[:;(]", str(w.get("uwagi", "")))[0].strip()[:60] or "—",
+                "Dostęp": "niedostępna" if not bal else ("balustrada " + ", ".join(bal))} for w in pl]
+    o.tabela(wiersze, tytul="Płyty wysunięte — funkcja i dostępność (rozstrzygnięcie AR dla PT-2 BO)", klasa="zwarta",
+             formaty={"Wierzch [m]": 2}, wyrownanie={"Funkcja (AR)": "l"}, szerokosci=["16mm", "18mm", "18mm", None, "26mm"],
+             zrodlo="model/budynek.yaml — wsporniki_plyty, balustrady")
+    o.tekst(f"""
+    **Funkcja płyt wysuniętych.** Płyty {", ".join(w["id"] for w in pl)} są okapami, daszkiem nad wejściem
+    i krawędziami stropów — **nie są tarasami ani balkonami**: nie mają wyjścia z pomieszczeń ani balustrad,
+    odwodnienie: {", ".join(odw)}; wierzch — obróbka lub membrana ze spadkiem od budynku. Dostęp wyłącznie w celu
+    konserwacji i napraw. Obciążenie użytkowe do obliczeń PT-2 BO (płyty i łączniki termoizolacyjne): jak dla dachu
+    kategorii H — q_k = {L(q, 1)} kN/m², Q_k = {L(Q, 1)} kN ({q_zr}; W-263), nie łączone ze śniegiem i wiatrem.
+    Zmiana funkcji którejkolwiek płyty na taras wymaga balustrady (WT § 296 ust. 1, § 298; W-094, W-095), warstw tarasu i ponownego
+    sprawdzenia w PT-2 BO.
+    """)
 
 
 def rozdz_akustyka(o: Opis, D: dict):
