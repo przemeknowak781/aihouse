@@ -1,5 +1,5 @@
 # Treści marketingowe strony www „Dom LAMELA” (tools/buduj_www.py). NIE wpisywać tu liczb o budynku —
-# wszystkie wartości budynku wstawia skrypt z modelu przez znaczniki {klucz} (lista kluczy: www/dist/dane_strony.json).
+# wszystkie wartości budynku wstawia skrypt z modelu przez znaczniki {klucz} (lista kluczy: www/raport/dane_strony.json → „wartosci”).
 # Ceny i pakiety są PRZYKŁADOWE (strona demonstracyjna, marka fikcyjna).
 marka:
   nazwa: "Pasmo i Cień"

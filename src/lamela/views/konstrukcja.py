@@ -1220,9 +1220,12 @@ def widok_zbrojenie_fundamentu(ctx: ViewContext, spec: dict, scale: float, opts:
         placer.add_lines(g.boundary, w=0.3)
     W = PF.get("mes")
     dz = PF.get("dozbr") or {}
-    for pg in dz.get("mu", []):                     # strefy przekroju podwójnie zbrojonego (μ > μ_lim) — MES
+    for i_mu, pg in enumerate(dz.get("mu", []), 1):   # strefy przekroju podwójnie zbrojonego (μ > μ_lim) — MES
         vp.fill(pg, L_OBR, "#f2c4c4", z=5)
         vp.geom(pg, L_OBR, pen="cienka", lt="KRESKOWA_DROBNA")
+        c_mu = pg.representative_point()
+        etykieta(vp, placer, (c_mu.x, c_mu.y), (1.0, 0.0), f"S{i_mu} — przekrój podwójnie zbrojony (μ > μ_lim)", None,
+                 1.8, offs=(4.0, 7.0, 10.0), ts=(0.0,))
     for (wa, k_), lst in [(k_, v) for k_, v in dz.items() if k_ != "mu" and k_[0] == warstwa]:
         for pg, *_ in lst:
             vp.geom(pg, L_OPI, pen="cienka", lt="KRESKOWA")

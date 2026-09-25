@@ -852,10 +852,19 @@ def dane(ctx) -> DaneKonstr:
             tb = traceback.extract_tb(ex.__traceback__)[-1]
             D.braki.append(f"Ekstrakcja danych ({fn.__name__[1:]}): {type(ex).__name__}: {ex} "
                            f"[{Path(tb.filename).name}:{tb.lineno}] [BŁĄD MODUŁU]")
+    fund_ids = {id(pz) for pz in an.pos_fund}
+    ids_mes = {z.id for z in D.zebra} | {s_.id for s_ in D.stopy}
     for g in an.pozycje:
         for pz in g.podpozycje:
             if not pz.ok:
                 ws = warunki_niespelnione(pz.wyniki + [w for sp in pz.podpozycje for w in sp.wyniki])
+                if D.plyta_f is not None and id(pz) in fund_ids and pz.ident in ids_mes:
+                    D.braki.append(f"Obliczenia — poz. {pz.nr} {pz.ident} (model ławy/stopy izolowanej biblioteki): "
+                                   + "; ".join(ws[:3]) + " — dla płyty z żebrami ZASTĄPIONE analizą MES płyty "
+                                   "fundamentowej (nośność i docisk podłoża, zbrojenie — raport MES); głębokość "
+                                   "posadowienia: płyta na XPS z izolacją obwodową wg PN-EN ISO 13793 (warunek R5 3.8 "
+                                   "ławy nie dotyczy) [ZAŁ].")
+                    continue
                 D.braki.append(f"Obliczenia — poz. {pz.nr} {pz.ident}: niespełnione warunki: " + "; ".join(ws[:3])
                                + (" …" if len(ws) > 3 else "") + " [WYMAGA ZMIANY PRZEKROJU / ANALIZY].")
     D.braki += [f"Biblioteka: {b}" for b in an.brak_danych]

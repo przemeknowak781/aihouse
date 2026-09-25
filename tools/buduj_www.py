@@ -9,7 +9,7 @@ Uruchamiać po każdej zmianie modelu. Etapy: dane z modelu i modułów oblicze�
 (lamela.pipeline, bez renderów pipeline'u) → rendery www 16:9 i 4:3 (lamela.www.rendery; cache w build/www/rendery/,
 klucz = treść modelu + kod eksportu i renderera) → WebP → szkic Inwestora (maska) → rysunki SVG (rzuty, elewacje,
 przekroje, przegrody, działka) → index.html (lamela.www.strona; treści i ceny PRZYKŁADOWE z www/tresc.yaml) →
-kontrola limitów (strona ≤ 16 MB, obraz ≤ 15 MB, razem ≤ 64 MB, zewnętrzne hosty tylko z listy dozwolonych).
+raporty w www/raport/ (dane_strony.json, raport_budowy.json) → kontrola limitów (strona ≤ 16 MB, obraz ≤ 15 MB, razem ≤ 64 MB, zewnętrzne hosty tylko z listy dozwolonych).
 """
 from __future__ import annotations
 
@@ -132,13 +132,15 @@ def _dalej(a, D, tr, glb, dist, assets, cache, teraz, t0) -> int:
                                                                               if k != "metoda"},
                 EP=D["en"]["EP"], EP_max=D["en"]["EP_max"], rendery=R.get("pliki"), kotwice=R.get("kotwice"),
                 cache_renderow=str(rdir.relative_to(ROOT)) if rdir.is_relative_to(ROOT) else str(rdir))
-    (dist / "dane_strony.json").write_text(json.dumps(dane, ensure_ascii=False, indent=1, default=str), encoding="utf-8")
+    rap = dist.parent / "raport"
+    rap.mkdir(parents=True, exist_ok=True)
+    (rap / "dane_strony.json").write_text(json.dumps(dane, ensure_ascii=False, indent=1, default=str), encoding="utf-8")
     k = kontrola(dist, html)
     print(f"[6] kontrola: index.html {k['pliki']['index.html'] / 1e6:.2f} MB, razem {k['razem'] / 1e6:.2f} MB, "
           f"{len(k['pliki'])} plików; czas {time.time() - t0:.0f} s", flush=True)
     for b in k["bledy"]:
         print("    BŁĄD:", b, flush=True)
-    (dist / "raport_budowy.json").write_text(json.dumps(k, ensure_ascii=False, indent=1), encoding="utf-8")
+    (rap / "raport_budowy.json").write_text(json.dumps(k, ensure_ascii=False, indent=1), encoding="utf-8")
     return 1 if k["bledy"] else 0
 
 
