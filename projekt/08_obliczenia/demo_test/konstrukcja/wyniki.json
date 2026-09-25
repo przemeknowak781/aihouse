@@ -517,7 +517,7 @@
    "id": "PL-D",
    "tytul": "Płyta wspornikowa PL-D",
    "rodzaj": "plyta",
-   "wykorzystanie": 0.9938,
+   "wykorzystanie": 0.9882,
    "ok": true,
    "przyjeto": [
     "Płyta gr. 20 cm z betonu C30/37, stal B500SP, otulenie c_nom = 40 mm; zbrojenie wg zestawienia pól (dołem siatka w obu kierunkach, górą nad podporami).",
@@ -526,51 +526,51 @@
    "warunki": [
     {
      "opis": "Zbrojenie na zginanie",
-     "E": 487.832,
+     "E": 469.7575,
      "R": 490.8739,
-     "eta": 0.9938
+     "eta": 0.957
     },
     {
      "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
      "E": 160.0,
-     "R": 188.4766,
-     "eta": 0.8489
+     "R": 199.6522,
+     "eta": 0.8014
     },
     {
      "opis": "Zbrojenie na zginanie",
-     "E": 542.7454,
-     "R": 558.5054,
-     "eta": 0.9718
-    },
-    {
-     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
-     "E": 90.0,
-     "R": 194.7529,
-     "eta": 0.4621
-    },
-    {
-     "opis": "Zbrojenie na zginanie",
-     "E": 332.6456,
-     "R": 335.1032,
-     "eta": 0.9927
+     "E": 517.416,
+     "R": 523.5988,
+     "eta": 0.9882
     },
     {
      "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
      "E": 150.0,
-     "R": 190.1071,
-     "eta": 0.789
+     "R": 189.8988,
+     "eta": 0.7899
     },
     {
      "opis": "Zbrojenie na zginanie",
-     "E": 322.1411,
-     "R": 335.1032,
-     "eta": 0.9613
+     "E": 271.1465,
+     "R": 279.2527,
+     "eta": 0.971
     },
     {
      "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
-     "E": 150.0,
-     "R": 199.412,
-     "eta": 0.7522
+     "E": 180.0,
+     "R": 197.515,
+     "eta": 0.9113
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 288.3582,
+     "R": 295.6793,
+     "eta": 0.9752
+    },
+    {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 170.0,
+     "R": 195.6718,
+     "eta": 0.8688
     },
     {
      "opis": "Zbrojenie na zginanie",
@@ -587,56 +587,56 @@
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 25.2258,
-     "R": 36.6892,
-     "eta": 0.6876
+     "R": 40.2937,
+     "eta": 0.626
     },
     {
      "opis": "Zbrojenie na zginanie",
-     "E": 487.832,
+     "E": 469.7575,
      "R": 490.8739,
-     "eta": 0.9938
+     "eta": 0.957
     },
     {
      "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
      "E": 160.0,
-     "R": 188.4766,
-     "eta": 0.8489
+     "R": 199.6522,
+     "eta": 0.8014
     },
     {
      "opis": "Zbrojenie na zginanie",
-     "E": 542.7454,
-     "R": 558.5054,
-     "eta": 0.9718
-    },
-    {
-     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
-     "E": 90.0,
-     "R": 194.7529,
-     "eta": 0.4621
-    },
-    {
-     "opis": "Zbrojenie na zginanie",
-     "E": 332.6456,
-     "R": 335.1032,
-     "eta": 0.9927
+     "E": 517.416,
+     "R": 523.5988,
+     "eta": 0.9882
     },
     {
      "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
      "E": 150.0,
-     "R": 190.1071,
-     "eta": 0.789
+     "R": 189.8988,
+     "eta": 0.7899
     },
     {
      "opis": "Zbrojenie na zginanie",
-     "E": 322.1411,
-     "R": 335.1032,
-     "eta": 0.9613
+     "E": 271.1465,
+     "R": 279.2527,
+     "eta": 0.971
     },
     {
      "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
-     "E": 150.0,
-     "R": 199.412,
-     "eta": 0.7522
+     "E": 180.0,
+     "R": 197.515,
+     "eta": 0.9113
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 288.3582,
+     "R": 295.6793,
+     "eta": 0.9752
+    },
+    {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 170.0,
+     "R": 195.6718,
+     "eta": 0.8688
     },
     {
      "opis": "Zbrojenie na zginanie",
@@ -653,8 +653,8 @@
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 25.2258,
-     "R": 36.6892,
-     "eta": 0.6876
+     "R": 40.2937,
+     "eta": 0.626
     }
    ],
    "dane": {
@@ -662,18 +662,18 @@
     "pola": [
      {
       "pole": "P1",
-      "Mx": 31.825942134515817,
-      "My": 32.91724412220306,
+      "Mx": 30.68422145697917,
+      "My": 31.438835326668876,
       "Mx_tabl": null,
       "My_tabl": null,
-      "Mgx": -21.92935006760063,
+      "Mgx": -17.948632013937356,
       "M_naroze": 15.880230742111324,
       "sc_zbr": null,
-      "Mgy": -19.85116148733033,
+      "Mgy": -17.81233985093757,
       "Ax": 490.87385212340524,
-      "Ay": 558.5053606381854,
+      "Ay": 523.5987755982989,
       "w": 5.463385880430691,
-      "eta": 0.9938031528914566,
+      "eta": 0.9881916878062517,
       "lx": 3.91,
       "ly": 4.85,
       "brzegi": "SWWS",
@@ -2481,6 +2481,7 @@
  ],
  "uwagi": [
   "PL-D: płyta z łącznikiem termoizolacyjnym i własnymi podporami (belki/słupy) — łącznik przyjęto jako przegubowy (przenoszący siłę poprzeczną, typ „Q”), płyta liczona osobno, podparta na krawędzi przy ścianie [ZAŁ].",
+  "PL-D, pole P1: momenty wspornika uśrednione na szerokości 1,0 m (M_x,góra −21,9 → −17,9; M_y,góra −19,9 → −17,8 kNm/m) — osobliwość MES w narożu linii podparcia [ZAŁ].",
   "PL-D: podpora punktowa SL2 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]"
  ],
  "brak_danych": [

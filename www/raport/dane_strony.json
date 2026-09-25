@@ -1,5 +1,5 @@
 {
- "wygenerowano": "2026-09-25T06:21:37",
+ "wygenerowano": "2026-09-25T06:32:41",
  "model": {
   "nazwa": "Dom LAMELA",
   "wersja": "1.0",
@@ -7,7 +7,13 @@
   "stadium": "koncepcja ostateczna (synteza W2 + przeszczepy W1/W3 + poprawki J1–J3)",
   "autor": "(do uzupełnienia — projektant z uprawnieniami bez ograniczeń)",
   "zrodlo": "tools/buduj_model.py (model parametryczny)",
-  "uwagi": "WT (t.j. Dz.U. 2022 poz. 1225 ze zm.) w brzmieniu do 19.09.2026, stosowane na podstawie art. 102a PB (oświadczenie Inwestora)"
+  "uwagi": "WT (t.j. Dz.U. 2022 poz. 1225 ze zm.) w brzmieniu do 19.09.2026, stosowane na podstawie art. 102a PB (oświadczenie Inwestora)",
+  "numeracja_pomieszczen": {
+   "model": "K.NN — K = numer kondygnacji od 0 (P0 parter = 0.xx, P1 = 1.xx, P2 = 2.xx)",
+   "arkusze_iso": "K+1.NN (parter 1.xx, I p. 2.xx, II p. 3.xx) — przy `numeracja_pomieszczen: iso` arkuszy",
+   "przejscie": "numer arkusza = (K + 1).NN; np. model 0.06 (salon) = arkusz 1.06, model 1.06 (klatka) = arkusz 2.06"
+  },
+  "PU_definicja": "PU wg W-316 (RPB §20 / PN-ISO 9836:2022): pomieszczenia podstawowe i pomocnicze BEZ komunikacji wewn. (klatki 0.04, 1.06, 2.06), BEZ garażu 0.13 i pom. technicznych/szachtów; strefy h 1,40–2,20 — 50 %, h < 1,40 — 0 %. „Użytkowa” rdzenia (zestawienie_powierzchni: podstawowa + pomocnicza) to wartość kontrolna Z GARAŻEM i bez ruchu — nie PU (podglad_modelu.py: bilans)"
  },
  "wartosci": {
   "nazwa": "Dom LAMELA",
@@ -18,7 +24,7 @@
   "kondygnacje": "3",
   "garaz_st": "2",
   "garaz_A": "37,42 m²",
-  "EP": "56,1",
+  "EP": "35,6",
   "EP_max": "70",
   "pv_kWp": "6,45",
   "dz_szer": "28,20",
@@ -71,7 +77,7 @@
    "pow": 1600.0
   }
  },
- "EP": 56.079198085027045,
+ "EP": 35.584083877534944,
  "EP_max": 70.0,
  "rendery": {
   "ogrod_169": {
