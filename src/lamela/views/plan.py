@@ -765,7 +765,11 @@ class PlanBuilder:
         # oznaczenie (symbol + wymiar) — rozmieszczane później
         center = w.pt(mid, w.face_t(label_side, "all"))
         sill = o.parapet if (typ in ("okno", "fix") and o.parapet > 0.001) else None
-        self._op_tags.append(dict(o=o, w=w, center=center, side=label_side, sill=sill))
+        try:
+            center2 = w.pt(mid, w.face_t(-label_side, "all"))
+        except Exception:                          # noqa: BLE001 — bez wariantu po drugiej stronie ściany
+            center2 = None
+        self._op_tags.append(dict(o=o, w=w, center=center, center2=center2, side=label_side, sill=sill))
         self.res.openings.append(o)
 
     # ------------------------------------------------------------------ wyposażenie
@@ -904,11 +908,21 @@ class PlanBuilder:
             o, w = t["o"], t["w"]
             shape = "ellipse" if (o.symbol and len(str(o.symbol)) > 2) else "circle"
             width, height = o.szer, o.wys
-            cands = [4.0, 8.0, 12.0, 16.0, 20.0, 26.0]
+            # kandydaci: długość osi opisu, przesunięcie wzdłuż otworu (w obrębie szerokości), potem druga strona
+            # ściany — znaczniki sąsiednich drzwi nie mogą się nakładać (weryfikacja C 2.1: D4/DG1, D1/D1)
+            sd0 = float(t["side"])
+            du_ = [0.0, 0.25, -0.25, 0.4, -0.4]
+            cands = [(a_, sd0, 0.0) for a_ in (4.0, 8.0, 12.0, 16.0, 20.0, 26.0)]
+            cands += [(a_, sd0, f_) for f_ in du_[1:] for a_ in (4.0, 8.0, 12.0, 16.0)]
+            if t.get("center2") is not None:
+                cands += [(a_, -sd0, f_) for f_ in du_ for a_ in (4.0, 8.0, 12.0)]
 
-            def fn(cv, a, t=t, o=o, w=w, shape=shape):
-                dims.opening_dim(cv, t["center"], w.u, width, height, t["sill"], side=float(t["side"]),
-                                 symbol=str(o.symbol) if o.symbol else None, axis_mm=a, symbol_shape=shape,
+            def fn(cv, c_, t=t, o=o, w=w, shape=shape):
+                a_, sd, f_ = c_
+                cen = np.asarray(t["center"] if sd == sd0 else t["center2"], float)
+                cen = cen + unit(np.asarray(w.u, float)) * f_ * float(width or 0.0)
+                dims.opening_dim(cv, cen, w.u, width, height, t["sill"], side=sd,
+                                 symbol=str(o.symbol) if o.symbol else None, axis_mm=a_, symbol_shape=shape,
                                  start_mm=1.0)
             self.placer.place(vp, fn, cands, penalty_step=0.3)
 
