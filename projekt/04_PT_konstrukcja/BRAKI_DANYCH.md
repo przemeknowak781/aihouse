@@ -16,4 +16,4 @@ Lista generowana automatycznie przez `lamela.views.konstrukcja` z: (1) braków z
 
 ## Wyniki obliczeń — elementy bez wymiarowania lub z niespełnionymi warunkami
 
-- Obliczenia — poz. 10.1 PF1: niespełnione warunki: Przebicie — fundament (6.4.4(2), (6.51)–(6.53)) (η = 173%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 10.1 PF1: niespełnione warunki: Przebicie — fundament (6.4.4(2), (6.51)–(6.53)) (η = 259%); Przebicie — fundament (6.4.4(2), (6.51)–(6.53)) (η = 111%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].

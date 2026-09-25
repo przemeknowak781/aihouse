@@ -1,240 +1,2248 @@
 {
- "ok": 13,
- "razem": 13,
+ "ok": 118,
+ "razem": 118,
  "wiersze": [
   {
-   "element": "SL10",
-   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
-   "poz": "8.10",
+   "element": "D4",
+   "miejsce": "nad podporą B7 — góra y",
+   "poz": "1.4",
    "arkusze": [
-    "PT-BO-27"
+    "PT-BO-10",
+    "PT-BO-11"
    ],
-   "As_req": 678.6,
-   "As_min": 452.4,
-   "As_prov": 678.6,
-   "jedn": "mm²",
-   "zbrojenie": "6Ø12",
-   "s": null,
-   "s_max": null,
+   "As_req": 375.2,
+   "As_min": 270.4,
+   "As_prov": 386.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 13",
+   "s": 130.0,
+   "s_max": 250.0,
    "ok": true,
    "uwagi": "",
-   "zapas": 0.0
+   "zapas": 0.031
   },
   {
-   "element": "SL11",
-   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
-   "poz": "8.11",
+   "element": "D4",
+   "miejsce": "nad podporą S0-03 — góra x",
+   "poz": "1.4",
    "arkusze": [
-    "PT-BO-27"
+    "PT-BO-10",
+    "PT-BO-11"
    ],
-   "As_req": 678.6,
-   "As_min": 452.4,
-   "As_prov": 678.6,
-   "jedn": "mm²",
-   "zbrojenie": "6Ø12",
-   "s": null,
-   "s_max": null,
+   "As_req": 361.7,
+   "As_min": 283.9,
+   "As_prov": 374.0,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 21",
+   "s": 210.0,
+   "s_max": 250.0,
    "ok": true,
    "uwagi": "",
-   "zapas": 0.0
+   "zapas": 0.034
   },
   {
-   "element": "SL12",
-   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
-   "poz": "8.12",
+   "element": "D4",
+   "miejsce": "nad podporą S0-04 — góra y",
+   "poz": "1.4",
    "arkusze": [
-    "PT-BO-27"
+    "PT-BO-10",
+    "PT-BO-11"
    ],
-   "As_req": 678.6,
-   "As_min": 452.4,
-   "As_prov": 678.6,
-   "jedn": "mm²",
-   "zbrojenie": "6Ø12",
-   "s": null,
-   "s_max": null,
+   "As_req": 375.2,
+   "As_min": 270.4,
+   "As_prov": 386.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 13",
+   "s": 130.0,
+   "s_max": 250.0,
    "ok": true,
    "uwagi": "",
-   "zapas": 0.0
+   "zapas": 0.031
   },
   {
-   "element": "SL13",
-   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
-   "poz": "8.13",
+   "element": "D4",
+   "miejsce": "nad podporą S0-17 — góra y",
+   "poz": "1.4",
    "arkusze": [
-    "PT-BO-27"
+    "PT-BO-10",
+    "PT-BO-11"
    ],
-   "As_req": 904.8,
-   "As_min": 452.4,
-   "As_prov": 904.8,
-   "jedn": "mm²",
-   "zbrojenie": "8Ø12",
-   "s": null,
-   "s_max": null,
+   "As_req": 375.2,
+   "As_min": 270.4,
+   "As_prov": 386.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 13",
+   "s": 130.0,
+   "s_max": 250.0,
    "ok": true,
    "uwagi": "",
-   "zapas": 0.0
+   "zapas": 0.031
   },
   {
-   "element": "SL14",
-   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
-   "poz": "8.14",
+   "element": "D4",
+   "miejsce": "pole P3 — dół x",
+   "poz": "1.4",
    "arkusze": [
-    "PT-BO-27"
+    "PT-BO-09",
+    "PT-BO-11"
    ],
-   "As_req": 904.8,
-   "As_min": 452.4,
-   "As_prov": 904.8,
-   "jedn": "mm²",
-   "zbrojenie": "8Ø12",
-   "s": null,
-   "s_max": null,
+   "As_req": 98.2,
+   "As_min": 283.9,
+   "As_prov": 295.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 17",
+   "s": 170.0,
+   "s_max": 250.0,
    "ok": true,
    "uwagi": "",
-   "zapas": 0.0
+   "zapas": 0.041
   },
   {
-   "element": "SL15",
-   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
-   "poz": "8.15",
+   "element": "D4",
+   "miejsce": "pole P3 — dół y",
+   "poz": "1.4",
    "arkusze": [
-    "PT-BO-27"
+    "PT-BO-09",
+    "PT-BO-11"
    ],
-   "As_req": 904.8,
-   "As_min": 452.4,
-   "As_prov": 904.8,
-   "jedn": "mm²",
-   "zbrojenie": "8Ø12",
-   "s": null,
-   "s_max": null,
+   "As_req": 103.0,
+   "As_min": 270.4,
+   "As_prov": 279.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 18",
+   "s": 180.0,
+   "s_max": 250.0,
    "ok": true,
    "uwagi": "",
-   "zapas": 0.0
+   "zapas": 0.033
   },
   {
-   "element": "SL16",
-   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
-   "poz": "8.16",
+   "element": "D4",
+   "miejsce": "pole P3 — naroże (dół x)",
+   "poz": "1.4",
    "arkusze": [
-    "PT-BO-27"
+    "PT-BO-09",
+    "PT-BO-11"
    ],
-   "As_req": 904.8,
-   "As_min": 452.4,
-   "As_prov": 904.8,
-   "jedn": "mm²",
-   "zbrojenie": "8Ø12",
-   "s": null,
-   "s_max": null,
+   "As_req": 115.4,
+   "As_min": 270.4,
+   "As_prov": 279.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 18",
+   "s": 180.0,
+   "s_max": 250.0,
    "ok": true,
    "uwagi": "",
-   "zapas": 0.0
+   "zapas": 0.033
   },
   {
-   "element": "SL17",
-   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
-   "poz": "8.17",
+   "element": "D4",
+   "miejsce": "pole P3 — naroże (dół y)",
+   "poz": "1.4",
    "arkusze": [
-    "PT-BO-27"
+    "PT-BO-09",
+    "PT-BO-11"
    ],
-   "As_req": 904.8,
-   "As_min": 452.4,
-   "As_prov": 904.8,
-   "jedn": "mm²",
-   "zbrojenie": "8Ø12",
-   "s": null,
-   "s_max": null,
+   "As_req": 115.4,
+   "As_min": 270.4,
+   "As_prov": 279.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 18",
+   "s": 180.0,
+   "s_max": 250.0,
    "ok": true,
    "uwagi": "",
-   "zapas": 0.0
+   "zapas": 0.033
   },
   {
-   "element": "SL18",
-   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
-   "poz": "8.18",
+   "element": "D4",
+   "miejsce": "pole P3 — naroże (góra x)",
+   "poz": "1.4",
    "arkusze": [
-    "PT-BO-27"
+    "PT-BO-10",
+    "PT-BO-11"
    ],
-   "As_req": 904.8,
-   "As_min": 452.4,
-   "As_prov": 904.8,
-   "jedn": "mm²",
-   "zbrojenie": "8Ø12",
-   "s": null,
-   "s_max": null,
+   "As_req": 115.4,
+   "As_min": 270.4,
+   "As_prov": 279.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 18",
+   "s": 180.0,
+   "s_max": 250.0,
    "ok": true,
    "uwagi": "",
-   "zapas": 0.0
+   "zapas": 0.033
   },
   {
-   "element": "SL19",
-   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
-   "poz": "8.19",
+   "element": "D4",
+   "miejsce": "pole P3 — naroże (góra y)",
+   "poz": "1.4",
    "arkusze": [
-    "PT-BO-27"
+    "PT-BO-10",
+    "PT-BO-11"
    ],
-   "As_req": 678.6,
-   "As_min": 452.4,
-   "As_prov": 678.6,
-   "jedn": "mm²",
-   "zbrojenie": "6Ø12",
-   "s": null,
-   "s_max": null,
+   "As_req": 115.4,
+   "As_min": 270.4,
+   "As_prov": 279.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 18",
+   "s": 180.0,
+   "s_max": 250.0,
    "ok": true,
    "uwagi": "",
-   "zapas": 0.0
+   "zapas": 0.033
   },
   {
-   "element": "SL20",
-   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
-   "poz": "8.20",
+   "element": "D4",
+   "miejsce": "pole P4 — dół x",
+   "poz": "1.4",
    "arkusze": [
-    "PT-BO-27"
+    "PT-BO-09",
+    "PT-BO-11"
    ],
-   "As_req": 678.6,
-   "As_min": 452.4,
-   "As_prov": 678.6,
-   "jedn": "mm²",
-   "zbrojenie": "6Ø12",
-   "s": null,
-   "s_max": null,
+   "As_req": 167.4,
+   "As_min": 283.9,
+   "As_prov": 295.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 17",
+   "s": 170.0,
+   "s_max": 250.0,
    "ok": true,
    "uwagi": "",
-   "zapas": 0.0
+   "zapas": 0.041
   },
   {
-   "element": "SL21",
-   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
-   "poz": "8.21",
+   "element": "D4",
+   "miejsce": "pole P4 — dół y",
+   "poz": "1.4",
    "arkusze": [
-    "PT-BO-27"
+    "PT-BO-09",
+    "PT-BO-11"
    ],
-   "As_req": 678.6,
-   "As_min": 452.4,
-   "As_prov": 678.6,
-   "jedn": "mm²",
-   "zbrojenie": "6Ø12",
-   "s": null,
-   "s_max": null,
+   "As_req": 173.9,
+   "As_min": 270.4,
+   "As_prov": 279.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 18",
+   "s": 180.0,
+   "s_max": 250.0,
    "ok": true,
    "uwagi": "",
-   "zapas": 0.0
+   "zapas": 0.033
   },
   {
-   "element": "SL9",
-   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
-   "poz": "8.9",
+   "element": "D4",
+   "miejsce": "pole P4 — naroże (dół x)",
+   "poz": "1.4",
    "arkusze": [
-    "PT-BO-27"
+    "PT-BO-09",
+    "PT-BO-11"
    ],
-   "As_req": 678.6,
-   "As_min": 452.4,
-   "As_prov": 678.6,
-   "jedn": "mm²",
-   "zbrojenie": "6Ø12",
-   "s": null,
+   "As_req": 196.3,
+   "As_min": 270.4,
+   "As_prov": 279.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 18",
+   "s": 180.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "D4",
+   "miejsce": "pole P4 — naroże (dół y)",
+   "poz": "1.4",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 196.3,
+   "As_min": 270.4,
+   "As_prov": 279.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 18",
+   "s": 180.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "D4",
+   "miejsce": "pole P4 — naroże (góra x)",
+   "poz": "1.4",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 196.3,
+   "As_min": 270.4,
+   "As_prov": 279.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 18",
+   "s": 180.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "D4",
+   "miejsce": "pole P4 — naroże (góra y)",
+   "poz": "1.4",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 196.3,
+   "As_min": 270.4,
+   "As_prov": 279.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 18",
+   "s": 180.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "PF1+PF2",
+   "miejsce": "dozbrojenie D1 dół x",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 1737.3,
+   "As_min": 0.0,
+   "As_prov": 1963.5,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø12 co 16 + Ø16 co 16",
+   "s": 160.0,
    "s_max": null,
    "ok": true,
    "uwagi": "",
-   "zapas": 0.0
+   "zapas": 0.13
+  },
+  {
+   "element": "PF1+PF2",
+   "miejsce": "dozbrojenie D1 dół y",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 3978.5,
+   "As_min": 0.0,
+   "As_prov": 4633.8,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø12 co 16 + Ø20 co 8",
+   "s": 80.0,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.165
+  },
+  {
+   "element": "PF1+PF2",
+   "miejsce": "dozbrojenie D1 góra y",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-04",
+    "PT-BO-05"
+   ],
+   "As_req": 2650.6,
+   "As_min": 0.0,
+   "As_prov": 2958.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø16 co 12 + Ø14 co 12",
+   "s": 120.0,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.116
+  },
+  {
+   "element": "PF1+PF2",
+   "miejsce": "dozbrojenie D2 dół x",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 1241.8,
+   "As_min": 0.0,
+   "As_prov": 1413.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø12 co 16 + Ø12 co 16",
+   "s": 160.0,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.138
+  },
+  {
+   "element": "PF1+PF2",
+   "miejsce": "dozbrojenie D2 dół y",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 914.5,
+   "As_min": 0.0,
+   "As_prov": 1021.0,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø12 co 16 + Ø8 co 16",
+   "s": 160.0,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.117
+  },
+  {
+   "element": "PF1+PF2",
+   "miejsce": "dozbrojenie D2 góra y",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-04",
+    "PT-BO-05"
+   ],
+   "As_req": 1757.3,
+   "As_min": 0.0,
+   "As_prov": 2094.4,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø16 co 12 + Ø8 co 12",
+   "s": 120.0,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.192
+  },
+  {
+   "element": "PF1+PF2",
+   "miejsce": "dozbrojenie D3 dół x",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 991.0,
+   "As_min": 0.0,
+   "As_prov": 1021.0,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø12 co 16 + Ø8 co 16",
+   "s": 160.0,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.03
+  },
+  {
+   "element": "PF1+PF2",
+   "miejsce": "dozbrojenie D3 dół y",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 741.7,
+   "As_min": 0.0,
+   "As_prov": 1021.0,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø12 co 16 + Ø8 co 16",
+   "s": 160.0,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.377
+  },
+  {
+   "element": "PF1+PF2",
+   "miejsce": "dozbrojenie D4 dół x",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 778.2,
+   "As_min": 0.0,
+   "As_prov": 1021.0,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø12 co 16 + Ø8 co 16",
+   "s": 160.0,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.312
+  },
+  {
+   "element": "PF1+PF2",
+   "miejsce": "dozbrojenie D4 dół y",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 1874.7,
+   "As_min": 0.0,
+   "As_prov": 1963.5,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø12 co 16 + Ø16 co 16",
+   "s": 160.0,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.047
+  },
+  {
+   "element": "PF1+PF2",
+   "miejsce": "dozbrojenie D5 dół x",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 1636.0,
+   "As_min": 0.0,
+   "As_prov": 1669.0,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø12 co 16 + Ø14 co 16",
+   "s": 160.0,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.02
+  },
+  {
+   "element": "PF1+PF2",
+   "miejsce": "dozbrojenie D5 dół y",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 1235.6,
+   "As_min": 0.0,
+   "As_prov": 1413.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø12 co 16 + Ø12 co 16",
+   "s": 160.0,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.144
+  },
+  {
+   "element": "PF1+PF2",
+   "miejsce": "dozbrojenie D6 dół x",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 808.6,
+   "As_min": 0.0,
+   "As_prov": 1021.0,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø12 co 16 + Ø8 co 16",
+   "s": 160.0,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.263
+  },
+  {
+   "element": "PF1+PF2",
+   "miejsce": "dozbrojenie D6 dół y",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 1883.6,
+   "As_min": 0.0,
+   "As_prov": 1963.5,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø12 co 16 + Ø16 co 16",
+   "s": 160.0,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.042
+  },
+  {
+   "element": "PF1+PF2",
+   "miejsce": "dozbrojenie D7 dół y",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 1575.0,
+   "As_min": 0.0,
+   "As_prov": 1669.0,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø12 co 16 + Ø14 co 16",
+   "s": 160.0,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.06
+  },
+  {
+   "element": "PF1+PF2",
+   "miejsce": "siatka dolna x (MES, poza dozbrojeniami)",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 705.5,
+   "As_min": 246.1,
+   "As_prov": 706.9,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø12 co 16",
+   "s": 160.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.002
+  },
+  {
+   "element": "PF1+PF2",
+   "miejsce": "siatka dolna y (MES, poza dozbrojeniami)",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 705.4,
+   "As_min": 246.1,
+   "As_prov": 706.9,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø12 co 16",
+   "s": 160.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.002
+  },
+  {
+   "element": "PF1+PF2",
+   "miejsce": "siatka górna x (MES, poza dozbrojeniami)",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-04",
+    "PT-BO-05"
+   ],
+   "As_req": 1647.6,
+   "As_min": 246.1,
+   "As_prov": 1675.5,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø16 co 12",
+   "s": 120.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.017
+  },
+  {
+   "element": "PF1+PF2",
+   "miejsce": "siatka górna y (MES, poza dozbrojeniami)",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-04",
+    "PT-BO-05"
+   ],
+   "As_req": 1672.2,
+   "As_min": 246.1,
+   "As_prov": 1675.5,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø16 co 12",
+   "s": 120.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.002
+  },
+  {
+   "element": "PF1+PF2",
+   "miejsce": "strefa S1 (płyta) — podwójnie zbrojona, najniekorz. el. (dół x)",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 1733.2,
+   "As_min": 0.0,
+   "As_prov": 1963.5,
+   "jedn": "mm²/m",
+   "zbrojenie": "siatka + dozbr./żebro",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "A_s2,max = 341 mm²/m; A_s1 + A_s2 = 4319 ≤ A_s,max = 10000 mm²/m; płyta: pręty ściskane usztywnione siatką poprzeczną s = 12 cm ≤ 15φ [ZAŁ]",
+   "zapas": 0.133
+  },
+  {
+   "element": "PL-DA",
+   "miejsce": "pole P9 — dół x",
+   "poz": "3.4",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 68.1,
+   "As_min": 309.1,
+   "As_prov": 314.2,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 16",
+   "s": 160.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.016
+  },
+  {
+   "element": "PL-DA",
+   "miejsce": "pole P9 — dół y",
+   "poz": "3.4",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 14.9,
+   "As_min": 294.1,
+   "As_prov": 295.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 17",
+   "s": 170.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.006
+  },
+  {
+   "element": "PL-DA",
+   "miejsce": "wspornik — góra x",
+   "poz": "3.4",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 57.9,
+   "As_min": 309.1,
+   "As_prov": 314.2,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 16",
+   "s": 160.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.016
+  },
+  {
+   "element": "PL-DA",
+   "miejsce": "wspornik — góra y",
+   "poz": "3.4",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 139.2,
+   "As_min": 294.1,
+   "As_prov": 295.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 17",
+   "s": 170.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.006
+  },
+  {
+   "element": "PL-E",
+   "miejsce": "pole P1 — dół x",
+   "poz": "3.3",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 88.0,
+   "As_min": 392.1,
+   "As_prov": 392.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.002
+  },
+  {
+   "element": "PL-E",
+   "miejsce": "pole P1 — dół y",
+   "poz": "3.3",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 93.5,
+   "As_min": 377.0,
+   "As_prov": 386.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 13",
+   "s": 130.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.026
+  },
+  {
+   "element": "PL-E",
+   "miejsce": "wspornik — góra x",
+   "poz": "3.3",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 252.0,
+   "As_min": 392.1,
+   "As_prov": 392.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.002
+  },
+  {
+   "element": "PL-E",
+   "miejsce": "wspornik — góra y",
+   "poz": "3.3",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 158.6,
+   "As_min": 377.0,
+   "As_prov": 386.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 13",
+   "s": 130.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.026
+  },
+  {
+   "element": "SF1",
+   "miejsce": "pogrubienie — siatka dolna (MES)",
+   "poz": "10.22",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 355.1,
+   "As_min": 854.5,
+   "As_prov": 855.2,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø14 co 18",
+   "s": 180.0,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.001
+  },
+  {
+   "element": "SF2",
+   "miejsce": "pogrubienie — siatka dolna (MES)",
+   "poz": "10.23",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 802.5,
+   "As_min": 854.5,
+   "As_prov": 855.2,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø14 co 18",
+   "s": 180.0,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.001
+  },
+  {
+   "element": "SF3",
+   "miejsce": "pogrubienie — siatka dolna (MES)",
+   "poz": "10.24",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 896.2,
+   "As_min": 854.5,
+   "As_prov": 905.5,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø14 co 17",
+   "s": 170.0,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.01
+  },
+  {
+   "element": "SF4",
+   "miejsce": "pogrubienie — siatka dolna (MES)",
+   "poz": "10.25",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 1880.9,
+   "As_min": 854.5,
+   "As_prov": 1924.2,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø14 co 8",
+   "s": 80.0,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.023
+  },
+  {
+   "element": "ST1",
+   "miejsce": "nad podporą B8 — góra y",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 972.7,
+   "As_min": 243.4,
+   "As_prov": 981.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 8",
+   "s": 80.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.009
+  },
+  {
+   "element": "ST1",
+   "miejsce": "nad podporą S0-06 — góra y",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 218.3,
+   "As_min": 243.4,
+   "As_prov": 251.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "ST1",
+   "miejsce": "nad podporą S0-08 — góra y",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 972.7,
+   "As_min": 243.4,
+   "As_prov": 981.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 8",
+   "s": 80.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.009
+  },
+  {
+   "element": "ST1",
+   "miejsce": "nad podporą S0-09 — góra y",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 972.7,
+   "As_min": 243.4,
+   "As_prov": 981.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 8",
+   "s": 80.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.009
+  },
+  {
+   "element": "ST1",
+   "miejsce": "nad podporą S0-10 — góra y",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 972.7,
+   "As_min": 243.4,
+   "As_prov": 981.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 8",
+   "s": 80.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.009
+  },
+  {
+   "element": "ST1",
+   "miejsce": "nad podporą S0-11 — góra x",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 146.0,
+   "As_min": 256.9,
+   "As_prov": 264.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.03
+  },
+  {
+   "element": "ST1",
+   "miejsce": "nad podporą S0-12 — góra x",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 161.6,
+   "As_min": 256.9,
+   "As_prov": 264.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.03
+  },
+  {
+   "element": "ST1",
+   "miejsce": "nad podporą S0-13 — góra x",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 186.0,
+   "As_min": 256.9,
+   "As_prov": 264.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.03
+  },
+  {
+   "element": "ST1",
+   "miejsce": "nad podporą S0-15 — góra x",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 406.1,
+   "As_min": 256.9,
+   "As_prov": 418.9,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 12",
+   "s": 120.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.032
+  },
+  {
+   "element": "ST1",
+   "miejsce": "nad podporą S0-16 — góra x",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 361.7,
+   "As_min": 283.9,
+   "As_prov": 374.0,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 21",
+   "s": 210.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.034
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P2 — dół x",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 130.7,
+   "As_min": 256.9,
+   "As_prov": 264.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.03
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P2 — dół y",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 301.8,
+   "As_min": 243.4,
+   "As_prov": 314.2,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 16",
+   "s": 160.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.041
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P5 — dół x",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 73.2,
+   "As_min": 256.9,
+   "As_prov": 264.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.03
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P5 — dół y",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 77.1,
+   "As_min": 243.4,
+   "As_prov": 251.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P5 — naroże (dół x)",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 567.3,
+   "As_min": 243.4,
+   "As_prov": 595.2,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø12 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.049
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P5 — naroże (dół y)",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 567.3,
+   "As_min": 243.4,
+   "As_prov": 595.2,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø12 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.049
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P5 — naroże (góra x)",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 567.3,
+   "As_min": 243.4,
+   "As_prov": 595.2,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø12 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.049
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P5 — naroże (góra y)",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 567.3,
+   "As_min": 243.4,
+   "As_prov": 595.2,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø12 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.049
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P6 — dół x",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 148.8,
+   "As_min": 256.9,
+   "As_prov": 264.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.03
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P6 — dół y",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 41.2,
+   "As_min": 243.4,
+   "As_prov": 251.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P6 — naroże (dół x)",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 831.1,
+   "As_min": 243.4,
+   "As_prov": 837.8,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø16 co 24",
+   "s": 240.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.008
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P6 — naroże (dół y)",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 831.1,
+   "As_min": 243.4,
+   "As_prov": 837.8,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø16 co 24",
+   "s": 240.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.008
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P6 — naroże (góra x)",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 831.1,
+   "As_min": 243.4,
+   "As_prov": 837.8,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø16 co 24",
+   "s": 240.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.008
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P6 — naroże (góra y)",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 831.1,
+   "As_min": 243.4,
+   "As_prov": 837.8,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø16 co 24",
+   "s": 240.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.008
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P7 — dół x",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 120.2,
+   "As_min": 256.9,
+   "As_prov": 264.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.03
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P7 — dół y",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 105.5,
+   "As_min": 243.4,
+   "As_prov": 251.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P7 — naroże (dół x)",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 1073.4,
+   "As_min": 243.4,
+   "As_prov": 1099.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø14 co 14",
+   "s": 140.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.024
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P7 — naroże (dół y)",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 1073.4,
+   "As_min": 243.4,
+   "As_prov": 1099.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø14 co 14",
+   "s": 140.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.024
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P7 — naroże (góra x)",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 1073.4,
+   "As_min": 243.4,
+   "As_prov": 1099.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø14 co 14",
+   "s": 140.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.024
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P7 — naroże (góra y)",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 1073.4,
+   "As_min": 243.4,
+   "As_prov": 1099.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø14 co 14",
+   "s": 140.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.024
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P8 — dół x",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 73.2,
+   "As_min": 256.9,
+   "As_prov": 264.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.03
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P8 — dół y",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 62.3,
+   "As_min": 243.4,
+   "As_prov": 251.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "ZF1",
+   "miejsce": "żebro — dołem (MES: A_s,req·b)",
+   "poz": "10.3",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 1075.7,
+   "As_min": 0.0,
+   "As_prov": 1405.9,
+   "jedn": "mm²",
+   "zbrojenie": "2Ø25 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 0.307
+  },
+  {
+   "element": "ZF1",
+   "miejsce": "żebro — górą (MES: A_s,req·b)",
+   "poz": "10.3",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 2548.6,
+   "As_min": 0.0,
+   "As_prov": 2968.8,
+   "jedn": "mm²",
+   "zbrojenie": "4Ø25 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 0.165
+  },
+  {
+   "element": "ZF10",
+   "miejsce": "żebro — dołem (MES: A_s,req·b)",
+   "poz": "10.12",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 2611.1,
+   "As_min": 0.0,
+   "As_prov": 2866.7,
+   "jedn": "mm²",
+   "zbrojenie": "8Ø20 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 0.098
+  },
+  {
+   "element": "ZF10",
+   "miejsce": "żebro — górą (MES: A_s,req·b)",
+   "poz": "10.12",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 0.0,
+   "As_min": 0.0,
+   "As_prov": 1742.5,
+   "jedn": "mm²",
+   "zbrojenie": "8Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": null
+  },
+  {
+   "element": "ZF11",
+   "miejsce": "żebro — dołem (MES: A_s,req·b)",
+   "poz": "10.13",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 2704.7,
+   "As_min": 0.0,
+   "As_prov": 3180.9,
+   "jedn": "mm²",
+   "zbrojenie": "9Ø20 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 0.176
+  },
+  {
+   "element": "ZF11",
+   "miejsce": "żebro — górą (MES: A_s,req·b)",
+   "poz": "10.13",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 195.1,
+   "As_min": 0.0,
+   "As_prov": 1742.5,
+   "jedn": "mm²",
+   "zbrojenie": "8Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 7.933
+  },
+  {
+   "element": "ZF12",
+   "miejsce": "żebro — dołem (MES: A_s,req·b)",
+   "poz": "10.14",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 1852.8,
+   "As_min": 0.0,
+   "As_prov": 2364.0,
+   "jedn": "mm²",
+   "zbrojenie": "10Ø16 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 0.276
+  },
+  {
+   "element": "ZF12",
+   "miejsce": "żebro — górą (MES: A_s,req·b)",
+   "poz": "10.14",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 265.1,
+   "As_min": 0.0,
+   "As_prov": 1968.7,
+   "jedn": "mm²",
+   "zbrojenie": "10Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 6.426
+  },
+  {
+   "element": "ZF13",
+   "miejsce": "żebro — dołem (MES: A_s,req·b)",
+   "poz": "10.15",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 1515.7,
+   "As_min": 0.0,
+   "As_prov": 1597.5,
+   "jedn": "mm²",
+   "zbrojenie": "11Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 0.054
+  },
+  {
+   "element": "ZF13",
+   "miejsce": "żebro — górą (MES: A_s,req·b)",
+   "poz": "10.15",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 179.4,
+   "As_min": 0.0,
+   "As_prov": 1742.5,
+   "jedn": "mm²",
+   "zbrojenie": "8Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 8.714
+  },
+  {
+   "element": "ZF14",
+   "miejsce": "żebro — dołem (MES: A_s,req·b)",
+   "poz": "10.16",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 2397.7,
+   "As_min": 0.0,
+   "As_prov": 2866.7,
+   "jedn": "mm²",
+   "zbrojenie": "8Ø20 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 0.196
+  },
+  {
+   "element": "ZF14",
+   "miejsce": "żebro — górą (MES: A_s,req·b)",
+   "poz": "10.16",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 416.8,
+   "As_min": 0.0,
+   "As_prov": 1629.4,
+   "jedn": "mm²",
+   "zbrojenie": "7Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 2.91
+  },
+  {
+   "element": "ZF15",
+   "miejsce": "żebro — dołem (MES: A_s,req·b)",
+   "poz": "10.17",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 221.3,
+   "As_min": 0.0,
+   "As_prov": 1032.0,
+   "jedn": "mm²",
+   "zbrojenie": "6Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 3.664
+  },
+  {
+   "element": "ZF15",
+   "miejsce": "żebro — górą (MES: A_s,req·b)",
+   "poz": "10.17",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 921.2,
+   "As_min": 0.0,
+   "As_prov": 1516.3,
+   "jedn": "mm²",
+   "zbrojenie": "6Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 0.646
+  },
+  {
+   "element": "ZF16",
+   "miejsce": "żebro — dołem (MES: A_s,req·b)",
+   "poz": "10.18",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 617.2,
+   "As_min": 0.0,
+   "As_prov": 1145.1,
+   "jedn": "mm²",
+   "zbrojenie": "7Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 0.855
+  },
+  {
+   "element": "ZF16",
+   "miejsce": "żebro — górą (MES: A_s,req·b)",
+   "poz": "10.18",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 866.3,
+   "As_min": 0.0,
+   "As_prov": 1629.4,
+   "jedn": "mm²",
+   "zbrojenie": "7Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 0.881
+  },
+  {
+   "element": "ZF17",
+   "miejsce": "żebro — dołem (MES: A_s,req·b)",
+   "poz": "10.19",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 378.6,
+   "As_min": 0.0,
+   "As_prov": 918.9,
+   "jedn": "mm²",
+   "zbrojenie": "5Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 1.427
+  },
+  {
+   "element": "ZF17",
+   "miejsce": "żebro — górą (MES: A_s,req·b)",
+   "poz": "10.19",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 575.6,
+   "As_min": 0.0,
+   "As_prov": 1403.2,
+   "jedn": "mm²",
+   "zbrojenie": "5Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 1.438
+  },
+  {
+   "element": "ZF18",
+   "miejsce": "żebro — dołem (MES: A_s,req·b)",
+   "poz": "10.20",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 1048.9,
+   "As_min": 0.0,
+   "As_prov": 1145.1,
+   "jedn": "mm²",
+   "zbrojenie": "7Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 0.092
+  },
+  {
+   "element": "ZF18",
+   "miejsce": "żebro — górą (MES: A_s,req·b)",
+   "poz": "10.20",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 0.0,
+   "As_min": 0.0,
+   "As_prov": 1629.4,
+   "jedn": "mm²",
+   "zbrojenie": "7Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": null
+  },
+  {
+   "element": "ZF19",
+   "miejsce": "żebro — dołem (MES: A_s,req·b)",
+   "poz": "10.21",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 3686.0,
+   "As_min": 0.0,
+   "As_prov": 4439.1,
+   "jedn": "mm²",
+   "zbrojenie": "28Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 0.204
+  },
+  {
+   "element": "ZF19",
+   "miejsce": "żebro — górą (MES: A_s,req·b)",
+   "poz": "10.21",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 2539.1,
+   "As_min": 0.0,
+   "As_prov": 6182.7,
+   "jedn": "mm²",
+   "zbrojenie": "28Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 1.435
+  },
+  {
+   "element": "ZF2",
+   "miejsce": "żebro — dołem (MES: A_s,req·b)",
+   "poz": "10.4",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 744.8,
+   "As_min": 0.0,
+   "As_prov": 1215.8,
+   "jedn": "mm²",
+   "zbrojenie": "7Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 0.632
+  },
+  {
+   "element": "ZF2",
+   "miejsce": "żebro — górą (MES: A_s,req·b)",
+   "poz": "10.4",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 631.8,
+   "As_min": 0.0,
+   "As_prov": 1683.9,
+   "jedn": "mm²",
+   "zbrojenie": "6Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 1.665
+  },
+  {
+   "element": "ZF3",
+   "miejsce": "żebro — dołem (MES: A_s,req·b)",
+   "poz": "10.5",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 57.8,
+   "As_min": 0.0,
+   "As_prov": 989.6,
+   "jedn": "mm²",
+   "zbrojenie": "5Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 16.112
+  },
+  {
+   "element": "ZF3",
+   "miejsce": "żebro — górą (MES: A_s,req·b)",
+   "poz": "10.5",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 525.8,
+   "As_min": 0.0,
+   "As_prov": 1457.7,
+   "jedn": "mm²",
+   "zbrojenie": "4Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 1.772
+  },
+  {
+   "element": "ZF4",
+   "miejsce": "żebro — dołem (MES: A_s,req·b)",
+   "poz": "10.6",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 0.0,
+   "As_min": 0.0,
+   "As_prov": 989.6,
+   "jedn": "mm²",
+   "zbrojenie": "5Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": null
+  },
+  {
+   "element": "ZF4",
+   "miejsce": "żebro — górą (MES: A_s,req·b)",
+   "poz": "10.6",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 504.7,
+   "As_min": 0.0,
+   "As_prov": 1457.7,
+   "jedn": "mm²",
+   "zbrojenie": "4Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 1.888
+  },
+  {
+   "element": "ZF5",
+   "miejsce": "żebro — dołem (MES: A_s,req·b)",
+   "poz": "10.7",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 91.0,
+   "As_min": 0.0,
+   "As_prov": 1102.7,
+   "jedn": "mm²",
+   "zbrojenie": "6Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 11.12
+  },
+  {
+   "element": "ZF5",
+   "miejsce": "żebro — górą (MES: A_s,req·b)",
+   "poz": "10.7",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 829.9,
+   "As_min": 0.0,
+   "As_prov": 1683.9,
+   "jedn": "mm²",
+   "zbrojenie": "6Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 1.029
+  },
+  {
+   "element": "ZF6",
+   "miejsce": "żebro — dołem (MES: A_s,req·b)",
+   "poz": "10.8",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 74.5,
+   "As_min": 0.0,
+   "As_prov": 989.6,
+   "jedn": "mm²",
+   "zbrojenie": "5Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 12.282
+  },
+  {
+   "element": "ZF6",
+   "miejsce": "żebro — górą (MES: A_s,req·b)",
+   "poz": "10.8",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 658.0,
+   "As_min": 0.0,
+   "As_prov": 1570.8,
+   "jedn": "mm²",
+   "zbrojenie": "5Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 1.387
+  },
+  {
+   "element": "ZF7",
+   "miejsce": "żebro — dołem (MES: A_s,req·b)",
+   "poz": "10.9",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 1158.0,
+   "As_min": 0.0,
+   "As_prov": 1668.2,
+   "jedn": "mm²",
+   "zbrojenie": "11Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 0.441
+  },
+  {
+   "element": "ZF7",
+   "miejsce": "żebro — górą (MES: A_s,req·b)",
+   "poz": "10.9",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 1231.2,
+   "As_min": 0.0,
+   "As_prov": 2249.4,
+   "jedn": "mm²",
+   "zbrojenie": "11Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 0.827
+  },
+  {
+   "element": "ZF8",
+   "miejsce": "żebro — dołem (MES: A_s,req·b)",
+   "poz": "10.10",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 1544.1,
+   "As_min": 0.0,
+   "As_prov": 1781.3,
+   "jedn": "mm²",
+   "zbrojenie": "12Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 0.154
+  },
+  {
+   "element": "ZF8",
+   "miejsce": "żebro — górą (MES: A_s,req·b)",
+   "poz": "10.10",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 3020.8,
+   "As_min": 0.0,
+   "As_prov": 3418.1,
+   "jedn": "mm²",
+   "zbrojenie": "12Ø16 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 0.132
+  },
+  {
+   "element": "ZF9",
+   "miejsce": "żebro — dołem (MES: A_s,req·b)",
+   "poz": "10.11",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 498.1,
+   "As_min": 0.0,
+   "As_prov": 1258.2,
+   "jedn": "mm²",
+   "zbrojenie": "8Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 1.526
+  },
+  {
+   "element": "ZF9",
+   "miejsce": "żebro — górą (MES: A_s,req·b)",
+   "poz": "10.11",
+   "arkusze": [
+    "PT-BO-03",
+    "PT-BO-05"
+   ],
+   "As_req": 2511.4,
+   "As_min": 0.0,
+   "As_prov": 2647.3,
+   "jedn": "mm²",
+   "zbrojenie": "9Ø16 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 0.054
   }
  ]
 }
