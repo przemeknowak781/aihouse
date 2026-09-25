@@ -154,7 +154,7 @@ def detal_cokol(m, opts: dict) -> Detal:
               "hydroizolacja pionowa (masa KMB / papa SBS) na czole płyty i cokole muru do +30 cm nad terenem")
     det.linia("S", [(0.0015, yT), (0.0015, y_pl - 0.004), (xL, y_pl - 0.004)], "tynk wewn. do płyty ŻB")
     det.linia("P", [(xL, y_m + 0.004), (0.0, y_m + 0.004)], "membrana SBS — bariera pary i radonu")
-    for p1, p2 in (((xL, yT), (x_out, yT)), ((xL, yB), (xR, yB)), ((xL, 0.0), (xL, yB)), ((xR, tz), (xR, yB))):
+    for p1, p2 in (((0.0, yT), (x_out, yT)), ((xL, yB), (xR, yB)), ((xL, 0.0), (xL, yB)), ((xR, tz), (xR, yB))):
         det.przerwa(p1, p2)
     # 6) opisy (prawa kolumna, od zewnątrz do wewnątrz)
     det.opis_stosu(sc, "y", 0.30, odwroc=True, tytul=f"{sz} — ściana zewnętrzna")
@@ -175,10 +175,10 @@ def detal_cokol(m, opts: dict) -> Detal:
                                                              f"{int(round(h_z * 100))} cm pod ścianą (wg PT-K)"])
     # 7) wymiary, rzędne, spadek
     det.wymiar([(a, yT) for a, _b, _w in sc] + [(sc[-1][1], yT)], yT + 0.06, "h")
-    det.wymiar([(x_out, tz), (x_out, y_cok)], x_out + 0.08, "v")
+    det.wymiar([(x_out, tz), (x_out, y_cok)], x_out + 0.05, "v")
     det.rzedna((xL + 0.06, 0.0), 0.0, "zero", "right")
-    det.rzedna((x_out + 0.62, tz), tz, "wyk", "left")
-    det.spadek((x_out + 0.05, tz + 0.03), (x_out + 0.30, tz + 0.025), 2.0)
+    det.rzedna((xR - 0.03, tz), tz, "wyk", "left")
+    det.spadek((x_out + 0.10, tz + 0.03), (x_out + 0.28, tz + 0.026), 2.0)
     det.uwagi.append("drenażu opaskowego nie projektuje się — decyzja w modelu działki (DR-0, W-285): piaski "
                      "średnie, ZWG ≈ 3,8 m p.p.t. (uzasadnienie: REKOMENDACJE mostków, rozdz. C)")
     det.uwagi.append("żebro płyty licowane z czołem płyty (lico konstrukcji muru — audyt A2 K-1); w modelu żebro "

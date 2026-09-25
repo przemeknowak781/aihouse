@@ -148,14 +148,14 @@ def rozwiniecie_wody(vp, ctx, W, res):
     odc = wo.odcinki
     by_do = {o.do: o for o in odc}
     piony = [p for p in wo.piony]
-    xs = {p.id: 10.0 + i * 8.0 for i, p in enumerate(piony)}
-    x_end = 10.0 + len(piony) * 8.0 + 2.0
+    xs = {p.id: 10.0 + i * 7.0 for i, p in enumerate(piony)}
+    x_end = 10.0 + len(piony) * 7.0 + 1.0
     _poziomy(vp, pl, m, -1.0, x_end)
     leg = Legenda()
     leg.line("S-WODA", "Wz — woda zimna", pen="srednia")
     leg.line("S-CWU", "Wc — ciepła woda użytkowa", lt="KRESKOWA", pen="srednia")
     leg.line("S-CYRK", "Cyrk — cyrkulacja c.w.u.", lt="PUNKTOWA_KROTKA", pen="cienka")
-    zm = {"ZW": z0 + 0.30, "CWU": z0 + 0.55, "CYRK": z0 + 0.80}
+    zm = {"ZW": z0 - 0.40, "CWU": z0 - 0.90, "CYRK": z0 - 1.40}     # przewody rozprowadzające (pod posadzką P0)
 
     def line(a, b, med, pen="srednia"):
         ly, _d, lt = S.media(COL[med])
@@ -168,45 +168,53 @@ def rozwiniecie_wody(vp, ctx, W, res):
     line((-1.0, zw), (4.0, zw), "ZW", pen="gruba")
     arrowhead(vp, (-1.0, zw), (-1.0, 0.0), 2.5, 12, True, "S-WODA")
     prz = next((o for o in odc if o.typ == "przylacze"), None)
-    lab((0.2, zw + 1.0 * k), f"przyłącze {prz.rura if prz else ''}")
+    lab((0.2, zw - 3.5 * k), f"przyłącze {prz.rura if prz else ''}")
     for x, fn in ((1.0, lambda p: S.valve(vp, p, 0.0, s_mm=2.6)), (1.6, lambda p: S.filter_(vp, p, 0.0, s_mm=3.0)),
                   (2.3, lambda p: S.water_meter(vp, p, 0.0, s_mm=4.0, label="WM")),
                   (3.0, lambda p: S.check_valve(vp, p, 0.0, s_mm=2.6)), (3.6, lambda p: S.valve(vp, p, 0.0, s_mm=2.6))):
         fn((x, zw))
     wm = wo.wodomierz
-    tag_leader(vp, pl, (2.3, zw), [f"WM DN{wm['DN']} Q3 = {num(wm['Q3'], 1)} m³/h, F, EA (PN-EN 1717), RED"], "S-OPISY")
-    vp.line((4.0, zw - 0.25), (4.0, zw + 1.6), "S-URZADZENIA", pen="gruba", lt="CIAGLA")
-    lab((4.0 - 0.1, zw + 1.7), "rozdzielacz Wz")
+    tag_leader(vp, pl, (2.3, zw), [f"WM DN{wm['DN']} Q3 = {num(wm['Q3'], 1)} m³/h, F, EA (PN-EN 1717), RED"], "S-OPISY",
+               radii=(9.0, 13.0, 18.0))
+    vp.line((4.0, zw - 0.25), (4.0, z0 + 1.1), "S-URZADZENIA", pen="gruba", lt="CIAGLA")
+    vp.text((3.9, z0 + 0.5), "rozdzielacz Wz", H_S, 90.0, "center", "bottom", "S-OPISY")
     # zasobnik
     zx = 6.2
     vp.rect(zx - 0.35, z0 + 0.9, zx + 0.35, z0 + 2.4, "S-URZADZENIA", pen="srednia", lt="CIAGLA")
     vp.text((zx, z0 + 1.65), f"{wo.cwu['V_zas']} dm³", H_S, 90.0, "center", "middle", "S-OPISY")
     lab((zx, z0 + 2.5), "zasobnik c.w.u.")
     t0zas = next((o for o in odc if o.od == "T0" and o.do == "ZAS"), None)
-    line((4.0, zw + 1.2), (zx - 0.35, zw + 1.2), "ZW")
+    line((4.0, z0 + 1.0), (zx - 0.35, z0 + 1.0), "ZW")
     if t0zas is not None:
-        lab(((4.0 + zx) / 2, zw + 1.2 + 1.0 * k), f"Wz {rura_krotko(t0zas.rura)}")
-    line((zx, z0 + 2.4), (zx, zm["CWU"] + 2.35), "CWU")
-    line((zx + 0.2, zm["CWU"] + 2.35), (zx + 0.2, zm["CWU"]), "CWU")
+        lab(((4.0 + zx) / 2 - 0.2, z0 + 1.0 + 1.0 * k), f"Wz {rura_krotko(t0zas.rura)}")
+    line((zx, z0 + 2.4), (zx, z0 + 2.7), "CWU")
+    line((zx, z0 + 2.7), (zx + 0.55, z0 + 2.7), "CWU")
+    line((zx + 0.55, z0 + 2.7), (zx + 0.55, zm["CWU"]), "CWU")
+    lab((zx + 0.25, z0 + 2.75), "TZM")
+    if wo.cwu.get("cyrkulacja", "brak") != "brak":
+        line((zx + 0.8, zm["CYRK"]), (zx + 0.8, z0 + 1.2), "CYRK", pen="cienka")
+        line((zx + 0.8, z0 + 1.2), (zx + 0.35, z0 + 1.2), "CYRK", pen="cienka")
+        S.pump(vp, (zx + 0.8, z0 + 0.4), 90.0, s_mm=3.0)
     cyrk = wo.cwu.get("cyrkulacja", "brak") != "brak"
     # główne do pionów i piony
-    for pn in piony:
+    for ip, pn in enumerate(piony):
         x = xs[pn.id]
         top = max(kids.index(kk) for kk in pn.kondygnacje)
-        for med, dxm, src in (("ZW", 0.0, 4.0), ("CWU", 0.3, zx + 0.2), ("CYRK", 0.6, zx + 0.45)):
+        for med, dxm, src in (("ZW", 0.0, 4.0), ("CWU", 0.3, zx + 0.55), ("CYRK", 0.6, zx + 0.8)):
             tag = {"ZW": "Z", "CWU": "C", "CYRK": "C"}[med]
             node = f"{pn.id}{tag}@{kids[0]}"
             o = by_do.get(node) if med != "CYRK" else by_do.get(f"{pn.id}C@{kids[0]}")
             if o is None or (med == "CYRK" and not cyrk):
                 continue
-            z = zm[med]
+            z = zm[med] - 0.12 * ip           # osobne przewody z rozdzielaczy do każdego pionu
+            if ip:
+                line((src, zm[med]), (src, z), med, pen="gruba" if med == "ZW" else "srednia")
             line((src, z), (x + dxm, z), med, pen="gruba" if med == "ZW" else "srednia")
             txt = f"{'Wz' if med == 'ZW' else 'Wc' if med == 'CWU' else 'Cyrk'} " + (rura_krotko(o.rura) if med != "CYRK"
                                                                                         else "16×2,0")
-            lab((x - 2.0 + dxm, z + 1.0 * k), txt)
+            lab((x - 2.2 + dxm * 3, z + 1.0 * k), txt)
             z_hi = m.kondygnacje[top].rzedna + (0.3 if med != "CYRK" else 0.5)
-            if top > 0 or med == "CYRK":
-                line((x + dxm, z), (x + dxm, z_hi), med)
+            line((x + dxm, z), (x + dxm, z_hi), med)
             for i in range(1, top + 1):
                 up = next((q for q in odc if q.typ == "pion" and q.do == f"{pn.id}{tag}@{kids[i]}"), None)
                 if up is not None and med != "CYRK":
@@ -219,21 +227,23 @@ def rozwiniecie_wody(vp, ctx, W, res):
             lst = [p for p in pn.przybory if p.kond == kid and (p.t.qn_zw > 0 or p.t.qn_cw > 0)]
             for j, p in enumerate(lst):
                 xf = x + 1.3 + 0.8 * j
-                for med, dxm, zz in (("ZW", 0.0, zk + 0.3), ("CWU", 0.3, zk + 0.45)):
+                for med, dxm, zz in (("ZW", 0.0, zk + 0.3), ("CWU", 0.3, zk + 0.55)):
                     if (med == "ZW" and p.t.qn_zw <= 0) or (med == "CWU" and p.t.qn_cw <= 0):
                         continue
                     if j == 0:
                         line((x + dxm, zz), (x + 1.3 + 0.8 * (len(lst) - 1) + dxm, zz), med)
-                    line((xf + dxm, zz), (xf + dxm, zk + p.h_wyl), med, pen="cienka")
-                vp.text((xf + 0.15, zk + p.h_wyl + 0.08), SKR.get(p.typ, p.typ[:3].upper()), H_S, 0.0, "center",
-                        "baseline", "S-OPISY")
+                    line((xf + dxm, zz), (xf + dxm, zk + max(p.h_wyl, 0.9)), med, pen="cienka")
+                vp.text((xf + 0.15, zk + max(p.h_wyl, 0.9) + 0.08), SKR.get(p.typ, p.typ[:3].upper()), H_S, 0.0,
+                        "center", "baseline", "S-OPISY")
     # zawory ogrodowe (odejścia z rozdzielacza)
     taps = [o for o in odc if o.od == "T0" and o.do.startswith("ZAW")]
     for i, o in enumerate(taps):
-        x = x_end - 1.0 - i * 1.2
-        line((4.0, zw + 1.5 - 0.15 * i), (x, zw + 1.5 - 0.15 * i), "ZW", pen="cienka")
-        line((x, zw + 1.5 - 0.15 * i), (x, z0 + 0.6), "ZW", pen="cienka")
-        vp.text((x + 0.1, z0 + 0.7), f"ZO {rura_krotko(o.rura)}", H_S, 90.0, "left", "bottom", "S-OPISY")
+        x = 7.6 + i * 0.9
+        zt = z0 + 0.2 + 0.15 * i
+        line((4.0, zt), (x, zt), "ZW", pen="cienka")
+        line((x, zt), (x, z0 + 0.9), "ZW", pen="cienka")
+        S.valve(vp, (x, z0 + 0.9), 90.0, s_mm=2.4)
+        vp.text((x + 0.12, z0 + 1.05), f"ZO {rura_krotko(o.rura)}", H_S, 90.0, "left", "bottom", "S-OPISY")
     from .schematy import rozsun_napisy
     rozsun_napisy(vp)
     leg.sym(lambda c, p: S.water_meter(c, p, 0.0, s_mm=4.0, label="WM"), "wodomierz; F — filtr; EA — zawór "

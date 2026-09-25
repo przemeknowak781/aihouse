@@ -162,5 +162,147 @@ def weryfikacja_hetenyi(L: float = 24.0, b: float = 1.0, h: float = 0.25, E: flo
     M0 = P / (4 * lam)
     w_mes = float(r.wynik.w.max())
     M_mes = float(r.wynik.m[:, 0].max())
-    return {"lambda": lam, "w0": w0, "M0": M0, "w_mes": w_mes, "M_mes": M_mes,
-            "blad_w": abs(w_mes / w0 - 1.0), "blad_M": abs(M_mes / M0 - 1.0), "L_lambda": L * lam}
+    # moment MES — w środku elementu (a = siatka/2 od linii obciążenia): M(a) = M₀·e^(−λa)·(cos λa − sin λa)
+    a = float(min(abs(pl.el_c[:, 0] - L / 2)))
+    M_a = M0 * math.exp(-lam * a) * (math.cos(lam * a) - math.sin(lam * a))
+    return {"lambda": lam, "w0": w0, "M0": M0, "M_a": M_a, "a": a, "w_mes": w_mes, "M_mes": M_mes,
+            "blad_w": abs(w_mes / w0 - 1.0), "blad_M": abs(M_mes / M_a - 1.0), "L_lambda": L * lam}
+
+
+# ==================================================================================================
+# Analiza płyty fundamentowej budynku (dane z modelu i z AnalizaKonstrukcji)
+# ==================================================================================================
+@dataclass
+class WynikPlytyFund:
+    id: str
+    obrys: Polygon
+    h: float
+    spod: float
+    beton: Beton
+    podloze: Podloze
+    el_c: np.ndarray
+    el_ab: np.ndarray
+    h_el: np.ndarray
+    strefa_el: list                      # id strefy (żebro/pogrubienie) elementu lub ""
+    M: dict                              # dol_x, dol_y, gora_x, gora_y → obwiednia ULS [kNm/m] (dół ≥ 0, góra ≤ 0)
+    As: dict                             # jw. → A_s,req [mm²/m]
+    As_min: np.ndarray                   # A_s,min elementu [mm²/m]
+    mu_przekr: np.ndarray                # maska: μ > μ_lim (przekrój podwójnie zbrojony)
+    p_d_max: float
+    p_k_max: float
+    w_k_max: float
+    oderwanie: float                     # udział powierzchni bez kontaktu (maks. po kombinacjach)
+    q_Rd: float
+    c_dol: float
+    c_gora: float
+    wyniki: list = field(default_factory=list)
+    kombinacje: int = 0
+
+
+def _klasa(model, mat, p):
+    from .materialy import klasa_betonu_z_nazwy
+    m = model.material(str(mat)) if mat else None
+    return klasa_betonu_z_nazwy(m.nazwa if m else str(mat)) or p.beton_dla("fundament")[1]
+
+
+def analiza_plyty_fundamentowej(an, siatka: float = 0.25, c_dol: float = 50.0, c_gora: float = 35.0,
+                                fi_zal: int = 12) -> WynikPlytyFund | None:
+    """MES płyty fundamentowej z żebrami/pogrubieniami na podłożu Winklera (kontakt jednostronny, obwiednia k_s)."""
+    from .obciazenia import Oddz, kombinacje, obciazenie_uzytkowe, zestawienie_przegrody
+    from . import fundamenty as fund
+    m, p = an.m, an.p
+    fu = m.fundamenty()
+    els = fu.get("elementy") or []
+    pl_el = [e for e in els if "obrys" in e]
+    if not pl_el:
+        return None
+    e0 = pl_el[0]
+    P = Polygon(e0["obrys"]).buffer(0)
+    h = float(e0.get("h", 0.25))
+    spod = float(e0.get("spod", -0.4))
+    beton = Beton.z_parametrow(_klasa(m, e0.get("mat"), p), p)
+    E = beton.E_cm * 1000.0
+    strefy, lx, ly, nazwy = [], set(), set(), []
+    for e in els:
+        if "os" not in e:
+            continue
+        ln = LineString(e["os"])
+        B = float(e.get("b", 0.6))
+        g = (ln.buffer(B / 2, cap_style=3) if ln.length < B else ln.buffer(B / 2, cap_style=2)).intersection(P)
+        if g.is_empty:
+            continue
+        hz = h + float(e.get("h", 0.3))
+        strefy.append((g, hz, E))
+        nazwy.append(str(e["id"]))
+        x0, y0, x1, y1 = g.bounds
+        lx.update([x0, x1])
+        ly.update([y0, y1])
+    k0 = m.kondygnacje[0].id
+    for w in m.sciany(k0):
+        (xa, ya), (xb, yb) = w.p1, w.p2
+        if abs(xa - xb) < 1e-6:
+            lx.add(xa)
+        elif abs(ya - yb) < 1e-6:
+            ly.add(ya)
+    for c in m.slupy():
+        if float(c["z_od"]) < spod + h + 0.5 and P.contains(Point(*c["xy"])):
+            lx.add(c["xy"][0])
+            ly.add(c["xy"][1])
+    x0, y0, x1, y1 = P.bounds
+    geo = m.raw.get("geotechnika") or {}
+    M0 = float((geo.get("grunt") or {}).get("M0") or 60000.0)
+    pod = k_s_z_geotechniki(x1 - x0, y1 - y0, M0)
+    plyty = {kk: PlytaWinkler(P, h, E, kk, nu=p.nu_beton, siatka=siatka, linie_siatki=(tuple(lx), tuple(ly)),
+                              strefy=strefy) for kk in (pod.k_s, pod.k_min, pod.k_max)}
+    pl0 = plyty[pod.k_s]
+    h_el = pl0.h_el.copy()
+    strefa_el = [""] * len(pl0.els)
+    for nm, (g, hz, _E) in zip(nazwy, strefy):
+        for i in np.nonzero(pl0.elementy_w(g))[0]:
+            strefa_el[i] = nm
+    # obciążenia (przypadki)
+    kd = m.kondygnacja(k0)
+    g_pod = 0.0
+    if getattr(kd, "podloga", None):
+        try:
+            g_pod = zestawienie_przegrody(m, kd.podloga, p, tylko="nad").g_k
+        except Exception:  # noqa: BLE001
+            g_pod = 1.5
+    q_uz = obciazenie_uzytkowe("strop", p).q_k
+    case_q = {"G": p.ciezar_zelbetu * h_el + g_pod, "QA": np.full(len(h_el), q_uz)}
+    case_pts: dict = {}
+    for w in m.sciany(k0):
+        pr = an.prof.get(w.id)
+        if not pr or "dol" not in pr:
+            continue
+        dol = pr["dol"]
+        ds = float(dol.s[1] - dol.s[0])
+        for cs in dol.przypadki():
+            if cs in ("QA_pA", "QA_pB"):
+                continue
+            q = dol.get(cs)
+            for s_, qq in zip(dol.s, q):
+                if abs(qq) > 1e-9:
+                    wgt = ds / 2 if (s_ <= 1e-9 or s_ >= dol.L - 1e-9) else ds
+                    case_pts.setdefault(cs, []).append((tuple(w.pt(s_, 0.0)), qq * wgt))
+    for c in m.slupy():
+        if float(c["z_od"]) < spod + h + 0.5 and P.contains(Point(*c["xy"])):
+            for cs, N in (an.slupy_N.get(str(c["id"])) or {}).items():
+                if cs in ("QA_pA", "QA_pB"):
+                    continue
+                case_pts.setdefault(cs, []).append((tuple(c["xy"]), N))
+    cases = sorted(set(case_q) | set(case_pts))
+    fvec = {cs: pl0.wektor(case_q.get(cs, 0.0), punkty=case_pts.get(cs, [])) for cs in cases}
+    odz = [Oddz("G", "G")]
+    for cs in cases:
+        if cs == "G":
+            continue
+        if cs == "SB2":
+            odz.append(Oddz(cs, "A", "S", "dach"))
+        else:
+            odz.append(Oddz(cs, "Q", {"QA": "A", "H": "H", "S1": "S", "S2": "S"}.get(cs, "A"),
+                            "QA" if cs.startswith("QA") else ("dach" if cs in ("H", "S1", "S2") else "")))
+    kb_uls = kombinacje(odz, p, "STR")
+    kb_chr = kombinacje(odz, p, "char")
+    return _obwiednia(pl0, plyty, pod, fvec, kb_uls, kb_chr, e0, P, h, spod, beton, h_el, strefa_el, c_dol, c_gora,
+                      fi_zal, an)
