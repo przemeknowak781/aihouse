@@ -271,7 +271,7 @@
     "DANE PRZYKŁADOWE": 56,
     "ZAŁ": 8,
     "NZW": 0,
-    "INT": 10,
+    "INT": 9,
     "PROG": 0,
     "lista": {
       "[DO UZUPEŁNIENIA: nazwa pracowni projektowej]": 1,
@@ -290,7 +290,7 @@
       "[DO UZUPEŁNIENIA: nr ewidencyjny PZGiK i data]": 1,
       "[DO UZUPEŁNIENIA]": 1,
       "[ZAŁ]": 8,
-      "[INT]": 10,
+      "[INT]": 9,
       "[DO UZUPEŁNIENIA: interpretacja zgodności z MPZP]": 1,
       "[DO UZUPEŁNIENIA: kolor pokrycia]": 1,
       "[DO UZUPEŁNIENIA: kolor ram (RAL)]": 1,
@@ -315,7 +315,7 @@
       "arkusze": 10
     }
   },
-  "rozmiar_mb": 1.5031623840332031,
+  "rozmiar_mb": 1.5031776428222656,
   "strony": 32,
   "podsumowanie": {
     "status": "PRZYKŁAD – NIE DO ZŁOŻENIA",
