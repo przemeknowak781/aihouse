@@ -625,6 +625,8 @@ def _slopes(lab, s, used):
             d = np.array([0.0, np.sign(d[1])])
         L = min(12.0, max(6.0, min(pg.bounds[2] - pg.bounds[0], pg.bounds[3] - pg.bounds[1]) / k * 0.8))
         pos, _c = D.slope_arrow(lab, pg, d, sp, length_mm=L, max_cost=8.0)
+        if pos is None:            # mniejsza strzałka, wyższy dopuszczalny koszt (wartość jest też w tabeli)
+            pos, _c = D.slope_arrow(lab, pg, d, sp, length_mm=5.0, max_cost=20.0)
         if pos is not None:
             used.add("spadek")
     # kierunki spływu na terenie (spadek terenu projektowanego)
@@ -813,6 +815,7 @@ def view_szczegoly(ctx, spec, scale, opts):
     r1 = D.vp_table(vp, x_t, wb[3], **_tab_tyczenie(s, tycz))
     r2 = D.vp_table(vp, x_t, r1[1] - 6.0 * k, **_tab_rzedne(s, W))
     r3 = D.vp_table(vp, x_t, r2[1] - 6.0 * k, **_tab_odwodnienie(s))
+    r3 = D.vp_table(vp, x_t, r3[1] - 6.0 * k, **_tab_nawierzchnie(s))
     D.vp_table(vp, x_t, r3[1] - 6.0 * k, **_tab_retencja(koordynacja(s, opts.get("odleglosci_min"),
                                                                      opts.get("retencja_min")), s))
     res = SiteResult(site=s, braki=s.braki)
@@ -871,6 +874,21 @@ def _tab_odwodnienie(s):
     return dict(title="ODWODNIENIE POWIERZCHNIOWE", cols=[("Ozn.", 0), ("Typ", 0), ("Wymiar", 0), ("Spadek", 0),
                                                            ("Odbiornik", 0)],
                 rows=rows, align=["left", "left", "right", "right", "left"], notes=notes, max_w_mm=120.0)
+
+
+def _tab_nawierzchnie(s):
+    rows = []
+    for u in s.utwardzenia:
+        sp = float(u["raw"].get("spadek") or 0.0)
+        rows.append([u["id"], _short(u["raw"].get("nawierzchnia"), 26), m2(u["poly"].difference(s.p0).area),
+                     f"{fmt.num(sp * 100, 1)} %" if sp else "—"])
+    for t in s.tarasy:
+        rows.append([t["id"], _short(t["naw"], 26), m2(t["poly"].difference(s.p0).area),
+                     f"rz. {mm(s.zero_abs + float(t['rz']))}" if t["rz"] is not None else "—"])
+    return dict(title="NAWIERZCHNIE UTWARDZONE I TARASY", cols=[("Ozn.", 0), ("Nawierzchnia", 0), ("Pow.", 0),
+                                                                 ("Spadek", 0)],
+                rows=rows, align=["left", "left", "right", "right"], max_w_mm=120.0,
+                notes=["Kierunek spadku — strzałki na rysunku (od budynku, do odwodnień liniowych i niecek)."])
 
 
 def _notes_szczegoly(s, zj_todo):

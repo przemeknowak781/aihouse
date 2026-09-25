@@ -51,7 +51,7 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 1446,
+          "prymitywy": 1408,
           "napisy": 472,
           "sprawdzone_lancuchy": 0
         }
@@ -102,7 +102,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 18.5,
+      "czas_s": 18.4,
       "png_kontrola": {
         "px": [
           3508,
@@ -148,7 +148,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 11.4,
+      "czas_s": 11.5,
       "png_kontrola": {
         "px": [
           3508,
@@ -175,9 +175,8 @@
     "PZT — brak danych: dzialka.yaml: uzbrojenie.projektowane[].{dn, material, spadek, rzedne}: średnice, spadki i rzędne dna/wierzchu przewodów w punktach załamania i włączenia (RPB § 15 ust. 2 pkt 11)",
     "PZT — brak danych: dzialka.yaml: uzbrojenie.obiekty (studzienki deszczowe): studzienki rewizyjne/połączeniowe na kolektorach deszczowych KD (włączenia rur spustowych, załamania trasy, osadnik przed zbiornikiem)",
     "PZT — brak danych: dzialka.yaml: uzbrojenie.obiekty[PC-JZ].{strefa_r, wym}: promień strefy bezpieczeństwa czynnika R290 (bez otworów, wpustów, studzienek) i wymiary jednostki",
-    "PZT — brak danych: dzialka.yaml: dzialka.mpzp (wskaźniki): wskaźniki i parametry MPZP potrzebne do tabeli zgodności PZT (RPB § 14 pkt 4 lit. d)",
-    "PZT-01: nie umieszczono 19 opisów: ['101,40', '101,16', '101,21', '101,25', '101,22', '101,27', '101,31', '101,36']"
+    "PZT — brak danych: dzialka.yaml: dzialka.mpzp (wskaźniki): wskaźniki i parametry MPZP potrzebne do tabeli zgodności PZT (RPB § 14 pkt 4 lit. d)"
   ],
   "tom": "projekt/02_PZT/rysunki/tom_PZT.pdf",
-  "czas_s": 50.3
+  "czas_s": 50.5
 }

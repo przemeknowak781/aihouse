@@ -1140,7 +1140,8 @@ def _garaz_dach_linie(det: Detal, g: dict) -> Detal:
     det.opis([(xs1 + 0.40, -g["t_R"] / 2)], ["płyta ŻB ciągła: strop ST1 (dom) / płyta dachu garażu — "
                                              "mostek ograniczony pasem docieplenia (ψ_iu w karcie)"])
     # wymiary, rzędne
-    det.wymiar([(x_iz + 0.6, y_top), (x_iz + 0.6, y_up), (x_iz + 0.6, g["y_x"])], x_iz + 0.62, "v")
+    xv = x_iz + g["b_zw"] + 0.10
+    det.wymiar([(xv, y_top), (xv, y_up), (xv, g["y_x"])], xv + 0.02, "v")
     det.wymiar([(x_iz, y_top + 0.02), (x_iz + g["b_zw"], y_top + 0.02)], y_top + 0.06, "h")
     det.wymiar([(xs1, -g["t_R"] - g["d_sg"] - 0.05), (min(xs1 + g["b_pas"], xR), -g["t_R"] - g["d_sg"] - 0.05)],
                -g["t_R"] - g["d_sg"] - 0.09, "h")

@@ -29,7 +29,7 @@ Belka nieskończona na podłożu sprężystym (Hetényi 1946): ugięcie pod sił
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Nośność podłoża (GEO, DA2*) | V_d = 15072,7 kN | R_d = 224314,1 kN | 7% | spełniony | PN-EN 1997-1 (6.1), NA.2.6 |
+| Nośność podłoża (GEO, DA2*) | V_d = 12425,8 kN | R_d = 224314,1 kN | 6% | spełniony | PN-EN 1997-1 (6.1), NA.2.6 |
 
 > Parametry gruntu PRZYKŁADOWE (brief) — w II kat. geotechnicznej wymagane badania CPT/DPL (W-282, E-04).
 
@@ -44,27 +44,27 @@ Belka nieskończona na podłożu sprężystym (Hetényi 1946): ugięcie pod sił
 - Jednostkowy opór graniczny: R_k/A' = c'·N_c·s_c·i_c + q'·N_q·s_q·i_q + ½·γ'·B'·N_γ·s_γ·i_γ = 0,0 + 5,55·26,09·1,000·1,000 + 0,5·18,50·1,000·32,59·1,000·1,000 = **446,3** kPa *((D.2))*
 - Opór graniczny (na 1 m ławy): R_k = (R_k/A')·A' = 446,3·1,000 = **446,3** kN/m
 - Obliczeniowy opór graniczny (DA2*): R_d = R_k/γ_R;v = 446,3/1,40 = **318,8** kN/m *(NA.2.6 (Ap2:2010), tabl. A.5)*
-- Maks. docisk obliczeniowy z MES (obwiednia k_s, kombinacje STR/GEO): p_d,max = **705,6** kPa
+- Maks. docisk obliczeniowy z MES (obwiednia k_s, kombinacje STR/GEO): p_d,max = **262,3** kPa
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Docisk lokalny do podłoża (pasmo pod żebrem) | p_d,max = 705,6 kPa | q_Rd = 318,8 kPa | 221% | **NIESPEŁNIONY** | PN-EN 1997-1 6.5.2, zał. D |
+| Docisk lokalny do podłoża (pasmo pod żebrem) | p_d,max = 262,3 kPa | q_Rd = 318,8 kPa | 82% | spełniony | PN-EN 1997-1 6.5.2, zał. D |
 
 > Parametry gruntu PRZYKŁADOWE (brief) — w II kat. geotechnicznej wymagane badania CPT/DPL (W-282, E-04).
 
 ## Odrywanie płyty od podłoża i osiadanie (MES, kontakt jednostronny)
 
 - Udział powierzchni bez kontaktu (maks. po kombinacjach ULS i wariantach k_s): A_oder/A = **0,0** %
-- Maks. docisk charakterystyczny (SLS): p_k,max = **557,6** kPa
-- Maks. osiadanie sprężyste (SLS, k_s nominalne): w_k,max = **83,6** mm
+- Maks. docisk charakterystyczny (SLS): p_k,max = **205,8** kPa
+- Maks. osiadanie sprężyste (SLS, k_s nominalne): w_k,max = **32,5** mm
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Osiadanie (PN-EN 1997-1 zał. H: s ≤ 50 mm dla fundamentów bezpośrednich) | w_k = 83,6 mm | s_dop = 50,0 mm | 167% | **NIESPEŁNIONY** | PN-EN 1997-1 zał. H |
+| Osiadanie (PN-EN 1997-1 zał. H: s ≤ 50 mm dla fundamentów bezpośrednich) | w_k = 32,5 mm | s_dop = 50,0 mm | 65% | spełniony | PN-EN 1997-1 zał. H |
 
 ## Przebicie płyty pod słupem SL1 (6.4.4(2))
 
-- Siła od słupa (obwiednia ULS): V_Ed = **3,8** kN
+- Siła od słupa (obwiednia ULS): V_Ed = **5,0** kN
 - Wysokość użyteczna w strefie słupa: d = h = 0,70 m = **638** mm
 - Obwód miarodajny (min v_Rd/v_Ed dla a ≤ 2d; bez redukcji odporem): a; u = **1,276 m; 8,897 m**
 
@@ -74,7 +74,7 @@ Belka nieskończona na podłożu sprężystym (Hetényi 1946): ugięcie pod sił
 
 ## Przebicie płyty pod słupem SL2 (6.4.4(2))
 
-- Siła od słupa (obwiednia ULS): V_Ed = **4,0** kN
+- Siła od słupa (obwiednia ULS): V_Ed = **5,6** kN
 - Wysokość użyteczna w strefie słupa: d = h = 0,70 m = **638** mm
 - Obwód miarodajny (min v_Rd/v_Ed dla a ≤ 2d; bez redukcji odporem): a; u = **1,276 m; 8,897 m**
 
@@ -84,7 +84,7 @@ Belka nieskończona na podłożu sprężystym (Hetényi 1946): ugięcie pod sił
 
 ## Przebicie płyty pod słupem SL3 (6.4.4(2))
 
-- Siła od słupa (obwiednia ULS): V_Ed = **3,6** kN
+- Siła od słupa (obwiednia ULS): V_Ed = **5,1** kN
 - Wysokość użyteczna w strefie słupa: d = h = 0,70 m = **638** mm
 - Obwód miarodajny (min v_Rd/v_Ed dla a ≤ 2d; bez redukcji odporem): a; u = **1,276 m; 8,897 m**
 
@@ -94,7 +94,7 @@ Belka nieskończona na podłożu sprężystym (Hetényi 1946): ugięcie pod sił
 
 ## Przebicie płyty pod słupem SL4 (6.4.4(2))
 
-- Siła od słupa (obwiednia ULS): V_Ed = **3,3** kN
+- Siła od słupa (obwiednia ULS): V_Ed = **5,0** kN
 - Wysokość użyteczna w strefie słupa: d = h = 0,70 m = **638** mm
 - Obwód miarodajny (min v_Rd/v_Ed dla a ≤ 2d; bez redukcji odporem): a; u = **1,276 m; 8,897 m**
 
@@ -106,10 +106,10 @@ Belka nieskończona na podłożu sprężystym (Hetényi 1946): ugięcie pod sił
 
 | Kierunek | M_Ed ekstremalny [kNm/m] | A_s,req maks. [mm²/m] | A_s,req 90 % pola płyty [mm²/m] |
 |---|---:|---:|---:|
-| dol_x | 2294.7 | 10012 | 950 |
-| dol_y | 1882.0 | 9497 | 1204 |
-| gora_x | -4757.6 | 13357 | 2815 |
-| gora_y | -3145.6 | 11346 | 3993 |
+| dol_x | 456.6 | 2251 | 575 |
+| dol_y | 873.4 | 4733 | 833 |
+| gora_x | -1398.2 | 7150 | 1313 |
+| gora_y | -562.1 | 2792 | 1161 |
 
-Elementy z μ > μ_lim (przekrój niewystarczający): 398 z 2865.
+Elementy z μ > μ_lim (przekrój niewystarczający): 1 z 2865.
 
