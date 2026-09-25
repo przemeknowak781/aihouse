@@ -173,6 +173,8 @@ def rysuj_adnotacje(vp: Viewport, det: Detal):
             if d.get("tekst"):
                 vp.text(P + np.array([2.6 * k, 0.4 * k]), d["tekst"], H_WYM, layer="A-SYMBOLE", color=KOLORY["H"],
                         mask=0.3)
+        elif rodz == "kontur":
+            vp.polyline(d["pts"], "A-WIDOK", closed=d.get("zamkniety", True), pen=d.get("pen", 0.35), lt=d.get("lt"))
         elif rodz == "strzalka":      # kierunek spływu / przepływu
             dims.slope(vp, d["a"], d["b"], None, text=d.get("tekst", ""), h=H_WYM)
 
@@ -319,9 +321,14 @@ def ocena_linii(det: Detal, info: dict, wyniki: dict, k: float) -> dict:
         if L == "I":
             n = len(polygons_of(info["izolacja"])) if not info["izolacja"].is_empty else 0
             if n > 1:
-                op.append(f"obrys izolacji na rysunku — {n} części (sprawdzić ciągłość)")
+                op.append(f"obrys izolacji: {n} części (w tym warstwy dodatkowe, np. izolacja podłogi)")
         else:
-            n = _skladowe(info["linie"].get(L, []), 1.5 * k)
+            ls = list(info["linie"].get(L, [])) + [LineString(P) for r_, P in det.polaczenia if r_ == L]
+            if L in "SP":        # taśma paroszczelna łączy warstwę szczelną / paroizolację z ramą
+                ls += list(info["linie"].get("T_in", []))
+            if L == "H":
+                ls += list(info["linie"].get("T_out", []))
+            n = _skladowe(ls, 1.5 * k) if info["linie"].get(L) else 0
             if n > 1:
                 op.append(f"linia na rysunku — {n} odcinki (przerwa?)")
                 st = "UWAGA" if st == "OK" else st

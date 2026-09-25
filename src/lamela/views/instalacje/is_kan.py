@@ -39,6 +39,7 @@ class RysK(Rysunek):
         if self.kid == self.kids[0]:
             self.kolektor()
         self.opisy()
+        self.braki_wspolne()
         return self.finish()
 
     # --------------------------------------------------------------------------------------------- piony

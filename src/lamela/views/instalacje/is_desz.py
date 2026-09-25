@@ -38,6 +38,7 @@ class RysD(Rysunek):
         else:
             self.parter()
         self.opisy()
+        self.braki_wspolne()
         return self.finish(rooms=not self.dach)
 
     # --------------------------------------------------------------------------------------------- dach

@@ -184,3 +184,121 @@ def detal_cokol(m, opts: dict) -> Detal:
     det.uwagi.append("żebro płyty licowane z czołem płyty (lico konstrukcji muru — audyt A2 K-1); w modelu żebro "
                      "osiowe 0,60 m — do ujednolicenia w PT-K")
     return det
+
+
+# ================================================================================================ D — okno
+def okno_reprezentatywne(m, kod_sz: str = "SZ1"):
+    """Okno w ścianie `kod_sz` z parapetem (> 5 cm) i nadprożem z sekcji `belki` (uwagi „nadproże otworu …”)."""
+    ok = [o for o in m.otwory() if o.sciana is not None and o.sciana.przegroda_kod == kod_sz and o.typ == "okno"
+          and (o.parapet or 0.0) > 0.05]
+    ok.sort(key=lambda o: (-o.szer * o.wys, o.id))
+    for o in ok:
+        b = next((b for b in m.belki() if o.id in str(b.get("uwagi", ""))), None)
+        if b is not None:
+            return o, b
+    return (ok[0], None) if ok else (None, None)
+
+
+def osadzenie(m, kod_sz: str) -> tuple[float, float]:
+    try:
+        from ..obliczenia.mostki2d.katalog import osadzenie_z_modelu
+        o = osadzenie_z_modelu(m, kod_sz)
+        return float(o["d_f"]), float(o["wsuniecie"])
+    except Exception:      # pragma: no cover
+        return 0.09, 0.05
+
+
+@rodzaj("okno", "WZ-11N", "WZ-11P", "WZ-11")
+def detal_okno(m, opts: dict) -> Detal:
+    """Osadzenie okna w ścianie z ETICS — ciepły montaż: podokiennik (dół) i nadproże (góra), przekrój pionowy
+    z przerwą; taśmy paroszczelna / paroprzepuszczalna, parapety, izolacja ościeża z zakładem na ramę."""
+    sz = przegroda_typu(m, "WZ-11N", "sciana_zewn", "SZ1")
+    o, bl = okno_reprezentatywne(m, sz)
+    H = float(o.wys) if o is not None else 1.50
+    det = Detal(m, "D-02", "Okno — ciepły montaż (podokiennik i nadproże)", ("WZ-11P", "WZ-11N", "WZ-11"), 5)
+    d_f, ws = osadzenie(m, sz)
+    Ws = det.warstwy(sz)
+    ks = next(i for i, w in enumerate(Ws) if w["konstr"])
+    xs1 = sum(w["d"] for w in Ws[:ks + 1])
+    x_out = sum(w["d"] for w in Ws)
+    xf0, xf1 = xs1 - ws, xs1 - ws + d_f                  # rama: `ws` w murze, reszta w ociepleniu
+    g = 0.015                                            # szczelina montażowa [ZAŁ]
+    hf = 0.11                                            # wysokość profilu ościeżnicy + skrzydła [ZAŁ, b_f]
+    D = H - 0.62                                         # przesunięcie części górnej (przerwa widoku)
+    y0, y1 = -0.28, 0.20                                 # część dolna
+    zak = {w["idx"]: (y0, 0.0) for w in Ws}
+    kx = next(i for i, w in enumerate(Ws) if i > ks and w["d"] >= 0.05)
+    zak[Ws[kx]["idx"]] = (y0, -0.02)
+    for w in Ws[kx + 1:]:
+        zak[w["idx"]] = (y0, -0.02)
+    sc = det.stos_v(sz, 0.0, y0, 0.0, zakres=zak)
+    # podokiennik: profil XPS, pianka, parapety, rama
+    det.poly([(xs1, -0.02), (x_out, -0.02), (x_out, 0.026), (xf1, 0.035), (xf1, g), (xs1, g)], "PROFIL_XPS")
+    det.rect(xf0, 0.0, xs1, g, "PIANKA")
+    det.rect(-0.03, 0.0, xf0 - 0.004, 0.025, "PARAPET_WEWN")
+    det.rect(xf0, g, xf1, g + hf, "RAMA_ALU")
+    xg = (xf0 + xf1) / 2
+    det.rect(xg - 0.024, g + hf - 0.02, xg + 0.024, y1, "SZYBA3")
+    det.obrobka([(xf1 - 0.006, 0.047), (xf1, 0.038), (x_out + 0.04, 0.027), (x_out + 0.04, 0.0)], strona=1)
+    det.linia("H", [(xf1 + 0.0015, 0.05), (xf1 + 0.0015, 0.0355), (x_out + 0.004, 0.0265), (x_out + 0.004, -0.035)],
+              "taśma / membrana pod parapetem")
+    det.linia("T_in", [(xf0 - 0.0015, g + 0.03), (xf0 - 0.0015, 0.0015), (xf0 - 0.05, 0.0015)])
+    det.linia("T_out", [(xf1 + 0.0035, g + 0.04), (xf1 + 0.0035, g)])
+    det.linia("S", [(0.0015, y0), (0.0015, 0.0008), (xf0 - 0.05, 0.0008)])
+    # nadproże (część górna przesunięta o D w dół)
+    yH = H - D
+    zak2 = {w["idx"]: (yH, yH + 0.34) for w in Ws}
+    zak2[Ws[0]["idx"]] = (yH, yH + 0.34)
+    sc2 = det.stos_v(sz, 0.0, yH, yH + 0.34, zakres=zak2)
+    hb = float(bl.get("h", 0.24)) if bl else 0.24
+    bb = float(bl.get("b", 0.18)) if bl else 0.18
+    det.rect(xs1 - bb, yH, xs1, yH + hb, "ZB_C25" if "ZB_C25" in m.materialy else Ws[ks]["mat"], konstr=True)
+    det.rect(0.0, yH - 0.012, xf0 - 0.004, yH, Ws[0]["mat"])                      # tynk na nadprożu
+    det.rect(xf0, yH - g, xs1, yH, "PIANKA")
+    det.rect(xf0, yH - g - hf, xf1, yH - g, "RAMA_ALU")
+    det.rect(xg - 0.024, yH - 0.29, xg + 0.024, yH - g - hf + 0.02, "SZYBA3")
+    iz = Ws[kx]["mat"]
+    det.rect(xs1, yH - g, x_out, yH, iz)                                             # EPS nad ramą (pas 15 mm)
+    det.rect(xf1 - 0.03, yH - g - 0.045, x_out, yH - g, iz)                          # izolacja nadproża z zakładem
+    det.rect(xf1 - 0.03, yH - g - 0.051, x_out, yH - g - 0.045, Ws[-1]["mat"])        # wyprawa podsufitki ościeża
+    det.obrobka([(xf1 - 0.03, yH - g - 0.051), (x_out + 0.004, yH - g - 0.051), (x_out + 0.004, yH - g - 0.03)],
+                kapinos=False)
+    det.linia("T_in", [(xf0 - 0.0015, yH - g - 0.03), (xf0 - 0.0015, yH - 0.0015), (xf0 - 0.05, yH - 0.0015)])
+    det.linia("T_out", [(xf1 + 0.0015, yH - g - 0.045), (xf1 + 0.0015, yH - g + 0.0015), (xs1 + 0.02, yH - g + 0.0015)])
+    det.linia("S", [(0.0015, yH + 0.34), (0.0015, yH - 0.0135), (xf0 - 0.05, yH - 0.0135)])
+    det.polaczenie("S", [(xf0, g + 0.03), (xf0, yH - g - 0.03)])
+    det.polaczenie("H", [(xf1, g + 0.04), (xf1, yH - g - 0.045)])
+    # osłona (kaseta nadstawna przed licem ETICS — bez kasety w ociepleniu)
+    if getattr(o, "oslona", None) and o.oslona not in ("brak", None):
+        det.kontur([(x_out + 0.02, yH - 0.20), (x_out + 0.16, yH - 0.20), (x_out + 0.16, yH - 0.05),
+                    (x_out + 0.02, yH - 0.05)])
+        det.opis([(x_out + 0.09, yH - 0.125)], [f"osłona ({o.oslona.replace('_', ' ')}) — kaseta nadstawna PRZED "
+                                                 "licem ETICS na konsolach z przekładką (bez kasety w ociepleniu)"])
+    for p1, p2 in (((xf0 - 0.02, y1), (xf1 + 0.02, y1)), ((xf0 - 0.02, yH - 0.29), (xf1 + 0.02, yH - 0.29)),
+                   ((0.0, y0), (x_out, y0)), ((0.0, yH + 0.34), (x_out, yH + 0.34))):
+        det.przerwa(p1, p2)
+    # opisy
+    det.opis([(xg, y1 - 0.03)], [f"okno {getattr(o, 'raw', {}).get('stolarka') or 'ALU 3-szybowe'} "
+                                 f"{o.szer:.2f}×{o.wys:.2f} m".replace(".", ",") if o is not None else "okno",
+                                 f"rama {mm(d_f)} mm: {mm(ws)} mm w murze, {mm(d_f - ws)} mm w ociepleniu (ciepły montaż)"])
+    det.opis([(x_out + 0.02, 0.027)], ["parapet zewn. — blacha powlekana / Al 1,0 mm, spadek ≥ 5 %, okapnik 40 mm "
+                                       "przed licem, zaślepki boczne na taśmie"])
+    det.opis([(x_out - 0.05, 0.005)], ["profil nośny parapetu z XPS (w strefie ocieplenia) + taśma pod parapetem "
+                                       "wywinięta na lico ocieplenia"])
+    det.opis([(xf1 + 0.0035, g + 0.02)], ["taśma paroprzepuszczalna / rozprężna (zewn.) na obwodzie ramy"])
+    det.opis([(xs1 - 0.02, g / 2)], [f"szczelina montażowa {mm(g)} mm — pianka PUR niskoprężna"])
+    det.opis([(xf0 - 0.0015, g + 0.015)], ["taśma paroszczelna (wewn.) na obwodzie ramy — połączona z tynkiem"])
+    det.opis([(-0.015, 0.0125)], ["parapet wewn. 20 mm na kleju, nawis 30 mm"])
+    det.opis_stosu(sc, "y", -0.18, odwroc=True, tytul=f"{sz} — ściana zewnętrzna")
+    det.opis([(xs1 - bb / 2, yH + hb / 2)], [f"nadproże ŻB {bl['id'] if bl else ''} {int(bb * 1000)}×{int(hb * 1000)} "
+                                             "(wg PT-K)"])
+    det.opis([(xf1 + 0.05, yH - g - 0.022)], [f"izolacja nadproża {skrot_nazwy(det.mat_info(iz)[0], 22)} 45 mm "
+                                              "z zakładem 30 mm na ramę, profil narożny z okapnikiem"])
+    det.opis([(xf0 - 0.0015, yH - g - 0.015)], ["taśma paroszczelna (wewn.) — tynk nadproża do taśmy"])
+    # wymiary
+    det.wymiar([(0.0, y0), (xs1 - (xs1 - Ws[0]["d"]), y0), (xf0, y0), (xs1, y0), (xf1, y0), (x_out - Ws[-1]["d"], y0),
+                (x_out, y0)], y0 - 0.035, "h")
+    det.wymiar([(0.0, y0), (x_out, y0)], y0 - 0.065, "h")
+    det.uwagi.append("okno w warstwie ocieplenia zgodnie z symulacją WZ-11/11N/11P (ψ_oi ≈ 0,01 W/(m·K)); montaż "
+                     "warstwowy: szczelniej od wewnątrz niż od zewnątrz (taśma paroszczelna / paroprzepuszczalna)")
+    return det

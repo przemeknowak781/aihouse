@@ -77,6 +77,7 @@ class RysCO(Rysunek):
         self.piony_co()
         self.rozdzielacz()
         self.opisy()
+        self.braki_wspolne()
         self.room_extra = {r: [f"{num(og.phi.get(r, 0), 0)} W"] for r in og.phi}
         for r in self.m.pomieszczenia(self.kid):
             if r.temp is not None and r.id in self.room_extra:
@@ -298,13 +299,27 @@ class RysCO(Rysunek):
             "Próba szczelności instalacji ogrzewania podłogowego wg PN-EN 1264-4 (przed wylaniem jastrychu, "
             "ciśnienie 1,5 × p_rob ≥ 6 bar); wygrzewanie jastrychu wg PN-EN 1264-4.",
         ]
+        import re as _re
         bad = [w for w in og.warunki if w.ok is False]
-        for w in bad[:5]:
+        pom = [w for w in bad if _re.match(r"^\d+\.\d+ ", w.opis)]
+        inne = [w for w in bad if w not in pom]
+        for w in pom[:6]:
             self.notes.append(f"SPRAWDZENIE NIESPEŁNIONE (obliczenia): {w.opis} ({w.podstawa}) — dogrzewanie "
                               "(np. grzejnik łazienkowy elektryczny) lub zmniejszenie T/zwiększenie θ_V do analizy.")
-        if bad:
-            self.brak("Ogrzewanie — pomieszczenia z niedoborem mocy podłogi", "; ".join(w.opis for w in bad[:6]),
+        for w in inne[:3]:
+            self.notes.append(f"SPRAWDZENIE NIESPEŁNIONE (obliczenia): {w.opis} ({w.podstawa}).")
+        if pom:
+            self.brak("Ogrzewanie — pomieszczenia z niedoborem mocy podłogi", "; ".join(w.opis for w in pom[:8]),
                       "wyposazenie.yaml: {typ: grzejnik, xy, obrot, moc_W} (grzejnik łazienkowy) lub decyzja projektowa")
+        for w in inne:
+            self.brak("Ogrzewanie — pompa ciepła", f"sprawdzenie niespełnione: {w.opis} ({w.podstawa})",
+                      "instalacje.wyroby.PC: {moc_nom_kW, czynnik, GWP, …} (DTR wybranego urządzenia)")
+        buf = next((e for e in self.W.dane.wyposazenie if "bufor" in str(e.get("opis", "")).lower()), None)
+        mm = _re.search(r"(\d+)\s*dm", str((buf or {}).get("opis", "")))
+        if mm and int(mm.group(1)) < int(og.bufor["V_dob"]):
+            self.brak("Bufor c.o. — pojemność", f"wyposazenie.yaml: {mm.group(1)} dm³ < wymagane z obliczeń "
+                      f"{og.bufor['V_dob']} dm³ (odszranianie, min. czas pracy PC)", "wyposazenie: {typ: zasobnik, "
+                      "opis: 'bufor …', V_dm3}")
         rows = [[f"{p.pom}/{p.nr}", num(100 * p.T, 0), num(p.L, 1), num(p.m_kgh, 0), num(p.dp, 1)]
                 for p in og.petle if (self.m.pomieszczenie(p.pom) and self.m.pomieszczenie(p.pom).kond == self.kid)]
         self.res.column_blocks.append(("petle", table_block(

@@ -115,6 +115,7 @@ def block_size(lines, h=H, style="normal", gap=1.45):
 
 
 DIRS = [(1, 0), (1, 1), (0, 1), (-1, 0), (1, -1), (0, -1), (-1, 1), (-1, -1)]
+DIRS2 = [(1, 0.5), (0.5, 1), (-0.5, 1), (-1, 0.5), (1, -0.5), (0.5, -1), (-0.5, -1), (-1, -0.5)]
 
 
 class Labeler:
@@ -155,14 +156,14 @@ class Labeler:
         cands = []
         for d in dists:
             for A in anchors:
-                for (ux, uy) in (dirs or DIRS):
+                for (ux, uy) in (dirs or (DIRS + DIRS2 if d >= 7.0 else DIRS)):
                     cx = A[0] + (ux * (d + W / 2.0) * k if ux else 0.0)
                     cy = A[1] + (uy * (d + Hh / 2.0) * k if uy else 0.0)
                     cands.append((cx, cy, ux, uy, d, A))
 
         def fn(cv, cand):
             cx, cy, ux, uy, d, A = cand
-            ha = "left" if ux > 0 else "right" if ux < 0 else "center"
+            ha = "left" if ux >= 0.99 else "right" if ux <= -0.99 else "center"
             x = cx - W / 2.0 * k if ha == "left" else cx + W / 2.0 * k if ha == "right" else cx
             top = cy + Hh / 2.0 * k
             text_block(cv, (x, top), lines, h, ha, layer, style, color, mask)
@@ -338,7 +339,7 @@ def label_base_map(c, s, lab: Labeler, win: Polygon, used: set, opts: dict, spot
             lab.along(ls, sx.lit, H, "Z-SIECI-IST", sx.kolor, n=3, max_cost=10.0, mask=0.2)
             short = short_desc(sx.opis)
             anchors = [np.asarray(ls.interpolate(f, normalized=True).coords[0])
-                       for f in (0.2, 0.3, 0.12, 0.06, 0.4, 0.8, 0.9, 0.95)]
+                       for f in (0.2, 0.3, 0.12, 0.06, 0.4, 0.8, 0.9, 0.95, 0.03, 0.5, 0.6, 0.7)]
             lab.label(anchors, [f"{sx.lit} — {short}"], H, "Z-SIECI-IST", color=sx.kolor,
                       dists=(6.0, 9.0, 12.0, 16.0, 20.0, 25.0), dirs=[(0, 1), (1, 1), (-1, 1), (0, -1), (1, -1),
                                                                        (-1, -1)],

@@ -36,6 +36,10 @@ class RysE(Rysunek):
                       and "szacht" not in r.nazwa.lower()]
         self._doors = self._drzwi()
         self.circuits_used = set()
+        self.brak("Punkty instalacji elektrycznych i teletechnicznych", "model nie zawiera położeń opraw, łączników, "
+                  "gniazd i punktów teletechnicznych — rozmieszczenie algorytmiczne (opis w uwagach arkuszy)",
+                  "instalacje.elektryka.punkty: [{typ: oprawa|lacznik|gniazdo|wypust|RJ45|TV|PIR, kond, xy, obrot, "
+                  "h, obwod, opis}]")
 
     # --------------------------------------------------------------------------------------------- pomieszczenia
     def rodzaj(self, r) -> str:

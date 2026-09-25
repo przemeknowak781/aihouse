@@ -68,6 +68,7 @@ class RysWM(Rysunek):
         if self.kid == self.rek_kid and self.rek_xy is not None:
             self.centrala()
         self.opisy()
+        self.braki_wspolne()
         self.room_extra = {}
         for rid, (n, w) in self.went.items():
             s = []

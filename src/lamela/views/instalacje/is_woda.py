@@ -71,6 +71,14 @@ class RysW(Rysunek):
         self.pomieszczenia()
         self.opisy()
         self.room_extra = {}
+        self.braki_wspolne()
+        zas_m = next((e for e in W.dane.wyposazenie if e.get("typ") == "zasobnik" and "cwu" in str(e.get("opis", "")).lower()),
+                     None)
+        mm = re.search(r"(\d+)\s*dm", str((zas_m or {}).get("opis", "")))
+        if mm and int(mm.group(1)) != int(wo.cwu["V_zas"]):
+            self.brak("Zasobnik c.w.u. — pojemność", f"wyposazenie.yaml: {mm.group(1)} dm³, obliczenia (PN-EN 12831-3 / "
+                      f"zapotrzebowanie): {wo.cwu['V_zas']} dm³ — na rysunku wartość z obliczeń",
+                      "wyposazenie: {typ: zasobnik, V_dm3: 400, …} lub instalacje.wyroby.zasobnik")
         return self.finish()
 
     # --------------------------------------------------------------------------------------------- węzły

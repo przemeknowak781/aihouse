@@ -182,6 +182,22 @@ class Rysunek:
         i = self.kids.index(kid)
         return self.kids[i - 1] if i > 0 else None
 
+    def braki_wspolne(self):
+        """Braki danych wspólne dla rysunków IS (piony bez rodzaju, trasy, dane wyrobów)."""
+        if self.W.korekty:
+            self.brak("instalacje.piony — rodzaj pionu", "lista pionów zawiera rury spustowe (RS…) bez pola `rodzaj`; "
+                      "biblioteka grupowania pionów traktowała je jako piony wod.-kan. — w obliczeniach do rysunków "
+                      "odfiltrowane", "piony: [{id, xy, rodzaj: kanalizacja|deszczowa|woda|co|wentylacja|teletechnika, "
+                      "kond: [P0, …], opis}]")
+        self.brak("Trasy przewodów (woda, kanalizacja, c.o., wentylacja)", "model nie zawiera przebiegów przewodów — "
+                  "trasy wyznaczono algorytmicznie (ortogonalnie, przy ścianach, z pionów/rozdzielaczy do przyborów)",
+                  "instalacje.trasy: [{medium: Wz|Wc|Cyrk|Ks|Z|P|SUP|ETA, kond, linia: [[x, y], …], dn, z}]")
+        if not (self.W.dane.inst.get("wyroby") or {}):
+            self.brak("instalacje.wyroby", "brak danych wyrobów (DTR/DWU) — obliczenia na danych przykładowych bibliotek "
+                      "(PC, wodomierz ∆p(Q3), EA k_v, wpusty, centrala went., moduł PV, falownik)",
+                      "wyroby: {PC: {P_A7W35, COP, SCOP_35, L_WA}, wodomierz: {DN, Q3, dp_Q3}, EA: {kv}, "
+                      "centrala: {V_nom, eta_t, SFP}, PV: {modul: {...}, falownik: {...}}}")
+
     # --------------------------------------------------------------------------------------------- zakończenie
     def finish(self, notes_extra=(), rooms=True):
         if rooms and not self.dach and self.pod is not None and self.pod.rooms:

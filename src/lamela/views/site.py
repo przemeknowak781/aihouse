@@ -794,7 +794,9 @@ def view_szczegoly(ctx, spec, scale, opts):
     x_t = wb[2] + 8.0 * k
     r1 = D.vp_table(vp, x_t, wb[3], **_tab_tyczenie(s, tycz))
     r2 = D.vp_table(vp, x_t, r1[1] - 6.0 * k, **_tab_rzedne(s, W))
-    D.vp_table(vp, x_t, r2[1] - 6.0 * k, **_tab_odwodnienie(s))
+    r3 = D.vp_table(vp, x_t, r2[1] - 6.0 * k, **_tab_odwodnienie(s))
+    D.vp_table(vp, x_t, r3[1] - 6.0 * k, **_tab_retencja(koordynacja(s, opts.get("odleglosci_min"),
+                                                                     opts.get("retencja_min")), s))
     res = SiteResult(site=s, braki=s.braki)
     res.column_blocks = [("legenda", D.legend_block(used))]
     res.notes = _notes_szczegoly(s, zj_todo)
@@ -901,16 +903,12 @@ def _util_labels(lab, s, used):
         anchors = [np.asarray(parts[0].interpolate(f, normalized=True).coords[0]) for f in (0.5, 0.35, 0.65, 0.2, 0.8)]
         lab.label(anchors, txt, h, "Z-SIECI-PROJ", color=sx.kolor, dists=(3.0, 6.0, 9.0, 13.0, 18.0),
                   leader_from=2.0, dot=True)
-    for sx in [x for x in s.sieci if x.istn]:
+    for sx in [x for x in s.sieci if x.istn]:           # opisy sieci istniejących — w tabeli obok rysunku
         g = D.clip(sx.geom, lab.bounds)
         if g is None:
             continue
         for part in getattr(g, "geoms", [g]):
-            lab.along(part, sx.lit, h, "Z-SIECI-IST", sx.kolor, n=2, max_cost=10.0, mask=0.2)
-            anchors = [np.asarray(part.interpolate(f, normalized=True).coords[0]) for f in (0.1, 0.9, 0.2, 0.8)]
-            lab.label(anchors, [f"{sx.lit} — {D.short_desc(sx.opis)} (istn.)"], h, "Z-SIECI-IST", color=sx.kolor,
-                      dists=(4.0, 7.0, 10.0, 14.0), dirs=[(0, 1), (1, 1), (-1, 1), (0, -1), (1, -1), (-1, -1)],
-                      leader_from=2.0, dot=True, max_cost=40.0)
+            lab.along(part, sx.lit, h, "Z-SIECI-IST", sx.kolor, n=3, max_cost=10.0, mask=0.2)
 
 
 def _inst_points(vp, lab, s, used):
@@ -1003,7 +1001,7 @@ def view_uzbrojenie(ctx, spec, scale, opts):
     x_t = wb[2] + 8.0 * k
     y = wb[3]
     for t in (_tab_przylacza(s), _tab_istn(s), _tab_obiekty(s, win), _tab_koord(K), _tab_skrzyz(K),
-              _tab_kolizje(K), _tab_retencja(K, s)):
+              _tab_kolizje(K)):
         r = D.vp_table(vp, x_t, y, **t)
         y = r[1] - 5.0 * k
     res = SiteResult(site=s, braki=s.braki)
