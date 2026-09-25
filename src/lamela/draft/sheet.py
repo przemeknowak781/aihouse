@@ -650,14 +650,14 @@ def notes_box(sh: Sheet, x: float, y_top: float, w: float, lines: list[str], tit
 
 def table(sh, x: float, y_top: float, cols: list[tuple[str, float]], rows: list[list[str]], h: float = 2.5,
           row_h: float = 5.0, title: str | None = None, layer: str = "R-OPISY", align: list[str] | None = None,
-          header_h: float | None = None, zawijaj=False) -> tuple:
+          header_h: float | None = None, zawijaj=False, h_naglowka: float = 1.8) -> tuple:
     """Prosta tabela (np. zestawienie pomieszczeń, stolarki). cols: [(nagłówek, szerokość), …].
 
     Tekst komórki jest zmniejszany (``fit``: szereg ISO 3098 do 1,8 mm). ``zawijaj=True`` — gdy nie mieści się
     nawet przy 1,8 mm, jest łamany na wiersze (najpierw w wysokości wiersza tabeli, potem wiersz rośnie), zamiast
     wychodzić na sąsiednią kolumnę; ``zawijaj="wiersze"`` — tekst dłuższy niż kolumna łamany pismem ``h`` (bez
     zmniejszania; jednolite pismo kolumny, np. tytuły w spisie rysunków). Bez przepełnień tabela jest identyczna
-    jak przy ``zawijaj=False``."""
+    jak przy ``zawijaj=False``. ``h_naglowka`` — pismo nagłówków kolumn (domyślnie 1,8 mm; PZT — 2,5 mm, W-312)."""
     W = sum(w for _n, w in cols)
     y = y_top
     header_h = header_h or row_h
@@ -668,9 +668,10 @@ def table(sh, x: float, y_top: float, cols: list[tuple[str, float]], rows: list[
         xx = x
         for name, w in cols:
             ls = name.split("\n")
+            lh_n = h_naglowka * 1.45
             for i, s_ in enumerate(ls):
-                yy = y - header_h / 2.0 + (len(ls) - 1) * 1.3 - i * 2.6
-                sh.text((xx + w / 2.0, yy), s_, 1.8, ha="center", va="middle", style="bold")
+                yy = y - header_h / 2.0 + (len(ls) - 1) * lh_n / 2.0 - i * lh_n
+                sh.text((xx + w / 2.0, yy), s_, h_naglowka, ha="center", va="middle", style="bold")
             xx += w
         y -= header_h
         sh.line((x, y), (x + W, y), pen=0.25)

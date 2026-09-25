@@ -9,21 +9,21 @@
 ## Stan opracowania i analiz konstrukcji — § 23 pkt 1 RPB; W-274
 
 Zestawienie generowane automatycznie przy każdym złożeniu tomu z wyników obliczeń konstrukcji (model budynku
-z 2026-09-25 08:02). Pozycja niezamknięta to analiza nie domknięta: warunek stanu granicznego niespełniony,
+z 2026-09-25 10:06). Pozycja niezamknięta to analiza nie domknięta: warunek stanu granicznego niespełniony,
 zbrojenie wymagane obliczeniowo nieujęte w kontroli rysunków, obciążenie lub parametr niezgodny z modelem,
 uwaga programu obliczeń wymagająca analizy, wynik starszy niż model albo arkusz rysunkowy z błędem. Pozycja
 **ZASTĄPIONE** — wynik modelu uproszczonego zastąpiony analizą dokładniejszą (wskazaną w opisie). Po domknięciu
 analiz i ponownym złożeniu tomu wiersze znikają z zestawienia.
 
-> **PROJEKT KONSTRUKCJI NIEZAMKNIĘTY — 42 pozycje NIEZAMKNIĘTE.** Tom jest wersją roboczą. Do czasu domknięcia wszystkich pozycji z tabeli poniżej — zmiany modelu wg zaleceń zespołu konstrukcji, ponowna analiza (obliczenia statyczne, MES płyty fundamentowej, kontrola zbrojenia rysunków) na zamrożonej wersji modelu i ponowne złożenie tomu — **nie podpisywać** oświadczenia projektanta PT (art. 41 ust. 4a pkt 2 PB) i nie przekazywać tomu do realizacji robót.
+> **PROJEKT KONSTRUKCJI NIEZAMKNIĘTY — 17 pozycji NIEZAMKNIĘTE.** Tom jest wersją roboczą. Do czasu domknięcia wszystkich pozycji z tabeli poniżej — zmiany modelu wg zaleceń zespołu konstrukcji, ponowna analiza (obliczenia statyczne, MES płyty fundamentowej, kontrola zbrojenia rysunków) na zamrożonej wersji modelu i ponowne złożenie tomu — **nie podpisywać** oświadczenia projektanta PT (art. 41 ust. 4a pkt 2 PB) i nie przekazywać tomu do realizacji robót.
 
 **Tabela 1. Stan analiz według obszarów**
 
 | Obszar analizy | Warunki spełnione | Stan |
 |---|---|---|
-| Obliczenia statyczne | 105 z 132 | NIEZAMKNIĘTE |
-| MES płyty fundamentowej | 6 z 7 | NIEZAMKNIĘTE |
-| Kontrola zbrojenia rysunków | 273 z 275 | NIEZAMKNIĘTE |
+| Obliczenia statyczne | 148 z 148 | zamknięte |
+| MES płyty fundamentowej | 13 z 13 | zamknięte |
+| Kontrola zbrojenia rysunków | 300 z 300 | zamknięte |
 | Część rysunkowa (arkusze i kontrola jakości arkuszy) | brak 4 | NIEZAMKNIĘTE |
 
 *Źródło: wyniki obliczeń statycznych, raport MES płyty fundamentowej (rozdz. 5), kontrola zbrojenia rysunków (rozdz. 6)*
@@ -32,69 +32,23 @@ analiz i ponownym złożeniu tomu wiersze znikają z zestawienia.
 
 | Obszar | Element | Wynik | Opis | Źródło |
 |---|---|---|---|---|
-| Aktualność | obliczenia statyczne | 2026-09-25 06:33 | wyniki starsze niż model (2026-09-25 08:02) albo brak pliku — ponowić analizę | czas modyfikacji plików |
-| Aktualność | MES płyty fundamentowej | 2026-09-25 06:48 | wyniki starsze niż model (2026-09-25 08:02) albo brak pliku — ponowić analizę | czas modyfikacji plików |
-| Aktualność | kontrola zbrojenia | 2026-09-25 06:48 | wyniki starsze niż model (2026-09-25 08:02) albo brak pliku — ponowić analizę | czas modyfikacji plików |
-| Obliczenia statyczne | poz. 3.2 PL-2 | 336 % | Rysy: średnica prętów (tabl. 7.2N) η = 336 %; Ugięcie długotrwałe (quasi-stała) ≤ L/250 η = 286 %; Zbrojenie na zginanie η = 140 % — wymaga zmiany przekroju / schematu (zalecenia zmian modelu zespołu konstrukcji) | wyniki obliczeń statycznych |
-| Obliczenia statyczne | poz. 9.9 S2-09 | 172 % | Nośność — połowa wysokości η = 172 %; Nośność — przekrój dolny η = 153 %; Nośność — przekrój górny η = 116 % — wymaga zmiany przekroju / schematu (zalecenia zmian modelu zespołu konstrukcji) | wyniki obliczeń statycznych |
-| Obliczenia statyczne | poz. 9.13 S1-01 | 136 % | Nośność — przekrój górny η = 136 %; Nośność — połowa wysokości η = 125 % — wymaga zmiany przekroju / schematu (zalecenia zmian modelu zespołu konstrukcji) | wyniki obliczeń statycznych |
-| Obliczenia statyczne | poz. 9.16 S1-04 | 155 % | Nośność — połowa wysokości η = 155 %; Nośność — przekrój górny η = 135 % — wymaga zmiany przekroju / schematu (zalecenia zmian modelu zespołu konstrukcji) | wyniki obliczeń statycznych |
-| Obliczenia statyczne | poz. 9.17 S1-05 | 230 % | Nośność — połowa wysokości η = 230 %; Nośność — przekrój dolny η = 199 %; Nośność — przekrój górny η = 160 % — wymaga zmiany przekroju / schematu (zalecenia zmian modelu zespołu konstrukcji) | wyniki obliczeń statycznych |
-| Obliczenia statyczne | poz. 9.18 S1-06 | 382 % | Nośność — przekrój dolny η = 382 %; Nośność — połowa wysokości η = 382 %; Nośność — przekrój górny η = 221 % — wymaga zmiany przekroju / schematu (zalecenia zmian modelu zespołu konstrukcji) | wyniki obliczeń statycznych |
-| Obliczenia statyczne | poz. 9.20 S1-08 | 219 % | Docisk η = 219 %; Nośność — połowa wysokości η = 108 % — wymaga zmiany przekroju / schematu (zalecenia zmian modelu zespołu konstrukcji) | wyniki obliczeń statycznych |
-| Obliczenia statyczne | poz. 9.21 S1-09 | 174 % | Docisk η = 174 % — wymaga zmiany przekroju / schematu (zalecenia zmian modelu zespołu konstrukcji) | wyniki obliczeń statycznych |
-| Obliczenia statyczne | poz. 9.23 S0-01 | 541 % | Nośność — połowa wysokości η = 541 %; Nośność — przekrój dolny η = 457 %; Nośność — przekrój górny η = 405 % — wymaga zmiany przekroju / schematu (zalecenia zmian modelu zespołu konstrukcji) | wyniki obliczeń statycznych |
-| Obliczenia statyczne | poz. 9.25 S0-07 | 132 % | Nośność — połowa wysokości η = 132 %; Nośność — przekrój dolny η = 113 % — wymaga zmiany przekroju / schematu (zalecenia zmian modelu zespołu konstrukcji) | wyniki obliczeń statycznych |
-| Obliczenia statyczne | poz. 9.26 S0-08 | 214 % | Nośność — połowa wysokości η = 214 %; Nośność — przekrój dolny η = 177 %; Nośność — przekrój górny η = 161 % — wymaga zmiany przekroju / schematu (zalecenia zmian modelu zespołu konstrukcji) | wyniki obliczeń statycznych |
-| Obliczenia statyczne | poz. 9.27 S0-09 | 107 % | Nośność — połowa wysokości η = 107 % — wymaga zmiany przekroju / schematu (zalecenia zmian modelu zespołu konstrukcji) | wyniki obliczeń statycznych |
-| Obliczenia statyczne | poz. 9.28 S0-10 | 367 % | Nośność — połowa wysokości η = 367 %; Nośność — przekrój dolny η = 338 %; Nośność — przekrój górny η = 246 % — wymaga zmiany przekroju / schematu (zalecenia zmian modelu zespołu konstrukcji) | wyniki obliczeń statycznych |
 | Ścinanie płyt | poz. 1.1 D1 | η_max = 72 % | V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P2; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia | wyniki obliczeń statycznych; obliczenia statyczne (rozdz. 4); kontrola zbrojenia rysunków (rozdz. 6) |
-| Ścinanie płyt | poz. 1.2 D2 | η_max = 96 % | V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P5; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia | wyniki obliczeń statycznych; obliczenia statyczne (rozdz. 4); kontrola zbrojenia rysunków (rozdz. 6) |
-| Ścinanie płyt | poz. 1.3 D3 | η_max = 91 % | V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P8; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia | wyniki obliczeń statycznych; obliczenia statyczne (rozdz. 4); kontrola zbrojenia rysunków (rozdz. 6) |
+| Ścinanie płyt | poz. 1.2 D2 | η_max = 77 % | V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P5; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia | wyniki obliczeń statycznych; obliczenia statyczne (rozdz. 4); kontrola zbrojenia rysunków (rozdz. 6) |
+| Ścinanie płyt | poz. 1.3 D3 | η_max = 100 % | V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P8; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia | wyniki obliczeń statycznych; obliczenia statyczne (rozdz. 4); kontrola zbrojenia rysunków (rozdz. 6) |
 | Ścinanie płyt | poz. 1.4 D4 | η_max = 44 % | V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P4; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia | wyniki obliczeń statycznych; obliczenia statyczne (rozdz. 4); kontrola zbrojenia rysunków (rozdz. 6) |
-| Ścinanie płyt | poz. 2.1 ST2 | η_max = 96 % | V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P1; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia | wyniki obliczeń statycznych; obliczenia statyczne (rozdz. 4); kontrola zbrojenia rysunków (rozdz. 6) |
-| Ścinanie płyt | poz. 2.2 ST2Z | η_max = 96 % | V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P2; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia | wyniki obliczeń statycznych; obliczenia statyczne (rozdz. 4); kontrola zbrojenia rysunków (rozdz. 6) |
+| Ścinanie płyt | poz. 2.1 ST2 | η_max = 96 % | V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P3; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia | wyniki obliczeń statycznych; obliczenia statyczne (rozdz. 4); kontrola zbrojenia rysunków (rozdz. 6) |
 | Ścinanie płyt | poz. 2.3 ST1 | η_max = 79 % | V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P2; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia | wyniki obliczeń statycznych; obliczenia statyczne (rozdz. 4); kontrola zbrojenia rysunków (rozdz. 6) |
-| Ścinanie płyt | poz. 3.2 PL-2 | η_max = 96 % | V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P1; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia | wyniki obliczeń statycznych; obliczenia statyczne (rozdz. 4); kontrola zbrojenia rysunków (rozdz. 6) |
 | Ścinanie płyt | poz. 3.3 PL-E | η_max = 81 % | V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P1; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia | wyniki obliczeń statycznych; obliczenia statyczne (rozdz. 4); kontrola zbrojenia rysunków (rozdz. 6) |
 | Ścinanie płyt | poz. 3.4 PL-DA | η_max = 74 % | V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P9; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia | wyniki obliczeń statycznych; obliczenia statyczne (rozdz. 4); kontrola zbrojenia rysunków (rozdz. 6) |
-| MES płyty fundamentowej | Docisk lokalny do podłoża (pasmo pod żebrem) | 114% | p_d,max = 364,0 kPa > q_Rd = 318,8 kPa (PN-EN 1997-1 6.5.2, zał. D) — pogrubienie / zmiana posadowienia (zalecenia zmian modelu zespołu konstrukcji) | raport MES płyty fundamentowej (rozdz. 5) |
-| Kontrola zbrojenia | PF1+PF2 — dozbrojenie D1 dół y | 4 299 < 5 243 mm²/m | wymagane zbrojenie niewykonalne w grubości płyty (rozstaw w świetle 8.2(2)) — obciążenie skupione węzła ścian/belek: pogrubienie płyty (stopa) pod węzłem — zalecenia zmian modelu zespołu konstrukcji [WYMAGA ZMIANY MODELU] | kontrola zbrojenia rysunków (rozdz. 6) |
-| Kontrola zbrojenia | PF1+PF2 — strefa S1 (płyta) — podwójnie zbrojona, najniekorz. el. (dół y) | 4 299 < 5 243 mm²/m | zbrojenie wymagane niewykonalne w grubości płyty — pogrubienie (stopa) pod węzłem, zalecenia zmian modelu zespołu konstrukcji [WYMAGA ZMIANY MODELU] | kontrola zbrojenia rysunków (rozdz. 6) |
-| Obliczenia statyczne | poz. 6.11 N-O0-18 | A_s2 = 235 mm² | przekrój podwójnie zbrojony — brak warunku A_s2 ≤ A_s,prov (górą) w pozycji i w kontroli zbrojenia rysunków; wysokość użyteczna d do przyjęcia z liczby warstw zbrojenia dolnego — zwiększyć przekrój lub zespolić ze stropem, przeliczyć | obliczenia statyczne; kontrola zbrojenia rysunków |
-| Obliczenia statyczne | nadproża / wieńce (26) | — | q_d mniejsze niż 6.10b z wypisanych g_k i q_k — zestawienie niesprawdzalne: wypisywać q_k tylko z przypadków użytych w kombinacji, 6.10b uzupełnić o Σγ_Q·ψ₀·Q_k,i, nie łączyć kat. H ze śniegiem (PN-EN 1991-1-1 p. 3.3.2), przeliczyć — poz. 6.1 N-O0-06 (q_d = 20,09 < 30,53 kN/m); 6.2 N-O0-08 (q_d = 22,93 < 25,64 kN/m); 6.3 N-O0-09 (q_d = 36,61 < 49,44 kN/m); 6.4 N-O0-10 (q_d = 13,11 < 17,65 kN/m); 6.5 N-O0-11 (q_d = 118,94 < 148,68 kN/m); 6.6 N-O0-12 (q_d = 25,93 < 30,56 kN/m) (i 20 innych) | obliczenia statyczne |
+| Obliczenia statyczne | nadproża / wieńce (25) | — | q_d mniejsze niż 6.10b z wypisanych g_k i q_k — zestawienie niesprawdzalne: wypisywać q_k tylko z przypadków użytych w kombinacji, 6.10b uzupełnić o Σγ_Q·ψ₀·Q_k,i, nie łączyć kat. H ze śniegiem (PN-EN 1991-1-1 p. 3.3.2), przeliczyć — poz. 6.1 N-O0-06 (q_d = 19,82 < 29,79 kN/m); 6.2 N-O0-08 (q_d = 22,93 < 25,64 kN/m); 6.3 N-O0-09 (q_d = 36,60 < 49,43 kN/m); 6.4 N-O0-10 (q_d = 13,11 < 17,65 kN/m); 6.5 N-O0-11 (q_d = 97,59 < 123,39 kN/m); 6.6 N-O0-12 (q_d = 25,38 < 29,82 kN/m) (i 19 innych) | obliczenia statyczne |
 | Zestawienie obciążeń | poz. 1.1 D1 | 100 % | brak w obciążeniach stałych: ciężar pola PV (8 modułów, stelaże i balast wg PT-4 IE) — uzupełnić i przeliczyć | obliczenia statyczne; model (PV, warstwy dachu) |
 | Zestawienie obciążeń | poz. 1.4 D4 | 97 % | brak w obciążeniach stałych: ciężar pola PV (7 modułów, stelaże i balast wg PT-4 IE); woda retencyjna substratu i maty drenażowej (stan nasycony) — uzupełnić i przeliczyć | obliczenia statyczne; model (PV, warstwy dachu) |
 | MES płyty fundamentowej | strefa garażu | — | obciążenie użytkowe garażu przyjęte jak kat. A — przypisać kat. F: q_k = 2,50 kN/m², Q_k = 20 kN (PN-EN 1991-1-1 tabl. 6.8 + NA) i przeliczyć MES | raport MES płyty fundamentowej |
-| Posadowienie | 9 pozycji: ZF1…SF4 | — | głębokość posadowienia mniejsza od h_z zastąpiona izolacją obwodową (D = 1,00 m, d_n = 0,10 m wg modelu) — brak obliczenia wg PN-EN ISO 13793 (wskaźnik mrozowy F_d dla lokalizacji) | obliczenia statyczne; model (fundamenty) |
 | Projekt geotechniczny | M₀ [kPa] | model 80 000 | parametr niezgodny z modelem geotechnicznym: obliczenia statyczne 100 000 — ujednolicić (jedno źródło: model „geotechnika”) i przeliczyć | model; obliczenia statyczne; raport MES płyty fundamentowej |
-| Uwagi analizy | 3 × | — | Ściana nośna S2-07 stoi na płycie ST2 + ST2Z + D2 + D3 + PL-2 bez ściany poniżej — obciążenie liniowe płyty; sprawdzić podciąg/żebro [WYMAGA ANALIZY].; Ściana nośna S2-08 stoi na płycie ST2 + ST2Z + D2 + D3 + PL-2 bez ściany poniżej — obciążenie liniowe płyty; sprawdzić podciąg/żebro [WYMAGA ANALIZY].; Ściana nośna S2-09 stoi na płycie ST2 + ST2Z + D2 + D3 + PL-2 bez ściany poniżej — obciążenie liniowe płyty; sprawdzić podciąg/żebro [WYMAGA ANALIZY]. | wyniki obliczeń statycznych |
-| Uwagi analizy | 12 × | — | ST1: podpora punktowa SL1 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]; ST1: podpora punktowa SL2 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]; ST1: podpora punktowa SL3 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY] (i 9 podobnych) | wyniki obliczeń statycznych |
-| Część rysunkowa | PT-BO-01 | — | kolizje napisów: 3 — usunąć przed wydaniem (kontrola jakości arkusza) | arkusze; raport kontroli arkuszy |
+| Część rysunkowa | PT-BO-01 | — | kolizje napisów: 11 — usunąć przed wydaniem (kontrola jakości arkusza) | arkusze; raport kontroli arkuszy |
 | Część rysunkowa | Raport kontroli arkuszy | — | 19 uwag dotyczy numerów lub tytułów niezgodnych z wykazem rysunków (PT-BO-03, PT-BO-04, PT-BO-05, PT-BO-07, PT-BO-08, PT-BO-09, PT-BO-10, PT-BO-11) — raport nieaktualny; wygenerować ponownie arkusze konstrukcji wraz z raportem kontroli | arkusze; raport kontroli arkuszy |
-| Część rysunkowa | Formaty arkuszy | — | 21 arkuszy w formacie niestandardowym (PT-BO-01, PT-BO-02, PT-BO-05, PT-BO-06, PT-BO-09, PT-BO-10, PT-BO-12, PT-BO-13, PT-BO-14, PT-BO-15, PT-BO-16, PT-BO-17, PT-BO-18, PT-BO-19, PT-BO-20, PT-BO-21, PT-BO-22, PT-BO-23, PT-BO-24, PT-BO-25, PT-BO-26; wymiary — wykaz rysunków) — dobrać format z szeregu PN-EN ISO 5457 (A0–A4, formaty wydłużone; W-313) | arkusze; raport kontroli arkuszy |
+| Część rysunkowa | Formaty arkuszy | — | 25 arkuszy w formacie niestandardowym (PT-BO-01, PT-BO-02, PT-BO-05, PT-BO-06, PT-BO-07, PT-BO-08, PT-BO-09, PT-BO-10, PT-BO-11, PT-BO-12, PT-BO-13, PT-BO-14, PT-BO-15, PT-BO-16, PT-BO-17, PT-BO-18, PT-BO-19, PT-BO-20, PT-BO-21, PT-BO-22, PT-BO-23, PT-BO-24, PT-BO-25, PT-BO-26, PT-BO-27; wymiary — wykaz rysunków) — dobrać format z szeregu PN-EN ISO 5457 (A0–A4, formaty wydłużone; W-313) | arkusze; raport kontroli arkuszy |
 | Część rysunkowa | Uwagi na arkuszach | — | PT-BO-09, PT-BO-10, PT-BO-12, PT-BO-13, PT-BO-15, PT-BO-16, PT-BO-20, PT-BO-21, PT-BO-22, PT-BO-23, PT-BO-24, PT-BO-25, PT-BO-26 — specyfikacja betonu powołuje PN-EN 206+A2 i PN-B-06265 bez statusu (normy wycofane, rejestr D-09) — ujednolicić z rozdz. 2.2 | arkusze; raport kontroli arkuszy |
-
-**Tabela 3. Pozycje ZASTĄPIONE analizą dokładniejszą**
-
-| Element | Wynik modelu uproszczonego | Opis |
-|---|---|---|
-| poz. 10.3 ZF1 | 289 % | model ławy izolowanej (Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) η = 289 %; Nośność podłoża (GEO, DA2*) η = 235 %) — nośność i osiadanie: analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia: płyta na XPS z izolacją obwodową (W-284) — sprawdzenie izolacji wg PN-EN ISO 13793 w pozycji „Posadowienie” (rozdz. 1) |
-| poz. 10.4 ZF2 | 289 % | model ławy izolowanej (Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) η = 289 %) — nośność i osiadanie: analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia: płyta na XPS z izolacją obwodową (W-284) — sprawdzenie izolacji wg PN-EN ISO 13793 w pozycji „Posadowienie” (rozdz. 1) |
-| poz. 10.7 ZF5 | 143 % | model ławy izolowanej (Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) η = 143 %) — nośność i osiadanie: analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia: płyta na XPS z izolacją obwodową (W-284) — sprawdzenie izolacji wg PN-EN ISO 13793 w pozycji „Posadowienie” (rozdz. 1) |
-| poz. 10.9 ZF7 | 289 % | model ławy izolowanej (Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) η = 289 %) — nośność i osiadanie: analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia: płyta na XPS z izolacją obwodową (W-284) — sprawdzenie izolacji wg PN-EN ISO 13793 w pozycji „Posadowienie” (rozdz. 1) |
-| poz. 10.10 ZF8 | 291 % | model ławy izolowanej (Nośność podłoża (GEO, DA2*) η = 291 %; Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) η = 289 %) — nośność i osiadanie: analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia: płyta na XPS z izolacją obwodową (W-284) — sprawdzenie izolacji wg PN-EN ISO 13793 w pozycji „Posadowienie” (rozdz. 1) |
-| poz. 10.11 ZF9 | 482 % | model ławy izolowanej (Nośność podłoża (GEO, DA2*) η = 482 %) — nośność i osiadanie: analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia: płyta na XPS z izolacją obwodową (W-284) — sprawdzenie izolacji wg PN-EN ISO 13793 w pozycji „Posadowienie” (rozdz. 1) |
-| poz. 10.13 ZF11 | 212 % | model ławy izolowanej (Nośność podłoża (GEO, DA2*) η = 212 %) — nośność i osiadanie: analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia: płyta na XPS z izolacją obwodową (W-284) — sprawdzenie izolacji wg PN-EN ISO 13793 w pozycji „Posadowienie” (rozdz. 1) |
-| poz. 10.15 ZF13 | 386 % | model ławy izolowanej (Nośność podłoża (GEO, DA2*) η = 386 %) — nośność i osiadanie: analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia: płyta na XPS z izolacją obwodową (W-284) — sprawdzenie izolacji wg PN-EN ISO 13793 w pozycji „Posadowienie” (rozdz. 1) |
-| poz. 10.16 ZF14 | 322 % | model ławy izolowanej (Nośność podłoża (GEO, DA2*) η = 322 %) — nośność i osiadanie: analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia: płyta na XPS z izolacją obwodową (W-284) — sprawdzenie izolacji wg PN-EN ISO 13793 w pozycji „Posadowienie” (rozdz. 1) |
-| poz. 10.18 ZF16 | 110 % | model ławy izolowanej (Nośność podłoża (GEO, DA2*) η = 110 %) — nośność i osiadanie: analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia: płyta na XPS z izolacją obwodową (W-284) — sprawdzenie izolacji wg PN-EN ISO 13793 w pozycji „Posadowienie” (rozdz. 1) |
-| poz. 10.20 SF1 | 204 % | model ławy izolowanej (Głębokość posadowienia η = 204 %) — nośność i osiadanie: analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia: płyta na XPS z izolacją obwodową (W-284) — sprawdzenie izolacji wg PN-EN ISO 13793 w pozycji „Posadowienie” (rozdz. 1) |
-| poz. 10.21 SF2 | 204 % | model ławy izolowanej (Głębokość posadowienia η = 204 %) — nośność i osiadanie: analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia: płyta na XPS z izolacją obwodową (W-284) — sprawdzenie izolacji wg PN-EN ISO 13793 w pozycji „Posadowienie” (rozdz. 1) |
-| poz. 10.22 SF3 | 204 % | model ławy izolowanej (Głębokość posadowienia η = 204 %) — nośność i osiadanie: analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia: płyta na XPS z izolacją obwodową (W-284) — sprawdzenie izolacji wg PN-EN ISO 13793 w pozycji „Posadowienie” (rozdz. 1) |
-| poz. 10.23 SF4 | 204 % | model ławy izolowanej (Głębokość posadowienia η = 204 %) — nośność i osiadanie: analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia: płyta na XPS z izolacją obwodową (W-284) — sprawdzenie izolacji wg PN-EN ISO 13793 w pozycji „Posadowienie” (rozdz. 1) |
-
-*Źródło: wykaz braków danych zespołu konstrukcji (zespół BO)*
 
 ## Podstawa opracowania — § 23 pkt 1 RPB
 
@@ -118,7 +72,7 @@ analiz i ponownym złożeniu tomu wiersze znikają z zestawienia.
 Eurokody 1. generacji z załącznikami krajowymi — bez mieszania z 2. generacją (rejestr wymagań A.3). Wycofanie
 normy nie zakazuje jej stosowania (stanowisko PKN); normy wycofane podano ze statusem i normą zastępczą.
 
-**Tabela 4. Normy stosowane w projekcie konstrukcji — wydanie i status**
+**Tabela 3. Normy stosowane w projekcie konstrukcji — wydanie i status**
 
 | Norma (wydanie) | Zakres | Status (rejestr wymagań A.3, PKN) |
 |---|---|---|
@@ -148,14 +102,14 @@ w opisie i w uwagach na arkuszach — wg PN-EN 206+A2:2021-08 i PN-B-06265:2022-
 jako wiedza techniczna dla spójności z PN-EN 1992-1-1:2008 (rejestr wymagań D-09). Przed wydaniem PT normę
 deklaracji betonu (PN-EN 206-1:2026-09) potwierdzić z wytwórnią betonu.
 
-**Tabela 5. Dane wejściowe tomu (odczyt przy każdym złożeniu)**
+**Tabela 4. Dane wejściowe tomu (odczyt przy każdym złożeniu)**
 
 | Dane wejściowe | Źródło | Stan |
 |---|---|---|
-| model budynku | wersja 1.0 | 2026-09-25 08:02 |
-| obliczenia statyczne | zespół konstrukcji — rozdz. 4 | 2026-09-25 06:33 — NIEZAMKNIĘTE (starsze niż model) |
-| MES płyty fundamentowej | zespół konstrukcji — rozdz. 5 | 2026-09-25 06:48 — NIEZAMKNIĘTE (starsze niż model) |
-| kontrola zbrojenia | zespół konstrukcji — rozdz. 6 | 2026-09-25 06:48 — NIEZAMKNIĘTE (starsze niż model) |
+| model budynku | wersja 1.0 | 2026-09-25 10:06 |
+| obliczenia statyczne | zespół konstrukcji — rozdz. 4 | 2026-09-25 10:11 — aktualne względem modelu |
+| MES płyty fundamentowej | zespół konstrukcji — rozdz. 5 | 2026-09-25 10:19 — aktualne względem modelu |
+| kontrola zbrojenia | zespół konstrukcji — rozdz. 6 | 2026-09-25 10:19 — aktualne względem modelu |
 
 ## Rozwiązania konstrukcyjne obiektu — § 23 pkt 1 RPB
 
@@ -174,19 +128,19 @@ zapewniają tarcze stropowe współpracujące ze ścianami murowymi w dwóch kie
 Ścieżki obciążeń elementów nietypowych (wg modelu): wsporniki — EQU: 1,10·G_dst + 1,5·Q_dst ≤ 0,90·G_stb (W-262); ugięcie końca ≤ wysięg/125 (W-268); łączniki termoizolacyjne z ETA (W-272); szczelina dylatacyjna nad stolarką pod krawędzią okapu E i ramy C; bryła A —
 lekka ściana A' → belka B3 → końce belek wspornikowych B4/B5 (osie 1 i 3, w licu ścian P2) → ściana A P1 (podpora) i przęsło zakotwienia A–B dociążone ścianami P2 i stropem; ST3 w osi A' na belce B6 opartej na narożach ścian.
 
-**Tabela 6. Zestawienie elementów konstrukcji (generowane z modelu)**
+**Tabela 5. Zestawienie elementów konstrukcji (generowane z modelu)**
 
 | Element | Identyfikatory (model) | Wymiary | Materiał | Poz. obliczeń |
 |---|---|---|---|---|
 | Płyta fundamentowa | PF1, PF2 | h = 0,25 m | Żelbet C25/30, B500SP (stropy, płyta fundamentowa, ściany) | rozdz. 5 (MES) |
-| Żebra (pogrubienia) płyty pod ścianami | ZF1…ZF17 (17 szt.) | b = 0,50–0,60 m, h = 0,25–0,30 m (pod płytą) | Żelbet C25/30, B500SP (stropy, płyta fundamentowa, ściany) | 10.3–10.19 |
-| Pogrubienia płyty pod słupami | SF1, SF2, SF3, SF4 | 1,00 m × 1,00 m, h = 0,45 m | Żelbet C25/30, B500SP (stropy, płyta fundamentowa, ściany) | 10.20–10.23 |
+| Żebra (pogrubienia) płyty pod ścianami | ZF1…ZF19 (19 szt.) | b = 0,50–1,80 m, h = 0,25–0,45 m (pod płytą) | Żelbet C25/30, B500SP (stropy, płyta fundamentowa, ściany) | 10.3–10.21 |
+| Pogrubienia płyty pod słupami | SF1, SF2, SF3, SF4, SF9 | 1,00–1,60 m × 1,00–1,60 m, h = 0,45–0,65 m | Żelbet C25/30, B500SP (stropy, płyta fundamentowa, ściany) | 10.22–10.26 |
 | Ściany nośne murowe i żelbetowe | 38 ścian (P0–P2) | wg przegród SCZB15, SW18, SWG, SWZB, SZ1, SZ2, SZL | Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej; Żelbet C25/30, B500SP (stropy, płyta fundamentowa, ściany) | 9.1–9.38 |
 | Stropy międzykondygnacyjne (płyty) | ST1, ST2, ST2Z | h = 0,22 m | Żelbet C25/30, B500SP (stropy, płyta fundamentowa, ściany) | 2.1–2.3 |
 | Stropodachy (płyty) | D1, D2, D3, D4 | h = 0,22–0,24 m | Żelbet C25/30, B500SP (stropy, płyta fundamentowa, ściany) | 1.1–1.4 |
 | Płyty wspornikowe (okapy, daszki) z łącznikami termoizolacyjnymi | PL-E, PL-DA, PL-2, PL-3 | h = 0,25–0,32 m | Żelbet C30/37 XC4/XF1 (krawędzie płyt wysuniętych, attyki, belki) | 3.1–3.4 |
 | Belki, podciągi i nadproża żelbetowe (model) | 38 szt. | b = 0,18–0,25 m, h = 0,18–1,07 m | Żelbet C25/30, B500SP (stropy, płyta fundamentowa, ściany); Żelbet C30/37 XC4/XF1 (krawędzie płyt wysuniętych, attyki, belki) | 5.1–5.17 |
-| Słupy | SL1, SL2, SL3, SL4, SL5, SL6, SL7, SL8 | 150x1000; RK 100x100x6; RK 120x120x8 | Rama boksu C: ruszt stalowy ocynkowany w okładzinie z blachy aluminiowej RAL 7016 (pusta w środku); Stal konstrukcyjna S355 (słupy RK, rama boksu C), cynkowana ogniowo + malowana proszkowo RAL 7016 | 8.1–8.8 |
+| Słupy | SL1, SL2, SL3, SL4, SL5, SL6, SL7, SL8, SL9, SL10, SL11, SL12, SL13, SL14, SL15, SL16, SL17, SL18, SL19, SL20, SL21 | 150x1000; 180x400; 180x440; 300x180; 400x180; 700x180; 865x180; RK 100x100x6; RK 120x120x8 | Rama boksu C: ruszt stalowy ocynkowany w okładzinie z blachy aluminiowej RAL 7016 (pusta w środku); Stal konstrukcyjna S355 (słupy RK, rama boksu C), cynkowana ogniowo + malowana proszkowo RAL 7016; Żelbet C30/37 XC4/XF1 (krawędzie płyt wysuniętych, attyki, belki) | 8.1–8.21 |
 | Schody (płyty biegów i spoczników) | SCH1, SCH2 | h = 0,18 m | Żelbet C25/30, B500SP (stropy, płyta fundamentowa, ściany) | 4.1–4.2 |
 | Nadproża i wieńce (pozycje obliczeń) | 33 pozycje | wg obliczeń statycznych | Żelbet C25/30, B500SP (stropy, płyta fundamentowa, ściany) | 6.1–7.3 |
 
@@ -205,7 +159,7 @@ Zastosowane schematy statyczne (konstrukcyjne) i modele obliczeniowe programu ob
 
 ### Założenia do obliczeń i obciążenia — PN-EN 1990, PN-EN 1991 + NA
 
-**Tabela 7. Założenia i obciążenia**
+**Tabela 6. Założenia i obciążenia**
 
 | Oddziaływanie | Założenie | Wartość |
 |---|---|---|
@@ -257,20 +211,20 @@ Wyprowadzenie wartości śniegu (zaspy przy uskokach, sytuacja wyjątkowa B2) i 
 
 ### Podstawowe wyniki obliczeń — § 23 pkt 1 RPB
 
-**Tabela 8. Wyniki obliczeń statycznych — zestawienie grup pozycji**
+**Tabela 7. Wyniki obliczeń statycznych — zestawienie grup pozycji**
 
 | Grupa | Pozycje | η_max | Element miarodajny | Niespełnione |
 |---|---|---|---|---|
 | 1. Dachy i stropodachy | 4 | 100 % | 1.1 D1 | — |
-| 2. Stropy | 3 | 100 % | 2.1 ST2 | — |
-| 3. Płyty wspornikowe | 4 | 336 % | 3.2 PL-2 | PL-2 |
+| 2. Stropy | 3 | 99 % | 2.3 ST1 | — |
+| 3. Płyty wspornikowe | 4 | 100 % | 3.2 PL-2 | — |
 | 4. Schody | 2 | 98 % | 4.1 SCH1 | — |
-| 5. Belki i podciągi | 17 | 99 % | 5.10 B5 | — |
-| 6. Nadproża | 30 | 100 % | 6.21 N-O1-10 | — |
+| 5. Belki i podciągi | 17 | 100 % | 5.12 B9 | — |
+| 6. Nadproża | 30 | 99 % | 6.15 N-O1-02 | — |
 | 7. Wieńce | 3 | 31 % | 7.1 W-D1_PL-3 | — |
-| 8. Słupy | 8 | 15 % | 8.5 SL5 | — |
-| 9. Ściany murowe | 38 | 541 % | 9.23 S0-01 | S2-09, S1-01, S1-04, S1-05, S1-06, S1-08, S1-09, S0-01, S0-07, S0-08, S0-09, S0-10 |
-| 10. Fundamenty | 23 | 482 % | 10.11 ZF9 | ZF1*, ZF2*, ZF5*, ZF7*, ZF8*, ZF9*, ZF11*, ZF13*, ZF14*, ZF16*, SF1*, SF2*, SF3*, SF4* |
+| 8. Słupy | 21 | 99 % | 8.19 SL19 | — |
+| 9. Ściany murowe | 38 | 82 % | 9.4 S2-04 | — |
+| 10. Fundamenty | 26 | 100 % | 10.12 ZF10 | — |
 
 η — maksymalne wykorzystanie nośności / warunku stanu granicznego pozycji (STR, GEO, SLS). Szczegóły, warunki i przyjęte zbrojenie — rozdz. 4. * — pozycja ZASTĄPIONA analizą dokładniejszą (model ławy izolowanej → MES płyty fundamentowej, rozdz. 1 i 5).
 
@@ -342,7 +296,7 @@ przed rozluźnieniem, rozmoczeniem i przemarzaniem w czasie robót oraz wykonani
 Podejście obliczeniowe DA2* (PN-EN 1997-1 + NA): parametry materiałowe M1 (γ_φ' = γ_c' = γ_γ = 1,0) — wartości
 obliczeniowe równe charakterystycznym z tabeli poniżej (kolumna „Model”).
 
-**Tabela 9. Parametry geotechniczne podłoża [DANE PRZYKŁADOWE – FIKCYJNE]**
+**Tabela 8. Parametry geotechniczne podłoża [DANE PRZYKŁADOWE – FIKCYJNE]**
 
 | Parametr (wartość charakterystyczna) | Model (geotechnika) | Obliczenia statyczne | MES płyty |
 |---|---|---|---|
@@ -370,13 +324,13 @@ Projektowy przekrój geotechniczny: 0,0–0,4 ziemia urodzajna; piaski średnie 
 k_s = 5303 kN/m³, obwiednia wariantów k_s,min; k_s,max =
 2652; 10606 kN/m³ (rozdz. 5).
 
-**Tabela 10. Nośność i osiadanie podłoża (§ 10 pkt 6) — wyniki MES płyty fundamentowej**
+**Tabela 9. Nośność i osiadanie podłoża (§ 10 pkt 6) — wyniki MES płyty fundamentowej**
 
 | Warunek | Efekt | Nośność / limit | η | Stan |
 |---|---|---|---|---|
-| Nośność podłoża (GEO, DA2*) | V_d = 13434,7 kN | R_d = 224314,1 kN | 6% | spełniony |
-| Docisk lokalny do podłoża (pasmo pod żebrem) | p_d,max = 364,0 kPa | q_Rd = 318,8 kPa | 114% | NIESPEŁNIONY — NIEZAMKNIĘTE |
-| Osiadanie (PN-EN 1997-1 zał. H: s ≤ 50 mm dla fundamentów bezpośrednich) | w_k = 43,9 mm | s_dop = 50,0 mm | 88% | spełniony |
+| Nośność podłoża (GEO, DA2*) | V_d = 13975,6 kN | R_d = 224314,1 kN | 6% | spełniony |
+| Docisk lokalny do podłoża (pasmo pod żebrem) | p_d,max = 272,8 kPa | q_Rd = 318,8 kPa | 86% | spełniony |
+| Osiadanie (PN-EN 1997-1 zał. H: s ≤ 50 mm dla fundamentów bezpośrednich) | w_k = 33,4 mm | s_dop = 50,0 mm | 67% | spełniony |
 
 Stateczność ogólna: teren płaski (spadek 0,63 m na obszarze działki), brak skarp i wykopów głębokich — sprawdzenie stateczności ogólnej nie jest miarodajne [ZAŁ].
 
@@ -384,9 +338,9 @@ Stateczność ogólna: teren płaski (spadek 0,63 m na obszarze działki), brak 
 
 ### Dane do zaprojektowania fundamentów {podstawa: § 10 pkt 7}
 Posadowienie bezpośrednie: płyta fundamentowa z żebrami, spód elementów na rzędnych −0,40…
-−0,85 m (względem ±0,000); usunięcie ziemi urodzajnej 0,4 m; strefa przemarzania
+−1,05 m (względem ±0,000); usunięcie ziemi urodzajnej 0,4 m; strefa przemarzania
 h_z = 0,8 m — ochrona izolacją obwodową (W-284; wymiary wg PN-EN ISO 13793 —
-pozycja „Posadowienie” NIEZAMKNIĘTE, rozdz. 1); osiadanie dopuszczalne
+wg obliczeń statycznych); osiadanie dopuszczalne
 s ≤ 50 mm (W-283).
 
 ### Specyfikacja badań kontrolnych robót ziemnych {podstawa: § 10 pkt 8}
@@ -400,7 +354,7 @@ opaskowy zbędne (W-285); agresywność wód gruntowych względem betonu — wg 
 
 ### Monitorowanie {podstawa: § 10 pkt 10}
 Pomiar osiadań płyty (rozdz. 3). Najbliższa zabudowa sąsiednia (dz. 123/5) w odległości
-≈ 13,9 m od płyty fundamentowej [DANE PRZYKŁADOWE – FIKCYJNE]; przy wykopie płytkim (spód fundamentów ≤ 0,85 m poniżej ±0,000)
+≈ 13,9 m od płyty fundamentowej [DANE PRZYKŁADOWE – FIKCYJNE]; przy wykopie płytkim (spód fundamentów ≤ 1,05 m poniżej ±0,000)
 monitoring obiektów sąsiednich nie jest wymagany [ZAŁ].
 
 ### Wpływy eksploatacji górniczej — § 23 pkt 2 RPB
@@ -428,10 +382,10 @@ niepalne. Słupy stalowe fasady i łączniki termoizolacyjne wsporników — bez
 - Izolacja obwodowa przeciwprzemarzaniowa: brak w modelu danych klimatycznych do obliczenia wg PN-EN ISO 13793 (wskaźnik mrozowy F_d / F_n, średnia roczna temperatura) — wymiary D = 1,00 m (garaż 1,20 m), d_n = 10 cm przyjęte z modelu bez sprawdzenia.
 - Przejścia instalacyjne przez płytę: model instalacji zawiera tylko położenia pionów i przyborów — brak średnic tulei, rzędnych i spadków podejść kanalizacji pod płytą (projekt branży S).
 - Geotechnika: parametry gruntu w modelu przykładowe (brief) — wymagana dokumentacja badań podłoża / projekt geotechniczny (kat. II) przed wydaniem PT; k_s płyty wyznaczono z M₀ modelu z obwiednią ×0,5/×2.
-- Obciążenie posadzki garażu i pasa gospodarczego (kat. F / sprzęt techniczny) — model nie przypisuje kategorii obciążenia użytkowego do płyty fundamentowej; w MES płyty przyjęto kat. A (2,0 kN/m²) na całej powierzchni.
+- Obciążenie posadzki pasa gospodarczego (pomieszczenie techniczne — ciężar urządzeń wg PT-IS): w MES płyty kat. A (2,0 kN/m²); garaż (PF2) — kat. F wg modelu (fundamenty.elementy[PF2].obciazenie_uzytkowe).
 - Obrysy stropów/dachów w modelu po licu ocieplenia (płyty nad warstwą EPS) — do korekty w audycie A2 (lico warstwy konstrukcyjnej); rysunki są generowane z modelu i zaktualizują się automatycznie.
 - Beton krawędzi wysuniętych: model XC4 + XF1 (C30/37, c_nom 40 mm) — biblioteka wymiaruje dla XC4 (c_nom 40 mm, zgodne); klasa XF1 wymaga napowietrzenia/w/c wg PN-B-06265 — wpisać w specyfikacji betonu.
-- Zmiany modelu wymagane do spełnienia wszystkich warunków (słupy ŻB w węzłach A/1, A/3, C/3, D/3 ze stopami, jawny schemat wsporników B3–B5, ścieżka obciążeń fasady S1-01 przez B1, naroże PL-2, elementy niekonstrukcyjne w wspornikach) — zalecenia zmian modelu zespołu konstrukcji.
+- Trzpienie ŻB w murze (SL9–SL21): technologia wykonania (kolejność murowanie/betonowanie, strzępia, kotwy muru) i zakłady prętów przez wieńce — do potwierdzenia przez wykonawcę; status zmian modelu — zalecenia zmian modelu zespołu konstrukcji.
 
 Wyroby wskazane z nazwy w dokumentacji zespołu BO należy traktować jako przykładowe — dopuszcza się wyroby równoważne spełniające parametry wymagane (nośność, klasa, deklaracja właściwości użytkowych, ETA/EAD dla łączników termoizolacyjnych).
 
@@ -439,29 +393,30 @@ Wyroby wskazane z nazwy w dokumentacji zespołu BO należy traktować jako przyk
 
 | Nr | Tytuł | Skala | Format | Uwagi |
 |---|---|---|---|---|
-| PT-BO-01 | RZUT FUNDAMENTÓW | 1:50 | nst. 540×594 |  |
-| PT-BO-02 | PRZEKROJE CHARAKTERYSTYCZNE FUNDAMENTU | 1:20 | nst. 250×594 |  |
+| PT-BO-01 | RZUT FUNDAMENTÓW | 1:50 | nst. 594×460 |  |
+| PT-BO-02 | PRZEKROJE CHARAKTERYSTYCZNE FUNDAMENTU | 1:20 | nst. 260×594 |  |
 | PT-BO-03 | ZBROJENIE DOLNE PŁYTY FUNDAMENTOWEJ | 1:50 | A2 |  |
 | PT-BO-04 | ZBROJENIE GÓRNE PŁYTY FUNDAMENTOWEJ | 1:50 | A2 |  |
-| PT-BO-05 | ZESTAWIENIE STALI — FUNDAMENT | — | nst. 230×594 |  |
-| PT-BO-06 | RZUT KONSTRUKCJI STROPU NAD PARTEREM | 1:50 | nst. 520×594 |  |
-| PT-BO-07 | RZUT KONSTRUKCJI STROPU NAD I PIĘTREM | 1:50 | A2 |  |
-| PT-BO-08 | RZUT KONSTRUKCJI STROPODACHU | 1:50 | A2 |  |
-| PT-BO-09 | ZBROJENIE DOLNE STROPU NAD PARTEREM | 1:50 | nst. 510×594 |  |
-| PT-BO-10 | ZBROJENIE GÓRNE STROPU NAD PARTEREM | 1:50 | nst. 510×594 |  |
-| PT-BO-11 | ZESTAWIENIE STALI — STROP NAD PARTEREM | — | A2 |  |
-| PT-BO-12 | ZBROJENIE DOLNE STROPU NAD I PIĘTREM | 1:50 | nst. 400×594 |  |
-| PT-BO-13 | ZBROJENIE GÓRNE STROPU NAD I PIĘTREM | 1:50 | nst. 400×594 |  |
-| PT-BO-14 | ZESTAWIENIE STALI — STROP NAD I PIĘTREM | — | nst. 460×420 |  |
-| PT-BO-15 | ZBROJENIE DOLNE STROPODACHU | 1:50 | nst. 400×594 |  |
-| PT-BO-16 | ZBROJENIE GÓRNE STROPODACHU | 1:50 | nst. 400×594 |  |
+| PT-BO-05 | ZESTAWIENIE STALI — FUNDAMENT | — | nst. 420×510 |  |
+| PT-BO-06 | RZUT KONSTRUKCJI STROPU NAD PARTEREM | 1:50 | nst. 594×460 |  |
+| PT-BO-07 | RZUT KONSTRUKCJI STROPU NAD I PIĘTREM | 1:50 | nst. 420×460 |  |
+| PT-BO-08 | RZUT KONSTRUKCJI STROPODACHU | 1:50 | nst. 420×460 |  |
+| PT-BO-09 | ZBROJENIE DOLNE STROPU NAD PARTEREM | 1:50 | nst. 594×440 |  |
+| PT-BO-10 | ZBROJENIE GÓRNE STROPU NAD PARTEREM | 1:50 | nst. 594×440 |  |
+| PT-BO-11 | ZESTAWIENIE STALI — STROP NAD PARTEREM | — | nst. 420×500 |  |
+| PT-BO-12 | ZBROJENIE DOLNE STROPU NAD I PIĘTREM | 1:50 | nst. 420×430 |  |
+| PT-BO-13 | ZBROJENIE GÓRNE STROPU NAD I PIĘTREM | 1:50 | nst. 420×440 |  |
+| PT-BO-14 | ZESTAWIENIE STALI — STROP NAD I PIĘTREM | — | nst. 420×450 |  |
+| PT-BO-15 | ZBROJENIE DOLNE STROPODACHU | 1:50 | nst. 420×430 |  |
+| PT-BO-16 | ZBROJENIE GÓRNE STROPODACHU | 1:50 | nst. 420×440 |  |
 | PT-BO-17 | ZESTAWIENIE STALI — STROPODACH | — | nst. 230×594 |  |
 | PT-BO-18 | WĘZŁY WSPORNIKÓW Z ŁĄCZNIKAMI TERMOIZOLACYJNYMI | 1:20 | nst. 310×594 |  |
 | PT-BO-19 | WIENIEC I OPARCIE STROPU NA MURZE SILIKATOWYM | 1:20 | nst. 470×297 |  |
-| PT-BO-20 | ZBROJENIE BELEK (1) | 1:25 | nst. 600×841 |  |
-| PT-BO-21 | ZBROJENIE BELEK (2) | 1:25 | nst. 500×841 |  |
+| PT-BO-20 | ZBROJENIE BELEK (1) | 1:25 | nst. 610×800 |  |
+| PT-BO-21 | ZBROJENIE BELEK (2) | 1:25 | nst. 594×700 |  |
 | PT-BO-22 | ZBROJENIE BELEK (3) | 1:25 | nst. 470×594 |  |
 | PT-BO-23 | ZBROJENIE NADPROŻY (1) | 1:25 | nst. 410×420 |  |
-| PT-BO-24 | ZBROJENIE NADPROŻY (2) | 1:25 | nst. 350×594 |  |
-| PT-BO-25 | ZBROJENIE NADPROŻY (3) | 1:25 | nst. 400×594 |  |
+| PT-BO-24 | ZBROJENIE NADPROŻY (2) | 1:25 | nst. 330×594 |  |
+| PT-BO-25 | ZBROJENIE NADPROŻY (3) | 1:25 | nst. 420×530 |  |
 | PT-BO-26 | ZBROJENIE SCHODÓW | 1:25 | nst. 400×297 |  |
+| PT-BO-27 | ZBROJENIE SŁUPÓW ŻELBETOWYCH W MURZE | 1:25 | nst. 870×297 |  |

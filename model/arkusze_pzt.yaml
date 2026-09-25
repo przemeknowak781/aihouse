@@ -19,6 +19,7 @@ wspolne:
   skala: 500
   format: auto                 # auto = ekonomiczny (lamela.views.uklad): najmniejszy koszt papieru — ISO 216, wydłużone lub H×L „na miarę”
                                # (H: 297/420/594/841/891; składanie do A4 w ocenie); klasyczny | A2 | [H, L] — patrz uklad.py
+  pismo_min: 2.5              # pismo uwag i podziałki w kolumnie opisowej ≥ 2,5 mm (W-312: PZT ≥ 2,5 mm; lamela.views.uklad)
   plik_tomu: "tom_PZT.pdf"
   tytul_tomu: "Projekt zagospodarowania działki — część rysunkowa"
   uwagi: []
@@ -54,15 +55,12 @@ arkusze:
     typ: pzt_uzbrojenie
     skala: 200
     # Ekonomia arkusza (docs/30_arkusze/zastosowanie_PZT.md): tabele jako bloki kolumny opisowej — silnik ustawia je
-    # obok mapy (w rzutni tabele 408 mm > mapa 330 mm → arkusz 580×594, 0,34 m², wypełnienie 63 %). Format JAWNY:
-    # auto daje 610×420, ale uwagi dzielą się tam na 3 części w odwróconej kolejności („cd.” nad mapą); 620×420
-    # (+10 mm, +1,6 % papieru, pasy 210+205+205) — jeden blok uwag. Przy zmianie treści sprawdzić: gdy się nie
-    # zmieści, generator przechodzi na układ klasyczny z uwagą w logu — wtedy wrócić do „auto”.
-    format: "620x420"
+    # obok mapy (w rzutni tabele 408 mm > mapa 330 mm → arkusz 580×594, 0,34 m², wypełnienie 63 %). Format: auto
+    # (weryfikacja_M.md § 6 — dawny format jawny 620×420 był obejściem sprzed poprawek silnika: kolejność czytania
+    # uwag, rezerwacja stref znaków centrujących).
     opcje:
       tabele: kolumna          # rzutnia (domyślnie) | kolumna — lamela.views.site._tabele
-      # wąskie tabele najpierw w środkowej kolumnie: przy kolejności domyślnej znak centrujący (oś arkusza, 10 mm
-      # w głąb ramki) przecina tytuł tabeli „OBIEKTY UZBROJENIA…” — silnik nie rezerwuje stref znaków centrujących
+      # kolejność tabel = kolejność czytania bloków (silnik układa je kolumnami od lewej, w kolumnie od góry)
       kolejnosc_tabel: [tab_przylacza, tab_skrzyzowania, tab_kolizje, tab_obiekty, tab_koordynacja]
       # minimalne odległości poziome między sieciami [m] — zasady wiedzy technicznej, NIE przepis (WT § 26–28 ich nie
       # określają); do potwierdzenia w warunkach przyłączenia gestorów sieci

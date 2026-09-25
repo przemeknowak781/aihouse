@@ -1380,8 +1380,9 @@ def legend_items():
     return it
 
 
-def legend_block(used: set, title="LEGENDA", cols=2, order=None, extra=()):
-    """Blok kolumny opisowej: legenda znaków użytych na rysunku (tylko obecne)."""
+def legend_block(used: set, title="LEGENDA", cols=2, order=None, extra=(), h=H):
+    """Blok kolumny opisowej: legenda znaków użytych na rysunku (tylko obecne); objaśnienia pismem ``h``
+    (PZT ≥ 2,5 mm — W-312)."""
     from ..draft.sheet import wrap
 
     def fn(sh, x, y, w):
@@ -1398,13 +1399,15 @@ def legend_block(used: set, title="LEGENDA", cols=2, order=None, extra=()):
         bottoms = []
         for ci in range(cols):
             yy = y0
+            lh = h * 1.45
             for draw, txt in ents[ci * per:(ci + 1) * per]:
-                ls = wrap(txt, cw - 19.0, 1.8)
-                hh = max(4.6, 2.6 * len(ls) + 1.4)
+                ls = wrap(txt, cw - 19.0, h)
+                hh = max(4.6, lh * len(ls) + 1.4)
                 cy = yy - hh / 2.0
                 draw(sh, x + ci * cw, cy)
                 for j, s_ in enumerate(ls):
-                    sh.text((x + ci * cw + 18.0, cy + (len(ls) - 1) * 1.3 - 0.9 - j * 2.6), s_, 1.8, layer="R-LEGENDA")
+                    sh.text((x + ci * cw + 18.0, cy + (len(ls) - 1) * lh / 2.0 - h / 2.0 - j * lh), s_, h,
+                            layer="R-LEGENDA")
                 yy -= hh
             bottoms.append(yy)
         return min(bottoms) if bottoms else y0
@@ -1420,17 +1423,19 @@ def table_block(title, cols, rows, align=None, h=2.5, row_h=4.6, notes=(), title
         cs = [(n_, w_ * w / tot) for n_, w_ in cols]
         with sh.on("R-OPISY"):
             sh.text((x, y - title_h), title, title_h, style="bold")
-        r = table(sh, x, y - title_h - 2.5, cs, rows, h=h, row_h=row_h, align=align, header_h=5.4)
+        # pismo komórek i nagłówków ≥ h (PZT 2,5 mm — W-312): teksty dłuższe niż kolumna łamane, nie zmniejszane
+        r = table(sh, x, y - title_h - 2.5, cs, rows, h=h, row_h=row_h, align=align, header_h=max(5.4, h * 1.45 + 2.0),
+                  zawijaj="wiersze", h_naglowka=min(h, 2.5))
         yy = r[1] - 1.0
         for nt in notes:
-            for s_ in wrap(nt, w, 1.8):
-                yy -= 2.6
-                sh.text((x, yy), s_, 1.8, layer="R-OPISY")
+            for s_ in wrap(nt, w, h):
+                yy -= h * 1.45
+                sh.text((x, yy), s_, h, layer="R-OPISY")
         return yy - 0.5
     return fn
 
 
-def text_block_col(title, lines, h=1.8):
+def text_block_col(title, lines, h=H):
     """Blok tekstu (akapity) w kolumnie opisowej."""
     from ..draft.sheet import wrap
 
