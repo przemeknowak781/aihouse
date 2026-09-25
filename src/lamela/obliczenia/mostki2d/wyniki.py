@@ -227,7 +227,7 @@ def oblicz_wezel(wezel: Wezel, h_min: float | None = None, h_max: float | None =
         f["f_Rsi_okno"] = (float(tp[ko]) - te) / (ti - te)
     if len(th) > 2:
         jedn = mf.rozwiaz_jednostkowe(wezel.grupy())
-        f["g"] = {g: float(jedn[g].theta_pow[k]) for g in wezel.grupy()}
+        f["g"] = {g: jedn[g].theta_powierzchni(xm, ym, k) for g in wezel.grupy()}
     tk, tdp = theta_krytyczne(ti)
     f["theta_krytyczna_80"] = tk
     f["theta_rosy"] = tdp

@@ -374,11 +374,39 @@ class Rozwiazanie:
             m &= ~np.isin(b.rodzaj_mat, ["rama", "szyba"])
         return m
 
+    def wierzcholki_powierzchni(self, maska: np.ndarray) -> list[tuple[float, float]]:
+        """Charakterystyczne wierzchołki łamanej powierzchni (maska ścian brzegowych): naroża (styk ścian ⟂ x i ⟂ y)
+        i końce łańcuchów (np. styk tynku ościeża z ramą okna, płaszczyzna odcięcia)."""
+        b = self.model.b
+        idx = np.nonzero(maska)[0]
+        wez: dict[tuple[float, float], list[int]] = {}
+        for k in idx:
+            for p in ((b.x0[k], b.y0[k]), (b.x1[k], b.y1[k])):
+                wez.setdefault((round(float(p[0]), 10), round(float(p[1]), 10)), []).append(int(k))
+        out = []
+        for p, ks in wez.items():
+            if len(ks) == 1 or len(set(int(b.orient[k]) for k in ks)) > 1:
+                out.append(p)
+        return out
+
     def theta_si_min(self, rodzaj: str = "wewn", bez_okien: bool = True) -> tuple[float, float, float, int]:
+        """Minimalna temperatura powierzchni: min ze środków ścian brzegowych i z wierzchołków łamanej powierzchni
+        (naroża wewnętrzne, styk ościeża z ramą — tam leży rzeczywiste minimum; wartość w środku ściany komórki
+        zawyża θ_si,min o O(h_min) — weryfikacja niezależna, uwaga 3). Zwraca (θ, x, y, k); k — indeks ściany
+        brzegowej (≥ 0) albo −1, gdy minimum leży w wierzchołku (x, y)."""
         m = self.powierzchnie(rodzaj, bez_okien=bez_okien)
         if not m.any():
             m = self.powierzchnie(rodzaj, bez_okien=False)
         tp = np.where(m, self.theta_pow, np.inf)
         k = int(np.argmin(tp))
         b = self.model.b
-        return float(tp[k]), float(b.xm[k]), float(b.ym[k]), k
+        best = (float(tp[k]), float(b.xm[k]), float(b.ym[k]), k)
+        for (x, y) in self.wierzcholki_powierzchni(m):
+            t = self.temperatura(x, y)
+            if np.isfinite(t) and t < best[0]:
+                best = (float(t), float(x), float(y), -1)
+        return best
+
+    def theta_powierzchni(self, x: float, y: float, k: int) -> float:
+        """Temperatura powierzchni w miejscu zwróconym przez `theta_si_min` (ściana k albo wierzchołek)."""
+        return float(self.theta_pow[k]) if k >= 0 else self.temperatura(x, y)
