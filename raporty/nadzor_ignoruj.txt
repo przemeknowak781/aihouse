@@ -1,0 +1,8 @@
+# agenci i przepływy zatrzymane celowo przez orkiestratora (nie są zastojem)
+wf_725a3592-fa1        # pierwszy panel koncepcji (interpretacja v1) — zatrzymany po korekcie Inwestora
+ac1298b42425dadc5      # stary agent W3 — zawieszony (3× limit długości), zastąpiony nowym
+# agenci zakończeni (potwierdzone powiadomieniem o zakończeniu)
+a70b2709f5f62a5a2      # silnik rysunkowy — zakończony
+affb914430bd01f17      # rdzeń modelu i pipeline 3D — zakończony
+a15e57952f52b96b8      # generatory widoków — zakończony
+af72e8de1f1d66b66      # rejestr wymagań — zakończony

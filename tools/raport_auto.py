@@ -54,8 +54,21 @@ def main():
     else:
         imgs = latest_images()
         caps = [str(p.relative_to(ROOT)) for p in imgs]
+    notes = list(stan.get("notes", []))
+    nz = ROOT / "raporty" / "nadzor.json"
+    if nz.exists():
+        try:
+            n = json.loads(nz.read_text(encoding="utf-8"))
+            akt = n.get("aktywni", [])
+            maxidle = max([x.get("idle_min") or 0 for x in akt] + [0])
+            if n.get("zastoje"):
+                notes.insert(0, "NADZÓR: ZASTÓJ — " + "; ".join(f"{z['opis']}: {', '.join(z['powody'])}" for z in n["zastoje"]))
+            else:
+                notes.insert(0, f"NADZÓR ({n.get('czas','')[-5:]}): {len(akt)} agentów aktywnych, bez zastojów; najdłuższa bezczynność {maxidle:.0f} min; zmiany w repo {n.get('repo_bez_zmian_min',0):.0f} min temu.")
+        except Exception:
+            pass
     spec = {"nr": nr, "title": a.title or stan.get("title", "Postęp prac"), "stages": stan["stages"],
-            "notes": stan.get("notes", []),
+            "notes": notes,
             "images": [{"path": str(p), "caption": c} for p, c in zip(imgs, caps)]}
     sp = ROOT / "raporty" / f"spec_{nr:02d}.json"
     sp.write_text(json.dumps(spec, ensure_ascii=False, indent=1), encoding="utf-8")
