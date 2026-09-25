@@ -436,7 +436,7 @@ Podpory: S2-01 (ściana), S2-02 (ściana), S2-03 (ściana), S2-04 (ściana), S2-
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·190 = **171** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 1000·171·0,540·17,86/(2,00 + 0,500)·10⁻³ = **659,57** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 251,3·171·434,8·2,00/(162,47·10³) = **230** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 251,3·171·434,8·2,00/(114,41·10³) = **327** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·190 = **142** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 251,3/(0,00080·1000) = **314** mm *((9.5N))*
 - Przyjęto strzemiona: φ8 5-cięte co s = **140** mm
@@ -444,8 +444,8 @@ Podpory: S2-01 (ściana), S2-02 (ściana), S2-03 (ściana), S2-04 (ściana), S2-
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Nośność krzyżulców betonowych | V_Ed = 162,47 kN | V_Rd,max = 659,57 kN | 25% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 162,47 kN | V_Rd,s = 266,94 kN | 61% | spełniony | (6.8) |
+| Nośność krzyżulców betonowych | V_Ed = 114,41 kN | V_Rd,max = 659,57 kN | 17% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 114,41 kN | V_Rd,s = 266,94 kN | 43% | spełniony | (6.8) |
 
 ##### Pole P2 — ugięcie (l = 5,12 m, K = 1,5)
 
@@ -1203,7 +1203,7 @@ Podpory: S0-02 (ściana), S0-03 (ściana), S0-04 (ściana), S0-05 (ściana), S0-
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·210 = **189** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 1000·189·0,540·17,86/(2,00 + 0,500)·10⁻³ = **729,00** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 251,3·189·434,8·2,00/(119,99·10³) = **344** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 251,3·189·434,8·2,00/(109,46·10³) = **377** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·210 = **158** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 251,3/(0,00080·1000) = **314** mm *((9.5N))*
 - Przyjęto strzemiona: φ8 5-cięte co s = **150** mm
@@ -1211,8 +1211,8 @@ Podpory: S0-02 (ściana), S0-03 (ściana), S0-04 (ściana), S0-05 (ściana), S0-
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Nośność krzyżulców betonowych | V_Ed = 119,99 kN | V_Rd,max = 729,00 kN | 16% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 119,99 kN | V_Rd,s = 275,37 kN | 44% | spełniony | (6.8) |
+| Nośność krzyżulców betonowych | V_Ed = 109,46 kN | V_Rd,max = 729,00 kN | 15% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 109,46 kN | V_Rd,s = 275,37 kN | 40% | spełniony | (6.8) |
 
 ##### Pole P4 — ugięcie (l = 6,38 m, K = 1,3)
 
@@ -1419,16 +1419,16 @@ Podpory: S1-01 (ściana), S1-02 (ściana), S1-03 (ściana), S1-04 (ściana), S1-
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·190 = **171** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 1000·171·0,540·17,86/(2,00 + 0,500)·10⁻³ = **659,57** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 251,3·171·434,8·2,00/(276,01·10³) = **135** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 251,3·171·434,8·2,00/(180,05·10³) = **208** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·190 = **142** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 251,3/(0,00080·1000) = **314** mm *((9.5N))*
-- Przyjęto strzemiona: φ8 5-cięte co s = **130** mm
-- Nośność zbrojenia na ścinanie: V_Rd,s = A_sw/s·z·f_ywd·cot θ = 251,3/130·171·434,8·2,00·10⁻³ = **287,47** kN
+- Przyjęto strzemiona: φ8 5-cięte co s = **140** mm
+- Nośność zbrojenia na ścinanie: V_Rd,s = A_sw/s·z·f_ywd·cot θ = 251,3/140·171·434,8·2,00·10⁻³ = **266,94** kN
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Nośność krzyżulców betonowych | V_Ed = 276,01 kN | V_Rd,max = 659,57 kN | 42% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 276,01 kN | V_Rd,s = 287,47 kN | 96% | spełniony | (6.8) |
+| Nośność krzyżulców betonowych | V_Ed = 180,05 kN | V_Rd,max = 659,57 kN | 27% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 180,05 kN | V_Rd,s = 266,94 kN | 67% | spełniony | (6.8) |
 
 ##### Pole P3 — ugięcie (l = 5,12 m, K = 1,5)
 
@@ -1835,7 +1835,7 @@ Podpory: S0-02 (ściana), S0-06 (ściana), S0-07 (ściana), S0-08 (ściana), S0-
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·190 = **171** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 1000·171·0,540·17,86/(2,00 + 0,500)·10⁻³ = **659,57** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 251,3·171·434,8·2,00/(210,35·10³) = **178** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 251,3·171·434,8·2,00/(173,84·10³) = **215** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·190 = **142** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 251,3/(0,00080·1000) = **314** mm *((9.5N))*
 - Przyjęto strzemiona: φ8 5-cięte co s = **140** mm
@@ -1843,8 +1843,8 @@ Podpory: S0-02 (ściana), S0-06 (ściana), S0-07 (ściana), S0-08 (ściana), S0-
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Nośność krzyżulców betonowych | V_Ed = 210,35 kN | V_Rd,max = 659,57 kN | 32% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 210,35 kN | V_Rd,s = 266,94 kN | 79% | spełniony | (6.8) |
+| Nośność krzyżulców betonowych | V_Ed = 173,84 kN | V_Rd,max = 659,57 kN | 26% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 173,84 kN | V_Rd,s = 266,94 kN | 65% | spełniony | (6.8) |
 
 ##### Pole P2 — ugięcie (l = 5,12 m, K = 1,5)
 
@@ -2025,7 +2025,7 @@ Podpory:
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Ścinanie bez zbrojenia poprzecznego (6.2.2) | V_Ed = 67,29 kN | V_Rd,c = 132,96 kN | 51% | spełniony | PN-EN 1992-1-1 6.2.2 |
+| Ścinanie bez zbrojenia poprzecznego (6.2.2) | V_Ed = 42,61 kN | V_Rd,c = 132,96 kN | 32% | spełniony | PN-EN 1992-1-1 6.2.2 |
 
 ##### Pole P1 — ugięcie (l = 14,40 m, K = 0,4)
 
@@ -2189,7 +2189,7 @@ Podpory:
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Ścinanie bez zbrojenia poprzecznego (6.2.2) | V_Ed = 73,87 kN | V_Rd,c = 128,18 kN | 58% | spełniony | PN-EN 1992-1-1 6.2.2 |
+| Ścinanie bez zbrojenia poprzecznego (6.2.2) | V_Ed = 50,42 kN | V_Rd,c = 128,18 kN | 39% | spełniony | PN-EN 1992-1-1 6.2.2 |
 
 ##### Pole P1 — ugięcie (l = 14,40 m, K = 0,4)
 
@@ -2344,25 +2344,16 @@ Podpory: , słupy:
 | Zbrojenie na zginanie | A_s,req = 377 mm²/m | A_s,prov = 387 mm²/m | 98% | spełniony | 6.1, (9.1N) |
 | Rysy: średnica prętów (tabl. 7.2N) | φ = 8 mm | φ_s,max = 19 mm | 42% | spełniony | 7.3.3(2) |
 
-##### Pole P1 — ścinanie: V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (9.3.2), strzemiona φ8, 4 ramion/m
+##### Pole P1 — ścinanie (maks. reakcja podpory, [UPR] 0,6·r przy podporze pośredniej)
 
 - Współczynnik skali: k = 1 + √(200/d) ≤ 2,0 = 1 + √(200/260) = **1,877**
 - Stopień zbrojenia podłużnego: ρ_l = A_sl/(b_w·d) ≤ 0,02 = 393/(1000·260) = **0,00151**
 - Nośność na ścinanie: V_Rd,c = C_Rd,c·k·(100·ρ_l·f_ck)^(1/3)·b_w·d = 0,1286·1,877·(100·0,00151·30)^(1/3)·1000·260·10⁻³ = **103,83** kN *((6.2.a); C_Rd,c = 0,18/γ_c)*
 - Wartość minimalna: V_Rd,c,min = v_min·b_w·d, v_min = 0,035·k^(3/2)·f_ck^(1/2) = 0,4930·1000·260·10⁻³ = **128,18** kN *((6.2.b), (6.3N))*
-- Ramię sił wewnętrznych: z = 0,9·d = 0,9·260 = **234** mm
-- Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
-- Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 1000·234·0,528·21,43/(2,00 + 0,500)·10⁻³ = **1059,02** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 201,1·234·434,8·2,00/(173,84·10³) = **235** mm *((6.8))*
-- Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·260 = **195** mm *((9.6N))*
-- Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 201,1/(0,00088·1000) = **229** mm *((9.5N))*
-- Przyjęto strzemiona: φ8 4-cięte co s = **190** mm
-- Nośność zbrojenia na ścinanie: V_Rd,s = A_sw/s·z·f_ywd·cot θ = 201,1/190·234·434,8·2,00·10⁻³ = **215,32** kN
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Nośność krzyżulców betonowych | V_Ed = 173,84 kN | V_Rd,max = 1059,02 kN | 16% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 173,84 kN | V_Rd,s = 215,32 kN | 81% | spełniony | (6.8) |
+| Ścinanie bez zbrojenia poprzecznego (6.2.2) | V_Ed = 70,31 kN | V_Rd,c = 128,18 kN | 55% | spełniony | PN-EN 1992-1-1 6.2.2 |
 
 ##### Pole P1 — ugięcie (l = 20,18 m, K = 0,4)
 
@@ -2518,25 +2509,16 @@ Podpory: , słupy:
 | Zbrojenie na zginanie | A_s,req = 294 mm²/m | A_s,prov = 296 mm²/m | 99% | spełniony | 6.1, (9.1N) |
 | Rysy: średnica prętów (tabl. 7.2N) | φ = 8 mm | φ_s,max = 15 mm | 55% | spełniony | 7.3.3(2) |
 
-##### Pole P9 — ścinanie: V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (9.3.2), strzemiona φ8, 5 ramion/m
+##### Pole P9 — ścinanie (maks. reakcja podpory, [UPR] 0,6·r przy podporze pośredniej)
 
 - Współczynnik skali: k = 1 + √(200/d) ≤ 2,0 = 1 + √(200/205) = **1,988**
 - Stopień zbrojenia podłużnego: ρ_l = A_sl/(b_w·d) ≤ 0,02 = 314/(1000·205) = **0,00153**
 - Nośność na ścinanie: V_Rd,c = C_Rd,c·k·(100·ρ_l·f_ck)^(1/3)·b_w·d = 0,1286·1,988·(100·0,00153·30)^(1/3)·1000·205·10⁻³ = **87,12** kN *((6.2.a); C_Rd,c = 0,18/γ_c)*
 - Wartość minimalna: V_Rd,c,min = v_min·b_w·d, v_min = 0,035·k^(3/2)·f_ck^(1/2) = 0,5372·1000·205·10⁻³ = **110,13** kN *((6.2.b), (6.3N))*
-- Ramię sił wewnętrznych: z = 0,9·d = 0,9·205 = **184** mm
-- Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
-- Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 1000·184·0,528·21,43/(2,00 + 0,500)·10⁻³ = **834,99** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 251,3·184·434,8·2,00/(198,68·10³) = **203** mm *((6.8))*
-- Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·205 = **154** mm *((9.6N))*
-- Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 251,3/(0,00088·1000) = **287** mm *((9.5N))*
-- Przyjęto strzemiona: φ8 5-cięte co s = **150** mm
-- Nośność zbrojenia na ścinanie: V_Rd,s = A_sw/s·z·f_ywd·cot θ = 251,3/150·184·434,8·2,00·10⁻³ = **268,81** kN
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Nośność krzyżulców betonowych | V_Ed = 198,68 kN | V_Rd,max = 834,99 kN | 24% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 198,68 kN | V_Rd,s = 268,81 kN | 74% | spełniony | (6.8) |
+| Ścinanie bez zbrojenia poprzecznego (6.2.2) | V_Ed = 82,75 kN | V_Rd,c = 110,13 kN | 75% | spełniony | PN-EN 1992-1-1 6.2.2 |
 
 ##### Pole P9 — ugięcie (l = 3,50 m, K = 0,4)
 

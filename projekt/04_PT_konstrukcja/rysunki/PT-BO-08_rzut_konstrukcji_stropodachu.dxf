@@ -493,7 +493,7 @@ $SKPOLY
   9
 $TDCREATE
  40
-2461309.4424074073
+2461309.4499537037
   9
 $TDUCREATE
  40
@@ -501,7 +501,7 @@ $TDUCREATE
   9
 $TDUPDATE
  40
-2461309.4424074073
+2461309.4499537037
   9
 $TDUUPDATE
  40
@@ -933,11 +933,11 @@ $PSTYLEMODE
   9
 $FINGERPRINTGUID
   2
-{6758CC0F-9F45-4313-8E0F-BAD820641C44}
+{760C452F-1E98-4F5C-BE5D-99973799FA5B}
   9
 $VERSIONGUID
   2
-{5025090F-A343-42D9-A6A2-DD05B710BE0A}
+{AB2FB010-FA18-4296-BA2E-E031F95F5689}
   9
 $EXTNAMES
 290
@@ -24003,7 +24003,7 @@ AcDbText
  40
 0.125
   1
-łącznik termoizol. (ETA), h = 32 cm: m_Ed = 21,1 kNm/m, v_Ed ≤ 67,3 kN/m (poz. 3.1)
+łącznik termoizol. (ETA), h = 32 cm: m_Ed = 21,1 kNm/m, v_Ed ≤ 42,6 kN/m (poz. 3.1)
  50
 90.0
   7
@@ -24105,7 +24105,7 @@ AcDbText
  40
 0.125
   1
-łącznik termoizol. (ETA), h = 32 cm: m_Ed = 18,7 kNm/m, v_Ed ≤ 67,3 kN/m (poz. 3.1)
+łącznik termoizol. (ETA), h = 32 cm: m_Ed = 18,7 kNm/m, v_Ed ≤ 42,6 kN/m (poz. 3.1)
   7
 PL_ARIAL
  11
@@ -24205,7 +24205,7 @@ AcDbText
  40
 0.125
   1
-łącznik termoizol. (ETA), h = 32 cm: m_Ed = 21,1 kNm/m, v_Ed ≤ 67,3 kN/m (poz. 3.1)
+łącznik termoizol. (ETA), h = 32 cm: m_Ed = 21,1 kNm/m, v_Ed ≤ 42,6 kN/m (poz. 3.1)
  50
 90.0
   7
@@ -33397,7 +33397,7 @@ DictionaryVariables
 280
 0
   1
-1.4.4 @ 2026-09-25T10:37:04.613171+00:00
+1.4.4 @ 2026-09-25T10:47:56.054560+00:00
   0
 DICTIONARYVAR
   5
@@ -33409,7 +33409,7 @@ DictionaryVariables
 280
 0
   1
-1.4.4 @ 2026-09-25T10:37:04.667093+00:00
+1.4.4 @ 2026-09-25T10:47:56.105022+00:00
   0
 ENDSEC
   0
