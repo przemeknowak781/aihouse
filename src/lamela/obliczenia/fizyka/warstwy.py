@@ -41,6 +41,7 @@ KRESK_FUNKCJA = {
 # słowa kluczowe nazwy materiału (małe litery, bez polskich znaków diakrytycznych porównywane obie formy)
 SLOWA = [
     (r"pustk|szczelin|powietrz|\bair\b|legar", "pustka"),
+    (r"jastrych|wylewk|posadzk|p[lł]ytk|gres|terakot|parkiet|deska pod|panel pod|wyk[lł]adzin", "wykonczenie"),
     (r"przeciwkorzen", "bariera_korzenna"),
     (r"geow[lł]*[oó]kn|w[lł]*[oó]knin|filtrac", "geowloknina"),
     (r"drena[zż]|kube[lł]k|mata drena", "drenaz"),

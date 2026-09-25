@@ -100,10 +100,15 @@ def oblicz_obudowe(m, *, wyniki_symulacji: dict | None = None, wariant_psi: str 
                            lam=gcfg.get("lambda"), izolacja=izol if og else None,
                            psi_wf=float(gcfg.get("psi_wf") or 0.0), theta_int=th, G_w=float(gcfg.get("G_w", 1.0)),
                            klimat_mies=list(k.theta_e), zal=zal if og else None)
+        wu.U = r.U
+        wu.U_c = r.U
+        wu.uwagi.append(f"U_equiv wg PN-EN ISO 13370: A = {r.A:.2f} m², P = {r.P:.2f} m, B' = {r.B:.2f} m, "
+                        f"d_t = {r.d_t:.2f} m".replace(".", ","))
         if og:
             wg = r
         else:
             wn = r
+            wu.U_max = wu.U_cel = None
     # --- stolarka ---
     stol = (getattr(m, "raw", {}) or {}).get("stolarka") or {}
     okna = {}
@@ -123,6 +128,14 @@ def oblicz_obudowe(m, *, wyniki_symulacji: dict | None = None, wariant_psi: str 
                 wo.U_cel = None
             okna[e.id] = wo
             U_elem[e.id] = wo.U_w
+    rozm: dict = {}
+    for e in br.elementy:
+        if e.id in okna:
+            rozm.setdefault(okna[e.id].symbol, set()).add((round(e.otwor.szer, 3), round(e.otwor.wys, 3)))
+    for sy, r_ in rozm.items():
+        if len(r_) > 1:
+            br.ostrzezenia.append(f"stolarka: symbol {sy} występuje w różnych wymiarach "
+                                  f"({', '.join(f'{a:.2f}×{b:.2f}' for a, b in sorted(r_))}) — ujednolicić zestawienie stolarki")
     if any(d.dane.status and "PRZYK" in d.dane.status for d in okna.values()):
         zal.dodaj("Stolarka: U_g, U_f, Ψ_g, szerokości ram, g_n — dane przykładowe typowych wyrobów "
                   "(dane/wyroby_przykladowe.yaml); do zastąpienia deklaracjami wybranego producenta", "[DANE PRZYKŁADOWE – FIKCYJNE]")

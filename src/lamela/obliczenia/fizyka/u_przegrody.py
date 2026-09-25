@@ -382,7 +382,7 @@ def u_klin_wielobok(wielobok, R0: float, lam_klin: float, *, d_add_fn=None, wpus
     U = 1.0 / (R0 + d_add / lam_klin)
     return {"U_sr": float(U.mean()), "d_add_sr": float(d_add.mean()), "d_add_max": float(d_add.max()),
             "n_pkt": int(len(pts)), "metoda": "całkowanie numeryczne (zał. C, p. C.1), siatka "
-            f"{krok:.2f} m, grubość rosnąca {spadek * 100:.1f} % od wpustów"}
+            f"{fmt(krok, 2)} m, grubość rosnąca {fmt(spadek * 100, 1)} % od wpustów"}
 
 
 # --------------------------------------------------------------------------------------------------
@@ -520,7 +520,8 @@ def raport_u(wyniki: Sequence[WynikU], zal: Zalozenia | None = None, tytul: str 
                               "Wynik U podano z dokładnością do 2 cyfr znaczących; opory — do 0,01 m²·K/W."])]
     wiersze = []
     for w in wyniki:
-        wiersze.append([w.kod, w.nazwa, ROLA_OPIS.get(w.rola, w.rola), fmt_r(w.R_T), fmt(w.dU, 3), fmt_u(w.U),
+        wiersze.append([w.kod, w.nazwa, ROLA_OPIS.get(w.rola, w.rola),
+                        (f"R_f = {fmt_r(w.R_f)}" if w.rola == "podloga_grunt" else fmt_r(w.R_T)), fmt(w.dU, 3), fmt_u(w.U),
                         fmt(w.U_max, 2) if w.U_max else "—", ok(w.spelnia_WT),
                         fmt(w.U_cel, 2) if w.U_cel else "—", ok(w.spelnia_cel)])
     s.append(tabela_md(["Kod", "Przegroda", "Rola", "R_T [m²K/W]", "ΣΔU", "U_c [W/(m²K)]", "U_C(max) WT",
@@ -543,6 +544,16 @@ def raport_u(wyniki: Sequence[WynikU], zal: Zalozenia | None = None, tytul: str 
             s.append(tabela_md(["Lp.", "Warstwa (od ciepłej strony)", "Funkcja", "d [cm]", "λ [W/(m·K)]", "R [m²K/W]",
                                 "Uwagi"], rows, "rlllrrl"))
             s.append("")
+            if w.rola == "podloga_grunt":
+                s.append(f"Opór warstw podłogi R_f = Σ R_j = {fmt(w.R_f, 3)} m²K/W (bez R_si, R_se i gruntu) — U podłogi "
+                         "na gruncie (U_equiv) wg PN-EN ISO 13370 — patrz 02_grunt.md.")
+                s.append("")
+                s.append(f"**U_equiv = {fmt_u(w.U)} W/(m²K)**; wymaganie WT: U ≤ {fmt(w.U_max) if w.U_max else '—'} "
+                         f"({ok(w.spelnia_WT)}); cel: {fmt(w.U_cel) if w.U_cel else '—'} ({ok(w.spelnia_cel)}).")
+                for u in w.uwagi:
+                    s.append(f"* {u}")
+                s.append("")
+                continue
             if w.R_gorny is not None:
                 s.append(f"Metoda kresów (p. 6.7.2): R'_T = {fmt(w.R_gorny, 3)}, R''_T = {fmt(w.R_dolny, 3)}, "
                          f"R_T = (R'_T + R''_T)/2 = {fmt(w.R_T, 3)} m²K/W, e = {fmt(w.blad_wzgl * 100, 1)} %.")

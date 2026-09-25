@@ -222,7 +222,10 @@ def dobor_pc(r: WynikObc, cfg: dict) -> dict:
 
     tt = np.linspace(te, t_gr, 400)
     diff = P_pc(tt) - Q_bud(tt)
-    biw = float(tt[np.argmax(diff >= 0)]) if np.any(diff >= 0) else None
+    if diff[0] >= 0:
+        biw = None                      # PC pokrywa obciążenie przy θ_e — praca monowalentna
+    else:
+        biw = float(tt[np.argmax(diff >= 0)]) if np.any(diff >= 0) else float(t_gr)
     k = klimat_godzinowy()
     T = k.DBT
     grz = T < t_gr
@@ -268,7 +271,8 @@ def raport_obciazenie(r: WynikObc, zal: Zalozenia | None = None, szczegoly: bool
             ["Wyrób (dane przykładowe)", f"{pc.get('opis', '')} — {pc.get('zrodlo', '')}"],
             ["Moc PC przy A−7/W35 (deklaracja)", f"{fmt(d['P_PC_Am7_kW'], 1)} kW"],
             [f"Moc PC przy θ_e = {fmt(r.theta_e, 0)} °C (ekstrapolacja)", f"{fmt(d['P_PC_te_kW'], 2)} kW"],
-            ["Punkt biwalentny (P_PC = Φ(θ))", f"{fmt(d['biwalentny_C'], 1)} °C" if d['biwalentny_C'] is not None else "—"],
+            ["Punkt biwalentny (P_PC = Φ(θ))", f"{fmt(d['biwalentny_C'], 1)} °C" if d['biwalentny_C'] is not None
+             else f"brak — P_PC(θ_e) ≥ Φ_HL (praca monowalentna)"],
             ["Udział grzałki w cieple sezonowym (TMY Poznań, θ < 15 °C)", f"{fmt(d['udzial_grzalki'] * 100, 2)} %"],
             ["Wymagana moc grzałki przy θ_e", f"{fmt(d['moc_grzalki_wym_kW'], 2)} kW (zainstalowana {fmt(d['moc_grzalki_kW'], 1)} kW)"],
         ], "ll"))
