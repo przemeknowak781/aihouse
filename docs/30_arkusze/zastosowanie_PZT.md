@@ -5,6 +5,9 @@ Wynik: `projekt/02_PZT/rysunki` (PDF, PNG, DXF, `tom_PZT.pdf`, `raport_widokow.j
 (format `auto` = ekonomiczny), składanie: `lamela.draft.skladanie`. Pomiar: `tools/metryki_arkuszy.py` (ta sama metoda
 co w `metryki_stan_wyjsciowy.md`).
 
+> **Aktualizacja (runda poprawek po weryfikacji, 2026-09-25):** tabele i formaty poniżej opisują stan po pierwszym wdrożeniu silnika (stan zweryfikowany w `weryfikacja_M.md` / `weryfikacja_C.md`). Stan bieżący (kandydaci „szerokość = rolka”, pismo PZT ≥ 2,5 mm, poprawki czytelności) — `docs/30_arkusze/podsumowanie.md`.
+
+
 Wymaganie Inwestora: „Pamiętaj o ekonomicznym ustawieniu na arkuszach, nie musimy sztywno trzymać się geometrii
 wielokrotności A3, chociaż fajnie jak się ładnie będzie składało.”
 
@@ -21,7 +24,7 @@ PYTHONPATH=src python3 tools/metryki_arkuszy.py PZT=projekt/02_PZT/rysunki --md 
 |---|---|---|---|---|---|---|---|---|---|---|
 | **Przed** — stan wyjściowy (dawny algorytm, pliki z repozytorium) | 3 | 3× A2 (594×420) | 0,75 | 12 | 78 % | 78 % | 77 % (PZT-02) | 0,15 | 18 | 0/3/0 |
 | Silnik `auto` bez zmian konfiguracji (model po bieżącej rundzie) | 3 | A2 pion., 400×594, 580×594 | 0,83 | 13,3 | 73 % | 75 % | 64 % (PZT-03) | — | 18 | 3/0/0 |
-| **Po** — silnik + poprawki konfiguracji | 3 | A2 pion. (420×594), 400×594, 620×420 | **0,75** | **12,0** | **82 %** | **82 %** | **77 % (PZT-01)** | **0,12** | 18 | **2/1/0** |
+| **Po** — silnik + poprawki konfiguracji | 3 | A2 pion. (420×594), 400×594, 620×420 | **0,75** | **12,0** | **82 %** | **82 %** | **81 % (PZT-01; pomiar weryfikacji M — raport sprzed poprawek silnika podawał 77 %)** | **0,12** | 18 | **2/1/0** |
 
 | Nr | Skala | Przed | Po | Pole przed → po [m²] | W obw. przed → po | Pasy / rzędy po [mm] | Składanie po |
 |---|---|---|---|---|---|---|---|

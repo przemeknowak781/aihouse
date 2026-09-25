@@ -9,13 +9,13 @@
 ## Stan opracowania i analiz konstrukcji — § 23 pkt 1 RPB; W-274
 
 Zestawienie generowane automatycznie przy każdym złożeniu tomu z wyników obliczeń konstrukcji (model budynku
-z 2026-09-25 10:06). Pozycja niezamknięta to analiza nie domknięta: warunek stanu granicznego niespełniony,
+z 2026-09-25 10:33). Pozycja niezamknięta to analiza nie domknięta: warunek stanu granicznego niespełniony,
 zbrojenie wymagane obliczeniowo nieujęte w kontroli rysunków, obciążenie lub parametr niezgodny z modelem,
 uwaga programu obliczeń wymagająca analizy, wynik starszy niż model albo arkusz rysunkowy z błędem. Pozycja
 **ZASTĄPIONE** — wynik modelu uproszczonego zastąpiony analizą dokładniejszą (wskazaną w opisie). Po domknięciu
 analiz i ponownym złożeniu tomu wiersze znikają z zestawienia.
 
-> **PROJEKT KONSTRUKCJI NIEZAMKNIĘTY — 17 pozycji NIEZAMKNIĘTE.** Tom jest wersją roboczą. Do czasu domknięcia wszystkich pozycji z tabeli poniżej — zmiany modelu wg zaleceń zespołu konstrukcji, ponowna analiza (obliczenia statyczne, MES płyty fundamentowej, kontrola zbrojenia rysunków) na zamrożonej wersji modelu i ponowne złożenie tomu — **nie podpisywać** oświadczenia projektanta PT (art. 41 ust. 4a pkt 2 PB) i nie przekazywać tomu do realizacji robót.
+> **PROJEKT KONSTRUKCJI NIEZAMKNIĘTY — 4 pozycje NIEZAMKNIĘTE.** Tom jest wersją roboczą. Do czasu domknięcia wszystkich pozycji z tabeli poniżej — zmiany modelu wg zaleceń zespołu konstrukcji, ponowna analiza (obliczenia statyczne, MES płyty fundamentowej, kontrola zbrojenia rysunków) na zamrożonej wersji modelu i ponowne złożenie tomu — **nie podpisywać** oświadczenia projektanta PT (art. 41 ust. 4a pkt 2 PB) i nie przekazywać tomu do realizacji robót.
 
 **Tabela 1. Stan analiz według obszarów**
 
@@ -23,7 +23,7 @@ analiz i ponownym złożeniu tomu wiersze znikają z zestawienia.
 |---|---|---|
 | Obliczenia statyczne | 148 z 148 | zamknięte |
 | MES płyty fundamentowej | 13 z 13 | zamknięte |
-| Kontrola zbrojenia rysunków | 300 z 300 | zamknięte |
+| Kontrola zbrojenia rysunków | 315 z 315 | zamknięte |
 | Część rysunkowa (arkusze i kontrola jakości arkuszy) | brak 4 | NIEZAMKNIĘTE |
 
 *Źródło: wyniki obliczeń statycznych, raport MES płyty fundamentowej (rozdz. 5), kontrola zbrojenia rysunków (rozdz. 6)*
@@ -32,19 +32,6 @@ analiz i ponownym złożeniu tomu wiersze znikają z zestawienia.
 
 | Obszar | Element | Wynik | Opis | Źródło |
 |---|---|---|---|---|
-| Ścinanie płyt | poz. 1.1 D1 | η_max = 72 % | V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P2; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia | wyniki obliczeń statycznych; obliczenia statyczne (rozdz. 4); kontrola zbrojenia rysunków (rozdz. 6) |
-| Ścinanie płyt | poz. 1.2 D2 | η_max = 77 % | V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P5; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia | wyniki obliczeń statycznych; obliczenia statyczne (rozdz. 4); kontrola zbrojenia rysunków (rozdz. 6) |
-| Ścinanie płyt | poz. 1.3 D3 | η_max = 100 % | V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P8; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia | wyniki obliczeń statycznych; obliczenia statyczne (rozdz. 4); kontrola zbrojenia rysunków (rozdz. 6) |
-| Ścinanie płyt | poz. 1.4 D4 | η_max = 44 % | V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P4; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia | wyniki obliczeń statycznych; obliczenia statyczne (rozdz. 4); kontrola zbrojenia rysunków (rozdz. 6) |
-| Ścinanie płyt | poz. 2.1 ST2 | η_max = 96 % | V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P3; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia | wyniki obliczeń statycznych; obliczenia statyczne (rozdz. 4); kontrola zbrojenia rysunków (rozdz. 6) |
-| Ścinanie płyt | poz. 2.3 ST1 | η_max = 79 % | V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P2; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia | wyniki obliczeń statycznych; obliczenia statyczne (rozdz. 4); kontrola zbrojenia rysunków (rozdz. 6) |
-| Ścinanie płyt | poz. 3.3 PL-E | η_max = 81 % | V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P1; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia | wyniki obliczeń statycznych; obliczenia statyczne (rozdz. 4); kontrola zbrojenia rysunków (rozdz. 6) |
-| Ścinanie płyt | poz. 3.4 PL-DA | η_max = 74 % | V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P9; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia | wyniki obliczeń statycznych; obliczenia statyczne (rozdz. 4); kontrola zbrojenia rysunków (rozdz. 6) |
-| Obliczenia statyczne | nadproża / wieńce (25) | — | q_d mniejsze niż 6.10b z wypisanych g_k i q_k — zestawienie niesprawdzalne: wypisywać q_k tylko z przypadków użytych w kombinacji, 6.10b uzupełnić o Σγ_Q·ψ₀·Q_k,i, nie łączyć kat. H ze śniegiem (PN-EN 1991-1-1 p. 3.3.2), przeliczyć — poz. 6.1 N-O0-06 (q_d = 19,82 < 29,79 kN/m); 6.2 N-O0-08 (q_d = 22,93 < 25,64 kN/m); 6.3 N-O0-09 (q_d = 36,60 < 49,43 kN/m); 6.4 N-O0-10 (q_d = 13,11 < 17,65 kN/m); 6.5 N-O0-11 (q_d = 97,59 < 123,39 kN/m); 6.6 N-O0-12 (q_d = 25,38 < 29,82 kN/m) (i 19 innych) | obliczenia statyczne |
-| Zestawienie obciążeń | poz. 1.1 D1 | 100 % | brak w obciążeniach stałych: ciężar pola PV (8 modułów, stelaże i balast wg PT-4 IE) — uzupełnić i przeliczyć | obliczenia statyczne; model (PV, warstwy dachu) |
-| Zestawienie obciążeń | poz. 1.4 D4 | 97 % | brak w obciążeniach stałych: ciężar pola PV (7 modułów, stelaże i balast wg PT-4 IE); woda retencyjna substratu i maty drenażowej (stan nasycony) — uzupełnić i przeliczyć | obliczenia statyczne; model (PV, warstwy dachu) |
-| MES płyty fundamentowej | strefa garażu | — | obciążenie użytkowe garażu przyjęte jak kat. A — przypisać kat. F: q_k = 2,50 kN/m², Q_k = 20 kN (PN-EN 1991-1-1 tabl. 6.8 + NA) i przeliczyć MES | raport MES płyty fundamentowej |
-| Projekt geotechniczny | M₀ [kPa] | model 80 000 | parametr niezgodny z modelem geotechnicznym: obliczenia statyczne 100 000 — ujednolicić (jedno źródło: model „geotechnika”) i przeliczyć | model; obliczenia statyczne; raport MES płyty fundamentowej |
 | Część rysunkowa | PT-BO-01 | — | kolizje napisów: 11 — usunąć przed wydaniem (kontrola jakości arkusza) | arkusze; raport kontroli arkuszy |
 | Część rysunkowa | Raport kontroli arkuszy | — | 19 uwag dotyczy numerów lub tytułów niezgodnych z wykazem rysunków (PT-BO-03, PT-BO-04, PT-BO-05, PT-BO-07, PT-BO-08, PT-BO-09, PT-BO-10, PT-BO-11) — raport nieaktualny; wygenerować ponownie arkusze konstrukcji wraz z raportem kontroli | arkusze; raport kontroli arkuszy |
 | Część rysunkowa | Formaty arkuszy | — | 25 arkuszy w formacie niestandardowym (PT-BO-01, PT-BO-02, PT-BO-05, PT-BO-06, PT-BO-07, PT-BO-08, PT-BO-09, PT-BO-10, PT-BO-11, PT-BO-12, PT-BO-13, PT-BO-14, PT-BO-15, PT-BO-16, PT-BO-17, PT-BO-18, PT-BO-19, PT-BO-20, PT-BO-21, PT-BO-22, PT-BO-23, PT-BO-24, PT-BO-25, PT-BO-26, PT-BO-27; wymiary — wykaz rysunków) — dobrać format z szeregu PN-EN ISO 5457 (A0–A4, formaty wydłużone; W-313) | arkusze; raport kontroli arkuszy |
@@ -106,10 +93,10 @@ deklaracji betonu (PN-EN 206-1:2026-09) potwierdzić z wytwórnią betonu.
 
 | Dane wejściowe | Źródło | Stan |
 |---|---|---|
-| model budynku | wersja 1.0 | 2026-09-25 10:06 |
-| obliczenia statyczne | zespół konstrukcji — rozdz. 4 | 2026-09-25 10:11 — aktualne względem modelu |
-| MES płyty fundamentowej | zespół konstrukcji — rozdz. 5 | 2026-09-25 10:19 — aktualne względem modelu |
-| kontrola zbrojenia | zespół konstrukcji — rozdz. 6 | 2026-09-25 10:19 — aktualne względem modelu |
+| model budynku | wersja 1.0 | 2026-09-25 10:33 |
+| obliczenia statyczne | zespół konstrukcji — rozdz. 4 | 2026-09-25 10:55 — aktualne względem modelu |
+| MES płyty fundamentowej | zespół konstrukcji — rozdz. 5 | 2026-09-25 10:56 — aktualne względem modelu |
+| kontrola zbrojenia | zespół konstrukcji — rozdz. 6 | 2026-09-25 10:56 — aktualne względem modelu |
 
 ## Rozwiązania konstrukcyjne obiektu — § 23 pkt 1 RPB
 
@@ -166,7 +153,7 @@ Zastosowane schematy statyczne (konstrukcyjne) i modele obliczeniowe programu ob
 | śnieg (PN-EN 1991-1-3 + NA) | strefa 2, s_k = 0,90 kN/m², zaspy przy uskokach (D4 przy P1, D2/D3 przy P2) + sytuacja wyjątkowa B2 (W-264) | s_k = 0,90 kN/m²; C_e = 1,00, C_t = 1,00; s (dach płaski) = 0,720 kN/m² |
 | wiatr (PN-EN 1991-1-4 + NA) | strefa 1, q_p(h ≤ 11 m) = 0,71 kN/m² (W-265) | v_b,0 = 22,0 m/s, teren kat. II; q_p = 0,699 kN/m² |
 | użytkowe (PN-EN 1991-1-1 + NA) | stropy kat. A 2,0 kN/m², schody 4,0 kN/m², dachy kat. H 0,4 kN/m² (W-263) | stropy q_k = 2,00 kN/m² (Q_k = 3,0 kN); schody 4,00; tarasy 4,00; dach H 0,40; garaż kat. F 2,50 kN/m² (Q_k = 20 kN) |
-| stałe (ciężar własny, warstwy) | dach zielony (model): substrat nasycony ≈ 1,4 kN/m² (stałe) | żelbet 25,0 kN/m³; warstwy przegród z modelu (materiały, grubości); dach zielony w obliczeniach (poz. 1.4 D4): substrat g_k = 1,12 kN/m² (8,0 cm × 14,00 kN/m³) — mniej niż założenie modelu (1,4 kN/m², stan nasycony): brak wody retencyjnej, pozycja NIEZAMKNIĘTE (rozdz. 1) |
+| stałe (ciężar własny, warstwy) | dach zielony (model): substrat — ciężar w stanie nasycenia wodą wg materiału SUBSTRAT (stałe) | żelbet 25,0 kN/m³; warstwy przegród z modelu (materiały, grubości); dach zielony w obliczeniach (poz. 1.4 D4): substrat g_k = 1,12 kN/m² (8,0 cm × 14,00 kN/m³) |
 | kombinacje (PN-EN 1990 + NA) | CC2/RC2, K_FI = 1,0 | STR/GEO 6.10a/6.10b: γ_G = 1,35, ξ = 0,85, γ_Q = 1,50; EQU: 1,10·G_dst + 1,50·Q_dst ≤ 0,90·G_stb |
 
 *Źródło: model budynku (obciążenia); parametry obliczeń z rejestru wymagań (W-261…W-265); obliczenia statyczne poz. 0.4*
@@ -215,12 +202,12 @@ Wyprowadzenie wartości śniegu (zaspy przy uskokach, sytuacja wyjątkowa B2) i 
 
 | Grupa | Pozycje | η_max | Element miarodajny | Niespełnione |
 |---|---|---|---|---|
-| 1. Dachy i stropodachy | 4 | 100 % | 1.1 D1 | — |
+| 1. Dachy i stropodachy | 4 | 100 % | 1.3 D3 | — |
 | 2. Stropy | 3 | 99 % | 2.3 ST1 | — |
 | 3. Płyty wspornikowe | 4 | 100 % | 3.2 PL-2 | — |
 | 4. Schody | 2 | 98 % | 4.1 SCH1 | — |
 | 5. Belki i podciągi | 17 | 100 % | 5.12 B9 | — |
-| 6. Nadproża | 30 | 99 % | 6.15 N-O1-02 | — |
+| 6. Nadproża | 30 | 100 % | 6.12 N-O0-21 | — |
 | 7. Wieńce | 3 | 31 % | 7.1 W-D1_PL-3 | — |
 | 8. Słupy | 21 | 99 % | 8.19 SL19 | — |
 | 9. Ściany murowe | 38 | 82 % | 9.4 S2-04 | — |
@@ -304,10 +291,10 @@ obliczeniowe równe charakterystycznym z tabeli poniżej (kolumna „Model”).
 | stopień zagęszczenia I_D | 0,60 | ≈ 0,6 (opis gruntu) | ≈ 0,6 (opis gruntu) |
 | kąt tarcia wewnętrznego φ'_k [°] | 33,0 | 33,0 | 33,0 |
 | ciężar objętościowy γ [kN/m³] | 18,5 | 18,5 | 18,5 |
-| moduł edometryczny M₀ [kPa] | 80 000 | 100 000 | 80 000 |
+| moduł edometryczny M₀ [kPa] | 80 000 | 80 000 | 80 000 |
 | ZWG [m p.p.t.] | 3,8 | 3,8 | γ' pod fundamentem |
 
-Źródłem parametrów projektu geotechnicznego jest model geotechniczny (kolumna „Model”). Rozbieżność w innej kolumnie oznacza obliczenia do powtórzenia na parametrach modelu — pozycja „Projekt geotechniczny” w rozdz. 1 (stan: NIEZAMKNIĘTE). W II kat. geotechnicznej korelacje PN-81/B-03020 niedopuszczalne (W-282).
+Źródłem parametrów projektu geotechnicznego jest model geotechniczny (kolumna „Model”). Rozbieżność w innej kolumnie oznacza obliczenia do powtórzenia na parametrach modelu — pozycja „Projekt geotechniczny” w rozdz. 1 (stan: brak rozbieżności). W II kat. geotechnicznej korelacje PN-81/B-03020 niedopuszczalne (W-282).
 
 *Źródło: model budynku (geotechnika); parametry obliczeń; raport MES płyty fundamentowej*
 
@@ -328,7 +315,7 @@ k_s = 5303 kN/m³, obwiednia wariantów k_s,min; k_s,max =
 
 | Warunek | Efekt | Nośność / limit | η | Stan |
 |---|---|---|---|---|
-| Nośność podłoża (GEO, DA2*) | V_d = 13975,6 kN | R_d = 224314,1 kN | 6% | spełniony |
+| Nośność podłoża (GEO, DA2*) | V_d = 13990,7 kN | R_d = 224314,1 kN | 6% | spełniony |
 | Docisk lokalny do podłoża (pasmo pod żebrem) | p_d,max = 272,8 kPa | q_Rd = 318,8 kPa | 86% | spełniony |
 | Osiadanie (PN-EN 1997-1 zał. H: s ≤ 50 mm dla fundamentów bezpośrednich) | w_k = 33,4 mm | s_dop = 50,0 mm | 67% | spełniony |
 
@@ -403,7 +390,7 @@ Wyroby wskazane z nazwy w dokumentacji zespołu BO należy traktować jako przyk
 | PT-BO-08 | RZUT KONSTRUKCJI STROPODACHU | 1:50 | nst. 420×460 |  |
 | PT-BO-09 | ZBROJENIE DOLNE STROPU NAD PARTEREM | 1:50 | nst. 594×440 |  |
 | PT-BO-10 | ZBROJENIE GÓRNE STROPU NAD PARTEREM | 1:50 | nst. 594×440 |  |
-| PT-BO-11 | ZESTAWIENIE STALI — STROP NAD PARTEREM | — | nst. 420×500 |  |
+| PT-BO-11 | ZESTAWIENIE STALI — STROP NAD PARTEREM | — | nst. 420×510 |  |
 | PT-BO-12 | ZBROJENIE DOLNE STROPU NAD I PIĘTREM | 1:50 | nst. 420×430 |  |
 | PT-BO-13 | ZBROJENIE GÓRNE STROPU NAD I PIĘTREM | 1:50 | nst. 420×440 |  |
 | PT-BO-14 | ZESTAWIENIE STALI — STROP NAD I PIĘTREM | — | nst. 420×450 |  |

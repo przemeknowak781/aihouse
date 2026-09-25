@@ -962,13 +962,16 @@ w obrysie murów).
 | Zakres | Wynik | Źródło |
 |---|---|---|
 | Pozycje obliczeń statycznych | **148 / 148 spełnionych** | python3 -m lamela.obliczenia.konstrukcja → obliczenia_statyczne.md |
-| Kontrola zbrojenia rysunków (A_s,prov ≥ A_s,req, s ≤ s_max, A_s ≤ A_s,max) | **300 / 300** | rysunki/kontrola_zbrojenia.md (27 arkuszy PT-BO) |
+| Kontrola zbrojenia rysunków (A_s,prov ≥ A_s,req, s ≤ s_max, A_s ≤ A_s,max) | **315 / 315** | rysunki/kontrola_zbrojenia.md (27 arkuszy PT-BO) |
 | Docisk do podłoża (MES, maks.) | p_d = 272,8 kPa ≤ q_Rd = 318,8 kPa (η = 86 %) | PN-EN 1997-1 6.5.2, zał. D (DA2*) |
 | Osiadanie (MES, k_s nominalne) | w_k = 33,4 mm ≤ 50 mm | PN-EN 1997-1 zał. H |
-| EQU belek/wsporników | B4: zakotwienie reakcji odrywającej w słupie ŻB η = 13 %; B5: brak odrywania podpór (R_EQU ≥ 0) η = 0 % | PN-EN 1990 tabl. A1.2(A) |
+| EQU belek/wsporników | B4: zakotwienie reakcji odrywającej w słupie ŻB η = 12 %; B5: brak odrywania podpór (R_EQU ≥ 0) η = 0 % | PN-EN 1990 tabl. A1.2(A) |
 | Przebicie płyty fundamentowej (maks.) | v_Ed = 0,511 ≤ v_Rd = 0,668 MPa | PN-EN 1992-1-1 6.4.4 |
 | Słupy ŻB (maks. wykorzystanie) | SL19: 99 % | PN-EN 1992-1-1 5.8.8 |
 <!-- KONSTR:END -->
+
+Domknięcia tomu PT-BO (pozycje NIEZAMKNIĘTE → 0; REKOMENDACJE p. 11): kombinacja obciążeń nadproży z ψ₀, strzemiona płyt w kontroli
+zbrojenia, ciężar pól PV (dane wyrobu przykładowe — do potwierdzenia kartą wyrobu w PT-4 IE), substrat nasycony, kat. F garażu.
 
 Zmiany bibliotek i rdzenia: `lamela.model` — pola `sciany[].oparta_na`, `sciany[].belka_w_koronie`, `belki[].podpory`, `slupy[].blacha_*`,
 `wsporniki_plyty[].konstrukcyjny` (walidacja odwołań; `docs/SCHEMAT_MODELU.md` §10.3); `obliczenia.konstrukcja` (pozycje, zelbet, MES płyty

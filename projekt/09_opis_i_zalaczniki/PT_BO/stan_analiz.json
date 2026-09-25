@@ -1,5 +1,5 @@
 {
- "model": "2026-09-25 10:06",
+ "model": "2026-09-25 10:33",
  "obszary": {
   "Obliczenia statyczne": [
    148,
@@ -10,117 +10,12 @@
    13
   ],
   "Kontrola zbrojenia rysunków": [
-   300,
-   300
+   315,
+   315
   ]
  },
- "niezamkniete": 17,
- "wiersze": [
-  {
-   "obszar": "Ścinanie płyt",
-   "element": "poz. 1.1 D1",
-   "wynik": "η_max = 72 %",
-   "stan": "NIEZAMKNIĘTE",
-   "opis": "V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P2; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia",
-   "zrodlo": "wyniki.json; obliczenia_statyczne.md; kontrola_zbrojenia.json"
-  },
-  {
-   "obszar": "Ścinanie płyt",
-   "element": "poz. 1.2 D2",
-   "wynik": "η_max = 77 %",
-   "stan": "NIEZAMKNIĘTE",
-   "opis": "V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P5; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia",
-   "zrodlo": "wyniki.json; obliczenia_statyczne.md; kontrola_zbrojenia.json"
-  },
-  {
-   "obszar": "Ścinanie płyt",
-   "element": "poz. 1.3 D3",
-   "wynik": "η_max = 100 %",
-   "stan": "NIEZAMKNIĘTE",
-   "opis": "V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P8; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia",
-   "zrodlo": "wyniki.json; obliczenia_statyczne.md; kontrola_zbrojenia.json"
-  },
-  {
-   "obszar": "Ścinanie płyt",
-   "element": "poz. 1.4 D4",
-   "wynik": "η_max = 44 %",
-   "stan": "NIEZAMKNIĘTE",
-   "opis": "V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P4; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia",
-   "zrodlo": "wyniki.json; obliczenia_statyczne.md; kontrola_zbrojenia.json"
-  },
-  {
-   "obszar": "Ścinanie płyt",
-   "element": "poz. 2.1 ST2",
-   "wynik": "η_max = 96 %",
-   "stan": "NIEZAMKNIĘTE",
-   "opis": "V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P3; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia",
-   "zrodlo": "wyniki.json; obliczenia_statyczne.md; kontrola_zbrojenia.json"
-  },
-  {
-   "obszar": "Ścinanie płyt",
-   "element": "poz. 2.3 ST1",
-   "wynik": "η_max = 79 %",
-   "stan": "NIEZAMKNIĘTE",
-   "opis": "V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P2; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia",
-   "zrodlo": "wyniki.json; obliczenia_statyczne.md; kontrola_zbrojenia.json"
-  },
-  {
-   "obszar": "Ścinanie płyt",
-   "element": "poz. 3.3 PL-E",
-   "wynik": "η_max = 81 %",
-   "stan": "NIEZAMKNIĘTE",
-   "opis": "V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P1; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia",
-   "zrodlo": "wyniki.json; obliczenia_statyczne.md; kontrola_zbrojenia.json"
-  },
-  {
-   "obszar": "Ścinanie płyt",
-   "element": "poz. 3.4 PL-DA",
-   "wynik": "η_max = 74 %",
-   "stan": "NIEZAMKNIĘTE",
-   "opis": "V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P9; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia",
-   "zrodlo": "wyniki.json; obliczenia_statyczne.md; kontrola_zbrojenia.json"
-  },
-  {
-   "obszar": "Obliczenia statyczne",
-   "element": "nadproża / wieńce (25)",
-   "wynik": "—",
-   "stan": "NIEZAMKNIĘTE",
-   "opis": "q_d mniejsze niż 6.10b z wypisanych g_k i q_k — zestawienie niesprawdzalne: wypisywać q_k tylko z przypadków użytych w kombinacji, 6.10b uzupełnić o Σγ_Q·ψ₀·Q_k,i, nie łączyć kat. H ze śniegiem (PN-EN 1991-1-1 p. 3.3.2), przeliczyć — poz. 6.1 N-O0-06 (q_d = 19,82 < 29,79 kN/m); 6.2 N-O0-08 (q_d = 22,93 < 25,64 kN/m); 6.3 N-O0-09 (q_d = 36,60 < 49,43 kN/m); 6.4 N-O0-10 (q_d = 13,11 < 17,65 kN/m); 6.5 N-O0-11 (q_d = 97,59 < 123,39 kN/m); 6.6 N-O0-12 (q_d = 25,38 < 29,82 kN/m) (i 19 innych)",
-   "zrodlo": "obliczenia statyczne"
-  },
-  {
-   "obszar": "Zestawienie obciążeń",
-   "element": "poz. 1.1 D1",
-   "wynik": "100 %",
-   "stan": "NIEZAMKNIĘTE",
-   "opis": "brak w obciążeniach stałych: ciężar pola PV (8 modułów, stelaże i balast wg PT-4 IE) — uzupełnić i przeliczyć",
-   "zrodlo": "obliczenia statyczne; model (PV, warstwy dachu)"
-  },
-  {
-   "obszar": "Zestawienie obciążeń",
-   "element": "poz. 1.4 D4",
-   "wynik": "97 %",
-   "stan": "NIEZAMKNIĘTE",
-   "opis": "brak w obciążeniach stałych: ciężar pola PV (7 modułów, stelaże i balast wg PT-4 IE); woda retencyjna substratu i maty drenażowej (stan nasycony) — uzupełnić i przeliczyć",
-   "zrodlo": "obliczenia statyczne; model (PV, warstwy dachu)"
-  },
-  {
-   "obszar": "MES płyty fundamentowej",
-   "element": "strefa garażu",
-   "wynik": "—",
-   "stan": "NIEZAMKNIĘTE",
-   "opis": "obciążenie użytkowe garażu przyjęte jak kat. A — przypisać kat. F: q_k = 2,50 kN/m², Q_k = 20 kN (PN-EN 1991-1-1 tabl. 6.8 + NA) i przeliczyć MES",
-   "zrodlo": "raport MES płyty fundamentowej"
-  },
-  {
-   "obszar": "Projekt geotechniczny",
-   "element": "M₀ [kPa]",
-   "wynik": "model 80 000",
-   "stan": "NIEZAMKNIĘTE",
-   "opis": "parametr niezgodny z modelem geotechnicznym: obliczenia statyczne 100 000 — ujednolicić (jedno źródło: model „geotechnika”) i przeliczyć",
-   "zrodlo": "model; obliczenia statyczne; raport MES płyty fundamentowej"
-  }
- ],
+ "niezamkniete": 4,
+ "wiersze": [],
  "arkusze_braki": [
   "PT-BO-01: kolizje napisów: 11 — usunąć przed wydaniem (kontrola jakości arkusza)",
   "Raport kontroli arkuszy: 19 uwag dotyczy numerów lub tytułów niezgodnych z wykazem rysunków (PT-BO-03, PT-BO-04, PT-BO-05, PT-BO-07, PT-BO-08, PT-BO-09, PT-BO-10, PT-BO-11) — raport nieaktualny; wygenerować ponownie arkusze konstrukcji wraz z raportem kontroli",

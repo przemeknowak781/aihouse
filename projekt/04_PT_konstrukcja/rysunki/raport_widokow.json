@@ -240,7 +240,7 @@
           "sprawdzone_lancuchy": 4
         }
       },
-      "czas_s": 200.3,
+      "czas_s": 262.6,
       "png_kontrola": {
         "px": [
           3508,
@@ -483,7 +483,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 8.0,
+      "czas_s": 7.8,
       "png_kontrola": {
         "px": [
           1536,
@@ -977,7 +977,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.3,
+      "czas_s": 3.0,
       "png_kontrola": {
         "px": [
           3508,
@@ -1207,7 +1207,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 8.5,
+      "czas_s": 8.3,
       "png_kontrola": {
         "px": [
           2481,
@@ -1472,7 +1472,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.0,
+      "czas_s": 2.7,
       "png_kontrola": {
         "px": [
           3508,
@@ -1966,7 +1966,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 1.9,
+      "czas_s": 1.7,
       "png_kontrola": {
         "px": [
           2481,
@@ -2460,7 +2460,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.6,
+      "czas_s": 3.9,
       "png_kontrola": {
         "px": [
           3508,
@@ -2690,7 +2690,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 5.0,
+      "czas_s": 4.9,
       "png_kontrola": {
         "px": [
           2481,
@@ -2937,7 +2937,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.2,
+      "czas_s": 3.1,
       "png_kontrola": {
         "px": [
           2481,
@@ -3193,7 +3193,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.3,
+      "czas_s": 3.4,
       "png_kontrola": {
         "px": [
           2481,
@@ -3423,7 +3423,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 4.6,
+      "czas_s": 4.8,
       "png_kontrola": {
         "px": [
           2481,
@@ -3670,7 +3670,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.3,
+      "czas_s": 2.4,
       "png_kontrola": {
         "px": [
           2481,
@@ -3926,7 +3926,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.1,
+      "czas_s": 2.9,
       "png_kontrola": {
         "px": [
           2481,
@@ -4156,7 +4156,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.6,
+      "czas_s": 3.5,
       "png_kontrola": {
         "px": [
           1359,
@@ -4634,7 +4634,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 1.5,
+      "czas_s": 1.6,
       "png_kontrola": {
         "px": [
           2776,
@@ -4866,7 +4866,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 5.4,
+      "czas_s": 5.6,
       "png_kontrola": {
         "px": [
           3603,
@@ -5108,7 +5108,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 4.1,
+      "czas_s": 3.9,
       "png_kontrola": {
         "px": [
           3508,
@@ -5622,7 +5622,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.1,
+      "czas_s": 2.4,
       "png_kontrola": {
         "px": [
           2422,
@@ -5879,7 +5879,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.2,
+      "czas_s": 2.3,
       "png_kontrola": {
         "px": [
           1949,
@@ -6136,7 +6136,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.9,
+      "czas_s": 2.8,
       "png_kontrola": {
         "px": [
           2481,
@@ -6374,7 +6374,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.1,
+      "czas_s": 2.0,
       "png_kontrola": {
         "px": [
           2363,
@@ -6634,7 +6634,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.8,
+      "czas_s": 2.6,
       "png_kontrola": {
         "px": [
           5138,
@@ -6704,5 +6704,5 @@
     },
     "wypelnienie_wazone": 0.723
   },
-  "czas_s": 328.4
+  "czas_s": 391.8
 }

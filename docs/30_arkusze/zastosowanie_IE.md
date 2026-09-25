@@ -4,6 +4,9 @@ Data: 2026-09-25. Komplet: projekt techniczny — instalacje elektryczne, 14 ark
 Konfiguracja: `model/arkusze_ie.yaml`. Wynik: `projekt/06_PT_instalacje_elektryczne/rysunki` (PDF, PNG, DXF,
 `raport_widokow.json`, `tom_PT-IE.pdf`).
 
+> **Aktualizacja (runda poprawek po weryfikacji, 2026-09-25):** tabele i formaty poniżej opisują stan po pierwszym wdrożeniu silnika (stan zweryfikowany w `weryfikacja_M.md` / `weryfikacja_C.md`). Stan bieżący (kandydaci „szerokość = rolka”, pismo PZT ≥ 2,5 mm, poprawki czytelności) — `docs/30_arkusze/podsumowanie.md`.
+
+
 Wymaganie inwestora: „Pamiętaj o ekonomicznym ustawieniu na arkuszach, nie musimy sztywno trzymać się geometrii
 wielokrotności A3, chociaż fajnie jak się ładnie będzie składało.”
 

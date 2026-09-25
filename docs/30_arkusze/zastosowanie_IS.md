@@ -4,6 +4,9 @@ Data: 2026-09-25. Konfiguracja: `model/arkusze_is.yaml`. Wynik: `projekt/05_PT_i
 DXF, `raport_widokow.json`, `tom_PT-IS.pdf` ze spisem rysunków PT-IS-00) oraz `projekt/05_PT_instalacje_sanitarne/
 BRAKI_DANYCH.md`. Silnik: `lamela.views.uklad` (format `auto`) i `lamela.draft.skladanie`.
 
+> **Aktualizacja (runda poprawek po weryfikacji, 2026-09-25):** tabele i formaty poniżej opisują stan po pierwszym wdrożeniu silnika (stan zweryfikowany w `weryfikacja_M.md` / `weryfikacja_C.md`). Stan bieżący (kandydaci „szerokość = rolka”, pismo PZT ≥ 2,5 mm, poprawki czytelności) — `docs/30_arkusze/podsumowanie.md`.
+
+
 Wymaganie inwestora: „Pamiętaj o ekonomicznym ustawieniu na arkuszach, nie musimy sztywno trzymać się geometrii
 wielokrotności A3, chociaż fajnie jak się ładnie będzie składało.”
 
@@ -39,7 +42,7 @@ PT-IS-01 790×420 z próbnego przebiegu silnika (raport wskazywał A3x3), więc 
 | PT-IS-08 | WENTYLACJA MECHANICZNA — RZUT PARTERU | IS-WM P0 | 710×420 | 0,298 | 71 % | 145+125×3+190 × 297+123 (10) | poprawne |
 | PT-IS-09 | WENTYLACJA MECHANICZNA — RZUTY I PIĘTRA I II PIĘTRA | IS-WM P1, P2 (wiersz) | 1320×297 | 0,392 | 83 % | 205+185×5+190 × 297 (7) | dobre |
 | PT-IS-10 | KANALIZACJA I WODOCIĄG — ROZWINIĘCIA | rozwinięcie kanalizacji + wodociągu (wiersz) | 1410×297 | 0,419 | 78 % | 210+200×6 × 297 (7) | dobre |
-| PT-IS-11 | SCHEMAT POMPY CIEPŁA, C.O. I C.W.U. | schemat PC | A2 594×420 | 0,249 | 85 % | 210+192+192 × 297+123 (6) | poprawne |
+| PT-IS-11 | SCHEMAT POMPY CIEPŁA, C.O. I C.W.U. | schemat PC | 580×420 (nst.; wcześniej A2 594×420) | 0,244 | 85 % | 210+192+192 × 297+123 (6) | poprawne |
 
 Numeracja ciągła PT-IS-01…11. Tabliczki mają „1/11 … 11/11”. Spis rysunków w `tom_PT-IS.pdf` (PT-IS-00) zgadza się
 z tabliczkami: numery, tytuły, skale i formaty sprawdzono w tekście PDF. `BRAKI_DANYCH.md` odwołuje się do nowych
@@ -76,7 +79,7 @@ i wycinki PIL: kolumnę opisową, tabliczkę, styk widoków, strefy znaków cent
   razem **1410×297 = 0,419 m²**. Składanie „dobre” (pasy 200 mm, 7 warstw zamiast 10), wspólna legenda przewodów.
   Schematy są z natury rzadkie (W kontur 30 %), ale nie da się ich zagęścić układem arkusza. Pionowa oś rzędnych
   schematów pozostaje w skali.
-* **PT-IS-11 (schemat PC)** — bez zmian (A2, 85 %). Łączenie ze schematami H = 297 albo z rzutami c.o. zwiększało
+* **PT-IS-11 (schemat PC)** — po przegenerowaniu 580×420 (dawniej A2; 85 %). Łączenie ze schematami H = 297 albo z rzutami c.o. zwiększało
   papier: 1640×420 = 0,69 m² wobec 0,67 m² osobno.
 * Tytuły arkuszy łączonych: „RZUTY I PIĘTRA I II PIĘTRA” zamiast „RZUTY I I II PIĘTRA” (wielkie litery „I I II” są
   nieczytelne). Tytuły widoków pozostały bez zmian („… — RZUT I PIĘTRA”, „… — RZUT II PIĘTRA”).

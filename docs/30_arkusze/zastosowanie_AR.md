@@ -3,6 +3,9 @@
 Data: 2026-09-25. Konfiguracja: `model/arkusze.yaml`. Wynik: `projekt/03_PAB/rysunki` (PDF, PNG, DXF,
 `raport_widokow.json`, `tom_widoki.pdf`). Silnik: `lamela.views.uklad` (format `auto`) i `lamela.draft.skladanie`.
 
+> **Aktualizacja (runda poprawek po weryfikacji, 2026-09-25):** tabele i formaty poniżej opisują stan po pierwszym wdrożeniu silnika (stan zweryfikowany w `weryfikacja_M.md` / `weryfikacja_C.md`). Stan bieżący (kandydaci „szerokość = rolka”, pismo PZT ≥ 2,5 mm, poprawki czytelności) — `docs/30_arkusze/podsumowanie.md`.
+
+
 Wymaganie inwestora: „Pamiętaj o ekonomicznym ustawieniu na arkuszach, nie musimy sztywno trzymać się geometrii
 wielokrotności A3, chociaż fajnie jak się ładnie będzie składało.”
 
@@ -117,3 +120,7 @@ PYTHONPATH=src python3 tools/metryki_arkuszy.py PRZED=projekt/01_koncepcja/widok
 * Model był zmieniany w trakcie pracy (m.in. doszła kratownica pnączy na elewacji E). Arkusze wygenerowano
   z bieżącego stanu modelu. Po zakończeniu rundy poprawek wystarczy przegenerować komplet tym samym poleceniem —
   formaty dobierze `auto` (żaden arkusz nie ma formatu jawnego).
+
+## Decyzja czytelności — PB-AR-04 (odnotowana po weryfikacji M § 3)
+
+Wariant pionowy 594×727 (przekrój A-A nad B-B) daje ok. −9 % papieru, ale rozdziela wspólną linię terenu i rzędne kondygnacji obu przekrojów; zespół AR świadomie zostawia jeden wiersz (`max_wysokosc: 594` w `model/arkusze.yaml` — ogranicza także kandydatów „szerokość = rolka”).

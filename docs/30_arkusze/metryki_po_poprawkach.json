@@ -1,0 +1,3265 @@
+[
+ {
+  "komplet": "AR",
+  "katalog": "projekt/03_PAB/rysunki",
+  "stan_plikow": "2026-09-25 10:52",
+  "arkusze": [
+   {
+    "W": 620.0000111897785,
+    "H": 594.0000047471788,
+    "frame": [
+     19.999999883439806,
+     9.999992540147568,
+     609.9999755859375,
+     584.0000122070312
+    ],
+    "tb": [
+     429.9999806722005,
+     481.0000115288628,
+     609.9999755859375,
+     584.0000122070312
+    ],
+    "pole_arkusza_m2": 0.36828000958997936,
+    "pole_ramki_m2": 0.3386599976566945,
+    "pole_tabliczki_m2": 0.01872,
+    "n_prymitywow": 13579,
+    "bloki": [
+     [
+      28.0,
+      17.0,
+      602.0,
+      561.0
+     ],
+     [
+      587.0,
+      443.0,
+      602.0,
+      469.0
+     ],
+     [
+      433.0,
+      457.0,
+      559.0,
+      466.0
+     ]
+    ],
+    "wypelnienie": 0.9366798623838867,
+    "wypelnienie_rys": 0.9329749396331978,
+    "wypelnienie_kontur": 0.6558583875771469,
+    "wypelnienie_skl": 0.8386493886647721,
+    "pusty_prostokat": {
+     "pole_m2": 0.010528,
+     "w": 188.0,
+     "h": 56.0,
+     "x": 241.9999998834398,
+     "y": 527.9999925401476
+    },
+    "przyciety": {
+     "W": 612.0,
+     "H": 588.0,
+     "pole_m2": 0.359856
+    },
+    "skladanie": {
+     "zgiecia_pionowe": [
+      210.0,
+      415.0
+     ],
+     "zgiecia_poziome": [
+      297.0
+     ],
+     "pasy": [
+      210.0,
+      205.0,
+      205.0
+     ],
+     "rzedy": [
+      297.0,
+      297.0
+     ],
+     "n_pasow": 3,
+     "n_rzedow": 2,
+     "warstwy": 6,
+     "wykorzystanie_paczki": 0.9841270097535657,
+     "ocena": "dobre",
+     "ocena_pion": "dobre",
+     "ocena_poziom": "dobre",
+     "uwagi": []
+    },
+    "nr": "PB-AR-01",
+    "tytul": "RZUT PARTERU",
+    "skala": "1:50",
+    "pdf": "projekt/03_PAB/rysunki/PB-AR-01_rzut_parteru.pdf",
+    "format": "620×594"
+   },
+   {
+    "W": 594.0000047471788,
+    "H": 479.9999864366319,
+    "frame": [
+     19.999999883439806,
+     9.999992540147568,
+     584.0000122070312,
+     469.99999389648434
+    ],
+    "tb": [
+     404.0000172932942,
+     366.9999932183159,
+     584.0000122070312,
+     469.99999389648434
+    ],
+    "pole_arkusza_m2": 0.28511999422200507,
+    "pole_ramki_m2": 0.259440006433826,
+    "pole_tabliczki_m2": 0.018824,
+    "n_prymitywow": 8824,
+    "bloki": [
+     [
+      404.0,
+      10.0,
+      577.0,
+      70.0
+     ],
+     [
+      28.0,
+      17.0,
+      570.0,
+      471.0
+     ],
+     [
+      561.0,
+      329.0,
+      576.0,
+      354.0
+     ],
+     [
+      407.0,
+      343.0,
+      533.0,
+      352.0
+     ]
+    ],
+    "wypelnienie": 0.9611470621960647,
+    "wypelnienie_rys": 0.9581074984028621,
+    "wypelnienie_kontur": 0.6927767327428116,
+    "wypelnienie_skl": 0.900165719274169,
+    "pusty_prostokat": {
+     "pole_m2": 0.0072,
+     "w": 200.0,
+     "h": 36.0,
+     "x": 19.999999883439806,
+     "y": 433.99999254014756
+    },
+    "przyciety": {
+     "W": 587.0,
+     "H": 479.9999864366319,
+     "pole_m2": 0.28175999203830293
+    },
+    "skladanie": {
+     "zgiecia_pionowe": [
+      210.0,
+      402.0
+     ],
+     "zgiecia_poziome": [
+      297.0
+     ],
+     "pasy": [
+      210.0,
+      192.0,
+      192.0
+     ],
+     "rzedy": [
+      297.0,
+      183.0
+     ],
+     "n_pasow": 3,
+     "n_rzedow": 2,
+     "warstwy": 6,
+     "wykorzystanie_paczki": 0.76190474646466,
+     "ocena": "poprawne",
+     "ocena_pion": "dobre",
+     "ocena_poziom": "poprawne",
+     "uwagi": [
+      "górny rząd 183 mm (niepełny)"
+     ]
+    },
+    "nr": "PB-AR-02",
+    "tytul": "RZUT I PIĘTRA",
+    "skala": "1:50",
+    "pdf": "projekt/03_PAB/rysunki/PB-AR-02_rzut_i_pietra.pdf",
+    "format": "594×480"
+   },
+   {
+    "W": 589.9999905056424,
+    "H": 890.9999640570745,
+    "frame": [
+     19.999999883439806,
+     9.999992540147568,
+     579.9999979654947,
+     880.999971516927
+    ],
+    "tb": [
+     400.0000030517578,
+     777.9999708387586,
+     579.9999979654947,
+     880.999971516927
+    ],
+    "pole_arkusza_m2": 0.5256899703342017,
+    "pole_ramki_m2": 0.48775998655646624,
+    "pole_tabliczki_m2": 0.01854,
+    "n_prymitywow": 15182,
+    "bloki": [
+     [
+      83.0,
+      17.0,
+      520.0,
+      347.0
+     ],
+     [
+      82.0,
+      349.0,
+      150.0,
+      359.0
+     ],
+     [
+      28.0,
+      373.0,
+      580.0,
+      881.0
+     ]
+    ],
+    "wypelnienie": 0.8719575441245503,
+    "wypelnienie_rys": 0.8668982815186401,
+    "wypelnienie_kontur": 0.6421026911434501,
+    "wypelnienie_skl": 0.8225643985939237,
+    "pusty_prostokat": {
+     "pole_m2": 0.022444,
+     "w": 62.0,
+     "h": 362.0,
+     "x": 19.999999883439806,
+     "y": 9.999992540147568
+    },
+    "przyciety": {
+     "W": 582.0,
+     "H": 884.0,
+     "pole_m2": 0.514488
+    },
+    "skladanie": {
+     "zgiecia_pionowe": [
+      210.0,
+      400.0
+     ],
+     "zgiecia_poziome": [
+      297.0,
+      594.0
+     ],
+     "pasy": [
+      210.0,
+      190.0,
+      190.0
+     ],
+     "rzedy": [
+      297.0,
+      297.0,
+      297.0
+     ],
+     "n_pasow": 3,
+     "n_rzedow": 3,
+     "warstwy": 9,
+     "wykorzystanie_paczki": 0.9365078836588133,
+     "ocena": "dobre",
+     "ocena_pion": "dobre",
+     "ocena_poziom": "dobre",
+     "uwagi": []
+    },
+    "nr": "PB-AR-03",
+    "tytul": "RZUT II PIĘTRA I RZUT DACHU",
+    "skala": "1:50",
+    "pdf": "projekt/03_PAB/rysunki/PB-AR-03_rzut_ii_pietra_i_rzut_dachu.pdf",
+    "format": "590×891"
+   },
+   {
+    "W": 1150.0000033908418,
+    "H": 419.9999881320529,
+    "frame": [
+     19.999999883439806,
+     9.999992540147568,
+     1140.0000108506943,
+     409.99999559190536
+    ],
+    "tb": [
+     959.9999728732638,
+     306.99999491373694,
+     1140.0000108506943,
+     409.99999559190536
+    ],
+    "pole_arkusza_m2": 0.4829999877760144,
+    "pole_ramki_m2": 0.44800000780487054,
+    "pole_tabliczki_m2": 0.018824,
+    "n_prymitywow": 48732,
+    "bloki": [
+     [
+      959.0,
+      10.0,
+      1141.0,
+      156.0
+     ],
+     [
+      423.0,
+      54.0,
+      491.0,
+      64.0
+     ],
+     [
+      28.0,
+      56.0,
+      96.0,
+      66.0
+     ],
+     [
+      423.0,
+      68.0,
+      958.0,
+      366.0
+     ],
+     [
+      28.0,
+      70.0,
+      406.0,
+      366.0
+     ],
+     [
+      348.0,
+      119.0,
+      396.0,
+      139.0
+     ],
+     [
+      963.0,
+      292.0,
+      1089.0,
+      301.0
+     ]
+    ],
+    "wypelnienie": 0.7125178447296662,
+    "wypelnienie_rys": 0.6999086494522144,
+    "wypelnienie_kontur": 0.4522566885495426,
+    "wypelnienie_skl": 0.6966495414346886,
+    "pusty_prostokat": {
+     "pole_m2": 0.04136,
+     "w": 940.0,
+     "h": 44.0,
+     "x": 19.999999883439806,
+     "y": 365.99999254014756
+    },
+    "przyciety": {
+     "W": 1143.0,
+     "H": 419.9999881320529,
+     "pole_m2": 0.48005998643493647
+    },
+    "skladanie": {
+     "zgiecia_pionowe": [
+      210.0,
+      350.0,
+      490.0,
+      630.0,
+      770.0,
+      960.0
+     ],
+     "zgiecia_poziome": [
+      297.0
+     ],
+     "pasy": [
+      210.0,
+      140.0,
+      140.0,
+      140.0,
+      140.0,
+      190.0,
+      190.0
+     ],
+     "rzedy": [
+      297.0,
+      123.0
+     ],
+     "n_pasow": 7,
+     "n_rzedow": 2,
+     "warstwy": 14,
+     "wykorzystanie_paczki": 0.5531505391511652,
+     "ocena": "poprawne",
+     "ocena_pion": "poprawne",
+     "ocena_poziom": "poprawne",
+     "uwagi": [
+      "najwęższy pas pośredni 140 mm",
+      "pasy nierówne (rozrzut 50 mm)",
+      "górny rząd 123 mm (niepełny)"
+     ]
+    },
+    "nr": "PB-AR-04",
+    "tytul": "PRZEKROJE A-A I B-B",
+    "skala": "1:50",
+    "pdf": "projekt/03_PAB/rysunki/PB-AR-04_przekroje_a_a_i_b_b.pdf",
+    "format": "1150×420"
+   },
+   {
+    "W": 2049.999934895833,
+    "H": 297.0000023735894,
+    "frame": [
+     19.999999883439806,
+     9.999992540147568,
+     2040.0000284830728,
+     287.0000098334418
+    ],
+    "tb": [
+     1859.9999905056422,
+     184.00000915527343,
+     2040.0000284830728,
+     287.0000098334418
+    ],
+    "pole_arkusza_m2": 0.6088499855299205,
+    "pole_ramki_m2": 0.5595400428545532,
+    "pole_tabliczki_m2": 0.018824,
+    "n_prymitywow": 20191,
+    "bloki": [
+     [
+      1851.0,
+      10.0,
+      2041.0,
+      178.0
+     ],
+     [
+      28.0,
+      25.0,
+      540.0,
+      276.0
+     ],
+     [
+      1487.0,
+      25.0,
+      1832.0,
+      276.0
+     ],
+     [
+      506.0,
+      30.0,
+      538.0,
+      45.0
+     ],
+     [
+      1798.0,
+      30.0,
+      1830.0,
+      45.0
+     ],
+     [
+      1423.0,
+      31.0,
+      1455.0,
+      46.0
+     ],
+     [
+      881.0,
+      32.0,
+      913.0,
+      47.0
+     ],
+     [
+      570.0,
+      33.0,
+      915.0,
+      276.0
+     ],
+     [
+      945.0,
+      33.0,
+      1457.0,
+      276.0
+     ],
+     [
+      506.0,
+      94.0,
+      554.0,
+      110.0
+     ],
+     [
+      1798.0,
+      94.0,
+      1846.0,
+      110.0
+     ],
+     [
+      1423.0,
+      95.0,
+      1471.0,
+      111.0
+     ],
+     [
+      881.0,
+      96.0,
+      929.0,
+      111.0
+     ],
+     [
+      1798.0,
+      150.0,
+      1830.0,
+      173.0
+     ],
+     [
+      881.0,
+      152.0,
+      913.0,
+      174.0
+     ],
+     [
+      1423.0,
+      152.0,
+      1455.0,
+      174.0
+     ]
+    ],
+    "wypelnienie": 0.849054515520156,
+    "wypelnienie_rys": 0.8437996357410241,
+    "wypelnienie_kontur": 0.5385065892028107,
+    "wypelnienie_skl": 0.8304338642673049,
+    "pusty_prostokat": {
+     "pole_m2": 0.025732,
+     "w": 1838.0,
+     "h": 14.0,
+     "x": 19.999999883439806,
+     "y": 9.999992540147568
+    },
+    "przyciety": {
+     "W": 2043.0,
+     "H": 297.0000023735894,
+     "pole_m2": 0.6067710048492431
+    },
+    "skladanie": {
+     "zgiecia_pionowe": [
+      204.0,
+      388.0,
+      572.0,
+      756.0,
+      940.0,
+      1124.0,
+      1308.0,
+      1492.0,
+      1676.0,
+      1860.0
+     ],
+     "zgiecia_poziome": [],
+     "pasy": [
+      204.0,
+      184.0,
+      184.0,
+      184.0,
+      184.0,
+      184.0,
+      184.0,
+      184.0,
+      184.0,
+      184.0,
+      190.0
+     ],
+     "rzedy": [
+      297.0
+     ],
+     "n_pasow": 11,
+     "n_rzedow": 1,
+     "warstwy": 11,
+     "wykorzystanie_paczki": 0.8874458663546293,
+     "ocena": "dobre",
+     "ocena_pion": "dobre",
+     "ocena_poziom": "dobre",
+     "uwagi": []
+    },
+    "nr": "PB-AR-05",
+    "tytul": "ELEWACJE",
+    "skala": "1:50",
+    "pdf": "projekt/03_PAB/rysunki/PB-AR-05_elewacje.pdf",
+    "format": "2050×297"
+   }
+  ],
+  "sumy": {
+   "arkuszy": 5,
+   "pole_m2": 2.270939947452121,
+   "a4_ekw": 36.41077356825591,
+   "pole_ramki_m2": 2.0934000413064107,
+   "wypelnienie_wazone": 0.8532387335223895,
+   "wypelnienie_srednie": 0.8662713657908648,
+   "wypelnienie_min": 0.7125178447296662,
+   "najgorsze": "PB-AR-04",
+   "puste_m2": 0.30723004130641085,
+   "przyciete_m2": 2.2429349833224825,
+   "warstwy_a4": 46,
+   "formaty": {
+    "620×594": 1,
+    "594×480": 1,
+    "590×891": 1,
+    "1150×420": 1,
+    "2050×297": 1
+   },
+   "oceny_skladania": {
+    "dobre": 3,
+    "poprawne": 2,
+    "słabe": 0
+   }
+  }
+ },
+ {
+  "komplet": "PZT",
+  "katalog": "projekt/02_PZT/rysunki",
+  "stan_plikow": "2026-09-25 10:50",
+  "arkusze": [
+   {
+    "W": 419.9999881320529,
+    "H": 529.9999922010633,
+    "frame": [
+     19.999999883439806,
+     9.999992540147568,
+     409.99999559190536,
+     519.9999996609157
+    ],
+    "tb": [
+     230.0000006781684,
+     416.99999898274734,
+     409.99999559190536,
+     519.9999996609157
+    ],
+    "pole_arkusza_m2": 0.2225999904344347,
+    "pole_ramki_m2": 0.198900000588417,
+    "pole_tabliczki_m2": 0.01872,
+    "n_prymitywow": 10059,
+    "bloki": [
+     [
+      28.0,
+      17.0,
+      410.0,
+      496.0
+     ],
+     [
+      231.0,
+      392.0,
+      360.0,
+      404.0
+     ]
+    ],
+    "wypelnienie": 0.9425741550798057,
+    "wypelnienie_rys": 0.9366078335491399,
+    "wypelnienie_kontur": 0.8069934616649137,
+    "wypelnienie_skl": 0.9425741550798057,
+    "pusty_prostokat": {
+     "pole_m2": 0.00504,
+     "w": 210.0,
+     "h": 24.0,
+     "x": 19.999999883439806,
+     "y": 495.99999254014756
+    },
+    "przyciety": {
+     "W": 412.0,
+     "H": 524.0,
+     "pole_m2": 0.215888
+    },
+    "skladanie": {
+     "zgiecia_pionowe": [
+      125.0,
+      230.0
+     ],
+     "zgiecia_poziome": [
+      297.0
+     ],
+     "pasy": [
+      125.0,
+      105.0,
+      190.0
+     ],
+     "rzedy": [
+      297.0,
+      233.0
+     ],
+     "n_pasow": 3,
+     "n_rzedow": 2,
+     "warstwy": 6,
+     "wykorzystanie_paczki": 0.5948372359425864,
+     "ocena": "poprawne",
+     "ocena_pion": "dobre",
+     "ocena_poziom": "poprawne",
+     "uwagi": [
+      "górny rząd 233 mm (niepełny)"
+     ]
+    },
+    "nr": "PZT-01",
+    "tytul": "PLAN ZAGOSPODAROWANIA DZIAŁKI",
+    "skala": "1:500",
+    "pdf": "projekt/02_PZT/rysunki/PZT-01_plan_zagospodarowania_dzialki.pdf",
+    "format": "420×530"
+   },
+   {
+    "W": 594.0000047471788,
+    "H": 429.9999806722005,
+    "frame": [
+     19.999999883439806,
+     9.999992540147568,
+     584.0000122070312,
+     419.9999881320529
+    ],
+    "tb": [
+     404.0000172932942,
+     316.9999874538845,
+     584.0000122070312,
+     419.9999881320529
+    ],
+    "pole_arkusza_m2": 0.25541999056057385,
+    "pole_ramki_m2": 0.23124000256650704,
+    "pole_tabliczki_m2": 0.018643,
+    "n_prymitywow": 15546,
+    "bloki": [
+     [
+      395.0,
+      10.0,
+      578.0,
+      251.0
+     ],
+     [
+      29.0,
+      20.0,
+      377.0,
+      402.0
+     ],
+     [
+      561.0,
+      279.0,
+      576.0,
+      304.0
+     ],
+     [
+      406.0,
+      292.0,
+      534.0,
+      304.0
+     ],
+     [
+      28.0,
+      404.0,
+      205.0,
+      413.0
+     ]
+    ],
+    "wypelnienie": 0.8613821042607541,
+    "wypelnienie_rys": 0.8492264604884091,
+    "wypelnienie_kontur": 0.7085279284793206,
+    "wypelnienie_skl": 0.8613821042607541,
+    "pusty_prostokat": {
+     "pole_m2": 0.00728,
+     "w": 182.0,
+     "h": 40.0,
+     "x": 377.9999998834398,
+     "y": 251.99999254014756
+    },
+    "przyciety": {
+     "W": 587.0,
+     "H": 429.9999806722005,
+     "pole_m2": 0.2524099886545817
+    },
+    "skladanie": {
+     "zgiecia_pionowe": [
+      210.0,
+      402.0
+     ],
+     "zgiecia_poziome": [
+      297.0
+     ],
+     "pasy": [
+      210.0,
+      192.0,
+      192.0
+     ],
+     "rzedy": [
+      297.0,
+      133.0
+     ],
+     "n_pasow": 3,
+     "n_rzedow": 2,
+     "warstwy": 6,
+     "wykorzystanie_paczki": 0.6825396573154131,
+     "ocena": "poprawne",
+     "ocena_pion": "dobre",
+     "ocena_poziom": "poprawne",
+     "uwagi": [
+      "górny rząd 133 mm (niepełny)"
+     ]
+    },
+    "nr": "PZT-02",
+    "tytul": "PLAN SZCZEGÓŁOWY — WYMIARY I RZĘDNE",
+    "skala": "1:200",
+    "pdf": "projekt/02_PZT/rysunki/PZT-02_plan_szczegolowy_wymiary_i_rzedne.pdf",
+    "format": "594×430"
+   },
+   {
+    "W": 609.9999755859375,
+    "H": 450.0000088161892,
+    "frame": [
+     19.999999883439806,
+     9.999992540147568,
+     599.9999830457899,
+     440.0000162760416
+    ],
+    "tb": [
+     419.9999881320529,
+     337.00001559787324,
+     599.9999830457899,
+     440.0000162760416
+    ],
+    "pole_arkusza_m2": 0.27449999439154704,
+    "pole_ramki_m2": 0.2494000065266287,
+    "pole_tabliczki_m2": 0.01872,
+    "n_prymitywow": 14644,
+    "bloki": [
+     [
+      20.0,
+      10.0,
+      403.0,
+      428.0
+     ],
+     [
+      416.0,
+      10.0,
+      600.0,
+      296.0
+     ],
+     [
+      237.0,
+      209.0,
+      401.0,
+      313.0
+     ],
+     [
+      577.0,
+      299.0,
+      592.0,
+      325.0
+     ],
+     [
+      422.0,
+      312.0,
+      550.0,
+      324.0
+     ],
+     [
+      237.0,
+      358.0,
+      401.0,
+      425.0
+     ]
+    ],
+    "wypelnienie": 0.9357016595550229,
+    "wypelnienie_rys": 0.9304837607381568,
+    "wypelnienie_kontur": 0.736543685616892,
+    "wypelnienie_skl": 0.7918043096719618,
+    "pusty_prostokat": {
+     "pole_m2": 0.00836,
+     "w": 190.0,
+     "h": 44.0,
+     "x": 229.9999998834398,
+     "y": 313.99999254014756
+    },
+    "przyciety": {
+     "W": 609.9999755859375,
+     "H": 450.0000088161892,
+     "pole_m2": 0.27449999439154704
+    },
+    "skladanie": {
+     "zgiecia_pionowe": [
+      210.0,
+      410.0
+     ],
+     "zgiecia_poziome": [
+      297.0
+     ],
+     "pasy": [
+      210.0,
+      200.0,
+      200.0
+     ],
+     "rzedy": [
+      297.0,
+      153.0
+     ],
+     "n_pasow": 3,
+     "n_rzedow": 2,
+     "warstwy": 6,
+     "wykorzystanie_paczki": 0.733525718538686,
+     "ocena": "poprawne",
+     "ocena_pion": "dobre",
+     "ocena_poziom": "poprawne",
+     "uwagi": [
+      "górny rząd 153 mm (niepełny)"
+     ]
+    },
+    "nr": "PZT-03",
+    "tytul": "RYSUNEK KOORDYNACYJNY UZBROJENIA TERENU",
+    "skala": "1:200",
+    "pdf": "projekt/02_PZT/rysunki/PZT-03_rysunek_koordynacyjny_uzbrojenia_terenu.pdf",
+    "format": "610×450"
+   }
+  ],
+  "sumy": {
+   "arkuszy": 3,
+   "pole_m2": 0.7525199753865556,
+   "a4_ekw": 12.065415670780112,
+   "pole_ramki_m2": 0.6795400096815527,
+   "wypelnienie_wazone": 0.9124230967512255,
+   "wypelnienie_srednie": 0.9132193062985277,
+   "wypelnienie_min": 0.8613821042607541,
+   "najgorsze": "PZT-02",
+   "puste_m2": 0.05951200968155268,
+   "przyciete_m2": 0.7427979830461288,
+   "warstwy_a4": 18,
+   "formaty": {
+    "420×530": 1,
+    "594×430": 1,
+    "610×450": 1
+   },
+   "oceny_skladania": {
+    "dobre": 0,
+    "poprawne": 3,
+    "słabe": 0
+   }
+  }
+ },
+ {
+  "komplet": "IS",
+  "katalog": "projekt/05_PT_instalacje_sanitarne/rysunki",
+  "stan_plikow": "2026-09-25 10:50",
+  "arkusze": [
+   {
+    "W": 609.9999755859375,
+    "H": 510.0000071207682,
+    "frame": [
+     19.999999883439806,
+     9.999992540147568,
+     599.9999830457899,
+     500.0000145806206
+    ],
+    "tb": [
+     419.9999881320529,
+     397.0000139024522,
+     599.9999830457899,
+     500.0000145806206
+    ],
+    "pole_arkusza_m2": 0.31109999189249654,
+    "pole_ramki_m2": 0.2842000045330255,
+    "pole_tabliczki_m2": 0.01872,
+    "n_prymitywow": 8877,
+    "bloki": [
+     [
+      28.0,
+      19.0,
+      585.0,
+      481.0
+     ],
+     [
+      577.0,
+      359.0,
+      592.0,
+      384.0
+     ]
+    ],
+    "wypelnienie": 0.9231843624742496,
+    "wypelnienie_rys": 0.9177678011139639,
+    "wypelnienie_kontur": 0.6486206793095916,
+    "wypelnienie_skl": 0.8500035050911768,
+    "pusty_prostokat": {
+     "pole_m2": 0.008272,
+     "w": 188.0,
+     "h": 44.0,
+     "x": 231.9999998834398,
+     "y": 455.99999254014756
+    },
+    "przyciety": {
+     "W": 602.0,
+     "H": 502.0,
+     "pole_m2": 0.302204
+    },
+    "skladanie": {
+     "zgiecia_pionowe": [
+      210.0,
+      410.0
+     ],
+     "zgiecia_poziome": [
+      297.0
+     ],
+     "pasy": [
+      210.0,
+      200.0,
+      200.0
+     ],
+     "rzedy": [
+      297.0,
+      213.0
+     ],
+     "n_pasow": 3,
+     "n_rzedow": 2,
+     "warstwy": 6,
+     "wykorzystanie_paczki": 0.8313291429974254,
+     "ocena": "poprawne",
+     "ocena_pion": "dobre",
+     "ocena_poziom": "poprawne",
+     "uwagi": [
+      "górny rząd 213 mm (niepełny)"
+     ]
+    },
+    "nr": "PT-IS-01",
+    "tytul": "INSTALACJA WODOCIĄGOWA — RZUT PARTERU",
+    "skala": "1:50",
+    "pdf": "projekt/05_PT_instalacje_sanitarne/rysunki/PT-IS-01_instalacja_wodociagowa_rzut_parteru.pdf",
+    "format": "610×510"
+   },
+   {
+    "W": 1130.0000183105467,
+    "H": 297.0000023735894,
+    "frame": [
+     19.999999883439806,
+     9.999992540147568,
+     1120.0000257703991,
+     287.0000098334418
+    ],
+    "tb": [
+     939.9999877929687,
+     184.00000915527343,
+     1120.0000257703991,
+     287.0000098334418
+    ],
+    "pole_arkusza_m2": 0.33561000812038844,
+    "pole_ramki_m2": 0.3047000261933118,
+    "pole_tabliczki_m2": 0.018824,
+    "n_prymitywow": 10283,
+    "bloki": [
+     [
+      939.0,
+      10.0,
+      1121.0,
+      117.0
+     ],
+     [
+      30.0,
+      19.0,
+      472.0,
+      288.0
+     ],
+     [
+      489.0,
+      36.0,
+      826.0,
+      288.0
+     ],
+     [
+      848.0,
+      36.0,
+      856.0,
+      271.0
+     ],
+     [
+      918.0,
+      36.0,
+      926.0,
+      271.0
+     ],
+     [
+      1087.0,
+      146.0,
+      1103.0,
+      172.0
+     ],
+     [
+      943.0,
+      160.0,
+      1069.0,
+      169.0
+     ]
+    ],
+    "wypelnienie": 0.8120445642594798,
+    "wypelnienie_rys": 0.7996683144231711,
+    "wypelnienie_kontur": 0.6777780841704867,
+    "wypelnienie_skl": 0.8120445642594798,
+    "pusty_prostokat": {
+     "pole_m2": 0.017236,
+     "w": 62.0,
+     "h": 278.0,
+     "x": 855.9999998834398,
+     "y": 9.999992540147568
+    },
+    "przyciety": {
+     "W": 1121.0,
+     "H": 297.0000023735894,
+     "pole_m2": 0.33293700266079373
+    },
+    "skladanie": {
+     "zgiecia_pionowe": [
+      210.0,
+      345.0,
+      480.0,
+      615.0,
+      750.0,
+      940.0
+     ],
+     "zgiecia_poziome": [],
+     "pasy": [
+      210.0,
+      135.0,
+      135.0,
+      135.0,
+      135.0,
+      190.0,
+      190.0
+     ],
+     "rzedy": [
+      297.0
+     ],
+     "n_pasow": 7,
+     "n_rzedow": 1,
+     "warstwy": 7,
+     "wykorzystanie_paczki": 0.7687075015927722,
+     "ocena": "poprawne",
+     "ocena_pion": "poprawne",
+     "ocena_poziom": "dobre",
+     "uwagi": [
+      "najwęższy pas pośredni 135 mm",
+      "pasy nierówne (rozrzut 55 mm)"
+     ]
+    },
+    "nr": "PT-IS-02",
+    "tytul": "INSTALACJA WODOCIĄGOWA — RZUTY I PIĘTRA I II PIĘTRA",
+    "skala": "1:50",
+    "pdf": "projekt/05_PT_instalacje_sanitarne/rysunki/PT-IS-02_instalacja_wodociagowa_rzuty_i_pietra_i_ii_pietr.pdf",
+    "format": "1130×297"
+   },
+   {
+    "W": 594.0000047471788,
+    "H": 479.9999864366319,
+    "frame": [
+     19.999999883439806,
+     9.999992540147568,
+     584.0000122070312,
+     469.99999389648434
+    ],
+    "tb": [
+     404.0000172932942,
+     366.9999932183159,
+     584.0000122070312,
+     469.99999389648434
+    ],
+    "pole_arkusza_m2": 0.28511999422200507,
+    "pole_ramki_m2": 0.259440006433826,
+    "pole_tabliczki_m2": 0.018824,
+    "n_prymitywow": 7993,
+    "bloki": [
+     [
+      28.0,
+      19.0,
+      502.0,
+      457.0
+     ],
+     [
+      41.0,
+      445.0,
+      167.0,
+      455.0
+     ]
+    ],
+    "wypelnienie": 0.8387912218754364,
+    "wypelnienie_rys": 0.8261794505955762,
+    "wypelnienie_kontur": 0.6677690244514736,
+    "wypelnienie_skl": 0.7709142577862774,
+    "pusty_prostokat": {
+     "pole_m2": 0.029192,
+     "w": 82.0,
+     "h": 356.0,
+     "x": 501.9999998834398,
+     "y": 9.999992540147568
+    },
+    "przyciety": {
+     "W": 587.0,
+     "H": 472.0,
+     "pole_m2": 0.277064
+    },
+    "skladanie": {
+     "zgiecia_pionowe": [
+      210.0,
+      402.0
+     ],
+     "zgiecia_poziome": [
+      297.0
+     ],
+     "pasy": [
+      210.0,
+      192.0,
+      192.0
+     ],
+     "rzedy": [
+      297.0,
+      183.0
+     ],
+     "n_pasow": 3,
+     "n_rzedow": 2,
+     "warstwy": 6,
+     "wykorzystanie_paczki": 0.76190474646466,
+     "ocena": "poprawne",
+     "ocena_pion": "dobre",
+     "ocena_poziom": "poprawne",
+     "uwagi": [
+      "górny rząd 183 mm (niepełny)"
+     ]
+    },
+    "nr": "PT-IS-03",
+    "tytul": "KANALIZACJA SANITARNA — RZUT PARTERU",
+    "skala": "1:50",
+    "pdf": "projekt/05_PT_instalacje_sanitarne/rysunki/PT-IS-03_kanalizacja_sanitarna_rzut_parteru.pdf",
+    "format": "594×480"
+   },
+   {
+    "W": 1130.0000183105467,
+    "H": 297.0000023735894,
+    "frame": [
+     19.999999883439806,
+     9.999992540147568,
+     1120.0000257703991,
+     287.0000098334418
+    ],
+    "tb": [
+     939.9999877929687,
+     184.00000915527343,
+     1120.0000257703991,
+     287.0000098334418
+    ],
+    "pole_arkusza_m2": 0.33561000812038844,
+    "pole_ramki_m2": 0.3047000261933118,
+    "pole_tabliczki_m2": 0.018824,
+    "n_prymitywow": 9494,
+    "bloki": [
+     [
+      939.0,
+      10.0,
+      1121.0,
+      114.0
+     ],
+     [
+      30.0,
+      19.0,
+      472.0,
+      288.0
+     ],
+     [
+      489.0,
+      37.0,
+      826.0,
+      288.0
+     ],
+     [
+      848.0,
+      44.0,
+      856.0,
+      271.0
+     ],
+     [
+      918.0,
+      44.0,
+      926.0,
+      271.0
+     ],
+     [
+      1087.0,
+      146.0,
+      1103.0,
+      172.0
+     ],
+     [
+      943.0,
+      160.0,
+      1069.0,
+      169.0
+     ]
+    ],
+    "wypelnienie": 0.8087265468223609,
+    "wypelnienie_rys": 0.7961318164052633,
+    "wypelnienie_kontur": 0.6644731952584391,
+    "wypelnienie_skl": 0.8087265468223609,
+    "pusty_prostokat": {
+     "pole_m2": 0.017236,
+     "w": 62.0,
+     "h": 278.0,
+     "x": 855.9999998834398,
+     "y": 9.999992540147568
+    },
+    "przyciety": {
+     "W": 1121.0,
+     "H": 297.0000023735894,
+     "pole_m2": 0.33293700266079373
+    },
+    "skladanie": {
+     "zgiecia_pionowe": [
+      210.0,
+      345.0,
+      480.0,
+      615.0,
+      750.0,
+      940.0
+     ],
+     "zgiecia_poziome": [],
+     "pasy": [
+      210.0,
+      135.0,
+      135.0,
+      135.0,
+      135.0,
+      190.0,
+      190.0
+     ],
+     "rzedy": [
+      297.0
+     ],
+     "n_pasow": 7,
+     "n_rzedow": 1,
+     "warstwy": 7,
+     "wykorzystanie_paczki": 0.7687075015927722,
+     "ocena": "poprawne",
+     "ocena_pion": "poprawne",
+     "ocena_poziom": "dobre",
+     "uwagi": [
+      "najwęższy pas pośredni 135 mm",
+      "pasy nierówne (rozrzut 55 mm)"
+     ]
+    },
+    "nr": "PT-IS-04",
+    "tytul": "KANALIZACJA SANITARNA — RZUTY I PIĘTRA I II PIĘTRA",
+    "skala": "1:50",
+    "pdf": "projekt/05_PT_instalacje_sanitarne/rysunki/PT-IS-04_kanalizacja_sanitarna_rzuty_i_pietra_i_ii_pietra.pdf",
+    "format": "1130×297"
+   },
+   {
+    "W": 594.0000047471788,
+    "H": 809.9999986436632,
+    "frame": [
+     19.999999883439806,
+     9.999992540147568,
+     584.0000122070312,
+     800.0000061035156
+    ],
+    "tb": [
+     404.0000172932942,
+     697.0000054253471,
+     584.0000122070312,
+     800.0000061035156
+    ],
+    "pole_arkusza_m2": 0.48114000303955073,
+    "pole_ramki_m2": 0.4455600173853769,
+    "pole_tabliczki_m2": 0.018824,
+    "n_prymitywow": 12218,
+    "bloki": [
+     [
+      34.0,
+      18.0,
+      551.0,
+      322.0
+     ],
+     [
+      28.0,
+      338.0,
+      558.0,
+      792.0
+     ],
+     [
+      41.0,
+      758.0,
+      167.0,
+      767.0
+     ]
+    ],
+    "wypelnienie": 0.9021949553707709,
+    "wypelnienie_rys": 0.897880620313278,
+    "wypelnienie_kontur": 0.6607662009882632,
+    "wypelnienie_skl": 0.83765595079683,
+    "pusty_prostokat": {
+     "pole_m2": 0.017836,
+     "w": 26.0,
+     "h": 686.0,
+     "x": 557.9999998834398,
+     "y": 9.999992540147568
+    },
+    "przyciety": {
+     "W": 587.0,
+     "H": 803.0,
+     "pole_m2": 0.471361
+    },
+    "skladanie": {
+     "zgiecia_pionowe": [
+      210.0,
+      402.0
+     ],
+     "zgiecia_poziome": [
+      297.0,
+      594.0
+     ],
+     "pasy": [
+      210.0,
+      192.0,
+      192.0
+     ],
+     "rzedy": [
+      297.0,
+      297.0,
+      216.0
+     ],
+     "n_pasow": 3,
+     "n_rzedow": 3,
+     "warstwy": 9,
+     "wykorzystanie_paczki": 0.857142862557766,
+     "ocena": "poprawne",
+     "ocena_pion": "dobre",
+     "ocena_poziom": "poprawne",
+     "uwagi": [
+      "górny rząd 216 mm (niepełny)"
+     ]
+    },
+    "nr": "PT-IS-05",
+    "tytul": "ODWODNIENIE DACHÓW — RZUT DACHU I RZUT PARTERU",
+    "skala": "1:50",
+    "pdf": "projekt/05_PT_instalacje_sanitarne/rysunki/PT-IS-05_odwodnienie_dachow_rzut_dachu_i_rzut_parteru.pdf",
+    "format": "594×810"
+   },
+   {
+    "W": 594.0000047471788,
+    "H": 450.0000088161892,
+    "frame": [
+     19.999999883439806,
+     9.999992540147568,
+     584.0000122070312,
+     440.0000162760416
+    ],
+    "tb": [
+     404.0000172932942,
+     337.00001559787324,
+     584.0000122070312,
+     440.0000162760416
+    ],
+    "pole_arkusza_m2": 0.2673000073730469,
+    "pole_ramki_m2": 0.24252001868618883,
+    "pole_tabliczki_m2": 0.018824,
+    "n_prymitywow": 7801,
+    "bloki": [
+     [
+      28.0,
+      19.0,
+      570.0,
+      433.0
+     ],
+     [
+      41.0,
+      417.0,
+      167.0,
+      426.0
+     ]
+    ],
+    "wypelnienie": 0.9371432561783117,
+    "wypelnienie_rys": 0.931853866797809,
+    "wypelnienie_kontur": 0.7010431589154509,
+    "wypelnienie_skl": 0.8817663843111778,
+    "pusty_prostokat": {
+     "pole_m2": 0.004564,
+     "w": 14.0,
+     "h": 326.0,
+     "x": 569.9999998834398,
+     "y": 9.999992540147568
+    },
+    "przyciety": {
+     "W": 587.0,
+     "H": 442.0,
+     "pole_m2": 0.259454
+    },
+    "skladanie": {
+     "zgiecia_pionowe": [
+      210.0,
+      402.0
+     ],
+     "zgiecia_poziome": [
+      297.0
+     ],
+     "pasy": [
+      210.0,
+      192.0,
+      192.0
+     ],
+     "rzedy": [
+      297.0,
+      153.0
+     ],
+     "n_pasow": 3,
+     "n_rzedow": 2,
+     "warstwy": 6,
+     "wykorzystanie_paczki": 0.7142857339881538,
+     "ocena": "poprawne",
+     "ocena_pion": "dobre",
+     "ocena_poziom": "poprawne",
+     "uwagi": [
+      "górny rząd 153 mm (niepełny)"
+     ]
+    },
+    "nr": "PT-IS-06",
+    "tytul": "OGRZEWANIE — RZUT PARTERU",
+    "skala": "1:50",
+    "pdf": "projekt/05_PT_instalacje_sanitarne/rysunki/PT-IS-06_ogrzewanie_rzut_parteru.pdf",
+    "format": "594×450"
+   },
+   {
+    "W": 1309.9999701605902,
+    "H": 297.0000023735894,
+    "frame": [
+     19.999999883439806,
+     9.999992540147568,
+     1299.9999776204427,
+     287.0000098334418
+    ],
+    "tb": [
+     1120.0000257703991,
+     184.00000915527343,
+     1299.9999776204427,
+     287.0000098334418
+    ],
+    "pole_arkusza_m2": 0.3890699942470974,
+    "pole_ramki_m2": 0.35456001596856607,
+    "pole_tabliczki_m2": 0.01872,
+    "n_prymitywow": 9409,
+    "bloki": [
+     [
+      936.0,
+      10.0,
+      1114.0,
+      157.0
+     ],
+     [
+      1120.0,
+      10.0,
+      1300.0,
+      69.0
+     ],
+     [
+      28.0,
+      19.0,
+      470.0,
+      288.0
+     ],
+     [
+      486.0,
+      37.0,
+      871.0,
+      288.0
+     ],
+     [
+      915.0,
+      44.0,
+      923.0,
+      271.0
+     ],
+     [
+      1268.0,
+      146.0,
+      1282.0,
+      172.0
+     ],
+     [
+      1123.0,
+      160.0,
+      1249.0,
+      169.0
+     ]
+    ],
+    "wypelnienie": 0.7737843739952986,
+    "wypelnienie_rys": 0.7611749280762502,
+    "wypelnienie_kontur": 0.6346936762885044,
+    "wypelnienie_skl": 0.7737843739952986,
+    "pusty_prostokat": {
+     "pole_m2": 0.02548,
+     "w": 196.0,
+     "h": 130.0,
+     "x": 923.9999998834398,
+     "y": 157.99999254014756
+    },
+    "przyciety": {
+     "W": 1302.0,
+     "H": 297.0000023735894,
+     "pole_m2": 0.3866940030904134
+    },
+    "skladanie": {
+     "zgiecia_pionowe": [
+      203.3,
+      386.7,
+      570.0,
+      753.3,
+      936.7,
+      1120.0
+     ],
+     "zgiecia_poziome": [],
+     "pasy": [
+      203.3,
+      183.3,
+      183.3,
+      183.3,
+      183.3,
+      183.3,
+      190.0
+     ],
+     "rzedy": [
+      297.0
+     ],
+     "n_pasow": 7,
+     "n_rzedow": 1,
+     "warstwy": 7,
+     "wykorzystanie_paczki": 0.8911564494081343,
+     "ocena": "dobre",
+     "ocena_pion": "dobre",
+     "ocena_poziom": "dobre",
+     "uwagi": []
+    },
+    "nr": "PT-IS-07",
+    "tytul": "OGRZEWANIE — RZUTY I PIĘTRA I II PIĘTRA",
+    "skala": "1:50",
+    "pdf": "projekt/05_PT_instalacje_sanitarne/rysunki/PT-IS-07_ogrzewanie_rzuty_i_pietra_i_ii_pietra.pdf",
+    "format": "1310×297"
+   },
+   {
+    "W": 594.0000047471788,
+    "H": 450.0000088161892,
+    "frame": [
+     19.999999883439806,
+     9.999992540147568,
+     584.0000122070312,
+     440.0000162760416
+    ],
+    "tb": [
+     404.0000172932942,
+     337.00001559787324,
+     584.0000122070312,
+     440.0000162760416
+    ],
+    "pole_arkusza_m2": 0.2673000073730469,
+    "pole_ramki_m2": 0.24252001868618883,
+    "pole_tabliczki_m2": 0.018824,
+    "n_prymitywow": 9315,
+    "bloki": [
+     [
+      28.0,
+      19.0,
+      502.0,
+      426.0
+     ]
+    ],
+    "wypelnienie": 0.837126770399518,
+    "wypelnienie_rys": 0.8234210026705872,
+    "wypelnienie_kontur": 0.6568488690664606,
+    "wypelnienie_skl": 0.7751195180437503,
+    "pusty_prostokat": {
+     "pole_m2": 0.026732,
+     "w": 82.0,
+     "h": 326.0,
+     "x": 501.9999998834398,
+     "y": 9.999992540147568
+    },
+    "przyciety": {
+     "W": 587.0,
+     "H": 442.0,
+     "pole_m2": 0.259454
+    },
+    "skladanie": {
+     "zgiecia_pionowe": [
+      210.0,
+      402.0
+     ],
+     "zgiecia_poziome": [
+      297.0
+     ],
+     "pasy": [
+      210.0,
+      192.0,
+      192.0
+     ],
+     "rzedy": [
+      297.0,
+      153.0
+     ],
+     "n_pasow": 3,
+     "n_rzedow": 2,
+     "warstwy": 6,
+     "wykorzystanie_paczki": 0.7142857339881538,
+     "ocena": "poprawne",
+     "ocena_pion": "dobre",
+     "ocena_poziom": "poprawne",
+     "uwagi": [
+      "górny rząd 153 mm (niepełny)"
+     ]
+    },
+    "nr": "PT-IS-08",
+    "tytul": "WENTYLACJA MECHANICZNA — RZUT PARTERU",
+    "skala": "1:50",
+    "pdf": "projekt/05_PT_instalacje_sanitarne/rysunki/PT-IS-08_wentylacja_mechaniczna_rzut_parteru.pdf",
+    "format": "594×450"
+   },
+   {
+    "W": 1309.9999701605902,
+    "H": 297.0000023735894,
+    "frame": [
+     19.999999883439806,
+     9.999992540147568,
+     1299.9999776204427,
+     287.0000098334418
+    ],
+    "tb": [
+     1120.0000257703991,
+     184.00000915527343,
+     1299.9999776204427,
+     287.0000098334418
+    ],
+    "pole_arkusza_m2": 0.3890699942470974,
+    "pole_ramki_m2": 0.35456001596856607,
+    "pole_tabliczki_m2": 0.01872,
+    "n_prymitywow": 14079,
+    "bloki": [
+     [
+      936.0,
+      10.0,
+      1300.0,
+      137.0
+     ],
+     [
+      28.0,
+      19.0,
+      470.0,
+      288.0
+     ],
+     [
+      487.0,
+      37.0,
+      879.0,
+      288.0
+     ],
+     [
+      915.0,
+      44.0,
+      923.0,
+      271.0
+     ],
+     [
+      1268.0,
+      146.0,
+      1282.0,
+      172.0
+     ],
+     [
+      1123.0,
+      160.0,
+      1249.0,
+      169.0
+     ]
+    ],
+    "wypelnienie": 0.8053699998290725,
+    "wypelnienie_rys": 0.7945211627937003,
+    "wypelnienie_kontur": 0.6525947359515959,
+    "wypelnienie_skl": 0.764104771543159,
+    "pusty_prostokat": {
+     "pole_m2": 0.0294,
+     "w": 196.0,
+     "h": 150.0,
+     "x": 923.9999998834398,
+     "y": 137.99999254014756
+    },
+    "przyciety": {
+     "W": 1302.0,
+     "H": 297.0000023735894,
+     "pole_m2": 0.3866940030904134
+    },
+    "skladanie": {
+     "zgiecia_pionowe": [
+      203.3,
+      386.7,
+      570.0,
+      753.3,
+      936.7,
+      1120.0
+     ],
+     "zgiecia_poziome": [],
+     "pasy": [
+      203.3,
+      183.3,
+      183.3,
+      183.3,
+      183.3,
+      183.3,
+      190.0
+     ],
+     "rzedy": [
+      297.0
+     ],
+     "n_pasow": 7,
+     "n_rzedow": 1,
+     "warstwy": 7,
+     "wykorzystanie_paczki": 0.8911564494081343,
+     "ocena": "dobre",
+     "ocena_pion": "dobre",
+     "ocena_poziom": "dobre",
+     "uwagi": []
+    },
+    "nr": "PT-IS-09",
+    "tytul": "WENTYLACJA MECHANICZNA — RZUTY I PIĘTRA I II PIĘTRA",
+    "skala": "1:50",
+    "pdf": "projekt/05_PT_instalacje_sanitarne/rysunki/PT-IS-09_wentylacja_mechaniczna_rzuty_i_pietra_i_ii_pietr.pdf",
+    "format": "1310×297"
+   },
+   {
+    "W": 1409.999981689453,
+    "H": 297.0000023735894,
+    "frame": [
+     19.999999883439806,
+     9.999992540147568,
+     1399.9999891493055,
+     287.0000098334418
+    ],
+    "tb": [
+     1220.000037299262,
+     184.00000915527343,
+     1399.9999891493055,
+     287.0000098334418
+    ],
+    "pole_arkusza_m2": 0.41876999790852854,
+    "pole_ramki_m2": 0.38226002089139066,
+    "pole_tabliczki_m2": 0.01872,
+    "n_prymitywow": 1227,
+    "bloki": [
+     [
+      1220.0,
+      10.0,
+      1400.0,
+      146.0
+     ],
+     [
+      28.0,
+      25.0,
+      526.0,
+      276.0
+     ],
+     [
+      543.0,
+      77.0,
+      1204.0,
+      276.0
+     ],
+     [
+      1031.0,
+      192.0,
+      1036.0,
+      207.0
+     ]
+    ],
+    "wypelnienie": 0.784118096632351,
+    "wypelnienie_rys": 0.7730015510010524,
+    "wypelnienie_kontur": 0.3004447070666359,
+    "wypelnienie_skl": 0.7720268504977906,
+    "pusty_prostokat": {
+     "pole_m2": 0.045804,
+     "w": 694.0,
+     "h": 66.0,
+     "x": 525.9999998834398,
+     "y": 9.999992540147568
+    },
+    "przyciety": {
+     "W": 1402.0,
+     "H": 297.0000023735894,
+     "pole_m2": 0.4163940033277723
+    },
+    "skladanie": {
+     "zgiecia_pionowe": [
+      210.0,
+      410.0,
+      610.0,
+      810.0,
+      1010.0,
+      1210.0
+     ],
+     "zgiecia_poziome": [],
+     "pasy": [
+      210.0,
+      200.0,
+      200.0,
+      200.0,
+      200.0,
+      200.0,
+      200.0
+     ],
+     "rzedy": [
+      297.0
+     ],
+     "n_pasow": 7,
+     "n_rzedow": 1,
+     "warstwy": 7,
+     "wykorzystanie_paczki": 0.9591836686789174,
+     "ocena": "dobre",
+     "ocena_pion": "dobre",
+     "ocena_poziom": "dobre",
+     "uwagi": []
+    },
+    "nr": "PT-IS-10",
+    "tytul": "KANALIZACJA I WODOCIĄG — ROZWINIĘCIA",
+    "skala": "—",
+    "pdf": "projekt/05_PT_instalacje_sanitarne/rysunki/PT-IS-10_kanalizacja_i_wodociag_rozwiniecia.pdf",
+    "format": "1410×297"
+   },
+   {
+    "W": 510.0000071207682,
+    "H": 419.9999881320529,
+    "frame": [
+     19.999999883439806,
+     9.999992540147568,
+     500.0000145806206,
+     409.99999559190536
+    ],
+    "tb": [
+     319.9999981350369,
+     306.99999491373694,
+     500.0000145806206,
+     409.99999559190536
+    ],
+    "pole_arkusza_m2": 0.21419999693806954,
+    "pole_ramki_m2": 0.1920000073437161,
+    "pole_tabliczki_m2": 0.018824,
+    "n_prymitywow": 516,
+    "bloki": [
+     [
+      28.0,
+      18.0,
+      501.0,
+      340.0
+     ]
+    ],
+    "wypelnienie": 0.8601926754322354,
+    "wypelnienie_rys": 0.8449958065470429,
+    "wypelnienie_kontur": 0.42841144194722913,
+    "wypelnienie_skl": 0.7972239278406968,
+    "pusty_prostokat": {
+     "pole_m2": 0.021,
+     "w": 300.0,
+     "h": 70.0,
+     "x": 19.999999883439806,
+     "y": 339.99999254014756
+    },
+    "przyciety": {
+     "W": 503.0,
+     "H": 413.0,
+     "pole_m2": 0.207739
+    },
+    "skladanie": {
+     "zgiecia_pionowe": [
+      170.0,
+      320.0
+     ],
+     "zgiecia_poziome": [
+      297.0
+     ],
+     "pasy": [
+      170.0,
+      150.0,
+      190.0
+     ],
+     "rzedy": [
+      297.0,
+      123.0
+     ],
+     "n_pasow": 3,
+     "n_rzedow": 2,
+     "warstwy": 6,
+     "wykorzystanie_paczki": 0.5723905642084056,
+     "ocena": "poprawne",
+     "ocena_pion": "poprawne",
+     "ocena_poziom": "poprawne",
+     "uwagi": [
+      "najwęższy pas pośredni 150 mm",
+      "górny rząd 123 mm (niepełny)"
+     ]
+    },
+    "nr": "PT-IS-11",
+    "tytul": "SCHEMAT POMPY CIEPŁA, C.O. I C.W.U.",
+    "skala": "—",
+    "pdf": "projekt/05_PT_instalacje_sanitarne/rysunki/PT-IS-11_schemat_pompy_ciepla_c_o_i_c_w_u.pdf",
+    "format": "510×420"
+   }
+  ],
+  "sumy": {
+   "arkuszy": 11,
+   "pole_m2": 3.694290003481715,
+   "a4_ekw": 59.23184228766579,
+   "pole_ramki_m2": 3.367020178283469,
+   "wypelnienie_wazone": 0.8407763690454682,
+   "wypelnienie_srednie": 0.8438797112062805,
+   "wypelnienie_min": 0.7737843739952986,
+   "najgorsze": "PT-IS-07",
+   "puste_m2": 0.536109178283469,
+   "przyciete_m2": 3.6329320148301867,
+   "warstwy_a4": 74,
+   "formaty": {
+    "610×510": 1,
+    "1130×297": 2,
+    "594×480": 1,
+    "594×810": 1,
+    "594×450": 2,
+    "1310×297": 2,
+    "1410×297": 1,
+    "510×420": 1
+   },
+   "oceny_skladania": {
+    "dobre": 3,
+    "poprawne": 8,
+    "słabe": 0
+   }
+  }
+ },
+ {
+  "komplet": "IE",
+  "katalog": "projekt/06_PT_instalacje_elektryczne/rysunki",
+  "stan_plikow": "2026-09-25 10:50",
+  "arkusze": [
+   {
+    "W": 594.0000047471788,
+    "H": 440.0000162760416,
+    "frame": [
+     19.999999883439806,
+     10.000035603841145,
+     584.0000122070312,
+     430.00002373589405
+    ],
+    "tb": [
+     404.0000172932942,
+     327.0000230577257,
+     584.0000122070312,
+     430.00002373589405
+    ],
+    "pole_arkusza_m2": 0.26136001175672746,
+    "pole_ramki_m2": 0.23687999848238608,
+    "pole_tabliczki_m2": 0.018643,
+    "n_prymitywow": 12685,
+    "bloki": [
+     [
+      28.0,
+      18.0,
+      525.0,
+      410.0
+     ],
+     [
+      41.0,
+      398.0,
+      167.0,
+      408.0
+     ]
+    ],
+    "wypelnienie": 0.8587639366061808,
+    "wypelnienie_rys": 0.8466987783233908,
+    "wypelnienie_kontur": 0.6791413417370582,
+    "wypelnienie_skl": 0.7934143921145589,
+    "pusty_prostokat": {
+     "pole_m2": 0.018328,
+     "w": 58.0,
+     "h": 316.0,
+     "x": 525.9999998834398,
+     "y": 10.000035603841145
+    },
+    "przyciety": {
+     "W": 587.0,
+     "H": 432.0,
+     "pole_m2": 0.253584
+    },
+    "skladanie": {
+     "zgiecia_pionowe": [
+      210.0,
+      402.0
+     ],
+     "zgiecia_poziome": [
+      297.0
+     ],
+     "pasy": [
+      210.0,
+      192.0,
+      192.0
+     ],
+     "rzedy": [
+      297.0,
+      143.0
+     ],
+     "n_pasow": 3,
+     "n_rzedow": 2,
+     "warstwy": 6,
+     "wykorzystanie_paczki": 0.6984127298293181,
+     "ocena": "poprawne",
+     "ocena_pion": "dobre",
+     "ocena_poziom": "poprawne",
+     "uwagi": [
+      "górny rząd 143 mm (niepełny)"
+     ]
+    },
+    "nr": "PT-IE-01",
+    "tytul": "INSTALACJA OŚWIETLENIA — RZUT PARTERU",
+    "skala": "1:50",
+    "pdf": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-01_instalacja_oswietlenia_rzut_parteru.pdf",
+    "format": "594×440"
+   },
+   {
+    "W": 690.0000020345052,
+    "H": 297.0000023735894,
+    "frame": [
+     19.999999883439806,
+     9.999992540147568,
+     680.0000094943575,
+     287.0000098334418
+    ],
+    "tb": [
+     500.0000145806206,
+     184.00000915527343,
+     680.0000094943575,
+     287.0000098334418
+    ],
+    "pole_arkusza_m2": 0.20493000224202473,
+    "pole_ramki_m2": 0.18282001407579856,
+    "pole_tabliczki_m2": 0.018824,
+    "n_prymitywow": 7993,
+    "bloki": [
+     [
+      500.0,
+      10.0,
+      681.0,
+      129.0
+     ],
+     [
+      35.0,
+      19.0,
+      477.0,
+      288.0
+     ],
+     [
+      647.0,
+      146.0,
+      662.0,
+      172.0
+     ],
+     [
+      503.0,
+      160.0,
+      629.0,
+      169.0
+     ]
+    ],
+    "wypelnienie": 0.8794715437082141,
+    "wypelnienie_rys": 0.8656368924575567,
+    "wypelnienie_kontur": 0.7400557356040068,
+    "wypelnienie_skl": 0.8794715437082141,
+    "pusty_prostokat": {
+     "pole_m2": 0.006116,
+     "w": 22.0,
+     "h": 278.0,
+     "x": 477.9999998834398,
+     "y": 9.999992540147568
+    },
+    "przyciety": {
+     "W": 676.0,
+     "H": 297.0000023735894,
+     "pole_m2": 0.20077200160454642
+    },
+    "skladanie": {
+     "zgiecia_pionowe": [
+      140.0,
+      260.0,
+      380.0,
+      500.0
+     ],
+     "zgiecia_poziome": [],
+     "pasy": [
+      140.0,
+      120.0,
+      120.0,
+      120.0,
+      190.0
+     ],
+     "rzedy": [
+      297.0
+     ],
+     "n_pasow": 5,
+     "n_rzedow": 1,
+     "warstwy": 5,
+     "wykorzystanie_paczki": 0.6571428643322903,
+     "ocena": "poprawne",
+     "ocena_pion": "poprawne",
+     "ocena_poziom": "dobre",
+     "uwagi": [
+      "najwęższy pas pośredni 120 mm"
+     ]
+    },
+    "nr": "PT-IE-02",
+    "tytul": "INSTALACJA OŚWIETLENIA — RZUT I PIĘTRA",
+    "skala": "1:50",
+    "pdf": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-02_instalacja_oswietlenia_rzut_i_pietra.pdf",
+    "format": "690×297"
+   },
+   {
+    "W": 570.0000054253471,
+    "H": 297.0000023735894,
+    "frame": [
+     19.999999883439806,
+     9.999992540147568,
+     560.0000128851996,
+     287.0000098334418
+    ],
+    "tb": [
+     380.0000179714626,
+     184.00000915527343,
+     560.0000128851996,
+     287.0000098334418
+    ],
+    "pole_arkusza_m2": 0.16929000296427404,
+    "pole_ramki_m2": 0.14958001293986659,
+    "pole_tabliczki_m2": 0.018824,
+    "n_prymitywow": 6649,
+    "bloki": [
+     [
+      380.0,
+      10.0,
+      561.0,
+      129.0
+     ],
+     [
+      28.0,
+      28.0,
+      365.0,
+      273.0
+     ],
+     [
+      527.0,
+      146.0,
+      542.0,
+      172.0
+     ],
+     [
+      383.0,
+      160.0,
+      509.0,
+      169.0
+     ]
+    ],
+    "wypelnienie": 0.8320095549799931,
+    "wypelnienie_rys": 0.8078251823767164,
+    "wypelnienie_kontur": 0.7105361064698328,
+    "wypelnienie_skl": 0.8320095549799931,
+    "pusty_prostokat": {
+     "pole_m2": 0.00648,
+     "w": 360.0,
+     "h": 18.0,
+     "x": 19.999999883439806,
+     "y": 9.999992540147568
+    },
+    "przyciety": {
+     "W": 563.0,
+     "H": 297.0000023735894,
+     "pole_m2": 0.16721100133633082
+    },
+    "skladanie": {
+     "zgiecia_pionowe": [
+      200.0,
+      380.0
+     ],
+     "zgiecia_poziome": [],
+     "pasy": [
+      200.0,
+      180.0,
+      190.0
+     ],
+     "rzedy": [
+      297.0
+     ],
+     "n_pasow": 3,
+     "n_rzedow": 1,
+     "warstwy": 3,
+     "wykorzystanie_paczki": 0.9047619206043186,
+     "ocena": "dobre",
+     "ocena_pion": "dobre",
+     "ocena_poziom": "dobre",
+     "uwagi": []
+    },
+    "nr": "PT-IE-03",
+    "tytul": "INSTALACJA OŚWIETLENIA — RZUT II PIĘTRA",
+    "skala": "1:50",
+    "pdf": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-03_instalacja_oswietlenia_rzut_ii_pietra.pdf",
+    "format": "570×297"
+   },
+   {
+    "W": 594.0000047471788,
+    "H": 500.0000145806206,
+    "frame": [
+     19.999999883439806,
+     10.000035603841145,
+     584.0000122070312,
+     490.000022040473
+    ],
+    "tb": [
+     404.0000172932942,
+     387.00002136230466,
+     584.0000122070312,
+     490.000022040473
+    ],
+    "pole_arkusza_m2": 0.2970000110344781,
+    "pole_ramki_m2": 0.27071999826558407,
+    "pole_tabliczki_m2": 0.018643,
+    "n_prymitywow": 10562,
+    "bloki": [
+     [
+      28.0,
+      18.0,
+      539.0,
+      482.0
+     ],
+     [
+      561.0,
+      349.0,
+      576.0,
+      374.0
+     ]
+    ],
+    "wypelnienie": 0.8987034632045124,
+    "wypelnienie_rys": 0.8912118183956965,
+    "wypelnienie_kontur": 0.6604499155788078,
+    "wypelnienie_skl": 0.8350140419926924,
+    "pusty_prostokat": {
+     "pole_m2": 0.014872,
+     "w": 44.0,
+     "h": 338.0,
+     "x": 539.9999998834398,
+     "y": 10.000035603841145
+    },
+    "przyciety": {
+     "W": 587.0,
+     "H": 492.0,
+     "pole_m2": 0.288804
+    },
+    "skladanie": {
+     "zgiecia_pionowe": [
+      210.0,
+      402.0
+     ],
+     "zgiecia_poziome": [
+      297.0
+     ],
+     "pasy": [
+      210.0,
+      192.0,
+      192.0
+     ],
+     "rzedy": [
+      297.0,
+      203.0
+     ],
+     "n_pasow": 3,
+     "n_rzedow": 2,
+     "warstwy": 6,
+     "wykorzystanie_paczki": 0.7936508231374007,
+     "ocena": "poprawne",
+     "ocena_pion": "dobre",
+     "ocena_poziom": "poprawne",
+     "uwagi": [
+      "górny rząd 203 mm (niepełny)"
+     ]
+    },
+    "nr": "PT-IE-04",
+    "tytul": "GNIAZDA I ZASILANIE URZĄDZEŃ — RZUT PARTERU",
+    "skala": "1:50",
+    "pdf": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-04_gniazda_i_zasilanie_urzadzen_rzut_parteru.pdf",
+    "format": "594×500"
+   },
+   {
+    "W": 594.0000047471788,
+    "H": 419.9999881320529,
+    "frame": [
+     19.999999883439806,
+     9.999992540147568,
+     584.0000122070312,
+     409.99999559190536
+    ],
+    "tb": [
+     404.0000172932942,
+     306.99999491373694,
+     584.0000122070312,
+     409.99999559190536
+    ],
+    "pole_arkusza_m2": 0.24947999494425446,
+    "pole_ramki_m2": 0.22560000665062796,
+    "pole_tabliczki_m2": 0.018824,
+    "n_prymitywow": 5787,
+    "bloki": [
+     [
+      35.0,
+      19.0,
+      477.0,
+      389.0
+     ]
+    ],
+    "wypelnienie": 0.7818173528387573,
+    "wypelnienie_rys": 0.7619549412529556,
+    "wypelnienie_kontur": 0.6485638106677455,
+    "wypelnienie_skl": 0.7818173528387573,
+    "pusty_prostokat": {
+     "pole_m2": 0.031376,
+     "w": 106.0,
+     "h": 296.0,
+     "x": 477.9999998834398,
+     "y": 9.999992540147568
+    },
+    "przyciety": {
+     "W": 580.0,
+     "H": 412.0,
+     "pole_m2": 0.23896
+    },
+    "skladanie": {
+     "zgiecia_pionowe": [
+      210.0,
+      402.0
+     ],
+     "zgiecia_poziome": [
+      297.0
+     ],
+     "pasy": [
+      210.0,
+      192.0,
+      192.0
+     ],
+     "rzedy": [
+      297.0,
+      123.0
+     ],
+     "n_pasow": 3,
+     "n_rzedow": 2,
+     "warstwy": 6,
+     "wykorzystanie_paczki": 0.6666666531565776,
+     "ocena": "poprawne",
+     "ocena_pion": "dobre",
+     "ocena_poziom": "poprawne",
+     "uwagi": [
+      "górny rząd 123 mm (niepełny)"
+     ]
+    },
+    "nr": "PT-IE-05",
+    "tytul": "GNIAZDA I ZASILANIE URZĄDZEŃ — RZUT I PIĘTRA",
+    "skala": "1:50",
+    "pdf": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-05_gniazda_i_zasilanie_urzadzen_rzut_i_pietra.pdf",
+    "format": "A2"
+   },
+   {
+    "W": 419.9999881320529,
+    "H": 450.0000088161892,
+    "frame": [
+     19.999999883439806,
+     9.999992540147568,
+     409.99999559190536,
+     440.0000162760416
+    ],
+    "tb": [
+     230.0000006781684,
+     337.00001559787324,
+     409.99999559190536,
+     440.0000162760416
+    ],
+    "pole_arkusza_m2": 0.18899999836222317,
+    "pole_ramki_m2": 0.16770000741163876,
+    "pole_tabliczki_m2": 0.01872,
+    "n_prymitywow": 5177,
+    "bloki": [
+     [
+      28.0,
+      19.0,
+      365.0,
+      429.0
+     ],
+     [
+      388.0,
+      299.0,
+      403.0,
+      325.0
+     ],
+     [
+      233.0,
+      313.0,
+      359.0,
+      322.0
+     ]
+    ],
+    "wypelnienie": 0.8638043744650805,
+    "wypelnienie_rys": 0.8466907888618185,
+    "wypelnienie_kontur": 0.6886642510188988,
+    "wypelnienie_skl": 0.7642993102879523,
+    "pusty_prostokat": {
+     "pole_m2": 0.012672,
+     "w": 44.0,
+     "h": 288.0,
+     "x": 365.9999998834398,
+     "y": 9.999992540147568
+    },
+    "przyciety": {
+     "W": 412.0,
+     "H": 442.0,
+     "pole_m2": 0.182104
+    },
+    "skladanie": {
+     "zgiecia_pionowe": [
+      125.0,
+      230.0
+     ],
+     "zgiecia_poziome": [
+      297.0
+     ],
+     "pasy": [
+      125.0,
+      105.0,
+      190.0
+     ],
+     "rzedy": [
+      297.0,
+      153.0
+     ],
+     "n_pasow": 3,
+     "n_rzedow": 2,
+     "warstwy": 6,
+     "wykorzystanie_paczki": 0.505050500673997,
+     "ocena": "poprawne",
+     "ocena_pion": "dobre",
+     "ocena_poziom": "poprawne",
+     "uwagi": [
+      "górny rząd 153 mm (niepełny)"
+     ]
+    },
+    "nr": "PT-IE-06",
+    "tytul": "GNIAZDA I ZASILANIE URZĄDZEŃ — RZUT II PIĘTRA",
+    "skala": "1:50",
+    "pdf": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-06_gniazda_i_zasilanie_urzadzen_rzut_ii_pietra.pdf",
+    "format": "420×450"
+   },
+   {
+    "W": 594.0000047471788,
+    "H": 469.99999389648434,
+    "frame": [
+     19.999999883439806,
+     9.999992540147568,
+     584.0000122070312,
+     460.0000013563368
+    ],
+    "tb": [
+     404.0000172932942,
+     357.00000067816836,
+     584.0000122070312,
+     460.0000013563368
+    ],
+    "pole_arkusza_m2": 0.2791799986056857,
+    "pole_ramki_m2": 0.25380001051794693,
+    "pole_tabliczki_m2": 0.018824,
+    "n_prymitywow": 7436,
+    "bloki": [
+     [
+      28.0,
+      19.0,
+      502.0,
+      461.0
+     ],
+     [
+      41.0,
+      371.0,
+      167.0,
+      381.0
+     ]
+    ],
+    "wypelnienie": 0.8594956302595373,
+    "wypelnienie_rys": 0.8482397822682273,
+    "wypelnienie_kontur": 0.5987076190024627,
+    "wypelnienie_skl": 0.7639715995452611,
+    "pusty_prostokat": {
+     "pole_m2": 0.028372,
+     "w": 82.0,
+     "h": 346.0,
+     "x": 501.9999998834398,
+     "y": 9.999992540147568
+    },
+    "przyciety": {
+     "W": 587.0,
+     "H": 462.0,
+     "pole_m2": 0.271194
+    },
+    "skladanie": {
+     "zgiecia_pionowe": [
+      210.0,
+      402.0
+     ],
+     "zgiecia_poziome": [
+      297.0
+     ],
+     "pasy": [
+      210.0,
+      192.0,
+      192.0
+     ],
+     "rzedy": [
+      297.0,
+      173.0
+     ],
+     "n_pasow": 3,
+     "n_rzedow": 2,
+     "warstwy": 6,
+     "wykorzystanie_paczki": 0.7460317423058247,
+     "ocena": "poprawne",
+     "ocena_pion": "dobre",
+     "ocena_poziom": "poprawne",
+     "uwagi": [
+      "górny rząd 173 mm (niepełny)"
+     ]
+    },
+    "nr": "PT-IE-07",
+    "tytul": "TELETECHNIKA — RZUT PARTERU",
+    "skala": "1:50",
+    "pdf": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-07_teletechnika_rzut_parteru.pdf",
+    "format": "594×470"
+   },
+   {
+    "W": 690.0000020345052,
+    "H": 297.0000023735894,
+    "frame": [
+     19.999999883439806,
+     9.999992540147568,
+     680.0000094943575,
+     287.0000098334418
+    ],
+    "tb": [
+     500.0000145806206,
+     184.00000915527343,
+     680.0000094943575,
+     287.0000098334418
+    ],
+    "pole_arkusza_m2": 0.20493000224202473,
+    "pole_ramki_m2": 0.18282001407579856,
+    "pole_tabliczki_m2": 0.018824,
+    "n_prymitywow": 4856,
+    "bloki": [
+     [
+      500.0,
+      10.0,
+      681.0,
+      100.0
+     ],
+     [
+      35.0,
+      19.0,
+      477.0,
+      288.0
+     ],
+     [
+      647.0,
+      146.0,
+      662.0,
+      172.0
+     ],
+     [
+      503.0,
+      160.0,
+      629.0,
+      169.0
+     ]
+    ],
+    "wypelnienie": 0.8507602451858121,
+    "wypelnienie_rys": 0.8336300169881693,
+    "wypelnienie_kontur": 0.699671754466477,
+    "wypelnienie_skl": 0.8507602451858121,
+    "pusty_prostokat": {
+     "pole_m2": 0.01008,
+     "w": 168.0,
+     "h": 60.0,
+     "x": 477.9999998834398,
+     "y": 99.99999254014757
+    },
+    "przyciety": {
+     "W": 676.0,
+     "H": 297.0000023735894,
+     "pole_m2": 0.20077200160454642
+    },
+    "skladanie": {
+     "zgiecia_pionowe": [
+      140.0,
+      260.0,
+      380.0,
+      500.0
+     ],
+     "zgiecia_poziome": [],
+     "pasy": [
+      140.0,
+      120.0,
+      120.0,
+      120.0,
+      190.0
+     ],
+     "rzedy": [
+      297.0
+     ],
+     "n_pasow": 5,
+     "n_rzedow": 1,
+     "warstwy": 5,
+     "wykorzystanie_paczki": 0.6571428643322903,
+     "ocena": "poprawne",
+     "ocena_pion": "poprawne",
+     "ocena_poziom": "dobre",
+     "uwagi": [
+      "najwęższy pas pośredni 120 mm"
+     ]
+    },
+    "nr": "PT-IE-08",
+    "tytul": "TELETECHNIKA — RZUT I PIĘTRA",
+    "skala": "1:50",
+    "pdf": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-08_teletechnika_rzut_i_pietra.pdf",
+    "format": "690×297"
+   },
+   {
+    "W": 570.0000054253471,
+    "H": 297.0000023735894,
+    "frame": [
+     19.999999883439806,
+     9.999992540147568,
+     560.0000128851996,
+     287.0000098334418
+    ],
+    "tb": [
+     380.0000179714626,
+     184.00000915527343,
+     560.0000128851996,
+     287.0000098334418
+    ],
+    "pole_arkusza_m2": 0.16929000296427404,
+    "pole_ramki_m2": 0.14958001293986659,
+    "pole_tabliczki_m2": 0.018824,
+    "n_prymitywow": 4267,
+    "bloki": [
+     [
+      380.0,
+      10.0,
+      561.0,
+      100.0
+     ],
+     [
+      28.0,
+      28.0,
+      365.0,
+      273.0
+     ],
+     [
+      527.0,
+      146.0,
+      542.0,
+      172.0
+     ],
+     [
+      383.0,
+      160.0,
+      509.0,
+      169.0
+     ]
+    ],
+    "wypelnienie": 0.7969179682309655,
+    "wypelnienie_rys": 0.7676817130097362,
+    "wypelnienie_kontur": 0.662735602515642,
+    "wypelnienie_skl": 0.7969179682309655,
+    "pusty_prostokat": {
+     "pole_m2": 0.0096,
+     "w": 160.0,
+     "h": 60.0,
+     "x": 365.9999998834398,
+     "y": 99.99999254014757
+    },
+    "przyciety": {
+     "W": 563.0,
+     "H": 297.0000023735894,
+     "pole_m2": 0.16721100133633082
+    },
+    "skladanie": {
+     "zgiecia_pionowe": [
+      200.0,
+      380.0
+     ],
+     "zgiecia_poziome": [],
+     "pasy": [
+      200.0,
+      180.0,
+      190.0
+     ],
+     "rzedy": [
+      297.0
+     ],
+     "n_pasow": 3,
+     "n_rzedow": 1,
+     "warstwy": 3,
+     "wykorzystanie_paczki": 0.9047619206043186,
+     "ocena": "dobre",
+     "ocena_pion": "dobre",
+     "ocena_poziom": "dobre",
+     "uwagi": []
+    },
+    "nr": "PT-IE-09",
+    "tytul": "TELETECHNIKA — RZUT II PIĘTRA",
+    "skala": "1:50",
+    "pdf": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-09_teletechnika_rzut_ii_pietra.pdf",
+    "format": "570×297"
+   },
+   {
+    "W": 594.0000047471788,
+    "H": 440.0000162760416,
+    "frame": [
+     19.999999883439806,
+     10.000035603841145,
+     584.0000122070312,
+     430.00002373589405
+    ],
+    "tb": [
+     404.0000172932942,
+     327.0000230577257,
+     584.0000122070312,
+     430.00002373589405
+    ],
+    "pole_arkusza_m2": 0.26136001175672746,
+    "pole_ramki_m2": 0.23687999848238608,
+    "pole_tabliczki_m2": 0.018643,
+    "n_prymitywow": 2489,
+    "bloki": [
+     [
+      28.0,
+      18.0,
+      535.0,
+      414.0
+     ],
+     [
+      224.0,
+      402.0,
+      350.0,
+      412.0
+     ]
+    ],
+    "wypelnienie": 0.878157722613578,
+    "wypelnienie_rys": 0.8677492877784628,
+    "wypelnienie_kontur": 0.6478132429210165,
+    "wypelnienie_skl": 0.8021698801814597,
+    "pusty_prostokat": {
+     "pole_m2": 0.015168,
+     "w": 48.0,
+     "h": 316.0,
+     "x": 535.9999998834398,
+     "y": 10.000035603841145
+    },
+    "przyciety": {
+     "W": 587.0,
+     "H": 432.0,
+     "pole_m2": 0.253584
+    },
+    "skladanie": {
+     "zgiecia_pionowe": [
+      210.0,
+      402.0
+     ],
+     "zgiecia_poziome": [
+      297.0
+     ],
+     "pasy": [
+      210.0,
+      192.0,
+      192.0
+     ],
+     "rzedy": [
+      297.0,
+      143.0
+     ],
+     "n_pasow": 3,
+     "n_rzedow": 2,
+     "warstwy": 6,
+     "wykorzystanie_paczki": 0.6984127298293181,
+     "ocena": "poprawne",
+     "ocena_pion": "dobre",
+     "ocena_poziom": "poprawne",
+     "uwagi": [
+      "górny rząd 143 mm (niepełny)"
+     ]
+    },
+    "nr": "PT-IE-10",
+    "tytul": "INSTALACJA FOTOWOLTAICZNA — RZUT DACHU",
+    "skala": "1:50",
+    "pdf": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-10_instalacja_fotowoltaiczna_rzut_dachu.pdf",
+    "format": "594×440"
+   },
+   {
+    "W": 594.0000047471788,
+    "H": 440.0000162760416,
+    "frame": [
+     19.999999883439806,
+     10.000035603841145,
+     584.0000122070312,
+     430.00002373589405
+    ],
+    "tb": [
+     404.0000172932942,
+     327.0000230577257,
+     584.0000122070312,
+     430.00002373589405
+    ],
+    "pole_arkusza_m2": 0.26136001175672746,
+    "pole_ramki_m2": 0.23687999848238608,
+    "pole_tabliczki_m2": 0.018643,
+    "n_prymitywow": 7336,
+    "bloki": [
+     [
+      28.0,
+      18.0,
+      535.0,
+      430.0
+     ],
+     [
+      41.0,
+      345.0,
+      167.0,
+      354.0
+     ]
+    ],
+    "wypelnienie": 0.9035545481731128,
+    "wypelnienie_rys": 0.8953156493112694,
+    "wypelnienie_kontur": 0.6457193557073315,
+    "wypelnienie_skl": 0.782881632844107,
+    "pusty_prostokat": {
+     "pole_m2": 0.015168,
+     "w": 48.0,
+     "h": 316.0,
+     "x": 535.9999998834398,
+     "y": 10.000035603841145
+    },
+    "przyciety": {
+     "W": 587.0,
+     "H": 432.0,
+     "pole_m2": 0.253584
+    },
+    "skladanie": {
+     "zgiecia_pionowe": [
+      210.0,
+      402.0
+     ],
+     "zgiecia_poziome": [
+      297.0
+     ],
+     "pasy": [
+      210.0,
+      192.0,
+      192.0
+     ],
+     "rzedy": [
+      297.0,
+      143.0
+     ],
+     "n_pasow": 3,
+     "n_rzedow": 2,
+     "warstwy": 6,
+     "wykorzystanie_paczki": 0.6984127298293181,
+     "ocena": "poprawne",
+     "ocena_pion": "dobre",
+     "ocena_poziom": "poprawne",
+     "uwagi": [
+      "górny rząd 143 mm (niepełny)"
+     ]
+    },
+    "nr": "PT-IE-11",
+    "tytul": "INSTALACJA FOTOWOLTAICZNA — RZUT PARTERU (FALOWNIK, SPD)",
+    "skala": "1:50",
+    "pdf": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-11_instalacja_fotowoltaiczna_rzut_parteru_falownik_.pdf",
+    "format": "594×440"
+   },
+   {
+    "W": 609.9999755859375,
+    "H": 479.9999864366319,
+    "frame": [
+     19.999999883439806,
+     9.999992540147568,
+     599.9999830457899,
+     469.99999389648434
+    ],
+    "tb": [
+     419.9999881320529,
+     366.9999932183159,
+     599.9999830457899,
+     469.99999389648434
+    ],
+    "pole_arkusza_m2": 0.2927999800075958,
+    "pole_ramki_m2": 0.2667999930413563,
+    "pole_tabliczki_m2": 0.01872,
+    "n_prymitywow": 7205,
+    "bloki": [
+     [
+      20.0,
+      19.0,
+      582.0,
+      471.0
+     ],
+     [
+      577.0,
+      329.0,
+      592.0,
+      354.0
+     ],
+     [
+      423.0,
+      343.0,
+      549.0,
+      352.0
+     ]
+    ],
+    "wypelnienie": 0.9600674913072248,
+    "wypelnienie_rys": 0.9570542029176039,
+    "wypelnienie_kontur": 0.669666434257759,
+    "wypelnienie_skl": 0.8386844296705626,
+    "pusty_prostokat": {
+     "pole_m2": 0.012512,
+     "w": 184.0,
+     "h": 68.0,
+     "x": 19.999999883439806,
+     "y": 371.99999254014756
+    },
+    "przyciety": {
+     "W": 609.9999755859375,
+     "H": 472.0,
+     "pole_m2": 0.28791998847656247
+    },
+    "skladanie": {
+     "zgiecia_pionowe": [
+      210.0,
+      410.0
+     ],
+     "zgiecia_poziome": [
+      297.0
+     ],
+     "pasy": [
+      210.0,
+      200.0,
+      200.0
+     ],
+     "rzedy": [
+      297.0,
+      183.0
+     ],
+     "n_pasow": 3,
+     "n_rzedow": 2,
+     "warstwy": 6,
+     "wykorzystanie_paczki": 0.7824273956699155,
+     "ocena": "poprawne",
+     "ocena_pion": "dobre",
+     "ocena_poziom": "poprawne",
+     "uwagi": [
+      "górny rząd 183 mm (niepełny)"
+     ]
+    },
+    "nr": "PT-IE-12",
+    "tytul": "UZIOM I POŁĄCZENIA WYRÓWNAWCZE — RZUT PARTERU",
+    "skala": "1:50",
+    "pdf": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-12_uziom_i_polaczenia_wyrownawcze_rzut_parteru.pdf",
+    "format": "610×480"
+   },
+   {
+    "W": 594.0000047471788,
+    "H": 440.0000162760416,
+    "frame": [
+     19.999999883439806,
+     10.000035603841145,
+     584.0000122070312,
+     430.00002373589405
+    ],
+    "tb": [
+     404.0000172932942,
+     327.0000230577257,
+     584.0000122070312,
+     430.00002373589405
+    ],
+    "pole_arkusza_m2": 0.26136001175672746,
+    "pole_ramki_m2": 0.23687999848238608,
+    "pole_tabliczki_m2": 0.018643,
+    "n_prymitywow": 2409,
+    "bloki": [
+     [
+      28.0,
+      18.0,
+      487.0,
+      414.0
+     ],
+     [
+      41.0,
+      345.0,
+      167.0,
+      354.0
+     ]
+    ],
+    "wypelnienie": 0.8155437404495125,
+    "wypelnienie_rys": 0.7997864762334851,
+    "wypelnienie_kontur": 0.6324299263753144,
+    "wypelnienie_skl": 0.7156281707448804,
+    "pusty_prostokat": {
+     "pole_m2": 0.030336,
+     "w": 96.0,
+     "h": 316.0,
+     "x": 487.9999998834398,
+     "y": 10.000035603841145
+    },
+    "przyciety": {
+     "W": 587.0,
+     "H": 432.0,
+     "pole_m2": 0.253584
+    },
+    "skladanie": {
+     "zgiecia_pionowe": [
+      210.0,
+      402.0
+     ],
+     "zgiecia_poziome": [
+      297.0
+     ],
+     "pasy": [
+      210.0,
+      192.0,
+      192.0
+     ],
+     "rzedy": [
+      297.0,
+      143.0
+     ],
+     "n_pasow": 3,
+     "n_rzedow": 2,
+     "warstwy": 6,
+     "wykorzystanie_paczki": 0.6984127298293181,
+     "ocena": "poprawne",
+     "ocena_pion": "dobre",
+     "ocena_poziom": "poprawne",
+     "uwagi": [
+      "górny rząd 143 mm (niepełny)"
+     ]
+    },
+    "nr": "PT-IE-13",
+    "tytul": "OCHRONA ODGROMOWA I WYRÓWNANIE POTENCJAŁÓW — RZUT DACHU",
+    "skala": "1:50",
+    "pdf": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-13_ochrona_odgromowa_i_wyrownanie_potencjalow_rzut_.pdf",
+    "format": "594×440"
+   },
+   {
+    "W": 870.0000400119357,
+    "H": 297.0000023735894,
+    "frame": [
+     19.999999883439806,
+     9.999992540147568,
+     859.999961344401,
+     287.0000098334418
+    ],
+    "tb": [
+     680.0000094943575,
+     184.00000915527343,
+     859.999961344401,
+     287.0000098334418
+    ],
+    "pole_arkusza_m2": 0.25839001394856775,
+    "pole_ramki_m2": 0.23268000385105275,
+    "pole_tabliczki_m2": 0.01872,
+    "n_prymitywow": 1235,
+    "bloki": [
+     [
+      680.0,
+      10.0,
+      860.0,
+      91.0
+     ],
+     [
+      30.0,
+      31.0,
+      662.0,
+      270.0
+     ]
+    ],
+    "wypelnienie": 0.7922812315148838,
+    "wypelnienie_rys": 0.7741072958444194,
+    "wypelnienie_kontur": 0.707611299961112,
+    "wypelnienie_skl": 0.7922812315148838,
+    "pusty_prostokat": {
+     "pole_m2": 0.018216,
+     "w": 198.0,
+     "h": 92.0,
+     "x": 661.9999998834398,
+     "y": 91.99999254014757
+    },
+    "przyciety": {
+     "W": 860.0,
+     "H": 297.0000023735894,
+     "pole_m2": 0.2554200020412869
+    },
+    "skladanie": {
+     "zgiecia_pionowe": [
+      210.0,
+      350.0,
+      490.0,
+      680.0
+     ],
+     "zgiecia_poziome": [],
+     "pasy": [
+      210.0,
+      140.0,
+      140.0,
+      190.0,
+      190.0
+     ],
+     "rzedy": [
+      297.0
+     ],
+     "n_pasow": 5,
+     "n_rzedow": 1,
+     "warstwy": 5,
+     "wykorzystanie_paczki": 0.8285714732998805,
+     "ocena": "poprawne",
+     "ocena_pion": "poprawne",
+     "ocena_poziom": "dobre",
+     "uwagi": [
+      "najwęższy pas pośredni 140 mm",
+      "pasy nierówne (rozrzut 50 mm)"
+     ]
+    },
+    "nr": "PT-IE-14",
+    "tytul": "SCHEMAT ROZDZIELNICY GŁÓWNEJ RG",
+    "skala": "—",
+    "pdf": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-14_schemat_rozdzielnicy_glownej_rg.pdf",
+    "format": "870×297"
+   }
+  ],
+  "sumy": {
+   "arkuszy": 14,
+   "pole_m2": 3.359730054342312,
+   "a4_ekw": 53.86772573901414,
+   "pole_ramki_m2": 3.029620067699082,
+   "wypelnienie_wazone": 0.8587898620489417,
+   "wypelnienie_srednie": 0.8550963431098119,
+   "wypelnienie_min": 0.7818173528387573,
+   "najgorsze": "PT-IE-05",
+   "puste_m2": 0.4278130676990819,
+   "przyciete_m2": 3.2747039963996034,
+   "warstwy_a4": 75,
+   "formaty": {
+    "594×440": 4,
+    "690×297": 2,
+    "570×297": 2,
+    "594×500": 1,
+    "A2": 1,
+    "420×450": 1,
+    "594×470": 1,
+    "610×480": 1,
+    "870×297": 1
+   },
+   "oceny_skladania": {
+    "dobre": 2,
+    "poprawne": 12,
+    "słabe": 0
+   }
+  }
+ }
+]

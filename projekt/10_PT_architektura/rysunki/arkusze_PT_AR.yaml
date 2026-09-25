@@ -1,5 +1,6 @@
 # WYGENEROWANO (tools/dokumenty/tom_PT_AR.py) z model/arkusze.yaml — nie edytować ręcznie
 wspolne:
+  tytul_tomu: Projekt architektoniczno-budowlany — rysunki
   pracownia: PRACOWNIA PROJEKTOWA — nazwa do uzupełnienia
   pracownia_adres: adres pracowni do uzupełnienia
   inwestor: (do uzupełnienia)
@@ -20,7 +21,7 @@ wspolne:
   kolorystyka: true
   uwagi:
   - 'Rysunek projektu technicznego (RPB § 24 pkt 1) wykonany z tego samego stanu modelu co rysunki PB-AR-xx projektu architektoniczno-budowlanego
-    (tom I); stan modelu: SHA-256 42ac7a811873 (budynek, dzialka, instalacje, wyposazenie).'
+    (tom I); stan modelu: SHA-256 98826e2b39ab (budynek, dzialka, instalacje, wyposazenie).'
   - Układ warstw przegród, stolarka, wykończenia, odwodnienie — część opisowa PT-1 AR; węzły — detale PT-AR-D.
 przekroje:
 - id: A

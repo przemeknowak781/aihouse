@@ -16,10 +16,10 @@ Oznaczenia: **[ZAŁ]** — przyjęcie projektanta (jawne, do akceptacji), **[MOD
 | Zakres | Wynik | Źródło |
 |---|---|---|
 | Pozycje obliczeń statycznych | **148 / 148 spełnionych** | python3 -m lamela.obliczenia.konstrukcja → obliczenia_statyczne.md |
-| Kontrola zbrojenia rysunków (A_s,prov ≥ A_s,req, s ≤ s_max, A_s ≤ A_s,max) | **300 / 300** | rysunki/kontrola_zbrojenia.md (27 arkuszy PT-BO) |
+| Kontrola zbrojenia rysunków (A_s,prov ≥ A_s,req, s ≤ s_max, A_s ≤ A_s,max) | **315 / 315** | rysunki/kontrola_zbrojenia.md (27 arkuszy PT-BO) |
 | Docisk do podłoża (MES, maks.) | p_d = 272,8 kPa ≤ q_Rd = 318,8 kPa (η = 86 %) | PN-EN 1997-1 6.5.2, zał. D (DA2*) |
 | Osiadanie (MES, k_s nominalne) | w_k = 33,4 mm ≤ 50 mm | PN-EN 1997-1 zał. H |
-| EQU belek/wsporników | B4: zakotwienie reakcji odrywającej w słupie ŻB η = 13 %; B5: brak odrywania podpór (R_EQU ≥ 0) η = 0 % | PN-EN 1990 tabl. A1.2(A) |
+| EQU belek/wsporników | B4: zakotwienie reakcji odrywającej w słupie ŻB η = 12 %; B5: brak odrywania podpór (R_EQU ≥ 0) η = 0 % | PN-EN 1990 tabl. A1.2(A) |
 | Przebicie płyty fundamentowej (maks.) | v_Ed = 0,511 ≤ v_Rd = 0,668 MPa | PN-EN 1992-1-1 6.4.4 |
 | Słupy ŻB (maks. wykorzystanie) | SL19: 99 % | PN-EN 1992-1-1 5.8.8 |
 <!-- STAN:END -->
@@ -228,3 +228,11 @@ kategoria obciążenia płyt składowych (garaż — F), obwód przebicia przyci
 trzpienie ŻB na rzucie fundamentów (kreskowanie, opis); nowy arkusz PT-BO-27 „Zbrojenie słupów żelbetowych w murze”
 (`views/konstrukcja_slupy.py`, rejestracja w kontroli zbrojenia). Testy: `test_obliczenia_konstrukcja.py` (słup ŻB, EQU belki,
 pręty żebra, płyta z MES), `test_rysunki_konstrukcja.py` (arkusz słupów).
+Domknięcia tomu PT-BO (stan analiz — pozycje NIEZAMKNIĘTE → 0): nadproża — kombinacja 6.10a/6.10b z oddziaływaniami
+towarzyszącymi ψ₀ (wcześniej 6.10b bez towarzyszących — niezachowawczo), użytkowe maks. z układów, dach: śnieg albo kat. H (nie łączone,
+PN-EN 1991-1-1 3.3.2), zestawienie jawne (g_k, q_k,A, q_k,dach); ścinanie płyt — pole z podporą stykającą się tylko w narożu (< 0,3 m)
+bez tej reakcji; strzemiona płyt (9.3.2) rejestrowane w kontroli zbrojenia (A_sw/s ≥ V_Ed/V_Rd,s, ρ_w,min, s ≤ 0,75d); ciężar pól PV
+(moduły + stelaż biosolarny — dane wyrobu `obliczenia/dane/wyroby_przykladowe.yaml`, [DANE PRZYKŁADOWE – FIKCYJNE]) jako obciążenie
+stałe na obrysie modułów; substrat dachu zielonego — ciężar w stanie nasycenia wodą (opis w zestawieniu); kategoria F garażu jawnie
+w raporcie MES; parametry gruntu z modelu (`geotechnika.grunt.phi`, M₀) także w parametrach tomu.
+

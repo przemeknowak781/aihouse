@@ -18,7 +18,7 @@ wspolne:
   rewizja: "0"
   skala: 500
   format: auto                 # auto = ekonomiczny (lamela.views.uklad): najmniejszy koszt papieru — ISO 216, wydłużone lub H×L „na miarę”
-                               # (H: 297/420/594/841/891; składanie do A4 w ocenie); klasyczny | A2 | [H, L] — patrz uklad.py
+                               # (H: 297/420/594/610/841/891/914 lub szerokość = rolka 297…914; składanie do A4 w ocenie); klasyczny | A2 | [H, L] — patrz uklad.py
   pismo_min: 2.5              # pismo uwag i podziałki w kolumnie opisowej ≥ 2,5 mm (W-312: PZT ≥ 2,5 mm; lamela.views.uklad)
   plik_tomu: "tom_PZT.pdf"
   tytul_tomu: "Projekt zagospodarowania działki — część rysunkowa"
@@ -39,14 +39,14 @@ arkusze:
     tytul: "PLAN ZAGOSPODAROWANIA DZIAŁKI"
     typ: pzt_plan
     skala: 500
-    # format auto → A2 pionowo (420×594, składanie dobre); tabele w rzutni obok mapy — wariant „tabele: kolumna” daje
-    # ten sam format (mapa 1:500 z opisem podkładu ma 285 mm wysokości — nie mieści się w H = 297)
+    # format auto → 420×530 (szerokość = rolka 420, 0,223 m²; pismo kolumny 2,5 mm — W-312); tabele w rzutni obok mapy
+    # (mapa 1:500 z opisem podkładu ma 285 mm wysokości — nie mieści się w H = 297)
     opcje: {podklad: true, warstwice: true, pikiety_co: 9.0, linia_plyt: PUNKTOWA}
   - nr: PZT-02
     tytul: "PLAN SZCZEGÓŁOWY — WYMIARY I RZĘDNE"
     typ: pzt_szczegoly
     skala: 200
-    # format auto → 400×594 (0,24 m², pasy 115+95+190 / rzędy 2×297); „tabele: kolumna” dałby 610×420 (0,26 m²).
+    # format auto → 594×430 (0,255 m², pasy 210+192+192; pismo tabel i legendy 2,5 mm — W-312, komórki łamane bez „…”).
     # Rzędne projektowane opisywane z przerzedzeniem (rzedne_proj_co 2,0 m / rzedne_proj_co_rowne 5,0 m — domyślne):
     # model ma gęsty TIN (1078 pkt, pierścienie co 0,25 m).
     opcje: {warstwice: true, warstwice_projektowane: false}

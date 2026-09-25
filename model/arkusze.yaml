@@ -16,7 +16,7 @@ wspolne:
   rewizja: "0"
   skala: 50                    # PAB wymaga ≥ 1:100 (R2 F18); 1:50 — czytelność warstw
   format: auto                 # auto = ekonomiczny (lamela.views.uklad): najmniejszy koszt papieru — ISO 216, wydłużone lub H×L „na miarę”
-                               # (H: 297/420/594/841/891; składanie do A4 w ocenie); klasyczny | A2 | [H, L] — patrz uklad.py
+                               # (H: 297/420/594/610/841/891/914 lub szerokość = rolka 297…914; składanie do A4 w ocenie); klasyczny | A2 | [H, L] — patrz uklad.py
   numeracja_pomieszczen: iso   # parter = 1.xx (PN-B-01025 / R4 pkt 3.9); „model” — identyfikatory z modelu
   wysokosc_ciecia: 1.10
   glebokosc_widoku: 1.5
