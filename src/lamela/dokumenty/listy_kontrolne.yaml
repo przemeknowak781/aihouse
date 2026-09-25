@@ -94,6 +94,7 @@ PT_WSPOLNE:
   - {id: F-02, el: "*", opis: "Rozmiar pliku ≤ 150 MB", podstawa: "RPB § 2b ust. 3", szukaj: {spec: rozmiar}}
   - {id: F-03, el: "*", opis: "Część rysunkowa wektorowa", podstawa: "RPB § 2b ust. 2", szukaj: {spec: wektor}}
   - {id: F-05, el: "*", opis: "Tom PT w osobnym pliku (bez wspólnej oprawy z PZT/PAB/ZL)", podstawa: "RPB § 5 ust. 3", szukaj: {spec: tom_pt}}
+  - {id: F-06, el: "*", opis: "Tom ze stanu modelu = bieżący model (znacznik „stan modelu: SHA-256 …”, wspólny dla tomów PT)", podstawa: "PB art. 34 ust. 3c, ust. 3d pkt 3 (zgodność PT z PZT/PAB i między tomami)", szukaj: {spec: stan_modelu}}
   - {id: C2-01, el: PT, opis: "Strona tytułowa: „Projekt techniczny”, zamierzenie, kategoria I, inwestor", podstawa: "RPB § 7 ust. 2 pkt 1–2", szukaj: {tytulowa: ['projekt techniczny', 'nazwa zamierzenia', 'kategoria obiektu budowlanego\s+I\b', 'inwestor'], wszystkie: true}, dane_osobowe: true}
   - {id: C2-02, el: PT, opis: "Strona tytułowa: nr tomu i liczba tomów PT", podstawa: "RPB § 7 ust. 6", szukaj: {tytulowa: ['tom \d+ z \d+']}}
   - {id: C2-03, el: PT, opis: "Strona tytułowa: data, autorzy ze specjalnością, nr uprawnień i zakresem", podstawa: "RPB § 7 ust. 2 pkt 3", szukaj: {tytulowa: ['data opracowania', 'nr uprawnie'], wszystkie: true}, dane_osobowe: true}

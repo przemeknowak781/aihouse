@@ -695,6 +695,8 @@ na nowym modelu.
 
 ## 14. Rejestr zmian — runda 2
 
+> Wartości w §14 — stan po rundzie 2 (zapis historyczny); stan wydania: §15 (wyniki — §15.5).
+
 Źródło wejścia: `docs/20_koncepcja/poprawki_runda2_wejscie.md`. Zapis: uwaga → decyzja → podstawa. Zmiany wprowadzone wyłącznie
 w `tools/buduj_model.py` (model/*.yaml generowane), bez zmiany brył A/B/C/G ani linii D/E.
 
@@ -903,3 +905,38 @@ Bryły A/B/C/G, linie D/E, sylweta „S”, funkcje pomieszczeń i przejścia �
 | BRAKI PT-IS | odwodnienie płyt wysuniętych (poz. 1–11) — w modelu (wyloty, rury, przelewy rynien); poz. 14 (szacht wentylacyjny), 18 (trasy), 21 (wyroby) — PT-IS | brief §9 pkt 3 |
 | 14.2 F — SCHEMAT_MODELU (nowe pola) | **wykonane:** `docs/SCHEMAT_MODELU.md` §2 (`elementy_zewn`) i §10 (pola dla bibliotek) | RPB §20 |
 | K-5, K-12 (żebro licowane), REKOMENDACJE_MODEL (BO) | etap „Konstrukcja” (poza zakresem wydania modelu) | — |
+
+### 15.5 Wyniki kontroli po wydaniu modelu
+
+| Wielkość | Wartość | Źródło / wymaganie |
+|---|---|---|
+| walidacja rdzenia | 0 błędów, 0 ostrzeżeń (INFO — pola dla bibliotek, SCHEMAT §10) | `python3 -m lamela.model` |
+| audyt WT/MPZP | **0 NIEZGODNE**, 4 UWAGI (te same, świadome: 0.15/0.16, SW1 ↔ wyrzutnia — interpretacja §10, PC-JZ od S), 166 OK, 3 INFO | `tools/audyt_wt.py` → `audyt_A1.md` |
+| pow. zabudowy / z płytami / PBC / intensywność / PU (W-316) | 187,50 m² (11,7 %) / 218,08 m² / 1 270,23 m² (79,4 %) / 0,248 / 239,13 m² | `lamela.wskazniki`; bilans §9 |
+| wysokość zabudowy | **10,47 m** (szczyt wyrzutni +10,20; t_śr z terenu projektowanego/istn.) ≤ 10,70 (rezerwa) ≤ 11,00 | upzp art. 2 pkt 30 lit. a; W-033 |
+| wysokość wg WT §6 | 9,97 m (wejście O0-03) — grupa N; przekroje/elewacje z modułu | WT §6, §8 |
+| EP / EP bez PV / bez PV przy n50 = 4 h⁻¹ | **35,8 / 58,1 / 67,4** kWh/(m²·rok) ≤ 70 | WT §329; `fizyka_energia` |
+| H_TB (moduł energii / katalog całk. z b_u i χ) | 32,0 W/K / 33,5 W/K (WZ-17: 10 konsol × 0,010) | PN-EN ISO 14683, 10211 |
+| Φ_HL; f_Rsi min | 7,46 kW; 0,820 (WZ-16a) ≥ 0,72 | PN-EN 12831-1; W-248 |
+| PV | 15 × 430 Wp = 6,45 kWp (D1 8 + D4 7), górna krawędź ≤ korona attyki | W-194, W-033 |
+| instalacje (woda, kanalizacja, deszczowa, drenaż, ogrzewanie, bilans mocy, obwody, PV, odgromowa) | 0 niespełnionych | `lamela.obliczenia.instalacje` |
+| teren (TIN co 0,10 m) | cokół min 0,316 m poza strefami progów z OL; spadek ≥ 3,0 % na wszystkich ścianach | brief §9 pkt 4, 6; W-019 |
+| funkcja (V3) | 0 kolizji mebel↔mebel/ściana/łuk drzwi, łuk↔łuk (P0–P2) | §15.4 |
+| testy | `test_wskazniki` ZALICZONE; `test_obliczenia_fizyka` 24/24; `_instalacje` 24/24; `_konstrukcja` 28/28; `test_mostki2d --szybko` 24/24; `test_arkusze_formaty` 14/14; `test_pipeline` 28/28 (w tym 3 nowe testy `elementy_zewn`; `test_podglad_www` zaliczony w powtórzeniu — przy równoległym obciążeniu maszyny przekraczał limit zrzutu 30 s) | `tools/test_*.py` |
+
+### 15.6 Zmiany rdzenia, bibliotek i narzędzi (poza `buduj_model.py`)
+* `lamela.model` — sekcja `elementy_zewn` (schemat, walidacja: enum typu, `z_do > z_od`, odsunięcie kratownicy > 0, osłona ażurowa,
+  odwołania do ściany/materiału; `Model.elementy_zewn()`); ocieplenie cokołu do spodu płyty fundamentowej (V1-06).
+* `lamela.ir` — `_elementy_zewn` (kratownica, konsole, pnącza, osłona, bryła urządzenia); podłoga na płycie bez dublowania ŻB,
+  warstwy pod płytą (PF1, PF2) poza żebrami (V1-06).
+* `lamela.wskazniki` — z_top urządzeń dachowych (N-2); `views.section.building_height` z modułu (V1-03);
+  `views.plan` — wyspa (`hokery`, `plyta_strona`), zasobnik/centrala/moduł PC z `xy` na licu (V3); `draft.symbols.kitchen_island(hob_side)`;
+  `views.site_data`/`site_draw`/`site` — elementy zewnętrzne na PZT (+ legenda); `model3d.materials` — ZIELEN_PNACZA, PC_OBUDOWA.
+* `obliczenia.sanitarne.drenaz` — TIN, krok 0,10 m, strefy progów (szer. + 0,15 m, OL ≤ 1,5 m), korytka `przy_licu`;
+  `sanitarne.deszczowa` — dopływy między polami i rurami, kontrola przelewów rynien; `inst_wspolne` — `rzedna_pokrycia` wylotów rynien.
+* `obliczenia.fizyka.mostki` — χ węzłów punktowych z modelu; `mostki2d.wezly_dod.wezel_garaz_plyta` — uskok, żebro, izolacja czoła,
+  wariant przerwy; `mostki2d.katalog_dod` — geometria uskoku/żebra z modelu; `tools/mostki_budynku.py`, `raport_mostkow_budynku.py` —
+  warianty WZ-09a na geometrii modelu; katalog `projekt/08_obliczenia/mostki/` przeliczony.
+* `tools/audyt_wt.py` — WT §152 ust. 7 (wylot poziomy) i ust. 10 w brzmieniu dosłownym, czerpnia i wyrzutnia na różnych dachach;
+  pow. zabudowy i PBC z `lamela.wskazniki` (V1-09). Testy: `test_pipeline` (3 × `elementy_zewn`), `test_obliczenia_instalacje`
+  (dopływy/przelewy rynien, drenaż TIN), `test_wskazniki` (z_top).

@@ -272,6 +272,16 @@ def _spec(nazwa, doc, sciezka, an, lista, el_info) -> tuple[str, str]:
         return ("BRAK" if inne else "OK"), (f"inne elementy w pliku: {inne}" if inne else "plik zawiera tylko tom PT")
     if nazwa == "tabliczki":
         return _tabliczki(doc, an)
+    if nazwa == "stan_modelu":
+        # weryfikacja PT (K-1): tom wygenerowany z bieżącego stanu modelu; ten sam skrót we wszystkich tomach
+        from .dane import stan_modelu, RE_STAN_MODELU
+        biez = stan_modelu()["skrot"]
+        w_tomie = sorted({m.group(1).lower() for t in an["teksty"] for m in RE_STAN_MODELU.finditer(t)})
+        if not w_tomie:
+            return "OSTRZEŻENIE", f"brak znacznika „stan modelu: SHA-256 …” (bieżący model: {biez})"
+        if w_tomie != [biez]:
+            return "BRAK", f"tom ze stanu modelu {', '.join(w_tomie)} ≠ bieżący model {biez} — wygenerować ponownie"
+        return "OK", f"stan modelu SHA-256 {biez} = bieżący model"
     if nazwa == "numeracja":
         if el_info is None:
             return "BRAK", "element nieznaleziony"

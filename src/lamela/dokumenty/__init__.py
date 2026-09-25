@@ -22,7 +22,7 @@ Szybki start::
 from .znaczniki import (STATUS_PRZYKLAD, DANE_PRZYKLADOWE, ZAL, NZW, do_uzup, dok_zewn, policz_znaczniki,
                         oznacz_html, blokuje_zlozenie)
 from .formaty import liczba, rzedna, data_slownie, data_pliku, wykryj_format
-from .dane import dane_obiektu, Projektant, projektanci_domyslni, SPECJALNOSCI, ELEMENTY
+from .dane import dane_obiektu, Projektant, projektanci_domyslni, SPECJALNOSCI, ELEMENTY, stan_modelu
 from .nazwy import nazwa_pliku, sprawdz_nazwe
 from .arkusze import Arkusz, arkusze_z_katalogu, plan_skladania
 from .dokument import Dokument, WynikDokumentu
@@ -33,7 +33,7 @@ from .render import zamknij_przegladarke
 __all__ = [
     "STATUS_PRZYKLAD", "DANE_PRZYKLADOWE", "ZAL", "NZW", "do_uzup", "dok_zewn", "policz_znaczniki", "oznacz_html",
     "blokuje_zlozenie", "liczba", "rzedna", "data_slownie", "data_pliku", "wykryj_format", "dane_obiektu",
-    "Projektant", "projektanci_domyslni", "SPECJALNOSCI", "ELEMENTY", "nazwa_pliku", "sprawdz_nazwe", "Arkusz",
+    "Projektant", "projektanci_domyslni", "stan_modelu", "SPECJALNOSCI", "ELEMENTY", "nazwa_pliku", "sprawdz_nazwe", "Arkusz",
     "arkusze_z_katalogu", "plan_skladania", "Dokument", "WynikDokumentu", "Tom", "WynikTomu", "sprawdz_tom",
     "LISTY_KONTROLNE", "RaportKompletnosci", "zamknij_przegladarke",
 ]

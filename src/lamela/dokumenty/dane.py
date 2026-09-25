@@ -254,3 +254,25 @@ def dane_obiektu(katalog_modelu: str | Path | None = None, *, budynek: str = "bu
 
 def projektanci_elementu(dane: dict, element: str) -> list[Projektant]:
     return [p for p in dane.get("projektanci", []) if p.dotyczy(element)]
+
+
+# ------------------------------------------------------------------------------------------------ stan modelu
+PLIKI_MODELU = ("budynek.yaml", "dzialka.yaml", "instalacje.yaml", "wyposazenie.yaml")
+RE_STAN_MODELU = re.compile(r"stan modelu:?\s*SHA-256\s+([0-9a-f]{12})", re.I)
+
+
+def stan_modelu(katalog_modelu: str | Path | None = None) -> dict:
+    """Skrót SHA-256 (12 znaków) plików danych modelu (``PLIKI_MODELU``) — wspólny znacznik stanu modelu,
+    wpisywany do każdego tomu i sprawdzany przez walidator (weryfikacja PT, K-1: tomy z jednego stanu modelu).
+    Zwraca {skrot, pliki, tekst} — ``tekst``: „stan modelu: SHA-256 1a2b3c4d5e6f (budynek, dzialka, …)”."""
+    import hashlib
+    kat = Path(katalog_modelu) if katalog_modelu else REPO / "model"
+    h = hashlib.sha256()
+    pliki = []
+    for n in PLIKI_MODELU:
+        p = kat / n
+        if p.exists():
+            h.update(n.encode() + b"\0" + p.read_bytes() + b"\0")
+            pliki.append(n.rsplit(".", 1)[0])
+    s = h.hexdigest()[:12]
+    return {"skrot": s, "pliki": pliki, "tekst": f"stan modelu: SHA-256 {s} ({', '.join(pliki)})"}
