@@ -216,7 +216,10 @@ class Strefa:
 class ElementFlankujacy:
     """Element flankujący do ψ = L_2D − Σ U_j·l_j (PN-EN ISO 10211 / PN-EN ISO 14683).
     U — podane albo liczone z `warstwy` (1D, te same R_s co w modelu 2D); `wezel_ref` — podmodel, którego L_2D
-    zastępuje U·l (np. okno bez ściany — ψ osadzenia); `l_e`, `l_i` — długości wg wymiarów zewnętrznych/wewnętrznych."""
+    zastępuje U·l (np. okno bez ściany — ψ osadzenia); długości wg systemów wymiarów (PN-EN ISO 13789 / 14683):
+    `l_e` — zewnętrzne, `l_i` — wewnętrzne (bez grubości stropów), `l_oi` — wewnętrzne całkowite (wysokości „od
+    podłogi do podłogi”, pod dachem do spodu płyty; długości po licach wewnętrznych; okna w świetle otworu w murze —
+    system stosowany w `energia.bryla` / `fizyka.mostki`); None → l_i."""
     nazwa: str
     grupy: tuple[str, str]
     l_e: float
@@ -227,6 +230,11 @@ class ElementFlankujacy:
     Rse: float = RSE
     wezel_ref: "Wezel | None" = None
     zrodlo: str = ""
+    l_oi: float | None = None
+
+    @property
+    def l_oi_(self) -> float:
+        return self.l_i if self.l_oi is None else self.l_oi
 
     def U_obl(self) -> float | None:
         if self.U is not None:
@@ -350,8 +358,11 @@ def material_z_modelu(model, kod: str) -> Material:
     m = model.material(kod)
     nazwa = m.nazwa or kod
     rodzaj = "nieprzezroczysty"
-    if any(s in nazwa.lower() for s in ("pustk", "powietrz", "legar", "szczelin")):
-        rodzaj = "powietrze"
+    n = nazwa.lower()
+    if bool(getattr(m, "wentylowana", False)) or "wentylowan" in n and "niewentylowan" not in n:
+        rodzaj = "powietrze_went"          # warstwa powietrza dobrze wentylowana (ISO 6946) — pomijana w U i w 2D
+    elif any(k in n for k in ("pustk", "powietrz", "szczelin")):
+        rodzaj = "powietrze"               # niewentylowana — λ_eq z modelu (ISO 6946 zał. D)
     return Material(kod, float(m.lambda_), nazwa, getattr(m, "kolor", None), rodzaj,
                     "model budynku (materialy.*.lambda)")
 
@@ -362,13 +373,19 @@ def warstwy_z_modelu(model, kod_przegrody: str) -> list[Warstwa]:
     return [Warstwa(material_z_modelu(model, w.mat), float(w.d), bool(w.konstrukcyjna)) for w in p.warstwy]
 
 
+def ma_pustke_wentylowana(warstwy: Sequence[Warstwa]) -> bool:
+    return any(w.mat.rodzaj == "powietrze_went" for w in warstwy)
+
+
 def pomin_pustki_wentylowane(warstwy: Sequence[Warstwa], zewn_na_poczatku: bool = True) -> list[Warstwa]:
-    """Pustkę wentylowaną i warstwy za nią (po stronie zewnętrznej) pomija się (PN-EN ISO 6946:2017 — warstwy dobrze wentylowane).
+    """Pustkę dobrze wentylowaną (rodzaj 'powietrze_went') i warstwy za nią (po stronie zewnętrznej) pomija się
+    (PN-EN ISO 6946:2017 — warstwy dobrze wentylowane). Warstwy powietrza niewentylowane ('powietrze', λ_eq)
+    pozostają — tak samo w U i w modelu 2D.
     zewn_na_poczatku=True — lista od góry (dachy, tarasy: strona zewnętrzna pierwsza); False — ściany (od wnętrza)."""
     lista = list(warstwy) if zewn_na_poczatku else list(reversed(warstwy))
     out: list[Warstwa] = []
     for w in lista:
-        if w.mat.rodzaj == "powietrze":
+        if w.mat.rodzaj == "powietrze_went":
             out = []
             continue
         out.append(w)
@@ -488,8 +505,11 @@ def wezel_wspornik(warstwy_sciany: Sequence[Warstwa], t_plyty: float = 0.20, mat
         ((-L_in / 2, -H / 2), _nas("pomieszczenie dolne", ti, "wewn")),
         ((-L_in / 2, t + t_pod + (H - t_pod) / 2), _nas("pomieszczenie górne", ti, "wewn")),
         ((x_out + S / 2, -H / 2), _nas("zewnętrze", te, "zewn"))])
-    fl = [ElementFlankujacy("ściana dolna", ("i", "e"), H + t / 2, H - t_suf, warstwy=list(warstwy_sciany)),
-          ElementFlankujacy("ściana górna", ("i", "e"), H + t / 2, H - t_pod, warstwy=list(warstwy_sciany))]
+    # l_oi: wysokości „od podłogi do podłogi” — ściana dolna do poziomu podłogi kondygnacji wyższej (y = t + t_pod)
+    fl = [ElementFlankujacy("ściana dolna", ("i", "e"), H + t / 2, H - t_suf, warstwy=list(warstwy_sciany),
+                            l_oi=H + t + t_pod),
+          ElementFlankujacy("ściana górna", ("i", "e"), H + t / 2, H - t_pod, warstwy=list(warstwy_sciany),
+                            l_oi=H - t_pod)]
     if wysieg > 0:
         typ, psi_d = "wspornik", ("B_balkon" if lacznik is None else None)
         nazwa = nazwa or ("Płyta wspornikowa " + ("z łącznikiem termoizolacyjnym" if lacznik else "ciągła (bez przerwy)"))
@@ -528,6 +548,12 @@ def wezel_attyka(warstwy_sciany: Sequence[Warstwa], warstwy_dachu: Sequence[Wars
     (konstrukcja ściany ponad płytę) obłożona izolacją od wewnątrz (d_izol_wewn), od góry (d_izol_gora) i od zewnątrz
     (ETICS ściany). blok_attyki — opcjonalny blok termiczny u podstawy attyki (materiał, wysokość)."""
     ti, te = _temperatury(theta_i, theta_e)
+    if ma_pustke_wentylowana(warstwy_dachu) or ma_pustke_wentylowana(warstwy_sciany):
+        # ISO 6946: przy warstwie dobrze wentylowanej warstwy zewnętrzne pomija się w U I w modelu 2D, a na
+        # powierzchni pustki R_se = R_si — ten wariant nie jest obsługiwany (weryfikacja niezależna, uwaga 7)
+        raise ValueError(f"Węzeł {id}: przegroda z warstwą powietrza dobrze wentylowaną (dach wentylowany / elewacja "
+                         f"wentylowana) — wariant nieobsługiwany w wezel_attyka; zbuduj węzeł z warstw do pustki "
+                         f"i strefą zewnętrzną o R_s = R_si")
     st = _stos(warstwy_sciany, 0.0)
     ks = indeks_konstrukcyjnej(warstwy_sciany)
     x_s0, x_s1 = st[ks][0], st[ks][1]
@@ -560,9 +586,9 @@ def wezel_attyka(warstwy_sciany: Sequence[Warstwa], warstwy_dachu: Sequence[Wars
     strefy = strefy_z_dopelnienia(ob, box(-L, -H, x_out + S, y_cap + S), [
         ((-L / 2, -H / 2), _nas("pomieszczenie", ti, "wewn")),
         ((x_out + S / 2, -H / 2), _nas("zewnętrze", te, "zewn"))])
-    fl = [ElementFlankujacy("ściana", ("i", "e"), H + y_top, H - t_suf, warstwy=list(warstwy_sciany)),
+    fl = [ElementFlankujacy("ściana", ("i", "e"), H + y_top, H - t_suf, warstwy=list(warstwy_sciany), l_oi=H),
           ElementFlankujacy("stropodach", ("i", "e"), L + x_out, L, warstwy=pomin_pustki_wentylowane(warstwy_dachu),
-                            Rsi=RSI_GORA)]
+                            Rsi=RSI_GORA, l_oi=L)]
     return Wezel(id, nazwa, "attyka", ob, strefy, fl, przekroj="pionowy",
                  punkty={"naroże sufit–ściana": (0.0, -t_suf)},
                  widok=(-min(L, 1.0), -min(H, 1.0), x_out + 0.1, y_cap + 0.1), psi_domyslne="R_attyka",

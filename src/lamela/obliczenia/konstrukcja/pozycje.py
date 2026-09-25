@@ -1054,13 +1054,20 @@ class AnalizaKonstrukcji:
         MxD = max(Mx, Mx_t or 0)
         MyD = max(My, My_t or 0)
         smax = zelbet.smax_plyta(h, True, True)
-        zx, fx, sx, Ax = zelbet.wymiaruj_plyte(MxD, h, dx, beton, self.stal, smax, nazwa=f"Pole {c['id']} — zginanie dół, kierunek x")
-        zy, fy, sy, Ay = zelbet.wymiaruj_plyte(MyD, h, dy, beton, self.stal, smax, nazwa=f"Pole {c['id']} — zginanie dół, kierunek y")
+        wmx = p.w_max.get(e.ekspozycja, 0.3)
+        qx, qy = float(wa_qp["dol_x"][mg].max()), float(wa_qp["dol_y"][mg].max())
+        qgx, qgy = float(wa_qp["gora_x"][mg].min()), float(wa_qp["gora_y"][mg].min())
+        zx, fx, sx, Ax = zelbet.wymiaruj_plyte(MxD, h, dx, beton, self.stal, smax, nazwa=f"Pole {c['id']} — zginanie dół, kierunek x",
+                                               M_qp=qx, w_max=wmx)
+        zy, fy, sy, Ay = zelbet.wymiaruj_plyte(MyD, h, dy, beton, self.stal, smax, nazwa=f"Pole {c['id']} — zginanie dół, kierunek y",
+                                               M_qp=qy, w_max=wmx)
         # góra: gdy brak momentu ujemnego przy krawędzi swobodnie podpartej — min. 25 % przęsła (9.3.1.2(2))
         Mgx_d = min(Mgx, -0.25 * MxD if "S" in c["brzegi"][:2] else 0.0)
         Mgy_d = min(Mgy, -0.25 * MyD if "S" in c["brzegi"][2:] else 0.0)
-        zgx, fgx, sgx, Agx = zelbet.wymiaruj_plyte(abs(Mgx_d), h, dx, beton, self.stal, smax, nazwa=f"Pole {c['id']} — zginanie góra, x")
-        zgy, fgy, sgy, Agy = zelbet.wymiaruj_plyte(abs(Mgy_d), h, dy, beton, self.stal, smax, nazwa=f"Pole {c['id']} — zginanie góra, y")
+        zgx, fgx, sgx, Agx = zelbet.wymiaruj_plyte(abs(Mgx_d), h, dx, beton, self.stal, smax, nazwa=f"Pole {c['id']} — zginanie góra, x",
+                                                   M_qp=abs(qgx), w_max=wmx)
+        zgy, fgy, sgy, Agy = zelbet.wymiaruj_plyte(abs(Mgy_d), h, dy, beton, self.stal, smax, nazwa=f"Pole {c['id']} — zginanie góra, y",
+                                                   M_qp=abs(qgy), w_max=wmx)
         zn = None
         if M_nar > 0:
             zn, fn, sn_, An = zelbet.wymiaruj_plyte(M_nar, h, dy, beton, self.stal, smax,
@@ -1078,28 +1085,33 @@ class AnalizaKonstrukcji:
         sc = zelbet.scinanie_bez_zbrojenia(vmax, 1.0, dx, min(Ax, Agx if Agx > 0 else Ax), beton,
                                            nazwa=f"Pole {c['id']} — ścinanie (maks. reakcja podpory, [UPR] 0,6·r przy podporze pośredniej)")
         # ugięcie
-        wq = float(env["qp"].w[np.unique(fe.el_nodes[msk].ravel())].max())
+        wn = np.unique(fe.el_nodes[msk].ravel())
         EI = e.beton.E_cm * 1000 * h ** 3 / 12
         lmin = min(c["lx"], c["ly"])
-        kier = "x" if c["lx"] <= c["ly"] else "y"
-        Mqp = float(wa_qp["dol_" + kier][msk].max())
-        As_k = Ax if kier == "x" else Ay
-        Asr_k = zx.As_req if kier == "x" else zy.As_req
-        dk = dx if kier == "x" else dy
         br = c["brzegi"]
-        kb_ = br[:2] if kier == "x" else br[2:]
         wsp = e.typ == "wspornik" and "W" in br and not self._ma_wlasne_podpory(e)
         if wsp:
-            K, L_ref, ksk = 0.4, p.wspornik_L_mnoznik * lmin, 0.5
+            kier = "x" if "W" in br[:2] else "y"
+            lk = c["lx"] if kier == "x" else c["ly"]
+            wq = float(np.abs(env["qp"].w[wn]).max())
+            Mqp = float(-wa_qp["gora_" + kier][msk].min())
+            As_k, Asr_k = (Agx, zgx.As_req) if kier == "x" else (Agy, zgy.As_req)
+            dk = dx if kier == "x" else dy
+            K, L_ref, ksk, lmin = 0.4, p.wspornik_L_mnoznik * lk, 0.5, lk
         else:
+            kier = "x" if c["lx"] <= c["ly"] else "y"
+            wq = float(env["qp"].w[wn].max())
+            Mqp = float(wa_qp["dol_" + kier][mg].max())
+            As_k = Ax if kier == "x" else Ay
+            Asr_k = zx.As_req if kier == "x" else zy.As_req
+            dk = dx if kier == "x" else dy
+            kb_ = br[:2] if kier == "x" else br[2:]
             nU = kb_.count("U")
             K = {0: 1.0, 1: 1.3, 2: 1.5}[nU]
             L_ref, ksk = lmin, 0.125
         ug = zelbet.ugiecie_komplet(lmin, K, h, dk, max(Asr_k, 1.0), As_k, beton, Mqp, wq * EI, p, k_skurcz=ksk, L_ref=L_ref,
                                     stal=self.stal, nazwa=f"Pole {c['id']} — ugięcie (l = {f(lmin)} m, K = {f(K, 1)})")
-        ry = zelbet.rysy_bez_obliczen(Mqp, 1.0, h, dk, As_k, fx if kier == "x" else fy, sx if kier == "x" else sy, beton,
-                                      p.w_max.get(e.ekspozycja, 0.3), nazwa=f"Pole {c['id']} — rysy")
-        wyniki = [zx, zy, zgx, zgy] + ([zn] if zn is not None else []) + [sc, ug, ry]
+        wyniki = [zx, zy, zgx, zgy] + ([zn] if zn is not None else []) + [sc, ug]
         warunki = [w for r in wyniki for w in r.warunki]
         eta = max((w.eta for w in warunki), default=0)
         wobl = ug.obl.w if hasattr(ug, "obl") else 0

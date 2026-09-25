@@ -787,38 +787,42 @@ def ugiecie_komplet(l_eff: float, K: float, h: float, d: float, As_req: float, A
 
 
 def wymiaruj_plyte(M_Ed: float, h: float, d: float, beton: Beton, stal: StalZbrojeniowa | None = None, s_max: float = 250.0,
-                   fi_min: int = 8, fi_max: int = 16, nazwa: str = "Zginanie płyty (na 1 m)") -> tuple[Zginanie, int, float, float]:
-    """Wymiarowanie pasma płyty b = 1 m: (wynik zginania, φ, s [mm], A_s,prov [mm²/m]) — A_s ≥ max(A_s,req; A_s,min)."""
+                   fi_min: int = 8, fi_max: int = 16, nazwa: str = "Zginanie płyty (na 1 m)", M_qp: float | None = None,
+                   w_max: float = 0.4) -> tuple[Zginanie, int, float, float]:
+    """Wymiarowanie pasma płyty b = 1 m: (wynik zginania, φ, s [mm], A_s,prov [mm²/m]) — A_s ≥ max(A_s,req; A_s,min),
+    rozstaw ≤ s_max (preferowany ≥ 120 mm); gdy podano M_qp — dobór z warunkiem rys bez obliczeń (7.3.3, tabl. 7.2N/7.3N)."""
     stal = stal or StalZbrojeniowa()
     zg = zginanie_prostokat(M_Ed, 1.0, h, d, beton, stal, nazwa=nazwa, element="plyta")
-    fi, s, As = dobierz_plyta(zg.As_req, s_max, fi_min, fi_max, As_min=zg.As_min if abs(M_Ed) > 1e-6 else 0.0)
+    need = max(zg.As_req, zg.As_min if abs(M_Ed) > 1e-6 else 0.0, 1e-9)
+    cand = []
+    for fi in (8, 10, 12, 14, 16, 20):
+        if fi < fi_min or fi > fi_max:
+            continue
+        a = pole_preta(fi)
+        for s_ in range(int(s_max // 10 * 10), 70, -10):
+            As = a * 1000 / s_
+            if As >= need:
+                cand.append((s_ < 120, As, -fi, s_, fi))
+    cand.sort()
+    if not cand:
+        fi, s_ = fi_max, 75
+        cand = [(True, pole_preta(fi) * 1000 / s_, -fi, s_, fi)]
+    wybor = cand[0]
+    ry = None
+    if M_qp is not None and abs(M_qp) > 1e-6:
+        for c in sorted(cand, key=lambda c: (c[1], c[0])):
+            r = rysy_bez_obliczen(abs(M_qp), 1.0, h, d, c[1], c[4], c[3], beton, w_max, nazwa=nazwa + " — rysy")
+            if r.ok:
+                wybor, ry = c, r
+                break
+        if ry is None:
+            wybor = max(cand, key=lambda c: c[1])
+            ry = rysy_bez_obliczen(abs(M_qp), 1.0, h, d, wybor[1], wybor[4], wybor[3], beton, w_max, nazwa=nazwa + " — rysy")
+    _, As, _, s_, fi = wybor
     zg.As_prov = As
-    zg.zbrojenie = f"φ{fi} co {f(s / 10, 0)} cm"
-    zg.krok("Przyjęto", zg.zbrojenie, "", As / 100, "cm²/m", nd=2)
-    zg.warunek("Zbrojenie na zginanie", max(zg.As_req, zg.As_min), As, "mm²/m", "6.1, (9.1N)", nd=0,
-               symbol_E="A_s,req", symbol_R="A_s,prov")
-    return zg, fi, s, As
-
-
-def zbrojenie_min_slupa(N_Ed: float, b: float, h: float, stal: StalZbrojeniowa | None = None) -> Wynik:
-    """Słup: A_s,min = max(0,10·N_Ed/f_yd; 0,002·A_c) (9.12N), A_s,max = 0,04·A_c (poza zakładami); pręty ≥ φ12 (NA [NZW])."""
-    stal = stal or StalZbrojeniowa()
-    w = Wynik(nazwa="Zbrojenie minimalne słupa (9.5.2)")
-    Ac = b * h * 1e6
-    As = max(0.10 * N_Ed * 1000 / stal.f_yd, 0.002 * Ac)
-    w.krok("Zbrojenie minimalne", "A_s,min = max(0,10·N_Ed/f_yd; 0,002·A_c)", f"max(0,10·{f(N_Ed, 1)}·10³/{f(stal.f_yd, 1)}; 0,002·{f(Ac, 0)})",
-           As, "mm²", nd=0, zrodlo="(9.12N)")
-    w.krok("Zbrojenie maksymalne", "A_s,max = 0,04·A_c", "", 0.04 * Ac, "mm²", nd=0, zrodlo="9.5.2(3)")
-    return w
-
-
-def zbrojenie_min_sciany(t: float, stal: StalZbrojeniowa | None = None) -> Wynik:
-    """Ściana żelbetowa (na 1 m): pionowe A_s,vmin = 0,002·A_c (po połowie przy każdej powierzchni), poziome
-    A_s,hmin = max(0,25·A_s,v; 0,001·A_c) (9.6.2, 9.6.3)."""
-    w = Wynik(nazwa="Zbrojenie minimalne ściany żelbetowej (9.6)")
-    Ac = t * 1e6
-    Av = 0.002 * Ac
-    Ah = max(0.25 * Av, 0.001 * Ac)
-    w.krok("Pionowe", "A_s,vmin = 0,002·A_c", f"0,002·{f(Ac, 0)}", Av, "mm²/m", nd=0, zrodlo="9.6.2(1)")
-    w.krok("Poziome", "A_s,hmin = max(0,25·A_s,v; 0,001·A_c)", "", Ah, "mm²/m", nd=0, zrodlo="9.6.3(1)")
-    return w
+    zg.zbrojenie = f"φ{fi} co {f(s_ / 10, 0)} cm"
+    zg.krok("Przyjęto" + (" (z warunkiem rys)" if ry is not None else ""), zg.zbrojenie, "", As / 100, "cm²/m", nd=2)
+    zg.warunek("Zbrojenie na zginanie", need, As, "mm²/m", "6.1, (9.1N)", nd=0, symbol_E="A_s,req", symbol_R="A_s,prov")
+    if ry is not None:
+        zg.dolacz(ry)
+    return zg, fi, float(s_), As
