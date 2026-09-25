@@ -554,6 +554,9 @@ class AnalizaKonstrukcji:
         tops = [e.wierzch for e in g.el]
         g.podp_l, g.podp_p = [], []
         g.sciany_pod = []
+        # słupy żelbetowe (trzpienie w murze) z głowicą pod płytą lub pod belką tej płyty (≤ 0,7 m) — podpory punktowe płyty
+        slupy_zb = [c for c in m.slupy() if self._slup_zelbetowy(c) and min(spody) - 0.7 <= float(c["z_do"]) <= max(spody) + TOL_Z
+                    and g.poly.buffer(0.05).contains(Point(*c["xy"]))]
         for w in m.sciany():
             if w.typ not in TYPY_NOSNE:
                 continue
@@ -567,13 +570,22 @@ class AnalizaKonstrukcji:
             # opiera się na belce (podpora liniowa „belka”), belka na swoich podporach (słupy, ściany)
             linie = [ln]
             kor = self._odcinki_na_belkach(w, "belka_w_koronie")
+            # słupy żelbetowe w murze (trzpienie) pod płytą: odcinek osi ściany w obrysie słupa nie jest podporą muru —
+            # płyta opiera się na słupie (podpora punktowa, niżej); skupienia reakcji w węzłach ścian/belek → słup
+            for c in slupy_zb:
+                a_s, b_s = _wymiary_slupa(str(c.get("przekroj")))
+                rect = box(c["xy"][0] - a_s / 2, c["xy"][1] - b_s / 2, c["xy"][0] + a_s / 2, c["xy"][1] + b_s / 2)
+                it = ln.intersection(rect)
+                if isinstance(it, LineString) and it.length > 0.02:
+                    s_a, s_b = sorted(w.st(p_)[0] for p_ in (it.coords[0], it.coords[-1]))
+                    kor = kor + [(c, s_a, s_b)]
             if kor:
                 wolne = [(0.0, w.L)]
                 for _, a_, c_ in kor:
                     wolne = [q for s0_, s1_ in wolne for q in ((s0_, min(s1_, a_)), (max(s0_, c_), s1_)) if q[1] - q[0] > 0.10]
                 linie = [LineString([tuple(w.pt(s0_, 0.0)), tuple(w.pt(s1_, 0.0))]) for s0_, s1_ in wolne]
-                self.log(f"{w.id}: odcinki pod belkami w koronie ({', '.join(str(b_['id']) for b_, _, _ in kor)}) wyłączone z "
-                         f"podparcia płyty {g.nazwa} — płyta oparta na belce (model: belka_w_koronie).")
+                self.log(f"{w.id}: odcinki pod belkami w koronie / w obrysie słupów ŻB ({', '.join(str(b_['id']) for b_, _, _ in kor)}) "
+                         f"wyłączone z podparcia płyty {g.nazwa} — płyta oparta na belce/słupie.")
             k = 0
             for ln_ in linie:
                 for piece in self._snap_linia(ln_, g.poly):
@@ -621,7 +633,8 @@ class AnalizaKonstrukcji:
                 g.podp_l.append(PodporaLiniowa(sid, piece, "przegub", "belka"))
                 g.belki.append((sid, b))
         for c in m.slupy():
-            if any(abs(float(c["z_do"]) - s) < TOL_Z for s in spody) and g.poly.buffer(0.05).contains(Point(*c["xy"])):
+            if (any(abs(float(c["z_do"]) - s) < TOL_Z for s in spody) and g.poly.buffer(0.05).contains(Point(*c["xy"]))) \
+                    or c in slupy_zb:
                 g.podp_p.append(PodporaPunktowa(str(c["id"]), tuple(c["xy"])))
 
     @staticmethod
@@ -834,6 +847,13 @@ class AnalizaKonstrukcji:
         except Exception:  # noqa: BLE001
             return 0.0
         return 0.0
+
+    def _slup_zelbetowy(self, c) -> bool:
+        mat = self.m.material(str(c.get("mat"))) if c.get("mat") else None
+        if mat is None:
+            return False
+        kr = (mat.kreskowanie or "").upper()
+        return "ZELBET" in kr or "ŻELBET" in kr or klasa_betonu_z_nazwy(mat.nazwa) is not None
 
     def _slup_ponizej(self, c):
         """Słup kontynuowany poniżej (ta sama oś pionowa ±5 cm, góra ≤ 0,7 m pod spodem słupa ``c``) albo None."""
