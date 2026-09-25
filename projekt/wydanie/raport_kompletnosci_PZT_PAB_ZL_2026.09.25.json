@@ -19,7 +19,7 @@
       "podstawa": "RPB § 2b ust. 3; W-300",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "4.45 MB (limit 150 MB)"
+      "szczegoly": "4.52 MB (limit 150 MB)"
     },
     {
       "id": "F-03",
@@ -28,7 +28,7 @@
       "podstawa": "RPB § 2b ust. 2; W-300",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "13 arkuszy wektorowych"
+      "szczegoly": "8 arkuszy wektorowych"
     },
     {
       "id": "F-04",
@@ -215,9 +215,9 @@
       "element": "PZT",
       "opis": "Rysunek: plan zagospodarowania na mapie do celów projektowych (≥ 1:500)",
       "podstawa": "RPB § 15 ust. 1–2, § 9 ust. 5; PZT-01",
-      "status": "OK",
+      "status": "DO UZUPEŁNIENIA",
       "obowiazkowa": true,
-      "szczegoly": "PZT-01 — PLAN ZAGOSPODAROWANIA DZIAŁKI (1:500)"
+      "szczegoly": "PZT-01 — PLAN ZAGOSPODAROWANIA DZIAŁKI (1:500); podkład przykładowy — [DO UZUPEŁNIENIA: mapa do celów projektowych] (RPB § 15 ust. 1)"
     },
     {
       "id": "C1-1-19",
@@ -289,7 +289,7 @@
       "podstawa": "RPB § 6 ust. 1",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "21 stron numerowanych"
+      "szczegoly": "22 stron numerowanych"
     },
     {
       "id": "C1-2-06",
@@ -377,9 +377,9 @@
       "element": "PAB",
       "opis": "Opis pkt 11: analiza automatycznej regulacji temperatury",
       "podstawa": "RPB § 20 ust. 1 pkt 11; W-152",
-      "status": "OK",
+      "status": "DO UZUPEŁNIENIA",
       "obowiazkowa": true,
-      "szczegoly": ""
+      "szczegoly": "nakład K i oszczędność s — [DO UZUPEŁNIENIA] (dane z ofert / producenta)"
     },
     {
       "id": "C1-2-16",
@@ -413,9 +413,9 @@
       "element": "PAB",
       "opis": "Opinia geotechniczna (kat. II)",
       "podstawa": "rozp. Dz.U. 2012 poz. 463 § 7 ust. 1, § 8; D-08",
-      "status": "OK",
+      "status": "DO UZUPEŁNIENIA",
       "obowiazkowa": true,
-      "szczegoly": ""
+      "szczegoly": "opinia przykładowa [DANE PRZYKŁADOWE – FIKCYJNE]; autor i badania podłoża — [DO UZUPEŁNIENIA]"
     },
     {
       "id": "C1-2-20",
@@ -433,7 +433,7 @@
       "podstawa": "RPB § 21 pkt 1 lit. a, c",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "PB-AR-04 — RZUT DACHU (1:50)"
+      "szczegoly": "PB-AR-03 — RZUT II PIĘTRA I RZUT DACHU (1:50)"
     },
     {
       "id": "C1-2-22",
@@ -451,7 +451,7 @@
       "podstawa": "RPB § 21 pkt 1 lit. c",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "rysunków: 4 (wymagane ≥ 2)"
+      "szczegoly": "rysunków: 2 (wymagane ≥ 2)"
     },
     {
       "id": "C1-2-24",
@@ -460,7 +460,7 @@
       "podstawa": "RPB § 9 ust. 3; W-306",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "10 rysunków w skali nie mniejszej niż 1:100"
+      "szczegoly": "5 rysunków w skali nie mniejszej niż 1:100"
     },
     {
       "id": "C1-3-01",
@@ -548,9 +548,9 @@
       "element": "ZL",
       "opis": "Decyzja zarządcy drogi o lokalizacji zjazdu (albo strona zastępcza)",
       "podstawa": "PB art. 33 ust. 2 pkt 1; u.d.p. art. 29 ust. 3a; W-020",
-      "status": "OK",
+      "status": "DO UZUPEŁNIENIA",
       "obowiazkowa": true,
-      "szczegoly": ""
+      "szczegoly": "strona zastępcza [DOKUMENT ZEWNĘTRZNY] — decyzja do dołączenia"
     },
     {
       "id": "C1-3-11",
@@ -572,17 +572,17 @@
     }
   ],
   "znaczniki": {
-    "DO UZUPEŁNIENIA": 162,
-    "DOKUMENT ZEWNĘTRZNY": 1,
-    "DANE PRZYKŁADOWE": 108,
-    "ZAŁ": 16,
-    "NZW": 1,
-    "INT": 9,
+    "DO UZUPEŁNIENIA": 214,
+    "DOKUMENT ZEWNĘTRZNY": 5,
+    "DANE PRZYKŁADOWE": 105,
+    "ZAŁ": 30,
+    "NZW": 4,
+    "INT": 15,
     "PROG": 0,
     "lista": {
       "[DO UZUPEŁNIENIA: nazwa pracowni projektowej]": 4,
       "[DO UZUPEŁNIENIA: adres pracowni]": 4,
-      "[DANE PRZYKŁADOWE – FIKCYJNE]": 108,
+      "[DANE PRZYKŁADOWE – FIKCYJNE]": 105,
       "[DO UZUPEŁNIENIA: jednostka ewidencyjna — kod TERYT WWPPGG_R i nazwa]": 4,
       "[DO UZUPEŁNIENIA: kod TERYT jedn. ewid. WWPPGG_R]": 9,
       "[DO UZUPEŁNIENIA: imię i nazwisko lub nazwa inwestora]": 12,
@@ -592,10 +592,14 @@
       "[DO UZUPEŁNIENIA: miejscowość]": 4,
       "[DO UZUPEŁNIENIA: data złożenia oświadczenia z art. 102a PB]": 3,
       "[DO UZUPEŁNIENIA: potwierdzenie wpisu w e-CRUB albo dołączenie kopii]": 2,
+      "[DO UZUPEŁNIENIA: …]": 3,
+      "[DOKUMENT ZEWNĘTRZNY – …]": 3,
+      "[ZAŁ]": 30,
+      "[NZW]": 4,
+      "[INT]": 15,
       "[DO UZUPEŁNIENIA: nr i data warunków przyłączenia (E-05)]": 1,
       "[DO UZUPEŁNIENIA: mapa do celów projektowych z klauzulą urzędową lub oświadczeniem geodety (E-01)]": 1,
       "[DO UZUPEŁNIENIA: nr i data zezwolenia zarządcy drogi]": 1,
-      "[ZAŁ]": 16,
       "[DO UZUPEŁNIENIA: warunki przyłączenia: ENEA Operator (nN), gestor wod.-kan., operator telekomunikacyjny — E-05]": 1,
       "[DO UZUPEŁNIENIA: obwód na wys. 5 cm — mapa do celów projektowych (u.o.p. art. 83f)]": 1,
       "[DO UZUPEŁNIENIA: wypis i wyrys z MPZP (E-02)]": 1,
@@ -604,28 +608,28 @@
       "[DO UZUPEŁNIENIA: k_f z badań podłoża (E-04)]": 1,
       "[DO UZUPEŁNIENIA: opinia geotechniczna (E-04)]": 1,
       "[DO UZUPEŁNIENIA: mapa do celów projektowych z klauzulą lub oświadczeniem geodety (E- 01)]": 1,
-      "[DO UZUPEŁNIENIA]": 13,
+      "[DO UZUPEŁNIENIA]": 60,
       "[DO UZUPEŁNIENIA: data oświadczenia Inwestora (art. 102a ust. 1 PB)]": 1,
       "[DO UZUPEŁNIENIA: nr ewidencyjny PZGiK i data]": 1,
-      "[INT]": 9,
       "[DO UZUPEŁNIENIA: interpretacja zgodności z MPZP]": 1,
       "[DO UZUPEŁNIENIA: kolor pokrycia]": 1,
       "[DO UZUPEŁNIENIA: kolor ram (RAL)]": 1,
       "[DO UZUPEŁNIENIA: paleta MPZP]": 1,
       "[DO UZUPEŁNIENIA: karta kolorystyki elewacji]": 1,
-      "[DO UZUPEŁNIENIA: wskaźnik nagromadzenia odpadów z regulaminu gminy]": 1,
-      "[DO UZUPEŁNIENIA: imię, nazwisko, nr uprawnień]": 1,
-      "[DO UZUPEŁNIENIA: K — oferta (PT-IS)]": 1,
-      "[DO UZUPEŁNIENIA: s — dane producenta systemu regulacji / PT-IS]": 1,
+      "[DO UZUPEŁNIENIA: nr i data zezwolenia oraz uzgodnienia zarządcy drogi]": 1,
       "[DO UZUPEŁNIENIA: metryki otworów, protokoły sondowań, data badań]": 1,
       "[DO UZUPEŁNIENIA: imię i nazwisko, kwalifikacje zawodowe (świadectwo/uprawnienia), podpis]": 1,
       "[DO UZUPEŁNIENIA: data opinii]": 1,
       "[DO UZUPEŁNIENIA: osoba odbierająca podłoże]": 1,
+      "[DO UZUPEŁNIENIA: wskaźnik nagromadzenia odpadów z regulaminu gminy]": 1,
+      "[DO UZUPEŁNIENIA: imię, nazwisko, nr uprawnień]": 1,
+      "[DO UZUPEŁNIENIA: K — oferta (PT-IS)]": 1,
+      "[DO UZUPEŁNIENIA: s — dane producenta systemu regulacji / PT-IS]": 1,
       "[DO UZUPEŁNIENIA: adres projektanta]": 1,
       "[DO UZUPEŁNIENIA: głębokość posadowienia zbiornika]": 1,
-      "[NZW]": 1,
       "[DOKUMENT ZEWNĘTRZNY – do dołączenia: Decyzja zarządcy drogi o lokalizacji zjazdu z drogi gminnej 1KDD, Wójt (burmistrz) Gminy Przykładowo (fikcyjna) — zarządca drogi gminnej (u.d.p. art. 19 ust. 2 pkt 4), art. 29 ust. 1 i 3a ustawy o drogach publicznych (t.j. Dz.U. 2025 poz. 889 ze zm.); PB art. 33 ust. 2 pkt 1]": 1,
-      "[DO UZUPEŁNIENIA: numer i data dokumentu]": 1,
+      "[DO UZUPEŁNIENIA: numer i data dokumentu]": 2,
+      "[DOKUMENT ZEWNĘTRZNY – do dołączenia: Uzgodnienie z zarządcą drogi gminnej 1KDD projektu zagospodarowania działki oraz projektu architektoniczno-budowlanego zjazdu, Wójt (burmistrz) Gminy Przykładowo (fikcyjna) — zarządca drogi gminnej (u.d.p. art. 19 ust. 2 pkt 4), art. 29 ust. 3 pkt 2 ustawy o drogach publicznych (t.j. Dz.U. 2025 poz. 889 ze zm.)]": 1,
       "[DO UZUPEŁNIENIA: data audytu, autor]": 1,
       "[DO UZUPEŁNIENIA: potwierdzenie braku sieci ciepłowniczej: mapa do celów projektowych lub informacja przedsiębiorstwa energetycznego]": 1,
       "[DO UZUPEŁNIENIA: data]": 1,
@@ -641,29 +645,29 @@
     },
     "PAB": {
       "od": 22,
-      "do": 53,
-      "strony_opisu": 22,
-      "arkusze": 10
+      "do": 49,
+      "strony_opisu": 23,
+      "arkusze": 5
     },
     "ZL": {
-      "od": 54,
-      "do": 62,
-      "strony_opisu": 9,
+      "od": 50,
+      "do": 59,
+      "strony_opisu": 10,
       "arkusze": 0
     }
   },
-  "rozmiar_mb": 4.454187393188477,
-  "strony": 62,
+  "rozmiar_mb": 4.521573,
+  "strony": 59,
   "podsumowanie": {
     "status": "PRZYKŁAD – NIE DO ZŁOŻENIA",
-    "OK": 57,
+    "OK": 53,
     "BRAK": 0,
-    "DO UZUPEŁNIENIA": 5,
+    "DO UZUPEŁNIENIA": 9,
     "N/D": 1,
     "OSTRZEŻENIE": 0,
-    "znaczniki_do_uzupelnienia": 162,
-    "znaczniki_dokument_zewnetrzny": 1,
-    "znaczniki_dane_przykladowe": 108
+    "znaczniki_do_uzupelnienia": 214,
+    "znaczniki_dokument_zewnetrzny": 5,
+    "znaczniki_dane_przykladowe": 105
   },
   "kontrole_pliku": [
     {
@@ -671,21 +675,21 @@
       "opis": "Rozmiar pliku ≤ 150 MB",
       "podstawa": "RPB § 2b ust. 3; W-300; D-26",
       "status": "OK",
-      "szczegoly": "4.45 MB"
+      "szczegoly": "4.31 MB"
     },
     {
       "id": "K-WEKTOR",
       "opis": "Arkusze rysunkowe w postaci wektorowej",
       "podstawa": "RPB § 2b ust. 2; W-300",
       "status": "OK",
-      "szczegoly": "13 arkuszy wektorowych (łącznie 24522 ścieżek); największy udział rastra 0.0 % (próg 35 %)"
+      "szczegoly": "8 arkuszy wektorowych (łącznie 25130 ścieżek); największy udział rastra 0.0 % (próg 35 %)"
     },
     {
       "id": "K-META",
       "opis": "Metadane PDF i zakładki",
       "podstawa": "dobra praktyka; AUD-RYS",
       "status": "OK",
-      "szczegoly": "Title: „Dom LAMELA — TOM I: PZT + PAB + ZL (PRZYKŁAD – NIE DO ZŁOŻENIA)”; zakładek: 103"
+      "szczegoly": "Title: „Dom LAMELA — TOM I: PZT + PAB + ZL (PRZYKŁAD – NIE DO ZŁOŻENIA)”; zakładek: 91"
     },
     {
       "id": "K-SPIS-ZL",
@@ -706,21 +710,28 @@
       "opis": "Arkusze PAB zgodne z raport_widokow.json",
       "podstawa": "RPB § 7 ust. 1 pkt 4, § 15–17 (PZT), § 21 (PAB); raport_widokow.json",
       "status": "OK",
-      "szczegoly": "10 z 10 arkuszy z projekt/01_koncepcja/widoki"
+      "szczegoly": "5 z 5 arkuszy z projekt/03_PAB/rysunki"
     },
     {
       "id": "K-PZT-AKT",
       "opis": "Aktualność rysunków PZT względem modelu",
       "podstawa": "spójność części opisowej i rysunkowej (model jedynym źródłem danych)",
-      "status": "OSTRZEŻENIE",
-      "szczegoly": "rysunki z 2026-09-25 05:36, model zmieniony 2026-09-25 07:16 (budynek.yaml, dzialka.yaml, instalacje.yaml, wyposazenie.yaml) — przed wydaniem wygenerować ponownie (tools/generuj_widoki.py)"
+      "status": "BRAK",
+      "szczegoly": "rysunki z 2026-09-25 07:56, model zmieniony 2026-09-25 08:02 (budynek.yaml, dzialka.yaml, instalacje.yaml, wyposazenie.yaml) — przed wydaniem wygenerować ponownie (tools/generuj_widoki.py)"
     },
     {
       "id": "K-PAB-AKT",
       "opis": "Aktualność rysunków PAB względem modelu",
       "podstawa": "spójność części opisowej i rysunkowej (model jedynym źródłem danych)",
-      "status": "OSTRZEŻENIE",
-      "szczegoly": "rysunki z 2026-09-25 05:19, model zmieniony 2026-09-25 07:16 (budynek.yaml, dzialka.yaml, instalacje.yaml, wyposazenie.yaml) — przed wydaniem wygenerować ponownie (tools/generuj_widoki.py)"
+      "status": "BRAK",
+      "szczegoly": "rysunki z 2026-09-25 07:59, model zmieniony 2026-09-25 08:02 (budynek.yaml, dzialka.yaml, instalacje.yaml, wyposazenie.yaml) — przed wydaniem wygenerować ponownie (tools/generuj_widoki.py)"
+    },
+    {
+      "id": "K-METRYKA",
+      "opis": "Metryki arkuszy — autorzy, uprawnienia, sprawdzający",
+      "podstawa": "RPB § 10 ust. 1 pkt 3; PB art. 20 ust. 3 pkt 2; W-305",
+      "status": "DO UZUPEŁNIENIA",
+      "szczegoly": "8 arkuszy z polami [DO UZUPEŁNIENIA] (imię i nazwisko, specjalność i nr uprawnień); sprawdzający: nie dotyczy (art. 20 ust. 3 pkt 2 PB)"
     }
   ],
   "arkusze": [
@@ -730,11 +741,11 @@
       "format": "A2",
       "skala": "1:500",
       "wymiary_mm": [
-        594,
-        420
+        420,
+        594
       ],
-      "sciezki": 1050,
-      "znaki": 9731,
+      "sciezki": 1083,
+      "znaki": 9977,
       "udzial_rastra": 0.0,
       "zastepczy": false,
       "status": "OK"
@@ -742,14 +753,14 @@
     {
       "nr": "PZT-02",
       "strona": 20,
-      "format": "A2",
+      "format": "nst. 400×594",
       "skala": "1:200",
       "wymiary_mm": [
-        594,
-        420
+        400,
+        594
       ],
-      "sciezki": 1544,
-      "znaki": 8354,
+      "sciezki": 1592,
+      "znaki": 8812,
       "udzial_rastra": 0.0,
       "zastepczy": false,
       "status": "OK"
@@ -757,164 +768,89 @@
     {
       "nr": "PZT-03",
       "strona": 21,
-      "format": "A2",
+      "format": "nst. 620×420",
       "skala": "1:200",
       "wymiary_mm": [
-        594,
+        620,
         420
       ],
-      "sciezki": 1080,
-      "znaki": 8630,
+      "sciezki": 1228,
+      "znaki": 9805,
       "udzial_rastra": 0.0,
       "zastepczy": false,
       "status": "OK"
     },
     {
       "nr": "PB-AR-01",
-      "strona": 44,
-      "format": "A1",
+      "strona": 45,
+      "format": "nst. 630×594",
       "skala": "1:50",
       "wymiary_mm": [
-        841,
+        630,
         594
       ],
-      "sciezki": 2631,
-      "znaki": 5834,
+      "sciezki": 2710,
+      "znaki": 5954,
       "udzial_rastra": 0.0,
       "zastepczy": false,
       "status": "OK"
     },
     {
       "nr": "PB-AR-02",
-      "strona": 45,
-      "format": "A3×3",
+      "strona": 46,
+      "format": "nst. 770×420",
       "skala": "1:50",
       "wymiary_mm": [
-        891,
+        770,
         420
       ],
-      "sciezki": 2134,
-      "znaki": 4848,
+      "sciezki": 2127,
+      "znaki": 4963,
       "udzial_rastra": 0.0,
       "zastepczy": false,
       "status": "OK"
     },
     {
       "nr": "PB-AR-03",
-      "strona": 46,
-      "format": "A3×3",
+      "strona": 47,
+      "format": "nst. 590×891",
       "skala": "1:50",
       "wymiary_mm": [
-        891,
-        420
+        590,
+        891
       ],
-      "sciezki": 2087,
-      "znaki": 4616,
+      "sciezki": 2622,
+      "znaki": 6207,
       "udzial_rastra": 0.0,
       "zastepczy": false,
       "status": "OK"
     },
     {
       "nr": "PB-AR-04",
-      "strona": 47,
-      "format": "A2×3",
+      "strona": 48,
+      "format": "nst. 1130×420",
       "skala": "1:50",
       "wymiary_mm": [
-        1261,
-        594
+        1130,
+        420
       ],
-      "sciezki": 593,
-      "znaki": 2887,
+      "sciezki": 7052,
+      "znaki": 9048,
       "udzial_rastra": 0.0,
       "zastepczy": false,
       "status": "OK"
     },
     {
       "nr": "PB-AR-05",
-      "strona": 48,
-      "format": "A3×3",
-      "skala": "1:50",
-      "wymiary_mm": [
-        891,
-        420
-      ],
-      "sciezki": 2725,
-      "znaki": 5552,
-      "udzial_rastra": 0.0,
-      "zastepczy": false,
-      "status": "OK"
-    },
-    {
-      "nr": "PB-AR-06",
       "strona": 49,
-      "format": "A3×3",
+      "format": "nst. 2050×297",
       "skala": "1:50",
       "wymiary_mm": [
-        891,
-        420
+        2050,
+        297
       ],
-      "sciezki": 4453,
-      "znaki": 6896,
-      "udzial_rastra": 0.0,
-      "zastepczy": false,
-      "status": "OK"
-    },
-    {
-      "nr": "PB-AR-07",
-      "strona": 50,
-      "format": "A3×3",
-      "skala": "1:50",
-      "wymiary_mm": [
-        891,
-        420
-      ],
-      "sciezki": 2719,
-      "znaki": 2957,
-      "udzial_rastra": 0.0,
-      "zastepczy": false,
-      "status": "OK"
-    },
-    {
-      "nr": "PB-AR-08",
-      "strona": 51,
-      "format": "A3×3",
-      "skala": "1:50",
-      "wymiary_mm": [
-        891,
-        420
-      ],
-      "sciezki": 777,
-      "znaki": 2752,
-      "udzial_rastra": 0.0,
-      "zastepczy": false,
-      "status": "OK"
-    },
-    {
-      "nr": "PB-AR-09",
-      "strona": 52,
-      "format": "A2",
-      "skala": "1:50",
-      "wymiary_mm": [
-        594,
-        420
-      ],
-      "sciezki": 1299,
-      "znaki": 2832,
-      "udzial_rastra": 0.0,
-      "zastepczy": false,
-      "status": "OK"
-    },
-    {
-      "nr": "PB-AR-10",
-      "strona": 53,
-      "format": "A2",
-      "skala": "1:50",
-      "wymiary_mm": [
-        594,
-        420
-      ],
-      "sciezki": 1430,
-      "znaki": 2906,
+      "sciezki": 6716,
+      "znaki": 4161,
       "udzial_rastra": 0.0,
       "zastepczy": false,
       "status": "OK"
@@ -922,8 +858,8 @@
   ],
   "zrodla_rysunkow": {
     "PZT": "projekt/02_PZT/rysunki",
-    "PAB": "projekt/01_koncepcja/widoki",
-    "PAB_info": "brak projekt/03_PAB/rysunki/raport_widokow.json — dołączono arkusze PB-AR z projekt/01_koncepcja/widoki (ten sam generator lamela.views i ta sama numeracja wg model/arkusze.yaml); przed wydaniem zastąpić kompletem z projekt/03_PAB/rysunki"
+    "PAB": "projekt/03_PAB/rysunki",
+    "PAB_info": "rysunki PAB z projekt/03_PAB/rysunki (raport_widokow.json)"
   },
   "sprawy_otwarte": {
     "PAB": [
@@ -934,7 +870,6 @@
       "Pompa ciepła: parametry (moc, SCOP, L_WA) z karty wyrobu przykładowego — do zastąpienia DTR wybranego wyrobu (PT-IS); wpływa na EP, hałas na granicy i dobór mocy.",
       "Bufor c.o.: w modelu (wyposazenie.yaml) „bufor 100 dm³”, z obliczeń ogrzewania min. 80 dm³ — ujednolicić w modelu (PT-IS).",
       "Dane osobowe (Inwestor, projektanci, nr uprawnień, pracownia) — brak sekcji `projekt:` w model/budynek.yaml; pola [DO UZUPEŁNIENIA].",
-      "Rysunki PAB: brak projekt/03_PAB/rysunki/raport_widokow.json — dołączono arkusze PB-AR z projekt/01_koncepcja/widoki (ten sam generator lamela.views i ta sama numeracja wg model/arkusze.yaml); przed wydaniem zastąpić kompletem z projekt/03_PAB/rysunki.",
       "Posadowienie: spód żeber obwodowych 0.34 m p.p.t. < h_z = 0.80 m — płytkie posadowienie z izolacją obwodową wymaga sprawdzenia wg PN-EN ISO 13793 w PT-2 BO (W-284).",
       "Kolorystyka: ściany zewnętrzne: SZ2, SZL — Membrana fasadowa wiatroizolacyjna UV-stabilna, czarna (sd ≈ 0,02 m): kolor/zgodność z paletą MPZP do ustalenia (karta kolorystyki; decyzja Inwestora).",
       "Kolorystyka: pokrycie dachu: D1 — Membrana dachowa TPO 1,5 mm, mocowana mechanicznie (hydroizolacja stro: kolor/zgodność z paletą MPZP do ustalenia (karta kolorystyki; decyzja Inwestora).",
@@ -969,18 +904,18 @@
       "kod": "PAB",
       "tytul": "Projekt architektoniczno-budowlany",
       "start": 22,
-      "strony": 32,
-      "strony_opisu": 22,
-      "arkusze": 10
+      "strony": 28,
+      "strony_opisu": 23,
+      "arkusze": 5
     },
     {
       "kod": "ZL",
       "tytul": "Załączniki",
-      "start": 54,
-      "strony": 9,
-      "strony_opisu": 9,
+      "start": 50,
+      "strony": 10,
+      "strony_opisu": 10,
       "arkusze": 0
     }
   ],
-  "wygenerowano": "2026-09-25 07:18"
+  "wygenerowano": "2026-09-25 08:04"
 }

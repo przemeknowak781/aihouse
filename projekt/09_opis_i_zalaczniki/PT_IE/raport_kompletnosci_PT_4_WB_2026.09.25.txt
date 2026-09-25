@@ -1,40 +1,45 @@
-RAPORT KOMPLETNOŚCI — PT_4_IE_2026.09.25.pdf
-Lista kontrolna: PT-4 IE — projekt techniczny, instalacje elektryczne (rejestr C.2)
+RAPORT KOMPLETNOŚCI — PT_4_WB_2026.09.25.pdf
+Lista kontrolna: PT-4 WB — projekt techniczny, instalacje elektryczne (IE) i telekomunikacyjne (BT) (rejestr C.2)
 Status: PRZYKŁAD – NIE DO ZŁOŻENIA
-Pozycje: OK 15 · BRAK 0 · DO UZUPEŁNIENIA 2 · N/D 0 · OSTRZEŻENIE 0
-Znaczniki: [DO UZUPEŁNIENIA] ×26, [DOKUMENT ZEWNĘTRZNY] ×0, [DANE PRZYKŁADOWE] ×55
-Plik: 48 stron, 2.73 MB
+Pozycje: OK 17 · BRAK 0 · DO UZUPEŁNIENIA 3 · N/D 0 · OSTRZEŻENIE 0
+Znaczniki: [DO UZUPEŁNIENIA] ×118, [DOKUMENT ZEWNĘTRZNY] ×0, [DANE PRZYKŁADOWE] ×56
+Plik: 49 stron, 2.89 MB
 
-  element PT: strony 1–48 (opis 34, arkusze 14)
+  element PT: strony 1–49 (opis 35, arkusze 14)
 
 ✓ F-01     [  *] OK               Nazwa pliku wg zał. 1 RPB (PT_x_y_rrrr.mm.dd.pdf) (RPB zał. 1; W-301) — nazwa zgodna z zał. 1 RPB (PT)
-✓ F-02     [  *] OK               Rozmiar pliku ≤ 150 MB (RPB § 2b ust. 3) — 2.73 MB (limit 150 MB)
+✓ F-02     [  *] OK               Rozmiar pliku ≤ 150 MB (RPB § 2b ust. 3) — 2.89 MB (limit 150 MB)
 ✓ F-03     [  *] OK               Część rysunkowa wektorowa (RPB § 2b ust. 2) — 14 arkuszy wektorowych
 ✓ F-05     [  *] OK               Tom PT w osobnym pliku (bez wspólnej oprawy z PZT/PAB/ZL) (RPB § 5 ust. 3) — plik zawiera tylko tom PT
 … C2-01    [ PT] DO UZUPEŁNIENIA  Strona tytułowa: „Projekt techniczny”, zamierzenie, kategoria I, inwestor (RPB § 7 ust. 2 pkt 1–2) — pola [DO UZUPEŁNIENIA] na stronie tytułowej
 ✓ C2-02    [ PT] OK               Strona tytułowa: nr tomu i liczba tomów PT (RPB § 7 ust. 6)
 … C2-03    [ PT] DO UZUPEŁNIENIA  Strona tytułowa: data, autorzy ze specjalnością, nr uprawnień i zakresem (RPB § 7 ust. 2 pkt 3) — pola [DO UZUPEŁNIENIA] na stronie tytułowej
 ✓ C2-04    [ PT] OK               Spis treści (RPB § 7 ust. 5)
-✓ C2-05    [ PT] OK               Numeracja stron tomu (RPB § 6 ust. 2) — 33 stron numerowanych
+✓ C2-05    [ PT] OK               Numeracja stron tomu (RPB § 6 ust. 2) — 34 stron numerowanych
 ✓ C2-06    [ PT] OK               Oświadczenie projektanta PT (brzmienie art. 41 ust. 4a pkt 2 PB) (PB art. 34 ust. 3d pkt 3, art. 41 ust. 4a pkt 2)
 ✓ C2-07    [ PT] OK               Dane dotyczące warunków ochrony przeciwpożarowej stosownie do zakresu (RPB § 23 pkt 10)
 ✓ C2-08    [ PT] OK               Skale rysunków nie mniejsze niż 1:100 (RPB § 9 ust. 3) — 13 rysunków w skali nie mniejszej niż 1:100
+✓ C2-09    [ PT] OK               Dane dotyczące warunków ochrony ludności (w PT — „nie dotyczy” z podstawą) (RPB § 23 pkt 12 (Dz.U. 2026 poz. 597 § 1 pkt 6))
+✓ C2-10    [  *] OK               Metryki arkuszy: projektant (dane lub [DO UZUPEŁNIENIA]), sprawdzający (osoba lub „nie dotyczy (art. 20 ust. 3 pkt 2 PB)”) (RPB § 10 ust. 1 pkt 3; W-305, W-320) — 14 tabliczek z wypełnioną metryką
 ✓ C2-IE-01 [ PT] OK               Instalacje elektroenergetyczne (RPB § 23 pkt 7 lit. g)
 ✓ C2-IE-02 [ PT] OK               Instalacje telekomunikacyjne (światłowód) (RPB § 23 pkt 7 lit. h; W-196)
 ✓ C2-IE-03 [ PT] OK               Instalacja piorunochronna / analiza ryzyka (RPB § 23 pkt 7 lit. i; W-191)
 ✓ C2-IE-04 [ PT] OK               Bilans mocy (RPB § 23 pkt 11 lit. a)
 ✓ C2-IE-05 [ PT] OK               Rzuty instalacji, schemat rozdzielnicy, uziom (RPB § 24 pkt 4 lit. b) — PT-IE-01 — INSTALACJA OŚWIETLENIA — RZUT PARTERU (1:50); PT-IE-02 — INSTALACJA OŚWIETLENIA — RZUT I PIĘTRA (1:50); PT-IE-03 — INSTALACJA OŚWIETLENIA — RZUT II P
+… C2-WB-01 [ PT] DO UZUPEŁNIENIA  Współautor ze specjalnością telekomunikacyjną na stronie tytułowej i w oświadczeniu (PB art. 15a ust. 18, art. 34 ust. 3e; RPB § 7 ust. 2 pkt 3) — pola [DO UZUPEŁNIENIA] na stronie tytułowej
 
 Pola do uzupełnienia i dokumenty zewnętrzne (wystąpienia):
-    4 × [DO UZUPEŁNIENIA]
-    3 × [DO UZUPEŁNIENIA: imię i nazwisko]
-    3 × [DO UZUPEŁNIENIA: nr uprawnień budowlanych]
+   88 × [DO UZUPEŁNIENIA]
+    6 × [DO UZUPEŁNIENIA: imię i nazwisko]
+    6 × [DO UZUPEŁNIENIA: nr uprawnień budowlanych]
     2 × [DO UZUPEŁNIENIA: adres inwestora]
     2 × [DO UZUPEŁNIENIA: imię i nazwisko lub nazwa inwestora]
     2 × [DO UZUPEŁNIENIA: kod TERYT jedn. ewid. WWPPGG_R]
     1 × [DO UZUPEŁNIENIA: adres pracowni]
     1 × [DO UZUPEŁNIENIA: data oświadczenia Inwestora (art. 102a PB)]
     1 × [DO UZUPEŁNIENIA: data złożenia oświadczenia z art. 102a PB]
+    1 × [DO UZUPEŁNIENIA: decyzja projektanta o sprawdzeniu wg PN-EN IEC 62305- 2:2025-09 przed realizacją]
+    1 × [DO UZUPEŁNIENIA: imię i nazwisko, nr uprawnień]
     1 × [DO UZUPEŁNIENIA: jednostka ewidencyjna — kod TERYT WWPPGG_R i nazwa]
     1 × [DO UZUPEŁNIENIA: miejscowość]
     1 × [DO UZUPEŁNIENIA: nazwa pracowni projektowej]

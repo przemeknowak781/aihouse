@@ -380,9 +380,58 @@ def table_block(title, cols, rows, align=None, h=1.8, row_h=4.2, raz_na_arkusz: 
             byly.add(raz_na_arkusz)
         tot = sum(c[1] for c in cols)
         cs = [(n, cw * w / tot) for n, cw in cols]
+        if any(T.width(str(v), h) > cw - 2.0 for r_ in rows for (_n, cw), v in zip(cs, r_)):
+            return _table_wrap(sh, x, y - 6.5, cs, rows, h, row_h, title, align)
         r = table(sh, x, y - 6.5, cs, rows, h=h, row_h=row_h, title=title, align=align, header_h=6.0)
         return r[1]
     return fn
+
+
+def _table_wrap(sh, x, y_top, cols, rows, h, row_h, title, align, header_h=6.0, layer="R-OPISY"):
+    """Tabela jak ``draft.sheet.table``, ale tekst komórki dłuższy niż kolumna jest ŁAMANY na wiersze (wysokość
+    wiersza rośnie), a nie wychodzi poza komórkę. Używana tylko, gdy któraś komórka się nie mieści."""
+    from ...draft.geom import rect_pts
+    W = sum(cw for _n, cw in cols)
+    lh = h * 1.45
+    y = y_top
+    with sh.on(layer):
+        if title:
+            sh.text((x, y + 2.0), title, 3.5, style="bold")
+        sh.fill(rect_pts(x, y - header_h, x + W, y), layer, "#eeeeee", z=5)
+        xx = x
+        for name, cw in cols:
+            ls = name.split("\n")
+            for i, s_ in enumerate(ls):
+                yy = y - header_h / 2.0 + (len(ls) - 1) * 1.3 - i * 2.6
+                sh.text((xx + cw / 2.0, yy), s_, 1.8, ha="center", va="middle", style="bold")
+            xx += cw
+        y -= header_h
+        sh.line((x, y), (x + W, y), pen=0.25)
+        for r_ in rows:
+            cells = [wrap(str(v), cw - 2.0, h) for (_n, cw), v in zip(cols, r_)]
+            n = max(len(c) for c in cells)
+            rh = max(row_h, row_h + (n - 1) * lh)
+            xx = x
+            for i, ((_n, cw), ls) in enumerate(zip(cols, cells)):
+                a = (align[i] if align else ("left" if i else "center"))
+                y0 = y - rh / 2.0 + (len(ls) - 1) * lh / 2.0
+                for j, s_ in enumerate(ls):
+                    yy = y0 - j * lh
+                    if a == "left":
+                        sh.text((xx + 1.0, yy), s_, h, va="middle")
+                    elif a == "right":
+                        sh.text((xx + cw - 1.0, yy), s_, h, va="middle", ha="right")
+                    else:
+                        sh.text((xx + cw / 2.0, yy), s_, h, va="middle", ha="center")
+                xx += cw
+            y -= rh
+            sh.line((x, y), (x + W, y), pen=0.13)
+        xx = x
+        for _n, cw in cols[:-1]:
+            xx += cw
+            sh.line((xx, y), (xx, y_top), pen=0.13)
+        sh.rect(x, y, x + W, y_top, pen=0.35)
+    return y
 
 
 def text_lines_block(title, lines, h=1.8):
