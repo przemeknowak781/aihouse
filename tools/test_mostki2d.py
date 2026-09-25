@@ -55,6 +55,21 @@ def test_iso10211_przypadek2():
     assert w.ok
 
 
+def test_przypadek2_niezalezny_od_siatki():
+    # regresja (weryfikacja niezależna, uwaga 1): G na styku Al/drewno/korek — |ΔG| < 0,1 K przy h_min 0,5 i 0,1 mm
+    wz = V.wezel_przypadek2()
+    G_ = []
+    for h_min, h_max in ((0.5e-3, 5e-3), (0.1e-3, 2e-3)):
+        roz = ModelMOS(wz, siatka_dla_wezla(wz, h_min=h_min, h_max=h_max)).rozwiaz()
+        x, y = V.PRZYPADEK2_PUNKTY["G"]
+        g = roz.temperatura(x * 1e-3, y * 1e-3)
+        assert abs(g - V.PRZYPADEK2_T["G"]) < 0.1, (h_min, g)
+        assert abs(g - 16.334) < 0.01, (h_min, g)          # niezależny solver węzłowy
+        G_.append(g)
+    assert abs(G_[0] - G_[1]) < 0.005
+    assert V.waliduj_przypadek2_siatki().ok
+
+
 def test_analityczne_1d_i_naroze():
     w = V.waliduj_1d()
     assert w.ok, w.max_odch_T
@@ -83,6 +98,130 @@ def test_siatka_podzial():
     assert np.diff(e).max() <= 0.05 + 1e-12 and np.diff(e)[0] <= 0.002 + 1e-12
     e2 = podzial(0.0, 0.0015, 0.002, 0.05, 1.25, 2)
     assert len(e2) == 3
+
+
+def test_siatka_bez_przepelnienia_i_granice():
+    e = podzial(0.0, 20.0, 0.003, 0.003, 1.25, 2)          # wcześniej OverflowError
+    d = np.diff(e)
+    assert abs(e[-1] - 20.0) < 1e-12 and d.max() <= 0.003 * (1 + 1e-9)
+    from lamela.obliczenia.mostki2d.siatka import krawedzie
+    k = krawedzie(np.array([0.0, 0.1, 0.1001, 0.3]), 0.002, 0.05, 1.25, 2)
+    d = np.diff(k)
+    assert (d[1:] / d[:-1]).max() <= 2.0 + 1e-9 and (d[:-1] / d[1:]).max() <= 2.0 + 1e-9
+
+
+def test_szczeliny_wykrywane():
+    from shapely.geometry import box
+    M = G.Material
+
+    def wezel(gap):
+        ob = [G.Obszar(box(0, 0, 0.18, 1), M("SIL", 0.77)), G.Obszar(box(0.18 + gap, 0, 0.38, 1), M("EPS", 0.031))]
+        st = G.strefy_z_dopelnienia(ob, box(-0.05, 0, 0.43, 1), [((-0.025, 0.5), G._nas("i", 20, "wewn")),
+                                                                   ((0.405, 0.5), G._nas("e", -18, "zewn"))])
+        return G.Wezel("x", "x", "t", ob, st, przekroj="poziomy")
+    r = ModelMOS(wezel(2e-7), siatka_dla_wezla(wezel(2e-7))).rozwiaz()   # < 0,5 µm — przyciąganie do 1 µm
+    assert abs(r.Phi_grup()["i"] / 38 - 1 / (0.13 + 0.18 / 0.77 + 0.2 / 0.031 + 0.04)) < 1e-4
+    for gap in (2e-6, 1e-4, 2e-3):
+        try:
+            ModelMOS(wezel(gap), siatka_dla_wezla(wezel(gap)))
+        except ValueError as e:
+            assert "szczelina" in str(e)
+        else:
+            raise AssertionError(f"szczelina {gap} m nie wykryta")
+
+
+def test_theta_si_w_wierzcholku():
+    # naroże słabo ocieplone (R_si = 0,25): minimum w narożu wewn. (0, 0), odniesienie 10,737 °C (siatka zbieżna)
+    wl = [G.Warstwa(G.Material("TG", 0.4), 0.015), G.Warstwa(G.Material("CEG", 0.77), 0.25, True),
+          G.Warstwa(G.Material("EPS", 0.04), 0.05)]
+    wz = G.wezel_naroznik_zewnetrzny(wl, theta_i=20, theta_e=-18)
+    t, x, y, k = ModelMOS(wz, siatka_dla_wezla(wz), "fRsi").rozwiaz().theta_si_min()
+    assert k == -1 and abs(x) < 1e-9 and abs(y) < 1e-9
+    assert abs(t - 10.737) < 0.02, t
+
+
+def test_systemy_wymiarow_psi_oi():
+    m = _model()
+    sz = _sz()
+    U = G.U_warstw(sz)
+    c = R.oblicz_wezel(G.wezel_naroznik_zewnetrzny(sz)).psi_glowne
+    assert abs(c.psi_oi - c.psi_i) < 1e-12
+    pod = G.warstwy_z_modelu(m, "POD-1")
+    f = R.oblicz_wezel(G.wezel_wspornik(sz, 0.2, None, pod, [G.Warstwa(G.MATERIALY_DOMYSLNE["TYNK_CEM"], 0.01)],
+                                        wysieg=0.0)).psi_glowne
+    assert abs(f.psi_oi - f.psi_e) < 1e-9                   # „od podłogi do podłogi” ⇒ ψ_oi = ψ_e
+    wz = G.wezel_oscieze_okna(sz, polozenie="w_izolacji")   # x0 = −0,03 (rama za murem)
+    w = R.oblicz_wezel(wz).psi_glowne
+    Uw = G.U_w_okna(0.95, 0.50, 0.115)
+    assert abs((w.psi_oi - w.psi_e) - (U - Uw) * (-0.03)) < 1e-9
+    a = R.oblicz_wezel(G.wezel_attyka(sz, G.warstwy_z_modelu(m, "SD-D1"))).psi_glowne
+    assert a.psi_oi > a.psi_e + 0.05                          # attyka: ψ_oi ≈ ψ_i ≫ ψ_e
+
+
+def test_attyka_wentylowana_i_legary():
+    m = _model()
+    assert G.material_z_modelu(m, "LEGARY").rodzaj == "powietrze"        # „(pustka)” — niewentylowana
+    wd = [G.Warstwa(G.Material("PW", 0.5, "pustka wentylowana", rodzaj="powietrze_went"), 0.05),
+          G.Warstwa(G.Material("PIR", 0.022), 0.2), G.Warstwa(G.Material("ZB", 2.3), 0.2, True)]
+    assert len(G.pomin_pustki_wentylowane(wd)) == 2
+    try:
+        G.wezel_attyka(_sz(), wd)
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("attyka z pustką wentylowaną powinna zgłosić błąd")
+
+
+def test_otwory_i_dlugosci_oi():
+    from lamela.obliczenia.mostki2d.katalog import B_prim, dlugosci_z_modelu, otwory_zewnetrzne
+    m = _model()
+    otw = otwory_zewnetrzne(m)
+    ids = {o.id for o in otw}
+    assert not ids & {"O0-06", "O0-07", "O1-08", "O1-09", "O1-10", "O1-11"}   # ściany wewn./działowe, typ otwor
+    assert {"O0-01", "O0-03", "O1-03"} <= ids
+    dl, _ = dlugosci_z_modelu(m)
+    assert abs(dl["WZ-W1"] - sum(2 * o.wys for o in otw)) < 1e-9
+    assert abs(dl["WZ-T1"] - 5.1) < 1e-9 and abs(dl["WZ-T3"] - 2.4) < 1e-9 and abs(dl["WZ-T2"] - 3.6) < 1e-9
+    assert abs(dl["WZ-N1"] + dl["WZ-N2"] - sum(o.szer for o in otw)) < 1e-9
+    assert abs(dl["WZ-P1"] - sum(o.szer for o in otw if o.parapet > 0.05)) < 1e-9
+    B, _ = B_prim(m)
+    assert 4.5 < B < 5.0
+
+
+def test_eksport_do_fizyka_mostki():
+    import json
+    from lamela.obliczenia.fizyka.mostki import psi_z_symulacji, wczytaj_wyniki_symulacji
+    sz = _sz()
+    w = R.oblicz_wezel(G.wezel_naroznik_zewnetrzny(sz))
+    plik = OUT / "eksport_test.json"
+    d = R.eksport_wynikow([w], {"WZ-C1": 11.54}, plik)
+    assert d["WZ-C1"]["dlugosc_oi"] == 11.54 and "psi_oi" in d["WZ-C1"]
+    wcz = wczytaj_wyniki_symulacji(plik)
+    psi, rodz = psi_z_symulacji(wcz["WZ-C1"], wcz["WZ-C1"]["typ"])
+    assert rodz == "Ψ_oi" and abs(psi - w.psi_glowne.psi_oi) < 1e-5
+    assert json.loads(plik.read_text(encoding="utf-8"))["WZ-C1"]["system_wymiarow"].startswith("oi")
+
+
+def test_bilans_wymuszany():
+    from shapely.geometry import box
+    M = G.Material
+    # dwie izolowane części materiału (brak styku) z pustką przy brzegu ramki — bilans poprawny, ale strefa i ma
+    # kontakt tylko z jedną częścią: wynik akceptowany; sprawdzamy, że kryterium bilansu jest egzekwowane w
+    # _rozwiaz_zbieznie (monkeypatch progu)
+    ob = [G.Obszar(box(0, 0, 0.2, 1), M("A", 1.0))]
+    st = [G.Strefa("i", box(-0.05, 0, 0, 1), 20.0, "wewn", "i", Rs=0.13),
+          G.Strefa("e", box(0.2, 0, 0.25, 1), -18.0, "zewn", "e", Rs=0.04)]
+    wz = G.Wezel("b", "b", "t", ob, st, przekroj="poziomy")
+    stary = R.KRYT_BILANSU
+    try:
+        R.KRYT_BILANSU = 0.0
+        R.oblicz_wezel(wz)
+    except ValueError as e:
+        assert "bilans" in str(e)
+    else:
+        raise AssertionError("brak kontroli bilansu")
+    finally:
+        R.KRYT_BILANSU = stary
 
 
 def test_U_13370():
@@ -157,7 +296,8 @@ def test_katalog_modelu_testowego():
     m = _model()
     wezly = katalog_z_modelu(m)
     ids = [w.id for w in wezly]
-    for k in ("WZ-C1", "WZ-IF1", "WZ-B1", "WZ-B0", "WZ-R1", "WZ-W1", "WZ-W2", "WZ-GF1", "WZ-G1", "WZ-G2", "WZ-RS1"):
+    for k in ("WZ-C1", "WZ-IF1", "WZ-B1", "WZ-B0", "WZ-R1", "WZ-W1", "WZ-W2", "WZ-N1", "WZ-N2", "WZ-P1", "WZ-GF1",
+              "WZ-T1", "WZ-T2", "WZ-T3", "WZ-G1", "WZ-G2", "WZ-RS1"):
         assert k in ids, k
     wyn = [R.oblicz_wezel(w, katalog_wykresow=OUT / "rys") for w in wezly]
     for w in wyn:
@@ -172,12 +312,17 @@ def test_katalog_modelu_testowego():
             assert w.fRsi_ok, (w.wezel.id, w.f["f_Rsi"])
     dl, _ = dlugosci_z_modelu(m)
     txt = R.raport_katalogu(wyn, OUT / "katalog_mostkow.md", "Katalog mostków — model testowy", dlugosci=dl)
-    assert "H_TB" in txt and "WZ-GF1" in txt
+    assert "H_TB" in txt and "WZ-GF1" in txt and "ψ_oi" in txt
+    H, wiersze = R.zestawienie_HTB(wyn, dl, "oi")
+    assert len(wiersze) == len([k for k in dl if k in ids]) and 10.0 < H < 40.0
+    ex = R.eksport_wynikow(wyn, dl, OUT / "wyniki_mostki2d.json")
+    assert all("psi_oi" in v and "f_rsi" in v for v in ex.values())
 
 
 def test_raport_walidacji():
     txt = V.raport_walidacji(plik=OUT / "walidacja_ISO10211.md")
-    assert "NIE SPEŁNIA" not in txt and txt.count("**SPEŁNIA**") == 5
+    assert "NIE SPEŁNIA" not in txt and txt.count("**SPEŁNIA**") == 6
+    assert "Weryfikacja niezależna i poprawki" in txt and "**BŁĄD**" not in txt
 
 
 # ------------------------------------------------------------------------------------------ runner

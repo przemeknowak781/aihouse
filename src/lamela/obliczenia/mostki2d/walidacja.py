@@ -460,7 +460,6 @@ UWAGI_WERYFIKACJI = [
 
 def sekcja_weryfikacji() -> list[str]:
     """Sekcja raportu „Weryfikacja niezależna i poprawki” (uwagi weryfikatorów, poprawki, kontrole numeryczne)."""
-    from .wyniki import fmt_liczba as f
     L = ["", "## Weryfikacja niezależna i poprawki", "",
          "Pakiet sprawdzili dwaj niezależni weryfikatorzy: (A) numeryczno-fizyczny — własny solver węzłowy MOS "
          "(vertex-centred), szereg Fouriera przypadku 1 (4001 wyrazów), testy skrajnych kontrastów λ, skalowania, "

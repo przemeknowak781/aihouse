@@ -353,6 +353,26 @@ def test_plyta_fundamentowa_bez_dzialki():
     assert any("Winkler" in w.nazwa for w in pf.wyniki) and any("Osiadanie" in w.nazwa for w in pf.wyniki)
 
 
+def test_sciana_nosna_na_stropie():
+    """Wariant: ściana nośna piętra S1-05 przesunięta (x = 5,0 m) — bez ściany poniżej → obciążenie liniowe stropu ST1
+    (reakcja dachu + ciężar ściany) i ostrzeżenie o konieczności podciągu."""
+    import copy
+    import yaml
+    from lamela.model import Model
+    raw = copy.deepcopy(yaml.safe_load(B_TEST.read_text(encoding="utf-8")))
+    for w in raw["sciany"]:
+        if w["id"] == "S1-05":
+            w["os"] = [[5.0, 0.0], [5.0, 8.0]]
+        if w["id"] == "S1-07":
+            w["os"] = [[5.0, 4.5], [10.0, 4.5]]
+    raw["otwory"] = [o for o in raw["otwory"] if o["sciana"] not in ("S1-05",)]
+    raw["pomieszczenia"] = [r for r in raw["pomieszczenia"] if r["kond"] != "P1"]
+    an = AnalizaKonstrukcji(Model(raw, yaml.safe_load(D_TEST.read_text(encoding="utf-8"))), Parametry()).uruchom(scisle=True)
+    st1 = next(g for g in an.grupy if g.nazwa == "ST1")
+    assert any("S1-05 bez podparcia" in o for _, _, _, o in st1.linie)
+    assert any("S1-05" in u and "bez ściany poniżej" in u for u in an.uwagi)
+
+
 def test_mur_przesklepienie():
     m = Mur()
     r = murm.sciana_luk(1.33, 2.86, 0.18, m)

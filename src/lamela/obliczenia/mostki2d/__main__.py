@@ -36,9 +36,9 @@ def main(argv=None) -> int:
         print(f"→ {out / 'walidacja_ISO10211.md'}")
         return 0 if all(x.ok for x in w) else 1
     from lamela.model import load_model
-    from .katalog import dlugosci_z_modelu, katalog_z_modelu
+    from .katalog import B_prim, dlugosci_z_modelu, katalog_z_modelu
     from .walidacja import waliduj_wszystko
-    from .wyniki import oblicz_wezel, raport_katalogu
+    from .wyniki import eksport_wynikow, oblicz_wezel, raport_katalogu
     m = load_model(args.budynek, args.dzialka)
     wezly = katalog_z_modelu(m, y_teren=args.teren)
     if args.tylko:
@@ -53,15 +53,17 @@ def main(argv=None) -> int:
         t = time.time()
         r = oblicz_wezel(wz, katalog_wykresow=out / "rys")
         p = r.psi_glowne
-        print(f"{wz.id:7s} ψ_e = {p.psi_e:+.3f} ψ_i = {p.psi_i:+.3f} f_Rsi = {r.f['f_Rsi']:.3f} "
+        print(f"{wz.id:7s} ψ_oi = {p.psi_oi:+.3f} ψ_e = {p.psi_e:+.3f} ψ_i = {p.psi_i:+.3f} f_Rsi = {r.f['f_Rsi']:.3f} "
               f"({time.time() - t:.1f} s)")
         wyniki.append(r)
     dl, uw = dlugosci_z_modelu(m)
     tytul = args.tytul or f"Katalog mostków cieplnych 2D — {m.meta.get('nazwa', '') if hasattr(m, 'meta') else ''}"
     raport_katalogu(wyniki, out / "katalog_mostkow.md", tytul,
-                    wstep="Model: `" + args.budynek + "`. Długości do H_TB (przybliżone): " + "; ".join(uw),
+                    wstep="Model: `" + args.budynek + "`. " + B_prim(m)[1] + ". Długości do H_TB (system wymiarów "
+                          "wewnętrznych całkowitych, przybliżone [INT]): " + "; ".join(uw),
                     dlugosci=dl, walidacja_md=wal_txt)
-    print(f"→ {out / 'katalog_mostkow.md'}")
+    eksport_wynikow(wyniki, dl, out / "wyniki_mostki2d.json")
+    print(f"→ {out / 'katalog_mostkow.md'}, {out / 'wyniki_mostki2d.json'}")
     return 0 if all(r.fRsi_ok and r.zbieznosc_ok for r in wyniki) else 2
 
 

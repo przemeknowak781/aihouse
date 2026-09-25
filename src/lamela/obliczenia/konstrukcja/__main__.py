@@ -28,6 +28,7 @@ def main(argv=None) -> int:
     ap.add_argument("--wymagania", default=None, help="ścieżka wymagania.yaml (domyślnie z repozytorium)")
     ap.add_argument("--bez-html", action="store_true")
     ap.add_argument("--nie-strict", action="store_true", help="nie przerywać przy błędach walidacji modelu")
+    ap.add_argument("--scisle", action="store_true", help="błąd dowolnego etapu analizy przerywa obliczenia (debug)")
     a = ap.parse_args(argv)
     t0 = time.time()
     m = load_model(a.budynek, a.dzialka, strict=not a.nie_strict)
@@ -35,7 +36,7 @@ def main(argv=None) -> int:
     if a.siatka:
         p.siatka_mes = a.siatka
     out = Path(a.out)
-    an = AnalizaKonstrukcji(m, p, rys_dir=out / "rys").uruchom()
+    an = AnalizaKonstrukcji(m, p, rys_dir=out / "rys").uruchom(scisle=a.scisle)
     f = generuj_raport(an, out, tytul=a.tytul, status=a.status, html=not a.bez_html)
     n = sum(len(g.podpozycje) for g in an.pozycje)
     nok = sum(1 for g in an.pozycje for pz in g.podpozycje if not pz.ok)
