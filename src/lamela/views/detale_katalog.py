@@ -1452,7 +1452,6 @@ def detal_rura_cokol(m, opts: dict) -> Detal:
     """Rura spustowa zewnętrzna przy cokole: obejmy na elementach montażowych ETICS (bez przebicia izolacji do muru),
     czyszczak nad terenem, przejście do PVC-U w opasce, przejście przez izolację obwodową, kolano i odpływ do KD."""
     import re
-    from shapely.geometry import Point as _Pt, box as _box
     r, d = rura_zewn(m, opts.get("rura"))
     det = detal_cokol(m, {"_xR": 1.40, "_yT": 0.85, "_yB": -1.30})
     det.id, det.tytul = "D-14", f"Rura spustowa {r.get('id', 'RS')} przy cokole — czyszczak i odpływ do KD"
@@ -1471,10 +1470,8 @@ def detal_rura_cokol(m, opts: dict) -> Detal:
     y_k = tz - 0.85                                            # oś odejścia poziomego (≥ h_z 0,8 m pod XPS)
     rk = 0.12                                                  # promień kolana (oś)
     # pustka rury (odjęta od gruntu, opaski, XPS) i ścianki rury
-    ring = _Pt(xa + rk, y_k + rk).buffer(rk + ro, 64).difference(_Pt(xa + rk, y_k + rk).buffer(max(rk - ro, 0.01), 64))
-    det.otwory.append(ring.intersection(_box(xa - ro, y_k - ro, xa + rk, y_k + rk)))
-    det.otwor(xa - ro, y_k + rk, xa + ro, tz + 0.01)
-    det.otwor(xa + rk, y_k - ro, xR + 0.2, y_k + ro)
+    y_x0 = tz - P["gl"] - P["d_n"]
+    det.otwor(xa - ro, y_x0 - 0.005, xa + ro, tz + 0.01)        # przejście przez opaskę i XPS (niżej — grunt)
     for sx in (-1, 1):
         det.kontur([(xa + sx * (ro - 0.005), yT), (xa + sx * (ro - 0.005), y_c1)], zamkniety=False, pen=0.5)
         det.kontur([(xa + sx * ro, y_c0), (xa + sx * ro, y_k + rk)], zamkniety=False, pen=0.5)
@@ -1490,7 +1487,7 @@ def detal_rura_cokol(m, opts: dict) -> Detal:
     det.kontur([(xa + ro + 0.006, y_c0 + 0.03), (xa + ro + 0.02, y_c0 + 0.03), (xa + ro + 0.02, y_c1 - 0.03),
                 (xa + ro + 0.006, y_c1 - 0.03)], zamkniety=False, pen=0.35)
     # otulina nad XPS obwodowym, uszczelnienie przejścia przez XPS
-    y_x0, y_x1 = tz - P["gl"] - P["d_n"], tz - P["gl"]
+    y_x1 = tz - P["gl"]
     for sx in (-1, 1):
         det.rect(xa + sx * ro, tz - 0.02, xa + sx * (ro + 0.02), y_x1, "OTULINA")
         det.rect(xa + sx * ro, y_x0, xa + sx * (ro + 0.008), y_x1, "PIANKA")

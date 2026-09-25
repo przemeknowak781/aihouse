@@ -338,7 +338,8 @@ W("S0-15", "P0", "SW18", (xE, y1), (xE, y2), uwagi="oś E — kuchnia / przedsio
 W("S0-16", "P0", "SWG", (xE, y2), (xE, y4), "lewa", "oś E — dom / garaż (izolacja od garażu, szczelna)")
 W("S0-17", "P0", "SWG", (xF, y2), (xE, y2), "lewa", "oś 2 — pas gospodarczy / garaż (izolacja od garażu, szczelna)")
 W("S0-18", "P0", "DZ12", (xP, y1), (xP, y2), uwagi="przedsionek / pom. techniczne")
-W("S0-19", "P0", "DZGK", (xB, Y_GP), (xC, Y_GP), uwagi="przedpokój gościnny / łazienka gościnna — ścianka GK z kasetą drzwi chowanych (A2 I-7)")
+W("S0-19", "P0", "DZ12", (xB, Y_GP), (xC, Y_GP), uwagi="przedpokój gościnny / łazienka gościnna — silikat 12 (A3 I-3: kaseta drzwi chowanych "
+  "kolidowała z węzłem obudowy SI S0-23 i podejściem WC do pionu K1; drzwi skrzydłowe O0-16)")
 W("S0-20", "P0", "DZ12", (xD, Y_HW), (xD2, Y_HW), uwagi="hol / WC")
 W("S0-21", "P0", "SGL", (xD2, Y_HW), (xE, Y_HW), uwagi="przeszklona ścianka wiatrołap / hol z drzwiami szklanymi (przeszczep z W3)")
 W("S0-22", "P0", "DZ12", (xD2, Y_HW), (xD2, y4), uwagi="WC / wiatrołap")
@@ -444,11 +445,14 @@ O("O0-11", "S0-07", 1.20, 3.60, "drzwi_przesuwne_HS", "HS2", H_E, 0.0, HS, "scre
   uwagi="HS salonu na taras zach. pod okapem 1,50 m (przeszczep J2 z W1/W3); nadproże = wieniec ST1")
 O("O0-12", "S0-07", 5.80, 7.60, "okno", "OZ1", 1.50, 0.90, RU, "zaluzja_zewn", uwagi="pokój gościnny — zachód (poza okapem PL-E: kaseta nadstawna)")
 O("O0-13", "S0-06", 4.30, 5.10, "okno", "ON1", 0.60, 1.60, ow("U"), "brak", uwagi="łazienka gościnna — okno wysokie")
-O("O0-14", "S0-08", 4.20, 5.10, "drzwi", "D1", 2.10, 0.0, ow("R", "do_wewn"), uwagi="salon → przedpokój gościnny")
-O("O0-15", "S0-11", 5.33, 6.23, "drzwi", "D1", 2.10, 0.0, ow("R", "do_wewn"), uwagi="przedpokój → pokój gościnny")
-O("O0-16", "S0-19", 4.08, 4.88, "drzwi", "D2P", 2.10, 0.0, ow("przesuwne", "na_zewn", przesuwne=True, chowane=True),
-  uwagi="łazienka gościnna — drzwi przesuwne CHOWANE w kasecie ścianki S0-19 (przesuw na wschód do x 5,68; audyt A2 I-7), "
-        "światło 0,80 × 2,00 (WT §79), podcięcie ≥ 0,022 m²; brak skrzydła w przedpokoju")
+O("O0-14", "S0-08", 4.20, 5.10, "drzwi", "D1P", 2.10, 0.0, ow("przesuwne", "na_zewn", przesuwne=True, chowane=False),
+  uwagi="salon → przedpokój gościnny: drzwi przesuwne NAŚCIENNE po stronie salonu, skrzydło parkuje na wolnej ścianie S0-08 "
+        "x 3,25–4,20 (audyt A3 I-3) — brak skrzydła w przedpokoju 0.08")
+O("O0-15", "S0-11", 5.33, 6.23, "drzwi", "D1", 2.10, 0.0, ow("R", "do_wewn"),
+  uwagi="przedpokój → pokój gościnny, otwierane do pokoju (A3 I-3)")
+O("O0-16", "S0-19", 4.25, 5.15, "drzwi", "D2", 2.10, 0.0, ow("R", "na_zewn"),
+  uwagi="łazienka gościnna — drzwi skrzydłowe otwierane NA ZEWNĄTRZ do przedpokoju 0.08 (WT §79, W-059), zawias od wsch. (x 5,15): "
+        "otwarte skrzydło parkuje przy obudowie SI, wolna strefa przedpokoju ≈ 1,2 × 1,1 m (audyt A3 I-3); podcięcie ≥ 0,022 m²")
 O("O0-17", "S0-09", 7.40, 8.20, "drzwi", "D3", 2.00, 0.0, ow("R", "do_wewn"), uwagi="spiżarnia pod biegiem 2 (przeszczep J2)")
 O("O0-18", "S0-10", 8.90, 10.40, "otwor", "OT1", 2.40, 0.0, uwagi="hol → pas komunikacyjny przy schodach / strefa dzienna")
 O("O0-19", "S0-20", 8.71, 9.61, "drzwi", "D2", 2.10, 0.0, ow("R", "na_zewn"), uwagi="WC gościnne — na zewnątrz, kratka ≥ 0,022 m²")
@@ -458,6 +462,10 @@ O("O0-21", "S0-15", 0.35, 1.25, "drzwi", "D1", 2.10, 0.0, ow("R", "do_wewn"),
   uwagi="przedsionek → kuchnia; przesunięte do fasady (przeszczep J1) — ciągła zabudowa kuchni y 1,40–5,02")
 O("O0-22", "S0-17", 13.60, 14.50, "drzwi", "DG1", 2.10, 0.0, ow("R", "do_wewn"),
   uwagi="garaż → przedsionek: szczelne, samozamykacz, U ≤ 1,3 (W-113, W-244)")
+O("O0-24", "S0-16", 5.60, 6.50, "drzwi", "DG1", 2.10, 0.0, ow("R", "do_wewn", "lewa"),
+  uwagi="DG2 garaż → hol 0.02 (audyt A3 I-4, runda 2): codzienne wejście rodziny z garażu do holu i schodów z pominięciem strefy "
+        "roboczej kuchni; stalowe ocieplone, szczelne, uszczelka obwodowa + próg, samozamykacz, U ≤ 1,3 (W-113, W-244); otwierane do "
+        "holu (auto na MP1 nie blokuje skrzydła), zawias przy y 6,50 — otwarte skrzydło parkuje przy ściance szklanej S0-21")
 O("O0-23", "S0-18", 1.60, 2.50, "drzwi", "D4", 2.10, 0.0, ow("R", "do_wewn", "prawa"),
   uwagi="pom. techniczne dostępne z domu przez przedsionek (poprawka J2); zawias przy y 1,60 — skrzydło nie wchodzi na moduł PC (A2 D-2)")
 
@@ -525,7 +533,9 @@ PAS = (5.90, 3.85, 8.90, Y3_s)
 # ---- P0
 PMS("0.01", "P0", "Wiatrołap", (10.9, 7.6), kat="ruchu", posadzka="GRES", temp=16, rodzaj="komunikacja", podloga="POD-0L",
     uwagi="szklana przegroda z drzwiami w osi wejścia; ławka")
-PMS("0.02", "P0", "Hol", (10.0, 5.9), kat="ruchu", posadzka="GRES", temp=20, rodzaj="komunikacja", podloga="POD-0L", uwagi="szafa wejściowa 0,60 m przy ścianie E")
+PMS("0.02", "P0", "Hol", (10.0, 5.9), kat="ruchu", posadzka="GRES", temp=20, rodzaj="komunikacja", podloga="POD-0L",
+    uwagi="drzwi DG2 z garażu (O0-24, A3 I-4): garaż → hol → OT1 → pas 0.07 → schody ≈ 7 m bez przejścia przez ciąg roboczy kuchni; "
+          "szafa płytka 0,45 m przy ścianie osi 3")
 PMS("0.03", "P0", "WC gościnne", (9.2, 7.6), kat="pomocnicza", posadzka="GRES", sciany="PLYTKI_SC", sufit="SUF_GK", temp=20, wyw=30, rodzaj="wc",
     podloga="POD-0L", uwagi="szer. 1,195 m ≥ 0,90 (W-060); wentylacja mechaniczna")
 PMS("0.04", "P0", "Klatka schodowa", None, [(XC_e, Y3_s), (B1_X1, Y3_s), (B1_X1, Y_SPOCZ), (XC_e, Y_SPOCZ)], kat="ruchu", temp=20, rodzaj="komunikacja",
@@ -557,13 +567,15 @@ PMS("0.09", "P0", "Łazienka gościnna (natrysk)", (4.8, 7.6), kat="pomocnicza",
     rodzaj="lazienka", podloga="POD-0L")
 PMS("0.10", "P0", "Pokój gościnny / gabinet", (1.9, 6.9), kat="podstawowa", pobyt=True, temp=20, naw=40, rodzaj="pokoj")
 PMS("0.11", "P0", "Przedsionek gospodarczy", (13.4, 1.4), kat="ruchu", posadzka="GRES", temp=20, rodzaj="komunikacja", podloga="POD-0L",
-    uwagi="garaż → przedsionek → kuchnia ≈ 6 m; szafa na odzież i obuwie; drzwi do ogrodu")
+    uwagi="zakupy i ogród: garaż → przedsionek → kuchnia ≈ 6 m (codzienne wejście rodziny — DG2 do holu, A3 I-4); szafa na odzież "
+          "i obuwie; drzwi do ogrodu")
 PMS("0.12", "P0", "Pomieszczenie techniczne", (16.6, 1.4), kat="techniczna", posadzka="GRES", sciany="TYNK_CW", temp=16, wyw=15, rodzaj="techniczne",
     podloga="POD-0L", uwagi="moduł hydrauliczny PC R290 (monoblok zewn.), zasobnik CWU 300 l, bufor 100 l, rozdzielacze, RG, wodomierz; dostęp z przedsionka")
 PMS("0.13", "P0", "Garaż 2-stanowiskowy", (15.3, 6.2), kat="pomocnicza", posadzka="ZYWICA", sciany="TYNK_CW", sufit="TYNK_CW", temp=None,
     rodzaj="garaz", podloga="POD-G", ogrzewane=False, rzedna=-0.10,
-    uwagi="w świetle 6,05 × 6,175 m (≥ 5,60 × 6,00; W-112); nieogrzewany, wentylacja naturalna ≥ 0,08 m² (W-115); posadzka −0,10 przy bramie "
-          "i −0,05 przy drzwiach O0-22 (próg dom–garaż 5 cm ≥ 3 cm, W-114), spadek 0,8 % do bramy; odwodnienie OL-1 przez separator SEP-1")
+    uwagi="w świetle 6,05 × 6,175 m, po odjęciu przechowywania 0,30 m przy ścianie osi F wolne 5,75 × 6,175 m (≥ 5,60 × 6,00; W-112; "
+          "A3 I-2); nieogrzewany, wentylacja naturalna ≥ 0,08 m² (W-115); posadzka −0,10 przy bramie i −0,05 przy drzwiach O0-22 i O0-24 "
+          "(próg dom–garaż 5 cm ≥ 3 cm, W-114), spadek 0,8 % do bramy; odwodnienie OL-1 przez separator SEP-1")
 # ---- P1
 PMS("1.01", "P1", "Hol", None, [(XA_i, yH + FD), (XE_i, yH + FD), (XE_i, Y3_s), (XA_i, Y3_s)],
     kat="ruchu", temp=20, rodzaj="komunikacja")
@@ -893,7 +905,8 @@ STOLARKA = {
     "DG1": {"wyrob": "drzwi_dom_garaz", "opis": "drzwi garaż–dom stalowe ocieplone, szczelne, z samozamykaczem 0,90 × 2,10", "U_D": 1.10},
     "D1": {"opis": "drzwi wewnętrzne pełne 0,90 × 2,10 w murze (światło ościeżnicy ≥ 0,80 × 2,00), bez progu"},
     "D2": {"opis": "drzwi łazienkowe/WC 0,90 × 2,10, otwierane na zewnątrz, z tuleją/podcięciem ≥ 0,022 m²"},
-    "D2P": {"opis": "drzwi przesuwne naścienne 0,90 × 2,10 (łazienka gościnna), szczelina ≥ 0,022 m²"},
+    "D1P": {"opis": "drzwi przesuwne naścienne 0,90 × 2,10 (salon → przedpokój gościnny), prowadnica natynkowa po stronie salonu, "
+                    "skrzydło 1,00 × 2,15 z zakładem, uszczelka szczotkowa"},
     "D3": {"opis": "drzwi spiżarni 0,80 × 2,00 z kratką"},
     "D4": {"opis": "drzwi pom. technicznego 0,90 × 2,10 z kratką, akustyczne R_w ≥ 32 dB"},
     "DS1": {"opis": "drzwi szklane VSG 0,90 × 2,10 w ściance wiatrołapu, oznakowane (W-067)"},
@@ -1231,7 +1244,8 @@ DZIALKA = {
     "bramy": [{"xy": [23.10, 50.0], "szer": 5.60, "typ": "przesuwna", "kierunek": [1.0, 0.0], "wys": 1.50},
               {"xy": [18.10, 50.0], "szer": 1.00, "typ": "furtka", "wys": 1.50}],
     "miejsca_postojowe": [
-        # stanowiska 2,50 × 5,90 (A1): MP1 0,30 od lica S0-16 (x 12,22), MP2 0,30 od frontu szafy na rowery (x 17,87) i 0,70 od lica S0-03
+        # stanowiska 2,50 × 5,90 (A1): MP1 0,30 od lica S0-16 (x 12,22), MP2 0,40 od frontu uchwytów rowerowych 0,30 (x 17,97) i 0,70 od
+        # lica S0-03 (audyt A3 I-2, runda 2: szerokość wolna garażu 5,75 m ≥ 5,60 — W-112)
         {"id": "MP1", "obrys": Rd(12.52, 3.20, 15.02, 9.10), "typ": "garaz"},
         {"id": "MP2", "obrys": Rd(15.07, 3.20, 17.57, 9.10), "typ": "garaz"},
         {"id": "MP3", "obrys": Rd(12.90, 11.90, 15.40, 16.90), "typ": "zewn", "auto": False},
@@ -1327,7 +1341,9 @@ XBS = XC_w     # lico wsch. łazienek pionu SI (5,77)
 WYP = [
     # ---- P0
     F("P0", "szafa", (XE_i, 7.36), 180, (1.28, 0.60), opis="szafa wiatrołapu (y 6,72–8,00 — doświetle FX3 odsłonięte, A2 D-4)"),
-    F("P0", "szafa", (XE_i, 5.89), 180, (1.30, 0.60), opis="szafa wejściowa"),
+    # audyt A3 I-4 (runda 2): szafa holu przy ścianie osi E usunięta (drzwi DG2 O0-24); szafa płytka przy ścianie osi 3 (x 10,45–11,60,
+    # y 5,23–5,68) — poza łukiem DG2 i otworem OT1; przejście DG2 → OT1 między frontem a ścianką S0-21: 0,92 m
+    F("P0", "szafa", (11.025, Y3_n), 90, (1.15, 0.45), opis="szafa wejściowa płytka 0,45 (drążek wysuwany prostopadły, obuwie)"),
     F("P0", "wc", (9.20, Y4_i), -90, (0.40, 0.60)), F("P0", "umywalka", (XD_e, 7.60), 0, (0.45, 0.30)),
     F("P0", "prysznic", (XB_i := xB + INT, 8.10), 0, (1.00, 0.90)), F("P0", "wc", (XBS, 7.20), 180, (0.40, 0.60)),
     F("P0", "umywalka", (XBS, 8.20), 180, (0.60, 0.45)),
@@ -1343,8 +1359,8 @@ WYP = [
     F("P0", "wyspa", (9.60, 2.90), 0, (2.20, 1.00), opis="wyspa z płytą indukcyjną i okapem (bez hokerów — przejście do jadalni ≥ 1,10 m)"),
     {"kond": "P0", "typ": "blat", "linia": [[XE_i, 1.40], [XE_i, Y3_s]], "gl": 0.6, "strona": 1, "gorne": True},
     F("P0", "zlew", (XE_i, 2.60), 180, (0.80, 0.50)), F("P0", "zmywarka", (XE_i, 1.90), 180, (0.60, 0.58)),
-    F("P0", "plyta", (10.10, 3.25), 180, (0.80, 0.52), opis="płyta indukcyjna na wyspie od strony ciągu roboczego (y 2,85–3,65), "
-                                                             "kucharz przodem do jadalni i ogrodu; 0,55 m blatu wyspy po obu stronach"),
+    F("P0", "plyta", (10.10, 2.90), 180, (0.80, 0.52), opis="płyta indukcyjna na wyspie od strony ciągu roboczego (y 2,50–3,30), "
+                                                             "kucharz przodem do jadalni i ogrodu; 0,70 m blatu wyspy po obu stronach"),
     F("P0", "lodowka", (XE_i, 4.60), 180, (0.60, 0.65)), F("P0", "urzadzenie", (XE_i, 3.90), 180, (0.60, 0.60), opis="piekarnik + mikrofala w słupku"),
     F("P0", "szafa", (XD_w, 6.80), 180, (1.20, 0.40), opis="regały spiżarni / schowka (y 6,20–7,40 — poza skrzydłem O0-17, A2 D-1)"),
     F("P0", "szafa", (xE + INT, 2.00), 0, (1.40, 0.60), opis="szafa przedsionka (odzież, obuwie)"),
@@ -1356,8 +1372,13 @@ WYP = [
     F("P0", "urzadzenie", (xF - INT, 1.20), 180, (0.40, 0.20), opis="wodomierz + zawór antyskażeniowy (PN-EN 1717)"),
     F("P0", "urzadzenie", (16.00, Y1_i), 90, (0.80, 0.15), opis="rozdzielacz ogrzewania podłogowego P0"),
     F("P0", "zlew", (xF - INT, 2.20), 180, (0.50, 0.40), opis="zlewik gospodarczy"),
-    F("P0", "szafa", (xF - INT, 7.65), 180, (2.40, 0.40), opis="rowery i sprzęt ogrodowy — szafa płytka 0,40 przy ścianie osi F, y 6,45–8,85 "
-                                                              "(poza prowadnicami bramy — A2 D-5); stanowisko MP2 ≥ 0,30 m od szafy"),
+    # audyt A3 I-2 (runda 2, wariant B — bez zmiany bryły G): przechowywanie przy ścianie osi F płytkie 0,30 m (x 17,97–18,27) →
+    # garaż w świetle wolny 5,75 m ≥ 5,60 (W-112); 0,22 m od krawędzi światła bramy (x 17,75) — poza światłem i prowadnicami bramy;
+    # stanowisko MP2 (x ≤ 17,57) 0,40 m od frontu; rowery przy drzwiach bocznych DZ2 (wyjście do ogrodu bez manewru autem)
+    F("P0", "szafa", (xF - INT, 7.50), 180, (2.80, 0.30), opis="rowery — uchwyty ścienne 2-poziomowe (rowery równolegle do ściany, "
+                                                              "kierownice obrócone), głęb. ≤ 0,30, y 6,10–8,90"),
+    F("P0", "szafa", (xF - INT, 4.00), 180, (1.50, 0.30), opis="sprzęt ogrodowy — panel ścienny z uchwytami i półka ≤ 0,30, y 3,25–4,75 "
+                                                              "(przed stanowiskiem MP2, poza światłem bramy)"),
     # ---- P1
     F("P1", "lozko", (xB - FD, 1.20), 180, (0.90, 2.00)), F("P1", "biurko", (XA_i, 1.90), 0, (1.40, 0.70)),
     F("P1", "szafa", (1.20, yH - FD), -90, (1.80, 0.60)),

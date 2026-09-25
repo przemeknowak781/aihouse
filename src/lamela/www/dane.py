@@ -240,6 +240,8 @@ def przegrody(m, U: dict) -> list:
                            kolor=(mat.raw.get("kolor") if mat is not None else None) or "#cccccc",
                            linia=FUNKCJA_LINII.get(fun) or ("konstr" if getattr(w, "konstrukcyjna", False) else ""),
                            lam=getattr(mat, "lambda_", None) if mat else None))
+        if p.typ == "sciana_zewn" and ws and not ws[-1]["linia"]:
+            ws[-1]["linia"] = "zewn"           # lico zewnętrzne ściany = czwarta linia (warstwa zewnętrzna)
         u = U.get(kod) or {}
         out.append(dict(kod=kod, nazwa=p.nazwa, typ=p.typ, d=round(sum(w["d"] for w in ws), 3), warstwy=ws,
                         U=u.get("U"), U_max=u.get("U_max")))
@@ -263,3 +265,69 @@ def instalacje(m) -> dict:
                 reku_eta=reku.get("eta_t"), pv_kWp=kwp, pv_n=pv.get("moduly"), pv_Wp=pv.get("P_modul_Wp"),
                 pv_az=pv.get("azymut"), pv_nach=pv.get("nachylenie"), cwu_V=cwu.get("V_projekt_dm3"),
                 n50=en.get("n50"), osoby=en.get("osoby"), garaz_stanowiska=(en.get("garaz") or {}).get("stanowiska"))
+
+
+def woda(m) -> dict:
+    """Odprowadzenie wody: pola dachów (spadek, wpusty, przelewy, rury), retencja i odwodnienia terenu z dzialka.yaml."""
+    dachy = []
+    for d in m.dachy():
+        try:
+            A = float(make_polygon(d["obrys"], d.get("otwory") or []).area)
+        except Exception:  # noqa: BLE001
+            A = None
+        dachy.append(dict(id=d.get("id"), A=A, spadek=d.get("spadek"), przegroda=d.get("przegroda"),
+                          wpusty=len(d.get("wpusty") or []), podgrzewane=sum(1 for w in d.get("wpusty") or []
+                                                                                if w.get("podgrzewany")),
+                          przelewy=len(d.get("przelewy_awaryjne") or []), rury=len(d.get("rury_spustowe") or [])))
+    raw = m.dz.raw if m.dz is not None else {}
+    rt = raw.get("retencja") or {}
+    zb, ro = rt.get("zbiornik") or {}, rt.get("rozsaczanie") or {}
+    A_ro = float(Polygon(ro["obrys"]).area) if ro.get("obrys") else None
+    odw = [o for o in raw.get("odwodnienia") or [] if isinstance(o, dict)]
+    sep = [o for o in (raw.get("uzbrojenie") or {}).get("obiekty") or [] if str(o.get("id", "")).startswith("SEP")]
+    return dict(dachy=dachy, zbiornik_V=zb.get("V"), niecka_A=A_ro, niecka_V=ro.get("V"), niecka_gl=ro.get("glebokosc"),
+                liniowe=sum(1 for o in odw if o.get("typ") == "liniowe"),
+                niecki=sum(1 for o in odw if o.get("typ") == "niecka"),
+                opaska=next((o.get("szer") for o in odw if o.get("typ") == "opaska_zwirowa"), None),
+                drenaz=any(o.get("typ") == "drenaz_opaskowy" and o.get("linia") for o in odw),
+                separator=bool(sep), grunt=(raw.get("teren") or {}).get("grunt"))
+
+
+def zbierz(budynek, dzialka, wyposazenie=None, fizyka: bool = True) -> dict:
+    m = load_model(str(budynek), str(dzialka) if dzialka else None, strict=False)
+    ir = build_ir(m)
+    wsk = wskazniki(m, ir)
+    D = dict(model=m, ir=ir, meta=dict(m.raw.get("meta") or {}),
+             walidacja=dict(bledy=len(m.bledy), ostrzezenia=len(m.ostrzezenia)))
+    D["pow"] = powierzchnie(m)
+    D["kondygnacje"] = [dict(id=k.id, nazwa=k.nazwa, rzedna=k.rzedna, h=k.wys_kondygnacji, h_sw=k.wys_w_swietle,
+                             brutto=round(m.obrys_kondygnacji(k.id).area, 2), PU=D["pow"]["PU_kond"].get(k.id, 0.0))
+                        for k in m.kondygnacje]
+    D["wsk"] = {k: v for k, v in wsk.items() if not k.startswith("_")}
+    D["kubatura"] = m.kubatura_brutto()["razem"]
+    fp = wsk["_geom"]["footprint"]
+    bx = fp.bounds
+    D["gabaryty"] = dict(dl=round(bx[2] - bx[0], 2), szer=round(bx[3] - bx[1], 2),
+                         obrys_all=[round(v, 2) for v in unary_union([m.obrys_kondygnacji(k.id)
+                                                                      for k in m.kondygnacje]).bounds])
+    D["dzialka_min"] = dzialka_minimalna(m)
+    D["orientacja"] = orientacja(m)
+    D["en"] = energia(m) if fizyka else None
+    D["przegrody"] = przegrody(m, (D["en"] or {}).get("U", {}))
+    D["inst"] = instalacje(m)
+    D["woda"] = woda(m)
+    D["konstr"] = dict(m.raw.get("konstrukcja") or {})
+    D["fund"] = dict(m.fundamenty() or {})
+    D["geo"] = dict(m.raw.get("geotechnika") or {})
+    D["stolarka"] = dict(m.raw.get("stolarka") or {})
+    D["materialy"] = {k: v.nazwa for k, v in m.materialy.items()}
+    D["dz"] = dict((m.dz.raw.get("dzialka") or {}) if m.dz is not None else {})
+    wyp = Path(wyposazenie) if wyposazenie else None
+    D["wyposazenie"] = (yaml.safe_load(wyp.read_text(encoding="utf-8")) or {}).get("wyposazenie", []) \
+        if wyp and wyp.exists() else []
+    D["drzewa_bud"] = []
+    if m.dz is not None:
+        for t in m.dz.raw.get("drzewa") or []:
+            x, y = m.dz.do_budynku(t["xy"])
+            D["drzewa_bud"].append((float(x), float(y), float(t.get("sr_korony") or 3.0) / 2))
+    return D

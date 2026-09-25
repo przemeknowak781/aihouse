@@ -58,6 +58,7 @@ class KResult:
     north: bool = False
     rooms: list = field(default_factory=list)
     units_note: str | None = None
+    bez_skali: bool = False
 
 
 def _s(s_mm: float) -> str:
@@ -1643,7 +1644,8 @@ def widok_zestawienie(ctx: ViewContext, spec: dict, scale: float, opts: dict):
         y = yb - 8.0
     res.notes.append("Tabele wygenerowane z obliczeń i geometrii zbrojenia (numery pozycji jak na arkuszach zbrojenia "
                      "elementu); masy — ρ = 7850 kg/m³, długości rozwinięcia wg PN-EN ISO 3766.")
-    res.units_note = "Długości prętów w cm, średnice w mm, masy w kg; tabele w skali 1:1 (bez podziałki rysunku)."
+    res.units_note = "Długości prętów w cm, średnice w mm, masy w kg (tabele — bez podziałki)."
+    res.bez_skali = True
     return vp, res, title
 
 

@@ -23,7 +23,9 @@ Lista generowana automatycznie przez `lamela.views.konstrukcja` z: (1) braków z
 - Płyta(y) PS-A: brak wyników MES w bibliotece (model MES niewykonalny) — zbrojenie nie może być narysowane z obliczeń [WYMAGA ANALIZY].
 - Płyta(y) PL-C2: brak wyników MES w bibliotece (model MES niewykonalny) — zbrojenie nie może być narysowane z obliczeń [WYMAGA ANALIZY].
 - Płyta(y) PL-C1 + PL-D: brak wyników MES w bibliotece (model MES niewykonalny) — zbrojenie nie może być narysowane z obliczeń [WYMAGA ANALIZY].
-- Belka B1 (podciąg fasady E, odwrócony (+2,78…+3,85 = parapet boksu C),…): brak pozycji wymiarowania w bibliotece (belka nie jest podporą płyty w modelu MES — np. belka odwrócona/wspornikowa) — zbrojenie do obliczenia indywidualnego [WYMAGA ANALIZY].
+- Belka B3: brak kompletu wyników wymiarowania w bibliotece — zbrojenie nie wyznaczone [WYMAGA ANALIZY].
+- Belka B4: brak kompletu wyników wymiarowania w bibliotece — zbrojenie nie wyznaczone [WYMAGA ANALIZY].
+- Belka B5: brak kompletu wyników wymiarowania w bibliotece — zbrojenie nie wyznaczone [WYMAGA ANALIZY].
 - Belka B3 (belka krawędziowa ST2 w osi A' (odwrócona, pod parapetem okn…): brak pozycji wymiarowania w bibliotece (belka nie jest podporą płyty w modelu MES — np. belka odwrócona/wspornikowa) — zbrojenie do obliczenia indywidualnego [WYMAGA ANALIZY].
 - Belka B4 (belka wspornikowa w osi 1 (w licu ściany P2, pod parapetem O…): brak pozycji wymiarowania w bibliotece (belka nie jest podporą płyty w modelu MES — np. belka odwrócona/wspornikowa) — zbrojenie do obliczenia indywidualnego [WYMAGA ANALIZY].
 - Belka B5 (belka wspornikowa w osi 3 (w ścianie pn. P2): wspornik 1,00 …): brak pozycji wymiarowania w bibliotece (belka nie jest podporą płyty w modelu MES — np. belka odwrócona/wspornikowa) — zbrojenie do obliczenia indywidualnego [WYMAGA ANALIZY].
@@ -34,6 +36,38 @@ Lista generowana automatycznie przez `lamela.views.konstrukcja` z: (1) braków z
 - ZF5: żebro (b = 60 cm, oś [[12.0, 9.375], [12.0, 8.75]]) wystaje poza obrys płyty PF1 o 0.10 m² w rzucie — niespójność modelu (krawędź płyty a lico żebra); na przekrojach żebro przycięte do lica płyty. Uzgodnić obrys płyty/osie żeber (audyt A2).
 - ZF6: żebro (b = 60 cm, oś [[12.0, 8.75], [0.0, 8.75]]) wystaje poza obrys płyty PF1 o 2.37 m² w rzucie — niespójność modelu (krawędź płyty a lico żebra); na przekrojach żebro przycięte do lica płyty. Uzgodnić obrys płyty/osie żeber (audyt A2).
 - ZF7: żebro (b = 60 cm, oś [[0.0, 8.75], [0.0, 0.0]]) wystaje poza obrys płyty PF1 o 1.74 m² w rzucie — niespójność modelu (krawędź płyty a lico żebra); na przekrojach żebro przycięte do lica płyty. Uzgodnić obrys płyty/osie żeber (audyt A2).
+- Obliczenia — poz. 2.2 ST2Z: niespełnione warunki: Zbrojenie na zginanie (η = 588%); Rysy: średnica prętów (tabl. 7.2N) (η = 1600000000%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 3.2 PL-2: niespełnione warunki: Ugięcie długotrwałe (quasi-stała) ≤ L/250 (η = 152%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 3.3 OB-A: niespełnione warunki: Zbrojenie na zginanie (η = 331%); Rysy: średnica prętów (tabl. 7.2N) (η = 1600000000%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 6.2 N-O0-02: niespełnione warunki: Nośność krzyżulców betonowych (η = 122%); Nośność strzemion (η = 216%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 6.3 N-O0-03: niespełnione warunki: Ugięcie długotrwałe (quasi-stała) ≤ L/250 (η = 146%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 6.5 N-O0-05: niespełnione warunki: Ugięcie długotrwałe (quasi-stała) ≤ L/250 (η = 228%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 6.11 N-O0-11: niespełnione warunki: Nośność strzemion (η = 107%); Ugięcie długotrwałe (quasi-stała) ≤ L/250 (η = 216%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 9.9 S2-09: niespełnione warunki: Nośność — przekrój górny (η = 116%); Nośność — połowa wysokości (η = 172%); Nośność — przekrój dolny (η = 153%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 9.13 S1-01: niespełnione warunki: Nośność — połowa wysokości (η = 124%); Nośność — przekrój dolny (η = 136%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 9.17 S1-05: niespełnione warunki: Nośność — połowa wysokości (η = 126%); Nośność — przekrój dolny (η = 110%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 9.18 S1-06: niespełnione warunki: Nośność — przekrój górny (η = 214%); Nośność — połowa wysokości (η = 371%); Nośność — przekrój dolny (η = 372%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 9.20 S1-08: niespełnione warunki: Nośność — połowa wysokości (η = 105%); Docisk (η = 212%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 9.21 S1-09: niespełnione warunki: Docisk (η = 169%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 9.23 S0-01: niespełnione warunki: Nośność — połowa wysokości (η = 153%); Nośność — przekrój dolny (η = 204%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 9.26 S0-08: niespełnione warunki: Nośność — przekrój górny (η = 155%); Nośność — połowa wysokości (η = 206%); Nośność — przekrój dolny (η = 170%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 9.27 S0-09: niespełnione warunki: Nośność — połowa wysokości (η = 107%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 9.28 S0-10: niespełnione warunki: Nośność — przekrój górny (η = 240%); Nośność — połowa wysokości (η = 358%); Nośność — przekrój dolny (η = 331%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 10.2 ZF1: niespełnione warunki: Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) (η = 254%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 10.3 ZF2: niespełnione warunki: Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) (η = 254%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 10.4 ZF3: niespełnione warunki: Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) (η = 198%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 10.5 ZF4: niespełnione warunki: Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) (η = 185%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 10.7 ZF6: niespełnione warunki: Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) (η = 254%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 10.8 ZF7: niespełnione warunki: Nośność podłoża (GEO, DA2*) (η = 136%); Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) (η = 254%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 10.9 ZF8: niespełnione warunki: Nośność podłoża (GEO, DA2*) (η = 373%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 10.11 ZF10: niespełnione warunki: Nośność podłoża (GEO, DA2*) (η = 207%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 10.13 ZF12: niespełnione warunki: Nośność podłoża (GEO, DA2*) (η = 380%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 10.14 ZF13: niespełnione warunki: Nośność podłoża (GEO, DA2*) (η = 316%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 10.16 ZF15: niespełnione warunki: Nośność podłoża (GEO, DA2*) (η = 132%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 10.18 SF1: niespełnione warunki: Głębokość posadowienia (η = 185%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 10.19 SF2: niespełnione warunki: Głębokość posadowienia (η = 185%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 10.20 SF3: niespełnione warunki: Głębokość posadowienia (η = 186%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 10.21 SF4: niespełnione warunki: Głębokość posadowienia (η = 185%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
 - Biblioteka: PL-C1: brak przegrody — przyjęto płytę bez warstw
 - Biblioteka: PL-C1: klasa betonu nie wynika z modelu (pole mat / materiał warstwy) — przyjęto C30/37 (XC3)
 - Biblioteka: PL-C2: brak przegrody — przyjęto płytę bez warstw
@@ -74,21 +108,3 @@ Lista generowana automatycznie przez `lamela.views.konstrukcja` z: (1) braków z
 - Biblioteka (uwaga analizy): PL-E: podpora punktowa SL2 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
 - Biblioteka (uwaga analizy): PL-E: podpora punktowa SL3 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
 - Biblioteka (uwaga analizy): PL-E: podpora punktowa SL4 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
-
-## Kontrola zbrojenia — pozycje niespełnione (szczegóły: raport kontroli zbrojenia)
-
-- PF1 / strefa S1 (płyta) — przekrój niewystarczający (poz. MES-PF): A_s,prov = 0 < max(A_s,req; A_s,min) = 1 — M_Ed = 231 kNm/m > M_lim — wymagana wysokość h ≥ 0.25 m (obecnie 0.25 m) [WYMAGA ZMIANY MODELU]
-- PL-2 / wspornik — góra x (poz. 3.2): A_s,prov = 2513 < max(A_s,req; A_s,min) = 3702 mm²/m Zbrojenie na zginanie (η = 138%); Rysy: średnica prętów (tabl. 7.2N) (η = 265%)
-- N-O1-11 / dołem (przęsło) (poz. 6.28): 7Ø10 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2))
-- N-O0-18 / dołem (przęsło) (poz. 6.17): 5Ø16 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2))
-- N-O0-02 / dołem (przęsło) (poz. 6.2): Nośność krzyżulców betonowych (η = 122%); Nośność strzemion (η = 216%); 6Ø20 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2)); A_s > A_s,max = 1584
-- N-O0-02 / górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) (poz. 6.2): A_s,prov = 157 < max(A_s,req; A_s,min) = 283 mm² 
-- N-O0-04 / dołem (przęsło) (poz. 6.4): 5Ø14 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2))
-- N-O0-03 / dołem (przęsło) (poz. 6.3): Ugięcie długotrwałe (quasi-stała) ≤ L/250 (η = 161%); 5Ø16 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2))
-- N-O1-13 / dołem (przęsło) (poz. 6.30): 5Ø14 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2))
-- N-O1-01 / dołem (przęsło) (poz. 6.20): 6Ø10 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2))
-- N-O0-11 / dołem (przęsło) (poz. 6.11): Nośność krzyżulców betonowych (η = 129%); Nośność strzemion (η = 228%); 8Ø20 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2)); A_s > A_s,max = 1584
-- N-O0-11 / górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) (poz. 6.11): A_s,prov = 157 < max(A_s,req; A_s,min) = 377 mm² 
-- N-O0-05 / dołem (przęsło) (poz. 6.5): Ugięcie długotrwałe (quasi-stała) ≤ L/250 (η = 252%); 5Ø20 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2))
-- N-O0-05 / górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1)) (poz. 6.5): A_s,prov = 157 < max(A_s,req; A_s,min) = 236 mm² 
-- N-O0-07 / dołem (przęsło) (poz. 6.7): Ugięcie długotrwałe (quasi-stała) ≤ L/250 (η = 219%)
