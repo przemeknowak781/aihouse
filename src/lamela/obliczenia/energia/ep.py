@@ -170,7 +170,10 @@ def system_projektowy(cfg: dict, went, A_f: float, dobor: dict | None = None, za
         pc.update(zr)
     temp_zas = float(og.get("temp_zasilania", 35))
     scop = float(og.get("SCOP", pc.get("SCOP_35" if temp_zas <= 40 else "SCOP_55", 4.5)))
-    zb = dict(wyrob("zasobnik_cwu", cw.get("zasobnik", "Z250")))
+    zs = cw.get("zasobnik", "Z250")                  # nazwa z biblioteki albo słownik parametrów (np. z modułu wody)
+    zb = dict(wyrob("zasobnik_cwu", zs if isinstance(zs, str) else "Z250"))
+    if isinstance(zs, dict):
+        zb.update(zs)
     Q_W = q_w_nd(A_f)
     eta_W_s = cw.get("eta_W_s")
     if eta_W_s is None and zb.get("strata_W"):
@@ -195,7 +198,7 @@ def system_projektowy(cfg: dict, went, A_f: float, dobor: dict | None = None, za
                "η_H,d = 0,96 (tab. 6 lp. 3a), η_H,s = 1,00 (tab. 8 lp. 3)",
                "el", float(cw.get("COP", pc.get("COP_cwu", 3.2))), eta_W_s, eta_W_d,
                f"COP_cwu = {fmt(pc.get('COP_cwu', 3.2), 2)} (PN-EN 16147); η_W,s = {fmt(eta_W_s, 3)} "
-               f"(strata zasobnika {zb.get('strata_W', '—')} W); η_W,d = {fmt(eta_W_d, 2)} (tab. 12 lp. 6.1a — cyrkulacja "
+               f"(zasobnik {fmt(V_zb, 0)} dm³, strata postojowa {fmt(zb.get('strata_W'), 0) if zb.get('strata_W') else '—'} W); η_W,d = {fmt(eta_W_d, 2)} (tab. 12 lp. 6.1a — cyrkulacja "
                "z ograniczeniem czasu pracy)", pom, dane_pv(pvc) if pvc is not False else None,
                (pvc or {}).get("autokonsumpcja", "symulacja") if isinstance(pvc, dict) else "symulacja",
                bool((pvc or {}).get("sterowanie_cwu_pv", True)) if isinstance(pvc, dict) else True,
@@ -206,7 +209,8 @@ def system_projektowy(cfg: dict, went, A_f: float, dobor: dict | None = None, za
     if zal:
         zal.dodaj(f"PC: SCOP = {fmt(scop, 2)}, COP_cwu = {fmt(s.eta_W_g, 2)}, udział grzałki w ogrzewaniu "
                   f"{fmt(s.udzial_grzalki * 100, 2)} % (TMY)", PRZYKL, pc.get("zrodlo", ""))
-        zal.dodaj(f"Dezynfekcja termiczna c.w.u. grzałką: {fmt(E_dez, 0)} kWh/rok (1×/tydz., {fmt(V_zb, 0)} dm³, 55→70 °C)",
+        zal.dodaj(f"Dezynfekcja termiczna c.w.u. grzałką: {fmt(E_dez, 0)} kWh/rok "
+                  f"({cw.get('dezynfekcja_opis') or f'1×/tydz., {fmt(V_zb, 0)} dm³, 55→70 °C'})",
                   ZAL, "WT § 120 ust. 2a; rejestr W-133")
     return s
 

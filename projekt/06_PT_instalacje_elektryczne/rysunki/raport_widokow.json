@@ -230,7 +230,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 7.3,
+      "czas_s": 7.5,
       "png_kontrola": {
         "px": [
           4075,
@@ -916,7 +916,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 5.5,
+      "czas_s": 5.3,
       "png_kontrola": {
         "px": [
           3367,
@@ -1635,7 +1635,7 @@
       "wypelnienie": {
         "wypelnienie": 0.729,
         "wypelnienie_rys": 0.71,
-        "wypelnienie_kontur": 0.531,
+        "wypelnienie_kontur": 0.532,
         "pole_arkusza_m2": 0.3089,
         "pole_ramki_m2": 0.2813,
         "pusty_prostokat_mm": [
@@ -1845,7 +1845,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.0,
+      "czas_s": 2.1,
       "png_kontrola": {
         "px": [
           4075,
@@ -2062,7 +2062,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.2,
+      "czas_s": 2.1,
       "png_kontrola": {
         "px": [
           3367,
@@ -2307,7 +2307,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 8.4,
+      "czas_s": 8.6,
       "png_kontrola": {
         "px": [
           4075,
@@ -2543,7 +2543,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.3,
+      "czas_s": 3.0,
       "png_kontrola": {
         "px": [
           4075,
@@ -3015,7 +3015,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.1,
+      "czas_s": 2.0,
       "png_kontrola": {
         "px": [
           4075,
@@ -3237,7 +3237,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 4.4,
+      "czas_s": 4.6,
       "png_kontrola": {
         "px": [
           5138,
@@ -3287,5 +3287,5 @@
     },
     "wypelnienie_wazone": 0.842
   },
-  "czas_s": 74.6
+  "czas_s": 74.7
 }

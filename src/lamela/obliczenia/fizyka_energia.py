@@ -102,17 +102,27 @@ def oblicz_wszystko(m, *, wyniki_symulacji: dict | None = None, wariant_psi: str
         uw += uwagi_wezla(w, m.przegrody, m.materialy, role)
     R["wezly_uwagi"] = uw
     # EP i alternatywy
+    _ep_warianty(R, m, ob, went, obc, wyniki_symulacji)
+    return R
+
+
+def _ep_warianty(R: dict, m, ob, went, obc, wyniki_symulacji, *, cfg: dict | None = None,
+                 dobor: dict | None = None) -> None:
+    """Charakterystyka energetyczna: wariant projektowy A, A0 (bez PV), alternatywy B, C i wrażliwość.
+    ``cfg``/``dobor`` — domyślnie ``ob.cfg`` (sekcja `energia` modelu) i dobór PC modułu obciążenia cieplnego."""
+    cfg = ob.cfg if cfg is None else cfg
+    dobor = obc.dobor if dobor is None else dobor
     zE = R["zal"]["ep"] = Zalozenia()
-    sA = EP.system_projektowy(ob.cfg, went, ob.bryla.A_f, obc.dobor, zal=zE)
+    sA = EP.system_projektowy(cfg, went, ob.bryla.A_f, dobor, zal=zE)
     wA = EP.oblicz_ep(ob, went, sA, obc=obc, zal=zE)
     sB = EP.system_gazowy(ob.bryla.A_f, went, ob.cfg)
     wB = EP.oblicz_ep(ob, went, sB, obc=obc, zal=Zalozenia())
     sC = EP.system_pc_domyslny(ob.bryla.A_f, went)
     wC = EP.oblicz_ep(ob, went, sC, obc=obc, zal=Zalozenia())
-    sA2 = EP.system_projektowy(ob.cfg, went, ob.bryla.A_f, obc.dobor, z_pv=False)
+    sA2 = EP.system_projektowy(cfg, went, ob.bryla.A_f, dobor, z_pv=False)
     sA2.nazwa = "A0: PC R290 + rekuperacja, bez PV"
     wA0 = EP.oblicz_ep(ob, went, sA2, obc=obc, zal=Zalozenia())
-    wA4 = EP.oblicz_ep(ob, went, EP.system_projektowy(ob.cfg, went, ob.bryla.A_f, obc.dobor), obc=obc, n50=4.0,
+    wA4 = EP.oblicz_ep(ob, went, EP.system_projektowy(cfg, went, ob.bryla.A_f, dobor), obc=obc, n50=4.0,
                        zal=Zalozenia())
     wA4.system.nazwa = "A (n50 = 4 h⁻¹ — brak próby szczelności)"
     wrazl = [wA4]
@@ -120,7 +130,7 @@ def oblicz_wszystko(m, *, wyniki_symulacji: dict | None = None, wariant_psi: str
         import dataclasses
         wz = MB.wezly_z_modelu(m, wyniki_symulacji, wezly_auto=ob.bryla.wezly_auto, wariant_domyslny="dobra_praktyka")
         ob_dp = dataclasses.replace(ob, wezly=wz, H_TB=MB.h_tb(wz))
-        wdp = EP.oblicz_ep(ob_dp, went, EP.system_projektowy(ob.cfg, went, ob.bryla.A_f, obc.dobor), obc=obc,
+        wdp = EP.oblicz_ep(ob_dp, went, EP.system_projektowy(cfg, went, ob.bryla.A_f, dobor), obc=obc,
                            zal=Zalozenia())
         wdp.system.nazwa = (f"A (Ψ „dobra praktyka” zamiast domyślnych PN-EN ISO 14683: H_TB = {fmt(ob_dp.H_TB, 1)} "
                             f"zamiast {fmt(ob.H_TB, 1)} W/K)")
@@ -128,7 +138,6 @@ def oblicz_wszystko(m, *, wyniki_symulacji: dict | None = None, wariant_psi: str
     R["ep"] = wA
     R["ep_alt"] = [wA, wA0, wB, wC]
     R["ep_wrazliwosc"] = wrazl
-    return R
 
 
 def zapisz_raporty(R: dict, out, *, tytul: str = "", model_opis: str = "") -> list[str]:
