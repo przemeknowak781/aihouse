@@ -1,6 +1,6 @@
 {
- "ok": 288,
- "razem": 288,
+ "ok": 315,
+ "razem": 315,
  "wiersze": [
   {
    "element": "B1",
@@ -1818,6 +1818,78 @@
    "zapas": 5.667
   },
   {
+   "element": "N-O0-11",
+   "miejsce": "dołem (przęsło)",
+   "poz": "6.5",
+   "arkusze": [
+    "PT-BO-25"
+   ],
+   "As_req": 557.8,
+   "As_min": 93.2,
+   "As_prov": 565.5,
+   "jedn": "mm²",
+   "zbrojenie": "5Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "pręty dolne w 2 warstwach (4 + 1)",
+   "zapas": 0.014
+  },
+  {
+   "element": "N-O0-11",
+   "miejsce": "górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1))",
+   "poz": "6.5",
+   "arkusze": [
+    "PT-BO-25"
+   ],
+   "As_req": 84.8,
+   "As_min": 0.0,
+   "As_prov": 157.1,
+   "jedn": "mm²",
+   "zbrojenie": "2Ø10",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.852
+  },
+  {
+   "element": "N-O0-12",
+   "miejsce": "dołem (przęsło)",
+   "poz": "6.6",
+   "arkusze": [
+    "PT-BO-25"
+   ],
+   "As_req": 150.2,
+   "As_min": 51.8,
+   "As_prov": 157.1,
+   "jedn": "mm²",
+   "zbrojenie": "2Ø10",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.046
+  },
+  {
+   "element": "N-O0-12",
+   "miejsce": "górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1))",
+   "poz": "6.6",
+   "arkusze": [
+    "PT-BO-25"
+   ],
+   "As_req": 23.6,
+   "As_min": 0.0,
+   "As_prov": 157.1,
+   "jedn": "mm²",
+   "zbrojenie": "2Ø10",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 5.667
+  },
+  {
    "element": "N-O0-13",
    "miejsce": "dołem (przęsło)",
    "poz": "6.7",
@@ -1962,6 +2034,42 @@
    "zapas": 5.667
   },
   {
+   "element": "N-O0-18",
+   "miejsce": "dołem (przęsło)",
+   "poz": "6.11",
+   "arkusze": [
+    "PT-BO-25"
+   ],
+   "As_req": 525.2,
+   "As_min": 51.8,
+   "As_prov": 549.8,
+   "jedn": "mm²",
+   "zbrojenie": "7Ø10",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "pręty dolne w 2 warstwach (4 + 3)",
+   "zapas": 0.047
+  },
+  {
+   "element": "N-O0-18",
+   "miejsce": "górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1))",
+   "poz": "6.11",
+   "arkusze": [
+    "PT-BO-25"
+   ],
+   "As_req": 82.5,
+   "As_min": 0.0,
+   "As_prov": 157.1,
+   "jedn": "mm²",
+   "zbrojenie": "2Ø10",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.905
+  },
+  {
    "element": "N-O0-21",
    "miejsce": "dołem (przęsło)",
    "poz": "6.12",
@@ -2070,6 +2178,42 @@
    "zapas": 5.667
   },
   {
+   "element": "N-O1-02",
+   "miejsce": "dołem (przęsło)",
+   "poz": "6.15",
+   "arkusze": [
+    "PT-BO-25"
+   ],
+   "As_req": 230.8,
+   "As_min": 51.8,
+   "As_prov": 235.6,
+   "jedn": "mm²",
+   "zbrojenie": "3Ø10",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.021
+  },
+  {
+   "element": "N-O1-02",
+   "miejsce": "górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1))",
+   "poz": "6.15",
+   "arkusze": [
+    "PT-BO-25"
+   ],
+   "As_req": 35.3,
+   "As_min": 0.0,
+   "As_prov": 157.1,
+   "jedn": "mm²",
+   "zbrojenie": "2Ø10",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 3.444
+  },
+  {
    "element": "N-O1-03",
    "miejsce": "dołem (przęsło)",
    "poz": "6.16",
@@ -2093,6 +2237,42 @@
    "poz": "6.16",
    "arkusze": [
     "PT-BO-23"
+   ],
+   "As_req": 23.6,
+   "As_min": 0.0,
+   "As_prov": 157.1,
+   "jedn": "mm²",
+   "zbrojenie": "2Ø10",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 5.667
+  },
+  {
+   "element": "N-O1-04",
+   "miejsce": "dołem (przęsło)",
+   "poz": "6.17",
+   "arkusze": [
+    "PT-BO-25"
+   ],
+   "As_req": 31.8,
+   "As_min": 51.8,
+   "As_prov": 157.1,
+   "jedn": "mm²",
+   "zbrojenie": "2Ø10",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 2.03
+  },
+  {
+   "element": "N-O1-04",
+   "miejsce": "górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1))",
+   "poz": "6.17",
+   "arkusze": [
+    "PT-BO-25"
    ],
    "As_req": 23.6,
    "As_min": 0.0,
@@ -3258,6 +3438,78 @@
    "zapas": 0.026
   },
   {
+   "element": "SCH1/bieg 1",
+   "miejsce": "płyta biegu — dołem (główne)",
+   "poz": "4.1",
+   "arkusze": [
+    "PT-BO-26"
+   ],
+   "As_req": 386.2,
+   "As_min": 201.4,
+   "As_prov": 392.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.017
+  },
+  {
+   "element": "SCH1/bieg 2",
+   "miejsce": "płyta biegu — dołem (główne)",
+   "poz": "4.1",
+   "arkusze": [
+    "PT-BO-26"
+   ],
+   "As_req": 386.2,
+   "As_min": 201.4,
+   "As_prov": 392.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.017
+  },
+  {
+   "element": "SCH2/bieg 1",
+   "miejsce": "płyta biegu — dołem (główne)",
+   "poz": "4.2",
+   "arkusze": [
+    "PT-BO-26"
+   ],
+   "As_req": 386.2,
+   "As_min": 201.4,
+   "As_prov": 392.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.017
+  },
+  {
+   "element": "SCH2/bieg 2",
+   "miejsce": "płyta biegu — dołem (główne)",
+   "poz": "4.2",
+   "arkusze": [
+    "PT-BO-26"
+   ],
+   "As_req": 386.2,
+   "As_min": 201.4,
+   "As_prov": 392.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.017
+  },
+  {
    "element": "SF1",
    "miejsce": "pogrubienie — siatka dolna (MES)",
    "poz": "10.22",
@@ -3351,6 +3603,240 @@
    "ok": true,
    "uwagi": "",
    "zapas": 0.005
+  },
+  {
+   "element": "SL10",
+   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
+   "poz": "8.10",
+   "arkusze": [
+    "PT-BO-27"
+   ],
+   "As_req": 678.6,
+   "As_min": 452.4,
+   "As_prov": 678.6,
+   "jedn": "mm²",
+   "zbrojenie": "6Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.0
+  },
+  {
+   "element": "SL11",
+   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
+   "poz": "8.11",
+   "arkusze": [
+    "PT-BO-27"
+   ],
+   "As_req": 678.6,
+   "As_min": 452.4,
+   "As_prov": 678.6,
+   "jedn": "mm²",
+   "zbrojenie": "6Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.0
+  },
+  {
+   "element": "SL12",
+   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
+   "poz": "8.12",
+   "arkusze": [
+    "PT-BO-27"
+   ],
+   "As_req": 678.6,
+   "As_min": 452.4,
+   "As_prov": 678.6,
+   "jedn": "mm²",
+   "zbrojenie": "6Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.0
+  },
+  {
+   "element": "SL13",
+   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
+   "poz": "8.13",
+   "arkusze": [
+    "PT-BO-27"
+   ],
+   "As_req": 904.8,
+   "As_min": 452.4,
+   "As_prov": 904.8,
+   "jedn": "mm²",
+   "zbrojenie": "8Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.0
+  },
+  {
+   "element": "SL14",
+   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
+   "poz": "8.14",
+   "arkusze": [
+    "PT-BO-27"
+   ],
+   "As_req": 904.8,
+   "As_min": 452.4,
+   "As_prov": 904.8,
+   "jedn": "mm²",
+   "zbrojenie": "8Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.0
+  },
+  {
+   "element": "SL15",
+   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
+   "poz": "8.15",
+   "arkusze": [
+    "PT-BO-27"
+   ],
+   "As_req": 904.8,
+   "As_min": 452.4,
+   "As_prov": 904.8,
+   "jedn": "mm²",
+   "zbrojenie": "8Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.0
+  },
+  {
+   "element": "SL16",
+   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
+   "poz": "8.16",
+   "arkusze": [
+    "PT-BO-27"
+   ],
+   "As_req": 904.8,
+   "As_min": 452.4,
+   "As_prov": 904.8,
+   "jedn": "mm²",
+   "zbrojenie": "8Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.0
+  },
+  {
+   "element": "SL17",
+   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
+   "poz": "8.17",
+   "arkusze": [
+    "PT-BO-27"
+   ],
+   "As_req": 904.8,
+   "As_min": 452.4,
+   "As_prov": 904.8,
+   "jedn": "mm²",
+   "zbrojenie": "8Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.0
+  },
+  {
+   "element": "SL18",
+   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
+   "poz": "8.18",
+   "arkusze": [
+    "PT-BO-27"
+   ],
+   "As_req": 904.8,
+   "As_min": 452.4,
+   "As_prov": 904.8,
+   "jedn": "mm²",
+   "zbrojenie": "8Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.0
+  },
+  {
+   "element": "SL19",
+   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
+   "poz": "8.19",
+   "arkusze": [
+    "PT-BO-27"
+   ],
+   "As_req": 678.6,
+   "As_min": 452.4,
+   "As_prov": 678.6,
+   "jedn": "mm²",
+   "zbrojenie": "6Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.0
+  },
+  {
+   "element": "SL20",
+   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
+   "poz": "8.20",
+   "arkusze": [
+    "PT-BO-27"
+   ],
+   "As_req": 678.6,
+   "As_min": 452.4,
+   "As_prov": 678.6,
+   "jedn": "mm²",
+   "zbrojenie": "6Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.0
+  },
+  {
+   "element": "SL21",
+   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
+   "poz": "8.21",
+   "arkusze": [
+    "PT-BO-27"
+   ],
+   "As_req": 678.6,
+   "As_min": 452.4,
+   "As_prov": 678.6,
+   "jedn": "mm²",
+   "zbrojenie": "6Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.0
+  },
+  {
+   "element": "SL9",
+   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
+   "poz": "8.9",
+   "arkusze": [
+    "PT-BO-27"
+   ],
+   "As_req": 678.6,
+   "As_min": 452.4,
+   "As_prov": 678.6,
+   "jedn": "mm²",
+   "zbrojenie": "6Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.0
   },
   {
    "element": "ST1",

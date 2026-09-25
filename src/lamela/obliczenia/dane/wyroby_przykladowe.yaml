@@ -176,7 +176,9 @@ pv:
     P_modul_Wp: 430
     liczba: 15
     PR: 0.80              # współczynnik wydajności instalacji (straty temperaturowe, falownik, okablowanie, zabrudzenie)
-    status: "[DANE PRZYKŁADOWE – FIKCYJNE]; PR — [ZAŁ]"
+    masa_modulu_kg: 21.5  # masa modułu (karta katalogowa typowego modułu 430 Wp 1722 × 1134 mm) — obciążenie stałe dachu (BO)
+    masa_stelaza_kg: 10.0 # stelaż systemu biosolarnego na 1 moduł (bez balastu — balastem jest substrat w warstwach dachu)
+    status: "[DANE PRZYKŁADOWE – FIKCYJNE]; PR — [ZAŁ]; masy modułu i stelaża — do potwierdzenia kartą wybranego wyrobu (PT-4 IE)"
     zrodlo: "dane przykładowe typowego modułu monokrystalicznego 430 Wp (lub równoważny); PR 0,80 — założenie wg literatury"
 
 emisje:              # metodologia pkt 6.1.2 — wskaźniki KOBiZE na rok sporządzenia

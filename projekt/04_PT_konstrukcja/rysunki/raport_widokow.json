@@ -240,7 +240,7 @@
           "sprawdzone_lancuchy": 4
         }
       },
-      "czas_s": 187.2,
+      "czas_s": 200.3,
       "png_kontrola": {
         "px": [
           3508,
@@ -483,7 +483,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 7.5,
+      "czas_s": 8.0,
       "png_kontrola": {
         "px": [
           1536,
@@ -730,7 +730,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 7.4,
+      "czas_s": 7.1,
       "png_kontrola": {
         "px": [
           3508,
@@ -977,7 +977,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.1,
+      "czas_s": 3.3,
       "png_kontrola": {
         "px": [
           3508,
@@ -1231,8 +1231,8 @@
         "pole_arkusza_m2": 0.2142,
         "pole_ramki_m2": 0.1911,
         "pusty_prostokat_mm": [
-          210,
-          72
+          200,
+          292
         ],
         "przyciety_mm": [
           412,
@@ -1472,7 +1472,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.6,
+      "czas_s": 3.0,
       "png_kontrola": {
         "px": [
           3508,
@@ -1719,7 +1719,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.1,
+      "czas_s": 2.0,
       "png_kontrola": {
         "px": [
           2481,
@@ -1743,8 +1743,8 @@
         "pole_arkusza_m2": 0.1932,
         "pole_ramki_m2": 0.1716,
         "pusty_prostokat_mm": [
-          12,
-          336
+          242,
+          44
         ],
         "przyciety_mm": [
           412,
@@ -2213,7 +2213,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.4,
+      "czas_s": 3.2,
       "png_kontrola": {
         "px": [
           3508,
@@ -2455,12 +2455,12 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 892,
-          "napisy": 294,
+          "prymitywy": 900,
+          "napisy": 296,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.7,
+      "czas_s": 3.6,
       "png_kontrola": {
         "px": [
           3508,
@@ -2497,7 +2497,7 @@
     {
       "nr": "PT-BO-11",
       "tytul": "ZESTAWIENIE STALI — STROP NAD PARTEREM",
-      "format": "420×500",
+      "format": "420×510",
       "typ": [
         "k_zestawienie"
       ],
@@ -2508,9 +2508,9 @@
       "qa_kind": null,
       "wymiary_mm": [
         420.0,
-        500.0
+        510.0
       ],
-      "pole_m2": 0.21,
+      "pole_m2": 0.2142,
       "skladanie": {
         "zgiecia_pionowe": [
           125.0,
@@ -2526,7 +2526,7 @@
         ],
         "rzedy": [
           297.0,
-          203.0
+          213.0
         ],
         "n_pasow": 3,
         "n_rzedow": 2,
@@ -2536,20 +2536,20 @@
         "ocena_poziom": "poprawne",
         "tabliczka_na_wierzchu": true,
         "uwagi": [
-          "górny rząd 203 mm (niepełny)"
+          "górny rząd 213 mm (niepełny)"
         ]
       },
       "uklad": {
-        "format": "420×500",
+        "format": "420×510",
         "wymiary_mm": [
           420.0,
-          500.0
+          510.0
         ],
-        "pole_m2": 0.21,
+        "pole_m2": 0.2142,
         "standardowy": false,
         "tryb": "ekonomiczny",
-        "koszt": 0.225,
-        "wypelnienie_szac": 0.557,
+        "koszt": 0.2295,
+        "wypelnienie_szac": 0.554,
         "uklad_widokow": "wiersz",
         "skladanie": {
           "zgiecia_pionowe": [
@@ -2566,7 +2566,7 @@
           ],
           "rzedy": [
             297.0,
-            203.0
+            213.0
           ],
           "n_pasow": 3,
           "n_rzedow": 2,
@@ -2576,7 +2576,7 @@
           "ocena_poziom": "poprawne",
           "tabliczka_na_wierzchu": true,
           "uwagi": [
-            "górny rząd 203 mm (niepełny)"
+            "górny rząd 213 mm (niepełny)"
           ]
         },
         "czesci_uwag": 1,
@@ -2584,13 +2584,13 @@
         "znaki_rezerwowane": true,
         "kandydaci": [
           {
-            "format": "420×500",
+            "format": "420×510",
             "wymiary_mm": [
               420,
-              500
+              510
             ],
-            "koszt": 0.225,
-            "pole_m2": 0.21,
+            "koszt": 0.2295,
+            "pole_m2": 0.2142,
             "skladanie": "poprawne"
           },
           {
@@ -2658,9 +2658,9 @@
             "uwagi[1–3]",
             [
               47.0,
-              84.2,
+              80.7,
               224.0,
-              108.5
+              105.0
             ]
           ]
         ],
@@ -2685,16 +2685,16 @@
           "brak legendy na arkuszu (R-LEGENDA) — wymagana dla oznaczeń spoza norm z zał. 2 rozp."
         ],
         "stats": {
-          "prymitywy": 1198,
-          "napisy": 948,
+          "prymitywy": 1227,
+          "napisy": 972,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 4.9,
+      "czas_s": 5.0,
       "png_kontrola": {
         "px": [
           2481,
-          2953
+          3012
         ],
         "dpi_eff": [
           150.0,
@@ -2707,19 +2707,19 @@
         "ok": true
       },
       "wypelnienie": {
-        "wypelnienie": 0.842,
-        "wypelnienie_rys": 0.825,
-        "wypelnienie_skl": 0.541,
-        "wypelnienie_kontur": 0.531,
-        "pole_arkusza_m2": 0.21,
-        "pole_ramki_m2": 0.1872,
+        "wypelnienie": 0.854,
+        "wypelnienie_rys": 0.838,
+        "wypelnienie_skl": 0.546,
+        "wypelnienie_kontur": 0.536,
+        "pole_arkusza_m2": 0.2142,
+        "pole_ramki_m2": 0.1911,
         "pusty_prostokat_mm": [
-          210,
-          74
+          200,
+          300
         ],
         "przyciety_mm": [
           412,
-          492
+          503
         ],
         "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
       }
@@ -2937,7 +2937,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.1,
+      "czas_s": 3.2,
       "png_kontrola": {
         "px": [
           2481,
@@ -3188,12 +3188,12 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 795,
-          "napisy": 268,
+          "prymitywy": 799,
+          "napisy": 269,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.4,
+      "czas_s": 3.3,
       "png_kontrola": {
         "px": [
           2481,
@@ -3217,8 +3217,8 @@
         "pole_arkusza_m2": 0.1848,
         "pole_ramki_m2": 0.1638,
         "pusty_prostokat_mm": [
-          390,
-          8
+          28,
+          276
         ],
         "przyciety_mm": [
           420,
@@ -3282,7 +3282,7 @@
         "standardowy": false,
         "tryb": "ekonomiczny",
         "koszt": 0.2025,
-        "wypelnienie_szac": 0.586,
+        "wypelnienie_szac": 0.593,
         "uklad_widokow": "wiersz",
         "skladanie": {
           "zgiecia_pionowe": [
@@ -3391,9 +3391,9 @@
             "uwagi[1–3]",
             [
               230.0,
-              342.8,
+              337.8,
               407.0,
-              367.1
+              362.1
             ]
           ]
         ],
@@ -3418,8 +3418,8 @@
           "brak legendy na arkuszu (R-LEGENDA) — wymagana dla oznaczeń spoza norm z zał. 2 rozp."
         ],
         "stats": {
-          "prymitywy": 1060,
-          "napisy": 825,
+          "prymitywy": 1067,
+          "napisy": 831,
           "sprawdzone_lancuchy": 0
         }
       },
@@ -3442,13 +3442,13 @@
       "wypelnienie": {
         "wypelnienie": 0.876,
         "wypelnienie_rys": 0.861,
-        "wypelnienie_skl": 0.563,
-        "wypelnienie_kontur": 0.568,
+        "wypelnienie_skl": 0.568,
+        "wypelnienie_kontur": 0.574,
         "pole_arkusza_m2": 0.189,
         "pole_ramki_m2": 0.1677,
         "pusty_prostokat_mm": [
-          390,
-          30
+          200,
+          222
         ],
         "przyciety_mm": [
           412,
@@ -3670,7 +3670,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.2,
+      "czas_s": 2.3,
       "png_kontrola": {
         "px": [
           2481,
@@ -3921,8 +3921,8 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 701,
-          "napisy": 251,
+          "prymitywy": 709,
+          "napisy": 253,
           "sprawdzone_lancuchy": 0
         }
       },
@@ -3950,8 +3950,8 @@
         "pole_arkusza_m2": 0.1848,
         "pole_ramki_m2": 0.1638,
         "pusty_prostokat_mm": [
-          390,
-          8
+          28,
+          276
         ],
         "przyciety_mm": [
           420,
@@ -4015,7 +4015,7 @@
         "standardowy": false,
         "tryb": "ekonomiczny",
         "koszt": 0.1548,
-        "wypelnienie_szac": 0.669,
+        "wypelnienie_szac": 0.688,
         "uklad_widokow": "wiersz",
         "skladanie": {
           "zgiecia_pionowe": [
@@ -4060,23 +4060,23 @@
             "skladanie": "słabe"
           },
           {
-            "format": "420×340",
+            "format": "420×350",
             "wymiary_mm": [
               420,
-              340
+              350
             ],
-            "koszt": 0.1618,
-            "pole_m2": 0.1428,
+            "koszt": 0.1666,
+            "pole_m2": 0.147,
             "skladanie": "słabe"
           },
           {
-            "format": "297×480",
+            "format": "297×490",
             "wymiary_mm": [
               297,
-              480
+              490
             ],
-            "koszt": 0.1674,
-            "pole_m2": 0.1426,
+            "koszt": 0.1709,
+            "pole_m2": 0.1455,
             "skladanie": "słabe"
           },
           {
@@ -4151,12 +4151,12 @@
           "brak legendy na arkuszu (R-LEGENDA) — wymagana dla oznaczeń spoza norm z zał. 2 rozp."
         ],
         "stats": {
-          "prymitywy": 760,
-          "napisy": 566,
+          "prymitywy": 774,
+          "napisy": 578,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.4,
+      "czas_s": 3.6,
       "png_kontrola": {
         "px": [
           1359,
@@ -4173,15 +4173,15 @@
         "ok": true
       },
       "wypelnienie": {
-        "wypelnienie": 0.678,
-        "wypelnienie_rys": 0.614,
-        "wypelnienie_skl": 0.678,
-        "wypelnienie_kontur": 0.653,
+        "wypelnienie": 0.693,
+        "wypelnienie_rys": 0.633,
+        "wypelnienie_skl": 0.693,
+        "wypelnienie_kontur": 0.668,
         "pole_arkusza_m2": 0.1366,
         "pole_ramki_m2": 0.1148,
         "pusty_prostokat_mm": [
           200,
-          102
+          98
         ],
         "przyciety_mm": [
           221,
@@ -4399,7 +4399,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.1,
+      "czas_s": 2.2,
       "png_kontrola": {
         "px": [
           1831,
@@ -4866,7 +4866,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 5.5,
+      "czas_s": 5.4,
       "png_kontrola": {
         "px": [
           3603,
@@ -5108,7 +5108,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.8,
+      "czas_s": 4.1,
       "png_kontrola": {
         "px": [
           3508,
@@ -5622,7 +5622,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.2,
+      "czas_s": 2.1,
       "png_kontrola": {
         "px": [
           2422,
@@ -5647,7 +5647,7 @@
         "pole_ramki_m2": 0.152,
         "pusty_prostokat_mm": [
           78,
-          240
+          256
         ],
         "przyciety_mm": [
           401,
@@ -5904,7 +5904,7 @@
         "pole_ramki_m2": 0.1722,
         "pusty_prostokat_mm": [
           120,
-          108
+          186
         ],
         "przyciety_mm": [
           318,
@@ -6136,7 +6136,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.8,
+      "czas_s": 2.9,
       "png_kontrola": {
         "px": [
           2481,
@@ -6634,7 +6634,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.9,
+      "czas_s": 2.8,
       "png_kontrola": {
         "px": [
           5138,
@@ -6694,15 +6694,15 @@
   "tom": "projekt/04_PT_konstrukcja/rysunki/tom_PT-BO.pdf",
   "papier": {
     "arkuszy": 27,
-    "pole_m2": 6.064,
-    "a4_ekw": 97.2,
+    "pole_m2": 6.069,
+    "a4_ekw": 97.3,
     "warstwy_a4": 161,
     "skladanie": {
       "dobre": 1,
       "poprawne": 23,
       "słabe": 3
     },
-    "wypelnienie_wazone": 0.722
+    "wypelnienie_wazone": 0.723
   },
-  "czas_s": 315.5
+  "czas_s": 328.4
 }

@@ -1034,6 +1034,48 @@ class AnalizaKonstrukcji:
         return s1, s2, sb, wyn
 
     # ---------------- MES grupy ----------------
+    def _pv_na_dachach(self, g: Grupa, fe, qG: np.ndarray) -> dict:
+        """Moduły PV na dachach (model: energia.pv.pola[].moduly — prostokąty [x0, y0, x1, y1]): obciążenie stałe
+        g_PV = (m_modułu + m_stelaża)·g/A_modułu na obrysie modułów (masy — dane wyrobu: obliczenia/dane/
+        wyroby_przykladowe.yaml, pv; balast systemu biosolarnego — substrat, ujęty w warstwach dachu)."""
+        import yaml
+        pv = ((self.m.raw.get("energia") or {}).get("pv") or {})
+        pola = [q for q in (pv.get("pola") or []) if isinstance(q, dict)]
+        if not pola:
+            return {}
+        try:
+            wy = yaml.safe_load((Path(__file__).resolve().parents[1] / "dane" / "wyroby_przykladowe.yaml").read_text(
+                encoding="utf-8")) or {}
+            mod = next(iter(((wy.get("pv") or {}).values())), {}) or {}
+            m_kg = float(mod.get("masa_modulu_kg")) + float(mod.get("masa_stelaza_kg") or 0.0)
+            status = str(mod.get("status") or "")
+        except Exception:  # noqa: BLE001
+            self.brak("Moduły PV: brak mas modułu/stelaża w danych wyrobu (wyroby_przykladowe.yaml, pv) — ciężar PV pominięty.")
+            return {}
+        out = {}
+        ids = {e.id: e for e in g.el}
+        for q in pola:
+            e = ids.get(str(q.get("dach")))
+            if e is None:
+                continue
+            n = 0
+            A_sum = 0.0
+            for r in q.get("moduly") or []:
+                x0, y0, x1, y1 = (float(v) for v in r)
+                A = abs(x1 - x0) * abs(y1 - y0)
+                if A <= 0:
+                    continue
+                gpv = m_kg * 9.81 / 1000.0 / A
+                qG[fe.elementy_w(box(min(x0, x1), min(y0, y1), max(x0, x1), max(y0, y1)))] += gpv
+                n += 1
+                A_sum += A
+            if n:
+                out[e.id] = (f"**Moduły PV (pole fotowoltaiczne na dachu {e.id})** — obciążenie stałe na obrysie {n} modułów: "
+                             f"g_PV = (m_modułu + m_stelaża)·g/A_modułu = {f(m_kg, 1)}·9,81·10⁻³/{f(A_sum / n, 3)} = "
+                             f"**{f(m_kg * 9.81 / 1000.0 / (A_sum / n), 3)}** kN/m² (balast systemu biosolarnego — substrat, "
+                             f"w warstwach dachu); masy — dane wyrobu {status}.")
+        return out
+
     def _analiza_grupy(self, g: Grupa):
         p = self.p
         self._komorki(g)
@@ -1060,6 +1102,7 @@ class AnalizaKonstrukcji:
                 qA[msk] = obciazenie_uzytkowe(e.kat_q, p).q_k
             else:
                 qH[msk] = obciazenie_uzytkowe("dach", p).q_k
+        g.pv_opis = self._pv_na_dachach(g, fe, qG)
         # zastępcze od ścianek lekkich (QA) — na elementy stropów
         for ln, cs, q, opis in g.linie:
             if ln is None and cs == "QA":
@@ -1184,6 +1227,8 @@ class AnalizaKonstrukcji:
                 poz.uwagi.append("Połączenie z płytą stropu przez łącznik termoizolacyjny (ETA) — dobór łącznika na siły "
                                  "m_Ed, v_Ed z niniejszej pozycji wg dokumentu producenta (W-272).")
             poz.obciazenia.append(f"**Obciążenia stałe — {e.zest.tytul}**\n\n" + e.zest.md(p))
+            if (getattr(g, "pv_opis", None) or {}).get(e.id):
+                poz.obciazenia.append(g.pv_opis[e.id])
             uz = obciazenie_uzytkowe(e.kat_q, p)
             txt = [f"Obciążenie użytkowe: {uz.opis}: q_k = {f(uz.q_k, 2)} kN/m², Q_k = {f(uz.Q_k, 1)} kN, ψ₀/ψ₁/ψ₂ = "
                    f"{'/'.join(f(x, 1) for x in uz.psi)} ({uz.zrodlo})."]
