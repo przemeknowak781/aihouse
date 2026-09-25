@@ -373,8 +373,8 @@ x = −2,20. Bryła A (z lamelami) ma w elewacji 13,60 m (x −1,30 … 12,30).
 * osie **B** i **D** — pasmo północne P0–P2 (P2 — ściany nadbudowy); oś **C** — P1 i P2 na **podciągu PD-C** w ST1 (rozp. 3,50 m, oś 3→4), bo na P0 jest ekran lamel;
 * osie **5** i **F** oraz ściana pd. garażu (oś 2) — tylko P0 (skrzydło wejściowe i garaż).
 
-**Linia południowa (oś 1) — ścieżka obciążeń:** SLA (P2, dach) → SLC / mur P1 → podciąg krawędziowy **PD-1** w ST1 (30 × 45, schowany w pasie
-okapu E +2,55…+3,05) → słupy SL1–SL4 fasady E → stopy/ława w osi 1. Słupy SLA3/SLA4, SLC1/SLC2 i SL3/SL4 leżą w osiach x = 6,90 i 9,30 — jedna
+**Linia południowa (oś 1) — ścieżka obciążeń:** SLA (P2, dach) → SLC / mur P1 → podciąg krawędziowy **PD-1** w ST1 — belka odwrócona 30 × 65 cm
+(+2,80…+3,45, schowana w parapecie boksu C i w murze P1; spód równo z płytą — nadproże przeszklenia E na +2,75) → słupy SL1–SL4 fasady E → stopy/ława w osi 1. Słupy SLA3/SLA4, SLC1/SLC2 i SL3/SL4 leżą w osiach x = 6,90 i 9,30 — jedna
 pionowa linia do fundamentu; SLA2 (x 2,60) stoi na ścianie murowanej P1 nad SL1 (x 2,60); SLA5 na narożniku ściany E. Rozpiętości PD-1 między
 podporami ≤ 2,70 m; krawędź ST2L (**PD-5**) między murem P1 (x ≤ 4,50), SLC1, SLC2 i filarem x 11,70–12,30 — ≤ 2,40 m.
 
@@ -403,3 +403,135 @@ posadowienie bezpośrednie w piaskach średnich (ZWG ≈ 3,8 m p.p.t.), II kateg
 fundamentowa (korzystna przy ciągłej izolacji XPS pod całym budynkiem — brief §9 p. 1).
 
 **Klasa odporności pożarowej:** zwolnienie wg WT §213 (dom jednorodzinny, 3 kondygnacje) — stal słupów bez wymagań R.
+
+## 5. Instalacje (założenia wariantu)
+
+* **Pompa ciepła** powietrze–woda split (R290): jednostka wewnętrzna (hydrobox), zasobnik CWU 300 l, bufor 100 l, rozdzielacze ogrzewania podłogowego,
+  rozdzielnica RG i wodomierz w **pom. technicznym 0.06** (6,88 m², P0, przy garażu i przedsionku). Jednostka zewnętrzna od **północy** (x 10,20–11,40;
+  y 11,85–12,45) w osłonie lamelowej — 13,30 m od granicy E, 17,5 m od W (W-024: ≥ 6,0 m), nie pod oknami sypialni (nad nią pralnia P1).
+* **Wentylacja mechaniczna z odzyskiem ciepła**: centrala w pom. 0.06 (P0); kanały pionowe w szachcie **SI** (x 6,505–6,905; y 5,505–5,905) na
+  wszystkich kondygnacjach, czerpnia/wyrzutnia na elewacji pn. skrzydła. Garaż — wentylacja naturalna (≥ 0,08 m² w bramie i ścianie E), poza rekuperacją.
+* **Kanalizacja**: pion **K1** w szachcie SI (łazienki P1 i P2 jedna nad drugą w osiach C–D; WC P2 i P1 przy szachcie), pion **K2** (pralnia P1 → przez
+  pom. techn.), łazienka gościnna i WC gościnne w skrzydle — podejścia bezpośrednio do poziomu pod płytą; wyprowadzenie na pn. do studzienki D425 (5,00; 15,00).
+  Piony wentylowane ponad dach nadbudowy (> 4 m od okien — W-139).
+* **Wody opadowe**: dach P2 i nadbudowy → wpusty z przelewami awaryjnymi w attyce, rury spustowe w szachcie/ścianie pn.; dachy zielone (garaż,
+  skrzydło) → retencja w warstwie drenażowej, wpusty przy attyce; loggia P2 → odwodnienie liniowe + rzygacz; wszystko → szczelny **zbiornik 5 m³**
+  (x −4,70…−2,30; y −8,30…−6,70) z przelewem do **niecki chłonnej 24 m²** (brief §8/§9).
+* **PV ≤ 6,5 kWp** na dachu P2 (≈ 60 m² dostępne po odliczeniu latarni i pasów przy attyce), dostęp klapą 0,9 × 0,9 z holu P2 (W-065).
+* Instalacja elektryczna: ZK w ogrodzeniu (x 11,50–12,30), WLZ do RG; światłowód 2 × HDPE 40 do pom. techn.
+
+## 6. Zagospodarowanie działki (`zagospodarowanie.png`)
+
+* **Położenie budynku** (lica ocieplenia): ściana zach. P0/P1 x = −0,30 → **7,00 m** od granicy W; ściana zach. P2 na wsporniku x = −1,30 → **6,00 m**;
+  płyty ST2L/ST3 x = −2,20 → **5,10 m**; okap zach. P0 i taras x = −1,80 → **5,50 m**; ściana wsch. garażu (z drzwiami) x = 18,70 → **6,00 m** od
+  granicy E; okap E nad patio x = 13,80 → 10,90 m; południe: okapy y = −1,30 → **29,70 m** od granicy S, taras y = −4,50 → 26,50 m; północ: skrzydło
+  wejściowe i garaż y = 11,60 → **7,40 m** od granicy z drogą, daszek y = 12,80 → **0,20 m przed linią zabudowy** (6,00 m od drogi; W-006 — żaden
+  element jej nie przekracza). Wszystkie ściany z oknami ≥ 4,00 m, płyty/okapy ≥ 4,00 m (wymóg WT §12 ust. 6 — 1,50 m — spełniony z zapasem).
+* **Dojazd i parkowanie**: brama przesuwna 5,20 m (x 12,70–17,90, odjazd na wschód wzdłuż ogrodzenia), podjazd z kostki 6,40 × 7,40 m przed bramą
+  garażu, **2 miejsca gościnne 2,50 × 5,00** na podjeździe (x 12,90–15,40 i 15,60–18,10; 6,60 m od granicy E ≥ 3,00 m — W-015); odwodnienie liniowe przed
+  bramą garażu. Razem **4 miejsca** (2 w garażu + 2 gościnne) ≥ 2.
+* **Dojście**: furtka 1,00 m **na osi x = 8,00** (x 7,50–8,50) → ścieżka z płyt 1,20 m → daszek → drzwi; łącznik z płyt do podjazdu (y 13,20–14,20).
+* **Tarasy i ogród**: taras ogrodowy S + W (deska kompozytowa, −0,05) — pas 14,10 × 4,20 m przed salonem/jadalnią/kuchnią + 1,50 × 5,70 m pod okapem
+  zachodnim; **patio poranne** przy kuchni (5,10 × 4,80 m) między ścianą E domu a ścianą pd. garażu (pnącza, okap 1,00 m); **oś ogrodowa** — ścieżka
+  z płyt w trawie od tarasu do solitera (8,00; −24,50); loggia P2 (13,0 × 1,20 m).
+* **Pojemniki na odpady**: osłona 2,10 × 1,00 m w linii ogrodzenia obok furtki (x 9,20–11,30) z drzwiczkami od ulicy — WT §23 ust. 4: w zabudowie
+  jednorodzinnej odległości nie określa się (W-016).
+* **Retencja**: szczelny zbiornik 5 m³ + niecka chłonna 24 m² (x −5,50…0,50; y −15,00…−11,00) — ≥ 1,8 m od granicy W, poza drzewami.
+* **Przyłącza** (od drogi 1KDD): woda PE 40 (x = 10,80) do przedsionka → wodomierz w pom. techn.; kanalizacja PVC 160 (x = 5,00) ze studzienką D425;
+  energia: ZK we wnęce ogrodzenia (x 11,50–12,30) → WLZ; światłowód (x = 12,10). Gaz — nie przyłączany.
+* **Zieleń izolacyjna**: żywopłoty wzdłuż granic E, W, S (pas 1,0 m), drzewa w ogrodzie (≥ 3 m od granic), drzewo przy wejściu.
+* **Ogrodzenie**: od drogi ażurowe h = 1,50 m (≤ 1,60 — MPZP), bez prefabrykatów betonowych; brama przesuwna i furtka nie otwierają się na zewnątrz.
+
+## 7. Orientacja, doświetlenie, energia
+
+* **Południe** — strefa dzienna (przeszklenie 10,85 m, 5 kwater, 34,90 m² szkła w strefie dziennej łącznie z oknem zach. = 1/1,7 podłogi), boks C, loggia P2.
+  Okap wysunięty 1,30 m przed szybę przeszklenia E (h = 2,75 m): kąt odcięcia ≈ 66° — w południe przesilenia letniego (61° przy 52,4° N)
+  zacienione ≈ 85 % wysokości szyb; zimą (14°) i w okresach przejściowych (38°) słońce wpada głęboko do jadalni i przez boks C do pustki. Zewnętrzne żaluzje fasadowe w kasetach za okapem
+  (g_c ≤ 0,35 — W-247), lamele P2 jako stała osłona z możliwością składania paneli przesuwnych na loggii.
+* **Zachód** — salon (HS na taras pod okapem 1,50 m), pokoje dzieci, gabinet P2; **wschód** — kuchnia (patio poranne), pokój rodzinny, sypialnia rodziców.
+* **Północ** — tylko okna pomocnicze: łazienki, pralnia, klatka (ON3), przedsionek, sidelight wiatrołapu; światło zenitalne: latarnia SW1 i świetlik SW2.
+* **Światło w głębi planu**: hol P0 (niskie pasmo północne) jest doświetlony trzema źródłami — świetlik SW2 nad wiatrołapem, latarnia SW1 przez klatkę
+  (ekran lamel), wylot 2,60 m na jadalnię z pustką. Galeria P1 dostaje światło południowe przez boks C i pustkę.
+* **Przesłanianie (WT §13)**: okna pokoi S nieprzesłonięte; drzwi kuchenne E patrzą na patio — ściana garażu leży 3,0 m poza osią okna, w odległości
+  ≥ 5,2 m po kącie 30° (> h = 3,65 m). Okno E pokoju rodzinnego (parapet +4,00) ponad attyką garażu (+3,65).
+* **Zwartość**: A/V pogorszone przez skrzydło jednokondygnacyjne i loggię — rekompensata: garaż i skrzydło w obrysie zwartego parteru, dachy zielone,
+  U ścian 0,15, okna 0,80, łączniki termoizolacyjne we wszystkich płytach. Kubatura ogrzewana ≈ (149,9 + 119,7 + 87,0) m² × 3,15 m ≈ 1 120 m³ (> 1000 m³ — uprawnienia bez ograniczeń, PWP).
+
+## 8. Tabela kontrolna (generowana z modelu — `python3 src/calc_w3.py kontrola`)
+
+| lp. | wymaganie | wartość w W3 | wymóg / cel | wynik |
+|---|---|---|---|---|
+| 1 | pow. 0.01 Salon + jadalnia + kuchnia | 59,31 m² | ≥ 50,0 m² | ✓ |
+| 2 | pow. 0.03 Pokój gościnny / gabinet | 12,63 m² | ≥ 8,0 m² | ✓ |
+| 3 | pow. 1.02 Pokój rodzinny / biblioteka (boks C) | 18,14 m² | ≥ 16,0 m² | ✓ |
+| 4 | pow. 1.03 Pokój dziecka 1 | 16,60 m² | ≥ 12,0 m² | ✓ |
+| 5 | pow. 1.04 Pokój dziecka 2 | 12,63 m² | ≥ 12,0 m² | ✓ |
+| 6 | pow. 2.02 Gabinet / pokój | 19,43 m² | ≥ 8,0 m² | ✓ |
+| 7 | pow. 2.04 Sypialnia rodziców | 15,24 m² | ≥ 14,0 m² | ✓ |
+| 8 | okna/podłoga 0.01 | 34,90 m² = 1/1,7 | ≥ 1/8 | ✓ |
+| 9 | okna/podłoga 0.03 | 2,26 m² = 1/5,6 | ≥ 1/8 | ✓ |
+| 10 | okna/podłoga 1.02 | 7,24 m² = 1/2,5 | ≥ 1/8 | ✓ |
+| 11 | okna/podłoga 1.03 | 2,53 m² = 1/6,6 | ≥ 1/8 | ✓ |
+| 12 | okna/podłoga 1.04 | 2,53 m² = 1/5,0 | ≥ 1/8 | ✓ |
+| 13 | okna/podłoga 2.02 | 14,93 m² = 1/1,3 | ≥ 1/8 | ✓ |
+| 14 | okna/podłoga 2.04 | 11,32 m² = 1/1,3 | ≥ 1/8 | ✓ |
+| 15 | pom. techniczne P0 | 6,88 m² | ≥ 6,00 m² | ✓ |
+| 16 | garaż w świetle | 6,08 × 6,29 m | ≥ 5,60 × 6,00 m | ✓ |
+| 17 | schody 2h+s | 2·0,175+0,28 = 0,630 m | 0,60–0,65 m | ✓ |
+| 18 | schody: wys. stopnia / bieg / spocznik | 0,175 / 1,00 / 1,05×2,14 m | ≤ 0,19 / ≥ 1,00 / ≥ 1,00 m | ✓ |
+| 19 | prześwit nad biegami | ≈ 2,94 m (bieg nad biegiem, 3,15 − 0,21) | ≥ 2,00 m | ✓ |
+| 20 | wys. w świetle pokoi P0/P1/P2 | 2,80 / 2,80 (2,55 pod loggią) / 2,80 m | ≥ 2,50 m (cel 2,70–2,80) | ✓ |
+| 21 | wys. pom. pomocn. (spiżarnia, łazienki) | 2,80 m | ≥ 2,20 m | ✓ |
+| 22 | pow. zabudowy | 200,18 m² (12,5 %) | ≤ 480 m² (30 %) | ✓ |
+| 23 | pow. biologicznie czynna | 1236,75 m² (77,3 %) | ≥ 800 m² (50 %) | ✓ |
+| 24 | intensywność zabudowy | 0,251 | 0,05–0,80 | ✓ |
+| 25 | wysokość budynku (MPZP, upzp art. 2 pkt 30) | 10,10 m (attyka +9,85; teren śr. -0,25) | ≤ 11,00 (rezerwa ≤ 10,70) | ✓ |
+| 26 | wysokość wg WT §6 | 9,84 m | ≤ 12 m (grupa N) | ✓ |
+| 27 | kondygnacje nadziemne | 3 (P0, P1, P2); brak piwnicy | ≤ 3 | ✓ |
+| 28 | odległość W: ściana P2 z oknami (x −1,30) | 6,00 m | ≥ 4,00 m | ✓ |
+| 29 | odległość W: ściana P0/P1 z oknami (x −0,30) | 7,00 m | ≥ 4,00 m | ✓ |
+| 30 | odległość W: płyta ST3/ST2L (x −2,20) | 5,10 m | ≥ 4,00 m | ✓ |
+| 31 | odległość W: okap P0 / taras (x −1,80) | 5,50 m | ≥ 4,00 m | ✓ |
+| 32 | odległość E: ściana garażu z drzwiami (x 18,70) | 6,00 m | ≥ 4,00 m | ✓ |
+| 33 | odległość E: okap ST1 nad patio (x 13,80) | 10,90 m | ≥ 4,00 m | ✓ |
+| 34 | odległość E: jedn. zewn. PC (x 11,40) | 13,30 m | ≥ 6,00 m | ✓ |
+| 35 | odległość E: miejsce gościnne P2 (x 18,10) | 6,60 m | ≥ 3,00 m | ✓ |
+| 36 | odległość S: okap/płyty (y −1,30) | 29,70 m | ≥ 4,00 m | ✓ |
+| 37 | odległość N: linia zabudowy – daszek (y 12,80) | 0,20 m | ≥ 0,00 m | ✓ |
+| 38 | PU łączna | 262,61 m² | 230–270 m² | ✓ |
+| 39 | strefa dzienna otwarta | 59,31 m² | ≥ 50 m² | ✓ |
+| 40 | miejsca postojowe | 2 w garażu + 2 gościnne | ≥ 2 | ✓ |
+
+Uwagi do tabeli: pow. okien liczona w świetle ościeżnic (−0,07 m z każdej strony, słupki 0,10 m); dla pokoju rodzinnego 1.02 uwzględniono tylko część boksu C przed tym pokojem (x 8,40–11,70) + okno E. Okna P2 leżą za loggią i lamelami (prześwit ekranu ≈ 67 %) — nawet po redukcji o 1/3 stosunek ≥ 1/2. Wysokość wg WT §6 liczona od terenu przy wejściu (−0,22) do wierzchu warstw stropodachu P2 (+9,62).
+
+## 9. Ocena wariantu W3
+
+**Zalety**
+1. Najsilniejsza z wariantów **sekwencja wejścia**: jedna prosta oś x = 8,00 od furtki przez drzwi, wiatrołap ze świetlikiem, szklaną przegrodę, hol
+   i jadalnię pod pustką aż do solitera na końcu ogrodu; widok „przez dom” od progu.
+2. **Światło**: strefa dzienna doświetlona z S, W i E (1/1,7 podłogi), jadalnia 2-kondygnacyjna pod boksem C, latarnia nad 3-kondygnacyjną klatką,
+   świetlik w skrzydle wejściowym — brak ciemnych stref komunikacji.
+3. **Relacje z ogrodem**: trzy wyjścia z parteru (taras S, taras W pod okapem, patio poranne E) + loggia rodziców 13 × 1,2 m na P2 i galeria z widokiem
+   przez pustkę; oś ogrodowa porządkuje ogród.
+4. Wierność szkicowi: rytm S (A–W, B/C–E, E–W, D do narożnika 19,0 m), rytm kwater parteru narastający ku wschodowi, lamele A, głębokie płyty 0,9–1,5 m.
+5. Konstrukcja racjonalna: ściany w pionie, rozpiętości ≤ 6,40 m, słupy przeszkleń w jednej linii pionowej (x 6,90 / 9,30), ciężkich ścian na
+   wspornikach brak, ściany P2 na wsporniku lekkie.
+6. Program zmieszczony w PU 262,61 m² (w przedziale 230–270), pow. zabudowy 12,5 %, PBC 77 %, wysokość 10,10 m.
+
+**Słabości / ryzyka**
+1. **Loggia P2 nad pomieszczeniami ogrzewanymi** i obniżona płyta ST2L — dodatkowe węzły hydroizolacji, łączniki termoizolacyjne na całej długości
+   (13 m), próg na osi 1'; wymaga starannego detalu (brief §9) i obniża wysokość P1 w pasie 1,20 m do 2,55 m.
+2. **Pustka nad jadalnią** — akustyka (pogłos w części wspólnej), rozprzestrzenianie zapachów kuchni na galerię P1, większa kubatura ogrzewana;
+   wymaga okapu kuchennego z recyrkulacją/wyciągiem i wykończeń chłonnych (sufit akustyczny nad pustką).
+3. Zwartość bryły słabsza niż W2 (jednokondygnacyjne skrzydło wejściowe, uskoki, loggia) — wyższe H_T i koszt; więcej dachów do odwodnienia (5 pól dachowych).
+4. **Pokój gościnny** dostępny z przedpokoju gościnnego w skrzydle (poprzez wiatrołap), a nie bezpośrednio z holu — dobra prywatność, ale dłuższa
+   droga; łazienka gościnna tylko przez pokój (WC gościnne osobno).
+5. Stopa schodów w wylocie holu (w strefie dziennej) — schody czytelne, ale komunikacja pionowa przecina strefę jadalni; nadbudowa P2 widoczna od ulicy.
+6. Pom. techniczne 6,88 m² mieści PC, CWU, bufor, RG i centralę wentylacyjną na styk (alternatywa: centrala w nadbudowie P2 kosztem łazienki).
+7. Garaż cofnięty 4,80 m od lica ogrodowego — w elewacji S czytelny, ale mniej „frontalny” niż w szkicu (świadoma decyzja dla patio i światła kuchni).
+
+## 10. Pliki
+
+* `opis.md` — niniejszy opis; `rzut_P0.png`, `rzut_P1.png`, `rzut_P2.png`, `elewacja_S.png`, `przekroj.png`, `zagospodarowanie.png`.
+* `src/base_w3.py` (osie, typy, poziomy), `src/geo_p0.py`, `src/geo_p1.py`, `src/geo_p2.py` (ściany, otwory, pomieszczenia), `src/geo_ext.py` (schody,
+  płyty, lamele, słupy, dachy, działka), `src/model_w3.py` (model zbiorczy + PU), `src/calc_w3.py` (tabele), `src/draw_*.py`, `src/plan_parts.py`, `src/sec_data.py`.

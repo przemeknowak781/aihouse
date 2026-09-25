@@ -338,21 +338,27 @@ def u_klin_prostokat(R0: float, R1: float) -> float:
     """Zał. C, wzór (C.3): prostokąt, grubość liniowo od 0 do d_max: U = (1/R1)·ln(1 + R1/R0)."""
     if R1 <= 1e-12:
         return 1.0 / R0
-    return math.log(1 + R1 / R0) / R1
+    return math.log1p(R1 / R0) / R1
 
 
 def u_klin_trojkat_max_w_wierzcholku(R0: float, R1: float) -> float:
     """Zał. C, wzór (C.4): trójkąt, największa grubość w wierzchołku: U = 2/R1·[(1 + R0/R1)·ln(1 + R1/R0) − 1]."""
     if R1 <= 1e-12:
         return 1.0 / R0
-    return 2.0 / R1 * ((1 + R0 / R1) * math.log(1 + R1 / R0) - 1)
+    x = R1 / R0
+    if x < 1e-4:                         # rozwinięcie w szereg (unikanie utraty dokładności)
+        return (1.0 / R0) * (1 - 2 * x / 3 + x * x / 2)
+    return 2.0 / R1 * ((1 + R0 / R1) * math.log1p(x) - 1)
 
 
 def u_klin_trojkat_min_w_wierzcholku(R0: float, R1: float) -> float:
     """Zał. C, wzór (C.5): trójkąt, najmniejsza grubość w wierzchołku: U = 2/R1·[1 − (R0/R1)·ln(1 + R1/R0)]."""
     if R1 <= 1e-12:
         return 1.0 / R0
-    return 2.0 / R1 * (1 - R0 / R1 * math.log(1 + R1 / R0))
+    x = R1 / R0
+    if x < 1e-4:
+        return (1.0 / R0) * (1 - x / 3 + x * x / 4)
+    return 2.0 / R1 * (1 - R0 / R1 * math.log1p(x))
 
 
 def u_klin_wielobok(wielobok, R0: float, lam_klin: float, *, d_add_fn=None, wpusty: Sequence | None = None,

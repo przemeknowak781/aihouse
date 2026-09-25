@@ -29,7 +29,7 @@ from .materialy import (TABL_BETON, Beton, Mur, StalKonstr, StalZbrojeniowa, kla
 from .obciazenia import (Oddz, ZestawienieStale, ciezar_materialu, kombinacje, obciazenie_uzytkowe, snieg_attyka,
                          snieg_B2_attyka, snieg_B2_uskok, snieg_dach_plaski, snieg_uskok, wiatr_dach_plaski, wiatr_qp,
                          wiatr_sciany, zastepcze_dzialowe, zestawienie_przegrody)
-from .plyty import PlytaMES, PodporaLiniowa, PodporaPunktowa, PoleCiagle, wood_armer, wyrownaj_moment_podporowy
+from .plyty import PlytaMES, PodporaLiniowa, PodporaPunktowa, PoleCiagle, WynikMES, wood_armer, wyrownaj_moment_podporowy
 from .statyka import Belka, ObcP, ObcQ, Podpora
 from .wspolne import BladDanych, Krok, Parametry, Warunek, Wynik, f, tabela
 
@@ -253,9 +253,8 @@ class AnalizaKonstrukcji:
         # wysokość budynku
         tops = [pl["top_attyki"] or pl["top"] for pl in m.plyty() if pl["typ"] == "dach"] or [pl["top"] for pl in m.plyty()] or [6.0]
         H = max(tops) - min((k.rzedna for k in m.kondygnacje), default=0.0) + max(-self.p.teren_domyslny, 0)
-        bx = m.bbox() if hasattr(m, "bbox") else None
         try:
-            (x0, y0), (x1, y1) = bx[0][:2], bx[1][:2]
+            x0, y0, x1, y1 = m.bbox()
         except Exception:  # noqa: BLE001
             U = unary_union([pl["poly_full"] for pl in m.plyty()])
             x0, y0, x1, y1 = U.bounds
@@ -554,6 +553,10 @@ class AnalizaKonstrukcji:
                                 g.linie.append((ln, c, q, f"ściana nośna {w.id} bez podparcia poniżej — średnio {f(q, 2)} kN/m ({c})"))
                     self.log(f"Ściana nośna {w.id} stoi na płycie {g.nazwa} bez ściany poniżej — obciążenie liniowe płyty; "
                              "sprawdzić podciąg/żebro [WYMAGA ANALIZY].")
+        for z, ln, RG, RQ, opis in getattr(self, "_pend_linie", []):
+            if abs(z - g.wierzch) < 0.35 and ln.distance(g.poly) < 0.05:
+                g.linie.append((ln, "G", RG, f"{opis}: {f(RG, 2)} kN/m (G)"))
+                g.linie.append((ln, "QA", RQ, f"{opis}: {f(RQ, 2)} kN/m (Q)"))
         for sid, N in self.slupy_N.items():
             c = next((c for c in m.slupy() if str(c["id"]) == sid), None)
             if c is None or abs(float(c["z_od"]) - g.wierzch) > TOL_Z or not g.poly.contains(Point(*c["xy"])):
@@ -760,6 +763,16 @@ class AnalizaKonstrukcji:
             qp = qp + g.res["QA"] * psiA
         env["qp"] = qp
         env["kombinacje"] = kombs
+        rmax = {}
+        for sp in g.podp_l:
+            best = 0.0
+            for kb in kombs:
+                rr = sum(a * g.res[c].R for c, a in kb.wsp.items() if c in g.res)
+                _, r = fe.reakcje_liniowe(WynikMES(None, None, rr), sp.id)
+                if len(r):
+                    best = max(best, float(np.nanmax(r)))
+            rmax[sp.id] = best
+        env["rmax"] = rmax
         g.env = env
         g.odz = odz
         self._pozycje_plyt(g)
@@ -832,9 +845,6 @@ class AnalizaKonstrukcji:
                 r = self._wymiaruj_pole(g, e, c, msk, c_nom, wa_qp)
                 rows.append(r["wiersz"])
                 prety += r["prety"]
-                poz.wyniki.extend([])  # szczegóły tylko dla pola miarodajnego
-                for wv in r["warunki"]:
-                    poz.wyniki.append(wv) if False else None
                 poz.dane.setdefault("pola", []).append(r["dane"])
                 if best is None or r["M_max"] > best["M_max"]:
                     best = r
@@ -925,13 +935,7 @@ class AnalizaKonstrukcji:
             if s.linia.distance(c["rect"]) > 0.05:
                 continue
             both = sum(1 for cc in g.komorki if s.linia.distance(cc["rect"]) < 0.05 and cc is not c) > 0
-            best = 0.0
-            for kb in g.env["kombinacje"]:
-                rr = sum(a * g.res[cs].R for cs, a in kb.wsp.items() if cs in g.res)
-                ss, r = fe.reakcje_liniowe(g.res["G"] * 0 + WynikR(rr), s.id)
-                if len(r):
-                    best = max(best, float(np.nanmax(r)))
-            vmax = max(vmax, best * (0.6 if both else 1.0))
+            vmax = max(vmax, g.env["rmax"].get(s.id, 0.0) * (0.6 if both else 1.0))
         for s in g.podp_p:
             if c["rect"].buffer(0.05).contains(Point(*s.xy)):
                 self.log(f"{e.id}: podpora punktowa {s.id} w polu {c['id']} — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]")
@@ -1055,7 +1059,7 @@ class AnalizaKonstrukcji:
                 x_start = 0.0
                 odc = []
                 pods_opis = []
-                land_s = self._spocznik_przy(spoczniki, S, z)
+                land_s = self._spocznik_przy(spoczniki, S, z, u)
                 if land_s is not None:
                     lp, (dmin, dmax) = land_s
                     back = -dmin                     # zasięg spocznika wstecz od S (wzdłuż −u)
@@ -1069,7 +1073,7 @@ class AnalizaKonstrukcji:
                     sup_low = ("posadzka", None, S)
                 odc.append(schm.OdcinekSchodow(x_start, x_start + Lb, "bieg"))
                 x_end = x_start + Lb
-                land_e = self._spocznik_przy(spoczniki, E, z_end)
+                land_e = self._spocznik_przy(spoczniki, E, z_end, u)
                 if land_e is not None:
                     lp, (dmin, dmax) = land_e
                     fwd = dmax
@@ -1083,6 +1087,7 @@ class AnalizaKonstrukcji:
                     sup_high = ("strop", None, E)
                 wyn = schm.plyta_schodowa(f"{sid} — bieg {bi + 1}", odc, hpl, hs, ss, float(bg["szer"]), beton, p,
                                           stal=self.stal, ekspozycja=p.ekspozycja.get("schody", "XC1"))
+                poz.dane.setdefault("biegi", []).append((odc, hs, ss, float(bg["szer"]), beton))
                 poz.wyniki.append(wyn)
                 poz.opis.append(f"Bieg {bi + 1}: {nst} podnóżków {f(hs * 100, 1)}/{f(ss * 100, 1)} cm, szer. {f(bg['szer'])} m, "
                                 f"rozpiętość w rzucie L = {f(wyn.L, 3)} m; podpory — {'; '.join(pods_opis)}.")
@@ -1110,16 +1115,30 @@ class AnalizaKonstrukcji:
             self.pos_schody.append(poz)
 
     def _min_grubosc_schodow(self, poz: Pozycja) -> float | None:
-        """Najmniejsza grubość płyty (co 1 cm), przy której wszystkie biegi spełniają warunki."""
-        return poz.dane.get("hmin")
+        """Najmniejsza grubość płyty (co 1 cm, do 30 cm), przy której wszystkie biegi spełniają warunki."""
+        p = self.p
+        for hcm in range(10, 31):
+            h = hcm / 100
+            ok = True
+            for odc, hs, ss, szer, beton in poz.dane.get("biegi", []):
+                r = schm.plyta_schodowa("x", odc, h, hs, ss, szer, beton, p, stal=self.stal)
+                if not r.ok:
+                    ok = False
+                    break
+            if ok and h > min(w.h for w in poz.wyniki if hasattr(w, "h")) - 1e-9:
+                poz.dane["hmin"] = h
+                return h
+        return None
 
-    def _spocznik_przy(self, spoczniki, pt, z):
+    def _spocznik_przy(self, spoczniki, pt, z, u):
+        """Spocznik na rzędnej z zawierający punkt pt: (wielobok, (t_min, t_max)) — zasięg wzdłuż kierunku u od pt."""
         for sp in spoczniki:
             if abs(float(sp["rzedna"]) - z) > 0.05:
                 continue
             P = Polygon(sp["obrys"])
             if P.buffer(0.1).contains(Point(*pt)):
-                return P, None
+                ts = [float((np.asarray(v) - np.asarray(pt)) @ u) for v in P.exterior.coords]
+                return P, (min(ts), max(ts))
         return None
 
     def _sciana_przy_krawedzi(self, P: Polygon, pt, u, z):
@@ -1302,7 +1321,7 @@ class AnalizaKonstrukcji:
                 for cs, r in g.res.items():
                     ss, rr = g.fe.reakcje_liniowe(r, sid)
                     if len(ss):
-                        sw = [w.st(ln.interpolate(s_))[0] for s_ in ss]
+                        sw = [w.st(ln.interpolate(s_).coords[0])[0] for s_ in ss]
                         pr["top_s"].dodaj(cs, sw, rr)
         # obciążenia skupione (belki, schody)
         for cs, P, s_c, szer in self.pending_sciany.get(w.id, []):
@@ -1808,16 +1827,6 @@ class AnalizaKonstrukcji:
                 gp.podpozycje.append(pz)
             self.pozycje.append(gp)
             nr += 1
-
-
-class WynikR:
-    """Pomocnicze opakowanie wektora reakcji dla PlytaMES.reakcje_liniowe."""
-
-    def __init__(self, R):
-        self.R = R
-
-    def __radd__(self, o):
-        return self
 
 
 def _kat(ln: LineString) -> float:

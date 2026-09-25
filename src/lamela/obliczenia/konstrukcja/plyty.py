@@ -394,14 +394,25 @@ class PlytaMES:
 
     # ---------------- obciążenia ----------------
     def _element_zawierajacy(self, x, y) -> int | None:
+        if not hasattr(self, "_el_idx"):
+            self._el_idx = {ij: k for k, ij in enumerate(self.els)}
         i = int(np.searchsorted(self.gx, x, side="right") - 1)
         j = int(np.searchsorted(self.gy, y, side="right") - 1)
-        i = min(max(i, 0), len(self.gx) - 2)
-        j = min(max(j, 0), len(self.gy) - 2)
-        try:
-            return self.els.index((i, j))
-        except ValueError:
-            return None
+        cand = [(i, j)]
+        # punkt na linii siatki — sąsiednie elementy
+        if i > 0 and abs(x - self.gx[min(i, len(self.gx) - 1)]) < 1e-6:
+            cand.append((i - 1, j))
+        if j > 0 and abs(y - self.gy[min(j, len(self.gy) - 1)]) < 1e-6:
+            cand.append((i, j - 1))
+            if i > 0:
+                cand.append((i - 1, j - 1))
+        for (a, b) in cand:
+            a = min(max(a, 0), len(self.gx) - 2)
+            b = min(max(b, 0), len(self.gy) - 2)
+            k = self._el_idx.get((a, b))
+            if k is not None:
+                return k
+        return None
 
     def wektor(self, q_el: np.ndarray | float = 0.0, linie: list | None = None, punkty: list | None = None) -> np.ndarray:
         """Wektor obciążeń: q_el — obciążenie powierzchniowe na elementach [kPa] (skalar lub tablica n_el);
