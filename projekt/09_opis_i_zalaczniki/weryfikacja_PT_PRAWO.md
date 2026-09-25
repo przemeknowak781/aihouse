@@ -69,3 +69,76 @@ na tekst „NIESPEŁNIONY”, „WYMAGA ANALIZY” lub „NIEZAMKNIĘTE” w tom
 Zasada „wiążące są wartości z obliczeń” nie usuwa sprzeczności wewnątrz tomu PT (RPB § 23 pkt 8, § 24 pkt 4).
 Poprawka: wpisać rozwiązania do parametrów obliczeń, przeliczyć, wygenerować arkusze IS i IE ponownie, a potem złożyć tomy.
 Walidator powinien dawać BRAK, gdy lista „arkusze nieaktualne” nie jest pusta.
+
+### ISTOTNE
+
+**I-1. PT-2 BO podaje błędną podstawę PT: „art. 34 ust. 3 pkt 4 (projekt techniczny)”.**
+Miejsce: s. 7, rozdz. 2.1; źródło w `tools/dokumenty/tom_PT_BO.py`, linia 403. W t.j. Dz.U. 2026 poz. 524 art. 34
+ust. 3 pkt 4 dotyczy oświadczenia zarządcy drogi. Projekt techniczny opisuje pkt 3 lit. a–e; dla BO właściwe są
+lit. a i d. PT-1 AR ma już poprawne brzmienie (pkt 3 lit. c).
+Uwaga: ten sam błąd jest w treści zlecenia.
+
+**I-2. W tomach brakuje RPB § 23 pkt 12 albo podano złe uzasadnienie.**
+Pkt 12 („dane dotyczące warunków ochrony ludności…”) dodał Dz.U. 2026 poz. 597 § 1 pkt 6. Nie jest wyjątkiem
+z § 3, więc obowiązuje od 19.05.2026.
+- PT-1 AR i PT-2 BO nie wspominają pkt 12.
+- PT-3 IS i PT-4 IE piszą „§ 23 pkt … 12 — nie dotyczy (budynek mieszkalny, nie liniowy)”. To uzasadnienie
+  pkt 6 — nie pasuje do pkt 12.
+- Rejestr C.2 również wymienia pkt 12 jako n/d bez podstawy. `listy_kontrolne.yaml` (PT_WSPOLNE) w ogóle go nie sprawdza.
+Poprawka: w każdym tomie dodać wpis: „§ 23 pkt 12 — nie dotyczy: PZT i PAB nie przewidują budowli ochronnej ani
+miejsca doraźnego schronienia (PAB § 20 ust. 1 pkt 14 — n/d)”. Do PT_WSPOLNE dodać regex `§ 23 pkt 12`.
+
+**I-3. PT-4 IE zawiera instalacje telekomunikacyjne, a jedynym autorem jest projektant ze specjalnością elektryczną.**
+Tom obejmuje przyłącze światłowodowe, okablowanie strukturalne, RTV/SAT i SSWiN (rozdz. 7, arkusze PT-IE-07…09).
+Autor na stronie tytułowej i w oświadczeniu ma specjalność „instalacyjna (elektryczne i elektroenergetyczne)”.
+Zakres telekomunikacji przewodowej należy do specjalności telekomunikacyjnej (PB art. 15a ust. 18); zakres
+z ust. 22 jej nie obejmuje.
+Skutki:
+- strona tytułowa i oświadczenie muszą wskazać współautora z tymi uprawnieniami (§ 7 ust. 2 pkt 3, art. 34 ust. 3e);
+- symbol pliku powinien być `WB` (zał. 1 RPB, objaśnienie 2 lit. l), np. `PT_4_WB_…`. Druga możliwość: osobny tom `PT_5_BT_…`.
+Ten sam podział ma rejestr C.2 — do korekty.
+
+**I-4. PT-2 BO — wycofane normy są przywołane bez statusu, a rysunki zawierają wymagania oparte na tych normach.**
+- Uwagi na arkuszach i w rozdz. 9: „beton wg PN-EN 206+A2 i PN-B-06265”, „napowietrzenie/w/c wg PN-B-06265”.
+  Obie normy są wycofane (rejestr A.3, D-09). Zastąpiły je PN-EN 206-1:2026-09 i PN-EN 206-2:2026-09.
+- Lista norm w rozdz. 2.2 nie zawiera normy betonu ani PN-EN 13670 i PN-EN 10080 (obie używane w uwagach), a także
+  norm spoza rejestru.
+- PN-EN 1996-3 i PN-EN ISO 3766 podano bez roku wydania.
+Naruszone: W-319 i rejestr A.1 pkt 5.
+Poprawka: dodać wykaz norm z wydaniem i statusem (aktualna / wycofana / powołana w WT) i ujednolicić uwagi na rysunkach.
+
+**I-5. W PT-3 IS dane ppoż. są niepełne (W-215, WT § 267 ust. 8) i sprzeczne z uwagami na rysunkach.**
+- Rozdz. 7 nie podaje wymogu nierozprzestrzeniania ognia dla izolacji cieplnych i akustycznych instalacji wod.-kan.
+  i c.o. Zwolnienie z § 213 obejmuje tylko § 212 i § 216, a § 267 ust. 8 nadal obowiązuje.
+- Rozdz. 7 mówi, że przejścia są „bez wymagań odporności ogniowej przepustów”. Uwaga 5 na arkuszach odwodnienia
+  (PT-IS-07/08) każe wykonać „przejścia przez stropy z uszczelnieniem ppoż. wg klasy stropu”.
+Poprawka: dopisać W-215 do rozdz. 7 i ujednolicić uwagę na arkuszach.
+
+**I-6. PT-3 IS — charakterystyka energetyczna (§ 23 pkt 11 lit. c–d) liczy się na innych danych pompy ciepła niż ogrzewanie.**
+Moduł energii przyjmuje P(A−7/W35) = 8,0 kW i SCOP 4,50. Moduł ogrzewania (PC-R290-07) przyjmuje 6,2 kW i SCOP 4,70
+(rozdz. 1, poz. 4). Wynik EP ≤ EP_max nie odnosi się więc do urządzenia z projektu.
+Poprawka: jedno źródło danych (instalacje.wyroby.PC), a potem przeliczyć EP, punkt biwalentny i hałas.
+
+**I-7. PT-2 BO — § 23 pkt 2 RPB i § 9–10 rozp. Dz.U. 2012 poz. 463 nie są spełnione, a walidator daje „OK”.**
+- Dokumentacji badań podłoża nie ma — jest tylko [DOKUMENT ZEWNĘTRZNY – do dołączenia] (s. 302).
+- W tab. 8 projektu geotechnicznego parametry są sprzeczne: M₀ = 80 000 kPa w modelu i MES, a 100 000 kPa
+  w obliczeniach statycznych. To dotyczy § 10 pkt 2 (parametry obliczeniowe).
+- C2-BO-02 ma status „OK”. Powinien być „DO UZUPEŁNIENIA”.
+Poprawka: ujednolicić parametry z jednego źródła. W walidatorze [DOKUMENT ZEWNĘTRZNY] w pozycji C2-BO-02 powinien
+dawać status inny niż OK.
+
+**I-8. PT-4 IE — ocena ryzyka piorunowego jest wykonana tylko wg wycofanych wydań, a sprawdzenie wg aktualnego odłożono „do PT”.**
+Rozdz. 11.4.9: „PN-EN 62305-2:2008/2012 — metodyka; PN-EN IEC 62305-2:2025-09 (EN) — do PT”. Tom jest właśnie PT.
+Rejestr A.1 pkt 5 wymaga spełnienia obu wydań.
+Dodatkowo:
+- N_G przyjęto „wg PN-86/E-05003/01” — norma dawno wycofana, bez statusu;
+- przywołano „PN-HD 60364-4-443/-5-534” — -5-534 jest wycofana, zastąpiła ją PN-HD 60364-5-53:2022-10.
+Poprawka: wykonać sprawdzenie kontrolne wg wydania z 2025 r. albo uzasadnić jego pominięcie, podać statusy norm
+i usunąć zwrot „do PT”.
+
+**I-9. Metryki rysunków we wszystkich tomach: pola projektanta są puste bez znacznika, a pole sprawdzającego nie ma wpisu „nie dotyczy”.**
+Na tabliczkach (np. PT-AR-01, PT-AR-D-05, PT-BO-03, PT-IS-01, PT-IE-14) pola „Imię i nazwisko” oraz
+„Specjalność, nr uprawnień” są puste i nie mają znacznika [DO UZUPEŁNIENIA]. Pole „Sprawdzający” jest puste.
+Naruszone: RPB § 10 ust. 1 pkt 3, W-305 („nie dotyczy (art. 20 ust. 3 pkt 2 PB)”) i W-320.
+Walidator sprawdza znaczniki tylko na stronie tytułowej, więc tego nie wykrywa.
+Poprawka: wypełnić tabliczki znacznikami z modelu (sekcja projekt) i dodać kontrolę tabliczek w AUD-RYS.
