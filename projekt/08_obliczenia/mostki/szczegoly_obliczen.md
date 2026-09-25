@@ -28,6 +28,8 @@ Podstawy: PN-EN ISO 10211:2017-09 (metoda numeryczna 2D, warunki brzegowe, płas
 | WZ-12 | Narożniki wypukłe ścian zewnętrznych | 0,5370 | 0,066 | −0,052 | 0,066 | 17,17 | 0,926 | tak | 0,01 % |
 | WZ-16a | Belki wspornikowe B4/B5 i belka B3 w linii izolacji wspornika bryły A (ciągłość wełny pod ST2Z) — ściana SZ2 na krawędzi, belka B4, płyta PL-2 (łącznik) | 0,6687 | 0,236 | 0,057 | 0,236 | 13,92 | 0,840 | tak | 0,03 % |
 | WZ-16b | Belki wspornikowe B4/B5 i belka B3 w linii izolacji wspornika bryły A (ciągłość wełny pod ST2Z) — ściana SZ1 na krawędzi, belka B5 | 0,5415 | 0,123 | −0,044 | 0,123 | 15,46 | 0,880 | tak | 0,01 % |
+| WZ-X1 | Dach D2/D3 (SD2) – ściana SZ1 wyższej kondygnacji na krawędzi (pod spodem ściana SW18, pomieszczenia ogrzewane) — węzeł spoza sekcji `wezly` | 0,3936 | 0,022 | −0,006 | 0,022 | 18,64 | 0,964 | tak | 0,01 % |
+| WZ-X2 | Dach D4 (DZ1) – ściana SZ1 wyższej kondygnacji na krawędzi (pod spodem ściana SW18, pomieszczenia ogrzewane) — węzeł spoza sekcji `wezly` | 0,4097 | 0,022 | −0,001 | 0,022 | 18,64 | 0,964 | tak | 0,01 % |
 
 ## H_TB — wymiary wewnętrzne całkowite (ψ_oi)
 
@@ -55,8 +57,10 @@ System wymiarów jak w obliczeniu obudowy (`energia.bryla`: ściany po licach we
 | WZ-12 | Narożniki wypukłe ścian zewnętrznych | 0,0655 | 49,5000 | 3,2439 |
 | WZ-16a | Belki wspornikowe B4/B5 i belka B3 w linii izolacji wspornika bryły A (ciągłość wełny pod ST2Z) — ściana SZ2 na krawędzi, belka B4, płyta PL-2 (łącznik) | 0,2365 | 1,0000 | 0,2365 |
 | WZ-16b | Belki wspornikowe B4/B5 i belka B3 w linii izolacji wspornika bryły A (ciągłość wełny pod ST2Z) — ściana SZ1 na krawędzi, belka B5 | 0,1229 | 1,0000 | 0,1229 |
+| WZ-X1 | Dach D2/D3 (SD2) – ściana SZ1 wyższej kondygnacji na krawędzi (pod spodem ściana SW18, pomieszczenia ogrzewane) — węzeł spoza sekcji `wezly` | 0,0224 | 14,6250 | 0,3269 |
+| WZ-X2 | Dach D4 (DZ1) – ściana SZ1 wyższej kondygnacji na krawędzi (pod spodem ściana SW18, pomieszczenia ogrzewane) — węzeł spoza sekcji `wezly` | 0,0219 | 3,0320 | 0,0663 |
 
-**H_TB = Σ ψ_oi·l_oi = 51,37 W/K** (węzły liniowe 2D; mostki punktowe χ — poza zakresem)
+**H_TB = Σ ψ_oi·l_oi = 51,76 W/K** (węzły liniowe 2D; mostki punktowe χ — poza zakresem)
 
 ## WZ-01 — Attyka stropodachu bryły A (D1)
 
@@ -852,6 +856,7 @@ Zmiana strumienia przy podwojeniu liczby podziałów: **0,028 %** (kryterium ISO
 
 * grunt: λ = 2,0, warstwa 1.0 m pod podsypką, dół adiabatyczny [ZAŁ]
 * θ_u: -10.4 °C z b_u = 0.8 [ZAŁ]
+* geometria z modelu: ściany S0-16, S0-17 (Σ 12.25 m) na płycie PF
 * długość z geometrii modelu [m]: 12,250
 
 **Warunki brzegowe** (przekrój pionowy; płaszczyzny odcięcia i osie symetrii adiabatyczne)
@@ -1744,4 +1749,229 @@ Zmiana strumienia przy podwojeniu liczby podziałów: **0,012 %** (kryterium ISO
 ![WZ-16b — strumień](rys/WZ-16b_strumien.png)
 
 ![WZ-16b — θ_si](rys/WZ-16b_theta_si.png)
+
+
+## WZ-X1 — Dach D2/D3 (SD2) – ściana SZ1 wyższej kondygnacji na krawędzi (pod spodem ściana SW18, pomieszczenia ogrzewane) — węzeł spoza sekcji `wezly`
+
+**Dane wejściowe**
+
+
+*ściana dolna (od lewej):*
+
+| kod | materiał | d [m] | λ [W/(m·K)] | R [m²K/W] |
+|---|---|---|---|---|
+| TYNK_GIPS | Tynk gipsowy maszynowy 1,5 cm | 0,0150 | 0,4000 | 0,0375 |
+| SIL18 | Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej | 0,1800 | 0,9000 | 0,2000 |
+| TYNK_GIPS | Tynk gipsowy maszynowy 1,5 cm | 0,0150 | 0,4000 | 0,0375 |
+
+
+*ściana górna (od lewej):*
+
+| kod | materiał | d [m] | λ [W/(m·K)] | R [m²K/W] |
+|---|---|---|---|---|
+| TYNK_GIPS | Tynk gipsowy maszynowy 1,5 cm | 0,0150 | 0,4000 | 0,0375 |
+| SIL18 | Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej | 0,1800 | 0,9000 | 0,2000 |
+| EPS031 | Styropian grafitowy EPS 031 (ETICS, NRO w systemie) | 0,2000 | 0,0310 | 6,4516 |
+| TYNK_SIL | ETICS: warstwa zbrojona + tynk silikonowy 1,5 mm (biały / jasnoszary NCS S 1500-N) | 0,0100 | 0,8000 | 0,0125 |
+
+* płyta: ZB_C25, t = 0.22 m
+* nad płytą L/P: wewn / zewn
+* pod płytą L/P: wewn / wewn
+
+*warstwy nad płytą L:*
+
+| kod | materiał | d [m] | λ [W/(m·K)] | R [m²K/W] |
+|---|---|---|---|---|
+| DESKA_DEB | Deska warstwowa dębowa 15 mm, klejona | 0,0150 | 0,1800 | 0,0833 |
+| JASTRYCH | Jastrych cementowy CT-C25-F5 z wężownicą ogrzewania podłogowego | 0,0650 | 1,2000 | 0,0542 |
+| EPS038 | Styropian podłogowy EPS 100-038 (pod jastrychem) | 0,0400 | 0,0380 | 1,0526 |
+| EPS_T | Styropian elastyfikowany EPS T (akustyczny, pod jastrychem) | 0,0300 | 0,0400 | 0,7500 |
+| ZB_C25 | Żelbet C25/30, B500SP (stropy, płyta fundamentowa, ściany) | 0,2200 | 2,3000 | 0,0957 |
+| TYNK_GIPS | Tynk gipsowy maszynowy 1,5 cm | 0,0100 | 0,4000 | 0,0250 |
+
+
+*warstwy nad płytą P:*
+
+| kod | materiał | d [m] | λ [W/(m·K)] | R [m²K/W] |
+|---|---|---|---|---|
+| ZWIR_16 | Żwir płukany 16/32 mm (balast dachu P1, opaska przy attyce) | 0,0500 | 2,0000 | 0,0250 |
+| WLOKN_OCHR | Włóknina ochronna PP 300 g/m² | 0,0040 | 0,5000 | 0,0080 |
+| MEMB_TPO | Membrana dachowa TPO 1,5 mm, mocowana mechanicznie (hydroizolacja stropodachów) | 0,0020 | 0,2000 | 0,0100 |
+| PIR022 | Płyty PIR z okładziną (izolacja spadkowa stropodachów) | 0,2000 | 0,0220 | 9,0909 |
+| PAROIZ_AL | Paroizolacja bitumiczna z wkładką Al (na płycie stropodachów) | 0,0040 | 0,2300 | 0,0174 |
+
+
+*warstwy pod płytą L:*
+
+| kod | materiał | d [m] | λ [W/(m·K)] | R [m²K/W] |
+|---|---|---|---|---|
+| TYNK_GIPS | Tynk gipsowy maszynowy 1,5 cm | 0,0100 | 0,4000 | 0,0250 |
+
+
+*warstwy pod płytą P:*
+
+| kod | materiał | d [m] | λ [W/(m·K)] | R [m²K/W] |
+|---|---|---|---|---|
+| TYNK_GIPS | Tynk gipsowy maszynowy 1,5 cm | 0,0100 | 0,4000 | 0,0250 |
+
+* θ_u: -10.4 °C z b_u = 0.8 [ZAŁ]
+* geometria z modelu: krawędzie dachów D2, D3 pod ścianą SZ1: Σ 14.63 m
+* długość z geometrii modelu [m]: 14,630
+
+**Warunki brzegowe** (przekrój pionowy; płaszczyzny odcięcia i osie symetrii adiabatyczne)
+
+| strefa | rodzaj | grupa | θ [°C] | R_s — przebieg ψ [m²K/W] | R_s — przebieg f_Rsi |
+|---|---|---|---|---|---|
+| dół lewa | wewn | i | 20,0 | wg ISO 6946: 0,13 poziomo / 0,10 w górę / 0,17 w dół | 0,25 (ramy/szyby 0,13) |
+| dół prawa | wewn | i | 20,0 | wg ISO 6946: 0,13 poziomo / 0,10 w górę / 0,17 w dół | 0,25 (ramy/szyby 0,13) |
+| góra lewa | wewn | i | 20,0 | wg ISO 6946: 0,13 poziomo / 0,10 w górę / 0,17 w dół | 0,25 (ramy/szyby 0,13) |
+| góra prawa | zewn | e | −18,0 | 0,04 | 0,04 |
+
+**Siatka i dokładność** (MOS, siatka prostokątna zagęszczana przy granicach materiałów)
+
+| siatka | komórek | Φ_całk [W/m] |
+|---|---|---|
+| 153 × 194 = 29682 komórek; Δx ∈ [1.65; 97.78] mm, Δy ∈ [1; 95.51] mm | 29682 | 14,9554 |
+| 306 × 388 = 118728 komórek; Δx ∈ [0.825; 48.89] mm, Δy ∈ [0.5; 47.75] mm | 118728 | 14,9569 |
+
+Zmiana strumienia przy podwojeniu liczby podziałów: **0,010 %** (kryterium ISO 10211 < 1 %: spełnione); zmiana L_2D (= zmiana ψ): 0,00004 W/(m·K) (kryterium ≤ max(1 % |ψ|; 0,001) = 0,00100: spełnione); bilans energii Σ Φ / (½ Σ|Φ|) = 2.6e-12 (kryterium < 10⁻⁴: spełnione).
+
+**Współczynniki sprzężenia i ψ**
+
+*Para i–e:* L_2D = **0,3936 W/(m·K)**
+
+| element flankujący | U [W/(m²K)] | l_e [m] | l_i [m] | l_oi [m] | U·l_e | U·l_i | U·l_oi |
+|---|---|---|---|---|---|---|---|
+| ściana górna | 0,1455 | 1,3350 | 1,2150 | 1,2150 | 0,1943 | 0,1768 | 0,1768 |
+| przegroda pozioma prawa | 0,1062 | 1,9350 | 1,8300 | 1,8300 | 0,2056 | 0,1944 | 0,1944 |
+
+ψ_oi (wymiary wewnętrzne całkowite — system projektu, H_TB) = 0,3936 − 0,3712 = **0,022 W/(m·K)**; ψ_e (zewnętrzne) = 0,3936 − 0,3999 = −0,006 W/(m·K); ψ_i (wewnętrzne) = 0,3936 − 0,3712 = 0,022 W/(m·K)
+
+**Temperatura powierzchni wewnętrznej i ryzyko pleśni** (R_si = 0,25 — PN-EN ISO 13788)
+
+* θ_si,min = **18,64 °C** w punkcie (0,000; 1,815) m przy θ_i = 20,0 °C, θ_e = −18,0 °C
+* f_Rsi = (θ_si,min − θ_e)/(θ_i − θ_e) = **0,964**; wymaganie f_Rsi ≥ 0,72 (WT zał. 2 pkt 2.2.1–2.2.5 (uproszczenie; φ_i = 50 %) (W-248)) → **SPEŁNIA**
+* informacyjnie przy θ_e obliczeniowej i φ_i = 50 %: θ_si,kryt (φ_si = 80 %) = 12,6 °C (f = 0,806), punkt rosy 9,3 °C → θ_si,min ≥ θ_si,kryt (ocena miesięczna wg ISO 13788 — łagodniejsza; kryterium formalne: f_Rsi ≥ 0,72)
+
+*Uwaga:* Grupy stref: i — ogrzewane, u — nieogrzewane, e — zewnętrze; ψ dla każdej pary grup z elementami flankującymi (PN-EN ISO 10211, więcej niż dwie temperatury).
+
+![WZ-X1 — temperatura](rys/WZ-X1_temperatura.png)
+
+![WZ-X1 — strumień](rys/WZ-X1_strumien.png)
+
+![WZ-X1 — θ_si](rys/WZ-X1_theta_si.png)
+
+
+## WZ-X2 — Dach D4 (DZ1) – ściana SZ1 wyższej kondygnacji na krawędzi (pod spodem ściana SW18, pomieszczenia ogrzewane) — węzeł spoza sekcji `wezly`
+
+**Dane wejściowe**
+
+
+*ściana dolna (od lewej):*
+
+| kod | materiał | d [m] | λ [W/(m·K)] | R [m²K/W] |
+|---|---|---|---|---|
+| TYNK_GIPS | Tynk gipsowy maszynowy 1,5 cm | 0,0150 | 0,4000 | 0,0375 |
+| SIL18 | Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej | 0,1800 | 0,9000 | 0,2000 |
+| TYNK_GIPS | Tynk gipsowy maszynowy 1,5 cm | 0,0150 | 0,4000 | 0,0375 |
+
+
+*ściana górna (od lewej):*
+
+| kod | materiał | d [m] | λ [W/(m·K)] | R [m²K/W] |
+|---|---|---|---|---|
+| TYNK_GIPS | Tynk gipsowy maszynowy 1,5 cm | 0,0150 | 0,4000 | 0,0375 |
+| SIL18 | Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej | 0,1800 | 0,9000 | 0,2000 |
+| EPS031 | Styropian grafitowy EPS 031 (ETICS, NRO w systemie) | 0,2000 | 0,0310 | 6,4516 |
+| TYNK_SIL | ETICS: warstwa zbrojona + tynk silikonowy 1,5 mm (biały / jasnoszary NCS S 1500-N) | 0,0100 | 0,8000 | 0,0125 |
+
+* płyta: ZB_C25, t = 0.22 m (prawa 0.24 m)
+* nad płytą L/P: wewn / zewn
+* pod płytą L/P: wewn / wewn
+
+*warstwy nad płytą L:*
+
+| kod | materiał | d [m] | λ [W/(m·K)] | R [m²K/W] |
+|---|---|---|---|---|
+| DESKA_DEB | Deska warstwowa dębowa 15 mm, klejona | 0,0150 | 0,1800 | 0,0833 |
+| JASTRYCH | Jastrych cementowy CT-C25-F5 z wężownicą ogrzewania podłogowego | 0,0650 | 1,2000 | 0,0542 |
+| EPS038 | Styropian podłogowy EPS 100-038 (pod jastrychem) | 0,0400 | 0,0380 | 1,0526 |
+| EPS_T | Styropian elastyfikowany EPS T (akustyczny, pod jastrychem) | 0,0300 | 0,0400 | 0,7500 |
+| ZB_C25 | Żelbet C25/30, B500SP (stropy, płyta fundamentowa, ściany) | 0,2200 | 2,3000 | 0,0957 |
+| TYNK_GIPS | Tynk gipsowy maszynowy 1,5 cm | 0,0100 | 0,4000 | 0,0250 |
+
+
+*warstwy nad płytą P:*
+
+| kod | materiał | d [m] | λ [W/(m·K)] | R [m²K/W] |
+|---|---|---|---|---|
+| SUBSTRAT | Substrat ekstensywny 8 cm z matą rozchodnikową (sedum) | 0,0800 | 0,8000 | 0,1000 |
+| GEOWL | Geowłóknina filtracyjna PP 150 g/m² | 0,0020 | 0,5000 | 0,0040 |
+| MATA_DREN | Mata drenażowo-retencyjna HDPE 25 mm (dach zielony) | 0,0250 | 0,5000 | 0,0500 |
+| WLOKN_OCHR | Włóknina ochronna PP 300 g/m² | 0,0040 | 0,5000 | 0,0080 |
+| BARIERA_KORZ | Bariera przeciwkorzenna PE-HD 0,5 mm (PN-EN 13948) | 0,0005 | 0,4000 | 0,0013 |
+| PAPA_SBS | Hydroizolacja 2 × papa SBS (podkładowa + wierzchniego krycia, dach zielony) | 0,0095 | 0,2300 | 0,0413 |
+| PIR022 | Płyty PIR z okładziną (izolacja spadkowa stropodachów) | 0,1800 | 0,0220 | 8,1818 |
+| PAROIZ_AL | Paroizolacja bitumiczna z wkładką Al (na płycie stropodachów) | 0,0040 | 0,2300 | 0,0174 |
+
+
+*warstwy pod płytą L:*
+
+| kod | materiał | d [m] | λ [W/(m·K)] | R [m²K/W] |
+|---|---|---|---|---|
+| TYNK_GIPS | Tynk gipsowy maszynowy 1,5 cm | 0,0100 | 0,4000 | 0,0250 |
+
+
+*warstwy pod płytą P:*
+
+| kod | materiał | d [m] | λ [W/(m·K)] | R [m²K/W] |
+|---|---|---|---|---|
+| TYNK_GIPS | Tynk gipsowy maszynowy 1,5 cm | 0,0100 | 0,4000 | 0,0250 |
+
+* θ_u: -10.4 °C z b_u = 0.8 [ZAŁ]
+* geometria z modelu: krawędzie dachów D4 pod ścianą SZ1: Σ 3.03 m
+* długość z geometrii modelu [m]: 3,030
+
+**Warunki brzegowe** (przekrój pionowy; płaszczyzny odcięcia i osie symetrii adiabatyczne)
+
+| strefa | rodzaj | grupa | θ [°C] | R_s — przebieg ψ [m²K/W] | R_s — przebieg f_Rsi |
+|---|---|---|---|---|---|
+| dół lewa | wewn | i | 20,0 | wg ISO 6946: 0,13 poziomo / 0,10 w górę / 0,17 w dół | 0,25 (ramy/szyby 0,13) |
+| dół prawa | wewn | i | 20,0 | wg ISO 6946: 0,13 poziomo / 0,10 w górę / 0,17 w dół | 0,25 (ramy/szyby 0,13) |
+| góra lewa | wewn | i | 20,0 | wg ISO 6946: 0,13 poziomo / 0,10 w górę / 0,17 w dół | 0,25 (ramy/szyby 0,13) |
+| góra prawa | zewn | e | −18,0 | 0,04 | 0,04 |
+
+**Siatka i dokładność** (MOS, siatka prostokątna zagęszczana przy granicach materiałów)
+
+| siatka | komórek | Φ_całk [W/m] |
+|---|---|---|
+| 153 × 222 = 33966 komórek; Δx ∈ [1.65; 97.78] mm, Δy ∈ [0.25; 95.51] mm | 33966 | 15,5663 |
+| 306 × 444 = 135864 komórek; Δx ∈ [0.825; 48.89] mm, Δy ∈ [0.125; 47.75] mm | 135864 | 15,5676 |
+
+Zmiana strumienia przy podwojeniu liczby podziałów: **0,008 %** (kryterium ISO 10211 < 1 %: spełnione); zmiana L_2D (= zmiana ψ): 0,00003 W/(m·K) (kryterium ≤ max(1 % |ψ|; 0,001) = 0,00100: spełnione); bilans energii Σ Φ / (½ Σ|Φ|) = 2.1e-11 (kryterium < 10⁻⁴: spełnione).
+
+**Współczynniki sprzężenia i ψ**
+
+*Para i–e:* L_2D = **0,4097 W/(m·K)**
+
+| element flankujący | U [W/(m²K)] | l_e [m] | l_i [m] | l_oi [m] | U·l_e | U·l_i | U·l_oi |
+|---|---|---|---|---|---|---|---|
+| ściana górna | 0,1455 | 1,2900 | 1,2150 | 1,2150 | 0,1877 | 0,1768 | 0,1768 |
+| przegroda pozioma prawa | 0,1153 | 1,9350 | 1,8300 | 1,8300 | 0,2231 | 0,2110 | 0,2110 |
+
+ψ_oi (wymiary wewnętrzne całkowite — system projektu, H_TB) = 0,4097 − 0,3878 = **0,022 W/(m·K)**; ψ_e (zewnętrzne) = 0,4097 − 0,4108 = −0,001 W/(m·K); ψ_i (wewnętrzne) = 0,4097 − 0,3878 = 0,022 W/(m·K)
+
+**Temperatura powierzchni wewnętrznej i ryzyko pleśni** (R_si = 0,25 — PN-EN ISO 13788)
+
+* θ_si,min = **18,64 °C** w punkcie (0,000; 1,815) m przy θ_i = 20,0 °C, θ_e = −18,0 °C
+* f_Rsi = (θ_si,min − θ_e)/(θ_i − θ_e) = **0,964**; wymaganie f_Rsi ≥ 0,72 (WT zał. 2 pkt 2.2.1–2.2.5 (uproszczenie; φ_i = 50 %) (W-248)) → **SPEŁNIA**
+* informacyjnie przy θ_e obliczeniowej i φ_i = 50 %: θ_si,kryt (φ_si = 80 %) = 12,6 °C (f = 0,806), punkt rosy 9,3 °C → θ_si,min ≥ θ_si,kryt (ocena miesięczna wg ISO 13788 — łagodniejsza; kryterium formalne: f_Rsi ≥ 0,72)
+
+*Uwaga:* Grupy stref: i — ogrzewane, u — nieogrzewane, e — zewnętrze; ψ dla każdej pary grup z elementami flankującymi (PN-EN ISO 10211, więcej niż dwie temperatury).
+
+![WZ-X2 — temperatura](rys/WZ-X2_temperatura.png)
+
+![WZ-X2 — strumień](rys/WZ-X2_strumien.png)
+
+![WZ-X2 — θ_si](rys/WZ-X2_theta_si.png)
 

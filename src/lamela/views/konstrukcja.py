@@ -827,8 +827,8 @@ def widok_strop(ctx: ViewContext, spec: dict, scale: float, opts: dict):
 
 
 def _laczniki(vp, placer, D, lv, e: KD.ElementPl, res: KResult):
-    """Łączniki termoizolacyjne wzdłuż linii zamocowania wspornika: pas (grubość korpusu izolacji 8 cm) po stronie
-    wspornika, opis z siłami m_Ed, v_Ed z obliczeń (pole wspornika)."""
+    """Łączniki termoizolacyjne wzdłuż linii zamocowania wspornika: pas (korpus izolacji ``LACZNIK_T``) po stronie
+    płyty zaplecza (w płaszczyźnie izolacji ściany), opis z siłami m_Ed, v_Ed z obliczeń (pole wspornika)."""
     inne = unary_union([x.poly for x in lv.elementy if x is not e])
     segs = [q for q in KD.odcinki_proste(e.poly.boundary.intersection(inne.buffer(0.02))) if q.length >= 1.0]
     pol = max(e.pola, key=lambda p: p.poly.area) if e.pola else None
@@ -839,8 +839,9 @@ def _laczniki(vp, placer, D, lv, e: KD.ElementPl, res: KResult):
         nrm = np.array([-(yb - ya), xb - xa]) / sg.length
         if not e.poly.buffer(-0.01).contains(Point(*(mid + nrm * 0.1))):
             nrm = -nrm
-        band = Polygon([sg.coords[0], sg.coords[-1], tuple(np.asarray(sg.coords[-1]) + nrm * 0.08),
-                        tuple(np.asarray(sg.coords[0]) + nrm * 0.08)])
+        tl = KD.LACZNIK_T
+        band = Polygon([sg.coords[0], sg.coords[-1], tuple(np.asarray(sg.coords[-1]) - nrm * tl),
+                        tuple(np.asarray(sg.coords[0]) - nrm * tl)])
         vp.fill(band, L_OBR, "#9a9a9a", z=21)
         vp.geom(band, L_OBR, pen="cienka")
         placer.add(band, "area", 0.8)

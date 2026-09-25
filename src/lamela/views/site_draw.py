@@ -148,16 +148,18 @@ class Labeler:
         k = self.k
         saved = self._mute(own)
         W, Hh = block_size(lines, h, style)
-        A = np.asarray(anchor, float)
+        anchors = [np.asarray(a_, float) for a_ in anchor] if isinstance(anchor, list) else \
+            [np.asarray(anchor, float)]
         cands = []
         for d in dists:
-            for (ux, uy) in (dirs or DIRS):
-                cx = A[0] + (ux * (d + W / 2.0) * k if ux else 0.0)
-                cy = A[1] + (uy * (d + Hh / 2.0) * k if uy else 0.0)
-                cands.append((cx, cy, ux, uy, d))
+            for A in anchors:
+                for (ux, uy) in (dirs or DIRS):
+                    cx = A[0] + (ux * (d + W / 2.0) * k if ux else 0.0)
+                    cy = A[1] + (uy * (d + Hh / 2.0) * k if uy else 0.0)
+                    cands.append((cx, cy, ux, uy, d, A))
 
         def fn(cv, cand):
-            cx, cy, ux, uy, d = cand
+            cx, cy, ux, uy, d, A = cand
             ha = "left" if ux > 0 else "right" if ux < 0 else "center"
             x = cx - W / 2.0 * k if ha == "left" else cx + W / 2.0 * k if ha == "right" else cx
             top = cy + Hh / 2.0 * k
@@ -289,22 +291,18 @@ def draw_base_map(c, s, lab: Labeler, win: Polygon, used: set, opts: dict, spot_
             c.polyline(ln, "Z-MAPA", pen=0.13, color="#8a8a8a")
         draw_geom(c, g, "Z-MAPA", pen=0.35, lt="CIAGLA", color="#3a3a3a")
         used.add("bud_sasiedni")
-    lab.reg(n0, w_line=0.3, w_fill=0.3)
     for x in s.sasiedzi:
         g = clip(x["bud"], win)
         if g is not None:
             txt = "m" + (str(x["kond"]) if x.get("kond") else "")
             p = np.asarray(g.representative_point().coords[0])
-            n1 = lab.mark()
             c.text(p, txt, 3.5, 0.0, "center", "middle", "Z-MAPA-OPISY", style="italic", color=GREY, mask=0.6)
-            lab.reg(n1)
     # uzbrojenie istniejące
     for sx in [x for x in s.sieci if x.istn]:
         g = clip(sx.geom, win)
         if g is not None:
             utility(c, g, sx, existing=True)
             used.add(f"ist_{sx.branza}")
-    lab.reg(n0, w_line=0.25)
     return n0
 
 
@@ -320,22 +318,18 @@ def label_base_map(c, s, lab: Labeler, win: Polygon, used: set, opts: dict, spot
         p = np.asarray((free if not free.is_empty else g).representative_point().coords[0])
         lab.label(p, [x["nr"]], 3.5, "Z-MAPA-OPISY", "italic", GREY, dists=(0.0, 3.0, 8.0, 14.0), leader_from=99,
                   max_cost=6.0)
+    road_name(c, s, lab, win)
     for sx in [x for x in s.sieci if x.istn]:
         g = clip(sx.geom, win)
         if g is None:
             continue
         for ls in (g.geoms if hasattr(g, "geoms") else [g]):
-            lab.along(ls, sx.lit, H, "Z-SIECI-IST", sx.kolor, n=3, max_cost=3.0)
+            lab.along(ls, sx.lit, H, "Z-SIECI-IST", sx.kolor, n=3, max_cost=10.0, mask=0.2)
             short = sx.opis.split("(")[0].split(",")[0].strip()
-            lab.along(ls, f"{sx.lit} — {short}", H, "Z-SIECI-IST", sx.kolor, n=1, max_cost=6.0,
-                      fracs=[0.35, 0.3, 0.4, 0.25, 0.45, 0.2, 0.5, 0.55, 0.6, 0.65])
-    if s.droga["pas"] is not None and clip(s.droga["pas"], win) is not None:
-        g = clip(s.droga["pas"], win)
-        cy = g.centroid.y
-        x0, _y0, x1, _y1 = g.bounds
-        axis = LineString([(x0, cy), (x1, cy)])
-        lab.along(axis, f"{s.droga['symbol']} — {s.droga['nazwa']}", 3.5, "Z-MAPA-OPISY", GREY, n=1, max_cost=30.0,
-                  style="bold")
+            anchors = [np.asarray(ls.interpolate(f, normalized=True).coords[0]) for f in (0.2, 0.3, 0.12, 0.4, 0.8)]
+            lab.label(anchors, [f"{sx.lit} — {short}"], H, "Z-SIECI-IST", color=sx.kolor,
+                      dists=(6.0, 9.0, 12.0, 16.0), dirs=[(0, 1), (1, 1), (-1, 1), (0, -1), (1, -1)], leader_from=2.0,
+                      dot=True, max_cost=12.0)
     if contours:
         bb = win.bounds
         for pts, Hh in s.contours(bb):
@@ -345,6 +339,38 @@ def label_base_map(c, s, lab: Labeler, win: Polygon, used: set, opts: dict, spot
                 continue
             for part in (g.geoms if hasattr(g, "geoms") else [g]):
                 lab.along(part, f"{Hh:.2f}".replace(".", ","), H, "Z-RZEDNE", None, n=1, max_cost=2.5)
+
+
+def road_name(c, s, lab: Labeler, win, h=2.5):
+    """Nazwa drogi w najszerszym wolnym pasie między liniami (krawędzie jezdni, sieci) w liniach rozgraniczających."""
+    g = clip(s.droga["pas"], win) if s.droga["pas"] is not None else None
+    if g is None:
+        return
+    r = g.minimum_rotated_rectangle
+    C = np.asarray(r.exterior.coords)[:4]
+    i = int(np.argmax([np.hypot(*(C[(j + 1) % 4] - C[j])) for j in range(4)]))
+    d = unit(C[(i + 1) % 4] - C[i])
+    n = perp(d)
+    o0 = float(C[i] @ n)
+    offs = [float(q @ n) for q in C]
+    lo, hi = min(offs), max(offs)
+    lines = [lo, hi]
+    if s.droga["jezdnia"] is not None:
+        lines += [float(q @ n) for q in np.asarray(s.droga["jezdnia"].exterior.coords)]
+    for sx in s.sieci:
+        if sx.istn:
+            lines += [float(np.asarray(sx.geom.interpolate(0.5, normalized=True).coords[0]) @ n)]
+    lines = sorted(v for v in set(round(x, 3) for x in lines) if lo - 1e-6 <= v <= hi + 1e-6)
+    gaps = sorted(((b - a, (a + b) / 2) for a, b in zip(lines[:-1], lines[1:])), reverse=True)
+    if not gaps:
+        return
+    mid = gaps[0][1]
+    t = [float(q @ d) for q in C]
+    axis = LineString([d * min(t) + n * mid, d * max(t) + n * mid])
+    txt = f"{s.droga['symbol']} — {s.droga['nazwa']}"
+    lab.along(axis, txt, h, "Z-MAPA-OPISY", GREY, n=1, max_cost=30.0, style="bold", mask=0.0,
+              fracs=[0.15, 0.2, 0.1, 0.25, 0.3, 0.8, 0.85, 0.75])
+    _ = o0
 
 
 def draw_contours(c, s, win: Polygon, used: set, projected=False, exclude=None):

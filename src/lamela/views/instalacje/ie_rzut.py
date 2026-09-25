@@ -270,7 +270,14 @@ class RysO(RysE):
                 lights.append(a + t * 0.2 + nrm * 0.25)
         if not lights:
             return
-        sw = self.przy_drzwiach(r)
+        sw = self.przy_drzwiach(r) or self.przy_drzwiach(r, off=0.05)
+        if not sw:                         # przejście bez drzwi / wąskie pomieszczenie: punkt ściany najbliżej wejścia
+            wl = self.wzdluz_scian(r, 6, zbl=0.2, parapet_max=9.0)
+            dz = [np.asarray(o.srodek) for w, o, rp, rm in self._doors if r in (rp, rm)]
+            if wl:
+                ref = dz[0] if dz else lights[0]
+                q, rot = min(wl, key=lambda t: float(np.hypot(*(t[0] - ref))))
+                sw = [(q, rot, None)]
         if not sw:
             return
         many = len(sw) > 1 and rd in ("komunikacja", "klatka")
@@ -329,3 +336,156 @@ class RysO(RysE):
             "Przewody YDYp 3×1,5 (4×1,5 łączniki schodowe/świecznikowe) w tynku i w warstwach stropu, w strefach "
             "instalacyjnych; w łazienkach osprzęt poza strefami 0–1 wg PN-HD 60364-7-701, IP44 w strefie 2.",
         ]
+
+
+# ================================================================================================ IE-G gniazda
+class RysG(RysE):
+    kod = "IE-G"
+
+    def run(self):
+        self.prepare()
+        self.leg.line("E-TRASY", "przewody obwodów gniazd YDYp 3×2,5 (5×2,5 — 3f) — połączenia punktów (przebieg "
+                      "schematyczny w tynku / w posadzce)", pen="b_cienka")
+        self.leg.sym(lambda c, p: S.socket(c, p - np.array([0, 1.5]), 90.0, n=2, s_mm=3.0),
+                     "gniazdo wtyczkowe podwójne ze stykiem ochronnym, h = 0,30 m (kuchnia nad blatem 1,10 m)")
+        self.leg.sym(lambda c, p: S.socket(c, p - np.array([0, 1.5]), 90.0, n=1, ip44=True, s_mm=3.0),
+                     "gniazdo bryzgoszczelne IP44 (łazienki h = 1,20 m, garaż, pom. techniczne, zewnętrzne)")
+        self.leg.sym(lambda c, p: S.junction_box(c, p, s_mm=1.8), "wypust / puszka przyłączeniowa urządzenia "
+                     "zasilanego na stałe (opis: obwód, urządzenie, moc)")
+        for r in self.rooms:
+            self.pomieszczenie(r)
+        if self.kid == self.kids[0]:
+            self.zewnetrzne()
+            self.rg()
+        self.oslony()
+        self.opisy()
+        self.tabela_obwodow(("gniazda", "staly"))
+        return self.finish()
+
+    def _gn(self, pts, r, oid, ip44=False, n=2, label=None):
+        out = []
+        for q, rot in pts:
+            self.sym(S.socket, q, rot, n=n, ip44=ip44, s_mm=3.0)
+            out.append(q + dir_deg(rot) * 0.08)
+        if out and oid:
+            c = np.asarray(r.polygon.centroid.coords[0])
+            out.sort(key=lambda p: math.atan2(p[1] - c[1], p[0] - c[0]))
+            self.chain(out, f"G:{r.id}:{oid}")
+            self.circuit_tag(out[0], oid, label)
+        return out
+
+    def _dedyk(self, grupa_or_nazwa, q, rot=None, txt=None, phases=1):
+        o = next((o for o in self.obw if o.odb.grupa == grupa_or_nazwa or grupa_or_nazwa in o.odb.nazwa.lower()), None)
+        if o is None:
+            return
+        q = np.asarray(q, float)
+        if rot is None:
+            self.sym(S.junction_box, q, s_mm=1.8)
+        else:
+            self.sym(S.socket, q, rot, n=1, phases=phases, s_mm=3.0)
+        self.circuit_tag(q, o.odb.id, txt or f"{o.odb.nazwa.split('(')[0].strip()} {num(o.odb.P, 1)} kW")
+
+    def pomieszczenie(self, r):
+        rd = self.rodzaj(r)
+        wy = [e for e in self.wyp() if r.polygon.buffer(0.35).contains(Point(e.get("xy") or e.get("linia", [[0, 0]])[0]))]
+        anchors = []
+        ob = self.obwod_dla(r, "gniazda")
+        oid = ob.odb.id if ob else None
+        if rd in ("pokoj", "kuchnia", "pomocnicze", "komunikacja"):
+            for e in wy:
+                t, xy, rot = e.get("typ"), np.asarray(e.get("xy") or [0, 0], float), float(e.get("obrot", 90))
+                d = dir_deg(rot)
+                tt = perp(d)
+                w0 = float((e.get("wym") or [1.0])[0])
+                if t == "lozko":
+                    anchors += [(xy + tt * (w0 / 2 + 0.25), rot), (xy - tt * (w0 / 2 + 0.25), rot)]
+                elif t == "biurko":
+                    anchors.append((xy + tt * (w0 / 2 - 0.2), rot))
+                elif t == "sofa":
+                    anchors.append((xy + tt * (w0 / 2 + 0.25), rot))
+        if rd == "kuchnia":
+            self._kuchnia(r, wy)
+            ob = next((o for o in self.obw if o.odb.grupa == "gniazda_kuchnia" and r.id in o.odb.pomieszczenia), None)
+            ob2 = [o for o in self.obw if o.odb.grupa == "gniazda_kuchnia" and r.id in o.odb.pomieszczenia]
+            oid = ob2[-1].odb.id if ob2 else oid
+        target = {"pokoj": 3 + int(r.pow_netto // 10), "kuchnia": 2 + int(r.pow_netto // 15),
+                  "komunikacja": max(1, int(r.polygon.length // 7)), "pomocnicze": 1}.get(rd, 0)
+        if rd in ("pokoj", "kuchnia", "komunikacja", "pomocnicze"):
+            excl = [a[0] for a in anchors] + [np.asarray(p, float) for e in wy if e.get("typ") == "blat"
+                                              for p in e["linia"]]
+            fill = self.wzdluz_scian(r, max(0, target - len(anchors)), exclude=excl)
+            self._gn(anchors + fill, r, oid)
+        elif rd == "lazienka":
+            pts = []
+            for e in wy:
+                if e.get("typ") in ("umywalka", "umywalka_blat"):
+                    rot = float(e.get("obrot", 90))
+                    tt = perp(dir_deg(rot))
+                    w0 = float((e.get("wym") or [0.6])[0])
+                    pts.append((np.asarray(e["xy"], float) + tt * (w0 / 2 + 0.3), rot))
+            self._gn(pts[:1], r, oid, ip44=True)
+        elif rd in ("garaz", "techniczne"):
+            o = next((o for o in self.obw if "garażu" in o.odb.nazwa.lower() and o.odb.typ_obwodu == "gniazda"), None)
+            self._gn(self.wzdluz_scian(r, 2), r, o.odb.id if o else None, ip44=True, n=1)
+            if rd == "garaz":
+                q = label_point(r.polygon)
+                self._dedyk("ev", self.wzdluz_scian(r, 1, zbl=1.0)[0][0] if self.wzdluz_scian(r, 1) else q,
+                            txt="ładowarka EV (wallbox) 11 kW, RCD typ B / RDC-DD")
+                br = next((o for o in self.m.otwory(kond=self.kid) if o.typ == "brama"), None)
+                if br is not None:
+                    self._dedyk("bramy garażowej", br.srodek + br.sciana.n * br.sciana.sgn_int * 0.4,
+                                txt="napęd bramy garażowej")
+            else:
+                for e in wy:
+                    op = str(e.get("opis", "")).lower()
+                    xy = np.asarray(e.get("xy") or [0, 0], float)
+                    if e.get("typ") == "pompa_ciepla":
+                        self._dedyk("sterowanie", xy, txt="sterownik PC, pompy, listwy ogrz. podł.")
+                    elif "cwu" in op or "c.w.u" in op:
+                        self._dedyk("grzalka", xy, txt="grzałka zasobnika / PC 3f")
+                    elif "rozdzielnica" in op:
+                        self._dedyk("pv", xy + np.array([0.6, 0.0]), txt="falownik PV 3f (AC)")
+                        self._dedyk("tele", xy + np.array([-0.6, 0.0]), txt="RACK / ONT / SSWiN")
+        elif rd == "pralnia":
+            for e in wy:
+                if e.get("typ") in ("pralka", "suszarka"):
+                    self._dedyk(e["typ"], np.asarray(e["xy"], float), float(e.get("obrot", 90)),
+                                txt=f"{e['typ']} (gniazdo IP44)")
+        for e in wy:
+            if e.get("typ") == "rekuperator":
+                self._dedyk("went", np.asarray(e["xy"], float), txt="centrala wentylacyjna")
+
+    def _kuchnia(self, r, wy):
+        g = [o for o in self.obw if o.odb.grupa == "gniazda_kuchnia" and r.id in o.odb.pomieszczenia]
+        for e in wy:
+            if e.get("typ") != "blat":
+                continue
+            a, b = np.asarray(e["linia"][0], float), np.asarray(e["linia"][-1], float)
+            L = float(np.hypot(*(b - a)))
+            t = (b - a) / (L or 1.0)
+            nrm = np.array([-t[1], t[0]]) * float(e.get("strona", 1.0))
+            rot = math.degrees(math.atan2(nrm[1], nrm[0]))
+            busy = [np.asarray(x["xy"], float) for x in wy if x.get("typ") in ("zlew", "urzadzenie", "lodowka")]
+            pts = []
+            for s in np.arange(0.4, L - 0.2, 1.1):
+                q = a + t * s
+                if all(float(np.hypot(*(q - bb))) > 0.45 for bb in busy):
+                    pts.append((q, rot))
+            for i, (q, rr) in enumerate(pts):
+                o = g[i % len(g)] if g else None
+                self.sym(S.socket, q, rr, n=2, s_mm=3.0)
+                if o is not None and i < len(g):
+                    self.circuit_tag(q + nrm * 0.08, o.odb.id, "nad blatem h = 1,10 m" if i == 0 else None)
+            self.chain([q + nrm * 0.08 for q, _ in pts], f"G:{r.id}:blat")
+        for e in wy:
+            t = e.get("typ")
+            xy = np.asarray(e.get("xy") or [0, 0], float)
+            rot = float(e.get("obrot", 90))
+            if t == "plyta":
+                self._dedyk("płyta", xy, txt="płyta indukcyjna 3f — puszka w wyspie")
+            elif t == "zmywarka":
+                self._dedyk("zmywarka", xy, rot)
+            elif t == "urzadzenie" and "piekarnik" in str(e.get("opis", "")).lower():
+                self._dedyk("piekarnik", xy, rot)
+            elif t == "lodowka" and g:
+                self.sym(S.socket, xy, rot, n=1, s_mm=3.0)

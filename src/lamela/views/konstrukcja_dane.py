@@ -1133,6 +1133,9 @@ def odcinki_proste(g) -> list:
     return [o for o in out if o.length > 1e-6]
 
 
+LACZNIK_T = 0.08      # grubość korpusu izolacji łącznika termoizolacyjnego [m] (typowo 80 mm; 120 mm — wyroby „XT”)
+
+
 def _gora_wsporniki(D, lv, zest, gora, Ping, h_lv, cmax):
     """Zbrojenie górne płyt wspornikowych: od krawędzi swobodnej (odgięcie) przez linię zamocowania do przęsła
     zaplecza na długość max(l_c; l_bd) za najbliższą podporą (ściana/belka ≤ 1,6 m od zamocowania — wspornik wielostopniowy, np. ST2Z + PL-2)."""
@@ -1181,6 +1184,13 @@ def _gora_wsporniki(D, lv, zest, gora, Ping, h_lv, cmax):
             back = _ceil5(d_s + max(l_c, _lbd(w.fi, el.beton)))
             a, b = sorted((r - strona * back, r + strona * (l_c + 0.5)))
             reg = (box(t0, a, t1, b) if kier == "y" else box(a, t0, b, t1)).intersection(Ping)
+            if el.lacznik:
+                # łącznik termoizolacyjny: pręty NIE przechodzą przez korpus izolacji (8 cm po stronie płyty zaplecza) —
+                # część wspornikowa (od krawędzi do łącznika) i część w płycie zaplecza zakładkowane z prętami łącznika
+                korp = (box(t0 - 1, min(r, r - strona * (LACZNIK_T + 0.02)), t1 + 1, max(r, r - strona * (LACZNIK_T + 0.02)))
+                        if kier == "y" else
+                        box(min(r, r - strona * (LACZNIK_T + 0.02)), t0 - 1, max(r, r - strona * (LACZNIK_T + 0.02)), t1 + 1))
+                reg = reg.difference(korp)
             sk = skanuj(reg, kier, t0 + el.c_nom / 1000, t1 - el.c_nom / 1000, w.s / 1000.0)
             bnd = el.poly.buffer(-el.c_nom / 1000.0, join_style=2).boundary
 

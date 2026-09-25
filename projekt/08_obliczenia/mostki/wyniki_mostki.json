@@ -14,6 +14,17 @@
     "theta_si_min": 16.152,
     "dlugosc": 45.9,
     "dlugosc_oi": 45.9,
+    "psi_pary": {
+      "i-e": {
+        "psi_oi": 0.17422,
+        "psi_e": 0.0627,
+        "L2D": 0.50378
+      }
+    },
+    "theta_grup": {
+      "i": 20.0,
+      "e": -18.0
+    },
     "ocena": "DOBRY",
     "izolacja_ciagla": true,
     "droga_mostka": null,
@@ -35,6 +46,17 @@
     "theta_si_min": 16.204,
     "dlugosc": 14.62,
     "dlugosc_oi": 14.62,
+    "psi_pary": {
+      "i-e": {
+        "psi_oi": 0.17142,
+        "psi_e": 0.05853,
+        "L2D": 0.50442
+      }
+    },
+    "theta_grup": {
+      "i": 20.0,
+      "e": -18.0
+    },
     "ocena": "DOBRY",
     "izolacja_ciagla": true,
     "droga_mostka": null,
@@ -56,6 +78,17 @@
     "theta_si_min": 15.808,
     "dlugosc": 9.55,
     "dlugosc_oi": 9.55,
+    "psi_pary": {
+      "i-e": {
+        "psi_oi": 0.19526,
+        "psi_e": 0.06912,
+        "L2D": 0.56113
+      }
+    },
+    "theta_grup": {
+      "i": 20.0,
+      "e": -18.0
+    },
     "ocena": "DOBRY",
     "izolacja_ciagla": true,
     "droga_mostka": null,
@@ -77,6 +110,17 @@
     "theta_si_min": 16.325,
     "dlugosc": 21.82,
     "dlugosc_oi": 21.82,
+    "psi_pary": {
+      "i-e": {
+        "psi_oi": 0.22043,
+        "psi_e": 0.22043,
+        "L2D": 0.60608
+      }
+    },
+    "theta_grup": {
+      "i": 20.0,
+      "e": -18.0
+    },
     "ocena": "DO POPRAWY",
     "izolacja_ciagla": true,
     "droga_mostka": null,
@@ -101,6 +145,17 @@
     "theta_si_min": 16.278,
     "dlugosc": 19.32,
     "dlugosc_oi": 19.32,
+    "psi_pary": {
+      "i-e": {
+        "psi_oi": 0.22621,
+        "psi_e": 0.21824,
+        "L2D": 0.62544
+      }
+    },
+    "theta_grup": {
+      "i": 20.0,
+      "e": -18.0
+    },
     "ocena": "DO POPRAWY",
     "izolacja_ciagla": true,
     "droga_mostka": null,
@@ -125,6 +180,17 @@
     "theta_si_min": 13.359,
     "dlugosc": 25.05,
     "dlugosc_oi": 25.05,
+    "psi_pary": {
+      "i-e": {
+        "psi_oi": 0.38548,
+        "psi_e": 0.27396,
+        "L2D": 0.71504
+      }
+    },
+    "theta_grup": {
+      "i": 20.0,
+      "e": -18.0
+    },
     "ocena": "DO POPRAWY",
     "izolacja_ciagla": true,
     "droga_mostka": null,
@@ -146,6 +212,17 @@
     "theta_si_min": 13.817,
     "dlugosc": 6.725,
     "dlugosc_oi": 6.725,
+    "psi_pary": {
+      "i-e": {
+        "psi_oi": 0.18214,
+        "psi_e": 0.05763,
+        "L2D": 0.56157
+      }
+    },
+    "theta_grup": {
+      "i": 20.0,
+      "e": -18.0
+    },
     "ocena": "DO POPRAWY",
     "izolacja_ciagla": true,
     "droga_mostka": null,
@@ -167,6 +244,17 @@
     "theta_si_min": 18.169,
     "dlugosc": 6.725,
     "dlugosc_oi": 6.725,
+    "psi_pary": {
+      "i-e": {
+        "psi_oi": -0.06066,
+        "psi_e": -0.01439,
+        "L2D": 0.50063
+      }
+    },
+    "theta_grup": {
+      "i": 20.0,
+      "e": -18.0
+    },
     "ocena": "BEZMOSTKOWY",
     "izolacja_ciagla": true,
     "droga_mostka": null,
@@ -188,6 +276,17 @@
     "theta_si_min": 16.32,
     "dlugosc": 43.4,
     "dlugosc_oi": 43.4,
+    "psi_pary": {
+      "i-e": {
+        "psi_oi": 0.10023,
+        "psi_e": 0.05752,
+        "L2D": 0.56544
+      }
+    },
+    "theta_grup": {
+      "i": 20.0,
+      "e": -18.0
+    },
     "ocena": "DOBRY",
     "izolacja_ciagla": true,
     "droga_mostka": null,
@@ -209,6 +308,17 @@
     "theta_si_min": 12.699,
     "dlugosc": 12.25,
     "dlugosc_oi": 12.25,
+    "psi_pary": {
+      "i-u": {
+        "psi_oi": 0.61558,
+        "psi_e": 0.61558,
+        "L2D": 0.8695
+      }
+    },
+    "theta_grup": {
+      "i": 20.0,
+      "u": -10.4
+    },
     "ocena": "ZŁY",
     "izolacja_ciagla": false,
     "droga_mostka": [
@@ -237,6 +347,28 @@
     "theta_si_min": 13.769,
     "dlugosc": 6.375,
     "dlugosc_oi": 6.375,
+    "psi_pary": {
+      "i-u": {
+        "psi_oi": 0.31694,
+        "psi_e": 0.28647,
+        "L2D": 0.57086
+      },
+      "i-e": {
+        "psi_oi": 0.07101,
+        "psi_e": 0.05222,
+        "L2D": 0.29823
+      },
+      "u-e": {
+        "psi_oi": -0.04345,
+        "psi_e": -0.06224,
+        "L2D": 0.2994
+      }
+    },
+    "theta_grup": {
+      "i": 20.0,
+      "u": -10.4,
+      "e": -18.0
+    },
     "ocena": "ZŁY",
     "izolacja_ciagla": false,
     "droga_mostka": [
@@ -264,6 +396,28 @@
     "theta_si_min": 15.64,
     "dlugosc": 5.875,
     "dlugosc_oi": 5.875,
+    "psi_pary": {
+      "i-u": {
+        "psi_oi": 0.17777,
+        "psi_e": 0.30219,
+        "L2D": 0.63863
+      },
+      "i-e": {
+        "psi_oi": 0.08132,
+        "psi_e": 0.0704,
+        "L2D": 0.25813
+      },
+      "u-e": {
+        "psi_oi": -0.05371,
+        "psi_e": -0.0725,
+        "L2D": 0.28914
+      }
+    },
+    "theta_grup": {
+      "i": 20.0,
+      "u": -10.4,
+      "e": -18.0
+    },
     "ocena": "ZŁY",
     "izolacja_ciagla": false,
     "droga_mostka": [
@@ -291,6 +445,17 @@
     "theta_si_min": 18.603,
     "dlugosc": 55.12,
     "dlugosc_oi": 55.12,
+    "psi_pary": {
+      "i-e": {
+        "psi_oi": -1e-05,
+        "psi_e": -1e-05,
+        "L2D": 0.38563
+      }
+    },
+    "theta_grup": {
+      "i": 20.0,
+      "e": -18.0
+    },
     "ocena": "BEZMOSTKOWY",
     "izolacja_ciagla": true,
     "droga_mostka": null,
@@ -312,6 +477,17 @@
     "theta_si_min": 17.344,
     "dlugosc": 89.9,
     "dlugosc_oi": 89.9,
+    "psi_pary": {
+      "i-e": {
+        "psi_oi": 0.00532,
+        "psi_e": 0.01405,
+        "L2D": 0.43741
+      }
+    },
+    "theta_grup": {
+      "i": 20.0,
+      "e": -18.0
+    },
     "ocena": "DOBRY",
     "izolacja_ciagla": true,
     "droga_mostka": null,
@@ -333,6 +509,17 @@
     "theta_si_min": 17.635,
     "dlugosc": 45.77,
     "dlugosc_oi": 45.77,
+    "psi_pary": {
+      "i-e": {
+        "psi_oi": 0.00781,
+        "psi_e": 0.01654,
+        "L2D": 0.44044
+      }
+    },
+    "theta_grup": {
+      "i": 20.0,
+      "e": -18.0
+    },
     "ocena": "DOBRY",
     "izolacja_ciagla": true,
     "droga_mostka": null,
@@ -354,6 +541,17 @@
     "theta_si_min": 16.623,
     "dlugosc": 29.62,
     "dlugosc_oi": 29.62,
+    "psi_pary": {
+      "i-e": {
+        "psi_oi": 0.00593,
+        "psi_e": 0.01466,
+        "L2D": 0.43746
+      }
+    },
+    "theta_grup": {
+      "i": 20.0,
+      "e": -18.0
+    },
     "ocena": "DOBRY",
     "izolacja_ciagla": true,
     "droga_mostka": null,
@@ -375,6 +573,17 @@
     "theta_si_min": 14.097,
     "dlugosc": 16.15,
     "dlugosc_oi": 16.15,
+    "psi_pary": {
+      "i-e": {
+        "psi_oi": 0.11846,
+        "psi_e": 0.07574,
+        "L2D": 0.72855
+      }
+    },
+    "theta_grup": {
+      "i": 20.0,
+      "e": -18.0
+    },
     "ocena": "DOBRY",
     "izolacja_ciagla": true,
     "droga_mostka": null,
@@ -396,6 +605,17 @@
     "theta_si_min": 17.173,
     "dlugosc": 49.5,
     "dlugosc_oi": 49.5,
+    "psi_pary": {
+      "i-e": {
+        "psi_oi": 0.06553,
+        "psi_e": -0.05234,
+        "L2D": 0.53704
+      }
+    },
+    "theta_grup": {
+      "i": 20.0,
+      "e": -18.0
+    },
     "ocena": "BEZMOSTKOWY",
     "izolacja_ciagla": true,
     "droga_mostka": null,
@@ -417,6 +637,17 @@
     "theta_si_min": 13.916,
     "dlugosc": 1.0,
     "dlugosc_oi": 1.0,
+    "psi_pary": {
+      "i-e": {
+        "psi_oi": 0.23646,
+        "psi_e": 0.05678,
+        "L2D": 0.66872
+      }
+    },
+    "theta_grup": {
+      "i": 20.0,
+      "e": -18.0
+    },
     "ocena": "DO POPRAWY",
     "izolacja_ciagla": true,
     "droga_mostka": null,
@@ -438,6 +669,81 @@
     "theta_si_min": 15.456,
     "dlugosc": 1.0,
     "dlugosc_oi": 1.0,
+    "psi_pary": {
+      "i-e": {
+        "psi_oi": 0.12286,
+        "psi_e": -0.04379,
+        "L2D": 0.54153
+      }
+    },
+    "theta_grup": {
+      "i": 20.0,
+      "e": -18.0
+    },
+    "ocena": "BEZMOSTKOWY",
+    "izolacja_ciagla": true,
+    "droga_mostka": null,
+    "woda_braki": [],
+    "woda_uwagi": []
+  },
+  "WZ-X1": {
+    "nazwa": "Dach D2/D3 (SD2) – ściana SZ1 wyższej kondygnacji na krawędzi (pod spodem ściana SW18, pomieszczenia ogrzewane) — węzeł spoza sekcji `wezly`",
+    "typ": "attyka",
+    "typ_mostki2d": "attyka",
+    "system_wymiarow": "oi — wewnętrzne całkowite",
+    "zrodlo": "symulacja PN-EN ISO 10211 (mostki2d)",
+    "zbieznosc_ok": true,
+    "psi_oi": 0.02235,
+    "psi_e": -0.00626,
+    "psi_i": 0.02235,
+    "L2D": 0.3936,
+    "f_rsi": 0.9643,
+    "theta_si_min": 18.645,
+    "dlugosc": 14.625,
+    "dlugosc_oi": 14.625,
+    "psi_pary": {
+      "i-e": {
+        "psi_oi": 0.02235,
+        "psi_e": -0.00626,
+        "L2D": 0.3936
+      }
+    },
+    "theta_grup": {
+      "i": 20.0,
+      "e": -18.0
+    },
+    "ocena": "BEZMOSTKOWY",
+    "izolacja_ciagla": true,
+    "droga_mostka": null,
+    "woda_braki": [],
+    "woda_uwagi": []
+  },
+  "WZ-X2": {
+    "nazwa": "Dach D4 (DZ1) – ściana SZ1 wyższej kondygnacji na krawędzi (pod spodem ściana SW18, pomieszczenia ogrzewane) — węzeł spoza sekcji `wezly`",
+    "typ": "attyka",
+    "typ_mostki2d": "attyka",
+    "system_wymiarow": "oi — wewnętrzne całkowite",
+    "zrodlo": "symulacja PN-EN ISO 10211 (mostki2d)",
+    "zbieznosc_ok": true,
+    "psi_oi": 0.02186,
+    "psi_e": -0.00116,
+    "psi_i": 0.02186,
+    "L2D": 0.40967,
+    "f_rsi": 0.9643,
+    "theta_si_min": 18.645,
+    "dlugosc": 3.032,
+    "dlugosc_oi": 3.032,
+    "psi_pary": {
+      "i-e": {
+        "psi_oi": 0.02186,
+        "psi_e": -0.00116,
+        "L2D": 0.40967
+      }
+    },
+    "theta_grup": {
+      "i": 20.0,
+      "e": -18.0
+    },
     "ocena": "BEZMOSTKOWY",
     "izolacja_ciagla": true,
     "droga_mostka": null,

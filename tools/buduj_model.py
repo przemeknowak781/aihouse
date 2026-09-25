@@ -241,6 +241,9 @@ PRZ = {
         L("ZB_C25", 0.15, konstrukcyjna=True)]),
     "DZ12": dict(nazwa="Ścianka działowa: silikat 12 + tynk gipsowy obustronnie (R'w ≥ 45 dB)", typ="scianka_dzialowa", warstwy=[
         L("TYNK_GIPS", 0.015), L("SIL12", 0.12, konstrukcyjna=True), L("TYNK_GIPS", 0.015)]),
+    "DZGK": dict(nazwa="Ścianka działowa GK 12,5 cm z kasetą drzwi przesuwnych chowanych (2 × GK impregnowana 12,5 mm obustronnie, "
+                       "kaseta stalowa 7,5 cm z wełną poza strefą kasety; R'w ≥ 40 dB)", typ="scianka_dzialowa", warstwy=[
+        L("GK", 0.025), L("WELNA_035", 0.075, konstrukcyjna=True), L("GK", 0.025)]),
     "GK10": dict(nazwa="Obudowa szachtu SI: 2 × GKF 12,5 + profil CW 50 z wełną + 2 × GKF 12,5 (EI 30)", typ="scianka_dzialowa", warstwy=[
         L("GK", 0.025), L("WELNA_035", 0.05, konstrukcyjna=True), L("GK", 0.025)]),
     "SGL": dict(nazwa="Ścianka szklana wiatrołap/hol: VSG w ramie aluminiowej z drzwiami szklanymi 0,90 m", typ="scianka_dzialowa", warstwy=[
@@ -256,7 +259,8 @@ PRZ = {
     "POD-0L": dict(nazwa="Podłoga na płycie (P0) — łazienki, WC, przedsionek, pom. techniczne: gres na hydroizolacji podpłytkowej", typ="podloga_na_gruncie",
                    warstwy=[L("GRES", 0.012), L("HYDRO_PODPL", 0.003), L("JASTRYCH", 0.065), L("EPS038", 0.065), L("MEMB_SBS_POD", 0.005),
                             L("ZB_C25", 0.25, konstrukcyjna=True), L("XPS300", 0.20), L("FOLIA_PE", 0.0002), L("PIASEK", 0.20)]),
-    "POD-G": dict(nazwa="Posadzka garażu (nieogrzewany): żywica R11 na warstwie wyrównawczej, spadek 1,5 % do bramy, płyta ŻB 25 cm na XPS 20 cm",
+    "POD-G": dict(nazwa="Posadzka garażu (nieogrzewany): żywica R11 na warstwie wyrównawczej, spadek 0,8 % do bramy (−0,05 przy drzwiach "
+                        "do domu → −0,10 przy bramie), płyta ŻB 25 cm na XPS 20 cm",
                   typ="podloga_na_gruncie", warstwy=[
         L("ZYWICA", 0.003), L("JASTRYCH", 0.047), L("ZB_C25", 0.25, konstrukcyjna=True), L("XPS300", 0.20), L("FOLIA_PE", 0.0002), L("PIASEK", 0.20)]),
     "POD-1": dict(nazwa="Strop międzykondygnacyjny: deska dębowa, jastrych z ogrzewaniem podł., EPS 100, EPS T (akustyczny), płyta ŻB 22 cm, tynk",
@@ -334,7 +338,7 @@ W("S0-15", "P0", "SW18", (xE, y1), (xE, y2), uwagi="oś E — kuchnia / przedsio
 W("S0-16", "P0", "SWG", (xE, y2), (xE, y4), "lewa", "oś E — dom / garaż (izolacja od garażu, szczelna)")
 W("S0-17", "P0", "SWG", (xF, y2), (xE, y2), "lewa", "oś 2 — pas gospodarczy / garaż (izolacja od garażu, szczelna)")
 W("S0-18", "P0", "DZ12", (xP, y1), (xP, y2), uwagi="przedsionek / pom. techniczne")
-W("S0-19", "P0", "DZ12", (xB, Y_GP), (xC, Y_GP), uwagi="przedpokój gościnny / łazienka gościnna")
+W("S0-19", "P0", "DZGK", (xB, Y_GP), (xC, Y_GP), uwagi="przedpokój gościnny / łazienka gościnna — ścianka GK z kasetą drzwi chowanych (A2 I-7)")
 W("S0-20", "P0", "DZ12", (xD, Y_HW), (xD2, Y_HW), uwagi="hol / WC")
 W("S0-21", "P0", "SGL", (xD2, Y_HW), (xE, Y_HW), uwagi="przeszklona ścianka wiatrołap / hol z drzwiami szklanymi (przeszczep z W3)")
 W("S0-22", "P0", "DZ12", (xD2, Y_HW), (xD2, y4), uwagi="WC / wiatrołap")
@@ -490,7 +494,8 @@ O("O2-08", "S2-12", 3.90, 4.80, "drzwi", "D1", 2.10, 0.0, ow("R", "do_wewn"), uw
 O("O2-09", "S2-18", 3.90, 4.80, "drzwi", "D1", 2.10, 0.0, ow("R", "do_wewn"), uwagi="hol → garderoba (przedpokój apartamentu)")
 O("O2-10", "S2-09", 4.20, 5.10, "drzwi", "D2", 2.10, 0.0, ow("R", "na_zewn"), uwagi="garderoba → łazienka rodziców (na zewnątrz)")
 O("O2-11", "S2-19", 3.90, 4.80, "drzwi", "D1", 2.10, 0.0, ow("R", "do_wewn"), uwagi="hol → gabinet")
-O("O2-12", "S2-15", 6.20, 7.10, "drzwi", "D4", 2.10, 0.0, ow("R", "do_wewn"), uwagi="hol → pom. techniczne (centrala reku, wyłaz na dach)")
+O("O2-12", "S2-15", 6.20, 7.10, "drzwi", "D4", 2.10, 0.0, ow("R", "na_zewn"),
+  uwagi="hol → pom. techniczne (centrala reku, wyłaz na dach); otwierane do holu — front serwisowy centrali i drabina wolne (A2 D-3)")
 
 
 # =====================================================================================================================
@@ -525,9 +530,22 @@ PMS("0.03", "P0", "WC gościnne", (9.2, 7.6), kat="pomocnicza", posadzka="GRES",
     podloga="POD-0L", uwagi="szer. 1,195 m ≥ 0,90 (W-060); wentylacja mechaniczna")
 PMS("0.04", "P0", "Klatka schodowa", None, [(XC_e, Y3_s), (B1_X1, Y3_s), (B1_X1, Y_SPOCZ), (XC_e, Y_SPOCZ)], kat="ruchu", temp=20, rodzaj="komunikacja",
     uwagi="bieg 1 SCH1; wyłączona z PU (W-316)")
-PMS("0.05", "P0", "Spiżarnia (pod schodami)", None, [(B2_X0, Y3_n), (B2_X1, Y3_n), (B2_X1, Y4_i), (XC_e, Y4_i), (XC_e, Y_SPOCZ), (B2_X0, Y_SPOCZ)],
-    kat="pomocnicza", posadzka="GRES", temp=16, wyw=15, rodzaj="pomocnicze", podloga="POD-0L", wys=1.90,
-    uwagi="wysokość zmienna 2,77 → 1,39 m pod biegiem 2 i spocznikiem — PU liczona w 50 % (wys. zastępcza 1,90; W-316)")
+# przestrzeń pod biegiem 2 SCH1 i spocznikiem — podział na strefy wysokości (audyt A1: WT §97, RPB §20 / PN-ISO 9836, W-316):
+# spód płyty biegu s(y) = N·h − t/cos α + (Y_SPOCZ − y)·h/s; granice h = 2,20 i h = 1,40
+_ALFA = math.atan(H_ST / S_ST)
+_SOF0 = N_BIEG * H_ST - 0.18 / math.cos(_ALFA)                      # ≈ 1,363 (spód przy krawędzi spocznika)
+Y_H22 = r(Y_SPOCZ - (2.20 - _SOF0) / (H_ST / S_ST), 3)            # ≈ 6,131
+Y_H14 = r(Y_SPOCZ - (1.40 - _SOF0) / (H_ST / S_ST), 3)            # ≈ 7,411
+PMS("0.05", "P0", "Spiżarnia", None, [(B2_X0, Y3_n), (B2_X1, Y3_n), (B2_X1, Y_H22), (B2_X0, Y_H22)],
+    kat="pomocnicza", posadzka="GRES", temp=16, wyw=15, rodzaj="pomocnicze", podloga="POD-0L",
+    uwagi="część pod górnym odcinkiem biegu 2, h ≥ 2,20 (PU 100 %); dalej schowek pod schodami 0.15/0.16 (bez ścianki)")
+PMS("0.15", "P0", "Schowek pod schodami (h 1,40–2,20)", None, [(B2_X0, Y_H22), (B2_X1, Y_H22), (B2_X1, Y_H14), (B2_X0, Y_H14)],
+    kat="pomocnicza", posadzka="GRES", temp=16, rodzaj="pomocnicze", podloga="POD-0L", wys=1.80,
+    uwagi="schowek (nie pomieszczenie gospodarcze — WT §97): h 1,40–2,20, PU 50 % (RPB §20 / PN-ISO 9836, W-316)")
+PMS("0.16", "P0", "Schowek pod spocznikiem (h < 1,40)", None,
+    [(B2_X0, Y_H14), (B2_X1, Y_H14), (B2_X1, Y4_i), (XC_e, Y4_i), (XC_e, Y_SPOCZ), (B2_X0, Y_SPOCZ)],
+    kat="pomocnicza", posadzka="GRES", temp=16, rodzaj="pomocnicze", podloga="POD-0L", wys=1.37,
+    uwagi="schowek pod spocznikiem: h ≈ 1,37–1,40 — nie wlicza się do PU (0 %, W-316)")
 PMS("0.06", "P0", "Salon + jadalnia + kuchnia", None,
     [(XA_i, Y1_i), (XE_i, Y1_i), (XE_i, Y3_s), (PAS[2], Y3_s), (PAS[2], PAS[1]), (PAS[0], PAS[1]), (PAS[0], Y3_s), (XA_i, Y3_s)],
     kat="podstawowa", pobyt=True, temp=20, naw=100, wyw=50, rodzaj="kuchnia",
@@ -543,8 +561,9 @@ PMS("0.11", "P0", "Przedsionek gospodarczy", (13.4, 1.4), kat="ruchu", posadzka=
 PMS("0.12", "P0", "Pomieszczenie techniczne", (16.6, 1.4), kat="techniczna", posadzka="GRES", sciany="TYNK_CW", temp=16, wyw=15, rodzaj="techniczne",
     podloga="POD-0L", uwagi="moduł hydrauliczny PC R290 (monoblok zewn.), zasobnik CWU 300 l, bufor 100 l, rozdzielacze, RG, wodomierz; dostęp z przedsionka")
 PMS("0.13", "P0", "Garaż 2-stanowiskowy", (15.3, 6.2), kat="pomocnicza", posadzka="ZYWICA", sciany="TYNK_CW", sufit="TYNK_CW", temp=None,
-    rodzaj="garaz", podloga="POD-G", ogrzewane=False,
-    uwagi="w świetle 6,05 × 6,175 m (≥ 5,60 × 6,00; W-112); nieogrzewany, wentylacja naturalna ≥ 0,08 m² (W-115); posadzka −0,10, spadek 1,5 % do bramy")
+    rodzaj="garaz", podloga="POD-G", ogrzewane=False, rzedna=-0.10,
+    uwagi="w świetle 6,05 × 6,175 m (≥ 5,60 × 6,00; W-112); nieogrzewany, wentylacja naturalna ≥ 0,08 m² (W-115); posadzka −0,10 przy bramie "
+          "i −0,05 przy drzwiach O0-22 (próg dom–garaż 5 cm ≥ 3 cm, W-114), spadek 0,8 % do bramy; odwodnienie OL-1 przez separator SEP-1")
 # ---- P1
 PMS("1.01", "P1", "Hol", None, [(XA_i, yH + FD), (XE_i, yH + FD), (XE_i, Y3_s), (XA_i, Y3_s)],
     kat="ruchu", temp=20, rodzaj="komunikacja")
@@ -581,22 +600,37 @@ for _k, _pid in (("P0", "0.14"), ("P1", "1.09"), ("P2", "2.08")):
 # 7. STROPY, DACHY (z attykami, spadkami, wpustami, przelewami awaryjnymi, rurami spustowymi), PŁYTY WYSUNIĘTE
 #    Konwencja SCHEMAT p. 5.1: odsłonięte fragmenty stropów = `dachy`; dach garażu = osobny element `dachy`.
 # =====================================================================================================================
-OB_P1 = R(-EXT, -EXT, xE + EXT, y4 + EXT)                                          # −0,30…12,30 × −0,30…9,05
+# KONWENCJA OBRYSÓW PŁYT (audyt A2 K-1; SCHEMAT §5 pkt 8):
+#  * krawędź płyty nad ścianą zewnętrzną niższej kondygnacji = LICO WARSTWY KONSTRUKCYJNEJ (±0,09 od osi; ściana lekka A' ±0,10) —
+#    ETICS/wełna ściany jest ciągła przed czołem płyty i attyki (WZ-10, WZ-01…03);
+#  * krawędź płyty/dachu przy ścianie WYŻSZEJ kondygnacji (uskok bryły) = lico zewnętrzne tej ściany (−/+0,30) — płyta ciągła pod
+#    ociepleniem ściany wyższej, pokrycie dachu dochodzi do lica ocieplenia (wywinięcie ≥ 0,15 m);
+#  * płyty wysunięte PL-* zaczynają się od lica ETICS (−0,30): pas −0,30…−0,09 = strefa łącznika termoizolacyjnego (ETA, korpus
+#    izolacyjny 0,08–0,12 m + dopełnienie EPS) w płaszczyźnie ocieplenia ściany (WZ-04…06).
+OB_P1 = R(-EXT, -EXT, xE + EXT, y4 + EXT)                                          # obrys P1 po licach ETICS (bilanse, teren)
+ZK = KZ                                                                              # 0,09 — lico konstrukcji ściany 18 cm
+ZL = 0.10                                                                            # lico konstrukcji ściany lekkiej A' (szkielet 20 cm)
+OB_D1 = P((xA2 - ZL, -ZK), (xE + ZK, -ZK), (xE + ZK, y3 + ZK), (xD + ZK, y3 + ZK), (xD + ZK, y4 + ZK),
+          (xB - ZK, y4 + ZK), (xB - ZK, y3 + ZK), (xA2 - ZL, y3 + ZK))                # stropodach P2 po licu konstrukcji
 OB_P2 = P((xA2 - EXT, -EXT), (xE + EXT, -EXT), (xE + EXT, y3 + EXT), (xD + EXT, y3 + EXT), (xD + EXT, y4 + EXT),
-          (xB - EXT, y4 + EXT), (xB - EXT, y3 + EXT), (xA2 - EXT, y3 + EXT))
+          (xB - EXT, y4 + EXT), (xB - EXT, y3 + EXT), (xA2 - EXT, y3 + EXT))          # obrys P2 po licach (długość attyki, węzły)
 OTW_SCH = R(XC_e, Y3_n, XD_w, Y4_i)                                                 # otwór klatki w ST1/ST2
 X2o = xA2 - EXT                                                                      # lico zach. bryły A (−1,30)
 
 STROPY = [
-    {"id": "ST1", "nad": "P0", "wierzch": Z_ST1, "grubosc": T_STR, "obrys": OB_P1, "otwory": [OTW_SCH], "podloga": "POD-1", "sufit": "TYNK_GIPS",
-     "mat": "ZB_C25", "uwagi": "strop nad P0 (część mieszkalna): N–S, ciągły 2-przęsłowy B1 (oś 1) – oś 3 – oś 4, rozpiętości 5,125 / 3,625 m"},
+    {"id": "ST1", "nad": "P0", "wierzch": Z_ST1, "grubosc": T_STR, "obrys": R(-ZK, -ZK, xE + EXT, y4 + ZK), "otwory": [OTW_SCH],
+     "podloga": "POD-1", "sufit": "TYNK_GIPS", "mat": "ZB_C25",
+     "uwagi": "strop nad P0 (część mieszkalna): N–S, ciągły 2-przęsłowy B1 (oś 1) – oś 3 – oś 4, rozpiętości 5,125 / 3,625 m; krawędzie "
+              "po licu konstrukcji (±0,09), od wsch. do lica ściany P1 (styk z dachem garażu D4 przez łącznik termoizolacyjny)"},
     {"id": "ST2", "nad": "P1", "wierzch": Z_ST2, "grubosc": T_STR,
-     "obrys": P((-EXT, -EXT), (xE + EXT, -EXT), (xE + EXT, y3 + EXT), (xD + EXT, y3 + EXT), (xD + EXT, y4 + EXT), (xB - EXT, y4 + EXT),
-                (xB - EXT, y3 + EXT), (-EXT, y3 + EXT)),
+     "obrys": P((-ZK, -ZK), (xE + ZK, -ZK), (xE + ZK, y3 + EXT), (xD + EXT, y3 + EXT), (xD + EXT, y4 + ZK), (xB - EXT, y4 + ZK),
+                (xB - EXT, y3 + EXT), (-ZK, y3 + EXT)),
      "otwory": [OTW_SCH], "podloga": "POD-1", "sufit": "TYNK_GIPS", "mat": "ZB_C25",
-     "uwagi": "strop nad P1 pod bryłą A i nadbudową; pola pn. poza bryłą A — dachy D2/D3"},
-    {"id": "ST2Z", "nad": "P1", "wierzch": Z_ST2, "grubosc": T_STR, "obrys": R(X2o, -EXT, -EXT, y3 + EXT), "podloga": "POD-1", "sufit": "SUF-ZEW",
-     "mat": "ZB_C25", "uwagi": "strop P2 nad powietrzem zewnętrznym (wspornik bryły A 1,00 m lico–lico): E–W oś A – belka B3, docieplenie spodu"},
+     "uwagi": "strop nad P1 pod bryłą A i nadbudową; pola pn. poza bryłą A — dachy D2/D3 (płyta ciągła); krawędzie nad ścianami P1 po licu "
+              "konstrukcji"},
+    {"id": "ST2Z", "nad": "P1", "wierzch": Z_ST2, "grubosc": T_STR, "obrys": R(xA2 - ZL, -EXT, -ZK, y3 + EXT), "podloga": "POD-1", "sufit": "SUF-ZEW",
+     "mat": "ZB_C25", "uwagi": "strop P2 nad powietrzem zewnętrznym (wspornik bryły A 1,00 m lico–lico): E–W oś A – belka B3, docieplenie spodu "
+                                "(IZ-ST2Z) i podsufitka PS-A"},
 ]
 
 WP = lambda x, y, dn=100, grz=True, **kw: {"xy": [r(x), r(y)], "dn": dn, "podgrzewany": grz, **kw}          # noqa: E731

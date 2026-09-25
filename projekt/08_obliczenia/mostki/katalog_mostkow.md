@@ -1,6 +1,6 @@
 # Katalog mostków cieplnych — Dom LAMELA
 
-Model: `model/budynek.yaml`; źródło węzłów: sekcja `wezly` modelu (20 węzłów). B' = A/(0,5·P) = 181.78/(0,5·57.90) = 6.28 m (obrys zewn. parteru) [INT]. Wygenerowano: `PYTHONPATH=src python3 tools/katalog_mostkow.py --budynek model/budynek.yaml`.
+Model: `model/budynek.yaml`; źródło węzłów: sekcja `wezly` modelu (20 węzłów) + 2 węzły spoza sekcji wykryte w geometrii (WZ-X…, długości z geometrii). B' = A/(0,5·P) = 181.78/(0,5·57.90) = 6.28 m (obrys zewn. parteru) [INT]. Wygenerowano: `PYTHONPATH=src python3 tools/katalog_mostkow.py --budynek model/budynek.yaml --dodatkowe`.
 
 **Cel** (brief sekcja 9 — wymaganie Inwestora): potwierdzenie symulacją numeryczną ciągłości izolacji i braku ryzyka pleśni w węzłach oraz kontrola odprowadzenia wody, hydroizolacji, paroizolacji, rur spustowych i drenażu.
 
@@ -36,6 +36,8 @@ Model: `model/budynek.yaml`; źródło węzłów: sekcja `wezly` modelu (20 węz
 | [WZ-12](#wz-12) | Narożniki wypukłe ścian zewnętrznych | −0,052 | +0,066 | +0,066 | 17,17 | 0,926 | ciągła | ✓ | **BEZMOSTKOWY** |
 | [WZ-16a](#wz-16a) | Belki wspornikowe B4/B5 i belka B3 w linii izolacji wspornika bryły A (ciągłość wełny pod ST2Z) — ściana SZ2 na krawędzi, belka B4, płyta PL-2 (łącznik) | +0,057 | +0,236 | +0,236 | 13,92 | 0,840 | ciągła | ✓ | **DO POPRAWY** |
 | [WZ-16b](#wz-16b) | Belki wspornikowe B4/B5 i belka B3 w linii izolacji wspornika bryły A (ciągłość wełny pod ST2Z) — ściana SZ1 na krawędzi, belka B5 | −0,044 | +0,123 | +0,123 | 15,46 | 0,880 | ciągła | ✓ | **BEZMOSTKOWY** |
+| [WZ-X1](#wz-x1) | Dach D2/D3 (SD2) – ściana SZ1 wyższej kondygnacji na krawędzi (pod spodem ściana SW18, pomieszczenia ogrzewane) — węzeł spoza sekcji `wezly` | −0,006 | +0,022 | +0,022 | 18,64 | 0,964 | ciągła | ✓ | **BEZMOSTKOWY** |
+| [WZ-X2](#wz-x2) | Dach D4 (DZ1) – ściana SZ1 wyższej kondygnacji na krawędzi (pod spodem ściana SW18, pomieszczenia ogrzewane) — węzeł spoza sekcji `wezly` | −0,001 | +0,022 | +0,022 | 18,64 | 0,964 | ciągła | ✓ | **BEZMOSTKOWY** |
 
 \* woda / wilgoć: liczba pozycji listy kontrolnej ✗ BRAK / ! UWAGA (bez pozycji „izolacja”) — dane do uzupełnienia w modelu lub rozwiązania do pokazania na detalu; ✓ — bez braków.
 
@@ -76,8 +78,10 @@ Zestawienie pozycji ✗ BRAK / ! UWAGA z list kontrolnych wszystkich węzłów (
 | WZ-12 | Narożniki wypukłe ścian zewnętrznych | +0,066 | 49,50 | +3,24 |
 | WZ-16a | Belki wspornikowe B4/B5 i belka B3 w linii izolacji wspornika bryły A (ciągłość wełny pod ST2Z) — ściana SZ2 na krawędzi, belka B4, płyta PL-2 (łącznik) | +0,236 | 1,00 | +0,24 |
 | WZ-16b | Belki wspornikowe B4/B5 i belka B3 w linii izolacji wspornika bryły A (ciągłość wełny pod ST2Z) — ściana SZ1 na krawędzi, belka B5 | +0,123 | 1,00 | +0,12 |
+| WZ-X1 | Dach D2/D3 (SD2) – ściana SZ1 wyższej kondygnacji na krawędzi (pod spodem ściana SW18, pomieszczenia ogrzewane) — węzeł spoza sekcji `wezly` | +0,022 | 14,62 | +0,33 |
+| WZ-X2 | Dach D4 (DZ1) – ściana SZ1 wyższej kondygnacji na krawędzi (pod spodem ściana SW18, pomieszczenia ogrzewane) — węzeł spoza sekcji `wezly` | +0,022 | 3,03 | +0,07 |
 
-**H_TB = Σ ψ_oi·l_oi = 51,37 W/K** (węzły liniowe wg modelu; warianty porównawcze bez długości nie są sumowane; mostki punktowe χ — poza zakresem 2D).
+**H_TB = Σ ψ_oi·l_oi = 51,76 W/K** (węzły liniowe wg modelu; warianty porównawcze bez długości nie są sumowane; mostki punktowe χ — poza zakresem 2D).
 
 ## Karty węzłów
 
@@ -550,6 +554,64 @@ Wykresy szczegółowe: [temperatura](rys/WZ-16a_temperatura.png), [strumien](rys
 *Na rysunku:* szczelność powietrzna: płyta ŻB + tynk ściany górnej doprowadzony do płyty.
 
 Wykresy szczegółowe: [temperatura](rys/WZ-16b_temperatura.png), [strumien](rys/WZ-16b_strumien.png), [powierzchnia](rys/WZ-16b_theta_si.png); dane wejściowe, warunki brzegowe, siatka, elementy flankujące — [szczegoly_obliczen.md](szczegoly_obliczen.md)
+
+### WZ-X1
+
+**Dach D2/D3 (SD2) – ściana SZ1 wyższej kondygnacji na krawędzi (pod spodem ściana SW18, pomieszczenia ogrzewane) — węzeł spoza sekcji `wezly`** — ocena **BEZMOSTKOWY** (ψ_e ≤ 0,01 W/(m·K), f_Rsi spełnione, izolacja ciągła)
+
+![WZ-X1 — karta węzła](WZ-X1_karta.png)
+
+* ψ_e = −0,006, ψ_i = +0,022, ψ_oi = +0,022 W/(m·K); L_2D = 0,3936 W/(m·K); odniesienie ψ_oi: domyślna 0,75, dobra praktyka 0,20 (stropodach–ściana zewnętrzna z attyką (izolacja attyki z 3 stron))
+* θ_si,min = 18,64 °C, f_Rsi = 0,964 (≥ 0,72 — brak ryzyka pleśni i kondensacji powierzchniowej)
+* izolacja: ciągła (brak drogi przez materiały o λ > 0,12 W/(m·K) z wnętrza na zewnątrz)
+* siatka: 118728 komórek, zmiana Φ przy podwojeniu 0,010 %, bilans 2.6e-12
+
+| | temat | pozycja listy kontrolnej |
+|---|---|---|
+| ✓ OK | izolacja | linia izolacji ciągła („test ołówka” na siatce: brak drogi przez materiały o λ > 0,12) |
+| ✓ OK | paro | szczelność powietrzna ściany SZ1: tynk wewnętrzny ciągły (TYNK_GIPS) — do stropu i posadzki |
+| ✓ OK | paro | paroizolacja stropodachu SD1: PAROIZ_AL — wywinięta na attykę |
+| ✓ OK | hydro | hydroizolacja stropodachu SD1: MEMB_TPO |
+| ✓ OK | hydro | wywinięcie hydroizolacji na attykę ≥ 15 cm ponad warstwę wierzchnią (brief 9.4) |
+| ✓ OK | woda | spadek dachu 0.02 (wymagany ≥ 2 %, izolacja spadkowa) |
+| ✓ OK | woda | wpusty dachowe: 2 szt. |
+| ✓ OK | woda | przelewy awaryjne w attyce: 3 szt. |
+| ✓ OK | rury | rury spustowe: RS1 (wewn_szacht → zbiornik), RS2 (wewn_szacht → zbiornik) |
+| i INFO | woda | obróbka korony attyki ze spadkiem ≥ 5 % do dachu i okapnikami; wpust / przelew przez attykę — mostek punktowy χ (poza modelem 2D; kołnierz izolowany) |
+
+*Uwaga:* Grupy stref: i — ogrzewane, u — nieogrzewane, e — zewnętrze; ψ dla każdej pary grup z elementami flankującymi (PN-EN ISO 10211, więcej niż dwie temperatury).
+*Na rysunku:* hydroizolacja dachu wywinięta na ścianę ≥ 15 cm ponad warstwę wierzchnią (substrat / żwir); spadek dachu ≥ 2 % od ściany; opaska żwirowa ≥ 0,5 m przy ścianie.
+
+Wykresy szczegółowe: [temperatura](rys/WZ-X1_temperatura.png), [strumien](rys/WZ-X1_strumien.png), [powierzchnia](rys/WZ-X1_theta_si.png); dane wejściowe, warunki brzegowe, siatka, elementy flankujące — [szczegoly_obliczen.md](szczegoly_obliczen.md)
+
+### WZ-X2
+
+**Dach D4 (DZ1) – ściana SZ1 wyższej kondygnacji na krawędzi (pod spodem ściana SW18, pomieszczenia ogrzewane) — węzeł spoza sekcji `wezly`** — ocena **BEZMOSTKOWY** (ψ_e ≤ 0,01 W/(m·K), f_Rsi spełnione, izolacja ciągła)
+
+![WZ-X2 — karta węzła](WZ-X2_karta.png)
+
+* ψ_e = −0,001, ψ_i = +0,022, ψ_oi = +0,022 W/(m·K); L_2D = 0,4097 W/(m·K); odniesienie ψ_oi: domyślna 0,75, dobra praktyka 0,20 (stropodach–ściana zewnętrzna z attyką (izolacja attyki z 3 stron))
+* θ_si,min = 18,64 °C, f_Rsi = 0,964 (≥ 0,72 — brak ryzyka pleśni i kondensacji powierzchniowej)
+* izolacja: ciągła (brak drogi przez materiały o λ > 0,12 W/(m·K) z wnętrza na zewnątrz)
+* siatka: 135864 komórek, zmiana Φ przy podwojeniu 0,008 %, bilans 2.1e-11
+
+| | temat | pozycja listy kontrolnej |
+|---|---|---|
+| ✓ OK | izolacja | linia izolacji ciągła („test ołówka” na siatce: brak drogi przez materiały o λ > 0,12) |
+| ✓ OK | paro | szczelność powietrzna ściany SZ1: tynk wewnętrzny ciągły (TYNK_GIPS) — do stropu i posadzki |
+| ✓ OK | paro | paroizolacja stropodachu SD1: PAROIZ_AL — wywinięta na attykę |
+| ✓ OK | hydro | hydroizolacja stropodachu SD1: MEMB_TPO |
+| ✓ OK | hydro | wywinięcie hydroizolacji na attykę ≥ 15 cm ponad warstwę wierzchnią (brief 9.4) |
+| ✓ OK | woda | spadek dachu 0.02 (wymagany ≥ 2 %, izolacja spadkowa) |
+| ✓ OK | woda | wpusty dachowe: 2 szt. |
+| ✓ OK | woda | przelewy awaryjne w attyce: 3 szt. |
+| ✓ OK | rury | rury spustowe: RS1 (wewn_szacht → zbiornik), RS2 (wewn_szacht → zbiornik) |
+| i INFO | woda | obróbka korony attyki ze spadkiem ≥ 5 % do dachu i okapnikami; wpust / przelew przez attykę — mostek punktowy χ (poza modelem 2D; kołnierz izolowany) |
+
+*Uwaga:* Grupy stref: i — ogrzewane, u — nieogrzewane, e — zewnętrze; ψ dla każdej pary grup z elementami flankującymi (PN-EN ISO 10211, więcej niż dwie temperatury).
+*Na rysunku:* hydroizolacja dachu wywinięta na ścianę ≥ 15 cm ponad warstwę wierzchnią (substrat / żwir); spadek dachu ≥ 2 % od ściany; opaska żwirowa ≥ 0,5 m przy ścianie.
+
+Wykresy szczegółowe: [temperatura](rys/WZ-X2_temperatura.png), [strumien](rys/WZ-X2_strumien.png), [powierzchnia](rys/WZ-X2_theta_si.png); dane wejściowe, warunki brzegowe, siatka, elementy flankujące — [szczegoly_obliczen.md](szczegoly_obliczen.md)
 
 ## Ograniczenia
 
