@@ -1,0 +1,19 @@
+{
+ "pliki": {
+  "index.html": 799268,
+  "assets/ulica_169.webp": 64876,
+  "assets/lotniczy_169.webp": 175020,
+  "assets/aksonometria_169.webp": 64128,
+  "assets/lotniczy_43.webp": 176388,
+  "assets/ogrod_169.webp": 83512,
+  "assets/ogrod_43.webp": 83784,
+  "assets/aksonometria_43.webp": 71736,
+  "assets/model.glb": 5146580,
+  "assets/ulica_43.webp": 54812,
+  "assets/szkic.png": 91505
+ },
+ "razem": 6811609,
+ "bledy": [
+  "niedozwolone hosty: ['https://fonts.googleapis.com']"
+ ]
+}

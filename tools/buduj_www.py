@@ -34,7 +34,7 @@ from lamela.www import schematy as SC  # noqa: E402
 from lamela.www import strona as ST  # noqa: E402
 from lamela.www.szkic import przetworz  # noqa: E402
 
-HOSTY_OK = ("https://cdn.jsdelivr.net/npm/", "https://cdnjs.cloudflare.com/", "https://fonts.googleapis.com/",
+HOSTY_OK = ("https://cdn.jsdelivr.net/npm/", "https://cdnjs.cloudflare.com/", "https://fonts.googleapis.com",
             "https://fonts.gstatic.com")
 LIMIT_STRONA, LIMIT_OBRAZ, LIMIT_RAZEM = 16e6, 15e6, 64e6
 
@@ -107,7 +107,9 @@ def _dalej(a, D, tr, glb, dist, assets, cache, teraz, t0) -> int:
     ss = 1 if a.szybko else 2
     wej = [a.budynek, a.dzialka] + sorted(str(p) for p in (ROOT / "src" / "lamela").glob("*.py")) + \
         sorted(str(p) for p in (ROOT / "src" / "lamela" / "model3d").glob("*.py")) + [str(Path(RN.__file__))]
-    klucz = RN.klucz_cache(wej, RN.UJECIA, RN.PROPORCJE, ss, extra=D["drzewa_bud"])
+    m = D["model"]
+    pomin = RN.drzewa_przeslaniajace(D["drzewa_bud"], m.bbox())
+    klucz = RN.klucz_cache(wej, RN.UJECIA, RN.PROPORCJE, ss, extra=[t[0] for t in pomin])
     rdir = cache / "rendery" / klucz
     kotwice = SC.kotwice_szkicu(D)
     if a.bez_renderow and not rdir.exists():
@@ -117,7 +119,22 @@ def _dalej(a, D, tr, glb, dist, assets, cache, teraz, t0) -> int:
             return 2
         rdir = stare[-1].parent
         print(f"    UWAGA: rendery z cache {rdir.name} (model mógł się zmienić)", flush=True)
-    R = RN.renderuj(glb, rdir, ss=ss, kotwice=kotwice, drzewa=D["drzewa_bud"], log=lambda s: print("   ", s, flush=True))
+    log = lambda s: print("   ", s, flush=True)  # noqa: E731
+    glb_ogrod = glb
+    if pomin and not (rdir / "ogrod_169.png").exists():
+        import copy
+        from lamela.model3d import export_glb
+        ids = {t[0] for t in pomin}
+        ir2 = copy.copy(D["ir"])
+        ir2.prisms = [p for p in D["ir"].prisms if p.element not in ids]
+        ir2.meshes = [q for q in D["ir"].meshes if q.element not in ids]
+        glb_ogrod = cache / "pipeline" / "render_ogrod.glb"
+        export_glb(ir2, glb_ogrod, model=m)
+        print(f"    ujęcie od ogrodu bez drzew przesłaniających elewację: {', '.join(sorted(ids))}", flush=True)
+    ogr = {k: v for k, v in RN.UJECIA.items() if k == "ogrod"}
+    R = RN.renderuj(glb_ogrod, rdir, ujecia=ogr, ss=ss, kotwice=kotwice, log=log)
+    R = RN.renderuj(glb, rdir, ujecia={k: v for k, v in RN.UJECIA.items() if k not in ogr}, ss=ss, kotwice=kotwice, log=log)
+    R["pominiete_drzewa"] = [dict(id=t[0], gatunek=t[4]) for t in pomin]
     for u in RN.UJECIA:
         for p in RN.PROPORCJE:
             n = webp(rdir / f"{u}_{p}.png", assets / f"{u}_{p}.webp")

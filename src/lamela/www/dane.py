@@ -329,5 +329,6 @@ def zbierz(budynek, dzialka, wyposazenie=None, fizyka: bool = True) -> dict:
     if m.dz is not None:
         for t in m.dz.raw.get("drzewa") or []:
             x, y = m.dz.do_budynku(t["xy"])
-            D["drzewa_bud"].append((float(x), float(y), float(t.get("sr_korony") or 3.0) / 2))
+            D["drzewa_bud"].append((str(t.get("id")), float(x), float(y), float(t.get("sr_korony") or 3.0) / 2,
+                                    str(t.get("gat") or "")))
     return D

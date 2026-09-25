@@ -159,7 +159,9 @@ def grupy_pionow(dane: DaneBudynku, przybory: list[Przybor]) -> list[Pion]:
     by_room: dict[tuple, list[Przybor]] = {}
     for p in wew:
         by_room.setdefault((p.kond, p.pom), []).append(p)
-    jawne = dane.inst.get("piony") or []
+    # tylko piony kanalizacyjne: pole `rodzaj` (instalacje.piony, runda 2 K-8) — rury spustowe, piony c.o., wentylacji
+    # i teletechniki nie zbierają przyborów (brak pola → zgodność wstecz: kanalizacja)
+    jawne = [j for j in (dane.inst.get("piony") or []) if str(j.get("rodzaj") or "kanalizacja") == "kanalizacja"]
     piony: list[Pion] = [Pion(id=str(j.get("id", f"P{i + 1}")), xy=(float(j["xy"][0]), float(j["xy"][1])),
                               kondygnacje=[], zrodlo="instalacje.yaml") for i, j in enumerate(jawne) if j.get("xy")]
     rooms = sorted(by_room.items(), key=lambda kv: (kond_idx.get(kv[0][0], 0), kv[0][1]))

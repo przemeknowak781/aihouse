@@ -75,6 +75,14 @@ def _slonce_txt(r: dict) -> str:
     return f'{d.day}.{d.month:02d}, godz. {s.get("godz", "")}, Słońce: azymut {fm(s["az"], 0)}°, wysokość {fm(s["el"], 0)}°'
 
 
+def _pominiete(R: dict) -> str:
+    d = R.get("pominiete_drzewa") or []
+    if not d:
+        return ""
+    return "W ujęciu pominięto " + ", ".join(f'{x["gatunek"].split("(")[0].strip()} ({x["id"]})' for x in d) + \
+        " — drzewo z projektu zieleni zasłaniałoby elewację."
+
+
 def naglowek(tr: dict, W: dict) -> str:
     mk = tr["marka"]
     nav = [("parametry", "Parametry"), ("galeria", "Wizualizacje"), ("rzuty", "Rzuty"), ("model-3d", "Model 3D"),
@@ -108,7 +116,7 @@ def hero(D: dict, tr: dict, W: dict, R: dict, sep: str) -> str:
             f'<img src="assets/ogrod_169.webp" width="1920" height="1080" fetchpriority="high" '
             f'alt="Dom LAMELA od strony ogrodu: przeszklony parter, pełne piętro z boksem w ramie i najwyższa bryła w pionowych lamelach">'
             f'</picture>{adn}</figure>'
-            f'<div class="hero-cap"><span>Widok od ogrodu, render z modelu 3D · {E(_slonce_txt(info))}</span>'
+            f'<div class="hero-cap"><span>Widok od ogrodu, render z modelu 3D · {E(_slonce_txt(info))}. {E(_pominiete(R))}</span>'
             f'<span>A–G: litery ze szkicu Inwestora</span></div>'
             f'<div class="hero-tyt"><h1 id="h-nazwa"><span class="kod">Projekt {E(tr["marka"]["kod_projektu"])} · dom jednorodzinny</span>'
             f'{E(h["naglowek"])}</h1><div><p class="lead">{tx(h["lead"], W)}</p><div class="cta">'
@@ -221,6 +229,8 @@ def galeria(D: dict, tr: dict, W: dict, R: dict, sep: str) -> str:
     for i, (u, tyt, op) in enumerate(GAL):
         info = R.get("pliki", {}).get(f"{u}_169") or {}
         sl = _slonce_txt(info) if u != "aksonometria" else "światło studyjne, rzut aksonometryczny"
+        if u == "ogrod" and _pominiete(R):
+            sl += ". " + _pominiete(R)
         opis = f"{tyt} — {op}. {sl}"
         fig += (f'<figure class="{"szer" if i == 0 else ""}"><button type="button" data-duzy="assets/{u}_169.webp" '
                 f'data-opis="{E(opis)}" aria-label="Powiększ: {E(tyt)}"><picture>'

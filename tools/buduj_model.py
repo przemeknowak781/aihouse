@@ -520,6 +520,10 @@ O("O2-12", "S2-15", 6.20, 7.10, "drzwi", "D4A", 2.10, 0.0, ow("R", "na_zewn"),
 #    wg WT §134 / PN-EN 12831-1 NA (pokoje, kuchnia, hol 20 °C; łazienki 24 °C; pom. gosp./techn. 16 °C; garaż nieogrzewany);
 #    wentylacja: wywiew min. wg PN-83/B-03430/Az3:2000 (kuchnia z kuchenką elektr. > 3 os. 50 m³/h, łazienka 50, WC 30,
 #    pom. bezokienne 15, pralnia ≥ 2 h⁻¹); nawiew do pokoi — bilans zrównoważony (Σnaw = Σwyw), ≥ 20 m³/h·os. (W-161)
+#    Runda 2 (K-9): wywiew — kuchnia 50, łazienki 4 × 50, WC 30, pralnia 40 (≥ 2 h⁻¹ · 18,4 m³), spiżarnia 15 (jedna przestrzeń ze
+#    strefami 0.15/0.16 — podział wyłącznie dla PU, bez ścianek), pom. techniczne 0.12 i 2.07 po 15 → Σ 365 m³/h; nawiew — salon z jadalnią
+#    90, pokoje 40/40/40, pokój rodzinny 50, sypialnia 60 (2 os.), gabinet 45 → Σ 365 m³/h = Σwyw; przepływ z pokoi przez hole do kuchni
+#    i łazienek (W-161, WT §150 ust. 2–3); szachty SI bez wywiewu. Strumień okresowy (okap 120) 435 ≤ V_max centrali (W-162, W-164).
 # =====================================================================================================================
 PM: list[dict] = []
 
@@ -559,15 +563,15 @@ PMS("0.05", "P0", "Spiżarnia", None, [(B2_X0, Y3_n), (B2_X1, Y3_n), (B2_X1, Y_H
     kat="pomocnicza", posadzka="GRES", temp=16, wyw=15, rodzaj="pomocnicze", podloga="POD-0L",
     uwagi="część pod górnym odcinkiem biegu 2, h ≥ 2,20 (PU 100 %); dalej schowek pod schodami 0.15/0.16 (bez ścianki)")
 PMS("0.15", "P0", "Schowek pod schodami (h 1,40–2,20)", None, [(B2_X0, Y_H22), (B2_X1, Y_H22), (B2_X1, Y_H14), (B2_X0, Y_H14)],
-    kat="pomocnicza", posadzka="GRES", temp=16, rodzaj="pomocnicze", podloga="POD-0L", wys=1.80,
+    kat="pomocnicza", posadzka="GRES", temp=16, rodzaj="strefa_spizarni", podloga="POD-0L", wys=1.80,
     uwagi="schowek (nie pomieszczenie gospodarcze — WT §97): h 1,40–2,20, PU 50 % (RPB §20 / PN-ISO 9836, W-316)")
 PMS("0.16", "P0", "Schowek pod spocznikiem (h < 1,40)", None,
     [(B2_X0, Y_H14), (B2_X1, Y_H14), (B2_X1, Y4_i), (XC_e, Y4_i), (XC_e, Y_SPOCZ), (B2_X0, Y_SPOCZ)],
-    kat="pomocnicza", posadzka="GRES", temp=16, rodzaj="pomocnicze", podloga="POD-0L", wys=1.37,
+    kat="pomocnicza", posadzka="GRES", temp=16, rodzaj="strefa_spizarni", podloga="POD-0L", wys=1.37,
     uwagi="schowek pod spocznikiem: h ≈ 1,37–1,40 — nie wlicza się do PU (0 %, W-316)")
 PMS("0.06", "P0", "Salon + jadalnia + kuchnia", None,
     [(XA_i, Y1_i), (XE_i, Y1_i), (XE_i, Y3_s), (PAS[2], Y3_s), (PAS[2], PAS[1]), (PAS[0], PAS[1]), (PAS[0], Y3_s), (XA_i, Y3_s)],
-    kat="podstawowa", pobyt=True, temp=20, naw=100, wyw=50, rodzaj="kuchnia",
+    kat="podstawowa", pobyt=True, temp=20, naw=90, wyw=50, rodzaj="kuchnia",
     uwagi="strefa dzienna; kuchnia z wyspą — zabudowa ciągła przy ścianie osi E (y 1,30–5,02, przeszczep J1); wywiew okap 50/120 m³/h")
 PMS("0.07", "P0", "Pas komunikacyjny przy schodach", None, [(PAS[0], PAS[1]), (PAS[2], PAS[1]), (PAS[2], PAS[3]), (PAS[0], PAS[3])], kat="ruchu",
     temp=20, rodzaj="komunikacja", uwagi="wydzielony ekranem z lamel h 2,10 m (LAM-P0); dojście hol → stopa schodów bez przechodzenia przez strefę mebli")
@@ -588,7 +592,7 @@ PMS("0.13", "P0", "Garaż 2-stanowiskowy", (15.3, 6.2), kat="pomocnicza", posadz
 # ---- P1
 PMS("1.01", "P1", "Hol", None, [(XA_i, yH + FD), (XE_i, yH + FD), (XE_i, Y3_s), (XA_i, Y3_s)],
     kat="ruchu", temp=20, rodzaj="komunikacja")
-PMS("1.02", "P1", "Pokój rodzinny / biblioteka (boks C)", (8.0, 1.8), kat="podstawowa", pobyt=True, temp=20, naw=40, rodzaj="pokoj")
+PMS("1.02", "P1", "Pokój rodzinny / biblioteka (boks C)", (8.0, 1.8), kat="podstawowa", pobyt=True, temp=20, naw=50, rodzaj="pokoj")
 PMS("1.03", "P1", "Pokój dziecka 1", (1.9, 1.8), kat="podstawowa", pobyt=True, temp=20, naw=40, rodzaj="pokoj")
 PMS("1.04", "P1", "Pokój dziecka 2", (1.9, 6.9), kat="podstawowa", pobyt=True, temp=20, naw=40, rodzaj="pokoj")
 PMS("1.05", "P1", "Łazienka dzieci (wanna)", (4.6, 7.5), kat="pomocnicza", posadzka="GRES", sciany="PLYTKI_SC", sufit="SUF_GK", temp=24, wyw=50,
@@ -601,22 +605,22 @@ PMS("1.08", "P1", "Pralnia z suszarnią", (10.9, 7.0), kat="pomocnicza", posadzk
     podloga="POD-1L", uwagi="zmniejszona do ≈ 6,6 m² (przeszczep J1); wywiew ≥ 2 h⁻¹")
 # ---- P2
 PMS("2.01", "P2", "Hol", None, [(xC + FD, Y_TH + FD), (xD - FD, Y_TH + FD), (xD - FD, Y3_s), (xC + FD, Y3_s)], kat="ruchu", temp=20, rodzaj="komunikacja")
-PMS("2.02", "P2", "Sypialnia rodziców", (1.3, 2.4), kat="podstawowa", pobyt=True, temp=20, naw=50, rodzaj="pokoj",
+PMS("2.02", "P2", "Sypialnia rodziców", (1.3, 2.4), kat="podstawowa", pobyt=True, temp=20, naw=60, rodzaj="pokoj",
     uwagi="naroże S+W nad wspornikiem; okna za lamelami")
 PMS("2.03", "P2", "Garderoba (przedpokój apartamentu)", (4.7, 2.4), kat="pomocnicza", temp=20, wyw=0, rodzaj="pomocnicze")
 PMS("2.04", "P2", "Łazienka rodziców", (4.6, 7.5), kat="pomocnicza", posadzka="GRES", sciany="PLYTKI_SC", sufit="SUF_GK", temp=24, wyw=50,
     rodzaj="lazienka", podloga="POD-1L", uwagi="nad łazienkami P1 i P0 (pion SI)")
-PMS("2.05", "P2", "Gabinet / pokój gościnny okazjonalny", (10.2, 2.4), kat="podstawowa", pobyt=True, temp=20, naw=40, rodzaj="pokoj",
+PMS("2.05", "P2", "Gabinet / pokój gościnny okazjonalny", (10.2, 2.4), kat="podstawowa", pobyt=True, temp=20, naw=45, rodzaj="pokoj",
     uwagi="bez sanitariatu na P2 poza apartamentem — stały 5. mieszkaniec w pokoju 0.10 z łazienką 0.09 (A3 D-7)")
 PMS("2.06", "P2", "Klatka schodowa (wyjście z biegu 2, pustka)", None,
     [(XC_e, Y3_n), (XM_e, Y3_n), (XM_e, Y3_s), (XD_w, Y3_s), (XD_w, Y4_i), (XC_e, Y4_i)], kat="ruchu",
     temp=20, rodzaj="komunikacja", uwagi="świetlik SW1 nad spocznikiem, okno pn. ON4; wyłączona z PU")
-PMS("2.07", "P2", "Pom. techniczne (centrala rekuperacyjna, wyłaz na dach)", (7.2, 1.3), kat="techniczna", posadzka="GRES", temp=16,
+PMS("2.07", "P2", "Pom. techniczne (centrala rekuperacyjna, wyłaz na dach)", (7.2, 1.3), kat="techniczna", posadzka="GRES", temp=16, wyw=15,
     rodzaj="techniczne", podloga="POD-1L", uwagi="centrala 450 m³/h; wyłaz 0,90 × 0,90 m z drabiną (W-065)")
 # szacht instalacyjny SI (0,40 × 1,12 m) — przestrzeń techniczna ogrzewana (obudowa GKF EI 30), bez PU; na każdej kondygnacji
 for _k, _pid in (("P0", "0.14"), ("P1", "1.09"), ("P2", "2.08")):
     PMS(_pid, _k, "Szacht instalacyjny SI", ((SI[0] + SI[2]) / 2, (SI[1] + SI[3]) / 2), kat="techniczna", posadzka=None, sciany=None, sufit=None,
-        temp=20, rodzaj="techniczne", uwagi="pion K1 Ø110, RS1/RS2 DN100 (otulina), kanały reku; rewizje z łazienek")
+        temp=20, rodzaj="szacht", uwagi="pion K1 Ø110, RS1/RS2 DN100 (otulina); rewizje z łazienek; szacht zamknięty (obudowa GKF EI 30) — bez nawiewu i wywiewu (nie jest pomieszczeniem w rozumieniu PN-83/B-03430; runda 2 K-9)")
 
 
 # =====================================================================================================================
@@ -1437,10 +1441,20 @@ INSTAL = {
         "czerpnia": CZERPNIA, "wyrzutnia": WYRZUTNIA,
         "pompa_ciepla_jz": {"xy": [16.80, -1.05], "ustawienie": "wolnostojaca", "odl_granica_E": 7.0},
     },
-    "piony": [{"id": "K1", "xy": [5.57, 6.20], "opis": "pion kanalizacyjny Ø110 w SI, wywiewka ponad dach D1"},
-              {"id": "K2", "xy": [9.70, 8.52], "opis": "pion Ø110 (WC P0, WC z natryskiem i pralnia P1), zawór napowietrzający PN-EN 12380"},
-              {"id": "RS1", "xy": [5.57, 5.45], "opis": "rura spustowa DN100 w SI"}, {"id": "RS2", "xy": [5.57, 5.85], "opis": "rura spustowa DN100 w SI"},
-              {"id": "RS6", "xy": [17.95, 0.35], "opis": "rura spustowa DN100 w pom. technicznym"}],
+    # runda 2 (K-8, BRAKI PT-IS poz. 15, 20): każdy pion z polem `rodzaj` (kanalizacja | deszczowa | woda | co | wentylacja |
+    # teletechnika) i listą kondygnacji `kond` — rury spustowe nie są pionami kanalizacji sanitarnej (PN-EN 12056-2/-3: systemy
+    # rozdzielcze; WT §126 ust. 1 — wody opadowe odprowadzane oddzielnie)
+    "piony": [{"id": "K1", "xy": [5.57, 6.20], "rodzaj": "kanalizacja", "kond": ["P0", "P1", "P2"],
+               "opis": "pion kanalizacyjny Ø110 w SI, wywiewka ponad dach D1 (z = pokrycie lokalne + 0,50)"},
+              {"id": "K2", "xy": [9.70, 8.52], "rodzaj": "kanalizacja", "kond": ["P0", "P1"],
+               "opis": "pion Ø110 (WC P0, WC z natryskiem i pralnia P1), zawór napowietrzający PN-EN 12380"},
+              {"id": "RS1", "xy": [5.57, 5.45], "rodzaj": "deszczowa", "kond": ["P0", "P1", "P2"], "opis": "rura spustowa DN100 w SI (WP1, D1)"},
+              {"id": "RS2", "xy": [5.57, 5.85], "rodzaj": "deszczowa", "kond": ["P0", "P1", "P2"], "opis": "rura spustowa DN100 w SI (WP2, D1)"},
+              {"id": "RS6", "xy": [17.95, 0.35], "rodzaj": "deszczowa", "kond": ["P0"], "opis": "rura spustowa DN100 w pom. technicznym (WP6, D4)"},
+              {"id": "PCO", "xy": [11.80, 4.40], "rodzaj": "co", "kond": ["P0", "P1", "P2"],
+               "opis": "piony c.o. zasilanie/powrót rozdzielaczy R-P1 i R-P2 (PE-X/Al 32, izolacja wg WT zał. 2 pkt 1.5): z pom. 0.12 "
+                       "w warstwie podłogi P0 do zabudowy kuchni (słupek, x 11,80), przy R-P1 w holu 1.01, na P2 w obudowie przy ścianie "
+                       "wsch. 2.05 i w warstwie podłogi do R-P2 — trasa do potwierdzenia w PT-IS"}],
     "przybory_dodatkowe": [{"kond": "P0", "typ": "zawor_ogrodowy", "xy": [1.00, -EXT], "obrot": -90},
                            {"kond": "P0", "typ": "zawor_ogrodowy", "xy": [xF + EXT, 7.50], "obrot": 0},
                            {"kond": "P0", "typ": "wpust_podlogowy", "xy": [16.00, 1.60], "obrot": 0}],

@@ -87,34 +87,16 @@ def rzut_punktow(cam: dict, W: int, H: int, punkty: list) -> list:
     return out
 
 
-def kadr_ogrodowy(v: dict, info: dict, W: int, H: int, drzewa: list, margines: float = 1.0) -> dict:
-    """Ujęcie z poziomu oczu od ogrodu bez pnia/korony drzewa na pierwszym planie: kamerę stawia się tuż przed
-    najbliższym drzewem stojącym w pasie widoku (drzewa z dzialka.yaml, układ budynku: (x, y, promień korony)),
-    a kąt widzenia dobiera tak, by zmieścić szerokość bryły i jej najwyższy punkt (obiektyw przesuwny)."""
-    x0, y0, z0, x1, y1, z1 = info["bbox_budynek"]
-    cam = v["camera"]
-    xc, yc = cam["pos"][0], cam["pos"][1]
-    zeye = cam["pos"][2]
-    szer = (x1 - x0) / 0.80
-    blok = [ty + r + margines for tx, ty, r in drzewa if ty < y0 and abs(tx - xc) < szer / 2 + r and ty + r > yc]
-    if not blok:
-        return v
-    yc = min(max(blok), y0 - 6.0)
-    d = y0 - yc
-    asp = W / H
-    hfov = 2 * math.atan(szer / 2 / d)
-    vfov = 2 * math.atan(math.tan(hfov / 2) / asp)
-    s = 0.22
-    wys = (z1 - zeye) / (d + (y1 - y0) * 0.35) / 0.92      # tangens kąta do najwyższego punktu (z zapasem)
-    vfov = max(vfov, 2 * math.atan(wys / (1 + 2 * s)))
-    v["camera"] = {**cam, "pos": [xc, yc, zeye], "target": [xc, yc + 100, zeye],
-                   "fov": round(min(70.0, math.degrees(vfov)), 2), "shift": s}
-    v["eye"] = [xc, yc]
-    return v
+def drzewa_przeslaniajace(drzewa: list, bbox: tuple, udzial: float = 0.28) -> list:
+    """Drzewa (id, x, y, r — układ budynku) stojące przed elewacją ogrodową, których korona wchodzi w środkowy pas
+    elewacji (± udzial·szerokości od osi) — pomijane w ujęciu „od ogrodu”, by nie zasłaniały bryły."""
+    x0, y0, x1, y1 = bbox[:4]
+    xc = (x0 + x1) / 2
+    return [t for t in drzewa if t[2] < y0 and abs(t[1] - xc) - t[3] < udzial * (x1 - x0)]
 
 
 def renderuj(glb: Path, cache: Path, ujecia: dict | None = None, proporcje: dict | None = None, ss: int = 2,
-             kotwice: dict | None = None, drzewa: list | None = None, log=print) -> dict:
+             kotwice: dict | None = None, log=print) -> dict:
     """Renderuje brakujące ujęcia do ``cache``; ``kotwice`` = {nazwa: (x, y, z)} rzutowane na kadr 'ogrod'."""
     ujecia = ujecia or UJECIA
     proporcje = proporcje or PROPORCJE
@@ -145,8 +127,6 @@ def renderuj(glb: Path, cache: Path, ujecia: dict | None = None, proporcje: dict
                 key, data, godz, extra = ujecia[u]
                 W, H = proporcje[p]
                 v = next(x for x in R.build_views(info, W, H, key) if x["key"] == key)
-                if key == "c" and drzewa:
-                    v = kadr_ogrodowy(v, info, W, H, drzewa)
                 if "eye" in v:
                     z = page.evaluate("p => LAMELA.groundZ(p)", [v["eye"]])[0]
                     if z is not None:

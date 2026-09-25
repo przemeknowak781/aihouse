@@ -20,19 +20,35 @@ instalacje:
   piony:
   - id: K1
     xy: [5.57, 6.2]
-    opis: pion kanalizacyjny Ø110 w SI, wywiewka ponad dach D1
+    rodzaj: kanalizacja
+    kond: [P0, P1, P2]
+    opis: pion kanalizacyjny Ø110 w SI, wywiewka ponad dach D1 (z = pokrycie lokalne + 0,50)
   - id: K2
     xy: [9.7, 8.52]
+    rodzaj: kanalizacja
+    kond: [P0, P1]
     opis: pion Ø110 (WC P0, WC z natryskiem i pralnia P1), zawór napowietrzający PN-EN 12380
   - id: RS1
     xy: [5.57, 5.45]
-    opis: rura spustowa DN100 w SI
+    rodzaj: deszczowa
+    kond: [P0, P1, P2]
+    opis: rura spustowa DN100 w SI (WP1, D1)
   - id: RS2
     xy: [5.57, 5.85]
-    opis: rura spustowa DN100 w SI
+    rodzaj: deszczowa
+    kond: [P0, P1, P2]
+    opis: rura spustowa DN100 w SI (WP2, D1)
   - id: RS6
     xy: [17.95, 0.35]
-    opis: rura spustowa DN100 w pom. technicznym
+    rodzaj: deszczowa
+    kond: [P0]
+    opis: rura spustowa DN100 w pom. technicznym (WP6, D4)
+  - id: PCO
+    xy: [11.8, 4.4]
+    rodzaj: co
+    kond: [P0, P1, P2]
+    opis: 'piony c.o. zasilanie/powrót rozdzielaczy R-P1 i R-P2 (PE-X/Al 32, izolacja wg WT zał. 2 pkt 1.5): z pom. 0.12 w warstwie podłogi P0 do zabudowy
+      kuchni (słupek, x 11,80), przy R-P1 w holu 1.01, na P2 w obudowie przy ścianie wsch. 2.05 i w warstwie podłogi do R-P2 — trasa do potwierdzenia w PT-IS'
   przybory_dodatkowe:
   - kond: P0
     typ: zawor_ogrodowy

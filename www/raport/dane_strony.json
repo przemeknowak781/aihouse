@@ -1,0 +1,213 @@
+{
+ "wygenerowano": "2026-09-25T05:55:58",
+ "model": {
+  "nazwa": "Dom LAMELA",
+  "wersja": "1.0",
+  "data": "2026-09-25",
+  "stadium": "koncepcja ostateczna (synteza W2 + przeszczepy W1/W3 + poprawki J1–J3)",
+  "autor": "(do uzupełnienia — projektant z uprawnieniami bez ograniczeń)",
+  "zrodlo": "tools/buduj_model.py (model parametryczny)",
+  "uwagi": "WT (t.j. Dz.U. 2022 poz. 1225 ze zm.) w brzmieniu do 19.09.2026, stosowane na podstawie art. 102a PB (oświadczenie Inwestora)"
+ },
+ "wartosci": {
+  "nazwa": "Dom LAMELA",
+  "PU": "239,13 m²",
+  "zabudowa": "187,50 m²",
+  "kubatura": "1 354,5 m³",
+  "wys_zab": "10,28 m",
+  "kondygnacje": "3",
+  "garaz_st": "2",
+  "garaz_A": "37,42 m²",
+  "EP": "57,8",
+  "EP_max": "70",
+  "pv_kWp": "6,45",
+  "dz_szer": "28,20",
+  "dz_gl": "21,15",
+  "dz_lz": "6,00",
+  "droga": "północy",
+  "ogrod": "południa",
+  "zbiornik_V": "5,0",
+  "niecka_A": "24 m²",
+  "wt_uwagi": "WT (t.j. Dz.U. 2022 poz. 1225 ze zm.) w brzmieniu do 19.09.2026, stosowane na podstawie art. 102a PB (oświadczenie Inwestora)",
+  "data": "25.09.2026",
+  "glb_mb": "5,1"
+ },
+ "PU": 239.13,
+ "PU_kond": {
+  "P0": 95.33,
+  "P1": 84.39,
+  "P2": 59.42
+ },
+ "dzialka_min": {
+  "szer": 28.2,
+  "gl": 21.15,
+  "pow": 596.5,
+  "W": {
+   "el": "lamele LAM-W (jak lico, które osłaniają)",
+   "d": 4.0
+  },
+  "E": {
+   "el": "lico P0 z oknami/drzwiami",
+   "d": 4.0
+  },
+  "S": {
+   "el": "taras T1",
+   "d": 1.5
+  },
+  "N": {
+   "el": "płyta/okap PL-DA",
+   "d": 6.0,
+   "zrodlo": "dzialka.yaml: linia_zabudowy ↔ droga.linie_rozgraniczajace (MPZP)"
+  },
+  "ramka": [
+   -5.53,
+   -4.8,
+   22.675,
+   16.35
+  ],
+  "referencyjna": {
+   "szer": 32.0,
+   "gl": 50.0,
+   "pow": 1600.0
+  }
+ },
+ "EP": 57.76629902837829,
+ "EP_max": 70.0,
+ "rendery": {
+  "ogrod_169": {
+   "slonce": {
+    "az": 248.79,
+    "el": 44.5,
+    "data": "2026-06-21",
+    "godz": "16:00"
+   },
+   "W": 1920,
+   "H": 1080,
+   "czas_s": 39.4
+  },
+  "ogrod_43": {
+   "slonce": {
+    "az": 248.79,
+    "el": 44.5,
+    "data": "2026-06-21",
+    "godz": "16:00"
+   },
+   "W": 1600,
+   "H": 1200,
+   "czas_s": 39.8
+  },
+  "ulica_169": {
+   "slonce": {
+    "az": 291.44,
+    "el": 13.25,
+    "data": "2026-06-21",
+    "godz": "19:30"
+   },
+   "W": 1920,
+   "H": 1080,
+   "czas_s": 26.8
+  },
+  "ulica_43": {
+   "slonce": {
+    "az": 291.44,
+    "el": 13.25,
+    "data": "2026-06-21",
+    "godz": "19:30"
+   },
+   "W": 1600,
+   "H": 1200,
+   "czas_s": 19.7
+  },
+  "lotniczy_169": {
+   "slonce": {
+    "az": 171.76,
+    "el": 57.43,
+    "data": "2026-05-20",
+    "godz": "12:30"
+   },
+   "W": 1920,
+   "H": 1080,
+   "czas_s": 14.2
+  },
+  "lotniczy_43": {
+   "slonce": {
+    "az": 171.76,
+    "el": 57.43,
+    "data": "2026-05-20",
+    "godz": "12:30"
+   },
+   "W": 1600,
+   "H": 1200,
+   "czas_s": 14.2
+  },
+  "aksonometria_169": {
+   "slonce": {
+    "az": 200.0,
+    "el": 48.0,
+    "data": "2026-03-21",
+    "godz": "12:00"
+   },
+   "W": 1920,
+   "H": 1080,
+   "czas_s": 11.4
+  },
+  "aksonometria_43": {
+   "slonce": {
+    "az": 200.0,
+    "el": 48.0,
+    "data": "2026-03-21",
+    "godz": "12:00"
+   },
+   "W": 1600,
+   "H": 1200,
+   "czas_s": 10.7
+  }
+ },
+ "kotwice": {
+  "ogrod_169": {
+   "A": {
+    "x": 34.52,
+    "y": 20.63
+   },
+   "B": {
+    "x": 24.65,
+    "y": 43.49
+   },
+   "C": {
+    "x": 64.66,
+    "y": 42.15
+   },
+   "D": {
+    "x": 96.48,
+    "y": 49.74
+   },
+   "E": {
+    "x": 39.42,
+    "y": 72.45
+   },
+   "G": {
+    "x": 89.54,
+    "y": 69.27
+   }
+  },
+  "ogrod_43": {
+   "A": {
+    "x": 29.36,
+    "y": 20.63
+   },
+   "B": {
+    "x": 16.2,
+    "y": 43.49
+   },
+   "C": {
+    "x": 69.55,
+    "y": 42.15
+   },
+   "E": {
+    "x": 35.9,
+    "y": 72.45
+   }
+  }
+ },
+ "cache_renderow": "build/www/rendery/d4185785b688984b"
+}
