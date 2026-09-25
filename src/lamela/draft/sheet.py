@@ -558,8 +558,11 @@ def scale_bar(c, pos, scale: float, length_m: float | None = None, h: float = 1.
 
     Segmenty naprzemiennie czarne/białe; pierwszy segment podzielony na części. ``pos`` = lewy dolny róg [mm]."""
     if length_m is None:
-        length_m = {20: 1.0, 25: 1.0, 50: 5.0, 100: 10.0, 200: 20.0, 250: 25.0, 500: 50.0, 1000: 100.0}.get(int(scale),
-                                                                                                      10.0)
+        # długość „ładna” (1-2-2,5-5) taka, by cała podziałka (z odcinkiem dzielonym) miała ≤ 125 mm na papierze:
+        # 1:5 → 0,5 m, 1:10 → 1 m, 1:20 → 2 m, 1:50 → 5 m, 1:100 → 10 m, 1:500 → 50 m (jak dotąd dla skal 1:50+)
+        lim = 125.0 * scale / 1000.0 / 1.2
+        nice = [0.05, 0.1, 0.2, 0.25, 0.5, 1.0, 2.0, 2.5, 5.0, 10.0, 20.0, 25.0, 50.0, 100.0, 200.0, 250.0, 500.0]
+        length_m = max([v for v in nice if v <= lim + 1e-9] or [nice[0]])
     mm_per_m = 1000.0 / scale
     n = 5
     step = length_m / n
@@ -581,7 +584,7 @@ def scale_bar(c, pos, scale: float, length_m: float | None = None, h: float = 1.
             if i % 2 == 1:
                 c.fill(rect_pts(xa, y0, xb, y0 + bh), layer, "#000000")
             c.rect(xa, y0, xb, y0 + bh, pen=0.18)
-        c.text((x0, y0 + bh + 1.0), fmt.num(step, 1, strip=True), h, ha="center")
+        c.text((x0, y0 + bh + 1.0), fmt.num(step, 2, strip=True), h, ha="center")
         for i in range(n + 1):
             v = i * step
             c.text((xz + i * step * mm_per_m, y0 + bh + 1.0), fmt.num(v, 2, strip=True), h, ha="center")

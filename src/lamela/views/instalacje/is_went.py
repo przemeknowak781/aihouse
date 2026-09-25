@@ -81,14 +81,32 @@ class RysWM(Rysunek):
 
     # --------------------------------------------------------------------------------------------- dane
     def _strumienie(self) -> dict:
+        """Strumienie [m³/h] pomieszczeń: max(model ``went``, bilans modułu energii — minima PN-83/B-03430/Az3);
+        nawiew do pokoju dziennego z aneksem kuchennym wg modelu (moduł energii traktuje go jak kuchnię — bez
+        nawiewu); szachty instalacyjne pominięte."""
         ew = self.W.energia_went
         out = {}
+        model = {r.id: r for r in self.m.pomieszczenia()}
+        roz = []
+        for rid, r in model.items():
+            if "szacht" in (r.nazwa or "").lower():
+                continue
+            w = r.went or {}
+            out[rid] = (float(w.get("naw", 0) or 0), float(w.get("wyw", 0) or 0))
         if ew is not None:
             for p in ew.pomieszczenia:
-                out[p.id] = (float(p.naw or 0.0), float(p.wyw or 0.0))
-        else:
-            for rid, v in (self.W.wentylacja.get("pom") or {}).items():
-                out[rid] = (float(v.get("naw", 0.0)), float(v.get("wyw", 0.0)))
+                if p.id not in out:
+                    continue
+                n0, w0 = out[p.id]
+                n1, w1 = float(p.naw or 0.0), float(p.wyw or 0.0)
+                n, w = max(n0, n1), max(w0, w1)
+                if (abs(n - n0) > 0.5 or abs(w - w0) > 0.5):
+                    roz.append(f"{p.id}: model {num(n0, 0)}/{num(w0, 0)} → bilans {num(n1, 0)}/{num(w1, 0)}")
+                out[p.id] = (n, w)
+        if roz:
+            self.brak("Strumienie powietrza pomieszczeń (went)", "rozbieżność modelu z bilansem wentylacji (moduł energii, "
+                      "PN-83/B-03430/Az3), nawiew/wywiew [m³/h]: " + "; ".join(roz[:12]) + " — na rysunku przyjęto "
+                      "wartości większe", "pomieszczenia[].went: {naw, wyw} (zbilansowane: Σnaw = Σwyw)")
         return out
 
     def _pion(self):
@@ -210,7 +228,7 @@ class RysWM(Rysunek):
         self.sym(S.recuperator, c, rot, w=float(wym[0]), d=float(wym[1]), label="")
         ew = W.energia_went
         cen = (ew.centrala if ew is not None else None) or {}
-        V = max(W.wentylacja.get("suma_naw", 0), W.wentylacja.get("suma_wyw", 0))
+        V = max(sum(v[0] for v in self.went.values()), sum(v[1] for v in self.went.values()))
         lines = [f"Centrala wentylacyjna z odzyskiem ciepła, V_obl = {num(V, 0)} m³/h",
                  (f"V_nom = {cen.get('V_nom_m3h', '—')} m³/h, η_t = {num(100 * float(cen.get('eta_t', 0)), 0)} %, "
                   f"SFP = {num(float(cen.get('SFP_Wh_m3', 0)), 2)} Wh/m³, L_WA = {cen.get('L_WA_dB', '—')} dB(A)")
@@ -278,6 +296,9 @@ class RysWM(Rysunek):
                 f"STRUMIENIE POWIETRZA — {self.kid} [m³/h]", [("Pom.", 16), ("Nazwa", 80), ("Nawiew", 20),
                                                              ("Wywiew", 20)], rows,
                 align=["left", "left", "right", "right"])))
-        if ew is not None:
-            self.notes.append(f"Bilans budynku: Σ nawiew = {num(ew.suma_naw, 0)} m³/h, Σ wywiew = {num(ew.suma_wyw, 0)} "
-                              f"m³/h ({ew.zrodlo_bilansu}).")
+        sn = sum(v[0] for v in self.went.values())
+        sw = sum(v[1] for v in self.went.values())
+        self.notes.append(f"Bilans na rysunkach: Σ nawiew = {num(sn, 0)} m³/h, Σ wywiew = {num(sw, 0)} m³/h — "
+                          "strumienie = max(model, bilans modułu energii" + (f": {ew.zrodlo_bilansu}" if ew is not None
+                                                                             else "") + "); nastawy regulacyjne "
+                          "nawiewników wyrównać do bilansu zrównoważonego przy rozruchu (PN-EN 12599).")

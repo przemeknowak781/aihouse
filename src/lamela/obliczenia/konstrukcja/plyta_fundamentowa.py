@@ -306,3 +306,119 @@ def analiza_plyty_fundamentowej(an, siatka: float = 0.25, c_dol: float = 50.0, c
     kb_chr = kombinacje(odz, p, "char")
     return _obwiednia(pl0, plyty, pod, fvec, kb_uls, kb_chr, e0, P, h, spod, beton, h_el, strefa_el, c_dol, c_gora,
                       fi_zal, an)
+
+
+def _obwiednia(pl0, plyty, pod, fvec, kb_uls, kb_chr, e0, P, h, spod, beton, h_el, strefa_el, c_dol, c_gora, fi_zal,
+               an) -> WynikPlytyFund:
+    from . import fundamenty as fund
+    p = an.p
+    n = len(pl0.els)
+    env = {"dol_x": np.zeros(n), "dol_y": np.zeros(n), "gora_x": np.zeros(n), "gora_y": np.zeros(n)}
+    p_d = p_k = w_k = odr = 0.0
+    V_d = V_k = 0.0
+    for kk, pl in plyty.items():
+        for kb in kb_uls:
+            f_ = sum(a * fvec[c] for c, a in kb.wsp.items() if c in fvec and a)
+            r = pl.rozwiaz_kontakt(f_)
+            wa = wood_armer(r.wynik.m)
+            for key in env:
+                env[key] = np.maximum(env[key], wa[key]) if key.startswith("dol") else np.minimum(env[key], wa[key])
+            p_d = max(p_d, float(r.p.max()))
+            odr = max(odr, 1.0 - float((pl.A_el * r.aktywne).sum() / pl.A_el.sum()))
+            V_d = max(V_d, float(f_[0::3].sum()))
+        for kb in kb_chr:
+            f_ = sum(a * fvec[c] for c, a in kb.wsp.items() if c in fvec and a)
+            r = pl.rozwiaz_kontakt(f_)
+            p_k = max(p_k, float(r.p.max()))
+            w_k = max(w_k, float(r.wynik.w.max()))
+            V_k = max(V_k, float(f_[0::3].sum()))
+    # wymiarowanie na zginanie (pasmo b = 1 m, d wg grubości elementu)
+    fcd, fyd = beton.f_cd, StalZbrojeniowa(f_yk=p.f_yk, gamma_s=p.gamma_s).f_yd
+    xl = StalZbrojeniowa(f_yk=p.f_yk, gamma_s=p.gamma_s).xi_eff_lim(beton)
+    mul = xl * (1 - 0.5 * xl)
+    As, mu_x = {}, np.zeros(n, bool)
+    d_min = None
+    for key, M in env.items():
+        c = (c_dol if key.startswith("dol") else c_gora) / 1000.0
+        d = h_el - c - fi_zal / 2000.0 - (fi_zal / 1000.0 if key.endswith("y") else 0.0)
+        mu = np.abs(M) / (1.0 * d ** 2 * beton.eta * fcd * 1000.0)
+        mu_x |= mu > mul
+        xi = 1 - np.sqrt(np.clip(1 - 2 * np.minimum(mu, mul), 0.0, None))
+        As[key] = xi * 1000.0 * d * 1000.0 * beton.eta * fcd / fyd
+        d_min = d if d_min is None else np.minimum(d_min, d)
+    As_min = np.maximum(0.26 * beton.f_ctm / p.f_yk, 0.0013) * 1000.0 * d_min * 1000.0
+    x0, y0, x1, y1 = P.bounds
+    # nośność podłoża (DA2*): całość płyty + lokalnie pod żebrem (pasmo b_ż + 2h)
+    try:
+        zt = min(float(an._teren_przy((x, y))) for x, y in list(P.exterior.coords)[:-1])
+    except Exception:  # noqa: BLE001
+        zt = 0.0
+    Dz = max(zt - spod, 0.3)
+    wyniki = [pod]
+    nos = fund.nosnosc_podloza(x1 - x0, Dz, V_k, V_d, p.grunt, p, L=y1 - y0,
+                               nazwa="Nośność podłoża pod płytą fundamentową (PN-EN 1997-1 zał. D, DA2*)")
+    wyniki.append(nos)
+    q_Rd = nos.R_d / max(nos.B_ef * nos.L_ef, 1e-9)
+    b_loc = min((e_.get("b", 0.6) for e_ in (an.m.fundamenty().get("elementy") or []) if "os" in e_), default=0.6) + 2 * h
+    loc = fund.nosnosc_podloza(b_loc, Dz, p_d * b_loc, p_d * b_loc, p.grunt, p,
+                               nazwa=f"Nacisk lokalny — maks. docisk MES p_d pod pasmem b = {f(b_loc)} m (żebro + 2h)")
+    loc.warunki.clear()
+    q_Rd_loc = loc.R_d / b_loc
+    loc.krok("Maks. docisk obliczeniowy z MES (obwiednia k_s, kombinacje STR/GEO)", "p_d,max", "", p_d, "kPa", nd=1)
+    loc.warunek("Docisk lokalny do podłoża (pasmo pod żebrem)", p_d, q_Rd_loc, "kPa", "PN-EN 1997-1 6.5.2, zał. D",
+                nd=1, symbol_E="p_d,max", symbol_R="q_Rd")
+    wyniki.append(loc)
+    wo = Wynik(nazwa="Odrywanie płyty od podłoża i osiadanie (MES, kontakt jednostronny)")
+    wo.krok("Udział powierzchni bez kontaktu (maks. po kombinacjach ULS i wariantach k_s)", "A_oder/A", "", odr * 100, "%",
+            nd=1)
+    wo.krok("Maks. docisk charakterystyczny (SLS)", "p_k,max", "", p_k, "kPa", nd=1)
+    wo.krok("Maks. osiadanie sprężyste (SLS, k_s,min)", "w_k,max", "", w_k * 1000, "mm", nd=1)
+    wo.warunek("Osiadanie (PN-EN 1997-1 zał. H: s ≤ 50 mm dla fundamentów bezpośrednich)", w_k * 1000, 50.0, "mm",
+               "PN-EN 1997-1 zał. H", nd=1, symbol_E="w_k", symbol_R="s_dop")
+    wyniki.append(wo)
+    W = WynikPlytyFund(str(e0.get("id")), P, h, spod, beton, pod, pl0.el_c.copy(), pl0.el_ab.copy(), h_el, strefa_el, env,
+                       As, As_min, mu_x, p_d, p_k, w_k, odr, q_Rd, c_dol, c_gora, wyniki, len(kb_uls) * len(plyty))
+    W.wyniki += przebicie_slupow(an, W, plyty, fvec, kb_uls)
+    return W
+
+
+def przebicie_slupow(an, W: WynikPlytyFund, plyty, fvec, kb_uls) -> list:
+    """Przebicie płyty/pogrubienia pod słupami (PN-EN 1992-1-1 6.4.4(2)): v_Ed = V_Ed,red/(u·d) ≤ v_Rd = C_Rd,c·k·
+    (100ρf_ck)^(1/3)·2d/a ≥ v_min·2d/a; V_Ed,red = V_Ed − p·A(a); a ∈ (0; 2d] — wartość miarodajna (min v_Rd/v_Ed)."""
+    from .materialy import pole_preta
+    m, p = an.m, an.p
+    out = []
+    bt = W.beton
+    for c in m.slupy():
+        xy = c["xy"]
+        if not (float(c["z_od"]) < W.spod + W.h + 0.5 and W.obrys.contains(Point(*xy))):
+            continue
+        N = an.slupy_N.get(str(c["id"])) or {}
+        V = max((sum(a * N.get(cs, 0.0) for cs, a in kb.wsp.items()) for kb in kb_uls), default=0.0)
+        i = int(np.argmin(np.hypot(W.el_c[:, 0] - xy[0], W.el_c[:, 1] - xy[1])))
+        ht = float(W.h_el[i])
+        d = ht - W.c_dol / 1000.0 - 0.012
+        a_sl = 0.12 + 2 * 0.05                     # słup RK 120 + blacha podstawy (wysięg 5 cm) [ZAŁ]
+        rho = 0.002
+        k = min(1 + math.sqrt(200 / (d * 1000)), 2.0)
+        vmin = 0.035 * k ** 1.5 * math.sqrt(bt.f_ck)
+        pmin = 0.0                                 # bezpiecznie: bez redukcji odporem gruntu przy braku docisku
+        best = None
+        for a in np.linspace(0.1 * d, 2 * d, 20):
+            u = 4 * a_sl + 2 * math.pi * a
+            A = a_sl ** 2 + 4 * a_sl * a + math.pi * a * a
+            Vr = max(V - pmin * A, 0.0)
+            vEd = Vr / (u * d) / 1000.0
+            vRd = max(0.18 / bt.gamma_c * k * (100 * rho * bt.f_ck) ** (1 / 3), vmin) * 2 * d / a
+            eta = vEd / vRd if vRd > 0 else 0.0
+            if best is None or eta > best[0]:
+                best = (eta, a, vEd, vRd, u)
+        w = Wynik(nazwa=f"Przebicie płyty pod słupem {c['id']} (6.4.4(2))")
+        w.krok("Siła od słupa (obwiednia ULS)", "V_Ed", "", V, "kN", nd=1)
+        w.krok("Wysokość użyteczna w strefie słupa", "d", f"h = {f(ht, 2)} m", d * 1000, "mm", nd=0)
+        w.krok("Obwód miarodajny (min v_Rd/v_Ed dla a ≤ 2d; bez redukcji odporem)", "a; u", "",
+               f"{f(best[1], 3)} m; {f(best[4], 3)} m")
+        w.warunek("Przebicie — fundament (6.4.4(2), (6.51)–(6.53))", best[2], best[3], "MPa", "PN-EN 1992-1-1 6.4.4",
+                  nd=3, symbol_E="v_Ed", symbol_R="v_Rd")
+        out.append(w)
+    return out

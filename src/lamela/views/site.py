@@ -355,10 +355,6 @@ def _labels_project(lab, s, W, used, detail=False, utilities=True):
         if lab.bounds is None or lab.bounds.contains(Point(o.xy)):
             (L if s.plot.buffer(1.0).contains(Point(o.xy)) else lab.label)(o.xy, txt, h, dot=False,
                                                                           dists=(1.5, 3.0, 5.0, 8.0, 12.0))
-    for b in s.bramy if detail else []:
-        nm = "furtka" if b["typ"] == "furtka" else "brama przesuwna"
-        L(b["xy"], [f"{nm} {mm(b['szer'])}"], h, dists=(3.0, 5.0, 8.0, 12.0), leader_from=2.5,
-                  dirs=[(0, -1), (1, -1), (-1, -1), (1, 0), (-1, 0)])
     for sx in [x for x in s.sieci if not x.istn] if utilities else []:
         g = sx.geom.difference(s.p0) if not s.p0.is_empty else sx.geom
         parts = sorted(getattr(g, "geoms", [g]), key=lambda q: -q.length)
@@ -978,8 +974,9 @@ def view_uzbrojenie(ctx, spec, scale, opts):
         if r["b"].istn or r["d"] > r["req"] + 1.0:
             continue
         a, b = nearest_points(r["a"].geom, r["b"].geom)
-        _dim_between(lab, r["a"].geom, r["b"].geom, a, b)
-        used.add("wymiar")
+        if D.place_dim(lab, (a.x, a.y), (b.x, b.y), on_a=r["a"].geom, on_b=r["b"].geom, span=4.0, step=0.25,
+                       max_cost=4.0) is not None:
+            used.add("wymiar")
     for r in K["drzewa"]:
         if r["d"] < r["req"] + 2.0:
             a, b = nearest_points(r["a"].geom, Point(r["t"]["xy"]))
@@ -987,8 +984,7 @@ def view_uzbrojenie(ctx, spec, scale, opts):
     _util_labels(lab, s, used)
     for o in s.obiekty.values():
         if win.contains(Point(o.xy)) and not o.id.upper().startswith("PC"):
-            txt = [o.id] + ([D.short_desc(o.opis, 30)] if not o.id.upper().startswith("ZK") else [])
-            lab.label(o.xy, txt, D.H, dists=(2.0, 4.0, 7.0, 10.0, 14.0), leader_from=1.8, dot=False)
+            lab.label(o.xy, [o.id], D.H, dists=(2.0, 3.5, 5.0, 7.0, 10.0), leader_from=1.8, dot=False)
     if s.pc is not None:
         lab.label(np.asarray(s.pc["body"].centroid.coords[0]), ["PC — jedn. zewn. (R290)",
                                                                 f"strefa r = {mm(s.pc['r'])} m"], D.H, dot=True,
@@ -1006,7 +1002,8 @@ def view_uzbrojenie(ctx, spec, scale, opts):
             lab.label(t["xy"], [t["id"]], D.H, dists=(0.8, 2.0, 4.0), leader_from=2.5, max_cost=6.0)
     x_t = wb[2] + 8.0 * k
     y = wb[3]
-    for t in (_tab_przylacza(s), _tab_koord(K), _tab_skrzyz(K), _tab_kolizje(K), _tab_retencja(K, s)):
+    for t in (_tab_przylacza(s), _tab_istn(s), _tab_obiekty(s, win), _tab_koord(K), _tab_skrzyz(K),
+              _tab_kolizje(K), _tab_retencja(K, s)):
         r = D.vp_table(vp, x_t, y, **t)
         y = r[1] - 5.0 * k
     res = SiteResult(site=s, braki=s.braki)
@@ -1036,6 +1033,20 @@ def _tab_przylacza(s):
                 rows=rows, align=["center", "left", "left", "right", "right"], max_w_mm=150.0,
                 notes=["L — długość trasy w rzucie (z częścią pod budynkiem, linia kreskowa); średnice, spadki i "
                        f"rzędne dna przewodów {D_TODO} (RPB § 15 ust. 2 pkt 11 — brak w modelu)."])
+
+
+def _tab_istn(s):
+    rows = [[x.lit, D.short_desc(x.opis, 44)] for x in s.sieci if x.istn]
+    return dict(title="SIECI ISTNIEJĄCE (wg mapy)", cols=[("Ozn.", 0), ("Opis", 0)], rows=rows or [["—", "brak"]],
+                align=["center", "left"], max_w_mm=150.0)
+
+
+def _tab_obiekty(s, win):
+    rows = [[o.id, D.short_desc(o.opis, 52)] for o in s.obiekty.values()]
+    rows += [[r["id"], f"rura spustowa DN{r['dn']} ({'zewn.' if r['trasa'] == 'zewn' else 'w szachcie'}) z dachu "
+                       f"{r['dach']}"] for r in s.rury]
+    return dict(title="OBIEKTY UZBROJENIA I ODWODNIENIA", cols=[("Ozn.", 0), ("Opis", 0)], rows=rows,
+                align=["center", "left"], max_w_mm=150.0)
 
 
 def _tab_koord(K):

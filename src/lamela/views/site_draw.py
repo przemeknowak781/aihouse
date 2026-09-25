@@ -147,6 +147,8 @@ class Labeler:
               max_cost=None, frame=False, register=True, leader_color=None, penalty=0.02, own=None):
         k = self.k
         saved = self._mute(own)
+        if leader_from < 50 and max(dists) < 25.0:        # dalsze położenia (z odnośnikiem), gdy blisko brak miejsca
+            dists = tuple(dists) + tuple(d_ for d_ in (14.0, 19.0, 25.0) if d_ > max(dists))
         W, Hh = block_size(lines, h, style)
         anchors = [np.asarray(a_, float) for a_ in anchor] if isinstance(anchor, list) else \
             [np.asarray(anchor, float)]

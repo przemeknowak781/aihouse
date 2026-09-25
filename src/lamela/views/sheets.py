@@ -350,7 +350,8 @@ def _north(model):
 
 def _scalebar(scale):
     def fn(sh, x, y, w):
-        L = {20: 2.0, 25: 2.0, 50: 5.0, 100: 10.0, 200: 20.0, 250: 25.0, 500: 50.0}.get(int(scale), 5.0)
+        # skale spoza słownika (detale 1:5, 1:10 …) — długość dobiera scale_bar (≤ 125 mm na papierze)
+        L = {20: 2.0, 25: 2.0, 50: 5.0, 100: 10.0, 200: 20.0, 250: 25.0, 500: 50.0}.get(int(scale))
         r = scale_bar(sh, (x + 4.0, y - 8.0), scale, L)
         return r[1] - 5.0
     return fn
