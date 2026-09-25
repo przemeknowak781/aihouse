@@ -1,0 +1,31 @@
+# Konfiguracja arkuszy widoków dla MODELU TESTOWEGO (tools/generuj_widoki.py, lamela.views.sheets).
+# Format opisany w src/lamela/views/sheets.py (docstring modułu). Wszystkie pola opcjonalne.
+wspolne:
+  obiekt: "Budynek testowy pipeline'u (model testowy) — NIE jest projektem Domu LAMELA"
+  inwestor: "(do uzupełnienia)"
+  kategoria: "I"
+  stadium: "PB"
+  branza: "ARCHITEKTURA (AR)"
+  prefiks_nr: "T-AR"
+  data: "2026-09-25"
+  rewizja: "0"
+  rewizje: [["0", "Próba generatorów widoków z modelu testowego", "2026-09-25"]]
+  skala: 50
+  format: auto
+  numeracja_pomieszczen: iso
+  wysokosc_ciecia: 1.10
+  uwagi:
+    - "MODEL TESTOWY — rysunek próbny generatorów widoków; dane nie stanowią projektu."
+przekroje:
+  - {id: A, x: 1.6, patrz: W}          # przez bieg górny schodów, okna płd. P0/P1, strop z otworem klatki
+  - {id: B, y: 2.5, patrz: N}          # przez okna ścian zach./wsch., drzwi HS piętra i płytę balkonu
+arkusze:
+  - {nr: T-AR-01, tytul: "RZUT PARTERU", typ: rzut, kond: P0}
+  - {nr: T-AR-02, tytul: "RZUT PIĘTRA", typ: rzut, kond: P1}
+  - {nr: T-AR-03, tytul: "RZUT DACHU", typ: dach}
+  - {nr: T-AR-04, tytul: "PRZEKRÓJ A-A", typ: przekroj, przekroj: A}
+  - {nr: T-AR-05, tytul: "PRZEKRÓJ B-B", typ: przekroj, przekroj: B}
+  - {nr: T-AR-06, tytul: "ELEWACJA POŁUDNIOWA", typ: elewacja, strona: S}
+  - {nr: T-AR-07, tytul: "ELEWACJA PÓŁNOCNA", typ: elewacja, strona: N}
+  - {nr: T-AR-08, tytul: "ELEWACJA WSCHODNIA", typ: elewacja, strona: E}
+  - {nr: T-AR-09, tytul: "ELEWACJA ZACHODNIA", typ: elewacja, strona: W}
