@@ -461,7 +461,11 @@ class AnalizaKonstrukcji:
             for j in range(i + 1, n):
                 if i in oddzielne or j in oddzielne:
                     continue
-                if abs(els[i].wierzch - els[j].wierzch) < 0.03 and els[i].poly_full.distance(els[j].poly_full) < 0.05:
+                # płyta wspornikowa na łączniku termoizolacyjnym (ETA) może mieć wierzch przesunięty względem stropu
+                # (typy łączników z uskokiem ≤ ok. 15 cm) — łącznik przenosi m_Ed i v_Ed, więc płyty liczone wspólnie
+                lt = any(e.typ == "wspornik" and e.raw.get("lacznik_termiczny") for e in (els[i], els[j]))
+                tol_w = 0.15 if lt else 0.03
+                if abs(els[i].wierzch - els[j].wierzch) < tol_w and els[i].poly_full.distance(els[j].poly_full) < 0.05:
                     par[fnd(i)] = fnd(j)
         for i in oddzielne:
             self.log(f"{els[i].id}: płyta z łącznikiem termoizolacyjnym i własnymi podporami (belki/słupy) — łącznik przyjęto "
@@ -1424,6 +1428,10 @@ class AnalizaKonstrukcji:
             h_pl = next((e.h for e in g.el if abs(spod + hb - e.spod) < TOL_Z), 0.0)
             gw = bw * hb * p.ciezar_zelbetu if not stalowa else 0.0
             obc["G"] = obc.get("G", []) + [ObcQ(gw)]
+            # wspólna siatka węzłów dla wszystkich przypadków (rozwiaz() dogęszcza siatkę w punktach nieciągłości
+            # obciążeń — bez tego wektory M(x) przypadków mają różne długości i obwiednia się nie składa)
+            belka.dodaj_punkty([t for v in obc.values() for q in v if isinstance(q, ObcQ)
+                                for t in (q.x0, q.x1) if t is not None])
             rozw = {cs: belka.rozwiaz(v) for cs, v in obc.items()}
             kombs = [k for k in kombinacje(g.odz, p, "STR") + kombinacje(g.odz, p, "wyj")]
             Ms = np.array([sum(a * rozw[c].M for c, a in kb.wsp.items() if c in rozw) for kb in kombs])
@@ -1918,6 +1926,11 @@ class AnalizaKonstrukcji:
             if w.typ not in TYPY_NOSNE or w.id not in self.prof or self.prof[w.id].get("tarcza"):
                 continue            # ściany-tarcze: pasma nad otworami zwymiarowane w pozycji tarczowej
             pr = self.prof[w.id]
+            if "gm2" not in pr:     # analiza ściany przerwana błędem — profil niekompletny
+                if m.otwory(sciana=w.id):
+                    self.log(f"Nadproża w ścianie {w.id}: profil obciążeń niekompletny (błąd analizy ściany) — pominięto "
+                             "[WYMAGA ANALIZY].")
+                continue
             t = w.warstwa_konstr.d
             gm2 = pr["gm2"]
             for o in pr["otw"]:

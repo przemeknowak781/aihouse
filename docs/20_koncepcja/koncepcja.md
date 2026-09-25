@@ -397,6 +397,7 @@ Obszar oddziaływania mieści się w całości na działce (W-012).
 | wskaźnik | wartość | wymaganie | ocena |
 |---|---|---|---|
 | PU wg RPB §20 / W-316 (bez klatek, garażu i techn.) | **240,50 m²** (P0 96,29, P1 84,88, P2 59,33) | 230–270 m² | ✓ |
+| kontrolnie PN-ISO 9836 (rdzeń `lamela.model`, pipeline): podstawowa / pomocnicza z garażem / ruchu / techniczna | 158,54 / 78,58 / 43,85 / 14,90 m² („PU” rdzenia = podst. + pomocn. = 237,12 m² — z garażem, bez komunikacji) | — | — |
 | garaż (osobno) / pom. techniczne (osobno) / klatki | 37,42 / 14,90 / 3,06 m² | — | — |
 | strefa dzienna salon + jadalnia + kuchnia | 54,44 m² | ≥ 50 m² | ✓ |
 | powierzchnia zabudowy (obrysy kondygnacji) | 187,50 m² (11,72 %); z płytami 212,99 m² | ≤ 480 m² (30 %) | ✓ |

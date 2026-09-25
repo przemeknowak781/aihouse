@@ -392,7 +392,7 @@ def przekroj(m, ir, os_, c, out: Path, nazwa: str):
         ax.plot(u, z, color="#6b5a3c", lw=1.0, zorder=4)
     for k in m.kondygnacje:
         ax.axhline(k.rzedna, color="#c0392b", lw=0.3, ls=(0, (6, 4)), zorder=0.8)
-        ax.text(ax.get_xlim()[0], k.rzedna, f" {k.id} {k.rzedna:+.3f}", fontsize=6, color="#c0392b", va="bottom")
+
     osie_ = m.raw["osie"]["y" if os_ == "x" else "x"]
     for n_, v in osie_.items():
         ax.axvline(U(v), color="#c0392b", lw=0.3, ls=(0, (8, 3, 1, 3)), zorder=0.8)
@@ -400,6 +400,8 @@ def przekroj(m, ir, os_, c, out: Path, nazwa: str):
     lo, hi = (-12.0, 5.0) if os_ == "x" else (-4.0, 21.0)
     ax.set_xlim(lo, hi)
     ax.set_ylim(-1.6, 11.3)
+    for k in m.kondygnacje:
+        ax.text(lo + 0.1, k.rzedna + 0.03, f"{k.id} {fmt(k.rzedna, 3)}", fontsize=6, color="#c0392b", va="bottom")
     ax.set_aspect("equal")
     ax.tick_params(labelsize=6)
     if os_ == "x":
@@ -410,10 +412,10 @@ def przekroj(m, ir, os_, c, out: Path, nazwa: str):
         ax.set_xlabel("x [m] (zachód → wschód)", fontsize=7)
     dachy = [sl for sl in m.plyty() if sl["typ"] == "dach"]
     top = max((sl["top_attyki"] or sl["top"]) for sl in dachy)
-    ax.set_title(f"{nazwa}: płaszczyzna {os_} = {fmt(c)} m — elementy przecięte (kolor materiału), widok (szary), teren; "
-                 f"najwyższy punkt attyki {top:+.3f}", fontsize=9, loc="left")
+    ax.set_title(f"{nazwa}: płaszczyzna {os_} = {fmt(c)} m\nelementy przecięte (kolor materiału), widok (szary), teren; "
+                 f"najwyższy punkt attyki {fmt(top, 3)}", fontsize=9, loc="left")
     fig.tight_layout()
-    fig.savefig(out, dpi=150)
+    fig.savefig(out, dpi=150, bbox_inches="tight")
     plt.close(fig)
 
 
