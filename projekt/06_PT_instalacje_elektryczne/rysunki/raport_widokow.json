@@ -230,7 +230,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 7.5,
+      "czas_s": 38.1,
       "png_kontrola": {
         "px": [
           4075,
@@ -468,7 +468,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 4.4,
+      "czas_s": 33.3,
       "png_kontrola": {
         "px": [
           4075,
@@ -916,7 +916,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 5.3,
+      "czas_s": 5.1,
       "png_kontrola": {
         "px": [
           3367,
@@ -1152,7 +1152,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.8,
+      "czas_s": 2.9,
       "png_kontrola": {
         "px": [
           3508,
@@ -1399,7 +1399,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.7,
+      "czas_s": 2.6,
       "png_kontrola": {
         "px": [
           4312,
@@ -1487,7 +1487,7 @@
         "standardowy": false,
         "tryb": "ekonomiczny",
         "koszt": 0.3309,
-        "wypelnienie_szac": 0.679,
+        "wypelnienie_szac": 0.684,
         "uklad_widokow": "wiersz",
         "skladanie": {
           "zgiecia_pionowe": [
@@ -1582,7 +1582,7 @@
             "legenda",
             [
               330.0,
-              500.4,
+              493.4,
               510.0,
               545.2
             ]
@@ -1616,7 +1616,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.8,
+      "czas_s": 3.9,
       "png_kontrola": {
         "px": [
           3071,
@@ -1633,8 +1633,8 @@
         "ok": true
       },
       "wypelnienie": {
-        "wypelnienie": 0.729,
-        "wypelnienie_rys": 0.71,
+        "wypelnienie": 0.737,
+        "wypelnienie_rys": 0.718,
         "wypelnienie_kontur": 0.532,
         "pole_arkusza_m2": 0.3089,
         "pole_ramki_m2": 0.2813,
@@ -1845,7 +1845,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.1,
+      "czas_s": 2.3,
       "png_kontrola": {
         "px": [
           4075,
@@ -2062,7 +2062,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.1,
+      "czas_s": 2.2,
       "png_kontrola": {
         "px": [
           3367,
@@ -2307,7 +2307,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 8.6,
+      "czas_s": 8.7,
       "png_kontrola": {
         "px": [
           4075,
@@ -2543,7 +2543,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.0,
+      "czas_s": 3.1,
       "png_kontrola": {
         "px": [
           4075,
@@ -3015,7 +3015,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.0,
+      "czas_s": 1.8,
       "png_kontrola": {
         "px": [
           4075,
@@ -3237,7 +3237,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 4.6,
+      "czas_s": 4.5,
       "png_kontrola": {
         "px": [
           5138,
@@ -3285,7 +3285,7 @@
       "poprawne": 11,
       "słabe": 0
     },
-    "wypelnienie_wazone": 0.842
+    "wypelnienie_wazone": 0.843
   },
-  "czas_s": 74.7
+  "czas_s": 134.6
 }
