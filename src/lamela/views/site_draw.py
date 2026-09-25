@@ -1365,7 +1365,7 @@ def register_all(lab: Labeler, n0=0, n1=None, min_len_mm=0.8, hatch_w=0.12):
 
 
 # ================================================================================================ tabele w rzutni
-def vp_table(c, x, y_top, cols, rows, title=None, h=H, row_h=5.0, align=None, notes=(), max_w_mm=None,
+def vp_table(c, x, y_top, cols, rows, title=None, h=H, row_h=4.4, align=None, notes=(), max_w_mm=None,
              layer="Z-OPISY", title_h=3.5, min_col=None):
     """Tabela rysowana w rzutni (jednostki modelu; wymiary papierowe × k) — pismo ≥ 2,5 mm (PZT). Szerokości kolumn
     dobierane do treści; nagłówki zawijane. ``cols`` = [(nagłówek, min. szer. mm)]. Zwraca (x0, y0, x1, y1)."""

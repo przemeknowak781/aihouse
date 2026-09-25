@@ -57,13 +57,16 @@ Dom to trzy poziome warstwy przesunięte względem siebie w rytmie **zachód –
 * **B — I piętro:** bryła pełna 12,60 m (lica ETICS, osie A–E 12,00 m), cofnięta od zachodu.
 * **C — boks w ramie:** trzy kwatery okna BC1 (≈ 7,0 m, słupki SL5/SL6) w lekkiej ramie stalowej wysuniętej 1,00 m (PL-C1, PL-C2). Pas górny
   ramy biegnie na wschód do x = 13,45, jak w szkicu.
-* **D — linia pozioma:** pas dolny ramy C (+3,65…+3,85) przechodzi w attykę zielonego dachu garażu D4 (+3,85). Kończy się narożnikiem
-  garażu **18,975 m** od lica zachodniego bryły B (szkic ≈ 19,0 m). **Nie jest tarasem:** dach garażu jest ekstensywny i nieużytkowy, bez
+* **D — linia pozioma:** pas dolny ramy C (+3,65…+3,85) przechodzi w **głęboką krawędź PL-D** (wysunięcie 1,00 m, +3,65…+3,85, lekka
+  rama stalowa w okładzinie na konsolach punktowych) biegnącą nad pasem gospodarczym do narożnika garażu, na wysokości korony attyki
+  zielonego dachu D4. Kończy się narożnikiem garażu **18,975 m** od lica zachodniego bryły B (szkic ≈ 19,0 m); linia jest ciągła także
+  w 3D i w perspektywie (poprawka po audycie A2, I-8). **Nie jest tarasem:** dach garażu jest ekstensywny i nieużytkowy, bez
   wyjścia i bez wiaty (decyzja Inwestora 2).
 * **G — garaż 2-stanowiskowy:** w bryle parteru, **w licu ogrodowym** (przeszczep J3/W1). W świetle ma 6,05 × 6,175 m. Brama od północy.
 * **E — parter:** ciągłe przeszklenie strefy dziennej w 5 kwaterach o narastającym rytmie 1,90 / 1,90 / 2,34 / 2,34 / 2,92 m (przeszczep z W3).
   Szósta kwatera to przeszklone drzwi gospodarcze w tym samym systemie, więc pas E czyta się na ok. 12,85 m. Nad nim płyta-okap E wystaje
-  1,00 m na południe i 1,50 m na zachód (PL-E, +2,75…+3,05).
+  1,00 m na południe i 1,50 m na zachód (PL-E, +2,70…+3,00 — wierzch równy ze stropem ST1).
+  Kwatery szklone są osadzone między licami słupów RK 120 (w świetle 1,78 / 1,78 / 2,22 / 2,22 / 2,86 m, wysokość 2,78 m do spodu B1).
 
 Porównanie krawędzi z modelu z odczytem szkicu (brief §1.1, 45,8 px/m; x liczone od lica zach. bryły B):
 
@@ -72,21 +75,21 @@ Porównanie krawędzi z modelu z odczytem szkicu (brief §1.1, 45,8 px/m; x licz
 | A — bryła II p. | −0,98 … +12,23 | −1,00 … +12,60 | wspornik 1,00 m jak w szkicu; wsch. koniec w licu B (ściany w pionie) |
 | A — płyty | −2,40 … +12,55 | −2,10 … +12,90 | okap 1,10 m zach., 1,00 m pd., 0,30 m wsch. |
 | B — bryła I p. | 0 … +12,01 | 0 … +12,60 | +0,6 m: moduł osi 12,00 m + ETICS (odstępstwo świadome) |
-| C — boks (szkło) | +4,48 … +11,68 | +4,40 … +11,42 | 3 kwatery ≈ 2,34 m |
+| C — boks (szkło) | +4,48 … +11,68 | +4,40 … +11,42 | 3 kwatery między słupkami SL5/SL6 (2,29 / 2,24 / 2,29 m) |
 | C — rama górna | +3,93 … +13,76 | +3,90 … +13,75 | przedłużona na wschód (przeszczep z W1) |
-| D — linia | +3,82 … +19,00 | +3,90 … +18,975 | jedna ciągła krawędź (+3,85) do narożnika G |
+| D — linia | +3,82 … +19,00 | +3,90 … +18,975 | jedna ciągła głęboka krawędź PL-C1 + PL-D (+3,85) do narożnika G |
 | E — przeszklenie | +0,98 … +13,21 | +0,60 … +13,45 | z drzwiami gospodarczymi w systemie fasady |
 | E — płyta | −1,53 … +14,08 | −1,50 … +14,10 | okap zach. 1,50 m |
 
 Graficzne porównanie z odchyłkami liczonymi przez skrypt jest w `final/elewacja_S_szkic.png`. Proporcje pionowe szkicu są umowne,
 bo wysokości kondygnacji wynikają z WT. Zachowano kolejność pasm:
-* okap E +2,75…+3,05;
+* okap E +2,70…+3,00;
 * linia D +3,65…+3,85;
 * boks C +3,85…+5,35;
 * rama górna +5,35…+5,55;
-* płyta A +5,95…+6,25;
-* lamele +6,25…+9,08;
-* stropodach +9,08…+9,40, attyka +9,776.
+* płyta A +5,85…+6,15 (z obudową czoła i podsufitką wspornika do +5,67 na zachodzie);
+* lamele +6,15…+8,98;
+* krawędź stropodachu PL-3 +8,98…+9,30, attyka +9,776.
 
 ## 3. Funkcja
 
@@ -106,8 +109,10 @@ obsługuje łazienki P0, P1 i P2 ustawione jedna nad drugą (x 3,98–5,77).
   * przeszklenie E z dwoma HS;
   * HS 2,40 m na taras zachodni pod okapem 1,50 m;
   * kuchnia z **ciągłą zabudową na ścianie osi E** (y 1,30–5,02) i wyspą, z oknem FX2 od południa;
-* spiżarnia 0.05 pod biegiem 2 (wejście od jadalni);
-* przedpokój gościnny 0.08 → pokój gościnny/gabinet 0.10 (12,5 m², okno zach.) i łazienka gościnna 0.09 z natryskiem (drzwi przesuwne);
+* spiżarnia 0.05 pod górnym odcinkiem biegu 2 (h ≥ 2,20; wejście od strony strefy dziennej), dalej bez ścianki schowek pod schodami
+  0.15 (h 1,40–2,20, PU 50 %) i schowek pod spocznikiem 0.16 (h < 1,40, poza PU) — podział wg audytu A1;
+* przedpokój gościnny 0.08 → pokój gościnny/gabinet 0.10 (12,5 m², okno zach.) i łazienka gościnna 0.09 z natryskiem (drzwi przesuwne
+  **chowane w kasecie** ścianki GK S0-19, światło 0,80 m — w przedpokoju nie ma skrzydła; poprawka A2 I-7);
 * przedsionek gospodarczy 0.11:
   * wejście z garażu drzwiami szczelnymi z samozamykaczem;
   * drzwi do kuchni przy fasadzie, droga auto → kuchnia ≈ 6 m;
@@ -116,7 +121,9 @@ obsługuje łazienki P0, P1 i P2 ustawione jedna nad drugą (x 3,98–5,77).
 * garaż 0.13 (6,05 × 6,175 m w świetle, nieogrzewany):
   * brama segmentowa 5,00 × 2,25 m;
   * drzwi boczne od wschodu;
-  * miejsce na rowery i sprzęt ogrodowy przy ścianie osi 2, poza torem jazdy.
+  * stanowiska 2,50 × 5,90 m (MP1 0,30 m od ściany osi E, MP2 0,30 m od szafy); płytka szafa 0,40 m na rowery i sprzęt ogrodowy przy
+    ścianie osi F, poza prowadnicami bramy;
+  * posadzka −0,05 przy drzwiach do domu → −0,10 przy bramie (spadek 0,8 %), próg dom–garaż 5 cm (W-114).
 
 **I piętro P1 (+3,15):**
 * hol 1.01 z galerią przy schodach;
@@ -135,10 +142,10 @@ obsługuje łazienki P0, P1 i P2 ustawione jedna nad drugą (x 3,98–5,77).
 
 **Schody SCH1/SCH2** (jednakowe, jedne nad drugimi, WT §68–69, W-090/W-091):
 * 2 × 9 podnóżków, h = 0,175 m, s = 0,28 m, 2h + s = 0,63 m;
-* bieg 1,15 / 1,145 m między licami; szerokość użytkowa przy jednym pochwycie ciągłym Ø42 wokół ścianki środkowej ≈ 1,05 m ≥ 1,00;
+* bieg 1,135 / 1,130 m między licami; szerokość użytkowa przy jednym pochwycie ciągłym Ø42 wokół ściany środkowej ≈ 1,04 m ≥ 1,00;
 * spocznik 2,415 × 1,175 m;
 * prześwit nad biegiem ≈ 2,75 m;
-* klatka obudowana ścianami C/D i ścianką środkową SC12, więc bez otwartych krawędzi;
+* klatka obudowana ścianami C/D i ścianą środkową ŻB 15 (SCZB15, ciągła P0–P2), więc bez otwartych krawędzi;
 * nad spocznikiem świetlik SW1, od północy okno ON4.
 
 **Kontrola wymagań** (szczegóły w bilansie §9):

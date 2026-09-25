@@ -1000,8 +1000,7 @@ def view_uzbrojenie(ctx, spec, scale, opts):
             lab.label(t["xy"], [t["id"]], D.H, dists=(0.8, 2.0, 4.0), leader_from=2.5, max_cost=6.0)
     x_t = wb[2] + 8.0 * k
     y = wb[3]
-    for t in (_tab_przylacza(s), _tab_istn(s), _tab_obiekty(s, win), _tab_koord(K), _tab_skrzyz(K),
-              _tab_kolizje(K)):
+    for t in (_tab_przylacza(s), _tab_obiekty(s, win), _tab_koord(K), _tab_skrzyz(K), _tab_kolizje(K)):
         r = D.vp_table(vp, x_t, y, **t)
         y = r[1] - 5.0 * k
     res = SiteResult(site=s, braki=s.braki)
@@ -1026,8 +1025,10 @@ def _tab_przylacza(s):
         L = x.geom.length
         rows.append([x.lit, BRANZE.get(x.branza, ("", x.branza))[1].split(" / ")[-1], D.short_desc(x.opis, 30),
                      mm(L), mm(float(x.dl)) if x.dl is not None else "—"])
-    return dict(title="SIECI I PRZYŁĄCZA PROJEKTOWANE", cols=[("Ozn.", 0), ("Sieć", 0), ("Opis", 0), ("L [m]", 0),
-                                                               ("L model [m]", 0)],
+    for x in [q for q in s.sieci if q.istn]:
+        rows.append([x.lit, "istniejąca (mapa)", D.short_desc(x.opis, 30), "—", "—"])
+    return dict(title="SIECI I PRZYŁĄCZA — PROJEKTOWANE I ISTNIEJĄCE",
+                cols=[("Ozn.", 0), ("Sieć", 0), ("Opis", 0), ("L [m]", 0), ("L model [m]", 0)],
                 rows=rows, align=["center", "left", "left", "right", "right"], max_w_mm=150.0,
                 notes=["L — długość trasy w rzucie (z częścią pod budynkiem, linia kreskowa); średnice, spadki i "
                        f"rzędne dna przewodów {D_TODO} (RPB § 15 ust. 2 pkt 11 — brak w modelu)."])
