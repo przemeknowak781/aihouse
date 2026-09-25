@@ -468,3 +468,83 @@ O("O2-09", "S2-13", 3.90, 4.80, "drzwi", "D1", 2.10, 0.0, ow("R", "do_wewn"), uw
 O("O2-10", "S2-09", 4.10, 5.00, "drzwi", "D2", 2.10, 0.0, ow("R", "na_zewn"), uwagi="garderoba → łazienka rodziców (na zewnątrz)")
 O("O2-11", "S2-14", 3.90, 4.80, "drzwi", "D1", 2.10, 0.0, ow("R", "do_wewn"), uwagi="hol → gabinet")
 O("O2-12", "S2-15", 6.20, 7.10, "drzwi", "D4", 2.10, 0.0, ow("R", "do_wewn"), uwagi="hol → pom. techniczne (centrala reku, wyłaz na dach)")
+
+
+# =====================================================================================================================
+# 6. POMIESZCZENIA — kategoria wg PN-ISO 9836:2022 (podstawowa | pomocnicza | ruchu | techniczna); temp. obliczeniowa θ_int
+#    wg WT §134 / PN-EN 12831-1 NA (pokoje, kuchnia, hol 20 °C; łazienki 24 °C; pom. gosp./techn. 16 °C; garaż nieogrzewany);
+#    wentylacja: wywiew min. wg PN-83/B-03430/Az3:2000 (kuchnia z kuchenką elektr. > 3 os. 50 m³/h, łazienka 50, WC 30,
+#    pom. bezokienne 15, pralnia ≥ 2 h⁻¹); nawiew do pokoi — bilans zrównoważony (Σnaw = Σwyw), ≥ 20 m³/h·os. (W-161)
+# =====================================================================================================================
+PM: list[dict] = []
+
+
+def PMS(pid, kond, nazwa, punkt=None, wiel=None, kat="podstawowa", pobyt=False, posadzka="DESKA_DEB", sciany="TYNK_GIPS",
+        sufit="TYNK_GIPS", temp=20, naw=0, wyw=0, rodzaj=None, podloga=None, **kw):
+    d = {"id": pid, "kond": kond, "nazwa": nazwa, "punkt": [r(punkt[0]), r(punkt[1])] if punkt else None,
+         "wielobok": [[r(a), r(b)] for a, b in wiel] if wiel else None, "kategoria": kat, "pobyt_ludzi": pobyt,
+         "posadzka": posadzka, "sciany_wyk": sciany, "sufit": sufit, "temp": temp, "went": {"naw": naw, "wyw": wyw}}
+    if rodzaj:
+        d["rodzaj"] = rodzaj
+    if podloga:
+        d["podloga"] = podloga
+    d.update(kw)
+    PM.append(d)
+
+
+# pas komunikacyjny przy schodach (ekran z lamel h 2,10 m wzdłuż y = 3,80 — przeszczep J1 z W3)
+PAS = (5.90, 3.85, 8.90, Y3_s)
+# ---- P0
+PMS("0.01", "P0", "Wiatrołap", (10.9, 7.6), kat="ruchu", posadzka="GRES", temp=16, rodzaj="komunikacja", podloga="POD-0L",
+    uwagi="szklana przegroda z drzwiami w osi wejścia; ławka")
+PMS("0.02", "P0", "Hol", (10.0, 5.9), kat="ruchu", posadzka="GRES", temp=20, rodzaj="komunikacja", podloga="POD-0L", uwagi="szafa wejściowa 0,60 m przy ścianie E")
+PMS("0.03", "P0", "WC gościnne", (9.2, 7.6), kat="pomocnicza", posadzka="GRES", sciany="PLYTKI_SC", sufit="SUF_GK", temp=20, wyw=30, rodzaj="wc",
+    podloga="POD-0L", uwagi="szer. 1,195 m ≥ 0,90 (W-060); wentylacja mechaniczna")
+PMS("0.04", "P0", "Klatka schodowa", None, [(XC_e, Y3_s), (B1_X1, Y3_s), (B1_X1, Y_SPOCZ), (XC_e, Y_SPOCZ)], kat="ruchu", temp=20, rodzaj="komunikacja",
+    uwagi="bieg 1 SCH1; wyłączona z PU (W-316)")
+PMS("0.05", "P0", "Spiżarnia (pod schodami)", None, [(B2_X0, Y3_n), (B2_X1, Y3_n), (B2_X1, Y4_i), (XC_e, Y4_i), (XC_e, Y_SPOCZ), (B2_X0, Y_SPOCZ)],
+    kat="pomocnicza", posadzka="GRES", temp=16, wyw=15, rodzaj="pomocnicze", podloga="POD-0L", wys=1.90,
+    uwagi="wysokość zmienna 2,77 → 1,39 m pod biegiem 2 i spocznikiem — PU liczona w 50 % (wys. zastępcza 1,90; W-316)")
+PMS("0.06", "P0", "Salon + jadalnia + kuchnia", None,
+    [(XA_i, Y1_i), (XE_i, Y1_i), (XE_i, Y3_s), (PAS[2], Y3_s), (PAS[2], PAS[1]), (PAS[0], PAS[1]), (PAS[0], Y3_s), (XA_i, Y3_s)],
+    kat="podstawowa", pobyt=True, temp=20, naw=100, wyw=50, rodzaj="kuchnia",
+    uwagi="strefa dzienna; kuchnia z wyspą — zabudowa ciągła przy ścianie osi E (y 1,30–5,02, przeszczep J1); wywiew okap 50/120 m³/h")
+PMS("0.07", "P0", "Pas komunikacyjny przy schodach", None, [(PAS[0], PAS[1]), (PAS[2], PAS[1]), (PAS[2], PAS[3]), (PAS[0], PAS[3])], kat="ruchu",
+    temp=20, rodzaj="komunikacja", uwagi="wydzielony ekranem z lamel h 2,10 m (LAM-P0); dojście hol → stopa schodów bez przechodzenia przez strefę mebli")
+PMS("0.08", "P0", "Przedpokój gościnny", (4.6, 5.8), kat="ruchu", temp=20, rodzaj="komunikacja")
+PMS("0.09", "P0", "Łazienka gościnna (natrysk)", (4.8, 7.6), kat="pomocnicza", posadzka="GRES", sciany="PLYTKI_SC", sufit="SUF_GK", temp=24, wyw=50,
+    rodzaj="lazienka", podloga="POD-0L")
+PMS("0.10", "P0", "Pokój gościnny / gabinet", (1.9, 6.9), kat="podstawowa", pobyt=True, temp=20, naw=40, rodzaj="pokoj")
+PMS("0.11", "P0", "Przedsionek gospodarczy", (13.4, 1.4), kat="ruchu", posadzka="GRES", temp=20, rodzaj="komunikacja", podloga="POD-0L",
+    uwagi="garaż → przedsionek → kuchnia ≈ 6 m; szafa na odzież i obuwie; drzwi do ogrodu")
+PMS("0.12", "P0", "Pomieszczenie techniczne", (16.6, 1.4), kat="techniczna", posadzka="GRES", sciany="TYNK_CW", temp=16, wyw=15, rodzaj="techniczne",
+    podloga="POD-0L", uwagi="moduł hydrauliczny PC R290 (monoblok zewn.), zasobnik CWU 300 l, bufor 100 l, rozdzielacze, RG, wodomierz; dostęp z przedsionka")
+PMS("0.13", "P0", "Garaż 2-stanowiskowy", (15.3, 6.2), kat="pomocnicza", posadzka="ZYWICA", sciany="TYNK_CW", sufit="TYNK_CW", temp=None,
+    rodzaj="garaz", podloga="POD-G", ogrzewane=False,
+    uwagi="w świetle 6,05 × 6,175 m (≥ 5,60 × 6,00; W-112); nieogrzewany, wentylacja naturalna ≥ 0,08 m² (W-115); posadzka −0,10, spadek 1,5 % do bramy")
+# ---- P1
+PMS("1.01", "P1", "Hol", None, [(XA_i, yH + FD), (XE_i, yH + FD), (XE_i, Y3_s), (XD_w, Y3_s), (XD_w, Y3_n), (XC_e, Y3_n), (XC_e, Y3_s), (XA_i, Y3_s)],
+    kat="ruchu", temp=20, rodzaj="komunikacja")
+PMS("1.02", "P1", "Pokój rodzinny / biblioteka (boks C)", (8.0, 1.8), kat="podstawowa", pobyt=True, temp=20, naw=40, rodzaj="pokoj")
+PMS("1.03", "P1", "Pokój dziecka 1", (1.9, 1.8), kat="podstawowa", pobyt=True, temp=20, naw=40, rodzaj="pokoj")
+PMS("1.04", "P1", "Pokój dziecka 2", (1.9, 6.9), kat="podstawowa", pobyt=True, temp=20, naw=40, rodzaj="pokoj")
+PMS("1.05", "P1", "Łazienka dzieci (wanna)", (4.6, 7.5), kat="pomocnicza", posadzka="GRES", sciany="PLYTKI_SC", sufit="SUF_GK", temp=24, wyw=50,
+    rodzaj="lazienka", podloga="POD-1L")
+PMS("1.06", "P1", "Klatka schodowa", None, [(XC_e, Y3_n), (XD_w, Y3_n), (XD_w, Y4_i), (XC_e, Y4_i)], kat="ruchu", temp=20, rodzaj="komunikacja",
+    uwagi="wyłączona z PU (W-316)")
+PMS("1.07", "P1", "WC z natryskiem", (9.2, 7.0), kat="pomocnicza", posadzka="GRES", sciany="PLYTKI_SC", sufit="SUF_GK", temp=24, wyw=50, rodzaj="lazienka",
+    podloga="POD-1L", uwagi="nad WC P0 — pion K2 (zawór napowietrzający, K1 wentylowany ponad dach)")
+PMS("1.08", "P1", "Pralnia z suszarnią", (10.9, 7.0), kat="pomocnicza", posadzka="GRES", sciany="PLYTKI_SC", temp=20, wyw=40, rodzaj="pralnia",
+    podloga="POD-1L", uwagi="zmniejszona do ≈ 6,6 m² (przeszczep J1); wywiew ≥ 2 h⁻¹")
+# ---- P2
+PMS("2.01", "P2", "Hol", None, [(xC + FD, Y_TH + FD), (xD - FD, Y_TH + FD), (xD - FD, Y3_s), (xC + FD, Y3_s)], kat="ruchu", temp=20, rodzaj="komunikacja")
+PMS("2.02", "P2", "Sypialnia rodziców", (1.3, 2.4), kat="podstawowa", pobyt=True, temp=20, naw=50, rodzaj="pokoj",
+    uwagi="naroże S+W nad wspornikiem; okna za lamelami")
+PMS("2.03", "P2", "Garderoba (przedpokój apartamentu)", (4.7, 2.4), kat="pomocnicza", temp=20, wyw=0, rodzaj="pomocnicze")
+PMS("2.04", "P2", "Łazienka rodziców", (4.6, 7.5), kat="pomocnicza", posadzka="GRES", sciany="PLYTKI_SC", sufit="SUF_GK", temp=24, wyw=50,
+    rodzaj="lazienka", podloga="POD-1L", uwagi="nad łazienkami P1 i P0 (pion SI)")
+PMS("2.05", "P2", "Gabinet / pokój", (10.2, 2.4), kat="podstawowa", pobyt=True, temp=20, naw=40, rodzaj="pokoj")
+PMS("2.06", "P2", "Klatka schodowa (wyjście z biegu 2, pustka)", None, [(XC_e, Y3_s), (XD_w, Y3_s), (XD_w, Y4_i), (XC_e, Y4_i)], kat="ruchu",
+    temp=20, rodzaj="komunikacja", uwagi="świetlik SW1 nad spocznikiem, okno pn. ON4; wyłączona z PU")
+PMS("2.07", "P2", "Pom. techniczne (centrala rekuperacyjna, wyłaz na dach)", (7.2, 1.3), kat="techniczna", posadzka="GRES", temp=16,
+    rodzaj="techniczne", podloga="POD-1L", uwagi="centrala 450 m³/h; wyłaz 0,90 × 0,90 m z drabiną (W-065)")
