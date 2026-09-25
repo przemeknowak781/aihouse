@@ -1015,8 +1015,10 @@ class Model:
                         self._err(loc, f"brak lub nieprawidłowe pole 'attyka.{pole}'")
             self._check_poly(loc, "obrys", d.get("obrys"))
             for j, w in enumerate(d.get("wpusty") or []):
+                if isinstance(w, dict):          # SCHEMAT p. 6: {xy: [x, y], dn, podgrzewany}
+                    w = w.get("xy")
                 if not _is_pt(w):
-                    self._err(loc, f"wpusty[{j}] musi być punktem [x, y]")
+                    self._err(loc, f"wpusty[{j}] musi być punktem [x, y] lub {{xy: [x, y], dn, podgrzewany}}")
                 elif _is_ring(d.get("obrys")) and not make_polygon(d["obrys"]).buffer(1e-6).contains(Point(w)):
                     self._warn(loc, f"wpust wpusty[{j}] {w} leży poza obrysem dachu")
         for i, w in enumerate(r.get("wsporniki_plyty") or []):

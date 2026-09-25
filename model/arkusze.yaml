@@ -21,10 +21,10 @@ wspolne:
   wymiary_wewnetrzne: true
   kolorystyka: true
   uwagi: []
-# przekroje: brak listy = automatycznie A-A (wzdłuż pierwszego biegu schodów) i B-B (prostopadle przez środek).
-# Po ustaleniu modelu wpisać jawnie, np.:
-#   - {id: A, x: 5.6, patrz: E}
-#   - {id: B, y: 3.2, patrz: N}
+# przekroje (W-315): A-A przez schody, boks C i bryłę A (N–S); B-B przez wspornik bryły A, strefę dzienną i garaż (W–E)
+przekroje:
+  - {id: A, x: 6.55, patrz: E}
+  - {id: B, y: 3.30, patrz: N}
 arkusze:
   - {nr: PB-AR-01, tytul: "RZUT PARTERU", typ: rzut, kond: P0}
   - {nr: PB-AR-02, tytul: "RZUT I PIĘTRA", typ: rzut, kond: P1}

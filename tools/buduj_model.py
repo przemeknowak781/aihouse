@@ -413,28 +413,28 @@ O("O0-02", "S0-01", E_KW[1], E_KW[2], "fix", "FX1", 2.75, 0.0, oslona="screen_zi
 O("O0-03", "S0-01", E_KW[2], E_KW[3], "drzwi_przesuwne_HS", "HS1", 2.75, 0.0, HS, "screen_zip", bezprogowe=True, uwagi="kwatera 3 — HS salon")
 O("O0-04", "S0-01", E_KW[3], E_KW[4], "drzwi_przesuwne_HS", "HS1", 2.75, 0.0, HS, "screen_zip", bezprogowe=True, uwagi="kwatera 4 — HS jadalnia")
 O("O0-05", "S0-01", E_KW[4], E_KW[5], "fix", "FX2", 2.75, 0.0, oslona="screen_zip", uwagi="przeszklenie E — kwatera 5 (kuchnia)")
-O("O0-06", "S0-02", 12.25, 13.15, "drzwi_zewn", "DZ3", 2.75, 0.0, ow("R", "na_zewn"), "screen_zip",
+O("O0-06", "S0-02", 12.35, 13.25, "drzwi_zewn", "DZ3", 2.75, 0.0, ow("R", "na_zewn"), "screen_zip",
   uwagi="drzwi gospodarcze przeszklone w systemie i podziale fasady E (przeszczep J2) — pas E czytany ≈ 12,85 m; pod okapem E")
 O("O0-07", "S0-04", 12.75, 17.75, "brama", "BR1", 2.25, -0.10, ow("segmentowa", "do_wewn"),
   uwagi="brama segmentowa 5,00 × 2,25 m w świetle, kratki went. ≥ 0,08 m² (W-111, W-115); posadzka garażu −0,10")
 O("O0-08", "S0-03", 4.90, 5.90, "drzwi_zewn", "DZ2", 2.10, 0.0, ow("R", "na_zewn"), uwagi="drzwi boczne garażu (rowery, ogród) — 5,70 m od granicy E")
 O("O0-09", "S0-06", 10.05, 11.15, "drzwi_zewn", "DZ1", 2.40, 0.0, ow("R", "do_wewn", "prawa"),
   uwagi="drzwi wejściowe 1,10 × 2,40 w murze (≥ 0,90 × 2,00 w świetle ościeżnicy), próg ≤ 0,02 (W-055); pod daszkiem")
-O("O0-10", "S0-06", 11.25, 11.795, "fix", "FX3", 2.40, 0.0, oslona="brak", uwagi="doświetle boczne drzwi wejściowych, VSG mleczne (przeszczep z W3)")
+O("O0-10", "S0-06", 11.25, 11.60, "fix", "FX3", 2.40, 0.0, oslona="brak", uwagi="doświetle boczne drzwi wejściowych, VSG mleczne (przeszczep z W3)")
 O("O0-11", "S0-07", 1.20, 3.60, "drzwi_przesuwne_HS", "HS2", 2.75, 0.0, HS, "screen_zip", bezprogowe=True,
   uwagi="HS salonu na taras zach. pod okapem 1,50 m (przeszczep J2 z W1/W3)")
 O("O0-12", "S0-07", 5.80, 7.60, "okno", "OZ1", 1.50, 0.90, RU, "zaluzja_zewn", uwagi="pokój gościnny — zachód")
 O("O0-13", "S0-06", 4.30, 5.10, "okno", "ON1", 0.60, 1.60, ow("U"), "brak", uwagi="łazienka gościnna — okno wysokie")
-O("O0-14", "S0-08", 4.10, 5.00, "drzwi", "D1", 2.10, 0.0, ow("R", "do_wewn"), uwagi="salon → przedpokój gościnny")
+O("O0-14", "S0-08", 4.20, 5.10, "drzwi", "D1", 2.10, 0.0, ow("R", "do_wewn"), uwagi="salon → przedpokój gościnny")
 O("O0-15", "S0-11", 5.33, 6.23, "drzwi", "D1", 2.10, 0.0, ow("R", "do_wewn"), uwagi="przedpokój → pokój gościnny")
-O("O0-16", "S0-19", 4.10, 5.00, "drzwi", "D2P", 2.10, 0.0, ow("przesuwne", "na_zewn", przesuwne=True),
+O("O0-16", "S0-19", 4.20, 5.10, "drzwi", "D2P", 2.10, 0.0, ow("przesuwne", "na_zewn", przesuwne=True),
   uwagi="łazienka gościnna — drzwi przesuwne naścienne (WT §79 ust. 1), podcięcie ≥ 0,022 m²")
 O("O0-17", "S0-09", 7.40, 8.20, "drzwi", "D3", 2.00, 0.0, ow("R", "do_wewn"), uwagi="spiżarnia pod biegiem 2 (przeszczep J2)")
 O("O0-18", "S0-10", 8.90, 10.40, "otwor", "OT1", 2.40, 0.0, uwagi="hol → pas komunikacyjny przy schodach / strefa dzienna")
 O("O0-19", "S0-20", 8.71, 9.61, "drzwi", "D2", 2.10, 0.0, ow("R", "na_zewn"), uwagi="WC gościnne — na zewnątrz, kratka ≥ 0,022 m²")
 O("O0-20", "S0-21", 10.15, 11.05, "drzwi", "DS1", 2.10, 0.0, ow("R", "do_wewn"), uwagi="drzwi szklane VSG w osi wejścia (x ≈ 10,60)")
-O("O0-21", "S0-15", 0.25, 1.15, "drzwi", "D1", 2.10, 0.0, ow("R", "do_wewn"),
-  uwagi="przedsionek → kuchnia; przesunięte do fasady (przeszczep J1) — ciągła zabudowa kuchni y 1,30–5,02")
+O("O0-21", "S0-15", 0.35, 1.25, "drzwi", "D1", 2.10, 0.0, ow("R", "do_wewn"),
+  uwagi="przedsionek → kuchnia; przesunięte do fasady (przeszczep J1) — ciągła zabudowa kuchni y 1,40–5,02")
 O("O0-22", "S0-17", 13.60, 14.50, "drzwi", "DG1", 2.10, 0.0, ow("R", "do_wewn"),
   uwagi="garaż → przedsionek: szczelne, samozamykacz, U ≤ 1,3 (W-113, W-244)")
 O("O0-23", "S0-18", 1.60, 2.50, "drzwi", "D4", 2.10, 0.0, ow("R", "do_wewn"),
@@ -451,7 +451,7 @@ O("O1-06", "S1-04", 1.00, 2.80, "okno", "OZ1", 1.50, 0.90, RU, "zaluzja_zewn", u
 O("O1-07", "S1-11", 2.60, 3.50, "drzwi", "D1", 2.10, 0.0, ow("R", "do_wewn"), uwagi="pokój dziecka 1")
 O("O1-08", "S1-11", 6.00, 8.40, "otwor", "OT2", 2.40, 0.0, uwagi="hol → pokój rodzinny (galeria przy schodach)")
 O("O1-09", "S1-05", 2.60, 3.50, "drzwi", "D1", 2.10, 0.0, ow("R", "do_wewn"), uwagi="pokój dziecka 2")
-O("O1-10", "S1-05", 4.10, 5.00, "drzwi", "D2", 2.10, 0.0, ow("R", "na_zewn"), uwagi="łazienka dzieci — na zewnątrz")
+O("O1-10", "S1-05", 4.20, 5.10, "drzwi", "D2", 2.10, 0.0, ow("R", "na_zewn"), uwagi="łazienka dzieci — na zewnątrz")
 O("O1-11", "S1-06", 8.71, 9.61, "drzwi", "D2", 2.10, 0.0, ow("R", "na_zewn"), uwagi="WC z natryskiem — na zewnątrz (pion K2 nad WC P0)")
 O("O1-12", "S1-06", 10.15, 11.05, "drzwi", "D1", 2.10, 0.0, ow("R", "do_wewn"), uwagi="pralnia z suszarnią")
 
@@ -465,7 +465,7 @@ O("O2-06", "S2-05", 4.30, 5.20, "okno", "ON2", 0.60, 1.60, ow("U"), "brak", uwag
 O("O2-07", "S2-05", 6.40, 8.10, "okno", "ON4", 1.50, 0.90, ow("U"), "brak", uwagi="klatka schodowa — północ (nad biegami)")
 O("O2-08", "S2-12", 3.90, 4.80, "drzwi", "D1", 2.10, 0.0, ow("R", "do_wewn"), uwagi="garderoba → sypialnia")
 O("O2-09", "S2-13", 3.90, 4.80, "drzwi", "D1", 2.10, 0.0, ow("R", "do_wewn"), uwagi="hol → garderoba (przedpokój apartamentu)")
-O("O2-10", "S2-09", 4.10, 5.00, "drzwi", "D2", 2.10, 0.0, ow("R", "na_zewn"), uwagi="garderoba → łazienka rodziców (na zewnątrz)")
+O("O2-10", "S2-09", 4.20, 5.10, "drzwi", "D2", 2.10, 0.0, ow("R", "na_zewn"), uwagi="garderoba → łazienka rodziców (na zewnątrz)")
 O("O2-11", "S2-14", 3.90, 4.80, "drzwi", "D1", 2.10, 0.0, ow("R", "do_wewn"), uwagi="hol → gabinet")
 O("O2-12", "S2-15", 6.20, 7.10, "drzwi", "D4", 2.10, 0.0, ow("R", "do_wewn"), uwagi="hol → pom. techniczne (centrala reku, wyłaz na dach)")
 
@@ -733,11 +733,15 @@ SCHODY = [schody("SCH1", "P0", "P1", 0.0), schody("SCH2", "P1", "P2", Z_P1)]
 
 
 def pochwyty(z0, n):
-    xw, xe = XC_e + 0.05, XD_w - 0.05
+    """Jeden pochwyt ciągły wokół ścianki środkowej (bieg 1 → obejście końca ścianki → bieg 2), oś pochwytu 0,071 m od lica
+    (0,05 m odstępu + Ø42/2 — W-096); szerokość użytkowa biegu 1,15 − 0,092 = 1,058 m ≥ 1,00 (W-091)."""
+    xw, xe = XM_w - 0.071, XM_e + 0.071
     zs = z0 + N_BIEG * H_ST
-    return [{"id": f"BL{n}", "polilinia": [[r(xw), Y_SCH0, r(z0 + H_ST)], [r(xw), Y_SPOCZ, r(zs)], [r(xw), r(Y4_i - 0.05), r(zs)],
-                                          [r(xe), r(Y4_i - 0.05), r(zs)], [r(xe), Y_SPOCZ, r(zs)], [r(xe), Y3_n, r(z0 + 2 * N_BIEG * H_ST)]],
-             "wys": 0.90, "typ": "pochwyt przyścienny stal nierdzewna Ø42, 0,05 m od ściany (W-096); szerokość użytkowa biegu ≥ 1,05 m (W-091)"}]
+    ye = r(Y_SPOCZ + 0.071)
+    return [{"id": f"BL{n}", "polilinia": [[r(xw), Y_SCH0, r(z0 + H_ST)], [r(xw), Y_SPOCZ, r(zs)], [r(xw), ye, r(zs)], [r(xe), ye, r(zs)],
+                                          [r(xe), Y_SPOCZ, r(zs + H_ST)], [r(xe), Y3_n, r(z0 + 2 * N_BIEG * H_ST)]],
+             "wys": 0.90, "typ": "pochwyt stal nierdzewna Ø42 na wspornikach, ciągły wokół ścianki środkowej (W-095/W-096); "
+                                 "od strony ścian C/D — ściany pełne, brak krawędzi otwartej"}]
 
 
 BALUSTRADY = pochwyty(0.0, 1) + pochwyty(Z_P1, 2)
@@ -759,7 +763,7 @@ TARASY = [
      "uwagi": "taras ogrodowy w kształcie L (pd. przed E pod okapem 1,00 m, zach. pod okapem 1,50 m) — 4,30 m od granicy zach."},
     {"id": "T2", "obrys": R(9.40, y4 + EXT, xE - EXT, 10.35), "rzedna": -0.02, "nawierzchnia": "płyty betonowe 60×60 na podsypce, spadek 2 % od drzwi",
      "grubosc": 0.08, "uwagi": "podest wejścia głównego pod daszkiem (bez stopni — cokół przejęty rzędną terenu)"},
-    {"id": "T3", "obrys": R(12.10, -1.30, 13.40, -EXT), "rzedna": -0.02, "nawierzchnia": "płyty betonowe 60×60, spadek 2 % od drzwi", "grubosc": 0.08,
+    {"id": "T3", "obrys": R(12.20, -1.30, 13.50, -EXT), "rzedna": -0.02, "nawierzchnia": "płyty betonowe 60×60, spadek 2 % od drzwi", "grubosc": 0.08,
      "uwagi": "podest drzwi gospodarczych pod okapem E"},
 ]
 
@@ -771,7 +775,7 @@ TARASY = [
 STOLARKA = {
     "FX1": {"wyrob": "fix_ALU_3sz", "opis": "przeszklenie stałe ALU 3-szybowe, 1,90 × 2,75 m, VSG od wewn. (strefa uderzeń)", "U_w": 0.75, "g_n": 0.50},
     "FX2": {"wyrob": "fix_ALU_3sz", "opis": "przeszklenie stałe ALU 3-szybowe, 2,93 × 2,75 m", "U_w": 0.73, "g_n": 0.50},
-    "FX3": {"wyrob": "fix_ALU_3sz", "opis": "doświetle drzwi wejściowych 0,545 × 2,40 m, VSG mleczne", "U_w": 0.85, "g_n": 0.40},
+    "FX3": {"wyrob": "fix_ALU_3sz", "opis": "doświetle drzwi wejściowych 0,35 × 2,40 m, VSG mleczne", "U_w": 0.85, "g_n": 0.40},
     "HS1": {"wyrob": "HS_ALU_3sz", "opis": "drzwi podnoszono-przesuwne ALU 2,335 × 2,75 m, próg termiczny bezprogowy, odwodnienie liniowe", "U_w": 0.85, "g_n": 0.50},
     "HS2": {"wyrob": "HS_ALU_3sz", "opis": "drzwi HS ALU 2,40 × 2,75 m (taras zach.)", "U_w": 0.85, "g_n": 0.50},
     "BC1": {"wyrob": "okno_ALU_3sz", "opis": "boks C: 3 kwatery 2,335 × 1,50 m (środkowa RU), dolna część stała VSG do 0,85 m", "U_w": 0.80, "g_n": 0.50},
@@ -1049,7 +1053,7 @@ DZIALKA = {
         {"id": "U3", "obrys": Rd(11.25, 10.35, xE + EXT, 11.35), "nawierzchnia": "łącznik dojście–podjazd — płyty betonowe", "spadek": 0.02},
         {"id": "U4", "obrys": Rd(6.40, 15.90, 9.60, 17.20), "nawierzchnia": "stanowisko pojemników — płyty betonowe (osłona z lamel)", "spadek": 0.02},
         {"id": "U5", "obrys": Rd(16.10, -1.45, 17.50, -0.65), "nawierzchnia": "fundament jednostki zewn. PC na wibroizolacji", "spadek": 0.0},
-        {"id": "U6", "obrys": Rd(13.40, -1.30, 14.40, -0.30), "nawierzchnia": "ścieżka gospodarcza — płyty w trawie (ażur, poza PBC)", "spadek": 0.02},
+        {"id": "U6", "obrys": Rd(13.50, -1.30, 14.40, -0.30), "nawierzchnia": "ścieżka gospodarcza — płyty w trawie (ażur, poza PBC)", "spadek": 0.02},
     ],
     "zielen": [
         {"id": "Z1", "obrys": R(0, 0, DZ_W, DZ_H), "typ": "trawnik"},
@@ -1176,7 +1180,7 @@ WYP = [
     F("P0", "sofa", (2.30, 3.40), -90, (2.80, 0.95), opis="salon — widok na ogród"),
     F("P0", "stol", (6.60, 2.10), 0, (2.20, 1.00), krzesla=8),
     F("P0", "wyspa", (9.80, 2.70), 90, (2.20, 1.00), opis="wyspa z płytą indukcyjną i okapem"),
-    {"kond": "P0", "typ": "blat", "linia": [[XE_i, 1.30], [XE_i, Y3_s]], "gl": 0.6, "strona": 1, "gorne": True},
+    {"kond": "P0", "typ": "blat", "linia": [[XE_i, 1.40], [XE_i, Y3_s]], "gl": 0.6, "strona": 1, "gorne": True},
     F("P0", "zlew", (XE_i, 2.60), 180, (0.80, 0.50)), F("P0", "zmywarka", (XE_i, 1.90), 180, (0.60, 0.58)),
     F("P0", "plyta", (10.30, 2.70), 90, (0.80, 0.52), opis="płyta indukcyjna na wyspie"),
     F("P0", "lodowka", (XE_i, 4.60), 180, (0.60, 0.65)), F("P0", "urzadzenie", (XE_i, 3.90), 180, (0.60, 0.60), opis="piekarnik + mikrofala w słupku"),
@@ -1286,3 +1290,64 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# =====================================================================================================================
+# 9. STOLARKA (dane przykładowe typowych wyrobów, „lub równoważne”), montaż, osłony, progi — wytyczne symulacji mostków 2D
+#    (koordynator, katalog projekt/08_obliczenia/demo_test/mostki): (1) ciepły montaż — rama wsunięta ≤ 5 cm w mur, 4 cm w
+#    warstwie izolacji, izolacja ościeża z zakładem 3 cm na ramę; (2) BEZ kaset rolet w ociepleniu — kasety w okapach/ramie C/
+#    szczelinie lamel albo nadstawne przed licem ETICS; (5) progi HS/wejścia — profil progowy termoizolacyjny na podwalinie
+#    z XPS/PUR-GF + odwodnienie liniowe.
+# =====================================================================================================================
+STOLARKA = {
+    "FX1": dict(wyrob="fix_ALU_3sz", opis="Przeszklenie stałe fasady E 1,90 × 2,75 m, Al z przekładką, 3 szyby, VSG od wewn.", U_w_max=0.9, g_n=0.50),
+    "FX2": dict(wyrob="fix_ALU_3sz", opis="Przeszklenie stałe fasady E 2,93 × 2,75 m (kuchnia)", U_w_max=0.9, g_n=0.50),
+    "FX3": dict(wyrob="fix_ALU_3sz", opis="Doświetle boczne drzwi wejściowych 0,545 × 2,40 m, VSG satynowane", U_w_max=0.9, g_n=0.50),
+    "HS1": dict(wyrob="HS_ALU_3sz", opis="Drzwi podnoszono-przesuwne HS 2,335 × 2,75 m, próg termiczny ≤ 2 cm", U_w_max=0.9, g_n=0.50),
+    "HS2": dict(wyrob="HS_ALU_3sz", opis="Drzwi HS 2,40 × 2,75 m — taras zachodni", U_w_max=0.9, g_n=0.50),
+    "BC1": dict(wyrob="okno_ALU_3sz", opis="Boks C: okno 3-kwaterowe 7,005 × 1,50 m, skrzydła RU, dolna część stała VSG 44.2 do 0,85 m", U_w_max=0.9, g_n=0.50),
+    "OZ1": dict(wyrob="okno_PVC_3sz", opis="Okno 1,80 × 1,50 m RU (zachód)", U_w_max=0.9, g_n=0.50),
+    "OE1": dict(wyrob="okno_PVC_3sz", opis="Okno 1,50 × 1,50 m RU (wschód, pokój rodzinny)", U_w_max=0.9, g_n=0.50),
+    "OP1": dict(wyrob="okno_ALU_3sz", opis="Okno 3,00 × 2,00 m za lamelami, parapet 0,60, dolna część stała VSG do 0,85 m, skrzydła do wewn. (W-098)", U_w_max=0.9, g_n=0.50),
+    "OP2": dict(wyrob="okno_ALU_3sz", opis="Okno 1,20 × 1,75 m za lamelami, skrzydła do wewn.", U_w_max=0.9, g_n=0.50),
+    "OP3": dict(wyrob="okno_ALU_3sz", opis="Okno 2,40 × 2,00 m za lamelami, parapet 0,60, dolna część stała VSG do 0,85 m", U_w_max=0.9, g_n=0.50),
+    "ON1": dict(wyrob="okno_PVC_3sz", opis="Okno wysokie 0,80 × 0,60 m U (łazienka gościnna)", U_w_max=0.9, g_n=0.50),
+    "ON2": dict(wyrob="okno_PVC_3sz", opis="Okno wysokie 0,90 × 0,60 m U (łazienki P1/P2)", U_w_max=0.9, g_n=0.50),
+    "ON3": dict(wyrob="okno_PVC_3sz", opis="Okno wysokie 1,20 × 0,60 m U (pralnia)", U_w_max=0.9, g_n=0.50),
+    "ON4": dict(wyrob="okno_PVC_3sz", opis="Okno 1,70 × 1,50 m U (klatka schodowa, północ)", U_w_max=0.9, g_n=0.50),
+    "DZ1": dict(wyrob="drzwi_zewn", opis="Drzwi wejściowe 1,10 × 2,40 w murze (≥ 0,90 × 2,00 w świetle ościeżnicy), próg ≤ 0,02, U_D ≤ 1,1", U_D=0.90),
+    "DZ2": dict(wyrob="drzwi_zewn", opis="Drzwi boczne garażu 1,00 × 2,10, stalowe ocieplone", U_D=1.30),
+    "DZ3": dict(wyrob="drzwi_zewn", opis="Drzwi gospodarcze przeszklone 0,90 × 2,75 w systemie fasady E, otwierane na zewnątrz", U_D=1.10),
+    "BR1": dict(wyrob="brama_segmentowa", opis="Brama segmentowa ocieplona 5,00 × 2,25 m z kratkami went. ≥ 0,08 m²", U_D=1.50),
+    "DG1": dict(wyrob="drzwi_dom_garaz", opis="Drzwi garaż–dom 0,90 × 2,10, stalowe ocieplone, uszczelka, samozamykacz (W-113)", U_D=1.10),
+    "D1": dict(opis="Drzwi wewnętrzne 0,90 × 2,10 w murze (≈ 0,80 × 2,00 w świetle ościeżnicy), bez progu (WT §75)"),
+    "D2": dict(opis="Drzwi łazienek/WC 0,90 × 2,10 w murze, otwierane na zewnątrz, podcięcie/kratka ≥ 0,022 m² (WT §79)"),
+    "D2P": dict(opis="Drzwi przesuwne naścienne łazienki 0,90 × 2,10, szczelina ≥ 0,022 m² (WT §79 ust. 1)"),
+    "D3": dict(opis="Drzwi spiżarni 0,80 × 2,00"),
+    "D4": dict(opis="Drzwi pom. technicznych 0,90 × 2,10, pełne, akustyczne R_w ≥ 32 dB (WT §96)"),
+    "DS1": dict(opis="Drzwi szklane VSG 0,90 × 2,10 w ściance szklanej wiatrołapu (oznakowanie kontrastowe — WT §295)"),
+    "OT1": dict(opis="Otwór 1,50 × 2,40 bez stolarki"),
+    "OT2": dict(opis="Otwór 2,40 × 2,40 bez stolarki"),
+}
+MONTAZ = ("ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna "
+          "od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)")
+OSL_MONTAZ = {
+    "S0-01": "screen ZIP — kaseta w podsufitce okapu PL-E (poza warstwą izolacji), prowadnice przy słupach fasady",
+    "S0-02": "screen ZIP — kaseta w podsufitce okapu PL-E",
+    "S0-07": "screen ZIP — kaseta w podsufitce okapu zach. PL-E (1,50 m)",
+    "S1-01": "screen ZIP — kaseta w pasie górnym ramy C (PL-C2), poza izolacją",
+    "S2-01": "screen ZIP w szczelinie wentylowanej za lamelami, kaseta nadstawna przed membraną pod okapem PL-3 (bez podcięcia wełny)",
+    "S2-02": "jw. — szczelina za lamelami",
+    "S2-08": "jw. — szczelina za lamelami",
+}
+for o in OT:
+    s = _SC[o["sciana"]]
+    if s["przegroda"] in ("SZ1", "SZ2", "SZL") and o["typ"] != "otwor":
+        o["montaz"] = MONTAZ
+        if o.get("oslona") and o["oslona"] != "brak":
+            o["oslona_montaz"] = OSL_MONTAZ.get(s["id"], "kaseta elewacyjna nadstawna PRZED licem ETICS (bez kasety w ociepleniu), "
+                                                         "prowadnice na konsolach dystansowych z przekładką")
+        if o["parapet"] <= 0.001 and o["typ"] in ("drzwi_przesuwne_HS", "drzwi_zewn", "fix"):
+            o["prog"] = {"profil": "próg termiczny ≤ 0,02 m (HS/drzwi) na podwalinie progowej z XPS 300 / PUR-GF (λ ≤ 0,05) na płycie",
+                         "odwodnienie_liniowe": s["kond"] == "P0" and s["przegroda"] == "SZ1",
+                         "hydroizolacja": "wywinięcie membrany SBS płyty ≥ 0,15 m pod profil + taśma EPDM"}

@@ -787,7 +787,7 @@ def blok_przy_krawedzi(prof: list, z_kraw: float, od_dolu: bool, kol: int = 3) -
     kol = 3 → σ normalne (σ_x w przekroju pionowym / σ_z w poziomym)."""
     segs = sorted(prof, key=lambda p: p[0], reverse=not od_dolu)
     if not segs:
-        return {"F": 0.0, "e": 0.0, "h": 0.0}
+        return {"F": 0.0, "e": 0.0, "h": 0.0, "s0": 0.0}
     first = segs[0]
     v0 = first[kol] if od_dolu else first[kol + 1]
     if abs(v0) < 1e-9:
@@ -825,7 +825,8 @@ def blok_przy_krawedzi(prof: list, z_kraw: float, od_dolu: bool, kol: int = 3) -
         if stop:
             break
     e = S / F if F > 1e-12 else 0.0
-    return {"F": znak * F, "e": e, "h": h}
+    s_kr = (first[kol] if od_dolu else first[kol + 1])
+    return {"F": znak * F, "e": e, "h": h, "s0": float(s_kr)}
 
 
 def wypadkowa_rozciagania(prof: list, kol: int = 3) -> tuple[float, float]:

@@ -257,7 +257,7 @@ def krawedzie(P: Polygon, otwory: list[OtworT]) -> list[Krawedz]:
                 if oid:
                     opis = f"ościeże {'prawe' if right else 'lewe'} otworu {oid}"
                 else:
-                    opis = "koniec lewy" if right else "koniec prawy"
+                    opis = f"koniec {'lewy' if right else 'prawy'} tarczy (x = {f(x0, 2)})"
                 out.append(Krawedz("", opis, "v", x0, a, b, 1 if right else -1, oid))
     # nazwy jednoznaczne (np. kilka odcinków krawędzi dolnej)
     cnt: dict = {}
@@ -538,9 +538,17 @@ class AnalizaTarczy:
                 for b in self._bloki_krawedzi(r, e):
                     if b["F"] > qp:
                         qp = b["F"]
+            s_char = 0.0
+            for n, r in self.r_char.items():
+                for b in self._bloki_krawedzi(r, e):
+                    if b["F"] > 0:
+                        s_char = max(s_char, b["s0"])
             if best is not None:
+                bl = [b for b in self.bloki[(e.id, best[1])] if b["F"] > 0.05 * best[0]["F"]]
+                zak = (min(b["x"] for b in bl), max(b["x"] for b in bl)) if bl else (e.a, e.b)
                 self.pasy_mes[e.id] = {"F": best[0]["F"], "k": best[1], "x": best[0]["x"], "e": best[0]["e"],
-                                       "h": best[0]["h"], "band": best[0]["band"], "sciskanie": best[0]["sciskanie"], "F_qp": qp}
+                                       "h": best[0]["h"], "band": best[0]["band"], "sciskanie": best[0]["sciskanie"], "F_qp": qp,
+                                       "s_char": s_char, "zakres": zak}
 
     # ---------------------------------------------------------------------------------------------
     # 3. STM
@@ -638,10 +646,10 @@ class AnalizaTarczy:
             wd = min(abs(v - e.wsp) for v in cand) if cand else 1.0
             ev = self._offset_v(r, e.a, e.b, e.wsp, e.strona > 0, min(0.25, 0.15 * wd))
             cols.append((e.wsp + e.strona * ev, 3, ("v", e.wsp, ev)))
+        x_lo, x_hi = P.bounds[0] + 0.02, P.bounds[2] - 0.02
         for s in d.podpory:
             if s.dl > 1e-9:
-                dd = min(0.10, s.dl / 4)
-                cols += [(s.s0 + dd, 1, None), (s.s1 - dd, 1, None)]
+                cols += [(min(max(s.s0, x_lo), x_hi), 1, None), (min(max(s.s1, x_lo), x_hi), 1, None)]
             else:
                 cols.append((s.s0, 2, None))
         for o in d.obciazenia:

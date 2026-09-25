@@ -322,22 +322,22 @@ otwory:
   - {id: O0-03, sciana: S0-01, symbol: HS1, typ: drzwi_przesuwne_HS, odl: 4.1, szer: 2.335, wys: 2.75, parapet: 0.0, otwieranie: {strona: prawa, kierunek: do_wewn, rodzaj: HS}, oslona: screen_zip, bezprogowe: true, uwagi: kwatera 3 — HS salon}
   - {id: O0-04, sciana: S0-01, symbol: HS1, typ: drzwi_przesuwne_HS, odl: 6.435, szer: 2.335, wys: 2.75, parapet: 0.0, otwieranie: {strona: prawa, kierunek: do_wewn, rodzaj: HS}, oslona: screen_zip, bezprogowe: true, uwagi: kwatera 4 — HS jadalnia}
   - {id: O0-05, sciana: S0-01, symbol: FX2, typ: fix, odl: 8.77, szer: 2.93, wys: 2.75, parapet: 0.0, oslona: screen_zip, uwagi: przeszklenie E — kwatera 5 (kuchnia)}
-  - {id: O0-06, sciana: S0-02, symbol: DZ3, typ: drzwi_zewn, odl: 0.25, szer: 0.9, wys: 2.75, parapet: 0.0, otwieranie: {strona: lewa, kierunek: na_zewn, rodzaj: R}, oslona: screen_zip, uwagi: 'drzwi gospodarcze przeszklone w systemie i podziale fasady E (przeszczep J2) — pas E czytany ≈ 12,85 m; pod okapem E'}
+  - {id: O0-06, sciana: S0-02, symbol: DZ3, typ: drzwi_zewn, odl: 0.35, szer: 0.9, wys: 2.75, parapet: 0.0, otwieranie: {strona: lewa, kierunek: na_zewn, rodzaj: R}, oslona: screen_zip, uwagi: 'drzwi gospodarcze przeszklone w systemie i podziale fasady E (przeszczep J2) — pas E czytany ≈ 12,85 m; pod okapem E'}
   - {id: O0-07, sciana: S0-04, symbol: BR1, typ: brama, odl: 0.625, szer: 5.0, wys: 2.25, parapet: -0.1, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: segmentowa}, uwagi: 'brama segmentowa 5,00 × 2,25 m w świetle, kratki went. ≥ 0,08 m² (W-111, W-115); posadzka garażu −0,10'}
   - {id: O0-08, sciana: S0-03, symbol: DZ2, typ: drzwi_zewn, odl: 4.9, szer: 1.0, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: na_zewn, rodzaj: R}, uwagi: 'drzwi boczne garażu (rowery, ogród) — 5,70 m od granicy E'}
   - {id: O0-09, sciana: S0-06, symbol: DZ1, typ: drzwi_zewn, odl: 0.85, szer: 1.1, wys: 2.4, parapet: 0.0, otwieranie: {strona: prawa, kierunek: do_wewn, rodzaj: R}, uwagi: 'drzwi wejściowe 1,10 × 2,40 w murze (≥ 0,90 × 2,00 w świetle ościeżnicy), próg ≤ 0,02 (W-055); pod daszkiem'}
-  - {id: O0-10, sciana: S0-06, symbol: FX3, typ: fix, odl: 0.205, szer: 0.545, wys: 2.4, parapet: 0.0, oslona: brak, uwagi: 'doświetle boczne drzwi wejściowych, VSG mleczne (przeszczep z W3)'}
+  - {id: O0-10, sciana: S0-06, symbol: FX3, typ: fix, odl: 0.4, szer: 0.35, wys: 2.4, parapet: 0.0, oslona: brak, uwagi: 'doświetle boczne drzwi wejściowych, VSG mleczne (przeszczep z W3)'}
   - {id: O0-11, sciana: S0-07, symbol: HS2, typ: drzwi_przesuwne_HS, odl: 5.15, szer: 2.4, wys: 2.75, parapet: 0.0, otwieranie: {strona: prawa, kierunek: do_wewn, rodzaj: HS}, oslona: screen_zip, bezprogowe: true, uwagi: 'HS salonu na taras zach. pod okapem 1,50 m (przeszczep J2 z W1/W3)'}
   - {id: O0-12, sciana: S0-07, symbol: OZ1, typ: okno, odl: 1.15, szer: 1.8, wys: 1.5, parapet: 0.9, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: RU}, oslona: zaluzja_zewn, uwagi: pokój gościnny — zachód}
   - {id: O0-13, sciana: S0-06, symbol: ON1, typ: okno, odl: 6.9, szer: 0.8, wys: 0.6, parapet: 1.6, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: U}, oslona: brak, uwagi: łazienka gościnna — okno wysokie}
-  - {id: O0-14, sciana: S0-08, symbol: D1, typ: drzwi, odl: 4.1, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: salon → przedpokój gościnny}
+  - {id: O0-14, sciana: S0-08, symbol: D1, typ: drzwi, odl: 4.2, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: salon → przedpokój gościnny}
   - {id: O0-15, sciana: S0-11, symbol: D1, typ: drzwi, odl: 0.205, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: przedpokój → pokój gościnny}
-  - {id: O0-16, sciana: S0-19, symbol: D2P, typ: drzwi, odl: 0.225, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: na_zewn, rodzaj: przesuwne, przesuwne: true}, uwagi: 'łazienka gościnna — drzwi przesuwne naścienne (WT §79 ust. 1), podcięcie ≥ 0,022 m²'}
+  - {id: O0-16, sciana: S0-19, symbol: D2P, typ: drzwi, odl: 0.325, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: na_zewn, rodzaj: przesuwne, przesuwne: true}, uwagi: 'łazienka gościnna — drzwi przesuwne naścienne (WT §79 ust. 1), podcięcie ≥ 0,022 m²'}
   - {id: O0-17, sciana: S0-09, symbol: D3, typ: drzwi, odl: 0.21, szer: 0.8, wys: 2.0, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: spiżarnia pod biegiem 2 (przeszczep J2)}
   - {id: O0-18, sciana: S0-10, symbol: OT1, typ: otwor, odl: 0.4, szer: 1.5, wys: 2.4, parapet: 0.0, uwagi: hol → pas komunikacyjny przy schodach / strefa dzienna}
   - {id: O0-19, sciana: S0-20, symbol: D2, typ: drzwi, odl: 0.21, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: na_zewn, rodzaj: R}, uwagi: 'WC gościnne — na zewnątrz, kratka ≥ 0,022 m²'}
   - {id: O0-20, sciana: S0-21, symbol: DS1, typ: drzwi, odl: 0.275, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: 'drzwi szklane VSG w osi wejścia (x ≈ 10,60)'}
-  - {id: O0-21, sciana: S0-15, symbol: D1, typ: drzwi, odl: 0.25, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: 'przedsionek → kuchnia; przesunięte do fasady (przeszczep J1) — ciągła zabudowa kuchni y 1,30–5,02'}
+  - {id: O0-21, sciana: S0-15, symbol: D1, typ: drzwi, odl: 0.35, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: 'przedsionek → kuchnia; przesunięte do fasady (przeszczep J1) — ciągła zabudowa kuchni y 1,40–5,02'}
   - {id: O0-22, sciana: S0-17, symbol: DG1, typ: drzwi, odl: 3.875, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: 'garaż → przedsionek: szczelne, samozamykacz, U ≤ 1,3 (W-113, W-244)'}
   - {id: O0-23, sciana: S0-18, symbol: D4, typ: drzwi, odl: 1.6, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: pom. techniczne dostępne z domu przez przedsionek (poprawka J2)}
   # --- P1
@@ -350,7 +350,7 @@ otwory:
   - {id: O1-07, sciana: S1-11, symbol: D1, typ: drzwi, odl: 2.6, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: pokój dziecka 1}
   - {id: O1-08, sciana: S1-11, symbol: OT2, typ: otwor, odl: 6.0, szer: 2.4, wys: 2.4, parapet: 0.0, uwagi: hol → pokój rodzinny (galeria przy schodach)}
   - {id: O1-09, sciana: S1-05, symbol: D1, typ: drzwi, odl: 2.6, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: pokój dziecka 2}
-  - {id: O1-10, sciana: S1-05, symbol: D2, typ: drzwi, odl: 4.1, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: na_zewn, rodzaj: R}, uwagi: łazienka dzieci — na zewnątrz}
+  - {id: O1-10, sciana: S1-05, symbol: D2, typ: drzwi, odl: 4.2, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: na_zewn, rodzaj: R}, uwagi: łazienka dzieci — na zewnątrz}
   - {id: O1-11, sciana: S1-06, symbol: D2, typ: drzwi, odl: 0.21, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: na_zewn, rodzaj: R}, uwagi: WC z natryskiem — na zewnątrz (pion K2 nad WC P0)}
   - {id: O1-12, sciana: S1-06, symbol: D1, typ: drzwi, odl: 1.65, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: pralnia z suszarnią}
   # --- P2
@@ -363,7 +363,7 @@ otwory:
   - {id: O2-07, sciana: S2-05, symbol: ON4, typ: okno, odl: 0.4, szer: 1.7, wys: 1.5, parapet: 0.9, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: U}, oslona: brak, uwagi: klatka schodowa — północ (nad biegami)}
   - {id: O2-08, sciana: S2-12, symbol: D1, typ: drzwi, odl: 3.9, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: garderoba → sypialnia}
   - {id: O2-09, sciana: S2-13, symbol: D1, typ: drzwi, odl: 3.9, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: hol → garderoba (przedpokój apartamentu)}
-  - {id: O2-10, sciana: S2-09, symbol: D2, typ: drzwi, odl: 0.225, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: na_zewn, rodzaj: R}, uwagi: garderoba → łazienka rodziców (na zewnątrz)}
+  - {id: O2-10, sciana: S2-09, symbol: D2, typ: drzwi, odl: 0.325, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: na_zewn, rodzaj: R}, uwagi: garderoba → łazienka rodziców (na zewnątrz)}
   - {id: O2-11, sciana: S2-14, symbol: D1, typ: drzwi, odl: 3.9, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: hol → gabinet}
   - {id: O2-12, sciana: S2-15, symbol: D4, typ: drzwi, odl: 0.325, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: 'hol → pom. techniczne (centrala reku, wyłaz na dach)'}
 
@@ -480,8 +480,8 @@ schody:
   - {id: SCH2, z_kond: P1, na_kond: P2, liczba_stopni: 18, wys_stopnia: 0.175, szer_stopnia: 0.28, biegi: [{start: [6.555, 5.23], kierunek: [0, 1], szer: 1.15, stopni: 9}, {start: [7.82, 7.47], kierunek: [0, -1], szer: 1.145, stopni: 9}], spoczniki: [{obrys: [[5.98, 7.47], [8.395, 7.47], [8.395, 8.645], [5.98, 8.645]], rzedna: 4.725}], plyta: {grubosc: 0.18}, mat: ZB_C25, uwagi: 'płyty biegów ŻB 18 cm oparte na ścianach C/D i ściance środkowej; stopnie dębowe; prześwit nad biegiem ≈ 2,75 m (≥ 2,00)'}
 
 balustrady:
-  - {id: BL1, polilinia: [[6.03, 5.23, 0.175], [6.03, 7.47, 1.575], [6.03, 8.595, 1.575], [8.345, 8.595, 1.575], [8.345, 7.47, 1.575], [8.345, 5.23, 3.15]], wys: 0.9, typ: 'pochwyt przyścienny stal nierdzewna Ø42, 0,05 m od ściany (W-096); szerokość użytkowa biegu ≥ 1,05 m (W-091)'}
-  - {id: BL2, polilinia: [[6.03, 5.23, 3.325], [6.03, 7.47, 4.725], [6.03, 8.595, 4.725], [8.345, 8.595, 4.725], [8.345, 7.47, 4.725], [8.345, 5.23, 6.3]], wys: 0.9, typ: 'pochwyt przyścienny stal nierdzewna Ø42, 0,05 m od ściany (W-096); szerokość użytkowa biegu ≥ 1,05 m (W-091)'}
+  - {id: BL1, polilinia: [[7.059, 5.23, 0.175], [7.059, 7.47, 1.575], [7.059, 7.541, 1.575], [7.321, 7.541, 1.575], [7.321, 7.47, 1.75], [7.321, 5.23, 3.15]], wys: 0.9, typ: 'pochwyt stal nierdzewna Ø42 na wspornikach, ciągły wokół ścianki środkowej (W-095/W-096); od strony ścian C/D — ściany pełne, brak krawędzi otwartej'}
+  - {id: BL2, polilinia: [[7.059, 5.23, 3.325], [7.059, 7.47, 4.725], [7.059, 7.541, 4.725], [7.321, 7.541, 4.725], [7.321, 7.47, 4.9], [7.321, 5.23, 6.3]], wys: 0.9, typ: 'pochwyt stal nierdzewna Ø42 na wspornikach, ciągły wokół ścianki środkowej (W-095/W-096); od strony ścian C/D — ściany pełne, brak krawędzi otwartej'}
 
 lamele:
   - {id: LAM-S, elewacja: S, linia: [[-1.3, -0.3], [12.3, -0.3]], z_od: 6.25, z_do: 9.08, rozstaw: 0.12, b: 0.04, h: 0.08, odsuniecie: 0.15, mat: DREWNO_TERMO, uwagi: 'bryła A — pionowe lamele na 2 ryglach, konsole z przekładką (χ); stała osłona okien P2'}
@@ -492,13 +492,13 @@ lamele:
 tarasy:
   - {id: T1, obrys: [[-3.3, -3.3], [12.3, -3.3], [12.3, -0.3], [-0.3, -0.3], [-0.3, 5.125], [-3.3, 5.125]], rzedna: -0.02, nawierzchnia: 'deska kompozytowa na legarach i wspornikach regulowanych, szczeliny 5 mm; odwodnienie liniowe przy progach HS', grubosc: 0.05, uwagi: 'taras ogrodowy w kształcie L (pd. przed E pod okapem 1,00 m, zach. pod okapem 1,50 m) — 4,30 m od granicy zach.'}
   - {id: T2, obrys: [[9.4, 9.05], [11.7, 9.05], [11.7, 10.35], [9.4, 10.35]], rzedna: -0.02, nawierzchnia: 'płyty betonowe 60×60 na podsypce, spadek 2 % od drzwi', grubosc: 0.08, uwagi: podest wejścia głównego pod daszkiem (bez stopni — cokół przejęty rzędną terenu)}
-  - {id: T3, obrys: [[12.1, -1.3], [13.4, -1.3], [13.4, -0.3], [12.1, -0.3]], rzedna: -0.02, nawierzchnia: 'płyty betonowe 60×60, spadek 2 % od drzwi', grubosc: 0.08, uwagi: podest drzwi gospodarczych pod okapem E}
+  - {id: T3, obrys: [[12.2, -1.3], [13.5, -1.3], [13.5, -0.3], [12.2, -0.3]], rzedna: -0.02, nawierzchnia: 'płyty betonowe 60×60, spadek 2 % od drzwi', grubosc: 0.08, uwagi: podest drzwi gospodarczych pod okapem E}
 
 # Stolarka — dane PRZYKŁADOWE typowych wyrobów (klucze: src/lamela/obliczenia/dane/wyroby_przykladowe.yaml), „lub równoważne”
 stolarka:
   FX1: {wyrob: fix_ALU_3sz, opis: 'przeszklenie stałe ALU 3-szybowe, 1,90 × 2,75 m, VSG od wewn. (strefa uderzeń)', U_w: 0.75, g_n: 0.5}
   FX2: {wyrob: fix_ALU_3sz, opis: 'przeszklenie stałe ALU 3-szybowe, 2,93 × 2,75 m', U_w: 0.73, g_n: 0.5}
-  FX3: {wyrob: fix_ALU_3sz, opis: 'doświetle drzwi wejściowych 0,545 × 2,40 m, VSG mleczne', U_w: 0.85, g_n: 0.4}
+  FX3: {wyrob: fix_ALU_3sz, opis: 'doświetle drzwi wejściowych 0,35 × 2,40 m, VSG mleczne', U_w: 0.85, g_n: 0.4}
   HS1: {wyrob: HS_ALU_3sz, opis: 'drzwi podnoszono-przesuwne ALU 2,335 × 2,75 m, próg termiczny bezprogowy, odwodnienie liniowe', U_w: 0.85, g_n: 0.5}
   HS2: {wyrob: HS_ALU_3sz, opis: 'drzwi HS ALU 2,40 × 2,75 m (taras zach.)', U_w: 0.85, g_n: 0.5}
   BC1: {wyrob: okno_ALU_3sz, opis: 'boks C: 3 kwatery 2,335 × 1,50 m (środkowa RU), dolna część stała VSG do 0,85 m', U_w: 0.8, g_n: 0.5}
@@ -537,7 +537,7 @@ wezly:
   - {id: WZ-08, nazwa: 'Cokół: ściana zewn. – płyta fundamentowa na XPS (część ogrzewana)', typ: sciana_grunt, przegrody: [SZ1, POD-0], dlugosc: 43.4}
   - {id: WZ-09, nazwa: 'Połączenia dom–garaż nieogrzewany (ściany osi E i 2 z płytą i stropem; docieplenie pasem 1,0 m — SUF-G)', typ: polaczenie_nieogrz, przegrody: [SWG, POD-0, DZ1, SUF-G], dlugosc: 24.5}
   - {id: WZ-10, nazwa: Strop pośredni ST1/ST2 – ściana zewn. z ETICS ciągłym (wieniec), typ: strop_posredni, przegrody: [POD-1, SZ1], dlugosc: 55.12}
-  - {id: WZ-11, nazwa: 'Ościeża, nadproża, podokienniki i progi — ciepły montaż w warstwie izolacji', typ: oscieze, przegrody: [SZ1, SZ2, SZL], dlugosc: 181.8}
+  - {id: WZ-11, nazwa: 'Ościeża, nadproża, podokienniki i progi — ciepły montaż w warstwie izolacji', typ: oscieze, przegrody: [SZ1, SZ2, SZL], dlugosc: 181.41}
   - {id: WZ-12, nazwa: Narożniki wypukłe ścian zewnętrznych, typ: naroznik_wypukly, przegrody: [SZ1, SZ2], dlugosc: 49.5}
   - {id: WZ-13, nazwa: Konsole rusztu lamel (przekładka termiczna), typ: konsola_lamel, przegrody: [SZ2, SZL], liczba: 50}
   - {id: WZ-14, nazwa: 'Konsole ramy boksu C i pasa D (punktowe, przekładka termiczna)', typ: kotwa, przegrody: [SZ1], liczba: 10}
