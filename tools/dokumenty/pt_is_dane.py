@@ -53,6 +53,7 @@ def _yaml(p: Path) -> dict:
 
 
 class DanePTIS:
+    ARK_ZNACZNIK = ZNACZNIK_NIEAKTUALNE
     """Komplet danych PT-3 IS. Atrybuty: ``m`` (model), ``B``/``Dz``/``I``/``Wy`` (surowe YAML), ``wym`` (rejestr),
     ``R`` (fizyka/energia), ``W`` (instalacje), ``Wd`` (``do_dict`` modułów), ``ep``/``ep0`` (EP z PV / bez PV),
     ``arkusze``, ``ark_braki``, ``ark_info``, ``braki_md``, ``otwarte`` (sprawy do zamknięcia)."""

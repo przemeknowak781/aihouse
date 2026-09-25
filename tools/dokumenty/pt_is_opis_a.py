@@ -41,6 +41,13 @@ def rozdz_stan(o: Opis, D: DanePTIS):
     o.tabela(wiersze, tytul="Wynik sprawdzeń obliczeniowych PT-3 IS",
              uwagi="Warunki informacyjne — wartości podawane bez kryterium (np. moc ścian grzewczych uzupełniających).",
              zrodlo="lamela.obliczenia.sanitarne, lamela.obliczenia.energia — uruchomienie przy generowaniu tomu")
+    o.tekst("Numeracja pomieszczeń w tomie — jak na arkuszach i w PT-1 AR (PN-B-01025, W-314): numer kondygnacji "
+            "(parter = 1, I piętro = 2, II piętro = 3), kropka, numer kolejny. Identyfikatory modelu (`model/budynek.yaml`) "
+            "mają parter = 0 — numer w tomie = identyfikator modelu + 1 w części przed kropką.")
+    if getattr(D, "ark_nieaktualne", None):
+        o.wniosek(f"**{D.ARK_ZNACZNIK}** — część rysunkowa nie odpowiada bieżącym obliczeniom: "
+                  + "; ".join(f"{nr}: {pw}" for nr, pw in D.ark_nieaktualne)
+                  + ". Tom nie nadaje się do wydania do czasu ponownego wygenerowania arkuszy.", alarm=True)
     if D.otwarte:
         o.tekst("**Sprawy otwarte** (do zamknięcia przed wydaniem tomu do realizacji; po uzupełnieniu modelu status "
                 "aktualizuje się przy ponownym generowaniu):\n\n" + "\n".join(f"{i}. {t}" for i, t in enumerate(D.otwarte, 1)))
@@ -103,6 +110,16 @@ def _obj(D: DanePTIS, ident: str) -> dict:
     return next((x for x in ((D.Dz.get("uzbrojenie") or {}).get("obiekty") or []) if x.get("id") == ident), {})
 
 
+def _pc_jz(D: DanePTIS) -> str:
+    """Opis jednostki zewnętrznej PC z modelu bez odległości wpisanej w tekst — odległość od granicy podaje się
+    jedną wartością z geometrii modelu (obliczenie hałasu i sprawdzenie W-024 w module ogrzewania)."""
+    op = _obj(D, "PC-JZ").get("opis", "lokalizacja wg PZT")
+    op = re.sub(r";?\s*\d+(?:,\d+)?\s*m od granicy[^;]*", "", op).strip(" ;")
+    h = D.og.halas or {}
+    return (f"{op}; odległość od granicy ({h.get('granica', 'granica działki')}) **{L(h.get('r'), 2)} m** "
+            "(geometria modelu — ta sama wartość w obliczeniu hałasu i w sprawdzeniu odległości)")
+
+
 def _pom_nazwa(D: DanePTIS, pid: str) -> str:
     p = next((x for x in D.went.pomieszczenia if x.id == pid), None)
     return f"{pid} {p.nazwa}" if p else pid
@@ -132,7 +149,7 @@ def rozdz_ogrzewanie(o: Opis, D: DanePTIS):
     poziom mocy akustycznej L_WA = {L(pc.get('L_WA'), 0)} dB (tryb nocny {L(pc.get('L_WA_noc'), 0)} dB). Układ
     monoenergetyczny: punkt biwalentny θ_biv = **{L(biw['theta_biv'], 1)} °C**, grzałka elektryczna
     {L(og.par.grzalka_kW, 1)} kW pokrywa {L(100 * biw['udzial_grzalki'], 2)} % rocznego zapotrzebowania (bilans godzinowy
-    TMY Poznań). Jednostka zewnętrzna: {_obj(D, 'PC-JZ').get('opis', 'lokalizacja wg PZT')}. Skropliny —
+    TMY Poznań). Jednostka zewnętrzna: {_pc_jz(D)}. Skropliny —
     {_obj(D, 'SK-PC').get('opis', 'odprowadzenie wg W-146')}. Moduł hydrauliczny, zasobnik c.w.u. i bufor —
     pomieszczenie techniczne parteru.
 
