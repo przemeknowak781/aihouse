@@ -913,6 +913,7 @@ def min_szerokosc(H: float, widoki, grupy, bloki, tb_h: float, o: dict):
     """Najmniejsza szerokość arkusza o wysokości H mieszcząca treść: (W, grupa, rozmieszczenie) lub None."""
     Wmax = float(o["max_dlugosc"])
     gap = float(o.get("odstep_widok_blok", GAP_VB))
+    mc = int(o.get("max_czesci_uwag", 4))
     Hf = H - 2 * MARG
     a_b = sum(b.szer * b.wys for b in bloki if b.uwagi is None)
     a_b += sum(b.uwagi.wysokosc(0, len(b.uwagi.lines)) * b.uwagi.w for b in bloki if b.uwagi is not None)
@@ -926,8 +927,8 @@ def min_szerokosc(H: float, widoki, grupy, bloki, tb_h: float, o: dict):
             continue
         W = math.ceil(lb / 5.0) * 5.0
         step, prev, r = 20.0, None, None
-        while W <= Wmax + 1e-6:
-            r = pakuj(W, H, widoki, g, bloki, tb_h, gap_vb=gap)
+        while W <= Wmax + 1e-6:            # wykonalność: bez rezerwacji stref znaków (najluźniejszy wariant)
+            r = pakuj(W, H, widoki, g, bloki, tb_h, gap_vb=gap, znaki=False, max_czesci=mc)
             if r.ok:
                 break
             prev, W = W, W + step
@@ -936,7 +937,7 @@ def min_szerokosc(H: float, widoki, grupy, bloki, tb_h: float, o: dict):
         if prev is not None:
             Wf = prev + 5.0
             while Wf < W - 1e-6:
-                rf = pakuj(Wf, H, widoki, g, bloki, tb_h, gap_vb=gap)
+                rf = pakuj(Wf, H, widoki, g, bloki, tb_h, gap_vb=gap, znaki=False, max_czesci=mc)
                 if rf.ok:
                     W, r = Wf, rf
                     break
@@ -946,15 +947,22 @@ def min_szerokosc(H: float, widoki, grupy, bloki, tb_h: float, o: dict):
     return best
 
 
-def _pakuj_wysrodkuj(W, H, widoki, g, bloki, tb_h, W_need, gap_vb: float = GAP_VB):
-    """Pakowanie na W × H z grupą widoków wyśrodkowaną w nadwyżce szerokości / wysokości (gdy się da)."""
+def _pakuj_wysrodkuj(W, H, widoki, g, bloki, tb_h, W_need, gap_vb: float = GAP_VB, o: dict | None = None):
+    """Pakowanie na W × H z grupą widoków wyśrodkowaną w nadwyżce szerokości / wysokości — przyjmowane tylko, gdy
+    nie pogarsza upakowania względem układu bez przesunięcia (``_jakosc``: części uwag, kolumny bloków, liczba
+    bloków, rezerwacja znaków); inaczej układ bez przesunięcia. None — nic się nie mieści."""
+    o = o or DOMYSLNE
+    kw = dict(znaki=o.get("znaki_centrujace", "auto"), max_czesci=int(o.get("max_czesci_uwag", 4)))
     extra = max(0.0, W - W_need)
     slack = max(0.0, (H - 2 * MARG) - PAD_V - PAD_B - g.h)
-    for p in ((extra / 2.0, slack / 2.0), (extra / 2.0, 0.0), (0.0, slack / 2.0), (0.0, 0.0)):
-        r = pakuj(W, H, widoki, g, bloki, tb_h, p, gap_vb)
-        if r.ok:
+    r0 = pakuj(W, H, widoki, g, bloki, tb_h, (0.0, 0.0), gap_vb, **kw)
+    for p in ((extra / 2.0, slack / 2.0), (extra / 2.0, 0.0), (0.0, slack / 2.0)):
+        if p[0] < 0.5 and p[1] < 0.5:
+            continue
+        r = pakuj(W, H, widoki, g, bloki, tb_h, p, gap_vb, **kw)
+        if r.ok and (not r0.ok or _jakosc(r) <= _jakosc(r0)):
             return r
-    return None
+    return r0 if r0.ok else None
 
 
 @dataclass
@@ -982,6 +990,7 @@ class Uklad:
                     pole_m2=round(self.W * self.H / 1e6, 4), standardowy=self.standard, tryb=self.tryb,
                     koszt=round(self.koszt, 4), wypelnienie_szac=round(self.wypelnienie_szac, 3),
                     uklad_widokow=self.roz.grupa.opis if self.roz.grupa else "", skladanie=self.skladanie,
+                    czesci_uwag=self.roz.czesci_uwag, znaki_rezerwowane=self.roz.znaki,
                     kandydaci=self.kandydaci[:6])
 
 
@@ -996,6 +1005,8 @@ def wypelnienie_ukladu(R: Rozmieszczenie, res: float = 2.0) -> float:
     nx, ny = int(math.ceil((fx1 - fx0) / res)), int(math.ceil((fy1 - fy0) / res))
     occ = np.zeros((ny, nx), bool)
     for _k, _n, r in R.prostokaty:
+        if _k == "znak":
+            continue
         c0, c1 = int((r[0] - fx0) / res), int(math.ceil((r[2] - fx0) / res))
         r0, r1 = int((r[1] - fy0) / res), int(math.ceil((r[3] - fy0) / res))
         occ[max(0, r0):max(0, r1), max(0, c0):max(0, c1)] = True
@@ -1010,18 +1021,25 @@ def rozmiesc(widoki: list[Widok], bloki: list[Blok], tb_h: float, o: dict | None
     tryb, jawny = tryb_formatu(o["format"] if fmt is None else fmt)
     grupy = uklady_widokow(widoki)
     gap = float(o.get("odstep_widok_blok", GAP_VB))
+    kc = float(o.get("kara_czesci_uwag", 0.02))
     if tryb == "jawny":
         nm, W, H = jawny
         std = nazwa_standardowa(W, H)
-        for g in grupy:
-            r = pakuj(W, H, widoki, g, bloki, tb_h, gap_vb=gap)
-            if r.ok:
-                need = _dociagnij(W, H, widoki, g, bloki, tb_h, gap)
-                r = _pakuj_wysrodkuj(W, H, widoki, g, bloki, tb_h, need, gap) or r
-                k, oc = koszt(W, H, std is not None, o, tb_h)
-                return Uklad(std[0] if std else nm, W, H, std[1] if std else None, std is not None, tryb, r, k, oc,
-                             [], wypelnienie_ukladu(r))
-        return None
+        best = None
+        for g in grupy:                            # warianty ułożenia widoków: najlepsze upakowanie (_jakosc)
+            if not pakuj(W, H, widoki, g, bloki, tb_h, gap_vb=gap, znaki=False,
+                         max_czesci=int(o["max_czesci_uwag"])).ok:
+                continue
+            need = _dociagnij(W, H, widoki, g, bloki, tb_h, gap)
+            r = _pakuj_wysrodkuj(W, H, widoki, g, bloki, tb_h, need, gap, o)
+            if r is not None and (best is None or _jakosc(r) < _jakosc(best)):
+                best = r
+        if best is None:
+            return None
+        k, oc = koszt(W, H, std is not None, o, tb_h)
+        k *= 1.0 + kc * best.dodatkowe_czesci
+        return Uklad(std[0] if std else nm, W, H, std[1] if std else None, std is not None, tryb, best, k, oc,
+                     [], wypelnienie_ukladu(best))
     stdf = formaty_standardowe(float(o["max_wysokosc"]), float(o["max_dlugosc"]))
     heights = sorted({float(h) for h in o["wysokosci"] if float(h) <= float(o["max_wysokosc"]) + 1e-6}
                      | {f[2] for f in stdf})
@@ -1043,11 +1061,20 @@ def rozmiesc(widoki: list[Widok], bloki: list[Blok], tb_h: float, o: dict | None
                 opts.append((k, std[0] if std else f"{L:.0f}×{H:.0f}", L, std[1] if std else None, std is not None,
                              oc))
         opts.sort(key=lambda t: (round(t[0], 6), not t[4], t[2]))
+        # koszt pełny = koszt papieru i składania × (1 + kara za każdą dodatkową część uwag) — znany po upakowaniu;
+        # kandydaci w kolejności kosztu papieru, do pierwszego, którego sam koszt papieru nie jest już lepszy
+        best_h = None
         for k, nm, L, ori, is_std, oc in opts[:12]:
-            r = _pakuj_wysrodkuj(L, H, widoki, g, bloki, tb_h, W_need, gap)
-            if r is not None:
-                cands.append(Uklad(nm, L, H, ori, is_std, tryb, r, k, oc))
+            if best_h is not None and k >= best_h.koszt - 1e-9:
                 break
+            r = _pakuj_wysrodkuj(L, H, widoki, g, bloki, tb_h, W_need, gap, o)
+            if r is None:
+                continue
+            kt = k * (1.0 + kc * r.dodatkowe_czesci)
+            if best_h is None or kt < best_h.koszt - 1e-9:
+                best_h = Uklad(nm, L, H, ori, is_std, tryb, r, kt, oc)
+        if best_h is not None:
+            cands.append(best_h)
     if not cands:
         return None
     cands.sort(key=lambda u: (round(u.koszt, 6), not u.standard, u.W * u.H, u.W))
@@ -1062,13 +1089,16 @@ def _dociagnij(W, H, widoki, g, bloki, tb_h, gap_vb: float = GAP_VB) -> float:
     """Najmniejsza szerokość ≤ W, przy której treść się mieści (do wyśrodkowania w formacie jawnym)."""
     lo = MARG_L + TB_W + MARG
     Wn = W
-    while Wn - 20.0 >= lo and pakuj(Wn - 20.0, H, widoki, g, bloki, tb_h, gap_vb=gap_vb).ok:
+    while Wn - 20.0 >= lo and pakuj(Wn - 20.0, H, widoki, g, bloki, tb_h, gap_vb=gap_vb, znaki=False).ok:
         Wn -= 20.0
     return Wn
 
 
 def sprawdz_nakladanie(R: Rozmieszczenie, tol: float = 0.5) -> list[str]:
-    """Kontrola rozmieszczenia: nakładanie się prostokątów (widoki, bloki, tabliczka) i wyjście poza ramkę."""
+    """Kontrola rozmieszczenia: nakładanie się prostokątów (widoki z tytułami, bloki, tabliczka, strefy znaków
+    centrujących) i wyjście poza ramkę. Strefa znaku jest sprawdzana z blokami (rezerwacja); z widokami, tytułami
+    i tabliczką nie — tam znak skraca ``Sheet.przytnij_znaki_centrujace`` (kontrola na arkuszu:
+    ``kolizje_znakow``)."""
     bledy = []
     fx0, fy0, fx1, fy1 = rama(R.W, R.H)
     P = R.prostokaty
@@ -1076,11 +1106,36 @@ def sprawdz_nakladanie(R: Rozmieszczenie, tol: float = 0.5) -> list[str]:
         if a[0] < fx0 - tol or a[1] < fy0 - tol or a[2] > fx1 + tol or a[3] > fy1 + tol:
             bledy.append(f"{k1} „{n1}” poza ramką {tuple(round(v, 1) for v in a)}")
         for k2, n2, b in P[i + 1:]:
-            if k1 == k2 == "widok" and n1 == n2:
-                continue                           # pasy zajętości jednego widoku
+            if {k1, k2} <= {"widok", "tytul"} and n1 == n2:
+                continue                           # pasy zajętości i tytuł jednego widoku
+            if "znak" in (k1, k2) and (k2 if k1 == "znak" else k1) != "blok":
+                continue
             if _przec(a, b, tol):
                 bledy.append(f"{k1} „{n1}” nakłada się na {k2} „{n2}”")
     return bledy
+
+
+def kolizje_znakow(sh, odstep: float = 0.2) -> list[str]:
+    """Kontrola na narysowanym arkuszu: znaki centrujące (po przycięciu) nie dotykają treści (prymitywy arkusza
+    i rzutni poza ramką i samymi znakami)."""
+    from ..draft.sheet import ZNAK_CENTR_GR as GR, _obwiednie_w_pasach
+    out = []
+    zn = getattr(sh, "znaki", None) or {}
+    pasy = {}
+    for s_, p in zn.items():
+        (xa, ya), (xb, yb) = p.pts[0], p.pts[-1]
+        a = GR / 2.0 + odstep
+        r = (min(xa, xb) - a, min(ya, yb) - a, max(xa, xb) + a, max(ya, yb) + a)
+        x0, y0, x1, y1 = sh.frame                  # tylko część za ramką (w marginesie nic nie ma)
+        r = (max(r[0], x0 + 0.5), max(r[1], y0 + 0.5), min(r[2], x1 - 0.5), min(r[3], y1 - 0.5))
+        if r[2] > r[0] and r[3] > r[1]:
+            pasy[s_] = r
+    for B in _obwiednie_w_pasach(sh, pasy):
+        for s_, r in pasy.items():
+            m = (B[:, 0] < r[2]) & (B[:, 2] > r[0]) & (B[:, 1] < r[3]) & (B[:, 3] > r[1])
+            if m.any():
+                out.append(f"znak centrujący „{s_}” dotyka treści ({int(m.sum())} el.)")
+    return sorted(set(out))
 
 
 # ================================================================================================ pomiar arkusza

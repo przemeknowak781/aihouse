@@ -693,6 +693,7 @@ def _arkusz_uklad(ctx, spec, idx, total, P, fmt_req):
         b.fn(sh, x, y_top, w)
     plot.add_control_marks(sh)
     znaki = sh.przytnij_znaki_centrujace()     # znak nie może dotykać treści (widoki nie są od znaków odsuwane)
+    bledy += U.kolizje_znakow(sh)
     tbr = sh.tb_rect or lay.roz.tabliczka
     if abs((tbr[3] - tbr[1]) - tb_h) > 0.5:
         bledy.append(f"wysokość tabliczki {tbr[3] - tbr[1]:.1f} ≠ pomiar {tb_h:.1f} mm")

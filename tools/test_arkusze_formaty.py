@@ -157,16 +157,18 @@ def _sprawdz_uklad(u, widoki, tb_h):
     tb = R.tabliczka
     fx0, fy0, fx1, fy1 = U.rama(u.W, u.H)
     assert abs(tb[2] - fx1) < 1e-6 and abs(tb[1] - fy0) < 1e-6, "tabliczka poza prawym dolnym rogiem"
-    rects = [(k, n, r) for k, n, r in R.prostokaty]
+    rects = [(k, n, r) for k, n, r in R.prostokaty if k != "znak"]   # strefy znaków: sprawdz_nakladanie
     for i, (k1, n1, a) in enumerate(rects):              # minimalne odstępy
         for k2, n2, b in rects[i + 1:]:
-            if n1 == n2 and k1 == k2 == "widok":
+            if n1 == n2 and {k1, k2} <= {"widok", "tytul"}:
                 continue
             dx = max(b[0] - a[2], a[0] - b[2])
             dy = max(b[1] - a[3], a[1] - b[3])
             gap = max(dx, dy)
-            need = U.GAP_VB if "widok" in (k1, k2) else min(U.GAP_B, U.GAP_C)
-            if {k1, k2} == {"widok"}:
+            kw = {"tytul": "widok"}
+            k1w, k2w = kw.get(k1, k1), kw.get(k2, k2)
+            need = U.GAP_VB if "widok" in (k1w, k2w) else min(U.GAP_B, U.GAP_C)
+            if {k1w, k2w} == {"widok"}:
                 need = min(need, U.GAP_V)
             assert gap >= need - 0.05, f"odstęp {gap:.1f} < {need} mm: {k1} {n1} ↔ {k2} {n2}"
     ok = SK.ocena_skladania(u.W, u.H, tb_h)

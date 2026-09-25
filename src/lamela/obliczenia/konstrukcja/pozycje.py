@@ -1875,9 +1875,13 @@ class AnalizaKonstrukcji:
             if ov < 0.3:
                 continue
             pv = self.prof[v.id]["dol"]
+            na_b = self._odcinki_na_belkach(v, "oparta_na")       # odcinki ściany v stojące na belkach — nie na murze w
             for cs in pv.przypadki():
                 sw = [w.st(v.pt(s_, 0.0))[0] for s_ in pv.s]
-                pr["top_a"].dodaj(cs, sw, pv.get(cs))
+                q = pv.get(cs).copy()
+                for _, a_, c_ in na_b:
+                    q[(pv.s >= a_ - 1e-9) & (pv.s <= c_ + 1e-9)] = 0.0
+                pr["top_a"].dodaj(cs, sw, q)
         # ciężar własny i przekazanie przez otwory → profil dolny
         gm2, zest = self._ciezar_sciany(w)
         h = w.z_do - w.z_od
