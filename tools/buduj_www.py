@@ -132,7 +132,7 @@ def _dalej(a, D, tr, glb, dist, assets, cache, teraz, t0) -> int:
     print("[3] rendery www (16:9, 4:3)…", flush=True)
     ss = 1 if a.szybko else 2
     wej = [a.budynek, a.dzialka] + sorted(str(p) for p in (ROOT / "src" / "lamela").glob("*.py")) + \
-        sorted(str(p) for p in (ROOT / "src" / "lamela" / "model3d").glob("*.py")) + [str(Path(RN.__file__))]
+        sorted(str(p) for p in (ROOT / "src" / "lamela" / "model3d").glob("*.py"))
     m = D["model"]
     pkt = punkty_bryly(D["ir"])
     z_ter = float(((D["ir"].meta or {}).get("dzialka") or {}).get("teren_z_budynek") or 0.0)

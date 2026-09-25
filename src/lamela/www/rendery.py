@@ -32,14 +32,15 @@ OKO = 1.65
 
 
 def klucz_cache(pliki: list, ujecia: dict, proporcje: dict, ss: int, extra=None) -> str:
-    """Klucz cache: treść plików wejściowych (model YAML, kod IR/eksportu 3D, renderery) + konfiguracja ujęć.
-    Eksport glb nie jest bajtowo deterministyczny, więc kluczem nie jest sam plik glb."""
+    """Klucz cache: treść plików wejściowych (model YAML, kod IR/eksportu 3D, renderery) + konfiguracja ujęć
+    (w ``extra`` — kamery i pominięte drzewa z ``plan_ujec``). Eksport glb nie jest bajtowo deterministyczny,
+    więc kluczem nie jest sam plik glb."""
     h = hashlib.sha256()
     for f in sorted(str(x) for x in pliki):
         h.update(f.encode())
         h.update(Path(f).read_bytes())
     h.update(json.dumps([WERSJA, ujecia, proporcje, ss, extra], sort_keys=True, default=str).encode())
-    for f in (R3D / "render.js", R3D / "render.py", HERE / "render_www.js", Path(__file__)):
+    for f in (R3D / "render.js", R3D / "render.py", HERE / "render_www.js", HERE / "render_www.html"):
         h.update(f.read_bytes())
     return h.hexdigest()[:16]
 
@@ -129,7 +130,7 @@ def kamera_34(pkt: list, az: float, f_mm: float, W: int, H: int, obszar, z_ter: 
     przesuwny), najmniejsza odległość, przy której cała bryła (punkty ``pkt``) mieści się w kadrze z marginesem;
     kamera musi stać w ``obszar`` (shapely). Gdy się nie da — krótsza ogniskowa (do 26 mm)."""
     from shapely.geometry import Point
-    xs, ys, zs = [p[0] for p in pkt], [p[1] for p in pkt], [p[2] for p in pkt]
+    xs, ys = [p[0] for p in pkt], [p[1] for p in pkt]
     cx, cy = (min(xs) + max(xs)) / 2, (min(ys) + max(ys)) / 2
     dx, dy = math.sin(math.radians(az)), math.cos(math.radians(az))
     ze = z_ter + OKO

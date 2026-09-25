@@ -166,7 +166,7 @@ def _polnoc_skala(ark: Arkusz):
     """Strzałka północy (oś y modelu = północ, azymut osi y z modelu uwzględniany przez orientację rysunku) i podziałka
     liniowa 0–5 m w prawym dolnym narożu okna."""
     u, v = ark.u1 - 1.0, ark.v0 + 0.9
-    ark.raw(f'<g class="an" aria-hidden="true">')
+    ark.raw('<g class="an" aria-hidden="true">')
     ark.path(f"M{ark.pt(u, v + 1.2)} L{ark.pt(u - 0.28, v + 0.35)} L{ark.pt(u, v + 0.52)} L{ark.pt(u + 0.28, v + 0.35)}Z",
              "an-n")
     ark.text(u, v, "N", "an-t", dy=0)

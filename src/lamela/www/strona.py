@@ -535,7 +535,7 @@ def formularz(tr: dict, W: dict, sep: str) -> str:
     def pole(id_, lab, inp, pelna=False):
         return (f'<div class="pole{" pelna" if pelna else ""}"><label for="{id_}">{lab}</label>{inp}'
                 f'<span class="blad" id="{id_}-blad" aria-live="polite"></span></div>')
-    f = (f'<form class="zap" id="form-zap" novalidate>'
+    f = ('<form class="zap" id="form-zap" novalidate>'
          + pole("z-imie", "Imię i nazwisko *", '<input id="z-imie" name="imie" type="text" autocomplete="name" required '
                 'aria-describedby="z-imie-blad">')
          + pole("z-email", "E-mail *", '<input id="z-email" name="email" type="email" autocomplete="email" required '
