@@ -17,7 +17,7 @@ from __future__ import annotations
 from markupsafe import Markup, escape
 
 from .dane import ELEMENTY, Projektant, SPECJALNOSCI
-from .formaty import data_slownie, liczba
+from .formaty import data_slownie
 from .znaczniki import do_uzup, DANE_PRZYKLADOWE, ZAL, NZW
 
 PB = "ustawy z dnia 7 lipca 1994 r. – Prawo budowlane (t.j. Dz.U. 2026 poz. 524 ze zm.)"
@@ -216,7 +216,6 @@ ZAGROZENIA_DOMYSLNE = [
 
 
 def dodaj_informacje_bioz(dok, *, tresc=None, projektant=None, zagrozenia=None, jako_zalacznik=True):
-    from .dokument import Dokument  # noqa: F401 (typ)
     t = dict(BIOZ_DOMYSLNA)
     t.update(tresc or {})
     p = projektant or next((x for x in dok.dane.get("projektanci", []) if x.branza == "AR"), Projektant("AR"))

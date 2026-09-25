@@ -20,9 +20,9 @@ from markupsafe import escape
 
 from . import render as R
 from .arkusze import Arkusz
-from .dane import dane_obiektu, ELEMENTY, SPECJALNOSCI
-from .dokument import Dokument, WynikDokumentu, _env, _metadane, _plain, stempluj_arkusz, GRUPY
-from .formaty import data_iso, data_slownie, odmiana
+from .dane import dane_obiektu, SPECJALNOSCI
+from .dokument import Dokument, WynikDokumentu, _env, _metadane, _plain, stempluj_arkusz
+from .formaty import data_iso, odmiana
 from .nazwy import nazwa_pliku, sprawdz_nazwe
 from .znaczniki import STATUS_PRZYKLAD, oznacz_html, indeksy_html
 
@@ -121,10 +121,8 @@ class Tom:
 
         out = pymupdf.open()
         zakladki, etykiety, uwagi = [], [], []
-        n_front = 0
         if front is not None:
             fdoc = pymupdf.open(stream=front, filetype="pdf")
-            n_front = fdoc.page_count
             out.insert_pdf(fdoc, links=True)
             fdoc.close()
             if self.strona_tytulowa:
@@ -206,7 +204,7 @@ class Tom:
             else:
                 p = Path(e)
                 a = Arkusz.z_pdf(p) if _wyglada_na_arkusz(p) else None
-                tyt = a.etykieta if a else (pymupdf.open(str(p)).metadata.get("title") or p.stem)
+                tyt = a.etykieta if a else _tytul_pdf(p)
             doc = pymupdf.open(str(p))
             if a is not None and (self.stempel if self.stempel is not None else self.przyklad):
                 for pg in doc:
@@ -216,9 +214,12 @@ class Tom:
             n = doc.page_count
             doc.close()
             zagn = bool(a is not None and self.zagniezdzaj and poprzedni_dok)
+            if a is None:
+                poprzedni_dok = True
             etyk = [{"startpage": 0, "prefix": a.nr if a else _plain(tyt)[:24], "style": "" if a else "D",
                      "firstpagenum": 1}]
-            czesci.append(dict(kod=a.nr if a else Path(p).stem, tytul=tyt, tytul_zakladki=tyt, pdf=pdf,
+            kod = a.nr if a else (tyt.split(" — ")[0] if " — " in tyt else Path(p).stem)
+            czesci.append(dict(kod=kod, tytul=tyt.split(" — ", 1)[-1], tytul_zakladki=tyt, pdf=pdf,
                                zakladki=[[l, t, s] for l, t, s in own], etykiety=etyk, wpisy=[], strony=n,
                                arkusze=[(a, 1)] if a else [], zagniezdzony=zagn))
         return czesci
@@ -233,7 +234,8 @@ class Tom:
         pod = self.podtytul or " · ".join(c["tytul"] for c in kody)
         zaw = []
         for c in kody:
-            opis = f"{c['strony_opisu'] or c['strony']} {odmiana(c['strony_opisu'] or c['strony'], 'strona', 'strony', 'stron')}"
+            n_s = c.get('strony_opisu') or c['strony']
+            opis = f"{n_s} {odmiana(n_s, 'strona', 'strony', 'stron')}"
             if c.get("arkusze"):
                 na = len(c["arkusze"])
                 opis += f" + {na} {odmiana(na, 'rysunek', 'rysunki', 'rysunków')}"
@@ -270,6 +272,11 @@ class Tom:
                         sp = 2 if dok.strona_tytulowa_wl else 1
                         wpisy.append(dict(poziom=2, numer="", tytul=dok.tytul_spisu, strona=str(sp),
                                           href=f"{URI_EL}{ei}/{sp}", grupa_naglowek=None))
+                if not c["wpisy"] and not c.get("arkusze"):          # gotowy PDF — wpisy z jego zakładek
+                    for lvl, t, sp in c["zakladki"]:
+                        if lvl <= 2:
+                            wpisy.append(dict(poziom=lvl + 1, numer="", tytul=t, strona=str(sp),
+                                              href=f"{URI_EL}{ei}/{sp}", grupa_naglowek=None))
                 for w in c["wpisy"]:
                     if w["poziom"] > 2 or not w.get("strona"):
                         continue
@@ -285,6 +292,18 @@ class Tom:
         html = (f'<!doctype html><html lang="pl"><head><meta charset="utf-8"><title>{tyt}</title>'
                 f"<style>{front.css()}</style></head><body>" + "\n".join(body) + "</body></html>")
         return R.html_na_pdf(indeksy_html(oznacz_html(html)))
+
+
+def _tytul_pdf(p: Path) -> str:
+    """Tytuł zakładki dla gotowego PDF: „KOD — tytuł” dla plików z ``Dokument.render_pdf`` (metadane Title
+    „<obiekt> — KOD tytuł (status)”), w pozostałych przypadkach Title albo nazwa pliku."""
+    d = pymupdf.open(str(p))
+    t = (d.metadata or {}).get("title") or ""
+    d.close()
+    m = re.search(r"—\s+(PZT|PAB|ZL|WN|PT(?:[ -]\d+)?(?: [A-Z]{2})?)\s+(.+?)(?:\s+\(PRZYKŁAD[^)]*\))?$", t)
+    if m:
+        return f"{m.group(1)} — {m.group(2)}"
+    return t or p.stem
 
 
 def _wyglada_na_arkusz(p: Path) -> bool:

@@ -20,7 +20,7 @@ from pathlib import Path
 import pymupdf
 import yaml
 
-from .formaty import PT2MM, wykryj_format, odmiana
+from .formaty import odmiana
 from .nazwy import sprawdz_nazwe
 from .znaczniki import policz_znaczniki, blokuje_zlozenie, STATUS_PRZYKLAD
 

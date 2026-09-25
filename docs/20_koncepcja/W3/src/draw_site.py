@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Plan zagospodarowania dzialki - wariant W2."""
+"""Plan zagospodarowania dzialki - wariant W3."""
 import sys, os
 import matplotlib
 matplotlib.use("Agg")
@@ -19,9 +19,10 @@ def wskazniki():
     dz = box(Z["xw"], Z["ys"], Z["xe"], Z["yn"])
     walls = unary_union([M.outline("P0"), M.outline("P1"), M.outline("P2")])
     plyty = unary_union([walls] + [p["poly"] for p in M.PLYTY])
-    utw = unary_union([e["poly"] for e in M.TEREN_ELEM.values()] + [walls])
+    utw = unary_union([e["poly"] for e in M.TEREN_ELEM.values() if e["typ"] != "bio"] + [walls])
     pbc = dz.area - utw.area
-    zielony_dach = box(12.30, -0.30, 18.70, 9.30).area - 0.3 * (6.4 + 9.6) * 2  # netto w attyce
+    dg = next(d for d in M.DACHY if d["id"] == "D-G")["poly"]
+    zielony_dach = dg.buffer(-0.30).area  # netto w attyce (tylko dach garazu)
     kond = sum(M.outline(k).area for k in ("P0", "P1", "P2"))
     return dict(dzialka=dz.area, zabudowa=walls.area, zabudowa_plyty=plyty.area, utwardzone=utw.area - walls.area,
                 pbc=pbc, pbc_z_dachem=pbc + 0.5 * zielony_dach, dach_ziel=zielony_dach, suma_kond=kond, intens=kond / dz.area,
@@ -63,34 +64,43 @@ def main():
         ax.add_patch(Circle((x, y), r, facecolor="#b9d99a", edgecolor="#5a8a3a", lw=0.8, alpha=0.8, zorder=0.7))
         ax.plot([x], [y], marker="+", color="#3d6b22", zorder=0.8)
     # utwardzenia
-    col = {"podjazd": "#cfcac1", "dojscie": "#d9d4ca", "taras": "#e6d9bf", "sciezka_E": "#e3e0da", "smietnik": "#9e9e9e", "pc_plyta": "#bdbdbd", "skrzynki": "#cfe3f3"}
+    col = {"podjazd": "#cfcac1", "dojscie": "#d9d4ca", "lacznik": "#d9d4ca", "taras": "#e6d9bf", "patio": "#e6d9bf", "os_ogrodowa": "#e3e0da",
+           "smietnik": "#9e9e9e", "pc_plyta": "#bdbdbd", "niecka": "#cfe3f3"}
     for k, e in M.TEREN_ELEM.items():
-        D.draw_poly(ax, e["poly"], facecolor=col[k], edgecolor="#777", lw=0.6, zorder=1, hatch="///" if k == "skrzynki" else None)
+        D.draw_poly(ax, e["poly"], facecolor=col[k], edgecolor="#777", lw=0.6, zorder=1, hatch="///" if k == "niecka" else None)
     for i, mp in enumerate(M.MIEJSCA_GOSC):
         D.draw_poly(ax, mp, facecolor="none", edgecolor="#333", lw=0.8, zorder=2, ls=(0, (4, 2)))
         c = mp.centroid
         ax.text(c.x, c.y, f"P{i+1}\ngość\n2,5×5,0", fontsize=6.3, ha="center", va="center", zorder=2)
     zx, zy = M.ZBIORNIK["xy"]
-    ax.add_patch(Rectangle((zx - 1.5, zy - 1.0), 3.0, 2.0, facecolor="#cfe3f3", edgecolor="#1f6fb4", lw=0.9, zorder=2))
-    ax.text(zx, zy, "zbiornik\n6 m³", fontsize=6, ha="center", va="center", zorder=3)
-    ax.text(-2.0, 14.6, "skrzynki rozsączające", fontsize=5.8, ha="center", va="center", zorder=3)
+    zw, zh = M.ZBIORNIK["wym"]
+    ax.add_patch(Rectangle((zx - zw / 2, zy - zh / 2), zw, zh, facecolor="#cfe3f3", edgecolor="#1f6fb4", lw=0.9, zorder=2))
+    ax.text(zx, zy, f"zbiornik\n{M.ZBIORNIK['V']:.0f} m³", fontsize=6, ha="center", va="center", zorder=3)
+    ax.plot([zx, -2.5], [zy - zh / 2, -11.0], color="#17becf", lw=1.0, ls=(0, (3, 2)), zorder=2)
+    ax.text(-2.5, -13.0, "niecka chłonna\n(ogród deszczowy)", fontsize=5.8, ha="center", va="center", zorder=3)
+    ax.text(8.3, -13.0, "oś ogrodowa", fontsize=6, rotation=90, ha="left", va="center", zorder=3)
     # budynek
     D.draw_poly(ax, M.outline("P0"), facecolor="#8f8f8f", edgecolor="black", lw=1.2, zorder=3)
-    D.draw_poly(ax, box(12.30, -0.30, 18.70, 9.30), facecolor="#b7d99a", edgecolor="black", lw=0.8, zorder=3.1, hatch="..")
+    for d in M.DACHY:
+        if d["id"] in ("D-G", "D-P0"):
+            D.draw_poly(ax, d["poly"], facecolor="#b7d99a", edgecolor="black", lw=0.8, zorder=3.1, hatch="..")
+    D.draw_poly(ax, M.outline("P1"), facecolor="#7f7f7f", edgecolor="black", lw=1.0, zorder=3.15)
     D.draw_poly(ax, M.outline("P2"), facecolor="#6e6e6e", edgecolor="black", lw=1.0, zorder=3.2)
     D.outline_dashed(ax, W["plyty"], color="#222", ls=(0, (2, 2)), lw=0.8, z=3.3)
-    ax.text(5.3, 2.3, "BUDYNEK\nMIESZKALNY\njednorodzinny\n3 kond. nadz.\n±0,00 = 101,65\ndach P2 attyka +9,80", fontsize=7.2, ha="center", va="center",
+    ax.text(5.3, 2.9, "BUDYNEK\nMIESZKALNY\njednorodzinny\n3 kond. nadz.\n±0,00 = 101,65\nattyka P2 +9,85", fontsize=7.2, ha="center", va="center",
             color="white", zorder=4, fontweight="bold")
-    ax.text(15.5, 4.5, "garaż 2-st.\ndach zielony\n+3,85", fontsize=6.8, ha="center", va="center", zorder=4)
-    ax.text(1.7, 7.0, "dach P1\n+6,70", fontsize=6, ha="center", va="center", color="white", zorder=4)
-    ax.text(10.4, 7.0, "dach P1\n+6,70", fontsize=6, ha="center", va="center", color="white", zorder=4)
-    ax.text(-2.2, 5.6, "wspornik\nP2", fontsize=5.5, ha="center", va="bottom", zorder=4)
-    ax.text(11.0, 9.55, "wejście", fontsize=6, ha="center", va="center", zorder=4)
-    ax.annotate("", xy=(15.5, 9.5), xytext=(15.5, 16.8), arrowprops=dict(arrowstyle="->", lw=1.2), zorder=4)
-    ax.text(15.5, 16.0, "wjazd", fontsize=6.3, ha="center", va="bottom", zorder=4)
-    ax.text(5.0, -2.3, "taras ogrodowy −0,05", fontsize=6.5, ha="center", zorder=4)
-    ax.text(20.1, 1.1, "PC", fontsize=6, ha="center", va="center", zorder=4)
-    ax.text(7.8, 16.65, "odpady", fontsize=5.5, ha="center", va="center", color="white", zorder=4)
+    ax.text(15.5, 8.0, "garaż 2-st.\ndach zielony\n+3,65", fontsize=6.8, ha="center", va="center", zorder=4)
+    ax.text(1.7, 7.3, "dach P1\n+6,70", fontsize=6, ha="center", va="center", color="white", zorder=4)
+    ax.text(11.0, 7.3, "P1", fontsize=6, ha="center", va="center", color="white", zorder=4)
+    ax.text(2.0, 10.4, "dach zielony skrzydła +3,40", fontsize=5.5, ha="center", va="center", zorder=4)
+    ax.text(14.9, 1.9, "patio\nporanne", fontsize=6, ha="center", va="center", zorder=4)
+    ax.text(-2.2, 6.0, "wspornik\nP2", fontsize=5.5, ha="center", va="bottom", zorder=4)
+    ax.text(8.0, 13.3, "wejście", fontsize=6, ha="center", va="center", zorder=4)
+    ax.annotate("", xy=(15.5, 11.8), xytext=(15.5, 18.4), arrowprops=dict(arrowstyle="->", lw=1.2), zorder=4)
+    ax.text(15.5, 17.6, "wjazd", fontsize=6.3, ha="center", va="bottom", zorder=4)
+    ax.text(5.0, -3.6, "taras ogrodowy −0,05", fontsize=6.5, ha="center", zorder=4)
+    ax.text(10.8, 12.9, "PC", fontsize=6, ha="center", va="center", zorder=4)
+    ax.text(10.25, 18.4, "odpady", fontsize=5.5, ha="center", va="center", color="white", zorder=4)
     # linia zabudowy
     ax.plot([Z["xw"], Z["xe"]], [M.LINIA_ZAB] * 2, color="#c00000", lw=1.3, ls=(0, (8, 3)), zorder=5)
     for xx in range(-6, 24, 3):
@@ -99,12 +109,12 @@ def main():
     # ogrodzenie
     b0, b1 = M.OGRODZENIE["brama"]
     f0, f1 = M.OGRODZENIE["furtka"]
-    for (a, b) in ((Z["xw"], M.TEREN_ELEM["smietnik"]["poly"].bounds[0]), (9.0, f0), (f1, b0)):
+    for (a, b) in ((Z["xw"], f0), (f1, M.TEREN_ELEM["smietnik"]["poly"].bounds[0]), (M.TEREN_ELEM["smietnik"]["poly"].bounds[2], b0)):
         ax.plot([a, b], [Z["yn"] - 0.1] * 2, color="#333", lw=2.2, zorder=5)
     ax.plot([b1, Z["xe"]], [Z["yn"] - 0.1] * 2, color="#333", lw=2.2, zorder=5)
     ax.plot([b0, b1], [Z["yn"] - 0.25] * 2, color="#333", lw=1.0, ls=(0, (3, 2)), zorder=5)
     ax.annotate("", xy=(b1 + 5.4, Z["yn"] - 0.6), xytext=(b1 + 0.3, Z["yn"] - 0.6), arrowprops=dict(arrowstyle="->", lw=0.8), zorder=5)
-    ax.text(b1 + 0.4, Z["yn"] - 0.9, "brama przesuwna 5,60 m (odjazd na E)", fontsize=5.8, ha="left", va="top", zorder=5)
+    ax.text(b1 + 0.4, Z["yn"] - 0.9, f"brama przesuwna {D.fmt(b1 - b0)} m (odjazd na E)", fontsize=5.8, ha="left", va="top", zorder=5)
     ax.text((f0 + f1) / 2 - 0.6, Z["yn"] - 0.8, "furtka 1,0", fontsize=5.5, ha="center", va="top", zorder=5)
     ax.add_patch(Rectangle((M.ZK[0], Z["yn"] - 0.45), M.ZK[1] - M.ZK[0], 0.45, facecolor="#d62728", edgecolor="black", lw=0.5, zorder=6))
     ax.text(M.ZK[0] - 0.1, Z["yn"] + 0.3, "ZK", fontsize=6, ha="right", va="bottom", color="#d62728", zorder=6)
@@ -117,16 +127,17 @@ def main():
     ax.add_patch(Circle((5.0, 15.0), 0.35, facecolor="white", edgecolor="#8b4513", lw=1.2, zorder=6))
     ax.text(5.5, 15.0, "Sr", fontsize=6, color="#8b4513", va="center", zorder=6)
     # wymiary odleglosci
-    D.dim_h(ax, Z["xw"], -1.30, 3.0, "6,30", fs=6.5)
-    D.dim_h(ax, Z["xw"], -2.40, 6.4, "5,20 (płyta)", fs=6.2)
-    D.dim_h(ax, Z["xw"], -0.30, -6.0, "7,30", fs=6.5)
-    D.dim_h(ax, 18.70, Z["xe"], 4.0, "5,70", fs=6.5)
-    D.dim_h(ax, 20.60, Z["xe"], 1.0, "3,80", fs=6.0)
-    D.dim_v(ax, 9.30, Z["yn"], 20.3, "8,00", fs=6.5, left=False)
-    D.dim_v(ax, 10.00, Z["yn"], 9.3, "7,30", fs=6.2)
+    D.dim_h(ax, Z["xw"], -1.30, 3.0, "6,00 (ściana P2)", fs=6.3)
+    D.dim_h(ax, Z["xw"], -2.20, 1.0, "5,10 (płyta ST3)", fs=6.2)
+    D.dim_h(ax, Z["xw"], -0.30, 8.0, "7,00", fs=6.5)
+    D.dim_h(ax, Z["xw"], -1.80, -2.0, "5,50 (okap/taras)", fs=6.0)
+    D.dim_h(ax, 18.70, Z["xe"], 7.0, "6,00", fs=6.5)
+    D.dim_h(ax, 13.80, Z["xe"], -1.0, "10,90 (okap E)", fs=6.0)
+    D.dim_v(ax, 11.60, Z["yn"], 20.3, "7,40", fs=6.5, left=False)
+    D.dim_v(ax, 12.80, Z["yn"], 6.3, "6,20 (daszek)", fs=6.2)
     D.dim_v(ax, M.LINIA_ZAB, Z["yn"], 22.5, "6,00", fs=6.5, left=False)
-    D.dim_v(ax, Z["ys"], -1.30, 22.0, "31,40 (okap)", fs=6.5, left=False)
-    D.dim_v(ax, Z["ys"], -4.30, 13.0, "28,40 (taras)", fs=6.2)
+    D.dim_v(ax, Z["ys"], -1.30, 22.0, "29,70 (okap)", fs=6.5, left=False)
+    D.dim_v(ax, Z["ys"], -4.50, 13.0, "26,50 (taras)", fs=6.2)
     D.dim_h(ax, Z["xw"], Z["xe"], -33.9 + 0.6, "32,00", fs=7)
     D.dim_v(ax, Z["ys"], Z["yn"], 25.0, "50,00", fs=7, left=False)
     D.north_arrow(ax, 31.0, 26.5, 1.3)
@@ -153,15 +164,15 @@ def main():
         ax.text(35.6, yy - 0.3, c, fontsize=5.4, zorder=8, ha="right", va="center", color="#1c6b2a")
     # legenda przylaczy
     leg = [("woda", "przyłącze wody PE 40 → wodomierz w pom. techn."), ("kan", "przykanalik PVC 160, Sr = studzienka D425"),
-           ("en", "WLZ z ZK → rozdzielnica RG"), ("tel", "światłowód"), ("deszcz", "deszczówka → zbiornik 6 m³ → skrzynki")]
+           ("en", "WLZ z ZK → rozdzielnica RG"), ("tel", "światłowód"), ("deszcz", "deszczówka → zbiornik 5 m³ → przelew do niecki")]
     for i, (k, t) in enumerate(leg):
         yy = -26.0 - i * 1.0
         ax.plot([25.0, 26.6], [yy, yy], color=cc[k], lw=2)
         ax.text(26.9, yy, t, fontsize=5.8, va="center")
-    fig.suptitle("W2 — ZAGOSPODAROWANIE DZIAŁKI (plan poglądowy, układ budynku: x → E, y → N)", fontsize=12.5, fontweight="bold", x=0.02, ha="left", y=0.99)
+    fig.suptitle("W3 — ZAGOSPODAROWANIE DZIAŁKI (plan poglądowy, układ budynku: x → E, y → N)", fontsize=12.5, fontweight="bold", x=0.02, ha="left", y=0.99)
     fig.text(0.02, 0.965, "Odległości od granic mierzone od lica ocieplenia (WT §9 ust. 3, §12): ściany z otworami ≥ 4,0 m, okapy/płyty ≥ 1,5 m (tu ≥ 4,0 m bezpiecznie). "
              "Wszystkie elementy budynku (także daszek i płyty) za linią zabudowy. Miejsca gościnne niezadaszone ≥ 3 m od granic E/W (WT §19 ust. 2, 5). "
-             "Pojemniki: WT §23 ust. 4 — odległości nie określa się w zabudowie jednorodzinnej.", fontsize=7.2, ha="left", va="top", wrap=True)
+             "Pojemniki: WT §23 ust. 4 — odległości nie określa się w zabudowie jednorodzinnej. Oś widoku x = 8,00: furtka → drzwi → ogród.", fontsize=7.2, ha="left", va="top", wrap=True)
     fig.subplots_adjust(left=0.01, right=0.99, top=0.94, bottom=0.01)
     fn = os.path.join(OUT, "zagospodarowanie.png")
     fig.savefig(fn, dpi=140)

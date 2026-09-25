@@ -33,7 +33,7 @@ sys.path.insert(0, str(REPO / "src"))
 import yaml  # noqa: E402
 
 from lamela.dokumenty import (Arkusz, Dokument, Tom, dane_obiektu, sprawdz_tom, plan_skladania,  # noqa: E402
-                              LISTY_KONTROLNE, liczba, do_uzup, DANE_PRZYKLADOWE, ZAL, NZW, zamknij_przegladarke)
+                              LISTY_KONTROLNE, liczba, do_uzup, DANE_PRZYKLADOWE, ZAL, zamknij_przegladarke)
 
 DEMO = REPO / "projekt/00_demo_silnika"
 WYM = yaml.safe_load(open(REPO / "docs/10_podstawy_prawne/wymagania.yaml", encoding="utf-8"))
@@ -302,7 +302,7 @@ def buduj_pab(d, model, arkusze) -> Dokument:
     regulacją temperatury zasilania — zgodnie z WT § 135 ust. 7–10 i § 147 ust. 5–7 (stosowanymi na podstawie art. 102a
     PB). Rozwiązanie jest technicznie i ekonomicznie uzasadnione (rejestr W-152).
     """, podstawa="§ 20 ust. 1 pkt 11 RPB")
-    pab.rozdzial("Zasadnicze elementy wyposażenia budowlano-instalacyjnego", f"""
+    pab.rozdzial("Zasadnicze elementy wyposażenia budowlano-instalacyjnego", """
     Źródło ciepła i c.w.u.: pompa ciepła powietrze–woda (R290) z zasobnikiem; wentylacja mechaniczna nawiewno-wywiewna
     z odzyskiem ciepła; instalacja elektryczna TN-S, instalacja PV ≤ 6,5 kWp (PB art. 29 ust. 4 pkt 3 lit. c).
     Przegrody zewnętrzne (informacyjnie; rozwiązania szczegółowe w PT-1 AR):
