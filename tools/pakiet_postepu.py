@@ -38,12 +38,20 @@ ETAPY = [
                                                      "projekt/06_PT_instalacje_elektryczne/BRAKI_DANYCH.md", "projekt/02_PZT/BRAKI_DANYCH.md"]),
     ("02_wyniki_etapow/08_arkusze_ekonomia", ["docs/30_arkusze/*.md"]),
     ("02_wyniki_etapow/09_strona_www", ["www/raport/zrzuty/*.jpg", "www/PLAN.md", "www/DO_POPRAWY.md"]),
+    ("02_wyniki_etapow/10_weryfikacje_i_kompletnosc_tomow", ["projekt/09_opis_i_zalaczniki/weryfikacja_*.md",
+                                                           "projekt/09_opis_i_zalaczniki/tom_I/weryfikacja_*.md",
+                                                           "projekt/09_opis_i_zalaczniki/*/raport_*.txt",
+                                                           "projekt/wydanie/raport_kompletnosci_*.md"]),
+    ("02_wyniki_etapow/11_statystyki_sesji", ["docs/50_statystyki/*.md", "docs/50_statystyki/*.png",
+                                            "docs/50_statystyki/dane/raport_*.md"]),
+    ("02_wyniki_etapow/12_prezentacja", ["docs/40_prezentacja/README.md"]),
 ]
 # duże pojedyncze rysunki: (katalog w pakiecie, katalog źródłowy)
 RYSUNKI = [
     ("03_rysunki_duze/PZT_zagospodarowanie", "projekt/02_PZT/rysunki"),
     ("03_rysunki_duze/PAB_architektura", "projekt/03_PAB/rysunki"),
-    ("03_rysunki_duze/PAB_architektura", "projekt/01_koncepcja/widoki"),      # zapas, gdy komplet PAB jeszcze nie wydany
+    ("03_rysunki_duze/PAB_architektura", "projekt/01_koncepcja/widoki"),      # zapas — tylko gdy komplet PAB nie istnieje
+    ("03_rysunki_duze/PT_AR_arkusze_stadium_PT", "projekt/10_PT_architektura/rysunki"),
     ("03_rysunki_duze/PT_AR_detale", "projekt/10_PT_architektura/detale"),
     ("03_rysunki_duze/PT_BO_konstrukcja", "projekt/04_PT_konstrukcja/rysunki"),
     ("03_rysunki_duze/PT_IS_instalacje_sanitarne", "projekt/05_PT_instalacje_sanitarne/rysunki"),
@@ -98,6 +106,8 @@ def main():
         d = ROOT / zr
         if not d.exists():
             continue
+        if zr == "projekt/01_koncepcja/widoki" and any((ROOT / "projekt/03_PAB/rysunki").glob("*.pdf")):
+            continue                                   # PAB wydany — dawne arkusze koncepcji byłyby nieaktualne
         n = 0
         for p in sorted(d.glob("*.pdf")):
             if p.name.startswith("tom") or p.stem in widziane:
@@ -125,7 +135,8 @@ def main():
     L = [f"# Dom LAMELA — pakiet postępu prac ({teraz:%d.%m.%Y, godz. %H:%M} CEST)", "",
          "Projekt koncepcyjny, budowlany i techniczny domu jednorodzinnego „Dom LAMELA” (sylweta „S” z przesuniętych brył wg",
          "szkicu Inwestora). **Stan: prace w toku — rysunki i tomy w tym pakiecie są WERSJAMI ROBOCZYMI przed wydaniem**",
-         "(model jest w końcowej rundzie poprawek; ostateczne wydanie zostanie przegenerowane z zamrożonego modelu).",
+         "(etap wydania w toku: po zamrożeniu modelu rysunki i tomy zostaną wygenerowane ponownie; status każdego tomu",
+         "podają raporty kompletności w `02_wyniki_etapow/10_weryfikacje_i_kompletnosc_tomow`).",
          "Działka, MPZP, warunki gruntowe i dane Inwestora są PRZYKŁADOWE/FIKCYJNE; dokumenty noszą oznaczenie",
          "„PRZYKŁAD – NIE DO ZŁOŻENIA”, a pola danych osobowych i uprawnień są do uzupełnienia.", "",
          "## Etapy", ""]
@@ -138,7 +149,10 @@ def main():
           "  `interpretacja_szkicu.png` (v1) i `interpretacja_S.png` zostały odrzucone po korekcie Inwestora.",
           "- Warianty W1–W3 to etap konkursowy koncepcji; bazą koncepcji ostatecznej jest W2 z przeszczepami z W1/W3.",
           "- Rysunki PDF są wektorowe (można je dowolnie powiększać); PNG to podglądy rastrowe.",
-          "- Strona katalogowa (wersja robocza): https://claude.ai/artifact/DVkqc1LzLnchNsDBNVnhTy (prywatna).", ""]
+          "- Strona katalogowa (wersja robocza): https://claude.ai/artifact/DVkqc1LzLnchNsDBNVnhTy (prywatna).",
+          "- Prezentacja (16 slajdów, do pobrania jako .pptx): https://claude.ai/artifact/TexRXPDTXrH99W7nd24UVB (prywatna).",
+          "- Tom PT-4 ma nazwę `PT_4_WB_…` (RPB zał. 1: WB = więcej niż jedna specjalność — elektryczna i telekomunikacyjna).",
+          "- Statystyki sesji (agenci, czas, iteracje, koszt porównawczy ze źródłami): `02_wyniki_etapow/11_statystyki_sesji`.", ""]
     (out / "README.md").write_text("\n".join(L), encoding="utf-8")
 
     pliki = [p for p in sorted(out.rglob("*")) if p.is_file() and p.name != "README.md"]

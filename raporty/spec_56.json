@@ -1,4 +1,5 @@
 {
+ "nr": 56,
  "title": "Nowy pakiet ZIP postępu (plansze, rysunki, tomy, statystyki) · konstrukcja: runda 1 ► · silnik arkuszy: poprawki ►",
  "stages": [
   [
@@ -52,6 +53,17 @@
  ],
  "notes": [
   "Pakiet: dodane arkusze PT-AR, weryfikacje tomów i statystyki sesji.",
-  "Konstrukcja: model i rysunki BO aktualizowane w rundzie 1."
+  "Konstrukcja: model i rysunki BO aktualizowane w rundzie 1.",
+  "NADZÓR (11:35): 2 agentów aktywnych, bez zastojów; najdłuższa bezczynność 3 min; zmiany w repo 0 min temu."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/docs/50_statystyki/agenci_w_czasie.png",
+   "caption": "Agenci w czasie (statystyki sesji)"
+  },
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/ar_stolarka.png",
+   "caption": "PT-1 AR s. 24: zestawienie stolarki z oceną U_w"
+  }
  ]
 }
