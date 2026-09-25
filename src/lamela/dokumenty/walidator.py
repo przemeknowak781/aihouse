@@ -291,8 +291,6 @@ def sprawdz_tom(tom, lista_kontrolna: dict | str | None = None) -> RaportKomplet
                     rx = re.compile("|".join(tr), re.I)
                     szczeg.append("; ".join(t for t in zakres["rysunki"] if rx.search(t))[:160])
             znaleziono = (len(trafione) >= wymagane) if wszystkie else bool(trafione)
-            if wszystkie and "tytulowa" in sz and len(sz) - ("wszystkie" in sz) == 1:
-                znaleziono = len(trafione) == len(sz["tytulowa"])
             if znaleziono:
                 st = "OK"
                 if poz.get("dane_osobowe") and "DO UZUPEŁNIENIA" in zakres["tytulowa"]:
