@@ -239,7 +239,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 7.6,
+      "czas_s": 7.3,
       "png_kontrola": {
         "px": [
           4075,
@@ -487,7 +487,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 4.4,
+      "czas_s": 4.2,
       "png_kontrola": {
         "px": [
           4075,
@@ -723,7 +723,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.9,
+      "czas_s": 3.8,
       "png_kontrola": {
         "px": [
           3367,
@@ -955,7 +955,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 5.4,
+      "czas_s": 5.3,
       "png_kontrola": {
         "px": [
           3367,
@@ -1201,7 +1201,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.9,
+      "czas_s": 3.0,
       "png_kontrola": {
         "px": [
           3508,
@@ -1290,8 +1290,8 @@
         "pole_m2": 0.2168,
         "standardowy": false,
         "tryb": "ekonomiczny",
-        "koszt": 0.2392,
-        "wypelnienie_szac": 0.671,
+        "koszt": 0.2322,
+        "wypelnienie_szac": 0.665,
         "uklad_widokow": "wiersz",
         "skladanie": {
           "zgiecia_pionowe": [
@@ -1322,9 +1322,9 @@
             "najwęższy pas pośredni 130 mm"
           ]
         },
-        "czesci_uwag": 2,
-        "kolejnosc_czytania": false,
-        "znaki_rezerwowane": true,
+        "czesci_uwag": 1,
+        "kolejnosc_czytania": true,
+        "znaki_rezerwowane": false,
         "kandydaci": [
           {
             "format": "730×297",
@@ -1332,7 +1332,7 @@
               730,
               297
             ],
-            "koszt": 0.2392,
+            "koszt": 0.2322,
             "pole_m2": 0.2168,
             "skladanie": "poprawne"
           },
@@ -1392,44 +1392,35 @@
             [
               540.0,
               118.0,
-              707.5,
+              720.0,
               148.8
             ]
           ],
           [
             "legenda",
             [
-              540.0,
-              244.4,
-              720.0,
-              284.0
+              351.0,
+              212.0,
+              531.0,
+              251.6
             ]
           ],
           [
             "obw",
             [
               540.0,
-              191.3,
+              235.9,
               720.0,
-              239.4
+              284.0
             ]
           ],
           [
-            "uwagi[1–4]",
+            "uwagi[1–7]",
             [
-              351.0,
-              206.2,
-              531.0,
-              242.5
-            ]
-          ],
-          [
-            "uwagi[5–7]",
-            [
-              376.0,
-              156.2,
-              556.0,
-              186.3
+              540.0,
+              175.6,
+              720.0,
+              230.9
             ]
           ]
         ],
@@ -1438,7 +1429,7 @@
           "g": 10.0,
           "d": 10.0,
           "l": 7.5,
-          "p": 10.0
+          "p": 7.9
         }
       },
       "pliki": {
@@ -1453,12 +1444,12 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 1007,
-          "napisy": 231,
+          "prymitywy": 1005,
+          "napisy": 230,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.7,
+      "czas_s": 2.9,
       "png_kontrola": {
         "px": [
           4312,
@@ -1475,15 +1466,15 @@
         "ok": true
       },
       "wypelnienie": {
-        "wypelnienie": 0.953,
-        "wypelnienie_rys": 0.947,
-        "wypelnienie_skl": 0.673,
-        "wypelnienie_kontur": 0.627,
+        "wypelnienie": 0.929,
+        "wypelnienie_rys": 0.921,
+        "wypelnienie_skl": 0.661,
+        "wypelnienie_kontur": 0.592,
         "pole_arkusza_m2": 0.2168,
         "pole_ramki_m2": 0.1939,
         "pusty_prostokat_mm": [
           520,
-          14
+          24
         ],
         "przyciety_mm": [
           722,
@@ -1924,7 +1915,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.0,
+      "czas_s": 2.1,
       "png_kontrola": {
         "px": [
           4075,
@@ -2151,7 +2142,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.2,
+      "czas_s": 2.1,
       "png_kontrola": {
         "px": [
           3367,
@@ -2397,7 +2388,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 39.2,
+      "czas_s": 8.6,
       "png_kontrola": {
         "px": [
           4075,
@@ -2634,7 +2625,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.1,
+      "czas_s": 3.2,
       "png_kontrola": {
         "px": [
           4075,
@@ -2880,7 +2871,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.5,
+      "czas_s": 3.8,
       "png_kontrola": {
         "px": [
           4252,
@@ -3349,7 +3340,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 4.5,
+      "czas_s": 4.7,
       "png_kontrola": {
         "px": [
           5138,
@@ -3398,7 +3389,7 @@
       "poprawne": 11,
       "słabe": 0
     },
-    "wypelnienie_wazone": 0.833
+    "wypelnienie_wazone": 0.831
   },
-  "czas_s": 106.1
+  "czas_s": 75.0
 }
