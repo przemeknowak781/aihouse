@@ -4,7 +4,11 @@
 Sprawdza: pasy składania do A4 (harmonijka: pasy ≤ 210 mm, w parach równych, pas z tabliczką ≥ 190 mm na
 wierzchu, pasy „ładne” 180–210 mm), plan składania (``plan_skladania``), formaty niestandardowe arkusza, podział
 uwag, brak nakładania bloków i widoków, zgodność wsteczną (formaty jawne, tryb klasyczny, kontrakt
-``register_view``: column_blocks, units_note, bez_skali, qa) i determinizm.
+``register_view``: column_blocks, units_note, bez_skali, qa) i determinizm; poprawki zgłoszone przez zespoły
+zastosowania (docs/30_arkusze/zastosowanie_*.md): strefy i przycinanie znaków centrujących, kolejność czytania
+części uwag i kolumn bloków, kara za rozdrobnienie uwag, wyśrodkowanie bez pogorszenia, dziedziczenie ``nr`` i
+scalanie bloków widoków, łamanie tekstu w tabelach (zestawienie pomieszczeń, spis tomu), zamiennik glifu ⌀,
+odcinek kontrolny a znak centrujący.
 
 Uruchomienie:
     PYTHONPATH=src python3 tools/test_arkusze_formaty.py [--szybko]    # --szybko: bez arkuszy z modelu testowego
@@ -441,6 +445,111 @@ def test_kolejnosc_kolumn():
     _sprawdz_uklad(u, v, 103.0)
 
 
+def _teksty(sh):
+    """[(napis, obwiednia (x0, y0, x1, y1))] napisów arkusza (bez rzutni)."""
+    from lamela.draft.core import PText, prim_points
+    out = []
+    for p in sh.prims:
+        if isinstance(p, PText):
+            b = prim_points(p, sh.k)[0]
+            out.append((p.string, (b[:, 0].min(), b[:, 1].min(), b[:, 0].max(), b[:, 1].max())))
+    return out
+
+
+def test_tabela_zawijanie():
+    """[AR 2] ``table(zawijaj=True)``: tekst komórki dłuższy niż kolumna łamany (wiersz rośnie), bez wychodzenia
+    na sąsiednią kolumnę; bez przepełnień — rysunek identyczny jak bez zawijania."""
+    from lamela.draft.sheet import table
+    cols = [("Nr", 14.0), ("Nazwa", 40.0), ("Posadzka", 30.0)]
+    rows = [["1.01", "Pom. techniczne (centrala rekuperacyjna, wyłaz na dach)", "Deska warstwowa dębowa 15 mm, klejona"],
+            ["1.02", "Hol", "Płytki"]]
+    sh = Sheet("A0", draw_frame=False)
+    r = table(sh, 100.0, 500.0, cols, rows, h=2.5, row_h=5.0, zawijaj=True)
+    granice = [100.0, 114.0, 154.0, 184.0]
+    for txt, b in _teksty(sh):
+        if txt in ("Nr", "Nazwa", "Posadzka"):
+            continue
+        c = max(i for i in range(3) if b[0] >= granice[i] - 0.5)
+        assert b[2] <= granice[c + 1] + 0.05, (txt, b, granice[c + 1])
+    assert 500.0 - r[1] > 5.0 * 3 + 1.0                              # wiersz z łamaniem wyższy
+    krotkie = [["1", "Hol", "Płytki"]]
+    a, b = Sheet("A0", draw_frame=False), Sheet("A0", draw_frame=False)
+    table(a, 10, 100, cols, krotkie)
+    table(b, 10, 100, cols, krotkie, zawijaj=True)
+    assert [(type(p).__name__, getattr(p, "string", None), str(getattr(p, "pts", getattr(p, "pos", None))))
+            for p in a.prims] == [(type(p).__name__, getattr(p, "string", None),
+                                   str(getattr(p, "pts", getattr(p, "pos", None)))) for p in b.prims]
+
+
+def test_tabela_pomieszczen():
+    """[AR 2] ``sheets._room_table``: długie nazwy i posadzki nie wchodzą na sąsiednie kolumny."""
+    from lamela.views.sheets import _room_table
+    rows = [dict(nr="3.07", nazwa="Pom. techniczne (centrala rekuperacyjna, wyłaz na dach)",
+                 posadzka="Deska warstwowa dębowa 15 mm, klejona", kategoria="techniczna", wys=2.6, pow=6.1),
+            dict(nr="1.13", nazwa="Garaż 2-stanowiskowy", posadzka="Posadzka żywiczna epoksydowa antypoślizgowa "
+                 "R11 (garaż)", kategoria="pomocnicza", wys=2.76, pow=37.42)]
+    sh = Sheet("A0", draw_frame=False)
+    _room_table(rows)(sh, 50.0, 800.0, U.TB_W)
+    granice = [50.0]
+    for w in (14.0, 60.0, 46.0, 18.0, 18.0, 22.0):
+        granice.append(granice[-1] + w)
+    for txt, b in _teksty(sh):
+        if b[3] > 800.0 - 7.0 - 0.1 or txt.startswith("ZESTAWIENIE"):
+            continue                                     # tytuł i nagłówek
+        c = max(i for i in range(6) if b[0] >= granice[i] - 0.6)
+        assert b[2] <= granice[c + 1] + 0.05, (txt, b, granice[c + 1])
+
+
+def test_zamiennik_glifu():
+    """[AR 3] ⌀ (U+2300, brak w Liberation Sans) → Ø w pomiarze, PDF i DXF; QA ostrzega o znakach spoza kroju."""
+    from lamela.draft import plot
+    from lamela.draft import text as T
+    from lamela.draft.core import text_items
+    from lamela.draft.sheet import TitleBlock
+    assert T.normalizuj("pręty ⌀12") == "pręty Ø12" and T.brakujace_znaki("pręty ⌀12") == ""
+    assert abs(T.width("⌀12", 2.5) - T.width("Ø12", 2.5)) < 1e-9
+    sh = Sheet("A3", title_block=TitleBlock(tytul="T", skala="1:50", nr_rysunku="X", obiekt="O", data="d"))
+    p = sh.text((50, 50), "pręty ⌀12", 2.5, layer="R-OPISY")
+    assert [s_ for _xy, s_, _h in text_items(p, 1.0)[0]] == ["pręty Ø12"]
+    sh.text((50, 60), "kąt ∠ 30°", 2.5, layer="R-OPISY")
+    w = plot.qa(sh)["warnings"]
+    assert any("∠" in x for x in w) and not any("⌀" in x or "Ø" in x for x in w), w
+
+
+def test_spis_rysunkow_tomu():
+    """[IE S3, S4] Spis w tomie: nagłówek łamany do szerokości pola (pismo 5 → 3,5 mm), tytuły rysunków łamane
+    w komórce, nic nie dotyka znaków centrujących."""
+    from lamela.draft import plot
+    from lamela.draft.sheet import ZNAK_CENTR_DL, TitleBlock
+    tyt = ["INSTALACJA FOTOWOLTAICZNA — SCHEMAT, ZABEZPIECZENIA I POŁĄCZENIA (FALOWNIK, SPD)",
+           "INSTALACJA ODGROMOWA I POŁĄCZENIA WYRÓWNAWCZE KONSTRUKCJI PV — RZUT DACHU"] + ["RZUT"] * 12
+    arks = [Sheet("A3", title_block=TitleBlock(tytul=t, nr_rysunku=f"PT-IE-{i + 1:02d}", skala="1:50"))
+            for i, t in enumerate(tyt)]
+    sh = plot.spis_rysunkow(arks, "Projekt techniczny — instalacje elektryczne wewnętrzne i zewnętrzne, "
+                                  "fotowoltaika, ochrona odgromowa (rysunki)")
+    x0, y0, x1, y1 = sh.frame
+    lo, hi = x0 + ZNAK_CENTR_DL, x1 - ZNAK_CENTR_DL
+    for txt, b in _teksty(sh):
+        if b[1] > sh.tb_rect[3]:                         # treść spisu (nad tabliczką)
+            assert lo < b[0] and b[2] < hi, (txt, b)
+            assert b[3] < y1 - ZNAK_CENTR_DL, (txt, b)
+    assert not U.kolizje_znakow(sh), U.kolizje_znakow(sh)
+    assert sh.znaki_gl["g"] == ZNAK_CENTR_DL and sh.znaki_gl["l"] == ZNAK_CENTR_DL
+
+
+def test_odcinek_kontrolny_a_znak():
+    """Odcinek kontrolny 100 mm w marginesie na oprawę: napis nie przecina lewego znaku centrującego (H = 297)."""
+    from lamela.draft import plot
+    for fmt_ in ("A3", "710x420", "A4"):
+        sh = Sheet(fmt_)
+        plot.add_control_marks(sh)
+        cy = sh.height / 2.0
+        (xa, _ya), (xb, _yb) = sh.znaki["l"].pts[0], sh.znaki["l"].pts[-1]
+        for txt, b in _teksty(sh):
+            if txt.startswith("odcinek kontrolny"):
+                assert not (b[1] < cy + 0.35 and b[3] > cy - 0.35 and b[0] < xb and b[2] > xa), (fmt_, b)
+
+
 # ================================================================================================ arkusze z modelu
 _CTX = None
 
@@ -543,6 +652,44 @@ def test_arkusz_rzutu_z_modelu():
     assert info2["uklad"]["bloki"] == info["uklad"]["bloki"] and info2["format"] == info["format"]
 
 
+def test_widoki_nr_i_scalanie_blokow():
+    """[IS 4, IS 5] Widoki z listy ``widoki`` dziedziczą ``nr`` arkusza; bloki kolumny o tej samej nazwie i treści
+    z kilku widoków — raz, o tej samej nazwie i innej treści — oba."""
+    from types import SimpleNamespace
+
+    from lamela.draft.core import Viewport
+    from lamela.views.sheets import register_view
+    nry = []
+
+    def leg(sh, x, y, w):
+        sh.text((x, y - 3.5), "LEGENDA WSPÓLNA", 3.5)
+        sh.rect(x, y - 30, x + w, y - 6)
+        return y - 30
+
+    def tab(i):
+        def fn(sh, x, y, w):
+            sh.text((x, y - 3.5), f"TABELA KONDYGNACJI {i}", 3.5)
+            return y - 20
+        return fn
+
+    def widok(ctx, spec, scale, opts):
+        nry.append(spec.get("nr"))
+        vp = Viewport(scale, "SCHEMAT")
+        vp.rect(0, 0, 8.0, 5.0, "A-WIDOK")
+        return vp, SimpleNamespace(column_blocks=[("leg", leg), ("tab", tab(spec.get("i")))], notes=[],
+                                   bez_skali=True, north=False), vp.title
+
+    register_view("test_scal", widok, rodzaj="rysunek testowy", qa="PZT")
+    sh, info = _build({"nr": "T-S-01", "tytul": "TEST", "skala": 100,
+                       "widoki": [{"typ": "test_scal", "i": 1}, {"typ": "test_scal", "i": 2}]})
+    assert nry == ["T-S-01", "T-S-01"], nry
+    names = [n for n, _r in info["uklad"]["bloki"]]
+    assert names.count("leg") == 1 and names.count("tab") == 2, names
+    txt = [p.string for p in sh.prims if hasattr(p, "runs")]
+    assert txt.count("LEGENDA WSPÓLNA") == 1 and {"TABELA KONDYGNACJI 1", "TABELA KONDYGNACJI 2"} <= set(txt)
+    assert not info["uklad"]["kolizje"] and set(info["uklad"]["znaki_centrujace"]) == set("gdlp")
+
+
 def ctx_cfg_arkusze():
     from lamela.views.sheets import load_config
     return load_config(ROOT / "model" / "test" / "arkusze_testowe.yaml", _ctx().model)["arkusze"]
@@ -557,7 +704,8 @@ def main(argv=None):
     tests = [(n, f) for n, f in globals().items() if n.startswith("test_") and callable(f)]
     if a.szybko:
         tests = [(n, f) for n, f in tests if n not in ("test_widok_rejestrowany", "test_zgodnosc_wsteczna_arkusz",
-                                                       "test_arkusz_rzutu_z_modelu")]
+                                                       "test_arkusz_rzutu_z_modelu",
+                                                       "test_widoki_nr_i_scalanie_blokow")]
     ok = fail = 0
     t0 = time.time()
     for n, f in tests:

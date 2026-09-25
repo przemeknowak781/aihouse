@@ -1252,6 +1252,7 @@ def wypelnienie_pdf(pdf) -> dict | None:
     r = _METRYKI.analyze_pdf(Path(pdf))
     e = r["pusty_prostokat"]
     return dict(wypelnienie=round(r["wypelnienie"], 3), wypelnienie_rys=round(r["wypelnienie_rys"], 3),
+                wypelnienie_skl=round(r.get("wypelnienie_skl", r["wypelnienie"]), 3),
                 wypelnienie_kontur=round(r["wypelnienie_kontur"], 3), pole_arkusza_m2=round(r["pole_arkusza_m2"], 4),
                 pole_ramki_m2=round(r["pole_ramki_m2"], 4),
                 pusty_prostokat_mm=[round(e["w"]), round(e["h"])],

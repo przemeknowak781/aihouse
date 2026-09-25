@@ -2327,8 +2327,10 @@ class AnalizaKonstrukcji:
                               "obciążeń znad otworów na filarki\n\n" + tabela(
                                   ["Przypadek", "max q_góra [kN/m]", "średnio q_dół [kN/m]", "max q_dół [kN/m]"], rows))
         if mur is None:
-            poz.uwagi.append("Warstwa konstrukcyjna nie jest murem (np. żelbet) — ściana żelbetowa: sprawdzenie wg PN-EN 1992-1-1 "
-                             "(ściany 9.6, smukłość 5.8) — poza zakresem automatycznym [WYMAGA ANALIZY].")
+            if self._sciana_zelbetowa(w):
+                self._sciana_zb_pasmo(w, pr, poz, cases)
+            else:
+                poz.uwagi.append("Warstwa konstrukcyjna nie jest murem ani żelbetem — sprawdzenie indywidualne [WYMAGA ANALIZY].")
             self.pos_sciany.append(poz)
             return
         odz = [Oddz("G", "G")] + [Oddz(c, "Q", {"QA": "A", "H": "H", "S1": "S", "S2": "S"}.get(c, "A"),
@@ -2417,6 +2419,29 @@ class AnalizaKonstrukcji:
             poz.rysunki += rysunki.rys_sciana(w, pr, self.rys(f"sciana_{_slug(w.id)}.png"))
         poz.przyjeto.append(f"Mur: {mur.nazwa}, f_d = {f(mur.f_d, 2)} MPa (klasa wykonania A, γ_M = {f(mur.gamma_M, 1)}).")
         self.pos_sciany.append(poz)
+
+    def _sciana_zb_pasmo(self, w, pr, poz, cases):
+        """Ściana żelbetowa (monolityczna) obciążona pionowo — pasmo 1,0 m jak słup (PN-EN 1992-1-1 5.8, 6.1): N_Ed —
+        maks. średnia krocząca 1,0 m profilu dolnego (z ciężarem ściany) po kombinacjach STR; l₀ = h (β = 1,0 [ZAŁ]);
+        zbrojenie pionowe ≥ 0,002·A_c (9.6.2), poziome ≥ max(25 % pionowego; 0,001·A_c) (9.6.3)."""
+        p, m = self.p, self.m
+        t, h = w.warstwa_konstr.d, pr["h"]
+        dol = pr["dol"]
+        odz = [Oddz("G", "G")] + [Oddz(c, "Q", {"QA": "A", "H": "H", "S1": "S", "S2": "S"}.get(c, "A"),
+                                       "QA" if c.startswith("QA") else ("dach" if c in ("H", "S1", "S2") else ""))
+                                  for c in cases if c not in ("G", "SB2")]
+        NEd = max(float(dol.srednia_ruchoma(dol.kombinacja(kb.wsp), 1.0).max()) for kb in kombinacje(odz, p, "STR"))
+        mat = m.material(w.warstwa_konstr.mat)
+        kl = klasa_betonu_z_nazwy(mat.nazwa if mat else None) or p.beton_dla("belka")[1]
+        beton = Beton.z_parametrow(kl, p)
+        c_nom = zelbet.otulina(p.ekspozycja.get("belka", "XC1"), 12, p, fi_strzemion=0).c_nom
+        r = zelbet.slup_zelbetowy(max(NEd, 1.0), 1.0, t, h, beton, self.stal, c_nom=c_nom, fi_s=0, phi_inf=p.fi_pelzania,
+                                  nazwa=f"{w.id} — ściana żelbetowa, pasmo 1,0 m (ściskanie mimośrodowe, 5.8)")
+        poz.wyniki.append(r)
+        Ah = max(0.25 * r.n_pr * math.pi * r.fi ** 2 / 4, 0.001 * t * 1e6)
+        fi_h, s_h, _ = zelbet.dobierz_plyta(Ah / 2, 400.0, 8, 12, As_min=Ah / 2)
+        poz.przyjeto.append(f"Ściana ŻB t = {f(t * 100, 0)} cm, {beton.klasa}: pionowo {r.zbrojenie}/m (po połowie przy licach), "
+                            f"poziomo φ{fi_h} co {f(s_h / 10, 0)} cm przy obu licach (9.6.3); N_Ed = {f(NEd, 1)} kN/m.")
 
     def _segmenty(self, w, pr) -> list:
         """Odcinki ściany: filarki między otworami ('filarek') lub pasma bez otworów ('sciana'); obrysy słupów ŻB w murze
@@ -2867,7 +2892,12 @@ class AnalizaKonstrukcji:
             f"({iz.get('opis') or 'wg modelu'}) — posadowienie płytkie chronione przed przemarzaniem wg PN-EN ISO 13793 "
             "zamiast warunku D ≥ h_z dla ław (W-284; przyjęcie Z6 — wymiary izolacji obwodowej do potwierdzenia w projekcie "
             "geotechnicznym dla strefy klimatycznej i danych gruntowych).")
-        poz.wyniki += [w_ for w_ in W.wyniki if not w_.nazwa.startswith("Przebicie")]
+        pady = [box(min(e["os"][0][0], e["os"][1][0]) - float(e.get("b", 1.0)) / 2, min(e["os"][0][1], e["os"][1][1]) - float(e.get("b", 1.0)) / 2,
+                    max(e["os"][0][0], e["os"][1][0]) + float(e.get("b", 1.0)) / 2, max(e["os"][0][1], e["os"][1][1]) + float(e.get("b", 1.0)) / 2)
+                for e in els if "os" in e and math.dist(e["os"][0], e["os"][1]) < float(e.get("b", 0.6))]
+        poza = {str(c["id"]) for c in m.slupy() if not any(pg.contains(Point(*c["xy"])) for pg in pady)}
+        poz.wyniki += [w_ for w_ in W.wyniki if not w_.nazwa.startswith("Przebicie")
+                       or any(f"słupem {cid} " in w_.nazwa for cid in poza)]
         wz = Wynik(nazwa="Zginanie płyty (MES, momenty Wood–Armer, obwiednia) — wymagane zbrojenie poza żebrami")
         Amax = 0.04 * 1000 * W.h * 1000
         for key in ("dol_x", "dol_y", "gora_x", "gora_y"):
@@ -2951,11 +2981,7 @@ class AnalizaKonstrukcji:
             A_d = float(W.As[wd][msk].max()) * B if msk.any() else 0.0
             A_g = float(W.As[wg][msk].max()) * B if msk.any() else 0.0
             A_min = max(0.26 * beton.f_ctm / p.f_yk, 0.0013) * B * 1000 * d * 1000
-            n_d, fi_d, _, As_d = zelbet.dobierz_belka(max(A_d, A_min), B, c_d, 8)
-            n_g, fi_g, _, As_g = zelbet.dobierz_belka(max(A_g, A_min), B, c_g, 8)
-            fi_z = max(fi_d, fi_g)
-            n_d = max(n_d, int(math.ceil(max(A_d, A_min) / (math.pi * fi_z ** 2 / 4) - 1e-9)))
-            n_g = max(n_g, int(math.ceil(max(A_g, A_min) / (math.pi * fi_z ** 2 / 4) - 1e-9)))
+            fi_z, n_d, n_g = _prety_zebra(max(A_d, A_min), max(A_g, A_min), B, max(c_d, c_g))
             As_d, As_g = n_d * math.pi * fi_z ** 2 / 4, n_g * math.pi * fi_z ** 2 / 4
             V = float(W.V_zeber.get(fid, 0.0))
             Mz = W.M_zeber.get(fid, (0.0, 0.0))
@@ -2967,14 +2993,18 @@ class AnalizaKonstrukcji:
                    zrodlo="(9.1N)")
             r.warunek("Zbrojenie dolne żebra", max(A_d, A_min), As_d, "mm²", "6.1, 9.2.1.1", nd=0, symbol_E="A_s,req", symbol_R="A_s,prov")
             r.warunek("Zbrojenie górne żebra", max(A_g, A_min), As_g, "mm²", "6.1, 9.2.1.1", nd=0, symbol_E="A_s,req", symbol_R="A_s,prov")
-            sc = zelbet.scinanie_strzemiona(max(V, 1e-3), B, d, min(As_d, As_g), beton, stal, 8, 2,
-                                            nazwa=f"{fid} — ścinanie pasma żebra (V = |dM/ds| z MES)")
+            for fs_, nr_ in ((8, 2), (10, 2), (8, 4), (10, 4), (12, 4)):
+                sc = zelbet.scinanie_strzemiona(max(V, 1e-3), B, d, min(As_d, As_g), beton, stal, fs_, nr_,
+                                                nazwa=f"{fid} — ścinanie pasma żebra (V = ΔM/Δs na bazie d, MES)")
+                if sc.ok:
+                    break
             r.dolacz(sc, "Ścinanie")
             r.krok("Maks. docisk pod żebrem (MES)", "p_d,max", "", pd_, "kPa", nd=1)
             r.warunek("Docisk do podłoża pod żebrem", pd_, W.q_Rd_lok, "kPa", "PN-EN 1997-1 6.5.2", nd=1, symbol_E="p_d,max",
                       symbol_R="q_Rd")
             s_st = int(getattr(sc, "s", 200) or 200)
-            r.zbrojenie_podl = (f"{n_d + n_g}φ{fi_z} (dołem {n_d}φ{fi_z}, górą {n_g}φ{fi_z}), strzemiona φ8 co {f(s_st / 10, 0)} cm")
+            r.zbrojenie_podl = (f"{n_d + n_g}φ{fi_z} (dołem {n_d}φ{fi_z}, górą {n_g}φ{fi_z}), strzemiona φ{fs_} co {f(s_st / 10, 0)} cm"
+                                + (f" ({nr_}-cięte)" if nr_ > 2 else ""))
             r.zbrojenie_poprz = "nie wymaga zbrojenia poprzecznego odsadzek (siatki płyty fundamentowej w MES)"
             r.krok("Zbrojenie podłużne", "A_s,min (warstwa)", "", A_min, "mm²", nd=0)
             r.krok("Przyjęto zbrojenie podłużne", "", "", r.zbrojenie_podl)
@@ -3066,6 +3096,20 @@ def _m_usrednione(fe, vals: np.ndarray, mask: np.ndarray, os_usr: str, b: float)
             continue
         best = min(best, float((vv[row] * w).sum() / w.sum()))
     return best
+
+
+def _prety_zebra(A_d: float, A_g: float, b: float, c_nom: float, fi_s: float = 10.0) -> tuple[int, int, int]:
+    """Pręty podłużne żebra (jedna średnica dół/góra): (φ, n_dół, n_góra) — najmniejsza średnica z (12, 16, 20, 25), przy
+    której każda warstwa mieści się w ≤ 2 rzędach (rozstaw w świetle ≥ max(φ; 25 mm) — 8.2(2), d_g = 16 mm)."""
+    for fi in (12, 16, 20, 25):
+        a = math.pi * fi ** 2 / 4
+        n_d, n_g = max(2, int(math.ceil(A_d / a - 1e-9))), max(2, int(math.ceil(A_g / a - 1e-9)))
+        s_min = max(fi, 25.0)
+        n_rz = int((b * 1000 - 2 * c_nom - 2 * fi_s + s_min) // (fi + s_min))
+        if max(n_d, n_g) <= 2 * n_rz:
+            return fi, n_d, n_g
+    a = math.pi * 25 ** 2 / 4
+    return 25, max(2, int(math.ceil(A_d / a))), max(2, int(math.ceil(A_g / a)))
 
 
 def _wymiary_slupa(txt: str) -> tuple[float, float]:

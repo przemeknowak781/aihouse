@@ -22,7 +22,9 @@ Metoda wyznaczania bloków treści (z rzeczywistej zawartości PDF, PyMuPDF):
    (domyślnie 6 mm: łączy elementy jednego widoku/tabeli, nie łączy bloków rozdzielonych normalnym odstępem),
    wypełnienie dziur; każda spójna składowa → prostokątna obwiednia bloku.
 4. W (obwiednie) = pole sumy (bez podwójnego liczenia) prostokątów bloków + tabliczki / pole wewnątrz ramki.
-   Dodatkowo: W_kontur (pole samej domkniętej maski, bez prostokątów), największy pusty prostokąt wewnątrz ramki
+   Dodatkowo: W_kontur (pole samej domkniętej maski, bez prostokątów), W_skł (jak W obw., ale składowa wklęsła —
+   maska < 75 % obwiedni, np. „L” z bloków sklejonych domknięciem — liczona obwiedniami części po domknięciu
+   2 mm; pokazuje puste pola, które W obw. zamyka w jednej obwiedni), największy pusty prostokąt wewnątrz ramki
    oraz „arkusz przycięty” — obwiednia całej treści + marginesy 20/10 mm (ile papieru zostaje przy obecnym
    układzie po odcięciu pustych pasów).
 
@@ -224,11 +226,29 @@ def analyze_pdf(pdf: Path, odstep: float = 6.0, res: float = 1.0) -> dict:
     tb_mask = np.zeros_like(occ)
     if tb:
         tb_mask[int(round((tb[1] - fy0) / res)):, int(round((tb[0] - fx0) / res)):] = True
+    # W skł. — obwiednie składowych, ale składowa wklęsła (np. „L” z bloków połączonych domknięciem 6 mm, których
+    # obwiednia obejmuje puste pole) — dzielona domknięciem 2 mm na części i liczona obwiedniami części
+    # (odstępy bloków silnika układu ≥ 5 mm; zgłoszenie AR: PB-AR-01 W obw. 93 % przy pustym polu 230×110 mm)
+    k2 = max(1, int(round(2.0 / res)))
+    st2 = np.ones((2 * k2 + 1, 2 * k2 + 1), bool)
+    closed2 = ndimage.binary_fill_holes(
+        ndimage.binary_erosion(ndimage.binary_dilation(occ, structure=st2), structure=st2, border_value=1) | occ)
+    union_s = np.zeros_like(occ)
+    for i, sl in enumerate(ndimage.find_objects(lab)):
+        comp = lab[sl] == i + 1
+        if comp.mean() >= 0.75:
+            union_s[sl] = True
+            continue
+        lab2, _n2 = ndimage.label(closed2[sl] & comp)
+        part = union_s[sl]
+        for sl2 in ndimage.find_objects(lab2):
+            part[sl2] = True
     frame_area = (fx1 - fx0) * (fy1 - fy0)
     cell = res * res
     a_blocks = float((union | tb_mask).sum()) * cell
     a_blocks_no_tb = float((union & ~tb_mask).sum()) * cell
     a_contour = float((closed | tb_mask).sum()) * cell
+    a_skl = float((union_s | tb_mask).sum()) * cell
     a_tb = float(tb_mask.sum()) * cell
     # największy pusty prostokąt (siatka 2 mm)
     s = max(1, int(round(2.0 / res)))
@@ -250,7 +270,7 @@ def analyze_pdf(pdf: Path, odstep: float = 6.0, res: float = 1.0) -> dict:
                 pole_tabliczki_m2=a_tb / 1e6, n_prymitywow=n_used, bloki=blocks,
                 wypelnienie=a_blocks / frame_area,
                 wypelnienie_rys=a_blocks_no_tb / max(1e-9, frame_area - a_tb),
-                wypelnienie_kontur=a_contour / frame_area,
+                wypelnienie_kontur=a_contour / frame_area, wypelnienie_skl=a_skl / frame_area,
                 pusty_prostokat=empty, przyciety=dict(W=trim_w, H=trim_h, pole_m2=trim_w * trim_h / 1e6))
 
 
@@ -409,14 +429,15 @@ def markdown_set(k: dict) -> str:
         L += [f"Stan plików PDF: {k['stan_plikow']}.", ""]
     if not s.get("arkuszy"):
         return "\n".join(L + ["Brak arkuszy PDF.", ""])
-    L += ["| Nr | Format | W×H [mm] | Pow. [m²] | W obw. | W rys. | W kontur | Największy pusty prostokąt | "
+    L += ["| Nr | Format | W×H [mm] | Pow. [m²] | W obw. | W skł. | W rys. | W kontur | Największy pusty prostokąt | "
           "Przycięty [mm] | Pasy [mm] | Rzędy [mm] | Warstwy | Składanie |",
-          "|---|---|---|---|---|---|---|---|---|---|---|---|---|"]
+          "|---|---|---|---|---|---|---|---|---|---|---|---|---|---|"]
     for w in k["arkusze"]:
         e, p, f = w["pusty_prostokat"], w["przyciety"], w["skladanie"]
         ocena = f["ocena"] + (" — " + "; ".join(f["uwagi"]) if f["uwagi"] else "")
         L.append(f"| {w['nr']} | {w['format']} | {w['W']:.0f}×{w['H']:.0f} | {_pl(w['pole_arkusza_m2'], 3)} | "
-                 f"{_pct(w['wypelnienie'])} | {_pct(w['wypelnienie_rys'])} | {_pct(w['wypelnienie_kontur'])} | "
+                 f"{_pct(w['wypelnienie'])} | {_pct(w.get('wypelnienie_skl', w['wypelnienie']))} | "
+                 f"{_pct(w['wypelnienie_rys'])} | {_pct(w['wypelnienie_kontur'])} | "
                  f"{e['w']:.0f}×{e['h']:.0f} ({_pl(e['pole_m2'], 3)} m²) | {p['W']:.0f}×{p['H']:.0f} | "
                  f"{' + '.join(f'{x:.0f}' for x in f['pasy'])} | {' + '.join(f'{x:.0f}' for x in f['rzedy'])} | "
                  f"{f['warstwy']} | {ocena} |")
