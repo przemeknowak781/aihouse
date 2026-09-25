@@ -81,6 +81,14 @@ def fundament_pod(m, x_os: float = 0.0) -> dict:
     return {"plyta": plyta, "zebro": zebro, "obwodowa": f.get("izolacja_obwodowa") or {}}
 
 
+def nazwa_lamel(det: Detal, lm: dict) -> str:
+    """Nazwa materiału lamel bez wymiarów zapisanych w nazwie („Lamele … 40×80” → „Lamele …”)."""
+    import re
+    n = det.mat_info(lm.get("mat", "DREWNO_TERMO"))[0]
+    n = re.sub(r"\s*\d+\s*[×x]\s*\d+\s*(mm)?\s*,?", "", n).strip(" ,—-")
+    return skrot_nazwy(n, 40)
+
+
 def tekst(det: Detal, mat: str, d: float | None = None, dopisek: str = "") -> str:
     n, _l, _k = det.mat_info(mat)
     s = skrot_nazwy(n)
@@ -842,9 +850,9 @@ def detal_wspornik_A(m, opts: dict) -> Detal:
         det.przerwa(p1, p2)
     # opisy
     det.opis_stosu(sc, "y", 0.62, odwroc=True, tytul=f"{sz} — ściana lekka (szkielet)")
-    det.opis([(xl0 + 0.04, 0.45)], [f"lamele {skrot_nazwy(det.mat_info(lm.get('mat', 'DREWNO_TERMO'))[0], 30)} "
-                                    f"{int(float(lm.get('b', 0.04)) * 1000)}×{int(float(lm.get('h', 0.08)) * 1000)} "
-                                    f"co {int(float(lm.get('rozstaw', 0.12)) * 1000)} mm na ruszcie (konsole — detal lamel)"])
+    det.opis([(xl0 + 0.04, 0.45)], [f"{nazwa_lamel(det, lm)} {int(float(lm.get('b', 0.04)) * 1000)}×"
+                                    f"{int(float(lm.get('h', 0.08)) * 1000)} co "
+                                    f"{int(float(lm.get('rozstaw', 0.12)) * 1000)} mm (widok) na ruszcie — detal D-12"])
     if k["belka"]:
         det.opis([(xs1 - bb / 2, hb / 2)], [f"belka krawędziowa {k['belka'][3]} ŻB {int(bb * 1000)}×"
                                             f"{int(round((hb + t) * 1000))} (odwrócona) — wg PT-K"])
@@ -1284,4 +1292,67 @@ def _garaz_plyta_opisy(det: Detal, g: dict) -> Detal:
                      "b_u); stan wg modelu = linie ciągłe, wariant zalecany = linie kreskowe (decyzja PT-K/Inwestor)")
     det.uwagi.append("posadzka garażu: jastrych spadkowy 0,8 % do bramy — grubość przy ścianie wg modelu "
                      f"({mm(y_g - y_pl)} mm); garaż bez membrany na płycie (płyta wodoszczelna W8 wg PT-K)")
+    return det
+
+
+# ================================================================================================ D — lamele (rzut)
+@rodzaj("lamele", "WZ-13")
+def detal_lamele(m, opts: dict) -> Detal:
+    """Przekrój poziomy (rzut) ściany SZ2 z lamelami na wysokości konsoli: konsola z przekładką termiczną przez
+    wełnę fasadową, mankiet na membranie, rygiel, lamele pionowe; mostek punktowy χ (WZ-13)."""
+    sz = przegroda_typu(m, "WZ-13", "sciana_zewn", "SZ2")
+    lm = next((l_ for l_ in m.raw.get("lamele") or [] if float(l_.get("odsuniecie", 0)) > 0), {})
+    b, h = float(lm.get("b", 0.04)), float(lm.get("h", 0.08))
+    roz, ods = float(lm.get("rozstaw", 0.12)), float(lm.get("odsuniecie", 0.15))
+    det = Detal(m, "D-12", f"Lamele elewacyjne {sz} — konsola rusztu (rzut)", ("WZ-13",), 5)
+    Ws = det.warstwy(sz)
+    ks = next(i for i, w in enumerate(Ws) if w["konstr"])
+    xs1 = sum(w["d"] for w in Ws[:ks + 1])
+    x_out = sum(w["d"] for w in Ws)
+    xL, xR, yB, yT = -0.08, x_out + ods + h + 0.05, 0.0, 0.60
+    det.okno = (xL, yB, xR, yT)
+    det.rect(xL - 0.1, yB - 0.05, 0.0, yT + 0.05, "POWIETRZE") if "POWIETRZE" in m.materialy else None
+    sc = det.stos_v(sz, 0.0, yB - 0.05, yT + 0.05)
+    yk = 0.30                                                  # oś konsoli
+    xl0 = x_out + ods                                          # lico tylne lamel
+    xr0, xr1 = xl0 - 0.05, xl0                                 # rygiel 50 mm (głęb.) w szczelinie
+    det.rect(xr0, yB - 0.05, xr1, yT + 0.05, "RYGIEL")
+    det.rect(xs1, yk - 0.05, xs1 + 0.010, yk + 0.05, "PRZEKLADKA")
+    det.rect(xs1 + 0.010, yk - 0.05, xs1 + 0.016, yk + 0.05, "KONSOLA")
+    det.rect(xs1 + 0.016, yk - 0.003, xr0, yk + 0.003, "KONSOLA")
+    det.kontur([(xs1 + 0.010, yk), (xs1 - 0.09, yk)], zamkniety=False, pen=0.5)             # kotwa
+    det.kontur([(xs1 - 0.09, yk - 0.006), (xs1 - 0.09, yk + 0.006)], zamkniety=False, pen=0.35)
+    y = yB + 0.03
+    while y + b <= yT + 0.001:
+        det.rect(xl0, y, xl0 + h, y + b, lm.get("mat", "DREWNO_TERMO"))
+        det.kontur([(xr1, y + b / 2), (xl0 + 0.035, y + b / 2)], zamkniety=False, pen=0.25)   # wkręt od tyłu
+        y += roz
+    # 4 linie: szczelność (tynk wewn.), wiatro-/wodoizolacja fasadowa z mankietem na konsoli
+    x_m = x_out - Ws[-1]["d"] / 2
+    det.linia("S", [(0.0015, yB), (0.0015, yT)], "tynk wewn. — warstwa szczelna")
+    det.linia("H", [(x_m, yB), (x_m, yk - 0.02)])
+    det.linia("H", [(x_m, yk + 0.02), (x_m, yT)])
+    det.linia("T_out", [(x_m, yk - 0.03), (x_m + 0.004, yk - 0.03), (x_m + 0.004, yk - 0.004), (x_out + 0.02, yk - 0.004)])
+    det.linia("T_out", [(x_m, yk + 0.03), (x_m + 0.004, yk + 0.03), (x_m + 0.004, yk + 0.004), (x_out + 0.02, yk + 0.004)])
+    det.polaczenie("H", [(x_out + 0.02, yk - 0.004), (x_out + 0.02, yk + 0.004)])        # mankiet wokół konsoli
+    for p1, p2 in (((xL, yB), (xR, yB)), ((xL, yT), (xR, yT))):
+        det.przerwa(p1, p2)
+    # opisy
+    det.opis_stosu(sc, "y", 0.52, odwroc=True, tytul=f"{sz} — ściana bryły A za lamelami")
+    det.opis([(xs1 + 0.005, yk + 0.035)], ["przekładka termoizolacyjna 10 mm (PA / EPDM) pod stopą konsoli"])
+    det.opis([(xs1 + 0.10, yk + 0.003)], ["konsola ze stali nierdz. / alu z przekładką — przez wełnę fasadową, "
+                                          "wełna docięta szczelnie wokół; rozstaw ≤ 1,0 m na 2 ryglach"])
+    det.opis([(xs1 - 0.05, yk)], ["kotwa (tuleja / kotwa chemiczna) w bloczku silikatowym — wg ETA producenta"])
+    det.opis([(x_out + 0.012, yk - 0.004)], ["mankiet EPDM / taśma uszczelniająca membranę wokół konsoli"])
+    det.opis([((xr0 + xr1) / 2, 0.10)], ["rygiel aluminiowy 50 mm (poziomy, 2 szt. na wysokości kondygnacji)"])
+    det.opis([(xl0 + h / 2, yB + 0.03 + b / 2)],
+             [f"{nazwa_lamel(det, lm)} {mm(b)}×{mm(h)} co {mm(roz)} mm, pionowe; wkręty nierdz. od tyłu przez rygiel"])
+    det.opis([((x_out + xr0) / 2, 0.45)], [f"szczelina wentylowana {mm(xr0 - x_out)} mm (wlot / wylot z siatką "
+                                           "przeciw owadom na dole i u góry)"])
+    det.wymiar([(a, yT) for a, _b, _w in sc] + [(x_out, yT), (xr0, yT), (xl0, yT), (xl0 + h, yT)], yT + 0.03, "h")
+    det.wymiar([(xl0 + h, yB + 0.03), (xl0 + h, yB + 0.03 + b), (xl0 + h, yB + 0.03 + roz)], xl0 + h + 0.025, "v")
+    det.uwagi.append("mostek punktowy konsoli: χ wg deklaracji producenta (wartość w zestawieniu H_TB — dane "
+                     "przykładowe do potwierdzenia wyrobem); liczba konsol z długości linii lamel × 2 rygle / 1,0 m")
+    det.uwagi.append("rzut na wysokości konsoli — rozstaw konsol i rygli wg obliczeń statycznych rusztu (PT-K / "
+                     "dostawca systemu)")
     return det
