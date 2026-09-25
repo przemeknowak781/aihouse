@@ -54,10 +54,11 @@ arkusze:
     typ: pzt_uzbrojenie
     skala: 200
     # Ekonomia arkusza (docs/30_arkusze/zastosowanie_PZT.md): tabele jako bloki kolumny opisowej — silnik ustawia je
-    # obok mapy (w rzutni tabele 408 mm > mapa 330 mm → arkusz 580×594, 0,34 m², wypełnienie 63 %); moduł składania
-    # 205 mm → L = 210 + 205·n (dziś 620×420, pasy 210+205+205): przy najmniejszej długości (610) uwagi dzielą się
-    # na 3 części w odwróconej kolejności — +10 mm papieru (+1,6 %) daje jeden blok uwag.
-    modul_skladania: 205
+    # obok mapy (w rzutni tabele 408 mm > mapa 330 mm → arkusz 580×594, 0,34 m², wypełnienie 63 %). Format JAWNY:
+    # auto daje 610×420, ale uwagi dzielą się tam na 3 części w odwróconej kolejności („cd.” nad mapą); 620×420
+    # (+10 mm, +1,6 % papieru, pasy 210+205+205) — jeden blok uwag. Przy zmianie treści sprawdzić: gdy się nie
+    # zmieści, generator przechodzi na układ klasyczny z uwagą w logu — wtedy wrócić do „auto”.
+    format: "620x420"
     opcje:
       tabele: kolumna          # rzutnia (domyślnie) | kolumna — lamela.views.site._tabele
       # minimalne odległości poziome między sieciami [m] — zasady wiedzy technicznej, NIE przepis (WT § 26–28 ich nie
