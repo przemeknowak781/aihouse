@@ -443,15 +443,21 @@ def oblicz_ogrzewanie(dane: DaneBudynku, phi_hl=None, par: ParametryOgrz | None 
     des = max(niel, key=lambda x: x["_thV"])
     Kd = des["_Kd"]
     dTH_des = des["q"] / Kd
-    thV = des["_thV"]
+    thV_wym = des["_thV"]
+    # θ_V ograniczona do θ_V,max (W-153): pomieszczenia, których Φ_HL podłoga nie pokrywa przy θ_V,max, dostają
+    # warunek niedoboru mocy (dodatkowa powierzchnia grzewcza) — zamiast podnoszenia temperatury całego układu
+    thV = min(thV_wym, par.theta_V_max)
     kroki["podl"] = [
         Krok(f"Pomieszczenie projektowe: {des['pom'].id} {des['pom'].nazwa}", "q_des = Φ_HL/A_F",
              f"{f(des['phi'], 0)}/{f(des['A_F'], 2)}", des["q"], "W/m²", "PN-EN 1264-3 (bez łazienek; największa wymagana θ_V)", 1),
         Krok(f"K_H dla T = {f(par.T_des, 2)} m, R_λ,B = {f(des['R_lB'], 2)}, s_u = {f(des['s_u'], 3)} m, λ_E = {f(des['lamE'], 2)}",
              "K_H = B·a_B·a_T^m_T·a_u^m_u·a_D^m_D", "", Kd, "W/(m²·K)", "PN-EN 1264-2 zał. A [NZW tablice]", 3),
         Krok("Nadwyżka temperatury czynnika", "∆θ_H = q/K_H", f"{f(des['q'], 1)}/{f(Kd, 3)}", dTH_des, "K", "", 2),
-        Krok(f"Temperatura zasilania (σ = {f(par.sigma, 0)} K)", "θ_V = θ_i + σ·e^(σ/∆θ_H)/(e^(σ/∆θ_H) − 1)", "", thV, "°C",
+        Krok(f"Temperatura zasilania wymagana (σ = {f(par.sigma, 0)} K)", "θ_V = θ_i + σ·e^(σ/∆θ_H)/(e^(σ/∆θ_H) − 1)", "", thV_wym, "°C",
              "definicja ∆θ_H (średnia logarytmiczna)", 1),
+        Krok("Projektowa temperatura zasilania", "θ_V,des = min(θ_V; θ_V,max)", f"min({f(thV_wym, 1)}; {f(par.theta_V_max, 1)})", thV,
+             "°C", "W-153 (R6 3.4)" + (" — niedobór mocy w pomieszczeniu projektowym pokrywa dodatkowa powierzchnia grzewcza"
+                                       if thV_wym > par.theta_V_max + 1e-9 else ""), 1),
         Krok("Charakterystyka bazowa — gęstość graniczna przy θ_F,max − θ_i = 9 K", "q_G = 8,92·9^1,1", "", q_charakterystyka(9.0),
              "W/m²", "PN-EN 1264-2 (29 °C / 33 °C łazienki)", 1),
     ]
