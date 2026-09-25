@@ -428,14 +428,18 @@ def _tab_wskazniki(s, W):
     zr = {"model": "dzialka.yaml: dzialka.mpzp",
           "konfiguracja": "konfiguracja arkuszy (brief § 3) — BRAK W MODELU [DO UZUPEŁNIENIA]",
           "brak": "BRAK [DO UZUPEŁNIENIA]"}[s.mpzp_zrodlo]
+    h = W["wys"]
+    bz = h.get("bez_zalozen")
     notes = [f"MPZP: {s.mpzp_txt or '—'}. Limity: {zr}.",
-             "Liczone z geometrii modelu (shapely): PBC bez nawierzchni ażurowych, opaski i fundamentu PC; dach "
-             "zielony (≥ 10 m²) liczony w 50 % tylko jako rezerwa.",
-             f"Wysokość zabudowy: najwyższy punkt {mm(W['top_abs'] or 0)} m n.p.m. ({W['top_src']}) minus średnia "
-             "z najniższej i najwyższej rzędnej terenu na obwodzie ścian — przyjęto większą z wartości dla terenu "
-             "istniejącego i projektowanego." if W["top_abs"] else "",
-             (f"WT § 6: od terenu projektowanego przy wejściu {W['wt']['wejscie']} ({mm(W['wt']['H_ent'])}) do "
-              f"wierzchu stropodachu {W['wt']['dach']} (bez attyki)." if W["wt"] and "H_ent" in W["wt"] else "")]
+             "Wartości z modułu lamela.wskazniki (jedyne źródło; definicje upzp art. 2 pkt 28–35, t.j. Dz.U. 2026 "
+             "poz. 538): PBC bez nawierzchni ażurowych, opaski, pojemników i terenu nad zbiornikiem; dach zielony "
+             "(≥ 10 m²) w 50 % — tylko rezerwa.",
+             f"Wysokość zabudowy = z_top {mm(h['z_top_abs'])} ({h['element']}) − t_śr {mm(h['t_sr'])} "
+             f"(t_min {mm(h['t_min'])}, t_max {mm(h['t_max'])} na obwodzie rzutu ścian zewn.; w każdym punkcie niższa "
+             "z rzędnych terenu istniejącego/projektowanego)"
+             + (f"; bez założenia: {mm(bz[0])} m ({bz[1]})." if bz else "."),
+             (f"WT § 6: od terenu przy wejściu {W['wt']['wejscie']} ({mm(W['wt']['H_ent'])}) do wierzchu stropodachu "
+              f"{W['wt']['dach']} (bez attyki) — grupa {W['wt']['grupa']}." if W["wt"] else "")]
     return dict(title="ZESTAWIENIE POWIERZCHNI I WSKAŹNIKÓW ZAGOSPODAROWANIA (RPB § 14 pkt 4, MPZP)",
                 cols=[("Wskaźnik / element", 0), ("Projekt", 0), ("MPZP / wymaganie", 0), ("Zgodność", 0)],
                 rows=rows, align=["left", "right", "left", "center"], notes=[n for n in notes if n])

@@ -347,10 +347,16 @@ def _unit(v):
 
 
 def opis_grupy(g: KD.GrupaPr) -> str:
-    t = f"{g.n} Ø{g.pret.fi}"
+    if g.kawalki > 1:
+        t = f"{g.n // g.kawalki}×{g.kawalki} Ø{g.pret.fi}"
+    else:
+        t = f"{g.n} Ø{g.pret.fi}"
     if g.s:
         t += f" co {g.s / 10:g}"
-    return t + f" l={g.pret.L_mm / 10:g}"
+    t += f" l={g.pret.L_mm / 10:g}"
+    if g.kawalki > 1:
+        t += f" (zakład {g.l0 * 100:.0f})"
+    return t
 
 
 def etykieta(vp, placer: Placer, p_ref, u, tekst: str, nr: int | None, h: float = 2.5, offs=(1.6, 5.5, 10.0),
@@ -1157,6 +1163,116 @@ def _uwagi_fundamentow(D, m, fu, iz, n_prz) -> list:
     return out
 
 
+# ------------------------------------------------------------------------------------------------ zbrojenie fundamentu
+def widok_zbrojenie_fundamentu(ctx: ViewContext, spec: dict, scale: float, opts: dict):
+    D = KD.dane(ctx)
+    m = ctx.model
+    F = D.plyta_f
+    PF = KD.prety_fundamentu(D)
+    warstwa = "gora" if str(spec.get("warstwa", "dolna")).lower().startswith("g") else "dol"
+    title = spec.get("tytul_widoku") or (f"ZBROJENIE {'GÓRNE' if warstwa == 'gora' else 'DOLNE'} PŁYTY FUNDAMENTOWEJ"
+                                         + (f" {F.id}" if F else ""))
+    vp = Viewport(scale, title)
+    res = KResult(north=True)
+    placer = Placer(vp.k)
+    nr_ark = spec.get("nr", "")
+    els = [e for e in (m.fundamenty().get("elementy") or [])]
+    P = F.poly if F is not None else unary_union([LineString(e["os"]).buffer(float(e.get("b", 0.6)) / 2)
+                                                  for e in els if "os" in e])
+    vp.geom(P, L_OBR, pen="gruba")
+    placer.add_lines(P.boundary, w=0.6, buf_mm=0.6)
+    osie_i_wymiary(vp, ctx, P.bounds, placer, sides=("dol", "lewo"))
+    for e in els:
+        if "os" not in e:
+            continue
+        ln = LineString(e["os"])
+        B = float(e.get("b", 0.6))
+        g = ln.buffer(B / 2, cap_style=3 if ln.length < B else 2)
+        vp.geom(g, L_OBR, pen="srednia", lt="KRESKOWA")
+        placer.add_lines(g.boundary, w=0.3)
+    for g in PF[warstwa]:
+        rysuj_grupe(vp, placer, g, opis=False)
+    for g in sorted(PF[warstwa], key=lambda q: -LineString(q.linia).length):
+        a, b = np.asarray(g.linia[0]), np.asarray(g.linia[1])
+        L = float(np.hypot(*(b - a)))
+        etykieta(vp, placer, (a + b) / 2, b - a, opis_grupy(g), g.pret.nr, 2.5,
+                 ts=[0.0] + [s_ * f * L for f in (0.15, 0.3) for s_ in (-1, 1)], bounds=P.buffer(2.0))
+        w = g.wym
+        KD.rejestruj(D, F.id, f"siatka {'dolna' if warstwa == 'dol' else 'górna'} {g.kier}", F.poz, w.As_req, w.As_min,
+                     KD.pole_preta(g.pret.fi) * 1000 / g.s, f"Ø{g.pret.fi} co {g.s / 10:g}", s=g.s,
+                     s_max=KD.s_max_plyty(F.h), As_max=0.04 * F.h * 1e6, arkusz=nr_ark,
+                     uwagi="pasmo Winklera bez żeber — patrz uwagi arkusza [WYMAGA ANALIZY]" if F.uwagi else "")
+    przek = {eid: nm for nm, eid, _ in _przekroje_fund(ctx, [e for e in els if "os" in e])}
+    for Z in D.zebra:
+        z = PF["zebra"].get(Z.id)
+        if z is None:
+            continue
+        e = next(x for x in els if str(x.get("id")) == Z.id)
+        ln = LineString(e["os"])
+        txt = (f"{Z.id}: dołem {z['n_dol']}Ø{z['dol'].fi} (poz. {z['dol'].nr}), górą {z['n_gora']}Ø{z['gora'].fi} "
+               f"(poz. {z['gora'].nr}), strz. Ø{z['strz'].fi} co {Z.strz[1] / 10:g} (poz. {z['strz'].nr})"
+               + (f" — przekrój {przek[Z.id]}-{przek[Z.id]}" if Z.id in przek else ""))
+        u = np.asarray(e["os"][1], float) - np.asarray(e["os"][0], float)
+        etykieta(vp, placer, np.asarray(ln.interpolate(0.5, normalized=True).coords[0]), u, txt, None, 1.8,
+                 offs=(Z.b * 1000 / scale / 2 + 1.2, Z.b * 1000 / scale / 2 + 4.5),
+                 ts=(0.0, -0.3 * ln.length, 0.3 * ln.length), layer=L_OPS)
+        As_p = (Z.dol[0] + Z.gora[0]) * KD.pole_preta(Z.dol[1])
+        KD.rejestruj(D, Z.id, "żebro — zbrojenie podłużne (dół + góra)", Z.poz, 0.0, Z.As_dol[1], As_p,
+                     f"{Z.dol[0]}+{Z.gora[0]} Ø{Z.dol[1]}", jedn="mm²", arkusz=nr_ark,
+                     uwagi="; ".join(Z.niesp[:2]))
+    for S_ in D.stopy:
+        st = PF["stopy"].get(S_.id)
+        if st is None:
+            continue
+        g = box(S_.xy[0] - S_.L / 2, S_.xy[1] - S_.B / 2, S_.xy[0] + S_.L / 2, S_.xy[1] + S_.B / 2)
+        placer.add(g, "area", 0.3)
+        if warstwa == "dol":
+            txt = f"{S_.id}: siatka dołem {st['n1']}+{st['n2']} Ø{S_.siatka.fi} co {S_.siatka.s / 10:g} (poz. {st['x'].nr}, {st['y'].nr})"
+            etykieta(vp, placer, (S_.xy[0], S_.xy[1] - S_.B / 2), (1.0, 0.0), txt, None, 1.8, offs=(2.0, 5.0, 8.0),
+                     ts=(0.0, -0.8, 0.8), layer=L_OPS)
+        w = S_.siatka
+        KD.rejestruj(D, S_.id, "pogrubienie — siatka dolna", S_.poz, w.As_req, w.As_min, KD.pole_preta(w.fi) * 1000 / w.s,
+                     f"Ø{w.fi} co {w.s / 10:g}", s=w.s, s_max=KD.s_max_plyty(S_.h), arkusz=nr_ark,
+                     uwagi="; ".join(S_.niesp[:1]))
+    if PF["naroza"] is not None and warstwa == "dol":
+        res.notes.append(f"Naroża żeber obwodowych: pręty narożne L (poz. {PF['naroza'].nr}) {PF['naroza'].n} Ø"
+                         f"{PF['naroza'].fi}, ramiona l₀ = {PF['naroza'].wym[0] / 10:g} cm — po 2 dołem i 2 górą w każdym "
+                         "narożu i na styku żeber (ciągłość zbrojenia podłużnego, PN-EN 1992-1-1 8.7).")
+    res.column_blocks.append(("legenda_k", blok_legendy(_legenda_zbrojenia(warstwa)[:4] + [
+        ("kreskowa", "żebra i pogrubienia pod płytą (zbrojenie — przekroje 1-1, 2-2, 3-3)")])))
+    res.column_blocks.append(("zestawienie", blok_zestawienia(
+        PF["zest"], "ZESTAWIENIE STALI — FUNDAMENT (płyta, żebra, pogrubienia)",
+        _stopka_fund(D), PF["zest"].masa)))
+    res.notes += UWAGI_ZBR[:3] + [
+        f"Siatki płyty (dół i góra): Ø{F.dol.fi} co {F.dol.s / 10:g} cm w obu kierunkach — dobór modułu "
+        f"(`dobierz_siatke`) z A_s,req/A_s,min biblioteki (poz. {F.poz}); pręty > 12 m łączone na zakład (mijankowo).",
+        "Kolejność robót: podsypka zagęszczona (I_s ≥ 0,98) → XPS (płyty układane mijankowo, szczelnie) → folia PE → "
+        "zbrojenie żeber i płyty, uziom/przewód wyrównawczy, tuleje przejść → betonowanie płyty z żebrami jednym "
+        "zabiegiem (bez przerw roboczych) → pielęgnacja ≥ 7 dni (PN-EN 13670 p. 8.5).",
+    ] + (F.uwagi if F is not None else [])
+    kol = kolizje_napisow(vp)
+    if kol:
+        ctx.note(f"{nr_ark} {title}", f"kolizje napisów: {kol}")
+    KD.zapisz_raporty(D, ctx)
+    return vp, res, title
+
+
+def _stopka_fund(D) -> list:
+    F = D.plyta_f
+    out = []
+    if F is not None:
+        out.append(f"Beton {F.beton}, klasa ekspozycji {F.eksp}; otulina: wierzch {D.c_fund[0]:.0f} mm, spód i boki "
+                   f"{D.c_fund[1]:.0f} mm (PN-EN 1992-1-1 tabl. 4.4N + 4.4.1.3(4), NA); stal {KD.GATUNEK}.")
+        from ..obliczenia.konstrukcja import zelbet
+        from ..obliczenia.konstrukcja.materialy import Beton
+        zz = []
+        for fi in sorted({p.fi for p in KD.prety_fundamentu(D)["zest"].prety}):
+            z = zelbet.zakotwienie(fi, Beton.z_parametrow(F.beton))
+            zz.append(f"Ø{fi}: l_bd = {z.l_bd / 10:.0f} cm, l₀ = {z.l_0 / 10:.0f} cm")
+        out.append("Zakotwienia/zakłady (8.4, 8.7, dobre warunki, 50 % łączonych): " + "; ".join(zz) + ".")
+    return out
+
+
 # ================================================================================================ rejestracja
 def widok_zbrojenie(ctx: ViewContext, spec: dict, scale: float, opts: dict):
     """Dyspozytor typu ``k_zbrojenie``: element = strop | plyta | fundament | belki | nadproza | schody | wsporniki."""
@@ -1167,7 +1283,8 @@ def widok_zbrojenie(ctx: ViewContext, spec: dict, scale: float, opts: dict):
     return fn(ctx, spec, scale, opts)
 
 
-_ZBROJENIE = {"strop": widok_zbrojenie_plyt, "plyta": widok_zbrojenie_plyt, "stropodach": widok_zbrojenie_plyt}
+_ZBROJENIE = {"strop": widok_zbrojenie_plyt, "plyta": widok_zbrojenie_plyt, "stropodach": widok_zbrojenie_plyt,
+              "fundament": widok_zbrojenie_fundamentu}
 
 register_view("k_zbrojenie", widok_zbrojenie, "rysunek zbrojenia")
 

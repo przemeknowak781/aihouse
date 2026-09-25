@@ -242,13 +242,16 @@ class Labeler:
 
 # ================================================================================================ podkład mapowy
 def map_window(s, opts: dict, margin=4.0):
-    """Okno podkładu: działka + budynki sąsiednie + hydrant (± margines), przycięte do zasięgu danych mapy."""
+    """Okno podkładu: działka z otoczeniem ``otoczenie`` [m] (domyślnie 25 m — sąsiednie działki, droga, uzbrojenie),
+    budynki sąsiednie i hydrant (± ``margin``), przycięte do zasięgu danych mapy (działki sąsiednie, pas drogowy)."""
     if opts.get("okno"):
         return tuple(float(v) for v in opts["okno"])
-    geoms = [s.plot] + [x["bud"] for x in s.sasiedzi if x["bud"] is not None]
-    geoms += [Point(o.xy) for o in s.obiekty.values() if o.id.upper().startswith("HYD")]
+    ot = float(opts.get("otoczenie", 25.0))
+    px0, py0, px1, py1 = s.plot.bounds
+    geoms = [box(px0 - ot, py0 - ot, px1 + ot, py1 + ot)]
+    geoms += [x["bud"].buffer(margin) for x in s.sasiedzi if x["bud"] is not None]
+    geoms += [Point(o.xy).buffer(2.0) for o in s.obiekty.values() if o.id.upper().startswith("HYD")]
     x0, y0, x1, y1 = unary_union(geoms).bounds
-    x0, y0, x1, y1 = x0 - margin, y0 - margin - 4.0, x1 + margin, y1 + margin
     data = [x["poly"] for x in s.sasiedzi if x["poly"] is not None] + \
         [g for g in (s.droga["pas"], s.plot) if g is not None]
     bx0, by0, bx1, by1 = unary_union(data).bounds

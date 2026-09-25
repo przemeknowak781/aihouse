@@ -22,6 +22,7 @@ wspolne:
   uwagi: []
 arkusze:
   - {nr: PT-BO-01, tytul: "RZUT FUNDAMENTÓW", typ: k_fundamenty}
+  - {nr: PT-BO-05, tytul: "ZBROJENIE DOLNE PŁYTY FUNDAMENTOWEJ", typ: k_zbrojenie, element: fundament, warstwa: dolna}
   - {nr: PT-BO-02, tytul: "RZUT KONSTRUKCJI STROPU NAD PARTEREM", typ: k_strop, poziom: ST1}
   - {nr: PT-BO-10, tytul: "ZBROJENIE DOLNE STROPU NAD PARTEREM", typ: k_zbrojenie, element: strop, poziom: ST1, warstwa: dolna}
   - {nr: PT-BO-11, tytul: "ZBROJENIE GÓRNE STROPU NAD PARTEREM", typ: k_zbrojenie, element: strop, poziom: ST1, warstwa: gorna}

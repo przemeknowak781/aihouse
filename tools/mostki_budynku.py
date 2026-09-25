@@ -97,3 +97,64 @@ def warianty(m, wezly, wyn, log=print) -> dict:
         finally:
             KD.LACZNIK = None
     return out
+
+
+def main(argv=None) -> int:
+    ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    ap.add_argument("--budynek", default=str(ROOT / "model" / "budynek.yaml"))
+    ap.add_argument("--dzialka", default=str(ROOT / "model" / "dzialka.yaml"))
+    ap.add_argument("--out", default=str(ROOT / "projekt" / "08_obliczenia" / "mostki"))
+    ap.add_argument("--bez-katalogu", action="store_true", help="bez ponownej symulacji (wyniki_mostki.json istnieje)")
+    ap.add_argument("--bez-wariantow", action="store_true")
+    a = ap.parse_args(argv)
+    out = Path(a.out)
+    kod = 0
+    if not a.bez_katalogu:
+        import katalog_mostkow
+        kod = katalog_mostkow.main(["--budynek", a.budynek, "--dzialka", a.dzialka, "--out", str(out), "--dodatkowe"])
+    from lamela.model import load_model
+    from lamela.obliczenia.mostki2d import zestawienie as Z
+    from lamela.obliczenia.mostki2d.karta import psi_odniesienia
+    from lamela.obliczenia.mostki2d.katalog import wezly_z_sekcji
+    from lamela.obliczenia.mostki2d.katalog_dod import wezly_dodatkowe
+    m = load_model(a.budynek, a.dzialka)
+    wyn = json.loads((out / "wyniki_mostki.json").read_text(encoding="utf-8"))
+    wezly, dl_model, _pom, kody = wezly_z_sekcji(m)
+    for w, L in wezly_dodatkowe(m):
+        wezly.append(w)
+        kody[w.id] = []
+    wezly = [w for w in wezly if w.id in wyn]
+    geo = Z.dlugosci_geometryczne(m, wezly)
+    chi = Z.mostki_punktowe(m)
+    cache: dict = {}
+    wpisy = {str(e["id"]): e for e in m.raw.get("wezly") or []}
+    rows = []
+    for w in wezly:
+        d = wyn[w.id]
+        baza = w.id if w.id in wpisy else w.id.rstrip("abcdefgh")
+        kd = [k for k in (wpisy.get(baza, {}).get("przegrody") or []) if k in m.przegrody]
+        if not kd:      # węzły dodatkowe — przegrody z danych węzła
+            kd = [k for k in m.przegrody if k in w.nazwa]
+        o4 = Z.ocena_4_linii(m, w, d, kd, cache)
+        ref = psi_odniesienia(w)
+        pary = d.get("psi_pary") or {}
+        L_g = geo.get(w.id, (None, ""))[0]
+        L_m = wpisy.get(baza, {}).get("dlugosc")
+        rows.append(dict(id=w.id, nazwa=w.nazwa, typ=w.typ, psi_e=d.get("psi_e"), psi_oi=d.get("psi_oi"),
+                         f_rsi=d.get("f_rsi"), ocena=d.get("ocena"), ref=ref, pary=pary, theta=d.get("theta_grup"),
+                         L_geo=L_g, L_geo_opis=geo.get(w.id, (None, ""))[1], L_model=L_m,
+                         L_model_czesc=dl_model.get(w.id), linie4=o4, przegrody=kd))
+    war = {} if a.bez_wariantow else warianty(m, wezly, wyn)
+    przel = Z.poziomy_przelewow(m)
+    dane = dict(model=str(Path(a.budynek).name), wezly=rows, chi=chi, warianty=war, przelewy=przel,
+                b_u=0.8)
+    (out / "zestawienie_mostkow.json").write_text(json.dumps(dane, ensure_ascii=False, indent=1, default=str),
+                                                  encoding="utf-8")
+    import raport_mostkow_budynku as R
+    R.zapisz(out, m, dane)
+    print(f"→ {out / 'zestawienie_HTB.md'}, {out / 'REKOMENDACJE.md'}, {out / 'zestawienie_mostkow.json'}")
+    return kod
+
+
+if __name__ == "__main__":
+    sys.exit(main())

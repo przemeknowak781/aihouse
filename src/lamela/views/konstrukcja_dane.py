@@ -912,6 +912,8 @@ class GrupaPr:
     zakres: object = None      # strefa (wielobok) — zbrojenie narożne
     haki: tuple = (False, False)
     rola: str = ""             # przeslo | podpora | wspornik | naroze | brzeg
+    kawalki: int = 1           # pręty dłuższe niż L_MAX dzielone na kawałki łączone na zakład l₀
+    l0: float = 0.0            # długość zakładu [m] (gdy kawalki > 1)
 
 
 def _seg_linii(region, kier: str, t: float, lo: float, hi: float):
@@ -966,17 +968,32 @@ def _rozciagnij(poly, kier: str, ext: float):
     return unary_union([translate(poly, d, 0) if kier == "x" else translate(poly, 0, d) for d in ds]).buffer(0)
 
 
-def _grupy_z_skanu(skan, kier, warstwa, fi, s_mm, element, pole, wym, zest, rola, haki_fn=None, h_leg=0.0):
+L_MAX = 12.0     # maks. długość handlowa pręta [m] — dłuższe dzielone, zakład l₀ (PN-EN 1992-1-1 8.7)
+
+
+def _l0(fi: int, beton: str) -> float:
+    from ..obliczenia.konstrukcja import zelbet
+    from ..obliczenia.konstrukcja.materialy import Beton
+    return zelbet.zakotwienie(fi, Beton.z_parametrow(beton)).l_0 / 1000.0
+
+
+def _grupy_z_skanu(skan, kier, warstwa, fi, s_mm, element, pole, wym, zest, rola, haki_fn=None, h_leg=0.0,
+                   beton: str = "C25/30"):
     out = []
     for a, b, ts in skan:
         L = (b - a) * 1000.0
         hk = haki_fn(a, b, ts) if haki_fn else (False, False)
+        kaw, l0 = 1, 0.0
+        if L / 1000.0 > L_MAX and not any(hk):
+            l0 = _ceil5(_l0(fi, beton))
+            kaw = int(math.ceil((L / 1000.0 - l0) / (L_MAX - l0)))
+            L = ((L / 1000.0 + (kaw - 1) * l0) / kaw) * 1000.0
         if hk[0] and hk[1]:
             pr = Pret(fi, "21", (h_leg * 1000, L, h_leg * 1000), len(ts), element)
         elif hk[0] or hk[1]:
             pr = Pret(fi, "11", (L, h_leg * 1000), len(ts), element)
         else:
-            pr = Pret(fi, "00", (L,), len(ts), element)
+            pr = Pret(fi, "00", (L,), len(ts) * kaw, element)
         n = pr.n
         pr = zest.dodaj(pr)
         # pręt reprezentatywny: 35 % / 65 % rozkładu (naprzemiennie wg pola) — pręty sąsiednich pól nie leżą w linii
@@ -987,7 +1004,8 @@ def _grupy_z_skanu(skan, kier, warstwa, fi, s_mm, element, pole, wym, zest, rola
         am = min(max(am, a + 0.1), b - 0.1)
         t0, t1 = ts[0], ts[-1]
         roz = ((am, t0), (am, t1)) if kier == "x" else ((t0, am), (t1, am))
-        out.append(GrupaPr(pr, n, s_mm, lin, roz, warstwa, kier, element, pole, wym, haki=hk, rola=rola))
+        out.append(GrupaPr(pr, n, s_mm, lin, roz, warstwa, kier, element, pole, wym, haki=hk, rola=rola, kawalki=kaw,
+                           l0=l0))
     return out
 
 
@@ -1030,7 +1048,7 @@ def prety_poziomu(D: DaneKonstr, lv: Poziom) -> dict:
                     continue
                 t_lo, t_hi = (bx[1], bx[3]) if kier == "x" else (bx[0], bx[2])
                 sk = skanuj(reg, kier, t_lo, t_hi, w.s / 1000.0)
-                dol += _grupy_z_skanu(sk, kier, "dol", w.fi, w.s, el.id, pol.pole, w, zest, "przeslo")
+                dol += _grupy_z_skanu(sk, kier, "dol", w.fi, w.s, el.id, pol.pole, w, zest, "przeslo", beton=el.beton)
     # ---------------------------------------------------------------- górą: nad podporami
     Pg = lv.poly
     cmax = max(e.c_nom for e in lv.elementy) / 1000.0
@@ -1240,3 +1258,68 @@ def typ_nadproza(D: DaneKonstr, nid: str) -> str | None:
         if any(n.id == nid for n in lst):
             return nm
     return None
+
+
+# ================================================================================================ pręty fundamentu
+def prety_fundamentu(D: DaneKonstr) -> dict:
+    """Zbrojenie płyty fundamentowej z żebrami i pogrubieniami: siatki płyty (dół/góra — ``dobierz_siatke``),
+    żebra (n·φ z obliczeń ław, dołem i górą, strzemiona zamknięte na pełną wysokość żebro + płyta), pogrubienia pod
+    słupami (siatka dołem z odgięciami — z obliczeń stóp), pręty narożne L żeber obwodowych (l₀ × l₀)."""
+    if "fund" in D.cache:
+        return D.cache["fund"]
+    from shapely.geometry import LineString, Point
+    m = D.an.m
+    zest = Zestawienie()
+    F = D.plyta_f
+    out = dict(zest=zest, dol=[], gora=[], zebra={}, stopy={}, naroza=None)
+    c_top, c_bot = D.c_fund
+    if F is not None:
+        P = F.poly
+        Pin = P.buffer(-c_bot / 1000.0, join_style=2)
+        x0, y0, x1, y1 = Pin.bounds
+        for warstwa, w in (("dol", F.dol), ("gora", F.gora)):
+            for kier in ("x", "y"):
+                t_lo, t_hi = (y0, y1) if kier == "x" else (x0, x1)
+                sk = skanuj(Pin, kier, t_lo, t_hi, w.s / 1000.0)
+                out[warstwa] += _grupy_z_skanu(sk, kier, warstwa, w.fi, w.s, F.id, "siatka", w, zest, "przeslo",
+                                               beton=F.beton)
+    els = {str(e["id"]): e for e in (m.fundamenty().get("elementy") or [])}
+    for Z in D.zebra:
+        e = els.get(Z.id)
+        if e is None:
+            continue
+        ln = LineString(e["os"])
+        h_tot = Z.h + (F.h if F is not None else 0.0)
+        c = Z.c_nom / 1000.0
+        L = ln.length + Z.b - 2 * c if ln.length > Z.b else ln.length
+        fi = Z.dol[1]
+        pd = zest.dodaj(Pret(fi, "00", (L * 1000,), Z.dol[0], Z.id, "dołem"))
+        pg = zest.dodaj(Pret(fi, "00", (L * 1000,), Z.gora[0], Z.id, "górą"))
+        fs, ss = Z.strz[0], Z.strz[1]
+        ns = int(math.ceil(ln.length / (ss / 1000.0))) + 1
+        pst = zest.dodaj(Pret(fs, "51", ((Z.b - 2 * c + 2 * fs / 1000) * 1000, (h_tot - 2 * c + 2 * fs / 1000) * 1000),
+                              ns, Z.id, "strzemię"))
+        pp = None
+        if Z.ids and Z.ids[0]:
+            fi_p, s_p = Z.ids[0]
+            pp = zest.dodaj(Pret(int(fi_p), "00", ((Z.b - 2 * c) * 1000,), int(math.ceil(ln.length / (s_p / 1000.0))) + 1,
+                                 Z.id, "poprzeczne"))
+        out["zebra"][Z.id] = dict(dol=pd, gora=pg, strz=pst, n_strz=ns, poprz=pp, h_tot=h_tot, L=L,
+                                  n_dol=Z.dol[0], n_gora=Z.gora[0])
+    # narożniki żeber obwodowych: pręty L l₀ × l₀ (po 2 dołem i górą w każdym narożu)
+    if F is not None and D.zebra:
+        fi = D.zebra[0].dol[1]
+        l0 = _ceil5(_l0(fi, F.beton))
+        n_nar = sum(1 for _ in list(F.poly.exterior.coords)[:-1])
+        out["naroza"] = zest.dodaj(Pret(fi, "11", (l0 * 1000, l0 * 1000), 4 * n_nar, "naroża", "narożniki żeber"))
+    for S_ in D.stopy:
+        w = S_.siatka
+        c = c_bot / 1000.0
+        n1 = int(math.ceil((S_.B - 2 * c) / (w.s / 1000.0))) + 1
+        n2 = int(math.ceil((S_.L - 2 * c) / (w.s / 1000.0))) + 1
+        leg = 150.0                        # odgięcie 15 cm — jak w pozycji obliczeniowej stopy (biblioteka)
+        p1 = zest.dodaj(Pret(w.fi, "21", (leg, (S_.L - 2 * c) * 1000, leg), n1, S_.id, "siatka dołem"))
+        p2 = zest.dodaj(Pret(w.fi, "21", (leg, (S_.B - 2 * c) * 1000, leg), n2, S_.id, "siatka dołem"))
+        out["stopy"][S_.id] = dict(x=p1, y=p2, n1=n1, n2=n2)
+    D.cache["fund"] = out
+    return out

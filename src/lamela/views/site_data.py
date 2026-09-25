@@ -608,89 +608,28 @@ def opaska(s: SiteData):
     return out
 
 
-def green_roofs(s: SiteData):
-    """Dachy zielone (warstwa substratu / „ziel” w nazwie przegrody) — pow. w rzucie [(id, Polygon)]."""
-    from ..model import make_polygon
-    out = []
-    for d in s.m.dachy():
-        p = s.m.przegroda(str(d.get("przegroda")))
-        name = (p.nazwa if p else "").lower()
-        mats = [w.mat for w in p.warstwy] if p else []
-        sub = any("SUBSTR" in str(mc).upper() or "substrat" in (s.m.material(mc).nazwa.lower()
-                                                                  if s.m.material(mc) else "") for mc in mats)
-        if (sub or "ziel" in name) and ring(d.get("obrys")):
-            out.append((str(d.get("id")), s.G(make_polygon(d["obrys"], d.get("otwory") or []))))
-    return out
-
-
 def wskazniki(s: SiteData) -> dict:
-    """Wskaźniki zagospodarowania liczone z geometrii modelu (shapely)."""
-    A = float(s.plot.area)
-    zab = float(s.footprint.area)
-    zab_pl = float(unary_union([s.footprint, s.slab_union]).area) if not s.slab_union.is_empty else zab
-    opas = opaska(s)
-    utw = unary_union([u["poly"] for u in s.utwardzenia]) if s.utwardzenia else Polygon()
-    tar = unary_union([t["poly"] for t in s.tarasy]).difference(s.p0) if s.tarasy else Polygon()
-    op = unary_union([o["poly"] for o in opas]) if opas else Polygon()
-    cover = unary_union([s.p0, utw, tar, op] + ([s.pc["body"]] if s.pc else []))
-    zielone = [z["poly"] for z in s.zielen if str(z["raw"].get("typ", "")) in ("trawnik", "rabata", "zywoplot",
-                                                                              "łąka", "laka", "ogrod")]
-    green = unary_union(zielone).intersection(s.plot) if zielone else s.plot
-    if s.rozsaczanie and s.rozsaczanie["poly"] is not None:
-        green = unary_union([green, s.rozsaczanie["poly"].intersection(s.plot)])
-    pbc_teren = float(green.difference(cover).area)
-    gr = [(i, g) for i, g in green_roofs(s) if g.area >= 10.0]
-    pbc_dach = 0.5 * sum(g.area for _i, g in gr)
-    kond = {k: float(g.area) for k, g in s.storeys.items()}
-    suma_k = sum(kond.values())
-    # wysokość zabudowy (upzp art. 2 pkt 30): najwyższy punkt − średnia z min./maks. rzędnej terenu na obwodzie
-    top_abs, top_src = None, ""
-    try:
-        bp = s.ctx.building_prisms if s.ctx.ir is not None else []
-        if bp:
-            p = max(bp, key=lambda q: q.z1)
-            top_abs, top_src = s.zero_abs + float(p.z1), f"{p.id} ({p.kind})"
-    except Exception:  # noqa: BLE001
-        pass
-    if top_abs is None:
-        tops = [(float(sl.get("top_attyki") or sl["top"]), str(sl["id"])) for sl in s.m.plyty()]
-        if tops:
-            z, i = max(tops)
-            top_abs, top_src = s.zero_abs + z, f"{i} (attyka)"
-    ring_pts = np.asarray(shapely.segmentize(s.p0.exterior, 0.25).coords) if not s.p0.is_empty else np.zeros((0, 2))
-    H = {}
-    for nm, fn in (("ist", s.H_ist), ("proj", s.H_proj)):
-        h = fn(ring_pts) if len(ring_pts) else None
-        if h is not None and len(h):
-            hm = (float(np.min(h)) + float(np.max(h))) / 2.0
-            H[nm] = dict(min=float(np.min(h)), max=float(np.max(h)), sr=hm,
-                         wys=(top_abs - hm) if top_abs is not None else None)
-    wys = max((v["wys"] for v in H.values() if v.get("wys") is not None), default=None)
-    wt = None
-    try:
-        if s.ctx.ir is not None:
-            from .section import building_height
-            wt = building_height(s.ctx)
-    except Exception:  # noqa: BLE001
-        wt = None
-    # WT § 6 z terenem PROJEKTOWANYM („przyjęta w projekcie rzędna terenu”, WT § 3 pkt 15)
-    if wt is not None and s._h_proj is not None:
-        ents = [e for e in s.wejscia if e["typ"] == "drzwi_zewn"] or s.wejscia
-        hz = sorted((float(s.H_proj(e["pt"] + e["out"] * 0.6)[0]), e["id"]) for e in ents)
-        if hz:
-            wt = dict(wt, z_ent=hz[0][0] - s.zero_abs, H_ent=hz[0][0], wejscie=hz[0][1],
-                      H=wt["z_top"] - (hz[0][0] - s.zero_abs), teren="projektowany")
-    miejsca = dict(garaz=sum(1 for q in s.miejsca if str(q["raw"].get("typ")) in ("garaz", "wiata")),
-                   zewn=sum(1 for q in s.miejsca if str(q["raw"].get("typ")) == "zewn"))
-    spadki = [float(d.get("spadek") or 0.0) for d in s.m.dachy()]
-    return dict(A=A, zab=zab, zab_pl=zab_pl, zab_p0=float(s.p0.area), udzial_zab=zab / A if A else 0.0,
-                utw=float(utw.difference(s.p0).area), tarasy=float(tar.area), opaska=float(op.area),
-                pbc=pbc_teren, pbc_udzial=pbc_teren / A if A else 0.0, pbc_dach=pbc_dach,
-                pbc_z_dachem=(pbc_teren + pbc_dach) / A if A else 0.0, dachy_ziel=[i for i, _g in gr],
-                kond=kond, suma_kond=suma_k, intens=suma_k / A if A else 0.0, n_kond=len(s.storeys),
-                top_abs=top_abs, top_src=top_src, H_teren=H, wys_zab=wys, wt=wt, miejsca=miejsca,
-                dach_spadek_deg=math.degrees(math.atan(max(spadki))) if spadki else None,
-                cover=cover, green=green.difference(cover))
+    """Wskaźniki do tabeli PZT — z JEDYNEGO źródła ``lamela.wskazniki`` (upzp art. 2 pkt 28–35, RPB § 14 pkt 4,
+    WT § 6); tu tylko przepisanie na klucze używane przez generator rysunków."""
+    from ..wskazniki import wskazniki as policz
+    w = policz(s.m, ir=getattr(s.ctx, "ir", None))
+    g = w["_geom"]
+    A = w["pow_dzialki"]["wartosc"]
+    h = w["wysokosc_zabudowy"]
+    wt6 = w.get("wysokosc_WT6")
+    wt = None if wt6 is None else dict(H=wt6["wartosc"], wejscie=wt6["wejscie"], H_ent=wt6["H_teren"],
+                                       dach=wt6["dach"], z_top=wt6["z_top"], grupa=wt6["grupa"])
+    return dict(A=A, zab=w["pow_zabudowy"]["wartosc"], zab_pl=w["pow_zabudowy_kontrolna"]["wartosc"],
+                zab_p0=float(s.p0.area), udzial_zab=w["udzial_zabudowy"]["wartosc"],
+                utw=w["pow_utwardzona"]["wartosc"], tarasy=w["pow_tarasow"]["wartosc"],
+                opaska=w["pow_opaski"]["wartosc"], pbc=w["pbc"]["wartosc"], pbc_udzial=w["udzial_pbc"]["wartosc"],
+                pbc_dach=w["pbc_rezerwa_dach"]["wartosc"], pbc_z_dachem=w["udzial_pbc_z_rezerwa"]["wartosc"],
+                dachy_ziel=w["pbc_rezerwa_dach"]["dachy"], kond=w["pow_kondygnacji"]["wartosc"],
+                suma_kond=w["suma_pow_kondygnacji_nadziemnych"]["wartosc"],
+                intens=w["intensywnosc_nadziemna"]["wartosc"], n_kond=w["kondygnacje_nadziemne"]["wartosc"],
+                top_abs=h["z_top_abs"], top_src=h["element"], wys_zab=h["wartosc"], wys=h, wt=wt,
+                miejsca=dict(garaz=w["miejsca_postojowe"]["garaz"], zewn=w["miejsca_postojowe"]["zewn"]),
+                dach_spadek_deg=w["kat_dachu"]["wartosc"], cover=g["cover"], green=g["pbc"], zrodlo=w)
 
 
 def odleglosci(s: SiteData, req_otw=4.0, req_bez=3.0, req_wys=1.5) -> list[dict]:

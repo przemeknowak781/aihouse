@@ -200,3 +200,84 @@ class RysWM(Rysunek):
                      "średnica przyłącza")
         self.leg.sym(lambda c, p: terminal(c, p, "W"), "wywiewnik (zawór wywiewny) — W, wydatek [m³/h]")
         self.leg.sym(lambda c, p: S.riser(c, p, None, "SUP", s_mm=3.4), "pion wentylacyjny (kanał pionowy SUP/ETA)")
+
+    # --------------------------------------------------------------------------------------------- centrala
+    def centrala(self):
+        W, rek = self.W, self.rek
+        c = self.rek_xy
+        wym = rek.get("wym") or [1.2, 0.7]
+        rot = float(rek.get("obrot", 90.0)) - 90.0
+        self.sym(S.recuperator, c, rot, w=float(wym[0]), d=float(wym[1]), label="")
+        ew = W.energia_went
+        cen = (ew.centrala if ew is not None else None) or {}
+        V = max(W.wentylacja.get("suma_naw", 0), W.wentylacja.get("suma_wyw", 0))
+        lines = [f"Centrala wentylacyjna z odzyskiem ciepła, V_obl = {num(V, 0)} m³/h",
+                 (f"V_nom = {cen.get('V_nom_m3h', '—')} m³/h, η_t = {num(100 * float(cen.get('eta_t', 0)), 0)} %, "
+                  f"SFP = {num(float(cen.get('SFP_Wh_m3', 0)), 2)} Wh/m³, L_WA = {cen.get('L_WA_dB', '—')} dB(A)")
+                 if cen else "parametry wg DTR wybranej centrali",
+                 (cen.get("filtry") or "filtry ISO ePM1 (nawiew), ISO Coarse (wywiew)") + " — dane przykładowe, "
+                 "lub równoważna"]
+        self.tag(c, lines, "S-OPISY", style="bold")
+        for key, med, p in (("SUP", "SUP", self.pion[0]), ("ETA", "ETA", self.pion[1])):
+            path = self.g.route(c, p, key + "0", other=3.0)
+            self.pipe(path, med, pen="gruba")
+            self.g.mark(path, key + "0")
+            self.label(path, f"{med} Ø{srednica(V, 3.5)}", "S-OPISY")
+        lok = W.dane.inst.get("lokalizacje") or {}
+        cz, wy = lok.get("czerpnia"), lok.get("wyrzutnia")
+        k1 = next((pn.xy for pn in W.kanalizacja.piony if pn.id == "K1"), None)
+        for key, med, xyz, kind in (("ODA", "ODA", cz, "czerpnia"), ("EHA", "EHA", wy, "wyrzutnia")):
+            if not xyz:
+                self.brak(f"Wentylacja — {kind}", f"brak położenia {kind} w instalacje.yaml (lokalizacje)",
+                          f"lokalizacje: {{{kind}: [x, y, z]}}")
+                continue
+            q = np.asarray(xyz[:2], float)
+            path = self.g.route(c, q, key, other=3.0)
+            self.pipe(path, med, pen="gruba")
+            self.g.mark(path, key)
+            self.label(path, f"{med} Ø{srednica(V, 3.0)} izol. 50 mm", "S-OPISY")
+            n0 = len(self.vp.prims)
+            self.vp.rect(q[0] - 0.2, q[1] - 0.2, q[0] + 0.2, q[1] + 0.2, "S-WENT", pen="srednia", lt="CIAGLA")
+            self.vp.line(q - 0.2, q + 0.2, "S-WENT", pen="b_cienka", lt="CIAGLA")
+            self.reg(n0)
+            txt = [f"{kind.upper()} dachowa {med} Ø{srednica(V, 3.0)}" + (f", wylot {fmt.level(float(xyz[2]))}"
+                                                                         if len(xyz) > 2 else "")]
+            if kind == "czerpnia" and wy:
+                dd = float(np.hypot(*(q - np.asarray(wy[:2], float))))
+                txt.append(f"odl. od wyrzutni {num(dd, 1)} m" + (f", od wywiewki K1 {num(float(np.hypot(*(q - np.asarray(k1)))), 1)} m"
+                                                                 if k1 is not None else "") + " (W-166, W-167)")
+            self.tag(q, txt, "S-OPISY", style="bold")
+        self.leg.line("S-WENT", "ODA — powietrze zewnętrzne (czerpane), EHA — wyrzutowe; kanały izolowane "
+                      "paroszczelnie", lt="PUNKTOWA_KROTKA", pen="gruba")
+        self.leg.sym(lambda c, p: S.recuperator(c, p, 0.0, w=14.0, d=8.0, label=""),
+                     "centrala wentylacyjna z odzyskiem ciepła (króćce ODA / EHA / ETA / SUP wg PN-EN 16798-3)")
+
+    def opisy(self):
+        W = self.W
+        ew = W.energia_went
+        self.notes += [
+            "Wentylacja mechaniczna nawiewno-wywiewna z odzyskiem ciepła wg WT § 147–150 i PN-EN 16798-3 (oznaczenia "
+            "ODA/SUP/ETA/EHA); strumienie powietrza z bilansu wentylacji (lamela.obliczenia.energia.wentylacja, "
+            "PN-B-03430/Az3 powołana w WT § 149) — nawiew do pokoi, wywiew z kuchni, łazienek, WC, pralni, spiżarni.",
+            "Średnice kanałów dobrane dla v ≤ 2,5 m/s (przyłącza) i ≤ 3,5 m/s (pnie); kanały okrągłe stalowe "
+            "ocynkowane (typu spiro) lub system rozdzielaczowy z przewodami elastycznymi (lub równoważne), z tłumikami "
+            "akustycznymi za centralą; przepływ powietrza między pomieszczeniami przez podcięcia drzwi ≥ 1 cm "
+            "(przepływ transferowy).",
+            "Trasy kanałów i lokalizację pionu wyznaczono algorytmicznie (ortogonalnie, w przestrzeni sufitów "
+            "podwieszanych/stropów) — do koordynacji z konstrukcją i architekturą (sufity SUF_GK).",
+            "Kanały ODA i EHA w obrębie budynku — izolacja paroszczelna ≥ 50 mm; kanały SUP/ETA w przestrzeniach "
+            "nieogrzewanych — izolacja ≥ 50 mm. Okap kuchenny — z recyrkulacją (filtr węglowy).",
+        ]
+        rows = []
+        for r in self.m.pomieszczenia(self.kid):
+            n, w = self.went.get(r.id, (0.0, 0.0))
+            if n or w:
+                rows.append([r.id, r.nazwa[:30], num(n, 0) if n else "—", num(w, 0) if w else "—"])
+        if rows:
+            self.res.column_blocks.append(("went", table_block(
+                f"STRUMIENIE POWIETRZA — {self.kid} [m³/h]", [("Pom.", 16), ("Nazwa", 80), ("Nawiew", 20),
+                                                             ("Wywiew", 20)], rows,
+                align=["left", "left", "right", "right"])))
+        if ew is not None:
+            self.notes.append(f"Bilans budynku: Σ nawiew = {num(ew.suma_naw, 0)} m³/h, Σ wywiew = {num(ew.suma_wyw, 0)} "
+                              f"m³/h ({ew.zrodlo_bilansu}).")
