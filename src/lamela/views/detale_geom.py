@@ -44,6 +44,10 @@ DET_MATS = {
     "OSCIEZNICA": ("Cokół / oścież świetlika — ocieplona kaseta systemowa", "IZOL_PIR", "izol", 0.03),
     "SKLEJKA": ("Sklejka wodoodporna 18 mm", "SKLEJKA", "warstwa", None),
     "USZCZELNIACZ": ("Masa uszczelniająca / taśma butylowa", "TWORZYWO", "warstwa", None),
+    "PRZELEW": ("Przelew awaryjny — króciec prostokątny ze stali nierdzewnej z kołnierzem", "STAL", "stal", None),
+    "RURA_MET": ("Rura spustowa DN100 / lej — stal powlekana lub tytan-cynk", "STAL", "stal", None),
+    "OTULINA": ("Otulina izolacyjna 20 mm (kauczuk / PE), akustyczna", "IZOL_MIEKKA", "izol", 0.04),
+    "ZAPRAWA": ("Zaprawa / masa wypełniająca przejście w płycie", "TYNK", "warstwa", None),
 }
 
 

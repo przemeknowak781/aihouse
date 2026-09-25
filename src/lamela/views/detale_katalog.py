@@ -489,7 +489,7 @@ def attyka_korona(m, kod_at: str) -> float:
 
 
 def rysuj_attyke(det: Detal, sz: str, kod_d: str, kod_at: str, h_att: float, d_klin: float | None,
-                 xL: float, yB: float, y_sr: float) -> dict:
+                 xL: float, yB: float, y_sr: float, hydro: bool = True) -> dict:
     """Ściana `sz` (lico wewn. x = 0) pod płytą dachu, płyta do lica konstrukcji, warstwy dachu, attyka AT
     (izolacja wewn. + konstrukcja w osi muru + izolacja ściany ciągła), korona z izolacją i obróbką."""
     m = det.model
@@ -528,8 +528,10 @@ def rysuj_attyke(det: Detal, sz: str, kod_d: str, kod_at: str, h_att: float, d_k
     x_iw = xs0 - d_iw
     memb = next((w for a, b, w in stos if w["funkcja"] == "hydroizolacja"), None)
     y_memb = next(((a + b) / 2 for a, b, w in stos if w["funkcja"] == "hydroizolacja"), y_top)
-    det.linia("H", [(xL, y_memb), (x_iw - 0.002, y_memb), (x_iw - 0.002, y_cap + 0.002), (x_out + 0.002, y_cap + 0.002),
-                    (x_out + 0.002, y_cap - 0.05)], "hydroizolacja wywinięta na attykę i koronę")
+    if hydro:
+        det.linia("H", [(xL, y_memb), (x_iw - 0.002, y_memb), (x_iw - 0.002, y_cap + 0.002),
+                        (x_out + 0.002, y_cap + 0.002), (x_out + 0.002, y_cap - 0.05)],
+                  "hydroizolacja wywinięta na attykę i koronę")
     y_par = next(((a + b) / 2 for a, b, w in stos if w["funkcja"] == "paroizolacja"), 0.002)
     det.linia("P", [(xL, y_par), (x_iw - 0.002, y_par), (x_iw - 0.002, y_top + 0.05)],
               "paroizolacja wywinięta na attykę ponad izolację dachu")
@@ -539,3 +541,84 @@ def rysuj_attyke(det: Detal, sz: str, kod_d: str, kod_at: str, h_att: float, d_k
                  (x_out + 0.035, y_cap - 0.05)], strona=1)
     return dict(sc=sc, xs0=xs0, xs1=xs1, x_out=x_out, t=t, y_top=y_top, y_cap=y_cap, y_p=y_p, x_iw=x_iw,
                 stos=stos, memb=memb, y_memb=y_memb, iw=iw)
+
+
+def _klin_w(m, dach: dict, xy) -> tuple[float | None, dict]:
+    """(grubość warstwy spadkowej w punkcie, poziomy) — z `mostki2d.zestawienie.poziomy_dachu`."""
+    from ..obliczenia.mostki2d.zestawienie import poziomy_dachu
+    pz = poziomy_dachu(m, dach, xy)
+    p = m.przegroda(dach["przegroda"])
+    raw = (p.raw or {}).get("warstwy") or []
+    kl = next((r.get("klin") for r in raw if isinstance(r, dict) and r.get("klin")), None)
+    if kl is None:
+        return None, pz
+    d = min(float(kl["d_max"]), float(kl["d_min"]) + float(dach.get("spadek") or 0.02) * pz["odl_wpustu"])
+    return d, pz
+
+
+# ================================================================================================ D — attyka z przelewem
+@rodzaj("attyka_przelew", "WZ-01")
+def detal_attyka_przelew(m, opts: dict) -> Detal:
+    """Attyka stropodachu bryły A w przekroju przez przelew awaryjny: rzędna dna przelewu wg kryterium
+    ≥ pokrycie przy wpuście + 0,03 m (i nie niżej niż pokrycie lokalne), wywinięcie ≥ 15 cm."""
+    from ..obliczenia.mostki2d.zestawienie import poziomy_przelewow
+    kod_d = przegroda_typu(m, "WZ-01", "stropodach", "SD1")
+    dach = dach_wg(m, kod_d)
+    pr = [p for p in poziomy_przelewow(m) if p["dach"] == dach["id"]]
+    pa = min(pr, key=lambda p: p["pokrycie_lok"]) if pr else None
+    xy = pa["xy"] if pa else dach["obrys"][0]
+    z0 = float(dach["plyta"]["wierzch"])
+    sz = sciana_przy(m, xy, z0) or przegroda_typu(m, "WZ-01", "sciana_zewn", "SZ1")
+    att = dach.get("attyka") or {}
+    kod_at = att.get("przegroda", "AT1")
+    d_kl, pz = _klin_w(m, dach, xy)
+    det = Detal(m, "D-04", f"Attyka dachu {dach['id']} — przelew awaryjny", ("WZ-01",), 10, z0=z0)
+    y_sr = m.przegroda(kod_d).d_nad_konstr()
+    xL, yB = -0.75, -0.62
+    A = rysuj_attyke(det, sz, kod_d, kod_at, float(att.get("wys_nad_pokryciem", 0.25)), d_kl, xL, yB, y_sr, hydro=False)
+    h = float(pa["h"]) if pa else 0.10
+    y_d = (pa["zalecane"] if pa else z0 + A["y_top"] + 0.03) - z0
+    x_iw, x_out, y_cap = A["x_iw"], A["x_out"], A["y_cap"]
+    det.okno = (xL, yB, x_out + 0.30, y_cap + 0.10)
+    det.otwor(x_iw - 0.01, y_d, x_out + 0.16, y_d + h)
+    det.rect(x_iw - 0.07, y_d - 0.004, x_out + 0.12, y_d, "PRZELEW")
+    det.rect(x_iw, y_d + h, x_out + 0.12, y_d + h + 0.003, "PRZELEW")
+    det.obrobka([(x_out + 0.12, y_d - 0.004), (x_out + 0.12, y_d - 0.02)], kapinos=False)
+    ym = A["y_memb"]
+    det.linia("H", [(xL, ym), (x_iw - 0.07, ym), (x_iw - 0.07, y_d - 0.004), (x_iw - 0.01, y_d - 0.004)],
+              "membrana wklejona w kołnierz przelewu")
+    det.linia("H", [(x_iw - 0.002, y_d + h + 0.003), (x_iw - 0.002, y_cap + 0.002), (x_out + 0.002, y_cap + 0.002),
+                    (x_out + 0.002, y_cap - 0.05)])
+    det.polaczenie("H", [(x_iw - 0.01, y_d - 0.004), (x_iw - 0.002, y_d + h + 0.003)])
+    for p1, p2 in (((0.0, yB), (x_out, yB)), ((xL, 0.3), (xL, -A["t"] - 0.02))):
+        det.przerwa(p1, p2)
+    det.opis_stosu(A["sc"], "y", -0.45, odwroc=True, tytul=f"{sz} — ściana zewnętrzna")
+    det.opis_stosu(A["stos"], "x", -0.45, wyjscie=(-0.45, y_cap + 0.06),
+                   tytul=f"{kod_d} — stropodach (izolacja spadkowa)")
+    det.opis([(A["xs0"] + 0.09, A["y_p"] - 0.08)], [f"attyka {kod_at}: ŻB {mm(A['xs1'] - A['xs0'])} mm w osi muru, "
+                                                   f"izolacja wewn. {mm(A['iw']['d']) if A['iw'] else '—'} mm i korony "
+                                                   f"{mm(attyka_korona(m, kod_at))} mm"])
+    det.opis([(x_out + 0.02, y_cap + 0.012)], ["obróbka korony — blacha powlekana 0,7 mm, spadek 5 % do dachu, "
+                                              "okapniki 30–40 mm, na klamrach"])
+    if pa:
+        det.opis([(x_out + 0.08, y_d + h / 2)],
+                 [f"przelew awaryjny {pa['opis'].split(' — ')[0].replace('przelew ', '')} "
+                  f"{int(float(opts.get('szer', 0.20)) * 1000)}×{int(h * 1000)} mm — dno "
+                  f"{fmt_z(pa['zalecane'])} (model {fmt_z(pa['dno'])})",
+                  f"pokrycie przy wpuście {fmt_z(pa['pokrycie_wpust'])}, w miejscu przelewu {fmt_z(pa['pokrycie_lok'])}:"
+                  f" dno ≥ pokrycie przy wpuście + 30 mm i ≥ pokrycie lokalne (W-142)"])
+    det.rzedna((x_out + 0.22, y_d), y_d, "konstr", "left", tekst=fmt_z(z0 + y_d))
+    det.rzedna((x_iw - 0.30, A["y_top"]), A["y_top"], "wyk", "left")
+    det.rzedna((x_out + 0.22, y_cap), y_cap, "wyk", "left")
+    det.rzedna((xL + 0.05, 0.0), 0.0, "konstr", "right")
+    det.wymiar([(x_iw - 0.12, A["y_top"]), (x_iw - 0.12, y_cap)], x_iw - 0.16, "v",
+               labels=[f"≥150 ({mm(y_cap - A['y_top'])})"])
+    det.spadek((x_iw - 0.12, A["y_top"] + 0.04), (x_iw - 0.40, A["y_top"] + 0.035), 2.0)
+    det.uwagi.append("rzędne przelewów awaryjnych D1: dno = pokrycie przy wpuście + 0,03…0,05 m, nie niżej niż pokrycie "
+                     "lokalne (tabela R-W2 w REKOMENDACJE mostków); wywinięcia ≥ 15 cm ponad warstwę wierzchnią (DAFA)")
+    return det
+
+
+def fmt_z(z: float) -> str:
+    from ..draft import fmt
+    return fmt.level(z)

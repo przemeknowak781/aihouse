@@ -1343,3 +1343,85 @@ def prety_fundamentu(D: DaneKonstr) -> dict:
         out["stopy"][S_.id] = dict(x=p1, y=p2, n1=n1, n2=n2)
     D.cache["fund"] = out
     return out
+
+
+# ================================================================================================ fundament — MES
+def fund_mes(D: DaneKonstr):
+    """Analiza MES płyty fundamentowej z żebrami na podłożu Winklera (``plyta_fundamentowa``) — raz na kontekst."""
+    if "fund_mes" in D.cache:
+        return D.cache["fund_mes"]
+    W = None
+    try:
+        from ..obliczenia.konstrukcja.plyta_fundamentowa import analiza_plyty_fundamentowej
+        W = analiza_plyty_fundamentowej(D.an, siatka=0.3, c_dol=D.c_fund[1], c_gora=D.c_fund[0])
+    except Exception as ex:  # noqa: BLE001
+        D.braki.append(f"MES płyty fundamentowej: {type(ex).__name__}: {ex} — zbrojenie płyty z pasma Winklera biblioteki "
+                       "[WYMAGA ANALIZY].")
+    D.cache["fund_mes"] = W
+    return W
+
+
+def _klastry(maski_el, W, pad: float = 0.02) -> list:
+    """Spójne obszary elementów (maska) → lista wieloboków."""
+    from shapely.geometry import box as _box
+    from shapely.ops import unary_union as _uu
+    idx = np.nonzero(maski_el)[0]
+    if not len(idx):
+        return []
+    bs = [_box(W.el_c[i][0] - W.el_ab[i][0] / 2 - pad, W.el_c[i][1] - W.el_ab[i][1] / 2 - pad,
+               W.el_c[i][0] + W.el_ab[i][0] / 2 + pad, W.el_c[i][1] + W.el_ab[i][1] / 2 + pad) for i in idx]
+    g = _uu(bs)
+    return [q.buffer(-pad, join_style=2) for q in getattr(g, "geoms", [g]) if q.area > 0.01]
+
+
+def dozbrojenia_fund(D: DaneKonstr, W, siatki: dict) -> dict:
+    """Dozbrojenia płyty z MES: dla warstwy/kierunku obszary (poza żebrami), gdzie A_s,req > A_s siatki →
+    pręty dodatkowe między prętami siatki (rozstaw s siatki) na obszarze + l_bd; strefy μ > μ_lim — do przeprojektowania.
+    Zwraca {(warstwa, kier): [(Polygon, φ, s, A_s,req,max, A_s,prov)]} oraz 'mu' (strefy)."""
+    out = {}
+    rib = np.array([s_ != "" for s_ in W.strefa_el])
+    for key, w in siatki.items():
+        warstwa, kier = key
+        req = W.As[f"{warstwa}_{kier}"]
+        defic = (req > w.As_prov + 1e-6) & ~rib & ~W.mu_przekr
+        lst = []
+        for pg in _klastry(defic, W):
+            inside = np.array([pg.buffer(0.05).contains(Point(*c)) for c in W.el_c]) & defic
+            need = float(req[inside].max()) if inside.any() else 0.0
+            extra = need - w.As_prov
+            fi_x, s_x = None, w.s
+            for fi in SREDNICE_PL:
+                if pole_preta(fi) * 1000.0 / s_x >= extra:
+                    fi_x = fi
+                    break
+            if fi_x is None:
+                fi_x, s_x = 20, w.s / 2
+            prov = w.As_prov + pole_preta(fi_x) * 1000.0 / s_x
+            lst.append((pg, fi_x, s_x, need, prov))
+        out[key] = lst
+    out["mu"] = _klastry(W.mu_przekr, W)
+    return out
+
+
+def prety_zebra_mes(W, Z, siatki: dict, n_min: tuple) -> dict:
+    """Pręty podłużne żebra z MES: A_s,req [mm²/m] × szerokość żebra (maks. wzdłuż żebra, elementy strefy żebra poza
+    μ > μ_lim) − udział siatki → n·φ (φ 12…20, ≥ liczba z biblioteki). Zwraca {warstwa: (n, φ, A_req, A_prov, mu_zle)}."""
+    kier = "x" if abs(Z.p1[0] - Z.p0[0]) >= abs(Z.p1[1] - Z.p0[1]) else "y"
+    msk = np.array([s_ == Z.id for s_ in W.strefa_el])
+    out = {}
+    for warstwa, nmin in (("dol", n_min[0]), ("gora", n_min[1])):
+        req = W.As[f"{warstwa}_{kier}"]
+        ok = msk & ~W.mu_przekr
+        A_req = float(req[ok].max()) * Z.b if ok.any() else 0.0
+        A_siatki = siatki[(warstwa, kier)].As_prov * Z.b
+        best = None
+        for fi in (12, 16, 20, 25):
+            n = max(nmin, int(math.ceil(max(A_req - A_siatki, 0.0) / pole_preta(fi) - 1e-9)))
+            if n * fi + (n - 1) * max(fi, 21) <= Z.b * 1000 - 2 * Z.c_nom - 20:
+                best = (n, fi)
+                break
+        if best is None:
+            best = (int(math.ceil(max(A_req - A_siatki, 0.0) / pole_preta(25))), 25)
+        n, fi = best
+        out[warstwa] = (n, fi, A_req, n * pole_preta(fi) + A_siatki, bool((msk & W.mu_przekr).any()))
+    return out

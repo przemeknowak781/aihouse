@@ -82,7 +82,8 @@ def _labels_building(lab, s, W, h=D.H):
     c0 = label_point(main)
     cands = [p for p in spiral(c0, 1.2 * k * 2, 6, 8) if inner.contains(Point(p))] or [tuple(c0)]
 
-    c1 = label_point(s.p0)
+    bx = s.p0.bounds
+    c1 = np.array([(bx[0] + bx[2]) / 2.0, label_point(s.p0)[1]])
     cands = [p for p in spiral(c1, 1.0 * k * 2, 6, 8) if inner.contains(Point(p))] or [tuple(c1)]
 
     def fn(cv, p):
