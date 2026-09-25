@@ -5,6 +5,7 @@
 # Uruchomienie:
 #   PYTHONPATH=src python3 tools/generuj_widoki.py --arkusze model/arkusze_bo.yaml --out projekt/04_PT_konstrukcja/rysunki
 wspolne:
+  tytul_tomu: "Projekt techniczny — konstrukcja (rysunki)"   # nagłówek spisu tomu rysunków (sheets.py: domyślny tytuł dotyczył architektury)
   pracownia: "PRACOWNIA PROJEKTOWA — nazwa do uzupełnienia"
   pracownia_adres: "adres pracowni do uzupełnienia"
   inwestor: "(do uzupełnienia)"

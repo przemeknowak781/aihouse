@@ -2,6 +2,7 @@
 # PROPOZYCJA formatu (opis pól: src/lamela/views/sheets.py). Plik NIE zawiera danych budynku — tylko układ arkuszy;
 # wszystkie wartości geometryczne, materiały, rzędne i opisy pochodzą z model/budynek.yaml + model/dzialka.yaml.
 wspolne:
+  tytul_tomu: "Projekt architektoniczno-budowlany — rysunki"   # nagłówek spisu tomu rysunków (sheets.py: domyślny tytuł dotyczył architektury)
   pracownia: "PRACOWNIA PROJEKTOWA — nazwa do uzupełnienia"
   pracownia_adres: "adres pracowni do uzupełnienia"
   inwestor: "(do uzupełnienia)"

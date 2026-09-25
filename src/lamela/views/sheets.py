@@ -804,7 +804,7 @@ def generate(budynek, dzialka=None, arkusze=None, wyposazenie=None, out_dir="bui
                             tytul="SPIS RYSUNKÓW", skala="—", nr_rysunku=f"{w.get('prefiks_nr', 'PB-AR')}-00",
                             data=str(w["data"]), rodzaj="spis", arkusz="—")
         tp = out / str(w.get("plik_tomu", "tom_widoki.pdf"))
-        plot.volume(sheets, tp, str(w.get("tytul_tomu") or "Tom rysunków architektury — widoki z modelu"), toc=True,
+        plot.volume(sheets, tp, str(w.get("tytul_tomu") or "Tom rysunków — widoki z modelu"), toc=True,
                     toc_tb=toc_tb)
         report["tom"] = str(tp)
     ok_ark = [a for a in report["arkusze"] if "blad" not in a and a.get("pole_m2")]

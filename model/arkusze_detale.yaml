@@ -8,6 +8,7 @@
 #   PYTHONPATH=src python3 tools/generuj_widoki.py --arkusze model/arkusze_detale.yaml \
 #       --out projekt/10_PT_architektura/detale
 wspolne:
+  tytul_tomu: "Projekt techniczny — architektura, detale"   # nagłówek spisu tomu rysunków (sheets.py: domyślny tytuł dotyczył architektury)
   pracownia: "PRACOWNIA PROJEKTOWA — nazwa do uzupełnienia"
   pracownia_adres: "adres pracowni do uzupełnienia"
   inwestor: "(do uzupełnienia)"
