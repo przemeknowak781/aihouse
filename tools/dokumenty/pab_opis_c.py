@@ -63,7 +63,7 @@ def r10(pab, D, d):
 
     System konwencjonalny: **{base.system.nazwa if base else '—'}**; system alternatywny: **{alt[0].system.nazwa}**
     (pompa ciepła powietrze–woda, wentylacja mechaniczna z odzyskiem ciepła o sprawności
-    η = {L(100 * D.went.eta, 0)} %, instalacja fotowoltaiczna {pv['n_modulow']} × moduł = {L(pv['P_kWp'], 2)} kWp,
+    η = {L(100 * D.went.eta, 0)} %, instalacja fotowoltaiczna o mocy {L(pv['P_kWp'], 2)} kWp — {pv['n_modulow']} modułów,
     magazyn ciepła). Wariantami kontrolnymi są: system alternatywny bez PV oraz pompa ciepła z wartościami domyślnymi
     metodologii. Dla każdego wariantu obliczono EU, EK, EP, emisję CO₂, udział OZE i roczny koszt energii.
     """)
@@ -72,7 +72,7 @@ def r10(pab, D, d):
              "Koszt energii [zł/rok]": w.koszt_zl, "Nakłady [zł]": w.system.capex_zl} for w in alt]
     pab.tabela(rows, tytul="Porównanie systemów zaopatrzenia w energię (RPB § 20 ust. 1 pkt 10 lit. d)", klasa="zwarta",
                formaty={"EK [kWh/(m²·rok)]": 1, "EP [kWh/(m²·rok)]": 1, "U_OZE [%]": 0, "Koszt energii [zł/rok]": 0,
-                        "Nakłady [zł]": 0}, szerokosci=[None, "16mm", "16mm", "18mm", "15mm", "14mm", "18mm", "17mm"],
+                        "Nakłady [zł]": 0}, szerokosci=[None, "21mm", "21mm", "16mm", "14mm", "13mm", "17mm", "15mm"],
                uwagi=[f"EP_max = {L(ep_max, 0)} kWh/(m²·rok) — {D.zr('energia', 'EP_max')}. Ceny energii i nakłady "
                       f"inwestycyjne — założenia orientacyjne {ZAL} (`lamela.obliczenia/dane/wyroby_przykladowe.yaml`), "
                       f"parametry urządzeń — wyroby przykładowe {DANE_PRZYKLADOWE}; nakłady obejmują tylko elementy "

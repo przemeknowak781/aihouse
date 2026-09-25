@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from lamela.dokumenty import DANE_PRZYKLADOWE, do_uzup, liczba as L
-from lamela.dokumenty.znaczniki import INT, ZAL
+from lamela.dokumenty.znaczniki import INT
 
 import re
 

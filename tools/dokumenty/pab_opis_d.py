@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from lamela.dokumenty import DANE_PRZYKLADOWE, do_uzup, liczba as L
-from lamela.dokumenty.znaczniki import INT, ZAL
+from lamela.dokumenty.znaczniki import ZAL
 
 from pab_opis_a import ok, tyt
 
@@ -118,8 +118,8 @@ def r13(pab, D, d):
         ("Zaopatrzenie w wodę do zewnętrznego gaszenia", f"≥ {L(D.v('ppoz', 'woda_ppoz_min'), 0)} dm³/s z sieci wodociągowej; "
          f"najbliższy hydrant ok. {L(D.hydrant['d'], 0) if D.hydrant else '—'} m od budynku {DANE_PRZYKLADOWE}",
          D.zr("ppoz", "woda_ppoz_min")),
-        ("Ewakuacja", f"wyjścia na zewnątrz z parteru: {', '.join(wyj)}; schody wewnętrzne — biegi {L(min(sch)) if sch else '—'} m",
-         "WT (budynek jednorodzinny — bez wymagań dla dróg ewakuacyjnych)" + f" {INT}"),
+        ("Wyjścia i komunikacja pionowa", f"wyjścia na zewnątrz z parteru: {', '.join(wyj)}; schody wewnętrzne "
+         f"żelbetowe, szerokość biegu min. {L(min(sch)) if sch else '—'} m", "model/budynek.yaml (otwory, schody)"),
         ("Uzgodnienie projektu z rzeczoznawcą ds. zabezpieczeń ppoż.", "niewymagane", "rozp. Dz.U. 2023 poz. 1563 § 3 ust. 1 (W-218)"),
     ]
     pab.rozdzial(tyt("Dane dotyczące warunków ochrony przeciwpożarowej", 13))
