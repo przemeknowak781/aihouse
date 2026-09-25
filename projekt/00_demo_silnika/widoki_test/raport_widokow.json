@@ -1,0 +1,487 @@
+{
+  "model": "model/test/dom_testowy.yaml",
+  "dzialka": "model/test/dzialka_testowa.yaml",
+  "arkusze_cfg": "model/test/arkusze_testowe.yaml",
+  "wyposazenie": "model/test/wyposazenie_testowe.yaml",
+  "walidacja": "Walidacja: brak uwag.",
+  "przekroje": {
+    "A": {
+      "o": [
+        1.599,
+        0.0
+      ],
+      "patrz": [
+        -1.0,
+        0.0
+      ]
+    },
+    "B": {
+      "o": [
+        0.0,
+        2.501
+      ],
+      "patrz": [
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "arkusze": [
+    {
+      "nr": "T-AR-01",
+      "tytul": "RZUT PARTERU",
+      "format": "A3x3",
+      "typ": [
+        "rzut"
+      ],
+      "skala": "1:50",
+      "widoki": [
+        "RZUT PARTERU"
+      ],
+      "pliki": {
+        "pdf": "projekt/00_demo_silnika/widoki_test/T-AR-01_rzut_parteru.pdf",
+        "png": "projekt/00_demo_silnika/widoki_test/T-AR-01_rzut_parteru.png",
+        "dxf": "projekt/00_demo_silnika/widoki_test/T-AR-01_rzut_parteru.dxf"
+      },
+      "qa": {
+        "ok": true,
+        "errors": [],
+        "warnings": [
+          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
+        ],
+        "stats": {
+          "prymitywy": 1530,
+          "napisy": 380,
+          "sprawdzone_lancuchy": 12
+        }
+      },
+      "czas_s": 6.5,
+      "png_kontrola": {
+        "px": [
+          5262,
+          2481
+        ],
+        "dpi_eff": [
+          150.0,
+          150.0
+        ],
+        "dpi_meta": [
+          150.01239999999999,
+          150.01239999999999
+        ],
+        "ok": true
+      }
+    },
+    {
+      "nr": "T-AR-02",
+      "tytul": "RZUT PIĘTRA",
+      "format": "A3x3",
+      "typ": [
+        "rzut"
+      ],
+      "skala": "1:50",
+      "widoki": [
+        "RZUT PIĘTRA"
+      ],
+      "pliki": {
+        "pdf": "projekt/00_demo_silnika/widoki_test/T-AR-02_rzut_pietra.pdf",
+        "png": "projekt/00_demo_silnika/widoki_test/T-AR-02_rzut_pietra.png",
+        "dxf": "projekt/00_demo_silnika/widoki_test/T-AR-02_rzut_pietra.dxf"
+      },
+      "qa": {
+        "ok": true,
+        "errors": [],
+        "warnings": [
+          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
+        ],
+        "stats": {
+          "prymitywy": 1746,
+          "napisy": 395,
+          "sprawdzone_lancuchy": 16
+        }
+      },
+      "czas_s": 6.6,
+      "png_kontrola": {
+        "px": [
+          5262,
+          2481
+        ],
+        "dpi_eff": [
+          150.0,
+          150.0
+        ],
+        "dpi_meta": [
+          150.01239999999999,
+          150.01239999999999
+        ],
+        "ok": true
+      }
+    },
+    {
+      "nr": "T-AR-03",
+      "tytul": "RZUT DACHU",
+      "format": "A3x3",
+      "typ": [
+        "dach"
+      ],
+      "skala": "1:50",
+      "widoki": [
+        "RZUT DACHU"
+      ],
+      "pliki": {
+        "pdf": "projekt/00_demo_silnika/widoki_test/T-AR-03_rzut_dachu.pdf",
+        "png": "projekt/00_demo_silnika/widoki_test/T-AR-03_rzut_dachu.png",
+        "dxf": "projekt/00_demo_silnika/widoki_test/T-AR-03_rzut_dachu.dxf"
+      },
+      "qa": {
+        "ok": true,
+        "errors": [],
+        "warnings": [
+          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
+        ],
+        "stats": {
+          "prymitywy": 590,
+          "napisy": 186,
+          "sprawdzone_lancuchy": 6
+        }
+      },
+      "czas_s": 2.1,
+      "png_kontrola": {
+        "px": [
+          5262,
+          2481
+        ],
+        "dpi_eff": [
+          150.0,
+          150.0
+        ],
+        "dpi_meta": [
+          150.01239999999999,
+          150.01239999999999
+        ],
+        "ok": true
+      }
+    },
+    {
+      "nr": "T-AR-04",
+      "tytul": "PRZEKRÓJ A-A",
+      "format": "A2",
+      "typ": [
+        "przekroj"
+      ],
+      "skala": "1:50",
+      "widoki": [
+        "PRZEKRÓJ A-A"
+      ],
+      "wysokosc_budynku": {
+        "z_ent": -0.2732594444444494,
+        "wejscie": "O0-03",
+        "z_top": 6.193499999999999,
+        "dach": "D1",
+        "H": 6.466759444444449,
+        "z_attyka": 6.493499999999999
+      },
+      "pliki": {
+        "pdf": "projekt/00_demo_silnika/widoki_test/T-AR-04_przekroj_a_a.pdf",
+        "png": "projekt/00_demo_silnika/widoki_test/T-AR-04_przekroj_a_a.png",
+        "dxf": "projekt/00_demo_silnika/widoki_test/T-AR-04_przekroj_a_a.dxf"
+      },
+      "qa": {
+        "ok": true,
+        "errors": [],
+        "warnings": [
+          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
+        ],
+        "stats": {
+          "prymitywy": 1806,
+          "napisy": 208,
+          "sprawdzone_lancuchy": 2
+        }
+      },
+      "czas_s": 4.9,
+      "png_kontrola": {
+        "px": [
+          3508,
+          2481
+        ],
+        "dpi_eff": [
+          150.0,
+          150.0
+        ],
+        "dpi_meta": [
+          150.01239999999999,
+          150.01239999999999
+        ],
+        "ok": true
+      }
+    },
+    {
+      "nr": "T-AR-05",
+      "tytul": "PRZEKRÓJ B-B",
+      "format": "A3x3",
+      "typ": [
+        "przekroj"
+      ],
+      "skala": "1:50",
+      "widoki": [
+        "PRZEKRÓJ B-B"
+      ],
+      "wysokosc_budynku": {
+        "z_ent": -0.2732594444444494,
+        "wejscie": "O0-03",
+        "z_top": 6.193499999999999,
+        "dach": "D1",
+        "H": 6.466759444444449,
+        "z_attyka": 6.493499999999999
+      },
+      "pliki": {
+        "pdf": "projekt/00_demo_silnika/widoki_test/T-AR-05_przekroj_b_b.pdf",
+        "png": "projekt/00_demo_silnika/widoki_test/T-AR-05_przekroj_b_b.png",
+        "dxf": "projekt/00_demo_silnika/widoki_test/T-AR-05_przekroj_b_b.dxf"
+      },
+      "qa": {
+        "ok": true,
+        "errors": [],
+        "warnings": [
+          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
+        ],
+        "stats": {
+          "prymitywy": 2116,
+          "napisy": 223,
+          "sprawdzone_lancuchy": 2
+        }
+      },
+      "czas_s": 5.0,
+      "png_kontrola": {
+        "px": [
+          5262,
+          2481
+        ],
+        "dpi_eff": [
+          150.0,
+          150.0
+        ],
+        "dpi_meta": [
+          150.01239999999999,
+          150.01239999999999
+        ],
+        "ok": true
+      }
+    },
+    {
+      "nr": "T-AR-06",
+      "tytul": "ELEWACJA POŁUDNIOWA",
+      "format": "A2",
+      "typ": [
+        "elewacja"
+      ],
+      "skala": "1:50",
+      "widoki": [
+        "ELEWACJA POŁUDNIOWA"
+      ],
+      "wysokosc_budynku": {
+        "z_ent": -0.2732594444444494,
+        "wejscie": "O0-03",
+        "z_top": 6.193499999999999,
+        "dach": "D1",
+        "H": 6.466759444444449,
+        "z_attyka": 6.493499999999999
+      },
+      "pliki": {
+        "pdf": "projekt/00_demo_silnika/widoki_test/T-AR-06_elewacja_poludniowa.pdf",
+        "png": "projekt/00_demo_silnika/widoki_test/T-AR-06_elewacja_poludniowa.png",
+        "dxf": "projekt/00_demo_silnika/widoki_test/T-AR-06_elewacja_poludniowa.dxf"
+      },
+      "qa": {
+        "ok": true,
+        "errors": [],
+        "warnings": [
+          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
+        ],
+        "stats": {
+          "prymitywy": 1476,
+          "napisy": 177,
+          "sprawdzone_lancuchy": 0
+        }
+      },
+      "czas_s": 3.3,
+      "png_kontrola": {
+        "px": [
+          3508,
+          2481
+        ],
+        "dpi_eff": [
+          150.0,
+          150.0
+        ],
+        "dpi_meta": [
+          150.01239999999999,
+          150.01239999999999
+        ],
+        "ok": true
+      }
+    },
+    {
+      "nr": "T-AR-07",
+      "tytul": "ELEWACJA PÓŁNOCNA",
+      "format": "A2",
+      "typ": [
+        "elewacja"
+      ],
+      "skala": "1:50",
+      "widoki": [
+        "ELEWACJA PÓŁNOCNA"
+      ],
+      "wysokosc_budynku": {
+        "z_ent": -0.2732594444444494,
+        "wejscie": "O0-03",
+        "z_top": 6.193499999999999,
+        "dach": "D1",
+        "H": 6.466759444444449,
+        "z_attyka": 6.493499999999999
+      },
+      "pliki": {
+        "pdf": "projekt/00_demo_silnika/widoki_test/T-AR-07_elewacja_polnocna.pdf",
+        "png": "projekt/00_demo_silnika/widoki_test/T-AR-07_elewacja_polnocna.png",
+        "dxf": "projekt/00_demo_silnika/widoki_test/T-AR-07_elewacja_polnocna.dxf"
+      },
+      "qa": {
+        "ok": true,
+        "errors": [],
+        "warnings": [
+          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
+        ],
+        "stats": {
+          "prymitywy": 625,
+          "napisy": 169,
+          "sprawdzone_lancuchy": 0
+        }
+      },
+      "czas_s": 2.4,
+      "png_kontrola": {
+        "px": [
+          3508,
+          2481
+        ],
+        "dpi_eff": [
+          150.0,
+          150.0
+        ],
+        "dpi_meta": [
+          150.01239999999999,
+          150.01239999999999
+        ],
+        "ok": true
+      }
+    },
+    {
+      "nr": "T-AR-08",
+      "tytul": "ELEWACJA WSCHODNIA",
+      "format": "A2",
+      "typ": [
+        "elewacja"
+      ],
+      "skala": "1:50",
+      "widoki": [
+        "ELEWACJA WSCHODNIA"
+      ],
+      "wysokosc_budynku": {
+        "z_ent": -0.2732594444444494,
+        "wejscie": "O0-03",
+        "z_top": 6.193499999999999,
+        "dach": "D1",
+        "H": 6.466759444444449,
+        "z_attyka": 6.493499999999999
+      },
+      "pliki": {
+        "pdf": "projekt/00_demo_silnika/widoki_test/T-AR-08_elewacja_wschodnia.pdf",
+        "png": "projekt/00_demo_silnika/widoki_test/T-AR-08_elewacja_wschodnia.png",
+        "dxf": "projekt/00_demo_silnika/widoki_test/T-AR-08_elewacja_wschodnia.dxf"
+      },
+      "qa": {
+        "ok": true,
+        "errors": [],
+        "warnings": [
+          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
+        ],
+        "stats": {
+          "prymitywy": 606,
+          "napisy": 173,
+          "sprawdzone_lancuchy": 0
+        }
+      },
+      "czas_s": 2.5,
+      "png_kontrola": {
+        "px": [
+          3508,
+          2481
+        ],
+        "dpi_eff": [
+          150.0,
+          150.0
+        ],
+        "dpi_meta": [
+          150.01239999999999,
+          150.01239999999999
+        ],
+        "ok": true
+      }
+    },
+    {
+      "nr": "T-AR-09",
+      "tytul": "ELEWACJA ZACHODNIA",
+      "format": "A2",
+      "typ": [
+        "elewacja"
+      ],
+      "skala": "1:50",
+      "widoki": [
+        "ELEWACJA ZACHODNIA"
+      ],
+      "wysokosc_budynku": {
+        "z_ent": -0.2732594444444494,
+        "wejscie": "O0-03",
+        "z_top": 6.193499999999999,
+        "dach": "D1",
+        "H": 6.466759444444449,
+        "z_attyka": 6.493499999999999
+      },
+      "pliki": {
+        "pdf": "projekt/00_demo_silnika/widoki_test/T-AR-09_elewacja_zachodnia.pdf",
+        "png": "projekt/00_demo_silnika/widoki_test/T-AR-09_elewacja_zachodnia.png",
+        "dxf": "projekt/00_demo_silnika/widoki_test/T-AR-09_elewacja_zachodnia.dxf"
+      },
+      "qa": {
+        "ok": true,
+        "errors": [],
+        "warnings": [
+          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
+        ],
+        "stats": {
+          "prymitywy": 537,
+          "napisy": 161,
+          "sprawdzone_lancuchy": 0
+        }
+      },
+      "czas_s": 2.6,
+      "png_kontrola": {
+        "px": [
+          3508,
+          2481
+        ],
+        "dpi_eff": [
+          150.0,
+          150.0
+        ],
+        "dpi_meta": [
+          150.01239999999999,
+          150.01239999999999
+        ],
+        "ok": true
+      }
+    }
+  ],
+  "problemy": [],
+  "tom": "projekt/00_demo_silnika/widoki_test/tom_widoki.pdf",
+  "czas_s": 43.9
+}
