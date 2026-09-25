@@ -314,14 +314,20 @@ def wezel_przegroda_w_linii(sciana_dol: Sequence[Warstwa], t_plyty: float, mat_p
     ob.append(_obsz(box(-L, y_bl, D_d if t_p != t else D_d + L_p, t), mat_plyty, "płyta"))
     if t_p != t:
         ob.append(_obsz(box(min(x_dp0, D_d), y_bp, D_d + L_p, t), mat_plyty, "płyta (strona prawa)"))
-    x_gp0 = D_g if sciana_gora else 0.0
+    # ściana górna: warstwy za ociepleniem (wyprawa) zaczynają się nad warstwami dachu po prawej (w strefie dachu
+    # ocieplenie ściany styka się z ociepleniem dachu; hydroizolacja wywinięta na ścianę — linia rysunku)
+    iz_g = None
+    if sciana_gora:
+        iz_g = max([k for k in range(kg + 1, len(st_g)) if st_g[k][2].mat.lam < 0.06], default=None)
+    x_gp0 = (st_g[iz_g][1] if (iz_g is not None and gp[0] == "zewn") else D_g) if sciana_gora else 0.0
     for y0, y1, w in _stos(list(reversed(gl[1])), t, +1):
         ob.append(_obsz(box(-L, y0, 0.0, y1), w))
     for y0, y1, w in _stos(list(reversed(gp[1])), t, +1):
         ob.append(_obsz(box(x_gp0, y0, D_d + L_p, y1), w))
     if sciana_gora:
         for k, (a, b, w) in enumerate(st_g):
-            ob.append(_obsz(box(a, t, b, t + max(t_gl, t_gp) + H), w))
+            y_s = t + t_gp if (iz_g is not None and k > iz_g and gp[0] == "zewn") else t
+            ob.append(_obsz(box(a, y_s, b, t + max(t_gl, t_gp) + H), w))
     S = S_STREFY
     y_top = t + max(t_gl, t_gp) + H
     ramka = box(-L, -H, D_d + L_p, y_top)
@@ -408,7 +414,8 @@ def _linie_linia(gl, gp, dl, dp, t, D_d, D_g, L, L_p, sciana_gora, t_gp) -> list
 # D. Ściana dom–garaż na ciągłej płycie fundamentowej
 # ==================================================================================================
 def wezel_garaz_plyta(sciana: Sequence[Warstwa], podloga_lewa: Sequence[Warstwa], podloga_prawa: Sequence[Warstwa],
-                      theta_u: float | None = None, b_u: float = 0.8, h_gruntu: float = 1.0, H: float | None = None,
+                      theta_u: float | None = None, b_u: float = 0.8, h_gruntu: float = 1.0,
+                      blok: tuple[Material, float] | None = None, H: float | None = None,
                       L: float | None = None, theta_i: float | None = None, theta_e: float | None = None,
                       id: str = "WZ-GP", nazwa: str = "Ściana dom–garaż na ciągłej płycie fundamentowej") -> Wezel:
     """Ściana (lico lewe = dom x = 0, prawe = garaż) na płycie fundamentowej ciągłej pod domem i garażem.
@@ -441,6 +448,9 @@ def wezel_garaz_plyta(sciana: Sequence[Warstwa], podloga_lewa: Sequence[Warstwa]
     ob.append(_obsz(box(-L, y - h_gruntu, D + L, y), MATERIALY_DOMYSLNE["GRUNT"], "grunt"))
     for a, b, w in st:
         ob.append(_obsz(box(a, y_w, b, H), w))
+    if blok:            # blok termoizolacyjny w pierwszej warstwie muru (wariant)
+        kk = indeks_konstrukcyjnej(sciana)
+        ob.append(_obsz(box(st[kk][0], y_w, st[kk][1], y_w + blok[1]), blok[0], "blok termoizolacyjny"))
     S = S_STREFY
     ramka = box(-L, y - h_gruntu, D + L, H)
     strefy = strefy_z_dopelnienia(ob, ramka, [((-L / 2, H / 2), _nas("dom (ogrzewany)", ti, "wewn")),

@@ -836,33 +836,34 @@ def dim_pts(c, a, b, h=H, label=None, layer="Z-WYMIARY"):
                           overshoot_mm=1.5, tick_mm=2.5, labels=[label] if label else None, mask=0.3)
 
 
-def place_dim(lab: Labeler, a, b, el=None, bnd=None, span=8.0, step=0.25, label=None, max_cost=None,
-              prefer=0.0):
+def place_dim(lab: Labeler, a, b, on_a=None, on_b=None, avoid=None, span=8.0, step=0.25, label=None,
+              max_cost=None, prefer=0.0, shifts=None):
     """Wymiar odległości a–b (np. lico ściany – granica) przesuwany równolegle (wzdłuż lica) w miejsce o
-    najmniejszej kolizji; ``el``/``bnd`` — geometrie, na których muszą leżeć końce po przesunięciu."""
+    najmniejszej kolizji. ``on_a``/``on_b`` — linie, na których muszą leżeć końce po przesunięciu; ``avoid`` —
+    wielobok, którego wnętrza linia wymiarowa nie może przecinać."""
     a, b = np.asarray(a, float), np.asarray(b, float)
     if np.hypot(*(b - a)) < 1e-3:
         return None
     t = perp(unit(b - a))
-    shifts = sorted(np.arange(-span, span + 1e-9, step), key=lambda v: abs(v - prefer))
+    if shifts is None:
+        shifts = sorted(np.arange(-span, span + 1e-9, step), key=lambda v: abs(v - prefer))
+    inner = avoid.buffer(-0.01) if avoid is not None else None
     cands = []
     for sh in shifts:
         a2, b2 = a + t * sh, b + t * sh
-        if el is not None and el.distance(Point(a2)) > 0.02:
+        if on_a is not None and on_a.distance(Point(a2)) > 0.02:
             continue
-        if bnd is not None and bnd.distance(Point(b2)) > 0.02:
+        if on_b is not None and on_b.distance(Point(b2)) > 0.02:
             continue
-        if el is not None and not isinstance(el, LineString):
-            seg = LineString([a2 + unit(b2 - a2) * 0.02, b2])
-            if el.buffer(-0.005).intersects(seg):
-                continue
+        if inner is not None and not inner.is_empty and inner.intersects(LineString([a2, b2])):
+            continue
         cands.append(sh)
     if not cands:
         cands = [0.0]
 
     def fn(cv, sh):
         dim_pts(cv, a + t * sh, b + t * sh, label=label)
-    pos, _c = lab.pl.place(lab.vp, fn, cands, penalty_step=0.01, max_cost=max_cost)
+    pos, _c = lab.pl.place(lab.vp, fn, cands, penalty_step=0.005, max_cost=max_cost)
     return pos
 
 

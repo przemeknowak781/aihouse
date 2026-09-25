@@ -398,6 +398,26 @@ def _warstwa_z_wyniku(zg, klucz: str) -> Warstwa | None:
                    float(zg.As_req), float(zg.As_min), float(zg.As_prov), float(getattr(zg, "M_Ed", 0.0)))
 
 
+def _obszar_pola(g, k: int, poly):
+    """Obszar pola k grupy płyt = suma elementów skończonych MES przypisanych do komórki (``g.cell_of``) o środkach
+    w obrysie elementu płyty (prostokąt komórki biblioteki bywa obwiednią nieprostokątnego wspornika)."""
+    from shapely.geometry import Point, box
+    from shapely.ops import unary_union
+    import numpy as np
+    fe = g.fe
+    cell_of = getattr(g, "cell_of", None)
+    if fe is None or cell_of is None:
+        return None
+    idx = np.nonzero(np.asarray(cell_of) == k)[0]
+    P = poly.buffer(1e-6)
+    bs = [box(fe.el_c[i][0] - fe.el_ab[i][0] / 2, fe.el_c[i][1] - fe.el_ab[i][1] / 2,
+              fe.el_c[i][0] + fe.el_ab[i][0] / 2, fe.el_c[i][1] + fe.el_ab[i][1] / 2)
+          for i in idx if P.contains(Point(*fe.el_c[i]))]
+    if not bs:
+        return None
+    return unary_union(bs).buffer(1e-4, join_style=2).buffer(-1e-4, join_style=2).intersection(poly)
+
+
 def _plyty(an, D):
     from shapely.geometry import box
     from ..obliczenia.konstrukcja import zelbet
@@ -427,8 +447,10 @@ def _plyty(an, D):
                 c = kom.get(sp.ident)
                 if c is None:
                     continue
-                r = box(*[float(v) for v in (c["x0"], c["y0"], c["x1"], c["y1"])])
-                pol = PolePl(e.id, c["id"], (c["x0"], c["y0"], c["x1"], c["y1"]), r.intersection(e.poly_full),
+                reg = _obszar_pola(g, list(kom).index(c["id"]), e.poly_full)
+                if reg is None or reg.area < 0.05:
+                    continue                          # pole bez elementów MES w obrysie tego elementu
+                pol = PolePl(e.id, c["id"], (c["x0"], c["y0"], c["x1"], c["y1"]), reg,
                              float(c["lx"]), float(c["ly"]), str(c.get("brzegi", "SSSS")))
                 for zg in sp.wyniki:
                     nm = getattr(zg, "nazwa", "")

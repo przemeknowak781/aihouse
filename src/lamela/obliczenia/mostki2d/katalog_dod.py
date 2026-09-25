@@ -226,7 +226,7 @@ def wezly_stropu_zewn(model, e: dict):
     pod = _W(model, st.get("podloga"))
     suf = _sufit(model, st.get("sufit"))
     out = []
-    for n, (sig, k) in enumerate(sorted(grupy.items(), key=lambda it: -it[1]["L"])):
+    for n, (sig, k) in enumerate(sorted(grupy.items(), key=lambda it: (it[1]["typ"], -it[1]["L"]))):
         wid = f"{e['id']}{'abcdefgh'[n]}"
         if k["typ"] == "b":
             if not k["sciana"]:
