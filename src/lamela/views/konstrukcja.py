@@ -130,6 +130,10 @@ def blok_legendy(pozycje: list, tytul: str = "OZNACZENIA NA RYSUNKU"):
                 elif rodz == "slup":
                     sh.fill([(cx + 4.5, yy - 0.6), (cx + 7.5, yy - 0.6), (cx + 7.5, yy + 2.4), (cx + 4.5, yy + 2.4)],
                             "R-LEGENDA", "#000000")
+                elif rodz == "slup_zb":
+                    sh.rect(cx + 3.5, yy - 0.6, cx + 8.5, yy + 2.4, pen=0.5)
+                    for t_ in (0.0, 1.5, 3.0):
+                        sh.line((cx + 3.5 + t_, yy - 0.6), (cx + 5.0 + t_, yy + 2.4), pen=0.18)
                 elif rodz == "poz":
                     S.tag(sh, (cx + 6, yy + 0.9), "3", shape="circle", r_mm=2.4, h=2.5, layer="R-LEGENDA")
                 elif rodz == "izol":
@@ -815,6 +819,7 @@ def widok_strop(ctx: ViewContext, spec: dict, scale: float, opts: dict):
     # kolumna: legenda, nadproża, belki, wieńce
     res.column_blocks.append(("legenda_k", blok_legendy([
         ("slup", "słup stalowy (przekrój) — pod płytą"),
+        ("slup_zb", "słup żelbetowy w murze (trzpień) — przekrój kreskowany; zbrojenie PT-BO-27"),
         ("kreskowa", "belka / podciąg pod płytą (widok zasłonięty); linia ciągła — belka odwrócona (nad płytą)"),
         ("lacznik", "łącznik termoizolacyjny płyty wspornikowej (ETA)"),
         ("tekst", "↔ kierunek pracy pola (krzyż — płyta krzyżowo zbrojona); P1… — pola obliczeniowe MES"),
@@ -1050,7 +1055,8 @@ def widok_fundamenty(ctx: ViewContext, spec: dict, scale: float, opts: dict):
         ("wyrownawczy", "przewód wyrównawczy funkcjonalny w płycie (połączony ze zbrojeniem)"),
         ("zacisk", "wyprowadzenie uziomu / złącze kontrolne (punkt stały uziemienia)"),
         ("przejscie", "przejście instalacyjne przez płytę (tuleja ochronna, szczelne)"),
-        ("slup", "słup stalowy (baza na pogrubieniu płyty)")])))
+        ("slup", "słup stalowy (baza na pogrubieniu płyty)"),
+        ("slup_zb", "słup żelbetowy w murze (trzpień SL…) — przekrój kreskowany; zbrojenie PT-BO-27")])))
     res.notes += _uwagi_fundamentow(D, m, fu, iz, n_prz)
     kol = kolizje_napisow(vp)
     if kol:

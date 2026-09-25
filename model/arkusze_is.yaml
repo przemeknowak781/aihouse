@@ -34,8 +34,9 @@ wspolne:
 # * rozwinięcia kanalizacji i wodociągu na jednym pasku H = 297 mm,
 # * `nr` powtórzony w widokach arkusza wielowidokowego — moduł instalacji zapisuje go w BRAKI_DANYCH.md i w uwagach
 #   (widoki z listy `widoki` nie dziedziczą pól arkusza),
-# * rzuty parteru K i WM: max_wysokosc 420 — koszt jak dla 520×594 (różnica 0,2 %), papier −0,011 m² na arkusz,
-#   układ jednolity z pozostałymi rzutami parteru (rzut po lewej, kolumna opisowa nad tabliczką); format dobiera `auto`.
+# * rzuty parteru: format dobiera `auto` bez ograniczeń wysokości — silnik rozważa także arkusze „bokiem na rolkę”
+#   (szerokość 594/610 mm, wysokość docięta; pasy 210 + 192 + 192 zamiast 125–145 mm — weryfikacja_M.md § 3);
+#   dawne wymuszenie max_wysokosc 420 przy PT-IS-03/08 usunięte (blokowało tańsze warianty).
 arkusze:
   - {nr: PT-IS-01, tytul: "INSTALACJA WODOCIĄGOWA — RZUT PARTERU", typ: inst_rzut, branza: IS-W, kond: P0}
   - nr: PT-IS-02
@@ -43,7 +44,7 @@ arkusze:
     widoki:
       - {nr: PT-IS-02, typ: inst_rzut, branza: IS-W, kond: P1}
       - {nr: PT-IS-02, typ: inst_rzut, branza: IS-W, kond: P2}
-  - {nr: PT-IS-03, tytul: "KANALIZACJA SANITARNA — RZUT PARTERU", typ: inst_rzut, branza: IS-K, kond: P0, max_wysokosc: 420}
+  - {nr: PT-IS-03, tytul: "KANALIZACJA SANITARNA — RZUT PARTERU", typ: inst_rzut, branza: IS-K, kond: P0}
   - nr: PT-IS-04
     tytul: "KANALIZACJA SANITARNA — RZUTY I PIĘTRA I II PIĘTRA"
     widoki:
@@ -60,7 +61,7 @@ arkusze:
     widoki:
       - {nr: PT-IS-07, typ: inst_rzut, branza: IS-CO, kond: P1}
       - {nr: PT-IS-07, typ: inst_rzut, branza: IS-CO, kond: P2}
-  - {nr: PT-IS-08, tytul: "WENTYLACJA MECHANICZNA — RZUT PARTERU", typ: inst_rzut, branza: IS-WM, kond: P0, max_wysokosc: 420}
+  - {nr: PT-IS-08, tytul: "WENTYLACJA MECHANICZNA — RZUT PARTERU", typ: inst_rzut, branza: IS-WM, kond: P0}
   - nr: PT-IS-09
     tytul: "WENTYLACJA MECHANICZNA — RZUTY I PIĘTRA I II PIĘTRA"
     widoki:

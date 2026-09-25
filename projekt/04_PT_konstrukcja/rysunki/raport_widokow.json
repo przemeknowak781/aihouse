@@ -234,12 +234,12 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 876,
-          "napisy": 306,
+          "prymitywy": 880,
+          "napisy": 307,
           "sprawdzone_lancuchy": 4
         }
       },
-      "czas_s": 514.3,
+      "czas_s": 144.6,
       "png_kontrola": {
         "px": [
           4193,
@@ -472,7 +472,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 7.1,
+      "czas_s": 7.8,
       "png_kontrola": {
         "px": [
           1536,
@@ -560,235 +560,8 @@
         "pole_m2": 0.2495,
         "standardowy": true,
         "tryb": "ekonomiczny",
-        "koszt": 0.2621,
-        "wypelnienie_szac": 0.695,
-        "uklad_widokow": "wiersz",
-        "skladanie": {
-          "zgiecia_pionowe": [
-            210.0,
-            402.0
-          ],
-          "zgiecia_poziome": [
-            297.0
-          ],
-          "pasy": [
-            210.0,
-            192.0,
-            192.0
-          ],
-          "rzedy": [
-            297.0,
-            123.0
-          ],
-          "n_pasow": 3,
-          "n_rzedow": 2,
-          "warstwy": 6,
-          "ocena": "poprawne",
-          "ocena_pion": "dobre",
-          "ocena_poziom": "poprawne",
-          "tabliczka_na_wierzchu": true,
-          "uwagi": [
-            "górny rząd 123 mm (niepełny)"
-          ]
-        },
-        "czesci_uwag": 1,
-        "kolejnosc_czytania": false,
-        "znaki_rezerwowane": true,
-        "kandydaci": [
-          {
-            "format": "A2",
-            "wymiary_mm": [
-              594,
-              420
-            ],
-            "koszt": 0.2621,
-            "pole_m2": 0.2495,
-            "skladanie": "poprawne"
-          },
-          {
-            "format": "470×594",
-            "wymiary_mm": [
-              470,
-              594
-            ],
-            "koszt": 0.2991,
-            "pole_m2": 0.2792,
-            "skladanie": "poprawne"
-          },
-          {
-            "format": "470×841",
-            "wymiary_mm": [
-              470,
-              841
-            ],
-            "koszt": 0.4397,
-            "pole_m2": 0.3953,
-            "skladanie": "poprawne"
-          },
-          {
-            "format": "470×891",
-            "wymiary_mm": [
-              470,
-              891
-            ],
-            "koszt": 0.4486,
-            "pole_m2": 0.4188,
-            "skladanie": "poprawne"
-          }
-        ],
-        "bloki": [
-          [
-            "tabliczka",
-            [
-              404.0,
-              10.0,
-              584.0,
-              113.0
-            ]
-          ],
-          [
-            "legenda_k",
-            [
-              218.0,
-              82.7,
-              398.0,
-              117.2
-            ]
-          ],
-          [
-            "uwagi[1–12]",
-            [
-              32.0,
-              27.6,
-              212.0,
-              117.2
-            ]
-          ],
-          [
-            "róża i podziałka",
-            [
-              218.0,
-              46.9,
-              398.0,
-              77.7
-            ]
-          ]
-        ],
-        "kolizje": [],
-        "znaki_centrujace": {
-          "g": 10.0,
-          "d": 10.0,
-          "l": 10.0,
-          "p": 10.0
-        }
-      },
-      "pliki": {
-        "pdf": "projekt/04_PT_konstrukcja/rysunki/PT-BO-03_zbrojenie_dolne_plyty_fundamentowej.pdf",
-        "png": "projekt/04_PT_konstrukcja/rysunki/PT-BO-03_zbrojenie_dolne_plyty_fundamentowej.png",
-        "dxf": "projekt/04_PT_konstrukcja/rysunki/PT-BO-03_zbrojenie_dolne_plyty_fundamentowej.dxf"
-      },
-      "qa": {
-        "ok": true,
-        "errors": [],
-        "warnings": [
-          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
-        ],
-        "stats": {
-          "prymitywy": 691,
-          "napisy": 274,
-          "sprawdzone_lancuchy": 0
-        }
-      },
-      "czas_s": 6.9,
-      "png_kontrola": {
-        "px": [
-          3508,
-          2481
-        ],
-        "dpi_eff": [
-          150.0,
-          150.0
-        ],
-        "dpi_meta": [
-          150.01239999999999,
-          150.01239999999999
-        ],
-        "ok": true
-      },
-      "wypelnienie": {
-        "wypelnienie": 0.769,
-        "wypelnienie_rys": 0.748,
-        "wypelnienie_skl": 0.692,
-        "wypelnienie_kontur": 0.598,
-        "pole_arkusza_m2": 0.2495,
-        "pole_ramki_m2": 0.2256,
-        "pusty_prostokat_mm": [
-          126,
-          296
-        ],
-        "przyciety_mm": [
-          583,
-          412
-        ],
-        "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
-      }
-    },
-    {
-      "nr": "PT-BO-04",
-      "tytul": "ZBROJENIE GÓRNE PŁYTY FUNDAMENTOWEJ",
-      "format": "A2",
-      "typ": [
-        "k_zbrojenie"
-      ],
-      "skala": "1:50",
-      "widoki": [
-        "ZBROJENIE GÓRNE PŁYTY FUNDAMENTOWEJ PF1+PF2"
-      ],
-      "qa_kind": null,
-      "wymiary_mm": [
-        594.0,
-        420.0
-      ],
-      "pole_m2": 0.2495,
-      "skladanie": {
-        "zgiecia_pionowe": [
-          210.0,
-          402.0
-        ],
-        "zgiecia_poziome": [
-          297.0
-        ],
-        "pasy": [
-          210.0,
-          192.0,
-          192.0
-        ],
-        "rzedy": [
-          297.0,
-          123.0
-        ],
-        "n_pasow": 3,
-        "n_rzedow": 2,
-        "warstwy": 6,
-        "ocena": "poprawne",
-        "ocena_pion": "dobre",
-        "ocena_poziom": "poprawne",
-        "tabliczka_na_wierzchu": true,
-        "uwagi": [
-          "górny rząd 123 mm (niepełny)"
-        ]
-      },
-      "uklad": {
-        "format": "A2",
-        "wymiary_mm": [
-          594.0,
-          420.0
-        ],
-        "pole_m2": 0.2495,
-        "standardowy": true,
-        "tryb": "ekonomiczny",
         "koszt": 0.2595,
-        "wypelnienie_szac": 0.69,
+        "wypelnienie_szac": 0.691,
         "uklad_widokow": "wiersz",
         "skladanie": {
           "zgiecia_pionowe": [
@@ -910,9 +683,9 @@
         }
       },
       "pliki": {
-        "pdf": "projekt/04_PT_konstrukcja/rysunki/PT-BO-04_zbrojenie_gorne_plyty_fundamentowej.pdf",
-        "png": "projekt/04_PT_konstrukcja/rysunki/PT-BO-04_zbrojenie_gorne_plyty_fundamentowej.png",
-        "dxf": "projekt/04_PT_konstrukcja/rysunki/PT-BO-04_zbrojenie_gorne_plyty_fundamentowej.dxf"
+        "pdf": "projekt/04_PT_konstrukcja/rysunki/PT-BO-03_zbrojenie_dolne_plyty_fundamentowej.pdf",
+        "png": "projekt/04_PT_konstrukcja/rysunki/PT-BO-03_zbrojenie_dolne_plyty_fundamentowej.png",
+        "dxf": "projekt/04_PT_konstrukcja/rysunki/PT-BO-03_zbrojenie_dolne_plyty_fundamentowej.dxf"
       },
       "qa": {
         "ok": true,
@@ -921,12 +694,12 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 600,
-          "napisy": 248,
+          "prymitywy": 692,
+          "napisy": 272,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.3,
+      "czas_s": 7.0,
       "png_kontrola": {
         "px": [
           3508,
@@ -946,7 +719,234 @@
         "wypelnienie": 0.759,
         "wypelnienie_rys": 0.737,
         "wypelnienie_skl": 0.687,
-        "wypelnienie_kontur": 0.586,
+        "wypelnienie_kontur": 0.587,
+        "pole_arkusza_m2": 0.2495,
+        "pole_ramki_m2": 0.2256,
+        "pusty_prostokat_mm": [
+          126,
+          296
+        ],
+        "przyciety_mm": [
+          583,
+          412
+        ],
+        "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
+      }
+    },
+    {
+      "nr": "PT-BO-04",
+      "tytul": "ZBROJENIE GÓRNE PŁYTY FUNDAMENTOWEJ",
+      "format": "A2",
+      "typ": [
+        "k_zbrojenie"
+      ],
+      "skala": "1:50",
+      "widoki": [
+        "ZBROJENIE GÓRNE PŁYTY FUNDAMENTOWEJ PF1+PF2"
+      ],
+      "qa_kind": null,
+      "wymiary_mm": [
+        594.0,
+        420.0
+      ],
+      "pole_m2": 0.2495,
+      "skladanie": {
+        "zgiecia_pionowe": [
+          210.0,
+          402.0
+        ],
+        "zgiecia_poziome": [
+          297.0
+        ],
+        "pasy": [
+          210.0,
+          192.0,
+          192.0
+        ],
+        "rzedy": [
+          297.0,
+          123.0
+        ],
+        "n_pasow": 3,
+        "n_rzedow": 2,
+        "warstwy": 6,
+        "ocena": "poprawne",
+        "ocena_pion": "dobre",
+        "ocena_poziom": "poprawne",
+        "tabliczka_na_wierzchu": true,
+        "uwagi": [
+          "górny rząd 123 mm (niepełny)"
+        ]
+      },
+      "uklad": {
+        "format": "A2",
+        "wymiary_mm": [
+          594.0,
+          420.0
+        ],
+        "pole_m2": 0.2495,
+        "standardowy": true,
+        "tryb": "ekonomiczny",
+        "koszt": 0.2595,
+        "wypelnienie_szac": 0.684,
+        "uklad_widokow": "wiersz",
+        "skladanie": {
+          "zgiecia_pionowe": [
+            210.0,
+            402.0
+          ],
+          "zgiecia_poziome": [
+            297.0
+          ],
+          "pasy": [
+            210.0,
+            192.0,
+            192.0
+          ],
+          "rzedy": [
+            297.0,
+            123.0
+          ],
+          "n_pasow": 3,
+          "n_rzedow": 2,
+          "warstwy": 6,
+          "ocena": "poprawne",
+          "ocena_pion": "dobre",
+          "ocena_poziom": "poprawne",
+          "tabliczka_na_wierzchu": true,
+          "uwagi": [
+            "górny rząd 123 mm (niepełny)"
+          ]
+        },
+        "czesci_uwag": 1,
+        "kolejnosc_czytania": true,
+        "znaki_rezerwowane": true,
+        "kandydaci": [
+          {
+            "format": "A2",
+            "wymiary_mm": [
+              594,
+              420
+            ],
+            "koszt": 0.2595,
+            "pole_m2": 0.2495,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "470×594",
+            "wymiary_mm": [
+              470,
+              594
+            ],
+            "koszt": 0.2991,
+            "pole_m2": 0.2792,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "470×841",
+            "wymiary_mm": [
+              470,
+              841
+            ],
+            "koszt": 0.4397,
+            "pole_m2": 0.3953,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "470×891",
+            "wymiary_mm": [
+              470,
+              891
+            ],
+            "koszt": 0.4486,
+            "pole_m2": 0.4188,
+            "skladanie": "poprawne"
+          }
+        ],
+        "bloki": [
+          [
+            "tabliczka",
+            [
+              404.0,
+              10.0,
+              584.0,
+              113.0
+            ]
+          ],
+          [
+            "legenda_k",
+            [
+              32.0,
+              82.7,
+              212.0,
+              117.2
+            ]
+          ],
+          [
+            "uwagi[1–10]",
+            [
+              218.0,
+              40.2,
+              398.0,
+              117.2
+            ]
+          ],
+          [
+            "róża i podziałka",
+            [
+              32.0,
+              46.9,
+              212.0,
+              77.7
+            ]
+          ]
+        ],
+        "kolizje": [],
+        "znaki_centrujace": {
+          "g": 10.0,
+          "d": 10.0,
+          "l": 10.0,
+          "p": 10.0
+        }
+      },
+      "pliki": {
+        "pdf": "projekt/04_PT_konstrukcja/rysunki/PT-BO-04_zbrojenie_gorne_plyty_fundamentowej.pdf",
+        "png": "projekt/04_PT_konstrukcja/rysunki/PT-BO-04_zbrojenie_gorne_plyty_fundamentowej.png",
+        "dxf": "projekt/04_PT_konstrukcja/rysunki/PT-BO-04_zbrojenie_gorne_plyty_fundamentowej.dxf"
+      },
+      "qa": {
+        "ok": true,
+        "errors": [],
+        "warnings": [
+          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
+        ],
+        "stats": {
+          "prymitywy": 598,
+          "napisy": 245,
+          "sprawdzone_lancuchy": 0
+        }
+      },
+      "czas_s": 2.8,
+      "png_kontrola": {
+        "px": [
+          3508,
+          2481
+        ],
+        "dpi_eff": [
+          150.0,
+          150.0
+        ],
+        "dpi_meta": [
+          150.01239999999999,
+          150.01239999999999
+        ],
+        "ok": true
+      },
+      "wypelnienie": {
+        "wypelnienie": 0.748,
+        "wypelnienie_rys": 0.725,
+        "wypelnienie_skl": 0.681,
+        "wypelnienie_kontur": 0.581,
         "pole_arkusza_m2": 0.2495,
         "pole_ramki_m2": 0.2256,
         "pusty_prostokat_mm": [
@@ -1013,7 +1013,7 @@
         "standardowy": true,
         "tryb": "ekonomiczny",
         "koszt": 0.2495,
-        "wypelnienie_szac": 0.46,
+        "wypelnienie_szac": 0.478,
         "uklad_widokow": "wiersz",
         "skladanie": {
           "zgiecia_pionowe": [
@@ -1100,9 +1100,9 @@
             "uwagi[1–3]",
             [
               230.0,
-              556.7,
+              178.5,
               410.0,
-              581.0
+              202.8
             ]
           ]
         ],
@@ -1127,12 +1127,12 @@
           "brak legendy na arkuszu (R-LEGENDA) — wymagana dla oznaczeń spoza norm z zał. 2 rozp."
         ],
         "stats": {
-          "prymitywy": 1315,
-          "napisy": 1050,
+          "prymitywy": 1375,
+          "napisy": 1102,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 8.9,
+      "czas_s": 8.6,
       "png_kontrola": {
         "px": [
           2481,
@@ -1149,19 +1149,19 @@
         "ok": true
       },
       "wypelnienie": {
-        "wypelnienie": 0.681,
-        "wypelnienie_rys": 0.652,
-        "wypelnienie_skl": 0.438,
-        "wypelnienie_kontur": 0.442,
+        "wypelnienie": 0.761,
+        "wypelnienie_rys": 0.739,
+        "wypelnienie_skl": 0.451,
+        "wypelnienie_kontur": 0.463,
         "pole_arkusza_m2": 0.2495,
         "pole_ramki_m2": 0.2239,
         "pusty_prostokat_mm": [
-          390,
-          82
+          210,
+          168
         ],
         "przyciety_mm": [
           412,
-          594
+          587
         ],
         "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
       }
@@ -1377,7 +1377,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.9,
+      "czas_s": 2.7,
       "png_kontrola": {
         "px": [
           3071,
@@ -1600,7 +1600,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.3,
+      "czas_s": 2.2,
       "png_kontrola": {
         "px": [
           2481,
@@ -2060,7 +2060,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.2,
+      "czas_s": 3.4,
       "png_kontrola": {
         "px": [
           4075,
@@ -2297,7 +2297,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.9,
+      "czas_s": 3.8,
       "png_kontrola": {
         "px": [
           4075,
@@ -2726,7 +2726,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.2,
+      "czas_s": 3.0,
       "png_kontrola": {
         "px": [
           2363,
@@ -2949,7 +2949,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.3,
+      "czas_s": 3.2,
       "png_kontrola": {
         "px": [
           2363,
@@ -3161,7 +3161,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 5.0,
+      "czas_s": 4.8,
       "png_kontrola": {
         "px": [
           2658,
@@ -3384,7 +3384,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.5,
+      "czas_s": 2.2,
       "png_kontrola": {
         "px": [
           2363,
@@ -3607,7 +3607,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.1,
+      "czas_s": 3.3,
       "png_kontrola": {
         "px": [
           2363,
@@ -3817,7 +3817,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.3,
+      "czas_s": 3.7,
       "png_kontrola": {
         "px": [
           1359,
@@ -4050,7 +4050,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.1,
+      "czas_s": 2.2,
       "png_kontrola": {
         "px": [
           1831,
@@ -4275,7 +4275,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 1.4,
+      "czas_s": 1.6,
       "png_kontrola": {
         "px": [
           2776,
@@ -4487,7 +4487,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 5.2,
+      "czas_s": 5.3,
       "png_kontrola": {
         "px": [
           3544,
@@ -4701,7 +4701,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.8,
+      "czas_s": 3.6,
       "png_kontrola": {
         "px": [
           2953,
@@ -4928,7 +4928,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.1,
+      "czas_s": 3.0,
       "png_kontrola": {
         "px": [
           2776,
@@ -5165,7 +5165,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.3,
+      "czas_s": 2.1,
       "png_kontrola": {
         "px": [
           2422,
@@ -5402,7 +5402,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.1,
+      "czas_s": 2.2,
       "png_kontrola": {
         "px": [
           1949,
@@ -5625,7 +5625,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.7,
+      "czas_s": 2.8,
       "png_kontrola": {
         "px": [
           2363,
@@ -5853,7 +5853,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.0,
+      "czas_s": 2.1,
       "png_kontrola": {
         "px": [
           2363,
@@ -6103,7 +6103,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.6,
+      "czas_s": 2.9,
       "png_kontrola": {
         "px": [
           5138,
@@ -6171,7 +6171,7 @@
       "poprawne": 14,
       "słabe": 3
     },
-    "wypelnienie_wazone": 0.645
+    "wypelnienie_wazone": 0.647
   },
-  "czas_s": 646.8
+  "czas_s": 271.5
 }
