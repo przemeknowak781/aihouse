@@ -119,6 +119,7 @@ class WynikT:
     odlaczone: list = field(default_factory=list)   # węzły podpór jednostronnych odłączone (odrywanie)
     iteracje: int = 1
     D_el: np.ndarray | None = None
+    _nar: np.ndarray | None = field(default=None, repr=False)
 
     @property
     def ux(self) -> np.ndarray:
@@ -633,40 +634,48 @@ class TarczaMES:
     # ---------------------------------------------------------------------------------------------
     # Przekroje (całkowanie naprężeń)
     # ---------------------------------------------------------------------------------------------
-    def _wiersz_pionowy(self, x: float) -> list[tuple[int, float]]:
-        """Elementy przecinane przekrojem pionowym x: [(e, ξ)] od dołu."""
-        i = int(np.searchsorted(self.gx, x, side="right") - 1)
-        i = min(max(i, 0), len(self.gx) - 2)
-        xi = 2 * (x - self.gx[i]) / (self.gx[i + 1] - self.gx[i]) - 1
-        out = []
-        for j in range(len(self.gz) - 1):
-            e = self.el_grid[j, i]
-            if e >= 0:
-                out.append((int(e), float(xi)))
-        return out
-
-    def _wiersz_poziomy(self, z: float) -> list[tuple[int, float]]:
-        j = int(np.searchsorted(self.gz, z, side="right") - 1)
-        j = min(max(j, 0), len(self.gz) - 2)
-        eta = 2 * (z - self.gz[j]) / (self.gz[j + 1] - self.gz[j]) - 1
-        out = []
-        for i in range(len(self.gx) - 1):
-            e = self.el_grid[j, i]
-            if e >= 0:
-                out.append((int(e), float(eta)))
+    def naprezenia_narozniki(self, wyn: WynikT) -> np.ndarray:
+        """σ w narożach elementów [ne × 4 × 3] (kolejność węzłów elementu; z modami wewnętrznymi) — buforowane.
+        Przy stałym η naprężenie jest liniowe w ξ (i odwrotnie), więc wartości w dowolnym punkcie krawędzi
+        przekroju pionowego/poziomego wynikają z interpolacji liniowej naroży."""
+        if getattr(wyn, "_nar", None) is not None:
+            return wyn._nar
+        a = self.el_ab[:, 0][:, None]
+        b = self.el_ab[:, 1][:, None]
+        ue = wyn.u[self.dof]
+        ux, uz = ue[:, 0::2], ue[:, 1::2]
+        al = wyn.alfa
+        D = wyn.D_el if wyn.D_el is not None else self._D_iso
+        out = np.zeros((self.ne, 4, 3))
+        for k in range(4):
+            xi, eta = _XI_N[k], _ETA_N[k]
+            dNdx = (_XI_N * (1 + _ETA_N * eta) / 4)[None, :] * (2 / a)
+            dNdz = (_ETA_N * (1 + _XI_N * xi) / 4)[None, :] * (2 / b)
+            ex = (dNdx * ux).sum(1) + al[:, 0] * (-4 * xi / a[:, 0])
+            ez = (dNdz * uz).sum(1) + al[:, 3] * (-4 * eta / b[:, 0])
+            g = (dNdz * ux + dNdx * uz).sum(1) + al[:, 1] * (-4 * eta / b[:, 0]) + al[:, 2] * (-4 * xi / a[:, 0])
+            eps = np.stack([ex, ez, g], axis=1)
+            out[:, k] = np.einsum("eij,ej->ei", D, eps)
+        wyn._nar = out
         return out
 
     def przekroj_pionowy(self, wyn: WynikT, x: float) -> dict:
         """Siły w przekroju pionowym x (lewa część działa na prawą): N = ∫σ_x·t dz [kN], V = ∫τ·t dz [kN],
-        M = ∫σ_x·t·(z − z_ref) dz [kNm] (z_ref = 0), odcinki pełne [(z0, z1, e-lista)] i liniowe rozkłady σ w elementach."""
-        segs = []
+        M = ∫σ_x·t·z dz [kNm] (względem z = 0), odcinki pełne [z0, z1] i profil liniowy w elementach
+        prof = [(z0, z1, t, σx0, σx1, τ0, τ1)]."""
+        nar = self.naprezenia_narozniki(wyn)
+        i = int(np.searchsorted(self.gx, x, side="right") - 1)
+        i = min(max(i, 0), len(self.gx) - 2)
+        r = (x - self.gx[i]) / (self.gx[i + 1] - self.gx[i])
+        col = self.el_grid[:, i]
+        es = col[col >= 0]
+        segs, prof = [], []
         N = V = M = 0.0
-        prof = []     # (z0, z1, t, sx0, sx1, tau0, tau1)
-        for e, xi in self._wiersz_pionowy(x):
+        for e in es:
             z0 = self.el_x0[e, 1]
             z1 = z0 + self.el_ab[e, 1]
-            s0 = self.naprezenia_pkt(wyn, e, xi, -1.0)
-            s1 = self.naprezenia_pkt(wyn, e, xi, 1.0)
+            s0 = (1 - r) * nar[e, 0] + r * nar[e, 1]      # η = −1
+            s1 = (1 - r) * nar[e, 3] + r * nar[e, 2]      # η = +1
             t = self.t_el[e]
             prof.append((z0, z1, t, s0[0], s1[0], s0[2], s1[2]))
             L = z1 - z0
@@ -680,15 +689,20 @@ class TarczaMES:
         return {"x": x, "N": N, "V": V, "M": M, "prof": prof, "odcinki": segs}
 
     def przekroj_poziomy(self, wyn: WynikT, z: float) -> dict:
-        """Siły w przekroju poziomym z: N_z = ∫σ_z·t dx, V = ∫τ·t dx, M = ∫σ_z·t·x dx; profil liniowy w elementach."""
-        segs = []
+        """Siły w przekroju poziomym z: N_z = ∫σ_z·t dx, V = ∫τ·t dx, M = ∫σ_z·t·x dx; prof = [(x0, x1, t, σz0, σz1, τ0, τ1)]."""
+        nar = self.naprezenia_narozniki(wyn)
+        j = int(np.searchsorted(self.gz, z, side="right") - 1)
+        j = min(max(j, 0), len(self.gz) - 2)
+        r = (z - self.gz[j]) / (self.gz[j + 1] - self.gz[j])
+        row = self.el_grid[j, :]
+        es = row[row >= 0]
+        segs, prof = [], []
         N = V = M = 0.0
-        prof = []
-        for e, eta in self._wiersz_poziomy(z):
+        for e in es:
             x0 = self.el_x0[e, 0]
             x1 = x0 + self.el_ab[e, 0]
-            s0 = self.naprezenia_pkt(wyn, e, -1.0, eta)
-            s1 = self.naprezenia_pkt(wyn, e, 1.0, eta)
+            s0 = (1 - r) * nar[e, 0] + r * nar[e, 3]      # ξ = −1
+            s1 = (1 - r) * nar[e, 1] + r * nar[e, 2]      # ξ = +1
             t = self.t_el[e]
             prof.append((x0, x1, t, s0[1], s1[1], s0[2], s1[2]))
             L = x1 - x0

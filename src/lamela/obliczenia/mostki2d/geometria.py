@@ -826,7 +826,7 @@ def _wezel_krawedz_okna(rodzaj: str, warstwy_sciany: Sequence[Warstwa], U_f: flo
     # linie schematyczne (układ lokalny s, n → T): taśmy montażu warstwowego, obróbki, spływ wody
     s_t = max(x0, d_t0)
     nf1 = yf0 + d_f
-    lin = [("tasma_wewn", [(s_t - 0.012, yf0 - 0.004), (x0 + 0.03, yf0 - 0.004)],
+    lin = [("tasma_wewn", [(s_t - 0.012, yf0 - 0.004), (s_t + 0.03, yf0 - 0.004)],
             "taśma paroszczelna od wewnątrz (rama ↔ tynk ościeża)"),
            ("tasma_zewn", [(x0 - 0.035, nf1 + 0.004), (x0 + 0.02, nf1 + 0.004)],
             "taśma paroprzepuszczalna od zewnątrz (pod izolacją ościeża)")]

@@ -368,3 +368,103 @@ W("S2-14", "P2", "DZ12", (xD, y1), (xD, y3), uwagi="hol / gabinet")
 W("S2-15", "P2", "DZ12", (xC, Y_TH), (xD, Y_TH), uwagi="pom. techniczne / hol")
 W("S2-16", "P2", "GK10", (X_SI, y3), (X_SI, Y_SI), uwagi="obudowa szachtu SI")
 W("S2-17", "P2", "GK10", (X_SI, Y_SI), (xC, Y_SI), uwagi="obudowa szachtu SI")
+
+
+# =====================================================================================================================
+# 5. OTWORY — położenie podawane w układzie globalnym (zakres x dla ścian równoległych do x, zakres y — do y);
+#    odl liczona od punktu początkowego osi ściany. Otwór ≥ 0,10 m od lica ściany prostopadłej (SCHEMAT p. 5.2).
+#    Drzwi do pokoi/łazienek/WC: otwór w murze ≥ 0,90 × 2,10 m (≥ 0,80 × 2,00 w świetle ościeżnicy — WT §75, §79, J1);
+#    łazienki i WC otwierane NA ZEWNĄTRZ lub przesuwne, z kratką/podcięciem ≥ 0,022 m² (WT §79, W-059).
+# =====================================================================================================================
+OT: list[dict] = []
+_SC = {s["id"]: s for s in SC}
+
+
+def O(oid, sid, a, b, typ, sym, wys, parapet=0.0, otw=None, oslona=None, **kw):
+    s = _SC[sid]
+    (x1, y1_), (x2, y2_) = s["os"]
+    if abs(y2_ - y1_) < 1e-9:          # ściana równoległa do x
+        c1, c2 = x1, x2
+    else:
+        c1, c2 = y1_, y2_
+    lo, hi = min(a, b), max(a, b)
+    odl = (lo - c1) if c2 > c1 else (c1 - hi)
+    d = {"id": oid, "sciana": sid, "symbol": sym, "typ": typ, "odl": r(odl), "szer": r(hi - lo), "wys": r(wys), "parapet": r(parapet)}
+    if otw:
+        d["otwieranie"] = otw
+    if oslona:
+        d["oslona"] = oslona
+    d.update(kw)
+    OT.append(d)
+    return d
+
+
+def ow(rodzaj="R", kierunek="do_wewn", strona="lewa", **kw):
+    return {"strona": strona, "kierunek": kierunek, "rodzaj": rodzaj, **kw}
+
+
+HS = ow("HS", "do_wewn", "prawa")
+RU = ow("RU")
+# ---- P0 — przeszklenie E: kwatery 1,90 / 1,90 / 2,335 / 2,335 / 2,93 (x 0,30–2,20–4,10–6,435–8,77–11,70); słupy SL1–SL4 w osiach
+#      podziałów; SL3/SL4 w jednej linii ze słupkami boksu C (przeszczep J2); HS w kwaterach 3 i 4 (bezprogowe)
+E_KW = [0.30, 2.20, 4.10, 6.435, 8.77, 11.70]
+O("O0-01", "S0-01", E_KW[0], E_KW[1], "fix", "FX1", 2.75, 0.0, oslona="screen_zip", uwagi="przeszklenie E — kwatera 1")
+O("O0-02", "S0-01", E_KW[1], E_KW[2], "fix", "FX1", 2.75, 0.0, oslona="screen_zip", uwagi="przeszklenie E — kwatera 2")
+O("O0-03", "S0-01", E_KW[2], E_KW[3], "drzwi_przesuwne_HS", "HS1", 2.75, 0.0, HS, "screen_zip", bezprogowe=True, uwagi="kwatera 3 — HS salon")
+O("O0-04", "S0-01", E_KW[3], E_KW[4], "drzwi_przesuwne_HS", "HS1", 2.75, 0.0, HS, "screen_zip", bezprogowe=True, uwagi="kwatera 4 — HS jadalnia")
+O("O0-05", "S0-01", E_KW[4], E_KW[5], "fix", "FX2", 2.75, 0.0, oslona="screen_zip", uwagi="przeszklenie E — kwatera 5 (kuchnia)")
+O("O0-06", "S0-02", 12.25, 13.15, "drzwi_zewn", "DZ3", 2.75, 0.0, ow("R", "na_zewn"), "screen_zip",
+  uwagi="drzwi gospodarcze przeszklone w systemie i podziale fasady E (przeszczep J2) — pas E czytany ≈ 12,85 m; pod okapem E")
+O("O0-07", "S0-04", 12.75, 17.75, "brama", "BR1", 2.25, -0.10, ow("segmentowa", "do_wewn"),
+  uwagi="brama segmentowa 5,00 × 2,25 m w świetle, kratki went. ≥ 0,08 m² (W-111, W-115); posadzka garażu −0,10")
+O("O0-08", "S0-03", 4.90, 5.90, "drzwi_zewn", "DZ2", 2.10, 0.0, ow("R", "na_zewn"), uwagi="drzwi boczne garażu (rowery, ogród) — 5,70 m od granicy E")
+O("O0-09", "S0-06", 10.05, 11.15, "drzwi_zewn", "DZ1", 2.40, 0.0, ow("R", "do_wewn", "prawa"),
+  uwagi="drzwi wejściowe 1,10 × 2,40 w murze (≥ 0,90 × 2,00 w świetle ościeżnicy), próg ≤ 0,02 (W-055); pod daszkiem")
+O("O0-10", "S0-06", 11.25, 11.795, "fix", "FX3", 2.40, 0.0, oslona="brak", uwagi="doświetle boczne drzwi wejściowych, VSG mleczne (przeszczep z W3)")
+O("O0-11", "S0-07", 1.20, 3.60, "drzwi_przesuwne_HS", "HS2", 2.75, 0.0, HS, "screen_zip", bezprogowe=True,
+  uwagi="HS salonu na taras zach. pod okapem 1,50 m (przeszczep J2 z W1/W3)")
+O("O0-12", "S0-07", 5.80, 7.60, "okno", "OZ1", 1.50, 0.90, RU, "zaluzja_zewn", uwagi="pokój gościnny — zachód")
+O("O0-13", "S0-06", 4.30, 5.10, "okno", "ON1", 0.60, 1.60, ow("U"), "brak", uwagi="łazienka gościnna — okno wysokie")
+O("O0-14", "S0-08", 4.10, 5.00, "drzwi", "D1", 2.10, 0.0, ow("R", "do_wewn"), uwagi="salon → przedpokój gościnny")
+O("O0-15", "S0-11", 5.33, 6.23, "drzwi", "D1", 2.10, 0.0, ow("R", "do_wewn"), uwagi="przedpokój → pokój gościnny")
+O("O0-16", "S0-19", 4.10, 5.00, "drzwi", "D2P", 2.10, 0.0, ow("przesuwne", "na_zewn", przesuwne=True),
+  uwagi="łazienka gościnna — drzwi przesuwne naścienne (WT §79 ust. 1), podcięcie ≥ 0,022 m²")
+O("O0-17", "S0-09", 7.40, 8.20, "drzwi", "D3", 2.00, 0.0, ow("R", "do_wewn"), uwagi="spiżarnia pod biegiem 2 (przeszczep J2)")
+O("O0-18", "S0-10", 8.90, 10.40, "otwor", "OT1", 2.40, 0.0, uwagi="hol → pas komunikacyjny przy schodach / strefa dzienna")
+O("O0-19", "S0-20", 8.71, 9.61, "drzwi", "D2", 2.10, 0.0, ow("R", "na_zewn"), uwagi="WC gościnne — na zewnątrz, kratka ≥ 0,022 m²")
+O("O0-20", "S0-21", 10.15, 11.05, "drzwi", "DS1", 2.10, 0.0, ow("R", "do_wewn"), uwagi="drzwi szklane VSG w osi wejścia (x ≈ 10,60)")
+O("O0-21", "S0-15", 0.25, 1.15, "drzwi", "D1", 2.10, 0.0, ow("R", "do_wewn"),
+  uwagi="przedsionek → kuchnia; przesunięte do fasady (przeszczep J1) — ciągła zabudowa kuchni y 1,30–5,02")
+O("O0-22", "S0-17", 13.60, 14.50, "drzwi", "DG1", 2.10, 0.0, ow("R", "do_wewn"),
+  uwagi="garaż → przedsionek: szczelne, samozamykacz, U ≤ 1,3 (W-113, W-244)")
+O("O0-23", "S0-18", 1.60, 2.50, "drzwi", "D4", 2.10, 0.0, ow("R", "do_wewn"),
+  uwagi="pom. techniczne dostępne z domu przez przedsionek (poprawka J2)")
+
+# ---- P1
+O("O1-01", "S1-01", 4.10, 11.105, "okno", "BC1", 1.50, 0.70, ow("RU"), "screen_zip", kwatery=3,
+  uwagi="boks C — 3 kwatery 2,335 m w ramie wysuniętej 1,00 m; dolna część stała VSG do 0,85 m (W-097); słupki SLC1/SLC2 nad SL3/SL4")
+O("O1-02", "S1-02", 1.20, 2.70, "okno", "OE1", 1.50, 0.85, RU, "zaluzja_zewn", uwagi="pokój rodzinny — wschód (parapet +4,00 > attyka garażu +3,85)")
+O("O1-03", "S1-03", 4.30, 5.20, "okno", "ON2", 0.60, 1.60, ow("U"), "brak", uwagi="łazienka dzieci")
+O("O1-04", "S1-03", 10.40, 11.60, "okno", "ON3", 0.60, 1.60, ow("U"), "brak", uwagi="pralnia")
+O("O1-05", "S1-04", 6.00, 7.80, "okno", "OZ1", 1.50, 0.90, RU, "zaluzja_zewn", uwagi="pokój dziecka 2 — zachód")
+O("O1-06", "S1-04", 1.00, 2.80, "okno", "OZ1", 1.50, 0.90, RU, "zaluzja_zewn", uwagi="pokój dziecka 1 — zachód (elewacja pd. bryły B pełna)")
+O("O1-07", "S1-11", 2.60, 3.50, "drzwi", "D1", 2.10, 0.0, ow("R", "do_wewn"), uwagi="pokój dziecka 1")
+O("O1-08", "S1-11", 6.00, 8.40, "otwor", "OT2", 2.40, 0.0, uwagi="hol → pokój rodzinny (galeria przy schodach)")
+O("O1-09", "S1-05", 2.60, 3.50, "drzwi", "D1", 2.10, 0.0, ow("R", "do_wewn"), uwagi="pokój dziecka 2")
+O("O1-10", "S1-05", 4.10, 5.00, "drzwi", "D2", 2.10, 0.0, ow("R", "na_zewn"), uwagi="łazienka dzieci — na zewnątrz")
+O("O1-11", "S1-06", 8.71, 9.61, "drzwi", "D2", 2.10, 0.0, ow("R", "na_zewn"), uwagi="WC z natryskiem — na zewnątrz (pion K2 nad WC P0)")
+O("O1-12", "S1-06", 10.15, 11.05, "drzwi", "D1", 2.10, 0.0, ow("R", "do_wewn"), uwagi="pralnia z suszarnią")
+
+# ---- P2 (okna od pd./zach./wsch. za lamelami; parapet 0,60 — dolna część stała VSG do 0,85 m, skrzydła do wewnątrz — W-097/W-098)
+O("O2-01", "S2-01", 0.00, 3.00, "okno", "OP1", 2.00, 0.60, ow("RU"), "screen_zip", uwagi="sypialnia — południe (za lamelami)")
+O("O2-02", "S2-01", 4.10, 5.30, "okno", "OP2", 1.75, 0.85, RU, "screen_zip", uwagi="garderoba — południe")
+O("O2-03", "S2-01", 9.00, 11.40, "okno", "OP3", 2.00, 0.60, ow("RU"), "screen_zip", uwagi="gabinet — południe")
+O("O2-04", "S2-08", 1.30, 3.70, "okno", "OP3", 2.00, 0.60, ow("RU"), "screen_zip", uwagi="sypialnia — zachód (ściana lekka, za lamelami)")
+O("O2-05", "S2-02", 1.90, 3.10, "okno", "OP2", 1.75, 0.85, RU, "screen_zip", uwagi="gabinet — wschód")
+O("O2-06", "S2-05", 4.30, 5.20, "okno", "ON2", 0.60, 1.60, ow("U"), "brak", uwagi="łazienka rodziców")
+O("O2-07", "S2-05", 6.40, 8.10, "okno", "ON4", 1.50, 0.90, ow("U"), "brak", uwagi="klatka schodowa — północ (nad biegami)")
+O("O2-08", "S2-12", 3.90, 4.80, "drzwi", "D1", 2.10, 0.0, ow("R", "do_wewn"), uwagi="garderoba → sypialnia")
+O("O2-09", "S2-13", 3.90, 4.80, "drzwi", "D1", 2.10, 0.0, ow("R", "do_wewn"), uwagi="hol → garderoba (przedpokój apartamentu)")
+O("O2-10", "S2-09", 4.10, 5.00, "drzwi", "D2", 2.10, 0.0, ow("R", "na_zewn"), uwagi="garderoba → łazienka rodziców (na zewnątrz)")
+O("O2-11", "S2-14", 3.90, 4.80, "drzwi", "D1", 2.10, 0.0, ow("R", "do_wewn"), uwagi="hol → gabinet")
+O("O2-12", "S2-15", 6.20, 7.10, "drzwi", "D4", 2.10, 0.0, ow("R", "do_wewn"), uwagi="hol → pom. techniczne (centrala reku, wyłaz na dach)")
