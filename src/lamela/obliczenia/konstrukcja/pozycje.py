@@ -1640,10 +1640,17 @@ class AnalizaKonstrukcji:
                 poz.rysunki += rysunki.rys_belka(belka, pods, rozw, Ms, Vs, bid, self.rys(f"belka_{_slug(bid)}.png"))
             # reakcje → ściany / słupy
             for k, (s, t, o) in enumerate(pods):
+                szer = 0.25
+                if t == "sciana" and abs(ux * o.u[0] + uy * o.u[1]) > 0.98:     # mur współliniowy: szerokość wpływu
+                    ss_ = [q[0] for q in pods if q[1] == "sciana" and q[2].id == o.id]
+                    j_ = ss_.index(s)
+                    lo_ = ss_[j_ - 1] if j_ > 0 else s
+                    hi_ = ss_[j_ + 1] if j_ + 1 < len(ss_) else s
+                    szer = min(max((hi_ - lo_) / 2, 0.25), 1.0)
                 for cs, r in rozw.items():
                     R = float(r.R[k])
                     if t == "sciana":
-                        self.pending_sciany.setdefault(o.id, []).append((cs, R, o.st((x0 + ux * s, y0 + uy * s))[0], 0.25))
+                        self.pending_sciany.setdefault(o.id, []).append((cs, R, o.st((x0 + ux * s, y0 + uy * s))[0], szer))
                     elif t == "belka":
                         self.pending_belki.setdefault(str(o["id"]), []).append((cs, R, (x0 + ux * s, y0 + uy * s)))
                         self.belki_oparte = getattr(self, "belki_oparte", set()) | {(bid, str(o["id"]))}
