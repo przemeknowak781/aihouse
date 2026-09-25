@@ -1,27 +1,27 @@
 {
- "czas": "2026-09-25 11:47",
+ "czas": "2026-09-25 11:50",
  "aktywni": [
   {
    "id": "abfdfaca2ef13a7b4",
    "opis": "wf_a8783476-2a1:konstrukcja:1",
-   "idle_min": 1.7,
-   "bez_narzedzi_min": 1.7,
+   "idle_min": 0.4,
+   "bez_narzedzi_min": 0.4,
    "limity": 0,
    "powody": []
   },
   {
    "id": "a0046cc6247462acc",
    "opis": "wf_dad224e5-cd8:weryfikacja:M",
-   "idle_min": 0.0,
-   "bez_narzedzi_min": 0.0,
+   "idle_min": 1.4,
+   "bez_narzedzi_min": 1.4,
    "limity": 0,
    "powody": []
   },
   {
    "id": "a4e05885df10b0345",
    "opis": "wf_dad224e5-cd8:weryfikacja:C",
-   "idle_min": 0.0,
-   "bez_narzedzi_min": 0.0,
+   "idle_min": 0.1,
+   "bez_narzedzi_min": null,
    "limity": 0,
    "powody": []
   }

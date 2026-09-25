@@ -2,7 +2,7 @@
 
 Wygenerowano: 2026-09-25 skryptem `tools/audyt_wt.py` (uruchomienie: `python3 tools/audyt_wt.py`). Model: `model/budynek.yaml` (wersja 1.0, stadium: koncepcja ostateczna (synteza W2 + przeszczepy W1/W3 + poprawki J1–J3)), `model/dzialka.yaml`; wartości progowe z `docs/10_podstawy_prawne/wymagania.yaml` (418 wpisów). Model nie był modyfikowany.
 
-**Wynik kontroli automatycznych:** 0 × NIEZGODNE, 4 × UWAGA, 166 × OK, 3 × INFO.
+**Wynik kontroli automatycznych:** 0 × NIEZGODNE, 4 × UWAGA, 174 × OK, 3 × INFO.
 
 
 ## 1. Niezgodności i uwagi (z kontroli automatycznych)
@@ -129,12 +129,20 @@ PU mieszkalna (podstawowa 158,71 + pomocnicza bez garażu 40,16 + komunikacja be
 | OB-A2 | płyta wysunięta/okap/daszek | W | 7,30 | 4,00 |
 | D2/przelew@[-0.09, 8.2] | przelew awaryjny (rzygacz ~0,15 m) | W | 7,36 | 4,00 |
 | D2 | dach z attyką | W | 7,51 | 4,00 |
+| SL9 | słup | W | 7,51 | 4,00 |
+| SL10 | słup | W | 7,51 | 4,00 |
+| SL11 | słup | W | 7,51 | 4,00 |
+| SL12 | słup | W | 7,51 | 4,00 |
 | RS3 | rura spustowa zewn. | W | 7,94 | 4,00 |
 | SL1 | słup | W | 9,74 | 4,00 |
+| SL13 | słup | W | 11,10 | 4,00 |
+| SL14 | słup | W | 11,10 | 4,00 |
+| SL15 | słup | W | 11,10 | 4,00 |
 | S2-06 | ściana zewn. P2 (bez otworów) | W | 11,18 | 3,00 |
 | PL-C1 | płyta wysunięta/okap/daszek | W | 11,20 | 4,00 |
 | PL-C2 | płyta wysunięta/okap/daszek | W | 11,20 | 4,00 |
 | D1/przelew@[3.785, 5.7] | przelew awaryjny (rzygacz ~0,15 m) | W | 11,24 | 4,00 |
+| SL21 | słup | W | 11,30 | 4,00 |
 | SL7 | słup | W | 11,55 | 4,00 |
 | SL2 | słup | W | 11,64 | 4,00 |
 | S0-05 | ściana zewn. P0 (bez otworów) | W | 19,30 | 3,00 |
@@ -247,6 +255,14 @@ Najbardziej wysunięty ku drodze element budynku leży 0,95 m przed nieprzekracz
 | Odległości | SL1 | słup → granica W | 9,74 m | ≥ 4,00 (założenie proj.); WT ≥ 1,50 | OK | WT §12 ust. 6 pkt 1 (płyty wysunięte traktowane jak okapy — interpretacja) [W-004]; TWARDE ZAŁOŻENIA |
 | Odległości | SL2 | słup → granica W | 11,64 m | ≥ 4,00 (założenie proj.); WT ≥ 1,50 | OK | WT §12 ust. 6 pkt 1 (płyty wysunięte traktowane jak okapy — interpretacja) [W-004]; TWARDE ZAŁOŻENIA |
 | Odległości | SL7 | słup → granica W | 11,55 m | ≥ 4,00 (założenie proj.); WT ≥ 1,50 | OK | WT §12 ust. 6 pkt 1 (płyty wysunięte traktowane jak okapy — interpretacja) [W-004]; TWARDE ZAŁOŻENIA |
+| Odległości | SL9 | słup → granica W | 7,51 m | ≥ 4,00 (założenie proj.); WT ≥ 1,50 | OK | WT §12 ust. 6 pkt 1 (płyty wysunięte traktowane jak okapy — interpretacja) [W-004]; TWARDE ZAŁOŻENIA |
+| Odległości | SL10 | słup → granica W | 7,51 m | ≥ 4,00 (założenie proj.); WT ≥ 1,50 | OK | WT §12 ust. 6 pkt 1 (płyty wysunięte traktowane jak okapy — interpretacja) [W-004]; TWARDE ZAŁOŻENIA |
+| Odległości | SL11 | słup → granica W | 7,51 m | ≥ 4,00 (założenie proj.); WT ≥ 1,50 | OK | WT §12 ust. 6 pkt 1 (płyty wysunięte traktowane jak okapy — interpretacja) [W-004]; TWARDE ZAŁOŻENIA |
+| Odległości | SL12 | słup → granica W | 7,51 m | ≥ 4,00 (założenie proj.); WT ≥ 1,50 | OK | WT §12 ust. 6 pkt 1 (płyty wysunięte traktowane jak okapy — interpretacja) [W-004]; TWARDE ZAŁOŻENIA |
+| Odległości | SL13 | słup → granica W | 11,10 m | ≥ 4,00 (założenie proj.); WT ≥ 1,50 | OK | WT §12 ust. 6 pkt 1 (płyty wysunięte traktowane jak okapy — interpretacja) [W-004]; TWARDE ZAŁOŻENIA |
+| Odległości | SL14 | słup → granica W | 11,10 m | ≥ 4,00 (założenie proj.); WT ≥ 1,50 | OK | WT §12 ust. 6 pkt 1 (płyty wysunięte traktowane jak okapy — interpretacja) [W-004]; TWARDE ZAŁOŻENIA |
+| Odległości | SL15 | słup → granica W | 11,10 m | ≥ 4,00 (założenie proj.); WT ≥ 1,50 | OK | WT §12 ust. 6 pkt 1 (płyty wysunięte traktowane jak okapy — interpretacja) [W-004]; TWARDE ZAŁOŻENIA |
+| Odległości | SL21 | słup → granica W | 11,30 m | ≥ 4,00 (założenie proj.); WT ≥ 1,50 | OK | WT §12 ust. 6 pkt 1 (płyty wysunięte traktowane jak okapy — interpretacja) [W-004]; TWARDE ZAŁOŻENIA |
 | Odległości | D1/przelew@[3.785, 5.7] | przelew awaryjny (rzygacz ~0,15 m) → granica W | 11,24 m | ≥ 4,00 (założenie proj.); WT ≥ 1,50 | OK | WT §12 ust. 6 pkt 1 (płyty wysunięte traktowane jak okapy — interpretacja) [W-004]; TWARDE ZAŁOŻENIA |
 | Odległości | RS3 | rura spustowa zewn. → granica W | 7,94 m | ≥ 4,00 (założenie proj.); WT ≥ 1,50 | OK | WT §12 ust. 6 pkt 1 (płyty wysunięte traktowane jak okapy — interpretacja) [W-004]; TWARDE ZAŁOŻENIA |
 | Odległości | D2/przelew@[-0.09, 8.2] | przelew awaryjny (rzygacz ~0,15 m) → granica W | 7,36 m | ≥ 4,00 (założenie proj.); WT ≥ 1,50 | OK | WT §12 ust. 6 pkt 1 (płyty wysunięte traktowane jak okapy — interpretacja) [W-004]; TWARDE ZAŁOŻENIA |
