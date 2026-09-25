@@ -347,7 +347,7 @@ def u_klin_trojkat_max_w_wierzcholku(R0: float, R1: float) -> float:
         return 1.0 / R0
     x = R1 / R0
     if x < 1e-4:                         # rozwinięcie w szereg (unikanie utraty dokładności)
-        return (1.0 / R0) * (1 - 2 * x / 3 + x * x / 2)
+        return (1.0 / R0) * (1 - x / 3 + x * x / 6)
     return 2.0 / R1 * ((1 + R0 / R1) * math.log1p(x) - 1)
 
 
@@ -357,7 +357,7 @@ def u_klin_trojkat_min_w_wierzcholku(R0: float, R1: float) -> float:
         return 1.0 / R0
     x = R1 / R0
     if x < 1e-4:
-        return (1.0 / R0) * (1 - x / 3 + x * x / 4)
+        return (1.0 / R0) * (1 - 2 * x / 3 + x * x / 2)
     return 2.0 / R1 * (1 - R0 / R1 * math.log1p(x))
 
 

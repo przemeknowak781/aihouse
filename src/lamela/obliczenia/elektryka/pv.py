@@ -31,7 +31,7 @@ from ..inst_wspolne import (DaneBudynku, Krok, Raport, Warunek, f, fa, pvgis_god
 MODUL_PRZYKLAD = {"model": "PV-430 TOPCon (dane przykładowe)", "P": 430.0, "U_oc": 38.9, "I_sc": 14.0, "U_mpp": 32.4, "I_mpp": 13.3,
                   "beta_Uoc": -0.0025, "gamma_Umpp": -0.0030, "dl": 1.722, "szer": 1.134, "I_R": 25.0}
 FALOWNIK_PRZYKLAD = {"model": "FAL-6K-3P (dane przykładowe)", "P_AC": 6.0, "U_dc_max": 1000.0, "U_mppt": (160.0, 950.0),
-                     "I_mppt_max": 16.0, "n_mppt": 2, "SPD_DC_wbudowany": True}
+                     "I_mppt_max": 16.0, "I_sc_max": 20.0, "n_mppt": 2, "SPD_DC_wbudowany": True}
 
 
 def pobierz_pvgis(lat: float = 52.40, lon: float = 16.93, angle: float = 15, aspect: float = 0, timeout: float = 30.0) -> dict | None:
@@ -178,13 +178,16 @@ def oblicz_pv(dane: DaneBudynku, par: ParametryPV | None = None, ogrzewanie=None
         p1 = h["P_S15"] / 1000.0
     else:
         p1 = (h["P_E10"] + h["P_W10"]) / 2000.0
-    p1 = p1 * (sum(Em1) / max(p1.sum(), 1e-9))
-    PV = p1 * P_kWp                                        # kWh w godzinie (UTC)
-    osoby = dane.osoby
-    E_hh = par.E_gospodarstwo if par.E_gospodarstwo is not None else 2500.0 + 300.0 * osoby
     idx = np.arange(8760)
     doy = idx // 24
     mies = np.clip(np.searchsorted(np.cumsum([31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]), doy, side="right"), 0, 11)
+    for k in range(12):                                    # skalowanie miesięczne do średniej wieloletniej PVGIS
+        sk = p1[mies == k].sum()
+        if sk > 0:
+            p1[mies == k] *= Em1[k] / sk
+    PV = p1 * P_kWp                                        # kWh w godzinie (UTC)
+    osoby = dane.osoby
+    E_hh = par.E_gospodarstwo if par.E_gospodarstwo is not None else 2500.0 + 300.0 * osoby
     h_lok = (idx % 24 + 1) % 24                              # UTC+1 [UPR — bez czasu letniego]
     L_hh = PROFIL_H0[h_lok] * SEZON_H0[mies]
     L_hh = L_hh / L_hh.sum() * E_hh
@@ -228,6 +231,8 @@ def oblicz_pv(dane: DaneBudynku, par: ParametryPV | None = None, ogrzewanie=None
            "E_auto_pom": float(a_P.sum()), "E_hh": E_hh, "E_H": float(L_H.sum()), "E_W": float(L_W.sum()), "E_pom": float(L_pom.sum()),
            "m_auto_tech": m_auto_tech, "m_PV": [float(PV[mies == k].sum()) for k in range(12)],
            "m_L": [float(L[mies == k].sum()) for k in range(12)], "m_auto": [float(auto[mies == k].sum()) for k in range(12)]}
+    kroki["prod"].append(Krok("Przebieg godzinowy: PVGIS seriescalc 2019 przeskalowany miesięcznie do średnich wieloletnich PVcalc",
+                              "", "", None))
     kroki["sym"] = [
         Krok("Zużycie gospodarstwa (AGD, oświetlenie)", "E_hh = 2500 + 300·N", f"2500 + 300·{osoby}", E_hh, "kWh/a", "[ZAŁ]", 0),
         Krok("Pompa ciepła — ogrzewanie (TMY, COP(θ_e))", "E_H = Σ Q_h/COP_h", "", sym["E_H"], "kWh/a", "moduł ogrzewania", 0),
@@ -251,7 +256,8 @@ def oblicz_pv(dane: DaneBudynku, par: ParametryPV | None = None, ogrzewanie=None
     lan = {"n_str": n_str, "Ns": Ns, "Uoc_max": Uoc_max, "Umpp_min": Umpp_min, "Umpp_max": Umpp_max, "I_sc": mod["I_sc"],
            "bezpieczniki": False}
     kroki["lan"] = [
-        Krok(f"Łańcuchy: {n_str} × {Ns} modułów ({'1 łańcuch' if n_str == 1 else 'po jednym na MPPT'})", "", "", None),
+        Krok(f"Łańcuchy: {n_str} ({' + '.join(str(x) for x in ([Ns, n - Ns] if n_str == 2 else [n]))} modułów; "
+             f"{'1 łańcuch' if n_str == 1 else 'po jednym na MPPT'})", "", "", None),
         Krok("Maks. napięcie łańcucha (θ_min = −25 °C)", "U_oc,max = N_s·U_oc·(1 + β·(θ_min − 25))",
              f"{Ns}·{f(mod['U_oc'], 1)}·(1 + ({f(100 * mod['beta_Uoc'], 2)}/100)·({f(par.theta_min, 0)} − 25))", Uoc_max, "V", "PN-HD 60364-7-712", 0),
         Krok("Min. napięcie MPP (θ_ogniwa = 70 °C)", "U_mpp,min = N_s·U_mpp·(1 + γ·(θ − 25))", "", Umpp_min, "V", "", 0),
@@ -259,8 +265,9 @@ def oblicz_pv(dane: DaneBudynku, par: ParametryPV | None = None, ogrzewanie=None
     war.append(Warunek("U_oc,max łańcucha ≤ U_DC,max falownika", Uoc_max, "<=", fal["U_dc_max"], "V", "DTR falownika", "W-194", nd=0))
     war.append(Warunek("U_mpp,min ≥ dolna granica MPPT", Umpp_min, ">=", fal["U_mppt"][0], "V", "DTR", "W-194", nd=0))
     war.append(Warunek("U_mpp,max ≤ górna granica MPPT", Umpp_max, "<=", fal["U_mppt"][1], "V", "DTR", "W-194", nd=0))
-    war.append(Warunek("1,25·I_sc ≤ I_max wejścia MPPT", 1.25 * mod["I_sc"], "<=", fal["I_mppt_max"] * 1.25, "A",
-                       "DTR (prąd zwarciowy wejścia ≥ 1,25·I_sc)", "W-194", nd=1))
+    war.append(Warunek("I_mpp ≤ maks. prąd roboczy wejścia MPPT", mod["I_mpp"], "<=", fal["I_mppt_max"], "A", "DTR", "W-194", nd=1))
+    war.append(Warunek("1,25·I_sc ≤ maks. prąd zwarciowy wejścia MPPT", 1.25 * mod["I_sc"], "<=", fal.get("I_sc_max", 20.0), "A",
+                       "DTR [W]", "W-194", nd=1))
     war.append(Warunek("Brak bezpieczników łańcuchowych: (N_p − 1)·I_sc ≤ I_R", 0.0, "<=", mod["I_R"], "A",
                        "PN-HD 60364-7-712 (1 łańcuch na MPPT) [W]", "W-194", nd=1))
     # DC

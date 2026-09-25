@@ -134,6 +134,9 @@ def test_klin_zal_C():
     n5 = u_klin_wielobok(tri, R0, lam, d_add_fn=lambda x, y: dmax * (1 - y / 8.0), krok=0.02)
     close(n5["U_sr"], u_klin_trojkat_min_w_wierzcholku(R0, dmax / lam), 3e-3 * n5["U_sr"], "trójkąt C.5")
     close(u_klin_prostokat(R0, 1e-9), 1 / R0, 1e-9, "granica")
+    # ciągłość szereg (x < 1e-4) / wzór pełny: przyrost = pochodna·Δx, dU/dx = −1/(3R0) (C.4), −2/(3R0) (C.5)
+    for f, k in ((u_klin_trojkat_max_w_wierzcholku, 1 / 3), (u_klin_trojkat_min_w_wierzcholku, 2 / 3)):
+        close(f(R0, R0 * 0.99e-4) - f(R0, R0 * 1.01e-4), k / R0 * 2e-6, 2e-10, f.__name__)
 
 
 # --------------------------------------------------------------------------------------------------

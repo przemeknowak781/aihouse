@@ -381,6 +381,12 @@ class PlytaMES:
             fixed.add(3 * k)
         if len(fixed) < 3:
             raise BladDanych("MES płyty: za mało podpór")
+        # węzły wspólne kilku podpór (np. skrzyżowania ścian) — reakcja dzielona po równo
+        self.udzial = np.zeros(len(self.nodes))
+        for nd in self.sup_nodes.values():
+            for k in nd:
+                self.udzial[k] += 1
+        self.udzial[self.udzial == 0] = 1
         self.fixed = np.array(sorted(fixed))
         n = self.K.shape[0]
         mask = np.ones(n, bool)
@@ -468,7 +474,8 @@ class PlytaMES:
 
     # ---------------- wyniki pomocnicze ----------------
     def reakcja(self, wynik: WynikMES, pid: str) -> float:
-        return float(wynik.R[self.sup_nodes.get(pid, [])].sum())
+        nd = self.sup_nodes.get(pid, [])
+        return float((wynik.R[nd] / self.udzial[nd]).sum()) if nd else 0.0
 
     def reakcje_liniowe(self, wynik: WynikMES, pid: str) -> tuple[np.ndarray, np.ndarray]:
         """Rozkład reakcji wzdłuż podpory liniowej: (s [m] od początku linii, r [kN/m])."""
@@ -479,12 +486,30 @@ class PlytaMES:
         ss = np.array([s_obj.linia.project(Point(*self.nodes[k])) for k in nd])
         o = np.argsort(ss)
         ss = ss[o]
-        R = wynik.R[np.asarray(nd)[o]]
+        nd_o = np.asarray(nd)[o]
+        R = wynik.R[nd_o] / self.udzial[nd_o]
         # szerokość zbierania każdego węzła
         bnd = np.concatenate([[ss[0]], (ss[:-1] + ss[1:]) / 2, [ss[-1]]])
         wdt = np.diff(bnd)
         wdt[wdt <= 1e-9] = np.nan
         return ss, R / wdt
+
+    def reakcja_max(self, wynik: WynikMES, pid: str, okno: float = 0.5) -> float:
+        """Maks. reakcja liniowa [kN/m] uśredniona na długości okna (wygładzenie osobliwości na końcach podpór)."""
+        s_obj = next(s for s in self.pl if s.id == pid)
+        nd = self.sup_nodes.get(pid, [])
+        if not nd:
+            return 0.0
+        ss = np.array([s_obj.linia.project(Point(*self.nodes[k])) for k in nd])
+        R = wynik.R[np.asarray(nd)] / self.udzial[np.asarray(nd)]
+        L = s_obj.linia.length
+        if L <= okno:
+            return abs(float(R.sum())) / max(L, 1e-6)
+        best = 0.0
+        for s0 in np.arange(0.0, L - okno + 1e-9, okno / 5):
+            m = (ss >= s0 - 1e-9) & (ss <= s0 + okno + 1e-9)
+            best = max(best, abs(float(R[m].sum())) / okno)
+        return best
 
     def elementy_w(self, g) -> np.ndarray:
         """Maska elementów, których środek leży w geometrii g."""

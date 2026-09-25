@@ -455,6 +455,8 @@ class AnalizaKonstrukcji:
                 g.podp_l.append(PodporaLiniowa(sid, piece, "przegub", "sciana"))
                 g.sciany_pod.append((sid, w))
         g.belki = []
+        strefa_scian = unary_union([sp.linia.buffer(ww.warstwa_konstr.d / 2 + 0.05) for (sid_, ww), sp in
+                                    zip(g.sciany_pod, g.podp_l)]) if g.podp_l else Polygon()
         for b in m.belki():
             top = float(b["spod"]) + float(b["h"])
             if not (any(abs(top - s) < TOL_Z for s in spody) or any(abs(top - t) < TOL_Z for t in tops)):
@@ -462,7 +464,12 @@ class AnalizaKonstrukcji:
             ln = LineString([tuple(b["os"][0]), tuple(b["os"][1])])
             if ln.distance(g.poly) > float(b["b"]) / 2 + 0.02:
                 continue
-            for k, piece in enumerate(self._snap_linia(ln, g.poly)):
+            pieces = []
+            for piece in self._snap_linia(ln, g.poly):
+                cut = piece.difference(strefa_scian) if not strefa_scian.is_empty else piece
+                pieces += [c for c in ([cut] if isinstance(cut, LineString) else list(getattr(cut, "geoms", [])))
+                           if isinstance(c, LineString) and c.length >= 0.15]
+            for k, piece in enumerate(pieces):
                 sid = str(b["id"]) if k == 0 else f"{b['id']}#{k + 1}"
                 g.podp_l.append(PodporaLiniowa(sid, piece, "przegub", "belka"))
                 g.belki.append((sid, b))
@@ -768,9 +775,7 @@ class AnalizaKonstrukcji:
             best = 0.0
             for kb in kombs:
                 rr = sum(a * g.res[c].R for c, a in kb.wsp.items() if c in g.res)
-                _, r = fe.reakcje_liniowe(WynikMES(None, None, rr), sp.id)
-                if len(r):
-                    best = max(best, float(np.nanmax(r)))
+                best = max(best, fe.reakcja_max(WynikMES(None, None, rr), sp.id, 0.5))
             rmax[sp.id] = best
         env["rmax"] = rmax
         g.env = env
@@ -946,7 +951,7 @@ class AnalizaKonstrukcji:
         EI = e.beton.E_cm * 1000 * h ** 3 / 12
         lmin = min(c["lx"], c["ly"])
         kier = "x" if c["lx"] <= c["ly"] else "y"
-        Mqp = float(max(wa_qp["dol_x"][msk].max(), wa_qp["dol_y"][msk].max()))
+        Mqp = float(wa_qp["dol_" + kier][msk].max())
         As_k = Ax if kier == "x" else Ay
         Asr_k = zx.As_req if kier == "x" else zy.As_req
         dk = dx if kier == "x" else dy
@@ -1453,7 +1458,7 @@ class AnalizaKonstrukcji:
                             "wiatr jako moment w połowie wysokości w·h²/8.")
         if zewn and wk:
             nmin = float(top.srednia_ruchoma(top.get("G") + pr["top_a"].get("G"), 1.0).min()) + pr["gm2"] * h / 2
-            sig = max(nmin, 0) / (t * 1000) / 1000 * p.gG_inf
+            sig = max(nmin, 0) / t / 1000 * p.gG_inf
             poz.wyniki.append(murm.sciana_wiatr(p.gQ * wk, h, t, mur, sigma_d=sig, p=p, nazwa=f"{w.id} — zginanie z płaszczyzny (wiatr)"))
         # docisk pod belkami i schodami
         for cs, P, s_c, szer in self.pending_sciany.get(w.id, []):
