@@ -1,4 +1,5 @@
 {
+ "nr": 35,
  "title": "PZT gotowe (3 arkusze A2) · nowe wymaganie: ekonomiczny układ arkuszy → silnik formatów niestandardowych składanych do A4 w budowie",
  "stages": [
   [
@@ -59,6 +60,13 @@
   "PZT-03 (1:200): uzbrojenie terenu — 9 skrzyżowań, 1 zbliżenie e–t 0,30 m < 0,50 m (dopuszczalne w rurach osłonowych, do uzgodnienia z gestorami); odległości minimalne między sieciami oznaczone jako zasady wiedzy technicznej (N SEP-E-004, COBRTI), nie przepis — WT § 26–28 ich nie określa.",
   "Cytowania mapy do celów projektowych zweryfikowane w ELI: § 32–33 rozp. w sprawie standardów technicznych (t.j. Dz.U. 2022 poz. 1670) i rozp. BDOT500 (Dz.U. 2021 poz. 1385) — oba obowiązujące.",
   "Strona www: plan identyfikacji gotowy — marka fikcyjna „Pasmo i Cień” (sprawdzono brak kolizji z istniejącymi pracowniami), paleta z materiałów modelu (beton, antracyt RAL 7016, termojesion lamel, sedum), kroje Archivo Expanded / IBM Plex.",
-  "Runda 2 poprawek modelu: etap funkcja (audyt A3) w toku."
+  "Runda 2 poprawek modelu: etap funkcja (audyt A3) w toku.",
+  "NADZÓR (07:43): 5 agentów aktywnych, bez zastojów; najdłuższa bezczynność 0 min; zmiany w repo 0 min temu."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/projekt/02_PZT/rysunki/PZT-03_rysunek_koordynacyjny_uzbrojenia_terenu.png",
+   "caption": "PZT-03 — rysunek koordynacyjny uzbrojenia terenu 1:200 (A2): sieci, skrzyżowania, zbliżenia, tabele w polu rysunku"
+  }
  ]
 }

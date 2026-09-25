@@ -9,7 +9,7 @@ import numpy as np
 from PIL import Image, ImageFilter
 
 # wycinek serwetki z rysunkiem — ułamki szerokości/wysokości zdjęcia (bez sztućców, zegarka i nadruków)
-WYCINEK = (0.232, 0.345, 0.765, 0.625)
+WYCINEK = (0.226, 0.455, 0.768, 0.80)
 
 
 def przetworz(src: Path, dst: Path, szer: int = 1400) -> dict:

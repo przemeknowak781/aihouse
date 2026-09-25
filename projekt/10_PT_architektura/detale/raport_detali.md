@@ -4,7 +4,7 @@ Kontrola automatyczna każdego detalu: zgodność grubości warstw narysowanych 
 
 | detal | tytuł | skala | węzły | grubości zgodne | kolizje napis–napis | napisy na liniach | H | S | P | I |
 |---|---|---|---|---|---|---|---|---|---|---|
-| D-01 | Cokół — ściana na płycie fundamentowej | 1:10 | WZ-08 | 12/12 | 1 | 0 | ✓ | ✓ | ✓ | ✓ |
+| D-01 | Cokół — ściana na płycie fundamentowej | 1:10 | WZ-08 | 12/12 | 0 | 0 | ✓ | ✓ | ✓ | ✓ |
 | D-03 | Próg drzwi HS bezprogowy z odwodnieniem liniowym | 1:10 | WZ-11T | 8/8 | 0 | 0 | ✓ | ✓ | ✓ | ✓ |
 | D-07 | Rura spustowa RS3 przy cokole — czyszczak i odpływ do KD | 1:10 | WZ-08 | 12/12 | 0 | 0 | ✓ | ✓ | ✓ | ✓ |
 | D-02 | Okno — ciepły montaż (podokiennik i nadproże) | 1:5 | WZ-11P, WZ-11N, WZ-11 | 8/8 | 0 | 0 | ✓ | ✓ | ✓ | ✓ |
