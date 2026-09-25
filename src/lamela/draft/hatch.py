@@ -724,6 +724,8 @@ def legend(c, x: float, y_top: float, codes, cols: int = 1, col_w: float = 88.0,
                 c.rect(x0, y0, x0 + sw[0] * k, y0 + sw[1] * k, layer=layer, pen="b_cienka", lt="KROPKOWA")
             elif cd == "GRUNT_RODZIMY":
                 ground_line(c, [(x0, y0 + sw[1] * k * 0.8), (x0 + sw[0] * k, y0 + sw[1] * k * 0.8)], layer=layer)
+            elif cd == "STAL":   # w legendzie: zaczernienie (przekroje cienkie)
+                c.fill(box, "A-WYPELNIENIA", "#000000")
             else:
                 hatch(c, box, cd, HATCH_LAYER, band_mm=None)
                 c.rect(x0, y0, x0 + sw[0] * k, y0 + sw[1] * k, layer=layer, pen="srednia")

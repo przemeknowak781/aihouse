@@ -567,10 +567,14 @@ def main():
     for key, sh, files in (("DEMO-01", sh_a, fa), ("DEMO-02", sh_b, fb), ("DEMO-03", sh_c, fc)):
         report[key] = {"pliki": files, "png": plot.check_png(files["png"], sh)}
     # kontrola skali: oś A → oś B (4,20 m w 1:50 = 84,0 mm) — linia osi w PDF
-    # kontrola skali: lico ocieplenia ściany północnej (8,08 m w 1:50 = 161,6 mm) — odcinek konturu w PDF
-    x_min, x_max, y_max = AX["A"] - F_EXT, AX["C"] + F_EXT, AY["2"] + F_EXT
+    # kontrola skali: zewnętrzne lico ściany północnej (z tynkiem 0,7 cm scalonym z ociepleniem — R4-C04),
+    # 7,794 m w 1:50 = 155,88 mm — odcinek konturu odczytany z PDF; oraz linia osi B
+    t_r = 0.007
+    x_min, x_max, y_max = AX["A"] - F_EXT - t_r, AX["C"] + F_EXT + t_r, AY["2"] + F_EXT + t_r
     report["DEMO-01"]["skala_lico_N"] = plot.check_scale(fa["pdf"], sh_a, vp_a, (x_min, y_max), (x_max, y_max))
     report["DEMO-01"]["skala_os_B"] = plot.check_scale(fa["pdf"], sh_a, vp_a, *vp_a.meta_axis)
+    for key, sh in (("DEMO-01", sh_a), ("DEMO-02", sh_b), ("DEMO-03", sh_c)):
+        report[key]["qa_R4"] = plot.qa(sh)
     vol = plot.volume([sh_a, sh_b, sh_c], OUT / "DEMO_tom.pdf", "Tom próbny — silnik rysunkowy")
     report["tom"] = vol
     (OUT / "raport_kontroli.json").write_text(json.dumps(report, indent=2, ensure_ascii=False, default=str),

@@ -21,9 +21,9 @@
       "ok": true
     },
     "skala_lico_N": {
-      "expected_mm": 161.6,
-      "measured_mm": 161.5999929216173,
-      "endpoint_err_mm": 1.1350416989654753e-05,
+      "expected_mm": 155.88,
+      "measured_mm": 155.87998784383137,
+      "endpoint_err_mm": 1.0647981791279772e-05,
       "page_mm": [
         419.9999881320529,
         297.0000023735894
@@ -35,9 +35,9 @@
       "ok": true
     },
     "skala_os_B": {
-      "expected_mm": 169.6,
-      "measured_mm": 169.5999837239583,
-      "endpoint_err_mm": 9.874007271155975e-06,
+      "expected_mm": 176.6,
+      "measured_mm": 176.5999871148003,
+      "endpoint_err_mm": 1.0411757606031401e-05,
       "page_mm": [
         419.9999881320529,
         297.0000023735894
@@ -47,6 +47,18 @@
         297.0
       ],
       "ok": true
+    },
+    "qa_R4": {
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
+      ],
+      "stats": {
+        "prymitywy": 1557,
+        "napisy": 214,
+        "sprawdzone_lancuchy": 5
+      }
     }
   },
   "DEMO-02": {
@@ -69,6 +81,18 @@
         199.9996
       ],
       "ok": true
+    },
+    "qa_R4": {
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
+      ],
+      "stats": {
+        "prymitywy": 6021,
+        "napisy": 162,
+        "sprawdzone_lancuchy": 1
+      }
     }
   },
   "DEMO-03": {
@@ -91,6 +115,18 @@
         199.9996
       ],
       "ok": true
+    },
+    "qa_R4": {
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
+      ],
+      "stats": {
+        "prymitywy": 1569,
+        "napisy": 371,
+        "sprawdzone_lancuchy": 0
+      }
     }
   },
   "tom": "/home/user/aihouse/projekt/00_demo_silnika/DEMO_tom.pdf"
