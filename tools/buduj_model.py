@@ -1342,6 +1342,7 @@ def main():
     zapisz_dzialka(OUT / "dzialka.yaml")
     zapisz_wyposazenie(OUT / "wyposazenie.yaml")
     zapisz_instalacje(OUT / "instalacje.yaml")
+    print("UWAGA KOORDYNACJA: dwa agenty syntezy pracują równolegle — przeczytaj scratchpad/koncepcja/KOORDYNACJA.md (podział plików)")
     print(f"zapisano: model/budynek.yaml ({len(SC)} ścian, {len(OT)} otworów, {len(PM)} pomieszczeń, {len(BELKI)} belek), "
           f"model/dzialka.yaml, model/wyposazenie.yaml ({len(WYP)} el.), model/instalacje.yaml")
 

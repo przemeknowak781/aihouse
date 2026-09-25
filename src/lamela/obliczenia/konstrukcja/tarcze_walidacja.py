@@ -233,8 +233,7 @@ def walidacja_zbieznosc(siatki=(0.20, 0.10, 0.05)) -> list[dict]:
         an._pasy_mes()
         top = next(v for k, v in an.pasy_mes.items() if k.startswith("krawędź górna"))
         RA = an.mes.reakcje(r)["A"]["R"]
-        cut = an.mes.przekroj_pionowy(r, -0.35)
-        out.append({"h": h, "ne": an.mes.ne, "w_wsp": w, "T_gora": top["F"], "R_A": RA, "M_utw": cut["M"],
+        out.append({"h": h, "ne": an.mes.ne, "w_wsp": w, "T_gora": top["F"], "R_A": RA, "R_Amax": float(an.mes.reakcje(r)["A"]["r"].max()),
                     "s1_max": float(an.s1_env.max() / 1000), "czas": time.time() - t0})
     return out
 
@@ -309,17 +308,23 @@ def raport_walidacji(out_dir: str | Path, zbieznosc: bool = True) -> dict:
         r = walidacja_belka_sciana(3.0, lh, 100.0, 0.2, 0.05, stm=True)
         bs_res.append(r)
         rows.append([f(lh, 2), f(r["h"], 2), (r["x_R"], 3), (r["M_MES"], 1), (r["M_statyka"], 1), (r["M_nominalny"], 1), (r["z_MES"], 3), (r["z_CEB"], 3),
-                     f"{(r['z_MES'] / r['z_CEB'] - 1) * 100:+.1f} %", (r["T_MES"], 1), (r["T_belka_sciana"], 1), (r.get("T_STM", float("nan")), 1),
+                     f((r['z_MES'] / r['z_CEB'] - 1) * 100, 1) + " %", (r["T_MES"], 1), (r["T_belka_sciana"], 1), (r.get("T_STM", float("nan")), 1),
                      (r["h_rozc"] / r["h"], 3)])
     res["belka_sciana"] = [{k: v for k, v in r.items() if k not in ("prof", "stm_an")} for r in bs_res]
     L += [tabela(["l/h", "h [m]", "x_R [m]", "M_MES [kNm]", "M_statyka [kNm]", "q(l²−a²)/8 [kNm]", "z_MES [m]", "z_CEB [m]", "Δz", "T_MES [kN]",
                   "T belka_sciana [kN]", "T_STM [kN]", "h_rozc/h"], rows), ""]
+    dz = [abs(r["z_MES"] / r["z_CEB"] - 1) for r in bs_res if r["l_h"] <= 1.5]
+    r2 = next(r for r in bs_res if abs(r["l_h"] - 2.0) < 1e-9)
+    dT = [abs(r["T_MES"] / r["T_belka_sciana"] - 1) for r in bs_res if r["l_h"] <= 2.0]
     L += ["x_R — środek reakcji podpory A z MES (podpora sztywna szer. 0,3 m: reakcja skupia się przy krawędzi wewnętrznej, stąd "
-          "M < q(l² − a²)/8 liczone dla reakcji w osi podpory). Wnioski: M z całkowania naprężeń = M ze statyki (z reakcji MES). Sprężyste ramię z_MES odpowiada regule "
-          "CEB/DAfStb w granicach podanych w tabeli — reguła jest zaokrągleniem wyników sprężystych (dla l/h ≈ 1 tarcza "
-          "„przestaje” zginać się jak belka — strefa rozciągana ≈ 0,15–0,25·h przy krawędzi dolnej, zgodnie z rozkładami "
-          "Leonhardta [P]). Dla l/h = 3 (granica belki-ściany wg 5.3.1(3)) z_MES zbliża się do ramienia belkowego ≈ 0,67·h "
-          "(rozkład liniowy). STM (dolne rozwiązanie plastyczne, węzły pasów wg MES) daje siłę w ściągu tego samego rzędu.", ""]
+          "M < q(l² − a²)/8 liczone dla reakcji w osi podpory); M_statyka — z reakcji MES = M z całkowania naprężeń.", "",
+          f"Wnioski: dla l/h = 0,75…1,5 sprężyste ramię sił wewnętrznych z_MES różni się od reguły CEB-FIP/DAfStb o ≤ "
+          f"{f(max(dz) * 100, 1)} % (reguła jest zaokrągleniem analiz sprężystych Leonhardta [P]); dla l/h = 2 reguła daje ramię "
+          f"{f(r2['z_CEB'] / r2['h'], 2)}·h wobec sprężystego {f(r2['z_MES'] / r2['h'], 2)}·h. Siła w ściągu z `zelbet.belka_sciana` "
+          f"(M = q·l²/8 dla osi podpór) różni się od sprężystej wypadkowej T_MES o ≤ {f(max(dT) * 100, 1)} % dla l/h ≤ 2. "
+          "Dla l/h = 3 (granica belki-ściany, 5.3.1(3)) z_MES → 0,67·h (liniowy rozkład σ_x — teoria belek). Strefa rozciągana "
+          "przy krawędzi dolnej: 0,20·h (l/h = 0,75) … 0,5·h (l/h = 3) — por. rozkłady Leonhardta [P]. STM (dolne rozwiązanie "
+          "plastyczne) daje ściąg mniejszy od sprężystego dla tarcz krępych (większe ramię), dla l/h ≥ 2 — zbliżony.", ""]
     fig, ax = plt.subplots(figsize=(6.4, 3.8))
     for r, col in zip(bs_res, (INK, BLUE, ORANGE, RED, INK2)):
         zp, sp = r["prof"]
@@ -364,17 +369,17 @@ def raport_walidacji(out_dir: str | Path, zbieznosc: bool = True) -> dict:
     if zbieznosc:
         zb = walidacja_zbieznosc()
         res["zbieznosc"] = zb
-        rows = [[f(r["h"], 2), r["ne"], (r["w_wsp"], 4), (r["T_gora"], 2), (r["R_A"], 2), (r["M_utw"], 2), (r["s1_max"], 3),
+        rows = [[f(r["h"], 2), r["ne"], (r["w_wsp"], 4), (r["T_gora"], 2), (r["R_A"], 2), (r["R_Amax"], 1), (r["s1_max"], 3),
                  f(r["czas"], 1)] for r in zb]
         pw, ew = _richardson([r["w_wsp"] for r in zb])
         pt, et = _richardson([r["T_gora"] for r in zb])
         pr, er = _richardson([r["R_A"] for r in zb])
         L += ["## (c) Zbieżność siatki — tarcza demo (kombinacja miarodajna STR)", "",
-              tabela(["h_el [m]", "n_el", "w_wspornika [mm]", "T pasa górnego (MES) [kN]", "R_A [kN]", "M przy podporze [kNm]",
+              tabela(["h_el [m]", "n_el", "w_wspornika [mm]", "T pasa górnego (MES) [kN]", "R_A [kN]", "r_A,max [kN/m]",
                       "σ₁,max [MPa]", "czas [s]"], rows), "",
               f"Ekstrapolacja Richardsona: w_wsp → {f(ew, 4)} mm (rząd {f(pw, 2)}), T → {f(et, 2)} kN (rząd {f(pt, 2)}), "
               f"R_A → {f(er, 2)} kN (rząd {f(pr, 2)}). Wielkości całkowe (ugięcie, reakcje, momenty, siły w pasach) zbieżne — "
-              "różnica h = 0,10 vs 0,05 m < 1–2 %; σ₁,max rośnie z zagęszczaniem (osobliwość w narożach wklęsłych otworów — "
+              "różnica h = 0,10 vs 0,05 m ≤ 2 %; σ₁,max i szczyt reakcji r_A,max rosną z zagęszczaniem (osobliwość w narożach wklęsłych otworów — "
               "dlatego wymiarowanie opiera się na wypadkowych, nie na wartościach szczytowych).", ""]
     # (d)
     an = AnalizaTarczy(dane_demo(), Parametry(), siatka=0.10)

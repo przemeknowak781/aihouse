@@ -11,6 +11,8 @@ Generuje do docs/20_koncepcja/final/:
 
 Uruchomienie: PYTHONPATH=src python3 tools/podglad_modelu.py [--out docs/20_koncepcja/final] [--bez-koncepcji]
 """
+# KOORDYNACJA: patrz scratchpad/koncepcja/KOORDYNACJA.md — ten plik należy do Agenta B; druga połowa (od „elewacje”) napisana przez
+#   Agenta A — używa kolor(m, mat) = lamela.views.common.material_color (dodać, jeśli brak).
 from __future__ import annotations
 
 import argparse
