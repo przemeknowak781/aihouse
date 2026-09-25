@@ -188,13 +188,13 @@ def build_views(info: dict, W: int, H: int, only: str) -> list[dict]:
         ycam = y1 + dist
         if jz:
             ys = [p[1] for p in jz]
-            yroad = (min(ys) + max(ys)) / 2 if min(ys) > y1 else None
+            yroad = max(ys) - 0.6 if min(ys) > y1 else None
             if yroad is not None:
                 ycam = min(ycam, yroad) if ycam > yroad else ycam
                 d_eff = ycam - y1
                 need_h = 2 * math.degrees(math.atan(width_need / 2 / d_eff))
                 vfov = min(64.0, max(vfov, 2 * math.degrees(math.atan(math.tan(math.radians(need_h / 2)) / aspect))))
-        xcam = cx + 0.08 * Wd
+        xcam = cx + 0.04 * Wd
         views.append({"key": "d", "name": VIEW_NAMES["d"], "width": W, "height": H, "eye": [xcam, ycam],
                       "camera": {"type": "persp", "pos": [xcam, ycam, zt + 1.6], "target": [xcam, ycam - 100, zt + 1.6],
                                  "fov": vfov, "shift": shift},
@@ -211,19 +211,24 @@ def build_views(info: dict, W: int, H: int, only: str) -> list[dict]:
         hh, ctr = _ortho_fit(ebb, 150.0, 30.0, aspect, 1.1)
         d = _dir(150.0, 30.0)
         pos = tuple(ctr[i] + d[i] * 300 for i in range(3))
-        views.append({"key": "e", "name": VIEW_NAMES["e"], "width": W, "height": H,
+        names = {k["id"]: k.get("nazwa") or k["id"] for k in meta.get("kondygnacje", [])}
+        labels = [{"text": f"{lv} · {names.get(lv, lv)}", "group": lv, "dx": -0.8, "dz": -0.4} for lv in levels]
+        labels.append({"text": "Dach", "group": "dach", "dx": -0.8})
+        views.append({"key": "e", "name": VIEW_NAMES["e"], "width": W, "height": H, "labels": labels,
                       "camera": {"type": "ortho", "pos": pos, "target": ctr, "halfHeight": hh},
                       "sun": {**s, "az": 200.0, "el": 48.0}, "groups": groups, "explode": explode, "bg": "studio",
                       "fog": False, "shadowBox": [ebb[0] - 6, ebb[1] - 6, ebb[2], ebb[3] + 6, ebb[4] + 6, ebb[5]],
                       "exposure": 1.0, "aoRadius": 0.9})
     if "f" in only:
         s = sun("2026-06-21", 15)
-        groups = {g: (g != "otoczenie") for g in info["groups"]}
+        groups = {g: (g not in ("otoczenie", "teren", "fundamenty")) for g in info["groups"]}
         hh = max((Hh + 1.6) / 2 * 1.08, (Wd + 3.0) / aspect / 2)
         tgt = (cx, y0 - 1, (z0 + z1) / 2 + 0.2)
         views.append({"key": "f", "name": VIEW_NAMES["f"], "width": W, "height": H,
                       "camera": {"type": "ortho", "pos": [cx, y0 - 200, tgt[2]], "target": [cx, y0, tgt[2]],
                                  "halfHeight": hh},
+                      "groundBand": {"x": cx, "y": y0 - 0.3, "z": zt, "depth": 2.5, "color": "#c9ccbd"},
+                      "glassOpacity": 0.9,
                       "sun": s, "groups": groups, "bg": "white", "fog": False, "groundDisc": False,
                       "shadowBox": shadow_near, "exposure": 1.0, "aoRadius": 0.8})
     return views
@@ -271,6 +276,19 @@ def _font(sz, bold=False):
         return ImageFont.load_default()
 
 
+def _draw_labels(img: Image.Image, labels: list[dict]):
+    dr = ImageDraw.Draw(img)
+    sc = img.size[0] / 2400
+    f = _font(max(14, int(34 * sc)), True)
+    for lb in labels:
+        x, y = lb["x"], lb["y"]
+        tw = dr.textlength(lb["text"], font=f)
+        x2 = max(12 * sc, x - tw - 120 * sc)
+        dr.line([(x2 + tw + 10 * sc, y), (x - 8 * sc, y)], fill=(90, 90, 90), width=max(1, int(2 * sc)))
+        dr.ellipse([x - 7 * sc, y - 7 * sc, x + 7 * sc, y + 7 * sc], fill=(155, 106, 64))
+        dr.text((x2, y - 20 * sc), lb["text"], fill=(35, 35, 35), font=f)
+
+
 def compose_sun_grid(tiles: list[tuple[dict, Image.Image]], out: Path, title: str):
     n = 3
     t = tiles[0][1].size[0]
@@ -288,8 +306,11 @@ def compose_sun_grid(tiles: list[tuple[dict, Image.Image]], out: Path, title: st
         y = head + pad + r * (t + lab + pad)
         im.paste(img, (x, y + lab))
         dd = v["data"]
-        txt = f"{dd[8:10]}.{dd[5:7]}.  godz. {v['godz']:02d}:00   —   azymut {v['sun']['az']:.0f}°, wys. {v['sun']['el']:.0f}°"
-        dr.text((x, y + 8), txt, fill=(30, 30, 30), font=_font(24, True))
+        fs = max(16, int(t / 34))
+        dr.text((x, y + 6), f"{dd[8:10]}.{dd[5:7]}, godz. {v['godz']:02d}:00", fill=(30, 30, 30), font=_font(fs, True))
+        tw = dr.textlength(f"azymut {v['sun']['az']:.0f}°, wysokość {v['sun']['el']:.0f}°", font=_font(fs - 2))
+        dr.text((x + t - tw, y + 8), f"azymut {v['sun']['az']:.0f}°, wysokość {v['sun']['el']:.0f}°",
+                fill=(80, 80, 80), font=_font(fs - 2))
         # strzałka północy
         ax, ay = x + t - 46, y + lab + 20
         dr.polygon([(ax, ay), (ax - 12, ay + 34), (ax, ay + 26), (ax + 12, ay + 34)], fill=(20, 20, 20))
@@ -329,8 +350,10 @@ def render_all(glb: Path, out: Path, views: str = "abcdefg", size=(2400, 1500), 
             for v in vlist:
                 v["ss"] = ss
                 t1 = time.time()
-                url = page.evaluate("c => LAMELA.render(c)", v)
-                img = _decode(url).resize((v["width"], v["height"]), Image.LANCZOS)
+                res = page.evaluate("c => LAMELA.render(c)", v)
+                img = _decode(res["url"]).resize((v["width"], v["height"]), Image.LANCZOS)
+                if res.get("labels"):
+                    _draw_labels(img, res["labels"])
                 fp = out / f"{v['name']}.png"
                 img.save(fp, optimize=True)
                 results["widoki"].append({"plik": str(fp), "widok": v["key"], "slonce": v["sun"],
@@ -344,8 +367,8 @@ def render_all(glb: Path, out: Path, views: str = "abcdefg", size=(2400, 1500), 
                 for v in sun_study_views(info, tile):
                     v["ss"] = ss
                     t1 = time.time()
-                    url = page.evaluate("c => LAMELA.render(c)", v)
-                    img = _decode(url).resize((v["width"], v["height"]), Image.LANCZOS)
+                    res = page.evaluate("c => LAMELA.render(c)", v)
+                    img = _decode(res["url"]).resize((v["width"], v["height"]), Image.LANCZOS)
                     img.save(sub / f"{v['name']}.png", optimize=True)
                     tiles.append((v, img))
                     if verbose:

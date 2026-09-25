@@ -36,33 +36,31 @@ def _X(pos, rot_deg, s=1.0):
 # ================================================================================================ elektryka
 def socket(c, pos, rot=90.0, n: int = 1, earth: bool = True, ip44: bool = False, phases: int = 1,
            s_mm: float = 3.0, layer: str = "E-GNIAZDA", label: str | None = None):
-    """Gniazdo wtyczkowe (PN-EN 60617-11: 11-13-01/-02): półokrąg z kreską do ściany; styk ochronny — kreska nad
-    półokręgiem; n>1 — gniazdo wielokrotne (kreski ukośne na trzonku); ip44 — gniazdo bryzgoszczelne
-    (półokrąg zaczerniony); phases=3 — gniazdo trójfazowe (3 kreski + opis 3~)."""
+    """Gniazdo wtyczkowe (PN-EN 60617-11: 11-13-01 symbol ogólny — łuk z doprowadzeniem w wierzchołku;
+    11-13-04 ze stykiem ochronnym — kreska styczna w wierzchołku łuku; 11-13-02 wielokrotne — kreska ukośna
+    na doprowadzeniu z liczbą gniazd). ip44 — gniazdo bryzgoszczelne/hermetyczne (łuk zaczerniony — praktyka);
+    phases=3 — gniazdo trójfazowe (opis 3~). pos — punkt na licu ściany, rot — kierunek od ściany."""
     k = c.k
     s = s_mm * k
     xf = _X(pos, rot)
     r = s * 0.5
-    stem = s * 0.45
+    L1 = s * 0.45
     with c.on(layer):
-        c.line(xf.pt(0, 0), xf.pt(0, stem))
-        t = np.linspace(0, math.pi, 25)
-        arc = np.column_stack([r * np.cos(t), stem + r * np.sin(t)])
-        pts = xf(arc)
+        c.line(xf.pt(0, 0), xf.pt(0, L1))
+        t = np.linspace(math.pi, 2 * math.pi, 25)
+        pts = xf(np.column_stack([r * np.cos(t), L1 + r + r * np.sin(t)]))
         if ip44:
             c.fill(pts, layer, "#000000")
         c.polyline(pts)
-        c.line(xf.pt(-r, stem), xf.pt(r, stem))
         if earth:
-            c.line(xf.pt(-r, stem + r + 0.35 * s), xf.pt(r, stem + r + 0.35 * s))
-            c.line(xf.pt(0, stem + r), xf.pt(0, stem + r + 0.35 * s))
-        marks = max(n if n > 1 else 0, 3 if phases == 3 else 0)
-        for i in range(marks):
-            y = stem * (0.3 + 0.5 * (i + 0.5) / marks)
-            c.line(xf.pt(-0.28 * s, y - 0.12 * s), xf.pt(0.28 * s, y + 0.12 * s), pen="cienka")
+            c.line(xf.pt(-r * 0.9, L1), xf.pt(r * 0.9, L1))
+        if n > 1:
+            y = L1 * 0.45
+            c.line(xf.pt(-0.28 * s, y - 0.14 * s), xf.pt(0.28 * s, y + 0.14 * s), pen="cienka")
+            c.text(xf.pt(0.38 * s, y + 0.1 * s), str(n), 1.8, 0.0, "left", "middle")
         lab = label if label is not None else ("3~" if phases == 3 else None)
         if lab:
-            c.text(xf.pt(r + 0.5 * s, stem + r), lab, 1.8, 0.0, "left", "middle")
+            c.text(xf.pt(r + 0.5 * s, L1 + r), lab, 1.8, 0.0, "left", "middle")
 
 
 def switch(c, pos, rot=90.0, kind: str = "1", ip44: bool = False, s_mm: float = 3.0, layer: str = "E-LACZNIKI"):
@@ -77,9 +75,8 @@ def switch(c, pos, rot=90.0, kind: str = "1", ip44: bool = False, s_mm: float = 
         if ip44:
             c.fill(circle_pts(xf.pt(*C), r, 24), layer, "#000000")
         c.circle(xf.pt(*C), r)
-        if kind == "przycisk":
-            c.line(xf.pt(C[0], C[1] + r), xf.pt(C[0], C[1] + r + 0.3 * s))
-            c.line(xf.pt(-0.18 * s, C[1] + r + 0.3 * s), xf.pt(0.18 * s, C[1] + r + 0.3 * s))
+        if kind == "przycisk":  # PN-EN 60617 11-14-10: dwa okręgi współśrodkowe
+            c.circle(xf.pt(*C), r * 1.7)
             return
 
         def arm(a_deg, ticks, both=False):
@@ -115,12 +112,26 @@ def switch(c, pos, rot=90.0, kind: str = "1", ip44: bool = False, s_mm: float = 
 
 def light(c, pos, kind: str = "sufit", rot: float = 90.0, s_mm: float = 4.0, layer: str = "E-OSWIETLENIE",
           label: str | None = None):
-    """Oprawa oświetleniowa (PN-EN 60617-11-15): 'sufit' — okrąg z krzyżykiem; 'sciana' — j.w. z kreską przy ścianie
-    (pos na licu ściany, rot od ściany); 'downlight' — oprawa wpuszczana (mały okrąg z kropką);
-    'awaryjna' — oprawa z krzyżykiem i zaczernionym półokręgiem."""
+    """Oprawa oświetleniowa (PN-EN 60617-11-15): 'sufit' — lampa, symbol ogólny: okrąg z krzyżykiem (11-15-03);
+    'kinkiet' — wypust ścienny: krzyżyk z kreską przy ścianie (11-15-02); 'sciana' — oprawa ścienna: okrąg
+    z krzyżykiem z kreską przy ścianie (praktyka); 'downlight' — oprawa wpuszczana (mały okrąg z kropką);
+    'awaryjna' — punkt świetlny zasilany z obwodu specjalnego (duży krzyżyk, 11-15-11) w okręgu.
+    Dla 'kinkiet'/'sciana' pos leży na licu ściany, rot — kierunek od ściany."""
     k = c.k
     R = s_mm * k / 2
     P = np.asarray(pos, float)
+    if kind == "kinkiet":
+        d = dir_deg(rot)
+        n = perp(d)
+        with c.on(layer):
+            c.line(P - n * R * 0.6, P + n * R * 0.6)
+            C = P + d * R * 0.7
+            a = R * 0.5
+            c.line(C - d * a - n * a, C + d * a + n * a)
+            c.line(C - d * a + n * a, C + d * a - n * a)
+            if label:
+                c.text(C + np.array([R + 0.8 * k, R * 0.3]), label, 1.8)
+        return
     with c.on(layer):
         if kind == "sciana":
             d = dir_deg(rot)
@@ -144,16 +155,20 @@ def light(c, pos, kind: str = "sufit", rot: float = 90.0, s_mm: float = 4.0, lay
             c.text(P + np.array([R + 0.8 * k, R * 0.3]), label, 1.8)
 
 
-def light_linear(c, p1, p2, width_mm: float = 1.6, layer: str = "E-OSWIETLENIE", label: str | None = None):
-    """Oprawa liniowa LED / świetlówkowa (odcinek z poprzecznymi zakończeniami — PN-EN 60617 11-15-03), długość
-    rzeczywista p1–p2."""
+def light_linear(c, p1, p2, width_mm: float = 1.6, layer: str = "E-OSWIETLENIE", label: str | None = None,
+                 body: bool = False):
+    """Oprawa liniowa LED / świetlówkowa (PN-EN 60617 11-15-04: odcinek z poprzecznymi kreskami na końcach),
+    długość rzeczywista p1–p2; body=True — dodatkowo obrys oprawy."""
     k = c.k
     A, B = np.asarray(p1, float), np.asarray(p2, float)
     d = unit(B - A)
     n = perp(d) * width_mm * k / 2
     with c.on(layer):
-        c.polygon([A - n, B - n, B + n, A + n], pen="cienka")
         c.line(A, B, pen="srednia")
+        c.line(A - n, A + n, pen="srednia")
+        c.line(B - n, B + n, pen="srednia")
+        if body:
+            c.polygon([A - n * 0.6, B - n * 0.6, B + n * 0.6, A + n * 0.6], pen="b_cienka")
         if label:
             c.text((A + B) / 2 + n * 2.2, label, 1.8, math.degrees(math.atan2(d[1], d[0])), "center", "baseline")
 
@@ -474,7 +489,7 @@ def air_terminal(c, pos, rot=0.0, kind: str = "czerpnia", w: float = 0.4, layer:
             lab = "WY"
         c.line(a0, a1, pen="cienka")
         arrowhead(c, a1, a1 - a0, 2.0, 12, True, layer)
-        c.text(xf.pt(0.08 + L * 0.5, 1.0 * k + w * 0.1), lab, 2.0, 0.0, "center", "bottom")
+        c.text((a0 + a1) / 2 + np.array([0.0, 1.0 * k]), lab, 2.0, 0.0, "center", "baseline")
 
 
 def recuperator(c, pos, rot=0.0, w: float = 0.75, d: float = 0.6, layer: str = "S-WENT", label: str = "REKUPERATOR"):
@@ -491,9 +506,12 @@ def recuperator(c, pos, rot=0.0, w: float = 0.75, d: float = 0.6, layer: str = "
         for (x, y, lab) in ((-w / 2 + r * 1.6, d / 2, "ZEW"), (w / 2 - r * 1.6, d / 2, "WYR"),
                             (-w / 2 + r * 1.6, -d / 2, "WYW"), (w / 2 - r * 1.6, -d / 2, "NAW")):
             c.circle(xf.pt(x, y + math.copysign(r, y)), r, pen="cienka")
-            c.text(xf.pt(x, y + math.copysign(2 * r + 1.0 * k + (0 if y > 0 else 1.8 * k), y)), lab, 1.8, 0.0,
-                   "center", "baseline")
-        c.text(xf.pt(0, -d / 2 - 2 * r - 5.5 * k), label, 2.0, 0.0, "center", "baseline")
+            if y > 0:
+                c.text(xf.pt(x, y + 2 * r + 0.8 * k), lab, 1.8, 0.0, "center", "baseline")
+            else:
+                c.text(xf.pt(x, y - 2 * r - 0.8 * k), lab, 1.8, 0.0, "center", "top")
+        if label:
+            c.text(xf.pt(0, d / 2 + 2 * r + 3.6 * k), label, 2.0, 0.0, "center", "baseline")
 
 
 def radiator(c, p1, p2, depth: float = 0.10, side: float = 1.0, layer: str = "S-OGRZ", label: str | None = None):

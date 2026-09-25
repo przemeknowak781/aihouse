@@ -18,6 +18,7 @@ const groups = {};
 const basePos = {};
 let meta = {};
 let terrainMinY = -0.5;
+let groundBand = null;
 
 function initRenderer() {
   renderer = new THREE.WebGLRenderer({ antialias: false, preserveDrawingBuffer: true, powerPreference: 'high-performance' });
@@ -55,6 +56,7 @@ function initRenderer() {
       void main(){ vec3 d = normalize(vDir); float h = d.y;
         vec3 c = mix(horizon, top, pow(clamp(h,0.0,1.0), 0.55));
         c = mix(c, bottom, smoothstep(0.0, -0.08, h));
+        c = mix(c, horizon * 1.08, exp(-abs(h) * 28.0) * 0.5);
         float s = max(dot(d, normalize(sunDir)), 0.0);
         c += sunCol * glow * (pow(s, 900.0)*6.0 + pow(s, 24.0)*0.18 + pow(s, 4.0)*0.06);
         gl_FragColor = vec4(c, 1.0); }`,
@@ -108,19 +110,20 @@ function tuneMaterials() {
 function setSky(mode, sunDirT, elev) {
   // kolory nieba zależne od wysokości Słońca
   const low = Math.max(0, Math.min(1, (elev - 2) / 25));
-  const top = new THREE.Color().setHSL(0.595, 0.62, 0.22 + 0.10 * low);
-  const hor = new THREE.Color().lerpColors(new THREE.Color(0xf0cfa8), new THREE.Color(0xc9dcec), low);
+  const top = new THREE.Color().setHSL(0.603, 0.78, 0.20 + 0.08 * low);
+  const hor = new THREE.Color().lerpColors(new THREE.Color(0xf0cfa8), new THREE.Color(0xb4cde6), low);
   skyMat.uniforms.top.value.copy(top);
   skyMat.uniforms.horizon.value.copy(hor);
   skyMat.uniforms.bottom.value.copy(new THREE.Color(0xa9b39c));
   skyMat.uniforms.sunDir.value.copy(sunDirT);
   skyMat.uniforms.sunCol.value.copy(new THREE.Color().lerpColors(new THREE.Color(1.0, 0.62, 0.35), new THREE.Color(1.0, 0.93, 0.8), low));
   if (mode === 'studio') {
-    skyMat.uniforms.top.value.set(0xe9ecef); skyMat.uniforms.horizon.value.set(0xf6f6f4);
-    skyMat.uniforms.bottom.value.set(0xf1f1ef); skyMat.uniforms.glow.value = 0.0;
+    // wartości HDR dobrane tak, by po ACES dać jasną szarość / biel
+    skyMat.uniforms.top.value.setRGB(1.45, 1.47, 1.52); skyMat.uniforms.horizon.value.setRGB(1.9, 1.9, 1.9);
+    skyMat.uniforms.bottom.value.setRGB(1.9, 1.9, 1.9); skyMat.uniforms.glow.value = 0.0;
   } else if (mode === 'white') {
-    skyMat.uniforms.top.value.set(0xffffff); skyMat.uniforms.horizon.value.set(0xffffff);
-    skyMat.uniforms.bottom.value.set(0xffffff); skyMat.uniforms.glow.value = 0.0;
+    skyMat.uniforms.top.value.setRGB(40, 40, 40); skyMat.uniforms.horizon.value.setRGB(40, 40, 40);
+    skyMat.uniforms.bottom.value.setRGB(40, 40, 40); skyMat.uniforms.glow.value = 0.0;
   } else {
     skyMat.uniforms.glow.value = 1.0;
   }
@@ -129,6 +132,10 @@ function setSky(mode, sunDirT, elev) {
   const s2 = new THREE.Mesh(new THREE.SphereGeometry(100, 32, 16), skyMat.clone());
   s2.material.uniforms = THREE.UniformsUtils.clone(skyMat.uniforms);
   s2.material.uniforms.glow.value = 0.25;
+  if (mode !== 'sky') {
+    s2.material.uniforms.top.value.setRGB(0.75, 0.78, 0.84); s2.material.uniforms.horizon.value.setRGB(0.9, 0.9, 0.9);
+    s2.material.uniforms.bottom.value.setRGB(0.55, 0.55, 0.53);
+  }
   envScene.add(s2);
   if (envRT) envRT.dispose();
   envRT = pmrem.fromScene(envScene, 0.02);
@@ -180,6 +187,12 @@ async function render(cfg) {
   const W = Math.round(cfg.width * (cfg.ss || 2)), H = Math.round(cfg.height * (cfg.ss || 2));
   renderer.setSize(W, H, false);
   renderer.toneMappingExposure = cfg.exposure || 1.0;
+  // krycie szkła (np. elewacje ortogonalne — bez prześwitu na tło)
+  root.traverse((o) => {
+    if (!o.isMesh) return;
+    const m = o.material; const code = (o.userData && o.userData.material) || m.name;
+    if (code === 'SZKLO') { if (m.userData.op0 === undefined) m.userData.op0 = m.opacity; m.opacity = cfg.glassOpacity || m.userData.op0; }
+  });
   // widoczność i rozsunięcie grup
   for (const [k, g] of Object.entries(groups)) {
     g.visible = cfg.groups && k in cfg.groups ? !!cfg.groups[k] : true;
@@ -240,6 +253,18 @@ async function render(cfg) {
     shadowPlane.position.set(ctr.x, (vb.isEmpty() ? 0 : vb.min.y) - 0.01, ctr.z);
   }
   scene.fog = cfg.fog ? new THREE.Fog(hor.clone(), cfg.fogNear || 120, cfg.fogFar || 900) : null;
+  // pas terenu (elewacje ortogonalne): pionowa płyta przed budynkiem do rzędnej terenu
+  if (groundBand) { scene.remove(groundBand); groundBand = null; }
+  if (cfg.groundBand) {
+    const gb = cfg.groundBand;
+    groundBand = new THREE.Mesh(new THREE.BoxGeometry(400, gb.depth || 3.0, 0.05),
+      new THREE.MeshBasicMaterial({ color: new THREE.Color(gb.color || '#8a8f7a') }));
+    groundBand.position.copy(B2T([gb.x || 0, gb.y, gb.z - (gb.depth || 3.0) / 2]));
+    const line = new THREE.Mesh(new THREE.BoxGeometry(400, 0.05, 0.06), new THREE.MeshBasicMaterial({ color: new THREE.Color(gb.line || '#4a4e44') }));
+    line.position.set(0, (gb.depth || 3.0) / 2 - 0.025, 0.01);
+    groundBand.add(line);
+    scene.add(groundBand);
+  }
   // kompozycja: N8AO (SSAO) → OutputPass (ACES + sRGB)
   const composer = new EffectComposer(renderer, new THREE.WebGLRenderTarget(W, H, { type: THREE.HalfFloatType }));
   composer.setPixelRatio(1);
@@ -264,7 +289,19 @@ async function render(cfg) {
   composer.render();
   const url = renderer.domElement.toDataURL('image/png');
   composer.dispose();
-  return url;
+  // etykiety (np. kondygnacje w aksonometrii): rzut punktów kotwiczących na obraz [px w rozdzielczości cfg.width]
+  const labels = [];
+  for (const lb of cfg.labels || []) {
+    const g = groups[lb.group];
+    if (!g || !g.visible) continue;
+    const b = boxOf(g);
+    if (b.isEmpty()) continue;
+    const bb = b3ToBud(b);
+    const pt = [bb[0] + (lb.dx || 0), (bb[1] + bb[4]) / 2 + (lb.dy || 0), (bb[2] + bb[5]) / 2 + (lb.dz || 0)];
+    const v = B2T(pt).project(cam);
+    labels.push({ text: lb.text, group: lb.group, x: (v.x + 1) / 2 * cfg.width, y: (1 - v.y) / 2 * cfg.height });
+  }
+  return { url, labels };
 }
 
 // rzędna terenu (układ budynku) w punktach [x, y] — promień w dół na siatki grupy 'teren'

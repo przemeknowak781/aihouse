@@ -24,7 +24,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from lamela.draft import dims, elements as E, fmt, hatch, plot, symbols as S  # noqa: E402
-from lamela.draft.sheet import Sheet, TitleBlock, notes_box, scale_bar, table  # noqa: E402
+from lamela.draft.sheet import (Sheet, TitleBlock, lettering_sample, lines_legend, notes_box, scale_bar,  # noqa: E402
+                                table)
 
 OUT = ROOT / "projekt" / "00_demo_silnika"
 
@@ -79,8 +80,9 @@ def demo_plan():
     # ścianka działowa 12 cm (ceramika) łazienka / hol
     E.wall_layers(cs, (F_STR - 0.01, Y_PART), (AX["B"] - F_STR + 0.01, Y_PART),
                   [("TYNK", 0.015, "wyk"), ("MUR_CERAMIKA", 0.12, "dzial"), ("TYNK", 0.015, "wyk")], angle=135.0)
+    depth = {"D1": 0.09, "D2": 0.12}
     for sym, (wall, a, b, h, sill) in OPEN.items():
-        cs.cut_out(E.opening_rect(wall[0], wall[1], a, b))
+        cs.cut_out(E.opening_rect(wall[0], wall[1], a, b, depth.get(sym, 0.35)))
     # szacht instalacyjny w łazience (otwór w stropie — obrys z przekątnymi)
     shaft = [(F_IN, 1.85), (F_IN + 0.30, 1.85), (F_IN + 0.30, Y_PART - 0.075), (F_IN, Y_PART - 0.075)]
     cs.draw(vp)
@@ -250,8 +252,8 @@ def draw_section(vp, detail: bool = False):
     x_in = x_ax + 0.09 + 0.015                  # lico wewnętrzne
     x_str_o = x_ax - 0.09
     x_ins_o = x_str_o - 0.20
-    x_r = 4.2                                   # prawa granica wycinka
-    x_l = -2.2                                  # grunt na zewnątrz
+    x_r = 3.7                                   # prawa granica wycinka
+    x_l = -3.2                                  # grunt na zewnątrz
     z0, z_p1, z_d = 0.0, 3.15, 6.30             # posadzki ±0,00, +3,15, wierzch stropu dachu
     # --- płyta fundamentowa i podłoga na gruncie (od wierzchu posadzki)
     zf = z0
@@ -314,50 +316,42 @@ def draw_section(vp, detail: bool = False):
     vp.polyline([(x_ins_o - 0.03, z_attic_top - 0.06), (x_ins_o - 0.03, z_attic_top + 0.01),
                  (x_ax + 0.09 + 0.10, z_attic_top + 0.02), (x_ax + 0.09 + 0.10, z_attic_top - 0.06)], "A-WIDOK",
                 pen="srednia")
-    # okno (widok) w ścianie piętra — linie widoku za płaszczyzną cięcia
     if not detail:
-        for xx in (x_r - 0.8,):
-            vp.line((xx, z0), (xx, z_p1 - 0.29), "A-WIDOK", pen="cienka")
-        # osie
+        # oś ściany
         S.axis_line(vp, (x_ax, slab_bot - 1.2), (x_ax, z_attic_top + 0.9), "A", "both", 4.0, 3.5)
-        # rzędne
-        xr = x_r + 0.25
-        dims.level_section(vp, (xr, z0), 0.0, "zero", abs_z=101.65)
-        dims.level_section(vp, (xr, z_p1), z_p1, "wyk")
-        dims.level_section(vp, (xr, z_p1_slab_bot), z_p1_slab_bot, "konstr")
-        dims.level_section(vp, (xr, z_d), z_d, "konstr")
-        dims.level_section(vp, (xr, z_top), z_top, "wyk")
-        dims.level_section(vp, (x_l + 0.2, z_ground), z_ground, "wyk", side="right", stub_mm=0)
-        dims.level_section(vp, (x_l + 0.2 + 1.2, slab_bot - 0.10), slab_bot - 0.10, "konstr", side="right", stub_mm=0)
-        dims.level_section(vp, (x_ins_o - 0.4, z_attic_top), z_attic_top, "wyk", side="left")
-        # wymiary pionowe (po lewej): łańcuch kondygnacji
+        # rzędne — kolumna przy krawędzi przekroju (automatyczne rozsuwanie znaczników)
+        dims.levels(vp, x_r + 0.25, [(z0, "zero", 101.65), (z_p1, "wyk"), (z_p1_slab_bot, "konstr"),
+                                     (z_d, "konstr"), (z_top, "wyk"), (slab_bot - 0.10, "konstr")])
+        dims.level_section(vp, (x_l + 0.35, z_ground), z_ground, "wyk", stub_mm=0)
+        dims.level_section(vp, (x_ins_o - 0.35, z_attic_top), z_attic_top, "wyk", side="left", stub_mm=0)
+        # wymiary pionowe (po lewej): kondygnacje i wysokość całkowita
         xd = x_l - 0.2
         dims.dim_v(vp, [slab_bot - 0.10, z0, z_p1, z_d, z_top, z_attic_top], xd, x_l + 0.5)
         dims.dim_v(vp, [slab_bot - 0.10, z_attic_top], xd - 7 * k, x_l + 0.5)
         # wysokości w świetle
-        dims.dim_v(vp, [z0, z_p1_slab_bot - 0.015], x_r - 0.35, x_r - 0.1, ext="short")
-        dims.dim_v(vp, [z_p1, z_d - 0.215], x_r - 0.35, x_r - 0.1, ext="short")
-        # grubość ściany (u dołu)
-        dims.dim_h(vp, [x_ins_o - 0.007, x_ins_o, x_str_o, x_ax + 0.09, x_in], 1.2, 1.0)
+        dims.dim_v(vp, [z0, z_p1_slab_bot - 0.015], 1.0, 1.2, ext="short")
+        dims.dim_v(vp, [z_p1, z_d - 0.215], 1.0, 1.2, ext="short")
+        # warstwy ściany (wymiar przez przegrodę — napisy z maską)
+        dims.dim_h(vp, [x_ins_o - 0.007, x_ins_o, x_str_o, x_ax + 0.09, x_in], 1.55, 1.3, mask=0.3)
         # spadek dachu
-        dims.slope(vp, (x_r - 0.4, z_top + 0.30), (x_r - 1.9, z_top + 0.30), 2.0)
-        # opisy warstw — drabinki
-        S.layer_callout(vp, (2.6, z_top - 0.35), (2.6, z_top + 0.55), ROOF_TXT, h=2.0, row_mm=4.0,
-                        title="STROPODACH SD1", marks=[(2.6, z_top - 0.025), (2.6, z_top - 0.16), (2.6, z_d - 0.1)])
-        S.layer_callout(vp, (1.4, z_p1_slab_bot + 0.05), (1.4, z_p1 + 0.55), FLOOR_P1_TXT, h=2.0, row_mm=4.0,
-                        title="STROP ST1 / PODŁOGA P1", marks=[(1.4, z_p1 - 0.05), (1.4, z_p1 - 0.12)])
-        S.layer_callout(vp, (1.4, slab_bot - 0.25), (1.4, z0 + 0.55), FLOOR_P0_TXT, h=2.0, row_mm=4.0,
-                        title="PODŁOGA NA GRUNCIE P0", marks=[(1.4, z0 - 0.04), (1.4, z0 - 0.15), (1.4, z0 - 0.4)])
-        S.layer_callout(vp, (x_in - 0.01, 1.9), (x_l + 0.35, 1.9), WALL_TXT, side="right", h=2.0, row_mm=4.0,
-                        title="ŚCIANA SZ1", marks=[(x_ax, 1.9), (x_ins_o + 0.1, 1.9)])
-        S.detail_callout(vp, (x_ax - 0.05, z_attic_top - 0.3), 13.0, "A", leader_to=(x_l + 0.4, z_attic_top + 0.35))
+        dims.slope(vp, (1.95, z_top + 0.22), (0.75, z_top + 0.22), 2.0)
+        # opisy warstw — odnośniki "drabinkowe"
+        xl = 2.2
+        S.layer_callout(vp, (xl, z_d - 0.12), (xl, z_top + 0.45), ROOF_TXT, h=2.0, row_mm=4.0,
+                        title="STROPODACH SD1", marks=[(xl, z_top - 0.03), (xl, z_top - 0.16), (xl, z_d - 0.1)])
+        S.layer_callout(vp, (xl, z_p1_slab_bot + 0.05), (xl, z_p1 + 0.35), FLOOR_P1_TXT, h=2.0, row_mm=4.0,
+                        title="STROP ST1 / PODŁOGA P1", marks=[(xl, z_p1 - 0.04), (xl, z_p1 - 0.12)])
+        S.layer_callout(vp, (xl, slab_bot - 0.22), (xl, z0 + 0.30), FLOOR_P0_TXT, h=2.0, row_mm=4.0,
+                        title="PODŁOGA NA GRUNCIE P0", marks=[(xl, z0 - 0.04), (xl, z0 - 0.15), (xl, z0 - 0.4)])
+        S.layer_callout(vp, (x_in - 0.005, 4.75), (-0.65, 4.75), list(reversed(WALL_TXT)), side="left", h=2.0,
+                        row_mm=4.0, title="ŚCIANA SZ1", marks=[(x_ax, 4.75), (x_ins_o + 0.1, 4.75)])
+        S.detail_callout(vp, (x_ax - 0.02, z_attic_top - 0.28), 12.0, "A", leader_to=(x_l + 0.5, z_attic_top + 0.85))
     else:
         dims.dim_h(vp, [x_ins_o - 0.007, x_ins_o, x_str_o, x_ax + 0.09, x_ax + 0.17], z_attic_top + 0.35,
                    z_attic_top + 0.1)
         dims.dim_v(vp, [z_d - 0.2, z_d, z_top, z_attic_top - 0.05, z_attic_top], x_ins_o - 0.25, x_ins_o)
-        dims.level_section(vp, (x_r - 0.5, z_top), z_top, "wyk")
-        dims.level_section(vp, (x_r - 0.5, z_d), z_d, "konstr")
-        dims.slope(vp, (x_r - 0.3, z_top + 0.15), (x_r - 1.1, z_top + 0.15), 2.0)
+        dims.levels(vp, x_ins_o + 1.9, [(z_top, "wyk"), (z_d, "konstr")])
+        dims.slope(vp, (x_ins_o + 1.7, z_top + 0.15), (x_ins_o + 0.9, z_top + 0.15), 2.0)
     return dict(z_attic_top=z_attic_top, x_ins_o=x_ins_o, z_d=z_d, x_r=x_r, slab_bot=slab_bot, x_l=x_l)
 
 
@@ -368,13 +362,14 @@ def demo_section():
     vp = sh.add_viewport(50, "PRZEKRÓJ A-A")
     g = draw_section(vp)
     x0, y0, x1, y1 = sh.frame
-    sh.place(vp, x0 + 6.0, y1 - 4.0, "tl")
+    sh.place(vp, x0 + 3.0, y1 - 3.0, "tl")
     sh.view_title(vp, "PRZEKRÓJ A-A (FRAGMENT)")
     # detal A 1:20 — druga rzutnia, ten sam rysunek z adnotacjami w skali detalu
     vd = sh.add_viewport(20, "DETAL A")
     draw_section(vd, detail=True)
     fx0, fy0, fx1, fy1 = sh.free_above_title_block()
-    clip = (g["x_ins_o"] - 0.75, g["z_d"] - 0.45, g["x_ins_o"] + 2.3, g["z_attic_top"] + 0.6)
+    fx0 = max(fx0, vp.clip[2] + 2.0)
+    clip = (g["x_ins_o"] - 0.80, g["z_d"] - 0.45, g["x_ins_o"] + 2.3, g["z_attic_top"] + 0.6)
     sh.place(vd, fx0 + 4.0, fy1 - 10.0, "tl", clip_model=clip)
     vd_frame = vd.clip
     sh.rect(*vd_frame, layer="R-OPISY", pen=0.25)
@@ -384,8 +379,8 @@ def demo_section():
              "w połowie zaczerniony — poziom ±0,00 z rzędną bezwzględną.",
              "Rysunek testowy silnika — dane nie stanowią projektu."]
     nb = notes_box(sh, fx0, vd_frame[1] - 12.0, fx1 - fx0, notes, "UWAGI", h=2.0)
-    scale_bar(sh, (fx0 + 4.0, nb[1] - 9.0), 50, 5.0)
-    scale_bar(sh, (fx0 + 95.0, nb[1] - 9.0), 20, 1.0)
+    b1 = scale_bar(sh, (fx0 + 4.0, nb[1] - 9.0), 50, 5.0)
+    scale_bar(sh, (fx0 + 4.0, b1[1] - 13.0), 20, 2.0)
     plot.add_control_marks(sh)
     files = sh.save(OUT / "DEMO-02_przekroj_1-50")
     return sh, vp, files
@@ -406,104 +401,135 @@ def demo_legend():
     def cell(title, fn):
         cells.append((title, fn))
 
-    # architektura
-    cell("Strzałka północy", lambda c, p: S.north_arrow(c, p, 12.0))
-    cell("Oś konstrukcyjna", lambda c, p: S.axis_line(c, p + (-12, 0), p + (8, 0), "B", "start", 3.5, 3.5))
-    cell("Oznaczenie przekroju", lambda c, p: S.section_mark(c, p + (-14, -2), p + (14, -2), "A", 1.0, 3.5, 5, 4.5))
-    cell("Oznaczenie pomieszczenia", lambda c, p: S.room_tag(c, p, "0.05", "Salon", 32.45, level_z=0.0, h=2.0))
-    cell("Symbol stolarki", lambda c, p: (S.tag(c, p + (-6, 0), "O1"), S.tag(c, p + (7, 0), "HS1", "ellipse")))
-    cell("Rzędna — rzut (X / ramka)", lambda c, p: (dims.level_plan(c, p + (-14, 2), 0.0),
-                                                     dims.level_plan(c, p + (8, -3), -0.02, style="box")))
-    cell("Rzędne — przekrój", lambda c, p: (dims.level_section(c, p + (-15, -3), 0.0, "zero", abs_z=101.65),
-                                            dims.level_section(c, p + (-1, -3), 3.15, "wyk", stub_mm=3),
-                                            dims.level_section(c, p + (12, -3), 2.95, "konstr", stub_mm=3)))
-    cell("Spadek / pochylnia", lambda c, p: (dims.slope(c, p + (-14, 3), p + (0, 3), 2.0),
-                                              dims.slope(c, p + (2, -3), p + (16, -3), 6.0, ramp=True)))
-    cell("Wejście do budynku", lambda c, p: (S.entrance_arrow(c, p + (-4, 0), 0.0),
-                                              S.entrance_arrow(c, p + (10, 0), 0.0, filled=False)))
-    cell("Odnośnik szczegółu", lambda c, p: S.detail_callout(c, p + (-8, 1), 5.0, "A", leader_to=p + (4, -4)))
-    cell("Wymiar (cm, mm w indeksie)", lambda c, p: dims.dim_h(c, [p[0] - 16, p[0] - 4, p[0] + 1.6, p[0] + 16],
-                                                                p[1] - 2, p[1] - 6,
+    # architektura (symbole umowne w rozmiarze wydruku; wybrane powiększone dla czytelności tablicy)
+    cell("Strzałka północy", lambda c, p: S.north_arrow(c, p + (0, -2), 14.0))
+    cell("Oś konstrukcyjna", lambda c, p: S.axis_line(c, p + (-14, 0), p + (14, 0), "B", "start", 4.0, 3.5))
+    cell("Oznaczenie przekroju", lambda c, p: S.section_mark(c, p + (-18, -3), p + (18, -3), "A", 1.0, 5.0, 7, 5.5))
+    cell("Oznaczenie pomieszczenia", lambda c, p: S.room_tag(c, p, "0.05", "Salon", 32.45, level_z=0.0, h=2.5))
+    cell("Symbol stolarki", lambda c, p: (S.tag(c, p + (-8, 0), "O1"), S.tag(c, p + (8, 0), "HS1", "ellipse")))
+    cell("Rzędna — rzut (X / ramka)", lambda c, p: (dims.level_plan(c, p + (-18, 2), 0.0),
+                                                     dims.level_plan(c, p + (10, -4), -0.02, style="box")))
+    cell("Rzędne — przekrój (±0,00 / wyk. / konstr.)",
+         lambda c, p: dims.levels(c, p[0] - 22, [(p[1] - 6, "zero", 101.65)], nd=2) if False else (
+             dims.level_section(c, p + (-22, -8), text="±0,00", kind="zero", abs_z=101.65, stub_mm=3),
+             dims.level_section(c, p + (-2, -5), 3.15, "wyk", stub_mm=3),
+             dims.level_section(c, p + (15, -5), 2.95, "konstr", stub_mm=3)))
+    cell("Spadek / pochylnia", lambda c, p: (dims.slope(c, p + (-22, 3), p + (-4, 3), 2.0),
+                                              dims.slope(c, p + (2, -4), p + (22, -4), 6.0, ramp=True)))
+    cell("Wejście do budynku (±0,00 / poniżej)", lambda c, p: (S.entrance_arrow(c, p + (-6, 0), 0.0),
+                                                               S.entrance_arrow(c, p + (12, 0), 0.0, filled=False)))
+    cell("Odnośnik szczegółu", lambda c, p: S.detail_callout(c, p + (-10, 1), 6.0, "A", leader_to=p + (5, -5)))
+    cell("Wymiar (cm, mm w indeksie)", lambda c, p: dims.dim_h(c, [p[0] - 22, p[0] - 6, p[0] + 1.5, p[0] + 22],
+                                                                p[1] - 2, p[1] - 7,
                                                                 labels=[dims.dim_runs(0.245), dims.dim_runs(0.12),
                                                                         dims.dim_runs(0.365)]))
-    cell("Otwór w stropie", lambda c, p: S.floor_opening(c, [p + (-8, -5), p + (8, -5), p + (8, 5), p + (-8, 5)]))
-    # elektryka
-    cell("Gniazdo 1f / 2× / IP44 / 3f", lambda c, p: (S.socket(c, p + (-15, -4), 90), S.socket(c, p + (-5, -4), 90, n=2),
-                                                        S.socket(c, p + (5, -4), 90, ip44=True),
-                                                        S.socket(c, p + (13, -4), 90, phases=3)))
-    cell("Łącznik 1-bieg. / 2-bieg. / schodowy", lambda c, p: (S.switch(c, p + (-12, -4), 90, "1"),
-                                                                S.switch(c, p + (0, -4), 90, "2"),
-                                                                S.switch(c, p + (12, -4), 90, "schodowy")))
-    cell("Oprawa sufit. / ścienna / LED", lambda c, p: (S.light(c, p + (-13, 0)), S.light(c, p + (-3, -5), "sciana"),
-                                                         S.light_linear(c, p + (5, 0), p + (17, 0))))
-    cell("Rozdzielnica / puszka / uziemienie", lambda c, p: (S.panel(c, p + (-12, -5), 90, 12, 3.5, "RG"),
-                                                              S.junction_box(c, p + (2, 0)),
-                                                              S.earth(c, p + (12, 3))))
-    cell("Czujnik ruchu / dzwonek / wideodomofon", lambda c, p: (S.motion_sensor(c, p + (-12, -4)),
-                                                                   S.bell(c, p + (0, -4)),
-                                                                   S.videophone(c, p + (12, -4))))
-    cell("Gniazdo RJ45 / TV / SPD", lambda c, p: (S.data_outlet(c, p + (-13, -4)), S.data_outlet(c, p + (-3, -4),
-                                                                                                  label="TV"),
-                                                   S.spd(c, p + (9, -2))))
+    cell("Otwór w stropie / szacht", lambda c, p: S.floor_opening(c, [p + (-10, -6), p + (10, -6), p + (10, 6),
+                                                                       p + (-10, 6)]))
+    cell("Drzwi rozwierane", lambda c, p: (c.line(p + (-26, -6), p + (-9, -6), "A-SCIANY-KONSTR"),
+                                           c.line(p + (9, -6), p + (26, -6), "A-SCIANY-KONSTR"),
+                                           S.door(c, p + (-9, -6), p + (9, -6), 2.0, 1.0, "a")))
+    cell("Drzwi przesuwne HS", lambda c, p: (c.line(p + (-26, -2), p + (-12, -2), "A-SCIANY-KONSTR"),
+                                             c.line(p + (12, -2), p + (26, -2), "A-SCIANY-KONSTR"),
+                                             S.sliding_door(c, p + (-12, -2), p + (12, -2), 5.0, 1.0, "HS", "b",
+                                                            frame_depth=3.2)))
+    cell("Okno (rama, szyba, parapety)", lambda c, p: (c.line(p + (-26, -1), p + (-10, -1), "A-SCIANY-KONSTR"),
+                                                        c.line(p + (10, -1), p + (26, -1), "A-SCIANY-KONSTR"),
+                                                        S.window(c, p + (-10, -1), p + (10, -1), 3.0, -5.0, -0.5,
+                                                                 -2.2, 1.0, sill_in_over=0.6, sill_out_over=0.8)))
+    cell("Schody — bieg z linią cięcia", lambda c, p: S.stairs(c, p + (-24, -1), 0.0, 10.0, 8, 5.6, 3.5, cut_after=5,
+                                                               h=2.0, total_steps=18, label_values=(0.175, 0.28)))
+    # elektryka (PN-EN 60617) — rozmiar ×1,6
+    z = 1.6
+    cell("Gniazdo 1f / 2× / IP44 / 3f", lambda c, p: (S.socket(c, p + (-21, -6), 90, s_mm=3 * z),
+                                                        S.socket(c, p + (-7, -6), 90, n=2, s_mm=3 * z),
+                                                        S.socket(c, p + (7, -6), 90, ip44=True, s_mm=3 * z),
+                                                        S.socket(c, p + (19, -6), 90, phases=3, s_mm=3 * z)))
+    cell("Łącznik 1-bieg. / 2-bieg. / schodowy", lambda c, p: (S.switch(c, p + (-16, -6), 90, "1", s_mm=3 * z),
+                                                                S.switch(c, p + (0, -6), 90, "2", s_mm=3 * z),
+                                                                S.switch(c, p + (16, -6), 90, "schodowy", s_mm=3 * z)))
+    cell("Oprawa ogólna / kinkiet / ścienna / liniowa", lambda c, p: (
+        S.light(c, p + (-21, 0), s_mm=4 * z), S.light(c, p + (-11, -6), "kinkiet", 90, s_mm=4 * z),
+        S.light(c, p + (-1, -6), "sciana", 90, s_mm=3.4 * z), S.light_linear(c, p + (9, 0), p + (26, 0), 2.4)))
+    cell("Rozdzielnica / puszka / uziemienie", lambda c, p: (S.panel(c, p + (-15, -6), 90, 14, 4.5, "RG"),
+                                                              S.junction_box(c, p + (2, 0), 2.4),
+                                                              S.earth(c, p + (16, 4), s_mm=3 * z)))
+    cell("Czujnik ruchu / dzwonek / wideodomofon", lambda c, p: (S.motion_sensor(c, p + (-16, -6), s_mm=3.2 * z),
+                                                                   S.bell(c, p + (0, -6), s_mm=3 * z),
+                                                                   S.videophone(c, p + (16, -6), s_mm=3.6 * z)))
+    cell("Gniazdo RJ45 / TV / SPD", lambda c, p: (S.data_outlet(c, p + (-19, -6), s_mm=3 * z),
+                                                   S.data_outlet(c, p + (-6, -6), label="TV", s_mm=3 * z),
+                                                   S.spd(c, p + (8, -3), s_mm=3.5 * z)))
     # sanitarne
-    cell("Pion / zawór / zawór zwrotny", lambda c, p: (S.riser(c, p + (-14, 0), "K1"), S.valve(c, p + (0, 0)),
-                                                        S.check_valve(c, p + (10, 0))))
-    cell("Wodomierz / filtr / pompa", lambda c, p: (c.line(p + (-18, 0), p + (18, 0), "S-WODA"),
-                                                     S.water_meter(c, p + (-10, 0)), S.filter_(c, p + (0, 0)),
-                                                     S.pump(c, p + (10, 0))))
-    cell("Rury: W / C / Cy / K", lambda c, p: [S.pipe(c, [p + (-16, 5 - 3.3 * i), p + (16, 5 - 3.3 * i)], m)
+    cell("Pion / zawór / zawór zwrotny", lambda c, p: (S.riser(c, p + (-18, 0), "K1", s_mm=4.0),
+                                                        c.line(p + (-4, 0), p + (24, 0), "S-WODA"),
+                                                        S.valve(c, p + (2, 0), s_mm=5.0),
+                                                        S.check_valve(c, p + (16, 0), s_mm=5.0)))
+    cell("Wodomierz / filtr / pompa", lambda c, p: (c.line(p + (-26, 0), p + (26, 0), "S-WODA"),
+                                                     S.water_meter(c, p + (-14, 0), 6.0), S.filter_(c, p + (0, 0), 5.5),
+                                                     S.pump(c, p + (14, 0), 6.0)))
+    cell("Rury: W / C / Cy / K", lambda c, p: [S.pipe(c, [p + (-24, 7 - 4.4 * i), p + (24, 7 - 4.4 * i)], m,
+                                                      label={"W": "W — woda zimna", "C": "C — CWU",
+                                                             "CY": "Cy — cyrkulacja", "K": "K — kanalizacja"}[m],
+                                                      h=1.8, label_at=0.5)
                                                for i, m in enumerate(["W", "C", "CY", "K"])])
-    cell("Rozdzielacz / zasobnik / pompa ciepła", lambda c, p: (S.manifold(c, p + (-18, 0), n=4, label="R"),
-                                                                 S.tank(c, p + (3, 0), 9.0, "CWU", h=1.8),
-                                                                 S.heat_pump(c, p + (10, -3), 0, 9, 6, "PC")))
-    cell("Czyszczak / wpust / rewizja", lambda c, p: (S.cleanout(c, p + (-13, 0)), S.floor_drain(c, p + (0, 0), 4.0),
-                                                       S.inspection(c, p + (12, 0), 6, 6)))
-    cell("Kratka / anemostat N / W", lambda c, p: (S.grille(c, p + (-13, 0), 0, 8, 3),
-                                                    S.anemostat(c, p + (-1, 0), 4, "N"),
-                                                    S.anemostat(c, p + (11, 0), 4, "W")))
-    cell("Czerpnia / wyrzutnia", lambda c, p: (S.air_terminal(c, p + (-4, 0), 180, "czerpnia", 6),
-                                               S.air_terminal(c, p + (4, 0), 0, "wyrzutnia", 6)))
-    cell("Rekuperator", lambda c, p: S.recuperator(c, p + (0, 1), 0, 16, 9))
-    cell("Grzejnik / ogrzewanie podłogowe", lambda c, p: (S.radiator(c, p + (-18, 3), p + (-6, 3), 2.0),
-                                                          S.floor_heating(c, box(p[0] - 2, p[1] - 6, p[0] + 16,
-                                                                                 p[1] + 5), 1.4, 0.8)))
+    cell("Rozdzielacz / zasobnik / pompa ciepła", lambda c, p: (S.manifold(c, p + (-27, -2), n=3, pitch_mm=3.0),
+                                                                 S.tank(c, p + (-1, 0), 11.0, "CWU", h=2.0),
+                                                                 S.heat_pump(c, p + (17, -4), 0, 13, 8, "PC")))
+    cell("Czyszczak / wpust / rewizja", lambda c, p: (S.cleanout(c, p + (-17, 0), s_mm=4.0),
+                                                       S.floor_drain(c, p + (0, 0), 6.0),
+                                                       S.inspection(c, p + (16, 0), 8, 8)))
+    cell("Kratka / anemostat N / W", lambda c, p: (S.grille(c, p + (-18, 0), 0, 10, 4),
+                                                    S.anemostat(c, p + (-2, 0), 6, "N"),
+                                                    S.anemostat(c, p + (14, 0), 6, "W")))
+    cell("Czerpnia / wyrzutnia", lambda c, p: (S.air_terminal(c, p + (-6, -2), 180, "czerpnia", 8),
+                                               S.air_terminal(c, p + (6, -2), 0, "wyrzutnia", 8)))
+    cell("Rekuperator", lambda c, p: S.recuperator(c, p + (0, -3), 0, 20, 10, label=None))
+    cell("Grzejnik / ogrzewanie podłogowe", lambda c, p: (S.radiator(c, p + (-26, 3), p + (-10, 3), 2.5),
+                                                          S.floor_heating(c, box(p[0] - 4, p[1] - 8, p[0] + 24,
+                                                                                 p[1] + 6), 1.6, 0.8)))
     # teren
-    cell("Drzewo istn. / proj. / do wycinki", lambda c, p: (S.tree(c, p + (-13, 0), 9), S.tree(c, p + (0, 0), 9, False),
-                                                            S.tree(c, p + (13, 0), 9, remove=True)))
-    cell("Drzewo iglaste / krzew / żywopłot", lambda c, p: (S.tree(c, p + (-13, 0), 9, conifer=True),
-                                                            S.shrub(c, p + (-2, 0), 5),
-                                                            S.hedge(c, [p + (5, 0), p + (18, 0)], 3)))
-    cell("Trawnik / kostka", lambda c, p: (S.lawn(c, box(p[0] - 18, p[1] - 5, p[0] - 1, p[1] + 5), 30, outline=True),
-                                          S.paving(c, box(p[0] + 1, p[1] - 5, p[0] + 18, p[1] + 5))))
-    cell("Słup / hydrant / studzienka", lambda c, p: (S.pole(c, p + (-14, 0)), S.pole(c, p + (-8, 0), "osw"),
-                                                      S.hydrant(c, p + (1, 0)), S.manhole(c, p + (10, 0), 3, "Sk")))
-    cell("Złącze ZK / skrzynka", lambda c, p: (S.cable_box(c, p + (-8, -2), 0, 9, 3.5, "ZK"),
-                                               S.utility_box(c, p + (8, -2), 0, 7, 3, "SW")))
-    cell("Granica działki z punktami", lambda c, p: S.plot_boundary(c, [p + (-17, -5), p + (17, -5), p + (15, 5)],
-                                                                    closed=False, point_labels=["12", "13", "14"]))
-    cell("Linia zabudowy", lambda c, p: S.building_line(c, p + (-18, -2), p + (18, -2), "linia zabudowy"))
-    cell("Warstwice / pkt wysokościowe", lambda c, p: (S.contours(c, [([p + (-18, -5), p + (-5, -2), p + (5, -4)],
+    cell("Drzewo istn. / proj. / do wycinki", lambda c, p: (S.tree(c, p + (-17, 0), 11), S.tree(c, p + (0, 0), 11, False),
+                                                            S.tree(c, p + (17, 0), 11, remove=True)))
+    cell("Drzewo iglaste / krzew / żywopłot", lambda c, p: (S.tree(c, p + (-17, 0), 11, conifer=True),
+                                                            S.shrub(c, p + (-3, 0), 6),
+                                                            S.hedge(c, [p + (6, 0), p + (26, 0)], 4)))
+    cell("Trawnik / kostka / deska", lambda c, p: (S.lawn(c, box(p[0] - 27, p[1] - 7, p[0] - 10, p[1] + 7), 30,
+                                                          outline=True),
+                                                   S.paving(c, box(p[0] - 8, p[1] - 7, p[0] + 8, p[1] + 7)),
+                                                   S.paving(c, box(p[0] + 10, p[1] - 7, p[0] + 27, p[1] + 7), "deska")))
+    cell("Słup en. / oświetl. / hydrant / studzienka", lambda c, p: (S.pole(c, p + (-20, 0), s_mm=3),
+                                                                     S.pole(c, p + (-10, 0), "osw", s_mm=3),
+                                                                     S.hydrant(c, p + (2, 0), 4.0),
+                                                                     S.manhole(c, p + (14, 0), 4.0, "Sk")))
+    cell("Złącze ZK / skrzynka", lambda c, p: (S.cable_box(c, p + (-10, -3), 0, 12, 4.5, "ZK"),
+                                               S.utility_box(c, p + (10, -3), 0, 9, 4, "SW")))
+    cell("Granica działki, punkty graniczne", lambda c, p: S.plot_boundary(c, [p + (-24, -6), p + (20, -6),
+                                                                               p + (18, 6)], closed=False,
+                                                                           point_labels=["12", "13", "14"]))
+    cell("Linia zabudowy", lambda c, p: S.building_line(c, p + (-26, -2), p + (26, -2),
+                                                         "nieprzekraczalna linia zabudowy"))
+    cell("Warstwice / pkt wysokościowe", lambda c, p: (S.contours(c, [([p + (-26, -7), p + (-8, -3), p + (6, -6)],
                                                                          101.5)], label_every=20),
-                                                       S.spot_height(c, p + (8, 2), 101.43),
-                                                       S.spot_height(c, p + (-12, 3), 101.65, existing=False)))
-    cell("Brama przesuwna / furtka", lambda c, p: (S.gate(c, p + (-18, -3), p + (-2, -3)),
-                                                   S.gate(c, p + (4, -4), p + (12, -4), "furtka")))
+                                                       S.spot_height(c, p + (10, 3), 101.43),
+                                                       S.spot_height(c, p + (-16, 4), 101.65, existing=False)))
+    cell("Brama przesuwna / furtka", lambda c, p: (S.gate(c, p + (-24, -4), p + (-2, -4)),
+                                                   S.gate(c, p + (6, -6), p + (18, -6), "furtka")))
 
     # rozmieszczenie siatki symboli
     top = lg[1] - 10.0
     sh.text((x0 + 8.0, top), "SYMBOLE GRAFICZNE (PN-B-01025, PN-EN 60617, PN-EN ISO 10628, PN-EN ISO 11091)", 3.5,
             style="bold", layer="R-LEGENDA")
-    cw, ch = 60.0, 24.0
+    cw, ch = 66.0, 29.0
     ncol = int((x1 - x0 - 16.0) // cw)
     for i, (title, fn) in enumerate(cells):
         r, cc = divmod(i, ncol)
         cx = x0 + 8.0 + cc * cw
         cy = top - 4.0 - (r + 1) * ch
-        if cy < sh.tb_rect[3] + 2 and cx + cw > sh.tb_rect[0]:
-            pass
         sh.rect(cx, cy, cx + cw, cy + ch, layer="R-LEGENDA", pen=0.18)
-        sh.text((cx + 1.5, cy + ch - 3.5), title, 1.9, layer="R-LEGENDA")
+        sh.text((cx + 1.5, cy + ch - 3.5), title, 2.0, layer="R-LEGENDA")
         fn(sh, np.array([cx + cw / 2, cy + ch / 2 - 2.5]))
+    ll = lines_legend(sh, lg[2] + 8.0, y1 - 14.0)
+    lettering_sample(sh, lg[2] + 8.0, ll[1] - 10.0, heights=(1.8, 2.5, 3.5, 5.0))
     plot.add_control_marks(sh)
     files = sh.save(OUT / "DEMO-03_legendy")
     return sh, files

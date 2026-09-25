@@ -249,10 +249,10 @@ def layer_callout(c, p_start, p_end, texts: list[str], side: str = "right", h: f
             c.line((B[0], y), (B[0] + sg * W, y))
             c.text((B[0] + sg * 0.8 * k, y + 0.8 * k), s, h, 0.0, "left" if sg > 0 else "right", "baseline")
         if title:
-            c.text((B[0] + sg * 0.8 * k, top[1] + R * 0.35), title, h, 0.0, "left" if sg > 0 else "right", "baseline",
-                   style="bold")
+            c.text((B[0] + sg * 0.8 * k, top[1] + 0.8 * k + h * 1.7 * k), title, h, 0.0,
+                   "left" if sg > 0 else "right", "baseline", style="bold")
     x0, x1 = sorted([B[0], B[0] + sg * W])
-    return (x0, B[1], x1, top[1] + (R if title else 0))
+    return (x0, B[1], x1, top[1] + (0.8 + h * 2.7) * k if title else top[1] + (0.8 + h) * k)
 
 
 # ================================================================================================ stolarka
@@ -410,7 +410,7 @@ def stairs(c, start, direction, width: float, n_steps: int, tread: float, riser:
            first_no: int = 1, cut_after: int | None = None, numbering: bool = True, arrow: bool = True,
            label: bool = True, layer: str = "A-SCHODY", side_label: float = 1.0, show_above: str = "dashed",
            h: float = 2.0, total_steps: int | None = None, arrow_end_extra: float = 0.0,
-           label_at: float | None = None):
+           label_at: float | None = None, label_values: tuple | None = None):
     """Bieg schodów prostych na rzucie (PN-B-01025).
 
     start      — środek krawędzi pierwszego stopnia (początek biegu), direction — kierunek wejścia [° lub wektor],
@@ -476,9 +476,10 @@ def stairs(c, start, direction, width: float, n_steps: int, tread: float, riser:
                 nsteps = total_steps or n_steps
                 s_lab = (end_s + tread * 0.5) / 2.0 if label_at is None else label_at
                 M = S + d * s_lab
-                top = [(f"{nsteps}×", 1.0, 0.0)] + dim_runs(riser, "cm")
+                rv, tv = label_values if label_values else (riser, tread)
+                top = [(f"{nsteps}×", 1.0, 0.0)] + dim_runs(rv, "cm")
                 c.text(M + up * 0.7 * k, None, h, ang, "center", "baseline", runs=top, mask=0.3)
-                c.text(M - up * (0.7 * k + h * k), None, h, ang, "center", "baseline", runs=dim_runs(tread, "cm"),
+                c.text(M - up * (0.7 * k + h * k), None, h, ang, "center", "baseline", runs=dim_runs(tv, "cm"),
                        mask=0.3)
 
 

@@ -332,7 +332,7 @@ def draw_title_block(sh: Sheet, tb: TitleBlock):
     W = TB_WIDTH
     x0 = fx1 - W
     # wysokości wierszy (od góry)
-    rows = {"prac": 12.0, "inw": 7.0, "obj": 10.5, "lok": 9.0, "hdr": 4.5, "os": 7.0, "tyt": 12.0, "dol": 9.0}
+    rows = {"prac": 12.0, "inw": 8.0, "obj": 10.5, "lok": 9.0, "hdr": 4.5, "os": 7.0, "tyt": 12.0, "dol": 9.0}
     n_os = len(tb.osoby)
     Htot = rows["prac"] + rows["inw"] + rows["obj"] + rows["lok"] + rows["hdr"] + n_os * rows["os"] + rows["tyt"] + rows["dol"]
     y1 = fy0 + Htot
@@ -340,7 +340,7 @@ def draw_title_block(sh: Sheet, tb: TitleBlock):
     thin, mid, thick = 0.18, 0.25, 0.5
     with sh.on(ly):
         # białe tło (gdyby rysunek zachodził) i obrys
-        sh.fill(rect_pts(x0, fy0, fx1, y1), ly, "#ffffff", z=27)
+        sh.fill(rect_pts(x0, fy0, fx1, y1), ly, "#ffffff", z=28.5)
         y = y1
         # --- pracownia | stadium | branża
         h = rows["prac"]
@@ -436,7 +436,7 @@ def draw_title_block(sh: Sheet, tb: TitleBlock):
             rh = 5.0
             cw = [(18.0, "REW."), (122.0, "OPIS ZMIANY"), (40.0, "DATA")]
             yy = top
-            sh.fill(rect_pts(x0, top, fx1, top + rh * (len(tb.rewizje) + 1)), ly, "#ffffff", z=27)
+            sh.fill(rect_pts(x0, top, fx1, top + rh * (len(tb.rewizje) + 1)), ly, "#ffffff", z=28.5)
             for row in list(reversed(tb.rewizje)) + [None]:
                 vals = [c[1] for c in cw] if row is None else list(row)
                 xx = x0
@@ -575,3 +575,71 @@ def control_segment(sh: Sheet, pos, length: float = 100.0, h: float = 1.8, verti
             sh.line(P + d * i, P + d * i + n * t, pen=0.18)
         sh.text(P + d * (length + 1.5), f"odcinek kontrolny {int(length)} mm (wydruk 1:1)", h,
                 90.0 if vertical else 0.0, "left", "middle" if not vertical else "top")
+
+
+LINE_LEGEND = [
+    # (opis, rodzaj linii, rola pióra, zastosowanie)
+    ("ciągła bardzo gruba", "CIAGLA", "b_gruba", "kontury przekroju bez kreskowania, pręty zbrojeniowe, izolacje przeciwwodne"),
+    ("ciągła gruba", "CIAGLA", "gruba", "kontury elementów konstrukcyjnych w przekroju (z kreskowaniem)"),
+    ("ciągła średnia", "CIAGLA", "srednia", "warstwy nienośne w przekroju, stolarka, krawędzie widoczne bliskie"),
+    ("ciągła cienka", "CIAGLA", "cienka", "wymiary, linie pomocnicze, odnośniki, wyposażenie, krawędzie widoczne"),
+    ("ciągła bardzo cienka", "CIAGLA", "b_cienka", "kreskowanie materiałów, meble"),
+    ("kreskowa cienka", "KRESKOWA", "cienka", "krawędzie niewidoczne, elementy nad płaszczyzną cięcia"),
+    ("punktowa cienka", "PUNKTOWA", "cienka", "osie konstrukcyjne, osie symetrii"),
+    ("punktowa gruba (krótka)", "PUNKTOWA_KROTKA", "gruba", "ślad płaszczyzny przekroju (końce i załamania)"),
+    ("dwupunktowa", "DWUPUNKTOWA", "gruba", "granice działki, elementy usuwane/projektowane, skrajne położenia"),
+    ("kropkowa", "KROPKOWA", "cienka", "elementy pomocnicze, zakres robót"),
+]
+
+
+def lines_legend(c, x: float, y_top: float, entries=None, scales=(20, 50, 100, 500), h: float = 2.0,
+                 title: str = "RODZAJE I GRUBOŚCI LINII (PN-EN ISO 128-2, grupy linii wg podziałki)",
+                 layer: str = "R-LEGENDA"):
+    """Tabela rodzajów linii: próbka, nazwa, zastosowanie i grubości [mm] w podziałkach ``scales``."""
+    from .styles import pen_mm
+    entries = entries or LINE_LEGEND
+    cols = [("Próbka", 30.0), ("Rodzaj linii", 38.0), ("Zastosowanie", 108.0)] + [(f"1:{s}", 13.0) for s in scales]
+    W = sum(w for _n, w in cols)
+    rh = 5.5
+    with c.on(layer):
+        c.text((x, y_top + 2.0), title, 3.5, style="bold")
+        y = y_top
+        c.fill(rect_pts(x, y - rh, x + W, y), layer, "#eeeeee", z=5)
+        xx = x
+        for n, w in cols:
+            c.text((xx + w / 2, y - rh / 2), n, 1.8, ha="center", va="middle", style="bold")
+            xx += w
+        y -= rh
+        for (name, lt, role, use) in entries:
+            ym = y - rh / 2
+            c.line((x + 3, ym), (x + 27, ym), layer, pen=pen_mm(role, 50), lt=None if lt == "CIAGLA" else lt,
+                   color="#000000", z=22)
+            c.text((x + 31, ym), name, h, va="middle")
+            c.text((x + 69, ym), use, fit(use, 106, h), va="middle")
+            xx = x + 176
+            for sc in scales:
+                c.text((xx + 6.5, ym), fmt.num(pen_mm(role, sc), 2), h, ha="center", va="middle")
+                xx += 13
+            y -= rh
+            c.line((x, y), (x + W, y), pen=0.13)
+        xx = x
+        for n, w in cols[:-1]:
+            xx += w
+            c.line((xx, y), (xx, y_top), pen=0.13)
+        c.rect(x, y, x + W, y_top, pen=0.35)
+    return (x, y, x + W, y_top)
+
+
+def lettering_sample(c, x: float, y_top: float, heights=(1.8, 2.5, 3.5, 5.0, 7.0), layer: str = "R-LEGENDA"):
+    """Próbka pisma (PN-EN ISO 3098: h = wysokość wielkich liter) z polskimi znakami diakrytycznymi."""
+    y = y_top
+    with c.on(layer):
+        c.text((x, y + 2.0), "PISMO (PN-EN ISO 3098; Liberation Sans — metrycznie zgodna z Arial)", 3.5,
+               style="bold")
+        y -= 3.0
+        for hh in heights:
+            y -= hh * 1.6
+            c.text((x, y), f"h = {fmt.num(hh, 1)} mm", 2.0)
+            c.text((x + 22, y), None, hh, runs=[("ĄĆĘŁŃÓŚŹŻ ąćęłńóśźż 0123456789 ±0,00 −1,20 24", 1.0, 0.0),
+                                                 ("5", T.SUP_SIZE, T.SUP_RAISE)])
+    return (x, y - 2.0, x + 200, y_top)

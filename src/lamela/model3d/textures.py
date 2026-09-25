@@ -87,15 +87,16 @@ def texture(name: str, color: str) -> Image.Image:
         edge = (np.abs((y * k) % 1.0) < 0.012) | (np.abs(((x + off) * 1.0) % 1.0) < 0.004)
         rgb[edge] *= 0.8
     elif name == "trawa":
-        a = _noise(n, 1.6, 41)
-        b = _noise(n, 0.6, 42)
-        c = _noise(n, 2.4, 43)
-        rgb = _shade(base, 0.45 * a + 0.35 * b + 0.3 * c, 0.20)
-        rgb[..., 0] *= 1.0 + 0.06 * c
+        a = _noise(n, 0.5, 41)                  # ziarno (źdźbła)
+        b = _noise(n, 1.3, 42)                  # średnia skala
+        c = _noise(n, 2.8, 43)                  # łagodne plamy (mała amplituda — bez widocznego powtarzania)
+        rgb = _shade(base, 0.9 * a + 0.5 * b + 0.35 * c, 0.075)
+        dry = np.clip(a - 1.6, 0, 2)[..., None] * np.array([0.10, 0.07, -0.02])
+        rgb = rgb + dry
     elif name == "lisc":
-        a = _noise(n, 0.8, 51)
-        b = _noise(n, 1.8, 52)
-        rgb = _shade(base, 0.55 * a + 0.45 * b, 0.28)
+        a = _noise(n, 0.7, 51)
+        b = _noise(n, 1.6, 52)
+        rgb = _shade(base, 0.6 * a + 0.4 * b, 0.16)
     elif name == "sedum":
         a = _noise(n, 1.2, 61)
         b = _noise(n, 2.2, 62)

@@ -117,8 +117,8 @@ class LayerDef:
 _L = LayerDef
 LAYERS: dict[str, LayerDef] = {l.name: l for l in [
     # ---- arkusz
-    _L("R-RAMKA", "Ramka arkusza, znaki składania i centrowania", "gruba", aci=7),
-    _L("R-TABLICZKA", "Tabliczka rysunkowa (PN-EN ISO 7200)", "cienka", aci=7),
+    _L("R-RAMKA", "Ramka arkusza, znaki składania i centrowania", "gruba", aci=7, z=29),
+    _L("R-TABLICZKA", "Tabliczka rysunkowa (PN-EN ISO 7200)", "cienka", aci=7, z=29),
     _L("R-OPISY", "Opisy arkusza: tytuły rzutni, uwagi, legendy", "cienka", aci=7),
     _L("R-LEGENDA", "Legenda oznaczeń", "cienka", aci=7),
     _L("R-RZUTNIA", "Obrys rzutni (nie drukowany)", "b_cienka", aci=8, plot=False),

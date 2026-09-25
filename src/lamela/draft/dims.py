@@ -55,7 +55,7 @@ def dim_runs(value_m: float, unit_: str = "cm", prefix: str = "", suffix: str = 
 def dim_chain(c, pts, at, direction="h", layer: str = DIM_LAYER, h: float = 2.5, unit_: str = "cm",
               ext: str = "short", ext_len=(2.0, 1.8), gap_mm: float = 1.5, tick_mm: float = 2.6,
               overshoot_mm: float = 1.8, text_gap_mm: float = 0.7, labels=None, min_seg: float = 1e-4,
-              tick_pen="srednia"):
+              tick_pen="srednia", mask: float = 0.0):
     """Łańcuch wymiarowy.
 
     pts        — punkty wymiarowane (współrzędne płótna); rzutowane na linię wymiarową,
@@ -128,11 +128,11 @@ def dim_chain(c, pts, at, direction="h", layer: str = DIM_LAYER, h: float = 2.5,
                 runs = dim_runs(L, unit_)
             w = T.runs_width(runs, h) * k
             segs.append({"i": i, "t0": tt[i], "t1": tt[i + 1], "L": L, "w": w, "runs": runs})
-        _place_dim_texts(c, segs, foot, d, r, up, sgn, ang, h, text_gap_mm, tick_mm, layer)
+        _place_dim_texts(c, segs, foot, d, r, up, sgn, ang, h, text_gap_mm, tick_mm, layer, mask)
     return {"t": tt, "s": s_line, "d": d, "n": n}
 
 
-def _place_dim_texts(c, segs, foot, d, r, up, sgn, ang, h, gap_mm, tick_mm, layer):
+def _place_dim_texts(c, segs, foot, d, r, up, sgn, ang, h, gap_mm, tick_mm, layer, mask=0.0):
     k = c.k
     clear = 0.6 * k
     tick_clear = (tick_mm / 2.0 * 0.72 + 0.35) * k
@@ -200,7 +200,7 @@ def _place_dim_texts(c, segs, foot, d, r, up, sgn, ang, h, gap_mm, tick_mm, laye
             # odnośnik od środka odcinka do napisu
             mid = foot((s["t0"] + s["t1"]) / 2.0)
             c.line(mid, base + up * (gap_mm * k + h * 1.9 * k - 0.5 * k))
-        c.text(pos, None, h, ang, "center", "baseline", runs=s["runs"])
+        c.text(pos, None, h, ang, "center", "baseline", runs=s["runs"], mask=mask)
 
 
 def dim_h(c, xs, y, y_ref=None, **kw):
@@ -269,7 +269,7 @@ def opening_dim(c, center, wall_dir, width: float, height: float, sill: float | 
 # ================================================================================================ rzędne
 def level_section(c, pt, z: float | None = None, kind: str = "wyk", side: str = "right", text: str | None = None,
                   abs_z: float | None = None, h: float = 2.5, nd: int = 2, stub_mm: float = 5.0,
-                  layer: str = LEVEL_LAYER, size_mm: float = 2.2, stem_mm: float = 1.2):
+                  layer: str = LEVEL_LAYER, size_mm: float = 2.2, stem_mm: float = 1.2, mask: float = 0.4):
     """Rzędna na przekroju/elewacji. ``pt`` — punkt na poziomie (wierzchołek trójkąta).
 
     kind: 'wyk'   — trójkąt zaczerniony (poziom wykończenia, np. posadzki),
@@ -304,6 +304,8 @@ def level_section(c, pt, z: float | None = None, kind: str = "wyk", side: str = 
                 else:
                     c.fill([apex, P + np.array([0, s]), bl], layer, "#000000")
         top = P + np.array([0.0, s])
+        if abs_z is not None:  # miejsce na rzędną bezwzględną pod linią odniesienia (PN-B-01025)
+            stem_mm = max(stem_mm, h + 2.0)
         stem_top = top + np.array([0.0, stem_mm * k])
         c.line(top, stem_top)
         w = T.width(label, h) * k
@@ -312,10 +314,39 @@ def level_section(c, pt, z: float | None = None, kind: str = "wyk", side: str = 
         ref_end = stem_top + np.array([sg * (w + 1.5 * k), 0.0])
         c.line(stem_top, ref_end)
         tx = stem_top + np.array([sg * 0.8 * k, 0.7 * k])
-        c.text(tx, label, h, 0.0, "left" if sg > 0 else "right", "baseline")
+        c.text(tx, label, h, 0.0, "left" if sg > 0 else "right", "baseline", mask=mask)
         if abs_z is not None:
             c.text(stem_top + np.array([sg * 0.8 * k, -0.9 * k]), fmt.level_abs(abs_z), h, 0.0,
-                   "left" if sg > 0 else "right", "top")
+                   "left" if sg > 0 else "right", "top", mask=mask)
+
+
+def levels(c, x: float, items, side: str = "right", h: float = 2.5, nd: int = 2, gap_mm: float = 1.5,
+           layer: str = LEVEL_LAYER, stub_mm: float = 4.0, **kw):
+    """Zestaw rzędnych przy jednej krawędzi przekroju z automatycznym rozsuwaniem: znaczniki, które zachodziłyby
+    na siebie w pionie, są przesuwane do kolejnej "kolumny" (w stronę ``side``).
+    items: [(z, kind) | (z, kind, abs_z)], x — położenie wierzchołków trójkątów pierwszej kolumny."""
+    k = c.k
+    sg = 1.0 if side == "right" else -1.0
+    hgt = (2.2 + 1.2 + 0.7 + h + gap_mm) * k       # wysokość znacznika (trójkąt + trzonek + napis)
+    cols: list[list[tuple]] = []
+    widths: list[float] = []
+    for it in sorted(items, key=lambda t: t[0]):
+        z, kind = it[0], it[1]
+        abs_z = it[2] if len(it) > 2 else None
+        lab = fmt.level(z, nd)
+        w = (T.width(lab, h) + 4.5) * k
+        lo, hi = z, z + hgt + ((h + 0.8) * k if abs_z is not None else 0.0)
+        ci = 0
+        while ci < len(cols) and any(not (hi <= a or lo >= b) for a, b in cols[ci]):
+            ci += 1
+        if ci == len(cols):
+            cols.append([])
+            widths.append(0.0)
+        cols[ci].append((lo, hi))
+        widths[ci] = max(widths[ci], w)
+        xx = x + sg * sum(widths[:ci])
+        level_section(c, (xx, z), z, kind, side, abs_z=abs_z, h=h, nd=nd, layer=layer,
+                      stub_mm=stub_mm if ci == 0 else 0.0, **kw)
 
 
 def level_plan(c, pt, z: float | None = None, style: str = "x", text: str | None = None, h: float = 2.5,

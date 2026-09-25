@@ -1,5 +1,6 @@
 {
- "title": "Korekta Inwestora: „S” z przesuniętych brył, garaż w parterze — panel koncepcji uruchomiony ponownie",
+ "nr": 6,
+ "title": "Pierwszy wariant koncepcji (W1 — wierność szkicowi): elewacja skalibrowana do szkicu, rzuty w opracowaniu",
  "stages": [
   [
    "Analiza szkicu — interpretacja v2 („S” z brył, garaż)",
@@ -52,5 +53,23 @@
   "Warianty W2 (ekonomia/konstrukcja) i W3 (światło/ogród) w toku; potem ocena 3 sędziów i synteza.",
   "Rejestr prawny: gotowe R1, R2, R3, R4, R5, R8; weryfikacja adwersarska w toku.",
   "Silnik rysunkowy i pipeline 3D: iteracje jakości."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/docs/20_koncepcja/W1/elewacja_S.png",
+   "caption": "W1: szkic vs elewacja południowa"
+  },
+  {
+   "path": "/home/user/aihouse/docs/20_koncepcja/W1/rzut_P0.png",
+   "caption": "W1: rzut parteru"
+  },
+  {
+   "path": "/home/user/aihouse/docs/20_koncepcja/W1/rzut_P1.png",
+   "caption": "W1: rzut I piętra"
+  },
+  {
+   "path": "/home/user/aihouse/docs/20_koncepcja/W1/rzut_P2.png",
+   "caption": "W1: rzut II piętra"
+  }
  ]
 }

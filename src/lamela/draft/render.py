@@ -138,10 +138,10 @@ def build_figure(sheet, mode: str = "branze") -> Figure:
             if dash is not None:
                 lc.set_linestyle(dash)
             lc.set_zorder(znext())
-            cp = ctx.clip_patch(clip)
+            ax.add_collection(lc)
+            cp = ctx.clip_patch(clip)   # po add_collection — inaczej osie nadpisują przycięcie
             if cp is not None:
                 lc.set_clip_path(cp)
-            ax.add_collection(lc)
             batch = []
             bkey = None
 
@@ -180,10 +180,10 @@ def build_figure(sheet, mode: str = "branze") -> Figure:
                 color = p.fill if p.fill else prim_color(p, mode)
                 patch = PathPatch(Path(verts, codes), facecolor=color, edgecolor="none", linewidth=0,
                                   antialiased=True, zorder=znext())
+                ax.add_patch(patch)
                 cp = ctx.clip_patch(clip)
                 if cp is not None:
                     patch.set_clip_path(cp)
-                ax.add_patch(patch)
             elif isinstance(p, PText):
                 flush()
                 runs, _box = text_items(p, canvas.k)

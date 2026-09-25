@@ -26,7 +26,7 @@ Rozporządzenie 2020/1609 wydano na podstawie art. 34 ust. 6 pkt 1 PB już w brz
 
 ### 1.2 Prawo budowlane (PB): przepisy o projekcie budowlanym
 * **T.j. Dz.U. 2026 poz. 524**, z późniejszymi zmianami: 2026 poz. 605 (od 21.05.2026), 2026 poz. 646 (od 29.05.2026) i **2026 poz. 1161**. Z ustawy 2026/1161 art. 2 pkt 4, czyli nowy **rozdział 10a „Przepisy epizodyczne”, art. 102a–102c**, obowiązuje od **02.09.2026**; reszta ustawy od 02.10.2026.
-* Ustawa z 04.12.2025 (Dz.U. 2025 poz. 1847) weszła w życie 07.01.2026, a jej art. 1 pkt 1 lit. a i c oraz pkt 3 (definicje budynków w art. 3 pkt 2b–2g, art. 9 ust. 7–8) weszły 20.09.2026. Zmieniła m.in.: **art. 33 ust. 2** (uchylenie pkt 9, nowy pkt 13 o oświadczeniu inwestora dla obiektów zbiorowej ochrony, od 01.01.2026), art. 34 ust. 2a, **art. 29 ust. 4 pkt 3 lit. c** (PV > 6,5 kW), art. 57 ust. 3–4. **Uchyliła art. 56 ust. 1a**, na który powołuje się brief (pkt 5, PV).
+* Ustawa z 04.12.2025 (Dz.U. 2025 poz. 1847) weszła w życie 07.01.2026, a jej art. 1 pkt 1 lit. a i c oraz pkt 3 (definicje w art. 3 pkt 2b–2g i pkt 24–27 PB; art. 9 ust. 3 pkt 3 i ust. 7–8 PB) weszły 20.09.2026 (adnotacja ELI DU/2025/1847). Zmieniła m.in.: **art. 33 ust. 2** (uchylenie pkt 9, nowy pkt 13 o oświadczeniu inwestora dla obiektów zbiorowej ochrony, od 01.01.2026), art. 34 ust. 2a, **art. 29 ust. 4 pkt 3 lit. c** (PV > 6,5 kW), art. 57 ust. 3–4. **Uchyliła art. 56 ust. 1a**, na który powołuje się brief (pkt 5, PV).
 * Treść projektu budowlanego wyznacza **art. 34 ust. 3** PB: projekt składa się z PZT, PAB, PT oraz opinii i uzgodnień. Oświadczenia i kopie uprawnień reguluje **art. 34 ust. 3d–3e**, postać papierową i elektroniczną **art. 34 ust. 3f**.
 * Załączniki do wniosku o PB określa **art. 33 ust. 2** PB, zakres sprawdzenia przez organ **art. 35 ust. 1**.
 * **Sprawdzenie projektu** (projektant sprawdzający) **nie jest wymagane** dla budynków mieszkalnych jednorodzinnych: **art. 20 ust. 3 pkt 2** PB.
@@ -42,7 +42,8 @@ Rozporządzenie 2020/1609 wydano na podstawie art. 34 ust. 6 pkt 1 PB już w brz
   * komunikat ministerstwa z 18.09.2026 (PDOIIB, inzynierbudownictwa.pl);
   * wzór oświadczenia PIIB z 22.09.2026;
   * wątpliwości środowiska: brak klasycznego przepisu przejściowego, status projektów bez oświadczenia.
-  Nazwy ministerstwa w komunikacie **nie zweryfikowałem**. Źródła wtórne podają MRiT, a akty z 2026 r. podpisuje Minister Finansów i Gospodarki.
+  Nazwy ministerstwa w komunikacie **nie zweryfikowałem** w źródle pierwotnym. Źródła wtórne (inzynierbudownictwa.pl, ZPR PDOIIB) przypisują komunikat z 18.09.2026 MRiT (gov.pl), a akty z 2026 r. podpisuje Minister Finansów i Gospodarki. Według cytatu w inzynierbudownictwa.pl (źródło wtórne) komunikat obejmuje WT 2002 oraz rozp. MSWiA z 16.08.1999 w sprawie warunków technicznych użytkowania budynków mieszkalnych (ELI: DU/1999/836 „uznany za uchylony”, uchylenie z DU/2019/1696) i podaje, że projekt nowego rozporządzenia MFiG jest „nadal” w pracach.
+* Uwaga do terminu: art. 102a–102c PB mówi o przepisach „obowiązujących do dnia 19 września 2026 r.” i o okresie „18 miesięcy od dnia 20 września 2026 r.”, ELI podaje datę uchylenia 2026-09-21, a PIIB (22.09.2026, wtórne) pisze, że rozporządzenie utraciło moc „z upływem 20 września 2026 r.”. Dla projektu rozstrzygające jest brzmienie art. 102a (zob. R-03).
 * **Skutek dla R2:** § 20 ust. 1 pkt 11 rozporządzenia o projekcie odsyła wprost do „§ 135 ust. 7–10 i § 147 ust. 5–7” WT z 2002 r. (Dz.U. 2022 poz. 1225). Rozporządzenie 2023/1563 (uzgodnienia ppoż.) odsyła do klasyfikacji pożarowej „określonej w przepisach … wydanych na podstawie art. 7 ust. 2 pkt 1”. Spójne stosowanie tych odesłań zapewnia złożenie oświadczenia z art. 102a.
 
 ### 1.4 Akty powiązane (sprawdzone w ELI; status „obowiązujący”)
@@ -60,7 +61,7 @@ Rozporządzenie 2020/1609 wydano na podstawie art. 34 ust. 6 pkt 1 PB już w brz
 | Rozp. MSWiA z 24.07.2009 w sprawie przeciwpożarowego zaopatrzenia w wodę oraz dróg pożarowych | 2009 nr 124 poz. 1030 | Dane ppoż. w PZT (§ 3, § 12) |
 | Ustawa o drogach publicznych | t.j. 2025 poz. 889 (zm. 2026/815, 982 bez zmian art. 29) | **Art. 29 ust. 3a:** zezwolenie na lokalizację zjazdu dołącza się do wniosku o PB |
 | Ustawa o ochronie ludności i obronie cywilnej | 2024 poz. 1907, zm. 2026 poz. 646 (i 815) | Art. 93–95a: obowiązki dotyczą budynków użyteczności publicznej, kondygnacji podziemnych budynków UP i wielorodzinnych, garaży podziemnych, budowli podziemnych. **Nie dotyczą domu jednorodzinnego** |
-| Ustawa o opłacie skarbowej | t.j. 2025 poz. 1154 (zm. 1795, 1847; 2026 poz. 846, 875, 912) | **Art. 2 ust. 1 pkt 2:** zwolnienie „w sprawach budownictwa mieszkaniowego”; pełnomocnictwo 17 zł (cz. IV zał.) |
+| Ustawa o opłacie skarbowej | t.j. 2025 poz. 1154 (zm. 1795, 1847; 2026 poz. 846, 875, 912, 1206 — art. 14 ustawy 2026/1206 zmienia tylko cz. III ust. 17 załącznika, od 11.01.2027) | **Art. 2 ust. 1 pkt 2:** zwolnienie „w sprawach budownictwa mieszkaniowego”; pełnomocnictwo 17 zł (cz. IV zał.) |
 | Prawo energetyczne | t.j. 2026 poz. 43 (zm. 516, 607, 900) | Art. 7b: treść oświadczenia z art. 33 ust. 2 pkt 10 PB |
 | Ustawa o charakterystyce energetycznej budynków (t.j. 2024 poz. 101) + rozp. MIiR z 27.02.2015 w sprawie metodologii (Dz.U. 2015 poz. 376, zm. 2017/22, 2019/1829, 2023/697) | — | Charakterystyka energetyczna w PT (§ 23 pkt 11) |
 
@@ -99,7 +100,7 @@ URL-e:
 | F11 | Dopuszczalna wspólna oprawa elementów, **z wyjątkiem objęcia wspólną oprawą PT w postaci elektronicznej**. Wspólna oprawa elektroniczna = jeden plik | RZF § 5 ust. 3–4 | U-RZF | TAK | PT elektroniczny zawsze w osobnych plikach |
 | F12 | Plik projektu elektronicznego podpisuje każda osoba opracowująca lub sprawdzająca daną część „w zakresie objętym plikiem”: **kwalifikowanym podpisem elektronicznym, podpisem osobistym albo podpisem zaufanym** | RZF § 7 ust. 4a; § 1 pkt 1 | U-RZF | TAK | Pola podpisów w szablonie pozostają do uzupełnienia; nie fabrykować danych |
 | F13 | PZT w postaci elektronicznej: mapa (lub jej kopia) może być **wektorowa lub rastrowa** | RZF § 15 ust. 1a | U-RZF | TAK | — |
-| F14 | Zakres projektu uwzględnia stopień skomplikowania, specyfikę obiektu, **warunki ochrony ppoż.** oraz, zależnie od przeznaczenia, warunki dla osób ze szczególnymi potrzebami i **ochronę ludności** (obiekty zbiorowej ochrony) | RZF § 3 ust. 1 (brzmienie 2026/597); PB art. 34 ust. 2, 2a | U-597, U-PB | TAK | Dla domu jednorodzinnego dostępność i ochrona ludności: „nie dotyczy” (A12, A13) |
+| F14 | Zakres projektu uwzględnia stopień skomplikowania, specyfikę obiektu, **warunki ochrony ppoż.** oraz, zależnie od przeznaczenia, warunki dla osób ze szczególnymi potrzebami i **ochronę ludności** (obiekty zbiorowej ochrony) | RZF § 3 ust. 1 (brzmienie 2026/597); PB art. 34 ust. 2, 2a | U-597, U-PB | TAK | Dla domu jednorodzinnego dostępność i ochrona ludności: „nie dotyczy” (A10, A11, A17; Z08, Z27, A23, P13, W08) |
 | F15 | Projekt określa **sposób spełnienia wymagań podstawowych art. 5 ust. 1 PB** | RZF § 3 ust. 2 | U-RZF | TAK | Opis techniczny odnosi się do art. 5 ust. 1 pkt 1 lit. a–g |
 | F16 | Oznaczenia graficzne i literowe **wg PN z zał. nr 2 RZF lub objaśnione w legendzie**; wymiarowanie wg PN z zał. nr 2. Zał. 2: PN-EN ISO 4157-1, -2, -3; PN-EN ISO 6284; PN-EN ISO 11091; PN-B-01025; PN-B-01027; **PN-B-01029**; PN-EN ISO 5261; PN-EN ISO 2553; PN-EN ISO 5845-1; (§ 12) **PN-ISO 9836**. „Stosuje się najnowszą normę opublikowaną w języku polskim” | RZF § 9 ust. 1; zał. 2 | U-RZF | TAK | Wydania norm: PN-ISO 9836:**2022-07** (wersja polska; PKN, źródło wtórne). Wydania pozostałych (np. PN-B-01025:2004, PN-B-01027:2002, PN-B-01029:2000, sklep PKN): **NIEZWERYFIKOWANE** co do „najnowszego wydania PL” |
 | F17 | Część rysunkowa zapewnia **jednoznaczne odczytanie** projektu (oznaczenia + wyjaśnienia opisowe) | RZF § 9 ust. 1 pkt 1 | U-RZF | TAK | — |
@@ -120,7 +121,7 @@ URL-e:
 | T06 | Za dużo osób, aby zmieścić je na 1 stronie A4: dane autorów w załączniku do strony tytułowej | RZF § 7 ust. 4 | U-RZF | TAK | — |
 | T07 | Spis treści wylicza zawartość **części opisowej, rysunkowej i dokumentów dołączonych, z numerami stron** | RZF § 7 ust. 5 | U-RZF | TAK | Generować automatycznie |
 | T08 | Oprawa wielotomowa: strona tytułowa i spis treści **dla każdego tomu**, na stronie tytułowej **nr tomu i łączna liczba tomów** danego elementu; identyfikatory działek na stronie tytułowej 1. tomu | RZF § 7 ust. 6 | U-RZF | TAK | — |
-| T09 | Wspólna oprawa: dopuszczalny **łączny spis treści** (ze spisem załączników); identyfikatory działek na stronie tytułowej PZT (albo PAB). **Łączny spis nie obejmuje PT** | RZF § 7 ust. 7–8 | U-RZF | TAK | — |
+| T09 | Wspólna oprawa: dopuszczalny **łączny spis treści** (ze spisem załączników); identyfikatory działek na stronie tytułowej PZT (na stronie PAB tylko wtedy, gdy PZT nie jest wymagany). **Łączny spis nie obejmuje PT** | RZF § 7 ust. 7–8 | U-RZF | TAK | — |
 | T10 | **Kolejna numeracja stron** projektu i załączników, **oddzielna dla każdego elementu** (i dla każdego tomu). W części rysunkowej wystarczy **numer rysunku** | RZF § 6 ust. 1–3 | U-RZF | TAK | — |
 | T11 | **Metryka** na każdym rysunku: (1) nazwa obiektu (co najmniej skrócona); (2) **tytuł, skala, numer rysunku**; (3) **imię i nazwisko projektanta, nr uprawnień**; (4) **data sporządzenia rysunku**; (5) **podpis** (tylko postać papierowa) | RZF § 10 ust. 1 | U-RZF | TAK | Tabliczka rysunkowa generowana z modelu |
 | T12 | Metryka: dane sprawdzającego, jeśli projekt podlega sprawdzeniu | RZF § 10 ust. 2 | U-RZF | TAK | **Nie dotyczy** (art. 20 ust. 3 pkt 2 PB) |
@@ -133,7 +134,7 @@ URL-e:
 | O02 | Kopii (1) i (2) **nie dołącza się**, jeżeli uprawnienia i osoba są wpisane do **centralnego rejestru osób posiadających uprawnienia budowlane (e-CRUB)** | PB art. 34 ust. 3da; art. 12 ust. 7a | U-PB | TAK | Organ sprawdza wtedy dane w rejestrze (art. 35 ust. 1 pkt 4–4a) |
 | O03 | W oświadczeniu (O01 pkt 3) podaje się imiona, nazwiska i nr uprawnień lub decyzji **wszystkich osób biorących udział w opracowaniu** (art. 20 ust. 1 pkt 1a) i sprawdzających | PB art. 34 ust. 3e | U-PB | TAK | Dla PAB i PT z branżami: wyliczyć współautorów |
 | O04 | Ten sam projektant PZT i PAB: dokumenty z art. 34 ust. 3d pkt 1 i 2 można dołączyć **tylko do jednego** z tych projektów. Oprawa wielotomowa: dokumenty z art. 34 ust. 3d **do pierwszego tomu** | RZF § 8 ust. 1–2 | U-RZF | TAK | — |
-| O05 | **Informacja BIOZ** (element „załączniki”): strona tytułowa (nazwa i adres obiektu; inwestor i adres; **imię, nazwisko i adres projektanta** sporządzającego informację) + część opisowa: (1) zakres robót i kolejność realizacji; (2) wykaz istniejących obiektów; (3) elementy zagospodarowania stwarzające zagrożenie; (4) przewidywane zagrożenia (skala, rodzaj, miejsce, czas); (5) sposób instruktażu przed robotami szczególnie niebezpiecznymi; (6) środki techniczne i organizacyjne, w tym komunikacja umożliwiająca ewakuację | PB art. 20 ust. 1 pkt 1b; RZF § 5 ust. 1 pkt 4 lit. c; rozp. BIOZ Dz.U. 2003 nr 120 poz. 1126 § 2 | U-PB, U-RZF, https://api.sejm.gov.pl/eli/acts/DU/2003/1126/text.pdf | TAK | Wskazać roboty na wysokości **> 5,0 m** (§ 6 pkt 1 lit. b rozp. BIOZ). Ich występowanie oznacza, że kierownik budowy musi sporządzić **plan BIOZ** (art. 21a ust. 1a pkt 1 PB). Wykopy: pionowe bez rozparcia > 1,5 m; skarpowe > 3,0 m (§ 6 pkt 1 lit. a) |
+| O05 | **Informacja BIOZ** (element „załączniki”): strona tytułowa (nazwa i adres obiektu; inwestor i adres; **imię, nazwisko i adres projektanta** sporządzającego informację) + część opisowa: (1) zakres robót i kolejność realizacji; (2) wykaz istniejących obiektów; (3) elementy zagospodarowania stwarzające zagrożenie; (4) przewidywane zagrożenia (skala, rodzaj, miejsce, czas); (5) sposób instruktażu przed robotami szczególnie niebezpiecznymi; (6) środki techniczne i organizacyjne, w tym komunikacja umożliwiająca ewakuację | PB art. 20 ust. 1 pkt 1b; RZF § 5 ust. 1 pkt 4 lit. c; rozp. BIOZ Dz.U. 2003 nr 120 poz. 1126 § 2 | U-PB, U-RZF, https://api.sejm.gov.pl/eli/acts/DU/2003/1126/text.pdf | TAK | Wskazać roboty na wysokości **> 5,0 m** (§ 6 pkt 1 lit. b rozp. BIOZ). Ich występowanie oznacza, że kierownik budowy musi sporządzić **plan BIOZ** (art. 21a ust. 1a pkt 1 PB). Wykopy: pionowe bez rozparcia > 1,5 m; skarpowe > 3,0 m (§ 6 pkt 1 lit. a). Roboty z użyciem dźwigów (§ 6 pkt 1 lit. f), jeśli montaż prefabrykatów lub stali dźwigiem |
 | O06 | Element „załączniki” obejmuje też **opinie, uzgodnienia, pozwolenia i inne dokumenty z art. 33 ust. 2 pkt 1 PB** oraz oświadczenie zarządcy drogi (tylko droga krajowa lub wojewódzka) | RZF § 5 ust. 1 pkt 4 lit. a–b; PB art. 34 ust. 3 pkt 4–5 | U-RZF, U-PB | TAK | Droga gminna: oświadczenie zarządcy „nie dotyczy”. Zjazd: zob. W06 |
 | O07 | **Odstępstwo (art. 9 PB)** lub zgoda na rozwiązania zamienne ppoż. (art. 6a ust. 2 ustawy o ochronie ppoż.), jeśli wydane: informacja w PAB, postanowienie dołączone | RZF § 20 ust. 2; PB art. 34 ust. 3 pkt 2 lit. j | U-RZF, U-PB | TAK | Zakładamy brak odstępstw |
 
@@ -158,7 +159,7 @@ URL-e:
 
 | ID | Wymaganie | Podstawa | URL | Pierwotne? | Uwagi |
 |---|---|---|---|---|---|
-| Z11 | Sporządza się **na aktualnej mapie do celów projektowych lub jej kopii** | RZF § 15 ust. 1; PB art. 34 ust. 3 pkt 1 | U-RZF, U-PB | TAK | Mapa z **klauzulą urzędową** lub oświadczeniem geodety o pozytywnej weryfikacji (PB art. 34b). Opis mapy (tytuł, skala, obręb, nr zgłoszenia prac, kierownik prac z nr uprawnień, układ współrzędnych i wysokości itd.): rozp. 2022/1670 § 33. Budynek ≤ 4 m od granicy: pomiar punktów granicznych (§ 31). Podpis kierownika prac (§ 30 ust. 3) |
+| Z11 | Sporządza się **na aktualnej mapie do celów projektowych lub jej kopii** | RZF § 15 ust. 1; PB art. 34 ust. 3 pkt 1 | U-RZF, U-PB | TAK | Mapa z **klauzulą urzędową** lub oświadczeniem geodety o pozytywnej weryfikacji (PB art. 34b). Opis mapy (tytuł, skala, obręb, nr zgłoszenia prac, kierownik prac z nr uprawnień, układ współrzędnych i wysokości itd.): rozp. 2022/1670 § 33. Budynek ≤ 4 m od granicy: pomiar punktów granicznych (§ 31 ust. 1), jeżeli w zasobie brak danych o położeniu punktów granicznych z dokładnością właściwą dla szczegółów I grupy. Podpis kierownika prac (§ 30 ust. 3) |
 | Z12 | Rysunek określa: (1) **orientację** względem terenów sąsiednich i **stron świata**; (2) **granice działki** | RZF § 15 ust. 2 pkt 1–2 | U-RZF | TAK | Strzałka północy; sąsiedztwo E, W, S |
 | Z13 | (3) **usytuowanie i obrys** istniejących i projektowanych obiektów, **sposób użytkowania**, urządzenia budowlane, **wejścia i wjazdy**, **liczba kondygnacji**, **rzędne charakterystyczne, w tym terenu istniejącego i projektowanego**, **wymiary, odległości od granic, odległości wzajemne** w zakresie niezbędnym do sprawdzenia zgodności z przepisami i ustaleniami | RZF § 15 ust. 2 pkt 3 | U-RZF | TAK | Rzędne w m n.p.m. (PL-EVRF2007-NH) i ±0,00 = … m n.p.m. |
 | Z14 | Te wymiary i odległości **„oznacza się z dokładnością zapisu do 0,01 m”** (dla wartości w pełnych metrach dopuszczalne 1 miejsce po przecinku) | RZF § 15 ust. 3 (od **05.11.2026**; nie stosuje się do wniosków złożonych wcześniej: § 2 ust. 2 rozp. 2026/597) | U-597 | TAK | **Stosować od razu** (bez względu na datę złożenia) |
@@ -171,7 +172,7 @@ URL-e:
 | Z21 | (10) urządzenia i rozwiązania **przeciwpożarowego zaopatrzenia w wodę** (hydranty, punkty poboru) z dojazdami | RZF § 15 ust. 2 pkt 10 | U-RZF | TAK | Pokazać najbliższy hydrant na sieci, jeśli znany (fikcja) |
 | Z22 | (11) **układ sieci i uzbrojenia** z przyłączami (woda, kanalizacja, ciepło, gaz) oraz **sposób odprowadzania wód opadowych** ze **spadkami, przekrojami, rzędnymi, wymiarami i odległościami**, z przyłączami i punktami pomiarowymi, **jeśli objęte projektem** | RZF § 15 ust. 2 pkt 11 | U-RZF | TAK | Deszczówka zawsze (zbiornik, skrzynki, przelew). Przyłącza wg decyzji Z24 |
 | Z23 | (12) **linie i przewody elektryczne i telekomunikacyjne**, miejsca przyłączenia, **złącza**, punkty pomiarowe, jeśli objęte projektem | RZF § 15 ust. 2 pkt 12 | U-RZF | TAK | Złącze kablowo-pomiarowe w linii ogrodzenia (brief) |
-| Z24 | Przyłącza mogą zostać wyłączone z PB. Budowa przyłączy (energia, woda, kanalizacja, gaz, ciepło, telekomunikacja) nie wymaga PB ani zgłoszenia; wymaga **planu sytuacyjnego** na kopii aktualnej mapy zasadniczej lub jednostkowej | PB art. 33 ust. 1a; art. 29 ust. 1 pkt 23; art. 29a ust. 1 | U-PB | TAK | Decyzja projektowa: przyłącza jako odrębne opracowanie (plan sytuacyjny) albo w zakresie PZT |
+| Z24 | Przyłącza mogą zostać wyłączone z PB (art. 33 ust. 1a). Budowa przyłączy (elektroenergetycznych, wodociągowych, kanalizacyjnych, gazowych, cieplnych, telekomunikacyjnych, wodorowych) **nie wymaga PB**; art. 29 ust. 1 pkt 23 kwalifikuje ją do zgłoszenia „z zastrzeżeniem art. 29a”, a art. 29a ust. 1 wymaga **planu sytuacyjnego** na kopii aktualnej mapy zasadniczej lub mapy jednostkowej przyjętej do zasobu. Art. 29a ust. 1–2 nie stosuje się, jeżeli inwestor dokonał zgłoszenia (art. 29a ust. 3; wtedy do zgłoszenia PZT z opisem technicznym instalacji, art. 30 ust. 2a pkt 4 lit. a) | PB art. 33 ust. 1a; art. 29 ust. 1 pkt 23; art. 29a ust. 1–3; art. 30 ust. 2a pkt 4 lit. a | U-PB | TAK | Decyzja projektowa: przyłącza jako odrębne opracowanie (plan sytuacyjny) albo w zakresie PZT |
 | Z25 | (13) podział terenu na części przy realizacji etapowej (§ 16) | RZF § 15 ust. 2 pkt 13; § 16 | U-RZF | TAK | Nie dotyczy (1 etap) |
 | Z26 | (14) położenie sytuacyjno-wysokościowe obiektów liniowych | RZF § 15 ust. 2 pkt 14 | U-RZF | TAK | Nie dotyczy |
 | Z27 | (15) elementy obiektu zbiorowej ochrony (wyjścia, strefy zagruzowania) | RZF § 15 ust. 2 pkt 15 (od 19.05.2026) | U-597 | TAK | Nie dotyczy |
@@ -192,7 +193,7 @@ URL-e:
 | A06 | Przy PU pomieszczenia lub ich części: **h ≥ 2,20 m → 100 %; 1,40 ≤ h < 2,20 m → 50 %; h < 1,40 m → 0 %**. Lokal mieszkalny = wydzielony trwałymi ścianami zespół pomieszczeń do stałego pobytu z pomieszczeniami pomocniczymi. **Powierzchnię całkowitą pomniejsza się o tarasy, balkony i loggie** | RZF § 20 ust. 1 pkt 4 lit. b tiret 3–5 (tiret 5 z 2023/2405) | U-RZF, U-2405 | TAK | — |
 | A07 | c) **wysokość, długość, szerokość, średnica**; d) **liczba kondygnacji**; e) inne dane potrzebne do stwierdzenia zgodności usytuowania z wymaganiami ppoż. | RZF § 20 ust. 1 pkt 4 lit. c–e | U-RZF | TAK | Wysokość wg definicji WT i MPZP (≤ 11,0 m; ≤ 3 kondygnacje) |
 | A08 | **Opinia geotechniczna** i informacja o **sposobie posadowienia** | RZF § 20 ust. 1 pkt 5; PB art. 34 ust. 3 pkt 2 lit. d; rozp. 2012/463 § 7 ust. 1, § 8 | U-RZF, U-PB, https://api.sejm.gov.pl/eli/acts/DU/2012/463/text.pdf | TAK | Opinia **ustala przydatność gruntów i kategorię geotechniczną** (§ 8). Wymagana dla każdej kategorii (§ 7 ust. 1). **Kategoria: zob. A-G** |
-| A-G | Kategoria geotechniczna. **Kat. I** obejmuje „niewielkie obiekty budowlane, o statycznie wyznaczalnym schemacie obliczeniowym w prostych warunkach gruntowych … takie jak: a) **1- lub 2-kondygnacyjne** budynki mieszkalne”. **Kat. II** obejmuje m.in. „fundamenty bezpośrednie lub głębokie”. Dla kat. II **dodatkowo dokumentacja badań podłoża i projekt geotechniczny** | rozp. 2012/463 § 4 ust. 3 pkt 1 lit. a, pkt 2 lit. a; § 7 ust. 2; § 4 ust. 1 i 4 | https://api.sejm.gov.pl/eli/acts/DU/2012/463/text.pdf | TAK | **Brief: „I kategoria”, do korekty.** Budynek 3-kondygnacyjny ze wspornikami i stropami monolitycznymi (schemat statycznie niewyznaczalny) nie spełnia opisu kat. I. Przyjąć **kat. II**; ostatecznie ustala ją opinia i projektant |
+| A-G | Kategoria geotechniczna. **Kat. I** obejmuje „posadawianie niewielkich obiektów budowlanych, o statycznie wyznaczalnym schemacie obliczeniowym w prostych warunkach gruntowych, w przypadku których możliwe jest zapewnienie minimalnych wymagań na podstawie doświadczeń i jakościowych badań geotechnicznych, takich jak: a) **1- lub 2-kondygnacyjne** budynki mieszkalne i gospodarcze”. **Kat. II** obejmuje m.in. „fundamenty bezpośrednie lub głębokie”. Dla kat. II **dodatkowo dokumentacja badań podłoża i projekt geotechniczny** | rozp. 2012/463 § 4 ust. 3 pkt 1 lit. a, pkt 2 lit. a; § 7 ust. 2; § 4 ust. 1 i 4 | https://api.sejm.gov.pl/eli/acts/DU/2012/463/text.pdf | TAK | **Brief: „I kategoria”, do korekty.** Budynek 3-kondygnacyjny ze wspornikami i stropami monolitycznymi (schemat statycznie niewyznaczalny) nie spełnia opisu kat. I. Przyjąć **kat. II**; ostatecznie ustala ją opinia i projektant |
 | A09 | **Liczba lokali mieszkalnych i użytkowych** | RZF § 20 ust. 1 pkt 6; PB art. 34 ust. 3 pkt 2 lit. b | U-RZF, U-PB | TAK | 1 lokal mieszkalny, 0 użytkowych (definicja budynku jednorodzinnego: art. 3 pkt 2a PB) |
 | A10 | Liczba lokali dostępnych dla osób z niepełnosprawnościami | RZF § 20 ust. 1 pkt 7 | U-RZF | TAK | Nie dotyczy (tylko budynki wielorodzinne) |
 | A11 | **Opis dostępności** | RZF § 20 ust. 1 pkt 8 (brzmienie z 2026/597 od 05.11.2026); PB art. 34 ust. 3 pkt 2 lit. h, art. 5 ust. 1 pkt 4 | U-RZF, U-597, U-PB | TAK | **Nie dotyczy** (tylko obiekty użyteczności publicznej i budownictwo wielorodzinne). W opisie podać „nie dotyczy” z podstawą |
@@ -257,11 +258,11 @@ URL-e:
 | W04 | **Oświadczenie o prawie do dysponowania nieruchomością na cele budowlane** (wzór MRPiT 2021) | PB art. 33 ust. 2 pkt 2; art. 32 ust. 4 pkt 2; rozp. Dz.U. 2021 poz. 1170 | U-PB, https://api.sejm.gov.pl/eli/acts/DU/2021/1170/text.pdf | TAK | — |
 | W05 | Decyzja WZ: tylko jeśli wymagana | PB art. 33 ust. 2 pkt 3 | U-PB | TAK | **Nie dotyczy**: teren objęty MPZP (fikcyjna uchwała XII/123/2024) |
 | W06 | **Zezwolenie zarządcy drogi na lokalizację zjazdu** (decyzja): „**dołącza się do wniosku o pozwolenie na budowę**” | ustawa o drogach publicznych art. 29 ust. 1, 3, 3a, 5 (t.j. Dz.U. 2025 poz. 889) | https://api.sejm.gov.pl/eli/acts/DU/2025/889/text.pdf | TAK | Wymagane, jeśli projektuje się nowy zjazd z drogi gminnej 1KDD. Zezwolenie **wygasa po 3 latach**, jeśli zjazdu nie zbudowano. Zarządca drogi uzgadnia PZT zjazdu (art. 29 ust. 3 pkt 2) |
-| W07 | **Oświadczenie projektanta z uprawnieniami instalacyjnymi (cieplne, wentylacyjne, gazowe, wod-kan; art. 14 ust. 1 pkt 4 lit. b PB)** o możliwości podłączenia do **istniejącej sieci ciepłowniczej** (art. 7b Prawa energetycznego), **z klauzulą: „Jestem świadomy(-ma) odpowiedzialności karnej za złożenie fałszywego oświadczenia.”** | PB art. 33 ust. 2 pkt 10; art. 35 ust. 1 pkt 3a lit. b; Prawo energetyczne art. 7b ust. 1, 3 (t.j. Dz.U. 2026 poz. 43) | U-PB, https://api.sejm.gov.pl/eli/acts/DU/2026/43/text.pdf | TAK | **Wymagane** (dom wykorzystuje ciepło do ogrzewania i CWU). Treść: brak sieci ciepłowniczej lub warunków technicznych przyłączenia; źródło indywidualne (PC). Organ sprawdza dołączenie |
+| W07 | **Oświadczenie projektanta z uprawnieniami instalacyjnymi (cieplne, wentylacyjne, gazowe, wod-kan; art. 14 ust. 1 pkt 4 lit. b PB)** o możliwości podłączenia do **istniejącej sieci ciepłowniczej** (art. 7b Prawa energetycznego), **z klauzulą: „Jestem świadomy(-ma) odpowiedzialności karnej za złożenie fałszywego oświadczenia.”** | PB art. 33 ust. 2 pkt 10; art. 35 ust. 1 pkt 3a lit. b; Prawo energetyczne art. 7b ust. 1, 3 (t.j. Dz.U. 2026 poz. 43) | U-PB, https://api.sejm.gov.pl/eli/acts/DU/2026/43/text.pdf | TAK | **Wymagane** (dom wykorzystuje ciepło do ogrzewania i CWU). Treść: brak sieci ciepłowniczej lub warunków technicznych przyłączenia; źródło indywidualne (PC). Gdyby sieć istniała, zwolnienie z obowiązku przyłączenia wymaga źródła indywidualnego o współczynniku nakładu nieodnawialnej energii pierwotnej „nie wyższym niż 0,8” i ≥ 60 % ciepła z OZE, stwierdzonych audytem (Pr. energ. art. 7b ust. 3 pkt 1–2, ust. 3c). Organ sprawdza dołączenie |
 | W08 | Oświadczenie inwestora dotyczące budowli ochronnej lub miejsca doraźnego schronienia | PB art. 33 ust. 2 pkt 13 (od 01.01.2026); ustawa o ochronie ludności art. 93–95 (brzmienie 2026/646) | U-PB, U-1847, https://api.sejm.gov.pl/eli/acts/DU/2026/646/text.pdf | TAK | **Nie dotyczy**: art. 93–95 obejmują budynki UP, kondygnacje podziemne budynków UP i wielorodzinnych, garaże podziemne, budowle podziemne |
 | W09 | **Oświadczenie inwestora o stosowaniu przepisów z art. 7 ust. 2 pkt 1 PB obowiązujących do 19.09.2026** (WT 2002). Jego złożenie przesądza o podstawie PZT, PAB i PT oraz wszystkich decyzji dla zamierzenia. Termin: 18 miesięcy od 20.09.2026 | PB art. 102a ust. 1, 2, 4 (dodany Dz.U. 2026 poz. 1161, od 02.09.2026) | U-1161 | TAK | **Rekomendacja: złożyć razem z wnioskiem** (patrz R-03). Wzór PIIB z 22.09.2026 (źródło wtórne): https://www.piib.org.pl/aktualnosci/informacje-biezace/5981-oswiadczenie-inwestora-o-stosowaniu-dotychczasowych-warunkow-technicznych |
 | W10 | **Pełnomocnictwo** (jeśli inwestor działa przez pełnomocnika) + **opłata skarbowa 17 zł** | Formularz PB-1 pkt 7; ustawa o opłacie skarbowej zał. cz. IV | https://api.sejm.gov.pl/eli/acts/DU/2025/1154/text.pdf | TAK | — |
-| W11 | Opłata skarbowa za pozwolenie na budowę: **zwolnienie** („nie podlega … w sprawach budownictwa mieszkaniowego”) | ustawa o opłacie skarbowej art. 2 ust. 1 pkt 2 | https://api.sejm.gov.pl/eli/acts/DU/2025/1154/text.pdf | TAK | Sprawdzone w t.j. 2025/1154 i zmianach 2026/846, 875, 912 (bez zmian art. 2 ust. 1 pkt 2) |
+| W11 | Opłata skarbowa za pozwolenie na budowę: **zwolnienie** („nie podlega … w sprawach budownictwa mieszkaniowego”) | ustawa o opłacie skarbowej art. 2 ust. 1 pkt 2 | https://api.sejm.gov.pl/eli/acts/DU/2025/1154/text.pdf | TAK | Sprawdzone w t.j. 2025/1154 i zmianach 2026/846, 875, 912, 1206 (bez zmian art. 2 ust. 1 pkt 2 i cz. IV zał.). Pełne brzmienie: „dokonanie innej niż wydanie decyzji o warunkach zabudowy i zagospodarowania terenu czynności urzędowej, wydanie zaświadczenia oraz zezwolenia, w sprawach budownictwa mieszkaniowego” |
 | W12 | Zakres sprawdzenia przez organ: zgodność PZT i PAB z **MPZP**; **zgodność PZT z przepisami, w tym techniczno-budowlanymi**; **kompletność PZT i PAB**; opinie i uzgodnienia; oświadczenia z art. 33 ust. 2 pkt 10 i 13; uprawnienia i przynależność do izby. Termin: **65 dni** | PB art. 35 ust. 1 pkt 1–4a; art. 35 ust. 6 pkt 1 | U-PB | TAK | Organ nie bada zgodności PAB z WT; odpowiada za nią projektant (art. 20 ust. 1 pkt 1) |
 | W13 | Uzgodnienie z **rzeczoznawcą ds. zabezpieczeń ppoż.**: obowiązek m.in. dla budynków z ZL I, II, V; budynków SW, W, WW z ZL III–V; **PV > 50 kW** | rozp. MSWiA Dz.U. 2023 poz. 1563 § 3 ust. 1 pkt 1–13 | https://api.sejm.gov.pl/eli/acts/DU/2023/1563/text.pdf | TAK | **Nie dotyczy**: ZL IV, budynek niski (N), PV ≤ 6,5 kW |
 | W14 | PV: uzgodnienie ppoż. i zawiadomienie PSP dla urządzeń fotowoltaicznych **> 6,5 kW** (reżim instalowania bez PB i zgłoszenia) | PB art. 29 ust. 4 pkt 3 lit. c (brzmienie 2025/1847) | U-PB, U-1847 | TAK | **Brief powołuje uchylony art. 56 ust. 1a** (uchylony przez art. 1 pkt 20 lit. b ustawy 2025/1847). Utrzymać **PV ≤ 6,5 kWp** |
@@ -483,3 +484,103 @@ URL-e:
 - PDOIIB ZPR, komunikat i wątpliwości (18.09.2026): https://zpr.pdl.piib.org.pl/2026/09/18/stare-wt-po-20-wrzesnia-komunikat-mrit-nie-rozwiazuje-wszystkich-watpliwosci/
 - Inżynier Budownictwa (18.09.2026): https://inzynierbudownictwa.pl/nowych-warunkow-technicznych-nie-ma-co-dalej/
 - Rzeczpospolita (07.2026): https://www.rp.pl/nieruchomosci/art44817971-jak-mamy-budowac-po-20-wrzesnia-2026-pyta-branza-ministerstwo-odpowiada-aktualizacja
+
+---
+
+## 6. Weryfikacja niezależna (2026-09-25)
+
+**Weryfikator:** niezależny agent (adwersarz). Wszystkie teksty i metadane pobrałem ponownie z API ELI Sejmu. Nie korzystałem z plików roboczych autora. Pliki: `/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/research/v2/` (`meta_*.json`, `t_*.txt`).
+**Zakres:** 19 kluczowych ustaleń (R2-CF01–CF19) oraz 38 dodatkowych twierdzeń z tabel. Sprawdzałem wartości liczbowe, numery Dz.U., jednostki redakcyjne, statusy i daty wejścia w życie. Razem 57 punktów kontrolnych.
+
+### 6.1 Potwierdzone (źródło pierwotne, tekst aktu lub metadane ELI)
+
+**Rozporządzenie o zakresie i formie projektu (RZF)**
+* **R2-CF01.** Metadane ELI DU/2020/1609:
+  * akty zmieniające: 2021/1169 (01.07.2021), 2021/2280 (25.12.2021), 2023/2405 (01.04.2024), 2026/597 (19.05.2026);
+  * t.j. 2022/1679; IN_FORCE; brak „uchyleń wynikających z”.
+  * 2020/1609 **nie figuruje** na liście „Akty uznane za uchylone” w metadanych DU/2019/1696 (lista obejmuje m.in. 2002/690, 2022/1225, 1999/836, 2013/640).
+  * DU/2023/2405: adnotacja „par. 1 pkt 3 wchodzi w życie z dniem 1 sierpnia 2024 r.”; 2024/473 § 1 pkt 2 (nowy § 3) i § 2a.
+  * DU/2026/597: ogłoszono 04.05.2026. § 3: „po upływie 14 dni” (czyli 19.05.2026), a § 1 pkt 3 lit. b i pkt 4 lit. a „po upływie 6 miesięcy” (czyli 05.11.2026; adnotacja ELI zgodna).
+* **R2-CF02.** RZF § 2, § 2a, § 2b ust. 1–4 („nie może przekraczać 150 MB”), § 5 ust. 1a, 2a, 3, 4, § 5a ust. 1–2, zał. nr 1 (PZT_z … PAB_ZL_z; y = AR, BO, BM, BD, BK, BH, BW, BT, IS, IE, IN, WB; z = rrrr.mm.dd).
+* **R2-CF03.** RZF § 7 ust. 2 pkt 1–4, ust. 4a, § 10 ust. 1 pkt 1–5, § 1 pkt 1. Kategoria I „budynki mieszkalne jednorodzinne” (załącznik do PB).
+* **R2-CF04.** RZF § 9 ust. 3 (1:200 dla obiektów o dużych rozmiarach, 1:100 dla pozostałych), § 9 ust. 5 („nie mniejsze niż 1:500”), zał. nr 2 poz. 1–12 z przypisem „Stosuje się najnowszą normę opublikowaną w języku polskim”. Wydanie PN-ISO 9836:2022-07 zob. 6.3.
+* **R2-CF05.** Dz.U. 2026/597 § 1 pkt 3 lit. b: brzmienie § 15 ust. 3 („z dokładnością zapisu do 0,01 m … jednego miejsca po przecinku”) oraz § 2 ust. 2 i § 3.
+* **R2-CF06.** Dz.U. 2023/2405 § 1 pkt 1–2 (brzmienie § 14 pkt 4 lit. a z loggiami i tiret piąte w § 20 ust. 1 pkt 4 lit. b); RZF § 20 ust. 1 pkt 4 lit. b tiret 1–4 (2,20 m → 100 %, 1,40–2,20 m → 50 %, < 1,40 m → 0 %).
+* **R2-CF07.** RZF § 20 ust. 1 pkt 1–13, ust. 2; § 21 pkt 1 lit. a–c; odesłanie w § 20 ust. 1 pkt 11 do „§ 135 ust. 7–10 i § 147 ust. 5–7” WT (Dz.U. 2022 poz. 1225); PB art. 34 ust. 3 pkt 2 lit. a–j.
+* **R2-CF08.** RZF po zmianie 2026/597 (§ 3 ust. 1 pkt 2, § 14 pkt 6a, § 15 ust. 2 pkt 15, § 20 ust. 1 pkt 8 i 14, § 21 pkt 3, § 23 pkt 12); PB art. 34 ust. 3 pkt 2 lit. h (art. 5 ust. 1 pkt 4); ustawa o ochronie ludności:
+  * art. 93 i 94 w brzmieniu 2026/646 art. 1 pkt 17 (budynki UP; kondygnacje podziemne budynków UP i wielorodzinnych; garaże podziemne);
+  * art. 95 (budowle podziemne transportowe; t.j. 2024/1907);
+  * art. 95a (2026/646 art. 1 pkt 18).
+* **R2-CF09.** Dz.U. 2023/2405 § 1 pkt 3, dosłownie: „… budynku mieszkalnego jednorodzinnego z dwoma lokalami, budynku mieszkalnego jednorodzinnego w zabudowie szeregowej lub bliźniaczej lub budynku mieszkalnego wielorodzinnego”.
+* **R2-CF10.** RZF § 23 pkt 1–11 (+ pkt 12 z 2026/597), § 24 pkt 1–4; PB art. 34 ust. 3 pkt 3 lit. a–e, ust. 3c.
+
+**Geotechnika, oświadczenia, BIOZ, wniosek**
+* **R2-CF11.** Rozp. 2012/463 (IN_FORCE): § 4 ust. 1, 3 pkt 1 lit. a, pkt 2 lit. a, ust. 4; § 7 ust. 1–3; § 8; § 9; § 10 pkt 1–10. Uwaga: przepis nie „nakazuje” kat. II dla budynku 3-kondygnacyjnego. Kategorię ustala opinia (§ 4 ust. 1) i projektant (§ 4 ust. 4). Zaliczenie do kat. II to **uzasadniona interpretacja**, nie wymóg literalny. Plik tak ją przedstawia (A-G, R-07).
+* **R2-CF12.** PB (t.j. 2026/524) art. 34 ust. 3d pkt 1–3, ust. 3da pkt 1–2, ust. 3e pkt 1–2; art. 12 ust. 7a; RZF § 8 ust. 1–2.
+* **R2-CF13.** PB art. 20 ust. 3 pkt 2 („budynki mieszkalne jednorodzinne”); RZF § 7 ust. 3, § 10 ust. 2.
+* **R2-CF14.** PB art. 20 ust. 1 pkt 1b, art. 21a ust. 1a pkt 1–2 i ust. 2; RZF § 5 ust. 1 pkt 4 lit. c; rozp. BIOZ 2003/1126:
+  * § 2 ust. 2 pkt 1–3 i ust. 3 pkt 1–6;
+  * § 6 pkt 1 lit. a (wykopy pionowe bez rozparcia 1,5 m, skarpowe 3,0 m) i lit. b („ponad 5,0 m”).
+* **R2-CF15.** DU/2026/255 (rozp. MFiG z **17.02.2026**; ogłoszone 03.03.2026, w życie 04.03.2026):
+  * § 2 (stosuje się do wniosków składanych od dnia wejścia w życie);
+  * § 3 (uchyla 2021/410; ELI: 2021/410 „uchylony”, 2026-03-04);
+  * treść formularza (pkt 1–8, załączniki w pkt 7).
+  PB art. 33 ust. 2 pkt 1–2, ust. 2c; art. 42 ust. 1 pkt 1 lit. a i pkt 4.
+* **R2-CF16.** PB art. 33 ust. 2 pkt 10 (pełna klauzula), art. 35 ust. 1 pkt 3a lit. b; art. 14 ust. 1 pkt 4 lit. b (cieplne, wentylacyjne, gazowe, wodociągowe i kanalizacyjne); Pr. energetyczne (t.j. 2026/43) art. 7b ust. 1 i 3.
+* **R2-CF17.** Ustawa o drogach publicznych (t.j. 2025/889) art. 29 ust. 1, 3 pkt 2, 3a, 5 („w ciągu 3 lat”). Zmiany po t.j. (2026/815 i 2026/982) nie dotyczą art. 29: 2026/982 zmienia art. 13, 13i, 13k, 13naa i 40a, a 2026/815 dodaje art. 20i.
+* **R2-CF18.** DU/2026/1161:
+  * art. 2 pkt 4 (art. 102a ust. 1–4, 102b, 102c);
+  * art. 5: w życie „po upływie 30 dni od dnia ogłoszenia”, co przy ogłoszeniu 01.09.2026 daje 02.10.2026; art. 2 pkt 4 „z dniem następującym po dniu ogłoszenia”, czyli 02.09.2026 (adnotacja ELI zgodna).
+  Ustawa o dostępności art. 66 w brzmieniu 2024/1081 („nie dłużej jednak niż przez 84 miesiące”; obejmuje art. 7 ust. 2 i 3 **oraz art. 34 ust. 6 pkt 1** PB); wejście w życie ustawy 20.09.2019 (ELI). ELI DU/2002/690: „uznany za uchylony”, 2026-09-21.
+* **R2-CF19.** PB art. 29 ust. 4 pkt 3 lit. c (PV > 6,5 kW; brzmienie z 2025/1847 art. 1 pkt 6 lit. d, przypis 40 t.j.); art. 56 ust. 1a „(uchylony)” przez art. 1 pkt 20 lit. b ustawy 2025/1847 (przypis 81 t.j.); rozp. 2023/1563 § 3 ust. 1 pkt 1–13 (pkt 12: PV „większej niż 50 kW”).
+
+**Pozostałe twierdzenia z tabel**
+* Procedura PB:
+  * PB art. 33 ust. 2 pkt 13 (dodany przez 2025/1847 art. 1 pkt 10 lit. b, w życie 01.01.2026, przypis 55 t.j.);
+  * art. 34 ust. 2a (od 01.01.2026), ust. 3f, ust. 4a–4b, ust. 5;
+  * art. 34b (mapa z klauzulą lub oświadczeniem wykonawcy);
+  * art. 35 ust. 1 pkt 1–4a, ust. 6 pkt 1 (**65 dni**);
+  * art. 41 ust. 4a pkt 2, ust. 4aa;
+  * art. 42 ust. 1 pkt 1, 2 lit. a, pkt 4;
+  * art. 57 ust. 1 pkt 1a, 2, 4, 5, 6, 6a i ust. 4 zd. 2 (dodane przez 2025/1847 art. 1 pkt 21 lit. b);
+  * art. 29a ust. 1; art. 33 ust. 1a.
+* Mapa do celów projektowych: rozp. 2022/1670 § 30 ust. 3, § 31 ust. 1, § 32 ust. 1, § 33 pkt 1–11.
+* Uzgodnienia ppoż.: 2023/1563 § 2 pkt 1 (odesłanie do przepisów z art. 7 ust. 2 pkt 1) i § 4 ust. 1 pkt 2 lit. a–m, pkt 3 lit. a–n.
+* Woda i drogi pożarowe: 2009/1030 § 3 ust. 2 („nie mniejszej jednak niż 10 dm³/s”) i ust. 3 (5 dm³/s do 2000 mieszkańców); § 12 ust. 1 pkt 2 (ZL IV tylko SW, W, WW).
+* Opłata skarbowa: art. 2 ust. 1 pkt 2; cz. IV zał. (pełnomocnictwo **17 zł**).
+* Statusy i daty wzorów formularzy (ELI):
+  * 2021/1170 (od 01.07.2021);
+  * 2026/254 (od 04.03.2026);
+  * 2026/272 (od 06.03.2026);
+  * 2026/223 (od 27.02.2026).
+* Pozostałe akty:
+  * t.j. Prawa energetycznego 2026/43, zm. 516, 607, 900;
+  * charakterystyka energetyczna: t.j. 2024/101; metodologia 2015/376, zm. 2017/22, 2019/1829, 2023/697;
+  * ochrona ludności 2024/1907, zm. 2026/646, 2026/815 (oraz 2025/1705 od 01.01.2027).
+* Nowelizacje PB po t.j. 2026/524 (ELI): 2026/605, 2026/646, a do tego 2026/1161.
+
+### 6.2 Poprawione (było → jest)
+
+| # | Miejsce | Było | Jest | Źródło |
+|---|---|---|---|---|
+| 1 | § 1.2, ustawa 2025/1847 | art. 1 pkt 1 lit. a i c oraz pkt 3 = „definicje budynków w art. 3 pkt 2b–2g, art. 9 ust. 7–8” | = definicje w art. 3 pkt 2b–2g **i pkt 24–27** (lit. c) oraz art. 9 **ust. 3 pkt 3** i ust. 7–8 | https://api.sejm.gov.pl/eli/acts/DU/2025/1847/text.pdf (art. 1 pkt 1 lit. c, pkt 3 lit. a–b) |
+| 2 | F14, uwagi | odsyłacze „(A12, A13)” wskazywały charakterystykę ekologiczną i analizę systemów alternatywnych, a nie dostępność i ochronę ludności | „(A10, A11, A17; Z08, Z27, A23, P13, W08)” | spójność wewnętrzna pliku; RZF § 20 ust. 1 pkt 7–8, 14 |
+| 3 | T09 | identyfikatory działek „na stronie tytułowej PZT (albo PAB)” | na stronie PAB **tylko gdy PZT nie jest wymagany** | RZF § 7 ust. 7 pkt 2 lit. a–b, https://api.sejm.gov.pl/eli/acts/DU/2022/1679/text.pdf |
+| 4 | Z24 | przyłącza: „nie wymaga PB ani zgłoszenia; wymaga planu sytuacyjnego” | nie wymaga PB. Art. 29 ust. 1 pkt 23 (nagłówek ust. 1: „wymaga zgłoszenia”) „z zastrzeżeniem art. 29a”. Art. 29a ust. 1: plan sytuacyjny. Art. 29a ust. 3: ust. 1–2 nie stosuje się, gdy dokonano zgłoszenia (wtedy PZT z opisem, art. 30 ust. 2a pkt 4 lit. a). Dodano przyłącza wodorowe | https://api.sejm.gov.pl/eli/acts/DU/2026/524/text.pdf (art. 29 ust. 1, art. 29a, art. 30 ust. 2a) |
+| 5 | A-G, cytat § 4 ust. 3 pkt 1 lit. a | „… takie jak: a) 1- lub 2-kondygnacyjne budynki mieszkalne” (cytat skrócony) | pełny cytat „… budynki mieszkalne **i gospodarcze**” z pominiętą częścią zdania | https://api.sejm.gov.pl/eli/acts/DU/2012/463/text.pdf |
+| 6 | Z11 | „Budynek ≤ 4 m od granicy: pomiar punktów granicznych (§ 31)” (bezwarunkowo) | pomiar wymagany, **jeżeli w zasobie brak danych** z dokładnością dla szczegółów I grupy | https://api.sejm.gov.pl/eli/acts/DU/2022/1670/text.pdf § 31 ust. 1 |
+| 7 | § 1.4, opłata skarbowa | lista zmian bez 2026/1206 | dodano 2026/1206 (art. 14: zmiana tylko cz. III ust. 17 zał., od 11.01.2027) | ELI DU/2006/1635 (Akty zmieniające); https://api.sejm.gov.pl/eli/acts/DU/2026/1206/text.pdf |
+
+Uzupełnienia bez zmiany sensu (nie są poprawką błędu):
+* W07: warunki z art. 7b ust. 3 Pr. energ. (≤ 0,8 i ≥ 60 % OZE, audyt);
+* O05: § 6 pkt 1 lit. f (dźwigi);
+* W11: pełne brzmienie art. 2 ust. 1 pkt 2;
+* § 1.3: treść komunikatu według źródła wtórnego oraz rozbieżność dat 19/20/21.09.2026.
+
+### 6.3 Niemożliwe do weryfikacji na źródłach pierwotnych
+
+* **Komunikat ministerstwa z 18.09.2026:** autor (MRiT czy MFiG) i dokładna treść. Znany tylko ze źródeł wtórnych (inzynierbudownictwa.pl, ZPR PDOIIB). Te strony istnieją i przypisują komunikat MRiT. Strony gov.pl nie weryfikowano.
+* **Wzór oświadczenia PIIB z 22.09.2026:** strona istnieje (HTTP 200, data publikacji 22.09.2026). Treść wzoru nie ma mocy normatywnej.
+* **Wydania norm z zał. 2 RZF** (w tym PN-ISO 9836:2022-07): sklep.pkn.pl odrzucił połączenie TLS (curl 60). Pozostaje NIEZWERYFIKOWANE (R-05).
+* **Przyczyna daty 2026-09-21 w ELI** wobec „do dnia 19 września 2026 r.” w art. 102a PB: nierozstrzygalne na podstawie tekstów (R-03).
+* **Limity techniczne e-Budownictwa** (R-13), praktyka organów co do aktualności mapy (R-12), treść PN-ISO 9836 (R-06): bez zmian, NIEZWERYFIKOWANE.

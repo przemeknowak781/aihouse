@@ -206,8 +206,9 @@ def wall_layers(cs: CutSet, p1, p2, layers, justification: str = "konstr", prior
     return items
 
 
-def opening_rect(p1, p2, a: float, b: float, depth: float = 2.0):
-    """Prostokąt otworu w ścianie p1→p2 (oś) od odległości a do b wzdłuż ściany (przecina całą grubość)."""
+def opening_rect(p1, p2, a: float, b: float, depth: float = 0.35):
+    """Prostokąt otworu w ścianie p1→p2 (oś) od odległości a do b wzdłuż ściany; ``depth`` — zasięg w obie strony
+    od osi (musi objąć wszystkie warstwy ściany, ale nie sięgać ścian sąsiednich)."""
     A, B = np.asarray(p1, float), np.asarray(p2, float)
     d = unit(B - A)
     n = perp(d)

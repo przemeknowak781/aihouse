@@ -253,6 +253,13 @@ class _Builder:
         return out
 
     def add_mesh(self, base_id, kind, V, Fc, material, level=None, group="otoczenie", smooth=False, **meta):
+        V = np.asarray(V, float)
+        Fc = np.asarray(Fc, int)
+        if meta.pop("closed", True) and len(Fc):
+            t = V[Fc]
+            vol = float(np.einsum("ij,ij->i", t[:, 0], np.cross(t[:, 1], t[:, 2])).sum()) / 6.0
+            if vol < 0:
+                Fc = Fc[:, ::-1]
         md = dict(meta)
         md["group"] = group
         mm = Mesh(id=self._uid(base_id), kind=kind, vertices=np.asarray(V, float), faces=np.asarray(Fc, int),
@@ -554,6 +561,7 @@ class _Builder:
             poly = make_polygon(st["obrys"], st.get("otwory") or [])
             mat = str(st.get("mat") or self.beton)
             self.add(sid, "slab", poly, st["wierzch"] - st["grubosc"], st["wierzch"], mat, lvl, part="plyta")
+            self._soffit(sid, poly, st["wierzch"] - st["grubosc"], nad, lvl, None)
             # warstwy podłogi nad płytą
             pk = st.get("podloga") or (m.kondygnacja(lvl).podloga if lvl in self.kondy and lvl != nad else None)
             p = m.przegroda(str(pk)) if pk else None
@@ -590,6 +598,7 @@ class _Builder:
         mat = slab_mat or (prz.warstwy[prz.idx_konstr].mat if prz is not None and prz.ma_oznaczona_konstr else self.beton)
         spod = wierzch - grubosc
         self.add(rid, kind_slab, obrys_poly, spod, wierzch, mat, lvl, group=group, part="plyta")
+        self._soffit(rid, obrys_poly, spod, below_kond, lvl, group)
         lays_up = prz.warstwy_nad_konstr() if prz is not None else []
         d_up = sum(x.d for x in lays_up)
         top = wierzch + d_up
@@ -626,6 +635,18 @@ class _Builder:
             if not region.is_empty:
                 self._stack_layers(rid, region, spod, lays_dn, below_kond, kind=kind_slab, part="sufit", group=group)
         return top
+
+    def _soffit(self, rid, poly, spod, below_kond, lvl, group):
+        """Podsufitka (tynk elewacyjny) pod częścią płyty wysuniętą poza obrys kondygnacji niżej."""
+        if below_kond not in self.kondy:
+            outline = Polygon()
+        else:
+            outline = self.m.obrys_kondygnacji(below_kond)
+        full = Polygon(poly.exterior) if isinstance(poly, Polygon) else poly
+        reg = clean_geom(full.difference(outline.buffer(0.02, join_style=2)) if not outline.is_empty else full,
+                         min_area=0.05)
+        if not reg.is_empty:
+            self.add(rid, "slab", reg, spod - 0.015, spod, self._facade_finish(), lvl, group=group, part="podsufitka")
 
     def _facade_finish(self) -> str:
         for s in self.m.sciany():
@@ -667,7 +688,7 @@ class _Builder:
                     below = k.id
                     break
             self._roof_like(wid, poly, w["wierzch"], w["grubosc"], prz, w.get("attyka"), "canopy", lvl, lvl,
-                            below_kond=None, slab_mat=w.get("mat"))
+                            below_kond=below, slab_mat=w.get("mat"))
 
     # ---------------- konstrukcja ----------------
     def _slupy(self):
@@ -1043,7 +1064,7 @@ class _Builder:
             cc = np.asarray(poly.exterior.coords)[:, :2]
             hz = self.hs(cc)
             shell = clean_geom(poly.difference(poly.buffer(-0.04, join_style=2)))
-            self.add("ODPADY", "fence", shell, float(hz.min()) - 0.05, float(hz.max()) + 1.35, "OGRODZENIE", None,
+            self.add("ODPADY", "fence", shell, float(hz.min()) - 0.05, float(hz.max()) + 1.35, "OSLONA_DREWNO", None,
                      group="otoczenie", part="oslona_smietnikowa")
             self.add("ODPADY", "pavement", poly, float(hz.min()) - 0.15, float(hz.max()) + 0.04, "NAW_PLYTY", None,
                      group="otoczenie")
@@ -1076,9 +1097,23 @@ class _Builder:
         else:
             rx = sr / 2 * (0.8 if birch else 1.0)
             ch = H - trunk_h
-            V, Fc = _blob(x, y, z + trunk_h + ch / 2, rx, rx, ch / 2 * 1.02, rng, 2)
-            self.add_mesh(tid, "vegetation", V, Fc, "KORONA_BRZOZA" if birch else "KORONA", part="korona",
-                          gatunek=t.get("gat"), smooth=True)
+            zc = z + trunk_h + ch / 2
+            nb = 6 if not birch else 5
+            Vs, Fs, off = [], [], 0
+            for k in range(nb):
+                if k == 0:
+                    ox, oy, oz, rr = 0.0, 0.0, 0.0, 0.62
+                else:
+                    a = 2 * math.pi * (k - 1) / (nb - 1) + rng.uniform(-0.4, 0.4)
+                    ox, oy = math.cos(a) * rx * 0.42, math.sin(a) * rx * 0.42
+                    oz = rng.uniform(-0.25, 0.3) * ch / 2
+                    rr = rng.uniform(0.5, 0.62)
+                V, Fc = _blob(x + ox, y + oy, zc + oz, rx * rr, rx * rr, ch / 2 * rr * 1.05, rng, 2)
+                Vs.append(V)
+                Fs.append(Fc + off)
+                off += len(V)
+            self.add_mesh(tid, "vegetation", np.vstack(Vs), np.vstack(Fs), "KORONA_BRZOZA" if birch else "KORONA",
+                          part="korona", gatunek=t.get("gat"), smooth=True)
 
     def _shrubs(self, zid, poly, i):
         rng = np.random.default_rng(500 + i)
@@ -1212,7 +1247,7 @@ class _Builder:
             V, Fc, Vg, Fg = _gable_roof(poly, eave, z0 + H, 0.45)
             if V is not None:
                 self.add_mesh(nid, "context", V, Fc, "SASIEDNI_DACH", part="dach")
-                self.add_mesh(nid, "context", Vg, Fg, "SASIEDNI_SCIANA", part="szczyt")
+                self.add_mesh(nid, "context", Vg, Fg, "SASIEDNI_SCIANA", part="szczyt", closed=False)
 
     def _cars_in(self, mid, poly, i):
         mrr = poly.minimum_rotated_rectangle
