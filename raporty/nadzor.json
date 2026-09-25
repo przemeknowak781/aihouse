@@ -1,11 +1,11 @@
 {
- "czas": "2026-09-25 04:34",
+ "czas": "2026-09-25 04:35",
  "aktywni": [
   {
    "id": "a358500c03b62940a",
    "opis": "Build MEP and electrical calc library",
    "idle_min": 0.7,
-   "bez_narzedzi_min": 0.7,
+   "bez_narzedzi_min": 0.8,
    "limity": 0,
    "powody": []
   },
@@ -13,31 +13,23 @@
    "id": "a87415027562c59a6",
    "opis": "Build physics and energy calc library",
    "idle_min": 0.1,
-   "bez_narzedzi_min": 0.1,
-   "limity": 0,
-   "powody": []
-  },
-  {
-   "id": "a7447ed7be6bcdaf1",
-   "opis": "Build document assembly framework",
-   "idle_min": 0.0,
-   "bez_narzedzi_min": 0.1,
+   "bez_narzedzi_min": 0.3,
    "limity": 0,
    "powody": []
   },
   {
    "id": "a27284e7b67190ca8",
    "opis": "Build structural Eurocode calc library",
-   "idle_min": 2.6,
-   "bez_narzedzi_min": 3.8,
+   "idle_min": 4.2,
+   "bez_narzedzi_min": 5.4,
    "limity": 0,
    "powody": []
   },
   {
    "id": "aa7ccab5f3db17a8f",
    "opis": "wf_44634517-034:wariant:W3",
-   "idle_min": 0.1,
-   "bez_narzedzi_min": 0.1,
+   "idle_min": 0.2,
+   "bez_narzedzi_min": 0.3,
    "limity": 0,
    "powody": []
   },
@@ -52,13 +44,13 @@
   {
    "id": "ac86cc1c1bb85cbe9",
    "opis": "wf_a0d51b50-592:weryfikacja:normy",
-   "idle_min": 0.3,
-   "bez_narzedzi_min": 0.3,
+   "idle_min": 0.0,
+   "bez_narzedzi_min": 0.0,
    "limity": 0,
    "powody": []
   }
  ],
  "zakonczeni": 0,
  "zastoje": [],
- "repo_bez_zmian_min": 0.1
+ "repo_bez_zmian_min": 0.3
 }

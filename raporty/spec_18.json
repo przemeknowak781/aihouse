@@ -1,5 +1,6 @@
 {
- "title": "Korekta Inwestora: „S” z przesuniętych brył, garaż w parterze — panel koncepcji uruchomiony ponownie",
+ "nr": 18,
+ "title": "Wszystkie 3 warianty koncepcji gotowe — rusza ocena sędziów; system tomów ukończony",
  "stages": [
   [
    "Analiza szkicu — interpretacja v2 („S” z brył, garaż)",
@@ -55,9 +56,24 @@
   ]
  ],
  "notes": [
+  "NADZÓR (04:35): 6 agentów aktywnych, bez zastojów; najdłuższa bezczynność 4 min; zmiany w repo 0 min temu.",
   "W3 („światło i ogród”) gotowy po restarcie w 30 min: oś widokowa furtka→wejście→hol→jadalnia pod pustką dwukondygnacyjną→ogród, patio poranne od wschodu przy garażu, loggia 1,2 m za lamelami na II piętrze.",
   "Teraz 3 sędziów ocenia W1/W2/W3 (funkcja+przepisy / konstrukcja+energia / wierność szkicowi), potem synteza skryptem parametrycznym.",
   "System składania tomów gotowy: demo TOM I (41 s.) — walidator kompletności: 0 braków, 8 pól „do uzupełnienia”.",
   "Solver mostków 2D zbudowany — trwa podwójna niezależna weryfikacja (numeryka + zgodność z ISO 10211/13788/14683)."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/docs/20_koncepcja/W3/elewacja_S.png",
+   "caption": "W3: elewacja płd. vs szkic"
+  },
+  {
+   "path": "/home/user/aihouse/docs/20_koncepcja/W3/rzut_P0.png",
+   "caption": "W3: rzut parteru (oś widokowa)"
+  },
+  {
+   "path": "/home/user/aihouse/docs/20_koncepcja/W3/przekroj.png",
+   "caption": "W3: przekrój (pustka nad jadalnią)"
+  }
  ]
 }

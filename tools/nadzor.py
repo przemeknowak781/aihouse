@@ -89,8 +89,9 @@ def agenci():
         zak, t_tool, lim, mt = analiza_transkryptu(j)
         # zakończenie agenta Agent-tool potwierdza orkiestrator wpisem do nadzor_ignoruj.txt; heurystyka pomocnicza:
         # ostatni wpis to tekst asystenta i brak zapisu > 3 min
-        zak = zak and (time.time() - mt) > 180
-        wyn.append(dict(id=aid, opis=opis, zrodlo="agent", aktywny=not zak, t_tool=t_tool, limity=lim, mtime=mt))
+        # heurystyka „ostatni wpis = tekst” jest zawodna (agent dzieli pracę tekstem i długo generuje kolejny plik) —
+        # agent jest zakończony WYŁĄCZNIE po wpisie orkiestratora do nadzor_ignoruj.txt (po powiadomieniu o zakończeniu)
+        wyn.append(dict(id=aid, opis=opis, zrodlo="agent", aktywny=True, t_tool=t_tool, limity=lim, mtime=mt))
     # agenci przepływów Workflow
     for wf in SES.glob("workflows/wf_*"):
         if wf.name in ign:

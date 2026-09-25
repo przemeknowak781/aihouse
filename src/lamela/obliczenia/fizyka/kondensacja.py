@@ -138,7 +138,8 @@ class WynikGlaser:
     M_a_max: float
     miesiac_max: int | None
     plaszczyzny: list[int]
-    sd_par_wym: float | None = None      # wymagane s_d paroizolacji (brak kondensacji)
+    sd_par_wym: float | None = None      # wymagane s_d paroizolacji — brak kondensacji (None: > 1500 m)
+    sd_par_wym_dop: float | None = None  # wymagane s_d — kondensacja dopuszczalna (wysycha, M_a ≤ kryterium)
     sd_par_ist: float | None = None
     idx_par: int | None = None
     kryterium_kg_m2: float = 0.5
@@ -289,6 +290,9 @@ def glaser(warstwy: list[WarstwaG], Rsi: float, Rse: float, *, theta_i: float = 
         res = WynikGlaser(kod, nazwa, rola, warstwy, theta_i, _opis(klasa, phi_i, theta_i), xR, xs, th, ps, P, G, MA,
                           list(range(12)), False, True, 0.0, None, [], kryterium_kg_m2=kryterium_kg_m2)
         _uzup_par(res, warstwy)
+        if _licz_sd:
+            res.sd_par_wym = 0.0
+            res.sd_par_wym_dop = 0.0
         return res
     start = next((m for m in range(12) if kond0[m] and not kond0[(m - 1) % 12]), 9)   # wszystkie mies. — od X
     kol = [(start + j) % 12 for j in range(12)]
@@ -321,8 +325,10 @@ def glaser(warstwy: list[WarstwaG], Rsi: float, Rse: float, *, theta_i: float = 
                       True, koniec <= 1e-9, float(tot.max()), mmax + 1, sorted(plaszcz), kryterium_kg_m2=kryterium_kg_m2)
     _uzup_par(res, warstwy)
     if _licz_sd:
-        res.sd_par_wym = wymagane_sd_paroizolacji(warstwy, Rsi, Rse, theta_i=theta_i, klasa=klasa, phi_i=phi_i,
-                                                  theta_e=te, p_e=pe)
+        kw = dict(theta_i=theta_i, klasa=klasa, phi_i=phi_i, theta_e=te, p_e=pe)
+        res.sd_par_wym = wymagane_sd_paroizolacji(warstwy, Rsi, Rse, **kw)
+        res.sd_par_wym_dop = wymagane_sd_paroizolacji(warstwy, Rsi, Rse, kryterium="dopuszczalna",
+                                                      kryterium_kg_m2=kryterium_kg_m2, **kw)
     return res
 
 
@@ -342,10 +348,12 @@ def _uzup_par(res: WynikGlaser, warstwy: list[WarstwaG]):
             res.sd_par_ist = warstwy[res.idx_par].sd
 
 
-def wymagane_sd_paroizolacji(warstwy: list[WarstwaG], Rsi: float, Rse: float, **kw) -> float | None:
-    """Najmniejsze s_d warstwy paroizolacyjnej po ciepłej stronie izolacji (dodanej bez oporu cieplnego), przy którym
-    w żadnym miesiącu nie występuje kondensacja międzywarstwowa. Zwraca s_d [m] (0 — nie wymaga), None — gdy brak
-    izolacji lub nieosiągalne (≥ 1500 m)."""
+def wymagane_sd_paroizolacji(warstwy: list[WarstwaG], Rsi: float, Rse: float, *, kryterium: str = "brak",
+                              kryterium_kg_m2: float = 0.5, **kw) -> float | None:
+    """Najmniejsze s_d warstwy paroizolacyjnej po ciepłej stronie izolacji (istniejącej — zastępowane; brak — dodanej
+    bez oporu cieplnego) spełniające kryterium: 'brak' — w żadnym miesiącu brak kondensacji międzywarstwowej;
+    'dopuszczalna' — kondensat wysycha w cyklu rocznym i M_a,max ≤ kryterium (WT zał. 2 pkt 2.2.5).
+    Zwraca s_d [m] (0 — nie wymaga), None — gdy brak izolacji albo nieosiągalne (> 1500 m)."""
     iz = [i for i, w in enumerate(warstwy) if w.funkcja == "izolacja"]
     if not iz:
         return None
@@ -360,8 +368,8 @@ def wymagane_sd_paroizolacji(warstwy: list[WarstwaG], Rsi: float, Rse: float, **
             ws[j] = WarstwaG(w0.kod, w0.nazwa, w0.funkcja, w0.d, w0.R, sd_add, w0.mu)
         else:
             ws = ws[:pos] + [WarstwaG("PAR", "paroizolacja (wirtualna)", "paroizolacja", 0.0, 0.0, sd_add, None)] + ws[pos:]
-        r = glaser(ws, Rsi, Rse, _licz_sd=False, **kw)
-        return not r.kondensacja
+        r = glaser(ws, Rsi, Rse, _licz_sd=False, kryterium_kg_m2=kryterium_kg_m2, **kw)
+        return (not r.kondensacja) if kryterium == "brak" else r.dopuszczalna
 
     if test(0.0 if not par else 1e-3):
         return 0.0
@@ -465,6 +473,14 @@ def raport_frsi(fr: WynikFRsi, zal: Zalozenia | None = None) -> str:
     return "\n".join(s)
 
 
+def _sd_txt(v):
+    if v is None:
+        return "> 1500 (nieosiągalne)"
+    if v <= 1e-9:
+        return "0 (nie wymaga)"
+    return fmt(v, 1)
+
+
 def raport_glaser(wyniki: Sequence[WynikGlaser], wykresy: dict | None = None, zal: Zalozenia | None = None) -> str:
     s = [naglowek_raportu("Kondensacja międzywarstwowa — metoda Glasera (PN-EN ISO 13788:2013 rozdz. 6)",
                           "PN-EN ISO 13788:2013-05 rozdz. 6; WT § 321 ust. 2, zał. 2 pkt 2.2.4–2.2.5; "
@@ -474,12 +490,13 @@ def raport_glaser(wyniki: Sequence[WynikGlaser], wykresy: dict | None = None, za
                            "występuje kondensacja w żadnym miesiącu (obliczenie iteracyjne)."])]
     rows = []
     for r in wyniki:
-        rows.append([r.kod, r.nazwa[:50], r.opis_wilg[:40], "tak" if r.kondensacja else "nie",
+        rows.append([r.kod, r.nazwa[:50], r.rola, "tak" if r.kondensacja else "nie",
                      fmt(r.M_a_max * 1000, 0), "tak" if r.wysycha else "NIE",
                      fmt(r.sd_par_ist, 1) if r.sd_par_ist is not None else "brak",
-                     (fmt(r.sd_par_wym, 1) if r.sd_par_wym is not None else "—"), ok(r.dopuszczalna)])
-    s.append(tabela_md(["Przegroda", "Nazwa", "Warunki wewn.", "Kondensacja", "M_a,max [g/m²]", "Wysycha",
-                        "s_d paroizol. ist. [m]", "s_d wymagane [m]", "Ocena"], rows, "lllrrrrrl"))
+                     _sd_txt(r.sd_par_wym), _sd_txt(r.sd_par_wym_dop), ok(r.dopuszczalna)])
+    s.append(tabela_md(["Przegroda", "Nazwa", "Rola", "Kondensacja", "M_a,max [g/m²]", "Wysycha",
+                        "s_d paroizol. istn. [m]", "s_d wym. — brak kondensacji [m]",
+                        "s_d wym. — kondensacja dopuszczalna [m]", "Ocena"], rows, "lllrrrrrrl"))
     s.append("")
     for r in wyniki:
         s.append(f"### {r.kod} — {r.nazwa}")
@@ -501,10 +518,14 @@ def raport_glaser(wyniki: Sequence[WynikGlaser], wykresy: dict | None = None, za
             s.append("Płaszczyzny kondensacji (numer granicy za warstwą): " +
                      ", ".join(f"{j} — między „{r.warstwy[j - 1].kod}” a „{r.warstwy[j].kod}”" for j in r.plaszczyzny))
             s.append("")
-        s.append(f"**Ocena:** {r.ocena}." + (f" Wymagane s_d paroizolacji ≥ {fmt(r.sd_par_wym, 1)} m" +
-                                             (f" (zastosowano {fmt(r.sd_par_ist, 1)} m — {ok(r.sd_par_ist >= r.sd_par_wym - 1e-6)})"
-                                              if r.sd_par_ist is not None else " (brak paroizolacji w układzie)") + "."
-                                             if r.sd_par_wym else ""))
+        s.append(f"**Ocena:** {r.ocena}. Warunki wewnętrzne: {r.opis_wilg}.")
+        s.append("")
+        s.append(f"Wymagane s_d paroizolacji (po ciepłej stronie izolacji): brak kondensacji — {_sd_txt(r.sd_par_wym)} m; "
+                 f"kondensacja dopuszczalna (wysycha, M_a ≤ {fmt(r.kryterium_kg_m2 * 1000, 0)} g/m²) — "
+                 f"{_sd_txt(r.sd_par_wym_dop)} m; istniejąca warstwa: "
+                 + (f"{r.warstwy[r.idx_par].kod}, s_d = {fmt(r.sd_par_ist, 1)} m "
+                    f"({ok(r.sd_par_wym_dop is not None and r.sd_par_ist >= r.sd_par_wym_dop - 1e-6)})"
+                    if r.sd_par_ist is not None else "brak") + ".")
         if wykresy and r.kod in wykresy:
             s.append("")
             s.append(f"![Glaser {r.kod}]({wykresy[r.kod]})")

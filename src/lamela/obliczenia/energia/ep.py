@@ -199,8 +199,10 @@ def system_projektowy(cfg: dict, went, A_f: float, dobor: dict | None = None, za
                "z ograniczeniem czasu pracy)", pom, dane_pv(pvc) if pvc is not False else None,
                (pvc or {}).get("autokonsumpcja", "symulacja") if isinstance(pvc, dict) else "symulacja",
                bool((pvc or {}).get("sterowanie_cwu_pv", True)) if isinstance(pvc, dict) else True,
-               float((dobor or {}).get("udzial_grzalki", 0.0)), E_dez, capex_zl=cfg.get("capex_A"),
-               status=PRZYKL)
+               float((dobor or {}).get("udzial_grzalki", 0.0)), E_dez, capex_zl=None, status=PRZYKL)
+    cx = wyrob("ceny").get("capex_zl", {}) or {}
+    s.capex_zl = cfg.get("capex_A") or ((cx.get("PC_R290_z_zasobnikiem") or 0) + ((cx.get("PV_6_5kWp") or 0) if s.pv else 0)
+                                        or None)
     if zal:
         zal.dodaj(f"PC: SCOP = {fmt(scop, 2)}, COP_cwu = {fmt(s.eta_W_g, 2)}, udział grzałki w ogrzewaniu "
                   f"{fmt(s.udzial_grzalki * 100, 2)} % (TMY)", PRZYKL, pc.get("zrodlo", ""))
@@ -227,7 +229,9 @@ def system_gazowy(A_f: float, went, cfg: dict | None = None) -> System:
                   "gaz", float(k.get("eta_H_g", 0.94)), 1.0, 0.96, 0.89,
                   "η_H,g = 0,94 (tab. 2 lp. 16a), η_H,e = 0,89, η_H,d = 0,96",
                   "gaz", float(k.get("eta_W_g", 0.85)), 0.85, 0.80, "η_W,g = 0,85 (tab. 9 lp. 5a), η_W,s = 0,85, η_W,d = 0,80",
-                  pom, None, capex_zl=(cfg or {}).get("capex_B"), status="wartości tabelaryczne metodologii")
+                  pom, None, capex_zl=(cfg or {}).get("capex_B") or ((wyrob("ceny").get("capex_zl") or {}).get(
+                      "kociol_gazowy_z_zasobnikiem", 0) + (wyrob("ceny").get("capex_zl") or {}).get(
+                      "przylacze_gazowe_i_instalacja", 0) or None), status="wartości tabelaryczne metodologii")
 
 
 def system_pc_domyslny(A_f: float, went) -> System:
@@ -551,7 +555,9 @@ def raport_alternatywy(wyniki: list[WynikEP], zal: Zalozenia | None = None) -> s
     """Tabela porównawcza systemów (RPB § 20 ust. 1 pkt 10 lit. a–e)."""
     s = [naglowek_raportu("Analiza alternatywnych systemów zaopatrzenia w energię (RPB § 20 ust. 1 pkt 10)",
                           "RPB § 20 ust. 1 pkt 10 lit. a–e; metodologia Dz.U. 2015 poz. 376 ze zm.; WT § 329",
-                          ["(a) szacunek rocznej energii użytkowej: EU; (b) nośniki dostępne na działce: energia elektryczna "
+                          ["Nakłady inwestycyjne i ceny energii — założenia orientacyjne [ZAŁ] (dane/wyroby_przykladowe.yaml: "
+                           "ceny, capex_zl) — do aktualizacji ofertami i taryfami URE.",
+                           "(a) szacunek rocznej energii użytkowej: EU; (b) nośniki dostępne na działce: energia elektryczna "
                            "(sieć nN), gaz ziemny (sieć w drodze), energia słoneczna (PV); sieć ciepłownicza — brak; "
                            "(c) system konwencjonalny (B) i alternatywny/hybrydowy (A); (d) obliczenia porównawcze; "
                            "(e) wynik i wybór."])]

@@ -115,9 +115,19 @@ def oblicz_wszystko(m, *, wyniki_symulacji: dict | None = None, wariant_psi: str
     wA4 = EP.oblicz_ep(ob, went, EP.system_projektowy(ob.cfg, went, ob.bryla.A_f, obc.dobor), obc=obc, n50=4.0,
                        zal=Zalozenia())
     wA4.system.nazwa = "A (n50 = 4 h⁻¹ — brak próby szczelności)"
+    wrazl = [wA4]
+    if any(x.status == "domyślna" for x in ob.wezly):
+        import dataclasses
+        wz = MB.wezly_z_modelu(m, wyniki_symulacji, wezly_auto=ob.bryla.wezly_auto, wariant_domyslny="dobra_praktyka")
+        ob_dp = dataclasses.replace(ob, wezly=wz, H_TB=MB.h_tb(wz))
+        wdp = EP.oblicz_ep(ob_dp, went, EP.system_projektowy(ob.cfg, went, ob.bryla.A_f, obc.dobor), obc=obc,
+                           zal=Zalozenia())
+        wdp.system.nazwa = (f"A (Ψ „dobra praktyka” zamiast domyślnych PN-EN ISO 14683: H_TB = {fmt(ob_dp.H_TB, 1)} "
+                            f"zamiast {fmt(ob.H_TB, 1)} W/K)")
+        wrazl.append(wdp)
     R["ep"] = wA
     R["ep_alt"] = [wA, wA0, wB, wC]
-    R["ep_wrazliwosc"] = [wA4]
+    R["ep_wrazliwosc"] = wrazl
     return R
 
 

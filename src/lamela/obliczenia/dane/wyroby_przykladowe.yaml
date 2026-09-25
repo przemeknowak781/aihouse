@@ -191,5 +191,11 @@ ceny:                # [ZAŁ] — do aktualizacji wg taryf zatwierdzonych przez 
   energia_elektryczna_oplaty_stale_zl_mies: 45.0
   gaz_zl_kWh: 0.36                          # brutto, grupa W-3.6 (paliwo + dystrybucja, składniki zmienne)
   gaz_oplaty_stale_zl_mies: 55.0
+  capex_zl:                                 # [ZAŁ] orientacyjne nakłady brutto 2026 — do weryfikacji ofertami
+    PC_R290_z_zasobnikiem: 45000            # PC 7–8 kW R290 + zasobnik 250 dm³ + montaż
+    PV_6_5kWp: 25000                        # 15 × 430 Wp + falownik + montaż na dachu płaskim
+    kociol_gazowy_z_zasobnikiem: 16000      # kocioł kondensacyjny + zasobnik + montaż
+    przylacze_gazowe_i_instalacja: 14000    # przyłącze, opłata przyłączeniowa, instalacja wewn., odprowadzenie spalin
+    uwagi: "bez elementów wspólnych wariantów (ogrzewanie podłogowe, rekuperacja, instalacja c.w.u.)"
   status: "[ZAŁ]"
   zrodlo: "założenie projektowe na IX 2026 (rząd wielkości taryf G11/W-3.6 dla Poznania); aktualizacja: bip.ure.gov.pl — taryfy energii elektrycznej i paliw gazowych"
