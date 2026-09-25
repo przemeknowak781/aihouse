@@ -110,19 +110,15 @@ def kontekst_oswiadczenia_projektanta(dok, *, projektant=None, osoby=None, techn
 
 # ------------------------------------------------------------------------------------ sieć ciepłownicza
 WARIANTY_SIECI = {
-    "brak_sieci": "na terenie, na którym zlokalizowany jest projektowany obiekt, <b>nie istnieje sieć ciepłownicza</b> "
-                  "i nie istnieją techniczne warunki dostarczania ciepła z systemu ciepłowniczego — obowiązek "
-                  "przyłączenia obiektu do sieci ciepłowniczej, o którym mowa w art. 7b ust. 1 Prawa energetycznego, "
-                  "nie występuje;",
-    "zrodlo_indywidualne": "istnieją techniczne i ekonomiczne warunki przyłączenia obiektu do sieci ciepłowniczej, "
-                           "jednak planowane jest dostarczanie ciepła z <b>indywidualnego źródła ciepła</b>, które "
-                           "charakteryzuje się współczynnikiem nakładu nieodnawialnej energii pierwotnej nie wyższym "
-                           "niż 0,8, a ciepło z niego wytworzone stanowi nie mniej niż 60 % ciepła z odnawialnych "
-                           "źródeł energii (art. 7b ust. 3 Prawa energetycznego); spełnienie warunków stwierdzono "
-                           "audytem z dnia " + do_uzup("data audytu, autor") + " (art. 7b ust. 3c);",
-    "przylaczenie": "istnieją techniczne i ekonomiczne warunki przyłączenia obiektu do sieci ciepłowniczej "
-                    "i dostarczania z niej ciepła — <b>obiekt zostanie przyłączony do sieci ciepłowniczej</b> "
-                    "(art. 7b ust. 1 Prawa energetycznego).",
+    "brak_sieci": "na terenie lokalizacji obiektu <b>nie istnieje sieć ciepłownicza</b> ani techniczne warunki dostarczania "
+                  "ciepła z systemu ciepłowniczego — obowiązek przyłączenia do sieci ciepłowniczej (art. 7b ust. 1 "
+                  "Prawa energetycznego) nie występuje;",
+    "zrodlo_indywidualne": "istnieją techniczne i ekonomiczne warunki przyłączenia do sieci ciepłowniczej, lecz ciepło "
+                           "będzie dostarczane z <b>indywidualnego źródła ciepła</b> o współczynniku nakładu "
+                           "nieodnawialnej energii pierwotnej ≤ 0,8 i udziale ciepła z OZE ≥ 60 % (art. 7b ust. 3), "
+                           "stwierdzonych audytem z dnia " + do_uzup("data audytu, autor") + " (art. 7b ust. 3c);",
+    "przylaczenie": "istnieją techniczne i ekonomiczne warunki przyłączenia — <b>obiekt zostanie przyłączony do sieci "
+                    "ciepłowniczej</b> (art. 7b ust. 1 Prawa energetycznego).",
 }
 
 

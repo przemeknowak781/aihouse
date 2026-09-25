@@ -10,10 +10,10 @@ Konwencje:
 * kolejność `Wezel.obszary` = priorytet: obszar późniejszy nadpisuje wcześniejszy (np. łącznik termoizolacyjny na płycie,
   budynek na gruncie);
 * strefy grupuje pole `grupa` (ta sama temperatura, np. „i” — pomieszczenia ogrzewane nad i pod stropem);
-  współczynniki sprzężenia L_2D liczone są między grupami (PN-EN ISO 10211 p. 10.4 — więcej niż dwie temperatury);
+  współczynniki sprzężenia L_2D liczone są między grupami (PN-EN ISO 10211 — więcej niż dwie temperatury brzegowe);
 * warstwy przegród jak w modelu (`docs/SCHEMAT_MODELU.md`): ściany od WNĘTRZA do ZEWNĄTRZ, poziome od GÓRY do DOŁU.
 
-Opory przejmowania (PN-EN ISO 6946:2017 tab. 7; PN-EN ISO 10211:2017 p. 7.3; PN-EN ISO 13788:2013 p. 4.2.2):
+Opory przejmowania (PN-EN ISO 6946:2017; PN-EN ISO 10211:2017; PN-EN ISO 13788:2013):
 R_se = 0,04; R_si = 0,13 (poziomo), 0,10 (w górę), 0,17 (w dół) — do strumieni i ψ; R_si = 0,25 do oceny temperatury
 powierzchni (f_Rsi), 0,13 dla ram i szyb.
 """
@@ -36,8 +36,8 @@ RS_ISO6946_WEWN = {"poziomo": RSI_POZIOMO, "gora": RSI_GORA, "dol": RSI_DOL}
 RSI_13788 = 0.25            # ocena temperatury powierzchni (przegrody nieprzezroczyste)
 RSI_13788_OKNA = 0.13       # ramy i szyby
 SIGMA = 5.67e-8             # W/(m²·K⁴)
-LAMBDA_GRUNTU = 2.0         # W/(m·K) — PN-EN ISO 13370:2017 tab. 7 (piasek/żwir) / PN-EN ISO 10211:2017 p. 5.2.4 [NZW]
-B_DOMYSLNE = 8.0            # m — szerokość budynku do modelu gruntu 2D, gdy nieznana (ISO 10211 tab. 2) [NZW]
+LAMBDA_GRUNTU = 2.0         # W/(m·K) — PN-EN ISO 13370:2017 (piasek/żwir) / PN-EN ISO 10211:2017 (grunt) [NZW]
+B_DOMYSLNE = 8.0            # m — szerokość budynku do modelu gruntu 2D, gdy nieznana (PN-EN ISO 10211 — wymiary obszaru gruntu) [NZW]
 
 
 # --------------------------------------------------------------------------------------------------
@@ -99,7 +99,7 @@ def _m(kod, lam, nazwa, kolor=None, rodzaj="nieprzezroczysty", zrodlo="PN-EN ISO
 
 MATERIALY_DOMYSLNE: dict[str, Material] = {m.kod: m for m in [
     _m("GRUNT", LAMBDA_GRUNTU, "Grunt (piasek/żwir) λ = 2,0", "#c8b48a", "grunt",
-       "PN-EN ISO 10211:2017 p. 5.2.4 / PN-EN ISO 13370:2017 tab. 7 [NZW]"),
+       "PN-EN ISO 10211:2017 / PN-EN ISO 13370:2017 — grunt jednorodny λ = 2,0 [NZW]"),
     _m("ZB", 2.3, "Żelbet (1 % zbrojenia)", "#b9b6ae", zrodlo="PN-EN ISO 10456:2009 tab. 3"),
     _m("BETON", 2.0, "Beton zwykły", "#c4c1b8", zrodlo="PN-EN ISO 10456:2009 tab. 3"),
     _m("BET_FUND", 1.7, "Bloczek betonowy fundamentowy (pełny)", "#bdb8ad"),
@@ -134,10 +134,10 @@ def material_rama(U_f: float, d_f: float, Rsi: float = RSI_POZIOMO, Rse: float =
 
 def material_szyba(U_g: float, d_g: float, Rsi: float = RSI_POZIOMO, Rse: float = RSE, kod: str = "SZYBA",
                    zrodlo: str = "") -> Material:
-    """Pakiet szybowy jako płyta zastępcza λ_eq = d_g / (1/U_g − R_si − R_se) (PN-EN ISO 10077-2 p. 6.2)."""
+    """Pakiet szybowy jako płyta zastępcza λ_eq = d_g / (1/U_g − R_si − R_se) (PN-EN ISO 10077-2 — płyta zastępcza szyby)."""
     R = 1.0 / U_g - Rsi - Rse
     return Material(kod, d_g / R, f"Pakiet szybowy (λ_eq z U_g = {U_g} W/(m²K), d = {d_g} m)", "#a8d0e6", "szyba",
-                    zrodlo or "PN-EN ISO 10077-2:2017 p. 6.2 (płyta zastępcza szyby)")
+                    zrodlo or "PN-EN ISO 10077-2:2017 (płyta zastępcza szyby)")
 
 
 # --------------------------------------------------------------------------------------------------
@@ -214,7 +214,7 @@ class Strefa:
 
 @dataclass
 class ElementFlankujacy:
-    """Element flankujący do ψ = L_2D − Σ U_j·l_j (ISO 10211 wz. 13 / ISO 14683 p. 5.3).
+    """Element flankujący do ψ = L_2D − Σ U_j·l_j (PN-EN ISO 10211 / PN-EN ISO 14683).
     U — podane albo liczone z `warstwy` (1D, te same R_s co w modelu 2D); `wezel_ref` — podmodel, którego L_2D
     zastępuje U·l (np. okno bez ściany — ψ osadzenia); `l_e`, `l_i` — długości wg wymiarów zewnętrznych/wewnętrznych."""
     nazwa: str
@@ -305,7 +305,7 @@ S_STREFY = 0.05     # grubość pasów stref brzegowych [m]
 
 def odl_ciecia(d_elementu: float, minimum: float = 1.0) -> float:
     """Odległość płaszczyzny odcięcia od elementu centralnego: max(1 m, 3·d elementu flankującego)
-    (PN-EN ISO 10211:2017 p. 5.2.2)."""
+    (PN-EN ISO 10211:2017 — płaszczyzny odcięcia)."""
     return max(minimum, 3.0 * d_elementu)
 
 
@@ -362,7 +362,7 @@ def warstwy_z_modelu(model, kod_przegrody: str) -> list[Warstwa]:
 
 
 def pomin_pustki_wentylowane(warstwy: Sequence[Warstwa], zewn_na_poczatku: bool = True) -> list[Warstwa]:
-    """Pustkę wentylowaną i warstwy za nią (po stronie zewnętrznej) pomija się (ISO 6946:2017 p. 6.9.4).
+    """Pustkę wentylowaną i warstwy za nią (po stronie zewnętrznej) pomija się (PN-EN ISO 6946:2017 — warstwy dobrze wentylowane).
     zewn_na_poczatku=True — lista od góry (dachy, tarasy: strona zewnętrzna pierwsza); False — ściany (od wnętrza)."""
     lista = list(warstwy) if zewn_na_poczatku else list(reversed(warstwy))
     out: list[Warstwa] = []
@@ -653,7 +653,7 @@ def wezel_oscieze_okna(warstwy_sciany: Sequence[Warstwa], U_f: float = 0.95, b_f
 
 def U_podlogi_13370(B: float, w: float, R_f: float, lam: float = LAMBDA_GRUNTU, Rsi: float = RSI_DOL,
                     Rse: float = RSE) -> tuple[float, float]:
-    """U podłogi na gruncie wg PN-EN ISO 13370:2017 p. 7.2 [NZW — wzory poza próbką normy, rejestr R6-30]:
+    """U podłogi na gruncie wg PN-EN ISO 13370:2017 (płyta na gruncie) [NZW — wzory poza próbką normy, rejestr R6-30]:
     d_t = w + λ(R_si + R_f + R_se); d_t < B': U = 2λ/(πB' + d_t)·ln(πB'/d_t + 1); d_t ≥ B': U = λ/(0,457B' + d_t)."""
     dt = w + lam * (Rsi + R_f + Rse)
     if dt < B:

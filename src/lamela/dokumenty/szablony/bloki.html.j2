@@ -137,7 +137,7 @@
 {% endmacro %}
 
 {# ================================================================================ podpisy #}
-{% macro podpisy(osoby, jeden=False) %}
+{% macro podpisy(osoby, jeden=False, uwaga=True) %}
 {% if jeden and osoby|length == 1 %}{% set o = osoby[0] %}
 <div class="podpis-linia">
   <div class="pole-podpisu"></div>
@@ -157,15 +157,15 @@
   {% endfor %}
 </div>
 {% endif %}
-<p class="podpis-uwaga">Postać elektroniczna: podpis kwalifikowany, osobisty albo zaufany pliku (§ 7 ust. 4a RPB) — pola pozostają puste.
-Postać papierowa: podpis własnoręczny w polu.</p>
+{% if uwaga %}<p class="podpis-uwaga">Postać elektroniczna: podpis kwalifikowany, osobisty albo zaufany pliku (§ 7 ust. 4a RPB) — pola pozostają puste.
+Postać papierowa: podpis własnoręczny w polu.</p>{% endif %}
 {% endmacro %}
 
 {# ================================================================================ tabela danych zamierzenia (oświadczenia) #}
-{% macro dane_zamierzenia(d, element=None) %}
+{% macro dane_zamierzenia(d, element=None, krotko=False) %}
 <table class="osw-dane">
   <tr><th>Zamierzenie budowlane</th><td>{{ d.nazwa_zamierzenia }}</td></tr>
-  <tr><th>Obiekt, kategoria</th><td>{{ d.obiekt }} — kategoria {{ d.kategoria }}</td></tr>
+  {% if not krotko %}<tr><th>Obiekt, kategoria</th><td>{{ d.obiekt }} — kategoria {{ d.kategoria }}</td></tr>{% endif %}
   <tr><th>Adres, działka</th><td>{{ d.adres }}; {{ d.lokalizacja }}; identyfikator: {{ d.dzialka.identyfikator }}</td></tr>
   <tr><th>Inwestor</th><td>{{ d.inwestor.nazwa }}, {{ d.inwestor.adres }}</td></tr>
   {% if element %}<tr><th>Element projektu</th><td>{{ element }}</td></tr>{% endif %}
@@ -203,13 +203,12 @@ Postać papierowa: podpis własnoręczny w polu.</p>
   <div class="osw-podst">dotyczące możliwości podłączenia projektowanego obiektu budowlanego do istniejącej sieci ciepłowniczej<br>
     (art. 33 ust. 2 pkt 10 ustawy z dnia 7 lipca 1994 r. – Prawo budowlane, t.j. Dz.U. 2026 poz. 524 ze zm.,
     w związku z art. 7b ustawy z dnia 10 kwietnia 1997 r. – Prawo energetyczne, t.j. Dz.U. 2026 poz. 43 ze zm.)</div>
-  {{ dane_zamierzenia(d) }}
+  {{ dane_zamierzenia(d, krotko=True) }}
   <div class="osw-tresc">
     <p>Ja, niżej podpisany(-a) <b>{{ o.projektant.imie_nazwisko }}</b>, posiadający(-a) uprawnienia budowlane
       w specjalności {{ o.projektant.specjalnosc }} (art. 14 ust. 1 pkt 4 lit. b PB), nr uprawnień {{ o.projektant.nr_uprawnien }},
       oświadczam, że w projektowanym obiekcie przewiduje się wykorzystywanie ciepła na potrzeby ogrzewania i podgrzewania
-      ciepłej wody użytkowej, a w zakresie możliwości jego podłączenia do istniejącej sieci ciepłowniczej, zgodnie z warunkami
-      określonymi w art. 7b ustawy – Prawo energetyczne:</p>
+      c.w.u., a co do możliwości podłączenia do istniejącej sieci ciepłowniczej (art. 7b Prawa energetycznego):</p>
     {% for w in o.warianty %}
     <div class="wybor"><div class="pole">{{ "X" if w.wybrany else "" }}</div><div class="opis">{{ w.tekst }}</div></div>
     {% endfor %}
@@ -217,10 +216,11 @@ Postać papierowa: podpis własnoręczny w polu.</p>
     {% if o.uzasadnienie %}<p class="mn">{{ o.uzasadnienie }}</p>{% endif %}
   </div>
   <div class="osw-klauzula">„Jestem świadomy(-ma) odpowiedzialności karnej za złożenie fałszywego oświadczenia.”</div>
-  {{ podpisy([o.podpis], jeden=True) }}
+  {{ podpisy([o.podpis], jeden=True, uwaga=False) }}
   <div class="osw-pouczenie"><p>Oświadczenie składa się pod rygorem odpowiedzialności karnej wynikającej z art. 233 § 6 ustawy z dnia 6 czerwca 1997 r.
     – Kodeks karny; klauzula zastępuje pouczenie organu (art. 33 ust. 2 pkt 10 PB). Oświadczenie jest załącznikiem do wniosku
-    o pozwolenie na budowę (art. 33 ust. 2 PB); organ sprawdza jego dołączenie (art. 35 ust. 1 pkt 3a lit. b PB).</p></div>
+    o pozwolenie na budowę (art. 33 ust. 2 PB); organ sprawdza jego dołączenie (art. 35 ust. 1 pkt 3a lit. b PB).
+    Postać elektroniczna — podpis kwalifikowany, osobisty albo zaufany; postać papierowa — podpis własnoręczny.</p></div>
 </section>
 {% endmacro %}
 

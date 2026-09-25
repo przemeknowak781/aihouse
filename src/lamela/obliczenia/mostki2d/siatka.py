@@ -5,7 +5,7 @@ linie przechodzą przez WSZYSTKIE współrzędne wierzchołków wieloboków, odw
 (bez rozmywania λ w komórce), a zagęszczenie geometryczne przy granicach (h_min → h_max, iloraz r) daje dużą
 rozdzielczość tam, gdzie gradienty są największe. MOS jest lokalnie konserwatywna (bilans energii domyka się do
 dokładności maszynowej), a podwajanie podziałów (każda komórka → 2) jest trywialne — kryterium PN-EN ISO 10211:2017
-p. 5.3.2 (zmiana strumienia < 1 % przy podwojeniu liczby podziałów) sprawdzane jest wprost. Krawędzie ukośne
+(zmiana strumienia < 1 % przy podwojeniu liczby podziałów) sprawdzane jest wprost. Krawędzie ukośne
 (rzadkie w węzłach) są aproksymowane schodkowo — ograniczenie opisane w raporcie.
 """
 from __future__ import annotations
@@ -54,7 +54,7 @@ class Siatka:
         return self.nx * self.ny
 
     def podwojona(self) -> "Siatka":
-        """Każda komórka dzielona na 2 w obu kierunkach (podwojenie liczby podziałów, ISO 10211 p. 5.3.2)."""
+        """Każda komórka dzielona na 2 w obu kierunkach (podwojenie liczby podziałów, ISO 10211)."""
         return Siatka(_podwoj(self.x), _podwoj(self.y))
 
     def opis(self) -> str:
@@ -76,8 +76,7 @@ def podzial(a: float, b: float, h_min: float, h_max: float, r: float = 1.25, n_m
     if L <= 0:
         return np.array([a, b])
     if L <= n_min * h_min * 1.0000001 or L <= 2 * h_min:
-        n = max(1, min(n_min, int(np.ceil(L / h_min - 1e-9))))
-        return np.linspace(a, b, n + 1)
+        return np.linspace(a, b, max(1, n_min) + 1)     # cienkie warstwy (membrany): n_min komórek
     pol = []
     acc = 0.0
     k = 0

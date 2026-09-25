@@ -2,13 +2,13 @@
 
 Metoda: objętości skończone na siatce prostokątnej zagęszczanej przy granicach materiałów, warunki Robina (h = 1/R_s), rozwiązanie bezpośrednie (scipy.sparse, SuperLU). Kryterium normy dla metody dokładnej 2D: temperatury ± 0,1 K, strumień ± 0,1 W/m.
 
-| Przypadek | Wynik | max |Δθ| [K] | ΔΦ [W/m] | Tolerancja |
+| Przypadek | Wynik | max. odchyłka θ [K] | odchyłka Φ [W/m] | Tolerancja |
 |---|---|---|---|---|
-| ISO 10211 zał. C — przypadek 1 (28 punktów, tabela normy) | **SPEŁNIA** | 0,0481 | — | |Δθ| ≤ 0,1 K |
-| ISO 10211 zał. C — przypadek 2 (punkty A…I + strumień) | **SPEŁNIA** | 0,0387 | −0,0097 | |Δθ| ≤ 0,1 K; |ΔΦ| ≤ 0,1 W/m |
-| A1 — ściana warstwowa 1D (Robin), rozwiązanie dokładne | **SPEŁNIA** | 0,0000 | — | |Δθ| < 10⁻⁶ K; |ΔU| < 10⁻⁹ |
-| A2 — przypadek 1 vs szereg Fouriera (bez zaokrągleń) | **SPEŁNIA** | 0,0018 | — | |Δθ| ≤ 0,02 K |
-| A3 — naroże 90°, powierzchnie izotermiczne: ΔS = S − (a+b)/t | **SPEŁNIA** | — | — | |ΔS − 0,559| ≤ 0,01 |
+| ISO 10211 zał. C — przypadek 1 (28 punktów, tabela normy) | **SPEŁNIA** | 0,0481 | — | Δθ w ± 0,1 K |
+| ISO 10211 zał. C — przypadek 2 (punkty A…I + strumień) | **SPEŁNIA** | 0,0387 | −0,0097 | Δθ w ± 0,1 K; ΔΦ w ± 0,1 W/m |
+| A1 — ściana warstwowa 1D (Robin), rozwiązanie dokładne | **SPEŁNIA** | 0,0000 | — | Δθ w ± 10⁻⁶ K; ΔU w ± 10⁻⁹ |
+| A2 — przypadek 1 vs szereg Fouriera (bez zaokrągleń) | **SPEŁNIA** | 0,0018 | — | Δθ w ± 0,02 K |
+| A3 — naroże 90°, powierzchnie izotermiczne: ΔS = S − (a+b)/t | **SPEŁNIA** | — | — | ΔS = 0,559 ± 0,01 |
 
 ## ISO 10211 zał. C — przypadek 1 (28 punktów, tabela normy)
 

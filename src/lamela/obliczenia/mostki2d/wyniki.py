@@ -5,8 +5,8 @@ Procedura dla węzła (PN-EN ISO 10211:2017):
    (kryterium: zmiana całkowitego strumienia < 1 % przy podwojeniu liczby podziałów; w razie potrzeby 4n);
 2. współczynniki sprzężenia L_2D między grupami stref (superpozycja rozwiązań jednostkowych; dla 2 temperatur
    L_2D = Φ/(θ_i − θ_e));
-3. ψ = L_2D − Σ U_j·l_j — osobno dla wymiarów zewnętrznych (l_e) i wewnętrznych (l_i) (PN-EN ISO 14683 p. 4–5);
-4. przebieg „f_Rsi” — R_si = 0,25 (0,13 ramy/szyby) wg PN-EN ISO 13788 p. 4.2.2 / ISO 10211 p. 7.3:
+3. ψ = L_2D − Σ U_j·l_j — osobno dla wymiarów zewnętrznych (l_e) i wewnętrznych (l_i) (PN-EN ISO 14683 — systemy wymiarów);
+4. przebieg „f_Rsi” — R_si = 0,25 (0,13 ramy/szyby) wg PN-EN ISO 13788 / PN-EN ISO 10211:
    f_Rsi = (θ_si,min − θ_e)/(θ_i − θ_e); ocena f_Rsi ≥ f_Rsi,min (W-248: 0,72 — WT zał. 2 pkt 2.2);
    dla 3 temperatur — współczynniki wagowe g (θ_si = Σ g_k·θ_k);
 5. informacyjnie: θ_si przy θ_e obl. vs temperatura krytyczna pleśni (φ_si = 80 %) i punkt rosy przy φ_i = 50 %.

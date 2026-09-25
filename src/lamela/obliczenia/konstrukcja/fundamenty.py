@@ -70,9 +70,9 @@ def nosnosc_podloza(B: float, D: float, V_k: float, V_d: float, grunt: Grunt, p:
     Nq, Nc, Ng = wspolczynniki_nosnosci(grunt.fi_k)
     w.krok("Parametry podłoża (charakterystyczne, M1: γ_φ = 1,0)", "φ'_k; c'_k; γ", "",
            f"{f(grunt.fi_k, 1)}°; {f(grunt.c_k, 1)} kPa; {f(grunt.gamma, 1)} kN/m³ — {grunt.nazwa}")
-    w.krok("Współczynniki nośności", "N_q = e^(π·tg φ')·tg²(45° + φ'/2)", "", Nq, nd=2, zrodlo="(D.2)")
-    w.krok("", "N_c = (N_q − 1)·ctg φ'", "", Nc, nd=2)
-    w.krok("", "N_γ = 2·(N_q − 1)·tg φ'", "", Ng, nd=2)
+    w.krok("Współczynnik nośności (nadkład)", "N_q = e^(π·tg φ')·tg²(45° + φ'/2)", "", Nq, nd=2, zrodlo="(D.2)")
+    w.krok("Współczynnik nośności (spójność)", "N_c = (N_q − 1)·ctg φ'", "", Nc, nd=2)
+    w.krok("Współczynnik nośności (ciężar gruntu)", "N_γ = 2·(N_q − 1)·tg φ'", "", Ng, nd=2)
     Bp = B - 2 * abs(e_B)
     pasmo = L is None
     Lp = (L - 2 * abs(e_L)) if not pasmo else 1.0
@@ -203,10 +203,11 @@ class Lawa(Wynik):
     prety: list = field(default_factory=list)
 
 
-def lawa(nazwa: str, B: float, h: float, t_w: float, D: float, G_k: float, Q_k: float, grunt: Grunt, beton: Beton,
+def lawa(nazwa: str, B: float, h: float, t_w: float, D: float, G_k: float, Q_k: float | list, grunt: Grunt, beton: Beton,
          p: Parametry | None = None, psi0: float = 0.7, dlugosc: float = 1.0, zewnetrzna: bool = True,
          G_nad_odsadzka: float | None = None, stal: StalZbrojeniowa | None = None, Q_k_inne: float = 0.0) -> Lawa:
-    """Ława pod ścianą: G_k, Q_k — obciążenia od ściany [kN/m] (wiodące Q_k, pozostałe zmienne Q_k_inne ×ψ0);
+    """Ława pod ścianą: G_k — obciążenie stałe od ściany [kN/m]; Q_k — zmienne [kN/m]: liczba (z ψ0 = psi0) albo lista
+    par (Q_k,i, ψ0,i) — każde kolejno wiodące (6.10a/6.10b), pozostałe z ψ0;
     dodaje ciężar ławy i gruntu na odsadzkach; sprawdza nośność (DA2*), osiadanie, głębokość posadowienia, ławę
     niezbrojoną poprzecznie (12.9.3) lub zbrojenie odsadzki, zbrojenie podłużne (konstrukcyjne, 9.2.1.1)."""
     p = p or Parametry()
@@ -217,17 +218,19 @@ def lawa(nazwa: str, B: float, h: float, t_w: float, D: float, G_k: float, Q_k: 
     w.krok("Ciężar ławy", "g_ł = B·h·25", f"{f(B, 2)}·{f(h, 2)}·25", g_f, "kN/m", nd=2)
     w.krok("Grunt/posadzka na odsadzkach", "g_o ≈ (B − t)·(D − h)·18", "", odsadzki, "kN/m", nd=2, zrodlo="[UPR]")
     Gk = G_k + g_f + odsadzki
-    Qk = Q_k
-    w.krok("Obciążenie charakterystyczne w poziomie posadowienia", "V_k = G_k + Q_k", f"{f(Gk, 1)} + {f(Qk, 1)} (+ {f(Q_k_inne, 1)})",
-           Gk + Qk + Q_k_inne, "kN/m", nd=1)
-    Va = p.gG_sup * Gk + p.gQ * psi0 * Qk + p.gQ * psi0 * Q_k_inne
-    Vb = p.xi * p.gG_sup * Gk + p.gQ * Qk + p.gQ * psi0 * Q_k_inne
+    Ql = list(Q_k) if isinstance(Q_k, (list, tuple)) else [(Q_k, psi0)] + ([(Q_k_inne, psi0)] if Q_k_inne else [])
+    Qk = sum(q for q, _ in Ql)
+    w.krok("Obciążenie charakterystyczne w poziomie posadowienia", "V_k = G_k + ΣQ_k", f"{f(Gk, 1)} + {f(Qk, 1)}", Gk + Qk, "kN/m", nd=1)
+    Va = p.gG_sup * Gk + sum(p.gQ * ps * q for q, ps in Ql)
+    Vb = max([p.xi * p.gG_sup * Gk + p.gQ * q + sum(p.gQ * ps2 * q2 for j, (q2, ps2) in enumerate(Ql) if j != i)
+              for i, (q, ps) in enumerate(Ql)] or [p.xi * p.gG_sup * Gk])
     Vd = max(Va, Vb)
     w.krok("Obciążenie obliczeniowe (STR/GEO)", "V_d = max(6.10a; 6.10b)", f"max({f(Va, 1)}; {f(Vb, 1)})", Vd, "kN/m", nd=1,
            zrodlo="PN-EN 1990 + NA")
-    nos = nosnosc_podloza(B, D, Gk + Qk + Q_k_inne, Vd, grunt, p)
+    Q_k_inne = 0.0
+    nos = nosnosc_podloza(B, D, Gk + Qk, Vd, grunt, p)
     w.dolacz(nos, "Nośność podłoża")
-    sig_k = (Gk + Qk + Q_k_inne) / B
+    sig_k = (Gk + Qk) / B
     osi = osiadanie(B, None, D, sig_k, grunt, p)
     w.dolacz(osi, "Osiadanie")
     # głębokość posadowienia
