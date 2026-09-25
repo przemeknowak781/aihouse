@@ -772,3 +772,49 @@ deszczowa, kanalizacja, ogrzewanie — 0 niespełnionych; EP = **35,6** (z PV), 
 | BRAKI PT-IS 19 — zasobnik 300 vs 400 dm³ | **przyjęta.** Zasobnik c.w.u. **400 dm³** (moduł wody: V_zas ≥ 367 dm³). | PN-EN 12831-3; W-133 |
 | K-3 / K-11 — wysokość zabudowy w narzędziach od t_min | **przyjęta.** `tools/audyt_wt.py` i `tools/podglad_modelu.py` biorą wysokość zabudowy i wysokość wg WT §6 wyłącznie z `lamela.wskazniki` (wariant od t_min — informacyjnie); podgląd — także pow. zabudowy, PBC i intensywność. Wywiewki K1/K3 z jawną rzędną (bez założenia +0,50 nad pokryciem średnim). | upzp art. 2 pkt 30 lit. a (Dz.U. 2026 poz. 538); W-033, W-063 |
 | wer. C3, C4 — numeracja pomieszczeń, etykieta PU | **przyjęta (dane).** `meta.numeracja_pomieszczen` (model K.NN ↔ arkusze iso (K+1).NN, przykład przejścia) i `meta.PU_definicja` (PU wg W-316 ≠ „użytkowa” rdzenia z garażem) — do opisów arkuszy (zespoły rysunków). | RPB §20, PN-ISO 9836:2022, W-316 |
+
+**D. Wyniki kontroli po zmianach (model po rundzie 2, część 2)**
+
+| Wielkość | Wartość | Źródło / wymaganie |
+|---|---|---|
+| PU (W-316) / pow. zabudowy / PBC | 239,13 m² / 187,50 m² (11,7 %) / 1 270,15 m² (79,4 %) | `lamela.wskazniki`, podglad_modelu.py; MPZP ≤ 30 %, ≥ 50 % |
+| wysokość zabudowy | **10,27 m** (od t_śr 101,38; najwyżej czerpnia/wyrzutnia +10,00; PV +9,863, attyka D1 +9,876, wywiewka K1 +9,94) | upzp art. 2 pkt 30 lit. a; ≤ 11,00 (rezerwa 10,70) — W-033 |
+| wysokość wg WT §6 | 9,97 m (wejście O0-03) — grupa N | WT §6, §8 (W-063) |
+| EP / EP bez PV | **35,6 / 57,8** kWh/(m²·rok) | ≤ 70 (W-240) |
+| H_TB | 30,6 W/K (moduł energii, Ψ z modelu); katalog mostków 32,4 W/K (z b_u i χ) | PN-EN ISO 14683 / 10211 |
+| f_Rsi min. | 0,836 (WZ-09b) | ≥ 0,72 (W-248) |
+| Φ_HL / PC | 7,41 kW / klasa ok. 7 kW R290 | PN-EN 12831-1; W-155 |
+| wentylacja | 365 / 365 m³/h, okresowo 435 m³/h ≤ 450 | W-161…W-164 |
+| PV | 15 × 430 Wp = 6,45 kWp (D1 7 + D4 8), 5 610 kWh/a | W-194, W-033 |
+| przelewy / wywinięcia | wszystkie ✓ (moduł deszczowy i katalog mostków R-W2/R-W3) | W-142; DAFA |
+| teren / cokół | spadki 2,7–4,0 %; cokół ≥ 0,31 m poza strefami drzwi z OL | W-019; brief §9 pkt 4 |
+| testy | test_pipeline (23), test_obliczenia_fizyka (24), _instalacje (22), _konstrukcja --lamela (28), test_mostki2d (26), test_rysunki_konstrukcja --model (12), test_wskazniki — zaliczone | — |
+
+Raporty: `projekt/08_obliczenia/fizyka_energia_runda2/`, `projekt/08_obliczenia/instalacje_runda2/`, katalog mostków
+`projekt/08_obliczenia/mostki/` (przeliczony dla nowego modelu), audyt `docs/20_koncepcja/audyt_A1.md`.
+
+**E. Minimalne poprawki bibliotek (bez rdzenia i bez `views/**`)**
+* `obliczenia/sanitarne/przybory.py` — grupowanie pionów tylko z `rodzaj: kanalizacja` (K-8);
+* `obliczenia/sanitarne/deszczowa.py`, `inst_wspolne.py` — dno przelewu względem `rzedna_pokrycia` przy wpuście + kontrola pokrycia lokalnego;
+  elementy `odwodnienie: nie_dotyczy | na_powierzchnie` nie są polami dachu (wer. C11);
+* `obliczenia/sanitarne/drenaz.py` — cokół: strefy drzwi z odwodnieniem liniowym wg brief §9 pkt 4 („lub odwodnienie liniowe”);
+* `obliczenia/sanitarne/ogrzewanie.py` — dodatkowe powierzchnie grzewcze `instalacje.grzejniki` odejmowane od Φ_HL podłogi;
+* `obliczenia/energia/bryla.py` — krótki odcinek ściany WEWNĘTRZNEJ bez pomieszczenia za nią (wnętrze obrysu) = przegroda adiabatyczna,
+  nie zewnętrzna (fałszywe „U ściany zewn.” SWG/DZ12/SCZB15, 0,1–0,3 m²);
+* `obliczenia/mostki2d/katalog_dod.py`, `katalog.py` — łącznik (`wsporniki_plyty[].lacznik`), blok attyki (`attyka.blok_termoizolacyjny`)
+  i blok u podstawy SWG (`wezly[].blok_u_podstawy`) czytane z modelu;
+* `tools/audyt_wt.py`, `tools/podglad_modelu.py` — wysokości (i w podglądzie wskaźniki MPZP) z `lamela.wskazniki` (K-11).
+
+**F. Pozostaje (poza zakresem części 2 lub do decyzji)**
+* **BO (K-5):** uskok płyty fundamentowej pod garażem (PF2, wierzch −0,30; żebra SWG i garażu do −0,85), blok z betonu komórkowego 600
+  w 1. warstwie SWG — sprawdzić w MES płyty i nośności muru; żebro licowane z czołem płyty (K-12).
+* **Zespoły rysunków (`views/**`, arkusze):** układ PV z `energia.pv.pola` (rysunek IE-PV liczy własny układ i raportuje 10 z 15),
+  rynny ukryte / RS7–RS12, OL-5/OL-6, T2 x 9,80, attyka D1 +0,10 m, ściany grzewcze (`instalacje.grzejniki` — nie w `wyposazenie`,
+  bo rzut architektury nie zna typu „grzejnik”), numeracja (`meta.numeracja_pomieszczen`), etykieta PU.
+* **PT-IE (wer. B7):** spadek napięcia WLZ 0,61 % > 0,50 % i DC PV 1,04 % > 1,00 % — parametry bibliotek (przekrój WLZ, trasa DC),
+  nie danych modelu; rozwiązać w PT (YKY 5×25 lub RG bliżej ZKP; DC 10 mm² lub falownik przy dachu).
+* **PT-IS:** trasy przewodów, pion/szacht wentylacyjny (BRAKI 14), teletechnika T1/RACK, dane wyrobów (DoP/DTR) — bez wymyślania danych;
+  spójność cyrkulacji c.w.u. (moduł wody: cyrkulacja czasowa; EP: η_W,d 0,60 zachowawczo, bez pompy cyrkulacyjnej).
+* Mostki: WZ-06 (0,205) i WZ-16a (0,194) nadal powyżej dobrej praktyki; kolejny krok — attyka lekka / obłożenie belek B3–B5 wełną
+  (REKOMENDACJE A) — do decyzji w PT-AR-D. Cel W-245 dla ścian (0,15) — świadomie nieosiągnięty (§14.2 B).
+* Audyt A1 — 4 UWAGI bez zmian (strefy pod schodami, wyrzutnia ↔ SW1 stały, PC-JZ od elewacji S).

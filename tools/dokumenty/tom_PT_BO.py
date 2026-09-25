@@ -241,3 +241,182 @@ def sekcja_md(tekst: str, naglowek: str) -> str:
     """Treść listy punktowanej sekcji „## …” (bez podsekcji) — np. BRAKI_DANYCH.md."""
     m = re.search(rf"^## {re.escape(naglowek)}[^\n]*\n(.*?)(?=^## |\Z)", tekst or "", flags=re.M | re.S)
     return m.group(1).strip() if m else ""
+
+
+# ============================================================================================ stan analiz
+def pola_scinania(obl_md: str) -> dict:
+    """{element: [„Pole P2”, …]} — pola płyt ze zbrojeniem na ścinanie (V_Ed > V_Rd,c) wg obliczeń statycznych."""
+    out: dict[str, list[str]] = {}
+    for sek in re.split(r"^### Poz\. ", obl_md or "", flags=re.M)[1:]:
+        m = re.search(r"Element modelu: `([^`]+)`", sek)
+        if not m:
+            continue
+        pola = re.findall(r"^#{4,6} (Pole [^—\n]+?) — ścinanie: V_Ed > V_Rd,c", sek, flags=re.M)
+        if pola:
+            out[m.group(1)] = sorted(set(p.strip() for p in pola), key=lambda s: (len(s), s))
+    return out
+
+
+def stan_analiz(D: dict) -> dict:
+    """Zestawienie stanu analiz zespołu BO. Wiersz: obszar, element, wynik, stan (NIEZAMKNIĘTE / ZASTĄPIONE /
+    zamknięte), opis, źródło. Reguły są ogólne — po domknięciu analiz wiersze znikają lub zmieniają stan."""
+    W, ok_obszary = [], OrderedDict()
+    wyn = D["wyniki"] or {"pozycje": [], "uwagi": []}
+    poz = wyn["pozycje"]
+    # 0. aktualność wyników względem modelu
+    for nazwa, (akt, kiedy) in D["aktualnosc"].items():
+        if not akt:
+            W.append(dict(obszar="Aktualność", element=nazwa, wynik=kiedy, stan=NZ,
+                          opis=f"wyniki starsze niż model ({D['t_modelu']}) albo brak pliku — ponowić analizę",
+                          zrodlo="czas modyfikacji plików"))
+    # 1. pozycje obliczeń statycznych z niespełnionymi warunkami
+    zast = set(re.findall(r"poz\. ([\d.]+) \S+ \(model ławy/stopy izolowanej[^\n]*ZASTĄPIONE", D["braki_md"]))
+    for p in poz:
+        if p["ok"]:
+            continue
+        zle = sorted({w["opis"]: w["eta"] for w in p["warunki"] if w["eta"] > 1.0}.items(), key=lambda x: -x[1])
+        opis = "; ".join(f"{o} η = {pct(e)}" for o, e in zle[:4])
+        if p["nr"] in zast:
+            W.append(dict(obszar="Obliczenia statyczne", element=f"poz. {p['nr']} {p['id']}", wynik=pct(p["wykorzystanie"]),
+                          stan="ZASTĄPIONE", opis=f"model ławy izolowanej ({opis}) — miarodajna analiza MES płyty "
+                          "fundamentowej (rozdz. 5); głębokość posadowienia — płyta na XPS z izolacją obwodową (W-284)",
+                          zrodlo="wyniki.json; BRAKI_DANYCH.md"))
+        else:
+            W.append(dict(obszar="Obliczenia statyczne", element=f"poz. {p['nr']} {p['id']}", wynik=pct(p["wykorzystanie"]),
+                          stan=NZ, opis=opis + " — wymaga zmiany przekroju / schematu (REKOMENDACJE_MODEL.md)",
+                          zrodlo="wyniki.json"))
+    ok_obszary["Obliczenia statyczne"] = (sum(p["ok"] for p in poz), len(poz))
+    # 2. ścinanie płyt: zbrojenie poprzeczne wymagane obliczeniowo — czy objęte kontrolą rysunków
+    kz = (D["kz"] or {}).get("wiersze", [])
+    pola = pola_scinania(D["obl_md"])
+    for p in poz:
+        if p["rodzaj"] != "plyta":
+            continue
+        ws = [w["eta"] for w in p["warunki"] if w["opis"].startswith("Ścinanie") or "strzemion" in w["opis"]
+              or "krzyżulc" in w["opis"]]
+        if not ws:
+            continue
+        strzemiona = any("strzemion" in w["opis"] for w in p["warunki"])
+        w_kontroli = any(r["element"] == p["id"] and re.search(r"strzem|ścin", r["miejsce"], re.I) for r in kz)
+        if strzemiona and not w_kontroli:
+            W.append(dict(obszar="Ścinanie płyt", element=f"poz. {p['nr']} {p['id']}", wynik=f"η_max = {pct(max(ws))}",
+                          stan=NZ, opis="V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: "
+                          + (", ".join(pola.get(p["id"], [])) or "wg obliczeń") + "; brak w kontroli zbrojenia "
+                          "rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia",
+                          zrodlo="wyniki.json; obliczenia_statyczne.md; kontrola_zbrojenia.json"))
+        elif max(ws) > 1.0:
+            W.append(dict(obszar="Ścinanie płyt", element=f"poz. {p['nr']} {p['id']}", wynik=pct(max(ws)), stan=NZ,
+                          opis="nośność na ścinanie niewystarczająca", zrodlo="wyniki.json"))
+    # 3. MES płyty fundamentowej
+    if not D["mes_md"]:
+        W.append(dict(obszar="MES płyty fundamentowej", element="PF", wynik="—", stan=NZ,
+                      opis="brak raportu MES płyty fundamentowej", zrodlo="plyta_fundamentowa_MES.md"))
+    else:
+        n = n_ok = 0
+        for tab in tabele_md(D["mes_md"]):
+            for r in tab:
+                if "Stan" not in r:
+                    continue
+                n += 1
+                if "NIESPEŁNION" in r["Stan"].upper():
+                    W.append(dict(obszar="MES płyty fundamentowej", element=r.get("Warunek", "—"), wynik=r.get("η", "—"),
+                                  stan=NZ, opis=f"{r.get('Efekt', '')} > {r.get('Nośność / limit', '')} "
+                                  f"({r.get('Podstawa', '')}) — pogrubienie / zmiana posadowienia (REKOMENDACJE_MODEL.md)",
+                                  zrodlo="plyta_fundamentowa_MES.md"))
+                else:
+                    n_ok += 1
+        ok_obszary["MES płyty fundamentowej"] = (n_ok, n)
+    # 4. kontrola zbrojenia rysunków
+    for r in kz:
+        if not r["ok"]:
+            W.append(dict(obszar="Kontrola zbrojenia", element=f"{r['element']} — {r['miejsce']}",
+                          wynik=f"{L(r['As_prov'], 0)} < {L(max(r['As_req'], r['As_min']), 0)} {r['jedn']}", stan=NZ,
+                          opis=re.sub(r"\s*\[WYMAGA ZMIANY MODELU\].*", " [WYMAGA ZMIANY MODELU]", r.get("uwagi") or "—"),
+                          zrodlo="kontrola_zbrojenia.json"))
+    if D["kz"]:
+        ok_obszary["Kontrola zbrojenia rysunków"] = (D["kz"]["ok"], D["kz"]["razem"])
+    # 5. uwagi biblioteki „[WYMAGA ANALIZY]” (grupowane wg treści)
+    grupy: OrderedDict = OrderedDict()
+    for u in wyn.get("uwagi", []):
+        if "WYMAGA ANALIZY" not in u:
+            continue
+        m = re.match(r"^(?:Ściana nośna )?([^:\s]+)[: ]\s*(.*)$", u)
+        klucz = re.sub(r"\b(SL|S\d-|P)\d+\w*\b", "…", m.group(2) if m else u)
+        grupy.setdefault(klucz, []).append(u)
+    for klucz, lst in grupy.items():
+        W.append(dict(obszar="Uwagi analizy", element=f"{len(lst)} ×", wynik="—", stan=NZ,
+                      opis="; ".join(lst[:3]) + (f" (i {len(lst) - 3} podobnych)" if len(lst) > 3 else ""),
+                      zrodlo="wyniki.json — uwagi"))
+    return dict(wiersze=W, obszary=ok_obszary, n_nz=sum(w["stan"] == NZ for w in W))
+
+
+# ============================================================================================ rozdziały
+def rozdz_stan(o: Opis, D: dict, S: dict, ark_uwagi: list[str]):
+    """1. Stan opracowania — analizy zamknięte / NIEZAMKNIĘTE (jawnie, aktualizowane z wyników BO)."""
+    o.rozdzial("Stan opracowania i analiz konstrukcji", podstawa="§ 23 pkt 1 RPB; W-274")
+    nz = S["n_nz"] + len(ark_uwagi)
+    o.tekst(f"""
+    Zestawienie generowane automatycznie przy każdym złożeniu tomu z wyników obliczeń zespołu BO (model
+    `model/budynek.yaml` z {D['t_modelu']}). Pozycja **{NZ}** oznacza analizę nie domkniętą: niespełniony warunek
+    stanu granicznego, wymagane obliczeniowo zbrojenie nieujęte w kontroli rysunków, uwagę biblioteki
+    „[WYMAGA ANALIZY]” albo brak arkusza rysunkowego. Pozycja **ZASTĄPIONE** — wynik modelu uproszczonego zastąpiony
+    analizą dokładniejszą (wskazaną w opisie). Po domknięciu analiz i ponownym uruchomieniu generatora wiersze
+    znikają z zestawienia.
+    """)
+    if nz:
+        o.wniosek(f"**PROJEKT KONSTRUKCJI NIEZAMKNIĘTY — {nz} {'pozycja' if nz == 1 else 'pozycji'} {NZ}.** "
+                  "Tom nie może być przekazany kierownikowi budowy (art. 42 ust. 1 PB) ani objęty oświadczeniem "
+                  "projektanta z art. 41 ust. 4a pkt 2 PB przed domknięciem wszystkich pozycji z tabeli poniżej.",
+                  alarm=True)
+    else:
+        o.wniosek("Wszystkie analizy konstrukcji objęte zestawieniem są domknięte (brak pozycji NIEZAMKNIĘTYCH).")
+    ob = [{"Obszar analizy": k, "Warunki spełnione": f"{a} z {b}", "Stan": "zamknięte" if a == b else NZ}
+          for k, (a, b) in S["obszary"].items()]
+    ob.append({"Obszar analizy": "Część rysunkowa (arkusze z raport_widokow.json)",
+               "Warunki spełnione": "komplet" if not ark_uwagi else f"brak {len(ark_uwagi)}",
+               "Stan": "zamknięte" if not ark_uwagi else NZ})
+    o.tabela(ob, tytul="Stan analiz według obszarów", wyrownanie={"Obszar analizy": "l"},
+             szerokosci=[None, "40mm", "34mm"], zrodlo="wyniki.json, plyta_fundamentowa_MES.md, kontrola_zbrojenia.json")
+    kol = ("Obszar", "Element", "Wynik", "Opis", "Źródło")
+    rows = [dict(zip(kol, (w["obszar"], w["element"], w["wynik"], w["opis"], w["zrodlo"])))
+            for w in S["wiersze"] if w["stan"] == NZ]
+    rows += [dict(zip(kol, ("Część rysunkowa", u.split(":")[0], "—", u.split(":", 1)[-1].strip(), "raport_widokow.json")))
+             for u in ark_uwagi]
+    if rows:
+        o.tabela(rows, tytul=f"Pozycje {NZ} (do domknięcia przez zespół BO przed wydaniem PT)", klasa="zwarta",
+                 lp=True, wyrownanie={"Opis": "l", "Element": "l"}, szerokosci=["24mm", "30mm", "20mm", None, "30mm"])
+    zast = [dict(zip(("Element", "Wynik modelu uproszczonego", "Opis"), (w["element"], w["wynik"], w["opis"])))
+            for w in S["wiersze"] if w["stan"] == "ZASTĄPIONE"]
+    if zast:
+        o.tabela(zast, tytul="Pozycje ZASTĄPIONE analizą dokładniejszą", klasa="zwarta", wyrownanie={"Opis": "l"},
+                 szerokosci=["26mm", "26mm", None], zrodlo="BRAKI_DANYCH.md (zespół BO)")
+
+
+def rozdz_podstawa(o: Opis, D: dict):
+    """2. Podstawa opracowania: przepisy, normy (z biblioteki obliczeń), dane wejściowe z datami."""
+    o.rozdzial("Podstawa opracowania", podstawa="§ 23 pkt 1 RPB")
+    meta = D["bud"].get("meta", {})
+    o.tekst(f"""
+    ## Przepisy
+    * ustawa — Prawo budowlane (PB), w szczególności art. 34 ust. 3 pkt 4 (projekt techniczny), art. 41 ust. 4a
+      pkt 2 (oświadczenie projektanta PT), art. 102a (stosowanie WT w dotychczasowym brzmieniu);
+    * rozporządzenie w sprawie szczegółowego zakresu i formy projektu budowlanego (RPB, Dz.U. 2020 poz. 1609,
+      t.j. Dz.U. 2022 poz. 1679 ze zm.) — § 23 pkt 1–3 i 10 (część opisowa PT), § 24 pkt 1 (część rysunkowa);
+    * rozporządzenie w sprawie warunków technicznych, jakim powinny odpowiadać budynki i ich usytuowanie (WT,
+      t.j. Dz.U. 2022 poz. 1225 ze zm.) — w brzmieniu stosowanym na podstawie art. 102a PB ({meta.get('uwagi', '—')});
+    * rozporządzenie MTBiGM z 25.04.2012 w sprawie ustalania geotechnicznych warunków posadawiania obiektów
+      budowlanych (Dz.U. 2012 poz. 463) — § 7 ust. 2 (kat. II: dokumentacja badań podłoża i projekt geotechniczny),
+      § 9, § 10.
+
+    ## Normy (Eurokody z załącznikami krajowymi)
+    """)
+    o.tekst("\n".join(f"* {n}" for n in D["RAP"].NORMY))
+    wiersze = [{"Dane wejściowe": "model budynku", "Plik": "model/budynek.yaml",
+                "Stan": f"wersja {meta.get('wersja', '—')}, {D['t_modelu']}"}]
+    for nazwa, (akt, kiedy) in D["aktualnosc"].items():
+        wiersze.append({"Dane wejściowe": nazwa, "Plik": {"obliczenia statyczne": rel(D["kat_obl"] / "wyniki.json"),
+                        "MES płyty fundamentowej": rel(KAT_OBL / "plyta_fundamentowa_MES.md"),
+                        "kontrola zbrojenia": rel(KAT_RYS / "kontrola_zbrojenia.json")}[nazwa],
+                        "Stan": f"{kiedy} — {'aktualne względem modelu' if akt else NZ + ' (nieaktualne)'}"})
+    o.tabela(wiersze, tytul="Dane wejściowe tomu (odczyt przy każdym złożeniu)", wyrownanie={"Plik": "l"},
+             szerokosci=["40mm", None, "58mm"])

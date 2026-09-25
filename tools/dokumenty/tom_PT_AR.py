@@ -201,7 +201,8 @@ FUNKCJE = {"izolacja": "izolacja cieplna", "szczelnosc": "szczelność powietrzn
            "hydroizolacja": "hydroizolacja", "przeciwwilgociowa": "izolacja przeciwwilgociowa/przeciwradonowa",
            "wiatroizolacja": "wiatroizolacja", "rozdzielajaca": "warstwa rozdzielająca", "drenaz": "drenaż",
            "geowloknina": "filtracja/ochrona", "substrat": "substrat roślinny", "bariera_korzenna": "bariera korzenna",
-           "spadkowa": "warstwa spadkowa", "pustka": "pustka powietrzna"}
+           "spadkowa": "warstwa spadkowa", "pustka": "pustka powietrzna", "konstrukcja": "konstrukcja",
+           "wykonczenie": "wykończenie", "tynk": "tynk", "balast": "balast / ochrona", "grunt": "podłoże"}
 TYPY_PRZEGR = {"sciana_zewn": "ściana zewnętrzna", "sciana_wewn_nosna": "ściana wewnętrzna nośna",
                "scianka_dzialowa": "ścianka działowa", "attyka": "attyka", "podloga_na_gruncie": "podłoga na gruncie",
                "strop": "strop / sufit", "stropodach": "stropodach / dach", "taras": "płyta wysunięta / okap"}
@@ -210,7 +211,7 @@ TYPY_PRZEGR = {"sciana_zewn": "ściana zewnętrzna", "sciana_wewn_nosna": "ścia
 def nazwa_przegrody(txt: str) -> str:
     """Nazwa z modelu bez wtrąceń „(U = …)” — wartość U podaje wyłącznie obliczenie."""
     t = re.sub(r"\s*\((U[ _]?(stropu \S+ )?=|U_equiv)[^()]*(\([^()]*\)[^()]*)*\)", "", txt)
-    return re.sub(r";\s*$", "", t).strip()
+    return re.sub(r";\s*$", "", t).replace("`", "").strip()
 
 
 def rozdz_zakres(o: Opis, D: dict, kat_ar: Path | None):
@@ -299,7 +300,7 @@ def rozdz_przegrody(o: Opis, D: dict):
                     uw.append("niejednorodna: " + ", ".join(f"{f['mat']} {L(f['udzial'] * 100, 0)} %"
                                                            for f in raw["frakcje"]))
                 if w.konstrukcyjna:
-                    uw.append("warstwa nośna / konstrukcyjna")
+                    uw.append("rdzeń przegrody")
                 rows.append({"Lp.": k, "Materiał / wyrób (parametry wymagane)": mt.nazwa if mt else w.mat,
                              "d [mm]": w.d * 1000, "λ [W/(m·K)]": mt.lambda_ if mt else None,
                              "Funkcja": FUNKCJE.get(fn, fn if fn != "inna" else "—"), "Uwagi": "; ".join(uw) or "—"})
@@ -381,8 +382,8 @@ def rozdz_U(o: Opis, D: dict):
                       "R [m²·K/W]": wu.Rsi, "Rodzaj": wu.kierunek})
         wr.append({"_klasa": "pod", "Lp.": "", "Warstwa": "R_se", "d [mm]": None, "λ [W/(m·K)]": None,
                    "R [m²·K/W]": wu.Rse, "Rodzaj": ""})
-        wr.append({"_klasa": "suma", "Lp.": "", "Warstwa": "R_T (kresy: " + (f"{L(wu.R_gorny, 2)}/{L(wu.R_dolny, 2)}"
-                   if wu.R_gorny else "—") + ")", "d [mm]": sum(w.d for w in wu.warstwy) * 1000,
+        wr.append({"_klasa": "suma", "Lp.": "", "Warstwa": "R_T" + (f" (kresy R'_T / R''_T: {L(wu.R_gorny, 2)} / "
+                   f"{L(wu.R_dolny, 2)})" if wu.R_gorny else ""), "d [mm]": sum(w.d for w in wu.warstwy) * 1000,
                    "λ [W/(m·K)]": None, "R [m²·K/W]": wu.R_T, "Rodzaj": ""})
         u = [f"U₀ = 1/R_T = {L(wu.U0, 3)}; ΔU_g = {L(wu.dU_g, 3)}, ΔU_f = {L(wu.dU_f, 3)}, ΔU_r = {L(wu.dU_r, 3)}; "
              f"U_c = {L(wu.U_c, 3)}" + (f"; izolacja spadkowa: U_śr = {L(wu.klin.get('U_sr'), 3)} "
@@ -418,21 +419,21 @@ def rozdz_mostki(o: Opis, D: dict):
         if w.psi is None:
             continue
         kk = _karta(mostki, w.id)
-        psi_k = "; ".join(f"{x['id'][len(w.id):] or ''}{':' if len(kk) > 1 else ''} {L(x['psi_oi'], 3)}".strip()
-                          for x in kk) or "—"
+        psi_k = " ".join(f"{x['id'][len(w.id):]}: {L(x['psi_oi'], 3)}" if len(kk) > 1 else L(x["psi_oi"], 3)
+                         for x in kk) or "—"
         fk = min((x["f_rsi"] for x in kk), default=None)
         if len(kk) == 1 and abs(kk[0]["psi_oi"] - w.psi) > 0.005:
             rozbiezne.append(w.id)
         f_ocena = w.f_rsi if w.f_rsi is not None else fk
         rows.append({"Węzeł": w.id, "Opis": w.nazwa[:70] + ("…" if len(w.nazwa) > 70 else ""),
                      "ψ_oi karta [W/(m·K)]": psi_k, "ψ projekt [W/(m·K)]": w.psi, "l [m]": w.dlugosc,
-                     "ψ·l [W/K]": w.H, "f_Rsi karta": fk, "f_Rsi projekt": w.f_rsi,
-                     "f_Rsi ≥ wym.": "—" if f_ocena is None else ("tak" if f_ocena >= f_wym - 1e-9 else "NIE"),
+                     "ψ·l [W/K]": w.H, "f_Rsi (karta)": fk, "f_Rsi (proj.)": w.f_rsi,
+                     "≥ f_Rsi,wym": "—" if f_ocena is None else ("tak" if f_ocena >= f_wym - 1e-9 else "NIE"),
                      "Detal": detale_wezla(D["detale"], w.id)})
     o.tabela(rows, tytul="Mostki cieplne liniowe — ψ, długości, f_Rsi",
-             formaty={"ψ projekt [W/(m·K)]": 3, "l [m]": 2, "ψ·l [W/K]": 2, "f_Rsi karta": 3, "f_Rsi projekt": 3},
-             klasa="zwarta", wyrownanie={"Opis": "l", "Detal": "l", "ψ_oi karta [W/(m·K)]": "r"},
-             szerokosci=["12mm", None, "17mm", "13mm", "11mm", "11mm", "11mm", "11mm", "10mm", "20mm"],
+             formaty={"ψ projekt [W/(m·K)]": 3, "l [m]": 2, "ψ·l [W/K]": 2, "f_Rsi (karta)": 3, "f_Rsi (proj.)": 3},
+             klasa="zwarta", wyrownanie={"Opis": "l", "Detal": "l", "ψ_oi karta [W/(m·K)]": "l", "≥ f_Rsi,wym": "c"},
+             szerokosci=["14mm", None, "19mm", "14mm", "12mm", "11mm", "13mm", "13mm", "12mm", "21mm"],
              uwagi=[f"Rozbieżność karty i wartości projektowej > 0,005 W/(m·K): {', '.join(rozbiezne)} — wartość "
                     "projektowa pochodzi z rundy poprawek modelu; karty węzłów należy odświeżyć "
                     "(tools/mostki_budynku.py) przed wydaniem."] if rozbiezne else None,
@@ -537,8 +538,10 @@ def rozdz_stolarka(o: Opis, D: dict):
                                                              str(otw.get("kierunek", "")).replace("_", " ")) if x)
                   or "stałe"}
         if ot.typ not in ZEWN:
-            r3.append(wiersz)
-            continue
+            r3.append(dict(wiersz))
+            if sym not in U_sym:
+                continue
+            wiersz["Rodzaj"] += " (do garażu)" if "garaz" in (st.get(sym) or {}).get("wyrob", "") else ""
         wiersz.update({"Osłona": OSLONY.get(ot.oslona or "brak", ot.oslona), "Montaż": ", ".join(sorted(g["montaz"]))
                        or "—"})
         r1.append(wiersz)
@@ -554,11 +557,11 @@ def rozdz_stolarka(o: Opis, D: dict):
                                ("spełnia" if all(x.spelnia for x in gs) else "NIE SPEŁNIA")) if gs else "—",
                    "Klasa szczeln.": dn.klasa_szczelnosci if dn and dn.klasa_szczelnosci else
                    (f"≥ {kl_min}" if ot.typ in ("okno", "fix", "drzwi_przesuwne_HS") else "—")})
-    o.tabela(r1, tytul="Zestawienie stolarki zewnętrznej — wymiary, otwieranie, osłony, montaż", klasa="zwarta",
+    o.tabela(r1, tytul="Zestawienie stolarki zewnętrznej i drzwi garaż–dom — wymiary, otwieranie, osłony, montaż", klasa="zwarta",
              wyrownanie={"Opis wyrobu (parametry wymagane)": "l", "Otwieranie": "l"},
              szerokosci=["11mm", "20mm", None, "16mm", "8mm", "12mm", "17mm", "14mm", "11mm"],
              zrodlo="model/budynek.yaml — otwory, stolarka (grupowanie po symbolu)")
-    o.tabela(r2, tytul="Zestawienie stolarki zewnętrznej — parametry cieplne, g, szczelność", klasa="zwarta",
+    o.tabela(r2, tytul="Zestawienie stolarki zewnętrznej i drzwi garaż–dom — parametry cieplne, g, szczelność", klasa="zwarta",
              formaty={"U_w wym. [W/(m²·K)]": 2, "U_max [W/(m²·K)]": 1, "g_n": 2}, wyrownanie={"Ocena g": "l"},
              uwagi=["U_w obl. — zakres dla otworów danego symbolu (PN-EN ISO 10077-1; drzwi — U_D z danych wyrobu). "
                     "f_C — współczynnik redukcji osłony (WT zał. 2 pkt 2.1.3 lub PN-EN ISO 52022-1 metodą "
@@ -654,7 +657,7 @@ def rozdz_4linie(o: Opis, D: dict):
                      "Detal": detale_wezla(D["detale"], w["id"])})
     o.tabela(rows, tytul="Ciągłość „4 linii” w węzłach obudowy", klasa="zwarta",
              wyrownanie={"I": "c", "H": "c", "S": "c", "P": "c", "Opis": "l", "Ciągłość / uwaga": "l", "Detal": "l"},
-             szerokosci=["12mm", "42mm", "5mm", "5mm", "5mm", "5mm", None, "22mm"],
+             szerokosci=["14mm", "42mm", "5mm", "5mm", "5mm", "5mm", None, "22mm"],
              uwagi=["✓ — ciągłość zachowana; ! — uwaga wykonawcza (opis w kolumnie „Ciągłość / uwaga” i na karcie "
                     "węzła); ✗ — brak ciągłości."],
              zrodlo="projekt/08_obliczenia/mostki/zestawienie_mostkow.json — linie4")

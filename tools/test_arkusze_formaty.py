@@ -79,6 +79,8 @@ def test_skladanie_formaty_standardowe():
     for L in (590, 970, 1350, 1730):                                     # L = 210 + 190·n, n parzyste
         assert SK.ocena_skladania(L, 594)["ocena"] == "dobre", L
     assert SK.ocena_skladania(780, 297)["ocena_pion"] == "słabe"          # n nieparzyste: para 95 mm
+    for W, H in ((630.0000037, 594.0000047), (629.9999962, 593.9999951), (419.9999881, 594.0000047)):
+        assert SK.ocena_skladania(W, H)["pasy"] == SK.ocena_skladania(round(W), round(H))["pasy"], (W, H)  # z PDF
 
 
 def test_plan_skladania():

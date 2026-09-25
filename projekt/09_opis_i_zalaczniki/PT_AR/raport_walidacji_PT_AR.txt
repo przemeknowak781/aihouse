@@ -1,0 +1,41 @@
+RAPORT KOMPLETNOŚCI — PT_1_AR_2026.09.25.pdf
+Lista kontrolna: PT-1 AR — projekt techniczny, architektura (rejestr C.2)
+Status: NIEKOMPLETNY
+Pozycje: OK 12 · BRAK 3 · DO UZUPEŁNIENIA 2 · N/D 1 · OSTRZEŻENIE 0
+Znaczniki: [DO UZUPEŁNIENIA] ×19, [DOKUMENT ZEWNĘTRZNY] ×0, [DANE PRZYKŁADOWE] ×41
+Plik: 30 stron, 0.49 MB
+
+  element PT: strony 1–30 (opis 30, arkusze 0)
+
+✓ F-01     [  *] OK               Nazwa pliku wg zał. 1 RPB (PT_x_y_rrrr.mm.dd.pdf) (RPB zał. 1; W-301) — nazwa zgodna z zał. 1 RPB (PT)
+✓ F-02     [  *] OK               Rozmiar pliku ≤ 150 MB (RPB § 2b ust. 3) — 0.49 MB (limit 150 MB)
+✓ F-03     [  *] OK               Część rysunkowa wektorowa (RPB § 2b ust. 2) — brak arkuszy w pliku
+✓ F-05     [  *] OK               Tom PT w osobnym pliku (bez wspólnej oprawy z PZT/PAB/ZL) (RPB § 5 ust. 3) — plik zawiera tylko tom PT
+… C2-01    [ PT] DO UZUPEŁNIENIA  Strona tytułowa: „Projekt techniczny”, zamierzenie, kategoria I, inwestor (RPB § 7 ust. 2 pkt 1–2) — pola [DO UZUPEŁNIENIA] na stronie tytułowej
+✓ C2-02    [ PT] OK               Strona tytułowa: nr tomu i liczba tomów PT (RPB § 7 ust. 6)
+… C2-03    [ PT] DO UZUPEŁNIENIA  Strona tytułowa: data, autorzy ze specjalnością, nr uprawnień i zakresem (RPB § 7 ust. 2 pkt 3) — pola [DO UZUPEŁNIENIA] na stronie tytułowej
+✓ C2-04    [ PT] OK               Spis treści (RPB § 7 ust. 5)
+✓ C2-05    [ PT] OK               Numeracja stron tomu (RPB § 6 ust. 2) — 29 stron numerowanych
+✓ C2-06    [ PT] OK               Oświadczenie projektanta PT (brzmienie art. 41 ust. 4a pkt 2 PB) (PB art. 34 ust. 3d pkt 3, art. 41 ust. 4a pkt 2)
+✓ C2-07    [ PT] OK               Dane dotyczące warunków ochrony przeciwpożarowej stosownie do zakresu (RPB § 23 pkt 10)
+✗ C2-08    [ PT] BRAK             Skale rysunków nie mniejsze niż 1:100 (RPB § 9 ust. 3) — brak rysunków
+✓ C2-AR-01 [ PT] OK               Rozwiązania konstrukcyjno-materiałowe przegród zewnętrznych i wewnętrznych (RPB § 23 pkt 4)
+✓ C2-AR-02 [ PT] OK               Obliczenia U / ψ / f_Rsi przegród i detali (W-243…W-250)
+✓ C2-AR-03 [ PT] OK               Zestawienie stolarki (U, g, szczelność, otwieranie) (W-317)
+✗ C2-AR-04 [ PT] BRAK             Detale cieplne i szczelności (wsporniki, attyki, okapy, osadzenie stolarki, próg, cokół) (RPB § 24 pkt 2)
+✗ C2-AR-05 [ PT] BRAK             Rzuty (z dachem), przekroje, elewacje uzupełniające (RPB § 24 pkt 1) — rysunków: 0 (wymagane ≥ 3)
+– C2-AR-06 [ PT] N/D              Analiza akustyczna § 23 pkt 4a (RPB § 23 pkt 4a) — nie dotyczy — dom wolnostojący z 1 lokalem (W-231)
+
+Pola do uzupełnienia i dokumenty zewnętrzne (wystąpienia):
+    3 × [DO UZUPEŁNIENIA: imię i nazwisko]
+    3 × [DO UZUPEŁNIENIA: nr uprawnień budowlanych]
+    2 × [DO UZUPEŁNIENIA: adres inwestora]
+    2 × [DO UZUPEŁNIENIA: imię i nazwisko lub nazwa inwestora]
+    2 × [DO UZUPEŁNIENIA: kod TERYT jedn. ewid. WWPPGG_R]
+    1 × [DO UZUPEŁNIENIA: adres pracowni]
+    1 × [DO UZUPEŁNIENIA: data złożenia oświadczenia z art. 102a PB]
+    1 × [DO UZUPEŁNIENIA: jednostka ewidencyjna — kod TERYT WWPPGG_R i nazwa]
+    1 × [DO UZUPEŁNIENIA: miejscowość]
+    1 × [DO UZUPEŁNIENIA: nazwa pracowni projektowej]
+    1 × [DO UZUPEŁNIENIA: nr i data decyzji o pozwoleniu na budowę, organ]
+    1 × [DO UZUPEŁNIENIA: potwierdzenie wpisu w e-CRUB albo dołączenie kopii]

@@ -36,8 +36,9 @@ RANK = {"dobre": 2, "poprawne": 1, "słabe": 0}
 
 
 def pasy_pionowe(W: float) -> list[float]:
-    """Szerokości pasów harmonijki od lewej krawędzi [mm] (suma = W)."""
-    W = float(W)
+    """Szerokości pasów harmonijki od lewej krawędzi [mm] (suma = W). W zaokrąglane do 0,01 mm — wymiary odczytane
+    z PDF (np. 630,0000037) dają ten sam plan co wymiary nominalne."""
+    W = round(float(W), 2)
     if W <= A4_W + 0.5:
         return [W]
     if W <= PAS_OPRAWY + 2 * PAS_TABLICZKI + 0.5:                  # ≤ 590: 3 pasy, margines na krawędzi paczki
@@ -57,7 +58,7 @@ def pasy_pionowe(W: float) -> list[float]:
 
 def rzedy_poziome(H: float) -> list[float]:
     """Wysokości rzędów od dolnej krawędzi [mm]: co 297 mm, ostatni (górny) — reszta."""
-    H = float(H)
+    H = round(float(H), 2)
     ys = []
     y = A4_H
     if H > A4_H + 0.5:

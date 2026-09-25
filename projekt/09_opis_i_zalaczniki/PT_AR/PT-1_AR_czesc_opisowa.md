@@ -47,7 +47,7 @@ wewnętrznej, warstwy przegród poziomych — od góry. Grubości w milimetrach;
 | Kod | Rodzaj | Nazwa (model) | Grubość [mm] | U [W/(m²·K)] | Detale |
 |---|---|---|---|---|---|
 | SZ1 | ściana zewnętrzna | Ściana zewnętrzna nośna: silikat 18 + ETICS EPS 031 20 cm | 405 | 0,170 | D-01, D-02, D-03, D-04, D-05, D-06, D-08, D-09 |
-| SZ2 | ściana zewnętrzna | Ściana zewnętrzna bryły A (P2) za lamelami: silikat 18 + wełna fasadowa 20 cm + membrana UV-stabilna (czarna); szczelina wentylowana ok. 11 cm i lamele na ruszcie — element `lamele` | 405 | 0,170 | D-02, D-04, D-08, D-12 |
+| SZ2 | ściana zewnętrzna | Ściana zewnętrzna bryły A (P2) za lamelami: silikat 18 + wełna fasadowa 20 cm + membrana UV-stabilna (czarna); szczelina wentylowana ok. 11 cm i lamele na ruszcie — element lamele | 405 | 0,170 | D-02, D-04, D-08, D-12 |
 | SZL | ściana zewnętrzna | Ściana zewnętrzna lekka A' (na wsporniku P2): GK + OSB (szczelność) + szkielet KVH 45×200 z wełną + DWD + wełna fasadowa 18 cm + membrana UV (lico zewn. 0,30 m od osi — jak SZ2, ciągłość warstw w narożu); bez funkcji nośnej | 440 | 0,099 | D-02, D-08, D-12 |
 | SW18 | ściana wewnętrzna nośna | Ściana wewnętrzna nośna: silikat 18, tynk gipsowy obustronnie | 210 | — | — |
 | SWZB | ściana wewnętrzna nośna | Ściana wewnętrzna nośna żelbetowa 18 cm (trzon klatki na P0 — usztywnienie w kierunku x, J2) | 210 | — | — |
@@ -84,16 +84,16 @@ Detale — detale PT-AR-D obejmujące węzły z udziałem przegrody (sekcja `wez
 | Lp. | Materiał / wyrób (parametry wymagane) | d [mm] | λ [W/(m·K)] | Funkcja | Uwagi |
 |---|---|---|---|---|---|
 | 1 | Tynk gipsowy maszynowy 1,5 cm | 15,000 | 0,400 | szczelność powietrzna | — |
-| 2 | Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej | 180,000 | 0,900 | konstrukcja | warstwa nośna / konstrukcyjna |
+| 2 | Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej | 180,000 | 0,900 | konstrukcja | rdzeń przegrody |
 | 3 | Styropian grafitowy EPS 031 (ETICS, NRO w systemie) | 200,000 | 0,031 | izolacja cieplna | — |
 | 4 | ETICS: warstwa zbrojona + tynk silikonowy 1,5 mm (biały / jasnoszary NCS S 1500-N) | 10,000 | 0,800 | tynk | — |
 
-**Tabela 3. SZ2 — Ściana zewnętrzna bryły A (P2) za lamelami: silikat 18 + wełna fasadowa 20 cm + membrana UV-stabilna (czarna); szczelina wentylowana ok. 11 cm i lamele na ruszcie — element `lamele`**
+**Tabela 3. SZ2 — Ściana zewnętrzna bryły A (P2) za lamelami: silikat 18 + wełna fasadowa 20 cm + membrana UV-stabilna (czarna); szczelina wentylowana ok. 11 cm i lamele na ruszcie — element lamele**
 
 | Lp. | Materiał / wyrób (parametry wymagane) | d [mm] | λ [W/(m·K)] | Funkcja | Uwagi |
 |---|---|---|---|---|---|
 | 1 | Tynk gipsowy maszynowy 1,5 cm | 15,000 | 0,400 | szczelność powietrzna | — |
-| 2 | Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej | 180,000 | 0,900 | konstrukcja | warstwa nośna / konstrukcyjna |
+| 2 | Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej | 180,000 | 0,900 | konstrukcja | rdzeń przegrody |
 | 3 | Wełna mineralna fasadowa (elewacja wentylowana bryły A, A1) | 200,000 | 0,035 | izolacja cieplna | — |
 | 4 | Membrana fasadowa wiatroizolacyjna UV-stabilna, czarna (sd ≈ 0,02 m) | 10,000 | 0,170 | wiatroizolacja | — |
 
@@ -101,9 +101,9 @@ Detale — detale PT-AR-D obejmujące węzły z udziałem przegrody (sekcja `wez
 
 | Lp. | Materiał / wyrób (parametry wymagane) | d [mm] | λ [W/(m·K)] | Funkcja | Uwagi |
 |---|---|---|---|---|---|
-| 1 | Płyta gipsowo-kartonowa 12,5 mm (GKB / GKBI w łazienkach) | 25,000 | 0,250 | wykonczenie | — |
+| 1 | Płyta gipsowo-kartonowa 12,5 mm (GKB / GKBI w łazienkach) | 25,000 | 0,250 | wykończenie | — |
 | 2 | Płyta OSB/3 15 mm (usztywnienie i warstwa szczelności ściany A') | 15,000 | 0,130 | szczelność powietrzna | — |
-| 3 | Wełna mineralna 035 (szkielet, docieplenia, ściana dom–garaż) | 200,000 | 0,035 | izolacja cieplna | niejednorodna: WELNA_035 88 %, DREWNO_KVH 12 %; warstwa nośna / konstrukcyjna |
+| 3 | Wełna mineralna 035 (szkielet, docieplenia, ściana dom–garaż) | 200,000 | 0,035 | izolacja cieplna | niejednorodna: WELNA_035 88 %, DREWNO_KVH 12 %; rdzeń przegrody |
 | 4 | Płyta drewnopochodna wiatroizolacyjna DWD/MDF.RWH 16 mm | 16,000 | 0,100 | wiatroizolacja | — |
 | 5 | Wełna mineralna fasadowa (elewacja wentylowana bryły A, A1) | 180,000 | 0,035 | izolacja cieplna | — |
 | 6 | Membrana fasadowa wiatroizolacyjna UV-stabilna, czarna (sd ≈ 0,02 m) | 4,000 | 0,170 | wiatroizolacja | — |
@@ -113,7 +113,7 @@ Detale — detale PT-AR-D obejmujące węzły z udziałem przegrody (sekcja `wez
 | Lp. | Materiał / wyrób (parametry wymagane) | d [mm] | λ [W/(m·K)] | Funkcja | Uwagi |
 |---|---|---|---|---|---|
 | 1 | Tynk gipsowy maszynowy 1,5 cm | 15,000 | 0,400 | tynk | — |
-| 2 | Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej | 180,000 | 0,900 | konstrukcja | warstwa nośna / konstrukcyjna |
+| 2 | Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej | 180,000 | 0,900 | konstrukcja | rdzeń przegrody |
 | 3 | Wełna mineralna 035 (szkielet, docieplenia, ściana dom–garaż) | 120,000 | 0,035 | izolacja cieplna | — |
 | 4 | Tynk cementowo-wapienny 1,5 cm (garaż, pom. techniczne) | 10,000 | 0,820 | tynk | — |
 
@@ -122,7 +122,7 @@ Detale — detale PT-AR-D obejmujące węzły z udziałem przegrody (sekcja `wez
 | Lp. | Materiał / wyrób (parametry wymagane) | d [mm] | λ [W/(m·K)] | Funkcja | Uwagi |
 |---|---|---|---|---|---|
 | 1 | Płyty PIR z okładziną (izolacja spadkowa stropodachów) | 100,000 | 0,022 | izolacja cieplna | — |
-| 2 | Żelbet C30/37 XC4/XF1 (krawędzie płyt wysuniętych, attyki, belki) | 180,000 | 2,500 | konstrukcja | warstwa nośna / konstrukcyjna |
+| 2 | Żelbet C30/37 XC4/XF1 (krawędzie płyt wysuniętych, attyki, belki) | 180,000 | 2,500 | konstrukcja | rdzeń przegrody |
 | 3 | Styropian grafitowy EPS 031 (ETICS, NRO w systemie) | 200,000 | 0,031 | izolacja cieplna | — |
 | 4 | ETICS: warstwa zbrojona + tynk silikonowy 1,5 mm (biały / jasnoszary NCS S 1500-N) | 5,000 | 0,800 | tynk | — |
 
@@ -131,56 +131,56 @@ Detale — detale PT-AR-D obejmujące węzły z udziałem przegrody (sekcja `wez
 | Lp. | Materiał / wyrób (parametry wymagane) | d [mm] | λ [W/(m·K)] | Funkcja | Uwagi |
 |---|---|---|---|---|---|
 | 1 | Deska warstwowa dębowa 15 mm, klejona | 15,000 | 0,180 | konstrukcja | — |
-| 2 | Jastrych cementowy CT-C25-F5 z wężownicą ogrzewania podłogowego | 65,000 | 1,200 | wykonczenie | — |
+| 2 | Jastrych cementowy CT-C25-F5 z wężownicą ogrzewania podłogowego | 65,000 | 1,200 | wykończenie | — |
 | 3 | Styropian podłogowy EPS 100-038 (pod jastrychem) | 65,000 | 0,038 | izolacja cieplna | — |
 | 4 | Izolacja przeciwwilgociowa i przeciwradonowa: membrana SBS 4 mm na płycie fundamentowej | 5,000 | 0,230 | izolacja przeciwwilgociowa/przeciwradonowa | — |
-| 5 | Żelbet C25/30, B500SP (stropy, płyta fundamentowa, ściany) | 250,000 | 2,300 | konstrukcja | warstwa nośna / konstrukcyjna |
+| 5 | Żelbet C25/30, B500SP (stropy, płyta fundamentowa, ściany) | 250,000 | 2,300 | konstrukcja | rdzeń przegrody |
 | 6 | Polistyren ekstrudowany XPS 300 (pod płytą fundamentową, cokół, izolacja obwodowa) | 200,000 | 0,036 | izolacja cieplna | — |
 | 7 | Folia PE 0,2 mm — warstwa rozdzielająca pod XPS (nie pełni funkcji paroizolacji) | 0,200 | 0,330 | warstwa rozdzielająca | — |
-| 8 | Podsypka piaskowa zagęszczona (I_s ≥ 0,98) | 200,000 | 2,000 | grunt | — |
+| 8 | Podsypka piaskowa zagęszczona (I_s ≥ 0,98) | 200,000 | 2,000 | podłoże | — |
 
 **Tabela 8. POD-0L — Podłoga na płycie (P0) — łazienki, WC, przedsionek, pom. techniczne: gres na hydroizolacji podpłytkowej**
 
 | Lp. | Materiał / wyrób (parametry wymagane) | d [mm] | λ [W/(m·K)] | Funkcja | Uwagi |
 |---|---|---|---|---|---|
-| 1 | Płytki gresowe 60×120 na kleju C2TE S1 | 12,000 | 1,300 | wykonczenie | — |
+| 1 | Płytki gresowe 60×120 na kleju C2TE S1 | 12,000 | 1,300 | wykończenie | — |
 | 2 | Hydroizolacja podpłytkowa (masa uszczelniająca + taśmy), strefy mokre | 3,000 | 0,200 | hydroizolacja | — |
-| 3 | Jastrych cementowy CT-C25-F5 z wężownicą ogrzewania podłogowego | 65,000 | 1,200 | wykonczenie | — |
+| 3 | Jastrych cementowy CT-C25-F5 z wężownicą ogrzewania podłogowego | 65,000 | 1,200 | wykończenie | — |
 | 4 | Styropian podłogowy EPS 100-038 (pod jastrychem) | 65,000 | 0,038 | izolacja cieplna | — |
 | 5 | Izolacja przeciwwilgociowa i przeciwradonowa: membrana SBS 4 mm na płycie fundamentowej | 5,000 | 0,230 | izolacja przeciwwilgociowa/przeciwradonowa | — |
-| 6 | Żelbet C25/30, B500SP (stropy, płyta fundamentowa, ściany) | 250,000 | 2,300 | konstrukcja | warstwa nośna / konstrukcyjna |
+| 6 | Żelbet C25/30, B500SP (stropy, płyta fundamentowa, ściany) | 250,000 | 2,300 | konstrukcja | rdzeń przegrody |
 | 7 | Polistyren ekstrudowany XPS 300 (pod płytą fundamentową, cokół, izolacja obwodowa) | 200,000 | 0,036 | izolacja cieplna | — |
 | 8 | Folia PE 0,2 mm — warstwa rozdzielająca pod XPS (nie pełni funkcji paroizolacji) | 0,200 | 0,330 | warstwa rozdzielająca | — |
-| 9 | Podsypka piaskowa zagęszczona (I_s ≥ 0,98) | 200,000 | 2,000 | grunt | — |
+| 9 | Podsypka piaskowa zagęszczona (I_s ≥ 0,98) | 200,000 | 2,000 | podłoże | — |
 
 **Tabela 9. POD-G — Posadzka garażu (nieogrzewany): żywica R11, jastrych cementowy zbrojony 9–14 cm (spadek 0,8 % do bramy: −0,05 przy drzwiach do domu → −0,10 przy bramie), folia PE, XPS 300 10 cm, membrana SBS (przeciwwilgociowa, przeciwradonowa), płyta ŻB 25 cm obniżona (wierzch −0,30) na XPS 20 cm**
 
 | Lp. | Materiał / wyrób (parametry wymagane) | d [mm] | λ [W/(m·K)] | Funkcja | Uwagi |
 |---|---|---|---|---|---|
-| 1 | Posadzka żywiczna epoksydowa antypoślizgowa R11 (garaż) | 3,000 | 0,200 | wykonczenie | — |
-| 2 | Jastrych cementowy CT-C30-F5 zbrojony (siatka/włókna), dylatacja obwodowa — posadzka garażu na XPS | 92,000 | 1,200 | wykonczenie | — |
+| 1 | Posadzka żywiczna epoksydowa antypoślizgowa R11 (garaż) | 3,000 | 0,200 | wykończenie | — |
+| 2 | Jastrych cementowy CT-C30-F5 zbrojony (siatka/włókna), dylatacja obwodowa — posadzka garażu na XPS | 92,000 | 1,200 | wykończenie | — |
 | 3 | Folia PE 0,2 mm — warstwa rozdzielająca pod XPS (nie pełni funkcji paroizolacji) | 0,200 | 0,330 | warstwa rozdzielająca | — |
 | 4 | Polistyren ekstrudowany XPS 300 (pod płytą fundamentową, cokół, izolacja obwodowa) | 100,000 | 0,036 | izolacja cieplna | — |
 | 5 | Izolacja przeciwwilgociowa i przeciwradonowa: membrana SBS 4 mm na płycie fundamentowej | 5,000 | 0,230 | izolacja przeciwwilgociowa/przeciwradonowa | — |
-| 6 | Żelbet C25/30, B500SP (stropy, płyta fundamentowa, ściany) | 250,000 | 2,300 | konstrukcja | warstwa nośna / konstrukcyjna |
+| 6 | Żelbet C25/30, B500SP (stropy, płyta fundamentowa, ściany) | 250,000 | 2,300 | konstrukcja | rdzeń przegrody |
 | 7 | Polistyren ekstrudowany XPS 300 (pod płytą fundamentową, cokół, izolacja obwodowa) | 200,000 | 0,036 | izolacja cieplna | — |
 | 8 | Folia PE 0,2 mm — warstwa rozdzielająca pod XPS (nie pełni funkcji paroizolacji) | 0,200 | 0,330 | warstwa rozdzielająca | — |
-| 9 | Podsypka piaskowa zagęszczona (I_s ≥ 0,98) | 200,000 | 2,000 | grunt | — |
+| 9 | Podsypka piaskowa zagęszczona (I_s ≥ 0,98) | 200,000 | 2,000 | podłoże | — |
 
 **Tabela 10. SUF-ZEW — Sufit pod stropem nad powietrzem zewnętrznym (wspornik bryły A): wełna 20 cm na kołkach + podsufitka włóknocementowa na ruszcie z pustką wentylowaną**
 
 | Lp. | Materiał / wyrób (parametry wymagane) | d [mm] | λ [W/(m·K)] | Funkcja | Uwagi |
 |---|---|---|---|---|---|
-| 1 | Wełna mineralna 035 (szkielet, docieplenia, ściana dom–garaż) | 200,000 | 0,035 | izolacja cieplna | warstwa nośna / konstrukcyjna |
+| 1 | Wełna mineralna 035 (szkielet, docieplenia, ściana dom–garaż) | 200,000 | 0,035 | izolacja cieplna | rdzeń przegrody |
 | 2 | Membrana fasadowa wiatroizolacyjna UV-stabilna, czarna (sd ≈ 0,02 m) | 1,000 | 0,170 | wiatroizolacja | — |
 | 3 | Pustka wentylowana 40 mm (ruszt lamel) | 40,000 | 0,250 | pustka powietrzna | — |
-| 4 | Podsufitka zewnętrzna: płyta włóknocementowa 12 mm na ruszcie, RAL 7016 | 12,000 | 0,350 | wykonczenie | — |
+| 4 | Podsufitka zewnętrzna: płyta włóknocementowa 12 mm na ruszcie, RAL 7016 | 12,000 | 0,350 | wykończenie | — |
 
 **Tabela 11. SUF-G — Docieplenie spodu stropu garażu pasem 1,0 m przy ścianach osi E i 2 (wełna 10 cm + płyta) — ograniczenie mostka (J2)**
 
 | Lp. | Materiał / wyrób (parametry wymagane) | d [mm] | λ [W/(m·K)] | Funkcja | Uwagi |
 |---|---|---|---|---|---|
-| 1 | Wełna mineralna 035 (szkielet, docieplenia, ściana dom–garaż) | 100,000 | 0,035 | izolacja cieplna | warstwa nośna / konstrukcyjna |
+| 1 | Wełna mineralna 035 (szkielet, docieplenia, ściana dom–garaż) | 100,000 | 0,035 | izolacja cieplna | rdzeń przegrody |
 | 2 | Tynk cementowo-wapienny 1,5 cm (garaż, pom. techniczne) | 10,000 | 0,820 | tynk | — |
 
 **Tabela 12. SD1 — Stropodach bryły A (P2): membrana TPO, PIR spadkowy 12–32 cm (śr. 22), paroizolacja z Al, płyta ŻB 22 cm, tynk; spadek ≥ 2 % do wpustów WP1/WP2**
@@ -190,19 +190,19 @@ Detale — detale PT-AR-D obejmujące węzły z udziałem przegrody (sekcja `wez
 | 1 | Membrana dachowa TPO 1,5 mm, mocowana mechanicznie (hydroizolacja stropodachów) | 2,000 | 0,200 | hydroizolacja | — |
 | 2 | Płyty PIR z okładziną (izolacja spadkowa stropodachów) | 220,000 | 0,022 | izolacja cieplna | spadkowa 120–320 mm |
 | 3 | Paroizolacja bitumiczna z wkładką Al (na płycie stropodachów) | 4,000 | 0,230 | paroizolacja | — |
-| 4 | Żelbet C25/30, B500SP (stropy, płyta fundamentowa, ściany) | 220,000 | 2,300 | konstrukcja | warstwa nośna / konstrukcyjna |
+| 4 | Żelbet C25/30, B500SP (stropy, płyta fundamentowa, ściany) | 220,000 | 2,300 | konstrukcja | rdzeń przegrody |
 | 5 | Tynk gipsowy maszynowy 1,5 cm | 10,000 | 0,400 | tynk | — |
 
 **Tabela 13. SD2 — Stropodach nad P1 (pola pn. poza bryłą A): żwir 5 cm, włóknina, membrana TPO, PIR spadkowy 14–26 cm, paroizolacja, płyta ŻB 22 cm**
 
 | Lp. | Materiał / wyrób (parametry wymagane) | d [mm] | λ [W/(m·K)] | Funkcja | Uwagi |
 |---|---|---|---|---|---|
-| 1 | Żwir płukany 16/32 mm (balast dachu P1, opaska przy attyce) | 50,000 | 2,000 | balast | — |
+| 1 | Żwir płukany 16/32 mm (balast dachu P1, opaska przy attyce) | 50,000 | 2,000 | balast / ochrona | — |
 | 2 | Włóknina ochronna PP 300 g/m² | 4,000 | 0,500 | filtracja/ochrona | — |
 | 3 | Membrana dachowa TPO 1,5 mm, mocowana mechanicznie (hydroizolacja stropodachów) | 2,000 | 0,200 | hydroizolacja | — |
 | 4 | Płyty PIR z okładziną (izolacja spadkowa stropodachów) | 200,000 | 0,022 | izolacja cieplna | spadkowa 140–260 mm |
 | 5 | Paroizolacja bitumiczna z wkładką Al (na płycie stropodachów) | 4,000 | 0,230 | paroizolacja | — |
-| 6 | Żelbet C25/30, B500SP (stropy, płyta fundamentowa, ściany) | 220,000 | 2,300 | konstrukcja | warstwa nośna / konstrukcyjna |
+| 6 | Żelbet C25/30, B500SP (stropy, płyta fundamentowa, ściany) | 220,000 | 2,300 | konstrukcja | rdzeń przegrody |
 | 7 | Tynk gipsowy maszynowy 1,5 cm | 10,000 | 0,400 | tynk | — |
 
 **Tabela 14. DZ1 — Dach zielony ekstensywny NIEUŻYTKOWY nad garażem (pom. nieogrzewane) i pasem gospodarczym: substrat 8 cm, geowłóknina, mata drenażowa, włóknina, bariera przeciwkorzenna, 2 × papa SBS, PIR spadkowy 12–24 cm, paroizolacja, płyta ŻB 24 cm (dwukierunkowa); opaska żwirowa 0,5 m przy attykach i wpustach; nad garażem: pole PV biosolarne (8 modułów)**
@@ -217,15 +217,15 @@ Detale — detale PT-AR-D obejmujące węzły z udziałem przegrody (sekcja `wez
 | 6 | Hydroizolacja 2 × papa SBS (podkładowa + wierzchniego krycia, dach zielony) | 9,500 | 0,230 | hydroizolacja | — |
 | 7 | Płyty PIR z okładziną (izolacja spadkowa stropodachów) | 180,000 | 0,022 | izolacja cieplna | spadkowa 120–240 mm |
 | 8 | Paroizolacja bitumiczna z wkładką Al (na płycie stropodachów) | 4,000 | 0,230 | paroizolacja | — |
-| 9 | Żelbet C25/30, B500SP (stropy, płyta fundamentowa, ściany) | 240,000 | 2,300 | konstrukcja | warstwa nośna / konstrukcyjna |
+| 9 | Żelbet C25/30, B500SP (stropy, płyta fundamentowa, ściany) | 240,000 | 2,300 | konstrukcja | rdzeń przegrody |
 
 **Tabela 15. OK1 — Płyta wysunięta (okap, daszek, krawędź ST2/ST3): obróbka/membrana ze spadkiem 2 % od budynku, płyta ŻB C30/37 z łącznikiem termoizolacyjnym (ETA), podsufitka z okapnikiem**
 
 | Lp. | Materiał / wyrób (parametry wymagane) | d [mm] | λ [W/(m·K)] | Funkcja | Uwagi |
 |---|---|---|---|---|---|
 | 1 | Membrana dachowa TPO 1,5 mm, mocowana mechanicznie (hydroizolacja stropodachów) | 2,000 | 0,200 | hydroizolacja | — |
-| 2 | Żelbet C30/37 XC4/XF1 (krawędzie płyt wysuniętych, attyki, belki) | 300,000 | 2,500 | konstrukcja | warstwa nośna / konstrukcyjna |
-| 3 | Podsufitka zewnętrzna: płyta włóknocementowa 12 mm na ruszcie, RAL 7016 | 12,000 | 0,350 | wykonczenie | — |
+| 2 | Żelbet C30/37 XC4/XF1 (krawędzie płyt wysuniętych, attyki, belki) | 300,000 | 2,500 | konstrukcja | rdzeń przegrody |
+| 3 | Podsufitka zewnętrzna: płyta włóknocementowa 12 mm na ruszcie, RAL 7016 | 12,000 | 0,350 | wykończenie | — |
 
 ### Przegrody wewnętrzne
 
@@ -234,7 +234,7 @@ Detale — detale PT-AR-D obejmujące węzły z udziałem przegrody (sekcja `wez
 | Lp. | Materiał / wyrób (parametry wymagane) | d [mm] | λ [W/(m·K)] | Funkcja | Uwagi |
 |---|---|---|---|---|---|
 | 1 | Tynk gipsowy maszynowy 1,5 cm | 15,000 | 0,400 | tynk | — |
-| 2 | Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej | 180,000 | 0,900 | konstrukcja | warstwa nośna / konstrukcyjna |
+| 2 | Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej | 180,000 | 0,900 | konstrukcja | rdzeń przegrody |
 | 3 | Tynk gipsowy maszynowy 1,5 cm | 15,000 | 0,400 | tynk | — |
 
 **Tabela 17. SWZB — Ściana wewnętrzna nośna żelbetowa 18 cm (trzon klatki na P0 — usztywnienie w kierunku x, J2)**
@@ -242,74 +242,74 @@ Detale — detale PT-AR-D obejmujące węzły z udziałem przegrody (sekcja `wez
 | Lp. | Materiał / wyrób (parametry wymagane) | d [mm] | λ [W/(m·K)] | Funkcja | Uwagi |
 |---|---|---|---|---|---|
 | 1 | Tynk gipsowy maszynowy 1,5 cm | 15,000 | 0,400 | tynk | — |
-| 2 | Żelbet C25/30, B500SP (stropy, płyta fundamentowa, ściany) | 180,000 | 2,300 | konstrukcja | warstwa nośna / konstrukcyjna |
+| 2 | Żelbet C25/30, B500SP (stropy, płyta fundamentowa, ściany) | 180,000 | 2,300 | konstrukcja | rdzeń przegrody |
 | 3 | Tynk gipsowy maszynowy 1,5 cm | 15,000 | 0,400 | tynk | — |
 
 **Tabela 18. SCZB15 — Ściana środkowa klatki schodowej: żelbet C25/30 15 cm, monolityczna z płytami biegów i spoczników, ciągła P0–P2 (przez poziomy stropów), zakotwiona w podciągach B8/B9/B10 osi 3 (audyt A2 I-2)**
 
 | Lp. | Materiał / wyrób (parametry wymagane) | d [mm] | λ [W/(m·K)] | Funkcja | Uwagi |
 |---|---|---|---|---|---|
-| 1 | Żelbet C25/30, B500SP (stropy, płyta fundamentowa, ściany) | 150,000 | 2,300 | konstrukcja | warstwa nośna / konstrukcyjna |
+| 1 | Żelbet C25/30, B500SP (stropy, płyta fundamentowa, ściany) | 150,000 | 2,300 | konstrukcja | rdzeń przegrody |
 
 **Tabela 19. DZ12 — Ścianka działowa: silikat 12 + tynk gipsowy obustronnie (R'w ≥ 45 dB)**
 
 | Lp. | Materiał / wyrób (parametry wymagane) | d [mm] | λ [W/(m·K)] | Funkcja | Uwagi |
 |---|---|---|---|---|---|
 | 1 | Tynk gipsowy maszynowy 1,5 cm | 15,000 | 0,400 | tynk | — |
-| 2 | Bloczek wapienno-piaskowy 12 cm, kl. 15 (ścianki działowe, licowy w klatce) | 120,000 | 0,900 | konstrukcja | warstwa nośna / konstrukcyjna |
+| 2 | Bloczek wapienno-piaskowy 12 cm, kl. 15 (ścianki działowe, licowy w klatce) | 120,000 | 0,900 | konstrukcja | rdzeń przegrody |
 | 3 | Tynk gipsowy maszynowy 1,5 cm | 15,000 | 0,400 | tynk | — |
 
 **Tabela 20. DZGK — Ścianka działowa GK 12,5 cm z kasetą drzwi przesuwnych chowanych (2 × GK impregnowana 12,5 mm obustronnie, kaseta stalowa 7,5 cm z wełną poza strefą kasety; R'w ≥ 40 dB)**
 
 | Lp. | Materiał / wyrób (parametry wymagane) | d [mm] | λ [W/(m·K)] | Funkcja | Uwagi |
 |---|---|---|---|---|---|
-| 1 | Płyta gipsowo-kartonowa 12,5 mm (GKB / GKBI w łazienkach) | 25,000 | 0,250 | wykonczenie | — |
-| 2 | Wełna mineralna 035 (szkielet, docieplenia, ściana dom–garaż) | 75,000 | 0,035 | izolacja cieplna | warstwa nośna / konstrukcyjna |
-| 3 | Płyta gipsowo-kartonowa 12,5 mm (GKB / GKBI w łazienkach) | 25,000 | 0,250 | wykonczenie | — |
+| 1 | Płyta gipsowo-kartonowa 12,5 mm (GKB / GKBI w łazienkach) | 25,000 | 0,250 | wykończenie | — |
+| 2 | Wełna mineralna 035 (szkielet, docieplenia, ściana dom–garaż) | 75,000 | 0,035 | izolacja cieplna | rdzeń przegrody |
+| 3 | Płyta gipsowo-kartonowa 12,5 mm (GKB / GKBI w łazienkach) | 25,000 | 0,250 | wykończenie | — |
 
 **Tabela 21. DZ18A — Ścianka działowa akustyczna pom. technicznego z centralą (P2): silikat 18 kl. 15 na zaprawie cienkowarstwowej, tynk gipsowy obustronnie, bez funkcji nośnej, styk ze stropem wypełniony elastycznie; cel R'A1 ≥ 50 dB do sprawdzenia w PT (audyt A3 I-8; W-066, W-230)**
 
 | Lp. | Materiał / wyrób (parametry wymagane) | d [mm] | λ [W/(m·K)] | Funkcja | Uwagi |
 |---|---|---|---|---|---|
 | 1 | Tynk gipsowy maszynowy 1,5 cm | 15,000 | 0,400 | tynk | — |
-| 2 | Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej | 180,000 | 0,900 | konstrukcja | warstwa nośna / konstrukcyjna |
+| 2 | Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej | 180,000 | 0,900 | konstrukcja | rdzeń przegrody |
 | 3 | Tynk gipsowy maszynowy 1,5 cm | 15,000 | 0,400 | tynk | — |
 
 **Tabela 22. GK10 — Obudowa szachtu SI: 2 × GKF 12,5 + profil CW 50 z wełną + 2 × GKF 12,5 (EI 30)**
 
 | Lp. | Materiał / wyrób (parametry wymagane) | d [mm] | λ [W/(m·K)] | Funkcja | Uwagi |
 |---|---|---|---|---|---|
-| 1 | Płyta gipsowo-kartonowa 12,5 mm (GKB / GKBI w łazienkach) | 25,000 | 0,250 | wykonczenie | — |
-| 2 | Wełna mineralna 035 (szkielet, docieplenia, ściana dom–garaż) | 50,000 | 0,035 | izolacja cieplna | warstwa nośna / konstrukcyjna |
-| 3 | Płyta gipsowo-kartonowa 12,5 mm (GKB / GKBI w łazienkach) | 25,000 | 0,250 | wykonczenie | — |
+| 1 | Płyta gipsowo-kartonowa 12,5 mm (GKB / GKBI w łazienkach) | 25,000 | 0,250 | wykończenie | — |
+| 2 | Wełna mineralna 035 (szkielet, docieplenia, ściana dom–garaż) | 50,000 | 0,035 | izolacja cieplna | rdzeń przegrody |
+| 3 | Płyta gipsowo-kartonowa 12,5 mm (GKB / GKBI w łazienkach) | 25,000 | 0,250 | wykończenie | — |
 
 **Tabela 23. SGL — Ścianka szklana wiatrołap/hol: VSG w ramie aluminiowej z drzwiami szklanymi 0,90 m**
 
 | Lp. | Materiał / wyrób (parametry wymagane) | d [mm] | λ [W/(m·K)] | Funkcja | Uwagi |
 |---|---|---|---|---|---|
-| 1 | Ścianka szklana VSG 2 × 8 mm w ramie aluminiowej (wiatrołap / hol) | 50,000 | 1,000 | wykonczenie | warstwa nośna / konstrukcyjna |
+| 1 | Ścianka szklana VSG 2 × 8 mm w ramie aluminiowej (wiatrołap / hol) | 50,000 | 1,000 | wykończenie | rdzeń przegrody |
 
 **Tabela 24. POD-1 — Strop międzykondygnacyjny: deska dębowa, jastrych z ogrzewaniem podł., EPS 100, EPS T (akustyczny), płyta ŻB 22 cm, tynk**
 
 | Lp. | Materiał / wyrób (parametry wymagane) | d [mm] | λ [W/(m·K)] | Funkcja | Uwagi |
 |---|---|---|---|---|---|
 | 1 | Deska warstwowa dębowa 15 mm, klejona | 15,000 | 0,180 | konstrukcja | — |
-| 2 | Jastrych cementowy CT-C25-F5 z wężownicą ogrzewania podłogowego | 65,000 | 1,200 | wykonczenie | — |
+| 2 | Jastrych cementowy CT-C25-F5 z wężownicą ogrzewania podłogowego | 65,000 | 1,200 | wykończenie | — |
 | 3 | Styropian podłogowy EPS 100-038 (pod jastrychem) | 40,000 | 0,038 | izolacja cieplna | — |
 | 4 | Styropian elastyfikowany EPS T (akustyczny, pod jastrychem) | 30,000 | 0,040 | izolacja cieplna | — |
-| 5 | Żelbet C25/30, B500SP (stropy, płyta fundamentowa, ściany) | 220,000 | 2,300 | konstrukcja | warstwa nośna / konstrukcyjna |
+| 5 | Żelbet C25/30, B500SP (stropy, płyta fundamentowa, ściany) | 220,000 | 2,300 | konstrukcja | rdzeń przegrody |
 | 6 | Tynk gipsowy maszynowy 1,5 cm | 10,000 | 0,400 | tynk | — |
 
 **Tabela 25. POD-1L — Strop międzykondygnacyjny — łazienki, WC, pralnia: gres na hydroizolacji podpłytkowej**
 
 | Lp. | Materiał / wyrób (parametry wymagane) | d [mm] | λ [W/(m·K)] | Funkcja | Uwagi |
 |---|---|---|---|---|---|
-| 1 | Płytki gresowe 60×120 na kleju C2TE S1 | 12,000 | 1,300 | wykonczenie | — |
+| 1 | Płytki gresowe 60×120 na kleju C2TE S1 | 12,000 | 1,300 | wykończenie | — |
 | 2 | Hydroizolacja podpłytkowa (masa uszczelniająca + taśmy), strefy mokre | 3,000 | 0,200 | hydroizolacja | — |
-| 3 | Jastrych cementowy CT-C25-F5 z wężownicą ogrzewania podłogowego | 65,000 | 1,200 | wykonczenie | — |
+| 3 | Jastrych cementowy CT-C25-F5 z wężownicą ogrzewania podłogowego | 65,000 | 1,200 | wykończenie | — |
 | 4 | Styropian podłogowy EPS 100-038 (pod jastrychem) | 40,000 | 0,038 | izolacja cieplna | — |
 | 5 | Styropian elastyfikowany EPS T (akustyczny, pod jastrychem) | 30,000 | 0,040 | izolacja cieplna | — |
-| 6 | Żelbet C25/30, B500SP (stropy, płyta fundamentowa, ściany) | 220,000 | 2,300 | konstrukcja | warstwa nośna / konstrukcyjna |
+| 6 | Żelbet C25/30, B500SP (stropy, płyta fundamentowa, ściany) | 220,000 | 2,300 | konstrukcja | rdzeń przegrody |
 | 7 | Tynk gipsowy maszynowy 1,5 cm | 10,000 | 0,400 | tynk | — |
 
 ## Analiza akustyczna (§ 23 pkt 4a RPB) — nie dotyczy — § 23 pkt 4a RPB
@@ -382,7 +382,7 @@ spełnia (WT zał. 2 pkt 1.4; W-246).
 | 7 | Folia PE 0,2 mm — warstwa rozdzielająca pod XPS (nie pełni funkcji paroizolacji) | 0,200 | 0,330 | 0,001 | jednorodna |
 | 8 | Podsypka piaskowa zagęszczona (I_s ≥ 0,98) | 200,000 | 2,000 | 0,000 | grunt |
 |  | R_se | — | — | 0,000 |  |
-|  | R_T (kresy: —) | 800,200 | — | 7,705 |  |
+|  | R_T | 800,200 | — | 7,705 |  |
 
 U₀ = 1/R_T = 0,130; ΔU_g = 0,000, ΔU_f = 0,000, ΔU_r = 0,000; U_c = 0,107; **U = 0,11 W/(m²·K)** (U_max = 0,30; WT zał. 2 pkt 1.1 lp. 6 (W-243); cel: R6 3.2 (R3: 0,25) [ZAŁ]).
 
@@ -403,7 +403,7 @@ U_equiv wg PN-EN ISO 13370: A = 111,03 m², P = 51,21 m, B' = 4,34 m, d_t = 15,8
 | 8 | Folia PE 0,2 mm — warstwa rozdzielająca pod XPS (nie pełni funkcji paroizolacji) | 0,200 | 0,330 | 0,001 | jednorodna |
 | 9 | Podsypka piaskowa zagęszczona (I_s ≥ 0,98) | 200,000 | 2,000 | 0,000 | grunt |
 |  | R_se | — | — | 0,000 |  |
-|  | R_T (kresy: —) | 850,400 | — | 8,727 |  |
+|  | R_T | 850,400 | — | 8,727 |  |
 
 U₀ = 1/R_T = 0,115; ΔU_g = 0,000, ΔU_f = 0,000, ΔU_r = 0,000; U_c = 0,103; **U = 0,10 W/(m²·K)** (U_max = —; WT zał. 2 pkt 1.1 lp. 6 (W-243); cel: R6 3.2 (R3: 0,25) [ZAŁ]).
 
@@ -419,7 +419,7 @@ U_equiv wg PN-EN ISO 13370: A = 37,42 m², P = 24,56 m, B' = 3,05 m, d_t = 17,94
 | 3 | Styropian grafitowy EPS 031 (ETICS, NRO w systemie) | 200,000 | 0,031 | 6,452 | jednorodna |
 | 4 | ETICS: warstwa zbrojona + tynk silikonowy 1,5 mm (biały / jasnoszary NCS S 1500-N) | 10,000 | 0,800 | 0,012 | jednorodna |
 |  | R_se | — | — | 0,040 |  |
-|  | R_T (kresy: —) | 405,000 | — | 6,872 |  |
+|  | R_T | 405,000 | — | 6,872 |  |
 
 U₀ = 1/R_T = 0,146; ΔU_g = 0,009, ΔU_f = 0,012, ΔU_r = 0,000; U_c = 0,166; **U = 0,17 W/(m²·K)** (U_max = 0,20; WT zał. 2 pkt 1.1 lp. 1 (t_i ≥ 16 °C) (W-243); cel: R6 3.2 (sprzeczność S-3: R3 0,17) [ZAŁ]).
 
@@ -433,7 +433,7 @@ U₀ = 1/R_T = 0,146; ΔU_g = 0,009, ΔU_f = 0,012, ΔU_r = 0,000; U_c = 0,166; 
 | 3 | Wełna mineralna 035 (szkielet, docieplenia, ściana dom–garaż) | 120,000 | 0,035 | 3,429 | jednorodna |
 | 4 | Tynk cementowo-wapienny 1,5 cm (garaż, pom. techniczne) | 10,000 | 0,820 | 0,012 | jednorodna |
 |  | R_se | — | — | 0,130 |  |
-|  | R_T (kresy: —) | 325,000 | — | 3,938 |  |
+|  | R_T | 325,000 | — | 3,938 |  |
 
 U₀ = 1/R_T = 0,254; ΔU_g = 0,008, ΔU_f = 0,012, ΔU_r = 0,000; U_c = 0,273; **U = 0,27 W/(m²·K)** (U_max = 0,30; WT zał. 2 pkt 1.1 lp. 2 (ściana dom–garaż) (W-243); cel: R6 3.2 [ZAŁ]).
 
@@ -452,7 +452,7 @@ U₀ = 1/R_T = 0,254; ΔU_g = 0,008, ΔU_f = 0,012, ΔU_r = 0,000; U_c = 0,273; 
 | 2 | Geowłóknina filtracyjna PP 150 g/m² | 2,000 | 0,500 | 0,004 | jednorodna |
 | 1 | Substrat ekstensywny 8 cm z matą rozchodnikową (sedum) | 80,000 | 0,800 | 0,100 | jednorodna |
 |  | R_se | — | — | 0,040 |  |
-|  | R_T (kresy: —) | 545,000 | — | 8,648 |  |
+|  | R_T | 545,000 | — | 8,648 |  |
 
 U₀ = 1/R_T = 0,116; ΔU_g = 0,009, ΔU_f = 0,000, ΔU_r = 0,000; U_c = 0,125; izolacja spadkowa: U_śr = 0,120 (zał. C — wzór dla kształtu 'prostokat'); **U = 0,13 W/(m²·K)** (U_max = 0,15; WT zał. 2 pkt 1.1 lp. 5 (W-243); cel: R6 3.2; R3 3.6 [ZAŁ]).
 
@@ -471,7 +471,7 @@ warstwa klinowa: U średnie wg PN-EN ISO 6946:2017 zał. C (zał. C — wzór dl
 | 2 | Włóknina ochronna PP 300 g/m² | 4,000 | 0,500 | 0,008 | jednorodna |
 | 1 | Żwir płukany 16/32 mm (balast dachu P1, opaska przy attyce) | 50,000 | 2,000 | 0,025 | jednorodna |
 |  | R_se | — | — | 0,040 |  |
-|  | R_T (kresy: —) | 490,000 | — | 9,412 |  |
+|  | R_T | 490,000 | — | 9,412 |  |
 
 U₀ = 1/R_T = 0,106; ΔU_g = 0,009, ΔU_f = 0,000, ΔU_r = 0,000; U_c = 0,116; izolacja spadkowa: U_śr = 0,109 (zał. C — wzór dla kształtu 'prostokat'); **U = 0,12 W/(m²·K)** (U_max = 0,15; WT zał. 2 pkt 1.1 lp. 5 (W-243); cel: R6 3.2; R3 3.6 [ZAŁ]).
 
@@ -488,7 +488,7 @@ warstwa klinowa: U średnie wg PN-EN ISO 6946:2017 zał. C (zał. C — wzór dl
 | 2 | Płyty PIR z okładziną (izolacja spadkowa stropodachów) | 220,000 | 0,022 | 10,000 | klin |
 | 1 | Membrana dachowa TPO 1,5 mm, mocowana mechanicznie (hydroizolacja stropodachów) | 2,000 | 0,200 | 0,010 | jednorodna |
 |  | R_se | — | — | 0,040 |  |
-|  | R_T (kresy: —) | 456,000 | — | 10,288 |  |
+|  | R_T | 456,000 | — | 10,288 |  |
 
 U₀ = 1/R_T = 0,097; ΔU_g = 0,009, ΔU_f = 0,000, ΔU_r = 0,000; U_c = 0,107; izolacja spadkowa: U_śr = 0,104 (zał. C — wzór dla kształtu 'prostokat'); **U = 0,11 W/(m²·K)** (U_max = 0,15; WT zał. 2 pkt 1.1 lp. 5 (W-243); cel: R6 3.2; R3 3.6 [ZAŁ]).
 
@@ -504,7 +504,7 @@ warstwa klinowa: U średnie wg PN-EN ISO 6946:2017 zał. C (zał. C — wzór dl
 | 3 | Wełna mineralna fasadowa (elewacja wentylowana bryły A, A1) | 200,000 | 0,035 | 5,714 | jednorodna |
 | 4 | Membrana fasadowa wiatroizolacyjna UV-stabilna, czarna (sd ≈ 0,02 m) | 10,000 | 0,170 | 0,059 | jednorodna |
 |  | R_se | — | — | 0,040 |  |
-|  | R_T (kresy: —) | 405,000 | — | 6,181 |  |
+|  | R_T | 405,000 | — | 6,181 |  |
 
 U₀ = 1/R_T = 0,162; ΔU_g = 0,009, ΔU_f = 0,000, ΔU_r = 0,000; U_c = 0,170; **U = 0,17 W/(m²·K)** (U_max = 0,20; WT zał. 2 pkt 1.1 lp. 1 (t_i ≥ 16 °C) (W-243); cel: R6 3.2 (sprzeczność S-3: R3 0,17) [ZAŁ]).
 
@@ -520,7 +520,7 @@ U₀ = 1/R_T = 0,162; ΔU_g = 0,009, ΔU_f = 0,000, ΔU_r = 0,000; U_c = 0,170; 
 | 5 | Wełna mineralna fasadowa (elewacja wentylowana bryły A, A1) | 180,000 | 0,035 | 5,143 | jednorodna |
 | 6 | Membrana fasadowa wiatroizolacyjna UV-stabilna, czarna (sd ≈ 0,02 m) | 4,000 | 0,170 | 0,024 | jednorodna |
 |  | R_se | — | — | 0,040 |  |
-|  | R_T (kresy: 10,69/10,02) | 440,000 | — | 10,355 |  |
+|  | R_T (kresy R'_T / R''_T: 10,69 / 10,02) | 440,000 | — | 10,355 |  |
 
 U₀ = 1/R_T = 0,097; ΔU_g = 0,002, ΔU_f = 0,000, ΔU_r = 0,000; U_c = 0,099; **U = 0,10 W/(m²·K)** (U_max = 0,20; WT zał. 2 pkt 1.1 lp. 1 (t_i ≥ 16 °C) (W-243); cel: R6 3.2 (sprzeczność S-3: R3 0,17) [ZAŁ]).
 
@@ -543,7 +543,7 @@ U₀ = 1/R_T = 0,097; ΔU_g = 0,002, ΔU_f = 0,000, ΔU_r = 0,000; U_c = 0,099; 
 | 10 | Pustka wentylowana 40 mm (ruszt lamel) | 40,000 | — | 0,000 | pustka dw |
 | 11 | Podsufitka zewnętrzna: płyta włóknocementowa 12 mm na ruszcie, RAL 7016 | 12,000 | 0,350 | 0,000 | pominieta |
 |  | R_se | — | — | 0,170 |  |
-|  | R_T (kresy: —) | 853,000 | — | 8,217 |  |
+|  | R_T | 853,000 | — | 8,217 |  |
 
 U₀ = 1/R_T = 0,122; ΔU_g = 0,005, ΔU_f = 0,000, ΔU_r = 0,000; U_c = 0,127; **U = 0,13 W/(m²·K)** (U_max = 0,15; WT zał. 2 pkt 1.1 lp. 5 („nad przejazdami”) — spód wspornika P2 (W-243) [INT]).
 
@@ -559,7 +559,7 @@ f_Rsi ≥ f_Rsi,wym = max(f_Rsi,kryt = 0,661 — miesiąc krytyczny 3,
 
 **Tabela 37. Mostki cieplne liniowe — ψ, długości, f_Rsi**
 
-| Węzeł | Opis | ψ_oi karta [W/(m·K)] | ψ projekt [W/(m·K)] | l [m] | ψ·l [W/K] | f_Rsi karta | f_Rsi projekt | f_Rsi ≥ wym. | Detal |
+| Węzeł | Opis | ψ_oi karta [W/(m·K)] | ψ projekt [W/(m·K)] | l [m] | ψ·l [W/K] | f_Rsi (karta) | f_Rsi (proj.) | ≥ f_Rsi,wym | Detal |
 |---|---|---|---|---|---|---|---|---|---|
 | WZ-01 | Attyka stropodachu bryły A (D1) | 0,086 | 0,086 | 19,940 | 1,715 | 0,932 | 0,932 | tak | D-04 (PT-AR-D-03) |
 | WZ-02 | Attyki dachów P1 (D2, D3) — poza ścianami bryły A | 0,171 | 0,171 | 13,410 | 2,293 | 0,900 | 0,900 | tak | D-05 (PT-AR-D-03) |
@@ -567,16 +567,16 @@ f_Rsi ≥ f_Rsi,wym = max(f_Rsi,kryt = 0,661 — miesiąc krytyczny 3,
 | WZ-04 | Okap E (PL-E) i daszek wejścia — łącznik termoizolacyjny | 0,128 | 0,128 | 22,470 | 2,876 | 0,929 | 0,929 | tak | D-09 (PT-AR-D-02) |
 | WZ-05 | Krawędź ST2 (PL-2) — łącznik termoizolacyjny pod bryłą A | 0,134 | 0,134 | 18,710 | 2,507 | 0,927 | 0,927 | tak | D-08 (PT-AR-D-04) |
 | WZ-06 | Krawędź ST3 (PL-3) — łącznik termoizolacyjny przy attyce bryły A | 0,205 | 0,205 | 24,300 | 4,981 | 0,889 | 0,889 | tak | — |
-| WZ-07 | Strop P2 nad powietrzem zewnętrznym (ST2Z) — krawędzie wspornika bryły… | a: 0,152; b: −0,061 | 0,046 | 11,440 | 0,526 | 0,851 | 0,851 | tak | D-08 (PT-AR-D-04) |
+| WZ-07 | Strop P2 nad powietrzem zewnętrznym (ST2Z) — krawędzie wspornika bryły… | a: 0,152 b: −0,061 | 0,046 | 11,440 | 0,526 | 0,851 | 0,851 | tak | D-08 (PT-AR-D-04) |
 | WZ-08 | Cokół: ściana zewn. – płyta fundamentowa na XPS (część ogrzewana) | 0,100 | 0,100 | 27,770 | 2,777 | 0,903 | 0,903 | tak | D-01 (PT-AR-D-01) |
-| WZ-09 | Połączenia dom–garaż nieogrzewany (ściany osi E i 2 z płytą i stropem;… | a: 0,301; b: 0,071; c: 0,081 | 0,188 | 24,510 | 4,608 | 0,836 | 0,836 | tak | D-10 (PT-AR-D-05) |
+| WZ-09 | Połączenia dom–garaż nieogrzewany (ściany osi E i 2 z płytą i stropem;… | a: 0,301 b: 0,071 c: 0,081 | 0,188 | 24,510 | 4,608 | 0,836 | 0,836 | tak | D-10 (PT-AR-D-05) |
 | WZ-10 | Strop pośredni ST1/ST2 – ściana zewn. z ETICS ciągłym (wieniec) | 0,000 | 0,000 | 18,200 | 0,000 | 0,963 | 0,963 | tak | — |
 | WZ-11 | Ościeża okien/drzwi — ciepły montaż (rama 5 cm w murze, 4 cm w izolacj… | 0,005 | 0,005 | 96,280 | 0,481 | 0,930 | 0,930 | tak | D-02 (PT-AR-D-02) |
 | WZ-11N | Nadproża — BEZ kaset osłon w ociepleniu (kasety w okapach / ramie C / … | 0,008 | 0,008 | 45,030 | 0,360 | 0,938 | 0,938 | tak | D-02 (PT-AR-D-02) |
 | WZ-11P | Podokienniki — parapet zewn. z okapnikiem na profilu z XPS | 0,006 | 0,006 | 29,420 | 0,177 | 0,911 | 0,911 | tak | D-02 (PT-AR-D-02) |
 | WZ-11T | Progi HS / drzwi zewn. na płycie P0 — profil progowy termoizolacyjny n… | 0,118 | 0,118 | 15,670 | 1,849 | 0,845 | 0,845 | tak | D-03 (PT-AR-D-01), D-02 (PT-AR-D-02) |
 | WZ-12 | Narożniki wypukłe ścian zewnętrznych | 0,066 | 0,066 | 40,050 | 2,643 | 0,926 | 0,926 | tak | — |
-| WZ-16 | Belki wspornikowe B4/B5 i belka B3 w linii izolacji wspornika bryły A … | a: 0,194; b: 0,123 | 0,159 | 2,020 | 0,321 | 0,854 | 0,854 | tak | D-08 (PT-AR-D-04) |
+| WZ-16 | Belki wspornikowe B4/B5 i belka B3 w linii izolacji wspornika bryły A … | a: 0,194 b: 0,123 | 0,159 | 2,020 | 0,321 | 0,854 | 0,854 | tak | D-08 (PT-AR-D-04) |
 | WZ-X1 | Dachy D2/D3 (SD2) – ściana SZ1 bryły A wyższej kondygnacji na krawędzi… | 0,022 | 0,022 | 13,790 | 0,303 | 0,964 | 0,964 | tak | — |
 | WZ-X2 | Dach D4 (DZ1) – ściana SZ1 bryły B na krawędzi (pas gospodarczy, pomie… | 0,022 | 0,022 | 2,790 | 0,061 | 0,964 | 0,964 | tak | — |
 
@@ -643,7 +643,7 @@ dla wymiarów otworu i danych przykładowego wyrobu [DANE PRZYKŁADOWE – FIKCY
 (model); U_max — WT zał. 2 pkt 1.2 (W-244). Szczelność: klasa ≥ 3 (WT zał. 2 pkt 2.3.2 (PN-EN 12207); W-249). Całkowita przepuszczalność
 energii promieniowania słonecznego g = f_C·g_n ≤ 0,35 dla okien E, S, W (WT zał. 2 pkt 2.1.1 (g = f_C·g_n; wyjątki pkt 2.1.4); W-247).
 
-**Tabela 41. Zestawienie stolarki zewnętrznej — wymiary, otwieranie, osłony, montaż**
+**Tabela 41. Zestawienie stolarki zewnętrznej i drzwi garaż–dom — wymiary, otwieranie, osłony, montaż**
 
 | Symbol | Rodzaj | Opis wyrobu (parametry wymagane) | Wymiary [cm] | Szt. | Kond. | Otwieranie | Osłona | Montaż |
 |---|---|---|---|---|---|---|---|---|
@@ -658,6 +658,7 @@ energii promieniowania słonecznego g = f_C·g_n ≤ 0,35 dla okien E, S, W (WT 
 | HS2 | drzwi podnoszono-przesuwne HS | drzwi HS ALU 2,40 × 2,75 m (taras zach.) | 240 × 278 | 1 | P0 | HS, prawa, do wewn | screen ZIP | M1 |
 | OZ1 | okno | okno RU 1,80 × 1,50 m | 180 × 150 | 3 | P0, P1 | RU, lewa, do wewn | żaluzja zewn. | M1 |
 | ON1 | okno | okno uchylne 0,80 × 0,60 m, szkło mleczne | 80 × 60 | 1 | P0 | U, lewa, do wewn | — | M1 |
+| DG1 | drzwi wewnętrzne (do garażu) | drzwi garaż–dom stalowe ocieplone, szczelne, z samozamykaczem 0,90 × 2,10 | 90 × 210 | 2 | P0 | R, lewa, do wewn | — | — |
 | BC1 | okno | boks C: 3 kwatery 2,34 × 1,50 m (środkowa RU), dolna część stała VSG do 0,85 m | 229 × 150 | 3 | P1 | F, lewa, do wewn | screen ZIP | M1 |
 | OE1 | okno | okno RU 1,50 × 1,50 m | 150 × 150 | 1 | P1 | RU, lewa, do wewn | żaluzja zewn. | M1 |
 | ON2 | okno | okno uchylne 0,90 × 0,60 m, szkło mleczne | 90 × 60 | 2 | P1, P2 | U, lewa, do wewn | — | M1 |
@@ -669,7 +670,7 @@ energii promieniowania słonecznego g = f_C·g_n ≤ 0,35 dla okien E, S, W (WT 
 
 *Źródło: model/budynek.yaml — otwory, stolarka (grupowanie po symbolu)*
 
-**Tabela 42. Zestawienie stolarki zewnętrznej — parametry cieplne, g, szczelność**
+**Tabela 42. Zestawienie stolarki zewnętrznej i drzwi garaż–dom — parametry cieplne, g, szczelność**
 
 | Symbol | U_w obl. [W/(m²·K)] | U_w wym. [W/(m²·K)] | U_max [W/(m²·K)] | g_n | f_C | g | Ocena g | Klasa szczeln. |
 |---|---|---|---|---|---|---|---|---|
@@ -684,6 +685,7 @@ energii promieniowania słonecznego g = f_C·g_n ≤ 0,35 dla okien E, S, W (WT 
 | HS2 | 0,82 | 0,850 | 0,900 | 0,500 | 0,14 | 0,068 | spełnia | 4 |
 | OZ1 | 0,81 | 0,800 | 0,900 | 0,500 | 0,15 | 0,075 | spełnia | 4 |
 | ON1 | 0,89 | 0,900 | 0,900 | 0,500 | — | — | orientacja N ± 45° (pkt 2.1.4) | 4 |
+| DG1 | 1,10 | 1,100 | 1,300 | — | — | — | — | — |
 | BC1 | 0,78 | 0,800 | 0,900 | 0,500 | 0,14 | 0,068 | spełnia | 4 |
 | OE1 | 0,75 | 0,800 | 0,900 | 0,500 | 0,15 | 0,075 | spełnia | 4 |
 | ON2 | 0,88 | 0,900 | 0,900 | 0,500 | — | — | orientacja N ± 45° (pkt 2.1.4) | 4 |
@@ -895,5 +897,21 @@ skalami i formatami — karta części rysunkowej (generowana z tabliczek arkusz
 
 **Tabela 51. Wykaz rysunków tomu PT-1 AR**
 
-|  |
-|
+| Nr | Tytuł | Skala | Format |
+|---|---|---|---|
+| PB-AR-01 | RZUT PARTERU | 1:50 | A1 |
+| PB-AR-02 | RZUT I PIĘTRA | 1:50 | A3×3 |
+| PB-AR-03 | RZUT II PIĘTRA | 1:50 | A3×3 |
+| PB-AR-04 | RZUT DACHU | 1:50 | A2×3 |
+| PB-AR-05 | PRZEKRÓJ A-A | 1:50 | A3×3 |
+| PB-AR-06 | PRZEKRÓJ B-B | 1:50 | A3×3 |
+| PB-AR-07 | ELEWACJA POŁUDNIOWA (OGRODOWA) | 1:50 | A3×3 |
+| PB-AR-08 | ELEWACJA PÓŁNOCNA (OD ULICY) | 1:50 | A3×3 |
+| PB-AR-09 | ELEWACJA WSCHODNIA | 1:50 | A2 |
+| PB-AR-10 | ELEWACJA ZACHODNIA | 1:50 | A2 |
+| PT-AR-D-01 | DETALE — COKÓŁ, PRÓG HS, RURA SPUSTOWA | 1:10 | A3×4 |
+| PT-AR-D-02 | DETALE — OKNO (CIEPŁY MONTAŻ), OKAP PL-E | 1:5 / 1:10 | A3×3 |
+| PT-AR-D-03 | DETALE — ATTYKI, WPUSTY, PRZELEW AWARYJNY | 1:10 | A3×3 |
+| PT-AR-D-04 | DETALE — WSPORNIK BRYŁY A, LAMELE ELEWACYJNE | 1:5 / 1:10 | A2 |
+| PT-AR-D-05 | DETALE — GARAŻ (ŚCIANA DOM–GARAŻ, DACH ZIELONY, DRZWI DZ2) | 1:10 | A2×3 |
+| PT-AR-D-06 | DETALE — WYŁAZ DACHOWY I ŚWIETLIK | 1:10 | A2 |
