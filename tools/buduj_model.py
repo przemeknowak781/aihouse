@@ -303,7 +303,7 @@ PRZ = {
         L("PAROIZ_AL", 0.004), L("ZB_C25", 0.22, konstrukcyjna=True), L("TYNK_GIPS", 0.010)]),
     "DZ1": dict(nazwa="Dach zielony ekstensywny NIEUŻYTKOWY nad garażem (pom. nieogrzewane) i pasem gospodarczym: substrat 8 cm, geowłóknina, mata "
                       "drenażowa, włóknina, bariera przeciwkorzenna, 2 × papa SBS, PIR spadkowy 12–24 cm, paroizolacja, płyta ŻB 24 cm "
-                      "(dwukierunkowa); opaska żwirowa 0,5 m przy attykach i wpustach (U = 0,13); nad garażem: pole PV biosolarne (8 modułów)", typ="stropodach", warstwy=[
+                      "(dwukierunkowa); opaska żwirowa 0,5 m przy attykach i wpustach (U = 0,13); nad garażem: pole PV biosolarne (liczba modułów — energia.pv.pola)", typ="stropodach", warstwy=[
         L("SUBSTRAT", 0.080), L("GEOWL", 0.002), L("MATA_DREN", 0.025), L("WLOKN_OCHR", 0.004), L("BARIERA_KORZ", 0.0005), L("PAPA_SBS", 0.0095),
         L("PIR022", 0.18, klin={"d_min": 0.12, "d_max": 0.24, "ksztalt": "prostokat"}), L("PAROIZ_AL", 0.004), L("ZB_C25", 0.24, konstrukcyjna=True)]),
     "OK1": dict(nazwa="Płyta wysunięta (okap, daszek, krawędź ST2/ST3): obróbka/membrana ze spadkiem 2 % od budynku, płyta ŻB C30/37 z łącznikiem "
@@ -669,9 +669,11 @@ STROPY = [
      "otwory": [OTW_SCH], "podloga": "POD-1", "sufit": "TYNK_GIPS", "mat": "ZB_C25",
      "uwagi": "strop nad P1 pod bryłą A i nadbudową; pola pn. poza bryłą A — dachy D2/D3 (płyta ciągła); krawędzie nad ścianami P1 po licu "
               "konstrukcji"},
-    {"id": "ST2Z", "nad": "P1", "wierzch": Z_ST2, "grubosc": T_STR, "obrys": R(xA2 - ZL, -EXT, -ZK, y3 + EXT), "podloga": "POD-1", "sufit": "SUF-ZEW",
+    # wydanie (V1-04, A2 K-1, R-W6): obrys ST2Z po LICU KONSTRUKCJI ścian P2 (y −0,09…5,215, jak ST2/D1) — pas −0,30…−0,09 od pd.
+    # i pn. = strefa łącznika termoizolacyjnego PL-2 w płaszczyźnie ocieplenia (geometria zgodna z obliczeniem WZ-07a/16a)
+    {"id": "ST2Z", "nad": "P1", "wierzch": Z_ST2, "grubosc": T_STR, "obrys": R(xA2 - ZL, -ZK, -ZK, y3 + ZK), "podloga": "POD-1", "sufit": "SUF-ZEW",
      "mat": "ZB_C25", "uwagi": "strop P2 nad powietrzem zewnętrznym (wspornik bryły A 1,00 m lico–lico): E–W oś A – belka B3, docieplenie spodu "
-                                "(IZ-ST2Z) i podsufitka PS-A"},
+                                "(IZ-ST2Z) i podsufitka PS-A; krawędzie pd./pn. po licu konstrukcji ścian P2 (±0,09), łącznik PL-2 w strefie izolacji"},
 ]
 
 # ---- runda 2 (R-W2, weryfikacja §6 A3; W-142): rzędne POKRYCIA (wierzch hydroizolacji) przy wpustach i w miejscach przelewów —
@@ -730,8 +732,8 @@ DACHY = [
                         "opis": "w szachcie SI; podejście poziome DN100 w suficie podwieszanym łazienki P2 (izolowane)"}],
      "spadki": [{"od": [xA2 - ZL, -ZK], "do": [5.57, 5.45], "spadek": 0.02}, {"od": [xE + ZK, -ZK], "do": [5.57, 5.45], "spadek": 0.02},
                 {"od": [xD + ZK, y4 + ZK], "do": [4.40, 8.35], "spadek": 0.02}],
-     "uwagi": "stropodach bryły A: 7 modułów PV EW10 na niskich stelażach (górna krawędź ≤ korona attyki +9,88 — energia.pv); świetlik SW1 2,10 × 1,00 nad spocznikiem; "
-              "wyłaz 0,90 × 0,90 w pom. 2.07 (x 7,20–8,10); czerpnia i wyrzutnia reku (≥ 0,40 m nad pokryciem lokalnym z klinem), wywiewka K1 nad SI; "
+     "uwagi": "stropodach bryły A: moduły PV EW10 (energia.pv.pola) na niskich stelażach (górna krawędź ≤ korona attyki +9,88 — energia.pv); świetlik SW1 2,10 × 1,00 nad spocznikiem; "
+              "wyłaz 0,90 × 0,90 w pom. 2.07 (x 7,20–8,10); wyrzutnia reku z wylotem pionowym (≥ 0,40 m nad pokryciem lokalnym z klinem; czerpnia na D3), wywiewka K1 nad SI; "
               "obrys po licu konstrukcji ścian P2 (attyka ŻB 18 w osi muru, ETICS/wełna ścian ciągła po zewnątrz)"},
     {"id": "D2", "obrys": R(-ZK, y3 + EXT, xB - EXT, y4 + ZK), "plyta": {"wierzch": Z_ST2, "grubosc": T_STR}, "przegroda": "SD2", "spadek": 0.02,
      "attyka": {"wys_nad_pokryciem": 0.25, "szer": 0.18, "przegroda": "AT1"},
@@ -751,7 +753,7 @@ DACHY = [
      "rury_spustowe": [{"id": "RS4", "od_wpustu": 0, "trasa": "zewn", "xy_pion": [9.20, y4 + EXT + 0.06], "dn": 100, "do": "zbiornik",
                         "opis": "zewnętrzna na elewacji pn. obok daszku wejścia, czyszczak, kolektor KD-W"}],
      "spadki": [{"od": [xE + ZK, y3 + EXT], "do": [9.20, y4 - 0.20], "spadek": 0.02}],
-     "uwagi": "dach nad P1 (pole wsch.), żwirowy, nieużytkowy"},
+     "uwagi": "dach nad P1 (pole wsch.), żwirowy, nieużytkowy; czerpnia dachowa reku przy narożu NE (energia.wentylacja — wydanie N-1)"},
     {"id": "D4", "obrys": P((xE + EXT, -ZK), (xF + ZK, -ZK), (xF + ZK, y5 + ZK), (xE - ZK, y5 + ZK), (xE - ZK, y4 + EXT), (xE + EXT, y4 + EXT)),
      "plyta": {"wierzch": Z_DG, "grubosc": T_DG}, "przegroda": "DZ1", "spadek": 0.02,
      "attyka": {"wys_nad_pokryciem": 0.545, "szer": 0.18, "przegroda": "AT1"},
@@ -768,7 +770,7 @@ DACHY = [
                         "opis": "w pom. technicznym 0.12 (obudowa izolowana), pod płytą do kolektora KD-E"}],
      "spadki": [{"od": [xE + EXT, 4.5], "do": [18.05, 9.05], "spadek": 0.02}, {"od": [xE + EXT, 1.2], "do": [17.95, 0.35], "spadek": 0.02}],
      "uwagi": "dach zielony ekstensywny NIEUŻYTKOWY nad garażem i pasem gospodarczym (bez tarasu, bez wyjścia — decyzja Inwestora); "
-              "runda 2: pole PV biosolarne 8 modułów (x 13,80–16,08; energia.pv), dostęp serwisowy drabiną przenośną; "
+              "runda 2: pole PV biosolarne (energia.pv.pola), dostęp serwisowy drabiną przenośną; "
               "attyka pd. +3,85 = linia D do narożnika garażu; opaska żwirowa 0,5 m przy attykach i wpustach"},
 ]
 
@@ -1214,8 +1216,21 @@ for _e in WEZLY:
                          + ("; średnia ważona podwęzłów" if _pod else "") + " — runda 2, 25.09.2026",
               zrodlo_frsi="katalog mostków budynku (PN-EN ISO 10211)" + ("; minimum podwęzłów" if _pod else ""))
 
-CZERPNIA = [11.60, 1.00, 10.00]      # [x, y, z dolnej krawędzi wlotu] — audyt A1 (WT §152 ust. 4, 10)
-WYRZUTNIA = [1.90, 4.00, 10.00]     # [x, y, z wylotu] — 3,00 m od krawędzi konstrukcji D1 nad O2-04, 10,15 m od czerpni
+# ---- wydanie (weryfikacja V2 N-1, N-2; WT §152 ust. 4, 7, 10–12 — tekst: Dz.U. 2022 poz. 1225, ELI): wyrzutnia z wylotem POZIOMYM
+#      na D1 nie spełniała ust. 7 (0,4 m nad linią najwyższych punktów w promieniu 10 m: attyka +9,88, wywiewka K1 +9,94) — zmiana:
+#      * wyrzutnia dachowa z wylotem PIONOWYM (deflektor bez zmiany kierunku strugi) — ust. 7 dotyczy wylotu poziomego; ust. 10:
+#        ≥ 6 m od czerpni i ≥ 1,0 m ponad czerpnią (spełnione także przy dosłownym brzmieniu „przy czym…”);
+#      * czerpnia dachowa przeniesiona z D1 na dach D3 (nad P1, pole wsch.): dolna krawędź wlotu ≥ 0,40 m nad powierzchnią (żwir) przy
+#        maks. pokryciu (ust. 4), ≥ 6 m od wywiewki K1 (ust. 4), 3,1 m poniżej wylotu wyrzutni; kanał czerpny izolowany po dachu D3 na
+#        podporach bez przebicia hydroizolacji → przejście szczelne przez ścianę pn. bryły A do sufitu 2.05/2.01 → centrala 2.07;
+#      * z_top — MAKSYMALNA wysokość urządzenia (kołpak/deflektor) jako wymaganie (wlicza się do wysokości zabudowy — upzp art. 2
+#        pkt 30 lit. a; N-2); wskazniki biorą max(z, z_top).
+_Z_ZWIR_SD2 = 0.05 + 0.004                                                         # żwir + włóknina ponad TPO (SD2)
+CZERPNIA = [11.45, 8.05, r(math.ceil((pokrycie("SD2", Z_ST2, 99.0) + _Z_ZWIR_SD2 + 0.40) * 20 - 1e-6) / 20, 2)]   # [x, y, z dolnej krawędzi wlotu]
+CZERPNIA_Z_TOP = r(CZERPNIA[2] + 0.50, 2)                                           # wlot 0,30 + daszek — maks. wysokość urządzenia
+WYRZUTNIA = [1.90, 4.00, 10.00]     # [x, y, z wylotu pionowego] — 3,00 m od krawędzi konstrukcji D1 nad O2-04
+WYRZUTNIA_Z_TOP = 10.20             # maks. wysokość wyrzutni z deflektorem (wymaganie „lub równoważne”)
+assert math.hypot(CZERPNIA[0] - WYRZUTNIA[0], CZERPNIA[1] - WYRZUTNIA[1]) >= 6.0 and WYRZUTNIA[2] - CZERPNIA[2] >= 1.0
 WYWIEWKA_K1 = [5.57, 6.20, r(pokrycie("SD1", Z_ST3, math.hypot(6.20 - _W1[1], 0.0)) + 0.50, 2)]   # pokrycie lokalne + 0,50 m
 
 # ---- runda 2 (K-7, weryfikacja §6 A4, BRAKI PT-IE poz. 1): FAKTYCZNE rozmieszczenie modułów PV. Moduł 1,722 × 1,134 m (dane
@@ -1259,7 +1274,7 @@ def _pv_uklad(pole, n_max, x_rng, y_start, dy=1.722, dx=1.117, szczelina=0.05, p
 _D1 = next(d_ for d_ in DACHY if d_["id"] == "D1")
 _D4 = next(d_ for d_ in DACHY if d_["id"] == "D4")
 _pw = lambda xy, rr: Polygon([(xy[0] + rr * math.cos(a_ / 8 * math.pi), xy[1] + rr * math.sin(a_ / 8 * math.pi)) for a_ in range(16)])  # noqa: E731
-_prz1 = ([Polygon(o).buffer(0.30, join_style=2) for o in _D1["otwory"]] + [_pw(CZERPNIA, 1.0), _pw(WYRZUTNIA, 1.0), _pw(WYWIEWKA_K1, 1.0)]
+_prz1 = ([Polygon(o).buffer(0.30, join_style=2) for o in _D1["otwory"]] + [_pw(WYRZUTNIA, 1.0), _pw(WYWIEWKA_K1, 1.0)]
          + [_pw(w["xy"], 0.5) for w in _D1["wpusty"]])
 _POLE_D1 = _pv_pole(_D1["obrys"], 0.28 + 1.0, _prz1)
 _MOD_D1 = _pv_uklad(_POLE_D1, 15, (_POLE_D1.bounds[0], _POLE_D1.bounds[2]), _POLE_D1.bounds[1])
@@ -1274,18 +1289,21 @@ assert len(_MOD_D1) + len(_MOD_D4) == 15 and _ZPV_D1 <= _KOR_D1 and _ZPV_D4 <= Z
 ENERGIA = {
     "n50": 1.0, "osoby": 5, "pojemnosc": "ciezka", "chlodzenie": False, "psi_wariant": "domyslna",
     "grunt": {"typ": "piasek", "lambda": 2.0, "izolacja_obwodowa": {"typ": "pozioma", "D": 1.0, "d_n": 0.10, "lam_n": 0.036}},
-    # runda 2: wyrzutnia dachowa z wylotem POZIOMYM (kołpak) — 10,15 m od czerpni ≥ 10 m (WT §152 ust. 10, W-167; flaga była
-    # niespójna z uwagą rundy 1); wywiewka K1 z jawną rzędną (pokrycie lokalne + 0,50) — wysokość zabudowy bez założeń (K-3)
-    "wentylacja": {"centrala": "RVU_450", "czerpnia": CZERPNIA, "wyrzutnia": WYRZUTNIA, "wyrzut": "poziomy",
+    # wydanie (N-1, N-2): wyrzutnia z wylotem PIONOWYM na D1, czerpnia na D3 (≥ 1 m niżej, ≥ 6 m) — patrz komentarz przy CZERPNIA;
+    # wywiewka K1 z jawną rzędną (pokrycie lokalne + 0,50) — wysokość zabudowy bez założeń (K-3)
+    "wentylacja": {"centrala": "RVU_450", "czerpnia": CZERPNIA, "wyrzutnia": WYRZUTNIA, "wyrzut": "pionowy",
+                   "czerpnia_dach": "D3", "wyrzutnia_dach": "D1", "czerpnia_z_top": CZERPNIA_Z_TOP, "wyrzutnia_z_top": WYRZUTNIA_Z_TOP,
                    "zestaw_zblokowany": False, "wywiewki_kanalizacyjne": [WYWIEWKA_K1, [18.15, 1.75, r(pokrycie("DZ1", Z_DG, 99.0) + 0.50, 2)]], "rzedna_terenu": -0.33,
                    "bilans": {"nawiew_m3h": 365, "wywiew_m3h": 365, "okresowo_m3h": 435,
                               "opis": "runda 2 (K-9): Σnaw = Σwyw = 365 m³/h (pom. went); centrala 450 m³/h (V_max 500) — praca 81 % nominału, "
                                       "tryb okresowy (okap 120) 435 ≤ 450 (weryfikacja §6 B5)"},
-                   "uwagi": "po audycie A1: czerpnia (11,60; 1,00) i wyrzutnia (1,90; 4,00) — odległość 10,15 m ≥ 10,00 m (WT §152 ust. 10, "
-                            "bez wymogu różnicy wysokości); dolna krawędź wlotu czerpni i wylot wyrzutni +10,00 ≥ pokrycie lokalne z klinem "
-                            "+ 0,40 (W-166); czerpnia 7,96 m od wywiewki K1 (≥ 6 m); wyrzutnia 3,00 m od krawędzi konstrukcji dachu nad "
-                            "oknem O2-04 (3,20 m od lica) i ≥ 4 m od krawędzi pd.; SW1 — świetlik stały (W-167 ust. 12 — okna otwierane); "
-                            "wysokość zabudowy bez zmian (≤ 11,0 m, MPZP); K2 zakończony zaworem napowietrzającym (W-139)"},
+                   "uwagi": "wydanie (weryfikacja V2 N-1/N-2): czerpnia dachowa na D3 — dolna krawędź wlotu ≥ 0,40 m nad powierzchnią "
+                            "dachu (żwir, maks. klin; WT §152 ust. 4), 6,2 m od wywiewki K1 (≥ 6 m), wlot od N/E (zacieniony); wyrzutnia "
+                            "dachowa na D1 z wylotem PIONOWYM (deflektor) ≥ 0,40 m nad pokryciem lokalnym, 3,00 m od krawędzi konstrukcji "
+                            "dachu nad oknem O2-04 (ust. 12); czerpnia–wyrzutnia ≥ 6 m i wyrzutnia ≥ 1,0 m ponad czerpnią (ust. 10 — wyrzut "
+                            "pionowy); ust. 7 (0,4 m nad linią najwyższych punktów w promieniu 10 m) dotyczy wylotu poziomego — nie ma "
+                            "zastosowania; SW1 — świetlik stały (ust. 12 — interpretacja §10 koncepcji); maks. wysokość urządzeń (z_top) "
+                            "wliczona do wysokości zabudowy (≤ 11,0 m, rezerwa 10,70 — W-033); K2 zakończony zaworem napowietrzającym (W-139)"},
     "ogrzewanie": {"zrodlo": "PC_R290_monoblok", "temp_zasilania": 35,
                    "uwagi": "PC powietrze–woda monoblok R290 (W-155), moduł hydrauliczny w pom. 0.12; ogrzewanie podłogowe z regulacją pokojową (W-152); "
                             "runda 2 (K-10): po symulacji mostków Φ_HL ≈ 7,4 kW (było 11,7) → klasa mocy ok. 7 kW (≤ 12 kW — W-155, "
@@ -1299,8 +1317,9 @@ ENERGIA = {
                      "pole": [[r(a_), r(b_)] for a_, b_ in list(_POLE_D1.exterior.coords)[:-1]] if _POLE_D1.geom_type == "Polygon" else None},
                     {"dach": "D4", "n": len(_MOD_D4), "moduly": _MOD_D4, "z_max": r(_ZPV_D4, 3), "korona_attyki": Z_RAMA_D[1],
                      "typ": "biosolarny (stelaże na substracie, roślinność pod modułami; kotwienie balastem substratu — bez przebić hydroizolacji)"}],
-           "uwagi": "Σ 15 × 430 Wp = 6,45 kWp ≤ 6,5 kWp (W-194, art. 29 ust. 4 pkt 3 lit. c PB): D1 — 7 modułów (więcej się nie mieści: "
-                    "strefa brzegowa 1,0 m, wyłaz, czerpnia/wyrzutnia, wywiewka), D4 — 8 modułów na dachu biosolarnym; górna krawędź modułów "
+           "uwagi": f"Σ {len(_MOD_D1) + len(_MOD_D4)} × 430 Wp = {str(round((len(_MOD_D1) + len(_MOD_D4)) * 0.43, 2)).replace('.', ',')} kWp ≤ 6,5 kWp (W-194, "
+                    f"art. 29 ust. 4 pkt 3 lit. c PB): D1 — {len(_MOD_D1)} modułów (pole montażu: strefa brzegowa 1,0 m, wyłaz, świetlik, "
+                    f"wyrzutnia, wywiewka; czerpnia na D3 od wydania), D4 — {len(_MOD_D4)} modułów na dachu biosolarnym; górna krawędź modułów "
                     "≤ korona attyki przy pokryciu lokalnym (D1: z_max ≤ korona, D4: ≤ +3,85) — W-033, D-15; PR 0,78 = 0,80 − 0,02 na "
                     "popołudniowe zacienienie pola D4 bryłami A/B [ZAŁ — do symulacji w PT-IE]; trasa DC i przepusty — PT-IE"},
     "garaz": {"stanowiska": 2, "otwory_went_m2": 0.10, "n_went": 1.0},

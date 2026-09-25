@@ -255,7 +255,7 @@ przegrody:
       - {mat: ZB_C25, d: 0.22, konstrukcyjna: true}
       - {mat: TYNK_GIPS, d: 0.01}
   DZ1:
-    nazwa: 'Dach zielony ekstensywny NIEUŻYTKOWY nad garażem (pom. nieogrzewane) i pasem gospodarczym: substrat 8 cm, geowłóknina, mata drenażowa, włóknina, bariera przeciwkorzenna, 2 × papa SBS, PIR spadkowy 12–24 cm, paroizolacja, płyta ŻB 24 cm (dwukierunkowa); opaska żwirowa 0,5 m przy attykach i wpustach (U = 0,13); nad garażem: pole PV biosolarne (8 modułów)'
+    nazwa: 'Dach zielony ekstensywny NIEUŻYTKOWY nad garażem (pom. nieogrzewane) i pasem gospodarczym: substrat 8 cm, geowłóknina, mata drenażowa, włóknina, bariera przeciwkorzenna, 2 × papa SBS, PIR spadkowy 12–24 cm, paroizolacja, płyta ŻB 24 cm (dwukierunkowa); opaska żwirowa 0,5 m przy attykach i wpustach (U = 0,13); nad garażem: pole PV biosolarne (liczba modułów — energia.pv.pola)'
     typ: stropodach
     warstwy:
       - {mat: SUBSTRAT, d: 0.08}
@@ -436,14 +436,14 @@ pomieszczenia:
 stropy:
   - {id: ST1, nad: P0, wierzch: 3.0, grubosc: 0.22, obrys: [[-0.09, -0.09], [12.3, -0.09], [12.3, 8.84], [-0.09, 8.84]], otwory: [[[5.98, 5.23], [8.395, 5.23], [8.395, 8.645], [5.98, 8.645]]], podloga: POD-1, sufit: TYNK_GIPS, mat: ZB_C25, uwagi: 'strop nad P0 (część mieszkalna): N–S, ciągły 2-przęsłowy B1 (oś 1) – oś 3 – oś 4, rozpiętości 5,125 / 3,625 m; krawędzie po licu konstrukcji (±0,09), od wsch. do lica ściany P1 (styk z dachem garażu D4 przez łącznik termoizolacyjny)'}
   - {id: ST2, nad: P1, wierzch: 6.1499999999999995, grubosc: 0.22, obrys: [[-0.09, -0.09], [12.09, -0.09], [12.09, 5.425], [8.8, 5.425], [8.8, 8.84], [3.575, 8.84], [3.575, 5.425], [-0.09, 5.425]], otwory: [[[5.98, 5.23], [8.395, 5.23], [8.395, 8.645], [5.98, 8.645]]], podloga: POD-1, sufit: TYNK_GIPS, mat: ZB_C25, uwagi: strop nad P1 pod bryłą A i nadbudową; pola pn. poza bryłą A — dachy D2/D3 (płyta ciągła); krawędzie nad ścianami P1 po licu konstrukcji}
-  - {id: ST2Z, nad: P1, wierzch: 6.1499999999999995, grubosc: 0.22, obrys: [[-1.1, -0.3], [-0.09, -0.3], [-0.09, 5.425], [-1.1, 5.425]], podloga: POD-1, sufit: SUF-ZEW, mat: ZB_C25, uwagi: 'strop P2 nad powietrzem zewnętrznym (wspornik bryły A 1,00 m lico–lico): E–W oś A – belka B3, docieplenie spodu (IZ-ST2Z) i podsufitka PS-A'}
+  - {id: ST2Z, nad: P1, wierzch: 6.1499999999999995, grubosc: 0.22, obrys: [[-1.1, -0.09], [-0.09, -0.09], [-0.09, 5.215], [-1.1, 5.215]], podloga: POD-1, sufit: SUF-ZEW, mat: ZB_C25, uwagi: 'strop P2 nad powietrzem zewnętrznym (wspornik bryły A 1,00 m lico–lico): E–W oś A – belka B3, docieplenie spodu (IZ-ST2Z) i podsufitka PS-A; krawędzie pd./pn. po licu konstrukcji ścian P2 (±0,09), łącznik PL-2 w strefie izolacji'}
 
 # odsłonięte fragmenty stropów = dachy (SCHEMAT p. 5.1); D1 — stropodach bryły A (pierwszy = dach główny)
 dachy:
-  - {id: D1, obrys: [[-1.1, -0.09], [12.09, -0.09], [12.09, 5.215], [8.59, 5.215], [8.59, 8.84], [3.785, 8.84], [3.785, 5.215], [-1.1, 5.215]], plyta: {wierzch: 9.3, grubosc: 0.22}, przegroda: SD1, spadek: 0.02, attyka: {wys_nad_pokryciem: 0.35, szer: 0.18, przegroda: AT1, blok_termoizolacyjny: {h: 0.15, lambda: 0.045, mat: BLOK_TERM, opis: 'nośny blok termoizolacyjny u podstawy attyki (element z ETA / szkło piankowe, klasa nośności wg PT-K) — mostki A: WZ-06 (REKOMENDACJE mostków, wariant policzony)'}}, otwory: [[[6.1, 7.45], [8.2, 7.45], [8.2, 8.45], [6.1, 8.45]], [[7.2, 0.9], [8.1, 0.9], [8.1, 1.8], [7.2, 1.8]]], rzedna_pokrycia: {przy_wpustach: 9.426, maks: 9.626, opis: 'wierzch hydroizolacji (TPO): stożki izolacji spadkowej 2 % wokół WP1/WP2 (R-W2)'}, wpusty: [{xy: [5.57, 5.45], dn: 100, podgrzewany: true, rzedna_pokrycia: 9.426, opis: WP1 — nad szachtem SI (najniższy punkt spadków)}, {xy: [4.4, 8.35], dn: 100, podgrzewany: true, rzedna_pokrycia: 9.426, opis: WP2 — przy attyce pn. nadbudowy; podejście w stropie łazienki P2 do SI}], przelewy_awaryjne: [{xy: [5.0, 8.84], sciana_attyki: N, szer: 0.2, wys: 0.1, rzedna_dna: 9.46, rzedna_pokrycia: 9.441, opis: 'przelew PA1 — attyka pn. nadbudowy (na teren, rzygacz z okapnikiem)'}, {xy: [3.785, 5.7], sciana_attyki: W, szer: 0.2, wys: 0.1, rzedna_dna: 9.47, rzedna_pokrycia: 9.462, opis: 'przelew PA2 — attyka zach. nadbudowy (na dach D2, pole z własnym wpustem WP3)'}], rury_spustowe: [{id: RS1, od_wpustu: 0, trasa: wewn_szacht, xy_pion: [5.57, 5.45], dn: 100, do: zbiornik, opis: 'w izolowanym szachcie SI (otulina 20 mm, izolacja akustyczna), pod płytą do kolektora KD-W'}, {id: RS2, od_wpustu: 1, trasa: wewn_szacht, xy_pion: [5.57, 5.85], dn: 100, do: zbiornik, opis: w szachcie SI; podejście poziome DN100 w suficie podwieszanym łazienki P2 (izolowane)}], spadki: [{od: [-1.1, -0.09], do: [5.57, 5.45], spadek: 0.02}, {od: [12.09, -0.09], do: [5.57, 5.45], spadek: 0.02}, {od: [8.59, 8.84], do: [4.4, 8.35], spadek: 0.02}], uwagi: 'stropodach bryły A: 7 modułów PV EW10 na niskich stelażach (górna krawędź ≤ korona attyki +9,88 — energia.pv); świetlik SW1 2,10 × 1,00 nad spocznikiem; wyłaz 0,90 × 0,90 w pom. 2.07 (x 7,20–8,10); czerpnia i wyrzutnia reku (≥ 0,40 m nad pokryciem lokalnym z klinem), wywiewka K1 nad SI; obrys po licu konstrukcji ścian P2 (attyka ŻB 18 w osi muru, ETICS/wełna ścian ciągła po zewnątrz)'}
+  - {id: D1, obrys: [[-1.1, -0.09], [12.09, -0.09], [12.09, 5.215], [8.59, 5.215], [8.59, 8.84], [3.785, 8.84], [3.785, 5.215], [-1.1, 5.215]], plyta: {wierzch: 9.3, grubosc: 0.22}, przegroda: SD1, spadek: 0.02, attyka: {wys_nad_pokryciem: 0.35, szer: 0.18, przegroda: AT1, blok_termoizolacyjny: {h: 0.15, lambda: 0.045, mat: BLOK_TERM, opis: 'nośny blok termoizolacyjny u podstawy attyki (element z ETA / szkło piankowe, klasa nośności wg PT-K) — mostki A: WZ-06 (REKOMENDACJE mostków, wariant policzony)'}}, otwory: [[[6.1, 7.45], [8.2, 7.45], [8.2, 8.45], [6.1, 8.45]], [[7.2, 0.9], [8.1, 0.9], [8.1, 1.8], [7.2, 1.8]]], rzedna_pokrycia: {przy_wpustach: 9.426, maks: 9.626, opis: 'wierzch hydroizolacji (TPO): stożki izolacji spadkowej 2 % wokół WP1/WP2 (R-W2)'}, wpusty: [{xy: [5.57, 5.45], dn: 100, podgrzewany: true, rzedna_pokrycia: 9.426, opis: WP1 — nad szachtem SI (najniższy punkt spadków)}, {xy: [4.4, 8.35], dn: 100, podgrzewany: true, rzedna_pokrycia: 9.426, opis: WP2 — przy attyce pn. nadbudowy; podejście w stropie łazienki P2 do SI}], przelewy_awaryjne: [{xy: [5.0, 8.84], sciana_attyki: N, szer: 0.2, wys: 0.1, rzedna_dna: 9.46, rzedna_pokrycia: 9.441, opis: 'przelew PA1 — attyka pn. nadbudowy (na teren, rzygacz z okapnikiem)'}, {xy: [3.785, 5.7], sciana_attyki: W, szer: 0.2, wys: 0.1, rzedna_dna: 9.47, rzedna_pokrycia: 9.462, opis: 'przelew PA2 — attyka zach. nadbudowy (na dach D2, pole z własnym wpustem WP3)'}], rury_spustowe: [{id: RS1, od_wpustu: 0, trasa: wewn_szacht, xy_pion: [5.57, 5.45], dn: 100, do: zbiornik, opis: 'w izolowanym szachcie SI (otulina 20 mm, izolacja akustyczna), pod płytą do kolektora KD-W'}, {id: RS2, od_wpustu: 1, trasa: wewn_szacht, xy_pion: [5.57, 5.85], dn: 100, do: zbiornik, opis: w szachcie SI; podejście poziome DN100 w suficie podwieszanym łazienki P2 (izolowane)}], spadki: [{od: [-1.1, -0.09], do: [5.57, 5.45], spadek: 0.02}, {od: [12.09, -0.09], do: [5.57, 5.45], spadek: 0.02}, {od: [8.59, 8.84], do: [4.4, 8.35], spadek: 0.02}], uwagi: 'stropodach bryły A: moduły PV EW10 (energia.pv.pola) na niskich stelażach (górna krawędź ≤ korona attyki +9,88 — energia.pv); świetlik SW1 2,10 × 1,00 nad spocznikiem; wyłaz 0,90 × 0,90 w pom. 2.07 (x 7,20–8,10); wyrzutnia reku z wylotem pionowym (≥ 0,40 m nad pokryciem lokalnym z klinem; czerpnia na D3), wywiewka K1 nad SI; obrys po licu konstrukcji ścian P2 (attyka ŻB 18 w osi muru, ETICS/wełna ścian ciągła po zewnątrz)'}
   - {id: D2, obrys: [[-0.09, 5.425], [3.575, 5.425], [3.575, 8.84], [-0.09, 8.84]], plyta: {wierzch: 6.1499999999999995, grubosc: 0.22}, przegroda: SD2, spadek: 0.02, attyka: {wys_nad_pokryciem: 0.25, szer: 0.18, przegroda: AT1}, rzedna_pokrycia: {przy_wpustach: 6.296, maks: 6.416, opis: wierzch TPO pod żwirem (R-W2)}, wpusty: [{xy: [0.4, 8.55], dn: 100, podgrzewany: true, rzedna_pokrycia: 6.296, opis: wpust przy attyce (boczny) WP3 — narożnik NW}], przelewy_awaryjne: [{xy: [-0.09, 8.2], sciana_attyki: W, szer: 0.2, wys: 0.1, rzedna_dna: 6.33, rzedna_pokrycia: 6.308, opis: 'przelew PA4 — attyka zach., 0,60 m od WP3 (R-W2)'}], rury_spustowe: [{id: RS3, od_wpustu: 0, trasa: zewn, xy_pion: [0.4, 9.110000000000001], dn: 100, do: zbiornik, opis: 'zewnętrzna na elewacji pn., czyszczak 0,5 m nad terenem, kolektor KD-W'}], spadki: [{od: [3.575, 5.425], do: [0.4, 8.55], spadek: 0.02}], uwagi: 'dach nad P1 (pole zach.), żwirowy, nieużytkowy'}
-  - {id: D3, obrys: [[8.8, 5.425], [12.09, 5.425], [12.09, 8.84], [8.8, 8.84]], plyta: {wierzch: 6.1499999999999995, grubosc: 0.22}, przegroda: SD2, spadek: 0.02, attyka: {wys_nad_pokryciem: 0.25, szer: 0.18, przegroda: AT1}, rzedna_pokrycia: {przy_wpustach: 6.296, maks: 6.416, opis: wierzch TPO pod żwirem (R-W2)}, wpusty: [{xy: [9.2, 8.55], dn: 100, podgrzewany: true, rzedna_pokrycia: 6.296, opis: wpust przy attyce (boczny) WP4 — przy attyce pn.}], przelewy_awaryjne: [{xy: [9.0, 8.84], sciana_attyki: N, szer: 0.2, wys: 0.1, rzedna_dna: 6.33, rzedna_pokrycia: 6.303, opis: 'przelew PA5 — attyka pn., 0,35 m od WP4; rzygacz z okapnikiem, wylot 0,40 m na zach. od daszka PL-DA (R-W2)'}], rury_spustowe: [{id: RS4, od_wpustu: 0, trasa: zewn, xy_pion: [9.2, 9.110000000000001], dn: 100, do: zbiornik, opis: 'zewnętrzna na elewacji pn. obok daszku wejścia, czyszczak, kolektor KD-W'}], spadki: [{od: [12.09, 5.425], do: [9.2, 8.55], spadek: 0.02}], uwagi: 'dach nad P1 (pole wsch.), żwirowy, nieużytkowy'}
-  - {id: D4, obrys: [[12.3, -0.09], [18.465, -0.09], [18.465, 9.465], [11.91, 9.465], [11.91, 9.05], [12.3, 9.05]], plyta: {wierzch: 3.0, grubosc: 0.24}, przegroda: DZ1, spadek: 0.02, attyka: {wys_nad_pokryciem: 0.545, szer: 0.18, przegroda: AT1}, rzedna_pokrycia: {przy_wpustach: 3.134, maks: 3.254, opis: wierzch papy SBS pod warstwami dachu zielonego (R-W2)}, wpusty: [{xy: [18.05, 9.05], dn: 100, podgrzewany: true, rzedna_pokrycia: 3.134, opis: 'WP5 — garaż, narożnik NE, studzienka kontrolna w opasce żwirowej'}, {xy: [17.95, 0.35], dn: 100, podgrzewany: true, rzedna_pokrycia: 3.134, opis: 'WP6 — pas gospodarczy, narożnik SE (poza strefą R290)'}], przelewy_awaryjne: [{xy: [18.465, 8.6], sciana_attyki: E, szer: 0.2, wys: 0.1, rzedna_dna: 3.17, rzedna_pokrycia: 3.146, opis: 'przelew PA6 — attyka wsch. (garaż), 0,57 m od WP5 (R-W2)'}, {xy: [18.465, 0.9], sciana_attyki: E, szer: 0.2, wys: 0.1, rzedna_dna: 3.17, rzedna_pokrycia: 3.149, opis: 'przelew PA7 — attyka wsch. (pas gosp.), 0,75 m od WP6; 2,6 m od jedn. PC (> 1 m — W-156)'}], rury_spustowe: [{id: RS5, od_wpustu: 0, trasa: zewn, xy_pion: [18.735, 9.05], dn: 100, do: zbiornik, opis: 'zewnętrzna w narożu NE, czyszczak, kolektor KD-E'}, {id: RS6, od_wpustu: 1, trasa: wewn_szacht, xy_pion: [17.95, 0.35], dn: 100, do: zbiornik, opis: 'w pom. technicznym 0.12 (obudowa izolowana), pod płytą do kolektora KD-E'}], spadki: [{od: [12.3, 4.5], do: [18.05, 9.05], spadek: 0.02}, {od: [12.3, 1.2], do: [17.95, 0.35], spadek: 0.02}], uwagi: 'dach zielony ekstensywny NIEUŻYTKOWY nad garażem i pasem gospodarczym (bez tarasu, bez wyjścia — decyzja Inwestora); runda 2: pole PV biosolarne 8 modułów (x 13,80–16,08; energia.pv), dostęp serwisowy drabiną przenośną; attyka pd. +3,85 = linia D do narożnika garażu; opaska żwirowa 0,5 m przy attykach i wpustach'}
+  - {id: D3, obrys: [[8.8, 5.425], [12.09, 5.425], [12.09, 8.84], [8.8, 8.84]], plyta: {wierzch: 6.1499999999999995, grubosc: 0.22}, przegroda: SD2, spadek: 0.02, attyka: {wys_nad_pokryciem: 0.25, szer: 0.18, przegroda: AT1}, rzedna_pokrycia: {przy_wpustach: 6.296, maks: 6.416, opis: wierzch TPO pod żwirem (R-W2)}, wpusty: [{xy: [9.2, 8.55], dn: 100, podgrzewany: true, rzedna_pokrycia: 6.296, opis: wpust przy attyce (boczny) WP4 — przy attyce pn.}], przelewy_awaryjne: [{xy: [9.0, 8.84], sciana_attyki: N, szer: 0.2, wys: 0.1, rzedna_dna: 6.33, rzedna_pokrycia: 6.303, opis: 'przelew PA5 — attyka pn., 0,35 m od WP4; rzygacz z okapnikiem, wylot 0,40 m na zach. od daszka PL-DA (R-W2)'}], rury_spustowe: [{id: RS4, od_wpustu: 0, trasa: zewn, xy_pion: [9.2, 9.110000000000001], dn: 100, do: zbiornik, opis: 'zewnętrzna na elewacji pn. obok daszku wejścia, czyszczak, kolektor KD-W'}], spadki: [{od: [12.09, 5.425], do: [9.2, 8.55], spadek: 0.02}], uwagi: 'dach nad P1 (pole wsch.), żwirowy, nieużytkowy; czerpnia dachowa reku przy narożu NE (energia.wentylacja — wydanie N-1)'}
+  - {id: D4, obrys: [[12.3, -0.09], [18.465, -0.09], [18.465, 9.465], [11.91, 9.465], [11.91, 9.05], [12.3, 9.05]], plyta: {wierzch: 3.0, grubosc: 0.24}, przegroda: DZ1, spadek: 0.02, attyka: {wys_nad_pokryciem: 0.545, szer: 0.18, przegroda: AT1}, rzedna_pokrycia: {przy_wpustach: 3.134, maks: 3.254, opis: wierzch papy SBS pod warstwami dachu zielonego (R-W2)}, wpusty: [{xy: [18.05, 9.05], dn: 100, podgrzewany: true, rzedna_pokrycia: 3.134, opis: 'WP5 — garaż, narożnik NE, studzienka kontrolna w opasce żwirowej'}, {xy: [17.95, 0.35], dn: 100, podgrzewany: true, rzedna_pokrycia: 3.134, opis: 'WP6 — pas gospodarczy, narożnik SE (poza strefą R290)'}], przelewy_awaryjne: [{xy: [18.465, 8.6], sciana_attyki: E, szer: 0.2, wys: 0.1, rzedna_dna: 3.17, rzedna_pokrycia: 3.146, opis: 'przelew PA6 — attyka wsch. (garaż), 0,57 m od WP5 (R-W2)'}, {xy: [18.465, 0.9], sciana_attyki: E, szer: 0.2, wys: 0.1, rzedna_dna: 3.17, rzedna_pokrycia: 3.149, opis: 'przelew PA7 — attyka wsch. (pas gosp.), 0,75 m od WP6; 2,6 m od jedn. PC (> 1 m — W-156)'}], rury_spustowe: [{id: RS5, od_wpustu: 0, trasa: zewn, xy_pion: [18.735, 9.05], dn: 100, do: zbiornik, opis: 'zewnętrzna w narożu NE, czyszczak, kolektor KD-E'}, {id: RS6, od_wpustu: 1, trasa: wewn_szacht, xy_pion: [17.95, 0.35], dn: 100, do: zbiornik, opis: 'w pom. technicznym 0.12 (obudowa izolowana), pod płytą do kolektora KD-E'}], spadki: [{od: [12.3, 4.5], do: [18.05, 9.05], spadek: 0.02}, {od: [12.3, 1.2], do: [17.95, 0.35], spadek: 0.02}], uwagi: 'dach zielony ekstensywny NIEUŻYTKOWY nad garażem i pasem gospodarczym (bez tarasu, bez wyjścia — decyzja Inwestora); runda 2: pole PV biosolarne (energia.pv.pola), dostęp serwisowy drabiną przenośną; attyka pd. +3,85 = linia D do narożnika garażu; opaska żwirowa 0,5 m przy attykach i wpustach'}
 
 wsporniki_plyty:
   - {id: PL-E, obrys: [[-1.8, -1.3], [13.8, -1.3], [13.8, -0.3], [-0.3, -0.3], [-0.3, 5.125], [-1.8, 5.125]], wierzch: 3.0, grubosc: 0.2999999999999998, przegroda: OK1, lacznik_termiczny: true, mat: ZB_C30, uwagi: 'E — okap ST1: 1,00 m pd. (x −1,80…13,80, także nad drzwiami gospodarczymi) i 1,50 m zach.; łączniki termoizolacyjne (ETA)', lacznik: {d: 0.12, lambda_eq: 0.08, opis: 'łącznik termoizolacyjny (ETA) — moduł izolacyjny 120 mm, λ_eq ≤ 0,08 W/(m·K) (wymaganie; zamiast przykładowego 80 mm / 0,09)'}, odwodnienie: {typ: rynna_ukryta, opis: 'rynna ukryta za blendą czołową (korytko 100 mm, spadek 0,5 % do wylotu), kapinos ≥ 3 cm, podgrzewanie przewodem grzejnym przy wylocie; rynna pd. → wylot E (x 13,70), rynna zach. → wylot N (y 4,95)'}, wpusty: [{xy: [13.7, -1.2], dn: 70, podgrzewany: true, opis: wylot rynny pd. (SE)}, {xy: [-1.7, 4.95], dn: 70, podgrzewany: true, opis: wylot rynny zach. (NW)}], rury_spustowe: [{id: RS8, od_wpustu: 0, trasa: zewn, xy_pion: [13.7, -0.36], dn: 80, do: zbiornik, opis: 'ściana pd. pasa gosp. (x 13,70, na wsch. od DZ3; łącznik 0,9 m w podsufitce), czyszczak, KD-E; 3,1 m od jedn. PC (> 1 m — W-156)'}, {id: RS7, od_wpustu: 1, trasa: zewn, xy_pion: [-0.36, 5.25], dn: 80, do: zbiornik, opis: 'ściana zach. P0 (y 5,25, na pn. od HS2; łącznik 1,4 m w podsufitce), czyszczak, KD-W; wspólna z rynną zach. PL-2'}], spadek: 0.02}
@@ -626,9 +626,13 @@ energia:
     izolacja_obwodowa: {typ: pozioma, D: 1.0, d_n: 0.1, lam_n: 0.036}
   wentylacja:
     centrala: RVU_450
-    czerpnia: [11.6, 1.0, 10.0]
+    czerpnia: [11.45, 8.05, 6.9]
     wyrzutnia: [1.9, 4.0, 10.0]
-    wyrzut: poziomy
+    wyrzut: pionowy
+    czerpnia_dach: D3
+    wyrzutnia_dach: D1
+    czerpnia_z_top: 7.4
+    wyrzutnia_z_top: 10.2
     zestaw_zblokowany: false
     wywiewki_kanalizacyjne:
     - [5.57, 6.2, 9.94]
@@ -636,10 +640,12 @@ energia:
     rzedna_terenu: -0.33
     bilans: {nawiew_m3h: 365, wywiew_m3h: 365, okresowo_m3h: 435, opis: 'runda 2 (K-9): Σnaw = Σwyw = 365 m³/h (pom. went); centrala 450 m³/h (V_max 500)
         — praca 81 % nominału, tryb okresowy (okap 120) 435 ≤ 450 (weryfikacja §6 B5)'}
-    uwagi: 'po audycie A1: czerpnia (11,60; 1,00) i wyrzutnia (1,90; 4,00) — odległość 10,15 m ≥ 10,00 m (WT §152 ust. 10, bez wymogu różnicy wysokości);
-      dolna krawędź wlotu czerpni i wylot wyrzutni +10,00 ≥ pokrycie lokalne z klinem + 0,40 (W-166); czerpnia 7,96 m od wywiewki K1 (≥ 6 m); wyrzutnia 3,00
-      m od krawędzi konstrukcji dachu nad oknem O2-04 (3,20 m od lica) i ≥ 4 m od krawędzi pd.; SW1 — świetlik stały (W-167 ust. 12 — okna otwierane); wysokość
-      zabudowy bez zmian (≤ 11,0 m, MPZP); K2 zakończony zaworem napowietrzającym (W-139)'
+    uwagi: 'wydanie (weryfikacja V2 N-1/N-2): czerpnia dachowa na D3 — dolna krawędź wlotu ≥ 0,40 m nad powierzchnią dachu (żwir, maks. klin; WT §152 ust.
+      4), 6,2 m od wywiewki K1 (≥ 6 m), wlot od N/E (zacieniony); wyrzutnia dachowa na D1 z wylotem PIONOWYM (deflektor) ≥ 0,40 m nad pokryciem lokalnym,
+      3,00 m od krawędzi konstrukcji dachu nad oknem O2-04 (ust. 12); czerpnia–wyrzutnia ≥ 6 m i wyrzutnia ≥ 1,0 m ponad czerpnią (ust. 10 — wyrzut pionowy);
+      ust. 7 (0,4 m nad linią najwyższych punktów w promieniu 10 m) dotyczy wylotu poziomego — nie ma zastosowania; SW1 — świetlik stały (ust. 12 — interpretacja
+      §10 koncepcji); maks. wysokość urządzeń (z_top) wliczona do wysokości zabudowy (≤ 11,0 m, rezerwa 10,70 — W-033); K2 zakończony zaworem napowietrzającym
+      (W-139)'
   ogrzewanie: {zrodlo: PC_R290_monoblok, temp_zasilania: 35, uwagi: 'PC powietrze–woda monoblok R290 (W-155), moduł hydrauliczny w pom. 0.12; ogrzewanie podłogowe
       z regulacją pokojową (W-152); runda 2 (K-10): po symulacji mostków Φ_HL ≈ 7,4 kW (było 11,7) → klasa mocy ok. 7 kW (≤ 12 kW — W-155, rozp. (UE) 2024/573),
       dobór wg DTR; łazienki/WC i klatka P2 — ściany grzewcze wodne (instalacje.grzejniki)'}
@@ -655,7 +661,7 @@ energia:
     z_max: 9.863
     pola:
     - dach: D1
-      n: 7
+      n: 8
       moduly:
       - [0.18, 1.19, 1.297, 2.912]
       - [1.347, 1.19, 2.464, 2.912]
@@ -663,12 +669,13 @@ energia:
       - [3.631, 1.19, 4.748, 2.912]
       - [5.348, 1.19, 6.465, 2.912]
       - [8.415, 1.19, 9.532, 2.912]
+      - [9.582, 1.19, 10.699, 2.912]
       - [5.08, 2.932, 6.197, 4.654]
       z_max: 9.863
       korona_attyki: 9.876
       pole: null
     - dach: D4
-      n: 8
+      n: 7
       moduly:
       - [13.8, 1.19, 14.917, 2.912]
       - [14.967, 1.19, 16.084, 2.912]
@@ -677,14 +684,13 @@ energia:
       - [13.8, 4.674, 14.917, 6.396]
       - [14.967, 4.674, 16.084, 6.396]
       - [13.8, 6.416, 14.917, 8.138]
-      - [14.967, 6.416, 16.084, 8.138]
       z_max: 3.704
       korona_attyki: 3.85
       typ: biosolarny (stelaże na substracie, roślinność pod modułami; kotwienie balastem substratu — bez przebić hydroizolacji)
-    uwagi: 'Σ 15 × 430 Wp = 6,45 kWp ≤ 6,5 kWp (W-194, art. 29 ust. 4 pkt 3 lit. c PB): D1 — 7 modułów (więcej się nie mieści: strefa brzegowa 1,0 m, wyłaz,
-      czerpnia/wyrzutnia, wywiewka), D4 — 8 modułów na dachu biosolarnym; górna krawędź modułów ≤ korona attyki przy pokryciu lokalnym (D1: z_max ≤ korona,
-      D4: ≤ +3,85) — W-033, D-15; PR 0,78 = 0,80 − 0,02 na popołudniowe zacienienie pola D4 bryłami A/B [ZAŁ — do symulacji w PT-IE]; trasa DC i przepusty
-      — PT-IE'
+    uwagi: 'Σ 15 × 430 Wp = 6,45 kWp ≤ 6,5 kWp (W-194, art. 29 ust. 4 pkt 3 lit. c PB): D1 — 8 modułów (pole montażu: strefa brzegowa 1,0 m, wyłaz, świetlik,
+      wyrzutnia, wywiewka; czerpnia na D3 od wydania), D4 — 7 modułów na dachu biosolarnym; górna krawędź modułów ≤ korona attyki przy pokryciu lokalnym (D1:
+      z_max ≤ korona, D4: ≤ +3,85) — W-033, D-15; PR 0,78 = 0,80 − 0,02 na popołudniowe zacienienie pola D4 bryłami A/B [ZAŁ — do symulacji w PT-IE]; trasa
+      DC i przepusty — PT-IE'
   garaz: {stanowiska: 2, otwory_went_m2: 0.1, n_went: 1.0}
 
 konstrukcja:

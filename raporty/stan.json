@@ -14,8 +14,8 @@
    "done"
   ],
   [
-   "Koncepcja: runda 2 ✔ (fizyka/woda) ► weryfikacja V1–V3 → domknięcie",
-   "running"
+   "Koncepcja: rundy poprawek 1–2 ✔ → domknięcie w przepływie wydania",
+   "done"
   ],
   [
    "Silnik rysunkowy wg PN",
@@ -38,15 +38,15 @@
    "done"
   ],
   [
-   "Mostki 2D ISO 10211 ✔ (22 węzły, H_TB 45,6 W/K), woda, detale ✔",
+   "Mostki 2D ISO 10211 ✔ (22 węzły, H_TB 30,6 W/K po rundzie 2), woda, detale ✔",
    "done"
   ],
   [
-   "Produkcja: PZT ✔, IS/IE ✔, BO/detale ►, układ arkuszy ► , tomy",
+   "Produkcja rysunków: PZT ✔, IS/IE ✔, BO ✔ (26 ark.), detale ✔ (6 ark.); silnik układu arkuszy ►",
    "running"
   ],
   [
-   "Wydanie: model ► konstrukcja → zamrożenie → obliczenia → rysunki → tomy → 5 weryfikacji",
+   "Tomy: Tom I ► (złożony roboczo), PT-1 AR, PT-3 IS robocze ►; wydanie ► (model → konstrukcja → zamrożenie …)",
    "running"
   ],
   [
