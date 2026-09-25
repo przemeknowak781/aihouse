@@ -20,6 +20,17 @@ GREEN = "#2f8a4c"
 DIV = LinearSegmentedColormap.from_list("div_tarcza", ["#0d366b", "#3987e5", "#cde2fb", "#f7f7f5", "#f9d2c1", "#eb6834", "#7a2c10"])
 
 
+def _ladna(v: float) -> float:
+    """Zaokrąglenie w górę do „ładnej” wartości (1, 1,5, 2, 2,5, 3, 4, 5, 6, 8 × 10ⁿ)."""
+    if v <= 0:
+        return 1e-6
+    e = 10 ** math.floor(math.log10(v))
+    for m_ in (1, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10):
+        if m_ * e >= v - 1e-12:
+            return m_ * e
+    return 10 * e
+
+
 def _tri(mes):
     return Triangulation(mes.nodes[:, 0], mes.nodes[:, 1], np.vstack([mes.els[:, [0, 1, 2]], mes.els[:, [0, 2, 3]]]))
 
@@ -85,31 +96,44 @@ def rys_schemat(an, path: Path) -> list:
     H = z1 - z0
     for z, lst in lv.items():
         gora = z >= z0 + 0.5 * H
-        base = z1 + 0.10 if gora else z0 + 0.12
-        top = base + 0.42 if gora else base + 0.36
+        col = BLUE if gora else ORANGE
         xa = min(o.s0 for o in lst)
         xb = max(o.s1 for o in lst)
         n = max(int((xb - xa) / 0.45), 2)
-        for x in np.linspace(xa + 0.1, xb - 0.1, n):
-            ax.annotate("", (x, base if gora else z + 0.02), (x, top), arrowprops=dict(arrowstyle="-|>", color=BLUE if gora else ORANGE,
-                                                                                        lw=0.7, mutation_scale=6), zorder=7)
-        ax.plot([xa, xb], [top, top], color=BLUE if gora else ORANGE, lw=0.8, zorder=7)
-        # opis: suma wg przypadków (średnio na długości)
+        if gora:
+            base, top = z1 + 0.06, z1 + 0.46
+            for x in np.linspace(xa + 0.1, xb - 0.1, n):
+                ax.annotate("", (x, base), (x, top), arrowprops=dict(arrowstyle="-|>", color=col, lw=0.7, mutation_scale=6), zorder=7)
+            ax.plot([xa, xb], [top, top], color=col, lw=0.8, zorder=7)
+            ytxt = top
+        else:
+            # obciążenie podwieszone (strop pod tarczą) — krótkie strzałki przy krawędzi dolnej, tylko w betonie
+            for x in np.linspace(xa + 0.1, xb - 0.1, n):
+                if not an.P.buffer(-0.005).contains(__import__("shapely").geometry.Point(x, z + 0.2)):
+                    continue
+                ax.annotate("", (x, z + 0.01), (x, z + 0.24), arrowprops=dict(arrowstyle="-|>", color=col, lw=0.7, mutation_scale=5),
+                            zorder=7)
+            ytxt = z + 0.12
         cases: dict = {}
         for o in lst:
             q = o.wypadkowa / max(o.s1 - o.s0, 1e-9)
             cases[o.przypadek] = cases.get(o.przypadek, 0.0) + q
         opis = ", ".join(f"{c}: {_pl(v, 1)}" for c, v in cases.items())
         nazwy = sorted({(o.opis.split("—")[0].strip() if o.opis else "") for o in lst} - {""})
-        ax.text(xb + 0.12, top, f"{' / '.join(nazwy)} z = {_pl(z, 2)} m\n{opis} kN/m", fontsize=6.5, color=INK, va="center",
-                ha="left", zorder=8, bbox=dict(fc="white", ec="none", alpha=0.8, pad=0.5))
+        ax.text(x1 + 0.12, ytxt, f"{' / '.join(nazwy)} (z = {_pl(z, 2)} m)\n{opis} kN/m", fontsize=6.5, color=col, va="center",
+                ha="left", zorder=8)
+    pk: dict = {}
     for o in d.obciazenia:
         if isinstance(o, ObcSkupione):
-            up = o.z > z0 + 0.5 * H
-            y_end = o.z
-            y_st = o.z + (0.75 if up else 0.55)
-            ax.annotate("", (o.s, y_end), (o.s, y_st), arrowprops=dict(arrowstyle="-|>", color=RED, lw=1.2), zorder=8)
-            ax.text(o.s + 0.06, y_st, f"{o.przypadek}: {_pl(o.P, 1)} kN", fontsize=6.5, color=RED, va="bottom", zorder=8)
+            pk.setdefault((round(o.s, 3), round(o.z, 3)), []).append(o)
+    for (xs_, zs_), lst in pk.items():
+        up = zs_ > z0 + 0.5 * H
+        y_st = zs_ + (0.75 if up else 0.62)
+        ax.annotate("", (xs_, zs_), (xs_, y_st), arrowprops=dict(arrowstyle="-|>", color=RED, lw=1.3), zorder=8)
+        txt = " + ".join(f"{o.przypadek}: {_pl(o.P, 1)}" for o in lst) + " kN"
+        nm = sorted({(o.opis.split("—")[0].strip() if o.opis else "") for o in lst} - {""})
+        ax.text(xs_ + 0.07, y_st, (" / ".join(nm) + ": " if nm else "") + txt, fontsize=6.5, color=RED, va="bottom", zorder=8,
+                bbox=dict(fc="white", ec="none", pad=0.3, alpha=0.85))
     # łańcuch wymiarowy
     xs = sorted({round(v, 3) for v in [x0, x1] + [o.s0 for o in d.otwory] + [o.s1 for o in d.otwory]
                  + [s.s0 for s in d.podpory] + [s.s1 for s in d.podpory]})
@@ -127,8 +151,8 @@ def rys_schemat(an, path: Path) -> list:
     ax.set_aspect("equal")
     ax.axis("off")
     ax.set_title(f"Tarcza {d.id} — schemat statyczny, podpory i obciążenia charakterystyczne (kN/m, kN)", loc="left")
-    leg = [Line2D([], [], color=BLUE, lw=1, label="obciążenie od stropu nad tarczą (na krawędzi górnej)"),
-           Line2D([], [], color=ORANGE, lw=1, label="obciążenie od stropu pod tarczą (podwieszone — krawędź dolna)"),
+    leg = [Line2D([], [], color=BLUE, lw=1, label="obciążenie na krawędzi górnej (strop nad tarczą)"),
+           Line2D([], [], color=ORANGE, lw=1, label="obciążenie podwieszone na krawędzi dolnej (strop pod tarczą)"),
            Line2D([], [], color=RED, lw=1.2, label="siły skupione"),
            Rectangle((0, 0), 1, 1, fc="white", ec=INK, hatch="////", label="podpora (ściana poniżej)")]
     ax.legend(handles=leg, fontsize=6.5, frameon=False, loc="upper left", bbox_to_anchor=(0.0, -0.02), ncol=4)
@@ -142,19 +166,21 @@ def _mapa(ax, an, val_el, tyt, jedn="MPa", cmap=DIV, sym=True, pct=99.0, vmin=No
     vn = mes.wartosci_wezlowe(val_el)
     tri = _tri(mes)
     if sym:
-        v = max(float(np.percentile(np.abs(vn), pct)), 1e-6)
+        v = _ladna(max(float(np.percentile(np.abs(vn), pct)), 1e-6))
         lev = np.linspace(-v, v, 21)
         cs = ax.tricontourf(tri, np.clip(vn, -v, v), levels=lev, cmap=cmap, extend="both")
     else:
-        lo = vmin if vmin is not None else float(np.percentile(vn, 100 - pct))
-        hi = vmax if vmax is not None else float(np.percentile(vn, pct))
+        lo = vmin if vmin is not None else -_ladna(-float(np.percentile(vn, 100 - pct)))
+        hi = vmax if vmax is not None else _ladna(float(np.percentile(vn, pct)))
         if hi - lo < 1e-9:
             hi = lo + 1e-6
         lev = np.linspace(lo, hi, 16)
         cs = ax.tricontourf(tri, np.clip(vn, lo, hi), levels=lev, cmap=cmap, extend="both")
     _obrys(ax, an.P, lw=0.8)
+    _podpory(ax, an, h=0.10)
     _osie(ax, an, pad=0.15)
-    cb = plt.colorbar(cs, ax=ax, fraction=0.025, pad=0.01)
+    ax.set_ylim(an.P.bounds[1] - 0.14, an.P.bounds[3] + 0.05)
+    cb = plt.colorbar(cs, ax=ax, fraction=0.025, pad=0.01, ticks=np.linspace(lev[0], lev[-1], 5))
     cb.set_label(jedn, fontsize=7)
     cb.ax.tick_params(labelsize=6.5)
     ax.set_title(tyt, loc="left", fontsize=8.5)
@@ -179,46 +205,53 @@ def rys_mapy(an, path: Path, kombinacja: str | None = None) -> list:
     return [(_save(fig, path), f"Tarcza {an.d.id}: mapy naprężeń σ_x, σ_z, τ_xz (MES, stan niezarysowany, {k}).")]
 
 
-def rys_glowne(an, path: Path, kombinacja: str | None = None, krok: float = 0.30) -> list:
-    """σ₁ (rozciąganie) i σ₂ (ściskanie) z trajektoriami (krzyżyki kierunków głównych, długość ∝ |σ|)."""
+def rys_glowne(an, path: Path, kombinacja: str | None = None, krok: float = 0.25) -> list:
+    """σ₁ (rozciąganie), σ₂ (ściskanie) i trajektorie naprężeń głównych (krzyżyki kierunków, długość ∝ |σ|)."""
     k = kombinacja or an.k_gov
     r = an.r_uls[k]
     mes = an.mes
     s1, s2, th = glowne(r.sig)
     L = an.P.bounds[2] - an.P.bounds[0]
-    fig, axs = plt.subplots(2, 1, figsize=(min(max(L * 0.85, 7), 12.5), 6.2))
-    _mapa(axs[0], an, np.clip(s1, 0, None) / 1000, "σ₁ — główne rozciągające; kreski: kierunek σ₁ (czerwone) i σ₂ (niebieskie)",
+    fig, axs = plt.subplots(3, 1, figsize=(min(max(L * 0.85, 7), 12.5), 8.8))
+    _mapa(axs[0], an, np.clip(s1, 0, None) / 1000, f"σ₁ — naprężenia główne rozciągające (f_ctm = {_pl(an.beton.f_ctm, 1)} MPa)",
           cmap=SEQ_ORANGE, sym=False, vmin=0.0, pct=99.0)
-    _mapa(axs[1], an, np.clip(s2, None, 0) / 1000, "σ₂ — główne ściskające; f_ctm = " + _pl(an.beton.f_ctm, 1) + " MPa, f_cd = "
-          + _pl(an.beton.f_cd, 1) + " MPa", cmap=SEQ_BLUE.reversed(), sym=False, vmax=0.0, pct=99.0)
-    # próbkowanie co krok
+    _mapa(axs[1], an, np.clip(s2, None, 0) / 1000, f"σ₂ — naprężenia główne ściskające (f_cd = {_pl(an.beton.f_cd, 1)} MPa)",
+          cmap=SEQ_BLUE.reversed(), sym=False, vmax=0.0, pct=99.0)
+    ax = axs[2]
+    _obrys(ax, an.P, fill=True, lw=0.8)
+    _podpory(ax, an, h=0.10)
     x0, z0, x1, z1 = an.P.bounds
-    xs = np.arange(x0 + krok / 2, x1, krok)
-    zs = np.arange(z0 + krok / 2, z1, krok)
     pts = []
-    for x in xs:
-        for z in zs:
+    for x in np.arange(x0 + krok / 2, x1, krok):
+        for z in np.arange(z0 + krok / 2, z1, krok):
             e = mes.element_w(x, z)
-            if e is not None:
-                pts.append(e)
-    pts = np.array(sorted(set(pts)))
-    if len(pts):
-        smax = max(float(np.percentile(np.abs(np.concatenate([s1[pts], s2[pts]])), 98)), 1e-6)
-        for ax in axs:
-            for e in pts:
-                cx, cz = mes.el_c[e]
-                for val, ang, col in ((s1[e], th[e], RED), (s2[e], th[e] + math.pi / 2, BLUE)):
-                    ln = 0.45 * krok * min(abs(val) / smax, 1.0)
-                    if ln < 0.02 * krok:
-                        continue
-                    dx, dz = 0.5 * ln * math.cos(ang), 0.5 * ln * math.sin(ang)
-                    ax.plot([cx - dx, cx + dx], [cz - dz, cz + dz], color=col if val * (1 if col == RED else -1) > 0 else MUTED,
-                            lw=0.7, zorder=6, solid_capstyle="butt")
-    fig.suptitle(f"Tarcza {an.d.id} — naprężenia główne [MPa] i trajektorie (kierunki główne), kombinacja {k}", fontsize=8.5,
-                 x=0.01, ha="left")
+            if e is not None and an.P.contains(__import__("shapely").geometry.Point(x, z)):
+                pts.append((x, z))
+    if pts:
+        pts = np.array(pts)
+        S = np.array([mes.naprezenia_xy(r, x, z) for x, z in pts])
+        a1, a2, at = glowne(S)
+        smax = max(float(np.percentile(np.abs(np.concatenate([a1, a2])), 97)), 1e-6)
+        for (cx, cz), v1, v2, ang in zip(pts, a1, a2, at):
+            for val, an_, col in ((v1, ang, RED), (v2, ang + math.pi / 2, BLUE)):
+                c_ = RED if val > 0 else BLUE
+                ln = 0.92 * krok * min(abs(val) / smax, 1.0) ** 0.5
+                if ln < 0.12 * krok:
+                    continue
+                dx, dz = 0.5 * ln * math.cos(an_), 0.5 * ln * math.sin(an_)
+                ax.plot([cx - dx, cx + dx], [cz - dz, cz + dz], color=c_, lw=0.9 if val > 0 else 0.8, zorder=6,
+                        solid_capstyle="butt")
+    _osie(ax, an, pad=0.15)
+    ax.set_ylim(z0 - 0.14, z1 + 0.05)
+    from matplotlib.cm import ScalarMappable
+    cb = plt.colorbar(ScalarMappable(cmap=SEQ_BLUE), ax=ax, fraction=0.025, pad=0.01)
+    cb.ax.set_visible(False)
+    ax.set_title("Trajektorie naprężeń głównych: rozciąganie (czerwone) i ściskanie (niebieskie), długość kreski ∝ √|σ|",
+                 loc="left", fontsize=8.5)
+    fig.suptitle(f"Tarcza {an.d.id} — naprężenia główne [MPa], kombinacja {k}", fontsize=8.5, x=0.01, ha="left")
     fig.tight_layout()
-    return [(_save(fig, path), f"Tarcza {an.d.id}: naprężenia główne σ₁, σ₂ i kierunki główne (trajektorie) — podstawa "
-             "orientacji modelu kratownicowego (EC2 5.6.4(5)).")]
+    return [(_save(fig, path), f"Tarcza {an.d.id}: naprężenia główne σ₁, σ₂ i trajektorie — podstawa orientacji modelu "
+             "kratownicowego (EC2 5.6.4(5)).")]
 
 
 # ==================================================================================================
@@ -240,9 +273,9 @@ def rys_stm(an, path: Path, kombinacja: str | None = None) -> list:
         a, b = m.wezly[m.ii[q]], m.wezly[m.jj[q]]
         small = abs(F[q]) < 0.08 * Fm
         col = MUTED if small else (RED if F[q] > 0 else BLUE)
-        lw = 0.4 if small else 0.7 + 3.3 * abs(F[q]) / Fm
+        lw = 0.3 if small else 0.7 + 3.3 * abs(F[q]) / Fm
         ax.plot([a[0], b[0]], [a[1], b[1]], color=col, lw=lw, ls="-" if F[q] > 0 else (0, (3, 1.6)), zorder=6,
-                solid_capstyle="round", alpha=0.55 if small else 1.0)
+                solid_capstyle="round", alpha=0.35 if small else 1.0)
     # etykiety — największe siły, bez nakładania
     placed = []
     for q in np.argsort(-np.abs(F)):
@@ -265,11 +298,12 @@ def rys_stm(an, path: Path, kombinacja: str | None = None) -> list:
             ax.annotate("", (x, z - 0.02), (x, z - 0.02 - ln), arrowprops=dict(arrowstyle="-|>", color=GREEN, lw=0.9), zorder=8)
         else:
             ax.annotate("", (x, z - 0.02 - ln), (x, z - 0.02), arrowprops=dict(arrowstyle="-|>", color=RED, lw=0.9), zorder=8)
-    # typy węzłów podporowych
+    # typy węzłów podporowych — znaczniki
     typy = getattr(an, "typ_wezla", {}).get(k, {})
+    mk = {"CCC": "o", "CCT": "^", "CTT": "s"}
     for i, t_ in typy.items():
         if Rw[i] > 0.05 * Rm:
-            ax.text(m.wezly[i, 0], m.wezly[i, 1] + 0.12, t_, fontsize=5.8, ha="center", color=INK2, zorder=9)
+            ax.plot(m.wezly[i, 0], m.wezly[i, 1], marker=mk[t_], ms=4.5, mfc="white", mec=INK, mew=0.8, ls="", zorder=10)
     _osie(ax, an, pad=0.3)
     ax.set_ylim(an.P.bounds[1] - 0.85, an.P.bounds[3] + 0.3)
     ax.set_title(f"Tarcza {an.d.id} — model kratownicowy (STM) z MES, kombinacja {k}; siły [kN] (+ cięgno, − krzyżulec)",
@@ -277,8 +311,11 @@ def rys_stm(an, path: Path, kombinacja: str | None = None) -> list:
     leg = [Line2D([], [], color=RED, lw=2, label="cięgno (zbrojenie)"),
            Line2D([], [], color=BLUE, lw=2, ls=(0, (3, 1.6)), label="krzyżulec ściskany (beton)"),
            Line2D([], [], color=MUTED, lw=0.6, label="pręty < 8 % F_max"),
-           Line2D([], [], color=GREEN, lw=1, marker=r"$\uparrow$", ls="", label="reakcja podpory")]
-    ax.legend(handles=leg, fontsize=6.5, frameon=False, loc="upper left", bbox_to_anchor=(0, -0.13), ncol=4)
+           Line2D([], [], color=GREEN, lw=1, marker=r"$\uparrow$", ls="", label="reakcja podpory"),
+           Line2D([], [], marker="o", mfc="white", mec=INK, ls="", label="węzeł CCC"),
+           Line2D([], [], marker="^", mfc="white", mec=INK, ls="", label="CCT"),
+           Line2D([], [], marker="s", mfc="white", mec=INK, ls="", label="CTT")]
+    ax.legend(handles=leg, fontsize=6.5, frameon=False, loc="upper left", bbox_to_anchor=(0, -0.13), ncol=7)
     return [(_save(fig, path), f"Tarcza {an.d.id}: model kratownicowy wygenerowany z pola naprężeń MES (programowanie liniowe, "
              f"kombinacja {k}); CCC/CCT/CTT — typ węzła podporowego.")]
 
@@ -302,10 +339,10 @@ def rys_pasy(an, path: Path) -> list:
         if env:
             xs = np.array(sorted(env))
             ax.plot(xs, [max(env[x], 0) for x in xs], color=col, lw=1.3, label=f"MES — wypadkowa rozciągania: {e.opis}")
-        pas = next((p_ for p_ in an.pasy if p_.klucz == e.id), None)
-        if pas is not None and pas.F_stm > 0:
-            ax.hlines(pas.F_stm, pas.zakres[0], pas.zakres[1], color=col, lw=1.0, ls=(0, (4, 2)),
-                      label=f"STM — maks. siła w cięgnie: {e.opis} ({_pl(pas.F_stm, 0)} kN)")
+        seg = an.odcinki_ciegien.get(e.id, []) if hasattr(an, "odcinki_ciegien") else []
+        if seg:
+            for j, (xa, xb, Fv) in enumerate(seg):
+                ax.hlines(Fv, xa, xb, color=col, lw=2.2, alpha=0.55, label=f"STM — cięgna przy krawędzi: {e.opis} (obwiednia)" if j == 0 else None)
     for s in an.d.podpory:
         ax.axvspan(s.s0, s.s1, color=FILL, zorder=-2)
     ax.set_ylabel("T [kN]")
@@ -357,6 +394,7 @@ def rys_ugiecia(an, path: Path) -> list:
     cb = plt.colorbar(cs, ax=ax, fraction=0.025, pad=0.01)
     cb.set_label("w [mm] (w dół +)", fontsize=7)
     _osie(ax, an, pad=0.2)
+    ax.set_aspect("equal", adjustable="datalim")
     txt = "; ".join(f"{u_['opis']}: w = {_pl(u_['w_II'], 2)} mm (lim {_pl(u_['w_dop'], 1)})" for u_ in getattr(an, "ugiecia", []))
     ax.set_title(f"Postać odkształcenia — SLS quasi-stała, t = ∞, sztywność zarysowana (skala ×{sk:.0f})", loc="left")
     if txt:
@@ -370,8 +408,8 @@ def rys_ugiecia(an, path: Path) -> list:
         if len(a["x"]) > 1:
             ax.plot(a["x"], a["r"], color=INK, lw=1.2)
             ax.plot(b["x"], b["r"], color=BLUE, lw=1.0, ls=(0, (3, 2)))
-            ax.text(0.5 * (s.s0 + s.s1), max(a["r"].max(), 0) * 1.02, f"{s.id}: R_d = {_pl(a['R'], 0)} kN\nR_k = {_pl(b['R'], 0)} kN",
-                    ha="center", va="bottom", fontsize=6.5)
+            ax.text(0.5 * (s.s0 + s.s1), 0.08 * max(a["r"].max(), 1.0), f"{s.id}: R_d = {_pl(a['R'], 0)} kN\nR_k = {_pl(b['R'], 0)} kN",
+                    ha="center", va="bottom", fontsize=6.5, bbox=dict(fc="white", ec="none", alpha=0.8, pad=0.4))
         else:
             ax.bar(a["x"], a["R"], width=0.1, color=INK)
     ax.axhline(0, color=INK2, lw=0.5)
@@ -422,7 +460,7 @@ def rys_zbrojenie(an, path: Path) -> list:
             for z_ in ext:
                 xe = a1 if z_["strona"] > 0 else a0
                 if not z_["sposob"] == "proste":
-                    ax.plot([xe, xe], [y, y - e.strona * 0.18], color=col, lw=2.0, zorder=7)
+                    ax.plot([xe, xe], [y, y + e.strona * 0.18], color=col, lw=2.0, zorder=7)
             c = (0.5 * (a0 + a1), y)
             lab = f"{pas.n}φ{pas.fi}"
             va = "bottom" if e.strona < 0 else "top"
@@ -443,10 +481,13 @@ def rys_zbrojenie(an, path: Path) -> list:
         g = 0.07
         ax.add_patch(Rectangle((o.s0 - g, o.z0 - g), o.szer + 2 * g, o.wys + 2 * g, fc="none", ec=INK2, lw=0.9, zorder=6))
         for (x, z, bx, bz) in ((o.s0, o.z1, -1, 1), (o.s1, o.z1, 1, 1), (o.s0, o.z0, -1, -1), (o.s1, o.z0, 1, -1)):
-            cx, cz = x + bx * 0.16, z + bz * 0.16
+            cx, cz = x + bx * 0.17, z + bz * 0.17
             ux, uz = 1 / math.sqrt(2), -bx * bz / math.sqrt(2)      # pręt prostopadły do dwusiecznej naroża
-            ll = 0.32
-            ax.plot([cx - ux * ll, cx + ux * ll], [cz - uz * ll, cz + uz * ll], color=INK, lw=1.0, zorder=7)
+            ln_ = __import__("shapely").geometry.LineString([(cx - ux * 0.3, cz - uz * 0.3), (cx + ux * 0.3, cz + uz * 0.3)])
+            ln_ = ln_.intersection(an.P.buffer(-0.04))
+            if not ln_.is_empty and ln_.geom_type == "LineString":
+                xx, zz = ln_.xy
+                ax.plot(xx, zz, color=INK, lw=1.1, zorder=7)
         ax.text(0.5 * (o.s0 + o.s1), 0.5 * (o.z0 + o.z1), f"{o.id}\nobwodowe 2φ{fi}/pow.\nukośne 2φ{fi}/pow.", ha="center", va="center",
                 fontsize=6, color=INK2)
     ax.set_title(f"Tarcza {d.id} — szkic zbrojenia głównego (pręty przy obu powierzchniach); siatki φ{an.siatka_fi} co "

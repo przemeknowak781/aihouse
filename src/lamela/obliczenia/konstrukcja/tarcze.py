@@ -856,11 +856,11 @@ class AnalizaTarczy:
         need_face = max(Adb, Asv_min / 2, Ash_min / 2, rx95 / 2, rz95 / 2)
         fi = d.fi_siatki
         a1 = pole_preta(fi)
-        s = min(int(smax // 10 * 10), int(a1 * 1000 / need_face // 10 * 10))
+        s = min(int(smax // 25 * 25), int(a1 * 1000 / need_face // 25 * 25))      # rozstaw co 25 mm
         while s < 100 and fi < 12:
             fi += 2
             a1 = pole_preta(fi)
-            s = min(int(smax // 10 * 10), int(a1 * 1000 / need_face // 10 * 10))
+            s = min(int(smax // 25 * 25), int(a1 * 1000 / need_face // 25 * 25))
         As_face = a1 * 1000 / s
         self.siatka_fi, self.siatka_s, self.siatka_As = fi, s, As_face
         w.krok("Zbrojenie z pola naprężeń (zał. F, obwiednia ULS, 95 % elementów poza narożami otworów)",
@@ -1016,6 +1016,13 @@ class AnalizaTarczy:
             pm = self.pasy_mes.get(e.id)
             if pm and pm["F"] > 5.0 and e.id not in grupy:
                 grupy[e.id] = {"e": e, "F": 0.0, "k": "", "prety": []}
+        self.odcinki_ciegien = {}
+        for key, g in grupy.items():
+            env: dict = {}
+            for a0, a1, Fv, _ in g["prety"]:
+                kk_ = (round(a0, 3), round(a1, 3))
+                env[kk_] = max(env.get(kk_, 0.0), Fv)
+            self.odcinki_ciegien[key] = [(a0, a1, Fv) for (a0, a1), Fv in sorted(env.items())]
         fyd = st.f_yd
         wmax = p.w_max.get(d.ekspozycja, 0.3)
         w = Wynik(nazwa="Cięgna (pasy rozciągane) — STM i całkowanie naprężeń MES (6.5.3, 7.3.2, 7.3.4, 8.4)")
