@@ -5,6 +5,7 @@ from __future__ import annotations
 from lamela.dokumenty import DANE_PRZYKLADOWE, ZAL, Arkusz, arkusze_z_katalogu, do_uzup, liczba
 
 from pzt_dane import _poly
+from redakcja import czysc, podstawa
 
 
 def L(v, nd=2):
@@ -58,7 +59,7 @@ def pkt5(zp, z, d):
         {"Oddziaływanie": "Emisje do powietrza", "Charakterystyka": "budynek bez źródeł spalania (ogrzewanie i c.w.u. — pompa ciepła, energia elektryczna, PV)",
          "Ocena": "brak emisji z instalacji spalania"},
         {"Oddziaływanie": "Ścieki i wody opadowe", "Charakterystyka": "ścieki bytowe do sieci; wody opadowe na działce; wody z podjazdu i garażu przez separator",
-         "Ocena": "brak zrzutu do wód i na teren sąsiedni (pkt 3 lit. b, pkt 7)"},
+         "Ocena": "brak zrzutu do wód i na teren sąsiedni (opis wg § 14 pkt 3 lit. b i pkt 7 RPB)"},
         {"Oddziaływanie": "Odpady", "Charakterystyka": "odpady komunalne segregowane w stanowisku pojemników przy ogrodzeniu",
          "Ocena": "odbiór wg regulaminu gminy"},
         {"Oddziaływanie": "Zieleń", "Charakterystyka": f"drzewa do usunięcia: {len(wyc) or 'brak'}; drzewa istniejące zachowane",
@@ -66,10 +67,11 @@ def pkt5(zp, z, d):
         {"Oddziaływanie": "Grunty rolne", "Charakterystyka": f"klasy gruntów {ZAL} — mineralne RIVb/RV {do_uzup('wypis z EGiB (E-03)')}",
          "Ocena": f"decyzja o wyłączeniu z produkcji nie dotyczy przy klasach IV–VI mineralnych [W-025]"},
         {"Oddziaływanie": "Czynnik chłodniczy R290 (propan)", "Charakterystyka": "strefa bezpieczeństwa wokół jednostki zewnętrznej bez otworów, wpustów, studzienek i źródeł zapłonu",
-         "Ocena": (f"elementy w strefie: {r290.wartosc} — " + ("spełnia" if r290.status == "OK" else "do sprawdzenia")
+         "Ocena": (f"elementy w strefie: {czysc(r290.wartosc)} — " + ("spełnia" if r290.status == "OK" else "do sprawdzenia")
                    if r290 else "—") + " [W-156]"},
     ], tytul="Oddziaływania i zagrożenia", lp=True, szerokosci=["7mm", "34mm", None, "46mm"],
-        zrodlo="lamela.obliczenia.sanitarne.ogrzewanie (hałas: PORT PC p. 4.4); audyt A1; model/dzialka.yaml")
+        zrodlo="lamela.obliczenia.sanitarne.ogrzewanie (hałas: wytyczne PORT PC, p. 4.4; ten sam wyrób i Φ_HL co w PAB, "
+               "rozdz. 9 i 12); sprawdzenie geometryczne modelu (tools/audyt_wt.py); model/dzialka.yaml")
 
 
 # ------------------------------------------------------------------------------------------------ § 14 pkt 6, 6a
@@ -81,13 +83,15 @@ def pkt6(zp, z, d):
     q, zr_q, i_q = z.wym("ppoz", "woda_ppoz_min")
     sas = [s for s in z.sasiedzi() if s["odl_bud"] is not None]
     smin = min(sas, key=lambda s: s["odl_bud"]) if sas else None
+    spl = min(sas, key=lambda s: s["odl_pl"]) if sas else None
     dh, hyd = z.odl_hydrantu()
     u2 = _poly(next((u for u in z.dz.get("utwardzenia") or [] if u.get("id") == "U2"), {}).get("obrys"))
     zp.rozdzial("Dane dotyczące warunków ochrony przeciwpożarowej", f"""
     Budynek mieszkalny jednorodzinny, kategoria zagrożenia ludzi **{zl}** ({zr_zl}), grupa wysokości **{grupa}** —
-    budynek niski (wysokość wg WT § 6: {L(z.w('wysokosc_WT6'))} m; {zr_gr}). Odległość od najbliższego budynku
-    sąsiedniego (dz. {smin['nr'] if smin else '—'}): {L(smin['odl_bud']) if smin else '—'} m ≥ {L(o8, 1)} m ({zr_o8};
-    {i_o8}) — ściany zewnętrzne i dach nierozprzestrzeniające ognia (PAB).
+    budynek niski (wysokość wg WT § 6: {L(z.w('wysokosc_WT6'))} m; {zr_gr}). Najmniejsza odległość od budynków
+    sąsiednich: od ścian zewnętrznych {L(smin['odl_bud']) if smin else '—'} m (dz. {smin['nr'] if smin else '—'}),
+    od płyt wysuniętych i okapów {L(spl['odl_pl']) if spl else '—'} m (dz. {spl['nr'] if spl else '—'}) — obie
+    ≥ {L(o8, 1)} m ({zr_o8}; {i_o8}); ściany zewnętrzne i dach nierozprzestrzeniające ognia (PAB, rozdz. 13).
 
     **Droga pożarowa** — nie jest wymagana: budynek {zl} niski nie należy do obiektów, dla których wymaga się drogi
     pożarowej (rozporządzenie MSWiA w sprawie przeciwpożarowego zaopatrzenia w wodę oraz dróg pożarowych,
@@ -140,14 +144,15 @@ def pkt7(zp, z, d):
              wymaganie=f"≥ V_min = {L(fb, 1)}·V_obl = {L(r['V_min_a'])} m³", podstawa=zr_fb, spelnia=V_n >= r["V_min_a"]),
         dict(parametr="Czas opróżniania niecki", wartosc=r["t_opr"], jedn="h", wymaganie=f"≤ {L(tmax, 0)} h",
              podstawa=zr_t, spelnia=r["t_opr"] <= tmax),
-    ] + [dict(parametr=f"Lokalizacja — {k.split('/')[1]}: odl. od granic / od budynku", wartosc=w.wartosc, wymaganie=w.wymog,
-              podstawa=w.podstawa, spelnia=w.status == "OK") for k, w in lok.items()],
+    ] + [dict(parametr=f"Lokalizacja — {k.split('/')[1].replace('rozsaczanie', 'niecka chłonna')}: odl. od granic / od "
+                        f"budynku", wartosc=czysc(w.wartosc), wymaganie=czysc(w.wymog),
+              podstawa=podstawa(w.podstawa), spelnia=w.status == "OK") for k, w in lok.items()],
         tytul="Retencja wód opadowych (wariant bazowy: zbiornik szczelny + niecka)",
         uwagi=["Zbiornik ≤ 5 m³ nie wymaga pozwolenia ani zgłoszenia (PB art. 29 ust. 2 pkt 36); rozsączanie skrzynkowe — "
                "wyłącznie po stanowisku PGW Wody Polskie (rejestr D-05, E-07)."])
     zp.markdown(f"""
     ## Warunki gruntowe i pozostałe dane
-    Kategoria geotechniczna: **{geo.get('kategoria', '—')}** ({geo.get('uwagi', '—')}); grunt: {(geo.get('grunt') or {}).get('rodzaj', '—')},
+    Kategoria geotechniczna: **{geo.get('kategoria', '—')}** ({czysc(geo.get('uwagi', '—'))}); grunt: {(geo.get('grunt') or {}).get('rodzaj', '—')},
     zwierciadło wody gruntowej ok. {L(abs(geo.get('ZWG', 0)), 1)} m p.p.t. {DANE_PRZYKLADOWE}
     {do_uzup('opinia geotechniczna (E-04)')}. Instalacja fotowoltaiczna na dachach: {pv.get('moduly', '—')} modułów,
     {L(kwp)} kWp ≤ {L(pvmax, 1)} kWp ({zr_pv.split(' (')[0]}; {i_pv}).
@@ -172,6 +177,8 @@ def pkt8(zp, z, d):
         return min(c, key=lambda x: x[0]) if c else (float("nan"), "—", 0)
     s_o, s_b, s_k = mn("ściana", True), mn("ściana", False), mn("płyta")
     sas = [s for s in z.sasiedzi() if s["odl_bud"] is not None]
+    smin = min(sas, key=lambda s: s["odl_bud"]) if sas else None
+    spl = min(sas, key=lambda s: s["odl_pl"]) if sas else None
     H = z.W["wysokosc_zabudowy"]["z_top_abs"] - z.W["wysokosc_zabudowy"]["t_min"]
     ns = z.naslonecznienie_sasiadow()
     dmin_s = min(s["odl_bud"] for s in sas) if sas else float("nan")
@@ -181,14 +188,18 @@ def pkt8(zp, z, d):
     rows = [
         ("WT § 12 ust. 1 pkt 1", "ściany z oknami/drzwiami od granicy", s_o[0], f"≥ {L(l_o)} m", s_o[0] >= l_o, s_o[1]),
         ("WT § 12 ust. 1 pkt 2", "ściany bez otworów od granicy", s_b[0], f"≥ {L(l_b)} m", s_b[0] >= l_b, s_b[1]),
-        ("WT § 12 ust. 6 pkt 1", "okapy, płyty wysunięte, daszki od granicy", s_k[0], f"≥ {L(l_k)} m", s_k[0] >= l_k, s_k[1]),
+        ("WT § 12 ust. 6 pkt 1", "okapy, płyty wysunięte, daszki od granicy", s_k[0],
+         f"≥ {L(l_k)} m" + (f" (przyjęto ≥ {L(s_k[2])} m {ZAL})" if s_k[2] and s_k[2] > l_k + 1e-6 else ""),
+         s_k[0] >= max(l_k, s_k[2] or 0) - 1e-6, s_k[1]),
         ("WT § 13", "przesłanianie budynków sąsiednich: odległość ≥ wysokość przesłaniania",
          dmin_s, f"≥ {L(H)} m (z_top − t_min)", dmin_s >= H, "budynki sąsiednie"),
         ("WT § 60", "nasłonecznienie budynków sąsiednich w dniach równonocy (ocena uproszczona)",
          min(x["h_min"] for x in ns) if ns else float("nan"), f"≥ {L(hn, 0)} h", all(x["h_min"] >= hn for x in ns), "cień budynku"),
         ("WT § 19 ust. 2", "stanowiska postojowe naziemne od granicy", min(x[3] for x in mp) if mp else float("nan"),
          f"≥ {L(gr_mp)} m", all(x[3] >= gr_mp for x in mp), ", ".join(x[0] for x in mp)),
-        ("WT § 271 ust. 1", "odległość ścian budynków ZL od budynków sąsiednich", dmin_s, f"≥ {L(o8)} m", dmin_s >= o8, "—"),
+        ("WT § 271 ust. 1", "odległość ścian budynków ZL od budynków sąsiednich (od płyt wysuniętych: "
+         f"{L(spl['odl_pl']) if spl else '—'} m, dz. {spl['nr'] if spl else '—'})", dmin_s, f"≥ {L(o8)} m",
+         dmin_s >= o8 and (spl is None or spl["odl_pl"] >= o8), f"dz. {smin['nr']}" if smin else "—"),
         ("u.d.p. art. 43 ust. 1", f"budynek od zewnętrznej krawędzi jezdni drogi gminnej {dr['symbol']}", dr["odl_bud_jezdnia"],
          f"≥ {L(oj)} m", dr["odl_bud_jezdnia"] >= oj, "—"),
         ("POŚ art. 144 ust. 2; Dz.U. 2014 poz. 112", "hałas instalacji (PC) na granicy — pora nocy", h["L_A_granica"],
@@ -203,7 +214,8 @@ def pkt8(zp, z, d):
     jednorodzinnej odległości nieustalone), WT § 28 (wody opadowe — zagospodarowane na działce), ustawy – Prawo
     wodne (t.j. Dz.U. 2025 poz. 960 ze zm.) art. 234 ust. 1 (zakaz zmiany kierunku i natężenia odpływu wód opadowych
     ze szkodą dla gruntów sąsiednich i odprowadzania wód na grunty sąsiednie), ustaleń MPZP (linia zabudowy,
-    wskaźniki — pkt 4). Wartości — minimum dla wszystkich elementów budynku i granic niedrogowych (audyt A1).
+    wskaźniki — rozdział opisu wg § 14 pkt 4 RPB). Wartości — minimum dla wszystkich elementów budynku i granic
+    niedrogowych (sprawdzenie geometryczne modelu — `tools/audyt_wt.py`).
     """, podstawa="§ 14 pkt 8, § 18 RPB")
     zp.tabela([{"Przepis": a, "Ograniczenie": b, "Projekt": f"{L(c, 1 if u != 'm' else 2)} {u}", "Wymaganie": e,
                 "Ocena": "spełnia" if f else "NIE SPEŁNIA", "Element": g} for (a, b, c, e, f, g), u in zip(rows, jedn)],

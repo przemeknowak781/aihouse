@@ -26,7 +26,7 @@ PODSTAWY = {
     ("geotechnika", "kategoria_geotechniczna"): "rozp. Dz.U. 2012 poz. 463 § 4 ust. 3 pkt 2 lit. a [W-280]",
     # WT § 316 ust. 2 — odprowadzenie wód od budynku; wartość 2 % jest założeniem projektowym (rejestr W-019 [ZAŁ])
     ("usytuowanie", "spadek_terenu_od_budynku_min"): f"WT § 316 ust. 2 (spływ wód od budynku); 2 % — założenie "
-                                                     f"projektowe {ZAL} [W-019]",
+                                                     f"projektowe {ZAL}",
 }
 
 # pojedyncze człony adnotacji roboczych (po podziale treści nawiasu na „, ” i „; ”)

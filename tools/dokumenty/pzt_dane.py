@@ -133,11 +133,17 @@ class DaneZag:
 
     # ------------------------------------------------------------------ otoczenie
     def sasiedzi(self) -> list[dict]:
+        """Budynki sąsiednie: ``odl_bud`` — od ścian zewnętrznych (WT § 271 ust. 1), ``odl_pl`` — od płyt wysuniętych
+        i okapów (informacyjnie; ta sama geometria co w PAB — ``lamela.wskazniki``)."""
+        from shapely.ops import unary_union
+        pl = [q for _i, q in (self.W.get("_geom") or {}).get("plyty") or []]
+        fp_pl = unary_union([self.fp] + pl) if pl else self.fp
         out = []
         for s in self.dz.get("sasiedzi") or []:
             zab = _poly(s.get("zabudowa"))
             obr = _poly(s.get("obrys"))
             out.append(dict(nr=str(s.get("nr")), opis=s.get("opis", ""), wys=s.get("wys"),
+                            odl_pl=float(fp_pl.distance(zab)) if zab is not None else None,
                             odl_bud=float(self.fp.distance(zab)) if zab is not None else None,
                             odl_granicy=float(zab.distance(self.plot)) if zab is not None else None,
                             przylega=bool(obr is not None and obr.distance(self.plot) < 0.01)))

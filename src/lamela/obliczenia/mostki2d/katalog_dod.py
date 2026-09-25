@@ -341,6 +341,35 @@ def _nad_punktem(model, xy, z_max: float):
     return (best[1], best[2]) if best else (None, None)
 
 
+def _uskok_zebro(model, sciany) -> tuple[float, tuple[float, float] | None]:
+    """Uskok wierzchu płyty fundamentowej (dom − garaż) i żebro pod najdłuższą ścianą dom–garaż (element `fundamenty` z osią
+    współliniową ze ścianą): (uskok [m], (b, głębokość spodu żebra poniżej wierzchu płyty domu) | None)."""
+    from shapely.geometry import LineString, Point, Polygon
+    fu = model.fundamenty() or {}
+    els = [x for x in (fu.get("elementy") or []) if isinstance(x, dict)]
+    plyty = [x for x in els if x.get("obrys") and x.get("spod") is not None and x.get("h") is not None]
+    if not sciany or not plyty:
+        return 0.0, None
+    s = max(sciany, key=lambda q: q.L)
+    mid = (s.p1 + s.p2) / 2
+    n_in = s.n * (1 if s.wnetrze != "prawa" else -1)
+
+    def top(pt):
+        c = [float(x["spod"]) + float(x["h"]) for x in plyty if Polygon(x["obrys"]).buffer(1e-6).contains(Point(tuple(pt)))]
+        return max(c) if c else None
+    t_d, t_g = top(mid + n_in * 0.6), top(mid - n_in * 0.6)
+    usk = max(0.0, (t_d - t_g)) if t_d is not None and t_g is not None else 0.0
+    zeb = None
+    ax = LineString([tuple(s.p1), tuple(s.p2)])
+    for x in els:
+        if x.get("os") and x.get("b") and x.get("spod") is not None:
+            L2 = LineString([tuple(q) for q in x["os"]])
+            if L2.distance(Point(tuple(mid))) < 0.05 and L2.length > 0.5 and t_d is not None:
+                zeb = (float(x["b"]), t_d - float(x["spod"]))
+                break
+    return usk, zeb
+
+
 def wezly_garazu(model, e: dict):
     kody = [str(k) for k in (e.get("przegrody") or [])]
     kg = next((k for k in kody if (_typ_p(model, k) or "").startswith("sciana") and _typ_p(model, k) != "sciana_zewn"),
@@ -361,8 +390,13 @@ def wezly_garazu(model, e: dict):
     if pod_dom and (model.fundamenty() or {}).get("typ") == "plyta":
         bl = e.get("blok_u_podstawy") if isinstance(e.get("blok_u_podstawy"), dict) else None   # runda 2: {mat, h} z modelu
         blok = (_mat(model, bl["mat"]), float(bl["h"])) if bl and bl.get("mat") and bl.get("h") else None
+        usk, zeb = _uskok_zebro(model, sciany)            # wydanie (V2 N-6): uskok PF1/PF2 i żebro pod ścianą z modelu
         w = D.wezel_garaz_plyta(_W(model, kg), _W(model, pod_dom), _W(model, pod_gar), blok=blok, id=f"{e['id']}a",
-                                nazwa=f"Ściana dom–garaż ({kg}) na płycie fundamentowej ({pod_dom} / {pod_gar})")
+                                nazwa=f"Ściana dom–garaż ({kg}) na płycie fundamentowej ({pod_dom} / {pod_gar})",
+                                uskok=usk, zebro=zeb)
+        if usk > 1e-6 or zeb:
+            w.dane["uskok / żebro"] = (f"uskok płyty garażu {usk:.2f} m" + (f"; żebro b = {zeb[0]:.2f} m, spód {zeb[1]:.2f} m pod "
+                                                                            f"wierzchem płyty domu" if zeb else ""))
         w.dane["geometria z modelu"] = f"ściany {', '.join(s.id for s in sciany)} (Σ {L_sc:.2f} m) na płycie PF"
         out.append((w, L_sc))
     # połączenia pod płytą — wg rodzaju płyty nad stroną domu (lewą) i garażu (prawą)

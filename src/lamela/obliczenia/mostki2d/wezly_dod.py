@@ -420,10 +420,13 @@ def wezel_garaz_plyta(sciana: Sequence[Warstwa], podloga_lewa: Sequence[Warstwa]
                       theta_u: float | None = None, b_u: float = 0.8, h_gruntu: float = 1.0,
                       blok: tuple[Material, float] | None = None, H: float | None = None,
                       L: float | None = None, theta_i: float | None = None, theta_e: float | None = None,
-                      id: str = "WZ-GP", nazwa: str = "Ściana dom–garaż na ciągłej płycie fundamentowej") -> Wezel:
+                      id: str = "WZ-GP", nazwa: str = "Ściana dom–garaż na ciągłej płycie fundamentowej",
+                      uskok: float = 0.0, zebro: tuple[float, float] | None = None, x_os: float | None = None) -> Wezel:
     """Ściana (lico lewe = dom x = 0, prawe = garaż) na płycie fundamentowej ciągłej pod domem i garażem.
     podloga_lewa / prawa — warstwy podłóg od góry z płytą (konstrukcyjna) i warstwami pod płytą (XPS, podsypka).
-    Wierzch posadzki domu y = 0. Pod podsypką grunt (λ = 2,0) grubości h_gruntu, dół i boki adiabatyczne [ZAŁ]:
+    ``uskok`` — obniżenie płyty garażu względem płyty domu [m] (uskok w osi warstwy konstrukcyjnej ściany ``x_os``; beton pod
+    ściną do jej lica od garażu), ``zebro`` — (szerokość, głębokość spodu poniżej wierzchu płyty domu) żebra pod ścianą, osiowo
+    (wydanie — weryfikacja V2 N-6: geometria węzła = geometria modelu PF1/PF2 + ZF). Wierzch posadzki domu y = 0. Pod podsypką grunt (λ = 2,0) grubości h_gruntu, dół i boki adiabatyczne [ZAŁ]:
     węzeł wewnętrzny daleko od krawędzi płyty — ψ_iu (dom → garaż) z przepływu przez płytę pod ścianą; wymiana
     z gruntem ujęta w U podłóg (PN-EN ISO 13370) poza węzłem."""
     ti, te = _temperatury(theta_i, theta_e)
@@ -438,17 +441,44 @@ def wezel_garaz_plyta(sciana: Sequence[Warstwa], podloga_lewa: Sequence[Warstwa]
     ob = []
     for y0, y1, w in _stos(podloga_lewa[:kl], 0.0, -1):
         ob.append(_obsz(box(-L, y0, 0.0, y1), w))
-    y_pp = y_w + grosz(podloga_prawa[:kp])
-    for y0, y1, w in _stos(podloga_prawa[:kp], y_pp, -1):
-        ob.append(_obsz(box(D, y0, D + L, y1), w))
-    ob.append(_obsz(box(-L, y_w - t_pl, D + L, y_w), podloga_lewa[kl], "płyta fundamentowa"))
-    y = y_w - t_pl
-    for w in podloga_lewa[kl + 1:]:
-        if w.d < 0.001:
-            continue
-        ob.append(_obsz(box(-L, y - w.d, D + L, y), w))
-        y -= w.d
-    ob.append(_obsz(box(-L, y - h_gruntu, D + L, y), MATERIALY_DOMYSLNE["GRUNT"], "grunt"))
+    if uskok <= 1e-6 and zebro is None:
+        y_pp = y_w + grosz(podloga_prawa[:kp])
+        for y0, y1, w in _stos(podloga_prawa[:kp], y_pp, -1):
+            ob.append(_obsz(box(D, y0, D + L, y1), w))
+        ob.append(_obsz(box(-L, y_w - t_pl, D + L, y_w), podloga_lewa[kl], "płyta fundamentowa"))
+        y = y_w - t_pl
+        for w in podloga_lewa[kl + 1:]:
+            if w.d < 0.001:
+                continue
+            ob.append(_obsz(box(-L, y - w.d, D + L, y), w))
+            y -= w.d
+        ob.append(_obsz(box(-L, y - h_gruntu, D + L, y), MATERIALY_DOMYSLNE["GRUNT"], "grunt"))
+    else:
+        from shapely.ops import unary_union as _uu
+        kk = indeks_konstrukcyjnej(sciana)
+        xo = x_os if x_os is not None else (st[kk][0] + st[kk][1]) / 2
+        yg = y_w - uskok                                                  # wierzch płyty garażu
+        y_pp = yg + grosz(podloga_prawa[:kp])
+        for y0, y1, w in _stos(podloga_prawa[:kp], y_pp, -1):
+            ob.append(_obsz(box(D, y0, D + L, y1), w))
+        beton = [box(-L, y_w - t_pl, xo, y_w), box(xo, yg - t_pl, D + L, yg)]
+        if uskok > 1e-6:
+            beton.append(box(xo, yg, D, y_w))                            # beton pod ścianą do lica od garażu (uskok)
+        if zebro is not None:
+            bz, gz = zebro
+            beton.append(box(xo - bz / 2, y_w - gz, xo + bz / 2, y_w))
+        B = _uu(beton)
+        ob.append(_obsz(B, podloga_lewa[kl], "płyta fundamentowa z uskokiem" + (" i żebrem" if zebro else "")))
+        pod = [w for w in podloga_lewa[kl + 1:] if w.d >= 0.001]
+        yl, yr = y_w - t_pl, yg - t_pl
+        for w in pod:
+            for g in (box(-L, yl - w.d, xo, yl), box(xo, yr - w.d, D + L, yr)):
+                g = g.difference(B)
+                if not g.is_empty and g.area > 1e-8:
+                    ob.append(_obsz(g, w))
+            yl, yr = yl - w.d, yr - w.d
+        y = min(yl, yr, y_w - (zebro[1] if zebro else 0.0))
+        ob.append(_obsz(box(-L, y - h_gruntu, D + L, y), MATERIALY_DOMYSLNE["GRUNT"], "grunt"))
     for a, b, w in st:
         ob.append(_obsz(box(a, y_w, b, H), w))
     if blok:            # blok termoizolacyjny w pierwszej warstwie muru (wariant)

@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from lamela.dokumenty import DANE_PRZYKLADOWE, ZAL, do_uzup, liczba
 
+from redakcja import czysc
+
 LOKALE_MIESZKALNE = 1   # program użytkowy (brief § 4; PAB § 20 ust. 1 pkt 6) — budynek z jednym lokalem mieszkalnym
 
 
@@ -22,8 +24,8 @@ def pkt4(zp, z, d):
     zp.rozdzial("Zestawienie powierzchni i wskaźników zagospodarowania", f"""
     Powierzchnie obliczono z geometrii modelu (`lamela.wskazniki`) wg definicji ustawy o planowaniu i zagospodarowaniu
     przestrzennym (upzp, t.j. Dz.U. 2026 poz. 538) art. 2 pkt 28–35 oraz § 14 pkt 4 RPB; powierzchnię zabudowy budynku
-    pomniejsza się o tarasy naziemne, gzymsy, balkony i loggie (§ 14 pkt 4 lit. a RPB). Powierzchnie w m²
-    z dokładnością do 0,01 m².
+    pomniejsza się o powierzchnię części zewnętrznych budynku, takich jak: tarasy naziemne i podparte słupami, gzymsy
+    oraz balkony (§ 14 pkt 4 lit. a RPB). Powierzchnie w m² z dokładnością do 0,01 m².
     """, podstawa="§ 14 pkt 4 RPB")
     utw = W["pow_utwardzona"].get("elementy") or {}
     nazwy = {u["id"]: u.get("nawierzchnia", "").split("—")[0].strip() for u in z.dz.get("utwardzenia") or []}
@@ -52,8 +54,8 @@ def pkt4(zp, z, d):
               "Powierzchnia [m²]": z.w("suma_pow_kondygnacji_nadziemnych"), "Udział [%]": None}]
     zp.tabela(rows, tytul=f"Zestawienie powierzchni — działka nr ewid. {d['dzialka']['nr']} ({L(A)} m²)",
               formaty={"Powierzchnia [m²]": 2, "Udział [%]": 2}, szerokosci=[None, "30mm", "22mm"],
-              uwagi=["Powierzchnia zabudowy: " + W["pow_zabudowy"]["metoda"] + ".",
-                     "Powierzchnia biologicznie czynna: " + W["pbc"]["metoda"] + "."],
+              uwagi=["Powierzchnia zabudowy: " + czysc(W["pow_zabudowy"]["metoda"]) + ".",
+                     "Powierzchnia biologicznie czynna: " + czysc(W["pbc"]["metoda"]) + "."],
               zrodlo="lamela.wskazniki (model/budynek.yaml + model/dzialka.yaml)")
     # bilans terenu (rzut parteru, nie powierzchnia zabudowy — wspornik wyższej kondygnacji nad terenem)
     p0 = float(z.p0.area)
@@ -88,7 +90,8 @@ def pkt4_mpzp(zp, z, d):
     import re
     lz_a = next((w.wartosc for w in z.wyniki_audytu("MPZP") if w.element == "linia zabudowy"), "")
     lz_el = (re.search(r"\(([^)]+)\)", lz_a) or [None, "—"])[1]
-    lz_w = f"{L(abs(z.lz_rezerwa))} m {'przed linią' if z.lz_rezerwa >= 0 else 'POZA linią'} ({lz_el})"
+    lz_w = (f"linia nieprzekroczona — rezerwa {L(z.lz_rezerwa)} m (element najbliższy linii: {lz_el})"
+            if z.lz_rezerwa >= 0 else f"PRZEKROCZENIE linii o {L(-z.lz_rezerwa)} m ({lz_el})")
     zp.tabela_wynikow([
         dict(parametr="Udział powierzchni zabudowy", wartosc=_pr(z.w("udzial_zabudowy")), jedn="%",
              wymaganie=f"≤ {L(_pr(u_zab), 0)} %", podstawa=f"{zr_zab} [{i_zab}]", spelnia=z.w("udzial_zabudowy") <= u_zab),
@@ -114,4 +117,4 @@ def pkt4_mpzp(zp, z, d):
     ], tytul=f"Zgodność z ustaleniami MPZP — {(z.dz.get('dzialka') or {}).get('mpzp', '—')}",
         uwagi=[f"Ustalenia MPZP przykładowe {DANE_PRZYKLADOWE}; wartości wymagań z `docs/10_podstawy_prawne/wymagania.yaml`. "
                f"Wysokość zabudowy wg upzp art. 2 pkt 30 lit. a: H = z_top − t_śr = {L(W['wysokosc_zabudowy']['z_top_abs'])} − "
-               f"{L(W['wysokosc_zabudowy']['t_sr'])} m n.p.m. ({W['wysokosc_zabudowy']['metoda']})."])
+               f"{L(W['wysokosc_zabudowy']['t_sr'])} m n.p.m. ({czysc(W['wysokosc_zabudowy']['metoda'])})."])

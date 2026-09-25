@@ -224,7 +224,7 @@ def r03(pab, D, d):
                                                    if m.przegroda(str(dh.get("przegroda"))) else "")]
     sp = sorted({float(dh.get("spadek") or 0) for dh in dachy})
     lam = sorted({lm["elewacja"] for lm in m.lamele() if "wewn" not in str(lm.get("uwagi", "")).lower()})
-    rz = D.arkusze_ref("rzut") + D.arkusze_ref("dach")
+    rz = list(dict.fromkeys(D.arkusze_ref("rzut") + D.arkusze_ref("dach")))   # arkusz rzutu z dachem — raz
     el = D.arkusze_ref("elewacja")
     pab.rozdzial(tyt("Układ przestrzenny, forma architektoniczna, wyroby wykończeniowe i kolorystyka; zgodność z MPZP", 3))
     pab.markdown(f"""

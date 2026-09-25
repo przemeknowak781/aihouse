@@ -214,6 +214,9 @@ class DanePAB:
         """Numery arkuszy PAB danego typu (rzut/dach/przekroj/elewacja) — z konfiguracji arkuszy modelu."""
         out = []
         for a in self.arkusze_cfg.get("arkusze") or []:
-            if a.get("typ") == typ and all(a.get(k) == v for k, v in kw.items()):
+            # arkusz z kilkoma widokami (``widoki: [...]``, np. „PRZEKROJE A-A I B-B”, „ELEWACJE”) — typ z widoków
+            widoki = [dict(a, **w) for w in (a.get("widoki") or [])] or [a]
+            if any(w.get("typ") == typ and all(w.get(k) == v for k, v in kw.items()) for w in widoki) \
+                    and str(a["nr"]) not in out:
                 out.append(str(a["nr"]))
         return out
