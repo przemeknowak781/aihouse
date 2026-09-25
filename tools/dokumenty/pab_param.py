@@ -152,6 +152,10 @@ def _wysokosc(pab, D):
                  "Element": o["el"], "Wymaganie [m]": o["lim"], "Ocena": "spełnia" if o["d"] >= o["lim"] - 1e-6 else "NIE SPEŁNIA"}
                 for o in D.odl_min], tytul="Najmniejsze odległości od granic działki (bez granicy z drogą)",
                klasa="zwarta", szerokosci=["16mm", None, "22mm", "18mm", "20mm", "18mm"],
-               uwagi=["WT § 12 ust. 1 pkt 1–2 (ściany z otworami ≥ 4,00 m, bez otworów ≥ 3,00 m), ust. 6 pkt 1 (okapy, tarasy "
-                      "≥ 1,50 m); dla elementów wysuniętych przyjęto założenie projektowe ≥ 4,00 m. Od granicy z drogą — linia "
-                      "zabudowy MPZP (rozdz. 3)."], zrodlo="tools/audyt_wt.py (odległości każdej płaszczyzny ściany i elementu)")
+               uwagi=[f"Ściany z otworami ≥ {L(D.v('usytuowanie', 'odl_granica_z_otworami'))} m "
+                      f"({D.zr('usytuowanie', 'odl_granica_z_otworami')}); bez otworów ≥ "
+                      f"{L(D.v('usytuowanie', 'odl_granica_bez_otworow'))} m ({D.zr('usytuowanie', 'odl_granica_bez_otworow')}); "
+                      f"okapy, gzymsy, tarasy ≥ {L(D.v('usytuowanie', 'odl_granica_okap_gzyms_balkon_schody'))} m "
+                      f"({D.zr('usytuowanie', 'odl_granica_okap_gzyms_balkon_schody')}); dla płyt wysuniętych i okapów przyjęto "
+                      "wymaganie ostrzejsze (założenie projektowe audytu A1). Od granicy z drogą — linia zabudowy MPZP (rozdz. 3)."],
+               zrodlo="tools/audyt_wt.py (odległości każdej płaszczyzny ściany i elementu)")

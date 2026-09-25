@@ -892,8 +892,8 @@ Dane w zakresie architektury (§ 23 pkt 10 RPB — stosownie do zakresu projektu
 ## Wykaz rysunków — część rysunkowa — § 24 RPB
 
 Część rysunkowa (§ 24 pkt 1–2 RPB) obejmuje rzuty wszystkich kondygnacji z rzutem dachu, przekroje i elewacje
-w skali 1:50 (arkusze AR z katalogu `projekt/01_koncepcja/widoki` — rysunki PAB dołączone jako podstawa rozwiązań PT; zmiany
-względem PAB — brak) oraz detale cieplne i szczelności PT-AR-D w skalach 1:5 i 1:10. Wykaz rysunków z numerami,
+w skali 1:50 (arkusze AR z katalogu `projekt/01_koncepcja/widoki` — rysunki PAB dołączone jako podstawa rozwiązań PT, generowane
+z tego samego modelu co część opisowa) oraz detale cieplne i szczelności PT-AR-D w skalach 1:5 i 1:10. Wykaz rysunków z numerami,
 skalami i formatami — karta części rysunkowej (generowana z tabliczek arkuszy).
 
 **Tabela 51. Rzuty, przekroje i elewacje (§ 24 pkt 1 RPB)**
