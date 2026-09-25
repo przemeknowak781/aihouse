@@ -692,9 +692,10 @@ def rozdz_odwodnienie(o: Opis, D: dict):
                      "Rury spustowe": "; ".join(_rura(r) for r in d.get("rury_spustowe") or []) or "—",
                      "h attyki [m]": (d.get("attyka") or {}).get("wys_nad_pokryciem")})
         for p in d.get("przelewy_awaryjne") or []:
-            prz.append({"Przelew": p.get("opis", "").split(" — ")[0], "Dach": d["id"],
+            mm = re.search(r"\bPA\d+\b", p.get("opis", ""))
+            prz.append({"Przelew": mm.group(0) if mm else "—", "Dach": d["id"],
                         "Wymiary [cm]": f"{round(p.get('szer', 0) * 100)} × {round(p.get('wys', 0) * 100)}",
-                        "Rzędna dna [m]": p.get("rzedna_dna"), "Rzędna pokrycia [m]": p.get("rzedna_pokrycia"),
+                        "Dno [m]": p.get("rzedna_dna"), "Pokrycie [m]": p.get("rzedna_pokrycia"),
                         "Δh [mm]": (p["rzedna_dna"] - p["rzedna_pokrycia"]) * 1000
                         if p.get("rzedna_dna") is not None and p.get("rzedna_pokrycia") is not None else None,
                         "Opis": p.get("opis", "")})
@@ -704,16 +705,17 @@ def rozdz_odwodnienie(o: Opis, D: dict):
              zrodlo="model/budynek.yaml — dachy")
     if prz:
         o.tabela(prz, tytul="Przelewy awaryjne w attykach — rzędne", klasa="zwarta",
-                 formaty={"Rzędna dna [m]": 3, "Rzędna pokrycia [m]": 3, "Δh [mm]": 0}, wyrownanie={"Opis": "l"},
-                 szerokosci=["13mm", "10mm", "15mm", "16mm", "18mm", "12mm", None],
-                 uwagi=["Δh — wzniesienie dna przelewu ponad lokalną rzędną pokrycia (wierzch hydroizolacji); przelew "
+                 formaty={"Dno [m]": 3, "Pokrycie [m]": 3, "Δh [mm]": 0}, wyrownanie={"Opis": "l"},
+                 szerokosci=["13mm", "10mm", "16mm", "16mm", "18mm", "12mm", None],
+                 uwagi=["Dno — rzędna dna przelewu; Pokrycie — lokalna rzędna pokrycia (wierzch hydroizolacji); "
+                        "Δh — wzniesienie dna przelewu ponad pokrycie; przelew "
                         "działa po zablokowaniu wpustu, poniżej korony attyki. Rzędne względne: ±0,000 = posadzka "
                         f"parteru = {L(m.zero_abs, 2)} m n.p.m. {DANE_PRZYKLADOWE}."],
                  zrodlo="model/budynek.yaml — dachy.przelewy_awaryjne")
     o.tekst("Przyziemie: nawierzchnie przy budynku ze spadkiem od ścian, odwodnienia liniowe przy progach drzwi HS, "
             "drzwi zewnętrznych i bramy (tarasy i podesty — tabela „Lamele, balustrady, tarasy i podesty”); "
             "hydroizolację płyty fundamentowej wywija się na cokół (detal "
-            f"{_det_tyt(det, 'cokół')}).")
+            f"{_det_tyt(det, '^cokół')}).")
 
 
 def rozdz_ppoz(o: Opis, D: dict):
@@ -730,7 +732,8 @@ def rozdz_ppoz(o: Opis, D: dict):
 
     * kategoria zagrożenia ludzi **{zl}** ({zl_z}); grupa wysokości **{gr}** ({gr_z}), wysokość wg WT § 6 —
       {L(w['wysokosc_WT6']['wartosc'])} m;
-    * {kond} kondygnacje nadziemne ≤ {kmax} — wymagań klasy odporności pożarowej budynku nie stawia się ({k_z});
+    * liczba kondygnacji nadziemnych {kond} (warunek zwolnienia: ≤ {kmax}) — wymagań klasy odporności pożarowej
+      budynku nie stawia się ({k_z});
       budynek stanowi jedną strefę pożarową razem z garażem (W-212);
     * ściany zewnętrzne i dach — nierozprzestrzeniające ognia (W-213): ETICS jako system z klasyfikacją NRO
       ({'; '.join(nro) or 'wg deklaracji systemu'}); pokrycia dachów z klasyfikacją B_ROOF(t1) {ZAL};
