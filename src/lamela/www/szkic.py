@@ -9,7 +9,7 @@ import numpy as np
 from PIL import Image, ImageFilter
 
 # wycinek serwetki z rysunkiem — ułamki szerokości/wysokości zdjęcia (bez sztućców, zegarka i nadruków)
-WYCINEK = (0.226, 0.455, 0.768, 0.80)
+WYCINEK = (0.226, 0.455, 0.757, 0.80)
 
 
 def przetworz(src: Path, dst: Path, szer: int = 1400) -> dict:
@@ -22,9 +22,12 @@ def przetworz(src: Path, dst: Path, szer: int = 1400) -> dict:
     L = 0.299 * R + 0.587 * G + 0.114 * B
     # tło serwetki — jasność lokalna (rozmyta) → kompensacja cienia i nierównego oświetlenia
     tlo = np.asarray(Image.fromarray(L.astype(np.uint8)).filter(ImageFilter.GaussianBlur(25)), dtype=np.float32)
-    niebieski = np.clip((B - R - 6.0) * 7.0, 0, 255)
-    ciemny = np.clip((tlo - L - 10.0) * 5.0, 0, 255)
-    alfa = np.minimum(niebieski, ciemny)
+    rb = B - R
+    rb_tlo = np.asarray(Image.fromarray(np.clip(rb + 128, 0, 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(25)),
+                        dtype=np.float32) - 128
+    niebieski = np.clip((rb - rb_tlo - 4.0) / 10.0, 0, 1)          # tusz długopisu: bardziej niebieski niż serwetka
+    ciemny = np.clip((tlo - L - 12.0) * 6.0, 0, 255)
+    alfa = ciemny * niebieski
     alfa = np.where(alfa < 40, 0, alfa)
     out = Image.fromarray(alfa.astype(np.uint8), "L").filter(ImageFilter.GaussianBlur(0.6))
     bb = out.point(lambda v: 255 if v > 60 else 0).getbbox()
