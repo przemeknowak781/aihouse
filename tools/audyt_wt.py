@@ -207,6 +207,7 @@ class AudytWT:
             self.op_by_wall.setdefault(o.sciana_id, []).append(o)
         self.plot = make_polygon(self.D["dzialka"]["obrys"])
         self._granice()
+        self._plyty = self.plyty()
 
     # ------------------------------------------------------------------ granice działki
     def _granice(self):
@@ -305,13 +306,15 @@ class AudytWT:
         u = self._u(b, x, y)
         return b["z0"] + b["h"] + u * b["h"] / b["s"]
 
-    def nad_punktem(self, x, y, z_min, pomin=()):
+    def nad_punktem(self, x, y, z_min, pomin=(), tylko_plyty=False):
         """Najniższy element konstrukcyjny nad punktem (x, y) powyżej z_min: (z_spodu, id)."""
         best = (math.inf, None)
         P = Point(x, y)
-        for pid, poly, spod, _ in self.plyty():
+        for pid, poly, spod, _ in self._plyty:
             if spod > z_min + 1e-6 and poly.buffer(1e-6).contains(P):
                 best = min(best, (spod, pid))
+        if tylko_plyty:
+            return best
         for b in self.biegi():
             if b["id"] in pomin:
                 continue
@@ -342,12 +345,27 @@ class AudytWT:
         for r in self.m.pomieszczenia():
             poly = r.polygon_podlogi if r.polygon_podlogi is not None else r.polygon
             if poly is None or poly.is_empty:
+                if r.polygon is not None and not r.polygon.is_empty:
+                    A.add("Pomieszczenia", f"{r.id} {r.nazwa}", "podłoga", "cały rzut = otwór w stropie (pustka klatki)",
+                          "—", "INFO", "PN-ISO 9836 / RPB §20 (klatka poza PU)")
+                    continue
                 A.add("Pomieszczenia", r.id, "geometria", "brak zamkniętego wieloboku", "wielobok zamknięty", "NIEZGODNE",
                       "SCHEMAT_MODELU §2", "uzupełnić ściany lub 'wielobok'")
                 continue
             z_pod = self.rz_podlogi(r.kond, r.raw.get("podloga"))
-            rp = poly.representative_point()
-            spod, sid = self.nad_punktem(rp.x, rp.y, z_pod + 0.5)
+            mnx, mny, mxx, mxy = poly.bounds
+            probki = []
+            for x in np.arange(mnx + 0.125, mxx, 0.25):
+                for y in np.arange(mny + 0.125, mxy, 0.25):
+                    if poly.contains(Point(x, y)):
+                        zz, pid = self.nad_punktem(x, y, z_pod + 0.5, tylko_plyty=True)
+                        if zz != math.inf:
+                            probki.append((zz, pid))
+            if not probki:
+                rp = poly.representative_point()
+                probki = [self.nad_punktem(rp.x, rp.y, z_pod + 0.5, tylko_plyty=True)]
+            probki.sort()
+            spod, sid = probki[len(probki) // 2]
             h_sw = None if spod == math.inf else spod - self.sufit_d(r.sufit) - z_pod
             # strefy wysokości (stopnie/spoczniki nad pomieszczeniem, belki)
             strefy = {"≥2,20": 0.0, "1,40–2,20": 0.0, "<1,40": 0.0}
@@ -383,10 +401,11 @@ class AudytWT:
                 pow_zal = pow_net if (h_sw or 0) >= 2.2 else (0.5 * pow_net if (h_sw or 0) >= 1.4 else 0.0)
             # belki obniżające
             h_belka, b_id = None, None
+            walls_k = unary_union([w.polygon for w in self.m.sciany(r.kond)])
             for be in self.m.belki():
                 a, c = np.array(be["os"][0], float), np.array(be["os"][1], float)
-                g = LineString([tuple(a), tuple(c)]).buffer(be["b"] / 2, cap_style=2)
-                if spod != math.inf and z_pod + 1.0 < be["spod"] < spod - 0.02 and g.intersection(poly).area > 0.01:
+                g = LineString([tuple(a), tuple(c)]).buffer(be["b"] / 2, cap_style=2).difference(walls_k.buffer(0.02))
+                if spod != math.inf and z_pod + 1.0 < be["spod"] < spod - 0.02 and g.intersection(poly).area > 0.05:
                     hb = be["spod"] - z_pod
                     if h_belka is None or hb < h_belka:
                         h_belka, b_id = hb, be["id"]
@@ -394,7 +413,7 @@ class AudytWT:
                        rodzaj=r.raw.get("rodzaj"), pow_model=round(r.pow_netto, 2), pow=round(pow_net, 2),
                        pow_zal=round(pow_zal, 2), h=None if h_sw is None else round(h_sw, 3),
                        h_min=None if h_min is None else round(h_min, 3), plyta=sid, strefy=strefy, schody=nad_schodami,
-                       h_belka=h_belka, belka=b_id, poly=poly, z_pod=z_pod)
+                       h_belka=h_belka, belka=b_id, poly=poly, poly_full=r.polygon, z_pod=z_pod)
             rows.append(row)
         self.rooms = {r["id"]: r for r in rows}
 
@@ -498,7 +517,7 @@ class AudytWT:
             c = o.srodek + nin * (abs(w.face_t(-w.ext_side)) + 0.10)
             hit = None
             for r in self.rooms.values():
-                if r["kond"] == o.kond and r["poly"].buffer(0.02).contains(Point(*c)):
+                if r["kond"] == o.kond and r["poly_full"].buffer(0.02).contains(Point(*c)):
                     hit = r["id"]
                     break
             a_mur = o.szer * o.wys
@@ -924,6 +943,7 @@ class AudytWT:
                         edges = [LineString([(b[0], b[1]), (b[0], b[3])]), LineString([(b[2], b[1]), (b[2], b[3])])]
                     else:
                         edges = [LineString([(b[0], b[1]), (b[2], b[1])]), LineString([(b[0], b[3]), (b[2], b[3])])]
+                    edges = [LineString([e.interpolate(0.5), e.interpolate(e.length - 0.5)]) for e in edges]
                     dmin = min(e.distance(walls) for e in edges)
                     lim = R.v("odl_stanowisko_sciana_min", 0.30)
                     A.add("Garaż", mp.get("id", "MP"), "dłuższa krawędź stanowiska → lico ściany", f"{f2(dmin)} m",
@@ -1076,10 +1096,14 @@ class AudytWT:
             for o in self.m.otwory():
                 if o.sciana is None or o.sciana.ext_side is None or o.typ not in TYPY_SZKLONE + ("okno",):
                     continue
-                if o.z1 > z_pl or o.z1 < z_pl - 4.0:
+                if o.z1 > z_pl or o.z1 < z_pl - 3.3:
                     continue
-                seg = LineString([tuple(o.p0), tuple(o.p1)])
-                if e.distance(seg) < 0.7 and e.buffer(0.7).intersection(seg).length > 0.1:
+                c0 = np.array(o.p0) + np.array(o.kierunek_zewn) * abs(o.sciana.face_t(o.sciana.ext_side))
+                c1 = np.array(o.p1) + np.array(o.kierunek_zewn) * abs(o.sciana.face_t(o.sciana.ext_side))
+                seg = LineString([tuple(c0), tuple(c1)])
+                ev = np.array(e.coords[1]) - np.array(e.coords[0])
+                par = abs(np.cross(ev / np.hypot(*ev), o.sciana.u)) < 0.05
+                if par and e.distance(seg) < 0.7 and e.buffer(0.7).intersection(seg).length > 0.1:
                     out.append(e)
                     break
         return out
@@ -1158,6 +1182,8 @@ class AudytWT:
                     if seg.distance(z) < 0.35:
                         kol.append(o.id)
                 for od in D.get("odwodnienia") or []:
+                    if od.get("typ") in ("opaska_zwirowa", "drenaz_opaskowy"):
+                        continue
                     geo = od.get("linia") or od.get("obrys")
                     if geo and len(geo) >= 2:
                         g = LineString([tuple(p) for p in geo]) if od.get("linia") else make_polygon(geo).exterior

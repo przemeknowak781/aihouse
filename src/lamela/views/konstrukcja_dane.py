@@ -304,3 +304,261 @@ def warunki_niespelnione(wyniki) -> list[str]:
                 if s not in out:
                     out.append(s)
     return out
+
+
+# ================================================================================================ struktury danych
+@dataclass
+class Warstwa:
+    """Zbrojenie pasma płyty w jednym kierunku i warstwie (z obliczeń): φ, s, A_s,req, A_s,min, A_s,prov [mm²/m]."""
+    kier: str                  # x | y
+    poloz: str                 # dol | gora | naroze
+    fi: int
+    s: float                   # mm
+    As_req: float
+    As_min: float
+    As_prov: float
+    M: float = 0.0             # kNm/m (wartość bezwzględna momentu miarodajnego)
+    zrodlo: str = "biblioteka"
+
+    @property
+    def need(self) -> float:
+        return max(self.As_req, self.As_min if self.As_req > 1e-6 or self.poloz == "dol" else 0.0)
+
+    @property
+    def ok(self) -> bool:
+        return self.As_prov + 1e-6 >= self.need
+
+    @property
+    def opis(self) -> str:
+        return f"⌀{self.fi} co {self.s / 10:g}"
+
+
+@dataclass
+class PolePl:
+    element: str
+    pole: str
+    rect: tuple                # x0, y0, x1, y1 (osie podpór pola)
+    poly: object               # pole ∩ obrys elementu
+    lx: float
+    ly: float
+    brzegi: str                # x0, x1, y0, y1: S — podparta, U — utwierdzona (ciągła), W — swobodna
+    warstwy: dict = field(default_factory=dict)   # dol_x, dol_y, gora_x, gora_y, naroze → Warstwa
+    eta: float = 0.0
+    niesp: list = field(default_factory=list)
+    V: float = 0.0
+
+
+@dataclass
+class ElementPl:
+    id: str
+    typ: str                   # strop | dach | wspornik
+    poz: str
+    poly: object
+    h: float
+    wierzch: float
+    beton: str
+    eksp: str
+    c_nom: float
+    lacznik: bool = False
+    pola: list = field(default_factory=list)
+    eta: float = 0.0
+    niesp: list = field(default_factory=list)
+    raw: dict = field(default_factory=dict)
+
+
+@dataclass
+class Poziom:
+    """Grupa płyt liczonych wspólnie (jeden model MES) — jeden rzut konstrukcji / zbrojenia."""
+    idx: int
+    nazwa: str
+    wierzch: float
+    elementy: list = field(default_factory=list)
+    podpory: list = field(default_factory=list)   # (id, LineString, rodzaj: sciana | belka)
+    slupy: list = field(default_factory=list)     # (id, (x, y))
+
+    @property
+    def poly(self):
+        from shapely.ops import unary_union
+        return unary_union([e.poly for e in self.elementy]).buffer(0)
+
+    @property
+    def spod(self) -> float:
+        return min(e.wierzch - e.h for e in self.elementy)
+
+
+_WARSTWY_RE = (("dol_x", "dół, kierunek x"), ("dol_y", "dół, kierunek y"), ("gora_x", "góra, x"),
+               ("gora_y", "góra, y"), ("naroze", "zbrojenie narożne"))
+
+
+def _warstwa_z_wyniku(zg, klucz: str) -> Warstwa | None:
+    fs = fi_s(getattr(zg, "zbrojenie", ""))
+    if fs is None:
+        return None
+    return Warstwa(klucz.split("_")[-1] if "_" in klucz else "xy", klucz.split("_")[0], fs[0], fs[1],
+                   float(zg.As_req), float(zg.As_min), float(zg.As_prov), float(getattr(zg, "M_Ed", 0.0)))
+
+
+def _plyty(an, D):
+    from shapely.geometry import box
+    from ..obliczenia.konstrukcja import zelbet
+    pos = {pz.ident: pz for pz in an.pos_plyty}
+    for g in an.grupy:
+        if g.fe is None or not g.komorki:
+            if any(e.id in pos for e in g.el):
+                continue
+            D.braki.append(f"Płyta(y) {g.nazwa}: brak wyników MES w bibliotece (model MES niewykonalny) — zbrojenie "
+                           "nie może być narysowane z obliczeń [WYMAGA ANALIZY].")
+            continue
+        kom = {c["id"]: c for c in g.komorki}
+        lv = Poziom(g.idx, g.nazwa, float(g.wierzch))
+        lv.podpory = [(s.id, s.linia, getattr(s, "rodzaj", "sciana")) for s in g.podp_l]
+        lv.slupy = [(s.id, tuple(s.xy)) for s in g.podp_p]
+        for e in g.el:
+            pz = pos.get(e.id)
+            if pz is None:
+                continue
+            c_nom = zelbet.otulina(e.ekspozycja, 10, an.p).c_nom
+            el = ElementPl(e.id, e.typ, pz.nr, e.poly_full, float(e.h), float(e.wierzch), e.beton.klasa, e.ekspozycja,
+                           float(c_nom), bool(e.raw.get("lacznik_termiczny")), raw=e.raw)
+            el.eta = pz.wykorzystanie
+            el.niesp = warunki_niespelnione(pz.wyniki + [w for sp in pz.podpozycje for w in sp.wyniki])
+            dane_pol = {d["pole"]: d for d in pz.dane.get("pola", [])}
+            for sp in pz.podpozycje:
+                c = kom.get(sp.ident)
+                if c is None:
+                    continue
+                r = box(*[float(v) for v in (c["x0"], c["y0"], c["x1"], c["y1"])])
+                pol = PolePl(e.id, c["id"], (c["x0"], c["y0"], c["x1"], c["y1"]), r.intersection(e.poly_full),
+                             float(c["lx"]), float(c["ly"]), str(c.get("brzegi", "SSSS")))
+                for zg in sp.wyniki:
+                    nm = getattr(zg, "nazwa", "")
+                    for klucz, frag in _WARSTWY_RE:
+                        if frag in nm and hasattr(zg, "As_prov"):
+                            w = _warstwa_z_wyniku(zg, klucz)
+                            if w is not None:
+                                pol.warstwy[klucz] = w
+                pol.eta = max((w.eta for r_ in sp.wyniki for w in r_.warunki), default=0.0)
+                pol.niesp = warunki_niespelnione(sp.wyniki)
+                pol.V = float(dane_pol.get(c["id"], {}).get("V", 0.0))
+                el.pola.append(pol)
+            lv.elementy.append(el)
+        if lv.elementy:
+            D.poziomy.append(lv)
+    D.poziomy.sort(key=lambda L: L.wierzch)
+
+
+@dataclass
+class BelkaZ:
+    """Belka / nadproże / wieniec z obliczeń: przekrój, zbrojenie podłużne (n·φ), strzemiona, A_s."""
+    id: str
+    rodzaj: str                # belka | nadproze | wieniec
+    poz: str
+    p0: tuple
+    p1: tuple
+    b: float
+    h: float                   # wysokość całkowita przekroju żelbetowego (z płytą, jeśli zespolona)
+    spod: float
+    beton: str
+    eksp: str
+    c_nom: float               # otulenie strzemion [mm]
+    dol: tuple = (2, 12)
+    gora: tuple = (2, 12)
+    As_dol: tuple = (0.0, 0.0, 0.0)     # (req, min, prov) [mm²]
+    As_gora: tuple = (0.0, 0.0, 0.0)
+    strz: tuple = (6, 250.0, 2)          # φ, s [mm], liczba ramion
+    h_pl: float = 0.0
+    M: float = 0.0
+    V: float = 0.0
+    eta: float = 0.0
+    niesp: list = field(default_factory=list)
+    opis: str = ""
+    sciana: str = ""
+    oparcie: float = 0.2
+    ids: list = field(default_factory=list)   # nadproża typowe: identyfikatory otworów danego typu
+
+    @property
+    def L(self) -> float:
+        return math.hypot(self.p1[0] - self.p0[0], self.p1[1] - self.p0[1])
+
+
+def _zginania(wyniki):
+    return [w for w in wyniki if hasattr(w, "As_prov") and hasattr(w, "As_req") and hasattr(w, "M_Ed")]
+
+
+def _as_z_warunku(wyniki, opis):
+    for r in wyniki:
+        for w in getattr(r, "warunki", []):
+            if w.opis == opis:
+                return float(w.E), float(w.R)
+    return None
+
+
+def _belki(an, D):
+    from ..obliczenia.konstrukcja import zelbet
+    m, p = an.m, an.p
+    bel = {str(b["id"]): b for b in m.belki()}
+    for pz in an.pos_belki:
+        b = bel.get(pz.ident)
+        if b is None or not pz.przyjeto:
+            D.braki.append(f"Belka {pz.ident}: brak kompletu wyników wymiarowania w bibliotece — zbrojenie nie "
+                           "wyznaczone [WYMAGA ANALIZY].")
+            continue
+        txt = " ".join(pz.przyjeto)
+        mm = re.search(r"dołem (\d+)[φ⌀](\d+), górą (\d+)[φ⌀](\d+)", txt)
+        mh = re.search(r"(\d+)×(\d+) cm", txt)
+        sc = next((w for w in pz.wyniki if hasattr(w, "strzemiona") and w.strzemiona), None)
+        if mm is None or sc is None:
+            continue
+        ex = p.ekspozycja.get("belka", "XC1")
+        fis = fi_s(sc.strzemiona)
+        c_s = zelbet.otulina(ex, fis[0], p).c_nom
+        zd = _as_z_warunku(pz.wyniki, "Zbrojenie dolne") or (0.0, 0.0)
+        zgs = _zginania(pz.wyniki)
+        zt = _as_z_warunku(pz.wyniki, "Zbrojenie górne")
+        h_tot = float(mh.group(2)) / 100.0 if mh else float(b["h"])
+        kl = re.search(r"C\d+/\d+", txt)
+        B = BelkaZ(pz.ident, "belka", pz.nr, tuple(b["os"][0]), tuple(b["os"][1]), float(b["b"]), h_tot,
+                   float(b["spod"]), kl.group(0) if kl else "C25/30", ex, float(c_s),
+                   dol=(int(mm.group(1)), int(mm.group(2))), gora=(int(mm.group(3)), int(mm.group(4))),
+                   As_dol=(zgs[0].As_req if zgs else zd[0], zgs[0].As_min if zgs else 0.0, zd[1]),
+                   As_gora=((zt[0], 0.0, zt[1]) if zt else (0.0, 0.0, int(mm.group(3)) * pole_preta(int(mm.group(4))))),
+                   strz=(fis[0], fis[1], 2), h_pl=max(h_tot - float(b["h"]), 0.0),
+                   M=float(zgs[0].M_Ed) if zgs else 0.0, V=float(sc.V_Ed), eta=pz.wykorzystanie,
+                   niesp=warunki_niespelnione(pz.wyniki), opis=str(b.get("uwagi") or ""))
+        D.belki.append(B)
+    got = {x.id for x in D.belki}
+    for bid, b in bel.items():
+        if bid not in got and not bid.startswith("N"):
+            D.braki.append(f"Belka {bid} ({b.get('uwagi', '')[:60]}…): brak pozycji wymiarowania w bibliotece "
+                           "(belka nie jest podporą płyty w modelu MES — np. belka odwrócona/wspornikowa) — "
+                           "zbrojenie do obliczenia indywidualnego [WYMAGA ANALIZY].")
+
+
+def _nadproza(an, D):
+    from ..obliczenia.konstrukcja import zelbet
+    m, p = an.m, an.p
+    for pz in an.pos_nadproza:
+        oid = pz.ident[2:]
+        o = m.otwor(oid)
+        txt = " ".join(pz.przyjeto)
+        mm = re.search(r"(\d+)×(\d+) cm, (C\d+/\d+), dołem (\d+)[φ⌀](\d+), strzemiona ([^,]+), oparcie ≥ (\d+)", txt)
+        if o is None or mm is None:
+            continue
+        w = o.sciana or m.sciana(o.sciana_id)
+        if w is None:
+            continue
+        a = float(mm.group(7)) / 100.0
+        t, hn = float(mm.group(1)) / 100.0, float(mm.group(2)) / 100.0
+        fis = fi_s(mm.group(6)) or (6, 250.0)
+        ex = p.ekspozycja.get("nadproze", "XC1")
+        zd = _as_z_warunku(pz.wyniki, "Zbrojenie dolne") or (0.0, 0.0)
+        zgs = _zginania(pz.wyniki)
+        B = BelkaZ(pz.ident, "nadproze", pz.nr, tuple(w.pt(max(o.s0 - a, 0.0), 0.0)), tuple(w.pt(min(o.s1 + a, w.L), 0.0)),
+                   t, hn, float(o.z1), mm.group(3), ex, float(zelbet.otulina(ex, fis[0], p).c_nom),
+                   dol=(int(mm.group(4)), int(mm.group(5))), gora=(2, 10),
+                   As_dol=(zgs[0].As_req if zgs else zd[0], zgs[0].As_min if zgs else 0.0, zd[1]),
+                   As_gora=(0.0, 0.0, 2 * pole_preta(10)), strz=(fis[0], fis[1], 2),
+                   M=float(pz.dane.get("M", 0.0)), eta=pz.wykorzystanie, niesp=warunki_niespelnione(pz.wyniki),
+                   opis=f"nad otworem {oid} ({o.szer * 100:.0f} cm) w ścianie {w.id}", sciana=w.id, oparcie=a,
+                   ids=[oid])
+        D.nadproza.append(B)

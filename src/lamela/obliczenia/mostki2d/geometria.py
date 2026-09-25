@@ -387,9 +387,11 @@ def material_z_modelu(model, kod: str) -> Material:
     nazwa = m.nazwa or kod
     rodzaj = "nieprzezroczysty"
     n = nazwa.lower()
-    if bool(getattr(m, "wentylowana", False)) or "wentylowan" in n and "niewentylowan" not in n:
+    # tylko materiał-POWIETRZE może być warstwą wentylowaną (nazwa „wełna fasadowa (elewacja wentylowana …)” — nie)
+    powietrze = any(k in n for k in ("pustk", "powietrz", "szczelin"))
+    if bool(getattr(m, "wentylowana", False)) or (powietrze and "wentylowan" in n and "niewentylowan" not in n):
         rodzaj = "powietrze_went"          # warstwa powietrza dobrze wentylowana (ISO 6946) — pomijana w U i w 2D
-    elif any(k in n for k in ("pustk", "powietrz", "szczelin")):
+    elif powietrze:
         rodzaj = "powietrze"               # niewentylowana — λ_eq z modelu (ISO 6946 zał. D)
     return Material(kod, float(m.lambda_), nazwa, getattr(m, "kolor", None), rodzaj,
                     "model budynku (materialy.*.lambda)")

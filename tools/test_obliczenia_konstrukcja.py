@@ -35,12 +35,15 @@ rachunkiem ręcznym w teście (wzory zamknięte).
 from __future__ import annotations
 
 import math
+import os
 import sys
 import time
 import traceback
 from pathlib import Path
 
-import numpy as np
+for _v in ("OPENBLAS_NUM_THREADS", "OMP_NUM_THREADS", "MKL_NUM_THREADS"):
+    os.environ.setdefault(_v, "1")      # małe układy gęste: wątki BLAS przy obciążonej maszynie spowalniają ~10×
+import numpy as np  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))

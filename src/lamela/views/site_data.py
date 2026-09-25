@@ -421,10 +421,9 @@ class SiteData:
             if isinstance(o, dict) and o.get("xy") is not None:
                 self.obiekty[str(o.get("id"))] = Obiekt(str(o.get("id")), np.asarray(o["xy"], float),
                                                        str(o.get("opis") or ""), o)
-        proj = [s for s in self.sieci if not s.istn]
-        if proj and not any(s.branza in ("kan_sanit", "kan_deszcz") and
-                            any(k in (u.get("projektowane") or [{}])[0] for k in ("rzedne", "spadek", "dn"))
-                            for s in proj):
+        kan = [s for s in (u.get("projektowane") or []) if isinstance(s, dict)
+               and branza(s.get("branza")) in ("kan_sanit", "kan_deszcz")]
+        if kan and not all(("rzedne" in s or "spadek" in s) and "dn" in s for s in kan):
             self.brak("dzialka.yaml: uzbrojenie.projektowane[].{dn, material, spadek, rzedne}",
                       "średnice, spadki i rzędne dna/wierzchu przewodów w punktach załamania i włączenia "
                       "(RPB § 15 ust. 2 pkt 11) — obecnie tylko w tekście 'opis'",
@@ -442,7 +441,7 @@ class SiteData:
         for d in self.m.dachy():
             for rs in d.get("rury_spustowe") or []:
                 if isinstance(rs, dict) and rs.get("xy_pion") is not None:
-                    self.rury.append(dict(id=str(rs.get("id", "")), xy=self.P(rs["xy_pion"])[0],
+                    self.rury.append(dict(id=str(rs.get("id", "")), xy=self.P(rs["xy_pion"][:2]),
                                           trasa=str(rs.get("trasa") or ""), dn=rs.get("dn"),
                                           do=str(rs.get("do") or ""), dach=str(d.get("id", ""))))
         self.inst = {}
@@ -457,7 +456,7 @@ class SiteData:
                     xy = v.get("xy") if isinstance(v, dict) else v
                     if isinstance(xy, (list, tuple)) and len(xy) >= 2 and all(isinstance(q, (int, float))
                                                                               for q in xy[:2]):
-                        self.inst[k] = self.P([float(xy[0]), float(xy[1])])[0]
+                        self.inst[k] = self.P([float(xy[0]), float(xy[1])])
         except Exception:  # noqa: BLE001 — dane pomocnicze (opcjonalne)
             pass
         # strefa R290 wokół jednostki zewnętrznej pompy ciepła
@@ -495,3 +494,93 @@ class SiteData:
                       "dach: 'płaski ≤ 12° lub 30–45°', min_miejsc_postojowych: 2, ogrodzenie_max_wys: 1.60}",
                       "PZT-01")
         self.mpzp = lim
+
+    # ------------------------------------------------------------------ teren
+    def _load_terrain(self):
+        t = self.raw.get("teren") or {}
+        self.warstwice_co = float(t.get("warstwice_co") or 0.10)
+        self.zwg = t.get("ZWG")
+        ex = np.asarray([p for p in (t.get("punkty") or []) if isinstance(p, (list, tuple)) and len(p) >= 3],
+                        float).reshape(-1, 3)
+        pr = np.asarray([p for p in (t.get("punkty_projektowane") or [])
+                         if isinstance(p, (list, tuple)) and len(p) >= 3], float).reshape(-1, 3)
+        self.pkt_ist = ex
+        self.pkt_proj = pr
+        if len(ex) < 3:
+            self.brak("dzialka.yaml: teren.punkty", "brak rzędnych terenu istniejącego", "punkty: [[x, y, H], ...]")
+        if len(pr) == 0:
+            self.brak("dzialka.yaml: teren.punkty_projektowane", "brak rzędnych terenu projektowanego",
+                      "punkty_projektowane: [[x, y, H], ...]", "PZT-02")
+        self._h_ist = _tin(ex) if len(ex) >= 3 else None
+        # teren projektowany: punkty projektowane + istniejące poza strefą zmian (≥ 2,5 m od punktów projektowanych
+        # i poza obrysem budynku)
+        if len(pr):
+            zone = unary_union([Point(p[:2]).buffer(2.5) for p in pr] + [self.p0.buffer(0.3)])
+            keep = ~shapely.contains_xy(zone, ex[:, 0], ex[:, 1]) if len(ex) else np.zeros(0, bool)
+            both = np.vstack([pr, ex[keep]]) if len(ex) else pr
+            self.strefa_zmian = unary_union([Point(p[:2]).buffer(1.5) for p in pr])
+            self._h_proj = _tin(both) if len(both) >= 3 else self._h_ist
+        else:
+            self.strefa_zmian = Polygon()
+            self._h_proj = self._h_ist
+
+    def H_ist(self, xy):
+        return None if self._h_ist is None else self._h_ist(np.asarray(xy, float).reshape(-1, 2))
+
+    def H_proj(self, xy):
+        return None if self._h_proj is None else self._h_proj(np.asarray(xy, float).reshape(-1, 2))
+
+    def contours(self, bbox, step=None, projected=False, res=0.5):
+        """Warstwice [(łamana Nx2, H)] w prostokącie bbox (x0, y0, x1, y1)."""
+        import contourpy
+        fn = self._h_proj if projected else self._h_ist
+        if fn is None:
+            return []
+        step = step or self.warstwice_co
+        x0, y0, x1, y1 = bbox
+        xs = np.arange(x0, x1 + res, res)
+        ys = np.arange(y0, y1 + res, res)
+        X, Y = np.meshgrid(xs, ys)
+        Z = fn(np.column_stack([X.ravel(), Y.ravel()])).reshape(X.shape)
+        gen = contourpy.contour_generator(X, Y, Z)
+        out = []
+        lo = math.ceil(np.nanmin(Z) / step - 1e-9)
+        hi = math.floor(np.nanmax(Z) / step + 1e-9)
+        for i in range(lo, hi + 1):
+            H = round(i * step, 3)
+            for a in gen.lines(H):
+                if len(a) >= 2:
+                    out.append((np.asarray(a), H))
+        return out
+
+    def teren_przy_wejsciu(self):
+        """Rzędna terenu projektowanego przed wejściem głównym (punkt projektowany ≤ 1,5 m od drzwi lub TIN)."""
+        e = self.wejscie_gl
+        if e is None:
+            return None, None
+        q = e["pt"] + e["out"] * 0.6
+        if len(self.pkt_proj):
+            d = np.hypot(self.pkt_proj[:, 0] - q[0], self.pkt_proj[:, 1] - q[1])
+            i = int(np.argmin(d))
+            if d[i] <= 1.5:
+                return float(self.pkt_proj[i, 2]), "proj"
+        h = self.H_proj(q)
+        return (float(h[0]), "tin") if h is not None else (None, None)
+
+
+def _tin(pts: np.ndarray):
+    """Interpolacja liniowa TIN z ekstrapolacją płaszczyzną najmniejszych kwadratów poza otoczką."""
+    from scipy.interpolate import LinearNDInterpolator
+    pts = np.unique(np.round(pts, 4), axis=0)
+    lin = LinearNDInterpolator(pts[:, :2], pts[:, 2])
+    A = np.c_[pts[:, 0], pts[:, 1], np.ones(len(pts))]
+    coef, *_ = np.linalg.lstsq(A, pts[:, 2], rcond=None)
+
+    def f(xy):
+        xy = np.asarray(xy, float).reshape(-1, 2)
+        z = np.asarray(lin(xy), float).reshape(-1)
+        bad = ~np.isfinite(z)
+        if bad.any():
+            z[bad] = coef[0] * xy[bad, 0] + coef[1] * xy[bad, 1] + coef[2]
+        return z
+    return f
