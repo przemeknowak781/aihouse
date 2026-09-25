@@ -542,8 +542,8 @@ Model zweryfikowano podglądem (`final/*.png`), arkuszami PB (`projekt/01_koncep
   i `model/instalacje.yaml`.
 * Walidacja: `PYTHONPATH=src python3 -m lamela.model model/budynek.yaml model/dzialka.yaml` (0 błędów, 0 ostrzeżeń).
 * `tools/podglad_modelu.py` → `docs/20_koncepcja/final/`:
-  * rzuty P0–P2;
-  * elewacje S/N/E/W;
+  * rzuty P0–P2 (`rzut_P0…P2.png`) i rzut dachów z odwodnieniem (`rzut_dachu.png`);
+  * elewacje S/N/E/W (`elewacja_S/N/E/W.png`, zbiorczo `elewacje.png`);
   * elewacja S na tle szkicu;
   * przekroje A-A i B-B;
   * działka;

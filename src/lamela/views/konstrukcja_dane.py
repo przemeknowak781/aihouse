@@ -562,3 +562,102 @@ def _nadproza(an, D):
                    opis=f"nad otworem {oid} ({o.szer * 100:.0f} cm) w ścianie {w.id}", sciana=w.id, oparcie=a,
                    ids=[oid])
         D.nadproza.append(B)
+
+
+def _wience(an, D):
+    from ..obliczenia.konstrukcja import zelbet
+    p = an.p
+    for pz in an.pos_wience:
+        txt = " ".join(pz.przyjeto)
+        nf = n_fi(txt) or (4, 12)
+        fs = fi_s(txt) or (6, 250.0)
+        kl = re.search(r"C\d+/\d+", txt)
+        l0 = re.search(r"l₀ = (\d+) mm", txt)
+        grp = next((g for g in an.grupy if pz.ident == f"W-{re.sub(r'[^A-Za-z0-9_-]+', '_', g.nazwa)[:40]}"), None)
+        ex = p.ekspozycja.get("wieniec", "XC1")
+        W = BelkaZ(pz.ident, "wieniec", pz.nr, (0.0, 0.0), (1.0, 0.0), 0.18, float(max((e.h for e in grp.el), default=0.22))
+                   if grp else 0.22, 0.0, kl.group(0) if kl else "C25/30", ex, float(zelbet.otulina(ex, fs[0], p).c_nom),
+                   dol=(nf[0] // 2, nf[1]), gora=(nf[0] - nf[0] // 2, nf[1]), strz=(fs[0], fs[1], 2),
+                   As_dol=(0.0, 0.0, 0.0), eta=pz.wykorzystanie, niesp=warunki_niespelnione(pz.wyniki),
+                   opis=f"wieńce pod płytą {grp.nazwa if grp else pz.ident}; zakład l₀ = {l0.group(1) if l0 else '?'} mm")
+        for r in pz.wyniki:
+            for w in r.warunki:
+                if w.opis.startswith("Ściąg obwodowy"):
+                    W.As_dol = (float(w.E), 0.0, float(w.R))
+        W.ids = [grp.idx] if grp else []
+        D.wience.append(W)
+
+
+@dataclass
+class BiegZ:
+    schody: str
+    nr: int
+    poz: str
+    h: float
+    L: float                  # rozpiętość w rzucie [m]
+    alfa: float
+    glowne: Warstwa | None = None
+    rozdz: tuple = (8, 400.0)
+    gorne: tuple = (10, 400.0)
+    prety: list = field(default_factory=list)   # Pret biblioteki (zelbet.Pret)
+    niesp: list = field(default_factory=list)
+    eta: float = 0.0
+    beton: str = "C25/30"
+    c_nom: float = 25.0
+
+
+def _schody(an, D):
+    from ..obliczenia.konstrukcja import zelbet
+    p = an.p
+    for pz in an.pos_schody:
+        for i, w in enumerate(pz.wyniki, 1):
+            txt = getattr(w, "zbrojenie", "") or ""
+            fss = _RE_FS.findall(txt)
+            if len(fss) < 2:
+                continue
+            fi, s = int(fss[0][0]), float(fss[0][1].replace(",", ".")) * 10
+            As = _as_z_warunku([w], "Zbrojenie główne") or (0.0, pole_preta(fi) * 1000 / s)
+            zg = next((k for k in w.kroki if k.opis.startswith("Zbrojenie minimalne")), None)
+            ex = p.ekspozycja.get("schody", "XC1")
+            b = BiegZ(pz.ident, i, pz.nr, float(w.h), float(w.L), float(w.alfa),
+                      Warstwa("x", "dol", fi, s, float(As[0]), float(zg.wynik) if zg else 0.0, float(As[1])),
+                      rozdz=(int(fss[1][0]), float(fss[1][1].replace(",", ".")) * 10),
+                      gorne=(int(fss[2][0]), float(fss[2][1].replace(",", ".")) * 10) if len(fss) > 2 else (fi, 2 * s),
+                      prety=list(getattr(w, "prety", [])), niesp=warunki_niespelnione([w]), eta=w.wykorzystanie,
+                      c_nom=float(zelbet.otulina(ex, fi, p).c_nom))
+            kl = re.search(r"C\d+/\d+", " ".join(pz.przyjeto))
+            b.beton = kl.group(0) if kl else b.beton
+            D.biegi.append(b)
+
+
+@dataclass
+class StopaZ:
+    id: str
+    poz: str
+    xy: tuple
+    B: float
+    L: float
+    h: float
+    spod: float
+    siatka: Warstwa | None = None
+    niesp: list = field(default_factory=list)
+    eta: float = 0.0
+
+
+@dataclass
+class PlytaFZ:
+    id: str
+    poz: str
+    poly: object
+    h: float
+    spod: float
+    beton: str
+    eksp: str
+    c_nom: float
+    M: float = 0.0
+    As_req: float = 0.0
+    As_min: float = 0.0
+    dol: Warstwa | None = None
+    gora: Warstwa | None = None
+    niesp: list = field(default_factory=list)
+    uwagi: list = field(default_factory=list)

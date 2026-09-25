@@ -244,6 +244,72 @@ def elewacje(m, ir, out: Path):
     plt.close(fig)
 
 
+def elewacje_osobno(m, ir, out: Path):
+    for st in ("S", "N", "E", "W"):
+        fig, ax = plt.subplots(figsize=(15, 7))
+        elewacja(ax, m, ir, st)
+        for zz in (0.0, 3.15, 6.30, 9.30):
+            ax.axhline(zz, color="#c0392b", lw=0.25, ls=(0, (6, 4)), zorder=1)
+        fig.tight_layout()
+        fig.savefig(out / f"elewacja_{st}.png", dpi=140, bbox_inches="tight")
+        plt.close(fig)
+
+
+def rzut_dachu(m, ir, out: Path):
+    """Dachy: obrysy, attyki, spadki, wpusty (WP), przelewy awaryjne (PA), rury spustowe (RS), otwory (świetlik, wyłaz)."""
+    fig, ax = plt.subplots(figsize=(16, 10))
+    for w in m.wsporniki():
+        fill(ax, Polygon(w["obrys"]), fc="#e6e3dd", ec="#777", lw=0.4, z=1)
+    kol = {"SD1": "#d9d4c7", "SD2": "#cfc8b8", "DZ1": "#b9d59c"}
+    for d in m.dachy():
+        g = Polygon(d["obrys"], [o for o in (d.get("otwory") or [])])
+        fill(ax, g, fc=kol.get(d.get("przegroda"), "#ddd"), ec="#222", lw=0.8, z=2)
+        att = (d.get("attyka") or {}).get("szer", 0.25)
+        fill(ax, Polygon(d["obrys"]).difference(Polygon(d["obrys"]).buffer(-att, join_style=2)), fc="#8d8d8d", ec="none", alpha=0.6, z=3)
+        c = Polygon(d["obrys"]).representative_point()
+        sl = next(x for x in m.plyty() if x["id"] == d["id"])
+        ax.text(c.x, c.y, f"{d['id']} ({d.get('przegroda')})\nwierzch {fmt(sl['top'], 3)}; attyka {fmt(sl['top_attyki'] or sl['top'], 3)}",
+                fontsize=7, ha="center", zorder=6, bbox=dict(fc="w", ec="none", alpha=0.7))
+        for sp in d.get("spadki") or []:
+            (x0, y0), (x1, y1) = sp["od"], sp["do"]
+            ax.annotate("", (x1, y1), (x0, y0), arrowprops=dict(arrowstyle="->", color="#1f77b4", lw=0.8), zorder=5)
+            ax.text((x0 + x1) / 2, (y0 + y1) / 2, f"{fmt(100 * sp['spadek'], 1)} %", fontsize=6, color="#1f77b4", zorder=5)
+        for wp in d.get("wpusty") or []:
+            x, y = wp["xy"] if isinstance(wp, dict) else wp
+            ax.plot([x], [y], "o", ms=7, mfc="#1f77b4", mec="k", zorder=7)
+            ax.text(x + 0.15, y + 0.15, f"WP DN{wp.get('dn', 100) if isinstance(wp, dict) else 100}", fontsize=6, zorder=7)
+        for pa in d.get("przelewy_awaryjne") or []:
+            x, y = pa["xy"]
+            ax.plot([x], [y], "s", ms=6, mfc="#ff7f0e", mec="k", zorder=7)
+            ax.text(x + 0.15, y - 0.35, f"PA {fmt(pa.get('rzedna_dna', 0), 2)}", fontsize=5.5, color="#b35900", zorder=7)
+        for rs in d.get("rury_spustowe") or []:
+            x, y = rs["xy_pion"]
+            ax.plot([x], [y], "D", ms=5, mfc="#7f7f7f", mec="k", zorder=8)
+            ax.text(x + 0.15, y - 0.2, f"{rs['id']} ({rs.get('trasa')})", fontsize=5.5, zorder=8)
+    for p in ir.prisms:
+        if p.kind == "lamella" and p.z0 > 5.0:
+            fill(ax, p.shape(), fc="#8a5a32", ec="none", z=4)
+    en = (m.raw.get("energia") or {}).get("wentylacja") or {}
+    for key, mk in (("czerpnia", "^"), ("wyrzutnia", "v")):
+        v = en.get(key)
+        if isinstance(v, list):
+            ax.plot([v[0]], [v[1]], mk, ms=8, mfc="#2ca02c", mec="k", zorder=8)
+            ax.text(v[0] + 0.2, v[1], key, fontsize=6, zorder=8)
+    for w in en.get("wywiewki_kanalizacyjne") or []:
+        ax.plot([w[0]], [w[1]], "x", ms=7, color="#8c564b", zorder=8)
+        ax.text(w[0] + 0.2, w[1], "wywiewka K1", fontsize=6, zorder=8)
+    osie(ax, m, (-3.0, 19.3), (-2.5, 10.4), "P2")
+    ax.set_aspect("equal")
+    ax.set_xlim(-4.0, 19.6)
+    ax.set_ylim(-2.8, 11.0)
+    ax.tick_params(labelsize=6)
+    ax.set_title("Dom LAMELA — rzut dachów z modelu: spadki (strzałki), wpusty WP, przelewy awaryjne PA, rury spustowe RS, "
+                 "czerpnia/wyrzutnia, lamele", fontsize=9, loc="left")
+    fig.tight_layout()
+    fig.savefig(out, dpi=150, bbox_inches="tight")
+    plt.close(fig)
+
+
 # ------------------------------------------------------------------------------------------------ elewacja S vs szkic (wierność)
 SZKIC_CROP = (563, 865, 2333, 1555)      # wycinek 1770 × 690 px oryginału (brief §1.1)
 SZKIC_SX = 45.8                           # px/m (bryła B 500…1050 px = 12,0 m)
@@ -754,12 +820,15 @@ def main(argv=None):
     print(f"Model: {len(m.sciany())} ścian, {len(m.otwory())} otworów, {len(m.pomieszczenia())} pomieszczeń; walidacja: "
           f"{len(m.bledy)} błędów, {len(m.ostrzezenia)} ostrzeżeń")
     ir = build_ir(m, otoczenie=True, auta=False)
-    co = set((a.tylko or "rzuty,elewacje,szkic,przekroje,dzialka,bilans").split(","))
+    co = set((a.tylko or "rzuty,dach,elewacje,szkic,przekroje,dzialka,bilans").split(","))
     if "rzuty" in co:
         for k in m.kondygnacje:
             rzut(m, ir, k.id, out / f"rzut_{k.id}.png")
     if "elewacje" in co:
         elewacje(m, ir, out / "elewacje.png")
+        elewacje_osobno(m, ir, out)
+    if "dach" in co:
+        rzut_dachu(m, ir, out / "rzut_dachu.png")
     fid = elewacja_szkic(m, ir, out / "elewacja_S_szkic.png") if "szkic" in co else wiernosc(m)[0]
     if "przekroje" in co:
         przekroj(m, ir, "x", 6.55, out / "przekroj_AA.png", "Przekrój A-A (przez schody, boks C i bryłę A; widok na wschód)")

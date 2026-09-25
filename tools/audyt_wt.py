@@ -550,6 +550,16 @@ class AudytWT:
                   "każde okno w pomieszczeniu", "UWAGA", "kontrola wewnętrzna")
         self.A.tabele["okna"] = rows
 
+    def _room_of(self, o):
+        w = o.sciana
+        if w is None or w.ext_side is None:
+            return None
+        c = o.srodek - np.array(o.kierunek_zewn) * (abs(w.face_t(-w.ext_side)) + 0.10)
+        for r in self.rooms.values():
+            if r["kond"] == o.kond and r["poly_full"].buffer(0.02).contains(Point(*c)):
+                return r
+        return None
+
     # ================================================================== 3. SCHODY
     def schody(self):
         R, A = self.R, self.A
@@ -986,6 +996,23 @@ class AudytWT:
                       "" if prog >= lim else f"obniżyć płytę/posadzkę garażu o ≥ {f2(lim - prog + 0.02, 2)} m (posadzka przy bramie ≤ "
                       f"{f2(zb - (lim - prog + 0.02), 2)}, przy drzwiach ≤ −0,05) i teren/odwodnienie liniowe przed bramą ≥ 0,02 m niżej niż próg bramy",
                       miejsce=f"S0-17 / {dg[0].id}")
+            # wrota – okna (W-117)
+            for o in [x for x in m.otwory() if x.typ == "brama"]:
+                seg = LineString([tuple(o.p0), tuple(o.p1)])
+                naj_v, naj_h = math.inf, math.inf
+                for q in m.otwory():
+                    if q.id == o.id or q.typ in ("drzwi", "otwor") or q.sciana is None or q.sciana.ext_side is None:
+                        continue
+                    s2 = LineString([tuple(q.p0), tuple(q.p1)])
+                    rq = self._room_of(q)
+                    if s2.distance(seg) < 0.35 and q.z0 >= o.z1:
+                        naj_v = min(naj_v, q.z0 - o.z1)
+                    elif q.kond == o.kond and rq is not None and rq.get("pobyt") and abs(q.z0 - o.z0) < 1.5:
+                        naj_h = min(naj_h, s2.distance(seg))
+                A.add("Garaż", o.id, "wrota → okna: pion / poziom (pobyt ludzi)",
+                      f"{'brak okien nad wrotami' if naj_v == math.inf else f2(naj_v) + ' m'} / "
+                      f"{'brak' if naj_h == math.inf else f2(naj_h) + ' m'}", "≥ 1,50 / ≥ 1,50",
+                      chk(naj_v >= 1.5 and naj_h >= 1.5), R.zr("wrota_okna_pion_min", "WT §279"))
         # --- drzwi wejściowe i daszek (W-055, W-057)
         for o in m.otwory():
             if o.typ == "drzwi_zewn" and o.sciana.kond == "P0" and o.symbol and "wej" in str(o.raw.get("uwagi", "")).lower():
@@ -1089,6 +1116,28 @@ class AudytWT:
                              "alternatywnie podnieść wyrzutnię ≥ 1,0 m ponad czerpnię (sprawdzić wys. zabudowy) albo zestaw zblokowany"
                              if prop else "rozsunąć na ≥ 10 m lub podnieść wyrzutnię ≥ 1,0 m ponad czerpnię"),
               miejsce=f"energia.wentylacja: czerpnia {cz}, wyrzutnia {wy}")
+        # wyrzutnia od okien w dachu (świetliki) — WT §152 ust. 12
+        for w in m.wsporniki():
+            if not (str(w.get("mat", "")).startswith("SZKLO") or "świetlik" in str(w.get("uwagi", "")).lower()):
+                continue
+            P = make_polygon(w["obrys"])
+            d = P.distance(Point(*wy[:2]))
+            top = float(w["wierzch"])
+            if d < 3.0:
+                st, wym = "NIEZGODNE", "≥ 3,00"
+            elif d < 10.0:
+                st = "OK" if wy[2] >= top + 1.0 - 1e-6 else "UWAGA"
+                wym = f"3–10 m ⇒ wylot ≥ 1,00 m nad górną krawędzią okna (≥ +{f2(top + 1.0, 2)})"
+            else:
+                st, wym = "OK", "≥ 10 m"
+            A.add("Wentylacja", f"wyrzutnia ↔ okno w dachu {w['id']}", "odległość / wylot ponad oknem",
+                  f"{f2(d)} m / {f2(wy[2] - top, 2)} m", wym, st,
+                  R.zr("wyrzutnia_odl_krawedz_dachu_z_oknami_min", "WT §152 ust. 12") + "; R6-43",
+                  "" if st == "OK" else
+                  f"(a) {w['id']} jako świetlik NIEOTWIERANY bez funkcji wentylacyjnej i zapis interpretacji w opisie (przepis dotyczy "
+                  f"okien) — rekomendowane; (b) wylot wyrzutni ≥ +{f2(top + 1.0, 2)} — koliduje z wys. zabudowy ≤ 11,00 m (MPZP); "
+                  f"(c) ≥ 10 m od {w['id']} — niewykonalne na D1 przy ≥ 3 m od krawędzi nad oknami",
+                  miejsce=f"wyrzutnia {wy}; {w['id']} {w['obrys'][0]}…{w['obrys'][2]}, wierzch +{f2(top, 2)}")
         # wyrzutnia od krawędzi dachu nad oknami
         ed = self._krawedzie_nad_oknami(D1)
         if ed:

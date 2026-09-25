@@ -672,6 +672,13 @@ def wskazniki(s: SiteData) -> dict:
             wt = building_height(s.ctx)
     except Exception:  # noqa: BLE001
         wt = None
+    # WT § 6 z terenem PROJEKTOWANYM („przyjęta w projekcie rzędna terenu”, WT § 3 pkt 15)
+    if wt is not None and s._h_proj is not None:
+        ents = [e for e in s.wejscia if e["typ"] == "drzwi_zewn"] or s.wejscia
+        hz = sorted((float(s.H_proj(e["pt"] + e["out"] * 0.6)[0]), e["id"]) for e in ents)
+        if hz:
+            wt = dict(wt, z_ent=hz[0][0] - s.zero_abs, H_ent=hz[0][0], wejscie=hz[0][1],
+                      H=wt["z_top"] - (hz[0][0] - s.zero_abs), teren="projektowany")
     miejsca = dict(garaz=sum(1 for q in s.miejsca if str(q["raw"].get("typ")) in ("garaz", "wiata")),
                    zewn=sum(1 for q in s.miejsca if str(q["raw"].get("typ")) == "zewn"))
     spadki = [float(d.get("spadek") or 0.0) for d in s.m.dachy()]
@@ -803,8 +810,12 @@ def koordynacja(s: SiteData, odl_min: dict | None = None, retencja_min: dict | N
             for p in pts:
                 skrz.append(dict(a=A, b=B, p=p))
             a2, b2 = A.geom, B.geom
-            if pts:
-                cut = unary_union([Point(p).buffer(req + 0.05) for p in pts])
+            # otoczenie skrzyżowań i punktów włączenia do sieci istniejącej tej samej branży — poza oceną
+            conn = [np.asarray(q) for q in (A.geom.coords[0], A.geom.coords[-1])
+                    if any(E.istn and E.branza == A.branza and E.geom.distance(Point(q)) < 0.05 for E in allx)]
+            ex = pts + conn
+            if ex:
+                cut = unary_union([Point(p).buffer(req + 0.05) for p in ex])
                 a2, b2 = a2.difference(cut), b2.difference(cut)
             if a2.is_empty or b2.is_empty:
                 continue
@@ -812,12 +823,18 @@ def koordynacja(s: SiteData, odl_min: dict | None = None, retencja_min: dict | N
             if d > max(3.0, 3 * req):
                 continue
             q1, q2 = nearest_points(a2, b2)
-            r = dict(a=A, b=B, d=d, req=req, src=src, ok=d >= req - 1e-6,
+            if ex and d < (req + 0.05) * 1.6 and min(min(np.hypot(*(np.asarray(q.coords[0]) - e)) for e in ex)
+                                                     for q in (q1, q2)) < (req + 0.05) * 1.6:
+                continue                                  # wyłącznie skutek wycięcia otoczenia skrzyżowania
+            warunk = any(re.search(r"hdpe|rur\w* osłon|osłonow", x.opis.lower()) for x in (A, B))
+            r = dict(a=A, b=B, d=d, req=req, src=src, ok=d >= req - 1e-6, warunkowo=warunk,
                      p=(np.asarray(q1.coords[0]) + np.asarray(q2.coords[0])) / 2)
             pary.append(r)
             if not r["ok"]:
                 kol.append(dict(typ="zbliżenie sieci", opis=f"{A.lit}–{B.lit}: {d:.2f} m < {req:.2f} m", p=r["p"],
-                                src=src))
+                                src=src, warunkowo=warunk,
+                                uwaga="dopuszczalne przy ułożeniu w rurach osłonowych — uzgodnić z gestorami"
+                                if warunk else "zmienić trasę lub zastosować osłony — uzgodnić z gestorami"))
     # drzewa (od pnia)
     drz = []
     rq_t = _req(odl, "drzewo", "drzewo") or (2.0, "")
@@ -848,15 +865,18 @@ def koordynacja(s: SiteData, odl_min: dict | None = None, retencja_min: dict | N
     # urządzenia retencji: od budynku, granic, drzew
     rm = dict(dict(budynek=3.0, granica=2.0, drzewo=1.0), **(retencja_min or {}))
     ret = []
-    for nm, g in (("zbiornik", Point(s.zbiornik["xy"]).buffer(float(s.zbiornik.get("sr") or 0) / 2)
-                   if s.zbiornik else None),
-                  ("niecka", s.rozsaczanie["poly"] if s.rozsaczanie else None)):
+    zb = None
+    if s.zbiornik:
+        zb = s.zbiornik["poly"] or (Point(s.zbiornik["xy"]).buffer(float(s.zbiornik["sr"]) / 2)
+                                    if s.zbiornik.get("sr") else Point(s.zbiornik["xy"]))
+    # drzewa istniejące pozostawiane — od korony; projektowane — od pnia (R8 pkt 3.5, W-144)
+    trees = [Point(t["xy"]).buffer(t["d"] / 2) if t["istn"] else Point(t["xy"]) for t in s.drzewa if not t["usun"]]
+    for nm, g in (("zbiornik", zb), ("niecka", s.rozsaczanie["poly"] if s.rozsaczanie else None)):
         if g is None:
             continue
-        crowns = [Point(t["xy"]).buffer(t["d"] / 2) for t in s.drzewa if not t["usun"]]
         for what, other, req in (("budynek", s.footprint, rm["budynek"]),
                                  ("granica", s.plot.exterior, rm["granica"]),
-                                 ("korona drzewa", unary_union(crowns) if crowns else None, rm["drzewo"])):
+                                 ("drzewo", unary_union(trees) if trees else None, rm["drzewo"])):
             if other is None or other.is_empty:
                 continue
             d = float(g.distance(other))

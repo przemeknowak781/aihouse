@@ -107,7 +107,7 @@ class Profil:
         arr = tmp.get(c)
         tot = float(np.trapezoid(arr, self.s))
         ds = self.s[1] - self.s[0]
-        n = max(int(round(okno / ds)), 1)
+        n = min(max(int(round(okno / ds)), 1), len(arr))     # okno nie dłuższe od ściany (np.convolve „same” → max(M, N))
         k = np.ones(n)
         num = np.convolve(arr, k, mode="same")
         den = np.convolve(np.ones_like(arr), k, mode="same")
