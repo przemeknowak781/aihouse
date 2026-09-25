@@ -54,6 +54,10 @@ PROFIL_H0 = np.array([0.55, 0.45, 0.40, 0.40, 0.40, 0.45, 0.70, 1.00, 1.05, 0.95
 SEZON_H0 = np.array([1.20, 1.15, 1.05, 0.95, 0.90, 0.85, 0.85, 0.85, 0.90, 1.00, 1.10, 1.20])
 
 
+# Obciążalność długotrwała przewodów H1Z2Z2-K (pojedynczy przewód w powietrzu; PN-EN 50618 zał. A, tabl. A.3) [A]
+IZ_H1Z2Z2K = {4.0: 55.0, 6.0: 70.0, 10.0: 98.0, 16.0: 132.0}
+
+
 @dataclass
 class ParametryPV:
     P_max_kWp: float | None = None
@@ -67,7 +71,7 @@ class ParametryPV:
     E_gospodarstwo: float | None = None  # kWh/a (AGD, oświetlenie) — domyślnie 2500 + 300·N [ZAŁ]
     cwu_w_godzinach_pv: bool = True
     L_DC: float | None = None          # m — trasa DC dach → falownik
-    s_DC: float = 6.0                  # mm² H1Z2Z2-K
+    s_DC: float = 10.0                 # mm² H1Z2Z2-K — 6 mm² nie spełnia ∆U_DC ≤ 1 % (weryfikacja PT, I-5)
     dU_DC_max: float = 1.0             # % [ZAŁ]
     siec: bool = False                 # próba pobrania PVGIS przy każdym wywołaniu
 
@@ -276,7 +280,7 @@ def oblicz_pv(dane: DaneBudynku, par: ParametryPV | None = None, ogrzewanie=None
     I_mpp = mod["I_mpp"]
     rho = 0.0175 * (1 + 0.00393 * 50)                     # Ω·mm²/m przy 70 °C
     dU_DC = 2 * L_DC * I_mpp * rho / par.s_DC / (Umpp_min if Umpp_min > 0 else 300) * 100
-    Iz_DC = 70.0                                           # A — H1Z2Z2-K 6 mm² w powietrzu [W, karta kabla]
+    Iz_DC = IZ_H1Z2Z2K.get(par.s_DC, 70.0)                 # A — H1Z2Z2-K, pojedynczy przewód w powietrzu (PN-EN 50618 tabl. A.3) [W]
     Ng = float(wym("elektryka", "Ng", 1.8) or 1.8)
     L_crit = 115.0 / Ng
     dc = {"L": L_DC, "dU": dU_DC, "Iz": Iz_DC, "L_crit": L_crit,

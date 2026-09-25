@@ -37,7 +37,7 @@ class ParametryObwody:
     Z_Q: float = 0.30                  # Ω — impedancja pętli zwarcia w ZKP (L–PEN) [ZAŁ — warunki przyłączenia]
     I_k_ZKP_max: float = 6.0           # kA — maks. prąd zwarciowy w ZKP [ZAŁ]
     zab_przedlicznikowe: str = "C"     # ENEA: wyłącznik nadprądowy C (R7-L06)
-    WLZ_przekroj: float = 16.0
+    WLZ_przekroj: float = 25.0         # mm² — 16 mm² nie spełnia ∆U ZKP→RG ≤ 0,5 % (weryfikacja PT, I-5)
     WLZ_zyly: int = 5                  # 5 — rozdział PEN w ZKP (preferowany, D-12); 4 — PEN, rozdział w RG
     WLZ_metoda: str = "D1"
     WLZ_zapas: float = 5.0             # m
@@ -290,7 +290,7 @@ def oblicz_obwody(dane: DaneBudynku, odbiorniki: list[Odbiornik], par: Parametry
            "T3": "ochrona lokalna T3 przy RACK i sterowniku PC (opcjonalnie)"}
     kroki["spd"] = [
         Krok("Współczynnik środowiskowy (tereny podmiejskie, F = 2)", "f_env = 85·F", "85·2", f_env, "", "443.5, odsyłacz krajowy (RST 2018) [NZW]", 0),
-        Krok("Krytyczna długość linii CRL", "CRL = f_env/(L_P·N_g)", f"{f(f_env, 0)}/({f(par.L_P_km, 2)}·{f(Ng, 1)})", CRL, "",
+        Krok("Obliczeniowy poziom ryzyka CRL (PN-HD 60364-4-443 p. 443.5)", "CRL = f_env/(L_P·N_g)", f"{f(f_env, 0)}/({f(par.L_P_km, 2)}·{f(Ng, 1)})", CRL, "",
              "PN-HD 60364-4-443:2016 p. 443.5; L_P [ZAŁ]", 0),
         Krok("Graniczna długość linii kablowej nN, przy której CRL = 1000", "L = f_env/(1000·N_g)", "", L_gr, "m", "", 0),
     ]

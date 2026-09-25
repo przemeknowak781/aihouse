@@ -1212,7 +1212,7 @@ zielen:
   - {id: Z6, obrys: [[0.8, 44.3], [13.8, 44.3], [13.8, 49.3], [0.8, 49.3]], typ: rabata, wys: 0.6}
   - {id: Z7, obrys: [[22.05, 31.75], [22.7, 31.75], [22.7, 32.4], [22.05, 32.4]], typ: rabata, wys: 0.3, opis: 'pas gruntu pnączy (K-13): ziemia urodzajna 0,50 m na warstwie drenażowej żwiru 0,15 m i geowłókninie (rozsączanie w piaski, bez wpustów); od cokołu: XPS + membrana kubełkowa wywinięta 0,15 m nad teren + obrzeże — bez przebić hydroizolacji; teren przy licu −0,33 (spadek 3 % od budynku zachowany)'}
 drzewa:
-  - {id: DR1, xy: [11.6, 10.7], gat: lipa drobnolistna (soliter na osi ogrodu), sr_korony: 7.0, istn: false, do_wyciecia: false, wys: 10.0}
+  - {id: DR1, xy: [11.6, 9.2], gat: lipa drobnolistna (soliter na osi ogrodu), sr_korony: 10.0, istn: false, do_wyciecia: false, wys: 12.0}
   - {id: DR2, xy: [2.6, 24.7], gat: klon polny (cień letni tarasu zach.), sr_korony: 5.0, istn: false, do_wyciecia: false, wys: 8.0}
   - {id: DR3, xy: [3.1, 18.7], gat: grab pospolity, sr_korony: 4.5, istn: false, do_wyciecia: false, wys: 7.0}
   - {id: DR4, xy: [23.6, 18.7], gat: jabłoń, sr_korony: 4.0, istn: false, do_wyciecia: false, wys: 5.0}
@@ -1256,7 +1256,7 @@ uzbrojenie:
   obiekty:
     - {id: ZKP, xy: [19.4, 49.8], opis: 'złącze kablowo-pomiarowe we wnęce ogrodzenia, PWP przy wejściu (W-190)'}
     - {id: SR1, xy: [13.0, 43.8], opis: studzienka rewizyjna kanalizacji Ø425 (poza garażem — W-118)}
-    - {id: PC-JZ, xy: [24.4, 31.65], opis: 'jednostka zewn. PC monoblok R290 w osłonie lamelowej z ekranem akustycznym od tarasu; 7,0 m od granicy E (≥ 6,0 — W-024); strefa R290 1,0 m bez otworów, wpustów i studzienek (W-156)'}
+    - {id: PC-JZ, xy: [24.4, 31.65], strefa_r: 1.0, wym: [1.2, 0.45], wym_zrodlo: 'obrys przykładowy [DO UZUPEŁNIENIA wg DTR wybranego urządzenia]', oslona: 'OS-PC (budynek.yaml: elementy_zewn)', opis: 'jednostka zewn. PC monoblok R290 w osłonie lamelowej z ekranem akustycznym od tarasu; 7,0 m od granicy E (≥ 6,0 — W-024); strefa R290 1,0 m bez otworów, wpustów i studzienek (W-156)'}
     - {id: SEP-1, xy: [27.4, 44.675], opis: 'osadnik z separatorem substancji ropopochodnych (mini, klasa I, PN-EN 858) dla OL-1/OL-4 (podjazd, posadzka garażu); odpływ do niecki NT-E, poza zbiornikiem retencyjnym (audyt A1, W-114)'}
     - {id: SK-PC, xy: [24.4, 29.8], opis: 'studnia chłonna skroplin PC (żwir, ≥ 0,8 m p.p.t.), poza strefą R290 (W-146)'}
     - {id: HYDR, xy: [-30.0, 56.0], opis: 'najbliższy hydrant zewnętrzny DN80 (ul. Lipowa) — zaopatrzenie ppoż. (W-217) [do potwierdzenia]'}

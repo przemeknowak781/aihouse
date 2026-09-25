@@ -1058,12 +1058,13 @@ def pochwyty(z0, n):
 
 BALUSTRADY = pochwyty(0.0, 1) + pochwyty(Z_P1, 2)
 
+Z_LAM_DO = r(Z_OKAP_3[0] - 0.02)     # wydanie (V1-11): górna krawędź lamel pod podsufitką PL-3 (szczelina 5 mm), nie w jej warstwie
 LAMELE = [
-    {"id": "LAM-S", "elewacja": "S", "linia": [[X2o - 0.15, -EXT], [xE + EXT + 0.15, -EXT]], "z_od": Z_OKAP_2[1], "z_do": Z_OKAP_3[0], "rozstaw": 0.12, "b": 0.04,
+    {"id": "LAM-S", "elewacja": "S", "linia": [[X2o - 0.15, -EXT], [xE + EXT + 0.15, -EXT]], "z_od": Z_OKAP_2[1], "z_do": Z_LAM_DO, "rozstaw": 0.12, "b": 0.04,
      "h": 0.08, "odsuniecie": 0.15, "mat": "DREWNO_TERMO", "uwagi": "bryła A — pionowe lamele na 2 ryglach, konsole z przekładką (χ); stała osłona okien P2"},
-    {"id": "LAM-W", "elewacja": "W", "linia": [[X2o, -EXT - 0.15], [X2o, y3 + EXT]], "z_od": Z_OKAP_2[1], "z_do": Z_OKAP_3[0], "rozstaw": 0.12, "b": 0.04,
+    {"id": "LAM-W", "elewacja": "W", "linia": [[X2o, -EXT - 0.15], [X2o, y3 + EXT]], "z_od": Z_OKAP_2[1], "z_do": Z_LAM_DO, "rozstaw": 0.12, "b": 0.04,
      "h": 0.08, "odsuniecie": 0.15, "mat": "DREWNO_TERMO", "uwagi": "czoło wspornika bryły A"},
-    {"id": "LAM-E", "elewacja": "E", "linia": [[xE + EXT, -EXT - 0.15], [xE + EXT, y3 + EXT]], "z_od": Z_OKAP_2[1], "z_do": Z_OKAP_3[0], "rozstaw": 0.12, "b": 0.04,
+    {"id": "LAM-E", "elewacja": "E", "linia": [[xE + EXT, -EXT - 0.15], [xE + EXT, y3 + EXT]], "z_od": Z_OKAP_2[1], "z_do": Z_LAM_DO, "rozstaw": 0.12, "b": 0.04,
      "h": 0.08, "odsuniecie": 0.15, "mat": "DREWNO_TERMO", "uwagi": "czoło wsch. bryły A"},
     {"id": "LAM-P0", "elewacja": "S", "linia": [[5.90, 3.80], [8.70, 3.80]], "z_od": 0.0, "z_do": 2.10, "rozstaw": 0.10, "b": 0.03, "h": 0.06,
      "odsuniecie": 0.0, "mat": "DAB_LAMELA", "uwagi": "ekran wewnętrzny P0 wydzielający pas komunikacyjny przy schodach (przeszczep J1 z W3)"},
@@ -1380,7 +1381,9 @@ _ZPV_D1 = max(pokrycie("SD1", Z_ST3, min(math.hypot(cx - wx, cy - wy) for wx, wy
 _ZPV_D4 = pokrycie("DZ1", Z_DG, 99.0) + 0.45                                         # stelaż biosolarny ≤ 0,45 m nad hydroizolacją
 assert len(_MOD_D1) + len(_MOD_D4) == 15 and _ZPV_D1 <= _KOR_D1 and _ZPV_D4 <= Z_RAMA_D[1], (len(_MOD_D1), len(_MOD_D4), _ZPV_D1, _KOR_D1)
 ENERGIA = {
-    "n50": 1.0, "osoby": 5, "pojemnosc": "ciezka", "chlodzenie": False, "psi_wariant": "domyslna",
+    "n50": 1.0, "n50_uwagi": "n50 ≤ 1,0 h⁻¹ — WYMAGANIE: obowiązkowa próba szczelności PN-EN ISO 9972 przed odbiorem (opis PB/PT); bez próby "
+                             "metodologia EP przyjmuje n50 wyższe — zapas EP bez PV maleje (weryfikacja V2 N-12)",
+    "osoby": 5, "pojemnosc": "ciezka", "chlodzenie": False, "psi_wariant": "domyslna",
     "grunt": {"typ": "piasek", "lambda": 2.0, "izolacja_obwodowa": {"typ": "pozioma", "D": 1.0, "d_n": 0.10, "lam_n": 0.036}},
     # wydanie (N-1, N-2): wyrzutnia z wylotem PIONOWYM na D1, czerpnia na D3 (≥ 1 m niżej, ≥ 6 m) — patrz komentarz przy CZERPNIA;
     # wywiewka K1 z jawną rzędną (pokrycie lokalne + 0,50) — wysokość zabudowy bez założeń (K-3)
@@ -1660,7 +1663,9 @@ DZIALKA = {
     "drzewa": [
         # K-2 (runda 2): lipa przesunięta poza niecką NCH-1 — rzut dojrzałej korony (r 3,5 m) ≥ 1,0 m od krawędzi niecki (W-144,
         # odległość liczona od korony, nie od pnia); 7,2 m od granicy pd., 9,9 m od DR6
-        {"id": "DR1", "xy": d(4.0, -22.0), "gat": "lipa drobnolistna (soliter na osi ogrodu)", "sr_korony": 7.0, "istn": False, "do_wyciecia": False, "wys": 10.0},
+        # wydanie (V1-13, V2 N-14): korona dojrzałej lipy przyjęta ZACHOWAWCZO 10 m [DO WERYFIKACJI — dendrolog / katalog szkółkarski];
+        # pień przesunięty na pd. (y −23,5): krawędź korony 1,5 m od NCH-1 (≥ 1,0 m — W-144), 9,2 m od granicy pd.
+        {"id": "DR1", "xy": d(4.0, -23.5), "gat": "lipa drobnolistna (soliter na osi ogrodu)", "sr_korony": 10.0, "istn": False, "do_wyciecia": False, "wys": 12.0},
         {"id": "DR2", "xy": d(-5.0, -8.0), "gat": "klon polny (cień letni tarasu zach.)", "sr_korony": 5.0, "istn": False, "do_wyciecia": False, "wys": 8.0},
         {"id": "DR3", "xy": d(-4.5, -14.0), "gat": "grab pospolity", "sr_korony": 4.5, "istn": False, "do_wyciecia": False, "wys": 7.0},
         {"id": "DR4", "xy": d(16.0, -14.0), "gat": "jabłoń", "sr_korony": 4.0, "istn": False, "do_wyciecia": False, "wys": 5.0},
@@ -1729,7 +1734,8 @@ DZIALKA.update({
         "obiekty": [
             {"id": "ZKP", "xy": [19.40, 49.80], "opis": "złącze kablowo-pomiarowe we wnęce ogrodzenia, PWP przy wejściu (W-190)"},
             {"id": "SR1", "xy": [13.00, 43.80], "opis": "studzienka rewizyjna kanalizacji Ø425 (poza garażem — W-118)"},
-            {"id": "PC-JZ", "xy": d(16.80, -1.05), "opis": "jednostka zewn. PC monoblok R290 w osłonie lamelowej z ekranem akustycznym od tarasu; "
+            {"id": "PC-JZ", "xy": d(16.80, -1.05), "strefa_r": 1.0, "wym": [1.20, 0.45], "wym_zrodlo": "obrys przykładowy [DO UZUPEŁNIENIA wg DTR wybranego urządzenia]", "oslona": "OS-PC (budynek.yaml: elementy_zewn)",
+             "opis": "jednostka zewn. PC monoblok R290 w osłonie lamelowej z ekranem akustycznym od tarasu; "
              "7,0 m od granicy E (≥ 6,0 — W-024); strefa R290 1,0 m bez otworów, wpustów i studzienek (W-156)"},
             {"id": "SEP-1", "xy": d(19.80, 11.975), "opis": "osadnik z separatorem substancji ropopochodnych (mini, klasa I, PN-EN 858) dla OL-1/OL-4 "
              "(podjazd, posadzka garażu); odpływ do niecki NT-E, poza zbiornikiem retencyjnym (audyt A1, W-114)"},

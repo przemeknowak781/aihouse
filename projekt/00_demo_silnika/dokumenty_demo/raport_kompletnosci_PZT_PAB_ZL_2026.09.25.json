@@ -19,7 +19,7 @@
       "podstawa": "RPB § 2b ust. 3; W-300",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "3.42 MB (limit 150 MB)"
+      "szczegoly": "3.61 MB (limit 150 MB)"
     },
     {
       "id": "F-03",
@@ -217,7 +217,7 @@
       "podstawa": "RPB § 15 ust. 1–2, § 9 ust. 5; PZT-01",
       "status": "DO UZUPEŁNIENIA",
       "obowiazkowa": true,
-      "szczegoly": "PZT-01 — Plan zagospodarowania działki na mapie do celów projektowych (1:500); tylko arkusz zastępczy — rysunek niedołączony"
+      "szczegoly": "PZT-01 — Plan zagospodarowania działki na mapie do celów projektowych (1:500); tylko arkusz zastępczy — rysunek niedołączony; podkład przykładowy — [DO UZUPEŁNIENIA: mapa do celów projektowych] (RPB § 15 ust. 1)"
     },
     {
       "id": "C1-1-19",
@@ -548,9 +548,9 @@
       "element": "ZL",
       "opis": "Decyzja zarządcy drogi o lokalizacji zjazdu (albo strona zastępcza)",
       "podstawa": "PB art. 33 ust. 2 pkt 1; u.d.p. art. 29 ust. 3a; W-020",
-      "status": "OK",
+      "status": "DO UZUPEŁNIENIA",
       "obowiazkowa": true,
-      "szczegoly": ""
+      "szczegoly": "strona zastępcza [DOKUMENT ZEWNĘTRZNY] — decyzja do dołączenia"
     },
     {
       "id": "C1-3-11",
@@ -572,7 +572,7 @@
     }
   ],
   "znaczniki": {
-    "DO UZUPEŁNIENIA": 122,
+    "DO UZUPEŁNIENIA": 194,
     "DOKUMENT ZEWNĘTRZNY": 2,
     "DANE PRZYKŁADOWE": 60,
     "ZAŁ": 6,
@@ -587,7 +587,7 @@
       "[DO UZUPEŁNIENIA: kod TERYT jedn. ewid. WWPPGG_R]": 8,
       "[DO UZUPEŁNIENIA: imię i nazwisko lub nazwa inwestora]": 8,
       "[DO UZUPEŁNIENIA: adres inwestora]": 8,
-      "[DO UZUPEŁNIENIA: imię i nazwisko]": 32,
+      "[DO UZUPEŁNIENIA: imię i nazwisko]": 68,
       "[DO UZUPEŁNIENIA: nr uprawnień budowlanych]": 32,
       "[DO UZUPEŁNIENIA: miejscowość]": 3,
       "[DO UZUPEŁNIENIA: data złożenia oświadczenia z art. 102a PB]": 2,
@@ -601,6 +601,7 @@
       "[DOKUMENT ZEWNĘTRZNY – do dołączenia: opinia geotechniczna, geotechnik z uprawnieniami, rozp. 2012/463 § 8]": 1,
       "[DO UZUPEŁNIENIA: dane wyrobu E-13]": 1,
       "[DO UZUPEŁNIENIA: deklaracje producenta, E-13]": 1,
+      "[DO UZUPEŁNIENIA: specjalność, nr uprawnień]": 36,
       "[DO UZUPEŁNIENIA: adres projektanta]": 1,
       "[NZW]": 1,
       "[DOKUMENT ZEWNĘTRZNY – do dołączenia: Decyzja zarządcy drogi o lokalizacji zjazdu z drogi gminnej 1KDD, Wójt Gminy Przykładowo (fikcyjna) — zarządca drogi gminnej, art. 29 ust. 1 i 3a ustawy o drogach publicznych (t.j. Dz.U. 2025 poz. 889); PB art. 33 ust. 2 pkt 1]": 1,
@@ -629,16 +630,16 @@
       "arkusze": 0
     }
   },
-  "rozmiar_mb": 3.4209671020507812,
+  "rozmiar_mb": 3.609419,
   "strony": 41,
   "podsumowanie": {
     "status": "PRZYKŁAD – NIE DO ZŁOŻENIA",
-    "OK": 54,
+    "OK": 53,
     "BRAK": 0,
-    "DO UZUPEŁNIENIA": 8,
+    "DO UZUPEŁNIENIA": 9,
     "N/D": 1,
     "OSTRZEŻENIE": 0,
-    "znaczniki_do_uzupelnienia": 122,
+    "znaczniki_do_uzupelnienia": 194,
     "znaczniki_dokument_zewnetrzny": 2,
     "znaczniki_dane_przykladowe": 60
   }

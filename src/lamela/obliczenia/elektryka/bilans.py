@@ -96,6 +96,9 @@ class WynikBilans:
     warunki: list
     kroki: list
     zalozenia: list
+    wsp_dlm: float = 1.0          # współczynnik ograniczenia odbiorników sterowanych (wspólny dla P_s,DLM i faz)
+    I_nast: float = 0.0           # nastawa prądu fazowego DLM [A]
+    P_lim: float = 0.0            # nastawa mocy DLM [kW]
 
     def do_dict(self) -> dict:
         return {"P_inst_kW": round(self.P_inst, 1), "P_szczyt_bez_DLM_kW": round(self.P_s_bez, 1),
@@ -390,9 +393,12 @@ def bilans_mocy(dane: DaneBudynku, odbiorniki: list[Odbiornik], par: ParametryBi
     ]
     zal = ["Współczynniki jednoczesności: " + ", ".join(f"{k} {f(v, 1)}" for k, v in par.k_j.items()) + " [ZAŁ].",
            f"Obwody gniazd: moc umowna {f(par.gniazda_P_obwod, 1)} kW/obwód; oświetlenie LED {f(par.oswietlenie_W_m2, 0)} W/m² [ZAŁ].",
-           "DLM (dynamiczne zarządzanie mocą): ograniczenie mocy ładowarki EV i blokada grzałki PC przy przekroczeniu mocy przyłączeniowej."]
+           "DLM (dynamiczne zarządzanie mocą): ograniczenie mocy ładowarki EV i blokada grzałki PC przy przekroczeniu mocy przyłączeniowej; "
+           f"nastawa DLM {f(100 * (1 - par.zapas_DLM), 0)} % granicy (moc przyłączeniowa, prąd zabezpieczenia przedlicznikowego) — "
+           "zapas regulacji na czas reakcji i histerezę [ZAŁ]."]
     return WynikBilans(dane=dane, par=par, odbiorniki=odbiorniki, P_inst=P_inst, P_s_bez=P_bez, P_s_dlm=P_dlm, P_przyl=P_przyl,
-                       I_zab=I_zab, I_B=I_B, fazy=fazy, asymetria=asym, sep=sep, warunki=war, kroki=kroki, zalozenia=zal)
+                       I_zab=I_zab, I_B=I_B, fazy=fazy, asymetria=asym, sep=sep, warunki=war, kroki=kroki, zalozenia=zal,
+                       wsp_dlm=wsp_dlm, I_nast=I_nast, P_lim=P_lim)
 
 
 def _raport(w: WynikBilans) -> Raport:

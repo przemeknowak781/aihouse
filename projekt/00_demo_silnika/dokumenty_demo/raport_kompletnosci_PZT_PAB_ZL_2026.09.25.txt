@@ -1,16 +1,16 @@
 RAPORT KOMPLETNOŚCI — PZT_PAB_ZL_2026.09.25.pdf
 Lista kontrolna: TOM I — PZT + PAB + ZL w jednym pliku (rejestr C.1)
 Status: PRZYKŁAD – NIE DO ZŁOŻENIA
-Pozycje: OK 54 · BRAK 0 · DO UZUPEŁNIENIA 8 · N/D 1 · OSTRZEŻENIE 0
-Znaczniki: [DO UZUPEŁNIENIA] ×122, [DOKUMENT ZEWNĘTRZNY] ×2, [DANE PRZYKŁADOWE] ×60
-Plik: 41 stron, 3.42 MB
+Pozycje: OK 53 · BRAK 0 · DO UZUPEŁNIENIA 9 · N/D 1 · OSTRZEŻENIE 0
+Znaczniki: [DO UZUPEŁNIENIA] ×194, [DOKUMENT ZEWNĘTRZNY] ×2, [DANE PRZYKŁADOWE] ×60
+Plik: 41 stron, 3.61 MB
 
   element PZT: strony 4–13 (opis 7, arkusze 3)
   element PAB: strony 14–33 (opis 8, arkusze 12)
   element ZL: strony 34–41 (opis 8, arkusze 0)
 
 ✓ F-01    [  *] OK               Nazwa pliku wg zał. 1 RPB (PZT_PAB_ZL_rrrr.mm.dd.pdf) (RPB § 2b ust. 4, zał. 1; W-301) — nazwa zgodna z zał. 1 RPB (PZT_PAB_ZL)
-✓ F-02    [  *] OK               Rozmiar pliku ≤ 150 MB (RPB § 2b ust. 3; W-300) — 3.42 MB (limit 150 MB)
+✓ F-02    [  *] OK               Rozmiar pliku ≤ 150 MB (RPB § 2b ust. 3; W-300) — 3.61 MB (limit 150 MB)
 ✓ F-03    [  *] OK               Część rysunkowa w postaci wektorowej (raster tylko jako podkład mapy) (RPB § 2b ust. 2; W-300) — 15 arkuszy wektorowych
 ✓ F-04    [  *] OK               Metadane PDF (tytuł, temat) (dobra praktyka; AUD-RYS) — Title: „Dom LAMELA — TOM I: PZT + PAB + ZL (PRZYKŁAD – NIE DO ZŁOŻENIA)”
 ✓ F-05    [  *] OK               PT nie jest objęty wspólną oprawą z PZT/PAB (RPB § 5 ust. 3; § 7 ust. 8) — brak PT w pliku
@@ -32,7 +32,7 @@ Plik: 41 stron, 3.42 MB
 ✓ C1-1-15 [PZT] OK               Opis: dane dotyczące warunków ochrony przeciwpożarowej (RPB § 14 pkt 6)
 ✓ C1-1-16 [PZT] OK               Opis: ochrona ludności — „nie dotyczy” z podstawą (RPB § 14 pkt 6a)
 ✓ C1-1-17 [PZT] OK               Opis: informacja o obszarze oddziaływania obiektu (RPB § 14 pkt 8, § 18; W-012)
-… C1-1-18 [PZT] DO UZUPEŁNIENIA  Rysunek: plan zagospodarowania na mapie do celów projektowych (≥ 1:500) (RPB § 15 ust. 1–2, § 9 ust. 5; PZT-01) — PZT-01 — Plan zagospodarowania działki na mapie do celów projektowych (1:500); tylko arkusz zastępczy — rysunek niedołączony
+… C1-1-18 [PZT] DO UZUPEŁNIENIA  Rysunek: plan zagospodarowania na mapie do celów projektowych (≥ 1:500) (RPB § 15 ust. 1–2, § 9 ust. 5; PZT-01) — PZT-01 — Plan zagospodarowania działki na mapie do celów projektowych (1:500); tylko arkusz zastępczy — rysunek niedołączony; podkład przykładowy — [DO UZUPEŁNIENIA: mapa do celów projektowych] (RPB § 15 ust. 1)
 … C1-1-19 [PZT] DO UZUPEŁNIENIA  Rysunek: plan szczegółowy — wymiary, odległości (0,01 m), rzędne (1:200) (RPB § 15 ust. 2 pkt 3, ust. 3; § 17 ust. 1; PZT-02) — PZT-02 — Plan szczegółowy — wymiary, odległości, rzędne (1:200); tylko arkusz zastępczy — rysunek niedołączony
 … C1-1-20 [PZT] DO UZUPEŁNIENIA  Rysunek: koordynacyjny uzbrojenia terenu (RPB § 17 ust. 2; PZT-03) — PZT-03 — Rysunek koordynacyjny uzbrojenia terenu (1:200); tylko arkusz zastępczy — rysunek niedołączony
 ✓ C1-1-21 [PZT] OK               Skale rysunków PZT nie mniejsze niż 1:500 (RPB § 9 ust. 5; W-306) — 3 rysunki w skali nie mniejszej niż 1:500
@@ -69,12 +69,13 @@ Plik: 41 stron, 3.42 MB
 ✓ C1-3-07 [ ZL] OK               Informacja BIOZ pkt 4: przewidywane zagrożenia (skala, rodzaj, miejsce, czas); wskazanie planu BIOZ (rozp. BIOZ § 2 ust. 3 pkt 4, § 6; PB art. 21a)
 ✓ C1-3-08 [ ZL] OK               Informacja BIOZ pkt 5: instruktaż pracowników (rozp. BIOZ § 2 ust. 3 pkt 5)
 ✓ C1-3-09 [ ZL] OK               Informacja BIOZ pkt 6: środki techniczne i organizacyjne, komunikacja ewakuacyjna (rozp. BIOZ § 2 ust. 3 pkt 6)
-✓ C1-3-10 [ ZL] OK               Decyzja zarządcy drogi o lokalizacji zjazdu (albo strona zastępcza) (PB art. 33 ust. 2 pkt 1; u.d.p. art. 29 ust. 3a; W-020)
+… C1-3-10 [ ZL] DO UZUPEŁNIENIA  Decyzja zarządcy drogi o lokalizacji zjazdu (albo strona zastępcza) (PB art. 33 ust. 2 pkt 1; u.d.p. art. 29 ust. 3a; W-020) — strona zastępcza [DOKUMENT ZEWNĘTRZNY] — decyzja do dołączenia
 ✓ C1-3-11 [ ZL] OK               Oświadczenie projektanta IS o sieci ciepłowniczej (formalnie załącznik wniosku) (PB art. 33 ust. 2 pkt 10; W-158)
 – C1-3-12 [ ZL] N/D              Oświadczenie zarządcy drogi krajowej/wojewódzkiej (RPB § 5 ust. 1 pkt 4 lit. b) — nie dotyczy — droga gminna 1KDD
 
 Pola do uzupełnienia i dokumenty zewnętrzne (wystąpienia):
-   32 × [DO UZUPEŁNIENIA: imię i nazwisko]
+   68 × [DO UZUPEŁNIENIA: imię i nazwisko]
+   36 × [DO UZUPEŁNIENIA: specjalność, nr uprawnień]
    32 × [DO UZUPEŁNIENIA: nr uprawnień budowlanych]
     8 × [DO UZUPEŁNIENIA: adres inwestora]
     8 × [DO UZUPEŁNIENIA: imię i nazwisko lub nazwa inwestora]

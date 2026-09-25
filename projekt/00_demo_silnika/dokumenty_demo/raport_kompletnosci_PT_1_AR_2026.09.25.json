@@ -19,7 +19,7 @@
       "podstawa": "RPB § 2b ust. 3",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "1.49 MB (limit 150 MB)"
+      "szczegoly": "1.58 MB (limit 150 MB)"
     },
     {
       "id": "F-03",
@@ -112,6 +112,24 @@
       "szczegoly": "9 rysunków w skali nie mniejszej niż 1:100"
     },
     {
+      "id": "C2-09",
+      "element": "PT",
+      "opis": "Dane dotyczące warunków ochrony ludności (w PT — „nie dotyczy” z podstawą)",
+      "podstawa": "RPB § 23 pkt 12 (Dz.U. 2026 poz. 597 § 1 pkt 6)",
+      "status": "BRAK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C2-10",
+      "element": "*",
+      "opis": "Metryki arkuszy: projektant (dane lub [DO UZUPEŁNIENIA]), sprawdzający (osoba lub „nie dotyczy (art. 20 ust. 3 pkt 2 PB)”)",
+      "podstawa": "RPB § 10 ust. 1 pkt 3; W-305, W-320",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "9 tabliczek z wypełnioną metryką"
+    },
+    {
       "id": "C2-AR-01",
       "element": "PT",
       "opis": "Rozwiązania konstrukcyjno-materiałowe przegród zewnętrznych i wewnętrznych",
@@ -167,7 +185,7 @@
     }
   ],
   "znaczniki": {
-    "DO UZUPEŁNIENIA": 20,
+    "DO UZUPEŁNIENIA": 74,
     "DOKUMENT ZEWNĘTRZNY": 0,
     "DANE PRZYKŁADOWE": 17,
     "ZAŁ": 4,
@@ -182,7 +200,7 @@
       "[DO UZUPEŁNIENIA: kod TERYT jedn. ewid. WWPPGG_R]": 2,
       "[DO UZUPEŁNIENIA: imię i nazwisko lub nazwa inwestora]": 2,
       "[DO UZUPEŁNIENIA: adres inwestora]": 2,
-      "[DO UZUPEŁNIENIA: imię i nazwisko]": 3,
+      "[DO UZUPEŁNIENIA: imię i nazwisko]": 30,
       "[DO UZUPEŁNIENIA: nr uprawnień budowlanych]": 3,
       "[DO UZUPEŁNIENIA: miejscowość]": 1,
       "[DO UZUPEŁNIENIA: nr i data decyzji o pozwoleniu na budowę, organ]": 1,
@@ -190,7 +208,8 @@
       "[DO UZUPEŁNIENIA: potwierdzenie wpisu w e-CRUB albo dołączenie kopii]": 1,
       "[ZAŁ]": 4,
       "[DO UZUPEŁNIENIA: deklaracje producenta, E-13]": 1,
-      "[NZW]": 1
+      "[NZW]": 1,
+      "[DO UZUPEŁNIENIA: specjalność, nr uprawnień]": 27
     }
   },
   "elementy": {
@@ -201,16 +220,16 @@
       "arkusze": 9
     }
   },
-  "rozmiar_mb": 1.4903907775878906,
+  "rozmiar_mb": 1.581119,
   "strony": 15,
   "podsumowanie": {
     "status": "NIEKOMPLETNY",
-    "OK": 14,
-    "BRAK": 1,
+    "OK": 15,
+    "BRAK": 2,
     "DO UZUPEŁNIENIA": 2,
     "N/D": 1,
     "OSTRZEŻENIE": 0,
-    "znaczniki_do_uzupelnienia": 20,
+    "znaczniki_do_uzupelnienia": 74,
     "znaczniki_dokument_zewnetrzny": 0,
     "znaczniki_dane_przykladowe": 17
   }

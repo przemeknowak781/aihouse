@@ -11,6 +11,18 @@ def _k(t) -> str:
     return str(t).replace("|", "\\|").replace("\n", " ")
 
 
+def _podsumowanie_uzup(r, kontrole: list) -> str:
+    """Rozbicie statusu DO UZUPEŁNIENIA: dane osobowe na stronach tytułowych a treść zastępcza (dane przykładowe,
+    strony zastępcze dokumentów, analizy bez danych wejściowych, metryki rysunków) — rejestr E.1."""
+    du = [p for p in r.pozycje if p.status == "DO UZUPEŁNIENIA"]
+    osob = [p.id for p in du if "stronie tytułowej" in (p.szczegoly or "")]
+    zast = [f"{p.id} ({p.szczegoly.split(';')[-1].strip()})" for p in du if p.id not in osob]
+    zast += [f"{k['id']} ({k['szczegoly']})" for k in kontrole if k["status"] == "DO UZUPEŁNIENIA"]
+    return (f"Pozycje „DO UZUPEŁNIENIA”: {len(du)} — dane osobowe i identyfikatory na stronach tytułowych "
+            f"({len(osob)}: {', '.join(osob) or '—'}); treść zastępcza, której nie wolno traktować jako kompletnej "
+            f"({len(zast)}): " + ("; ".join(zast) if zast else "—") + ".")
+
+
 def raport_md(r, w, kontrole: list, wekt: list, zrodla: dict, otwarte: dict) -> str:
     s = r.podsumowanie()
     L = [f"# Raport kompletności — {r.plik}", "",
@@ -23,6 +35,7 @@ def raport_md(r, w, kontrole: list, wekt: list, zrodla: dict, otwarte: dict) -> 
          f"| {s['OK']} | {s['BRAK']} | {s['DO UZUPEŁNIENIA']} | {s['N/D']} | {s['OSTRZEŻENIE']} | "
          f"{s['znaczniki_do_uzupelnienia']} | {s['znaczniki_dokument_zewnetrzny']} | "
          f"{s['znaczniki_dane_przykladowe']} |", "",
+         _podsumowanie_uzup(r, kontrole), "",
          f"Plik: `projekt/wydanie/{w.nazwa}` — {w.strony} stron, {w.rozmiar_mb:.2f} MB; nazwa wg zał. 1 RPB: "
          f"{'zgodna' if w.nazwa_zgodna else 'NIEZGODNA'}.", "",
          "## 1. Skład tomu (RPB § 5 ust. 1, 3–4; § 7 ust. 7 pkt 1)", "",

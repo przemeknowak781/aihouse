@@ -1,14 +1,14 @@
 RAPORT KOMPLETNOŚCI — PT_1_AR_2026.09.25.pdf
 Lista kontrolna: PT-1 AR — projekt techniczny, architektura (rejestr C.2)
 Status: NIEKOMPLETNY
-Pozycje: OK 14 · BRAK 1 · DO UZUPEŁNIENIA 2 · N/D 1 · OSTRZEŻENIE 0
-Znaczniki: [DO UZUPEŁNIENIA] ×20, [DOKUMENT ZEWNĘTRZNY] ×0, [DANE PRZYKŁADOWE] ×17
-Plik: 15 stron, 1.49 MB
+Pozycje: OK 15 · BRAK 2 · DO UZUPEŁNIENIA 2 · N/D 1 · OSTRZEŻENIE 0
+Znaczniki: [DO UZUPEŁNIENIA] ×74, [DOKUMENT ZEWNĘTRZNY] ×0, [DANE PRZYKŁADOWE] ×17
+Plik: 15 stron, 1.58 MB
 
   element PT: strony 1–15 (opis 6, arkusze 9)
 
 ✓ F-01     [  *] OK               Nazwa pliku wg zał. 1 RPB (PT_x_y_rrrr.mm.dd.pdf) (RPB zał. 1; W-301) — nazwa zgodna z zał. 1 RPB (PT)
-✓ F-02     [  *] OK               Rozmiar pliku ≤ 150 MB (RPB § 2b ust. 3) — 1.49 MB (limit 150 MB)
+✓ F-02     [  *] OK               Rozmiar pliku ≤ 150 MB (RPB § 2b ust. 3) — 1.58 MB (limit 150 MB)
 ✓ F-03     [  *] OK               Część rysunkowa wektorowa (RPB § 2b ust. 2) — 9 arkuszy wektorowych
 ✓ F-05     [  *] OK               Tom PT w osobnym pliku (bez wspólnej oprawy z PZT/PAB/ZL) (RPB § 5 ust. 3) — plik zawiera tylko tom PT
 … C2-01    [ PT] DO UZUPEŁNIENIA  Strona tytułowa: „Projekt techniczny”, zamierzenie, kategoria I, inwestor (RPB § 7 ust. 2 pkt 1–2) — pola [DO UZUPEŁNIENIA] na stronie tytułowej
@@ -19,6 +19,8 @@ Plik: 15 stron, 1.49 MB
 ✓ C2-06    [ PT] OK               Oświadczenie projektanta PT (brzmienie art. 41 ust. 4a pkt 2 PB) (PB art. 34 ust. 3d pkt 3, art. 41 ust. 4a pkt 2)
 ✓ C2-07    [ PT] OK               Dane dotyczące warunków ochrony przeciwpożarowej stosownie do zakresu (RPB § 23 pkt 10)
 ✓ C2-08    [ PT] OK               Skale rysunków nie mniejsze niż 1:100 (RPB § 9 ust. 3) — 9 rysunków w skali nie mniejszej niż 1:100
+✗ C2-09    [ PT] BRAK             Dane dotyczące warunków ochrony ludności (w PT — „nie dotyczy” z podstawą) (RPB § 23 pkt 12 (Dz.U. 2026 poz. 597 § 1 pkt 6))
+✓ C2-10    [  *] OK               Metryki arkuszy: projektant (dane lub [DO UZUPEŁNIENIA]), sprawdzający (osoba lub „nie dotyczy (art. 20 ust. 3 pkt 2 PB)”) (RPB § 10 ust. 1 pkt 3; W-305, W-320) — 9 tabliczek z wypełnioną metryką
 ✓ C2-AR-01 [ PT] OK               Rozwiązania konstrukcyjno-materiałowe przegród zewnętrznych i wewnętrznych (RPB § 23 pkt 4)
 ✓ C2-AR-02 [ PT] OK               Obliczenia U / ψ / f_Rsi przegród i detali (W-243…W-250)
 ✓ C2-AR-03 [ PT] OK               Zestawienie stolarki (U, g, szczelność, otwieranie) (W-317)
@@ -27,7 +29,8 @@ Plik: 15 stron, 1.49 MB
 – C2-AR-06 [ PT] N/D              Analiza akustyczna § 23 pkt 4a (RPB § 23 pkt 4a) — nie dotyczy — dom wolnostojący z 1 lokalem (W-231)
 
 Pola do uzupełnienia i dokumenty zewnętrzne (wystąpienia):
-    3 × [DO UZUPEŁNIENIA: imię i nazwisko]
+   30 × [DO UZUPEŁNIENIA: imię i nazwisko]
+   27 × [DO UZUPEŁNIENIA: specjalność, nr uprawnień]
     3 × [DO UZUPEŁNIENIA: nr uprawnień budowlanych]
     2 × [DO UZUPEŁNIENIA: adres inwestora]
     2 × [DO UZUPEŁNIENIA: imię i nazwisko lub nazwa inwestora]

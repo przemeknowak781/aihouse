@@ -516,6 +516,82 @@ def test_podglad_www():
 
 
 # ==================================================================================================
+# ==================================================================================================
+# Wyposażenie zewnętrzne elewacji `elementy_zewn` (decyzja Inwestora K-13 — kratownica pnączy, osłona lamelowa urządzenia)
+def _elem_zewn_raw(odsuniecie=0.15, rozstaw=0.10, sciana=None):
+    raw = _base()
+    m = Model(_load_raw(B_TEST), None)
+    w = next(x for x in m.sciany() if x.ext_side is not None and x.L > 3.0)
+    tf = w.face_t(w.ext_side, "all")
+    a, b = w.pt(0.5, tf), w.pt(w.L - 0.5, tf)
+    n = w.pt(w.L / 2, tf + w.ext_side * 1.0) - w.pt(w.L / 2, tf)
+    el = ("E" if n[0] > 0.5 else "W" if n[0] < -0.5 else "N" if n[1] > 0 else "S")
+    o = w.pt(w.L / 2, tf + w.ext_side * 1.5)
+    raw["elementy_zewn"] = [
+        {"id": "KR-T", "typ": "kratownica_pnacza", "elewacja": el, "sciana": sciana or w.id,
+         "linia": [[float(a[0]), float(a[1])], [float(b[0]), float(b[1])]], "z_od": 0.05, "z_do": 2.50,
+         "odsuniecie": odsuniecie, "oczko": 0.30, "pret": 0.012, "rama": 0.04, "mat": raw["sciany"][0].get("mat", None) or
+         next(iter(raw["materialy"])), "konsole": {"xz": [[float((a[0] + b[0]) / 2) if abs(b[0] - a[0]) > abs(b[1] - a[1])
+                                                            else float((a[1] + b[1]) / 2), 1.0]]}, "pnacza": {"rodzaj": "test"}},
+        {"id": "OS-T", "typ": "oslona_lamelowa", "linia": [[float(o[0]) - 1, float(o[1]) - 1], [float(o[0]) - 1, float(o[1]) + 1],
+                                                           [float(o[0]) + 1, float(o[1]) + 1]],
+         "z_od": 0.05, "z_do": 1.2, "rozstaw": rozstaw, "b": 0.04, "h": 0.06, "mat": next(iter(raw["materialy"])),
+         "urzadzenie": {"obrys": [[float(o[0]) - 0.3, float(o[1]) - 0.2], [float(o[0]) + 0.3, float(o[1]) - 0.2],
+                                  [float(o[0]) + 0.3, float(o[1]) + 0.2], [float(o[0]) - 0.3, float(o[1]) + 0.2]], "z_od": 0.0, "z_do": 0.8}}]
+    return raw, w
+
+
+def test_elementy_zewn_walidacja():
+    raw, _ = _elem_zewn_raw()
+    m, e, _ = _errs(raw)
+    assert not any("elementy_zewn" in x for x in e), e
+    assert [x["id"] for x in m.elementy_zewn()] == ["KR-T", "OS-T"]
+    raw, _ = _elem_zewn_raw(odsuniecie=0.0, rozstaw=0.03, sciana="S9-99")
+    _, e, _ = _errs(raw)
+    assert any("odsuniecie" in x for x in e), e                      # kratownica musi być odsunięta od ETICS
+    assert any("ażurowa" in x for x in e), e                        # osłona pełna — niedopuszczalna (R290, przepływ)
+    assert any("S9-99" in x for x in e), e                          # odwołanie do nieistniejącej ściany
+
+
+def test_elementy_zewn_ir():
+    raw, w = _elem_zewn_raw()
+    m = Model(raw, None)
+    I = build_ir(m, otoczenie=False)
+    kr = [p for p in I.prisms if p.id.startswith("KR-T")]
+    parts = {p.meta.get("part") for p in kr}
+    assert {"rama", "pret", "konsola", "pnacza"} <= parts, parts
+    assert sum(1 for p in kr if p.meta.get("part") == "konsola") == 1
+    tf = w.face_t(w.ext_side, "all")
+    face = w.pt(w.L / 2, tf)
+    # płaszczyzna kratownicy (rama) odsunięta od lica o `odsuniecie` — bez styku z ETICS
+    rama = [Polygon(p.polygon) for p in kr if p.meta.get("part") == "rama"]
+    dmin = min(r.distance(Point(*w.pt(0.5 + 0.3, tf))) for r in rama)
+    assert approx(dmin, 0.15, 0.02), dmin
+    assert all(p.kind == "vegetation" and p.meta.get("group") == "otoczenie" for p in kr if p.meta.get("part") == "pnacza")
+    os_ = [p for p in I.prisms if p.id.startswith("OS-T")]
+    assert sum(1 for p in os_ if p.kind == "lamella") > 20 and any(p.kind == "context" for p in os_)
+    # elementy kratownicy nie wchodzą w ścianę
+    sc = unary_union([p.shape() for p in I.prisms if p.kind in ("wall", "insulation") and p.id.startswith(w.id)])
+    assert all(Polygon(p.polygon).intersection(sc).area < 1e-4 for p in kr if p.meta.get("part") != "konsola"), "kolizja z ścianą"
+    assert face is not None
+
+
+def test_elementy_zewn_lamela():
+    """Model „Dom LAMELA” — K-13: kratownica na S0-02, osłona PC, węzeł χ konsol = liczba konsol, PZT i IR."""
+    mb = load_model(ROOT / "model" / "budynek.yaml", ROOT / "model" / "dzialka.yaml")
+    ez = {e["id"]: e for e in mb.elementy_zewn()}
+    assert {"KR-1", "KR-2", "OS-PC"} <= set(ez), ez.keys()
+    n_k = sum(len(e["konsole"]["xz"]) for e in ez.values() if e.get("konsole"))
+    wz = next(w for w in mb.raw["wezly"] if w["id"] == "WZ-17")
+    assert wz["liczba"] == n_k and wz.get("chi") is not None
+    assert all(min(z for _x, z in e["konsole"]["xz"]) >= 0.30 for e in ez.values() if e.get("konsole"))   # nad cokołem
+    I = build_ir(mb, otoczenie=False)
+    assert any(p.id.startswith("KR-1") and p.kind == "railing" for p in I.prisms)
+    assert any(p.id.startswith("OS-PC") and p.kind == "lamella" for p in I.prisms)
+    os_ = ez["OS-PC"]
+    assert os_["z_od"] >= -0.30 and os_["rozstaw"] > os_["b"]                 # prześwit przy terenie, ażur
+
+
 def main(argv=None):
     import argparse
     ap = argparse.ArgumentParser()

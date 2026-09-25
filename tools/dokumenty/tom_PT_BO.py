@@ -87,6 +87,44 @@ def rel(p: Path) -> str:
         return str(p)
 
 
+# Opis źródeł zrozumiały dla czytelnika PT (kierownik budowy, organ) — bez ścieżek plików i identyfikatorów kodu
+# (weryfikacja PT, D-2). Stosowane do całej treści części opisowej, także do dokumentów zespołu BO wstawianych w tom.
+ZRODLA_OPIS = [
+    (r"Plik generowany (?:automatycznie )?przez `lamela\.views\.[\w.]+`(?: \([^)]*\))?\s*(?:przy rysowaniu arkuszy)?\.?",
+     "Zestawienie generowane automatycznie z modelu budynku przy rysowaniu arkuszy."),
+    (r"Lista generowana automatycznie przez `lamela\.views\.[\w.]+`", "Lista generowana automatycznie"),
+    (r"\s*\(test `tools/[^`]+`\)", " (test kontrolny programu obliczeń)"),
+    (r"\(moduł `konstrukcja_dane\.rejestruj`\)\s*", ""),
+    (r"`AnalizaKonstrukcji\.brak_danych`", "braki zgłoszone przez program obliczeń"),
+    (r"`?lamela\.views\.[\w.]+`?", "program rysunkowy projektu"),
+    (r"(?:biblioteki |biblioteka |moduł obliczeń |moduł )?`?lamela\.obliczenia\.[\w.]+`?(?: 1\.0)?", "program obliczeń konstrukcji"),
+    (r"`?tools/[\w/]+\.py`?", "program generujący model"),
+    (r"`?(?:projekt/04_PT_konstrukcja/)?REKOMENDACJE_MODEL\.md`?", "zalecenia zmian modelu zespołu konstrukcji"),
+    (r"`?(?:projekt/04_PT_konstrukcja/)?BRAKI_DANYCH\.md`?", "wykaz braków danych zespołu konstrukcji"),
+    (r"`?(?:[\w/]+/)?wyniki\.json`?(?: — uwagi)?", "wyniki obliczeń statycznych"),
+    (r"`?(?:[\w/]+/)?obliczenia_statyczne\.md`?", "obliczenia statyczne (rozdz. 4)"),
+    (r"`?(?:[\w/]+/)?plyta_fundamentowa_MES\.md`?", "raport MES płyty fundamentowej (rozdz. 5)"),
+    (r"`?(?:[\w/]+/)?kontrola_zbrojenia\.(?:json|md)`?", "kontrola zbrojenia rysunków (rozdz. 6)"),
+    (r"`?(?:[\w/]+/)?raport_widokow\.json`?", "raport kontroli arkuszy"),
+    (r"`?(?:/[\w/]+/)?(?:model/)?budynek\.yaml`?", "model budynku"),
+    (r"`?(?:model/)?dzialka\.yaml`?", "model działki"),
+    (r"`?(?:model/)?instalacje\.yaml`?", "model instalacji"),
+    (r"`?(?:model/)?arkusze_bo\.yaml`?", "konfiguracja arkuszy konstrukcji"),
+    (r"`?Parametry\.z_wymagan`?", "parametry obliczeń z rejestru wymagań"),
+    (r"energia\.pv(?:\.pola)?", "model — instalacja PV"),
+]
+_RE_ZRODLA = [(re.compile(a), b) for a, b in ZRODLA_OPIS]
+
+
+def jawne(t):
+    """Zastępuje ścieżki i identyfikatory kodu opisem źródła (tekst trafiający do PDF i źródła MD)."""
+    if not isinstance(t, str):
+        return t
+    for rx, zam in _RE_ZRODLA:
+        t = rx.sub(zam, t)
+    return t
+
+
 RE_IMG = re.compile(r"^!\[(?P<cap>[^\]]*)\]\((?P<src>[^)]+)\)\s*$", re.M)
 
 
@@ -104,20 +142,21 @@ class Opis:
 
     def rozdzial(self, tytul: str, tresc: str | None = None, *, poziom: int = 1, podstawa: str | None = None,
                  nowa_strona: bool = False):
-        tresc = textwrap.dedent(tresc).strip() if tresc else None
+        tresc = jawne(textwrap.dedent(tresc).strip()) if tresc else None
         self.dok.rozdzial(tytul, tresc, poziom=poziom, podstawa=podstawa, nowa_strona=nowa_strona)
         self.md.append(f"{'#' * (poziom + 1)} {tytul}" + (f" — {podstawa}" if podstawa else ""))
         if tresc:
             self.md.append(tresc)
 
     def tekst(self, tresc: str):
-        tresc = textwrap.dedent(tresc).strip()
+        tresc = jawne(textwrap.dedent(tresc).strip())
         self.dok.markdown(tresc)
         self.md.append(tresc)
 
     def wniosek(self, tresc: str, alarm: bool = False):
-        self.dok.wniosek(textwrap.dedent(tresc).strip(), alarm=alarm)
-        self.md.append("> " + textwrap.dedent(tresc).strip().replace("\n", "\n> "))
+        tresc = jawne(textwrap.dedent(tresc).strip())
+        self.dok.wniosek(tresc, alarm=alarm)
+        self.md.append("> " + tresc.replace("\n", "\n> "))
 
     def obraz(self, plik: Path, podpis: str, szerokosc: str | None = None):
         self.dok.obraz(plik, podpis=podpis, szerokosc=szerokosc)
@@ -128,6 +167,9 @@ class Opis:
         self.md.append(f"*[Wykres: {podpis} — w PDF]*")
 
     def tabela(self, wiersze: list, *, tytul: str, uwagi=None, zrodlo: str | None = None, **kw):
+        wiersze = [jawne(w) if isinstance(w, str) else {k: jawne(v) for k, v in w.items()} for w in wiersze]
+        tytul, zrodlo = jawne(tytul), jawne(zrodlo)
+        uwagi = jawne(uwagi) if isinstance(uwagi, str) else [jawne(u) for u in (uwagi or [])] or None
         self.dok.tabela(wiersze, tytul=tytul, uwagi=uwagi, zrodlo=zrodlo, **kw)
         self.n_tab += 1
         kol = [k for k in (next((w for w in wiersze if isinstance(w, dict)), {}) or {}) if not k.startswith("_")]
@@ -147,7 +189,7 @@ class Opis:
         """Wstawia gotowy dokument Markdown (np. obliczenia statyczne biblioteki): nagłówki → rozdziały numerowane,
         obrazy ``![podpis](rys/…)`` → ilustracje numerowane (plik względem ``katalog``); wiersz „*Rys. …*” pomijany.
         Do źródła MD trafia tylko odesłanie (pełny tekst jest w pliku źródłowym zespołu BO)."""
-        tekst = re.sub(r"^\*Rys\. [^\n]*\*\s*$", "", tekst, flags=re.M)
+        tekst = jawne(re.sub(r"^\*Rys\. [^\n]*\*\s*$", "", tekst, flags=re.M))
         poz = 0
         for m in RE_IMG.finditer(tekst):
             seg = tekst[poz:m.start()]
@@ -259,6 +301,108 @@ def pola_scinania(obl_md: str) -> dict:
     return out
 
 
+def sekcje_pozycji(obl_md: str) -> dict:
+    """{element: (nr, treść sekcji „### Poz. …”)} z obliczeń statycznych."""
+    out = {}
+    for sek in re.split(r"^### Poz\. ", obl_md or "", flags=re.M)[1:]:
+        m, n = re.search(r"Element modelu: `([^`]+)`", sek), re.match(r"([\d.]+)", sek)
+        if m and n:
+            out[m.group(1)] = (n.group(1), sek)
+    return out
+
+
+def _f(txt) -> float | None:
+    try:
+        return float(str(txt).replace(" ", "").replace("\u202f", "").replace(",", "."))
+    except (TypeError, ValueError):
+        return None
+
+
+def zestawienie_obciazen(sek: str) -> str:
+    """Podsekcja „#### Zestawienie obciążeń” pozycji (do następnego nagłówka ####)."""
+    m = re.search(r"^#### Zestawienie obciążeń\s*\n(.*?)(?=^#### |\Z)", sek, flags=re.M | re.S)
+    return m.group(1) if m else ""
+
+
+def kontrole_spojnosci(D: dict) -> list[dict]:
+    """Sprawdzenia spójności wyników BO z modelem i regułami kombinacji (weryfikacja PT — obliczenia) —
+    każda niezgodność → pozycja NIEZAMKNIĘTE. Reguły ogólne: po poprawie modułów i ponownej analizie znikają."""
+    W, p, b = [], D["p"], D["bud"]
+    obl, mes = D["obl_md"] or "", D["mes_md"] or ""
+    sek = sekcje_pozycji(obl)
+    # (a) przekrój podwójnie zbrojony: A_s2 > 0 wymaga warunku zbrojenia ściskanego (górnego) w pozycji
+    for el, (nr, t) in sek.items():
+        as2 = [_f(x) for x in re.findall(r"A_s2 = [^\n]*?= \*\*([\d ,]+)\*\* mm²", t)]
+        as2 = [x for x in as2 if x]
+        if as2 and not re.search(r"^\| Zbrojenie (?:górne|ściskane)", t, flags=re.M):
+            W.append(dict(obszar="Obliczenia statyczne", element=f"poz. {nr} {el}", wynik=f"A_s2 = {L(max(as2), 0)} mm²",
+                          stan=NZ, opis="przekrój podwójnie zbrojony — brak warunku A_s2 ≤ A_s,prov (górą) w pozycji "
+                          "i w kontroli zbrojenia rysunków; wysokość użyteczna d do przyjęcia z liczby warstw zbrojenia "
+                          "dolnego — zwiększyć przekrój lub zespolić ze stropem, przeliczyć",
+                          zrodlo="obliczenia statyczne; kontrola zbrojenia rysunków"))
+    # (b) obciążenie obliczeniowe q_d nie mniejsze niż 6.10b z wypisanych g_k, q_k (q_k jako wiodące)
+    zle = []
+    for el, (nr, t) in sek.items():
+        m = re.search(r"g_k; q_k = \*\*([\d ,]+); ([\d ,]+)\*\* kN/m", t)
+        md = re.search(r"Obciążenie obliczeniowe: q_d = \*\*([\d ,]+)\*\* kN/m", t)
+        if m and md:
+            g, q, qd = _f(m.group(1)), _f(m.group(2)), _f(md.group(1))
+            q610b = p.xi * p.gG_sup * g + p.gQ * q
+            if qd < 0.99 * q610b:
+                zle.append(f"{nr} {el} (q_d = {L(qd)} < {L(q610b)} kN/m)")
+    if zle:
+        W.append(dict(obszar="Obliczenia statyczne", element=f"nadproża / wieńce ({len(zle)})", wynik="—", stan=NZ,
+                      opis="wypisane q_k nie odpowiadają kombinacji (suma przypadków, w tym wyjątkowego); 6.10b bez "
+                      "Σγ_Q·ψ₀·Q_k,i; kat. H łączona ze śniegiem (PN-EN 1991-1-1 p. 3.3.2) — poz. " + "; ".join(zle[:6])
+                      + (f" (i {len(zle) - 6} innych)" if len(zle) > 6 else ""), zrodlo="obliczenia statyczne"))
+    # (c) dachy z polem PV — ciężar PV w zestawieniu obciążeń; (d) dach zielony — woda retencyjna warstw
+    pv = {x.get("dach"): x.get("n") for x in ((b.get("energia") or {}).get("pv") or {}).get("pola", [])}
+    for el, (nr, t) in sek.items():
+        zo = zestawienie_obciazen(t)
+        if not zo:
+            continue
+        braki = []
+        if el in pv and not re.search(r"\bPV\b|fotowolt|moduł|balast", zo, re.I):
+            braki.append(f"ciężar pola PV ({pv[el]} modułów, stelaże i balast wg PT-4 IE)")
+        if re.search(r"^\| Substrat", zo, flags=re.M) and not re.search(r"\bwod[aąyę]\b|nasycon", zo, re.I):
+            braki.append("woda retencyjna substratu i maty drenażowej (stan nasycony)")
+        if braki:
+            W.append(dict(obszar="Zestawienie obciążeń", element=f"poz. {nr} {el}", wynik=pct(next(
+                (x["wykorzystanie"] for x in (D["wyniki"] or {}).get("pozycje", []) if x["id"] == el), None)),
+                stan=NZ, opis="brak w obciążeniach stałych: " + "; ".join(braki) + " — uzupełnić i przeliczyć",
+                zrodlo="obliczenia statyczne; model (PV, warstwy dachu)"))
+    # (e) garaż w MES płyty fundamentowej — kategoria F
+    garaz = any("garaż" in str(x.get("nazwa", "")).lower() for x in b.get("pomieszczenia", []))
+    if garaz and mes and not re.search(r"kat(?:egori\w*|\.)\s*F\b", mes):
+        W.append(dict(obszar="MES płyty fundamentowej", element="strefa garażu", wynik="—", stan=NZ,
+                      opis=f"obciążenie użytkowe garażu przyjęte jak kat. A — przypisać kat. F: q_k = {L(p.q_garaz)} "
+                      f"kN/m², Q_k = {L(p.Q_garaz, 0)} kN (PN-EN 1991-1-1 tabl. 6.8 + NA) i przeliczyć MES",
+                      zrodlo="raport MES płyty fundamentowej"))
+    # (f) izolacja przeciwprzemarzaniowa zamiast głębokości posadowienia — obliczenie wg PN-EN ISO 13793
+    glebokosc = [f"{x['id']}" for x in (D["wyniki"] or {}).get("pozycje", []) if any(
+        w["eta"] > 1.0 and re.search(r"głębokoś|przemarz", w["opis"], re.I) for w in x["warunki"])]
+    if glebokosc and not re.search(r"PN-EN ISO 13793[^\n]*(?:F_d|F_n)", obl + mes):
+        iz = (b.get("fundamenty") or {}).get("izolacja_obwodowa") or {}
+        W.append(dict(obszar="Posadowienie", element=f"{len(glebokosc)} pozycji: {glebokosc[0]}…{glebokosc[-1]}",
+                      wynik="—", stan=NZ, opis="głębokość posadowienia mniejsza od h_z zastąpiona izolacją obwodową "
+                      f"(D = {L(iz.get('D'))} m, d_n = {L(iz.get('d_n'))} m wg modelu) — brak obliczenia wg PN-EN ISO "
+                      "13793 (wskaźnik mrozowy F_d dla lokalizacji)", zrodlo="obliczenia statyczne; model (fundamenty)"))
+    # (g) parametry geotechniczne — jedno źródło (model „geotechnika”)
+    gr = (b.get("geotechnika") or {}).get("grunt") or {}
+    m0_mes = re.search(r"E_s = M₀[^=]*= ([\d ]+)·\(1\+", mes)
+    por = [("φ'_k [°]", gr.get("phi"), p.grunt.fi_k, None), ("γ [kN/m³]", gr.get("gamma"), p.grunt.gamma, None),
+           ("M₀ [kPa]", gr.get("M0"), p.grunt.M0, _f(m0_mes.group(1)) if m0_mes else None)]
+    for nazwa, mod, st, me in por:
+        rozb = [f"{k} {L(v, 0 if v and v > 100 else 1)}" for k, v in (("obliczenia statyczne", st), ("MES", me))
+                if v is not None and mod is not None and abs(float(v) - float(mod)) > 1e-6]
+        if rozb:
+            W.append(dict(obszar="Projekt geotechniczny", element=nazwa, wynik=f"model {L(mod, 0 if mod > 100 else 1)}",
+                          stan=NZ, opis="parametr niezgodny z modelem geotechnicznym: " + ", ".join(rozb)
+                          + " — ujednolicić (jedno źródło: model „geotechnika”) i przeliczyć", zrodlo="model; "
+                          "obliczenia statyczne; raport MES płyty fundamentowej"))
+    return W
+
+
 def stan_analiz(D: dict) -> dict:
     """Zestawienie stanu analiz zespołu BO. Wiersz: obszar, element, wynik, stan (NIEZAMKNIĘTE / ZASTĄPIONE /
     zamknięte), opis, źródło. Reguły są ogólne — po domknięciu analiz wiersze znikają lub zmieniają stan."""
@@ -280,8 +424,9 @@ def stan_analiz(D: dict) -> dict:
         opis = "; ".join(f"{o} η = {pct(e)}" for o, e in zle[:4])
         if p["nr"] in zast:
             W.append(dict(obszar="Obliczenia statyczne", element=f"poz. {p['nr']} {p['id']}", wynik=pct(p["wykorzystanie"]),
-                          stan="ZASTĄPIONE", opis=f"model ławy izolowanej ({opis}) — miarodajna analiza MES płyty "
-                          "fundamentowej (rozdz. 5); głębokość posadowienia — płyta na XPS z izolacją obwodową (W-284)",
+                          stan="ZASTĄPIONE", opis=f"model ławy izolowanej ({opis}) — nośność i osiadanie: analiza MES "
+                          "płyty fundamentowej (rozdz. 5); głębokość posadowienia: płyta na XPS z izolacją obwodową "
+                          "(W-284) — sprawdzenie izolacji wg PN-EN ISO 13793 w pozycji „Posadowienie” (rozdz. 1)",
                           zrodlo="wyniki.json; BRAKI_DANYCH.md"))
         else:
             W.append(dict(obszar="Obliczenia statyczne", element=f"poz. {p['nr']} {p['id']}", wynik=pct(p["wykorzystanie"]),
@@ -337,6 +482,8 @@ def stan_analiz(D: dict) -> dict:
                           zrodlo="kontrola_zbrojenia.json"))
     if D["kz"]:
         ok_obszary["Kontrola zbrojenia rysunków"] = (D["kz"]["ok"], D["kz"]["razem"])
+    # 4a. spójność wyników z modelem i regułami kombinacji (weryfikacja PT)
+    W += kontrole_spojnosci(D)
     # 5. uwagi biblioteki „[WYMAGA ANALIZY]” (grupowane wg treści)
     grupy: OrderedDict = OrderedDict()
     for u in wyn.get("uwagi", []):
