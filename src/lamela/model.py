@@ -963,8 +963,9 @@ class Model:
         self._build_openings()
         # pomieszczenia
         self._build_rooms()
-        # spójność rzędnych
+        # spójność rzędnych, kolizje płyt
         self._check_levels()
+        self._check_slab_overlaps()
         # działka
         if self.raw_dz is not None:
             self._validate_dzialka()
@@ -1666,6 +1667,18 @@ class Model:
                     if abs(h - float(k.wys_w_swietle)) > 0.02:
                         self._warn(f"{self.src_b}: kondygnacje ({kid})",
                                    f"wys_w_swietle {k.wys_w_swietle:.2f} ≠ wysokość wyliczona z płyt {h:.2f} m")
+
+    def _check_slab_overlaps(self):
+        sl = self._slab_elems()
+        for a, b in combinations(sl, 2):
+            dz = min(a["wierzch"], b["wierzch"]) - max(a["spod"], b["spod"])
+            if dz <= 0.01:
+                continue
+            ov = a["poly"].intersection(b["poly"]).area
+            if ov > 0.05:
+                self._warn(f"{self.src_b}: {a['typ']} {a['id']} / {b['typ']} {b['id']}",
+                           f"płyty nakładają się w rzucie ({ov:.2f} m²) w tym samym zakresie rzędnych — zdublowana "
+                           "geometria (np. strop i dach nad tą samą częścią); rozdziel obrysy")
 
     # ---------------- działka ----------------
     def _validate_dzialka(self):

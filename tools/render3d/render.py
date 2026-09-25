@@ -222,8 +222,9 @@ def build_views(info: dict, W: int, H: int, only: str) -> list[dict]:
     if "f" in only:
         s = sun("2026-06-21", 15)
         groups = {g: (g not in ("otoczenie", "teren", "fundamenty")) for g in info["groups"]}
-        hh = max((Hh + 1.6) / 2 * 1.08, (Wd + 3.0) / aspect / 2)
-        tgt = (cx, y0 - 1, (z0 + z1) / 2 + 0.2)
+        hv = z1 - zt
+        hh = max(hv / 2 * 1.30, (Wd + 3.0) / aspect / 2)
+        tgt = (cx, y0 - 1, zt + hv / 2 + 0.06 * hh)
         views.append({"key": "f", "name": VIEW_NAMES["f"], "width": W, "height": H,
                       "camera": {"type": "ortho", "pos": [cx, y0 - 200, tgt[2]], "target": [cx, y0, tgt[2]],
                                  "halfHeight": hh},

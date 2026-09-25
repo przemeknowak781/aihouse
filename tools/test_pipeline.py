@@ -242,6 +242,13 @@ def test_walidacja_niezamkniete_pomieszczenie_i_duplikat():
     assert any("0.01" in x and "nie leży w zamkniętym obszarze" in x for x in e2), e2
 
 
+def test_walidacja_nakladajace_plyty():
+    raw = _base()
+    raw["wsporniki_plyty"][0]["obrys"] = [[8.0, 0.0], [14.0, 0.0], [14.0, 5.0], [8.0, 5.0]]
+    _, e, w = _errs(raw)
+    assert any("PL-D" in x and "ST1" in x and "nakładają się" in x for x in w), w
+
+
 def test_walidacja_strict_i_orientacja():
     raw = _base()
     raw["stropy"][0]["obrys"] = list(reversed(raw["stropy"][0]["obrys"]))
