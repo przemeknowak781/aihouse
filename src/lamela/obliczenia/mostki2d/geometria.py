@@ -1265,7 +1265,7 @@ def wezel_rura_spustowa(warstwy_sciany: Sequence[Warstwa], szer_wneki: float = 0
              dict(_ln("rura", okrag(szer_wneki / 2 + 0.25, D + 0.04 + r_r),
                       "wariant zalecany: rura przed licem na obejmach dystansowych (bez wnęki, ψ ≈ 0)"), alt=True)]
     return Wezel(id, nazwa, "rura_spustowa", ob, strefy, fl, przekroj="poziomy", linie=linie,
-                 punkty={"lico wewn. za wnęką": (0.0, 0.0)}, widok=(-0.6, -0.1, 0.6, D + 0.1),
+                 punkty={"lico wewn. za wnęką": (0.0, 0.0)}, widok=(-0.6, -0.1, 0.6, D + 0.25),
                  dane={"warstwy ściany": dane_warstw(warstwy_sciany),
                        "wnęka": f"szer. {szer_wneki} m, pozostała izolacja {d_pozostala} m"},
                  uwagi=["Wariant zalecany: rura przed licem ETICS na obejmach dystansowych (bez wnęki) albo "

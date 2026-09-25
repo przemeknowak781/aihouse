@@ -202,7 +202,7 @@ def kontrola_wody(wezel: Wezel, model=None, kontekst: dict | None = None) -> lis
                "attyka", "cokol", "wspornik", "prog") and fs:
         if "tynk" in fs or "paroizolacja" in fs or "szczelnosc" in fs:
             add("OK", "paro", f"szczelność powietrzna ściany {kod_sz}: tynk wewnętrzny ciągły "
-                              f"({', '.join(fs.get('tynk', fs.get('paroizolacja', [])))}) — do stropu i posadzki")
+                              f"({(fs.get('tynk') or fs.get('paroizolacja') or fs.get('szczelnosc'))[0]}) — do stropu i posadzki")
         else:
             add("BRAK", "paro", f"ściana {kod_sz}: brak warstwy szczelności powietrznej po ciepłej stronie")
     if typ == "attyka":
@@ -258,6 +258,15 @@ def kontrola_wody(wezel: Wezel, model=None, kontekst: dict | None = None) -> lis
         if typ == "podokiennik":
             add("OK" if _linie_z(wezel, "okapnik") else "BRAK", "woda",
                 "parapet zewnętrzny: spadek ≥ 5 %, okapnik ≥ 3 cm przed licem, zaślepki boczne, taśma pod parapetem")
+    elif typ == "prog" and "grunt" not in wezel.dane:
+        kod_t = _przegroda_typu(model, "taras", kody)
+        ft = _funkcje_przegrody(model, kod_t)
+        if model is not None and "łącznik" in wezel.dane:
+            add("OK" if "hydroizolacja" in ft else "BRAK", "hydro",
+                f"hydroizolacja tarasu/balkonu {kod_t}: " + (", ".join(ft["hydroizolacja"]) if "hydroizolacja" in ft
+                                                             else "brak w warstwach"))
+        add("INFO", "woda", "próg: hydroizolacja / taśma EPDM wprowadzona pod ramę, spadek ≥ 1,5–2 % od budynku, "
+                            "odwodnienie liniowe przy progu bezbarierowym (brief 9.4)")
     elif typ in ("cokol", "prog"):
         kod_p = _przegroda_typu(model, "podloga_na_gruncie", kody)
         fp = _funkcje_przegrody(model, kod_p)
@@ -316,6 +325,9 @@ def psi_odniesienia(wezel: Wezel) -> tuple[float, float, str, str] | None:
     klucz = {"naroze": "naroznik_wypukly", "strop_posredni": "strop_posredni", "attyka": "attyka",
              "oscieze": "oscieze", "nadproze": "oscieze", "podokiennik": "oscieze", "prog": "oscieze",
              "cokol": "sciana_grunt", "garaz": "polaczenie_nieogrz"}.get(typ, typ)
+    if typ == "prog":
+        klucz = ("sciana_grunt" if "grunt" in wezel.dane else
+                 "plyta_wspornikowa_lacznik" if "łącznik" in wezel.dane else "oscieze")
     if typ == "wspornik":
         # węzeł projektowy „płyta wspornikowa” wymaga łącznika (brief 9.2) — odniesienie: z łącznikiem
         klucz = "plyta_wspornikowa_lacznik"
@@ -435,9 +447,14 @@ def rysuj_przekroj(ax, wezel: Wezel, ciag: Ciaglosc | None = None, legenda_ax=No
         if pt is not None:
             ax.add_patch(pt)
         minx, miny, maxx, maxy = part.bounds
-        if part.area > 0.02 * vb.area and min(maxx - minx, maxy - miny) > 0.06 * min(widok[2] - widok[0],
+        if part.area > 0.02 * vb.area and min(maxx - minx, maxy - miny) > 0.10 * min(widok[2] - widok[0],
                                                                                       widok[3] - widok[1]):
-            rp = part.representative_point()
+            from shapely.ops import polylabel
+            try:
+                rp = polylabel(part.buffer(0) if part.geom_type == "Polygon" else part.representative_point(),
+                               tolerance=0.005)
+            except Exception:   # pragma: no cover
+                rp = part.representative_point()
             ax.text(rp.x, rp.y, f"{st.nazwa}\nθ = {st.theta:g} °C", ha="center", va="center", fontsize=7.5,
                     color="#444444", zorder=8, style="italic")
     uzyte: dict[str, Any] = {}
@@ -552,9 +569,10 @@ def rysuj_karte(w, plik: str | Path, ciag: Ciaglosc | None = None, ocena: dict |
     widok = _widok(wz)
     asp = (widok[3] - widok[1]) / max(widok[2] - widok[0], 1e-9)
     H_pl = float(np.clip(6.2 * asp, 3.6, 7.2))
-    fig = plt.figure(figsize=(15.0, H_pl + 3.3), dpi=130)
-    gs = fig.add_gridspec(3, 2, height_ratios=[H_pl, 1.95, 0.75], hspace=0.12, wspace=0.10,
-                          left=0.05, right=0.97, top=0.94, bottom=0.02)
+    H_f = H_pl + 3.6
+    fig = plt.figure(figsize=(15.0, H_f), dpi=130)
+    gs = fig.add_gridspec(3, 2, height_ratios=[H_pl, 1.95, 0.75], hspace=0.22, wspace=0.10,
+                          left=0.05, right=0.97, top=1.0 - 0.75 / H_f, bottom=0.02)
     ax1, ax2 = fig.add_subplot(gs[0, 0]), fig.add_subplot(gs[0, 1])
     axl, axl2, axw = fig.add_subplot(gs[1, 0]), fig.add_subplot(gs[1, 1]), fig.add_subplot(gs[2, :])
     for a in (axl, axl2, axw):
@@ -604,7 +622,8 @@ def rysuj_karte(w, plik: str | Path, ciag: Ciaglosc | None = None, ocena: dict |
         uz = oc["uzasadnienie"]
         axw.text(1.0, 0.42, uz if len(uz) <= 90 else uz[:89] + "…", fontsize=7.5, ha="right", va="top",
                  transform=axw.transAxes, color="#333333")
-    fig.suptitle(f"{wz.id} — {wz.nazwa}", fontsize=12, weight="bold", x=0.05, ha="left")
+    fig.suptitle(f"{wz.id} — {wz.nazwa}", fontsize=12, weight="bold", x=0.05, y=1.0 - 0.12 / H_f, ha="left",
+                 va="top")
     plik = Path(plik)
     plik.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(plik)
