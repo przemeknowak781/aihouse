@@ -303,6 +303,143 @@ def test_determinizm():
         assert [r for _k, _n, r in a.roz.prostokaty] == [r for _k, _n, r in b.roz.prostokaty]
 
 
+# ================================================================================================ poprawki silnika
+# (zgłoszenia zespołów AR, PZT, IS, IE — docs/30_arkusze/zastosowanie_*.md)
+def _blok_roza(h=30.0):
+    """Blok jak „róża i podziałka”: podziałka od lewej, róża przy prawej krawędzi szerokości w."""
+    def fn(sh, x, y, w):
+        sh.rect(x + 4, y - 20, x + 124, y - 18)
+        sh.rect(x + w - 19, y - 22, x + w - 5, y - 8)
+        return y - h
+    return U.blok("róża i podziałka", fn, kotwica="nad_tabliczka", w_min=155.0)
+
+
+def test_znaki_centrujace_rezerwacja():
+    """[PZT 1, IS 1, IE S1] Strefy znaków centrujących zajęte dla bloków; wiersz róży nad tabliczką zwężony, gdy
+    prawy znak (H/2) wypada nad tabliczką (H = 297); sprawdz_nakladanie widzi blok na strefie znaku."""
+    v = [U.Widok("v", 300, 200, 120, 10.5)]
+    bl = [_blok_roza(), _blok_prosty(60), _uwagi(4)]
+    g = U.uklady_widokow(v)[0]
+    R = U.pakuj(600.0, 297.0, v, g, bl, 103.0, znaki=True)
+    assert R.ok and R.znaki, R.brak
+    strefy = U.strefy_znakow(600.0, 297.0)
+    assert {n for k, n, _r in R.prostokaty if k == "znak"} == set("gdlp")
+    for k, n, r in R.prostokaty:
+        if k == "blok":
+            assert not any(U._przec(r, z) for z in strefy.values()), (n, r)
+    roza = [(b, r) for (b, *_x), (_k, _n, r) in zip(R.bloki, [p for p in R.prostokaty if p[0] == "blok"])
+            if b.nazwa.startswith("róża")][0]
+    assert roza[0].w < U.TB_W and roza[1][1] < 297 / 2 < roza[1][3], roza   # zwężony, nadal nad tabliczką
+    assert abs(roza[1][0] - R.tabliczka[0]) < 1e-6
+    assert not U.sprawdz_nakladanie(R)
+    R.prostokaty.append(("blok", "test", (strefy["p"][0] - 5, 140.0, strefy["p"][2], 160.0)))
+    assert any("znak" in e for e in U.sprawdz_nakladanie(R))
+    # tryb auto: wynik nie gorszy niż bez rezerwacji; tryb „skracaj” — bez stref
+    Ra = U.pakuj(600.0, 297.0, v, g, bl, 103.0)
+    R0 = U.pakuj(600.0, 297.0, v, g, bl, 103.0, znaki="skracaj")
+    assert Ra.ok and U._jakosc(Ra)[:3] <= U._jakosc(R0)[:3]
+    assert not any(k == "znak" for k, _n, _r in R0.prostokaty)
+
+
+def test_tytul_widoku_omija_znak():
+    """[IS 1] Tytuł widoku trafiający na dolny znak centrujący — przesunięty w prawo za znak (w miejscu widoku)."""
+    v = [U.Widok("a", 200, 245, 120, 10.5), U.Widok("b", 300, 245, 150, 10.5)]
+    g = U._grupa_z_wierszy(v, [[0, 1]])
+    W, H = 760.0, 297.0
+    R0 = U.pakuj(W, H, v, g, [], 103.0, znaki=False)
+    z = U.strefy_znakow(W, H)["d"]
+    t0 = [r for k, n, r in R0.prostokaty if k == "tytul" and n == "b"][0]
+    assert U._przec(t0, z), "przypadek testowy: tytuł na strefie znaku"
+    R = U.pakuj(W, H, v, g, [], 103.0, znaki=True)
+    t = [r for k, n, r in R.prostokaty if k == "tytul" and n == "b"][0]
+    assert R.ok and R.tytuly_dx[1] > 2.0 and not U._przec(t, z), (R.tytuly_dx, t, z)
+    assert t[2] <= R.widoki[1][0] + v[1].slot_w + 1e-6              # w szerokości miejsca widoku
+    assert R.tytuly_dx[0] == 2.0
+
+
+def test_przytnij_znaki_centrujace():
+    """[PZT 1, IS 1, IE S1] Na narysowanym arkuszu znak kończy się przed treścią (odstęp 1,5 mm); gdy wejście
+    < 2 mm — na ramce; bez przeszkód — 10 mm (ISO 5457 4.3); także przeszkody w rzutni."""
+    from lamela.draft.core import Viewport
+    from lamela.draft.sheet import ZNAK_CENTR_DL, ZNAK_CENTR_ODSTEP
+    sh = Sheet("A3")                                     # 420 × 297
+    x0, y0, x1, y1 = sh.frame
+    W, H = sh.width, sh.height
+    sh.rect(W / 2 - 10, y1 - 20, W / 2 + 10, y1 - 5, layer="R-OPISY")           # 5 mm pod ramką
+    sh.text((x0 + 1.0, H / 2 - 1.0), "TEKST PRZY RAMCE", 2.5, layer="R-OPISY")  # lewy znak: < 2 mm
+    vp = Viewport(100, "T")
+    vp.line((0.0, 0.0), (10.0, 0.0), "A-SCIANY")                             # 100 mm w 1:100
+    sh.viewports.append(vp)
+    sh.place(vp, x1 - 108.0, H / 2 - 3.0, "bl", pad=3.0)                       # linia do x1 − 5 na osi H/2
+    assert U.kolizje_znakow(sh), "przed przycięciem znak dotyka treści"
+    gl = sh.przytnij_znaki_centrujace()
+    assert abs(gl["g"] - (5.0 - ZNAK_CENTR_ODSTEP)) < 0.2, gl
+    assert gl["l"] == 0.0 and gl["d"] == ZNAK_CENTR_DL, gl
+    assert abs(gl["p"] - (5.0 - ZNAK_CENTR_ODSTEP)) < 0.3, gl
+    assert not U.kolizje_znakow(sh)
+    p = sh.znaki["g"].pts
+    assert abs(p[0][1] - H) < 1e-9 and abs(p[-1][1] - (y1 - gl["g"])) < 1e-6    # od krawędzi arkusza
+    assert abs(sh.znaki["l"].pts[-1][0] - x0) < 1e-9
+
+
+def test_uwagi_kolejnosc_czytania():
+    """[AR 1, PZT 2, IS 2, IE S2] Części uwag w kolejności czytania, ≥ 2 pozycje w części, ≤ max_czesci_uwag."""
+    n_split = 0
+    for views, blocks in _przypadki(seed=5, n=30):
+        widoki = [U.Widok(f"v{i}", w, h, min(w, 140.0), 10.5) for i, (w, h) in enumerate(views)]
+        bloki = [_blok_prosty(h) for h in blocks] + [_uwagi(12)]
+        u = U.rozmiesc(widoki, bloki, 103.0, {"wysokosci": [297, 420]})
+        if u is None:
+            continue
+        _sprawdz_uklad(u, widoki, 103.0)
+        _sprawdz_czesci_uwag(u.roz, 12)
+        assert u.roz.czesci_uwag <= 4
+        n_split += u.roz.czesci_uwag > 1
+    u = U.rozmiesc([U.Widok("v", 700, 240, 100, 10.5)], [_blok_prosty(90), _uwagi(60)], 103.0,
+                   {"wysokosci": [297], "max_wysokosc": 297, "max_czesci_uwag": 6})
+    _sprawdz_czesci_uwag(u.roz, 60)
+    assert u.roz.czesci_uwag >= 2
+
+
+def test_kara_czesci_uwag():
+    """[PZT 2] Koszt = papier × składanie × (1 + kara · dodatkowe części uwag); przy dużej karze części nie
+    przybywa względem kary zerowej."""
+    for views, blocks in _przypadki(seed=13, n=12):
+        widoki = [U.Widok(f"v{i}", w, h, min(w, 140.0), 10.5) for i, (w, h) in enumerate(views)]
+        mk = lambda: [_blok_prosty(h) for h in blocks] + [_uwagi(16)]      # noqa: E731
+        u0 = U.rozmiesc(widoki, mk(), 103.0, {"kara_czesci_uwag": 0.0})
+        u1 = U.rozmiesc(widoki, mk(), 103.0, {"kara_czesci_uwag": 0.5})
+        if u0 is None:
+            continue
+        assert u1.roz.dodatkowe_czesci <= u0.roz.dodatkowe_czesci, (u0.nazwa, u1.nazwa)
+        k, _oc = U.koszt(u1.W, u1.H, u1.standard, U.opcje({}), 103.0)
+        assert abs(u1.koszt - k * U._kara_ukladu(u1.roz, {"kara_czesci_uwag": 0.5})) < 1e-9
+
+
+def test_wysrodkowanie_nie_pogarsza():
+    """[PZT 3] Wyśrodkowanie grupy widoków przyjmowane tylko, gdy nie pogarsza upakowania (części uwag, kolejność,
+    kolumny, liczba bloków)."""
+    for views, blocks in _przypadki(seed=17, n=15):
+        widoki = [U.Widok(f"v{i}", w, h, min(w, 140.0), 10.5) for i, (w, h) in enumerate(views)]
+        bloki = [_blok_prosty(h) for h in blocks] + [_uwagi(10)]
+        u = U.rozmiesc(widoki, bloki, 103.0, {})
+        if u is None:
+            continue
+        r0 = U.pakuj(u.W, u.H, widoki, u.roz.grupa, bloki, 103.0)
+        assert r0.ok and U._jakosc(u.roz) <= U._jakosc(r0), (u.nazwa, U._jakosc(u.roz), U._jakosc(r0))
+
+
+def test_kolejnosc_kolumn():
+    """[IS 3] Bloki w kilku kolumnach czytają się kolumnami od lewej, w kolumnie od góry (kolejność listy)."""
+    v = [U.Widok("v", 420, 330, 150, 10.5)]
+    bl = [_blok_prosty(h) for h in (110, 95, 120, 80, 100)] + [_uwagi(6)]
+    u = U.rozmiesc(v, bl, 103.0, {"wysokosci": [420], "max_wysokosc": 420}, fmt="ekonomiczny")
+    rects = [r for k, _n, r in u.roz.prostokaty if k == "blok"]
+    assert len(U._kolumny(rects)) >= 2, rects
+    assert u.roz.kolejnosc_ok and U._kolejnosc_ok(rects), [(n, r) for k, n, r in u.roz.prostokaty if k == "blok"]
+    _sprawdz_uklad(u, v, 103.0)
+
+
 # ================================================================================================ arkusze z modelu
 _CTX = None
 
