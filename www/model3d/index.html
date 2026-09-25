@@ -338,8 +338,14 @@ function setView(v) {
   const [cx, cy] = [T2B(c)[0], T2B(c)[1]];
   const zb = T2B(bbox.min)[2];
   const yS = T2B(new THREE.Vector3(0, 0, bbox.max.z))[1], yN = T2B(new THREE.Vector3(0, 0, bbox.min.z))[1];
-  const vf = THREE.MathUtils.degToRad(camera.fov / 2);
-  const hf = Math.atan(Math.tan(vf) * camera.aspect);
+  // kąty widzenia części okna niezasłoniętej panelem
+  const w = window.innerWidth, h = window.innerHeight, pr = $('panel').getBoundingClientRect();
+  const mobile = window.matchMedia('(max-width: 700px)').matches;
+  const uw = !mobile && pr.right < w * 0.5 ? w - pr.right : w;
+  const ph = mobile ? Math.max(0, h - pr.top) : 0;
+  const fullH = h + ph, uh = h - ph;
+  const tv = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
+  const vf = Math.atan(tv * uh / fullH), hf = Math.atan(tv * uw / fullH);
   const fitD = R / Math.tan(Math.min(vf, hf)) * 1.05;
   let pos, tgt;
   const dz = meta.dzialka || {};
@@ -416,7 +422,9 @@ renderer.domElement.addEventListener('pointerup', (e) => {
     return !(pl && pl.length && pl[0].distanceToPoint(h.point) < 0);
   });
   if (!hits.length) { $('info').textContent = 'Kliknij element modelu.'; return; }
-  const o = hits[0].object;
+  const solid = hits.filter((h) => !(h.object.material.transparent && h.object.material.opacity < 0.4));
+  const o = (solid[0] || hits[0]).object;
+  hits[0] = solid[0] || hits[0];
   const u = Object.keys(o.userData || {}).length ? o.userData : (o.parent && o.parent.userData) || {};
   const p = T2B(hits[0].point);
   $('info').innerHTML = `<b>${u.id || o.name}</b> · ${u.kind || ''}<br>materiał: <b>${u.material || o.material.name || '—'}</b> · grupa: ${u.group || '—'}<br>punkt: x ${p[0].toFixed(2)}, y ${p[1].toFixed(2)}, z ${p[2].toFixed(2)}`;

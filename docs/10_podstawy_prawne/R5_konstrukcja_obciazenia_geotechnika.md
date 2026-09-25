@@ -368,3 +368,76 @@ klimat: {theta_e: -18, theta_me: 7.9, strefa: II}
   wg której normy deklaruje zgodność.
 * **N-12 (nowe z weryfikacji): sytuacja wyjątkowa śniegu B2.** NA wymaga B2 (R5-33). Wzory zał. B (B.3, B.4) trzeba potwierdzić
   w tekście normy. Dla uskoków brył LAMELA obciążenie zaspą wyjątkową może przekroczyć 3,6 kN/m².
+
+---
+
+## Weryfikacja niezależna (2026-09-25)
+
+Weryfikator niezależny (adwersarz). Pliki robocze i pobrane źródła: `scratchpad/research/R5ver/` (m.in. `pip.py` — własny test
+punkt-w-wielokącie na KML Dlubal, `g.txt`, `pb.txt`, `r.txt`, `r597.txt`, `wt.txt`, `itb.txt`, odpowiedzi z wyszukiwarki PKN `o206*.txt`).
+Sprawdzono 45 ustaleń krytycznych.
+
+### A. Potwierdzone (niezależnym źródłem)
+* **R5-80, R5-81, R5-82, R5-83, R5-86** — tekst Dz.U. 2012 poz. 463 (ELI, status „obowiązujący”, w mocy od 29.04.2012): § 4 ust. 2 pkt 1,
+  § 4 ust. 3 pkt 1 lit. a i pkt 2 lit. a, § 4 ust. 4–5, § 6 ust. 2–3, § 7 ust. 1–3, § 8–10 — brzmienie zgodne. Do R5-81 dodano uściślenie
+  (wyliczenie „takich jak”, rola opinii — § 4 ust. 1, § 8).
+* **R5-05, R5-07** — t.j. Pb Dz.U. 2026 poz. 524: art. 20 ust. 2 i ust. 3 pkt 2, art. 34 ust. 3 pkt 2 lit. d, pkt 3 lit. a i d, ust. 3c, ust. 6 pkt 2 — zgodne.
+  Nowele 2026 poz. 605 (art. 64 ust. 3), 646 (art. 33 ust. 2 pkt 13) i 1161 (art. 12, 96, 99, 102a–102c) nie zmieniają art. 20 ani art. 34 ust. 3.
+* **R5-06** — Dz.U. 2022 poz. 1679 § 20 ust. 1 pkt 5 i § 23 pkt 1–2 — zgodne. Uściślono daty wejścia w życie zmiany 2026 poz. 597.
+* **R5-03, R5-100** — WT (t.j. Dz.U. 2022 poz. 1225): § 204 ust. 4, Zał. 1 poz. 49 z przypisami *) i **), § 213 pkt 1 lit. a, § 217 ust. 2, § 271 ust. 8a — brzmienie zgodne.
+  ELI: 2002/690 i 2022/1225 „uznany za uchylony”, repealDate 2026-09-21, „Uchylenia wynikające z: DU/2019/1696”.
+* **R5-101** — nowele WT 2023 poz. 2442, 2024 poz. 474 i 726 są aktami zmieniającymi WT według metadanych ELI.
+* **R5-01, R5-02** — strona PKN „Eurokody” (aktualizacja czerwiec 2026): 30.09.2027 i 31.03.2028, zakaz mieszania edycji, NA 1. edycji tylko z 1. edycją.
+  Lista ITB/PKN (30.08.2024): NA:2018-11 do EC2, NA:2015-02 do EN 1991-1-7, NA:2014-03 + Ap2:2014-09 + Ap3:2016-04 do EN 1996-1-1,
+  Ap2:2010 + NA:2011 do EN 1997-1, A1:2015-10 do EN 1991-1-3 (tylko EN), PN-EN 1992-1-1:2024-05 i PN-EN 1996-1-1:2023-08 tylko po angielsku.
+* **R5-60, R5-61, R5-62** — lista ITB: „Ap2 … K dla silikatów Grupy 1 i zaprawy do cienkich spoin z 0,55 na 0,60”. f_k = 0,60·20^0,85 = 7,656 MPa
+  (przeliczone; także kl. 15 → 6,00, kl. 25 → 9,26). Xella, Tab. 4.3–4.4: γ_M 1,7/2,0; 2,0/2,2; 2,2/2,5; ściany 100–150 mm 2,5/2,7; wyjątkowa 1,3.
+* **R5-40, R5-41, R5-42, R5-44** — własny test KML (strefa wiatrowa 1 dla Poznania i 13 innych miejscowości); q_b = 0,5·1,25·22² = 0,3025 kN/m²;
+  opisy kategorii terenu zgodne z Tabl. NA.3 (przedruk PW).
+* **R5-30** (strefa 2 dla Poznania) — własny test KML oraz IB (Donajko): „strefa 2 … (np. Poznań, Warszawa)”. Uzasadnienie poprawiono (pkt B).
+* **R5-34, R5-35, R5-36** — SPECBUD (przykład zaspy μ_w = (b₁ + b₂)/2h; NA: nawisy „powyżej 300 m n.p.m., a także na całym obszarze strefy 4”);
+  IB cz. II: 0,8 ≤ μ₂ ≤ 2,0 i l_s = 2h (5–15 m). Wartości w sekcji 3.4 przeliczono.
+* **R5-12** — A. Biegus (PIIB): Tabl. B1 — CC2 „budynki użyteczności publicznej, mieszkalne, biurowe”; RC1/2/3 → K_FI 0,9/1,0/1,1.
+* **R5-50, R5-51** — Pędziwiatr (DWE 2010): „γc = 1,4 został przyjęty do normy w ramach tak zwanych ustaleń krajowych”. Tab. 2.2: XC1 C20/25,
+  XC2 C25/30, XC3/XC4 C30/37.
+* **R5-71, R5-70 (γ_M2)** — Intersoft „Projektowanie konstrukcji stalowych”, Tabl. 6: L/250, L/200, L/150, L/350, L/250, L/500;
+  „L – rozpiętość elementu (lub podwójny wysięg wspornika)”; H/150 (jednokondygnacyjne bez suwnic), H/500 (wielokondygnacyjne); γ_M2 = 1,25.
+* **R5-84, R5-85** — UWM (Srokosz): DA2* wg PN-EN 1997-1:2008/Ap2 pkt NA.2.6; s_max = 50 mm, Δ_max = 10 mm, ω_max = 0,003 rad (Tabl. NA.3).
+  Szacunek nośności z sekcji 3.8 przeliczono niezależnie wg zał. D: φ′ = 32° → 497/355 kPa; φ′ = 33° → 567/405 kPa — zgodne.
+* **R5-90** — PKN, Załącznik A: PN-B-03020:1981 wycofana 31.03.2010, zastąpiona przez PN-EN 1997-1:2008.
+* **R5-93, R5-94** — Poznań w strefie I (0,8 m) wg źródeł wtórnych. Godlewski (ITB/WOIIB 2018): Poznań, P i Gp, Z₅₀ = 1,31 m, po korekcie 1,64 m.
+  Tekst zawiera też zdanie „wartości liczbowe podane w PN-81/B-03020 dotyczą gruntów spoistych”.
+* **R5-110** — Purmo 2012, Tab. 2.1: I −16/7,7; II −18/7,9; III −20/7,6; IV −22/6,9; V −24/5,5 (przynależność Poznania do strefy II — źródło wtórne).
+
+### B. Poprawione (było → jest; źródło)
+1. **R5-30 / streszczenie pkt 2.** Było: „granica strefy 1 przebiega ponad 60 km na zachód od Poznania”; „potwierdza to poradnik Xella”.
+   Jest: najbliższa granica strefy 1 ok. 33 km na SSW od centrum Poznania i ok. 14 km od Mosiny (Kościan w strefie 1). Przykład Xella dotyczy
+   Warszawy. Źródła: KML Dlubal (własny test `pip.py`); Xella 2017, s. 45–46 („II strefie śniegowej (Warszawa)”).
+2. **R5-33.** Było: „nie uwzględnia się wyjątkowych opadów ani wyjątkowych zamieci (tylko przypadek A)”. Jest: NA wyklucza wyjątkowe opady,
+   ale **nakazuje przypadek B2** (wyjątkowe zaspy wg zał. B). Dodano R5-38, uwagę w 3.4, N-12 i `przypadki: [A, B2]` w YAML.
+   Źródła: IB „Wpływ kształtu dachu na jego obciążenie śniegiem – cz. II”; IB „Obciążenie śniegiem wg Eurokodu 1”; opracowanie na silo.tips.
+3. **R5-43 / 3.5 / N-4 / YAML.** Było: wzór c_e dla kategorii II NIEZWERYFIKOWANY; q_p (II) = 0,60/0,65/0,70/0,71/0,72; obwiednia 0,72.
+   Jest: c_e = 2,3·(z/10)^0,24, z_min = 2 m (NA Tabl. NA.3); q_p (II) = 0,59/0,64/0,70/0,70/0,71; obwiednia 0,71 (0,72 dopuszczalne
+   jako zaokrąglenie w górę). Źródło: PW MEiL, Wykład 4 (przedruk Tabl. NA.3).
+4. **R5-04.** Było: „Zał. 1 poz. 48 powołuje PN-B-02171:2017-06” (przy § 204 ust. 3). Jest: PN-B-02171 powołana w Zał. 1 poz. 2 (§ 96 ust. 1)
+   i poz. 48 (§ 196 ust. 2–3), a nie przy § 204. Źródło: tekst WT Dz.U. 2022 poz. 1225, Zał. 1.
+5. **R5-06.** Było: „Zmiana Dz.U. 2026 poz. 597 (w mocy od 19.05.2026)”. Jest: od 19.05.2026 obowiązuje część zmian; § 1 pkt 3 lit. b
+   (dokładność 0,01 m w PZT) i pkt 4 lit. a obowiązują po 6 mies. od ogłoszenia 04.05.2026, tj. 05.11.2026 (wyliczenie). Źródło: Dz.U. 2026 poz. 597, § 3.
+6. **N-1.** Było: „Dz.U. 2026 poz. 646 zmienia art. 7 ust. 2 Pb”. Jest: 646 zmienia art. 33 ust. 2 pkt 13 Pb. Okres przejściowy WT wynika
+   z art. 102a–102c PB (Dz.U. 2026 poz. 1161, art. 2 pkt 4). Źródła: teksty ELI 2026/646 i 2026/1161.
+7. **R5-54 / 3.1 (status norm betonowych).** Było: PN-EN 206+A2:2021-08 z PN-B-06265:2022-08 jako obowiązujące. Jest: obie **wycofane**
+   (PKN, 25.09.2026), zastąpione przez PN-EN 206-1:2026-09 i PN-EN 206-2:2026-09 (EN). Dodano N-11. Źródło: wyszukiwarka norm PKN.
+8. **R5-95.** Było: status PN-B-10736:1999 i PN-B-10725:1997 NIEZWERYFIKOWANY. Jest: obie wycofane (PKN).
+9. **R5-72 / 3.1.** Dodano aktualne wydanie **PN-EN 1090-2+A1:2024-10**; PN-EN 1090-2:2018-09 wycofana (PKN).
+10. **R5-55.** Uzupełniono status PN-H-93220:2018-02 (aktualna) i poprawkę Ap1:2018-04 (PKN).
+11. **R5-110 / N-7.** PN-EN 12831-1:2017-08 jest aktualna (tylko EN) i zastąpiła PN-EN 12831:2006 (wycofana) — PKN.
+12. **3.8.** PN-EN ISO 13793:2002 — aktualna, wersja polska (PKN).
+13. **R5-63.** Uzupełniono wartości η_A (Xella, Tab. 4.5).
+
+### C. Niemożliwe do weryfikacji w tej sesji (treść norm płatna; sklep PKN: HTTP 503 i błąd łańcucha TLS)
+* Wartości q_k i Q_k kategorii A oraz q_k i Q_k dachu H w PL NA do PN-EN 1991-1-1 (R5-20, R5-22). Przyjęte górne granice przedziałów EN są bezpieczne.
+* Treść zmian NA:2016-11 i NA:2018-11 do PN-EN 1992-1-1: γ_c = 1,4, α_cc, Tabl. 4.3N/4.4N, zał. E (R5-50, R5-52, N-3). Potwierdzenie γ_c = 1,4
+  pochodzi ze źródła opartego na NA:2010.
+* Wzory zał. B (B.3, B.4) PN-EN 1991-1-3 (R5-38), tablica c_pe 7.2 (R5-45), EXC2 jako domyślna klasa (R5-72), l/500 z EC2 7.4.1(5),
+  otulenia k₁/k₂ (R5-52), zakres badań PN-EN 1997-2 zał. B.3.
+* Oryginał mapy h_z PN-81/B-03020 (N-5), typ budynku w Tabl. NA.3 EC7 (N-6), mapa sektorów c_dir (R5-41), zawartość NA do PN-EN 12831-1:2017.

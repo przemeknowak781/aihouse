@@ -77,7 +77,8 @@ typ przegrody ściany, jedna warstwa konstrukcyjna, zerowe osie, nakładające s
 **otwory poza ścianą (w poziomie i w pionie)**, **nakładające się otwory**, otwór w strefie węzła ściany dochodzącej,
 orientacja CCW i poprawność wieloboków, otwory stropów w obrysie, spójność schodów (suma stopni, h·n = Δrzędnych),
 lamele (rozstaw > b), spójność rzędnych (wierzch stropu + podłoga = rzędna; `wys_w_swietle` vs wyliczona),
-pomieszczenia niezamknięte, punkt w ścianie, nakładające się pomieszczenia, działka (obrys, pole, punkty terenu).
+pomieszczenia niezamknięte, punkt w ścianie, nakładające się pomieszczenia, **nakładające się płyty** (strop/dach/wspornik
+w tym samym zakresie z — zdublowana geometria), działka (obrys, pole, punkty terenu), **budynek w granicach działki**.
 
 ### Konwencje geometryczne (ustalone w rdzeniu — uzupełniają schemat)
 * **Warstwy ściany**: kolejność w przegrodzie od wnętrza do zewnątrz; oś = środek warstwy konstrukcyjnej;
@@ -119,6 +120,10 @@ pomieszczenia niezamknięte, punkt w ścianie, nakładające się pomieszczenia,
   `elewacja` (S/N/E/W/SE/…), wycentrowane na linii z rozstawem osiowym `rozstaw`; + 2 rygle stalowe.
 * **Stolarka**: rama przy licu zewn. warstwy konstrukcyjnej (5 cm w głąb, 4 cm w izolacji), kwatery automatyczne
   (okno ≤ 1,6 m, fix/HS ≤ 3,0 m; HS min. 2) lub opcjonalne pole `kwatery` otworu; parapety zewn. i wewn., okładziny ościeży.
+* **Płyty w 3D**: spód części płyty wysuniętej poza obrys kondygnacji niżej dostaje podsufitkę (tynk elewacyjny);
+  attyka biegnie po krawędzi obrysu dachu (oprócz odcinków przy ścianach wyższych kondygnacji) z okładziną i obróbką.
+  Dach na poziomie stropu wyższej kondygnacji (np. dach garażu) należy do grupy tej kondygnacji; dach nad najwyższą
+  kondygnacją — do grupy `dach`. Stropy należą do grupy kondygnacji, której są podłogą.
 * **Działka**: współrzędne `dzialka.yaml` w układzie działki; `uklad.przesuniecie/obrot` = transformacja budynek → działka
   (`p_d = R·p_b + t`). Rzędne terenu `H` bezwzględne → względne `H − zero_abs`.
 
@@ -156,6 +161,18 @@ sceny: metadane IR (kondygnacje, pomieszczenia, działka). Materiały PBR z `mat
 tekstury proceduralne: drewno, deski, parkiet, trawa, kostka, płyty, asfalt, beton, tynk, liście, sedum).
 `export_obj(ir, "x.obj", model=m)` → `.obj + .mtl + tekstury`.
 
+Warstwy-pustki (kod/nazwa: PUSTKA, SZCZELINA, POWIETRZE, AIR) są w IR (przekroje), ale nie trafiają do glTF/OBJ.
+
+## Podgląd www (`www/model3d/`)
+`index.html` + `model.glb` (kopiowany przez `lamela.pipeline --www www/model3d`); three.js 0.186.1 z cdn.jsdelivr.net.
+Działa z dowolnego serwera plików statycznych (np. `python3 -m http.server` w katalogu repozytorium →
+`http://localhost:8000/www/model3d/`); inny model: `index.html?model=ścieżka.glb`. Otwarty z dysku (file://)
+przeglądarka blokuje pobranie .glb — strona pokazuje wtedy wybór pliku / upuszczenie pliku.
+Funkcje: OrbitControls, przełączniki grup (fundamenty, P0…Pn, dach, teren, otoczenie), widoki (ogród, ulica, lotniczy,
+z góry), rozsunięcie kondygnacji, przekrój płaszczyzną (pozioma / pionowa W–E / N–S, suwak, odwrócenie), dzień/wieczór
+(światła pomieszczeń z metadanych, świecące szyby), cienie, identyfikacja elementu po kliknięciu (id, materiał, rzędna),
+układ responsywny (telefon: panel dolny, zwijany).
+
 ## Rendery (`tools/render3d`)
 Widoki (PNG 2400×1500, render 2× + Lanczos): a) lotniczy SE (21.03 12:00), b) lotniczy SW (21.06 15:00), c) poziom oczu
 z ogrodu — elewacja płd. (21.06 15:00, obiektyw przesuwny), d) od ulicy (21.06 19:30), e) aksonometria rozwarstwiona
@@ -169,5 +186,9 @@ cienie PCF soft 4096², N8AO (SSAO), ACES + sRGB, mgła. Parametry każdego rend
 * Otwory prostokątne; brak nadproży/wieńców jako osobnych elementów (N/W w belkach — jeśli podane).
 * Schody proste (biegi prostoliniowe + spoczniki); balustrady pochyłe aproksymowane schodkowo (pryzmy).
 * Przekroje w podglądzie www bez „zaślepek” (widoczne wnętrza brył).
+* Otoczenie: drzewa, auta i budynki sąsiednie — bryły uproszczone; teren bez skarp/murów oporowych (TIN z punktów).
+* Rendery programowe (SwiftShader, CPU): komplet 7 widoków 2400×1500 + siatka nasłonecznienia ≈ 9–10 min.
+* Test podglądu www podmienia w przeglądarce testowej adresy CDN na lokalne `node_modules/three` (ta sama wersja) —
+  sandbox nie ufa CA proxy; adresy CDN sprawdzane osobno (HTTP 200).
 * Współczynniki wysokości PN-ISO 9836 — do potwierdzenia w rejestrze wymagań; kubatura/zabudowa — interpretacja
   opisana wyżej (MPZP może definiować inaczej).
