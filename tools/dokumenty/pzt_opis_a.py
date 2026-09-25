@@ -23,6 +23,20 @@ def _naw(z, uid):
     return n.split("—", 1)[1].strip() if "—" in n else n
 
 
+def _gat(t):
+    """Gatunek drzewa bez dopisku o stanie (stan — osobna kolumna)."""
+    return str(t.get("gat", "—")).split(" (istniej")[0]
+
+
+def _drenaz(o):
+    if not o:
+        return "Drenażu opaskowego nie przewiduje się"
+    op = str(o.get("opis", ""))
+    if "NIE PROJEKTUJE" in op.upper():
+        return "Drenażu opaskowego nie projektuje się — " + (op.split("—", 1)[1].strip() if "—" in op else "")
+    return "Drenaż opaskowy: " + op
+
+
 def _brama(z, typ):
     return next((b for b in z.dz.get("bramy") or [] if b.get("typ") == typ), None)
 
@@ -112,9 +126,9 @@ def pkt2(zp, z, d):
 
     Otoczenie: od północy droga publiczna gminna {dr['symbol']} — {dr['nazwa']}, w liniach rozgraniczających
     {L(dr['szer_lr'])} m, jezdnia {dr['nawierzchnia']} szer. {L(dr['szer_jezdni'])} m;
-    """ + "".join(f"działka nr {s['nr']} — {s['opis']}; " for s in sas) + f"""
+    """ + "; ".join(f"działka nr {s['nr']} — {s['opis']}" for s in sas) + "." + f"""
 
-    Zieleń istniejąca: {len(ist)} drzew{'a' if 1 < len(ist) < 5 else ''} ({'; '.join(t_['gat'] for t_ in ist) or 'brak'}),
+    Zieleń istniejąca: {len(ist)} drzew{'a' if 1 < len(ist) < 5 else ''} ({'; '.join(_gat(t_) for t_ in ist) or 'brak'}),
     zachowywane; drzew i krzewów do usunięcia: {len(wyc) or 'brak'}. Uzbrojenie istniejące w pasie drogi
     {dr['symbol']}: {'; '.join(s['opis'] for s in siec)} {DANE_PRZYKLADOWE}. Stan istniejący — na mapie do celów
     projektowych {do_uzup('mapa do celów projektowych z klauzulą urzędową lub oświadczeniem geodety (E-01)')} (rys. PZT-01).
@@ -138,9 +152,9 @@ def pkt3(zp, z, d):
 def pkt3_ab(zp, z, d):
     ob = [o for o in (z.dz.get("uzbrojenie") or {}).get("obiekty") or [] if o.get("id") != "HYDR"]
     ret = z.dz.get("retencja") or {}
-    rows = [{"Element": o["id"], "Opis": _kr(o.get("opis"), 2)} for o in ob]
-    rows += [{"Element": "zbiornik retencyjny", "Opis": _kr((ret.get("zbiornik") or {}).get("opis"), 2)},
-             {"Element": "niecka chłonna", "Opis": _kr((ret.get("rozsaczanie") or {}).get("opis"), 1)}]
+    rows = [{"Element": o["id"], "Opis": o.get("opis", "—")} for o in ob]
+    rows += [{"Element": "zbiornik retencyjny", "Opis": (ret.get("zbiornik") or {}).get("opis", "—")},
+             {"Element": "niecka chłonna", "Opis": (ret.get("rozsaczanie") or {}).get("opis", "—")}]
     og = z.ogrodzenie_od_drogi()
     rows += [{"Element": "ogrodzenie od drogi", "Opis": f"{og[0]['typ'].split(',')[0]}; h = {L(max(o['wys'] for o in og if o['od_drogi']))} m; "
               f"łącznie {L(sum(o['dl'] for o in og if o['od_drogi']))} m"} if any(o["od_drogi"] for o in og) else {},
@@ -148,14 +162,15 @@ def pkt3_ab(zp, z, d):
                                                            for o in og if not o["od_drogi"])}]
     rows += [{"Element": f"{b['typ']}", "Opis": f"szer. w świetle {L(b['szer'])} m, h = {L(b['wys'])} m"}
              for b in z.dz.get("bramy") or []]
-    rows += [{"Element": "stanowisko pojemników", "Opis": _kr((z.dz.get("odpady") or {}).get("opis"), 1)}]
+    rows += [{"Element": "stanowisko pojemników", "Opis": (z.dz.get("odpady") or {}).get("opis", "—")}]
     zp.markdown("## Urządzenia budowlane związane z budynkiem {podstawa: § 14 pkt 3 lit. a}\n"
                 "Urządzenia budowlane (PB art. 3 pkt 9) projektowane na działce — położenie na rys. PZT-01 i PZT-03:")
     zp.tabela([r for r in rows if r], tytul="Urządzenia budowlane (z modelu `dzialka.yaml`)", lp=True,
-              szerokosci=["7mm", "38mm", None], zrodlo="model/dzialka.yaml — uzbrojenie.obiekty, retencja, ogrodzenie, bramy, odpady")
+              szerokosci=["9mm", "34mm", None], zrodlo="model/dzialka.yaml — uzbrojenie.obiekty, retencja, ogrodzenie, bramy, odpady")
     k = z.inst["kanalizacja"]
     prz = next((o for o in k.odcinki if o.rodzaj == "przykanalik"), None)
     ks = next((p for p in (z.dz.get("uzbrojenie") or {}).get("projektowane") or [] if p["branza"] == "kan_sanit"), {})
+    sr = z.obiekt("SR1") or {}
     ks_ist = next((p for p in (z.dz.get("uzbrojenie") or {}).get("istniejace") or [] if p["branza"] == "kan_sanit"), {})
     kd = [p for p in (z.dz.get("uzbrojenie") or {}).get("projektowane") or [] if p["branza"] == "kan_deszcz"]
     dsz = z.inst["deszczowa"]
@@ -163,7 +178,8 @@ def pkt3_ab(zp, z, d):
     ## Sposób odprowadzania ścieków i wód opadowych {{podstawa: § 14 pkt 3 lit. b}}
     **Ścieki bytowe** — grawitacyjnie do sieci kanalizacji sanitarnej ({ks_ist.get('opis', '—')}) w drodze
     {z.droga()['symbol']}: przykanalik {prz.rura if prz else '—'} o spadku {L(100 * prz.i, 1) if prz else '—'} %
-    [ZAŁ — warunki gestora], {_kr(ks.get('opis'), 2)}; długość trasy na rysunku {L(ks.get('dl', 0), 1)} m.
+    [ZAŁ — warunki gestora], ze studzienką rewizyjną SR1 ({sr.get('opis', '—')}); długość trasy na działce
+    i w pasie drogowym {L(ks.get('dl', 0), 1)} m (rys. PZT-03).
     Ścieki przemysłowe nie powstają.
 
     **Wody opadowe i roztopowe** — zagospodarowane w całości w granicach działki (MPZP 3MN; WT § 28 ust. 2 [W-145]).
@@ -192,9 +208,9 @@ def pkt3_cd(zp, z, d):
     zp.markdown(f"""
     ## Układ komunikacyjny {{podstawa: § 14 pkt 3 lit. c}}
     Wjazd bramą przesuwną w ogrodzeniu od drogi {dr['symbol']}; podjazd przed garażem szer. {L(x1 - x0)} m
-    i dł. {L(y1 - y0)} m (nawierzchnia: {_utw(z, 'U1').get('nawierzchnia', '—')}, spadek {L(100 * _utw(z, 'U1').get('spadek', 0), 1)} %
+    i dł. {L(y1 - y0)} m (nawierzchnia: {_naw(z, 'U1')}, spadek {L(100 * _utw(z, 'U1').get('spadek', 0), 1)} %
     od budynku) — dojazd szerszy od wymaganego {L(szer_min)} m ({z.wym('usytuowanie', 'dojazd_szer_min')[1]}).
-    Dojście piesze od furtki do wejścia głównego: {_utw(z, 'U2').get('nawierzchnia', '—')}. Stanowiska postojowe:
+    Dojście piesze od furtki do wejścia głównego: {_naw(z, 'U2')}. Stanowiska postojowe:
     """)
     rows = [{"Stanowisko": i, "Rodzaj": "w garażu" if t == "garaz" else "naziemne, niezadaszone",
              "Wymiary [m]": f"{L(a)} × {L(b)}", "Odl. od granic niedrogowych [m]": dd,
@@ -225,7 +241,7 @@ def pkt3_ef(zp, z, d):
     """)
     zp.tabela([{"Branża": naz.get(p["branza"], p["branza"]), "Parametry (model)": p.get("opis", "—"),
                 "Długość [m]": p.get("dl")} for p in proj], tytul="Projektowane przyłącza i przewody na działce",
-              lp=True, formaty={"Długość [m]": 1}, szerokosci=["7mm", "32mm", None, "20mm"],
+              lp=True, formaty={"Długość [m]": 1}, szerokosci=["9mm", "30mm", None, "20mm"],
               uwagi=["Średnice, spadki i rzędne w punktach załamania i włączenia — rys. PZT-03 oraz PT-3 IS / PT-4 IE; "
                      "parametry przyłączy wg warunków przyłączenia " + do_uzup("warunki przyłączenia: ENEA Operator (nN), "
                      "gestor wod.-kan., operator telekomunikacyjny — E-05") + "."],
@@ -242,7 +258,7 @@ def pkt3_ef(zp, z, d):
     posadzka parteru ±0,00 = {L(z.zero)} m n.p.m., tj. {L(z.zero - tsr)} m ponad średni poziom terenu przy budynku.
     Teren przy budynku ze spadkiem ≥ {L(100 * sp_min, 0)} % od ścian ({zr_sp}; {id_sp}), opaska żwirowa wokół budynku
     ({L(z.w('pow_opaski'), 1)} m²), odwodnienia liniowe przy drzwiach bezprogowych, przed garażem i przy bramie;
-    na granicach działki rzędne projektowane równe istniejącym. Drenaż opaskowy: {(drn or {}).get('opis', '—')}.
+    na granicach działki rzędne projektowane równe istniejącym. {_drenaz(drn)}.
     Rzędne — rys. PZT-02.
     """)
     zp.tabela([{"Symbol": o["id"], "Rodzaj": o.get("typ", "—").replace("_", " "), "Opis": _kr(o.get("opis"), 1),
@@ -255,7 +271,7 @@ def pkt3_ef(zp, z, d):
     ({L(zp_.get('zywoplot', 0), 1)} m²), rabaty ({L(zp_.get('rabata', 0), 1)} m²), niecka chłonna jako ogród deszczowy.
     Drzewa:
     """)
-    zp.tabela([{"Nr": t_["id"], "Gatunek": t_.get("gat"), "Stan": "istniejące — zachowane" if t_.get("istn") and not t_.get("do_wyciecia")
+    zp.tabela([{"Nr": t_["id"], "Gatunek": _gat(t_), "Stan": "istniejące — zachowane" if t_.get("istn") and not t_.get("do_wyciecia")
                 else ("do usunięcia" if t_.get("do_wyciecia") else "projektowane"),
                 "Średnica korony [m]": t_.get("sr_korony"), "Wysokość [m]": t_.get("wys")} for t_ in z.drzewa()],
               tytul="Drzewa istniejące i projektowane", formaty={"Średnica korony [m]": 1, "Wysokość [m]": 1},

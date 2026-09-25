@@ -52,7 +52,8 @@ def pkt4(zp, z, d):
               "Powierzchnia [m²]": z.w("suma_pow_kondygnacji_nadziemnych"), "Udział [%]": None}]
     zp.tabela(rows, tytul=f"Zestawienie powierzchni — działka nr ewid. {d['dzialka']['nr']} ({L(A)} m²)",
               formaty={"Powierzchnia [m²]": 2, "Udział [%]": 2}, szerokosci=[None, "30mm", "22mm"],
-              uwagi=[W["pow_zabudowy"]["metoda"] + ".", W["pbc"]["metoda"] + "."],
+              uwagi=["Powierzchnia zabudowy: " + W["pow_zabudowy"]["metoda"] + ".",
+                     "Powierzchnia biologicznie czynna: " + W["pbc"]["metoda"] + "."],
               zrodlo="lamela.wskazniki (model/budynek.yaml + model/dzialka.yaml)")
     # bilans terenu (rzut parteru, nie powierzchnia zabudowy — wspornik wyższej kondygnacji nad terenem)
     p0 = float(z.p0.area)
@@ -84,11 +85,14 @@ def pkt4_mpzp(zp, z, d):
     H = z.w("wysokosc_zabudowy")
     ne = W["miejsca_postojowe"]
     og = max((o["wys"] for o in z.ogrodzenie_od_drogi() if o["od_drogi"]), default=0.0)
-    lz_w = next((w.wartosc for w in z.wyniki_audytu("MPZP") if w.element == "linia zabudowy"), "—")
+    import re
+    lz_a = next((w.wartosc for w in z.wyniki_audytu("MPZP") if w.element == "linia zabudowy"), "")
+    lz_el = (re.search(r"\(([^)]+)\)", lz_a) or [None, "—"])[1]
+    lz_w = f"{L(abs(z.lz_rezerwa))} m {'przed linią' if z.lz_rezerwa >= 0 else 'POZA linią'} ({lz_el})"
     zp.tabela_wynikow([
         dict(parametr="Udział powierzchni zabudowy", wartosc=_pr(z.w("udzial_zabudowy")), jedn="%",
              wymaganie=f"≤ {L(_pr(u_zab), 0)} %", podstawa=f"{zr_zab} [{i_zab}]", spelnia=z.w("udzial_zabudowy") <= u_zab),
-        dict(parametr="Udział powierzchni biologicznie czynnej (bez rezerwy dachu)", wartosc=_pr(z.w("udzial_pbc")), jedn="%",
+        dict(parametr="Udział powierzchni biologicznie czynnej (bez rezerwy dachu zielonego)", wartosc=_pr(z.w("udzial_pbc")), jedn="%",
              wymaganie=f"≥ {L(_pr(u_pbc), 0)} %", podstawa=f"{zr_pbc} [{i_pbc}]", spelnia=z.w("udzial_pbc") >= u_pbc),
         dict(parametr="Intensywność zabudowy (nadziemna)", wartosc=L(z.w("intensywnosc_nadziemna"), 3),
              wymaganie=f"{L(ints[0])}–{L(ints[1])}", podstawa=f"{zr_int} [{i_int}]",
@@ -102,7 +106,7 @@ def pkt4_mpzp(zp, z, d):
         dict(parametr=f"Miejsca postojowe (garaż {ne.get('garaz')} + naziemne {ne.get('zewn')})", wartosc=str(ne["wartosc"]),
              jedn="szt.", wymaganie=f"≥ {mp} na lokal mieszkalny", podstawa=f"{zr_mp} [{i_mp}]",
              spelnia=ne["wartosc"] >= mp * LOKALE_MIESZKALNE),
-        dict(parametr="Nieprzekraczalna linia zabudowy — element najbliższy (− = przed linią)", wartosc=lz_w,
+        dict(parametr="Nieprzekraczalna linia zabudowy — element najbliższy linii", wartosc=lz_w,
              wymaganie=f"{L(lz)} m od linii rozgraniczającej; brak przekroczeń", podstawa=f"{zr_lz} [{i_lz}]",
              spelnia=z.lz_rezerwa >= 0),
         dict(parametr="Wysokość ogrodzenia od drogi (ażurowe)", wartosc=og, jedn="m", wymaganie=f"≤ {L(ogr)} m",

@@ -27,7 +27,8 @@ def pkt5(zp, z, d):
                 podstawa="§ 14 pkt 5 RPB")
     zp.markdown(f"""
     ## Ograniczenia i zakazy wynikające z aktów prawa miejscowego {{podstawa: § 14 pkt 5 lit. a}}
-    Działka leży w terenie **3MN** — zabudowa mieszkaniowa jednorodzinna wolnostojąca — MPZP: {(z.dz.get('dzialka') or {}).get('mpzp', '—')}
+    Działka leży na terenie objętym miejscowym planem zagospodarowania przestrzennego — {(z.dz.get('dzialka') or {}).get('mpzp', '—')},
+    przeznaczenie: zabudowa mieszkaniowa jednorodzinna wolnostojąca
     {DANE_PRZYKLADOWE} {do_uzup('wypis i wyrys z MPZP (E-02)')}. Ustalenia istotne dla zagospodarowania:
     nieprzekraczalna linia zabudowy {L(lz)} m od linii rozgraniczającej drogi {z.droga()['symbol']}; wskaźniki
     powierzchni zabudowy, powierzchni biologicznie czynnej, intensywności, wysokości, liczby kondygnacji, geometrii
@@ -65,7 +66,8 @@ def pkt5(zp, z, d):
         {"Oddziaływanie": "Grunty rolne", "Charakterystyka": f"klasy gruntów {ZAL} — mineralne RIVb/RV {do_uzup('wypis z EGiB (E-03)')}",
          "Ocena": f"decyzja o wyłączeniu z produkcji nie dotyczy przy klasach IV–VI mineralnych [W-025]"},
         {"Oddziaływanie": "Czynnik chłodniczy R290 (propan)", "Charakterystyka": "strefa bezpieczeństwa wokół jednostki zewnętrznej bez otworów, wpustów, studzienek i źródeł zapłonu",
-         "Ocena": (f"{r290.wartosc} ({r290.status})" if r290 else "—") + " [W-156]"},
+         "Ocena": (f"elementy w strefie: {r290.wartosc} — " + ("spełnia" if r290.status == "OK" else "do sprawdzenia")
+                   if r290 else "—") + " [W-156]"},
     ], tytul="Oddziaływania i zagrożenia", lp=True, szerokosci=["7mm", "34mm", None, "46mm"],
         zrodlo="lamela.obliczenia.sanitarne.ogrzewanie (hałas: PORT PC p. 4.4); audyt A1; model/dzialka.yaml")
 
@@ -93,7 +95,7 @@ def pkt6(zp, z, d):
     utwardzonym dojściem długości ok. {L(u2.bounds[3] - u2.bounds[1], 1) if u2 is not None else '—'} m do wejścia głównego (rys. PZT-01).
 
     **Przeciwpożarowe zaopatrzenie w wodę** — wymagana wydajność ≥ {L(q, 0)} dm³/s ({zr_q}; {i_q}) z sieci wodociągowej
-    w drodze {z.droga()['symbol']}: najbliższy hydrant zewnętrzny — {(hyd or {}).get('opis', '—')}, w odległości ok.
+    w drodze {z.droga()['symbol']}: {str((hyd or {}).get('opis', '—')).split(' — ')[0]}, w odległości ok.
     {L(dh, 0) if dh is not None else '—'} m od budynku {DANE_PRZYKLADOWE}
     {do_uzup('potwierdzenie lokalizacji i wydajności hydrantu przez gestora sieci')}.
     Przeciwpożarowy wyłącznik prądu — przy złączu kablowo-pomiarowym / wejściu (PT-4 IE).
@@ -148,7 +150,7 @@ def pkt7(zp, z, d):
     Kategoria geotechniczna: **{geo.get('kategoria', '—')}** ({geo.get('uwagi', '—')}); grunt: {(geo.get('grunt') or {}).get('rodzaj', '—')},
     zwierciadło wody gruntowej ok. {L(abs(geo.get('ZWG', 0)), 1)} m p.p.t. {DANE_PRZYKLADOWE}
     {do_uzup('opinia geotechniczna (E-04)')}. Instalacja fotowoltaiczna na dachach: {pv.get('moduly', '—')} modułów,
-    {L(kwp)} kWp ≤ {L(pvmax, 1)} kWp ({zr_pv}; {i_pv}).
+    {L(kwp)} kWp ≤ {L(pvmax, 1)} kWp ({zr_pv.split(' (')[0]}; {i_pv}).
     """)
 
 
@@ -189,9 +191,10 @@ def pkt8(zp, z, d):
         ("WT § 271 ust. 1", "odległość ścian budynków ZL od budynków sąsiednich", dmin_s, f"≥ {L(o8)} m", dmin_s >= o8, "—"),
         ("u.d.p. art. 43 ust. 1", f"budynek od zewnętrznej krawędzi jezdni drogi gminnej {dr['symbol']}", dr["odl_bud_jezdnia"],
          f"≥ {L(oj)} m", dr["odl_bud_jezdnia"] >= oj, "—"),
-        ("POŚ art. 144 ust. 2; Dz.U. 2014 poz. 112", "hałas instalacji (PC) na granicy — pora nocy [dB(A)]", h["L_A_granica"],
-         f"≤ {L(Ln, 0)}", h["L_A_granica"] <= Ln, h["granica"]),
+        ("POŚ art. 144 ust. 2; Dz.U. 2014 poz. 112", "hałas instalacji (PC) na granicy — pora nocy", h["L_A_granica"],
+         f"≤ {L(Ln, 0)} dB(A)", h["L_A_granica"] <= Ln, h["granica"]),
     ]
+    jedn = ["m", "m", "m", "m", "h", "m", "m", "m", "dB(A)"]
     ok = all(r[4] for r in rows) and z.lz_rezerwa >= 0
     zp.rozdzial("Informacja o obszarze oddziaływania obiektu", f"""
     Obszar oddziaływania obiektu (PB art. 3 pkt 20 — teren wyznaczony w otoczeniu obiektu na podstawie przepisów
@@ -202,11 +205,12 @@ def pkt8(zp, z, d):
     ze szkodą dla gruntów sąsiednich i odprowadzania wód na grunty sąsiednie), ustaleń MPZP (linia zabudowy,
     wskaźniki — pkt 4). Wartości — minimum dla wszystkich elementów budynku i granic niedrogowych (audyt A1).
     """, podstawa="§ 14 pkt 8, § 18 RPB")
-    zp.tabela([{"Przepis": a, "Ograniczenie": b, "Projekt (min.) [m]": c, "Wymaganie": e,
-                "Ocena": "spełnia" if f else "NIE SPEŁNIA", "Element": g} for a, b, c, e, f, g in rows],
-              tytul="Przepisy wyznaczające obszar oddziaływania i sprawdzenie", formaty={"Projekt (min.) [m]": 2},
+    zp.tabela([{"Przepis": a, "Ograniczenie": b, "Projekt": f"{L(c, 1 if u != 'm' else 2)} {u}", "Wymaganie": e,
+                "Ocena": "spełnia" if f else "NIE SPEŁNIA", "Element": g} for (a, b, c, e, f, g), u in zip(rows, jedn)],
+              tytul="Przepisy wyznaczające obszar oddziaływania i sprawdzenie", wyrownanie={"Projekt": "r"},
               szerokosci=["26mm", None, "18mm", "22mm", "16mm", "18mm"], klasa="zwarta",
-              uwagi=[f"{zr_o} [{i_o}]; {zr_k}; {zr_hn} — {ns[0]['daty'][0]}, {ns[0]['daty'][1]}, godz. "
+              uwagi=[f"{zr_o} [{i_o}]; {zr_k}; {zr_hn} — " + ", ".join(".".join(reversed(x.split("-"))) for x in ns[0]["daty"])
+                     + f", godz. "
                      f"{ns[0]['przedzial'][0]}–{ns[0]['przedzial'][1]}" if ns else zr_o])
     if ok:
         zp.wniosek(f"**Obszar oddziaływania obiektu mieści się w całości na działce nr ewid. {d['dzialka']['nr']}, "
