@@ -74,18 +74,24 @@ class WynikObc:
         return self.Phi_T + self.Phi_V + self.Phi_RH
 
 
-def theta_nieogrzewanej(ob, pid: str, theta_e: float, *, n_u: float = 3.0, temp_ogrz: dict | None = None) -> tuple[float, float, float, float]:
-    """Temperatura przestrzeni nieogrzewanej z bilansu (PN-EN ISO 13789:2017 p. 6.4; PN-EN 12831-1 p. 6.3.2.4):
-    θ_u = (Σ H_iu·θ_i + H_ue·θ_e)/(Σ H_iu + H_ue); H_ue = Σ A·U (zewn.) + H_g + ρc·n_u·V_u.
-    Zwraca (θ_u, b = H_ue/(H_iu + H_ue), H_iu, H_ue)."""
+def theta_nieogrzewanej(ob, pid: str, theta_e: float, *, n_u: float = 3.0, temp_ogrz: dict | None = None,
+                        theta_me: float | None = None) -> tuple[float, float, float, float]:
+    """Temperatura przestrzeni nieogrzewanej z bilansu ustalonego (PN-EN ISO 13789:2017 p. 6.4; PN-EN 12831-1 p. 6.3.2.4):
+    θ_u = (Σ H_iu·θ_i + H_ue·θ_e + H_ug·θ_m,e)/(Σ H_iu + H_ue + H_ug);
+    H_ue = Σ A·U (do powietrza zewn.) + ρc·n_u·V_u; H_ug = f_g1·A·U_equiv (grunt — ta sama konwencja co H_T,ig
+    w PN-EN 12831: strumień f_g1·f_g2·A·U·(θ_i − θ_e) = f_g1·A·U·(θ_i − θ_m,e)).
+    Zwraca (θ_u, b = (θ_i − θ_u)/(θ_i − θ_e) dla θ_i = 20 °C, H_iu, H_ue + H_ug)."""
     br = ob.bryla
     pu = br.pomieszczenia[pid]
+    theta_me = float(wym("ogrzewanie", "theta_me", 7.9)) if theta_me is None else theta_me
     H_ue = 0.0
+    H_ug = 0.0
     for e in pu.elementy:
         if e.sasiad == "zewn":
             H_ue += e.A * ob.U(e)
-        elif e.sasiad == "grunt" and ob.grunt_nieogrz is not None:
-            H_ue += ob.grunt_nieogrz.H_g * e.A / max(ob.grunt_nieogrz.A, 1e-9)
+        elif e.sasiad == "grunt":
+            U = ob.grunt_nieogrz.U if ob.grunt_nieogrz is not None else ob.U(e)
+            H_ug += (ob.grunt_nieogrz.f_g1 if ob.grunt_nieogrz is not None else 1.45) * e.A * U
     H_ue += RHO_C_WH * n_u * pu.V
     H_iu = 0.0
     sum_t = 0.0
@@ -95,10 +101,12 @@ def theta_nieogrzewanej(ob, pid: str, theta_e: float, *, n_u: float = 3.0, temp_
                 h = e.A * ob.U(e)
                 H_iu += h
                 sum_t += h * ((temp_ogrz or {}).get(p.id, p.theta or 20.0))
-    if H_iu + H_ue <= 0:
+    den = H_iu + H_ue + H_ug
+    if den <= 0:
         return theta_e, 1.0, 0.0, 0.0
-    th = (sum_t + H_ue * theta_e) / (H_iu + H_ue)
-    return th, H_ue / (H_iu + H_ue), H_iu, H_ue
+    th = (sum_t + H_ue * theta_e + H_ug * theta_me) / den
+    b = (20.0 - th) / (20.0 - theta_e)
+    return th, b, H_iu, H_ue + H_ug
 
 
 def obciazenie_cieplne(ob, went: WynikWent, *, theta_e: float | None = None, theta_me: float | None = None,
@@ -121,7 +129,7 @@ def obciazenie_cieplne(ob, went: WynikWent, *, theta_e: float | None = None, the
     # nieogrzewane
     th_u, b_u = {}, {}
     for pu in br.nieogrzewane:
-        t, b, _, _ = theta_nieogrzewanej(ob, pu.id, theta_e, n_u=n_u)
+        t, b, _, _ = theta_nieogrzewanej(ob, pu.id, theta_e, n_u=n_u, theta_me=theta_me)
         th_u[pu.id], b_u[pu.id] = t, b
     A_obud = ob.A_obudowy or 1.0
     wyn = []
@@ -189,7 +197,8 @@ def obciazenie_cieplne(ob, went: WynikWent, *, theta_e: float | None = None, the
                   f"nagrzewnicy wtórnej); powietrze transferowe do łazienek o θ = {fmt(th_tr, 1)} °C", ZAL)
         for pid, t in th_u.items():
             zal.dodaj(f"Przestrzeń nieogrzewana {pid}: θ_u = {fmt(t, 1)} °C, b_u = {fmt(b_u[pid], 2)} z bilansu "
-                      f"(n_u = {fmt(n_u, 1)} h⁻¹ — przestrzeń ze stałymi otworami wentylacyjnymi)", NZW,
+                      f"(n_u = {fmt(n_u, 1)} h⁻¹ — przestrzeń ze stałymi otworami wentylacyjnymi; grunt pod posadzką "
+                      "sprzężony z θ_m,e); b_u stosowane także w bilansie miesięcznym EP", NZW,
                       "PN-EN ISO 13789:2017 p. 6.4 i tab. krotności dla przestrzeni nieogrzewanych")
     return r
 

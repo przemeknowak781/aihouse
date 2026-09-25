@@ -42,6 +42,7 @@ from lamela.obliczenia.fizyka_energia import oblicz_wszystko, zapisz_raporty  # 
 B_TEST = ROOT / "model" / "test" / "dom_testowy.yaml"
 D_TEST = ROOT / "model" / "test" / "dzialka_testowa.yaml"
 DEMO = ROOT / "projekt" / "08_obliczenia" / "demo_test"
+B_ENERGIA = ROOT / "tools" / "test_obliczenia_dane" / "dom_energia.yaml"
 B_DOCEL = ROOT / "model" / "budynek.yaml"
 D_DOCEL = ROOT / "model" / "dzialka.yaml"
 
@@ -384,6 +385,58 @@ def test_model_nieogrzewane_bu():
     assert w2.H_tr_skladniki["przestrzenie nieogrzewane (b_u)"] > 0
 
 
+_RE = None
+
+
+def _wyniki_energia():
+    global _RE
+    if _RE is None:
+        m = load_model(B_ENERGIA, None, strict=True)
+        _RE = (m, oblicz_wszystko(m))
+    return _RE
+
+
+def test_model_energia_garaz_wspornik_lazienki():
+    """Model z garażem nieogrzewanym, łazienkami 24 °C, wspornikiem P1 nad powietrzem, stropodachem zielonym nad P0."""
+    m, R = _wyniki_energia()
+    ob = R["obudowa"]
+    br = ob.bryla
+    assert not br.ostrzezenia, br.ostrzezenia
+    role = {e.rola for e in br.elementy_obudowy()}
+    assert {"strop_zewn", "strop_nieogrz", "sciana_nieogrz", "dach", "podloga_grunt", "drzwi"} <= role
+    # garaż: θ_u z bilansu z gruntem sprzężonym z θ_m,e; b_u ∈ (0,5; 1)
+    assert 0.5 < R["obc"].b_u["0.04"] < 1.0
+    # przegrody wyłącznie garażu — bez wymagań U; przegrody dom–garaż — z wymaganiami 0,30/0,25
+    assert ob.u[("SZG", "sciana_zewn")].U_max is None and ob.u[("SD-G", "dach")].U_max is None
+    assert ob.u[("SWG", "sciana_nieogrz")].U_max == 0.3 and ob.u[("ST2|P1|dol", "strop_nieogrz")].U_max == 0.25
+    close(ob.u[("SWG", "sciana_nieogrz")].Rse, 0.13, 1e-12, "R_se = R_si do pom. nieogrzewanego")
+    # wspornik z ociepleniem spodu: U < 0,15
+    assert ob.u[("ST3|P1|zewn", "strop_zewn")].U < 0.15
+    # warstwa klinowa jawna (klin: d_min/d_max, prostokąt) — U < U(d_min)
+    wd = ob.u[("SD-D1", "dach")]
+    assert wd.klin and wd.U < wd.U_c
+    # łazienki: powietrze transferowe, Φ_V > 0 mimo braku nawiewu
+    obc = {o.id: o for o in R["obc"].pomieszczenia}
+    assert obc["0.02"].q_tr > 0 and obc["0.02"].q_su == 0 and obc["0.02"].Phi_V > 0
+    # łazienka 24 °C traci ciepło do sąsiadów 20 °C
+    assert any("(20 °C)" in x[1] for x in obc["0.02"].skladniki)
+    # węzły z modelu (aliasy typów mostki2d), konsole lamel (χ)
+    typy = {w.typ for w in ob.wezly}
+    assert {"attyka", "naroznik_wypukly", "sciana_grunt", "oscieze", "konsola_lamel"} <= typy
+    # okap nad oknem łazienki P0 od wspornika ST3 (strop P1)
+    e = next(x for x in br.elementy if x.id == "O0-02")
+    assert e.zacienienie and e.zacienienie.get("okap_zrodlo") == "ST3"
+    # ciągłość: wszystkie przegrody kompletne (dach zielony z drenażem, filtrem i warstwą odporną na korzenie)
+    assert all(c.ok for c in ob.ciaglosc), [(c.kod, [u.opis for u in c.braki]) for c in ob.ciaglosc if not c.ok]
+    # czerpnia/wyrzutnia, garaż — sprawdzenia
+    assert all(c is not False for _, _, c in R["went"].sprawdzenia + R["went"].garaz)
+    # grunt: izolacja obwodowa R = 0,15/0,035 ≥ 2,0
+    assert ob.grunt.spelnia_obwodowa
+    A, A0, B, C = R["ep_alt"]
+    assert A.spelnia and A.EP < A0.EP < C.EP < B.EP
+    assert A.H_tr_skladniki["przestrzenie nieogrzewane (b_u)"] > 0 and A.H_tr_skladniki["stropy nad powietrzem zewn."] > 0
+
+
 def test_demo_raporty(katalog: Path | None = None):
     m, R = _wyniki()
     out = katalog or (ROOT / "build" / "test" / "obliczenia_demo")
@@ -396,6 +449,11 @@ def test_demo_raporty(katalog: Path | None = None):
         assert n in names, n
     for p in pl:
         assert Path(p).stat().st_size > 200, p
+    m2, R2 = _wyniki_energia()
+    pl2 = zapisz_raporty(R2, out / "dom_energia", tytul="model testowy energii (garaż, wspornik, dach zielony)",
+                         model_opis="Model: `tools/test_obliczenia_dane/dom_energia.yaml` — model TESTOWY biblioteki "
+                                    "(nie jest projektem Domu LAMELA).")
+    assert len(pl2) >= 14
 
 
 def test_model_docelowy_jesli_istnieje():

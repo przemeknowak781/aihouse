@@ -39,6 +39,7 @@ class Obudowa:
     U_elem: dict                     # id elementu → U [W/(m²K)]
     zal: Zalozenia
     cfg: dict = field(default_factory=dict)
+    klucze_ogrz: set = field(default_factory=set)    # (układ, rola) przegród pomieszczeń ogrzewanych
 
     def U(self, e: Element) -> float:
         return self.U_elem[e.id]
@@ -152,6 +153,13 @@ def oblicz_obudowe(m, *, wyniki_symulacji: dict | None = None, wariant_psi: str 
         U_elem[e.id] = w.U if w is not None else 0.0
         if w is None and br.pomieszczenia[e.pom].ogrzewane and e.sasiad != br.pomieszczenia[e.pom].id:
             br.ostrzezenia.append(f"{e.pom}/{e.id}: brak układu warstw ({e.rola}) — U = 0 (sprawdzić model)")
+    # wymagania U tylko dla przegród pomieszczeń ogrzewanych (WT zał. 2 pkt 1.1 — przegrody pom. nieogrzewanych bez wymagań)
+    klucze_ogrz = {(e.uklad or e.przegroda, e.rola) for e in br.elementy if br.pomieszczenia[e.pom].ogrzewane}
+    for key, wu in U.items():
+        if key not in klucze_ogrz and key[1] != "podloga_grunt":
+            if wu.U_max is not None or wu.U_cel is not None:
+                wu.uwagi.append("przegroda wyłącznie pomieszczenia nieogrzewanego — bez wymagań U (WT zał. 2 pkt 1.1)")
+            wu.U_max = wu.U_cel = None
     # --- mostki ---
     sym = wyniki_symulacji
     if sym is None and cfg.get("wezly_wyniki"):
@@ -198,7 +206,7 @@ def oblicz_obudowe(m, *, wyniki_symulacji: dict | None = None, wariant_psi: str 
                 continue
             cg[key] = sprawdz_ciaglosc(kod, nazwa, ws, m.materialy, rola)
         cg[key].elementy.append(f"{e.pom}:{e.id}")
-    return Obudowa(m, br, U, okna, wg, wn, wezly, Htb, zac, gs, list(cg.values()), U_elem, zal, cfg)
+    return Obudowa(m, br, U, okna, wg, wn, wezly, Htb, zac, gs, list(cg.values()), U_elem, zal, cfg, klucze_ogrz)
 
 
 def raport_ciaglosc(wyniki: list[WynikCiaglosci], uwagi_wezlow: list | None = None) -> str:

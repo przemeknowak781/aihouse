@@ -52,7 +52,8 @@ def oblicz_wszystko(m, *, wyniki_symulacji: dict | None = None, wariant_psi: str
     fr3 = KD.f_rsi_min(20.0, phi_i=None, klasa=klasa_wilgotnosci)
     elem = []
     for (kod, rola), wu in ob.u.items():
-        if rola in ("sciana_wewn", "strop_wewn"):
+        if rola in ("sciana_wewn", "strop_wewn", "podloga_grunt_nieogrz") or \
+                ((kod, rola) not in ob.klucze_ogrz and rola != "podloga_grunt"):
             continue
         f = KD.f_rsi_przegrody(wu.U if rola != "podloga_grunt" else (ob.grunt.U if ob.grunt else wu.U))
         elem.append({"id": kod, "opis": f"przegroda ({rola}), U = {fmt_u(wu.U)}", "f_Rsi": f,

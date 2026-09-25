@@ -1,5 +1,6 @@
 {
- "title": "Korekta Inwestora: „S” z przesuniętych brył, garaż w parterze — panel koncepcji uruchomiony ponownie",
+ "nr": 19,
+ "title": "Biblioteka fizyki budowli i EP działa (Glaser, ciągłość warstw, EP); sędziowie oceniają warianty",
  "stages": [
   [
    "Analiza szkicu — interpretacja v2 („S” z brył, garaż)",
@@ -55,9 +56,24 @@
   ]
  ],
  "notes": [
+  "NADZÓR (04:46): 6 agentów aktywnych, bez zastojów; najdłuższa bezczynność 1 min; zmiany w repo 0 min temu.",
   "Biblioteka fizyki/EP działa (test): U wg ISO 6946, grunt ISO 13370, Glaser ISO 13788 na urzędowym klimacie TRM Poznań, obciążenie cieplne 12831-1, EP wg metodologii, wentylacja — z wykazem zgodności z WT.",
   "Kontrola „4 linii” działa: na modelu testowym wykryła brak izolacji przeciwwilgociowej podłogi na gruncie (WT § 316) i 1 okno z g > 0,35 — takie błędy nie przejdą do projektu LAMELA.",
   "Sędziowie J1/J2 oceniają warianty (J3 w kolejce); potem synteza parametryczna modelu.",
   "Solver mostków: weryfikacja numeryczna w toku (normowa zakończona)."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/projekt/08_obliczenia/demo_test/glaser_SD-D1.png",
+   "caption": "Glaser (ISO 13788) — stropodach, klimat TRM Poznań"
+  },
+  {
+   "path": "/home/user/aihouse/projekt/08_obliczenia/demo_test/bilans_energii.png",
+   "caption": "Bilans energii miesięczny (metodologia EP)"
+  },
+  {
+   "path": "/home/user/aihouse/docs/20_koncepcja/W3/przekroj.png",
+   "caption": "W3: przekrój"
+  }
  ]
 }
