@@ -414,7 +414,7 @@ def label_base_map(c, s, lab: Labeler, win: Polygon, used: set, opts: dict, spot
         for ls in (g.geoms if hasattr(g, "geoms") else [g]):
             lab.along(ls, sx.lit, H, "Z-SIECI-IST", sx.kolor, n=3, max_cost=10.0, mask=0.2)
             from ..draft.sheet import wrap
-            short = short_desc(sx.opis)
+            short = short_desc(sx.opis, 120)             # pełny opis, łamany niżej (bez „…”)
             anchors = [np.asarray(ls.interpolate(f, normalized=True).coords[0])
                        for f in (0.2, 0.3, 0.12, 0.06, 0.4, 0.8, 0.9, 0.95, 0.03, 0.5, 0.6, 0.7)]
             txt = f"{sx.lit} — {short}"
@@ -1491,18 +1491,45 @@ def register_all(lab: Labeler, n0=0, n1=None, min_len_mm=0.8, hatch_w=0.12):
 
 
 # ================================================================================================ tabele w rzutni
+def _szerokosci_z_zawijaniem(ws, wmin, align, limit):
+    """Szerokości kolumn ≤ ``limit`` łącznie: kolumny tekstowe (wyrównane do lewej) zwężane od najszerszej
+    („napełnianie wodą” — wspólny pułap), nie węższe niż najdłuższe słowo / nagłówek (``wmin``)."""
+    ws = list(ws)
+    if limit is None or sum(ws) <= limit + 1e-6:
+        return ws
+    tekst = [j for j in range(len(ws)) if (align[j] if align else ("left" if j == 0 else "right")) == "left"]
+    if not tekst:
+        return ws
+    stale = sum(w for j, w in enumerate(ws) if j not in tekst)
+    lo, hi = 0.0, max(ws[j] for j in tekst)
+    for _ in range(40):                                   # pułap c: suma(min(w_j, max(c, wmin_j))) = limit − stałe
+        c_ = (lo + hi) / 2.0
+        if sum(min(ws[j], max(c_, wmin[j])) for j in tekst) + stale > limit:
+            hi = c_
+        else:
+            lo = c_
+    for j in tekst:
+        ws[j] = min(ws[j], max(lo, wmin[j]))
+    return ws
+
+
 def vp_table(c, x, y_top, cols, rows, title=None, h=H, row_h=4.4, align=None, notes=(), max_w_mm=None,
-             layer="Z-OPISY", title_h=3.5, min_col=None):
+             layer="Z-OPISY", title_h=3.5, min_col=None, wrap_w=None):
     """Tabela rysowana w rzutni (jednostki modelu; wymiary papierowe × k) — pismo ≥ 2,5 mm (PZT). Szerokości kolumn
-    dobierane do treści; nagłówki zawijane. ``cols`` = [(nagłówek, min. szer. mm)]. Zwraca (x0, y0, x1, y1)."""
+    dobierane do treści; nagłówki zawijane. ``cols`` = [(nagłówek, min. szer. mm)]. Tabela nie szersza niż
+    ``wrap_w`` (domyślnie ``max_w_mm``): dłuższe teksty kolumn wyrównanych do lewej są łamane na wiersze tym samym
+    pismem (bez skracania „…” — weryfikacja C 2.3). Zwraca (x0, y0, x1, y1)."""
     from ..draft.sheet import wrap
     k = c.k
     pad = 1.2
-    ws = []
-    for j, (hd, wmin) in enumerate(cols):
+    ws, wmin = [], []
+    for j, (hd, wm) in enumerate(cols):
         wc = max([T.width(str(r[j]), h) for r in rows if j < len(r)] + [0.0]) + 2 * pad
         wh = max(T.width(wd, h, "bold") for wd in str(hd).split()) + 2 * pad
-        ws.append(max(wc, wh, float(wmin or 0)))
+        wword = max([T.width(wd, h) for r in rows if j < len(r) for wd in str(r[j]).split()] + [0.0]) + 2 * pad
+        ws.append(max(wc, wh, float(wm or 0)))
+        wmin.append(max(wh, wword, float(wm or 0)))
+    ws = _szerokosci_z_zawijaniem(ws, wmin, align, wrap_w if wrap_w is not None else max_w_mm)
     Wt = sum(ws)
     hdr = [wrap(str(hd), ws[j] - 2 * pad, h, "bold") for j, (hd, _w) in enumerate(cols)]
     nh = max(len(x_) for x_ in hdr)
@@ -1525,22 +1552,26 @@ def vp_table(c, x, y_top, cols, rows, title=None, h=H, row_h=4.4, align=None, no
         xx += ws[j]
     y -= header_h * k
     c.line((x, y), (X(Wt), y), layer, pen=0.25)
+    lh = h * 1.45
     for r in rows:
+        cells = [wrap(str(v), ws[j] - 2 * pad, h) if T.width(str(v), h) > ws[j] - 2 * pad + 1e-6 else [str(v)]
+                 for j, v in enumerate(r)]
+        rh = row_h + (max(len(ls) for ls in cells) - 1) * lh if cells else row_h
         xx = 0.0
-        for j, v in enumerate(r):
+        for j, (v, ls) in enumerate(zip(r, cells)):
             a = (align[j] if align else ("left" if j == 0 else "right"))
             st = "bold" if str(v) in ("NIE",) else "normal"
             col = "#c00000" if str(v) in ("NIE", "KOLIZJA") else None
-            if a == "left":
-                c.text((X(xx + pad), y - row_h / 2.0 * k), str(v), h, 0.0, "left", "middle", layer, style=st, color=col)
-            elif a == "right":
-                c.text((X(xx + ws[j] - pad), y - row_h / 2.0 * k), str(v), h, 0.0, "right", "middle", layer,
-                       style=st, color=col)
-            else:
-                c.text((X(xx + ws[j] / 2.0), y - row_h / 2.0 * k), str(v), h, 0.0, "center", "middle", layer,
-                       style=st, color=col)
+            for i, t_ in enumerate(ls):
+                yy = y - (rh / 2.0 - (len(ls) - 1) * lh / 2.0 + i * lh) * k
+                if a == "left":
+                    c.text((X(xx + pad), yy), t_, h, 0.0, "left", "middle", layer, style=st, color=col)
+                elif a == "right":
+                    c.text((X(xx + ws[j] - pad), yy), t_, h, 0.0, "right", "middle", layer, style=st, color=col)
+                else:
+                    c.text((X(xx + ws[j] / 2.0), yy), t_, h, 0.0, "center", "middle", layer, style=st, color=col)
             xx += ws[j]
-        y -= row_h * k
+        y -= rh * k
         c.line((x, y), (X(Wt), y), layer, pen=0.13)
     xx = 0.0
     for j in range(len(ws) - 1):

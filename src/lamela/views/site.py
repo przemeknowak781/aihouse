@@ -141,7 +141,8 @@ def _tabele(vp, opts, tabs, x, y_top, gap=6.0) -> list:
     if str(opts.get("tabele", "rzutnia")).strip().lower() == "kolumna":
         out = []
         for nm, t in tabs:
-            def fn(sh, x_, y_, w_, t=t):
+            def fn(sh, x_, y_, w_, t=t):             # tabela nie szersza niż blok (długie opisy łamane)
+                t = dict(t, max_w_mm=min(float(t.get("max_w_mm") or w_), w_), wrap_w=w_)
                 return D.vp_table(sh, x_, y_, **t)[1]
             out.append((nm, fn))
         return out
@@ -332,9 +333,21 @@ def _dims_plan(lab, s, used, detail=False):
                     avoid=unary_union([s.footprint, x["bud"]]), span=12.0, step=0.5)
 
 
+_BEZ_SKROTU = 400          # tabele: pełny opis (vp_table łamie długie komórki — weryfikacja C 2.3)
+
+
 def _short(txt, n=28):
     t = str(txt or "").split(" — ")[0].split(";")[0].strip()
     return t if len(t) <= n else t[:n - 1].rstrip() + "…"
+
+
+def _zawin_opis(t: str, n: int = 40, max_wierszy: int = 3) -> list[str]:
+    """Opis na planie łamany na wiersze ≤ n znaków (zamiast ucinania „…”; weryfikacja C 2.3)."""
+    import textwrap
+    ls = textwrap.wrap(t, n, break_long_words=False, break_on_hyphens=False) or [t]
+    if len(ls) > max_wierszy:
+        ls = ls[:max_wierszy - 1] + [" ".join(ls[max_wierszy - 1:])]
+    return ls
 
 
 def _labels_project(lab, s, W, used, detail=False, utilities=True):
@@ -369,10 +382,11 @@ def _labels_project(lab, s, W, used, detail=False, utilities=True):
             L(np.asarray(pg.representative_point().coords[0]), ["taras" if "desk" in t["naw"] else
                                                                         "podest"], h, dists=(0.0, 1.5, 4.0, 8.0))
     for u in s.utwardzenia:
-        nm = _short(u["raw"].get("nawierzchnia"), 22)
+        nm = _short(u["raw"].get("nawierzchnia"), _BEZ_SKROTU)
         if u["poly"].area < 3.0 or "fundament" in nm or "pojemnik" in nm:
             continue
-        L(np.asarray(u["poly"].representative_point().coords[0]), [nm], h, dists=(0.0, 1.5, 4.0, 8.0, 12.0))
+        L(np.asarray(u["poly"].representative_point().coords[0]), _zawin_opis(nm, 24, 2), h,
+          dists=(0.0, 1.5, 4.0, 8.0, 12.0))
     for q in s.miejsca:
         if q["poly"].difference(s.p0).area < 0.1:
             continue
@@ -903,7 +917,7 @@ def _tab_rzedne(s, W):
     rows = [["±0,00 — posadzka parteru", mm(z0)]]
     for t in s.tarasy:
         if t["rz"] is not None:
-            rows.append([f"{t['id']} — {_short(t['naw'], 18)}", mm(z0 + float(t["rz"]))])
+            rows.append([f"{t['id']} — {_short(t['naw'], _BEZ_SKROTU)}", mm(z0 + float(t["rz"]))])
     h, src = s.teren_przy_wejsciu()
     if h is not None:
         rows.append(["teren proj. przy wejściu głównym", mm(h)])
@@ -930,7 +944,7 @@ def _tab_odwodnienie(s):
              f"b = {mm(float(o['szer'] or 0))} m")
         sp = f"{fmt.num(float(o['spadek']) * 100, 1)} %" if o["spadek"] else "—"
         typ = {"liniowe": "liniowe", "niecka": "niecka", "opaska_zwirowa": "opaska żwir."}.get(o["typ"], o["typ"])
-        rows.append([o["id"], typ, wym, sp, _short(o["odb"], 20) or "—"])
+        rows.append([o["id"], typ, wym, sp, _short(o["odb"], _BEZ_SKROTU) or "—"])
     notes = [f"{o['id']}: {o['opis']}" for o in s.odwodnienia if o["typ"] == "drenaz_opaskowy"]
     return dict(title="ODWODNIENIE POWIERZCHNIOWE", cols=[("Ozn.", 0), ("Typ", 0), ("Wymiar", 0), ("Spadek", 0),
                                                            ("Odbiornik", 0)],
@@ -941,10 +955,10 @@ def _tab_nawierzchnie(s):
     rows = []
     for u in s.utwardzenia:
         sp = float(u["raw"].get("spadek") or 0.0)
-        rows.append([u["id"], _short(u["raw"].get("nawierzchnia"), 26), m2(u["poly"].difference(s.p0).area),
+        rows.append([u["id"], _short(u["raw"].get("nawierzchnia"), _BEZ_SKROTU), m2(u["poly"].difference(s.p0).area),
                      f"{fmt.num(sp * 100, 1)} %" if sp else "—"])
     for t in s.tarasy:
-        rows.append([t["id"], _short(t["naw"], 26), m2(t["poly"].difference(s.p0).area),
+        rows.append([t["id"], _short(t["naw"], _BEZ_SKROTU), m2(t["poly"].difference(s.p0).area),
                      f"rz. {mm(s.zero_abs + float(t['rz']))}" if t["rz"] is not None else "—"])
     return dict(title="NAWIERZCHNIE UTWARDZONE I TARASY", cols=[("Ozn.", 0), ("Nawierzchnia", 0), ("Pow.", 0),
                                                                  ("Spadek", 0)],
@@ -981,7 +995,7 @@ def _util_labels(lab, s, used):
             lab.along(part, sx.lit, h, "Z-SIECI-PROJ", sx.kolor, n=2 if part.length > 8 else 1, max_cost=6.0,
                       mask=0.25)
         L = sx.geom.length
-        txt = [f"{_sid(sx)} — {D.short_desc(sx.opis, 34)}", f"L = {mm(L)} m" + (
+        txt = _zawin_opis(f"{_sid(sx)} — {D.short_desc(sx.opis, _BEZ_SKROTU)}", 40) + [f"L = {mm(L)} m" + (
             f" (model: {mm(float(sx.dl))} m)" if sx.dl is not None and abs(float(sx.dl) - L) > 0.05 else "")]
         anchors = [np.asarray(parts[0].interpolate(f, normalized=True).coords[0]) for f in (0.5, 0.35, 0.65, 0.2, 0.8)]
         lab.label(anchors, txt, h, "Z-SIECI-PROJ", color=sx.kolor, dists=(3.0, 6.0, 9.0, 13.0, 18.0),
@@ -1106,10 +1120,11 @@ def _tab_przylacza(s):
     rows = []
     for x in [q for q in s.sieci if not q.istn]:
         L = x.geom.length
-        rows.append([_sid(x), BRANZE.get(x.branza, ("", x.branza))[1].split(" / ")[-1], D.short_desc(x.opis, 30),
+        rows.append([_sid(x), BRANZE.get(x.branza, ("", x.branza))[1].split(" / ")[-1],
+                     D.short_desc(x.opis, _BEZ_SKROTU),
                      mm(L), mm(float(x.dl)) if x.dl is not None else "—"])
     for x in [q for q in s.sieci if q.istn]:
-        rows.append([_sid(x), "istniejąca (mapa)", D.short_desc(x.opis, 30), "—", "—"])
+        rows.append([_sid(x), "istniejąca (mapa)", D.short_desc(x.opis, _BEZ_SKROTU), "—", "—"])
     return dict(title="SIECI I PRZYŁĄCZA — PROJEKTOWANE I ISTNIEJĄCE",
                 cols=[("Ozn.", 0), ("Sieć", 0), ("Opis", 0), ("L [m]", 0), ("L model [m]", 0)],
                 rows=rows, align=["left", "left", "left", "right", "right"], max_w_mm=150.0,
@@ -1123,13 +1138,13 @@ def _sid(x):
 
 
 def _tab_istn(s):
-    rows = [[x.lit, D.short_desc(x.opis, 44)] for x in s.sieci if x.istn]
+    rows = [[x.lit, D.short_desc(x.opis, _BEZ_SKROTU)] for x in s.sieci if x.istn]
     return dict(title="SIECI ISTNIEJĄCE (wg mapy)", cols=[("Ozn.", 0), ("Opis", 0)], rows=rows or [["—", "brak"]],
                 align=["center", "left"], max_w_mm=150.0)
 
 
 def _tab_obiekty(s, win):
-    rows = [[o.id, D.short_desc(o.opis, 52)] for o in s.obiekty.values()]
+    rows = [[o.id, D.short_desc(o.opis, _BEZ_SKROTU)] for o in s.obiekty.values()]
     rows += [[r["id"], f"rura spustowa DN{r['dn']} ({'zewn.' if r['trasa'] == 'zewn' else 'w szachcie'}) z dachu "
                        f"{r['dach']}"] for r in s.rury]
     return dict(title="OBIEKTY UZBROJENIA I ODWODNIENIA", cols=[("Ozn.", 0), ("Opis", 0)], rows=rows,

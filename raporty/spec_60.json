@@ -1,4 +1,5 @@
 {
+ "nr": 60,
  "title": "Konstrukcja, runda 1: kontrola zbrojenia 300/300 (było 273/275), nowy arkusz słupów PT-BO-27 · arkusze: poprawki ►",
  "stages": [
   [
@@ -52,6 +53,17 @@
  ],
  "notes": [
   "Konstrukcja: 147 pozycji bez niespełnionych — czeka na weryfikację pętli.",
-  "Arkusze: poprawki 4 uwag, m.in. pismo PZT ≥ 2,5 mm."
+  "Arkusze: poprawki 4 uwag, m.in. pismo PZT ≥ 2,5 mm.",
+  "NADZÓR (12:17): 2 agentów aktywnych, bez zastojów; najdłuższa bezczynność 4 min; zmiany w repo 0 min temu."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/projekt/04_PT_konstrukcja/rysunki/PT-BO-27_zbrojenie_slupow_zelbetowych_w_murze.png",
+   "caption": "PT-BO-27 zbrojenie słupów żelbetowych w murze (nowy)"
+  },
+  {
+   "path": "/home/user/aihouse/projekt/04_PT_konstrukcja/rysunki/PT-BO-01_rzut_fundamentow.png",
+   "caption": "PT-BO-01 rzut fundamentów (runda 1)"
+  }
  ]
 }
