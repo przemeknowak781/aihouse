@@ -828,6 +828,12 @@ def dane(ctx) -> DaneKonstr:
             tb = traceback.extract_tb(ex.__traceback__)[-1]
             D.braki.append(f"Ekstrakcja danych ({fn.__name__[1:]}): {type(ex).__name__}: {ex} "
                            f"[{Path(tb.filename).name}:{tb.lineno}] [BŁĄD MODUŁU]")
+    for g in an.pozycje:
+        for pz in g.podpozycje:
+            if not pz.ok:
+                ws = warunki_niespelnione(pz.wyniki + [w for sp in pz.podpozycje for w in sp.wyniki])
+                D.braki.append(f"Obliczenia — poz. {pz.nr} {pz.ident}: niespełnione warunki: " + "; ".join(ws[:3])
+                               + (" …" if len(ws) > 3 else "") + " [WYMAGA ZMIANY PRZEKROJU / ANALIZY].")
     D.braki += [f"Biblioteka: {b}" for b in an.brak_danych]
     D.braki += [f"Biblioteka (uwaga analizy): {u}" for u in an.uwagi
                 if "WYMAGA ANALIZY" in u or "BŁĄD" in u or "niewykonalny" in u]

@@ -1,4 +1,5 @@
 {
+ "nr": 34,
  "title": "Konstrukcja: rysunki zbrojenia z automatyczną kontrolą A_s (267/282 ✔) · detale 1:10 (10 węzłów) · runda 2 poprawek: funkcja",
  "stages": [
   [
@@ -59,6 +60,17 @@
   "KRYTYCZNIE: stropodach D1 — ścinanie bez zbrojenia poprzecznego η = 344 % (6.2.2) + 15 pozycji niespełnionych → zlecono odróżnienie osobliwości MES od rzeczywistych przekroczeń i przeprojektowanie (podciąg / pogrubienie / zbrojenie na ścinanie); cel 100 %.",
   "Arkusze BO/PZT wychodziły na A0 przez wysokie kolumny tabel — zlecono przeniesienie zestawień stali na pole rysunku / osobne arkusze (A1/A2).",
   "Detale 1:10: 10 węzłów (cokół, okno, próg HS, attyka, wspornik, garaż–dom, dach zielony, lamele…) z wynikami ISO 10211; węzeł dom–garaż uczciwie oceniony „ZŁY” w teście ciągłości izolacji (ψ_oi 0,081, f_Rsi 0,885) — poprawa w rundzie 2 (XPS pod posadzką garażu, blok u podstawy ściany).",
-  "W toku: runda 2 poprawek modelu (etap funkcja), strona www katalogu (budowa z modelu)."
+  "W toku: runda 2 poprawek modelu (etap funkcja), strona www katalogu (budowa z modelu).",
+  "NADZÓR (07:32): 5 agentów aktywnych, bez zastojów; najdłuższa bezczynność 4 min; zmiany w repo 0 min temu."
+ ],
+ "images": [
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/detale/PT-AR-D-T8_detal_test_garaz_dach.png",
+   "caption": "Detal D-10 — ściana dom–garaż i dach zielony 1:10 (ocena ciągłości: „ZŁY” → poprawa w rundzie 2)"
+  },
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/bo/out/PT-BO-08_zbrojenie_dolne_stropu_nad_parterem.png",
+   "caption": "PT-BO-08 — zbrojenie dolne stropu nad parterem 1:50 (format A0 do korekty)"
+  }
  ]
 }

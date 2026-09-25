@@ -10,10 +10,14 @@
   i litery wg mapy zasadniczej), obiekty, odległości między sieciami i od budynku/drzew, skrzyżowania, kolizje.
 
 Opcje widoku (``opcje`` w konfiguracji arkusza — wszystkie opcjonalne):
-``okno: [x0, y0, x1, y1]`` (układ działki), ``margines`` [m], ``linia_plyt: PUNKTOWA|KRESKOWA``,
-``pikiety_co`` [m] (PZT-01: min. odstęp opisywanych rzędnych mapy), ``warstwice: true``,
-``warstwice_projektowane: false``, ``mpzp: {...}`` (limity, gdy brak w modelu), ``odleglosci_min: {"e-t": [0.5, "źródło"]}``,
-``retencja_min: {budynek: 3.0, granica: 2.0, drzewo: 1.0}``, ``podklad: true`` (PZT-01), ``zielen: true``.
+``okno: [x0, y0, x1, y1]`` (układ działki), ``otoczenie`` [m] (PZT-01, domyślnie 25), ``margines`` [m],
+``linia_plyt: PUNKTOWA|KRESKOWA``, ``pikiety_co`` [m] (PZT-01: min. odstęp opisywanych rzędnych mapy),
+``warstwice: true``, ``warstwice_projektowane: false`` (PZT-02), ``mpzp: {...}`` (limity, gdy brak w modelu; także
+``wspolne.mpzp``), ``odleglosci_min: {"e-t": [0.5, "źródło"]}`` i ``retencja_min: {budynek: 3.0, granica: 2.0,
+drzewo: 1.0}`` (PZT-03/PZT-02), ``podklad: true``, ``zielen: true``, ``szer_tabel`` [mm] (PZT-01).
+Tabele zestawień rysowane są w rzutni obok rysunku (pismo 2,5 mm), legenda i uwagi — w kolumnie opisowej arkusza.
+Wskaźniki MPZP — wyłącznie z ``lamela.wskazniki`` (jedno źródło). Braki danych: ``braki_md`` /
+``python3 -m lamela.views.site --braki projekt/02_PZT/BRAKI_DANYCH.md``.
 Konfiguracja arkuszy: ``model/arkusze_pzt.yaml``; CLI: ``tools/generuj_widoki.py --arkusze model/arkusze_pzt.yaml``.
 """
 from __future__ import annotations

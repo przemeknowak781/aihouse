@@ -1324,7 +1324,7 @@ def _kontrola_fund(D, F, PF, warstwa: str, nr_ark: str):
                 continue
             Mx = float(max(np.abs(W.M[k_][msk]).max() for k_ in W.M))
             d_req = math.sqrt(Mx / (mul * bt.f_cd * 1000.0))
-            h_req = d_req + W.c_dol / 1000.0 + 0.012
+            h_req = math.ceil((d_req + W.c_dol / 1000.0 + 0.012) * 100.0 - 1e-9) / 100.0
             strefy = sorted({W.strefa_el[j] or "płyta" for j in np.nonzero(msk)[0]})
             KD.rejestruj(D, F.id, f"strefa S{i} ({', '.join(strefy)[:30]}) — przekrój niewystarczający", "MES-PF", 1.0, 0.0,
                          0.0, "—", jedn="—", arkusz=nr_ark, wymuszone_ok=False,

@@ -1356,3 +1356,80 @@ def detal_lamele(m, opts: dict) -> Detal:
     det.uwagi.append("rzut na wysokości konsoli — rozstaw konsol i rygli wg obliczeń statycznych rusztu (PT-K / "
                      "dostawca systemu)")
     return det
+
+
+# ================================================================================================ D — wyłaz / świetlik
+@rodzaj("wylaz", "WYL1", "SW1")
+def detal_wylaz(m, opts: dict) -> Detal:
+    """Wyłaz dachowy / świetlik na cokole ocieplonym (h z modelu) w stropodachu: krawędź otworu w płycie, cokół
+    z izolacją ciągłą z izolacją dachu, membrana wywinięta na cokół pod obróbkę ramy, paroizolacja i warstwa
+    szczelna wywinięte na cokół (taśma do ramy)."""
+    import re
+    el = next((w for w in m.wsporniki() if w["id"] == opts.get("element", "WYL1")), None) or \
+        next(w for w in m.wsporniki() if w["id"] in ("WYL1", "SW1"))
+    from shapely.geometry import Polygon as _P, Point as _Pt
+    c = _P(el["obrys"]).centroid
+    dach = next((d for d in m.dachy() if _P(d["obrys"]).contains(_Pt(c.x, c.y))), m.dachy()[0])
+    kd = dach["przegroda"]
+    r = re.search(r"cokole[^,;]*?h\s*(\d+[.,]\d+)", str(el.get("uwagi", "")))
+    h_c = float(r.group(1).replace(",", ".")) if r else 0.30
+    nazwa = "Wyłaz dachowy" if el["id"].startswith("WYL") else "Świetlik"
+    det = Detal(m, "D-13", f"{nazwa} {el['id']} — cokół ocieplony h {h_c:.2f} m".replace(".", ","), (), 10,
+                z0=float(dach["plyta"]["wierzch"]))
+    d_kl, _pz = _klin_w(m, dach, (c.x, c.y))
+    Wd = det.warstwy(kd)
+    kk = next(i for i, w in enumerate(Wd) if w["konstr"])
+    t = Wd[kk]["d"]
+    xL, xR, yB, yT = -0.40, 0.95, -0.42, 0.0
+    b_s, b_c = 0.018, 0.10                                   # sklejka / rdzeń cokołu (kaseta ocieplona)
+    x_c1 = b_c + b_s                                         # lico zewn. cokołu (od krawędzi otworu x = 0)
+    stos, y_top, _pl = stos_dachu(det, kd, x_c1, xR + 0.05, d_kl)
+    y_cap = y_top + h_c
+    yT = y_cap + 0.20
+    det.okno = (xL, yB, xR, yT)
+    det.rect(0.0, -t, xR + 0.05, 0.0, Wd[kk]["mat"], konstr=True)
+    det._rejestr(kd, Wd[kk], t)
+    y = -t
+    for w in Wd[kk + 1:]:
+        det.rect(-0.012, y - w["d"], xR + 0.05, y, w["mat"])
+        det._rejestr(kd, w, w["d"])
+        y -= w["d"]
+    det.rect(-0.0125, y, 0.0, 0.0, "GK" if "GK" in m.materialy else Wd[-1]["mat"])       # obudowa ościeża
+    det.rect(0.0, 0.0, b_c, y_cap, "OSCIEZNICA")
+    det.rect(b_c, 0.0, x_c1, y_cap, "SKLEJKA")
+    det.rect(-0.0125, 0.0, 0.0, y_cap, "GK" if "GK" in m.materialy else Wd[-1]["mat"])
+    # rama wyłazu / świetlika i klapa (ocieplona) — wyrób systemowy
+    det.rect(-0.03, y_cap, x_c1 + 0.01, y_cap + 0.07, "RAMA_ALU")
+    det.rect(xL - 0.05, y_cap + 0.07, x_c1 + 0.01, y_cap + 0.13, "OSCIEZNICA" if el["id"].startswith("WYL")
+             else "SZYBA3")
+    det.obrobka([(x_c1 + 0.03, y_cap + 0.10), (x_c1 + 0.03, y_cap - 0.06)], strona=1)
+    # 4 linie
+    y_memb = next(((a + b) / 2 for a, b, w in stos if w["funkcja"] == "hydroizolacja"), y_top)
+    y_par = next(((a + b) / 2 for a, b, w in stos if w["funkcja"] == "paroizolacja"), 0.002)
+    det.linia("H", [(xR + 0.05, y_memb), (x_c1 + 0.002, y_memb), (x_c1 + 0.002, y_cap - 0.01),
+                    (x_c1 + 0.012, y_cap - 0.01)], "membrana wywinięta na cokół pod obróbkę ramy")
+    det.linia("P", [(xR + 0.05, y_par), (x_c1 + 0.002, y_par), (x_c1 + 0.002, y_top + 0.04)],
+              "paroizolacja wywinięta na cokół ponad izolację dachu")
+    det.linia("S", [(xR + 0.05, -t - 0.012), (-0.014, -t - 0.012), (-0.014, y_cap - 0.02)])
+    det.linia("T_in", [(-0.014, y_cap - 0.04), (-0.014, y_cap + 0.002), (0.02, y_cap + 0.002)])
+    det.polaczenie("H", [(x_c1 + 0.012, y_cap - 0.01), (x_c1 + 0.03, y_cap + 0.10)])
+    for p1, p2 in (((xR, yB), (xR, y_top)), ((xL, y_cap + 0.07), (xL, y_cap + 0.13))):
+        det.przerwa(p1, p2)
+    det.opis_stosu([(a, b, w) for a, b, w in stos], "x", xR - 0.12, odwroc=False,
+                   tytul=f"{kd} — stropodach (klin w przekroju {mm(d_kl or 0)} mm)")
+    det.opis([(b_c / 2, y_top + 0.10)], [f"cokół systemowy ocieplony (kaseta PIR {mm(b_c)} mm + sklejka "
+                                         f"wodoodporna 18 mm), wys. {mm(h_c)} mm ponad pokrycie (≥ 150 mm — DAFA)"])
+    det.opis([(x_c1 + 0.03, y_cap + 0.03)], ["obróbka ramy (fartuch) z okapnikiem, zakład ≥ 50 mm na membranę"])
+    det.opis([(x_c1 * 0.5, y_cap + 0.035)], [f"rama {nazwa.lower()}a {el['id']} (wyrób systemowy, U ≤ 1,1), "
+                                             "taśma paroszczelna rama–obudowa od wewnątrz"])
+    det.opis([(-0.20, y_cap + 0.10)], ["klapa ocieplona (wyłaz 0,90 × 0,90 m w świetle, W-065)"
+                                       if el["id"].startswith("WYL") else "przeszklenie świetlika (VSG) wg producenta"])
+    det.opis([(-0.006, -t / 2)], ["obudowa ościeża GK 12,5 mm na kleju, taśma szczelna do tynku sufitu"])
+    det.opis([(0.4, -t / 2)], [f"płyta stropodachu ŻB {mm(t)} mm — krawędź otworu (wymian wg PT-K)"])
+    det.wymiar([(x_c1 + 0.08, y_top), (x_c1 + 0.08, y_cap)], x_c1 + 0.10, "v")
+    det.rzedna((xR - 0.30, y_top), y_top, "wyk", "right")
+    det.rzedna((xR - 0.30, 0.0), 0.0, "konstr", "right")
+    det.uwagi.append(f"{el['id']}: cokół h {mm(h_c)} mm ≥ 150 mm ponad pokrycie (wytyczne DAFA), izolacja cokołu "
+                     "ciągła z izolacją dachu; mostek liniowy krawędzi cokołu uwzględniony w U wyrobu (EN ISO 12567-2 / "
+                     "deklaracja producenta)")
+    return det
