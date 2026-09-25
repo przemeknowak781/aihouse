@@ -26,10 +26,27 @@ ISO_ELONGATED = {
 }
 
 
+def custom_size(fmt_name) -> tuple[float, float] | None:
+    """Format niestandardowy podany wymiarami: '780x594' / '780×594' / 'nst. 780×594' / (780, 594) → (szer., wys.)
+    w kolejności zapisu; None — to nie jest zapis wymiarów."""
+    if isinstance(fmt_name, (tuple, list)) and len(fmt_name) == 2:
+        return float(fmt_name[0]), float(fmt_name[1])
+    s = str(fmt_name).lower().replace("nst.", "").replace("×", "x").replace(" ", "").replace(",", ".")
+    m = re.fullmatch(r"(\d+(?:\.\d+)?)x(\d+(?:\.\d+)?)", s)
+    return (float(m.group(1)), float(m.group(2))) if m else None
+
+
 def sheet_size(fmt_name: str, orientation: str | None = None) -> tuple[float, float]:
     """(szerokość, wysokość) [mm]. ``fmt_name``: 'A0'…'A4', formaty wydłużone 'A3x3' / 'A3×3' / 'A2x2' (ogólnie
-    Ak×n: krótszy bok = dłuższy bok Ak, dłuższy = n × krótszy bok Ak). ``orientation``: 'landscape' | 'portrait'
-    (domyślnie: A4 pionowo, pozostałe poziomo)."""
+    Ak×n: krótszy bok = dłuższy bok Ak, dłuższy = n × krótszy bok Ak) albo format niestandardowy '780x594'
+    (szerokość × wysokość, jak zapisano). ``orientation``: 'landscape' | 'portrait' (domyślnie: A4 pionowo, formaty
+    niestandardowe jak zapisano, pozostałe poziomo)."""
+    cs = custom_size(fmt_name)
+    if cs is not None:
+        if orientation is None:
+            return cs
+        short, long_ = min(cs), max(cs)
+        return (long_, short) if orientation == "landscape" else (short, long_)
     key = fmt_name.upper().replace("×", "X").replace(" ", "")
     key = key.replace("X", "x")
     if key in ISO_A:
@@ -49,40 +66,12 @@ def sheet_size(fmt_name: str, orientation: str | None = None) -> tuple[float, fl
 
 
 def fold_positions(W: float, H: float):
-    """Linie składania do formatu A4 (sposób "do wpięcia" z marginesem 20 mm, wg PN-N-01603 / DIN 824 A,
-    uogólniony dla formatów wydłużonych). Zwraca (xs od lewej krawędzi, ys od dolnej krawędzi) [mm].
-
-    Tabliczka pozostaje na wierzchu (panel 190 mm przy prawej krawędzi), lewy pas 210 mm z marginesem
-    na oprawę pozostaje pełny."""
-    xs: list[float] = []
-    if W > 210.5:
-        if W <= 420.5:
-            xs = [105.0, W - 190.0]
-        else:
-            rest = W - 210.0
-            m = 0
-            while True:
-                L = rest - m * 190.0
-                if L < 0:
-                    m -= 2
-                    L = rest - m * 190.0
-                    break
-                if L / 2.0 <= 210.0:
-                    break
-                m += 2
-            half = L / 2.0
-            widths = [210.0, half, half] + [190.0] * m
-            x = 0.0
-            for w in widths[:-1]:
-                x += w
-                xs.append(x)
-    ys: list[float] = []
-    if H > 297.5:
-        y = 297.0
-        while y < H - 1.0:
-            ys.append(y)
-            y += 297.0
-    return xs, ys
+    """Linie składania do formatu A4 (sposób „do wpięcia” z marginesem 20 mm — praktyka DIN 824 forma A,
+    uogólniona na formaty wydłużone i niestandardowe; PN-N-01603:1986 wycofana — przywołanie informacyjne).
+    Zwraca (xs od lewej krawędzi, ys od dolnej krawędzi) [mm]. Geometria harmonijki i jej ocena:
+    ``lamela.draft.skladanie`` (pasy w parach równych, pas z tabliczką ≥ 190 mm na wierzchu)."""
+    from .skladanie import fold_positions as _fp
+    return _fp(W, H)
 
 
 # ------------------------------------------------------------------------------------------------ tabliczka
@@ -167,7 +156,8 @@ class Sheet(SheetBase):
                  grid_reference: bool | None = None, draw_frame: bool = True):
         W, H = sheet_size(fmt_name, orientation)
         super().__init__(W, H)
-        self.fmt_name = fmt_name.replace("x", "×").replace("X", "×")
+        self.custom = custom_size(fmt_name) is not None          # format niestandardowy (wymiary „na miarę”)
+        self.fmt_name = f"{W:.0f}×{H:.0f}" if self.custom else str(fmt_name).replace("x", "×").replace("X", "×")
         self.frame = (binding, margin, W - margin, H - margin)  # x0, y0, x1, y1
         self.tb = title_block
         self.tb_rect = None
@@ -200,13 +190,20 @@ class Sheet(SheetBase):
                 for y in ys:
                     self.line((0.0, y), (min(5.0, x0), y), pen=0.35)
                     self.line((W, y), (W - min(5.0, W - x1), y), pen=0.35)
+                # numery zgięć na marginesie (kolejność składania: pionowe od prawej — od pasa z tabliczką,
+                # potem poziome od dołu); pismo 1,8 mm przy dolnej / lewej krawędzi arkusza
+                for i, x in enumerate(sorted(xs, reverse=True)):
+                    self.text((x + 0.8, 0.8), str(i + 1), 1.8)
+                for j, y in enumerate(ys):
+                    self.text((0.8, y + 0.8), str(len(xs) + j + 1), 1.8)
             if grid_reference is None:
                 grid_reference = W * H >= 420 * 594 - 1   # R4 pkt 3.1: A2 i większe
             if grid_reference:
                 self._grid_reference()
         # oznaczenie formatu w dolnym marginesie przy prawym rogu (PN-EN ISO 5457 / R4-B07)
-        self.text((x1, y0 / 2.0), f"{self.fmt_name} ({int(round(W))}×{int(round(H))})", 1.8, 0.0, "right", "middle",
-                  layer="R-RAMKA")
+        lab = (f"{self.fmt_name} (format niestandardowy)" if getattr(self, "custom", False)
+               else f"{self.fmt_name} ({int(round(W))}×{int(round(H))})")
+        self.text((x1, y0 / 2.0), lab, 1.8, 0.0, "right", "middle", layer="R-RAMKA")
 
     def _grid_reference(self):
         """Siatka odniesień (PN-EN ISO 5457 4.4): pola 50 mm liczone od osi symetrii arkusza, różnice w polach
@@ -485,8 +482,9 @@ def draw_title_block(sh: Sheet, tb: TitleBlock):
 
 # ------------------------------------------------------------------------------------------------ bloki tekstowe
 def notes_box(sh: Sheet, x: float, y_top: float, w: float, lines: list[str], title: str = "UWAGI", h: float = 2.5,
-              numbered: bool = True, frame: bool = True, layer: str = "R-OPISY") -> tuple:
-    """Blok uwag (zawijany do szerokości w). Zwraca prostokąt (x0, y0, x1, y1)."""
+              numbered: bool = True, frame: bool = True, layer: str = "R-OPISY", start: int = 1) -> tuple:
+    """Blok uwag (zawijany do szerokości w). ``start`` — numer pierwszej uwagi (ciąg dalszy bloku podzielonego
+    na kolumny). Zwraca prostokąt (x0, y0, x1, y1)."""
     pad = 2.0
     y = y_top - pad - 3.5
     with sh.on(layer):
@@ -494,7 +492,7 @@ def notes_box(sh: Sheet, x: float, y_top: float, w: float, lines: list[str], tit
             sh.text((x + pad, y), title, 3.5, style="bold")
             y -= 3.5 * 1.8
         for i, ln in enumerate(lines):
-            prefix = f"{i + 1}. " if numbered else ""
+            prefix = f"{i + start}. " if numbered else ""
             ind = T.width(prefix, h) if prefix else 0.0
             ls = wrap(ln, w - 2 * pad - ind, h)
             for j, s in enumerate(ls):

@@ -15,20 +15,6 @@ Lista generowana automatycznie przez `lamela.views.konstrukcja` z: (1) braków z
 
 ## Wyniki obliczeń — elementy bez wymiarowania lub z niespełnionymi warunkami
 
-- Płyta(y) SW1: brak wyników MES w bibliotece (model MES niewykonalny) — zbrojenie nie może być narysowane z obliczeń [WYMAGA ANALIZY].
-- Płyta(y) WYL1: brak wyników MES w bibliotece (model MES niewykonalny) — zbrojenie nie może być narysowane z obliczeń [WYMAGA ANALIZY].
-- OB-A: element płytowy z materiału PODSUF (Podsufitka zewnętrzna: płyta włóknocementowa 12 mm na ruszcie, RAL 7016) — biblioteka liczy go jako płytę (poz. 3.3); pominięty na rysunkach konstrukcyjnych (element niekonstrukcyjny — do wyłączenia z obliczeń w bibliotece/modelu).
-- Płyta(y) IZ-ST2Z: brak wyników MES w bibliotece (model MES niewykonalny) — zbrojenie nie może być narysowane z obliczeń [WYMAGA ANALIZY].
-- Płyta(y) OB-A2: brak wyników MES w bibliotece (model MES niewykonalny) — zbrojenie nie może być narysowane z obliczeń [WYMAGA ANALIZY].
-- Płyta(y) PS-A: brak wyników MES w bibliotece (model MES niewykonalny) — zbrojenie nie może być narysowane z obliczeń [WYMAGA ANALIZY].
-- Płyta(y) PL-C2: brak wyników MES w bibliotece (model MES niewykonalny) — zbrojenie nie może być narysowane z obliczeń [WYMAGA ANALIZY].
-- Płyta(y) PL-C1 + PL-D: brak wyników MES w bibliotece (model MES niewykonalny) — zbrojenie nie może być narysowane z obliczeń [WYMAGA ANALIZY].
-- Belka B3: brak kompletu wyników wymiarowania w bibliotece — zbrojenie nie wyznaczone [WYMAGA ANALIZY].
-- Belka B4: brak kompletu wyników wymiarowania w bibliotece — zbrojenie nie wyznaczone [WYMAGA ANALIZY].
-- Belka B5: brak kompletu wyników wymiarowania w bibliotece — zbrojenie nie wyznaczone [WYMAGA ANALIZY].
-- Belka B3 (belka krawędziowa ST2 w osi A' (odwrócona, pod parapetem okn…): brak pozycji wymiarowania w bibliotece (belka nie jest podporą płyty w modelu MES — np. belka odwrócona/wspornikowa) — zbrojenie do obliczenia indywidualnego [WYMAGA ANALIZY].
-- Belka B4 (belka wspornikowa w osi 1 (w licu ściany P2, pod parapetem O…): brak pozycji wymiarowania w bibliotece (belka nie jest podporą płyty w modelu MES — np. belka odwrócona/wspornikowa) — zbrojenie do obliczenia indywidualnego [WYMAGA ANALIZY].
-- Belka B5 (belka wspornikowa w osi 3 (w ścianie pn. P2): wspornik 1,00 …): brak pozycji wymiarowania w bibliotece (belka nie jest podporą płyty w modelu MES — np. belka odwrócona/wspornikowa) — zbrojenie do obliczenia indywidualnego [WYMAGA ANALIZY].
 - ZF1: żebro (b = 60 cm, oś [[0.0, 0.0], [12.0, 0.0]]) wystaje poza obrys płyty PF1 o 2.39 m² w rzucie — niespójność modelu (krawędź płyty a lico żebra); na przekrojach żebro przycięte do lica płyty. Uzgodnić obrys płyty/osie żeber (audyt A2).
 - ZF2: żebro (b = 60 cm, oś [[12.0, 0.0], [18.375, 0.0]]) wystaje poza obrys płyty PF1 o 1.27 m² w rzucie — niespójność modelu (krawędź płyty a lico żebra); na przekrojach żebro przycięte do lica płyty. Uzgodnić obrys płyty/osie żeber (audyt A2).
 - ZF3: żebro (b = 60 cm, oś [[18.375, 0.0], [18.375, 9.375]]) wystaje poza obrys płyty PF1 o 1.87 m² w rzucie — niespójność modelu (krawędź płyty a lico żebra); na przekrojach żebro przycięte do lica płyty. Uzgodnić obrys płyty/osie żeber (audyt A2).
@@ -36,62 +22,37 @@ Lista generowana automatycznie przez `lamela.views.konstrukcja` z: (1) braków z
 - ZF5: żebro (b = 60 cm, oś [[12.0, 9.375], [12.0, 8.75]]) wystaje poza obrys płyty PF1 o 0.10 m² w rzucie — niespójność modelu (krawędź płyty a lico żebra); na przekrojach żebro przycięte do lica płyty. Uzgodnić obrys płyty/osie żeber (audyt A2).
 - ZF6: żebro (b = 60 cm, oś [[12.0, 8.75], [0.0, 8.75]]) wystaje poza obrys płyty PF1 o 2.37 m² w rzucie — niespójność modelu (krawędź płyty a lico żebra); na przekrojach żebro przycięte do lica płyty. Uzgodnić obrys płyty/osie żeber (audyt A2).
 - ZF7: żebro (b = 60 cm, oś [[0.0, 8.75], [0.0, 0.0]]) wystaje poza obrys płyty PF1 o 1.74 m² w rzucie — niespójność modelu (krawędź płyty a lico żebra); na przekrojach żebro przycięte do lica płyty. Uzgodnić obrys płyty/osie żeber (audyt A2).
-- Obliczenia — poz. 2.2 ST2Z: niespełnione warunki: Zbrojenie na zginanie (η = 589%); Rysy: średnica prętów (tabl. 7.2N) (η = 1600000000%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
-- Obliczenia — poz. 3.2 PL-2: niespełnione warunki: Ugięcie długotrwałe (quasi-stała) ≤ L/250 (η = 152%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
-- Obliczenia — poz. 3.3 OB-A: niespełnione warunki: Zbrojenie na zginanie (η = 331%); Rysy: średnica prętów (tabl. 7.2N) (η = 1600000000%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 3.2 PL-2: niespełnione warunki: Zbrojenie na zginanie (η = 118%); Zbrojenie na zginanie (η = 135%); Rysy: średnica prętów (tabl. 7.2N) (η = 256%) … [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
 - Obliczenia — poz. 9.9 S2-09: niespełnione warunki: Nośność — przekrój górny (η = 116%); Nośność — połowa wysokości (η = 172%); Nośność — przekrój dolny (η = 153%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
-- Obliczenia — poz. 9.13 S1-01: niespełnione warunki: Nośność — połowa wysokości (η = 125%); Nośność — przekrój dolny (η = 137%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
-- Obliczenia — poz. 9.17 S1-05: niespełnione warunki: Nośność — połowa wysokości (η = 129%); Nośność — przekrój dolny (η = 112%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
-- Obliczenia — poz. 9.18 S1-06: niespełnione warunki: Nośność — przekrój górny (η = 219%); Nośność — połowa wysokości (η = 379%); Nośność — przekrój dolny (η = 380%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
-- Obliczenia — poz. 9.20 S1-08: niespełnione warunki: Nośność — połowa wysokości (η = 107%); Docisk (η = 216%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
-- Obliczenia — poz. 9.21 S1-09: niespełnione warunki: Docisk (η = 172%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
-- Obliczenia — poz. 9.23 S0-01: niespełnione warunki: Nośność — połowa wysokości (η = 154%); Nośność — przekrój dolny (η = 205%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
-- Obliczenia — poz. 9.26 S0-08: niespełnione warunki: Nośność — przekrój górny (η = 157%); Nośność — połowa wysokości (η = 208%); Nośność — przekrój dolny (η = 172%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 9.13 S1-01: niespełnione warunki: Nośność — przekrój górny (η = 136%); Nośność — połowa wysokości (η = 125%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 9.16 S1-04: niespełnione warunki: Nośność — przekrój górny (η = 135%); Nośność — połowa wysokości (η = 155%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 9.17 S1-05: niespełnione warunki: Nośność — przekrój górny (η = 160%); Nośność — połowa wysokości (η = 230%); Nośność — przekrój dolny (η = 199%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 9.18 S1-06: niespełnione warunki: Nośność — przekrój górny (η = 221%); Nośność — połowa wysokości (η = 382%); Nośność — przekrój dolny (η = 382%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 9.20 S1-08: niespełnione warunki: Nośność — połowa wysokości (η = 108%); Docisk (η = 219%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 9.21 S1-09: niespełnione warunki: Docisk (η = 174%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 9.23 S0-01: niespełnione warunki: Nośność — przekrój górny (η = 405%); Nośność — połowa wysokości (η = 541%); Nośność — przekrój dolny (η = 457%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 9.25 S0-07: niespełnione warunki: Nośność — połowa wysokości (η = 132%); Nośność — przekrój dolny (η = 113%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 9.26 S0-08: niespełnione warunki: Nośność — przekrój górny (η = 161%); Nośność — połowa wysokości (η = 214%); Nośność — przekrój dolny (η = 177%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
 - Obliczenia — poz. 9.27 S0-09: niespełnione warunki: Nośność — połowa wysokości (η = 107%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
-- Obliczenia — poz. 9.28 S0-10: niespełnione warunki: Nośność — przekrój górny (η = 245%); Nośność — połowa wysokości (η = 364%); Nośność — przekrój dolny (η = 336%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
-- Obliczenia — poz. 10.2 ZF1: niespełnione warunki: Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) (η = 254%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
-- Obliczenia — poz. 10.3 ZF2: niespełnione warunki: Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) (η = 254%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
-- Obliczenia — poz. 10.4 ZF3: niespełnione warunki: Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) (η = 198%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
-- Obliczenia — poz. 10.5 ZF4: niespełnione warunki: Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) (η = 185%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
-- Obliczenia — poz. 10.7 ZF6: niespełnione warunki: Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) (η = 254%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
-- Obliczenia — poz. 10.8 ZF7: niespełnione warunki: Nośność podłoża (GEO, DA2*) (η = 137%); Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) (η = 254%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
-- Obliczenia — poz. 10.9 ZF8: niespełnione warunki: Nośność podłoża (GEO, DA2*) (η = 376%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
-- Obliczenia — poz. 10.11 ZF10: niespełnione warunki: Nośność podłoża (GEO, DA2*) (η = 211%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
-- Obliczenia — poz. 10.13 ZF12: niespełnione warunki: Nośność podłoża (GEO, DA2*) (η = 384%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
-- Obliczenia — poz. 10.14 ZF13: niespełnione warunki: Nośność podłoża (GEO, DA2*) (η = 320%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
-- Obliczenia — poz. 10.16 ZF15: niespełnione warunki: Nośność podłoża (GEO, DA2*) (η = 135%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
-- Obliczenia — poz. 10.18 SF1: niespełnione warunki: Głębokość posadowienia (η = 185%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
-- Obliczenia — poz. 10.19 SF2: niespełnione warunki: Głębokość posadowienia (η = 185%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
-- Obliczenia — poz. 10.20 SF3: niespełnione warunki: Głębokość posadowienia (η = 186%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
-- Obliczenia — poz. 10.21 SF4: niespełnione warunki: Głębokość posadowienia (η = 185%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
-- Biblioteka: PL-C1: brak przegrody — przyjęto płytę bez warstw
-- Biblioteka: PL-C1: klasa betonu nie wynika z modelu (pole mat / materiał warstwy) — przyjęto C30/37 (XC3)
-- Biblioteka: PL-C2: brak przegrody — przyjęto płytę bez warstw
-- Biblioteka: PL-C2: klasa betonu nie wynika z modelu (pole mat / materiał warstwy) — przyjęto C30/37 (XC3)
-- Biblioteka: IZ-ST2Z: brak przegrody — przyjęto płytę bez warstw
-- Biblioteka: IZ-ST2Z: klasa betonu nie wynika z modelu (pole mat / materiał warstwy) — przyjęto C30/37 (XC3)
-- Biblioteka: PS-A: brak przegrody — przyjęto płytę bez warstw
-- Biblioteka: PS-A: klasa betonu nie wynika z modelu (pole mat / materiał warstwy) — przyjęto C30/37 (XC3)
-- Biblioteka: OB-A: brak przegrody — przyjęto płytę bez warstw
-- Biblioteka: OB-A: klasa betonu nie wynika z modelu (pole mat / materiał warstwy) — przyjęto C30/37 (XC3)
-- Biblioteka: OB-A2: brak przegrody — przyjęto płytę bez warstw
-- Biblioteka: OB-A2: klasa betonu nie wynika z modelu (pole mat / materiał warstwy) — przyjęto C30/37 (XC3)
-- Biblioteka: SW1: brak przegrody — przyjęto płytę bez warstw
-- Biblioteka: SW1: klasa betonu nie wynika z modelu (pole mat / materiał warstwy) — przyjęto C30/37 (XC4)
-- Biblioteka: WYL1: brak przegrody — przyjęto płytę bez warstw
-- Biblioteka: WYL1: klasa betonu nie wynika z modelu (pole mat / materiał warstwy) — przyjęto C30/37 (XC4)
-- Biblioteka: PL-D: brak przegrody — przyjęto płytę bez warstw
-- Biblioteka: PL-D: klasa betonu nie wynika z modelu (pole mat / materiał warstwy) — przyjęto C30/37 (XC4)
-- Biblioteka (uwaga analizy): Grupa płyt SW1: MES niewykonalny (MES płyty: za mało podpór) — pominięto
-- Biblioteka (uwaga analizy): Grupa płyt WYL1: MES niewykonalny (MES płyty: za mało podpór) — pominięto
-- Biblioteka (uwaga analizy): Ściana nośna S2-07 stoi na płycie ST2 + ST2Z + D2 + D3 + PL-2 + OB-A bez ściany poniżej — obciążenie liniowe płyty; sprawdzić podciąg/żebro [WYMAGA ANALIZY].
-- Biblioteka (uwaga analizy): Ściana nośna S2-08 stoi na płycie ST2 + ST2Z + D2 + D3 + PL-2 + OB-A bez ściany poniżej — obciążenie liniowe płyty; sprawdzić podciąg/żebro [WYMAGA ANALIZY].
-- Biblioteka (uwaga analizy): Ściana nośna S2-09 stoi na płycie ST2 + ST2Z + D2 + D3 + PL-2 + OB-A bez ściany poniżej — obciążenie liniowe płyty; sprawdzić podciąg/żebro [WYMAGA ANALIZY].
-- Biblioteka (uwaga analizy): Grupa płyt IZ-ST2Z: MES niewykonalny (MES płyty: za mało podpór) — pominięto
-- Biblioteka (uwaga analizy): Grupa płyt OB-A2: MES niewykonalny (MES płyty: brak elementów (obrys zbyt mały?)) — pominięto
-- Biblioteka (uwaga analizy): Grupa płyt PS-A: MES niewykonalny (MES płyty: za mało podpór) — pominięto
-- Biblioteka (uwaga analizy): Grupa płyt PL-C2: MES niewykonalny (MES płyty: za mało podpór) — pominięto
-- Biblioteka (uwaga analizy): Grupa płyt PL-C1 + PL-D: MES niewykonalny (MES płyty: za mało podpór) — pominięto
+- Obliczenia — poz. 9.28 S0-10: niespełnione warunki: Nośność — przekrój górny (η = 246%); Nośność — połowa wysokości (η = 367%); Nośność — przekrój dolny (η = 338%) [WYMAGA ZMIANY PRZEKROJU / ANALIZY].
+- Obliczenia — poz. 10.2 ZF1 (model ławy/stopy izolowanej biblioteki): Nośność podłoża (GEO, DA2*) (η = 220%); Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) (η = 254%) — dla płyty z żebrami ZASTĄPIONE analizą MES płyty fundamentowej (nośność i docisk podłoża, zbrojenie — raport MES); głębokość posadowienia: płyta na XPS z izolacją obwodową wg PN-EN ISO 13793 (warunek R5 3.8 ławy nie dotyczy) [ZAŁ].
+- Obliczenia — poz. 10.3 ZF2 (model ławy/stopy izolowanej biblioteki): Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) (η = 254%) — dla płyty z żebrami ZASTĄPIONE analizą MES płyty fundamentowej (nośność i docisk podłoża, zbrojenie — raport MES); głębokość posadowienia: płyta na XPS z izolacją obwodową wg PN-EN ISO 13793 (warunek R5 3.8 ławy nie dotyczy) [ZAŁ].
+- Obliczenia — poz. 10.4 ZF3 (model ławy/stopy izolowanej biblioteki): Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) (η = 198%) — dla płyty z żebrami ZASTĄPIONE analizą MES płyty fundamentowej (nośność i docisk podłoża, zbrojenie — raport MES); głębokość posadowienia: płyta na XPS z izolacją obwodową wg PN-EN ISO 13793 (warunek R5 3.8 ławy nie dotyczy) [ZAŁ].
+- Obliczenia — poz. 10.5 ZF4 (model ławy/stopy izolowanej biblioteki): Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) (η = 185%) — dla płyty z żebrami ZASTĄPIONE analizą MES płyty fundamentowej (nośność i docisk podłoża, zbrojenie — raport MES); głębokość posadowienia: płyta na XPS z izolacją obwodową wg PN-EN ISO 13793 (warunek R5 3.8 ławy nie dotyczy) [ZAŁ].
+- Obliczenia — poz. 10.7 ZF6 (model ławy/stopy izolowanej biblioteki): Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) (η = 254%) — dla płyty z żebrami ZASTĄPIONE analizą MES płyty fundamentowej (nośność i docisk podłoża, zbrojenie — raport MES); głębokość posadowienia: płyta na XPS z izolacją obwodową wg PN-EN ISO 13793 (warunek R5 3.8 ławy nie dotyczy) [ZAŁ].
+- Obliczenia — poz. 10.8 ZF7 (model ławy/stopy izolowanej biblioteki): Nośność podłoża (GEO, DA2*) (η = 273%); Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) (η = 254%) — dla płyty z żebrami ZASTĄPIONE analizą MES płyty fundamentowej (nośność i docisk podłoża, zbrojenie — raport MES); głębokość posadowienia: płyta na XPS z izolacją obwodową wg PN-EN ISO 13793 (warunek R5 3.8 ławy nie dotyczy) [ZAŁ].
+- Obliczenia — poz. 10.9 ZF8 (model ławy/stopy izolowanej biblioteki): Nośność podłoża (GEO, DA2*) (η = 482%) — dla płyty z żebrami ZASTĄPIONE analizą MES płyty fundamentowej (nośność i docisk podłoża, zbrojenie — raport MES); głębokość posadowienia: płyta na XPS z izolacją obwodową wg PN-EN ISO 13793 (warunek R5 3.8 ławy nie dotyczy) [ZAŁ].
+- Obliczenia — poz. 10.11 ZF10 (model ławy/stopy izolowanej biblioteki): Nośność podłoża (GEO, DA2*) (η = 212%) — dla płyty z żebrami ZASTĄPIONE analizą MES płyty fundamentowej (nośność i docisk podłoża, zbrojenie — raport MES); głębokość posadowienia: płyta na XPS z izolacją obwodową wg PN-EN ISO 13793 (warunek R5 3.8 ławy nie dotyczy) [ZAŁ].
+- Obliczenia — poz. 10.13 ZF12 (model ławy/stopy izolowanej biblioteki): Nośność podłoża (GEO, DA2*) (η = 386%) — dla płyty z żebrami ZASTĄPIONE analizą MES płyty fundamentowej (nośność i docisk podłoża, zbrojenie — raport MES); głębokość posadowienia: płyta na XPS z izolacją obwodową wg PN-EN ISO 13793 (warunek R5 3.8 ławy nie dotyczy) [ZAŁ].
+- Obliczenia — poz. 10.14 ZF13 (model ławy/stopy izolowanej biblioteki): Nośność podłoża (GEO, DA2*) (η = 322%) — dla płyty z żebrami ZASTĄPIONE analizą MES płyty fundamentowej (nośność i docisk podłoża, zbrojenie — raport MES); głębokość posadowienia: płyta na XPS z izolacją obwodową wg PN-EN ISO 13793 (warunek R5 3.8 ławy nie dotyczy) [ZAŁ].
+- Obliczenia — poz. 10.16 ZF15 (model ławy/stopy izolowanej biblioteki): Nośność podłoża (GEO, DA2*) (η = 135%) — dla płyty z żebrami ZASTĄPIONE analizą MES płyty fundamentowej (nośność i docisk podłoża, zbrojenie — raport MES); głębokość posadowienia: płyta na XPS z izolacją obwodową wg PN-EN ISO 13793 (warunek R5 3.8 ławy nie dotyczy) [ZAŁ].
+- Obliczenia — poz. 10.18 SF1 (model ławy/stopy izolowanej biblioteki): Głębokość posadowienia (η = 185%) — dla płyty z żebrami ZASTĄPIONE analizą MES płyty fundamentowej (nośność i docisk podłoża, zbrojenie — raport MES); głębokość posadowienia: płyta na XPS z izolacją obwodową wg PN-EN ISO 13793 (warunek R5 3.8 ławy nie dotyczy) [ZAŁ].
+- Obliczenia — poz. 10.19 SF2 (model ławy/stopy izolowanej biblioteki): Głębokość posadowienia (η = 185%) — dla płyty z żebrami ZASTĄPIONE analizą MES płyty fundamentowej (nośność i docisk podłoża, zbrojenie — raport MES); głębokość posadowienia: płyta na XPS z izolacją obwodową wg PN-EN ISO 13793 (warunek R5 3.8 ławy nie dotyczy) [ZAŁ].
+- Obliczenia — poz. 10.20 SF3 (model ławy/stopy izolowanej biblioteki): Głębokość posadowienia (η = 186%) — dla płyty z żebrami ZASTĄPIONE analizą MES płyty fundamentowej (nośność i docisk podłoża, zbrojenie — raport MES); głębokość posadowienia: płyta na XPS z izolacją obwodową wg PN-EN ISO 13793 (warunek R5 3.8 ławy nie dotyczy) [ZAŁ].
+- Obliczenia — poz. 10.21 SF4 (model ławy/stopy izolowanej biblioteki): Głębokość posadowienia (η = 185%) — dla płyty z żebrami ZASTĄPIONE analizą MES płyty fundamentowej (nośność i docisk podłoża, zbrojenie — raport MES); głębokość posadowienia: płyta na XPS z izolacją obwodową wg PN-EN ISO 13793 (warunek R5 3.8 ławy nie dotyczy) [ZAŁ].
+- Biblioteka (uwaga analizy): Ściana nośna S2-07 stoi na płycie ST2 + ST2Z + D2 + D3 + PL-2 bez ściany poniżej — obciążenie liniowe płyty; sprawdzić podciąg/żebro [WYMAGA ANALIZY].
+- Biblioteka (uwaga analizy): Ściana nośna S2-08 stoi na płycie ST2 + ST2Z + D2 + D3 + PL-2 bez ściany poniżej — obciążenie liniowe płyty; sprawdzić podciąg/żebro [WYMAGA ANALIZY].
+- Biblioteka (uwaga analizy): Ściana nośna S2-09 stoi na płycie ST2 + ST2Z + D2 + D3 + PL-2 bez ściany poniżej — obciążenie liniowe płyty; sprawdzić podciąg/żebro [WYMAGA ANALIZY].
 - Biblioteka (uwaga analizy): ST1: podpora punktowa SL1 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
 - Biblioteka (uwaga analizy): ST1: podpora punktowa SL2 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
 - Biblioteka (uwaga analizy): ST1: podpora punktowa SL3 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
@@ -104,9 +65,3 @@ Lista generowana automatycznie przez `lamela.views.konstrukcja` z: (1) braków z
 - Biblioteka (uwaga analizy): PL-E: podpora punktowa SL2 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
 - Biblioteka (uwaga analizy): PL-E: podpora punktowa SL3 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
 - Biblioteka (uwaga analizy): PL-E: podpora punktowa SL4 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
-
-## Kontrola zbrojenia — pozycje niespełnione (szczegóły: raport kontroli zbrojenia)
-
-- PF1 / strefa S1 (płyta) — przekrój niewystarczający (poz. MES-PF): A_s,prov = 0 < max(A_s,req; A_s,min) = 1 — M_Ed = 254 kNm/m > M_lim — wymagana wysokość h ≥ 0.26 m (obecnie 0.25 m) [WYMAGA ZMIANY MODELU]
-- ST2Z / nad podporą S1-04 — góra x (poz. 2.2): A_s,prov = 2513 < max(A_s,req; A_s,min) = 15782 mm²/m Zbrojenie na zginanie (η = 589%); Rysy: średnica prętów (tabl. 7.2N) (η = 1600000000%)
-- ST2Z / nad podporą N17 — góra x (poz. 2.2): A_s,prov = 2513 < max(A_s,req; A_s,min) = 15782 mm²/m Zbrojenie na zginanie (η = 589%); Rysy: średnica prętów (tabl. 7.2N) (η = 1600000000%)

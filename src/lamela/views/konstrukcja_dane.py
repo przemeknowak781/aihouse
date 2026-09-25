@@ -862,8 +862,8 @@ def dane(ctx) -> DaneKonstr:
                     D.braki.append(f"Obliczenia — poz. {pz.nr} {pz.ident} (model ławy/stopy izolowanej biblioteki): "
                                    + "; ".join(ws[:3]) + " — dla płyty z żebrami ZASTĄPIONE analizą MES płyty "
                                    "fundamentowej (nośność i docisk podłoża, zbrojenie — raport MES); głębokość "
-                                   "posadowienia: płyta na XPS z izolacją obwodową wg PN-EN ISO 13793 (warunek R5 3.8 "
-                                   "ławy nie dotyczy) [ZAŁ].")
+                                   "posadowienia: płyta na XPS z izolacją obwodową wg PN-EN ISO 13793 (W-284 — wariant "
+                                   "płyty wg koncepcji; warunek ławy D ≥ 1,0 m nie dotyczy) [ZAŁ].")
                     continue
                 D.braki.append(f"Obliczenia — poz. {pz.nr} {pz.ident}: niespełnione warunki: " + "; ".join(ws[:3])
                                + (" …" if len(ws) > 3 else "") + " [WYMAGA ZMIANY PRZEKROJU / ANALIZY].")

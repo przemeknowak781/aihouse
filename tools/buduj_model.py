@@ -660,18 +660,56 @@ STROPY = [
                                 "(IZ-ST2Z) i podsufitka PS-A"},
 ]
 
-WP = lambda x, y, dn=100, grz=True, **kw: {"xy": [r(x), r(y)], "dn": dn, "podgrzewany": grz, **kw}          # noqa: E731
-PA = lambda x, y, sc, dno, **kw: {"xy": [r(x), r(y)], "sciana_attyki": sc, "szer": 0.20, "wys": 0.10, "rzedna_dna": r(dno), **kw}  # noqa: E731
+# ---- runda 2 (R-W2, weryfikacja §6 A3; W-142): rzędne POKRYCIA (wierzch hydroizolacji) przy wpustach i w miejscach przelewów —
+#      izolacja spadkowa jako stożek wokół wpustu: d = d_min + i·L (i = 2 %, ≤ d_max) [INT]; dno przelewu = pokrycie przy wpuście
+#      + 0,03…0,05 m (J2 poprawka 5.1) i ≥ pokrycie lokalne; górna krawędź otworu ≤ pokrycie + 0,15 m (DAFA — wywinięcie)
+ATT_D1 = 0.35      # attyka D1 nad pokryciem średnim: +0,10 m (R-W3: wywinięcie w najwyższym narożu 0,28 ≥ 0,15 + tolerancja;
+#                    W-033/D-15: moduły PV na stelażach 0,30 m poniżej korony attyki — energia.pv.z_max)
+
+
+def pokrycie(kod_prz, z_plyty, L=0.0, i=0.02):
+    """Rzędna wierzchu hydroizolacji [m] w odległości L od wpustu (klin izolacji spadkowej `klin` przegrody)."""
+    ws = PRZ[kod_prz]["warstwy"]
+    k = next(n for n, w in enumerate(ws) if w["mat"] in ("MEMB_TPO", "PAPA_SBS"))
+    z = z_plyty
+    for w in ws[k:]:
+        if w.get("konstrukcyjna"):
+            break
+        kl = w.get("klin")
+        z += min(kl["d_max"], kl["d_min"] + i * L) if kl else w["d"]
+    return r(z, 3)
+
+
+def WP(x, y, prz, z_pl, dn=100, grz=True, **kw):
+    return {"xy": [r(x), r(y)], "dn": dn, "podgrzewany": grz, "rzedna_pokrycia": pokrycie(prz, z_pl), **kw}
+
+
+def PA(x, y, sc, dno, wp, prz, z_pl, **kw):
+    """Przelew awaryjny 0,20 × 0,10 m w attyce; `wp` — najbliższy wpust (x, y) do rzędnej pokrycia lokalnego."""
+    pl = pokrycie(prz, z_pl, math.hypot(x - wp[0], y - wp[1]))
+    pw = pokrycie(prz, z_pl)
+    assert pw + 0.03 - 1e-6 <= dno <= pw + 0.05 + 1e-6 and dno >= pl - 1e-6, (x, y, dno, pw, pl)
+    return {"xy": [r(x), r(y)], "sciana_attyki": sc, "szer": 0.20, "wys": 0.10, "rzedna_dna": r(dno), "rzedna_pokrycia": pl, **kw}
+
+
+_W1, _W2, _W3, _W4, _W5, _W6 = (5.57, 5.45), (4.40, 8.35), (0.40, y4 - 0.20), (9.20, y4 - 0.20), (18.05, 9.05), (17.95, 0.35)
 
 DACHY = [
     {"id": "D1", "obrys": OB_D1, "plyta": {"wierzch": Z_ST3, "grubosc": T_STR}, "przegroda": "SD1", "spadek": 0.02,
-     "attyka": {"wys_nad_pokryciem": 0.25, "szer": 0.18, "przegroda": "AT1"},
+     "attyka": {"wys_nad_pokryciem": ATT_D1, "szer": 0.18, "przegroda": "AT1",
+                "blok_termoizolacyjny": {"h": 0.15, "lambda": 0.045, "mat": "BLOK_TERM",
+                                         "opis": "nośny blok termoizolacyjny u podstawy attyki (element z ETA / szkło piankowe, klasa nośności "
+                                                 "wg PT-K) — mostki A: WZ-06 (REKOMENDACJE mostków, wariant policzony)"}},
      "otwory": [R(6.10, 7.45, 8.20, 8.45), R(7.20, 0.90, 8.10, 1.80)],
-     "wpusty": [WP(5.57, 5.45, opis="WP1 — nad szachtem SI (najniższy punkt spadków)"),
-                WP(4.40, 8.35, opis="WP2 — przy attyce pn. nadbudowy; podejście w stropie łazienki P2 do SI")],
-     "przelewy_awaryjne": [PA(5.00, y4 + ZK, "N", 9.48, opis="przelew PA1 — attyka pn. nadbudowy (na dach D2/teren)"),
-                           PA(2.00, y3 + ZK, "N", 9.52, opis="przelew PA2 — na dach D2 (pole zach., z własnym wpustem)"),
-                           PA(10.60, y3 + ZK, "N", 9.52, opis="przelew PA3 — na dach D3 (pole wsch., z własnym wpustem)")],
+     "rzedna_pokrycia": {"przy_wpustach": pokrycie("SD1", Z_ST3), "maks": pokrycie("SD1", Z_ST3, 99.0),
+                         "opis": "wierzch hydroizolacji (TPO): stożki izolacji spadkowej 2 % wokół WP1/WP2 (R-W2)"},
+     "wpusty": [WP(*_W1, "SD1", Z_ST3, opis="WP1 — nad szachtem SI (najniższy punkt spadków)"),
+                WP(*_W2, "SD1", Z_ST3, opis="WP2 — przy attyce pn. nadbudowy; podejście w stropie łazienki P2 do SI")],
+     # R-W2: PA1 0,78 m od WP2; PA2 przeniesiony do attyki zach. nadbudowy 1,80 m od WP1 (spływ na D2); PA3 (attyka pn. pola wsch.,
+     # pokrycie lokalne +0,10 nad wpustem) USUNIĘTY — przepustowość PA1 + PA2 ≥ F_R·Q (moduł deszczowy)
+     "przelewy_awaryjne": [PA(5.00, y4 + ZK, "N", 9.46, _W2, "SD1", Z_ST3, opis="przelew PA1 — attyka pn. nadbudowy (na teren, rzygacz z okapnikiem)"),
+                           PA(xB - ZK, 5.70, "W", 9.47, _W1, "SD1", Z_ST3, opis="przelew PA2 — attyka zach. nadbudowy (na dach D2, "
+                                                                                  "pole z własnym wpustem WP3)")],
      "rury_spustowe": [{"id": "RS1", "od_wpustu": 0, "trasa": "wewn_szacht", "xy_pion": [5.57, 5.45], "dn": 100, "do": "zbiornik",
                         "opis": "w izolowanym szachcie SI (otulina 20 mm, izolacja akustyczna), pod płytą do kolektora KD-W"},
                        {"id": "RS2", "od_wpustu": 1, "trasa": "wewn_szacht", "xy_pion": [5.57, 5.85], "dn": 100, "do": "zbiornik",
@@ -683,16 +721,19 @@ DACHY = [
               "obrys po licu konstrukcji ścian P2 (attyka ŻB 18 w osi muru, ETICS/wełna ścian ciągła po zewnątrz)"},
     {"id": "D2", "obrys": R(-ZK, y3 + EXT, xB - EXT, y4 + ZK), "plyta": {"wierzch": Z_ST2, "grubosc": T_STR}, "przegroda": "SD2", "spadek": 0.02,
      "attyka": {"wys_nad_pokryciem": 0.25, "szer": 0.18, "przegroda": "AT1"},
-     "wpusty": [WP(0.40, y4 - 0.20, opis="wpust przy attyce (boczny) WP3 — narożnik NW")],
-     "przelewy_awaryjne": [PA(-ZK, 7.20, "W", 6.46, opis="przelew PA4 — attyka zach.")],
+     "rzedna_pokrycia": {"przy_wpustach": pokrycie("SD2", Z_ST2), "maks": pokrycie("SD2", Z_ST2, 99.0), "opis": "wierzch TPO pod żwirem (R-W2)"},
+     "wpusty": [WP(*_W3, "SD2", Z_ST2, opis="wpust przy attyce (boczny) WP3 — narożnik NW")],
+     "przelewy_awaryjne": [PA(-ZK, 8.20, "W", 6.33, _W3, "SD2", Z_ST2, opis="przelew PA4 — attyka zach., 0,60 m od WP3 (R-W2)")],
      "rury_spustowe": [{"id": "RS3", "od_wpustu": 0, "trasa": "zewn", "xy_pion": [0.40, y4 + EXT + 0.06], "dn": 100, "do": "zbiornik",
                         "opis": "zewnętrzna na elewacji pn., czyszczak 0,5 m nad terenem, kolektor KD-W"}],
      "spadki": [{"od": [xB - EXT, y3 + EXT], "do": [0.40, y4 - 0.20], "spadek": 0.02}],
      "uwagi": "dach nad P1 (pole zach.), żwirowy, nieużytkowy"},
     {"id": "D3", "obrys": R(xD + EXT, y3 + EXT, xE + ZK, y4 + ZK), "plyta": {"wierzch": Z_ST2, "grubosc": T_STR}, "przegroda": "SD2", "spadek": 0.02,
      "attyka": {"wys_nad_pokryciem": 0.25, "szer": 0.18, "przegroda": "AT1"},
-     "wpusty": [WP(9.20, y4 - 0.20, opis="wpust przy attyce (boczny) WP4 — przy attyce pn.")],
-     "przelewy_awaryjne": [PA(xE + ZK, 7.20, "E", 6.46, opis="przelew PA5 — attyka wsch. (awaryjnie na dach D4)")],
+     "rzedna_pokrycia": {"przy_wpustach": pokrycie("SD2", Z_ST2), "maks": pokrycie("SD2", Z_ST2, 99.0), "opis": "wierzch TPO pod żwirem (R-W2)"},
+     "wpusty": [WP(*_W4, "SD2", Z_ST2, opis="wpust przy attyce (boczny) WP4 — przy attyce pn.")],
+     "przelewy_awaryjne": [PA(9.00, y4 + ZK, "N", 6.33, _W4, "SD2", Z_ST2, opis="przelew PA5 — attyka pn., 0,35 m od WP4; rzygacz z okapnikiem, "
+                                                                            "wylot 0,40 m na zach. od daszka PL-DA (R-W2)")],
      "rury_spustowe": [{"id": "RS4", "od_wpustu": 0, "trasa": "zewn", "xy_pion": [9.20, y4 + EXT + 0.06], "dn": 100, "do": "zbiornik",
                         "opis": "zewnętrzna na elewacji pn. obok daszku wejścia, czyszczak, kolektor KD-W"}],
      "spadki": [{"od": [xE + ZK, y3 + EXT], "do": [9.20, y4 - 0.20], "spadek": 0.02}],
@@ -700,10 +741,13 @@ DACHY = [
     {"id": "D4", "obrys": P((xE + EXT, -ZK), (xF + ZK, -ZK), (xF + ZK, y5 + ZK), (xE - ZK, y5 + ZK), (xE - ZK, y4 + EXT), (xE + EXT, y4 + EXT)),
      "plyta": {"wierzch": Z_DG, "grubosc": T_DG}, "przegroda": "DZ1", "spadek": 0.02,
      "attyka": {"wys_nad_pokryciem": 0.545, "szer": 0.18, "przegroda": "AT1"},
-     "wpusty": [WP(18.05, 9.05, opis="WP5 — garaż, narożnik NE, studzienka kontrolna w opasce żwirowej"),
-                WP(17.95, 0.35, opis="WP6 — pas gospodarczy, narożnik SE (poza strefą R290)")],
-     "przelewy_awaryjne": [PA(xF + ZK, 6.50, "E", 3.36, opis="przelew PA6 — attyka wsch. (garaż)"),
-                           PA(xF + ZK, 2.40, "E", 3.36, opis="przelew PA7 — attyka wsch. (pas gosp.; > 1 m od jedn. PC)")],
+     "rzedna_pokrycia": {"przy_wpustach": pokrycie("DZ1", Z_DG), "maks": pokrycie("DZ1", Z_DG, 99.0),
+                         "opis": "wierzch papy SBS pod warstwami dachu zielonego (R-W2)"},
+     "wpusty": [WP(*_W5, "DZ1", Z_DG, opis="WP5 — garaż, narożnik NE, studzienka kontrolna w opasce żwirowej"),
+                WP(*_W6, "DZ1", Z_DG, opis="WP6 — pas gospodarczy, narożnik SE (poza strefą R290)")],
+     "przelewy_awaryjne": [PA(xF + ZK, 8.60, "E", 3.17, _W5, "DZ1", Z_DG, opis="przelew PA6 — attyka wsch. (garaż), 0,57 m od WP5 (R-W2)"),
+                           PA(xF + ZK, 0.90, "E", 3.17, _W6, "DZ1", Z_DG, opis="przelew PA7 — attyka wsch. (pas gosp.), 0,75 m od WP6; "
+                                                                           "2,6 m od jedn. PC (> 1 m — W-156)")],
      "rury_spustowe": [{"id": "RS5", "od_wpustu": 0, "trasa": "zewn", "xy_pion": [xF + EXT + 0.06, 9.05], "dn": 100, "do": "zbiornik",
                         "opis": "zewnętrzna w narożu NE, czyszczak, kolektor KD-E"},
                        {"id": "RS6", "od_wpustu": 1, "trasa": "wewn_szacht", "xy_pion": [17.95, 0.35], "dn": 100, "do": "zbiornik",

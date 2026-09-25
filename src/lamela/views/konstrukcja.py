@@ -1181,7 +1181,13 @@ def _uwagi_fundamentow(D, m, fu, iz, n_prz) -> list:
     for z in D.zebra + D.stopy:
         if z.niesp:
             bad.append(f"{z.id}: {z.niesp[0]}")
-    if bad:
+    if bad and D.plyta_f is not None and KD.prety_fundamentu(D).get("mes") is not None:
+        out.append("Pozycje ław/stóp izolowanych biblioteki (" + ", ".join(sorted({b_.split(':')[0] for b_ in bad}))
+                   + ") — warunki nośności podłoża i głębokości posadowienia modelu ławy ZASTĄPIONE analizą MES płyty "
+                   "z żebrami na podłożu sprężystym (docisk, osiadanie, zbrojenie — raport MES) oraz izolacją obwodową "
+                   "wg PN-EN ISO 13793 (płyta na XPS, posadowienie płytkie zabezpieczone przed przemarzaniem — W-284, wariant "
+                   "płyty wg koncepcji) [ZAŁ].")
+    elif bad:
         out.append("UWAGA — obliczenia (biblioteka, model ław/stóp izolowanych) wykazują niespełnione warunki: "
                    + "; ".join(bad[:6]) + ("…" if len(bad) > 6 else "") + ". Model ław nie uwzględnia współpracy z "
                    "płytą i izolacji obwodowej (PN-EN ISO 13793) — wymagana analiza płyty z żebrami na podłożu "
@@ -1503,7 +1509,6 @@ def widok_zbrojenie_belek(ctx: ViewContext, spec: dict, scale: float, opts: dict
     vp = Viewport(scale, title)
     placer = Placer(vp.k)
     k = vp.k
-    kol = max(int(spec.get("kolumny", 2)), 1)
     rows, bloki = [], []
     for i, (ident, B, tyt) in enumerate(items):
         pr = KB.prety_belki(B, zest)
@@ -1521,19 +1526,30 @@ def widok_zbrojenie_belek(ctx: ViewContext, spec: dict, scale: float, opts: dict
     if not bloki:                   # część pusta (mniej elementów niż części w konfiguracji arkuszy)
         vp.text((0.0, 0.0), f"Brak {'belek' if el == 'belki' else 'nadproży'} w tej części zestawu — "
                 "zmniejszyć liczbę części (czesc) w konfiguracji arkuszy.", 2.5, layer=L_OPI)
-    # układ w siatce: kolumny o szerokości maks. bloku, wiersze o wysokości maks. bloku
-    cw = [0.0] * kol
-    for i, (*_, bb) in enumerate(bloki):
-        cw[i % kol] = max(cw[i % kol], bb[2] - bb[0])
+    # układ zwarty (pakowanie półkowe, first-fit decreasing): szerokość docelowa ≥ najszerszy blok i ≈ √(1,6·ΣA)
+    # (proporcje arkusza poziomego) — bez pustych kolumn wymuszonych przez najdłuższą belkę
+    gx, gy = 20 * k, 10 * k
+    wh = [(bb[2] - bb[0], bb[3] - bb[1]) for *_, bb in bloki]
+    W_doc = max([w_ for w_, _ in wh] + [math.sqrt(1.6 * sum((w_ + gx) * (h_ + gy) for w_, h_ in wh))]) if wh else 0.0
+    polki = []                                  # [szerokość zajęta, wysokość, [indeksy]]
+    for i in sorted(range(len(bloki)), key=lambda j: -wh[j][0]):
+        w_, h_ = wh[i]
+        for pk in polki:
+            if pk[0] + gx + w_ <= W_doc + 1e-9:
+                pk[0] += gx + w_
+                pk[1] = max(pk[1], h_)
+                pk[2].append(i)
+                break
+        else:
+            polki.append([w_, h_, [i]])
     Y = 0.0
-    for r0 in range(0, len(bloki), kol):
-        rz = bloki[r0:r0 + kol]
-        hmax = max(bb[3] - bb[1] for *_, bb in rz)
+    for _w, hmax, idx in polki:
         X = 0.0
-        for j, (B, pr, pods, tyt, bb) in enumerate(rz):
+        for i in sorted(idx, key=lambda j: j):
+            B, pr, pods, tyt, bb = bloki[i]
             KB.rysuj_belke(vp, placer, B, pr, X - bb[0], Y - bb[3] - B.h, pods, tyt, 2.5)
-            X += cw[j] + 20 * k
-        Y -= hmax + 10 * k
+            X += wh[i][0] + gx
+        Y -= hmax + gy
     res.column_blocks.append(("zestawienie", blok_zestawienia(zest, "ZESTAWIENIE STALI", _stopka_belek(D, rows), None)))
     bad = [B for B, _ in rows if B.niesp]
     res.notes += [
