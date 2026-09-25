@@ -205,9 +205,8 @@ def test_eksport_do_fizyka_mostki():
 def test_bilans_wymuszany():
     from shapely.geometry import box
     M = G.Material
-    # dwie izolowane części materiału (brak styku) z pustką przy brzegu ramki — bilans poprawny, ale strefa i ma
-    # kontakt tylko z jedną częścią: wynik akceptowany; sprawdzamy, że kryterium bilansu jest egzekwowane w
-    # _rozwiaz_zbieznie (monkeypatch progu)
+    # kryterium bilansu (< 10⁻⁴) jest egzekwowane w oblicz_wezel (ValueError), a nie tylko raportowane —
+    # sprawdzenie przez chwilowe wyzerowanie progu
     ob = [G.Obszar(box(0, 0, 0.2, 1), M("A", 1.0))]
     st = [G.Strefa("i", box(-0.05, 0, 0, 1), 20.0, "wewn", "i", Rs=0.13),
           G.Strefa("e", box(0.2, 0, 0.25, 1), -18.0, "zewn", "e", Rs=0.04)]

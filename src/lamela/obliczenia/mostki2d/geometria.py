@@ -956,8 +956,9 @@ def wezel_cokol(warstwy_sciany: Sequence[Warstwa], warstwy_podlogi: Sequence[War
     `mat`, od wierzchu płyty konstrukcyjnej do poziomu posadzki), warstwy posadzki do lica wewn. ramy, ocieplenie
     ściany fundamentowej do spodu ramy; ψ_prog = L_2D − U_podłogi·l − L_2D,drzwi (model ramy z szybą).
     Obszar gruntu wg ISO 10211 (model 2D z podłogą): wewnątrz 0,5·b od lica zewn., na zewnątrz 2,5·b, w głąb 2,5·b
-    poniżej terenu (b — szerokość budynku; 8 m, gdy nieznana) [NZW]; płaszczyzny odcięcia w gruncie adiabatyczne.
-    ψ_g = L_2D − U_ściany·h − U_podłogi(ISO 13370, B' = b)·l_podłogi (wymiary zewn.: l = 0,5·b; wewn.: 0,5·b − w)."""
+    poniżej terenu (b — wymiar charakterystyczny B' = A/(0,5·P) z modelu, `katalog_z_modelu`; 8 m, gdy nieznany) [NZW];
+    płaszczyzny odcięcia w gruncie adiabatyczne. ψ_g = L_2D − U_ściany·h − U_podłogi(ISO 13370, B' = b)·l_podłogi
+    (wymiary zewn.: l = 0,5·b; wewn. i wewn. całkowite: 0,5·b − w)."""
     ti, te = _temperatury(theta_i, theta_e)
     st = _stos(warstwy_sciany, 0.0)
     ks = indeks_konstrukcyjnej(warstwy_sciany)

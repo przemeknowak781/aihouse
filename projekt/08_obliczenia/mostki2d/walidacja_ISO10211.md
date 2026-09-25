@@ -6,6 +6,7 @@ Metoda: objętości skończone na siatce prostokątnej zagęszczanej przy granic
 |---|---|---|---|---|
 | ISO 10211 zał. C — przypadek 1 (28 punktów, tabela normy) | **SPEŁNIA** | 0,0481 | — | Δθ w ± 0,1 K |
 | ISO 10211 zał. C — przypadek 2 (punkty A…I + strumień) | **SPEŁNIA** | 0,0387 | −0,0097 | Δθ w ± 0,1 K; ΔΦ w ± 0,1 W/m |
+| Przypadek 2 — niezależność od siatki (h_min = 0,5 i 0,1 mm; punkty D, G, Φ) | **SPEŁNIA** | 0,0341 | — | Δθ w ± 0,1 K; ΔΦ w ± 0,1 W/m na każdej siatce |
 | A1 — ściana warstwowa 1D (Robin), rozwiązanie dokładne | **SPEŁNIA** | 0,0000 | — | Δθ w ± 10⁻⁶ K; ΔU w ± 10⁻⁹ |
 | A2 — przypadek 1 vs szereg Fouriera (bez zaokrągleń) | **SPEŁNIA** | 0,0018 | — | Δθ w ± 0,02 K |
 | A3 — naroże 90°, powierzchnie izotermiczne: ΔS = S − (a+b)/t | **SPEŁNIA** | — | — | ΔS = 0,559 ± 0,01 |
@@ -45,7 +46,7 @@ Siatka: 81 × 145 = 11745 komórek; Δx ∈ [1.94; 19.72] mm, Δy ∈ [1.94; 19.
 | 7.3 | (0.75; 0.25) | 0,8000 | 0,8201 | +0,0201 |
 | 7.4 | (1.00; 0.25) | 0,9000 | 0,8863 | −0,0137 |
 
-bilans energii: 8.1e-14
+bilans energii: 5.3e-14
 
 ## ISO 10211 zał. C — przypadek 2 (punkty A…I + strumień)
 
@@ -56,15 +57,30 @@ Siatka: 307 × 145 = 44515 komórek; Δx ∈ [0.0863; 1.999] mm, Δy ∈ [0.0863
 | A | (0; 47.5) mm | 7,1000 | 7,0639 | −0,0361 |
 | B | (500; 47.5) mm | 0,8000 | 0,7613 | −0,0387 |
 | C | (0; 41.5) mm | 7,9000 | 7,8970 | −0,0030 |
-| D | (15; 41.5) mm | 6,3000 | 6,2772 | −0,0228 |
+| D | (15; 41.5) mm | 6,3000 | 6,2719 | −0,0281 |
 | E | (500; 41.5) mm | 0,8000 | 0,8275 | +0,0275 |
 | F | (0; 36.5) mm | 16,4000 | 16,4084 | +0,0084 |
-| G | (15; 36.5) mm | 16,3000 | 16,2734 | −0,0266 |
+| G | (15; 36.5) mm | 16,3000 | 16,3341 | +0,0341 |
 | H | (0; 0) mm | 16,8000 | 16,7677 | −0,0323 |
 | I | (500; 0) mm | 18,3000 | 18,3337 | +0,0337 |
 | Φ [W/m] | HI → AB | 9,5000 | 9,4903 | −0,0097 |
 
-bilans energii: 4.5e-10; Φ_AB = 9.4903 W/m
+bilans energii: 3.8e-10; Φ_AB = 9.4903 W/m
+
+## Przypadek 2 — niezależność od siatki (h_min = 0,5 i 0,1 mm; punkty D, G, Φ)
+
+Siatka: 132 × 62 = 8184 komórek; Δx ∈ [0.459; 4.964] mm, Δy ∈ [0.466; 3.47] mm | 307 × 145 = 44515 komórek; Δx ∈ [0.0863; 1.999] mm, Δy ∈ [0.0863; 1.904] mm
+
+| Punkt | Położenie | Odniesienie | Obliczono | Odchyłka |
+|---|---|---|---|---|
+| D | h_min = 0,5 mm (8184 kom,) | 6,3000 | 6,2708 | −0,0292 |
+| G | h_min = 0,5 mm (8184 kom,) | 16,3000 | 16,3341 | +0,0341 |
+| Φ [W/m] | h_min = 0,5 mm | 9,5000 | 9,4874 | −0,0126 |
+| D | h_min = 0,1 mm (44515 kom,) | 6,3000 | 6,2719 | −0,0281 |
+| G | h_min = 0,1 mm (44515 kom,) | 16,3000 | 16,3341 | +0,0341 |
+| Φ [W/m] | h_min = 0,1 mm | 9,5000 | 9,4903 | −0,0097 |
+
+Niezależny solver węzłowy (weryfikator): G = 16,334 °C, D = 6,273 °C (zbieżne 13k–210k węzłów). Przed poprawką (średnia arytmetyczna rekonstrukcji z 4 komórek wokół wierzchołka) G zależało od siatki: 16,108 (h_min 0,5 mm — poza tolerancją) … 16,273 (siatka walidacyjna) … 16,313 °C.
 
 ## A1 — ściana warstwowa 1D (Robin), rozwiązanie dokładne
 
@@ -124,6 +140,36 @@ Siatka: 286 × 286 = 81796 komórek; Δx ∈ [0.481; 9.902] mm, Δy ∈ [0.481; 
 | ΔS (siatka 2n) |  | 0,5590 | 0,5585 | −0,0005 |
 
 Wartość odniesienia 0,559 — kwadrat narożny ≈ 0,56 „kwadratu” (odwzorowanie konforemne); wzór Langmuira–Adamsa–Stevensa (1919) podaje 0,54 (przybliżenie).
+
+## Weryfikacja niezależna i poprawki
+
+Pakiet sprawdzili dwaj niezależni weryfikatorzy: (A) numeryczno-fizyczny — własny solver węzłowy MOS (vertex-centred), szereg Fouriera przypadku 1 (4001 wyrazów), testy skrajnych kontrastów λ, skalowania, szczelin, zbieżności katalogu; (B) zgodności z normami PN-EN ISO 10211:2017, 14683:2017, 13788:2013, 6946:2017, 13370:2017 (próbki norm iTeh, dane przypadku 2 z QuickField/SimScale/Physibel). Potwierdzone bez zmian: przypadek 1 zbieżny w 2. rzędzie do rozwiązania Fouriera; przypadek 2 poza punktem G zgodny z niezależnym solverem do 0,005 K, Φ = 9,4904 vs 9,4917 W/m; bilans 10⁻¹⁵…3·10⁻⁹; średnia harmoniczna λ i warunki Robina (ściana 1D ze skrajnymi warstwami — błąd U ≤ 5·10⁻¹⁰); ΔS naroża 0,5587; kierunki R_si, R_si = 0,25 w przebiegu f_Rsi, długości l_e/l_i; brak pustek w węzłach katalogu; obszar gruntu i płaszczyzny odcięcia.
+
+| Nr | Waga | Uwaga weryfikatora | Poprawka |
+|---|---|---|---|
+| 1 | istotna | Temperatura w wierzchołku siatki na styku materiałów (przypadek 2, punkt G: aluminium / drewno / korek) liczona jako średnia arytmetyczna rekonstrukcji z 4 komórek — 1. rząd, zależna od siatki (h_min = 0,5 mm: G = 16,108 °C, poza tolerancją). | `Rozwiazanie.temperatura`: średnia rekonstrukcji ważona λ komórek (dla jednego materiału — bez zmian). Test regresji: przypadek 2 na siatkach h_min = 0,5 i 0,1 mm (tabela wyżej). |
+| 2 | istotna | Szczeliny między wielobokami szersze niż tolerancja scalania (10⁻⁷ m) stawały się pustkami adiabatycznymi bez ostrzeżenia; bilans energii tylko raportowany. | (a) `siatka.kontroluj_pustki` — ValueError dla zamkniętych pustek wewnętrznych i dla ciągów komórek pustki ograniczonych z obu stron materiałem/strefą (położenie w komunikacie; `Wezel.dopusc_pustki` — wyjątek dla celowych wcięć); (b) współrzędne wierzchołków przyciągane do siatki 1 µm; (c) `oblicz_wezel` odrzuca rozwiązanie z bilansem ≥ 10⁻⁴ (ValueError). |
+| 3 | drobna | θ_si,min i f_Rsi tylko w środkach ścian komórek — zawyżone o O(h_min) w narożu wewnętrznym i na styku ościeża z ramą. | `theta_si_min` sprawdza też wierzchołki łamanej powierzchni (naroża, końce łańcuchów) — temperatura z rekonstrukcji ważonej λ; współczynniki wagowe g (3 temperatury) w tym samym punkcie. |
+| 4 | drobna | Cienkie warstwy dobrze przewodzące (blachy, obróbki) — ψ zbieżne tylko w 1. rzędzie; kryterium 1 % strumienia nie kontroluje błędu ψ. | h_min ≤ grubość najcieńszego obszaru o λ ≥ 1; iloraz sąsiednich komórek na liniach granicznych ≤ 2; dodatkowe kryterium zbieżności |ΔL_2D| ≤ max(1 % |ψ|; 0,001 W/(m·K)) przy podwojeniu siatki (obok 1 % Φ wg ISO 10211). |
+| 5 | drobna | `podzial` — OverflowError dla długich odcinków przy małym h_max (r**k przed ograniczeniem). | Wzrost komórek ograniczany przed potęgowaniem; resztę odcinka wypełniają komórki h_max liczone wprost. |
+| 6 | drobna | Model gruntu i U podłogi (ISO 13370) z b = 8 m zamiast B' budynku. | `katalog_z_modelu`: b = B' = A/(0,5·P) z obrysu zewnętrznego parteru (model testowy: 4,74 m) [INT]. |
+| 7 | drobna | Attyka: warstwy dachu nad pustką wentylowaną w modelu 2D, a w U pominięte; „legary” klasyfikowane jako pustka. | Rozróżnienie 'powietrze' (niewentylowana, λ_eq — w U i w 2D) i 'powietrze_went' (nazwa „…wentylowana” lub pole `wentylowana`); `wezel_attyka` z warstwą wentylowaną → ValueError (wariant nieobsługiwany); słowo „legar” nie decyduje o klasyfikacji. |
+| 8 | istotna | System wymiarów ψ i H_TB niespójny z projektem (`energia.bryla`, `fizyka.mostki` — wymiary wewnętrzne całkowite, okna w świetle otworu w murze); H_TB = 9,28 W/K liczone z ψ_e. | `ElementFlankujacy.l_oi`, `WynikPsi.psi_oi` (strop pośredni / wspornik / próg: ψ_oi = ψ_e — wysokości „od podłogi do podłogi”; attyka: ściana do spodu płyty; okna: ściana do krawędzi otworu w murze + korekta U_w·x0 pasa między krawędzią ramy a otworem); H_TB = Σ ψ_oi·l_oi z długościami w tym samym systemie; eksport `eksport_wynikow` → {id: {psi_oi, psi_e, psi_i, f_rsi, dlugosc(_oi), typ}} (czytany przez `fizyka.mostki.wczytaj_wyniki_symulacji` — pierwszeństwo psi_oi). Poprzednie H_TB = 9,28 W/K (ψ_e, długości zewn., w tym otwory wewnętrzne) — NIEPORÓWNYWALNE, wycofane. |
+| 9 | istotna | Długość WZ-W1 obejmowała otwory w ścianach wewnętrznych/działowych; pominięte progi; nadproża i podokienniki liczone jak ościeże. | `otwory_zewnetrzne` — tylko ściany o przegrodzie `sciana_zewn` (bez `typ: otwor`); nowe węzły 2D (przekroje pionowe): WZ-N1 nadproże, WZ-N2 nadproże z kasetą osłony w ociepleniu (otwory z żaluzją/screenem), WZ-P1 podokiennik z parapetem wewn. i obróbką zewn., WZ-T1 próg na płycie parteru (grunt), WZ-T2 próg okna do podłogi na stropie, WZ-T3 próg drzwi na płycie wspornikowej z łącznikiem; długości: ościeża 2·wys, nadproża/podokienniki/progi szer. |
+
+**Kontrole numeryczne poprawek** (uruchamiane przy generowaniu raportu):
+
+| Uwaga | Kontrola | Wynik | Ocena |
+|---|---|---|---|
+| 2 | szczelina między wielobokami 0,2 µm / 0,1 mm (ściana SIL 18 + EPS 20) | 0,2 µm → U_2D = 0,1459 (1D: 0,1459; przyciąganie do 1 µm); 0,1 mm → ValueError (szczelina wykryta) | **OK** |
+| 5 | podzial(0; 20 m; h = 3 mm) | 6667 komórek, max 3,000 mm (wcześniej OverflowError) | **OK** |
+| 3 | θ_si,min naroża wewn. (h_min 2 mm vs 0,25 mm; odniesienie 10,737 °C) | 10,736 / 10,737 °C (wcześniej 10,810 / 10,747 — środki ścian komórek) | **OK** |
+| 4 | płaskownik stalowy 2 mm przez izolację 0,2 m (półmodel), ψ vs niezależny solver 0,03472 | ψ = 0,03449 (−0,7 %; wcześniej −1,5 % po akceptacji siatki), siatki 2640, 10560, zbieżność Φ i ψ: True | **OK** |
+| 7 | attyka z warstwą dobrze wentylowaną | ValueError (wariant nieobsługiwany — brak niespójności U/2D) | **OK** |
+
+Wynik punktu G przypadku 2 **zależał od siatki** przed poprawką 1 (tolerancja ± 0,1 K spełniona na siatce walidacyjnej h_min = 0,1 mm częściowo dzięki zaokrągleniu wartości odniesienia 16,3); po poprawce G = 16,334 °C niezależnie od siatki (0,5 mm → 0,025 mm), zgodnie z niezależnym solverem. Odchyłki A (−0,036 K) i B (−0,039 K) są identyczne w obu solverach — wynikają z zaokrąglenia wartości odniesienia.
+
+Wpływ poprawek na katalog (model testowy): f_Rsi zmienia się o ≤ 0,002 (wierzchołki), ψ o ≤ 0,001 W/(m·K) (siatka), cokół WZ-GF1 z B' = 4,74 m: ψ_oi = ψ_i ≈ 0,21 zamiast 0,20 W/(m·K). Wszystkie węzły z ciągłą izolacją spełniają f_Rsi ≥ 0,72; wariant porównawczy WZ-B0 (płyta bez łącznika) — f_Rsi ≈ 0,746 (na granicy, ψ ≈ 0,75 W/(m·K)).
 
 ## Źródła danych referencyjnych
 

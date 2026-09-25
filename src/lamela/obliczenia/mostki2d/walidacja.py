@@ -209,10 +209,10 @@ def waliduj_przypadek2_siatki(siatki=SIATKI_PRZYPADKU2) -> WynikWalidacji:
             d = t - PRZYPADEK2_T[p]
             mx = max(mx, abs(d))
             ok &= abs(d) <= TOL_T
-            wiersze.append([p, f"h_min = {h_min * 1000:g} mm ({s.n} kom.)", PRZYPADEK2_T[p], t, d])
+            wiersze.append([p, f"h_min = {h_min * 1000:g} mm ({s.n} kom.)".replace(".", ","), PRZYPADEK2_T[p], t, d])
         phi = roz.Phi_grup()["i"]
         ok &= abs(phi - PRZYPADEK2_PHI) <= TOL_PHI
-        wiersze.append(["Φ [W/m]", f"h_min = {h_min * 1000:g} mm", PRZYPADEK2_PHI, phi, phi - PRZYPADEK2_PHI])
+        wiersze.append(["Φ [W/m]", f"h_min = {h_min * 1000:g} mm".replace(".", ","), PRZYPADEK2_PHI, phi, phi - PRZYPADEK2_PHI])
         opis.append(s.opis())
     w = WynikWalidacji("Przypadek 2 — niezależność od siatki (h_min = 0,5 i 0,1 mm; punkty D, G, Φ)", ok, mx, None,
                        "Δθ w ± 0,1 K; ΔΦ w ± 0,1 W/m na każdej siatce", wiersze, siatka=" | ".join(opis))

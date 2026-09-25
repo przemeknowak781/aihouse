@@ -3667,13 +3667,13 @@ Element modelu: `L1` · maks. wykorzystanie nośności η = 133% · **WARUNKI NI
 
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
-| G | 49,85 | 244,2 |
 | S2 | 1,44 | 6,5 |
+| QA_pB | 2,57 | 11,6 |
+| G | 49,85 | 244,2 |
 | H | 0,80 | 3,6 |
 | S1 | 1,44 | 6,5 |
-| QA_pB | 2,57 | 11,6 |
-| QA | 3,92 | 18,3 |
 | QA_pA | 1,51 | 6,7 |
+| QA | 3,92 | 18,3 |
 
 #### Obliczenia
 
@@ -3736,14 +3736,14 @@ Element modelu: `L2` · maks. wykorzystanie nośności η = 118% · **WARUNKI NI
 
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
-| G | 90,48 | 377,4 |
-| SB2 | 3,96 | 13,6 |
-| H | 1,52 | 5,5 |
-| QA_pB | 7,35 | 29,1 |
-| QA | 17,03 | 61,5 |
 | S2 | 6,72 | 23,4 |
+| SB2 | 3,96 | 13,6 |
 | S1 | 4,55 | 15,9 |
+| QA_pB | 7,35 | 29,1 |
+| G | 90,48 | 377,4 |
+| H | 1,52 | 5,5 |
 | QA_pA | 0,00 | 0,0 |
+| QA | 17,03 | 61,5 |
 
 #### Obliczenia
 
@@ -3806,13 +3806,13 @@ Element modelu: `L3` · maks. wykorzystanie nośności η = 119% · **WARUNKI NI
 
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
-| G | 50,78 | 314,4 |
 | S2 | 1,34 | 6,5 |
+| QA_pB | 3,74 | 11,7 |
+| G | 50,78 | 314,4 |
 | H | 0,74 | 3,6 |
 | S1 | 1,34 | 6,5 |
-| QA_pB | 3,74 | 11,7 |
-| QA | 3,90 | 27,7 |
 | QA_pA | 0,00 | 2,5 |
+| QA | 3,90 | 27,7 |
 
 #### Obliczenia
 
@@ -3875,13 +3875,13 @@ Element modelu: `L4` · maks. wykorzystanie nośności η = 134% · **WARUNKI NI
 
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
-| G | 52,08 | 271,2 |
 | S2 | 1,46 | 7,4 |
+| QA_pB | 0,00 | 0,0 |
+| G | 52,08 | 271,2 |
 | H | 0,81 | 4,1 |
 | S1 | 1,46 | 7,4 |
-| QA_pB | 0,00 | 0,0 |
-| QA | 4,40 | 14,4 |
 | QA_pA | 5,25 | 17,0 |
+| QA | 4,40 | 14,4 |
 
 #### Obliczenia
 
@@ -3944,13 +3944,13 @@ Element modelu: `L5` · maks. wykorzystanie nośności η = 96% · wszystkie war
 
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
-| G | 123,00 | 687,3 |
 | S2 | 5,23 | 29,4 |
+| QA_pB | 8,68 | 46,4 |
+| G | 123,00 | 687,3 |
 | H | 2,90 | 16,4 |
 | S1 | 5,23 | 29,4 |
-| QA_pB | 8,68 | 46,4 |
-| QA | 16,31 | 83,8 |
 | QA_pA | 7,63 | 37,4 |
+| QA | 16,31 | 83,8 |
 
 #### Obliczenia
 
@@ -4026,24 +4026,21 @@ Spód stopy −1,100 m, teren −0,23 m → zagłębienie D = 0,87 m.
 - Moduł edometryczny: M₀ = **100** MPa *([ZAŁ — do badań])*
 - Zasięg strefy aktywnej: z_max: σ_z ≤ 0,2·σ'_v0 = (warstwy h_i = 0,150 m) = **2,10** m *(PN-EN 1997-1 6.6.2(6))*
 - Osiadanie: s = Σ σ_z,i·h_i/M₀ = Σ (14 warstw) = **0,9** mm
-- Przebicie — obwód kontrolny w odległości a = d: u = 4·c + 2π·a = 4·0,22 + 2π·0,348 = **3,067** m *(6.4.4(2))*
-- Siła przebijająca zredukowana o odpór: V_Ed,red = V_Ed − σ·A_in = **0,0** kN
-- Naprężenie: v_Ed = V_Ed,red/(u·d) = **0,000** MPa
-- Nośność (ρ_l = 0,2 % — min.): v_Rd = C_Rd,c·k·(100ρf_ck)^(1/3)·2d/a ≥ v_min·2d/a = **0,816** MPa *((6.50))*
+- Przebicie: obwód kontrolny (a = d) poza obrysem stopy = **przebicie nie decyduje** *(6.4.4)*
+- Wspornik stopy (miarodajny): M = σ·b·c²/2 = 135,1·0,60·0,490²/2 = **9,73** kNm
 - *Zbrojenie dolne stopy*
 - Wysokość użyteczna: d = **348** mm
-- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 2,93·10⁶/(1200·348²·1,0·17,86) = **0,0011** *(3.1.7(3))*
-- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0011) = **0,0011**
-- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,001 ≤ 0,493 = **spełniony**
-- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0011·1200·348·1,0·17,86/434,8 = **19** mm²
-- Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,6/500·1200·348; 0,0013·1200·348) = **565** mm² *((9.1N) + NA)*
+- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 9,73·10⁶/(600·348²·1,0·17,86) = **0,0075** *(3.1.7(3))*
+- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0075) = **0,0075**
+- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,008 ≤ 0,493 = **spełniony**
+- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0075·600·348·1,0·17,86/434,8 = **65** mm²
+- Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,6/500·600·348; 0,0013·600·348) = **282** mm² *((9.1N) + NA)*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
 | Nośność podłoża (GEO, DA2*) | V_d = 115,1 kN | R_d = 353,0 kN | 33% | spełniony | PN-EN 1997-1 (6.1), NA.2.6 |
 | Osiadanie | s = 0,9 mm | s_max = 50,0 mm | 2% | spełniony | PN-EN 1997-1 NA.3 (tabl. NA.3) |
 | Głębokość posadowienia | D_min = 1,00 m | D = 0,87 m | 115% | **NIESPEŁNIONY** | W-284 |
-| Przebicie stopy | v_Ed = 0,000 MPa | v_Rd = 0,816 MPa | 0% | spełniony | (6.50) |
 
 > Parametry gruntu PRZYKŁADOWE (brief) — w II kat. geotechnicznej wymagane badania CPT/DPL (W-282, E-04).
 > Osiadanie orientacyjne: pominięto wpływ fundamentów sąsiednich i odciążenie wykopem; M₀ — dane przykładowe.
@@ -4082,24 +4079,21 @@ Spód stopy −1,100 m, teren −0,28 m → zagłębienie D = 0,82 m.
 - Moduł edometryczny: M₀ = **100** MPa *([ZAŁ — do badań])*
 - Zasięg strefy aktywnej: z_max: σ_z ≤ 0,2·σ'_v0 = (warstwy h_i = 0,150 m) = **1,95** m *(PN-EN 1997-1 6.6.2(6))*
 - Osiadanie: s = Σ σ_z,i·h_i/M₀ = Σ (13 warstw) = **0,7** mm
-- Przebicie — obwód kontrolny w odległości a = d: u = 4·c + 2π·a = 4·0,22 + 2π·0,348 = **3,067** m *(6.4.4(2))*
-- Siła przebijająca zredukowana o odpór: V_Ed,red = V_Ed − σ·A_in = **0,0** kN
-- Naprężenie: v_Ed = V_Ed,red/(u·d) = **0,000** MPa
-- Nośność (ρ_l = 0,2 % — min.): v_Rd = C_Rd,c·k·(100ρf_ck)^(1/3)·2d/a ≥ v_min·2d/a = **0,816** MPa *((6.50))*
+- Przebicie: obwód kontrolny (a = d) poza obrysem stopy = **przebicie nie decyduje** *(6.4.4)*
+- Wspornik stopy (miarodajny): M = σ·b·c²/2 = 99,5·0,60·0,490²/2 = **7,16** kNm
 - *Zbrojenie dolne stopy*
 - Wysokość użyteczna: d = **348** mm
-- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 2,15·10⁶/(1200·348²·1,0·17,86) = **0,0008** *(3.1.7(3))*
-- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0008) = **0,0008**
-- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,001 ≤ 0,493 = **spełniony**
-- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0008·1200·348·1,0·17,86/434,8 = **14** mm²
-- Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,6/500·1200·348; 0,0013·1200·348) = **565** mm² *((9.1N) + NA)*
+- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 7,16·10⁶/(600·348²·1,0·17,86) = **0,0055** *(3.1.7(3))*
+- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0055) = **0,0055**
+- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,006 ≤ 0,493 = **spełniony**
+- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0055·600·348·1,0·17,86/434,8 = **47** mm²
+- Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,6/500·600·348; 0,0013·600·348) = **282** mm² *((9.1N) + NA)*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
 | Nośność podłoża (GEO, DA2*) | V_d = 88,7 kN | R_d = 338,9 kN | 26% | spełniony | PN-EN 1997-1 (6.1), NA.2.6 |
 | Osiadanie | s = 0,7 mm | s_max = 50,0 mm | 1% | spełniony | PN-EN 1997-1 NA.3 (tabl. NA.3) |
 | Głębokość posadowienia | D_min = 1,00 m | D = 0,82 m | 122% | **NIESPEŁNIONY** | W-284 |
-| Przebicie stopy | v_Ed = 0,000 MPa | v_Rd = 0,816 MPa | 0% | spełniony | (6.50) |
 
 > Parametry gruntu PRZYKŁADOWE (brief) — w II kat. geotechnicznej wymagane badania CPT/DPL (W-282, E-04).
 > Osiadanie orientacyjne: pominięto wpływ fundamentów sąsiednich i odciążenie wykopem; M₀ — dane przykładowe.

@@ -313,18 +313,23 @@ def stopa(nazwa: str, B: float, L: float, h: float, a_sl: float, D: float, G_k: 
     k = min(1 + math.sqrt(200 / (d * 1000)), 2.0)
     rho = 0.002
     vRd = max(0.18 / beton.gamma_c * k * (100 * rho * beton.f_ck) ** (1 / 3), 0.035 * k ** 1.5 * math.sqrt(beton.f_ck)) * 2 * d / a
-    w.krok("Przebicie — obwód kontrolny w odległości a = d", "u = 4·c + 2π·a", f"4·{f(a_sl, 2)} + 2π·{f(a, 3)}", u, "m", nd=3,
-           zrodlo="6.4.4(2)")
-    w.krok("Siła przebijająca zredukowana o odpór", "V_Ed,red = V_Ed − σ·A_in", "", VEd_red, "kN", nd=1)
-    w.krok("Naprężenie", "v_Ed = V_Ed,red/(u·d)", "", vEd, "MPa", nd=3)
-    w.krok("Nośność (ρ_l = 0,2 % — min.)", "v_Rd = C_Rd,c·k·(100ρf_ck)^(1/3)·2d/a ≥ v_min·2d/a", "", vRd, "MPa", nd=3, zrodlo="(6.50)")
-    w.warunek("Przebicie stopy", vEd, vRd, "MPa", "(6.50)", nd=3, symbol_E="v_Ed", symbol_R="v_Rd")
-    # zginanie wspornika stopy
-    cw = (B - a_sl) / 2
-    M = sig * L * cw * cw / 2
-    zg = zelbet.zginanie_prostokat(M, L, h, d, beton, stal, nazwa="Zginanie wspornika stopy")
+    if Ain >= B * L:
+        w.krok("Przebicie", "obwód kontrolny (a = d) poza obrysem stopy", "", "przebicie nie decyduje", zrodlo="6.4.4")
+    else:
+        w.krok("Przebicie — obwód kontrolny w odległości a = d", "u = 4·c + 2π·a", f"4·{f(a_sl, 2)} + 2π·{f(a, 3)}", u, "m", nd=3,
+               zrodlo="6.4.4(2)")
+        w.krok("Siła przebijająca zredukowana o odpór", "V_Ed,red = V_Ed − σ·A_in", "", VEd_red, "kN", nd=1)
+        w.krok("Naprężenie", "v_Ed = V_Ed,red/(u·d)", "", vEd, "MPa", nd=3)
+        w.krok("Nośność (ρ_l = 0,2 % — min.)", "v_Rd = C_Rd,c·k·(100ρf_ck)^(1/3)·2d/a ≥ v_min·2d/a", "", vRd, "MPa", nd=3, zrodlo="(6.50)")
+        w.warunek("Przebicie stopy", vEd, vRd, "MPa", "(6.50)", nd=3, symbol_E="v_Ed", symbol_R="v_Rd")
+    # zginanie wsporników stopy — miarodajny kierunek (dłuższy wysięg)
+    cB, cL = (B - a_sl) / 2, (L - a_sl) / 2
+    cw, szer = (cL, B) if cL * cL * B >= cB * cB * L else (cB, L)
+    M = sig * szer * cw * cw / 2
+    w.krok("Wspornik stopy (miarodajny)", "M = σ·b·c²/2", f"{f(sig, 1)}·{f(szer, 2)}·{f(cw, 3)}²/2", M, "kNm")
+    zg = zelbet.zginanie_prostokat(M, szer, h, d, beton, stal, nazwa="Zginanie wspornika stopy")
     w.dolacz(zg, "Zbrojenie dolne stopy")
-    fi, s, As = zelbet.dobierz_plyta(zg.As_req / L, 250.0, 10, 16, As_min=zg.As_min / L)
+    fi, s, As = zelbet.dobierz_plyta(zg.As_req / szer, 250.0, 10, 16, As_min=zg.As_min / szer)
     w.zbrojenie_poprz = f"siatka dołem φ{fi} co {f(s / 10, 0)} cm w obu kierunkach"
     n = int(B / (s / 1000)) + 1
     w.prety = [zelbet.Pret(nazwa, 1, fi, round(B - 0.1 + 2 * 0.15, 2), 2 * n, "21", "z odgięciem 15 cm")]
