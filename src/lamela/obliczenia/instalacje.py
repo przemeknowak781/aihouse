@@ -58,7 +58,7 @@ def oblicz_wszystko(budynek, dzialka=None, wyposazenie=None, instalacje=None, ph
 
     dane = dane_z_modelu(budynek, dzialka, wyposazenie, instalacje)
     went = wentylacja_z(wentylacja, dane)
-    V = went["suma_wyw"] or went["suma_naw"] or 330.0
+    V = max(went["suma_wyw"], went["suma_naw"]) or 330.0          # wentylacja zrównoważona: max(Σnawiew, Σwywiew)
     wyn = {"dane": dane}
     woda0 = oblicz_wode(dane, ParametryWoda())
     wyn["ogrzewanie"] = oblicz_ogrzewanie(dane, phi_hl=phi_hl, cwu=woda0.cwu)
@@ -143,7 +143,8 @@ def zapisz(wyn: dict, out, schematy: bool = True) -> Path:
               "## Dane przekazywane do charakterystyki energetycznej (moduł energii)", "",
               "```json", json.dumps(do_ep, ensure_ascii=False, indent=1), "```", "",
               "## Założenia ogólne i uwagi", ""]
-    lines += [f"* {u}" for u in d.uwagi] + ["* Wentylacja (moc rekuperatora, profil zużycia): " + f"{f(wyn['wentylacja']['suma_wyw'] or 330, 0)} m³/h — "
+    Vw = max(wyn["wentylacja"]["suma_wyw"], wyn["wentylacja"]["suma_naw"]) or 330.0
+    lines += [f"* {u}" for u in d.uwagi] + [f"* Wentylacja (moc rekuperatora, profil zużycia): {f(Vw, 0)} m³/h = max(Σnawiew, Σwywiew) — "
                                              + wyn["wentylacja"]["zrodlo"] + ".", ""]
     lines += ["## Dane wymagane od modelu / wyposażenia (do uzupełnienia w `model/`)", "",
               tabela(["Plik / źródło", "Dane"], [[a, b] for a, b in DANE_WYMAGANE], "ll"), ""]
