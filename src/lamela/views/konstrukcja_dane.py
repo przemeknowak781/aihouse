@@ -41,6 +41,15 @@ def _skrot_plikow(paths) -> str:
     return h.hexdigest()[:16]
 
 
+class _Pickler(pickle.Pickler):
+    """Pickler pomijający obiekty nieserializowalne (faktoryzacje SuperLU macierzy MES) — do cache analizy."""
+
+    def reducer_override(self, obj):
+        if type(obj).__name__ in ("SuperLU", "Figure", "Axes"):
+            return (type(None), ())
+        return NotImplemented
+
+
 def analiza(ctx):
     """AnalizaKonstrukcji dla modelu kontekstu (raz na kontekst). Błędy etapów trafiają do ``an.uwagi``."""
     an = getattr(ctx, "_konstr_an", None)
@@ -67,7 +76,10 @@ def analiza(ctx):
     if pk is not None:
         try:
             pk.parent.mkdir(parents=True, exist_ok=True)
-            pk.write_bytes(pickle.dumps(an))
+            import io
+            buf = io.BytesIO()
+            _Pickler(buf, protocol=pickle.HIGHEST_PROTOCOL).dump(an)
+            pk.write_bytes(buf.getvalue())
         except Exception:  # noqa: BLE001
             pass
     ctx._konstr_an = an
@@ -188,3 +200,107 @@ class Zestawienie:
     @property
     def masa(self) -> float:
         return sum(self.masy().values())
+
+
+# ================================================================================================ dobór prętów
+def as_min_plyty(h: float, d: float, f_ctm: float, f_yk: float = 500.0) -> float:
+    """A_s,min [mm²/m] — PN-EN 1992-1-1 (9.1N) + NA: max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d), b = 1 m."""
+    return max(0.26 * f_ctm / f_yk * 1000.0 * d * 1000.0, 0.0013 * 1000.0 * d * 1000.0)
+
+
+def s_max_plyty(h: float, glowne: bool = True, strefa_max: bool = True) -> float:
+    """s_max,slabs [mm] — PN-EN 1992-1-1 9.3.1.1(3) + NA: główne 2h ≤ 250 (strefa M_max) / 3h ≤ 400; rozdzielcze
+    3h ≤ 400 / 3,5h ≤ 450."""
+    hm = h * 1000.0
+    if glowne:
+        return min(2 * hm, 250.0) if strefa_max else min(3 * hm, 400.0)
+    return min(3 * hm, 400.0) if strefa_max else min(3.5 * hm, 450.0)
+
+
+def dobierz_siatke(As_req: float, As_min: float, h: float, s_max: float | None = None, fi_min: int = 10,
+                   fi_max: int = 16, d_g: float = 16.0) -> tuple[int, float, float]:
+    """Dobór prętów pasma płyty b = 1 m (A_s,req → φ, s): (φ [mm], s [mm], A_s,prov [mm²/m]).
+
+    Warunki: A_s,prov ≥ max(A_s,req; A_s,min) (6.1, 9.2.1.1(1)); A_s,prov ≤ A_s,max = 0,04·A_c (9.2.1.1(3));
+    s ≤ s_max (9.3.1.1(3)); rozstaw w świetle ≥ max(φ; d_g + 5 mm; 20 mm) (8.2(2)). Kryterium — najmniejsza masa
+    stali, przy równej masie rozstawy „okrągłe” (100/125/150/200/250) i większa średnica."""
+    s_max = s_max or s_max_plyty(h)
+    need = max(As_req, As_min, 1e-9)
+    As_max = 0.04 * 1000.0 * h * 1000.0
+    best = None
+    for fi in SREDNICE_PL:
+        if fi < fi_min or fi > fi_max:
+            continue
+        s_min_cl = max(fi, d_g + 5.0, 20.0) + fi
+        for s in range(int(s_max // 5 * 5), int(math.ceil(s_min_cl)) - 1, -5):
+            As = pole_preta(fi) * 1000.0 / s
+            if As >= need:
+                if As > As_max:
+                    break
+                okragly = 0 if s in (100, 125, 150, 175, 200, 250) else (1 if s % 10 == 0 else 2)
+                cand = (round(As, 0), okragly, -fi, s, fi, As)
+                if best is None or cand < best:
+                    best = cand
+                break
+    if best is None:
+        raise ValueError(f"nie można dobrać zbrojenia: A_s,req = {As_req:.0f} mm²/m przy h = {h:.2f} m")
+    return best[4], float(best[3]), best[5]
+
+
+def dobierz_prety_belki(As_req: float, b_w: float, c_nom: float, fi_s: float = 8, d_g: float = 16.0,
+                        srednice=(12, 14, 16, 20, 25), n_min: int = 2) -> tuple[int, int, float]:
+    """Dobór prętów podłużnych belki (n·φ w jednej warstwie): (n, φ, A_s,prov [mm²]); rozstaw w świetle ≥ max(φ;
+    d_g + 5; 20 mm) (8.2(2)). Zwraca pierwszy (najlżejszy) wariant mieszczący się w jednej warstwie."""
+    best = None
+    for fi in srednice:
+        n = max(n_min, int(math.ceil(As_req / pole_preta(fi) - 1e-9)))
+        smin = max(fi, d_g + 5.0, 20.0)
+        n_row = int((b_w * 1000.0 - 2 * c_nom - 2 * fi_s + smin) // (fi + smin))
+        if n > n_row:
+            continue
+        cand = (n * pole_preta(fi), fi, n)
+        if best is None or cand < best:
+            best = cand
+    if best is None:
+        fi = srednice[-1]
+        n = max(n_min, int(math.ceil(As_req / pole_preta(fi))))
+        return n, fi, n * pole_preta(fi)
+    return best[2], best[1], best[0]
+
+
+# ================================================================================================ parsowanie wyników
+_RE_FS = re.compile(r"[φ⌀Ø]\s*(\d+)\s*co\s*([\d]+(?:[,.]\d+)?)\s*cm")
+_RE_NFI = re.compile(r"(\d+)\s*[φ⌀Ø]\s*(\d+)")
+
+
+def fi_s(txt: str | None):
+    """„φ10 co 15 cm” → (10, 150.0) albo None."""
+    m = _RE_FS.search(txt or "")
+    if not m:
+        return None
+    return int(m.group(1)), float(m.group(2).replace(",", ".")) * 10.0
+
+
+def n_fi(txt: str | None):
+    """„4φ12 …” → (4, 12) albo None."""
+    m = _RE_NFI.search(txt or "")
+    return (int(m.group(1)), int(m.group(2))) if m else None
+
+
+def krok_wynik(w, *prefiksy):
+    """Wartość liczbowa pierwszego kroku wyniku, którego opis zaczyna się od jednego z prefiksów."""
+    for k in getattr(w, "kroki", []):
+        if any(str(k.opis).startswith(p) for p in prefiksy) and isinstance(k.wynik, (int, float)):
+            return float(k.wynik)
+    return None
+
+
+def warunki_niespelnione(wyniki) -> list[str]:
+    out = []
+    for r in wyniki:
+        for w in getattr(r, "warunki", []):
+            if not w.ok:
+                s = f"{w.opis} (η = {w.eta * 100:.0f}%)"
+                if s not in out:
+                    out.append(s)
+    return out

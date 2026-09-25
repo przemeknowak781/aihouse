@@ -147,8 +147,8 @@ MAT = [
                           kreskowanie="TWORZYWO", kolor="#1f4f35", funkcja="bariera_korzenna"), "PN-EN ISO 10456: PE-HD λ 0,40"),
     ("MEMB_SBS_POD", dict(nazwa="Izolacja przeciwwilgociowa i przeciwradonowa: membrana SBS 4 mm na płycie fundamentowej", **{"lambda": 0.23}, rho=1100, cp=1000,
                           mu=20000, kreskowanie="IZOL_PRZECIWWILGOCIOWA", kolor="#2f3032", funkcja="przeciwwilgociowa"), "PN-EN 13969, DWU"),
-    ("FOLIA_PE", dict(nazwa="Folia PE 0,2 mm (warstwa rozdzielająca)", **{"lambda": 0.33}, rho=950, cp=1800, mu=100000, kreskowanie="PAROIZOLACJA",
-                      kolor="#5d6d7e", funkcja="paroizolacja"), "PN-EN ISO 10456: PE λ 0,33"),
+    ("FOLIA_PE", dict(nazwa="Folia PE 0,2 mm — warstwa rozdzielająca pod XPS (nie pełni funkcji paroizolacji)", **{"lambda": 0.33}, rho=950, cp=1800,
+                      mu=100000, kreskowanie="TWORZYWO", kolor="#5d6d7e", funkcja="rozdzielajaca"), "PN-EN ISO 10456: PE λ 0,33"),
     ("MEMB_WIATR", dict(nazwa="Membrana fasadowa wiatroizolacyjna UV-stabilna, czarna (sd ≈ 0,02 m)", **{"lambda": 0.17}, rho=600, cp=1000, sd=0.02, mu=40,
                         kreskowanie="MEMBRANA_PAROPRZEP", kolor="#1d1d1d", funkcja="wiatroizolacja"), "DWU typowej membrany fasadowej UV (PN-EN 13859-2)"),
     ("MEMB_PAROSZ", dict(nazwa="Membrana paroszczelna (warstwa szczelności powietrznej w ścianie szkieletowej), sd ≥ 10 m", **{"lambda": 0.17}, rho=600, cp=1000,
@@ -217,15 +217,14 @@ def L(mat, d, **kw):
 PRZ = {
     # ---------------- ściany
     "SZ1": dict(nazwa="Ściana zewnętrzna nośna: silikat 18 + ETICS EPS 031 20 cm (U ≈ 0,15)", typ="sciana_zewn", warstwy=[
-        L("TYNK_GIPS", 0.015, funkcja="szczelnosc_powietrzna"), L("SIL18", 0.18, konstrukcyjna=True), L("EPS031", 0.20), L("TYNK_SIL", 0.010)]),
+        L("TYNK_GIPS", 0.015, funkcja="szczelnosc"), L("SIL18", 0.18, konstrukcyjna=True), L("EPS031", 0.20), L("TYNK_SIL", 0.010)]),
     "SZ2": dict(nazwa="Ściana zewnętrzna bryły A (P2) za lamelami: silikat 18 + wełna fasadowa 20 cm + membrana UV-stabilna (czarna); "
                       "szczelina wentylowana ok. 11 cm i lamele na ruszcie — element `lamele` (U ≈ 0,16)", typ="sciana_zewn", warstwy=[
-        L("TYNK_GIPS", 0.015, funkcja="szczelnosc_powietrzna"), L("SIL18", 0.18, konstrukcyjna=True), L("WELNA_FAS", 0.20),
+        L("TYNK_GIPS", 0.015, funkcja="szczelnosc"), L("SIL18", 0.18, konstrukcyjna=True), L("WELNA_FAS", 0.20),
         L("MEMB_WIATR", 0.010)]),
-    "SZL": dict(nazwa="Ściana zewnętrzna lekka A' (na wsporniku P2): szkielet KVH 45×200 z wełną + OSB (szczelność) + DWD + wełna fasadowa 18 cm + "
+    "SZL": dict(nazwa="Ściana zewnętrzna lekka A' (na wsporniku P2): GK + OSB (szczelność) + szkielet KVH 45×200 z wełną + DWD + wełna fasadowa 18 cm + "
                       "membrana UV (lico zewn. 0,30 m od osi — jak SZ2, ciągłość warstw w narożu); bez funkcji nośnej (U ≈ 0,10)", typ="sciana_zewn", warstwy=[
-        L("GK", 0.025), L("WELNA_035", 0.05, frakcje=[{"mat": "WELNA_035", "udzial": 0.9}, {"mat": "DREWNO_KVH", "udzial": 0.1}]),
-        L("OSB", 0.015, funkcja="paroizolacja"),
+        L("GK", 0.025), L("OSB", 0.015, funkcja="szczelnosc"),
         L("WELNA_035", 0.20, konstrukcyjna=True, frakcje=[{"mat": "WELNA_035", "udzial": 0.88}, {"mat": "DREWNO_KVH", "udzial": 0.12}]),
         L("DWD16", 0.016), L("WELNA_FAS", 0.180), L("MEMB_WIATR", 0.004)]),
     "SW18": dict(nazwa="Ściana wewnętrzna nośna: silikat 18, tynk gipsowy obustronnie", typ="sciana_wewn_nosna", warstwy=[
@@ -265,7 +264,7 @@ PRZ = {
         L("TYNK_GIPS", 0.010)]),
     "SUF-ZEW": dict(nazwa="Sufit pod stropem nad powietrzem zewnętrznym (wspornik bryły A): wełna 20 cm na kołkach + podsufitka włóknocementowa "
                           "na ruszcie z pustką wentylowaną (U stropu ≈ 0,15)", typ="strop", warstwy=[
-        L("WELNA_035", 0.20, konstrukcyjna=True), L("PUSTKA_WENT", 0.04, pustka="dw"), L("PODSUF", 0.012)]),
+        L("WELNA_035", 0.20, konstrukcyjna=True), L("MEMB_WIATR", 0.001), L("PUSTKA_WENT", 0.04, pustka="dw"), L("PODSUF", 0.012)]),
     "SUF-G": dict(nazwa="Docieplenie spodu stropu garażu pasem 1,0 m przy ścianach osi E i 2 (wełna 10 cm + płyta) — ograniczenie mostka (J2)",
                   typ="strop", warstwy=[L("WELNA_035", 0.10, konstrukcyjna=True), L("TYNK_CW", 0.01)]),
     # ---------------- dachy (dach ciepły, izolacja spadkowa — wartość d = średnia klina)
@@ -321,7 +320,7 @@ W("S0-05", "P0", "SZ1", (xE, y5), (xE, y4), "lewa", "odcinek zach. garażu (przy
 W("S0-06", "P0", "SZ1", (xE, y4), (xA, y4), "lewa", "ściana pn. — wejście główne, okno łazienki gościnnej")
 W("S0-07", "P0", "SZ1", (xA, y4), (xA, y1), "lewa", "ściana zach. — drzwi HS na taras zach., okno pokoju gościnnego")
 W("S0-08", "P0", "SW18", (xA, y3), (xC, y3), uwagi="ściana grzbietowa (oś 3), odcinek zach.")
-W("S0-09", "P0", "DZ12", (xM, y3), (xD, y3), uwagi="ścianka spiżarni pod biegiem 2 (strop nad nią — belka B8 w osi 3)")
+W("S0-09", "P0", "SW18", (xM, y3), (xD, y3), uwagi="ściana spiżarni pod biegiem 2, silikat 18 (lica w osi 3 jak S0-08/S0-10; nad nią belka B8)")
 W("S0-10", "P0", "SW18", (xD, y3), (xE, y3), uwagi="ściana grzbietowa (oś 3), odcinek wsch. — otwór hol/strefa dzienna")
 W("S0-11", "P0", "SW18", (xB, y3), (xB, y4), uwagi="oś B")
 W("S0-12", "P0", "SWZB", (xC, y3), (xC, y4), uwagi="oś C — ściana trzonu klatki, żelbet (sztywność P0 w kier. x)")
@@ -552,6 +551,10 @@ PMS("2.06", "P2", "Klatka schodowa (wyjście z biegu 2, pustka)", None, [(XC_e, 
     temp=20, rodzaj="komunikacja", uwagi="świetlik SW1 nad spocznikiem, okno pn. ON4; wyłączona z PU")
 PMS("2.07", "P2", "Pom. techniczne (centrala rekuperacyjna, wyłaz na dach)", (7.2, 1.3), kat="techniczna", posadzka="GRES", temp=16,
     rodzaj="techniczne", podloga="POD-1L", uwagi="centrala 450 m³/h; wyłaz 0,90 × 0,90 m z drabiną (W-065)")
+# szacht instalacyjny SI (0,40 × 1,12 m) — przestrzeń techniczna ogrzewana (obudowa GKF EI 30), bez PU; na każdej kondygnacji
+for _k, _pid in (("P0", "0.14"), ("P1", "1.09"), ("P2", "2.08")):
+    PMS(_pid, _k, "Szacht instalacyjny SI", ((SI[0] + SI[2]) / 2, (SI[1] + SI[3]) / 2), kat="techniczna", posadzka=None, sciany=None, sufit=None,
+        temp=20, rodzaj="techniczne", uwagi="pion K1 Ø110, RS1/RS2 DN100 (otulina), kanały reku; rewizje z łazienek")
 
 
 # =====================================================================================================================

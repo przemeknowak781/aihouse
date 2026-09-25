@@ -34,7 +34,7 @@ materialy:
   PAPA_SBS: {nazwa: 'Hydroizolacja 2 × papa SBS (podkładowa + wierzchniego krycia, dach zielony)', lambda: 0.23, rho: 1100, cp: 1000, mu: 20000, kreskowanie: IZOL_PRZECIWWODNA, kolor: '#2f3032', funkcja: hydroizolacja}   # PN-EN 13707, DWU; PN-EN ISO 10456 tab. 4 bitum λ 0,23
   BARIERA_KORZ: {nazwa: 'Bariera przeciwkorzenna PE-HD 0,5 mm (PN-EN 13948)', lambda: 0.4, rho: 950, cp: 1800, mu: 100000, kreskowanie: TWORZYWO, kolor: '#1f4f35', funkcja: bariera_korzenna}   # PN-EN ISO 10456: PE-HD λ 0,40
   MEMB_SBS_POD: {nazwa: 'Izolacja przeciwwilgociowa i przeciwradonowa: membrana SBS 4 mm na płycie fundamentowej', lambda: 0.23, rho: 1100, cp: 1000, mu: 20000, kreskowanie: IZOL_PRZECIWWILGOCIOWA, kolor: '#2f3032', funkcja: przeciwwilgociowa}   # PN-EN 13969, DWU
-  FOLIA_PE: {nazwa: 'Folia PE 0,2 mm (warstwa rozdzielająca)', lambda: 0.33, rho: 950, cp: 1800, mu: 100000, kreskowanie: PAROIZOLACJA, kolor: '#5d6d7e', funkcja: paroizolacja}   # PN-EN ISO 10456: PE λ 0,33
+  FOLIA_PE: {nazwa: 'Folia PE 0,2 mm — warstwa rozdzielająca pod XPS (nie pełni funkcji paroizolacji)', lambda: 0.33, rho: 950, cp: 1800, mu: 100000, kreskowanie: TWORZYWO, kolor: '#5d6d7e', funkcja: rozdzielajaca}   # PN-EN ISO 10456: PE λ 0,33
   MEMB_WIATR: {nazwa: 'Membrana fasadowa wiatroizolacyjna UV-stabilna, czarna (sd ≈ 0,02 m)', lambda: 0.17, rho: 600, cp: 1000, sd: 0.02, mu: 40, kreskowanie: MEMBRANA_PAROPRZEP, kolor: '#1d1d1d', funkcja: wiatroizolacja}   # DWU typowej membrany fasadowej UV (PN-EN 13859-2)
   MEMB_PAROSZ: {nazwa: 'Membrana paroszczelna (warstwa szczelności powietrznej w ścianie szkieletowej), sd ≥ 10 m', lambda: 0.17, rho: 600, cp: 1000, sd: 10.0, mu: 25000, kreskowanie: PAROIZOLACJA, kolor: '#2e7d32', funkcja: paroizolacja}   # PN-EN 13984, DWU
   MATA_DREN: {nazwa: Mata drenażowo-retencyjna HDPE 25 mm (dach zielony), lambda: 0.5, rho: 80, cp: 1800, mu: 1, kreskowanie: TWORZYWO, kolor: '#4a4a4a', funkcja: drenaz}   # DWU typowej maty drenażowej (pustki — λ zastępcza, poza obliczeniem U)
@@ -68,7 +68,7 @@ przegrody:
     nazwa: 'Ściana zewnętrzna nośna: silikat 18 + ETICS EPS 031 20 cm (U ≈ 0,15)'
     typ: sciana_zewn
     warstwy:
-      - {mat: TYNK_GIPS, d: 0.015, funkcja: szczelnosc_powietrzna}
+      - {mat: TYNK_GIPS, d: 0.015, funkcja: szczelnosc}
       - {mat: SIL18, d: 0.18, konstrukcyjna: true}
       - {mat: EPS031, d: 0.2}
       - {mat: TYNK_SIL, d: 0.01}
@@ -76,17 +76,16 @@ przegrody:
     nazwa: 'Ściana zewnętrzna bryły A (P2) za lamelami: silikat 18 + wełna fasadowa 20 cm + membrana UV-stabilna (czarna); szczelina wentylowana ok. 11 cm i lamele na ruszcie — element `lamele` (U ≈ 0,16)'
     typ: sciana_zewn
     warstwy:
-      - {mat: TYNK_GIPS, d: 0.015, funkcja: szczelnosc_powietrzna}
+      - {mat: TYNK_GIPS, d: 0.015, funkcja: szczelnosc}
       - {mat: SIL18, d: 0.18, konstrukcyjna: true}
       - {mat: WELNA_FAS, d: 0.2}
       - {mat: MEMB_WIATR, d: 0.01}
   SZL:
-    nazwa: 'Ściana zewnętrzna lekka A'' (na wsporniku P2): szkielet KVH 45×200 z wełną + OSB (szczelność) + DWD + wełna fasadowa 18 cm + membrana UV (lico zewn. 0,30 m od osi — jak SZ2, ciągłość warstw w narożu); bez funkcji nośnej (U ≈ 0,10)'
+    nazwa: 'Ściana zewnętrzna lekka A'' (na wsporniku P2): GK + OSB (szczelność) + szkielet KVH 45×200 z wełną + DWD + wełna fasadowa 18 cm + membrana UV (lico zewn. 0,30 m od osi — jak SZ2, ciągłość warstw w narożu); bez funkcji nośnej (U ≈ 0,10)'
     typ: sciana_zewn
     warstwy:
       - {mat: GK, d: 0.025}
-      - {mat: WELNA_035, d: 0.05, frakcje: [{mat: WELNA_035, udzial: 0.9}, {mat: DREWNO_KVH, udzial: 0.1}]}
-      - {mat: OSB, d: 0.015, funkcja: paroizolacja}
+      - {mat: OSB, d: 0.015, funkcja: szczelnosc}
       - {mat: WELNA_035, d: 0.2, konstrukcyjna: true, frakcje: [{mat: WELNA_035, udzial: 0.88}, {mat: DREWNO_KVH, udzial: 0.12}]}
       - {mat: DWD16, d: 0.016}
       - {mat: WELNA_FAS, d: 0.18}
@@ -206,6 +205,7 @@ przegrody:
     typ: strop
     warstwy:
       - {mat: WELNA_035, d: 0.2, konstrukcyjna: true}
+      - {mat: MEMB_WIATR, d: 0.001}
       - {mat: PUSTKA_WENT, d: 0.04, pustka: dw}
       - {mat: PODSUF, d: 0.012}
   SUF-G:
@@ -265,7 +265,7 @@ sciany:
   - {id: S0-06, kond: P0, przegroda: SZ1, os: [[12.0, 8.75], [0.0, 8.75]], wnetrze: lewa, z_od: null, z_do: null, uwagi: 'ściana pn. — wejście główne, okno łazienki gościnnej'}
   - {id: S0-07, kond: P0, przegroda: SZ1, os: [[0.0, 8.75], [0.0, 0.0]], wnetrze: lewa, z_od: null, z_do: null, uwagi: 'ściana zach. — drzwi HS na taras zach., okno pokoju gościnnego'}
   - {id: S0-08, kond: P0, przegroda: SW18, os: [[0.0, 5.125], [5.875, 5.125]], wnetrze: srodek, z_od: null, z_do: null, uwagi: 'ściana grzbietowa (oś 3), odcinek zach.'}
-  - {id: S0-09, kond: P0, przegroda: DZ12, os: [[7.19, 5.125], [8.5, 5.125]], wnetrze: srodek, z_od: null, z_do: null, uwagi: ścianka spiżarni pod biegiem 2 (strop nad nią — belka B8 w osi 3)}
+  - {id: S0-09, kond: P0, przegroda: SW18, os: [[7.19, 5.125], [8.5, 5.125]], wnetrze: srodek, z_od: null, z_do: null, uwagi: 'ściana spiżarni pod biegiem 2, silikat 18 (lica w osi 3 jak S0-08/S0-10; nad nią belka B8)'}
   - {id: S0-10, kond: P0, przegroda: SW18, os: [[8.5, 5.125], [12.0, 5.125]], wnetrze: srodek, z_od: null, z_do: null, uwagi: 'ściana grzbietowa (oś 3), odcinek wsch. — otwór hol/strefa dzienna'}
   - {id: S0-11, kond: P0, przegroda: SW18, os: [[3.875, 5.125], [3.875, 8.75]], wnetrze: srodek, z_od: null, z_do: null, uwagi: oś B}
   - {id: S0-12, kond: P0, przegroda: SWZB, os: [[5.875, 5.125], [5.875, 8.75]], wnetrze: srodek, z_od: null, z_do: null, uwagi: 'oś C — ściana trzonu klatki, żelbet (sztywność P0 w kier. x)'}
@@ -399,6 +399,12 @@ pomieszczenia:
   - {id: '2.05', kond: P2, nazwa: Gabinet / pokój, punkt: [10.2, 2.4], wielobok: null, kategoria: podstawowa, pobyt_ludzi: true, posadzka: DESKA_DEB, sciany_wyk: TYNK_GIPS, sufit: TYNK_GIPS, temp: 20, went: {naw: 40, wyw: 0}, rodzaj: pokoj}
   - {id: '2.06', kond: P2, nazwa: 'Klatka schodowa (wyjście z biegu 2, pustka)', punkt: null, wielobok: [[5.98, 5.02], [8.395, 5.02], [8.395, 8.645], [5.98, 8.645]], kategoria: ruchu, pobyt_ludzi: false, posadzka: DESKA_DEB, sciany_wyk: TYNK_GIPS, sufit: TYNK_GIPS, temp: 20, went: {naw: 0, wyw: 0}, rodzaj: komunikacja, uwagi: 'świetlik SW1 nad spocznikiem, okno pn. ON4; wyłączona z PU'}
   - {id: '2.07', kond: P2, nazwa: 'Pom. techniczne (centrala rekuperacyjna, wyłaz na dach)', punkt: [7.2, 1.3], wielobok: null, kategoria: techniczna, pobyt_ludzi: false, posadzka: GRES, sciany_wyk: TYNK_GIPS, sufit: TYNK_GIPS, temp: 16, went: {naw: 0, wyw: 0}, rodzaj: techniczne, podloga: POD-1L, uwagi: 'centrala 450 m³/h; wyłaz 0,90 × 0,90 m z drabiną (W-065)'}
+  # --- P0
+  - {id: '0.14', kond: P0, nazwa: Szacht instalacyjny SI, punkt: [5.57, 5.79], wielobok: null, kategoria: techniczna, pobyt_ludzi: false, posadzka: null, sciany_wyk: null, sufit: null, temp: 20, went: {naw: 0, wyw: 0}, rodzaj: techniczne, uwagi: 'pion K1 Ø110, RS1/RS2 DN100 (otulina), kanały reku; rewizje z łazienek'}
+  # --- P1
+  - {id: '1.09', kond: P1, nazwa: Szacht instalacyjny SI, punkt: [5.57, 5.79], wielobok: null, kategoria: techniczna, pobyt_ludzi: false, posadzka: null, sciany_wyk: null, sufit: null, temp: 20, went: {naw: 0, wyw: 0}, rodzaj: techniczne, uwagi: 'pion K1 Ø110, RS1/RS2 DN100 (otulina), kanały reku; rewizje z łazienek'}
+  # --- P2
+  - {id: '2.08', kond: P2, nazwa: Szacht instalacyjny SI, punkt: [5.57, 5.79], wielobok: null, kategoria: techniczna, pobyt_ludzi: false, posadzka: null, sciany_wyk: null, sufit: null, temp: 20, went: {naw: 0, wyw: 0}, rodzaj: techniczne, uwagi: 'pion K1 Ø110, RS1/RS2 DN100 (otulina), kanały reku; rewizje z łazienek'}
 
 stropy:
   - {id: ST1, nad: P0, wierzch: 3.0, grubosc: 0.22, obrys: [[-0.3, -0.3], [12.3, -0.3], [12.3, 9.05], [-0.3, 9.05]], otwory: [[[5.98, 5.23], [8.395, 5.23], [8.395, 8.645], [5.98, 8.645]]], podloga: POD-1, sufit: TYNK_GIPS, mat: ZB_C25, uwagi: 'strop nad P0 (część mieszkalna): N–S, ciągły 2-przęsłowy B1 (oś 1) – oś 3 – oś 4, rozpiętości 5,125 / 3,625 m'}
@@ -466,13 +472,14 @@ fundamenty:
     - {id: ZF6, os: [[12.0, 8.75], [0.0, 8.75]], b: 0.6, h: 0.3, spod: -0.7, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-06 — krawędź z izolacją obwodową XPS (PN-EN ISO 13793)}
     - {id: ZF7, os: [[0.0, 8.75], [0.0, 0.0]], b: 0.6, h: 0.3, spod: -0.7, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-07 — krawędź z izolacją obwodową XPS (PN-EN ISO 13793)}
     - {id: ZF8, os: [[0.0, 5.125], [5.875, 5.125]], b: 0.5, h: 0.25, spod: -0.65, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-08}
-    - {id: ZF9, os: [[8.5, 5.125], [12.0, 5.125]], b: 0.5, h: 0.25, spod: -0.65, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-10}
-    - {id: ZF10, os: [[3.875, 5.125], [3.875, 8.75]], b: 0.5, h: 0.25, spod: -0.65, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-11}
-    - {id: ZF11, os: [[5.875, 5.125], [5.875, 8.75]], b: 0.5, h: 0.25, spod: -0.65, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-12}
-    - {id: ZF12, os: [[8.5, 5.125], [8.5, 8.75]], b: 0.5, h: 0.25, spod: -0.65, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-13}
-    - {id: ZF13, os: [[12.0, 0.0], [12.0, 2.875]], b: 0.5, h: 0.25, spod: -0.65, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-15}
-    - {id: ZF14, os: [[12.0, 2.875], [12.0, 8.75]], b: 0.5, h: 0.25, spod: -0.65, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-16}
-    - {id: ZF15, os: [[18.375, 2.875], [12.0, 2.875]], b: 0.5, h: 0.25, spod: -0.65, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-17}
+    - {id: ZF9, os: [[7.19, 5.125], [8.5, 5.125]], b: 0.5, h: 0.25, spod: -0.65, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-09}
+    - {id: ZF10, os: [[8.5, 5.125], [12.0, 5.125]], b: 0.5, h: 0.25, spod: -0.65, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-10}
+    - {id: ZF11, os: [[3.875, 5.125], [3.875, 8.75]], b: 0.5, h: 0.25, spod: -0.65, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-11}
+    - {id: ZF12, os: [[5.875, 5.125], [5.875, 8.75]], b: 0.5, h: 0.25, spod: -0.65, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-12}
+    - {id: ZF13, os: [[8.5, 5.125], [8.5, 8.75]], b: 0.5, h: 0.25, spod: -0.65, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-13}
+    - {id: ZF14, os: [[12.0, 0.0], [12.0, 2.875]], b: 0.5, h: 0.25, spod: -0.65, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-15}
+    - {id: ZF15, os: [[12.0, 2.875], [12.0, 8.75]], b: 0.5, h: 0.25, spod: -0.65, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-16}
+    - {id: ZF16, os: [[18.375, 2.875], [12.0, 2.875]], b: 0.5, h: 0.25, spod: -0.65, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-17}
     - {id: SF1, os: [[2.195, 0.0], [2.205, 0.0]], b: 1.0, h: 0.45, spod: -0.85, mat: ZB_C25, uwagi: 'pogrubienie płyty 1,0 × 1,0 m pod słupem SL1 (przebicie)'}
     - {id: SF2, os: [[4.095, 0.0], [4.105, 0.0]], b: 1.0, h: 0.45, spod: -0.85, mat: ZB_C25, uwagi: 'pogrubienie płyty 1,0 × 1,0 m pod słupem SL2 (przebicie)'}
     - {id: SF3, os: [[6.435, 0.0], [6.445, 0.0]], b: 1.0, h: 0.45, spod: -0.85, mat: ZB_C25, uwagi: 'pogrubienie płyty 1,0 × 1,0 m pod słupem SL3 (przebicie)'}

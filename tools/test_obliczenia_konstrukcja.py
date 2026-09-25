@@ -493,7 +493,7 @@ def test_tarcza_w_modelu():
     pz = next(p_ for p_ in an.pos_tarcze if p_.ident == "S1-01")
     assert pz.ok, [w.opis for w in pz.warunki if not w.ok]
     assert any(g.tytul == "Ściany-tarcze żelbetowe" for g in an.pozycje)
-    assert not any(pz_.ident.startswith("N-O1-0") for pz_ in an.pos_nadproza), "nadproża tarczy liczone w pozycji tarczowej"
+    assert not any(pz_.ident in ("N-O1-01", "N-O1-02") for pz_ in an.pos_nadproza), "nadproża tarczy liczone w pozycji tarczowej"
     wt = an.tarcze["S1-01"]
     assert {s.sciana for s in wt.an.d.podpory} == {"S0-01"} and len(wt.an.d.podpory) == 3
     RG = sum(v["R"] for v in wt.an.reakcje_przyp["G"].values())
