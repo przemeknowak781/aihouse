@@ -127,10 +127,13 @@ PT_BO:
   wspolne: PT_WSPOLNE
   pozycje:
     - {id: C2-BO-01, el: PT, opis: "Rozwiązania konstrukcyjne, schematy statyczne, założenia i obciążenia, wyniki obliczeń", podstawa: "RPB § 23 pkt 1; W-262…W-265", szukaj: {tekst: ['§ 23 pkt 1\b', 'schemat\w* statyczn'], wszystkie: false}}
-    - {id: C2-BO-02, el: PT, opis: "Dokumentacja badań podłoża gruntowego i projekt geotechniczny (kat. II)", podstawa: "RPB § 23 pkt 2; rozp. 2012/463 § 7 ust. 2", szukaj: {tekst: ['projekt\w* geotechniczn', 'badań podłoża'], wszystkie: true}}
+    - {id: C2-BO-02, el: PT, opis: "Dokumentacja badań podłoża gruntowego i projekt geotechniczny (kat. II)", podstawa: "RPB § 23 pkt 2; rozp. 2012/463 § 7 ust. 2, § 9, § 10", szukaj: {tekst: ['projekt\w* geotechniczn', 'badań podłoża'], wszystkie: true}, uzupelnic_gdy: ['DOKUMENT ZEWNĘTRZNY – do dołączenia: dokumentacja badań podłoża'], uzupelnic_opis: "dokumentacja badań podłoża — strona zastępcza [DOKUMENT ZEWNĘTRZNY]; projekt geotechniczny na danych przykładowych"}
     - {id: C2-BO-03, el: PT, opis: "Rzuty fundamentów i stropów, wsporniki", podstawa: "RPB § 24 pkt 1 lit. a", szukaj: {rysunki: ['fundament', 'strop|wspornik']}}
     - {id: C2-BO-04, el: PT, opis: "Rysunki zbrojenia (ISO 3766) z uziomem fundamentowym", podstawa: "RPB § 24 pkt 1; W-187", szukaj: {rysunki: ['zbrojeni']}}
     - {id: C2-BO-05, el: PT, opis: "Dokumentacja geologiczno-inżynierska", podstawa: "RPB § 23 pkt 3", szukaj: {}, nd: "warunki proste (P03)"}
+    # pozycja „negatywna” (weryfikacja PT, K-2): tom z oświadczeniem projektanta PT nie może zawierać warunków
+    # niespełnionych ani analiz niedomkniętych — wzorce wrażliwe na wielkość liter (znaczniki wyników i stanu analiz)
+    - {id: C2-BO-06, el: PT, opis: "Analizy konstrukcji zamknięte: brak warunków NIESPEŁNIONYCH, uwag [WYMAGA ANALIZY] i pozycji NIEZAMKNIĘTYCH", podstawa: "PB art. 34 ust. 3 pkt 3 lit. a, art. 41 ust. 4a pkt 2; RPB § 23 pkt 1", brak_gdy: ['(?-i:NIESPEŁNION\w*)', '(?-i:WYMAGA ANALIZY)', '(?-i:NIEZAMKNIĘT\w*)'], brak_opis: "tom zawiera znaczniki niedomkniętych analiz"}
 
 PT_IS:
   opis: "PT-3 IS — projekt techniczny, instalacje sanitarne (rejestr C.2)"

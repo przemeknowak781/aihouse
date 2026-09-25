@@ -10,6 +10,7 @@ from lamela.dokumenty import do_uzup, liczba as L  # noqa: E402
 from lamela.dokumenty.znaczniki import DANE_PRZYKLADOWE, INT, ZAL  # noqa: E402
 
 from pab_opis_a import ok, tyt  # noqa: E402
+from redakcja import odmiana  # noqa: E402
 
 POJEMNOSC = {"bardzo_lekka": "bardzo lekka", "lekka": "lekka", "srednia": "średnia", "ciezka": "ciężka",
              "bardzo_ciezka": "bardzo ciężka"}   # klasy pojemności cieplnej — metodologia ChE (lamela.obliczenia.energia)
@@ -154,7 +155,7 @@ def r11(pab, D, d):
     C_{{H}} = {L(C_H, 0)} zł/rok przy cenie {L(c_el, 2)} zł/kWh {ZAL}. Kryterium ust. 9 pkt 2 — okres zwrotu nakładów
     SPBT = K / (s·C_{{H}}) ≤ 5 lat — jest spełnione, gdy nakład na urządzenia regulacji pomieszczeniowej nie przekracza
     wartości granicznej **K_{{gr}} = 5·s·C_{{H}}, tj. {L(5 * C_H / 100, 0)} zł na każdy punkt procentowy względnej
-    oszczędności energii na ogrzewanie s** ({n_pom} pomieszczeń z regulacją). Nakład K na termostaty i siłowniki
+    oszczędności energii na ogrzewanie s** ({n_pom} {odmiana(n_pom, 'pomieszczenie', 'pomieszczenia', 'pomieszczeń')} z regulacją). Nakład K na termostaty i siłowniki
     {do_uzup('K — oferta (PT-IS)')}
     oraz oszczędność s {do_uzup('s — dane producenta systemu regulacji / PT-IS')} potwierdza się w PT-3 IS.
 

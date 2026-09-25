@@ -1,11 +1,11 @@
 {
- "czas": "2026-09-25 09:50",
+ "czas": "2026-09-25 09:53",
  "aktywni": [
   {
    "id": "a46d9e0323adf8ae2",
    "opis": "wf_ce63599a-15f:poprawki:tom-I",
-   "idle_min": 0.1,
-   "bez_narzedzi_min": 0.1,
+   "idle_min": 0.0,
+   "bez_narzedzi_min": 0.0,
    "limity": 0,
    "powody": []
   },
@@ -20,24 +20,24 @@
   {
    "id": "a472cdd66d2cb0c0b",
    "opis": "wf_dad224e5-cd8:zastosowanie:PZT",
-   "idle_min": 0.1,
-   "bez_narzedzi_min": 0.1,
-   "limity": 0,
-   "powody": []
-  },
-  {
-   "id": "ac4887df55cb098ed",
-   "opis": "wf_dad224e5-cd8:zastosowanie:IS",
    "idle_min": 0.2,
    "bez_narzedzi_min": 0.2,
    "limity": 0,
    "powody": []
   },
   {
+   "id": "ac4887df55cb098ed",
+   "opis": "wf_dad224e5-cd8:zastosowanie:IS",
+   "idle_min": 0.0,
+   "bez_narzedzi_min": 0.1,
+   "limity": 0,
+   "powody": []
+  },
+  {
    "id": "abd1c424d0164d558",
    "opis": "wf_c5f7e298-4b9:poprawki:BO",
-   "idle_min": 0.0,
-   "bez_narzedzi_min": 0.0,
+   "idle_min": 0.2,
+   "bez_narzedzi_min": 0.2,
    "limity": 0,
    "powody": []
   },
@@ -52,5 +52,5 @@
  ],
  "zakonczeni": 0,
  "zastoje": [],
- "repo_bez_zmian_min": 0.1
+ "repo_bez_zmian_min": 0.5
 }

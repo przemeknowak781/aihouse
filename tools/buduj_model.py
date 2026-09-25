@@ -1287,12 +1287,12 @@ WEZLY = [
 _SYM = {  # id: (Ψ_oi [W/(m·K)], f_Rsi, L_geom [m], podwęzły {id: (Ψ_oi, L)})
     "WZ-01": (0.086, 0.932, 19.94, None), "WZ-02": (0.171, 0.900, 13.41, None), "WZ-03": (0.195, 0.890, 7.17, None),
     "WZ-04": (0.128, 0.929, 22.47, None), "WZ-05": (0.134, 0.927, 18.71, None), "WZ-06": (0.205, 0.889, 24.30, None),
-    "WZ-07": (None, 0.851, None, {"WZ-07a": (0.152, 5.72), "WZ-07b": (-0.061, 5.72)}),
+    "WZ-07": (None, 0.851, None, {"WZ-07a": (0.152, 5.30), "WZ-07b": (-0.061, 5.30)}),       # wydanie: ST2Z po licu konstrukcji
     "WZ-08": (0.100, 0.903, 27.77, None),
-    "WZ-09": (None, 0.836, None, {"WZ-09a": (0.301, 12.25), "WZ-09b": (0.071, 6.38), "WZ-09c": (0.081, 5.88)}),
+    "WZ-09": (None, 0.836, None, {"WZ-09a": (0.406, 12.25), "WZ-09b": (0.071, 6.38), "WZ-09c": (0.081, 5.88)}),  # wydanie: uskok+żebro
     "WZ-10": (0.000, 0.963, 18.20, None), "WZ-11": (0.005, 0.930, 96.28, None), "WZ-11N": (0.008, 0.938, 45.03, None),
     "WZ-11P": (0.006, 0.911, 29.42, None), "WZ-11T": (0.118, 0.845, 15.67, None), "WZ-12": (0.066, 0.926, 40.05, None),
-    "WZ-16": (None, 0.854, None, {"WZ-16a": (0.194, 1.01), "WZ-16b": (0.123, 1.01)}),
+    "WZ-16": (None, 0.820, None, {"WZ-16a": (0.189, 1.01), "WZ-16b": (0.120, 1.01)}),
     "WZ-X1": (0.022, 0.964, 13.79, None), "WZ-X2": (0.022, 0.964, 2.79, None),
 }
 for _e in WEZLY:
@@ -1306,7 +1306,7 @@ for _e in WEZLY:
         _e["podwezly"] = {k: {"psi_oi": p_, "dlugosc": L_} for k, (p_, L_) in _pod.items()}
     _e.update(dlugosc=_L, psi=_psi, f_rsi=_f,
               zrodlo_psi="katalog mostków budynku — tools/mostki_budynku.py (PN-EN ISO 10211, 2D), Ψ_oi"
-                         + ("; średnia ważona podwęzłów" if _pod else "") + " — runda 2, 25.09.2026",
+                         + ("; średnia ważona podwęzłów" if _pod else "") + " — przeliczenie: wydanie 25.09.2026",
               zrodlo_frsi="katalog mostków budynku (PN-EN ISO 10211)" + ("; minimum podwęzłów" if _pod else ""))
 
 # ---- wydanie (weryfikacja V2 N-1, N-2; WT §152 ust. 4, 7, 10–12 — tekst: Dz.U. 2022 poz. 1225, ELI): wyrzutnia z wylotem POZIOMYM

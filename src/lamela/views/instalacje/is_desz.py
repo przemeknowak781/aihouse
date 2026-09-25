@@ -245,4 +245,5 @@ class RysD(Rysunek):
             "WYNIKI OBLICZEŃ — ODWODNIENIE DACHÓW (PN-EN 12056-3)",
             [("Pole", 14), ("Typ", 20), ("A [m²]", 18), ("Q [l/s]", 18), ("wpustów", 18), ("Q_wp [l/s]", 22),
              ("Q_przel. [l/s]", 24), ("h_spiętrz. [cm]", 26)], rows,
-            align=["left", "left", "right", "right", "right", "right", "right", "right"])))
+            align=["left", "left", "right", "right", "right", "right", "right", "right"],
+            raz_na_arkusz="desz")))           # tabela całego budynku — na arkuszu dach + parter tylko raz

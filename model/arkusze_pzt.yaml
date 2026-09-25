@@ -61,6 +61,9 @@ arkusze:
     format: "620x420"
     opcje:
       tabele: kolumna          # rzutnia (domyślnie) | kolumna — lamela.views.site._tabele
+      # wąskie tabele najpierw w środkowej kolumnie: przy kolejności domyślnej znak centrujący (oś arkusza, 10 mm
+      # w głąb ramki) przecina tytuł tabeli „OBIEKTY UZBROJENIA…” — silnik nie rezerwuje stref znaków centrujących
+      kolejnosc_tabel: [tab_przylacza, tab_skrzyzowania, tab_kolizje, tab_obiekty, tab_koordynacja]
       # minimalne odległości poziome między sieciami [m] — zasady wiedzy technicznej, NIE przepis (WT § 26–28 ich nie
       # określają); do potwierdzenia w warunkach przyłączenia gestorów sieci
       odleglosci_min:

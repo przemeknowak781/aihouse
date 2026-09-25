@@ -49,12 +49,14 @@ def popraw_cytaty(t: str) -> str:
     """Poprawki cytatów sprawdzonych w tekście urzędowym: upzp art. 2 pkt 35 nie dzieli się na litery; RPB — ze zmianą
     Dz.U. 2026 poz. 597."""
     t = re.sub(r"(art\. 2 pkt 35) lit\. a", r"\1", t)
+    t = re.sub(r"(RPB § 14 pkt 4) (\([^()]*\)) (lit\. a)", r"\1 \3 \2", t)
     return re.sub(r"(Dz\.U\. 2022 poz\. 1679, zm\. Dz\.U\. 2023 poz\. 2405)(?! i Dz\.U\. 2026)", r"\1 i Dz.U. 2026 poz. 597", t)
 
 
 def czysc(txt) -> str:
     """Usuwa adnotacje robocze z opisu pochodzącego z modelu lub rejestru; zapis liczb — przecinek dziesiętny."""
     t = popraw_cytaty(str(txt if txt is not None else ""))
+    t = re.sub(r"\(brief\s*§\s*\d+[^()]*\)", f"(program Inwestora {ZAL})", t)
     t = _NAWIAS.sub(_czysc_nawias, t)
     t = re.sub(r"\s*[—–-]\s*(?:sprzeczno\w* S-\d+|runda \d+)", "", t)
     t = re.sub(r"\s*[—–-]\s*(?:R\d [\d.]+|R\d-\d+|audyt\w* [AJ]\d[^;,)]*)", "", t)

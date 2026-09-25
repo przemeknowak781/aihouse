@@ -257,18 +257,33 @@ class Legenda:
         self.zrodlo = zrodlo
         self.items: list = []
         self._keys: set = set()
+        self._order: list = []           # klucze w kolejności pozycji (scalanie legend widoków jednego arkusza)
 
     def line(self, layer: str, text: str, lt=None, pen=None, key=None, color=None):
         key = key or ("L", layer, lt, text)
         if key not in self._keys:
             self._keys.add(key)
+            self._order.append(key)
             self.items.append(("line", (layer, lt, pen, color), text))
 
     def sym(self, fn, text: str, key=None):
         key = key or ("S", text)
         if key not in self._keys:
             self._keys.add(key)
+            self._order.append(key)
             self.items.append(("sym", fn, text))
+
+    @classmethod
+    def suma(cls, legendy: list) -> "Legenda":
+        """Legenda łączna kilku widoków (tytuł i źródło z pierwszej; pozycje bez powtórzeń, w kolejności widoków)."""
+        out = cls(legendy[0].tytul, legendy[0].zrodlo)
+        for lg in legendy:
+            for key, it in zip(lg._order, lg.items):
+                if key not in out._keys:
+                    out._keys.add(key)
+                    out._order.append(key)
+                    out.items.append(it)
+        return out
 
     def block(self):
         items = list(self.items)
@@ -322,13 +337,47 @@ class Legenda:
         return fn
 
 
-def table_block(title, cols, rows, align=None, h=1.8, row_h=4.2):
-    """Tabela w kolumnie opisowej (szerokości kolumn skalowane do szerokości kolumny arkusza)."""
+def legenda_arkusza(ctx, leg: Legenda):
+    """Blok legendy wspólnej dla widoków jednego arkusza (np. rzuty I i II piętra jednej branży na jednym arkuszu).
+
+    Widoki arkusza są tworzone kolejno, zanim silnik zmierzy lub narysuje jakikolwiek blok kolumny opisowej
+    (``sheets._przygotuj``). Legendy (o tym samym tytule) utworzone od ostatniego rysowania bloku legendy tworzą więc
+    grupę arkusza. Pierwszy blok grupy rysuje legendę łączną (pozycje bez powtórzeń), kolejne na tym samym arkuszu
+    nic nie rysują (silnik układu je pomija). Dla arkusza z jednym widokiem wynik jest identyczny jak ``leg.block()``."""
+    grupy = ctx.__dict__.setdefault("_inst_leg_grupy", {})
+    g = grupy.get(leg.tytul)
+    if g is None or g["zamknieta"]:
+        g = {"legendy": [], "zamknieta": False, "blok": None}
+        grupy[leg.tytul] = g
+    g["legendy"].append(leg)
+    gid = id(g)
+
+    def fn(sh, x, y, w):
+        g["zamknieta"] = True
+        byly = sh.__dict__.setdefault("_inst_legendy", set())
+        if gid in byly:
+            return y
+        byly.add(gid)
+        if g["blok"] is None:
+            g["blok"] = Legenda.suma(g["legendy"]).block()
+        return g["blok"](sh, x, y, w)
+    return fn
+
+
+def table_block(title, cols, rows, align=None, h=1.8, row_h=4.2, raz_na_arkusz: str | None = None):
+    """Tabela w kolumnie opisowej (szerokości kolumn skalowane do szerokości kolumny arkusza). ``raz_na_arkusz`` —
+    klucz tabeli wspólnej dla kilku widoków arkusza (np. wyniki obliczeń całego budynku): rysowana tylko raz na
+    arkusz (kolejne wywołania na tym samym arkuszu nic nie rysują — silnik układu je pomija)."""
     from ...draft.sheet import table
 
     def fn(sh, x, y, w):
         if not rows:
             return y
+        if raz_na_arkusz:
+            byly = sh.__dict__.setdefault("_inst_tabele", set())
+            if raz_na_arkusz in byly:
+                return y
+            byly.add(raz_na_arkusz)
         tot = sum(c[1] for c in cols)
         cs = [(n, cw * w / tot) for n, cw in cols]
         r = table(sh, x, y - 6.5, cs, rows, h=h, row_h=row_h, title=title, align=align, header_h=6.0)

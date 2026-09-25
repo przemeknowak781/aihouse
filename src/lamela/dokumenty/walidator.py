@@ -179,6 +179,13 @@ def _ile_widokow(tytul: str) -> int:
     return max(1, n)
 
 
+def _etykieta_wzorca(w: str) -> str:
+    """Wzorzec regex → czytelna etykieta do raportu (bez flag i klas znaków)."""
+    w = re.sub(r"\(\?-?i:", "", w)
+    w = re.sub(r"\\w\*|\\w\+|\\b|[()?]", "", w)
+    return w.replace("\\", "")
+
+
 def _szukaj(wzorce, gdzie) -> list[str]:
     tr = []
     for w in wzorce:
@@ -308,6 +315,19 @@ def sprawdz_tom(tom, lista_kontrolna: dict | str | None = None) -> RaportKomplet
                 continue
             sz = poz.get("szukaj") or {}
             info = an["elementy"].get(el) if el != "*" else None
+            if poz.get("brak_gdy") and not any(k in sz for k in ("spec", "skala_max", "tytulowa", "zakladki", "tekst",
+                                                                   "rysunki")):
+                # pozycja „negatywna”: BRAK, gdy w treści elementu jest znacznik niedomkniętej analizy
+                # (wzorce z (?-i:…) są wrażliwe na wielkość liter — np. „NIESPEŁNIONY” w tabeli warunków)
+                tekst_el = info["tekst"] if info else " ".join(an["teksty"])
+                tr = [(w, len(re.findall(w.replace(" ", r"\s+"), tekst_el, flags=re.I))) for w in poz["brak_gdy"]]
+                tr = [(w, n) for w, n in tr if n]
+                st = ("BRAK" if ob else "OSTRZEŻENIE") if tr else "OK"
+                opis = ((poz.get("brak_opis") or "znaczniki niedomkniętej analizy") + ": "
+                        + ", ".join(f"„{_etykieta_wzorca(w)}” ×{n}" for w, n in tr)) if tr else \
+                    "brak znaczników niedomkniętej analizy"
+                pozycje.append(Pozycja(status=st, szczegoly=opis, **base))
+                continue
             if el != "*" and info is None:
                 pozycje.append(Pozycja(status="BRAK" if ob else "OSTRZEŻENIE", szczegoly=f"brak elementu {el} w pliku",
                                        **base))

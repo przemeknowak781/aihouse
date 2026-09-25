@@ -6,7 +6,13 @@ from lamela.dokumenty.znaczniki import INT, ZAL
 
 from pab_opis_a import ok, tyt
 from pab_opis_b import przykanalik
-from redakcja import czysc, liczby_pl, podstawa
+from redakcja import czysc, liczby_pl, odmiana, podstawa
+
+
+def _nr(el: str) -> str:
+    """Identyfikator pomieszczenia modelu K.NN → numer arkuszy K+1.NN (PN-B-01025; jak w tabeli pomieszczeń)."""
+    import re
+    return re.sub(r"^(\d)\.(\d{2})\b", lambda m: f"{int(m.group(1)) + 1}.{m.group(2)}", el)
 
 
 def uwagi_audytu(D, sekcja: str | None = None) -> list:
@@ -182,13 +188,13 @@ def r14_15(pab, D, d):
     pab.markdown(f"""
     **Nie dotyczy** — nie wydano zgody na odstępstwo od przepisów techniczno-budowlanych (art. 9 PB) ani postanowienia,
     o którym mowa w art. 6a ust. 2 ustawy o ochronie przeciwpożarowej; projekt nie przewiduje rozwiązań wymagających
-    takiej zgody. Sprawdzenie zgodności modelu z WT (`tools/audyt_wt.py`; {sum(D.audyt_statusy.values())} sprawdzeń)
-    wykazało {niezg} niezgodności oraz {len(uw)} {'pozycję' if len(uw) == 1 else 'pozycje' if 1 < len(uw) % 10 < 5 and len(uw) % 100 not in (12, 13, 14) else 'pozycji'}
-    wymagających rozstrzygnięcia projektanta (interpretacji przepisu albo odstępstwa od założeń projektowych — nie od
+    takiej zgody. Sprawdzenie zgodności modelu z WT (`tools/audyt_wt.py`; {sum(D.audyt_statusy.values())} {odmiana(sum(D.audyt_statusy.values()), 'sprawdzenie', 'sprawdzenia', 'sprawdzeń')})
+    wykazało {niezg} niezgodności oraz {len(uw)} {odmiana(len(uw), 'pozycję wymagającą', 'pozycje wymagające', 'pozycji wymagających')}
+    rozstrzygnięcia projektanta (interpretacji przepisu albo odstępstwa od założeń projektowych — nie od
     przepisów); zestawienie poniżej.
     """)
     if uw:
-        pab.tabela([{"Element": czysc(x.element), "Stan projektu": f"{czysc(x.parametr)}: {czysc(x.wartosc)}",
+        pab.tabela([{"Element": _nr(czysc(x.element)), "Stan projektu": f"{czysc(x.parametr)}: {czysc(x.wartosc)}",
                      "Wymaganie (podstawa)": f"{czysc(x.wymog)} ({podstawa(x.podstawa)})",
                      "Rozstrzygnięcie": rozstrzygniecie(D, x)} for x in uw],
                    tytul="Pozycje sprawdzenia zgodności z WT wymagające rozstrzygnięcia projektanta", klasa="zwarta", lp=True,

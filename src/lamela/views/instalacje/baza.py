@@ -11,7 +11,7 @@ from ...draft import symbols as S
 from ...draft.geom import perp
 from . import podklad as P
 from .trasy import siatka_kondygnacji
-from .wspolne import H_S, InstResult, Legenda, braki_of, label_along, tag_leader, text_collisions
+from .wspolne import H_S, InstResult, Legenda, braki_of, label_along, legenda_arkusza, tag_leader, text_collisions
 
 
 ZRODLA_OZN = {
@@ -212,7 +212,7 @@ class Rysunek:
         if rooms and not self.dach and self.pod is not None and self.pod.rooms:
             P.opisy_pomieszczen(self.vp, self.pl, self.ctx, self.pod, self.room_extra)
         P.osie(self.vp, self.ctx)
-        self.res.column_blocks.insert(0, ("legenda", self.leg.block()))
+        self.res.column_blocks.insert(0, ("legenda", legenda_arkusza(self.ctx, self.leg)))   # wspólna dla widoków arkusza
         from ...draft import fmt
         self.res.units_note = (f"Średnice przewodów w mm (d_z×s — rury wielowarstwowe, Ø/DN — kanalizacja, kanały "
                                f"wentylacyjne), przekroje żył w mm², odległości i rzędne w m; ±0,000 = "

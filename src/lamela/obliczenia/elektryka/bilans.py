@@ -72,6 +72,7 @@ class ParametryBilans:
     ev: bool | None = None                  # None → gdy jest garaż
     ev_kW: float = 11.0
     grzalka_kW: float = 6.0
+    zapas_DLM: float = 0.10                 # zapas regulacji DLM: nastawa = (1 − zapas)·granica (histereza, czas reakcji) [ZAŁ]
     k_j: dict = field(default_factory=lambda: {
         "oswietlenie": 0.7, "gniazda": 0.2, "gniazda_kuchnia": 0.5, "gniazda_lazienka": 0.3, "gotowanie": 0.6,
         "agd": 0.6, "pc": 1.0, "grzalka": 1.0, "went": 1.0, "sterowanie": 1.0, "ev": 1.0, "zewn": 0.3, "tele": 1.0,
@@ -111,6 +112,19 @@ class WynikBilans:
 # --------------------------------------------------------------------------------------------------
 # Odbiorniki z modelu
 # --------------------------------------------------------------------------------------------------
+def _sfp_centrali(dane: DaneBudynku) -> tuple[float | None, str]:
+    """SFP [Wh/m³] centrali wentylacyjnej z modelu (``energia.wentylacja.centrala`` — klucz katalogu wyrobów
+    albo słownik), jak w ``energia.wentylacja.bilans_wentylacji``; (None, '') gdy brak danych."""
+    from ..wspolne import wyrob
+    raw = getattr(getattr(dane, "model", None), "raw", None) or {}
+    wc = ((raw.get("energia") or {}).get("wentylacja") or {})
+    c = wc.get("centrala") or "RVU_450"
+    kl = c if isinstance(c, str) else "model"
+    cd = dict(wyrob("centrala_wentylacyjna", c)) if isinstance(c, str) else dict(c)
+    sfp = cd.get("SFP_Wh_m3")
+    return (float(sfp), kl) if sfp else (None, "")
+
+
 def _wyp(dane: DaneBudynku, typ: str) -> list:
     return [e for e in dane.wyposazenie + (dane.inst.get("przybory_dodatkowe") or []) if e.get("typ") == typ and e.get("xy")]
 
@@ -244,9 +258,14 @@ def odbiorniki_z_modelu(dane: DaneBudynku, par: ParametryBilans | None = None, o
     D("Sterowanie PC, pompy obiegowe, listwy ogrzewania podłogowego", "sterowanie", 0.3, 1, zas, In_min=10, s_min=1.5)
     V = wentylacja_m3h if wentylacja_m3h is not None else 330.0
     rek = _wyp(dane, "rekuperator")
-    D(f"Rekuperator (V ≈ {f(V, 0)} m³/h)", "went", max(0.15, 0.5 * V / 1000.0 + 0.0), 1,
+    sfp, c_kl = _sfp_centrali(dane)
+    if sfp:      # ta sama zależność co dobór centrali (energia.wentylacja, PT-3 IS): P = SFP·q przy strumieniu projektowym
+        P_went, podst_went = sfp * V / 1000.0, f"R7 D9; P = SFP·V = {f(sfp, 2)} Wh/m³ · {f(V, 0)} m³/h (centrala {c_kl}, dobór PT-3 IS)"
+    else:
+        P_went, podst_went = max(0.15, 0.5 * V / 1000.0), "R7 D9; moc wentylatorów ≈ 0,5 W/(m³/h) [ZAŁ]"
+    D(f"Rekuperator (V ≈ {f(V, 0)} m³/h)", "went", P_went, 1,
       (*rek[0]["xy"], rek[0].get("kond", "P0")) if rek else (dane.lok("RG") or zas), In_min=10, s_min=1.5,
-      podst="R7 D9; moc wentylatorów ≈ 0,5 W/(m³/h) [ZAŁ]")
+      podst=podst_went)
     # falownik PV (generacja)
     if pv_kW_AC is None:
         pv_kW_AC = 6.0
@@ -307,11 +326,15 @@ def bilans_mocy(dane: DaneBudynku, odbiorniki: list[Odbiornik], par: ParametryBi
     P_bez = sum(o.P_s for o in odbiorniki)
     P_nster = sum(o.P_s for o in odbiorniki if not o.sterowany)
     P_ster = sum(o.P_s for o in odbiorniki if o.sterowany)
-    P_lim = min(P_przyl, math.sqrt(3) * UN * I_zab * par.cosphi_sr / 1000.0)   # granica DLM: moc przyłączeniowa i prąd I_zab
+    k_n = 1.0 - par.zapas_DLM                                     # nastawa DLM poniżej granicy (zapas regulacji)
+    P_gr = min(P_przyl, math.sqrt(3) * UN * I_zab * par.cosphi_sr / 1000.0)   # granica: moc przyłączeniowa i prąd I_zab
+    P_lim = k_n * P_gr
     P_dlm = P_nster + min(P_ster, max(0.0, P_lim - P_nster))
     wsp_dlm = (P_dlm - P_nster) / P_ster if P_ster > 0 else 1.0
+    wsp_moc = wsp_dlm
     fazy = _przypisz_fazy(odbiorniki, wsp_dlm)
-    P_faza_lim = U0 * I_zab * par.cosphi_sr / 1000.0
+    I_nast = k_n * I_zab                                          # nastawa prądu fazowego DLM
+    P_faza_lim = U0 * I_nast * par.cosphi_sr / 1000.0
     if P_ster > 0 and max(fazy.values()) > P_faza_lim:          # DLM kontroluje prądy fazowe — dalsze ograniczenie
         lo, hi = 0.0, wsp_dlm
         for _ in range(40):
@@ -334,6 +357,8 @@ def bilans_mocy(dane: DaneBudynku, odbiorniki: list[Odbiornik], par: ParametryBi
         Warunek("Moc szczytowa z DLM ≤ moc przyłączeniowa", P_dlm, "<=", P_przyl, "kW", wym_zrodlo("elektryka", "moc_przylaczeniowa_projekt"), "W-192"),
         Warunek("Prąd szczytowy ≤ zabezpieczenie przedlicznikowe", I_B, "<=", I_zab, "A", "R7-L09", "W-192", nd=1),
         Warunek("Najbardziej obciążona faza: prąd ≤ zabezpieczenie przedlicznikowe", I_faza_max, "<=", I_zab, "A", "", "W-192", nd=1),
+        Warunek(f"Najbardziej obciążona faza: prąd ≤ nastawa DLM ({f(100 * k_n, 0)} % I_zab — zapas regulacji)", I_faza_max,
+                "<=", I_nast + 1e-6, "A", "[ZAŁ]", "W-192", nd=1),
         Warunek("Moc przyłączeniowa ≤ 40 kW (grupa V)", P_przyl, "<=", float(wym("elektryka", "grupa_przylaczeniowa_V_moc_max", 40) or 40),
                 "kW", "RSys §3 ust. 1 pkt 5", "W-192"),
         Warunek("Moc przyłączeniowa ↔ zabezpieczenie (√3·400·I_zab, cos φ = 1)", P_przyl, "<=", P_z_I, "kW", "R7-L09", "W-192"),
@@ -348,10 +373,16 @@ def bilans_mocy(dane: DaneBudynku, odbiorniki: list[Odbiornik], par: ParametryBi
     kroki = [
         Krok("Moc zainstalowana (bez generacji PV)", "P_i = ΣP", "", P_inst, "kW", "", 1),
         Krok("Moc szczytowa bez zarządzania mocą", "P_s = Σk_j·P", "", P_bez, "kW", "k_j [ZAŁ]", 1),
-        Krok("Granica zarządzania mocą (moc przyłączeniowa i prąd zabezpieczenia przy cos φ)", "P_lim = min(P_przył; √3·U·I_zab·cos φ)",
-             f"min({f(P_przyl, 1)}; √3·400·{f(I_zab, 0)}·{f(par.cosphi_sr, 2)}/1000)", P_lim, "kW", "", 2),
-        Krok("Moc szczytowa z DLM (odbiorniki sterowane ograniczone)", "P_s,DLM = P_nst + min(P_st; P_lim − P_nst)",
-             f"{f(P_nster, 2)} + min({f(P_ster, 2)}; {f(P_lim, 2)} − {f(P_nster, 2)})", P_dlm, "kW", "", 1),
+        Krok("Nastawa zarządzania mocą (granica: moc przyłączeniowa i prąd zabezpieczenia; zapas regulacji)",
+             "P_lim = (1 − z)·min(P_przył; √3·U·I_zab·cos φ)",
+             f"{f(k_n, 2)}·min({f(P_przyl, 1)}; √3·400·{f(I_zab, 0)}·{f(par.cosphi_sr, 2)}/1000)", P_lim, "kW", "z [ZAŁ]", 2),
+        Krok("Współczynnik ograniczenia odbiorników sterowanych — z mocy całkowitej", "w_P = min(1; (P_lim − P_nst)/P_st)",
+             f"({f(P_lim, 2)} − {f(P_nster, 2)})/{f(P_ster, 2)}", wsp_moc, "", "", 3),
+        Krok("Nastawa prądu fazowego DLM", "I_nast = (1 − z)·I_zab", f"{f(k_n, 2)}·{f(I_zab, 0)}", I_nast, "A", "z [ZAŁ]", 1),
+        Krok("Współczynnik ograniczenia przyjęty (z mocy całkowitej i z prądu najbardziej obciążonej fazy)",
+             "w = min(w_P; w_I), w_I: max I_Lk(w) = I_nast", "", wsp_dlm, "", "", 3),
+        Krok("Moc szczytowa z DLM (odbiorniki sterowane ograniczone — ten sam współczynnik co w podziale na fazy)",
+             "P_s,DLM = P_nst + w·P_st", f"{f(P_nster, 2)} + {f(wsp_dlm, 3)}·{f(P_ster, 2)}", P_dlm, "kW", "", 2),
         Krok("Prąd szczytowy", "I_B = P_s/(√3·U·cos φ)", f"{f(P_dlm * 1000, 0)}/(√3·400·{f(par.cosphi_sr, 2)})", I_B, "A", "", 1),
         Krok("Kontrolnie N SEP-E-002: 30 kVA + ogrzewanie elektryczne (PC + grzałka)", "P = 30·cos φ + P_ogrz",
              f"30·{f(par.cosphi_sr, 2)} + {f(ogrz, 2)}", sep, "kW", "R7-L08 [W]", 1),

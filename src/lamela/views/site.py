@@ -130,7 +130,14 @@ def _tabele(vp, opts, tabs, x, y_top, gap=6.0) -> list:
       (``lamela.views.uklad``) ustawia je ekonomicznie obok rysunku: w kolumnach, w pasie pod rysunkiem i w wolnych
       narożnikach obwiedni widoku.
 
+    ``kolejnosc_tabel: [nazwa, …]`` — kolejność tabel (pozostałe za nimi w kolejności domyślnej); dla ``kolumna``
+    decyduje o miejscu bloku (silnik umieszcza bloki po kolei od kolumny nad tabliczką w lewo).
+
     Zwraca bloki kolumny opisowej [(nazwa, fn)] (pusta lista dla ``rzutnia``)."""
+    kol = [str(n) for n in (opts.get("kolejnosc_tabel") or [])]
+    if kol:
+        d = dict(tabs)
+        tabs = [(n, d[n]) for n in kol if n in d] + [(n, t) for n, t in tabs if n not in kol]
     if str(opts.get("tabele", "rzutnia")).strip().lower() == "kolumna":
         out = []
         for nm, t in tabs:

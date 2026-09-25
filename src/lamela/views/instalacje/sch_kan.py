@@ -10,7 +10,7 @@ from ...draft import fmt, symbols as S
 from ...draft.dims import arrowhead
 from ...obliczenia.sanitarne.przybory import KATALOG
 from ..common import Placer
-from .wspolne import H_M, H_S, Legenda, num, rura_krotko, table_block, tag_leader
+from .wspolne import H_M, H_S, Legenda, legenda_arkusza, num, rura_krotko, table_block, tag_leader
 
 SKR = {"wc": "WC", "umywalka": "UMY", "umywalka_blat": "UMY", "prysznic": "NAT", "wanna": "WAN", "zlew": "ZL",
        "zlewik": "ZLG", "zmywarka": "ZM", "pralka": "PR", "suszarka": "SU", "wpust_podlogowy": "WP",
@@ -118,7 +118,7 @@ def rozwiniecie_kan(vp, ctx, W, res):
             "zawór napowietrzający pionu")
     from .schematy import rozsun_napisy
     rozsun_napisy(vp)
-    res.column_blocks.append(("legenda", leg.block()))
+    res.column_blocks.append(("legenda", legenda_arkusza(ctx, leg)))
     rows = [[o.id, o.rodzaj, f"Ø{o.rura.split()[-1]}", num(o.sum_DU, 1), num(o.Q, 2), num(o.L, 2)] for o in kn.odcinki
             if o.rodzaj in ("pion", "poziom", "przykanalik")]
     res.column_blocks.append(("tab", table_block("PIONY I PRZEWODY ODPŁYWOWE (obliczenia PN-EN 12056-2)",
@@ -245,7 +245,7 @@ def rozwiniecie_wody(vp, ctx, W, res):
     rozsun_napisy(vp)
     leg.sym(lambda c, p: S.water_meter(c, p, 0.0, s_mm=4.0, label="WM"), "wodomierz; F — filtr; EA — zawór "
             "antyskażeniowy (zwrotny); zawory odcinające")
-    res.column_blocks.append(("legenda", leg.block()))
+    res.column_blocks.append(("legenda", legenda_arkusza(ctx, leg)))
     pk = wo.punkt_krytyczny
     res.notes += ["Rozwinięcie instalacji wodociągowej: oś pionowa w skali rzędnych, oś pozioma umowna; wysokości "
                   "wypływów wg PN-92/B-01706 (praktyka projektowa). Średnice z obliczeń (lamela.obliczenia.sanitarne."
