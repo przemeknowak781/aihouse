@@ -276,3 +276,21 @@ rysują je jak balustrady/lamele; PZT — linia kratownicy (zieleń) i osłona z
 * `dzialka.uzbrojenie.obiekty[PC-JZ]`: `strefa_r`, `wym`, `wym_zrodlo`, `oslona`; `dzialka.zielen[].opis`.
 * `wyposazenie.yaml`: `wyspa` — `hokery` (liczba), `plyta_strona` (N/S/E/W); `pompa_ciepla`, `zasobnik`, `rekuperator` — `xy`
   na licu ściany, `obrot` od ściany do pomieszczenia (jak pozostałe meble; `views.plan.draw_furniture`).
+
+### 10.3 Konstrukcja — jawna ścieżka obciążeń (runda konstrukcyjna 1; rdzeń: `F["sciany"|"belki"|"slupy"|"wsporniki_plyty"]`, walidacja odwołań)
+* `sciany[].oparta_na: [id belek]` — ściana stoi na belkach (np. S1-01 na B1, S2-01 na B4/B2): profil obciążenia dolnego ściany na
+  odcinku nad belką → obciążenie belki (`pozycje._obc_scian_i_slupow_na_belce`), a nie mur poniżej; ściana bez muru poniżej, stojąca
+  w ≥ 90 % na belkach, nie obciąża płyty liniowo.
+* `sciany[].belka_w_koronie: [id belek]` — belki w koronie ściany (np. S0-01 pod B1, S1-01 pod B4/B2): odcinek ściany pod belką nie jest
+  podporą płyty (płyta opiera się na belce, belka na swoich podporach).
+* `belki[].podpory: [{typ: sciana | slup | belka, id, s}]` — jawny schemat podparcia (s — odległość od początku osi belki [m]); zastępuje
+  wyznaczanie automatyczne (wsporniki B4/B5, belka krawędziowa B3, podciągi B8/B9 na słupach ŻB).
+* `slupy[]` żelbetowe (`mat` ŻB, `przekroj: "AxB"` w mm — A wzdłuż x, B wzdłuż y) — trzpienie w murze: w obrysie słupa mur jest przerwany
+  (obciążenia korony ściany w obrysie → słup), słup nad słupem (oś wyższego w obrysie niższego, ≤ 0,7 m) — siła osiowa przekazywana
+  bezpośrednio; pozycja wg PN-EN 1992-1-1 5.8.8 (`zelbet.slup_zelbetowy`); w MES płyty fundamentowej siła rozłożona na długości.
+* `slupy[].blacha_gorna`, `slupy[].blacha_dolna` — `{a, b, t}` [m] blach czołowych słupów stalowych (docisk 6.7).
+* `wsporniki_plyty[].konstrukcyjny: false` — okładziny, ramy, izolacje, szkło (poza analizą płyt ŻB).
+* `fundamenty.elementy[].obciazenie_uzytkowe` — kategoria obciążenia użytkowego płyty (np. `garaz` — kat. F) w MES płyty fundamentowej.
+* Płyta fundamentowa z żebrami (`fundamenty.typ: plyta`, elementy z `obrys` i z `os`): pozycje obliczeń z MES płyty na podłożu
+  sprężystym (płyta, żebra, pogrubienia — `pozycje._fundament_plytowy`); żebro krawędziowe licowane z krawędzią płyty (oś przesunięta
+  do wnętrza o b/2 − 0,10 m); element z `os` krótszą od `b` — pogrubienie (stopa).
