@@ -178,7 +178,7 @@ def rozdz_wentylacja(o: Opis, D: DanePTIS):
     z paroizolacją (W-168); tłumiki akustyczne na króćcach centrali; skropliny do kanalizacji przez syfon
     z zamknięciem wodnym. Czerpnia na wys. {L((lok.get('czerpnia') or [None] * 3)[2], 1)} m, wyrzutnia na wys.
     {L((lok.get('wyrzutnia') or [None] * 3)[2], 1)} m (odległości wg WT § 152 — sprawdzenia w obliczeniach).
-    Garaż — wentylacja naturalna, bez połączenia z centralą ({'; '.join(g[1] for g in w.garaz) if w.garaz else '—'}).
+    Garaż — wentylacja naturalna, bez połączenia z centralą ({'; '.join(g[0] for g in w.garaz) if w.garaz else '—'}).
     """)
     rows = [{"Pomieszczenie": f"{p.id} {p.nazwa}", "Nawiew [m³/h]": p.naw, "Wywiew [m³/h]": p.wyw,
              "Podstawa": p.podstawa or ("pokój — rozdział nawiewu" if p.naw else "—")}
@@ -220,3 +220,81 @@ def rozdz_woda(o: Opis, D: DanePTIS):
     o.tabela([{"Miejsce": r[0], "Kategoria cieczy": r[1], "Zabezpieczenie": r[2], "Podstawa": r[3]}
               for r in wd.zabezpieczenia_1717], tytul="Zabezpieczenia przed przepływem zwrotnym (PN-EN 1717)",
              wyrownanie={"Miejsce": "l", "Zabezpieczenie": "l", "Podstawa": "l"}, zrodlo="lamela.obliczenia.sanitarne.woda")
+
+
+def rozdz_kanalizacja(o: Opis, D: DanePTIS):
+    """3.4 Kanalizacja sanitarna (§ 23 pkt 7 lit. e)."""
+    ka, Kd = D.W["kanalizacja"], D.Wd["kanalizacja"]
+    st = ka.studzienka or {}
+    went = "; ".join(f"{x['pion']} DN{x['dn']} — {x['wentylacja']}" for x in (ka.wentylacja or []))
+    cofka = [x for x in ka.warunki if x.id == "W-140"]
+    o.rozdzial("Kanalizacja sanitarna", poziom=2, podstawa="§ 23 pkt 7 lit. e RPB; W-138…W-140")
+    o.tekst(f"""
+    Kanalizacja grawitacyjna, system I wg PN-EN 12056-2 (K = 0,5): ΣDU = **{L(Kd['sum_DU'], 1)} l/s**,
+    Q_ww = 0,5·√ΣDU = **{L(Kd['Q_ww_l_s'], 2)} l/s** (W-138). Piony: {went}; wentylacja pionów wg WT § 125 (W-139).
+    Przewody odpływowe pod posadzką parteru (w płycie fundamentowej — przejścia wg PT-2 BO) do wyjścia z budynku,
+    przykanalik **{Kd['przykanalik'].replace('i=', 'i = ')}** ze studzienką rewizyjną: {st.get('typ', '—')}, głębokość
+    {L(st.get('glebokosc'), 2)} m, {L(st.get('dystans_granica'), 1)} m od granicy. Rzędne dna (wzgl. ±0,000):
+    {'; '.join(f'{k} {L(v, 2)} m' for k, v in (ka.rzedne or {}).items())}.
+    Zabezpieczenie przed cofką (WT § 124, W-140): {'; '.join(f"{x.opis} — {'spełnione' if x.ok else 'NIESPEŁNIONE'}" for x in cofka) or 'wg obliczeń'}.
+    Skropliny centrali wentylacyjnej i wpust podłogowy pomieszczenia technicznego — przez syfony z zamknięciem
+    wodnym (syfon wpustu z zabezpieczeniem przed wyschnięciem). Materiały: rury i kształtki PP-HT wewnątrz,
+    PVC-U lite SN8 pod posadzką i na przykanaliku (przykładowe — lub równoważne).
+    """)
+
+
+def rozdz_deszczowa(o: Opis, D: DanePTIS):
+    """3.5 Wody opadowe, retencja, drenaż (§ 23 pkt 7 lit. e)."""
+    de, Dd, dr = D.W["deszczowa"], D.Wd["deszczowa"], D.W["drenaz"]
+    ret, ret_m = de.retencja or {}, D.Dz.get("retencja") or {}
+    n_wp = sum(len(p.wpusty or []) for p in de.pola)
+    rs = [u for u in (D.Dz.get("uzbrojenie") or {}).get("projektowane", []) if u.get("branza") == "kan_deszcz"]
+    nie = (ret_m.get("rozsaczanie") or {})
+    o.rozdzial("Odprowadzenie i zagospodarowanie wód opadowych, drenaż", poziom=2,
+               podstawa="§ 23 pkt 7 lit. e RPB; W-142…W-146, W-018, W-019")
+    o.tekst(f"""
+    **Odwodnienie dachów** (PN-EN 12056-3, r = 0,046 l/(s·m²); W-142): {len(de.pola)} pól dachowych
+    o łącznej powierzchni **{L(Dd['A_dachow_m2'], 1)} m²**, Q = **{L(Dd['Q_dachy_l_s'], 2)} l/s**; {n_wp} wpustów
+    dachowych (podgrzewane) i przelewy awaryjne w attykach; dach zielony ekstensywny
+    ({', '.join(f"{z['id']} {L(z['A'], 1)} m²" for z in (de.dach_zielony or [])) or '—'}). Rury spustowe wewnętrzne
+    (szacht SI) i zewnętrzne → kolektory deszczowe PVC-U: {'; '.join(u.get('opis', '') for u in rs[:3])}.
+
+    **Retencja — wariant bazowy (W-145).** Szczelny zbiornik **{L(Dd['V_zbiornika_m3'], 1)} m³** (≤ 5 m³ — nie
+    jest urządzeniem wodnym) z osadnikiem i filtrem, pompą do podlewania ogrodu (pokrycie zapotrzebowania
+    na podlewanie {L(100 * Dd['pokrycie_podlewania'], 0)} %; bilans IMGW 1991–2020) i przelewem do niecki chłonnej
+    (ogród deszczowy). Powierzchnia zredukowana zlewni A_red = {L(Dd['A_red_m2'], 1)} m²; wymagana objętość niecki
+    (PANDa 2050, C = 10 lat, f_b = 1,2; W-143) V_min = **{L(Dd['niecka_V_min_m3'], 2)} m³**; niecka w modelu
+    (dzialka.yaml): {L(nie.get('V'), 1)} m³, głębokość {L(nie.get('glebokosc'), 2)} m — czas opróżniania
+    {L(ret.get('t_opr'), 1)} h (≤ 24 h). Deszczówka — instalacja odrębna, bez połączenia z wodociągiem (W-136).
+    Odwodnienia liniowe przy drzwiach bez progu i przed bramą garażu ({len(de.odwodnienia_liniowe or [])} korytek
+    wg obliczeń); woda z podjazdu i garażu przez osadnik z separatorem — nie do zbiornika retencyjnego.
+    Skrzynki rozsączające — wyłącznie wariant opcjonalny po stanowisku PGW Wody Polskie (D-05).
+
+    **Drenaż opaskowy: {dr.decyzja}** ({D.Wd['drenaz'].get('klasa_oddzialywania_wody')}).
+    {' '.join(dr.uzasadnienie)} Zalecenia: {' '.join(dr.zalecenia[:2])}
+    """)
+
+
+def rozdz_sieci(o: Opis, D: DanePTIS):
+    """4. Powiązania z sieciami zewnętrznymi i punkty pomiarowe (§ 23 pkt 8)."""
+    uz = D.Dz.get("uzbrojenie") or {}
+    ist = {u.get("branza"): u.get("opis", "") for u in uz.get("istniejace", [])}
+    proj = [u for u in uz.get("projektowane", []) if u.get("branza") in ("woda", "kan_sanit", "kan_deszcz")]
+    o.rozdzial("Powiązania instalacji z sieciami zewnętrznymi i punkty pomiarowe", podstawa="§ 23 pkt 8 RPB",
+               nowa_strona=True)
+    rows = [{"Medium": {"woda": "woda", "kan_sanit": "ścieki bytowe", "kan_deszcz": "wody opadowe"}[u["branza"]],
+             "Sieć zewnętrzna / odbiornik": ist.get(u["branza"], "zagospodarowanie na działce (retencja)"),
+             "Przyłącze / przewód": u.get("opis", ""), "Długość [m]": u.get("dl")} for u in proj]
+    o.tabela(rows, tytul="Powiązania z sieciami i odbiornikami zewnętrznymi (dane działki — "
+             f"{FIKCJA})", formaty={"Długość [m]": 1},
+             wyrownanie={"Sieć zewnętrzna / odbiornik": "l", "Przyłącze / przewód": "l"},
+             zrodlo="model/dzialka.yaml — uzbrojenie istniejące i projektowane")
+    o.tekst(f"""
+    **Punkty pomiarowe:** wodomierz główny {D.Wd['woda']['wodomierz']} (odczyt gestora sieci; W-131); licznik
+    energii elektrycznej w ZKP (PT-4 IE) — pompa ciepła i grzałka zasilane z instalacji budynku (moce elektryczne
+    — rozdział „Charakterystyka energetyczna”, bilans mocy). Sieć gazowa: {ist.get('gaz', 'brak')} —
+    budynek bez przyłącza gazowego. Sieć ciepłownicza — brak (oświadczenie projektanta instalacyjnego w ZL; W-158).
+    Parametry sieci (ciśnienie dyspozycyjne i maksymalne, rzędna kanału) przyjęto jako założenia [ZAŁ] — do
+    potwierdzenia w warunkach przyłączenia gestorów sieci (D-23): ciśnienie dyspozycyjne
+    {L(D.W['woda'].par.p_sieci_min, 2)} MPa, maksymalne {L(D.W['woda'].par.p_sieci_max, 2)} MPa.
+    """)

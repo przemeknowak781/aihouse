@@ -2,10 +2,10 @@ RAPORT KOMPLETNOŚCI — PAB_2026.09.25.pdf
 Lista kontrolna: Element PAB (rejestr C.1 poz. 2)
 Status: PRZYKŁAD – NIE DO ZŁOŻENIA
 Pozycje: OK 26 · BRAK 0 · DO UZUPEŁNIENIA 3 · N/D 0 · OSTRZEŻENIE 0
-Znaczniki: [DO UZUPEŁNIENIA] ×73, [DOKUMENT ZEWNĘTRZNY] ×0, [DANE PRZYKŁADOWE] ×57
-Plik: 33 stron, 1.50 MB
+Znaczniki: [DO UZUPEŁNIENIA] ×73, [DOKUMENT ZEWNĘTRZNY] ×0, [DANE PRZYKŁADOWE] ×56
+Plik: 32 stron, 1.50 MB
 
-  element PAB: strony 1–33 (opis 23, arkusze 10)
+  element PAB: strony 1–32 (opis 22, arkusze 10)
 
 ✓ F-01    [  *] OK               Nazwa pliku wg zał. 1 RPB (PZT_PAB_ZL_rrrr.mm.dd.pdf) (RPB § 2b ust. 4, zał. 1; W-301) — nazwa zgodna z zał. 1 RPB (PAB)
 ✓ F-02    [  *] OK               Rozmiar pliku ≤ 150 MB (RPB § 2b ust. 3; W-300) — 1.50 MB (limit 150 MB)
@@ -16,7 +16,7 @@ Plik: 33 stron, 1.50 MB
 … C1-2-02 [PAB] DO UZUPEŁNIENIA  Strona tytułowa: zamierzenie, adres, kategoria I, inwestor (RPB § 7 ust. 2 pkt 2) — pola [DO UZUPEŁNIENIA] na stronie tytułowej
 … C1-2-03 [PAB] DO UZUPEŁNIENIA  Strona tytułowa: data, autorzy ze specjalnością, nr uprawnień i zakresem (RPB § 7 ust. 2 pkt 3) — pola [DO UZUPEŁNIENIA] na stronie tytułowej
 ✓ C1-2-04 [PAB] OK               Spis treści (RPB § 7 ust. 5)
-✓ C1-2-05 [PAB] OK               Numeracja stron elementu (RPB § 6 ust. 1) — 22 stron numerowanych
+✓ C1-2-05 [PAB] OK               Numeracja stron elementu (RPB § 6 ust. 1) — 21 stron numerowanych
 ✓ C1-2-06 [PAB] OK               Oświadczenie projektanta(-ów) z listą współautorów (PB art. 34 ust. 3d pkt 3, ust. 3e)
 ✓ C1-2-07 [PAB] OK               Opis pkt 1: rodzaj i kategoria obiektu (RPB § 20 ust. 1 pkt 1)
 ✓ C1-2-08 [PAB] OK               Opis pkt 2: sposób użytkowania i program użytkowy (RPB § 20 ust. 1 pkt 2)
