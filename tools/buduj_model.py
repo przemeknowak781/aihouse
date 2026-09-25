@@ -1090,11 +1090,11 @@ _zi += 1
 FUND_EL.append({"id": f"ZF{_zi}", "os": [[xC, y3], [xM, y3]], "b": 0.50, "h": 0.45, "spod": r(Z_PLYTA_F - T_PLYTA_F - 0.45),
                 "mat": "ZB_C25", "uwagi": "żebro łączące płyty w osi 3 pod podciągiem B8 (C–M, bez ściany) — ciągłość żebra osi 3 pod "
                                           "trzpieniami ŻB B/3, C/3, D/3"})
-# pogrubienie pasmowe płyty w osi 3 pod trzpieniami B/3 i C/3 (x 3,20…6,40, szer. 1,60 m, h = 0,70 m łącznie) — rozkład sił
+# pogrubienie pasmowe płyty w osi 3 pod trzpieniami B/3 i C/3 (x 3,00…7,00, szer. 1,80 m, h = 0,70 m łącznie) — rozkład sił
 # ≈ 2,8 MN na podłoże bez wspornikowego zginania płyty 25 cm wzdłuż żebra (MES: m_y ≈ 270 kNm/m przy licu żebra ZF9)
 _zi += 1
-FUND_EL.append({"id": f"ZF{_zi}", "os": [[3.20, y3], [6.40, y3]], "b": 1.60, "h": 0.45, "spod": r(Z_PLYTA_F - T_PLYTA_F - 0.45),
-                "mat": "ZB_C25", "uwagi": "pogrubienie pasmowe płyty w osi 3 pod trzpieniami ŻB B/3 i C/3 (1,60 × 3,20 m, h = 0,70 m)"})
+FUND_EL.append({"id": f"ZF{_zi}", "os": [[3.00, y3], [7.00, y3]], "b": 1.80, "h": 0.45, "spod": r(Z_PLYTA_F - T_PLYTA_F - 0.45),
+                "mat": "ZB_C25", "uwagi": "pogrubienie pasmowe płyty w osi 3 pod trzpieniami ŻB B/3 i C/3 (1,80 × 4,00 m, h = 0,70 m)"})
 for sl in SLUPY[:4]:
     x, y = sl["xy"]
     FUND_EL.append({"id": f"SF{sl['id'][2:]}", "os": [[r(x - 0.005), y], [r(x + 0.005), y]], "b": 1.00, "h": 0.45, "spod": r(Z_PLYTA_F - T_PLYTA_F - 0.45),
