@@ -744,11 +744,11 @@ class RysT(RysE):
                      "gniazdo teleinformatyczne (2×RJ45 kat. 6A; TV — gniazdo RTV/SAT + RJ45)")
         self.leg.sym(lambda c, p: _box(c, p, "AP"), "AP — punkt dostępowy Wi-Fi (sufit, PoE)")
         self.leg.sym(lambda c, p: S.motion_sensor(c, p - np.array([0, 1.5]), 90.0, s_mm=3.0, label="PIR",
-                                                  layer="E-ALARM"), "czujka ruchu SSWiN (PIR), h ≈ 2,2 m")
+                                                  layer="E-ALARM"), "czujka ruchu SSWiN (PIR), h ≈ 2,2 m", wys=7.0)
         self.leg.sym(lambda c, p: S.tag(c, p, "CD", shape="circle", r_mm=2.0, h=1.8, layer="E-ALARM"),
-                     "CD — czujka dymu (autonomiczna/SSWiN) w komunikacji")
+                     "CD — czujka dymu (autonomiczna/SSWiN) w komunikacji", wys=6.0)
         self.leg.sym(lambda c, p: S.videophone(c, p - np.array([0, 1.8]), 90.0, s_mm=3.2, label="WD"),
-                     "WD — monitor wideodomofonu")
+                     "WD — monitor wideodomofonu", wys=7.5)
         self.leg.sym(lambda c, p: _box(c, p, "M", w_mm=3.6, layer="E-ALARM"),
                      "M — manipulator SSWiN; SZ — sygnalizator zewnętrzny; RACK — szafa teleinformatyczna")
         return out

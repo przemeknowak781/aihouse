@@ -266,8 +266,16 @@ class Legenda:
             self._order.append(key)
             self.items.append(("line", (layer, lt, pen, color), text))
 
-    def sym(self, fn, text: str, key=None):
+    def sym(self, fn, text: str, key=None, wys: float | None = None):
+        """``wys`` — najmniejsza wysokość wiersza legendy [mm] dla symboli wyższych niż wiersz tekstu (np. z opisem
+        nad symbolem), żeby nie nachodziły na sąsiednie pozycje."""
         key = key or ("S", text)
+        if wys:
+            f0 = fn
+
+            def fn(c, p):
+                return f0(c, p)
+            fn._wys = float(wys)
         if key not in self._keys:
             self._keys.add(key)
             self._order.append(key)
@@ -306,7 +314,7 @@ class Legenda:
                 rows = []
                 for kind, payload, text in items:
                     ls = wrap(text, tw, 1.8)
-                    rows.append((kind, payload, ls, max(5.2, 2.7 * len(ls) + 1.6)))
+                    rows.append((kind, payload, ls, max(5.2, 2.7 * len(ls) + 1.6, getattr(payload, "_wys", 0.0))))
                 # rozkład na 2 kolumny o zbliżonej wysokości
                 tot = sum(r[3] for r in rows)
                 acc, split = 0.0, len(rows)
