@@ -916,7 +916,7 @@ class PlanBuilder:
                             continue
                         if best is None or ev["score"] > best["score"]:
                             best = ev
-                if best is None or best["score"] <= 0.0:
+                if best is None or best["score"] <= -1.0:
                     break
                 n0 = len(vp.prims)
                 for ch in best["chains"]:
@@ -1006,10 +1006,10 @@ class PlanBuilder:
         # kara za przecięcie otworów drzwiowych/okiennych (linia przez otwór = zła szerokość)
         pen = 0.0
         if not self.voids.is_empty and ln.intersects(self.voids):
-            pen += 4.0
+            pen += 2.5
         for sa in self.stair_areas:
             if ln.intersects(sa):
-                pen += 3.0
+                pen += 1.0
         score = len(covered) * 4.0 - cost * 0.35 - pen
         return dict(score=score, c=c, chains=out_ch, covered=covered)
 

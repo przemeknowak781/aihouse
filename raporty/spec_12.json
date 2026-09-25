@@ -1,5 +1,6 @@
 {
- "title": "Korekta Inwestora: „S” z przesuniętych brył, garaż w parterze — panel koncepcji uruchomiony ponownie",
+ "nr": 12,
+ "title": "Porównanie wariantów W1 i W2; W3 w opracowaniu, generatory rysunków i rejestr w toku",
  "stages": [
   [
    "Analiza szkicu — interpretacja v2 („S” z brył, garaż)",
@@ -55,5 +56,19 @@
   "Samokontrola wariantów wskazała słabości do usunięcia w syntezie (np. łazienka P1 bezpośrednio z klatki w W1; płytka strefa dzienna w W2).",
   "Równolegle: scalanie rejestru wymagań w jedną listę kontrolną; budowa generatorów rzutów/przekrojów/elewacji z modelu.",
   "Przy ≈3 kondygnacjach dom wymaga dokumentacji geotechnicznej kat. II (badania + projekt geotechniczny) — uwzględnione w spisie tomów."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/docs/20_koncepcja/porownanie_W1_W2.png",
+   "caption": "Porównanie W1 / W2"
+  },
+  {
+   "path": "/home/user/aihouse/docs/20_koncepcja/W1/rzut_P0.png",
+   "caption": "W1: parter"
+  },
+  {
+   "path": "/home/user/aihouse/docs/20_koncepcja/W2/rzut_P0.png",
+   "caption": "W2: parter"
+  }
  ]
 }

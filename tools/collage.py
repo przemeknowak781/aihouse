@@ -121,9 +121,25 @@ def main(spec_path):
             pp = Path(it["path"]) if Path(it["path"]).exists() else ROOT / it["path"]
             with Image.open(pp) as _im:
                 asp.append(_im.width / _im.height)
-        if len(imgs) in (2, 3) and sum(asp) / len(asp) > 1.25:
-            cols, rows = 1, len(imgs)
-        cw = (gx1 - gx0 - (cols - 1) * 20) // cols
+        if len(imgs) == 2 and sum(asp) / len(asp) > 1.25:
+            cols, rows = 1, 2
+        if len(imgs) == 3:
+            # układ: pierwszy obraz na całą szerokość u góry, dwa pozostałe obok siebie niżej
+            gh = (gy1 - gy0 - 20) // 2
+            boxes = [(gx0, gy0, gx1 - gx0, gh), (gx0, gy0 + gh + 20, (gx1 - gx0 - 20) // 2, gh),
+                     (gx0 + (gx1 - gx0 - 20) // 2 + 20, gy0 + gh + 20, (gx1 - gx0 - 20) // 2, gh)]
+            for it, (x0, y0, cw, ch) in zip(imgs, boxes):
+                pth = Path(it["path"]) if Path(it["path"]).exists() else ROOT / it["path"]
+                im = fit_image(pth, cw, ch - 46)
+                img.paste(im, (x0 + (cw - im.width) // 2, y0 + (ch - 46 - im.height) // 2))
+                d.rectangle([x0, y0, x0 + cw, y0 + ch - 46], outline=(210, 210, 210), width=2)
+                cap, capf = it.get("caption", ""), font(23)
+                while d.textlength(cap, font=capf) > cw and len(cap) > 4:
+                    cap = cap[:-2]
+                d.text((x0, y0 + ch - 38), cap, font=capf, fill=(40, 40, 40))
+            imgs = []
+            cols, rows = 1, 1
+        cw = (gx1 - gx0 - (cols - 1) * 20) // cols if imgs else 0
         ch = (gy1 - gy0 - (rows - 1) * 20) // rows
         for k, it in enumerate(imgs[: cols * rows]):
             c, r = k % cols, k // cols

@@ -262,6 +262,8 @@ class SectionBuilder:
                 if sb - sa < 1e-4:
                     continue
                 hc = hatch_code(m, p.material)
+                if hc == "DREWNO_POPRZ" and (p.z1 - p.z0) > 4.0 * (sb - sa):
+                    hc = "DREWNO_WZDL"
                 kind = _cut_kind_for(self.ctx, p, hc)
                 rect = box(sa, p.z0, sb, p.z1)
                 horiz = (sb - sa) >= (p.z1 - p.z0)
@@ -597,21 +599,28 @@ class SectionBuilder:
 
         def fn(cv, c):
             ps, pe, side, marks = c
-            S.layer_callout(cv, ps, pe, texts, side=side, h=1.8, row_mm=3.6, marks=marks, title=title)
+            _callout(cv, ps, pe, texts, side, marks, title)
         if cands:
             self.placer.place(vp, fn, cands, penalty_step=0.05)
 
     def _place_wall(self, w, its, left):
         vp, k, m = self.vp, self.vp.k, self.m
-        its = sorted(its, key=lambda it: it["s0"])
-        sa = min(it["s0"] for it in its)
-        sb = max(it["s1"] for it in its)
-        kk = m.kondygnacja(w.kond)
         order = list(reversed(w.przegroda.warstwy)) if left else list(w.przegroda.warstwy)
         texts = [layer_text(m, x.mat, x.d) for x in order]
         title = f"{w.przegroda_kod} — {w.przegroda.nazwa}"
         cands = []
-        for zf in (0.55, 0.45, 0.65, 0.35, 0.25, 0.72, 0.18, 0.8):
+        walls = [v for v in self._edge_walls(left=left) if v.przegroda_kod == w.przegroda_kod]
+        combos = []
+        for v in walls:
+            vits = sorted([it for it in self.items if it["p"].meta.get("wall") == v.id], key=lambda it: it["s0"])
+            if vits:
+                for zf in (0.55, 0.45, 0.65, 0.35, 0.25, 0.72, 0.18, 0.8):
+                    combos.append((v, vits, zf))
+        combos.sort(key=lambda t: abs(t[2] - 0.5))
+        for v, its, zf in combos:
+            kk = m.kondygnacja(v.kond)
+            sa = min(it["s0"] for it in its)
+            sb = max(it["s1"] for it in its)
             z = kk.rzedna + kk.wys_kondygnacji * zf
             here = [it for it in its if it["z0"] <= z <= it["z1"]]
             if len(here) < 2:
@@ -626,9 +635,19 @@ class SectionBuilder:
 
         def fn(cv, c):
             ps, pe, side, marks = c
-            S.layer_callout(cv, ps, pe, texts, side=side, h=1.8, row_mm=3.6, marks=marks, title=title)
+            _callout(cv, ps, pe, texts, side, marks, title)
         if cands:
             self.placer.place(vp, fn, cands, penalty_step=0.05)
+
+
+def _callout(cv, ps, pe, texts, side, marks, title):
+    """Opis warstw z maskami pod napisami (czytelność na tle linii widoku)."""
+    from ..draft.core import PText
+    n0 = len(cv.prims)
+    S.layer_callout(cv, ps, pe, texts, side=side, h=1.8, row_mm=3.6, marks=marks, title=title)
+    for p in cv.prims[n0:]:
+        if isinstance(p, PText):
+            p.mask = 0.35
 
 
 def _cls(p):

@@ -158,21 +158,19 @@ class ElevationBuilder:
         mats = sorted(self.mats.items(), key=lambda kv: -kv[1]["area"])
         nr = 0
         for code, e in mats:
-            if e["area"] < float(self.opts.get("min_pow_materialu", 0.15)):
+            if e["area"] < float(self.opts.get("min_pow_materialu", 0.25)):
                 continue
             nr += 1
             name = material_name(m, code)
             rows.append((nr, code, name, material_color(m, code), e["area"]))
             big = max((p for g in e["polys"] for p in polygons_of(g)), key=lambda p: p.area)
-            if big.area < 0.25:
-                continue
             c = label_point(big)
             cands = [(c[0] + dx, c[1] + dy) for dx in (0.0, 0.4, -0.4, 0.8, -0.8) for dy in (0.0, 0.3, -0.3)]
-            cands = [p for p in cands if big.contains(Point(p))] or [tuple(c)]
+            cands = [p for p in cands if big.buffer(-0.12).contains(Point(p))]
 
             def fn(cv, pos, nr=nr):
                 S.tag(cv, pos, str(nr), shape="hex", r_mm=2.6, h=2.5)
-            if self.placer.place(vp, fn, cands, max_cost=6.0)[0] is None:
+            if not cands or self.placer.place(vp, fn, cands, max_cost=6.0)[0] is None:
                 # poza obszarem materiału — z odnośnikiem (kropka w polu materiału)
                 oc = []
                 for dx in (14.0, -14.0, 22.0, -22.0):
