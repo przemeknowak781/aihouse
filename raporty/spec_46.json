@@ -1,4 +1,5 @@
 {
+ "nr": 46,
  "title": "Wszystkie 5 tomów złożone roboczo (Tom I, PT-1…4) · weryfikacje Tomu I: rysunki starsze niż opisy, dwa źródła danych PC → naprawa u źródła",
  "stages": [
   [
@@ -58,6 +59,17 @@
   "Tomy robocze: PZT_PAB_ZL (Tom I), PT-1 AR, PT-2 BO (333 strony obliczeń statycznych z MES płyt, obwiedniami i ugięciami), PT-3 IS (z charakterystyką energetyczną), PT-4 IE.",
   "Weryfikacja FAKTY Tomu I (krytyczne): część rysunkowa starsza niż opis — wysokość 10,28 vs 10,27 m, niecka 24 vs 28 m², odległości zbiornika — wydanie regeneruje rysunki z zamrożonego modelu przed składaniem.",
   "Weryfikacja PRAWO Tomu I (istotne): dwie różne pompy ciepła w PZT i PAB (błąd wywołania obliczeń w module PZT — Φ wskaźnikowe zamiast Φ_HL z PN-EN 12831), brak metryk autorów na arkuszach (RPB § 10), uzgodnienie zjazdu z zarządcą drogi; walidator zaniżał braki — treści zastępcze będą raportowane osobno.",
-  "Zasada naprawy: jedna wielkość = jedno źródło (moduł liczony raz, wynik współdzielony) + blokada składania, gdy rysunek jest starszy niż model."
+  "Zasada naprawy: jedna wielkość = jedno źródło (moduł liczony raz, wynik współdzielony) + blokada składania, gdy rysunek jest starszy niż model.",
+  "NADZÓR (09:41): 6 agentów aktywnych, bez zastojów; najdłuższa bezczynność 2 min; zmiany w repo 0 min temu."
+ ],
+ "images": [
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/ptbo_p.png",
+   "caption": "PT-2 BO s. 18: schemat statyczny i obwiednie MES płyty D1 (etykiety do poprawy)"
+  },
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/pab_pow.png",
+   "caption": "PAB s. 6: program użytkowy z modelu"
+  }
  ]
 }

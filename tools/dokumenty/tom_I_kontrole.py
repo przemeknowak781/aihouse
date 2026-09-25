@@ -109,7 +109,7 @@ def aktualnosc(kod: str, kat: Path | None) -> dict:
     fmt = lambda t: dt.datetime.fromtimestamp(t).strftime("%Y-%m-%d %H:%M")  # noqa: E731
     if nowsze:
         t_mod = max(t for _, t in mod)
-        return kontrola(f"K-{kod}-AKT", f"Aktualność rysunków {kod} względem modelu", pod, "OSTRZEŻENIE",
+        return kontrola(f"K-{kod}-AKT", f"Aktualność rysunków {kod} względem modelu", pod, "BRAK",
                         f"rysunki z {fmt(t_rys)}, model zmieniony {fmt(t_mod)} ({', '.join(nowsze)}) — "
                         f"przed wydaniem wygenerować ponownie (tools/generuj_widoki.py)")
     return kontrola(f"K-{kod}-AKT", f"Aktualność rysunków {kod} względem modelu", pod, "OK",
@@ -151,6 +151,38 @@ def wektorowosc(pdf: Path, arkusze_tomu: list) -> tuple[dict, list[dict]]:
                      f"największy udział rastra {mx * 100:.1f} % (próg {PROG_RASTRA * 100:.0f} %)"
                      + (f"; arkusze zastępcze: {', '.join(zast)}" if zast else ""))
     return k, wiersze
+
+
+def metryki(pdf: Path, arkusze_tomu: list) -> dict:
+    """Metryki arkuszy (RPB § 10 ust. 1 pkt 3): pola projektanta, sprawdzającego i opracowującego wypełnione —
+    danymi albo znacznikiem ``[DO UZUPEŁNIENIA]`` / „nie dotyczy (art. 20 ust. 3 pkt 2 PB)”; pole puste = BRAK."""
+    from lamela.dokumenty.dokument import metryka_arkusza
+    pod = "RPB § 10 ust. 1 pkt 3; PB art. 20 ust. 3 pkt 2; W-305"
+    doc = pymupdf.open(str(pdf))
+    puste, uzup, bez = [], [], []
+    try:
+        for a, s in arkusze_tomu:
+            if getattr(a, "plik", None) is None:
+                continue
+            pg = doc[s - 1]
+            rows = metryka_arkusza(pg)
+            if not rows:
+                bez.append(str(a.nr))
+                continue
+            if any(r["pusty"] for r in rows):
+                puste.append(str(a.nr))
+            elif "DO UZUPEŁNIENIA" in pg.get_text():
+                uzup.append(str(a.nr))
+    finally:
+        doc.close()
+    if puste:
+        return kontrola("K-METRYKA", "Metryki arkuszy — autorzy, uprawnienia, sprawdzający", pod, "BRAK",
+                        f"puste pola metryki: {', '.join(puste)}")
+    st = "DO UZUPEŁNIENIA" if uzup else "OK"
+    return kontrola("K-METRYKA", "Metryki arkuszy — autorzy, uprawnienia, sprawdzający", pod, st,
+                    (f"{len(uzup)} arkuszy z polami [DO UZUPEŁNIENIA] (imię i nazwisko, specjalność i nr uprawnień); "
+                     "sprawdzający: nie dotyczy (art. 20 ust. 3 pkt 2 PB)" if uzup else "metryki wypełnione")
+                    + (f"; bez rozpoznanej tabliczki: {', '.join(bez)}" if bez else ""))
 
 
 def rozmiar(pdf: Path, limit_mb: float = 150.0) -> dict:

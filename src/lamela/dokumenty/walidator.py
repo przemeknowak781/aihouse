@@ -313,6 +313,12 @@ def sprawdz_tom(tom, lista_kontrolna: dict | str | None = None) -> RaportKomplet
                 if zastepczy:
                     st = "DO UZUPEŁNIENIA"
                     szczeg.append("tylko arkusz zastępczy — rysunek niedołączony")
+                # treść zastępcza (rejestr E.1): pozycja jest, ale jej sekcja zawiera znacznik wskazany na liście
+                zast_tr = _szukaj(poz.get("uzupelnic_gdy") or [], zakres["tekst"])
+                if zast_tr:
+                    st = "DO UZUPEŁNIENIA"
+                    szczeg.append(poz.get("uzupelnic_opis") or "treść zastępcza ze znacznikiem [DO UZUPEŁNIENIA] / "
+                                  "[DOKUMENT ZEWNĘTRZNY]")
             else:
                 st = "BRAK" if ob else "OSTRZEŻENIE"
                 if wszystkie:

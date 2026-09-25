@@ -753,11 +753,16 @@ class AudytWT:
         ext = [make_polygon(w["obrys"]) for w in m.wsporniki() if w.get("wierzch", 0) < 9.5 and w["id"].startswith("PL")]
         ext += [make_polygon(d["obrys"]) for d in m.dachy()]
         zab_pl = unary_union([zab] + ext)
+        # wydanie (weryfikacja V1-09; K-3): wartości wskaźników z JEDNEGO źródła `lamela.wskazniki`; metoda audytu — kontrolnie (INFO)
+        from lamela.wskazniki import wskazniki as _wsk
+        W_ = _wsk(m)
+        Az, Azp = float(W_["pow_zabudowy"]["wartosc"]), float(W_["pow_zabudowy_kontrolna"]["wartosc"])
         lim = R.v("pow_zabudowy_max", 0.30 * plot_area)
-        A.add("MPZP", "pow. zabudowy (1) obrys ścian zewn. wszystkich kondygnacji", "A_z", f"{f2(zab.area)} m² ({f2(100 * zab.area / plot_area, 1)} %)",
-              f"≤ {f2(lim)} m²", chk(zab.area <= lim), R.zr("pow_zabudowy_max", "MPZP"))
-        A.add("MPZP", "pow. zabudowy (2) kontrolnie z płytami wysuniętymi", "A_z+", f"{f2(zab_pl.area)} m² ({f2(100 * zab_pl.area / plot_area, 1)} %)",
-              f"≤ {f2(lim)} m²", chk(zab_pl.area <= lim), "rejestr D-06")
+        A.add("MPZP", "pow. zabudowy (1) obrys ścian zewn. wszystkich kondygnacji (lamela.wskazniki)", "A_z",
+              f"{f2(Az)} m² ({f2(100 * Az / plot_area, 1)} %)", f"≤ {f2(lim)} m²", chk(Az <= lim), R.zr("pow_zabudowy_max", "MPZP"))
+        A.add("MPZP", "pow. zabudowy (2) kontrolnie z płytami wysuniętymi (lamela.wskazniki)", "A_z+",
+              f"{f2(Azp)} m² ({f2(100 * Azp / plot_area, 1)} %); metoda audytu: {f2(zab_pl.area)} m²",
+              f"≤ {f2(lim)} m²", chk(Azp <= lim), "rejestr D-06")
         # intensywność (nadziemna)
         suma = sum(g.area for g in outl.values())
         lo, hi = R.v("intensywnosc_zakres", [0.05, 0.80])
@@ -786,7 +791,9 @@ class AudytWT:
             uszcz.append(Point(*zb["xy"]).buffer(math.sqrt(a / math.pi)))
             opis.append(f"teren nad zbiornikiem ≈ {f2(a, 1)} m² wyłączony (W-031)")
         U = unary_union(uszcz).intersection(self.plot)
-        pbc = self.plot.area - U.area
+        pbc_audyt = self.plot.area - U.area
+        pbc = float(W_["pbc"]["wartosc"])
+        opis.append(f"wartość z lamela.wskazniki; metoda audytu kontrolnie {f2(pbc_audyt)} m²")
         dach_ziel = sum(make_polygon(d["obrys"]).area for d in m.dachy()
                         if "ziel" in str(d.get("uwagi", "")).lower() or d.get("przegroda") == "DZ1")
         lim = R.v("PBC_min", 0.5 * plot_area)
@@ -1027,25 +1034,65 @@ class AudytWT:
                   chk(d >= R.v("odl_ppoz_ZL_ZL", 8.0) and d >= hb), R.zr("odl_ppoz_ZL_ZL", "WT §271") + "; WT §13, §60")
 
     def _wentylacja(self):
+        """WT §152 (t.j. Dz.U. 2022 poz. 1225): ust. 4 (czerpnia dachowa), ust. 7 (wyrzutnia z wylotem poziomym — 0,4 m nad
+        powierzchnią i nad linią najwyższych punktów części budynku w promieniu 10 m; wydanie — weryfikacja V2 N-1), ust. 10–11
+        (czerpnia–wyrzutnia na dachu: ≥ 10 m przy wyrzucie poziomym / ≥ 6 m przy pionowym, wyrzutnia ≥ 1 m ponad czerpnią —
+        brzmienie dosłowne; zestaw zblokowany — ust. 11), ust. 12–13. Czerpnia i wyrzutnia mogą leżeć na różnych dachach."""
         R, A, m = self.R, self.A, self.m
         went = ((self.B.get("energia") or {}).get("wentylacja") or {})
         cz, wy = went.get("czerpnia"), went.get("wyrzutnia")
         if not cz or not wy:
             return
-        D1 = next((d for d in m.dachy() if make_polygon(d["obrys"]).contains(Point(*cz[:2]))), None)
+        dach_w = lambda p_: next((d for d in m.dachy() if make_polygon(d["obrys"]).contains(Point(*p_[:2]))), None)  # noqa: E731
+        D_cz, D1 = dach_w(cz), dach_w(wy)
         if D1 is None:
             return
         wyw = [(p[0], p[1]) for p in (went.get("wywiewki_kanalizacyjne") or [])]
-        z_cz_roof = self.pokrycie_lokalne(D1, *cz[:2])
+        poziomy = str(went.get("wyrzut", "poziomy")) == "poziomy"
+        if D_cz is not None:
+            z_cz_roof = self.pokrycie_lokalne(D_cz, *cz[:2])
+            A.add("Wentylacja", f"czerpnia dachowa ({D_cz['id']})", "wysokość nad pokryciem (lokalnie, klin)",
+                  f"{f2(cz[2] - z_cz_roof, 3)} m (pokrycie ≈ +{f2(z_cz_roof, 3)})", "≥ 0,40",
+                  chk(cz[2] - z_cz_roof >= 0.4 - 1e-6, soft=True), R.zr("czerpnia_dachowa_nad_powierzchnia_min", "WT §152 ust. 4"),
+                  "" if cz[2] - z_cz_roof >= 0.4 else f"dolna krawędź otworu czerpni ≥ +{f2(z_cz_roof + 0.40, 2)}",
+                  miejsce=f"{cz}")
         z_wy_roof = self.pokrycie_lokalne(D1, *wy[:2])
-        A.add("Wentylacja", "czerpnia dachowa", "wysokość nad pokryciem (lokalnie, klin)",
-              f"{f2(cz[2] - z_cz_roof, 3)} m (pokrycie ≈ +{f2(z_cz_roof, 3)})", "≥ 0,40",
-              chk(cz[2] - z_cz_roof >= 0.4 - 1e-6, soft=True), R.zr("czerpnia_dachowa_nad_powierzchnia_min", "WT §152 ust. 4"),
-              "" if cz[2] - z_cz_roof >= 0.4 else f"dolna krawędź otworu czerpni ≥ +{f2(z_cz_roof + 0.40, 2)}",
-              miejsce=f"{cz}")
-        A.add("Wentylacja", "wyrzutnia dachowa", "wysokość nad pokryciem (lokalnie, klin)",
-              f"{f2(wy[2] - z_wy_roof, 3)} m", "≥ 0,40", chk(wy[2] - z_wy_roof >= 0.4 - 1e-6, soft=True),
-              R.zr("wyrzutnia_dachowa_nad_powierzchnia_min", "WT §152 ust. 7"), miejsce=f"{wy}")
+        A.add("Wentylacja", f"wyrzutnia dachowa ({D1['id']}, wylot {'poziomy' if poziomy else 'pionowy'})",
+              "wysokość nad pokryciem (lokalnie, klin)", f"{f2(wy[2] - z_wy_roof, 3)} m", "≥ 0,40",
+              chk(wy[2] - z_wy_roof >= 0.4 - 1e-6, soft=True), R.zr("wyrzutnia_dachowa_nad_powierzchnia_min", "WT §152 ust. 7"),
+              miejsce=f"{wy}")
+        # ust. 7 — linia najwyższych punktów części budynku wystających ponad dach w promieniu 10 m (tylko wylot poziomy)
+        pk = []
+        for d in m.dachy():
+            att = d.get("attyka") if isinstance(d.get("attyka"), dict) else None
+            if att and make_polygon(d["obrys"]).exterior.distance(Point(*wy[:2])) <= 10.0:
+                pk.append((self._pokrycie(d)[1] + float(att.get("wys_nad_pokryciem", 0.0)), f"attyka {d['id']}"))
+        for p in (went.get("wywiewki_kanalizacyjne") or []):
+            if len(p) >= 3 and math.hypot(p[0] - wy[0], p[1] - wy[1]) <= 10.0:
+                pk.append((float(p[2]), "wywiewka"))
+        for w in m.wsporniki():
+            if w.get("id") in ("SW1", "WYL1") or str(w.get("mat", "")).startswith("SZKLO"):
+                if make_polygon(w["obrys"]).distance(Point(*wy[:2])) <= 10.0:
+                    pk.append((float(w["wierzch"]), str(w["id"])))
+        pv = ((self.B.get("energia") or {}).get("pv") or {})
+        for pole in pv.get("pola") or []:
+            mods = pole.get("moduly") or []
+            if mods and pole.get("z_max") is not None and min(math.hypot((b[0] + b[2]) / 2 - wy[0], (b[1] + b[3]) / 2 - wy[1])
+                                                           for b in mods) <= 10.0:
+                pk.append((float(pole["z_max"]), f"PV {pole.get('dach')}"))
+        if D_cz is not None and math.hypot(cz[0] - wy[0], cz[1] - wy[1]) <= 10.0:
+            pk.append((float(went.get("czerpnia_z_top") or cz[2]), "czerpnia"))
+        zpk, npk = max(pk) if pk else (z_wy_roof, "pokrycie")
+        if poziomy:
+            A.add("Wentylacja", "wyrzutnia (wylot poziomy) ↔ najwyższe punkty w promieniu 10 m", "dolna krawędź wylotu nad linią",
+                  f"{f2(wy[2] - zpk, 3)} m (najwyżej: {npk} +{f2(zpk, 3)})", "≥ 0,40", chk(wy[2] - zpk >= 0.4 - 1e-6),
+                  "WT §152 ust. 7; W-167; R6-43",
+                  "" if wy[2] - zpk >= 0.4 else f"wylot ≥ +{f2(zpk + 0.40, 2)} albo wylot pionowy (ust. 7 dotyczy wylotu poziomego)",
+                  miejsce=f"energia.wentylacja.wyrzutnia {wy}")
+        else:
+            A.add("Wentylacja", "wyrzutnia (wylot pionowy) ↔ najwyższe punkty w promieniu 10 m", "ust. 7 — tylko wylot poziomy",
+                  f"nie dotyczy (wylot pionowy; informacyjnie {f2(wy[2] - zpk, 3)} m nad {npk})", "—", "INFO",
+                  "WT §152 ust. 7; W-167", miejsce=f"energia.wentylacja.wyrzutnia {wy}")
         for p in wyw:
             d = math.hypot(cz[0] - p[0], cz[1] - p[1])
             A.add("Wentylacja", "czerpnia ↔ wywiewka kanalizacyjna", "odległość", f"{f2(d)} m", "≥ 6,00",
@@ -1055,17 +1102,17 @@ class AudytWT:
         l10 = R.v("czerpnia_wyrzutnia_dach_wyrzut_poziomy_min", 10.0)
         l6 = R.v("czerpnia_wyrzutnia_dach_wyrzut_pionowy_min", 6.0)
         dzl = R.v("wyrzutnia_ponad_czerpnia_min", 1.0)
-        ok = d >= l10 - 1e-6 or (d >= l6 and dz >= dzl - 1e-6) or bool(went.get("zestaw_zblokowany"))
-        # propozycja położeń: wyrzutnia ≥ 3 m od krawędzi dachu nad oknami, czerpnia ≥ 6 m od wywiewek, odl. ≥ 10 m
-        prop = self._propozycja_went(D1, cz, wy, wyw) if not ok else None
+        lwym = l10 if poziomy else l6
+        ok = (d >= lwym - 1e-6 and dz >= dzl - 1e-6) or bool(went.get("zestaw_zblokowany"))
+        prop = self._propozycja_went(D1, cz, wy, wyw) if not ok and D_cz is D1 else None
         A.add("Wentylacja", "czerpnia ↔ wyrzutnia (dach)", "odległość / wyrzutnia wyżej o",
-              f"{f2(d)} m / {f2(dz, 2)} m", f"≥ {f2(l10)} m, albo ≥ {f2(l6)} m przy wyrzutni ≥ {f2(dzl)} m wyżej (lub zestaw zblokowany)",
+              f"{f2(d)} m / {f2(dz, 2)} m", f"≥ {f2(lwym)} m (wyrzut {'poziomy' if poziomy else 'pionowy'}) i wyrzutnia ≥ {f2(dzl)} m "
+              "ponad czerpnią (lub zestaw zblokowany — ust. 11)",
               chk(ok), R.zr("czerpnia_wyrzutnia_dach_wyrzut_poziomy_min", "WT §152 ust. 10") + "; R6-43",
-              "" if ok else (f"rozsunąć na ≥ {f2(l10)} m, np. czerpnia ({f2(prop[0][0])}; {f2(prop[0][1])}), wyrzutnia "
-                             f"({f2(prop[1][0])}; {f2(prop[1][1])}) → {f2(prop[2])} m (wyrzutnia {f2(prop[3])} m od krawędzi dachu nad oknami; "
-                             f"czerpnia {f2(prop[4])} m od wywiewki); rzędne wylotów ≥ pokrycie lokalne + 0,40; "
-                             "alternatywnie podnieść wyrzutnię ≥ 1,0 m ponad czerpnię (sprawdzić wys. zabudowy) albo zestaw zblokowany"
-                             if prop else "rozsunąć na ≥ 10 m lub podnieść wyrzutnię ≥ 1,0 m ponad czerpnię"),
+              "" if ok else (f"rozsunąć na ≥ {f2(lwym)} m i podnieść wyrzutnię ≥ {f2(dzl)} m ponad czerpnię (sprawdzić wys. zabudowy) "
+                             "albo czerpnia na niższym dachu / zestaw zblokowany" +
+                             (f"; np. czerpnia ({f2(prop[0][0])}; {f2(prop[0][1])}), wyrzutnia ({f2(prop[1][0])}; {f2(prop[1][1])})"
+                              if prop else "")),
               miejsce=f"energia.wentylacja: czerpnia {cz}, wyrzutnia {wy}")
         # wyrzutnia od okien w dachu (świetliki) — WT §152 ust. 12
         for w in m.wsporniki():

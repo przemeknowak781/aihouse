@@ -863,13 +863,25 @@ def metryka_arkusza(page: pymupdf.Page) -> list[dict]:
     if hdr is None or spec is None:
         return []
     data = next((x for x in w if x[4] == "DATA" and abs(x[1] - hdr[1]) < 3 and x[0] > spec[0]), None)
-    x_data = data[0] if data else spec[0] + 2 * (spec[0] - hdr[0])
+    ym = (hdr[1] + hdr[3]) / 2
+    pion = sorted({round(a.x, 1) for d in page.get_drawings() for it in d["items"] if it[0] == "l"
+                   for a, b in [(it[1], it[2])] if abs(a.x - b.x) < 0.3 and min(a.y, b.y) - 0.5 <= ym <= max(a.y, b.y) + 0.5}
+                  | {round(x, 1) for d in page.get_drawings() for it in d["items"] if it[0] == "re"
+                     for r in [it[1]] if r.y0 - 0.5 <= ym <= r.y1 + 0.5 for x in (r.x0, r.x1)})
+
+    def granice(x0, x1):          # kolumna tabliczki zawierająca nagłówek [x0, x1] (linie pionowe rysunku)
+        lewe, prawe = [v for v in pion if v <= x0 + 0.5], [v for v in pion if v >= x1 - 0.5]
+        return (lewe[-1] if lewe else x0 - 2), (prawe[0] if prawe else x1 + 2)
+    x_nazw, _ = granice(hdr[0], w[w.index(hdr) + 2][2])
+    x_spec, x_data = granice(spec[0], spec[2] + 40 if not data else data[0] - 1)
+    if data is not None:
+        x_data = granice(data[0], data[2])[0]
     out = []
     for x in w:
-        if x[4] in WIERSZE_METRYKI and hdr[3] < x[1] < hdr[3] + 90 and x[2] <= hdr[0] + 1:
+        if x[4] in WIERSZE_METRYKI and hdr[3] < x[1] < hdr[3] + 90 and x[2] <= x_nazw + 1:
             y0, y1 = x[1] - 1.5, x[3] + 1.5
-            zajety = any(hdr[0] - 1 <= v[0] < x_data - 1 and v[1] < y1 and v[3] > y0 for v in w)
-            out.append(dict(funkcja=x[4], rect=pymupdf.Rect(x[:4]), x_nazw=hdr[0], x_spec=spec[0], x_data=x_data,
+            zajety = any(x_nazw + 0.5 <= v[0] < x_data - 0.5 and v[1] < y1 and v[3] > y0 for v in w)
+            out.append(dict(funkcja=x[4], rect=pymupdf.Rect(x[:4]), x_nazw=x_nazw, x_spec=x_spec, x_data=x_data,
                             pusty=not zajety))
     return out
 
@@ -890,8 +902,8 @@ def uzupelnij_metryke(page: pymupdf.Page) -> int:
             t1, t2 = do_uzup("imię i nazwisko"), do_uzup("specjalność, nr uprawnień")
         y = r["rect"].y1 - 1.2
         for t, x0, x1 in ((t1, r["x_nazw"], r["x_spec"]), (t2, r["x_spec"], r["x_data"])):
-            s = min(5.5, 0.94 * (x1 - x0 - 2) / max(f.text_length(t, 1), 1e-6))
-            page.insert_text((x0 + 0.5, y), t, fontname="lsr", fontsize=s, color=(0.36, 0.28, 0.0))
+            s = min(5.5, 0.92 * (x1 - x0 - 3) / max(f.text_length(t, 1), 1e-6))
+            page.insert_text((x0 + 1.5, y), t, fontname="lsr", fontsize=s, color=(0.36, 0.28, 0.0))
     return len(rows)
 
 

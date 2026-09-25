@@ -124,7 +124,7 @@ def main(argv=None) -> int:
     k_wekt, wekt = K.wektorowosc(w.sciezka, w.arkusze)
     kontrole = [K.rozmiar(w.sciezka), k_wekt, K.metadane(w.sciezka), K.spis_zalacznikow(w.sciezka),
                 K.zgodnosc_z_raportem("PZT", K.KAT_PZT, ark_pzt), K.zgodnosc_z_raportem("PAB", kat_pab, ark_pab),
-                K.aktualnosc("PZT", K.KAT_PZT), K.aktualnosc("PAB", kat_pab)]
+                K.aktualnosc("PZT", K.KAT_PZT), K.aktualnosc("PAB", kat_pab), K.metryki(w.sciezka, w.arkusze)]
     otwarte = dict(PAB=list(D.otwarte), rysunki_PZT=K.problemy_generatora(K.KAT_PZT),
                    rysunki_PAB=K.problemy_generatora(kat_pab))
     zrodla = dict(PZT=K._rel(K.KAT_PZT), PAB=K._rel(kat_pab), PAB_info=info_pab)

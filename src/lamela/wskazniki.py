@@ -228,7 +228,12 @@ def punkty_najwyzsze(model, ir=None) -> list[tuple]:
     for kk in ("czerpnia", "wyrzutnia"):
         v = went.get(kk)
         if isinstance(v, (list, tuple)) and len(v) >= 3:
-            out.append((float(v[2]), f"{kk} wentylacji (dachowa)", "budynek.yaml: energia.wentylacja", False))
+            zt = went.get(f"{kk}_z_top")      # maks. wysokość urządzenia (kołpak, deflektor) — wydanie, weryfikacja V2 N-2
+            if zt is not None and float(zt) > float(v[2]):
+                out.append((float(zt), f"{kk} wentylacji (dachowa, szczyt urządzenia)", f"budynek.yaml: energia.wentylacja.{kk}_z_top",
+                            False))
+            else:
+                out.append((float(v[2]), f"{kk} wentylacji (dachowa)", "budynek.yaml: energia.wentylacja", False))
     roof_top = max((_pokrycie(model, d)[1] for d in model.dachy()), default=0.0)
     for i, v in enumerate(went.get("wywiewki_kanalizacyjne") or []):
         if isinstance(v, (list, tuple)) and len(v) >= 3:

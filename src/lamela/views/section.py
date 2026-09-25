@@ -145,9 +145,21 @@ def terrain_profile(ctx: ViewContext, o, R, s0: float, s1: float, step: float = 
 
 
 def building_height(ctx: ViewContext) -> dict:
-    """Wysokość budynku wg § 6 WT: od terenu przy najniżej położonym wejściu (drzwi zewnętrzne na najniższej
-    kondygnacji nadziemnej) do wierzchu najwyżej położonego stropodachu (z warstwami izolacji i osłony, bez attyk)."""
+    """Wysokość budynku wg § 6 WT — JEDNO ŹRÓDŁO: ``lamela.wskazniki.wskazniki()["wysokosc_WT6"]`` (wydanie, weryfikacja V1-03;
+    K-3). Gdy moduł nie zwróci wartości (model bez działki) — metoda zastępcza: teren IR przy najniżej położonym wejściu do
+    wierzchu najwyżej położonego stropodachu (bez attyk)."""
     m = ctx.model
+    try:
+        from ..wskazniki import wskazniki
+        w6 = wskazniki(m).get("wysokosc_WT6") or {}
+        if w6.get("wartosc") is not None and w6.get("H_teren") is not None:
+            z0 = float(((m.raw or {}).get("uklad") or {}).get("zero_abs", 0.0))
+            z_att = max([float(sl.get("top_attyki") or sl["top"]) for sl in m.plyty() if sl["typ"] == "dach"]
+                        or [float(w6["z_top"])])
+            return dict(z_ent=float(w6["H_teren"]) - z0, wejscie=w6.get("wejscie"), z_top=float(w6["z_top"]),
+                        dach=w6.get("dach"), H=float(w6["wartosc"]), z_attyka=z_att, zrodlo="lamela.wskazniki")
+    except Exception:  # noqa: BLE001 — metoda zastępcza poniżej
+        pass
     terr = ctx.ir.terrain
     ent = []
     k0 = m.kondygnacje[0].id if m.kondygnacje else None
