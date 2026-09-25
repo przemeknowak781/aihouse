@@ -802,6 +802,59 @@ WSP = [
               "i jednostkę PC; dach garażu nieużytkowy — PL-D nie jest tarasem (decyzja 2)"},
 ]
 
+# ---- runda 2 — ODWODNIENIE PŁYT WYSUNIĘTYCH (R-W1, weryfikacja §6 B1, BRAKI PT-IS poz. 1–11; brief §9 pkt 3):
+#      spadek ≥ 2 % od budynku do czoła, RYNNA UKRYTA za blendą czołową (korytko stal nierdzewna / blacha powlekana 0,7 mm, spadek
+#      0,5 % do wylotu), wyloty DN70 → rury spustowe DN80 przy ścianach (nie w polu tarasu), kapinosy ≥ 3 cm na blendzie i podsufitce;
+#      rynna mocowana do czoła płyty za blendą — poza strefą łącznika termoizolacyjnego. Q = r·A (r = 0,046 l/(s·m²), W-142).
+#      Kaskada: PL-3 → (rury w szczelinie za lamelami LAM-W / LAM-E) → rynna PL-2; PL-C1/PL-C2 (rama C) → PL-E / PL-D (obróbka
+#      z okapnikiem, powierzchnie ≤ 10 m² nad płytą z rynną). Elementy osłonięte (IZ-ST2Z, PS-A, OB-A…) i świetlik/wyłaz na D1 — bez
+#      własnego odwodnienia (woda na pokrycie D1).
+def _RS(rid, xy, do, opis, dn=80, trasa="zewn", od=0):
+    return {"id": rid, "od_wpustu": od, "trasa": trasa, "xy_pion": [r(xy[0]), r(xy[1])], "dn": dn, "do": do, "opis": opis}
+
+
+_RYNNA = "rynna ukryta za blendą czołową (korytko 100 mm, spadek 0,5 % do wylotu), kapinos ≥ 3 cm, podgrzewanie przewodem grzejnym przy wylocie"
+_ODW = {
+    "PL-E": {"odwodnienie": {"typ": "rynna_ukryta", "opis": _RYNNA + "; rynna pd. → wylot E (x 13,70), rynna zach. → wylot N (y 4,95)"},
+             "wpusty": [{"xy": [13.70, -1.20], "dn": 70, "podgrzewany": True, "opis": "wylot rynny pd. (SE)"},
+                        {"xy": [-1.70, 4.95], "dn": 70, "podgrzewany": True, "opis": "wylot rynny zach. (NW)"}],
+             "rury_spustowe": [_RS("RS8", (13.70, -EXT - 0.06), "zbiornik", "ściana pd. pasa gosp. (x 13,70, na wsch. od DZ3; łącznik 0,9 m "
+                                   "w podsufitce), czyszczak, KD-E; 3,1 m od jedn. PC (> 1 m — W-156)"),
+                               _RS("RS7", (-EXT - 0.06, 5.25), "zbiornik", "ściana zach. P0 (y 5,25, na pn. od HS2; łącznik 1,4 m w podsufitce), "
+                                   "czyszczak, KD-W; wspólna z rynną zach. PL-2", od=1)]},
+    "PL-DA": {"odwodnienie": {"typ": "rynna_ukryta", "opis": _RYNNA + "; spadek do wylotu W"},
+              "wpusty": [{"xy": [9.50, 10.25], "dn": 70, "podgrzewany": True, "opis": "wylot rynny daszka (NW)"}],
+              "rury_spustowe": [_RS("RS4", (9.20, y4 + EXT + 0.06), "zbiornik", "wspólna z D3 (pion zewn. na elewacji pn., 0,20 m na zach. "
+                                    "od daszka); łącznik DN70 w podsufitce daszka", dn=100)]},
+    "PL-2": {"odwodnienie": {"typ": "rynna_ukryta", "opis": _RYNNA + "; rynna pd. i pas wsch. → wylot NE (spływ na D4), rynna zach. → wylot NW; "
+                             "przyjmuje wodę z PL-3 (rury w szczelinie za lamelami)"},
+             "wpusty": [{"xy": [12.50, 5.30], "dn": 70, "podgrzewany": True, "opis": "wylot NE (pas wsch. 0,30 m)"},
+                        {"xy": [-2.30, 5.30], "dn": 70, "podgrzewany": True, "opis": "wylot NW (pas zach.)"}],
+             "rury_spustowe": [_RS("RS10", (xE + EXT + 0.06, 5.30), "dach D4", "ściana wsch. bryły B (P1), z = +5,85 → +3,40, wylot "
+                                   "z kolanem na opaskę żwirową dachu D4 (WP5/WP6 — zapas przepustowości)"),
+                               _RS("RS7", (-EXT - 0.06, 5.25), "zbiornik", "łącznik w podsufitce PS-A do ściany P1, dalej jak PL-E", od=1)]},
+    "PL-3": {"odwodnienie": {"typ": "rynna_ukryta", "opis": _RYNNA + "; wyloty NE/NW → rury DN70 w szczelinie za lamelami LAM-E / LAM-W "
+                             "do rynny PL-2"},
+             "wpusty": [{"xy": [12.50, 5.30], "dn": 70, "podgrzewany": True, "opis": "wylot NE"},
+                        {"xy": [-2.30, 5.30], "dn": 70, "podgrzewany": True, "opis": "wylot NW"}],
+             "rury_spustowe": [_RS("RS11", (xE + EXT + 0.08, 5.20), "PL-2", "w szczelinie za lamelami LAM-E, +8,98 → +6,15", dn=70),
+                               _RS("RS12", (X2o - 0.08, 5.20), "PL-2", "w szczelinie za lamelami LAM-W, +8,98 → +6,15", dn=70, od=1)]},
+    "PL-D": {"odwodnienie": {"typ": "rynna_ukryta", "opis": _RYNNA + "; spadek do wylotu W — linia kapania NIE nad jednostką PC"},
+             "wpusty": [{"xy": [13.90, -1.20], "dn": 70, "podgrzewany": True, "opis": "wylot rynny linii D (W)"}],
+             "rury_spustowe": [_RS("RS8", (13.70, -EXT - 0.06), "zbiornik", "wspólna z PL-E")]},
+}
+for _w in WSP:
+    _o = _ODW.get(_w["id"])
+    if _o:
+        _w.update(_o, spadek=0.02)
+    elif _w["id"] in ("PL-C1", "PL-C2"):
+        _w.update(spadek=0.02, odwodnienie={"typ": "na_powierzchnie", "odbiornik": "PL-E / PL-D",
+                                            "opis": "obróbka ramy C ze spadkiem 2 % od budynku, okapnik ≥ 3 cm — spływ na płytę PL-E / PL-D z rynną"})
+    elif _w["id"] in ("SW1", "WYL1"):
+        _w["odwodnienie"] = {"typ": "na_powierzchnie", "odbiornik": "D1", "opis": "na pokrycie D1 (wpusty WP1/WP2)"}
+    elif _w["id"] in ("IZ-ST2Z", "PS-A", "OB-A", "OB-A2"):
+        _w["odwodnienie"] = {"typ": "nie_dotyczy", "opis": "element osłonięty płytą PL-2 (nie jest polem dachu)"}
+
 
 # =====================================================================================================================
 # 8. SŁUPY, BELKI, NADPROŻA, FUNDAMENTY, SCHODY, BALUSTRADY/POCHWYTY, LAMELE, TARASY

@@ -593,6 +593,10 @@ def dane_z_modelu(budynek, dzialka=None, wyposazenie=None, instalacje=None, stri
     for w in m.wsporniki():
         if not w.get("obrys"):
             continue
+        # elementy bez własnego pola odwodnienia (runda 2, weryfikacja §6 C11): osłonięte płytą (`nie_dotyczy`) albo
+        # oddające wodę na inną powierzchnię z odwodnieniem (`na_powierzchnie` — świetlik/wyłaz na dachu, rama C nad okapem)
+        if str((w.get("odwodnienie") or {}).get("typ", "")) in ("nie_dotyczy", "na_powierzchnie"):
+            continue
         P = make_polygon(w["obrys"])
         prz = m.przegroda(str(w.get("przegroda"))) if w.get("przegroda") else None
         wierzch = float(w.get("wierzch", 0.0))
