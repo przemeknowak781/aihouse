@@ -525,7 +525,8 @@ UWAGI_ZBR = [
     "Pręty łączyć na zakład l₀ (tabela w stopce zestawienia), styki mijankowo — w jednym przekroju ≤ 50 % prętów; "
     "odstęp w świetle prętów ≥ max(φ; d_g + 5 mm; 20 mm) — PN-EN 1992-1-1 8.2(2), 8.7.2; pręty dolne w strefie "
     "podpory zakotwić ≥ 10φ za licem (9.3.1.2(1) → 9.2.1.5).",
-    "Betonowanie: beton wg PN-EN 206+A2 i PN-B-06265 (klasa, ekspozycja, D_max 16 mm, konsystencja S3); pielęgnacja ≥ 7 "
+    "Betonowanie: beton wg PN-EN 206+A2 i PN-B-06265 (normy wycofane — stosowane jako wiedza techniczna, rejestr D-09; "
+    "deklarację betonu wg PN-EN 206-1:2026-09 potwierdzić z wytwórnią) (klasa, ekspozycja, D_max 16 mm, konsystencja S3); pielęgnacja ≥ 7 "
     "dni (klasa pielęgnacji 2 — PN-EN 13670 p. 8.5); przerwy robocze wyłącznie w miejscach uzgodnionych z projektantem.",
     "Rozszalowanie i usunięcie podpór: płyty i belki po uzyskaniu ≥ 70 % f_ck (PN-EN 13670 p. 5.6 i 8.5), wsporniki — "
     "nie wcześniej niż po 28 dniach i po wykonaniu elementów dociążających zaplecze; podpory wtórne do 28 dni.",
@@ -989,7 +990,14 @@ def widok_fundamenty(ctx: ViewContext, spec: dict, scale: float, opts: dict):
             else:                               # słup ŻB (trzpień w murze) — kreskowanie żelbetu, opis
                 H.hatch(vp, g_, "ZELBET")
                 vp.geom(g_, L_OBR, pen="gruba")
-                vp.text((x + a / 2 + 0.05, y + b / 2 + 0.05), str(c["id"]), 2.5, 0, "left", "bottom", L_OPS)
+                placer.add(g_.buffer(0.02), "area", 1.0)
+
+                def draw_sl(c_, pos, _t=str(c["id"])):
+                    c_.text(pos, _t, 2.5, 0, "center", "middle", L_OPS, mask=0.6)
+                d_ = max(a, b) / 2 + 0.25
+                placer.place(vp, draw_sl, [(x + dx_, y + dy_) for dx_, dy_ in ((d_, 0.0), (-d_, 0.0), (0.0, d_), (0.0, -d_),
+                                                                               (d_, d_), (-d_, d_), (d_, -d_), (-d_, -d_))],
+                             penalty_step=0.2)
     # płyta
     if P is not None:
         vp.geom(P, L_OBR, pen="gruba")
