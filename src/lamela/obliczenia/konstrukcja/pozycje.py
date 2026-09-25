@@ -554,9 +554,6 @@ class AnalizaKonstrukcji:
         tops = [e.wierzch for e in g.el]
         g.podp_l, g.podp_p = [], []
         g.sciany_pod = []
-        # słupy żelbetowe (trzpienie w murze) z głowicą pod płytą lub pod belką tej płyty (≤ 0,7 m) — podpory punktowe płyty
-        slupy_zb = [c for c in m.slupy() if self._slup_zelbetowy(c) and min(spody) - 0.7 <= float(c["z_do"]) <= max(spody) + TOL_Z
-                    and g.poly.buffer(0.05).contains(Point(*c["xy"]))]
         for w in m.sciany():
             if w.typ not in TYPY_NOSNE:
                 continue
@@ -570,22 +567,13 @@ class AnalizaKonstrukcji:
             # opiera się na belce (podpora liniowa „belka”), belka na swoich podporach (słupy, ściany)
             linie = [ln]
             kor = self._odcinki_na_belkach(w, "belka_w_koronie")
-            # słupy żelbetowe w murze (trzpienie) pod płytą: odcinek osi ściany w obrysie słupa nie jest podporą muru —
-            # płyta opiera się na słupie (podpora punktowa, niżej); skupienia reakcji w węzłach ścian/belek → słup
-            for c in slupy_zb:
-                a_s, b_s = _wymiary_slupa(str(c.get("przekroj")))
-                rect = box(c["xy"][0] - a_s / 2, c["xy"][1] - b_s / 2, c["xy"][0] + a_s / 2, c["xy"][1] + b_s / 2)
-                it = ln.intersection(rect)
-                if isinstance(it, LineString) and it.length > 0.02:
-                    s_a, s_b = sorted(w.st(p_)[0] for p_ in (it.coords[0], it.coords[-1]))
-                    kor = kor + [(c, s_a, s_b)]
             if kor:
                 wolne = [(0.0, w.L)]
                 for _, a_, c_ in kor:
                     wolne = [q for s0_, s1_ in wolne for q in ((s0_, min(s1_, a_)), (max(s0_, c_), s1_)) if q[1] - q[0] > 0.10]
                 linie = [LineString([tuple(w.pt(s0_, 0.0)), tuple(w.pt(s1_, 0.0))]) for s0_, s1_ in wolne]
-                self.log(f"{w.id}: odcinki pod belkami w koronie / w obrysie słupów ŻB ({', '.join(str(b_['id']) for b_, _, _ in kor)}) "
-                         f"wyłączone z podparcia płyty {g.nazwa} — płyta oparta na belce/słupie.")
+                self.log(f"{w.id}: odcinki pod belkami w koronie ({', '.join(str(b_['id']) for b_, _, _ in kor)}) wyłączone z "
+                         f"podparcia płyty {g.nazwa} — płyta oparta na belce (model: belka_w_koronie).")
             k = 0
             for ln_ in linie:
                 for piece in self._snap_linia(ln_, g.poly):
@@ -633,8 +621,8 @@ class AnalizaKonstrukcji:
                 g.podp_l.append(PodporaLiniowa(sid, piece, "przegub", "belka"))
                 g.belki.append((sid, b))
         for c in m.slupy():
-            if (any(abs(float(c["z_do"]) - s) < TOL_Z for s in spody) and g.poly.buffer(0.05).contains(Point(*c["xy"]))) \
-                    or c in slupy_zb:
+            if any(abs(float(c["z_do"]) - s) < TOL_Z for s in spody) and g.poly.buffer(0.05).contains(Point(*c["xy"])) \
+                    and not self._slupy_w_scianach_ids().get(str(c["id"])):
                 g.podp_p.append(PodporaPunktowa(str(c["id"]), tuple(c["xy"])))
 
     @staticmethod
@@ -860,6 +848,40 @@ class AnalizaKonstrukcji:
             return False
         kr = (mat.kreskowanie or "").upper()
         return "ZELBET" in kr or "ŻELBET" in kr or klasa_betonu_z_nazwy(mat.nazwa) is not None
+
+    def _slupy_w_scianie(self, w) -> list:
+        """[(słup, s_a, s_b)] — słupy żelbetowe w murze (trzpienie) w obrysie ściany ``w`` tej samej kondygnacji (głowica
+        ≤ 0,7 m pod koroną ściany): odcinek osi ściany w obrysie słupa [s_a; s_b]. Obciążenia korony ściany na tym odcinku
+        (reakcje płyt, oparcia belek, ściany wyżej) przejmuje słup — mur jest przerwany słupem [ZAŁ]."""
+        out = []
+        ln = w.axis_line()
+        for c in self.m.slupy():
+            if not self._slup_zelbetowy(c):
+                continue
+            if not (w.z_do - 0.7 <= float(c["z_do"]) <= w.z_do + TOL_Z and float(c["z_od"]) <= w.z_od + 0.7):
+                continue
+            a_s, b_s = _wymiary_slupa(str(c.get("przekroj")))
+            rect = box(c["xy"][0] - a_s / 2, c["xy"][1] - b_s / 2, c["xy"][0] + a_s / 2, c["xy"][1] + b_s / 2)
+            it = ln.intersection(rect.buffer(0.005, join_style=2))
+            if isinstance(it, LineString) and it.length > 0.02:
+                s_a, s_b = sorted(w.st(p_)[0] for p_ in (it.coords[0], it.coords[-1]))
+                out.append((c, max(s_a, 0.0), min(s_b, w.L)))
+        return out
+
+    def _slupy_w_scianach_ids(self) -> dict:
+        """id słupa → [id ścian], w których obrysie stoi (trzpienie) — cache."""
+        if getattr(self, "_cache_slupy_sc", None) is None:
+            d = {}
+            for w in self.m.sciany():
+                if w.typ in TYPY_NOSNE:
+                    for c, _, _ in self._slupy_w_scianie(w):
+                        d.setdefault(str(c["id"]), []).append(w.id)
+            self._cache_slupy_sc = d
+        return self._cache_slupy_sc
+
+    def _do_slupa(self, c, cs: str, P: float):
+        d_ = self.slupy_N.setdefault(str(c["id"]), {})
+        d_[cs] = d_.get(cs, 0.0) + P
 
     def _slup_ponizej(self, c):
         """Słup kontynuowany poniżej (ta sama oś pionowa ±5 cm, góra ≤ 0,7 m pod spodem słupa ``c``) albo None."""
@@ -1879,6 +1901,8 @@ class AnalizaKonstrukcji:
     def _sciana(self, w):
         m = self.m
         pr = self.prof.setdefault(w.id, {"top_s": Profil(w.L), "top_a": Profil(w.L), "dol": Profil(w.L), "otw": []})
+        kol = self._slupy_w_scianie(w)            # słupy ŻB w murze (trzpienie) — przejmują obciążenia korony w swoim obrysie
+        pr["slupy"] = kol
         # reakcje płyt
         for g in self.grupy:
             if g.fe is None:
@@ -1890,11 +1914,26 @@ class AnalizaKonstrukcji:
                 for cs, r in g.res.items():
                     ss, rr = g.fe.reakcje_liniowe(r, sid)
                     if len(ss):
-                        sw = [w.st(ln.interpolate(s_).coords[0])[0] for s_ in ss]
+                        sw = np.array([w.st(ln.interpolate(s_).coords[0])[0] for s_ in ss])
+                        rr = np.nan_to_num(rr)
+                        if kol:
+                            # reakcje węzłowe płyty w obrysie słupa ŻB (trzpienia) → słup (bez wygładzenia: skupienia reakcji
+                            # w węzłach ścian/belek trafiają do słupa, nie do muru)
+                            bnd = np.concatenate([[ss[0]], (ss[:-1] + ss[1:]) / 2, [ss[-1]]])
+                            Fn = rr * np.diff(bnd)
+                            for c, a_, b_ in kol:
+                                m_ = (sw >= a_ - 1e-6) & (sw <= b_ + 1e-6)
+                                if m_.any():
+                                    self._do_slupa(c, cs, float(Fn[m_].sum()))
+                                    rr = np.where(m_, 0.0, rr)
                         # wygładzenie 1,0 m z zachowaniem wypadkowej (siły narożne płyty) [UPR]
-                        pr["top_s"].dodaj_wygladzone(cs, sw, np.nan_to_num(rr), 1.0)
-        # obciążenia skupione (belki, schody)
+                        pr["top_s"].dodaj_wygladzone(cs, sw, rr, 1.0)
+        # obciążenia skupione (belki, schody); w obrysie słupa ŻB — na słup
         for cs, P, s_c, szer in self.pending_sciany.get(w.id, []):
+            c_ = next((c for c, a_, b_ in kol if a_ - 1e-6 <= s_c <= b_ + 1e-6), None)
+            if c_ is not None:
+                self._do_slupa(c_, cs, P)
+                continue
             pr["top_s"].dodaj_skupiona(cs, P, s_c, szer)
         # ściany powyżej
         for v in m.sciany():
@@ -1912,6 +1951,13 @@ class AnalizaKonstrukcji:
                 q = pv.get(cs).copy()
                 for _, a_, c_ in na_b:
                     q[(pv.s >= a_ - 1e-9) & (pv.s <= c_ + 1e-9)] = 0.0
+                sw = np.asarray(sw)
+                for c, a_, b_ in kol:                 # ściana wyżej nad słupem ŻB — na słup (mur przerwany słupem)
+                    m_ = (sw >= a_ - 1e-6) & (sw <= b_ + 1e-6)
+                    if m_.sum() >= 2:
+                        o_ = np.argsort(sw[m_])
+                        self._do_slupa(c, cs, float(np.trapezoid(q[m_][o_], sw[m_][o_])))
+                        q = np.where(m_, 0.0, q)
                 pr["top_a"].dodaj(cs, sw, q)
         # ciężar własny i przekazanie przez otwory → profil dolny
         gm2, zest = self._ciezar_sciany(w)

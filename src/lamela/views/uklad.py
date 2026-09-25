@@ -852,9 +852,10 @@ def _uwagi_szukaj(wolne: Wolne, U, i0: int, prev, P: int, mp: int, budzet: list)
 
 def _porzadek_czytania(R: Rozmieszczenie, baza: Wolne, kolejne: list, n_b: int, n_p: int):
     """Gdy bloki (bez wiersza nad tabliczką) zajmują kilka kolumn, a kolejność listy nie czyta się kolumnami od
-    lewej i w kolumnie od góry — ponowne ułożenie w tych samych kolumnach: bloki listy kolejno od lewej kolumny,
-    w kolumnie od góry, uwagi „płyną” przez kolumny (≥ 2 pozycje w części). Przyjmowane, gdy wszystko się mieści,
-    a części uwag nie przybywa; inaczej układ bez zmian."""
+    lewej i w kolumnie od góry — ponowne ułożenie w tych samych kolumnach (sloty: wolne odcinki kolumn od lewej,
+    w kolumnie od góry): kolejne bloki listy i pozycje uwag dzielone na sloty w kolejności tak, aby najbardziej
+    wypełniony slot był jak najmniej wypełniony (kolumny wyrównane, bez pustej kolumny obok przepełnionej); część
+    uwag „(cd.)” obciążona karą. Przyjmowane, gdy wszystko się mieści, a części uwag nie przybywa."""
     wpisy = R.bloki[n_b:]
     rects = [r for k, _n, r in R.prostokaty[n_p:] if k == "blok"]
     if len(rects) < 2 or len(rects) != len(wpisy):
@@ -865,64 +866,88 @@ def _porzadek_czytania(R: Rozmieszczenie, baza: Wolne, kolejne: list, n_b: int, 
     ci = {i: c for c, col in enumerate(cols) for i in col[2]}
     if all(ci[i + 1] > ci[i] or (ci[i + 1] == ci[i] and _po(rects[i], rects[i + 1])) for i in range(len(rects) - 1)):
         return
-    sloty = []                                     # (x0, x1, y_bot, y_top) — kolumny od lewej, w kolumnie od góry
+    sloty = []                                     # (x0, x1, y_bot, y_top)
     for x0, x1, idx in cols:
         y_lo = min(rects[i][1] for i in idx)
         y_hi = max(rects[i][3] for i in idx)
-        segs = sorted((f[1], f[3]) for f in baza.free if f[0] <= x0 + 1e-6 and f[2] >= x1 - 1e-6)
         scal = []
-        for a, b in segs:
+        for a, b in sorted((f[1], f[3]) for f in baza.free if f[0] <= x0 + 1e-6 and f[2] >= x1 - 1e-6):
             if scal and a <= scal[-1][1] + 1e-6:
                 scal[-1][1] = max(scal[-1][1], b)
             else:
                 scal.append([a, b])
-        for a, b in sorted(scal, key=lambda t: -t[1]):
-            if b > y_lo + 1e-6 and a < y_hi - 1e-6:
-                sloty.append((x0, x1, a, b))
-    wl = baza.kopia()
-    nowe = []                                      # (Blok, x0, y0)
-    si, kursor = 0, (sloty[0][3] if sloty else 0.0)
-    czesci = 0
-
-    def wstaw(szer, wys):
-        nonlocal si, kursor
-        while si < len(sloty):
-            x0, x1, a, b = sloty[si]
-            top = min(kursor, b)
-            r = (x1 - szer, top - wys, x1, top)
-            if szer <= x1 - x0 + 1e-6 and r[1] >= a - 1e-6 and wl.miesci(r):
-                wl.zajmij(_napompuj(r, GAP_C, GAP_B, GAP_C, GAP_B))
-                kursor = r[1] - GAP_B
-                return r
-            si += 1
-            kursor = sloty[si][3] if si < len(sloty) else 0.0
-        return None
+        sloty += [(x0, x1, a, b) for a, b in sorted(scal, key=lambda t: -t[1]) if b > y_lo + 1e-6 and a < y_hi - 1e-6]
+    units = []                                     # ("b", blok, None) | ("u", blok uwag, nr pozycji)
     for b in kolejne:
-        if b.uwagi is None:
-            r = wstaw(b.szer, b.wys)
-            if r is None:
-                return
-            nowe.append((b, r[0], r[1]))
-            continue
-        U = b.uwagi
-        n, i0 = len(U.lines), 0
-        while i0 < n:
-            if si >= len(sloty):
-                return
-            x0, x1, a, bb = sloty[si]
-            k = _max_k(U, i0, min(kursor, bb) - a)
-            if k < n and n - k < 2 and k - i0 >= 3:
-                k = n - 2
-            if k <= i0 or (k - i0 < 2 and n - i0 >= 2 and k < n):
-                si += 1
-                kursor = sloty[si][3] if si < len(sloty) else 0.0
+        units += [("b", b, None)] if b.uwagi is None else [("u", b, i) for i in range(len(b.uwagi.lines))]
+    m, S = len(units), len(sloty)
+    if not S:
+        return
+
+    def grupy(c0, c1):                             # [(blok, i0, i1)] — uwagi jako jedna część w slocie
+        out, i = [], c0
+        while i < c1:
+            kind, b, idx = units[i]
+            if kind == "b":
+                out.append((b, None, None))
+                i += 1
                 continue
-            r = wstaw(U.w, U.wysokosc(i0, k))
-            if r is None:
+            k = i
+            while k < c1 and units[k][1] is b:
+                k += 1
+            out.append((b, idx, units[k - 1][2] + 1))
+            i = k
+        return out
+
+    def koszt_slotu(j, c0, c1):
+        if c0 == c1:
+            return 0.0
+        x0, x1, a, bb = sloty[j]
+        h, kara = -GAP_B, 0.0
+        for b, i0, i1 in grupy(c0, c1):
+            if i0 is None:
+                if b.szer > x1 - x0 + 1e-6:
+                    return None
+                h += b.wys + GAP_B
+                continue
+            n = len(b.uwagi.lines)
+            if i1 - i0 < 2 and n >= 2 and not (i0 == 0 and i1 == n):
+                return None                        # część z jedną pozycją
+            h += b.uwagi.wysokosc(i0, i1) + GAP_B
+            kara += 0.3 if i0 > 0 else 0.0         # część „(cd.)”
+        return None if h > bb - a + 1e-6 else h / max(1e-6, bb - a) + kara
+    INF = float("inf")
+    dp = [[INF] * (m + 1) for _ in range(S + 1)]
+    arg = [[0] * (m + 1) for _ in range(S + 1)]
+    dp[0][0] = 0.0
+    for j in range(1, S + 1):
+        for c in range(m + 1):
+            for c0 in range(c + 1):
+                if dp[j - 1][c0] == INF:
+                    continue
+                k = koszt_slotu(j - 1, c0, c)
+                if k is not None and max(dp[j - 1][c0], k) < dp[j][c] - 1e-12:
+                    dp[j][c], arg[j][c] = max(dp[j - 1][c0], k), c0
+    if dp[S][m] == INF:
+        return
+    podzial, c = [], m
+    for j in range(S, 0, -1):
+        podzial.append((j - 1, arg[j][c], c))
+        c = arg[j][c]
+    wl = baza.kopia()
+    nowe, czesci = [], 0
+    for j, c0, c1 in reversed(podzial):
+        x0, x1, a, top = sloty[j]
+        for b, i0, i1 in grupy(c0, c1):
+            if i0 is not None:
+                b = Blok(f"{b.nazwa}[{i0 + 1}–{i1}]", b.uwagi.fn(i0, i1), b.uwagi.w, b.uwagi.wysokosc(i0, i1))
+                czesci += 1
+            r = (x1 - b.szer, top - b.wys, x1, top)
+            if not wl.miesci(r):
                 return
-            nowe.append((Blok(f"{b.nazwa}[{i0 + 1}–{k}]", U.fn(i0, k), U.w, U.wysokosc(i0, k)), r[0], r[1]))
-            czesci += 1
-            i0 = k
+            wl.zajmij(_napompuj(r, GAP_C, GAP_B, GAP_C, GAP_B))
+            nowe.append((b, r[0], r[1]))
+            top = r[1] - GAP_B
     if czesci > R.czesci_uwag:
         return
     R.bloki = R.bloki[:n_b]
@@ -930,7 +955,8 @@ def _porzadek_czytania(R: Rozmieszczenie, baza: Wolne, kolejne: list, n_b: int, 
     for b, x0, y0 in nowe:
         R.bloki.append((b, x0 + b.dx0, y0 + b.h, b.w))
         R.prostokaty.append(("blok", b.nazwa, (x0, y0, x0 + b.szer, y0 + b.wys)))
-    R.czesci_uwag = czesci if any(b.uwagi is not None for b in kolejne) else R.czesci_uwag
+    if any(b.uwagi is not None for b in kolejne):
+        R.czesci_uwag = czesci
 
 
 # ================================================================================================ dobór formatu
