@@ -397,12 +397,14 @@ def kontrola_grubosci(det: Detal) -> list[tuple]:
 
 
 def kolizje(boxes: list, vp: Viewport) -> dict:
-    """Kolizje napisów opisów: napis–napis (pole > 0,05 mm²) i napis–linie rysunku (prymitywy poza opisami)."""
+    """Kolizje napisów: napis–napis dla WSZYSTKICH napisów rzutni (opisy, rzędne, wymiary, pole opisu; pole
+    wspólne > 0,05 mm²) i napis opisu–linie rysunku (prymitywy poza warstwą opisów)."""
     k2 = vp.k * vp.k
+    wszystkie = [Polygon(text_items(p, vp.k)[1]) for p in vp.prims if isinstance(p, PText)]
     tt = 0
-    for i in range(len(boxes)):
-        for j in range(i + 1, len(boxes)):
-            if boxes[i][1].intersection(boxes[j][1]).area / k2 > 0.05:
+    for i in range(len(wszystkie)):
+        for j in range(i + 1, len(wszystkie)):
+            if wszystkie[i].intersects(wszystkie[j]) and wszystkie[i].intersection(wszystkie[j]).area / k2 > 0.05:
                 tt += 1
     tl = 0
     linie = [LineString(p.pts) for p in vp.prims if isinstance(p, PLine) and p.layer not in ("A-OPISY",)

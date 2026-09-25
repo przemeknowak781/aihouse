@@ -86,10 +86,16 @@ def _labels_building(lab, s, W, h=D.H):
     c1 = np.array([(bx[0] + bx[2]) / 2.0, label_point(s.p0)[1]])
     cands = [p for p in spiral(c1, 1.0 * k * 2, 6, 8) if inner.contains(Point(p))] or [tuple(c1)]
 
+    from ..draft import text as T
+    fun = ["bud. mieszk. jednorodz."]
+    if T.width(fun[0], h) > (bx[2] - bx[0]) / k - 5.0:
+        fun = ["bud. mieszk.", "jednorodz."]
+
     def fn(cv, p):
         S.building_label(cv, p, s.zero_abs, rom, h=h, layer="Z-OPISY")
-        cv.text(np.asarray(p) + np.array([0.0, h * 1.6 * k]), "bud. mieszk. jednorodz.", h, 0.0, "center",
-                "baseline", "Z-OPISY")
+        for i, t_ in enumerate(reversed(fun)):
+            cv.text(np.asarray(p) + np.array([0.0, h * (1.6 + 1.45 * i) * k]), t_, h, 0.0, "center", "baseline",
+                    "Z-OPISY")
     lab.pl.place(lab.vp, fn, cands, penalty_step=0.01, bounds=s.p0.buffer(-1.0 * k))
     return c0
 
@@ -296,8 +302,15 @@ def _labels_project(lab, s, W, used, detail=False, utilities=True):
     """Opisy elementów projektu (priorytet przed opisami podkładu)."""
     k = lab.k
     h = D.H
-    R = s.plot.buffer(0.3) if detail else (lab.bounds.difference(s.droga["pas"].buffer(0.3))
-                                            if lab.bounds is not None and s.droga["pas"] is not None else s.plot)
+    if detail:
+        R = s.plot.buffer(0.3)
+    else:                   # działka z otoczeniem 12 m, bez pasa drogowego i terenu po drugiej stronie drogi
+        R = s.plot.buffer(12.0, join_style=2)
+        if lab.bounds is not None:
+            R = R.intersection(lab.bounds)
+        if s.droga["pas"] is not None:
+            R = R.difference(s.droga["pas"].buffer(0.3))
+            R = max((q for q in getattr(R, "geoms", [R]) if q.intersects(s.plot)), key=lambda q: q.area, default=R)
     L = lambda *a_, **kw: lab.label_in(R, *a_, **kw)   # noqa: E731 — opisy projektu poza pasem drogowym
     # działka: numer i powierzchnia
     free = s.plot.difference(s.footprint.buffer(4.0)).buffer(-3.0)

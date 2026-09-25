@@ -22,6 +22,9 @@ import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
+import numpy as np
+from shapely.geometry import Point
+
 from ..obliczenia.konstrukcja.materialy import masa_preta, pole_preta
 
 GATUNEK = "B500SP"
@@ -1282,17 +1285,47 @@ def typ_nadproza(D: DaneKonstr, nid: str) -> str | None:
 
 # ================================================================================================ pręty fundamentu
 def prety_fundamentu(D: DaneKonstr) -> dict:
-    """Zbrojenie płyty fundamentowej z żebrami i pogrubieniami: siatki płyty (dół/góra — ``dobierz_siatke``),
-    żebra (n·φ z obliczeń ław, dołem i górą, strzemiona zamknięte na pełną wysokość żebro + płyta), pogrubienia pod
-    słupami (siatka dołem z odgięciami — z obliczeń stóp), pręty narożne L żeber obwodowych (l₀ × l₀)."""
+    """Zbrojenie płyty fundamentowej z żebrami i pogrubieniami. Gdy dostępna jest analiza MES płyty na podłożu
+    Winklera (``fund_mes``): siatki dół/góra z A_s,req MES (90 % powierzchni płyty poza żebrami, ≥ A_s,min), dozbrojenia
+    obszarów o A_s,req > siatki, pręty podłużne żeber i pogrubień z A_s,req × szerokość; w przeciwnym razie — siatki
+    z biblioteki (``dobierz_siatke``) i pręty żeber z obliczeń ław. Strzemiona żeber — z obliczeń biblioteki."""
     if "fund" in D.cache:
         return D.cache["fund"]
-    from shapely.geometry import LineString, Point
+    from shapely.geometry import LineString, box
     m = D.an.m
     zest = Zestawienie()
     F = D.plyta_f
-    out = dict(zest=zest, dol=[], gora=[], zebra={}, stopy={}, naroza=None)
+    out = dict(zest=zest, dol=[], gora=[], zebra={}, stopy={}, naroza=None, dozbr={}, mes=None, mes_zebra={})
     c_top, c_bot = D.c_fund
+    W = fund_mes(D) if F is not None else None
+    out["mes"] = W
+    if F is not None and W is not None:
+        rib = np.array([s_ != "" for s_ in W.strefa_el])
+        pl_el = ~rib & ~W.mu_przekr
+        Asm = float(W.As_min[~rib].max()) if (~rib).any() else F.As_min
+        for warstwa in ("dol", "gora"):
+            req = np.maximum(W.As[f"{warstwa}_x"], W.As[f"{warstwa}_y"])[pl_el]
+            need = float(np.percentile(req, 90)) if len(req) else 0.0
+            fi, s_, As = dobierz_siatke(need, Asm, F.h, s_max_plyty(F.h), fi_min=10, fi_max=16)
+            w = Warstwa("xy", warstwa, fi, s_, need, Asm, As, 0.0, "MES płyty fundamentowej (90 % pola poza żebrami)")
+            setattr(F, warstwa, w)
+        F.uwagi = [
+            f"Płyta fundamentowa — analiza MES na podłożu sprężystym (moduł plyta_fundamentowa: płyta ACM z żebrami jako "
+            f"pasma h = h_płyty + h_żebra, sprężyny Winklera, kontakt jednostronny, {W.kombinacje} obliczeń: kombinacje STR "
+            f"× k_s ∈ {{{W.podloze.k_min:.0f}; {W.podloze.k_s:.0f}; {W.podloze.k_max:.0f}}} kN/m³ z M₀ i wymiarów płyty — "
+            f"Bowles (5-16a), PN-EN 1997-1 zał. F.2; weryfikacja: belka Hetényiego, błąd < 1 %). Maks. docisk p_d = "
+            f"{W.p_d_max:.0f} kPa (q_Rd,lok = {next((w_.warunki[0].R for w_ in W.wyniki if 'Nacisk lokalny' in w_.nazwa), 0):.0f} "
+            f"kPa), osiadanie w_k = {W.w_k_max * 1000:.0f} mm, odrywanie {W.oderwanie * 100:.0f} % powierzchni."]
+        bad = [x for w_ in W.wyniki for x in w_.warunki if not x.ok]
+        if bad or W.mu_przekr.any():
+            F.uwagi.append(
+                "UWAGA — MES płyty wykazuje niespełnione warunki: " + "; ".join(f"{x.opis} ({x.E:.0f} > {x.R:.0f})"
+                                                                               for x in bad[:3])
+                + (f"; przekrój żeber/płyty niewystarczający (μ > μ_lim) na {W.mu_przekr.sum()} elementach — strefy "
+                   "zaznaczone na rysunku" if W.mu_przekr.any() else "")
+                + ". Przyczyna: skupienie obciążeń ścian parteru (profil biblioteki — m.in. obciążenie fasady S0-01 "
+                  "przekazane na filarek narożny, belka B1 bez pozycji obliczeniowej). Wymagane: obliczenie B1 i słupów "
+                  "SL1–SL4, poszerzenie/pogłębienie żeber w strefach zaznaczonych [WYMAGA ZMIANY MODELU].")
     if F is not None:
         P = F.poly
         Pin = P.buffer(-c_bot / 1000.0, join_style=2)
@@ -1303,6 +1336,22 @@ def prety_fundamentu(D: DaneKonstr) -> dict:
                 sk = skanuj(Pin, kier, t_lo, t_hi, w.s / 1000.0)
                 out[warstwa] += _grupy_z_skanu(sk, kier, warstwa, w.fi, w.s, F.id, "siatka", w, zest, "przeslo",
                                                beton=F.beton)
+        if W is not None:
+            siatki = {(wa, k_): getattr(F, wa) for wa in ("dol", "gora") for k_ in ("x", "y")}
+            dz = dozbrojenia_fund(D, W, siatki)
+            out["dozbr"] = dz
+            for (wa, k_), lst in [(k, v) for k, v in dz.items() if k != "mu"]:
+                for i, (pg, fi, s_x, need, prov) in enumerate(lst):
+                    lbd = _ceil5(_lbd(fi, F.beton))
+                    reg = _rozciagnij(pg, k_, lbd).intersection(Pin)
+                    bx = pg.bounds
+                    t_lo, t_hi = (bx[1], bx[3]) if k_ == "x" else (bx[0], bx[2])
+                    w_ = Warstwa(k_, wa, fi, s_x, need, 0.0, prov, 0.0, "MES — dozbrojenie")
+                    gs = _grupy_z_skanu(skanuj(reg, k_, t_lo, t_hi, s_x / 1000.0), k_, wa, fi, s_x, F.id, f"D{i + 1}",
+                                        w_, zest, "dozbrojenie", beton=F.beton)
+                    for g in gs:
+                        g.zakres = pg
+                    out[wa] += gs
     els = {str(e["id"]): e for e in (m.fundamenty().get("elementy") or [])}
     for Z in D.zebra:
         e = els.get(Z.id)
@@ -1312,27 +1361,36 @@ def prety_fundamentu(D: DaneKonstr) -> dict:
         h_tot = Z.h + (F.h if F is not None else 0.0)
         c = Z.c_nom / 1000.0
         L = ln.length + Z.b - 2 * c if ln.length > Z.b else ln.length
-        fi = Z.dol[1]
-        pd = zest.dodaj(Pret(fi, "00", (L * 1000,), Z.dol[0], Z.id, "dołem"))
-        pg = zest.dodaj(Pret(fi, "00", (L * 1000,), Z.gora[0], Z.id, "górą"))
+        nd, fd, ng, fg = Z.dol[0], Z.dol[1], Z.gora[0], Z.gora[1]
+        if W is not None:
+            rz = prety_zebra_mes(W, Z, {(wa, k_): getattr(F, wa) for wa in ("dol", "gora") for k_ in ("x", "y")},
+                                 (Z.dol[0], Z.gora[0]))
+            out["mes_zebra"][Z.id] = rz
+            nd, fd = rz["dol"][0], rz["dol"][1]
+            ng, fg = rz["gora"][0], rz["gora"][1]
+        pd = zest.dodaj(Pret(fd, "00", (L * 1000,), nd, Z.id, "dołem"))
+        pg_ = zest.dodaj(Pret(fg, "00", (L * 1000,), ng, Z.id, "górą"))
         fs, ss = Z.strz[0], Z.strz[1]
         ns = int(math.ceil(ln.length / (ss / 1000.0))) + 1
         pst = zest.dodaj(Pret(fs, "51", ((Z.b - 2 * c + 2 * fs / 1000) * 1000, (h_tot - 2 * c + 2 * fs / 1000) * 1000),
                               ns, Z.id, "strzemię"))
-        pp = None
-        if Z.ids and Z.ids[0]:
-            fi_p, s_p = Z.ids[0]
-            pp = zest.dodaj(Pret(int(fi_p), "00", ((Z.b - 2 * c) * 1000,), int(math.ceil(ln.length / (s_p / 1000.0))) + 1,
-                                 Z.id, "poprzeczne"))
-        out["zebra"][Z.id] = dict(dol=pd, gora=pg, strz=pst, n_strz=ns, poprz=pp, h_tot=h_tot, L=L,
-                                  n_dol=Z.dol[0], n_gora=Z.gora[0])
-    # narożniki żeber obwodowych: pręty L l₀ × l₀ (po 2 dołem i górą w każdym narożu)
+        out["zebra"][Z.id] = dict(dol=pd, gora=pg_, strz=pst, n_strz=ns, poprz=None, h_tot=h_tot, L=L,
+                                  n_dol=nd, n_gora=ng)
     if F is not None and D.zebra:
-        fi = D.zebra[0].dol[1]
+        fi = max(z["dol"].fi for z in out["zebra"].values()) if out["zebra"] else 12
         l0 = _ceil5(_l0(fi, F.beton))
         n_nar = sum(1 for _ in list(F.poly.exterior.coords)[:-1])
         out["naroza"] = zest.dodaj(Pret(fi, "11", (l0 * 1000, l0 * 1000), 4 * n_nar, "naroża", "narożniki żeber"))
     for S_ in D.stopy:
+        if W is not None and F is not None:
+            msk = np.array([s_ == S_.id for s_ in W.strefa_el]) & ~W.mu_przekr
+            if msk.any():
+                req = float(np.maximum(W.As["dol_x"], W.As["dol_y"])[msk].max())
+                if req > S_.siatka.As_prov:
+                    fi, s_, As = dobierz_siatke(req, S_.siatka.As_min, S_.h + F.h, s_max_plyty(S_.h + F.h), 12, 20)
+                    S_.siatka = Warstwa("xy", "dol", fi, s_, req, S_.siatka.As_min, As, 0.0, "MES płyty fundamentowej")
+                else:
+                    S_.siatka.As_req = max(S_.siatka.As_req, req)
         w = S_.siatka
         c = c_bot / 1000.0
         n1 = int(math.ceil((S_.B - 2 * c) / (w.s / 1000.0))) + 1

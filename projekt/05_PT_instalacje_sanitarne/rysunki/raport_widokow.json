@@ -51,12 +51,12 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 1068,
-          "napisy": 296,
+          "prymitywy": 1070,
+          "napisy": 298,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 7.8,
+      "czas_s": 7.7,
       "png_kontrola": {
         "px": [
           5262,
@@ -97,12 +97,12 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 735,
-          "napisy": 195,
+          "prymitywy": 737,
+          "napisy": 197,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 4.0,
+      "czas_s": 4.4,
       "png_kontrola": {
         "px": [
           5262,
@@ -143,12 +143,12 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 846,
-          "napisy": 187,
+          "prymitywy": 848,
+          "napisy": 189,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.6,
+      "czas_s": 3.7,
       "png_kontrola": {
         "px": [
           5262,
@@ -189,12 +189,12 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 1055,
-          "napisy": 340,
+          "prymitywy": 1057,
+          "napisy": 342,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 4.0,
+      "czas_s": 4.1,
       "png_kontrola": {
         "px": [
           5262,
@@ -235,12 +235,12 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 722,
-          "napisy": 193,
+          "prymitywy": 724,
+          "napisy": 195,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.5,
+      "czas_s": 2.7,
       "png_kontrola": {
         "px": [
           5262,
@@ -281,12 +281,12 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 827,
-          "napisy": 179,
+          "prymitywy": 829,
+          "napisy": 181,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.1,
+      "czas_s": 2.3,
       "png_kontrola": {
         "px": [
           5262,
@@ -327,12 +327,12 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 712,
-          "napisy": 285,
+          "prymitywy": 714,
+          "napisy": 287,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 9.2,
+      "czas_s": 9.4,
       "png_kontrola": {
         "px": [
           5262,
@@ -373,12 +373,12 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 944,
-          "napisy": 258,
+          "prymitywy": 946,
+          "napisy": 260,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.1,
+      "czas_s": 3.2,
       "png_kontrola": {
         "px": [
           5262,
@@ -398,7 +398,7 @@
     {
       "nr": "PT-IS-09",
       "tytul": "OGRZEWANIE — RZUT PARTERU",
-      "format": "A3x3",
+      "format": "A1",
       "typ": [
         "inst_rzut"
       ],
@@ -419,16 +419,16 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 1135,
-          "napisy": 359,
+          "prymitywy": 1153,
+          "napisy": 373,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 7.0,
+      "czas_s": 7.8,
       "png_kontrola": {
         "px": [
-          5262,
-          2481
+          4967,
+          3508
         ],
         "dpi_eff": [
           150.0,
@@ -465,12 +465,12 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 867,
-          "napisy": 287,
+          "prymitywy": 877,
+          "napisy": 297,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.7,
+      "czas_s": 3.9,
       "png_kontrola": {
         "px": [
           5262,
@@ -511,12 +511,12 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 983,
-          "napisy": 263,
+          "prymitywy": 993,
+          "napisy": 273,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.9,
+      "czas_s": 3.6,
       "png_kontrola": {
         "px": [
           5262,
@@ -557,12 +557,12 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 1072,
-          "napisy": 247,
+          "prymitywy": 1090,
+          "napisy": 248,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 4.5,
+      "czas_s": 4.7,
       "png_kontrola": {
         "px": [
           5262,
@@ -603,12 +603,12 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 956,
-          "napisy": 232,
+          "prymitywy": 935,
+          "napisy": 230,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.0,
+      "czas_s": 3.5,
       "png_kontrola": {
         "px": [
           5262,
@@ -649,12 +649,12 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 1077,
-          "napisy": 237,
+          "prymitywy": 1056,
+          "napisy": 235,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.4,
+      "czas_s": 3.5,
       "png_kontrola": {
         "px": [
           5262,
@@ -700,7 +700,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 1.5,
+      "czas_s": 1.6,
       "png_kontrola": {
         "px": [
           5262,
@@ -746,7 +746,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 1.5,
+      "czas_s": 1.4,
       "png_kontrola": {
         "px": [
           5262,
@@ -792,7 +792,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.2,
+      "czas_s": 2.3,
       "png_kontrola": {
         "px": [
           5262,
@@ -811,9 +811,8 @@
     }
   ],
   "problemy": [
-    "instalacje (obliczenia): Piony deszczowe RS1, RS2, RS6 wyłączone z grupowania pionów wod.-kan. (w modelu `instalacje.piony` bez pola `rodzaj`).",
-    "arkusz PT-IS-07: kolizje napisów: 2"
+    "instalacje (obliczenia): Piony deszczowe RS1, RS2, RS6 wyłączone z grupowania pionów wod.-kan. (w modelu `instalacje.piony` bez pola `rodzaj`)."
   ],
   "tom": "projekt/05_PT_instalacje_sanitarne/rysunki/tom_PT-IS.pdf",
-  "czas_s": 85.0
+  "czas_s": 88.3
 }

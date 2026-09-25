@@ -612,7 +612,7 @@ def detal_attyka_przelew(m, opts: dict) -> Detal:
     det.rzedna((x_out + 0.22, y_cap), y_cap, "wyk", "left")
     det.rzedna((xL + 0.05, 0.0), 0.0, "konstr", "right")
     det.wymiar([(x_iw - 0.12, A["y_top"]), (x_iw - 0.12, y_cap)], x_iw - 0.16, "v",
-               labels=[f"≥150 ({mm(y_cap - A['y_top'])})"])
+               labels=[f"{mm(y_cap - A['y_top'])} ≥ 150"])
     det.spadek((x_iw - 0.12, A["y_top"] + 0.04), (x_iw - 0.40, A["y_top"] + 0.035), 2.0)
     det.uwagi.append("rzędne przelewów awaryjnych D1: dno = pokrycie przy wpuście + 0,03…0,05 m, nie niżej niż pokrycie "
                      "lokalne (tabela R-W2 w REKOMENDACJE mostków); wywinięcia ≥ 15 cm ponad warstwę wierzchnią (DAFA)")
@@ -622,3 +622,147 @@ def detal_attyka_przelew(m, opts: dict) -> Detal:
 def fmt_z(z: float) -> str:
     from ..draft import fmt
     return fmt.level(z)
+
+
+# ================================================================================================ D — attyka z wpustem bocznym
+@rodzaj("attyka_wpust", "WZ-02")
+def detal_attyka_wpust(m, opts: dict) -> Detal:
+    """Attyka dachu P1 w przekroju przez wpust attykowy (boczny) i rurę spustową zewnętrzną z lejem."""
+    kod_d = przegroda_typu(m, "WZ-02", "stropodach", "SD2")
+    dach = dach_wg(m, kod_d)
+    wp = (dach.get("wpusty") or [{}])[0]
+    xy = wp.get("xy", dach["obrys"][0]) if isinstance(wp, dict) else wp
+    rs = next((r for r in dach.get("rury_spustowe") or [] if r.get("trasa") == "zewn"), {})
+    z0 = float(dach["plyta"]["wierzch"])
+    sz = sciana_przy(m, xy, z0) or przegroda_typu(m, "WZ-02", "sciana_zewn", "SZ1")
+    att = dach.get("attyka") or {}
+    kod_at = att.get("przegroda", "AT1")
+    d_kl, pz = _klin_w(m, dach, xy)
+    det = Detal(m, "D-05", f"Attyka dachu {dach['id']} — wpust boczny i rura spustowa", ("WZ-02",), 10, z0=z0)
+    y_sr = m.przegroda(kod_d).d_nad_konstr()
+    xL, yB = -0.70, -0.75
+    A = rysuj_attyke(det, sz, kod_d, kod_at, float(att.get("wys_nad_pokryciem", 0.25)), d_kl, xL, yB, y_sr, hydro=False)
+    x_iw, x_out, y_cap, ym = A["x_iw"], A["x_out"], A["y_cap"], A["y_memb"]
+    dn = float(rs.get("dn", 100)) / 1000.0 if rs else 0.10
+    y0w = ym - 0.004
+    det.otwor(x_iw - 0.01, y0w, x_out + 0.02, y0w + dn + 0.01)                      # przejście wpustu przez attykę
+    det.rect(x_iw - 0.12, y0w - 0.003, x_out + 0.02, y0w, "WPUST")
+    det.rect(x_iw, y0w + dn + 0.007, x_out + 0.02, y0w + dn + 0.01, "WPUST")
+    xr0, xr1 = x_out + 0.03, x_out + 0.03 + max(0.20, 1.6 * dn)                      # lej (rura zbiorcza)
+    det.rect(xr0, y0w - 0.25, xr0 + 0.003, y0w + dn + 0.10, "RURA_MET")
+    det.rect(xr1 - 0.003, y0w - 0.25, xr1, y0w + dn + 0.10, "RURA_MET")
+    det.rect(xr0, y0w - 0.253, xr1, y0w - 0.25, "RURA_MET")
+    xc = (xr0 + xr1) / 2
+    det.rect(xc - dn / 2, yB, xc - dn / 2 + 0.002, y0w - 0.253, "RURA_MET")
+    det.rect(xc + dn / 2 - 0.002, yB, xc + dn / 2, y0w - 0.253, "RURA_MET")
+    det.kontur([(x_out, y0w - 0.35), (xc - dn / 2, y0w - 0.35)], zamkniety=False, pen=0.5)   # obejma dystansowa
+    det.linia("H", [(xL, ym), (x_iw - 0.12, ym), (x_iw - 0.12, y0w - 0.003), (x_iw - 0.01, y0w - 0.003)],
+              "membrana wklejona w kołnierz wpustu")
+    det.linia("H", [(x_iw - 0.002, y0w + dn + 0.01), (x_iw - 0.002, y_cap + 0.002), (x_out + 0.002, y_cap + 0.002),
+                    (x_out + 0.002, y_cap - 0.05)])
+    det.polaczenie("H", [(x_iw - 0.01, y0w - 0.003), (x_iw - 0.002, y0w + dn + 0.01)])
+    det.okno = (xL, yB, xr1 + 0.05, y_cap + 0.10)
+    det.przerwa((0.0, yB), (x_out, yB))
+    det.przerwa((xc - dn / 2 - 0.02, yB), (xc + dn / 2 + 0.02, yB))
+    det.przerwa((xL, 0.3), (xL, -A["t"] - 0.02))
+    det.opis_stosu(A["stos"], "x", -0.42, wyjscie=(-0.42, y_cap + 0.06), tytul=f"{kod_d} — stropodach")
+    det.opis_stosu(A["sc"], "y", -0.55, odwroc=True, tytul=f"{sz} — ściana zewnętrzna")
+    det.opis([(x_iw - 0.08, y0w - 0.0015)], [f"wpust attykowy (boczny) DN{int(dn * 1000)} z kołnierzem, podgrzewany "
+                                             f"— {str(wp.get('opis', '')).split(' — ')[0] if isinstance(wp, dict) else ''}"])
+    det.opis([(xr1 - 0.01, y0w + 0.03)], [f"lej spustowy + rura {rs.get('id', '')} DN{int(dn * 1000)} na obejmach "
+                                          "dystansowych przed licem ETICS (bez wnęki w ociepleniu)"])
+    det.opis([((x_out + xc - dn / 2) / 2, y0w - 0.35)], ["obejma z kotwą w murze przez ocieplenie — mostek punktowy "
+                                                         "(χ ≈ 0,002 W/K, jak łącznik ETICS)"])
+    det.opis([(A["xs0"] + 0.09, A["y_p"] - 0.06)], [f"attyka {kod_at} (ŻB w osi muru, izolacja z 3 stron)"])
+    det.rzedna((x_iw - 0.35, A["y_top"]), A["y_top"], "wyk", "left")
+    det.rzedna((xr1 + 0.02, y_cap), y_cap, "wyk", "left")
+    det.wymiar([(x_iw - 0.10, A["y_top"]), (x_iw - 0.10, y_cap)], x_iw - 0.14, "v",
+               labels=[f"{mm(y_cap - A['y_top'])} ≥ 150"])
+    prz = (dach.get("przelewy_awaryjne") or [{}])[0]
+    det.uwagi.append(f"dach {dach['id']}: przelew awaryjny {str(prz.get('opis', '')).split(' — ')[0]} w attyce (poza "
+                     "przekrojem, rozwiązanie jak detal D-04); rura spustowa do kolektora KD → zbiornik retencyjny "
+                     "(detal D-07)")
+    return det
+
+
+# ================================================================================================ D — wpust dachowy
+@rodzaj("wpust", "WZ-15")
+def detal_wpust(m, opts: dict) -> Detal:
+    """Wpust dachowy wewnętrzny (podgrzewany) w stropodachu z izolacją spadkową: przejście przez paroizolację,
+    izolację i hydroizolację (kołnierze), rura spustowa w izolowanym szachcie."""
+    dach = next((d for d in m.dachy() if any(r.get("trasa") == "wewn_szacht" for r in d.get("rury_spustowe") or [])),
+                m.dachy()[0])
+    kod_d = dach["przegroda"]
+    r = next(r for r in dach.get("rury_spustowe") or [] if r.get("trasa") == "wewn_szacht")
+    wp = (dach.get("wpusty") or [{}])[int(r.get("od_wpustu", 0))]
+    xy = wp.get("xy") if isinstance(wp, dict) else wp
+    z0 = float(dach["plyta"]["wierzch"])
+    d_kl, pz = _klin_w(m, dach, xy)
+    det = Detal(m, "D-06", f"Wpust dachowy {str(wp.get('opis', 'WP')).split(' — ')[0]} i rura {r.get('id')}",
+                ("WZ-15",), 10, z0=z0)
+    dn = float(r.get("dn", 100)) / 1000.0
+    ro = dn / 2 + 0.005
+    Wd = det.warstwy(kod_d)
+    kd = next(i for i, w in enumerate(Wd) if w["konstr"])
+    t = Wd[kd]["d"]
+    xL, xR, yB = -0.55, 0.55, -0.80
+    det.okno = (xL, yB, xR, 0.45)
+    det.rect(xL, -t, xR, 0.0, Wd[kd]["mat"], konstr=True)
+    det._rejestr(kod_d, Wd[kd], t)
+    y = -t
+    for w in Wd[kd + 1:]:
+        det.rect(xL, y - w["d"], -0.36, y, w["mat"])
+        det.rect(0.36, y - w["d"], xR, y, w["mat"])
+        det._rejestr(kod_d, w, w["d"])
+        y -= w["d"]
+    stos, y_top, _pl = stos_dachu(det, kod_d, xL, xR, d_kl)
+    ym = next(((a + b) / 2 for a, b, w in stos if w["funkcja"] == "hydroizolacja"), y_top)
+    yp = next(((a + b) / 2 for a, b, w in stos if w["funkcja"] == "paroizolacja"), 0.002)
+    det.otwor(-(ro - 0.005), yB, ro - 0.005, y_top + 0.10)                           # przelot rury
+    det.rect(-ro - 0.025, -t, -ro, 0.0, "ZAPRAWA")
+    det.rect(ro, -t, ro + 0.025, 0.0, "ZAPRAWA")
+    for sgn in (-1, 1):                                                              # korpus wpustu / rura
+        det.rect(sgn * ro, yB, sgn * (ro - 0.005), ym + 0.004, "WPUST")
+        det.rect(sgn * ro, yB, sgn * (ro + 0.020), -t - 0.01, "OTULINA")
+    det.rect(-0.20, yp - 0.004, 0.20, yp, "WPUST")                                   # kołnierz paroizolacji
+    det.rect(-0.25, ym - 0.004, -ro, ym, "WPUST")                                    # kołnierz hydroizolacji
+    det.rect(ro, ym - 0.004, 0.25, ym, "WPUST")
+    det.kontur([(-0.10, ym), (-0.08, ym + 0.12), (0.08, ym + 0.12), (0.10, ym)], zamkniety=False, pen=0.35)
+    for sgn in (-1, 1):
+        det.kontur([(sgn * (ro + 0.012) + 0.006 * np.cos(a), ym - 0.03 + 0.006 * np.sin(a))
+                    for a in np.linspace(0, 2 * np.pi, 13)], pen=0.35)
+    gk = "GK10" if "GK10" in m.przegrody else None
+    if gk:
+        det.stos_v(gk, -0.36, yB, -t - 0.012, kier=-1)
+        det.stos_v(gk, 0.36, yB, -t - 0.012, kier=+1)
+    det.linia("H", [(xL, ym), (-0.25, ym), (-ro, ym)])
+    det.linia("H", [(ro, ym), (xR, ym)])
+    det.polaczenie("H", [(-ro, ym), (ro, ym)])
+    det.linia("P", [(xL, yp), (-0.20, yp), (-ro, yp)])
+    det.linia("P", [(ro, yp), (xR, yp)])
+    det.polaczenie("P", [(-ro, yp), (ro, yp)])
+    det.linia("S", [(xL, -t - 0.002), (-0.36, -t - 0.002)])
+    det.linia("S", [(0.36, -t - 0.002), (xR, -t - 0.002)])
+    det.polaczenie("S", [(-0.36, -t - 0.002), (0.36, -t - 0.002)])
+    for p1, p2 in (((xL, yB), (xR, yB)), ((xL, y_top), (xL, -t)), ((xR, y_top), (xR, -t))):
+        det.przerwa(p1, p2)
+    det.opis_stosu(stos, "x", 0.45, wyjscie=(0.45, y_top + 0.12), tytul=f"{kod_d} — stropodach")
+    det.opis([(0.0, ym + 0.12)], ["kosz ochronny (liściołap)"])
+    det.opis([(0.18, ym - 0.002)], [f"wpust dachowy DN{int(dn * 1000)} z grzałką, kołnierz dociskowy membrany "
+                                    "(nadstawka w warstwie izolacji)"])
+    det.opis([(ro + 0.012, ym - 0.03)], ["kabel grzejny wpustu (sterowanie termostatem)"])
+    det.opis([(0.15, yp - 0.002)], ["kołnierz paroizolacji — wklejony w paroizolację z Al (szczelność powietrzna)"])
+    det.opis([(ro + 0.012, -t / 2)], ["przejście przez płytę: tuleja / otwór wiercony, wypełnienie zaprawą "
+                                      "(ognioodporne wg PT-K)"])
+    det.opis([(ro + 0.01, -t - 0.20)], [f"rura spustowa {r.get('id')} DN{int(dn * 1000)} w otulinie 20 mm "
+                                        f"(przeciwroszeniowa, akustyczna) — {r.get('opis', '')[:60]}"])
+    if gk:
+        det.opis([(0.40, -t - 0.35)], [f"obudowa szachtu {gk} (EI 30)"])
+    det.rzedna((-0.30, y_top), y_top, "wyk", "left")
+    det.rzedna((xL + 0.08, 0.0), 0.0, "konstr", "right")
+    det.spadek((-0.28, y_top + 0.10), (-0.14, y_top + 0.10), 2.0)
+    det.spadek((0.28, y_top + 0.10), (0.14, y_top + 0.10), 2.0)
+    det.opis([(-0.30, y_top + 0.002)], [f"pokrycie przy wpuście {fmt_z(z0 + y_top)} (izolacja spadkowa d_min)"])
+    det.uwagi.append("wpusty i przejścia instalacji przez przegrody zewnętrzne — mostki punktowe χ (WZ-15, wartości "
+                     "typowe); kołnierze paroizolacji i hydroizolacji wpustu — ciągłość 4 linii")
+    return det

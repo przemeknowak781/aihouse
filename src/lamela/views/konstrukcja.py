@@ -1191,18 +1191,24 @@ def widok_zbrojenie_fundamentu(ctx: ViewContext, spec: dict, scale: float, opts:
         g = ln.buffer(B / 2, cap_style=3 if ln.length < B else 2)
         vp.geom(g, L_OBR, pen="srednia", lt="KRESKOWA")
         placer.add_lines(g.boundary, w=0.3)
+    W = PF.get("mes")
+    dz = PF.get("dozbr") or {}
+    for pg in dz.get("mu", []):                     # strefy przekroju niewystarczającego (μ > μ_lim) — MES
+        vp.fill(pg, L_OBR, "#f2c4c4", z=5)
+        vp.geom(pg, L_OBR, pen="cienka", lt="KRESKOWA_DROBNA")
+    for (wa, k_), lst in [(k_, v) for k_, v in dz.items() if k_ != "mu" and k_[0] == warstwa]:
+        for pg, *_ in lst:
+            vp.geom(pg, L_OPI, pen="cienka", lt="KRESKOWA")
+            placer.add_lines(pg.boundary, w=0.3)
     for g in PF[warstwa]:
         rysuj_grupe(vp, placer, g, opis=False)
     for g in sorted(PF[warstwa], key=lambda q: -LineString(q.linia).length):
         a, b = np.asarray(g.linia[0]), np.asarray(g.linia[1])
         L = float(np.hypot(*(b - a)))
-        etykieta(vp, placer, (a + b) / 2, b - a, opis_grupy(g), g.pret.nr, 2.5,
+        txt = opis_grupy(g) + (f" — dozbrojenie {g.pole}" if g.rola == "dozbrojenie" else "")
+        etykieta(vp, placer, (a + b) / 2, b - a, txt, g.pret.nr, 2.5,
                  ts=[0.0] + [s_ * f * L for f in (0.15, 0.3) for s_ in (-1, 1)], bounds=P.buffer(2.0))
-        w = g.wym
-        KD.rejestruj(D, F.id, f"siatka {'dolna' if warstwa == 'dol' else 'górna'} {g.kier}", F.poz, w.As_req, w.As_min,
-                     KD.pole_preta(g.pret.fi) * 1000 / g.s, f"Ø{g.pret.fi} co {g.s / 10:g}", s=g.s,
-                     s_max=KD.s_max_plyty(F.h), As_max=0.04 * F.h * 1e6, arkusz=nr_ark,
-                     uwagi="pasmo Winklera bez żeber — patrz uwagi arkusza [WYMAGA ANALIZY]" if F.uwagi else "")
+    _kontrola_fund(D, F, PF, warstwa, nr_ark)
     przek = {eid: nm for nm, eid, _ in _przekroje_fund(ctx, [e for e in els if "os" in e])}
     for Z in D.zebra:
         z = PF["zebra"].get(Z.id)
@@ -1217,10 +1223,18 @@ def widok_zbrojenie_fundamentu(ctx: ViewContext, spec: dict, scale: float, opts:
         etykieta(vp, placer, np.asarray(ln.interpolate(0.5, normalized=True).coords[0]), u, txt, None, 1.8,
                  offs=(Z.b * 1000 / scale / 2 + 1.2, Z.b * 1000 / scale / 2 + 4.5),
                  ts=(0.0, -0.3 * ln.length, 0.3 * ln.length), layer=L_OPS)
-        As_p = (Z.dol[0] + Z.gora[0]) * KD.pole_preta(Z.dol[1])
-        KD.rejestruj(D, Z.id, "żebro — zbrojenie podłużne (dół + góra)", Z.poz, 0.0, Z.As_dol[1], As_p,
-                     f"{Z.dol[0]}+{Z.gora[0]} Ø{Z.dol[1]}", jedn="mm²", arkusz=nr_ark,
-                     uwagi="; ".join(Z.niesp[:2]))
+        rz = PF["mes_zebra"].get(Z.id)
+        if rz is None:
+            As_p = (Z.dol[0] + Z.gora[0]) * KD.pole_preta(Z.dol[1])
+            KD.rejestruj(D, Z.id, "żebro — zbrojenie podłużne (dół + góra)", Z.poz, 0.0, Z.As_dol[1], As_p,
+                         f"{Z.dol[0]}+{Z.gora[0]} Ø{Z.dol[1]}", jedn="mm²", arkusz=nr_ark, uwagi="; ".join(Z.niesp[:2]))
+        elif warstwa == "dol":
+            for wa in ("dol", "gora"):
+                n_, fi_, Areq, Aprov, zle = rz[wa]
+                KD.rejestruj(D, Z.id, f"żebro — {'dołem' if wa == 'dol' else 'górą'} (MES: A_s,req·b)", Z.poz, Areq, 0.0,
+                             Aprov, f"{n_}Ø{fi_} + siatka", jedn="mm²", arkusz=nr_ark, wymuszone_ok=not zle,
+                             uwagi="w strefie żebra μ > μ_lim — pogłębić/poszerzyć żebro [WYMAGA ZMIANY MODELU]" if zle
+                             else "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami")
     for S_ in D.stopy:
         st = PF["stopy"].get(S_.id)
         if st is None:
@@ -1231,10 +1245,7 @@ def widok_zbrojenie_fundamentu(ctx: ViewContext, spec: dict, scale: float, opts:
             txt = f"{S_.id}: siatka dołem {st['n1']}+{st['n2']} Ø{S_.siatka.fi} co {S_.siatka.s / 10:g} (poz. {st['x'].nr}, {st['y'].nr})"
             etykieta(vp, placer, (S_.xy[0], S_.xy[1] - S_.B / 2), (1.0, 0.0), txt, None, 1.8, offs=(2.0, 5.0, 8.0),
                      ts=(0.0, -0.8, 0.8), layer=L_OPS)
-        w = S_.siatka
-        KD.rejestruj(D, S_.id, "pogrubienie — siatka dolna", S_.poz, w.As_req, w.As_min, KD.pole_preta(w.fi) * 1000 / w.s,
-                     f"Ø{w.fi} co {w.s / 10:g}", s=w.s, s_max=KD.s_max_plyty(S_.h), arkusz=nr_ark,
-                     uwagi="; ".join(S_.niesp[:1]))
+
     if PF["naroza"] is not None and warstwa == "dol":
         res.notes.append(f"Naroża żeber obwodowych: pręty narożne L (poz. {PF['naroza'].nr}) {PF['naroza'].n} Ø"
                          f"{PF['naroza'].fi}, ramiona l₀ = {PF['naroza'].wym[0] / 10:g} cm — po 2 dołem i 2 górą w każdym "
@@ -1245,8 +1256,9 @@ def widok_zbrojenie_fundamentu(ctx: ViewContext, spec: dict, scale: float, opts:
         PF["zest"], "ZESTAWIENIE STALI — FUNDAMENT (płyta, żebra, pogrubienia)",
         _stopka_fund(D), PF["zest"].masa)))
     res.notes += UWAGI_ZBR[:3] + [
-        f"Siatki płyty (dół i góra): Ø{F.dol.fi} co {F.dol.s / 10:g} cm w obu kierunkach — dobór modułu "
-        f"(`dobierz_siatke`) z A_s,req/A_s,min biblioteki (poz. {F.poz}); pręty > 12 m łączone na zakład (mijankowo).",
+        f"Siatki płyty: dołem Ø{F.dol.fi} co {F.dol.s / 10:g}, górą Ø{F.gora.fi} co {F.gora.s / 10:g} cm w obu kierunkach "
+        f"— dobór modułu (`dobierz_siatke`) z A_s,req ({F.dol.zrodlo}); dozbrojenia (obszary kreskowe D…) — pręty "
+        "między prętami siatki; pręty > 12 m łączone na zakład (mijankowo).",
         "Kolejność robót: podsypka zagęszczona (I_s ≥ 0,98) → XPS (płyty układane mijankowo, szczelnie) → folia PE → "
         "zbrojenie żeber i płyty, uziom/przewód wyrównawczy, tuleje przejść → betonowanie płyty z żebrami jednym "
         "zabiegiem (bez przerw roboczych) → pielęgnacja ≥ 7 dni (PN-EN 13670 p. 8.5).",
@@ -1256,6 +1268,57 @@ def widok_zbrojenie_fundamentu(ctx: ViewContext, spec: dict, scale: float, opts:
         ctx.note(f"{nr_ark} {title}", f"kolizje napisów: {kol}")
     KD.zapisz_raporty(D, ctx)
     return vp, res, title
+
+
+def _kontrola_fund(D, F, PF, warstwa: str, nr_ark: str):
+    """Rejestr kontroli A_s płyty fundamentowej: siatki (MES poza dozbrojeniami), dozbrojenia, strefy μ > μ_lim."""
+    W = PF.get("mes")
+    if F is None:
+        return
+    if W is None:
+        for kier in ("x", "y"):
+            w = getattr(F, warstwa)
+            KD.rejestruj(D, F.id, f"siatka {'dolna' if warstwa == 'dol' else 'górna'} {kier}", F.poz, w.As_req, w.As_min,
+                         w.As_prov, w.opis, s=w.s, s_max=KD.s_max_plyty(F.h), arkusz=nr_ark,
+                         uwagi="pasmo Winklera biblioteki bez żeber [WYMAGA ANALIZY]")
+        return
+    rib = np.array([s_ != "" for s_ in W.strefa_el])
+    dz = PF.get("dozbr") or {}
+    w = getattr(F, warstwa)
+    for kier in ("x", "y"):
+        req = W.As[f"{warstwa}_{kier}"]
+        cov = np.zeros(len(req), bool)
+        for pg, *_ in dz.get((warstwa, kier), []):
+            cov |= np.array([pg.buffer(0.05).contains(Point(*c)) for c in W.el_c])
+        msk = ~rib & ~W.mu_przekr & ~cov
+        need = float(req[msk].max()) if msk.any() else 0.0
+        KD.rejestruj(D, F.id, f"siatka {'dolna' if warstwa == 'dol' else 'górna'} {kier} (MES, poza dozbrojeniami)",
+                     "MES-PF", need, w.As_min, w.As_prov, w.opis, s=w.s, s_max=KD.s_max_plyty(F.h),
+                     As_max=0.04 * F.h * 1e6, arkusz=nr_ark)
+        for i, (pg, fi, s_x, nd, prov) in enumerate(dz.get((warstwa, kier), []), 1):
+            KD.rejestruj(D, F.id, f"dozbrojenie D{i} {'dół' if warstwa == 'dol' else 'góra'} {kier}", "MES-PF", nd, 0.0,
+                         prov, f"{w.opis} + Ø{fi} co {s_x / 10:g}", s=s_x, arkusz=nr_ark)
+    if warstwa == "dol":
+        bt = W.beton
+        from ..obliczenia.konstrukcja.materialy import StalZbrojeniowa
+        xl = StalZbrojeniowa().xi_eff_lim(bt)
+        mul = xl * (1 - 0.5 * xl)
+        for i, pg in enumerate(dz.get("mu", []), 1):
+            msk = np.array([pg.buffer(0.05).contains(Point(*c)) for c in W.el_c]) & W.mu_przekr
+            if not msk.any():
+                continue
+            Mx = float(max(np.abs(W.M[k_][msk]).max() for k_ in W.M))
+            d_req = math.sqrt(Mx / (mul * bt.f_cd * 1000.0))
+            h_req = d_req + W.c_dol / 1000.0 + 0.012
+            strefy = sorted({W.strefa_el[j] or "płyta" for j in np.nonzero(msk)[0]})
+            KD.rejestruj(D, F.id, f"strefa S{i} ({', '.join(strefy)[:30]}) — przekrój niewystarczający", "MES-PF", 1.0, 0.0,
+                         0.0, "—", jedn="—", arkusz=nr_ark, wymuszone_ok=False,
+                         uwagi=f"M_Ed = {Mx:.0f} kNm/m > M_lim — wymagana wysokość h ≥ {h_req:.2f} m (obecnie "
+                               f"{float(W.h_el[msk].max()):.2f} m) [WYMAGA ZMIANY MODELU]")
+        for S_ in D.stopy:
+            ww = S_.siatka
+            KD.rejestruj(D, S_.id, "pogrubienie — siatka dolna (MES)", S_.poz, ww.As_req, ww.As_min, ww.As_prov, ww.opis,
+                         s=ww.s, arkusz=nr_ark)
 
 
 def _stopka_fund(D) -> list:

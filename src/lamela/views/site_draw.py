@@ -337,10 +337,13 @@ def label_base_map(c, s, lab: Labeler, win: Polygon, used: set, opts: dict, spot
             continue
         for ls in (g.geoms if hasattr(g, "geoms") else [g]):
             lab.along(ls, sx.lit, H, "Z-SIECI-IST", sx.kolor, n=3, max_cost=10.0, mask=0.2)
+            from ..draft.sheet import wrap
             short = short_desc(sx.opis)
             anchors = [np.asarray(ls.interpolate(f, normalized=True).coords[0])
                        for f in (0.2, 0.3, 0.12, 0.06, 0.4, 0.8, 0.9, 0.95, 0.03, 0.5, 0.6, 0.7)]
-            lab.label(anchors, [f"{sx.lit} — {short}"], H, "Z-SIECI-IST", color=sx.kolor,
+            txt = f"{sx.lit} — {short}"
+            lines = wrap(txt, 48.0, H) if T.width(txt, H) > 52.0 else [txt]
+            lab.label(anchors, lines, H, "Z-SIECI-IST", color=sx.kolor,
                       dists=(6.0, 9.0, 12.0, 16.0, 20.0, 25.0), dirs=[(0, 1), (1, 1), (-1, 1), (0, -1), (1, -1),
                                                                        (-1, -1)],
                       leader_from=2.0, dot=True, max_cost=40.0)
