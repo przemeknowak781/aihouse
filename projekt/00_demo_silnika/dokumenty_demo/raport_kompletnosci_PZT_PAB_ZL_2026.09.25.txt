@@ -96,5 +96,5 @@ Pola do uzupełnienia i dokumenty zewnętrzne (wystąpienia):
     1 × [DO UZUPEŁNIENIA: numer i data dokumentu]
     1 × [DO UZUPEŁNIENIA: potwierdzenie braku sieci ciepłowniczej: mapa do celów projektowych lub informacja przedsiębiorstwa ciepłowniczego]
     1 × [DO UZUPEŁNIENIA: z modelu]
-    1 × [DOKUMENT ZEWNĘTRZNY – do dołączenia: Decyzja zarządcy drogi o lokalizacji zjazdu z drogi gminnej 1KDD, Wójt Gminy Przykładowo — zarządca drogi gminnej, art. 29 ust. 1 i 3a ustawy o drogach publicznych (t.j. Dz.U. 2025 poz. 889); PB art. 33 ust. 2 pkt 1]
+    1 × [DOKUMENT ZEWNĘTRZNY – do dołączenia: Decyzja zarządcy drogi o lokalizacji zjazdu z drogi gminnej 1KDD, Wójt Gminy Przykładowo (fikcyjna) — zarządca drogi gminnej, art. 29 ust. 1 i 3a ustawy o drogach publicznych (t.j. Dz.U. 2025 poz. 889); PB art. 33 ust. 2 pkt 1]
     1 × [DOKUMENT ZEWNĘTRZNY – do dołączenia: opinia geotechniczna, geotechnik z uprawnieniami, rozp. 2012/463 § 8]

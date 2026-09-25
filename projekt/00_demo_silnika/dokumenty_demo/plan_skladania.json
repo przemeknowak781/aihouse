@@ -12,7 +12,21 @@
     "zlozenia_poziome": [
       297.0
     ],
-    "opis": "4 zgięcia pionowe (harmonijka, pas 210 mm z marginesem do oprawy), 1 zgięcie poziome; tabliczka na wierzchu"
+    "pasy": [
+      210.0,
+      150.5,
+      150.5,
+      190.0,
+      190.0
+    ],
+    "rzedy": [
+      297.0,
+      123.0
+    ],
+    "warstwy": 10,
+    "ocena": "poprawne",
+    "tabliczka_na_wierzchu": true,
+    "opis": "4 zgięcia pionowe (harmonijka 210 + 150 + 150 + 190 + 190 mm, pierwszy pas z marginesem do oprawy), 1 zgięcie poziome; tabliczka na wierzchu; składanie poprawne"
   },
   {
     "nr": "T-AR-02",
@@ -27,7 +41,21 @@
     "zlozenia_poziome": [
       297.0
     ],
-    "opis": "4 zgięcia pionowe (harmonijka, pas 210 mm z marginesem do oprawy), 1 zgięcie poziome; tabliczka na wierzchu"
+    "pasy": [
+      210.0,
+      150.5,
+      150.5,
+      190.0,
+      190.0
+    ],
+    "rzedy": [
+      297.0,
+      123.0
+    ],
+    "warstwy": 10,
+    "ocena": "poprawne",
+    "tabliczka_na_wierzchu": true,
+    "opis": "4 zgięcia pionowe (harmonijka 210 + 150 + 150 + 190 + 190 mm, pierwszy pas z marginesem do oprawy), 1 zgięcie poziome; tabliczka na wierzchu; składanie poprawne"
   },
   {
     "nr": "T-AR-03",
@@ -42,7 +70,21 @@
     "zlozenia_poziome": [
       297.0
     ],
-    "opis": "4 zgięcia pionowe (harmonijka, pas 210 mm z marginesem do oprawy), 1 zgięcie poziome; tabliczka na wierzchu"
+    "pasy": [
+      210.0,
+      150.5,
+      150.5,
+      190.0,
+      190.0
+    ],
+    "rzedy": [
+      297.0,
+      123.0
+    ],
+    "warstwy": 10,
+    "ocena": "poprawne",
+    "tabliczka_na_wierzchu": true,
+    "opis": "4 zgięcia pionowe (harmonijka 210 + 150 + 150 + 190 + 190 mm, pierwszy pas z marginesem do oprawy), 1 zgięcie poziome; tabliczka na wierzchu; składanie poprawne"
   },
   {
     "nr": "T-AR-04",
@@ -55,7 +97,19 @@
     "zlozenia_poziome": [
       297.0
     ],
-    "opis": "2 zgięcia pionowe (harmonijka, pas 210 mm z marginesem do oprawy), 1 zgięcie poziome; tabliczka na wierzchu"
+    "pasy": [
+      210.0,
+      192.0,
+      192.0
+    ],
+    "rzedy": [
+      297.0,
+      123.0
+    ],
+    "warstwy": 6,
+    "ocena": "poprawne",
+    "tabliczka_na_wierzchu": true,
+    "opis": "2 zgięcia pionowe (harmonijka 210 + 192 + 192 mm, pierwszy pas z marginesem do oprawy), 1 zgięcie poziome; tabliczka na wierzchu; składanie poprawne"
   },
   {
     "nr": "T-AR-05",
@@ -70,7 +124,21 @@
     "zlozenia_poziome": [
       297.0
     ],
-    "opis": "4 zgięcia pionowe (harmonijka, pas 210 mm z marginesem do oprawy), 1 zgięcie poziome; tabliczka na wierzchu"
+    "pasy": [
+      210.0,
+      150.5,
+      150.5,
+      190.0,
+      190.0
+    ],
+    "rzedy": [
+      297.0,
+      123.0
+    ],
+    "warstwy": 10,
+    "ocena": "poprawne",
+    "tabliczka_na_wierzchu": true,
+    "opis": "4 zgięcia pionowe (harmonijka 210 + 150 + 150 + 190 + 190 mm, pierwszy pas z marginesem do oprawy), 1 zgięcie poziome; tabliczka na wierzchu; składanie poprawne"
   },
   {
     "nr": "T-AR-06",
@@ -83,7 +151,19 @@
     "zlozenia_poziome": [
       297.0
     ],
-    "opis": "2 zgięcia pionowe (harmonijka, pas 210 mm z marginesem do oprawy), 1 zgięcie poziome; tabliczka na wierzchu"
+    "pasy": [
+      210.0,
+      192.0,
+      192.0
+    ],
+    "rzedy": [
+      297.0,
+      123.0
+    ],
+    "warstwy": 6,
+    "ocena": "poprawne",
+    "tabliczka_na_wierzchu": true,
+    "opis": "2 zgięcia pionowe (harmonijka 210 + 192 + 192 mm, pierwszy pas z marginesem do oprawy), 1 zgięcie poziome; tabliczka na wierzchu; składanie poprawne"
   },
   {
     "nr": "T-AR-07",
@@ -96,7 +176,19 @@
     "zlozenia_poziome": [
       297.0
     ],
-    "opis": "2 zgięcia pionowe (harmonijka, pas 210 mm z marginesem do oprawy), 1 zgięcie poziome; tabliczka na wierzchu"
+    "pasy": [
+      210.0,
+      192.0,
+      192.0
+    ],
+    "rzedy": [
+      297.0,
+      123.0
+    ],
+    "warstwy": 6,
+    "ocena": "poprawne",
+    "tabliczka_na_wierzchu": true,
+    "opis": "2 zgięcia pionowe (harmonijka 210 + 192 + 192 mm, pierwszy pas z marginesem do oprawy), 1 zgięcie poziome; tabliczka na wierzchu; składanie poprawne"
   },
   {
     "nr": "T-AR-08",
@@ -109,7 +201,19 @@
     "zlozenia_poziome": [
       297.0
     ],
-    "opis": "2 zgięcia pionowe (harmonijka, pas 210 mm z marginesem do oprawy), 1 zgięcie poziome; tabliczka na wierzchu"
+    "pasy": [
+      210.0,
+      192.0,
+      192.0
+    ],
+    "rzedy": [
+      297.0,
+      123.0
+    ],
+    "warstwy": 6,
+    "ocena": "poprawne",
+    "tabliczka_na_wierzchu": true,
+    "opis": "2 zgięcia pionowe (harmonijka 210 + 192 + 192 mm, pierwszy pas z marginesem do oprawy), 1 zgięcie poziome; tabliczka na wierzchu; składanie poprawne"
   },
   {
     "nr": "T-AR-09",
@@ -122,29 +226,63 @@
     "zlozenia_poziome": [
       297.0
     ],
-    "opis": "2 zgięcia pionowe (harmonijka, pas 210 mm z marginesem do oprawy), 1 zgięcie poziome; tabliczka na wierzchu"
+    "pasy": [
+      210.0,
+      192.0,
+      192.0
+    ],
+    "rzedy": [
+      297.0,
+      123.0
+    ],
+    "warstwy": 6,
+    "ocena": "poprawne",
+    "tabliczka_na_wierzchu": true,
+    "opis": "2 zgięcia pionowe (harmonijka 210 + 192 + 192 mm, pierwszy pas z marginesem do oprawy), 1 zgięcie poziome; tabliczka na wierzchu; składanie poprawne"
   },
   {
     "nr": "DEMO-01",
     "format": "A3",
     "wymiary": "420×297",
     "zlozenia_pionowe": [
-      105.0,
+      125.0,
       230.0
     ],
     "zlozenia_poziome": [],
-    "opis": "2 zgięcia pionowe (harmonijka, pas 210 mm z marginesem do oprawy); tabliczka na wierzchu"
+    "pasy": [
+      125.0,
+      105.0,
+      190.0
+    ],
+    "rzedy": [
+      297.0
+    ],
+    "warstwy": 3,
+    "ocena": "dobre",
+    "tabliczka_na_wierzchu": true,
+    "opis": "2 zgięcia pionowe (harmonijka 125 + 105 + 190 mm, pierwszy pas z marginesem do oprawy); tabliczka na wierzchu; składanie dobre"
   },
   {
     "nr": "DEMO-02",
     "format": "A3",
     "wymiary": "420×297",
     "zlozenia_pionowe": [
-      105.0,
+      125.0,
       230.0
     ],
     "zlozenia_poziome": [],
-    "opis": "2 zgięcia pionowe (harmonijka, pas 210 mm z marginesem do oprawy); tabliczka na wierzchu"
+    "pasy": [
+      125.0,
+      105.0,
+      190.0
+    ],
+    "rzedy": [
+      297.0
+    ],
+    "warstwy": 3,
+    "ocena": "dobre",
+    "tabliczka_na_wierzchu": true,
+    "opis": "2 zgięcia pionowe (harmonijka 125 + 105 + 190 mm, pierwszy pas z marginesem do oprawy); tabliczka na wierzchu; składanie dobre"
   },
   {
     "nr": "DEMO-03",
@@ -157,6 +295,18 @@
     "zlozenia_poziome": [
       297.0
     ],
-    "opis": "2 zgięcia pionowe (harmonijka, pas 210 mm z marginesem do oprawy), 1 zgięcie poziome; tabliczka na wierzchu"
+    "pasy": [
+      210.0,
+      192.0,
+      192.0
+    ],
+    "rzedy": [
+      297.0,
+      123.0
+    ],
+    "warstwy": 6,
+    "ocena": "poprawne",
+    "tabliczka_na_wierzchu": true,
+    "opis": "2 zgięcia pionowe (harmonijka 210 + 192 + 192 mm, pierwszy pas z marginesem do oprawy), 1 zgięcie poziome; tabliczka na wierzchu; składanie poprawne"
   }
 ]

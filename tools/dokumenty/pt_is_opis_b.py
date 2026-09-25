@@ -49,7 +49,7 @@ def wk(D: DanePTIS, modul: str, fragment: str, parametr: str | None = None, miej
 
 def rozdz_obliczenia(o: Opis, D: DanePTIS):
     """5. Założenia, obliczenia i dobór urządzeń (§ 23 pkt 8 lit. a–b) — zestawienie + pełne obliczenia."""
-    obc, w, og, pc = D.obc, D.went, D.og, D.og.pc
+    obc, w, pc = D.obc, D.went, D.og.pc
     grp: dict = {}
     for p in obc.pomieszczenia:
         grp.setdefault(round(p.theta, 1), []).append(p)
@@ -348,7 +348,7 @@ def rozdz_braki(o: Opis, D: DanePTIS):
     o.tekst("Uzgodnienia: PT-1 AR (przejścia przez przegrody, szachty, wyłaz), PT-2 BO (przejścia przez płytę "
             "fundamentową i stropy, podstawy urządzeń), PT-4 IE (zasilanie PC, grzałki, centrali, sterowników; "
             "połączenia wyrównawcze rur metalowych). Braki modelu zgłoszone przez generator rysunków IS "
-            f"(`projekt/05_PT_instalacje_sanitarne/BRAKI_DANYCH.md`, stan z dnia generowania rysunków):")
+            "(`projekt/05_PT_instalacje_sanitarne/BRAKI_DANYCH.md`, stan z dnia generowania rysunków):")
     rows = D.braki_tabela()
     if rows:
         o.tabela(rows, tytul="Braki danych modelu — rysunki IS", wyrownanie={"Element": "l", "Brak / stan w modelu": "l"},

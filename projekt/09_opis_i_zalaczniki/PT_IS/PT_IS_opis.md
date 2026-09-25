@@ -165,7 +165,7 @@ Garaż — wentylacja naturalna, bez połączenia z centralą (Garaż 0.13: otwo
 
 ### Instalacja wodociągowa wody zimnej i ciepłej — § 23 pkt 7 lit. e RPB; W-130…W-137
 
-Zasilanie z sieci wodociągowej przyłączem (PZT); wodomierz główny **DN25 Q3=6.3** w pomieszczeniu
+Zasilanie z sieci wodociągowej przyłączem (PZT); wodomierz główny **DN25, Q3 = 6,3 m³/h** w pomieszczeniu
 technicznym parteru (W-131), za nim filtr, zawór antyskażeniowy EA (PN-EN 1717) i
 reduktor ciśnienia (nastawa 400 kPa).
 Przybory (23): pralka ×1, prysznic ×3, suszarka ×1, umywalka ×3, umywalka_blat ×2, wanna ×1, wc ×5, wpust_podlogowy ×1, zawor_ogrodowy ×2, zlew ×3, zmywarka ×1. Zapotrzebowanie:
@@ -202,7 +202,7 @@ cyrkulacji i c.o. wg WT zał. 2 pkt 1.5 (W-135).
 Kanalizacja grawitacyjna, system I wg PN-EN 12056-2 (K = 0,5): ΣDU = **20,6 l/s**,
 Q_ww = 0,5·√ΣDU = **2,27 l/s** (W-138). Piony: K1 DN100 — wywiewka ponad dach; K2 DN100 — zawór napowietrzający PN-EN 12380 (dozwolony); K3 DN70 — wywiewka ponad dach; wentylacja pionów wg WT § 125 (W-139).
 Przewody odpływowe pod posadzką parteru (w płycie fundamentowej — przejścia wg PT-2 BO) do wyjścia z budynku,
-przykanalik **DN150 i = 0.02** ze studzienką rewizyjną: studzienka rewizyjna z tworzywa PP DN425 z kinetą przelotową, właz żeliwny B125 [ZAŁ], głębokość
+przykanalik **DN150 i = 2,0 %** ze studzienką rewizyjną: studzienka rewizyjna z tworzywa PP DN425 z kinetą przelotową, właz żeliwny B125 [ZAŁ], głębokość
 1,17 m, 6,2 m od granicy. Rzędne dna (wzgl. ±0,000):
 pion K3 −0,99 m; pion K2 −1,29 m; pion K1 −1,42 m; wyjście z budynku −1,48 m; studzienka (dno wlotu) −1,54 m.
 Zabezpieczenie przed cofką (WT § 124, W-140): Najniższy wpust/przybór powyżej poziomu piętrzenia (teren przy kanale w ulicy) — spełnione.
@@ -250,7 +250,7 @@ Grunt: piaski średnie, k_f = 3,00·10⁻⁴ m/s (wartość typowa [W]; wymagane
 
 *Źródło: model/dzialka.yaml — uzbrojenie istniejące i projektowane*
 
-**Punkty pomiarowe:** wodomierz główny DN25 Q3=6.3 (odczyt gestora sieci; W-131); licznik
+**Punkty pomiarowe:** wodomierz główny DN25, Q3 = 6,3 m³/h (odczyt gestora sieci; W-131); licznik
 energii elektrycznej w ZKP (PT-4 IE) — pompa ciepła i grzałka zasilane z instalacji budynku (moce elektryczne
 — rozdział „Charakterystyka energetyczna”, bilans mocy). Sieć gazowa: gazociąg PE 63 — NIE wykorzystywany (dom all-electric) —
 budynek bez przyłącza gazowego. Sieć ciepłownicza — brak (oświadczenie projektanta instalacyjnego w ZL; W-158).
@@ -495,7 +495,7 @@ ponownego przeliczenia EP, punktu biwalentnego i hałasu (generator tomu przelic
 | Naczynia wzbiorcze przeponowe | c.o. ≥ 18 dm³ (p₀ 0,83 bar); c.w.u. ≥ 50 dm³ (p₀ 3,8 bar), przepływowe | PN-B-02414:1999 (powołana w WT) [W-154] |
 | Rozdzielacze ogrzewania podłogowego | P0: 12 obwodów, przepływomierze, siłowniki 230 V/24 V NC; P1: 7 obwodów, przepływomierze, siłowniki 230 V/24 V NC; P2: 7 obwodów, przepływomierze, siłowniki 230 V/24 V NC | W-152, W-154 |
 | Centrala wentylacyjna z odzyskiem ciepła | V_max ≥ 435 m³/h przy sprężu instalacji; η_t ≥ 85 %; SFP ≤ 1,90 kW/(m³/s); SEC klasa ≥ A; by-pass 100 %; filtry ISO ePM1 50 % (nawiew), ISO Coarse (wywiew); L_WA wg PN-B-02151-2 w pokojach | W-160…W-169; (UE) 1253/2014; PN-EN 13141-7+A1:2026-05 |
-| Zestaw wodomierzowy | wodomierz DN25 Q3=6.3 (lub wg warunków gestora), zawory, filtr, EA; reduktor ciśnienia wymagany | W-131, W-130; PN-EN 1717 |
+| Zestaw wodomierzowy | wodomierz DN25, Q3 = 6,3 m³/h (lub wg warunków gestora), zawory, filtr, EA; reduktor ciśnienia wymagany | W-131, W-130; PN-EN 1717 |
 | Zbiornik retencyjny wód opadowych | szczelny, V = 5,0 m³ (≤ 5 m³), osadnik, filtr, pompa zatapialna do podlewania, przelew do niecki, właz z zabezpieczeniem | W-145; PW art. 16 pkt 65 lit. f |
 
 Dane liczbowe urządzeń przykładowych: [DANE PRZYKŁADOWE – FIKCYJNE].
