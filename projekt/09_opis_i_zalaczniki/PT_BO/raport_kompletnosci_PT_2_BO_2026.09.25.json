@@ -1,7 +1,7 @@
 {
   "plik": "PT_2_BO_2026.09.25.pdf",
   "lista": "PT-2 BO — projekt techniczny, konstrukcja (rejestr C.2)",
-  "status": "PRZYKŁAD – NIE DO ZŁOŻENIA",
+  "status": "NIEKOMPLETNY",
   "pozycje": [
     {
       "id": "F-01",
@@ -19,7 +19,7 @@
       "podstawa": "RPB § 2b ust. 3",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "10.62 MB (limit 150 MB)"
+      "szczegoly": "11.32 MB (limit 150 MB)"
     },
     {
       "id": "F-03",
@@ -82,7 +82,7 @@
       "podstawa": "RPB § 6 ust. 2",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "306 stron numerowanych"
+      "szczegoly": "343 stron numerowanych"
     },
     {
       "id": "C2-06",
@@ -112,6 +112,24 @@
       "szczegoly": "22 rysunki w skali nie mniejszej niż 1:100"
     },
     {
+      "id": "C2-09",
+      "element": "PT",
+      "opis": "Dane dotyczące warunków ochrony ludności (w PT — „nie dotyczy” z podstawą)",
+      "podstawa": "RPB § 23 pkt 12 (Dz.U. 2026 poz. 597 § 1 pkt 6)",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C2-10",
+      "element": "*",
+      "opis": "Metryki arkuszy: projektant (dane lub [DO UZUPEŁNIENIA]), sprawdzający (osoba lub „nie dotyczy (art. 20 ust. 3 pkt 2 PB)”)",
+      "podstawa": "RPB § 10 ust. 1 pkt 3; W-305, W-320",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "26 tabliczek z wypełnioną metryką"
+    },
+    {
       "id": "C2-BO-01",
       "element": "PT",
       "opis": "Rozwiązania konstrukcyjne, schematy statyczne, założenia i obciążenia, wyniki obliczeń",
@@ -124,10 +142,10 @@
       "id": "C2-BO-02",
       "element": "PT",
       "opis": "Dokumentacja badań podłoża gruntowego i projekt geotechniczny (kat. II)",
-      "podstawa": "RPB § 23 pkt 2; rozp. 2012/463 § 7 ust. 2",
-      "status": "OK",
+      "podstawa": "RPB § 23 pkt 2; rozp. 2012/463 § 7 ust. 2, § 9, § 10",
+      "status": "DO UZUPEŁNIENIA",
       "obowiazkowa": true,
-      "szczegoly": ""
+      "szczegoly": "dokumentacja badań podłoża — strona zastępcza [DOKUMENT ZEWNĘTRZNY]; projekt geotechniczny na danych przykładowych"
     },
     {
       "id": "C2-BO-03",
@@ -155,12 +173,21 @@
       "status": "N/D",
       "obowiazkowa": true,
       "szczegoly": "nie dotyczy — warunki proste (P03)"
+    },
+    {
+      "id": "C2-BO-06",
+      "element": "PT",
+      "opis": "Analizy konstrukcji zamknięte: brak warunków NIESPEŁNIONYCH, uwag [WYMAGA ANALIZY] i pozycji NIEZAMKNIĘTYCH",
+      "podstawa": "PB art. 34 ust. 3 pkt 3 lit. a, art. 41 ust. 4a pkt 2; RPB § 23 pkt 1",
+      "status": "BRAK",
+      "obowiazkowa": true,
+      "szczegoly": "tom zawiera znaczniki niedomkniętych analiz: „NIESPEŁNION” ×76, „WYMAGA ANALIZY” ×27, „NIEZAMKNIĘT” ×14"
     }
   ],
   "znaczniki": {
-    "DO UZUPEŁNIENIA": 20,
+    "DO UZUPEŁNIENIA": 183,
     "DOKUMENT ZEWNĘTRZNY": 1,
-    "DANE PRZYKŁADOWE": 363,
+    "DANE PRZYKŁADOWE": 400,
     "ZAŁ": 33,
     "NZW": 74,
     "INT": 0,
@@ -168,43 +195,46 @@
     "lista": {
       "[DO UZUPEŁNIENIA: nazwa pracowni projektowej]": 1,
       "[DO UZUPEŁNIENIA: adres pracowni]": 1,
-      "[DANE PRZYKŁADOWE – FIKCYJNE]": 340,
+      "[DANE PRZYKŁADOWE – FIKCYJNE]": 377,
       "[DO UZUPEŁNIENIA: jednostka ewidencyjna — kod TERYT WWPPGG_R i nazwa]": 1,
       "[DO UZUPEŁNIENIA: kod TERYT jedn. ewid. WWPPGG_R]": 2,
       "[DO UZUPEŁNIENIA: imię i nazwisko lub nazwa inwestora]": 2,
       "[DO UZUPEŁNIENIA: adres inwestora]": 2,
-      "[DO UZUPEŁNIENIA: imię i nazwisko]": 3,
+      "[DO UZUPEŁNIENIA: imię i nazwisko]": 81,
       "[DO UZUPEŁNIENIA: nr uprawnień budowlanych]": 3,
       "[DO UZUPEŁNIENIA: miejscowość]": 1,
       "[DO UZUPEŁNIENIA: nr i data decyzji o pozwoleniu na budowę, organ]": 1,
       "[DO UZUPEŁNIENIA: data złożenia oświadczenia z art. 102a PB]": 1,
       "[DO UZUPEŁNIENIA: potwierdzenie wpisu w e-CRUB albo dołączenie kopii]": 1,
+      "[DO UZUPEŁNIENIA: status w katalogu PKN — poza rejestrem wymagań A.3]": 4,
+      "[DO UZUPEŁNIENIA: rok wydania — poza rejestrem wymagań A.3]": 3,
       "[ZAŁ]": 33,
       "[NZW]": 74,
       "[DO UZUPEŁNIENIA: imię i nazwisko, specjalność, nr uprawnień]": 1,
       "[DANE PRZYKŁADOWE]": 23,
-      "[DOKUMENT ZEWNĘTRZNY – do dołączenia: dokumentacja badań podłoża gruntowego, geotechnik z uprawnieniami (E-04)]": 1
+      "[DOKUMENT ZEWNĘTRZNY – do dołączenia: dokumentacja badań podłoża gruntowego, geotechnik z uprawnieniami (E- 04)]": 1,
+      "[DO UZUPEŁNIENIA: specjalność, nr uprawnień]": 78
     }
   },
   "elementy": {
     "PT": {
       "od": 1,
-      "do": 333,
-      "strony_opisu": 307,
+      "do": 370,
+      "strony_opisu": 344,
       "arkusze": 26
     }
   },
-  "rozmiar_mb": 10.618850708007812,
-  "strony": 333,
+  "rozmiar_mb": 11.316986,
+  "strony": 370,
   "podsumowanie": {
-    "status": "PRZYKŁAD – NIE DO ZŁOŻENIA",
-    "OK": 14,
-    "BRAK": 0,
-    "DO UZUPEŁNIENIA": 2,
+    "status": "NIEKOMPLETNY",
+    "OK": 15,
+    "BRAK": 1,
+    "DO UZUPEŁNIENIA": 3,
     "N/D": 1,
     "OSTRZEŻENIE": 0,
-    "znaczniki_do_uzupelnienia": 20,
+    "znaczniki_do_uzupelnienia": 183,
     "znaczniki_dokument_zewnetrzny": 1,
-    "znaczniki_dane_przykladowe": 363
+    "znaczniki_dane_przykladowe": 400
   }
 }

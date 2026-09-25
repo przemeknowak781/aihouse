@@ -123,6 +123,11 @@ oświadczenie, punkty opisu (§ 14 pkt 1–8 PZT, § 20 ust. 1 pkt 1–14 PAB, �
 rzutów/przekrojów/elewacji i skale ≤ 1:100 / 1:500), metryki arkuszy (`spec: tabliczki` — wiersz „Projektant” niepusty, „Sprawdzający” z osobą albo „nie dotyczy (art. 20 ust. 3 pkt 2 PB)”; W-305, W-320), § 23 pkt 12 w każdym tomie PT, ZL (informacja BIOZ pkt 1–6, zjazd, oświadczenie IS).
 Wyszukuje po zakładkach, tekście strony tytułowej, tekście opisu i tytułach rysunków (wyrażenia regularne).
 
+Klucze pozycji poza `szukaj`: `uzupelnic_gdy` (+ `uzupelnic_opis`) — znaleziona treść zawiera znacznik zastępczy
+(np. `[DOKUMENT ZEWNĘTRZNY – do dołączenia: dokumentacja badań podłoża…]`) → DO UZUPEŁNIENIA; `brak_gdy`
+(+ `brak_opis`) — pozycja „negatywna”: BRAK, gdy tekst elementu zawiera wskazane znaczniki (wzorce `(?-i:…)` są
+wrażliwe na wielkość liter), np. C2-BO-06: „NIESPEŁNIONY”, „WYMAGA ANALIZY”, „NIEZAMKNIĘTE” w tomie PT-2 BO.
+
 Statusy pozycji: OK · BRAK · DO UZUPEŁNIENIA (jest, ale z polem `[DO UZUPEŁNIENIA]` / tylko arkusz zastępczy) · N/D
 · OSTRZEŻENIE. Status tomu: NIEKOMPLETNY → PRZYKŁAD – NIE DO ZŁOŻENIA (są znaczniki `[DO UZUPEŁNIENIA]` lub
 `[DOKUMENT ZEWNĘTRZNY]`, reguła AUD-RYS z E.1) → KOMPLETNY FORMALNIE. `raport.tekst()`, `raport.json()`,
