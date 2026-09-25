@@ -545,6 +545,7 @@ class Rozmieszczenie:
     znaki: bool = False                              # strefy znaków centrujących zarezerwowane
     czesci_uwag: int = 0                             # części uwag (wszystkich bloków uwag)
     bloki_uwag: int = 0
+    kolejnosc_ok: bool = True                        # bloki czytają się kolumnami od lewej, w kolumnie od góry
 
     @property
     def dodatkowe_czesci(self) -> int:
@@ -616,15 +617,16 @@ def pakuj(W: float, H: float, widoki: list[Widok], grupa: Grupa, bloki: list[Blo
         return _pakuj(*args, False, max_czesci, kolejnosc)
     r1 = _pakuj(*args, True, max_czesci, kolejnosc)
     r0 = _pakuj(*args, False, max_czesci, kolejnosc)
-    if r1.ok and (not r0.ok or _jakosc(r1)[:2] <= _jakosc(r0)[:2]):
+    if r1.ok and (not r0.ok or _jakosc(r1)[:3] <= _jakosc(r0)[:3]):
         return r1
     return r0 if r0.ok else r1
 
 
 def _jakosc(R: Rozmieszczenie) -> tuple:
-    """Ocena upakowania (mniej = lepiej): części uwag, kolumny bloków, liczba bloków, brak rezerwacji znaków."""
+    """Ocena upakowania (mniej = lepiej): dodatkowe części uwag, kolejność czytania bloków, kolumny bloków, liczba
+    bloków, brak rezerwacji znaków."""
     rb = [r for k, _n, r in R.prostokaty if k == "blok"]
-    return (R.dodatkowe_czesci, len(_kolumny(rb)), len(R.bloki), 0 if R.znaki else 1)
+    return (R.dodatkowe_czesci, 0 if R.kolejnosc_ok else 1, len(_kolumny(rb)), len(R.bloki), 0 if R.znaki else 1)
 
 
 def _pakuj(W, H, widoki, grupa, bloki, tb_h, przes, gap_vb, znaki: bool, max_czesci: int,
@@ -689,16 +691,36 @@ def _pakuj(W, H, widoki, grupa, bloki, tb_h, przes, gap_vb, znaki: bool, max_cze
             R.brak = f"blok „{b.nazwa}” ({b.szer:.0f}×{b.wys:.0f} mm) nie mieści się"
             return R
         _dodaj_blok(wolne, R, b, pos[0], pos[1])
+    stan = (list(R.bloki), list(R.prostokaty), R.czesci_uwag, wolne)
+    warianty = [stan]
     if kolejnosc != "dowolna":
-        wolne = _porzadek_czytania(R, baza, kolejne, n_b, n_p) or wolne
-    for b in odlozone:
-        pos = _umiesc_blok(wolne, b, b.szer, b.wys)
-        if pos is None:
-            R.brak = f"blok „{b.nazwa}” ({b.szer:.0f}×{b.wys:.0f} mm) nie mieści się"
+        wl = _porzadek_czytania(R, baza, kolejne, n_b, n_p)
+        if wl is not None:
+            warianty.insert(0, (R.bloki, R.prostokaty, R.czesci_uwag, wl))
+    for bl, pr, cz, wl in warianty:            # bloki odłożone; gdy się nie mieszczą po przestawieniu — bez niego
+        R.bloki, R.prostokaty, R.czesci_uwag = list(bl), list(pr), cz
+        wl = wl.kopia()
+        for b in odlozone:
+            pos = _umiesc_blok(wl, b, b.szer, b.wys)
+            if pos is None:
+                R.brak = f"blok „{b.nazwa}” ({b.szer:.0f}×{b.wys:.0f} mm) nie mieści się"
+                break
+            _dodaj_blok(wl, R, b, pos[0], pos[1])
+        else:
+            R.brak, R.ok = "", True
+            R.kolejnosc_ok = _kolejnosc_ok([r for k, _n, r in R.prostokaty[n_p:n_p + len(R.bloki) - n_b]
+                                            if k == "blok"])
             return R
-        _dodaj_blok(wolne, R, b, pos[0], pos[1])
-    R.ok = True
     return R
+
+
+def _kolejnosc_ok(rects) -> bool:
+    """Prostokąty w kolejności listy czytają się kolumnami od lewej, w kolumnie od góry."""
+    if len(rects) < 2:
+        return True
+    ci = {i: c for c, col in enumerate(_kolumny(rects)) for i in col[2]}
+    return all(ci[i + 1] > ci[i] or (ci[i + 1] == ci[i] and _po(rects[i], rects[i + 1]))
+               for i in range(len(rects) - 1))
 
 
 def _umiesc_kotwice(wolne: Wolne, b: Blok, tb: tuple, fx1: float):
@@ -870,20 +892,17 @@ def _porzadek_czytania(R: Rozmieszczenie, baza: Wolne, kolejne: list, n_b: int, 
     cols = _kolumny(rects)
     if len(cols) < 2:
         return
-    ci = {i: c for c, col in enumerate(cols) for i in col[2]}
-    if all(ci[i + 1] > ci[i] or (ci[i + 1] == ci[i] and _po(rects[i], rects[i + 1])) for i in range(len(rects) - 1)):
+    if _kolejnosc_ok(rects):
         return
-    sloty = []                                     # (x0, x1, y_bot, y_top)
+    sloty = []                                     # (x0, x1, y_bot, y_top) — wszystkie wolne odcinki kolumn
     for x0, x1, idx in cols:
-        y_lo = min(rects[i][1] for i in idx)
-        y_hi = max(rects[i][3] for i in idx)
         scal = []
         for a, b in sorted((f[1], f[3]) for f in baza.free if f[0] <= x0 + 1e-6 and f[2] >= x1 - 1e-6):
             if scal and a <= scal[-1][1] + 1e-6:
                 scal[-1][1] = max(scal[-1][1], b)
             else:
                 scal.append([a, b])
-        sloty += [(x0, x1, a, b) for a, b in sorted(scal, key=lambda t: -t[1]) if b > y_lo + 1e-6 and a < y_hi - 1e-6]
+        sloty += [(x0, x1, a, b) for a, b in sorted(scal, key=lambda t: -t[1]) if b - a >= 10.0]
     units = []                                     # ("b", blok, None) | ("u", blok uwag, nr pozycji)
     for b in kolejne:
         units += [("b", b, None)] if b.uwagi is None else [("u", b, i) for i in range(len(b.uwagi.lines))]

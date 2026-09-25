@@ -1923,7 +1923,9 @@ class AnalizaKonstrukcji:
                             Fn = rr * np.diff(bnd)
                             for c, a_, b_ in kol:
                                 m_ = (sw >= a_ - 1e-6) & (sw <= b_ + 1e-6)
-                                if m_.any():
+                                if m_.any() and float(Fn[m_].sum()) > 0.0:
+                                    # tylko wypadkowa dodatnia (docisk); ujemne siły narożne płyty Kirchhoffa zostają
+                                    # w profilu ściany (wyrównanie jak dla muru) — słup bez odciążenia artefaktem MES
                                     self._do_slupa(c, cs, float(Fn[m_].sum()))
                                     rr = np.where(m_, 0.0, rr)
                         # wygładzenie 1,0 m z zachowaniem wypadkowej (siły narożne płyty) [UPR]
@@ -1990,6 +1992,18 @@ class AnalizaKonstrukcji:
                     arr = arr + np.where(mm, T / 2 / (a1 - a0), 0.0)
                 dol.q[cs] = arr
             pr["otw"].append(o)
+        # słupy ŻB w murze: obciążenie dolne w obrysie słupa (w tym przekazane znad sąsiednich otworów) → słup; mur
+        # przerwany słupem (bez ciężaru muru w obrysie słupa)
+        for c, a_, b_ in kol:
+            msk = (dol.s >= a_ - 1e-9) & (dol.s <= b_ + 1e-9)
+            if msk.sum() < 2:
+                continue
+            for cs in list(dol.q):
+                arr = dol.q[cs]
+                T = float(np.trapezoid(np.where(msk, arr, 0.0), dol.s)) - (gm2 * h * (b_ - a_) if cs == "G" else 0.0)
+                if abs(T) > 1e-9:
+                    self._do_slupa(c, cs, T)
+                dol.q[cs] = np.where(msk, 0.0, arr)
         pr["gm2"], pr["zest"], pr["h"] = gm2, zest, h
         self._sprawdz_sciane(w, pr)
 
@@ -2303,16 +2317,17 @@ class AnalizaKonstrukcji:
         self.pos_sciany.append(poz)
 
     def _segmenty(self, w, pr) -> list:
-        """Odcinki ściany: filarki między otworami ('filarek') lub pasma bez otworów ('sciana')."""
-        otw = sorted(pr["otw"], key=lambda o: o.s0)
-        if not otw:
+        """Odcinki ściany: filarki między otworami ('filarek') lub pasma bez otworów ('sciana'); obrysy słupów ŻB w murze
+        (trzpieni) wyłączone — przerywają mur jak otwory (filarek przy słupie liczony bez długości słupa)."""
+        prz = sorted([(o.s0, o.s1) for o in pr["otw"]] + [(a_, b_) for _, a_, b_ in pr.get("slupy") or []])
+        if not prz:
             return [(0.0, w.L, "sciana")]
         out = []
         prev = 0.0
-        for o in otw:
-            if o.s0 - prev > 0.05:
-                out.append((prev, o.s0, "filarek" if o.s0 - prev <= 2.0 else "sciana"))
-            prev = max(prev, o.s1)
+        for s0, s1 in prz:
+            if s0 - prev > 0.05:
+                out.append((prev, s0, "filarek" if s0 - prev <= 2.0 else "sciana"))
+            prev = max(prev, s1)
         if w.L - prev > 0.05:
             out.append((prev, w.L, "filarek" if w.L - prev <= 2.0 else "sciana"))
         return out
