@@ -391,6 +391,13 @@ class SectionBuilder:
                 chain_storey.add(z)
         chain_detail.add(ztop_l)
         chain_storey.add(ztop_l)
+        # łańcuch szczegółowy tylko do wysokości ściany skrajnej; kondygnacyjny — wszystkie poziomy i dachy
+        chain_detail = {z for z in chain_detail if z <= ztop_l + 1e-6}
+        for z in [float(sl["top"]) for sl in m.plyty() if sl["typ"] == "dach" and self._elem_cut(sl["id"])]:
+            chain_storey.add(z)
+        att = [float(sl.get("top_attyki") or 0) for sl in m.plyty() if sl["typ"] == "dach" and self._elem_cut(sl["id"])]
+        if att:
+            chain_storey.add(max(att))
         rnd = lambda v: round(float(v), 3)    # noqa: E731 — punkty na siatce 1 mm (sumy łańcuchów = całość)
         chain_detail = {rnd(v) for v in chain_detail}
         chain_storey = {rnd(v) for v in chain_storey}
