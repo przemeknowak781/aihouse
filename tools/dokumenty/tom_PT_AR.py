@@ -241,14 +241,14 @@ def rozdz_zakres(o: Opis, D: dict, kat_ar: Path | None):
     PN-EN ISO 13370:2017-09, PN-EN ISO 10077-1:2017-10, PN-EN ISO 10211:2017-09, PN-EN ISO 13788:2013-05,
     PN-EN ISO 14683:2017-09 (rejestr wymagań, W-243…W-250). Tom jest zgodny z PZT i PAB (PB art. 34 ust. 3c).
     """, podstawa="§ 23 RPB")
-    o.rozdzial("Wyroby budowlane — zasada doboru", f"""
-    Wyroby określono **parametrami wymaganymi** (λ obliczeniowe, grubość, klasa reakcji na ogień, opór dyfuzyjny s_d,
+    o.tekst(f"""
+    **Wyroby budowlane — zasada doboru (PB art. 10).** Wyroby określono **parametrami wymaganymi** (λ obliczeniowe, grubość, klasa reakcji na ogień, opór dyfuzyjny s_d,
     U_w/U_D, g, klasa szczelności). Nazwy systemów i dane z kart katalogowych przywołane w modelu są
     **przykładowe — dopuszcza się wyroby równoważne** o parametrach nie gorszych, wprowadzone do obrotu zgodnie
     z PB art. 10 (oznakowanie CE lub znak budowlany B, deklaracja właściwości użytkowych). Wartości oznaczone
     {ZAL} (założenie) i {NZW} (niezweryfikowane) wymagają potwierdzenia deklaracją wybranego wyrobu przed
     wbudowaniem.
-    """, podstawa="PB art. 10")
+    """)
 
 
 def rozdz_przegrody(o: Opis, D: dict):
@@ -484,7 +484,7 @@ def rozdz_kondensacja(o: Opis, D: dict):
 
 
 TYPY_OTW = {"okno": "okno", "fix": "przeszklenie stałe", "drzwi_zewn": "drzwi zewnętrzne",
-            "drzwi_przesuwne_HS": "drzwi podnoszono-przesuwne HS", "brama": "brama garażowa",
+            "drzwi_przesuwne_HS": "drzwi przesuwne HS", "brama": "brama garażowa",
             "drzwi": "drzwi wewnętrzne", "otwor": "otwór bez stolarki"}
 OSLONY = {"zaluzja_zewn": "żaluzja zewn.", "roleta_zewn": "roleta zewn.", "screen_zip": "screen ZIP", "brak": "—"}
 ZEWN = ("okno", "fix", "drzwi_zewn", "drzwi_przesuwne_HS", "brama")
@@ -541,7 +541,8 @@ def rozdz_stolarka(o: Opis, D: dict):
             r3.append(dict(wiersz))
             if sym not in U_sym:
                 continue
-            wiersz["Rodzaj"] += " (do garażu)" if "garaz" in (st.get(sym) or {}).get("wyrob", "") else ""
+            wiersz["Rodzaj"] = ("drzwi dom–garaż" if "garaz" in (st.get(sym) or {}).get("wyrob", "")
+                                else "drzwi w przegrodzie cieplnej")
         wiersz.update({"Osłona": OSLONY.get(ot.oslona or "brak", ot.oslona), "Montaż": ", ".join(sorted(g["montaz"]))
                        or "—"})
         r1.append(wiersz)
@@ -559,7 +560,7 @@ def rozdz_stolarka(o: Opis, D: dict):
                    (f"≥ {kl_min}" if ot.typ in ("okno", "fix", "drzwi_przesuwne_HS") else "—")})
     o.tabela(r1, tytul="Zestawienie stolarki zewnętrznej i drzwi garaż–dom — wymiary, otwieranie, osłony, montaż", klasa="zwarta",
              wyrownanie={"Opis wyrobu (parametry wymagane)": "l", "Otwieranie": "l"},
-             szerokosci=["11mm", "18mm", None, "15mm", "8mm", "11mm", "17mm", "13mm", "13mm"],
+             szerokosci=["11mm", "19mm", None, "17mm", "8mm", "10mm", "17mm", "13mm", "12mm"],
              zrodlo="model/budynek.yaml — otwory, stolarka (grupowanie po symbolu)")
     o.tabela(r2, tytul="Zestawienie stolarki zewnętrznej i drzwi garaż–dom — parametry cieplne, g, szczelność", klasa="zwarta",
              formaty={"U_w wym. [W/(m²·K)]": 2, "U_max [W/(m²·K)]": 1, "g_n": 2}, wyrownanie={"Ocena g": "l"},

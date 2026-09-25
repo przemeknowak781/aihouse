@@ -27,9 +27,7 @@ energetyczna); pkt 10 — w każdym tomie stosownie do zakresu (tu: rozdział �
 PN-EN ISO 13370:2017-09, PN-EN ISO 10077-1:2017-10, PN-EN ISO 10211:2017-09, PN-EN ISO 13788:2013-05,
 PN-EN ISO 14683:2017-09 (rejestr wymagań, W-243…W-250). Tom jest zgodny z PZT i PAB (PB art. 34 ust. 3c).
 
-## Wyroby budowlane — zasada doboru — PB art. 10
-
-Wyroby określono **parametrami wymaganymi** (λ obliczeniowe, grubość, klasa reakcji na ogień, opór dyfuzyjny s_d,
+**Wyroby budowlane — zasada doboru (PB art. 10).** Wyroby określono **parametrami wymaganymi** (λ obliczeniowe, grubość, klasa reakcji na ogień, opór dyfuzyjny s_d,
 U_w/U_D, g, klasa szczelności). Nazwy systemów i dane z kart katalogowych przywołane w modelu są
 **przykładowe — dopuszcza się wyroby równoważne** o parametrach nie gorszych, wprowadzone do obrotu zgodnie
 z PB art. 10 (oznakowanie CE lub znak budowlany B, deklaracja właściwości użytkowych). Wartości oznaczone
@@ -559,7 +557,7 @@ f_Rsi ≥ f_Rsi,wym = max(f_Rsi,kryt = 0,661 — miesiąc krytyczny 3,
 
 **Tabela 37. Mostki cieplne liniowe — ψ, długości, f_Rsi**
 
-| Węzeł | Opis | ψ_oi karta [W/(m·K)] | ψ projekt [W/(m·K)] | l [m] | ψ·l [W/K] | f_Rsi (karta) | f_Rsi (proj.) | ≥ f_Rsi,wym | Detal |
+| Węzeł | Opis | ψ_oi karta [W/(m·K)] | ψ projekt [W/(m·K)] | l [m] | ψ·l [W/K] | f_Rsi [karta] | f_Rsi [projekt] | Ocena f_Rsi | Detal |
 |---|---|---|---|---|---|---|---|---|---|
 | WZ-01 | Attyka stropodachu bryły A (D1) | 0,086 | 0,086 | 19,940 | 1,715 | 0,932 | 0,932 | tak | D-04 (PT-AR-D-03) |
 | WZ-02 | Attyki dachów P1 (D2, D3) — poza ścianami bryły A | 0,171 | 0,171 | 13,410 | 2,293 | 0,900 | 0,900 | tak | D-05 (PT-AR-D-03) |
@@ -574,7 +572,7 @@ f_Rsi ≥ f_Rsi,wym = max(f_Rsi,kryt = 0,661 — miesiąc krytyczny 3,
 | WZ-11 | Ościeża okien/drzwi — ciepły montaż (rama 5 cm w murze, 4 cm w izolacj… | 0,005 | 0,005 | 96,280 | 0,481 | 0,930 | 0,930 | tak | D-02 (PT-AR-D-02) |
 | WZ-11N | Nadproża — BEZ kaset osłon w ociepleniu (kasety w okapach / ramie C / … | 0,008 | 0,008 | 45,030 | 0,360 | 0,938 | 0,938 | tak | D-02 (PT-AR-D-02) |
 | WZ-11P | Podokienniki — parapet zewn. z okapnikiem na profilu z XPS | 0,006 | 0,006 | 29,420 | 0,177 | 0,911 | 0,911 | tak | D-02 (PT-AR-D-02) |
-| WZ-11T | Progi HS / drzwi zewn. na płycie P0 — profil progowy termoizolacyjny n… | 0,118 | 0,118 | 15,670 | 1,849 | 0,845 | 0,845 | tak | D-03 (PT-AR-D-01), D-02 (PT-AR-D-02) |
+| WZ-11T | Progi HS / drzwi zewn. na płycie P0 — profil progowy termoizolacyjny n… | 0,118 | 0,118 | 15,670 | 1,849 | 0,845 | 0,845 | tak | D-03 (PT-AR-D-01) |
 | WZ-12 | Narożniki wypukłe ścian zewnętrznych | 0,066 | 0,066 | 40,050 | 2,643 | 0,926 | 0,926 | tak | — |
 | WZ-16 | Belki wspornikowe B4/B5 i belka B3 w linii izolacji wspornika bryły A … | a: 0,194 b: 0,123 | 0,159 | 2,020 | 0,321 | 0,854 | 0,854 | tak | D-08 (PT-AR-D-04) |
 | WZ-X1 | Dachy D2/D3 (SD2) – ściana SZ1 bryły A wyższej kondygnacji na krawędzi… | 0,022 | 0,022 | 13,790 | 0,303 | 0,964 | 0,964 | tak | — |
@@ -648,17 +646,17 @@ energii promieniowania słonecznego g = f_C·g_n ≤ 0,35 dla okien E, S, W (WT 
 | Symbol | Rodzaj | Opis wyrobu (parametry wymagane) | Wymiary [cm] | Szt. | Kond. | Otwieranie | Osłona | Montaż |
 |---|---|---|---|---|---|---|---|---|
 | FX1 | przeszklenie stałe | przeszklenie stałe ALU 3-szybowe, 1,90 × 2,75 m, VSG od wewn. (strefa uderzeń) | 178 × 278 | 2 | P0 | stałe | screen ZIP | M1 |
-| HS1 | drzwi podnoszono-przesuwne HS | drzwi podnoszono-przesuwne ALU 2,34 × 2,75 m, próg termiczny bezprogowy, odwodnienie liniowe | 222 × 278 | 2 | P0 | HS, prawa, do wewn | screen ZIP | M1 |
+| HS1 | drzwi przesuwne HS | drzwi podnoszono-przesuwne ALU 2,34 × 2,75 m, próg termiczny bezprogowy, odwodnienie liniowe | 222 × 278 | 2 | P0 | HS, prawa, do wewn | screen ZIP | M1 |
 | FX2 | przeszklenie stałe | przeszklenie stałe ALU 3-szybowe, 2,92 × 2,75 m | 286 × 278 | 1 | P0 | stałe | screen ZIP | M1 |
 | DZ3 | drzwi zewnętrzne | drzwi gospodarcze przeszklone ALU 0,90 × 2,75 w systemie fasady E, otwierane na zewn. | 90 × 276 | 1 | P0 | R, lewa, na zewn | screen ZIP | M1 |
 | BR1 | brama garażowa | brama segmentowa ocieplona 5,00 × 2,25 m, napęd, kratki went. ≥ 0,08 m² | 500 × 225 | 1 | P0 | segmentowa, lewa, do wewn | — | — |
 | DZ2 | drzwi zewnętrzne | drzwi boczne garażu 1,00 × 2,10 (garaż nieogrzewany) | 100 × 210 | 1 | P0 | R, lewa, na zewn | — | M1 |
 | DZ1 | drzwi zewnętrzne | drzwi wejściowe ALU ocieplone 1,10 × 2,40 w murze (światło ościeżnicy ≥ 0,96 × 2,33), próg ≤ 2 cm | 110 × 240 | 1 | P0 | R, prawa, do wewn | — | M1 |
 | FX3 | przeszklenie stałe | doświetle drzwi wejściowych 0,35 × 2,40 m, VSG mleczne; rama o podwyższonej izolacyjności (wymagane U_f ≤ 0,80, U_w ≤ 0,90 — WT zał. 2 pkt 1.2, W-244) | 35 × 240 | 1 | P0 | stałe | — | M1 |
-| HS2 | drzwi podnoszono-przesuwne HS | drzwi HS ALU 2,40 × 2,75 m (taras zach.) | 240 × 278 | 1 | P0 | HS, prawa, do wewn | screen ZIP | M1 |
+| HS2 | drzwi przesuwne HS | drzwi HS ALU 2,40 × 2,75 m (taras zach.) | 240 × 278 | 1 | P0 | HS, prawa, do wewn | screen ZIP | M1 |
 | OZ1 | okno | okno RU 1,80 × 1,50 m | 180 × 150 | 3 | P0, P1 | RU, lewa, do wewn | żaluzja zewn. | M1 |
 | ON1 | okno | okno uchylne 0,80 × 0,60 m, szkło mleczne | 80 × 60 | 1 | P0 | U, lewa, do wewn | — | M1 |
-| DG1 | drzwi wewnętrzne (do garażu) | drzwi garaż–dom stalowe ocieplone, szczelne, z samozamykaczem 0,90 × 2,10 | 90 × 210 | 2 | P0 | R, lewa, do wewn | — | — |
+| DG1 | drzwi dom–garaż | drzwi garaż–dom stalowe ocieplone, szczelne, z samozamykaczem 0,90 × 2,10 | 90 × 210 | 2 | P0 | R, lewa, do wewn | — | — |
 | BC1 | okno | boks C: 3 kwatery 2,34 × 1,50 m (środkowa RU), dolna część stała VSG do 0,85 m | 229 × 150 | 3 | P1 | F, lewa, do wewn | screen ZIP | M1 |
 | OE1 | okno | okno RU 1,50 × 1,50 m | 150 × 150 | 1 | P1 | RU, lewa, do wewn | żaluzja zewn. | M1 |
 | ON2 | okno | okno uchylne 0,90 × 0,60 m, szkło mleczne | 90 × 60 | 2 | P1, P2 | U, lewa, do wewn | — | M1 |
@@ -825,7 +823,7 @@ Ocenę ciągłości w węzłach (karty mostków, PN-EN ISO 10211) i odesłania d
 | WZ-11 | Ościeża okien/drzwi — ciepły montaż (rama 5 cm w murze, 4 cm… | ✓ | ✓ | ✓ | ✓ | zachowana | D-02 (PT-AR-D-02) |
 | WZ-11N | Nadproża — BEZ kaset osłon w ociepleniu (kasety w okapach / … | ✓ | ✓ | ✓ | ✓ | zachowana | D-02 (PT-AR-D-02) |
 | WZ-11P | Podokienniki — parapet zewn. z okapnikiem na profilu z XPS | ✓ | ✓ | ✓ | ✓ | zachowana | D-02 (PT-AR-D-02) |
-| WZ-11T | Progi HS / drzwi zewn. na płycie P0 — profil progowy termoiz… | ✓ | ✓ | ✓ | ✓ | zachowana | D-03 (PT-AR-D-01), D-02 (PT-AR-D-02) |
+| WZ-11T | Progi HS / drzwi zewn. na płycie P0 — profil progowy termoiz… | ✓ | ✓ | ✓ | ✓ | zachowana | D-03 (PT-AR-D-01) |
 | WZ-12 | Narożniki wypukłe ścian zewnętrznych | ✓ | ✓ | ✓ | ✓ | zachowana | — |
 | WZ-16a | Krawędź stropu ST2Z nad powietrzem: ściana SZ2 na belce B4 +… | ✓ | ✓ | ✓ | ✓ | zachowana | D-08 (PT-AR-D-04) |
 | WZ-16b | Krawędź stropu ST2Z nad powietrzem: ściana SZ1 na belce B5 | ✓ | ✓ | ✓ | ✓ | zachowana | D-08 (PT-AR-D-04) |
@@ -845,31 +843,33 @@ liniowym — D-03 (PT-AR-D-01), D-14 (PT-AR-D-05). Wymiarowanie hydrauliczne i o
 
 **Tabela 49. Odwodnienie dachów**
 
-| Dach | Przegroda | Spadek [%] | Wpusty | Rury spustowe | Attyka nad pokryciem [m] |
+| Dach | Przegroda | Spadek [%] | Wpusty | Rury spustowe | h attyki [m] |
 |---|---|---|---|---|---|
 | D1 | SD1 | 2,000 | WP1 DN100 z grzałką; WP2 DN100 z grzałką | RS1 DN100 (wewn.) → zbiornik; RS2 DN100 (wewn.) → zbiornik | 0,350 |
 | D2 | SD2 | 2,000 | wpust przy attyce (boczny) WP3 DN100 z grzałką | RS3 DN100 (zewn.) → zbiornik | 0,250 |
 | D3 | SD2 | 2,000 | wpust przy attyce (boczny) WP4 DN100 z grzałką | RS4 DN100 (zewn.) → zbiornik | 0,250 |
 | D4 | DZ1 | 2,000 | WP5 DN100 z grzałką; WP6 DN100 z grzałką | RS5 DN100 (zewn.) → zbiornik; RS6 DN100 (wewn.) → zbiornik | 0,545 |
 
+h attyki — wysokość korony attyki ponad pokrycie (wierzch hydroizolacji).
+
 *Źródło: model/budynek.yaml — dachy*
 
 **Tabela 50. Przelewy awaryjne w attykach — rzędne**
 
-| Przelew | Dach | Wymiary [cm] | Rzędna dna [m] | Rzędna pokrycia [m] | Δh [mm] | Opis |
+| Przelew | Dach | Wymiary [cm] | Dno [m] | Pokrycie [m] | Δh [mm] | Opis |
 |---|---|---|---|---|---|---|
-| przelew PA1 | D1 | 20 × 10 | 9,460 | 9,441 | 19,000 | przelew PA1 — attyka pn. nadbudowy (na teren, rzygacz z okapnikiem) |
-| przelew PA2 | D1 | 20 × 10 | 9,470 | 9,462 | 8,000 | przelew PA2 — attyka zach. nadbudowy (na dach D2, pole z własnym wpustem WP3) |
-| przelew PA4 | D2 | 20 × 10 | 6,330 | 6,308 | 22,000 | przelew PA4 — attyka zach., 0,60 m od WP3 (R-W2) |
-| przelew PA5 | D3 | 20 × 10 | 6,330 | 6,303 | 27,000 | przelew PA5 — attyka pn., 0,35 m od WP4; rzygacz z okapnikiem, wylot 0,40 m na zach. od daszka PL-DA (R-W2) |
-| przelew PA6 | D4 | 20 × 10 | 3,170 | 3,146 | 24,000 | przelew PA6 — attyka wsch. (garaż), 0,57 m od WP5 (R-W2) |
-| przelew PA7 | D4 | 20 × 10 | 3,170 | 3,149 | 21,000 | przelew PA7 — attyka wsch. (pas gosp.), 0,75 m od WP6; 2,6 m od jedn. PC (> 1 m — W-156) |
+| PA1 | D1 | 20 × 10 | 9,460 | 9,441 | 19,000 | przelew PA1 — attyka pn. nadbudowy (na teren, rzygacz z okapnikiem) |
+| PA2 | D1 | 20 × 10 | 9,470 | 9,462 | 8,000 | przelew PA2 — attyka zach. nadbudowy (na dach D2, pole z własnym wpustem WP3) |
+| PA4 | D2 | 20 × 10 | 6,330 | 6,308 | 22,000 | przelew PA4 — attyka zach., 0,60 m od WP3 (R-W2) |
+| PA5 | D3 | 20 × 10 | 6,330 | 6,303 | 27,000 | przelew PA5 — attyka pn., 0,35 m od WP4; rzygacz z okapnikiem, wylot 0,40 m na zach. od daszka PL-DA (R-W2) |
+| PA6 | D4 | 20 × 10 | 3,170 | 3,146 | 24,000 | przelew PA6 — attyka wsch. (garaż), 0,57 m od WP5 (R-W2) |
+| PA7 | D4 | 20 × 10 | 3,170 | 3,149 | 21,000 | przelew PA7 — attyka wsch. (pas gosp.), 0,75 m od WP6; 2,6 m od jedn. PC (> 1 m — W-156) |
 
-Δh — wzniesienie dna przelewu ponad lokalną rzędną pokrycia (wierzch hydroizolacji); przelew działa po zablokowaniu wpustu, poniżej korony attyki. Rzędne względne: ±0,000 = posadzka parteru = 101,65 m n.p.m. [DANE PRZYKŁADOWE – FIKCYJNE].
+Dno — rzędna dna przelewu; Pokrycie — lokalna rzędna pokrycia (wierzch hydroizolacji); Δh — wzniesienie dna przelewu ponad pokrycie; przelew działa po zablokowaniu wpustu, poniżej korony attyki. Rzędne względne: ±0,000 = posadzka parteru = 101,65 m n.p.m. [DANE PRZYKŁADOWE – FIKCYJNE].
 
 *Źródło: model/budynek.yaml — dachy.przelewy_awaryjne*
 
-Przyziemie: nawierzchnie przy budynku ze spadkiem od ścian, odwodnienia liniowe przy progach drzwi HS, drzwi zewnętrznych i bramy (tarasy i podesty — tabela „Lamele, balustrady, tarasy i podesty”); hydroizolację płyty fundamentowej wywija się na cokół (detal D-01 (PT-AR-D-01), D-13 (PT-AR-D-06), D-13a (PT-AR-D-06)).
+Przyziemie: nawierzchnie przy budynku ze spadkiem od ścian, odwodnienia liniowe przy progach drzwi HS, drzwi zewnętrznych i bramy (tarasy i podesty — tabela „Lamele, balustrady, tarasy i podesty”); hydroizolację płyty fundamentowej wywija się na cokół (detal D-01 (PT-AR-D-01)).
 
 ## Dane dotyczące warunków ochrony przeciwpożarowej — § 23 pkt 10 RPB
 
@@ -878,7 +878,8 @@ Dane w zakresie architektury (§ 23 pkt 10 RPB — stosownie do zakresu projektu
 
 * kategoria zagrożenia ludzi **ZL IV** (WT §209 ust. 2 pkt 4; W-210); grupa wysokości **N** (WT §8 pkt 1; W-210), wysokość wg WT § 6 —
   9,97 m;
-* 3 kondygnacje nadziemne ≤ 3 — wymagań klasy odporności pożarowej budynku nie stawia się (WT §213 pkt 1 lit. a; W-211);
+* liczba kondygnacji nadziemnych 3 (warunek zwolnienia: ≤ 3) — wymagań klasy odporności pożarowej
+  budynku nie stawia się (WT §213 pkt 1 lit. a; W-211);
   budynek stanowi jedną strefę pożarową razem z garażem (W-212);
 * ściany zewnętrzne i dach — nierozprzestrzeniające ognia (W-213): ETICS jako system z klasyfikacją NRO
   (Styropian grafitowy EPS 031 (ETICS, NRO w systemie)); pokrycia dachów z klasyfikacją B_ROOF(t1) [ZAŁ];
@@ -895,9 +896,9 @@ w skali 1:50 (arkusze AR z katalogu `projekt/01_koncepcja/widoki` — rysunki PA
 względem PAB — brak) oraz detale cieplne i szczelności PT-AR-D w skalach 1:5 i 1:10. Wykaz rysunków z numerami,
 skalami i formatami — karta części rysunkowej (generowana z tabliczek arkuszy).
 
-**Tabela 51. Wykaz rysunków tomu PT-1 AR**
+**Tabela 51. Rzuty, przekroje i elewacje (§ 24 pkt 1 RPB)**
 
-| Nr | Tytuł | Skala | Format |
+| Nr rysunku | Tytuł | Skala | Format |
 |---|---|---|---|
 | PB-AR-01 | RZUT PARTERU | 1:50 | A1 |
 | PB-AR-02 | RZUT I PIĘTRA | 1:50 | A3×3 |
@@ -909,9 +910,25 @@ skalami i formatami — karta części rysunkowej (generowana z tabliczek arkusz
 | PB-AR-08 | ELEWACJA PÓŁNOCNA (OD ULICY) | 1:50 | A3×3 |
 | PB-AR-09 | ELEWACJA WSCHODNIA | 1:50 | A2 |
 | PB-AR-10 | ELEWACJA ZACHODNIA | 1:50 | A2 |
-| PT-AR-D-01 | DETALE — COKÓŁ, PRÓG HS, RURA SPUSTOWA | 1:10 | A3×4 |
-| PT-AR-D-02 | DETALE — OKNO (CIEPŁY MONTAŻ), OKAP PL-E | 1:5 / 1:10 | A3×3 |
-| PT-AR-D-03 | DETALE — ATTYKI, WPUSTY, PRZELEW AWARYJNY | 1:10 | A3×3 |
-| PT-AR-D-04 | DETALE — WSPORNIK BRYŁY A, LAMELE ELEWACYJNE | 1:5 / 1:10 | A2 |
-| PT-AR-D-05 | DETALE — GARAŻ (ŚCIANA DOM–GARAŻ, DACH ZIELONY, DRZWI DZ2) | 1:10 | A2×3 |
-| PT-AR-D-06 | DETALE — WYŁAZ DACHOWY I ŚWIETLIK | 1:10 | A2 |
+
+**Tabela 52. Detale cieplne i szczelności (§ 24 pkt 2 RPB) — indeks detali**
+
+| Detal | Tytuł detalu | Arkusz | Skala | Węzły (karty mostków) |
+|---|---|---|---|---|
+| D-01 | COKÓŁ — ŚCIANA NA PŁYCIE FUNDAMENTOWEJ | PT-AR-D-01 | 1:10 | WZ-08 |
+| D-03 | PRÓG DRZWI HS BEZPROGOWY Z ODWODNIENIEM LINIOWYM | PT-AR-D-01 | 1:10 | WZ-11T |
+| D-07 | RURA SPUSTOWA RS3 PRZY COKOLE — CZYSZCZAK I ODPŁYW DO KD | PT-AR-D-01 | 1:10 | — |
+| D-02 | OKNO — CIEPŁY MONTAŻ (PODOKIENNIK I NADPROŻE) | PT-AR-D-02 | 1:5 / 1:10 | WZ-11, WZ-11N, WZ-11P |
+| D-09 | OKAP PL-E 1,50 M NAD PRZESZKLENIEM HS | PT-AR-D-02 | 1:5 / 1:10 | WZ-04 |
+| D-04 | ATTYKA DACHU D1 — PRZELEW AWARYJNY | PT-AR-D-03 | 1:10 | WZ-01 |
+| D-05 | ATTYKA DACHU D2 — WPUST BOCZNY I RURA SPUSTOWA | PT-AR-D-03 | 1:10 | WZ-02 |
+| D-06 | WPUST DACHOWY WP1 I RURA RS1 | PT-AR-D-03 | 1:10 | WZ-15 |
+| D-08 | WSPORNIK BRYŁY A — KRAWĘDŹ ST2Z Z PŁYTĄ PL-2 | PT-AR-D-04 | 1:5 / 1:10 | WZ-05, WZ-07, WZ-07a, WZ-16, WZ-16a |
+| D-12 | LAMELE ELEWACYJNE SZ2 — KONSOLA RUSZTU (RZUT) | PT-AR-D-04 | 1:5 / 1:10 | WZ-13 |
+| D-10 | ŚCIANA DOM–GARAŻ (SWG) I DACH ZIELONY D4 PRZY ŚCIANIE DOMU | PT-AR-D-05 | 1:10 | WZ-09, WZ-09c |
+| D-11 | ŚCIANA DOM–GARAŻ (SWG) NA PŁYCIE FUNDAMENTOWEJ | PT-AR-D-05 | 1:10 | WZ-09a |
+| D-14 | PRÓG DRZWI DZ2 GARAŻU — ODWODNIENIE LINIOWE I USZCZELNIENIE | PT-AR-D-05 | 1:10 | — |
+| D-13 | WYŁAZ DACHOWY WYL1 — COKÓŁ OCIEPLONY H 0,30 M | PT-AR-D-06 | 1:10 | — |
+| D-13a | ŚWIETLIK SW1 — COKÓŁ OCIEPLONY H 0,30 M | PT-AR-D-06 | 1:10 | — |
+
+*Źródło: raport_widokow.json katalogu detali; model/arkusze_detale.yaml; lamela.views.detale_katalog*

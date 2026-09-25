@@ -567,3 +567,242 @@ def rozdz_konstrukcja(o: Opis, D: dict):
         o.tekst(tab03)
     else:
         o.wniosek(f"Brak podsekcji 0.3 w obliczeniach statycznych — tabela otulin {NZ}.", alarm=True)
+
+
+def grupy_pozycji(D: dict) -> OrderedDict:
+    """{nr grupy: tytuł} ze spisu pozycji obliczeń statycznych."""
+    out = OrderedDict()
+    for tab in tabele_md(D["obl_md"]):
+        if tab and "Poz." in tab[0] and "η_max" in tab[0]:
+            for r in tab:
+                m = re.match(r"\*\*(\d+)\*\*", r["Poz."])
+                if m:
+                    out[m.group(1)] = r["Opis"].strip("*")
+            break
+    return out
+
+
+def _wykres_eta(poz: list, grupy: OrderedDict):
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    fig, ax = plt.subplots(figsize=(10, 3.6))
+    x = range(len(poz))
+    eta = [100 * p["wykorzystanie"] for p in poz]
+    cap = 200.0
+    ax.bar(x, [min(e, cap) for e in eta], width=0.8,
+           color=["#2a78d6" if p["ok"] else "#d03b3b" for p in poz], linewidth=0)
+    ax.axhline(100, color="#0b0b0b", lw=0.8, ls="--")
+    for i, e in enumerate(eta):
+        if e > cap:
+            ax.text(i, cap + 2, f"{e:.0f}", ha="center", va="bottom", fontsize=6, rotation=90)
+    gr = [p["nr"].split(".")[0] for p in poz]
+    starts = [i for i in range(len(gr)) if i == 0 or gr[i] != gr[i - 1]]
+    for s in starts[1:]:
+        ax.axvline(s - 0.5, color="#dcdbd6", lw=0.8)
+    ax.set_xticks([(s + (starts[k + 1] if k + 1 < len(starts) else len(gr))) / 2 - 0.5 for k, s in enumerate(starts)])
+    ax.set_xticklabels([gr[s] for s in starts], fontsize=8)
+    ax.set_xlim(-1, len(poz))
+    ax.set_ylim(0, cap + 30)
+    ax.set_ylabel("η_max [%]")
+    ax.set_xlabel("grupa pozycji (numer) — " + "; ".join(f"{k} {v.lower()}" for k, v in grupy.items()), fontsize=7)
+    for s in ("top", "right"):
+        ax.spines[s].set_visible(False)
+    fig.tight_layout()
+    return fig
+
+
+def rozdz_wyniki(o: Opis, D: dict):
+    """3.5 Podstawowe wyniki obliczeń; 3.6 pomiary przemieszczeń; 3.7 zakres analiz wymagający osobnych obliczeń."""
+    poz = (D["wyniki"] or {}).get("pozycje", [])
+    grupy = grupy_pozycji(D)
+    o.rozdzial("Podstawowe wyniki obliczeń", poziom=2, podstawa="§ 23 pkt 1 RPB")
+    rows = []
+    for g, tyt in grupy.items():
+        pg = [p for p in poz if p["nr"].split(".")[0] == g]
+        if not pg:
+            continue
+        mx = max(pg, key=lambda p: p["wykorzystanie"])
+        zle = [p for p in pg if not p["ok"]]
+        rows.append({"Grupa": f"{g}. {tyt}", "Pozycje": len(pg), "η_max": pct(mx["wykorzystanie"]),
+                     "Element miarodajny": f"{mx['nr']} {mx['id']}",
+                     "Niespełnione": ", ".join(p["id"] for p in zle) if zle else "—"})
+    o.tabela(rows, tytul="Wyniki obliczeń statycznych — zestawienie grup pozycji", klasa="zwarta",
+             wyrownanie={"Grupa": "l", "Niespełnione": "l"}, szerokosci=["46mm", "16mm", "16mm", "28mm", None],
+             uwagi=["η — maksymalne wykorzystanie nośności / warunku stanu granicznego pozycji (STR, GEO, SLS). "
+                    "Szczegóły, warunki i przyjęte zbrojenie — rozdz. 4; pozycje ZASTĄPIONE — rozdz. 1."],
+             zrodlo="wyniki.json (lamela.obliczenia.konstrukcja)")
+    if poz:
+        o.wykres(_wykres_eta(poz, grupy), "Maksymalne wykorzystanie nośności η pozycji obliczeń (czerwone — warunki "
+                 "niespełnione; wartości > 200 % opisane liczbą)")
+    o.rozdzial("Pomiary przemieszczeń i odkształceń", poziom=2, podstawa="§ 23 pkt 1 RPB; W-274")
+    wsp = [p for p in poz if p["nr"].startswith("3.")]
+    o.tekst(f"""
+    Nie przewiduje się stałego monitoringu geodezyjnego obiektu. Zaleca się kontrolny pomiar ugięć końców płyt
+    wspornikowych ({', '.join(p['id'] for p in wsp) or '—'}) po rozdeskowaniu i po wykonaniu warstw wykończeniowych
+    (porównanie z ugięciami z obliczeń, rozdz. 4 poz. 3) oraz pomiar osiadań płyty fundamentowej w 4 narożach po
+    wykonaniu stanu surowego (porównanie z osiadaniem z MES, rozdz. 5) [ZAŁ].
+    """)
+    o.rozdzial("Zakres wymagający odrębnych analiz", poziom=2)
+    o.tekst("Ograniczenia modeli obliczeniowych biblioteki (do rozstrzygnięcia przez projektanta konstrukcji):\n\n"
+            + "\n".join(f"* {t}" for t in D["RAP"].OGRANICZENIA))
+
+
+def rozdz_obliczenia(o: Opis, D: dict):
+    """4. Pełne obliczenia statyczne (dokument biblioteki), 5. MES płyty fundamentowej, 6. kontrola zbrojenia."""
+    o.rozdzial("Obliczenia statyczne", podstawa="§ 23 pkt 1 RPB; PN-EN 1990…1997", nowa_strona=True)
+    obl = D["obl_md"]
+    if not obl:
+        o.wniosek(f"Brak pliku obliczeń statycznych — {NZ}.", alarm=True)
+    else:
+        obl = re.sub(r"\A# [^\n]*\n", "", obl)                          # tytuł dokumentu → rozdział tomu
+        o.dokument_md(obl, D["kat_obl"], md_odeslanie=f"*[Pełne obliczenia statyczne — w PDF; źródło: "
+                      f"`{rel(D['kat_obl'] / 'obliczenia_statyczne.md')}`]*")
+    o.rozdzial("Płyta fundamentowa — analiza MES na podłożu sprężystym", podstawa="PN-EN 1992-1-1; PN-EN 1997-1",
+               nowa_strona=True)
+    if D["mes_md"]:
+        o.dokument_md(re.sub(r"\A# [^\n]*\n", "", D["mes_md"]), KAT_OBL,
+                      md_odeslanie=f"*[Raport MES — w PDF; źródło: `{rel(KAT_OBL / 'plyta_fundamentowa_MES.md')}`]*")
+    else:
+        o.wniosek(f"Brak raportu MES płyty fundamentowej — {NZ}.", alarm=True)
+    o.rozdzial("Kontrola zbrojenia rysunków", podstawa="PN-EN 1992-1-1 9.2.1.1, 9.3.1.1; RPB § 24 pkt 1",
+               nowa_strona=True)
+    if D["kz_md"]:
+        o.dokument_md(re.sub(r"\A# [^\n]*\n", "", D["kz_md"]), KAT_RYS,
+                      md_odeslanie=f"*[Kontrola zbrojenia — w PDF; źródło: `{rel(KAT_RYS / 'kontrola_zbrojenia.md')}`]*")
+    else:
+        o.wniosek(f"Brak raportu kontroli zbrojenia rysunków — {NZ}.", alarm=True)
+
+
+def _odl_sasiadow(D: dict):
+    """Najmniejsza odległość obrysu płyty fundamentowej od zabudowy działek sąsiednich [m] (prostokąty obwiedni)."""
+    dz, fund = D["dz"], D["bud"].get("fundamenty", {}).get("elementy", [])
+    dx, dy = (dz.get("uklad") or {}).get("przesuniecie", [0.0, 0.0])
+    pts = [(x + dx, y + dy) for e in fund if "obrys" in e for x, y in e["obrys"]]
+    if not pts:
+        return None, None
+    bx0, bx1 = min(p[0] for p in pts), max(p[0] for p in pts)
+    by0, by1 = min(p[1] for p in pts), max(p[1] for p in pts)
+    best = (None, None)
+    for s in dz.get("sasiedzi", []):
+        z = s.get("zabudowa") or []
+        if not z:
+            continue
+        zx0, zx1 = min(p[0] for p in z), max(p[0] for p in z)
+        zy0, zy1 = min(p[1] for p in z), max(p[1] for p in z)
+        d = (max(0.0, zx0 - bx1, bx0 - zx1) ** 2 + max(0.0, zy0 - by1, by0 - zy1) ** 2) ** 0.5
+        if best[0] is None or d < best[0]:
+            best = (d, s.get("nr"))
+    return best
+
+
+def rozdz_geotechnika(o: Opis, D: dict):
+    """7. Geotechniczne warunki i sposób posadowienia (§ 23 pkt 2–3 RPB; rozp. Dz.U. 2012 poz. 463 § 7, § 9, § 10)."""
+    b, p, mes = D["bud"], D["p"], D["mes_md"] or ""
+    geo, fund = b.get("geotechnika", {}), b.get("fundamenty", {})
+    gr = geo.get("grunt", {})
+    tr = D["dz"].get("teren", {})
+    H = [pt[2] for pt in tr.get("punkty", [])]
+    zero = b.get("uklad", {}).get("zero_abs")
+    spody = [e["spod"] for e in fund.get("elementy", []) if "spod" in e]
+    iz = fund.get("izolacja_obwodowa", {})
+    o.rozdzial("Geotechniczne warunki i sposób posadowienia", podstawa="§ 23 pkt 2 RPB; Dz.U. 2012 poz. 463 § 7 ust. 2",
+               nowa_strona=True)
+    o.wniosek(f"Dane gruntowe są **{FIKCJA}** (brief; rejestr E-04, W-282). Przed wydaniem PT wymagane są "
+              "dokumentacja badań podłoża gruntowego i projekt geotechniczny sporządzone na podstawie badań polowych "
+              "(CPT/DPL) — do tego czasu wyniki nośności i osiadania są ilustracyjne.", alarm=True)
+    o.tekst(f"""
+    Kategoria geotechniczna obiektu: **{geo.get('kategoria', '—')}** ({p.kategoria_geotechniczna} w obliczeniach;
+    W-280, rejestr D-08) — zgodnie z § 7 ust. 2 rozporządzenia (Dz.U. 2012 poz. 463) opracowuje się dodatkowo
+    dokumentację badań podłoża gruntowego i projekt geotechniczny. Warunki gruntowe proste — dokumentacji
+    geologiczno-inżynierskiej (§ 7 ust. 3) nie sporządza się (§ 23 pkt 3 RPB — nie dotyczy). Opinia geotechniczna
+    (§ 7 ust. 1, § 8) — w projekcie architektoniczno-budowlanym (PAB). Zakres badań: {geo.get('uwagi', '—')}.
+    """)
+    o.rozdzial("Dokumentacja badań podłoża gruntowego", poziom=2, podstawa="Dz.U. 2012 poz. 463 § 9")
+    o.tekst(f"""
+    Rozpoznanie przyjęte do projektu {FIKCJA}: {tr.get('grunt', '—')}. Teren istniejący w obrysie działki:
+    rzędne {L(min(H)) if H else '—'}…{L(max(H)) if H else '—'} m n.p.m.; poziom ±0,000 = {L(zero, 2)} m n.p.m.;
+    zwierciadło wody gruntowej ≈ {L(abs(geo.get('ZWG', 0)), 1)} m p.p.t. (rzędna {L(tr.get('ZWG'), 2)} m n.p.m.).
+    Dokumentacja badań (opis metodyki badań polowych i laboratoryjnych, wyniki, interpretacja, model geologiczny,
+    wartości wyprowadzone dla każdej warstwy) — {do_uzup('dokumentacja badań podłoża gruntowego (geotechnik z uprawnieniami, E-04)')}.
+    """)
+    o.rozdzial("Projekt geotechniczny", poziom=2, podstawa="Dz.U. 2012 poz. 463 § 10 pkt 1–10")
+    m0_mes = re.search(r"E_s = M₀[^=]*= ([\d ]+)·\(1\+([\d,]+)\)", mes)
+    o.tabela([
+        {"Parametr (wartość charakterystyczna)": "rodzaj gruntu nośnego", "Model (geotechnika)": gr.get("rodzaj", "—"),
+         "Obliczenia statyczne": p.grunt.nazwa, "MES płyty": "jw. (M1)"},
+        {"Parametr (wartość charakterystyczna)": "stopień zagęszczenia I_D", "Model (geotechnika)": L(gr.get("I_D")),
+         "Obliczenia statyczne": "≈ 0,6 (opis)", "MES płyty": "—"},
+        {"Parametr (wartość charakterystyczna)": "kąt tarcia wewnętrznego φ'_k [°]", "Model (geotechnika)": L(gr.get("phi"), 1),
+         "Obliczenia statyczne": L(p.grunt.fi_k, 1), "MES płyty": (wartosc_md(mes, "Parametry podłoża") or "—").split(";")[0]},
+        {"Parametr (wartość charakterystyczna)": "ciężar objętościowy γ [kN/m³]", "Model (geotechnika)": L(gr.get("gamma"), 1),
+         "Obliczenia statyczne": L(p.grunt.gamma, 1), "MES płyty": "18,5" if "18,5 kN/m³" in mes else "—"},
+        {"Parametr (wartość charakterystyczna)": "moduł edometryczny M₀ [kPa]", "Model (geotechnika)": L(gr.get("M0"), 0),
+         "Obliczenia statyczne": L(p.grunt.M0, 0), "MES płyty": m0_mes.group(1).strip() if m0_mes else "—"},
+        {"Parametr (wartość charakterystyczna)": "ZWG [m p.p.t.]", "Model (geotechnika)": L(abs(geo.get("ZWG", 0)), 1),
+         "Obliczenia statyczne": L(p.grunt.ZWG, 1), "MES płyty": "γ' pod fundamentem" if "γ'" in mes else "—"},
+    ], tytul=f"Parametry geotechniczne podłoża {FIKCJA}", klasa="zwarta",
+        wyrownanie={"Parametr (wartość charakterystyczna)": "l", "Model (geotechnika)": "l", "Obliczenia statyczne": "l"},
+        uwagi=["Rozbieżności między kolumnami wskazują parametr do ujednolicenia po badaniach (jedno źródło: model "
+               "`geotechnika`); w II kat. geotechnicznej korelacje PN-81/B-03020 niedopuszczalne (W-282)."],
+        zrodlo="model/budynek.yaml (geotechnika); Parametry.z_wymagan; plyta_fundamentowa_MES.md")
+    mes_war = [r for t in tabele_md(mes) for r in t if "Stan" in r]
+    o.tekst(f"""
+    ### Prognoza zmian właściwości podłoża w czasie {{podstawa: § 10 pkt 1}}
+    Piaski średnie niewysadzinowe, ZWG ok. {L(abs(geo.get('ZWG', 0)), 1)} m p.p.t. — poniżej strefy wpływu
+    fundamentu płytkiego; istotnych zmian właściwości w czasie nie przewiduje się pod warunkiem ochrony dna wykopu
+    przed rozluźnieniem, rozmoczeniem i przemarzaniem w czasie robót oraz wykonania izolacji obwodowej
+    ({iz.get('opis', '—')}).
+
+    ### Obliczeniowe parametry geotechniczne {{podstawa: § 10 pkt 2}}
+    Podejście obliczeniowe DA2* (PN-EN 1997-1 + NA): parametry materiałowe M1 (γ_φ' = γ_c' = γ_γ = 1,0) — wartości
+    obliczeniowe równe charakterystycznym z tabeli powyżej (kolumna „Model”).
+
+    ### Częściowe współczynniki bezpieczeństwa {{podstawa: § 10 pkt 3}}
+    A1: γ_G = {L(p.gG_sup)} (ξ = {L(p.xi)}), γ_Q = {L(p.gQ)}; M1: 1,0; R2: γ_R;v = {L(p.gR_v, 1)}, γ_R;h = {L(p.gR_h, 1)}
+    (PN-EN 1997-1 NA.2.6, W-283).
+
+    ### Oddziaływania od gruntu {{podstawa: § 10 pkt 4}}
+    Budynek niepodpiwniczony — parcie gruntu na ściany nie występuje. Nadkład w poziomie posadowienia:
+    q' = {wartosc_md(mes, 'Naprężenie od nadkładu') or '—'} kPa; wypór wody nie występuje (ZWG poniżej posadowienia).
+
+    ### Model obliczeniowy podłoża {{podstawa: § 10 pkt 5}}
+    Projektowy przekrój geotechniczny: {tr.get('grunt', '—')}. Model Winklera płyty fundamentowej:
+    k_s = {wartosc_md(mes, 'Współczynnik podatności') or '—'} kN/m³, obwiednia wariantów k_s,min; k_s,max =
+    {wartosc_md(mes, 'Obwiednia wariantów') or '—'} kN/m³ (rozdz. 5).
+    """)
+    o.tabela([{"Warunek": r.get("Warunek"), "Efekt": r.get("Efekt"), "Nośność / limit": r.get("Nośność / limit"),
+               "η": r.get("η"), "Stan": r.get("Stan", "").strip("*") if "NIESPEŁ" not in r.get("Stan", "").upper()
+               else f"NIESPEŁNIONY — {NZ}"} for r in mes_war
+              if re.search(r"podłoż|osiadan|odryw", r.get("Warunek", ""), re.I)]
+             or [{"Warunek": "—", "Efekt": "—", "Nośność / limit": "—", "η": "—", "Stan": f"brak raportu MES — {NZ}"}],
+             tytul="Nośność i osiadanie podłoża (§ 10 pkt 6) — wyniki MES płyty fundamentowej", klasa="zwarta",
+             wyrownanie={"Warunek": "l"}, szerokosci=[None, "34mm", "34mm", "12mm", "32mm"],
+             uwagi=["Stateczność ogólna: teren płaski "
+                    f"(spadek {L((max(H) - min(H)), 2) if H else '—'} m na obszarze działki), brak skarp i wykopów "
+                    "głębokich — sprawdzenie stateczności ogólnej nie jest miarodajne [ZAŁ]."],
+             zrodlo="plyta_fundamentowa_MES.md")
+    d_s, nr_s = _odl_sasiadow(D)
+    o.tekst(f"""
+    ### Dane do zaprojektowania fundamentów {{podstawa: § 10 pkt 7}}
+    Posadowienie bezpośrednie: płyta fundamentowa z żebrami, spód elementów na rzędnych {L(max(spody), 2)}…
+    {L(min(spody), 2)} m (względem ±0,000); usunięcie ziemi urodzajnej {L(geo.get('humus'), 1)} m; strefa przemarzania
+    h_z = {L(geo.get('h_z'), 1)} m — ochrona izolacją obwodową (W-284); osiadanie dopuszczalne
+    s ≤ {L(p.s_max_mm, 0)} mm (W-283).
+
+    ### Specyfikacja badań kontrolnych robót ziemnych {{podstawa: § 10 pkt 8}}
+    Odbiór dna wykopu przez geotechnika (zgodność gruntu z dokumentacją badań); kontrola zagęszczenia podsypki pod
+    płytą (wskaźnik zagęszczenia lub moduł odkształcenia — wartości wymagane {do_uzup('wg dokumentacji badań podłoża')});
+    kontrola grubości i ciągłości izolacji XPS pod płytą.
+
+    ### Wody gruntowe {{podstawa: § 10 pkt 9}}
+    ZWG ≈ {L(abs(geo.get('ZWG', 0)), 1)} m p.p.t. — poniżej poziomu posadowienia; odwodnienie wykopu i drenaż
+    opaskowy zbędne (W-285); agresywność wód gruntowych względem betonu {do_uzup('wg dokumentacji badań podłoża')}.
+
+    ### Monitorowanie {{podstawa: § 10 pkt 10}}
+    Pomiar osiadań płyty (rozdz. 3). Najbliższa zabudowa sąsiednia (dz. {nr_s or '—'}) w odległości
+    ≈ {L(d_s, 1)} m od płyty fundamentowej {FIKCJA}; przy wykopie płytkim (≤ {L(abs(min(spody)), 2)} m p.p.t.)
+    monitoring obiektów sąsiednich nie jest wymagany [ZAŁ].
+    """)
+    o.rozdzial("Wpływy eksploatacji górniczej", poziom=2, podstawa="§ 23 pkt 2 RPB")
+    o.tekst(f"Nie dotyczy — działka poza terenem górniczym {FIKCJA}.")

@@ -19,7 +19,7 @@
       "podstawa": "RPB § 2b ust. 3",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "4.29 MB (limit 150 MB)"
+      "szczegoly": "4.30 MB (limit 150 MB)"
     },
     {
       "id": "F-03",
@@ -82,7 +82,7 @@
       "podstawa": "RPB § 6 ust. 2",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "29 stron numerowanych"
+      "szczegoly": "32 stron numerowanych"
     },
     {
       "id": "C2-06",
@@ -169,7 +169,7 @@
   "znaczniki": {
     "DO UZUPEŁNIENIA": 19,
     "DOKUMENT ZEWNĘTRZNY": 0,
-    "DANE PRZYKŁADOWE": 59,
+    "DANE PRZYKŁADOWE": 61,
     "ZAŁ": 15,
     "NZW": 7,
     "INT": 1,
@@ -177,7 +177,7 @@
     "lista": {
       "[DO UZUPEŁNIENIA: nazwa pracowni projektowej]": 1,
       "[DO UZUPEŁNIENIA: adres pracowni]": 1,
-      "[DANE PRZYKŁADOWE – FIKCYJNE]": 59,
+      "[DANE PRZYKŁADOWE – FIKCYJNE]": 61,
       "[DO UZUPEŁNIENIA: jednostka ewidencyjna — kod TERYT WWPPGG_R i nazwa]": 1,
       "[DO UZUPEŁNIENIA: kod TERYT jedn. ewid. WWPPGG_R]": 2,
       "[DO UZUPEŁNIENIA: imię i nazwisko lub nazwa inwestora]": 2,
@@ -196,13 +196,13 @@
   "elementy": {
     "PT": {
       "od": 1,
-      "do": 46,
-      "strony_opisu": 30,
+      "do": 49,
+      "strony_opisu": 33,
       "arkusze": 16
     }
   },
-  "rozmiar_mb": 4.28994083404541,
-  "strony": 46,
+  "rozmiar_mb": 4.296795845031738,
+  "strony": 49,
   "podsumowanie": {
     "status": "PRZYKŁAD – NIE DO ZŁOŻENIA",
     "OK": 15,
@@ -212,6 +212,6 @@
     "OSTRZEŻENIE": 0,
     "znaczniki_do_uzupelnienia": 19,
     "znaczniki_dokument_zewnetrzny": 0,
-    "znaczniki_dane_przykladowe": 59
+    "znaczniki_dane_przykladowe": 61
   }
 }
