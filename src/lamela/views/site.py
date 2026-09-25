@@ -84,6 +84,19 @@ def _labels_building(lab, s, W, h=D.H):
     return c0
 
 
+def _label_garage(lab, s):
+    """Opis garażu wewnątrz obrysu (stanowiska postojowe w garażu — WT § 18, MPZP)."""
+    g = [q["poly"] for q in s.miejsca if q["poly"].difference(s.p0).area < 0.1]
+    if not g:
+        return
+    U = unary_union(g).convex_hull
+    old_b = lab.bounds
+    lab.bounds = U.buffer(0.2)
+    lab.label(np.asarray(U.centroid.coords[0]), ["garaż", f"{len(g)} × P"], D.H, dists=(0.0, 0.5, 1.0, 1.5),
+              leader_from=99)
+    lab.bounds = old_b
+
+
 def _label_function(lab, s, anchor, lines=("budynek mieszkalny jednorodzinny", "— projektowany")):
     lab.label(anchor, list(lines), D.H, dists=(9.0, 12.0, 15.0, 19.0, 24.0), leader_from=2.0, dot=True)
 
@@ -153,6 +166,7 @@ def view_plan(ctx, spec, scale, opts):
     # --- opisy i wymiary (kolejność = priorytet)
     c0 = _labels_building(lab, s, W)
     used.add("zero")
+    _label_garage(lab, s)
     lab.area(s.footprint, 3.0)
     _dims_plan(lab, s, used)
     _label_function(lab, s, c0)
@@ -272,8 +286,11 @@ def _labels_project(lab, s, W, used, detail=False):
     lab.label(anchor, [f"dz. nr {s.nr}", f"P = {m2(s.plot.area)}"], 3.5, "Z-OPISY", ["bold", "normal"],
               dists=(0.0, 3.0, 6.0, 10.0, 15.0, 22.0), leader_from=99)
     if s.linia_zabudowy is not None:
-        lab.along(s.linia_zabudowy, "nieprzekraczalna linia zabudowy (MPZP)", h, "Z-LZ", "#c00000", n=1,
-                  offset_mm=2.4, max_cost=8.0)
+        lz = s.linia_zabudowy
+        a0 = np.asarray(lz.interpolate(min(1.0, lz.length * 0.05)).coords[0])
+        lab.label(a0, ["nieprzekraczalna linia", "zabudowy (MPZP)"], h, "Z-LZ", color="#c00000",
+                  dists=(3.0, 6.0, 10.0, 15.0, 20.0), dirs=[(-1, 1), (-1, -1), (-1, 0), (0, -1), (1, -1)],
+                  leader_from=2.0, leader_color="#c00000")
     for t in s.tarasy:
         pg = t["poly"].difference(s.p0)
         if pg.area > 4.0:
@@ -288,11 +305,7 @@ def _labels_project(lab, s, W, used, detail=False):
         if q["poly"].difference(s.p0).area < 0.1:
             continue
         lab.label(np.asarray(q["poly"].centroid.coords[0]), ["P"], h, style="bold", dists=(0.0, 1.0, 2.5),
-                  max_cost=3.0)
-    nga = sum(1 for q in s.miejsca if q["poly"].difference(s.p0).area < 0.1)
-    if nga and s.wjazdy:
-        w = s.wjazdy[0]
-        lab.label(w["pt"] - w["out"] * 2.0, [f"garaż — {nga} st. post."], h, dists=(0.0, 1.5, 3.0, 5.0))
+                  own=q["poly"].exterior)
     if s.odpady and s.odpady["poly"] is not None:
         lab.label(np.asarray(s.odpady["poly"].centroid.coords[0]), ["odpady"], h, dot=True,
                   dists=(1.0, 2.5, 4.0, 6.0, 9.0, 12.0))
@@ -323,7 +336,7 @@ def _labels_project(lab, s, W, used, detail=False):
             txt = [o.id]
         if lab.bounds is None or lab.bounds.contains(Point(o.xy)):
             lab.label(o.xy, txt, h, dot=False, dists=(1.5, 3.0, 5.0, 8.0, 12.0))
-    for b in s.bramy:
+    for b in s.bramy if detail else []:
         nm = "furtka" if b["typ"] == "furtka" else "brama przesuwna"
         lab.label(b["xy"], [f"{nm} {mm(b['szer'])}"], h, dists=(3.0, 5.0, 8.0, 12.0), leader_from=2.5,
                   dirs=[(0, -1), (1, -1), (-1, -1), (1, 0), (-1, 0)])

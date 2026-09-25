@@ -36,7 +36,7 @@ class Podklad:
     extent: tuple | None = None
 
 
-def _restyle(prims, scale, meble=True, urzadzenia=False):
+def _restyle(prims, scale, meble=True, urzadzenia=False, widok=0.13):
     out = []
     w_k = 0.25 if scale <= 50 else 0.18
     for p in prims:
@@ -66,7 +66,7 @@ def _restyle(prims, scale, meble=True, urzadzenia=False):
         elif ly == "A-MEBLE":
             q.layer, q.pen, q.color = "I-PODKLAD", 0.13, "#b8b8b8"
         else:
-            q.layer, q.pen, q.color = "I-PODKLAD", 0.13, None
+            q.layer, q.pen, q.color = "I-PODKLAD", widok, ("#777777" if widok > 0.13 else None)
         out.append(q)
     return out
 
@@ -109,7 +109,7 @@ def dach(vp, ctx) -> Podklad:
         draw_roof_plan(tmp, ctx, {})
         cache[key] = tmp.prims
     prims = [p for p in cache[key] if p.layer not in ("A-SYMBOLE",)]
-    vp.prims.extend(_restyle(prims, vp.scale, meble=False))
+    vp.prims.extend(_restyle(prims, vp.scale, meble=False, widok=0.18))
     m = ctx.model
     outl = unary_union([m.obrys_kondygnacji(k.id) for k in m.kondygnacje])
     pod = Podklad(None, 0.0, Polygon(), Polygon(), clean(outl), [], [], None)

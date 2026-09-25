@@ -979,7 +979,9 @@ def _grupy_z_skanu(skan, kier, warstwa, fi, s_mm, element, pole, wym, zest, rola
             pr = Pret(fi, "00", (L,), len(ts), element)
         n = pr.n
         pr = zest.dodaj(pr)
-        tm = ts[len(ts) // 2]
+        # pręt reprezentatywny: 35 % / 65 % rozkładu (naprzemiennie wg pola) — pręty sąsiednich pól nie leżą w linii
+        fr = 0.35 if (sum(map(ord, str(pole) + kier)) % 2) else 0.65
+        tm = ts[min(int(len(ts) * fr), len(ts) - 1)] if rola == "przeslo" else ts[len(ts) // 2]
         lin = ((a, tm), (b, tm)) if kier == "x" else ((tm, a), (tm, b))
         am = (a + b) / 2 + (0.18 * (b - a) if rola == "przeslo" and kier == "y" else 0.0)
         am = min(max(am, a + 0.1), b - 0.1)
@@ -1205,3 +1207,36 @@ def _naroza(D, lv, zest, dol, gora):
                         for g in gs:
                             g.zakres = zone
                         lst += gs
+
+
+# ================================================================================================ nadproża — typy
+def typy_nadprozy(D: DaneKonstr) -> list:
+    """Nadproża z obliczeń pogrupowane w typy (jednakowy przekrój, długość co 5 cm, zbrojenie, beton): lista
+    (oznaczenie „NA”, „NB”…, [BelkaZ]). Otwory z nadprożem–belką modelu (np. N6 „nadproże otworu O2-01”) pominięte."""
+    if "typy_nadprozy" in D.cache:
+        return D.cache["typy_nadprozy"]
+    zbelki = set()
+    for b in D.an.m.belki():
+        mm = re.search(r"otworu (O[\w-]+)", str(b.get("uwagi") or ""))
+        if mm and any(x.id == str(b["id"]) for x in D.belki):
+            zbelki.add(mm.group(1))
+    grp: dict = {}
+    for n in D.nadproza:
+        if n.ids and n.ids[0] in zbelki:
+            continue
+        key = (round(n.b, 3), round(n.h, 3), round(math.ceil(n.L * 20 - 1e-6) / 20, 2), n.dol, n.gora, n.strz, n.beton)
+        grp.setdefault(key, []).append(n)
+    out = []
+    lit = "ABCDEFGHJKLMNPRSTUWZ"
+    for i, (key, lst) in enumerate(sorted(grp.items(), key=lambda t: (t[0][2], t[0][1], t[0][3]))):
+        nm = "N" + (lit[i] if i < len(lit) else str(i + 1))
+        out.append((nm, lst))
+    D.cache["typy_nadprozy"] = out
+    return out
+
+
+def typ_nadproza(D: DaneKonstr, nid: str) -> str | None:
+    for nm, lst in typy_nadprozy(D):
+        if any(n.id == nid for n in lst):
+            return nm
+    return None

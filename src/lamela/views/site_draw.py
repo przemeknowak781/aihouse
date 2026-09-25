@@ -855,7 +855,7 @@ def dim_pts(c, a, b, h=H, label=None, layer="Z-WYMIARY"):
     a, b = np.asarray(a, float), np.asarray(b, float)
     ang = math.degrees(math.atan2(b[1] - a[1], b[0] - a[0]))
     if label is None:          # zaokrąglenie „połówkowe w górę” do 0,01 m (uniknięcie błędu 18,975 → 18,97)
-        label = fmt.num(fmt.round_half_up(float(np.hypot(*(b - a))) * 100.0) / 100.0, 2)
+        label = fmt.num(fmt.round_half_up(round(float(np.hypot(*(b - a))) * 100.0, 6)) / 100.0, 2)
     return dims.dim_chain(c, [a, b], a, ang, layer=layer, h=h, unit_="m", tick_pen=0.18, ext_len=(1.5, 1.5),
                           overshoot_mm=1.5, tick_mm=2.5, labels=[label], mask=0.3)
 
@@ -951,7 +951,7 @@ def _lg_util(branza, existing):
         from .site_data import BRANZE, Siec
         sx = Siec(branza, LineString([(x + 1, y), (x + 15, y)]), "", existing)
         utility(sh, sx.geom, sx, existing=existing, flow=False)
-        sh.text((x + 8, y + 0.9), BRANZE[branza][0], 1.8, 0.0, "center", "bottom", "R-LEGENDA", color=sx.kolor)
+        sh.text((x + 8, y), BRANZE[branza][0], 1.8, 0.0, "center", "middle", "R-LEGENDA", color=sx.kolor, mask=0.4)
     return f
 
 
@@ -977,7 +977,7 @@ def _lg_rect(kind):
         elif kind == "opaska":
             _dots(sh, r, 0.35, _rng(r, 4), "Z-UTWARDZENIA", 0.3, pen=0.25)
         elif kind == "trawnik":
-            S.lawn(sh, r, 3.0, seed=5)
+            S.lawn(sh, r, 40.0, seed=5)
             return
         elif kind == "niecka":
             for yy in (y - 0.8, y + 0.8):
@@ -1187,9 +1187,18 @@ def legend_items():
         "skrzyzowanie": (_lg_sym("skrzyzowanie"), "skrzyżowanie sieci — zachować odstęp pionowy (tabela)"),
         "kolizja": (_lg_sym("kolizja"), "zbliżenie / kolizja sieci (nr w tabeli koordynacji)"),
     }
+    opisy = {"woda": ("sieć wodociągowa istniejąca (mapa)", "przyłącze wodociągowe projektowane"),
+             "kan_sanit": ("sieć kanalizacji sanitarnej istniejąca (mapa)", "przykanalik sanitarny projektowany"),
+             "kan_deszcz": ("sieć kanalizacji deszczowej istniejąca (mapa)",
+                            "kanalizacja deszczowa projektowana (kolektory, przelew)"),
+             "en": ("linia kablowa nN istniejąca (mapa)", "kabel nN projektowany (ZKP → RG)"),
+             "tele": ("sieć telekomunikacyjna istniejąca (mapa)", "przyłącze telekomunikacyjne projektowane"),
+             "gaz": ("sieć gazowa istniejąca (mapa)", "przyłącze gazowe projektowane"),
+             "cieplo": ("sieć ciepłownicza istniejąca (mapa)", "przyłącze ciepłownicze projektowane")}
     for b, (l, nm, _c) in BRANZE.items():
-        it[f"ist_{b}"] = (_lg_util(b, True), f"{l} — sieć {nm.split(' / ')[0]} istniejąca (mapa)")
-        it[f"proj_{b}"] = (_lg_util(b, False), f"{l} — {nm.split(' / ')[-1]} projektowana/-y")
+        oi, op = opisy.get(b, (f"sieć {nm} istniejąca (mapa)", f"{nm} — projektowana"))
+        it[f"ist_{b}"] = (_lg_util(b, True), f"{l} — {oi}")
+        it[f"proj_{b}"] = (_lg_util(b, False), f"{l} — {op}")
     return it
 
 

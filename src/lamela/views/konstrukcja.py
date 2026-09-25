@@ -136,6 +136,22 @@ def blok_legendy(pozycje: list, tytul: str = "OZNACZENIA NA RYSUNKU"):
     return fn
 
 
+def blok_tabeli(tytul: str, cols, rows, h: float = 1.8, row_h: float = 4.5):
+    """Blok kolumny opisowej: prosta tabela z tytułem (zawijanym do szerokości kolumny)."""
+    def fn(sh, x, y, w):
+        if not rows:
+            return y
+        ls = wrap(tytul, w, 2.5, "bold")
+        for j, t in enumerate(ls):
+            sh.text((x, y - 3.0 - j * 3.6), t, 2.5, style="bold", layer="R-OPISY")
+        y0 = y - 3.0 - (len(ls) - 1) * 3.6 - 3.0
+        sc = w / sum(c[1] for c in cols)
+        r = table(sh, x, y0, [(n, cw * sc) for n, cw in cols], rows, h=h, row_h=row_h,
+                  align=["center"] + ["left"] * (len(cols) - 1))
+        return r[1] - 1.0
+    return fn
+
+
 def _szkic_ksztaltu(sh, x, y, w, h, ksztalt: str):
     """Miniatura kształtu pręta (PN-EN ISO 3766) w komórce tabeli: x, y — lewy dolny róg, w × h [mm]."""
     pen = 0.35
@@ -185,7 +201,8 @@ def blok_zestawienia(zest: KD.Zestawienie, tytul: str, stopka: list[str] | None 
         rows.append(["", "", "Masa [kg]", "", "", ""] + [_pl(ms[d], 1) for d in sr])
         rows.append(["", "", f"RAZEM stal {KD.GATUNEK} [kg]", "", "", ""] + [""] * (len(sr) - 1) + [_pl(zest.masa, 1)])
         rh = 4.5
-        r = table(sh, x, y - 7.0, cols, rows, h=1.8, row_h=rh, title=tytul, header_h=7.0,
+        tt = tytul if text_w(tytul, 3.5, "bold") <= w else tytul.split(" — ")[0]
+        r = table(sh, x, y - 7.0, cols, rows, h=1.8, row_h=rh, title=tt, header_h=7.0,
                   align=["center", "center", "left", "right", "right", "center"] + ["right"] * len(sr))
         # szkice kształtów + wymiary w kolumnie „Kształt”
         xk = x + 19.0
@@ -362,7 +379,7 @@ def etykieta(vp, placer: Placer, p_ref, u, tekst: str, nr: int | None, h: float 
         if nr is not None:
             _nr_poz(c, x + u * r_mm * k, nr, h, layer)
             x = x + u * (2 * r_mm + 1.0) * k
-        c.text(x, tekst, h, rot, "left", "middle", layer)
+        c.text(x, tekst, h, rot, "left", "middle", layer, mask=0.5)
         if off > 3.0:
             q = p + n * sd * (off - 0.8) * k
             c.line(p, q, layer, pen="cienka")
@@ -564,13 +581,24 @@ def widok_zbrojenie_plyt(ctx: ViewContext, spec: dict, scale: float, opts: dict)
         L = float(np.hypot(*(b - a)))
         ts = [0.0] + [s_ * f * L for f in (0.18, 0.32) for s_ in (-1, 1)]
         etykieta(vp, placer, (a + b) / 2, b - a, opis_grupy(g), g.pret.nr, 2.5, ts=ts, bounds=bnd)
-    for (el, pole, cx, cy), gs in naroza.items():
+    wiersze_n = []
+    for i, ((el, pole, cx, cy), gs) in enumerate(sorted(naroza.items(), key=lambda t: (-t[0][3], t[0][2])), 1):
         gs = sorted(gs, key=lambda q: q.kier)
-        nrs = "/".join(str(q.pret.nr) for q in gs)
-        n = sum(q.n for q in gs)
-        txt = f"naroże: poz. {nrs} — {n} Ø{gs[0].pret.fi} co {gs[0].s / 10:g}"
-        etykieta(vp, placer, (cx, cy), (1.0, 0.0), txt, None, 1.8, offs=(0.0, 3.5, 7.0), ts=(0.0, -0.5, 0.5),
-                 bounds=bnd)
+        tag = f"N{i}"
+        zn = gs[0].zakres
+        cands = [(cx, cy)] + [(cx + dx, cy + dy) for dx in (-0.45, 0.45, 0.0) for dy in (0.0, -0.45, 0.45)]
+
+        def draw_tag(c, pos, _t=tag):
+            S.tag(c, pos, _t, shape="hex", r_mm=2.4, h=1.8, layer=L_OPI)
+        placer.place(vp, draw_tag, cands, penalty_step=0.2)
+        nrs = ", ".join(dict.fromkeys(f"{q.pret.nr} ({q.kier})" for q in gs))
+        wiersze_n.append([tag, f"{el}/{pole}", _pl(zn.bounds[2] - zn.bounds[0], 2), nrs,
+                          f"Ø{gs[0].pret.fi} co {gs[0].s / 10:g}"])
+    if wiersze_n:
+        res.column_blocks.append(("naroza", blok_tabeli(
+            "STREFY ZBROJENIA NAROŻNEGO (górą i dołem, 2 kierunki — PN-EN 1992-1-1 9.3.1.3)",
+            [("Strefa", 14.0), ("Pole", 26.0), ("Bok [m]", 16.0), ("Pozycje (kierunek)", 84.0), ("Pręty", 40.0)],
+            wiersze_n)))
     for e in lv.elementy:
         _opis_elementu(vp, placer, e)
     osie_i_wymiary(vp, ctx, lv.poly.bounds, placer, sides=("dol", "lewo"))

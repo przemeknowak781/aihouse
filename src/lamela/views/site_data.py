@@ -570,9 +570,10 @@ class SiteData:
 
 def _tin(pts: np.ndarray):
     """Interpolacja liniowa TIN z ekstrapolacją płaszczyzną najmniejszych kwadratów poza otoczką."""
-    from scipy.interpolate import LinearNDInterpolator
+    from scipy.interpolate import CloughTocher2DInterpolator
     pts = np.unique(np.round(pts, 4), axis=0)
-    lin = LinearNDInterpolator(pts[:, :2], pts[:, 2])
+    # interpolacja C1 (Clough–Tocher) na triangulacji punktów — przechodzi przez rzędne pomierzone, warstwice gładkie
+    lin = CloughTocher2DInterpolator(pts[:, :2], pts[:, 2])
     A = np.c_[pts[:, 0], pts[:, 1], np.ones(len(pts))]
     coef, *_ = np.linalg.lstsq(A, pts[:, 2], rcond=None)
 

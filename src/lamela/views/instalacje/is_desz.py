@@ -78,7 +78,7 @@ class RysD(Rysunek):
                 c = a + (b - a) * 0.45
                 n0 = len(self.vp.prims)
                 dims.slope(self.vp, c - u * 0.8, c + u * 0.8, float(sp.get("spadek", d.get("spadek", 0.02))) * 100,
-                           layer="S-DESZCZ", h=1.8)
+                           layer="S-OPISY", h=1.8)
                 self.reg(n0)
             if pole is not None:
                 inner = poly.buffer(-0.3, join_style=2)
@@ -103,7 +103,7 @@ class RysD(Rysunek):
         self.leg.sym(lambda c, p: S.floor_drain(c, p, 5.0, layer="S-DESZCZ", label=None),
                      "wpust dachowy (DN100, z grzałką — podgrzewany), wymiar rzeczywisty kosza")
         self.leg.sym(lambda c, p: dims.slope(c, p - np.array([6.0, 0.0]), p + np.array([6.0, 0.0]), 2.0,
-                                             layer="S-DESZCZ", h=1.8), "spadek połaci (izolacja spadkowa) do wpustów")
+                                             layer="S-OPISY", h=1.8), "spadek połaci (izolacja spadkowa) do wpustów")
 
     def przelew(self, d, p, j):
         vp = self.vp
@@ -116,8 +116,8 @@ class RysD(Rysunek):
         w = float(p.get("szer", 0.2))
         a, b = q - u * at - t * w / 2, q + u * 0.05 + t * w / 2
         n0 = len(vp.prims)
-        vp.polygon([a, a + u * (at + 0.05), b, b - u * (at + 0.05)], "S-DESZCZ", pen="srednia", lt=None)
-        vp.line(q, q + u * 0.45, "S-DESZCZ", pen="cienka", lt=None)
+        vp.polygon([a, a + u * (at + 0.05), b, b - u * (at + 0.05)], "S-DESZCZ", pen="srednia", lt="CIAGLA")
+        vp.line(q, q + u * 0.45, "S-DESZCZ", pen="cienka", lt="CIAGLA")
         arrowhead(vp, q + u * 0.45, u, 2.0, 14, True, "S-DESZCZ")
         self.reg(n0)
         pid = _ident(p.get("opis"), f"PA{j + 1}")
@@ -125,7 +125,7 @@ class RysD(Rysunek):
                                f"dno {fmt.level(float(p.get('rzedna_dna', 0)))}"], "S-OPISY")
         self.leg.sym(lambda c, pp: (c.polygon([pp + np.array([-2.0, -1.5]), pp + np.array([2.0, -1.5]),
                                                pp + np.array([2.0, 1.5]), pp + np.array([-2.0, 1.5])], "S-DESZCZ",
-                                              pen="srednia", lt=None),
+                                              pen="srednia", lt="CIAGLA"),
                                     arrowhead(c, pp + np.array([6.0, 0.0]), np.array([1.0, 0.0]), 2.0, 14, True,
                                               "S-DESZCZ")),
                      "przelew awaryjny w attyce (PN-EN 12056-3 p. 7) — kierunek wypływu")
@@ -208,13 +208,13 @@ class RysD(Rysunek):
             ln = LineString(a)
             for off in (-0.06, 0.06):
                 g = ln.offset_curve(off)
-                self.vp.polyline(np.asarray(g.coords), "S-DESZCZ", pen="cienka", lt=None)
+                self.vp.polyline(np.asarray(g.coords), "S-DESZCZ", pen="cienka", lt="CIAGLA")
             self.reg(n0)
             self.tag(a[len(a) // 2], [f"{o.get('id', '')} odwodnienie liniowe → {o.get('odbiornik', '')}"], "S-OPISY")
             self.leg.sym(lambda c, p: (c.line(p + np.array([-6, 0.9]), p + np.array([6, 0.9]), "S-DESZCZ",
-                                              pen="cienka", lt=None),
+                                              pen="cienka", lt="CIAGLA"),
                                        c.line(p + np.array([-6, -0.9]), p + np.array([6, -0.9]), "S-DESZCZ",
-                                              pen="cienka", lt=None)),
+                                              pen="cienka", lt="CIAGLA")),
                          "odwodnienie liniowe (korytko z rusztem) wg dzialka.yaml")
 
     # --------------------------------------------------------------------------------------------- opisy

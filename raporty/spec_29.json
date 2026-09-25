@@ -1,4 +1,5 @@
 {
+ "nr": 29,
  "title": "Pierwsze rysunki produkcyjne: PZT 1:500 i instalacja wodociągowa 1:50 · audyty A1–A3 zakończone → poprawki modelu w toku",
  "stages": [
   [
@@ -59,6 +60,17 @@
   "Krytycznie: PZT-01 wyszedł na A0 z drobnym planem — przyczyną tabele w kolumnie; zlecono A3 i osobne zestawienia.",
   "Niespójność wysokości zabudowy (10,02 / 10,04 / 10,25 / 10,33 m) → sprawdzono dosłownie art. 2 pkt 30 upzp (t.j. Dz.U. 2026 poz. 538, ELI): odniesienie = ŚREDNIA z min./maks. terenu na obwodzie ścian; wyłączenia zamknięte (komin, maszynownia/pom. techniczne, wyjście z klatki) → urządzenia dachowe wliczane. Wprowadzany jeden moduł lamela.wskazniki.",
   "Moduł ścian-tarcz (MES QM6 + model kratownicowy STM) zwalidowany: σ ≤ 0,4 % vs rozwiązanie ścisłe, zbieżność siatki ≤ 2 %; w obecnym modelu wspornik niosą belki — tarcze nie występują.",
-  "Weryfikacja niezależna koncepcji: PU 240,24 m² (nie 241,07), EP 57,2 ≤ 70 (bez PV 81,8 — PV konieczne), 7 dodatkowych niezgodności (spadki terenu, przelewy awaryjne, PV ponad attyką, cokół garażu, odwodnienie okapów) → druga runda poprawek."
+  "Weryfikacja niezależna koncepcji: PU 240,24 m² (nie 241,07), EP 57,2 ≤ 70 (bez PV 81,8 — PV konieczne), 7 dodatkowych niezgodności (spadki terenu, przelewy awaryjne, PV ponad attyką, cokół garażu, odwodnienie okapów) → druga runda poprawek.",
+  "NADZÓR (06:38): 5 agentów aktywnych, bez zastojów; najdłuższa bezczynność 2 min; zmiany w repo 0 min temu."
+ ],
+ "images": [
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/inst/v_IS01.png",
+   "caption": "PT-IS-01 — instalacja wodociągowa, rzut parteru 1:50 (wersja robocza)"
+  },
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/pzt/PZT-01_small.png",
+   "caption": "PZT-01 — plan zagospodarowania 1:500 (wersja robocza, format do korekty)"
+  }
  ]
 }
