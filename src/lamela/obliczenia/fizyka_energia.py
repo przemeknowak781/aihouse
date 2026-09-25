@@ -207,6 +207,7 @@ def przelicz_ep_wyroby(R: dict, W: dict, m, wyniki_symulacji: dict | None = None
     for u in uw:
         R["zal"]["ep"].dodaj(u, PRZYKL, "lamela.obliczenia.fizyka_energia.cfg_z_instalacji")
     R["ep_z_instalacji"] = uw
+    R["ep_cfg"] = cfg                                    # konfiguracja użyta w EP (PC, zasobnik, dezynfekcja)
     return uw
 
 

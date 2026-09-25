@@ -148,9 +148,12 @@ def rozdz_ep(o: Opis, D: DanePTIS):
     dla A_f = {L(ep.A_f, 1)} m² (bez garażu nieogrzewanego), metodą miesięczną z danymi klimatycznymi Poznań.
     Wariant projektowy **A** obejmuje instalację fotowoltaiczną (projektowaną w PT-4 IE); ponieważ energia z PV
     liczona jest tylko w części autokonsumowanej, a instalacja PV może nie zostać wykonana razem z budynkiem,
-    **wariant A0 bez PV podano jawnie** — oba warianty sprawdzono względem EP_max. Dane urządzeń (SCOP, η_t,
-    moce pomocnicze) z kart wyrobów przykładowych {FIKCJA} — przed wydaniem do realizacji zastąpić danymi
-    deklarowanymi wybranych wyrobów (W-242) i przeliczyć.
+    **wariant A0 bez PV podano jawnie** — oba warianty sprawdzono względem EP_max. EP policzono dla urządzeń
+    zaprojektowanych w tym tomie — pompy ciepła {D.og.pc.get('model')} (dobór w obliczeniach ogrzewania) i zasobnika
+    c.w.u. {L(D.Wd['woda']['zasobnik_l'], 0)} dm³ z dezynfekcją termiczną (obliczenia wody); dane liczbowe tych
+    urządzeń (SCOP, COP_cwu, strata postojowa), centrali (η_t, SFP) i moce pomocnicze są danymi wyrobów
+    przykładowych {FIKCJA} — po wyborze wyrobów zastąpić danymi deklarowanymi (W-242), a generator tomu
+    przeliczy EP, punkt biwalentny i hałas.
     """)
     o.rozdzial("Bilans mocy urządzeń elektrycznych i zużywających inne rodzaje energii", poziom=2,
                podstawa="§ 23 pkt 11 lit. a RPB")
@@ -190,6 +193,8 @@ def rozdz_ep(o: Opis, D: DanePTIS):
              zrodlo="lamela.obliczenia.energia.obudowa; WT zał. 2 pkt 1.1–1.2")
     o.rozdzial("Parametry sprawności energetycznej instalacji", poziom=2, podstawa="§ 23 pkt 11 lit. c RPB")
     og = D.Wd["ogrzewanie"]
+    cwc = (D.R.get("ep_cfg") or D.R["obudowa"].cfg).get("cwu") or {}
+    zb = cwc.get("zasobnik") if isinstance(cwc.get("zasobnik"), dict) else {}
     rows = [{"Instalacja": "Ogrzewanie", "Wytwarzanie η_g": s.eta_H_g, "Akumulacja η_s": s.eta_H_s,
              "Przesył η_d": s.eta_H_d, "Regulacja η_e": s.eta_H_e, "Łącznie η_tot": s.eta_H_tot},
             {"Instalacja": "Ciepła woda użytkowa", "Wytwarzanie η_g": s.eta_W_g, "Akumulacja η_s": s.eta_W_s,
@@ -199,9 +204,14 @@ def rozdz_ep(o: Opis, D: DanePTIS):
              uwagi=[f"Źródło ogrzewania: {s.zrodlo_H}", f"C.w.u.: {s.zrodlo_W or 'wg modułu wody (η_W,d, zasobnik)'}",
                     f"Wentylacja: odzysk ciepła η_oc = {L(ep.eta_oc, 2)}; pomocnicze: "
                     + "; ".join(f"{p.opis} {L(p.P_W, 0)} W" for p in s.pomocnicze),
-                    f"Moduł ogrzewania (bilans godzinowy TMY): SCOP obliczeniowy {L(og['SCOP_obl_TMY'], 2)} "
-                    f"(deklarowany {L(og['SCOP_dekl'], 2)}), η_H,e = {L(og['do_EP']['eta_H_e'], 2)}, "
-                    f"η_H,d = {L(og['do_EP']['eta_H_d'], 2)} — do ujednolicenia z EP po wyborze wyrobu."],
+                    f"Pompa ciepła w EP — urządzenie z projektu ({og['PC']}, moduł ogrzewania): η_H,g = SCOP = "
+                    f"{L(s.eta_H_g, 2)} = min(SCOP₃₅ deklarowany {L(og['SCOP_dekl'], 2)}; SCOP z bilansu godzinowego TMY "
+                    f"{L(og['SCOP_obl_TMY'], 2)}) — wartość ostrożna; udział grzałki {L(100 * s.udzial_grzalki, 2)} % "
+                    f"(ten sam bilans godzinowy).",
+                    f"Zasobnik c.w.u. w EP — z projektu (moduł wody): V = {L(zb.get('V_dm3'), 0)} dm³, strata postojowa "
+                    f"{L(zb.get('strata_W'), 0)} W ({zb.get('zrodlo', '—')}); dezynfekcja termiczna "
+                    f"{L(s.E_dezynfekcja_kWh, 0)} kWh/rok ({cwc.get('dezynfekcja_opis', 'moduł wody')}) — energia "
+                    "elektryczna grzałki doliczona do c.w.u."],
              zrodlo="lamela.obliczenia.energia.ep — metodologia tab. 2, 3, 6, 8, 12, 14")
     o.rozdzial("Wskaźniki EP, EK, EU, udział OZE — spełnienie wymagań", poziom=2,
                podstawa="§ 23 pkt 11 lit. d RPB; WT § 328–329 (W-240)")

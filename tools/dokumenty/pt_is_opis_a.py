@@ -265,15 +265,21 @@ def rozdz_deszczowa(o: Opis, D: DanePTIS):
     """3.5 Wody opadowe, retencja, drenaż (§ 23 pkt 7 lit. e)."""
     de, Dd, dr = D.W["deszczowa"], D.Wd["deszczowa"], D.W["drenaz"]
     ret, ret_m = de.retencja or {}, D.Dz.get("retencja") or {}
-    n_wp = sum(len(p.wpusty or []) for p in de.pola)
+    mod = {x.get("id"): x for x in (D.B.get("dachy") or []) + (D.B.get("wsporniki_plyty") or []) if isinstance(x, dict)}
+    ryn = [p for p in de.pola if ((mod.get(p.id) or {}).get("odwodnienie") or {}).get("typ") == "rynna_ukryta"]
+    dach = [p for p in de.pola if p not in ryn]
+    n_wp, n_wyl = sum(len(p.wpusty or []) for p in dach), sum(len(p.wpusty or []) for p in ryn)
     rs = [u for u in (D.Dz.get("uzbrojenie") or {}).get("projektowane", []) if u.get("branza") == "kan_deszcz"]
     nie = (ret_m.get("rozsaczanie") or {})
     o.rozdzial("Odprowadzenie i zagospodarowanie wód opadowych, drenaż", poziom=2,
                podstawa="§ 23 pkt 7 lit. e RPB; W-142…W-146, W-018, W-019")
     o.tekst(f"""
-    **Odwodnienie dachów** (PN-EN 12056-3, r = 0,046 l/(s·m²); W-142): {len(de.pola)} pól dachowych
-    o łącznej powierzchni **{L(Dd['A_dachow_m2'], 1)} m²**, Q = **{L(Dd['Q_dachy_l_s'], 2)} l/s**; {n_wp} wpustów
-    dachowych (podgrzewane) i przelewy awaryjne w attykach; dach zielony ekstensywny
+    **Odwodnienie dachów** (PN-EN 12056-3, r = 0,046 l/(s·m²); W-142): {len(de.pola)} pól odwadnianych o łącznej
+    powierzchni **{L(Dd['A_dachow_m2'], 1)} m²**, Q = **{L(Dd['Q_dachy_l_s'], 2)} l/s**:
+    dachy z attyką ({', '.join(p.id for p in dach) or '—'}) — wpusty dachowe podgrzewane, razem {n_wp} szt.,
+    i przelewy awaryjne w attykach; płyty okapowe i wspornikowe ({', '.join(p.id for p in ryn) or '—'}) — rynny
+    ukryte za blendą czołową (PT-1 AR), wyloty rynien podgrzewane, razem {n_wyl} szt., i przelewy (rzygacze)
+    w blendzie. Dach zielony ekstensywny
     ({', '.join(f"{z['id']} {L(z['A'], 1)} m²" for z in (de.dach_zielony or [])) or '—'}). Rury spustowe wewnętrzne
     (szacht SI) i zewnętrzne → kolektory deszczowe PVC-U: {'; '.join(u.get('opis', '') for u in rs[:3])}.
 
@@ -281,9 +287,10 @@ def rozdz_deszczowa(o: Opis, D: DanePTIS):
     jest urządzeniem wodnym) z osadnikiem i filtrem, pompą do podlewania ogrodu (pokrycie zapotrzebowania
     na podlewanie {L(100 * Dd['pokrycie_podlewania'], 0)} %; bilans IMGW 1991–2020) i przelewem do niecki chłonnej
     (ogród deszczowy). Powierzchnia zredukowana zlewni A_red = {L(Dd['A_red_m2'], 1)} m²; wymagana objętość niecki
-    (PANDa 2050, C = 10 lat, f_b = 1,2; W-143) V_min = **{L(Dd['niecka_V_min_m3'], 2)} m³**; niecka w modelu
-    (dzialka.yaml): {L(nie.get('V'), 1)} m³, głębokość {L(nie.get('glebokosc'), 2)} m — czas opróżniania
-    {L(ret.get('t_opr'), 1)} h (≤ 24 h). Deszczówka — instalacja odrębna, bez połączenia z wodociągiem (W-136).
+    (PANDa 2050, C = 10 lat, f_b = 1,2; W-143) V_min = **{L(Dd['niecka_V_min_m3'], 2)} m³**. Niecka przyjęta
+    ({ret.get('zrodlo_niecki', 'dzialka.yaml')}): A_n = **{L(ret.get('A_n'), 1)} m²**, głębokość
+    {L(ret.get('h_n', nie.get('glebokosc')), 2)} m, V = **{L(ret.get('V_n'), 2)} m³** ≥ V_min (minimalna powierzchnia
+    z doboru {L(ret.get('A_n_min'), 1)} m²) — czas opróżniania {L(ret.get('t_opr'), 1)} h (≤ 24 h). Deszczówka — instalacja odrębna, bez połączenia z wodociągiem (W-136).
     Odwodnienia liniowe przy drzwiach bez progu i przed bramą garażu ({len(de.odwodnienia_liniowe or [])} korytek
     wg obliczeń); woda z podjazdu i garażu przez osadnik z separatorem — nie do zbiornika retencyjnego.
     Skrzynki rozsączające — wyłącznie wariant opcjonalny po stanowisku PGW Wody Polskie (D-05).
