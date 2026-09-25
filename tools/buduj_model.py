@@ -1278,32 +1278,53 @@ def teren_punkty():
 
 
 def teren_projekt():
-    """Rzędne projektowane (bezwzględne): cokół ≥ 0,30 m (pierścień 0,5 m = 101,35) poza strefami drzwi; spadek ≥ 2 % na 1,5 m od budynku;
-    przy drzwiach — podesty −0,02 z odwodnieniem liniowym; na granicach E, W, S rzędne istniejące (W-019)."""
+    """Rzędne projektowane (bezwzględne) — runda 2 (K-1, weryfikacja §6 A2/A5, R-W4; W-019, brief §9 pkt 4 i 6; DIN 18533-1 pomocniczo):
+    * pas 0–2,3 m od lic P0: pierścienie d = 0; 0,3; 0,8; 1,5; 2,3 m, H = H0 − 0,03·d (spadek 3 % od budynku ≥ 2 % z zapasem na
+      wykonanie), H0 = 101,33 (−0,32: cokół ≥ 0,30 m nad terenem; przy garażu 0,22 m nad posadzką −0,10 ≥ 0,15 — DIN 18533-1);
+      pierścień 2,3 m = dno niecek trawiastych NT-N / NT-E (przechwyt spływu, spadek podłużny ≥ 0,5 % do ogrodu pd.);
+    * strefy drzwi (pierścienie pominięte): podest T2 wejścia −0,02 (OL-3), fartuch bramy −0,12 → OL-1 2,3 m od bramy (spadek 2,4 %),
+      podest DZ2 −0,12 z OL-5 przy progu i stopniem 0,15 m, podest T3 drzwi DZ3 −0,02 z OL-6 przy progu i 2 stopniami;
+    * dalej — ogród pd. i pas zach. ze spadkiem ≈ 0,5 % ku niecce NCH-1; przed elewacją pn. powrót do terenu istniejącego (skarpa
+      niecki ≤ 1:8); na granicach E, W, S i przy drodze rzędne istniejące (W-019). Jednostka PC na fundamencie (U5) — nie jest terenem."""
+    H0, I = 101.33, 0.03
+    stref = {"T2": (box(9.40, 9.04, 11.70, 11.60), 2.31), "BR1": (box(11.70, 9.66, 18.05, 12.20), 2.31),
+             "DZ2": (box(18.66, 4.60, 20.10, 6.20), 1.49), "T3": (box(12.20, -1.70, 13.50, -0.29), 1.31)}
     P_ = []
-    ring = Polygon(OB_P0).buffer(0.5, join_style=2)
-    ring2 = Polygon(OB_P0).buffer(2.0, join_style=2)
-    for poly, dz in ((ring, 0.0), (ring2, -0.03)):
-        c = list(poly.exterior.coords)[:-1]
-        dense = []
+    for dd in (0.0, 0.3, 0.8, 1.5, 2.3):
+        c = list(Polygon(OB_P0).buffer(dd, join_style=2).exterior.coords)[:-1] if dd > 0 else list(Polygon(OB_P0).exterior.coords)[:-1]
+        krok = 0.25 if dd in (0.0, 0.3, 2.3) else 0.5
         for (x0, y0), (x1, y1) in zip(c, c[1:] + c[:1]):
-            n = max(1, int(math.hypot(x1 - x0, y1 - y0) // 3.0))
-            dense += [(x0 + (x1 - x0) * k / n, y0 + (y1 - y0) * k / n) for k in range(n)]
-        for x, y in dense:
-            if x > xF + EXT + 0.2 or (y > y4 + EXT + 0.2 and x > xE - 0.5):       # garaż/podjazd — strefa wyższa (wjazd bez stopni)
-                h = 101.47
-            else:
-                h = 101.35
-            P_.append([r(x + T_DZ[0], 2), r(y + T_DZ[1], 2), r(h + dz, 2)])
-    spec = [((10.60, 9.60), 101.63, "podest wejścia"), ((10.60, 10.40), 101.60, "odwodnienie liniowe OL-3"),
-            ((10.60, 13.50), 101.52, "dojście"), ((10.60, 17.10), 101.47, "furtka (spadek do posesji)"),
-            ((15.50, 9.95), 101.53, "próg bramy / fartuch"), ((15.50, 10.30), 101.50, "odwodnienie liniowe OL-1"),
-            ((15.50, 13.50), 101.55, "grzbiet podjazdu"), ((15.50, 16.90), 101.47, "odwodnienie liniowe OL-4 przy bramie"),
-            ((6.00, -0.60), 101.32, "pod tarasem (żwir)"), ((6.00, -4.00), 101.28, "za tarasem"), ((-4.00, 2.00), 101.30, "za tarasem zach."),
-            ((16.80, -1.05), 101.40, "fundament jednostki PC"), ((20.50, 4.50), 101.40, "niecka trawiasta wsch. (odpływ na pd.)"),
-            ((5.00, 11.30), 101.31, "niecka trawiasta pn. (odpływ na zach.)")]
-    for (x, y), h, _ in spec:
-        P_.append([r(x + T_DZ[0], 2), r(y + T_DZ[1], 2), h])
+            n = max(1, int(math.ceil(math.hypot(x1 - x0, y1 - y0) / krok)))
+            for k in range(n):
+                x, y = x0 + (x1 - x0) * k / n, y0 + (y1 - y0) * k / n
+                pt = Polygon([(x - 1e-3, y - 1e-3), (x + 1e-3, y - 1e-3), (x + 1e-3, y + 1e-3), (x - 1e-3, y + 1e-3)])
+                if any(g.intersects(pt) and dd <= dmax for g, dmax in stref.values()):
+                    continue
+                P_.append([r(x + T_DZ[0], 2), r(y + T_DZ[1], 2), r(H0 - I * dd, 3)])
+    spec = []
+    for x in (9.45, 10.00, 10.60, 11.15, 11.65):                                   # T2 — podest wejścia pod daszkiem, OL-3
+        spec += [((x, 9.10), 101.63), ((x, 9.70), 101.62), ((x, 10.30), 101.61), ((x, 10.40), 101.60)]
+    for x in (9.95, 10.60, 11.25):                                                 # dojście U2 (spadek do posesji)
+        spec += [((x, 11.50), 101.58), ((x, 13.50), 101.52), ((x, 17.10), 101.47)]
+    for x in (11.90, 12.80, 14.00, 15.19, 16.50, 17.70):                           # BR1 — fartuch, OL-1, grzbiet, OL-4
+        spec += [((x, 9.70), 101.53), ((x, 9.975), 101.525), ((x, 10.90), 101.50), ((x, 11.975), 101.47), ((x, 13.00), 101.50),
+                 ((x, 14.00), 101.52), ((x, 15.50), 101.50), ((x, 16.90), 101.47)]
+    for y in (4.95, 5.40, 5.85):                                                   # DZ2 — podest, OL-5, stopień 0,15
+        spec += [((18.75, y), 101.53), ((19.30, y), 101.52), ((19.85, y), 101.51), ((20.05, y), 101.36)]
+    for x in (12.25, 12.85, 13.45):                                                # T3 — podest DZ3, OL-6, 2 stopnie
+        spec += [((x, -0.35), 101.63), ((x, -0.85), 101.62), ((x, -1.30), 101.61), ((x, -1.55), 101.31)]
+    for x in (-3.3, 0.0, 3.0, 6.0, 9.0, 12.0, 15.0, 18.0):                         # ogród pd. — spadek ≈ 0,5 % ku niecce NCH-1
+        spec += [((x, -3.2), 101.26), ((x, -6.0), 101.25), ((x, -9.0), 101.24), ((x, -12.0), 101.23)]
+    for y in (8.0, 5.0, 2.0, -1.0):                                                # pas zach. (za tarasem) — spływ na pd.
+        spec += [((-3.8, y), r(101.265 - 0.002 * (8.0 - y), 3)), ((-5.5, y), r(101.27 - 0.002 * (8.0 - y), 3))]
+    spec += [((-3.0, 11.35), 101.26), ((-3.8, 10.5), 101.26),                       # NT-N — wylot na zach.
+             ((21.0, 10.2), 101.26), ((21.0, -1.0), 101.21), ((21.0, -3.0), 101.20), ((20.0, -3.4), 101.20)]   # NT-E — na pd.
+    for x in (-3.0, 1.0, 5.0, 9.0):                                                # przed elewacją pn. — powrót do terenu istn.
+        spec.append(((x, 13.0), H_ist(x + T_DZ[0], 13.0 + T_DZ[1])))
+    for y in (8.0, 4.0, 0.0):                                                      # za niecką NT-E — teren istniejący
+        spec.append(((23.0, y), H_ist(23.0 + T_DZ[0], y + T_DZ[1])))
+    for (x, y), h in spec:
+        P_.append([r(x + T_DZ[0], 2), r(y + T_DZ[1], 2), r(h, 3)])
     return P_
 
 
@@ -1340,7 +1361,9 @@ DZIALKA = {
         {"id": "Z6", "obrys": Rd(-6.80, 11.60, 6.20, 16.60), "typ": "rabata", "wys": 0.6},
     ],
     "drzewa": [
-        {"id": "DR1", "xy": d(5.0, -19.0), "gat": "lipa drobnolistna (soliter na osi ogrodu)", "sr_korony": 7.0, "istn": False, "do_wyciecia": False, "wys": 10.0},
+        # K-2 (runda 2): lipa przesunięta poza niecką NCH-1 — rzut dojrzałej korony (r 3,5 m) ≥ 1,0 m od krawędzi niecki (W-144,
+        # odległość liczona od korony, nie od pnia); 7,2 m od granicy pd., 9,9 m od DR6
+        {"id": "DR1", "xy": d(4.0, -22.0), "gat": "lipa drobnolistna (soliter na osi ogrodu)", "sr_korony": 7.0, "istn": False, "do_wyciecia": False, "wys": 10.0},
         {"id": "DR2", "xy": d(-5.0, -8.0), "gat": "klon polny (cień letni tarasu zach.)", "sr_korony": 5.0, "istn": False, "do_wyciecia": False, "wys": 8.0},
         {"id": "DR3", "xy": d(-4.5, -14.0), "gat": "grab pospolity", "sr_korony": 4.5, "istn": False, "do_wyciecia": False, "wys": 7.0},
         {"id": "DR4", "xy": d(16.0, -14.0), "gat": "jabłoń", "sr_korony": 4.0, "istn": False, "do_wyciecia": False, "wys": 5.0},
@@ -1369,7 +1392,7 @@ DZIALKA = {
 }
 
 ZBIORNIK = d(4.00, -7.00)
-NIECKA = Rd(1.00, -17.00, 7.00, -13.00)
+NIECKA = Rd(0.50, -17.00, 7.50, -13.00)      # weryfikacja §6 B6: 28 m² (≥ 26 m²), głęb. 0,30 m (W-145) — V 8,4 m³
 DZIALKA.update({
     "uzbrojenie": {
         "istniejace": [
@@ -1394,15 +1417,22 @@ DZIALKA.update({
             {"branza": "kan_deszcz", "linia": [[26.40, 41.75], [27.20, 41.75], [27.20, 28.20], [ZBIORNIK[0], 28.20], ZBIORNIK],
              "opis": "kolektor KD-E PVC 160 (RS5 dach garażu, RS6 z pom. technicznego)", "dl": 31.6},
             {"branza": "kan_deszcz", "linia": [ZBIORNIK, [10.60, 22.00], d(4.00, -13.00)], "opis": "przelew zbiornika DN160 do niecki chłonnej", "dl": 6.2},
-            {"branza": "kan_deszcz", "linia": [d(xF + EXT - 0.2, 10.30), d(19.80, 10.30), d(20.60, 9.00)],
-             "opis": "OL-1 (i OL-4 kanałem wzdłuż podjazdu) → separator SEP-1 → niecka NT-E (PVC 160)", "dl": 2.9},
+            {"branza": "kan_deszcz", "linia": [d(xF + EXT - 0.2, 11.975), d(19.80, 11.975), d(21.00, 10.20)],
+             "opis": "OL-1 (i OL-4 kanałem wzdłuż podjazdu) → separator SEP-1 → niecka NT-E (PVC 160)", "dl": 3.3},
+            # runda 2 (R-W1, R-W4): nowe rury spustowe płyt wysuniętych i odwodnienia liniowe drzwi DZ2 / DZ3
+            {"branza": "kan_deszcz", "linia": [d(-EXT - 0.06, 5.25), [4.00, r(5.25 + T_DZ[1], 3)]],
+             "opis": "RS7 (rynny zach. PL-E i PL-2) → KD-W, PVC 110", "dl": 3.2},
+            {"branza": "kan_deszcz", "linia": [d(13.70, -EXT - 0.06), [r(13.70 + T_DZ[0], 3), 28.20]],
+             "opis": "RS8 (rynny PL-E pd. i PL-D) + OL-6 (próg DZ3) → KD-E, PVC 110", "dl": 4.1},
+            {"branza": "kan_deszcz", "linia": [d(18.85, 5.40), [27.20, r(5.40 + T_DZ[1], 3)]],
+             "opis": "OL-5 (próg DZ2 garażu) → KD-E, PVC 110 (woda czysta z podestu — nie z posadzki garażu)", "dl": 0.8},
         ],
         "obiekty": [
             {"id": "ZKP", "xy": [19.40, 49.80], "opis": "złącze kablowo-pomiarowe we wnęce ogrodzenia, PWP przy wejściu (W-190)"},
             {"id": "SR1", "xy": [13.00, 43.80], "opis": "studzienka rewizyjna kanalizacji Ø425 (poza garażem — W-118)"},
             {"id": "PC-JZ", "xy": d(16.80, -1.05), "opis": "jednostka zewn. PC monoblok R290 w osłonie lamelowej z ekranem akustycznym od tarasu; "
              "7,0 m od granicy E (≥ 6,0 — W-024); strefa R290 1,0 m bez otworów, wpustów i studzienek (W-156)"},
-            {"id": "SEP-1", "xy": d(19.80, 10.30), "opis": "osadnik z separatorem substancji ropopochodnych (mini, klasa I, PN-EN 858) dla OL-1/OL-4 "
+            {"id": "SEP-1", "xy": d(19.80, 11.975), "opis": "osadnik z separatorem substancji ropopochodnych (mini, klasa I, PN-EN 858) dla OL-1/OL-4 "
              "(podjazd, posadzka garażu); odpływ do niecki NT-E, poza zbiornikiem retencyjnym (audyt A1, W-114)"},
             {"id": "SK-PC", "xy": d(16.80, -2.90), "opis": "studnia chłonna skroplin PC (żwir, ≥ 0,8 m p.p.t.), poza strefą R290 (W-146)"},
             {"id": "HYDR", "xy": [-30.0, 56.0], "opis": "najbliższy hydrant zewnętrzny DN80 (ul. Lipowa) — zaopatrzenie ppoż. (W-217) [do potwierdzenia]"},
@@ -1411,11 +1441,12 @@ DZIALKA.update({
     "retencja": {
         "zbiornik": {"xy": ZBIORNIK, "V": 5.0, "opis": "szczelny zbiornik PE 5,0 m³ z osadnikiem i filtrem, pompa do podlewania, przelew DN160 do niecki; "
                      "≥ 3,0 m od budynku, ≥ 2,0 m od granic (W-145: wariant bazowy, nie jest urządzeniem wodnym)"},
-        "rozsaczanie": {"obrys": NIECKA, "V": 7.2, "typ": "niecka", "glebokosc": 0.30,
-                        "opis": "niecka chłonna (ogród deszczowy) 24 m², głęb. 0,30 m, ≥ 3,0 m od fundamentów, ≥ 2,0 m od granic, ≥ 1,0 m od drzew (W-144)"},
+        "rozsaczanie": {"obrys": NIECKA, "V": 8.4, "typ": "niecka", "glebokosc": 0.30,
+                        "opis": "niecka chłonna (ogród deszczowy) 28 m² (powiększona — weryfikacja §6 B6), głęb. 0,30 m, ≥ 3,0 m od fundamentów, "
+                                "≥ 2,0 m od granic, ≥ 1,0 m od rzutu korony dojrzałych drzew (W-144, K-2)"},
     },
     "odwodnienia": [
-        {"id": "OL-1", "typ": "liniowe", "linia": [d(xE + EXT + 0.2, 10.30), d(xF + EXT - 0.2, 10.30)], "spadek": 0.005, "odbiornik": "SEP-1 → NT-E",
+        {"id": "OL-1", "typ": "liniowe", "linia": [d(xE + EXT + 0.2, 11.975), d(xF + EXT - 0.2, 11.975)], "spadek": 0.005, "odbiornik": "SEP-1 → NT-E",
          "opis": "odwodnienie liniowe przed bramą garażu (W-019); woda z posadzki garażu i podjazdu (węglowodory) przez osadnik-separator SEP-1 "
                  "do niecki trawiastej NT-E — NIE do zbiornika retencyjnego (audyt A1)"},
         {"id": "OL-2", "typ": "liniowe", "linia": [d(0.30, -EXT - 0.10), d(11.70, -EXT - 0.10)], "spadek": 0.005, "odbiornik": "opaska / KD-W",
@@ -1428,10 +1459,16 @@ DZIALKA.update({
         {"id": "OZ-1", "typ": "opaska_zwirowa", "obrys": [[r(x + T_DZ[0], 3), r(y + T_DZ[1], 3)] for x, y in
                                                           list(Polygon(OB_P0).buffer(0.5, join_style=2).exterior.coords)[:-1]],
          "szer": 0.50, "opis": "opaska żwirowa 16/32 szer. 0,5 m na geowłókninie wokół budynku (poza tarasem, podestami i podjazdem)"},
-        {"id": "NT-N", "typ": "niecka", "linia": [d(-3.60, 11.30), d(11.00, 11.30)], "spadek": 0.005, "odbiornik": "KD-W",
+        {"id": "NT-N", "typ": "niecka", "linia": [d(-3.80, 10.50), d(-3.00, 11.35), d(9.30, 11.35)], "spadek": 0.005, "odbiornik": "pas zach. → ogród pd.",
          "opis": "płytka niecka trawiasta przed elewacją pn. (przechwyt spływu od drogi), spadek na zachód"},
-        {"id": "NT-E", "typ": "niecka", "linia": [d(20.60, 9.00), d(20.60, -4.00)], "spadek": 0.006, "odbiornik": "ogród pd.",
-         "opis": "płytka niecka trawiasta wzdłuż elewacji wsch. garażu (teren od granicy E wyższy), spadek na południe"},
+        {"id": "NT-E", "typ": "niecka", "linia": [d(21.00, 10.20), d(21.00, -3.00), d(20.00, -3.40)], "spadek": 0.005, "odbiornik": "ogród pd.",
+         "opis": "płytka niecka trawiasta 2,3 m od elewacji wsch. garażu (dno = koniec pasa spadku 3 % od budynku; teren od granicy E "
+                 "wyższy), spadek na południe"},
+        {"id": "OL-5", "typ": "liniowe", "linia": [d(18.85, 4.75), d(18.85, 6.05)], "spadek": 0.005, "odbiornik": "KD-E",
+         "opis": "odwodnienie liniowe przed progiem DZ2 na szer. drzwi + 0,15 m z każdej strony (R-W4, detal PT-AR-D-14): podest −0,12 "
+                 "ze spadkiem 2 % od drzwi, stopień 0,15 m do terenu; próg uszczelniony taśmą EPDM / KMB wywiniętą ≥ 0,15 m na ościeża"},
+        {"id": "OL-6", "typ": "liniowe", "linia": [d(12.20, -0.45), d(13.50, -0.45)], "spadek": 0.005, "odbiornik": "RS8 → KD-E",
+         "opis": "odwodnienie liniowe przy progu DZ3 (podest T3 −0,02, spadek 2 % od drzwi, 2 stopnie do ogrodu) — brief §9 pkt 4"},
         {"id": "NCH-1", "typ": "niecka", "obrys": NIECKA, "odbiornik": "grunt (piaski, ZWG 3,8 m p.p.t.)", "opis": "niecka chłonna — przelew zbiornika"},
         {"id": "DR-0", "typ": "drenaz_opaskowy", "linia": [], "opis": "NIE PROJEKTUJE SIĘ — piaski przepuszczalne, ZWG ≈ 3,8 m p.p.t., posadowienie ≈ 0,5 m p.p.t. "
          "(W-285); ochrona płyty: XPS + membrana SBS, opaska żwirowa i spadki terenu"},

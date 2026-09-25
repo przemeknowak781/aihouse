@@ -70,6 +70,19 @@ def kontrola(dist: Path, html: str) -> dict:
     return dict(pliki=pliki, razem=razem, bledy=bledy)
 
 
+def punkty_bryly(ir) -> list:
+    """Punkty obwiedni bryły do kadrowania (otoczka wypukła rzutów elementów budynku × rzędne spodu i wierzchu)."""
+    from shapely.geometry import MultiPoint
+    pts, z0, z1 = [], 1e9, -1e9
+    for p in ir.prisms:
+        if p.meta.get("group") in ("otoczenie", "teren", "fundamenty") or p.kind in ("terrain", "footing"):
+            continue
+        pts += list(p.polygon)
+        z0, z1 = min(z0, p.z0), max(z1, p.z1)
+    hull = MultiPoint(pts).convex_hull
+    return [(x, y, z) for x, y in list(hull.exterior.coords)[:-1] for z in (max(z0, -0.3), z1)]
+
+
 def podglad(html: str, dist: Path, cel: Path):
     """Lokalny podgląd z minimalnym szkieletem dokumentu (jak dodaje platforma: charset, viewport) — tylko do testów:
     python3 -m http.server --directory build/www/podglad."""
@@ -121,8 +134,12 @@ def _dalej(a, D, tr, glb, dist, assets, cache, teraz, t0) -> int:
     wej = [a.budynek, a.dzialka] + sorted(str(p) for p in (ROOT / "src" / "lamela").glob("*.py")) + \
         sorted(str(p) for p in (ROOT / "src" / "lamela" / "model3d").glob("*.py")) + [str(Path(RN.__file__))]
     m = D["model"]
-    pomin = RN.drzewa_przeslaniajace(D["drzewa_bud"], m.bbox())
-    klucz = RN.klucz_cache(wej, RN.UJECIA, RN.PROPORCJE, ss, extra=[t[0] for t in pomin])
+    pkt = punkty_bryly(D["ir"])
+    z_ter = float(((D["ir"].meta or {}).get("dzialka") or {}).get("teren_z_budynek") or 0.0)
+    obszary = {"dzialka": m.dz.obrys.buffer(-1.8), "droga": m.dz.poly_bud(m.dz.raw["droga"]["linie_rozgraniczajace"]).buffer(-0.4)}
+    plan = RN.plan_ujec(RN.UJECIA, RN.PROPORCJE, pkt, obszary, D["drzewa_bud"], z_ter)
+    kam = {k: [v["cam"], [t[0] for t in v["pomin"]]] for k, v in plan.items()}
+    klucz = RN.klucz_cache(wej, RN.UJECIA, RN.PROPORCJE, ss, extra=kam)
     rdir = cache / "rendery" / klucz
     kotwice = SC.kotwice_szkicu(D)
     if a.bez_renderow and not rdir.exists():
@@ -133,21 +150,19 @@ def _dalej(a, D, tr, glb, dist, assets, cache, teraz, t0) -> int:
         rdir = stare[-1].parent
         print(f"    UWAGA: rendery z cache {rdir.name} (model mógł się zmienić)", flush=True)
     log = lambda s: print("   ", s, flush=True)  # noqa: E731
-    glb_ogrod = glb
-    if pomin and not (rdir / "ogrod_169.png").exists():
-        import copy
-        from lamela.model3d import export_glb
-        ids = {t[0] for t in pomin}
-        ir2 = copy.copy(D["ir"])
-        ir2.prisms = [p for p in D["ir"].prisms if p.element not in ids]
-        ir2.meshes = [q for q in D["ir"].meshes if q.element not in ids]
-        glb_ogrod = cache / "pipeline" / "render_ogrod.glb"
-        export_glb(ir2, glb_ogrod, model=m)
-        print(f"    ujęcie od ogrodu bez drzew przesłaniających elewację: {', '.join(sorted(ids))}", flush=True)
-    ogr = {k: v for k, v in RN.UJECIA.items() if k == "ogrod"}
-    R = RN.renderuj(glb_ogrod, rdir, ujecia=ogr, ss=ss, kotwice=kotwice, log=log)
-    R = RN.renderuj(glb, rdir, ujecia={k: v for k, v in RN.UJECIA.items() if k not in ogr}, ss=ss, kotwice=kotwice, log=log)
-    R["pominiete_drzewa"] = [dict(id=t[0], gatunek=t[4]) for t in pomin]
+    gotowe = {(): glb}
+
+    def glb_bez(ids: tuple) -> Path:
+        if ids not in gotowe:
+            import copy
+            from lamela.model3d import export_glb
+            ir2 = copy.copy(D["ir"])
+            ir2.prisms = [p for p in D["ir"].prisms if p.element not in ids]
+            ir2.meshes = [q for q in D["ir"].meshes if q.element not in ids]
+            gotowe[ids] = cache / "pipeline" / f"render_bez_{'_'.join(ids)}.glb"
+            export_glb(ir2, gotowe[ids], model=m)
+        return gotowe[ids]
+    R = RN.renderuj(glb_bez, rdir, plan, ss=ss, kotwice=kotwice, log=log)
     for u in RN.UJECIA:
         for p in RN.PROPORCJE:
             n = webp(rdir / f"{u}_{p}.png", assets / f"{u}_{p}.webp")

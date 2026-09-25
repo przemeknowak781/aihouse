@@ -128,7 +128,7 @@ def ocen_drenaz(dane: DaneBudynku, par: ParametryDrenaz | None = None) -> WynikD
         war.append(Warunek(f"Spadek terenu od budynku, ściana {s['odcinek']} (śr. {f(s['srodek'][0], 1)}; {f(s['srodek'][1], 1)})",
                            s["spadek"], ">=", par.spadek_min, "", f"W-019; brief §9 pkt 6 ({zrodlo})", "W-019", nd=3))
     # brief §9 pkt 4: cokół ≥ 0,30 m ALBO odwodnienie liniowe przy drzwiach bezprogowych — punkty obwodu w strefie drzwi
-    # parteru (parapet ≤ 5 cm, ± 0,30 m) z odwodnieniem liniowym ≤ 1,5 m od drzwi wyłączone z minimum (runda 2, K-1)
+    # parteru (parapet ≤ 5 cm, ± 0,30 m) z odwodnieniem liniowym ≤ 2,5 m od drzwi wyłączone z minimum (runda 2, K-1)
     strefy = _strefy_drzwi_z_odwodnieniem(dane)
     z0 = dane.rzedna(dane.kondygnacje[0]["id"])
     poza = [z0 - z for p, z in zip(pts, tz) if not any(g.distance(p) <= 1e-6 for g, _o in strefy)]
@@ -158,7 +158,7 @@ def ocen_drenaz(dane: DaneBudynku, par: ParametryDrenaz | None = None) -> WynikD
 
 def _strefy_drzwi_z_odwodnieniem(dane: DaneBudynku) -> list:
     """[(strefa — bufor 0,30 m wokół otworu drzwiowego parteru na licu, opis)] dla drzwi zewnętrznych / HS / bramy z parapetem
-    ≤ 5 cm, przed którymi w modelu działki jest odwodnienie liniowe (typ 'liniowe') w odległości ≤ 1,5 m."""
+    ≤ 5 cm, przed którymi w modelu działki jest odwodnienie liniowe (typ 'liniowe') w odległości ≤ 2,5 m (fartuch bramy ze spadkiem do OL)."""
     from shapely.geometry import LineString
     m = dane.model
     dz = getattr(m, "dz", None)
@@ -178,7 +178,7 @@ def _strefy_drzwi_z_odwodnieniem(dane: DaneBudynku) -> list:
         es = o.sciana.ext_side      # odcinek otworu na licu zewnętrznym ściany
         tf = o.sciana.face_t(es) if es is not None else 0.0
         seg = LineString([tuple(o.sciana.pt(o.s0, tf)), tuple(o.sciana.pt(o.s1, tf))])
-        bl = [i for i, g in ol if g.distance(seg) <= 1.5]
+        bl = [i for i, g in ol if g.distance(seg) <= 2.5]
         if bl:
             out.append((seg.buffer(0.30), f"{o.id} ({o.symbol or o.typ}; {', '.join(bl)})"))
     return out
