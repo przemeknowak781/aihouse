@@ -1,0 +1,38 @@
+# Konfiguracja arkuszy rysunków architektury generowanych z modelu (lamela.views, tools/generuj_widoki.py).
+# PROPOZYCJA formatu (opis pól: src/lamela/views/sheets.py). Plik NIE zawiera danych budynku — tylko układ arkuszy;
+# wszystkie wartości geometryczne, materiały, rzędne i opisy pochodzą z model/budynek.yaml + model/dzialka.yaml.
+wspolne:
+  pracownia: "PRACOWNIA PROJEKTOWA — nazwa do uzupełnienia"
+  pracownia_adres: "adres pracowni do uzupełnienia"
+  inwestor: "(do uzupełnienia)"
+  obiekt: "Budynek mieszkalny jednorodzinny wolnostojący „Dom LAMELA”"
+  lokalizacja: null            # null → z dzialka.yaml (nr działki, obręb; adres/gmina, jeśli podane)
+  kategoria: "I"
+  stadium: "PB"
+  branza: "ARCHITEKTURA (AR)"
+  prefiks_nr: "PB-AR"
+  data: null                   # null → meta.data z budynek.yaml
+  rewizja: "0"
+  skala: 50                    # PAB wymaga ≥ 1:100 (R2 F18); 1:50 — czytelność warstw
+  format: auto                 # najmniejszy z A3, A2, A3×3, A1, A3×4, A2×3, A0… mieszczący widok + kolumnę opisową
+  numeracja_pomieszczen: iso   # parter = 1.xx (PN-B-01025 / R4 pkt 3.9); „model” — identyfikatory z modelu
+  wysokosc_ciecia: 1.10
+  glebokosc_widoku: 1.5
+  wymiary_wewnetrzne: true
+  kolorystyka: true
+  uwagi: []
+# przekroje: brak listy = automatycznie A-A (wzdłuż pierwszego biegu schodów) i B-B (prostopadle przez środek).
+# Po ustaleniu modelu wpisać jawnie, np.:
+#   - {id: A, x: 5.6, patrz: E}
+#   - {id: B, y: 3.2, patrz: N}
+arkusze:
+  - {nr: PB-AR-01, tytul: "RZUT PARTERU", typ: rzut, kond: P0}
+  - {nr: PB-AR-02, tytul: "RZUT I PIĘTRA", typ: rzut, kond: P1}
+  - {nr: PB-AR-03, tytul: "RZUT II PIĘTRA", typ: rzut, kond: P2}
+  - {nr: PB-AR-04, tytul: "RZUT DACHU", typ: dach}
+  - {nr: PB-AR-05, tytul: "PRZEKRÓJ A-A", typ: przekroj, przekroj: A}
+  - {nr: PB-AR-06, tytul: "PRZEKRÓJ B-B", typ: przekroj, przekroj: B}
+  - {nr: PB-AR-07, tytul: "ELEWACJA POŁUDNIOWA (OGRODOWA)", typ: elewacja, strona: S}
+  - {nr: PB-AR-08, tytul: "ELEWACJA PÓŁNOCNA (OD ULICY)", typ: elewacja, strona: N}
+  - {nr: PB-AR-09, tytul: "ELEWACJA WSCHODNIA", typ: elewacja, strona: E}
+  - {nr: PB-AR-10, tytul: "ELEWACJA ZACHODNIA", typ: elewacja, strona: W}

@@ -95,3 +95,223 @@ mpzp:
   miejsca_postojowe_na_lokal_min: {wartosc: 2, jedn: szt, typ: min, id: W-036, status: program, zrodlo: "MPZP 3MN; WT §18 ust. 2"}
   ogrodzenie_od_drogi_wys_max: {wartosc: 1.60, jedn: m, typ: max, id: W-038, status: program, zrodlo: "MPZP 3MN (ażurowe, bez prefabrykatów betonowych)"}
   kolorystyka_elewacji: {wartosc: ["biele", "szarości", "grafit", "naturalne drewno", "beton architektoniczny"], jedn: "-", typ: info, id: W-037, status: program, zrodlo: "MPZP 3MN"}
+
+pomieszczenia:
+  wys_pokoj_min: {wartosc: 2.50, jedn: m, typ: min, id: W-050, status: zweryfikowane, zrodlo: "WT §72 ust. 1"}
+  wys_kuchnia_min: {wartosc: 2.50, jedn: m, typ: min, id: W-050, status: zalozenie, zrodlo: "WT §72 ust. 1 (kuchnię przyjęto jak pokój) — R3 B-10"}
+  wys_czasowy_pobyt_min: {wartosc: 2.20, jedn: m, typ: min, id: W-051, status: zweryfikowane, zrodlo: "WT §72 ust. 1"}
+  wys_lazienka_min: {wartosc: 2.50, jedn: m, typ: min, id: W-052, status: zweryfikowane, zrodlo: "WT §77 ust. 2"}
+  wys_lazienka_went_mech_min: {wartosc: 2.20, jedn: m, typ: min, id: W-052, status: zweryfikowane, zrodlo: "WT §77 ust. 3"}
+  wys_techniczne_gospodarcze_min: {wartosc: 2.00, jedn: m, typ: min, id: W-053, status: zweryfikowane, zrodlo: "WT §97 ust. 1"}
+  przejscie_pod_przewodami_min: {wartosc: 1.90, jedn: m, typ: min, id: W-053, status: zweryfikowane, zrodlo: "WT §97 ust. 2"}
+  drzwi_wejsciowe_szer_min: {wartosc: 0.90, jedn: m, typ: min, id: W-055, status: zweryfikowane, zrodlo: "WT §62 ust. 1 (w świetle ościeżnicy)"}
+  drzwi_wejsciowe_wys_min: {wartosc: 2.00, jedn: m, typ: min, id: W-055, status: zweryfikowane, zrodlo: "WT §62 ust. 1"}
+  prog_drzwi_wejsciowe_max: {wartosc: 0.02, jedn: m, typ: max, id: W-055, status: zweryfikowane, zrodlo: "WT §62 ust. 3"}
+  daszek_wejscie_wysieg_min: {wartosc: 1.0, jedn: m, typ: min, id: W-057, status: zweryfikowane, zrodlo: "WT §292 ust. 1 (budynek > 2 kondygnacji, grupa N)"}
+  daszek_wejscie_szer_ponad_drzwi_min: {wartosc: 1.0, jedn: m, typ: min, id: W-057, status: zweryfikowane, zrodlo: "WT §292 ust. 1 (szerokość ≥ szer. drzwi + 1 m)"}
+  drzwi_pokoj_kuchnia_szer_min: {wartosc: 0.80, jedn: m, typ: min, id: W-058, status: zweryfikowane, zrodlo: "WT §75 ust. 1 (bez progów, ust. 3)"}
+  drzwi_pokoj_kuchnia_wys_min: {wartosc: 2.00, jedn: m, typ: min, id: W-058, status: zweryfikowane, zrodlo: "WT §75 ust. 1"}
+  drzwi_lazienka_szer_min: {wartosc: 0.80, jedn: m, typ: min, id: W-059, status: zweryfikowane, zrodlo: "WT §79 ust. 1 (otwierane na zewnątrz lub przesuwne)"}
+  drzwi_lazienka_otwor_went_min: {wartosc: 0.022, jedn: m2, typ: min, id: W-059, status: zweryfikowane, zrodlo: "WT §79 ust. 1"}
+  wc_szer_min: {wartosc: 0.90, jedn: m, typ: min, id: W-060, status: zweryfikowane, zrodlo: "WT §83"}
+  wc_pole_przed_miska: {wartosc: [0.60, 0.90], jedn: m, typ: min, id: W-060, status: zweryfikowane, zrodlo: "WT §83"}
+  lazienka_sciany_zmywalne_wys: {wartosc: 2.0, jedn: m, typ: min, id: W-061, status: zweryfikowane, zrodlo: "WT §78 ust. 1"}
+  kabina_natryskowa_pow_min: {wartosc: 1.5, jedn: m2, typ: min, id: W-061, status: zweryfikowane, zrodlo: "WT §81 ust. 2 (kabina zamknięta murowana)"}
+  kabina_natryskowa_szer_min: {wartosc: 0.9, jedn: m, typ: min, id: W-061, status: zweryfikowane, zrodlo: "WT §81 ust. 2"}
+  wys_budynku_grupa_N_max: {wartosc: 12.0, jedn: m, typ: max, id: W-063, status: zweryfikowane, zrodlo: "WT §8 pkt 1 (lub ≤ 4 kondygnacje mieszkalne)"}
+  kondygnacja_techniczna_prog_wys: {wartosc: 2.0, jedn: m, typ: max, id: W-064, status: zweryfikowane, zrodlo: "WT §3 pkt 16 (przestrzeń techniczna > 2 m = kondygnacja)"}
+  klapa_dach_wymiar_min: {wartosc: [0.80, 0.80], jedn: m, typ: min, id: W-065, status: zweryfikowane, zrodlo: "WT §308 ust. 3"}
+  drabina_szer_min: {wartosc: 0.50, jedn: m, typ: min, id: W-065, status: zweryfikowane, zrodlo: "WT §101 ust. 2"}
+  drabina_rozstaw_szczebli_max: {wartosc: 0.30, jedn: m, typ: max, id: W-065, status: zweryfikowane, zrodlo: "WT §101 ust. 2"}
+  drabina_obrecze_od_wys: {wartosc: 3.0, jedn: m, typ: info, id: W-065, status: zweryfikowane, zrodlo: "WT §101 ust. 3"}
+  drabina_odl_od_sciany_min: {wartosc: 0.15, jedn: m, typ: min, id: W-065, status: zweryfikowane, zrodlo: "WT §101 ust. 2"}
+  kratka_przejscie_przeswit_max: {wartosc: 20, jedn: mm, typ: max, id: W-067, status: zweryfikowane, zrodlo: "WT §294 ust. 3"}
+  pokoj_pow_min_program: {wartosc: 8.0, jedn: m2, typ: min, id: W-068, status: program, zrodlo: "brief §5 (nie WT; dawny §94 ust. 2 uchylony Dz.U. 2017 poz. 2285)"}
+  pokoj_dziecka_pow_min_program: {wartosc: 12.0, jedn: m2, typ: min, id: W-068, status: program, zrodlo: "brief §4"}
+  PU_docelowa_program: {wartosc: [230.0, 270.0], jedn: m2, typ: zakres, id: W-068, status: program, zrodlo: "brief §4"}
+  okno_do_podlogi_pobyt_ludzi_min: {wartosc: 0.125, jedn: "-", typ: min, id: W-080, status: zweryfikowane, zrodlo: "WT §57 ust. 2 (1/8, w świetle ościeżnic)"}
+  okno_do_podlogi_inne_min: {wartosc: 0.0833, jedn: "-", typ: min, id: W-080, status: zweryfikowane, zrodlo: "WT §57 ust. 2 (1/12)"}
+
+schody:
+  bieg_szer_min: {wartosc: 0.80, jedn: m, typ: min, id: W-090, status: zweryfikowane, zrodlo: "WT §68 ust. 1 (budynki jednorodzinne)"}
+  spocznik_szer_min: {wartosc: 0.80, jedn: m, typ: min, id: W-090, status: zweryfikowane, zrodlo: "WT §68 ust. 1"}
+  h_max: {wartosc: 0.19, jedn: m, typ: max, id: W-090, status: zweryfikowane, zrodlo: "WT §68 ust. 1"}
+  bieg_szer_projekt: {wartosc: 1.00, jedn: m, typ: min, id: W-090, status: zalozenie, zrodlo: "brief §5"}
+  h_projekt: {wartosc: 0.175, jedn: m, typ: rowne, id: W-090, status: zalozenie, zrodlo: "brief §5"}
+  s_projekt: {wartosc: 0.28, jedn: m, typ: rowne, id: W-090, status: zalozenie, zrodlo: "brief §5"}
+  dwa_h_plus_s: {wartosc: [0.60, 0.65], jedn: m, typ: zakres, id: W-091, status: zweryfikowane, zrodlo: "WT §69 ust. 4"}
+  wachlarz_szer_min: {wartosc: 0.25, jedn: m, typ: min, id: W-092, status: zweryfikowane, zrodlo: "WT §69 ust. 6"}
+  wachlarz_odl_pomiaru_od_poreczy: {wartosc: 0.40, jedn: m, typ: info, id: W-092, status: zweryfikowane, zrodlo: "WT §69 ust. 6"}
+  zewn_szer_min: {wartosc: 1.20, jedn: m, typ: min, id: W-093, status: zweryfikowane, zrodlo: "WT §68 ust. 3"}
+  zewn_stopnie_w_biegu_max: {wartosc: 10, jedn: szt, typ: max, id: W-093, status: zweryfikowane, zrodlo: "WT §69 ust. 3"}
+  zewn_h_projekt: {wartosc: 0.15, jedn: m, typ: rowne, id: W-093, status: zalozenie, zrodlo: "R3 3.4 pkt 14"}
+  techniczne_h_max: {wartosc: 0.20, jedn: m, typ: max, id: W-093, status: zweryfikowane, zrodlo: "WT §68 ust. 1 (ostatni wiersz)"}
+  balustrada_od_roznicy_poziomow: {wartosc: 0.50, jedn: m, typ: info, id: W-094, status: zweryfikowane, zrodlo: "WT §296 ust. 1"}
+  balustrada_wys_min: {wartosc: 0.90, jedn: m, typ: min, id: W-095, status: zweryfikowane, zrodlo: "WT §298 ust. 1–2 (budynki jednorodzinne; prześwit nieregulowany)"}
+  balustrada_przeswit_zalecany_max: {wartosc: 0.12, jedn: m, typ: max, id: W-095, status: zalozenie, zrodlo: "R3 K-10 (dobra praktyka)"}
+  porecz_odl_od_sciany_min: {wartosc: 0.05, jedn: m, typ: min, id: W-096, status: zweryfikowane, zrodlo: "WT §298 ust. 5"}
+  porecz_zewn_przedluzenie: {wartosc: 0.30, jedn: m, typ: min, id: W-096, status: zweryfikowane, zrodlo: "WT §298 ust. 6"}
+  podokiennik_min: {wartosc: 0.85, jedn: m, typ: min, id: W-097, status: zweryfikowane, zrodlo: "WT §301 ust. 1, 3 (poza przyziemiem)"}
+  okno_wychylenie_na_zewn_max: {wartosc: 0.60, jedn: m, typ: max, id: W-098, status: zweryfikowane, zrodlo: "WT §299 ust. 2"}
+  pochylnia_garaz_max: {wartosc: 0.25, jedn: "-", typ: max, id: W-099, status: zweryfikowane, zrodlo: "WT §70 (garaż indywidualny)"}
+  pochylnia_piesza_zewn: {wartosc: [0.15, 0.08, 0.06], jedn: "-", typ: max, id: W-099, status: zweryfikowane, zrodlo: "WT §70 (h ≤ 0,15 / ≤ 0,5 / > 0,5 m)"}
+  przeswit_nad_biegiem_min: {wartosc: 2.00, jedn: m, typ: min, id: W-100, status: zalozenie, zrodlo: "R3 K-22 (dobra praktyka)"}
+
+garaz:
+  wys_swiatlo_min: {wartosc: 2.20, jedn: m, typ: min, id: W-110, status: zweryfikowane, zrodlo: "WT §102 pkt 1"}
+  wys_pod_instalacjami_min: {wartosc: 2.00, jedn: m, typ: min, id: W-110, status: zweryfikowane, zrodlo: "WT §102 pkt 1"}
+  brama_szer_min: {wartosc: 2.30, jedn: m, typ: min, id: W-111, status: zweryfikowane, zrodlo: "WT §102 pkt 2"}
+  brama_wys_min: {wartosc: 2.00, jedn: m, typ: min, id: W-111, status: zweryfikowane, zrodlo: "WT §102 pkt 2"}
+  odl_stanowisko_sciana_min: {wartosc: 0.30, jedn: m, typ: min, id: W-112, status: zweryfikowane, zrodlo: "WT §104 ust. 1 pkt 1"}
+  odl_stanowisko_slup_min: {wartosc: 0.10, jedn: m, typ: min, id: W-112, status: zweryfikowane, zrodlo: "WT §104 ust. 1 pkt 1"}
+  droga_manewrowa_min: {wartosc: 5.0, jedn: m, typ: min, id: W-112, status: zweryfikowane, zrodlo: "WT §104 ust. 3"}
+  szer_swiatlo_min: {wartosc: 5.60, jedn: m, typ: min, id: W-112, status: interpretacja, zrodlo: "WT §104 + §21 ust. 1 (0,3 + 2×2,5 + 0,3)"}
+  szer_swiatlo_zalecana: {wartosc: 5.90, jedn: m, typ: min, id: W-112, status: zalozenie, zrodlo: "R3 B-23"}
+  gl_swiatlo_min: {wartosc: 6.00, jedn: m, typ: min, id: W-112, status: program, zrodlo: "brief §4"}
+  prog_posadzki: {wartosc: 30, jedn: mm, typ: rowne, id: W-114, status: zweryfikowane, zrodlo: "WT §107 ust. 2"}
+  went_otwory_na_stanowisko: {wartosc: 0.04, jedn: m2, typ: min, id: W-115, status: zweryfikowane, zrodlo: "WT §108 ust. 1 pkt 1 (garaż nieogrzewany)"}
+  went_otwory_suma_min: {wartosc: 0.08, jedn: m2, typ: min, id: W-115, status: interpretacja, zrodlo: "WT §108 ust. 1 pkt 1 (2 stanowiska — ostrożna interpretacja)"}
+  went_ogrzewany_wymian_min: {wartosc: 1.5, jedn: 1/h, typ: min, id: W-115, status: zweryfikowane, zrodlo: "WT §108 ust. 1 pkt 2 (wariant garażu ogrzewanego)"}
+  wrota_okna_pion_min: {wartosc: 1.50, jedn: m, typ: min, id: W-117, status: zweryfikowane, zrodlo: "WT §279 ust. 1 (wszystkie okna)"}
+  wrota_okna_pion_z_daszkiem_min: {wartosc: 1.10, jedn: m, typ: min, id: W-117, status: zweryfikowane, zrodlo: "WT §279 ust. 1 (daszek niepalny ≥ 0,60 m, wysunięty 0,80 m poza boki wrót)"}
+  wrota_okna_poziom_min: {wartosc: 1.50, jedn: m, typ: min, id: W-117, status: zweryfikowane, zrodlo: "WT §279 ust. 2 (okna pomieszczeń na pobyt ludzi)"}
+
+wodkan:
+  cisnienie_punkt_czerpalny: {wartosc: [0.05, 0.60], jedn: MPa, typ: zakres, id: W-130, status: zweryfikowane, zrodlo: "WT §114 ust. 1"}
+  cwu_temp_punkty: {wartosc: [55, 60], jedn: degC, typ: zakres, id: W-133, status: zweryfikowane, zrodlo: "WT §120 ust. 2"}
+  cwu_dezynfekcja_termiczna_temp: {wartosc: [70, 80], jedn: degC, typ: zakres, id: W-133, status: zweryfikowane, zrodlo: "WT §120 ust. 2a (przy metodzie cieplnej; wybrana w projekcie)"}
+  izolacja_lambda_odniesienia: {wartosc: 0.035, jedn: W/(mK), typ: info, id: W-135, status: zweryfikowane, zrodlo: "WT zał. 2 pkt 1.5"}
+  izolacja_grubosc_dw_do_22mm: {wartosc: 0.020, jedn: m, typ: min, id: W-135, status: zweryfikowane, zrodlo: "WT zał. 2 pkt 1.5 lp. 1"}
+  izolacja_grubosc_dw_22_35mm: {wartosc: 0.030, jedn: m, typ: min, id: W-135, status: zweryfikowane, zrodlo: "WT zał. 2 pkt 1.5 lp. 2"}
+  izolacja_przejscia_udzial: {wartosc: 0.5, jedn: "-", typ: min, id: W-135, status: zweryfikowane, zrodlo: "WT zał. 2 pkt 1.5 (50 % wymagań)"}
+  kanalizacja_K: {wartosc: 0.5, jedn: "-", typ: rowne, id: W-138, status: niezweryfikowane, zrodlo: "PN-EN 12056-2:2002 tabl. 3 (użytkowanie nieciągłe)"}
+  pion_WC_DN_min: {wartosc: 100, jedn: mm, typ: min, id: W-138, status: niezweryfikowane, zrodlo: "PN-EN 12056-2:2002"}
+  wywiewka_odl_pozioma_od_okien: {wartosc: 4.0, jedn: m, typ: info, id: W-139, status: zweryfikowane, zrodlo: "WT §125 ust. 1 (bliżej — wylot powyżej górnej krawędzi okien)"}
+  zawory_napowietrzajace_co_n_ty_pion: {wartosc: 5, jedn: "-", typ: info, id: W-139, status: zweryfikowane, zrodlo: "WT §125 ust. 2"}
+  przykrycie_wodociagu_min: {wartosc: 1.20, jedn: m, typ: min, id: W-141, status: niezweryfikowane, zrodlo: "h_z + 0,4 m; PN-B-10725:1997, PN-B-10736:1999 (wycof.) — wiedza techniczna"}
+  deszcz_natezenie_rynny: {wartosc: 0.046, jedn: l/(s*m2), typ: rowne, id: W-142, status: zalozenie, zrodlo: "PANDa C10, 5 min (Aquanet 2024); zakres 0,03–0,05 — Rynek Instalacyjny 12/2015"}
+  spadek_dachu_min: {wartosc: 0.02, jedn: "-", typ: min, id: W-142, status: zalozenie, zrodlo: "R3 H-04 (dobra praktyka)"}
+  retencja_C_lat: {wartosc: 10, jedn: lat, typ: rowne, id: W-143, status: zalozenie, zrodlo: "Aquanet 2024 zał. C (PANDa 2050 RCP4.5, Poznań-Ławica)"}
+  retencja_wsp_bezp_fb: {wartosc: 1.2, jedn: "-", typ: min, id: W-143, status: zalozenie, zrodlo: "Aquanet 2024 zał. C (1,1 przy przelewie awaryjnym)"}
+  retencja_kf_redukcja: {wartosc: 0.5, jedn: "-", typ: rowne, id: W-143, status: zalozenie, zrodlo: "Aquanet 2024 zał. C (k_f,nn = 0,5·k_f)"}
+  retencja_oproznianie_max: {wartosc: 24, jedn: h, typ: max, id: W-143, status: zalozenie, zrodlo: "Aquanet 2024 zał. C"}
+  psi_dach_plaski: {wartosc: 0.95, jedn: "-", typ: info, id: W-143, status: zalozenie, zrodlo: "Aquanet 2024 tab. 2"}
+  psi_dach_zielony_ekstensywny: {wartosc: 0.5, jedn: "-", typ: info, id: W-143, status: zalozenie, zrodlo: "Aquanet 2024 tab. 2"}
+  psi_kostka_betonowa: {wartosc: 0.8, jedn: "-", typ: info, id: W-143, status: zalozenie, zrodlo: "Aquanet 2024 tab. 2"}
+  psi_plyty_azurowe: {wartosc: 0.4, jedn: "-", typ: info, id: W-143, status: zalozenie, zrodlo: "Aquanet 2024 tab. 2"}
+  psi_ogrod: {wartosc: 0.15, jedn: "-", typ: info, id: W-143, status: zalozenie, zrodlo: "Aquanet 2024 tab. 2"}
+  rozsaczanie_odl_fundament_min: {wartosc: 3.0, jedn: m, typ: min, id: W-144, status: zalozenie, zrodlo: "R8 3.5 (≥ 1,5·h_f + 0,5 m wg Aquanet) — sprzeczność S-4"}
+  rozsaczanie_odl_granica_min: {wartosc: 2.0, jedn: m, typ: min, id: W-144, status: zalozenie, zrodlo: "R8 3.5"}
+  rozsaczanie_odl_drzewa_min: {wartosc: 1.0, jedn: m, typ: min, id: W-144, status: zalozenie, zrodlo: "R8 3.5"}
+  rozsaczanie_dno_nad_ZWG_min: {wartosc: 1.0, jedn: m, typ: min, id: W-144, status: zalozenie, zrodlo: "Aquanet 2024 zał. C"}
+  zbiornik_opadowy_bez_zgloszenia_max: {wartosc: 5.0, jedn: m3, typ: max, id: W-145, status: zweryfikowane, zrodlo: "PB art. 29 ust. 2 pkt 36 (5–15 m³ — zgłoszenie, ust. 1 pkt 38)"}
+
+ogrzewanie:
+  theta_e: {wartosc: -18, jedn: degC, typ: rowne, id: W-150, status: niezweryfikowane, zrodlo: "NA do PN-EN 12831:2006, strefa II (Poznań wg źródeł wtórnych); WT §134 ust. 2, zał. 1 lp. 16–17"}
+  theta_me: {wartosc: 7.9, jedn: degC, typ: rowne, id: W-150, status: niezweryfikowane, zrodlo: "NA do PN-EN 12831:2006, strefa II"}
+  theta_i_pokoj_hol_kuchnia: {wartosc: 20, jedn: degC, typ: rowne, id: W-150, status: zweryfikowane, zrodlo: "WT §134 ust. 2"}
+  theta_i_lazienka: {wartosc: 24, jedn: degC, typ: rowne, id: W-150, status: zweryfikowane, zrodlo: "WT §134 ust. 2"}
+  theta_i_garaz_ogrzewany: {wartosc: 5, jedn: degC, typ: rowne, id: W-150, status: zweryfikowane, zrodlo: "WT §134 ust. 2 (w projekcie garaż nieogrzewany)"}
+  regulacja_pomieszczeniowa_zwrot_max: {wartosc: 5, jedn: lat, typ: max, id: W-152, status: zweryfikowane, zrodlo: "WT §135 ust. 7–9"}
+  czynnik_grzewczy_temp_max: {wartosc: 90, jedn: degC, typ: max, id: W-153, status: zweryfikowane, zrodlo: "WT §135 ust. 5; §302 ust. 1"}
+  podlogowka_zasilanie_max: {wartosc: 35, jedn: degC, typ: max, id: W-153, status: zalozenie, zrodlo: "R6 3.4"}
+  pc_fgaz_zakaz_moc_max: {wartosc: 12, jedn: kW, typ: info, id: W-155, status: zweryfikowane, zrodlo: "rozp. (UE) 2024/573 zał. IV pkt 8 lit. b, pkt 9 lit. b (GWP ≥ 150 od 2027-01-01)"}
+  pc_fgaz_zakaz_GWP_prog: {wartosc: 150, jedn: "-", typ: max, id: W-155, status: zweryfikowane, zrodlo: "rozp. (UE) 2024/573 zał. IV pkt 8–9"}
+  pc_fgaz_zakaz_od: {wartosc: "2027-01-01", jedn: data, typ: info, id: W-155, status: zweryfikowane, zrodlo: "rozp. (UE) 2024/573 zał. IV pkt 8 lit. b, pkt 9 lit. b"}
+  pc_eta_s_niskotemp_min: {wartosc: 1.25, jedn: "-", typ: min, id: W-155, status: zweryfikowane, zrodlo: "rozp. (UE) 813/2013 zał. II pkt 1 lit. b"}
+  pc_LWA_zewn_do_6kW_max: {wartosc: 65, jedn: dB, typ: max, id: W-155, status: zweryfikowane, zrodlo: "rozp. (UE) 813/2013 zał. II pkt 3"}
+  pc_LWA_zewn_6_12kW_max: {wartosc: 70, jedn: dB, typ: max, id: W-155, status: zweryfikowane, zrodlo: "rozp. (UE) 813/2013 zał. II pkt 3"}
+  pc_R290_strefa_bezp: {wartosc: 1.0, jedn: m, typ: min, id: W-156, status: niezweryfikowane, zrodlo: "dane producentów (DTR); PN-EN 378-1+A1:2021-03"}
+  siec_ciepl_zwolnienie_wsp_nakladu_max: {wartosc: 0.8, jedn: "-", typ: max, id: W-158, status: zweryfikowane, zrodlo: "Pr. energ. art. 7b ust. 3 (łącznie z ≥ 60 % OZE)"}
+  siec_ciepl_zwolnienie_OZE_min: {wartosc: 0.60, jedn: "-", typ: min, id: W-158, status: zweryfikowane, zrodlo: "Pr. energ. art. 7b ust. 3"}
+
+wentylacja:
+  nawiew_na_osobe_min: {wartosc: 20, jedn: m3/h, typ: min, id: W-161, status: zweryfikowane, zrodlo: "WT §149 ust. 1"}
+  liczba_osob: {wartosc: 5, jedn: os, typ: info, id: W-161, status: program, zrodlo: "brief §4 (rodzina 4–5 osób)"}
+  wywiew_kuchnia_el_ponad_3_os: {wartosc: 50, jedn: m3/h, typ: min, id: W-162, status: niezweryfikowane, zrodlo: "PN-B-03430:1983/Az3:2000 (wycof., powołana w WT §149 ust. 1) — źródła wtórne"}
+  wywiew_kuchnia_el_do_3_os: {wartosc: 30, jedn: m3/h, typ: min, id: W-162, status: niezweryfikowane, zrodlo: "PN-B-03430/Az3"}
+  wywiew_kuchnia_okresowo: {wartosc: 120, jedn: m3/h, typ: min, id: W-162, status: niezweryfikowane, zrodlo: "PN-B-03430/Az3 (zalecenie)"}
+  wywiew_lazienka: {wartosc: 50, jedn: m3/h, typ: min, id: W-162, status: niezweryfikowane, zrodlo: "PN-B-03430/Az3"}
+  wywiew_wc: {wartosc: 30, jedn: m3/h, typ: min, id: W-162, status: niezweryfikowane, zrodlo: "PN-B-03430/Az3"}
+  wywiew_pomieszczenie_bezokienne: {wartosc: 15, jedn: m3/h, typ: min, id: W-162, status: niezweryfikowane, zrodlo: "PN-B-03430/Az3"}
+  wywiew_pralnia_krotnosc: {wartosc: 2, jedn: 1/h, typ: min, id: W-162, status: niezweryfikowane, zrodlo: "PN-B-03430/Az3"}
+  wywiew_suma_szacunek: {wartosc: 330, jedn: m3/h, typ: info, id: W-162, status: zalozenie, zrodlo: "R6 3.5"}
+  odzysk_obowiazek_od_strumienia: {wartosc: 500, jedn: m3/h, typ: info, id: W-163, status: zweryfikowane, zrodlo: "WT §151 ust. 1"}
+  odzysk_sprawnosc_min_WT: {wartosc: 0.50, jedn: "-", typ: min, id: W-163, status: zweryfikowane, zrodlo: "WT §151 ust. 1 (tylko ≥ 500 m³/h)"}
+  odzysk_sprawnosc_cel: {wartosc: 0.85, jedn: "-", typ: min, id: W-163, status: zalozenie, zrodlo: "R6 3.5"}
+  SFP_nawiew_z_odzyskiem_max: {wartosc: 1.60, jedn: kW/(m3/s), typ: max, id: W-164, status: zweryfikowane, zrodlo: "WT §154 ust. 10"}
+  SFP_wywiew_z_odzyskiem_max: {wartosc: 1.00, jedn: kW/(m3/s), typ: max, id: W-164, status: zweryfikowane, zrodlo: "WT §154 ust. 10"}
+  SFP_dodatek_odzysk_ponad_67: {wartosc: 0.3, jedn: kW/(m3/s), typ: info, id: W-164, status: zweryfikowane, zrodlo: "WT §154 ust. 11"}
+  filtr_klasa_min: {wartosc: "G4", jedn: "-", typ: min, id: W-165, status: zweryfikowane, zrodlo: "WT §154 ust. 6 (PN-EN 779, wycof.; ekwiwalent ISO 16890 niezweryfikowany)"}
+  czerpnia_odl_ulica_odpady_wywiewki_min: {wartosc: 8.0, jedn: m, typ: min, id: W-166, status: zweryfikowane, zrodlo: "WT §152 ust. 3"}
+  czerpnia_dolna_krawedz_nad_terenem_min: {wartosc: 2.0, jedn: m, typ: min, id: W-166, status: zweryfikowane, zrodlo: "WT §152 ust. 3"}
+  czerpnia_dachowa_nad_powierzchnia_min: {wartosc: 0.4, jedn: m, typ: min, id: W-166, status: zweryfikowane, zrodlo: "WT §152 ust. 4"}
+  czerpnia_dachowa_odl_wywiewki_min: {wartosc: 6.0, jedn: m, typ: min, id: W-166, status: zweryfikowane, zrodlo: "WT §152 ust. 4"}
+  wyrzutnia_dachowa_nad_powierzchnia_min: {wartosc: 0.4, jedn: m, typ: min, id: W-167, status: zweryfikowane, zrodlo: "WT §152 ust. 7 (także nad punktami w promieniu 10 m)"}
+  czerpnia_wyrzutnia_dach_wyrzut_poziomy_min: {wartosc: 10.0, jedn: m, typ: min, id: W-167, status: zweryfikowane, zrodlo: "WT §152 ust. 10"}
+  czerpnia_wyrzutnia_dach_wyrzut_pionowy_min: {wartosc: 6.0, jedn: m, typ: min, id: W-167, status: zweryfikowane, zrodlo: "WT §152 ust. 10 (wyrzutnia ≥ 1 m wyżej)"}
+  wyrzutnia_ponad_czerpnia_min: {wartosc: 1.0, jedn: m, typ: min, id: W-167, status: zweryfikowane, zrodlo: "WT §152 ust. 10"}
+  wyrzutnia_odl_krawedz_dachu_z_oknami_min: {wartosc: 3.0, jedn: m, typ: min, id: W-167, status: zweryfikowane, zrodlo: "WT §152 ust. 12"}
+  wyrzutnia_scienna_sasiad_z_oknami_min: {wartosc: 10.0, jedn: m, typ: min, id: W-167, status: zweryfikowane, zrodlo: "WT §152 ust. 9 (bez okien 8 m)"}
+  wyrzutnia_scienna_okna_poziom_min: {wartosc: 3.0, jedn: m, typ: min, id: W-167, status: zweryfikowane, zrodlo: "WT §152 ust. 9"}
+  wyrzutnia_scienna_okna_pion_min: {wartosc: 2.0, jedn: m, typ: min, id: W-167, status: zweryfikowane, zrodlo: "WT §152 ust. 9"}
+  polaczenie_elastyczne_dl_max: {wartosc: 0.25, jedn: m, typ: max, id: W-168, status: zweryfikowane, zrodlo: "WT §154 ust. 8"}
+  centrala_SEC_max: {wartosc: -20, jedn: kWh/(m2a), typ: max, id: W-169, status: zweryfikowane, zrodlo: "rozp. (UE) 1253/2014 zał. II pkt 2"}
+
+elektryka:
+  RCD_IDn_max: {wartosc: 30, jedn: mA, typ: max, id: W-181, status: zweryfikowane, zrodlo: "PN-HD 60364-4-41:2017-09 p. 411.3.3–411.3.4 (tekst IEC); WT §183 ust. 1 pkt 3"}
+  RCD_gniazda_In_do: {wartosc: 32, jedn: A, typ: info, id: W-181, status: zweryfikowane, zrodlo: "PN-HD 60364-4-41:2017-09 p. 411.3.3"}
+  czas_wylaczenia_TN_230V_max: {wartosc: 0.4, jedn: s, typ: max, id: W-182, status: zweryfikowane, zrodlo: "PN-HD 60364-4-41 tabl. 41.1"}
+  wypusty_pokoj_do_20m2_min: {wartosc: 1, jedn: szt, typ: min, id: W-183, status: niezweryfikowane, zrodlo: "N SEP-E-002 (źródło wtórne)"}
+  wypusty_pokoj_ponad_20m2_min: {wartosc: 2, jedn: szt, typ: min, id: W-183, status: niezweryfikowane, zrodlo: "N SEP-E-002 (źródło wtórne)"}
+  tynk_nad_przewodem_min: {wartosc: 5, jedn: mm, typ: min, id: W-184, status: zweryfikowane, zrodlo: "WT §187 ust. 2"}
+  przekroj_Cu_obwody_min: {wartosc: 1.5, jedn: mm2, typ: min, id: W-184, status: niezweryfikowane, zrodlo: "PN-HD 60364-5-52:2011 tabl. 52.2"}
+  zyly_tylko_Cu_do_przekroju: {wartosc: 10, jedn: mm2, typ: max, id: W-180, status: zweryfikowane, zrodlo: "WT §183 ust. 1 pkt 9"}
+  spadek_napiecia_ZKP_odbiornik_max: {wartosc: 3.0, jedn: "%", typ: max, id: W-185, status: niezweryfikowane, zrodlo: "N SEP-E-002 (norma z WT — PN-IEC 60364-5-52:2002: 4 %)"}
+  spadek_napiecia_ZKP_RG_max: {wartosc: 0.5, jedn: "%", typ: max, id: W-185, status: niezweryfikowane, zrodlo: "N SEP-E-002"}
+  WLZ_obciazalnosc_min: {wartosc: 50, jedn: A, typ: min, id: W-185, status: niezweryfikowane, zrodlo: "N SEP-E-002 (źródło wtórne)"}
+  CRL_prog: {wartosc: 1000, jedn: "-", typ: info, id: W-186, status: zweryfikowane, zrodlo: "PN-HD 60364-4-443:2016 p. 443.5 (CRL < 1000 ⇒ SPD)"}
+  CRL_f_env: {wartosc: 170, jedn: "-", typ: info, id: W-186, status: niezweryfikowane, zrodlo: "443.5: 85·F, F = 2 (odsyłacz krajowy wg RST 2018)"}
+  Ng: {wartosc: 1.8, jedn: 1/(km2*rok), typ: info, id: W-186, status: niezweryfikowane, zrodlo: "PN-86/E-05003/01 wg SEP (na północ od 51°30′)"}
+  SPD_T1_Iimp_min: {wartosc: 12.5, jedn: kA, typ: min, id: W-186, status: niezweryfikowane, zrodlo: "PN-HD 60364-5-534:2016 (obecnie 5-53:2022-10) wg RST"}
+  SPD_Up_max: {wartosc: 2.5, jedn: kV, typ: max, id: W-186, status: zweryfikowane, zrodlo: "PN-HD 60364-4-443:2016 tabl. 443.2 (kategoria II); zalecane 1,5 kV"}
+  uziom_otulina_min: {wartosc: 0.05, jedn: m, typ: min, id: W-187, status: zweryfikowane, zrodlo: "PN-HD 60364-5-54:2011 zał. C.3.2"}
+  uziom_mocowanie_do_zbrojenia_co_max: {wartosc: 2.0, jedn: m, typ: max, id: W-187, status: zweryfikowane, zrodlo: "PN-HD 60364-5-54:2011 zał. C.3.2"}
+  izolacja_fundamentu_folia_prog: {wartosc: 0.5, jedn: mm, typ: info, id: W-187, status: zweryfikowane, zrodlo: "PN-HD 60364-5-54:2011 zał. C.2 (folia > 0,5 mm ⇒ uziom otokowy)"}
+  przewod_uziemiajacy_min: {wartosc: 16, jedn: mm2, typ: min, id: W-188, status: zweryfikowane, zrodlo: "PN-HD 60364-5-54 p. 542.3.1 (6 mm² Cu; przy LPS 16 mm² — przyjęto)"}
+  wyrownawczy_glowny_min: {wartosc: 6, jedn: mm2, typ: min, id: W-188, status: zweryfikowane, zrodlo: "PN-HD 60364-5-54 p. 544.1 (≥ ½ największego PE)"}
+  wyrownawczy_glowny_nie_wiecej_niz: {wartosc: 25, jedn: mm2, typ: info, id: W-188, status: zweryfikowane, zrodlo: "PN-HD 60364-5-54 p. 544.1"}
+  lazienka_strefa1_wys: {wartosc: 2.25, jedn: m, typ: info, id: W-189, status: niezweryfikowane, zrodlo: "PN-HD 60364-7-701:2010 (wg źródeł wtórnych; zweryfikować z wyd. 2025-02)"}
+  lazienka_strefa2_szer: {wartosc: 0.60, jedn: m, typ: info, id: W-189, status: niezweryfikowane, zrodlo: "PN-HD 60364-7-701:2010 (wg źródeł wtórnych)"}
+  lazienka_IP_strefy_1_2_min: {wartosc: "IPX4", jedn: "-", typ: min, id: W-189, status: niezweryfikowane, zrodlo: "PN-HD 60364-7-701"}
+  PWP_kubatura_strefy_prog: {wartosc: 1000, jedn: m3, typ: info, id: W-190, status: zweryfikowane, zrodlo: "WT §183 ust. 2 (ROPoż §4 ust. 2 pkt 2 — zwolnienie; rekomendacja: projektować PWP)"}
+  odgromowa_RT: {wartosc: 1.0e-5, jedn: 1/rok, typ: max, id: W-191, status: niezweryfikowane, zrodlo: "PN-EN 62305-2 (ryzyko tolerowane R1)"}
+  obciazenie_ogniowe_progi: {wartosc: [400, 800], jedn: MJ/m2, typ: info, id: W-191, status: niezweryfikowane, zrodlo: "PN-EN 62305-2:2008/2012 (niskie/zwykłe/wysokie)"}
+  grupa_przylaczeniowa_V_moc_max: {wartosc: 40, jedn: kW, typ: max, id: W-192, status: zweryfikowane, zrodlo: "RSys (t.j. Dz.U. 2025 poz. 919) §3 ust. 1 pkt 5"}
+  warunki_przylaczenia_termin: {wartosc: 21, jedn: dni, typ: info, id: W-192, status: zweryfikowane, zrodlo: "Pr. energ. art. 7 ust. 8g pkt 1"}
+  warunki_przylaczenia_waznosc: {wartosc: 2, jedn: lat, typ: info, id: W-192, status: zweryfikowane, zrodlo: "Pr. energ. art. 7 ust. 8i"}
+  moc_przylaczeniowa_projekt: {wartosc: 27, jedn: kW, typ: info, id: W-192, status: zalozenie, zrodlo: "R7 3.1 (zabezpieczenie przedlicznikowe 40 A)"}
+  zabezpieczenie_przedlicznikowe_projekt: {wartosc: 40, jedn: A, typ: info, id: W-192, status: zalozenie, zrodlo: "R7 3.1"}
+  ZKP_pole_odczytowe_min: {wartosc: 0.48, jedn: m, typ: min, id: W-192, status: zweryfikowane, zrodlo: "standard ENEA Operator „Układy pomiarowe” (od 02.04.2024) — dokument OSD"}
+  kabel_nN_glebokosc_min: {wartosc: 0.70, jedn: m, typ: min, id: W-192, status: zweryfikowane, zrodlo: "standard ENEA „Linie kablowe nn” (od 01.10.2025) p. 5.4.2 — dokument OSD"}
+  PV_moc_modulow_max: {wartosc: 6.5, jedn: kWp, typ: max, id: W-194, status: zweryfikowane, zrodlo: "PB art. 29 ust. 4 pkt 3 lit. c; OZE art. 2 pkt 19b lit. b"}
+  PV_falownik_max: {wartosc: 6.5, jedn: kW, typ: max, id: W-194, status: zalozenie, zrodlo: "R1-35 (ograniczenie bezpieczne)"}
+  magazyn_energii_max: {wartosc: 30, jedn: kWh, typ: max, id: W-194, status: zweryfikowane, zrodlo: "PB art. 29 ust. 4 pkt 3 lit. c"}
+  mikroinstalacja_max: {wartosc: 50, jedn: kW, typ: max, id: W-194, status: zweryfikowane, zrodlo: "ustawa OZE art. 2 pkt 19"}
+  OSD_przylaczenie_mikroinstalacji_termin: {wartosc: 30, jedn: dni, typ: info, id: W-194, status: zweryfikowane, zrodlo: "Pr. energ. art. 7 ust. 8d7"}
+  EPBD_miejsca_prog: {wartosc: 3, jedn: szt, typ: info, id: W-195, status: zweryfikowane, zrodlo: "dyr. (UE) 2024/1275 art. 14 ust. 4 (> 3 miejsca; nietransponowana)"}
+  EPBD_okablowanie_wstepne_udzial: {wartosc: 0.5, jedn: "-", typ: min, id: W-195, status: zweryfikowane, zrodlo: "dyr. (UE) 2024/1275 art. 14 ust. 4"}
+  swiatlowod_wlokna_min: {wartosc: 2, jedn: szt, typ: min, id: W-196, status: zalozenie, zrodlo: "WT §192f ust. 5 (analogia, dobra praktyka)"}
+  swiatlowod_tlumienie_toru_max: {wartosc: 1.2, jedn: dB, typ: max, id: W-196, status: zalozenie, zrodlo: "WT §192f ust. 5 (analogia)"}
+  czujki_dymu_min: {wartosc: 1, jedn: szt, typ: min, id: W-197, status: zweryfikowane, zrodlo: "ROPoż §28a ust. 1 (Dz.U. 2024 poz. 1716)"}
+
+ppoz:
+  kategoria_ZL: {wartosc: "ZL IV", jedn: "-", typ: rowne, id: W-210, status: zweryfikowane, zrodlo: "WT §209 ust. 2 pkt 4"}
+  grupa_wysokosci: {wartosc: "N", jedn: "-", typ: rowne, id: W-210, status: zweryfikowane, zrodlo: "WT §8 pkt 1"}
+  zwolnienie_213_kondygnacje_max: {wartosc: 3, jedn: "-", typ: max, id: W-211, status: zweryfikowane, zrodlo: "WT §213 pkt 1 lit. a"}
+  woda_ppoz_min: {wartosc: 10, jedn: dm3/s, typ: min, id: W-217, status: zweryfikowane, zrodlo: "rozp. Dz.U. 2009 nr 124 poz. 1030 §3 ust. 2 (5 dm³/s wg ust. 3)"}
+  rzeczoznawca_ppoz_PV_prog: {wartosc: 50, jedn: kW, typ: info, id: W-218, status: zweryfikowane, zrodlo: "rozp. Dz.U. 2023 poz. 1563 §3 ust. 1 pkt 12"}
+
+akustyka:
+  norma_poziomy_w_pomieszczeniach: {wartosc: "PN-B-02151-2:2018-01", jedn: "-", typ: info, id: W-230, status: zweryfikowane, zrodlo: "WT §326 ust. 1, zał. 1 (Dz.U. 2023 poz. 2442)"}
+  norma_izolacyjnosc_przegrod: {wartosc: "PN-B-02151-3:2015-10", jedn: "-", typ: info, id: W-230, status: zweryfikowane, zrodlo: "WT §326 ust. 2, zał. 1"}
