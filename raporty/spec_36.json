@@ -1,4 +1,5 @@
 {
+ "nr": 36,
  "title": "Detale PT-AR-D-01…06 gotowe (15 detali, 4 linie ciągłości) · pomiar zużycia papieru: wypełnienie arkuszy 32–78 % → silnik układu w budowie",
  "stages": [
   [
@@ -59,6 +60,13 @@
   "Norma składania zweryfikowana: PN-N-01603:1986 „Składanie formatów arkuszy” — WYCOFANA bez następcy (katalog PKN); DIN 824:1981-03 aktualna (forma A — do wpięcia). Wymiary pasów 190/210/20 mm potwierdzone tylko źródłami wtórnymi → w dokumentacji: „praktyka wg DIN 824 forma A, uogólnienie [przyjęcie]”.",
   "Detale: 15 szt. 1:10/1:5 — cokół, próg HS, rura spustowa z czyszczakiem, okno w ciepłym montażu, okap z rynną ukrytą i spadkiem 2 %, attyki z wpustem i przelewem awaryjnym, wspornik bryły A, lamele, garaż, wyłaz, świetlik; wyniki ψ/f_Rsi przy każdym detalu.",
   "H_TB z geometrii modelu 45,6 W/K (domyślne PN-EN ISO 14683: 137,6 W/K) — istotne dla EP; 7 węzłów z rekomendacjami poprawy trafia do rundy 2.",
-  "Runda 2 poprawek modelu: etap fizyka/woda/instalacje w toku (funkcja — zakończona)."
+  "Runda 2 poprawek modelu: etap fizyka/woda/instalacje w toku (funkcja — zakończona).",
+  "NADZÓR (07:54): 4 agentów aktywnych, bez zastojów; najdłuższa bezczynność 0 min; zmiany w repo 0 min temu."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/projekt/10_PT_architektura/detale/PT-AR-D-02_detale_okno_cieply_montaz_okap_pl_e.png",
+   "caption": "PT-AR-D-02 — okno w ciepłym montażu 1:5 i okap PL-E 1:10 (rynna ukryta, łącznik termoizolacyjny, spadek 2 %)"
+  }
  ]
 }

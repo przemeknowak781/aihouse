@@ -22,7 +22,7 @@ CDN = ["https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js",
        "https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/controls/OrbitControls.js",
        "https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/environments/RoomEnvironment.js"]
 DOP = {"N": "północy", "S": "południa", "E": "wschodu", "W": "zachodu"}
-MIEJSC = {"N": "północnej", "S": "południowej", "E": "wschodniej", "W": "zachodniej"}
+BIER = {"N": "północ", "S": "południe", "E": "wschód", "W": "zachód"}
 LINIE_MAT = {"izolacja": "WELNA_FAS", "hydro": "HYDRO_PODPL", "szczelnosc": "MEMB_PAROSZ", "zewn": "DREWNO_TERMO"}
 
 
@@ -294,8 +294,223 @@ def elewacje_sekcja(D: dict, tr: dict, W: dict, arkusze: Path | None, sep: str) 
         svg = EL.przekroj(D, sec, zr)
         pl = f'x = {fm(sec["x"])} m' if "x" in sec else f'y = {fm(sec["y"])} m'
         pan += (f'<div class="panel" role="tabpanel" id="p-el-{sid}" aria-labelledby="t-el-{sid}" hidden><div class="rys-box">{svg}</div>'
-                f'<p class="etk" style="margin-top:.6rem">Płaszczyzna {E(pl)}, widok na {E(MIEJSC.get(str(sec.get("patrz")), "")).replace("ej", "")} · '
+                f'<p class="etk" style="margin-top:.6rem">Płaszczyzna {E(pl)}, widok na {E(BIER.get(str(sec.get("patrz")), ""))} · '
                 f'kolor: izolacja termiczna przecięta, ciemny: konstrukcja</p></div>')
         zak += f'<button type="button" role="tab" id="t-el-{sid}" aria-controls="p-el-{sid}" aria-selected="false" tabindex="-1">Przekrój {E(sid)}-{E(sid)}</button>'
     body = (f'<p class="lead">{tx(tr["elewacje"]["opis"], W)}</p><div class="zakl" role="tablist" aria-label="Elewacje i przekroje">{zak}</div>{pan}')
     return sekcja("elewacje", "Rysunki", tr["elewacje"]["tytul"], "", body, sep)
+
+
+def model3d(D: dict, tr: dict, W: dict, sep: str) -> str:
+    m = D["model"]
+    x0, y0, x1, y1 = unary_bounds(m)
+    top = D["wsk"]["wysokosc_zabudowy"]["z_top"]
+    c = [(x0 + x1) / 2, (y0 + y1) / 2, top / 2]
+    R = max(x1 - x0, y1 - y0, top) * 0.75
+    ks = [k.id for k in m.kondygnacje]
+    from ..sun import sun_position, sun_vector
+    az, el = sun_position("2026-06-21 15:00")
+    sv = sun_vector(az, el, D["orientacja"]["azymut_osi_y"])
+    wid = {"ogrod": dict(poz=[c[0] - 4, y0 - 2.6 * R, 1.7], cel=[c[0], c[1], c[2] * 0.8]),
+           "ulica": dict(poz=[c[0] + 3, y1 + 2.4 * R, 1.7], cel=[c[0], c[1], c[2] * 0.8]),
+           "lotniczy": dict(poz=[x1 + 1.6 * R, y0 - 1.9 * R, 1.6 * R], cel=c),
+           "gora": dict(poz=[c[0], c[1] - 0.01, 3.4 * R], cel=[c[0], c[1], 0])}
+    cfg = dict(plik="assets/model.glb", srodek=c, promien=R, slonce=list(sv), widoki=wid, kolejnosc=ks + ["dach"],
+               krok=round(max(k.wys_kondygnacji or 3.0 for k in m.kondygnacje) * 0.9, 2), otoczenie=["otoczenie"])
+    btn = [("widok", "ogrod", "Ogród"), ("widok", "ulica", "Ulica"), ("widok", "lotniczy", "Z lotu ptaka"),
+           ("widok", "gora", "Z góry"), ("przelacz", "rozsun", "Rozsuń kondygnacje"), ("przelacz", "otoczenie", "Otoczenie")]
+    ster = "".join(f'<button type="button" data-{a}="{b}" disabled'
+                   + (f' aria-pressed="{"true" if b == "otoczenie" else "false"}"' if a == "przelacz" else "")
+                   + f'>{E(n)}</button>' for a, b, n in btn)
+    t = tr["widok3d"]
+    body = (f'<p class="lead">{tx(t["opis"], W)}</p><div class="v3d" id="v3d">'
+            f'<div class="v3d-plakat" id="v3d-plakat" style="background-image:url(assets/lotniczy_169.webp)">'
+            f'<p>Model 3D (glTF, {E(W.get("glb_mb", ""))} MB) — wczytuje się po kliknięciu.</p>'
+            f'<button type="button" class="btn btn-g" id="v3d-start">{E(t["przycisk"])}</button></div>'
+            f'<p class="v3d-stan" id="v3d-stan" role="status" aria-live="polite"></p></div>'
+            f'<div class="v3d-ster" id="v3d-ster" role="group" aria-label="Sterowanie widokiem 3D">{ster}</div>'
+            f'<script type="application/json" id="dane-3d">{json.dumps(cfg)}</script>')
+    return sekcja("model-3d", "Interaktywnie", t["tytul"], '<p class="nota">Mysz: obrót, kółko — przybliżenie, prawy '
+                  'przycisk — przesunięcie. Dotyk: jeden palec obraca, dwa przybliżają.</p>', body, sep)
+
+
+def unary_bounds(m):
+    from shapely.ops import unary_union
+    return unary_union([m.obrys_kondygnacji(k.id) for k in m.kondygnacje]).bounds
+
+
+def technologia(D: dict, tr: dict, W: dict, sep: str) -> str:
+    en = D["en"] or {}
+    karty = ""
+    for p in D["przegrody"]:
+        nz = p["nazwa"].split(":")[0].split("(")[0].strip()
+        u = (f'<span class="u">U = {fm(p["U"], 3)}<small> W/(m²·K)</small></span>'
+             + (f'<span class="etk">wymaganie ≤ {fm(p["U_max"])}</span>' if p.get("U_max") else "")) if p.get("U") else \
+            '<span class="etk">U — nie dotyczy</span>'
+        karty += (f'<div class="karta przeg"><div class="przeg-gl"><h3><span class="nr">{E(p["kod"])}</span> {E(nz)}</h3>{u}</div>'
+                  f'{SC.przegroda_html(p)}<p class="etk">grubość {fm(p["d"] * 100, 1)} cm</p></div>')
+    k, f, g, st = D["konstr"], D["fund"], D["geo"], D["stolarka"]
+    ok = [v for v in st.values() if isinstance(v, dict) and str(v.get("wyrob", "")).startswith(("okno", "fix", "HS"))]
+    beton = k.get("beton") or {}
+    rows = [("Ściany nośne", E(str(k.get("mur", "")))),
+            ("Stropy i ściany ŻB", E(str(beton.get("stropy_sciany", "")))),
+            ("Elementy wysunięte", E(str(beton.get("krawedzie_wysuniete", ""))) + "; łączniki termoizolacyjne"),
+            ("Stal zbrojeniowa", E(str(k.get("stal_zbrojeniowa", "")))),
+            ("Fundament", f'płyta fundamentowa — {E(str(beton.get("fundament", "")))}; izolacja obwodowa: '
+                          f'{E(str((f.get("izolacja_obwodowa") or {}).get("opis", "")))}' if f.get("typ") == "plyta" else E(str(f.get("typ")))),
+            ("Grunt (założenie)", f'{E(str((g.get("grunt") or {}).get("rodzaj", "")))}; kategoria geotechniczna {E(str(g.get("kategoria", "")))}; '
+                                  f'{E(str(g.get("uwagi", "")))}'),
+            ("Okna i przeszklenia", f'{len(ok)} typów, 3-szybowe; U<sub>w</sub> {fm(en.get("Uw_min"))}–{fm(en.get("Uw_max"))} W/(m²·K) '
+                                    f'(moduł fizyki, {en.get("n_okien", 0)} pozycji); ciepły montaż'),
+            ("Klasy konstrukcji", f'{E(str(k.get("klasa_konsekwencji", "")))}/{E(str(k.get("klasa_niezawodnosci", "")))}, '
+                                  f'okres użytkowania {E(str(k.get("okres_uzytkowania", "")))} lat')]
+    tab = "".join(f'<tr><th scope="row">{a}</th><td>{b}</td></tr>' for a, b in rows)
+    body = (f'<p class="lead">{tx(tr["technologia"]["lead"], W)}</p><div class="siatka-2">{karty}</div>'
+            f'<h3>Konstrukcja i stolarka</h3><div class="tab-wrap"><table>{tab}</table></div>')
+    return sekcja("technologia", "Przegrody z U", tr["technologia"]["tytul"],
+                  f'<p class="nota">U: {E(en.get("zrodlo", ""))}. Kolory warstw — kolory materiałów w modelu; pasek pod '
+                  f'przegrodą — przynależność warstwy do „4 linii”.</p>', body, sep)
+
+
+def jakosc(D: dict, tr: dict, W: dict, prz_svg: str, sep: str) -> str:
+    """4 linie: skład każdej linii zebrany z warstw przegród modelu + wynik kontroli ciągłości modułu fizyki; woda."""
+    zb = {k: {} for k in SC.LINIE}
+    for p in D["przegrody"]:
+        for w in p["warstwy"]:
+            if w["linia"] in zb:
+                nz = w["nazwa"].split(" (")[0].split(",")[0].split(":")[-1].strip()
+                zb[w["linia"]].setdefault(nz, set()).add(w["d"])
+    li = ""
+    for k, nazwa in SC.LINIE.items():
+        el = "; ".join(f'{n} {"/".join(fm(d * 100, 1 if d < 0.01 else 0) for d in sorted(ds))} cm'
+                       for n, ds in list(zb[k].items())[:5])
+        li += f'<li style="--k:var(--l-{k})"><b>{E(nazwa.capitalize())}</b><p>{E(el)}</p></li>'
+    en = D["en"] or {}
+    br = en.get("ciaglosc_braki") or {}
+    n = en.get("ciaglosc_n", 0)
+    kontrola = (f'<p><span class="{"ok" if not br else "uw"}">Kontrola ciągłości (moduł fizyki): {n - len(br)} z {n} '
+                f'przegród bez braków.</span> '
+                + " ".join(f'Uwaga do weryfikacji: {E(kk)} — {E("; ".join(v))}.' for kk, v in br.items()) + '</p>')
+    wd = D["woda"]
+    def _grz(d):
+        return f' ({d["podgrzewane"]} z grzałką)' if d["podgrzewane"] else ""
+    wiersze = "".join(f'<tr><td class="nr">{E(str(d["id"]))}</td><td>{E(str(d["przegroda"]))}</td><td class="l">{fm(d["A"], 1)}</td>'
+                      f'<td class="l">{fm(100 * (d["spadek"] or 0), 0)} %</td><td class="l">{d["wpusty"]}{_grz(d)}</td>'
+                      f'<td class="l">{d["przelewy"]}</td><td class="l">{d["rury"]}</td></tr>' for d in wd["dachy"])
+    dachy = (f'<div class="tab-wrap"><table><thead><tr><th>Pole</th><th>Przegroda</th><th class="l">m²</th><th class="l">Spadek</th>'
+             f'<th class="l">Wpusty</th><th class="l">Przelewy awaryjne</th><th class="l">Rury spustowe</th></tr></thead>'
+             f'<tbody>{wiersze}</tbody></table></div>')
+    teren = (f'<ul class="adapt"><li>Wszystkie rury spustowe prowadzą do szczelnego zbiornika {fm(wd["zbiornik_V"], 1)} m³ '
+             f'(woda do podlewania), przelew — do niecki chłonnej {fm_m2(wd["niecka_A"], 0)} o głębokości {fm(wd["niecka_gl"])} m.</li>'
+             f'<li>Wokół budynku opaska żwirowa {fm(wd["opaska"])} m, spadek terenu od ścian; {wd["liniowe"]} odwodnienia liniowe '
+             f'(progi HS, wejście, brama garażu, wjazd) i {wd["niecki"]} niecki trawiaste.</li>'
+             + ('<li>Woda z podjazdu i posadzki garażu przechodzi przez osadnik z separatorem i nie trafia do zbiornika.</li>'
+                if wd["separator"] else "")
+             + (f'<li>Drenażu opaskowego nie przewidziano: {E(str(wd["grunt"]))} (przyjęte w modelu — do potwierdzenia '
+                f'opinią geotechniczną).</li>' if not wd["drenaz"] else "") + '</ul>')
+    body = (f'<p class="lead">{tx(tr["jakosc"]["lead"], W)}</p><ul class="linie4">{li}</ul>{kontrola}'
+            f'<div class="rys-box">{prz_svg}</div><p class="etk">Przekrój z modelu: izolacja termiczna przecięta w kolorze '
+            f'pierwszej linii — ciągła od płyty fundamentowej po attyki.</p>'
+            f'<h3>Odprowadzenie wody z dachów</h3>{dachy}<h3>Woda na działce</h3>{teren}')
+    return sekcja("jakosc", "Wyróżnik jakości", tr["jakosc"]["tytul"], '<p class="nota">Skład linii zebrany automatycznie '
+                  'z warstw przegród modelu (pola „funkcja” warstw i materiałów).</p>', body, sep)
+
+
+def energia(D: dict, tr: dict, W: dict, sep: str) -> str:
+    en, ins = D["en"] or {}, D["inst"]
+    if not en:
+        return ""
+    mx = max(en["EP_max"] * 1.25, en["EP"] * 1.1)
+    skala = (f'<div class="skala-ep" role="img" aria-label="EP {fm(en["EP"], 1)} przy wymaganiu {fm(en["EP_max"], 0)} kWh/(m²·rok)">'
+             f'<div class="pas" style="width:{100 * en["EP"] / mx:.1f}%"></div><div class="max" style="left:{100 * en["EP_max"] / mx:.1f}%"></div>'
+             f'<span style="left:0">EP {fm(en["EP"], 1)}</span><span style="left:{100 * en["EP_max"] / mx:.1f}%">EP<sub>max</sub> {fm(en["EP_max"], 0)}</span></div>')
+    kaf = [(fm(en["EP"], 1), "kWh/(m²·rok)", "energia pierwotna EP"),
+           (fm(en["EK"], 1), "kWh/(m²·rok)", "energia końcowa EK"), (fm(en["EU"], 1), "kWh/(m²·rok)", "energia użytkowa EU"),
+           (fm(en["U_oze"], 0), "%", "udział OZE"), (fm(en["Phi_HL_kW"], 1), "kW", "projektowe obciążenie cieplne"),
+           (fm(en["went_m3h"], 0), "m³/h", "strumień wentylacji projektowy"),
+           (fm(ins["pc_P"], 1), "kW", f'pompa ciepła A-7/W35, SCOP {fm(ins["pc_SCOP"], 1)}'),
+           (fm(100 * (ins["reku_eta"] or 0), 0), "%", f'odzysk ciepła, centrala {fm(ins["reku_V"], 0)} m³/h'),
+           (fm(ins["pv_kWp"]), "kWp", f'PV: {ins["pv_n"]} × {ins["pv_Wp"]} Wp, azymut {ins["pv_az"]}°'),
+           (fm(ins["cwu_V"], 0), "dm³", "zasobnik c.w.u."), (fm(ins["n50"], 1), "1/h", "szczelność n50 (cel)"),
+           (fm(en["A_f"], 1), "m²", "powierzchnia A_f o regulowanej temp.")]
+    kafle = "".join(f'<div><span class="w">{E(a)}<small>{E(b)}</small></span><p>{E(c)}</p></div>' for a, b, c in kaf)
+    alt = "".join(f'<tr><td>{E(a["nazwa"])}</td><td class="l">{fm(a["EP"], 1)}</td><td class="l">{fm(a["U_oze"], 0)} %</td>'
+                  f'<td>{"<span class=ok>spełnia</span>" if a["spelnia"] else "<span class=uw>nie spełnia</span>"}</td></tr>'
+                  for a in en["alternatywy"])
+    body = (f'<p class="lead">{tx(tr["energia"]["lead"], W)}</p><div class="wsk-ep">{skala}'
+            f'<p>Klasa energetyczna: moduł obliczeń jej nie wyznacza, dlatego jej nie podajemy.</p></div>'
+            f'<div class="kafle">{kafle}</div><h3>Warianty źródła ciepła (ten sam budynek)</h3>'
+            f'<div class="tab-wrap"><table><thead><tr><th>Wariant</th><th class="l">EP</th><th class="l">OZE</th><th>EP ≤ EP<sub>max</sub></th>'
+            f'</tr></thead><tbody>{alt}</tbody></table></div>')
+    return sekcja("energia", "Charakterystyka energetyczna", tr["energia"]["tytul"],
+                  f'<p class="nota">Źródło: {E(en["zrodlo"])}. Dane urządzeń przykładowe („lub równoważne”) — potwierdza PT.</p>',
+                  body, sep)
+
+
+def dzialka(D: dict, tr: dict, W: dict, sep: str) -> str:
+    dm, ori = D["dzialka_min"], D["orientacja"]
+    nz = {"W": "zachód", "E": "wschód", "S": "południe (ogród)", "N": "północ (droga)"}
+    rows = ""
+    for k in ("W", "E", "S", "N"):
+        q = dm[k]
+        pod = "WT § 12 ust. 6 (element wysunięty)" if q["d"] == 1.5 else (
+            "linia zabudowy (MPZP); § 12 nie dotyczy granicy z drogą (ust. 10)" if k == "N" else
+            f'WT § 12 ust. 1 pkt {"1" if q["d"] == 4.0 else "2"}')
+        rows += (f'<tr><td>{nz[k]}</td><td>{E(str(q["el"]))}</td><td class="l">{fm(q["d"])} m</td>'
+                 f'<td class="pod">{E(pod)}</td></tr>')
+    ref = dm.get("referencyjna") or {}
+    body = (f'<p class="lead">{tx(tr["dzialka"]["lead"], W)}</p>'
+            f'<div class="tabliczka"><div><span class="etk">Szerokość min.</span><span class="w">{fm(dm["szer"])}<small>m</small></span>'
+            f'<span class="p">granice boczne W–E</span></div><div><span class="etk">Głębokość min.</span><span class="w">{fm(dm["gl"])}'
+            f'<small>m</small></span><span class="p">od drogi do granicy tylnej</span></div><div><span class="etk">Prostokąt</span>'
+            f'<span class="w">{fm(dm["pow"], 0)}<small>m²</small></span><span class="p">bez wymagań MPZP co do powierzchni</span></div>'
+            f'<div><span class="etk">Wjazd i wejście</span><span class="w">od {E(DOP.get(ori["droga"] or "N", ""))}</span>'
+            f'<span class="p">ogród od {E(DOP.get(ori["najwiecej"], ""))}</span></div></div>'
+            f'<div class="rys-box">{SC.dzialka_svg(D)}</div>'
+            f'<div class="tab-wrap"><table><thead><tr><th>Strona</th><th>Element decydujący</th><th class="l">Odległość</th>'
+            f'<th>Podstawa</th></tr></thead><tbody>{rows}</tbody></table></div>'
+            f'<p><b>Metoda.</b> {E(dm["metoda"])}</p>'
+            f'<p>Działka referencyjna w modelu projektu (fikcyjna): {fm(ref.get("szer"))} × {fm(ref.get("gl"))} m, '
+            f'{fm_m2(ref.get("pow"), 0)}. Na działce węższej niż minimum zmiana usytuowania wymaga zgody autora i ponownego '
+            f'sprawdzenia przepisów przez projektanta adaptującego (np. ściana bez okien może stanąć bliżej granicy).</p>')
+    return sekcja("dzialka", "Wymagania działki", tr["dzialka"]["tytul"],
+                  f'<p class="nota">Nachylenie dachu {fm(D["wsk"]["kat_dachu"]["wartosc"], 1)}° (spadek dachu płaskiego); '
+                  f'przeszklenia wg kierunków: S {fm(ori["przeszklenia"]["S"], 1)}, W {fm(ori["przeszklenia"]["W"], 1)}, '
+                  f'E {fm(ori["przeszklenia"]["E"], 1)}, N {fm(ori["przeszklenia"]["N"], 1)} m².</p>', body, sep)
+
+
+def dokumentacja(D: dict, tr: dict, W: dict, model_dir: Path, sep: str) -> str:
+    t, a = tr["dokumentacja"], tr["adaptacja"]
+    li = ""
+    for c in t["czesci"]:
+        n = None
+        if c.get("arkusze") and (model_dir / c["arkusze"]).exists():
+            n = len((yaml.safe_load((model_dir / c["arkusze"]).read_text(encoding="utf-8")) or {}).get("arkusze") or [])
+        li += (f'<li><span class="kod">{E(c["kod"])}</span><b>{E(c["nazwa"])}</b><p>{E(c["opis"])}</p>'
+               + (f'<p class="etk">{n} arkuszy rysunkowych w konfiguracji modelu</p>' if n else "") + '</li>')
+    ad = "".join(f'<li>{tx(p, W)}</li>' for p in a["punkty"])
+    body = (f'<p class="lead">{tx(t["lead"], W)}</p><ul class="tomy">{li}</ul><p>{tx(t["uwaga"], W)}</p>'
+            f'<h3 id="adaptacja">{E(a["tytul"])}</h3><ul class="adapt">{ad}</ul><p class="demo">{tx(a["zastrzezenie"], W)}</p>')
+    return sekcja("dokumentacja", "Komplet dokumentacji", t["tytul"], '<p class="nota">Liczba arkuszy odczytana z plików '
+                  'konfiguracji rysunków modelu (model/arkusze*.yaml).</p>', body, sep)
+
+
+def pakiety(tr: dict, W: dict, sep: str) -> str:
+    t = tr["pakiety"]
+    karty = "".join(f'<div class="pakiet{" wyr" if p.get("wyroznij") else ""}"><h3>{E(p["nazwa"])}</h3><p>{E(p["dla"])}</p>'
+                    f'<p class="cena num">{E(p["cena"])}<small>cena przykładowa</small></p>'
+                    f'<ul>{"".join(f"<li>{E(z)}</li>" for z in p["zawiera"])}</ul>'
+                    f'<a class="btn{" btn-g" if p.get("wyroznij") else ""}" href="#zapytanie" data-pakiet="{E(p["nazwa"])}">'
+                    f'Zapytaj o pakiet {E(p["nazwa"])}</a></div>' for p in t["lista"])
+    op = "".join(f'<tr><td>{E(o["nazwa"])}</td><td class="l">{E(o["cena"])}</td></tr>' for o in t["opcje"])
+    body = (f'<p class="baner">{E(t["etykieta"])}</p><div class="pakiety">{karty}</div><h3>{E(t["opcje_tytul"])}</h3>'
+            f'<div class="tab-wrap"><table class="opcje"><thead><tr><th>Opcja</th><th class="l">Cena przykładowa</th></tr></thead>'
+            f'<tbody>{op}</tbody></table></div>')
+    return sekcja("pakiety", "Cennik (przykładowy)", t["tytul"], '<p class="nota">Ceny brutto przykładowe. Strona jest '
+                  'demonstracją — nie można tu niczego kupić.</p>', body, sep)
+
+
+def faq(tr: dict, W: dict, sep: str) -> str:
+    t = tr["faq"]
+    q = "".join(f'<details class="faq"><summary>{tx(x["p"], W)}</summary><p>{tx(x["o"], W)}</p></details>' for x in t["lista"])
+    return sekcja("pytania", "FAQ", t["tytul"], "", f"<div>{q}</div>", sep)
