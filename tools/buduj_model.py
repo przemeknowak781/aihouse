@@ -450,7 +450,7 @@ O("O0-14", "S0-08", 4.20, 5.10, "drzwi", "D1P", 2.10, 0.0, ow("przesuwne", "na_z
         "x 3,25–4,20 (audyt A3 I-3) — brak skrzydła w przedpokoju 0.08")
 O("O0-15", "S0-11", 5.33, 6.23, "drzwi", "D1", 2.10, 0.0, ow("R", "do_wewn"),
   uwagi="przedpokój → pokój gościnny, otwierane do pokoju (A3 I-3)")
-O("O0-16", "S0-19", 4.25, 5.15, "drzwi", "D2", 2.10, 0.0, ow("R", "na_zewn"),
+O("O0-16", "S0-19", 4.25, 5.15, "drzwi", "D2", 2.10, 0.0, ow("R", "na_zewn", "prawa"),
   uwagi="łazienka gościnna — drzwi skrzydłowe otwierane NA ZEWNĄTRZ do przedpokoju 0.08 (WT §79, W-059), zawias od wsch. (x 5,15): "
         "otwarte skrzydło parkuje przy obudowie SI, wolna strefa przedpokoju ≈ 1,2 × 1,1 m (audyt A3 I-3); podcięcie ≥ 0,022 m²")
 O("O0-17", "S0-09", 7.40, 8.20, "drzwi", "D3", 2.00, 0.0, ow("R", "do_wewn"), uwagi="spiżarnia pod biegiem 2 (przeszczep J2)")
