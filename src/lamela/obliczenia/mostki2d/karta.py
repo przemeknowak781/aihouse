@@ -629,3 +629,176 @@ def rysuj_karte(w, plik: str | Path, ciag: Ciaglosc | None = None, ocena: dict |
     fig.savefig(plik)
     plt.close(fig)
     return str(plik)
+
+
+# --------------------------------------------------------------------------------------------------
+# Raport katalogu kart
+# --------------------------------------------------------------------------------------------------
+@dataclass
+class KartaWezla:
+    w: Any                       # WynikWezla
+    ciag: Ciaglosc
+    kontrola: list
+    ocena: dict
+    png: str = ""
+
+
+def karta_wezla(w, model=None, kontekst: dict | None = None, plik_png: str | Path | None = None) -> KartaWezla:
+    """Ciągłość + kontrola wody + ocena (+ rysunek karty) dla wyniku `oblicz_wezel`."""
+    c = ciaglosc_izolacji(w)
+    kx = dict(kontekst or {})
+    kx["ciaglosc"] = c
+    kt = kontrola_wody(w.wezel, model, kx)
+    oc = ocena_wezla(w, c, kt)
+    png = rysuj_karte(w, plik_png, c, oc, kt) if plik_png else ""
+    return KartaWezla(w, c, kt, oc, png)
+
+
+def _f(x, n=3, znak=False):
+    if x is None or (isinstance(x, float) and not math.isfinite(x)):
+        return "—"
+    s = f"{x:+.{n}f}" if znak else f"{x:.{n}f}"
+    return s.replace(".", ",").replace("-", "−")
+
+
+def _izol_krotko(c: Ciaglosc) -> str:
+    if c.ciagla:
+        return "ciągła"
+    return "przez grunt" if c.przez_grunt else "**PRZERWANA**"
+
+
+def tabela_kart(karty: list[KartaWezla], rel=lambda p: p) -> str:
+    L = ["| węzeł | nazwa | ψ_e | ψ_i | ψ_oi | θ_si,min [°C] | f_Rsi | izolacja | woda / wilgoć* | ocena |",
+         "|---|---|---|---|---|---|---|---|---|---|"]
+    for k in karty:
+        p = k.w.psi_glowne
+        wd = (f"{k.ocena['braki_wody']} ✗ / {k.ocena['uwagi_wody']} !" if (k.ocena['braki_wody'] or
+                                                                            k.ocena['uwagi_wody']) else "✓")
+        L.append(f"| [{k.w.wezel.id}](#{k.w.wezel.id.lower()}) | {k.w.wezel.nazwa} | {_f(p.psi_e, 3, True)} | "
+                 f"{_f(p.psi_i, 3, True)} | {_f(p.psi_oi, 3, True)} | {_f(k.w.f['theta_si_min'], 2)} | "
+                 f"{_f(k.w.f['f_Rsi'], 3)}{'' if k.w.fRsi_ok else ' **✗**'} | {_izol_krotko(k.ciag)} | {wd} | "
+                 f"**{k.ocena['klasa']}** |")
+    return "\n".join(L)
+
+
+def raport_kart(karty: list[KartaWezla], plik: str | Path, tytul: str, wstep: str = "", walidacja_txt: str = "",
+                porownania: list | None = None, dlugosci: dict | None = None, szczegoly: str | None = None,
+                pominiete: list[str] | None = None) -> str:
+    plik = Path(plik)
+    rel = lambda p: str(Path(p).relative_to(plik.parent)) if p else ""
+    ti = karty[0].w.f["theta_i"] if karty else 20.0
+    te = karty[0].w.f["theta_e"] if karty else -18.0
+    fmin = karty[0].w.fRsi_min if karty else 0.72
+    L = [f"# {tytul}", "", wstep, "",
+         "**Cel** (brief sekcja 9 — wymaganie Inwestora): potwierdzenie symulacją numeryczną ciągłości izolacji i braku "
+         "ryzyka pleśni w węzłach oraz kontrola odprowadzenia wody, hydroizolacji, paroizolacji, rur spustowych i drenażu.",
+         "",
+         "**Metoda.** Model 2D metodą objętości skończonych (`lamela.obliczenia.mostki2d`) wg PN-EN ISO 10211:2017: "
+         "płaszczyzny odcięcia ≥ max(1 m; 3·d), R_se = 0,04, R_si = 0,13 / 0,10 / 0,17 (ISO 6946) do strumieni i ψ; "
+         f"R_si = 0,25 (ramy/szyby 0,13) do θ_si i f_Rsi (PN-EN ISO 13788); θ_i = {_f(ti, 0)} °C, θ_e = {_f(te, 0)} °C; "
+         "grunt λ = 2,0 W/(m·K), podłoga wg PN-EN ISO 13370 z B′ = A/(0,5·P). Siatka zagęszczana przy granicach "
+         "materiałów i podwajana do zmiany strumienia < 1 % i ψ ≤ max(1 %; 0,001 W/(m·K)); bilans energii < 10⁻⁴. "
+         "ψ_e — wymiary zewnętrzne, ψ_i — wewnętrzne (PN-EN ISO 14683), ψ_oi — wewnętrzne całkowite (system projektu, "
+         "H_TB). Walidacja solvera: " + (walidacja_txt or "patrz `projekt/08_obliczenia/mostki2d/walidacja_ISO10211.md`")
+         + ".", "",
+         f"**Ciągłość izolacji („test ołówka”, zasada linii czerwonej)** — sprawdzana na siatce każdego węzła: "
+         f"szukana jest droga z powierzchni wewnętrznej na zewnętrzną / do strefy nieogrzewanej wyłącznie przez "
+         f"materiały o λ > {LAMBDA_IZOL:g} W/(m·K) [ZAŁ] (ramy i szyby traktowane jak obudowa). Brak drogi = linia "
+         f"izolacji ciągła; droga istnieje = mostek konstrukcyjny (na karcie czerwona linia przerywana ✕–✕); droga "
+         f"kończąca się w gruncie = izolacja domyka się przez grunt (typowe dla ław — ocena „do poprawy”).", "",
+         "**Ocena:** " + "; ".join(f"**{k}** — {v[1]}" for k, v in KLASY.items()) + ". Odniesienia ψ_oi: "
+         "wartość domyślna PN-EN ISO 14683 zał. C i „dobra praktyka” z `fizyka.mostki.PSI_DOMYSLNE` [NZW]; "
+         f"f_Rsi,min = {fmin} (W-248, WT zał. 2 pkt 2.2). Kryterium „bez mostków” ψ_e ≤ 0,01 W/(m·K) — informacyjne.", "",
+         "**Rysunki (zasada „4 linii”, brief 9.1):** izolacja — kreskowanie czerwone; hydroizolacja / izolacja "
+         "przeciwwodna — niebieska ciągła, przeciwwilgociowa — niebieska przerywana; paroizolacja / szczelność "
+         "powietrzna (tynk wewn., taśmy wewn.) — zielona; taśmy / uszczelnienia zewnętrzne — niebieska kropkowana; "
+         "obróbki, parapety, okapniki — czarna; spływ wody — strzałka turkusowa; drenaż / opaska żwirowa — brązowa; "
+         "rura spustowa — szara. Membrany, taśmy i obróbki są pomijalne cieplnie (poza modelem 2D, tylko na rysunku) — "
+         "z wyjątkiem warstw przegród modelu (EPDM, paroizolacja, hydroizolacja pionowa), które są w obliczeniu.", "",
+         "## Tabela zbiorcza", "", tabela_kart(karty), "",
+         "\\* woda / wilgoć: liczba pozycji listy kontrolnej ✗ BRAK / ! UWAGA (bez pozycji „izolacja”) — dane do "
+         "uzupełnienia w modelu lub rozwiązania do pokazania na detalu; ✓ — bez braków.", ""]
+    if pominiete:
+        L += ["Pominięte wpisy sekcji `wezly`: " + "; ".join(pominiete), ""]
+    idk = {k.w.wezel.id: k for k in karty}
+    if porownania:
+        L += ["## Porównanie wariantów", ""]
+        for tyt, ids, kom in porownania:
+            ks = [idk[i] for i in ids if i in idk]
+            if len(ks) < 2:
+                continue
+            L += [f"### {tyt}", "", "| węzeł | wariant | ψ_e | ψ_oi | f_Rsi | izolacja | ocena |", "|---|---|---|---|---|---|---|"]
+            for k in ks:
+                p = k.w.psi_glowne
+                L.append(f"| {k.w.wezel.id} | {k.w.wezel.nazwa} | {_f(p.psi_e, 3, True)} | {_f(p.psi_oi, 3, True)} | "
+                         f"{_f(k.w.f['f_Rsi'], 3)} | {_izol_krotko(k.ciag)} | **{k.ocena['klasa']}** |")
+            a, b = ks[0], ks[-1]
+            pa, pb = a.w.psi_glowne, b.w.psi_glowne
+            L += ["", f"Różnica {b.w.wezel.id} względem {a.w.wezel.id}: Δψ_oi = {_f(pb.psi_oi - pa.psi_oi, 3, True)} "
+                      f"W/(m·K), Δf_Rsi = {_f(b.w.f['f_Rsi'] - a.w.f['f_Rsi'], 3, True)}, "
+                      f"Δθ_si,min = {_f(b.w.f['theta_si_min'] - a.w.f['theta_si_min'], 2, True)} K — {kom}.", ""]
+    # zbiorcza lista działań (woda / wilgoć / ciągłość)
+    zb: dict[tuple[str, str], list[str]] = {}
+    for k in karty:
+        for poz in k.kontrola:
+            if poz.status in ("BRAK", "UWAGA"):
+                zb.setdefault((poz.status, poz.tekst), []).append(k.w.wezel.id)
+    if zb:
+        L += ["## Woda, wilgoć, ciągłość — pozycje do uzupełnienia", "",
+              "Zestawienie pozycji ✗ BRAK / ! UWAGA z list kontrolnych wszystkich węzłów (dane modelu i działki oraz "
+              "wymagania detalu — brief 9.3–9.6).", "", "| status | pozycja | węzły |", "|---|---|---|"]
+        for (st, tx), ids in sorted(zb.items(), key=lambda x: (x[0][0] != "BRAK", x[0][1])):
+            L.append(f"| {'✗ BRAK' if st == 'BRAK' else '! UWAGA'} | {tx} | {', '.join(ids)} |")
+        L.append("")
+    if dlugosci:
+        from .wyniki import zestawienie_HTB
+        H, wiersze = zestawienie_HTB([k.w for k in karty], dlugosci, "oi")
+        if wiersze:
+            L += ["## H_TB z wartości symulowanych (ψ_oi)", "", "| węzeł | nazwa | ψ_oi [W/(m·K)] | l_oi [m] | ψ·l [W/K] |",
+                  "|---|---|---|---|---|"]
+            for r in wiersze:
+                L.append(f"| {r[0]} | {r[1]} | {_f(r[2], 3, True)} | {_f(r[3], 2)} | {_f(r[4], 2, True)} |")
+            L += ["", f"**H_TB = Σ ψ_oi·l_oi = {_f(H, 2)} W/K** (węzły liniowe wg modelu; warianty porównawcze bez "
+                      "długości nie są sumowane; mostki punktowe χ — poza zakresem 2D).", ""]
+    L += ["## Karty węzłów", ""]
+    ik = {"OK": "✓", "UWAGA": "!", "BRAK": "✗", "INFO": "i"}
+    for k in karty:
+        wz, p = k.w.wezel, k.w.psi_glowne
+        L += [f"### {wz.id}", "", f"**{wz.nazwa}** — ocena **{k.ocena['klasa']}** ({k.ocena['uzasadnienie']})", ""]
+        if k.png:
+            L += [f"![{wz.id} — karta węzła]({rel(k.png)})", ""]
+        ref = k.ocena.get("ref")
+        L += [f"* ψ_e = {_f(p.psi_e, 3, True)}, ψ_i = {_f(p.psi_i, 3, True)}, ψ_oi = {_f(p.psi_oi, 3, True)} W/(m·K); "
+              f"L_2D = {_f(p.L2D, 4)} W/(m·K)" + (f"; odniesienie ψ_oi: domyślna {_f(ref[0], 2)}, dobra praktyka "
+                                                    f"{_f(ref[1], 2)} ({ref[2]})" if ref else ""),
+              f"* θ_si,min = {_f(k.w.f['theta_si_min'], 2)} °C, f_Rsi = {_f(k.w.f['f_Rsi'], 3)} "
+              f"({'≥' if k.w.fRsi_ok else '<'} {k.w.fRsi_min} — {'brak ryzyka pleśni i kondensacji powierzchniowej' if k.w.fRsi_ok else 'RYZYKO PLEŚNI'})"
+              + (f"; rama/szyba f_Rsi = {_f(k.w.f['f_Rsi_okno'], 3)} (informacyjnie)" if "f_Rsi_okno" in k.w.f else ""),
+              f"* izolacja: {k.ciag.opis}",
+              f"* siatka: {k.w.siatki[-1][1]} komórek, zmiana Φ przy podwojeniu {_f(100 * k.w.zmiana, 3)} %, "
+              f"bilans {k.w.bilans:.1e}", "",
+              "| | temat | pozycja listy kontrolnej |", "|---|---|---|"]
+        for poz in k.kontrola:
+            L.append(f"| {ik[poz.status]} {poz.status} | {poz.temat} | {poz.tekst} |")
+        L.append("")
+        for u in wz.uwagi:
+            L.append(f"*Uwaga:* {u}")
+        if wz.linie:
+            L.append("*Na rysunku:* " + "; ".join(sorted({ln["opis"] for ln in wz.linie if ln.get("opis")})) + ".")
+        if k.w.wykresy:
+            L.append("")
+            L.append("Wykresy szczegółowe: " + ", ".join(f"[{n}]({rel(v)})" for n, v in k.w.wykresy.items())
+                     + (f"; dane wejściowe, warunki brzegowe, siatka, elementy flankujące — "
+                        f"[{Path(szczegoly).name}]({rel(szczegoly)})" if szczegoly else ""))
+        L.append("")
+    L += ["## Ograniczenia", "",
+          "* Modele 2D (mostki liniowe). Mostki punktowe χ (wpusty i przelewy w attyce, konsole, kotwy, narożniki 3D, "
+          "przejścia rur) — poza zakresem; wymagają modelu 3D lub deklaracji wyrobu.",
+          "* Łącznik termoizolacyjny, okna, profile progowe — DANE PRZYKŁADOWE (do zastąpienia deklaracjami wyrobów).",
+          "* Ocena pleśni kryterium f_Rsi (stan ustalony); transport wilgoci w przegrodach — metoda Glasera w "
+          "obliczeniach fizyki budowli (`05_wilgotnosc.md`).",
+          "* Linie hydro/paro/obróbek/drenażu na rysunkach są schematem wymagań detalu, nie rysunkiem wykonawczym.", ""]
+    txt = "\n".join(L)
+    plik.parent.mkdir(parents=True, exist_ok=True)
+    plik.write_text(txt, encoding="utf-8")
+    return txt
