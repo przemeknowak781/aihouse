@@ -952,15 +952,21 @@ for _sl in SLUPY[:4]:
 Z_SPOD_ST2, Z_SPOD_ST3 = r(Z_ST2 - T_STR), r(Z_ST3 - T_STR)          # 5,93; 9,08
 _SLZ = [("A/1", (xA, 0.11), ((Z_PLYTA_F, Z_SPOD_ST1, "P0: podpora końca B1, płyta ST1"), (Z_ST1, Z_SPOD_ST2, "P1: podpora wspornika B4, płyta ST2"))),
         ("A/3", (xA, y3), ((Z_PLYTA_F, Z_SPOD_ST1, "P0: płyta ST1"), (Z_ST1, Z_SPOD_ST2, "P1: podpora wspornika B5, płyta ST2"))),
-        ("B/3", (xB, y3), ((Z_PLYTA_F, Z_SPOD_ST1, "P0: płyta ST1"), (Z_ST1, Z_SPOD_ST2, "P1: koniec przęsła zakotwienia B5, płyta ST2"),
+        ("B/3", (r(xB - 0.025), y3), ((Z_PLYTA_F, Z_SPOD_ST1, "P0: płyta ST1"), (Z_ST1, Z_SPOD_ST2, "P1: koniec przęsła zakotwienia B5, płyta ST2"),
                                      (Z_ST2, Z_SPOD_ST3, "P2: naroże wklęsłe stropodachu D1"))),
         ("C/3", (r((5.10 + xC + 0.09) / 2), y3), ((Z_PLYTA_F, r(Z_ST1 - 0.50), "P0: oparcie B8 (filarek S0-08 przy ścianie ŻB S0-12)"), (Z_ST1, r(Z_ST2 - 0.50), "P1: oparcie B9"))),
-        ("D/3", (r(xD + 0.06), y3), ((Z_PLYTA_F, r(Z_ST1 - 0.50), "P0: oparcie B8 (filarki S0-09/S0-10 przy ścianie ŻB S0-13)"), (Z_ST1, r(Z_ST2 - 0.50), "P1: oparcie B9"))),
-        ("E/1", (xE, 0.11), ((Z_PLYTA_F, Z_SPOD_ST1, "P0: podpora końca B1 (naroże E/1), płyta ST1"),))]
+        ("D/3-P0", (r(xD + 0.05), y3), ((Z_PLYTA_F, r(Z_ST1 - 0.50), "P0: oparcie B8 (filarki S0-09/S0-10 przy ścianie ŻB S0-13)"),)),
+        ("D/3", (r(xD + 0.06), y3), ((Z_ST1, r(Z_ST2 - 0.50), "P1: oparcie B9 (filarek S1-06)"),)),
+        ("E/1", (xE, 0.13), ((Z_PLYTA_F, Z_SPOD_ST1, "P0: podpora końca B1 (naroże E/1), płyta ST1"),)),
+        ("B/1", (r(xB + 0.025), 0.0), ((Z_RAMA_D[1], Z_SPOD_ST2, "P1: koniec przęsła zakotwienia B4 (zakotwienie reakcji odrywającej "
+                                                                  "w B1) i oparcie B2, na belce B1"),))]
 # B/3, C/3, D/3 — trzpienie wydłużone w osi 3 (w filarkach ścian S0-08/S1-05, S0-09/S0-10/S1-06; w S0-11 otwór O0-15 przy węźle);
 # D/3: 30 cm — wypełnia filarek S1-06 (0,21 m) między węzłem a drzwiami O1-11 (filarek ŻB zamiast muru)
 # C/3: filarek żelbetowy 18 × 86,5 cm — cały filarek S0-08/S1-05 między drzwiami O0-14/O1-10 a węzłem (x 5,10…5,965)
-_SLZ_PRZ = {"B/3": "400x180", "C/3": "865x180", "D/3": "300x180"}
+# B/3 — cały filarek S1-05 między O1-09 a O1-10 (x 3,50…4,20) — bez resztek muru < 0,20 m przy trzpieniu (także P0 i P2)
+# D/3-P0 — filarki S0-09 i S0-10 między drzwiami O0-17 a otworem O0-18 (x 8,20…8,90); E/1 — do drzwi O0-21 (y −0,09…0,35);
+# B/1 — w murze S1-01 do okna O1-01 (x 3,70…4,10), na belce B1
+_SLZ_PRZ = {"B/3": "700x180", "C/3": "865x180", "D/3": "300x180", "D/3-P0": "700x180", "E/1": "180x440", "B/1": "400x180"}
 SLZ_WEZLY = {}                          # węzeł → [id słupów od dołu]
 for _wz, _xy, _odc in _SLZ:
     for _z0, _z1, _opis in _odc:
@@ -1020,13 +1026,14 @@ for o in OT:
 # typ/id/s — odległość od początku osi belki [m]) oraz ściany stojące na belkach (oparta_na) i belki w koronie ścian (belka_w_koronie:
 # odcinek ściany pod belką nie jest podporą płyty — płyta opiera się na belce, belka na swoich podporach)
 _B = {b_["id"]: b_ for b_ in BELKI}
-_B["B4"]["podpory"] = [{"typ": "slup", "id": SLZ_WEZLY["A/1"][1], "s": r(xA - xA2)}, {"typ": "sciana", "id": "S1-01", "s": r(xB - xA2)}]
+_B["B4"]["podpory"] = [{"typ": "slup", "id": SLZ_WEZLY["A/1"][1], "s": r(xA - xA2)}, {"typ": "slup", "id": SLZ_WEZLY["B/1"][0], "s": r(xB - xA2)}]
 _B["B5"]["podpory"] = [{"typ": "slup", "id": SLZ_WEZLY["A/3"][1], "s": r(xA - xA2)}, {"typ": "slup", "id": SLZ_WEZLY["B/3"][1], "s": r(xB - xA2)}]
 _B["B3"]["podpory"] = [{"typ": "belka", "id": "B4", "s": 0.0}, {"typ": "belka", "id": "B5", "s": r(y3)}]
 for _bid, _k in (("B8", 0), ("B9", 1)):     # podciągi w osi 3 na słupach ŻB C/3 i D/3
-    _B[_bid]["podpory"] = [{"typ": "slup", "id": SLZ_WEZLY["C/3"][_k], "s": 0.0}, {"typ": "slup", "id": SLZ_WEZLY["D/3"][_k], "s": r(xD - xC)}]
+    _B[_bid]["podpory"] = [{"typ": "slup", "id": SLZ_WEZLY["C/3"][_k], "s": 0.0},
+                           {"typ": "slup", "id": (SLZ_WEZLY["D/3-P0"] + SLZ_WEZLY["D/3"])[_k], "s": r(xD - xC)}]
 _B["B4"]["uwagi"] = ("belka wspornikowa w osi 1 (w licu ściany P2, pod parapetem O2-01 +6,90): wspornik 1,00 m na słupie ŻB A/1, przęsło "
-                     "zakotwienia A–B 3,875 m dociążone ścianą S2-01 (oparta_na) — koniec na murze S1-01")
+                     "zakotwienia A–B 3,875 m dociążone ścianą S2-01 (oparta_na) — koniec na słupie ŻB B/1 (zakotwienie w B1)")
 _B["B5"]["uwagi"] = ("belka wspornikowa w osi 3 (w ścianie pn. P2): wspornik 1,00 m na słupie ŻB A/3, przęsło zakotwienia A–B na słupie ŻB B/3, "
                      "dociążone ścianą S2-07 (oparta_na)")
 for _sid, _pola in {"S0-01": {"belka_w_koronie": ["B1"]},

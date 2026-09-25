@@ -888,7 +888,7 @@ class AnalizaKonstrukcji:
         for c in self.m.slupy():
             if not self._slup_zelbetowy(c):
                 continue
-            if not (w.z_do - 0.7 <= float(c["z_do"]) <= w.z_do + TOL_Z and float(c["z_od"]) <= w.z_od + 0.7):
+            if not (w.z_do - 0.7 <= float(c["z_do"]) <= w.z_do + TOL_Z and float(c["z_od"]) <= w.z_od + 1.0):
                 continue
             a_s, b_s = _wymiary_slupa(str(c.get("przekroj")))
             rect = box(c["xy"][0] - a_s / 2, c["xy"][1] - b_s / 2, c["xy"][0] + a_s / 2, c["xy"][1] + b_s / 2)
@@ -919,8 +919,16 @@ class AnalizaKonstrukcji:
         for c2 in self.m.slupy():
             if c2 is c or str(c2["id"]) == str(c["id"]):
                 continue
-            if math.hypot(c2["xy"][0] - c["xy"][0], c2["xy"][1] - c["xy"][1]) <= 0.05 and z0 - 0.7 <= float(c2["z_do"]) <= z0 + TOL_Z:
+            if not (z0 - 0.7 <= float(c2["z_do"]) <= z0 + TOL_Z):
+                continue
+            if math.hypot(c2["xy"][0] - c["xy"][0], c2["xy"][1] - c["xy"][1]) <= 0.05:
                 return c2
+            try:                                   # oś słupa wyższego w obrysie słupa niższego (trzpienie różnej długości)
+                a2, b2 = _wymiary_slupa(str(c2.get("przekroj")))
+                if abs(c["xy"][0] - c2["xy"][0]) <= a2 / 2 + 1e-6 and abs(c["xy"][1] - c2["xy"][1]) <= b2 / 2 + 1e-6:
+                    return c2
+            except BladDanych:
+                pass
         return None
 
     def _sciana_ponizej(self, w):

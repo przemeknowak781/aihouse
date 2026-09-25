@@ -475,20 +475,21 @@ slupy:
   - {id: SL10, xy: [0.0, 0.11], przekroj: 180x400, mat: ZB_C30, z_od: 3.0, z_do: 5.93, uwagi: 'słup żelbetowy w murze (trzpień 18 × 40 cm) w węźle A/1 — P1: podpora wspornika B4, płyta ST2'}
   - {id: SL11, xy: [0.0, 5.125], przekroj: 180x400, mat: ZB_C30, z_od: -0.15, z_do: 2.78, uwagi: 'słup żelbetowy w murze (trzpień 18 × 40 cm) w węźle A/3 — P0: płyta ST1'}
   - {id: SL12, xy: [0.0, 5.125], przekroj: 180x400, mat: ZB_C30, z_od: 3.0, z_do: 5.93, uwagi: 'słup żelbetowy w murze (trzpień 18 × 40 cm) w węźle A/3 — P1: podpora wspornika B5, płyta ST2'}
-  - {id: SL13, xy: [3.875, 5.125], przekroj: 400x180, mat: ZB_C30, z_od: -0.15, z_do: 2.78, uwagi: 'słup żelbetowy w murze (trzpień 18 × 40 cm) w węźle B/3 — P0: płyta ST1'}
-  - {id: SL14, xy: [3.875, 5.125], przekroj: 400x180, mat: ZB_C30, z_od: 3.0, z_do: 5.93, uwagi: 'słup żelbetowy w murze (trzpień 18 × 40 cm) w węźle B/3 — P1: koniec przęsła zakotwienia B5, płyta ST2'}
-  - {id: SL15, xy: [3.875, 5.125], przekroj: 400x180, mat: ZB_C30, z_od: 6.15, z_do: 9.08, uwagi: 'słup żelbetowy w murze (trzpień 18 × 40 cm) w węźle B/3 — P2: naroże wklęsłe stropodachu D1'}
-  - {id: SL16, xy: [5.5325, 5.125], przekroj: 865x180, mat: ZB_C30, z_od: -0.15, z_do: 2.5, uwagi: 'słup żelbetowy w murze (trzpień 18 × 86.5 cm) w węźle C/3 — P0: oparcie B8 (filarek S0-08 przy ścianie ŻB S0-12)'}
-  - {id: SL17, xy: [5.5325, 5.125], przekroj: 865x180, mat: ZB_C30, z_od: 3.0, z_do: 5.65, uwagi: 'słup żelbetowy w murze (trzpień 18 × 86.5 cm) w węźle C/3 — P1: oparcie B9'}
-  - {id: SL18, xy: [8.56, 5.125], przekroj: 300x180, mat: ZB_C30, z_od: -0.15, z_do: 2.5, uwagi: 'słup żelbetowy w murze (trzpień 18 × 30 cm) w węźle D/3 — P0: oparcie B8 (filarki S0-09/S0-10 przy ścianie ŻB S0-13)'}
-  - {id: SL19, xy: [8.56, 5.125], przekroj: 300x180, mat: ZB_C30, z_od: 3.0, z_do: 5.65, uwagi: 'słup żelbetowy w murze (trzpień 18 × 30 cm) w węźle D/3 — P1: oparcie B9'}
-  - {id: SL20, xy: [12.0, 0.11], przekroj: 180x400, mat: ZB_C30, z_od: -0.15, z_do: 2.78, uwagi: 'słup żelbetowy w murze (trzpień 18 × 40 cm) w węźle E/1 — P0: podpora końca B1 (naroże E/1), płyta ST1'}
+  - {id: SL13, xy: [3.85, 5.125], przekroj: 700x180, mat: ZB_C30, z_od: -0.15, z_do: 2.78, uwagi: 'słup żelbetowy w murze (trzpień 18 × 70 cm) w węźle B/3 — P0: płyta ST1'}
+  - {id: SL14, xy: [3.85, 5.125], przekroj: 700x180, mat: ZB_C30, z_od: 3.0, z_do: 5.93, uwagi: 'słup żelbetowy w murze (trzpień 18 × 70 cm) w węźle B/3 — P1: koniec przęsła zakotwienia B5, płyta ST2'}
+  - {id: SL15, xy: [3.85, 5.125], przekroj: 700x180, mat: ZB_C30, z_od: 6.15, z_do: 9.08, uwagi: 'słup żelbetowy w murze (trzpień 18 × 70 cm) w węźle B/3 — P2: naroże wklęsłe stropodachu D1'}
+  - {id: SL16, xy: [5.5325, 5.125], przekroj: 865x180, mat: ZB_C30, z_od: -0.15, z_do: 2.5, uwagi: 'słup żelbetowy w murze (trzpień 18 × 86,5 cm) w węźle C/3 — P0: oparcie B8 (filarek S0-08 przy ścianie ŻB S0-12)'}
+  - {id: SL17, xy: [5.5325, 5.125], przekroj: 865x180, mat: ZB_C30, z_od: 3.0, z_do: 5.65, uwagi: 'słup żelbetowy w murze (trzpień 18 × 86,5 cm) w węźle C/3 — P1: oparcie B9'}
+  - {id: SL18, xy: [8.55, 5.125], przekroj: 700x180, mat: ZB_C30, z_od: -0.15, z_do: 2.5, uwagi: 'słup żelbetowy w murze (trzpień 18 × 70 cm) w węźle D/3-P0 — P0: oparcie B8 (filarki S0-09/S0-10 przy ścianie ŻB S0-13)'}
+  - {id: SL19, xy: [8.56, 5.125], przekroj: 300x180, mat: ZB_C30, z_od: 3.0, z_do: 5.65, uwagi: 'słup żelbetowy w murze (trzpień 18 × 30 cm) w węźle D/3 — P1: oparcie B9 (filarek S1-06)'}
+  - {id: SL20, xy: [12.0, 0.13], przekroj: 180x440, mat: ZB_C30, z_od: -0.15, z_do: 2.78, uwagi: 'słup żelbetowy w murze (trzpień 18 × 44 cm) w węźle E/1 — P0: podpora końca B1 (naroże E/1), płyta ST1'}
+  - {id: SL21, xy: [3.9, 0.0], przekroj: 400x180, mat: ZB_C30, z_od: 3.85, z_do: 5.93, uwagi: 'słup żelbetowy w murze (trzpień 18 × 40 cm) w węźle B/1 — P1: koniec przęsła zakotwienia B4 (zakotwienie reakcji odrywającej w B1) i oparcie B2, na belce B1'}
 
 belki:
   - {id: B1, os: [[0.0, 0.0], [12.0, 0.0]], b: 0.18, h: 1.07, spod: 2.78, mat: ZB_C30, uwagi: 'podciąg fasady E, odwrócony (+2,78…+3,85 = parapet boksu C), 18 × 107 w licu muru (ETICS ciągły — A2 D-9); przęsła 2,20/1,90/2,34/2,34/3,22 na SL1–SL4 i ścianach A, E'}
   - {id: B2, os: [[3.85, 0.0], [11.37, 0.0]], b: 0.18, h: 0.8, spod: 5.35, mat: ZB_C30, uwagi: 'nadproże boksu C 18×80 w licu muru, 3 przęsła 2,34 m na słupkach SL5/SL6'}
   - {id: B3, os: [[-1.0, 0.0], [-1.0, 5.125]], b: 0.2, h: 0.6, spod: 5.93, mat: ZB_C30, uwagi: 'belka krawędziowa ST2 w osi A'' (odwrócona, pod parapetem okna O2-04) — niesie lekką ścianę A'' i okap PL-2; oparta na końcach B4/B5', podpory: [{typ: belka, id: B4, s: 0.0}, {typ: belka, id: B5, s: 5.125}]}
-  - {id: B4, os: [[-1.0, 0.0], [3.875, 0.0]], b: 0.18, h: 0.8, spod: 5.93, mat: ZB_C30, uwagi: 'belka wspornikowa w osi 1 (w licu ściany P2, pod parapetem O2-01 +6,90): wspornik 1,00 m na słupie ŻB A/1, przęsło zakotwienia A–B 3,875 m dociążone ścianą S2-01 (oparta_na) — koniec na murze S1-01', podpory: [{typ: slup, id: SL10, s: 1.0}, {typ: sciana, id: S1-01, s: 4.875}]}
+  - {id: B4, os: [[-1.0, 0.0], [3.875, 0.0]], b: 0.18, h: 0.8, spod: 5.93, mat: ZB_C30, uwagi: 'belka wspornikowa w osi 1 (w licu ściany P2, pod parapetem O2-01 +6,90): wspornik 1,00 m na słupie ŻB A/1, przęsło zakotwienia A–B 3,875 m dociążone ścianą S2-01 (oparta_na) — koniec na słupie ŻB B/1 (zakotwienie w B1)', podpory: [{typ: slup, id: SL10, s: 1.0}, {typ: slup, id: SL21, s: 4.875}]}
   - {id: B5, os: [[-1.0, 5.125], [3.875, 5.125]], b: 0.18, h: 0.8, spod: 5.93, mat: ZB_C30, uwagi: 'belka wspornikowa w osi 3 (w ścianie pn. P2): wspornik 1,00 m na słupie ŻB A/3, przęsło zakotwienia A–B na słupie ŻB B/3, dociążone ścianą S2-07 (oparta_na)', podpory: [{typ: slup, id: SL12, s: 1.0}, {typ: slup, id: SL14, s: 4.875}]}
   - {id: B6, os: [[-1.0, 0.0], [-1.0, 5.125]], b: 0.2, h: 0.4, spod: 8.9, mat: ZB_C30, uwagi: belka krawędziowa ST3 w osi A' (nad oknem O2-04) — okap zach. stropodachu; oparta na narożach ścian osi 1 i 3}
   - {id: B7, os: [[12.5, 9.375], [17.95, 9.375]], b: 0.25, h: 0.85, spod: 2.15, mat: ZB_C30, uwagi: 'nadproże bramy garażu (rozp. 5,00 m w świetle)'}
