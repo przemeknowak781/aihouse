@@ -108,3 +108,5 @@ Lista generowana automatycznie przez `lamela.views.konstrukcja` z: (1) braków z
 ## Kontrola zbrojenia — pozycje niespełnione (szczegóły: raport kontroli zbrojenia)
 
 - PF1 / strefa S1 (płyta) — przekrój niewystarczający (poz. MES-PF): A_s,prov = 0 < max(A_s,req; A_s,min) = 1 — M_Ed = 254 kNm/m > M_lim — wymagana wysokość h ≥ 0.26 m (obecnie 0.25 m) [WYMAGA ZMIANY MODELU]
+- ST2Z / nad podporą S1-04 — góra x (poz. 2.2): A_s,prov = 2513 < max(A_s,req; A_s,min) = 15782 mm²/m Zbrojenie na zginanie (η = 589%); Rysy: średnica prętów (tabl. 7.2N) (η = 1600000000%)
+- ST2Z / nad podporą N17 — góra x (poz. 2.2): A_s,prov = 2513 < max(A_s,req; A_s,min) = 15782 mm²/m Zbrojenie na zginanie (η = 589%); Rysy: średnica prętów (tabl. 7.2N) (η = 1600000000%)

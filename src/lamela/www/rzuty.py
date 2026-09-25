@@ -85,7 +85,7 @@ def rzut(D: dict, kid: str, okno: tuple) -> dict:
             ark.geom(Polygon(t["obrys"]), "ter")
     # pomieszczenia — wypełnienie wg kategorii
     for r in pokoje:
-        ark.geom(r.polygon, f"rm rm-{r.kategoria}")
+        ark.geom(r.polygon, f"rm rm-{r.kategoria}", f' data-pom="{r.id}"')
     # schody i spoczniki poniżej/powyżej cięcia
     for p in ir.prisms:
         if p.level == kid and p.kind in ("stair_step", "landing"):

@@ -1220,7 +1220,7 @@ def widok_zbrojenie_fundamentu(ctx: ViewContext, spec: dict, scale: float, opts:
         placer.add_lines(g.boundary, w=0.3)
     W = PF.get("mes")
     dz = PF.get("dozbr") or {}
-    for pg in dz.get("mu", []):                     # strefy przekroju niewystarczającego (μ > μ_lim) — MES
+    for pg in dz.get("mu", []):                     # strefy przekroju podwójnie zbrojonego (μ > μ_lim) — MES
         vp.fill(pg, L_OBR, "#f2c4c4", z=5)
         vp.geom(pg, L_OBR, pen="cienka", lt="KRESKOWA_DROBNA")
     for (wa, k_), lst in [(k_, v) for k_, v in dz.items() if k_ != "mu" and k_[0] == warstwa]:
@@ -1277,11 +1277,12 @@ def widok_zbrojenie_fundamentu(ctx: ViewContext, spec: dict, scale: float, opts:
                          f"{Z.dol[0]}+{Z.gora[0]} Ø{Z.dol[1]}", jedn="mm²", arkusz=nr_ark, uwagi="; ".join(Z.niesp[:2]))
         elif warstwa == "dol":
             for wa in ("dol", "gora"):
-                n_, fi_, Areq, Aprov, zle = rz[wa]
+                n_, fi_, Areq, Aprov, podw = rz[wa]
                 KD.rejestruj(D, Z.id, f"żebro — {'dołem' if wa == 'dol' else 'górą'} (MES: A_s,req·b)", Z.poz, Areq, 0.0,
-                             Aprov, f"{n_}Ø{fi_} + siatka", jedn="mm²", arkusz=nr_ark, wymuszone_ok=not zle,
-                             uwagi="w strefie żebra μ > μ_lim — pogłębić/poszerzyć żebro [WYMAGA ZMIANY MODELU]" if zle
-                             else "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami")
+                             Aprov, f"{n_}Ø{fi_} + siatka", jedn="mm²", arkusz=nr_ark,
+                             uwagi=("strefa podwójnie zbrojona (μ > μ_lim) — A_s2 ujęte w wymaganiu warstwy przeciwnej; "
+                                    if podw else "") + "warunki ław biblioteki (model ławy izolowanej) zastąpione MES "
+                                                       "płyty z żebrami")
     for S_ in D.stopy:
         st = PF["stopy"].get(S_.id)
         if st is None:
@@ -1318,6 +1319,28 @@ def widok_zbrojenie_fundamentu(ctx: ViewContext, spec: dict, scale: float, opts:
     return vp, res, title
 
 
+def _as_prov_fund(D, PF, F, W, wa: str, kier: str, j: int) -> float:
+    """A_s,prov [mm²/m] warstwy/kierunku w elemencie MES j: pręty żebra (A/b, kierunek żebra) albo siatka pogrubienia,
+    w pozostałych — siatka płyty + dozbrojenie obejmujące środek elementu."""
+    zid = W.strefa_el[j]
+    if zid:
+        Z = next((z for z in D.zebra if z.id == zid), None)
+        rz = (PF.get("mes_zebra") or {}).get(zid)
+        if Z is not None and rz is not None:
+            kz = "x" if abs(Z.p1[0] - Z.p0[0]) >= abs(Z.p1[1] - Z.p0[1]) else "y"
+            if kz == kier:
+                return rz[wa][3] / Z.b
+        S_ = next((x for x in D.stopy if x.id == zid), None)
+        if S_ is not None and wa == "dol":
+            return S_.siatka.As_prov
+    base = getattr(F, wa).As_prov
+    pt = Point(*W.el_c[j])
+    for pg, _fi, _s, _nd, prov in (PF.get("dozbr") or {}).get((wa, kier), []):
+        if pg.buffer(0.05).contains(pt):
+            base = max(base, prov)
+    return base
+
+
 def _kontrola_fund(D, F, PF, warstwa: str, nr_ark: str):
     """Rejestr kontroli A_s płyty fundamentowej: siatki (MES poza dozbrojeniami), dozbrojenia, strefy μ > μ_lim."""
     W = PF.get("mes")
@@ -1338,7 +1361,7 @@ def _kontrola_fund(D, F, PF, warstwa: str, nr_ark: str):
         cov = np.zeros(len(req), bool)
         for pg, *_ in dz.get((warstwa, kier), []):
             cov |= np.array([pg.buffer(0.05).contains(Point(*c)) for c in W.el_c])
-        msk = ~rib & ~W.mu_przekr & ~cov
+        msk = ~rib & ~cov
         need = float(req[msk].max()) if msk.any() else 0.0
         KD.rejestruj(D, F.id, f"siatka {'dolna' if warstwa == 'dol' else 'górna'} {kier} (MES, poza dozbrojeniami)",
                      "MES-PF", need, w.As_min, w.As_prov, w.opis, s=w.s, s_max=KD.s_max_plyty(F.h),
@@ -1347,22 +1370,45 @@ def _kontrola_fund(D, F, PF, warstwa: str, nr_ark: str):
             KD.rejestruj(D, F.id, f"dozbrojenie D{i} {'dół' if warstwa == 'dol' else 'góra'} {kier}", "MES-PF", nd, 0.0,
                          prov, f"{w.opis} + Ø{fi} co {s_x / 10:g}", s=s_x, arkusz=nr_ark)
     if warstwa == "dol":
-        bt = W.beton
-        from ..obliczenia.konstrukcja.materialy import StalZbrojeniowa
-        xl = StalZbrojeniowa().xi_eff_lim(bt)
-        mul = xl * (1 - 0.5 * xl)
         for i, pg in enumerate(dz.get("mu", []), 1):
             msk = np.array([pg.buffer(0.05).contains(Point(*c)) for c in W.el_c]) & W.mu_przekr
             if not msk.any():
                 continue
-            Mx = float(max(np.abs(W.M[k_][msk]).max() for k_ in W.M))
-            d_req = math.sqrt(Mx / (mul * bt.f_cd * 1000.0))
-            h_req = math.ceil((d_req + W.c_dol / 1000.0 + 0.012) * 100.0 - 1e-9) / 100.0
-            strefy = sorted({W.strefa_el[j] or "płyta" for j in np.nonzero(msk)[0]})
-            KD.rejestruj(D, F.id, f"strefa S{i} ({', '.join(strefy)[:30]}) — przekrój niewystarczający", "MES-PF", 1.0, 0.0,
-                         0.0, "—", jedn="—", arkusz=nr_ark, wymuszone_ok=False,
-                         uwagi=f"M_Ed = {Mx:.0f} kNm/m > M_lim — wymagana wysokość h ≥ {h_req:.2f} m (obecnie "
-                               f"{float(W.h_el[msk].max()):.2f} m) [WYMAGA ZMIANY MODELU]")
+            idx = np.nonzero(msk)[0]
+            # element po elemencie: A_s,prov (siatka + dozbrojenie / pręty żebra) ≥ A_s,req (z A_s2 w warstwie przeciwnej)
+            worst = None
+            for j in idx:
+                for wa in ("dol", "gora"):
+                    for kier in ("x", "y"):
+                        rq = float(W.As[f"{wa}_{kier}"][j])
+                        pv = _as_prov_fund(D, PF, F, W, wa, kier, int(j))
+                        r_ = rq / max(pv, 1e-9)
+                        if worst is None or r_ > worst[0]:
+                            worst = (r_, rq, pv, wa, kier)
+            _, rq, pv, wa, kier = worst
+            As_tot = max(float((W.As[f"dol_{k_}"][idx] + W.As[f"gora_{k_}"][idx]).max()) for k_ in ("x", "y"))
+            As_max = 0.04 * float(W.h_el[idx].min()) * 1e6
+            As2 = max(float(v[idx].max()) for v in W.As_sc.values()) if W.As_sc else 0.0
+            strefy = sorted({W.strefa_el[j] or "płyta" for j in idx})
+            uw = [f"A_s2,max = {As2:.0f} mm²/m; A_s1 + A_s2 = {As_tot:.0f} ≤ A_s,max = {As_max:.0f} mm²/m"
+                  if As_tot <= As_max else f"A_s1 + A_s2 = {As_tot:.0f} > A_s,max = {As_max:.0f} mm²/m"]
+            ok = As_tot <= As_max
+            for zid in strefy:
+                Z = next((z for z in D.zebra if z.id == zid), None)
+                rz = (PF.get("mes_zebra") or {}).get(zid)
+                if Z is not None and rz is not None:
+                    fi_c = min(rz["dol"][1], rz["gora"][1])
+                    ok_s = Z.strz[1] <= 15 * fi_c + 1e-6
+                    ok = ok and ok_s
+                    uw.append(f"strzemiona {zid} s = {Z.strz[1] / 10:g} cm {'≤' if ok_s else '>'} 15φ = {15 * fi_c / 10:g} cm "
+                              "(9.2.1.2(3))")
+                elif zid == "płyta":
+                    s_p = min(F.dol.s, F.gora.s)
+                    uw.append(f"płyta: pręty ściskane usztywnione siatką poprzeczną s = {s_p / 10:g} cm "
+                              f"{'≤' if s_p <= 15 * F.gora.fi else '>'} 15φ [ZAŁ]")
+            KD.rejestruj(D, F.id, f"strefa S{i} ({', '.join(strefy)[:30]}) — podwójnie zbrojona, najniekorz. el. "
+                                  f"({'dół' if wa == 'dol' else 'góra'} {kier})", "MES-PF", rq, 0.0, pv,
+                         "siatka + dozbr./żebro", arkusz=nr_ark, wymuszone_ok=ok, uwagi="; ".join(uw))
         for S_ in D.stopy:
             ww = S_.siatka
             KD.rejestruj(D, S_.id, "pogrubienie — siatka dolna (MES)", S_.poz, ww.As_req, ww.As_min, ww.As_prov, ww.opis,

@@ -1439,7 +1439,7 @@ def prety_fundamentu(D: DaneKonstr) -> dict:
         F.uwagi = [
             f"Płyta fundamentowa — analiza MES na podłożu sprężystym (moduł plyta_fundamentowa: płyta ACM z żebrami jako "
             f"pasma h = h_płyty + h_żebra, sprężyny Winklera, kontakt jednostronny, {W.kombinacje} obliczeń: kombinacje STR "
-            f"× k_s ∈ {{{W.podloze.k_min:.0f}; {W.podloze.k_s:.0f}; {W.podloze.k_max:.0f}}} kN/m³ z M₀ i wymiarów płyty — "
+            f"× 3 warianty k_s = {W.podloze.k_min:.0f}, {W.podloze.k_s:.0f} i {W.podloze.k_max:.0f} kN/m³ z M₀ i wymiarów płyty — "
             f"Bowles (5-16a), PN-EN 1997-1 zał. F.2; weryfikacja: belka Hetényiego, błąd < 1 %). Maks. docisk p_d = "
             f"{W.p_d_max:.0f} kPa (q_Rd,lok = {next((w_.warunki[0].R for w_ in W.wyniki if 'Nacisk lokalny' in w_.nazwa), 0):.0f} "
             f"kPa), osiadanie w_k = {W.w_k_max * 1000:.0f} mm, odrywanie {W.oderwanie * 100:.0f} % powierzchni."]
