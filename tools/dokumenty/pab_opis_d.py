@@ -2,9 +2,37 @@
 from __future__ import annotations
 
 from lamela.dokumenty import DANE_PRZYKLADOWE, do_uzup, liczba as L
-from lamela.dokumenty.znaczniki import ZAL
+from lamela.dokumenty.znaczniki import INT, ZAL
 
 from pab_opis_a import ok, tyt
+from pab_opis_b import przykanalik
+from redakcja import czysc, liczby_pl, podstawa
+
+
+def uwagi_audytu(D, sekcja: str | None = None) -> list:
+    """Wyniki sprawdzenia zgodności z WT (tools/audyt_wt.py) o statusie UWAGA / NIEZGODNE."""
+    return [x for x in D.audyt.wyniki if x.status in ("UWAGA", "NIEZGODNE") and (sekcja is None or x.sekcja == sekcja)]
+
+
+def rozstrzygniecie(D, x) -> str:
+    """Stanowisko projektu wobec uwagi sprawdzenia WT — z danych modelu; bez danych: do rozstrzygnięcia w PT."""
+    el = str(x.element)
+    if x.sekcja == "Wentylacja" and "SW1" in el:
+        sw = next((w for w in D.m.wsporniki() if w.get("id") == "SW1"), {})
+        if sw.get("otwierany") is False:
+            return (f"świetlik SW1 jest stały — nieotwierany, bez funkcji wentylacyjnej (model); przyjęto, że wymaganie "
+                    f"WT § 152 ust. 13 dotyczące okien w połaci dachu nie odnosi się do przegrody przeszklonej "
+                    f"nieotwieranej {INT}; w razie odmiennej oceny organu — zestaw zblokowany czerpnia/wyrzutnia albo "
+                    f"przesunięcie wyrzutni (PT-3 IS)")
+    if x.sekcja == "Zagospodarowanie" and "PC" in el:
+        return (f"odstępstwo od założenia projektowego (lokalizacja od N lub E), nie od przepisów: od północy wjazd, "
+                f"wejście i przyłącza, od wschodu odległość od granicy mniejsza od przyjętej; wymagania hałasowe na "
+                f"granicy spełnione (rozdz. 9.4), strefa bezpieczeństwa R290 zachowana {ZAL}")
+    if x.sekcja == "Wysokości" and "schow" in el.lower():
+        return (f"przestrzeń pod biegiem schodów stanowi schowek wbudowany (RPB § 20 ust. 1 pkt 4 lit. b tiret 2), "
+                f"a nie pomieszczenie gospodarcze w rozumieniu WT § 97 ust. 1; powierzchnię zaliczono do PU ze "
+                f"współczynnikiem wysokości (rozdz. 4) {INT}")
+    return "do rozstrzygnięcia w projekcie technicznym " + do_uzup("rozstrzygnięcie projektanta")
 
 ROLE = {"sciana_zewn": "ściana zewnętrzna", "dach": "stropodach / dach", "podloga_grunt": "podłoga na gruncie",
         "strop_zewn": "strop nad powietrzem zewnętrznym", "sciana_nieogrz": "ściana do garażu nieogrzewanego"}
@@ -19,9 +47,11 @@ def r12(pab, D, d):
     ob, og, wo, ka = D.ob, D.W["ogrzewanie"], D.Wd["woda"], D.Wd["kanalizacja"]
     bi, pv, od, went = D.Wd["bilans"], D.Wd["pv"], D.Wd["odgromowa"], D.went
     pc = (D.obc.dobor or {}).get("pc") or {}
-    dob = D.obc.dobor or {}
-    tele = next((u.get("opis") for u in ((D.Dz.get("uzbrojenie") or {}).get("projektowane") or [])
-                 if u.get("branza") == "tele"), do_uzup("instalacja telekomunikacyjna"))
+    pco = og.pc
+    scop_ep = getattr(D.ep.system, "eta_H_g", None)
+    tele = czysc(next((u.get("opis") for u in ((D.Dz.get("uzbrojenie") or {}).get("projektowane") or [])
+                       if u.get("branza") == "tele"), do_uzup("instalacja telekomunikacyjna")))
+    sw1 = uwagi_audytu(D, "Wentylacja")
     pab.rozdzial(tyt("Zasadnicze elementy wyposażenia budowlano-instalacyjnego", 12))
     rows = []
     for (kod, rola), wu in ob.u.items():
@@ -52,11 +82,13 @@ def r12(pab, D, d):
     pab.markdown(f"""
     ## Źródło ciepła i przygotowanie ciepłej wody użytkowej
 
-    * **Źródło ciepła:** {pc.get('opis', do_uzup('pompa ciepła'))} — wyrób przykładowy {og.pc.get('model', '')}
-      {DANE_PRZYKLADOWE}; projektowe obciążenie cieplne budynku Φ_{{HL}} = {L(D.obc.Phi_HL / 1000, 2)} kW (PN-EN 12831-1),
-      moc pompy przy θ_{{e}} = {L(D.obc.theta_e, 0)} °C: {L(dob.get('P_PC_te_kW'), 2)} kW, punkt biwalentny
-      {L(og.biwalentny.get('theta_biv'), 1)} °C, grzałka elektryczna szczytowa (udział w energii
-      {L(100 * og.bin.get('udzial_grzalki', 0), 2)} %). Jednostka zewnętrzna — monoblok na czynniku R290 na działce
+    * **Źródło ciepła:** {pc.get('opis', do_uzup('pompa ciepła'))} — wyrób przykładowy {pco.get('model', '')}
+      {DANE_PRZYKLADOWE}, dobrany do projektowego obciążenia cieplnego budynku Φ_{{HL}} = {L(D.obc.Phi_HL / 1000, 2)} kW
+      (PN-EN 12831-1): moc pompy przy θ_{{e}} = {L(D.obc.theta_e, 0)} °C {L(og.biwalentny.get('P_te'), 2)} kW, punkt
+      biwalentny {L(og.biwalentny.get('theta_biv'), 1)} °C, grzałka elektryczna szczytowa (udział w energii
+      {L(100 * og.bin.get('udzial_grzalki', 0), 2)} %); SCOP (35 °C) = {L(pco.get('SCOP_35'), 2)}; L_{{WA}} =
+      {L(pco.get('L_WA'), 0)} / {L(pco.get('L_WA_noc'), 0)} dB(A) (dzień / tryb nocny) — ten sam wyrób w opisie PZT.
+      {('Charakterystykę energetyczną (rozdz. 10) obliczono dla SCOP = ' + L(scop_ep, 2) + ' z karty wyrobu przykładowego — wartość nie wyższa od SCOP wyrobu dobranego, wynik EP po stronie bezpiecznej; ujednolicenie danych wyrobu — PT-3 IS.') if scop_ep and pco.get('SCOP_35') and scop_ep <= pco['SCOP_35'] + 1e-9 else ('Charakterystykę energetyczną obliczono dla SCOP = ' + L(scop_ep, 2) + ' — do ujednolicenia z wyrobem dobranym w PT-3 IS ' + do_uzup('SCOP wyrobu') + '.') if scop_ep else ''} Jednostka zewnętrzna — monoblok na czynniku R290 na działce
       (strefa bezpieczeństwa wg DTR, W-156); moduł hydrauliczny w pomieszczeniu technicznym na parterze.
     * **Ogrzewanie:** wodne płaszczyznowe (podłogowe) niskotemperaturowe, temperatura zasilania {L(og.theta_V, 1)} °C,
       rozdzielacze na każdej kondygnacji, ściany grzewcze w łazienkach; regulacja — rozdz. 11. Garaż nieogrzewany.
@@ -64,11 +96,12 @@ def r12(pab, D, d):
       cyrkulacja: {wo['cyrkulacja']}; okresowa dezynfekcja termiczna; zawór termostatyczny przed punktami poboru.
     * **Wentylacja:** mechaniczna nawiewno-wywiewna z odzyskiem ciepła, centrala w pomieszczeniu technicznym II piętra;
       strumienie Σ nawiew = {L(went.suma_naw, 0)} m³/h, Σ wywiew = {L(went.suma_wyw, 0)} m³/h (PN-83/B-03430/Az3; WT § 149),
-      sprawność odzysku {L(100 * went.eta, 0)} %; czerpnia i wyrzutnia dachowe (WT § 152; W-166). Garaż — wentylacja
-      naturalna (kratki w bramie).
-    * **Wodociąg i kanalizacja:** przyłącze wodociągowe, wodomierz {wo['wodomierz']} w pomieszczeniu technicznym;
+      sprawność odzysku {L(100 * went.eta, 0)} %; czerpnia i wyrzutnia dachowe (WT § 152 ust. 6–13; W-166, W-167).
+      {' '.join(f'Wyrzutnia a {czysc(x.element).split("↔")[-1].strip()}: {czysc(x.parametr)} {czysc(x.wartosc)} (wymaganie: {czysc(x.wymog)}; WT § 152 ust. 12–13) — {rozstrzygniecie(D, x)}.' for x in sw1)}
+      Garaż — wentylacja naturalna (kratki w bramie).
+    * **Wodociąg i kanalizacja:** przyłącze wodociągowe, wodomierz {liczby_pl(wo['wodomierz'])} w pomieszczeniu technicznym;
       kanalizacja sanitarna grawitacyjna, piony {', '.join(f'{k} {v}' for k, v in (ka.get('piony') or {}).items())},
-      przykanalik {ka['przykanalik']} do sieci; wody opadowe — rozdz. 9.
+      przykanalik {przykanalik(D)} do sieci; wody opadowe — rozdz. 9.
     * **Instalacja elektryczna:** zasilanie kablowe nN ze złącza w linii ogrodzenia, moc przyłączeniowa
       {L(bi['P_przylaczeniowa_kW'], 0)} kW, zabezpieczenie przedlicznikowe {L(bi['I_zab_A'], 0)} A (moc szczytowa z
       zarządzaniem obciążeniem {L(bi['P_szczyt_DLM_kW'], 1)} kW); układ TN-S, ochrona różnicowoprądowa i przeciwprzepięciowa,
@@ -88,6 +121,8 @@ def r13(pab, D, d):
     wyj = sorted({o.raw.get("symbol") or o.id for o in D.m.otwory() if o.typ in ("drzwi_zewn", "drzwi_przesuwne_HS")
                   and o.kond == D.m.kondygnacje[0].id})
     sch = [b["szer"] for s in D.m.schody() for b in s.get("biegi", [])]
+    s_sc = min(D.sasiedzi, key=lambda s: s["d"], default=None)
+    s_pl = min(D.sasiedzi, key=lambda s: s["d_pl"], default=None)
     s_min = min((min(s["d"], s["d_pl"]) for s in D.sasiedzi), default=None)
     l_zl = D.v("usytuowanie", "odl_ppoz_ZL_ZL")
     pv = D.Wd["pv"]
@@ -104,7 +139,9 @@ def r13(pab, D, d):
          "wymagań nie stawia się" if kn <= zw else "WYMAGANE — budynek > 3 kondygnacji", D.zr("ppoz", "zwolnienie_213_kondygnacje_max")),
         ("Ściany zewnętrzne, okładziny, przekrycie dachu", f"nierozprzestrzeniające ognia (ETICS NRO, dach B_ROOF(t1)) {ZAL}",
          "WT § 271 ust. 2, § 272 ust. 2 (W-213)"),
-        ("Odległość od budynków sąsiednich", f"min. {L(s_min)} m — {ok(s_min is not None and s_min >= l_zl)} (≥ {L(l_zl)} m)",
+        ("Odległość od budynków sąsiednich", (f"od ścian zewnętrznych {L(s_sc['d'])} m (dz. {s_sc['nr']}), od płyt wysuniętych "
+                                              f"i okapów {L(s_pl['d_pl'])} m (dz. {s_pl['nr']}) — " if s_sc else "")
+         + f"{ok(s_min is not None and s_min >= l_zl)} (≥ {L(l_zl)} m)",
          D.zr("usytuowanie", "odl_ppoz_ZL_ZL")),
         ("Przeciwpożarowy wyłącznik prądu", (f"projektuje się (kubatura strefy {L(V)} m³ > {L(v_pwp, 0)} m³)" if V > v_pwp
          else "projektuje się (rekomendacja W-190)") + " — przy złączu kablowo-pomiarowym / wejściu głównym, oznakowany",
@@ -140,9 +177,19 @@ def r14_15(pab, D, d):
     zbiorowej ochrony (RPB § 3 ust. 1 pkt 2 w brzmieniu nadanym rozporządzeniem Dz.U. 2026 poz. 597).
     """)
     niezg = D.audyt_statusy.get("NIEZGODNE", 0)
+    uw = uwagi_audytu(D)
     pab.rozdzial("Informacja o zgodzie na odstępstwo (§ 20 ust. 2 RPB)")
     pab.markdown(f"""
     **Nie dotyczy** — nie wydano zgody na odstępstwo od przepisów techniczno-budowlanych (art. 9 PB) ani postanowienia,
     o którym mowa w art. 6a ust. 2 ustawy o ochronie przeciwpożarowej; projekt nie przewiduje rozwiązań wymagających
-    takiej zgody (audyt zgodności z WT: {niezg} niezgodności).
+    takiej zgody. Sprawdzenie zgodności modelu z WT (`tools/audyt_wt.py`; {sum(D.audyt_statusy.values())} sprawdzeń)
+    wykazało {niezg} niezgodności oraz {len(uw)} {'pozycję' if len(uw) == 1 else 'pozycje' if 1 < len(uw) % 10 < 5 and len(uw) % 100 not in (12, 13, 14) else 'pozycji'}
+    wymagających rozstrzygnięcia projektanta (interpretacji przepisu albo odstępstwa od założeń projektowych — nie od
+    przepisów); zestawienie poniżej.
     """)
+    if uw:
+        pab.tabela([{"Element": czysc(x.element), "Stan projektu": f"{czysc(x.parametr)}: {czysc(x.wartosc)}",
+                     "Wymaganie (podstawa)": f"{czysc(x.wymog)} ({podstawa(x.podstawa)})",
+                     "Rozstrzygnięcie": rozstrzygniecie(D, x)} for x in uw],
+                   tytul="Pozycje sprawdzenia zgodności z WT wymagające rozstrzygnięcia projektanta", klasa="zwarta", lp=True,
+                   szerokosci=["7mm", "28mm", "34mm", "38mm", None], zrodlo="tools/audyt_wt.py (status UWAGA / NIEZGODNE)")

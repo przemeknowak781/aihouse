@@ -421,7 +421,8 @@ def wezel_garaz_plyta(sciana: Sequence[Warstwa], podloga_lewa: Sequence[Warstwa]
                       blok: tuple[Material, float] | None = None, H: float | None = None,
                       L: float | None = None, theta_i: float | None = None, theta_e: float | None = None,
                       id: str = "WZ-GP", nazwa: str = "Ściana dom–garaż na ciągłej płycie fundamentowej",
-                      uskok: float = 0.0, zebro: tuple[float, float] | None = None, x_os: float | None = None) -> Wezel:
+                      uskok: float = 0.0, zebro: tuple[float, float] | None = None, x_os: float | None = None,
+                      przerwa: tuple[Material, float] | None = None) -> Wezel:
     """Ściana (lico lewe = dom x = 0, prawe = garaż) na płycie fundamentowej ciągłej pod domem i garażem.
     podloga_lewa / prawa — warstwy podłóg od góry z płytą (konstrukcyjna) i warstwami pod płytą (XPS, podsypka).
     ``uskok`` — obniżenie płyty garażu względem płyty domu [m] (uskok w osi warstwy konstrukcyjnej ściany ``x_os``; beton pod
@@ -468,6 +469,11 @@ def wezel_garaz_plyta(sciana: Sequence[Warstwa], podloga_lewa: Sequence[Warstwa]
             bz, gz = zebro
             beton.append(box(xo - bz / 2, y_w - gz, xo + bz / 2, y_w))
         B = _uu(beton)
+        if przerwa is not None:          # wariant: przerwa termiczna płyty garażu przy żebrze/uskoku (izolacja pionowa na grubości PF2)
+            xb = max(D, xo + (zebro[0] / 2 if zebro else 0.0))
+            pz = box(xb, yg - t_pl, xb + przerwa[1], yg)
+            B = B.difference(pz)
+            ob.append(_obsz(pz, przerwa[0], "przerwa termiczna płyty (wariant)"))
         ob.append(_obsz(B, podloga_lewa[kl], "płyta fundamentowa z uskokiem" + (" i żebrem" if zebro else "")))
         pod = [w for w in podloga_lewa[kl + 1:] if w.d >= 0.001]
         yl, yr = y_w - t_pl, yg - t_pl
