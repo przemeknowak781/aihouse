@@ -6,7 +6,7 @@
 
 # Opis techniczny — instalacje sanitarne (§ 23 RPB)
 
-## Stan opracowania i sprawy otwarte — E.1 rejestru; W-272
+## Stan opracowania i sprawy otwarte — rejestr wymagań, sekcja E
 
 Tom opracowano automatycznie z modelu budynku (`model/*.yaml`, stan z 2026-09-25 06:48) i bibliotek obliczeniowych
 `lamela.obliczenia` uruchamianych przy każdym generowaniu tomu — każda liczba w tomie pochodzi z modelu albo
@@ -35,8 +35,9 @@ Warunki informacyjne — wartości podawane bez kryterium (np. moc ścian grzewc
 1. Arkusze IS wygenerowano przed ostatnią zmianą modelu — przed wydaniem wygenerować ponownie (tools/generuj_widoki.py --arkusze model/arkusze_is.yaml).
 2. Pompa ciepła — dwa różne zestawy danych przykładowych: moduł energii (dobór, EP) P(A−7/W35) = 8,0 kW, SCOP₃₅ = 4,50; moduł ogrzewania (PC-R290-07 (przykład)) P(A−7/W35) = 6,2 kW, SCOP₃₅ = 4,70, L_WA = 57 dB — ujednolicić w `instalacje.wyroby.PC` (DTR/DWU wybranego wyrobu) i przeliczyć EP, punkt biwalentny i hałas.
 3. `instalacje.wyroby` w modelu puste — obliczenia na danych przykładowych bibliotek (PC, centrala wentylacyjna, wodomierz Δp(Q3), zawór EA k_v, wpusty) [DANE PRZYKŁADOWE – FIKCYJNE]; zastąpić danymi DTR/DWU wyrobów wybranych przez wykonawcę (wyroby równoważne).
-4. Bufor c.o.: w modelu „bufor 100 dm³”, z obliczeń 80 dm³ — ujednolicić.
-5. Dane osobowe (Inwestor, projektanci, nr uprawnień, pracownia) — brak sekcji `projekt:` w model/budynek.yaml; pola [DO UZUPEŁNIENIA].
+4. Dane osobowe (Inwestor, projektanci, nr uprawnień, pracownia) — brak sekcji `projekt:` w model/budynek.yaml; pola oznaczone jako do uzupełnienia (strona tytułowa, oświadczenie).
+
+> PODGLĄD — obliczenia odczytane z pamięci podręcznej; wersja nie do wydania.
 
 ## Przedmiot, zakres i podstawy opracowania — § 23 RPB
 
@@ -88,7 +89,7 @@ dotyczącymi zamierzenia budowlanego (oświadczenie projektanta).
 
 **Obciążenie cieplne.** Projektowe obciążenie cieplne budynku Φ_HL = **7,41 kW**
 (PN-EN 12831, θ_e = −18 °C, średnia roczna θ_m,e = 7,9 °C; W-150, W-151),
-z dodatkiem na c.w.u. Φ_W = 1 250,00 kW. Temperatury wewnętrzne wg WT § 134 ust. 2 (model
+z dodatkiem na c.w.u. Φ_W = 1,25 kW. Temperatury wewnętrzne wg WT § 134 ust. 2 (model
 `pomieszczenia[].temp`); garaż nieogrzewany (θ_u = −10,6 °C).
 
 **Źródło ciepła.** Pompa ciepła powietrze–woda typu monoblok na czynniku naturalnym R290 (W-155) —
@@ -263,8 +264,7 @@ potwierdzenia w warunkach przyłączenia gestorów sieci (D-23): ciśnienie dysp
 
 Klimat zewnętrzny: θ_e = −18 °C (strefa II, W-150), θ_m,e = 7,9 °C; dane
 godzinowe TMY Poznań (WMO 12330) do bilansu pompy ciepła i charakterystyki energetycznej. Klimat wewnętrzny
-(WT § 134 ust. 2): temperatury obliczeniowe pomieszczeń 16, 20, 24 °C (pokoje,
-kuchnia, komunikacja 20 °C; łazienki 24 °C; wartości z modelu). Powietrze zewnętrzne ≥ 20 m³/h na osobę
+(WT § 134 ust. 2; model `pomieszczenia[].temp`): **16 °C** — 6 pomieszczeń: 0.01, 0.05, 0.15, 0.16, 0.12, 2.07; **20 °C** — 22 pomieszczeń: 0.02, 0.03, 0.04, 0.06, 0.07, 0.08, 0.10, 0.11, 1.01, 1.02, 1.03, 1.04, 1.06, 1.08, 2.01, 2.02, 2.03, 2.05, 2.06, 0.14, 1.09, 2.08; **24 °C** — 0.09 Łazienka gościnna (natrysk), 1.05 Łazienka dzieci (wanna), 1.07 WC z natryskiem, 2.04 Łazienka rodziców. Powietrze zewnętrzne ≥ 20 m³/h na osobę
 (5 os.), wywiew wg PN-83/B-03430/Az3 (W-161, W-162). Szczelność budynku n50 = 1,0 h⁻¹ [ZAŁ]
 (cel projektowy — potwierdzić próbą ciśnieniową, W-249); sprawność odzysku ciepła η_v = 0,85.
 
@@ -288,7 +288,7 @@ kuchnia, komunikacja 20 °C; łazienki 24 °C; wartości z modelu). Powietrze ze
 * Strefa bezpieczeństwa R290 (1,0 m + wymiar urządzenia ≈ 0,4 m): otwory w strefie: 0 szt. (= 0 szt.; PN-EN 378-1; DTR (W-156) — brak [W-156])
 * Wentylacja: nawiew / wywiew: 365 / 365 m³/h (≥ 100 / ≥ 362; WT § 149 [W-161, W-162])
 * Centrala: wydajność maks. ≥ strumień okresowy: 500 m³/h (≥ 435 m³/h; PN-83/B-03430/Az3)
-* SFP nawiewu / wywiewu: 0,50 / 0,50 kW/(m³/s) (≤ 1,90 / ≤ 1,30; WT § 154 ust. 10–11 [W-164])
+* SFP nawiewu / wywiewu [kW/(m³/s)]: 0,50 / 0,50  (≤ 1,90 / ≤ 1,30; WT § 154 ust. 10–11 [W-164])
 * Przepływ obliczeniowy ≤ Q3 wodomierza: 4,06 m³/h (≤ 6,30 m³/h; PN-EN ISO 4064 / MID [W-131])
 * Wymagane ciśnienie w sieci ≤ ciśnienie dyspozycyjne: 0,329 MPa (≤ 0,350 MPa; warunki gestora [ZAŁ p_dysp] [W-130])
 * Ciśnienie statyczne w punkcie ≤ 0,60 MPa (WT §114): 0,40 MPa (≤ 0,60 MPa; WT §114 ust. 1 [W-130])
@@ -471,7 +471,7 @@ ponownego przeliczenia EP, punktu biwalentnego i hałasu (generator tomu przelic
 
 | Urządzenie | Parametry wymagane | Podstawa |
 |---|---|---|
-| Pompa ciepła powietrze–woda, monoblok | czynnik naturalny R290 (GWP < 150); P(A−15/W35) ≥ 5,0 kW i pokrycie Φ_HL + Φ_W = 1 257,41 kW przy θ_e z grzałką ≤ 6 kW; SCOP₃₅ ≥ 4,7; η_s ≥ 125 %; L_WA ≤ 57 dB (tryb nocny niżej); regulacja pogodowa, sterowanie zależne od zapotrzebowania | W-155, W-156, W-024; (UE) 2024/573, 813/2013 |
+| Pompa ciepła powietrze–woda, monoblok | czynnik naturalny R290 (GWP < 150); P(A−15/W35) ≥ 5,0 kW i pokrycie Φ_HL + Φ_W = 8,66 kW przy θ_e z grzałką ≤ 6 kW; SCOP₃₅ ≥ 4,7; η_s ≥ 125 %; L_WA ≤ 57 dB (tryb nocny niżej); regulacja pogodowa, sterowanie zależne od zapotrzebowania | W-155, W-156, W-024; (UE) 2024/573, 813/2013 |
 | Zasobnik c.w.u. z wężownicą | V ≥ 400 dm³, wężownica ≥ 1,8 m² (dla PC), grzałka do dezynfekcji, grupa bezpieczeństwa, izolacja fabryczna | W-133, W-134; PN-EN 16147+A1:2023-06 |
 | Bufor c.o. (szeregowy) | V ≥ 80 dm³, izolowany | obliczenia ogrzewania |
 | Naczynia wzbiorcze przeponowe | c.o. ≥ 18 dm³ (p₀ 0,83 bar); c.w.u. ≥ 50 dm³ (p₀ 3,8 bar), przepływowe | PN-B-02414:1999 (powołana w WT) [W-154] |
@@ -513,7 +513,7 @@ częściowe przed zakryciem (przewody w posadzkach, bruzdach, pod płytą) z wpi
    gwarancyjne urządzeń, instrukcja obsługi instalacji dla użytkownika, dokumentacja powykonawcza (PT
    z naniesionymi zmianami), dane do świadectwa charakterystyki energetycznej (C.3 rejestru).
 
-## Dane do uzupełnienia i uzgodnienia międzybranżowe — W-272, W-286, E-04
+## Dane do uzupełnienia i uzgodnienia międzybranżowe — rejestr wymagań, sekcje D i E
 
 Uzgodnienia: PT-1 AR (przejścia przez przegrody, szachty, wyłaz), PT-2 BO (przejścia przez płytę fundamentową i stropy, podstawy urządzeń), PT-4 IE (zasilanie PC, grzałki, centrali, sterowników; połączenia wyrównawcze rur metalowych). Braki modelu zgłoszone przez generator rysunków IS (`projekt/05_PT_instalacje_sanitarne/BRAKI_DANYCH.md`, stan z dnia generowania rysunków):
 
@@ -543,7 +543,7 @@ Uzgodnienia: PT-1 AR (przejścia przez przegrody, szachty, wyłaz), PT-2 BO (prz
 | 20 | instalacje.piony — rodzaj pionu | lista pionów zawiera rury spustowe (RS…) bez pola `rodzaj`; biblioteka grupowania pionów traktowała je jako piony wod.-kan. — w obliczeniach do rysunków odfiltrowane | PT-IS-01, PT-IS-02, PT-IS-03, PT-IS-04, PT-IS-05, PT-IS-06, PT-IS-07, PT-IS-08, PT-IS-09, PT-IS-10, PT-IS-11, PT-IS-12, PT-IS-13, PT-IS-14 |
 | 21 | instalacje.wyroby | brak danych wyrobów (DTR/DWU) — obliczenia na danych przykładowych bibliotek (PC, wodomierz ∆p(Q3), EA k_v, wpusty, centrala went., moduł PV, falownik) | PT-IS-01, PT-IS-02, PT-IS-03, PT-IS-04, PT-IS-05, PT-IS-06, PT-IS-07, PT-IS-08, PT-IS-09, PT-IS-10, PT-IS-11, PT-IS-12, PT-IS-13, PT-IS-14 |
 
-Pozycje wyznaczone algorytmicznie są na rysunkach oznaczone [DO UZUPEŁNIENIA] (warstwa I-BRAKI). Pozycje nieaktualne wobec bieżących obliczeń — patrz „Stan opracowania i sprawy otwarte”.
+Pozycje wyznaczone algorytmicznie są na rysunkach oznaczone znacznikiem braku danych (linia kreskowa purpurowa, warstwa I-BRAKI). Pozycje nieaktualne wobec bieżących obliczeń — patrz „Stan opracowania i sprawy otwarte”.
 
 *Źródło: projekt/05_PT_instalacje_sanitarne/BRAKI_DANYCH.md*
 

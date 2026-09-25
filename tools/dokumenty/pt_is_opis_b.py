@@ -19,7 +19,7 @@ def wstaw_raport(o: Opis, tekst: str, *, tytul: str, podstawa: str | None = None
     → poziom 3 (numeracja z nagłówków usunięta — numeruje dokument), obrazy → ilustracje numerowane."""
     tekst = re.sub(r"\A\s*#\s+[^\n]*\n", "", tekst)
     tekst = re.sub(r"^(#{2,4})\s+\d+(?:\.\d+)*\.?\s+", r"\1 ", tekst, flags=re.M)
-    tekst = re.sub(r"^(#{2,4})\s", lambda m: m.group(1)[1:] + "# ", tekst, flags=re.M)   # ## → # (+przesunięcie 1)
+    tekst = re.sub(r"^(#{2,4})\s", lambda m: m.group(1)[1:] + " ", tekst, flags=re.M)   # ## → # (+przesunięcie 1)
     o.rozdzial(tytul, poziom=2, podstawa=podstawa, nowa_strona=True)
     poz = 0
     for m in RE_IMG.finditer(tekst):

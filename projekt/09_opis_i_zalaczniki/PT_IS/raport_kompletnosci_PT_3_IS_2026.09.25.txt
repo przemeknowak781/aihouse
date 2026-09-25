@@ -2,7 +2,7 @@ RAPORT KOMPLETNOŚCI — PT_3_IS_2026.09.25.pdf
 Lista kontrolna: PT-3 IS — projekt techniczny, instalacje sanitarne (rejestr C.2)
 Status: PRZYKŁAD – NIE DO ZŁOŻENIA
 Pozycje: OK 15 · BRAK 0 · DO UZUPEŁNIENIA 3 · N/D 0 · OSTRZEŻENIE 0
-Znaczniki: [DO UZUPEŁNIENIA] ×55, [DOKUMENT ZEWNĘTRZNY] ×0, [DANE PRZYKŁADOWE] ×99
+Znaczniki: [DO UZUPEŁNIENIA] ×53, [DOKUMENT ZEWNĘTRZNY] ×0, [DANE PRZYKŁADOWE] ×99
 Plik: 85 stron, 2.13 MB
 
   element PT: strony 1–85 (opis 68, arkusze 17)
@@ -33,7 +33,6 @@ Pola do uzupełnienia i dokumenty zewnętrzne (wystąpienia):
     2 × [DO UZUPEŁNIENIA: adres inwestora]
     2 × [DO UZUPEŁNIENIA: imię i nazwisko lub nazwa inwestora]
     2 × [DO UZUPEŁNIENIA: kod TERYT jedn. ewid. WWPPGG_R]
-    2 × [DO UZUPEŁNIENIA]
     1 × [DO UZUPEŁNIENIA: adres pracowni]
     1 × [DO UZUPEŁNIENIA: data złożenia oświadczenia z art. 102a PB]
     1 × [DO UZUPEŁNIENIA: jednostka ewidencyjna — kod TERYT WWPPGG_R i nazwa]

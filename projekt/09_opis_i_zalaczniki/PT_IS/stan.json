@@ -1,12 +1,11 @@
 {
  "model": "2026-09-25 06:48",
- "podglad": false,
+ "podglad": true,
  "sprawy_otwarte": [
   "Arkusze IS wygenerowano przed ostatnią zmianą modelu — przed wydaniem wygenerować ponownie (tools/generuj_widoki.py --arkusze model/arkusze_is.yaml).",
   "Pompa ciepła — dwa różne zestawy danych przykładowych: moduł energii (dobór, EP) P(A−7/W35) = 8,0 kW, SCOP₃₅ = 4,50; moduł ogrzewania (PC-R290-07 (przykład)) P(A−7/W35) = 6,2 kW, SCOP₃₅ = 4,70, L_WA = 57 dB — ujednolicić w `instalacje.wyroby.PC` (DTR/DWU wybranego wyrobu) i przeliczyć EP, punkt biwalentny i hałas.",
   "`instalacje.wyroby` w modelu puste — obliczenia na danych przykładowych bibliotek (PC, centrala wentylacyjna, wodomierz Δp(Q3), zawór EA k_v, wpusty) [DANE PRZYKŁADOWE – FIKCYJNE]; zastąpić danymi DTR/DWU wyrobów wybranych przez wykonawcę (wyroby równoważne).",
-  "Bufor c.o.: w modelu „bufor 100 dm³”, z obliczeń 80 dm³ — ujednolicić.",
-  "Dane osobowe (Inwestor, projektanci, nr uprawnień, pracownia) — brak sekcji `projekt:` w model/budynek.yaml; pola [DO UZUPEŁNIENIA]."
+  "Dane osobowe (Inwestor, projektanci, nr uprawnień, pracownia) — brak sekcji `projekt:` w model/budynek.yaml; pola oznaczone jako do uzupełnienia (strona tytułowa, oświadczenie)."
  ],
  "arkusze_braki": [],
  "EP": 35.6,
