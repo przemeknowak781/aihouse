@@ -1,24 +1,32 @@
 {
- "czas": "2026-09-25 11:44",
+ "czas": "2026-09-25 11:47",
  "aktywni": [
   {
    "id": "abfdfaca2ef13a7b4",
    "opis": "wf_a8783476-2a1:konstrukcja:1",
-   "idle_min": 1.8,
-   "bez_narzedzi_min": 1.8,
+   "idle_min": 1.7,
+   "bez_narzedzi_min": 1.7,
    "limity": 0,
    "powody": []
   },
   {
-   "id": "a2e2d61b96c7d28ef",
-   "opis": "wf_dad224e5-cd8:silnik:poprawki",
+   "id": "a0046cc6247462acc",
+   "opis": "wf_dad224e5-cd8:weryfikacja:M",
    "idle_min": 0.0,
-   "bez_narzedzi_min": 0.1,
+   "bez_narzedzi_min": 0.0,
+   "limity": 0,
+   "powody": []
+  },
+  {
+   "id": "a4e05885df10b0345",
+   "opis": "wf_dad224e5-cd8:weryfikacja:C",
+   "idle_min": 0.0,
+   "bez_narzedzi_min": 0.0,
    "limity": 0,
    "powody": []
   }
  ],
  "zakonczeni": 0,
  "zastoje": [],
- "repo_bez_zmian_min": 0.7
+ "repo_bez_zmian_min": 0.1
 }
