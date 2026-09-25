@@ -53,12 +53,13 @@ Odwodnienie liniowe przy drzwiach bez progu: korytko przed progiem na całej sze
 ## 4. Zbiornik ≤ 5 m³ i niecka (wariant bazowy)
 
 * Powierzchnia zredukowana zlewni (dachy): A_red = Σψ_i·A_i = 0,95·83,3 + 0,95·19,6 = **97,7** m² — _Aquanet 2024 tab. 2 (W-143)_
-* Zdolność chłonna niecki: Q_inf = 1000·A_inf·k_f,nn = 1000·A_n·0,5·k_f = 1000·9,0·5,00·10⁻⁵ = **0,450** l/s — _Aquanet 2024 wzór (2); k_f [ZAŁ — badania]_
-* Objętość obliczeniowa (czasza niecki zasilana opadem ψ = 1,0), t_d = 30 min: V_obl = max_td[0,06·q(t_d)·(A_red + A_n)·t_d − 0,06·Q_inf·t_d] = 0,06·157,64·0,0107·30 − 0,06·0,450·30 = **2,22** m³ — _Aquanet 2024 wzór (1); PANDa 2050 C10_
-* Minimalna objętość niecki (zbiornik ≤ 5 m³ pełny — bez zaliczenia): V_min = f_b·V_obl = 1,2·2,22 = **2,66** m³ — _f_b wg W-143_
-* Wariant: zbiornik pusty na początku opadu (zaliczenie V_zb): V_min' = f_b·max(V_obl − V_zb; 0) = 1,2·max(2,22 − 5,0; 0) = **0,00** m³
-* Przyjęta niecka (ogród deszczowy): A_n × h = 9,0 × 0,30 = **2,70** m³ — _W-145_
-* Czas opróżniania niecki: t = V_min/Q_inf = 2,66/0,00045/3600 = **1,6** h
+* Zdolność chłonna niecki: Q_inf = 1000·A_inf·k_f,nn = 1000·A_n·0,5·k_f = 1000·8,0·5,00·10⁻⁵ = **0,400** l/s — _Aquanet 2024 wzór (2); k_f [ZAŁ — badania]_
+* Objętość obliczeniowa (czasza niecki zasilana opadem ψ = 1,0), t_d = 30 min: V_obl = max_td[0,06·q(t_d)·(A_red + A_n)·t_d − 0,06·Q_inf·t_d] = 0,06·157,64·0,0106·30 − 0,06·0,400·30 = **2,28** m³ — _Aquanet 2024 wzór (1); PANDa 2050 C10_
+* Minimalna objętość niecki (zbiornik ≤ 5 m³ pełny — bez zaliczenia): V_min = f_b·V_obl = 1,2·2,28 = **2,73** m³ — _f_b wg W-143_
+* Wariant: zbiornik pusty na początku opadu (zaliczenie V_zb): V_min' = f_b·max(V_obl − V_zb; 0) = 1,2·max(2,28 − 5,0; 0) = **0,00** m³
+* Minimalna powierzchnia niecki (dobór): A_n,min: V_min ≤ A_n·h ∧ t_opr ≤ t_max = iteracja co 0,5 m² = **9,0** m²
+* Przyjęta niecka (ogród deszczowy) — model (dzialka.yaml: retencja.rozsaczanie): A_n × h = 8,0 × 0,30 = **2,40** m³ — _W-145_
+* Czas opróżniania niecki: t = V_min/Q_inf = 2,73/0,00040/3600 = **1,9** h
 
 | Urządzenie | x, y (układ budynku) | Odl. od budynku [m] | Odl. od granicy [m] |
 |:---|:---|---:|---:|
@@ -108,16 +109,22 @@ Skrzynki: osadnik przed urządzeniem; odległości wg W-144; wymagają stanowisk
 | W-142 | Rura spustowa RS-PL-D-1: Q ≤ Q_RWP(DN100, f = 0,33) | 0,90 l/s | ≤ 9,61 l/s | SPEŁNIONY | PN-EN 12056-3 (rury spustowe) [NZW] |
 | W-142 | Pole PL-D: przepustowość wpustów ≥ Q | 4,50 l/s | ≥ 0,90 l/s | SPEŁNIONY | PN-EN 12056-3 p. 6 |
 | W-145 | Pojemność szczelnego zbiornika (bez zgłoszenia) | 5,00 m³ | ≤ 5,00 m³ | SPEŁNIONY | W-145: PB art. 29 ust. 2 pkt 36 (5–15 m³ — zgłoszenie, ust. 1 pkt 38) |
-| W-143 | Niecka: pojemność ≥ V_min (zbiornik pełny — bez zaliczenia) | 2,70 m³ | ≥ 2,66 m³ | SPEŁNIONY | Aquanet 2024 wzór (1), f_b |
+| W-143 | Niecka: pojemność ≥ V_min (zbiornik pełny — bez zaliczenia) | 2,40 m³ | ≥ 2,73 m³ | **NIESPEŁNIONY** | Aquanet 2024 wzór (1), f_b |
 | W-145 | Niecka: głębokość | 0,30 m | ≤ 0,30 m | SPEŁNIONY | W-145 (≤ 0,3 m) |
-| W-143 | Niecka: czas opróżniania | 1,6 h | ≤ 24,0 h | SPEŁNIONY | W-143: Aquanet 2024 zał. C [zalozenie] |
+| W-143 | Niecka: powierzchnia przyjęta ≥ minimalna z doboru | 8,0 m² | ≥ 9,0 m² | **NIESPEŁNIONY** | dobór (V_min ≤ A_n·h, t_opr ≤ 24 h); przyjęto: model (dzialka.yaml: retencja.rozsaczanie) |
+| W-143 | Niecka: czas opróżniania | 1,9 h | ≤ 24,0 h | SPEŁNIONY | W-143: Aquanet 2024 zał. C [zalozenie] |
 | W-144 | Dno niecki nad maks. zwierciadłem wód gruntowych | 3,50 m | ≥ 1,00 m | SPEŁNIONY | Aquanet 2024; W-144 |
 | W-144 | niecka / rozsączanie: odległość od fundamentów | 11,70 m | ≥ 3,00 m | SPEŁNIONY | W-144 (S-4) |
 | W-144 | niecka / rozsączanie: odległość od granicy działki | 4,00 m | ≥ 2,00 m | SPEŁNIONY | W-144 |
 
 ## Podsumowanie sprawdzeń
 
-Warunków: 16; spełnionych: 16; niespełnionych: 0; informacyjnych: 0.
+Warunków: 17; spełnionych: 15; niespełnionych: 2; informacyjnych: 0.
+
+Niespełnione:
+
+* W-143 — Niecka: pojemność ≥ V_min (zbiornik pełny — bez zaliczenia): 2,40 m³ (wymaganie >= 2,73 m³)
+* W-143 — Niecka: powierzchnia przyjęta ≥ minimalna z doboru: 8,0 m² (wymaganie >= 9,0 m²)
 
 ## Źródła
 

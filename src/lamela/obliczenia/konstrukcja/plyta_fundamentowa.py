@@ -29,6 +29,7 @@ from dataclasses import dataclass, field
 import numpy as np
 import scipy.sparse as sp
 import scipy.sparse.linalg as spla
+from shapely import contains_xy
 from shapely.geometry import LineString, Point, Polygon, box
 from shapely.ops import unary_union
 
@@ -503,17 +504,18 @@ def _obwiednia(pl0, plyty, pod, fvec, kb_uls, kb_chr, e0, P, h, spod, beton, h_e
 
 def przebicie_slupow(an, W: WynikPlytyFund, plyty, fvec, kb_uls) -> list:
     """Przebicie płyty/pogrubienia pod słupami (PN-EN 1992-1-1 6.4.4(2)): v_Ed = β·V_Ed,red/(u·d) ≤ v_Rd = C_Rd,c·k·
-    (100ρf_ck)^(1/3)·2d/a ≥ v_min·2d/a; V_Ed,red = V_Ed − p·A(a); a ∈ (0; 2d] — wartość miarodajna (min v_Rd/v_Ed)."""
-    from .materialy import pole_preta
+    (100ρf_ck)^(1/3)·2d/a ≥ v_min·2d/a; V_Ed,red = V_Ed − ΔV_Ed, ΔV_Ed — wypadkowa odporu gruntu w obwodzie kontrolnym
+    pomniejszona o ciężar płyty (γ_G = 1,35) z MES tej samej kombinacji (6.4.4(2)); a ∈ (0; 2d] — wartość miarodajna
+    (maks. v_Ed/v_Rd po kombinacjach STR i wariantach k_s); obwód przycięty krawędzią płyty, β wg 6.4.3(6)."""
     m, p = an.m, an.p
     out = []
     bt = W.beton
+    kol = []
     for c in m.slupy():
         xy = c["xy"]
         if not (float(c["z_od"]) < W.spod + W.h + 0.5 and W.obrys.contains(Point(*xy))):
             continue
         N = an.slupy_N.get(str(c["id"])) or {}
-        V = max((sum(a * N.get(cs, 0.0) for cs, a in kb.wsp.items()) for kb in kb_uls), default=0.0)
         i = int(np.argmin(np.hypot(W.el_c[:, 0] - xy[0], W.el_c[:, 1] - xy[1])))
         ht = float(W.h_el[i])
         d = ht - W.c_dol / 1000.0 - 0.012
@@ -526,33 +528,49 @@ def przebicie_slupow(an, W: WynikPlytyFund, plyty, fvec, kb_uls) -> list:
             c1, c2 = _wymiary_slupa(str(c.get("przekroj")))
             c2 = min(c2, 3 * c1) if c2 > c1 else c2  # wydłużony trzpień: długość czynna ≤ 3·grubość [ZAŁ, por. 6.4.2(3)]
             c1 = min(c1, 3 * c2) if c1 > c2 else c1
-        rho = 0.002
-        k = min(1 + math.sqrt(200 / (d * 1000)), 2.0)
-        vmin = 0.035 * k ** 1.5 * math.sqrt(bt.f_ck)
-        pmin = 0.0                                 # bezpiecznie: bez redukcji odporem gruntu przy braku docisku
-        best = None
         rect = box(xy[0] - c1 / 2, xy[1] - c2 / 2, xy[0] + c1 / 2, xy[1] + c2 / 2)
         k0 = rect.buffer(2 * d, quad_segs=16)
         udz = k0.exterior.intersection(W.obrys).length / k0.exterior.length
         # β — słup wewnętrzny / krawędziowy / narożny (6.4.3(6), rys. 6.21N — wartości zalecane, układ usztywniony)
         beta, poloz = (1.15, "wewnętrzny") if udz > 0.9 else ((1.4, "krawędziowy") if udz > 0.6 else (1.5, "narożny"))
+        kontury = []
         for a in np.linspace(0.1 * d, 2 * d, 20):
-            # obwód kontrolny przycięty krawędzią płyty (słup przy krawędzi/narożu — 6.4.2(4), rys. 6.15) [UPR]
             kontur = rect.buffer(a, quad_segs=16)
-            u = kontur.exterior.intersection(W.obrys).length
-            A = kontur.intersection(W.obrys).area
-            Vr = max(V - pmin * A, 0.0)
-            vEd = beta * Vr / (u * d) / 1000.0
-            vRd = max(0.18 / bt.gamma_c * k * (100 * rho * bt.f_ck) ** (1 / 3), vmin) * 2 * d / a
-            eta = vEd / vRd if vRd > 0 else 0.0
-            if best is None or eta > best[0]:
-                best = (eta, a, vEd, vRd, u)
+            ins = contains_xy(kontur, W.el_c[:, 0], W.el_c[:, 1])
+            kontury.append((a, kontur.exterior.intersection(W.obrys).length, ins))
+        kol.append(dict(c=c, N=N, d=d, ht=ht, beta=beta, poloz=poloz, kontury=kontury, best=None, V=0.0))
+    if not kol:
+        return out
+    rho = 0.002
+    for kk, pl in plyty.items():
+        for kb in kb_uls:
+            f_ = sum(a * fvec[cs] for cs, a in kb.wsp.items() if cs in fvec and a)
+            r = pl.rozwiaz_kontakt(f_)
+            q_net = (r.p - p.gG_sup * p.ciezar_zelbetu * W.h_el) * pl.A_el     # odpór netto elementu [kN]
+            for K in kol:
+                V = sum(a * K["N"].get(cs, 0.0) for cs, a in kb.wsp.items())
+                K["V"] = max(K["V"], V)
+                d = K["d"]
+                kk_ = min(1 + math.sqrt(200 / (d * 1000)), 2.0)
+                vmin = 0.035 * kk_ ** 1.5 * math.sqrt(bt.f_ck)
+                for a, u, ins in K["kontury"]:
+                    dV = max(float(q_net[ins].sum()), 0.0)
+                    Vr = max(V - dV, 0.0)
+                    vEd = K["beta"] * Vr / (u * d) / 1000.0
+                    vRd = max(0.18 / bt.gamma_c * kk_ * (100 * rho * bt.f_ck) ** (1 / 3), vmin) * 2 * d / a
+                    eta = vEd / vRd if vRd > 0 else 0.0
+                    if K["best"] is None or eta > K["best"][0]:
+                        K["best"] = (eta, a, vEd, vRd, u, V, dV)
+    for K in kol:
+        c, best = K["c"], K["best"]
         w = Wynik(nazwa=f"Przebicie płyty pod słupem {c['id']} (6.4.4(2))")
-        w.krok("Siła od słupa (obwiednia ULS)", "V_Ed", "", V, "kN", nd=1)
-        w.krok("Wysokość użyteczna w strefie słupa", "d", f"h = {f(ht, 2)} m", d * 1000, "mm", nd=0)
-        w.krok("Położenie słupa względem krawędzi płyty; współczynnik β", "β (6.39), rys. 6.21N", f"słup {poloz}", beta, nd=2,
-               zrodlo="PN-EN 1992-1-1 6.4.3(6) [wartości zalecane]")
-        w.krok("Obwód miarodajny (min v_Rd/v_Ed dla a ≤ 2d; przycięty krawędzią płyty; bez redukcji odporem)", "a; u", "",
+        w.krok("Siła od słupa (obwiednia ULS)", "V_Ed", "", K["V"], "kN", nd=1)
+        w.krok("Wysokość użyteczna w strefie słupa", "d", f"h = {f(K['ht'], 2)} m", K["d"] * 1000, "mm", nd=0)
+        w.krok("Położenie słupa względem krawędzi płyty; współczynnik β", "β (6.39), rys. 6.21N", f"słup {K['poloz']}", K["beta"],
+               nd=2, zrodlo="PN-EN 1992-1-1 6.4.3(6) [wartości zalecane]")
+        w.krok("Kombinacja miarodajna: siła słupa i odpór netto w obwodzie (MES, grunt − 1,35·ciężar płyty)", "V_Ed; ΔV_Ed", "",
+               f"{f(best[5], 1)} kN; {f(best[6], 1)} kN", zrodlo="6.4.4(2)")
+        w.krok("Obwód miarodajny (maks. v_Ed/v_Rd dla a ≤ 2d; przycięty krawędzią płyty)", "a; u", "",
                f"{f(best[1], 3)} m; {f(best[4], 3)} m")
         w.warunek("Przebicie — fundament (6.4.4(2), (6.51)–(6.53))", best[2], best[3], "MPa", "PN-EN 1992-1-1 6.4.4",
                   nd=3, symbol_E="v_Ed", symbol_R="v_Rd")

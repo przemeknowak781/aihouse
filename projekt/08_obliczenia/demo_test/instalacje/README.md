@@ -9,7 +9,7 @@ Biblioteka `lamela.obliczenia.sanitarne` i `lamela.obliczenia.elektryka`. Model:
 |:---|---:|---:|---:|:---|
 | [Instalacja wodociągowa i c.w.u.](01_woda.md) | 12 | 12 | 0 | — |
 | [Kanalizacja sanitarna](02_kanalizacja.md) | 19 | 19 | 0 | — |
-| [Odwodnienie dachów, retencja](03_deszczowa.md) | 16 | 16 | 0 | — |
+| [Odwodnienie dachów, retencja](03_deszczowa.md) | 17 | 15 | 2 | W-143 Niecka: pojemność ≥ V_min (zbiornik pełny — bez zaliczenia); W-143 Niecka: powierzchnia przyjęta ≥ minimalna z doboru |
 | [Drenaż i odwodnienie powierzchniowe](04_drenaz.md) | 5 | 0 | 5 | W-019 Spadek terenu od budynku (minimum na odcinku), ściana 1 (x 8,1; y −0,3); W-019 Spadek terenu od budynku (minimum na odcinku), ściana 2 (x 10,3; y 4,4); W-019 Spadek terenu od budynku (minimum na odcinku), ściana 3 (x 4,9; y 8,3); W-019 Spadek terenu od budynku (minimum na odcinku), ściana 4 (x |
 | [Pompa ciepła, ogrzewanie podłogowe, hałas](05_ogrzewanie.md) | 43 | 40 | 3 | W-153 1.01 Sypialnia: moc podłogi przy θ_V,des (T = 10 cm) ≥ Φ_HL; W-153 1.02 Hol: moc podłogi przy θ_V,des (T = 10 cm) ≥ Φ_HL; W-153 1.04 Garderoba: moc podłogi przy θ_V,des (T = 10 cm) ≥ Φ_HL |
 | [Bilans mocy](06_bilans_mocy.md) | 8 | 8 | 0 | — |
@@ -23,7 +23,7 @@ Schematy: [schemat ideowy RG](schemat_RG.png), [schemat PC / c.w.u.](schemat_PC_
 
 * Woda: q_obl = 0,787 dm³/s, wodomierz DN20 Q3=4.0, p_wym = 298 kPa (PRY07 prysznic (c.w.u.)); zasobnik c.w.u. 200 dm³, cyrkulacja: czasowa.
 * Kanalizacja: ΣDU = 8,7 l/s, Q_ww = 2,00 l/s, przykanalik DN150 i=0.02.
-* Wody opadowe: dachy 102,8 m², Q = 4,73 l/s; zbiornik 5,0 m³ + niecka 9,0 m² (V_min 2,66 m³); pokrycie podlewania 85 %.
+* Wody opadowe: dachy 102,8 m², Q = 4,73 l/s; zbiornik 5,0 m³ + niecka 8,0 m² (V_min 2,73 m³); pokrycie podlewania 85 %.
 * Drenaż opaskowy: NIEWYMAGANY (W1.1-E (wilgoć gruntowa, woda nienaporowa)).
 * Ogrzewanie: Φ_HL = 5,71 kW (moduł fizyki/energii (PN-EN 12831)); PC PC-R290-05 (przykład), θ_biv = −8,4 °C; θ_V = 35,0 °C; bufor 40 dm³; hałas na granicy 24,6 dB(A).
 * Bilans mocy: P_inst = 42,9 kW, P_szczyt (DLM) = 23,9 kW ≤ P_przył = 27 kW / 40 A.
@@ -42,7 +42,7 @@ Schematy: [schemat ideowy RG](schemat_RG.png), [schemat PC / c.w.u.](schemat_PC_
   "dezynfekcja_kWh_a": 257.0
  },
  "ogrzewanie": {
-  "eta_H_g_SCOP": 4.8,
+  "eta_H_g_SCOP": 4.1,
   "COP_cwu": 3.3,
   "eta_H_e": 0.89,
   "eta_H_d": 0.96,

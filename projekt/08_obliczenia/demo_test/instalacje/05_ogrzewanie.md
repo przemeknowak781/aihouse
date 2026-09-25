@@ -29,7 +29,7 @@ Obiekt: Dom testowy pipeline'u 3D. Φ_HL: moduł fizyki/energii (PN-EN 12831). D
 | 0.04 Kuchnia z jadalnią | 700 |
 | 1.01 Sypialnia | 576 |
 | 1.02 Hol | 593 |
-| 1.03 Pokój | 1026 |
+| 1.03 Pokój | 1027 |
 | 1.04 Garderoba | 365 |
 | 1.05 Sypialnia 2 | 289 |
 
@@ -45,10 +45,10 @@ Dobrano: **PC-R290-05 (przykład)** — monoblok powietrze–woda, czynnik R290;
 * Współczynnik strat budynku: H = Φ_HL/(θ_i − θ_e) = 5709/(20 − (−18)) = **150,2** W/K
 * Moc PC przy θ_e (W35): P_PC(θ_e) = interpolacja danych katalogowych = **3,30** kW — _[ZAŁ]_
 * Punkt biwalentny (P_PC(θ) = H·(θ_i − θ)): θ_biv = bisekcja = **−8,4** °C — _kryterium θ_biv ≤ −7 °C [ZAŁ]_
-* Ciepło na ogrzewanie w roku typowym (TMY Poznań, granica grzania 15 °C): Q_H = Σ H·(15 − θ_e,h) = **8633** kWh/a — _PVGIS 5.3 TMY [UPR — bilans EP w module energii]_
+* Ciepło do bilansu godzinowego PC — metoda uproszczona (stopniogodziny TMY Poznań, granica grzania 15 °C, bez bilansu zysków ciepła; NIE jest to zapotrzebowanie Q_H,nd — to podaje charakterystyka energetyczna): Q_H,PC = Σ H·(15 − θ_e,h) = **8633** kWh/a — _PVGIS 5.3 TMY [UPR — tylko do udziału grzałki i SCOP]_
 * Energia z grzałki (godziny z P_PC < Φ): Q_grz = Σ max(0, Φ − P_PC) = **7** kWh/a
 * Udział grzałki: Q_grz/Q_H = **0,08** % — _≤ 5 % [ZAŁ]_
-* Sezonowy COP z obliczenia godzinowego (informacyjnie; do EP — SCOP deklarowany): SCOP = ΣQ_PC/ΣE_el = **4,10**
+* Sezonowy COP z obliczenia godzinowego (do EP — mniejsza z wartości: ta albo SCOP deklarowany): SCOP = ΣQ_PC/ΣE_el = **4,10**
 * Uwaga: TMY Poznań — min. θ_e = −14,6 °C (rok typowy nie zawiera temperatury obliczeniowej −18 °C); w latach mroźnych udział grzałki większy — pokrycie mocy przy θ_e sprawdzono niżej
 
 ## 3. Ogrzewanie podłogowe (PN-EN 1264)
@@ -66,11 +66,11 @@ Dobrano: **PC-R290-05 (przykład)** — monoblok powietrze–woda, czynnik R290;
 | 0.02 | Hol ze schodami | P0 | 535 | 11,3 | 47,5 | 24,6 | GRES (płytki) 0,02 | 25 | 13,24 | 31,6 | 3,37 | 148,2 | 1 | 52,2 |
 | 0.03 | Salon | P0 | 1042 | 20,9 | 49,9 | 24,8 | DESKA_DEB (drewno 15 mm) 0,10 | 10 | 13,93 | — | 5,00 | 197,5 | 3 | 227,8 |
 | 0.04 | Kuchnia z jadalnią | P0 | 700 | 14,2 | 49,1 | 24,7 | GRES (płytki) 0,02 | 20 | 12,07 | 29,5 | 5,46 | 119,4 | 1 | 82,4 |
-| 1.01 | Sypialnia | P1 | 576 | 10,2 | 56,3 | 25,3 | DESKA_DEB (drewno 15 mm) 0,10 | 10 | 14,49 | — | 5,00 | 110,4 | 2 | 118,0 |
+| 1.01 | Sypialnia | P1 | 576 | 10,2 | 56,3 | 25,3 | DESKA_DEB (drewno 15 mm) 0,10 | 10 | 14,49 | — | 5,00 | 110,5 | 2 | 118,0 |
 | 1.02 | Hol | P1 | 593 | 9,5 | 62,2 | 25,8 | DESKA_DEB (drewno 15 mm) 0,10 | 10 | 16,01 | — | 5,00 | 113,7 | 2 | 103,1 |
-| 1.03 | Pokój | P1 | 1026 | 20,5 | 50,0 | 24,8 | DESKA_DEB (drewno 15 mm) 0,10 | 10 | 12,88 | 31,0 | 4,04 | 243,7 | 3 | 224,3 |
+| 1.03 | Pokój | P1 | 1027 | 20,5 | 50,0 | 24,8 | DESKA_DEB (drewno 15 mm) 0,10 | 10 | 12,88 | 31,0 | 4,03 | 243,8 | 3 | 224,3 |
 | 1.04 | Garderoba | P1 | 365 | 5,6 | 65,0 | 26,1 | DESKA_DEB (drewno 15 mm) 0,10 | 10 | 16,74 | — | 5,00 | 70,0 | 1 | 70,1 |
-| 1.05 | Sypialnia 2 | P1 | 289 | 7,4 | 39,1 | 23,8 | DESKA_DEB (drewno 15 mm) 0,10 | 20 | 12,26 | 29,9 | 5,12 | 54,1 | 1 | 45,1 |
+| 1.05 | Sypialnia 2 | P1 | 289 | 7,4 | 39,1 | 23,8 | DESKA_DEB (drewno 15 mm) 0,10 | 20 | 12,27 | 29,9 | 5,11 | 54,2 | 1 | 45,1 |
 
 | Pętla | T [cm] | L [m] | ṁ [kg/h] | ∆p [kPa] | V [dm³] |
 |:---|---:|---:|---:|---:|---:|
@@ -85,16 +85,16 @@ Dobrano: **PC-R290-05 (przykład)** — monoblok powietrze–woda, czynnik R290;
 | 1.01/2 | 10 | 59,0 | 55,2 | 6,9 | 6,7 |
 | 1.02/1 | 10 | 51,5 | 56,9 | 6,7 | 5,8 |
 | 1.02/2 | 10 | 51,5 | 56,9 | 6,7 | 5,8 |
-| 1.03/1 | 10 | 74,8 | 81,2 | 12,2 | 8,5 |
-| 1.03/2 | 10 | 74,8 | 81,2 | 12,2 | 8,5 |
-| 1.03/3 | 10 | 74,8 | 81,2 | 12,2 | 8,5 |
+| 1.03/1 | 10 | 74,8 | 81,3 | 12,2 | 8,5 |
+| 1.03/2 | 10 | 74,8 | 81,3 | 12,2 | 8,5 |
+| 1.03/3 | 10 | 74,8 | 81,3 | 12,2 | 8,5 |
 | 1.04/1 | 10 | 70,1 | 70,0 | 10,2 | 7,9 |
-| 1.05/1 | 20 | 45,1 | 54,1 | 6,4 | 5,1 |
+| 1.05/1 | 20 | 45,1 | 54,2 | 6,4 | 5,1 |
 
 | Kondygnacja | Pętle | Rozdzielacze (sekcje) | Σṁ [kg/h] | ∆p_max [kPa] |
 |:---|---:|:---|---:|---:|
 | P0 | 7 | 1 × (7) | 599,9 | 20,2 |
-| P1 | 9 | 1 × (9) | 592,0 | 12,2 |
+| P1 | 9 | 1 × (9) | 592,2 | 12,2 |
 
 Rozdzielacze z przepływomierzami i zaworami termostatycznymi pod siłowniki; termostaty pokojowe w każdym pomieszczeniu (W-152); łazienki — dodatkowo grzejnik drabinkowy z grzałką (okres przejściowy) [ZAŁ].
 
@@ -186,7 +186,7 @@ Rozdzielacze z przepływomierzami i zaworami termostatycznymi pod siłowniki; te
 
 | Wielkość | Wartość |
 |:---|---:|
-| eta_H_g_SCOP | 4,800 |
+| eta_H_g_SCOP | 4,100 |
 | COP_cwu | 3,300 |
 | eta_H_e | 0,8900 |
 | eta_H_d | 0,9600 |

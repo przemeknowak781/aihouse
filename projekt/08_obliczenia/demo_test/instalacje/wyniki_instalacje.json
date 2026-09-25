@@ -27,8 +27,8 @@
   "Q_dachy_l_s": 4.73,
   "A_red_m2": 97.7,
   "V_zbiornika_m3": 5.0,
-  "niecka_A_m2": 9.0,
-  "niecka_V_min_m3": 2.66,
+  "niecka_A_m2": 8.0,
+  "niecka_V_min_m3": 2.73,
   "pokrycie_podlewania": 0.854
  },
  "drenaz": {
@@ -52,7 +52,7 @@
   "naczynie_cwu_l": 25,
   "L_A_granica_dB": 24.6,
   "do_EP": {
-   "eta_H_g_SCOP": 4.8,
+   "eta_H_g_SCOP": 4.1,
    "COP_cwu": 3.3,
    "eta_H_e": 0.89,
    "eta_H_d": 0.96,
@@ -129,7 +129,7 @@
    "dezynfekcja_kWh_a": 257.0
   },
   "ogrzewanie": {
-   "eta_H_g_SCOP": 4.8,
+   "eta_H_g_SCOP": 4.1,
    "COP_cwu": 3.3,
    "eta_H_e": 0.89,
    "eta_H_d": 0.96,

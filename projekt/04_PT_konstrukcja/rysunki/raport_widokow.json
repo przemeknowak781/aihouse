@@ -30,7 +30,7 @@
     {
       "nr": "PT-BO-01",
       "tytul": "RZUT FUNDAMENTÓW",
-      "format": "720×420",
+      "format": "710×420",
       "typ": [
         "k_fundamenty"
       ],
@@ -40,25 +40,25 @@
       ],
       "qa_kind": null,
       "wymiary_mm": [
-        720.0,
+        710.0,
         420.0
       ],
-      "pole_m2": 0.3024,
+      "pole_m2": 0.2982,
       "skladanie": {
         "zgiecia_pionowe": [
-          147.5,
-          275.0,
-          402.5,
-          530.0
+          145.0,
+          270.0,
+          395.0,
+          520.0
         ],
         "zgiecia_poziome": [
           297.0
         ],
         "pasy": [
-          147.5,
-          127.5,
-          127.5,
-          127.5,
+          145.0,
+          125.0,
+          125.0,
+          125.0,
           190.0
         ],
         "rzedy": [
@@ -73,37 +73,37 @@
         "ocena_poziom": "poprawne",
         "tabliczka_na_wierzchu": true,
         "uwagi": [
-          "najwęższy pas pośredni 128 mm",
+          "najwęższy pas pośredni 125 mm",
           "górny rząd 123 mm (niepełny)"
         ]
       },
       "uklad": {
-        "format": "720×420",
+        "format": "710×420",
         "wymiary_mm": [
-          720.0,
+          710.0,
           420.0
         ],
-        "pole_m2": 0.3024,
+        "pole_m2": 0.2982,
         "standardowy": false,
         "tryb": "ekonomiczny",
-        "koszt": 0.3364,
-        "wypelnienie_szac": 0.708,
+        "koszt": 0.3384,
+        "wypelnienie_szac": 0.713,
         "uklad_widokow": "wiersz",
         "skladanie": {
           "zgiecia_pionowe": [
-            147.5,
-            275.0,
-            402.5,
-            530.0
+            145.0,
+            270.0,
+            395.0,
+            520.0
           ],
           "zgiecia_poziome": [
             297.0
           ],
           "pasy": [
-            147.5,
-            127.5,
-            127.5,
-            127.5,
+            145.0,
+            125.0,
+            125.0,
+            125.0,
             190.0
           ],
           "rzedy": [
@@ -118,22 +118,22 @@
           "ocena_poziom": "poprawne",
           "tabliczka_na_wierzchu": true,
           "uwagi": [
-            "najwęższy pas pośredni 128 mm",
+            "najwęższy pas pośredni 125 mm",
             "górny rząd 123 mm (niepełny)"
           ]
         },
-        "czesci_uwag": 1,
+        "czesci_uwag": 2,
         "kolejnosc_czytania": true,
         "znaki_rezerwowane": true,
         "kandydaci": [
           {
-            "format": "720×420",
+            "format": "710×420",
             "wymiary_mm": [
-              720,
+              710,
               420
             ],
-            "koszt": 0.3364,
-            "pole_m2": 0.3024,
+            "koszt": 0.3384,
+            "pole_m2": 0.2982,
             "skladanie": "poprawne"
           },
           {
@@ -171,37 +171,46 @@
           [
             "tabliczka",
             [
-              530.0,
+              520.0,
               10.0,
-              710.0,
+              700.0,
               113.0
-            ]
-          ],
-          [
-            "róża i podziałka",
-            [
-              530.0,
-              118.0,
-              710.0,
-              148.8
             ]
           ],
           [
             "legenda_k",
             [
-              530.0,
-              361.9,
-              710.0,
+              130.8,
+              36.4,
+              310.8,
+              81.5
+            ]
+          ],
+          [
+            "uwagi[1–3]",
+            [
+              520.0,
+              362.5,
+              700.0,
               407.0
             ]
           ],
           [
-            "uwagi[1–7]",
+            "uwagi[4–7]",
             [
-              530.0,
-              287.2,
-              710.0,
-              356.9
+              520.0,
+              280.1,
+              700.0,
+              316.5
+            ]
+          ],
+          [
+            "róża i podziałka",
+            [
+              334.0,
+              50.7,
+              514.0,
+              81.5
             ]
           ]
         ],
@@ -225,15 +234,15 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 804,
-          "napisy": 299,
+          "prymitywy": 876,
+          "napisy": 306,
           "sprawdzone_lancuchy": 4
         }
       },
-      "czas_s": 131.9,
+      "czas_s": 514.3,
       "png_kontrola": {
         "px": [
-          4252,
+          4193,
           2481
         ],
         "dpi_eff": [
@@ -247,18 +256,18 @@
         "ok": true
       },
       "wypelnienie": {
-        "wypelnienie": 0.718,
-        "wypelnienie_rys": 0.698,
-        "wypelnienie_skl": 0.718,
-        "wypelnienie_kontur": 0.599,
-        "pole_arkusza_m2": 0.3024,
-        "pole_ramki_m2": 0.276,
+        "wypelnienie": 0.777,
+        "wypelnienie_rys": 0.761,
+        "wypelnienie_skl": 0.777,
+        "wypelnienie_kontur": 0.623,
+        "pole_arkusza_m2": 0.2982,
+        "pole_ramki_m2": 0.272,
         "pusty_prostokat_mm": [
-          194,
-          134
+          180,
+          166
         ],
         "przyciety_mm": [
-          712,
+          702,
           420
         ],
         "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
@@ -267,7 +276,7 @@
     {
       "nr": "PT-BO-02",
       "tytul": "PRZEKROJE CHARAKTERYSTYCZNE FUNDAMENTU",
-      "format": "250×594",
+      "format": "260×594",
       "typ": [
         "k_przekroj",
         "k_przekroj",
@@ -281,21 +290,21 @@
       ],
       "qa_kind": null,
       "wymiary_mm": [
-        250.0,
+        260.0,
         594.0
       ],
-      "pole_m2": 0.1485,
+      "pole_m2": 0.1544,
       "skladanie": {
         "zgiecia_pionowe": [
-          40.0,
-          60.0
+          45.0,
+          70.0
         ],
         "zgiecia_poziome": [
           297.0
         ],
         "pasy": [
-          40.0,
-          20.0,
+          45.0,
+          25.0,
           190.0
         ],
         "rzedy": [
@@ -310,32 +319,32 @@
         "ocena_poziom": "dobre",
         "tabliczka_na_wierzchu": true,
         "uwagi": [
-          "pas pośredni 20 mm (klasyczne A3: 105 mm)"
+          "pas pośredni 25 mm (klasyczne A3: 105 mm)"
         ]
       },
       "uklad": {
-        "format": "250×594",
+        "format": "260×594",
         "wymiary_mm": [
-          250.0,
+          260.0,
           594.0
         ],
-        "pole_m2": 0.1485,
+        "pole_m2": 0.1544,
         "standardowy": false,
         "tryb": "ekonomiczny",
-        "koszt": 0.1683,
-        "wypelnienie_szac": 0.539,
+        "koszt": 0.175,
+        "wypelnienie_szac": 0.519,
         "uklad_widokow": "kolumna",
         "skladanie": {
           "zgiecia_pionowe": [
-            40.0,
-            60.0
+            45.0,
+            70.0
           ],
           "zgiecia_poziome": [
             297.0
           ],
           "pasy": [
-            40.0,
-            20.0,
+            45.0,
+            25.0,
             190.0
           ],
           "rzedy": [
@@ -350,7 +359,7 @@
           "ocena_poziom": "dobre",
           "tabliczka_na_wierzchu": true,
           "uwagi": [
-            "pas pośredni 20 mm (klasyczne A3: 105 mm)"
+            "pas pośredni 25 mm (klasyczne A3: 105 mm)"
           ]
         },
         "czesci_uwag": 1,
@@ -358,13 +367,13 @@
         "znaki_rezerwowane": true,
         "kandydaci": [
           {
-            "format": "250×594",
+            "format": "260×594",
             "wymiary_mm": [
-              250,
+              260,
               594
             ],
-            "koszt": 0.1683,
-            "pole_m2": 0.1485,
+            "koszt": 0.175,
+            "pole_m2": 0.1544,
             "skladanie": "słabe"
           },
           {
@@ -388,23 +397,23 @@
             "skladanie": "dobre"
           },
           {
-            "format": "250×841",
+            "format": "260×841",
             "wymiary_mm": [
-              250,
+              260,
               841
             ],
-            "koszt": 0.2469,
-            "pole_m2": 0.2102,
+            "koszt": 0.2568,
+            "pole_m2": 0.2187,
             "skladanie": "słabe"
           },
           {
-            "format": "250×891",
+            "format": "260×891",
             "wymiary_mm": [
-              250,
+              260,
               891
             ],
-            "koszt": 0.2524,
-            "pole_m2": 0.2228,
+            "koszt": 0.2625,
+            "pole_m2": 0.2317,
             "skladanie": "słabe"
           }
         ],
@@ -412,28 +421,28 @@
           [
             "tabliczka",
             [
-              60.0,
+              70.0,
               10.0,
-              240.0,
+              250.0,
               113.0
-            ]
-          ],
-          [
-            "podziałka",
-            [
-              60.0,
-              118.0,
-              240.0,
-              131.0
             ]
           ],
           [
             "uwagi[1–5]",
             [
-              60.0,
-              178.8,
-              240.0,
-              210.0
+              70.0,
+              541.3,
+              250.0,
+              572.5
+            ]
+          ],
+          [
+            "podziałka",
+            [
+              70.0,
+              523.3,
+              250.0,
+              536.3
             ]
           ]
         ],
@@ -463,10 +472,10 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 7.6,
+      "czas_s": 7.1,
       "png_kontrola": {
         "px": [
-          1477,
+          1536,
           3508
         ],
         "dpi_eff": [
@@ -480,19 +489,19 @@
         "ok": true
       },
       "wypelnienie": {
-        "wypelnienie": 0.705,
-        "wypelnienie_rys": 0.654,
-        "wypelnienie_skl": 0.568,
-        "wypelnienie_kontur": 0.466,
-        "pole_arkusza_m2": 0.1485,
-        "pole_ramki_m2": 0.1263,
+        "wypelnienie": 0.625,
+        "wypelnienie_rys": 0.563,
+        "wypelnienie_skl": 0.526,
+        "wypelnienie_kontur": 0.435,
+        "pole_arkusza_m2": 0.1544,
+        "pole_ramki_m2": 0.132,
         "pusty_prostokat_mm": [
-          220,
-          50
+          230,
+          62
         ],
         "przyciety_mm": [
-          240,
-          586
+          251,
+          584
         ],
         "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
       }
@@ -551,8 +560,235 @@
         "pole_m2": 0.2495,
         "standardowy": true,
         "tryb": "ekonomiczny",
+        "koszt": 0.2621,
+        "wypelnienie_szac": 0.695,
+        "uklad_widokow": "wiersz",
+        "skladanie": {
+          "zgiecia_pionowe": [
+            210.0,
+            402.0
+          ],
+          "zgiecia_poziome": [
+            297.0
+          ],
+          "pasy": [
+            210.0,
+            192.0,
+            192.0
+          ],
+          "rzedy": [
+            297.0,
+            123.0
+          ],
+          "n_pasow": 3,
+          "n_rzedow": 2,
+          "warstwy": 6,
+          "ocena": "poprawne",
+          "ocena_pion": "dobre",
+          "ocena_poziom": "poprawne",
+          "tabliczka_na_wierzchu": true,
+          "uwagi": [
+            "górny rząd 123 mm (niepełny)"
+          ]
+        },
+        "czesci_uwag": 1,
+        "kolejnosc_czytania": false,
+        "znaki_rezerwowane": true,
+        "kandydaci": [
+          {
+            "format": "A2",
+            "wymiary_mm": [
+              594,
+              420
+            ],
+            "koszt": 0.2621,
+            "pole_m2": 0.2495,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "470×594",
+            "wymiary_mm": [
+              470,
+              594
+            ],
+            "koszt": 0.2991,
+            "pole_m2": 0.2792,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "470×841",
+            "wymiary_mm": [
+              470,
+              841
+            ],
+            "koszt": 0.4397,
+            "pole_m2": 0.3953,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "470×891",
+            "wymiary_mm": [
+              470,
+              891
+            ],
+            "koszt": 0.4486,
+            "pole_m2": 0.4188,
+            "skladanie": "poprawne"
+          }
+        ],
+        "bloki": [
+          [
+            "tabliczka",
+            [
+              404.0,
+              10.0,
+              584.0,
+              113.0
+            ]
+          ],
+          [
+            "legenda_k",
+            [
+              218.0,
+              82.7,
+              398.0,
+              117.2
+            ]
+          ],
+          [
+            "uwagi[1–12]",
+            [
+              32.0,
+              27.6,
+              212.0,
+              117.2
+            ]
+          ],
+          [
+            "róża i podziałka",
+            [
+              218.0,
+              46.9,
+              398.0,
+              77.7
+            ]
+          ]
+        ],
+        "kolizje": [],
+        "znaki_centrujace": {
+          "g": 10.0,
+          "d": 10.0,
+          "l": 10.0,
+          "p": 10.0
+        }
+      },
+      "pliki": {
+        "pdf": "projekt/04_PT_konstrukcja/rysunki/PT-BO-03_zbrojenie_dolne_plyty_fundamentowej.pdf",
+        "png": "projekt/04_PT_konstrukcja/rysunki/PT-BO-03_zbrojenie_dolne_plyty_fundamentowej.png",
+        "dxf": "projekt/04_PT_konstrukcja/rysunki/PT-BO-03_zbrojenie_dolne_plyty_fundamentowej.dxf"
+      },
+      "qa": {
+        "ok": true,
+        "errors": [],
+        "warnings": [
+          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
+        ],
+        "stats": {
+          "prymitywy": 691,
+          "napisy": 274,
+          "sprawdzone_lancuchy": 0
+        }
+      },
+      "czas_s": 6.9,
+      "png_kontrola": {
+        "px": [
+          3508,
+          2481
+        ],
+        "dpi_eff": [
+          150.0,
+          150.0
+        ],
+        "dpi_meta": [
+          150.01239999999999,
+          150.01239999999999
+        ],
+        "ok": true
+      },
+      "wypelnienie": {
+        "wypelnienie": 0.769,
+        "wypelnienie_rys": 0.748,
+        "wypelnienie_skl": 0.692,
+        "wypelnienie_kontur": 0.598,
+        "pole_arkusza_m2": 0.2495,
+        "pole_ramki_m2": 0.2256,
+        "pusty_prostokat_mm": [
+          126,
+          296
+        ],
+        "przyciety_mm": [
+          583,
+          412
+        ],
+        "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
+      }
+    },
+    {
+      "nr": "PT-BO-04",
+      "tytul": "ZBROJENIE GÓRNE PŁYTY FUNDAMENTOWEJ",
+      "format": "A2",
+      "typ": [
+        "k_zbrojenie"
+      ],
+      "skala": "1:50",
+      "widoki": [
+        "ZBROJENIE GÓRNE PŁYTY FUNDAMENTOWEJ PF1+PF2"
+      ],
+      "qa_kind": null,
+      "wymiary_mm": [
+        594.0,
+        420.0
+      ],
+      "pole_m2": 0.2495,
+      "skladanie": {
+        "zgiecia_pionowe": [
+          210.0,
+          402.0
+        ],
+        "zgiecia_poziome": [
+          297.0
+        ],
+        "pasy": [
+          210.0,
+          192.0,
+          192.0
+        ],
+        "rzedy": [
+          297.0,
+          123.0
+        ],
+        "n_pasow": 3,
+        "n_rzedow": 2,
+        "warstwy": 6,
+        "ocena": "poprawne",
+        "ocena_pion": "dobre",
+        "ocena_poziom": "poprawne",
+        "tabliczka_na_wierzchu": true,
+        "uwagi": [
+          "górny rząd 123 mm (niepełny)"
+        ]
+      },
+      "uklad": {
+        "format": "A2",
+        "wymiary_mm": [
+          594.0,
+          420.0
+        ],
+        "pole_m2": 0.2495,
+        "standardowy": true,
+        "tryb": "ekonomiczny",
         "koszt": 0.2595,
-        "wypelnienie_szac": 0.692,
+        "wypelnienie_szac": 0.69,
         "uklad_widokow": "wiersz",
         "skladanie": {
           "zgiecia_pionowe": [
@@ -674,9 +910,9 @@
         }
       },
       "pliki": {
-        "pdf": "projekt/04_PT_konstrukcja/rysunki/PT-BO-03_zbrojenie_dolne_plyty_fundamentowej.pdf",
-        "png": "projekt/04_PT_konstrukcja/rysunki/PT-BO-03_zbrojenie_dolne_plyty_fundamentowej.png",
-        "dxf": "projekt/04_PT_konstrukcja/rysunki/PT-BO-03_zbrojenie_dolne_plyty_fundamentowej.dxf"
+        "pdf": "projekt/04_PT_konstrukcja/rysunki/PT-BO-04_zbrojenie_gorne_plyty_fundamentowej.pdf",
+        "png": "projekt/04_PT_konstrukcja/rysunki/PT-BO-04_zbrojenie_gorne_plyty_fundamentowej.png",
+        "dxf": "projekt/04_PT_konstrukcja/rysunki/PT-BO-04_zbrojenie_gorne_plyty_fundamentowej.dxf"
       },
       "qa": {
         "ok": true,
@@ -685,12 +921,12 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 695,
-          "napisy": 270,
+          "prymitywy": 600,
+          "napisy": 248,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 7.0,
+      "czas_s": 3.3,
       "png_kontrola": {
         "px": [
           3508,
@@ -710,234 +946,7 @@
         "wypelnienie": 0.759,
         "wypelnienie_rys": 0.737,
         "wypelnienie_skl": 0.687,
-        "wypelnienie_kontur": 0.589,
-        "pole_arkusza_m2": 0.2495,
-        "pole_ramki_m2": 0.2256,
-        "pusty_prostokat_mm": [
-          126,
-          296
-        ],
-        "przyciety_mm": [
-          583,
-          412
-        ],
-        "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
-      }
-    },
-    {
-      "nr": "PT-BO-04",
-      "tytul": "ZBROJENIE GÓRNE PŁYTY FUNDAMENTOWEJ",
-      "format": "A2",
-      "typ": [
-        "k_zbrojenie"
-      ],
-      "skala": "1:50",
-      "widoki": [
-        "ZBROJENIE GÓRNE PŁYTY FUNDAMENTOWEJ PF1+PF2"
-      ],
-      "qa_kind": null,
-      "wymiary_mm": [
-        594.0,
-        420.0
-      ],
-      "pole_m2": 0.2495,
-      "skladanie": {
-        "zgiecia_pionowe": [
-          210.0,
-          402.0
-        ],
-        "zgiecia_poziome": [
-          297.0
-        ],
-        "pasy": [
-          210.0,
-          192.0,
-          192.0
-        ],
-        "rzedy": [
-          297.0,
-          123.0
-        ],
-        "n_pasow": 3,
-        "n_rzedow": 2,
-        "warstwy": 6,
-        "ocena": "poprawne",
-        "ocena_pion": "dobre",
-        "ocena_poziom": "poprawne",
-        "tabliczka_na_wierzchu": true,
-        "uwagi": [
-          "górny rząd 123 mm (niepełny)"
-        ]
-      },
-      "uklad": {
-        "format": "A2",
-        "wymiary_mm": [
-          594.0,
-          420.0
-        ],
-        "pole_m2": 0.2495,
-        "standardowy": true,
-        "tryb": "ekonomiczny",
-        "koszt": 0.2595,
-        "wypelnienie_szac": 0.685,
-        "uklad_widokow": "wiersz",
-        "skladanie": {
-          "zgiecia_pionowe": [
-            210.0,
-            402.0
-          ],
-          "zgiecia_poziome": [
-            297.0
-          ],
-          "pasy": [
-            210.0,
-            192.0,
-            192.0
-          ],
-          "rzedy": [
-            297.0,
-            123.0
-          ],
-          "n_pasow": 3,
-          "n_rzedow": 2,
-          "warstwy": 6,
-          "ocena": "poprawne",
-          "ocena_pion": "dobre",
-          "ocena_poziom": "poprawne",
-          "tabliczka_na_wierzchu": true,
-          "uwagi": [
-            "górny rząd 123 mm (niepełny)"
-          ]
-        },
-        "czesci_uwag": 1,
-        "kolejnosc_czytania": true,
-        "znaki_rezerwowane": true,
-        "kandydaci": [
-          {
-            "format": "A2",
-            "wymiary_mm": [
-              594,
-              420
-            ],
-            "koszt": 0.2595,
-            "pole_m2": 0.2495,
-            "skladanie": "poprawne"
-          },
-          {
-            "format": "470×594",
-            "wymiary_mm": [
-              470,
-              594
-            ],
-            "koszt": 0.2991,
-            "pole_m2": 0.2792,
-            "skladanie": "poprawne"
-          },
-          {
-            "format": "470×841",
-            "wymiary_mm": [
-              470,
-              841
-            ],
-            "koszt": 0.4397,
-            "pole_m2": 0.3953,
-            "skladanie": "poprawne"
-          },
-          {
-            "format": "470×891",
-            "wymiary_mm": [
-              470,
-              891
-            ],
-            "koszt": 0.4486,
-            "pole_m2": 0.4188,
-            "skladanie": "poprawne"
-          }
-        ],
-        "bloki": [
-          [
-            "tabliczka",
-            [
-              404.0,
-              10.0,
-              584.0,
-              113.0
-            ]
-          ],
-          [
-            "legenda_k",
-            [
-              32.0,
-              82.7,
-              212.0,
-              117.2
-            ]
-          ],
-          [
-            "uwagi[1–10]",
-            [
-              218.0,
-              40.2,
-              398.0,
-              117.2
-            ]
-          ],
-          [
-            "róża i podziałka",
-            [
-              32.0,
-              46.9,
-              212.0,
-              77.7
-            ]
-          ]
-        ],
-        "kolizje": [],
-        "znaki_centrujace": {
-          "g": 10.0,
-          "d": 10.0,
-          "l": 10.0,
-          "p": 10.0
-        }
-      },
-      "pliki": {
-        "pdf": "projekt/04_PT_konstrukcja/rysunki/PT-BO-04_zbrojenie_gorne_plyty_fundamentowej.pdf",
-        "png": "projekt/04_PT_konstrukcja/rysunki/PT-BO-04_zbrojenie_gorne_plyty_fundamentowej.png",
-        "dxf": "projekt/04_PT_konstrukcja/rysunki/PT-BO-04_zbrojenie_gorne_plyty_fundamentowej.dxf"
-      },
-      "qa": {
-        "ok": true,
-        "errors": [],
-        "warnings": [
-          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
-        ],
-        "stats": {
-          "prymitywy": 591,
-          "napisy": 244,
-          "sprawdzone_lancuchy": 0
-        }
-      },
-      "czas_s": 3.0,
-      "png_kontrola": {
-        "px": [
-          3508,
-          2481
-        ],
-        "dpi_eff": [
-          150.0,
-          150.0
-        ],
-        "dpi_meta": [
-          150.01239999999999,
-          150.01239999999999
-        ],
-        "ok": true
-      },
-      "wypelnienie": {
-        "wypelnienie": 0.748,
-        "wypelnienie_rys": 0.725,
-        "wypelnienie_skl": 0.681,
-        "wypelnienie_kontur": 0.583,
+        "wypelnienie_kontur": 0.586,
         "pole_arkusza_m2": 0.2495,
         "pole_ramki_m2": 0.2256,
         "pusty_prostokat_mm": [
@@ -1004,7 +1013,7 @@
         "standardowy": true,
         "tryb": "ekonomiczny",
         "koszt": 0.2495,
-        "wypelnienie_szac": 0.468,
+        "wypelnienie_szac": 0.46,
         "uklad_widokow": "wiersz",
         "skladanie": {
           "zgiecia_pionowe": [
@@ -1091,9 +1100,9 @@
             "uwagi[1–3]",
             [
               230.0,
-              187.5,
+              556.7,
               410.0,
-              211.8
+              581.0
             ]
           ]
         ],
@@ -1118,12 +1127,12 @@
           "brak legendy na arkuszu (R-LEGENDA) — wymagana dla oznaczeń spoza norm z zał. 2 rozp."
         ],
         "stats": {
-          "prymitywy": 1418,
-          "napisy": 1148,
+          "prymitywy": 1315,
+          "napisy": 1050,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 7.9,
+      "czas_s": 8.9,
       "png_kontrola": {
         "px": [
           2481,
@@ -1140,19 +1149,19 @@
         "ok": true
       },
       "wypelnienie": {
-        "wypelnienie": 0.746,
-        "wypelnienie_rys": 0.723,
-        "wypelnienie_skl": 0.441,
-        "wypelnienie_kontur": 0.455,
+        "wypelnienie": 0.681,
+        "wypelnienie_rys": 0.652,
+        "wypelnienie_skl": 0.438,
+        "wypelnienie_kontur": 0.442,
         "pole_arkusza_m2": 0.2495,
         "pole_ramki_m2": 0.2239,
         "pusty_prostokat_mm": [
-          210,
-          176
+          390,
+          82
         ],
         "przyciety_mm": [
           412,
-          587
+          594
         ],
         "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
       }
@@ -1368,7 +1377,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.8,
+      "czas_s": 2.9,
       "png_kontrola": {
         "px": [
           3071,
@@ -1591,7 +1600,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.0,
+      "czas_s": 2.3,
       "png_kontrola": {
         "px": [
           2481,
@@ -2288,7 +2297,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.8,
+      "czas_s": 3.9,
       "png_kontrola": {
         "px": [
           4075,
@@ -2494,7 +2503,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 5.0,
+      "czas_s": 4.9,
       "png_kontrola": {
         "px": [
           2481,
@@ -2940,7 +2949,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.4,
+      "czas_s": 3.3,
       "png_kontrola": {
         "px": [
           2363,
@@ -3152,7 +3161,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 4.7,
+      "czas_s": 5.0,
       "png_kontrola": {
         "px": [
           2658,
@@ -3375,7 +3384,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.3,
+      "czas_s": 2.5,
       "png_kontrola": {
         "px": [
           2363,
@@ -3808,7 +3817,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.6,
+      "czas_s": 3.3,
       "png_kontrola": {
         "px": [
           1359,
@@ -4266,7 +4275,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 1.5,
+      "czas_s": 1.4,
       "png_kontrola": {
         "px": [
           2776,
@@ -4478,7 +4487,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 5.7,
+      "czas_s": 5.2,
       "png_kontrola": {
         "px": [
           3544,
@@ -4692,7 +4701,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.7,
+      "czas_s": 3.8,
       "png_kontrola": {
         "px": [
           2953,
@@ -4886,9 +4895,9 @@
           [
             "uwagi[5–6]",
             [
-              253.5,
+              273.5,
               140.1,
-              433.5,
+              453.5,
               161.0
             ]
           ]
@@ -4919,7 +4928,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.0,
+      "czas_s": 3.1,
       "png_kontrola": {
         "px": [
           2776,
@@ -4936,8 +4945,8 @@
         "ok": true
       },
       "wypelnienie": {
-        "wypelnienie": 0.573,
-        "wypelnienie_rys": 0.539,
+        "wypelnienie": 0.576,
+        "wypelnienie_rys": 0.541,
         "wypelnienie_skl": 0.445,
         "wypelnienie_kontur": 0.375,
         "pole_arkusza_m2": 0.2792,
@@ -5156,7 +5165,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.2,
+      "czas_s": 2.3,
       "png_kontrola": {
         "px": [
           2422,
@@ -5616,7 +5625,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.6,
+      "czas_s": 2.7,
       "png_kontrola": {
         "px": [
           2363,
@@ -5877,14 +5886,264 @@
         ],
         "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
       }
+    },
+    {
+      "nr": "PT-BO-27",
+      "tytul": "ZBROJENIE SŁUPÓW ŻELBETOWYCH W MURZE",
+      "format": "870×297",
+      "typ": [
+        "k_zbrojenie"
+      ],
+      "skala": "1:25",
+      "widoki": [
+        "ZBROJENIE SŁUPÓW ŻELBETOWYCH W MURZE"
+      ],
+      "qa_kind": null,
+      "wymiary_mm": [
+        870.0,
+        297.0
+      ],
+      "pole_m2": 0.2584,
+      "skladanie": {
+        "zgiecia_pionowe": [
+          210.0,
+          350.0,
+          490.0,
+          680.0
+        ],
+        "zgiecia_poziome": [],
+        "pasy": [
+          210.0,
+          140.0,
+          140.0,
+          190.0,
+          190.0
+        ],
+        "rzedy": [
+          297.0
+        ],
+        "n_pasow": 5,
+        "n_rzedow": 1,
+        "warstwy": 5,
+        "ocena": "poprawne",
+        "ocena_pion": "poprawne",
+        "ocena_poziom": "dobre",
+        "tabliczka_na_wierzchu": true,
+        "uwagi": [
+          "najwęższy pas pośredni 140 mm",
+          "pasy nierówne (rozrzut 50 mm)"
+        ]
+      },
+      "uklad": {
+        "format": "870×297",
+        "wymiary_mm": [
+          870.0,
+          297.0
+        ],
+        "pole_m2": 0.2584,
+        "standardowy": false,
+        "tryb": "ekonomiczny",
+        "koszt": 0.2796,
+        "wypelnienie_szac": 0.715,
+        "uklad_widokow": "wiersz",
+        "skladanie": {
+          "zgiecia_pionowe": [
+            210.0,
+            350.0,
+            490.0,
+            680.0
+          ],
+          "zgiecia_poziome": [],
+          "pasy": [
+            210.0,
+            140.0,
+            140.0,
+            190.0,
+            190.0
+          ],
+          "rzedy": [
+            297.0
+          ],
+          "n_pasow": 5,
+          "n_rzedow": 1,
+          "warstwy": 5,
+          "ocena": "poprawne",
+          "ocena_pion": "poprawne",
+          "ocena_poziom": "dobre",
+          "tabliczka_na_wierzchu": true,
+          "uwagi": [
+            "najwęższy pas pośredni 140 mm",
+            "pasy nierówne (rozrzut 50 mm)"
+          ]
+        },
+        "czesci_uwag": 1,
+        "kolejnosc_czytania": false,
+        "znaki_rezerwowane": false,
+        "kandydaci": [
+          {
+            "format": "870×297",
+            "wymiary_mm": [
+              870,
+              297
+            ],
+            "koszt": 0.2796,
+            "pole_m2": 0.2584,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "700×420",
+            "wymiary_mm": [
+              700,
+              420
+            ],
+            "koszt": 0.327,
+            "pole_m2": 0.294,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "700×594",
+            "wymiary_mm": [
+              700,
+              594
+            ],
+            "koszt": 0.4454,
+            "pole_m2": 0.4158,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "700×841",
+            "wymiary_mm": [
+              700,
+              841
+            ],
+            "koszt": 0.6549,
+            "pole_m2": 0.5887,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "700×891",
+            "wymiary_mm": [
+              700,
+              891
+            ],
+            "koszt": 0.6681,
+            "pole_m2": 0.6237,
+            "skladanie": "poprawne"
+          }
+        ],
+        "bloki": [
+          [
+            "tabliczka",
+            [
+              680.0,
+              10.0,
+              860.0,
+              113.0
+            ]
+          ],
+          [
+            "podziałka",
+            [
+              680.0,
+              118.0,
+              860.0,
+              131.0
+            ]
+          ],
+          [
+            "legenda_k",
+            [
+              680.0,
+              260.1,
+              860.0,
+              284.0
+            ]
+          ],
+          [
+            "zestawienie",
+            [
+              680.0,
+              146.7,
+              860.0,
+              221.3
+            ]
+          ],
+          [
+            "uwagi[1–5]",
+            [
+              494.0,
+              32.3,
+              674.0,
+              66.3
+            ]
+          ]
+        ],
+        "kolizje": [],
+        "znaki_centrujace": {
+          "g": 10.0,
+          "d": 10.0,
+          "l": 10.0,
+          "p": 7.2
+        }
+      },
+      "pliki": {
+        "pdf": "projekt/04_PT_konstrukcja/rysunki/PT-BO-27_zbrojenie_slupow_zelbetowych_w_murze.pdf",
+        "png": "projekt/04_PT_konstrukcja/rysunki/PT-BO-27_zbrojenie_slupow_zelbetowych_w_murze.png",
+        "dxf": "projekt/04_PT_konstrukcja/rysunki/PT-BO-27_zbrojenie_slupow_zelbetowych_w_murze.dxf"
+      },
+      "qa": {
+        "ok": true,
+        "errors": [],
+        "warnings": [
+          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
+        ],
+        "stats": {
+          "prymitywy": 2514,
+          "napisy": 310,
+          "sprawdzone_lancuchy": 0
+        }
+      },
+      "czas_s": 2.6,
+      "png_kontrola": {
+        "px": [
+          5138,
+          1754
+        ],
+        "dpi_eff": [
+          150.0,
+          150.0
+        ],
+        "dpi_meta": [
+          150.01239999999999,
+          150.01239999999999
+        ],
+        "ok": true
+      },
+      "wypelnienie": {
+        "wypelnienie": 0.46,
+        "wypelnienie_rys": 0.413,
+        "wypelnienie_skl": 0.431,
+        "wypelnienie_kontur": 0.317,
+        "pole_arkusza_m2": 0.2584,
+        "pole_ramki_m2": 0.2327,
+        "pusty_prostokat_mm": [
+          472,
+          58
+        ],
+        "przyciety_mm": [
+          862,
+          297
+        ],
+        "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
+      }
     }
   ],
   "problemy": [
-    "PT-BO-01 RZUT FUNDAMENTÓW: kolizje napisów: 4",
-    "PT-BO-03 ZBROJENIE DOLNE PŁYTY FUNDAMENTOWEJ PF1+PF2: kolizje napisów: 12",
-    "PT-BO-04 ZBROJENIE GÓRNE PŁYTY FUNDAMENTOWEJ PF1+PF2: kolizje napisów: 4",
-    "PT-BO-05 ZBROJENIE DOLNE PŁYTY FUNDAMENTOWEJ PF1+PF2: kolizje napisów: 12",
-    "PT-BO-05 ZBROJENIE GÓRNE PŁYTY FUNDAMENTOWEJ PF1+PF2: kolizje napisów: 4",
+    "PT-BO-01 RZUT FUNDAMENTÓW: kolizje napisów: 11",
+    "PT-BO-03 ZBROJENIE DOLNE PŁYTY FUNDAMENTOWEJ PF1+PF2: kolizje napisów: 8",
+    "PT-BO-04 ZBROJENIE GÓRNE PŁYTY FUNDAMENTOWEJ PF1+PF2: kolizje napisów: 3",
+    "PT-BO-05 ZBROJENIE DOLNE PŁYTY FUNDAMENTOWEJ PF1+PF2: kolizje napisów: 8",
+    "PT-BO-05 ZBROJENIE GÓRNE PŁYTY FUNDAMENTOWEJ PF1+PF2: kolizje napisów: 3",
     "PT-BO-07 RZUT KONSTRUKCJI — PŁYTY ST2, ST2Z, D2, D3, PL-2: kolizje napisów: 1",
     "PT-BO-08 RZUT KONSTRUKCJI — PŁYTY D1, PL-3: kolizje napisów: 3",
     "PT-BO-09 ZBROJENIE DOLNE PŁYT ST1, D4, PL-E, PL-DA: kolizje napisów: 1",
@@ -5903,16 +6162,16 @@
   ],
   "tom": "projekt/04_PT_konstrukcja/rysunki/tom_PT-BO.pdf",
   "papier": {
-    "arkuszy": 26,
-    "pole_m2": 6.365,
-    "a4_ekw": 102.1,
-    "warstwy_a4": 168,
+    "arkuszy": 27,
+    "pole_m2": 6.625,
+    "a4_ekw": 106.2,
+    "warstwy_a4": 173,
     "skladanie": {
       "dobre": 10,
-      "poprawne": 13,
+      "poprawne": 14,
       "słabe": 3
     },
-    "wypelnienie_wazone": 0.653
+    "wypelnienie_wazone": 0.645
   },
-  "czas_s": 254.9
+  "czas_s": 646.8
 }
