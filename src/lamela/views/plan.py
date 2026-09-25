@@ -383,12 +383,17 @@ class PlanBuilder:
 
     # ------------------------------------------------------------------ schody
     def stairs(self):
+        """Schody kondygnacji: wszystkie biegi „z” i „na” tę kondygnację razem — widok z góry z zasłanianiem
+        (stopnie wyższe zasłaniają niższe, płyta stropu zasłania schody z kondygnacji niższej), część biegu nad
+        płaszczyzną cięcia kreskowo tylko tam, gdzie pod nią nie widać biegu przychodzącego (schody nad schodami)."""
         m, vp, k = self.m, self.vp, self.vp.k
+        from ..draft.dims import arrowhead
+        from ..draft.geom import readable_angle
+        items = []
         for sch in m.schody():
             zk, nk = str(sch.get("z_kond")), str(sch.get("na_kond"))
             if self.kid not in (zk, nk):
                 continue
-            starting = self.kid == zk
             try:
                 z = m.kondygnacja(zk).rzedna
             except KeyError:
@@ -403,57 +408,80 @@ class PlanBuilder:
                 n = perp(d)
                 b = float(bg.get("szer", 1.0))
                 ns = int(bg.get("stopni", 0))
-                fl = dict(S=Sx, d=d, n=n, b=b, ns=ns, first=no + 1)
                 for j in range(max(ns - 1, 0)):
                     no += 1
                     a0, a1 = Sx + d * j * g, Sx + d * (j + 1) * g
                     poly = Polygon([tuple(a0 - n * b / 2), tuple(a1 - n * b / 2), tuple(a1 + n * b / 2),
                                     tuple(a0 + n * b / 2)])
                     steps.append(dict(no=no, poly=poly, top=z + (j + 1) * h, fl=len(flights), j=j, a0=a0, a1=a1))
-                fl["last"] = no
-                fl["E"] = Sx + d * max(ns - 1, 0) * g
-                flights.append(fl)
+                flights.append(dict(S=Sx, d=d, n=n, b=b, ns=ns, E=Sx + d * max(ns - 1, 0) * g))
                 z += ns * h
             landings = [(Polygon(sp["obrys"]), float(sp["rzedna"])) for sp in sch.get("spoczniki") or []
                         if sp.get("obrys")]
-            # zasłonięcie: przy schodach z niższej kondygnacji — płyta stropu z otworem + ściany przecięte
-            occ = self.cut_region
-            if not starting:
-                slabs = [Polygon(st["obrys"], st.get("otwory") or []) for st in m.stropy()
-                         if self.k_prev is not None and str(st.get("nad")) == self.k_prev.id]
-                if slabs:
-                    occ = unary_union([occ] + slabs)
-            occb = occ.buffer(1e-4)
-            n0 = len(vp.prims)
-
-            def state(top):
-                if not starting:
-                    return "below"
-                return "below" if top <= self.z_cut + 1e-6 else "above"
-
-            vis_steps = []
+            starting = self.kid == zk
             for st in steps:
-                stt = state(st["top"])
-                st["state"] = stt
-                ring = LineString(list(st["poly"].exterior.coords))
-                vis = ring.difference(occb) if stt == "below" else ring.difference(self.cut_region.buffer(1e-4))
-                if vis.is_empty:
-                    st["visible"] = False
+                st["state"] = "below" if (not starting or st["top"] <= self.z_cut + 1e-6) else "above"
+            lands = [dict(poly=pg, rz=rz, state="below" if (not starting or rz <= self.z_cut + 1e-6) else "above")
+                     for pg, rz in landings]
+            items.append(dict(sch=sch, starting=starting, steps=steps, flights=flights, lands=lands,
+                              landings=landings, g=g, h=h))
+        if not items:
+            return
+        n0 = len(vp.prims)
+        arriving = [it for it in items if not it["starting"]]
+        slab = Polygon()
+        z_slab = None
+        if arriving and self.k_prev is not None:
+            sl = [st for st in m.stropy() if str(st.get("nad")) == self.k_prev.id]
+            if sl:
+                slab = unary_union([Polygon(st["obrys"], st.get("otwory") or []) for st in sl])
+                z_slab = max(float(st["wierzch"]) for st in sl)
+        # --- widok z góry: stopnie, spoczniki, płyta — od najwyższych
+        faces = []
+        for it in items:
+            for st in it["steps"]:
+                if st["state"] == "below":
+                    faces.append((st["top"], st["poly"], st))
+            for ld in it["lands"]:
+                if ld["state"] == "below":
+                    faces.append((ld["rz"], ld["poly"], ld))
+        if z_slab is not None and not slab.is_empty:
+            faces.append((z_slab, slab, None))
+        faces.sort(key=lambda f: -f[0])
+        occ = self.cut_region
+        for z, poly, ref in faces:
+            if ref is not None:
+                vis_line = poly.boundary.difference(occ.buffer(1e-4))
+                draw_lines(vp, vis_line, "A-SCHODY", pen="cienka")
+                ref["vis"] = poly.difference(occ)
+            occ = occ.union(poly)
+        occ_final = occ
+        below_vis = unary_union([st["vis"] for it in items for st in it["steps"] + it["lands"]
+                                 if st.get("vis") is not None and not st["vis"].is_empty] or [Polygon()])
+        arr_foot = unary_union([st["poly"] for it in arriving for st in it["steps"]] +
+                               [pg for it in arriving for pg, _ in it["landings"]]) if arriving else Polygon()
+        # --- część nad płaszczyzną cięcia (kreskowo), linia cięcia, numeracja, strzałki
+        for it in items:
+            g, flights, steps = it["g"], it["flights"], it["steps"]
+            hide = self.cut_region.union(arr_foot.buffer(1e-3)) if it["starting"] and arriving else self.cut_region
+            for st in steps:
+                if st["state"] != "above":
                     continue
-                st["visible"] = st["poly"].difference(occb).area > 0.02 * st["poly"].area
-                draw_lines(vp, vis, "A-SCHODY", pen="cienka", lt="KRESKOWA" if stt == "above" else None)
-                if st["visible"]:
-                    vis_steps.append(st)
-            for pg, rz in landings:
-                stt = "above" if (starting and rz > self.z_cut) else "below"
-                ring = LineString(list(pg.exterior.coords))
-                vis = ring.difference(occb if stt == "below" else self.cut_region.buffer(1e-4))
-                draw_lines(vp, vis, "A-SCHODY", pen="cienka", lt="KRESKOWA" if stt == "above" else None)
-                if pg.difference(occb).area > 0.05:
-                    c = label_point(pg.difference(occb) if stt == "below" else pg)
-                    self._later_levels.append((c, rz, pg))
-            # linia cięcia (zygzak) w biegu, w którym stopnie przechodzą nad płaszczyznę
-            if starting:
+                vis_line = st["poly"].boundary.difference(hide.buffer(1e-4))
+                if not vis_line.is_empty:
+                    draw_lines(vp, vis_line, "A-SCHODY", pen="cienka", lt="KRESKOWA")
+                    st["vis"] = st["poly"].difference(hide)
+            for ld in it["lands"]:
+                if ld["state"] == "above":
+                    vis_line = ld["poly"].boundary.difference(hide.buffer(1e-4))
+                    if not vis_line.is_empty:
+                        draw_lines(vp, vis_line, "A-SCHODY", pen="cienka", lt="KRESKOWA")
+                        ld["vis"] = ld["poly"].difference(hide)
+            for ld in it["lands"]:
+                va = ld.get("vis")
+                if va is not None and va.area > 0.05:
+                    self._later_levels.append((label_point(va), ld["rz"], ld["poly"]))
+            if it["starting"]:
                 for fi, fl in enumerate(flights):
                     fs = [s for s in steps if s["fl"] == fi]
                     tr = [i for i in range(1, len(fs)) if fs[i - 1]["state"] == "below" and fs[i]["state"] == "above"]
@@ -464,67 +492,65 @@ class PlanBuilder:
                     cs_ = (st["j"] + 0.5) * g
                     p0 = fl["S"] - Wv + fl["d"] * (cs_ - g * 0.55)
                     p1 = fl["S"] + Wv + fl["d"] * (cs_ + g * 0.55)
-                    mm = (p0 + p1) / 2
+                    mm_ = (p0 + p1) / 2
                     dd = unit(p1 - p0)
                     zz = 1.2 * k
-                    q = [p0 - dd * 1.0 * k, mm - dd * zz, mm + perp(dd) * zz * 1.3, mm - perp(dd) * zz * 1.3,
-                         mm + dd * zz, p1 + dd * 1.0 * k]
+                    q = [p0 - dd * 1.0 * k, mm_ - dd * zz, mm_ + perp(dd) * zz * 1.3, mm_ - perp(dd) * zz * 1.3,
+                         mm_ + dd * zz, p1 + dd * 1.0 * k]
                     vp.polyline(q, "A-SCHODY", pen="cienka")
-            # numeracja stopni
             for st in steps:
-                if not st.get("visible", False) and st["state"] == "below":
+                va = st.get("vis")
+                if va is None or va.area < 0.25 * st["poly"].area:
                     continue
                 fl = flights[st["fl"]]
                 c = (st["a0"] + st["a1"]) / 2 + fl["n"] * fl["b"] * 0.30
-                if st["state"] == "below" and not Point(c).within(st["poly"].difference(occb)):
+                if not va.buffer(-0.02).contains(Point(c)):
                     continue
                 ang = math.degrees(math.atan2(fl["d"][1], fl["d"][0]))
-                from ..draft.geom import readable_angle
                 vp.text(c, str(st["no"]), 1.8, readable_angle(ang - 90.0), "center", "middle", layer="A-SCHODY")
-            # strzałka kierunku (kółko — pierwszy stopień, grot — koniec biegu / linia cięcia)
+            # strzałka: kółko przy pierwszym stopniu, grot na końcu biegu (lub przy linii cięcia)
             path = []
             for fi, fl in enumerate(flights):
                 a = fl["S"] + fl["d"] * g * 0.5
-                e = fl["E"]
                 if fi > 0:
                     prev = flights[fi - 1]
-                    lc = self._landing_between(landings, prev["E"], fl["S"])
+                    lc = self._landing_between(it["landings"], prev["E"], fl["S"])
                     if lc is not None:
                         m1 = prev["E"] + prev["d"] * float((lc - prev["E"]) @ prev["d"])
                         m2 = fl["S"] - fl["d"] * float((fl["S"] - lc) @ fl["d"])
                         path += [m1, m2]
-                path += [a if fi == 0 else fl["S"], e]
-            if starting:
-                cut_at = None
-                for st in steps:
-                    if st["state"] == "above":
-                        cut_at = st
-                        break
+                path += [a if fi == 0 else fl["S"], fl["E"]]
+            if it["starting"]:
+                cut_at = next((st for st in steps if st["state"] == "above"), None)
                 if cut_at is not None:
                     fl = flights[cut_at["fl"]]
-                    endp = fl["S"] + fl["d"] * (cut_at["j"] + 0.35) * g
-                    path = self._truncate_path(path, endp)
+                    path = self._truncate_path(path, fl["S"] + fl["d"] * (cut_at["j"] + 0.35) * g)
             if len(path) >= 2:
                 pl = LineString([tuple(p) for p in path])
-                vis = pl if starting else pl.difference(occb)
+                if it["starting"]:
+                    vis = pl.difference(self.cut_region.buffer(1e-4))
+                else:
+                    upper = unary_union([s["poly"] for o in items if o["starting"] for s in o["steps"]
+                                         if s["state"] == "below"] or [Polygon()])
+                    vis = pl.difference(unary_union([self.cut_region, slab, upper]).buffer(1e-4))
                 segs = [a for a in lines_of(vis) if len(a) >= 2]
                 for a in segs:
                     vp.polyline(a, "A-SCHODY", pen="cienka")
-                first_vis = Point(path[0]).distance(occb) > 1e-3 or starting
-                if first_vis:
+                if segs and Point(tuple(path[0])).distance(LineString(segs[0])) < 1e-3:
                     vp.fill(Point(tuple(path[0])).buffer(0.9 * k, 16), "A-SCHODY", "#ffffff", z=19.5)
                     vp.circle(path[0], 0.9 * k, "A-SCHODY", pen="cienka", z=19.6)
                 if segs:
                     last = segs[-1]
-                    from ..draft.dims import arrowhead
                     arrowhead(vp, last[-1], last[-1] - last[-2], 2.4, 12, True, "A-SCHODY")
-                self._stair_label.append((sch, path, starting))
-            self.placer.add_prims(vp.prims[n0:], w_text=1.0, w_line=0.6)
-            foot = unary_union([st["poly"] for st in steps] + [pg for pg, _ in landings])
-            vis_foot = foot.difference(occb) if not starting else foot
-            if not vis_foot.is_empty:
-                self.placer.add(vis_foot, "area", 0.6)
-                self.stair_areas.append(vis_foot)
+                if it["starting"] or not any(o["starting"] for o in items):
+                    self._stair_label.append((it["sch"], [np.asarray(p) for p in (segs[0] if segs else path)],
+                                              it["starting"]))
+        self.placer.add_prims(vp.prims[n0:], w_text=1.0, w_line=0.6)
+        vis_foot = unary_union([below_vis] + [st["vis"] for it in items for st in it["steps"] + it["lands"]
+                                              if st.get("vis") is not None])
+        if not vis_foot.is_empty:
+            self.placer.add(vis_foot, "area", 0.6)
+            self.stair_areas.append(vis_foot)
 
     @staticmethod
     def _landing_between(landings, e, s):

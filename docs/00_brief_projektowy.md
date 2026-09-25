@@ -113,3 +113,18 @@ Uchwała nr XII/123/2024 Rady Gminy Przykładowo z dnia 21.03.2024 r. — teren 
 2. Każde stwierdzenie normatywne w części opisowej ma podane źródło (akt prawny z Dz.U. i paragrafem / norma z numerem i rokiem).
 3. Język dokumentacji: polski. Jednostki SI, wymiary na rysunkach w cm / rzędne w m (zgodnie z PN-B-01029).
 4. Dane osobowe projektantów, numery uprawnień, podpisy — **pola do uzupełnienia** (nie wolno fabrykować danych rzeczywistych osób).
+
+## 8. Korekty briefu po weryfikacji rejestru wymagań (2026-09-25) — NADRZĘDNE wobec sekcji 2–6
+Szczegóły i podstawy: `docs/10_podstawy_prawne/00_rejestr_wymagan.md` (sekcja A — korekty K-1…K-10, sprzeczności S-1…S-13).
+* Podstawa techniczna: **WT w brzmieniu obowiązującym do 19.09.2026** (t.j. Dz.U. 2022 poz. 1225 ze zm.) stosowane na podstawie **art. 102a PB** po złożeniu oświadczenia Inwestora (wniosek najpóźniej do 19.03.2028).
+* Kategoria geotechniczna: **II** (nie I) — opinia + dokumentacja badań podłoża + projekt geotechniczny.
+* Śnieg: **strefa 2, s_k = 0,9 kN/m²**; sytuacja wyjątkowa B2 (zaspy przy uskokach brył). Wiatr: q_p = 0,71 kN/m².
+* PV ≤ 6,5 kWp — podstawa: **art. 29 ust. 4 pkt 3 lit. c PB** (art. 56 ust. 1a uchylony).
+* A0max już nie obowiązuje; obowiązuje g_c ≤ 0,35 dla okien (poza N) — osłony zewnętrzne.
+* Balustrady w budynku jednorodzinnym: wysokość wg WT § 298 (0,90 m tam, gdzie dopuszczone — patrz rejestr).
+* „Pokój ≥ 8/16 m²” — wymóg programowy Inwestora (nie WT dla domu jednorodzinnego).
+* Ochrona ppoż.: zwolnienie z § 212/216 wg § 213 (dom jednorodzinny ≤ 3 kondygnacji); PWP projektujemy (kubatura > 1000 m³, § 183 WT) mimo zwolnienia w rozp. o ochronie ppoż.
+* Rzędne na rysunkach arch.-bud.: 3 miejsca po przecinku (PN-B-01025); PZT: 2 miejsca, wymiary 0,01 m.
+* Wody opadowe (wariant bazowy): szczelny zbiornik ≤ 5 m³ z przelewem do niecki/ogrodu (rozsączanie skrzynkowe tylko po stanowisku PGW WP — ryzyko pozwolenia wodnoprawnego).
+* EP liczone na **deklarowanych parametrach urządzeń** (wartości domyślne metodologii dają EP ≈ 99 > 70).
+* Beton: specyfikacja wg PN-EN 206+A2 / PN-B-06265 jako wiedza techniczna (normy wycofane, zastępcze PN-EN 206-1/-2:2026-09 tylko po angielsku) — potwierdzić z wytwórnią.

@@ -315,3 +315,162 @@ ppoz:
 akustyka:
   norma_poziomy_w_pomieszczeniach: {wartosc: "PN-B-02151-2:2018-01", jedn: "-", typ: info, id: W-230, status: zweryfikowane, zrodlo: "WT §326 ust. 1, zał. 1 (Dz.U. 2023 poz. 2442)"}
   norma_izolacyjnosc_przegrod: {wartosc: "PN-B-02151-3:2015-10", jedn: "-", typ: info, id: W-230, status: zweryfikowane, zrodlo: "WT §326 ust. 2, zał. 1"}
+
+energia:
+  EP_max: {wartosc: 70, jedn: kWh/(m2a), typ: max, id: W-240, status: zweryfikowane, zrodlo: "WT §329 ust. 1 (EP_H+W, budynek mieszkalny jednorodzinny, od 31.12.2020)"}
+  dEP_C_wspolczynnik: {wartosc: 5, jedn: kWh/(m2a), typ: info, id: W-240, status: zweryfikowane, zrodlo: "WT §329 ust. 2 (ΔEP_C = 5·A_f,C/A_f tylko przy instalacji chłodzenia)"}
+  dEP_L: {wartosc: 0, jedn: kWh/(m2a), typ: rowne, id: W-240, status: zweryfikowane, zrodlo: "WT §329 ust. 2"}
+  w_el_siec: {wartosc: 2.50, jedn: "-", typ: rowne, id: W-241, status: zweryfikowane, zrodlo: "metodologia Dz.U. 2015 poz. 376, tab. 1 (brzmienie Dz.U. 2023 poz. 697)"}
+  w_PV_autokonsumpcja: {wartosc: 0.00, jedn: "-", typ: rowne, id: W-241, status: zweryfikowane, zrodlo: "metodologia tab. 1 lp. 6; energia oddana do sieci nie obniża EP"}
+  Q_W_nd: {wartosc: 24.1, jedn: kWh/(m2a), typ: info, id: W-242, status: zweryfikowane, zrodlo: "metodologia wzór (61), tab. 27 (V_Wi 1,40; k_R 0,90; 55/10 °C)"}
+  V_Wi: {wartosc: 1.40, jedn: dm3/(m2*doba), typ: info, id: W-242, status: zweryfikowane, zrodlo: "metodologia tab. 27"}
+  k_R: {wartosc: 0.90, jedn: "-", typ: info, id: W-242, status: zweryfikowane, zrodlo: "metodologia tab. 27"}
+  q_int: {wartosc: 6.8, jedn: W/m2, typ: info, id: W-242, status: zweryfikowane, zrodlo: "metodologia tab. 26"}
+  eta_Hg_PC_domyslna_35_28: {wartosc: 3.00, jedn: "-", typ: info, id: W-242, status: zweryfikowane, zrodlo: "metodologia tab. 2 lp. 21 (55/45 °C: 2,60)"}
+  eta_Wg_PC_domyslna: {wartosc: 2.60, jedn: "-", typ: info, id: W-242, status: zweryfikowane, zrodlo: "metodologia tab. 9 lp. 11"}
+  eta_He_podlogowe_regulacja: {wartosc: 0.89, jedn: "-", typ: info, id: W-242, status: zweryfikowane, zrodlo: "metodologia tab. 3 lp. 6b"}
+  eta_Hd_przestrzen_ogrzewana: {wartosc: 0.96, jedn: "-", typ: info, id: W-242, status: zweryfikowane, zrodlo: "metodologia tab. 6"}
+  eta_Wd_bez_cyrkulacji: {wartosc: 0.60, jedn: "-", typ: info, id: W-242, status: zweryfikowane, zrodlo: "metodologia tab. 12 lp. 3.1"}
+  eta_Wd_cyrkulacja_czasowa: {wartosc: 0.80, jedn: "-", typ: info, id: W-242, status: zweryfikowane, zrodlo: "metodologia tab. 12 lp. 6.1a"}
+  eta_Ws_zasobnik_po_2005: {wartosc: 0.85, jedn: "-", typ: info, id: W-242, status: zweryfikowane, zrodlo: "metodologia tab. 14"}
+  U_max_sciana: {wartosc: 0.20, jedn: W/(m2K), typ: max, id: W-243, status: zweryfikowane, zrodlo: "WT zał. 2 pkt 1.1 lp. 1 (t_i ≥ 16 °C)"}
+  U_max_stropodach: {wartosc: 0.15, jedn: W/(m2K), typ: max, id: W-243, status: zweryfikowane, zrodlo: "WT zał. 2 pkt 1.1 lp. 5"}
+  U_max_strop_nad_powietrzem_zewn: {wartosc: 0.15, jedn: W/(m2K), typ: max, id: W-243, status: interpretacja, zrodlo: "WT zał. 2 pkt 1.1 lp. 5 („nad przejazdami”) — spód wspornika P2"}
+  U_max_podloga_na_gruncie: {wartosc: 0.30, jedn: W/(m2K), typ: max, id: W-243, status: zweryfikowane, zrodlo: "WT zał. 2 pkt 1.1 lp. 6"}
+  U_max_strop_nad_nieogrzewanym: {wartosc: 0.25, jedn: W/(m2K), typ: max, id: W-243, status: zweryfikowane, zrodlo: "WT zał. 2 pkt 1.1 lp. 7, 8c"}
+  U_max_sciana_ogrzewane_nieogrzewane: {wartosc: 0.30, jedn: W/(m2K), typ: max, id: W-243, status: zweryfikowane, zrodlo: "WT zał. 2 pkt 1.1 lp. 2 (ściana dom–garaż)"}
+  U_max_okno: {wartosc: 0.9, jedn: W/(m2K), typ: max, id: W-244, status: zweryfikowane, zrodlo: "WT zał. 2 pkt 1.2 (okna, drzwi balkonowe, przeszklenia stałe)"}
+  U_max_okno_polaciowe: {wartosc: 1.1, jedn: W/(m2K), typ: max, id: W-244, status: zweryfikowane, zrodlo: "WT zał. 2 pkt 1.2 (klapa dachowa)"}
+  U_max_drzwi_zewn: {wartosc: 1.3, jedn: W/(m2K), typ: max, id: W-244, status: zweryfikowane, zrodlo: "WT zał. 2 pkt 1.2 (także drzwi garaż–dom)"}
+  U_cel_sciana: {wartosc: 0.15, jedn: W/(m2K), typ: max, id: W-245, status: zalozenie, zrodlo: "R6 3.2 (sprzeczność S-3: R3 0,17)"}
+  U_cel_stropodach: {wartosc: 0.12, jedn: W/(m2K), typ: max, id: W-245, status: zalozenie, zrodlo: "R6 3.2; R3 3.6"}
+  U_cel_podloga: {wartosc: 0.20, jedn: W/(m2K), typ: max, id: W-245, status: zalozenie, zrodlo: "R6 3.2 (R3: 0,25)"}
+  U_cel_okno: {wartosc: 0.80, jedn: W/(m2K), typ: max, id: W-245, status: zalozenie, zrodlo: "R6 3.2; R3 3.6"}
+  U_cel_drzwi: {wartosc: 1.10, jedn: W/(m2K), typ: max, id: W-245, status: zalozenie, zrodlo: "R6 3.2; R3 3.6"}
+  U_cel_sciana_dom_garaz: {wartosc: 0.25, jedn: W/(m2K), typ: max, id: W-245, status: zalozenie, zrodlo: "R6 3.2"}
+  R_izolacji_obwodowej_min: {wartosc: 2.0, jedn: m2K/W, typ: min, id: W-246, status: zweryfikowane, zrodlo: "WT zał. 2 pkt 1.4"}
+  g_c_max: {wartosc: 0.35, jedn: "-", typ: max, id: W-247, status: zweryfikowane, zrodlo: "WT zał. 2 pkt 2.1.1 (g = f_C·g_n; wyjątki pkt 2.1.4)"}
+  g_okno_male_zwolnione_pow: {wartosc: 0.5, jedn: m2, typ: info, id: W-247, status: zweryfikowane, zrodlo: "WT zał. 2 pkt 2.1.4"}
+  g_n_domyslne_potrojne: {wartosc: 0.5, jedn: "-", typ: info, id: W-247, status: zweryfikowane, zrodlo: "WT zał. 2 pkt 2.1.2"}
+  A0max: {wartosc: null, jedn: "-", typ: info, id: W-247, status: zweryfikowane, zrodlo: "nie obowiązuje od 01.01.2018 (Dz.U. 2017 poz. 2285 §1 pkt 67)"}
+  fRsi_min: {wartosc: 0.72, jedn: "-", typ: min, id: W-248, status: zweryfikowane, zrodlo: "WT zał. 2 pkt 2.2.1–2.2.5 (uproszczenie; φ_i = 50 %)"}
+  okna_klasa_szczelnosci_min: {wartosc: 3, jedn: "-", typ: min, id: W-249, status: zweryfikowane, zrodlo: "WT zał. 2 pkt 2.3.2 (PN-EN 12207)"}
+  okna_przepuszczalnosc_na_m_max: {wartosc: 2.25, jedn: m3/(m*h), typ: max, id: W-249, status: zweryfikowane, zrodlo: "WT zał. 2 pkt 2.3.2 (przy 100 Pa)"}
+  n50_zalecane_max: {wartosc: 1.5, jedn: 1/h, typ: max, id: W-249, status: zweryfikowane, zrodlo: "WT zał. 2 pkt 2.3.3 (zalecenie, wentylacja mechaniczna)"}
+  n50_cel: {wartosc: 1.0, jedn: 1/h, typ: max, id: W-249, status: zalozenie, zrodlo: "R3 3.6; R6 3.2"}
+  Rse: {wartosc: 0.04, jedn: m2K/W, typ: rowne, id: W-250, status: zweryfikowane, zrodlo: "PN-EN ISO 6946:2017-10"}
+  Rsi_gora_poziom_dol: {wartosc: [0.10, 0.13, 0.17], jedn: m2K/W, typ: rowne, id: W-250, status: niezweryfikowane, zrodlo: "PN-EN ISO 6946:2017-10 tab. (strumień w górę / poziomo / w dół)"}
+  dU_pustki_poziom1: {wartosc: 0.01, jedn: W/(m2K), typ: rowne, id: W-250, status: niezweryfikowane, zrodlo: "PN-EN ISO 6946:2017-10 zał. F"}
+
+konstrukcja:
+  gamma_G_sup: {wartosc: 1.35, jedn: "-", typ: rowne, id: W-262, status: niezweryfikowane, zrodlo: "PN-EN 1990 + NA:2010, tabl. A1.2(B) (6.10a)"}
+  xi: {wartosc: 0.85, jedn: "-", typ: rowne, id: W-262, status: niezweryfikowane, zrodlo: "PN-EN 1990 + NA:2010 (6.10b: ξ·γ_G = 1,15)"}
+  gamma_G_inf: {wartosc: 1.00, jedn: "-", typ: rowne, id: W-262, status: niezweryfikowane, zrodlo: "PN-EN 1990 + NA:2010"}
+  gamma_Q: {wartosc: 1.50, jedn: "-", typ: rowne, id: W-262, status: niezweryfikowane, zrodlo: "PN-EN 1990 + NA:2010"}
+  EQU_gamma_G_dst: {wartosc: 1.10, jedn: "-", typ: rowne, id: W-262, status: niezweryfikowane, zrodlo: "PN-EN 1990 tabl. A1.2(A)"}
+  EQU_gamma_G_stb: {wartosc: 0.90, jedn: "-", typ: rowne, id: W-262, status: niezweryfikowane, zrodlo: "PN-EN 1990 tabl. A1.2(A)"}
+  psi_kat_A: {wartosc: [0.7, 0.5, 0.3], jedn: "-", typ: rowne, id: W-262, status: niezweryfikowane, zrodlo: "PN-EN 1990 tabl. A1.1 (ψ0, ψ1, ψ2)"}
+  psi_dach_H: {wartosc: [0.0, 0.0, 0.0], jedn: "-", typ: rowne, id: W-262, status: niezweryfikowane, zrodlo: "PN-EN 1990 tabl. A1.1"}
+  psi_snieg: {wartosc: [0.5, 0.2, 0.0], jedn: "-", typ: rowne, id: W-262, status: niezweryfikowane, zrodlo: "PN-EN 1990 tabl. A1.1 + Ap1 (A ≤ 1000 m)"}
+  psi_wiatr: {wartosc: [0.6, 0.2, 0.0], jedn: "-", typ: rowne, id: W-262, status: niezweryfikowane, zrodlo: "PN-EN 1990 tabl. A1.1"}
+  K_FI: {wartosc: 1.0, jedn: "-", typ: rowne, id: W-261, status: niezweryfikowane, zrodlo: "PN-EN 1990 zał. B (CC2/RC2)"}
+  okres_uzytkowania: {wartosc: 50, jedn: lat, typ: rowne, id: W-261, status: niezweryfikowane, zrodlo: "PN-EN 1990 tabl. 2.1 (kat. 4) → S4"}
+  q_k_strop: {wartosc: 2.0, jedn: kN/m2, typ: min, id: W-263, status: niezweryfikowane, zrodlo: "PN-EN 1991-1-1 tabl. 6.2 (kat. A; górna granica EN)"}
+  Q_k_strop: {wartosc: 3.0, jedn: kN, typ: min, id: W-263, status: niezweryfikowane, zrodlo: "PN-EN 1991-1-1 tabl. 6.2"}
+  q_k_schody: {wartosc: 4.0, jedn: kN/m2, typ: min, id: W-263, status: niezweryfikowane, zrodlo: "PN-EN 1991-1-1 tabl. 6.2"}
+  Q_k_schody: {wartosc: 4.0, jedn: kN, typ: min, id: W-263, status: niezweryfikowane, zrodlo: "PN-EN 1991-1-1 tabl. 6.2"}
+  q_k_dach_H: {wartosc: 0.4, jedn: kN/m2, typ: min, id: W-263, status: niezweryfikowane, zrodlo: "PN-EN 1991-1-1 tabl. 6.10 + NA (nie łączyć ze śniegiem i wiatrem)"}
+  Q_k_dach_H: {wartosc: 1.0, jedn: kN, typ: min, id: W-263, status: niezweryfikowane, zrodlo: "PN-EN 1991-1-1 tabl. 6.10 + NA"}
+  q_k_dzialowe_lekkie: {wartosc: 0.8, jedn: kN/m2, typ: min, id: W-263, status: niezweryfikowane, zrodlo: "PN-EN 1991-1-1 p. 6.3.1.2(8) (ścianki ≤ 2,0 kN/m)"}
+  ciezar_zelbetu: {wartosc: 25.0, jedn: kN/m3, typ: rowne, id: W-263, status: niezweryfikowane, zrodlo: "PN-EN 1991-1-1 zał. A"}
+  s_k: {wartosc: 0.9, jedn: kN/m2, typ: rowne, id: W-264, status: niezweryfikowane, zrodlo: "PN-EN 1991-1-3 + NA:2010 rys. NA.1 (strefa 2; test KML Dlubal)"}
+  C_e: {wartosc: 1.0, jedn: "-", typ: rowne, id: W-264, status: niezweryfikowane, zrodlo: "PN-EN 1991-1-3 tabl. 5.1"}
+  C_t: {wartosc: 1.0, jedn: "-", typ: rowne, id: W-264, status: niezweryfikowane, zrodlo: "PN-EN 1991-1-3 p. 5.2(8)"}
+  mu_1: {wartosc: 0.8, jedn: "-", typ: rowne, id: W-264, status: niezweryfikowane, zrodlo: "PN-EN 1991-1-3 tabl. 5.2"}
+  s_dach_plaski: {wartosc: 0.72, jedn: kN/m2, typ: rowne, id: W-264, status: niezweryfikowane, zrodlo: "s = μ1·C_e·C_t·s_k"}
+  gamma_snieg: {wartosc: 2.0, jedn: kN/m3, typ: rowne, id: W-264, status: niezweryfikowane, zrodlo: "PN-EN 1991-1-3 p. 5.3.6"}
+  mu_2_attyka_zakres: {wartosc: [0.8, 2.0], jedn: "-", typ: zakres, id: W-264, status: niezweryfikowane, zrodlo: "PN-EN 1991-1-3 p. 6.2"}
+  mu_w_uskok_zakres: {wartosc: [0.8, 4.0], jedn: "-", typ: zakres, id: W-264, status: niezweryfikowane, zrodlo: "PN-EN 1991-1-3 p. 5.3.6"}
+  l_s_zaspy_zakres: {wartosc: [5.0, 15.0], jedn: m, typ: zakres, id: W-264, status: niezweryfikowane, zrodlo: "PN-EN 1991-1-3 p. 5.3.6, 6.2 (l_s = 2h)"}
+  mu_B2_max: {wartosc: 8.0, jedn: "-", typ: max, id: W-264, status: niezweryfikowane, zrodlo: "PN-EN 1991-1-3 zał. B.3 (sytuacja wyjątkowa B2 wymagana przez NA)"}
+  v_b0: {wartosc: 22.0, jedn: m/s, typ: rowne, id: W-265, status: niezweryfikowane, zrodlo: "PN-EN 1991-1-4 + NA:2010 tabl. NA.1 (strefa 1)"}
+  q_b: {wartosc: 0.30, jedn: kN/m2, typ: rowne, id: W-265, status: niezweryfikowane, zrodlo: "PN-EN 1991-1-4 + NA (0,3025)"}
+  c_dir: {wartosc: 1.0, jedn: "-", typ: rowne, id: W-265, status: zalozenie, zrodlo: "PN-EN 1991-1-4 p. 4.2 (bezpiecznie)"}
+  c_e_teren_II: {wartosc: "2.3*(z/10)^0.24, z_min=2", jedn: "-", typ: info, id: W-265, status: niezweryfikowane, zrodlo: "PN-EN 1991-1-4 NA tabl. NA.3"}
+  c_e_teren_III: {wartosc: "1.9*(z/10)^0.26, z_min=5", jedn: "-", typ: info, id: W-265, status: niezweryfikowane, zrodlo: "PN-EN 1991-1-4 NA tabl. NA.3"}
+  q_p_obwiednia: {wartosc: 0.71, jedn: kN/m2, typ: rowne, id: W-265, status: niezweryfikowane, zrodlo: "PN-EN 1991-1-4 + NA (teren II, z ≤ 11 m; 0,72 dopuszczalne)"}
+  gamma_c: {wartosc: 1.4, jedn: "-", typ: rowne, id: W-266, status: niezweryfikowane, zrodlo: "PN-EN 1992-1-1 + NA p. 2.4.2.4"}
+  gamma_s: {wartosc: 1.15, jedn: "-", typ: rowne, id: W-266, status: niezweryfikowane, zrodlo: "PN-EN 1992-1-1 + NA p. 2.4.2.4"}
+  beton_klasa_XC1: {wartosc: "C25/30", jedn: "-", typ: min, id: W-266, status: zalozenie, zrodlo: "PN-EN 1992-1-1 zał. E (min. C20/25)"}
+  beton_klasa_XC2: {wartosc: "C25/30", jedn: "-", typ: min, id: W-266, status: niezweryfikowane, zrodlo: "PN-EN 1992-1-1 zał. E"}
+  beton_klasa_XC3: {wartosc: "C30/37", jedn: "-", typ: min, id: W-266, status: niezweryfikowane, zrodlo: "PN-EN 1992-1-1 zał. E"}
+  beton_klasa_XC4_XF1: {wartosc: "C30/37", jedn: "-", typ: min, id: W-266, status: niezweryfikowane, zrodlo: "PN-EN 1992-1-1 zał. E; F2, w/c ≤ 0,55"}
+  c_nom_XC1: {wartosc: 25, jedn: mm, typ: min, id: W-266, status: niezweryfikowane, zrodlo: "PN-EN 1992-1-1 p. 4.4.1 (c_min,dur 15 + Δc_dev 10)"}
+  c_nom_XC2: {wartosc: 35, jedn: mm, typ: min, id: W-266, status: niezweryfikowane, zrodlo: "PN-EN 1992-1-1 p. 4.4.1 (od gruntu na podbetonie ≥ 50)"}
+  c_nom_XC3: {wartosc: 35, jedn: mm, typ: min, id: W-266, status: niezweryfikowane, zrodlo: "PN-EN 1992-1-1 p. 4.4.1"}
+  c_nom_XC4: {wartosc: 40, jedn: mm, typ: min, id: W-266, status: niezweryfikowane, zrodlo: "PN-EN 1992-1-1 p. 4.4.1"}
+  dc_dev: {wartosc: 10, jedn: mm, typ: rowne, id: W-266, status: niezweryfikowane, zrodlo: "PN-EN 1992-1-1 p. 4.4.1.3"}
+  w_max_X0_XC1: {wartosc: 0.4, jedn: mm, typ: max, id: W-267, status: niezweryfikowane, zrodlo: "PN-EN 1992-1-1 tabl. 7.1N"}
+  w_max_pozostale: {wartosc: 0.3, jedn: mm, typ: max, id: W-267, status: niezweryfikowane, zrodlo: "PN-EN 1992-1-1 tabl. 7.1N"}
+  ugiecie_mianownik: {wartosc: 250, jedn: "-", typ: min, id: W-268, status: niezweryfikowane, zrodlo: "PN-EN 1992-1-1 p. 7.4.1(4) (L/250, quasi-stała)"}
+  ugiecie_przyrost_mianownik: {wartosc: 500, jedn: "-", typ: min, id: W-268, status: niezweryfikowane, zrodlo: "PN-EN 1992-1-1 p. 7.4.1(5)"}
+  wspornik_L_wspolczynnik: {wartosc: 2.0, jedn: "-", typ: rowne, id: W-268, status: interpretacja, zrodlo: "L = 2 × wysięg (analogia do NA EN 1993-1-1) — R5-56"}
+  f_yk: {wartosc: 500, jedn: MPa, typ: rowne, id: W-269, status: zweryfikowane, zrodlo: "PN-H-93220:2018-02 (B500SP, klasa C)"}
+  f_yd: {wartosc: 435, jedn: MPa, typ: rowne, id: W-269, status: niezweryfikowane, zrodlo: "f_yk/γ_s"}
+  mur_K: {wartosc: 0.60, jedn: "-", typ: rowne, id: W-270, status: zweryfikowane, zrodlo: "PN-EN 1996-1-1 NA tabl. NA.5 po Ap2:2014-09"}
+  mur_f_k: {wartosc: 7.66, jedn: MPa, typ: rowne, id: W-270, status: zweryfikowane, zrodlo: "0,60·20^0,85 (silikat gr. 1, kl. 20, zaprawa cienkowarstwowa)"}
+  mur_gamma_M_A: {wartosc: 1.7, jedn: "-", typ: rowne, id: W-270, status: niezweryfikowane, zrodlo: "PN-EN 1996-1-1 NA tabl. NA.1 (klasa wykonania A; B: 2,0)"}
+  mur_f_d: {wartosc: 4.50, jedn: MPa, typ: rowne, id: W-270, status: niezweryfikowane, zrodlo: "f_k/γ_M"}
+  mur_filarek_prog_pola: {wartosc: 0.3, jedn: m2, typ: info, id: W-270, status: niezweryfikowane, zrodlo: "PN-EN 1996-1-1 + NA (η_A)"}
+  stal_gamma_M0: {wartosc: 1.0, jedn: "-", typ: rowne, id: W-271, status: niezweryfikowane, zrodlo: "PN-EN 1993-1-1 + NA p. 6.1"}
+  stal_gamma_M2: {wartosc: 1.25, jedn: "-", typ: rowne, id: W-271, status: niezweryfikowane, zrodlo: "PN-EN 1993-1-8"}
+
+geotechnika:
+  kategoria_geotechniczna: {wartosc: 2, jedn: "-", typ: rowne, id: W-280, status: interpretacja, zrodlo: "rozp. Dz.U. 2012 poz. 463 §4 ust. 3 (brief: I — korekta)"}
+  gamma_R_v: {wartosc: 1.4, jedn: "-", typ: rowne, id: W-283, status: niezweryfikowane, zrodlo: "PN-EN 1997-1 + Ap2:2010 NA.2.6 (DA2*)"}
+  gamma_R_h: {wartosc: 1.1, jedn: "-", typ: rowne, id: W-283, status: niezweryfikowane, zrodlo: "PN-EN 1997-1 zał. A tabl. A.5"}
+  osiadanie_max: {wartosc: 50, jedn: mm, typ: max, id: W-283, status: niezweryfikowane, zrodlo: "PN-EN 1997-1 NA tabl. NA.3"}
+  strzalka_ugiecia_podloza_max: {wartosc: 10, jedn: mm, typ: max, id: W-283, status: niezweryfikowane, zrodlo: "PN-EN 1997-1 NA tabl. NA.3"}
+  przechylenie_max: {wartosc: 0.003, jedn: rad, typ: max, id: W-283, status: niezweryfikowane, zrodlo: "PN-EN 1997-1 NA tabl. NA.3"}
+  h_z: {wartosc: 0.8, jedn: m, typ: info, id: W-284, status: niezweryfikowane, zrodlo: "PN-B-03020:1981 rys. 1 (wycof.; strefa I)"}
+  posadowienie_zewn_min: {wartosc: 1.0, jedn: m, typ: min, id: W-284, status: zalozenie, zrodlo: "R5 3.8 (≥ h_z z rezerwą)"}
+  posadowienie_wewn_min: {wartosc: 0.5, jedn: m, typ: min, id: W-284, status: niezweryfikowane, zrodlo: "PN-B-03020:1981 p. 2.2.2 a (wycof.)"}
+  humus_do_usuniecia: {wartosc: 0.4, jedn: m, typ: info, id: W-284, status: program, zrodlo: "brief §2 (dane przykładowe)"}
+  ZWG_ppt: {wartosc: 3.8, jedn: m, typ: info, id: W-285, status: program, zrodlo: "brief §2 (dane przykładowe)"}
+  badania_punkty_min: {wartosc: 3, jedn: szt, typ: min, id: W-282, status: zalozenie, zrodlo: "R5 3.8 (PN-EN 1997-2 zał. B.3 — niezweryfikowane)"}
+  badania_glebokosc_pod_posadowieniem_min: {wartosc: 6.0, jedn: m, typ: min, id: W-282, status: zalozenie, zrodlo: "R5 3.8"}
+
+rysunek:
+  skala_PAB_PT_min_mianownik: {wartosc: 100, jedn: "-", typ: max, id: W-306, status: zweryfikowane, zrodlo: "RPB §9 ust. 3 (skala nie mniejsza niż 1:100)"}
+  skala_PZT_min_mianownik: {wartosc: 500, jedn: "-", typ: max, id: W-306, status: zweryfikowane, zrodlo: "RPB §9 ust. 5"}
+  pdf_rozmiar_max: {wartosc: 150, jedn: MB, typ: max, id: W-300, status: zweryfikowane, zrodlo: "RPB §2b ust. 3"}
+  wzorzec_nazwy_TOM_I: {wartosc: "^PZT_PAB_ZL_\\d{4}\\.\\d{2}\\.\\d{2}\\.pdf$", jedn: regex, typ: info, id: W-301, status: zweryfikowane, zrodlo: "RPB zał. 1"}
+  wzorzec_nazwy_PT: {wartosc: "^PT_\\d+_(AR|BO|IS|IE|BT|IN|WB)_\\d{4}\\.\\d{2}\\.\\d{2}\\.pdf$", jedn: regex, typ: info, id: W-301, status: zweryfikowane, zrodlo: "RPB zał. 1"}
+  PZT_dokladnosc_zapisu: {wartosc: 0.01, jedn: m, typ: rowne, id: W-307, status: zweryfikowane, zrodlo: "RPB §15 ust. 3 (Dz.U. 2026 poz. 597; od 05.11.2026)"}
+  rzedne_miejsca_arch: {wartosc: 3, jedn: "-", typ: rowne, id: W-310, status: niezweryfikowane, zrodlo: "PN-B-01025:2004 p. 3.5 (wg źródeł wtórnych)"}
+  rzedne_miejsca_PZT: {wartosc: 2, jedn: "-", typ: rowne, id: W-310, status: niezweryfikowane, zrodlo: "PN-B-01027:2002 poz. 1.8"}
+  powierzchnie_miejsca: {wartosc: 2, jedn: "-", typ: rowne, id: W-316, status: zweryfikowane, zrodlo: "PN-ISO 9836:2022-07 (ISO 9836:2017 p. 5.1.1.2, 5.2.1.3)"}
+  PU_waga_wys_prog_pelna: {wartosc: 2.20, jedn: m, typ: info, id: W-316, status: zweryfikowane, zrodlo: "RPB §20 ust. 1 pkt 4 lit. b (≥ 2,20 m → 100 %)"}
+  PU_waga_wys_prog_polowa: {wartosc: 1.40, jedn: m, typ: info, id: W-316, status: zweryfikowane, zrodlo: "RPB §20 ust. 1 pkt 4 lit. b (1,40–2,20 m → 50 %; < 1,40 m → 0 %)"}
+  linie_szereg: {wartosc: [0.13, 0.18, 0.25, 0.35, 0.5, 0.7, 1.0, 1.4, 2.0], jedn: mm, typ: info, id: W-311, status: zweryfikowane, zrodlo: "PN-EN ISO 128-2:2023-05 p. 5.1 (ISO 128-2:2022)"}
+  linie_grupa_1_100: {wartosc: 0.5, jedn: mm, typ: rowne, id: W-311, status: zalozenie, zrodlo: "ISO 128-23 tabl. 2 (cienka 0,25 / gruba 0,5 / b. gruba 1,0)"}
+  linie_grupa_1_50: {wartosc: 0.7, jedn: mm, typ: rowne, id: W-311, status: zalozenie, zrodlo: "ISO 128-23 tabl. 2 (0,35 / 0,7 / 1,4)"}
+  linie_odstep_rownoleglych_min: {wartosc: 0.7, jedn: mm, typ: min, id: W-311, status: zweryfikowane, zrodlo: "PN-EN ISO 128-2 p. 6.1"}
+  PZT_obrys_budynku_linia: {wartosc: 1.4, jedn: mm, typ: rowne, id: W-311, status: niezweryfikowane, zrodlo: "PN-B-01027:2002 poz. 1.1"}
+  PZT_przewieszenie_prog: {wartosc: 1.0, jedn: m, typ: info, id: W-311, status: niezweryfikowane, zrodlo: "PN-B-01027:2002 poz. 1.6 c (> 1,0 m — linia punktowa 0,7)"}
+  pismo_szereg: {wartosc: [1.8, 2.5, 3.5, 5.0, 7.0, 10.0, 14.0, 20.0], jedn: mm, typ: info, id: W-312, status: zweryfikowane, zrodlo: "PN-EN ISO 3098-1:2015-06 p. 5.1"}
+  pismo_PZT_min: {wartosc: 2.5, jedn: mm, typ: min, id: W-312, status: niezweryfikowane, zrodlo: "PN-B-01027:2002 poz. 1.8, 4.1"}
+  arkusz_margines_lewy: {wartosc: 20, jedn: mm, typ: rowne, id: W-313, status: zweryfikowane, zrodlo: "PN-EN ISO 5457:2002 p. 4.2"}
+  arkusz_margines_pozostale: {wartosc: 10, jedn: mm, typ: rowne, id: W-313, status: zweryfikowane, zrodlo: "PN-EN ISO 5457:2002 p. 4.2"}
+  arkusz_ramka_linia: {wartosc: 0.7, jedn: mm, typ: rowne, id: W-313, status: zweryfikowane, zrodlo: "PN-EN ISO 5457:2002 p. 4.2"}
+  tabliczka_szerokosc: {wartosc: 180, jedn: mm, typ: rowne, id: W-305, status: zalozenie, zrodlo: "PN-EN ISO 7200:2007 rozdz. 6"}
+  wymiar_pierwszy_ciag_od_obrysu: {wartosc: 10, jedn: mm, typ: rowne, id: W-309, status: zalozenie, zrodlo: "PN-B-01029 wg źródeł wtórnych (R4-F04)"}
+  wymiar_odstep_ciagow: {wartosc: 7, jedn: mm, typ: min, id: W-309, status: zalozenie, zrodlo: "PN-B-01029 wg źródeł wtórnych (7–8 mm)"}
+  pole_metryki_obowiazkowe: {wartosc: ["nazwa_obiektu", "tytul", "skala", "numer_rysunku", "projektant", "nr_uprawnien", "data"], jedn: "-", typ: info, id: W-305, status: zweryfikowane, zrodlo: "RPB §10 ust. 1 (podpis — tylko postać papierowa)"}
+
+oznaczenia_danych:
+  do_uzupelnienia: {wartosc: "[DO UZUPEŁNIENIA: …]", jedn: tekst, typ: info, id: W-320, status: zalozenie, zrodlo: "rejestr sekcja E.1; brief §7 pkt 4"}
+  dane_przykladowe: {wartosc: "[DANE PRZYKŁADOWE – FIKCYJNE]", jedn: tekst, typ: info, id: W-320, status: zalozenie, zrodlo: "rejestr sekcja E.1"}
+  status_dokumentu_tabliczka: {wartosc: "PRZYKŁAD – NIE DO ZŁOŻENIA", jedn: tekst, typ: info, id: W-320, status: zalozenie, zrodlo: "rejestr sekcja E.1; PN-EN ISO 7200 (pole „status dokumentu”)"}
+  dokument_zewnetrzny: {wartosc: "[DOKUMENT ZEWNĘTRZNY – do dołączenia: …]", jedn: tekst, typ: info, id: W-320, status: zalozenie, zrodlo: "rejestr sekcja E.1"}
+  status_danych_modelu: {wartosc: ["fikcyjne", "przykladowe", "zalozenie", "do_uzupelnienia"], jedn: "-", typ: info, id: W-320, status: zalozenie, zrodlo: "rejestr sekcja E.1"}
