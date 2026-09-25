@@ -1,0 +1,23 @@
+# Wyposażenie (symbole na rzutach) dla MODELU TESTOWEGO — format pliku model/wyposazenie.yaml:
+#   {kond, typ, xy: [x, y] (punkt na licu ściany w osi elementu; stoły/wyspy — środek), obrot: kierunek „od ściany
+#    do pomieszczenia” [°, CCW od osi +x], wym: [szer., głęb.] [m], opis?}
+#   typ: wc | umywalka | umywalka_blat | wanna | prysznic | pralka | suszarka | zlew | plyta | lodowka | zmywarka |
+#        lozko | szafa | sofa | stol | biurko | wyspa | urzadzenie | pompa_ciepla | zasobnik | rekuperator
+#   typ blat: {kond, typ: blat, linia: [[x,y], …] (lico ściany), gl: 0.6, strona: 1|-1, gorne: true}
+wyposazenie:
+  # --- P0
+  - {kond: P0, typ: biurko, xy: [4.095, 2.3], obrot: 180, wym: [1.4, 0.7]}
+  - {kond: P0, typ: szafa, xy: [0.95, 4.425], obrot: -90, wym: [1.4, 0.6]}
+  - {kond: P0, typ: sofa, xy: [7.1, 3.3], obrot: -90, wym: [2.4, 0.95]}
+  - {kond: P0, typ: lodowka, xy: [4.62, 7.895], obrot: -90, wym: [0.6, 0.65]}
+  - {kond: P0, typ: blat, linia: [[9.895, 7.895], [4.92, 7.895]], gl: 0.6, strona: 1, gorne: true}
+  - {kond: P0, typ: zlew, xy: [8.2, 7.895], obrot: -90, wym: [0.8, 0.5]}
+  - {kond: P0, typ: plyta, xy: [6.2, 7.895], obrot: -90, wym: [0.6, 0.52]}
+  - {kond: P0, typ: zmywarka, xy: [8.9, 7.895], obrot: -90, wym: [0.6, 0.58]}
+  - {kond: P0, typ: stol, xy: [7.4, 5.75], obrot: 90, wym: [1.8, 0.9], krzesla: 6}
+  # --- P1
+  - {kond: P1, typ: lozko, xy: [4.095, 1.6], obrot: 180, wym: [1.6, 2.0]}
+  - {kond: P1, typ: biurko, xy: [4.305, 2.3], obrot: 0, wym: [1.4, 0.7]}
+  - {kond: P1, typ: sofa, xy: [6.6, 4.425], obrot: -90, wym: [2.0, 0.9]}
+  - {kond: P1, typ: lozko, xy: [5.6, 7.895], obrot: -90, wym: [1.4, 2.0]}
+  - {kond: P1, typ: szafa, xy: [9.895, 6.25], obrot: 180, wym: [2.4, 0.6]}

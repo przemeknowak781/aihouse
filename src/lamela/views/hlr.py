@@ -45,11 +45,7 @@ class Group:
 
     def finish(self):
         if self.poly is None:
-            u = unary_union(self.polys)
-            try:
-                u = shapely.set_precision(u, Q)
-            except Exception:  # pragma: no cover
-                pass
+            u = _safe_union(self.polys)
             self.poly = u.buffer(0) if not u.is_valid else u
         return self.poly
 
@@ -188,12 +184,10 @@ def hidden_lines(groups: list[Group], occluder=None, tol: float = 2e-4, min_len:
             idx = []
         bnd = P.boundary
         if len(idx):
-            local = unary_union([occ[i] for i in idx])
-            try:
-                vis = P.difference(local)
-            except Exception:
-                vis = P.buffer(0).difference(local.buffer(0))
-            lines = bnd.difference(local.buffer(tol, join_style=2))
+            local = _safe_union([occ[i] for i in idx])
+            vis = _safe(lambda a, b, gs: a.difference(b, grid_size=gs), P, local)
+            lb = local.buffer(tol, join_style=2)
+            lines = _safe(lambda a, b, gs: a.difference(b, grid_size=gs), bnd, lb)
         else:
             vis, lines = P, bnd
         if lines is not None and not lines.is_empty and min_len:
@@ -206,6 +200,25 @@ def hidden_lines(groups: list[Group], occluder=None, tol: float = 2e-4, min_len:
             occ.append(pg)
             bnds.append(pg.bounds)
     return order
+
+
+def _safe(op, a, b):
+    """Operacja nakładkowa odporna na błędy topologii: kolejno siatka 1e-5, 1e-4 m i buffer(0)."""
+    for gs in (Q, 1e-4, 1e-3):
+        try:
+            return op(a, b, gs)
+        except Exception:
+            continue
+    return op(a.buffer(0) if hasattr(a, "exterior") or a.geom_type.endswith("Polygon") else a, b.buffer(0), None)
+
+
+def _safe_union(geoms):
+    for gs in (Q, 1e-4, 1e-3):
+        try:
+            return unary_union(geoms, grid_size=gs)
+        except Exception:
+            continue
+    return unary_union([g.buffer(0) for g in geoms])
 
 
 def silhouette(groups: list[Group]):
