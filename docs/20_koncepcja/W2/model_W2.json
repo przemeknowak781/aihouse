@@ -1,0 +1,3460 @@
+{
+ "meta": {
+  "nazwa": "Dom LAMELA — koncepcja W2",
+  "data": "2026-09-25",
+  "uklad": "x→E, y→N, z→góra; 0,0 = osie A/1; ±0,00 = 101,65 m n.p.m."
+ },
+ "osie": {
+  "x": {
+   "A'": -1.0,
+   "A": 0.0,
+   "B": 3.875,
+   "C": 6.095,
+   "D": 8.425,
+   "E": 12.0,
+   "F": 18.4
+  },
+  "y": {
+   "1": 0.0,
+   "2": 2.6,
+   "3": 4.8,
+   "4": 8.4,
+   "5": 9.0
+  }
+ },
+ "poziomy": {
+  "zero_abs": 101.65,
+  "P0": 0.0,
+  "P1": 3.15,
+  "P2": 6.3,
+  "wys_kond": 3.15,
+  "podl": 0.15,
+  "ST1": [
+   2.8,
+   3.0
+  ],
+  "ST2": [
+   5.95,
+   6.15
+  ],
+  "ST3": [
+   9.1,
+   9.32
+  ],
+  "STG": [
+   2.76,
+   3.0
+  ],
+  "dach_P2_warstwy": 9.6,
+  "attyka_P2": 9.8,
+  "dach_P1_warstwy": 6.5,
+  "attyka_P1": 6.7,
+  "dach_G_warstwy": 3.35,
+  "attyka_G": 3.85,
+  "lawa_spod": -1.1
+ },
+ "typy_scian": {
+  "SZ1": {
+   "nazwa": "ściana zewn. nośna: tynk 1,5 + silikat 18 + EPS grafit/welna 20 + tynk 1 cm",
+   "L": 0.105,
+   "R": 0.3,
+   "kol": "#8c8c8c"
+  },
+  "SZL": {
+   "nazwa": "ściana zewn. lekka P2 (wspornik): szkielet stal/drewno + welna 20 + płyta, gr. 40,5 cm",
+   "L": 0.105,
+   "R": 0.3,
+   "kol": "#b0a58c"
+  },
+  "SW18": {
+   "nazwa": "ściana wewn. nośna: silikat 18 + 2x tynk 1,5",
+   "L": 0.105,
+   "R": 0.105,
+   "kol": "#8c8c8c"
+  },
+  "SWG": {
+   "nazwa": "ściana nośna dom/garaż: tynk 1,5 + silikat 18 + welna 12 + tynk 1 (U~0,28)",
+   "L": 0.105,
+   "R": 0.22,
+   "kol": "#8c8c8c"
+  },
+  "SC12": {
+   "nazwa": "ścianka środkowa schodów: silikat 12 (fair-faced)",
+   "L": 0.06,
+   "R": 0.06,
+   "kol": "#a9a9a9"
+  },
+  "DZ12": {
+   "nazwa": "ścianka działowa: silikat 12 + 2x tynk 1,5",
+   "L": 0.075,
+   "R": 0.075,
+   "kol": "#c8c8c8"
+  }
+ },
+ "sciany": [
+  {
+   "id": "S0-01",
+   "kond": "P0",
+   "typ": "SZ1",
+   "p1": [
+    0,
+    0
+   ],
+   "p2": [
+    12,
+    0
+   ],
+   "ext": [
+    0.3,
+    0
+   ],
+   "uw": "fasada pd. strefy dziennej: przeszklenie 5 kwater na słupach stalowych SL1-SL4 + belka B1"
+  },
+  {
+   "id": "S0-02",
+   "kond": "P0",
+   "typ": "SZ1",
+   "p1": [
+    12,
+    0
+   ],
+   "p2": [
+    18.4,
+    0
+   ],
+   "ext": [
+    0,
+    0.3
+   ],
+   "uw": "ściana pd. strefy gospodarczej (pełna - bryła G)"
+  },
+  {
+   "id": "S0-03",
+   "kond": "P0",
+   "typ": "SZ1",
+   "p1": [
+    18.4,
+    0
+   ],
+   "p2": [
+    18.4,
+    9.0
+   ],
+   "ext": [
+    0.3,
+    0.3
+   ],
+   "uw": "ściana wsch. garażu (pion D)"
+  },
+  {
+   "id": "S0-04",
+   "kond": "P0",
+   "typ": "SZ1",
+   "p1": [
+    18.4,
+    9.0
+   ],
+   "p2": [
+    12,
+    9.0
+   ],
+   "ext": [
+    0.3,
+    0.3
+   ],
+   "uw": "ściana pn. garażu z brama"
+  },
+  {
+   "id": "S0-05",
+   "kond": "P0",
+   "typ": "SZ1",
+   "p1": [
+    12,
+    9.0
+   ],
+   "p2": [
+    12,
+    8.4
+   ],
+   "ext": [
+    0.3,
+    0
+   ],
+   "uw": "ściana zach. garażu - odcinek zewn."
+  },
+  {
+   "id": "S0-06",
+   "kond": "P0",
+   "typ": "SZ1",
+   "p1": [
+    12,
+    8.4
+   ],
+   "p2": [
+    0,
+    8.4
+   ],
+   "ext": [
+    0,
+    0.3
+   ],
+   "uw": "ściana pn. częśći mieszkalnej"
+  },
+  {
+   "id": "S0-07",
+   "kond": "P0",
+   "typ": "SZ1",
+   "p1": [
+    0,
+    8.4
+   ],
+   "p2": [
+    0,
+    0
+   ],
+   "ext": [
+    0.3,
+    0.3
+   ],
+   "uw": "ściana zach. (os A)"
+  },
+  {
+   "id": "S0-08",
+   "kond": "P0",
+   "typ": "SW18",
+   "p1": [
+    0,
+    4.8
+   ],
+   "p2": [
+    12,
+    4.8
+   ],
+   "ext": [
+    0,
+    0
+   ],
+   "uw": "ściana grzbietowa (os 3)"
+  },
+  {
+   "id": "S0-09",
+   "kond": "P0",
+   "typ": "SW18",
+   "p1": [
+    3.875,
+    4.8
+   ],
+   "p2": [
+    3.875,
+    8.4
+   ],
+   "ext": [
+    0,
+    0
+   ],
+   "uw": "os B"
+  },
+  {
+   "id": "S0-10",
+   "kond": "P0",
+   "typ": "SW18",
+   "p1": [
+    6.095,
+    4.8
+   ],
+   "p2": [
+    6.095,
+    8.4
+   ],
+   "ext": [
+    0,
+    0
+   ],
+   "uw": "os C - klatka schodowa"
+  },
+  {
+   "id": "S0-11",
+   "kond": "P0",
+   "typ": "SW18",
+   "p1": [
+    8.425,
+    4.8
+   ],
+   "p2": [
+    8.425,
+    8.4
+   ],
+   "ext": [
+    0,
+    0
+   ],
+   "uw": "os D - klatka schodowa"
+  },
+  {
+   "id": "S0-12",
+   "kond": "P0",
+   "typ": "SW18",
+   "p1": [
+    12,
+    0
+   ],
+   "p2": [
+    12,
+    2.6
+   ],
+   "ext": [
+    0,
+    0
+   ],
+   "uw": "os E - kuchnia/przedsionek"
+  },
+  {
+   "id": "S0-13",
+   "kond": "P0",
+   "typ": "SWG",
+   "p1": [
+    12,
+    2.6
+   ],
+   "p2": [
+    12,
+    8.4
+   ],
+   "ext": [
+    0,
+    0
+   ],
+   "uw": "os E - dom/garaż (ocieplona od garażu)"
+  },
+  {
+   "id": "S0-14",
+   "kond": "P0",
+   "typ": "SWG",
+   "p1": [
+    18.4,
+    2.6
+   ],
+   "p2": [
+    12,
+    2.6
+   ],
+   "ext": [
+    0,
+    0
+   ],
+   "uw": "os 2 - strefa gosp./garaż"
+  },
+  {
+   "id": "S0-15",
+   "kond": "P0",
+   "typ": "SC12",
+   "p1": [
+    7.26,
+    4.8
+   ],
+   "p2": [
+    7.26,
+    7.145
+   ],
+   "ext": [
+    0,
+    0
+   ],
+   "uw": "ścianka środkowa schodów"
+  },
+  {
+   "id": "S0-16",
+   "kond": "P0",
+   "typ": "DZ12",
+   "p1": [
+    3.875,
+    6.275
+   ],
+   "p2": [
+    6.095,
+    6.275
+   ],
+   "ext": [
+    0.0,
+    0.0
+   ],
+   "uw": ""
+  },
+  {
+   "id": "S0-17",
+   "kond": "P0",
+   "typ": "DZ12",
+   "p1": [
+    8.425,
+    6.375
+   ],
+   "p2": [
+    12,
+    6.375
+   ],
+   "ext": [
+    0.0,
+    0.0
+   ],
+   "uw": ""
+  },
+  {
+   "id": "S0-18",
+   "kond": "P0",
+   "typ": "DZ12",
+   "p1": [
+    9.675,
+    6.375
+   ],
+   "p2": [
+    9.675,
+    8.4
+   ],
+   "ext": [
+    0.0,
+    0.0
+   ],
+   "uw": ""
+  },
+  {
+   "id": "S0-19",
+   "kond": "P0",
+   "typ": "DZ12",
+   "p1": [
+    14.275,
+    0
+   ],
+   "p2": [
+    14.275,
+    2.6
+   ],
+   "ext": [
+    0.0,
+    0.0
+   ],
+   "uw": ""
+  },
+  {
+   "id": "S0-20",
+   "kond": "P0",
+   "typ": "DZ12",
+   "p1": [
+    15.475,
+    0
+   ],
+   "p2": [
+    15.475,
+    2.6
+   ],
+   "ext": [
+    0.0,
+    0.0
+   ],
+   "uw": ""
+  },
+  {
+   "id": "S1-01",
+   "kond": "P1",
+   "typ": "SZ1",
+   "p1": [
+    0,
+    0
+   ],
+   "p2": [
+    12,
+    0
+   ],
+   "ext": [
+    0.3,
+    0.3
+   ],
+   "uw": "ściana pd. bryły B, otwor boksu C na belce B1"
+  },
+  {
+   "id": "S1-02",
+   "kond": "P1",
+   "typ": "SZ1",
+   "p1": [
+    12,
+    0
+   ],
+   "p2": [
+    12,
+    8.4
+   ],
+   "ext": [
+    0.3,
+    0.3
+   ],
+   "uw": "ściana wsch. (os E)"
+  },
+  {
+   "id": "S1-03",
+   "kond": "P1",
+   "typ": "SZ1",
+   "p1": [
+    12,
+    8.4
+   ],
+   "p2": [
+    0,
+    8.4
+   ],
+   "ext": [
+    0.3,
+    0.3
+   ],
+   "uw": "ściana pn."
+  },
+  {
+   "id": "S1-04",
+   "kond": "P1",
+   "typ": "SZ1",
+   "p1": [
+    0,
+    8.4
+   ],
+   "p2": [
+    0,
+    0
+   ],
+   "ext": [
+    0.3,
+    0.3
+   ],
+   "uw": "ściana zach. (os A)"
+  },
+  {
+   "id": "S1-05",
+   "kond": "P1",
+   "typ": "SW18",
+   "p1": [
+    0,
+    4.8
+   ],
+   "p2": [
+    12,
+    4.8
+   ],
+   "ext": [
+    0,
+    0
+   ],
+   "uw": "ściana grzbietowa (os 3)"
+  },
+  {
+   "id": "S1-06",
+   "kond": "P1",
+   "typ": "SW18",
+   "p1": [
+    3.875,
+    4.8
+   ],
+   "p2": [
+    3.875,
+    8.4
+   ],
+   "ext": [
+    0,
+    0
+   ],
+   "uw": "os B"
+  },
+  {
+   "id": "S1-07",
+   "kond": "P1",
+   "typ": "SW18",
+   "p1": [
+    6.095,
+    4.8
+   ],
+   "p2": [
+    6.095,
+    8.4
+   ],
+   "ext": [
+    0,
+    0
+   ],
+   "uw": "os C"
+  },
+  {
+   "id": "S1-08",
+   "kond": "P1",
+   "typ": "SW18",
+   "p1": [
+    8.425,
+    4.8
+   ],
+   "p2": [
+    8.425,
+    8.4
+   ],
+   "ext": [
+    0,
+    0
+   ],
+   "uw": "os D"
+  },
+  {
+   "id": "S1-09",
+   "kond": "P1",
+   "typ": "SC12",
+   "p1": [
+    7.26,
+    4.8
+   ],
+   "p2": [
+    7.26,
+    7.145
+   ],
+   "ext": [
+    0,
+    0
+   ],
+   "uw": "ścianka środkowa schodów"
+  },
+  {
+   "id": "S1-10",
+   "kond": "P1",
+   "typ": "DZ12",
+   "p1": [
+    3.875,
+    0
+   ],
+   "p2": [
+    3.875,
+    3.575
+   ],
+   "ext": [
+    0,
+    0.075
+   ],
+   "uw": ""
+  },
+  {
+   "id": "S1-11",
+   "kond": "P1",
+   "typ": "DZ12",
+   "p1": [
+    0,
+    3.575
+   ],
+   "p2": [
+    3.875,
+    3.575
+   ],
+   "ext": [
+    0,
+    0.075
+   ],
+   "uw": ""
+  },
+  {
+   "id": "S2-01",
+   "kond": "P2",
+   "typ": "SZ1",
+   "p1": [
+    -1,
+    0
+   ],
+   "p2": [
+    12,
+    0
+   ],
+   "ext": [
+    0.3,
+    0.3
+   ],
+   "uw": "ściana pd. bryły A; odc. x -1,0...2,0 żelbetowa ściana-tarcza"
+  },
+  {
+   "id": "S2-02",
+   "kond": "P2",
+   "typ": "SZ1",
+   "p1": [
+    12,
+    0
+   ],
+   "p2": [
+    12,
+    4.8
+   ],
+   "ext": [
+    0.3,
+    0.3
+   ],
+   "uw": "ściana wsch."
+  },
+  {
+   "id": "S2-03",
+   "kond": "P2",
+   "typ": "SZ1",
+   "p1": [
+    12,
+    4.8
+   ],
+   "p2": [
+    8.425,
+    4.8
+   ],
+   "ext": [
+    0.3,
+    0
+   ],
+   "uw": "ściana pn. bryły A (nad dachem P1)"
+  },
+  {
+   "id": "S2-04",
+   "kond": "P2",
+   "typ": "SZ1",
+   "p1": [
+    8.425,
+    4.8
+   ],
+   "p2": [
+    8.425,
+    8.4
+   ],
+   "ext": [
+    0,
+    0.3
+   ],
+   "uw": "nadbudowa klatki/łazienki - ściana wsch."
+  },
+  {
+   "id": "S2-05",
+   "kond": "P2",
+   "typ": "SZ1",
+   "p1": [
+    8.425,
+    8.4
+   ],
+   "p2": [
+    3.875,
+    8.4
+   ],
+   "ext": [
+    0.3,
+    0.3
+   ],
+   "uw": "nadbudowa - ściana pn."
+  },
+  {
+   "id": "S2-06",
+   "kond": "P2",
+   "typ": "SZ1",
+   "p1": [
+    3.875,
+    8.4
+   ],
+   "p2": [
+    3.875,
+    4.8
+   ],
+   "ext": [
+    0.3,
+    0
+   ],
+   "uw": "nadbudowa - ściana zach."
+  },
+  {
+   "id": "S2-07",
+   "kond": "P2",
+   "typ": "SZ1",
+   "p1": [
+    3.875,
+    4.8
+   ],
+   "p2": [
+    -1,
+    4.8
+   ],
+   "ext": [
+    0,
+    0.3
+   ],
+   "uw": "ściana pn. bryły A; odc. x -1,0...2,0 żelbetowa ściana-tarcza"
+  },
+  {
+   "id": "S2-08",
+   "kond": "P2",
+   "typ": "SZL",
+   "p1": [
+    -1,
+    4.8
+   ],
+   "p2": [
+    -1,
+    0
+   ],
+   "ext": [
+    0.3,
+    0.3
+   ],
+   "uw": "ściana zach. na wsporniku 1,0 m (lekka)"
+  },
+  {
+   "id": "S2-09",
+   "kond": "P2",
+   "typ": "SW18",
+   "p1": [
+    3.875,
+    4.8
+   ],
+   "p2": [
+    8.425,
+    4.8
+   ],
+   "ext": [
+    0,
+    0
+   ],
+   "uw": "os 3 wewn."
+  },
+  {
+   "id": "S2-10",
+   "kond": "P2",
+   "typ": "SW18",
+   "p1": [
+    6.095,
+    4.8
+   ],
+   "p2": [
+    6.095,
+    8.4
+   ],
+   "ext": [
+    0,
+    0
+   ],
+   "uw": "os C"
+  },
+  {
+   "id": "S2-11",
+   "kond": "P2",
+   "typ": "SC12",
+   "p1": [
+    7.26,
+    4.8
+   ],
+   "p2": [
+    7.26,
+    7.145
+   ],
+   "ext": [
+    0,
+    0
+   ],
+   "uw": "ścianka środkowa schodów"
+  },
+  {
+   "id": "S2-12",
+   "kond": "P2",
+   "typ": "DZ12",
+   "p1": [
+    3.675,
+    0
+   ],
+   "p2": [
+    3.675,
+    4.8
+   ],
+   "ext": [
+    0.0,
+    0.0
+   ],
+   "uw": ""
+  },
+  {
+   "id": "S2-13",
+   "kond": "P2",
+   "typ": "DZ12",
+   "p1": [
+    6.125,
+    0
+   ],
+   "p2": [
+    6.125,
+    4.8
+   ],
+   "ext": [
+    0.0,
+    0.0
+   ],
+   "uw": ""
+  },
+  {
+   "id": "S2-14",
+   "kond": "P2",
+   "typ": "DZ12",
+   "p1": [
+    8.395,
+    0
+   ],
+   "p2": [
+    8.395,
+    4.8
+   ],
+   "ext": [
+    0.0,
+    0.0
+   ],
+   "uw": ""
+  },
+  {
+   "id": "S2-15",
+   "kond": "P2",
+   "typ": "DZ12",
+   "p1": [
+    6.125,
+    2.725
+   ],
+   "p2": [
+    8.395,
+    2.725
+   ],
+   "ext": [
+    0.0,
+    0.0
+   ],
+   "uw": ""
+  }
+ ],
+ "otwory": [
+  {
+   "id": "O0-01",
+   "sciana": "S0-01",
+   "a": 0.3,
+   "b": 11.7,
+   "szer": 11.4,
+   "typ": "fasada",
+   "wys": 2.75,
+   "par": 0.0,
+   "sym": "FS1",
+   "zaw": null,
+   "kier": null,
+   "uw": "przeszklenie E: 5 kwater po 2,28 m (kw. 2 i 4 - drzwi HS), słupki SL1-SL4 w szprosach",
+   "kw": 5
+  },
+  {
+   "id": "O0-02",
+   "sciana": "S0-07",
+   "a": 1.2,
+   "b": 3.6,
+   "szer": 2.4,
+   "typ": "okno",
+   "wys": 2.15,
+   "par": 0.45,
+   "sym": "OZ1",
+   "zaw": null,
+   "kier": null,
+   "uw": "okno zach. salonu (siedzisko), pod okapem 1,5 m",
+   "kw": 1
+  },
+  {
+   "id": "O0-03",
+   "sciana": "S0-07",
+   "a": 5.5,
+   "b": 7.3,
+   "szer": 1.8,
+   "typ": "okno",
+   "wys": 1.5,
+   "par": 0.9,
+   "sym": "OZ2",
+   "zaw": null,
+   "kier": null,
+   "uw": "pokój gościnny",
+   "kw": 1
+  },
+  {
+   "id": "O0-04",
+   "sciana": "S0-06",
+   "a": 10.2,
+   "b": 11.3,
+   "szer": 1.1,
+   "typ": "drzwi_zewn",
+   "wys": 2.4,
+   "par": 0.0,
+   "sym": "DZ1",
+   "zaw": "a",
+   "kier": "-y",
+   "uw": "drzwi wejściowe 110x240 (w świetle ościeżnicy >= 0,90x2,00), prog <= 2 cm",
+   "kw": 1
+  },
+  {
+   "id": "O0-05",
+   "sciana": "S0-04",
+   "a": 12.75,
+   "b": 17.75,
+   "szer": 5.0,
+   "typ": "brama",
+   "wys": 2.25,
+   "par": 0.0,
+   "sym": "BR1",
+   "zaw": null,
+   "kier": null,
+   "uw": "brama segmentowa 500x225, kratki went. >= 0,08 m2",
+   "kw": 1
+  },
+  {
+   "id": "O0-06",
+   "sciana": "S0-03",
+   "a": 5.0,
+   "b": 5.9,
+   "szer": 0.9,
+   "typ": "drzwi_zewn",
+   "wys": 2.1,
+   "par": 0.0,
+   "sym": "DZ2",
+   "zaw": "a",
+   "kier": "-x",
+   "uw": "drzwi boczne garażu (rowery, ogród)",
+   "kw": 1
+  },
+  {
+   "id": "O0-07",
+   "sciana": "S0-08",
+   "a": 4.2,
+   "b": 5.1,
+   "szer": 0.9,
+   "typ": "otwor",
+   "wys": 2.1,
+   "par": 0.0,
+   "sym": "",
+   "zaw": null,
+   "kier": null,
+   "uw": "przejście do przedpokóju gościnnego",
+   "kw": 1
+  },
+  {
+   "id": "O0-08",
+   "sciana": "S0-08",
+   "a": 6.2,
+   "b": 7.2,
+   "szer": 1.0,
+   "typ": "otwor",
+   "wys": 2.55,
+   "par": 0.0,
+   "sym": "",
+   "zaw": null,
+   "kier": null,
+   "uw": "wejście na bieg 1 schodów",
+   "kw": 1
+  },
+  {
+   "id": "O0-09",
+   "sciana": "S0-08",
+   "a": 7.4,
+   "b": 8.2,
+   "szer": 0.8,
+   "typ": "drzwi",
+   "wys": 2.0,
+   "par": 0.0,
+   "sym": "D3",
+   "zaw": "a",
+   "kier": "+y",
+   "uw": "schowek pod schodami",
+   "kw": 1
+  },
+  {
+   "id": "O0-10",
+   "sciana": "S0-08",
+   "a": 8.8,
+   "b": 10.2,
+   "szer": 1.4,
+   "typ": "otwor",
+   "wys": 2.4,
+   "par": 0.0,
+   "sym": "",
+   "zaw": null,
+   "kier": null,
+   "uw": "hol - strefa dzienna",
+   "kw": 1
+  },
+  {
+   "id": "O0-11",
+   "sciana": "S0-09",
+   "a": 5.1,
+   "b": 6.0,
+   "szer": 0.9,
+   "typ": "drzwi",
+   "wys": 2.05,
+   "par": 0.0,
+   "sym": "D1",
+   "zaw": "a",
+   "kier": "-x",
+   "uw": "pokój gościnny",
+   "kw": 1
+  },
+  {
+   "id": "O0-12",
+   "sciana": "S0-16",
+   "a": 4.2,
+   "b": 5.0,
+   "szer": 0.8,
+   "typ": "drzwi",
+   "wys": 2.05,
+   "par": 0.0,
+   "sym": "D2",
+   "zaw": "a",
+   "kier": "-y",
+   "uw": "łazienka gościnna (na zewnątrz, kratka)",
+   "kw": 1
+  },
+  {
+   "id": "O0-13",
+   "sciana": "S0-17",
+   "a": 10.3,
+   "b": 11.2,
+   "szer": 0.9,
+   "typ": "drzwi",
+   "wys": 2.05,
+   "par": 0.0,
+   "sym": "D1",
+   "zaw": "b",
+   "kier": "-y",
+   "uw": "wiatrołap - hol",
+   "kw": 1
+  },
+  {
+   "id": "O0-14",
+   "sciana": "S0-17",
+   "a": 8.7,
+   "b": 9.5,
+   "szer": 0.8,
+   "typ": "drzwi",
+   "wys": 2.05,
+   "par": 0.0,
+   "sym": "D2",
+   "zaw": "a",
+   "kier": "-y",
+   "uw": "WC (na zewnątrz, kratka)",
+   "kw": 1
+  },
+  {
+   "id": "O0-15",
+   "sciana": "S0-12",
+   "a": 1.0,
+   "b": 1.9,
+   "szer": 0.9,
+   "typ": "drzwi",
+   "wys": 2.05,
+   "par": 0.0,
+   "sym": "D1",
+   "zaw": "a",
+   "kier": "+x",
+   "uw": "kuchnia - przedsionek gosp.",
+   "kw": 1
+  },
+  {
+   "id": "O0-16",
+   "sciana": "S0-14",
+   "a": 12.5,
+   "b": 13.4,
+   "szer": 0.9,
+   "typ": "drzwi",
+   "wys": 2.05,
+   "par": 0.0,
+   "sym": "DG1",
+   "zaw": "a",
+   "kier": "+y",
+   "uw": "przedsionek - garaż: szczelne, samozamykacz, U<=1,3",
+   "kw": 1
+  },
+  {
+   "id": "O0-17",
+   "sciana": "S0-14",
+   "a": 16.6,
+   "b": 17.5,
+   "szer": 0.9,
+   "typ": "drzwi",
+   "wys": 2.05,
+   "par": 0.0,
+   "sym": "DG1",
+   "zaw": "b",
+   "kier": "+y",
+   "uw": "pom. techniczne - garaż",
+   "kw": 1
+  },
+  {
+   "id": "O0-19",
+   "sciana": "S0-02",
+   "a": 12.25,
+   "b": 13.15,
+   "szer": 0.9,
+   "typ": "drzwi_zewn",
+   "wys": 2.4,
+   "par": 0.0,
+   "sym": "DZ3",
+   "zaw": "a",
+   "kier": "-y",
+   "uw": "drzwi gospodarcze przeszklone przedsionek - ogród/taras (otwierane na zewnątrz)",
+   "kw": 1
+  },
+  {
+   "id": "O0-18",
+   "sciana": "S0-19",
+   "a": 1.1,
+   "b": 1.9,
+   "szer": 0.8,
+   "typ": "drzwi",
+   "wys": 2.05,
+   "par": 0.0,
+   "sym": "D3",
+   "zaw": "a",
+   "kier": "+x",
+   "uw": "spiżarnia",
+   "kw": 1
+  },
+  {
+   "id": "O1-01",
+   "sciana": "S1-01",
+   "a": 4.1,
+   "b": 11.1,
+   "szer": 7.0,
+   "typ": "boks",
+   "wys": 1.5,
+   "par": 0.7,
+   "sym": "BC1",
+   "zaw": null,
+   "kier": null,
+   "uw": "boks C: 3 kwatery 2,33 m, dolna część stała VSG do 0,85 m (K-17), słupki w szprosach",
+   "kw": 3
+  },
+  {
+   "id": "O1-02",
+   "sciana": "S1-02",
+   "a": 1.6,
+   "b": 2.8,
+   "szer": 1.2,
+   "typ": "okno",
+   "wys": 1.5,
+   "par": 0.85,
+   "sym": "OE1",
+   "zaw": null,
+   "kier": null,
+   "uw": "pokój rodzinny - widok na dach zielony",
+   "kw": 1
+  },
+  {
+   "id": "O1-03",
+   "sciana": "S1-03",
+   "a": 4.4,
+   "b": 5.3,
+   "szer": 0.9,
+   "typ": "okno",
+   "wys": 0.6,
+   "par": 1.5,
+   "sym": "ON1",
+   "zaw": null,
+   "kier": null,
+   "uw": "łazienka - okno doświetlające",
+   "kw": 1
+  },
+  {
+   "id": "O1-04",
+   "sciana": "S1-03",
+   "a": 10.0,
+   "b": 11.2,
+   "szer": 1.2,
+   "typ": "okno",
+   "wys": 0.6,
+   "par": 1.5,
+   "sym": "ON2",
+   "zaw": null,
+   "kier": null,
+   "uw": "pralnia",
+   "kw": 1
+  },
+  {
+   "id": "O1-05",
+   "sciana": "S1-04",
+   "a": 5.7,
+   "b": 7.5,
+   "szer": 1.8,
+   "typ": "okno",
+   "wys": 1.5,
+   "par": 0.85,
+   "sym": "OZ2",
+   "zaw": null,
+   "kier": null,
+   "uw": "pokój dziecka 2",
+   "kw": 1
+  },
+  {
+   "id": "O1-06",
+   "sciana": "S1-04",
+   "a": 0.9,
+   "b": 2.7,
+   "szer": 1.8,
+   "typ": "okno",
+   "wys": 1.5,
+   "par": 0.85,
+   "sym": "OZ2",
+   "zaw": null,
+   "kier": null,
+   "uw": "pokój dziecka 1 (elewacja pd. bryły B pełna jak w szkicu)",
+   "kw": 1
+  },
+  {
+   "id": "O1-07",
+   "sciana": "S1-05",
+   "a": 2.7,
+   "b": 3.6,
+   "szer": 0.9,
+   "typ": "drzwi",
+   "wys": 2.05,
+   "par": 0.0,
+   "sym": "D1",
+   "zaw": "a",
+   "kier": "+y",
+   "uw": "pokój dziecka 2",
+   "kw": 1
+  },
+  {
+   "id": "O1-08",
+   "sciana": "S1-05",
+   "a": 4.2,
+   "b": 5.0,
+   "szer": 0.8,
+   "typ": "drzwi",
+   "wys": 2.05,
+   "par": 0.0,
+   "sym": "D2",
+   "zaw": "a",
+   "kier": "-y",
+   "uw": "łazienka (na zewnątrz)",
+   "kw": 1
+  },
+  {
+   "id": "O1-09",
+   "sciana": "S1-05",
+   "a": 6.2,
+   "b": 8.32,
+   "szer": 2.12,
+   "typ": "otwor",
+   "wys": 2.55,
+   "par": 0.0,
+   "sym": "",
+   "zaw": null,
+   "kier": null,
+   "uw": "klatka schodówa - oba biegi",
+   "kw": 1
+  },
+  {
+   "id": "O1-10",
+   "sciana": "S1-05",
+   "a": 9.0,
+   "b": 9.9,
+   "szer": 0.9,
+   "typ": "drzwi",
+   "wys": 2.05,
+   "par": 0.0,
+   "sym": "D1",
+   "zaw": "b",
+   "kier": "+y",
+   "uw": "pralnia",
+   "kw": 1
+  },
+  {
+   "id": "O1-11",
+   "sciana": "S1-11",
+   "a": 2.7,
+   "b": 3.6,
+   "szer": 0.9,
+   "typ": "drzwi",
+   "wys": 2.05,
+   "par": 0.0,
+   "sym": "D1",
+   "zaw": "a",
+   "kier": "-y",
+   "uw": "pokój dziecka 1",
+   "kw": 1
+  },
+  {
+   "id": "O2-01",
+   "sciana": "S2-01",
+   "a": 0.2,
+   "b": 3.2,
+   "szer": 3.0,
+   "typ": "okno",
+   "wys": 2.0,
+   "par": 0.6,
+   "sym": "OP1",
+   "zaw": null,
+   "kier": null,
+   "uw": "sypialnia; za lamelami; dolna część stała do 0,85; skrzydła do wewnątrz (K-16)",
+   "kw": 1
+  },
+  {
+   "id": "O2-02",
+   "sciana": "S2-01",
+   "a": 4.3,
+   "b": 5.5,
+   "szer": 1.2,
+   "typ": "okno",
+   "wys": 1.75,
+   "par": 0.85,
+   "sym": "OP2",
+   "zaw": null,
+   "kier": null,
+   "uw": "garderoba; za lamelami",
+   "kw": 1
+  },
+  {
+   "id": "O2-03",
+   "sciana": "S2-01",
+   "a": 8.9,
+   "b": 11.3,
+   "szer": 2.4,
+   "typ": "okno",
+   "wys": 2.0,
+   "par": 0.6,
+   "sym": "OP1",
+   "zaw": null,
+   "kier": null,
+   "uw": "gabinet; za lamelami",
+   "kw": 1
+  },
+  {
+   "id": "O2-04",
+   "sciana": "S2-02",
+   "a": 1.8,
+   "b": 3.0,
+   "szer": 1.2,
+   "typ": "okno",
+   "wys": 1.75,
+   "par": 0.85,
+   "sym": "OP2",
+   "zaw": null,
+   "kier": null,
+   "uw": "gabinet - wschod",
+   "kw": 1
+  },
+  {
+   "id": "O2-05",
+   "sciana": "S2-05",
+   "a": 6.4,
+   "b": 8.1,
+   "szer": 1.7,
+   "typ": "okno",
+   "wys": 1.5,
+   "par": 0.9,
+   "sym": "ON3",
+   "zaw": null,
+   "kier": null,
+   "uw": "okno nad klatka schodówa (północ)",
+   "kw": 1
+  },
+  {
+   "id": "O2-06",
+   "sciana": "S2-05",
+   "a": 4.3,
+   "b": 5.2,
+   "szer": 0.9,
+   "typ": "okno",
+   "wys": 0.8,
+   "par": 1.5,
+   "sym": "ON1",
+   "zaw": null,
+   "kier": null,
+   "uw": "łazienka rodziców",
+   "kw": 1
+  },
+  {
+   "id": "O2-07",
+   "sciana": "S2-08",
+   "a": 1.2,
+   "b": 3.6,
+   "szer": 2.4,
+   "typ": "okno",
+   "wys": 2.0,
+   "par": 0.6,
+   "sym": "OP1",
+   "zaw": null,
+   "kier": null,
+   "uw": "sypialnia - zachod",
+   "kw": 1
+  },
+  {
+   "id": "O2-08",
+   "sciana": "S2-09",
+   "a": 4.2,
+   "b": 5.0,
+   "szer": 0.8,
+   "typ": "drzwi",
+   "wys": 2.05,
+   "par": 0.0,
+   "sym": "D2",
+   "zaw": "a",
+   "kier": "-y",
+   "uw": "łazienka rodziców (na zewnątrz)",
+   "kw": 1
+  },
+  {
+   "id": "O2-09",
+   "sciana": "S2-09",
+   "a": 7.32,
+   "b": 8.32,
+   "szer": 1.0,
+   "typ": "otwor",
+   "wys": 2.4,
+   "par": 0.0,
+   "sym": "",
+   "zaw": null,
+   "kier": null,
+   "uw": "wyjście z biegu 2 schodów",
+   "kw": 1
+  },
+  {
+   "id": "O2-10",
+   "sciana": "S2-12",
+   "a": 3.4,
+   "b": 4.2,
+   "szer": 0.8,
+   "typ": "drzwi",
+   "wys": 2.05,
+   "par": 0.0,
+   "sym": "D1",
+   "zaw": "b",
+   "kier": "-x",
+   "uw": "sypialnia",
+   "kw": 1
+  },
+  {
+   "id": "O2-11",
+   "sciana": "S2-13",
+   "a": 3.3,
+   "b": 4.1,
+   "szer": 0.8,
+   "typ": "drzwi",
+   "wys": 2.05,
+   "par": 0.0,
+   "sym": "D1",
+   "zaw": "b",
+   "kier": "-x",
+   "uw": "garderoba (wejście do apartamentu)",
+   "kw": 1
+  },
+  {
+   "id": "O2-12",
+   "sciana": "S2-14",
+   "a": 3.3,
+   "b": 4.2,
+   "szer": 0.9,
+   "typ": "drzwi",
+   "wys": 2.05,
+   "par": 0.0,
+   "sym": "D1",
+   "zaw": "b",
+   "kier": "+x",
+   "uw": "gabinet",
+   "kw": 1
+  },
+  {
+   "id": "O2-13",
+   "sciana": "S2-15",
+   "a": 6.6,
+   "b": 7.4,
+   "szer": 0.8,
+   "typ": "drzwi",
+   "wys": 2.05,
+   "par": 0.0,
+   "sym": "D3",
+   "zaw": "a",
+   "kier": "-y",
+   "uw": "pom. techniczne (rekuperator, wyłaz na dach)",
+   "kw": 1
+  }
+ ],
+ "pomieszczenia": [
+  {
+   "id": "0.01",
+   "nazwa": "Wiatrołap",
+   "kond": "P0",
+   "kat": "ruchu",
+   "pobyt": false,
+   "min": null,
+   "posadzka": "gres",
+   "uw": "szafa wnękowa 0,6 m",
+   "pow": 3.96,
+   "geometria": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.895,
+       6.45
+      ],
+      [
+       11.895,
+       8.295
+      ],
+      [
+       9.75,
+       8.295
+      ],
+      [
+       9.75,
+       6.45
+      ],
+      [
+       11.895,
+       6.45
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "0.02",
+   "nazwa": "Hol",
+   "kond": "P0",
+   "kat": "ruchu",
+   "pobyt": false,
+   "min": null,
+   "posadzka": "gres",
+   "uw": "",
+   "pow": 4.69,
+   "geometria": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.895,
+       4.905
+      ],
+      [
+       11.895,
+       6.3
+      ],
+      [
+       8.53,
+       6.3
+      ],
+      [
+       8.53,
+       4.905
+      ],
+      [
+       11.895,
+       4.905
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "0.03",
+   "nazwa": "WC gościnne",
+   "kond": "P0",
+   "kat": "pomocnicza",
+   "pobyt": false,
+   "min": null,
+   "posadzka": "gres",
+   "uw": "szer. 1,07 >= 0,90 (B-17)",
+   "pow": 1.97,
+   "geometria": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       9.6,
+       6.45
+      ],
+      [
+       9.6,
+       8.295
+      ],
+      [
+       8.53,
+       8.295
+      ],
+      [
+       8.53,
+       6.45
+      ],
+      [
+       9.6,
+       6.45
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "0.04",
+   "nazwa": "Klatka schodówa",
+   "kond": "P0",
+   "kat": "ruchu",
+   "pobyt": false,
+   "min": null,
+   "posadzka": "dąb",
+   "uw": "",
+   "pow": 4.68,
+   "geometria": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       7.2,
+       4.905
+      ],
+      [
+       6.2,
+       4.905
+      ],
+      [
+       6.2,
+       7.145
+      ],
+      [
+       6.2,
+       8.295
+      ],
+      [
+       8.32,
+       8.295
+      ],
+      [
+       8.32,
+       7.145
+      ],
+      [
+       7.2,
+       7.145
+      ],
+      [
+       7.2,
+       4.905
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "0.05",
+   "nazwa": "Schowek pod schodami",
+   "kond": "P0",
+   "kat": "pomocnicza",
+   "pobyt": false,
+   "min": null,
+   "posadzka": "dąb",
+   "uw": "wys. zmienna 1,37-2,77 m",
+   "pow": 2.24,
+   "geometria": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       8.32,
+       4.905
+      ],
+      [
+       8.32,
+       7.145
+      ],
+      [
+       7.32,
+       7.145
+      ],
+      [
+       7.32,
+       4.905
+      ],
+      [
+       8.32,
+       4.905
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "0.06",
+   "nazwa": "Salon + jadalnia + kuchnia",
+   "kond": "P0",
+   "kat": "podstawowa",
+   "pobyt": true,
+   "min": 50.0,
+   "posadzka": "dąb/gres",
+   "uw": "strefa otwarta; kuchnia z wyspą przy ścianie E",
+   "pow": 54.12,
+   "geometria": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.895,
+       0.105
+      ],
+      [
+       11.895,
+       4.695
+      ],
+      [
+       0.105,
+       4.695
+      ],
+      [
+       0.105,
+       0.105
+      ],
+      [
+       11.895,
+       0.105
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "0.07",
+   "nazwa": "Przedpokój gościnny",
+   "kond": "P0",
+   "kat": "ruchu",
+   "pobyt": false,
+   "min": null,
+   "posadzka": "dąb",
+   "uw": "",
+   "pow": 2.32,
+   "geometria": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       3.98,
+       4.905
+      ],
+      [
+       3.98,
+       6.2
+      ],
+      [
+       5.99,
+       6.2
+      ],
+      [
+       5.99,
+       5.605
+      ],
+      [
+       5.59,
+       5.605
+      ],
+      [
+       5.59,
+       4.905
+      ],
+      [
+       3.98,
+       4.905
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "0.08",
+   "nazwa": "Łazienka gościnna (prysznic)",
+   "kond": "P0",
+   "kat": "pomocnicza",
+   "pobyt": false,
+   "min": null,
+   "posadzka": "gres",
+   "uw": "",
+   "pow": 3.91,
+   "geometria": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       5.99,
+       6.35
+      ],
+      [
+       5.99,
+       8.295
+      ],
+      [
+       3.98,
+       8.295
+      ],
+      [
+       3.98,
+       6.35
+      ],
+      [
+       5.99,
+       6.35
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "0.09",
+   "nazwa": "Pokój gościnny / gabinet",
+   "kond": "P0",
+   "kat": "podstawowa",
+   "pobyt": true,
+   "min": 8.0,
+   "posadzka": "dąb",
+   "uw": "",
+   "pow": 12.42,
+   "geometria": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       3.77,
+       4.905
+      ],
+      [
+       3.77,
+       8.295
+      ],
+      [
+       0.105,
+       8.295
+      ],
+      [
+       0.105,
+       4.905
+      ],
+      [
+       3.77,
+       4.905
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "0.10",
+   "nazwa": "Przedsionek gospodarczy",
+   "kond": "P0",
+   "kat": "ruchu",
+   "pobyt": false,
+   "min": null,
+   "posadzka": "gres",
+   "uw": "ławka, buty, zlew gosp.",
+   "pow": 5.01,
+   "geometria": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       14.2,
+       0.105
+      ],
+      [
+       14.2,
+       2.495
+      ],
+      [
+       12.105,
+       2.495
+      ],
+      [
+       12.105,
+       0.105
+      ],
+      [
+       14.2,
+       0.105
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "0.11",
+   "nazwa": "Spiżarnia",
+   "kond": "P0",
+   "kat": "pomocnicza",
+   "pobyt": false,
+   "min": null,
+   "posadzka": "gres",
+   "uw": "",
+   "pow": 2.51,
+   "geometria": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       15.4,
+       0.105
+      ],
+      [
+       15.4,
+       2.495
+      ],
+      [
+       14.35,
+       2.495
+      ],
+      [
+       14.35,
+       0.105
+      ],
+      [
+       15.4,
+       0.105
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "0.12",
+   "nazwa": "Pomieszczenie techniczne",
+   "kond": "P0",
+   "kat": "techniczna",
+   "pobyt": false,
+   "min": 6.0,
+   "posadzka": "gres",
+   "uw": "PC split (jedn. wewn.), zasobnik CWU 300 l, bufor, rozdzielacze, rozdzielnica RG, wodomierz",
+   "pow": 6.56,
+   "geometria": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       18.295,
+       0.105
+      ],
+      [
+       18.295,
+       2.495
+      ],
+      [
+       15.55,
+       2.495
+      ],
+      [
+       15.55,
+       0.105
+      ],
+      [
+       18.295,
+       0.105
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "0.13",
+   "nazwa": "Garaż 2-stanowiskowy",
+   "kond": "P0",
+   "kat": "garaż",
+   "pobyt": false,
+   "min": null,
+   "posadzka": "posadzka żywiczna",
+   "uw": "w świetle 6,08 x 6,08 m",
+   "pow": 36.91,
+   "geometria": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       18.295,
+       2.82
+      ],
+      [
+       18.295,
+       8.895
+      ],
+      [
+       12.22,
+       8.895
+      ],
+      [
+       12.22,
+       2.82
+      ],
+      [
+       18.295,
+       2.82
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "1.01",
+   "nazwa": "Hol",
+   "kond": "P1",
+   "kat": "ruchu",
+   "pobyt": false,
+   "min": null,
+   "posadzka": "dąb",
+   "uw": "",
+   "pow": 8.58,
+   "geometria": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       8.32,
+       3.65
+      ],
+      [
+       8.32,
+       4.695
+      ],
+      [
+       0.105,
+       4.695
+      ],
+      [
+       0.105,
+       3.65
+      ],
+      [
+       8.32,
+       3.65
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "1.02",
+   "nazwa": "Pokój rodzinny / biblioteka (boks C)",
+   "kond": "P1",
+   "kat": "podstawowa",
+   "pobyt": true,
+   "min": 16.0,
+   "posadzka": "dąb",
+   "uw": "",
+   "pow": 31.9,
+   "geometria": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.895,
+       0.105
+      ],
+      [
+       3.95,
+       0.105
+      ],
+      [
+       3.95,
+       3.65
+      ],
+      [
+       8.32,
+       3.65
+      ],
+      [
+       8.32,
+       4.695
+      ],
+      [
+       11.895,
+       4.695
+      ],
+      [
+       11.895,
+       3.65
+      ],
+      [
+       11.895,
+       0.105
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "1.03",
+   "nazwa": "Pokój dziecka 1",
+   "kond": "P1",
+   "kat": "podstawowa",
+   "pobyt": true,
+   "min": 12.0,
+   "posadzka": "dąb",
+   "uw": "",
+   "pow": 12.54,
+   "geometria": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       3.8,
+       0.105
+      ],
+      [
+       3.8,
+       3.5
+      ],
+      [
+       0.105,
+       3.5
+      ],
+      [
+       0.105,
+       0.105
+      ],
+      [
+       3.8,
+       0.105
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "1.04",
+   "nazwa": "Pokój dziecka 2",
+   "kond": "P1",
+   "kat": "podstawowa",
+   "pobyt": true,
+   "min": 12.0,
+   "posadzka": "dąb",
+   "uw": "",
+   "pow": 12.42,
+   "geometria": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       3.77,
+       4.905
+      ],
+      [
+       3.77,
+       8.295
+      ],
+      [
+       0.105,
+       8.295
+      ],
+      [
+       0.105,
+       4.905
+      ],
+      [
+       3.77,
+       4.905
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "1.05",
+   "nazwa": "Łazienka",
+   "kond": "P1",
+   "kat": "pomocnicza",
+   "pobyt": false,
+   "min": null,
+   "posadzka": "gres",
+   "uw": "",
+   "pow": 6.53,
+   "geometria": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       3.98,
+       4.905
+      ],
+      [
+       3.98,
+       8.295
+      ],
+      [
+       5.99,
+       8.295
+      ],
+      [
+       5.99,
+       5.605
+      ],
+      [
+       5.59,
+       5.605
+      ],
+      [
+       5.59,
+       4.905
+      ],
+      [
+       3.98,
+       4.905
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "1.06",
+   "nazwa": "Klatka schodówa",
+   "kond": "P1",
+   "kat": "ruchu",
+   "pobyt": false,
+   "min": null,
+   "posadzka": "dąb",
+   "uw": "",
+   "pow": 6.92,
+   "geometria": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       6.2,
+       4.905
+      ],
+      [
+       6.2,
+       8.295
+      ],
+      [
+       8.32,
+       8.295
+      ],
+      [
+       8.32,
+       4.905
+      ],
+      [
+       7.32,
+       4.905
+      ],
+      [
+       7.32,
+       7.145
+      ],
+      [
+       7.2,
+       7.145
+      ],
+      [
+       7.2,
+       4.905
+      ],
+      [
+       6.2,
+       4.905
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "1.07",
+   "nazwa": "Pralnia z suszarnią",
+   "kond": "P1",
+   "kat": "pomocnicza",
+   "pobyt": false,
+   "min": null,
+   "posadzka": "gres",
+   "uw": "",
+   "pow": 11.26,
+   "geometria": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.895,
+       8.295
+      ],
+      [
+       11.895,
+       4.905
+      ],
+      [
+       8.53,
+       4.905
+      ],
+      [
+       8.53,
+       7.9
+      ],
+      [
+       8.9,
+       7.9
+      ],
+      [
+       8.9,
+       8.295
+      ],
+      [
+       11.895,
+       8.295
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "2.01",
+   "nazwa": "Hol",
+   "kond": "P2",
+   "kat": "ruchu",
+   "pobyt": false,
+   "min": null,
+   "posadzka": "dąb",
+   "uw": "",
+   "pow": 4.02,
+   "geometria": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       8.32,
+       2.8
+      ],
+      [
+       8.32,
+       4.695
+      ],
+      [
+       6.2,
+       4.695
+      ],
+      [
+       6.2,
+       2.8
+      ],
+      [
+       8.32,
+       2.8
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "2.02",
+   "nazwa": "Sypialnia rodziców",
+   "kond": "P2",
+   "kat": "podstawowa",
+   "pobyt": true,
+   "min": 14.0,
+   "posadzka": "dąb",
+   "uw": "",
+   "pow": 20.63,
+   "geometria": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       3.6,
+       0.105
+      ],
+      [
+       3.6,
+       4.695
+      ],
+      [
+       -0.895,
+       4.695
+      ],
+      [
+       -0.895,
+       0.105
+      ],
+      [
+       3.6,
+       0.105
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "2.03",
+   "nazwa": "Garderoba",
+   "kond": "P2",
+   "kat": "pomocnicza",
+   "pobyt": false,
+   "min": null,
+   "posadzka": "dąb",
+   "uw": "",
+   "pow": 10.56,
+   "geometria": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       6.05,
+       0.105
+      ],
+      [
+       6.05,
+       4.695
+      ],
+      [
+       3.75,
+       4.695
+      ],
+      [
+       3.75,
+       0.105
+      ],
+      [
+       6.05,
+       0.105
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "2.04",
+   "nazwa": "Łazienka rodziców",
+   "kond": "P2",
+   "kat": "pomocnicza",
+   "pobyt": false,
+   "min": null,
+   "posadzka": "gres",
+   "uw": "",
+   "pow": 6.53,
+   "geometria": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       3.98,
+       4.905
+      ],
+      [
+       3.98,
+       8.295
+      ],
+      [
+       5.99,
+       8.295
+      ],
+      [
+       5.99,
+       5.605
+      ],
+      [
+       5.59,
+       5.605
+      ],
+      [
+       5.59,
+       4.905
+      ],
+      [
+       3.98,
+       4.905
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "2.05",
+   "nazwa": "Gabinet",
+   "kond": "P2",
+   "kat": "podstawowa",
+   "pobyt": true,
+   "min": 8.0,
+   "posadzka": "dąb",
+   "uw": "",
+   "pow": 15.72,
+   "geometria": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       11.895,
+       0.105
+      ],
+      [
+       11.895,
+       4.695
+      ],
+      [
+       8.47,
+       4.695
+      ],
+      [
+       8.47,
+       0.105
+      ],
+      [
+       11.895,
+       0.105
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "2.06",
+   "nazwa": "Pom. techn. (reku + wyłaz)",
+   "kond": "P2",
+   "kat": "techniczna",
+   "pobyt": false,
+   "min": null,
+   "posadzka": "gres",
+   "uw": "klapa 0,9x0,9 + drabina (K-20, K-21)",
+   "pow": 5.4,
+   "geometria": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       8.32,
+       0.105
+      ],
+      [
+       8.32,
+       2.65
+      ],
+      [
+       6.2,
+       2.65
+      ],
+      [
+       6.2,
+       0.105
+      ],
+      [
+       8.32,
+       0.105
+      ]
+     ]
+    ]
+   }
+  }
+ ],
+ "plyty": [
+  {
+   "id": "E-okap",
+   "opis": "ST1: okap pd. strefy dziennej (linia E) - wysunięcie 1,00 m",
+   "z": [
+    2.75,
+    3.05
+   ],
+   "lacznik": true,
+   "geometria": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.6,
+       -1.3
+      ],
+      [
+       12.6,
+       -0.3
+      ],
+      [
+       -1.8,
+       -0.3
+      ],
+      [
+       -1.8,
+       -1.3
+      ],
+      [
+       12.6,
+       -1.3
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "E-okap-W",
+   "opis": "ST1: okap zach. - wysunięcie 1,50 m",
+   "z": [
+    2.75,
+    3.05
+   ],
+   "lacznik": true,
+   "geometria": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -0.3,
+       -0.3
+      ],
+      [
+       -0.3,
+       4.8
+      ],
+      [
+       -1.8,
+       4.8
+      ],
+      [
+       -1.8,
+       -0.3
+      ],
+      [
+       -0.3,
+       -0.3
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "daszek",
+   "opis": "ST1: daszek nad wejściem 2,80 x 1,30 m (K-12)",
+   "z": [
+    2.8,
+    3.05
+   ],
+   "lacznik": true,
+   "geometria": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.3,
+       8.7
+      ],
+      [
+       12.3,
+       10.0
+      ],
+      [
+       9.5,
+       10.0
+      ],
+      [
+       9.5,
+       8.7
+      ],
+      [
+       12.3,
+       8.7
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "C-dol",
+   "opis": "rama C - płyta dolna (linia D) wysunięcie 1,00 m",
+   "z": [
+    3.65,
+    3.85
+   ],
+   "lacznik": true,
+   "geometria": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.6,
+       -1.3
+      ],
+      [
+       12.6,
+       -0.3
+      ],
+      [
+       3.6,
+       -0.3
+      ],
+      [
+       3.6,
+       -1.3
+      ],
+      [
+       12.6,
+       -1.3
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "C-gora",
+   "opis": "rama C - płyta górna wysunięcie 1,00 m",
+   "z": [
+    5.35,
+    5.55
+   ],
+   "lacznik": true,
+   "geometria": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.6,
+       -1.3
+      ],
+      [
+       12.6,
+       -0.3
+      ],
+      [
+       3.6,
+       -0.3
+      ],
+      [
+       3.6,
+       -1.3
+      ],
+      [
+       12.6,
+       -1.3
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "ST2-okap",
+   "opis": "ST2: krawędź pd. + zach. (spód bryły A) - wysunięcie 1,00 / 1,10 m",
+   "z": [
+    5.95,
+    6.25
+   ],
+   "lacznik": true,
+   "geometria": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.6,
+       -0.3
+      ],
+      [
+       12.6,
+       -1.3
+      ],
+      [
+       -2.4,
+       -1.3
+      ],
+      [
+       -2.4,
+       -0.3
+      ],
+      [
+       -2.4,
+       5.1
+      ],
+      [
+       -1.3,
+       5.1
+      ],
+      [
+       -1.3,
+       -0.3
+      ],
+      [
+       12.6,
+       -0.3
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "ST3-okap",
+   "opis": "ST3: stropodach bryły A - wysunięcie pd. 1,00, zach. 1,10, wsch. 0,30 m",
+   "z": [
+    9.1,
+    9.42
+   ],
+   "lacznik": true,
+   "geometria": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       12.6,
+       -1.3
+      ],
+      [
+       -2.4,
+       -1.3
+      ],
+      [
+       -2.4,
+       -0.3
+      ],
+      [
+       -2.4,
+       5.1
+      ],
+      [
+       -1.3,
+       5.1
+      ],
+      [
+       -1.3,
+       -0.3
+      ],
+      [
+       12.3,
+       -0.3
+      ],
+      [
+       12.3,
+       5.1
+      ],
+      [
+       12.6,
+       5.1
+      ],
+      [
+       12.6,
+       -0.3
+      ],
+      [
+       12.6,
+       -1.3
+      ]
+     ]
+    ]
+   }
+  }
+ ],
+ "lamele": {
+  "x": [
+   -1.3,
+   12.3
+  ],
+  "y": -0.45,
+  "z": [
+   6.15,
+   9.1
+  ],
+  "rozstaw": 0.12,
+  "b": 0.04,
+  "h": 0.08,
+  "mat": "drewno termo / aluminium drewnopodobne"
+ },
+ "slupy": [
+  {
+   "id": "SL1",
+   "xy": [
+    2.5799999999999996,
+    0.0
+   ],
+   "przekroj": "RK 120x120x8 S355 w szprosie",
+   "z": [
+    0.0,
+    2.8
+   ]
+  },
+  {
+   "id": "SL2",
+   "xy": [
+    4.859999999999999,
+    0.0
+   ],
+   "przekroj": "RK 120x120x8 S355 w szprosie",
+   "z": [
+    0.0,
+    2.8
+   ]
+  },
+  {
+   "id": "SL3",
+   "xy": [
+    7.14,
+    0.0
+   ],
+   "przekroj": "RK 120x120x8 S355 w szprosie",
+   "z": [
+    0.0,
+    2.8
+   ]
+  },
+  {
+   "id": "SL4",
+   "xy": [
+    9.42,
+    0.0
+   ],
+   "przekroj": "RK 120x120x8 S355 w szprosie",
+   "z": [
+    0.0,
+    2.8
+   ]
+  },
+  {
+   "id": "SLC1",
+   "xy": [
+    6.433333333333334,
+    0.0
+   ],
+   "przekroj": "RK 100x100x6 w szprosie boksu C",
+   "z": [
+    3.85,
+    5.35
+   ]
+  },
+  {
+   "id": "SLC2",
+   "xy": [
+    8.766666666666666,
+    0.0
+   ],
+   "przekroj": "RK 100x100x6 w szprosie boksu C",
+   "z": [
+    3.85,
+    5.35
+   ]
+  }
+ ],
+ "schody": {
+  "h": 0.175,
+  "s": 0.28,
+  "n_podn": 18,
+  "biegi": 2,
+  "stopni_w_biegu": 9,
+  "szer": 1.0,
+  "bieg_W": {
+   "x": [
+    6.2,
+    7.2
+   ],
+   "y0": 4.905,
+   "kier": 1
+  },
+  "spocznik": {
+   "x": [
+    6.2,
+    8.32
+   ],
+   "y": [
+    7.145,
+    8.295
+   ]
+  },
+  "bieg_E": {
+   "x": [
+    7.32,
+    8.32
+   ],
+   "y0": 7.145,
+   "kier": -1
+  },
+  "gr_plyty_biegu": 0.18
+ },
+ "dzialka": {
+  "granice": {
+   "xw": -7.6,
+   "xe": 24.4,
+   "ys": -32.7,
+   "yn": 17.3
+  },
+  "linia_zabudowy_y": 11.3,
+  "rzedne_narozy": {
+   "NW": 101.4,
+   "NE": 101.55,
+   "SW": 101.1,
+   "SE": 101.25
+  },
+  "elementy": {
+   "podjazd": {
+    "opis": "podjazd - kostka betonowa szara (dojazd do bramy garażu)",
+    "geometria": {
+     "type": "Polygon",
+     "coordinates": [
+      [
+       [
+        18.7,
+        9.3
+       ],
+       [
+        18.7,
+        17.3
+       ],
+       [
+        12.3,
+        17.3
+       ],
+       [
+        12.3,
+        9.3
+       ],
+       [
+        18.7,
+        9.3
+       ]
+      ]
+     ]
+    }
+   },
+   "dojscie": {
+    "opis": "dojście do wejscia 2,50 m - płyty betonowe",
+    "geometria": {
+     "type": "Polygon",
+     "coordinates": [
+      [
+       [
+        12.3,
+        8.7
+       ],
+       [
+        12.3,
+        17.3
+       ],
+       [
+        9.8,
+        17.3
+       ],
+       [
+        9.8,
+        8.7
+       ],
+       [
+        12.3,
+        8.7
+       ]
+      ]
+     ]
+    }
+   },
+   "taras": {
+    "opis": "taras ogrodowy -0,05 (deska kompozytowa na legarach / płyty)",
+    "geometria": {
+     "type": "Polygon",
+     "coordinates": [
+      [
+       [
+        11.7,
+        -0.3
+       ],
+       [
+        11.7,
+        -4.3
+       ],
+       [
+        -1.8,
+        -4.3
+       ],
+       [
+        -1.8,
+        -0.3
+       ],
+       [
+        -1.8,
+        4.8
+       ],
+       [
+        -0.3,
+        4.8
+       ],
+       [
+        -0.3,
+        -0.3
+       ],
+       [
+        11.7,
+        -0.3
+       ]
+      ]
+     ]
+    }
+   },
+   "sciezka_E": {
+    "opis": "ścieżka żwirowa wzdłuż ściany wsch. (drzwi boczne garażu, jedn. zewn. PC)",
+    "geometria": {
+     "type": "Polygon",
+     "coordinates": [
+      [
+       [
+        19.6,
+        -1.0
+       ],
+       [
+        19.6,
+        9.3
+       ],
+       [
+        18.7,
+        9.3
+       ],
+       [
+        18.7,
+        -1.0
+       ],
+       [
+        19.6,
+        -1.0
+       ]
+      ]
+     ]
+    }
+   },
+   "smietnik": {
+    "opis": "osłona na pojemniki (4 x 240 l, segregacja) w linii ogrodzenia, drzwiczki od ulicy",
+    "geometria": {
+     "type": "Polygon",
+     "coordinates": [
+      [
+       [
+        9.0,
+        16.1
+       ],
+       [
+        9.0,
+        17.2
+       ],
+       [
+        6.6,
+        17.2
+       ],
+       [
+        6.6,
+        16.1
+       ],
+       [
+        9.0,
+        16.1
+       ]
+      ]
+     ]
+    }
+   },
+   "pc_plyta": {
+    "opis": "jednostka zewn. pompy ciepła na fundamencie z wibroizolacją",
+    "geometria": {
+     "type": "Polygon",
+     "coordinates": [
+      [
+       [
+        20.6,
+        0.4
+       ],
+       [
+        20.6,
+        1.8
+       ],
+       [
+        19.6,
+        1.8
+       ],
+       [
+        19.6,
+        0.4
+       ],
+       [
+        20.6,
+        0.4
+       ]
+      ]
+     ]
+    }
+   },
+   "skrzynki": {
+    "opis": "skrzynki rozsączające 7,0x1,2x0,66 m (V~5,5 m3) - wyłączone z PBC",
+    "geometria": {
+     "type": "Polygon",
+     "coordinates": [
+      [
+       [
+        1.5,
+        14.0
+       ],
+       [
+        1.5,
+        15.2
+       ],
+       [
+        -5.5,
+        15.2
+       ],
+       [
+        -5.5,
+        14.0
+       ],
+       [
+        1.5,
+        14.0
+       ]
+      ]
+     ]
+    }
+   }
+  },
+  "miejsca_goscinne": [
+   {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       15.4,
+       10.0
+      ],
+      [
+       15.4,
+       15.0
+      ],
+      [
+       12.9,
+       15.0
+      ],
+      [
+       12.9,
+       10.0
+      ],
+      [
+       15.4,
+       10.0
+      ]
+     ]
+    ]
+   },
+   {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       18.1,
+       10.0
+      ],
+      [
+       18.1,
+       15.0
+      ],
+      [
+       15.6,
+       15.0
+      ],
+      [
+       15.6,
+       10.0
+      ],
+      [
+       18.1,
+       10.0
+      ]
+     ]
+    ]
+   }
+  ],
+  "zbiornik": {
+   "xy": [
+    -2.5,
+    12.5
+   ],
+   "wym": [
+    3.0,
+    2.0
+   ],
+   "V": 6.0,
+   "opis": "zbiornik retencyjny na deszczówkę 6 m3 (podlewanie ogrodu), przelew do skrzynek"
+  },
+  "przylacza": {
+   "woda": {
+    "pts": [
+     [
+      16.8,
+      20.5
+     ],
+     [
+      16.8,
+      9.3
+     ],
+     [
+      16.8,
+      2.4
+     ]
+    ],
+    "opis": "przyłącze wody PE 40 od sieci PE 110; wodomierz w pom. techn. 0.12"
+   },
+   "kan": {
+    "pts": [
+     [
+      5.0,
+      8.7
+     ],
+     [
+      5.0,
+      15.0
+     ],
+     [
+      5.0,
+      23.0
+     ]
+    ],
+    "opis": "przykanalik PVC 160 do sieci PVC 200; studzienka rewizyjna D425 na dzialce"
+   },
+   "en": {
+    "pts": [
+     [
+      11.8,
+      18.3
+     ],
+     [
+      11.8,
+      17.3
+     ],
+     [
+      11.8,
+      9.4
+     ],
+     [
+      12.1,
+      9.4
+     ]
+    ],
+    "opis": "WLZ YKY 5x10 z ZK do rozdzielnicy RG (pom. techn.)"
+   },
+   "tel": {
+    "pts": [
+     [
+      12.0,
+      18.8
+     ],
+     [
+      12.0,
+      17.3
+     ],
+     [
+      12.0,
+      9.4
+     ]
+    ],
+    "opis": "światłowód (kanalizacja teletechniczna)"
+   },
+   "deszcz": {
+    "pts": [
+     [
+      0.5,
+      8.7
+     ],
+     [
+      0.5,
+      11.5
+     ],
+     [
+      -1.0,
+      12.5
+     ]
+    ],
+    "opis": "kanalizacja deszczowa z rur spustowych elewacji pn. do zbiornika"
+   }
+  }
+ },
+ "wyniki": {
+  "PU": {
+   "P0": 104.39,
+   "P1": 90.15,
+   "P2": 62.86
+  },
+  "PU_suma": 257.4,
+  "garaz": 36.91,
+  "zabudowa": 180.6,
+  "zabudowa_z_plytami": 204.82,
+  "PBC": 1268.8,
+  "intensywnosc": 0.238,
+  "wys_mpzp": 10.05,
+  "wys_WT": 9.9
+ }
+}

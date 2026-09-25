@@ -1,5 +1,6 @@
 {
- "title": "Korekta Inwestora: „S” z przesuniętych brył, garaż w parterze — panel koncepcji uruchomiony ponownie",
+ "nr": 10,
+ "title": "Pipeline 3D ukończony (rendery, nasłonecznienie, aksonometria); W2 kompletny, W3 startuje",
  "stages": [
   [
    "Analiza szkicu — interpretacja v2 („S” z brył, garaż)",
@@ -55,5 +56,23 @@
   "W2 kompletny (rzuty, elewacja, przekrój, zagospodarowanie). W3 (światło/ogród) startuje — potem ocena sędziów.",
   "Obrazy 3D w raporcie to jeszcze model TESTOWY — Dom LAMELA trafi do pipeline'u po syntezie koncepcji.",
   "Generatory rzutów/przekrojów/elewacji z modelu w budowie (test na modelu testowym)."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/docs/20_koncepcja/W2/przekroj.png",
+   "caption": "W2: przekrój"
+  },
+  {
+   "path": "/home/user/aihouse/docs/20_koncepcja/W2/zagospodarowanie.png",
+   "caption": "W2: zagospodarowanie działki"
+  },
+  {
+   "path": "/home/user/aihouse/build/test/pipeline/rendery/g_naslonecznienie_3x3.png",
+   "caption": "Analiza nasłonecznienia 3×3 (model testowy)"
+  },
+  {
+   "path": "/home/user/aihouse/build/test/pipeline/rendery/e_aksonometria_rozwarstwiona.png",
+   "caption": "Aksonometria rozwarstwiona (model testowy)"
+  }
  ]
 }
