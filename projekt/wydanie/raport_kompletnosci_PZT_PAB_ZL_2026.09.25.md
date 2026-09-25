@@ -1,6 +1,6 @@
 # Raport kompletności — PZT_PAB_ZL_2026.09.25.pdf
 
-*Wygenerowano 2026-09-25 07:16 przez `tools/dokumenty/zloz_tom_I.py` (walidator `lamela.dokumenty.sprawdz_tom`, lista „TOM I — PZT + PAB + ZL w jednym pliku (rejestr C.1)”). Walidator ocenia obecność treści wymaganej przepisami (wyrażenia regularne), nie jej poprawność merytoryczną.*
+*Wygenerowano 2026-09-25 07:18 przez `tools/dokumenty/zloz_tom_I.py` (walidator `lamela.dokumenty.sprawdz_tom`, lista „TOM I — PZT + PAB + ZL w jednym pliku (rejestr C.1)”). Walidator ocenia obecność treści wymaganej przepisami (wyrażenia regularne), nie jej poprawność merytoryczną.*
 
 **Status tomu: PRZYKŁAD – NIE DO ZŁOŻENIA**
 
@@ -18,7 +18,7 @@ Plik: `projekt/wydanie/PZT_PAB_ZL_2026.09.25.pdf` — 62 stron, 4.45 MB; nazwa w
 | PAB | Projekt architektoniczno-budowlany | 22–53 | 22 | 10 |
 | ZL | Załączniki | 54–62 | 9 | 0 |
 
-Strony 1–2 pliku: strona tytułowa tomu i łączny spis treści (bez numeru elementu).
+Strony 1–4 pliku: strona tytułowa tomu i łączny spis treści ze spisem załączników (numeracja „TOM I · strona X z 4”).
 
 Źródła rysunków: PZT — `projekt/02_PZT/rysunki`; PAB — `projekt/01_koncepcja/widoki`.
 
