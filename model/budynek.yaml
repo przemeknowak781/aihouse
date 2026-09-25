@@ -555,7 +555,7 @@ fundamenty:
     - {id: SF2, os: [[4.095, 0.4], [4.105, 0.4]], b: 1.0, h: 0.45, spod: -0.85, mat: ZB_C25, uwagi: 'pogrubienie płyty 1,0 × 1,0 m pod słupem SL2 (przebicie) — w obrysie płyty'}
     - {id: SF3, os: [[6.435, 0.4], [6.445, 0.4]], b: 1.0, h: 0.45, spod: -0.85, mat: ZB_C25, uwagi: 'pogrubienie płyty 1,0 × 1,0 m pod słupem SL3 (przebicie) — w obrysie płyty'}
     - {id: SF4, os: [[8.775, 0.4], [8.785, 0.4]], b: 1.0, h: 0.45, spod: -0.85, mat: ZB_C25, uwagi: 'pogrubienie płyty 1,0 × 1,0 m pod słupem SL4 (przebicie) — w obrysie płyty'}
-    - {id: SF9, os: [[0.595, 0.6], [0.605, 0.6]], b: 1.4, h: 0.45, spod: -0.85, mat: ZB_C25, uwagi: 'pogrubienie narożne 1,4 × 1,4 m pod trzpieniem ŻB A/1 (SL9) — przebicie przy narożu płyty'}
+    - {id: SF9, os: [[0.695, 0.7], [0.705, 0.7]], b: 1.6, h: 0.65, spod: -1.05, mat: ZB_C25, uwagi: 'pogrubienie narożne 1,6 × 1,6 m (h = 0,90 m łącznie) pod trzpieniem ŻB A/1 (SL9) — przebicie przy narożu płyty'}
 
 schody:
   - {id: SCH1, z_kond: P0, na_kond: P1, liczba_stopni: 18, wys_stopnia: 0.175, szer_stopnia: 0.28, biegi: [{start: [6.5475, 5.23], kierunek: [0, 1], szer: 1.135, stopni: 9}, {start: [7.83, 7.47], kierunek: [0, -1], szer: 1.13, stopni: 9}], spoczniki: [{obrys: [[5.98, 7.47], [8.395, 7.47], [8.395, 8.645], [5.98, 8.645]], rzedna: 1.575}], plyta: {grubosc: 0.18}, mat: ZB_C25, uwagi: 'płyty biegów ŻB 18 cm: dolny koniec na stropie/podciągu osi 3 (B8/B9/B10 — P0/P1/P2), górny na płycie spocznika; spocznik na ścianach C/D i ścianie środkowej ŻB 15 (monolitycznie, A2 I-2); stopnie dębowe; biegi 1,135 / 1,130 m w świetle ścian, prześwit nad biegiem ≥ 2,00'}

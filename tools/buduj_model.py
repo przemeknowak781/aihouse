@@ -1119,11 +1119,11 @@ for sl in SLUPY[:4]:
                     "spod": r(Z_PLYTA_F - T_PLYTA_F - 0.45),
                     "mat": "ZB_C25", "uwagi": f"pogrubienie płyty 1,0 × 1,0 m pod słupem {sl['id']} (przebicie) — w obrysie płyty"})
 # runda konstrukcyjna 1: pogrubienie narożne pod trzpieniem ŻB A/1 (słup narożny płyty — przebicie 6.4.4 z β = 1,5, obwód
-# przycięty krawędziami płyty) — 1,40 × 1,40 m w obrysie płyty, h = 0,70 m łącznie
+# przycięty krawędziami płyty) — 1,60 × 1,60 m w obrysie płyty, h = 0,90 m łącznie
 _sl9 = SLZ_WEZLY["A/1"][0]
-FUND_EL.append({"id": f"SF{_sl9[2:]}", "os": [[r(xA + 0.595), 0.60], [r(xA + 0.605), 0.60]], "b": 1.40, "h": 0.45,
-                "spod": r(Z_PLYTA_F - T_PLYTA_F - 0.45), "mat": "ZB_C25",
-                "uwagi": f"pogrubienie narożne 1,4 × 1,4 m pod trzpieniem ŻB A/1 ({_sl9}) — przebicie przy narożu płyty"})
+FUND_EL.append({"id": f"SF{_sl9[2:]}", "os": [[r(xA + 0.695), 0.70], [r(xA + 0.705), 0.70]], "b": 1.60, "h": 0.65,
+                "spod": r(Z_PLYTA_F - T_PLYTA_F - 0.65), "mat": "ZB_C25",
+                "uwagi": f"pogrubienie narożne 1,6 × 1,6 m (h = 0,90 m łącznie) pod trzpieniem ŻB A/1 ({_sl9}) — przebicie przy narożu płyty"})
 FUND = {"typ": "plyta", "elementy": FUND_EL,
         "izolacja_obwodowa": {"typ": "pozioma", "D": 1.00, "d_n": 0.10, "mat": "XPS300", "glebokosc": 0.45,
                               "opis": "izolacja przeciwprzemarzaniowa XPS 10 cm × 1,00 m (garaż 1,20 m) wokół płyty, spadek 2 % od budynku"},

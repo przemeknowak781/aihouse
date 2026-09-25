@@ -66,3 +66,64 @@ w całości: rzut w pełnej skali 1:50 / 1:500, legenda i uwagi pod rzutem, nic 
 Nie uznano za błąd: warianty krótsze o 5 mm (krok siatki długości 10 mm), PZT-01 410×594 (−2,4 %, zjada go kara
 niestandardu 3 %), PB-AR-04 594×727 (przekroje jeden nad drugim, −9 %) — zespół AR świadomie wybrał jeden wiersz na
 wspólnej linii terenu; to decyzja czytelności, warto ją tylko odnotować w `zastosowanie_AR.md`.
+
+**Poprawka (silnik, nie konfiguracja):** w `uklad.rozmiesc` dodać kandydatów „szerokość = rolka”: dla
+W ∈ {297, 420, 594, 610, 841, 914} najmniejsza wysokość H (krok `krok_dlugosci`, ≥ 297) z `pakuj(...).ok`, oceniana
+tym samym `koszt()`; do listy `wysokosci` dopisać rolki 610 i 914 (dokumentacja modułu je wymienia, lista nie).
+Po zmianie usunąć z `model/arkusze_is.yaml` wymuszenie `max_wysokosc: 420` przy PT-IS-03/08 (blokuje także te
+warianty) i przegenerować komplety. Test: arkusz o treści ~560×400 mm ma dostać 594×H, a nie 690×420.
+
+## 4. Składanie — pasy spoza 180–210 mm
+
+Tabliczka jest na wierzchu na wszystkich arkuszach, znaki składania leżą dokładnie na liniach planu
+(`fold_positions`), numeracja zgięć jest na marginesie. Nieregularne pasy (pas pośredni < 180 mm, ocena „poprawne”)
+ma **20 z 33 arkuszy**: PB-AR-02 (140), PB-AR-04 (135, rozrzut 55), PT-IS-01 (145), PT-IS-02/-04 (135, rozrzut 55),
+PT-IS-03/-06/-08 (125), PT-IE-01/-02/-08/-10/-11/-13 (120), PT-IE-06 (130), PT-IE-07 (155), PT-IE-12 (128), PT-IE-14
+(140, rozrzut 50) oraz PZT-01/-02 (klasyczne A3: 125 + 105 + 190, 115 + 95 + 190 — praktyka DIN, akceptowalne).
+Przyczyna: długości 640–920 i 1060–1280 mm leżą w lukach między pasmami „ładnymi” (570–630, 930–1050,
+1290–1470 mm), a kara 4 % za „poprawne” zwykle przegrywa z dopłatą papieru. Warianty z § 3 (szerokość 594/610 →
+210 + 192 + 192) usuwają 9 z tych przypadków i jednocześnie zmniejszają papier — to główny kierunek poprawy.
+
+## 5. Numeracja, spisy, wydanie
+
+* Tabliczki (NR, ARKUSZ 1/N…N/N, SKALA, FORMAT), spisy w `tom_widoki.pdf`, `tom_PZT.pdf`, `tom_PT-IS.pdf`,
+  `tom_PT-IE.pdf` i `raport_widokow.json` są wzajemnie zgodne; tomy mają stronę spisu A4 + arkusze w formatach
+  rzeczywistych. `PAB_2026.09.25.pdf`, `PZT_2026.09.25.pdf` i `wydanie/PZT_PAB_ZL_2026.09.25.pdf` zawierają aktualne
+  arkusze.
+* **Rozjazd:** `projekt/wydanie/PT_3_IS_2026.09.25.pdf` ma PT-IS-11 594×420 (jest 580×420);
+  `projekt/wydanie/PT_4_WB_2026.09.25.pdf` ma PT-IE-03 690×297 (jest 570×297), PT-IE-06 594×420 (jest 730×297),
+  PT-IE-09 690×297 (jest 570×297). Te same stare formaty są w wykazach rysunków
+  `projekt/09_opis_i_zalaczniki/PT_IS/PT_IS_opis.md` (PT-IS-11 „A2”) i `PT_IE/PT_IE_opis.md` (IE-03, -06, -09).
+  Wydania powstały przed ostatnim przegenerowaniem rysunków po poprawkach silnika.
+
+## 6. PZT-03 — format jawny jest już zbędnym obejściem
+
+`model/arkusze_pzt.yaml` wymusza `format: "620x420"`, bo „auto daje 610×420 z uwagami w 3 częściach”. Po poprawkach
+silnika `auto` (arkusz wygenerowany kontrolnie, `weryf/pzt_auto/`) daje **A2 pionowo 420×594**: 0,2495 m² zamiast
+0,2604 (−4 %), składanie „dobre” (125 + 105 + 190 / 297 + 297) zamiast „poprawne”, W 92 %, uwagi w jednym bloku,
+bez kolizji; koszt silnika 0,252 wobec 0,282. Deklaracja zespołu silnika „w trybie auto wychodzi zawsze 620×420” nie
+potwierdza się dla bieżącej treści. Komentarz w YAML (o braku rezerwacji stref znaków centrujących) też jest
+nieaktualny.
+
+## 7. Czytelność — pismo na PZT (W-312)
+
+Rejestr W-312 wymaga na PZT pisma ≥ 2,5 mm. Na PZT-01…03 blok „OBJAŚNIENIA I UWAGI”, legenda i część opisów mają
+1,8 mm (em 2,62 mm w PDF; np. PZT-03 uwagi 1–8; ok. 4–5 tys. znaków na arkusz). To stan sprzed prac nad ekonomią
+arkuszy (`sheets._bloki_ukladu`: `BlokUwag(h=1.8)`, `site_draw` legenda 1,8), nie regresja — ale zwiększenie pisma
+zmieni wymiary bloków, więc trzeba to zrobić przed zamrożeniem formatów.
+
+## 8. Drobne
+
+* `zastosowanie_IS.md` podaje PT-IS-11 jako A2 (jest 580×420), `zastosowanie_PZT.md` W min 77 % (PZT-01; jest 81 %).
+* Arkusze z flagą `kolejnosc_czytania: false` (PB-AR-03, PZT-03, PT-IS-06, PT-IE-01/-10/-12): obejrzano PT-IE-01 i
+  PZT-03 — kolejność dopuszczalna, ale na PT-IE-01 tabela OBWODY stoi w połowie prawej kolumny z pustym polem
+  ok. 180×170 mm nad nią; wariant 594×437 z § 3 usuwa ten problem.
+* `test_podglad_www` (przeglądarka 3D) przekracza 30 s kliknięcia przy równoległym obciążeniu CPU; osobno przechodzi.
+  Nie dotyczy arkuszy.
+
+## 9. Wniosek
+
+Cel Inwestora jest w dużej mierze osiągnięty: −36 % papieru, wypełnienie 81–85 %, paczki A4 cieńsze o 41 %, skale
+zgodne z RPB, PDF wektorowe, tabliczki i spisy spójne. Do poprawy przed wydaniem: (1) kandydaci „szerokość = rolka”
+w silniku — dalsze ok. −4 % papieru i lepsze składanie 9 arkuszy; (2) PZT-03 na `auto`; (3) przegenerowanie
+wydań PT-3 IS i PT-4 IE oraz wykazów rysunków w opisach; (4) pismo 2,5 mm na PZT.
