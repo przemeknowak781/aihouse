@@ -64,5 +64,5 @@ wyposazenie:
   - {kond: P2, typ: biurko, xy: [10.2, 0.105], obrot: 90, wym: [1.8, 0.8]}
   - {kond: P2, typ: szafa, xy: [8.605, 2.0], obrot: 0, wym: [2.4, 0.4], opis: regał}
   - {kond: P2, typ: sofa, xy: [11.895, 3.8], obrot: 180, wym: [2.0, 0.9], opis: sofa rozkładana (gość okazjonalny — A3 D-7)}
-  - {kond: P2, typ: rekuperator, xy: [5.98, 1.3], obrot: 0, wym: [1.2, 0.7], opis: 'centrala wentylacyjna 450 m³/h, η_t 85 % — na podstawie antywibracyjnej, połączenia elastyczne, tłumiki na 4 króćcach; L w pokojach ≤ wartości PN-B-02151-2 do sprawdzenia w PT-IS (A3 I-8; W-232)'}
+  - {kond: P2, typ: rekuperator, xy: [6.13, 1.3], obrot: 0, wym: [1.2, 0.7], opis: 'centrala wentylacyjna 450 m³/h, η_t 85 %, 0,15 m od ściany (króćce ODA/ETA — V3) — na podstawie antywibracyjnej, połączenia elastyczne, tłumiki na 4 króćcach; L w pokojach ≤ wartości PN-B-02151-2 do sprawdzenia w PT-IS (A3 I-8; W-232)'}
   - {kond: P2, typ: urzadzenie, xy: [8.395, 1.3], obrot: 180, wym: [0.8, 0.15], opis: rozdzielacz ogrzewania podłogowego P2}

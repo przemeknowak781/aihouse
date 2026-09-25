@@ -102,6 +102,8 @@ PT_WSPOLNE:
   - {id: C2-06, el: PT, opis: "Oświadczenie projektanta PT (brzmienie art. 41 ust. 4a pkt 2 PB)", podstawa: "PB art. 34 ust. 3d pkt 3, art. 41 ust. 4a pkt 2", szukaj: {zakladki: ['oświadczenie projektanta'], tekst: ['rozstrzygnięciami dotyczącymi'], wszystkie: true}}
   - {id: C2-07, el: PT, opis: "Dane dotyczące warunków ochrony przeciwpożarowej stosownie do zakresu", podstawa: "RPB § 23 pkt 10", szukaj: {tekst: ['§ 23 pkt 10\b', 'przeciwpożarow']}}
   - {id: C2-08, el: PT, opis: "Skale rysunków nie mniejsze niż 1:100", podstawa: "RPB § 9 ust. 3", szukaj: {skala_max: 100}}
+  - {id: C2-09, el: PT, opis: "Dane dotyczące warunków ochrony ludności (w PT — „nie dotyczy” z podstawą)", podstawa: "RPB § 23 pkt 12 (Dz.U. 2026 poz. 597 § 1 pkt 6)", szukaj: {tekst: ['§ 23 pkt 12\b']}}
+  - {id: C2-10, el: "*", opis: "Metryki arkuszy: projektant (dane lub [DO UZUPEŁNIENIA]), sprawdzający (osoba lub „nie dotyczy (art. 20 ust. 3 pkt 2 PB)”)", podstawa: "RPB § 10 ust. 1 pkt 3; W-305, W-320", szukaj: {spec: tabliczki}}
 
 PT_AR:
   opis: "PT-1 AR — projekt techniczny, architektura (rejestr C.2)"
@@ -156,3 +158,19 @@ PT_IE:
     - {id: C2-IE-03, el: PT, opis: "Instalacja piorunochronna / analiza ryzyka", podstawa: "RPB § 23 pkt 7 lit. i; W-191", szukaj: {tekst: ['piorunochron|ryzyk\w* piorun']}}
     - {id: C2-IE-04, el: PT, opis: "Bilans mocy", podstawa: "RPB § 23 pkt 11 lit. a", szukaj: {tekst: ['bilans\w* mocy']}}
     - {id: C2-IE-05, el: PT, opis: "Rzuty instalacji, schemat rozdzielnicy, uziom", podstawa: "RPB § 24 pkt 4 lit. b", szukaj: {rysunki: ['rzut|schemat|uziom']}}
+
+# Tom PT-4 obejmujący instalacje elektryczne i telekomunikacyjne — dwie specjalności (PB art. 15a ust. 18 i 22),
+# symbol WB (zał. 1 RPB: „więcej niż jedna specjalność”); pozycje PT_IE + współautor z uprawnieniami telekomunikacyjnymi.
+PT_WB:
+  opis: "PT-4 WB — projekt techniczny, instalacje elektryczne (IE) i telekomunikacyjne (BT) (rejestr C.2)"
+  nazwa_pliku: PT
+  symbol: WB
+  elementy: [PT]
+  wspolne: PT_WSPOLNE
+  pozycje:
+    - {id: C2-IE-01, el: PT, opis: "Instalacje elektroenergetyczne", podstawa: "RPB § 23 pkt 7 lit. g", szukaj: {tekst: ['elektroenerget']}}
+    - {id: C2-IE-02, el: PT, opis: "Instalacje telekomunikacyjne (światłowód)", podstawa: "RPB § 23 pkt 7 lit. h; W-196", szukaj: {tekst: ['telekomunik|światłow']}}
+    - {id: C2-IE-03, el: PT, opis: "Instalacja piorunochronna / analiza ryzyka", podstawa: "RPB § 23 pkt 7 lit. i; W-191", szukaj: {tekst: ['piorunochron|ryzyk\w* piorun']}}
+    - {id: C2-IE-04, el: PT, opis: "Bilans mocy", podstawa: "RPB § 23 pkt 11 lit. a", szukaj: {tekst: ['bilans\w* mocy']}}
+    - {id: C2-IE-05, el: PT, opis: "Rzuty instalacji, schemat rozdzielnicy, uziom", podstawa: "RPB § 24 pkt 4 lit. b", szukaj: {rysunki: ['rzut|schemat|uziom']}}
+    - {id: C2-WB-01, el: PT, opis: "Współautor ze specjalnością telekomunikacyjną na stronie tytułowej i w oświadczeniu", podstawa: "PB art. 15a ust. 18, art. 34 ust. 3e; RPB § 7 ust. 2 pkt 3", szukaj: {tytulowa: ['telekomunikac'], tekst: ['telekomunikacyjn\w* bez ograniczeń'], wszystkie: true}, dane_osobowe: true}

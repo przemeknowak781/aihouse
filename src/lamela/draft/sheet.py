@@ -75,17 +75,24 @@ def fold_positions(W: float, H: float):
 
 
 # ------------------------------------------------------------------------------------------------ tabliczka
+DO_UZUP = "[DO UZUPEŁNIENIA]"                          # konwencja znaczników — rejestr wymagań, sekcja E.1
+SPRAWDZAJACY_ND = "nie dotyczy (art. 20 ust. 3 pkt 2 PB)"   # W-305: dom jednorodzinny — bez sprawdzającego
+
+
 @dataclass
 class Osoba:
-    """Wiersz metryki w tabliczce. Pola celowo puste — do ręcznego uzupełnienia (nie fabrykujemy danych osób)."""
+    """Wiersz metryki w tabliczce (RPB § 10 ust. 1 pkt 3). Dane osób nie są fabrykowane: pola bez danych
+    niosą znacznik ``[DO UZUPEŁNIENIA]`` (W-320), a nie pozostają puste."""
     funkcja: str
-    imie_nazwisko: str = ""
-    specjalnosc_uprawnienia: str = ""
+    imie_nazwisko: str = DO_UZUP
+    specjalnosc_uprawnienia: str = DO_UZUP
     data: str = ""
 
 
 def _osoby_domyslne():
-    return [Osoba("Projektant"), Osoba("Projektant (wsp.)"), Osoba("Sprawdzający"), Osoba("Opracował")]
+    return [Osoba("Projektant"), Osoba("Projektant (wsp.)"),
+            Osoba("Sprawdzający", imie_nazwisko=SPRAWDZAJACY_ND, specjalnosc_uprawnienia="—"),
+            Osoba("Opracował")]
 
 
 @dataclass

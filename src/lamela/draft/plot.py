@@ -110,7 +110,12 @@ def qa(sheet, kind: str | None = None) -> dict:
                 errors.append(f"tabliczka: brak pola „{name}”")
         proj = [o for o in tb.osoby if o.funkcja.lower().startswith("projektant")]
         if not proj or not proj[0].imie_nazwisko or not proj[0].specjalnosc_uprawnienia:
-            warnings.append("tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)")
+            errors.append("tabliczka: puste pole projektanta bez znacznika [DO UZUPEŁNIENIA] (RPB § 10 ust. 1 pkt 3, W-320)")
+        elif "DO UZUPEŁNIENIA" in proj[0].imie_nazwisko + proj[0].specjalnosc_uprawnienia:
+            warnings.append("tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)")
+        spr = [o for o in tb.osoby if o.funkcja.lower().startswith("sprawdz")]
+        if tb.sprawdzenie and spr and not spr[0].imie_nazwisko:
+            errors.append("tabliczka: puste pole „Sprawdzający” — wpisać osobę albo „nie dotyczy (art. 20 ust. 3 pkt 2 PB)” (W-305)")
     # 2. legenda
     all_prims = [(None, sheet, p) for p in sheet.prims] + [(vp, vp, p) for vp in sheet.viewports for p in vp.prims]
     if not any(p.layer == "R-LEGENDA" for _v, _c, p in all_prims):

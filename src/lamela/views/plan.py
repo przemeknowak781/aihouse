@@ -1161,7 +1161,17 @@ def draw_furniture(vp, it: dict):
                 kw["hob_side"] = 1 if dv[0] * math.cos(a_) + dv[1] * math.sin(a_) > 0 else -1
         fn(vp, pos, rot - 90.0, **kw)
     elif fname == "tank":
-        fn(vp, pos, **kw)
+        # wydanie (V3 — kolizje mebli ze ścianami): `xy` na licu ściany, `obrot` — od ściany do pomieszczenia (jak meble);
+        # symbol zbiornika rysowany od środka → przesunięcie o promień w głąb pomieszczenia
+        d_ = float(kw.get("d", 0.65))
+        a_ = math.radians(rot)
+        fn(vp, (pos[0] + math.cos(a_) * d_ / 2, pos[1] + math.sin(a_) * d_ / 2), **kw)
+    elif fname == "recuperator":
+        d_ = float(kw.get("d", 0.6))
+        a_ = math.radians(rot)
+        fn(vp, (pos[0] + math.cos(a_) * d_ / 2, pos[1] + math.sin(a_) * d_ / 2), rot - 90.0, **kw)
+    elif fname == "heat_pump":
+        fn(vp, pos, rot - 90.0, **kw)
     else:
         fn(vp, pos, rot, **kw)
 

@@ -103,4 +103,5 @@ def linki_na_goto(doc: pymupdf.Document, uri_mapa=None):
 
 
 def rozmiar_mb(sciezka) -> float:
-    return os.path.getsize(sciezka) / (1024 * 1024)
+    """Rozmiar pliku w MB (10⁶ B — jednostka dziesiętna SI, jak w RPB § 2b ust. 3 „150 MB”)."""
+    return os.path.getsize(sciezka) / 1_000_000

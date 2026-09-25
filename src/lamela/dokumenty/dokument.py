@@ -945,7 +945,7 @@ def _metadane(doc: pymupdf.Document, *, tytul: str, dane: dict, temat: str, przy
     doc.set_metadata({
         "title": tytul, "author": autor, "subject": f"{temat}; {dane.get('lokalizacja', '')}; "
                                                     f"kategoria obiektu {dane.get('kategoria', 'I')}",
-        "keywords": "; ".join(k for k in ["projekt budowlany", "RPB Dz.U. 2022 poz. 1679", dane.get("nazwa_krotka", ""),
+        "keywords": "; ".join(k for k in ["projekt budowlany", "RPB Dz.U. 2022 poz. 1679 ze zm.", dane.get("nazwa_krotka", ""),
                                           f"kategoria {dane.get('kategoria', 'I')}", slowa,
                                           STATUS_PRZYKLAD if przyklad else ""] if k),
         "creator": "lamela.dokumenty (Chromium + PyMuPDF)", "producer": f"PyMuPDF {pymupdf.VersionBind}",

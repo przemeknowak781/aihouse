@@ -166,6 +166,19 @@ def _analiza(doc: pymupdf.Document, lista: dict) -> dict:
     return dict(toc=toc, teksty=teksty, a4=a4, elementy=elementy)
 
 
+def _ile_widokow(tytul: str) -> int:
+    """Liczba widoków na arkuszu wg tytułu: oznaczenia przekrojów „A-A”, „B-B” (każde osobno); tytuł w liczbie
+    mnogiej bez oznaczeń („ELEWACJE”, „PRZEKROJE”) — co najmniej 2; „ELEWACJE N, S, E, W” — liczba kierunków."""
+    t = tytul.split("(")[0]
+    n = len(re.findall(r"\b([A-Z])\s*[-–]\s*\1\b", t))
+    kier = re.search(r"ELEWACJ\w*\s+((?:[NSEW]|PŁN|PŁD|WSCH|ZACH)\w*(?:\s*[,i]\s*\w+)+)", t, re.I)
+    if kier:
+        n = max(n, len(re.split(r"\s*[,i]\s*", kier.group(1).strip())))
+    if n == 0 and re.search(r"\b(PRZEKROJE|ELEWACJE|RZUTY)\b", t, re.I):
+        n = 2
+    return max(1, n)
+
+
 def _szukaj(wzorce, gdzie) -> list[str]:
     tr = []
     for w in wzorce:
@@ -179,6 +192,44 @@ def _szukaj(wzorce, gdzie) -> list[str]:
     return tr
 
 
+def _wiersz_tabliczki(slowa, etykieta: str) -> str | None:
+    """Tekst wiersza metryki (na prawo od komórki FUNKCJA = ``etykieta``); None — brak wiersza."""
+    for w in slowa:
+        if w[4].lower().rstrip(":") == etykieta.lower():
+            y = (w[1] + w[3]) / 2
+            h = max(w[3] - w[1], 1.0)
+            reszta = [v for v in slowa if v[0] > w[2] and abs((v[1] + v[3]) / 2 - y) < 0.8 * h
+                      and v[0] - w[2] < 400]
+            t = " ".join(v[4] for v in sorted(reszta, key=lambda v: v[0]))
+            if t.startswith("(wsp"):                       # wiersz współprojektanta — szukaj dalej
+                continue
+            return t
+    return None
+
+
+def _tabliczki(doc, an) -> tuple[str, str]:
+    """Metryki arkuszy (RPB § 10 ust. 1 pkt 3; W-305, W-320): wiersz „Projektant” niepusty (dane albo
+    [DO UZUPEŁNIENIA]); wiersz „Sprawdzający” — osoba albo „nie dotyczy (art. 20 ust. 3 pkt 2 PB)”."""
+    zle, n = [], 0
+    for i, p in enumerate(doc):
+        if an["a4"][i]:
+            continue
+        slowa = p.get_text("words")
+        if not any("UPRAWNIE" in w[4].upper() for w in slowa):
+            continue                                   # arkusz bez tabliczki lamela.draft (np. zastępczy)
+        n += 1
+        pr = _wiersz_tabliczki(slowa, "Projektant")
+        sp = _wiersz_tabliczki(slowa, "Sprawdzający")
+        if pr is not None and not re.search(r"\w{3,}", pr):
+            zle.append(f"s. {i + 1}: pusty wiersz „Projektant”")
+        if sp is not None and not re.search(r"\w{3,}", sp):
+            zle.append(f"s. {i + 1}: pusty wiersz „Sprawdzający”")
+    if not n:
+        return "OK", "brak arkuszy z tabliczką lamela.draft"
+    return ("BRAK" if zle else "OK"), ("; ".join(zle[:6]) + (f" … (+{len(zle) - 6})" if len(zle) > 6 else "")
+                                       if zle else f"{n} {odmiana(n, 'tabliczka', 'tabliczki', 'tabliczek')} z wypełnioną metryką")
+
+
 def _spec(nazwa, doc, sciezka, an, lista, el_info) -> tuple[str, str]:
     if nazwa == "nazwa_pliku":
         ok, opis = sprawdz_nazwe(Path(sciezka).name, lista.get("nazwa_pliku"))
@@ -186,7 +237,7 @@ def _spec(nazwa, doc, sciezka, an, lista, el_info) -> tuple[str, str]:
             return "BRAK", f"symbol specjalności w nazwie ≠ {lista['symbol']}"
         return ("OK" if ok else "BRAK"), opis
     if nazwa == "rozmiar":
-        mb = Path(sciezka).stat().st_size / 1048576
+        mb = Path(sciezka).stat().st_size / 1_000_000
         return ("OK" if mb <= LIMIT_MB else "BRAK"), f"{mb:.2f} MB (limit {LIMIT_MB:.0f} MB)"
     if nazwa == "metadane":
         m = doc.metadata or {}
@@ -212,6 +263,8 @@ def _spec(nazwa, doc, sciezka, an, lista, el_info) -> tuple[str, str]:
     if nazwa == "tom_pt":
         inne = [k for k in an["elementy"] if not k.startswith("PT") and k != "*"]
         return ("BRAK" if inne else "OK"), (f"inne elementy w pliku: {inne}" if inne else "plik zawiera tylko tom PT")
+    if nazwa == "tabliczki":
+        return _tabliczki(doc, an)
     if nazwa == "numeracja":
         if el_info is None:
             return "BRAK", "element nieznaleziony"
@@ -291,7 +344,7 @@ def sprawdz_tom(tom, lista_kontrolna: dict | str | None = None) -> RaportKomplet
                 wymagane += len(w)
                 if tryb == "rysunki" and sz.get("min"):
                     rx = re.compile(w[0].replace(" ", r"\s+"), re.I)
-                    ile = sum(1 for t in zakres["rysunki"] if rx.search(t))
+                    ile = sum(_ile_widokow(t) for t in zakres["rysunki"] if rx.search(t))
                     if ile >= sz["min"]:
                         trafione.append(w[0])
                     szczeg.append(f"rysunków: {ile} (wymagane ≥ {sz['min']})")
@@ -338,6 +391,6 @@ def sprawdz_tom(tom, lista_kontrolna: dict | str | None = None) -> RaportKomplet
                    for k, v in an["elementy"].items()}
         return RaportKompletnosci(plik=sciezka.name, lista=lista.get("opis", lista.get("klucz", "")), status=status,
                                   pozycje=pozycje, znaczniki=zn, elementy=el_opis,
-                                  rozmiar_mb=sciezka.stat().st_size / 1048576, strony=doc.page_count)
+                                  rozmiar_mb=sciezka.stat().st_size / 1_000_000, strony=doc.page_count)
     finally:
         doc.close()

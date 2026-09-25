@@ -1873,7 +1873,7 @@ WYP = [
     F("P2", "umywalka_blat", (XB_i, 6.95), 0, (1.40, 0.50), opis="umywalka podwójna (2 stanowiska po 0,70 m)"),
     F("P2", "biurko", (10.20, Y1_i), 90, (1.80, 0.80)), F("P2", "szafa", (xD + INT, 2.00), 0, (2.40, 0.40), opis="regał"),
     F("P2", "sofa", (XE_i, 3.80), 180, (2.00, 0.90), opis="sofa rozkładana (gość okazjonalny — A3 D-7)"),
-    F("P2", "rekuperator", (xC + INT, 1.30), 0, (1.20, 0.70), opis="centrala wentylacyjna 450 m³/h, η_t 85 % — na podstawie "
+    F("P2", "rekuperator", (xC + INT + 0.15, 1.30), 0, (1.20, 0.70), opis="centrala wentylacyjna 450 m³/h, η_t 85 %, 0,15 m od ściany (króćce ODA/ETA — V3) — na podstawie "
       "antywibracyjnej, połączenia elastyczne, tłumiki na 4 króćcach; L w pokojach ≤ wartości PN-B-02151-2 do sprawdzenia w PT-IS "
       "(A3 I-8; W-232)"),
     F("P2", "urzadzenie", (xD - INT, 1.30), 180, (0.80, 0.15), opis="rozdzielacz ogrzewania podłogowego P2"),
