@@ -12,6 +12,8 @@
 Opcje widoku (``opcje`` w konfiguracji arkusza — wszystkie opcjonalne):
 ``okno: [x0, y0, x1, y1]`` (układ działki), ``otoczenie`` [m] (PZT-01, domyślnie 25), ``margines`` [m],
 ``linia_plyt: PUNKTOWA|KRESKOWA``, ``pikiety_co`` [m] (PZT-01: min. odstęp opisywanych rzędnych mapy),
+``rzedne_proj_co`` [m] (PZT-02: min. odstęp opisywanych rzędnych projektowanych, domyślnie 2,0; 0 — wszystkie),
+``rzedne_proj_co_rowne`` [m] (PZT-02: min. odstęp opisów tej samej rzędnej, domyślnie 5,0),
 ``warstwice: true``, ``warstwice_projektowane: false`` (PZT-02), ``mpzp: {...}`` (limity, gdy brak w modelu; także
 ``wspolne.mpzp``), ``odleglosci_min: {"e-t": [0.5, "źródło"]}`` i ``retencja_min: {budynek: 3.0, granica: 2.0,
 drzewo: 1.0}`` (PZT-03/PZT-02), ``podklad: true``, ``zielen: true``, ``szer_tabel`` [mm] (PZT-01).
@@ -351,6 +353,12 @@ def _labels_project(lab, s, W, used, detail=False, utilities=True):
     if s.pc is not None:
         L(np.asarray(s.pc["body"].centroid.coords[0]),
           ["PC (R290)"] if detail else ["PC — jedn. zewn.", f"strefa R290 r = {mm(s.pc['r'])} m"], h, dot=True)
+    kr = [e for e in getattr(s, "elem_zewn", []) if e["typ"] == "kratownica_pnacza"]
+    if kr:                                                     # K-13 — jeden opis dla wszystkich paneli kratownicy
+        g = unary_union([e["geom"] for e in kr])
+        q = np.asarray(g.interpolate(0.15, normalized=True).coords[0]) if g.geom_type == "LineString" else \
+            np.asarray(g.representative_point().coords[0])
+        L(q, ["zielona ściana (pnącza", "na kratownicy)"] if detail else ["zielona ściana"], h, dists=(1.0, 2.5, 4.0, 6.0))
     if s.zbiornik:
         V = s.zbiornik.get("V")
         L(s.zbiornik["xy"], [f"zbiornik retencyjny V = {fmt.num(float(V), 1)} m³" if V else "zbiornik"], h,
@@ -715,11 +723,11 @@ def _lab_m(v):
     return fmt.num(fmt.round_half_up(round(abs(v) * 100.0, 6)) / 100.0, 2)
 
 
-def _levels(lab, s, used, all_existing=True, projected=True, existing=True):
+def _levels(lab, s, used, all_existing=True, projected=True, existing=True, co=2.0, co_rowne=5.0):
     """Rzędne: projektowane (punkty modelu, tarasy/podesty), istniejące (siatka pikiet — poza strefą zmian terenu,
     gdzie obowiązują rzędne projektowane)."""
     if projected:
-        _levels_proj(lab, s, used)
+        _levels_proj(lab, s, used, co, co_rowne)
     if not existing:
         return
     zone = s.strefa_zmian.buffer(0.5) if not s.strefa_zmian.is_empty else None
@@ -734,7 +742,28 @@ def _levels(lab, s, used, all_existing=True, projected=True, existing=True):
             used.add("spot_ist")
 
 
-def _levels_proj(lab, s, used):
+def proj_do_opisu(P, co=2.0, co_rowne=5.0):
+    """Rzędne projektowane do opisu na rysunku. Model może podawać gęsty TIN (np. pierścienie co 0,25 m wokół
+    budynku — definicja ukształtowania terenu), a opisuje się punkty charakterystyczne: najpierw rzędne rzadkie
+    (podesty, dojścia, niecki), potem powtarzalne (pierścienie); punkt jest pomijany, gdy leży bliżej niż ``co`` [m]
+    od już wybranego albo bliżej niż ``co_rowne`` od wybranego o tej samej opisywanej rzędnej (0,01 m).
+    ``co`` ≤ 0 — wszystkie punkty (dawne zachowanie)."""
+    P = np.asarray(P, float).reshape(-1, 3)
+    if len(P) == 0 or co <= 0:
+        return P
+    hr = np.round(P[:, 2], 2)
+    _u, inv, cnt = np.unique(hr, return_inverse=True, return_counts=True)
+    order = sorted(range(len(P)), key=lambda i: (cnt[inv[i]], i))
+    sel = []
+    for i in order:
+        x, y = P[i, 0], P[i, 1]
+        if all(not (d < co or (d < co_rowne and hr[j] == hr[i])) for j in sel
+               for d in (float(np.hypot(P[j, 0] - x, P[j, 1] - y)),)):
+            sel.append(i)
+    return P[sorted(sel)]
+
+
+def _levels_proj(lab, s, used, co=2.0, co_rowne=5.0):
     for t in s.tarasy:
         if t["rz"] is None:
             continue
@@ -742,7 +771,7 @@ def _levels_proj(lab, s, used):
         if pg.area < 0.5:
             continue
         D.spot(lab, np.asarray(pg.representative_point().coords[0]), s.zero_abs + float(t["rz"]), projected=True)
-    for p in s.pkt_proj:
+    for p in proj_do_opisu(s.pkt_proj, co, co_rowne):
         pos, _c = D.spot(lab, p[:2], p[2], projected=True, dists=(0.6, 1.5, 3.0, 5.0, 8.0, 11.0, 14.0))
         if pos is not None:
             used.add("spot_proj")
@@ -806,7 +835,8 @@ def view_szczegoly(ctx, spec, scale, opts):
         gw = min(s.granice, key=lambda g_: g_["seg"].distance(geom))
         a, b = nearest_points(geom, gw["seg"])
         D.place_dim(lab, (a.x, a.y), (b.x, b.y), on_b=gw["seg"], span=3.0, step=0.25)
-    _levels(lab, s, used, existing=False)
+    _levels(lab, s, used, existing=False, co=float(opts.get("rzedne_proj_co", 2.0)),
+            co_rowne=float(opts.get("rzedne_proj_co_rowne", 5.0)))
     _drain_labels(lab, s)
     _labels_project(lab, s, W, used, detail=True, utilities=False)
     _levels(lab, s, used, projected=False)

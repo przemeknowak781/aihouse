@@ -33,7 +33,9 @@ def _poly(r):
 class DaneZag:
     """Komplet danych zagospodarowania; wszystkie wartości liczbowe wyliczane z modelu i obliczeń."""
 
-    def __init__(self, repo: Path = REPO, *, z_obliczeniami: bool = True):
+    def __init__(self, repo: Path = REPO, *, z_obliczeniami: bool = True, phi_hl=None):
+        """``phi_hl`` — wynik obciążenia cieplnego PN-EN 12831 (``DanePAB.obc``); bez niego liczony tym samym łańcuchem
+        co w PAB (``fizyka_energia.oblicz_wszystko`` z ψ z symulacji mostków), aby PZT i PAB opisywały ten sam wyrób PC."""
         self.repo = repo
         self.p_bud, self.p_dz = repo / "model/budynek.yaml", repo / "model/dzialka.yaml"
         self.m = load_model(self.p_bud, self.p_dz, strict=False)
@@ -48,12 +50,13 @@ class DaneZag:
         self.fp = self.G["footprint"]          # rzut ścian zewnętrznych wszystkich kondygnacji (układ działki)
         self.p0 = self.G["p0"]
         self._audyt()
-        self.inst = self._instalacje() if z_obliczeniami else {}
+        self.inst = self._instalacje(phi_hl) if z_obliczeniami else {}
 
     # ------------------------------------------------------------------ wymagania.yaml
     def wym(self, sekcja: str, klucz: str):
+        from redakcja import podstawa
         w = self.WYM[sekcja][klucz]
-        return w["wartosc"], w["zrodlo"], w.get("id") or ""
+        return w["wartosc"], podstawa(w["zrodlo"], sekcja, klucz), w.get("id") or ""
 
     def w(self, klucz: str):
         """Wartość wskaźnika z ``lamela.wskazniki``."""
@@ -83,7 +86,15 @@ class DaneZag:
         return [x for x in self.audyt.A.wyniki if x.sekcja == sekcja]
 
     # ------------------------------------------------------------------ obliczenia instalacyjne
-    def _instalacje(self) -> dict:
+    def _obciazenie(self):
+        """Φ_HL wg PN-EN 12831 — ten sam łańcuch i te same ψ z symulacji co ``pab_dane.DanePAB._energia``."""
+        from lamela.obliczenia import fizyka_energia as FE
+        from lamela.obliczenia.fizyka import mostki as MB
+        pm = self.repo / "projekt/08_obliczenia/mostki/wyniki_mostki.json"
+        sym = MB.wczytaj_wyniki_symulacji(pm) if pm.exists() else None
+        return FE.oblicz_wszystko(self.m, wyniki_symulacji=sym)["obc"]
+
+    def _instalacje(self, phi_hl=None) -> dict:
         from lamela.obliczenia.inst_wspolne import dane_z_modelu
         from lamela.obliczenia.sanitarne.deszczowa import oblicz_deszczowa
         from lamela.obliczenia.sanitarne.kanalizacja import ParametryKan, oblicz_kanalizacje
@@ -93,7 +104,8 @@ class DaneZag:
         dane = dane_z_modelu(r / "budynek.yaml", r / "dzialka.yaml", r / "wyposazenie.yaml", r / "instalacje.yaml")
         woda0 = oblicz_wode(dane, ParametryWoda())
         return dict(dane=dane, deszczowa=oblicz_deszczowa(dane), kanalizacja=oblicz_kanalizacje(dane),
-                    ogrzewanie=oblicz_ogrzewanie(dane, cwu=woda0.cwu), par_kan=ParametryKan())
+                    ogrzewanie=oblicz_ogrzewanie(dane, phi_hl=phi_hl if phi_hl is not None else self._obciazenie(),
+                                                 cwu=woda0.cwu), par_kan=ParametryKan())
 
     # ------------------------------------------------------------------ teren
     def teren_istn(self) -> dict:

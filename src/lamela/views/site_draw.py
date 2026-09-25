@@ -673,6 +673,38 @@ def draw_building(c, s, used: set, slab_lt="PUNKTOWA", pen_outline=1.4):
         c.line(a, b, "Z-BUDYNEK", pen=0.35)
         arrowhead(c, b, b - a, 2.5, 14, False, "Z-BUDYNEK", pen=0.35)
         used.add("wjazd")
+    draw_ext_elements(c, s, used)
+
+
+ZIELEN_KOL = "#2e7d32"
+
+
+def draw_ext_elements(c, s, used: set):
+    """Wyposażenie zewnętrzne elewacji (`elementy_zewn`, K-13): kratownica z pnączami — linia 0,5 (zieleń) z kółkami co 1,0 m
+    (liście w rzucie); osłona lamelowa urządzenia — linia 0,35 z kreskami lamel co 0,5 m."""
+    k = c.k
+    for e in getattr(s, "elem_zewn", []) or []:
+        g = e["geom"]
+        if e["typ"] == "kratownica_pnacza":
+            c.polyline(list(g.coords), "Z-ZIELEN", pen=0.5, color=ZIELEN_KOL)
+            L = g.length
+            for i in range(int(L // 1.0) + 1):
+                q = np.asarray(g.interpolate(min(L, 0.5 + i * 1.0)).coords[0])
+                c.circle(q, 0.6 * k, "Z-ZIELEN", pen=0.18, color=ZIELEN_KOL)
+            used.add("kratownica")
+        elif e["typ"] == "oslona_lamelowa":
+            c.polyline(list(g.coords), "Z-OGRODZENIE", pen=0.35)
+            for a_, b_ in zip(list(g.coords)[:-1], list(g.coords)[1:]):
+                a_, b_ = np.asarray(a_), np.asarray(b_)
+                Ls = float(np.hypot(*(b_ - a_)))
+                if Ls < 1e-6:
+                    continue
+                u = (b_ - a_) / Ls
+                nn = np.array([-u[1], u[0]])
+                for j in range(int(Ls // 0.5) + 1):
+                    q = a_ + u * min(Ls, j * 0.5)
+                    c.line(q - nn * 0.6 * k, q + nn * 0.6 * k, "Z-OGRODZENIE", pen=0.18)
+            used.add("oslona_pc")
 
 
 def draw_building_line(c, s, used: set, win=None):
@@ -1308,6 +1340,9 @@ def legend_items():
         "brama": (_lg_sym("brama"), "brama przesuwna (poz. 2.9)"),
         "furtka": (_lg_sym("furtka"), "furtka otwierana do wewnątrz działki (WT § 42)"),
         "pc": (_lg_rect("strefa"), "jednostka zewn. pompy ciepła (fundament) i strefa czynnika R290"),
+        "oslona_pc": (_lg_line(0.35, layer="Z-OGRODZENIE"), "ażurowa osłona z lamel jednostki PC (bez dachu, prześwit przy terenie)"),
+        "kratownica": (_lg_line(0.5, color=ZIELEN_KOL, layer="Z-ZIELEN"),
+                       "zielona ściana — pnącza na kratownicy stalowej odsuniętej od elewacji (decyzja Inwestora K-13)"),
         "zbiornik": (_lg_rect("zbiornik"), "zbiornik retencyjny szczelny (ZB)"),
         "niecka_chlonna": (_lg_rect("niecka"), "niecka chłonna — ogród deszczowy (przelew zbiornika)"),
         "odw_liniowe": (_lg_sym("odw_liniowe"), "odwodnienie liniowe"),

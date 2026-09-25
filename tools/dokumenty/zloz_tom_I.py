@@ -97,10 +97,10 @@ def main(argv=None) -> int:
     data = a.data or d.get("data")
     if a.data:
         d["data"] = data
-    print("dane PZT/ZL: model + wskaźniki + audyt + obliczenia …")
-    z = DaneZag(REPO)
-    print(f"dane PAB … ({time.time() - t0:.0f} s)")
+    print("dane PAB: model + audyt + fizyka/EP + instalacje …")
     D = DanePAB()
+    print(f"dane PZT/ZL (Φ_HL i dobór PC wspólne z PAB) … ({time.time() - t0:.0f} s)")
+    z = DaneZag(REPO, phi_hl=D.obc)
     kat_pab, info_pab = K.zrodlo_rysunkow_pab(D)
     GPAB.uzupelnij_otwarte(D)
     print(f"  {info_pab}")

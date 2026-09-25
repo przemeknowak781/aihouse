@@ -53,6 +53,8 @@ FIXED: dict[str, PBR] = {
     "KORONA": PBR("#58773a", 0.9, texture="lisc", uv=1.5),
     "KORONA_BRZOZA": PBR("#7a9747", 0.9, texture="lisc", uv=1.5),
     "KORONA_IGL": PBR("#33502c", 0.9, texture="lisc", uv=1.5),
+    "ZIELEN_PNACZA": PBR("#4f7a34", 0.9, texture="lisc", uv=1.0),      # pnącza na kratownicy (K-13)
+    "PC_OBUDOWA": PBR("#d8dadc", 0.5, 0.2),                             # obudowa jednostki zewn. PC (kontekst 3D)
     "KRZEW": PBR("#4d6c33", 0.9, texture="lisc", uv=1.0),
     "PIEN": PBR("#594838", 0.95),
     "PIEN_BRZOZA": PBR("#d9d4c9", 0.9),

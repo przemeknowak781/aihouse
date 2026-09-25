@@ -289,6 +289,18 @@ class SiteData:
             if ring(t.get("obrys")):
                 self.tarasy.append(dict(id=str(t.get("id", "")), poly=self.G(make_polygon(t["obrys"])),
                                         naw=str(t.get("nawierzchnia") or ""), rz=t.get("rzedna"), raw=t))
+        # wyposażenie zewnętrzne elewacji (SCHEMAT §2 `elementy_zewn`, K-13): kratownica pnączy — linia w płaszczyźnie kratownicy
+        # (odsunięta od lica), osłona lamelowa — polilinia osłony
+        self.elem_zewn = []
+        for e in (m.elementy_zewn() if hasattr(m, "elementy_zewn") else []):
+            pts = e.get("linia")
+            if not (isinstance(pts, list) and len(pts) >= 2):
+                continue
+            g = LineString([tuple(map(float, q[:2])) for q in pts])
+            dv = {"S": (0, -1), "N": (0, 1), "E": (1, 0), "W": (-1, 0)}.get(str(e.get("elewacja", "")).upper())
+            if e.get("typ") == "kratownica_pnacza" and e.get("odsuniecie") and dv is not None:
+                g = affinity.translate(g, dv[0] * float(e["odsuniecie"]), dv[1] * float(e["odsuniecie"]))
+            self.elem_zewn.append(dict(id=str(e.get("id")), typ=str(e.get("typ")), geom=self.G(g), raw=e))
         # wejścia i wjazd
         self.wejscia, self.wjazdy = [], []
         for o in m.otwory():

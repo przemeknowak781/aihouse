@@ -75,8 +75,12 @@ class DanePAB:
 
     def zr(self, sekcja: str, klucz: str) -> str:
         """Podstawa wartości normatywnej z rejestru: „<zrodlo> [W-xxx]”."""
+        from redakcja import PODSTAWY, podstawa
         x = (self.wym.get(sekcja) or {}).get(klucz) or {}
-        return f"{x.get('zrodlo', '')}".replace("*", "\\*") + (f" [{x['id']}]" if x.get("id") else "")
+        if (sekcja, klucz) in PODSTAWY:
+            return PODSTAWY[(sekcja, klucz)].replace("*", "\\*")
+        t = podstawa(x.get("zrodlo", "")).replace("*", "\\*")
+        return t + (f" [{x['id']}]" if x.get("id") and f"{x['id']}]" not in t and f"{x['id']}," not in t else "")
 
     # ------------------------------------------------------------------ audyt A1 (PU W-316, odległości)
     def _audyt(self):

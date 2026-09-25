@@ -848,6 +848,51 @@ def stempluj_arkusz(page: pymupdf.Page, tekst: str = STATUS_PRZYKLAD, drugi: str
     y0 = min(14 * MM + w1 + 3 * MM + w2, H / 2 - 12 * MM)   # koniec tekstu nad znakiem centrującym
     page.insert_text((x, y0), tekst, fontname="lsb", fontsize=s1, color=(0.64, 0.15, 0.16), rotate=90)
     page.insert_text((x, y0 - w1 - 3 * MM), drugi, fontname="lsr", fontsize=s2, color=(0.52, 0.10, 0.11), rotate=90)
+    uzupelnij_metryke(page)
+
+
+WIERSZE_METRYKI = ("Projektant", "Sprawdzający", "Opracował")
+
+
+def metryka_arkusza(page: pymupdf.Page) -> list[dict]:
+    """Wiersze metryki arkusza (tabliczka ``lamela.draft``: kolumny „IMIĘ I NAZWISKO”, „SPECJALNOŚĆ, NR UPRAWNIEŃ”,
+    „DATA”; RPB § 10 ust. 1 pkt 3) — ``[{funkcja, rect, x_nazw, x_spec, x_data, pusty}]``; [] gdy brak tabliczki."""
+    w = page.get_text("words")
+    hdr = next((x for i, x in enumerate(w) if x[4] == "IMIĘ" and i + 2 < len(w) and w[i + 2][4].startswith("NAZWISKO")), None)
+    spec = next((x for x in w if x[4].startswith("SPECJALNO") and hdr and abs(x[1] - hdr[1]) < 3), None)
+    if hdr is None or spec is None:
+        return []
+    data = next((x for x in w if x[4] == "DATA" and abs(x[1] - hdr[1]) < 3 and x[0] > spec[0]), None)
+    x_data = data[0] if data else spec[0] + 2 * (spec[0] - hdr[0])
+    out = []
+    for x in w:
+        if x[4] in WIERSZE_METRYKI and hdr[3] < x[1] < hdr[3] + 90 and x[2] <= hdr[0] + 1:
+            y0, y1 = x[1] - 1.5, x[3] + 1.5
+            zajety = any(hdr[0] - 1 <= v[0] < x_data - 1 and v[1] < y1 and v[3] > y0 for v in w)
+            out.append(dict(funkcja=x[4], rect=pymupdf.Rect(x[:4]), x_nazw=hdr[0], x_spec=spec[0], x_data=x_data,
+                            pusty=not zajety))
+    return out
+
+
+def uzupelnij_metryke(page: pymupdf.Page) -> int:
+    """Wpisuje w puste pola metryki arkusza znaczniki zamiast pozostawiania ich pustych (RPB § 10 ust. 1 pkt 3):
+    projektant / opracował — ``[DO UZUPEŁNIENIA: …]``; sprawdzający — „nie dotyczy (art. 20 ust. 3 pkt 2 PB)”
+    (budynek mieszkalny jednorodzinny). Zwraca liczbę uzupełnionych wierszy."""
+    rows = [r for r in metryka_arkusza(page) if r["pusty"]]
+    if not rows:
+        return 0
+    page.insert_font(fontname="lsr", fontfile=FONT_REG)
+    f = pymupdf.Font(fontfile=FONT_REG)
+    for r in rows:
+        if r["funkcja"] == "Sprawdzający":
+            t1, t2 = "nie dotyczy", "art. 20 ust. 3 pkt 2 PB"
+        else:
+            t1, t2 = do_uzup("imię i nazwisko"), do_uzup("specjalność, nr uprawnień")
+        y = r["rect"].y1 - 1.2
+        for t, x0, x1 in ((t1, r["x_nazw"], r["x_spec"]), (t2, r["x_spec"], r["x_data"])):
+            s = min(5.5, 0.94 * (x1 - x0 - 2) / max(f.text_length(t, 1), 1e-6))
+            page.insert_text((x0 + 0.5, y), t, fontname="lsr", fontsize=s, color=(0.36, 0.28, 0.0))
+    return len(rows)
 
 
 def _strony_zastepcze(arkusze: list[Arkusz], dok: Dokument) -> bytes:

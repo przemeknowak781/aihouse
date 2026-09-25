@@ -49,7 +49,7 @@ def czysc(txt) -> str:
     """Usuwa adnotacje robocze z opisu pochodzącego z modelu lub rejestru; zapis liczb — przecinek dziesiętny."""
     t = str(txt if txt is not None else "")
     t = _NAWIAS.sub(_czysc_nawias, t)
-    t = re.sub(r"\s*[—–-]\s*sprzeczno\w* S-\d+", "", t)
+    t = re.sub(r"\s*[—–-]\s*(?:sprzeczno\w* S-\d+|runda \d+)", "", t)
     t = re.sub(r"\s*[—–-]\s*(?:R\d [\d.]+|R\d-\d+|audyt\w* [AJ]\d[^;,)]*)", "", t)
     t = re.sub(r"(?:;\s*|,\s*)?\b(?:R\d [\d.]+|R\d-\d+|R\d-R\d|audyt\w* [AJ]\d|K-\d+)\b", "", t)
     t = re.sub(r"\bTWARDE ZAŁOŻENIA\b", f"założenie projektowe {ZAL}", t)
@@ -60,7 +60,18 @@ def czysc(txt) -> str:
     t = re.sub(r"\s+([,;.)])", r"\1", t)
     t = re.sub(r"\(\s*[;,]\s*", "(", t)
     t = re.sub(r"^[;,]\s*|\s*[;,]\s*$", "", t.strip())
-    return re.sub(r"\s{2,}", " ", t).strip()
+    t = re.sub(r"\s{2,}", " ", t).strip()
+    return _scal_id(t)
+
+
+def _scal_id(t: str) -> str:
+    """„[W-144] [W-144, W-145]” → „[W-144, W-145]” (kolejne nawiasy z identyfikatorami rejestru)."""
+    def scal(m):
+        ids = []
+        for g in re.findall(r"\[([^\]]*)\]", m.group(0)):
+            ids += [x.strip() for x in g.split(",") if x.strip() and x.strip() not in ids]
+        return "[" + ", ".join(ids) + "]"
+    return re.sub(r"\[(?:W|D)-\d+[^\]]*\](?:\s*\[(?:W|D)-\d+[^\]]*\])+", scal, t)
 
 
 def liczby_pl(txt) -> str:
