@@ -313,7 +313,7 @@ def wezel_przegroda_w_linii(sciana_dol: Sequence[Warstwa], t_plyty: float, mat_p
         ob.append(_obsz(box(x_dp0, y0, x_dp1, y1), w))
     ob.append(_obsz(box(-L, y_bl, D_d if t_p != t else D_d + L_p, t), mat_plyty, "płyta"))
     if t_p != t:
-        ob.append(_obsz(box(D_d, y_bp, D_d + L_p, t), mat_plyty, "płyta (strona prawa)"))
+        ob.append(_obsz(box(min(x_dp0, D_d), y_bp, D_d + L_p, t), mat_plyty, "płyta (strona prawa)"))
     x_gp0 = D_g if sciana_gora else 0.0
     for y0, y1, w in _stos(list(reversed(gl[1])), t, +1):
         ob.append(_obsz(box(-L, y0, 0.0, y1), w))

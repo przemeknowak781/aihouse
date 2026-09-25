@@ -58,8 +58,14 @@ def sciany_wzdluz(model, geom, kondy, typy=("sciana_zewn",), tol=TOL_XY) -> dict
     """{kod przegrody: długość osi ścian leżącej w odległości ≤ tol od `geom`} dla ścian kondygnacji `kondy`."""
     out: dict[str, float] = {}
     g = geom.buffer(tol)
+    kier = None
+    if isinstance(geom, LineString) and geom.length > 0:
+        c = list(geom.coords)
+        kier = ((c[-1][0] - c[0][0]) / geom.length, (c[-1][1] - c[0][1]) / geom.length)
     for s in model.sciany():
         if s.kond not in kondy or (typy and s.typ not in typy):
+            continue
+        if kier is not None and abs(kier[0] * s.u[1] - kier[1] * s.u[0]) > 0.17:   # tylko ściany równoległe
             continue
         L = LineString([tuple(s.p1), tuple(s.p2)]).intersection(g).length
         if L > 0.3:

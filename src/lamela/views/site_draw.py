@@ -1100,3 +1100,179 @@ def tyczenie_mark(c, p, label=None, layer="Z-TYCZENIE"):
     c.line(P + [0, -1.6 * k], P + [0, 1.6 * k], layer, pen=0.18)
     if label and c.k == 1.0:
         c.text(P + [2.2, 0.4], label, 1.8, 0, "left", "baseline", layer)
+
+
+def legend_items():
+    """Klucz → (rysowanie symbolu, opis). Kolejność = kolejność w legendzie."""
+    from .site_data import BRANZE
+    it = {
+        "mapa_ramka": (_lg_sym("mapa_ramka"), "zasięg podkładu mapowego (mapa do celów projektowych — PRZYKŁADOWA)"),
+        "granica": (_lg_sym("granica"), "granica działki budowlanej, punkt graniczny, narożnik (PN-B-01027 poz. 2.7)"),
+        "rozgraniczajaca": (_lg_line(0.7, color="#303030", layer="Z-DROGA"),
+                            "linia rozgraniczająca drogi publicznej (PN-B-01027 poz. 2.5)"),
+        "jezdnia": (_lg_rect("jezdnia"), "jezdnia drogi publicznej (wg mapy)"),
+        "bud_sasiedni": (_lg_rect("bud_sasiedni"), "budynek istniejący (mapa); m2 — mieszkalny, 2 kondygnacje"),
+        "linia_zabudowy": (_lg_sym("linia_zabudowy"), "nieprzekraczalna linia zabudowy wg MPZP (PN-B-01027 poz. 2.2)"),
+        "budynek": (_lg_line(1.4, layer="Z-BUDYNEK"),
+                    "budynek projektowany — obrys ścian parteru 1,0 m nad terenem (poz. 1.1)"),
+        "bud_wyzsze": (_lg_line(0.7, "KRESKOWA", layer="Z-BUDYNEK-NAD"),
+                       "obrys wyższych kondygnacji poza obrysem parteru (poz. 1.6 d)"),
+        "bud_plyty": (_lg_line(0.7, "PUNKTOWA", layer="Z-BUDYNEK-NAD"),
+                      "obrys płyt wspornikowych, okapów i daszku — przewieszenia (poz. 1.6 c)"),
+        "zero": (_lg_sym("zero"), "rzędna ±0,00 (posadzka parteru) w m n.p.m.; w kółku liczba kondygnacji nadziemnych"),
+        "wejscie": (_lg_sym("wejscie"), "wejście główne do budynku (poz. 1.7)"),
+        "wjazd": (_lg_sym("wjazd"), "wjazd do garażu"),
+        "zjazd": (_lg_rect("zjazd"), "zjazd z drogi publicznej — wg zezwolenia zarządcy drogi [DO UZUPEŁNIENIA]"),
+        "naw_drobne": (_lg_rect("drobne"), "nawierzchnia z kostki betonowej (poz. 7.10)"),
+        "naw_duze": (_lg_rect("duze"), "nawierzchnia z płyt betonowych (poz. 7.11)"),
+        "naw_azur": (_lg_rect("azur"), "płyty w trawie (ażur) — poza PBC"),
+        "taras": (_lg_rect("deska"), "taras naziemny — deska kompozytowa na legarach"),
+        "opaska": (_lg_rect("opaska"), "opaska żwirowa 16/32 na geowłókninie"),
+        "parking": (_lg_sym("parking"), "stanowisko postojowe 2,50 × 5,00 m (WT § 21)"),
+        "odpady": (_lg_sym("odpady"), "osłona pojemników na odpady — segregacja (WT § 22)"),
+        "trawnik": (_lg_rect("trawnik"), "trawnik projektowany (poz. 7.8)"),
+        "rabata": (_lg_sym("rabata"), "rabata z krzewami"),
+        "zywoplot": (_lg_sym("zywoplot"), "żywopłot projektowany (poz. 7.6)"),
+        "drzewo_proj": (_lg_sym("drzewo_proj"), "drzewo liściaste projektowane (poz. 7.1)"),
+        "drzewo_ist": (_lg_sym("drzewo_ist"), "drzewo istniejące — zachowane (poz. 7.2)"),
+        "drzewo_usun": (_lg_sym("drzewo_usun"), "drzewo do usunięcia (poz. 7.5)"),
+        "ogrodzenie": (_lg_sym("ogrodzenie"), "ogrodzenie projektowane (poz. 2.8; na granicy — odsunięte graficznie)"),
+        "brama": (_lg_sym("brama"), "brama przesuwna (poz. 2.9)"),
+        "furtka": (_lg_sym("furtka"), "furtka otwierana do wewnątrz działki (WT § 42)"),
+        "pc": (_lg_rect("strefa"), "jednostka zewn. pompy ciepła (fundament) i strefa czynnika R290"),
+        "zbiornik": (_lg_rect("zbiornik"), "zbiornik retencyjny szczelny (ZB)"),
+        "niecka_chlonna": (_lg_rect("niecka"), "niecka chłonna — ogród deszczowy (przelew zbiornika)"),
+        "odw_liniowe": (_lg_sym("odw_liniowe"), "odwodnienie liniowe"),
+        "odw_niecka": (_lg_sym("odw_niecka"), "niecka trawiasta — grot w kierunku spływu"),
+        "rura_spustowa": (_lg_sym("rura_spustowa"), "rura spustowa: zewnętrzna / w szachcie (RS)"),
+        "wlaczenie": (_lg_sym("wlaczenie"), "miejsce włączenia przyłącza do sieci (PN-B-01027 poz. 6)"),
+        "zkp": (_lg_sym("zkp"), "złącze kablowo-pomiarowe ZKP (w linii ogrodzenia)"),
+        "studzienka": (_lg_sym("studzienka"), "studzienka rewizyjna kanalizacji"),
+        "studnia_chlonna": (_lg_sym("studnia_chlonna"), "studnia chłonna skroplin pompy ciepła"),
+        "hydrant": (_lg_sym("hydrant"), "hydrant zewnętrzny na sieci (Hp)"),
+        "warstwice": (_lg_line(0.18, color="#8a5a2a", layer="Z-RZEDNE"),
+                      "warstwica terenu istniejącego (PN-B-01027 poz. 5.2)"),
+        "warstwice_proj": (_lg_line(0.5, layer="Z-RZEDNE-PROJ"), "warstwica terenu projektowanego (poz. 5.2)"),
+        "spot_ist": (_lg_sym("spot_ist"), "rzędna terenu istniejącego [m n.p.m.]"),
+        "spot_proj": (_lg_sym("spot_proj"), "rzędna terenu projektowanego [m n.p.m.]"),
+        "spadek": (_lg_sym("spadek"), "spadek nawierzchni [%] — grot w kierunku spadku"),
+        "splyw": (_lg_sym("splyw"), "kierunek spływu wód opadowych, spadek terenu [%]"),
+        "wymiar": (_lg_sym("wymiar"), "wymiar / odległość w m z dokładnością 0,01 m"),
+        "tyczenie": (_lg_sym("tyczenie"), "punkt tyczenia (narożnik obrysu parteru) — wykaz współrzędnych"),
+        "skrzyzowanie": (_lg_sym("skrzyzowanie"), "skrzyżowanie sieci — zachować odstęp pionowy (tabela)"),
+        "kolizja": (_lg_sym("kolizja"), "zbliżenie / kolizja sieci (nr w tabeli koordynacji)"),
+    }
+    for b, (l, nm, _c) in BRANZE.items():
+        it[f"ist_{b}"] = (_lg_util(b, True), f"{l} — sieć {nm.split(' / ')[0]} istniejąca (mapa)")
+        it[f"proj_{b}"] = (_lg_util(b, False), f"{l} — {nm.split(' / ')[-1]} projektowana/-y")
+    return it
+
+
+def legend_block(used: set, title="LEGENDA", cols=2, order=None, extra=()):
+    """Blok kolumny opisowej: legenda znaków użytych na rysunku (tylko obecne)."""
+    from ..draft.sheet import wrap
+
+    def fn(sh, x, y, w):
+        items = legend_items()
+        keys = [k_ for k_ in (order or items) if k_ in used and k_ in items]
+        keys += [k_ for k_ in items if k_ in used and k_ not in keys]
+        ents = [items[k_] for k_ in keys] + list(extra)
+        with sh.on("R-LEGENDA"):
+            sh.text((x, y - 3.5), title, 3.5, style="bold")
+        cw = (w - 2.0) / cols
+        n = len(ents)
+        per = math.ceil(n / cols)
+        y0 = y - 8.5
+        bottoms = []
+        for ci in range(cols):
+            yy = y0
+            for draw, txt in ents[ci * per:(ci + 1) * per]:
+                ls = wrap(txt, cw - 19.0, 1.8)
+                hh = max(4.6, 2.6 * len(ls) + 1.4)
+                cy = yy - hh / 2.0
+                draw(sh, x + ci * cw, cy)
+                for j, s_ in enumerate(ls):
+                    sh.text((x + ci * cw + 18.0, cy + (len(ls) - 1) * 1.3 - 0.9 - j * 2.6), s_, 1.8, layer="R-LEGENDA")
+                yy -= hh
+            bottoms.append(yy)
+        return min(bottoms) if bottoms else y0
+    return fn
+
+
+def table_block(title, cols, rows, align=None, h=2.5, row_h=4.6, notes=(), title_h=3.5):
+    """Tabela w kolumnie opisowej (szerokości kolumn skalowane do szerokości kolumny arkusza)."""
+    from ..draft.sheet import table, wrap
+
+    def fn(sh, x, y, w):
+        tot = sum(c_[1] for c_ in cols)
+        cs = [(n_, w_ * w / tot) for n_, w_ in cols]
+        with sh.on("R-OPISY"):
+            sh.text((x, y - title_h), title, title_h, style="bold")
+        r = table(sh, x, y - title_h - 2.5, cs, rows, h=h, row_h=row_h, align=align, header_h=5.4)
+        yy = r[1] - 1.0
+        for nt in notes:
+            for s_ in wrap(nt, w, 1.8):
+                yy -= 2.6
+                sh.text((x, yy), s_, 1.8, layer="R-OPISY")
+        return yy - 0.5
+    return fn
+
+
+def text_block_col(title, lines, h=1.8):
+    """Blok tekstu (akapity) w kolumnie opisowej."""
+    from ..draft.sheet import wrap
+
+    def fn(sh, x, y, w):
+        with sh.on("R-OPISY"):
+            sh.text((x, y - 3.5), title, 3.5, style="bold")
+            yy = y - 6.5
+            for par in lines:
+                for s_ in wrap(par, w - 2.0, h):
+                    yy -= h * 1.45
+                    sh.text((x + 1.0, yy), s_, h)
+                yy -= 0.8
+        return yy
+    return fn
+
+
+# ------------------------------------------------------------------------------------------------ rejestracja
+LAYER_W = {"Z-BUDYNEK": 1.2, "Z-DZIALKA": 0.9, "Z-SIECI-PROJ": 1.0, "Z-SIECI-IST": 0.8, "Z-WYMIARY": 0.9,
+           "Z-LZ": 0.8, "Z-DROGA": 0.5, "Z-MAPA": 0.3, "Z-RZEDNE": 0.35, "Z-ZIELEN": 0.35, "Z-UTWARDZENIA": 0.25,
+           "Z-STREFY": 0.3, "Z-ODWODNIENIE": 0.8, "Z-OGRODZENIE": 0.6, "Z-BUDYNEK-NAD": 0.8, "Z-UZBROJENIE": 1.0,
+           "Z-TLO": 0.0, "Z-KOLIZJE": 1.0, "Z-TYCZENIE": 1.0, "Z-RZEDNE-PROJ": 0.8}
+
+
+def register_all(lab: Labeler, n0=0, n1=None, min_len_mm=0.8, hatch_w=0.12):
+    """Rejestruje narysowane prymitywy w ``lab`` z wagami zależnymi od warstwy; pomija kropki/drobne kreski
+    (trawnik, żwir), wypełnienia tła; kreskowania (linie cienkie ≤ 0,18 mm) — z małą wagą."""
+    from ..draft.core import PArc, PFill, PLine, PText
+    from .common import prim_shapes
+    k = lab.k
+    prims = lab.vp.prims[n0:n1]
+    for p in prims:
+        w = LAYER_W.get(p.layer, 0.6)
+        if w <= 0:
+            continue
+        if isinstance(p, PLine):
+            pts = p.pts
+            L = float(np.sum(np.hypot(*np.diff(pts, axis=0).T))) if len(pts) > 1 else 0.0
+            if L < min_len_mm * k:
+                continue
+            pen = lab.vp.pen_mm(p.pen, p.layer)
+            if pen <= 0.18 and p.layer in ("Z-UTWARDZENIA", "Z-MAPA", "Z-STREFY", "Z-ODWODNIENIE"):
+                w = hatch_w
+        elif isinstance(p, PFill):
+            if p.fill in ("#ffffff", "#e6e6e6"):
+                continue
+            try:
+                if Polygon(p.rings[0]).area < (1.2 * k) ** 2:
+                    continue
+            except Exception:  # noqa: BLE001
+                continue
+        t, l_, f = prim_shapes([p], k)
+        for g in t:
+            lab.pl.add(g, "text", 1.0)
+        for g in l_:
+            lab.pl.add(g, "line", w)
+        for g in f:
+            lab.pl.add(g, "area", w)

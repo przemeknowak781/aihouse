@@ -144,7 +144,7 @@ def _solve(eff, cell, turn, src):
     cols = np.concatenate([b, a, b2 + N, a2 + N, al + N, al])
     wt = np.concatenate([w[b], w[a], w[b2], w[a2], np.full(N, turn), np.full(N, turn)])
     G = csr_matrix((wt, (rows, cols)), shape=(2 * N, 2 * N))
-    dist, pred = dijkstra(G, directed=True, indices=[src, src + N], return_predecessors=True, min_only=True)
+    dist, pred, _s = dijkstra(G, directed=True, indices=[src, src + N], return_predecessors=True, min_only=True)
     return dist, pred
 
 

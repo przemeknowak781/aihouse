@@ -163,3 +163,129 @@ Rendery pipeline'u `lamela.pipeline` (glTF → three.js w Chromium /opt/pw-brows
 * `3D_widok_od_ulicy_N.png` — widok z ul. Lipowej (21.06, 19:30): brama garażu, wejście pod daszkiem, ogrodzenie ażurowe, osłona pojemników.
 
 Rendery (glTF 58 500 trójkątów) wygenerowano ze stanu modelu z nagłówka. Przy każdej zmianie modelu trzeba je wygenerować ponownie (Aneks A).
+
+## 6. Błędy i niespójności (do audytu i poprawek)
+
+Kategorie:
+* **A** — niezgodność z wymaganiem; wymaga zmiany modelu przed PAB;
+* **B** — decyzja projektowa do podjęcia;
+* **C** — błąd rysunkowy, narzędziowy albo niespójność dokumentów.
+
+Źródło każdej pozycji podano w nawiasie. Modelu nie zmieniano.
+
+### A — niezgodności z wymaganiami
+
+1. **Czerpnia a wyrzutnia na dachu** (moduł fizyki, `07_wentylacja`).
+   * Wyrzutnia (+10,00) jest tylko 0,05 m wyżej od czerpni (+9,95). Przy wyrzucie pionowym wymagane jest ≥ 1,0 m albo zestaw zblokowany (WT §152, W-167). Odległość 9,81 m jest poprawna (≥ 6 m).
+   * Podniesienie wyrzutni do +10,95 dałoby wysokość zabudowy 101,65 + 10,95 − 101,404 = **11,20 m > 11,00 m** (MPZP, W-033).
+   * Możliwe rozwiązania:
+     * czerpnia na dachu D2/D3, ≈ +6,8, czyli ≥ 0,40 m nad pokryciem (Δz ≈ 3 m); sprawdzić ≥ 6 m od K1 i od wyrzutni;
+     * czerpnia ścienna wg W-166: ≥ 8 m od ulicy, pojemników i wywiewek, dolna krawędź ≥ 2 m nad terenem;
+     * certyfikowany zestaw zblokowany.
+   * Zgodnie z poprawką J1 nr 6 czerpnia, wyrzutnia i K1 mają być na rzucie dachu. Na PB-AR-04 ich nie ma.
+2. **Spadki terenu od budynku** (moduł drenażu).
+   * Wymagane ≥ 2 % na 1,5–2 m (W-019, brief §9.6). Moduł liczy teren od lica do punktu 2 m dalej i dostaje na wszystkich ścianach tylko 0,2–1,1 %.
+   * Punkty projektowane w `dzialka.yaml` mają 101,35 w pasie 0,5 m i 101,32 w pasie 2,0 m od lic. Daje to 2 % tylko między tymi pierścieniami, a przy licu TIN interpoluje rzędne istniejące.
+   * Trzeba dodać punkty przy cokole, np. +0,02–0,03 wyżej niż pierścień 0,5 m.
+3. **Przelewy awaryjne D1** (moduł deszczowy).
+   * Dno przelewów leży 0,01–0,05 m **pod** pokryciem przy wpuście, a wymagane jest ≥ 0,03 m nad nim (W-142; J2 poprawka 5.1: 30–50 mm).
+   * W tym stanie przelew działałby jak główny odpływ zamiast wpustów WP1/WP2.
+4. **PV ponad attyką** (moduł PV).
+   * Stelaże dają górną krawędź modułów 0,30 m nad pokryciem, attyka ma 0,25 m. Moduły wystają więc o 0,05 m (W-033, D-15).
+   * Uwaga w `energia.pv` („≤ +9,78”) i tekst §7 („nie wyżej niż attyka”) są z tym sprzeczne.
+   * PV nie ma ani na rzucie dachu, ani w 3D.
+5. **Cokół** (moduł deszczowy/drenażowy).
+   * Minimalna wysokość to 0,14 m, przy drzwiach DZ2 garażu (strona wsch., teren wyższy). Wymagane ≥ 0,30 m albo odwodnienie liniowe przy drzwiach (brief §9.4).
+   * Odwodnienia OL-* obejmują HS, wejście i bramy, ale nie DZ2.
+6. **Doświetle FX3** (moduł fizyki).
+   * Obliczone U_w = 1,0 > 0,9 W/(m²K) dla okna (WT zał. 2 pkt 1.2, W-244), przy deklaracji 0,85.
+   * Rozwiązania: zmienić profil albo zestawić FX3 jako część drzwi DZ1 (U ≤ 1,3).
+7. **Moc ogrzewania podłogowego** (moduł ogrzewania; PN-EN 1264; W-153).
+   * Przy θ_V = 35 °C brakuje mocy w łazienkach i WC: 0.03, 0.09, 1.05, 1.07, 2.04. Deficyt 98–312 W oznacza grzejniki drabinkowe.
+   * Brakuje też w pomieszczeniach 2.02 (−308 W), 2.05 (−312 W), 0.06 (−276 W) i 0.11 (−113 W).
+   * Przyczyną jest m.in. Φ_HL liczone z domyślnymi Ψ (poz. B4).
+   * Moc nominalna PC dobrana przez moduł to 12,2 kW **[DO UZUPEŁNIENIA: dobór PC po symulacji Ψ i wg DTR wyrobu]**.
+
+### B — decyzje projektowe
+
+1. **Odwodnienie płyt wysuniętych.** Dotyczy PL-E (≈ 16 m, wysięg 1,00/1,50 m), PL-2, PL-3 (+9,40), PL-C1/C2 i daszka PL-DA.
+   * Mają spadek 2 % od budynku i okapnik, bez rynien. Moduł deszczowy zgłasza brak wpustów.
+   * Linia kapania wypada nad tarasem T1, nad krawędzią podestu wejścia T2 (daszek i podest mają po 1,30 m, więc ryzyko oblodzenia przy wejściu) i nad podestem T3.
+   * Do rozstrzygnięcia: rynna ukryta w krawędzi albo odwodnienie liniowe pod linią kapania (brief §9.3).
+2. **Szafa na rowery w garażu** (x 17,67–18,27, y 6,8–9,2).
+   * Czoło szafy wchodzi 0,08 m w światło bramy (krawędź BR1 x 17,75), a szafa kończy się 0,07 m przed licem ściany z bramą. Koliduje to z prowadnicą bramy segmentowej.
+   * W strefie przedniej szerokość garażu w świetle spada do 5,45 m < 5,60 m (W-112).
+   * Propozycja: skrócić szafę do y ≤ 8,6 m i zmniejszyć głębokość do ≤ 0,45 m albo przenieść ją na ścianę osi 2 poza tor jazdy.
+3. **EP zależy od PV i od Ψ.**
+   * EP = 57,2 przy Ψ domyślnych (H_TB = 137,6 W/K, ΔU_TB = 0,225 W/(m²K)).
+   * Bez PV EP = 81,8 > 70. PV 6,45 kWp jest więc warunkiem spełnienia W-240, a nie opcją.
+   * 16 węzłów czeka na symulację PN-EN ISO 10211 (brief §9.2, W-248). Z Ψ „dobrej praktyki” EP spada do 40,8.
+4. **Obciążenie cieplne 11,48 kW (43,7 W/m²)** jest wysokie jak na U ≤ 0,17. Dominują Ψ domyślne: attyki 0,75, cokół 0,80, ST2Z 0,60. Dobór PC i ogrzewania (A7) powtórzyć po symulacji węzłów.
+5. **Wentylacja.** Strumień projektowy wynosi 407 m³/h, a w trybie intensywnym 477 m³/h. Centrala ma 450 m³/h, więc zapas nominalny to ok. 10 %, a tryb intensywny go przekracza. Sprawdzić dobór (W-161…W-164).
+6. **Retencja.** Niecka ma 6,75 m³ przy V_min 6,65 m³ (zapas 1,5 %; W-143). Zalecane powiększenie niecki do ≥ 26 m². Pogłębianie odpada, bo W-145 dopuszcza ogród deszczowy o głębokości ≤ 0,30 m.
+7. **Elektryka** (moduł obwodów, etap PT):
+   * prąd najbardziej obciążonej fazy 40,2 A > 40 A (W-192);
+   * spadek napięcia na WLZ 0,61 % > 0,50 % (W-185);
+   * spadek napięcia DC w PV 1,03 % > 1,00 % (W-194).
+8. **Uskok podsufitki wspornika A.** Spód docieplenia IZ-ST2Z (+5,73) leży 0,22 m niżej niż spód płyty PL-2 (+5,95). Na elewacji W widać go jako gzyms pod okapem. Rozstrzygnąć detal (wyrównanie spodu albo świadomy uskok) i narysować podsufitkę.
+9. **Zalecenia nieobowiązkowe J2/J3, niezrealizowane:**
+   * gabinet/pokój 5. osoby na P2 nie ma łazienki dostępnej inaczej niż przez apartament;
+   * pom. techniczne 2.07 zajmuje ok. 2,6 m elewacji pd. za lamelami (J2 poz. 8).
+10. **Widok od ulicy.** Na elewacji N dominuje pełny tynk z sześcioma małymi oknami (J3: katalog „sprzedaje się widokiem od ulicy”). W renderze `3D_widok_od_ulicy_N.png` ogrodzenie stoi na jasnym cokole — potwierdzić, że to nie prefabrykat betonowy (MPZP, W-038).
+
+### C — rysunki, narzędzia, spójność dokumentów
+
+1. **PB-AR-04 (rzut dachu).**
+   * Brakuje: PV, czerpni, wyrzutni, wywiewki K1, strefy obsługi PV i drogi od wyłazu.
+   * Opisy warstw D2/D1/D4 nachodzą na siebie i wychodzą poza pola dachu.
+   * Arkusz A2×3 jest w ok. 55 % pusty (lepszy byłby A2 albo A3×3).
+2. **Wełna IZ-ST2Z widoczna jako żółty pas.**
+   * Widać ją pod wspornikiem A na PB-AR-07/08/10, w `elewacja_S_szkic.png` i w 3D (kolor wełny #efe3b0), bo podsufitka PODSUF istnieje tylko jako warstwa SUF-ZEW, a nie jako element.
+   * Na PB-AR-09 pod lamelami LAM-E (od +6,20) widać czarny pas membrany ściany (od +6,15).
+3. **Numeracja pomieszczeń.**
+   * Arkusze (`arkusze.yaml`: `numeracja_pomieszczen: iso`) numerują parter 1.xx, I p. 2.xx, II p. 3.xx. Model i `koncepcja.md` używają 0.xx/1.xx/2.xx.
+   * Ten sam numer oznacza więc różne pomieszczenia: „1.06” to salon na PB-AR-01, a klatka P1 w koncepcji.
+   * Ujednolicić albo dodać do opisu tabelę przejścia.
+4. **„Użytkowa” w zestawieniach pomieszczeń na arkuszach** (np. PB-AR-01: 115,94 m²) i „PU” rdzenia (`zestawienie_powierzchni()` = 237,36 m²) to podstawowa + pomocnicza **z garażem i bez komunikacji**. To nie jest PU wg W-316 z §9 (240,24 m²). Zmienić etykietę albo definicję.
+5. **Wysokość wg WT §6.** Arkusze (nota PB-AR-05…10) podają 9,79 m, §9 podaje 9,85 m. Różnią się przyjętym „terenem przy najniższym wejściu” (−0,267 i −0,326). Ujednolicić definicję: wejście główne, brama garażu czy drzwi DZ2.
+6. **Posadzka garażu.** Model ją ma na −0,10 (warstwy POD-G na płycie −0,15, uwaga O0-07, §5 koncepcji). PB-AR-01 i przekrój B-B opisują ją jako „±0,000”, a zestawienie podaje wysokość 2,76 m.
+7. **Kolizje napisów na PB-AR-01.**
+   * Opisy drzwi DG1 i D4 nachodzą na siebie.
+   * Opisy „wodomierz + zawór antyskażeniowy (PN-EN 1717)” i „rozdzielnica główna RG” wychodzą poza ściany pomieszczenia 0.12.
+8. **U w nazwach przegród modelu i w tabeli §6 koncepcji** są niższe od obliczonych (tabela w §3). SZ1 i SZ2 nie osiągają celu projektowego 0,15 (W-245).
+9. **Tekst koncepcji wobec modelu:**
+   * §6 „teren ze spadkiem ≥ 2 %” i „cokół ≥ 0,30 m” — zob. A2 i A5;
+   * §7 „PV nie wyżej niż attyka” — zob. A4;
+   * §7 czerpnia i wyrzutnia „W-166/W-167” — W-167 niespełniony (A1);
+   * §8 „PC 7,0 m od granicy E” — 6,90 m od krawędzi fundamentu, 7,60 m od środka urządzenia (wymóg spełniony);
+   * §9 PBC 1 281,57 m² wobec 1 271,31 m² w weryfikacji (różnica metody, poz. §2).
+10. **Wcześniejsze liczby syntezy.**
+    * PU 241,07 m² — obecny model daje 240,24 m².
+    * Wysokość 10,02 m — to wartość do attyki. W-033 wlicza urządzenia dachowe, więc właściwa wartość to 10,25 m (tak podaje §9), a do PV 10,07 m.
+    * Pow. zabudowy 187,51 m² — dokładnie 187,50 m².
+11. **Narzędzia.**
+    * `lamela.obliczenia.sanitarne.deszczowa` traktuje wszystkie `wsporniki_plyty` jako pola dachu. Alarmy „brak wpustów” dla IZ-ST2Z, SW1 i WYL1 są fałszywe; dla PL-* zob. B1.
+    * `raport_obciazenie` kończył się `ZeroDivisionError` dla pomieszczenia o powierzchni 0 m² (klatka 1.06 we wcześniejszym stanie modelu).
+    * Brak generatora arkusza PZT z modelu: plugin `lamela.views.site` z `VIEW_PLUGINS` nie istnieje. `pzt_koncepcja.png` jest podglądem skryptowym.
+
+## Aneks A. Odtworzenie wyników (z katalogu repozytorium, `PYTHONPATH=src`)
+
+```bash
+python3 -m lamela.model model/budynek.yaml model/dzialka.yaml                     # walidacja + powierzchnie rdzenia
+python3 tools/generuj_widoki.py --out <katalog> --formaty png --dpi 170 --bez-tomu  # arkusz_01…10 (kopie PB-AR-01…10)
+python3 -m lamela.pipeline --budynek model/budynek.yaml --dzialka model/dzialka.yaml --out <katalog> --views ade --size 2000x1250
+python3 -m lamela.obliczenia.fizyka_energia --budynek model/budynek.yaml --dzialka model/dzialka.yaml --out <katalog>
+python3 -m lamela.obliczenia.instalacje --budynek model/budynek.yaml --dzialka model/dzialka.yaml \
+    --wyposazenie model/wyposazenie.yaml --instalacje model/instalacje.yaml --phi-hl energia --wentylacja energia --out <katalog>
+```
+
+PU wg W-316 (konwencja modelu) — ten sam wynik co §9:
+
+```python
+from lamela.model import load_model
+m = load_model("model/budynek.yaml", "model/dzialka.yaml", strict=True)
+wyl = {"0.04", "1.06", "2.06", "0.13"}                     # klatki (W-316) i garaż (osobno)
+pom = [r for k in ("P0", "P1", "P2") for r in m.pomieszczenia(k)]
+pu = sum(r.pow_zaliczona for r in pom if r.id not in wyl and r.kategoria != "techniczna")
+print(round(pu, 2), m.pow_zabudowy()["budynek"], m.kubatura_brutto()["razem"])   # 240.24 187.5 1354.5
+```

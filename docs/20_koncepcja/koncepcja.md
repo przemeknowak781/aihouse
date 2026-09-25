@@ -551,3 +551,31 @@ Model zweryfikowano podglądem (`final/*.png`), arkuszami PB (`projekt/01_koncep
 * `tools/generuj_widoki.py` → `projekt/01_koncepcja/widoki/`: arkusze PB-AR-01…10 (DXF, PDF, PNG) i tom PDF.
 * `lamela.pipeline` → `projekt/07_model_3D/wstepne/`: model glTF/OBJ, wskaźniki, walidacja.
 * Oceny panelu: `docs/20_koncepcja/ocena_J1.md`, `ocena_J2.md`, `ocena_J3.md`; warianty: `docs/20_koncepcja/W1…W3/`.
+
+## 12. Weryfikacja niezależna i podglądy 3D
+
+Szczegóły są w `docs/20_koncepcja/weryfikacja_koncepcji.md`. Weryfikację wykonano na tym samym stanie modelu co bilans §9
+(`budynek.yaml` SHA-256 `d238ec0e…`).
+
+**Wskaźniki zgodne z §9:**
+* PU wg W-316: 240,24 m²; przy geometrycznym ważeniu wysokości spiżarni pod schodami 239,26 m²;
+* powierzchnia zabudowy: 187,50 m²;
+* intensywność zabudowy: 0,248;
+* kubatura: 1 354,5 m³;
+* wysokość zabudowy: 10,25 m z czerpnią i wyrzutnią dachową, 10,02 m do attyki;
+* EP z modułu fizyki: 57,2 kWh/(m²·rok) ≤ 70.
+
+PBC wychodzi 1 271,31 m² (79,5 %) wobec 1 281,57 m² w §9 — różnica wynika z metody liczenia.
+
+**Główne niezgodności do poprawy:**
+* wyrzutnia tylko 0,05 m nad czerpnią (W-167); jej podniesienie przekroczyłoby wysokość 11,0 m z MPZP;
+* spadki terenu od budynku < 2 % (W-019);
+* dno przelewów awaryjnych D1 poniżej pokrycia (W-142);
+* PV 0,05 m ponad attyką (W-033);
+* cokół 0,14 m przy drzwiach DZ2;
+* U_w doświetla FX3 = 1,0.
+
+**Nowe podglądy w `final/`:**
+* `arkusz_01…10_*.png` — arkusze PB-AR-01…10, 1:50, 170 dpi;
+* `pzt_koncepcja.png`;
+* `3D_aksonometria_rozwarstwiona.png`, `3D_widok_lotniczy_SE.png`, `3D_widok_od_ulicy_N.png`.

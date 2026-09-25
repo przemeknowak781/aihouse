@@ -1107,13 +1107,21 @@ def _gora_wsporniki(D, lv, zest, gora, Ping, h_lv, cmax):
             w = pol.warstwy.get("gora_" + kier)
             if w is None:
                 continue
-            ext = el.poly.bounds
-            l_c = (ext[3] - ext[1] if kier == "y" else ext[2] - ext[0])
-            l_c = min(l_c, max(abs(v - r) for v in ((ext[1], ext[3]) if kier == "y" else (ext[0], ext[2]))))
+            big = 1e3
+            half = (box(-big, min(r, r + strona * big), big, max(r, r + strona * big)) if kier == "y"
+                    else box(min(r, r + strona * big), -big, max(r, r + strona * big), big))
+            arm = el.poly.intersection(half)
+            if arm.is_empty:
+                continue
+            ab = arm.bounds
+            l_c = (ab[3] - ab[1]) if kier == "y" else (ab[2] - ab[0])
+            t0, t1 = (ab[0], ab[2]) if kier == "y" else (ab[1], ab[3])
             podp = [ln for _, ln, _r in lv.podpory
                     if (kier == "y" and abs(ln.coords[0][1] - ln.coords[-1][1]) < 1e-3 and 0 < -strona * (ln.coords[0][1] - r) < 0.6)
                     or (kier == "x" and abs(ln.coords[0][0] - ln.coords[-1][0]) < 1e-3 and 0 < -strona * (ln.coords[0][0] - r) < 0.6)]
-            d_s = min((abs((ln.coords[0][1] if kier == "y" else ln.coords[0][0]) - r) for ln in podp), default=0.0)
+            if not podp:
+                continue                                        # styk bez podpory przy zamocowaniu — nie wspornik
+            d_s = min(abs((ln.coords[0][1] if kier == "y" else ln.coords[0][0]) - r) for ln in podp)
             back = _ceil5(d_s + max(l_c, _lbd(w.fi, el.beton)))
             a, b = sorted((r - strona * back, r + strona * (l_c + 0.5)))
             reg = (box(t0, a, t1, b) if kier == "y" else box(a, t0, b, t1)).intersection(Ping)
