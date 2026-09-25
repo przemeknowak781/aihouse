@@ -210,10 +210,114 @@ class Labeler:
             if not cands:
                 break
             mid = len(cands) // 2
-            cands = sorted(cands, key=lambda c_: abs(cands.index(c_) - mid))
+            cands = [c_ for _i, c_ in sorted(enumerate(cands), key=lambda t: abs(t[0] - mid))]
             pos, _c = self.pl.place(self.vp, fn, cands, penalty_step=0.01, bounds=self.bounds, max_cost=max_cost)
             if pos is None:
                 break
             used.append(ls.project(Point(pos[0])))
             placed += 1
         return placed
+
+
+# ================================================================================================ podkład mapowy
+def map_window(s, opts: dict, margin=4.0):
+    """Okno podkładu: działka + budynki sąsiednie + hydrant (± margines), przycięte do zasięgu danych mapy."""
+    if opts.get("okno"):
+        return tuple(float(v) for v in opts["okno"])
+    geoms = [s.plot] + [x["bud"] for x in s.sasiedzi if x["bud"] is not None]
+    geoms += [Point(o.xy) for o in s.obiekty.values() if o.id.upper().startswith("HYD")]
+    x0, y0, x1, y1 = unary_union(geoms).bounds
+    x0, y0, x1, y1 = x0 - margin, y0 - margin - 4.0, x1 + margin, y1 + margin
+    data = [x["poly"] for x in s.sasiedzi if x["poly"] is not None] + \
+        [g for g in (s.droga["pas"], s.plot) if g is not None]
+    bx0, by0, bx1, by1 = unary_union(data).bounds
+    return max(x0, bx0), max(y0, by0), min(x1, bx1), min(y1, by1)
+
+
+def draw_base_map(c, s, lab: Labeler, win: Polygon, used: set, opts: dict, spot_every=9.0):
+    """Treść podkładu (mapy do celów projektowych — SYNTETYCZNEJ, z dzialka.yaml): działki sąsiednie z numerami,
+    budynki sąsiednie, droga, uzbrojenie istniejące, warstwice i pikiety terenu istniejącego, zieleń istniejąca."""
+    from ..draft import symbols as S
+    k = c.k
+    n0 = lab.mark()
+    # działki sąsiednie
+    for x in s.sasiedzi:
+        g = clip(x["poly"], win)
+        if g is not None:
+            draw_geom(c, clip(x["poly"].exterior, win), "Z-MAPA", pen=0.25, lt="CIAGLA")
+    # droga: pas w liniach rozgraniczających (0,7 — PN-B-01027 poz. 2.5), jezdnia
+    pas, jez = s.droga["pas"], s.droga["jezdnia"]
+    if jez is not None and clip(jez, win) is not None:
+        c.fill(clip(jez, win), "Z-DROGA", "#e6e6e6", z=8.0)
+        draw_geom(c, clip(jez.exterior, win), "Z-MAPA", pen=0.25, lt="CIAGLA")
+        used.add("jezdnia")
+    if pas is not None:
+        draw_geom(c, clip(pas.exterior, win), "Z-DROGA", pen=0.7, lt="CIAGLA", color="#303030")
+        used.add("rozgraniczajaca")
+    # budynki sąsiednie (kreskowanie 45° cienkie, opis funkcja + liczba kondygnacji wg BDOT500)
+    from ..draft.hatch import _parallel
+    for x in s.sasiedzi:
+        g = clip(x["bud"], win)
+        if g is None:
+            continue
+        fill_white(c, g)
+        for ln in _parallel(g, 45.0, 1.5 * k):
+            c.polyline(ln, "Z-MAPA", pen=0.13, color="#8a8a8a")
+        draw_geom(c, g, "Z-MAPA", pen=0.35, lt="CIAGLA", color="#3a3a3a")
+        used.add("bud_sasiedni")
+    lab.reg(n0, w_line=0.3, w_fill=0.3)
+    for x in s.sasiedzi:
+        g = clip(x["bud"], win)
+        if g is not None:
+            txt = "m" + (str(x["kond"]) if x.get("kond") else "")
+            p = np.asarray(g.representative_point().coords[0])
+            n1 = lab.mark()
+            c.text(p, txt, 3.5, 0.0, "center", "middle", "Z-MAPA-OPISY", style="italic", color=GREY, mask=0.6)
+            lab.reg(n1)
+    # uzbrojenie istniejące
+    for sx in [x for x in s.sieci if x.istn]:
+        g = clip(sx.geom, win)
+        if g is not None:
+            utility(c, g, sx, existing=True)
+            used.add(f"ist_{sx.branza}")
+    lab.reg(n0, w_line=0.25)
+    return n0
+
+
+def label_base_map(c, s, lab: Labeler, win: Polygon, used: set, opts: dict, spot_every=9.0, contours=True):
+    """Opisy podkładu po narysowaniu projektu (niższy priorytet niż treść projektu)."""
+    k = c.k
+    # numery działek
+    for x in s.sasiedzi:
+        g = clip(x["poly"], win)
+        if g is None:
+            continue
+        free = g.difference(x["bud"].buffer(1.0)) if x["bud"] is not None else g
+        p = np.asarray((free if not free.is_empty else g).representative_point().coords[0])
+        lab.label(p, [x["nr"]], 3.5, "Z-MAPA-OPISY", "italic", GREY, dists=(0.0, 3.0, 8.0, 14.0), leader_from=99,
+                  max_cost=6.0)
+    for sx in [x for x in s.sieci if x.istn]:
+        g = clip(sx.geom, win)
+        if g is None:
+            continue
+        for ls in (g.geoms if hasattr(g, "geoms") else [g]):
+            lab.along(ls, sx.lit, H, "Z-SIECI-IST", sx.kolor, n=3, max_cost=3.0)
+            short = sx.opis.split("(")[0].split(",")[0].strip()
+            lab.along(ls, f"{sx.lit} — {short}", H, "Z-SIECI-IST", sx.kolor, n=1, max_cost=6.0,
+                      fracs=[0.35, 0.3, 0.4, 0.25, 0.45, 0.2, 0.5, 0.55, 0.6, 0.65])
+    if s.droga["pas"] is not None and clip(s.droga["pas"], win) is not None:
+        g = clip(s.droga["pas"], win)
+        cy = g.centroid.y
+        x0, _y0, x1, _y1 = g.bounds
+        axis = LineString([(x0, cy), (x1, cy)])
+        lab.along(axis, f"{s.droga['symbol']} — {s.droga['nazwa']}", 3.5, "Z-MAPA-OPISY", GREY, n=1, max_cost=30.0,
+                  style="bold")
+    if contours:
+        bb = win.bounds
+        for pts, Hh in s.contours(bb):
+            ls = LineString(pts)
+            g = clip(ls, win.buffer(-1.0 * k))
+            if g is None:
+                continue
+            for part in (g.geoms if hasattr(g, "geoms") else [g]):
+                lab.along(part, f"{Hh:.2f}".replace(".", ","), H, "Z-RZEDNE", None, n=1, max_cost=2.5)
