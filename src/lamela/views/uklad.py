@@ -18,7 +18,7 @@ wielokrotności A3, chociaż fajnie jak się ładnie będzie składało.”
    w grupie (wiersz / kolumna / siatka — wariant o najmniejszym polu), bloki kolumny opisowej (legendy, tabele,
    uwagi, róża + podziałka) rozmieszczane algorytmem wolnych prostokątów (MaxRects): najpierw kolumna nad tabliczką,
    potem kolejne kolumny w lewo, pas pod widokami i wolne obszary w obrysie widoków („kieszenie” przy krawędzi
-   obwiedni, z odstępem ≥ ``odstep_kieszeni``); uwagi dzielone na kolumny (numeracja ciągła, „cd.”); róża
+   obwiedni — zajętość widoku liczona pasami 5 mm z prymitywów rzutni, odstęp ≥ ``odstep_widok_blok``); uwagi dzielone na kolumny (numeracja ciągła, „cd.”); róża
    kierunków i podziałka — jeden wiersz bezpośrednio nad tabliczką. Odstępy: widok–widok ≥ 12 mm, widok–blok
    ≥ 10 mm, blok–blok ≥ 5 mm; nic się nie nakłada (``sprawdz_nakladanie``).
 4. **Tryby** (``format`` w ``wspolne`` lub w arkuszu): ``auto`` = ``ekonomiczny`` (wszystkie kandydaty),
@@ -27,7 +27,8 @@ wielokrotności A3, chociaż fajnie jak się ładnie będzie składało.”
    jak dotąd), wymiary ``[H, L]`` lub ``"780x594"`` (L × H).
 
 Parametry (``wspolne`` lub arkusz, wszystkie opcjonalne): ``format``, ``wysokosci``, ``krok_dlugosci`` (10),
-``modul_skladania`` (190 — docelowa szerokość pasa harmonijki; 0 — bez kandydatów „ładnych” długości),
+``modul_skladania`` (``auto`` — wszystkie długości do +35 %, wybór kosztem z oceną składania; liczba m — tylko
+L = 210 + m·n, np. 190; 0 — tylko najmniejsza długość), ``max_wysokosc`` (914),
 ``kara_niestandard`` (0,03), ``kara_skladania`` ({dobre: 0, poprawne: 0,04, słabe: 0,10} — na kierunek),
 ``max_dlugosc`` (2400), ``wolne_obszary`` (true — bloki także w pustych narożnikach obwiedni widoków),
 ``odstep_widok_blok`` (10 mm).

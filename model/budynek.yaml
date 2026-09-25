@@ -632,6 +632,7 @@ energia:
     zestaw_zblokowany: false
     wywiewki_kanalizacyjne:
     - [5.57, 6.2, 9.94]
+    - [18.15, 1.75, 3.75]
     rzedna_terenu: -0.33
     bilans: {nawiew_m3h: 365, wywiew_m3h: 365, okresowo_m3h: 435, opis: 'runda 2 (K-9): Σnaw = Σwyw = 365 m³/h (pom. went); centrala 450 m³/h (V_max 500)
         — praca 81 % nominału, tryb okresowy (okap 120) 435 ≤ 450 (weryfikacja §6 B5)'}

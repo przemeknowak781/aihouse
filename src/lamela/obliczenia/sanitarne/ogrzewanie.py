@@ -425,10 +425,22 @@ def oblicz_ogrzewanie(dane: DaneBudynku, phi_hl=None, par: ParametryOgrz | None 
         mokre = {x.pom for x in przybory_z_modelu(dane) if x.typ in ("wanna", "prysznic")}
     except Exception:
         mokre = set()
+    # dodatkowe powierzchnie grzewcze wodne (ściany grzewcze / grzejniki niskotemperaturowe z obiegu PC) — `instalacje.grzejniki`
+    # [{pom, kond, xy, typ, moc_W}] (runda 2, K-10): pokrywają część Φ_HL, podłoga — resztę (PN-EN 1264-3; PN-EN 12831-1)
+    dod: dict[str, float] = {}
+    for g in dane.inst.get("grzejniki") or []:
+        if isinstance(g, dict) and g.get("pom") and g.get("moc_W"):
+            dod[str(g["pom"])] = dod.get(str(g["pom"]), 0.0) + float(g["moc_W"])
     for pid, ph in phi.items():
         p = dane.pom(pid)
         if p is None or ph <= 0:
             continue
+        if dod.get(pid):
+            war.append(Warunek(f"{p.id} {p.nazwa}: dodatkowa powierzchnia grzewcza wodna (instalacje.grzejniki)", dod[pid], "info",
+                               None, "W", "PN-EN 1264-3 / PN-EN 12831-1 — podłoga pokrywa Φ_HL − P_dod", "W-153", nd=0))
+            ph = ph - dod[pid]
+            if ph <= 0:
+                continue
         rodz = "lazienka" if pid in mokre else p.rodzaj
         fz = par.f_zabudowy.get(rodz, par.f_zabudowy["inne"])
         A_F = p.pow * fz

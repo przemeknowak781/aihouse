@@ -1276,7 +1276,7 @@ ENERGIA = {
     # runda 2: wyrzutnia dachowa z wylotem POZIOMYM (kołpak) — 10,15 m od czerpni ≥ 10 m (WT §152 ust. 10, W-167; flaga była
     # niespójna z uwagą rundy 1); wywiewka K1 z jawną rzędną (pokrycie lokalne + 0,50) — wysokość zabudowy bez założeń (K-3)
     "wentylacja": {"centrala": "RVU_450", "czerpnia": CZERPNIA, "wyrzutnia": WYRZUTNIA, "wyrzut": "poziomy",
-                   "zestaw_zblokowany": False, "wywiewki_kanalizacyjne": [WYWIEWKA_K1], "rzedna_terenu": -0.33,
+                   "zestaw_zblokowany": False, "wywiewki_kanalizacyjne": [WYWIEWKA_K1, [18.15, 1.75, r(pokrycie("DZ1", Z_DG, 99.0) + 0.50, 2)]], "rzedna_terenu": -0.33,
                    "bilans": {"nawiew_m3h": 365, "wywiew_m3h": 365, "okresowo_m3h": 435,
                               "opis": "runda 2 (K-9): Σnaw = Σwyw = 365 m³/h (pom. went); centrala 450 m³/h (V_max 500) — praca 81 % nominału, "
                                       "tryb okresowy (okap 120) 435 ≤ 450 (weryfikacja §6 B5)"},
@@ -1739,10 +1739,32 @@ INSTAL = {
               {"id": "RS1", "xy": [5.57, 5.45], "rodzaj": "deszczowa", "kond": ["P0", "P1", "P2"], "opis": "rura spustowa DN100 w SI (WP1, D1)"},
               {"id": "RS2", "xy": [5.57, 5.85], "rodzaj": "deszczowa", "kond": ["P0", "P1", "P2"], "opis": "rura spustowa DN100 w SI (WP2, D1)"},
               {"id": "RS6", "xy": [17.95, 0.35], "rodzaj": "deszczowa", "kond": ["P0"], "opis": "rura spustowa DN100 w pom. technicznym (WP6, D4)"},
+              {"id": "K3", "xy": [18.15, 1.75], "rodzaj": "kanalizacja", "kond": ["P0"],
+               "opis": "pion Ø110 pom. technicznego 0.12 (zlewik, wpust podłogowy, skropliny) — wywiewka ponad dach D4 (+3,81), 6,6 m od "
+                       "czerpni (≥ 6 m, WT §152 ust. 4); dotąd przybory 0.12 przypisywane błędnie do rury spustowej RS6 (K-8)"},
               {"id": "PCO", "xy": [11.80, 4.40], "rodzaj": "co", "kond": ["P0", "P1", "P2"],
                "opis": "piony c.o. zasilanie/powrót rozdzielaczy R-P1 i R-P2 (PE-X/Al 32, izolacja wg WT zał. 2 pkt 1.5): z pom. 0.12 "
                        "w warstwie podłogi P0 do zabudowy kuchni (słupek, x 11,80), przy R-P1 w holu 1.01, na P2 w obudowie przy ścianie "
                        "wsch. 2.05 i w warstwie podłogi do R-P2 — trasa do potwierdzenia w PT-IS"}],
+    # runda 2 (K-10, weryfikacja §6 A7, BRAKI PT-IS poz. 12): DODATKOWE POWIERZCHNIE GRZEWCZE WODNE z obiegu PC (35/30 °C — W-153; bez
+    # grzałek elektrycznych — EP): ogrzewanie ścienne w tynku/zabudowie (rura PE-RT/PE-X 10–12 mm, rozstaw 7,5–10 cm; wydajność przyjęta
+    # 55 W/m² przy θ_i 24 °C i 80 W/m² przy 20 °C [ZAŁ — PN-EN 1264-5, sprawdzić dla systemu w PT]) w łazienkach/WC, gdzie podłoga
+    # (A_F po odjęciu przyborów, θ_F ≤ 29/33 °C — PN-EN 1264-2) nie pokrywa Φ_HL; w klatce P2 (pustka 0.2 m² z Φ_HL ≈ 0,18 kW) —
+    # ściana grzewcza przy oknie ON4. Moc = wymaganie (deficyt z obliczeń + ok. 20 %), do doboru wg DTR systemu (lub równoważny).
+    "grzejniki": [
+        {"id": "SG-0.03", "kond": "P0", "pom": "0.03", "xy": [9.20, 6.75], "typ": "sciana_grzewcza", "moc_W": 80, "A_m2": 1.0,
+         "opis": "ściana grzewcza wodna 1,0 m² (ściana S0-20 nad stelażem WC), obieg z R-P0"},
+        {"id": "SG-0.09", "kond": "P0", "pom": "0.09", "xy": [4.00, 7.20], "typ": "sciana_grzewcza", "moc_W": 280, "A_m2": 5.1,
+         "opis": "ściana grzewcza wodna 5,1 m² (ściany osi B i pn. poza strefą natrysku i umywalki), obieg z R-P0"},
+        {"id": "SG-1.05", "kond": "P1", "pom": "1.05", "xy": [4.60, 5.35], "typ": "sciana_grzewcza", "moc_W": 150, "A_m2": 2.7,
+         "opis": "ściana grzewcza wodna 2,7 m² (ściana pd. łazienki), obieg z R-P1"},
+        {"id": "SG-1.07", "kond": "P1", "pom": "1.07", "xy": [9.20, 6.75], "typ": "sciana_grzewcza", "moc_W": 180, "A_m2": 3.3,
+         "opis": "ściana grzewcza wodna 3,3 m², obieg z R-P1"},
+        {"id": "SG-2.04", "kond": "P2", "pom": "2.04", "xy": [4.60, 5.35], "typ": "sciana_grzewcza", "moc_W": 180, "A_m2": 3.3,
+         "opis": "ściana grzewcza wodna 3,3 m² (ściana pd. łazienki, poza blatem), obieg z R-P2"},
+        {"id": "SG-2.06", "kond": "P2", "pom": "2.06", "xy": [7.20, 8.60], "typ": "sciana_grzewcza", "moc_W": 200, "A_m2": 2.5,
+         "opis": "ściana grzewcza wodna 2,5 m² na ścianie pn. klatki przy oknie ON4 (pustka nad biegiem — podłoga 0,2 m²), obieg z R-P2"},
+    ],
     "przybory_dodatkowe": [{"kond": "P0", "typ": "zawor_ogrodowy", "xy": [1.00, -EXT], "obrot": -90},
                            {"kond": "P0", "typ": "zawor_ogrodowy", "xy": [xF + EXT, 7.50], "obrot": 0},
                            {"kond": "P0", "typ": "wpust_podlogowy", "xy": [16.00, 1.60], "obrot": 0}],

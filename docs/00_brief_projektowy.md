@@ -157,3 +157,9 @@ hydroizolacji, paroizolacji i drenażu** oraz **symulacji numerycznej mostków t
    odwodnienia liniowe przy HS i przed garażem, zagospodarowanie wód na działce (zbiornik ≤ 5 m³ + niecka/rozsączanie).
 Skutki dla modelu: przegrody z pełnymi warstwami (paroizolacja, hydroizolacja, warstwy spadkowe, drenażowe), dachy z wpustami,
 przelewami awaryjnymi i rurami spustowymi, działka z odwodnieniami i spadkami terenu, katalog węzłów z symulacją.
+
+
+## 10. Decyzje Inwestora w toku projektowania
+
+* **25.09.2026, ok. 08:27 — elewacja ogrodowa garażu (bryła G):** zielona ściana z pnączy na lekkiej kratownicy stalowej + ażurowa osłona z lamel wokół jednostki zewnętrznej pompy ciepła; bryła i linie szkicu bez zmian (odpowiedź na pytanie koordynatora; alternatywy odrzucone: okładzina z lamel, przeszklenie, czysta ściana).
+* **25.09.2026 — arkusze rysunkowe:** „Pamiętaj o ekonomicznym ustawieniu na arkuszach, nie musimy sztywno trzymać się geometrii wielokrotności A3, chociaż fajnie jak się ładnie będzie składało.”

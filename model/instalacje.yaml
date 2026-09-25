@@ -43,12 +43,67 @@ instalacje:
     rodzaj: deszczowa
     kond: [P0]
     opis: rura spustowa DN100 w pom. technicznym (WP6, D4)
+  - id: K3
+    xy: [18.15, 1.75]
+    rodzaj: kanalizacja
+    kond: [P0]
+    opis: pion Ø110 pom. technicznego 0.12 (zlewik, wpust podłogowy, skropliny) — wywiewka ponad dach D4 (+3,81), 6,6 m od czerpni (≥ 6 m, WT §152 ust. 4);
+      dotąd przybory 0.12 przypisywane błędnie do rury spustowej RS6 (K-8)
   - id: PCO
     xy: [11.8, 4.4]
     rodzaj: co
     kond: [P0, P1, P2]
     opis: 'piony c.o. zasilanie/powrót rozdzielaczy R-P1 i R-P2 (PE-X/Al 32, izolacja wg WT zał. 2 pkt 1.5): z pom. 0.12 w warstwie podłogi P0 do zabudowy
       kuchni (słupek, x 11,80), przy R-P1 w holu 1.01, na P2 w obudowie przy ścianie wsch. 2.05 i w warstwie podłogi do R-P2 — trasa do potwierdzenia w PT-IS'
+  grzejniki:
+  - id: SG-0.03
+    kond: P0
+    pom: '0.03'
+    xy: [9.2, 6.75]
+    typ: sciana_grzewcza
+    moc_W: 80
+    A_m2: 1.0
+    opis: ściana grzewcza wodna 1,0 m² (ściana S0-20 nad stelażem WC), obieg z R-P0
+  - id: SG-0.09
+    kond: P0
+    pom: '0.09'
+    xy: [4.0, 7.2]
+    typ: sciana_grzewcza
+    moc_W: 280
+    A_m2: 5.1
+    opis: ściana grzewcza wodna 5,1 m² (ściany osi B i pn. poza strefą natrysku i umywalki), obieg z R-P0
+  - id: SG-1.05
+    kond: P1
+    pom: '1.05'
+    xy: [4.6, 5.35]
+    typ: sciana_grzewcza
+    moc_W: 150
+    A_m2: 2.7
+    opis: ściana grzewcza wodna 2,7 m² (ściana pd. łazienki), obieg z R-P1
+  - id: SG-1.07
+    kond: P1
+    pom: '1.07'
+    xy: [9.2, 6.75]
+    typ: sciana_grzewcza
+    moc_W: 180
+    A_m2: 3.3
+    opis: ściana grzewcza wodna 3,3 m², obieg z R-P1
+  - id: SG-2.04
+    kond: P2
+    pom: '2.04'
+    xy: [4.6, 5.35]
+    typ: sciana_grzewcza
+    moc_W: 180
+    A_m2: 3.3
+    opis: ściana grzewcza wodna 3,3 m² (ściana pd. łazienki, poza blatem), obieg z R-P2
+  - id: SG-2.06
+    kond: P2
+    pom: '2.06'
+    xy: [7.2, 8.6]
+    typ: sciana_grzewcza
+    moc_W: 200
+    A_m2: 2.5
+    opis: ściana grzewcza wodna 2,5 m² na ścianie pn. klatki przy oknie ON4 (pustka nad biegiem — podłoga 0,2 m²), obieg z R-P2
   przybory_dodatkowe:
   - kond: P0
     typ: zawor_ogrodowy
