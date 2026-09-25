@@ -56,7 +56,7 @@
           "sprawdzone_lancuchy": 18
         }
       },
-      "czas_s": 41.6,
+      "czas_s": 41.4,
       "png_kontrola": {
         "px": [
           4967,
@@ -102,7 +102,7 @@
           "sprawdzone_lancuchy": 12
         }
       },
-      "czas_s": 17.2,
+      "czas_s": 17.7,
       "png_kontrola": {
         "px": [
           5262,
@@ -148,7 +148,7 @@
           "sprawdzone_lancuchy": 16
         }
       },
-      "czas_s": 15.5,
+      "czas_s": 15.7,
       "png_kontrola": {
         "px": [
           5262,
@@ -194,7 +194,7 @@
           "sprawdzone_lancuchy": 6
         }
       },
-      "czas_s": 8.0,
+      "czas_s": 7.5,
       "png_kontrola": {
         "px": [
           7447,
@@ -248,7 +248,7 @@
           "sprawdzone_lancuchy": 2
         }
       },
-      "czas_s": 17.4,
+      "czas_s": 17.5,
       "png_kontrola": {
         "px": [
           5262,
@@ -297,12 +297,12 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 4671,
+          "prymitywy": 4669,
           "napisy": 286,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 24.4,
+      "czas_s": 25.1,
       "png_kontrola": {
         "px": [
           5262,
@@ -356,7 +356,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 11.7,
+      "czas_s": 11.8,
       "png_kontrola": {
         "px": [
           5262,
@@ -464,7 +464,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 9.7,
+      "czas_s": 9.9,
       "png_kontrola": {
         "px": [
           3508,
@@ -538,5 +538,5 @@
   ],
   "problemy": [],
   "tom": "projekt/01_koncepcja/widoki/tom_widoki.pdf",
-  "czas_s": 181.0
+  "czas_s": 183.0
 }

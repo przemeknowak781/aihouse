@@ -640,7 +640,7 @@ PA = lambda x, y, sc, dno, **kw: {"xy": [r(x), r(y)], "sciana_attyki": sc, "szer
 DACHY = [
     {"id": "D1", "obrys": OB_D1, "plyta": {"wierzch": Z_ST3, "grubosc": T_STR}, "przegroda": "SD1", "spadek": 0.02,
      "attyka": {"wys_nad_pokryciem": 0.25, "szer": 0.18, "przegroda": "AT1"},
-     "otwory": [R(6.10, 7.55, 8.30, 8.55), R(7.20, 0.90, 8.10, 1.80)],
+     "otwory": [R(6.10, 7.45, 8.20, 8.45), R(7.20, 0.90, 8.10, 1.80)],
      "wpusty": [WP(5.57, 5.45, opis="WP1 — nad szachtem SI (najniższy punkt spadków)"),
                 WP(4.40, 8.35, opis="WP2 — przy attyce pn. nadbudowy; podejście w stropie łazienki P2 do SI")],
      "przelewy_awaryjne": [PA(5.00, y4 + ZK, "N", 9.48, opis="przelew PA1 — attyka pn. nadbudowy (na dach D2/teren)"),
@@ -652,7 +652,7 @@ DACHY = [
                         "opis": "w szachcie SI; podejście poziome DN100 w suficie podwieszanym łazienki P2 (izolowane)"}],
      "spadki": [{"od": [xA2 - ZL, -ZK], "do": [5.57, 5.45], "spadek": 0.02}, {"od": [xE + ZK, -ZK], "do": [5.57, 5.45], "spadek": 0.02},
                 {"od": [xD + ZK, y4 + ZK], "do": [4.40, 8.35], "spadek": 0.02}],
-     "uwagi": "stropodach bryły A: PV ≤ 6,5 kWp na niskich stelażach (≤ +9,78, nie ponad attykę); świetlik SW1 2,20 × 1,00 nad spocznikiem; "
+     "uwagi": "stropodach bryły A: PV ≤ 6,5 kWp na niskich stelażach (≤ +9,78, nie ponad attykę); świetlik SW1 2,10 × 1,00 nad spocznikiem; "
               "wyłaz 0,90 × 0,90 w pom. 2.07 (x 7,20–8,10); czerpnia i wyrzutnia reku (≥ 0,40 m nad pokryciem lokalnym z klinem), wywiewka K1 nad SI; "
               "obrys po licu konstrukcji ścian P2 (attyka ŻB 18 w osi muru, ETICS/wełna ścian ciągła po zewnątrz)"},
     {"id": "D2", "obrys": R(-ZK, y3 + EXT, xB - EXT, y4 + ZK), "plyta": {"wierzch": Z_ST2, "grubosc": T_STR}, "przegroda": "SD2", "spadek": 0.02,
@@ -719,8 +719,8 @@ WSP = [
      "uwagi": "obudowa czoła PL-2 i podsufitki (płyta włóknocementowa na ruszcie, okapnik) — widoczna „gruba krawędź” 0,48 m warstwy A"},
     {"id": "OB-A2", "obrys": R(-EXT, -1.30, -EXT + 0.02, -EXT), "wierzch": Z_OKAP_2[0], "grubosc": r(Z_OKAP_2[0] - Z_PS_A + 0.012), "mat": "PODSUF",
      "lacznik_termiczny": False, "uwagi": "zamknięcie pustki podsufitki PS-A od wsch. (pod PL-2)"},
-    {"id": "SW1", "obrys": R(6.00, 7.45, 8.40, 8.65), "wierzch": 9.75, "grubosc": 0.05, "mat": "SZKLO_VSG", "lacznik_termiczny": False,
-     "uwagi": "świetlik SW1 nad spocznikiem klatki (otwór 2,20 × 1,00 m) — płaski świetlik STAŁY (nieotwierany, bez funkcji wentylacyjnej), "
+    {"id": "SW1", "obrys": R(6.00, 7.35, 8.30, 8.55), "wierzch": 9.75, "grubosc": 0.05, "mat": "SZKLO_VSG", "lacznik_termiczny": False,
+     "uwagi": "świetlik SW1 nad spocznikiem klatki (otwór 2,10 × 1,00 m, poza izolacją attyki) — płaski świetlik STAŁY (nieotwierany, bez funkcji wentylacyjnej), "
               "3-szybowy U ≤ 1,1, na cokole ocieplonym h 0,30, nie wyżej niż attyka; WT §152 ust. 12 dotyczy okien otwieranych — interpretacja "
               "w koncepcja.md (audyt A1)", "otwierany": False},
     {"id": "WYL1", "obrys": R(7.10, 0.80, 8.20, 1.90), "wierzch": 9.74, "grubosc": 0.06, "mat": "RAMA_C", "lacznik_termiczny": False,

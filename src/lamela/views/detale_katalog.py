@@ -766,3 +766,110 @@ def detal_wpust(m, opts: dict) -> Detal:
     det.uwagi.append("wpusty i przejścia instalacji przez przegrody zewnętrzne — mostki punktowe χ (WZ-15, wartości "
                      "typowe); kołnierze paroizolacji i hydroizolacji wpustu — ciągłość 4 linii")
     return det
+
+
+# ================================================================================================ D — wspornik bryły A
+@rodzaj("wspornik_A", "WZ-07", "WZ-07a", "WZ-16", "WZ-16a", "WZ-05")
+def detal_wspornik_A(m, opts: dict) -> Detal:
+    """Krawędź wspornika bryły A: ściana lekka na belce krawędziowej, strop nad powietrzem z ociepleniem spodu
+    i podsufitką (jedna płaszczyzna — audyt A2 I-5), płyta PL-2 przez łącznik termoizolacyjny, lamele."""
+    from ..obliczenia.mostki2d.katalog_dod import krawedzie_stropu_zewn
+    kody = wpis(m, "WZ-07").get("przegrody") or []
+    st = next((s for s in m.stropy() if s.get("sufit") in kody and s.get("sufit") in m.przegrody), None) or \
+        next(s for s in m.stropy() if s.get("sufit") in m.przegrody)
+    kr = [k for k in krawedzie_stropu_zewn(m, st) if k["typ"] == "a"]
+    k = max(kr, key=lambda k_: (k_["belka_rodzaj"] == "krawedziowa", k_["L"]))
+    z0, t = float(st["wierzch"]), float(st["grubosc"])
+    det = Detal(m, "D-08", f"Wspornik bryły A — krawędź stropu {st['id']} (ściana {k['sciana']}, płyta "
+                           f"{k['wsp']['id'] if k['wsp'] else '—'})", ("WZ-07a", "WZ-16a"), 10, z0=z0)
+    sz, pod, suf = k["sciana"], st.get("podloga"), st.get("sufit")
+    Ws = det.warstwy(sz)
+    ks = next(i for i, w in enumerate(Ws) if w["konstr"])
+    xs0 = sum(w["d"] for w in Ws[:ks])
+    xs1 = xs0 + Ws[ks]["d"]
+    x_out = sum(w["d"] for w in Ws)
+    bb, hb = (k["belka"][0], k["belka"][1]) if k["belka"] else (Ws[ks]["d"], 0.0)
+    Wp = det.warstwy(pod)
+    y_f = sum(w["d"] for w in Wp)
+    xL, xR, yT, yB = -0.45, 1.00, 0.85, -0.56
+    det.okno = (xL, yB, xR, yT)
+    ws_ = k["wsp"]
+    t_w = float(ws_["grubosc"]) if ws_ else t
+    # ściana lekka: warstwy wewn. od podłogi, szkielet od belki, zewn. od wierzchu płyty wspornikowej
+    zak = {}
+    for i, w in enumerate(Ws):
+        zak[w["idx"]] = (y_f, yT) if i < ks else ((hb, yT) if i == ks else (0.0, yT))
+    sc = det.stos_v(sz, 0.0, 0.0, yT, zakres=zak)
+    det.stos_h(pod, xL, xs0, y_f)
+    det.rect(xL, -t, xs1, 0.0, st.get("mat", "ZB_C25"), konstr=True)
+    det.rect(xs1 - bb, 0.0, xs1, hb, k["belka"][2] if k["belka"] else st.get("mat"), konstr=True, grupa="belka")
+    lac_d = 0.08
+    if ws_:
+        det.rect(xs1, -t_w, xs1 + lac_d, 0.0, "LACZNIK")
+        det.poly([(xs1 + lac_d, 0.0), (xR + 0.05, -0.02 * (xR + 0.05 - xs1 - lac_d)), (xR + 0.05, -t_w),
+                  (xs1 + lac_d, -t_w)], ws_.get("mat", "ZB_C30"), konstr=True)
+    # sufit nad powietrzem: wełna do lica ocieplenia ściany, pustka wentylowana, podsufitka ciągła pod płytą PL-2
+    Wsf = det.warstwy(suf)
+    w_iz = next(w for w in Wsf if w["konstr"] or w["mat"].startswith("WELNA"))
+    y_w = -t - w_iz["d"]
+    det.poly([(xL, -t), (xs1, -t), (xs1, -t_w), (x_out, -t_w), (x_out, y_w), (xL, y_w)], w_iz["mat"])
+    det._rejestr(suf, w_iz, w_iz["d"])
+    y = y_w
+    for w in Wsf[Wsf.index(w_iz) + 1:]:
+        if "PUSTKA" in w["mat"] or "pustka" in det.mat_info(w["mat"])[0].lower():
+            for xb in (xL + 0.10, 0.35, 0.80):
+                det.rect(xb, y - w["d"], xb + 0.05, y, "RUSZT")
+        else:
+            det.rect(xL, y - w["d"], xR + 0.05, y, w["mat"])
+        det._rejestr(suf, w, w["d"])
+        y -= w["d"]
+    y_ps = y
+    # lamele (widok) i membrany
+    lm = next((l_ for l_ in m.raw.get("lamele") or [] if float(l_.get("odsuniecie", 0)) > 0), {})
+    xl0 = x_out + float(lm.get("odsuniecie", 0.15))
+    det.kontur([(xl0, 0.0), (xl0 + float(lm.get("h", 0.08)), 0.0), (xl0 + float(lm.get("h", 0.08)), yT),
+                (xl0, yT)], pen=0.35)
+    det.kontur([(x_out, 0.12), (xl0, 0.12)], zamkniety=False, pen=0.5)
+    det.linia("H", [(xR + 0.05, 0.002 - 0.02 * (xR + 0.05 - xs1 - lac_d)), (xs1 + lac_d, 0.002), (x_out + 0.002, 0.002),
+                    (x_out + 0.002, 0.18)], "membrana płyty wywinięta na ścianę ≥ 15 cm pod membranę fasadową")
+    det.linia("S", [(xs0 - 0.0075, yT), (xs0 - 0.0075, 0.004), (xL, 0.004)])
+    det.linia("P", [(xs0 - 0.012, yT), (xs0 - 0.012, y_f)])
+    det.linia("T_in", [(xs0 - 0.012, y_f + 0.06), (xs0 - 0.012, y_f + 0.002), (xs0 + 0.002, y_f + 0.002)])
+    for p1, p2 in (((0.0, yT), (x_out, yT)), ((xL, yB + 0.08), (xL, y_f)), ((xR, 0.02), (xR, y_ps))):
+        det.przerwa(p1, p2)
+    # opisy
+    det.opis_stosu(sc, "y", 0.62, odwroc=True, tytul=f"{sz} — ściana lekka (szkielet)")
+    det.opis([(xl0 + 0.04, 0.45)], [f"lamele {skrot_nazwy(det.mat_info(lm.get('mat', 'DREWNO_TERMO'))[0], 30)} "
+                                    f"{int(float(lm.get('b', 0.04)) * 1000)}×{int(float(lm.get('h', 0.08)) * 1000)} "
+                                    f"co {int(float(lm.get('rozstaw', 0.12)) * 1000)} mm na ruszcie (konsole — detal lamel)"])
+    if k["belka"]:
+        det.opis([(xs1 - bb / 2, hb / 2)], [f"belka krawędziowa {k['belka'][3]} ŻB {int(bb * 1000)}×"
+                                            f"{int(round((hb + t) * 1000))} (odwrócona) — wg PT-K"])
+    if ws_:
+        det.opis([(xs1 + lac_d / 2, -t_w / 2)], [f"łącznik termoizolacyjny (ETA) w strefie ocieplenia — przykł. "
+                                                 f"{int(lac_d * 1000)} mm; zalecany 120 mm (REKOMENDACJE A)"])
+        det.opis([(0.85, -0.12)], [f"płyta {ws_['id']} ŻB C30/37 {int(t_w * 1000)} mm, wierzch = wierzch stropu "
+                                   "(A2), spadek 2 % do czoła, membrana TPO; rynna ukryta za blendą"])
+    det.opis_stosu(det_stos_pod(det, suf, t, y_w), "x", -0.30, odwroc=False, wyjscie=(-0.30, yB - 0.02),
+                   tytul=f"{suf} — sufit nad powietrzem zewnętrznym")
+    det.opis([(0.65, (y_ps - t_w) / 2 - 0.05)], ["podsufitka jedna płaszczyzna pod wspornikiem A i pasem PL-2, "
+                                                  "czoło PL-2 obudowane blendą do spodu podsufitki (audyt A2 I-5)"])
+    det.opis_stosu([(a, b, w) for a, b, w in det_stos_pod(det, pod, y_f, 0.0)], "x", -0.20,
+                   wyjscie=(-0.20, yT + 0.03), tytul=f"{pod} — podłoga")
+    det.wymiar([(a, yT) for a, _b, _w in sc] + [(sc[-1][1], yT)], yT + 0.05, "h")
+    det.wymiar([(xL + 0.03, -t), (xL + 0.03, y_w), (xL + 0.03, y_ps)], xL - 0.03, "v")
+    det.rzedna((xL + 0.06, y_f), y_f, "wyk", "right")
+    det.rzedna((xL + 0.06, 0.0), 0.0, "konstr", "right")
+    det.rzedna((0.60, y_ps), y_ps, "wyk", "right")
+    det.uwagi.append("wspornik bryły A: ocieplenie spodu stropu ST2Z ciągłe od ETICS ściany P1 do lica ocieplenia ściany "
+                     "lekkiej, podsufitka wentylowana (szczelina 40 mm, kratki na obwodzie)")
+    return det
+
+
+def det_stos_pod(det: Detal, kod: str, y_top: float, y_bot: float) -> list:
+    """Stos (y_góra, y_dół, warstwa) przegrody poziomej `kod` od y_top w dół — tylko do opisu (bez rysowania)."""
+    out, y = [], y_top
+    for w in det.warstwy(kod):
+        out.append((y, y - w["d"], w))
+        y -= w["d"]
+    return out

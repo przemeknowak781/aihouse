@@ -78,7 +78,8 @@ class Braki:
                "|---:|:---|:---|:---|:---|"]
         for i, r in enumerate(sorted(rows, key=lambda r: r["element"])):
             ark = ", ".join(sorted(r["arkusze"])) or "—"
-            out.append(f"| {i + 1} | {r['element']} | {r['opis']} | {r['format'] or '—'} | {ark} |")
+            esc = lambda t: str(t).replace("|", "\\|")      # noqa: E731 — „|” w komórkach tabeli Markdown
+            out.append(f"| {i + 1} | {esc(r['element'])} | {esc(r['opis'])} | {esc(r['format'] or '—')} | {ark} |")
         out += ["", "Po uzupełnieniu danych w `model/*.yaml` (lub w `tools/buduj_model.py`) wystarczy ponownie "
                 "wygenerować arkusze: `PYTHONPATH=src python3 tools/generuj_widoki.py --arkusze model/arkusze_is.yaml "
                 "--out projekt/05_PT_instalacje_sanitarne/rysunki` (analogicznie `arkusze_ie.yaml`).", ""]

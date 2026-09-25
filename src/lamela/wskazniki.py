@@ -235,7 +235,7 @@ def punkty_najwyzsze(model, ir=None) -> list[tuple]:
             out.append((float(v[2]), f"wywiewka kanalizacyjna {i + 1}", "budynek.yaml: energia.wentylacja", False))
         elif isinstance(v, (list, tuple)) and len(v) >= 2:
             out.append((roof_top + WYWIEWKA_NAD_POKR, f"wywiewka kanalizacyjna {i + 1} (z = pokrycie + "
-                        f"{WYWIEWKA_NAD_POKR:.2f} m — ZAŁOŻENIE, brak rzędnej w modelu)",
+                        f"{WYWIEWKA_NAD_POKR:.2f} m — ZAŁOŻENIE, brak rzędnej w modelu)".replace(".", ","),
                         "budynek.yaml: energia.wentylacja.wywiewki_kanalizacyjne [x, y] — brak z", True))
     pv = (model.raw.get("energia") or {}).get("pv") or {}
     if isinstance(pv, dict) and pv.get("z_max") is not None:

@@ -428,7 +428,8 @@ def _tab_wskazniki(s, W):
     it = L.get("intensywnosc")
     kk = "+".join(W["kond"])
     rows.append([f"Pow. kondygnacji nadz. ({kk})", m2(W["suma_kond"]),
-                 f"{m2(it[0] * A)}–{m2(it[1] * A)}" if it else "—", ""])
+                 f"{m2(it[0] * A)}–{m2(it[1] * A)}" if it else "—",
+                 _ok(it[0] * A <= W["suma_kond"] <= it[1] * A) if it else ""])
     rows.append(["Nadziemna intensywność zabudowy", fmt.num(W["intens"], 3),
                  f"{fmt.num(it[0], 2)}–{fmt.num(it[1], 2)}" if it else "—",
                  _ok(it[0] <= W["intens"] <= it[1]) if it else ""])

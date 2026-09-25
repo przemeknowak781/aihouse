@@ -656,7 +656,7 @@ class _Builder:
                 band = clean_geom(full.buffer(t_out, join_style=2).difference(full)
                                   .intersection(ring.buffer(t_out + 0.02, join_style=2)), min_area=1e-4)
                 fin = mat_out or self._facade_finish()
-                covered = []
+                covered, czesciowe = [], []
                 for w in m.sciany():
                     if w.ext_side is None:
                         continue
@@ -672,6 +672,12 @@ class _Builder:
                         continue
                     covered.append(part)
                     if z_from < zt - 0.01:
+                        czesciowe.append((part, z_from))
+                # ocieplenie ścian sięgające korony (np. ściana wyższej kondygnacji) ma pierwszeństwo przed okładziną
+                pelne = unary_union([p_ for p_ in covered if not any(p_ is c for c, _ in czesciowe)]) if covered else Polygon()
+                for part, z_from in czesciowe:
+                    part = clean_geom(part.difference(pelne), min_area=1e-4) if not pelne.is_empty else part
+                    if not part.is_empty:
                         self.add(rid, "parapet", part, max(spod, z_from), zt, fin, lvl, group=group, part="okladzina_attyki")
                 rest = clean_geom(band.difference(unary_union(covered)), min_area=1e-4) if covered else band
                 if not rest.is_empty:

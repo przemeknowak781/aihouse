@@ -1387,8 +1387,13 @@ def prety_fundamentu(D: DaneKonstr) -> dict:
             if msk.any():
                 req = float(np.maximum(W.As["dol_x"], W.As["dol_y"])[msk].max())
                 if req > S_.siatka.As_prov:
-                    fi, s_, As = dobierz_siatke(req, S_.siatka.As_min, S_.h + F.h, s_max_plyty(S_.h + F.h), 12, 20)
-                    S_.siatka = Warstwa("xy", "dol", fi, s_, req, S_.siatka.As_min, As, 0.0, "MES płyty fundamentowej")
+                    try:
+                        fi, s_, As = dobierz_siatke(req, S_.siatka.As_min, S_.h + F.h, s_max_plyty(S_.h + F.h), 12, 20)
+                        S_.siatka = Warstwa("xy", "dol", fi, s_, req, S_.siatka.As_min, As, 0.0, "MES płyty fundamentowej")
+                    except ValueError:
+                        S_.siatka.As_req = req
+                        S_.niesp.append(f"MES: A_s,req = {req:.0f} mm²/m — nie do rozmieszczenia (φ ≤ 20, s ≥ 7 cm); "
+                                        "przekrój pogrubienia niewystarczający [WYMAGA ZMIANY MODELU]")
                 else:
                     S_.siatka.As_req = max(S_.siatka.As_req, req)
         w = S_.siatka

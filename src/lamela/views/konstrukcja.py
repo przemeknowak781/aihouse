@@ -1318,7 +1318,7 @@ def _kontrola_fund(D, F, PF, warstwa: str, nr_ark: str):
         for S_ in D.stopy:
             ww = S_.siatka
             KD.rejestruj(D, S_.id, "pogrubienie — siatka dolna (MES)", S_.poz, ww.As_req, ww.As_min, ww.As_prov, ww.opis,
-                         s=ww.s, arkusz=nr_ark)
+                         s=ww.s, arkusz=nr_ark, uwagi="; ".join(x for x in S_.niesp if x.startswith("MES"))[:200])
 
 
 def _stopka_fund(D) -> list:
