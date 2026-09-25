@@ -1,5 +1,6 @@
 {
- "title": "Korekta Inwestora: „S” z przesuniętych brył, garaż w parterze — panel koncepcji uruchomiony ponownie",
+ "nr": 15,
+ "title": "Restart wariantu W3 (zawieszony agent); nowy pakiet: woda, ciągłość izolacji i symulacja mostków termicznych",
  "stages": [
   [
    "Analiza szkicu — interpretacja v2 („S” z brył, garaż)",
@@ -59,5 +60,19 @@
   "Synteza modelu zabezpieczona: model powstanie skryptem parametrycznym tools/buduj_model.py (walidacja + rysunki + 3D po każdej sekcji).",
   "Nowy wymóg Inwestora: odprowadzenie wody, ciągłość izolacji, mostki, rury spustowe, hydro- i paroizolacja, drenaż — wpisany do briefu i schematu modelu; buduje się walidowany solver mostków 2D wg PN-EN ISO 10211.",
   "Biblioteki obliczeń (fizyka/EP, konstrukcja, instalacje) i system składania tomów w budowie."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/00_wejscie/interpretacja_szkicu_v2.png",
+   "caption": "Interpretacja v2 (obowiązująca)"
+  },
+  {
+   "path": "/home/user/aihouse/docs/20_koncepcja/W1/przekroj.png",
+   "caption": "W1: przekrój (łączniki termoizolacyjne na czerwono)"
+  },
+  {
+   "path": "/home/user/aihouse/docs/20_koncepcja/W2/przekroj.png",
+   "caption": "W2: przekrój"
+  }
  ]
 }
