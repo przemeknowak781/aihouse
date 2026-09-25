@@ -191,22 +191,21 @@ class Dokument:
         self._bloki.append(("naglowek", dict(id=id_, tag=f"h{min(lvl, 6)}", klasa=f"g{poziom}", numer=numer,
                                               tytul=tytul, podstawa=podstawa, nowa_strona=nowa_strona)))
         if tresc:
-            self.markdown(tresc, poziom_bazowy=poziom)
+            self.markdown(tresc)
         return self
 
     def podrozdzial(self, tytul: str, tresc: str | None = None, **kw):
         return self.rozdzial(tytul, tresc, poziom=2, **kw)
 
-    def markdown(self, tekst: str, *, poziom_bazowy: int | None = None):
-        """Treść Markdown (tabele, listy, pogrubienia…). Nagłówki ``#``/``##`` w treści stają się rozdziałami
-        numerowanymi o poziomie ``poziom_bazowy + liczba #``."""
-        if poziom_bazowy is None:
-            poziom_bazowy = next((i for i in range(len(self._licz), 0, -1) if self._licz[i - 1]), 0)
+    def markdown(self, tekst: str, *, przesuniecie: int = 0):
+        """Treść Markdown (tabele, listy, pogrubienia, przypisy…). Nagłówki w treści stają się rozdziałami
+        numerowanymi: ``#`` — poziom 1 (rozdział), ``##`` — poziom 2 (podrozdział) itd. (+ ``przesuniecie``).
+        Podstawę prawną nagłówka podaje się na końcu: ``## Tytuł {podstawa: § 14 pkt 3 lit. c}``."""
         tekst = _dedent(tekst)
         czesci = re.split(r"^(#{1,4})[ \t]+(.+?)[ \t]*#*[ \t]*$", tekst, flags=re.M)
         self._md_blok(czesci[0])
         for i in range(1, len(czesci), 3):
-            poz = poziom_bazowy + len(czesci[i])
+            poz = len(czesci[i]) + przesuniecie
             tyt = czesci[i + 1]
             m = re.match(r"(.*?)\s*\{podstawa:\s*(.+)\}\s*$", tyt)
             self.rozdzial(m.group(1) if m else tyt, poziom=poz, podstawa=m.group(2) if m else None)
@@ -532,7 +531,7 @@ class Dokument:
                          "Format": a.format or "—", "Wymiary [mm]": a.wymiar_tekst(), "Uwagi": status})
         self._n_tab += 1
         wykaz = _tabela_ctx(self._nowe_id("tab"), self._n_tab, "Wykaz rysunków", rows, lp=True,
-                            szerokosci=["7mm", "22mm", None, "15mm", "15mm", "20mm", "30mm"],
+                            szerokosci=["7mm", "19mm", None, "13mm", "13mm", "17mm", "46mm"],
                             wyrown={"Skala": "c", "Format": "c", "Wymiary [mm]": "c"})
         self._bloki.append(("karta_rysunkowa", dict(
             id=id_, podstawa=podstawa, element=f"{self.kod} — {self.tytul}", branza=self.branza,

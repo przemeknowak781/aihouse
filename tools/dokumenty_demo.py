@@ -168,20 +168,21 @@ def _wykres_bilansu(bilans, pow_dz, u_zab, u_pbc):
     x = 0.0
     for (k, v), c, n in zip(bilans.items(), kolory, nazwy):
         w = 100 * v / pow_dz
-        ax.barh(0, w, left=x, height=0.46, color=c, edgecolor="white", linewidth=1.2)
+        ax.barh(0, w, left=x, height=0.4, color=c, edgecolor="white", linewidth=1.2)
         if w > 6:
             ax.text(x + w / 2, 0, f"{n}\n{liczba(w, 1)} %", ha="center", va="center", fontsize=7.4,
                     color="white" if c in ("#2a78d6", "#eb6834") else "#0b0b0b")
         else:
-            ax.annotate(f"{n} {liczba(w, 1)} %", xy=(x + w / 2, 0.23), xytext=(x + w / 2 + 3, 0.52), fontsize=7,
-                        color="#52514e", arrowprops=dict(arrowstyle="-", lw=0.5, color="#52514e"))
+            ax.annotate(f"{n} {liczba(w, 1)} %", xy=(x + w / 2, -0.23), xytext=(x + w / 2 + 2.5, -0.56),
+                        fontsize=7, color="#52514e", va="center",
+                        arrowprops=dict(arrowstyle="-", lw=0.5, color="#52514e", shrinkA=0, shrinkB=0))
         x += w
     for pos, txt in ((100 * u_zab, f"MPZP: zabudowa ≤ {liczba(100 * u_zab, 0)} %"),
-                     (100 - 100 * u_pbc, f"MPZP: PBC ≥ {liczba(100 * u_pbc, 0)} % (na prawo)")):
-        ax.axvline(pos, ymin=0.08, ymax=0.92, color="#0b0b0b", lw=0.9, ls=(0, (3, 2)))
-        ax.text(pos, -0.46, txt, ha="center", va="top", fontsize=7, color="#0b0b0b")
+                     (100 - 100 * u_pbc, f"MPZP: biologicznie czynna ≥ {liczba(100 * u_pbc, 0)} % (od prawej)")):
+        ax.plot([pos, pos], [-0.3, 0.52], color="#0b0b0b", lw=0.8, ls=(0, (3, 2)))
+        ax.text(pos + 0.7, 0.52, txt, ha="left", va="top", fontsize=7, color="#0b0b0b")
     ax.set_xlim(0, 100)
-    ax.set_ylim(-0.75, 0.75)
+    ax.set_ylim(-0.72, 0.6)
     ax.set_yticks([])
     ax.set_xticks(range(0, 101, 10))
     ax.set_xticklabels([f"{t} %" for t in range(0, 101, 10)], fontsize=6.8, color="#52514e")

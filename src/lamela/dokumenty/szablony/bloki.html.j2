@@ -46,8 +46,8 @@
   </table>
 
   {% if s.autorzy %}
+  <div class="st-autorzy-tyt">Opracowanie — autorzy (§ 7 ust. 2 pkt 3 RPB)</div>
   <table class="st-autorzy">
-    <caption>Opracowanie — autorzy (§ 7 ust. 2 pkt 3 RPB)</caption>
     <thead><tr><th style="width:23mm">Funkcja, branża</th><th style="width:30mm">Imię i nazwisko</th>
       <th style="width:38mm">Specjalność i nr uprawnień budowlanych</th><th>Zakres opracowania</th><th style="width:24mm">Podpis</th></tr></thead>
     <tbody>
@@ -95,8 +95,8 @@
 {# ================================================================================ tabela #}
 {% macro tabela(t) %}
 <figure class="tabela" id="{{ t.id }}">
+  {% if t.tytul %}<div class="tab-tyt"><span class="et">Tabela {{ t.numer }}.</span>{{ t.tytul }}</div>{% endif %}
   <table class="tab {{ t.klasa }}">
-    {% if t.tytul %}<caption><span class="et">Tabela {{ t.numer }}.</span>{{ t.tytul }}</caption>{% endif %}
     {% if t.szerokosci %}<colgroup>{% for w in t.szerokosci %}<col{% if w %} style="width:{{ w }}"{% endif %}>{% endfor %}</colgroup>{% endif %}
     <thead><tr>{% for k in t.kolumny %}<th class="{{ k.klasa }}">{{ k.naglowek }}{% if k.jedn %}<span class="jedn">{{ k.jedn }}</span>{% endif %}</th>{% endfor %}</tr></thead>
     <tbody>
@@ -117,7 +117,7 @@
 
 {# ================================================================================ podpisy #}
 {% macro podpisy(osoby, jeden=False) %}
-<div class="podpisy{% if jeden %} jeden{% endif %}">
+<div class="podpisy{% if jeden %} jeden{% elif osoby|length >= 3 %} trzy{% endif %}">
   {% for o in osoby %}
   <div class="karta-podpisu">
     <div class="rola">{{ o.rola }}</div>

@@ -96,8 +96,8 @@ dt { color: var(--szary); } dd { margin: 0; }
 /* ------------------------------------------------------------------------------------------ tabele */
 figure.tabela { margin: 3.5mm 0 4.5mm; }
 table.tab { width: 100%; border-collapse: collapse; font-size: 8.3pt; line-height: 1.3; }
-table.tab caption { caption-side: top; text-align: left; font-size: 8.8pt; padding: 0 0 1.6mm; color: var(--ink); break-after: avoid; }
-table.tab caption .et { font-weight: bold; color: var(--akcent); margin-right: 1.5mm; }
+.tab-tyt { text-align: left; font-size: 8.8pt; padding: 0 0 1.6mm; color: var(--ink); break-after: avoid; break-inside: avoid; }
+.tab-tyt .et { font-weight: bold; color: var(--akcent); margin-right: 1.5mm; }
 table.tab thead { display: table-header-group; }
 table.tab th { background: var(--tlo-nagl); font-weight: bold; text-align: left; vertical-align: bottom;
                padding: 1.3mm 1.6mm; border-top: 0.9pt solid var(--akcent); border-bottom: 0.6pt solid var(--akcent); }
@@ -137,7 +137,7 @@ figure.ilustr figcaption .et { font-weight: bold; color: var(--akcent); margin-r
               white-space: nowrap; z-index: -1; }
 
 /* ------------------------------------------------------------------------------------------ strona tytułowa */
-section.st { page: tytulowa; break-after: page; min-height: 266mm; display: flex; flex-direction: column; font-size: 9pt; }
+section.st { page: tytulowa; break-after: page; font-size: 9pt; height: 266mm; position: relative; overflow: hidden; }
 .st .et { display: block; font-size: 6.6pt; letter-spacing: 0.09em; text-transform: uppercase; color: var(--szary); margin-bottom: 0.6mm; }
 .st-gora { display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 2.5mm;
            border-bottom: 0.6pt solid var(--akcent); }
@@ -161,14 +161,14 @@ table.st-dane tr { border-bottom: 0.35pt solid var(--linia-m); }
 table.st-dane tr:first-child { border-top: 0.35pt solid var(--linia-m); }
 table.st-dane .duze { font-size: 9.8pt; font-weight: bold; }
 table.st-autorzy { width: 100%; border-collapse: collapse; font-size: 7.3pt; line-height: 1.26; }
-table.st-autorzy caption { caption-side: top; text-align: left; font-size: 6.6pt; letter-spacing: 0.09em; text-transform: uppercase;
-                          color: var(--szary); padding-bottom: 1.2mm; }
+.st-autorzy-tyt { text-align: left; font-size: 6.6pt; letter-spacing: 0.09em; text-transform: uppercase;
+                  color: var(--szary); padding-bottom: 1.2mm; break-after: avoid; }
 table.st-autorzy th { text-align: left; font-weight: bold; background: var(--tlo-nagl); padding: 1.1mm 1.4mm;
                       border-top: 0.8pt solid var(--akcent); border-bottom: 0.5pt solid var(--akcent); font-size: 7pt; }
 table.st-autorzy td { padding: 1.1mm 1.4mm; border-bottom: 0.35pt solid var(--linia); vertical-align: top; }
 table.st-autorzy td.podpis { height: 11mm; border-left: 0.35pt solid var(--linia); }
 table.st-autorzy tr.spr td { color: var(--szary); height: auto; }
-.st-dol { margin-top: auto; padding-top: 4mm; }
+.st-dol { position: absolute; left: 0; right: 0; bottom: 0; }
 .st-dol-siatka { display: grid; grid-template-columns: 1fr 1fr 1.6fr; gap: 3mm; padding-top: 2.5mm;
                  border-top: 0.6pt solid var(--akcent); font-size: 8.4pt; }
 .st-uwaga { font-size: 6.8pt; color: var(--szary); margin-top: 2.5mm; line-height: 1.35; text-align: left; }
@@ -199,7 +199,7 @@ a.spis-w.el { font-size: 10.2pt; font-weight: bold; color: var(--akcent); margin
 
 /* ------------------------------------------------------------------------------------------ oświadczenia */
 section.osw { break-before: page; font-size: 9.8pt; }
-.osw-miejsce { text-align: right; margin-bottom: 7mm; }
+.osw-miejsce { text-align: right; margin-bottom: 5mm; }
 .osw-tyt { text-align: center; font-size: 13pt; font-weight: bold; letter-spacing: 0.08em; color: var(--akcent); margin: 0 0 1.5mm; }
 .osw-podst { text-align: center; font-size: 8.3pt; color: var(--szary); margin: 0 12mm 6mm; line-height: 1.4; white-space: pre-line; }
 table.osw-dane { width: 100%; border-collapse: collapse; margin: 0 0 6mm; font-size: 9pt; }
@@ -222,11 +222,12 @@ table.osw-dane tr { border-bottom: 0.35pt solid var(--linia-m); }
                 color: var(--akcent); margin: 0 0 4mm; }
 
 /* ------------------------------------------------------------------------------------------ podpisy */
-.podpisy { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm 6mm; margin: 8mm 0 2mm; break-inside: avoid; }
+.podpisy { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm 6mm; margin: 6mm 0 2mm; break-inside: avoid; }
 .podpisy.jeden { grid-template-columns: 1fr; margin-left: 50%; }
+.podpisy.trzy { grid-template-columns: 1fr 1fr 1fr; gap: 3mm 4mm; }
 .karta-podpisu { border: 0.5pt solid var(--linia); padding: 2mm 2.8mm 2.2mm; break-inside: avoid; font-size: 8pt; line-height: 1.35; }
 .karta-podpisu .rola { font-size: 6.8pt; letter-spacing: 0.08em; text-transform: uppercase; color: var(--akcent); font-weight: bold; }
-.karta-podpisu .pole-podpisu { height: 15mm; border-bottom: 0.5pt dotted #7c8793; margin: 1.2mm 0 1mm; }
+.karta-podpisu .pole-podpisu { height: 13mm; border-bottom: 0.5pt dotted #7c8793; margin: 1.2mm 0 1mm; }
 .karta-podpisu .opis-pola { font-size: 6.6pt; color: var(--szary); }
 .podpis-uwaga { font-size: 6.9pt; color: var(--szary); margin-top: 1.5mm; }
 
