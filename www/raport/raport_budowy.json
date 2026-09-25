@@ -1,17 +1,17 @@
 {
  "pliki": {
-  "index.html": 802076,
-  "assets/ulica_169.webp": 87476,
-  "assets/lotniczy_169.webp": 159614,
+  "index.html": 802080,
+  "assets/ulica_169.webp": 87486,
+  "assets/lotniczy_169.webp": 159812,
   "assets/aksonometria_169.webp": 86780,
-  "assets/lotniczy_43.webp": 159572,
-  "assets/ogrod_169.webp": 109202,
-  "assets/ogrod_43.webp": 95102,
+  "assets/lotniczy_43.webp": 159570,
+  "assets/ogrod_169.webp": 109104,
+  "assets/ogrod_43.webp": 95258,
   "assets/aksonometria_43.webp": 97828,
   "assets/model.glb": 5150656,
-  "assets/ulica_43.webp": 91172,
+  "assets/ulica_43.webp": 91146,
   "assets/szkic.png": 91505
  },
- "razem": 6930983,
+ "razem": 6931225,
  "bledy": []
 }

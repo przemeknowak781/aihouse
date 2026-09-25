@@ -2,6 +2,7 @@
 powiązania z sieciami (§ 23 pkt 8 RPB). Wszystkie liczby z ``DanePTIS`` (model + obliczenia przy uruchomieniu)."""
 from __future__ import annotations
 
+import re
 from collections import Counter
 
 from pt_is_dane import MODULY, L, DanePTIS, Opis
@@ -198,7 +199,7 @@ def rozdz_woda(o: Opis, D: DanePTIS):
     rury = sorted({od.rura.split(" ")[0] for od in wd.odcinki if getattr(od, "rura", None)})
     o.rozdzial("Instalacja wodociągowa wody zimnej i ciepłej", poziom=2, podstawa="§ 23 pkt 7 lit. e RPB; W-130…W-137")
     o.tekst(f"""
-    Zasilanie z sieci wodociągowej przyłączem (PZT); wodomierz główny **{Wd['wodomierz']}** w pomieszczeniu
+    Zasilanie z sieci wodociągowej przyłączem (PZT); wodomierz główny **{D.wodomierz}** w pomieszczeniu
     technicznym parteru (W-131), za nim filtr, zawór antyskażeniowy EA (PN-EN 1717) i
     {'reduktor ciśnienia (nastawa ' + L(cis.get('p_stat_za_reduktorem'), 0) + ' kPa)' if cis.get('reduktor') else 'bez reduktora'}.
     Przybory ({len(wd.przybory)}): {', '.join(f'{k} ×{v}' for k, v in sorted(typy.items()))}. Zapotrzebowanie:
@@ -233,7 +234,7 @@ def rozdz_kanalizacja(o: Opis, D: DanePTIS):
     Kanalizacja grawitacyjna, system I wg PN-EN 12056-2 (K = 0,5): ΣDU = **{L(Kd['sum_DU'], 1)} l/s**,
     Q_ww = 0,5·√ΣDU = **{L(Kd['Q_ww_l_s'], 2)} l/s** (W-138). Piony: {went}; wentylacja pionów wg WT § 125 (W-139).
     Przewody odpływowe pod posadzką parteru (w płycie fundamentowej — przejścia wg PT-2 BO) do wyjścia z budynku,
-    przykanalik **{Kd['przykanalik'].replace('i=', 'i = ')}** ze studzienką rewizyjną: {st.get('typ', '—')}, głębokość
+    przykanalik **{re.sub(r'i=([0-9.]+)', lambda m: f'i = {L(100 * float(m.group(1)), 1)} %', Kd['przykanalik'])}** ze studzienką rewizyjną: {st.get('typ', '—')}, głębokość
     {L(st.get('glebokosc'), 2)} m, {L(st.get('dystans_granica'), 1)} m od granicy. Rzędne dna (wzgl. ±0,000):
     {'; '.join(f'{k} {L(v, 2)} m' for k, v in (ka.rzedne or {}).items())}.
     Zabezpieczenie przed cofką (WT § 124, W-140): {'; '.join(f"{x.opis} — {'spełnione' if x.ok else 'NIESPEŁNIONE'}" for x in cofka) or 'wg obliczeń'}.
@@ -290,7 +291,7 @@ def rozdz_sieci(o: Opis, D: DanePTIS):
              wyrownanie={"Sieć zewnętrzna / odbiornik": "l", "Przyłącze / przewód": "l"},
              zrodlo="model/dzialka.yaml — uzbrojenie istniejące i projektowane")
     o.tekst(f"""
-    **Punkty pomiarowe:** wodomierz główny {D.Wd['woda']['wodomierz']} (odczyt gestora sieci; W-131); licznik
+    **Punkty pomiarowe:** wodomierz główny {D.wodomierz} (odczyt gestora sieci; W-131); licznik
     energii elektrycznej w ZKP (PT-4 IE) — pompa ciepła i grzałka zasilane z instalacji budynku (moce elektryczne
     — rozdział „Charakterystyka energetyczna”, bilans mocy). Sieć gazowa: {ist.get('gaz', 'brak')} —
     budynek bez przyłącza gazowego. Sieć ciepłownicza — brak (oświadczenie projektanta instalacyjnego w ZL; W-158).

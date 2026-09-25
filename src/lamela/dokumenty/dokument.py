@@ -529,6 +529,7 @@ class Dokument:
         """Karta części rysunkowej z metryką i wykazem rysunków (generowanym z listy arkuszy) + dołączenie
         arkuszy PDF za częścią opisową. Elementy listy: ``Arkusz`` lub ścieżka PDF."""
         self._grupa = "rysunkowa"
+        self._przes = 0          # część rysunkowa nie jest częścią poprzedzającego załącznika (np. opinii w PAB)
         self.arkusze = [a if isinstance(a, Arkusz) else Arkusz.z_pdf(a) for a in arkusze]
         id_ = self._nowe_id("rys")
         self._wpis(id_, "Karta części rysunkowej i wykaz rysunków", 1 + self._przes)

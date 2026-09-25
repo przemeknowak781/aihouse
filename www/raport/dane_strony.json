@@ -1,5 +1,5 @@
 {
- "wygenerowano": "2026-09-25T06:55:38",
+ "wygenerowano": "2026-09-25T06:57:20",
  "model": {
   "nazwa": "Dom LAMELA",
   "wersja": "1.0",
@@ -89,7 +89,7 @@
    },
    "W": 1920,
    "H": 1080,
-   "czas_s": 193.7,
+   "czas_s": 77.1,
    "ogniskowa_mm": 34.0
   },
   "ogrod_43": {
@@ -101,7 +101,7 @@
    },
    "W": 1600,
    "H": 1200,
-   "czas_s": 141.2,
+   "czas_s": 56.2,
    "ogniskowa_mm": 40.0
   },
   "ulica_169": {
@@ -113,7 +113,7 @@
    },
    "W": 1920,
    "H": 1080,
-   "czas_s": 145.2,
+   "czas_s": 146.9,
    "ogniskowa_mm": 36.0
   },
   "ulica_43": {
@@ -125,7 +125,7 @@
    },
    "W": 1600,
    "H": 1200,
-   "czas_s": 102.1,
+   "czas_s": 198.7,
    "ogniskowa_mm": 40.0
   },
   "lotniczy_169": {
@@ -137,7 +137,7 @@
    },
    "W": 1920,
    "H": 1080,
-   "czas_s": 87.9,
+   "czas_s": 176.1,
    "ogniskowa_mm": null
   },
   "lotniczy_43": {
@@ -149,7 +149,7 @@
    },
    "W": 1600,
    "H": 1200,
-   "czas_s": 145.2,
+   "czas_s": 140.8,
    "ogniskowa_mm": null
   },
   "aksonometria_169": {
@@ -161,7 +161,7 @@
    },
    "W": 1920,
    "H": 1080,
-   "czas_s": 77.5,
+   "czas_s": 112.2,
    "ogniskowa_mm": null
   },
   "aksonometria_43": {
@@ -173,7 +173,7 @@
    },
    "W": 1600,
    "H": 1200,
-   "czas_s": 111.5,
+   "czas_s": 84.9,
    "ogniskowa_mm": null
   }
  },
@@ -231,5 +231,5 @@
    }
   }
  },
- "cache_renderow": "build/www/rendery/9b77df6d02ad2ab3"
+ "cache_renderow": "build/www/rendery/e1b0493b3102fb9b"
 }

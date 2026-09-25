@@ -159,6 +159,11 @@ class DanePTIS:
             self.otwarte.append(f"Rysunki {', '.join(nok)} zawierają uwagi „SPRAWDZENIE NIESPEŁNIONE” z poprzedniej wersji "
                                 "obliczeń, a bieżące obliczenia nie wykazują warunków niespełnionych — wygenerować ponownie.")
 
+    @property
+    def wodomierz(self) -> str:
+        w = self.W["woda"].wodomierz or {}
+        return f"DN{w.get('DN')}, Q3 = {L(w.get('Q3'), 1)} m³/h" if w else str(self.Wd["woda"].get("wodomierz"))
+
     def arkusze_nr(self, *slowa) -> str:
         """Numery arkuszy, których tytuł zawiera wszystkie ``slowa`` (bez rozróżniania wielkości liter)."""
         nr = [a.nr for a in self.arkusze if all(s.lower() in (a.tytul or "").lower() for s in slowa)]

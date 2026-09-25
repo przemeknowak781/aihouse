@@ -296,7 +296,7 @@ def rozdz_urzadzenia(o: Opis, D: DanePTIS):
                                "(nawiew), ISO Coarse (wywiew); L_WA wg PN-B-02151-2 w pokojach",
          "Podstawa": "W-160…W-169; (UE) 1253/2014; PN-EN 13141-7+A1:2026-05"},
         {"Urządzenie": "Zestaw wodomierzowy",
-         "Parametry wymagane": f"wodomierz {Wd['woda']['wodomierz']} (lub wg warunków gestora), zawory, filtr, EA; "
+         "Parametry wymagane": f"wodomierz {D.wodomierz} (lub wg warunków gestora), zawory, filtr, EA; "
                                f"reduktor ciśnienia {'wymagany' if D.W['woda'].cisnienia.get('reduktor') else 'niewymagany'}",
          "Podstawa": "W-131, W-130; PN-EN 1717"},
         {"Urządzenie": "Zbiornik retencyjny wód opadowych",
