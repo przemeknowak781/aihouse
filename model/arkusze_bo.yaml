@@ -24,6 +24,9 @@ arkusze:
   - {nr: PT-BO-01, tytul: "RZUT FUNDAMENTÓW", typ: k_fundamenty}
   - {nr: PT-BO-06, tytul: "PRZEKROJE FUNDAMENTU", typ: k_przekroj, skala: 20, widoki: [{typ: k_przekroj, detal: zebro, przekroj: "1", skala: 20}, {typ: k_przekroj, detal: zebro, przekroj: "2", skala: 20}, {typ: k_przekroj, detal: stopa, przekroj: "3", skala: 20}]}
   - {nr: PT-BO-20, tytul: "SZCZEGÓŁY STROPÓW — WSPORNIK, WIENIEC, OPARCIE", typ: k_przekroj, skala: 20, widoki: [{typ: k_przekroj, detal: wspornik, poziom: ST1, element: PL-E, skala: 20}, {typ: k_przekroj, detal: wieniec, poziom: ST1, skala: 20}, {typ: k_przekroj, detal: oparcie, poziom: ST1, skala: 20}]}
+  - {nr: PT-BO-30, tytul: "ZBROJENIE BELEK (1)", typ: k_zbrojenie, element: belki, skala: 25, czesc: [1, 2]}
+  - {nr: PT-BO-31, tytul: "ZBROJENIE BELEK (2)", typ: k_zbrojenie, element: belki, skala: 25, czesc: [2, 2]}
+  - {nr: PT-BO-32, tytul: "ZBROJENIE NADPROŻY (1)", typ: k_zbrojenie, element: nadproza, skala: 25, czesc: [1, 2], kolumny: 2}
   - {nr: PT-BO-05, tytul: "ZBROJENIE DOLNE PŁYTY FUNDAMENTOWEJ", typ: k_zbrojenie, element: fundament, warstwa: dolna}
   - {nr: PT-BO-02, tytul: "RZUT KONSTRUKCJI STROPU NAD PARTEREM", typ: k_strop, poziom: ST1}
   - {nr: PT-BO-10, tytul: "ZBROJENIE DOLNE STROPU NAD PARTEREM", typ: k_zbrojenie, element: strop, poziom: ST1, warstwa: dolna}

@@ -268,3 +268,262 @@ def rysuj_pole_opisu(vp: Viewport, det: Detal, bbox, wiersze: list[tuple[str, st
     x0, y0 = bbox[0], bbox[1] - 7.0 * k
     for j, (t, kol) in enumerate(wiersze):
         vp.text((x0, y0 - j * 3.2 * k), t, H_OPIS, layer="A-DET-OPIS", color=kol, style="bold" if j == 0 else "normal")
+
+
+# ---------------------------------------------------------------------------------------------- wyniki i ocena
+def wczytaj_wyniki(ctx) -> dict:
+    """Wiersze węzłów z `zestawienie_mostkow.json` (tools/mostki_budynku.py) — {id: wiersz}."""
+    p = Path(str((ctx.cfg or {}).get("wyniki_mostkow") or "projekt/08_obliczenia/mostki/zestawienie_mostkow.json"))
+    if not p.is_absolute():
+        p = ROOT / p
+    if not p.exists():
+        return {}
+    try:
+        d = json.loads(p.read_text(encoding="utf-8"))
+    except Exception:          # pragma: no cover
+        return {}
+    return {r["id"]: r for r in d.get("wezly") or []} | {"_chi": {c["id"]: c for c in d.get("chi") or []}}
+
+
+def _skladowe(linie: list, tol: float) -> int:
+    """Liczba spójnych składowych zbioru odcinków (odległość ≤ tol = połączone)."""
+    n = len(linie)
+    if n == 0:
+        return 0
+    par = list(range(n))
+
+    def f(i):
+        while par[i] != i:
+            par[i] = par[par[i]]
+            i = par[i]
+        return i
+    for i in range(n):
+        for j in range(i + 1, n):
+            if linie[i].distance(linie[j]) <= tol:
+                par[f(i)] = f(j)
+    return len({f(i) for i in range(n)})
+
+
+def ocena_linii(det: Detal, info: dict, wyniki: dict, k: float) -> dict:
+    """Ocena ciągłości 4 linii detalu: status z karty mostka (zestawienie 4 linii węzłów) + ciągłość linii narysowanych
+    (liczba składowych; izolacja — liczba składowych obrysu). {H|S|P|I: (status, opis)}."""
+    out = {}
+    wz = [wyniki[w] for w in det.wezly if w in wyniki]
+    for L in "HSPI":
+        st, op = "OK", []
+        for r in wz:
+            s4, t4 = (r.get("linie4") or {}).get(L, ("OK", ""))
+            if s4 != "OK":
+                st = "UWAGA" if st == "OK" else st
+                op.append(f"{r['id']}: {t4[:110]}")
+        if L == "I":
+            n = len(polygons_of(info["izolacja"])) if not info["izolacja"].is_empty else 0
+            if n > 1:
+                op.append(f"obrys izolacji na rysunku — {n} części (sprawdzić ciągłość)")
+        else:
+            n = _skladowe(info["linie"].get(L, []), 1.5 * k)
+            if n > 1:
+                op.append(f"linia na rysunku — {n} odcinki (przerwa?)")
+                st = "UWAGA" if st == "OK" else st
+            if n == 0 and not wz:
+                op.append("brak w detalu")
+        out[L] = (st, "; ".join(op) if op else "ciągłość zachowana")
+    return out
+
+
+def wiersze_opisu(det: Detal, wyniki: dict, oc: dict) -> list[tuple[str, str | None]]:
+    out = []
+    for w in det.wezly:
+        r = wyniki.get(w)
+        if r is None:
+            ch = (wyniki.get("_chi") or {}).get(w)
+            if ch:
+                out.append((f"{w} — mostek punktowy: χ = {fmt.num(ch['chi'], 3)} W/K × {int(ch['n'])} szt. = "
+                            f"{fmt.num(ch['chi'] * ch['n'], 2)} W/K ({ch['zrodlo'][:60]})", None))
+            continue
+        fr = r.get("f_rsi")
+        out.append((f"{w}: ψ_e = {fmt.num(r['psi_e'], 3)}, ψ_oi = {fmt.num(r['psi_oi'], 3)} W/(m·K); "
+                    f"f_Rsi = {fmt.num(fr, 3)} {'≥' if (fr or 0) >= 0.72 else '<'} 0,72 — {r.get('ocena')}", None))
+    if not out:
+        out.append(("Węzeł bez karty mostka 2D (mostek punktowy / element systemowy) — patrz uwagi", None))
+    sym = {"OK": "✓", "UWAGA": "!", "BRAK": "✗"}
+    txt = "  ".join(f"{L} {sym[oc[L][0]]}" for L in "HSPI")
+    zle = [f"{L}: {oc[L][1]}" for L in "HSPI" if oc[L][0] != "OK"]
+    out.append((f"4 linie: {txt} — " + ("ciągłość zachowana" if not zle else "uwaga"),
+                "#1a7f37" if not zle else "#b7791f"))
+    for z in zle:
+        out.append((z[:150], "#b7791f"))
+    return out
+
+
+def kontrola_grubosci(det: Detal) -> list[tuple]:
+    """[(kod, idx, mat, d_model, d_rys, status)] — zgodność grubości warstw narysowanych z przegrodami modelu."""
+    out = []
+    for kod, idx, mat, d_m, d_r, klin in det.kontrola:
+        if klin:
+            ok = float(klin["d_min"]) - 5e-4 <= d_r <= float(klin["d_max"]) + 5e-4
+        else:
+            ok = abs(d_m - d_r) <= 5e-4
+        out.append((kod, idx, mat, d_m, d_r, "OK" if ok else "RÓŻNICA"))
+    return out
+
+
+def kolizje(boxes: list, vp: Viewport) -> dict:
+    """Kolizje napisów opisów: napis–napis (pole > 0,05 mm²) i napis–linie rysunku (prymitywy poza opisami)."""
+    k2 = vp.k * vp.k
+    tt = 0
+    for i in range(len(boxes)):
+        for j in range(i + 1, len(boxes)):
+            if boxes[i][1].intersection(boxes[j][1]).area / k2 > 0.05:
+                tt += 1
+    tl = 0
+    linie = [LineString(p.pts) for p in vp.prims if isinstance(p, PLine) and p.layer not in ("A-OPISY",)
+             and len(p.pts) >= 2]
+    for _t, b in boxes:
+        bb = b.buffer(-0.2 * vp.k)
+        if any(bb.intersects(l_) for l_ in linie):
+            tl += 1
+    return {"napis_napis": tt, "napis_linia": tl, "napisy": len(boxes)}
+
+
+# ---------------------------------------------------------------------------------------------- widok arkusza
+@dataclass
+class DetalResult:
+    det: Detal
+    hatch_mats: dict = field(default_factory=dict)
+    notes: list = field(default_factory=list)
+    column_blocks: list = field(default_factory=list)
+    units_note: str | None = None
+    raport: dict = field(default_factory=dict)
+    rooms: list = field(default_factory=list)
+    north: bool = False
+
+
+RAPORT: dict[str, dict] = {}
+UWAGI_OGOLNE = [
+    "Kreskowania materiałów wg PN-B-01030:2000 (aktualna) i PN-EN ISO 128-3:2023-02 (zastąpiła wycofane PN-ISO "
+    "128-50:2006); oznaczenia spoza normy — w legendzie arkusza.",
+    "Opisy warstw od zewnątrz do wewnątrz (kolejność kropek na linii odnośnika = kolejność wierszy), grubości w mm "
+    "wg przegród modelu (kontrola zgodności — raport modułu detali).",
+    "Zasada „4 linii” (brief §9.1): hydroizolacja — niebieska, szczelność powietrzna — czerwona przerywana, "
+    "paroizolacja — fioletowa, izolacja cieplna — obrys pomarańczowy; każda linia ciągła wokół kubatury ogrzewanej.",
+    "Wywinięcia hydroizolacji ≥ 15 cm ponad warstwę wierzchnią (żwir, substrat, nawierzchnia) — Wytyczne DAFA dla "
+    "dachów płaskich; DIN 18531 (pomocniczo); PN-EN 1991 wysokości wywinięć nie określa. Cokół: uszczelnienie "
+    "≥ 30 cm nad terenem (brief §9.4; DIN 18533-1 — pomocniczo) albo odwodnienie liniowe przy drzwiach bezprogowych.",
+    "Wyroby (łączniki termoizolacyjne, taśmy, profile progowe, wpusty, konsole) — dane przykładowe „lub równoważne”; "
+    "parametry (ETA/DWU) do potwierdzenia przed realizacją.",
+]
+
+
+def _blok_legenda(sh, x, y, w):
+    if getattr(sh, "_det_legenda", False):
+        return y
+    sh._det_legenda = True
+    with sh.on("R-LEGENDA"):
+        sh.text((x, y - 3.5), "ZASADA „4 LINII” I OZNACZENIA DETALI", 3.5, style="bold")
+        yy = y - 9.0
+        for kod, txt in LEGENDA_4:
+            if kod == "I":
+                sh.rect(x + 1, yy - 0.6, x + 13, yy + 2.2, "R-LEGENDA", pen=0.5, color=KOLORY["I"])
+            else:
+                ly, pen, lt = STYL[kod]
+                sh.line((x + 1, yy + 0.9), (x + 13, yy + 0.9), "R-LEGENDA", pen=pen, lt=lt, color=KOLORY.get(kod))
+            ls = _zawin(txt, w - 18.0)
+            for j, s in enumerate(ls):
+                sh.text((x + 16, yy - j * 2.7), s, 1.8)
+            yy -= 2.7 * len(ls) + 1.6
+        sh.line((x + 1, yy + 0.9), (x + 13, yy + 0.9), "R-LEGENDA", pen=0.5, color="#000000")
+        sh.text((x + 16, yy), "obróbka blacharska z okapnikiem (kapinosem), rynna ukryta", 1.8)
+        yy -= 4.3
+    return yy + 1.0
+
+
+def _blok_wyniki(det_id: str, wiersze: list):
+    def fn(sh, x, y, w):
+        yy = y
+        if not getattr(sh, "_det_wyniki", False):
+            sh._det_wyniki = True
+            sh.text((x, yy - 3.5), "WYNIKI MOSTKÓW (PN-EN ISO 10211) I OCENA 4 LINII", 3.5, "R-LEGENDA",
+                    style="bold")
+            yy -= 8.0
+        ls = _zawin(f"{det_id}: " + wiersze[0][0], w - 2.0)
+        for t, kol in [(s, None) for s in ls] + [(s, kol) for t_, kol in wiersze[1:] for s in _zawin(t_, w - 6.0)]:
+            sh.text((x + (0 if t in ls else 4.0), yy), t, 1.8, layer="R-LEGENDA", color=kol)
+            yy -= 2.7
+        return yy - 1.0
+    return fn
+
+
+def widok_detalu(ctx, spec: dict, scale: float, opts: dict):
+    from . import detale_katalog as DK
+    rodzaj = spec.get("rodzaj") or DK.WEZEL_RODZAJ.get(str(spec.get("wezel")))
+    if rodzaj not in DK.RODZAJE:
+        raise KeyError(f"detal: nieznany rodzaj/węzeł „{spec.get('rodzaj') or spec.get('wezel')}” "
+                       f"(rodzaje: {', '.join(DK.RODZAJE)})")
+    det: Detal = DK.RODZAJE[rodzaj](ctx.model, dict(opts, **{k: v for k, v in spec.items() if k in ("id_detalu",)}))
+    if spec.get("id_detalu"):
+        det.id = str(spec["id_detalu"])
+    sk = int(spec.get("skala") or det.skala or scale)
+    title = spec.get("tytul_widoku") or f"DETAL {det.id} — {det.tytul.upper()}"
+    vp = Viewport(sk, title)
+    info = rysuj_elementy(vp, det)
+    rysuj_adnotacje(vp, det)
+    bbox = vp.extents()
+    boxes = rysuj_opisy(vp, det, bbox)
+    wyniki = wczytaj_wyniki(ctx)
+    oc = ocena_linii(det, info, wyniki, vp.k)
+    wiersze = wiersze_opisu(det, wyniki, oc)
+    e = vp.extents()
+    rysuj_pole_opisu(vp, det, (bbox[0], min(bbox[1], e[1]), bbox[2], bbox[3]), wiersze)
+    kg = kontrola_grubosci(det)
+    kol = kolizje(boxes, vp)
+    res = DetalResult(det, info["hatch_mats"])
+    res.units_note = (f"Wymiary w mm, rzędne w m względem ±0,000 = {fmt.level_abs(ctx.model.zero_abs)} m n.p.m. "
+                      "(PL-EVRF2007-NH).")
+    n_ok = sum(1 for r in kg if r[5] == "OK")
+    res.notes = list(UWAGI_OGOLNE) + [f"Detal {det.id}: {u}" for u in det.uwagi]
+    res.column_blocks = [("legenda4", _blok_legenda), (f"wyniki-{det.id}", _blok_wyniki(det.id, wiersze))]
+    res.raport = dict(id=det.id, tytul=det.tytul, skala=sk, wezly=list(det.wezly), grubosci=kg,
+                      grubosci_ok=f"{n_ok}/{len(kg)}", kolizje=kol, linie4={L: oc[L] for L in "HSPI"},
+                      wyniki=[w for w, _k in wiersze])
+    RAPORT[det.id] = res.raport
+    _zapisz_raport(ctx)
+    return vp, res, title
+
+
+def _zapisz_raport(ctx):
+    p = (ctx.cfg or {}).get("raport_detali")
+    if not p:
+        return
+    p = Path(str(p))
+    if not p.is_absolute():
+        p = ROOT / p
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(raport_detali(), encoding="utf-8")
+
+
+def raport_detali(raport: dict | None = None) -> str:
+    R = raport if raport is not None else RAPORT
+    L = ["# Raport modułu detali (lamela.views.detale)", "",
+         "Kontrola automatyczna każdego detalu: zgodność grubości warstw narysowanych z przegrodami `model/budynek.yaml` "
+         "(tolerancja 0,5 mm; warstwy klinowe — w zakresie d_min…d_max), kolizje opisów (napis–napis, napis–linia "
+         "rysunku), ciągłość 4 linii (karta mostka + liczba odcinków linii na rysunku).", "",
+         "| detal | tytuł | skala | węzły | grubości zgodne | kolizje napis–napis | napisy na liniach | H | S | P | I |",
+         "|---|---|---|---|---|---|---|---|---|---|---|"]
+    sym = {"OK": "✓", "UWAGA": "!", "BRAK": "✗"}
+    for d in R.values():
+        k = d["kolizje"]
+        L.append(f"| {d['id']} | {d['tytul']} | 1:{d['skala']} | {', '.join(d['wezly']) or '—'} | {d['grubosci_ok']} | "
+                 f"{k['napis_napis']} | {k['napis_linia']} | " + " | ".join(sym[d['linie4'][x][0]] for x in "HSPI")
+                 + " |")
+    L += ["", "## Szczegóły — grubości warstw (model ↔ rysunek)", ""]
+    for d in R.values():
+        zle = [r for r in d["grubosci"] if r[5] != "OK"]
+        L.append(f"* **{d['id']}** — {d['grubosci_ok']} warstw zgodnych" + (": " + "; ".join(
+            f"{r[0]}[{r[1]}] {r[2]} model {r[3] * 1000:.1f} mm ≠ rysunek {r[4] * 1000:.1f} mm" for r in zle)
+                                                                         if zle else "") + "; 4 linie: " + "; ".join(
+            f"{x} — {d['linie4'][x][1]}" for x in "HSPI"))
+    return "\n".join(L) + "\n"
+
+
+register_view("detal", widok_detalu, rodzaj="detal")

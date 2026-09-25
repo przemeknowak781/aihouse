@@ -586,7 +586,8 @@ PMS("2.03", "P2", "Garderoba (przedpokój apartamentu)", (4.7, 2.4), kat="pomocn
 PMS("2.04", "P2", "Łazienka rodziców", (4.6, 7.5), kat="pomocnicza", posadzka="GRES", sciany="PLYTKI_SC", sufit="SUF_GK", temp=24, wyw=50,
     rodzaj="lazienka", podloga="POD-1L", uwagi="nad łazienkami P1 i P0 (pion SI)")
 PMS("2.05", "P2", "Gabinet / pokój", (10.2, 2.4), kat="podstawowa", pobyt=True, temp=20, naw=40, rodzaj="pokoj")
-PMS("2.06", "P2", "Klatka schodowa (wyjście z biegu 2, pustka)", None, [(XC_e, Y3_s), (XD_w, Y3_s), (XD_w, Y4_i), (XC_e, Y4_i)], kat="ruchu",
+PMS("2.06", "P2", "Klatka schodowa (wyjście z biegu 2, pustka)", None,
+    [(XC_e, Y3_n), (XM_e, Y3_n), (XM_e, Y3_s), (XD_w, Y3_s), (XD_w, Y4_i), (XC_e, Y4_i)], kat="ruchu",
     temp=20, rodzaj="komunikacja", uwagi="świetlik SW1 nad spocznikiem, okno pn. ON4; wyłączona z PU")
 PMS("2.07", "P2", "Pom. techniczne (centrala rekuperacyjna, wyłaz na dach)", (7.2, 1.3), kat="techniczna", posadzka="GRES", temp=16,
     rodzaj="techniczne", podloga="POD-1L", uwagi="centrala 450 m³/h; wyłaz 0,90 × 0,90 m z drabiną (W-065)")
@@ -686,7 +687,7 @@ DACHY = [
               "attyka pd. +3,85 = linia D do narożnika garażu; opaska żwirowa 0,5 m przy attykach i wpustach"},
 ]
 
-Z_PS_A = r(Z_ST2 - T_STR - 0.20 - 0.001 - 0.04, 3)           # spód pustki pod IZ-ST2Z → wierzch podsufitki PS-A ≈ +5,689
+Z_PS_A = r(Z_ST2 - T_STR - 0.015 - 0.20 - 0.001 - 0.04, 3)   # klej/tynk, wełna, membrana, pustka → wierzch podsufitki PS-A ≈ +5,674
 _OB_A = [[r(a), r(b)] for a, b in list(orient(Polygon(R(-2.42, -1.32, -EXT, y3 + EXT + 0.02)).difference(Polygon(R(-2.40, -1.30, -EXT, y3 + EXT))),
                                                1.0).exterior.coords)[:-1]]
 WSP = [
@@ -708,7 +709,7 @@ WSP = [
                               (-2.40, y3 + EXT)),
      "wierzch": Z_OKAP_3[1], "grubosc": Z_OKAP_3[1] - Z_OKAP_3[0], "przegroda": "OK1", "lacznik_termiczny": True, "mat": "ZB_C30",
      "uwagi": "krawędź ST3 — stropodach bryły A: 1,00 m pd., 1,10 m zach., 0,30 m wsch.; attyka cofnięta w licu ściany"},
-    {"id": "IZ-ST2Z", "obrys": R(X2o, -EXT, -EXT, y3 + EXT), "wierzch": r(Z_ST2 - T_STR), "grubosc": 0.20, "mat": "WELNA_035", "lacznik_termiczny": False,
+    {"id": "IZ-ST2Z", "obrys": R(X2o, -EXT, -EXT, y3 + EXT), "wierzch": r(Z_ST2 - T_STR - 0.015), "grubosc": 0.20, "mat": "WELNA_035", "lacznik_termiczny": False,
      "uwagi": "docieplenie spodu stropu nad powietrzem (SUF-ZEW: wełna 20 cm + membrana, pustka wentylowana 4 cm, podsufitka PS-A) — "
               "ciągłość izolacji wspornika bryły A (brief §9.1); łączy się z ETICS ściany P1 (lico −0,30) i wełną ściany A' (−1,30)"},
     {"id": "PS-A", "obrys": R(-2.40, -1.30, -EXT, y3 + EXT), "wierzch": Z_PS_A, "grubosc": 0.012, "mat": "PODSUF", "lacznik_termiczny": False,

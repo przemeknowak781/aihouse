@@ -510,5 +510,147 @@ def _notes_plan(s, W, zj_todo, lab):
     return out
 
 
+# ================================================================================================ PZT-02 / PZT-03
+def detail_window(s, opts, margin=3.0):
+    """Okno rysunków 1:200: działka ± ``margines`` [m], w kierunku drogi — do przeciwnej linii rozgraniczającej."""
+    if opts.get("okno"):
+        return tuple(float(v) for v in opts["okno"])
+    m_ = float(opts.get("margines", margin))
+    x0, y0, x1, y1 = s.plot.bounds
+    X0, Y0, X1, Y1 = x0 - m_, y0 - m_, x1 + m_, y1 + m_
+    pas = s.droga["pas"]
+    if pas is not None:
+        near = pas.intersection(box(X0, Y0 - 50, X1, Y1 + 50))
+        if not near.is_empty and near.distance(s.plot) < 0.1:
+            bx0, by0, bx1, by1 = near.bounds
+            Y0, Y1 = min(Y0, by0 - 1.0), max(Y1, by1 + 1.0)
+    return X0, Y0, X1, Y1
+
+
+def _draw_context(vp, s, lab, win, used, hatch=True, lawn=False, zone=True, utilities_ist=True):
+    """Treść wspólna 1:200: sąsiednie granice, droga, zieleń, nawierzchnie, budynek, ogrodzenie, retencja."""
+    k = vp.k
+    for x in s.sasiedzi:
+        g = D.clip(x["poly"].exterior, win) if x["poly"] is not None else None
+        D.draw_geom(vp, g, "Z-MAPA", pen=0.25, lt="CIAGLA")
+    pas, jez = s.droga["pas"], s.droga["jezdnia"]
+    if jez is not None and D.clip(jez, win) is not None:
+        vp.fill(D.clip(jez, win), "Z-DROGA", "#e6e6e6", z=8.0)
+        D.draw_geom(vp, D.clip(jez.exterior, win), "Z-MAPA", pen=0.25, lt="CIAGLA")
+        used.add("jezdnia")
+    if pas is not None:
+        D.draw_geom(vp, D.clip(pas.exterior, win), "Z-DROGA", pen=0.7, lt="CIAGLA", color="#303030")
+        used.add("rozgraniczajaca")
+    if utilities_ist:
+        for sx in [x for x in s.sieci if x.istn]:
+            g = D.clip(sx.geom, win)
+            if g is not None:
+                D.utility(vp, g, sx, existing=True)
+                used.add(f"ist_{sx.branza}")
+    zj, zj_todo = D.zjazd_poly(s)
+    if zj is not None:
+        from ..draft import symbols as S
+        D.fill_white(vp, zj, z=8.5)
+        if hatch:
+            S.paving(vp, zj, "drobne", outline=False, band_mm=4.0)
+        D.draw_geom(vp, zj, "Z-UTWARDZENIA", pen=0.35, lt="KRESKOWA" if zj_todo else "CIAGLA")
+        used.add("zjazd")
+    D.draw_green(vp, s, used, lawn=lawn, green=None)
+    D.draw_hardscape(vp, s, used, hatch=hatch, opaska_polys=opaska(s))
+    D.draw_parking(vp, s, used)
+    D.draw_bins(vp, s, used)
+    D.draw_retention(vp, s, used)
+    if zone:
+        D.draw_pc(vp, s, used)
+    D.draw_fence(vp, s, used)
+    D.draw_plot_boundary(vp, s, used)
+    D.draw_building_line(vp, s, used, win)
+    return zj_todo
+
+
+def _rect_dims(lab, pg, h=True, v=True, offs=(3.0, 5.0, 7.0, 10.0)):
+    """Wymiary prostokąta (szerokość, długość) ustawiane po stronie o najmniejszej kolizji."""
+    if pg is None or pg.is_empty or abs(pg.area - pg.envelope.area) > 0.02 * pg.envelope.area:
+        return
+    x0, y0, x1, y1 = pg.bounds
+    k = lab.k
+    if h:
+        D.place_dim(lab, (x0, y0), (x1, y0), shifts=[-o * k for o in offs] + [(y1 - y0) + o * k for o in offs])
+    if v:
+        D.place_dim(lab, (x1, y0), (x1, y1), shifts=[-o * k for o in offs] + [(x1 - x0) + o * k for o in offs])
+
+
+def _grad(fn, p, e=0.25):
+    """Gradient powierzchni (dH/dx, dH/dy) — różnice centralne."""
+    x, y = float(p[0]), float(p[1])
+    q = np.array([[x + e, y], [x - e, y], [x, y + e], [x, y - e]])
+    h = fn(q)
+    return np.array([(h[0] - h[1]) / (2 * e), (h[2] - h[3]) / (2 * e)])
+
+
+def _slopes(lab, s, used):
+    """Spadki nawierzchni (wartość z modelu, kierunek wg terenu projektowanego) i kierunki spływu na terenie."""
+    k = lab.k
+    for u in s.utwardzenia + [dict(id=t["id"], poly=t["poly"].difference(s.p0), raw=dict(spadek=0.02))
+                              for t in s.tarasy if "podest" in t["raw"].get("uwagi", "") or "płyt" in t["naw"]]:
+        sp = float(u["raw"].get("spadek") or 0.0)
+        pg = u["poly"].difference(s.p0)
+        if sp <= 0 or pg.is_empty or pg.area < 1.0:
+            continue
+        c = np.asarray(pg.representative_point().coords[0])
+        g = _grad(s.H_proj, c)
+        d = -g if np.hypot(*g) > 1e-4 else (c - np.asarray(s.p0.centroid.coords[0]))
+        if abs(d[0]) > 2.5 * abs(d[1]):
+            d = np.array([np.sign(d[0]), 0.0])
+        elif abs(d[1]) > 2.5 * abs(d[0]):
+            d = np.array([0.0, np.sign(d[1])])
+        L = min(12.0, max(6.0, min(pg.bounds[2] - pg.bounds[0], pg.bounds[3] - pg.bounds[1]) / k * 0.8))
+        pos, _c = D.slope_arrow(lab, pg, d, sp, length_mm=L)
+        if pos is not None:
+            used.add("spadek")
+    # kierunki spływu na terenie (spadek terenu projektowanego)
+    cover = unary_union([s.p0.buffer(0.2)] + [u["poly"] for u in s.utwardzenia] + [t["poly"] for t in s.tarasy])
+    pts = []
+    ring = s.p0.buffer(1.25, join_style=2).exterior
+    n = max(8, int(ring.length / 5.0))
+    pts += [np.asarray(ring.interpolate(i / n, normalized=True).coords[0]) for i in range(n)]
+    x0, y0, x1, y1 = s.plot.bounds
+    for x in np.arange(x0 + 6.0, x1 - 3.0, 9.0):
+        for y in np.arange(y0 + 5.0, y1 - 3.0, 9.0):
+            pts.append(np.array([x, y]))
+    free = s.plot.buffer(-1.5).difference(cover.buffer(0.8))
+    for p in pts:
+        if not free.contains(Point(p)):
+            continue
+        g = _grad(s.H_proj, p)
+        if np.hypot(*g) < 2e-3:
+            continue
+        pg = Point(p).buffer(3.0)
+        pos, _c = D.slope_arrow(lab, pg.intersection(free), -g, float(np.hypot(*g)), length_mm=8.0, max_cost=3.0)
+        if pos is not None:
+            used.add("splyw")
+
+
+def _drain_labels(lab, s):
+    h = D.H
+    for o in s.odwodnienia:
+        g = o["geom"] if o["geom"] is not None and o["geom"].length > 0.05 else o["poly"]
+        if g is None or g.is_empty:
+            continue
+        if o["typ"] == "liniowe":
+            txt = [f"{o['id']} odwodn. liniowe", f"i = {fmt.num(float(o['spadek'] or 0) * 100, 1)}% → {o['odb']}"]
+        elif o["typ"] == "niecka" and o["geom"] is not None:
+            txt = [f"{o['id']} niecka trawiasta", f"i = {fmt.num(float(o['spadek'] or 0) * 100, 1)}%"]
+        elif o["typ"] == "opaska_zwirowa":
+            txt = [f"{o['id']} opaska żwirowa {fmt.num(float(o['szer'] or 0.5), 2)} m"]
+        else:
+            continue
+        anchors = [np.asarray(g.interpolate(f, normalized=True).coords[0]) if hasattr(g, "interpolate") else
+                   np.asarray(g.representative_point().coords[0]) for f in (0.5, 0.3, 0.7, 0.15, 0.85)]
+        lab.label(anchors, txt, h, "Z-ODWODNIENIE", dists=(2.0, 4.0, 7.0, 10.0, 14.0), leader_from=1.5, dot=True)
+    for r in s.rury:
+        lab.label(r["xy"], [r["id"]], h, "Z-ODWODNIENIE", dists=(1.2, 2.5, 4.0, 6.0), leader_from=2.4)
+
+
 # ================================================================================================ rejestracja
 register_view("pzt_plan", view_plan, "plan zagospodarowania", qa="PZT")

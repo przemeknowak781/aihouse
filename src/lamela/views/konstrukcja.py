@@ -1305,6 +1305,97 @@ def widok_przekroj(ctx: ViewContext, spec: dict, scale: float, opts: dict):
     return vp, res, title
 
 
+# ------------------------------------------------------------------------------------------------ belki / nadproża
+def _czesc(lst: list, spec: dict) -> list:
+    """Podział listy elementów na arkusze: ``czesc: [i, n]`` — i-ta z n części (kolejność wg identyfikatora)."""
+    cz = spec.get("czesc")
+    if not cz:
+        return lst
+    i, n = int(cz[0]), max(int(cz[1]), 1)
+    per = int(math.ceil(len(lst) / n))
+    return lst[(i - 1) * per: i * per]
+
+
+def widok_zbrojenie_belek(ctx: ViewContext, spec: dict, scale: float, opts: dict):
+    from . import konstrukcja_belki as KB
+    D = KD.dane(ctx)
+    m = ctx.model
+    el = str(spec.get("element", "belki")).lower()
+    nr_ark = spec.get("nr", "")
+    zest = KD.Zestawienie()
+    res = KResult()
+    if el == "belki":
+        ids = spec.get("ids")
+        items = [(b.id, b, f"{b.id} — {_cm(b.b)}×{_cm(b.h)} cm, {b.beton} (poz. {b.poz})") for b in
+                 sorted(D.belki, key=lambda q: (len(q.id), q.id)) if not ids or b.id in ids]
+        items = _czesc(items, spec)
+        title = spec.get("tytul_widoku") or ("ZBROJENIE BELEK " + ", ".join(i[0] for i in items))
+    else:
+        typy = KD.typy_nadprozy(D)
+        items = [(nm, lst[0], f"{nm} — {_cm(lst[0].b)}×{_cm(lst[0].h)} cm, {lst[0].beton}; otwory: "
+                  + ", ".join(x.ids[0] for x in lst)[:70] + f" (poz. {', '.join(sorted({x.poz for x in lst}))[:30]})")
+                 for nm, lst in typy]
+        items = _czesc(items, spec)
+        title = spec.get("tytul_widoku") or ("ZBROJENIE NADPROŻY " + ", ".join(i[0] for i in items))
+    vp = Viewport(scale, title)
+    placer = Placer(vp.k)
+    k = vp.k
+    Y = 0.0
+    kol = max(int(spec.get("kolumny", 1)), 1)
+    col_w = 0.0
+    col_x = [0.0]
+    rows = []
+    for i, (ident, B, tyt) in enumerate(items):
+        pr = KB.prety_belki(B, zest)
+        # dla typu nadproża liczby sztuk × liczba nadproży typu
+        if el != "belki":
+            n_typ = len(next(lst for nm, lst in KD.typy_nadprozy(D) if nm == ident))
+            for key in ("dol", "gora", "strz"):
+                pr[key].n += (n_typ - 1) * {"dol": B.dol[0], "gora": B.gora[0], "strz": pr["ns"]}[key]
+        pods = KB.podpory_belki(m, B)
+        ci = i % kol
+        X0 = sum(col_x[:ci + 1]) if ci else 0.0
+        bb = KB.rysuj_belke(vp, placer, B, pr, X0 + 0.3, Y - B.h, pods, tyt, 2.5)
+        col_w = max(col_w, bb[2] - bb[0])
+        if ci == kol - 1 or i == len(items) - 1:
+            Y = min(Y, bb[1]) - 12 * k
+            col_x = [0.0] + [col_w + 0.8] * (kol - 1)
+        rows.append((B, pr))
+        for bd in ([B] if el == "belki" else next(lst for nm, lst in KD.typy_nadprozy(D) if nm == ident)):
+            KB.kontrola_belki(D, bd, pr, nr_ark)
+    res.column_blocks.append(("zestawienie", blok_zestawienia(zest, "ZESTAWIENIE STALI", _stopka_belek(D, rows), None)))
+    bad = [B for B, _ in rows if B.niesp]
+    res.notes += [
+        "Belki: pręty dolne i górne z odgięciami 90° w strefach podporowych (zakotwienie ≥ l_bd od lica podpory — "
+        "PN-EN 1992-1-1 9.2.1.4), strzemiona zamknięte z hakami 135° (8.5, rys. 8.5), pierwsze strzemię 5 cm od lica "
+        "podpory; rozstaw wg obliczeń (6.2.3), s ≤ min(0,75·d; 400 mm) (9.6N).",
+        "Przekrój A-A — w środku rozpiętości; długości prętów l — długości rozwinięcia (wymiary zewnętrzne, "
+        "odliczenie gięcia wg PN-EN ISO 3766).",
+    ] + UWAGI_ZBR[3:5]
+    if el != "belki":
+        res.notes.append("Nadproża pogrupowano w typy (jednakowy przekrój, długość i zbrojenie z obliczeń); liczby sztuk "
+                         "w zestawieniu — łącznie dla wszystkich nadproży typu.")
+    if bad:
+        res.notes.append("UWAGA — obliczenia (biblioteka) wykazują niespełnione warunki: " + "; ".join(
+            f"{B.id if el == 'belki' else B.ids[0]}: {B.niesp[0]}" for B in bad[:5]) + " — zmiana przekroju przed "
+            "wydaniem do realizacji [WYMAGA ANALIZY].")
+    kolz = kolizje_napisow(vp)
+    if kolz:
+        ctx.note(f"{nr_ark} {title}", f"kolizje napisów: {kolz}")
+    KD.zapisz_raporty(D, ctx)
+    return vp, res, title
+
+
+def _stopka_belek(D, rows) -> list:
+    out = []
+    grp = {}
+    for B, _ in rows:
+        grp.setdefault((B.beton, B.eksp, B.c_nom), []).append(B.id if B.rodzaj == "belka" else B.ids[0])
+    for (bt, ex, c), ids in grp.items():
+        out.append(f"{', '.join(ids)[:80]}: beton {bt}, {ex}, otulina strzemion c_nom = {c:.0f} mm (tabl. 4.4N + NA).")
+    return out
+
+
 # ================================================================================================ rejestracja
 def widok_zbrojenie(ctx: ViewContext, spec: dict, scale: float, opts: dict):
     """Dyspozytor typu ``k_zbrojenie``: element = strop | plyta | fundament | belki | nadproza | schody | wsporniki."""
@@ -1316,7 +1407,8 @@ def widok_zbrojenie(ctx: ViewContext, spec: dict, scale: float, opts: dict):
 
 
 _ZBROJENIE = {"strop": widok_zbrojenie_plyt, "plyta": widok_zbrojenie_plyt, "stropodach": widok_zbrojenie_plyt,
-              "fundament": widok_zbrojenie_fundamentu}
+              "fundament": widok_zbrojenie_fundamentu, "belki": widok_zbrojenie_belek,
+              "nadproza": widok_zbrojenie_belek}
 
 register_view("k_zbrojenie", widok_zbrojenie, "rysunek zbrojenia")
 

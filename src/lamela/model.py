@@ -1433,6 +1433,8 @@ class Model:
                 else:
                     z_top = max(z_top, sl["wierzch"])
         prev = self._kond_prev(s.kond)
+        s._ext_dol_wolne = True     # czy warstwy zewnętrzne można obniżyć w narożu (harmonizacja) — nie, gdy pod nimi jest
+        #                             ocieplenie ściany niższej (lico w linii) albo płyta ciągła przed licem (uskok bryły)
         if prev is None:
             z_bot = s.z_od - 0.30
         else:
@@ -1450,6 +1452,7 @@ class Model:
                     P = sl["poly_full"]
                     if P.buffer(0.02).contains(Point(tuple(probe_in))) and not P.contains(p_out) and not ciagla_na_zewnatrz(sl):
                         z_bot = min(z_bot, sl["spod"])
+            s._ext_dol_wolne = z_bot < s.z_od - 1e-6
         for lay in s.warstwy:
             if lay.strona == es:
                 lay.z0, lay.z1 = z_bot, z_top
@@ -1474,7 +1477,9 @@ class Model:
                     if not es or not ev:
                         continue
                     z0 = min(min(l.z0 for l in es), min(l.z0 for l in ev))
-                    for l in es + ev:
+                    wolne = ([] if not getattr(s, "_ext_dol_wolne", True) else es) + \
+                            ([] if not getattr(v, "_ext_dol_wolne", True) else ev)
+                    for l in wolne:
                         if l.z0 > z0 + 1e-6:
                             l.z0 = z0
                             changed = True
