@@ -201,6 +201,7 @@ Obrys lica zewnętrznego (ocieplenie):
         A(openings_table(k))
         A("\n**Pomieszczenia**\n\n")
         A(rooms_table(k))
+        A("\n")
     A("\n### 3.7 Elementy zewnętrzne: płyty, rama C, lamele, słupy\n\n")
     A(tab(["ID", "opis", "rzut", "z [m]", "łącznik termoizol."], [(p["id"], p["opis"], poly_txt(p["poly"]), f"{f(p['z'][0])}…{f(p['z'][1])}", "tak" if p["lacznik"] else "—") for p in M.PLYTY]))
     L = M.LAMELE

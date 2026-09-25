@@ -1339,7 +1339,7 @@
    "sym": "",
    "zaw": null,
    "kier": null,
-   "uw": "klatka schodówa - oba biegi",
+   "uw": "klatka schodowa - oba biegi",
    "kw": 1
   },
   {
@@ -1444,7 +1444,7 @@
    "sym": "ON3",
    "zaw": null,
    "kier": null,
-   "uw": "okno nad klatka schodówa (północ)",
+   "uw": "okno nad klatka schodowa (północ)",
    "kw": 1
   },
   {
@@ -1685,7 +1685,7 @@
   },
   {
    "id": "0.04",
-   "nazwa": "Klatka schodówa",
+   "nazwa": "Klatka schodowa",
    "kond": "P0",
    "kat": "ruchu",
    "pobyt": false,
@@ -1939,7 +1939,7 @@
    "pobyt": false,
    "min": null,
    "posadzka": "gres",
-   "uw": "ławka, buty, zlew gosp.",
+   "uw": "szafka na buty; przejście garaż–kuchnia–ogród",
    "pow": 5.01,
    "geometria": {
     "type": "Polygon",
@@ -2295,7 +2295,7 @@
   },
   {
    "id": "1.06",
-   "nazwa": "Klatka schodówa",
+   "nazwa": "Klatka schodowa",
    "kond": "P1",
    "kat": "ruchu",
    "pobyt": false,

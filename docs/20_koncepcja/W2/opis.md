@@ -183,18 +183,19 @@ Obrys lica zewnętrznego (ocieplenie):
 | 0.01 | Wiatrołap | prost. x 9,750…11,895; y 6,450…8,295 | 3,96 | ruchu | nie | gres | szafa wnękowa 0,6 m |
 | 0.02 | Hol | prost. x 8,530…11,895; y 4,905…6,300 | 4,69 | ruchu | nie | gres |  |
 | 0.03 | WC gościnne | prost. x 8,530…9,600; y 6,450…8,295 | 1,97 | pomocnicza | nie | gres | szer. 1,07 >= 0,90 (B-17) |
-| 0.04 | Klatka schodówa | wielobok (7,200; 4,905) (6,200; 4,905) (6,200; 7,145) (6,200; 8,295) (8,320; 8,295) (8,320; 7,145) (7,200; 7,145) | 4,68 | ruchu | nie | dąb |  |
+| 0.04 | Klatka schodowa | wielobok (7,200; 4,905) (6,200; 4,905) (6,200; 7,145) (6,200; 8,295) (8,320; 8,295) (8,320; 7,145) (7,200; 7,145) | 4,68 | ruchu | nie | dąb |  |
 | 0.05 | Schowek pod schodami | prost. x 7,320…8,320; y 4,905…7,145 | 2,24 | pomocnicza | nie | dąb | wys. zmienna 1,37-2,77 m |
 | 0.06 | Salon + jadalnia + kuchnia | prost. x 0,105…11,895; y 0,105…4,695 | 54,12 | podstawowa | tak | dąb/gres | strefa otwarta; kuchnia z wyspą przy ścianie E |
 | 0.07 | Przedpokój gościnny | wielobok (3,980; 4,905) (3,980; 6,200) (5,990; 6,200) (5,990; 5,605) (5,590; 5,605) (5,590; 4,905) | 2,32 | ruchu | nie | dąb |  |
 | 0.08 | Łazienka gościnna (prysznic) | prost. x 3,980…5,990; y 6,350…8,295 | 3,91 | pomocnicza | nie | gres |  |
 | 0.09 | Pokój gościnny / gabinet | prost. x 0,105…3,770; y 4,905…8,295 | 12,42 | podstawowa | tak | dąb |  |
-| 0.10 | Przedsionek gospodarczy | prost. x 12,105…14,200; y 0,105…2,495 | 5,01 | ruchu | nie | gres | ławka, buty, zlew gosp. |
+| 0.10 | Przedsionek gospodarczy | prost. x 12,105…14,200; y 0,105…2,495 | 5,01 | ruchu | nie | gres | szafka na buty; przejście garaż–kuchnia–ogród |
 | 0.11 | Spiżarnia | prost. x 14,350…15,400; y 0,105…2,495 | 2,51 | pomocnicza | nie | gres |  |
 | 0.12 | Pomieszczenie techniczne | prost. x 15,550…18,295; y 0,105…2,495 | 6,56 | techniczna | nie | gres | PC split (jedn. wewn.), zasobnik CWU 300 l, bufor, rozdzielacze, rozdzielnica RG, wodomierz |
 | 0.13 | Garaż 2-stanowiskowy | prost. x 12,220…18,295; y 2,820…8,895 | 36,91 | garaż | nie | posadzka żywiczna | w świetle 6,08 x 6,08 m |
 
 **Suma PU P0 (bez garażu): 104,39 m²**; garaż: 36,91 m².
+
 
 ### 3.5 I PIĘTRO P1 (+3,15)
 
@@ -226,7 +227,7 @@ Obrys lica zewnętrznego (ocieplenie):
 | O1-06 | S1-04 | y 0,90…2,70 | 1,80 | 1,50 | 0,85 | okno | OZ2 |  | pokój dziecka 1 (elewacja pd. bryły B pełna jak w szkicu) |
 | O1-07 | S1-05 | x 2,70…3,60 | 0,90 | 2,05 | 0,00 | drzwi | D1 | zawias a, na +y | pokój dziecka 2 |
 | O1-08 | S1-05 | x 4,20…5,00 | 0,80 | 2,05 | 0,00 | drzwi | D2 | zawias a, na -y | łazienka (na zewnątrz) |
-| O1-09 | S1-05 | x 6,20…8,32 | 2,12 | 2,55 | 0,00 | otwor |  |  | klatka schodówa - oba biegi |
+| O1-09 | S1-05 | x 6,20…8,32 | 2,12 | 2,55 | 0,00 | otwor |  |  | klatka schodowa - oba biegi |
 | O1-10 | S1-05 | x 9,00…9,90 | 0,90 | 2,05 | 0,00 | drzwi | D1 | zawias b, na +y | pralnia |
 | O1-11 | S1-11 | x 2,70…3,60 | 0,90 | 2,05 | 0,00 | drzwi | D1 | zawias a, na -y | pokój dziecka 1 |
 
@@ -239,10 +240,11 @@ Obrys lica zewnętrznego (ocieplenie):
 | 1.03 | Pokój dziecka 1 | prost. x 0,105…3,800; y 0,105…3,500 | 12,54 | podstawowa | tak | dąb |  |
 | 1.04 | Pokój dziecka 2 | prost. x 0,105…3,770; y 4,905…8,295 | 12,42 | podstawowa | tak | dąb |  |
 | 1.05 | Łazienka | wielobok (3,980; 4,905) (3,980; 8,295) (5,990; 8,295) (5,990; 5,605) (5,590; 5,605) (5,590; 4,905) | 6,53 | pomocnicza | nie | gres |  |
-| 1.06 | Klatka schodówa | wielobok (6,200; 4,905) (6,200; 8,295) (8,320; 8,295) (8,320; 4,905) (7,320; 4,905) (7,320; 7,145) (7,200; 7,145) (7,200; 4,905) | 6,92 | ruchu | nie | dąb |  |
+| 1.06 | Klatka schodowa | wielobok (6,200; 4,905) (6,200; 8,295) (8,320; 8,295) (8,320; 4,905) (7,320; 4,905) (7,320; 7,145) (7,200; 7,145) (7,200; 4,905) | 6,92 | ruchu | nie | dąb |  |
 | 1.07 | Pralnia z suszarnią | wielobok (11,895; 8,295) (11,895; 4,905) (8,530; 4,905) (8,530; 7,900) (8,900; 7,900) (8,900; 8,295) | 11,26 | pomocnicza | nie | gres |  |
 
 **Suma PU P1 (bez garażu): 90,15 m²**.
+
 
 ### 3.6 II PIĘTRO P2 (+6,30)
 
@@ -274,7 +276,7 @@ Obrys lica zewnętrznego (ocieplenie):
 | O2-02 | S2-01 | x 4,30…5,50 | 1,20 | 1,75 | 0,85 | okno | OP2 |  | garderoba; za lamelami |
 | O2-03 | S2-01 | x 8,90…11,30 | 2,40 | 2,00 | 0,60 | okno | OP1 |  | gabinet; za lamelami |
 | O2-04 | S2-02 | y 1,80…3,00 | 1,20 | 1,75 | 0,85 | okno | OP2 |  | gabinet - wschod |
-| O2-05 | S2-05 | x 6,40…8,10 | 1,70 | 1,50 | 0,90 | okno | ON3 |  | okno nad klatka schodówa (północ) |
+| O2-05 | S2-05 | x 6,40…8,10 | 1,70 | 1,50 | 0,90 | okno | ON3 |  | okno nad klatka schodowa (północ) |
 | O2-06 | S2-05 | x 4,30…5,20 | 0,90 | 0,80 | 1,50 | okno | ON1 |  | łazienka rodziców |
 | O2-07 | S2-08 | y 1,20…3,60 | 2,40 | 2,00 | 0,60 | okno | OP1 |  | sypialnia - zachod |
 | O2-08 | S2-09 | x 4,20…5,00 | 0,80 | 2,05 | 0,00 | drzwi | D2 | zawias a, na -y | łazienka rodziców (na zewnątrz) |
@@ -296,6 +298,7 @@ Obrys lica zewnętrznego (ocieplenie):
 | 2.06 | Pom. techn. (reku + wyłaz) | prost. x 6,200…8,320; y 0,105…2,650 | 5,40 | techniczna | nie | gres | klapa 0,9x0,9 + drabina (K-20, K-21) |
 
 **Suma PU P2 (bez garażu): 62,86 m²**.
+
 
 ### 3.7 Elementy zewnętrzne: płyty, rama C, lamele, słupy
 

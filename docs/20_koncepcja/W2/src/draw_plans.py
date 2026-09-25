@@ -189,7 +189,7 @@ def dims(ax, kond):
 
 INFO = {
     "P0": ("W2 - RZUT PARTERU P0   (±0,00 = 101,65 m n.p.m.; posadzka P0 = 0,00; h w świetle 2,80 m)",
-           "Konstrukcja: ściany nośne silikat 18 cm w osiach A, B, C, D, E, F, 1(strefa gosp.), 3, 4, 5 - ciągłe przez P0-P1 (P2: A, E, 1, 3, B, C, D). "
+           "Konstrukcja: ściany nośne silikat 18 cm w osiach A, B, C, D, E, F, 1(strefa gosp.), 3, 4, 5 - ciągłe przez P0-P1 (P2: A' lekka na wsporniku, E, 1, 3, B, C, D). "
            "Fasada pd. (E): przeszklenie 5 kwater na słupach stalowych SL1-SL4 + belka B1 25x105 (+2,80...+3,85). "
            "Strop ST1 20 cm, rozpiętości 4,80 / 3,60 m (N-S); garaż: płyta 24 cm, rozp. 6,40 m (E-W)."),
     "P1": ("W2 - RZUT I PIĘTRA P1   (posadzka +3,15; h w świetle 2,80 m)",
