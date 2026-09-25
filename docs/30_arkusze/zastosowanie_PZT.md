@@ -76,3 +76,75 @@ w raporcie układu: brak na wszystkich arkuszach. QA: 0 błędów, 1 ostrzeżeni
 | `kolumna`, `620x420` | 620×420 | 0,260 | 84 % | poprawne | uwagi w jednym bloku; znak centrujący przecina tytuł tabeli „OBIEKTY…” |
 | **`kolumna`, `620x420`, `kolejnosc_tabel`** | **620×420** | **0,260** | **84 %** | **poprawne** | **wybrany**: uwagi w całości, nic nie koliduje |
 | `kolumna`, `630x420` / `650x420` | — | 0,265 / 0,273 | 82 % / 80 % | poprawne / słabe | bez korzyści |
+
+Uzasadnienie formatu jawnego. Przy 610×420 z trybu auto uwagi rozpadają się na 3 części w odwróconej kolejności,
+co jest błędem czytelności. 620×420 to +10 mm i +1,6 % papieru, a daje jeden blok uwag. Pasy wychodzą
+210 + 205 + 205, więc są równe i bliskie 210. Rzędy 297 + 123 dają ocenę „poprawne”. Wariant 450×594 („poprawne”,
+0,267 m²) jest droższy. `kolejnosc_tabel` najpierw wstawia w środkową kolumnę wąskie tabele (skrzyżowania,
+kolizje). Dzięki temu znak centrujący na osi arkusza (x = 310 mm, 10 mm w głąb ramki) trafia w wolne miejsce.
+Tabela przyłączy stoi pod legendą, a obiekty i koordynacja w środkowej kolumnie. Wszystkie tabele leżą obok mapy.
+Uwaga eksploatacyjna, zapisana też w konfiguracji: gdy treść tabel dalej urośnie i przestanie się mieścić
+w 620×420, generator przejdzie na układ klasyczny i zapisze uwagę w logu. Wtedy trzeba wrócić do `format: auto`.
+
+Połączenie PZT-02 i PZT-03 w jeden arkusz odrzucono. Oba rysunki mają 1:200 i ten sam wycinek, ale treść jest
+gęsta: rzędne, spadki i odwodnienie na jednym, sieci, odległości i skrzyżowania na drugim. Nałożenie obniżyłoby
+czytelność, a RPB § 15 wymaga czytelnego przedstawienia uzbrojenia.
+
+## 3. Zmiany w module widoku `src/lamela/views/site.py` (komplet PZT)
+
+1. **Błąd: PZT-02 generował się w nieskończoność.** Runda modelu wprowadziła do `dzialka.yaml` 1078 rzędnych
+   projektowanych (`teren.punkty_projektowane`: pierścienie co 0,25–0,5 m wokół budynku, gęsty TIN z
+   `tools/buduj_model.py:teren_projekt`). `_levels_proj` opisywał każdy punkt etykietą z optymalizacją kolizji.
+   Po 15 minutach PZT-02 wciąż się nie wygenerował, a rysunek byłby nieczytelny. Poprawka: `proj_do_opisu(P, co,
+   co_rowne)`. Opisywane są punkty charakterystyczne: najpierw rzędne rzadkie (podesty, dojścia, niecki), potem
+   powtarzalne (pierścienie). Pominięty zostaje punkt bliższy niż `rzedne_proj_co` (2,0 m = 10 mm w 1:200) od już
+   opisanego albo bliższy niż `rzedne_proj_co_rowne` (5,0 m) od opisanego o tej samej rzędnej (0,01 m). Wartość 0
+   przywraca dawne zachowanie. Wynik: 66 opisów, gęstość jak w stanie wyjściowym. PZT-02 generuje się w ~22 s.
+   TIN w modelu jest nietknięty (warstwice, interpolacja rzędnej przy wejściu).
+2. **Opcja `tabele: rzutnia | kolumna`** (`_tabele`) dla wszystkich trzech typów. `rzutnia` (domyślnie) to dawne
+   zachowanie: tabele w rzutni przy prawej krawędzi okna. `kolumna`: każda tabela jest blokiem kolumny opisowej
+   (`vp_table` rysuje na arkuszu, pismo 2,5 mm bez zmian), a silnik ustawia bloki ekonomicznie: w kolumnach obok
+   rysunku, w pasie pod nim i w wolnych narożnikach. Do tego `kolejnosc_tabel: [nazwa, …]`. Nazwy bloków:
+   `tab_wskazniki`, `tab_odleglosci` (PZT-01); `tab_tyczenie`, `tab_rzedne`, `tab_odwodnienie`, `tab_nawierzchnie`,
+   `tab_retencja` (PZT-02); `tab_przylacza`, `tab_obiekty`, `tab_koordynacja`, `tab_skrzyzowania`, `tab_kolizje`
+   (PZT-03). Moduł `site.py` nie jest używany przez inne komplety (sprawdzono).
+
+Nie edytowano `sheets.py`, `uklad.py`, `site_data.py`, `site_draw.py` (inny zespół zmieniał je równolegle) ani
+modelu (`budynek.yaml`, `dzialka.yaml`, `tools/buduj_model.py`).
+
+## 4. Kontrola wizualna
+
+Obejrzano każdy arkusz w całości i w powiększonych wycinkach PNG 150 dpi:
+
+* PZT-02: rzędne wokół budynku, legenda z uwagami względem tabliczki.
+* PZT-03: styk mapy z tabelami, tabela koordynacji, uwagi z tabliczką, strefy znaków centrujących.
+* PZT-01: dolna część arkusza, znaki centrujące.
+
+Na żadnym arkuszu nic się nie nakłada, a tytuły i numeracja są spójne. Pozostałe drobiazgi zależą od silnika i
+nie kolidują z treścią:
+
+* PZT-01: górny znak centrujący dochodzi do górnej krawędzi ramki opisu podkładu. Prawy znak (y = 297 mm) leży
+  w odstępie między wierszami legendy.
+* PZT-02: górny znak centrujący dotyka ramki okna mapy.
+
+Pliki robocze, warianty i wycinki: `/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/arkusze/pzt/`.
+
+## 5. Błędy silnika (do zespołu `uklad.py` / `sheets.py` — nie poprawiane tutaj)
+
+1. **Strefy znaków centrujących nie są rezerwowane.** `Sheet._draw_frame` rysuje znaki centrujące na osiach W/2 i
+   H/2 (0,7 mm, ok. 10 mm w głąb ramki). `uklad.pakuj` zaczyna wolne pole 3 mm od ramki (`PAD_B`), a
+   `sprawdz_nakladanie` nie zna tych znaków. Objaw: PZT-03 620×420 przy domyślnej kolejności tabel. Znak na
+   x = 310 mm, y = 10–20 mm przecina tytuł „OBIEKTY UZBROJENIA I O|DWODNIENIA”, a raport podaje `kolizje: []`.
+   PZT-01 i PZT-02: znak dotyka ramek bloków. Propozycja: w `pakuj` zająć w `Wolne` cztery prostokąty
+   (W/2 ± 3 mm × 12 mm od ramki, analogicznie H/2) i dodać je do `prostokaty` jako „znak”.
+2. **Uwagi dzielone na części bez kontroli kolejności i bez kary.** `_pakuj_uwagi` wstawia każdą kolejną część w
+   pozycję „najbardziej w prawo, potem najwyżej”. Część „(cd.)” może więc wylądować nad pierwszą częścią albo na
+   lewo od niej. Objaw: PZT-03 w trybie auto (610×420): poz. 1–5 pod tabelami, poz. 6–7 „(cd.)” w lewym górnym rogu
+   nad mapą, poz. 8 sama w osobnym pudełku przy dolnej ramce. `min_szerokosc` i koszt nie karzą rozdrobnienia,
+   więc wygrywa 610 mm, choć 620 mm daje jeden blok. Propozycja: kara w koszcie za każdą dodatkową część uwag,
+   minimalna część ≥ 2 pozycje, części w kolejności czytania (kolumny od lewej, w kolumnie od góry).
+3. **Wyśrodkowanie grupy zmienia wynik upakowania na gorszy.** `_pakuj_wysrodkuj` bierze pierwsze udane pakowanie
+   z przesunięciem (nadwyżka/2), nawet gdy dzieli uwagi bardziej niż pakowanie bez przesunięcia. Objaw: PZT-03 z
+   `modul_skladania: 205` daje L = 620 przy W_need = 610 i przesunięcie 5 mm, a uwagi są w 3 częściach (1–5, 6–7,
+   8–8). Z `format: 620x420` (`_dociagnij` → bez przesunięcia) uwagi są w jednej części. Propozycja: przyjmować
+   wyśrodkowanie tylko wtedy, gdy liczba bloków i części uwag się nie zwiększa, w przeciwnym razie (0, 0).
