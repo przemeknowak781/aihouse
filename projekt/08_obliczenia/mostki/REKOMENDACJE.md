@@ -70,7 +70,7 @@ Wniosek: rzędne przelewów w modelu odnoszą się do pokrycia **średniego** (g
 
 ### R-W4. Cokół przy drzwiach DZ2 garażu
 
-Weryfikacja koncepcji (§6 A5): cokół 0,14 m przy DZ2 (strona wsch., teren wyższy) < 0,30 m, brak odwodnienia liniowego. Zalecenie (detal PT-AR-D): odwodnienie liniowe przed progiem DZ2 na całą szerokość drzwi + 0,15 m z każdej strony, podłączone do KD-E; nawierzchnia ze spadkiem 2 % od drzwi; uszczelnienie progu taśmą EPDM / masą KMB wywiniętą ≥ 15 cm na ościeża poza strefę rozbryzgu i połączoną z izolacją przeciwwilgociową płyty; lokalne obniżenie terenu przy DZ2 (niecka NT-E) tak, by cokół poza drzwiami ≥ 0,30 m (DIN 18533-1: uszczelnienie cokołu ok. 30 cm, min. 15 cm nad terenem w stanie końcowym).
+Weryfikacja koncepcji (§6 A5): cokół 0,14 m przy DZ2 (strona wsch., teren wyższy) < 0,30 m, brak odwodnienia liniowego. Bieżący model: posadzka garażu -0,10, teren projektowany przed DZ2 (TIN) -0,177 → cokół 0,08 m, Zalecenie (detal PT-AR-D-14): odwodnienie liniowe przed progiem DZ2 na całą szerokość drzwi + 0,15 m z każdej strony, podłączone do KD-E; nawierzchnia ze spadkiem 2 % od drzwi; uszczelnienie progu taśmą EPDM / masą KMB wywiniętą ≥ 15 cm na ościeża poza strefę rozbryzgu i połączoną z izolacją przeciwwilgociową płyty; lokalne obniżenie terenu przy DZ2 (niecka NT-E) tak, by cokół poza drzwiami ≥ 0,30 m (DIN 18533-1: uszczelnienie cokołu ok. 30 cm, min. 15 cm nad terenem w stanie końcowym).
 
 ### R-W5. Podsufitka i czoło wspornika bryły A
 

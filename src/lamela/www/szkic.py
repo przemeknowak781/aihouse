@@ -10,6 +10,7 @@ from PIL import Image, ImageFilter
 
 # wycinek serwetki z rysunkiem — ułamki szerokości/wysokości zdjęcia (bez sztućców, zegarka i nadruków)
 WYCINEK = (0.226, 0.455, 0.757, 0.80)
+MASKI = ((0.0, 0.0, 0.06, 0.16), (0.88, 0.0, 1.0, 0.27))
 
 
 def przetworz(src: Path, dst: Path, szer: int = 1400) -> dict:
@@ -29,6 +30,9 @@ def przetworz(src: Path, dst: Path, szer: int = 1400) -> dict:
     ciemny = np.clip((tlo - L - 12.0) * 6.0, 0, 255)
     alfa = ciemny * niebieski
     alfa = np.where(alfa < 40, 0, alfa)
+    h, w = alfa.shape
+    for fx0, fy0, fx1, fy1 in MASKI:                    # refleksy noża i paska zegarka przy krawędziach wycinka
+        alfa[int(fy0 * h):int(fy1 * h), int(fx0 * w):int(fx1 * w)] = 0
     out = Image.fromarray(alfa.astype(np.uint8), "L").filter(ImageFilter.GaussianBlur(0.6))
     bb = out.point(lambda v: 255 if v > 60 else 0).getbbox()
     if bb:

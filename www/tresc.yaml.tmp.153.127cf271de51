@@ -1,0 +1,72 @@
+# Treści marketingowe strony www „Dom LAMELA” (tools/buduj_www.py). NIE wpisywać tu liczb o budynku —
+# wszystkie wartości budynku wstawia skrypt z modelu przez znaczniki {klucz} (lista kluczy: www/dist/dane_strony.json).
+# Ceny i pakiety są PRZYKŁADOWE (strona demonstracyjna, marka fikcyjna).
+marka:
+  nazwa: "Pasmo i Cień"
+  podtytul: "katalog domów autorskich"
+  oznaczenie: "marka przykładowa — strona demonstracyjna"
+  adres_tekst: "zapytania@pasmo-i-cien.example"   # domena .example (RFC 2606) — adres nie istnieje
+  kod_projektu: "PC-LAMELA"
+
+hero:
+  naglowek: "Dom LAMELA"
+  lead: >-
+    Trzy poziome pasma przesunięte względem siebie jak litera S: parter otwarty na ogród, zwarte piętro
+    i najwyższa bryła w pionowych lamelach z drewna termo. {PU} powierzchni użytkowej, garaż na {garaz_st} auta,
+    płaski dach i ciepła obudowa bez przerw w izolacji.
+  cta_1: "Zobacz rzuty"
+  cta_2: "Zapytaj o projekt"
+
+idea:
+  tytul: "Z serwetki do modelu"
+  tekst: >-
+    Projekt zaczął się od szkicu Inwestora na serwetce: trzy pasma, pionowe kreski lameli, przeszklony parter.
+    Każda litera szkicu ma dziś swój element w modelu, a wymiary podane niżej są odczytane z tego samego modelu,
+    z którego powstają rysunki, rendery i obliczenia.
+
+galeria:
+  tytul: "Wizualizacje"
+  opis: >-
+    Rendery z modelu 3D projektu. Słońce ustawione astronomicznie dla Poznania w podanym dniu i godzinie.
+    Zieleń, auta i sąsiednie budynki są poglądowe.
+
+rzuty:
+  tytul: "Rzuty kondygnacji"
+  opis: >-
+    Rzuty z przykładowym umeblowaniem. Numer pomieszczenia na rzucie odpowiada wierszowi zestawienia obok.
+    Powierzchnie netto liczone z modelu po licach ścian wykończonych.
+
+elewacje:
+  tytul: "Elewacje i przekroje"
+  opis: >-
+    Rzuty prostokątne z modelu, kolory według materiałów projektu. Rzędne względem poziomu ±0,00 (posadzka parteru).
+
+widok3d:
+  tytul: "Model 3D"
+  opis: "Obracaj, przybliżaj i rozsuwaj kondygnacje. Model jest tym samym plikiem, z którego powstały rendery."
+  przycisk: "Wczytaj model 3D"
+
+technologia:
+  tytul: "Technologia i materiały"
+  lead: >-
+    Murowane ściany z silikatu, żelbetowe stropy i płyta fundamentowa na XPS. Wartości U policzył moduł fizyki
+    budowli na pełnych warstwach przegród, z uwzględnieniem mostków cieplnych.
+
+jakosc:
+  tytul: "Cztery linie obudowy"
+  lead: >-
+    Każda przegroda zewnętrzna ma cztery ciągłe warstwy funkcyjne: izolację termiczną, hydroizolację,
+    warstwę szczelności powietrznej i warstwę zewnętrzną. Ciągłość sprawdza moduł fizyki dla każdej przegrody,
+    a każde pole dachu ma spadek, wpust i przelew awaryjny.
+
+energia:
+  tytul: "Energia i instalacje"
+  lead: >-
+    Dom w pełni elektryczny: pompa ciepła powietrze–woda, ogrzewanie podłogowe niskotemperaturowe,
+    wentylacja z odzyskiem ciepła i instalacja fotowoltaiczna na dachu najwyższej bryły.
+
+dzialka:
+  tytul: "Jaka działka"
+  lead: >-
+    Minimalne wymiary działki wyliczone z gabarytów budynku i odległości od granic. To punkt wyjścia do rozmowy
+    o konkretnej działce, a nie gwarancja: plan miejscowy albo decyzja o warunkach zabudowy mogą wymagać więcej.

@@ -369,7 +369,10 @@ def measure_set(nazwa: str, katalog: Path, odstep: float = 6.0, podglad: Path | 
             r["podglad"] = str(preview(a["pdf"], r, Path(podglad) / nazwa / f"{a['nr']}.png"))
         r["bloki"] = [[round(v, 1) for v in b] for b in r["bloki"]]
         wiersze.append(r)
-    return dict(komplet=nazwa, katalog=str(katalog), arkusze=wiersze, sumy=totals(wiersze))
+    import datetime as _dt
+    mt = max((Path(w["pdf"]).stat().st_mtime for w in wiersze), default=None)
+    stan = _dt.datetime.fromtimestamp(mt).strftime("%Y-%m-%d %H:%M") if mt else None
+    return dict(komplet=nazwa, katalog=str(katalog), stan_plikow=stan, arkusze=wiersze, sumy=totals(wiersze))
 
 
 def totals(ws: list[dict]) -> dict:
@@ -402,6 +405,8 @@ def _pct(x: float) -> str:
 def markdown_set(k: dict) -> str:
     s = k["sumy"]
     L = [f"### {k['komplet']} — `{k['katalog']}`", ""]
+    if k.get("stan_plikow"):
+        L += [f"Stan plików PDF: {k['stan_plikow']}.", ""]
     if not s.get("arkuszy"):
         return "\n".join(L + ["Brak arkuszy PDF.", ""])
     L += ["| Nr | Format | W×H [mm] | Pow. [m²] | W obw. | W rys. | W kontur | Największy pusty prostokąt | "
@@ -417,13 +422,32 @@ def markdown_set(k: dict) -> str:
                  f"{f['warstwy']} | {ocena} |")
     fm = ", ".join(f"{n}× {f}" for f, n in s["formaty"].items())
     oc = ", ".join(f"{o}: {n}" for o, n in s["oceny_skladania"].items() if n)
-    L += ["", f"**Suma:** {s['arkuszy']} ark. ({fm}); papier {_pl(s['pole_m2'])} m² (≈ {s['a4_ekw']:.1f} A4); "
+    L += ["", f"**Suma:** {s['arkuszy']} ark. ({fm}); papier {_pl(s['pole_m2'])} m² (≈ {_pl(s['a4_ekw'], 1)} A4); "
           f"wypełnienie ważone {_pct(s['wypelnienie_wazone'])}, średnie {_pct(s['wypelnienie_srednie'])}, "
           f"najniższe {_pct(s['wypelnienie_min'])} ({s['najgorsze']}); puste pole w ramkach "
           f"{_pl(s['puste_m2'])} m²; po samym przycięciu pustych pasów {_pl(s['przyciete_m2'])} m² "
           f"(−{_pct(1 - s['przyciete_m2'] / s['pole_m2'])}); warstw A4 po złożeniu: {s['warstwy_a4']}; "
           f"składanie — {oc}.", ""]
     return "\n".join(L)
+
+
+def markdown_summary(wyniki: list[dict]) -> str:
+    """Tabela zbiorcza kompletów."""
+    L = ["| Komplet | Arkuszy | Formaty | Papier [m²] | ≈ A4 | W ważone | W średnie | W min (arkusz) | Puste [m²] | "
+         "Po przycięciu [m²] | Warstwy A4 | Składanie (dobre/poprawne/słabe) |",
+         "|---|---|---|---|---|---|---|---|---|---|---|---|"]
+    for k in wyniki:
+        s = k["sumy"]
+        if not s.get("arkuszy"):
+            L.append(f"| {k['komplet']} | 0 | — | — | — | — | — | — | — | — | — | — |")
+            continue
+        fm = ", ".join(f"{n}× {f}" for f, n in s["formaty"].items())
+        o = s["oceny_skladania"]
+        L.append(f"| {k['komplet']} | {s['arkuszy']} | {fm} | {_pl(s['pole_m2'])} | {_pl(s['a4_ekw'], 0)} | "
+                 f"{_pct(s['wypelnienie_wazone'])} | {_pct(s['wypelnienie_srednie'])} | "
+                 f"{_pct(s['wypelnienie_min'])} ({s['najgorsze']}) | {_pl(s['puste_m2'])} | {_pl(s['przyciete_m2'])} | "
+                 f"{s['warstwy_a4']} | {o['dobre']}/{o['poprawne']}/{o['słabe']} |")
+    return "\n".join(L) + "\n"
 
 
 def main(argv=None):
@@ -452,7 +476,8 @@ def main(argv=None):
         Path(a.json).write_text(json.dumps(wyniki, ensure_ascii=False, indent=1, default=float), encoding="utf-8")
     if a.md:
         Path(a.md).parent.mkdir(parents=True, exist_ok=True)
-        Path(a.md).write_text("\n".join(markdown_set(k) for k in wyniki), encoding="utf-8")
+        Path(a.md).write_text(markdown_summary(wyniki) + "\n" + "\n".join(markdown_set(k) for k in wyniki),
+                              encoding="utf-8")
     return wyniki
 
 
