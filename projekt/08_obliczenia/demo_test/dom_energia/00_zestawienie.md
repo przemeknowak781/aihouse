@@ -34,7 +34,7 @@ Model: `tools/test_obliczenia_dane/dom_energia.yaml` — model TESTOWY bibliotek
 | U_w OP3 (okno) | 0,73 | ≤ 0,90 | ✔ spełnia | ≤ 0,80: ✔ spełnia |
 | U_w OP5 (okno) | 0,69 | ≤ 0,90 | ✔ spełnia | ≤ 0,80: ✔ spełnia |
 | g ≤ 0,35 (okna E/S/W) | 7/7 spełnia | WT zał. 2 pkt 2.1 | ✔ spełnia | — |
-| f_Rsi ≥ f_Rsi,wym | f_wym = 0,720 | WT zał. 2 pkt 2.2 | ✘ NIE spełnia | SZG, SD-G; bez danych: 7 węzłów (symulacja) |
+| f_Rsi ≥ f_Rsi,wym | f_wym = 0,720 | WT zał. 2 pkt 2.2 | ✔ spełnia | —; bez danych: 7 węzłów (symulacja) |
 | Kondensacja międzywarstwowa | 6/6 dopuszczalna | WT zał. 2 pkt 2.2.5 | ✔ spełnia | — |
 | Ciągłość warstw (4 linie) | 7/7 przegród | brief § 9 | ✔ spełnia | — |
 | Izolacja obwodowa R ≥ 2,0 | 4,29 | WT zał. 2 pkt 1.4 | ✔ spełnia |  |

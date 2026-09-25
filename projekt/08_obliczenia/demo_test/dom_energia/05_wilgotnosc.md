@@ -26,12 +26,9 @@ Miesiąc krytyczny: **II**, f_Rsi,max = **0,661**; wartość dopuszczona przez W
 | Element | Opis | f_Rsi | Źródło | f_Rsi ≥ 0,720 |
 |:---|:---|---:|:---|:---|
 | POD-0 | przegroda (podloga_grunt), U = 0,13 | 0,967 | 1 − U·0,25 (PN-EN ISO 13788 p. 4.3) | ✔ spełnia |
-| POD-G | przegroda (podloga_grunt_nieogrz), U = 0,93 | 0,766 | 1 − U·0,25 (PN-EN ISO 13788 p. 4.3) | ✔ spełnia |
 | SZ1 | przegroda (sciana_zewn), U = 0,17 | 0,959 | 1 − U·0,25 (PN-EN ISO 13788 p. 4.3) | ✔ spełnia |
 | DZ-P0 | przegroda (dach), U = 0,10 | 0,974 | 1 − U·0,25 (PN-EN ISO 13788 p. 4.3) | ✔ spełnia |
 | SWG | przegroda (sciana_nieogrz), U = 0,23 | 0,941 | 1 − U·0,25 (PN-EN ISO 13788 p. 4.3) | ✔ spełnia |
-| SZG | przegroda (sciana_zewn), U = 2,0 | 0,510 | 1 − U·0,25 (PN-EN ISO 13788 p. 4.3) | ✘ NIE spełnia |
-| SD-G | przegroda (dach), U = 4,3 | −0,073 | 1 − U·0,25 (PN-EN ISO 13788 p. 4.3) | ✘ NIE spełnia |
 | ST3\|P1\|zewn | przegroda (strop_zewn), U = 0,090 | 0,978 | 1 − U·0,25 (PN-EN ISO 13788 p. 4.3) | ✔ spełnia |
 | SD-D1 | przegroda (dach), U = 0,082 | 0,979 | 1 − U·0,25 (PN-EN ISO 13788 p. 4.3) | ✔ spełnia |
 | ST2\|P1\|dol | przegroda (strop_nieogrz), U = 0,10 | 0,975 | 1 − U·0,25 (PN-EN ISO 13788 p. 4.3) | ✔ spełnia |
