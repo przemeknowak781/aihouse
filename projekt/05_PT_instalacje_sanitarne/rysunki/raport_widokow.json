@@ -3,7 +3,7 @@
   "dzialka": "/home/user/aihouse/model/dzialka.yaml",
   "arkusze_cfg": "model/arkusze_is.yaml",
   "wyposazenie": "/home/user/aihouse/model/wyposazenie.yaml",
-  "walidacja": "Walidacja: 0 błędów, 0 ostrzeżeń, 389 informacji\n  [INFO] budynek.yaml: stolarka: sekcja spoza schematu — ignorowana przez rdzeń modelu\n  [INFO] budynek.yaml: wezly: sekcja spoza schematu — ignorowana przez rdzeń modelu\n  [INFO] budynek.yaml: energia: sekcja spoza schematu — ignorowana przez rdzeń modelu\n  [INFO] budynek.yaml: konstrukcja: sekcja spoza schematu — ignorowana przez rdzeń modelu\n  [INFO] budynek.yaml: geotechnika: sekcja spoza schematu — ignorowana przez rdzeń modelu\n  [INFO] budynek.yaml: stropy[0] (ST1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: stropy[1] (ST2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: stropy[2] (ST2Z): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[0] (D1): pole 'rzedna_pokrycia' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[0] (D1): pole 'przelewy_awaryjne' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[0] (D1): pole 'rury_spustowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[0] (D1): pole 'spadki' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[0] (D1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[1] (D2): pole 'rzedna_pokrycia' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[1] (D2): pole 'przelewy_awaryjne' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[1] (D2): pole 'rury_spustowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[1] (D2): pole 'spadki' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[1] (D2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[2] (D3): pole 'rzedna_pokrycia' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[2] (D3): pole 'przelewy_awaryjne' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[2] (D3): pole 'rury_spustowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[2] (D3): pole 'spadki' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[2] (D3): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[3] (D4): pole 'rzedna_pokrycia' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[3] (D4): pole 'przelewy_awaryjne' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[3] (D4): pole 'rury_spustowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[3] (D4): pole 'spadki' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[3] (D4): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[0] (PL-E): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[0] (PL-E): pole 'lacznik' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[0] (PL-E): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[0] (PL-E): pole 'wpusty' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[0] (PL-E): pole 'rury_spustowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[0] (PL-E): pole 'przelewy_awaryjne' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[0] (PL-E): pole 'spadek' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[1] (PL-DA): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[1] (PL-DA): pole 'lacznik' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[1] (PL-DA): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[1] (PL-DA): pole 'wpusty' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[1] (PL-DA): pole 'rury_spustowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[1] (PL-DA): pole 'przelewy_awaryjne' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[1] (PL-DA): pole 'spadek' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[2] (PL-C1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[2] (PL-C1): pole 'spadek' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[2] (PL-C1): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[3] (PL-C2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[3] (PL-C2): pole 'spadek' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[3] (PL-C2): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[4] (PL-2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[4] (PL-2): pole 'lacznik' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[4] (PL-2): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[4] (PL-2): pole 'wpusty' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[4] (PL-2): pole 'rury_spustowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[4] (PL-2): pole 'przelewy_awaryjne' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[4] (PL-2): pole 'spadek' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[5] (PL-3): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[5] (PL-3): pole 'lacznik' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[5] (PL-3): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[5] (PL-3): pole 'wpusty' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[5] (PL-3): pole 'rury_spustowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[5] (PL-3): pole 'przelewy_awaryjne' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[5] (PL-3): pole 'spadek' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[6] (IZ-ST2Z): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[6] (IZ-ST2Z): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[7] (PS-A): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[7] (PS-A): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[8] (OB-A): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[8] (OB-A): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[9] (OB-A2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[9] (OB-A2): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[10] (SW1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[10] (SW1): pole 'otwierany' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[10] (SW1): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[11] (WYL1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[11] (WYL1): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[12] (PL-D): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[12] (PL-D): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[12] (PL-D): pole 'wpusty' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[12] (PL-D): pole 'rury_spustowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[12] (PL-D): pole 'przelewy_awaryjne' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[12] (PL-D): pole 'spadek' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[0] (SL1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[1] (SL2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[2] (SL3): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[3] (SL4): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[4] (SL5): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[5] (SL6): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[6] (SL7): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[7] (SL8): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[0] (B1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[1] (B2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[2] (B3): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[3] (B4): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[4] (B5): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[5] (B6): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[6] (B7): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[7] (B8): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[8] (B9): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[9] (B10): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[10] (N1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[11] (N2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[12] (N3): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[13] (N4): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[14] (N5): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[15] (N6): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[16] (N7): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[17] (N8): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[18] (N9): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[19] (N10): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[20] (N11): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[21] (N12): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[22] (N13): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[23] (N14): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[24] (N15): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[25] (N16): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[26] (N17): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[27] (N18): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[28] (N19): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[29] (N20): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[30] (N21): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[31] (N22): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[32] (N23): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[33] (N24): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[34] (N25): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[35] (N26): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[36] (N27): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[37] (N28): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: schody[0] (SCH1): pole 'plyta' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: schody[0] (SCH1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: schody[1] (SCH2): pole 'plyta' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: schody[1] (SCH2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: lamele[0] (LAM-S): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: lamele[1] (LAM-W): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: lamele[2] (LAM-E): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: lamele[3] (LAM-P0): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: tarasy[0] (T1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: tarasy[1] (T2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: tarasy[2] (T3): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[0] (S0-01): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[1] (S0-02): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[2] (S0-03): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[3] (S0-04): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[4] (S0-05): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[5] (S0-06): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[6] (S0-07): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[7] (S0-08): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[8] (S0-09): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[9] (S0-10): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[10] (S0-11): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[11] (S0-12): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[12] (S0-13): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[13] (S0-14): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[14] (S0-15): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[15] (S0-16): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[16] (S0-17): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[17] (S0-18): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[18] (S0-19): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[19] (S0-20): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[20] (S0-21): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[21] (S0-22): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[22] (S0-23): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[23] (S1-01): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[24] (S1-02): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[25] (S1-03): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[26] (S1-04): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[27] (S1-05): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[28] (S1-06): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[29] (S1-07): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[30] (S1-08): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[31] (S1-09): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[32] (S1-10): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[33] (S1-11): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[34] (S1-12): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[35] (S1-13): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[36] (S1-14): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[37] (S1-15): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[38] (S2-01): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[39] (S2-02): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[40] (S2-03): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[41] (S2-04): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[42] (S2-05): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[43] (S2-06): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[44] (S2-07): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[45] (S2-08): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[46] (S2-09): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[47] (S2-10): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[48] (S2-11): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[49] (S2-12): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[50] (S2-13): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[51] (S2-18): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[52] (S2-14): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[53] (S2-19): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[54] (S2-15): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[55] (S2-16): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[56] (S2-17): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[0] (O0-01): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[0] (O0-01): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[0] (O0-01): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[0] (O0-01): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[1] (O0-02): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[1] (O0-02): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[1] (O0-02): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[1] (O0-02): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[2] (O0-03): pole 'bezprogowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[2] (O0-03): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[2] (O0-03): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[2] (O0-03): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[2] (O0-03): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[3] (O0-04): pole 'bezprogowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[3] (O0-04): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[3] (O0-04): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[3] (O0-04): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[3] (O0-04): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[4] (O0-05): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[4] (O0-05): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[4] (O0-05): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[4] (O0-05): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[5] (O0-06): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[5] (O0-06): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[5] (O0-06): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[5] (O0-06): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[6] (O0-07): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[6] (O0-07): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[7] (O0-08): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[7] (O0-08): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[7] (O0-08): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[8] (O0-09): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[8] (O0-09): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[8] (O0-09): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[9] (O0-10): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[9] (O0-10): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[9] (O0-10): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[10] (O0-11): pole 'bezprogowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[10] (O0-11): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[10] (O0-11): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[10] (O0-11): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[10] (O0-11): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[11] (O0-12): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[11] (O0-12): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[11] (O0-12): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[12] (O0-13): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[12] (O0-13): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[13] (O0-14): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[14] (O0-15): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[15] (O0-16): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[16] (O0-17): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[17] (O0-18): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[18] (O0-19): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[19] (O0-20): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[20] (O0-21): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[21] (O0-22): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[22] (O0-24): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[23] (O0-23): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[24] (O1-01): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[24] (O1-01): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[24] (O1-01): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[25] (O1-13): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[25] (O1-13): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[25] (O1-13): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[26] (O1-14): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[26] (O1-14): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[26] (O1-14): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[27] (O1-02): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[27] (O1-02): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[27] (O1-02): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[28] (O1-03): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[28] (O1-03): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[29] (O1-04): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[29] (O1-04): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[30] (O1-05): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[30] (O1-05): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[30] (O1-05): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[31] (O1-06): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[31] (O1-06): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[31] (O1-06): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[32] (O1-07): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[33] (O1-08): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[34] (O1-09): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[35] (O1-10): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[36] (O1-11): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[37] (O1-12): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[38] (O2-01): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[38] (O2-01): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[38] (O2-01): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[39] (O2-02): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[39] (O2-02): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[39] (O2-02): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[40] (O2-03): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[40] (O2-03): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[40] (O2-03): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[41] (O2-04): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[41] (O2-04): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[41] (O2-04): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[42] (O2-05): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[42] (O2-05): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[42] (O2-05): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[43] (O2-06): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[43] (O2-06): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[44] (O2-07): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[44] (O2-07): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[45] (O2-08): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[46] (O2-09): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[47] (O2-10): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[48] (O2-11): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[49] (O2-12): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[0] (0.01): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[0] (0.01): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[0] (0.01): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[1] (0.02): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[1] (0.02): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[1] (0.02): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[2] (0.03): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[2] (0.03): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[2] (0.03): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[3] (0.04): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[3] (0.04): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[4] (0.05): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[4] (0.05): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[4] (0.05): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[5] (0.15): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[5] (0.15): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[5] (0.15): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[6] (0.16): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[6] (0.16): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[6] (0.16): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[7] (0.06): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[7] (0.06): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[8] (0.07): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[8] (0.07): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[9] (0.08): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[10] (0.09): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[10] (0.09): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[11] (0.10): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[12] (0.11): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[12] (0.11): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[12] (0.11): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[13] (0.12): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[13] (0.12): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[13] (0.12): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[14] (0.13): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[14] (0.13): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[14] (0.13): pole 'ogrzewane' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[14] (0.13): pole 'rzedna' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[14] (0.13): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[15] (1.01): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[16] (1.02): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[17] (1.03): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[18] (1.04): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[19] (1.05): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[19] (1.05): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[20] (1.06): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[20] (1.06): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[21] (1.07): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[21] (1.07): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[21] (1.07): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[22] (1.08): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[22] (1.08): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[22] (1.08): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[23] (2.01): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[24] (2.02): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[24] (2.02): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[25] (2.03): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[26] (2.04): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[26] (2.04): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[26] (2.04): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[27] (2.05): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[27] (2.05): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[28] (2.06): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[28] (2.06): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[29] (2.07): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[29] (2.07): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[29] (2.07): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[30] (0.14): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[30] (0.14): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[31] (1.09): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[31] (1.09): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[32] (2.08): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[32] (2.08): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] dzialka.yaml: odwodnienia: sekcja spoza schematu — ignorowana przez rdzeń modelu\n  [INFO] dzialka.yaml: sasiedzi[0]: pole 'kondygnacje' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] dzialka.yaml: sasiedzi[0]: pole 'funkcja' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] dzialka.yaml: sasiedzi[1]: pole 'kondygnacje' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] dzialka.yaml: sasiedzi[1]: pole 'funkcja' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] dzialka.yaml: sasiedzi[3]: pole 'kondygnacje' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] dzialka.yaml: sasiedzi[3]: pole 'funkcja' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] dzialka.yaml: sasiedzi[4]: pole 'kondygnacje' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] dzialka.yaml: sasiedzi[4]: pole 'funkcja' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] dzialka.yaml: zielen[6]: pole 'opis' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] dzialka.yaml: bramy[1]: pole 'otwieranie' spoza schematu — ignorowane przez rdzeń modelu",
+  "walidacja": "Walidacja: 0 błędów, 0 ostrzeżeń, 402 informacji\n  [INFO] budynek.yaml: stolarka: sekcja spoza schematu — ignorowana przez rdzeń modelu\n  [INFO] budynek.yaml: wezly: sekcja spoza schematu — ignorowana przez rdzeń modelu\n  [INFO] budynek.yaml: energia: sekcja spoza schematu — ignorowana przez rdzeń modelu\n  [INFO] budynek.yaml: konstrukcja: sekcja spoza schematu — ignorowana przez rdzeń modelu\n  [INFO] budynek.yaml: geotechnika: sekcja spoza schematu — ignorowana przez rdzeń modelu\n  [INFO] budynek.yaml: stropy[0] (ST1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: stropy[1] (ST2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: stropy[2] (ST2Z): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[0] (D1): pole 'rzedna_pokrycia' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[0] (D1): pole 'przelewy_awaryjne' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[0] (D1): pole 'rury_spustowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[0] (D1): pole 'spadki' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[0] (D1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[1] (D2): pole 'rzedna_pokrycia' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[1] (D2): pole 'przelewy_awaryjne' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[1] (D2): pole 'rury_spustowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[1] (D2): pole 'spadki' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[1] (D2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[2] (D3): pole 'rzedna_pokrycia' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[2] (D3): pole 'przelewy_awaryjne' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[2] (D3): pole 'rury_spustowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[2] (D3): pole 'spadki' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[2] (D3): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[3] (D4): pole 'rzedna_pokrycia' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[3] (D4): pole 'przelewy_awaryjne' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[3] (D4): pole 'rury_spustowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[3] (D4): pole 'spadki' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[3] (D4): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[0] (PL-E): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[0] (PL-E): pole 'lacznik' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[0] (PL-E): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[0] (PL-E): pole 'wpusty' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[0] (PL-E): pole 'rury_spustowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[0] (PL-E): pole 'przelewy_awaryjne' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[0] (PL-E): pole 'spadek' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[1] (PL-DA): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[1] (PL-DA): pole 'lacznik' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[1] (PL-DA): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[1] (PL-DA): pole 'wpusty' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[1] (PL-DA): pole 'rury_spustowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[1] (PL-DA): pole 'przelewy_awaryjne' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[1] (PL-DA): pole 'spadek' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[2] (PL-C1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[2] (PL-C1): pole 'spadek' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[2] (PL-C1): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[3] (PL-C2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[3] (PL-C2): pole 'spadek' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[3] (PL-C2): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[4] (PL-2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[4] (PL-2): pole 'lacznik' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[4] (PL-2): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[4] (PL-2): pole 'wpusty' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[4] (PL-2): pole 'rury_spustowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[4] (PL-2): pole 'przelewy_awaryjne' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[4] (PL-2): pole 'spadek' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[5] (PL-3): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[5] (PL-3): pole 'lacznik' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[5] (PL-3): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[5] (PL-3): pole 'wpusty' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[5] (PL-3): pole 'rury_spustowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[5] (PL-3): pole 'przelewy_awaryjne' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[5] (PL-3): pole 'spadek' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[6] (IZ-ST2Z): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[6] (IZ-ST2Z): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[7] (PS-A): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[7] (PS-A): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[8] (OB-A): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[8] (OB-A): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[9] (OB-A2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[9] (OB-A2): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[10] (SW1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[10] (SW1): pole 'otwierany' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[10] (SW1): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[11] (WYL1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[11] (WYL1): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[12] (PL-D): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[12] (PL-D): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[12] (PL-D): pole 'wpusty' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[12] (PL-D): pole 'rury_spustowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[12] (PL-D): pole 'przelewy_awaryjne' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[12] (PL-D): pole 'spadek' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[0] (SL1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[1] (SL2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[2] (SL3): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[3] (SL4): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[4] (SL5): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[5] (SL6): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[6] (SL7): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[7] (SL8): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[8] (SL9): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[9] (SL10): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[10] (SL11): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[11] (SL12): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[12] (SL13): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[13] (SL14): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[14] (SL15): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[15] (SL16): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[16] (SL17): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[17] (SL18): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[18] (SL19): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[19] (SL20): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[20] (SL21): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[0] (B1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[1] (B2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[2] (B3): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[3] (B4): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[4] (B5): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[5] (B6): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[6] (B7): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[7] (B8): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[8] (B9): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[9] (B10): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[10] (N1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[11] (N2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[12] (N3): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[13] (N4): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[14] (N5): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[15] (N6): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[16] (N7): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[17] (N8): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[18] (N9): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[19] (N10): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[20] (N11): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[21] (N12): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[22] (N13): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[23] (N14): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[24] (N15): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[25] (N16): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[26] (N17): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[27] (N18): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[28] (N19): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[29] (N20): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[30] (N21): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[31] (N22): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[32] (N23): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[33] (N24): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[34] (N25): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[35] (N26): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[36] (N27): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[37] (N28): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: schody[0] (SCH1): pole 'plyta' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: schody[0] (SCH1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: schody[1] (SCH2): pole 'plyta' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: schody[1] (SCH2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: lamele[0] (LAM-S): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: lamele[1] (LAM-W): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: lamele[2] (LAM-E): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: lamele[3] (LAM-P0): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: tarasy[0] (T1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: tarasy[1] (T2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: tarasy[2] (T3): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[0] (S0-01): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[1] (S0-02): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[2] (S0-03): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[3] (S0-04): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[4] (S0-05): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[5] (S0-06): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[6] (S0-07): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[7] (S0-08): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[8] (S0-09): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[9] (S0-10): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[10] (S0-11): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[11] (S0-12): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[12] (S0-13): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[13] (S0-14): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[14] (S0-15): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[15] (S0-16): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[16] (S0-17): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[17] (S0-18): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[18] (S0-19): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[19] (S0-20): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[20] (S0-21): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[21] (S0-22): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[22] (S0-23): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[23] (S1-01): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[24] (S1-02): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[25] (S1-03): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[26] (S1-04): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[27] (S1-05): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[28] (S1-06): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[29] (S1-07): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[30] (S1-08): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[31] (S1-09): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[32] (S1-10): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[33] (S1-11): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[34] (S1-12): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[35] (S1-13): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[36] (S1-14): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[37] (S1-15): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[38] (S2-01): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[39] (S2-02): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[40] (S2-03): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[41] (S2-04): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[42] (S2-05): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[43] (S2-06): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[44] (S2-07): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[45] (S2-08): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[46] (S2-09): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[47] (S2-10): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[48] (S2-11): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[49] (S2-12): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[50] (S2-13): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[51] (S2-18): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[52] (S2-14): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[53] (S2-19): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[54] (S2-15): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[55] (S2-16): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[56] (S2-17): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[0] (O0-01): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[0] (O0-01): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[0] (O0-01): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[0] (O0-01): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[1] (O0-02): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[1] (O0-02): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[1] (O0-02): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[1] (O0-02): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[2] (O0-03): pole 'bezprogowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[2] (O0-03): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[2] (O0-03): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[2] (O0-03): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[2] (O0-03): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[3] (O0-04): pole 'bezprogowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[3] (O0-04): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[3] (O0-04): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[3] (O0-04): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[3] (O0-04): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[4] (O0-05): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[4] (O0-05): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[4] (O0-05): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[4] (O0-05): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[5] (O0-06): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[5] (O0-06): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[5] (O0-06): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[5] (O0-06): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[6] (O0-07): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[6] (O0-07): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[7] (O0-08): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[7] (O0-08): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[7] (O0-08): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[8] (O0-09): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[8] (O0-09): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[8] (O0-09): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[9] (O0-10): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[9] (O0-10): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[9] (O0-10): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[10] (O0-11): pole 'bezprogowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[10] (O0-11): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[10] (O0-11): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[10] (O0-11): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[10] (O0-11): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[11] (O0-12): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[11] (O0-12): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[11] (O0-12): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[12] (O0-13): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[12] (O0-13): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[13] (O0-14): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[14] (O0-15): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[15] (O0-16): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[16] (O0-17): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[17] (O0-18): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[18] (O0-19): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[19] (O0-20): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[20] (O0-21): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[21] (O0-22): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[22] (O0-24): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[23] (O0-23): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[24] (O1-01): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[24] (O1-01): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[24] (O1-01): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[25] (O1-13): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[25] (O1-13): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[25] (O1-13): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[26] (O1-14): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[26] (O1-14): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[26] (O1-14): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[27] (O1-02): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[27] (O1-02): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[27] (O1-02): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[28] (O1-03): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[28] (O1-03): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[29] (O1-04): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[29] (O1-04): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[30] (O1-05): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[30] (O1-05): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[30] (O1-05): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[31] (O1-06): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[31] (O1-06): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[31] (O1-06): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[32] (O1-07): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[33] (O1-08): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[34] (O1-09): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[35] (O1-10): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[36] (O1-11): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[37] (O1-12): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[38] (O2-01): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[38] (O2-01): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[38] (O2-01): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[39] (O2-02): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[39] (O2-02): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[39] (O2-02): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[40] (O2-03): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[40] (O2-03): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[40] (O2-03): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[41] (O2-04): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[41] (O2-04): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[41] (O2-04): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[42] (O2-05): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[42] (O2-05): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[42] (O2-05): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[43] (O2-06): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[43] (O2-06): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[44] (O2-07): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[44] (O2-07): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[45] (O2-08): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[46] (O2-09): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[47] (O2-10): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[48] (O2-11): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[49] (O2-12): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[0] (0.01): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[0] (0.01): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[0] (0.01): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[1] (0.02): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[1] (0.02): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[1] (0.02): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[2] (0.03): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[2] (0.03): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[2] (0.03): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[3] (0.04): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[3] (0.04): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[4] (0.05): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[4] (0.05): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[4] (0.05): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[5] (0.15): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[5] (0.15): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[5] (0.15): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[6] (0.16): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[6] (0.16): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[6] (0.16): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[7] (0.06): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[7] (0.06): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[8] (0.07): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[8] (0.07): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[9] (0.08): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[10] (0.09): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[10] (0.09): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[11] (0.10): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[12] (0.11): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[12] (0.11): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[12] (0.11): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[13] (0.12): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[13] (0.12): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[13] (0.12): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[14] (0.13): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[14] (0.13): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[14] (0.13): pole 'ogrzewane' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[14] (0.13): pole 'rzedna' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[14] (0.13): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[15] (1.01): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[16] (1.02): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[17] (1.03): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[18] (1.04): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[19] (1.05): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[19] (1.05): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[20] (1.06): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[20] (1.06): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[21] (1.07): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[21] (1.07): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[21] (1.07): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[22] (1.08): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[22] (1.08): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[22] (1.08): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[23] (2.01): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[24] (2.02): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[24] (2.02): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[25] (2.03): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[26] (2.04): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[26] (2.04): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[26] (2.04): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[27] (2.05): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[27] (2.05): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[28] (2.06): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[28] (2.06): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[29] (2.07): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[29] (2.07): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[29] (2.07): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[30] (0.14): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[30] (0.14): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[31] (1.09): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[31] (1.09): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[32] (2.08): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[32] (2.08): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] dzialka.yaml: odwodnienia: sekcja spoza schematu — ignorowana przez rdzeń modelu\n  [INFO] dzialka.yaml: sasiedzi[0]: pole 'kondygnacje' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] dzialka.yaml: sasiedzi[0]: pole 'funkcja' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] dzialka.yaml: sasiedzi[1]: pole 'kondygnacje' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] dzialka.yaml: sasiedzi[1]: pole 'funkcja' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] dzialka.yaml: sasiedzi[3]: pole 'kondygnacje' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] dzialka.yaml: sasiedzi[3]: pole 'funkcja' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] dzialka.yaml: sasiedzi[4]: pole 'kondygnacje' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] dzialka.yaml: sasiedzi[4]: pole 'funkcja' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] dzialka.yaml: zielen[6]: pole 'opis' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] dzialka.yaml: bramy[1]: pole 'otwieranie' spoza schematu — ignorowane przez rdzeń modelu",
   "przekroje": {
     "A": {
       "o": [
@@ -122,6 +122,9 @@
             "górny rząd 123 mm (niepełny)"
           ]
         },
+        "czesci_uwag": 1,
+        "kolejnosc_czytania": true,
+        "znaki_rezerwowane": false,
         "kandydaci": [
           {
             "format": "790×420",
@@ -220,7 +223,13 @@
             ]
           ]
         ],
-        "kolizje": []
+        "kolizje": [],
+        "znaki_centrujace": {
+          "g": 10.0,
+          "d": 10.0,
+          "l": 7.5,
+          "p": 10.0
+        }
       },
       "pliki": {
         "pdf": "projekt/05_PT_instalacje_sanitarne/rysunki/PT-IS-01_instalacja_wodociagowa_rzut_parteru.pdf",
@@ -239,7 +248,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 8.2,
+      "czas_s": 38.4,
       "png_kontrola": {
         "px": [
           4666,
@@ -258,6 +267,7 @@
       "wypelnienie": {
         "wypelnienie": 0.813,
         "wypelnienie_rys": 0.8,
+        "wypelnienie_skl": 0.812,
         "wypelnienie_kontur": 0.585,
         "pole_arkusza_m2": 0.3318,
         "pole_ramki_m2": 0.304,
@@ -335,7 +345,7 @@
         "standardowy": false,
         "tryb": "ekonomiczny",
         "koszt": 0.3595,
-        "wypelnienie_szac": 0.855,
+        "wypelnienie_szac": 0.853,
         "uklad_widokow": "wiersz",
         "skladanie": {
           "zgiecia_pionowe": [
@@ -371,6 +381,9 @@
             "pasy nierówne (rozrzut 55 mm)"
           ]
         },
+        "czesci_uwag": 1,
+        "kolejnosc_czytania": true,
+        "znaki_rezerwowane": true,
         "kandydaci": [
           {
             "format": "1130×297",
@@ -438,7 +451,7 @@
             [
               940.0,
               118.0,
-              1120.0,
+              1107.5,
               148.8
             ]
           ],
@@ -461,7 +474,13 @@
             ]
           ]
         ],
-        "kolizje": []
+        "kolizje": [],
+        "znaki_centrujace": {
+          "g": 10.0,
+          "d": 10.0,
+          "l": 10.0,
+          "p": 10.0
+        }
       },
       "pliki": {
         "pdf": "projekt/05_PT_instalacje_sanitarne/rysunki/PT-IS-02_instalacja_wodociagowa_rzuty_i_pietra_i_ii_pietr.pdf",
@@ -497,9 +516,10 @@
         "ok": true
       },
       "wypelnienie": {
-        "wypelnienie": 0.813,
-        "wypelnienie_rys": 0.801,
-        "wypelnienie_kontur": 0.679,
+        "wypelnienie": 0.812,
+        "wypelnienie_rys": 0.8,
+        "wypelnienie_skl": 0.812,
+        "wypelnienie_kontur": 0.678,
         "pole_arkusza_m2": 0.3356,
         "pole_ramki_m2": 0.3047,
         "pusty_prostokat_mm": [
@@ -608,6 +628,9 @@
             "górny rząd 123 mm (niepełny)"
           ]
         },
+        "czesci_uwag": 1,
+        "kolejnosc_czytania": true,
+        "znaki_rezerwowane": true,
         "kandydaci": [
           {
             "format": "710×420",
@@ -667,7 +690,13 @@
             ]
           ]
         ],
-        "kolizje": []
+        "kolizje": [],
+        "znaki_centrujace": {
+          "g": 10.0,
+          "d": 10.0,
+          "l": 10.0,
+          "p": 10.0
+        }
       },
       "pliki": {
         "pdf": "projekt/05_PT_instalacje_sanitarne/rysunki/PT-IS-03_kanalizacja_sanitarna_rzut_parteru.pdf",
@@ -686,7 +715,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 4.8,
+      "czas_s": 4.3,
       "png_kontrola": {
         "px": [
           4193,
@@ -705,6 +734,7 @@
       "wypelnienie": {
         "wypelnienie": 0.767,
         "wypelnienie_rys": 0.75,
+        "wypelnienie_skl": 0.767,
         "wypelnienie_kontur": 0.622,
         "pole_arkusza_m2": 0.2982,
         "pole_ramki_m2": 0.272,
@@ -782,7 +812,7 @@
         "standardowy": false,
         "tryb": "ekonomiczny",
         "koszt": 0.3595,
-        "wypelnienie_szac": 0.843,
+        "wypelnienie_szac": 0.842,
         "uklad_widokow": "wiersz",
         "skladanie": {
           "zgiecia_pionowe": [
@@ -818,6 +848,9 @@
             "pasy nierówne (rozrzut 55 mm)"
           ]
         },
+        "czesci_uwag": 1,
+        "kolejnosc_czytania": true,
+        "znaki_rezerwowane": true,
         "kandydaci": [
           {
             "format": "1130×297",
@@ -885,7 +918,7 @@
             [
               940.0,
               118.0,
-              1120.0,
+              1107.5,
               148.8
             ]
           ],
@@ -908,7 +941,13 @@
             ]
           ]
         ],
-        "kolizje": []
+        "kolizje": [],
+        "znaki_centrujace": {
+          "g": 10.0,
+          "d": 10.0,
+          "l": 10.0,
+          "p": 10.0
+        }
       },
       "pliki": {
         "pdf": "projekt/05_PT_instalacje_sanitarne/rysunki/PT-IS-04_kanalizacja_sanitarna_rzuty_i_pietra_i_ii_pietra.pdf",
@@ -944,8 +983,9 @@
         "ok": true
       },
       "wypelnienie": {
-        "wypelnienie": 0.808,
-        "wypelnienie_rys": 0.796,
+        "wypelnienie": 0.807,
+        "wypelnienie_rys": 0.794,
+        "wypelnienie_skl": 0.807,
         "wypelnienie_kontur": 0.665,
         "pole_arkusza_m2": 0.3356,
         "pole_ramki_m2": 0.3047,
@@ -1051,6 +1091,9 @@
             "górny rząd 247 mm (niepełny)"
           ]
         },
+        "czesci_uwag": 1,
+        "kolejnosc_czytania": true,
+        "znaki_rezerwowane": true,
         "kandydaci": [
           {
             "format": "590×841",
@@ -1115,9 +1158,9 @@
           [
             "legenda",
             [
-              214.0,
+              28.0,
               99.8,
-              394.0,
+              208.0,
               151.6
             ]
           ],
@@ -1125,22 +1168,28 @@
             "desz",
             [
               214.0,
-              44.5,
+              101.3,
               394.0,
-              94.8
+              151.6
             ]
           ],
           [
             "uwagi[1–7]",
             [
-              28.0,
-              107.9,
-              208.0,
-              151.6
+              214.0,
+              52.6,
+              394.0,
+              96.3
             ]
           ]
         ],
-        "kolizje": []
+        "kolizje": [],
+        "znaki_centrujace": {
+          "g": 10.0,
+          "d": 10.0,
+          "l": 10.0,
+          "p": 10.0
+        }
       },
       "pliki": {
         "pdf": "projekt/05_PT_instalacje_sanitarne/rysunki/PT-IS-05_odwodnienie_dachow_rzut_dachu_i_rzut_parteru.pdf",
@@ -1159,7 +1208,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 11.3,
+      "czas_s": 11.1,
       "png_kontrola": {
         "px": [
           3485,
@@ -1176,14 +1225,15 @@
         "ok": true
       },
       "wypelnienie": {
-        "wypelnienie": 0.89,
-        "wypelnienie_rys": 0.885,
-        "wypelnienie_kontur": 0.639,
+        "wypelnienie": 0.884,
+        "wypelnienie_rys": 0.879,
+        "wypelnienie_skl": 0.812,
+        "wypelnienie_kontur": 0.64,
         "pole_arkusza_m2": 0.4962,
         "pole_ramki_m2": 0.4598,
         "pusty_prostokat_mm": [
-          20,
-          680
+          380,
+          42
         ],
         "przyciety_mm": [
           582,
@@ -1251,8 +1301,8 @@
         "pole_m2": 0.2982,
         "standardowy": false,
         "tryb": "ekonomiczny",
-        "koszt": 0.3317,
-        "wypelnienie_szac": 0.738,
+        "koszt": 0.335,
+        "wypelnienie_szac": 0.721,
         "uklad_widokow": "wiersz",
         "skladanie": {
           "zgiecia_pionowe": [
@@ -1287,6 +1337,9 @@
             "górny rząd 123 mm (niepełny)"
           ]
         },
+        "czesci_uwag": 1,
+        "kolejnosc_czytania": false,
+        "znaki_rezerwowane": true,
         "kandydaci": [
           {
             "format": "710×420",
@@ -1294,7 +1347,7 @@
               710,
               420
             ],
-            "koszt": 0.3317,
+            "koszt": 0.335,
             "pole_m2": 0.2982,
             "skladanie": "poprawne"
           },
@@ -1340,61 +1393,49 @@
             ]
           ],
           [
-            "róża i podziałka",
+            "legenda",
             [
               520.0,
-              326.2,
+              307.7,
               700.0,
               357.0
             ]
           ],
           [
-            "legenda",
+            "petle",
             [
               334.0,
-              47.7,
+              29.9,
               514.0,
               97.0
             ]
           ],
           [
-            "petle",
+            "uwagi[1–7]",
             [
               148.0,
-              19.4,
+              31.2,
               328.0,
               86.5
             ]
           ],
           [
-            "uwagi[1–3]",
+            "róża i podziałka",
             [
-              520.0,
-              206.9,
-              700.0,
+              508.5,
+              206.2,
+              688.5,
               237.0
-            ]
-          ],
-          [
-            "uwagi[4–5]",
-            [
-              334.0,
-              16.0,
-              514.0,
-              42.7
-            ]
-          ],
-          [
-            "uwagi[6–7]",
-            [
-              520.0,
-              121.1,
-              700.0,
-              142.0
             ]
           ]
         ],
-        "kolizje": []
+        "kolizje": [],
+        "znaki_centrujace": {
+          "g": 7.5,
+          "d": 10.0,
+          "l": 10.0,
+          "p": 10.0
+        }
       },
       "pliki": {
         "pdf": "projekt/05_PT_instalacje_sanitarne/rysunki/PT-IS-06_ogrzewanie_rzut_parteru.pdf",
@@ -1408,12 +1449,12 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 1115,
-          "napisy": 322,
+          "prymitywy": 1111,
+          "napisy": 320,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 6.5,
+      "czas_s": 6.6,
       "png_kontrola": {
         "px": [
           4193,
@@ -1430,14 +1471,15 @@
         "ok": true
       },
       "wypelnienie": {
-        "wypelnienie": 0.953,
-        "wypelnienie_rys": 0.95,
-        "wypelnienie_kontur": 0.661,
+        "wypelnienie": 0.93,
+        "wypelnienie_rys": 0.924,
+        "wypelnienie_skl": 0.758,
+        "wypelnienie_kontur": 0.642,
         "pole_arkusza_m2": 0.2982,
         "pole_ramki_m2": 0.272,
         "pusty_prostokat_mm": [
-          680,
-          8
+          500,
+          18
         ],
         "przyciety_mm": [
           700,
@@ -1506,7 +1548,7 @@
         "standardowy": false,
         "tryb": "ekonomiczny",
         "koszt": 0.4038,
-        "wypelnienie_szac": 0.767,
+        "wypelnienie_szac": 0.766,
         "uklad_widokow": "wiersz",
         "skladanie": {
           "zgiecia_pionowe": [
@@ -1539,6 +1581,9 @@
           "tabliczka_na_wierzchu": true,
           "uwagi": []
         },
+        "czesci_uwag": 1,
+        "kolejnosc_czytania": true,
+        "znaki_rezerwowane": true,
         "kandydaci": [
           {
             "format": "1320×297",
@@ -1606,25 +1651,25 @@
             [
               1130.0,
               118.0,
-              1310.0,
+              1297.5,
               148.8
             ]
           ],
           [
             "legenda",
             [
-              1130.0,
+              944.0,
               234.7,
-              1310.0,
+              1124.0,
               284.0
             ]
           ],
           [
             "petle",
             [
-              1130.0,
+              944.0,
               187.8,
-              1310.0,
+              1124.0,
               229.7
             ]
           ],
@@ -1632,22 +1677,28 @@
             "petle",
             [
               944.0,
-              242.1,
+              140.9,
               1124.0,
-              284.0
+              182.8
             ]
           ],
           [
             "uwagi[1–7]",
             [
-              944.0,
-              181.8,
-              1124.0,
-              237.1
+              1130.0,
+              228.7,
+              1310.0,
+              284.0
             ]
           ]
         ],
-        "kolizje": []
+        "kolizje": [],
+        "znaki_centrujace": {
+          "g": 10.0,
+          "d": 10.0,
+          "l": 10.0,
+          "p": 10.0
+        }
       },
       "pliki": {
         "pdf": "projekt/05_PT_instalacje_sanitarne/rysunki/PT-IS-07_ogrzewanie_rzuty_i_pietra_i_ii_pietra.pdf",
@@ -1666,7 +1717,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 6.1,
+      "czas_s": 5.3,
       "png_kontrola": {
         "px": [
           7796,
@@ -1683,14 +1734,15 @@
         "ok": true
       },
       "wypelnienie": {
-        "wypelnienie": 0.774,
-        "wypelnienie_rys": 0.762,
+        "wypelnienie": 0.77,
+        "wypelnienie_rys": 0.757,
+        "wypelnienie_skl": 0.77,
         "wypelnienie_kontur": 0.63,
         "pole_arkusza_m2": 0.392,
         "pole_ramki_m2": 0.3573,
         "pusty_prostokat_mm": [
           204,
-          172
+          130
         ],
         "przyciety_mm": [
           1310,
@@ -1794,6 +1846,9 @@
             "górny rząd 123 mm (niepełny)"
           ]
         },
+        "czesci_uwag": 1,
+        "kolejnosc_czytania": true,
+        "znaki_rezerwowane": true,
         "kandydaci": [
           {
             "format": "710×420",
@@ -1853,7 +1908,13 @@
             ]
           ]
         ],
-        "kolizje": []
+        "kolizje": [],
+        "znaki_centrujace": {
+          "g": 10.0,
+          "d": 10.0,
+          "l": 10.0,
+          "p": 10.0
+        }
       },
       "pliki": {
         "pdf": "projekt/05_PT_instalacje_sanitarne/rysunki/PT-IS-08_wentylacja_mechaniczna_rzut_parteru.pdf",
@@ -1872,7 +1933,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 4.4,
+      "czas_s": 4.3,
       "png_kontrola": {
         "px": [
           4193,
@@ -1891,6 +1952,7 @@
       "wypelnienie": {
         "wypelnienie": 0.706,
         "wypelnienie_rys": 0.685,
+        "wypelnienie_skl": 0.706,
         "wypelnienie_kontur": 0.578,
         "pole_arkusza_m2": 0.2982,
         "pole_ramki_m2": 0.272,
@@ -1965,7 +2027,7 @@
         "standardowy": false,
         "tryb": "ekonomiczny",
         "koszt": 0.4038,
-        "wypelnienie_szac": 0.766,
+        "wypelnienie_szac": 0.764,
         "uklad_widokow": "wiersz",
         "skladanie": {
           "zgiecia_pionowe": [
@@ -1998,6 +2060,9 @@
           "tabliczka_na_wierzchu": true,
           "uwagi": []
         },
+        "czesci_uwag": 1,
+        "kolejnosc_czytania": true,
+        "znaki_rezerwowane": true,
         "kandydaci": [
           {
             "format": "1320×297",
@@ -2065,48 +2130,54 @@
             [
               1130.0,
               118.0,
-              1310.0,
+              1297.5,
               148.8
             ]
           ],
           [
             "legenda",
             [
-              1130.0,
+              944.0,
               237.5,
-              1310.0,
+              1124.0,
               284.0
             ]
           ],
           [
             "went",
             [
-              1130.0,
+              944.0,
               194.8,
-              1310.0,
+              1124.0,
               232.5
             ]
           ],
           [
             "went",
             [
-              1130.0,
+              944.0,
               160.5,
-              1310.0,
+              1124.0,
               189.8
             ]
           ],
           [
             "uwagi[1–8]",
             [
-              944.0,
+              1130.0,
               219.5,
-              1124.0,
+              1310.0,
               284.0
             ]
           ]
         ],
-        "kolizje": []
+        "kolizje": [],
+        "znaki_centrujace": {
+          "g": 10.0,
+          "d": 10.0,
+          "l": 10.0,
+          "p": 10.0
+        }
       },
       "pliki": {
         "pdf": "projekt/05_PT_instalacje_sanitarne/rysunki/PT-IS-09_wentylacja_mechaniczna_rzuty_i_pietra_i_ii_pietr.pdf",
@@ -2142,14 +2213,15 @@
         "ok": true
       },
       "wypelnienie": {
-        "wypelnienie": 0.833,
-        "wypelnienie_rys": 0.824,
-        "wypelnienie_kontur": 0.646,
+        "wypelnienie": 0.801,
+        "wypelnienie_rys": 0.79,
+        "wypelnienie_skl": 0.76,
+        "wypelnienie_kontur": 0.648,
         "pole_arkusza_m2": 0.392,
         "pole_ramki_m2": 0.3573,
         "pusty_prostokat_mm": [
           204,
-          116
+          150
         ],
         "przyciety_mm": [
           1310,
@@ -2251,6 +2323,9 @@
           "tabliczka_na_wierzchu": true,
           "uwagi": []
         },
+        "czesci_uwag": 1,
+        "kolejnosc_czytania": true,
+        "znaki_rezerwowane": true,
         "kandydaci": [
           {
             "format": "1410×297",
@@ -2268,7 +2343,7 @@
               750,
               594
             ],
-            "koszt": 0.4772,
+            "koszt": 0.482,
             "pole_m2": 0.4455,
             "skladanie": "poprawne"
           },
@@ -2278,7 +2353,7 @@
               1220,
               420
             ],
-            "koszt": 0.57,
+            "koszt": 0.5757,
             "pole_m2": 0.5124,
             "skladanie": "poprawne"
           },
@@ -2341,7 +2416,13 @@
             ]
           ]
         ],
-        "kolizje": []
+        "kolizje": [],
+        "znaki_centrujace": {
+          "g": 10.0,
+          "d": 10.0,
+          "l": 10.0,
+          "p": 10.0
+        }
       },
       "pliki": {
         "pdf": "projekt/05_PT_instalacje_sanitarne/rysunki/PT-IS-10_kanalizacja_i_wodociag_rozwiniecia.pdf",
@@ -2360,7 +2441,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.3,
+      "czas_s": 2.4,
       "png_kontrola": {
         "px": [
           8327,
@@ -2379,6 +2460,7 @@
       "wypelnienie": {
         "wypelnienie": 0.784,
         "wypelnienie_rys": 0.773,
+        "wypelnienie_skl": 0.756,
         "wypelnienie_kontur": 0.3,
         "pole_arkusza_m2": 0.4188,
         "pole_ramki_m2": 0.3823,
@@ -2396,7 +2478,7 @@
     {
       "nr": "PT-IS-11",
       "tytul": "SCHEMAT POMPY CIEPŁA, C.O. I C.W.U.",
-      "format": "A2",
+      "format": "580×420",
       "typ": [
         "inst_schemat"
       ],
@@ -2406,22 +2488,22 @@
       ],
       "qa_kind": null,
       "wymiary_mm": [
-        594.0,
+        580.0,
         420.0
       ],
-      "pole_m2": 0.2495,
+      "pole_m2": 0.2436,
       "skladanie": {
         "zgiecia_pionowe": [
-          210.0,
-          402.0
+          205.0,
+          390.0
         ],
         "zgiecia_poziome": [
           297.0
         ],
         "pasy": [
-          210.0,
-          192.0,
-          192.0
+          205.0,
+          185.0,
+          190.0
         ],
         "rzedy": [
           297.0,
@@ -2439,29 +2521,29 @@
         ]
       },
       "uklad": {
-        "format": "A2",
+        "format": "580×420",
         "wymiary_mm": [
-          594.0,
+          580.0,
           420.0
         ],
-        "pole_m2": 0.2495,
-        "standardowy": true,
+        "pole_m2": 0.2436,
+        "standardowy": false,
         "tryb": "ekonomiczny",
-        "koszt": 0.2595,
-        "wypelnienie_szac": 0.53,
+        "koszt": 0.2609,
+        "wypelnienie_szac": 0.546,
         "uklad_widokow": "wiersz",
         "skladanie": {
           "zgiecia_pionowe": [
-            210.0,
-            402.0
+            205.0,
+            390.0
           ],
           "zgiecia_poziome": [
             297.0
           ],
           "pasy": [
-            210.0,
-            192.0,
-            192.0
+            205.0,
+            185.0,
+            190.0
           ],
           "rzedy": [
             297.0,
@@ -2478,15 +2560,18 @@
             "górny rząd 123 mm (niepełny)"
           ]
         },
+        "czesci_uwag": 1,
+        "kolejnosc_czytania": true,
+        "znaki_rezerwowane": true,
         "kandydaci": [
           {
-            "format": "A2",
+            "format": "580×420",
             "wymiary_mm": [
-              594,
+              580,
               420
             ],
-            "koszt": 0.2595,
-            "pole_m2": 0.2495,
+            "koszt": 0.2609,
+            "pole_m2": 0.2436,
             "skladanie": "poprawne"
           },
           {
@@ -2524,32 +2609,38 @@
           [
             "tabliczka",
             [
-              404.0,
+              390.0,
               10.0,
-              584.0,
+              570.0,
               113.0
             ]
           ],
           [
             "legenda",
             [
-              404.0,
-              266.5,
-              584.0,
-              284.9
+              204.0,
+              51.0,
+              384.0,
+              69.4
             ]
           ],
           [
             "uwagi[1–6]",
             [
-              218.0,
-              62.5,
-              398.0,
-              99.9
+              390.0,
+              247.5,
+              570.0,
+              284.9
             ]
           ]
         ],
-        "kolizje": []
+        "kolizje": [],
+        "znaki_centrujace": {
+          "g": 10.0,
+          "d": 10.0,
+          "l": 10.0,
+          "p": 10.0
+        }
       },
       "pliki": {
         "pdf": "projekt/05_PT_instalacje_sanitarne/rysunki/PT-IS-11_schemat_pompy_ciepla_c_o_i_c_w_u.pdf",
@@ -2563,15 +2654,15 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 367,
-          "napisy": 174,
+          "prymitywy": 291,
+          "napisy": 134,
           "sprawdzone_lancuchy": 0
         }
       },
       "czas_s": 2.2,
       "png_kontrola": {
         "px": [
-          3508,
+          3426,
           2481
         ],
         "dpi_eff": [
@@ -2585,17 +2676,18 @@
         "ok": true
       },
       "wypelnienie": {
-        "wypelnienie": 0.855,
-        "wypelnienie_rys": 0.842,
-        "wypelnienie_kontur": 0.385,
-        "pole_arkusza_m2": 0.2495,
-        "pole_ramki_m2": 0.2256,
+        "wypelnienie": 0.773,
+        "wypelnienie_rys": 0.752,
+        "wypelnienie_skl": 0.723,
+        "wypelnienie_kontur": 0.381,
+        "pole_arkusza_m2": 0.2436,
+        "pole_ramki_m2": 0.22,
         "pusty_prostokat_mm": [
-          384,
-          52
+          370,
+          44
         ],
         "przyciety_mm": [
-          580,
+          573,
           413
         ],
         "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
@@ -2608,15 +2700,15 @@
   "tom": "projekt/05_PT_instalacje_sanitarne/rysunki/tom_PT-IS.pdf",
   "papier": {
     "arkuszy": 11,
-    "pole_m2": 3.846,
-    "a4_ekw": 61.7,
+    "pole_m2": 3.84,
+    "a4_ekw": 61.6,
     "warstwy_a4": 90,
     "skladanie": {
       "dobre": 3,
       "poprawne": 8,
       "słabe": 0
     },
-    "wypelnienie_wazone": 0.819
+    "wypelnienie_wazone": 0.808
   },
-  "czas_s": 83.3
+  "czas_s": 111.2
 }

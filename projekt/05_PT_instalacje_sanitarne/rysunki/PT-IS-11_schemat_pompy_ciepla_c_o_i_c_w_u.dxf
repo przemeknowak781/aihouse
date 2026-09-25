@@ -493,7 +493,7 @@ $SKPOLY
   9
 $TDCREATE
  40
-2461309.349884259
+2461309.394398148
   9
 $TDUCREATE
  40
@@ -501,7 +501,7 @@ $TDUCREATE
   9
 $TDUPDATE
  40
-2461309.349884259
+2461309.394398148
   9
 $TDUUPDATE
  40
@@ -553,7 +553,7 @@ $SPLINESEGS
   9
 $HANDSEED
   5
-218
+1CC
   9
 $SURFTAB1
  70
@@ -847,7 +847,7 @@ $PLIMMIN
   9
 $PLIMMAX
  10
-594.0
+580.0
  20
 420.0
   9
@@ -933,11 +933,11 @@ $PSTYLEMODE
   9
 $FINGERPRINTGUID
   2
-{4558EC8C-FAC0-4B40-865F-F6BE627FEC4C}
+{7E168848-32E0-4963-BDE8-5577D850E6DB}
   9
 $VERSIONGUID
   2
-{8D4CEABA-77E7-474D-B9C5-8E233B05FA52}
+{721585DE-EA6A-4098-92CD-D601C2B5BE64}
   9
 $EXTNAMES
 290
@@ -1327,9 +1327,9 @@ ISM
   0
 CLASS
   1
-LAYOUT
+ACDBPLACEHOLDER
   2
-AcDbLayout
+AcDbPlaceHolder
   3
 ObjectDBX Classes
  90
@@ -1343,9 +1343,9 @@ ObjectDBX Classes
   0
 CLASS
   1
-ACDBPLACEHOLDER
+LAYOUT
   2
-AcDbPlaceHolder
+AcDbLayout
   3
 ObjectDBX Classes
  90
@@ -5329,7 +5329,7 @@ AcAecLayerStandard
   0
 APPID
   5
-215
+1C9
 330
 3
 100
@@ -5343,7 +5343,7 @@ HATCHBACKGROUNDCOLOR
   0
 APPID
   5
-216
+1CA
 330
 3
 100
@@ -5653,7 +5653,7 @@ ENTITIES
   0
 HATCH
   5
-17A
+12E
 330
 17
 100
@@ -5721,7 +5721,7 @@ SOLID
   0
 HATCH
   5
-17B
+12F
 330
 17
 100
@@ -5789,7 +5789,7 @@ SOLID
   0
 HATCH
   5
-17C
+130
 330
 17
 100
@@ -5857,7 +5857,7 @@ SOLID
   0
 HATCH
   5
-17D
+131
 330
 17
 100
@@ -5921,7 +5921,7 @@ SOLID
   0
 HATCH
   5
-17E
+132
 330
 17
 100
@@ -5985,7 +5985,7 @@ SOLID
   0
 HATCH
   5
-17F
+133
 330
 17
 100
@@ -6049,7 +6049,7 @@ SOLID
   0
 HATCH
   5
-180
+134
 330
 17
 100
@@ -6113,7 +6113,7 @@ SOLID
   0
 HATCH
   5
-181
+135
 330
 17
 100
@@ -6261,7 +6261,7 @@ SOLID
   0
 HATCH
   5
-182
+136
 330
 17
 100
@@ -6329,7 +6329,7 @@ SOLID
   0
 HATCH
   5
-183
+137
 330
 17
 100
@@ -6477,7 +6477,7 @@ SOLID
   0
 HATCH
   5
-184
+138
 330
 17
 100
@@ -6593,7 +6593,7 @@ SOLID
   0
 HATCH
   5
-185
+139
 330
 17
 100
@@ -6657,7 +6657,7 @@ SOLID
   0
 HATCH
   5
-186
+13A
 330
 17
 100
@@ -6773,7 +6773,7 @@ SOLID
   0
 HATCH
   5
-187
+13B
 330
 17
 100
@@ -6841,7 +6841,7 @@ SOLID
   0
 HATCH
   5
-188
+13C
 330
 17
 100
@@ -6909,7 +6909,7 @@ SOLID
   0
 HATCH
   5
-189
+13D
 330
 17
 100
@@ -6977,7 +6977,7 @@ SOLID
   0
 HATCH
   5
-18A
+13E
 330
 17
 100
@@ -7045,7 +7045,7 @@ SOLID
   0
 HATCH
   5
-18B
+13F
 330
 17
 100
@@ -7113,7 +7113,7 @@ SOLID
   0
 HATCH
   5
-18C
+140
 330
 17
 100
@@ -7181,7 +7181,7 @@ SOLID
   0
 HATCH
   5
-18D
+141
 330
 17
 100
@@ -7249,7 +7249,7 @@ SOLID
   0
 HATCH
   5
-18E
+142
 330
 17
 100
@@ -7317,7 +7317,7 @@ SOLID
   0
 HATCH
   5
-18F
+143
 330
 17
 100
@@ -7385,7 +7385,7 @@ SOLID
   0
 HATCH
   5
-190
+144
 330
 17
 100
@@ -7501,7 +7501,7 @@ SOLID
   0
 HATCH
   5
-191
+145
 330
 17
 100
@@ -7565,7 +7565,7 @@ SOLID
   0
 HATCH
   5
-192
+146
 330
 17
 100
@@ -7629,7 +7629,7 @@ SOLID
   0
 HATCH
   5
-193
+147
 330
 17
 100
@@ -7745,7 +7745,7 @@ SOLID
   0
 HATCH
   5
-194
+148
 330
 17
 100
@@ -7809,7 +7809,7 @@ SOLID
   0
 LWPOLYLINE
   5
-195
+149
 330
 17
 100
@@ -7849,7 +7849,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-196
+14A
 330
 17
 100
@@ -7969,7 +7969,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-197
+14B
 330
 17
 100
@@ -8009,7 +8009,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-198
+14C
 330
 17
 100
@@ -8049,7 +8049,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-199
+14D
 330
 17
 100
@@ -8085,7 +8085,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-19A
+14E
 330
 17
 100
@@ -8121,7 +8121,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-19B
+14F
 330
 17
 100
@@ -8157,7 +8157,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-19C
+150
 330
 17
 100
@@ -8193,7 +8193,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-19D
+151
 330
 17
 100
@@ -8313,7 +8313,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-19E
+152
 330
 17
 100
@@ -8353,7 +8353,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-19F
+153
 330
 17
 100
@@ -8473,7 +8473,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1A0
+154
 330
 17
 100
@@ -8561,7 +8561,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1A1
+155
 330
 17
 100
@@ -8649,7 +8649,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1A2
+156
 330
 17
 100
@@ -8689,7 +8689,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1A3
+157
 330
 17
 100
@@ -8729,7 +8729,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1A4
+158
 330
 17
 100
@@ -8769,7 +8769,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1A5
+159
 330
 17
 100
@@ -8809,7 +8809,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1A6
+15A
 330
 17
 100
@@ -8849,7 +8849,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1A7
+15B
 330
 17
 100
@@ -8889,7 +8889,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1A8
+15C
 330
 17
 100
@@ -8929,7 +8929,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1A9
+15D
 330
 17
 100
@@ -8969,7 +8969,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1AA
+15E
 330
 17
 100
@@ -9009,7 +9009,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1AB
+15F
 330
 17
 100
@@ -9097,7 +9097,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1AC
+160
 330
 17
 100
@@ -9133,7 +9133,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1AD
+161
 330
 17
 100
@@ -9169,7 +9169,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1AE
+162
 330
 17
 100
@@ -9257,7 +9257,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1AF
+163
 330
 17
 100
@@ -9289,7 +9289,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1B0
+164
 330
 17
 100
@@ -9321,7 +9321,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1B1
+165
 330
 17
 100
@@ -9353,7 +9353,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1B2
+166
 330
 17
 100
@@ -9385,7 +9385,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1B3
+167
 330
 17
 100
@@ -9417,7 +9417,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1B4
+168
 330
 17
 100
@@ -9449,7 +9449,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1B5
+169
 330
 17
 100
@@ -9481,7 +9481,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1B6
+16A
 330
 17
 100
@@ -9517,7 +9517,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1B7
+16B
 330
 17
 100
@@ -9573,7 +9573,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1B8
+16C
 330
 17
 100
@@ -9621,7 +9621,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1B9
+16D
 330
 17
 100
@@ -9653,7 +9653,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1BA
+16E
 330
 17
 100
@@ -9685,7 +9685,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1BB
+16F
 330
 17
 100
@@ -9717,7 +9717,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1BC
+170
 330
 17
 100
@@ -9749,7 +9749,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1BD
+171
 330
 17
 100
@@ -9785,7 +9785,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1BE
+172
 330
 17
 100
@@ -9825,7 +9825,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1BF
+173
 330
 17
 100
@@ -9865,7 +9865,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1C0
+174
 330
 17
 100
@@ -9905,7 +9905,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1C1
+175
 330
 17
 100
@@ -9945,7 +9945,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1C2
+176
 330
 17
 100
@@ -9985,7 +9985,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1C3
+177
 330
 17
 100
@@ -10025,7 +10025,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1C4
+178
 330
 17
 100
@@ -10065,7 +10065,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1C5
+179
 330
 17
 100
@@ -10105,7 +10105,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1C6
+17A
 330
 17
 100
@@ -10145,7 +10145,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1C7
+17B
 330
 17
 100
@@ -10185,7 +10185,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1C8
+17C
 330
 17
 100
@@ -10221,7 +10221,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1C9
+17D
 330
 17
 100
@@ -10261,7 +10261,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1CA
+17E
 330
 17
 100
@@ -10301,7 +10301,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1CB
+17F
 330
 17
 100
@@ -10341,7 +10341,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1CC
+180
 330
 17
 100
@@ -10381,7 +10381,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1CD
+181
 330
 17
 100
@@ -10421,7 +10421,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1CE
+182
 330
 17
 100
@@ -10461,7 +10461,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1CF
+183
 330
 17
 100
@@ -10501,7 +10501,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1D0
+184
 330
 17
 100
@@ -10541,7 +10541,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1D1
+185
 330
 17
 100
@@ -10573,7 +10573,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1D2
+186
 330
 17
 100
@@ -10605,7 +10605,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1D3
+187
 330
 17
 100
@@ -10637,7 +10637,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1D4
+188
 330
 17
 100
@@ -10673,7 +10673,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1D5
+189
 330
 17
 100
@@ -10713,7 +10713,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1D6
+18A
 330
 17
 100
@@ -10745,7 +10745,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1D7
+18B
 330
 17
 100
@@ -10785,7 +10785,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1D8
+18C
 330
 17
 100
@@ -10817,7 +10817,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1D9
+18D
 330
 17
 100
@@ -10849,7 +10849,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1DA
+18E
 330
 17
 100
@@ -10881,7 +10881,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1DB
+18F
 330
 17
 100
@@ -10913,7 +10913,7 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-1DC
+190
 330
 17
 100
@@ -10945,7 +10945,7 @@ AcDbPolyline
   0
 TEXT
   5
-1DD
+191
 330
 17
 100
@@ -10979,7 +10979,7 @@ AcDbText
   0
 TEXT
   5
-1DE
+192
 330
 17
 100
@@ -11013,7 +11013,7 @@ AcDbText
   0
 TEXT
   5
-1DF
+193
 330
 17
 100
@@ -11047,7 +11047,7 @@ AcDbText
   0
 TEXT
   5
-1E0
+194
 330
 17
 100
@@ -11081,7 +11081,7 @@ AcDbText
   0
 TEXT
   5
-1E1
+195
 330
 17
 100
@@ -11117,7 +11117,7 @@ AcDbText
   0
 TEXT
   5
-1E2
+196
 330
 17
 100
@@ -11151,7 +11151,7 @@ AcDbText
   0
 TEXT
   5
-1E3
+197
 330
 17
 100
@@ -11185,7 +11185,7 @@ AcDbText
   0
 TEXT
   5
-1E4
+198
 330
 17
 100
@@ -11219,7 +11219,7 @@ AcDbText
   0
 TEXT
   5
-1E5
+199
 330
 17
 100
@@ -11253,7 +11253,7 @@ AcDbText
   0
 TEXT
   5
-1E6
+19A
 330
 17
 100
@@ -11287,7 +11287,7 @@ AcDbText
   0
 TEXT
   5
-1E7
+19B
 330
 17
 100
@@ -11321,7 +11321,7 @@ AcDbText
   0
 TEXT
   5
-1E8
+19C
 330
 17
 100
@@ -11355,7 +11355,7 @@ AcDbText
   0
 TEXT
   5
-1E9
+19D
 330
 17
 100
@@ -11389,7 +11389,7 @@ AcDbText
   0
 TEXT
   5
-1EA
+19E
 330
 17
 100
@@ -11423,7 +11423,7 @@ AcDbText
   0
 TEXT
   5
-1EB
+19F
 330
 17
 100
@@ -11457,7 +11457,7 @@ AcDbText
   0
 TEXT
   5
-1EC
+1A0
 330
 17
 100
@@ -11491,7 +11491,7 @@ AcDbText
   0
 TEXT
   5
-1ED
+1A1
 330
 17
 100
@@ -11525,7 +11525,7 @@ AcDbText
   0
 TEXT
   5
-1EE
+1A2
 330
 17
 100
@@ -11559,7 +11559,7 @@ AcDbText
   0
 TEXT
   5
-1EF
+1A3
 330
 17
 100
@@ -11593,7 +11593,7 @@ AcDbText
   0
 TEXT
   5
-1F0
+1A4
 330
 17
 100
@@ -11627,7 +11627,7 @@ AcDbText
   0
 TEXT
   5
-1F1
+1A5
 330
 17
 100
@@ -11661,7 +11661,7 @@ AcDbText
   0
 TEXT
   5
-1F2
+1A6
 330
 17
 100
@@ -11695,7 +11695,7 @@ AcDbText
   0
 TEXT
   5
-1F3
+1A7
 330
 17
 100
@@ -11729,7 +11729,7 @@ AcDbText
   0
 TEXT
   5
-1F4
+1A8
 330
 17
 100
@@ -11749,7 +11749,7 @@ AcDbText
  40
 0.09000000000000001
   1
-rozdzielacz P1: 7 pętli, Σṁ = 296 kg/h
+rozdzielacz P1: 7 pętli, Σṁ = 297 kg/h
   7
 PL_ARIAL
  11
@@ -11763,7 +11763,7 @@ AcDbText
   0
 TEXT
   5
-1F5
+1A9
 330
 17
 100
@@ -11797,7 +11797,7 @@ AcDbText
   0
 TEXT
   5
-1F6
+1AA
 330
 17
 100
@@ -11831,7 +11831,7 @@ AcDbText
   0
 TEXT
   5
-1F7
+1AB
 330
 17
 100
@@ -11865,7 +11865,7 @@ AcDbText
   0
 TEXT
   5
-1F8
+1AC
 330
 17
 100
@@ -11899,7 +11899,7 @@ AcDbText
   0
 TEXT
   5
-1F9
+1AD
 330
 17
 100
@@ -11933,7 +11933,7 @@ AcDbText
   0
 TEXT
   5
-1FA
+1AE
 330
 17
 100
@@ -11967,7 +11967,7 @@ AcDbText
   0
 TEXT
   5
-1FB
+1AF
 330
 17
 100
@@ -12001,7 +12001,7 @@ AcDbText
   0
 TEXT
   5
-1FC
+1B0
 330
 17
 100
@@ -12035,7 +12035,7 @@ AcDbText
   0
 TEXT
   5
-1FD
+1B1
 330
 17
 100
@@ -12069,7 +12069,7 @@ AcDbText
   0
 TEXT
   5
-1FE
+1B2
 330
 17
 100
@@ -12103,7 +12103,7 @@ AcDbText
   0
 TEXT
   5
-1FF
+1B3
 330
 17
 100
@@ -12137,7 +12137,7 @@ AcDbText
   0
 TEXT
   5
-200
+1B4
 330
 17
 100
@@ -12171,7 +12171,7 @@ AcDbText
   0
 TEXT
   5
-201
+1B5
 330
 17
 100
@@ -12205,7 +12205,7 @@ AcDbText
   0
 TEXT
   5
-202
+1B6
 330
 17
 100
@@ -12239,7 +12239,7 @@ AcDbText
   0
 TEXT
   5
-203
+1B7
 330
 17
 100
@@ -12273,7 +12273,7 @@ AcDbText
   0
 TEXT
   5
-204
+1B8
 330
 17
 100
@@ -12307,7 +12307,7 @@ AcDbText
   0
 TEXT
   5
-205
+1B9
 330
 17
 100
@@ -12341,7 +12341,7 @@ AcDbText
   0
 TEXT
   5
-206
+1BA
 330
 17
 100
@@ -12375,7 +12375,7 @@ AcDbText
   0
 TEXT
   5
-207
+1BB
 330
 17
 100
@@ -12409,7 +12409,7 @@ AcDbText
   0
 TEXT
   5
-208
+1BC
 330
 17
 100
@@ -12443,7 +12443,7 @@ AcDbText
   0
 TEXT
   5
-209
+1BD
 330
 17
 100
@@ -12477,7 +12477,7 @@ AcDbText
   0
 TEXT
   5
-20A
+1BE
 330
 17
 100
@@ -12511,7 +12511,7 @@ AcDbText
   0
 TEXT
   5
-20B
+1BF
 330
 17
 100
@@ -12545,7 +12545,7 @@ AcDbText
   0
 TEXT
   5
-20C
+1C0
 330
 17
 100
@@ -12579,7 +12579,7 @@ AcDbText
   0
 TEXT
   5
-20D
+1C1
 330
 17
 100
@@ -12613,7 +12613,7 @@ AcDbText
   0
 TEXT
   5
-20E
+1C2
 330
 17
 100
@@ -12647,7 +12647,7 @@ AcDbText
   0
 TEXT
   5
-20F
+1C3
 330
 17
 100
@@ -12681,7 +12681,7 @@ AcDbText
   0
 TEXT
   5
-210
+1C4
 330
 17
 100
@@ -12715,7 +12715,7 @@ AcDbText
   0
 TEXT
   5
-211
+1C5
 330
 17
 100
@@ -12749,7 +12749,7 @@ AcDbText
   0
 TEXT
   5
-212
+1C6
 330
 17
 100
@@ -12783,7 +12783,7 @@ AcDbText
   0
 TEXT
   5
-213
+1C7
 330
 17
 100
@@ -12829,13 +12829,13 @@ VIEWPORTS
 100
 AcDbViewport
  10
-297.0
+290.0
  20
 210.0
  30
 0.0
  40
-594.0
+580.0
  41
 420.0
  68
@@ -12843,7 +12843,7 @@ AcDbViewport
  69
 1
  12
-297.0
+290.0
  22
 210.0
  13
@@ -12939,11 +12939,11 @@ AcDbPolyline
  70
 0
  10
-35.0
+28.0
  20
 81.44708426073134
  10
-206.6159436747672
+199.6159436747672
  20
 81.44708426073134
   0
@@ -12967,13 +12967,13 @@ AcDbPolyline
  70
 0
  10
-405.0
+205.0
  20
-270.74708426073136
+55.24708426073134
  10
-419.0
+219.0
  20
-270.74708426073136
+55.24708426073134
   0
 LWPOLYLINE
   5
@@ -12995,21 +12995,21 @@ AcDbPolyline
  70
 1
  10
-218.0
+390.0
  20
-62.48708426073134
+247.4870842607313
  10
-398.0
+570.0
  20
-62.48708426073134
+247.4870842607313
  10
-398.0
+570.0
  20
-99.94708426073134
+284.94708426073134
  10
-218.0
+390.0
  20
-99.94708426073134
+284.94708426073134
   0
 LWPOLYLINE
   5
@@ -13393,19 +13393,19 @@ SOLID
  93
 4
  10
-404.0
+390.0
  20
 10.0
  10
-584.0
+570.0
  20
 10.0
  10
-584.0
+570.0
  20
 103.0
  10
-404.0
+390.0
  20
 103.0
  97
@@ -13463,19 +13463,19 @@ SOLID
  93
 4
  10
-404.0
+390.0
  20
 103.0
  10
-584.0
+570.0
  20
 103.0
  10
-584.0
+570.0
  20
 113.0
  10
-404.0
+390.0
  20
 113.0
  97
@@ -13511,11 +13511,11 @@ AcDbPolyline
  20
 10.0
  10
-584.0
+570.0
  20
 10.0
  10
-584.0
+570.0
  20
 410.0
  10
@@ -13543,11 +13543,11 @@ AcDbPolyline
  70
 0
  10
-297.0
+290.0
  20
 0.0
  10
-297.0
+290.0
  20
 20.0
   0
@@ -13571,11 +13571,11 @@ AcDbPolyline
  70
 0
  10
-297.0
+290.0
  20
 420.0
  10
-297.0
+290.0
  20
 400.0
   0
@@ -13627,11 +13627,11 @@ AcDbPolyline
  70
 0
  10
-594.0
+580.0
  20
 210.0
  10
-574.0
+560.0
  20
 210.0
   0
@@ -13655,11 +13655,11 @@ AcDbPolyline
  70
 0
  10
-210.0
+205.0
  20
 0.0
  10
-210.0
+205.0
  20
 5.0
   0
@@ -13683,11 +13683,11 @@ AcDbPolyline
  70
 0
  10
-210.0
+205.0
  20
 420.0
  10
-210.0
+205.0
  20
 415.0
   0
@@ -13711,11 +13711,11 @@ AcDbPolyline
  70
 0
  10
-402.0
+390.0
  20
 0.0
  10
-402.0
+390.0
  20
 5.0
   0
@@ -13739,11 +13739,11 @@ AcDbPolyline
  70
 0
  10
-402.0
+390.0
  20
 420.0
  10
-402.0
+390.0
  20
 415.0
   0
@@ -13795,11 +13795,11 @@ AcDbPolyline
  70
 0
  10
-594.0
+580.0
  20
 297.0
  10
-589.0
+575.0
  20
 297.0
   0
@@ -13813,9 +13813,9 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 370
-35
+25
 100
 AcDbPolyline
  90
@@ -13823,13 +13823,13 @@ AcDbPolyline
  70
 0
  10
-47.0
+500.0
  20
-10.0
+91.0
  10
-47.0
+500.0
  20
-5.0
+103.0
   0
 LWPOLYLINE
   5
@@ -13841,9 +13841,9 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 370
-35
+25
 100
 AcDbPolyline
  90
@@ -13851,13 +13851,13 @@ AcDbPolyline
  70
 0
  10
-47.0
+525.0
  20
-410.0
+91.0
  10
-47.0
+525.0
  20
-415.0
+103.0
   0
 LWPOLYLINE
   5
@@ -13869,9 +13869,9 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 370
-35
+25
 100
 AcDbPolyline
  90
@@ -13879,13 +13879,13 @@ AcDbPolyline
  70
 0
  10
-97.0
+390.0
  20
-10.0
+91.0
  10
-97.0
+570.0
  20
-5.0
+91.0
   0
 LWPOLYLINE
   5
@@ -13897,9 +13897,9 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 370
-35
+18
 100
 AcDbPolyline
  90
@@ -13907,13 +13907,13 @@ AcDbPolyline
  70
 0
  10
-97.0
+390.0
  20
-410.0
+83.0
  10
-97.0
+570.0
  20
-415.0
+83.0
   0
 LWPOLYLINE
   5
@@ -13925,9 +13925,9 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 370
-35
+18
 100
 AcDbPolyline
  90
@@ -13935,13 +13935,13 @@ AcDbPolyline
  70
 0
  10
-147.0
+390.0
  20
-10.0
+72.5
  10
-147.0
+570.0
  20
-5.0
+72.5
   0
 LWPOLYLINE
   5
@@ -13953,9 +13953,9 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 370
-35
+18
 100
 AcDbPolyline
  90
@@ -13963,13 +13963,13 @@ AcDbPolyline
  70
 0
  10
-147.0
+540.0
  20
-410.0
+63.5
  10
-147.0
+540.0
  20
-415.0
+72.5
   0
 LWPOLYLINE
   5
@@ -13981,9 +13981,9 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 370
-35
+25
 100
 AcDbPolyline
  90
@@ -13991,13 +13991,13 @@ AcDbPolyline
  70
 0
  10
-197.0
+390.0
  20
-10.0
+63.5
  10
-197.0
+570.0
  20
-5.0
+63.5
   0
 LWPOLYLINE
   5
@@ -14009,9 +14009,9 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 370
-35
+18
 100
 AcDbPolyline
  90
@@ -14019,13 +14019,13 @@ AcDbPolyline
  70
 0
  10
-197.0
+390.0
  20
-410.0
+59.0
  10
-197.0
+570.0
  20
-415.0
+59.0
   0
 LWPOLYLINE
   5
@@ -14037,9 +14037,9 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 370
-35
+18
 100
 AcDbPolyline
  90
@@ -14047,13 +14047,13 @@ AcDbPolyline
  70
 0
  10
-247.0
+390.0
  20
-10.0
+52.0
  10
-247.0
+570.0
  20
-5.0
+52.0
   0
 LWPOLYLINE
   5
@@ -14065,9 +14065,9 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 370
-35
+18
 100
 AcDbPolyline
  90
@@ -14075,13 +14075,13 @@ AcDbPolyline
  70
 0
  10
-247.0
+390.0
  20
-410.0
+45.0
  10
-247.0
+570.0
  20
-415.0
+45.0
   0
 LWPOLYLINE
   5
@@ -14093,9 +14093,9 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 370
-35
+18
 100
 AcDbPolyline
  90
@@ -14103,13 +14103,13 @@ AcDbPolyline
  70
 0
  10
-297.0
+390.0
  20
-10.0
+38.0
  10
-297.0
+570.0
  20
-5.0
+38.0
   0
 LWPOLYLINE
   5
@@ -14121,9 +14121,9 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 370
-35
+18
 100
 AcDbPolyline
  90
@@ -14131,13 +14131,13 @@ AcDbPolyline
  70
 0
  10
-297.0
+390.0
  20
-410.0
+31.0
  10
-297.0
+570.0
  20
-415.0
+31.0
   0
 LWPOLYLINE
   5
@@ -14149,9 +14149,9 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 370
-35
+18
 100
 AcDbPolyline
  90
@@ -14159,13 +14159,13 @@ AcDbPolyline
  70
 0
  10
-347.0
+417.0
  20
-10.0
+31.0
  10
-347.0
+417.0
  20
-5.0
+63.5
   0
 LWPOLYLINE
   5
@@ -14177,9 +14177,9 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 370
-35
+18
 100
 AcDbPolyline
  90
@@ -14187,13 +14187,13 @@ AcDbPolyline
  70
 0
  10
-347.0
+460.0
  20
-410.0
+31.0
  10
-347.0
+460.0
  20
-415.0
+63.5
   0
 LWPOLYLINE
   5
@@ -14205,9 +14205,9 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 370
-35
+18
 100
 AcDbPolyline
  90
@@ -14215,13 +14215,13 @@ AcDbPolyline
  70
 0
  10
-397.0
+515.0
  20
-10.0
+31.0
  10
-397.0
+515.0
  20
-5.0
+63.5
   0
 LWPOLYLINE
   5
@@ -14233,9 +14233,9 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 370
-35
+18
 100
 AcDbPolyline
  90
@@ -14243,13 +14243,13 @@ AcDbPolyline
  70
 0
  10
-397.0
+535.0
  20
-410.0
+31.0
  10
-397.0
+535.0
  20
-415.0
+63.5
   0
 LWPOLYLINE
   5
@@ -14261,9 +14261,9 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 370
-35
+25
 100
 AcDbPolyline
  90
@@ -14271,13 +14271,13 @@ AcDbPolyline
  70
 0
  10
-447.0
+390.0
  20
-10.0
+31.0
  10
-447.0
+570.0
  20
-5.0
+31.0
   0
 LWPOLYLINE
   5
@@ -14289,9 +14289,9 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 370
-35
+25
 100
 AcDbPolyline
  90
@@ -14299,13 +14299,13 @@ AcDbPolyline
  70
 0
  10
-447.0
+390.0
  20
-410.0
+19.0
  10
-447.0
+570.0
  20
-415.0
+19.0
   0
 LWPOLYLINE
   5
@@ -14317,9 +14317,9 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 370
-35
+25
 100
 AcDbPolyline
  90
@@ -14327,13 +14327,13 @@ AcDbPolyline
  70
 0
  10
-497.0
+414.0
  20
 10.0
  10
-497.0
+414.0
  20
-5.0
+19.0
   0
 LWPOLYLINE
   5
@@ -14345,9 +14345,9 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 370
-35
+25
 100
 AcDbPolyline
  90
@@ -14355,13 +14355,13 @@ AcDbPolyline
  70
 0
  10
-497.0
+430.0
  20
-410.0
+10.0
  10
-497.0
+430.0
  20
-415.0
+19.0
   0
 LWPOLYLINE
   5
@@ -14373,9 +14373,9 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 370
-35
+25
 100
 AcDbPolyline
  90
@@ -14383,13 +14383,13 @@ AcDbPolyline
  70
 0
  10
-547.0
+454.0
  20
 10.0
  10
-547.0
+454.0
  20
-5.0
+19.0
   0
 LWPOLYLINE
   5
@@ -14401,9 +14401,9 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 370
-35
+25
 100
 AcDbPolyline
  90
@@ -14411,13 +14411,13 @@ AcDbPolyline
  70
 0
  10
-547.0
+482.0
  20
-410.0
+10.0
  10
-547.0
+482.0
  20
-415.0
+19.0
   0
 LWPOLYLINE
   5
@@ -14429,9 +14429,9 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 370
-35
+25
 100
 AcDbPolyline
  90
@@ -14439,13 +14439,13 @@ AcDbPolyline
  70
 0
  10
-20.0
+534.0
  20
-60.0
+10.0
  10
-15.0
+534.0
  20
-60.0
+19.0
   0
 LWPOLYLINE
   5
@@ -14457,9 +14457,9 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 370
-35
+25
 100
 AcDbPolyline
  90
@@ -14467,1025 +14467,17 @@ AcDbPolyline
  70
 0
  10
-584.0
+552.0
  20
-60.0
+10.0
  10
-589.0
+552.0
  20
-60.0
+19.0
   0
 LWPOLYLINE
   5
 D9
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-RAMKA
-370
-35
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-20.0
- 20
-110.0
- 10
-15.0
- 20
-110.0
-  0
-LWPOLYLINE
-  5
-DA
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-RAMKA
-370
-35
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-584.0
- 20
-110.0
- 10
-589.0
- 20
-110.0
-  0
-LWPOLYLINE
-  5
-DB
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-RAMKA
-370
-35
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-20.0
- 20
-160.0
- 10
-15.0
- 20
-160.0
-  0
-LWPOLYLINE
-  5
-DC
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-RAMKA
-370
-35
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-584.0
- 20
-160.0
- 10
-589.0
- 20
-160.0
-  0
-LWPOLYLINE
-  5
-DD
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-RAMKA
-370
-35
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-20.0
- 20
-210.0
- 10
-15.0
- 20
-210.0
-  0
-LWPOLYLINE
-  5
-DE
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-RAMKA
-370
-35
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-584.0
- 20
-210.0
- 10
-589.0
- 20
-210.0
-  0
-LWPOLYLINE
-  5
-DF
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-RAMKA
-370
-35
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-20.0
- 20
-260.0
- 10
-15.0
- 20
-260.0
-  0
-LWPOLYLINE
-  5
-E0
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-RAMKA
-370
-35
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-584.0
- 20
-260.0
- 10
-589.0
- 20
-260.0
-  0
-LWPOLYLINE
-  5
-E1
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-RAMKA
-370
-35
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-20.0
- 20
-310.0
- 10
-15.0
- 20
-310.0
-  0
-LWPOLYLINE
-  5
-E2
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-RAMKA
-370
-35
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-584.0
- 20
-310.0
- 10
-589.0
- 20
-310.0
-  0
-LWPOLYLINE
-  5
-E3
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-RAMKA
-370
-35
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-20.0
- 20
-360.0
- 10
-15.0
- 20
-360.0
-  0
-LWPOLYLINE
-  5
-E4
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-RAMKA
-370
-35
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-584.0
- 20
-360.0
- 10
-589.0
- 20
-360.0
-  0
-LWPOLYLINE
-  5
-E5
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-370
-25
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-514.0
- 20
-91.0
- 10
-514.0
- 20
-103.0
-  0
-LWPOLYLINE
-  5
-E6
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-370
-25
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-539.0
- 20
-91.0
- 10
-539.0
- 20
-103.0
-  0
-LWPOLYLINE
-  5
-E7
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-370
-25
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-404.0
- 20
-91.0
- 10
-584.0
- 20
-91.0
-  0
-LWPOLYLINE
-  5
-E8
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-370
-18
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-404.0
- 20
-83.0
- 10
-584.0
- 20
-83.0
-  0
-LWPOLYLINE
-  5
-E9
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-370
-18
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-404.0
- 20
-72.5
- 10
-584.0
- 20
-72.5
-  0
-LWPOLYLINE
-  5
-EA
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-370
-18
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-554.0
- 20
-63.5
- 10
-554.0
- 20
-72.5
-  0
-LWPOLYLINE
-  5
-EB
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-370
-25
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-404.0
- 20
-63.5
- 10
-584.0
- 20
-63.5
-  0
-LWPOLYLINE
-  5
-EC
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-370
-18
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-404.0
- 20
-59.0
- 10
-584.0
- 20
-59.0
-  0
-LWPOLYLINE
-  5
-ED
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-370
-18
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-404.0
- 20
-52.0
- 10
-584.0
- 20
-52.0
-  0
-LWPOLYLINE
-  5
-EE
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-370
-18
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-404.0
- 20
-45.0
- 10
-584.0
- 20
-45.0
-  0
-LWPOLYLINE
-  5
-EF
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-370
-18
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-404.0
- 20
-38.0
- 10
-584.0
- 20
-38.0
-  0
-LWPOLYLINE
-  5
-F0
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-370
-18
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-404.0
- 20
-31.0
- 10
-584.0
- 20
-31.0
-  0
-LWPOLYLINE
-  5
-F1
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-370
-18
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-431.0
- 20
-31.0
- 10
-431.0
- 20
-63.5
-  0
-LWPOLYLINE
-  5
-F2
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-370
-18
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-474.0
- 20
-31.0
- 10
-474.0
- 20
-63.5
-  0
-LWPOLYLINE
-  5
-F3
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-370
-18
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-529.0
- 20
-31.0
- 10
-529.0
- 20
-63.5
-  0
-LWPOLYLINE
-  5
-F4
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-370
-18
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-549.0
- 20
-31.0
- 10
-549.0
- 20
-63.5
-  0
-LWPOLYLINE
-  5
-F5
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-370
-25
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-404.0
- 20
-31.0
- 10
-584.0
- 20
-31.0
-  0
-LWPOLYLINE
-  5
-F6
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-370
-25
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-404.0
- 20
-19.0
- 10
-584.0
- 20
-19.0
-  0
-LWPOLYLINE
-  5
-F7
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-370
-25
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-428.0
- 20
-10.0
- 10
-428.0
- 20
-19.0
-  0
-LWPOLYLINE
-  5
-F8
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-370
-25
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-444.0
- 20
-10.0
- 10
-444.0
- 20
-19.0
-  0
-LWPOLYLINE
-  5
-F9
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-370
-25
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-468.0
- 20
-10.0
- 10
-468.0
- 20
-19.0
-  0
-LWPOLYLINE
-  5
-FA
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-370
-25
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-496.0
- 20
-10.0
- 10
-496.0
- 20
-19.0
-  0
-LWPOLYLINE
-  5
-FB
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-370
-25
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-548.0
- 20
-10.0
- 10
-548.0
- 20
-19.0
-  0
-LWPOLYLINE
-  5
-FC
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-370
-25
-100
-AcDbPolyline
- 90
-2
- 70
-0
- 10
-566.0
- 20
-10.0
- 10
-566.0
- 20
-19.0
-  0
-LWPOLYLINE
-  5
-FD
 330
 1B
 100
@@ -15503,25 +14495,25 @@ AcDbPolyline
  70
 1
  10
-404.0
+390.0
  20
 10.0
  10
-584.0
+570.0
  20
 10.0
  10
-584.0
+570.0
  20
 103.0
  10
-404.0
+390.0
  20
 103.0
   0
 LWPOLYLINE
   5
-FE
+DA
 330
 1B
 100
@@ -15539,17 +14531,17 @@ AcDbPolyline
  70
 0
  10
-404.0
+390.0
  20
 108.0
  10
-584.0
+570.0
  20
 108.0
   0
 LWPOLYLINE
   5
-FF
+DB
 330
 1B
 100
@@ -15567,17 +14559,17 @@ AcDbPolyline
  70
 0
  10
-404.0
+390.0
  20
 113.0
  10
-584.0
+570.0
  20
 113.0
   0
 LWPOLYLINE
   5
-100
+DC
 330
 1B
 100
@@ -15595,17 +14587,17 @@ AcDbPolyline
  70
 0
  10
-422.0
+408.0
  20
 103.0
  10
-422.0
+408.0
  20
 113.0
   0
 LWPOLYLINE
   5
-101
+DD
 330
 1B
 100
@@ -15623,17 +14615,17 @@ AcDbPolyline
  70
 0
  10
-544.0
+530.0
  20
 103.0
  10
-544.0
+530.0
  20
 113.0
   0
 LWPOLYLINE
   5
-102
+DE
 330
 1B
 100
@@ -15651,25 +14643,25 @@ AcDbPolyline
  70
 1
  10
-404.0
+390.0
  20
 103.0
  10
-584.0
+570.0
  20
 103.0
  10
-584.0
+570.0
  20
 113.0
  10
-404.0
+390.0
  20
 113.0
   0
 TEXT
   5
-103
+DF
 330
 1B
 100
@@ -15681,7 +14673,7 @@ R-OPISY
 100
 AcDbText
  10
-35.0
+28.0
  20
 82.94708426073134
  30
@@ -15693,7 +14685,7 @@ SCHEMAT IDEOWY POMPY CIEPŁA, C.O. I C.W.U.
   7
 PL_ARIAL_B
  11
-35.0
+28.0
  21
 82.94708426073134
  31
@@ -15703,7 +14695,7 @@ AcDbText
   0
 TEXT
   5
-104
+E0
 330
 1B
 100
@@ -15715,9 +14707,9 @@ R-LEGENDA
 100
 AcDbText
  10
-404.0
+204.0
  20
-281.44708426073134
+65.94708426073134
  30
 0.0
  40
@@ -15727,9 +14719,9 @@ OZNACZENIA
   7
 PL_ARIAL_B
  11
-404.0
+204.0
  21
-281.44708426073134
+65.94708426073134
  31
 0.0
 100
@@ -15737,7 +14729,7 @@ AcDbText
   0
 TEXT
   5
-105
+E1
 330
 1B
 100
@@ -15749,9 +14741,9 @@ R-LEGENDA
 100
 AcDbText
  10
-404.0
+204.0
  20
-276.44708426073134
+60.947084260731344
  30
 0.0
  40
@@ -15761,9 +14753,9 @@ Legenda symboli — na schemacie (PN-EN 60617 / PN-EN ISO 14617 w uproszczeniu; 
   7
 PL_ARIAL_I
  11
-404.0
+204.0
  21
-276.44708426073134
+60.947084260731344
  31
 0.0
 100
@@ -15771,7 +14763,7 @@ AcDbText
   0
 TEXT
   5
-106
+E2
 330
 1B
 100
@@ -15783,9 +14775,9 @@ R-LEGENDA
 100
 AcDbText
  10
-422.0
+222.0
  20
-270.54708426073137
+55.04708426073134
  30
 0.0
  40
@@ -15795,9 +14787,9 @@ linie schematu — wg legendy na rysunku
   7
 PL_ARIAL
  11
-422.0
+222.0
  21
-270.54708426073137
+55.04708426073134
  31
 0.0
 100
@@ -15805,7 +14797,7 @@ AcDbText
   0
 TEXT
   5
-107
+E3
 330
 1B
 100
@@ -15817,9 +14809,9 @@ R-OPISY
 100
 AcDbText
  10
-220.0
+392.0
  20
-94.44708426073134
+279.44708426073134
  30
 0.0
  40
@@ -15829,9 +14821,9 @@ OBJAŚNIENIA I UWAGI
   7
 PL_ARIAL_B
  11
-220.0
+392.0
  21
-94.44708426073134
+279.44708426073134
  31
 0.0
 100
@@ -15839,7 +14831,7 @@ AcDbText
   0
 TEXT
   5
-108
+E4
 330
 1B
 100
@@ -15851,9 +14843,9 @@ R-OPISY
 100
 AcDbText
  10
-220.0
+392.0
  20
-88.14708426073135
+273.14708426073133
  30
 0.0
  40
@@ -15863,9 +14855,9 @@ AcDbText
   7
 PL_ARIAL
  11
-220.0
+392.0
  21
-88.14708426073135
+273.14708426073133
  31
 0.0
 100
@@ -15873,7 +14865,7 @@ AcDbText
   0
 TEXT
   5
-109
+E5
 330
 1B
 100
@@ -15885,9 +14877,9 @@ R-OPISY
 100
 AcDbText
  10
-222.90869861458097
+394.90869861458094
  20
-88.14708426073135
+273.14708426073133
  30
 0.0
  40
@@ -15897,9 +14889,9 @@ Schemat bez skali; rzędne w m względem ±0,000 (posadzka parteru), średnice w
   7
 PL_ARIAL
  11
-222.90869861458097
+394.90869861458094
  21
-88.14708426073135
+273.14708426073133
  31
 0.0
 100
@@ -15907,7 +14899,7 @@ AcDbText
   0
 TEXT
   5
-10A
+E6
 330
 1B
 100
@@ -15919,9 +14911,9 @@ R-OPISY
 100
 AcDbText
  10
-220.0
+392.0
  20
-84.72708426073135
+269.7270842607313
  30
 0.0
  40
@@ -15931,9 +14923,9 @@ AcDbText
   7
 PL_ARIAL
  11
-220.0
+392.0
  21
-84.72708426073135
+269.7270842607313
  31
 0.0
 100
@@ -15941,7 +14933,7 @@ AcDbText
   0
 TEXT
   5
-10B
+E7
 330
 1B
 100
@@ -15953,9 +14945,9 @@ R-OPISY
 100
 AcDbText
  10
-222.90869861458097
+394.90869861458094
  20
-84.72708426073135
+269.7270842607313
  30
 0.0
  40
@@ -15965,9 +14957,9 @@ Rysunki instalacji na podkładzie rzutów architektury (PB-AR); podkład — lin
   7
 PL_ARIAL
  11
-222.90869861458097
+394.90869861458094
  21
-84.72708426073135
+269.7270842607313
  31
 0.0
 100
@@ -15975,7 +14967,7 @@ AcDbText
   0
 TEXT
   5
-10C
+E8
 330
 1B
 100
@@ -15987,9 +14979,9 @@ R-OPISY
 100
 AcDbText
  10
-220.0
+392.0
  20
-81.30708426073134
+266.3070842607313
  30
 0.0
  40
@@ -15999,9 +14991,9 @@ AcDbText
   7
 PL_ARIAL
  11
-220.0
+392.0
  21
-81.30708426073134
+266.3070842607313
  31
 0.0
 100
@@ -16009,7 +15001,7 @@ AcDbText
   0
 TEXT
   5
-10D
+E9
 330
 1B
 100
@@ -16021,9 +15013,9 @@ R-OPISY
 100
 AcDbText
  10
-222.90869861458097
+394.90869861458094
  20
-81.30708426073134
+266.3070842607313
  30
 0.0
  40
@@ -16033,9 +15025,9 @@ Schemat odtworzony wektorowo z funkcji lamela.obliczenia.sanitarne.schemat_pc (d
   7
 PL_ARIAL
  11
-222.90869861458097
+394.90869861458094
  21
-81.30708426073134
+266.3070842607313
  31
 0.0
 100
@@ -16043,7 +15035,7 @@ AcDbText
   0
 TEXT
   5
-10E
+EA
 330
 1B
 100
@@ -16055,9 +15047,9 @@ R-OPISY
 100
 AcDbText
  10
-222.90869861458097
+394.90869861458094
  20
-78.42708426073135
+263.4270842607313
  30
 0.0
  40
@@ -16067,9 +15059,9 @@ aktualnym modelu; skala rysunkowa 1.83 mm/jedn. (pismo ≥ 1,8 mm), przesunięto
   7
 PL_ARIAL
  11
-222.90869861458097
+394.90869861458094
  21
-78.42708426073135
+263.4270842607313
  31
 0.0
 100
@@ -16077,7 +15069,7 @@ AcDbText
   0
 TEXT
   5
-10F
+EB
 330
 1B
 100
@@ -16089,9 +15081,9 @@ R-OPISY
 100
 AcDbText
  10
-220.0
+392.0
  20
-75.00708426073135
+260.0070842607313
  30
 0.0
  40
@@ -16101,9 +15093,9 @@ AcDbText
   7
 PL_ARIAL
  11
-220.0
+392.0
  21
-75.00708426073135
+260.0070842607313
  31
 0.0
 100
@@ -16111,7 +15103,7 @@ AcDbText
   0
 TEXT
   5
-110
+EC
 330
 1B
 100
@@ -16123,9 +15115,9 @@ R-OPISY
 100
 AcDbText
  10
-222.90869861458097
+394.90869861458094
  20
-75.00708426073135
+260.0070842607313
  30
 0.0
  40
@@ -16135,9 +15127,9 @@ Dane urządzeń przykładowe (bez nazw handlowych) — do zastąpienia DTR wybra
   7
 PL_ARIAL
  11
-222.90869861458097
+394.90869861458094
  21
-75.00708426073135
+260.0070842607313
  31
 0.0
 100
@@ -16145,7 +15137,7 @@ AcDbText
   0
 TEXT
   5
-111
+ED
 330
 1B
 100
@@ -16157,9 +15149,9 @@ R-OPISY
 100
 AcDbText
  10
-220.0
+392.0
  20
-71.58708426073134
+256.5870842607313
  30
 0.0
  40
@@ -16169,9 +15161,9 @@ AcDbText
   7
 PL_ARIAL
  11
-220.0
+392.0
  21
-71.58708426073134
+256.5870842607313
  31
 0.0
 100
@@ -16179,7 +15171,7 @@ AcDbText
   0
 TEXT
   5
-112
+EE
 330
 1B
 100
@@ -16191,9 +15183,9 @@ R-OPISY
 100
 AcDbText
  10
-222.90869861458097
+394.90869861458094
  20
-71.58708426073134
+256.5870842607313
  30
 0.0
  40
@@ -16203,9 +15195,9 @@ Ogrzewanie wg PN-EN 1264, PN-EN 12828 (zabezpieczenie instalacji wodnych), c.w.u
   7
 PL_ARIAL
  11
-222.90869861458097
+394.90869861458094
  21
-71.58708426073134
+256.5870842607313
  31
 0.0
 100
@@ -16213,7 +15205,7 @@ AcDbText
   0
 TEXT
   5
-113
+EF
 330
 1B
 100
@@ -16225,9 +15217,9 @@ R-OPISY
 100
 AcDbText
  10
-222.90869861458097
+394.90869861458094
  20
-68.70708426073135
+253.70708426073128
  30
 0.0
  40
@@ -16237,9 +15229,9 @@ bezpieczeństwa z obliczeń.
   7
 PL_ARIAL
  11
-222.90869861458097
+394.90869861458094
  21
-68.70708426073135
+253.70708426073128
  31
 0.0
 100
@@ -16247,7 +15239,7 @@ AcDbText
   0
 TEXT
   5
-114
+F0
 330
 1B
 100
@@ -16259,9 +15251,9 @@ R-OPISY
 100
 AcDbText
  10
-220.0
+392.0
  20
-65.28708426073135
+250.2870842607313
  30
 0.0
  40
@@ -16271,9 +15263,9 @@ AcDbText
   7
 PL_ARIAL
  11
-220.0
+392.0
  21
-65.28708426073135
+250.2870842607313
  31
 0.0
 100
@@ -16281,7 +15273,7 @@ AcDbText
   0
 TEXT
   5
-115
+F1
 330
 1B
 100
@@ -16293,9 +15285,9 @@ R-OPISY
 100
 AcDbText
  10
-222.90869861458097
+394.90869861458094
  20
-65.28708426073135
+250.2870842607313
  30
 0.0
  40
@@ -16305,9 +15297,9 @@ Rysunek wygenerowany automatycznie z modelu model/budynek.yaml (wersja 1.0, 2026
   7
 PL_ARIAL
  11
-222.90869861458097
+394.90869861458094
  21
-65.28708426073135
+250.2870842607313
  31
 0.0
 100
@@ -16315,7 +15307,7 @@ AcDbText
   0
 TEXT
   5
-116
+F2
 330
 1B
 100
@@ -16351,7 +15343,7 @@ AcDbText
   0
 TEXT
   5
-117
+F3
 330
 1B
 100
@@ -16363,7 +15355,7 @@ R-RAMKA
 100
 AcDbText
  10
-402.8
+390.8
  20
 0.8
  30
@@ -16375,9 +15367,1233 @@ AcDbText
   7
 PL_ARIAL
  11
-402.8
+390.8
  21
 0.8
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+F4
+330
+1B
+100
+AcDbEntity
+ 67
+1
+  8
+R-RAMKA
+100
+AcDbText
+ 10
+205.8
+ 20
+0.8
+ 30
+0.0
+ 40
+1.8
+  1
+2
+  7
+PL_ARIAL
+ 11
+205.8
+ 21
+0.8
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+F5
+330
+1B
+100
+AcDbEntity
+ 67
+1
+  8
+R-RAMKA
+100
+AcDbText
+ 10
+0.8
+ 20
+297.8
+ 30
+0.0
+ 40
+1.8
+  1
+3
+  7
+PL_ARIAL
+ 11
+0.8
+ 21
+297.8
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+F6
+330
+1B
+100
+AcDbEntity
+ 67
+1
+  8
+R-RAMKA
+100
+AcDbText
+ 10
+554.7983193277311
+ 20
+4.1
+ 30
+0.0
+ 40
+1.8
+  1
+nst. 580×420
+  7
+PL_ARIAL
+ 11
+554.7983193277311
+ 21
+4.1
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+F7
+330
+1B
+100
+AcDbEntity
+ 67
+1
+  8
+R-TABLICZKA
+100
+AcDbText
+ 10
+391.2
+ 20
+100.0
+ 30
+0.0
+ 40
+1.8
+  1
+PRACOWNIA PROJEKTOWA
+  7
+PL_ARIAL
+ 11
+391.2
+ 21
+100.0
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+F8
+330
+1B
+100
+AcDbEntity
+ 67
+1
+  8
+R-TABLICZKA
+100
+AcDbText
+ 10
+391.2
+ 20
+96.1
+ 30
+0.0
+ 40
+2.5
+  1
+PRACOWNIA PROJEKTOWA — nazwa do uzupełnienia
+  7
+PL_ARIAL_B
+ 11
+391.2
+ 21
+96.1
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+F9
+330
+1B
+100
+AcDbEntity
+ 67
+1
+  8
+R-TABLICZKA
+100
+AcDbText
+ 10
+391.2
+ 20
+92.4
+ 30
+0.0
+ 40
+1.8
+  1
+adres pracowni do uzupełnienia
+  7
+PL_ARIAL
+ 11
+391.2
+ 21
+92.4
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+FA
+330
+1B
+100
+AcDbEntity
+ 67
+1
+  8
+R-TABLICZKA
+100
+AcDbText
+ 10
+501.2
+ 20
+100.0
+ 30
+0.0
+ 40
+1.8
+  1
+STADIUM
+  7
+PL_ARIAL
+ 11
+501.2
+ 21
+100.0
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+FB
+330
+1B
+100
+AcDbEntity
+ 67
+1
+  8
+R-TABLICZKA
+100
+AcDbText
+ 10
+507.8565750624574
+ 20
+93.5
+ 30
+0.0
+ 40
+5.0
+  1
+PT
+  7
+PL_ARIAL_B
+ 11
+507.8565750624574
+ 21
+93.5
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+FC
+330
+1B
+100
+AcDbEntity
+ 67
+1
+  8
+R-TABLICZKA
+100
+AcDbText
+ 10
+526.2
+ 20
+100.0
+ 30
+0.0
+ 40
+1.8
+  1
+BRANŻA
+  7
+PL_ARIAL
+ 11
+526.2
+ 21
+100.0
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+FD
+330
+1B
+100
+AcDbEntity
+ 67
+1
+  8
+R-TABLICZKA
+100
+AcDbText
+ 10
+526.2
+ 20
+96.26249999999999
+ 30
+0.0
+ 40
+2.5
+  1
+INSTALACJE
+  7
+PL_ARIAL_B
+ 11
+526.2
+ 21
+96.26249999999999
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+FE
+330
+1B
+100
+AcDbEntity
+ 67
+1
+  8
+R-TABLICZKA
+100
+AcDbText
+ 10
+526.2
+ 20
+92.63749999999999
+ 30
+0.0
+ 40
+2.5
+  1
+SANITARNE (IS)
+  7
+PL_ARIAL_B
+ 11
+526.2
+ 21
+92.63749999999999
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+FF
+330
+1B
+100
+AcDbEntity
+ 67
+1
+  8
+R-TABLICZKA
+100
+AcDbText
+ 10
+391.2
+ 20
+88.0
+ 30
+0.0
+ 40
+1.8
+  1
+INWESTOR
+  7
+PL_ARIAL
+ 11
+391.2
+ 21
+88.0
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+100
+330
+1B
+100
+AcDbEntity
+ 67
+1
+  8
+R-TABLICZKA
+100
+AcDbText
+ 10
+391.2
+ 20
+84.44999999999999
+ 30
+0.0
+ 40
+2.5
+  1
+(do uzupełnienia)
+  7
+PL_ARIAL
+ 11
+391.2
+ 21
+84.44999999999999
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+101
+330
+1B
+100
+AcDbEntity
+ 67
+1
+  8
+R-TABLICZKA
+100
+AcDbText
+ 10
+391.2
+ 20
+80.0
+ 30
+0.0
+ 40
+1.8
+  1
+OBIEKT / NAZWA ZAMIERZENIA BUDOWLANEGO
+  7
+PL_ARIAL
+ 11
+391.2
+ 21
+80.0
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+102
+330
+1B
+100
+AcDbEntity
+ 67
+1
+  8
+R-TABLICZKA
+100
+AcDbText
+ 10
+391.2
+ 20
+75.19999999999999
+ 30
+0.0
+ 40
+2.5
+  1
+Budynek mieszkalny jednorodzinny wolnostojący „Dom LAMELA”
+  7
+PL_ARIAL_B
+ 11
+391.2
+ 21
+75.19999999999999
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+103
+330
+1B
+100
+AcDbEntity
+ 67
+1
+  8
+R-TABLICZKA
+100
+AcDbText
+ 10
+391.2
+ 20
+69.5
+ 30
+0.0
+ 40
+1.8
+  1
+ADRES / LOKALIZACJA (NR DZIAŁKI, OBRĘB, JEDN. EWIDENCYJNA)
+  7
+PL_ARIAL
+ 11
+391.2
+ 21
+69.5
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+104
+330
+1B
+100
+AcDbEntity
+ 67
+1
+  8
+R-TABLICZKA
+100
+AcDbText
+ 10
+391.2
+ 20
+65.716
+ 30
+0.0
+ 40
+1.8
+  1
+ul. Lipowa (fikcyjna), dz. nr ewid. 123/4, obręb 0005 Przykładowo, gm. Przykładowo (fikcyjna)
+  7
+PL_ARIAL
+ 11
+391.2
+ 21
+65.716
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+105
+330
+1B
+100
+AcDbEntity
+ 67
+1
+  8
+R-TABLICZKA
+100
+AcDbText
+ 10
+541.2
+ 20
+69.5
+ 30
+0.0
+ 40
+1.8
+  1
+KAT. OBIEKTU
+  7
+PL_ARIAL
+ 11
+541.2
+ 21
+69.5
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+106
+330
+1B
+100
+AcDbEntity
+ 67
+1
+  8
+R-TABLICZKA
+100
+AcDbText
+ 10
+554.2933227344992
+ 20
+65.07
+ 30
+0.0
+ 40
+3.5
+  1
+I
+  7
+PL_ARIAL_B
+ 11
+554.2933227344992
+ 21
+65.07
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+107
+330
+1B
+100
+AcDbEntity
+ 67
+1
+  8
+R-TABLICZKA
+100
+AcDbText
+ 10
+397.4673631614808
+ 20
+60.35
+ 30
+0.0
+ 40
+1.8
+  1
+FUNKCJA
+  7
+PL_ARIAL
+ 11
+397.4673631614808
+ 21
+60.35
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+108
+330
+1B
+100
+AcDbEntity
+ 67
+1
+  8
+R-TABLICZKA
+100
+AcDbText
+ 10
+427.74312968430615
+ 20
+60.35
+ 30
+0.0
+ 40
+1.8
+  1
+IMIĘ I NAZWISKO
+  7
+PL_ARIAL
+ 11
+427.74312968430615
+ 21
+60.35
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+109
+330
+1B
+100
+AcDbEntity
+ 67
+1
+  8
+R-TABLICZKA
+100
+AcDbText
+ 10
+466.9770156711333
+ 20
+60.35
+ 30
+0.0
+ 40
+1.8
+  1
+SPECJALNOŚĆ, NR UPRAWNIEŃ
+  7
+PL_ARIAL
+ 11
+466.9770156711333
+ 21
+60.35
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+10A
+330
+1B
+100
+AcDbEntity
+ 67
+1
+  8
+R-TABLICZKA
+100
+AcDbText
+ 10
+521.7051782875312
+ 20
+60.35
+ 30
+0.0
+ 40
+1.8
+  1
+DATA
+  7
+PL_ARIAL
+ 11
+521.7051782875312
+ 21
+60.35
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+10B
+330
+1B
+100
+AcDbEntity
+ 67
+1
+  8
+R-TABLICZKA
+100
+AcDbText
+ 10
+547.556438791733
+ 20
+60.35
+ 30
+0.0
+ 40
+1.8
+  1
+PODPIS
+  7
+PL_ARIAL
+ 11
+547.556438791733
+ 21
+60.35
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+10C
+330
+1B
+100
+AcDbEntity
+ 67
+1
+  8
+R-TABLICZKA
+100
+AcDbText
+ 10
+391.2
+ 20
+54.6
+ 30
+0.0
+ 40
+1.8
+  1
+Projektant
+  7
+PL_ARIAL
+ 11
+391.2
+ 21
+54.6
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+10D
+330
+1B
+100
+AcDbEntity
+ 67
+1
+  8
+R-TABLICZKA
+100
+AcDbText
+ 10
+418.2
+ 20
+54.25
+ 30
+0.0
+ 40
+2.5
+  1
+[DO UZUPEŁNIENIA]
+  7
+PL_ARIAL
+ 11
+418.2
+ 21
+54.25
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+10E
+330
+1B
+100
+AcDbEntity
+ 67
+1
+  8
+R-TABLICZKA
+100
+AcDbText
+ 10
+461.2
+ 20
+54.6
+ 30
+0.0
+ 40
+1.8
+  1
+[DO UZUPEŁNIENIA]
+  7
+PL_ARIAL
+ 11
+461.2
+ 21
+54.6
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+10F
+330
+1B
+100
+AcDbEntity
+ 67
+1
+  8
+R-TABLICZKA
+100
+AcDbText
+ 10
+391.2
+ 20
+47.6
+ 30
+0.0
+ 40
+1.8
+  1
+Projektant (wsp.)
+  7
+PL_ARIAL
+ 11
+391.2
+ 21
+47.6
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+110
+330
+1B
+100
+AcDbEntity
+ 67
+1
+  8
+R-TABLICZKA
+100
+AcDbText
+ 10
+418.2
+ 20
+47.25
+ 30
+0.0
+ 40
+2.5
+  1
+[DO UZUPEŁNIENIA]
+  7
+PL_ARIAL
+ 11
+418.2
+ 21
+47.25
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+111
+330
+1B
+100
+AcDbEntity
+ 67
+1
+  8
+R-TABLICZKA
+100
+AcDbText
+ 10
+461.2
+ 20
+47.6
+ 30
+0.0
+ 40
+1.8
+  1
+[DO UZUPEŁNIENIA]
+  7
+PL_ARIAL
+ 11
+461.2
+ 21
+47.6
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+112
+330
+1B
+100
+AcDbEntity
+ 67
+1
+  8
+R-TABLICZKA
+100
+AcDbText
+ 10
+391.2
+ 20
+40.6
+ 30
+0.0
+ 40
+1.8
+  1
+Sprawdzający
+  7
+PL_ARIAL
+ 11
+391.2
+ 21
+40.6
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+113
+330
+1B
+100
+AcDbEntity
+ 67
+1
+  8
+R-TABLICZKA
+100
+AcDbText
+ 10
+418.2
+ 20
+40.6
+ 30
+0.0
+ 40
+1.8
+  1
+nie dotyczy (art. 20 ust. 3 pkt 2 PB)
+  7
+PL_ARIAL
+ 11
+418.2
+ 21
+40.6
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+114
+330
+1B
+100
+AcDbEntity
+ 67
+1
+  8
+R-TABLICZKA
+100
+AcDbText
+ 10
+461.2
+ 20
+40.6
+ 30
+0.0
+ 40
+1.8
+  1
+—
+  7
+PL_ARIAL
+ 11
+461.2
+ 21
+40.6
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+115
+330
+1B
+100
+AcDbEntity
+ 67
+1
+  8
+R-TABLICZKA
+100
+AcDbText
+ 10
+391.2
+ 20
+33.6
+ 30
+0.0
+ 40
+1.8
+  1
+Opracował
+  7
+PL_ARIAL
+ 11
+391.2
+ 21
+33.6
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+116
+330
+1B
+100
+AcDbEntity
+ 67
+1
+  8
+R-TABLICZKA
+100
+AcDbText
+ 10
+418.2
+ 20
+33.25
+ 30
+0.0
+ 40
+2.5
+  1
+[DO UZUPEŁNIENIA]
+  7
+PL_ARIAL
+ 11
+418.2
+ 21
+33.25
+ 31
+0.0
+100
+AcDbText
+  0
+TEXT
+  5
+117
+330
+1B
+100
+AcDbEntity
+ 67
+1
+  8
+R-TABLICZKA
+100
+AcDbText
+ 10
+461.2
+ 20
+33.6
+ 30
+0.0
+ 40
+1.8
+  1
+[DO UZUPEŁNIENIA]
+  7
+PL_ARIAL
+ 11
+461.2
+ 21
+33.6
  31
 0.0
 100
@@ -16393,25 +16609,25 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 100
 AcDbText
  10
-210.8
+391.2
  20
-0.8
+28.0
  30
 0.0
  40
 1.8
   1
-2
+TYTUŁ RYSUNKU
   7
 PL_ARIAL
  11
-210.8
+391.2
  21
-0.8
+28.0
  31
 0.0
 100
@@ -16427,25 +16643,25 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 100
 AcDbText
  10
-0.8
+391.2
  20
-297.8
+21.5
  30
 0.0
  40
-1.8
+5.0
   1
-3
+SCHEMAT POMPY CIEPŁA, C.O. I C.W.U.
   7
-PL_ARIAL
+PL_ARIAL_B
  11
-0.8
+391.2
  21
-297.8
+21.5
  31
 0.0
 100
@@ -16461,25 +16677,25 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 100
 AcDbText
  10
-32.08545310015898
+391.2
  20
-413.25
+16.0
  30
 0.0
  40
-3.5
+1.8
   1
-1
+SKALA
   7
 PL_ARIAL
  11
-32.08545310015898
+391.2
  21
-413.25
+16.0
  31
 0.0
 100
@@ -16495,25 +16711,25 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 100
 AcDbText
  10
-32.08545310015898
+399.456279809221
  20
-3.25
+11.57
  30
 0.0
  40
 3.5
   1
-1
+—
   7
-PL_ARIAL
+PL_ARIAL_B
  11
-32.08545310015898
+399.456279809221
  21
-3.25
+11.57
  31
 0.0
 100
@@ -16529,25 +16745,25 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 100
 AcDbText
  10
-70.58545310015899
+415.2
  20
-413.25
+16.0
  30
 0.0
  40
-3.5
+1.8
   1
-2
+FORMAT
   7
 PL_ARIAL
  11
-70.58545310015899
+415.2
  21
-413.25
+16.0
  31
 0.0
 100
@@ -16563,25 +16779,25 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 100
 AcDbText
  10
-70.58545310015899
+416.8710424710425
  20
-3.25
+12.216000000000001
  30
 0.0
  40
-3.5
+1.8
   1
-2
+580×420
   7
 PL_ARIAL
  11
-70.58545310015899
+416.8710424710425
  21
-3.25
+12.216000000000001
  31
 0.0
 100
@@ -16597,25 +16813,25 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 100
 AcDbText
  10
-120.58545310015899
+431.2
  20
-413.25
+16.0
  30
 0.0
  40
-3.5
+1.8
   1
-3
+DATA WYDANIA
   7
 PL_ARIAL
  11
-120.58545310015899
+431.2
  21
-413.25
+16.0
  31
 0.0
 100
@@ -16631,25 +16847,25 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 100
 AcDbText
  10
-120.58545310015899
+432.706904383375
  20
-3.25
+11.95
  30
 0.0
  40
-3.5
+2.5
   1
-3
+2026-09-25
   7
 PL_ARIAL
  11
-120.58545310015899
+432.706904383375
  21
-3.25
+11.95
  31
 0.0
 100
@@ -16665,25 +16881,25 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 100
 AcDbText
  10
-170.585453100159
+455.2
  20
-413.25
+16.0
  30
 0.0
  40
-3.5
+1.8
   1
-4
+RODZAJ DOK.
   7
 PL_ARIAL
  11
-170.585453100159
+455.2
  21
-413.25
+16.0
  31
 0.0
 100
@@ -16699,25 +16915,25 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 100
 AcDbText
  10
-170.585453100159
+457.6760617760618
  20
-3.25
+12.216000000000001
  30
 0.0
  40
-3.5
+1.8
   1
-4
+schemat instalacji
   7
 PL_ARIAL
  11
-170.585453100159
+457.6760617760618
  21
-3.25
+12.216000000000001
  31
 0.0
 100
@@ -16733,25 +16949,25 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 100
 AcDbText
  10
-220.585453100159
+483.2
  20
-413.25
+16.0
  30
 0.0
  40
-3.5
+1.8
   1
-5
+NR RYSUNKU
   7
 PL_ARIAL
  11
-220.585453100159
+483.2
  21
-413.25
+16.0
  31
 0.0
 100
@@ -16767,25 +16983,25 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 100
 AcDbText
  10
-220.585453100159
+498.10373608903024
  20
-3.25
+11.57
  30
 0.0
  40
 3.5
   1
-5
+PT-IS-11
   7
-PL_ARIAL
+PL_ARIAL_B
  11
-220.585453100159
+498.10373608903024
  21
-3.25
+11.57
  31
 0.0
 100
@@ -16801,25 +17017,25 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 100
 AcDbText
  10
-270.585453100159
+535.2
  20
-413.25
+16.0
  30
 0.0
  40
-3.5
+1.8
   1
-6
+ARKUSZ
   7
 PL_ARIAL
  11
-270.585453100159
+535.2
  21
-413.25
+16.0
  31
 0.0
 100
@@ -16835,25 +17051,25 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 100
 AcDbText
  10
-270.585453100159
+538.7233704292528
  20
-3.25
+11.95
  30
 0.0
  40
-3.5
+2.5
   1
-6
+11/11
   7
 PL_ARIAL
  11
-270.585453100159
+538.7233704292528
  21
-3.25
+11.95
  31
 0.0
 100
@@ -16869,25 +17085,25 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 100
 AcDbText
  10
-320.585453100159
+553.2
  20
-413.25
+16.0
  30
 0.0
  40
-3.5
+1.8
   1
-7
+REW.
   7
 PL_ARIAL
  11
-320.585453100159
+553.2
  21
-413.25
+16.0
  31
 0.0
 100
@@ -16903,25 +17119,25 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 100
 AcDbText
  10
-320.585453100159
+559.5854531001589
  20
-3.25
+11.57
  30
 0.0
  40
 3.5
   1
-7
+0
   7
-PL_ARIAL
+PL_ARIAL_B
  11
-320.585453100159
+559.5854531001589
  21
-3.25
+11.57
  31
 0.0
 100
@@ -16937,25 +17153,25 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 100
 AcDbText
  10
-370.585453100159
+391.2
  20
-413.25
+104.25
  30
 0.0
  40
-3.5
+2.5
   1
-8
+0
   7
 PL_ARIAL
  11
-370.585453100159
+391.2
  21
-413.25
+104.25
  31
 0.0
 100
@@ -16971,25 +17187,25 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 100
 AcDbText
  10
-370.585453100159
+409.2
  20
-3.25
+104.25
  30
 0.0
  40
-3.5
+2.5
   1
-8
+Wydanie — rysunek wygenerowany z modelu
   7
 PL_ARIAL
  11
-370.585453100159
+409.2
  21
-3.25
+104.25
  31
 0.0
 100
@@ -17005,25 +17221,25 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 100
 AcDbText
  10
-420.585453100159
+531.2
  20
-413.25
+104.25
  30
 0.0
  40
-3.5
+2.5
   1
-9
+2026-09-25
   7
 PL_ARIAL
  11
-420.585453100159
+531.2
  21
-413.25
+104.25
  31
 0.0
 100
@@ -17039,25 +17255,25 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 100
 AcDbText
  10
-420.585453100159
+391.2
  20
-3.25
+109.6
  30
 0.0
  40
-3.5
+1.8
   1
-9
+REW.
   7
 PL_ARIAL
  11
-420.585453100159
+391.2
  21
-3.25
+109.6
  31
 0.0
 100
@@ -17073,25 +17289,25 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
+R-TABLICZKA
 100
 AcDbText
  10
-469.170906200318
+409.2
  20
-413.25
+109.6
  30
 0.0
  40
-3.5
+1.8
   1
-10
+OPIS ZMIANY
   7
 PL_ARIAL
  11
-469.170906200318
+409.2
  21
-413.25
+109.6
  31
 0.0
 100
@@ -17107,2595 +17323,11 @@ AcDbEntity
  67
 1
   8
-R-RAMKA
-100
-AcDbText
- 10
-469.170906200318
- 20
-3.25
- 30
-0.0
- 40
-3.5
-  1
-10
-  7
-PL_ARIAL
- 11
-469.170906200318
- 21
-3.25
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-12E
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-RAMKA
-100
-AcDbText
- 10
-519.3596979332274
- 20
-413.25
- 30
-0.0
- 40
-3.5
-  1
-11
-  7
-PL_ARIAL
- 11
-519.3596979332274
- 21
-413.25
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-12F
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-RAMKA
-100
-AcDbText
- 10
-519.3596979332274
- 20
-3.25
- 30
-0.0
- 40
-3.5
-  1
-11
-  7
-PL_ARIAL
- 11
-519.3596979332274
- 21
-3.25
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-130
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-RAMKA
-100
-AcDbText
- 10
-562.670906200318
- 20
-413.25
- 30
-0.0
- 40
-3.5
-  1
-12
-  7
-PL_ARIAL
- 11
-562.670906200318
- 21
-413.25
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-131
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-RAMKA
-100
-AcDbText
- 10
-562.670906200318
- 20
-3.25
- 30
-0.0
- 40
-3.5
-  1
-12
-  7
-PL_ARIAL
- 11
-562.670906200318
- 21
-3.25
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-132
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-RAMKA
-100
-AcDbText
- 10
-587.3032591414944
- 20
-383.25
- 30
-0.0
- 40
-3.5
-  1
-A
-  7
-PL_ARIAL
- 11
-587.3032591414944
- 21
-383.25
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-133
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-RAMKA
-100
-AcDbText
- 10
-13.303259141494436
- 20
-383.25
- 30
-0.0
- 40
-3.5
-  1
-A
-  7
-PL_ARIAL
- 11
-13.303259141494436
- 21
-383.25
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-134
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-RAMKA
-100
-AcDbText
- 10
-587.3032591414944
- 20
-333.25
- 30
-0.0
- 40
-3.5
-  1
-B
-  7
-PL_ARIAL
- 11
-587.3032591414944
- 21
-333.25
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-135
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-RAMKA
-100
-AcDbText
- 10
-13.303259141494436
- 20
-333.25
- 30
-0.0
- 40
-3.5
-  1
-B
-  7
-PL_ARIAL
- 11
-13.303259141494436
- 21
-333.25
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-136
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-RAMKA
-100
-AcDbText
- 10
-587.1629570747218
- 20
-283.25
- 30
-0.0
- 40
-3.5
-  1
-C
-  7
-PL_ARIAL
- 11
-587.1629570747218
- 21
-283.25
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-137
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-RAMKA
-100
-AcDbText
- 10
-13.162957074721781
- 20
-283.25
- 30
-0.0
- 40
-3.5
-  1
-C
-  7
-PL_ARIAL
- 11
-13.162957074721781
- 21
-283.25
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-138
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-RAMKA
-100
-AcDbText
- 10
-587.1629570747218
- 20
-233.25
- 30
-0.0
- 40
-3.5
-  1
-D
-  7
-PL_ARIAL
- 11
-587.1629570747218
- 21
-233.25
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-139
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-RAMKA
-100
-AcDbText
- 10
-13.162957074721781
- 20
-233.25
- 30
-0.0
- 40
-3.5
-  1
-D
-  7
-PL_ARIAL
- 11
-13.162957074721781
- 21
-233.25
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-13A
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-RAMKA
-100
-AcDbText
- 10
-587.3032591414944
- 20
-183.25
- 30
-0.0
- 40
-3.5
-  1
-E
-  7
-PL_ARIAL
- 11
-587.3032591414944
- 21
-183.25
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-13B
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-RAMKA
-100
-AcDbText
- 10
-13.303259141494436
- 20
-183.25
- 30
-0.0
- 40
-3.5
-  1
-E
-  7
-PL_ARIAL
- 11
-13.303259141494436
- 21
-183.25
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-13C
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-RAMKA
-100
-AcDbText
- 10
-587.4463434022258
- 20
-133.25
- 30
-0.0
- 40
-3.5
-  1
-F
-  7
-PL_ARIAL
- 11
-587.4463434022258
- 21
-133.25
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-13D
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-RAMKA
-100
-AcDbText
- 10
-13.446343402225756
- 20
-133.25
- 30
-0.0
- 40
-3.5
-  1
-F
-  7
-PL_ARIAL
- 11
-13.446343402225756
- 21
-133.25
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-13E
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-RAMKA
-100
-AcDbText
- 10
-587.0214626391097
- 20
-83.25
- 30
-0.0
- 40
-3.5
-  1
-G
-  7
-PL_ARIAL
- 11
-587.0214626391097
- 21
-83.25
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-13F
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-RAMKA
-100
-AcDbText
- 10
-13.021462639109698
- 20
-83.25
- 30
-0.0
- 40
-3.5
-  1
-G
-  7
-PL_ARIAL
- 11
-13.021462639109698
- 21
-83.25
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-140
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-RAMKA
-100
-AcDbText
- 10
-587.1629570747218
- 20
-33.25
- 30
-0.0
- 40
-3.5
-  1
-H
-  7
-PL_ARIAL
- 11
-587.1629570747218
- 21
-33.25
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-141
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-RAMKA
-100
-AcDbText
- 10
-13.162957074721781
- 20
-33.25
- 30
-0.0
- 40
-3.5
-  1
-H
-  7
-PL_ARIAL
- 11
-13.162957074721781
- 21
-33.25
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-142
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-RAMKA
-100
-AcDbText
- 10
-568.0726777197366
- 20
-0.525
- 30
-0.0
- 40
-1.8
-  1
-A2 (594×420)
-  7
-PL_ARIAL
- 11
-568.0726777197366
- 21
-0.525
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-143
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
 R-TABLICZKA
 100
 AcDbText
  10
-405.2
- 20
-100.0
- 30
-0.0
- 40
-1.8
-  1
-PRACOWNIA PROJEKTOWA
-  7
-PL_ARIAL
- 11
-405.2
- 21
-100.0
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-144
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-405.2
- 20
-96.1
- 30
-0.0
- 40
-2.5
-  1
-PRACOWNIA PROJEKTOWA — nazwa do uzupełnienia
-  7
-PL_ARIAL_B
- 11
-405.2
- 21
-96.1
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-145
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-405.2
- 20
-92.4
- 30
-0.0
- 40
-1.8
-  1
-adres pracowni do uzupełnienia
-  7
-PL_ARIAL
- 11
-405.2
- 21
-92.4
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-146
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-515.2
- 20
-100.0
- 30
-0.0
- 40
-1.8
-  1
-STADIUM
-  7
-PL_ARIAL
- 11
-515.2
- 21
-100.0
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-147
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-521.8565750624574
- 20
-93.5
- 30
-0.0
- 40
-5.0
-  1
-PT
-  7
-PL_ARIAL_B
- 11
-521.8565750624574
- 21
-93.5
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-148
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-540.2
- 20
-100.0
- 30
-0.0
- 40
-1.8
-  1
-BRANŻA
-  7
-PL_ARIAL
- 11
-540.2
- 21
-100.0
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-149
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-540.2
- 20
-96.26249999999999
- 30
-0.0
- 40
-2.5
-  1
-INSTALACJE
-  7
-PL_ARIAL_B
- 11
-540.2
- 21
-96.26249999999999
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-14A
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-540.2
- 20
-92.63749999999999
- 30
-0.0
- 40
-2.5
-  1
-SANITARNE (IS)
-  7
-PL_ARIAL_B
- 11
-540.2
- 21
-92.63749999999999
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-14B
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-405.2
- 20
-88.0
- 30
-0.0
- 40
-1.8
-  1
-INWESTOR
-  7
-PL_ARIAL
- 11
-405.2
- 21
-88.0
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-14C
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-405.2
- 20
-84.44999999999999
- 30
-0.0
- 40
-2.5
-  1
-(do uzupełnienia)
-  7
-PL_ARIAL
- 11
-405.2
- 21
-84.44999999999999
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-14D
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-405.2
- 20
-80.0
- 30
-0.0
- 40
-1.8
-  1
-OBIEKT / NAZWA ZAMIERZENIA BUDOWLANEGO
-  7
-PL_ARIAL
- 11
-405.2
- 21
-80.0
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-14E
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-405.2
- 20
-75.19999999999999
- 30
-0.0
- 40
-2.5
-  1
-Budynek mieszkalny jednorodzinny wolnostojący „Dom LAMELA”
-  7
-PL_ARIAL_B
- 11
-405.2
- 21
-75.19999999999999
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-14F
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-405.2
- 20
-69.5
- 30
-0.0
- 40
-1.8
-  1
-ADRES / LOKALIZACJA (NR DZIAŁKI, OBRĘB, JEDN. EWIDENCYJNA)
-  7
-PL_ARIAL
- 11
-405.2
- 21
-69.5
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-150
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-405.2
- 20
-65.716
- 30
-0.0
- 40
-1.8
-  1
-ul. Lipowa (fikcyjna), dz. nr ewid. 123/4, obręb 0005 Przykładowo, gm. Przykładowo (fikcyjna)
-  7
-PL_ARIAL
- 11
-405.2
- 21
-65.716
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-151
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-555.2
- 20
-69.5
- 30
-0.0
- 40
-1.8
-  1
-KAT. OBIEKTU
-  7
-PL_ARIAL
- 11
-555.2
- 21
-69.5
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-152
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-568.2933227344992
- 20
-65.07
- 30
-0.0
- 40
-3.5
-  1
-I
-  7
-PL_ARIAL_B
- 11
-568.2933227344992
- 21
-65.07
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-153
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-411.4673631614808
- 20
-60.35
- 30
-0.0
- 40
-1.8
-  1
-FUNKCJA
-  7
-PL_ARIAL
- 11
-411.4673631614808
- 21
-60.35
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-154
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-441.74312968430615
- 20
-60.35
- 30
-0.0
- 40
-1.8
-  1
-IMIĘ I NAZWISKO
-  7
-PL_ARIAL
- 11
-441.74312968430615
- 21
-60.35
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-155
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-480.9770156711333
- 20
-60.35
- 30
-0.0
- 40
-1.8
-  1
-SPECJALNOŚĆ, NR UPRAWNIEŃ
-  7
-PL_ARIAL
- 11
-480.9770156711333
- 21
-60.35
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-156
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-535.7051782875312
- 20
-60.35
- 30
-0.0
- 40
-1.8
-  1
-DATA
-  7
-PL_ARIAL
- 11
-535.7051782875312
- 21
-60.35
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-157
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-561.556438791733
- 20
-60.35
- 30
-0.0
- 40
-1.8
-  1
-PODPIS
-  7
-PL_ARIAL
- 11
-561.556438791733
- 21
-60.35
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-158
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-405.2
- 20
-54.6
- 30
-0.0
- 40
-1.8
-  1
-Projektant
-  7
-PL_ARIAL
- 11
-405.2
- 21
-54.6
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-159
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-432.2
- 20
-54.25
- 30
-0.0
- 40
-2.5
-  1
-[DO UZUPEŁNIENIA]
-  7
-PL_ARIAL
- 11
-432.2
- 21
-54.25
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-15A
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-475.2
- 20
-54.6
- 30
-0.0
- 40
-1.8
-  1
-[DO UZUPEŁNIENIA]
-  7
-PL_ARIAL
- 11
-475.2
- 21
-54.6
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-15B
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-405.2
- 20
-47.6
- 30
-0.0
- 40
-1.8
-  1
-Projektant (wsp.)
-  7
-PL_ARIAL
- 11
-405.2
- 21
-47.6
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-15C
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-432.2
- 20
-47.25
- 30
-0.0
- 40
-2.5
-  1
-[DO UZUPEŁNIENIA]
-  7
-PL_ARIAL
- 11
-432.2
- 21
-47.25
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-15D
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-475.2
- 20
-47.6
- 30
-0.0
- 40
-1.8
-  1
-[DO UZUPEŁNIENIA]
-  7
-PL_ARIAL
- 11
-475.2
- 21
-47.6
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-15E
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-405.2
- 20
-40.6
- 30
-0.0
- 40
-1.8
-  1
-Sprawdzający
-  7
-PL_ARIAL
- 11
-405.2
- 21
-40.6
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-15F
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-432.2
- 20
-40.6
- 30
-0.0
- 40
-1.8
-  1
-nie dotyczy (art. 20 ust. 3 pkt 2 PB)
-  7
-PL_ARIAL
- 11
-432.2
- 21
-40.6
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-160
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-475.2
- 20
-40.6
- 30
-0.0
- 40
-1.8
-  1
-—
-  7
-PL_ARIAL
- 11
-475.2
- 21
-40.6
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-161
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-405.2
- 20
-33.6
- 30
-0.0
- 40
-1.8
-  1
-Opracował
-  7
-PL_ARIAL
- 11
-405.2
- 21
-33.6
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-162
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-432.2
- 20
-33.25
- 30
-0.0
- 40
-2.5
-  1
-[DO UZUPEŁNIENIA]
-  7
-PL_ARIAL
- 11
-432.2
- 21
-33.25
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-163
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-475.2
- 20
-33.6
- 30
-0.0
- 40
-1.8
-  1
-[DO UZUPEŁNIENIA]
-  7
-PL_ARIAL
- 11
-475.2
- 21
-33.6
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-164
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-405.2
- 20
-28.0
- 30
-0.0
- 40
-1.8
-  1
-TYTUŁ RYSUNKU
-  7
-PL_ARIAL
- 11
-405.2
- 21
-28.0
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-165
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-405.2
- 20
-21.5
- 30
-0.0
- 40
-5.0
-  1
-SCHEMAT POMPY CIEPŁA, C.O. I C.W.U.
-  7
-PL_ARIAL_B
- 11
-405.2
- 21
-21.5
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-166
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-405.2
- 20
-16.0
- 30
-0.0
- 40
-1.8
-  1
-SKALA
-  7
-PL_ARIAL
- 11
-405.2
- 21
-16.0
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-167
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-413.456279809221
- 20
-11.57
- 30
-0.0
- 40
-3.5
-  1
-—
-  7
-PL_ARIAL_B
- 11
-413.456279809221
- 21
-11.57
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-168
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-429.2
- 20
-16.0
- 30
-0.0
- 40
-1.8
-  1
-FORMAT
-  7
-PL_ARIAL
- 11
-429.2
- 21
-16.0
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-169
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-433.777651601181
- 20
-11.95
- 30
-0.0
- 40
-2.5
-  1
-A2
-  7
-PL_ARIAL
- 11
-433.777651601181
- 21
-11.95
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-16A
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-445.2
- 20
-16.0
- 30
-0.0
- 40
-1.8
-  1
-DATA WYDANIA
-  7
-PL_ARIAL
- 11
-445.2
- 21
-16.0
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-16B
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-446.706904383375
- 20
-11.95
- 30
-0.0
- 40
-2.5
-  1
-2026-09-25
-  7
-PL_ARIAL
- 11
-446.706904383375
- 21
-11.95
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-16C
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-469.2
- 20
-16.0
- 30
-0.0
- 40
-1.8
-  1
-RODZAJ DOK.
-  7
-PL_ARIAL
- 11
-469.2
- 21
-16.0
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-16D
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-471.6760617760618
- 20
-12.216000000000001
- 30
-0.0
- 40
-1.8
-  1
-schemat instalacji
-  7
-PL_ARIAL
- 11
-471.6760617760618
- 21
-12.216000000000001
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-16E
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-497.2
- 20
-16.0
- 30
-0.0
- 40
-1.8
-  1
-NR RYSUNKU
-  7
-PL_ARIAL
- 11
-497.2
- 21
-16.0
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-16F
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-512.1037360890302
- 20
-11.57
- 30
-0.0
- 40
-3.5
-  1
-PT-IS-11
-  7
-PL_ARIAL_B
- 11
-512.1037360890302
- 21
-11.57
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-170
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-549.2
- 20
-16.0
- 30
-0.0
- 40
-1.8
-  1
-ARKUSZ
-  7
-PL_ARIAL
- 11
-549.2
- 21
-16.0
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-171
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-552.7233704292528
- 20
-11.95
- 30
-0.0
- 40
-2.5
-  1
-11/11
-  7
-PL_ARIAL
- 11
-552.7233704292528
- 21
-11.95
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-172
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-567.2
- 20
-16.0
- 30
-0.0
- 40
-1.8
-  1
-REW.
-  7
-PL_ARIAL
- 11
-567.2
- 21
-16.0
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-173
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-573.5854531001589
- 20
-11.57
- 30
-0.0
- 40
-3.5
-  1
-0
-  7
-PL_ARIAL_B
- 11
-573.5854531001589
- 21
-11.57
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-174
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-405.2
- 20
-104.25
- 30
-0.0
- 40
-2.5
-  1
-0
-  7
-PL_ARIAL
- 11
-405.2
- 21
-104.25
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-175
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-423.2
- 20
-104.25
- 30
-0.0
- 40
-2.5
-  1
-Wydanie — rysunek wygenerowany z modelu
-  7
-PL_ARIAL
- 11
-423.2
- 21
-104.25
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-176
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-545.2
- 20
-104.25
- 30
-0.0
- 40
-2.5
-  1
-2026-09-25
-  7
-PL_ARIAL
- 11
-545.2
- 21
-104.25
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-177
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-405.2
- 20
-109.6
- 30
-0.0
- 40
-1.8
-  1
-REW.
-  7
-PL_ARIAL
- 11
-405.2
- 21
-109.6
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-178
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-423.2
- 20
-109.6
- 30
-0.0
- 40
-1.8
-  1
-OPIS ZMIANY
-  7
-PL_ARIAL
- 11
-423.2
- 21
-109.6
- 31
-0.0
-100
-AcDbText
-  0
-TEXT
-  5
-179
-330
-1B
-100
-AcDbEntity
- 67
-1
-  8
-R-TABLICZKA
-100
-AcDbText
- 10
-545.2
+531.2
  20
 109.6
  30
@@ -19707,7 +17339,7 @@ DATA
   7
 PL_ARIAL
  11
-545.2
+531.2
  21
 109.6
  31
@@ -19717,7 +17349,7 @@ AcDbText
   0
 VIEWPORT
   5
-214
+1C8
 330
 1B
 100
@@ -19729,7 +17361,7 @@ R-RZUTNIA
 100
 AcDbViewport
  10
-266.7662957074722
+259.7662957074722
  20
 246.97354213036567
  30
@@ -20171,7 +17803,7 @@ AcDbPlotSettings
   2
 DWG to PDF.pc3
   4
-LAMELA_(594.00_x_420.00_MM)
+LAMELA_(580.00_x_420.00_MM)
   6
 
  40
@@ -20183,7 +17815,7 @@ LAMELA_(594.00_x_420.00_MM)
  43
 0.0
  44
-594.0
+580.0
  45
 420.0
  46
@@ -20239,7 +17871,7 @@ Arkusz PT-IS-11
  20
 -0.0
  11
-594.0
+580.0
  21
 420.0
  12
@@ -20813,7 +18445,7 @@ CREATED_BY_EZDXF
   3
 WRITTEN_BY_EZDXF
 350
-217
+1CB
   0
 DICTIONARYVAR
   5
@@ -20825,11 +18457,11 @@ DictionaryVariables
 280
 0
   1
-1.4.4 @ 2026-09-25T08:23:50.653885+00:00
+1.4.4 @ 2026-09-25T09:27:56.249739+00:00
   0
 DICTIONARYVAR
   5
-217
+1CB
 330
 2D
 100
@@ -20837,7 +18469,7 @@ DictionaryVariables
 280
 0
   1
-1.4.4 @ 2026-09-25T08:23:50.694239+00:00
+1.4.4 @ 2026-09-25T09:27:56.280653+00:00
   0
 ENDSEC
   0
