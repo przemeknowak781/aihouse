@@ -1435,3 +1435,71 @@ def detal_wylaz(m, opts: dict) -> Detal:
                      "ciągła z izolacją dachu; mostek liniowy krawędzi cokołu uwzględniony w U wyrobu (EN ISO 12567-2 / "
                      "deklaracja producenta)")
     return det
+
+
+# ================================================================================================ D — rura spustowa
+def rura_zewn(m, rid: str | None = None) -> tuple[dict, dict]:
+    """(rura spustowa zewnętrzna z modelu, dach) — pierwsza z trasą 'zewn' (albo o id rid)."""
+    for d in m.dachy():
+        for r in d.get("rury_spustowe") or []:
+            if (rid and r.get("id") == rid) or (not rid and r.get("trasa") == "zewn"):
+                return r, d
+    return {}, {}
+
+
+@rodzaj("rura_cokol", "RS")
+def detal_rura_cokol(m, opts: dict) -> Detal:
+    """Rura spustowa zewnętrzna przy cokole: obejmy na elementach montażowych ETICS (bez przebicia izolacji do muru),
+    czyszczak nad terenem, przejście do PVC-U w opasce, przejście przez izolację obwodową, kolano i odpływ do KD."""
+    import re
+    from shapely.geometry import Point as _Pt, box as _box
+    r, d = rura_zewn(m, opts.get("rura"))
+    det = detal_cokol(m, {"_xR": 1.40, "_yT": 0.85})
+    det.id, det.tytul = "D-14", f"Rura spustowa {r.get('id', 'RS')} przy cokole — czyszczak i odpływ do KD"
+    P = det.pom
+    x_out, tz, xR, yT, yB = P["x_out"], P["tz"], P["xR"], P["yT"], P["yB"]
+    det.opisy = [o for o in det.opisy if (o.tytul or "").startswith(("SZ", "POD")) or
+                 any(k in " ".join(o.teksty) for k in ("izolacja obwodowa",))]
+    det.wymiary, det.przerwy, det.spadki = [], [], []
+    det.okno = (P["xL"], yB, xR, yT)
+    dn = float(r.get("dn", 100)) / 1000.0
+    ro = dn / 2 + 0.005                                        # promień zewn. PVC 110 / rury 100
+    xa = x_out + 0.035 + ro                                    # oś rury (odsunięcie od lica ETICS 35 mm)
+    mc = re.search(r"czyszczak\s*(\d+[.,]\d+)\s*m", str(r.get("opis", "")))
+    h_cz = float(mc.group(1).replace(",", ".")) if mc else 0.5
+    y_c0, y_c1 = tz + h_cz - 0.12, tz + h_cz + 0.12            # czyszczak
+    y_k = tz - 0.85                                            # oś odejścia poziomego (≥ h_z 0,8 m pod XPS)
+    rk = 0.12                                                  # promień kolana (oś)
+    # pustka rury (odjęta od gruntu, opaski, XPS) i ścianki rury
+    ring = _Pt(xa + rk, y_k + rk).buffer(rk + ro, 64).difference(_Pt(xa + rk, y_k + rk).buffer(max(rk - ro, 0.01), 64))
+    det.otwory.append(ring.intersection(_box(xa - ro, y_k - ro, xa + rk, y_k + rk)))
+    det.otwor(xa - ro, y_k + rk, xa + ro, tz + 0.01)
+    det.otwor(xa + rk, y_k - ro, xR + 0.2, y_k + ro)
+    for sx in (-1, 1):
+        det.kontur([(xa + sx * (ro - 0.005), yT), (xa + sx * (ro - 0.005), y_c1)], zamkniety=False, pen=0.5)
+        det.kontur([(xa + sx * ro, y_c0), (xa + sx * ro, y_k + rk)], zamkniety=False, pen=0.5)
+    import numpy as np
+    for rr in (rk + ro, rk - ro):
+        a = np.linspace(np.pi, 1.5 * np.pi, 16)
+        det.kontur([(xa + rk + rr * np.cos(t_), y_k + rk + rr * np.sin(t_)) for t_ in a], zamkniety=False, pen=0.5)
+    for sy in (-1, 1):
+        det.kontur([(xa + rk, y_k + sy * ro), (xR + 0.1, y_k + sy * ro - 0.02 * (xR + 0.1 - xa - rk))],
+                   zamkniety=False, pen=0.5)
+    det.kontur([(xa - ro - 0.006, y_c0), (xa + ro + 0.006, y_c0), (xa + ro + 0.006, y_c1), (xa - ro - 0.006, y_c1)],
+               pen=0.5)
+    det.kontur([(xa + ro + 0.006, y_c0 + 0.03), (xa + ro + 0.02, y_c0 + 0.03), (xa + ro + 0.02, y_c1 - 0.03),
+                (xa + ro + 0.006, y_c1 - 0.03)], zamkniety=False, pen=0.35)
+    # otulina nad XPS obwodowym, uszczelnienie przejścia przez XPS
+    y_x0, y_x1 = tz - P["gl"] - P["d_n"], tz - P["gl"]
+    for sx in (-1, 1):
+        det.rect(xa + sx * ro, tz - 0.02, xa + sx * (ro + 0.02), y_x1, "OTULINA")
+        det.rect(xa + sx * ro, y_x0, xa + sx * (ro + 0.008), y_x1, "PIANKA")
+    # obejma dystansowa na elemencie montażowym ETICS
+    y_o = yT - 0.18
+    x_iz0 = x_out - P["d_x"] if False else P["xs1"]
+    det.rect(x_iz0, y_o - 0.035, x_out - 0.01, y_o + 0.035, "PIANKA")
+    det.kontur([(x_out - 0.06, y_o), (xa - ro, y_o)], zamkniety=False, pen=0.5)
+    det.kontur([(xa - ro - 0.004, y_o - 0.015), (xa - ro - 0.004, y_o + 0.015)], zamkniety=False, pen=0.7)
+    det.kontur([(xa + ro + 0.004, y_o - 0.015), (xa + ro + 0.004, y_o + 0.015)], zamkniety=False, pen=0.7)
+    return _rura_opisy(det, dict(r=r, d=d, xa=xa, ro=ro, y_c0=y_c0, y_c1=y_c1, y_k=y_k, rk=rk, y_o=y_o, h_cz=h_cz,
+                                 y_x0=y_x0, y_x1=y_x1, x_iz0=x_iz0))

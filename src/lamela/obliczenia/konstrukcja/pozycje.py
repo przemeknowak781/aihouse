@@ -1993,43 +1993,59 @@ class AnalizaKonstrukcji:
                     arr = top.get(cs) + pr["top_a"].get(cs)
                     msk = (top.s >= o.s0) & (top.s <= o.s1)
                     q[cs] = float(arr[msk].mean()) if msk.any() else 0.0
-                q["G"] = q.get("G", 0.0) + gm2 * max(gap, 0) + t * hn * p.ciezar_zelbetu
-                qd = max(p.gG_sup * q["G"] + p.gQ * 0.7 * sum(v for c, v in q.items() if c in ("QA", "S2", "H")),
-                         p.xi * p.gG_sup * q["G"] + p.gQ * max([v for c, v in q.items() if c in ("QA", "S2", "H")] or [0])
-                         + p.gQ * 0.7 * 0)
-                qqp = q["G"] + p.psi_of("A")[2] * q.get("QA", 0.0)
-                kl = p.beton_dla("nadproze")[1]
-                beton = Beton.z_parametrow(kl, p)
-                c = zelbet.otulina(p.ekspozycja.get("nadproze", "XC1"), 12, p, fi_strzemion=6).c_nom
-                d = hn - c / 1000 - 0.006
-                nid = f"N-{o.id}"
-                poz = Pozycja("", nid, f"Nadproże {nid} nad otworem {o.id} w ścianie {w.id} (światło {f(o.szer)} m)", "nadproze")
-                MEd = qd * Lef ** 2 / 8
-                VEd = qd * o.szer / 2
-                w0 = Wynik(nazwa=f"{nid} — schemat i obciążenie")
-                w0.krok("Rozpiętość obliczeniowa", "l_eff = l_n + min(a; h)", f"{f(o.szer)} + {f(min(a, hn))}", Lef, "m", zrodlo="5.3.2.2")
-                w0.krok("Przekrój", "b × h", "", f"{f(t * 100, 0)} × {f(hn * 100, 0)} cm" + (" (zespolone z płytą stropu)" if zint else ""))
-                w0.krok("Obciążenie (średnio nad otworem; bez efektu przesklepienia [UPR])", "g_k; q_k",
-                        "", f"{f(q['G'], 2)}; {f(sum(v for c_, v in q.items() if c_ != 'G'), 2)}", "kN/m")
-                w0.krok("Obciążenie obliczeniowe", "q_d", "", qd, "kN/m")
-                w0.krok("Moment", "M_Ed = q_d·l_eff²/8", f"{f(qd)}·{f(Lef, 3)}²/8", MEd, "kNm")
-                w0.krok("Siła poprzeczna", "V_Ed = q_d·l_n/2", f"{f(qd)}·{f(o.szer)}/2", VEd, "kN")
-                poz.wyniki.append(w0)
-                zg = zelbet.zginanie_prostokat(MEd, t, hn, d, beton, self.stal, nazwa=f"{nid} — zginanie")
-                n, fi, _, As = zelbet.dobierz_belka(max(zg.As_req, zg.As_min), t, c, 6, srednice=(10, 12, 14, 16, 20))
-                zg.warunek("Zbrojenie dolne", max(zg.As_req, zg.As_min), As, "mm²", "6.1", nd=0, symbol_E="A_s,req", symbol_R="A_s,prov")
-                poz.wyniki.append(zg)
-                sc = zelbet.scinanie_strzemiona(VEd, t, d, As, beton, self.stal, 6, 2, nazwa=f"{nid} — ścinanie")
-                poz.wyniki.append(sc)
-                wel = 5 * qqp * Lef ** 4 / 384
-                poz.wyniki.append(zelbet.ugiecie_komplet(Lef, 1.0, hn, d, zg.As_req, As, beton, qqp * Lef ** 2 / 8, wel, p, b=t,
-                                                         stal=self.stal, nazwa=f"{nid} — ugięcie"))
-                mur = self._mur_sciany(w)
-                if mur is not None:
-                    R = qd * Lef / 2
-                    a1 = min(s0, w.L - s1)
-                    poz.wyniki.append(murm.docisk(R, max(a1, 0.0), a, t, max(w.z_do - w.z_od, 0.5), mur,
-                                                  nazwa=f"{nid} — docisk na murze (oparcie {f(a * 100, 0)} cm)"))
+                q0 = dict(q)
+                # wysokość nadproża: z założenia (25 cm / zespolone z płytą); gdy warunki niespełnione lub pręty nie
+                # mieszczą się w ≤ 2 warstwach — większa wysokość w granicach muru nad otworem, na końcu nadproże
+                # zespolone z płytą stropu (h = mur nad otworem + płyta) [ZAŁ]
+                kand = [hn] + ([h_ for h_ in (0.30, 0.35, 0.40, 0.45, 0.50, 0.60) if hn < h_ <= gap + 1e-6] if not zint else [])
+                if not zint and slab is not None and gap + slab.h > kand[-1] + 1e-6:
+                    kand.append(gap + slab.h)
+                for i_h, hn in enumerate(kand):
+                    zint = zint or (slab is not None and abs(hn - (gap + slab.h)) < 1e-6)
+                    q = dict(q0)
+                    q["G"] = q.get("G", 0.0) + gm2 * max(gap - (hn if not zint else gap), 0) + t * hn * p.ciezar_zelbetu
+                    qd = max(p.gG_sup * q["G"] + p.gQ * 0.7 * sum(v for c, v in q.items() if c in ("QA", "S2", "H")),
+                             p.xi * p.gG_sup * q["G"] + p.gQ * max([v for c, v in q.items() if c in ("QA", "S2", "H")] or [0])
+                             + p.gQ * 0.7 * 0)
+                    qqp = q["G"] + p.psi_of("A")[2] * q.get("QA", 0.0)
+                    kl = p.beton_dla("nadproze")[1]
+                    beton = Beton.z_parametrow(kl, p)
+                    c = zelbet.otulina(p.ekspozycja.get("nadproze", "XC1"), 12, p, fi_strzemion=6).c_nom
+                    d = hn - c / 1000 - 0.006
+                    nid = f"N-{o.id}"
+                    poz = Pozycja("", nid, f"Nadproże {nid} nad otworem {o.id} w ścianie {w.id} (światło {f(o.szer)} m)", "nadproze")
+                    MEd = qd * Lef ** 2 / 8
+                    VEd = qd * o.szer / 2
+                    w0 = Wynik(nazwa=f"{nid} — schemat i obciążenie")
+                    w0.krok("Rozpiętość obliczeniowa", "l_eff = l_n + min(a; h)", f"{f(o.szer)} + {f(min(a, hn))}", Lef, "m", zrodlo="5.3.2.2")
+                    w0.krok("Przekrój", "b × h", "", f"{f(t * 100, 0)} × {f(hn * 100, 0)} cm" + (" (zespolone z płytą stropu)" if zint else ""))
+                    w0.krok("Obciążenie (średnio nad otworem; bez efektu przesklepienia [UPR])", "g_k; q_k",
+                            "", f"{f(q['G'], 2)}; {f(sum(v for c_, v in q.items() if c_ != 'G'), 2)}", "kN/m")
+                    w0.krok("Obciążenie obliczeniowe", "q_d", "", qd, "kN/m")
+                    w0.krok("Moment", "M_Ed = q_d·l_eff²/8", f"{f(qd)}·{f(Lef, 3)}²/8", MEd, "kNm")
+                    w0.krok("Siła poprzeczna", "V_Ed = q_d·l_n/2", f"{f(qd)}·{f(o.szer)}/2", VEd, "kN")
+                    poz.wyniki.append(w0)
+                    zg = zelbet.zginanie_prostokat(MEd, t, hn, d, beton, self.stal, nazwa=f"{nid} — zginanie")
+                    n, fi, _rows, As = zelbet.dobierz_belka(max(zg.As_req, zg.As_min), t, c, 6, srednice=(10, 12, 14, 16, 20))
+                    zg.warunek("Zbrojenie dolne", max(zg.As_req, zg.As_min), As, "mm²", "6.1", nd=0, symbol_E="A_s,req", symbol_R="A_s,prov")
+                    poz.wyniki.append(zg)
+                    sc = zelbet.scinanie_strzemiona(VEd, t, d, As, beton, self.stal, 6, 2, nazwa=f"{nid} — ścinanie")
+                    poz.wyniki.append(sc)
+                    wel = 5 * qqp * Lef ** 4 / 384
+                    poz.wyniki.append(zelbet.ugiecie_komplet(Lef, 1.0, hn, d, zg.As_req, As, beton, qqp * Lef ** 2 / 8, wel, p, b=t,
+                                                             stal=self.stal, nazwa=f"{nid} — ugięcie"))
+                    mur = self._mur_sciany(w)
+                    if mur is not None:
+                        R = qd * Lef / 2
+                        a1 = min(s0, w.L - s1)
+                        poz.wyniki.append(murm.docisk(R, max(a1, 0.0), a, t, max(w.z_do - w.z_od, 0.5), mur,
+                                                      nazwa=f"{nid} — docisk na murze (oparcie {f(a * 100, 0)} cm)"))
+                    ok_ = all(w_.ok for r_ in poz.wyniki for w_ in r_.warunki) and _rows <= 2
+                    if ok_:
+                        break
+                if i_h > 0:
+                    poz.uwagi.append(f"Wysokość nadproża zwiększona do {f(hn * 100, 0)} cm (warunki nośności/ugięcia lub "
+                                     "rozmieszczenie prętów przy wysokości wyjściowej) [ZAŁ].")
                 poz.przyjeto.append(f"{nid}: {'nadproże zespolone z płytą' if zint else 'nadproże żelbetowe'} "
                                     f"{f(t * 100, 0)}×{f(hn * 100, 0)} cm, {beton.klasa}, dołem {n}φ{fi}, strzemiona {sc.strzemiona}, "
                                     f"oparcie ≥ {f(a * 100, 0)} cm.")

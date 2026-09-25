@@ -100,10 +100,18 @@ def rysuj_belke(vp, placer: Placer, B: KD.BelkaZ, pr: dict, X0: float, Y0: float
     vp.geom(gs, L_OBR, pen="gruba")
     fs = B.strz[0] / 1000.0
     vp.rect(sx + c + fs / 2, y0 + c + fs / 2, sx + B.b - c - fs / 2, y1 - c - fs / 2, L_ZBR, pen=0.35)
-    for n_, fi, zz in ((B.dol[0], fd, zd), (B.gora[0], fg, zg)):
-        xx = np.linspace(sx + cm + fi / 2, sx + B.b - cm - fi / 2, max(n_, 2)) if n_ > 1 else [sx + B.b / 2]
-        for q in xx:
-            vp.fill(Point(q, zz).buffer(max(fi / 2, 0.45 * k), 16), L_ZBR, "#000000")
+    n_row, rows = warstwy_pretow(B, cm)
+    for n_, fi, zz, sg in ((B.dol[0], fd, zd, 1.0), (B.gora[0], fg, zg, -1.0)):
+        left = n_
+        r = 0
+        while left > 0:
+            nn = min(left, n_row) if sg > 0 else left
+            xx = np.linspace(sx + cm + fi / 2, sx + B.b - cm - fi / 2, max(nn, 2)) if nn > 1 else [sx + B.b / 2]
+            for q in xx:
+                vp.fill(Point(q, zz + sg * r * (fi + max(fi / 1000, 0.021))).buffer(max(fi / 2, 0.45 * k), 16), L_ZBR,
+                        "#000000")
+            left -= nn
+            r += 1
     dims.dim_h(vp, [sx, sx + B.b], y0 - 6 * k, None, layer="K-WYMIARY")
     vp.text((sx + B.b / 2, y1 + 4 * k), "A-A", 3.5, 0, "center", "baseline", L_OPS, style="bold")
     placer.add(gs.buffer(8 * k), "area", 1.0)
@@ -163,16 +171,26 @@ def podpory_belki(m, B: KD.BelkaZ) -> list:
     return sorted(uniq.values())
 
 
+def warstwy_pretow(B: KD.BelkaZ, cm_m: float) -> tuple[int, int]:
+    """(prętów w warstwie, liczba warstw) — odstęp w świetle ≥ max(φ; d_g + 5; 20 mm) (PN-EN 1992-1-1 8.2(2))."""
+    fi = B.dol[1]
+    smin = max(fi, 16 + 5, 20)
+    n_row = max(int((B.b * 1000 - 2 * cm_m * 1000 + smin) // (fi + smin)), 1)
+    return n_row, int(math.ceil(B.dol[0] / n_row))
+
+
 def kontrola_belki(D, B: KD.BelkaZ, pr: dict, arkusz: str):
     from ..obliczenia.konstrukcja.materialy import pole_preta
     As_d = B.dol[0] * pole_preta(B.dol[1])
     As_g = B.gora[0] * pole_preta(B.gora[1])
-    smin = max(B.dol[1], 16 + 5, 20)
-    miesci = B.dol[0] * B.dol[1] + (B.dol[0] - 1) * smin <= B.b * 1000 - 2 * pr["cm"] * 1000 + 1e-6
+    n_row, rows = warstwy_pretow(B, pr["cm"])
+    miesci = rows <= 2
     uw = "; ".join(B.niesp[:2])
+    if rows == 2:
+        uw = (uw + "; " if uw else "") + f"pręty dolne w 2 warstwach ({n_row} + {B.dol[0] - n_row})"
     if not miesci:
-        uw = (uw + "; " if uw else "") + (f"{B.dol[0]}Ø{B.dol[1]} nie mieści się w jednej warstwie przy b = "
-                                          f"{B.b * 100:.0f} cm (odstęp w świetle ≥ {smin} mm — 8.2(2))")
+        uw = (uw + "; " if uw else "") + (f"{B.dol[0]}Ø{B.dol[1]} nie mieści się w 2 warstwach przy b = "
+                                          f"{B.b * 100:.0f} cm (8.2(2))")
     KD.rejestruj(D, B.id, "dołem (przęsło)", B.poz, B.As_dol[0], B.As_dol[1], As_d, f"{B.dol[0]}Ø{B.dol[1]}", jedn="mm²",
                  As_max=0.04 * B.b * B.h * 1e6, arkusz=arkusz, uwagi=uw, wymuszone_ok=miesci and not B.niesp)
     KD.rejestruj(D, B.id, "górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1))", B.poz, max(B.As_gora[0], 0.15 * As_d), 0.0,

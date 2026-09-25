@@ -493,7 +493,7 @@ $SKPOLY
   9
 $TDCREATE
  40
-2461309.2291782405
+2461309.2330439813
   9
 $TDUCREATE
  40
@@ -501,7 +501,7 @@ $TDUCREATE
   9
 $TDUPDATE
  40
-2461309.2291782405
+2461309.2330439813
   9
 $TDUUPDATE
  40
@@ -933,11 +933,11 @@ $PSTYLEMODE
   9
 $FINGERPRINTGUID
   2
-{2B77FD82-601C-4CBE-9547-4BFBE6AC6FCD}
+{A76E38D4-4B37-4051-B2A1-03C8178ABBDD}
   9
 $VERSIONGUID
   2
-{6FB2556F-81E4-4DC7-B0D5-17BD5DBAFA00}
+{42F4D08D-71ED-4863-8F7A-F0C23CECDF5B}
   9
 $EXTNAMES
 290
@@ -60775,7 +60775,7 @@ AcDbText
  40
 1.25
   1
-znaki wg zał. 4 rozp. w sprawie BDOT500 i mapy zasadniczej (Dz.U. 2021 poz. 1385) [SPRAWDŹ numer w
+znaki wg zał. 4 rozp. w sprawie BDOT500 i mapy zasadniczej (Dz.U. 2021 poz. 1385; oba akty
   7
 PL_ARIAL
  11
@@ -60807,7 +60807,7 @@ AcDbText
  40
 1.25
   1
-ELI].
+zweryfikowane w ELI 25.09.2026 — status: obowiązujące).
   7
 PL_ARIAL
  11
@@ -76631,7 +76631,7 @@ AcDbText
  40
 1.8
   1
-Rysunek wygenerowany automatycznie z modelu /home/user/aihouse/model/budynek.yaml (wersja 1.0, 2026-09-25) — generatory lamela.views.
+Rysunek wygenerowany automatycznie z modelu model/budynek.yaml (wersja 1.0, 2026-09-25) — generatory lamela.views.
   7
 PL_ARIAL
  11
@@ -81259,7 +81259,7 @@ DictionaryVariables
 280
 0
   1
-1.4.4 @ 2026-09-25T05:30:01.621965+00:00
+1.4.4 @ 2026-09-25T05:35:35.209855+00:00
   0
 DICTIONARYVAR
   5
@@ -81271,7 +81271,7 @@ DictionaryVariables
 280
 0
   1
-1.4.4 @ 2026-09-25T05:30:01.765100+00:00
+1.4.4 @ 2026-09-25T05:35:35.349699+00:00
   0
 ENDSEC
   0

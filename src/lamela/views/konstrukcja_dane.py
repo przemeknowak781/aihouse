@@ -349,6 +349,7 @@ class PolePl:
     eta: float = 0.0
     niesp: list = field(default_factory=list)
     V: float = 0.0
+    sc_zbr: dict | None = None      # zbrojenie na ścinanie płyty (biblioteka): opis, φ, s, ramiona/m, podpora, V
 
 
 @dataclass
@@ -461,6 +462,7 @@ def _plyty(an, D):
                 pol.eta = max((w.eta for r_ in sp.wyniki for w in r_.warunki), default=0.0)
                 pol.niesp = warunki_niespelnione(sp.wyniki)
                 pol.V = float(dane_pol.get(c["id"], {}).get("V", 0.0))
+                pol.sc_zbr = dane_pol.get(c["id"], {}).get("sc_zbr")
                 el.pola.append(pol)
             lv.elementy.append(el)
         if lv.elementy:
