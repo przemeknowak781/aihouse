@@ -29,7 +29,7 @@ Belka nieskończona na podłożu sprężystym (Hetényi 1946): ugięcie pod sił
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Nośność podłoża (GEO, DA2*) | V_d = 13425,8 kN | R_d = 224314,1 kN | 6% | spełniony | PN-EN 1997-1 (6.1), NA.2.6 |
+| Nośność podłoża (GEO, DA2*) | V_d = 13424,5 kN | R_d = 224314,1 kN | 6% | spełniony | PN-EN 1997-1 (6.1), NA.2.6 |
 
 > Parametry gruntu PRZYKŁADOWE (brief) — w II kat. geotechnicznej wymagane badania CPT/DPL (W-282, E-04).
 
@@ -107,8 +107,8 @@ Belka nieskończona na podłożu sprężystym (Hetényi 1946): ugięcie pod sił
 | Kierunek | M_Ed ekstremalny [kNm/m] | A_s,req maks. [mm²/m] | A_s,req 90 % pola płyty [mm²/m] |
 |---|---:|---:|---:|
 | dol_x | 577.9 | 2898 | 709 |
-| dol_y | 838.9 | 5252 | 949 |
-| gora_x | -2046.2 | 9861 | 1387 |
+| dol_y | 838.9 | 5252 | 948 |
+| gora_x | -2046.2 | 9860 | 1387 |
 | gora_y | -1251.4 | 6987 | 2005 |
 
 Elementy z μ > μ_lim — przekrój podwójnie zbrojony: 16 z 2865 (A_s2,max = 1840 mm²/m; A_s2 = ΔM/(σ_s2·(d − a₂)), ΔM = M_Ed − μ_lim·b·d²·η·f_cd, σ_s2 = min(f_yd; E_s·ε_cu3·(1 − a₂/x_lim)); A_s2 dodane do wymagania warstwy przeciwnej, A_s1 = A_s,lim + A_s2·σ_s2/f_yd).

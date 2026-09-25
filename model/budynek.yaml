@@ -600,7 +600,7 @@ wezly:
   - {id: WZ-06, nazwa: Krawędź ST3 (PL-3) — łącznik termoizolacyjny przy attyce bryły A, typ: plyta_wspornikowa_lacznik, przegrody: [OK1, SD1, SZ2], dlugosc: 25.05}
   - {id: WZ-07, nazwa: Strop P2 nad powietrzem zewnętrznym (ST2Z) — krawędzie wspornika bryły A, typ: strop_zewn_krawedz, przegrody: [POD-1, SUF-ZEW, SZL, SZ1], dlugosc: 13.45}
   - {id: WZ-08, nazwa: 'Cokół: ściana zewn. – płyta fundamentowa na XPS (część ogrzewana)', typ: sciana_grunt, przegrody: [SZ1, POD-0], dlugosc: 43.4}
-  - {id: WZ-09, nazwa: 'Połączenia dom–garaż nieogrzewany (ściany osi E i 2 z płytą i stropem; docieplenie pasem 1,0 m — SUF-G)', typ: polaczenie_nieogrz, przegrody: [SWG, POD-0, DZ1, SUF-G], dlugosc: 24.5}
+  - {id: WZ-09, nazwa: 'Połączenia dom–garaż nieogrzewany (ściany osi E i 2 z płytą i stropem; docieplenie pasem 1,0 m — SUF-G)', typ: polaczenie_nieogrz, przegrody: [SWG, POD-0, DZ1, SUF-G], dlugosc: 24.5, blok_u_podstawy: {mat: BET_KOM_600, h: 0.24}}
   - {id: WZ-10, nazwa: Strop pośredni ST1/ST2 – ściana zewn. z ETICS ciągłym (wieniec), typ: strop_posredni, przegrody: [POD-1, SZ1], dlugosc: 55.12}
   - {id: WZ-11, nazwa: 'Ościeża okien/drzwi — ciepły montaż (rama 5 cm w murze, 4 cm w izolacji, zakład izolacji 3 cm na ramę)', typ: oscieze, przegrody: [SZ1, SZ2, SZL], dlugosc: 96.28, wariant: czesciowo}
   - {id: WZ-11N, nazwa: Nadproża — BEZ kaset osłon w ociepleniu (kasety w okapach / ramie C / szczelinie lamel / nadstawne), typ: nadproze, przegrody: [SZ1, SZ2, SZL], dlugosc: 45.03, wariant: czesciowo}

@@ -850,80 +850,31 @@ class AudytWT:
         return min(zmin + float(d.get("spadek") or 0.02) * dist, zmax)
 
     def wysokosc(self):
+        """Wysokość zabudowy (upzp art. 2 pkt 30 lit. a) i wysokość budynku wg WT §6 — WYŁĄCZNIE z ``lamela.wskazniki``
+        (runda 2, K-3/K-11: jedno źródło; definicje — docs/10_podstawy_prawne/weryfikacja_upzp_art2_definicje.md). Wariant
+        od najniższego terenu (t_min) — tylko informacyjnie."""
+        from lamela.wskazniki import wskazniki
         R, A, m = self.R, self.A, self.m
         z0 = m.zero_abs
-        # --- obwód ścian parteru (teren przy licu)
-        p0 = m.obrys_kondygnacji(min(self.kond, key=lambda k: self.kond[k].rzedna))
-        ring = LineString(p0.exterior.coords)
-        vals_i, vals_p = [], []
-        for s in np.arange(0, ring.length, 0.25):
-            q = ring.interpolate(s)
-            # punkt 0,3 m na zewnątrz lica
-            q2 = ring.interpolate(min(s + 0.01, ring.length))
-            t = np.array([q2.x - q.x, q2.y - q.y])
-            if np.hypot(*t) == 0:
-                continue
-            t /= np.hypot(*t)
-            nrm = np.array([t[1], -t[0]])
-            pt = np.array([q.x, q.y]) + nrm * 0.30
-            if p0.contains(Point(*pt)):
-                pt = np.array([q.x, q.y]) - nrm * 0.30
-            X, Y = self.U.p(pt)
-            a, b = self.T.istn(X, Y), self.T.proj_(X, Y, r=2.0)
-            if a is not None:
-                vals_i.append(a)
-            if b is not None:
-                vals_p.append(b)
-        t_i = (min(vals_i), max(vals_i)) if vals_i else (None, None)
-        t_p = (min(vals_p), max(vals_p)) if vals_p else (None, None)
-        lows = [v for v in (t_i[0], t_p[0]) if v is not None]
-        highs = [v for v in (t_i[1], t_p[1]) if v is not None]
-        t_min = min(lows)
-        t_sr = (min(lows) + min(highs)) / 2
-        # --- najwyższe punkty
-        top = []
-        for d in m.dachy():
-            zmin, zsr, zmax = self._pokrycie(d)
-            att = d.get("attyka") or {}
-            top.append((zsr + float(att.get("wys_nad_pokryciem", 0)), f"attyka {d['id']}"))
-            top.append((zmax, f"pokrycie {d['id']} (max, klin)"))
-        for w in m.wsporniki():
-            top.append((float(w["wierzch"]), w["id"]))
-        for lm in m.lamele():
-            top.append((float(lm["z_do"]), lm["id"]))
-        went = ((self.B.get("energia") or {}).get("wentylacja") or {})
-        for k in ("czerpnia", "wyrzutnia"):
-            if went.get(k) and len(went[k]) >= 3:
-                top.append((float(went[k][2]), k))
-        z_top, el_top = max(top)
+        W = wskazniki(m)
+        wz, w6 = W["wysokosc_zabudowy"], W["wysokosc_WT6"]
+        H_sr, t_min, t_max, t_sr = float(wz["wartosc"]), float(wz["t_min"]), float(wz["t_max"]), float(wz["t_sr"])
+        z_top, el_top = float(wz["z_top"]), str(wz["element"])
         H_upzp_min = z0 + z_top - t_min
-        H_upzp_sr = z0 + z_top - t_sr
         lim, rez = R.v("wys_zabudowy_max", 11.0), R.v("wys_zabudowy_rezerwa", 0.30)
-        A.add("MPZP", "wysokość zabudowy (upzp art. 2 pkt 30)", f"od najniższego terenu {f2(t_min)} do {el_top} (+{f2(z_top, 3)})",
-              f"{f2(H_upzp_min)} m (od średniej {f2(t_sr)}: {f2(H_upzp_sr)} m)", f"≤ {f2(lim)} (z rezerwą ≤ {f2(lim - rez)})",
-              "OK" if H_upzp_min <= lim - rez else ("UWAGA" if H_upzp_min <= lim else "NIEZGODNE"),
-              R.zr("wys_zabudowy_max", "MPZP") + "; rejestr D-15")
-        # --- WT §6: teren przy najniżej położonym wejściu → najwyższy punkt stropodachu nad pomieszczeniami
-        wejscia = []
-        for o in m.otwory():
-            if o.typ not in TYPY_WEJSC or o.kierunek_zewn is None:
-                continue
-            c = o.srodek + np.array(o.kierunek_zewn) * (abs(o.sciana.face_t(o.sciana.ext_side)) + 0.6)
-            X, Y = self.U.p(c)
-            wejscia.append((self.T.nizsza(X, Y), o.id))
-        t_we, o_we = min(w for w in wejscia if w[0] is not None)
-        z_str = []
-        for d in m.dachy():
-            zmin, zsr, zmax = self._pokrycie(d)
-            z_str.append((zmax, d["id"]))
-        z_s, d_s = max(z_str)
-        H_wt = z0 + z_s - t_we
-        A.add("WT", "wysokość budynku wg WT §6", f"teren przy wejściu {o_we}: {f2(t_we)} → wierzch {d_s} z izol. (+{f2(z_s, 3)})",
+        A.add("MPZP", "wysokość zabudowy (upzp art. 2 pkt 30 lit. a — lamela.wskazniki)",
+              f"od średniej t_śr = ({f2(t_min)} + {f2(t_max)})/2 = {f2(t_sr)} do {el_top} (+{f2(z_top, 3)})",
+              f"{f2(H_sr)} m (informacyjnie od t_min {f2(t_min)}: {f2(H_upzp_min)} m)", f"≤ {f2(lim)} (z rezerwą ≤ {f2(lim - rez)})",
+              "OK" if H_sr <= lim - rez else ("UWAGA" if H_sr <= lim else "NIEZGODNE"),
+              R.zr("wys_zabudowy_max", "MPZP") + "; " + str(wz["podstawa"]) + "; rejestr D-15")
+        H_wt, t_we, o_we = float(w6["wartosc"]), float(w6["H_teren"]), str(w6["wejscie"])
+        A.add("WT", "wysokość budynku wg WT §6 (lamela.wskazniki)",
+              f"teren przy wejściu {o_we}: {f2(t_we)} → wierzch {w6['dach']} z izol. (+{f2(float(w6['z_top']), 3)})",
               f"{f2(H_wt)} m", f"≤ {f2(R.v('wys_budynku_grupa_N_max', 12.0))} (N); ≤ {f2(lim)} (MPZP)",
               chk(H_wt <= min(lim, R.v("wys_budynku_grupa_N_max", 12.0))), R.zr("wys_budynku_grupa_N_max", "WT §6, §8") + "; [W-063]")
-        A.info["wysokosc"] = dict(teren_istn=t_i, teren_proj=t_p, t_min=t_min, t_sr=t_sr, z_top=z_top, el_top=el_top,
-                                  H_upzp=H_upzp_min, H_upzp_sr=H_upzp_sr, H_WT=H_wt, wejscie=o_we, t_wejscia=t_we,
-                                  wejscia=wejscia)
+        A.info["wysokosc"] = dict(t_min=t_min, t_max=t_max, t_sr=t_sr, z_top=z_top, el_top=el_top, H_upzp=H_sr,
+                                  H_upzp_sr=H_sr, H_upzp_od_t_min=H_upzp_min, H_WT=H_wt, wejscie=o_we, t_wejscia=t_we,
+                                  zrodlo="lamela.wskazniki")
 
     # ================================================================== 7. INNE WYMAGANIA WT / PZT
     def inne(self):

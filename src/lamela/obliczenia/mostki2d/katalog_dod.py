@@ -359,7 +359,9 @@ def wezly_garazu(model, e: dict):
     out = []
     L_sc = sum(s.L for s in sciany)
     if pod_dom and (model.fundamenty() or {}).get("typ") == "plyta":
-        w = D.wezel_garaz_plyta(_W(model, kg), _W(model, pod_dom), _W(model, pod_gar), id=f"{e['id']}a",
+        bl = e.get("blok_u_podstawy") if isinstance(e.get("blok_u_podstawy"), dict) else None   # runda 2: {mat, h} z modelu
+        blok = (_mat(model, bl["mat"]), float(bl["h"])) if bl and bl.get("mat") and bl.get("h") else None
+        w = D.wezel_garaz_plyta(_W(model, kg), _W(model, pod_dom), _W(model, pod_gar), blok=blok, id=f"{e['id']}a",
                                 nazwa=f"Ściana dom–garaż ({kg}) na płycie fundamentowej ({pod_dom} / {pod_gar})")
         w.dane["geometria z modelu"] = f"ściany {', '.join(s.id for s in sciany)} (Σ {L_sc:.2f} m) na płycie PF"
         out.append((w, L_sc))

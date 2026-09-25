@@ -1151,7 +1151,10 @@ WEZLY = [
     {"id": "WZ-08", "nazwa": "Cokół: ściana zewn. – płyta fundamentowa na XPS (część ogrzewana)", "typ": "sciana_grunt", "przegrody": ["SZ1", "POD-0"],
      "dlugosc": L_COKOL},
     {"id": "WZ-09", "nazwa": "Połączenia dom–garaż nieogrzewany (ściany osi E i 2 z płytą i stropem; docieplenie pasem 1,0 m — SUF-G)",
-     "typ": "polaczenie_nieogrz", "przegrody": ["SWG", "POD-0", "DZ1", "SUF-G"], "dlugosc": L_GAR},
+     "typ": "polaczenie_nieogrz", "przegrody": ["SWG", "POD-0", "DZ1", "SUF-G"], "dlugosc": L_GAR,
+     # runda 2 (REKOMENDACJE mostków A — WZ-09a): XPS 10 cm pod posadzką garażu (POD-G, płyta PF2 obniżona) + blok termiczny w 1. warstwie
+     # muru SWG — beton komórkowy odm. 600 (λ 0,16), h 0,24 m; nośność 1. warstwy — PT-K (naprężenia pod ścianą dom–garaż)
+     "blok_u_podstawy": {"mat": "BET_KOM_600", "h": 0.24}},
     {"id": "WZ-10", "nazwa": "Strop pośredni ST1/ST2 – ściana zewn. z ETICS ciągłym (wieniec)", "typ": "strop_posredni", "przegrody": ["POD-1", "SZ1"],
      "dlugosc": r(2 * (12.6 + 9.35) - 12.6 - 5.425 + 2 * (xE - xD + y4 - y3) + 2 * (xB + y4 - y3), 2)},
     {"id": "WZ-11", "nazwa": "Ościeża okien/drzwi — ciepły montaż (rama 5 cm w murze, 4 cm w izolacji, zakład izolacji 3 cm na ramę)", "typ": "oscieze",

@@ -90,13 +90,13 @@ def porownanie_audyt(w):
         return
     ia = A.info.get("wysokosc") or {}
     h = w["wysokosc_zabudowy"]
-    rows = [("wysokość zabudowy [m]", h["wartosc"], ia.get("H_upzp"), "A1 od t_min — BŁĄD METODY (pkt 30 lit. a: średnia)"),
-            ("  j.w. A1 „od średniej” [m]", h["wartosc"], ia.get("H_upzp_sr"), "A1: t_śr = (min dolnych + min górnych)/2"),
+    rows = [("wysokość zabudowy [m]", h["wartosc"], ia.get("H_upzp"), "A1 = lamela.wskazniki (runda 2, K-11); od t_min tylko informacyjnie"),
+            ("  j.w. A1 „od średniej” [m]", h["wartosc"], ia.get("H_upzp_sr"), "A1 = lamela.wskazniki (K-11)"),
             ("t_min [m n.p.m.]", h["t_min"], ia.get("t_min"), ""),
             ("t_śr [m n.p.m.]", h["t_sr"], ia.get("t_sr"), ""),
             ("z_top [m wzgl.]", h["z_top"], ia.get("z_top"), f"{h['element']} / A1: {ia.get('el_top')}"),
             ("wysokość wg WT § 6 [m]", (w.get("wysokosc_WT6") or {}).get("wartosc"), ia.get("H_WT"),
-             "teren przy wejściu: TIN proj. vs najbliższy punkt (A1)"),
+             "A1 = lamela.wskazniki (K-11)"),
             ("PBC teren [m²]", w["pbc"]["wartosc"], (A.info.get("PBC") or {}).get("teren"),
              "opaska: pas przy ścianach vs wielobok 'obrys' (A1)"),
             ("PBC rezerwa dach 50 % [m²]", w["pbc_rezerwa_dach"]["wartosc"],

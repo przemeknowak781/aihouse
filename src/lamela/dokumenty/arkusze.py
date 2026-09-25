@@ -165,13 +165,16 @@ def arkusze_z_katalogu(katalog, wzorzec: str = "*.pdf", pomin=("tom",)) -> list[
 def plan_skladania(arkusze: list[Arkusz]) -> list[dict]:
     """Plan składania arkuszy do formatu A4 dla wersji papierowej (RPB § 2a — oprawa do A4).
 
-    Wykorzystuje ``lamela.draft.sheet.fold_positions`` (sposób „do wpięcia”: tabliczka na wierzchu, lewy pas
-    210 mm z marginesem 20 mm na oprawę, wg PN-N-01603 / DIN 824 A). Zwraca listę
-    ``{nr, format, wymiary, zlozenia_pionowe, zlozenia_poziome, opis}``."""
+    Wykorzystuje ``lamela.draft.skladanie`` (te same linie co znaki składania na arkuszach ``lamela.draft``):
+    sposób „do wpięcia” wg praktyki DIN 824 forma A, uogólniony na formaty wydłużone i niestandardowe — harmonijka
+    o nieparzystej liczbie pasów w parach równych, pierwszy pas z marginesem 20 mm na oprawę, pas z tabliczką
+    (≥ 190 mm) na wierzchu; potem zgięcia poziome co 297 mm od dołu. Zwraca listę ``{nr, format, wymiary,
+    zlozenia_pionowe, zlozenia_poziome, pasy, rzedy, warstwy, ocena, tabliczka_na_wierzchu, opis}``
+    (ocena: „dobre” / „poprawne” / „słabe” — progi jak ``tools/metryki_arkuszy.py``)."""
     try:
-        from lamela.draft.sheet import fold_positions
+        from lamela.draft.skladanie import ocena_skladania
     except Exception:           # pragma: no cover — silnik rysunkowy niedostępny
-        fold_positions = None
+        ocena_skladania = None
     out = []
     for a in arkusze:
         if not a.wymiary_mm and not a.format:
@@ -179,21 +182,28 @@ def plan_skladania(arkusze: list[Arkusz]) -> list[dict]:
         if a.wymiary_mm:
             W, H = a.wymiary_mm[0]
         else:
-            s, l = rozmiar_formatu(a.format)
-            W, H = l, s
-        if fold_positions is not None:
-            xs, ys = fold_positions(W, H)
-        else:
-            xs, ys = [], []
+            m = re.search(r"(\d+(?:[.,]\d+)?)\s*[x×]\s*(\d+(?:[.,]\d+)?)", str(a.format))
+            if m and not re.match(r"^\s*A\d", str(a.format), re.I):      # niestandardowy „780×594” / „nst. …”
+                W, H = float(m.group(1).replace(",", ".")), float(m.group(2).replace(",", "."))
+            else:
+                s_, l_ = rozmiar_formatu(a.format)
+                W, H = (s_, l_) if str(a.format).strip().upper() == "A4" else (l_, s_)    # A4 pionowo
+        oc = ocena_skladania(W, H) if ocena_skladania is not None else None
+        xs = oc["zgiecia_pionowe"] if oc else []
+        ys = oc["zgiecia_poziome"] if oc else []
         if not xs and not ys:
             opis = "bez składania (A4)"
         else:
             nx, ny = len(xs), len(ys)
-            opis = (f"{nx} {odmiana(nx, 'zgięcie pionowe', 'zgięcia pionowe', 'zgięć pionowych')} (harmonijka, "
-                    "pas 210 mm z marginesem do oprawy)"
+            opis = (f"{nx} {odmiana(nx, 'zgięcie pionowe', 'zgięcia pionowe', 'zgięć pionowych')} (harmonijka "
+                    + " + ".join(f"{p:.0f}" for p in oc["pasy"]) + " mm, pierwszy pas z marginesem do oprawy)"
                     + (f", {ny} {odmiana(ny, 'zgięcie poziome', 'zgięcia poziome', 'zgięć poziomych')}" if ny else "")
-                    + "; tabliczka na wierzchu")
+                    + ("; tabliczka na wierzchu" if oc["tabliczka_na_wierzchu"] else
+                       "; UWAGA: tabliczka częściowo pod spodem")
+                    + f"; składanie {oc['ocena']}")
         out.append({"nr": a.nr, "format": a.format, "wymiary": f"{round(W)}×{round(H)}",
                     "zlozenia_pionowe": [round(x, 1) for x in xs], "zlozenia_poziome": [round(y, 1) for y in ys],
-                    "opis": opis})
+                    "pasy": oc["pasy"] if oc else [], "rzedy": oc["rzedy"] if oc else [],
+                    "warstwy": oc["warstwy"] if oc else 1, "ocena": oc["ocena"] if oc else None,
+                    "tabliczka_na_wierzchu": oc["tabliczka_na_wierzchu"] if oc else None, "opis": opis})
     return out
