@@ -1,0 +1,112 @@
+{
+ "model": "2026-09-25 07:28",
+ "podglad": true,
+ "sprawy_otwarte": [
+  "Arkusze nieaktualne wobec bieżących obliczeń — przed wydaniem wygenerować ponownie (rozdz. „Część rysunkowa — zgodność z obliczeniami”): PT-IE-04, PT-IE-06, PT-IE-14 (3 rozbieżności).",
+  "Arkusze IE wygenerowano przed ostatnią zmianą modelu — przed wydaniem wygenerować ponownie (tools/generuj_widoki.py --arkusze model/arkusze_ie.yaml).",
+  "Obliczenia (WLZ, obwody, zabezpieczenia, ∆U, samoczynne wyłączenie, SPD, PWP) — warunek niespełniony: WLZ: spadek napięcia ZKP → RG: 0,61 % (wymaganie <= 0,50 %; W-185: N SEP-E-002 [niezweryfikowane]) — rozwiązanie: WLZ YKY 5×25 mm² (∆U ≈ 0,39 % ≤ 0,50 %; przeliczenie proporcjonalne do przekroju); zmienić w parametrach obliczeń i przeliczyć.",
+  "Obliczenia (Instalacja fotowoltaiczna (≤ 6,5 kWp)) — warunek niespełniony: Spadek napięcia po stronie DC: 1,04 % (wymaganie <= 1,00 %; [ZAŁ]) — rozwiązanie: przewody DC H1Z2Z2-K 10 mm² (∆U ≈ 0,62 % ≤ 1,00 %; przeliczenie proporcjonalne do przekroju); zmienić w parametrach obliczeń i przeliczyć.",
+  "`instalacje.wyroby` w modelu puste — moduł PV, falownik, pompa ciepła i aparatura przyjęte z danych przykładowych bibliotek [DANE PRZYKŁADOWE – FIKCYJNE]; zastąpić danymi DTR/DWU wyrobów wybranych przez wykonawcę (wyroby równoważne spełniające parametry wymagane — rozdz. „Wyroby”).",
+  "Dane osobowe (Inwestor, projektanci, nr uprawnień, pracownia) — brak sekcji `projekt:` w model/budynek.yaml; pola oznaczone jako do uzupełnienia (strona tytułowa, oświadczenie).",
+  "Warunki przyłączenia OSD [DOKUMENT ZEWNĘTRZNY] — moc przyłączeniowa, typ zabezpieczenia przedlicznikowego, impedancja pętli zwarcia Z_Q i prąd zwarciowy w ZKP, rozdział PEN przyjęte jako [ZAŁ]; po otrzymaniu warunków przeliczyć obwody (D-12, W-192, E-05)."
+ ],
+ "arkusze_braki": [],
+ "rozbieznosci_rysunkow": [
+  "PT-IE-04: model PC PC-R290-12 (obliczenia: PC-R290-07)",
+  "PT-IE-06, PT-IE-14: strumień centrali 437 m³/h (obliczenia: 365 m³/h)",
+  "PT-IE-14 (schemat RG) — 25 obwodów niezgodnych z bieżącymi obliczeniami (zabezpieczenie / przewód / faza): L1: rysunek B10 / YDYp 3×1,5 / L2, obliczenia B10 / YDYp 3×1,5 / L1; L2: rysunek B10 / YDYp 3×1,5 / L1, obliczenia B10 / YDYp 3×1,5 / L2; L3: rysunek B10 / YDYp 3×1,5 / L2, obliczenia B10 / YDYp 3×1,5 / L3; L4: rysunek B10 / YDYp 3×1,5 / L3, obliczenia B10 / YDYp 3×1,5 / L1; L5: rysunek B10 / YDYp 3×1,5 / L1, obliczenia B10 / YDYp 3×1,5 / L2; G1: rysunek B16 / YDYp 3×2,5 / L3, obliczenia B16 / YDYp 3×2,5 / L1; G3: rysunek B16 / YDYp 3×2,5 / L1, obliczenia B16 / YDYp 3×2,5 / L2; G4: rysunek B16 / YDYp 3×4 / L2, obliczenia B16 / YDYp 3×4 / L1; G6: rysunek B16 / YDYp 3×2,5 / L2, obliczenia B16 / YDYp 3×2,5 / L1; G7: rysunek B16 / YDYp 3×2,5 / L1, obliczenia B16 / YDYp 3×2,5 / L3; G9: rysunek B16 / YDYp 3×4 / L3, obliczenia B16 / YDYp 3×4 / L1; G10: rysunek B16 / YDYp 3×4 / L2, obliczenia B16 / YDYp 3×4 / L3; G11: rysunek B16 / YDYp 3×2,5 / L1, obliczenia B16 / YDYp 3×2,5 / L2; G12: rysunek B16 / YDYp 3×4 / L3, obliczenia B16 / YDYp 3×4 / L1; G13: rysunek B16 / YDYp 3×2,5 / L1, obliczenia B16 / YDYp 3×2,5 / L2; G14: rysunek B16 / YDYp 3×4 / L2, obliczenia B16 / YDYp 3×4 / L3; D2: rysunek B16 / YDYp 3×2,5 / L1, obliczenia B16 / YDYp 3×2,5 / L2; D4: rysunek B16 / YDYp 3×2,5 / L3, obliczenia B16 / YDYp 3×2,5 / L2; D5: rysunek B16 / YDYp 3×2,5 / L2, obliczenia B16 / YDYp 3×2,5 / L3; D6: rysunek 3P C16 / YDYp 5×2,5 / 3f, obliczenia C16 / YDYp 3×2,5 / L1; D12: rysunek B10 / YDYp 3×1,5 / L1, obliczenia B10 / YDYp 3×1,5 / L3; D13: rysunek B16 / YKY 3×2,5 / L2, obliczenia B16 / YKY 3×2,5 / L1; D14: rysunek B16 / YDYp 3×2,5 / L1, obliczenia B16 / YDYp 3×2,5 / L2; D15: rysunek B16 / YKY 3×2,5 / L2, obliczenia B16 / YKY 3×2,5 / L1; D16: rysunek B10 / YDYp 3×1,5 / L1, obliczenia B10 / YDYp 3×1,5 / L2"
+ ],
+ "propozycje": [
+  {
+   "warunek": "WLZ: spadek napięcia ZKP → RG",
+   "modul": "obwody",
+   "wartosc": 0.6078219018836489,
+   "limit": 0.5,
+   "jedn": "%",
+   "rozwiazanie": "WLZ YKY 5×25 mm²",
+   "wartosc_po": 0.3890060172055353
+  },
+  {
+   "warunek": "Spadek napięcia po stronie DC",
+   "modul": "pv",
+   "wartosc": 1.0351180814243919,
+   "limit": 1.0,
+   "jedn": "%",
+   "rozwiazanie": "przewody DC H1Z2Z2-K 10 mm²",
+   "wartosc_po": 0.6210708488546351
+  }
+ ],
+ "wyniki": {
+  "bilans": {
+   "P_inst_kW": 71.4,
+   "P_szczyt_bez_DLM_kW": 41.3,
+   "P_szczyt_DLM_kW": 26.2,
+   "P_przylaczeniowa_kW": 27.0,
+   "I_zab_A": 40.0,
+   "fazy_kW": {
+    "L1": 8.74,
+    "L2": 8.74,
+    "L3": 8.73
+   },
+   "asymetria": 0.001
+  },
+  "obwody": {
+   "WLZ": "YKY 5×16",
+   "dU_WLZ_proc": 0.608,
+   "obwody": 35,
+   "dU_max_proc": 2.98,
+   "Z_s_max_ohm": 1.161,
+   "CRL": 315.0,
+   "PWP": "PROJEKTOWAĆ (rekomendacja D-04 — spełnia WT §183 ust. 2 i jest zgodne z ROPoż)"
+  },
+  "pv": {
+   "n_modulow": 15,
+   "P_kWp": 6.45,
+   "wariant": "EW10",
+   "E_PV_kWh_a": 5610.0,
+   "autokonsumpcja": 0.651,
+   "pokrycie": 0.33,
+   "do_EP": {
+    "E_PV_uzyta_H_kWh_a": 348.0,
+    "E_PV_uzyta_W_kWh_a": 1574.0,
+    "E_PV_uzyta_pom_kWh_a": 528.0,
+    "E_PV_uzyta_H_W_pom_miesiecznie_kWh": [
+     75.1,
+     148.3,
+     256.8,
+     331.6,
+     288.6,
+     283.6,
+     277.1,
+     268.8,
+     221.5,
+     162.1,
+     83.2,
+     54.0
+    ],
+    "w_PV": 0.0,
+    "metoda": "bilans godzinowy, przypisanie proporcjonalne [UPR]"
+   }
+  },
+  "odgromowa": {
+   "A_D_m2": 4281.0,
+   "N_D": 0.00771,
+   "N_L": 0.018,
+   "klasa_pozarowa": "zwykłe",
+   "decyzja_LPS": "LPS NIEWYMAGANY (R1 ≤ R_T przy SPD T1 dla obu klas obciążenia ogniowego)",
+   "uziom": "otokowy w gruncie",
+   "R_uziomu_ohm": 14.9
+  }
+ },
+ "kubatura_m3": 1354.4,
+ "niespelnione": [
+  [
+   "obwody",
+   "WLZ: spadek napięcia ZKP → RG"
+  ],
+  [
+   "pv",
+   "Spadek napięcia po stronie DC"
+  ]
+ ]
+}

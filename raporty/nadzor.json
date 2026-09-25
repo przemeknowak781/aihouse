@@ -1,27 +1,19 @@
 {
- "czas": "2026-09-25 09:26",
+ "czas": "2026-09-25 09:29",
  "aktywni": [
   {
-   "id": "a55aa437470dfb767",
-   "opis": "wf_ce63599a-15f:weryfikacja:FAKTY",
+   "id": "ad025dee132028c71",
+   "opis": "wf_ce63599a-15f:weryfikacja:PRAWO",
    "idle_min": 0.5,
    "bez_narzedzi_min": 0.5,
    "limity": 0,
    "powody": []
   },
   {
-   "id": "ad025dee132028c71",
-   "opis": "wf_ce63599a-15f:weryfikacja:PRAWO",
-   "idle_min": 0.0,
-   "bez_narzedzi_min": 0.0,
-   "limity": 0,
-   "powody": []
-  },
-  {
    "id": "af672122528919503",
    "opis": "wf_a8783476-2a1:model:domkniecie",
-   "idle_min": 0.6,
-   "bez_narzedzi_min": 0.7,
+   "idle_min": 0.0,
+   "bez_narzedzi_min": 0.0,
    "limity": 0,
    "powody": []
   },
@@ -29,23 +21,15 @@
    "id": "af726fb2109d239e4",
    "opis": "wf_dad224e5-cd8:zastosowanie:AR",
    "idle_min": 0.1,
-   "bez_narzedzi_min": 0.1,
+   "bez_narzedzi_min": 3.1,
    "limity": 0,
    "powody": []
   },
   {
    "id": "a472cdd66d2cb0c0b",
    "opis": "wf_dad224e5-cd8:zastosowanie:PZT",
-   "idle_min": 6.0,
-   "bez_narzedzi_min": 6.0,
-   "limity": 0,
-   "powody": []
-  },
-  {
-   "id": "ad07d221db9b5c09f",
-   "opis": "wf_c5f7e298-4b9:PT:BO",
-   "idle_min": 8.8,
-   "bez_narzedzi_min": 8.8,
+   "idle_min": 9.0,
+   "bez_narzedzi_min": 9.0,
    "limity": 0,
    "powody": []
   },
@@ -60,5 +44,5 @@
  ],
  "zakonczeni": 0,
  "zastoje": [],
- "repo_bez_zmian_min": 0.9
+ "repo_bez_zmian_min": 0.3
 }

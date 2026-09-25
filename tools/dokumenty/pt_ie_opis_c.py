@@ -4,6 +4,7 @@ wyroby i parametry wymagane, próby i odbiory, braki danych. Liczby wyłącznie 
 from __future__ import annotations
 
 from pt_ie_dane import KAT_ZRODLA, L, DanePTIE, Opis
+from pt_ie_opis_b import _wykl
 from pt_is_opis_b import OPS, wstaw_raport
 
 from lamela.obliczenia.elektryka.bilans import U0
@@ -125,8 +126,12 @@ def rozdz_obliczenia(o: Opis, D: DanePTIE):
     wiersze = []
     for mod, frag, par in wybor:
         x = _w(D, mod, frag)
-        if x is not None:
-            wiersze.append(wiersz(x, par, miejsca=7 if mod == "odgromowa" else 2))
+        if x is None:
+            continue
+        w = wiersz(x, par, miejsca=0 if "CRL" in x.opis else 2)
+        if mod == "odgromowa" and x.op != "info":                 # ryzyko — zapis wykładniczy
+            w.update(wartosc=f"{_wykl(x.wartosc)} {x.jedn}", jedn="", wymaganie=f"≤ {_wykl(x.limit)} {x.jedn}")
+        wiersze.append(w)
     n_all = sum(len(D.warunki(k)) for k in ("bilans", "obwody", "pv", "odgromowa"))
     o.rozdzial("Obliczenia", podstawa="§ 23 pkt 8 RPB — założenia, wyniki, dobór", nowa_strona=True)
     o.tekst(f"""

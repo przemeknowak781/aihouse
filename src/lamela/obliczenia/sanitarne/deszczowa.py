@@ -209,34 +209,29 @@ def oblicz_deszczowa(dane: DaneBudynku, par: ParametryDeszcz | None = None, podl
     # Przepływ w rurze = Σ po wszystkich polach, które ją zasilają (rura wspólna kilku pól liczona raz, łącznie).
     ids = {dd.id for dd in dane.dachy if dd.pole >= 1.0}
     q_pola = {dd.id: r * dd.pole * par.C_wymiarowanie for dd in dane.dachy if dd.pole >= 1.0}
-    rury_id = {str(rr.get("id")) for dd in dane.dachy if dd.pole >= 1.0 for rr in dd.rury_spustowe}
+    cel_rury = {}
+    for dd in dane.dachy:
+        if dd.id in ids:
+            for rr in dd.rury_spustowe:
+                cel_rury.setdefault(str(rr.get("id")), str(rr.get("do") or "").replace("dach ", "").strip())
     dop_pole: dict[str, float] = {}
     q_rury: dict[str, float] = {}
-    for dd in dane.dachy:
-        if dd.id not in ids or not dd.rury_spustowe:
-            continue
-        for rr in dd.rury_spustowe:
-            q_rury[str(rr.get("id"))] = q_rury.get(str(rr.get("id")), 0.0) + q_pola[dd.id] / len(dd.rury_spustowe)
-    for _ in range(3):                                   # kaskady (PL-3 → rura → pole niżej) — kilka przejść
-        dop_pole = {}
+    for _ in range(4):                                   # kaskady (PL-3 → RS11 → RS10 → D4) — kilka przejść do ustalenia
+        q_rury = {}
         for dd in dane.dachy:
             if dd.id not in ids or not dd.rury_spustowe:
                 continue
+            qd = (q_pola[dd.id] + dop_pole.get(dd.id, 0.0)) / len(dd.rury_spustowe)
             for rr in dd.rury_spustowe:
-                cel = str(rr.get("do") or "").replace("dach ", "").strip()
-                qr = q_pola[dd.id] / len(dd.rury_spustowe) + dop_pole.get(dd.id, 0.0) / len(dd.rury_spustowe)
-                if cel in ids and cel != dd.id:
-                    dop_pole[cel] = dop_pole.get(cel, 0.0) + qr
-                elif cel in rury_id:
-                    q_rury[cel] = q_rury.get(cel, 0.0)
-        # rury zasilane rurą z innego pola (trójnik)
-    for dd in dane.dachy:
-        if dd.id not in ids:
-            continue
-        for rr in dd.rury_spustowe:
-            cel = str(rr.get("do") or "").strip()
-            if cel in rury_id:
-                q_rury[cel] = q_rury.get(cel, 0.0) + q_pola[dd.id] / len(dd.rury_spustowe)
+                q_rury[str(rr.get("id"))] = q_rury.get(str(rr.get("id")), 0.0) + qd
+        for rid, cel in cel_rury.items():                # rura → rura (trójnik)
+            if cel in cel_rury and cel != rid and rid in q_rury:
+                q_rury[cel] = q_rury.get(cel, 0.0) + q_rury[rid]
+        nowe: dict[str, float] = {}
+        for rid, cel in cel_rury.items():                # rura → inne pole
+            if cel in ids and rid in q_rury:
+                nowe[cel] = nowe.get(cel, 0.0) + q_rury[rid]
+        dop_pole = nowe
     for dd in dane.dachy:
         if dd.pole < 1.0:
             continue

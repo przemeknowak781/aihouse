@@ -22,6 +22,8 @@ from pt_is_dane import REPO, L, Opis, _yaml, rel  # noqa: F401 — wspólne narz
 
 from lamela.dokumenty import Arkusz
 
+OPS = {"<=": "≤", ">=": "≥", "<": "<", ">": ">", "==": "="}
+
 KAT_IE = REPO / "projekt/06_PT_instalacje_elektryczne"
 KAT_RYS = KAT_IE / "rysunki"
 KAT_ZRODLA = REPO / "projekt/09_opis_i_zalaczniki/PT_IE"
@@ -206,7 +208,7 @@ class DanePTIE:
                                      f" z bieżącymi obliczeniami (zabezpieczenie / przewód / faza): " + "; ".join(rozn))
         if self.rozb_rys:
             self.otwarte.append("Arkusze nieaktualne wobec bieżących obliczeń — przed wydaniem wygenerować ponownie "
-                                "(rozdz. „Część rysunkowa — zgodność z obliczeniami”): "
+                                "(rozdz. „Braki danych i zgodność części rysunkowej”): "
                                 + ", ".join(sorted({n for r in self.rozb_rys for n in re.findall(r"PT-IE-\d+", r)}))
                                 + f" ({len(self.rozb_rys)} {'rozbieżność' if len(self.rozb_rys) == 1 else 'rozbieżności'}).")
 
@@ -229,7 +231,7 @@ class DanePTIE:
                 prop = self._przekroj(x.wartosc, self.pv.par.s_DC, x.limit)
                 co = "przewody DC H1Z2Z2-K {s} mm²"
             opis = (f"Obliczenia ({NAZWY_MOD[mod]}) — warunek niespełniony: {x.opis}: {L(x.wartosc, 2)} {x.jedn} "
-                    f"(wymaganie {x.op} {L(x.limit, 2)} {x.jedn}; {x.podstawa})")
+                    f"(wymaganie {OPS.get(x.op, x.op)} {L(x.limit, 2)} {x.jedn}; {x.podstawa})")
             if prop:
                 s2, dU2 = prop
                 roz = co.format(s=L(s2, 0))
@@ -245,7 +247,7 @@ class DanePTIE:
         if not self.B.get("projekt"):
             self.otwarte.append("Dane osobowe (Inwestor, projektanci, nr uprawnień, pracownia) — brak sekcji "
                                 "`projekt:` w model/budynek.yaml; pola oznaczone jako do uzupełnienia (strona tytułowa, oświadczenie).")
-        self.otwarte.append("Warunki przyłączenia OSD [DOKUMENT ZEWNĘTRZNY] — moc przyłączeniowa, typ zabezpieczenia "
+        self.otwarte.append("Warunki przyłączenia OSD (E-05) — nieuzyskane; moc przyłączeniowa, typ zabezpieczenia "
                             "przedlicznikowego, impedancja pętli zwarcia Z_Q i prąd zwarciowy w ZKP, rozdział PEN "
                             "przyjęte jako [ZAŁ]; po otrzymaniu warunków przeliczyć obwody (D-12, W-192, E-05).")
         self.otwarte += self.ark_braki
