@@ -686,30 +686,49 @@ DACHY = [
               "attyka pd. +3,85 = linia D do narożnika garażu; opaska żwirowa 0,5 m przy attykach i wpustach"},
 ]
 
+Z_PS_A = r(Z_ST2 - T_STR - 0.20 - 0.001 - 0.04, 3)           # spód pustki pod IZ-ST2Z → wierzch podsufitki PS-A ≈ +5,689
+_OB_A = [[r(a), r(b)] for a, b in list(orient(Polygon(R(-2.42, -1.32, -EXT, y3 + EXT + 0.02)).difference(Polygon(R(-2.40, -1.30, -EXT, y3 + EXT))),
+                                               1.0).exterior.coords)[:-1]]
 WSP = [
     {"id": "PL-E", "obrys": P((-1.80, -1.30), (13.80, -1.30), (13.80, -EXT), (-EXT, -EXT), (-EXT, y3), (-1.80, y3)), "wierzch": Z_OKAP_E[1],
      "grubosc": Z_OKAP_E[1] - Z_OKAP_E[0], "przegroda": "OK1", "lacznik_termiczny": True, "mat": "ZB_C30",
      "uwagi": "E — okap ST1: 1,00 m pd. (x −1,80…13,80, także nad drzwiami gospodarczymi) i 1,50 m zach.; łączniki termoizolacyjne (ETA)"},
-    {"id": "PL-DA", "obrys": R(9.40, y4 + EXT, xE - EXT, 10.35), "wierzch": 3.05, "grubosc": 0.25, "przegroda": "OK1", "lacznik_termiczny": True,
+    {"id": "PL-DA", "obrys": R(9.40, y4 + EXT, xE - EXT, 10.35), "wierzch": Z_ST1, "grubosc": 0.25, "przegroda": "OK1", "lacznik_termiczny": True,
      "mat": "ZB_C30", "uwagi": "daszek nad wejściem 2,30 × 1,30 m (≥ drzwi + 1,0 × ≥ 1,0 — W-057); 0,95 m za linią zabudowy"},
     {"id": "PL-C1", "obrys": R(3.60, -1.30, 12.60, -EXT), "wierzch": Z_RAMA_D[1], "grubosc": 0.20, "mat": "RAMA_C", "lacznik_termiczny": True,
      "uwagi": "rama boksu C — pas dolny = linia D (+3,65…+3,85), lekka rama stalowa w okładzinie na konsolach punktowych z przekładką (J2)"},
     {"id": "PL-C2", "obrys": R(3.60, -1.30, 13.45, -EXT), "wierzch": Z_RAMA_G[1], "grubosc": 0.20, "mat": "RAMA_C", "lacznik_termiczny": True,
      "uwagi": "rama boksu C — pas górny (+5,35…+5,55), przedłużony na wschód do x 13,45 (szkic: 13,76 m od lica B)"},
-    {"id": "PL-2", "obrys": P((-2.40, -1.30), (12.60, -1.30), (12.60, -EXT), (X2o, -EXT), (X2o, y3 + EXT), (-2.40, y3 + EXT)),
+    {"id": "PL-2", "obrys": P((-2.40, -1.30), (12.60, -1.30), (12.60, y3 + EXT), (xE + EXT, y3 + EXT), (xE + EXT, -EXT), (X2o, -EXT),
+                              (X2o, y3 + EXT), (-2.40, y3 + EXT)),
      "wierzch": Z_OKAP_2[1], "grubosc": Z_OKAP_2[1] - Z_OKAP_2[0], "przegroda": "OK1", "lacznik_termiczny": True, "mat": "ZB_C30",
-     "uwagi": "krawędź ST2 — spód bryły A: wysunięcie 1,00 m pd., 1,10 m zach. (od lica A), 0,30 m wsch."},
+     "uwagi": "krawędź ST2 — spód bryły A: wysunięcie 1,00 m pd., 1,10 m zach. (od lica A), 0,30 m wsch. (pas pod lamelami LAM-E); "
+              "wierzch = ST2, pogrubienie od spodu; łącznik termoizolacyjny w strefie −0,30…−0,09"},
     {"id": "PL-3", "obrys": P((-2.40, -1.30), (12.60, -1.30), (12.60, y3 + EXT), (xE + EXT, y3 + EXT), (xE + EXT, -EXT), (X2o, -EXT), (X2o, y3 + EXT),
                               (-2.40, y3 + EXT)),
      "wierzch": Z_OKAP_3[1], "grubosc": Z_OKAP_3[1] - Z_OKAP_3[0], "przegroda": "OK1", "lacznik_termiczny": True, "mat": "ZB_C30",
      "uwagi": "krawędź ST3 — stropodach bryły A: 1,00 m pd., 1,10 m zach., 0,30 m wsch.; attyka cofnięta w licu ściany"},
     {"id": "IZ-ST2Z", "obrys": R(X2o, -EXT, -EXT, y3 + EXT), "wierzch": r(Z_ST2 - T_STR), "grubosc": 0.20, "mat": "WELNA_035", "lacznik_termiczny": False,
-     "uwagi": "docieplenie spodu stropu nad powietrzem (SUF-ZEW: wełna 20 cm + podsufitka na ruszcie) — ciągłość izolacji wspornika bryły A (brief §9.1)"},
+     "uwagi": "docieplenie spodu stropu nad powietrzem (SUF-ZEW: wełna 20 cm + membrana, pustka wentylowana 4 cm, podsufitka PS-A) — "
+              "ciągłość izolacji wspornika bryły A (brief §9.1); łączy się z ETICS ściany P1 (lico −0,30) i wełną ściany A' (−1,30)"},
+    {"id": "PS-A", "obrys": R(-2.40, -1.30, -EXT, y3 + EXT), "wierzch": Z_PS_A, "grubosc": 0.012, "mat": "PODSUF", "lacznik_termiczny": False,
+     "uwagi": "jedna płaska podsufitka włóknocementowa na ruszcie pod wspornikiem bryły A i pasem zach. PL-2 (+5,68; audyt A2 I-5); "
+              "pustka wentylowana nad nią, szczeliny wentylacyjne z siatką przy czołach"},
+    {"id": "OB-A", "obrys": _OB_A, "wierzch": Z_OKAP_2[1], "grubosc": r(Z_OKAP_2[1] - Z_PS_A + 0.012), "mat": "PODSUF", "lacznik_termiczny": False,
+     "uwagi": "obudowa czoła PL-2 i podsufitki (płyta włóknocementowa na ruszcie, okapnik) — widoczna „gruba krawędź” 0,48 m warstwy A"},
+    {"id": "OB-A2", "obrys": R(-EXT, -1.30, -EXT + 0.02, -EXT), "wierzch": Z_OKAP_2[0], "grubosc": r(Z_OKAP_2[0] - Z_PS_A + 0.012), "mat": "PODSUF",
+     "lacznik_termiczny": False, "uwagi": "zamknięcie pustki podsufitki PS-A od wsch. (pod PL-2)"},
     {"id": "SW1", "obrys": R(6.00, 7.45, 8.40, 8.65), "wierzch": 9.75, "grubosc": 0.05, "mat": "SZKLO_VSG", "lacznik_termiczny": False,
-     "uwagi": "świetlik SW1 nad spocznikiem klatki (otwór 2,20 × 1,00 m) — kopuła/płaski świetlik 3-szybowy U ≤ 1,1 na cokole ocieplonym h 0,30, "
-              "nie wyżej niż attyka (+9,776)"},
-    {"id": "WYL1", "obrys": R(6.60, 0.80, 7.70, 1.90), "wierzch": 9.74, "grubosc": 0.06, "mat": "RAMA_C", "lacznik_termiczny": False,
-     "uwagi": "wyłaz dachowy 0,90 × 0,90 m w świetle (W-065), ocieplony U ≤ 1,1, na cokole h 0,30; drabina w pom. 2.07"},
+     "uwagi": "świetlik SW1 nad spocznikiem klatki (otwór 2,20 × 1,00 m) — płaski świetlik STAŁY (nieotwierany, bez funkcji wentylacyjnej), "
+              "3-szybowy U ≤ 1,1, na cokole ocieplonym h 0,30, nie wyżej niż attyka; WT §152 ust. 12 dotyczy okien otwieranych — interpretacja "
+              "w koncepcja.md (audyt A1)", "otwierany": False},
+    {"id": "WYL1", "obrys": R(7.10, 0.80, 8.20, 1.90), "wierzch": 9.74, "grubosc": 0.06, "mat": "RAMA_C", "lacznik_termiczny": False,
+     "uwagi": "wyłaz dachowy 0,90 × 0,90 m w świetle (W-065), ocieplony U ≤ 1,1, na cokole h 0,30; drabina w pom. 2.07 przy wsch. ścianie, "
+              "poza frontem serwisowym centrali (A2 D-3)"},
+    {"id": "PL-D", "obrys": R(12.60, -1.30, xF + EXT, -EXT), "wierzch": Z_RAMA_D[1], "grubosc": 0.20, "mat": "RAMA_C", "lacznik_termiczny": True,
+     "uwagi": "linia D — głęboka krawędź 1,00 m na wschód od ramy C do narożnika garażu (x 18,675; audyt A2 I-8, decyzja Inwestora 3): "
+              "lekka rama stalowa w okładzinie na konsolach punktowych z przekładką termiczną (jak PL-C1), okapnik; osłania drzwi DZ3 "
+              "i jednostkę PC; dach garażu nieużytkowy — PL-D nie jest tarasem (decyzja 2)"},
 ]
 
 

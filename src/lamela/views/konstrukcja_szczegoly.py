@@ -446,3 +446,196 @@ def _grupy_przy(P, warstwa, Q, n, rola=None, r=1.5):
         elif LineString([a, b]).buffer(0.01).intersects(ln) or g.zakres is not None and g.zakres.intersects(ln):
             out.append((g, False))
     return out
+
+
+def szczegol_stropu(ctx, spec, vp, res, placer, rodzaj: str):
+    """Węzeł stropu: ``wspornik`` (płyta wspornikowa z łącznikiem termoizolacyjnym), ``wieniec`` (krawędź stropu na
+    ścianie zewnętrznej), ``oparcie`` (strop ciągły nad ścianą wewnętrzną)."""
+    D = KD.dane(ctx)
+    m = ctx.model
+    lv = D.poziom(spec.get("poziom") or spec.get("element") or spec.get("kond"))
+    if lv is None:
+        raise KeyError(f"k_przekroj/{rodzaj}: brak poziomu płyt")
+    P = KD.prety_poziomu(D, lv)
+    Q, n, wall, host, wsp, gw = _wybor_wezla(D, lv, rodzaj, spec.get("element") if rodzaj != "wspornik" else
+                                             spec.get("element"), m)
+    R = Rama(Q, n)
+    host = host or lv.elementy[0]
+    top_h, sp_h = host.wierzch, host.wierzch - host.h
+    cs = E.CutSet()
+    wl = warstwy_sciany(wall, R) if wall is not None else []
+    xw0 = min((a for a, b, *_ in wl), default=-0.1)
+    xw1 = max((b for a, b, *_ in wl), default=0.1)
+    xk = [(a, b) for a, b, mat, konstr, kl in wl if konstr]
+    xk0, xk1 = xk[0] if xk else (-0.09, 0.09)
+    x_in = xk0 - 1.3
+    if rodzaj == "wspornik":
+        l_c = _promien(wsp.poly, Q + n * 0.01, n) + 0.01
+        x_edge_h = -KD.LACZNIK_T
+        x_out = l_c
+    elif rodzaj == "wieniec":
+        x_edge_h = _promien(host.poly, Q, n)
+        x_out = x_edge_h
+    else:
+        x_edge_h = xk1 + 1.3
+        x_out = x_edge_h
+    z_bot = sp_h - 0.75
+    if wall is not None:
+        dodaj_warstwy_pionowe(cs, m, wl, z_bot, min(wall.z_do, sp_h), wall.typ)
+    cs.add(box(x_in, sp_h, x_edge_h, top_h), "ZELBET", "strop")
+    # ściana powyżej (ta sama oś), warstwy podłogi i sufitu
+    kn = _kond_nad(m, top_h)
+    w_up = _sciana_na_linii(m, kn.id, Q, np.array([-n[1], n[0]])) if (kn is not None and wall is not None) else None
+    wl_up = warstwy_sciany(w_up, R) if w_up is not None else []
+    if wl_up:
+        dodaj_warstwy_pionowe(cs, m, wl_up, top_h, top_h + 0.7, w_up.typ)
+    pod = m.przegroda(kn.podloga) if kn is not None and getattr(kn, "podloga", None) else None
+    u0 = min((a for a, b, *_ in wl_up), default=x_edge_h)
+    u1 = max((b for a, b, *_ in wl_up), default=x_edge_h)
+    warstwy_pod = []
+    if pod is not None:
+        if rodzaj == "oparcie" and wl_up:
+            warstwy_pod = dodaj_warstwy_poziome(cs, m, pod, x_in, u0, top_h, True)
+            dodaj_warstwy_poziome(cs, m, pod, u1, x_out, top_h, True)
+        else:
+            warstwy_pod = dodaj_warstwy_poziome(cs, m, pod, x_in, u0 if wl_up else (x_edge_h if rodzaj != "wspornik"
+                                                                                  else xw0), top_h, True)
+        pd_ = pod
+        dodaj_warstwy_poziome(cs, m, pd_, x_in, xw0 if wall is not None else x_out, sp_h, False)
+        if rodzaj == "oparcie":
+            dodaj_warstwy_poziome(cs, m, pd_, xw1, x_out, sp_h, False)
+    if rodzaj == "wspornik":
+        tc, spc = wsp.wierzch, wsp.wierzch - wsp.h
+        cs.add(box(0.0, spc, l_c, tc), "ZELBET", "strop")
+        prz = m.przegroda(wsp.raw.get("przegroda")) if wsp.raw.get("przegroda") else None
+        if prz is not None:
+            dodaj_warstwy_poziome(cs, m, prz, 0.0, l_c, tc, True)
+            dodaj_warstwy_poziome(cs, m, prz, 0.0, l_c, spc, False)
+        zl0, zl1 = max(sp_h, spc), min(top_h, tc)
+        cs.add(box(-KD.LACZNIK_T, zl0, 0.0, zl1), "IZOL_TWARDA", "izol")
+    cs.draw(vp)
+    if wall is not None:
+        urwanie(vp, (xw0 - 0.05, z_bot), (xw1 + 0.05, z_bot))
+    if wl_up:
+        urwanie(vp, (u0 - 0.05, top_h + 0.7), (u1 + 0.05, top_h + 0.7))
+    urwanie(vp, (x_in, sp_h - 0.05), (x_in, top_h + 0.12))
+    if rodzaj == "oparcie":
+        urwanie(vp, (x_out, sp_h - 0.05), (x_out, top_h + 0.12))
+    zb = _zbrojenie_wezla(vp, placer, D, P, lv, host, wsp, gw, R, Q, n, rodzaj, x_in, x_out, x_edge_h, xk0, xk1,
+                          top_h, sp_h)
+    # wymiary, rzędne
+    ch = sorted({round(v, 4) for v in [xk0, xk1] + ([x_edge_h, 0.0, x_out] if rodzaj == "wspornik" else [x_edge_h])
+                 if x_in < v <= x_out + 1e-6})
+    dims.dim_h(vp, ch, z_bot - 0.12, None, layer="K-WYMIARY")
+    zz = sorted({round(v, 4) for v in (sp_h, top_h)})
+    dims.dim_v(vp, zz, x_in - 0.15, None, layer="K-WYMIARY")
+    lvl = [(top_h, "konstr"), (sp_h, "konstr")]
+    if pod is not None:
+        lvl.append((top_h + sum(w_.d for w_ in pod.warstwy[:pod.idx_konstr]), "wyk"))
+    dims.levels(vp, x_in + 0.1, lvl, side="left")
+    if rodzaj == "wspornik":
+        dims.dim_v(vp, sorted({round(wsp.wierzch - wsp.h, 4), round(wsp.wierzch, 4)}), x_out + 0.15, None,
+                   layer="K-WYMIARY")
+        dims.levels(vp, x_out - 0.1, [(wsp.wierzch, "konstr")], side="right")
+    if warstwy_pod:
+        opis_warstw(vp, placer, x_in + 0.45, sp_h, top_h, warstwy_pod, m, "lewo",
+                    tytul=f"{pod.nazwa.split(':')[0][:40]}" if pod is not None else None)
+    tyt = {"wspornik": f"WĘZEŁ WSPORNIKA {wsp.id if wsp else ''} — ŁĄCZNIK TERMOIZOLACYJNY",
+           "wieniec": f"WIENIEC — KRAWĘDŹ STROPU {host.id} NA ŚCIANIE {wall.id if wall else ''}",
+           "oparcie": f"OPARCIE STROPU {host.id} NA ŚCIANIE {wall.id if wall else ''}"}[rodzaj]
+    return tyt, zb
+
+
+def _zbrojenie_wezla(vp, placer, D, P, lv, host, wsp, gw, R, Q, n, rodzaj, x_in, x_out, x_edge_h, xk0, xk1, top_h, sp_h):
+    k = vp.k
+    uzyte = []
+
+    def c_of(eid):
+        e = next((x for x in lv.elementy if x.id == eid), host)
+        return e.c_nom / 1000.0, e
+
+    def rysuj_w_plaszczyznie(g, warstwa, lab_dz):
+        c, e = c_of(g.element)
+        top, sp = e.wierzch, e.wierzch - e.h
+        fi = g.pret.fi / 1000.0
+        a, b = np.asarray(g.linia[0]), np.asarray(g.linia[1])
+        xa, xb = R.x(a), R.x(b)
+        if xa > xb:
+            xa, xb = xb, xa
+            hk = (g.haki[1], g.haki[0])
+        else:
+            hk = g.haki
+        xa, xb = max(xa, x_in), min(xb, x_out)
+        z = (sp + c + fi / 2) if warstwa == "dol" else (top - c - fi / 2)
+        leg = e.h - 2 * c
+        pts = [(xa, z), (xb, z)]
+        if hk[0] and warstwa == "gora":
+            pts = [(xa, z - leg)] + pts
+        if hk[1] and warstwa == "gora":
+            pts = pts + [(xb, z - leg)]
+        pret_linia(vp, pts)
+        xm = (xa + xb) / 2
+        opis(vp, placer, (xm, z), f"{g.n if g.kawalki == 1 else g.n // g.kawalki} Ø{g.pret.fi}"
+             + (f" co {g.s / 10:g}" if g.s else "") + f" l={g.pret.L_mm / 10:g}", g.pret.nr,
+             "prawo" if xm > 0 else "lewo", lab_dz)
+        uzyte.append(g)
+
+    def kropki(g, warstwa, x0, x1, off):
+        c, e = c_of(g.element)
+        top, sp = e.wierzch, e.wierzch - e.h
+        fi = g.pret.fi / 1000.0
+        z = (sp + c + off + fi / 2) if warstwa == "dol" else (top - c - off - fi / 2)
+        if g.s:
+            rzad_kropek(vp, x0 + 0.04, x1 - 0.04, z, g.pret.fi, g.s)
+        opis(vp, placer, ((x0 + x1) / 2, z), f"Ø{g.pret.fi}" + (f" co {g.s / 10:g}" if g.s else ""), g.pret.nr,
+             "lewo" if x1 < 0.3 else "prawo", 10.0 if warstwa == "gora" else -10.0)
+        uzyte.append(g)
+
+    lab = {"dol": -6.0, "gora": 6.0}
+    for warstwa in ("dol", "gora"):
+        gr = _grupy_przy(P, warstwa, Q, n)
+        inpl = [g for g, ip in gr if ip and g.rola != "naroze"]
+        perp = [g for g, ip in gr if not ip and g.rola != "naroze"]
+        seen = set()
+        for i, g in enumerate(sorted(inpl, key=lambda q: -q.n)):
+            key = (g.element, g.pret.nr, round(R.x(g.linia[0]), 1))
+            if key in seen:
+                continue
+            seen.add(key)
+            rysuj_w_plaszczyznie(g, warstwa, lab[warstwa] * (1 + 0.8 * i))
+        fi_in = max((g.pret.fi for g in inpl), default=8) / 1000.0
+        for g in perp[:2]:
+            c, e = c_of(g.element)
+            x0 = x_in if e is host else 0.0
+            x1 = (x_edge_h - c) if e is host else x_out - c
+            kropki(g, warstwa, x0, x1, fi_in)
+    # wieniec w płycie nad ścianą murowaną
+    wn = next((w for w in D.wience if lv.idx in w.ids), None)
+    if wn is not None and rodzaj in ("wieniec", "oparcie", "wspornik"):
+        cw = wn.c_nom / 1000.0
+        fs = wn.strz[0] / 1000.0
+        x0, x1 = xk0 + cw, xk1 - cw
+        z0, z1 = sp_h + cw, top_h - cw - 0.012
+        strzemie(vp, x0, z0, x1, z1, wn.strz[0])
+        fi = wn.dol[1] / 1000.0
+        for xx in (x0 + fs + fi / 2, x1 - fs - fi / 2):
+            for zz in (z0 + fs + fi / 2, z1 - fs - fi / 2):
+                pret_kropka(vp, xx, zz, wn.dol[1])
+        opis(vp, placer, (x1 - fs, z0 + fs), f"wieniec {wn.dol[0] + wn.gora[0]}Ø{wn.dol[1]}, strz. Ø{wn.strz[0]} co "
+             f"{wn.strz[1] / 10:g} (poz. obl. {wn.poz})", None, "prawo" if rodzaj != "wspornik" else "lewo", -14.0, h=1.8)
+    if rodzaj == "wspornik" and wsp is not None:
+        tl = KD.LACZNIK_T
+        c = wsp.c_nom / 1000.0
+        zt = min(top_h, wsp.wierzch) - c - 0.006
+        vp.line((-tl - 0.55, zt), (0.55, zt), L_ZBR, pen=0.35, lt="KRESKOWA", z=31)
+        zb_ = max(sp_h, wsp.wierzch - wsp.h) + c + 0.02
+        vp.rect(-tl - 0.02, zb_, 0.02, zb_ + 0.05, L_ZBR, pen=0.35, z=31)
+        opis(vp, placer, (0.3, zt), "pręty rozciągane łącznika (ETA), zakład z prętami płyt", None, "prawo", 16.0, h=1.8)
+        opis(vp, placer, (-tl / 2, zb_ + 0.025), "moduł ściskany łącznika", None, "prawo", -16.0, h=1.8)
+        pz = max(wsp.pola, key=lambda p: p.poly.area) if wsp.pola else None
+        kier = "x" if abs(n[0]) > 0.5 else "y"
+        w = pz.warstwy.get("gora_" + kier) if pz else None
+        opis(vp, placer, (-tl / 2, (max(sp_h, wsp.wierzch - wsp.h) + min(top_h, wsp.wierzch)) / 2),
+             f"łącznik termoizolacyjny (ETA) h = {wsp.h * 100:.0f} cm, izolacja {tl * 1000:.0f} mm, "
+             f"m_Ed = {w.M:.1f} kNm/m" if w else "łącznik termoizolacyjny (ETA)", None, "lewo", 22.0, h=1.8)
+    return uzyte

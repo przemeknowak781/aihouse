@@ -288,7 +288,7 @@ def _labels_project(lab, s, W, used, detail=False):
     k = lab.k
     h = D.H
     R = s.plot.buffer(0.3)
-    L = lambda *a_, **kw: lab.label_in(R, *a_, **kw)      # noqa: E731 — opisy projektu najpierw w działce
+    L = lambda *a_, **kw: lab.label_in(R, *a_, **kw)   # noqa: E731 — opisy projektu w granicach działki
     # działka: numer i powierzchnia
     free = s.plot.difference(s.footprint.buffer(4.0)).buffer(-3.0)
     anchor = np.asarray((free if not free.is_empty else s.plot).representative_point().coords[0])

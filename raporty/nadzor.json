@@ -1,10 +1,10 @@
 {
- "czas": "2026-09-25 06:49",
+ "czas": "2026-09-25 06:50",
  "aktywni": [
   {
    "id": "a076389c324f1eb11",
    "opis": "Build PZT site-plan generator",
-   "idle_min": 0.0,
+   "idle_min": 0.1,
    "bez_narzedzi_min": 0.2,
    "limity": 0,
    "powody": []
@@ -13,30 +13,30 @@
    "id": "a9f2ed8bb74c2c0d9",
    "opis": "Build construction details generator",
    "idle_min": 0.0,
-   "bez_narzedzi_min": 0.7,
+   "bez_narzedzi_min": 0.1,
    "limity": 0,
    "powody": []
   },
   {
    "id": "a68a8b74f8ab79b44",
    "opis": "Build MEP installation drawings",
-   "idle_min": 0.1,
-   "bez_narzedzi_min": 0.1,
+   "idle_min": 0.0,
+   "bez_narzedzi_min": 0.2,
    "limity": 0,
    "powody": []
   },
   {
    "id": "a5045de9ee0554cc8",
    "opis": "Build structural drawings generator",
-   "idle_min": 0.2,
-   "bez_narzedzi_min": 0.3,
+   "idle_min": 0.1,
+   "bez_narzedzi_min": 0.7,
    "limity": 0,
    "powody": []
   },
   {
    "id": "a26a33699e730c1d9",
    "opis": "wf_44634517-034:poprawki",
-   "idle_min": 0.1,
+   "idle_min": 0.0,
    "bez_narzedzi_min": 0.1,
    "limity": 0,
    "powody": []

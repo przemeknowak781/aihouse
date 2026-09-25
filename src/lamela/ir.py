@@ -584,12 +584,34 @@ class _Builder:
 
     def _attic_ring(self, obrys: Polygon, szer: float, z_level: float) -> Any:
         ring = clean_geom(obrys.difference(obrys.buffer(-szer, join_style=2)))
-        # bez attyki wzdłuż ścian wyższych kondygnacji stojących na płycie
+        # bez attyki wzdłuż ścian wyższych kondygnacji stojących na płycie: usuwany jest tylko pas RÓWNOLEGŁY do lica
+        # ściany wyższej (krawędź obrysu leżąca na licu); końce attyki prostopadłe do ściany dochodzą do jej lica
         higher = [self.m.obrys_kondygnacji(k.id) for k in self.m.kondygnacje
                   if self.m.kond_z_od(k.id) >= z_level - 0.10]
         higher = [g for g in higher if not g.is_empty]
-        if higher:
-            ring = clean_geom(ring.difference(unary_union(higher).buffer(szer + 0.05, join_style=2)), min_area=1e-3)
+        if not higher:
+            return ring
+        H = unary_union(higher)
+        hb = H.boundary.buffer(0.03)
+        cs = list(obrys.exterior.coords)
+        rem, keep = [], []
+        for a, b in zip(cs[:-1], cs[1:]):
+            e = LineString([a, b])
+            if e.length < 1e-6:
+                continue
+            strip = clean_geom(e.buffer(szer + 0.01, cap_style=2).intersection(obrys), min_area=1e-6)
+            shared = e.intersection(hb)
+            if shared.length > 0.05 and shared.length >= 0.5 * e.length:
+                rem.append(strip)
+            else:
+                keep.append(strip)
+        if rem:
+            cut = unary_union(rem)
+            if keep:
+                cut = cut.difference(unary_union(keep))
+            ring = clean_geom(ring.difference(cut), min_area=1e-3)
+        # attyka nie wchodzi w obrys wyższej kondygnacji
+        ring = clean_geom(ring.difference(H), min_area=1e-3)
         return ring
 
     def _roof_like(self, rid, obrys_poly, wierzch, grubosc, prz, attyka, kind_slab, lvl, group, below_kond=None,
@@ -606,21 +628,55 @@ class _Builder:
         if attyka:
             szer = float(attyka.get("szer", 0.25))
             wys = float(attyka.get("wys_nad_pokryciem", 0.30))
+            # warstwy attyki z przegrody (od dachu do zewnątrz): izolacja od strony dachu | konstrukcja | ocieplenie zewn.
+            pa = m.przegroda(str(attyka.get("przegroda"))) if attyka.get("przegroda") else None
+            t_in, t_out, mat_in, mat_out = 0.0, 0.10, None, None
+            if pa is not None and pa.ma_oznaczona_konstr:
+                k = pa.idx_konstr
+                t_in = sum(x.d for x in pa.warstwy[:k])
+                t_out = sum(x.d for x in pa.warstwy[k + 1:]) or 0.10
+                mat_in = pa.warstwy[0].mat if k > 0 else None
+                mat_out = pa.warstwy[k + 1].mat if k + 1 < len(pa.warstwy) else None
             ring = self._attic_ring(full, szer, wierzch)
-            inner = clean_geom(obrys_poly.difference(ring))
+            band_in = Polygon()
+            if t_in > 1e-6 and not ring.is_empty:
+                band_in = clean_geom(ring.buffer(t_in, join_style=2).intersection(full).difference(ring), min_area=1e-4)
+            inner = clean_geom(obrys_poly.difference(ring).difference(band_in))
             if lays_up:
                 kk = "terrace" if kind_slab == "canopy" else "roof"
                 self._stack_layers(rid, inner, top, lays_up, lvl, kind=kk, part="pokrycie", group=group)
             if not ring.is_empty:
                 zt = top + wys
                 self.add(rid, "parapet", ring, wierzch, zt, mat, lvl, group=group, part="attyka")
-                # okładzina czołowa (ETICS/tynk) i obróbka blacharska
-                clad = clean_geom(full.buffer(0.10, join_style=2).difference(full)
-                                  .intersection(ring.buffer(0.12, join_style=2)), min_area=1e-4)
-                fin = self._facade_finish()
-                self.add(rid, "parapet", clad, spod, zt, fin, lvl, group=group, part="okladzina_attyki")
-                cop = clean_geom(ring.buffer(0.03, join_style=2).union(clad.buffer(0.03, join_style=2))
-                                 .intersection(full.buffer(0.13, join_style=2)), min_area=1e-4)
+                if not band_in.is_empty and mat_in:
+                    self.add(rid, "insulation", band_in, wierzch, zt, mat_in, lvl, group=group, part="izolacja_attyki")
+                # ocieplenie czoła attyki: tylko tam, gdzie ocieplenie ściany poniżej nie dochodzi do korony
+                # (warstwy zewnętrzne ścian są przedłużane przez rdzeń na czoła płyt i attyki — bez dublowania)
+                band = clean_geom(full.buffer(t_out, join_style=2).difference(full)
+                                  .intersection(ring.buffer(t_out + 0.02, join_style=2)), min_area=1e-4)
+                fin = mat_out or self._facade_finish()
+                covered = []
+                for w in m.sciany():
+                    if w.ext_side is None:
+                        continue
+                    ext = [x for x in w.warstwy if x.strona == w.ext_side and x.polygon is not None]
+                    if not ext:
+                        continue
+                    g = unary_union([x.polygon for x in ext])
+                    part = clean_geom(band.intersection(g.buffer(0.005, join_style=2)), min_area=1e-4)
+                    if part.is_empty:
+                        continue
+                    z_from = max(x.z1 for x in ext)
+                    if z_from < spod - 0.01 or min(x.z0 for x in ext) > zt - 0.01:
+                        continue
+                    covered.append(part)
+                    if z_from < zt - 0.01:
+                        self.add(rid, "parapet", part, max(spod, z_from), zt, fin, lvl, group=group, part="okladzina_attyki")
+                rest = clean_geom(band.difference(unary_union(covered)), min_area=1e-4) if covered else band
+                if not rest.is_empty:
+                    self.add(rid, "parapet", rest, spod, zt, fin, lvl, group=group, part="okladzina_attyki")
+                cop = clean_geom(unary_union([ring, band_in, band]).buffer(0.03, join_style=2)
+                                 .intersection(full.buffer(t_out + 0.04, join_style=2)), min_area=1e-4)
                 self.add(rid, "parapet", cop, zt, zt + 0.02, M_OBROBKA, lvl, group=group, part="obrobka")
         else:
             if lays_up:

@@ -653,8 +653,9 @@ class RysT(RysE):
                 q = label_point(r.polygon) + np.array([0.6, 0.6])
                 self.sym(S.motion_sensor, q, 90.0, s_mm=3.0, label="PIR", layer="E-ALARM")
                 out.append(q)
-        if rd == "komunikacja" and r.pow_netto == max((x.pow_netto for x in self.rooms if self.rodzaj(x) ==
-                                                         "komunikacja"), default=0):
+        kom = [x for x in self.rooms if self.rodzaj(x) == "komunikacja"]
+        hol = [x for x in kom if "hol" in x.nazwa.lower()] or kom
+        if rd == "komunikacja" and hol and r is max(hol, key=lambda x: x.pow_netto):
             q = label_point(r.polygon)
             _box_q = q + np.array([0.0, 0.5])
             self.sym(_box, _box_q, "AP")
@@ -690,6 +691,14 @@ class RysT(RysE):
         # wideodomofon, manipulator SSWiN, sygnalizator — przy wejściu głównym
         dz = [(w, o) for w in self.m.sciany(self.kid) if w.ext_side is not None for o in w.otwory if
               o.typ == "drzwi_zewn"]
+
+        def glowne(t):
+            w, o = t
+            r = self._room_pt(w.pt((o.s0 + o.s1) / 2, w.face_t(w.sgn_int, "all") + w.sgn_int * 0.3 *
+                                   (1 if w.sgn_int > 0 else 1)))
+            nm = (r.nazwa.lower() if r is not None else "")
+            return (0 if "wiatro" in nm else 1 if "hol" in nm else 2, -o.szer)
+        dz.sort(key=glowne)
         if dz:
             w, o = dz[0]
             si = w.sgn_int

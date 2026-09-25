@@ -1274,6 +1274,37 @@ def _stopka_fund(D) -> list:
     return out
 
 
+# ------------------------------------------------------------------------------------------------ k_przekroj
+def widok_przekroj(ctx: ViewContext, spec: dict, scale: float, opts: dict):
+    from . import konstrukcja_szczegoly as SZ
+    D = KD.dane(ctx)
+    detal = str(spec.get("detal", "zebro")).lower()
+    vp = Viewport(scale, "")
+    res = KResult()
+    placer = Placer(vp.k)
+    if detal in ("zebro", "stopa", "fundament"):
+        nazwa, pod, w = SZ.szczegol_fundamentu(ctx, spec, vp, res, placer)
+        lab = str(spec.get("przekroj") or "")
+        title = spec.get("tytul_widoku") or (f"PRZEKRÓJ {lab}-{lab} — {nazwa}" if lab else nazwa)
+        res.notes.append("Przekroje fundamentu: warstwy wg przegrody podłogi na gruncie i ściany z modelu; izolacja "
+                         "obwodowa wg PN-EN ISO 13793; zbrojenie — numery pozycji jak na arkuszu zbrojenia fundamentu.")
+    else:
+        title_, uz = SZ.szczegol_stropu(ctx, spec, vp, res, placer, detal)
+        title = spec.get("tytul_widoku") or title_
+        res.notes.append("Węzły stropów: warstwy wg przegród z modelu; zbrojenie — numery pozycji jak na arkuszach "
+                         "zbrojenia płyt poziomu (warstwa dolna/górna); wieniec wg pozycji obliczeniowej wieńców.")
+    vp.title = title
+    res.notes += [
+        "Otuliny (c_nom) — wg klasy ekspozycji elementów (PN-EN 1992-1-1 tabl. 4.4N + NA, Δc_dev = 10 mm); "
+        "podkładki dystansowe wg PN-EN 13670.",
+        "Stal B500SP (PN-H-93220), beton wg arkuszy zbrojenia; oznaczenia prętów wg PN-EN ISO 3766.",
+    ]
+    kol = kolizje_napisow(vp)
+    if kol:
+        ctx.note(f"{spec.get('nr', '')} {title}", f"kolizje napisów: {kol}")
+    return vp, res, title
+
+
 # ================================================================================================ rejestracja
 def widok_zbrojenie(ctx: ViewContext, spec: dict, scale: float, opts: dict):
     """Dyspozytor typu ``k_zbrojenie``: element = strop | plyta | fundament | belki | nadproza | schody | wsporniki."""
@@ -1291,3 +1322,4 @@ register_view("k_zbrojenie", widok_zbrojenie, "rysunek zbrojenia")
 
 register_view("k_strop", widok_strop, "rzut konstrukcji")
 register_view("k_fundamenty", widok_fundamenty, "rzut fundamentów")
+register_view("k_przekroj", widok_przekroj, "przekrój konstrukcyjny")

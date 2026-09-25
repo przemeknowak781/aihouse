@@ -1413,13 +1413,21 @@ class Model:
         probe_out = s.pt(s.L / 2, tout + es * 0.05)
         probe_in = s.pt(s.L / 2, tk - es * 0.01)
         slabs = self._slab_elems()
+        p_out = Point(tuple(probe_out))
+
+        def ciagla_na_zewnatrz(sl) -> bool:
+            """Płyta przechodzi przed licem ściany w inną płytę/dach na tym samym poziomie (wspornik stropu, dach przy
+            uskoku bryły) — czoła płyty nie ma, więc warstw zewnętrznych ściany nie przedłuża się na jej wysokość."""
+            return any(o is not sl and o["typ"] in ("strop", "dach") and abs(o["wierzch"] - sl["wierzch"]) <= Z_TOL
+                       and o["poly_full"].contains(p_out) for o in slabs)
+
         for sl in slabs:
             if abs(sl["spod"] - s.z_do) > Z_TOL:
                 continue
             if sl["typ"] == "strop" and sl["nad"] != s.kond:
                 continue
             P = sl["poly_full"]
-            if P.buffer(0.02).contains(Point(tuple(probe_in))) and not P.contains(Point(tuple(probe_out))):
+            if P.buffer(0.02).contains(Point(tuple(probe_in))) and not P.contains(p_out) and not ciagla_na_zewnatrz(sl):
                 if sl["typ"] == "dach":
                     z_top = max(z_top, sl.get("top_attyki") or sl["top"])
                 else:
@@ -1440,7 +1448,7 @@ class Model:
                     if abs(sl["wierzch"] - s.z_od) > Z_TOL:
                         continue
                     P = sl["poly_full"]
-                    if P.buffer(0.02).contains(Point(tuple(probe_in))) and not P.contains(Point(tuple(probe_out))):
+                    if P.buffer(0.02).contains(Point(tuple(probe_in))) and not P.contains(p_out) and not ciagla_na_zewnatrz(sl):
                         z_bot = min(z_bot, sl["spod"])
         for lay in s.warstwy:
             if lay.strona == es:
