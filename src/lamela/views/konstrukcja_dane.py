@@ -661,3 +661,144 @@ class PlytaFZ:
     gora: Warstwa | None = None
     niesp: list = field(default_factory=list)
     uwagi: list = field(default_factory=list)
+
+
+def _c_nom_modelu(m, klucz: str, domyslne: float) -> tuple[float, float]:
+    """Otulenie z opisu modelu (konstrukcja.beton.<klucz>: „… c_nom 35 mm (50 mm od gruntu)”) → (c_nom, c_dół)."""
+    txt = str(((m.raw.get("konstrukcja") or {}).get("beton") or {}).get(klucz) or "")
+    a = re.search(r"c_nom\s*(\d+)\s*mm", txt)
+    b = re.search(r"(\d+)\s*mm od gruntu", txt)
+    c = float(a.group(1)) if a else domyslne
+    return c, float(b.group(1)) if b else c
+
+
+def _fundamenty(an, D):
+    from ..obliczenia.konstrukcja import zelbet
+    from shapely.geometry import Polygon
+    m, p = an.m, an.p
+    els = {str(e["id"]): e for e in (m.fundamenty().get("elementy") or [])}
+    ex = p.ekspozycja.get("fundament", "XC2")
+    c_lib = zelbet.otulina(ex, 12, p, na_gruncie="podbeton").c_nom
+    c_top, c_bot = _c_nom_modelu(m, "fundament", c_lib)
+    for pz in an.pos_fund:
+        el = els.get(pz.ident)
+        if el is None:
+            continue
+        kl = re.search(r"C\d+/\d+", " ".join(pz.przyjeto) + str(el.get("mat")))
+        beton = kl.group(0) if kl else "C25/30"
+        if "os" not in el:
+            win = next((w for w in pz.wyniki if "Winkler" in getattr(w, "nazwa", "")), None)
+            h = float(el.get("h", 0.25))
+            F = PlytaFZ(pz.ident, pz.nr, Polygon(el["obrys"]), h, float(el.get("spod", -0.4)), beton, ex, c_bot)
+            if win is not None:
+                F.M = krok_wynik(win, "Moment maksymalny", "Moment pod") or 0.0
+                F.As_req = krok_wynik(win, "Wymagane zbrojenie rozciągane", "Zbrojenie rozciągane") or 0.0
+                F.As_min = krok_wynik(win, "Zbrojenie minimalne") or 0.0
+                As2 = krok_wynik(win, "Zbrojenie ściskane") or 0.0
+            else:
+                As2 = 0.0
+                D.braki.append(f"{pz.ident}: brak wyniku pasma płyty (Winkler) — siatki z A_s,min [WYMAGA ANALIZY].")
+            d = h - c_bot / 1000.0 - 0.006
+            As_min = F.As_min or as_min_plyty(h, d, 2.6)
+            if As2 > 0 or F.As_req > 0.04 * 1000 * h * 1000 * 0.5:
+                F.uwagi.append(
+                    f"Biblioteka (pasmo Winklera h = {h * 100:.0f} cm pod ścianą krawędziową, BEZ żeber ZF): M_Ed = "
+                    f"{F.M:.1f} kNm/m, A_s,req = {F.As_req / 100:.1f} cm²/m (μ > μ_lim — przekrój podwójnie zbrojony). "
+                    "Model pasma nie uwzględnia żeber pod ścianami — siatki płyty przyjęto z A_s,min (9.1N), obciążenie "
+                    "liniowe ścian przejmują żebra ZF. KONTROLA A_s NIESPEŁNIONA dla pasma przykrawędziowego — "
+                    "wymagany MES płyty z żebrami na podłożu sprężystym [WYMAGA ANALIZY].")
+                need_req = 0.0
+            else:
+                need_req = F.As_req
+            fi, s, As = dobierz_siatke(need_req, As_min, h, s_max_plyty(h), fi_min=10, fi_max=16)
+            F.dol = Warstwa("xy", "dol", fi, s, F.As_req, As_min, As, F.M, "dobór modułu (dobierz_siatke)")
+            F.gora = Warstwa("xy", "gora", fi, s, F.As_req, As_min, As, F.M, "dobór modułu (dobierz_siatke)")
+            F.niesp = warunki_niespelnione(pz.wyniki)
+            D.plyta_f = F
+            D.c_fund = (c_top, c_bot)
+            continue
+        r = next((w for w in pz.wyniki if hasattr(w, "zbrojenie_poprz")), None)
+        if r is None:
+            continue
+        (x0, y0), (x1, y1) = el["os"][0], el["os"][1]
+        if pz.tytul.startswith("Stopa"):
+            fs = fi_s(r.zbrojenie_poprz) or (12, 200.0)
+            B, hf = float(el.get("b", 1.0)), float(el.get("h", 0.45))
+            Lf = math.hypot(x1 - x0, y1 - y0) + B
+            Asr = (krok_wynik(r, "Wymagane zbrojenie rozciągane") or 0.0) / B
+            Asm = (krok_wynik(r, "Zbrojenie minimalne") or 0.0) / B
+            D.stopy.append(StopaZ(pz.ident, pz.nr, ((x0 + x1) / 2, (y0 + y1) / 2), B, Lf, hf, float(el.get("spod", -0.85)),
+                                  Warstwa("xy", "dol", fs[0], fs[1], Asr, Asm, pole_preta(fs[0]) * 1000 / fs[1]),
+                                  warunki_niespelnione(pz.wyniki), pz.wykorzystanie))
+            continue
+        nf = n_fi(r.zbrojenie_podl) or (4, 12)
+        st = fi_s(r.zbrojenie_podl) or (6, 300.0)
+        pp = None if "nie wymaga" in (r.zbrojenie_poprz or "") else fi_s(r.zbrojenie_poprz)
+        Asm = krok_wynik(r, "Zbrojenie podłużne") or 0.0
+        Z = BelkaZ(pz.ident, "zebro", pz.nr, (x0, y0), (x1, y1), float(el.get("b", 0.6)), float(el.get("h", 0.3)),
+                   float(el.get("spod", -0.7)), beton, ex, c_bot, dol=(nf[0] - nf[0] // 2, nf[1]),
+                   gora=(nf[0] // 2, nf[1]), As_dol=(0.0, Asm, nf[0] * pole_preta(nf[1])), strz=(st[0], st[1], 2),
+                   eta=pz.wykorzystanie, niesp=warunki_niespelnione(pz.wyniki), opis=str(el.get("uwagi") or ""))
+        Z.ids = [pp] if pp else []
+        D.zebra.append(Z)
+
+
+# ================================================================================================ agregat
+@dataclass
+class DaneKonstr:
+    an: object
+    poziomy: list = field(default_factory=list)
+    belki: list = field(default_factory=list)
+    nadproza: list = field(default_factory=list)
+    wience: list = field(default_factory=list)
+    biegi: list = field(default_factory=list)
+    stopy: list = field(default_factory=list)
+    zebra: list = field(default_factory=list)
+    plyta_f: PlytaFZ | None = None
+    c_fund: tuple = (35.0, 50.0)
+    braki: list = field(default_factory=list)
+    rys: dict = field(default_factory=dict)       # rejestr zbrojenia narysowanego: klucz → wiersz kontroli
+    cache: dict = field(default_factory=dict)
+
+    def poziom(self, klucz) -> Poziom | None:
+        """Poziom (grupa płyt) po: id elementu (np. 'ST1'), kondygnacji pod stropem ('P0') albo indeksie grupy."""
+        k = str(klucz)
+        for lv in self.poziomy:
+            if k in [e.id for e in lv.elementy] or k == str(lv.idx) or k == lv.nazwa:
+                return lv
+        m = self.an.m
+        try:
+            kd = m.kondygnacja(k)
+            z = kd.rzedna + kd.wys_kondygnacji
+            return min(self.poziomy, key=lambda L: abs(L.wierzch - z)) if self.poziomy else None
+        except KeyError:
+            return None
+
+    def element(self, eid: str) -> ElementPl | None:
+        for lv in self.poziomy:
+            for e in lv.elementy:
+                if e.id == eid:
+                    return e
+        return None
+
+
+def dane(ctx) -> DaneKonstr:
+    """Dane konstrukcyjne (raz na kontekst): analiza + ekstrakcja zbrojenia z wyników biblioteki."""
+    D = getattr(ctx, "_konstr_dane", None)
+    if D is not None:
+        return D
+    an = analiza(ctx)
+    D = DaneKonstr(an)
+    for fn in (_plyty, _belki, _nadproza, _wience, _schody, _fundamenty):
+        try:
+            fn(an, D)
+        except Exception as ex:  # noqa: BLE001 — brak jednego rodzaju elementów nie blokuje rysunków
+            import traceback
+            tb = traceback.extract_tb(ex.__traceback__)[-1]
+            D.braki.append(f"Ekstrakcja danych ({fn.__name__[1:]}): {type(ex).__name__}: {ex} "
+                           f"[{Path(tb.filename).name}:{tb.lineno}] [BŁĄD MODUŁU]")
+    D.braki += [f"Biblioteka: {b}" for b in an.brak_danych]
+    D.braki += [f"Biblioteka (uwaga analizy): {u}" for u in an.uwagi
+                if "WYMAGA ANALIZY" in u or "BŁĄD" in u or "niewykonalny" in u]
+    ctx._konstr_dane = D
+    return D

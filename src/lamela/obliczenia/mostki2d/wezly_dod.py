@@ -125,3 +125,224 @@ def wezel_wspornik_ogolny(sciana_gora: Sequence[Warstwa], sciana_dol: Sequence[W
         L_in=L_in, H=H, pod=pod, wysieg=wysieg, lacznik=lacznik, d_l=d_lacznika, belka=belka,
         sciana_gora=sciana_gora, sciana_dol=sciana_dol, podloga=podloga, sufit=sufit, mat_plyty=mat_plyty,
         mat_wsp=mat_wsp))
+
+
+def _wynik_wspornika(id, nazwa, ob, strefy, fl, g: dict) -> Wezel:
+    t, x_out, x_end, x_s1 = g["t"], g["x_out"], g["x_end"], g["x_s1"]
+    wys = g["wysieg"]
+    lac = g["lacznik"]
+    linie = []
+    if wys > 0:
+        h_w = 0.15 + 0.03       # wywinięcie hydroizolacji ≥ 15 cm ponad powierzchnię płyty (+ obróbka) [ZAŁ]
+        yw = g["y_w1"]
+        linie = [_ln("hydro", [(x_end, yw + 0.004), (x_out + 0.004, yw + 0.004), (x_out + 0.004, yw + h_w)],
+                     "membrana płyty wspornikowej wywinięta na ścianę ≥ 15 cm ponad powierzchnię płyty"),
+                 _ln("obrobka", [(x_end - 0.10, yw + 0.006), (x_end + 0.03, yw + 0.006), (x_end + 0.03, yw - 0.05),
+                                 (x_end + 0.045, yw - 0.065)], "obróbka czoła płyty z okapnikiem ≥ 3 cm"),
+                 _ln("woda", [(x_out + 0.12, yw + 0.05), (x_out + max(0.25, min(0.9, wys - 0.1)), yw + 0.05)],
+                     "spadek płyty ≥ 2 % od budynku")]
+    if g["pod"] == "zewn":
+        linie.append(_ln("paro", [(-g["L_in"], t + g["t_pod"] + 0.002), (0.0, t + g["t_pod"] + 0.002)],
+                         "szczelność powietrzna: płyta ŻB + tynk ściany górnej doprowadzony do płyty"))
+    typ = "strop_zewn_krawedz" if g["pod"] == "zewn" else ("wspornik" if wys > 0 else "strop_posredni")
+    nm = nazwa or {"strop_zewn_krawedz": "Strop nad powietrzem zewnętrznym — krawędź ze ścianą",
+                   "wspornik": "Płyta wspornikowa z łącznikiem termoizolacyjnym",
+                   "strop_posredni": "Strop pośredni"}[typ]
+    dane = {"warstwy ściany górnej": dane_warstw(g["sciana_gora"]),
+            "warstwy ściany dolnej": dane_warstw(g["sciana_dol"] or []) if g["pod"] == "wewn" else "— (pod stropem "
+                                                                                                   "powietrze zewn.)",
+            "płyta": f"{g['mat_plyty'].kod}, t = {t} m",
+            "warstwy podłogi": dane_warstw(g["podloga"]), "warstwy sufitu (bez pustki wentylowanej)": dane_warstw(g["sufit"])}
+    if wys > 0:
+        dane["płyta wspornikowa"] = (f"{g['mat_wsp'].kod}, t = {g['t_w']} m, wierzch {g['y_w1'] - t:+.2f} m wzgl. "
+                                     f"wierzchu stropu, wysięg {wys} m od lica ocieplenia")
+        dane["łącznik"] = (f"{lac.nazwa}: λ_eq = {lac.lam} W/(m·K), d = {g['d_l']} m — {lac.zrodlo}" if lac
+                           else "brak (płyta ciągła przez izolację)")
+    if g["belka"]:
+        dane["belka odwrócona"] = f"b = {g['belka'][0]} m, h nad płytą = {g['belka'][1]:.2f} m (w linii ściany górnej)"
+    uw = []
+    if g["pod"] == "zewn":
+        uw.append("Pustka wentylowana pod ociepleniem spodu stropu i podsufitka pominięte (PN-EN ISO 6946 — warstwy "
+                  "za pustką dobrze wentylowaną); R_se = 0,04 na spodzie ocieplenia (wariant ostrożny) [ZAŁ].")
+    return Wezel(id, nm, typ, ob, strefy, fl, przekroj="pionowy", linie=linie,
+                 punkty={"naroże podłoga–ściana": (0.0, t + g["t_pod"])},
+                 widok=(-min(g["L_in"], 1.0), -min(g["H"], 1.0) - (g["t_suf"] if g["pod"] == "zewn" else 0.0),
+                        max(x_end, x_out) + 0.1, t + min(g["H"], 1.0)),
+                 psi_domyslne=None, dane=dane, uwagi=uw,
+                 opis="Przekrój pionowy; " + ("pod stropem powietrze zewnętrzne (ocieplenie spodu)." if g["pod"] == "zewn"
+                                             else "pomieszczenia nad i pod stropem ogrzewane (grupa „i”)."))
+
+
+# ==================================================================================================
+# B. Attyka w licu ściany + płyta wspornikowa stropodachu (okap) przez łącznik
+# ==================================================================================================
+def wezel_attyka_wspornik(sciana: Sequence[Warstwa], dach: Sequence[Warstwa], attyka: Sequence[Warstwa],
+                          h_nad_pokryciem: float = 0.30, d_izol_gora: float = 0.05,
+                          t_wsp: float | None = None, dy_wsp: float = 0.0, mat_wsp: Material | None = None,
+                          wysieg: float = 1.0, lacznik: Material | None = LACZNIK_PRZYKLAD, d_lacznika: float = 0.08,
+                          H: float | None = None, L: float | None = None, theta_i: float | None = None,
+                          theta_e: float | None = None, id: str = "WZ-RW", nazwa: str | None = None) -> Wezel:
+    """Stropodach z attyką w licu ściany i okapem (płyta wspornikowa) przez łącznik termoizolacyjny.
+    `attyka` — warstwy przegrody attyki od strony dachu: [izolacja wewn., konstrukcja, izolacja zewn., wyprawa]
+    (konstrukcja attyki w linii konstrukcji ściany). Wspornik: grubość t_wsp, wierzch t_plyty + dy_wsp, od lica
+    konstrukcji do lica ocieplenia + wysieg; izolacja zewnętrzna attyki opiera się na wsporniku."""
+    ti, te = _temperatury(theta_i, theta_e)
+    st = _stos(sciana, 0.0)
+    ks = indeks_konstrukcyjnej(sciana)
+    x_s0, x_s1 = st[ks][0], st[ks][1]
+    x_out = st[-1][1]
+    dach = _bez_went_dach(dach)
+    kd = indeks_konstrukcyjnej(dach)
+    nad, plyta, pod = list(dach[:kd]), dach[kd], list(dach[kd + 1:])
+    t = plyta.d
+    t_suf = grubosc(pod)
+    y_top = t + grubosc(nad)
+    y_cap = y_top + h_nad_pokryciem
+    y_p = y_cap - d_izol_gora
+    ka = indeks_konstrukcyjnej(attyka)
+    iz_w = attyka[ka - 1] if ka > 0 else Warstwa(_izolacja_najlepsza(nad), 0.10)
+    iz_z = attyka[ka + 1] if ka + 1 < len(attyka) else None
+    mat_att = attyka[ka].mat
+    t_w = t_wsp or t
+    y_w1 = t + dy_wsp
+    y_w0 = y_w1 - t_w
+    x_end = x_out + wysieg
+    H = H or odl_ciecia(x_out)
+    L = L or odl_ciecia(grubosc(dach))
+    ob = []
+    for k, (a, b, w) in enumerate(st):
+        ob.append(_obsz(box(a, -H, b, 0.0 if k <= ks else y_w0), w))
+    for y0, y1, w in _stos(pod, 0.0, -1):
+        ob.append(_obsz(box(-L, y0, 0.0, y1), w))
+    ob.append(_obsz(box(-L, 0.0, x_s1, t), plyta, "płyta stropodachu"))
+    for y0, y1, w in _stos(list(reversed(nad)), t, +1):
+        ob.append(_obsz(box(-L, y0, x_s0 - iz_w.d, y1), w))
+    ob.append(_obsz(box(x_s0, t, x_s1, y_p), mat_att, "attyka"))
+    ob.append(_obsz(box(x_s0 - iz_w.d, t, x_s0, y_p), iz_w.mat, "izolacja attyki (wewn.)"))
+    x_iz_z = x_out if iz_z is None else x_s1 + iz_z.d
+    mat_z = (iz_z.mat if iz_z is not None else sciana[-1].mat)
+    ob.append(_obsz(box(x_s1, y_w1, x_iz_z, y_p), mat_z, "izolacja attyki (zewn.)"))
+    ob.append(_obsz(box(x_s0 - iz_w.d, y_p, x_iz_z, y_cap), iz_w.mat, "izolacja korony attyki"))
+    ob.append(_obsz(box(x_s1, y_w0, x_end, y_w1), mat_wsp or plyta.mat, "płyta wspornikowa (okap)"))
+    if lacznik is not None:
+        ob.append(_obsz(box(x_s1, y_w0, x_s1 + d_lacznika, y_w1), lacznik))
+    S = S_STREFY
+    ramka = box(-L, -H, max(x_end, x_iz_z) + S, y_cap + S)
+    strefy = strefy_z_dopelnienia(ob, ramka, [((-L / 2, -H / 2), _nas("pomieszczenie", ti, "wewn")),
+                                              ((x_end + S / 2, -H / 2), _nas("zewnętrze", te, "zewn"))])
+    fl = [ElementFlankujacy("ściana", ("i", "e"), H + y_top, H - t_suf, warstwy=list(sciana), l_oi=H),
+          ElementFlankujacy("stropodach", ("i", "e"), L + x_out, L, warstwy=list(dach), Rsi=RSI_GORA, l_oi=L)]
+    x_iw = x_s0 - iz_w.d
+    linie = [
+        _ln("paro", [(-L, t + 0.001), (x_s0 - 0.002, t + 0.001), (x_s0 - 0.002, y_top + 0.05)],
+            "paroizolacja na płycie wywinięta na attykę ponad izolację dachu (szczelność)"),
+        _ln("hydro", [(-L, y_top), (x_iw, y_top), (x_iw, y_cap), (x_iz_z, y_cap)],
+            f"hydroizolacja wywinięta na attykę i koronę — {h_nad_pokryciem * 100:.0f} cm ponad pokrycie "
+            f"({'≥' if h_nad_pokryciem >= 0.15 else '< WYMAGANE'} 15 cm)"),
+        _ln("hydro", [(x_iz_z + 0.004, y_w1 + 0.15), (x_iz_z + 0.004, y_w1 + 0.004), (x_end, y_w1 + 0.004)],
+            "membrana okapu wywinięta na izolację attyki ≥ 15 cm"),
+        _ln("obrobka", [(x_iw - 0.03, y_cap - 0.07), (x_iw - 0.03, y_cap + 0.01), (x_iz_z + 0.035, y_cap + 0.02),
+                        (x_iz_z + 0.035, y_cap - 0.05)], "obróbka korony attyki: spadek ≥ 5 % do dachu, okapniki"),
+        _ln("obrobka", [(x_end - 0.10, y_w1 + 0.006), (x_end + 0.03, y_w1 + 0.006), (x_end + 0.03, y_w0 + 0.02),
+                        (x_end + 0.045, y_w0)], "obróbka czoła okapu z okapnikiem"),
+        _ln("woda", [(x_iw - 0.08, y_top + 0.04), (x_iw - min(0.6, 0.8 * L), y_top + 0.04)],
+            "spadek dachu ≥ 2 % do wpustów; przelew awaryjny w attyce (χ)"),
+    ]
+    return Wezel(id, nazwa or "Attyka w licu ściany z okapem stropodachu (łącznik termoizolacyjny)", "attyka", ob,
+                 strefy, fl, przekroj="pionowy", linie=linie, punkty={"naroże sufit–ściana": (0.0, -t_suf)},
+                 widok=(-min(L, 1.0), -min(H, 1.0), x_end + 0.1, y_cap + 0.1), psi_domyslne="R_attyka",
+                 dane={"warstwy ściany": dane_warstw(sciana), "warstwy dachu": dane_warstw(dach),
+                       "attyka": dane_warstw(attyka) + [["wys. nad pokryciem", h_nad_pokryciem]],
+                       "okap": f"t = {t_w} m, wierzch {dy_wsp:+.2f} m wzgl. płyty, wysięg {wysieg} m",
+                       "łącznik": (f"{lacznik.nazwa}: λ_eq = {lacznik.lam}, d = {d_lacznika} m — {lacznik.zrodlo}"
+                                   if lacznik else "brak")})
+
+
+# ==================================================================================================
+# C. Płyta ciągła nad przegrodą pionową (dom–garaż, ściana wyższej kondygnacji, ściana pod stropem nad powietrzem)
+# ==================================================================================================
+def wezel_przegroda_w_linii(sciana_dol: Sequence[Warstwa], t_plyty: float, mat_plyty: Material,
+                            gora_lewa: tuple, gora_prawa: tuple, dol_lewa: tuple, dol_prawa: tuple,
+                            sciana_gora: Sequence[Warstwa] | None = None, t_plyty_prawa: float | None = None,
+                            theta_u: float | None = None, b_u: float = 0.8, H: float | None = None,
+                            L: float | None = None, theta_i: float | None = None, theta_e: float | None = None,
+                            id: str = "WZ-L", nazwa: str = "Płyta ciągła nad przegrodą pionową",
+                            typ: str = "polaczenie_nieogrz") -> Wezel:
+    """Przekrój pionowy przez płytę ciągłą nad ścianą `sciana_dol` (lico lewe x = 0; warstwy od lewej).
+    gora_lewa / gora_prawa: ('wewn', warstwy podłogi) | ('zewn', warstwy dachu od góry) — nad płytą;
+    dol_lewa / dol_prawa: (rodzaj 'wewn'|'nieogrz'|'zewn', warstwy sufitu od płyty w dół[, szerokość pasa]) — pod płytą;
+    sciana_gora — ściana na płycie w tej samej linii (lico lewe x = 0), rozdziela strefy nad płytą; bez niej obie
+    strony nad płytą muszą być tego samego rodzaju. Płyta po prawej może mieć inną grubość (wierzch wspólny)."""
+    ti, te = _temperatury(theta_i, theta_e)
+    tu = _theta_u(ti, te, theta_u, b_u)
+    th = {"wewn": ti, "zewn": te, "nieogrz": tu}
+    t = t_plyty
+    t_p = t_plyty_prawa or t
+    st_d = _stos(sciana_dol, 0.0)
+    D_d = st_d[-1][1]
+    st_g = _stos(sciana_gora, 0.0) if sciana_gora else []
+    D_g = st_g[-1][1] if st_g else 0.0
+    kg = indeks_konstrukcyjnej(sciana_gora) if sciana_gora else 0
+    def _gora(spec):
+        return spec[0], (list(spec[1]) if spec[0] == "wewn" else _bez_went_dach(spec[1]))
+    gl, gp = _gora(gora_lewa), _gora(gora_prawa)
+    def _dol(spec):
+        rodz, w = spec[0], list(spec[1]) if len(spec) > 1 else []
+        w = _bez_went_sufit(w) if rodz == "zewn" else w
+        return rodz, w, (spec[2] if len(spec) > 2 else None)
+    dl, dp = _dol(dol_lewa), _dol(dol_prawa)
+    t_gl, t_gp = grubosc(gl[1]), grubosc(gp[1])
+    t_dl, t_dp = grubosc(dl[1]), grubosc(dp[1])
+    dmax = max(D_d, D_g)
+    H = H or odl_ciecia(dmax)
+    L = L or odl_ciecia(max(t + t_gl + t_dl, t_p + t_gp + t_dp))
+    L_p = L + (dp[2] or 0.0)
+    y_bl, y_bp = 0.0, t - t_p          # spód płyty lewej / prawej (wierzch wspólny y = t)
+    ob = []
+    for k, (a, b, w) in enumerate(st_d):
+        ob.append(_obsz(box(a, -H, b, min(y_bl, y_bp) if a >= 0 else 0.0), w))
+    for y0, y1, w in _stos(dl[1], y_bl, -1):
+        ob.append(_obsz(box(-L, y0, 0.0, y1), w))
+    x_dp1 = D_d + dp[2] if dp[2] else D_d + L_p
+    for y0, y1, w in _stos(dp[1], y_bp, -1):
+        ob.append(_obsz(box(D_d, y0, x_dp1, y1), w))
+    ob.append(_obsz(box(-L, y_bl, D_d if t_p != t else D_d + L_p, t), mat_plyty, "płyta"))
+    if t_p != t:
+        ob.append(_obsz(box(D_d, y_bp, D_d + L_p, t), mat_plyty, "płyta (strona prawa)"))
+    x_gp0 = D_g if sciana_gora else 0.0
+    for y0, y1, w in _stos(list(reversed(gl[1])), t, +1):
+        ob.append(_obsz(box(-L, y0, 0.0, y1), w))
+    for y0, y1, w in _stos(list(reversed(gp[1])), t, +1):
+        ob.append(_obsz(box(x_gp0, y0, D_d + L_p, y1), w))
+    if sciana_gora:
+        for k, (a, b, w) in enumerate(st_g):
+            ob.append(_obsz(box(a, t, b, t + max(t_gl, t_gp) + H), w))
+    S = S_STREFY
+    y_top = t + max(t_gl, t_gp) + H
+    ramka = box(-L, -H, D_d + L_p, y_top)
+    nas, grp = [], {}
+    def seed(xy, rodz, nm):
+        g = GRUPY[rodz]
+        nas.append((xy, _nas(nm, th[rodz], rodz, g)))
+        grp[nm] = g
+    seed((-L / 2, -H / 2), dl[0], "dół lewa")
+    seed((D_d + L_p / 2, -H / 2), dp[0], "dół prawa")
+    seed((-L / 2, y_top - S / 2), gl[0], "góra lewa")
+    if sciana_gora or gp[0] != gl[0]:
+        seed((D_d + L_p - S / 2, y_top - S / 2), gp[0], "góra prawa")
+    strefy = strefy_z_dopelnienia(ob, ramka, nas)
+    fl = _flank_linia(sciana_dol, sciana_gora, t, t_p, mat_plyty, gl, gp, dl, dp, H, L, L_p, D_d, D_g, grp)
+    linie = _linie_linia(gl, gp, dl, dp, t, D_d, D_g, L, L_p, sciana_gora, t_gp)
+    return Wezel(id, nazwa, typ, ob, strefy, fl, przekroj="pionowy", linie=linie,
+                 punkty={"naroże dół lewa": (0.0, -t_dl)},
+                 widok=(-min(L, 1.0), -min(H, 1.0), D_d + min(L_p, 1.2), t + max(t_gl, t_gp) + min(H, 0.8)),
+                 dane={"ściana dolna (od lewej)": dane_warstw(sciana_dol),
+                       "ściana górna (od lewej)": dane_warstw(sciana_gora or []),
+                       "płyta": f"{mat_plyty.kod}, t = {t} m" + (f" (prawa {t_p} m)" if t_p != t else ""),
+                       "nad płytą L/P": f"{gl[0]} / {gp[0]}", "pod płytą L/P": f"{dl[0]} / {dp[0]}"
+                                                                           + (f" (pas {dp[2]} m)" if dp[2] else ""),
+                       "warstwy nad płytą L": dane_warstw(gl[1]), "warstwy nad płytą P": dane_warstw(gp[1]),
+                       "warstwy pod płytą L": dane_warstw(dl[1]), "warstwy pod płytą P": dane_warstw(dp[1]),
+                       "θ_u": f"{tu:.1f} °C" + (" (zadana)" if theta_u is not None else f" z b_u = {b_u} [ZAŁ]")},
+                 uwagi=["Grupy stref: i — ogrzewane, u — nieogrzewane, e — zewnętrze; ψ dla każdej pary grup "
+                        "z elementami flankującymi (PN-EN ISO 10211, więcej niż dwie temperatury)."])
