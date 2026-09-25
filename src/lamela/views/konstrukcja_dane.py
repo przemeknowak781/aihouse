@@ -764,7 +764,8 @@ def _fundamenty(an, D):
                 As2 = krok_wynik(win, "Zbrojenie ściskane") or 0.0
             else:
                 As2 = 0.0
-                D.braki.append(f"{pz.ident}: brak wyniku pasma płyty (Winkler) — siatki z A_s,min [WYMAGA ANALIZY].")
+                if not pz.dane.get("mes"):         # pozycja z MES płyty (biblioteka) — siatki z MES (prety_fundamentu)
+                    D.braki.append(f"{pz.ident}: brak wyniku pasma płyty (Winkler) — siatki z A_s,min [WYMAGA ANALIZY].")
             d = h - c_bot / 1000.0 - 0.006
             As_min = F.As_min or as_min_plyty(h, d, 2.6)
             if As2 > 0 or F.As_req > 0.04 * 1000 * h * 1000 * 0.5:
@@ -1598,6 +1599,10 @@ def fund_mes(D: DaneKonstr):
     """Analiza MES płyty fundamentowej z żebrami na podłożu Winklera (``plyta_fundamentowa``) — raz na kontekst."""
     if "fund_mes" in D.cache:
         return D.cache["fund_mes"]
+    W = getattr(D.an, "fund_mes", None)            # MES z pozycji obliczeń statycznych (te same parametry) — bez ponownej analizy
+    if W is not None and abs(W.c_dol - D.c_fund[1]) < 1e-6 and abs(W.c_gora - D.c_fund[0]) < 1e-6:
+        D.cache["fund_mes"] = W
+        return W
     W = None
     try:
         from ..obliczenia.konstrukcja.plyta_fundamentowa import analiza_plyty_fundamentowej
