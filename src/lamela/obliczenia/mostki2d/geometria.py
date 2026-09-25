@@ -559,7 +559,16 @@ def wezel_wspornik(warstwy_sciany: Sequence[Warstwa], t_plyty: float = 0.20, mat
     if wysieg > 0:
         dane["łącznik"] = (f"{lacznik.nazwa}: λ_eq = {lacznik.lam} W/(m·K), d = {d_lacznika} m — {lacznik.zrodlo}"
                            if lacznik else "brak (płyta ciągła przez izolację)")
-    return Wezel(id, nazwa, typ, ob, strefy, fl, przekroj="pionowy",
+    linie = []
+    if wysieg > 0:
+        h_w = 0.15 + 0.07     # wywinięcie ≥ 15 cm ponad nawierzchnię tarasu (nawierzchnia ~7 cm) [ZAŁ]
+        linie = [_ln("hydro", [(x_end, t + 0.004), (x_out + 0.004, t + 0.004), (x_out + 0.004, t + h_w)],
+                     "hydroizolacja płyty wywinięta na ścianę ≥ 15 cm ponad nawierzchnię (pod cokolik XPS)"),
+                 _ln("obrobka", [(x_end - 0.10, t + 0.006), (x_end + 0.03, t + 0.006), (x_end + 0.03, t - 0.05),
+                                 (x_end + 0.045, t - 0.065)], "obróbka czoła płyty z okapnikiem ≥ 3 cm"),
+                 _ln("woda", [(x_out + 0.12, t + 0.05), (x_out + max(0.25, min(0.9, wysieg - 0.1)), t + 0.05)],
+                     "spadek płyty ≥ 1,5–2 % od budynku")]
+    return Wezel(id, nazwa, typ, ob, strefy, fl, przekroj="pionowy", linie=linie,
                  punkty={"naroże sufit": (0.0, -t_suf), "naroże podłoga": (0.0, t + t_pod)},
                  widok=(-min(L_in, 1.0), -min(H, 1.0), max(x_end, x_out) + 0.1, t + min(H, 1.0)),
                  psi_domyslne=psi_d, psi_deklarowane=psi_dekl, dane=dane,
@@ -617,7 +626,27 @@ def wezel_attyka(warstwy_sciany: Sequence[Warstwa], warstwy_dachu: Sequence[Wars
     fl = [ElementFlankujacy("ściana", ("i", "e"), H + y_top, H - t_suf, warstwy=list(warstwy_sciany), l_oi=H),
           ElementFlankujacy("stropodach", ("i", "e"), L + x_out, L, warstwy=pomin_pustki_wentylowane(warstwy_dachu),
                             Rsi=RSI_GORA, l_oi=L)]
-    return Wezel(id, nazwa, "attyka", ob, strefy, fl, przekroj="pionowy",
+    x_iw = x_s0 - d_izol_wewn
+    paro = next((w.mat.kod for w in nad if "paroiz" in w.mat.nazwa.lower() or "paroiz" in w.mat.kod.lower()), None)
+    hyd = next((w.mat.kod for w in nad if any(k in f"{w.mat.kod} {w.mat.nazwa}".lower()
+                                             for k in ("epdm", "hydro", "papa", "pap ", "tpo", "pvc", "membran"))),
+               None)
+    wz_h = h_nad_pokryciem >= 0.15
+    r_k = 0.05 * (x_out + 0.035 - (x_iw - 0.03))       # spadek korony 5 % do dachu
+    linie = [
+        _ln("paro", [(-L, t + 0.001), (x_s0 - 0.002, t + 0.001), (x_s0 - 0.002, y_top + 0.05)],
+            f"paroizolacja na płycie ({paro or 'BRAK w przegrodzie modelu'}) wywinięta na attykę ponad izolację "
+            f"dachu, połączona z płytą ŻB (szczelność)"),
+        _ln("hydro", [(-L, y_top), (x_iw, y_top), (x_iw, y_cap), (x_out, y_cap), (x_out, y_cap - 0.06)],
+            f"hydroizolacja ({hyd or 'BRAK w przegrodzie modelu'}) wywinięta na attykę i koronę — "
+            f"{h_nad_pokryciem * 100:.0f} cm ponad pokrycie ({'≥' if wz_h else '< WYMAGANE'} 15 cm)"),
+        _ln("obrobka", [(x_iw - 0.03, y_cap - 0.07), (x_iw - 0.03, y_cap + 0.01), (x_out + 0.035, y_cap + 0.01 + r_k),
+                        (x_out + 0.035, y_cap - 0.05), (x_out + 0.05, y_cap - 0.065)],
+            "obróbka korony attyki: spadek ≥ 5 % do dachu, okapniki ≥ 3 cm od lic"),
+        _ln("woda", [(x_iw - 0.08, y_top + 0.04), (x_iw - min(0.6, 0.8 * L), y_top + 0.04)],
+            "spadek dachu ≥ 2 % do wpustów; przelew awaryjny w attyce (mostek punktowy χ)"),
+    ]
+    return Wezel(id, nazwa, "attyka", ob, strefy, fl, przekroj="pionowy", linie=linie,
                  punkty={"naroże sufit–ściana": (0.0, -t_suf)},
                  widok=(-min(L, 1.0), -min(H, 1.0), x_out + 0.1, y_cap + 0.1), psi_domyslne="R_attyka",
                  dane={"warstwy ściany": dane_warstw(warstwy_sciany), "warstwy dachu": dane_warstw(warstwy_dachu),
@@ -794,9 +823,28 @@ def _wezel_krawedz_okna(rodzaj: str, warstwy_sciany: Sequence[Warstwa], U_f: flo
                      "ostrożny dla f_Rsi (ogranicza dopływ ciepła do naroża pod parapetem).")
     else:
         nz = nazwa or f"Ościeże okna — rama {opis_pol}"
+    # linie schematyczne (układ lokalny s, n → T): taśmy montażu warstwowego, obróbki, spływ wody
+    s_t = max(x0, d_t0)
+    nf1 = yf0 + d_f
+    lin = [("tasma_wewn", [(s_t - 0.012, yf0 - 0.004), (x0 + 0.03, yf0 - 0.004)],
+            "taśma paroszczelna od wewnątrz (rama ↔ tynk ościeża)"),
+           ("tasma_zewn", [(x0 - 0.035, nf1 + 0.004), (x0 + 0.02, nf1 + 0.004)],
+            "taśma paroprzepuszczalna od zewnątrz (pod izolacją ościeża)")]
+    if rodzaj == "nadproze":
+        lin.append(("obrobka", [(s_izol - 0.06, D + 0.002), (s_izol + 0.002, D + 0.002), (s_izol + 0.014, D + 0.014)],
+                    "profil narożny z okapnikiem w ETICS nad oknem"))
+    if rodzaj == "podokiennik" and parapet_zewn is not None:
+        lin += [("tasma_zewn", [(s_izol - 0.004, nf1 - 0.01), (s_izol - 0.004, D - 0.01)],
+                 "taśma / membrana pod parapetem (2. poziom uszczelnienia), wywinięta na ramę"),
+                ("obrobka", [(s_izol + parapet_zewn[1], D + parapet_zewn[2]), (s_izol - 0.03, D + parapet_zewn[2]),
+                             (s_izol - 0.04, D + parapet_zewn[2] - 0.01)],
+                 f"okapnik parapetu {parapet_zewn[2] * 100:.0f} cm przed licem, zaślepki boczne"),
+                ("woda", [(s_izol + 0.035, nf1 + 0.03), (s_izol + 0.02, D + parapet_zewn[2] + 0.02)],
+                 "spadek parapetu ≥ 5 % na zewnątrz")]
+    linie = [_ln(r_, [T(p_) for p_ in xy_], o_) for r_, xy_, o_ in lin]
     wid = T(box(-0.6, -0.1, x_cut, D + 0.1)).bounds
     return Wezel(id, nz, typ, ob_t, strefy, fl, przekroj="poziomy" if rodzaj == "oscieze" else "pionowy",
-                 punkty=punkty, widok=wid, psi_domyslne=psi_d, dane=dane, uwagi=uwagi)
+                 punkty=punkty, widok=wid, psi_domyslne=psi_d, dane=dane, uwagi=uwagi, linie=linie)
 
 
 def wezel_oscieze_okna(warstwy_sciany: Sequence[Warstwa], U_f: float = 0.95, b_f: float = 0.115, d_f: float = 0.082,
@@ -946,7 +994,15 @@ def wezel_prog_strop(warstwy_sciany: Sequence[Warstwa], t_plyty: float = 0.20, m
     uw = ["Ocieplenie ściany prowadzone do spodu ramy (cokolik izolacji XPS nad płytą) — ciągłość izolacji w "
           "płaszczyźnie ramy; hydroizolacja tarasu/balkonu wywinięta ≥ 15 cm lub pod próg (taśma EPDM do ramy), "
           "spadek płyty ≥ 1,5–2 % od budynku, odwodnienie liniowe/rynna przy progu bezbarierowym."]
-    return Wezel(id, nz, "prog", ob, strefy, fl, przekroj="pionowy",
+    linie = [_ln("hydro", [(x_end, t + 0.004), (x_out + 0.004, t + 0.004), (x_out + 0.004, y_f - 0.004),
+                           (x_f1 - 0.01, y_f - 0.004)],
+                 "hydroizolacja płyty wprowadzona pod próg / taśma EPDM do ramy"),
+             _ln("tasma_wewn", [(x_f0 - 0.04, y_f + 0.004), (x_f0 + 0.01, y_f + 0.004)],
+                 "taśma paroszczelna rama ↔ posadzka/strop")]
+    if wysieg > 0:
+        linie.append(_ln("woda", [(x_out + 0.12, t + 0.05), (x_out + max(0.25, min(0.9, wysieg - 0.1)), t + 0.05)],
+                         "spadek ≥ 1,5–2 % od budynku; odwodnienie liniowe przy progu"))
+    return Wezel(id, nz, "prog", ob, strefy, fl, przekroj="pionowy", linie=linie,
                  punkty={"styk podłoga–rama": (x_f0, y_f), "naroże sufit": (0.0, -t_suf)},
                  widok=(-min(L_in, 1.0), -min(H, 1.0), max(x_end, x_out) + 0.1, y_top),
                  dane=dane, uwagi=uw,
@@ -1072,8 +1128,36 @@ def wezel_cokol(warstwy_sciany: Sequence[Warstwa], warstwy_podlogi: Sequence[War
     dane_prog = {}
     if prog is not None:
         dane_prog = {"próg": _opis_progu(prog, x_f0, y_w0)}
+    # linie schematyczne: izolacje przeciwwilgociowe/przeciwwodne, strefa cokołu, drenaż, spływ wody
+    x_hd = x_s1 + d_h / 2
+    linie = []
+    if fundament == "lawa":
+        linie += [_ln("przeciwwilg", [(x_in, y_w0 + 0.002), (x_s0, y_w0 + 0.002), (x_hd, y_w0 + 0.002)],
+                      "izolacja przeciwwilgociowa podłogi (na płycie podkładowej) połączona z poziomą pod murem"),
+                  _ln("przeciwwilg", [(xc - b_l / 2, y_lt + 0.002), (xc + b_l / 2, y_lt + 0.002)],
+                      "izolacja pozioma na ławie"),
+                  _ln("hydro", [(x_hd, y_lt), (x_hd, y_prz)],
+                      "izolacja pionowa ściany fundamentowej (KMB / masa bitumiczna) do spodu ETICS")]
+        x_dr, y_dr = xc + b_l / 2 + 0.12, spod + 0.08
+    else:
+        linie += [_ln("hydro", [(x_in, y_izol_dol - 0.002), (x_hd, y_izol_dol - 0.002), (x_hd, y_prz)],
+                      "hydroizolacja pod płytą (na XPS) wywinięta na krawędź płyty — ciągła do strefy cokołu")]
+        x_dr, y_dr = x_out + 0.25, y_izol_dol - 0.05
+    linie += [_ln("hydro", [(x_out + 0.003, y_teren - 0.15), (x_out + 0.003, y_prz + 0.05)],
+                  f"uszczelnienie strefy cokołu (masa/tynk mozaikowy) do {h_cokolu * 100:.0f} cm nad terenem"
+                  f" ({'≥' if h_cokolu >= 0.30 - 1e-9 else '< WYMAGANE'} 30 cm)"),
+              _ln("drenaz", [(x_out + 0.01, y_teren), (x_out + 0.50, y_teren), (x_out + 0.50, y_teren - 0.20),
+                             (x_out + 0.01, y_teren - 0.20)], "opaska żwirowa ≥ 50 cm"),
+              _ln("drenaz", [(x_dr + 0.05 * math.cos(a_), y_dr + 0.05 * math.sin(a_))
+                             for a_ in [k_ * math.pi / 8 for k_ in range(17)]],
+                  "drenaż opaskowy DN100 w obsypce żwirowej — decyzja wg badań gruntu / ZWG"),
+              _ln("woda", [(x_out + 0.55, y_teren + 0.04), (x_out + 0.98, y_teren + 0.03)],
+                  "spadek terenu ≥ 2 % od budynku na ≥ 1,5–2 m")]
+    if prog is not None:
+        linie.append(_ln("tasma_zewn", [(x_f1 + 0.01, 0.003), (x_out + 0.02, 0.003)],
+                         "odwodnienie liniowe przed progiem (próg bezbarierowy)"))
     return Wezel(id, wz_nazwa,
-                 "cokol" if prog is None else "prog", ob, strefy, fl, przekroj="pionowy",
+                 "cokol" if prog is None else "prog", ob, strefy, fl, przekroj="pionowy", linie=linie,
                  punkty={"naroże ściana–posadzka": (0.0, 0.0)} if prog is None else
                  {"styk posadzka–rama": (x_f0, 0.0)},
                  siatka={"h_min": 0.003, "h_max": 0.40, "r": 1.25},
@@ -1133,6 +1217,13 @@ def wezel_garaz(warstwy_sciany: Sequence[Warstwa], warstwy_sciany_garazu: Sequen
                                ("przerywa ocieplenie" if przerwa_izolacji else "dochodzi do lica ETICS")),
                  "garaz", ob, strefy, fl, przekroj="poziomy",
                  punkty={"naroże dom (lico wewn.)": (0.0, 0.0)},
+                 linie=[_ln("paro", [(-L, -0.002), (L, -0.002)],
+                            "tynk wewnętrzny ciągły — szczelność powietrzna (i gazowa od garażu, WT § 106)"),
+                        _ln("tasma_zewn", [(-d_g - 0.01, y_out + 0.004), (0.01, y_out + 0.004)],
+                            "styk ściana garażu ↔ ETICS: taśma rozprężna / dylatacja")]
+                 if not przerwa_izolacji else
+                 [_ln("paro", [(-L, -0.002), (L, -0.002)],
+                      "tynk wewnętrzny ciągły — szczelność powietrzna (i gazowa od garażu, WT § 106)")],
                  widok=(-1.2, -0.3, 1.2, y_out + 1.0),
                  dane={"warstwy ściany domu": dane_warstw(warstwy_sciany),
                        "warstwy ściany garażu (od garażu)": dane_warstw(warstwy_sciany_garazu),
@@ -1166,7 +1257,14 @@ def wezel_rura_spustowa(warstwy_sciany: Sequence[Warstwa], szer_wneki: float = 0
         ((0.0, -S / 2), _nas("wnętrze", ti, "wewn")),
         ((0.0, D + S / 2), _nas("zewnętrze (z wnęką)", te, "zewn"))])
     fl = [ElementFlankujacy("ściana", ("i", "e"), 2 * L, 2 * L, warstwy=list(warstwy_sciany))]
-    return Wezel(id, nazwa, "rura_spustowa", ob, strefy, fl, przekroj="poziomy",
+    r_r = 0.05
+    yc_w = y_s1 + d_pozostala + r_r + 0.005
+    okrag = lambda xc_, yc_: [(xc_ + r_r * math.cos(k_ * math.pi / 12), yc_ + r_r * math.sin(k_ * math.pi / 12))
+                              for k_ in range(25)]
+    linie = [_ln("rura", okrag(0.0, yc_w), "rura spustowa DN100 we wnęce ETICS (wariant obliczony)"),
+             dict(_ln("rura", okrag(szer_wneki / 2 + 0.25, D + 0.04 + r_r),
+                      "wariant zalecany: rura przed licem na obejmach dystansowych (bez wnęki, ψ ≈ 0)"), alt=True)]
+    return Wezel(id, nazwa, "rura_spustowa", ob, strefy, fl, przekroj="poziomy", linie=linie,
                  punkty={"lico wewn. za wnęką": (0.0, 0.0)}, widok=(-0.6, -0.1, 0.6, D + 0.1),
                  dane={"warstwy ściany": dane_warstw(warstwy_sciany),
                        "wnęka": f"szer. {szer_wneki} m, pozostała izolacja {d_pozostala} m"},
