@@ -679,7 +679,7 @@ def table(sh, x: float, y_top: float, cols: list[tuple[str, float]], rows: list[
                 ls = [v]
                 if zawijaj and T.width(v, hh) > w - 2.0 + 1e-6:
                     hh, ls = _zawin_komorke(v, w - 2.0, h, row_h)
-                    rh = max(rh, (len(ls) - 1) * hh * 1.45 + hh + 1.6)
+                    rh = max(rh, (len(ls) - 1) * hh * 1.45 + hh + 2.2)
                 cells.append((hh, ls))
             xx = x
             for i, ((name, w), (hh, ls)) in enumerate(zip(cols, cells)):
@@ -709,7 +709,7 @@ def _zawin_komorke(v: str, avail: float, h: float, row_h: float) -> tuple[float,
     ISO 3098 (≤ h, ≥ 1,8 mm), przy którym wiersze mieszczą się w wysokości wiersza tabeli; inaczej 1,8 mm."""
     for hh in [x for x in reversed(styles.TEXT_SERIES) if 1.8 - 1e-6 <= x <= h + 1e-6]:
         ls = wrap(v, avail, hh)
-        if all(T.width(s_, hh) <= avail + 1e-6 for s_ in ls) and (len(ls) - 1) * hh * 1.45 + hh <= row_h - 1.0:
+        if all(T.width(s_, hh) <= avail + 1e-6 for s_ in ls) and (len(ls) - 1) * hh * 1.45 + hh <= row_h - 2.2:
             return hh, ls
     return 1.8, wrap(v, avail, 1.8)
 

@@ -2690,6 +2690,9 @@ class AnalizaKonstrukcji:
     def _fundamenty(self):
         p, m = self.p, self.m
         fu = m.fundamenty()
+        if fu.get("typ") == "plyta" and any("obrys" in e for e in (fu.get("elementy") or [])):
+            self._fundament_plytowy()
+            return
         k0 = m.kondygnacje[0] if m.kondygnacje else None
         z_posadzki = m.kond_z_od(k0.id) if k0 else 0.0
         obrys0 = m.obrys_kondygnacji(k0.id) if k0 else Polygon()
@@ -2814,6 +2817,180 @@ class AnalizaKonstrukcji:
         if self.rys_dir and fu.get("elementy"):
             from . import rysunki
             self.rys_fund = rysunki.rys_fundamenty(self, self.rys("fundamenty_plan.png"))
+
+    def _otulenie_fundamentu(self) -> tuple[float, float]:
+        """(c_nom górą, c_nom dołem) [mm] z opisu modelu (konstrukcja.beton.fundament: „… c_nom 35 mm (50 mm od gruntu)”)."""
+        txt = str(((self.m.raw.get("konstrukcja") or {}).get("beton") or {}).get("fundament") or "")
+        c_lib = zelbet.otulina(self.p.ekspozycja.get("fundament", "XC2"), 12, self.p, na_gruncie="podbeton").c_nom
+        a = re.search(r"c_nom\s*(\d+)\s*mm", txt)
+        b = re.search(r"(\d+)\s*mm od gruntu", txt)
+        c = float(a.group(1)) if a else c_lib
+        return c, float(b.group(1)) if b else c
+
+    def _fundament_plytowy(self):
+        """Płyta fundamentowa z żebrami i pogrubieniami — pozycje z MES płyty na podłożu sprężystym (moduł
+        plyta_fundamentowa; zastępuje pozycje ław/stóp izolowanych — przyjęcie Z6): płyta (podłoże, nośność ogólna,
+        docisk lokalny, osiadanie, odrywanie, zginanie), każde żebro (docisk, zginanie pasma żebra, ścinanie), każde
+        pogrubienie (zginanie, przebicie, docisk)."""
+        from .plyta_fundamentowa import analiza_plyty_fundamentowej
+        p, m = self.p, self.m
+        fu = m.fundamenty()
+        els = fu.get("elementy") or []
+        c_g, c_d = self._otulenie_fundamentu()
+        W = analiza_plyty_fundamentowej(self, siatka=0.3, c_dol=c_d, c_gora=c_g)
+        self.fund_mes = W
+        if W is None:
+            return
+        kl = klasa_betonu_z_nazwy(str(next((e.get("mat") for e in els if "obrys" in e), "")) or "") or p.beton_dla("fundament")[1]
+        kl = klasa_betonu_z_nazwy(m.material(str(next((e.get("mat") for e in els if "obrys" in e), ""))).nazwa
+                                  if m.material(str(next((e.get("mat") for e in els if "obrys" in e), ""))) else "") or kl
+        beton = Beton.z_parametrow(kl, p)
+        rib = np.array([s_ != "" for s_ in W.strefa_el])
+        pl_ids = [str(e["id"]) for e in els if "obrys" in e]
+        iz = fu.get("izolacja_obwodowa") or {}
+        # --- płyta (pozycja główna: pierwsza płyta składowa)
+        poz = Pozycja("", pl_ids[0], f"Płyta fundamentowa {W.id} z żebrami i pogrubieniami — MES na podłożu sprężystym",
+                      "fundament")
+        poz.dane["mes"] = True
+        poz.opis.append(
+            f"Płyta żelbetowa h = {f(W.h * 100, 0)} cm ({beton.klasa}) z żebrami pod ścianami nośnymi i pogrubieniami pod słupami, "
+            f"na XPS i podsypce; model MES płytowy (elementy ACM, siatka ≤ 0,30 m) na podłożu Winklera z kontaktem "
+            f"jednostronnym, żebra/pogrubienia jako strefy o grubości h_płyty + h_żebra [ZAŁ]; k_s z modułu edometrycznego "
+            f"M₀ i wymiarów płyty (Bowles (5-16a), PN-EN 1997-1 zał. F.2), obwiednia wariantów k_s × 0,5 / × 2 (Z4); "
+            f"obciążenia: profile dolne ścian parteru (średnia krocząca 2,0 m — Z5), siły w słupach (trzpienie ŻB — "
+            f"rozłożone na długości trzpienia), ciężar płyty i podłogi, obciążenie użytkowe posadzki; {W.kombinacje} obliczeń "
+            f"(kombinacje STR/GEO × warianty k_s). Płyty składowe: {', '.join(pl_ids)} (uskok poziomów w żebrze — [ZAŁ]).")
+        poz.opis.append(
+            "Głębokość posadowienia: płyta na izolacji termicznej z izolacją obwodową przeciwprzemarzaniową "
+            f"({iz.get('opis') or 'wg modelu'}) — posadowienie płytkie chronione przed przemarzaniem wg PN-EN ISO 13793 "
+            "zamiast warunku D ≥ h_z dla ław (W-284; przyjęcie Z6 — wymiary izolacji obwodowej do potwierdzenia w projekcie "
+            "geotechnicznym dla strefy klimatycznej i danych gruntowych).")
+        poz.wyniki += [w_ for w_ in W.wyniki if not w_.nazwa.startswith("Przebicie")]
+        wz = Wynik(nazwa="Zginanie płyty (MES, momenty Wood–Armer, obwiednia) — wymagane zbrojenie poza żebrami")
+        Amax = 0.04 * 1000 * W.h * 1000
+        for key in ("dol_x", "dol_y", "gora_x", "gora_y"):
+            A = float(W.As[key][~rib].max()) if (~rib).any() else 0.0
+            M = float(np.abs(W.M[key][~rib]).max()) if (~rib).any() else 0.0
+            wz.krok(f"Warstwa {key.replace('_', ' ')}: maks. moment / A_s,req", "m_Ed; A_s,req", "", f"{f(M, 1)} kNm/m; {f(A, 0)} mm²/m")
+            wz.warunek(f"Zbrojenie płyty {key.replace('_', ' ')} ≤ A_s,max (9.2.1.1(3))", A, Amax, "mm²/m", "PN-EN 1992-1-1 9.2.1.1(3)",
+                       nd=0, symbol_E="A_s,req", symbol_R="A_s,max")
+        wz.krok("Minimalne zbrojenie płyty", "A_s,min = max(0,26·f_ctm/f_yk; 0,0013)·b·d", "", float(W.As_min[~rib].min()) if (~rib).any() else 0.0,
+                "mm²/m", nd=0, zrodlo="(9.1N)")
+        if W.mu_przekr.any():
+            wz.uwaga(f"{int(W.mu_przekr.sum())} el. MES z μ > μ_lim — przekrój podwójnie zbrojony (A_s2 w warstwie przeciwnej ujęte "
+                     "w wymaganiu tej warstwy).")
+        poz.wyniki.append(wz)
+        poz.przyjeto.append(f"Płyta fundamentowa gr. {f(W.h * 100, 0)} cm, {beton.klasa}, otulenie {f(c_d, 0)} mm (od gruntu) / "
+                            f"{f(c_g, 0)} mm; siatki dół/góra i dozbrojenia — z A_s,req MES (rysunki PT-BO, kontrola zbrojenia).")
+        self.pos_fund.append(poz)
+        for pid in pl_ids[1:]:
+            el = next(e for e in els if str(e.get("id")) == pid)
+            Pc = Polygon(el["obrys"]).buffer(0)
+            msk = np.array([Pc.contains(Point(*c_)) for c_ in W.el_c])
+            pz = Pozycja("", pid, f"Płyta fundamentowa {pid} — część płyty {W.id} (MES wspólny — poz. {pl_ids[0]})", "fundament")
+            pz.dane["mes"] = True
+            wr = Wynik(nazwa=f"Wyniki MES w obszarze płyty {pid}")
+            if msk.any():
+                wr.krok("Maks. docisk obliczeniowy w obszarze", "p_d,max", "", float(W.p_d_el[msk].max()), "kPa", nd=1)
+                wr.krok("Maks. osiadanie (SLS)", "w_k,max", "", float(W.w_k_el[msk].max()) * 1000, "mm", nd=1)
+                wr.warunek("Docisk do podłoża (obszar płyty)", float(W.p_d_el[msk].max()), W.q_Rd_lok, "kPa", "PN-EN 1997-1 6.5.2",
+                           nd=1, symbol_E="p_d,max", symbol_R="q_Rd")
+            pz.wyniki.append(wr)
+            pz.opis.append(str(el.get("uwagi") or ""))
+            pz.przyjeto.append(f"Płyta gr. {f(float(el.get('h', W.h)) * 100, 0)} cm — zbrojenie jak poz. {pl_ids[0]} (MES wspólny).")
+            self.pos_fund.append(pz)
+        # --- żebra i pogrubienia
+        rows = []
+        stal = self.stal
+        for e in els:
+            if "os" not in e:
+                continue
+            fid = str(e["id"])
+            (x0, y0), (x1, y1) = e["os"][0], e["os"][1]
+            Lx = math.hypot(x1 - x0, y1 - y0)
+            B, hz = float(e.get("b", 0.6)), float(e.get("h", 0.3))
+            msk = np.array([s_ == fid for s_ in W.strefa_el])
+            h_t = float(W.h_el[msk].max()) if msk.any() else W.h + hz
+            kier = "x" if abs(x1 - x0) >= abs(y1 - y0) else "y"
+            pd_ = float(W.p_d_el[msk].max()) if msk.any() else 0.0
+            r = fund.Lawa(nazwa=f"{fid} — MES płyty fundamentowej", B=B, h=h_t)
+            if Lx < B:                                   # pogrubienie (stopa) pod słupem
+                Lf = Lx + B
+                sl = [c for c in m.slupy() if box(min(x0, x1) - B / 2, min(y0, y1) - B / 2, max(x0, x1) + B / 2,
+                                                   max(y0, y1) + B / 2).contains(Point(*c["xy"]))
+                      and float(c["z_od"]) < W.spod + W.h + 0.5]
+                req = float(np.maximum(W.As["dol_x"], W.As["dol_y"])[msk].max()) if msk.any() else 0.0
+                Amin = float(W.As_min[msk].max()) if msk.any() else 0.0
+                fi, s_, As = zelbet.dobierz_plyta(max(req, Amin), 250.0, 12, 20, As_min=Amin)
+                r.krok("Wymagane zbrojenie rozciągane (MES, maks. w pogrubieniu, dół) × szerokość", "A_s,req·B", "", req * B, "mm²", nd=0)
+                r.krok("Zbrojenie minimalne × szerokość", "A_s,min·B", "", Amin * B, "mm²", nd=0, zrodlo="(9.1N)")
+                r.warunek("Zbrojenie dolne pogrubienia (MES)", req, As, "mm²/m", "6.1", nd=0, symbol_E="A_s,req", symbol_R="A_s,prov")
+                r.krok("Maks. docisk pod pogrubieniem (MES)", "p_d,max", "", pd_, "kPa", nd=1)
+                r.warunek("Docisk do podłoża pod pogrubieniem", pd_, W.q_Rd_lok, "kPa", "PN-EN 1997-1 6.5.2", nd=1,
+                          symbol_E="p_d,max", symbol_R="q_Rd")
+                r.zbrojenie_poprz = f"siatka dołem φ{fi} co {f(s_ / 10, 0)} cm w obu kierunkach"
+                pz = Pozycja("", fid, f"Stopa (pogrubienie płyty) {fid} ({f(B)} × {f(Lf)} × {f(h_t)} m) pod słupem "
+                             + (", ".join(str(c["id"]) for c in sl) or "—"), "fundament")
+                pz.wyniki.append(r)
+                pz.wyniki += [w_ for w_ in W.wyniki if w_.nazwa.startswith("Przebicie")
+                              and any(f"słupem {c['id']} " in w_.nazwa for c in sl)]
+                pz.opis.append(f"Pogrubienie płyty fundamentowej (łącznie h = {f(h_t)} m) w MES płyty — poz. {pl_ids[0]}; "
+                               f"{e.get('uwagi') or ''}")
+                pz.przyjeto.append(f"Pogrubienie {f(B * 100, 0)}×{f(Lf * 100, 0)}×{f(h_t * 100, 0)} cm, {beton.klasa}; {r.zbrojenie_poprz}.")
+                pz.dane["mes"] = True
+                self.pos_fund.append(pz)
+                rows.append([fid, "pogrubienie", f"{f(B)}×{f(Lf)}", (h_t, 2), (pd_, 0), "", f"{f(pz.wykorzystanie * 100, 0)}%"])
+                continue
+            # żebro: pasmo b × (h_płyty + h_żebra)
+            c = c_d / 1000.0
+            d = h_t - c - 0.008 - 0.008
+            wd = f"dol_{kier}"
+            wg = f"gora_{kier}"
+            A_d = float(W.As[wd][msk].max()) * B if msk.any() else 0.0
+            A_g = float(W.As[wg][msk].max()) * B if msk.any() else 0.0
+            A_min = max(0.26 * beton.f_ctm / p.f_yk, 0.0013) * B * 1000 * d * 1000
+            n_d, fi_d, _, As_d = zelbet.dobierz_belka(max(A_d, A_min), B, c_d, 8)
+            n_g, fi_g, _, As_g = zelbet.dobierz_belka(max(A_g, A_min), B, c_g, 8)
+            fi_z = max(fi_d, fi_g)
+            n_d = max(n_d, int(math.ceil(max(A_d, A_min) / (math.pi * fi_z ** 2 / 4) - 1e-9)))
+            n_g = max(n_g, int(math.ceil(max(A_g, A_min) / (math.pi * fi_z ** 2 / 4) - 1e-9)))
+            As_d, As_g = n_d * math.pi * fi_z ** 2 / 4, n_g * math.pi * fi_z ** 2 / 4
+            V = float(W.V_zeber.get(fid, 0.0))
+            Mz = W.M_zeber.get(fid, (0.0, 0.0))
+            r.krok("Pasmo żebra w MES", "b × h", "", f"{f(B * 100, 0)} × {f(h_t * 100, 0)} cm, L = {f(Lx, 2)} m")
+            r.krok("Moment pasma żebra (Σ m·szer., obwiednia ULS)", "M_Ed,dół; M_Ed,góra", "", f"{f(Mz[0], 1)}; {f(Mz[1], 1)} kNm")
+            r.krok("Wymagane zbrojenie dolne (MES: maks. A_s,req × b)", "A_s,req,dół", "", A_d, "mm²", nd=0)
+            r.krok("Wymagane zbrojenie górne (MES: maks. A_s,req × b)", "A_s,req,góra", "", A_g, "mm²", nd=0)
+            r.krok("Zbrojenie podłużne minimalne (każda warstwa)", "A_s,min = max(0,26·f_ctm/f_yk; 0,0013)·b·d", "", A_min, "mm²", nd=0,
+                   zrodlo="(9.1N)")
+            r.warunek("Zbrojenie dolne żebra", max(A_d, A_min), As_d, "mm²", "6.1, 9.2.1.1", nd=0, symbol_E="A_s,req", symbol_R="A_s,prov")
+            r.warunek("Zbrojenie górne żebra", max(A_g, A_min), As_g, "mm²", "6.1, 9.2.1.1", nd=0, symbol_E="A_s,req", symbol_R="A_s,prov")
+            sc = zelbet.scinanie_strzemiona(max(V, 1e-3), B, d, min(As_d, As_g), beton, stal, 8, 2,
+                                            nazwa=f"{fid} — ścinanie pasma żebra (V = |dM/ds| z MES)")
+            r.dolacz(sc, "Ścinanie")
+            r.krok("Maks. docisk pod żebrem (MES)", "p_d,max", "", pd_, "kPa", nd=1)
+            r.warunek("Docisk do podłoża pod żebrem", pd_, W.q_Rd_lok, "kPa", "PN-EN 1997-1 6.5.2", nd=1, symbol_E="p_d,max",
+                      symbol_R="q_Rd")
+            s_st = int(getattr(sc, "s", 200) or 200)
+            r.zbrojenie_podl = (f"{n_d + n_g}φ{fi_z} (dołem {n_d}φ{fi_z}, górą {n_g}φ{fi_z}), strzemiona φ8 co {f(s_st / 10, 0)} cm")
+            r.zbrojenie_poprz = "nie wymaga zbrojenia poprzecznego odsadzek (siatki płyty fundamentowej w MES)"
+            r.krok("Zbrojenie podłużne", "A_s,min (warstwa)", "", A_min, "mm²", nd=0)
+            r.krok("Przyjęto zbrojenie podłużne", "", "", r.zbrojenie_podl)
+            pz = Pozycja("", fid, f"Żebro płyty fundamentowej {fid} (b = {f(B)} m, h = {f(h_t)} m, L = {f(Lx, 2)} m)", "fundament")
+            pz.opis.append(f"{e.get('uwagi') or ''}. Żebro w MES płyty (poz. {pl_ids[0]}): siły z pasma elementów żebra; ochrona przed "
+                           "przemarzaniem — izolacja obwodowa (poz. płyty, Z6).")
+            pz.wyniki.append(r)
+            pz.przyjeto.append(f"Żebro {f(B * 100, 0)}×{f(h_t * 100, 0)} cm, {beton.klasa}; {r.zbrojenie_podl}.")
+            pz.dane["mes"] = True
+            self.pos_fund.append(pz)
+            rows.append([fid, "żebro", f"{f(B)}×{f(h_t)}", (Lx, 2), (pd_, 0), (V, 1), f"{f(pz.wykorzystanie * 100, 0)}%"])
+        self.fund_tabela = rows
+        if self.rys_dir and els:
+            from . import rysunki
+            try:
+                self.rys_fund = rysunki.rys_fundamenty(self, self.rys("fundamenty_plan.png"))
+            except Exception as ex:  # noqa: BLE001
+                self.log(f"Rysunek planu fundamentów: {type(ex).__name__}: {ex}")
 
     def _plyta_fund(self, el, poz, beton):
         p = self.p

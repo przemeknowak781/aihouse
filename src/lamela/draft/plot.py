@@ -11,46 +11,55 @@ import numpy as np
 
 from . import render
 from . import text as T
-from .sheet import ZNAK_CENTR_DL, Sheet, TitleBlock, control_segment, fit, table, wrap
+from .sheet import ZNAK_CENTR_DL, Sheet, TitleBlock, control_segment, table, wrap
 
 PT2MM = 25.4 / 72.0
 
 
 def volume(sheets, pdf_path, title: str = "Tom rysunków", toc: bool = True, toc_tb: TitleBlock | None = None,
            mode: str = "branze") -> str:
-    """Składa arkusze w jeden PDF. ``toc=True`` — pierwsza strona A4 ze spisem rysunków."""
+    """Składa arkusze w jeden PDF. ``toc=True`` — pierwsza strona A4 ze spisem rysunków (``spis_rysunkow``)."""
     pages = list(sheets)
     if toc:
-        tb = toc_tb or TitleBlock(tytul="SPIS RYSUNKÓW", nr_rysunku="00", skala="—")
-        sh = Sheet("A4", title_block=tb)
-        rows = []
-        for i, s in enumerate(pages):
-            t = s.tb
-            rows.append([str(i + 1), t.nr_rysunku if t else "", t.tytul if t else s.meta.get("title", ""),
-                         t.skala if t else "", s.fmt_name])
-        x0, y0, x1, y1 = sh.frame
-        # pole spisu między znakami centrującymi (lewy/prawy: 10 mm za ramką na osi H/2, górny: 10 mm w dół na osi
-        # W/2) — odstęp 3 mm; nagłówek dopasowany (5 → 3,5 mm) i łamany (≤ 3 wiersze) do szerokości pola
-        tx = x0 + ZNAK_CENTR_DL + 3.0
-        avail = (x1 - ZNAK_CENTR_DL - 3.0) - tx
-        tt = title.upper()
-        hh = fit(tt, avail, 5.0, 3.5, "bold")
-        ls = [tt] if T.width(tt, hh, "bold") <= avail else wrap(tt, avail, hh, "bold")[:3]
-        y = y1 - ZNAK_CENTR_DL - 2.5 - hh
-        for ln in ls:
-            sh.text((tx, y), ln, hh, style="bold")
-            y -= hh * 1.6
-        top = y + hh * 1.6 - 5.5
-        cols = [("Lp.", 9.0), ("Nr rys.", 26.0), ("Tytuł rysunku", 81.0), ("Skala", 18.0), ("Format", 20.0)]
-        k = avail / sum(w for _n, w in cols)
-        cols = [(n, w * k) for n, w in cols]
-        tb_top = (sh.tb_rect[3] if sh.tb_rect else y0) + 6.0
-        row_h = max(4.5, min(6.0, (top - tb_top) / (len(rows) + 1)))
-        table(sh, tx, top, cols, rows, h=2.5, row_h=row_h, zawijaj=True)
-        sh.przytnij_znaki_centrujace()
-        pages = [sh] + pages
+        pages = [spis_rysunkow(pages, title, toc_tb)] + pages
     render.sheets_to_pdf(pages, pdf_path, mode, title)
     return str(pdf_path)
+
+
+def spis_rysunkow(sheets, title: str = "Tom rysunków", toc_tb: TitleBlock | None = None) -> Sheet:
+    """Strona A4 ze spisem rysunków tomu. Pole spisu leży między znakami centrującymi (lewy i prawy: 10 mm za
+    ramką na osi H/2, górny: 10 mm w dół na osi W/2) z odstępem 3 mm. Nagłówek (tytuł tomu) — pismo 5 mm
+    (≤ 2 wiersze), a gdy się nie mieści — 3,5 mm (≤ 3 wiersze), łamany do szerokości pola; tytuły rysunków w tabeli łamane w komórce
+    (``table(zawijaj=True)``); wysokość wiersza dopasowana do miejsca nad tabliczką."""
+    tb = toc_tb or TitleBlock(tytul="SPIS RYSUNKÓW", nr_rysunku="00", skala="—")
+    sh = Sheet("A4", title_block=tb)
+    rows = []
+    for i, s in enumerate(sheets):
+        t = s.tb
+        rows.append([str(i + 1), t.nr_rysunku if t else "", t.tytul if t else s.meta.get("title", ""),
+                     t.skala if t else "", s.fmt_name])
+    x0, y0, x1, y1 = sh.frame
+    tx = x0 + ZNAK_CENTR_DL + 3.0
+    avail = (x1 - ZNAK_CENTR_DL - 3.0) - tx
+    tt = title.upper()
+    for hh, nmax in ((5.0, 1), (5.0, 2), (3.5, 1), (3.5, 2), (3.5, 3)):
+        ls = wrap(tt, avail, hh, "bold")
+        if len(ls) <= nmax and all(T.width(x, hh, "bold") <= avail + 1e-6 for x in ls):
+            break
+    ls = ls[:3]
+    y = y1 - ZNAK_CENTR_DL - 2.5 - hh
+    for ln in ls:
+        sh.text((tx, y), ln, hh, style="bold")
+        y -= hh * 1.6
+    top = y + hh * 1.6 - 5.5
+    cols = [("Lp.", 9.0), ("Nr rys.", 26.0), ("Tytuł rysunku", 81.0), ("Skala", 18.0), ("Format", 20.0)]
+    k = avail / sum(w for _n, w in cols)
+    cols = [(n, w * k) for n, w in cols]
+    tb_top = (sh.tb_rect[3] if sh.tb_rect else y0) + 6.0
+    row_h = max(4.5, min(6.0, (top - tb_top) / (len(rows) + 1)))
+    table(sh, tx, top, cols, rows, h=2.5, row_h=row_h, zawijaj=True)
+    sh.przytnij_znaki_centrujace()
+    return sh
 
 
 def pdf_segments(pdf_path, page: int = 0):

@@ -198,6 +198,12 @@ class WynikPlytyFund:
     wyniki: list = field(default_factory=list)
     kombinacje: int = 0
     As_sc: dict = field(default_factory=dict)   # A_s2 — zbrojenie ściskane (warstwa przeciwna) dla μ > μ_lim [mm²/m]
+    p_d_el: np.ndarray | None = None             # obwiednia docisku obliczeniowego w elementach [kPa]
+    w_k_el: np.ndarray | None = None             # obwiednia osiadania charakterystycznego w elementach [m] (k_s nominalne)
+    V_zeber: dict = field(default_factory=dict)  # id żebra → maks. siła poprzeczna pasma żebra V_Ed [kN] (z dM/ds, ULS)
+    M_zeber: dict = field(default_factory=dict)  # id żebra → (M_dół,max; M_góra,min) pasma żebra [kNm]
+    q_Rd_lok: float = 0.0
+    b_lok: float = 0.0
 
 
 OKNO_SCIANY = 2.0     # [m] rozdział obciążeń ścian na płytę (średnia krocząca)
@@ -207,6 +213,44 @@ def _klasa(model, mat, p):
     from .materialy import klasa_betonu_z_nazwy
     m = model.material(str(mat)) if mat else None
     return klasa_betonu_z_nazwy(m.nazwa if m else str(mat)) or p.beton_dla("fundament")[1]
+
+
+def _punkty_slupa(an, c) -> list:
+    """Punkty przyłożenia siły słupa: słup stalowy — oś; słup/filarek żelbetowy (trzpień) — punkty co ≤ 0,15 m wzdłuż
+    dłuższego boku obrysu (siła rozłożona na długości trzpienia) [ZAŁ]."""
+    x, y = c["xy"]
+    try:
+        if not an._slup_zelbetowy(c):
+            return [(x, y)]
+        from .pozycje import _wymiary_slupa
+        a, b = _wymiary_slupa(str(c.get("przekroj")))
+    except Exception:  # noqa: BLE001
+        return [(x, y)]
+    L = max(a, b)
+    n = max(int(math.ceil(L / 0.15)), 1)
+    ts = [(-L / 2 + (k + 0.5) * L / n) for k in range(n)]
+    return [(x + t, y) for t in ts] if a >= b else [(x, y + t) for t in ts]
+
+
+def _geometria_zeber(pl0, strefa_el, els) -> dict:
+    """Pasma żeber (elementy MES strefy żebra) pogrupowane w przekroje poprzeczne wzdłuż osi żebra:
+    {id: (kierunek 'x'|'y', współrzędne przekrojów [m], [indeksy elementów przekroju])} — do sił w pasmie żebra."""
+    out = {}
+    for e in els:
+        if "os" not in e:
+            continue
+        (x0, y0), (x1, y1) = e["os"][0], e["os"][1]
+        if math.hypot(x1 - x0, y1 - y0) < float(e.get("b", 0.6)):
+            continue                                       # pogrubienie punktowe (stopa) — przebicie, nie ścinanie belkowe
+        nm = str(e["id"])
+        idx = np.array([i for i, s_ in enumerate(strefa_el) if s_ == nm], int)
+        if len(idx) < 4:
+            continue
+        kier = "x" if abs(x1 - x0) >= abs(y1 - y0) else "y"
+        st = np.round(pl0.el_c[idx, 0 if kier == "x" else 1], 4)
+        uq = np.unique(st)
+        out[nm] = (kier, uq, [idx[st == u] for u in uq])
+    return out
 
 
 def analiza_plyty_fundamentowej(an, siatka: float = 0.25, c_dol: float = 50.0, c_gora: float = 35.0,
@@ -310,10 +354,11 @@ def analiza_plyty_fundamentowej(an, siatka: float = 0.25, c_dol: float = 50.0, c
                     case_pts.setdefault(cs, []).append((tuple(w.pt(s_, 0.0)), qq * wgt))
     for c in m.slupy():
         if float(c["z_od"]) < spod + h + 0.5 and P.contains(Point(*c["xy"])):
+            pts = _punkty_slupa(an, c)
             for cs, N in (an.slupy_N.get(str(c["id"])) or {}).items():
                 if cs in ("QA_pA", "QA_pB"):
                     continue
-                case_pts.setdefault(cs, []).append((tuple(c["xy"]), N))
+                case_pts.setdefault(cs, []).extend((pt, N / len(pts)) for pt in pts)
     cases = sorted(set(case_q) | set(case_pts))
     fvec = {cs: pl0.wektor(case_q.get(cs, 0.0), punkty=case_pts.get(cs, [])) for cs in cases}
     odz = [Oddz("G", "G")]
@@ -339,6 +384,11 @@ def _obwiednia(pl0, plyty, pod, fvec, kb_uls, kb_chr, e0, P, h, spod, beton, h_e
     env = {"dol_x": np.zeros(n), "dol_y": np.zeros(n), "gora_x": np.zeros(n), "gora_y": np.zeros(n)}
     p_d = p_k = w_k = odr = 0.0
     V_d = V_k = 0.0
+    p_el = np.zeros(n)
+    w_el = np.zeros(n)
+    zeb = _geometria_zeber(pl0, strefa_el, an.m.fundamenty().get("elementy") or [])
+    V_z = {k: 0.0 for k in zeb}
+    M_z = {k: [0.0, 0.0] for k in zeb}
     for kk, pl in plyty.items():
         for kb in kb_uls:
             f_ = sum(a * fvec[c] for c, a in kb.wsp.items() if c in fvec and a)
@@ -347,14 +397,22 @@ def _obwiednia(pl0, plyty, pod, fvec, kb_uls, kb_chr, e0, P, h, spod, beton, h_e
             for key in env:
                 env[key] = np.maximum(env[key], wa[key]) if key.startswith("dol") else np.minimum(env[key], wa[key])
             p_d = max(p_d, float(r.p.max()))
+            p_el = np.maximum(p_el, r.p)
             odr = max(odr, 1.0 - float((pl.A_el * r.aktywne).sum() / pl.A_el.sum()))
             V_d = max(V_d, float(f_[0::3].sum()))
+            for nm, (kier, uq, grp) in zeb.items():       # pasmo żebra: M(u) = Σ m·szer. → V = |dM/du| (równowaga) [UPR]
+                j = 0 if kier == "x" else 1
+                Mu = np.array([float((r.wynik.m[g_, j] * pl.el_ab[g_, 1 - j]).sum()) for g_ in grp])
+                if len(uq) > 1:
+                    V_z[nm] = max(V_z[nm], float(np.abs(np.diff(Mu) / np.diff(uq)).max()))
+                M_z[nm] = [max(M_z[nm][0], float(Mu.max())), min(M_z[nm][1], float(Mu.min()))]
         for kb in kb_chr:
             f_ = sum(a * fvec[c] for c, a in kb.wsp.items() if c in fvec and a)
             r = pl.rozwiaz_kontakt(f_)
             p_k = max(p_k, float(r.p.max()))
             if abs(kk - pod.k_s) < 1e-6:            # osiadanie — dla k_s nominalnego (warianty — obwiednia sił)
                 w_k = max(w_k, float(r.wynik.w.max()))
+                w_el = np.maximum(w_el, r.wynik.w[pl.el_nodes].mean(axis=1))
             V_k = max(V_k, float(f_[0::3].sum()))
     # wymiarowanie na zginanie (pasmo b = 1 m, d wg grubości elementu)
     fcd, fyd = beton.f_cd, StalZbrojeniowa(f_yk=p.f_yk, gamma_s=p.gamma_s).f_yd
@@ -418,6 +476,8 @@ def _obwiednia(pl0, plyty, pod, fvec, kb_uls, kb_chr, e0, P, h, spod, beton, h_e
     W = WynikPlytyFund(str(e0.get("id")), P, h, spod, beton, pod, pl0.el_c.copy(), pl0.el_ab.copy(), h_el, strefa_el, env,
                        As, As_min, mu_x, p_d, p_k, w_k, odr, q_Rd, c_dol, c_gora, wyniki, len(kb_uls) * len(plyty))
     W.As_sc = As_sc
+    W.p_d_el, W.w_k_el, W.V_zeber, W.M_zeber = p_el, w_el, V_z, {k: tuple(v) for k, v in M_z.items()}
+    W.q_Rd_lok, W.b_lok = q_Rd_loc, b_loc
     W.wyniki += przebicie_slupow(an, W, plyty, fvec, kb_uls)
     return W
 
@@ -438,15 +498,23 @@ def przebicie_slupow(an, W: WynikPlytyFund, plyty, fvec, kb_uls) -> list:
         i = int(np.argmin(np.hypot(W.el_c[:, 0] - xy[0], W.el_c[:, 1] - xy[1])))
         ht = float(W.h_el[i])
         d = ht - W.c_dol / 1000.0 - 0.012
-        a_sl = 0.12 + 2 * 0.05                     # słup RK 120 + blacha podstawy (wysięg 5 cm) [ZAŁ]
+        c1 = c2 = 0.12 + 2 * 0.05                  # słup stalowy: przekrój + blacha podstawy (wysięg 5 cm) [ZAŁ]
+        bl = c.get("blacha_dolna")
+        if isinstance(bl, dict):
+            c1, c2 = float(bl.get("a", c1)), float(bl.get("b", c2))
+        if an._slup_zelbetowy(c):
+            from .pozycje import _wymiary_slupa
+            c1, c2 = _wymiary_slupa(str(c.get("przekroj")))
+            c2 = min(c2, 3 * c1) if c2 > c1 else c2  # wydłużony trzpień: długość czynna ≤ 3·grubość [ZAŁ, por. 6.4.2(3)]
+            c1 = min(c1, 3 * c2) if c1 > c2 else c1
         rho = 0.002
         k = min(1 + math.sqrt(200 / (d * 1000)), 2.0)
         vmin = 0.035 * k ** 1.5 * math.sqrt(bt.f_ck)
         pmin = 0.0                                 # bezpiecznie: bez redukcji odporem gruntu przy braku docisku
         best = None
         for a in np.linspace(0.1 * d, 2 * d, 20):
-            u = 4 * a_sl + 2 * math.pi * a
-            A = a_sl ** 2 + 4 * a_sl * a + math.pi * a * a
+            u = 2 * (c1 + c2) + 2 * math.pi * a
+            A = c1 * c2 + 2 * (c1 + c2) * a + math.pi * a * a
             Vr = max(V - pmin * A, 0.0)
             vEd = Vr / (u * d) / 1000.0
             vRd = max(0.18 / bt.gamma_c * k * (100 * rho * bt.f_ck) ** (1 / 3), vmin) * 2 * d / a

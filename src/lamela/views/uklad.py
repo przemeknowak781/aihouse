@@ -1210,13 +1210,14 @@ def kolizje_znakow(sh, odstep: float = 0.2) -> list[str]:
     out = []
     zn = getattr(sh, "znaki", None) or {}
     pasy = {}
-    for s_, p in zn.items():
-        (xa, ya), (xb, yb) = p.pts[0], p.pts[-1]
-        a = GR / 2.0 + odstep
-        r = (min(xa, xb) - a, min(ya, yb) - a, max(xa, xb) + a, max(ya, yb) + a)
-        x0, y0, x1, y1 = sh.frame                  # tylko część za ramką (w marginesie nic nie ma)
-        r = (max(r[0], x0 + 0.5), max(r[1], y0 + 0.5), min(r[2], x1 - 0.5), min(r[3], y1 - 0.5))
-        if r[2] > r[0] and r[3] > r[1]:
+    x0, y0, x1, y1 = sh.frame
+    a = GR / 2.0 + odstep
+    for s_, p in zn.items():                       # tylko część znaku za ramką (w polu rysunkowym)
+        xe, ye = float(p.pts[-1][0]), float(p.pts[-1][1])
+        r = {"d": (xe - a, y0 + 0.5, xe + a, ye + a), "g": (xe - a, ye - a, xe + a, y1 - 0.5),
+             "l": (x0 + 0.5, ye - a, xe + a, ye + a), "p": (xe - a, ye - a, x1 - 0.5, ye + a)}.get(s_)
+        gl = {"d": ye - y0, "g": y1 - ye, "l": xe - x0, "p": x1 - xe}.get(s_, 0.0)
+        if r is not None and gl > 0.5:
             pasy[s_] = r
     for B in _obwiednie_w_pasach(sh, pasy):
         for s_, r in pasy.items():
