@@ -1,0 +1,683 @@
+{
+ "pomieszczenia": [
+  {
+   "id": "0.01",
+   "kond": "P0",
+   "nazwa": "Wiatrołap",
+   "kat": "ruchu",
+   "A": 3.89,
+   "h": 2.77,
+   "wsp": 1.0,
+   "A_zal": 3.89
+  },
+  {
+   "id": "0.02",
+   "kond": "P0",
+   "nazwa": "Hol",
+   "kat": "ruchu",
+   "A": 4.44,
+   "h": 2.77,
+   "wsp": 1.0,
+   "A_zal": 4.44
+  },
+  {
+   "id": "0.03",
+   "kond": "P0",
+   "nazwa": "WC gościnne",
+   "kat": "pomocnicza",
+   "A": 2.32,
+   "h": 2.77,
+   "wsp": 1.0,
+   "A_zal": 2.32
+  },
+  {
+   "id": "0.04",
+   "kond": "P0",
+   "nazwa": "Klatka schodowa",
+   "kat": "ruchu",
+   "A": 2.82,
+   "h": 2.77,
+   "wsp": 1.0,
+   "A_zal": 2.82
+  },
+  {
+   "id": "0.05",
+   "kond": "P0",
+   "nazwa": "Spiżarnia (pod schodami)",
+   "kat": "pomocnicza",
+   "A": 5.4,
+   "h": 1.9,
+   "wsp": 0.5,
+   "A_zal": 2.7
+  },
+  {
+   "id": "0.06",
+   "kond": "P0",
+   "nazwa": "Salon + jadalnia + kuchnia",
+   "kat": "podstawowa",
+   "A": 54.44,
+   "h": 2.77,
+   "wsp": 1.0,
+   "A_zal": 54.44
+  },
+  {
+   "id": "0.07",
+   "kond": "P0",
+   "nazwa": "Pas komunikacyjny przy schodach",
+   "kat": "ruchu",
+   "A": 3.51,
+   "h": 2.77,
+   "wsp": 1.0,
+   "A_zal": 3.51
+  },
+  {
+   "id": "0.08",
+   "kond": "P0",
+   "nazwa": "Przedpokój gościnny",
+   "kat": "ruchu",
+   "A": 1.44,
+   "h": 2.77,
+   "wsp": 1.0,
+   "A_zal": 1.44
+  },
+  {
+   "id": "0.09",
+   "kond": "P0",
+   "nazwa": "Łazienka gościnna (natrysk)",
+   "kat": "pomocnicza",
+   "A": 3.84,
+   "h": 2.77,
+   "wsp": 1.0,
+   "A_zal": 3.84
+  },
+  {
+   "id": "0.10",
+   "kond": "P0",
+   "nazwa": "Pokój gościnny / gabinet",
+   "kat": "podstawowa",
+   "A": 12.52,
+   "h": 2.77,
+   "wsp": 1.0,
+   "A_zal": 12.52
+  },
+  {
+   "id": "0.11",
+   "kond": "P0",
+   "nazwa": "Przedsionek gospodarczy",
+   "kat": "ruchu",
+   "A": 7.18,
+   "h": 2.76,
+   "wsp": 1.0,
+   "A_zal": 7.18
+  },
+  {
+   "id": "0.12",
+   "kond": "P0",
+   "nazwa": "Pomieszczenie techniczne",
+   "kat": "techniczna",
+   "A": 8.85,
+   "h": 2.76,
+   "wsp": 1.0,
+   "A_zal": 8.85
+  },
+  {
+   "id": "0.13",
+   "kond": "P0",
+   "nazwa": "Garaż 2-stanowiskowy",
+   "kat": "pomocnicza",
+   "A": 37.42,
+   "h": 2.76,
+   "wsp": 1.0,
+   "A_zal": 37.42
+  },
+  {
+   "id": "1.01",
+   "kond": "P1",
+   "nazwa": "Hol",
+   "kat": "ruchu",
+   "A": 14.58,
+   "h": 2.77,
+   "wsp": 1.0,
+   "A_zal": 14.58
+  },
+  {
+   "id": "1.02",
+   "kond": "P1",
+   "nazwa": "Pokój rodzinny / biblioteka (boks C)",
+   "kat": "podstawowa",
+   "A": 28.36,
+   "h": 2.77,
+   "wsp": 1.0,
+   "A_zal": 28.36
+  },
+  {
+   "id": "1.03",
+   "kond": "P1",
+   "nazwa": "Pokój dziecka 1",
+   "kat": "podstawowa",
+   "A": 13.19,
+   "h": 2.77,
+   "wsp": 1.0,
+   "A_zal": 13.19
+  },
+  {
+   "id": "1.04",
+   "kond": "P1",
+   "nazwa": "Pokój dziecka 2",
+   "kat": "podstawowa",
+   "A": 12.52,
+   "h": 2.77,
+   "wsp": 1.0,
+   "A_zal": 12.52
+  },
+  {
+   "id": "1.05",
+   "kond": "P1",
+   "nazwa": "Łazienka dzieci (wanna)",
+   "kat": "pomocnicza",
+   "A": 5.5,
+   "h": 2.77,
+   "wsp": 1.0,
+   "A_zal": 5.5
+  },
+  {
+   "id": "1.06",
+   "kond": "P1",
+   "nazwa": "Klatka schodowa",
+   "kat": "ruchu",
+   "A": 0.0,
+   "h": 2.77,
+   "wsp": 1.0,
+   "A_zal": 0.0
+  },
+  {
+   "id": "1.07",
+   "kond": "P1",
+   "nazwa": "WC z natryskiem",
+   "kat": "pomocnicza",
+   "A": 4.08,
+   "h": 2.77,
+   "wsp": 1.0,
+   "A_zal": 4.08
+  },
+  {
+   "id": "1.08",
+   "kond": "P1",
+   "nazwa": "Pralnia z suszarnią",
+   "kat": "pomocnicza",
+   "A": 6.64,
+   "h": 2.77,
+   "wsp": 1.0,
+   "A_zal": 6.64
+  },
+  {
+   "id": "2.01",
+   "kond": "P2",
+   "nazwa": "Hol",
+   "kat": "ruchu",
+   "A": 5.74,
+   "h": 2.77,
+   "wsp": 1.0,
+   "A_zal": 5.74
+  },
+  {
+   "id": "2.02",
+   "kond": "P2",
+   "nazwa": "Sypialnia rodziców",
+   "kat": "podstawowa",
+   "A": 21.19,
+   "h": 2.77,
+   "wsp": 1.0,
+   "A_zal": 21.19
+  },
+  {
+   "id": "2.03",
+   "kond": "P2",
+   "nazwa": "Garderoba (przedpokój apartamentu)",
+   "kat": "pomocnicza",
+   "A": 10.57,
+   "h": 2.77,
+   "wsp": 1.0,
+   "A_zal": 10.57
+  },
+  {
+   "id": "2.04",
+   "kond": "P2",
+   "nazwa": "Łazienka rodziców",
+   "kat": "pomocnicza",
+   "A": 5.51,
+   "h": 2.77,
+   "wsp": 1.0,
+   "A_zal": 5.51
+  },
+  {
+   "id": "2.05",
+   "kond": "P2",
+   "nazwa": "Gabinet / pokój",
+   "kat": "podstawowa",
+   "A": 16.32,
+   "h": 2.77,
+   "wsp": 1.0,
+   "A_zal": 16.32
+  },
+  {
+   "id": "2.06",
+   "kond": "P2",
+   "nazwa": "Klatka schodowa (wyjście z biegu 2, pustka)",
+   "kat": "ruchu",
+   "A": 0.24,
+   "h": 2.77,
+   "wsp": 1.0,
+   "A_zal": 0.24
+  },
+  {
+   "id": "2.07",
+   "kond": "P2",
+   "nazwa": "Pom. techniczne (centrala rekuperacyjna, wyłaz na dach)",
+   "kat": "techniczna",
+   "A": 6.05,
+   "h": 2.77,
+   "wsp": 1.0,
+   "A_zal": 6.05
+  }
+ ],
+ "PU_W316": {
+  "P0": 96.29,
+  "P1": 84.88,
+  "P2": 59.33
+ },
+ "PU_W316_suma": 240.5,
+ "garaz": 37.42,
+ "techniczne": 14.9,
+ "klatki": 3.06,
+ "PN_ISO_9836": {
+  "podstawowa": 158.54,
+  "pomocnicza (z garażem)": 78.58,
+  "ruchu": 43.85,
+  "techniczna": 14.9,
+  "netto razem": 295.87
+ },
+ "dzialka_m2": 1600.0,
+ "zabudowa": {
+  "m2": 187.5,
+  "proc": 11.72,
+  "z_plytami_m2": 212.99
+ },
+ "brutto_kondygnacji": {
+  "P0": 181.78,
+  "P1": 117.81,
+  "P2": 96.8
+ },
+ "intensywnosc": 0.248,
+ "kubatura_brutto_m3": 1354.5,
+ "PBC": {
+  "m2": 1281.57,
+  "proc": 80.1,
+  "rezerwa_dach_zielony_50proc_m2": 31.98,
+  "utwardzenia_tarasy_m2": 130.93
+ },
+ "wysokosc": {
+  "attyka_max": 9.776,
+  "najwyzszy_punkt_z_instalacjami": 10.0,
+  "teren_obwod_min": -0.329,
+  "teren_obwod_max": -0.172,
+  "teren_sredni": -0.251,
+  "H_upzp_m": 10.25,
+  "H_WT6_m": 9.85,
+  "teren_najnizsze_wejscie": -0.326,
+  "kondygnacje_nadziemne": 3
+ },
+ "okna_podloga": [
+  {
+   "id": "0.06",
+   "nazwa": "Salon + jadalnia + kuchnia",
+   "A_podl": 54.44,
+   "okna": [
+    "O0-01",
+    "O0-02",
+    "O0-03",
+    "O0-04",
+    "O0-05",
+    "O0-11"
+   ],
+   "A_osciez": 33.83,
+   "stosunek": "1:1.6",
+   "ok": true
+  },
+  {
+   "id": "0.10",
+   "nazwa": "Pokój gościnny / gabinet",
+   "A_podl": 12.52,
+   "okna": [
+    "O0-12"
+   ],
+   "A_osciez": 2.26,
+   "stosunek": "1:5.5",
+   "ok": true
+  },
+  {
+   "id": "1.02",
+   "nazwa": "Pokój rodzinny / biblioteka (boks C)",
+   "A_podl": 28.36,
+   "okna": [
+    "O1-01",
+    "O1-02"
+   ],
+   "A_osciez": 11.21,
+   "stosunek": "1:2.5",
+   "ok": true
+  },
+  {
+   "id": "1.03",
+   "nazwa": "Pokój dziecka 1",
+   "A_podl": 13.19,
+   "okna": [
+    "O1-01",
+    "O1-06"
+   ],
+   "A_osciez": 11.61,
+   "stosunek": "1:1.1",
+   "ok": true
+  },
+  {
+   "id": "1.04",
+   "nazwa": "Pokój dziecka 2",
+   "A_podl": 12.52,
+   "okna": [
+    "O1-05"
+   ],
+   "A_osciez": 2.26,
+   "stosunek": "1:5.5",
+   "ok": true
+  },
+  {
+   "id": "2.02",
+   "nazwa": "Sypialnia rodziców",
+   "A_podl": 21.19,
+   "okna": [
+    "O2-01",
+    "O2-04"
+   ],
+   "A_osciez": 9.52,
+   "stosunek": "1:2.2",
+   "ok": true
+  },
+  {
+   "id": "2.05",
+   "nazwa": "Gabinet / pokój",
+   "A_podl": 16.32,
+   "okna": [
+    "O2-03",
+    "O2-05"
+   ],
+   "A_osciez": 5.91,
+   "stosunek": "1:2.8",
+   "ok": true
+  }
+ ],
+ "schody": [
+  {
+   "id": "SCH1",
+   "h": 0.175,
+   "s": 0.28,
+   "2h+s": 0.63,
+   "biegi_szer": [
+    1.15,
+    1.145
+   ],
+   "n": 18
+  },
+  {
+   "id": "SCH2",
+   "h": 0.175,
+   "s": 0.28,
+   "2h+s": 0.63,
+   "biegi_szer": [
+    1.15,
+    1.145
+   ],
+   "n": 18
+  }
+ ],
+ "miejsca_postojowe": 4,
+ "odleglosci": [
+  {
+   "element": "ściany P0 (lico ocieplenia)",
+   "W": 7.3,
+   "E": 5.72,
+   "S": 32.4,
+   "N_linia_zab": 1.62,
+   "otwory": true
+  },
+  {
+   "element": "ściany P1 (lico ocieplenia)",
+   "W": 7.3,
+   "E": 12.1,
+   "S": 32.4,
+   "N_linia_zab": 2.25,
+   "otwory": true
+  },
+  {
+   "element": "ściany P2 (lico ocieplenia)",
+   "W": 6.3,
+   "E": 12.1,
+   "S": 32.4,
+   "N_linia_zab": 2.25,
+   "otwory": true
+  },
+  {
+   "element": "płyta PL-E",
+   "W": 5.8,
+   "E": 10.6,
+   "S": 31.4,
+   "N_linia_zab": 6.17,
+   "otwory": false
+  },
+  {
+   "element": "płyta PL-DA",
+   "W": 17.0,
+   "E": 12.7,
+   "S": 41.75,
+   "N_linia_zab": 0.95,
+   "otwory": false
+  },
+  {
+   "element": "płyta PL-C1",
+   "W": 11.2,
+   "E": 11.8,
+   "S": 31.4,
+   "N_linia_zab": 11.6,
+   "otwory": false
+  },
+  {
+   "element": "płyta PL-C2",
+   "W": 11.2,
+   "E": 10.95,
+   "S": 31.4,
+   "N_linia_zab": 11.6,
+   "otwory": false
+  },
+  {
+   "element": "płyta PL-2",
+   "W": 5.2,
+   "E": 11.8,
+   "S": 31.4,
+   "N_linia_zab": 5.87,
+   "otwory": false
+  },
+  {
+   "element": "płyta PL-3",
+   "W": 5.2,
+   "E": 11.8,
+   "S": 31.4,
+   "N_linia_zab": 5.87,
+   "otwory": false
+  },
+  {
+   "element": "płyta IZ-ST2Z",
+   "W": 6.3,
+   "E": 24.7,
+   "S": 32.4,
+   "N_linia_zab": 5.87,
+   "otwory": false
+  },
+  {
+   "element": "płyta SW1",
+   "W": 13.6,
+   "E": 16.0,
+   "S": 40.15,
+   "N_linia_zab": 2.65,
+   "otwory": false
+  },
+  {
+   "element": "płyta WYL1",
+   "W": 14.2,
+   "E": 16.7,
+   "S": 33.5,
+   "N_linia_zab": 9.4,
+   "otwory": false
+  },
+  {
+   "element": "taras T1",
+   "W": 4.3,
+   "E": 12.1,
+   "S": 29.4,
+   "N_linia_zab": 6.17,
+   "otwory": false
+  },
+  {
+   "element": "taras T2",
+   "W": 17.0,
+   "E": 12.7,
+   "S": 41.75,
+   "N_linia_zab": 0.95,
+   "otwory": false
+  },
+  {
+   "element": "taras T3",
+   "W": 19.8,
+   "E": 10.9,
+   "S": 31.4,
+   "N_linia_zab": 11.6,
+   "otwory": false
+  },
+  {
+   "element": "jednostka zewn. PC",
+   "W": 23.8,
+   "E": 7.0,
+   "S": 31.05,
+   "N_linia_zab": 11.75,
+   "otwory": false
+  }
+ ],
+ "wiernosc_szkicowi": [
+  {
+   "element": "A — bryła II p. (lamele)",
+   "szkic": [
+    -0.98,
+    12.23
+   ],
+   "model": [
+    -1.0,
+    12.6
+   ],
+   "odchylka": 0.37
+  },
+  {
+   "element": "A — płyty (dół/góra)",
+   "szkic": [
+    -2.4,
+    12.55
+   ],
+   "model": [
+    -2.1,
+    12.9
+   ],
+   "odchylka": 0.35
+  },
+  {
+   "element": "B — bryła I p.",
+   "szkic": [
+    0.0,
+    12.01
+   ],
+   "model": [
+    0.0,
+    12.6
+   ],
+   "odchylka": 0.59
+  },
+  {
+   "element": "C — boks (przeszklenie)",
+   "szkic": [
+    4.48,
+    11.68
+   ],
+   "model": [
+    4.4,
+    11.42
+   ],
+   "odchylka": 0.26
+  },
+  {
+   "element": "C — rama górna",
+   "szkic": [
+    3.93,
+    13.76
+   ],
+   "model": [
+    3.9,
+    13.75
+   ],
+   "odchylka": 0.03
+  },
+  {
+   "element": "D — linia pozioma",
+   "szkic": [
+    3.82,
+    19.0
+   ],
+   "model": [
+    3.9,
+    18.975
+   ],
+   "odchylka": 0.08
+  },
+  {
+   "element": "D — pion (narożnik G)",
+   "szkic": [
+    19.17,
+    19.17
+   ],
+   "model": [
+    18.975,
+    18.975
+   ],
+   "odchylka": 0.2
+  },
+  {
+   "element": "E — przeszklenie parteru",
+   "szkic": [
+    0.98,
+    13.21
+   ],
+   "model": [
+    0.6,
+    13.55
+   ],
+   "odchylka": 0.38
+  },
+  {
+   "element": "E — płyta dachu parteru",
+   "szkic": [
+    -1.53,
+    14.08
+   ],
+   "model": [
+    -1.5,
+    14.1
+   ],
+   "odchylka": 0.03
+  }
+ ]
+}

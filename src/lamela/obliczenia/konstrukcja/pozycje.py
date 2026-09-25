@@ -1708,7 +1708,7 @@ class AnalizaKonstrukcji:
                 kl = klasa_betonu_z_nazwy(mt.nazwa if mt else None) or "C25/30"
                 E = TABL_BETON[kl][6] * 1e6
             pods.append(PodporaT(f"{v.id}" + (f"#{k}" if sum(1 for q in sc if q[0].id == v.id) > 1 else ""), s0, s1, 0.0,
-                                 k=E * tv / hv, opis=f"ściana {v.id}", sciana=v.id, tylko_docisk=bool(opt.get("tylko_docisk", False))))
+                                 k=E * tv / hv, opis=f"ściana {v.id}", sciana=v.id, tylko_docisk=bool(opt.get("tylko_docisk", True))))
         for c, s_ in sl:
             pods.append(PodporaT(str(c["id"]), s_, s_, 0.0, opis=f"słup {c['id']}", sciana=str(c["id"])))
         if not pods:

@@ -65,7 +65,7 @@ def tg_kontrola_wzorow(l=1.0, c=0.5, q=10.0, h=1e-5) -> dict:
 def walidacja_tg(l: float = 1.0, c: float = 0.5, q: float = 100.0, h: float = 0.05) -> dict:
     """MES tarczy 2l × 2c vs rozwiązanie ścisłe: maks. błąd względny σ_x, τ (względem maksimum) i σ_z (względem q)."""
     P = box(-l, -c, l, c)
-    pods = [PodporaT("A", -l, -l, 0.0), PodporaT("B", l, l, 0.0)]
+    pods = [PodporaT("A", -l, -l, 0.0, tylko_docisk=False), PodporaT("B", l, l, 0.0, tylko_docisk=False)]
     m = TarczaMES(P, 1.0, 3.0e7, nu=0.2, gamma=0.0, podpory=pods, obciazenia=[ObcLiniowe("Q", -l, l, c, q)], siatka=h,
                   linie=((0.0,), (0.0,)))
     fv = m.wektor({"Q": 1.0})

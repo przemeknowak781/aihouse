@@ -39,6 +39,7 @@ from lamela.views.common import material_color  # noqa: E402
 
 KAT_KOLOR = {"podstawowa": "#fff4d6", "pomocnicza": "#e3f0fa", "ruchu": "#eeeeee", "techniczna": "#f3e3f0"}
 CUT_H = 1.10
+WYP: list = []
 
 
 # ------------------------------------------------------------------------------------------------ rysowanie shapely
@@ -146,11 +147,31 @@ def rzut(m, ir, kid, out: Path):
     ax.grid(color="#eee", lw=0.3)
     ax.arrow(x1 - 1.0, y1 - 3.0, 0, 1.2, width=0.05, color="k")
     ax.text(x1 - 1.0, y1 - 1.5, "N", ha="center", fontsize=10, weight="bold")
+    # wyposażenie (model/wyposazenie.yaml) — prostokąty i blaty
+    for it in WYP:
+        if it.get("kond") != kid:
+            continue
+        if it.get("typ") == "blat" and it.get("linia"):
+            ln = LineString(it["linia"])
+            g = ln.buffer(float(it.get("gl", 0.6)) * float(it.get("strona", 1)), single_sided=True, cap_style=2)
+            fill(ax, g, fc="#e9e2d6", ec="#8c8c8c", lw=0.4, z=2.5)
+            continue
+        if not it.get("xy") or not it.get("wym"):
+            continue
+        x, y = it["xy"]
+        w_, d_ = it["wym"]
+        a_ = math.radians(it.get("obrot", 0))
+        u = np.array([math.cos(a_), math.sin(a_)])
+        v = np.array([-u[1], u[0]])
+        c = np.array([x, y], float) + (0 if it["typ"] in ("stol", "wyspa") else u * d_ / 2)
+        pts = [c + v * sx * w_ / 2 + u * sy * d_ / 2 for sx, sy in ((-1, -1), (1, -1), (1, 1), (-1, 1))]
+        fill(ax, Polygon(pts), fc="none", ec="#8c8c8c", lw=0.4, z=2.5)
     brut = m.obrys_kondygnacji(kid).area
-    pu = sum(r.pow_zaliczona for r in m.pomieszczenia(kid) if r.kategoria in ("podstawowa", "pomocnicza"))
+    pu = sum(r.pow_zaliczona for r in m.pomieszczenia(kid) if not any(s in r.nazwa.lower() for s in ("klatka", "garaż"))
+             and r.kategoria != "techniczna")
     ax.set_title(f"Dom LAMELA — rzut {k.nazwa} ({kid}), posadzka {k.rzedna:+.3f}; cięcie +{CUT_H:.2f} m — model/budynek.yaml\n"
-                 f"pow. brutto kondygnacji {fmt(brut)} m²; PU (podst.+pomocn., PN-ISO 9836) {fmt(pu)} m²; płyty nad cięciem — linia kreskowa",
-                 fontsize=9, loc="left")
+                 f"pow. brutto kondygnacji {fmt(brut)} m²; PU wg RPB §20 / W-316 (bez klatki, garażu, techn.) {fmt(pu)} m²; "
+                 f"płyty nad cięciem — linia kreskowa; wyposażenie z model/wyposazenie.yaml", fontsize=9, loc="left")
     fig.tight_layout()
     fig.savefig(out, dpi=150)
     plt.close(fig)
@@ -516,7 +537,7 @@ def dzialka_png(m, ir, out: Path):
                  "P0 — wypełnienie; P1 — kreska; P2 — kropki; płyty wysunięte — linia punktowa; retencja — niebieski; "
                  "odwodnienia liniowe — turkus; bramy — pomarańcz", fontsize=8, loc="left")
     fig.tight_layout()
-    fig.savefig(out, dpi=140)
+    fig.savefig(out, dpi=140, bbox_inches="tight")
     plt.close(fig)
     return wyn
 
@@ -624,12 +645,16 @@ def bilans(m, wyn_odl, fidelity):
         for o in m.otwory(kond=r.kond):
             if o.typ in ("otwor", "drzwi", "brama") or o.sciana.typ != "sciana_zewn":
                 continue
-            if o.footprint.buffer(0.05).intersects(r.polygon.buffer(0.35)):
+            sc = o.sciana
+            n_out = np.asarray(o.kierunek_zewn, float) if o.kierunek_zewn is not None else np.zeros(2)
+            gl = max(abs(sc.t_min), abs(sc.t_max)) + 0.30
+            c_ = np.asarray(o.srodek, float)[:2] - n_out[:2] * gl
+            if r.polygon.contains(Point(float(c_[0]), float(c_[1]))):
                 A_m += o.szer * o.wys
                 A_o += max(0.0, o.szer - 0.14) * max(0.0, o.wys - 0.14)
                 ids.append(o.id)
         okna.append({"id": r.id, "nazwa": r.nazwa, "A_podl": round(r.pow_netto, 2), "okna": ids, "A_osciez": round(A_o, 2),
-                     "stosunek": f"1:{r.pow_netto / A_o:.1f}" if A_o > 0 else "—", "ok": A_o >= r.pow_netto / 8})
+                     "stosunek": ("1:" + fmt(r.pow_netto / A_o, 1)) if A_o > 0 else "—", "ok": A_o >= r.pow_netto / 8})
     B["okna_podloga"] = okna
     # schody
     B["schody"] = [{"id": s["id"], "h": s["wys_stopnia"], "s": s["szer_stopnia"], "2h+s": round(2 * s["wys_stopnia"] + s["szer_stopnia"], 3),
@@ -660,10 +685,10 @@ def bilans_md(B) -> str:
     L.append(f"| intensywność zabudowy (Σ brutto kondygnacji / działka) | {fmt(B['intensywnosc'], 3)} | 0,05–0,80 | "
              f"{'✓' if 0.05 <= B['intensywnosc'] <= 0.8 else '✗'} |")
     L.append(f"| kubatura brutto | {fmt(B['kubatura_brutto_m3'], 1)} m³ | — (> 1000 m³ → PWP, W-190) | — |")
-    L.append(f"| wysokość zabudowy (upzp): najwyższy punkt {w['najwyzszy_punkt_z_instalacjami']:+.3f} − śr. teren {w['teren_sredni']:+.3f} | "
+    L.append(f"| wysokość zabudowy (upzp): najwyższy punkt {fmt(w['najwyzszy_punkt_z_instalacjami'], 3)} − śr. teren {fmt(w['teren_sredni'], 3)} | "
              f"**{fmt(w['H_upzp_m'])} m** | ≤ 11,00 m (rezerwa → 10,70) | {'✓' if w['H_upzp_m'] <= 10.70 else '✗'} |")
     if w.get("H_WT6_m") is not None:
-        L.append(f"| wysokość budynku wg WT §6 (teren przy najniższym wejściu {w['teren_najnizsze_wejscie']:+.3f}) | {fmt(w['H_WT6_m'])} m | grupa N ≤ 12 m | "
+        L.append(f"| wysokość budynku wg WT §6 (teren przy najniższym wejściu {fmt(w['teren_najnizsze_wejscie'], 3)}) | {fmt(w['H_WT6_m'])} m | grupa N ≤ 12 m | "
                  f"{'✓' if w['H_WT6_m'] <= 12 else '✗'} |")
     L.append(f"| kondygnacje nadziemne | {w['kondygnacje_nadziemne']} | ≤ 3 | ✓ |")
     L.append(f"| miejsca postojowe (garaż + podjazd) | {B['miejsca_postojowe']} | ≥ 2 | {'✓' if B['miejsca_postojowe'] >= 2 else '✗'} |")
@@ -716,6 +741,10 @@ def main(argv=None):
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
     m = load_model(a.budynek, a.dzialka, strict=True)
+    pw = Path(a.budynek).with_name("wyposazenie.yaml")
+    if pw.exists():
+        import yaml
+        WYP[:] = (yaml.safe_load(pw.read_text(encoding="utf-8")) or {}).get("wyposazenie") or []
     print(f"Model: {len(m.sciany())} ścian, {len(m.otwory())} otworów, {len(m.pomieszczenia())} pomieszczeń; walidacja: "
           f"{len(m.bledy)} błędów, {len(m.ostrzezenia)} ostrzeżeń")
     ir = build_ir(m, otoczenie=True, auta=False)

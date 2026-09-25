@@ -405,11 +405,17 @@ class AnalizaTarczy:
         self.s1_env, self.s2_env = s1, s2
 
     def _reakcje_przypadki(self):
-        """Reakcje charakterystyczne wg przypadków (liniowo, wszystkie podpory czynne) — bilans ścieżki obciążeń."""
+        """Reakcje charakterystyczne wg przypadków — bilans ścieżki obciążeń. Podpory jednostronne: zbiór węzłów w kontakcie
+        ustalony z miarodajnej kombinacji charakterystycznej, dalej rozwiązania liniowe (superpozycja) [UPR]."""
         self.r_przyp = {}
         self.reakcje_przyp: dict = {}
+        akt = self.r_char[self.k_char_gov].aktywne
+        n_odl = len(self.r_char[self.k_char_gov].odlaczone)
+        if n_odl:
+            self._uwaga(f"Podpory jednostronne: w kombinacji {self.k_char_gov} {n_odl} węzłów podpór bez docisku (odrywanie krawędzi "
+                        "podpory) — reakcje wg przypadków liczone z tym zbiorem kontaktu.")
         for c in self.mes.przypadki():
-            r = self.mes.rozwiaz_kombinacje({c: 1.0}, c)
+            r = self.mes.rozwiaz(self.mes.wektor({c: 1.0}), opis=c, aktywne=akt)
             self.r_przyp[c] = r
             self.reakcje_przyp[c] = self.mes.reakcje(r)
 
@@ -913,9 +919,11 @@ class AnalizaTarczy:
         w.warunek("Zbrojenie pionowe środnika (maks.) ≤ siatki obu powierzchni", rzm, cap, "mm²/m", "zał. F", nd=0,
                   symbol_E="a_sz,req", symbol_R="a_sz,prov")
         nu = 0.6 * (1 - b.f_ck / 250)
-        sc_m = float(self.scd[msk].max()) / 1000 if msk.any() else 0.0
-        w.warunek("Naprężenie w betonie σ_cd ≤ ν·f_cd", sc_m, nu * b.f_cd, "MPa", "zał. F (F.4), (F.7); (6.6N)",
-                  symbol_E="σ_cd", symbol_R="ν·f_cd")
+        if msk.any():
+            e_ = int(np.argmax(np.where(msk, self.eta_F, -1)))
+            w.warunek("Naprężenie w betonie σ_cd ≤ ν·f_cd (ściskanie dwuosiowe: ≤ f_cd)", self.scd[e_] / 1000,
+                      self.scd[e_] / 1000 / max(self.eta_F[e_], 1e-9), "MPa", "zał. F (F.4), (F.7), F(3); (6.6N)",
+                      symbol_E="σ_cd", symbol_R="σ_Rd")
         self.sekcje.append(w)
 
     def _zal_F(self):
@@ -942,6 +950,10 @@ class AnalizaTarczy:
             fz = np.where(swap, ftA, ftB)
             rx = np.maximum(rx, fx * t / fyd * 1e6)
             rz = np.maximum(rz, fz * t / fyd * 1e6)
+            # wytężenie betonu: σ_cd/(ν·f_cd) przy zbrojeniu, σ_max/f_cd w dwuosiowym ściskaniu (F(3))
+            nu = 0.6 * (1 - self.beton.f_ck / 250)
+            eta_c = np.where(bez, scd / (self.beton.f_cd * 1000), scd / (nu * self.beton.f_cd * 1000))
+            self.eta_F = np.maximum(getattr(self, "eta_F", np.zeros_like(eta_c)), eta_c)
             sc = np.maximum(sc, scd)
         return rx, rz, sc
 
@@ -1246,15 +1258,20 @@ class AnalizaTarczy:
             return min(l_row[k], l_col[k])
         for n, F in m.F.items():
             Fmax = max(float(np.abs(F).max()), 1e-9)
-            # krzyżulce
+            # krzyżulce: bez rozciągania poprzecznego (σ₁ z MES w środku krzyżulca ≤ f_ctd) — f_cd (6.55), w strefie
+            # zarysowanej — 0,6·ν'·f_cd (6.56)
+            rr = self.r_uls[n]
             for k in np.nonzero(F < -0.01 * Fmax)[0]:
                 ang = math.atan2(m.U[k, 1], m.U[k, 0])
                 wi, wj = szer(m.ii[k], ang), szer(m.jj[k], ang)
                 wmin = max(min(wi, wj), 0.02)
                 sig = -F[k] / (t * wmin) / 1000
-                key = k
-                if key not in best_s or sig > best_s[key][0]:
-                    best_s[key] = (sig, n, -F[k], wmin)
+                sg = self.mes.naprezenia_xy(rr, *(0.5 * (m.wezly[m.ii[k]] + m.wezly[m.jj[k]])))
+                s1m = glowne(sg[None])[0][0] / 1000 if sg is not None else 0.0
+                lim = fcd if s1m <= b.f_ctd else sRd_strut
+                eta = sig / lim
+                if k not in best_s or eta > best_s[k][0]:
+                    best_s[k] = (eta, n, -F[k], wmin, sig, lim, s1m)
             # węzły
             Pn = m.P[n]
             Rw = m.Rw[n]
@@ -1293,24 +1310,26 @@ class AnalizaTarczy:
                     best_n[k] = (eta, n, typ, s_, lim, Rk)
                 typ_wezla_gov.setdefault(n, {})[k] = typ
         self.typ_wezla = typ_wezla_gov
-        wyn_s.krok("Nośność krzyżulców w strefie zarysowanej", "σ_Rd,max = 0,6·ν'·f_cd, ν' = 1 − f_ck/250",
-                   f"0,6·{f(nu_p, 3)}·{f(fcd, 2)}", sRd_strut, "MPa", zrodlo="(6.56), (6.57N)")
+        wyn_s.krok("Nośność krzyżulców w strefie zarysowanej (rozciąganie poprzeczne, σ₁ > f_ctd)", "σ_Rd,max = 0,6·ν'·f_cd, "
+                   "ν' = 1 − f_ck/250", f"0,6·{f(nu_p, 3)}·{f(fcd, 2)}", sRd_strut, "MPa", zrodlo="(6.56), (6.57N)")
+        wyn_s.krok("Krzyżulce bez rozciągania poprzecznego (σ₁ z MES ≤ f_ctd, np. pasy ściskane)", "σ_Rd,max = f_cd", "", fcd, "MPa",
+                   zrodlo="(6.55)")
         wyn_s.krok("Szerokość krzyżulca na końcu", "w = l·sin θ + u·cos θ (węzeł na pasie: l — długość docisku/pasa, u = 2a); "
                    "węzeł wewnętrzny: w = rozstaw węzłów [UPR]", "", "")
         top = sorted(best_s.items(), key=lambda kv: -kv[1][0])[:8]
         rows = []
         self.C_max = max((v[2] for v in best_s.values()), default=0.0)
-        for k, (sig, n, C, wmin) in top:
+        for k, (eta, n, C, wmin, sig, lim, s1m) in top:
             pa, pb = m.wezly[m.ii[k]], m.wezly[m.jj[k]]
             ang = math.degrees(math.atan2(pb[1] - pa[1], pb[0] - pa[0]))
             rows.append([f"({f(pa[0])}; {f(pa[1])})–({f(pb[0])}; {f(pb[1])})", f(abs(ang) if abs(ang) <= 90 else 180 - abs(ang), 0) + "°",
-                         (C, 1), (wmin * 1000, 0), (sig, 2), (sRd_strut, 2), f"{f(sig / sRd_strut * 100, 0)}%", n])
+                         (C, 1), (wmin * 1000, 0), (s1m, 2), (sig, 2), (lim, 2), f"{f(eta * 100, 0)}%", n])
         if top:
-            k, (sig, n, C, wmin) = top[0]
-            wyn_s.warunek(f"Krzyżulec miarodajny (C = {f(C, 1)} kN, w = {f(wmin * 1000, 0)} mm)", sig, sRd_strut, "MPa", "(6.56)",
-                          symbol_E="σ_Ed", symbol_R="σ_Rd,max")
+            k, (eta, n, C, wmin, sig, lim, s1m) = top[0]
+            wyn_s.warunek(f"Krzyżulec miarodajny (C = {f(C, 1)} kN, w = {f(wmin * 1000, 0)} mm, σ₁ = {f(s1m, 2)} MPa)", sig, lim, "MPa",
+                          "(6.55)" if lim == fcd else "(6.56)", symbol_E="σ_Ed", symbol_R="σ_Rd,max")
         self.tabele.append("**Krzyżulce ściskane — najbardziej wytężone (obwiednia kombinacji STR)**\n\n" + tabela(
-            ["Krzyżulec (x; z) [m]", "kąt", "C [kN]", "w [mm]", "σ_Ed [MPa]", "σ_Rd,max [MPa]", "η", "Kombinacja"], rows))
+            ["Krzyżulec (x; z) [m]", "kąt", "C [kN]", "w [mm]", "σ₁ MES [MPa]", "σ_Ed [MPa]", "σ_Rd,max [MPa]", "η", "Kombinacja"], rows))
         self.sekcje.append(wyn_s)
         # węzły
         for typ, k_ in K_WEZLA.items():
@@ -1447,7 +1466,7 @@ class AnalizaTarczy:
             e = pas.krawedz
             if e is None:
                 continue
-            u = max(2 * pas.a, 0.1)
+            u = max(2 * pas.a, 2.5 * (self.c_nom + pas.fi / 2000), 0.12)
             if e.typ == "h":
                 z0, z1 = sorted((e.wsp, e.wsp + e.strona * u))
                 msk = (mes.el_c[:, 1] > z0) & (mes.el_c[:, 1] < z1) & (mes.el_c[:, 0] > pas.zakres[0] - 0.3) & (mes.el_c[:, 0] < pas.zakres[1] + 0.3)
@@ -1456,6 +1475,7 @@ class AnalizaTarczy:
                 x0, x1 = sorted((e.wsp, e.wsp + e.strona * u))
                 msk = (mes.el_c[:, 0] > x0) & (mes.el_c[:, 0] < x1) & (mes.el_c[:, 1] > pas.zakres[0] - 0.3) & (mes.el_c[:, 1] < pas.zakres[1] + 0.3)
                 rz[msk] += pas.As_prov / (d.t * u * 1e6)
+        self.rho_x, self.rho_z = rx, rz
         self.n_rys = int(rys.sum())
         w.krok("Zasięg zarysowania (kombinacja charakterystyczna, σ₁ > f_ctm)", "n_el,zar / n_el", f"{self.n_rys}/{mes.ne}",
                f"{f(self.n_rys / mes.ne * 100, 1)} %", zrodlo="[UPR]")
@@ -1464,13 +1484,11 @@ class AnalizaTarczy:
 
         def rozwiaz_dl(wsp, E_c, zarys: bool):
             E_el = mes.E_el / self.beton.E_cm / 1000 * E_c
+            D = np.array(mes.D_domyslne(E_el))
+            D[:, 0, 0] += rx * p.E_s * 1000            # zbrojenie rozmyte także w stanie niezarysowanym (przekrój sprowadzony)
+            D[:, 1, 1] += rz * p.E_s * 1000
             if zarys and rys.any():
-                D = np.array(mes.D_domyslne(E_el))
-                th = thc
-                Dz = D_zarysowany(E_c, p.nu_beton, th[rys], rx[rys], rz[rys], p.E_s * 1000, zeta[rys])
-                D[rys] = Dz
-            else:
-                D = mes.D_domyslne(E_el)
+                D[rys] = D_zarysowany(E_c, p.nu_beton, thc[rys], rx[rys], rz[rys], p.E_s * 1000, zeta[rys])
             ks = {}
             for s in mes.podpory:
                 ks[s.id] = mes.pod_k[s.id]

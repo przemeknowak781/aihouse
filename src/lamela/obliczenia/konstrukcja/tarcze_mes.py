@@ -63,7 +63,7 @@ class PodporaT:
     z: float = 0.0
     k: float | None = None
     kx: bool = False
-    tylko_docisk: bool = False
+    tylko_docisk: bool = True
     opis: str = ""
     sciana: str = ""            # id ściany/elementu poniżej (bilans ścieżki obciążeń)
     z1: float | None = None     # podpora pionowa (utwierdzenie w ścianie poprzecznej): x = s0, z…z1 (u_z; u_x gdy kx)
@@ -156,6 +156,7 @@ class WynikT:
     odlaczone: list = field(default_factory=list)   # węzły podpór jednostronnych odłączone (odrywanie)
     iteracje: int = 1
     D_el: np.ndarray | None = None
+    aktywne: dict | None = field(default=None, repr=False)
     _nar: np.ndarray | None = field(default=None, repr=False)
 
     @property
@@ -194,8 +195,8 @@ def _T_rot(th):
 def D_zarysowany(E_c: float, nu: float, th: np.ndarray, rho_x: np.ndarray, rho_z: np.ndarray, E_s: float, zeta: np.ndarray,
                  beta_G: float = 0.2) -> np.ndarray:
     """Efektywna macierz sprężystości elementów zarysowanych (rysy rozmyte, obrotowe) z usztywnieniem przez beton
-    między rysami: C_eff = (1 − ζ)·C_I + ζ·C_II (interpolacja podatności — analogia (7.18)). Stan II: beton w osiach
-    głównych diag(0, E_c, β_G·G), zbrojenie rozmyte diag(ρ_x·E_s, ρ_z·E_s, 0) w osiach globalnych."""
+    między rysami: C_eff = (1 − ζ)·C_I + ζ·C_II (interpolacja podatności — analogia (7.18)). Stan I: beton izotropowy +
+    zbrojenie rozmyte; stan II: beton w osiach głównych diag(0, E_c, β_G·G) + zbrojenie rozmyte diag(ρ_x·E_s, ρ_z·E_s, 0)."""
     n = len(th)
     DI = D_izo(E_c, nu)
     G = E_c / (2 * (1 + nu))
@@ -206,9 +207,12 @@ def D_zarysowany(E_c: float, nu: float, th: np.ndarray, rho_x: np.ndarray, rho_z
     DII = np.einsum("nji,njk,nkl->nil", T, Dl, T)
     DII[:, 0, 0] += rho_x * E_s
     DII[:, 1, 1] += rho_z * E_s
-    CI = np.linalg.inv(DI)
+    DIs = np.repeat(DI[None], n, axis=0)
+    DIs[:, 0, 0] += rho_x * E_s
+    DIs[:, 1, 1] += rho_z * E_s
+    CI = np.linalg.inv(DIs)
     CII = np.linalg.inv(DII + np.eye(3) * 1e-9 * E_c)
-    Ceff = (1 - zeta)[:, None, None] * CI[None] + zeta[:, None, None] * CII
+    Ceff = (1 - zeta)[:, None, None] * CI + zeta[:, None, None] * CII
     return np.linalg.inv(Ceff)
 
 
@@ -552,8 +556,10 @@ class TarczaMES:
         K = K0 + sp.diags(kdiag)
         return K.tocsc(), ~fixed
 
-    def rozwiaz(self, f: np.ndarray, D_el: np.ndarray | None = None, opis: str = "", maks_iter: int = 40) -> WynikT:
-        """Rozwiązanie K·u = f (kombinacja); podpory jednostronne — iteracja zbioru aktywnego."""
+    def rozwiaz(self, f: np.ndarray, D_el: np.ndarray | None = None, opis: str = "", maks_iter: int = 40,
+                aktywne: dict | None = None) -> WynikT:
+        """Rozwiązanie K·u = f (kombinacja); podpory jednostronne — iteracja zbioru aktywnego. ``aktywne`` — ustalony
+        zbiór węzłów w kontakcie {id podpory: maska} (rozwiązanie liniowe, np. przypadki do superpozycji)."""
         if D_el is None:
             K0 = self.K0
             Rm, D = self._Rm_iso, self._D_iso
@@ -562,7 +568,9 @@ class TarczaMES:
             K0 = self.sztywnosc(D_el)
             Rm, D = self._Rm, D_el
             key0 = None
-        aktywne = {s.id: np.ones(len(self.pod_wezly[s.id]), bool) for s in self.podpory}
+        staly = aktywne is not None
+        aktywne = ({k: v.copy() for k, v in aktywne.items()} if staly
+                   else {s.id: np.ones(len(self.pod_wezly[s.id]), bool) for s in self.podpory})
         odl = []
         it = 0
         while True:
@@ -586,7 +594,7 @@ class TarczaMES:
             R = K0 @ u - f
             zmiana = False
             for s in self.podpory:
-                if not s.tylko_docisk:
+                if not s.tylko_docisk or s.z1 is not None or staly:
                     continue
                 nd = self.pod_wezly[s.id]
                 akt = aktywne[s.id]
@@ -617,7 +625,7 @@ class TarczaMES:
         sig = np.einsum("eij,ej->ei", D, eps)
         if it >= maks_iter:
             self.uwagi.append("Iteracja podpór jednostronnych nie zbiegła się w limicie iteracji — wynik przybliżony")
-        return WynikT(u, sig, alfa, R, f, opis, odl, it, D if D_el is not None else None)
+        return WynikT(u, sig, alfa, R, f, opis, odl, it, D if D_el is not None else None, aktywne)
 
     def rozwiaz_kombinacje(self, wsp: dict[str, float], opis: str = "", D_el=None) -> WynikT:
         return self.rozwiaz(self.wektor(wsp), D_el=D_el, opis=opis)

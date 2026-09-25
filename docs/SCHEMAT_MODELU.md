@@ -210,7 +210,7 @@ Pełna lista: docstring `src/lamela/obliczenia/energia/__init__.py`. Braki są r
 * **Ściany-tarcze i wsporniki tarczowe** (wspornik P2) — moduł `lamela.obliczenia.konstrukcja.tarcze` (MES płaskiego stanu naprężenia +
   model kratownicowy STM wg PN-EN 1992-1-1 p. 5.6.4/6.5). Ściana jest liczona jako tarcza, gdy ma pole `tarcza: true` albo automatycznie:
   warstwa konstrukcyjna żelbetowa i pod ścianą brak ciągłej podpory (ściany poniżej bez otworów + słupy < 95 % długości). `tarcza: false`
-  wyłącza. Opcje (słownik): `tarcza: {beton: C30/37, ekspozycja: XC3, siatka: 0.10, tylko_docisk: false}`. Dane pobierane z modelu:
+  wyłącza. Opcje (słownik): `tarcza: {beton: C30/37, ekspozycja: XC3, siatka: 0.10, tylko_docisk: true}` (podpory jednostronne — domyślnie). Dane pobierane z modelu:
   oś, z_od/z_do, grubość i materiał warstwy konstrukcyjnej (klasa betonu z nazwy materiału, np. „Żelbet C30/37”), otwory ściany,
   podpory = współliniowe ściany nośne poniżej (z_do w zakresie z_od − 0,6 … z_od; odcinki bez ich otworów; sztywność k = E·t/h) i słupy
   pod osią; obciążenia = reakcje płyt nad tarczą (krawędź górna), płyty pod tarczą poza ścianami poniżej (płyta podwieszona — krawędź
