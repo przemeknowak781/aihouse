@@ -1,5 +1,6 @@
 {
- "title": "Korekta Inwestora: „S” z przesuniętych brył, garaż w parterze — panel koncepcji uruchomiony ponownie",
+ "nr": 14,
+ "title": "Narzędzia produkcyjne gotowe; startują biblioteki obliczeń (fizyka/EP, konstrukcja, instalacje); W3 w toku",
  "stages": [
   [
    "Analiza szkicu — interpretacja v2 („S” z brył, garaż)",
@@ -55,5 +56,19 @@
   "Równolegle powstają biblioteki obliczeń z raportami „obliczeń statycznych” i instalacyjnych w polskim formacie (norma + punkt przy każdym wzorze).",
   "Wariant W3 (światło/ogród) wciąż w opracowaniu — najdłuższy etap koncepcji.",
   "Konwencje modelu (dachy odsłoniętych stropów, kody kreskowań PN-B-01030) dopisane do schematu dla syntezy."
+ ],
+ "images": [
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/views/w1like/out_final/PB-AR-04_rzut_dachu.png",
+   "caption": "TEST generatora: rzut dachu (model roboczy)"
+  },
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/views/w1like/out_final/PB-AR-06_przekroj_b_b.png",
+   "caption": "TEST: przekrój B-B"
+  },
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/views/w1like/out_final/PB-AR-02_rzut_i_pietra.png",
+   "caption": "TEST: rzut I piętra"
+  }
  ]
 }
