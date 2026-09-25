@@ -393,6 +393,10 @@ def common_notes(ctx: ViewContext, kinds: set, extra=(), units: str | None = Non
     out += list(w.get("uwagi") or [])
     out += list(extra)
     src = ctx.src or "model/budynek.yaml"
+    try:                                  # ścieżka względna repozytorium (bez ścieżek lokalnych na arkuszu)
+        src = str(Path(src).resolve().relative_to(Path(__file__).resolve().parents[3]))
+    except ValueError:
+        src = Path(src).name
     meta = getattr(m, "meta", {}) or {}
     out.append(f"Rysunek wygenerowany automatycznie z modelu {src} (wersja {meta.get('wersja', '?')}, "
                f"{meta.get('data', '?')}) — generatory lamela.views.")

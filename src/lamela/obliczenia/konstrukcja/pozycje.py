@@ -34,6 +34,11 @@ from .statyka import Belka, ObcQ, Podpora
 from .wspolne import BladDanych, Parametry, Wynik, f, tabela
 
 TOL_Z = 0.06
+# Uśrednienie reakcji podpór liniowych do sprawdzenia ścinania płyt [ZAŁ projektanta]: MES płyty Kirchhoffa daje osobliwe
+# (nieograniczone przy zagęszczaniu siatki) skupienia reakcji na końcach podpór liniowych i w narożach wklęsłych;
+# płyta bez zbrojenia poprzecznego redystrybuuje siłę poprzeczną w poprzek pasma — miarodajna jest średnia na długości
+# rozdziału ≈ 1,0 m (≈ 4–5 d płyt 20–25 cm). Przekroczenia po uśrednieniu → zbrojenie na ścinanie (h ≥ 200 mm, 9.3.2).
+OKNO_SCINANIA = 1.0
 TYPY_NOSNE = ("sciana_zewn", "sciana_wewn_nosna")
 PRZYPADKI = ("G", "QA", "QA_pA", "QA_pB", "H", "S1", "S2", "SB2")
 
@@ -567,7 +572,11 @@ class AnalizaKonstrukcji:
         linie_scian = [(sp.linia, ww.warstwa_konstr.d) for (sid_, ww), sp in zip(g.sciany_pod, g.podp_l)]
         for b in m.belki():
             top = float(b["spod"]) + float(b["h"])
-            if not (any(abs(top - s) < TOL_Z for s in spody) or any(abs(top - t) < TOL_Z for t in tops)):
+            odwr = any(abs(float(b["spod"]) - s) < TOL_Z for s in spody) and top > max(tops) + TOL_Z
+            if not (any(abs(top - s) < TOL_Z for s in spody) or any(abs(top - t) < TOL_Z for t in tops) or odwr):
+                continue            # belka odwrócona (płyta przy spodzie belki) — podpora płyty jak belka pod płytą
+            mat = m.material(str(b.get("mat"))) if b.get("mat") else None
+            if mat is not None and (mat.kreskowanie or "").upper() not in ("ZELBET", "STAL") and "elbet" not in (mat.nazwa or ""):
                 continue
             ln = LineString([tuple(b["os"][0]), tuple(b["os"][1])])
             if ln.distance(g.poly) > float(b["b"]) / 2 + 0.02:
@@ -943,7 +952,7 @@ class AnalizaKonstrukcji:
             best = 0.0
             for kb in kombs:
                 rr = sum(a * g.res[c].R for c, a in kb.wsp.items() if c in g.res)
-                best = max(best, fe.reakcja_max(WynikMES(None, None, rr), sp.id, 0.5))
+                best = max(best, fe.reakcja_max(WynikMES(None, None, rr), sp.id, OKNO_SCINANIA))
             rmax[sp.id] = best
         env["rmax"] = rmax
         g.env = env

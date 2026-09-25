@@ -40,7 +40,7 @@ MAPA_TXT = ("PODKŁAD PRZYKŁADOWY — mapa do celów projektowych fikcyjna [DAN
             "z modelu działki (dzialka.yaml); w projekcie rzeczywistym — aktualna mapa do celów projektowych "
             "wg art. 34 ust. 3 pkt 1 PB (z klauzulą urzędową lub oświadczeniem geodety — art. 34b PB), treść "
             "i opis mapy wg § 32–33 rozp. w sprawie standardów technicznych (t.j. Dz.U. 2022 poz. 1670), znaki "
-            "wg zał. 4 rozp. w sprawie BDOT500 i mapy zasadniczej (Dz.U. 2021 poz. 1385) [SPRAWDŹ numer w ELI].")
+            "wg zał. 4 rozp. w sprawie BDOT500 i mapy zasadniczej (Dz.U. 2021 poz. 1385; oba akty zweryfikowane w ELI 25.09.2026 — status: obowiązujące).")
 
 
 @dataclass
