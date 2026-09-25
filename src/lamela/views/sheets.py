@@ -179,6 +179,13 @@ class ViewOut:
 # ``bez_skali`` (bool — schemat: tytuł widoku bez podziałki, skala w tabliczce „—”, bez podziałki liniowej).
 # ``rodzaj`` — tekst pola „rodzaj rysunku” w tabliczce (np. „plan zagospodarowania”, „rzut instalacji”, „detal”).
 # ``qa`` — rodzaj kontroli ``plot.qa`` (np. „PZT”: podziałki do 1:500, pismo ≥ 2,5 mm); None — ze stadium tabliczki.
+# Widoki z listy ``widoki`` arkusza dziedziczą ``nr`` arkusza (``spec["nr"]``), jeśli go nie podano.
+# Kontrakt bloków kolumny arkusza z kilkoma widokami: bloki wszystkich widoków trafiają do jednej kolumny w kolejności
+# widoków. Bloki o tej samej nazwie i identycznej treści (np. ta sama legenda / tabela całego budynku z dwóch rzutów)
+# są scalane — zostaje pierwszy. Blok może zależeć od stanu arkusza (np. legenda wspólna rysowana raz: kolejne
+# wywołania na tym samym arkuszu nic nie rysują i zwracają ``y_top``) — silnik układu pomija bloki, które w pomiarze
+# sekwencyjnym nic nie rysują, a bloki zmieniające wysokość względem pomiaru osobnego łączy z poprzednim
+# (``uklad.bloki_z_kolumny``). Blok nie może zakładać, że stanie pod poprzednim blokiem listy.
 VIEW_TYPES: dict = {}
 VIEW_PLUGINS = ("site", "instalacje", "konstrukcja", "detale")   # moduły lamela.views ładowane przy nieznanym typie
 
@@ -274,7 +281,7 @@ def _room_table(rows):
         data.append(["", "RAZEM powierzchnia netto", "", "", "", fmt.area(tot, unit=False)])
         data.append(["", "w tym podstawowa + pomocnicza", "", "", "", fmt.area(pu, unit=False)])
         r = table(sh, x, y - 7.0, cols, data, h=2.5, row_h=5.0, title="ZESTAWIENIE POMIESZCZEŃ",
-                  align=["center", "left", "left", "center", "right", "right"])
+                  align=["center", "left", "left", "center", "right", "right"], zawijaj=True)
         return r[1]
     return fn
 
@@ -444,6 +451,9 @@ def _przygotuj(ctx: ViewContext, spec: dict) -> dict:
     m = ctx.model
     scale = float(spec.get("skala", ctx.cfg.get("skala", 50)))
     vspecs = [dict(vs) for vs in (spec.get("widoki") or [spec])]
+    for vs in vspecs:                   # widoki z listy znają numer arkusza (braki danych, uwagi generatorów)
+        if spec.get("nr") is not None:
+            vs.setdefault("nr", spec["nr"])
     shared_nr = {}                      # wspólna numeracja materiałów elewacji na arkuszu
     for vs in vspecs:
         if vs.get("typ") == "elewacja":
@@ -483,9 +493,8 @@ def _przygotuj(ctx: ViewContext, spec: dict) -> dict:
     if el_rows:
         el_rows = sorted(el_rows, key=lambda r: r[0])
         col.add("mats", _material_legend(el_rows, m))
-    for v in views:
-        for nm, fn in (getattr(v.result, "column_blocks", None) or []):
-            col.add(nm, fn)
+    for nm, fn in _scal_bloki([b for v in views for b in (getattr(v.result, "column_blocks", None) or [])]):
+        col.add(nm, fn)
     extra = list(spec.get("uwagi") or [])
     for v in views:
         extra += [n for n in (getattr(v.result, "notes", None) or []) if n not in extra]
@@ -503,6 +512,42 @@ def _przygotuj(ctx: ViewContext, spec: dict) -> dict:
                 scale_txt=scale_txt)
 
 
+def _podpis_bloku(fn, w: float = TB_W) -> tuple:
+    """Treść bloku narysowanego na arkuszu próbnym (do porównania bloków o tej samej nazwie)."""
+    import numpy as np
+    sh = Sheet("A0", draw_frame=False)
+    yb = fn(sh, 100.0, 5000.0, w)
+    out = [round(float(yb), 2)]
+    for p in sh.prims:
+        g = getattr(p, "pts", None)
+        if g is None:
+            g = getattr(p, "pos", None)
+        if g is None and getattr(p, "rings", None) is not None:
+            g = p.rings[0]
+        pts = tuple(np.round(np.asarray(g, float).ravel(), 2).tolist()) if g is not None else ()
+        out.append((type(p).__name__, p.layer, pts, getattr(p, "string", None) if hasattr(p, "runs") else None,
+                    getattr(p, "h", None), getattr(p, "fill", None), getattr(p, "pen", None)))
+    return tuple(out)
+
+
+def _scal_bloki(pary) -> list:
+    """Bloki kolumny kilku widoków: blok o tej samej nazwie i identycznej treści co wcześniejszy — pomijany."""
+    out, podpisy = [], {}
+    nazwy = [nm for nm, _f in pary]
+    for nm, fn in pary:
+        if nazwy.count(nm) > 1:
+            try:
+                pp = _podpis_bloku(fn)
+            except Exception:                      # noqa: BLE001 — blok niedający się narysować osobno: zostaje
+                pp = None
+            if pp is not None and pp in podpisy.setdefault(nm, []):
+                continue
+            if pp is not None:
+                podpisy[nm].append(pp)
+        out.append((nm, fn))
+    return out
+
+
 def _info(spec, views, fmt_name, scale_txt, W, H, tb_h):
     info = dict(nr=spec["nr"], tytul=spec.get("tytul"), format=fmt_name, typ=[v.kind for v in views],
                 skala=scale_txt, widoki=[v.title for v in views],
@@ -515,12 +560,15 @@ def _info(spec, views, fmt_name, scale_txt, W, H, tb_h):
     return info
 
 
-def _place_views(sh, views, positions):
-    for v, (x, y) in zip(views, positions):
+def _place_views(sh, views, positions, tytuly_dx=None):
+    """Rzutnie w pozycjach silnika układu; ``tytuly_dx`` — odsunięcie tytułu od lewej krawędzi rzutni (domyślnie
+    2 mm; silnik przesuwa tytuł, który trafiłby na znak centrujący)."""
+    for i, (v, (x, y)) in enumerate(zip(views, positions)):
         above = v.kind == "przekroj"
         sh.viewports.append(v.vp)
         sh.place(v.vp, x, y, "bl", pad=3.0)
-        sh.view_title(v.vp, v.title, where="above" if above else "below", dx=2.0,
+        dx = float(tytuly_dx[i]) if tytuly_dx and i < len(tytuly_dx) else 2.0
+        sh.view_title(v.vp, v.title, where="above" if above else "below", dx=dx,
                       scale=not getattr(v.result, "bez_skali", False))
 
 
@@ -585,9 +633,10 @@ def _arkusz_klasyczny(ctx, spec, idx, total, P, fmt_req: str):
             y -= v.h_mm + 12.0 + 12.0
     col.draw(sh, fx1 - TB_W, fy1 - 3.0, TB_W)
     plot.add_control_marks(sh)
+    znaki = sh.przytnij_znaki_centrujace()
     tbr = sh.tb_rect or (0, 0, 0, 0)
     info = _info(spec, views, f, P["scale_txt"], sh.width, sh.height, tbr[3] - tbr[1])
-    info["uklad"] = dict(tryb="klasyczny", format=f)
+    info["uklad"] = dict(tryb="klasyczny", format=f, znaki_centrujace=znaki)
     return sh, info
 
 
@@ -609,8 +658,10 @@ def _bloki_ukladu(ctx, P) -> list:
             if nfn is not None:
                 yb = min(yb, nfn(sh, x, y, w))
             return yb
+        # w_min: wiersz może być węższy (róża przesuwa się w lewo — np. gdy prawy znak centrujący H/2 wypada
+        # nad tabliczką, arkusze H = 297); podziałka ≤ 125 mm + róża 14 mm
         out.append(U.blok("róża i podziałka" if nfn and sfn else ("róża" if nfn else "podziałka"), ns,
-                          kotwica="nad_tabliczka"))
+                          kotwica="nad_tabliczka", w_min=155.0 if sfn else 30.0))
     pary = [(nm, fn) for nm, fn in col.blocks if nm not in ("north", "scale", "notes")]
     out += U.bloki_z_kolumny(pary, TB_W)      # pomiar sekwencyjny: bloki zależne od poprzednich — razem
     if any(nm == "notes" for nm, _f in col.blocks):
@@ -637,16 +688,17 @@ def _arkusz_uklad(ctx, spec, idx, total, P, fmt_req):
         return None
     bledy = U.sprawdz_nakladanie(lay.roz)
     sh = Sheet(lay.sheet_fmt, orientation=lay.orientacja, title_block=tb)
-    _place_views(sh, views, lay.roz.widoki)
+    _place_views(sh, views, lay.roz.widoki, lay.roz.tytuly_dx)
     for b, x, y_top, w in lay.roz.bloki:
         b.fn(sh, x, y_top, w)
     plot.add_control_marks(sh)
+    znaki = sh.przytnij_znaki_centrujace()     # znak nie może dotykać treści (widoki nie są od znaków odsuwane)
     tbr = sh.tb_rect or lay.roz.tabliczka
     if abs((tbr[3] - tbr[1]) - tb_h) > 0.5:
         bledy.append(f"wysokość tabliczki {tbr[3] - tbr[1]:.1f} ≠ pomiar {tb_h:.1f} mm")
     info = _info(spec, views, lay.nazwa, P["scale_txt"], lay.W, lay.H, tb_h)
     info["uklad"] = dict(lay.info(), bloki=[[n, [round(v, 1) for v in r]] for k, n, r in lay.roz.prostokaty
-                                           if k != "widok"], kolizje=bledy)
+                                           if k in ("blok", "tabliczka")], kolizje=bledy, znaki_centrujace=znaki)
     if bledy:
         ctx.note(f"arkusz {spec['nr']}", "układ: " + "; ".join(bledy[:3]))
     return sh, info

@@ -1,4 +1,5 @@
 {
+ "nr": 51,
  "title": "Tomy PT-1…4 po weryfikacji i poprawkach · PT-2 BO zablokowany do zamknięcia analiz · konstrukcja: runda 1 ►",
  "stages": [
   [
@@ -52,6 +53,17 @@
  ],
  "notes": [
   "PT-2 BO: walidator blokuje tom, dopóki są analizy niezamknięte (42).",
-  "PT-1 AR: własne arkusze stadium PT (PT-AR-01…05)."
+  "PT-1 AR: własne arkusze stadium PT (PT-AR-01…05).",
+  "NADZÓR (10:38): 3 agentów aktywnych, bez zastojów; najdłuższa bezczynność 0 min; zmiany w repo 0 min temu."
+ ],
+ "images": [
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/PT-AR-04_przekroje_a_a_i_b_b.png",
+   "caption": "PT-AR-04 przekroje A-A i B-B (stadium PT)"
+  },
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/PT-AR-01_rzut_parteru.png",
+   "caption": "PT-AR-01 rzut parteru (stadium PT)"
+  }
  ]
 }
