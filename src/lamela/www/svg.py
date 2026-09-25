@@ -35,11 +35,11 @@ class Arkusz:
 
     # --- ścieżki
     def d_ring(self, coords) -> str:
-        c = list(coords)
+        c = [tuple(q[:2]) for q in coords]
         if len(c) < 2:
             return ""
-        return "M" + " L".join(self.pt(u, v) for u, v in c[:-1] if True) + "Z" if c[0] == c[-1] else \
-            "M" + " L".join(self.pt(u, v) for u, v in c)
+        zam = c[0] == c[-1]
+        return "M" + " L".join(self.pt(u, v) for u, v in (c[:-1] if zam else c)) + ("Z" if zam else "")
 
     def d_geom(self, g) -> str:
         out = []
