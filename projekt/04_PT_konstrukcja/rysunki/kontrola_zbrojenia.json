@@ -1,6 +1,6 @@
 {
- "ok": 280,
- "razem": 280,
+ "ok": 284,
+ "razem": 284,
  "wiersze": [
   {
    "element": "B1",
@@ -3265,6 +3265,78 @@
    "ok": true,
    "uwagi": "",
    "zapas": 0.026
+  },
+  {
+   "element": "SCH1/bieg 1",
+   "miejsce": "płyta biegu — dołem (główne)",
+   "poz": "4.1",
+   "arkusze": [
+    "PT-BO-26"
+   ],
+   "As_req": 386.2,
+   "As_min": 201.4,
+   "As_prov": 392.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.017
+  },
+  {
+   "element": "SCH1/bieg 2",
+   "miejsce": "płyta biegu — dołem (główne)",
+   "poz": "4.1",
+   "arkusze": [
+    "PT-BO-26"
+   ],
+   "As_req": 386.2,
+   "As_min": 201.4,
+   "As_prov": 392.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.017
+  },
+  {
+   "element": "SCH2/bieg 1",
+   "miejsce": "płyta biegu — dołem (główne)",
+   "poz": "4.2",
+   "arkusze": [
+    "PT-BO-26"
+   ],
+   "As_req": 386.2,
+   "As_min": 201.4,
+   "As_prov": 392.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.017
+  },
+  {
+   "element": "SCH2/bieg 2",
+   "miejsce": "płyta biegu — dołem (główne)",
+   "poz": "4.2",
+   "arkusze": [
+    "PT-BO-26"
+   ],
+   "As_req": 386.2,
+   "As_min": 201.4,
+   "As_prov": 392.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.017
   },
   {
    "element": "SF1",

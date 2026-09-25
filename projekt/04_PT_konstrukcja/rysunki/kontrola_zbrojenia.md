@@ -2,7 +2,7 @@
 
 Plik generowany automatycznie przez `lamela.views.konstrukcja` (moduł `konstrukcja_dane.rejestruj`) przy rysowaniu arkuszy. A_s,req, A_s,min — z obiektów wyników biblioteki `lamela.obliczenia.konstrukcja` (pozycje obliczeń statycznych); A_s,prov — zbrojenie NARYSOWANE na arkuszach (φ/s lub n·φ). Warunki: PN-EN 1992-1-1 6.1, 9.2.1.1(1) (9.1N) + NA, 9.2.1.1(3) (A_s,max = 0,04·A_c), 9.3.1.1(3) (s_max).
 
-**Wynik: 280/280 pozycji spełnia warunek A_s,prov ≥ A_s,req** (0 niespełnionych — kolumna „Uwagi”).
+**Wynik: 284/284 pozycji spełnia warunek A_s,prov ≥ A_s,req** (0 niespełnionych — kolumna „Uwagi”).
 
 | Element | Miejsce | Poz. obl. | A_s,req | A_s,min | A_s,prov | Jedn. | Zbrojenie | Zapas | Wynik | Arkusze | Uwagi |
 |---|---|---|---:|---:|---:|---|---|---:|---|---|---|
@@ -182,6 +182,10 @@ Plik generowany automatycznie przez `lamela.views.konstrukcja` (moduł `konstruk
 | PL-E | pole P1 — dół y | 3.3 | 94 | 377 | 387 | mm²/m | Ø8 co 13 | +3% | ✓ | PT-BO-09, PT-BO-11 |  |
 | PL-E | wspornik — góra x | 3.3 | 252 | 392 | 393 | mm²/m | Ø10 co 20 | +0% | ✓ | PT-BO-10, PT-BO-11 |  |
 | PL-E | wspornik — góra y | 3.3 | 159 | 377 | 387 | mm²/m | Ø8 co 13 | +3% | ✓ | PT-BO-10, PT-BO-11 |  |
+| SCH1/bieg 1 | płyta biegu — dołem (główne) | 4.1 | 386 | 201 | 393 | mm²/m | Ø10 co 20 | +2% | ✓ | PT-BO-26 |  |
+| SCH1/bieg 2 | płyta biegu — dołem (główne) | 4.1 | 386 | 201 | 393 | mm²/m | Ø10 co 20 | +2% | ✓ | PT-BO-26 |  |
+| SCH2/bieg 1 | płyta biegu — dołem (główne) | 4.2 | 386 | 201 | 393 | mm²/m | Ø10 co 20 | +2% | ✓ | PT-BO-26 |  |
+| SCH2/bieg 2 | płyta biegu — dołem (główne) | 4.2 | 386 | 201 | 393 | mm²/m | Ø10 co 20 | +2% | ✓ | PT-BO-26 |  |
 | SF1 | pogrubienie — siatka dolna (MES) | 10.22 | 488 | 854 | 855 | mm²/m | Ø14 co 18 | +0% | ✓ | PT-BO-03, PT-BO-05 |  |
 | SF2 | pogrubienie — siatka dolna (MES) | 10.23 | 867 | 854 | 870 | mm²/m | Ø12 co 13 | +0% | ✓ | PT-BO-03, PT-BO-05 |  |
 | SF3 | pogrubienie — siatka dolna (MES) | 10.24 | 1036 | 854 | 1058 | mm²/m | Ø16 co 19 | +2% | ✓ | PT-BO-03, PT-BO-05 |  |
