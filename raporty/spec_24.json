@@ -1,5 +1,6 @@
 {
- "title": "Korekta Inwestora: „S” z przesuniętych brył, garaż w parterze — panel koncepcji uruchomiony ponownie",
+ "nr": 24,
+ "title": "Synteza modelu w toku (skrypt parametryczny ze źródłami parametrów); katalog mostków i moduł tarcz w budowie",
  "stages": [
   [
    "Analiza szkicu — interpretacja v2 („S” z brył, garaż)",
@@ -55,9 +56,24 @@
   ]
  ],
  "notes": [
+  "NADZÓR (05:38): 3 agentów aktywnych, bez zastojów; najdłuższa bezczynność 3 min; zmiany w repo 0 min temu.",
   "Synteza: skrypt parametryczny tools/buduj_model.py (370+ linii) — materiały z λ/ρ/c_p/μ ze źródłami (PN-EN ISO 10456, PN-EN 1745, DWU „lub równoważne”), moduł osi 0,125 m (bloczki silikatowe), ściany; przyjęta płyta fundamentowa (ciągła izolacja cokołu).",
   "Model zapisze 4 pliki: budynek.yaml, dzialka.yaml, wyposazenie.yaml, instalacje.yaml — po każdej sekcji walidacja rdzenia, rysunki i 3D.",
   "Symulacja mostków: katalog węzłów demonstracyjnych kończony; moduł ścian-tarcz (MES+STM) w budowie.",
   "Po syntezie: 3 audytorów (WT/MPZP, spójność geometrii, funkcja/ergonomia) → poprawki → start produkcji dokumentacji."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/docs/20_koncepcja/werdykt_panelu.png",
+   "caption": "Werdykt: baza W2 + przeszczepy"
+  },
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/mostki/WZ-T3.png",
+   "caption": "Mostek WZ-T3 (demo)"
+  },
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/mostki/WZ-P1.png",
+   "caption": "Mostek WZ-P1 (demo)"
+  }
  ]
 }

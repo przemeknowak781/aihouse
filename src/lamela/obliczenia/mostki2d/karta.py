@@ -52,7 +52,7 @@ class Ciaglosc:
     @property
     def opis(self) -> str:
         if self.ciagla:
-            return f"ciągła (brak drogi przez materiały o λ > {self.lam_izol:g} W/(m·K) z wnętrza na zewnątrz)"
+            return f"ciągła (brak drogi przez materiały o λ > {_f(self.lam_izol, 2)} W/(m·K) z wnętrza na zewnątrz)"
         return ("PRZERWANA — droga mostka: " + " → ".join(self.materialy)
                 + (" (wyjście przez grunt)" if self.przez_grunt else ""))
 
@@ -189,7 +189,7 @@ def kontrola_wody(wezel: Wezel, model=None, kontekst: dict | None = None) -> lis
     if cg is not None:
         if cg.ciagla:
             add("OK", "izolacja", "linia izolacji ciągła („test ołówka” na siatce: brak drogi przez materiały "
-                                  f"o λ > {cg.lam_izol:g})")
+                                  f"o λ > {_f(cg.lam_izol, 2)})")
         elif cg.przez_grunt:
             add("UWAGA", "izolacja", "linia izolacji domyka się przez grunt: " + " → ".join(cg.materialy)
                 + " — ograniczyć izolacją obwodową / blokiem termicznym u podstawy muru")
@@ -299,8 +299,8 @@ def kontrola_wody(wezel: Wezel, model=None, kontekst: dict | None = None) -> lis
                                                                           "brak (`dachy[].rury_spustowe`)"))
         add("UWAGA", "izolacja", "wnęka w ETICS pocienia izolację (ψ > 0) — zalecana rura przed licem na obejmach "
                                  "dystansowych albo w izolowanym szachcie wewnętrznym")
-        add("INFO", "rury", "czyszczak / osadnik nad terenem, podłączenie do zbiornika retencyjnego / niecki "
-                            "(PN-EN 12056-3), kolano z wylotem nad opaską żwirową zabronione przy ścianie")
+        add("INFO", "rury", "czyszczak z osadnikiem nad terenem, szczelne podłączenie do kanalizacji deszczowej / "
+                            "zbiornika retencyjnego / niecki (PN-EN 12056-3) — bez zrzutu wody przy cokole")
     elif typ == "garaz":
         add("INFO", "paro", "ściana dom–garaż: szczelność na spaliny (WT § 106 ust. 1) — tynk ciągły, uszczelnione "
                             "przejścia instalacji, drzwi z samozamykaczem i uszczelką")
@@ -350,7 +350,7 @@ def ocena_wezla(w, ciag: Ciaglosc | None = None, kontrola: list[Pozycja] | None 
     uz = []
     if not w.fRsi_ok:
         kl = "NIE SPEŁNIA"
-        uz.append(f"f_Rsi = {w.f['f_Rsi']:.3f} < {w.fRsi_min}")
+        uz.append(f"f_Rsi = {_f(w.f['f_Rsi'])} < {_f(w.fRsi_min, 2)}")
     else:
         kl = "DOBRY"
         if ciag is not None and not ciag.ciagla and not ciag.przez_grunt:
@@ -362,10 +362,10 @@ def ocena_wezla(w, ciag: Ciaglosc | None = None, kontrola: list[Pozycja] | None 
             d, dp, _, _ = ref
             if p.psi_oi > max(d, PSI_BEZMOSTKOWY) + 1e-9:
                 kl = "ZŁY"
-                uz.append(f"ψ_oi = {p.psi_oi:.3f} > domyślna {d:.2f}")
+                uz.append(f"ψ_oi = {_f(p.psi_oi)} > domyślna {_f(d, 2)}")
             elif p.psi_oi > max(dp, PSI_BEZMOSTKOWY) + 1e-9 and kl != "ZŁY":
                 kl = "DO POPRAWY"
-                uz.append(f"ψ_oi = {p.psi_oi:.3f} > dobra praktyka {dp:.2f}")
+                uz.append(f"ψ_oi = {_f(p.psi_oi)} > dobra praktyka {_f(dp, 2)}")
         if kl == "DOBRY" and ciag is not None and not ciag.ciagla:
             kl = "DO POPRAWY"
             uz.append("izolacja domyka się przez grunt")
@@ -466,7 +466,7 @@ def rysuj_przekroj(ax, wezel: Wezel, ciag: Ciaglosc | None = None, legenda_ax=No
                                tolerance=0.005)
             except Exception:   # pragma: no cover
                 rp = part.representative_point()
-            ax.text(rp.x, rp.y, f"{st.nazwa}\nθ = {st.theta:g} °C", ha="center", va="center", fontsize=7.5,
+            ax.text(rp.x, rp.y, f"{st.nazwa}\nθ = {_f(st.theta, 1)} °C", ha="center", va="center", fontsize=7.5,
                     color="#444444", zorder=8, style="italic")
     uzyte: dict[str, Any] = {}
     for k, o in enumerate(wezel.obszary):
@@ -513,7 +513,7 @@ def rysuj_przekroj(ax, wezel: Wezel, ciag: Ciaglosc | None = None, legenda_ax=No
         nz = nz if len(nz) <= 34 else nz[:33] + "…"
         h.append(Patch(facecolor=_kolor_mat(m), edgecolor="#d62728" if izol else "#333333", lw=0.5,
                        hatch="////" if izol else ("...." if m.rodzaj == "grunt" else None),
-                       label=f"{m.kod} — {nz}, λ = {m.lam:.3g}"))
+                       label=f"{m.kod} — {nz}, λ = {f'{m.lam:.3g}'.replace('.', ',')}"))
     for r in rodz_uz:
         kol, lw, ls = STYLE_LINII[r]
         h.append(Line2D([], [], color=kol, lw=lw, ls=ls, label=RODZAJE_LINII[r]))
@@ -555,7 +555,7 @@ def rysuj_temperature(ax, w, fig=None):
                 xy = np.asarray(rg.coords)
                 ax.plot(xy[:, 0], xy[:, 1], color="#333333", lw=0.3, zorder=3, alpha=0.7)
     ax.plot([w.f["x"]], [w.f["y"]], marker="o", mfc="none", mec="#9d174d", mew=1.8, ms=10, zorder=6)
-    ax.annotate(f"θ_si,min = {w.f['theta_si_min']:.1f} °C\n(R_si = 0,25)", (w.f["x"], w.f["y"]),
+    ax.annotate(f"θ_si,min = {_f(w.f['theta_si_min'], 1)} °C\n(R_si = 0,25)", (w.f["x"], w.f["y"]),
                 xytext=(14, -26), textcoords="offset points", fontsize=7, color="#9d174d", zorder=7,
                 bbox=dict(boxstyle="round,pad=0.2", fc="white", ec="none", alpha=0.85))
     ax.set_xlim(widok[0], widok[2])
@@ -595,7 +595,7 @@ def rysuj_karte(w, plik: str | Path, ciag: Ciaglosc | None = None, ocena: dict |
     axl2.legend(handles=[Line2D([], [], color="k", lw=0.6, label="izotermy co 2 K (opis co 4 K)"),
                          Line2D([], [], color="#1e3a8a", lw=1.0, label="izoterma 0 °C"),
                          Line2D([], [], color="#9d174d", lw=1.4, ls="--",
-                                label=f"θ = {lim:.1f} °C ↔ f_Rsi,min = {w.fRsi_min} (R_si = 0,25; ISO 13788)"),
+                                label=f"θ = {_f(lim, 1)} °C ↔ f_Rsi,min = {_f(w.fRsi_min, 2)} (R_si = 0,25; ISO 13788)"),
                          Line2D([], [], ls="none", marker="o", mfc="none", mec="#9d174d", mew=1.8, ms=8,
                                 label="θ_si,min — punkt krytyczny powierzchni wewn.")],
                 loc="upper left", fontsize=7, frameon=False, borderaxespad=0.0)
@@ -615,12 +615,12 @@ def rysuj_karte(w, plik: str | Path, ciag: Ciaglosc | None = None, ocena: dict |
     p = w.psi_glowne
     oc = ocena or {}
     ref = oc.get("ref")
-    t1 = (f"ψ_e = {p.psi_e:+.3f}   ψ_i = {p.psi_i:+.3f}   ψ_oi = {p.psi_oi:+.3f} W/(m·K)   (L_2D = {p.L2D:.4f})"
-          if p else "ψ — n/d")
-    t2 = (f"θ_si,min = {w.f['theta_si_min']:.2f} °C   f_Rsi = {w.f['f_Rsi']:.3f} "
-          f"({'≥' if w.fRsi_ok else '<'} {w.fRsi_min})")
+    t1 = (f"ψ_e = {_f(p.psi_e, 3, True)}   ψ_i = {_f(p.psi_i, 3, True)}   ψ_oi = {_f(p.psi_oi, 3, True)} W/(m·K)   "
+          f"(L_2D = {_f(p.L2D, 4)})" if p else "ψ — n/d")
+    t2 = (f"θ_si,min = {_f(w.f['theta_si_min'], 2)} °C   f_Rsi = {_f(w.f['f_Rsi'])} "
+          f"({'≥' if w.fRsi_ok else '<'} {_f(w.fRsi_min, 2)})")
     if ref:
-        t2 += f"   ψ_oi odniesienia: domyślna {ref[0]:.2f} / dobra praktyka {ref[1]:.2f}"
+        t2 += f"   ψ_oi odniesienia: domyślna {_f(ref[0], 2)} / dobra praktyka {_f(ref[1], 2)}"
     t3 = "izolacja: " + (ciag.opis if ciag is not None else "—")
     axw.text(0.0, 0.92, t1, fontsize=10, weight="bold", transform=axw.transAxes, va="top")
     axw.text(0.0, 0.55, t2, fontsize=9, transform=axw.transAxes, va="top")
@@ -714,12 +714,12 @@ def raport_kart(karty: list[KartaWezla], plik: str | Path, tytul: str, wstep: st
          + ".", "",
          f"**Ciągłość izolacji („test ołówka”, zasada linii czerwonej)** — sprawdzana na siatce każdego węzła: "
          f"szukana jest droga z powierzchni wewnętrznej na zewnętrzną / do strefy nieogrzewanej wyłącznie przez "
-         f"materiały o λ > {LAMBDA_IZOL:g} W/(m·K) [ZAŁ] (ramy i szyby traktowane jak obudowa). Brak drogi = linia "
+         f"materiały o λ > {_f(LAMBDA_IZOL, 2)} W/(m·K) [ZAŁ] (ramy i szyby traktowane jak obudowa). Brak drogi = linia "
          f"izolacji ciągła; droga istnieje = mostek konstrukcyjny (na karcie czerwona linia przerywana ✕–✕); droga "
          f"kończąca się w gruncie = izolacja domyka się przez grunt (typowe dla ław — ocena „do poprawy”).", "",
          "**Ocena:** " + "; ".join(f"**{k}** — {v[1]}" for k, v in KLASY.items()) + ". Odniesienia ψ_oi: "
          "wartość domyślna PN-EN ISO 14683 zał. C i „dobra praktyka” z `fizyka.mostki.PSI_DOMYSLNE` [NZW]; "
-         f"f_Rsi,min = {fmin} (W-248, WT zał. 2 pkt 2.2). Kryterium „bez mostków” ψ_e ≤ 0,01 W/(m·K) — informacyjne.", "",
+         f"f_Rsi,min = {_f(fmin, 2)} (W-248, WT zał. 2 pkt 2.2). Kryterium „bez mostków” ψ_e ≤ 0,01 W/(m·K) — informacyjne.", "",
          "**Rysunki (zasada „4 linii”, brief 9.1):** izolacja — kreskowanie czerwone; hydroizolacja / izolacja "
          "przeciwwodna — niebieska ciągła, przeciwwilgociowa — niebieska przerywana; paroizolacja / szczelność "
          "powietrzna (tynk wewn., taśmy wewn.) — zielona; taśmy / uszczelnienia zewnętrzne — niebieska kropkowana; "
@@ -783,7 +783,7 @@ def raport_kart(karty: list[KartaWezla], plik: str | Path, tytul: str, wstep: st
               f"L_2D = {_f(p.L2D, 4)} W/(m·K)" + (f"; odniesienie ψ_oi: domyślna {_f(ref[0], 2)}, dobra praktyka "
                                                     f"{_f(ref[1], 2)} ({ref[2]})" if ref else ""),
               f"* θ_si,min = {_f(k.w.f['theta_si_min'], 2)} °C, f_Rsi = {_f(k.w.f['f_Rsi'], 3)} "
-              f"({'≥' if k.w.fRsi_ok else '<'} {k.w.fRsi_min} — {'brak ryzyka pleśni i kondensacji powierzchniowej' if k.w.fRsi_ok else 'RYZYKO PLEŚNI'})"
+              f"({'≥' if k.w.fRsi_ok else '<'} {_f(k.w.fRsi_min, 2)} — {'brak ryzyka pleśni i kondensacji powierzchniowej' if k.w.fRsi_ok else 'RYZYKO PLEŚNI'})"
               + (f"; rama/szyba f_Rsi = {_f(k.w.f['f_Rsi_okno'], 3)} (informacyjnie)" if "f_Rsi_okno" in k.w.f else ""),
               f"* izolacja: {k.ciag.opis}",
               f"* siatka: {k.w.siatki[-1][1]} komórek, zmiana Φ przy podwojeniu {_f(100 * k.w.zmiana, 3)} %, "
