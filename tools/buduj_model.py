@@ -952,15 +952,17 @@ for _sl in SLUPY[:4]:
 Z_SPOD_ST2, Z_SPOD_ST3 = r(Z_ST2 - T_STR), r(Z_ST3 - T_STR)          # 5,93; 9,08
 _SLZ = [("A/1", (xA, 0.11), ((Z_PLYTA_F, Z_SPOD_ST1, "P0: podpora końca B1, płyta ST1"), (Z_ST1, Z_SPOD_ST2, "P1: podpora wspornika B4, płyta ST2"))),
         ("A/3", (xA, y3), ((Z_PLYTA_F, Z_SPOD_ST1, "P0: płyta ST1"), (Z_ST1, Z_SPOD_ST2, "P1: podpora wspornika B5, płyta ST2"))),
-        ("B/3", (xB, r(y3 + 0.11)), ((Z_PLYTA_F, Z_SPOD_ST1, "P0: płyta ST1"), (Z_ST1, Z_SPOD_ST2, "P1: koniec przęsła zakotwienia B5, płyta ST2"),
+        ("B/3", (xB, y3), ((Z_PLYTA_F, Z_SPOD_ST1, "P0: płyta ST1"), (Z_ST1, Z_SPOD_ST2, "P1: koniec przęsła zakotwienia B5, płyta ST2"),
                                      (Z_ST2, Z_SPOD_ST3, "P2: naroże wklęsłe stropodachu D1"))),
         ("C/3", (xC, r(y3 + 0.11)), ((Z_PLYTA_F, r(Z_ST1 - 0.50), "P0: oparcie B8 (w ścianie ŻB S0-12)"), (Z_ST1, r(Z_ST2 - 0.50), "P1: oparcie B9"))),
-        ("D/3", (xD, r(y3 + 0.11)), ((Z_PLYTA_F, r(Z_ST1 - 0.50), "P0: oparcie B8 (w ścianie ŻB S0-13)"), (Z_ST1, r(Z_ST2 - 0.50), "P1: oparcie B9")))]
+        ("D/3", (xD, r(y3 + 0.11)), ((Z_PLYTA_F, r(Z_ST1 - 0.50), "P0: oparcie B8 (w ścianie ŻB S0-13)"), (Z_ST1, r(Z_ST2 - 0.50), "P1: oparcie B9"))),
+        ("E/1", (xE, 0.11), ((Z_PLYTA_F, Z_SPOD_ST1, "P0: podpora końca B1 (naroże E/1), płyta ST1"),))]
+_SLZ_PRZ = {"B/3": "400x180"}          # B/3: trzpień wydłużony w osi 3 (w ścianie S0-11 otwór O0-15 przy węźle)
 SLZ_WEZLY = {}                          # węzeł → [id słupów od dołu]
 for _wz, _xy, _odc in _SLZ:
     for _z0, _z1, _opis in _odc:
         _id = f"SL{len(SLUPY) + 1}"
-        SLUPY.append({"id": _id, "xy": [r(_xy[0]), r(_xy[1])], "przekroj": "180x400", "mat": "ZB_C30", "z_od": r(_z0), "z_do": r(_z1),
+        SLUPY.append({"id": _id, "xy": [r(_xy[0]), r(_xy[1])], "przekroj": _SLZ_PRZ.get(_wz, "180x400"), "mat": "ZB_C30", "z_od": r(_z0), "z_do": r(_z1),
                       "uwagi": f"słup żelbetowy w murze (trzpień 18 × 40 cm) w węźle {_wz} — {_opis}"})
         SLZ_WEZLY.setdefault(_wz, []).append(_id)
 

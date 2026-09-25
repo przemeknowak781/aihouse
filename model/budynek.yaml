@@ -475,13 +475,14 @@ slupy:
   - {id: SL10, xy: [0.0, 0.11], przekroj: 180x400, mat: ZB_C30, z_od: 3.0, z_do: 5.93, uwagi: 'słup żelbetowy w murze (trzpień 18 × 40 cm) w węźle A/1 — P1: podpora wspornika B4, płyta ST2'}
   - {id: SL11, xy: [0.0, 5.125], przekroj: 180x400, mat: ZB_C30, z_od: -0.15, z_do: 2.78, uwagi: 'słup żelbetowy w murze (trzpień 18 × 40 cm) w węźle A/3 — P0: płyta ST1'}
   - {id: SL12, xy: [0.0, 5.125], przekroj: 180x400, mat: ZB_C30, z_od: 3.0, z_do: 5.93, uwagi: 'słup żelbetowy w murze (trzpień 18 × 40 cm) w węźle A/3 — P1: podpora wspornika B5, płyta ST2'}
-  - {id: SL13, xy: [3.875, 5.235], przekroj: 180x400, mat: ZB_C30, z_od: -0.15, z_do: 2.78, uwagi: 'słup żelbetowy w murze (trzpień 18 × 40 cm) w węźle B/3 — P0: płyta ST1'}
-  - {id: SL14, xy: [3.875, 5.235], przekroj: 180x400, mat: ZB_C30, z_od: 3.0, z_do: 5.93, uwagi: 'słup żelbetowy w murze (trzpień 18 × 40 cm) w węźle B/3 — P1: koniec przęsła zakotwienia B5, płyta ST2'}
-  - {id: SL15, xy: [3.875, 5.235], przekroj: 180x400, mat: ZB_C30, z_od: 6.15, z_do: 9.08, uwagi: 'słup żelbetowy w murze (trzpień 18 × 40 cm) w węźle B/3 — P2: naroże wklęsłe stropodachu D1'}
+  - {id: SL13, xy: [3.875, 5.125], przekroj: 400x180, mat: ZB_C30, z_od: -0.15, z_do: 2.78, uwagi: 'słup żelbetowy w murze (trzpień 18 × 40 cm) w węźle B/3 — P0: płyta ST1'}
+  - {id: SL14, xy: [3.875, 5.125], przekroj: 400x180, mat: ZB_C30, z_od: 3.0, z_do: 5.93, uwagi: 'słup żelbetowy w murze (trzpień 18 × 40 cm) w węźle B/3 — P1: koniec przęsła zakotwienia B5, płyta ST2'}
+  - {id: SL15, xy: [3.875, 5.125], przekroj: 400x180, mat: ZB_C30, z_od: 6.15, z_do: 9.08, uwagi: 'słup żelbetowy w murze (trzpień 18 × 40 cm) w węźle B/3 — P2: naroże wklęsłe stropodachu D1'}
   - {id: SL16, xy: [5.875, 5.235], przekroj: 180x400, mat: ZB_C30, z_od: -0.15, z_do: 2.5, uwagi: 'słup żelbetowy w murze (trzpień 18 × 40 cm) w węźle C/3 — P0: oparcie B8 (w ścianie ŻB S0-12)'}
   - {id: SL17, xy: [5.875, 5.235], przekroj: 180x400, mat: ZB_C30, z_od: 3.0, z_do: 5.65, uwagi: 'słup żelbetowy w murze (trzpień 18 × 40 cm) w węźle C/3 — P1: oparcie B9'}
   - {id: SL18, xy: [8.5, 5.235], przekroj: 180x400, mat: ZB_C30, z_od: -0.15, z_do: 2.5, uwagi: 'słup żelbetowy w murze (trzpień 18 × 40 cm) w węźle D/3 — P0: oparcie B8 (w ścianie ŻB S0-13)'}
   - {id: SL19, xy: [8.5, 5.235], przekroj: 180x400, mat: ZB_C30, z_od: 3.0, z_do: 5.65, uwagi: 'słup żelbetowy w murze (trzpień 18 × 40 cm) w węźle D/3 — P1: oparcie B9'}
+  - {id: SL20, xy: [12.0, 0.11], przekroj: 180x400, mat: ZB_C30, z_od: -0.15, z_do: 2.78, uwagi: 'słup żelbetowy w murze (trzpień 18 × 40 cm) w węźle E/1 — P0: podpora końca B1 (naroże E/1), płyta ST1'}
 
 belki:
   - {id: B1, os: [[0.0, 0.0], [12.0, 0.0]], b: 0.18, h: 1.07, spod: 2.78, mat: ZB_C30, uwagi: 'podciąg fasady E, odwrócony (+2,78…+3,85 = parapet boksu C), 18 × 107 w licu muru (ETICS ciągły — A2 D-9); przęsła 2,20/1,90/2,34/2,34/3,22 na SL1–SL4 i ścianach A, E'}

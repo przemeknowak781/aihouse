@@ -808,19 +808,17 @@ def _uwagi_szukaj(wolne: Wolne, U, i0: int, prev, P: int, mp: int, budzet: list)
             key = (-(k - i0), not ciag, -round(f[2] / 5.0), -round(f[3] / 5.0), -f[2], -f[3], x)
             cands.append((key, x, rect[1], k, rect))
     cands.sort(key=lambda c: c[0])
-    seen, tried = set(), 0
+    tried = []                                     # próbowane miejsca: kolejne kandydatki w innych polach
     for _key, x, y, k, rect in cands:
-        sig = (round(x, 1), round(y, 1), k)
-        if sig in seen:
+        if any(_przec(rect, t) for t in tried):
             continue
-        seen.add(sig)
+        tried.append(rect)
         wl = wolne.kopia()
         wl.zajmij(_napompuj(rect, GAP_C, GAP_B, GAP_C, GAP_B))
         sub = _uwagi_szukaj(wl, U, k, rect, P - 1, mp, budzet)
         if sub is not None:
             return [(i0, k, x, y)] + sub
-        tried += 1
-        if tried >= 3 or budzet[0] <= 0:
+        if len(tried) >= 4 or budzet[0] <= 0:
             break
     return None
 
