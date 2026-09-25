@@ -321,3 +321,176 @@ def label_base_map(c, s, lab: Labeler, win: Polygon, used: set, opts: dict, spot
                 continue
             for part in (g.geoms if hasattr(g, "geoms") else [g]):
                 lab.along(part, f"{Hh:.2f}".replace(".", ","), H, "Z-RZEDNE", None, n=1, max_cost=2.5)
+
+
+def draw_contours(c, s, win: Polygon, used: set, projected=False, exclude=None):
+    """Warstwice terenu istniejącego (0,18) / projektowanego (0,5) — PN-B-01027 poz. 5.2."""
+    n = 0
+    zone = s.strefa_zmian if projected else None
+    for pts, _Hh in s.contours(win.bounds, projected=projected):
+        g = clip(LineString(pts), win)
+        if g is None:
+            continue
+        if exclude is not None:
+            g = g.difference(exclude)
+        if zone is not None:
+            g = g.intersection(zone)
+        if g.is_empty:
+            continue
+        draw_geom(c, g, "Z-RZEDNE-PROJ" if projected else "Z-RZEDNE", pen=0.5 if projected else 0.18, lt="CIAGLA",
+                  color=None if projected else "#8a5a2a")
+        n += 1
+    if n:
+        used.add("warstwice_proj" if projected else "warstwice")
+
+
+# ================================================================================================ sieci
+def utility(c, g, sx, existing=False, pen=None, inside=None, flow=True, every_mm=30.0):
+    """Sieć/przyłącze (kolor i litera wg mapy zasadniczej; grubości PN-B-01027: kanalizacja, kabel e 0,7;
+    wodociąg, telekomunikacja 0,5; istniejące 0,35). ``inside`` — obszar (budynek), w którym linia kreskowa
+    (przewód pod płytą / w budynku); kierunek przepływu kanalizacji — trójkąty (Ks pełny, Kd pusty)."""
+    k = c.k
+    col = sx.kolor
+    w = pen or (0.35 if existing else (0.7 if sx.branza in ("kan_sanit", "kan_deszcz", "en") else 0.5))
+    layer = "Z-SIECI-IST" if existing else "Z-SIECI-PROJ"
+    parts_out, parts_in = [g], []
+    if inside is not None and not inside.is_empty:
+        parts_out = [g.difference(inside)]
+        parts_in = [g.intersection(inside)]
+    for pg in parts_out:
+        draw_geom(c, pg, layer, pen=w, lt="CIAGLA", color=col)
+    for pg in parts_in:
+        draw_geom(c, pg, layer, pen=0.35, lt="KRESKOWA", color=col)
+    if flow and not existing and sx.branza in ("kan_sanit", "kan_deszcz"):
+        for ls in [LineString(a) for a in lines_of(parts_out[0]) if len(a) >= 2]:
+            L = ls.length
+            s_ = every_mm * k * 0.5
+            while s_ < L - 2 * k:
+                p = np.asarray(ls.interpolate(s_).coords[0])
+                q = np.asarray(ls.interpolate(min(L, s_ + 0.1 * k)).coords[0])
+                d = unit(q - p)
+                nn = perp(d)
+                a = 2.4 * k
+                tri = [p + d * a * 0.87, p + nn * a / 2, p - nn * a / 2]
+                if sx.branza == "kan_sanit":
+                    c.fill(tri, layer, col)
+                else:
+                    c.fill(tri, layer, "#ffffff", z=21.5)
+                c.polygon(tri, layer, pen=0.25, color=col, z=21.6)
+                s_ += every_mm * k
+
+
+def cross_mark(c, p, layer="Z-SIECI-PROJ", size_mm=1.4, pen=0.5, color=None):
+    """„×” w miejscu włączenia do sieci istniejącej (PN-B-01027 poz. 6)."""
+    k = c.k
+    a = size_mm * k
+    P = np.asarray(p, float)
+    c.line(P + [-a, -a], P + [a, a], layer, pen=pen, color=color)
+    c.line(P + [-a, a], P + [a, -a], layer, pen=pen, color=color)
+
+
+# ================================================================================================ projekt
+def paving_kind(txt: str):
+    t = (txt or "").lower()
+    if "fundament" in t:
+        return None
+    if "ażur" in t or "azur" in t or "w trawie" in t:
+        return "azur"
+    if "kostk" in t:
+        return "drobne"
+    if "płyt" in t or "plyt" in t:
+        return "duze"
+    if "desk" in t:
+        return "deska"
+    if "żwir" in t or "zwir" in t:
+        return "zwir"
+    if "asfalt" in t:
+        return "asfalt"
+    return "duze"
+
+
+def draw_hardscape(c, s, used: set, hatch=True, band_mm=None, opaska_polys=()):
+    """Nawierzchnie utwardzone (PN-B-01027 poz. 7.10–7.11), tarasy, opaska żwirowa."""
+    from ..draft import symbols as S
+    from ..draft.hatch import _dots, _rng
+    k = c.k
+    band = band_mm if band_mm is not None else (3.0 if c.scale >= 400 else 5.0)
+    for u in s.utwardzenia:
+        pg = u["poly"].difference(s.p0)
+        if pg.is_empty:
+            continue
+        kind = paving_kind(u["raw"].get("nawierzchnia", ""))
+        fill_white(c, pg)
+        if kind is None:
+            draw_geom(c, pg, "Z-UTWARDZENIA", pen=0.35, lt="CIAGLA")
+            continue
+        if hatch:
+            if kind == "azur":
+                S.paving(c, pg, "duze", outline=False)
+                _dots(c, pg, 0.15, _rng(pg), "Z-ZIELEN", 0.14, pen=0.25)
+            else:
+                S.paving(c, pg, kind, outline=False, band_mm=band if kind == "drobne" else None)
+        draw_geom(c, pg, "Z-UTWARDZENIA", pen=0.35, lt="CIAGLA")
+        used.add(f"naw_{kind}")
+    for t in s.tarasy:
+        pg = t["poly"].difference(s.p0)
+        if pg.is_empty:
+            continue
+        fill_white(c, pg)
+        kind = paving_kind(t["naw"]) or "duze"
+        if hatch:
+            S.paving(c, pg, kind, outline=False, angle=0.0, band_mm=band if kind == "drobne" else None)
+        draw_geom(c, pg, "Z-UTWARDZENIA", pen=0.35, lt="CIAGLA")
+        used.add("taras" if kind == "deska" else f"naw_{kind}")
+    for o in opaska_polys:
+        fill_white(c, o["poly"])
+        if hatch:
+            _dots(c, o["poly"], 0.35, _rng(o["poly"]), "Z-UTWARDZENIA", 0.3, pen=0.25)
+        draw_geom(c, o["poly"], "Z-UTWARDZENIA", pen=0.18, lt="CIAGLA")
+        used.add("opaska")
+
+
+def hedge_axis(pg: Polygon):
+    """Oś i szerokość pasa (prostokąt obrócony minimalny)."""
+    r = pg.minimum_rotated_rectangle
+    C = np.asarray(r.exterior.coords)[:4]
+    e = [np.hypot(*(C[(i + 1) % 4] - C[i])) for i in range(4)]
+    i = int(np.argmax(e))
+    a, b = C[i], C[(i + 1) % 4]
+    w = min(e)
+    off = unit(C[(i + 2) % 4] - b) * w / 2
+    return a + off, b + off, w
+
+
+def draw_green(c, s, used: set, cover=None, lawn=True, trees=True, labels_lab=None, green=None):
+    """Zieleń: trawnik (kropki), rabaty, żywopłoty, drzewa istniejące/projektowane/do usunięcia (PN-B-01027 poz. 7)."""
+    from ..draft import symbols as S
+    k = c.k
+    rab = [z for z in s.zielen if str(z["raw"].get("typ")) == "rabata"]
+    hed = [z for z in s.zielen if str(z["raw"].get("typ")) == "zywoplot"]
+    if lawn and green is not None:
+        g = green.difference(unary_union([z["poly"] for z in rab + hed] or [Polygon()]))
+        if s.rozsaczanie and s.rozsaczanie["poly"] is not None:
+            g = g.difference(s.rozsaczanie["poly"])
+        S.lawn(c, g, 2.0 if c.scale >= 400 else 1.4, seed=7)
+        used.add("trawnik")
+    for z in rab:
+        pg = z["poly"].difference(s.p0)
+        draw_geom(c, pg, "Z-ZIELEN", pen=0.25, lt="KRESKOWA")
+        step = max(1.6, 5.0 * k)
+        x0, y0, x1, y1 = pg.bounds
+        for x in np.arange(x0 + step / 2, x1, step):
+            for y in np.arange(y0 + step / 2, y1, step):
+                if pg.buffer(-0.3).contains(Point(x, y)):
+                    S.shrub(c, (x, y), min(1.0, max(0.6, 3.0 * k)))
+        used.add("rabata")
+    for z in hed:
+        a, b, w = hedge_axis(z["poly"])
+        S.hedge(c, [a, b], width=min(w, 1.2), conifer=False)
+        used.add("zywoplot")
+    if trees:
+        for t in s.drzewa:
+            S.tree(c, t["xy"], t["d"], existing=t["istn"], remove=t["usun"], conifer=t["iglaste"])
+            used.add("drzewo_ist" if t["istn"] else "drzewo_proj")
+            if t["usun"]:
+                used.add("drzewo_usun")

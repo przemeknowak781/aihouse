@@ -299,13 +299,18 @@ def wezel_przegroda_w_linii(sciana_dol: Sequence[Warstwa], t_plyty: float, mat_p
     L_p = L + (dp[2] or 0.0)
     y_bl, y_bp = 0.0, t - t_p          # spód płyty lewej / prawej (wierzch wspólny y = t)
     ob = []
+    # warstwy ściany dolnej po prawej stronie ocieplenia (wyprawa) kończą się na spodzie ocieplenia sufitu
+    kd = indeks_konstrukcyjnej(sciana_dol)
+    iz = max([k for k in range(kd + 1, len(st_d)) if st_d[k][2].mat.lam < 0.06], default=None)
+    x_dp0 = st_d[iz][1] if (iz is not None and dp[1]) else D_d
     for k, (a, b, w) in enumerate(st_d):
-        ob.append(_obsz(box(a, -H, b, min(y_bl, y_bp) if a >= 0 else 0.0), w))
+        y_g = (y_bp - t_dp) if (iz is not None and k > iz and dp[1]) else 0.0
+        ob.append(_obsz(box(a, -H, b, y_g), w))
     for y0, y1, w in _stos(dl[1], y_bl, -1):
         ob.append(_obsz(box(-L, y0, 0.0, y1), w))
     x_dp1 = D_d + dp[2] if dp[2] else D_d + L_p
     for y0, y1, w in _stos(dp[1], y_bp, -1):
-        ob.append(_obsz(box(D_d, y0, x_dp1, y1), w))
+        ob.append(_obsz(box(x_dp0, y0, x_dp1, y1), w))
     ob.append(_obsz(box(-L, y_bl, D_d if t_p != t else D_d + L_p, t), mat_plyty, "płyta"))
     if t_p != t:
         ob.append(_obsz(box(D_d, y_bp, D_d + L_p, t), mat_plyty, "płyta (strona prawa)"))
@@ -346,3 +351,113 @@ def wezel_przegroda_w_linii(sciana_dol: Sequence[Warstwa], t_plyty: float, mat_p
                        "θ_u": f"{tu:.1f} °C" + (" (zadana)" if theta_u is not None else f" z b_u = {b_u} [ZAŁ]")},
                  uwagi=["Grupy stref: i — ogrzewane, u — nieogrzewane, e — zewnętrze; ψ dla każdej pary grup "
                         "z elementami flankującymi (PN-EN ISO 10211, więcej niż dwie temperatury)."])
+
+
+def _flank_linia(sciana_dol, sciana_gora, t, t_p, mat_plyty, gl, gp, dl, dp, H, L, L_p, D_d, D_g, grp) -> list:
+    """Elementy flankujące węzła `wezel_przegroda_w_linii` dla par różnych grup stref."""
+    g_dl, g_dp, g_gl = grp["dół lewa"], grp["dół prawa"], grp["góra lewa"]
+    g_gp = grp.get("góra prawa", g_gl)
+    t_gl, t_gp, t_dl = grosz(gl[1]), grosz(gp[1]), grosz(dl[1])
+    fl = []
+    if g_dl != g_dp:            # ściana dolna
+        rs = RSI_POZIOMO if "e" not in (g_dl, g_dp) else 0.04
+        l_oi = H + t + t_gl if gl[0] == "wewn" else H
+        fl.append(ElementFlankujacy("ściana dolna", (g_dl, g_dp), H + t / 2, H - t_dl, warstwy=list(sciana_dol),
+                                    Rse=rs, l_oi=l_oi))
+    if sciana_gora and g_gl != g_gp:
+        h_s = max(t_gl, t_gp) + H
+        rs = RSI_POZIOMO if "e" not in (g_gl, g_gp) else 0.04
+        fl.append(ElementFlankujacy("ściana górna", (g_gl, g_gp), h_s - t_gp, h_s - t_gl, warstwy=list(sciana_gora),
+                                    Rse=rs, l_oi=h_s - t_gl))
+    def poziomy(nazwa, gora, dol, tt, gg, gd, l_e, l_i):
+        if gg == gd:
+            return
+        w = list(gora[1] if gora[0] != "wewn" else gora[1]) + [Warstwa(mat_plyty, tt, True)] + list(dol[1] if not dol[2] else [])
+        # kierunek strumienia: od ciepłej strony — w górę, gdy ciepło pod płytą
+        cieplo_pod = {"i": 2, "u": 1, "e": 0}[gd] > {"i": 2, "u": 1, "e": 0}[gg]
+        rsi = RSI_GORA if cieplo_pod else RSI_DOL
+        rse = 0.04 if "e" in (gg, gd) else rsi
+        fl.append(ElementFlankujacy(nazwa, (gd, gg), l_e, l_i, warstwy=w, Rsi=rsi, Rse=rse, l_oi=l_i))
+    poziomy("przegroda pozioma lewa", gl, dl, t, g_gl, g_dl, L + (D_d / 2), L)
+    poziomy("przegroda pozioma prawa", gp, dp, t_p, g_gp, g_dp, L_p + (D_d / 2), L_p)
+    return fl
+
+
+def grosz(w) -> float:
+    return grubosc(w)
+
+
+def _linie_linia(gl, gp, dl, dp, t, D_d, D_g, L, L_p, sciana_gora, t_gp) -> list:
+    lin = []
+    if gp[0] == "zewn" and sciana_gora:
+        h = t + t_gp
+        lin.append(_ln("hydro", [(D_d + L_p, h), (D_g + 0.004, h), (D_g + 0.004, h + 0.15 + 0.03)],
+                       "hydroizolacja dachu wywinięta na ścianę ≥ 15 cm ponad warstwę wierzchnią (substrat / żwir)"))
+        lin.append(_ln("woda", [(D_g + 0.6, h + 0.04), (D_g + min(1.1, L_p - 0.05), h + 0.04)],
+                       "spadek dachu ≥ 2 % od ściany; opaska żwirowa ≥ 0,5 m przy ścianie"))
+    if gl[0] == "zewn" and gp[0] == "zewn" and not sciana_gora:
+        h = t + grosz(gl[1])
+        lin.append(_ln("hydro", [(-L, h), (D_d + L_p, h)], "hydroizolacja dachu ciągła nad ścianą"))
+    if "nieogrz" in (dl[0], dp[0]):
+        lin.append(_ln("paro", [(-L, -grosz(dl[1]) - 0.002), (-0.002, -grosz(dl[1]) - 0.002), (-0.002, -1.0)],
+                       "tynk / szczelność powietrzna i gazowa od strony garażu (WT § 106)"))
+    return lin
+
+
+# ==================================================================================================
+# D. Ściana dom–garaż na ciągłej płycie fundamentowej
+# ==================================================================================================
+def wezel_garaz_plyta(sciana: Sequence[Warstwa], podloga_lewa: Sequence[Warstwa], podloga_prawa: Sequence[Warstwa],
+                      theta_u: float | None = None, b_u: float = 0.8, h_gruntu: float = 1.0, H: float | None = None,
+                      L: float | None = None, theta_i: float | None = None, theta_e: float | None = None,
+                      id: str = "WZ-GP", nazwa: str = "Ściana dom–garaż na ciągłej płycie fundamentowej") -> Wezel:
+    """Ściana (lico lewe = dom x = 0, prawe = garaż) na płycie fundamentowej ciągłej pod domem i garażem.
+    podloga_lewa / prawa — warstwy podłóg od góry z płytą (konstrukcyjna) i warstwami pod płytą (XPS, podsypka).
+    Wierzch posadzki domu y = 0. Pod podsypką grunt (λ = 2,0) grubości h_gruntu, dół i boki adiabatyczne [ZAŁ]:
+    węzeł wewnętrzny daleko od krawędzi płyty — ψ_iu (dom → garaż) z przepływu przez płytę pod ścianą; wymiana
+    z gruntem ujęta w U podłóg (PN-EN ISO 13370) poza węzłem."""
+    ti, te = _temperatury(theta_i, theta_e)
+    tu = _theta_u(ti, te, theta_u, b_u)
+    st = _stos(sciana, 0.0)
+    D = st[-1][1]
+    kl, kp = indeks_konstrukcyjnej(podloga_lewa), indeks_konstrukcyjnej(podloga_prawa)
+    y_w = -grubosc(podloga_lewa[:kl])            # wierzch płyty
+    t_pl = podloga_lewa[kl].d
+    H = H or odl_ciecia(D)
+    L = L or odl_ciecia(grubosc(podloga_lewa))
+    ob = []
+    for y0, y1, w in _stos(podloga_lewa[:kl], 0.0, -1):
+        ob.append(_obsz(box(-L, y0, 0.0, y1), w))
+    y_pp = y_w + grosz(podloga_prawa[:kp])
+    for y0, y1, w in _stos(podloga_prawa[:kp], y_pp, -1):
+        ob.append(_obsz(box(D, y0, D + L, y1), w))
+    ob.append(_obsz(box(-L, y_w - t_pl, D + L, y_w), podloga_lewa[kl], "płyta fundamentowa"))
+    y = y_w - t_pl
+    for w in podloga_lewa[kl + 1:]:
+        if w.d < 0.001:
+            continue
+        ob.append(_obsz(box(-L, y - w.d, D + L, y), w))
+        y -= w.d
+    ob.append(_obsz(box(-L, y - h_gruntu, D + L, y), MATERIALY_DOMYSLNE["GRUNT"], "grunt"))
+    for a, b, w in st:
+        ob.append(_obsz(box(a, y_w, b, H), w))
+    S = S_STREFY
+    ramka = box(-L, y - h_gruntu, D + L, H)
+    strefy = strefy_z_dopelnienia(ob, ramka, [((-L / 2, H / 2), _nas("dom (ogrzewany)", ti, "wewn")),
+                                              ((D + L / 2, H / 2), _nas("garaż nieogrzewany", tu, "nieogrz"))])
+    fl = [ElementFlankujacy("ściana dom–garaż (od posadzki domu)", ("i", "u"), H, H, warstwy=list(sciana),
+                            Rse=RSI_POZIOMO)]
+    linie = [_ln("przeciwwilg", [(-L, y_w + 0.003), (D + L, y_w + 0.003)],
+                 "izolacja przeciwwilgociowa/przeciwradonowa na płycie — ciągła pod ścianą"),
+             _ln("paro", [(-0.002, H), (-0.002, 0.0)], "tynk wewnętrzny do posadzki — szczelność powietrzna"),
+             _ln("tasma_zewn", [(D + 0.002, y_pp + 0.01), (D + 0.002, 0.30)],
+                 "garaż: uszczelnienie styku ściana–posadzka (szczelność gazowa, WT § 106), cokolik")]
+    return Wezel(id, nazwa, "garaz", ob, strefy, fl, przekroj="pionowy", linie=linie,
+                 punkty={"naroże ściana–posadzka (dom)": (0.0, 0.0)},
+                 widok=(-min(L, 1.0), y - 0.3, D + min(L, 1.0), 0.9),
+                 dane={"ściana (od domu)": dane_warstw(sciana), "podłoga domu": dane_warstw(podloga_lewa),
+                       "posadzka garażu": dane_warstw(podloga_prawa),
+                       "grunt": f"λ = 2,0, warstwa {h_gruntu} m pod podsypką, dół adiabatyczny [ZAŁ]",
+                       "θ_u": f"{tu:.1f} °C" + (" (zadana)" if theta_u is not None else f" z b_u = {b_u} [ZAŁ]")},
+                 uwagi=["ψ_iu = L_2D,iu − U_ściany·h (podłogi po obu stronach nie wymieniają ciepła z gruntem w "
+                        "modelu węzła — dół adiabatyczny); strata do garażu wchodzi do H_U = H_iu·b_u (PN-EN ISO 13789)."])
