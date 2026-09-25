@@ -506,7 +506,9 @@ class SectionBuilder:
                 if sb - sa < 0.6:
                     continue
                 # wysokość w świetle
-                cands = [sa + f * (sb - sa) for f in (0.12, 0.88, 0.25, 0.75, 0.4, 0.6)]
+                fr = [0.12, 0.88, 0.25, 0.75, 0.4, 0.6]            # + gęściej: omijanie opisów warstw (C 2.2)
+                fr += [f for f in np.linspace(0.06, 0.94, 23) if min(abs(f - g) for g in fr) > 0.02]
+                cands = [sa + f * (sb - sa) for f in fr]
 
                 def fn(cv, s, zf=zf, hgt=hgt):
                     dims.dim_v(cv, [zf, zf + hgt], s, s + 0.2, ext="short")
@@ -675,22 +677,25 @@ def _callout(cv, ps, pe, texts, side, marks, title):
     """Opis warstw z maskami pod napisami (czytelność na tle linii widoku)."""
     from ..draft.core import PText
     from ..draft import text as TT
+    from ..draft.sheet import wrap
     wr = max(TT.width(t, 1.8) for t in texts) + 2.0
-    wmax = max(wr + 4.0, 1.6 * wr)                  # tytuł do 1,6 × szerokości wierszy — bez „…” (weryf. C 2.2)
-    if title and TT.width(title, 1.8, "bold") > wmax:
-        words = title.split()
-        while len(words) > 2 and TT.width(" ".join(words) + "…", 1.8, "bold") > wmax:
-            words.pop()
-        title = " ".join(words).rstrip(",;:—-") + "…"
-    wt = TT.width(title, 1.8, "bold") + 2.0 if title else 0.0
+    # tytuł łamany do szerokości wierszy (min. 90 mm) — bez ucinania „…” (weryfikacja C 2.2)
+    tl = wrap(title, max(wr - 1.6, 90.0), 1.8, "bold") if title else []
+    wt = max([TT.width(t_, 1.8, "bold") for t_ in tl] + [0.0]) + 2.0
     n0 = len(cv.prims)
-    r = S.layer_callout(cv, ps, pe, texts, side=side, h=1.8, row_mm=3.6, marks=marks, title=title,
+    r = S.layer_callout(cv, ps, pe, texts, side=side, h=1.8, row_mm=3.6, marks=marks, title=None,
                         width_mm=max(wr, wt))
+    k = cv.k
+    sg = 1.0 if side == "right" else -1.0
+    for i, t_ in enumerate(reversed(tl)):                # wiersze tytułu nad drabinką, ostatni najniżej
+        cv.text((pe[0] + sg * 0.8 * k, r[3] + (0.4 + i * 1.8 * 1.45) * k), t_, 1.8, 0.0,
+                "left" if sg > 0 else "right", "baseline", "A-OPISY", style="bold")
+    if tl:
+        r = (r[0], r[1], r[2], r[3] + (0.4 + len(tl) * 1.8 * 1.45) * k)
     for p in cv.prims[n0:]:
         if isinstance(p, PText):
             p.mask = 0.35
     # białe tło pod całym opisem warstw: linie przekroju (osie, wymiary) nie przechodzą przez tabelę (weryf. C 2.2)
-    k = cv.k
     cv.fill([(r[0] - 0.8 * k, r[1] + 0.3 * k), (r[2] + 0.8 * k, r[1] + 0.3 * k), (r[2] + 0.8 * k, r[3] + 0.6 * k),
              (r[0] - 0.8 * k, r[3] + 0.6 * k)], "A-OPISY", "#ffffff", z=25.9)
 

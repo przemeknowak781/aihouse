@@ -1,11 +1,11 @@
 {
- "czas": "2026-09-25 12:32",
+ "czas": "2026-09-25 12:35",
  "aktywni": [
   {
    "id": "abfdfaca2ef13a7b4",
    "opis": "wf_a8783476-2a1:konstrukcja:1",
-   "idle_min": 0.0,
-   "bez_narzedzi_min": 0.0,
+   "idle_min": 2.7,
+   "bez_narzedzi_min": 2.7,
    "limity": 0,
    "powody": []
   },
@@ -20,5 +20,5 @@
  ],
  "zakonczeni": 0,
  "zastoje": [],
- "repo_bez_zmian_min": 0.2
+ "repo_bez_zmian_min": 0.3
 }
