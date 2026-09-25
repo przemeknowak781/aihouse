@@ -75,6 +75,19 @@ A_D = {0.0: [1.013, 1.013, 1.012, 1.011, 1.010, 1.009, 1.009, 1.008, 1.006],
 ROZSTAWY = [0.10, 0.15, 0.20, 0.25, 0.30]
 
 
+def interp_ekstrap(x, xs, ys):
+    """Interpolacja liniowa z ekstrapolacją liniową poza zakresem (dane katalogowe PC poniżej −15 °C) [UPR]."""
+    x = np.asarray(x, float)
+    y = np.interp(x, xs, ys)
+    lo = x < xs[0]
+    hi = x > xs[-1]
+    k0 = (ys[1] - ys[0]) / (xs[1] - xs[0])
+    k1 = (ys[-1] - ys[-2]) / (xs[-1] - xs[-2])
+    y = np.where(lo, ys[0] + k0 * (x - xs[0]), y)
+    y = np.where(hi, ys[-1] + k1 * (x - xs[-1]), y)
+    return y
+
+
 def _interp_R(tab: dict, R: float, T: float | None = None) -> float:
     Rs = sorted(tab)
     R = min(max(R, Rs[0]), Rs[-1])
@@ -168,6 +181,7 @@ class ParametryOgrz:
     theta_V_max: float = 35.0
     sigma: float = 5.0
     T_des: float = 0.10                 # rozstaw w pomieszczeniu projektowym [m]
+    sigma_min: float = 3.0              # K — minimalne schłodzenie w pętlach pozostałych pomieszczeń [ZAŁ]
     q_wsk_20: float = 35.0              # W/m² — ZASTĘPCZO gdy brak Φ_HL [ZAŁ]
     q_wsk_24: float = 45.0
     phi_cwu_os: float = 0.25            # kW/os (VDI 4645) [W]
@@ -330,7 +344,7 @@ def oblicz_ogrzewanie(dane: DaneBudynku, phi_hl=None, par: ParametryOgrz | None 
 
     def ocen(pc):
         Ts, Ps, Cs = pc["T"], pc["P"], pc["COP"]
-        P_at = lambda t: float(np.interp(t, Ts, Ps)) * 1000.0
+        P_at = lambda t: float(interp_ekstrap(t, Ts, Ps)) * 1000.0
         # punkt biwalentny: Φ(θ) + Φ_W_sr? — linia budynku (bez c.w.u.; c.w.u. w trybie priorytetowym, krótkotrwale)
         lo, hi = te, par.theta_granica
         f_ = lambda t: P_at(t) - H * (par.theta_i - t)
@@ -346,8 +360,8 @@ def oblicz_ogrzewanie(dane: DaneBudynku, phi_hl=None, par: ParametryOgrz | None 
             tb = 0.5 * (lo + hi)
         mask = T < par.theta_granica
         Q = H * np.clip(par.theta_granica - T, 0, None)            # zapotrzebowanie godzinowe (z zyskami) [W]
-        Pmax = np.interp(T, Ts, Ps) * 1000.0
-        cop = np.interp(T, Ts, Cs)
+        Pmax = interp_ekstrap(T, Ts, Ps) * 1000.0
+        cop = np.maximum(interp_ekstrap(T, Ts, Cs), 1.0)
         Q_pc = np.minimum(Q, Pmax)
         Q_gr = Q - Q_pc
         E_el = float(np.sum(Q_pc[mask] / cop[mask])) / 1000.0
@@ -397,11 +411,17 @@ def oblicz_ogrzewanie(dane: DaneBudynku, phi_hl=None, par: ParametryOgrz | None 
     # ---- podłogówka
     rozdz = dane.inst.get("lokalizacje", {}).get("rozdzielacze_co") or {}
     podl = []
+    try:
+        from .przybory import przybory_z_modelu
+        mokre = {x.pom for x in przybory_z_modelu(dane) if x.typ in ("wanna", "prysznic")}
+    except Exception:
+        mokre = set()
     for pid, ph in phi.items():
         p = dane.pom(pid)
         if p is None or ph <= 0:
             continue
-        fz = par.f_zabudowy.get(p.rodzaj, par.f_zabudowy["inne"])
+        rodz = "lazienka" if pid in mokre else p.rodzaj
+        fz = par.f_zabudowy.get(rodz, par.f_zabudowy["inne"])
         A_F = p.pow * fz
         q = ph / A_F
         R_lB, R_opis = _R_lambda_B(dane, p)
@@ -409,16 +429,20 @@ def oblicz_ogrzewanie(dane: DaneBudynku, phi_hl=None, par: ParametryOgrz | None 
         ti = p.temp or 20.0
         dTF_max = 9.0
         q_lim = q_charakterystyka(dTF_max)
-        podl.append({"pom": p, "phi": ph, "A_F": A_F, "fz": fz, "q": q, "R_lB": R_lB, "R_opis": R_opis, "s_u": s_u, "lamE": lamE,
+        podl.append({"pom": p, "rodzaj": rodz, "phi": ph, "A_F": A_F, "fz": fz, "q": q, "R_lB": R_lB, "R_opis": R_opis, "s_u": s_u, "lamE": lamE,
                      "R_u": R_u, "ti": ti, "q_lim": q_lim, "theta_F": ti + (q / 8.92) ** (1 / 1.1) if q > 0 else ti})
-    niel = [x for x in podl if x["pom"].rodzaj not in ("lazienka", "wc")] or podl
-    des = max(niel, key=lambda x: x["q"])
-    Kd = K_H(par.T_des, des["R_lB"], des["s_u"], des["lamE"])
+    niel = [x for x in podl if x["rodzaj"] not in ("lazienka", "wc")] or podl
+    # pomieszczenie projektowe: największa wymagana θ_V przy T_des i σ (uogólnienie PN-EN 1264-3 na różne R_λ,B)
+    for x in niel:
+        x["_Kd"] = K_H(par.T_des, x["R_lB"], x["s_u"], x["lamE"])
+        x["_thV"] = theta_V_z(x["q"] / x["_Kd"], par.sigma, x["ti"])
+    des = max(niel, key=lambda x: x["_thV"])
+    Kd = des["_Kd"]
     dTH_des = des["q"] / Kd
-    thV = theta_V_z(dTH_des, par.sigma, des["ti"])
+    thV = des["_thV"]
     kroki["podl"] = [
         Krok(f"Pomieszczenie projektowe: {des['pom'].id} {des['pom'].nazwa}", "q_des = Φ_HL/A_F",
-             f"{f(des['phi'], 0)}/{f(des['A_F'], 2)}", des["q"], "W/m²", "PN-EN 1264-3 (bez łazienek)", 1),
+             f"{f(des['phi'], 0)}/{f(des['A_F'], 2)}", des["q"], "W/m²", "PN-EN 1264-3 (bez łazienek; największa wymagana θ_V)", 1),
         Krok(f"K_H dla T = {f(par.T_des, 2)} m, R_λ,B = {f(des['R_lB'], 2)}, s_u = {f(des['s_u'], 3)} m, λ_E = {f(des['lamE'], 2)}",
              "K_H = B·a_B·a_T^m_T·a_u^m_u·a_D^m_D", "", Kd, "W/(m²·K)", "PN-EN 1264-2 zał. A [NZW tablice]", 3),
         Krok("Nadwyżka temperatury czynnika", "∆θ_H = q/K_H", f"{f(des['q'], 1)}/{f(Kd, 3)}", dTH_des, "K", "", 2),
@@ -436,19 +460,27 @@ def oblicz_ogrzewanie(dane: DaneBudynku, phi_hl=None, par: ParametryOgrz | None 
         p = x["pom"]
         war.append(Warunek(f"{p.id} {p.nazwa}: gęstość strumienia ≤ q_G (θ_F ≤ {f(x['ti'] + 9, 0)} °C)", x["q"], "<=", x["q_lim"],
                            "W/m²", "PN-EN 1264-2", "W-153", nd=1))
-        # najrzadszy rozstaw spełniający ∆θ_H,j ≤ θ_V − θ_i − 1 K (σ_j ≥ ~2 K)
+        # najrzadszy rozstaw, przy którym schłodzenie σ_j ≥ σ_min
         T_ok, dTH, thR = None, None, None
         for Tr in reversed(ROZSTAWY):
             K = K_H(Tr, x["R_lB"], x["s_u"], x["lamE"])
             d = x["q"] / K
             r = theta_R_z(thV, d, x["ti"])
-            if r is not None and thV - r >= 2.0 - 1e-9:
+            if r is not None and thV - r >= par.sigma_min - 1e-9:
                 T_ok, dTH, thR = Tr, d, r
                 break
         if T_ok is None:
             Tr = ROZSTAWY[0]
             K = K_H(Tr, x["R_lB"], x["s_u"], x["lamE"])
             T_ok, dTH, thR = Tr, x["q"] / K, None
+            # osiągalne q przy θ_V i σ = 2 K → brakująca moc do pokrycia dodatkową powierzchnią grzewczą
+            dTH_ach = dT_H_log(thV, thV - 2.0, x["ti"])
+            q_ach = K * dTH_ach
+            deficyt = max(0.0, (x["q"] - q_ach) * x["A_F"])
+            war.append(Warunek(f"{p.id} {p.nazwa}: moc podłogi przy θ_V,des (T = 10 cm) ≥ Φ_HL", q_ach * x["A_F"], ">=", x["phi"], "W",
+                               "PN-EN 1264-3 — " + ("łazienka: dogrzewanie grzejnikiem drabinkowym" if x["rodzaj"] in ("lazienka", "wc")
+                                                    else "dodatkowa powierzchnia grzewcza (ściana) lub mniejsze R_λ,B"),
+                               "W-153", nd=0, uwagi=f"brak ≈ {f(deficyt, 0)} W"))
         sigma_j = (thV - thR) if thR is not None else par.sigma
         R_o = 1 / 10.8 + x["R_lB"] + x["s_u"] / x["lamE"]
         R_u = max(x["R_u"], 0.1)
@@ -459,13 +491,18 @@ def oblicz_ogrzewanie(dane: DaneBudynku, phi_hl=None, par: ParametryOgrz | None 
         L_dop = manhattan(rxy, p.centroid) * 2 + 1.0
         L_tot = x["A_F"] / T_ok + L_dop
         n = max(1, math.ceil(L_tot / par.L_petli_max))
+
+        def _dp(nn):
+            q_l = mH / nn / 3600.0 / rho_wody(30.0) * 1000.0
+            v, R, _ = spadek_jednostkowy(q_l, d_w, 30.0)
+            return 1.3 * R * (L_tot / nn) + 5.0       # +30 % miejscowe, zawór regulacyjny/rozdzielacz 5 kPa [ZAŁ]
+        while _dp(n) > par.dp_petli_max and n < 8:
+            n += 1
         for k in range(n):
             Lk = L_tot / n
             mk = mH / n
-            q_l = mk / 3600.0 / rho_wody(30.0) * 1000.0
-            v, R, _ = spadek_jednostkowy(q_l, d_w, 30.0)
-            dp = 1.3 * R * Lk + 5.0       # +30 % miejscowe, zawór regulacyjny/rozdzielacz 5 kPa [ZAŁ]
-            petle.append(Petla(pom=p.id, nr=k + 1, T=T_ok, L=Lk, m_kgh=mk, dp=dp, V_l=math.pi * (d_w / 1000) ** 2 / 4 * Lk * 1000))
+            petle.append(Petla(pom=p.id, nr=k + 1, T=T_ok, L=Lk, m_kgh=mk, dp=_dp(n),
+                               V_l=math.pi * (d_w / 1000) ** 2 / 4 * Lk * 1000))
             war.append(Warunek(f"Pętla {p.id}/{k + 1}: długość", Lk, "<=", par.L_petli_max, "m", "PE-X 16×2 [W]", "W-154", nd=1))
         wiersze.append([p.id, p.nazwa, p.kond, f(x["phi"], 0), f(x["A_F"], 1), f(x["q"], 1), f(x["theta_F"], 1), x["R_opis"],
                         f(100 * T_ok, 0), f(dTH, 2), f(thR, 1) if thR else "—", f(sigma_j, 2), f(mH, 1), n, f(L_tot, 1)])
@@ -674,7 +711,7 @@ def _raport(w: WynikOgrzewanie) -> Raport:
     R.h(2, "7. Sprawdzenia")
     R.war(w.warunki)
     R.h(2, "8. Dane do charakterystyki energetycznej")
-    R.tab(["Wielkość", "Wartość"], [[k, str(v)] for k, v in w.do_dict()["do_EP"].items()], "lr")
+    R.tab(["Wielkość", "Wartość"], [[k, fa(v, 4) if isinstance(v, float) else str(v)] for k, v in w.do_dict()["do_EP"].items()], "lr")
     R.zrodlo("WT §133–135, §327 (t.j. Dz.U. 2022 poz. 1225 ze zm.)", "PN-EN 1264-2:2009+A1:2012, -3, -4 — zał. A (K_H) [NZW tablice]",
              "Rozp. (UE) 2024/573 zał. IV pkt 8–9; rozp. (UE) 813/2013 zał. II",
              "PORT PC, Wytyczne do ograniczania hałasu instalacji z pompami ciepła, p. 4.4",

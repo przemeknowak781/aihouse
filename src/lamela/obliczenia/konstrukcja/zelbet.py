@@ -755,3 +755,44 @@ def wykaz_stali(prety: list[Pret], zapas: float = 0.0) -> str:
 
 def masa_stali(prety: list[Pret]) -> float:
     return sum(p.masa for p in prety)
+
+
+# ==================================================================================================
+# Procedury złożone
+# ==================================================================================================
+def ugiecie_komplet(l_eff: float, K: float, h: float, d: float, As_req: float, As_prov: float, beton: Beton,
+                    M_qp: float, w_EI1: float, p: Parametry | None = None, b: float = 1.0, k_skurcz: float = 0.125,
+                    L_ref: float | None = None, stal: StalZbrojeniowa | None = None, teowy: bool = False,
+                    nazwa: str = "Stan graniczny ugięć") -> Wynik:
+    """Ugięcie: najpierw l/d (7.4.2); gdy niespełnione — decyduje obliczenie (7.4.3). Wynik zawiera oba sprawdzenia,
+    warunkiem jest to miarodajne (7.4.2(1): spełnienie l/d zwalnia z obliczeń)."""
+    p = p or Parametry()
+    w = Wynik(nazwa=nazwa)
+    ld = ugiecie_ld(l_eff, d, As_req, As_prov, b, beton, K=K, stal=stal, teowy=teowy)
+    ug = ugiecie_obliczeniowe(M_qp, w_EI1, l_eff, b, h, d, As_prov, beton, p, k_skurcz=k_skurcz, L_ref=L_ref)
+    w.kroki += ld.kroki
+    w.kroki.append(Krok("*Obliczenie ugięcia (7.4.3)*"))
+    w.kroki += ug.kroki
+    if ld.ok:
+        w.warunki += ld.warunki
+        w.uwaga(f"l/d spełnione — obliczenie (7.4.3) informacyjnie: w = {f(ug.w, 1)} mm ≤? {f(ug.w_dop, 1)} mm.")
+    else:
+        w.warunki += ug.warunki
+        w.uwaga(f"l/d niespełnione ({f(ld.l_d_rzecz, 1)} > {f(ld.l_d_dop, 1)}) — miarodajne obliczenie ugięcia (7.4.3).")
+    w.l_d = ld
+    w.obl = ug
+    return w
+
+
+def wymiaruj_plyte(M_Ed: float, h: float, d: float, beton: Beton, stal: StalZbrojeniowa | None = None, s_max: float = 250.0,
+                   fi_min: int = 8, fi_max: int = 16, nazwa: str = "Zginanie płyty (na 1 m)") -> tuple[Zginanie, int, float, float]:
+    """Wymiarowanie pasma płyty b = 1 m: (wynik zginania, φ, s [mm], A_s,prov [mm²/m]) — A_s ≥ max(A_s,req; A_s,min)."""
+    stal = stal or StalZbrojeniowa()
+    zg = zginanie_prostokat(M_Ed, 1.0, h, d, beton, stal, nazwa=nazwa, element="plyta")
+    fi, s, As = dobierz_plyta(zg.As_req, s_max, fi_min, fi_max, As_min=zg.As_min if abs(M_Ed) > 1e-6 else 0.0)
+    zg.As_prov = As
+    zg.zbrojenie = f"φ{fi} co {f(s / 10, 0)} cm"
+    zg.krok("Przyjęto", zg.zbrojenie, "", As / 100, "cm²/m", nd=2)
+    zg.warunek("Zbrojenie na zginanie", max(zg.As_req, zg.As_min), As, "mm²/m", "6.1, (9.1N)", nd=0,
+               symbol_E="A_s,req", symbol_R="A_s,prov")
+    return zg, fi, s, As

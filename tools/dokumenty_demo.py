@@ -278,8 +278,8 @@ def buduj_pab(d, model, arkusze) -> Dokument:
                    tytul="Parametry budynku (model testowy)", wyrownanie={"Wartość": "r", "Jedn.": "c"},
                    szerokosci=[None, "34mm", "14mm"], zrodlo="model/test/dom_testowy.yaml; RPB § 20 ust. 1 pkt 4 lit. a–d")
     pab.rozdzial("Opinia geotechniczna i sposób posadowienia", f"""
-    Posadowienie bezpośrednie na piaskach średnich średniozagęszczonych (I_D ≈ 0,6), poniżej głębokości przemarzania
-    h_z = 0,8 m; zwierciadło wody gruntowej ok. 3,8 m p.p.t. {DANE_PRZYKLADOWE}. **Opinia geotechniczna** ustalająca
+    Posadowienie bezpośrednie na piaskach średnich średniozagęszczonych (I_{{D}} ≈ 0,6), poniżej głębokości przemarzania
+    h_{{z}} = 0,8 m; zwierciadło wody gruntowej ok. 3,8 m p.p.t. {DANE_PRZYKLADOWE}. **Opinia geotechniczna** ustalająca
     przydatność gruntów i kategorię geotechniczną (rozp. Dz.U. 2012 poz. 463 § 7 ust. 1, § 8) —
     [DOKUMENT ZEWNĘTRZNY – do dołączenia: opinia geotechniczna, geotechnik z uprawnieniami, rozp. 2012/463 § 8].
     """, podstawa="§ 20 ust. 1 pkt 5 RPB")
@@ -290,7 +290,7 @@ def buduj_pab(d, model, arkusze) -> Dokument:
     pab.rozdzial("Wpływ na środowisko, zdrowie ludzi i obiekty sąsiednie", f"""
     Zapotrzebowanie na wodę z sieci ok. 0,6 m³/d; ścieki bytowe do sieci kanalizacyjnej; wody opadowe zagospodarowane
     na działce. Brak emisji spalin (budynek all-electric). Odpady komunalne — segregacja w miejscu gromadzenia odpadów.
-    Źródło hałasu: jednostka zewnętrzna pompy ciepła (L_WA wg DTR wybranego modelu {do_uzup('dane wyrobu E-13')}).
+    Źródło hałasu: jednostka zewnętrzna pompy ciepła (L_{{WA}} wg DTR wybranego modelu {do_uzup('dane wyrobu E-13')}).
     """, podstawa="§ 20 ust. 1 pkt 9 RPB")
     pab.rozdzial("Analiza wysoce wydajnych systemów alternatywnych", """
     Porównano: (A) kocioł gazowy kondensacyjny zasilany z sieci gazowej w drodze 1KDD oraz (B) pompę ciepła powietrze–woda
@@ -309,7 +309,7 @@ def buduj_pab(d, model, arkusze) -> Dokument:
     """, podstawa="§ 20 ust. 1 pkt 12 RPB")
     if model is not None:
         _przegroda(pab, model, "SZ1", ("energia", "U_max_sciana"), "poziomy", 0.13)
-        _przegroda(pab, model, "SD-D1", ("energia", "U_max_stropodach"), "w górę", 0.10)
+        _przegroda(pab, model, "SD-D1", ("energia", "U_max_stropodach"), "w górę", 0.10, od_zewnatrz=True)
     pab.rozdzial("Dane dotyczące warunków ochrony przeciwpożarowej", podstawa="§ 20 ust. 1 pkt 13 RPB")
     pab.tabela([
         {"Parametr": "Wysokość / grupa wysokości", "Wartość": "budynek niski (N)", "Podstawa": "WT § 8 pkt 1"},
@@ -329,7 +329,7 @@ def buduj_pab(d, model, arkusze) -> Dokument:
     return pab
 
 
-def _przegroda(dok, model, kod, klucz_umax, strumien, Rsi):
+def _przegroda(dok, model, kod, klucz_umax, strumien, Rsi, od_zewnatrz=False):
     p = model.przegrody.get(kod) if isinstance(model.przegrody, dict) else model.przegroda(kod)
     if p is None:
         return
@@ -338,7 +338,7 @@ def _przegroda(dok, model, kod, klucz_umax, strumien, Rsi):
         m = model.material(w.mat)
         warstwy.append((m.nazwa if m else w.mat, w.d, m.lambda_ if m else None))
     umax, zr, wid = wym(*klucz_umax)
-    dok.tabela_przegrody(p.nazwa, warstwy, kod=kod, Rsi=Rsi, U_max=umax, strumien=strumien,
+    dok.tabela_przegrody(p.nazwa, warstwy, kod=kod, Rsi=Rsi, U_max=umax, strumien=strumien, od_zewnatrz=od_zewnatrz,
                          podstawa_Umax=f"{zr}; {wid}", zrodlo="model/test/dom_testowy.yaml — sekcje materialy, przegrody")
 
 
@@ -365,12 +365,12 @@ def _stolarka(dok, model):
                      "Parapet [cm]": round(o.parapet * 100) if o.typ in ("okno", "fix") else "—",
                      "Otwieranie": f"{otw.get('rodzaj', '—')}, {otw.get('strona', '')}".strip(", ") if otw else "stałe",
                      "Osłona": oslony.get(o.oslona or "brak", o.oslona), "Liczba [szt.]": g["n"],
-                     "U_max [W/(m²·K)]": (u_dz if "drzwi_zewn" in o.typ else u_ok) if zewn else "—"})
+                     "U_{max} [W/(m²·K)]": (u_dz if "drzwi_zewn" in o.typ else u_ok) if zewn else "—"})
     dok.tabela(rows, tytul="Zestawienie stolarki (generowane z modelu)", klasa="zwarta",
-               formaty={"U_max [W/(m²·K)]": 1}, wyrownanie={"Otwieranie": "l", "Osłona": "l", "Symbol": "l"},
+               formaty={"U_{max} [W/(m²·K)]": 1}, wyrownanie={"Otwieranie": "l", "Osłona": "l", "Symbol": "l"},
                szerokosci=["13mm", "31mm", "24mm", "14mm", None, "20mm", "13mm", "19mm"],
-               uwagi=[f"U_max: okna i przeszklenia {liczba(u_ok, 1)} — {zr_ok}; drzwi zewnętrzne {liczba(u_dz, 1)} — "
-                      f"{zr_dz}. Szczelność okien klasa ≥ 3 (WT zał. 2 pkt 2.3.2). Wartości U_w i g wybranych "
+               uwagi=[f"U_{{max}}: okna i przeszklenia {liczba(u_ok, 1)} — {zr_ok}; drzwi zewnętrzne {liczba(u_dz, 1)} — "
+                      f"{zr_dz}. Szczelność okien klasa ≥ 3 (WT zał. 2 pkt 2.3.2). Wartości U_{{w}} i g wybranych "
                       f"wyrobów {do_uzup('deklaracje producenta, E-13')}."],
                zrodlo="model/test/dom_testowy.yaml — otwory (grupowanie po symbolu)")
 
@@ -411,7 +411,7 @@ def buduj_pt_ar(d, model, arkusze) -> Dokument:
     if model is not None:
         _przegroda(pt, model, "SZ1", ("energia", "U_max_sciana"), "poziomy", 0.13)
         _przegroda(pt, model, "POD-0", ("energia", "U_max_podloga_na_gruncie"), "w dół", 0.17)
-        _przegroda(pt, model, "SD-D1", ("energia", "U_max_stropodach"), "w górę", 0.10)
+        _przegroda(pt, model, "SD-D1", ("energia", "U_max_stropodach"), "w górę", 0.10, od_zewnatrz=True)
         _stolarka(pt, model)
     pt.rozdzial("Dane dotyczące warunków ochrony przeciwpożarowej", """
     Klasy reakcji na ogień wyrobów elewacyjnych: ETICS — NRO jako system (WT § 216 w zw. z § 213); przejścia instalacyjne

@@ -24,7 +24,7 @@ from .dane import dane_obiektu, ELEMENTY, SPECJALNOSCI
 from .dokument import Dokument, WynikDokumentu, _env, _metadane, _plain, stempluj_arkusz, GRUPY
 from .formaty import data_iso, data_slownie, odmiana
 from .nazwy import nazwa_pliku, sprawdz_nazwe
-from .znaczniki import STATUS_PRZYKLAD, oznacz_html
+from .znaczniki import STATUS_PRZYKLAD, oznacz_html, indeksy_html
 
 URI_EL = "https://lamela.invalid/e/"
 LIMIT_MB = 150.0
@@ -82,6 +82,7 @@ class Tom:
         self.zagniezdzaj = zagniezdzaj_arkusze
         self.stempel = stempel_arkuszy
         self.rodzaj = rodzaj or self._rodzaj_domyslny()
+        self.wynik: WynikTomu | None = None
         self._sprawdz_oprawe()
 
     # --------------------------------------------------------------------------------------------- reguły
@@ -176,8 +177,9 @@ class Tom:
         if mb > self.limit_mb:
             raise PrzekroczonyRozmiar(f"{sciezka.name}: {mb:.1f} MB > {self.limit_mb} MB (RPB § 2b ust. 3) — "
                                       "podziel tom (PZT_PAB_z + ZL_z albo PAB_x_z) lub zmniejsz rastry")
-        return WynikTomu(sciezka=sciezka, nazwa=sciezka.name, rozmiar_mb=mb, strony=n, elementy=elementy_info,
-                         zakladki=zakladki, nazwa_zgodna=ok_n, uwagi=uwagi, arkusze=arkusze_tomu)
+        self.wynik = WynikTomu(sciezka=sciezka, nazwa=sciezka.name, rozmiar_mb=mb, strony=n, elementy=elementy_info,
+                               zakladki=zakladki, nazwa_zgodna=ok_n, uwagi=uwagi, arkusze=arkusze_tomu)
+        return self.wynik
 
     def _renderuj_czesci(self, nazwa: str) -> list[dict]:
         dok_el = [e for e in self.elementy if isinstance(e, Dokument)]
@@ -282,7 +284,7 @@ class Tom:
         tyt = escape(f"{self.dane['nazwa_krotka']} — {self.nazwa}")
         html = (f'<!doctype html><html lang="pl"><head><meta charset="utf-8"><title>{tyt}</title>'
                 f"<style>{front.css()}</style></head><body>" + "\n".join(body) + "</body></html>")
-        return R.html_na_pdf(oznacz_html(html))
+        return R.html_na_pdf(indeksy_html(oznacz_html(html)))
 
 
 def _wyglada_na_arkusz(p: Path) -> bool:

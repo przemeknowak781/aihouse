@@ -31,12 +31,14 @@ from . import render as R
 from .arkusze import Arkusz, MM
 from .dane import ELEMENTY, SPECJALNOSCI, Projektant, dane_obiektu, projektanci_elementu
 from .formaty import liczba, data_slownie, data_iso, odmiana
-from .znaczniki import (STATUS_PRZYKLAD, DANE_PRZYKLADOWE, do_uzup, dok_zewn, oznacz_html)
+from .znaczniki import (STATUS_PRZYKLAD, DANE_PRZYKLADOWE, do_uzup, dok_zewn, oznacz_html, indeksy_html,
+                        bez_indeksow)
 
 SZABLONY = Path(__file__).with_name("szablony")
 FONT_REG = "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf"
 FONT_BOLD = "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf"
 URI_RYS = "https://lamela.invalid/rys/"
+PUSTE = (None, "", "—", "–", "-", "n/d", "nie dotyczy")
 
 _env = jinja2.Environment(loader=jinja2.FileSystemLoader(str(SZABLONY)), autoescape=jinja2.select_autoescape(
     enabled_extensions=("html", "j2"), default_for_string=True), trim_blocks=True, lstrip_blocks=True)
@@ -271,7 +273,7 @@ class Dokument:
                 nazwa, jedn = m.group(1), m.group(2)
             naglowki.append((nazwa, f"[{jedn}]" if jedn and not str(jedn).startswith("[") else jedn))
         numeryczne = [all(isinstance(r[1][j], (int, float)) and not isinstance(r[1][j], bool)
-                          for r in rows if r[0] is None and r[1][j] not in (None, "")) and
+                          for r in rows if r[0] is None and r[1][j] not in PUSTE) and
                       any(isinstance(r[1][j], (int, float)) for r in rows if r[0] is None) for j in range(n)]
 
         def fmt(j, v):
@@ -305,7 +307,9 @@ class Dokument:
             if klasa_w == "grupa_txt":
                 wiersze.append(dict(klasa="grupa", komorki=[dict(tekst=_cell(r, html_komorki), klasa="", colspan=n + lp)]))
                 continue
-            komorki = [dict(tekst=_cell(fmt(j, v), html_komorki), klasa=kl(j), colspan=1) for j, v in enumerate(r)]
+            komorki = [dict(tekst=_cell(fmt(j, v), html_komorki),
+                            klasa=kl(j) + (" wrap" if isinstance(v, str) and numeryczne[j] else ""), colspan=1)
+                       for j, v in enumerate(r)]
             if lp:
                 if klasa_w in (None, ""):
                     nr += 1
@@ -344,13 +348,17 @@ class Dokument:
 
     def tabela_przegrody(self, nazwa: str, warstwy: list, *, Rsi: float = 0.13, Rse: float = 0.04,
                          U_max: float | None = None, podstawa_Umax: str | None = None, strumien: str = "poziomy",
-                         uwagi: list | None = None, zrodlo: str | None = None, kod: str | None = None) -> dict:
-        """Tabela przegrody z warstwami (od strony wewnętrznej) i obliczeniem U wg PN-EN ISO 6946:2017-10
-        (bez poprawek ΔU — oznaczone [ZAŁ]). ``warstwy``: [(nazwa, d [m], λ [W/(m·K)])] lub słowniki
-        {nazwa, d, lambda, R}. Zwraca {R_T, U, spelnia}."""
-        wiersze, R_suma = [], 0.0
-        wiersze.append({"_klasa": "pod", "Warstwa (od wewnątrz)": f"opór przejmowania od wewnątrz R_si ({strumien} strumień ciepła)",
-                        "d [m]": None, "λ [W/(m·K)]": None, "R [m²·K/W]": Rsi})
+                         od_zewnatrz: bool = False, uwagi: list | None = None, zrodlo: str | None = None,
+                         kod: str | None = None) -> dict:
+        """Tabela przegrody z warstwami i obliczeniem U wg PN-EN ISO 6946:2017-10 (bez poprawek ΔU — [ZAŁ]).
+        ``warstwy``: [(nazwa, d [m], λ [W/(m·K)])] lub słowniki {nazwa, d, lambda, R}; kolejność warstw — od strony
+        wewnętrznej, chyba że ``od_zewnatrz=True`` (np. stropodach opisany od góry). Zwraca {R_T, U, spelnia}."""
+        kol = "Warstwa (od zewnątrz)" if od_zewnatrz else "Warstwa (od wewnątrz)"
+        w_si = {"_klasa": "pod", kol: f"opór przejmowania ciepła po stronie wewnętrznej R_{{si}} ({strumien} strumień)",
+                "d [m]": None, "λ [W/(m·K)]": None, "R [m²·K/W]": Rsi}
+        w_se = {"_klasa": "pod", kol: "opór przejmowania ciepła po stronie zewnętrznej R_{se}",
+                "d [m]": None, "λ [W/(m·K)]": None, "R [m²·K/W]": Rse}
+        wiersze, R_suma = [w_se if od_zewnatrz else w_si], 0.0
         for w in warstwy:
             if isinstance(w, dict):
                 nz, d, lam, Rw = w.get("nazwa"), w.get("d"), w.get("lambda"), w.get("R")
@@ -360,18 +368,17 @@ class Dokument:
             if Rw is None:
                 Rw = d / lam if lam else 0.0
             R_suma += Rw
-            wiersze.append({"Warstwa (od wewnątrz)": nz, "d [m]": d, "λ [W/(m·K)]": lam, "R [m²·K/W]": Rw})
-        wiersze.append({"_klasa": "pod", "Warstwa (od wewnątrz)": "opór przejmowania na zewnątrz R_se",
-                        "d [m]": None, "λ [W/(m·K)]": None, "R [m²·K/W]": Rse})
+            wiersze.append({kol: nz, "d [m]": d, "λ [W/(m·K)]": lam, "R [m²·K/W]": Rw})
+        wiersze.append(w_si if od_zewnatrz else w_se)
         RT = Rsi + R_suma + Rse
         U = 1.0 / RT
         d_suma = sum((w.get("d") if isinstance(w, dict) else w[1]) or 0 for w in warstwy)
-        wiersze.append({"_klasa": "suma", "Warstwa (od wewnątrz)": "Całkowity opór cieplny R_T / grubość przegrody",
+        wiersze.append({"_klasa": "suma", kol: "Całkowity opór cieplny R_{T} / grubość przegrody",
                         "d [m]": d_suma, "λ [W/(m·K)]": None, "R [m²·K/W]": RT})
         spelnia = None if U_max is None else U <= U_max + 1e-9
-        wynik_txt = f"U = {liczba(U, 3)} W/(m²·K)"
+        wynik_txt = f"<b>U = {liczba(U, 3)} W/(m²·K)</b>"
         if U_max is not None:
-            wynik_txt += f" {'≤' if spelnia else '>'} U_max = {liczba(U_max, 2)} W/(m²·K) — " + \
+            wynik_txt += f" {'≤' if spelnia else '>'} U_{{max}} = {liczba(U_max, 2)} W/(m²·K) — " + \
                          ("<b class='ok'>spełnia</b>" if spelnia else "<b class='nok'>NIE SPEŁNIA</b>")
         u = [f"Współczynnik przenikania ciepła: {wynik_txt}"
              + (f" ({podstawa_Umax})" if podstawa_Umax else "") + "."]
@@ -647,7 +654,7 @@ class Dokument:
         tyt = _html.escape(f"{d['nazwa_krotka']} — {self.kod} {self.tytul}")
         doc = (f'<!doctype html><html lang="pl"><head><meta charset="utf-8"><title>{tyt}</title>'
                f"<style>{self.css()}</style></head><body>" + "\n".join(body) + "</body></html>")
-        return oznacz_html(doc)
+        return indeksy_html(oznacz_html(doc))
 
     # ------------------------------------------------------------------------------------------ render PDF
     def render_pdf(self, sciezka: str | Path | None = None, *, dolacz_arkusze: bool = True,
@@ -742,7 +749,7 @@ def _dedent(t: str) -> str:
 
 
 def _plain(s) -> str:
-    return re.sub(r"<[^>]+>", "", str(s))
+    return bez_indeksow(re.sub(r"<[^>]+>", "", str(s)))
 
 
 def _cell(v, html_ok: bool):

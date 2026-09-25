@@ -186,7 +186,7 @@ def obciazenie_cieplne(ob, went: WynikWent, *, theta_e: float | None = None, the
         zal.dodaj(f"Szczelność: n50 = {fmt(n50, 1)} h⁻¹ (cel projektu — do potwierdzenia próbą PN-EN ISO 9972); "
                   "e_i = 0,02/0,03 (osłonięcie średnie), ε = 1,0", NZW, "PN-EN 12831:2006 tab. D.6–D.7")
         zal.dodaj(f"Nawiew po odzysku: θ_su = θ_e + η·(θ_ex − θ_e) = {fmt(th_su, 1)} °C (η = {fmt(eta, 2)}; bez "
-                  "nagrzewnicy wtórnej); powietrze transferowe do łazienek o θ = {fmt(th_tr, 1)} °C", ZAL)
+                  f"nagrzewnicy wtórnej); powietrze transferowe do łazienek o θ = {fmt(th_tr, 1)} °C", ZAL)
         for pid, t in th_u.items():
             zal.dodaj(f"Przestrzeń nieogrzewana {pid}: θ_u = {fmt(t, 1)} °C, b_u = {fmt(b_u[pid], 2)} z bilansu "
                       f"(n_u = {fmt(n_u, 1)} h⁻¹ — przestrzeń ze stałymi otworami wentylacyjnymi)", NZW,

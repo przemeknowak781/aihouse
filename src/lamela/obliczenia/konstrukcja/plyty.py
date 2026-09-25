@@ -257,7 +257,7 @@ class PlytaMES:
     def __init__(self, obrys: Polygon, grubosc: float, E: float, nu: float = 0.2,
                  podpory_liniowe: list[PodporaLiniowa] | None = None,
                  podpory_punktowe: list[PodporaPunktowa] | None = None, siatka: float = 0.2,
-                 linie_siatki: tuple = ((), ())):
+                 linie_siatki: tuple = ((), ()), strefy: list | None = None):
         self.obrys = obrys
         self.h = float(grubosc)
         self.E = float(E)
@@ -267,6 +267,13 @@ class PlytaMES:
         self.pp = list(podpory_punktowe or [])
         self.uwagi: list[str] = []
         self._siatka(siatka, linie_siatki)
+        # strefy o innej grubości/module: [(Polygon, h, E)] — sztywność D elementu wg środka elementu
+        self.D_el = np.full(len(self.els), self.D)
+        self.h_el = np.full(len(self.els), self.h)
+        for g, hh, EE in (strefy or []):
+            msk = self.elementy_w(g)
+            self.D_el[msk] = EE * hh ** 3 / (12 * (1 - self.nu ** 2))
+            self.h_el[msk] = hh
         self._sztywnosc()
         self._warunki()
 
@@ -338,7 +345,7 @@ class PlytaMES:
             rr, cc = np.meshgrid(dof, dof, indexing="ij")
             rows.append(rr.ravel())
             cols.append(cc.ravel())
-            vals.append((K * self.D).ravel())
+            vals.append((K * self.D_el[e]).ravel())
         self.K = sp.csr_matrix((np.concatenate(vals), (np.concatenate(rows), np.concatenate(cols))), shape=(n, n))
 
     def _warunki(self):
@@ -437,8 +444,9 @@ class PlytaMES:
         Rn = np.zeros(len(self.nodes))
         Rn[self.fixed[self.fixed % 3 == 0] // 3] = R[self.fixed[self.fixed % 3 == 0]]
         m = np.zeros((len(self.els), 3))
-        Dm = self.D * np.array([[1, self.nu, 0], [self.nu, 1, 0], [0, 0, (1 - self.nu) / 2]])
+        Dm0 = np.array([[1, self.nu, 0], [self.nu, 1, 0], [0, 0, (1 - self.nu) / 2]])
         for e, (nds, (a, b)) in enumerate(zip(self.el_nodes, self.el_ab)):
+            Dm = self.D_el[e] * Dm0
             Ci, _, _ = _acm(round(a, 9), round(b, 9), self.nu)
             dof = np.array([[3 * k, 3 * k + 1, 3 * k + 2] for k in nds]).ravel()
             B = np.vstack([_Pxx(a / 2, b / 2), _Pyy(a / 2, b / 2), 2 * _Pxy(a / 2, b / 2)]) @ Ci

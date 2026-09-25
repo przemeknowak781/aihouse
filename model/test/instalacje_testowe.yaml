@@ -18,7 +18,7 @@ instalacje:
     rozdzielacze_co: {P0: [3.60, 7.80], P1: [3.40, 7.60]}
     ZKP: [4.00, 17.80]              # w linii ogrodzenia przy furtce (układ budynku)
     studzienka: [7.00, 16.50]       # studzienka rewizyjna na przykanaliku (układ budynku)
-    pompa_ciepla_jz: {xy: [8.50, 8.90], ustawienie: przy_scianie}
+    pompa_ciepla_jz: {xy: [5.50, 8.90], ustawienie: przy_scianie}
   przybory_dodatkowe:
     - {kond: P0, typ: wc, xy: [4.095, 6.60], obrot: 180}
     - {kond: P0, typ: umywalka, xy: [4.095, 7.50], obrot: 180}

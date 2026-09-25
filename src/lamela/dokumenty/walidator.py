@@ -20,7 +20,7 @@ from pathlib import Path
 import pymupdf
 import yaml
 
-from .formaty import PT2MM, wykryj_format
+from .formaty import PT2MM, wykryj_format, odmiana
 from .nazwy import sprawdz_nazwe
 from .znaczniki import policz_znaczniki, blokuje_zlozenie, STATUS_PRZYKLAD
 
@@ -204,7 +204,8 @@ def _spec(nazwa, doc, sciezka, an, lista, el_info) -> tuple[str, str]:
         n_ark = sum(1 for x in an["a4"] if not x)
         if rastrowe:
             return "BRAK", f"arkusze z dominującym rastrem na stronach {rastrowe} (dopuszczalny tylko podkład mapy)"
-        return "OK", f"{n_ark} arkuszy wektorowych" if n_ark else "brak arkuszy w pliku"
+        return "OK", (f"{n_ark} {odmiana(n_ark, 'arkusz wektorowy', 'arkusze wektorowe', 'arkuszy wektorowych')}"
+                      if n_ark else "brak arkuszy w pliku")
     if nazwa == "oprawa_pt":
         pt = [k for k in an["elementy"] if k.startswith("PT")]
         return ("BRAK" if pt else "OK"), ("PT we wspólnej oprawie" if pt else "brak PT w pliku")
@@ -225,6 +226,12 @@ def sprawdz_tom(tom, lista_kontrolna: dict | str | None = None) -> RaportKomplet
     """Sprawdza kompletność tomu. ``tom`` — ścieżka PDF, ``WynikTomu``, ``WynikDokumentu`` (z zapisaną ścieżką).
     ``lista_kontrolna`` — słownik z ``LISTY_KONTROLNE`` lub jego klucz ('TOM_I', 'PT_AR', …); ``None`` — dobór
     po nazwie pliku."""
+    if hasattr(tom, "wynik") and getattr(tom, "wynik", None) is not None:      # obiekt Tom po zloz()
+        if lista_kontrolna is None and getattr(tom, "rodzaj", None) == "PT" and getattr(tom, "symbol", None):
+            lista_kontrolna = f"PT_{tom.symbol}"
+        tom = tom.wynik
+    elif hasattr(tom, "zloz"):
+        raise ValueError("Tom nie został złożony — wywołaj najpierw tom.zloz(katalog)")
     sciezka = Path(getattr(tom, "sciezka", None) or tom)
     if isinstance(lista_kontrolna, str):
         lista = LISTY_KONTROLNE[lista_kontrolna]
@@ -266,7 +273,8 @@ def sprawdz_tom(tom, lista_kontrolna: dict | str | None = None) -> RaportKomplet
                     pozycje.append(Pozycja(status="BRAK" if ob else "OSTRZEŻENIE", szczegoly="brak rysunków", **base))
                 else:
                     pozycje.append(Pozycja(status="BRAK" if zle else "OK", szczegoly=(
-                        "; ".join(zle) if zle else f"{len(skale)} rysunków ze skalą ≥ 1:{sz['skala_max']}"), **base))
+                        "; ".join(zle) if zle else f"{len(skale)} {odmiana(len(skale), 'rysunek', 'rysunki', 'rysunków')}"
+                                                   f" w skali nie mniejszej niż 1:{sz['skala_max']}"), **base))
                 continue
             zakres = {"tytulowa": info["tytulowa"] if info else " ".join(an["teksty"][:1]),
                       "zakladki": info["zakladki"] if info else [t for _, t, _ in an["toc"]],

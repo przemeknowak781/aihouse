@@ -67,6 +67,34 @@ def oznacz_html(html: str) -> str:
     return "".join(out)
 
 
+_RE_IDX = re.compile(r"([_^])\{([^{}<>]{1,24})\}")
+
+
+def indeksy_html(html: str) -> str:
+    """Zapis indeksów w tekście: ``R_{si}`` → R<sub>si</sub>, ``m^{2}`` → m<sup>2</sup> (węzły tekstowe HTML,
+    poza ``<style>``/``<script>``)."""
+    out, skip = [], False
+    for part in _RE_TAG.split(html):
+        if part.startswith("<"):
+            low = part[:8].lower()
+            if low.startswith(("<style", "<script", "<title")):
+                skip = True
+            elif low.startswith(("</style", "</scrip", "</title")):
+                skip = False
+            out.append(part)
+        elif skip or "{" not in part:
+            out.append(part)
+        else:
+            out.append(_RE_IDX.sub(lambda m: f"<{'sub' if m.group(1) == '_' else 'sup'}>{m.group(2)}"
+                                             f"</{'sub' if m.group(1) == '_' else 'sup'}>", part))
+    return "".join(out)
+
+
+def bez_indeksow(tekst: str) -> str:
+    """``R_{si}`` → ``Rsi`` (zakładki PDF, metadane)."""
+    return _RE_IDX.sub(lambda m: m.group(2), tekst)
+
+
 def policz_znaczniki(tekst: str) -> dict:
     """Zlicza znaczniki w tekście (np. wyciągniętym z PDF). Zwraca
     ``{"DO UZUPEŁNIENIA": n, "DOKUMENT ZEWNĘTRZNY": n, "DANE PRZYKŁADOWE": n, "ZAŁ": n, "NZW": n, …,
