@@ -1,5 +1,6 @@
 {
- "title": "Korekta Inwestora: „S” z przesuniętych brył, garaż w parterze — panel koncepcji uruchomiony ponownie",
+ "nr": 23,
+ "title": "Symulacja mostków termicznych 2D działa (ISO 10211) — ocena węzłów, ciągłość izolacji i odprowadzenie wody",
  "stages": [
   [
    "Analiza szkicu — interpretacja v2 („S” z brył, garaż)",
@@ -55,9 +56,24 @@
   ]
  ],
  "notes": [
+  "NADZÓR (05:28): 3 agentów aktywnych, bez zastojów; najdłuższa bezczynność 4 min; zmiany w repo 0 min temu.",
   "Symulacja mostków 2D (ISO 10211) działa: płyta wspornikowa BEZ łącznika — ψ_e = 0,75 W/(m·K), f_Rsi = 0,746, wykryte przerwanie linii izolacji → ocena ZŁY (wariant porównawczy). Katalog węzłów z łącznikiem, ciepłym montażem okien, cokołem i attyką w toku.",
   "Narzędzie sygnalizuje też brak spadku i odwodnienia krawędzi płyt (okapnik, rzygacz, rura spustowa) — kontrola wody na każdym węźle.",
   "Synteza modelu (baza W2 + przeszczepy + 28 poprawek) w toku — etap analizy materiałów, potem skrypt parametryczny.",
   "Moduł ścian-tarcz (MES + STM) dla wspornika P2 w budowie."
+ ],
+ "images": [
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/mostki/WZ-B0.png",
+   "caption": "Płyta wspornikowa BEZ łącznika — ψ 0,75, ocena ZŁY (porównawczy)"
+  },
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/mostki/WZ-R1.png",
+   "caption": "Węzeł WZ-R1 (demo)"
+  },
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/mostki/WZ-GF1.png",
+   "caption": "Węzeł WZ-GF1 cokół (demo)"
+  }
  ]
 }
