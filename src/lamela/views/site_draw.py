@@ -1126,7 +1126,7 @@ def _lg_util(branza, existing):
         from .site_data import BRANZE, Siec
         sx = Siec(branza, LineString([(x + 1, y), (x + 15, y)]), "", existing)
         utility(sh, sx.geom, sx, existing=existing, flow=False)
-        sh.text((x + 8, y), BRANZE[branza][0], 1.8, 0.0, "center", "middle", "R-LEGENDA", color=sx.kolor, mask=0.4)
+        sh.text((x + 8, y), BRANZE[branza][0], H, 0.0, "center", "middle", "R-LEGENDA", color=sx.kolor, mask=0.4)
     return f
 
 
@@ -1142,7 +1142,7 @@ def _lg_rect(kind):
             for ln in _parallel(r, 45.0, 1.5):
                 sh.polyline(ln, "Z-MAPA", pen=0.13, color="#8a8a8a")
             sh.polygon(np.asarray(r.exterior.coords)[:-1], "Z-MAPA", pen=0.35, color="#3a3a3a")
-            sh.text((x + 8, y), "m2", 1.8, 0, "center", "middle", "R-LEGENDA", style="italic", mask=0.3)
+            sh.text((x + 8, y), "m2", H, 0, "center", "middle", "R-LEGENDA", style="italic", mask=0.3)
             return
         elif kind in ("drobne", "duze", "deska"):
             S.paving(sh, r, kind, outline=False, band_mm=1.2 if kind == "drobne" else None)
@@ -1173,7 +1173,7 @@ def _lg_rect(kind):
         elif kind == "zbiornik":
             b = box(x + 4.5, y - 2.0, x + 11.5, y + 2.0)
             sh.polygon(np.asarray(b.exterior.coords)[:-1], "Z-ODWODNIENIE", pen=0.5)
-            sh.text((x + 8, y), "ZB", 1.8, 0, "center", "middle", "Z-ODWODNIENIE")
+            sh.text((x + 8, y), "ZB", H, 0, "center", "middle", "Z-ODWODNIENIE")
             return
         elif kind == "zjazd":
             sh.polygon(np.asarray(r.exterior.coords)[:-1], "Z-UTWARDZENIA", pen=0.35, lt="KRESKOWA")
@@ -1192,9 +1192,9 @@ def _lg_sym(kind):
             sh.line((x + 1, y), (x + 15, y), "Z-DZIALKA", pen=0.35, lt="CIAGLA", color="#000000")
             sh.dot((x + 1, y), 1.0, "Z-DZIALKA")
             sh.dot((x + 15, y), 1.0, "Z-DZIALKA")
-            sh.fill(circle_pts(p, 2.0, 24), "Z-DZIALKA", "#ffffff", z=26.2)
-            sh.circle(p, 2.0, "Z-DZIALKA", pen=0.25, z=26.3)
-            sh.text(p, "A", 1.8, 0, "center", "middle", "Z-DZIALKA")
+            sh.fill(circle_pts(p, 2.3, 24), "Z-DZIALKA", "#ffffff", z=26.2)
+            sh.circle(p, 2.3, "Z-DZIALKA", pen=0.25, z=26.3)
+            sh.text(p, "A", H, 0, "center", "middle", "Z-DZIALKA")
         elif kind == "linia_zabudowy":
             col = styles.layer("Z-LZ").plot_rgb
             sh.line((x + 1, y), (x + 15, y), "Z-LZ", pen=0.35, lt="CIAGLA", color=col)
@@ -1224,7 +1224,7 @@ def _lg_sym(kind):
         elif kind == "parking":
             sh.polygon(np.asarray(box(x + 3, y - 2.0, x + 13, y + 2.0).exterior.coords)[:-1], "Z-UTWARDZENIA",
                        pen=0.25)
-            sh.text(p, "P", 1.8, 0, "center", "middle", "R-LEGENDA", style="bold")
+            sh.text(p, "P", H, 0, "center", "middle", "R-LEGENDA", style="bold")
         elif kind == "odpady":
             sh.polygon(np.asarray(box(x + 2, y - 1.5, x + 14, y + 1.5).exterior.coords)[:-1], "Z-OGRODZENIE",
                        pen=0.35)
@@ -1264,24 +1264,24 @@ def _lg_sym(kind):
         elif kind == "spot_ist":
             sh.line((x + 2, y), (x + 3.6, y), "Z-RZEDNE", pen=0.18, color="#6b4423")
             sh.line((x + 2.8, y - 0.8), (x + 2.8, y + 0.8), "Z-RZEDNE", pen=0.18, color="#6b4423")
-            sh.text((x + 4.2, y + 0.3), "101,25", 1.8, 0, "left", "baseline", "Z-RZEDNE", style="italic",
+            sh.text((x + 4.2, y + 0.3), "101,25", H, 0, "left", "baseline", "Z-RZEDNE", style="italic",
                     color="#6b4423")
         elif kind == "spot_proj":
             sh.dot((x + 2.8, y), 0.9, "Z-RZEDNE-PROJ")
-            sh.text((x + 4.4, y + 0.3), "101,35", 1.8, 0, "left", "baseline", "Z-RZEDNE-PROJ")
-            sh.rect(x + 3.9, y - 0.4, x + 4.4 + T.width("101,35", 1.8) + 0.5, y + 2.4, "Z-RZEDNE-PROJ", pen=0.18)
+            sh.text((x + 4.4, y + 0.3), "101,35", H, 0, "left", "baseline", "Z-RZEDNE-PROJ")
+            sh.rect(x + 3.9, y - 0.4, x + 4.4 + T.width("101,35", H) + 0.5, y + H + 0.9, "Z-RZEDNE-PROJ", pen=0.18)
         elif kind in ("spadek", "splyw"):
-            slope(sh, (x + 1, y - 0.6), (x + 15, y - 0.6), text="2,0%" if kind == "spadek" else "i", h=1.8,
+            slope(sh, (x + 1, y - 0.6), (x + 15, y - 0.6), text="2,0%" if kind == "spadek" else "i", h=H,
                   layer="Z-ODWODNIENIE")
         elif kind == "zero":
-            sh.text((x + 8, y + 0.2), "±0,00=101,65", 1.8, 0, "center", "baseline", "R-LEGENDA")
+            sh.text((x + 8, y + 0.2), "±0,00=101,65", H, 0, "center", "baseline", "R-LEGENDA")
         elif kind == "wymiar":
-            dim_pts(sh, (x + 1, y - 1.2), (x + 15, y - 1.2), h=1.8, label="4,30", layer="R-LEGENDA")
+            dim_pts(sh, (x + 1, y - 1.2), (x + 15, y - 1.2), h=H, label="4,30", layer="R-LEGENDA")
         elif kind == "tyczenie":
             tyczenie_mark(sh, p, "T1")
         elif kind == "kolizja":
-            sh.circle(p, 2.0, "Z-KOLIZJE", pen=0.5)
-            sh.text(p, "K1", 1.8, 0, "center", "middle", "Z-KOLIZJE", style="bold")
+            sh.circle(p, 2.6, "Z-KOLIZJE", pen=0.5)
+            sh.text(p, "K1", H, 0, "center", "middle", "Z-KOLIZJE", style="bold")
         elif kind == "skrzyzowanie":
             sh.line((x + 2, y), (x + 14, y), "Z-SIECI-PROJ", pen=0.5, color="#0050c8")
             sh.line((p[0], y - 2), (p[0], y + 2), "Z-SIECI-PROJ", pen=0.7, color="#d00000")
@@ -1299,7 +1299,7 @@ def tyczenie_mark(c, p, label=None, layer="Z-TYCZENIE"):
     c.line(P + [-1.6 * k, 0], P + [1.6 * k, 0], layer, pen=0.18)
     c.line(P + [0, -1.6 * k], P + [0, 1.6 * k], layer, pen=0.18)
     if label and c.k == 1.0:
-        c.text(P + [2.2, 0.4], label, 1.8, 0, "left", "baseline", layer)
+        c.text(P + [2.2, 0.4], label, H, 0, "left", "baseline", layer)
 
 
 def legend_items():
