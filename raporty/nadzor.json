@@ -1,56 +1,48 @@
 {
- "czas": "2026-09-25 04:47",
+ "czas": "2026-09-25 04:50",
  "aktywni": [
   {
    "id": "a358500c03b62940a",
    "opis": "Build MEP and electrical calc library",
-   "idle_min": 0.9,
-   "bez_narzedzi_min": 1.0,
-   "limity": 0,
-   "powody": []
-  },
-  {
-   "id": "a87415027562c59a6",
-   "opis": "Build physics and energy calc library",
    "idle_min": 0.0,
-   "bez_narzedzi_min": 0.2,
+   "bez_narzedzi_min": 0.1,
    "limity": 0,
    "powody": []
   },
   {
    "id": "a27284e7b67190ca8",
    "opis": "Build structural Eurocode calc library",
-   "idle_min": 0.8,
-   "bez_narzedzi_min": 0.8,
+   "idle_min": 0.3,
+   "bez_narzedzi_min": 0.4,
    "limity": 0,
    "powody": []
   },
   {
    "id": "a856d66efb0614c73",
    "opis": "wf_44634517-034:sędzia:J1",
-   "idle_min": 2.4,
-   "bez_narzedzi_min": 2.5,
+   "idle_min": 1.5,
+   "bez_narzedzi_min": 1.5,
    "limity": 0,
    "powody": []
   },
   {
    "id": "a6577b608fd30ce04",
    "opis": "wf_44634517-034:sędzia:J2",
-   "idle_min": 3.1,
-   "bez_narzedzi_min": 3.2,
+   "idle_min": 1.6,
+   "bez_narzedzi_min": 1.6,
    "limity": 0,
    "powody": []
   },
   {
-   "id": "a40ae4c2ae04c6ee0",
-   "opis": "wf_a0d51b50-592:weryfikacja:numeryka",
-   "idle_min": 0.1,
-   "bez_narzedzi_min": 0.7,
+   "id": "a97b89276bf7931f1",
+   "opis": "wf_a0d51b50-592:poprawki",
+   "idle_min": 0.9,
+   "bez_narzedzi_min": 0.9,
    "limity": 0,
    "powody": []
   }
  ],
  "zakonczeni": 0,
  "zastoje": [],
- "repo_bez_zmian_min": 0.0
+ "repo_bez_zmian_min": 0.1
 }
