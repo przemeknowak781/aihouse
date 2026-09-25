@@ -1,13 +1,1192 @@
 {
- "ok": 43,
- "razem": 45,
+ "ok": 189,
+ "razem": 191,
  "wiersze": [
+  {
+   "element": "D1",
+   "miejsce": "nad podporą B10 — góra y",
+   "poz": "1.1",
+   "arkusze": [
+    "PT-BO-16",
+    "PT-BO-17"
+   ],
+   "As_req": 573.0,
+   "As_min": 243.4,
+   "As_prov": 604.2,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 13",
+   "s": 130.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.054
+  },
+  {
+   "element": "D1",
+   "miejsce": "nad podporą N27 — góra y",
+   "poz": "1.1",
+   "arkusze": [
+    "PT-BO-16",
+    "PT-BO-17"
+   ],
+   "As_req": 292.6,
+   "As_min": 243.4,
+   "As_prov": 295.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 17",
+   "s": 170.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.01
+  },
+  {
+   "element": "D1",
+   "miejsce": "nad podporą S2-03 — góra y",
+   "poz": "1.1",
+   "arkusze": [
+    "PT-BO-16",
+    "PT-BO-17"
+   ],
+   "As_req": 573.0,
+   "As_min": 243.4,
+   "As_prov": 604.2,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 13",
+   "s": 130.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.054
+  },
+  {
+   "element": "D1",
+   "miejsce": "nad podporą S2-04 — góra x",
+   "poz": "1.1",
+   "arkusze": [
+    "PT-BO-16",
+    "PT-BO-17"
+   ],
+   "As_req": 117.0,
+   "As_min": 256.9,
+   "As_prov": 264.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.03
+  },
+  {
+   "element": "D1",
+   "miejsce": "nad podporą S2-05 — góra y",
+   "poz": "1.1",
+   "arkusze": [
+    "PT-BO-16",
+    "PT-BO-17"
+   ],
+   "As_req": 292.6,
+   "As_min": 243.4,
+   "As_prov": 295.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 17",
+   "s": 170.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.01
+  },
+  {
+   "element": "D1",
+   "miejsce": "nad podporą S2-06 — góra x",
+   "poz": "1.1",
+   "arkusze": [
+    "PT-BO-16",
+    "PT-BO-17"
+   ],
+   "As_req": 339.7,
+   "As_min": 256.9,
+   "As_prov": 341.5,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 23",
+   "s": 230.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.005
+  },
+  {
+   "element": "D1",
+   "miejsce": "nad podporą S2-07 — góra y",
+   "poz": "1.1",
+   "arkusze": [
+    "PT-BO-16",
+    "PT-BO-17"
+   ],
+   "As_req": 573.0,
+   "As_min": 243.4,
+   "As_prov": 604.2,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 13",
+   "s": 130.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.054
+  },
+  {
+   "element": "D1",
+   "miejsce": "nad podporą S2-09 — góra y",
+   "poz": "1.1",
+   "arkusze": [
+    "PT-BO-16",
+    "PT-BO-17"
+   ],
+   "As_req": 573.0,
+   "As_min": 243.4,
+   "As_prov": 604.2,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 13",
+   "s": 130.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.054
+  },
+  {
+   "element": "D1",
+   "miejsce": "nad podporą S2-10 — góra x",
+   "poz": "1.1",
+   "arkusze": [
+    "PT-BO-16",
+    "PT-BO-17"
+   ],
+   "As_req": 339.7,
+   "As_min": 256.9,
+   "As_prov": 341.5,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 23",
+   "s": 230.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.005
+  },
+  {
+   "element": "D1",
+   "miejsce": "pole P2 — dół x",
+   "poz": "1.1",
+   "arkusze": [
+    "PT-BO-15",
+    "PT-BO-17"
+   ],
+   "As_req": 96.3,
+   "As_min": 256.9,
+   "As_prov": 264.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.03
+  },
+  {
+   "element": "D1",
+   "miejsce": "pole P2 — dół y",
+   "poz": "1.1",
+   "arkusze": [
+    "PT-BO-15",
+    "PT-BO-17"
+   ],
+   "As_req": 239.8,
+   "As_min": 243.4,
+   "As_prov": 264.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.087
+  },
+  {
+   "element": "D1",
+   "miejsce": "pole P4 — dół x",
+   "poz": "1.1",
+   "arkusze": [
+    "PT-BO-15",
+    "PT-BO-17"
+   ],
+   "As_req": 67.3,
+   "As_min": 256.9,
+   "As_prov": 264.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.03
+  },
+  {
+   "element": "D1",
+   "miejsce": "pole P4 — dół y",
+   "poz": "1.1",
+   "arkusze": [
+    "PT-BO-15",
+    "PT-BO-17"
+   ],
+   "As_req": 67.7,
+   "As_min": 243.4,
+   "As_prov": 251.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "D1",
+   "miejsce": "pole P4 — naroże (dół x)",
+   "poz": "1.1",
+   "arkusze": [
+    "PT-BO-15",
+    "PT-BO-17"
+   ],
+   "As_req": 566.1,
+   "As_min": 243.4,
+   "As_prov": 595.2,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø12 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.052
+  },
+  {
+   "element": "D1",
+   "miejsce": "pole P4 — naroże (dół y)",
+   "poz": "1.1",
+   "arkusze": [
+    "PT-BO-15",
+    "PT-BO-17"
+   ],
+   "As_req": 566.1,
+   "As_min": 243.4,
+   "As_prov": 595.2,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø12 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.052
+  },
+  {
+   "element": "D1",
+   "miejsce": "pole P4 — naroże (góra x)",
+   "poz": "1.1",
+   "arkusze": [
+    "PT-BO-16",
+    "PT-BO-17"
+   ],
+   "As_req": 566.1,
+   "As_min": 243.4,
+   "As_prov": 595.2,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø12 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.052
+  },
+  {
+   "element": "D1",
+   "miejsce": "pole P4 — naroże (góra y)",
+   "poz": "1.1",
+   "arkusze": [
+    "PT-BO-16",
+    "PT-BO-17"
+   ],
+   "As_req": 566.1,
+   "As_min": 243.4,
+   "As_prov": 595.2,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø12 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.052
+  },
+  {
+   "element": "D1",
+   "miejsce": "pole P5 — dół x",
+   "poz": "1.1",
+   "arkusze": [
+    "PT-BO-15",
+    "PT-BO-17"
+   ],
+   "As_req": 93.4,
+   "As_min": 256.9,
+   "As_prov": 264.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.03
+  },
+  {
+   "element": "D1",
+   "miejsce": "pole P5 — dół y",
+   "poz": "1.1",
+   "arkusze": [
+    "PT-BO-15",
+    "PT-BO-17"
+   ],
+   "As_req": 33.6,
+   "As_min": 243.4,
+   "As_prov": 251.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "D1",
+   "miejsce": "pole P5 — naroże (dół x)",
+   "poz": "1.1",
+   "arkusze": [
+    "PT-BO-15",
+    "PT-BO-17"
+   ],
+   "As_req": 296.1,
+   "As_min": 243.4,
+   "As_prov": 314.2,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 16",
+   "s": 160.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.061
+  },
+  {
+   "element": "D1",
+   "miejsce": "pole P5 — naroże (dół y)",
+   "poz": "1.1",
+   "arkusze": [
+    "PT-BO-15",
+    "PT-BO-17"
+   ],
+   "As_req": 296.1,
+   "As_min": 243.4,
+   "As_prov": 314.2,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 16",
+   "s": 160.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.061
+  },
+  {
+   "element": "D1",
+   "miejsce": "pole P5 — naroże (góra x)",
+   "poz": "1.1",
+   "arkusze": [
+    "PT-BO-16",
+    "PT-BO-17"
+   ],
+   "As_req": 296.1,
+   "As_min": 243.4,
+   "As_prov": 314.2,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 16",
+   "s": 160.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.061
+  },
+  {
+   "element": "D1",
+   "miejsce": "pole P5 — naroże (góra y)",
+   "poz": "1.1",
+   "arkusze": [
+    "PT-BO-16",
+    "PT-BO-17"
+   ],
+   "As_req": 296.1,
+   "As_min": 243.4,
+   "As_prov": 314.2,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 16",
+   "s": 160.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.061
+  },
+  {
+   "element": "D1",
+   "miejsce": "pole P6 — dół x",
+   "poz": "1.1",
+   "arkusze": [
+    "PT-BO-15",
+    "PT-BO-17"
+   ],
+   "As_req": 72.5,
+   "As_min": 256.9,
+   "As_prov": 264.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.03
+  },
+  {
+   "element": "D1",
+   "miejsce": "pole P6 — dół y",
+   "poz": "1.1",
+   "arkusze": [
+    "PT-BO-15",
+    "PT-BO-17"
+   ],
+   "As_req": 68.7,
+   "As_min": 243.4,
+   "As_prov": 251.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "D1",
+   "miejsce": "pole P6 — naroże (dół x)",
+   "poz": "1.1",
+   "arkusze": [
+    "PT-BO-15",
+    "PT-BO-17"
+   ],
+   "As_req": 515.6,
+   "As_min": 243.4,
+   "As_prov": 523.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 15",
+   "s": 150.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.016
+  },
+  {
+   "element": "D1",
+   "miejsce": "pole P6 — naroże (dół y)",
+   "poz": "1.1",
+   "arkusze": [
+    "PT-BO-15",
+    "PT-BO-17"
+   ],
+   "As_req": 515.6,
+   "As_min": 243.4,
+   "As_prov": 523.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 15",
+   "s": 150.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.016
+  },
+  {
+   "element": "D1",
+   "miejsce": "pole P6 — naroże (góra x)",
+   "poz": "1.1",
+   "arkusze": [
+    "PT-BO-16",
+    "PT-BO-17"
+   ],
+   "As_req": 515.6,
+   "As_min": 243.4,
+   "As_prov": 523.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 15",
+   "s": 150.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.016
+  },
+  {
+   "element": "D1",
+   "miejsce": "pole P6 — naroże (góra y)",
+   "poz": "1.1",
+   "arkusze": [
+    "PT-BO-16",
+    "PT-BO-17"
+   ],
+   "As_req": 515.6,
+   "As_min": 243.4,
+   "As_prov": 523.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 15",
+   "s": 150.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.016
+  },
+  {
+   "element": "D2",
+   "miejsce": "nad podporą N16 — góra x",
+   "poz": "1.2",
+   "arkusze": [
+    "PT-BO-13",
+    "PT-BO-14"
+   ],
+   "As_req": 243.3,
+   "As_min": 256.9,
+   "As_prov": 264.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.03
+  },
+  {
+   "element": "D2",
+   "miejsce": "nad podporą S1-03 — góra y",
+   "poz": "1.2",
+   "arkusze": [
+    "PT-BO-13",
+    "PT-BO-14"
+   ],
+   "As_req": 270.1,
+   "As_min": 243.4,
+   "As_prov": 279.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 18",
+   "s": 180.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.034
+  },
+  {
+   "element": "D2",
+   "miejsce": "nad podporą S1-04 — góra x",
+   "poz": "1.2",
+   "arkusze": [
+    "PT-BO-13",
+    "PT-BO-14"
+   ],
+   "As_req": 243.3,
+   "As_min": 256.9,
+   "As_prov": 264.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.03
+  },
+  {
+   "element": "D2",
+   "miejsce": "nad podporą S1-07 — góra x",
+   "poz": "1.2",
+   "arkusze": [
+    "PT-BO-13",
+    "PT-BO-14"
+   ],
+   "As_req": 243.3,
+   "As_min": 256.9,
+   "As_prov": 264.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.03
+  },
+  {
+   "element": "D2",
+   "miejsce": "pole P5 — dół x",
+   "poz": "1.2",
+   "arkusze": [
+    "PT-BO-12",
+    "PT-BO-14"
+   ],
+   "As_req": 103.5,
+   "As_min": 256.9,
+   "As_prov": 264.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.03
+  },
+  {
+   "element": "D2",
+   "miejsce": "pole P5 — dół y",
+   "poz": "1.2",
+   "arkusze": [
+    "PT-BO-12",
+    "PT-BO-14"
+   ],
+   "As_req": 122.7,
+   "As_min": 243.4,
+   "As_prov": 251.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "D2",
+   "miejsce": "pole P5 — naroże (dół x)",
+   "poz": "1.2",
+   "arkusze": [
+    "PT-BO-12",
+    "PT-BO-14"
+   ],
+   "As_req": 170.2,
+   "As_min": 243.4,
+   "As_prov": 251.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "D2",
+   "miejsce": "pole P5 — naroże (dół y)",
+   "poz": "1.2",
+   "arkusze": [
+    "PT-BO-12",
+    "PT-BO-14"
+   ],
+   "As_req": 170.2,
+   "As_min": 243.4,
+   "As_prov": 251.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "D2",
+   "miejsce": "pole P5 — naroże (góra x)",
+   "poz": "1.2",
+   "arkusze": [
+    "PT-BO-13",
+    "PT-BO-14"
+   ],
+   "As_req": 170.2,
+   "As_min": 243.4,
+   "As_prov": 251.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "D2",
+   "miejsce": "pole P5 — naroże (góra y)",
+   "poz": "1.2",
+   "arkusze": [
+    "PT-BO-13",
+    "PT-BO-14"
+   ],
+   "As_req": 170.2,
+   "As_min": 243.4,
+   "As_prov": 251.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "D3",
+   "miejsce": "nad podporą S1-03 — góra y",
+   "poz": "1.3",
+   "arkusze": [
+    "PT-BO-13",
+    "PT-BO-14"
+   ],
+   "As_req": 210.7,
+   "As_min": 243.4,
+   "As_prov": 251.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "D3",
+   "miejsce": "pole P8 — dół x",
+   "poz": "1.3",
+   "arkusze": [
+    "PT-BO-12",
+    "PT-BO-14"
+   ],
+   "As_req": 49.5,
+   "As_min": 256.9,
+   "As_prov": 264.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.03
+  },
+  {
+   "element": "D3",
+   "miejsce": "pole P8 — dół y",
+   "poz": "1.3",
+   "arkusze": [
+    "PT-BO-12",
+    "PT-BO-14"
+   ],
+   "As_req": 55.2,
+   "As_min": 243.4,
+   "As_prov": 251.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "D3",
+   "miejsce": "pole P8 — naroże (dół x)",
+   "poz": "1.3",
+   "arkusze": [
+    "PT-BO-12",
+    "PT-BO-14"
+   ],
+   "As_req": 199.0,
+   "As_min": 243.4,
+   "As_prov": 251.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "D3",
+   "miejsce": "pole P8 — naroże (dół y)",
+   "poz": "1.3",
+   "arkusze": [
+    "PT-BO-12",
+    "PT-BO-14"
+   ],
+   "As_req": 199.0,
+   "As_min": 243.4,
+   "As_prov": 251.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "D3",
+   "miejsce": "pole P8 — naroże (góra x)",
+   "poz": "1.3",
+   "arkusze": [
+    "PT-BO-13",
+    "PT-BO-14"
+   ],
+   "As_req": 199.0,
+   "As_min": 243.4,
+   "As_prov": 251.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "D3",
+   "miejsce": "pole P8 — naroże (góra y)",
+   "poz": "1.3",
+   "arkusze": [
+    "PT-BO-13",
+    "PT-BO-14"
+   ],
+   "As_req": 199.0,
+   "As_min": 243.4,
+   "As_prov": 251.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "D4",
+   "miejsce": "nad podporą B7 — góra y",
+   "poz": "1.4",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 375.2,
+   "As_min": 270.4,
+   "As_prov": 386.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 13",
+   "s": 130.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.031
+  },
+  {
+   "element": "D4",
+   "miejsce": "nad podporą S0-03 — góra x",
+   "poz": "1.4",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 361.7,
+   "As_min": 283.9,
+   "As_prov": 374.0,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 21",
+   "s": 210.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.034
+  },
+  {
+   "element": "D4",
+   "miejsce": "nad podporą S0-04 — góra y",
+   "poz": "1.4",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 375.2,
+   "As_min": 270.4,
+   "As_prov": 386.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 13",
+   "s": 130.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.031
+  },
+  {
+   "element": "D4",
+   "miejsce": "nad podporą S0-17 — góra y",
+   "poz": "1.4",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 375.2,
+   "As_min": 270.4,
+   "As_prov": 386.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 13",
+   "s": 130.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.031
+  },
+  {
+   "element": "D4",
+   "miejsce": "pole P3 — dół x",
+   "poz": "1.4",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 98.2,
+   "As_min": 283.9,
+   "As_prov": 295.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 17",
+   "s": 170.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.041
+  },
+  {
+   "element": "D4",
+   "miejsce": "pole P3 — dół y",
+   "poz": "1.4",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 103.0,
+   "As_min": 270.4,
+   "As_prov": 279.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 18",
+   "s": 180.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "D4",
+   "miejsce": "pole P3 — naroże (dół x)",
+   "poz": "1.4",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 115.4,
+   "As_min": 270.4,
+   "As_prov": 279.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 18",
+   "s": 180.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "D4",
+   "miejsce": "pole P3 — naroże (dół y)",
+   "poz": "1.4",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 115.4,
+   "As_min": 270.4,
+   "As_prov": 279.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 18",
+   "s": 180.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "D4",
+   "miejsce": "pole P3 — naroże (góra x)",
+   "poz": "1.4",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 115.4,
+   "As_min": 270.4,
+   "As_prov": 279.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 18",
+   "s": 180.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "D4",
+   "miejsce": "pole P3 — naroże (góra y)",
+   "poz": "1.4",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 115.4,
+   "As_min": 270.4,
+   "As_prov": 279.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 18",
+   "s": 180.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "D4",
+   "miejsce": "pole P4 — dół x",
+   "poz": "1.4",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 167.4,
+   "As_min": 283.9,
+   "As_prov": 295.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 17",
+   "s": 170.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.041
+  },
+  {
+   "element": "D4",
+   "miejsce": "pole P4 — dół y",
+   "poz": "1.4",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 173.9,
+   "As_min": 270.4,
+   "As_prov": 279.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 18",
+   "s": 180.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "D4",
+   "miejsce": "pole P4 — naroże (dół x)",
+   "poz": "1.4",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 196.3,
+   "As_min": 270.4,
+   "As_prov": 279.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 18",
+   "s": 180.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "D4",
+   "miejsce": "pole P4 — naroże (dół y)",
+   "poz": "1.4",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 196.3,
+   "As_min": 270.4,
+   "As_prov": 279.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 18",
+   "s": 180.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "D4",
+   "miejsce": "pole P4 — naroże (góra x)",
+   "poz": "1.4",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 196.3,
+   "As_min": 270.4,
+   "As_prov": 279.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 18",
+   "s": 180.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "D4",
+   "miejsce": "pole P4 — naroże (góra y)",
+   "poz": "1.4",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 196.3,
+   "As_min": 270.4,
+   "As_prov": 279.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 18",
+   "s": 180.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
   {
    "element": "PF1+PF2",
    "miejsce": "dozbrojenie D1 dół x",
    "poz": "MES-PF",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 2583.0,
    "As_min": 0.0,
@@ -25,7 +1204,8 @@
    "miejsce": "dozbrojenie D1 dół y",
    "poz": "MES-PF",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 5243.0,
    "As_min": 0.0,
@@ -40,10 +1220,49 @@
   },
   {
    "element": "PF1+PF2",
+   "miejsce": "dozbrojenie D1 góra x",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-04",
+    "PT-BO-05"
+   ],
+   "As_req": 2214.8,
+   "As_min": 0.0,
+   "As_prov": 2722.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø14 co 7.5 + Ø8 co 7.5",
+   "s": 75.0,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.229
+  },
+  {
+   "element": "PF1+PF2",
+   "miejsce": "dozbrojenie D1 góra y",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-04",
+    "PT-BO-05"
+   ],
+   "As_req": 3019.6,
+   "As_min": 0.0,
+   "As_prov": 3099.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø14 co 7.5 + Ø10 co 7.5",
+   "s": 75.0,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.027
+  },
+  {
+   "element": "PF1+PF2",
    "miejsce": "dozbrojenie D2 dół x",
    "poz": "MES-PF",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 1263.4,
    "As_min": 0.0,
@@ -61,7 +1280,8 @@
    "miejsce": "dozbrojenie D2 dół y",
    "poz": "MES-PF",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 1474.4,
    "As_min": 0.0,
@@ -76,10 +1296,30 @@
   },
   {
    "element": "PF1+PF2",
+   "miejsce": "dozbrojenie D2 góra x",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-04",
+    "PT-BO-05"
+   ],
+   "As_req": 2607.6,
+   "As_min": 0.0,
+   "As_prov": 2722.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø14 co 7.5 + Ø8 co 7.5",
+   "s": 75.0,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.044
+  },
+  {
+   "element": "PF1+PF2",
    "miejsce": "dozbrojenie D3 dół x",
    "poz": "MES-PF",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 1271.5,
    "As_min": 0.0,
@@ -97,7 +1337,8 @@
    "miejsce": "dozbrojenie D3 dół y",
    "poz": "MES-PF",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 2556.0,
    "As_min": 0.0,
@@ -112,10 +1353,30 @@
   },
   {
    "element": "PF1+PF2",
+   "miejsce": "dozbrojenie D3 góra x",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-04",
+    "PT-BO-05"
+   ],
+   "As_req": 2429.3,
+   "As_min": 0.0,
+   "As_prov": 2722.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø14 co 7.5 + Ø8 co 7.5",
+   "s": 75.0,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.121
+  },
+  {
+   "element": "PF1+PF2",
    "miejsce": "dozbrojenie D4 dół x",
    "poz": "MES-PF",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 1086.0,
    "As_min": 0.0,
@@ -133,7 +1394,8 @@
    "miejsce": "dozbrojenie D4 dół y",
    "poz": "MES-PF",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 1456.3,
    "As_min": 0.0,
@@ -151,7 +1413,8 @@
    "miejsce": "siatka dolna x (MES, poza dozbrojeniami)",
    "poz": "MES-PF",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 1018.7,
    "As_min": 246.1,
@@ -169,7 +1432,8 @@
    "miejsce": "siatka dolna y (MES, poza dozbrojeniami)",
    "poz": "MES-PF",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 1019.7,
    "As_min": 246.1,
@@ -184,10 +1448,49 @@
   },
   {
    "element": "PF1+PF2",
+   "miejsce": "siatka górna x (MES, poza dozbrojeniami)",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-04",
+    "PT-BO-05"
+   ],
+   "As_req": 2049.2,
+   "As_min": 246.1,
+   "As_prov": 2052.5,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø14 co 7.5",
+   "s": 75.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.002
+  },
+  {
+   "element": "PF1+PF2",
+   "miejsce": "siatka górna y (MES, poza dozbrojeniami)",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-04",
+    "PT-BO-05"
+   ],
+   "As_req": 2051.9,
+   "As_min": 246.1,
+   "As_prov": 2052.5,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø14 co 7.5",
+   "s": 75.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.0
+  },
+  {
+   "element": "PF1+PF2",
    "miejsce": "strefa S1 (płyta) — podwójnie zbrojona, najniekorz. el. (dół y)",
    "poz": "MES-PF",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 5243.0,
    "As_min": 0.0,
@@ -201,11 +1504,316 @@
    "zapas": -0.18
   },
   {
+   "element": "PL-2",
+   "miejsce": "pole P1 — dół x",
+   "poz": "3.2",
+   "arkusze": [
+    "PT-BO-12",
+    "PT-BO-14"
+   ],
+   "As_req": 608.9,
+   "As_min": 392.1,
+   "As_prov": 628.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 8",
+   "s": 80.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "Zbrojenie na zginanie (η = 140%); Rysy: średnica prętów (tabl. 7.2N) (η = 336%)",
+   "zapas": 0.032
+  },
+  {
+   "element": "PL-2",
+   "miejsce": "pole P1 — dół y",
+   "poz": "3.2",
+   "arkusze": [
+    "PT-BO-12",
+    "PT-BO-14"
+   ],
+   "As_req": 1621.3,
+   "As_min": 377.0,
+   "As_prov": 1675.5,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø16 co 12",
+   "s": 120.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "Zbrojenie na zginanie (η = 140%); Rysy: średnica prętów (tabl. 7.2N) (η = 336%)",
+   "zapas": 0.033
+  },
+  {
+   "element": "PL-2",
+   "miejsce": "wspornik — góra x",
+   "poz": "3.2",
+   "arkusze": [
+    "PT-BO-13",
+    "PT-BO-14"
+   ],
+   "As_req": 2245.7,
+   "As_min": 392.1,
+   "As_prov": 2513.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø16 co 8",
+   "s": 80.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "Zbrojenie na zginanie (η = 140%); Rysy: średnica prętów (tabl. 7.2N) (η = 336%)",
+   "zapas": 0.119
+  },
+  {
+   "element": "PL-2",
+   "miejsce": "wspornik — góra y",
+   "poz": "3.2",
+   "arkusze": [
+    "PT-BO-13",
+    "PT-BO-14"
+   ],
+   "As_req": 3756.0,
+   "As_min": 377.0,
+   "As_prov": 3776.0,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø25 co 13",
+   "s": 130.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "Zbrojenie na zginanie (η = 140%); Rysy: średnica prętów (tabl. 7.2N) (η = 336%)",
+   "zapas": 0.005
+  },
+  {
+   "element": "PL-3",
+   "miejsce": "pole P1 — dół x",
+   "poz": "3.1",
+   "arkusze": [
+    "PT-BO-15",
+    "PT-BO-17"
+   ],
+   "As_req": 42.8,
+   "As_min": 414.7,
+   "As_prov": 418.9,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 12",
+   "s": 120.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.01
+  },
+  {
+   "element": "PL-3",
+   "miejsce": "pole P1 — dół y",
+   "poz": "3.1",
+   "arkusze": [
+    "PT-BO-15",
+    "PT-BO-17"
+   ],
+   "As_req": 43.3,
+   "As_min": 399.6,
+   "As_prov": 413.4,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.034
+  },
+  {
+   "element": "PL-3",
+   "miejsce": "wspornik — góra x",
+   "poz": "3.1",
+   "arkusze": [
+    "PT-BO-16",
+    "PT-BO-17"
+   ],
+   "As_req": 177.9,
+   "As_min": 414.7,
+   "As_prov": 418.9,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 12",
+   "s": 120.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.01
+  },
+  {
+   "element": "PL-3",
+   "miejsce": "wspornik — góra y",
+   "poz": "3.1",
+   "arkusze": [
+    "PT-BO-16",
+    "PT-BO-17"
+   ],
+   "As_req": 163.1,
+   "As_min": 399.6,
+   "As_prov": 413.4,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.034
+  },
+  {
+   "element": "PL-DA",
+   "miejsce": "pole P9 — dół x",
+   "poz": "3.4",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 68.1,
+   "As_min": 309.1,
+   "As_prov": 314.2,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 16",
+   "s": 160.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.016
+  },
+  {
+   "element": "PL-DA",
+   "miejsce": "pole P9 — dół y",
+   "poz": "3.4",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 14.9,
+   "As_min": 294.1,
+   "As_prov": 295.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 17",
+   "s": 170.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.006
+  },
+  {
+   "element": "PL-DA",
+   "miejsce": "wspornik — góra x",
+   "poz": "3.4",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 57.9,
+   "As_min": 309.1,
+   "As_prov": 314.2,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 16",
+   "s": 160.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.016
+  },
+  {
+   "element": "PL-DA",
+   "miejsce": "wspornik — góra y",
+   "poz": "3.4",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 139.2,
+   "As_min": 294.1,
+   "As_prov": 295.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 17",
+   "s": 170.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.006
+  },
+  {
+   "element": "PL-E",
+   "miejsce": "pole P1 — dół x",
+   "poz": "3.3",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 88.0,
+   "As_min": 392.1,
+   "As_prov": 392.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.002
+  },
+  {
+   "element": "PL-E",
+   "miejsce": "pole P1 — dół y",
+   "poz": "3.3",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 93.5,
+   "As_min": 377.0,
+   "As_prov": 386.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 13",
+   "s": 130.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.026
+  },
+  {
+   "element": "PL-E",
+   "miejsce": "wspornik — góra x",
+   "poz": "3.3",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 252.0,
+   "As_min": 392.1,
+   "As_prov": 392.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.002
+  },
+  {
+   "element": "PL-E",
+   "miejsce": "wspornik — góra y",
+   "poz": "3.3",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 158.6,
+   "As_min": 377.0,
+   "As_prov": 386.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 13",
+   "s": 130.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.026
+  },
+  {
    "element": "SF1",
    "miejsce": "pogrubienie — siatka dolna (MES)",
    "poz": "10.20",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 1533.7,
    "As_min": 538.1,
@@ -223,7 +1831,8 @@
    "miejsce": "pogrubienie — siatka dolna (MES)",
    "poz": "10.21",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 1931.2,
    "As_min": 538.1,
@@ -241,7 +1850,8 @@
    "miejsce": "pogrubienie — siatka dolna (MES)",
    "poz": "10.22",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 898.8,
    "As_min": 538.1,
@@ -259,7 +1869,8 @@
    "miejsce": "pogrubienie — siatka dolna (MES)",
    "poz": "10.23",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 788.8,
    "As_min": 538.1,
@@ -273,11 +1884,1190 @@
    "zapas": 0.001
   },
   {
+   "element": "ST1",
+   "miejsce": "nad podporą B8 — góra y",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 972.7,
+   "As_min": 243.4,
+   "As_prov": 981.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 8",
+   "s": 80.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.009
+  },
+  {
+   "element": "ST1",
+   "miejsce": "nad podporą S0-06 — góra y",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 218.3,
+   "As_min": 243.4,
+   "As_prov": 251.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "ST1",
+   "miejsce": "nad podporą S0-08 — góra y",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 972.7,
+   "As_min": 243.4,
+   "As_prov": 981.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 8",
+   "s": 80.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.009
+  },
+  {
+   "element": "ST1",
+   "miejsce": "nad podporą S0-09 — góra y",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 972.7,
+   "As_min": 243.4,
+   "As_prov": 981.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 8",
+   "s": 80.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.009
+  },
+  {
+   "element": "ST1",
+   "miejsce": "nad podporą S0-10 — góra y",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 972.7,
+   "As_min": 243.4,
+   "As_prov": 981.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 8",
+   "s": 80.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.009
+  },
+  {
+   "element": "ST1",
+   "miejsce": "nad podporą S0-11 — góra x",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 146.0,
+   "As_min": 256.9,
+   "As_prov": 264.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.03
+  },
+  {
+   "element": "ST1",
+   "miejsce": "nad podporą S0-12 — góra x",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 161.6,
+   "As_min": 256.9,
+   "As_prov": 264.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.03
+  },
+  {
+   "element": "ST1",
+   "miejsce": "nad podporą S0-13 — góra x",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 186.0,
+   "As_min": 256.9,
+   "As_prov": 264.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.03
+  },
+  {
+   "element": "ST1",
+   "miejsce": "nad podporą S0-15 — góra x",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 406.1,
+   "As_min": 256.9,
+   "As_prov": 418.9,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 12",
+   "s": 120.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.032
+  },
+  {
+   "element": "ST1",
+   "miejsce": "nad podporą S0-16 — góra x",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 361.7,
+   "As_min": 283.9,
+   "As_prov": 374.0,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 21",
+   "s": 210.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.034
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P2 — dół x",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 130.7,
+   "As_min": 256.9,
+   "As_prov": 264.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.03
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P2 — dół y",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 301.8,
+   "As_min": 243.4,
+   "As_prov": 314.2,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 16",
+   "s": 160.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.041
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P5 — dół x",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 73.2,
+   "As_min": 256.9,
+   "As_prov": 264.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.03
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P5 — dół y",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 77.1,
+   "As_min": 243.4,
+   "As_prov": 251.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P5 — naroże (dół x)",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 567.3,
+   "As_min": 243.4,
+   "As_prov": 595.2,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø12 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.049
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P5 — naroże (dół y)",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 567.3,
+   "As_min": 243.4,
+   "As_prov": 595.2,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø12 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.049
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P5 — naroże (góra x)",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 567.3,
+   "As_min": 243.4,
+   "As_prov": 595.2,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø12 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.049
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P5 — naroże (góra y)",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 567.3,
+   "As_min": 243.4,
+   "As_prov": 595.2,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø12 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.049
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P6 — dół x",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 148.8,
+   "As_min": 256.9,
+   "As_prov": 264.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.03
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P6 — dół y",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 41.2,
+   "As_min": 243.4,
+   "As_prov": 251.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P6 — naroże (dół x)",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 831.1,
+   "As_min": 243.4,
+   "As_prov": 837.8,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø16 co 24",
+   "s": 240.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.008
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P6 — naroże (dół y)",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 831.1,
+   "As_min": 243.4,
+   "As_prov": 837.8,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø16 co 24",
+   "s": 240.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.008
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P6 — naroże (góra x)",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 831.1,
+   "As_min": 243.4,
+   "As_prov": 837.8,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø16 co 24",
+   "s": 240.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.008
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P6 — naroże (góra y)",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 831.1,
+   "As_min": 243.4,
+   "As_prov": 837.8,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø16 co 24",
+   "s": 240.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.008
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P7 — dół x",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 120.2,
+   "As_min": 256.9,
+   "As_prov": 264.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.03
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P7 — dół y",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 105.5,
+   "As_min": 243.4,
+   "As_prov": 251.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P7 — naroże (dół x)",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 1073.4,
+   "As_min": 243.4,
+   "As_prov": 1099.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø14 co 14",
+   "s": 140.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.024
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P7 — naroże (dół y)",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 1073.4,
+   "As_min": 243.4,
+   "As_prov": 1099.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø14 co 14",
+   "s": 140.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.024
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P7 — naroże (góra x)",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 1073.4,
+   "As_min": 243.4,
+   "As_prov": 1099.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø14 co 14",
+   "s": 140.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.024
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P7 — naroże (góra y)",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-10",
+    "PT-BO-11"
+   ],
+   "As_req": 1073.4,
+   "As_min": 243.4,
+   "As_prov": 1099.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø14 co 14",
+   "s": 140.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.024
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P8 — dół x",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 73.2,
+   "As_min": 256.9,
+   "As_prov": 264.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.03
+  },
+  {
+   "element": "ST1",
+   "miejsce": "pole P8 — dół y",
+   "poz": "2.3",
+   "arkusze": [
+    "PT-BO-09",
+    "PT-BO-11"
+   ],
+   "As_req": 62.3,
+   "As_min": 243.4,
+   "As_prov": 251.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "ST2",
+   "miejsce": "nad podporą B5 — góra y",
+   "poz": "2.1",
+   "arkusze": [
+    "PT-BO-13",
+    "PT-BO-14"
+   ],
+   "As_req": 1192.0,
+   "As_min": 243.4,
+   "As_prov": 1256.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø16 co 16",
+   "s": 160.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.054
+  },
+  {
+   "element": "ST2",
+   "miejsce": "nad podporą B9 — góra y",
+   "poz": "2.1",
+   "arkusze": [
+    "PT-BO-13",
+    "PT-BO-14"
+   ],
+   "As_req": 1192.0,
+   "As_min": 243.4,
+   "As_prov": 1256.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø16 co 16",
+   "s": 160.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.054
+  },
+  {
+   "element": "ST2",
+   "miejsce": "nad podporą S1-03 — góra y",
+   "poz": "2.1",
+   "arkusze": [
+    "PT-BO-13",
+    "PT-BO-14"
+   ],
+   "As_req": 241.4,
+   "As_min": 243.4,
+   "As_prov": 264.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.087
+  },
+  {
+   "element": "ST2",
+   "miejsce": "nad podporą S1-05 — góra y",
+   "poz": "2.1",
+   "arkusze": [
+    "PT-BO-13",
+    "PT-BO-14"
+   ],
+   "As_req": 1192.0,
+   "As_min": 243.4,
+   "As_prov": 1256.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø16 co 16",
+   "s": 160.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.054
+  },
+  {
+   "element": "ST2",
+   "miejsce": "nad podporą S1-06 — góra y",
+   "poz": "2.1",
+   "arkusze": [
+    "PT-BO-13",
+    "PT-BO-14"
+   ],
+   "As_req": 1192.0,
+   "As_min": 243.4,
+   "As_prov": 1256.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø16 co 16",
+   "s": 160.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.054
+  },
+  {
+   "element": "ST2",
+   "miejsce": "nad podporą S1-08 — góra x",
+   "poz": "2.1",
+   "arkusze": [
+    "PT-BO-13",
+    "PT-BO-14"
+   ],
+   "As_req": 190.2,
+   "As_min": 256.9,
+   "As_prov": 264.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.03
+  },
+  {
+   "element": "ST2",
+   "miejsce": "nad podporą S1-09 — góra x",
+   "poz": "2.1",
+   "arkusze": [
+    "PT-BO-13",
+    "PT-BO-14"
+   ],
+   "As_req": 210.4,
+   "As_min": 256.9,
+   "As_prov": 264.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.03
+  },
+  {
+   "element": "ST2",
+   "miejsce": "pole P3 — dół x",
+   "poz": "2.1",
+   "arkusze": [
+    "PT-BO-12",
+    "PT-BO-14"
+   ],
+   "As_req": 206.4,
+   "As_min": 256.9,
+   "As_prov": 264.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.03
+  },
+  {
+   "element": "ST2",
+   "miejsce": "pole P3 — dół y",
+   "poz": "2.1",
+   "arkusze": [
+    "PT-BO-12",
+    "PT-BO-14"
+   ],
+   "As_req": 419.6,
+   "As_min": 243.4,
+   "As_prov": 436.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 18",
+   "s": 180.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.04
+  },
+  {
+   "element": "ST2",
+   "miejsce": "pole P6 — dół x",
+   "poz": "2.1",
+   "arkusze": [
+    "PT-BO-12",
+    "PT-BO-14"
+   ],
+   "As_req": 170.3,
+   "As_min": 256.9,
+   "As_prov": 264.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.03
+  },
+  {
+   "element": "ST2",
+   "miejsce": "pole P6 — dół y",
+   "poz": "2.1",
+   "arkusze": [
+    "PT-BO-12",
+    "PT-BO-14"
+   ],
+   "As_req": 53.9,
+   "As_min": 243.4,
+   "As_prov": 251.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "ST2",
+   "miejsce": "pole P6 — naroże (dół x)",
+   "poz": "2.1",
+   "arkusze": [
+    "PT-BO-12",
+    "PT-BO-14"
+   ],
+   "As_req": 998.3,
+   "As_min": 243.4,
+   "As_prov": 1005.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø16 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.007
+  },
+  {
+   "element": "ST2",
+   "miejsce": "pole P6 — naroże (dół y)",
+   "poz": "2.1",
+   "arkusze": [
+    "PT-BO-12",
+    "PT-BO-14"
+   ],
+   "As_req": 998.3,
+   "As_min": 243.4,
+   "As_prov": 1005.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø16 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.007
+  },
+  {
+   "element": "ST2",
+   "miejsce": "pole P6 — naroże (góra x)",
+   "poz": "2.1",
+   "arkusze": [
+    "PT-BO-13",
+    "PT-BO-14"
+   ],
+   "As_req": 998.3,
+   "As_min": 243.4,
+   "As_prov": 1005.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø16 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.007
+  },
+  {
+   "element": "ST2",
+   "miejsce": "pole P6 — naroże (góra y)",
+   "poz": "2.1",
+   "arkusze": [
+    "PT-BO-13",
+    "PT-BO-14"
+   ],
+   "As_req": 998.3,
+   "As_min": 243.4,
+   "As_prov": 1005.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø16 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.007
+  },
+  {
+   "element": "ST2",
+   "miejsce": "pole P7 — dół x",
+   "poz": "2.1",
+   "arkusze": [
+    "PT-BO-12",
+    "PT-BO-14"
+   ],
+   "As_req": 138.5,
+   "As_min": 256.9,
+   "As_prov": 264.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.03
+  },
+  {
+   "element": "ST2",
+   "miejsce": "pole P7 — dół y",
+   "poz": "2.1",
+   "arkusze": [
+    "PT-BO-12",
+    "PT-BO-14"
+   ],
+   "As_req": 133.6,
+   "As_min": 243.4,
+   "As_prov": 251.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.033
+  },
+  {
+   "element": "ST2",
+   "miejsce": "pole P7 — naroże (dół x)",
+   "poz": "2.1",
+   "arkusze": [
+    "PT-BO-12",
+    "PT-BO-14"
+   ],
+   "As_req": 1281.7,
+   "As_min": 243.4,
+   "As_prov": 1282.8,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø14 co 12",
+   "s": 120.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.001
+  },
+  {
+   "element": "ST2",
+   "miejsce": "pole P7 — naroże (dół y)",
+   "poz": "2.1",
+   "arkusze": [
+    "PT-BO-12",
+    "PT-BO-14"
+   ],
+   "As_req": 1281.7,
+   "As_min": 243.4,
+   "As_prov": 1282.8,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø14 co 12",
+   "s": 120.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.001
+  },
+  {
+   "element": "ST2",
+   "miejsce": "pole P7 — naroże (góra x)",
+   "poz": "2.1",
+   "arkusze": [
+    "PT-BO-13",
+    "PT-BO-14"
+   ],
+   "As_req": 1281.7,
+   "As_min": 243.4,
+   "As_prov": 1282.8,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø14 co 12",
+   "s": 120.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.001
+  },
+  {
+   "element": "ST2",
+   "miejsce": "pole P7 — naroże (góra y)",
+   "poz": "2.1",
+   "arkusze": [
+    "PT-BO-13",
+    "PT-BO-14"
+   ],
+   "As_req": 1281.7,
+   "As_min": 243.4,
+   "As_prov": 1282.8,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø14 co 12",
+   "s": 120.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.001
+  },
+  {
+   "element": "ST2Z",
+   "miejsce": "nad podporą B5 — góra y",
+   "poz": "2.2",
+   "arkusze": [
+    "PT-BO-13",
+    "PT-BO-14"
+   ],
+   "As_req": 263.8,
+   "As_min": 243.4,
+   "As_prov": 264.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø8 co 19",
+   "s": 190.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.003
+  },
+  {
+   "element": "ST2Z",
+   "miejsce": "nad podporą N17 — góra x",
+   "poz": "2.2",
+   "arkusze": [
+    "PT-BO-13",
+    "PT-BO-14"
+   ],
+   "As_req": 458.5,
+   "As_min": 256.9,
+   "As_prov": 462.0,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 17",
+   "s": 170.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.008
+  },
+  {
+   "element": "ST2Z",
+   "miejsce": "nad podporą S1-04 — góra x",
+   "poz": "2.2",
+   "arkusze": [
+    "PT-BO-13",
+    "PT-BO-14"
+   ],
+   "As_req": 458.5,
+   "As_min": 256.9,
+   "As_prov": 462.0,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 17",
+   "s": 170.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.008
+  },
+  {
+   "element": "ST2Z",
+   "miejsce": "pole P2 — dół x",
+   "poz": "2.2",
+   "arkusze": [
+    "PT-BO-12",
+    "PT-BO-14"
+   ],
+   "As_req": 470.0,
+   "As_min": 256.9,
+   "As_prov": 490.9,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 16",
+   "s": 160.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.044
+  },
+  {
+   "element": "ST2Z",
+   "miejsce": "pole P2 — dół y",
+   "poz": "2.2",
+   "arkusze": [
+    "PT-BO-12",
+    "PT-BO-14"
+   ],
+   "As_req": 1121.5,
+   "As_min": 243.4,
+   "As_prov": 1131.0,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø12 co 10",
+   "s": 100.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.008
+  },
+  {
+   "element": "ST2Z",
+   "miejsce": "pole P2 — naroże (dół x)",
+   "poz": "2.2",
+   "arkusze": [
+    "PT-BO-12",
+    "PT-BO-14"
+   ],
+   "As_req": 1176.7,
+   "As_min": 243.4,
+   "As_prov": 1182.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø16 co 17",
+   "s": 170.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.005
+  },
+  {
+   "element": "ST2Z",
+   "miejsce": "pole P2 — naroże (dół y)",
+   "poz": "2.2",
+   "arkusze": [
+    "PT-BO-12",
+    "PT-BO-14"
+   ],
+   "As_req": 1176.7,
+   "As_min": 243.4,
+   "As_prov": 1182.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø16 co 17",
+   "s": 170.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.005
+  },
+  {
+   "element": "ST2Z",
+   "miejsce": "pole P2 — naroże (góra x)",
+   "poz": "2.2",
+   "arkusze": [
+    "PT-BO-13",
+    "PT-BO-14"
+   ],
+   "As_req": 1176.7,
+   "As_min": 243.4,
+   "As_prov": 1182.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø16 co 17",
+   "s": 170.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.005
+  },
+  {
+   "element": "ST2Z",
+   "miejsce": "pole P2 — naroże (góra y)",
+   "poz": "2.2",
+   "arkusze": [
+    "PT-BO-13",
+    "PT-BO-14"
+   ],
+   "As_req": 1176.7,
+   "As_min": 243.4,
+   "As_prov": 1182.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø16 co 17",
+   "s": 170.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.005
+  },
+  {
    "element": "ZF1",
    "miejsce": "żebro — dołem (MES: A_s,req·b)",
    "poz": "10.3",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 1249.2,
    "As_min": 0.0,
@@ -295,7 +3085,8 @@
    "miejsce": "żebro — górą (MES: A_s,req·b)",
    "poz": "10.3",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 5919.5,
    "As_min": 0.0,
@@ -313,7 +3104,8 @@
    "miejsce": "żebro — dołem (MES: A_s,req·b)",
    "poz": "10.12",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 800.3,
    "As_min": 0.0,
@@ -331,7 +3123,8 @@
    "miejsce": "żebro — górą (MES: A_s,req·b)",
    "poz": "10.12",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 116.1,
    "As_min": 0.0,
@@ -349,7 +3142,8 @@
    "miejsce": "żebro — dołem (MES: A_s,req·b)",
    "poz": "10.13",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 902.4,
    "As_min": 0.0,
@@ -367,7 +3161,8 @@
    "miejsce": "żebro — górą (MES: A_s,req·b)",
    "poz": "10.13",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 198.2,
    "As_min": 0.0,
@@ -385,7 +3180,8 @@
    "miejsce": "żebro — dołem (MES: A_s,req·b)",
    "poz": "10.14",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 2617.5,
    "As_min": 0.0,
@@ -403,7 +3199,8 @@
    "miejsce": "żebro — górą (MES: A_s,req·b)",
    "poz": "10.14",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 414.7,
    "As_min": 0.0,
@@ -421,7 +3218,8 @@
    "miejsce": "żebro — dołem (MES: A_s,req·b)",
    "poz": "10.15",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 2375.8,
    "As_min": 0.0,
@@ -439,7 +3237,8 @@
    "miejsce": "żebro — górą (MES: A_s,req·b)",
    "poz": "10.15",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 412.5,
    "As_min": 0.0,
@@ -457,7 +3256,8 @@
    "miejsce": "żebro — dołem (MES: A_s,req·b)",
    "poz": "10.16",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 2189.4,
    "As_min": 0.0,
@@ -475,7 +3275,8 @@
    "miejsce": "żebro — górą (MES: A_s,req·b)",
    "poz": "10.16",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 385.4,
    "As_min": 0.0,
@@ -493,7 +3294,8 @@
    "miejsce": "żebro — dołem (MES: A_s,req·b)",
    "poz": "10.17",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 179.9,
    "As_min": 0.0,
@@ -511,7 +3313,8 @@
    "miejsce": "żebro — górą (MES: A_s,req·b)",
    "poz": "10.17",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 822.4,
    "As_min": 0.0,
@@ -529,7 +3332,8 @@
    "miejsce": "żebro — dołem (MES: A_s,req·b)",
    "poz": "10.18",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 1012.2,
    "As_min": 0.0,
@@ -547,7 +3351,8 @@
    "miejsce": "żebro — górą (MES: A_s,req·b)",
    "poz": "10.18",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 822.6,
    "As_min": 0.0,
@@ -565,7 +3370,8 @@
    "miejsce": "żebro — dołem (MES: A_s,req·b)",
    "poz": "10.19",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 693.5,
    "As_min": 0.0,
@@ -583,7 +3389,8 @@
    "miejsce": "żebro — górą (MES: A_s,req·b)",
    "poz": "10.19",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 628.2,
    "As_min": 0.0,
@@ -601,7 +3408,8 @@
    "miejsce": "żebro — dołem (MES: A_s,req·b)",
    "poz": "10.4",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 503.0,
    "As_min": 0.0,
@@ -619,7 +3427,8 @@
    "miejsce": "żebro — górą (MES: A_s,req·b)",
    "poz": "10.4",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 345.1,
    "As_min": 0.0,
@@ -637,7 +3446,8 @@
    "miejsce": "żebro — dołem (MES: A_s,req·b)",
    "poz": "10.7",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 134.6,
    "As_min": 0.0,
@@ -655,7 +3465,8 @@
    "miejsce": "żebro — górą (MES: A_s,req·b)",
    "poz": "10.7",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 996.2,
    "As_min": 0.0,
@@ -673,7 +3484,8 @@
    "miejsce": "żebro — dołem (MES: A_s,req·b)",
    "poz": "10.8",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 0.0,
    "As_min": 0.0,
@@ -691,7 +3503,8 @@
    "miejsce": "żebro — górą (MES: A_s,req·b)",
    "poz": "10.8",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 452.0,
    "As_min": 0.0,
@@ -709,7 +3522,8 @@
    "miejsce": "żebro — dołem (MES: A_s,req·b)",
    "poz": "10.9",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 1736.2,
    "As_min": 0.0,
@@ -727,7 +3541,8 @@
    "miejsce": "żebro — górą (MES: A_s,req·b)",
    "poz": "10.9",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 1911.7,
    "As_min": 0.0,
@@ -745,7 +3560,8 @@
    "miejsce": "żebro — dołem (MES: A_s,req·b)",
    "poz": "10.10",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 1539.7,
    "As_min": 0.0,
@@ -763,7 +3579,8 @@
    "miejsce": "żebro — górą (MES: A_s,req·b)",
    "poz": "10.10",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 4192.1,
    "As_min": 0.0,
@@ -781,7 +3598,8 @@
    "miejsce": "żebro — dołem (MES: A_s,req·b)",
    "poz": "10.11",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 1416.8,
    "As_min": 0.0,
@@ -799,7 +3617,8 @@
    "miejsce": "żebro — górą (MES: A_s,req·b)",
    "poz": "10.11",
    "arkusze": [
-    "PT-BO-03"
+    "PT-BO-03",
+    "PT-BO-05"
    ],
    "As_req": 2454.0,
    "As_min": 0.0,

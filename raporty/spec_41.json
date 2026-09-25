@@ -1,4 +1,5 @@
 {
+ "nr": 41,
  "title": "Pierwszy tom PT złożony: PT-1 AR (46 stron: opis, U/ψ/f_Rsi, kondensacja, stolarka, „4 linie”, odwodnienie, ppoż., rysunki)",
  "stages": [
   [
@@ -58,6 +59,13 @@
   "PT_1_AR_2026.09.25.pdf (nazwa wg zał. 1 RPB): strona tytułowa wg RPB § 7 (pola osobowe [DO UZUPEŁNIENIA], dane działki oznaczone jako fikcyjne, baner „PRZYKŁAD – NIE DO ZŁOŻENIA”), oświadczenie art. 34 ust. 3d pkt 3 PB, 11 rozdziałów + część rysunkowa.",
   "Wydanie przygotowane jako „jedno polecenie”: po wpisaniu rzeczywistych danych (Inwestor, projektanci z uprawnieniami, mapa, badania gruntu) generator usunie baner — odmówi, dopóki zostanie choć jedno pole fikcyjne lub puste.",
   "W toku: Tom I (PZT, PAB), PT-2 BO, PT-3 IS, PT-4 IE; runda 2 (fizyka/woda); silnik arkuszy; konstrukcja (kontrola 273/276); www.",
-  "Przygotowany przepływ wydania (7 etapów: zamrożenie modelu → obliczenia → rysunki → tomy/3D/www → 4 weryfikacje → pętla poprawek → raport)."
+  "Przygotowany przepływ wydania (7 etapów: zamrożenie modelu → obliczenia → rysunki → tomy/3D/www → 4 weryfikacje → pętla poprawek → raport).",
+  "NADZÓR (08:47): 8 agentów aktywnych, bez zastojów; najdłuższa bezczynność 5 min; zmiany w repo 0 min temu."
+ ],
+ "images": [
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/ptar_p0.png",
+   "caption": "PT-1 AR — strona tytułowa tomu (RPB § 7): pola osobowe do uzupełnienia, dane fikcyjne oznaczone"
+  }
  ]
 }

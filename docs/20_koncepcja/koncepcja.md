@@ -818,3 +818,6 @@ Raporty: `projekt/08_obliczenia/fizyka_energia_runda2/`, `projekt/08_obliczenia/
 * Mostki: WZ-06 (0,205) i WZ-16a (0,194) nadal powyżej dobrej praktyki; kolejny krok — attyka lekka / obłożenie belek B3–B5 wełną
   (REKOMENDACJE A) — do decyzji w PT-AR-D. Cel W-245 dla ścian (0,15) — świadomie nieosiągnięty (§14.2 B).
 * Audyt A1 — 4 UWAGI bez zmian (strefy pod schodami, wyrzutnia ↔ SW1 stały, PC-JZ od elewacji S).
+* `docs/SCHEMAT_MODELU.md` — dopisać nowe pola (rdzeń je ignoruje — INFO walidacji): `wpusty/przelewy_awaryjne[].rzedna_pokrycia`,
+  `dachy[].rzedna_pokrycia`, `attyka.blok_termoizolacyjny`, `wsporniki_plyty[].odwodnienie/lacznik/spadek`, `wezly[].psi/f_rsi/podwezly/
+  blok_u_podstawy`, `energia.pv.pola/z_max`, `instalacje.piony[].rodzaj/kond`, `instalacje.grzejniki` (właściciel schematu).

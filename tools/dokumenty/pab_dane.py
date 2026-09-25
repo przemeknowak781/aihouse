@@ -169,8 +169,8 @@ class DanePAB:
     # ------------------------------------------------------------------ kontrole spójności → „otwarte”
     def _kontrole(self):
         for x in self.audyt.wyniki:
-            if x.status == "NIEZGODNE":
-                self.otwarte.append(f"Audyt A1 — NIEZGODNE: {x.sekcja} / {x.element} / {x.parametr}: {x.wartosc} "
+            if x.status in ("NIEZGODNE", "UWAGA"):
+                self.otwarte.append(f"Audyt A1 — {x.status}: {x.sekcja} / {x.element} / {x.parametr}: {x.wartosc} "
                                     f"(wymóg {x.wymog}; {x.podstawa}).")
         pc = (self.obc.dobor or {}).get("pc") or {}
         if "PRZYK" in str(pc.get("status", "")).upper():

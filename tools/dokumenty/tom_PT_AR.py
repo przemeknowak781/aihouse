@@ -170,7 +170,7 @@ def mapa_detali() -> OrderedDict:
 
 def detale_wezla(detale: dict, wid: str) -> str:
     """Odsyłacz do detali dla węzła (np. WZ-09a → „D-11 (PT-AR-D-05)”); dopasowanie także po węźle nadrzędnym."""
-    baza = re.sub(r"[a-zNPT]$", "", wid) if re.match(r"WZ-\d+[a-zNPT]$", wid) else wid
+    baza = re.sub(r"[a-z]$", "", wid) if re.match(r"WZ-\d+[a-z]$", wid) else wid
     tr = [f"{d} ({v['arkusz']})" for d, v in detale.items() if wid in v["wezly"] or baza in v["wezly"]]
     return ", ".join(tr) if tr else "—"
 
@@ -427,12 +427,12 @@ def rozdz_mostki(o: Opis, D: dict):
         f_ocena = w.f_rsi if w.f_rsi is not None else fk
         rows.append({"Węzeł": w.id, "Opis": w.nazwa[:70] + ("…" if len(w.nazwa) > 70 else ""),
                      "ψ_oi karta [W/(m·K)]": psi_k, "ψ projekt [W/(m·K)]": w.psi, "l [m]": w.dlugosc,
-                     "ψ·l [W/K]": w.H, "f_Rsi (karta)": fk, "f_Rsi (proj.)": w.f_rsi,
-                     "≥ f_Rsi,wym": "—" if f_ocena is None else ("tak" if f_ocena >= f_wym - 1e-9 else "NIE"),
+                     "ψ·l [W/K]": w.H, "f_Rsi [karta]": fk, "f_Rsi [projekt]": w.f_rsi,
+                     "Ocena f_Rsi": "—" if f_ocena is None else ("tak" if f_ocena >= f_wym - 1e-9 else "NIE"),
                      "Detal": detale_wezla(D["detale"], w.id)})
     o.tabela(rows, tytul="Mostki cieplne liniowe — ψ, długości, f_Rsi",
-             formaty={"ψ projekt [W/(m·K)]": 3, "l [m]": 2, "ψ·l [W/K]": 2, "f_Rsi (karta)": 3, "f_Rsi (proj.)": 3},
-             klasa="zwarta", wyrownanie={"Opis": "l", "Detal": "l", "ψ_oi karta [W/(m·K)]": "l", "≥ f_Rsi,wym": "c"},
+             formaty={"ψ projekt [W/(m·K)]": 3, "l [m]": 2, "ψ·l [W/K]": 2, "f_Rsi [karta]": 3, "f_Rsi [projekt]": 3},
+             klasa="zwarta", wyrownanie={"Opis": "l", "Detal": "l", "ψ_oi karta [W/(m·K)]": "l", "Ocena f_Rsi": "c"},
              szerokosci=["14mm", None, "19mm", "14mm", "12mm", "11mm", "13mm", "13mm", "12mm", "21mm"],
              uwagi=[f"Rozbieżność karty i wartości projektowej > 0,005 W/(m·K): {', '.join(rozbiezne)} — wartość "
                     "projektowa pochodzi z rundy poprawek modelu; karty węzłów należy odświeżyć "
@@ -559,7 +559,7 @@ def rozdz_stolarka(o: Opis, D: dict):
                    (f"≥ {kl_min}" if ot.typ in ("okno", "fix", "drzwi_przesuwne_HS") else "—")})
     o.tabela(r1, tytul="Zestawienie stolarki zewnętrznej i drzwi garaż–dom — wymiary, otwieranie, osłony, montaż", klasa="zwarta",
              wyrownanie={"Opis wyrobu (parametry wymagane)": "l", "Otwieranie": "l"},
-             szerokosci=["11mm", "20mm", None, "16mm", "8mm", "12mm", "17mm", "14mm", "11mm"],
+             szerokosci=["11mm", "18mm", None, "15mm", "8mm", "11mm", "17mm", "13mm", "13mm"],
              zrodlo="model/budynek.yaml — otwory, stolarka (grupowanie po symbolu)")
     o.tabela(r2, tytul="Zestawienie stolarki zewnętrznej i drzwi garaż–dom — parametry cieplne, g, szczelność", klasa="zwarta",
              formaty={"U_w wym. [W/(m²·K)]": 2, "U_max [W/(m²·K)]": 1, "g_n": 2}, wyrownanie={"Ocena g": "l"},
@@ -690,7 +690,7 @@ def rozdz_odwodnienie(o: Opis, D: dict):
                                          + (" z grzałką" if w.get("podgrzewany") else "") for w in d.get("wpusty") or [])
                      or "—",
                      "Rury spustowe": "; ".join(_rura(r) for r in d.get("rury_spustowe") or []) or "—",
-                     "Attyka nad pokryciem [m]": (d.get("attyka") or {}).get("wys_nad_pokryciem")})
+                     "h attyki [m]": (d.get("attyka") or {}).get("wys_nad_pokryciem")})
         for p in d.get("przelewy_awaryjne") or []:
             prz.append({"Przelew": p.get("opis", "").split(" — ")[0], "Dach": d["id"],
                         "Wymiary [cm]": f"{round(p.get('szer', 0) * 100)} × {round(p.get('wys', 0) * 100)}",
@@ -698,8 +698,9 @@ def rozdz_odwodnienie(o: Opis, D: dict):
                         "Δh [mm]": (p["rzedna_dna"] - p["rzedna_pokrycia"]) * 1000
                         if p.get("rzedna_dna") is not None and p.get("rzedna_pokrycia") is not None else None,
                         "Opis": p.get("opis", "")})
-    o.tabela(rows, tytul="Odwodnienie dachów", klasa="zwarta", formaty={"Spadek [%]": 1, "Attyka nad pokryciem [m]": 2},
-             wyrownanie={"Wpusty": "l", "Rury spustowe": "l"}, szerokosci=["10mm", "16mm", "13mm", None, None, "17mm"],
+    o.tabela(rows, tytul="Odwodnienie dachów", klasa="zwarta", formaty={"Spadek [%]": 1, "h attyki [m]": 2},
+             wyrownanie={"Wpusty": "l", "Rury spustowe": "l"}, szerokosci=["10mm", "16mm", "13mm", None, None, "14mm"],
+             uwagi=["h attyki — wysokość korony attyki ponad pokrycie (wierzch hydroizolacji)."],
              zrodlo="model/budynek.yaml — dachy")
     if prz:
         o.tabela(prz, tytul="Przelewy awaryjne w attykach — rzędne", klasa="zwarta",

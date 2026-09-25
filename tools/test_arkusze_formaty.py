@@ -109,7 +109,7 @@ def test_arkusz_niestandardowy():
     labels = [p.string for p in sh.prims if hasattr(p, "runs") and p.pos[1] < 3.0]
     assert sorted(labels) == [str(i + 1) for i in range(len(xs))], labels
     txt = [p.string for p in sh.prims if hasattr(p, "runs")]
-    assert any("format niestandardowy" in t for t in txt)
+    assert "nst. 780×594" in txt
     assert not Sheet("A3x3").custom and Sheet("A3x3").fmt_name == "A3×3"
 
 

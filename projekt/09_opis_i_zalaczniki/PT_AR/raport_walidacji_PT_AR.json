@@ -1,7 +1,7 @@
 {
   "plik": "PT_1_AR_2026.09.25.pdf",
   "lista": "PT-1 AR — projekt techniczny, architektura (rejestr C.2)",
-  "status": "NIEKOMPLETNY",
+  "status": "PRZYKŁAD – NIE DO ZŁOŻENIA",
   "pozycje": [
     {
       "id": "F-01",
@@ -19,7 +19,7 @@
       "podstawa": "RPB § 2b ust. 3",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "0.49 MB (limit 150 MB)"
+      "szczegoly": "4.29 MB (limit 150 MB)"
     },
     {
       "id": "F-03",
@@ -28,7 +28,7 @@
       "podstawa": "RPB § 2b ust. 2",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "brak arkuszy w pliku"
+      "szczegoly": "16 arkuszy wektorowych"
     },
     {
       "id": "F-05",
@@ -107,9 +107,9 @@
       "element": "PT",
       "opis": "Skale rysunków nie mniejsze niż 1:100",
       "podstawa": "RPB § 9 ust. 3",
-      "status": "BRAK",
+      "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "brak rysunków"
+      "szczegoly": "16 rysunków w skali nie mniejszej niż 1:100"
     },
     {
       "id": "C2-AR-01",
@@ -143,18 +143,18 @@
       "element": "PT",
       "opis": "Detale cieplne i szczelności (wsporniki, attyki, okapy, osadzenie stolarki, próg, cokół)",
       "podstawa": "RPB § 24 pkt 2",
-      "status": "BRAK",
+      "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": ""
+      "szczegoly": "PT-AR-D-01 — DETALE — COKÓŁ, PRÓG HS, RURA SPUSTOWA (1:10); PT-AR-D-02 — DETALE — OKNO (CIEPŁY MONTAŻ), OKAP PL-E (1:5 / 1:10); PT-AR-D-03 — DETALE — ATTYKI, WP"
     },
     {
       "id": "C2-AR-05",
       "element": "PT",
       "opis": "Rzuty (z dachem), przekroje, elewacje uzupełniające",
       "podstawa": "RPB § 24 pkt 1",
-      "status": "BRAK",
+      "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "rysunków: 0 (wymagane ≥ 3)"
+      "szczegoly": "rysunków: 11 (wymagane ≥ 3)"
     },
     {
       "id": "C2-AR-06",
@@ -169,15 +169,15 @@
   "znaczniki": {
     "DO UZUPEŁNIENIA": 19,
     "DOKUMENT ZEWNĘTRZNY": 0,
-    "DANE PRZYKŁADOWE": 41,
+    "DANE PRZYKŁADOWE": 59,
     "ZAŁ": 15,
-    "NZW": 5,
+    "NZW": 7,
     "INT": 1,
     "PROG": 0,
     "lista": {
       "[DO UZUPEŁNIENIA: nazwa pracowni projektowej]": 1,
       "[DO UZUPEŁNIENIA: adres pracowni]": 1,
-      "[DANE PRZYKŁADOWE – FIKCYJNE]": 41,
+      "[DANE PRZYKŁADOWE – FIKCYJNE]": 59,
       "[DO UZUPEŁNIENIA: jednostka ewidencyjna — kod TERYT WWPPGG_R i nazwa]": 1,
       "[DO UZUPEŁNIENIA: kod TERYT jedn. ewid. WWPPGG_R]": 2,
       "[DO UZUPEŁNIENIA: imię i nazwisko lub nazwa inwestora]": 2,
@@ -189,29 +189,29 @@
       "[DO UZUPEŁNIENIA: data złożenia oświadczenia z art. 102a PB]": 1,
       "[DO UZUPEŁNIENIA: potwierdzenie wpisu w e-CRUB albo dołączenie kopii]": 1,
       "[ZAŁ]": 15,
-      "[NZW]": 5,
+      "[NZW]": 7,
       "[INT]": 1
     }
   },
   "elementy": {
     "PT": {
       "od": 1,
-      "do": 30,
+      "do": 46,
       "strony_opisu": 30,
-      "arkusze": 0
+      "arkusze": 16
     }
   },
-  "rozmiar_mb": 0.4910764694213867,
-  "strony": 30,
+  "rozmiar_mb": 4.28994083404541,
+  "strony": 46,
   "podsumowanie": {
-    "status": "NIEKOMPLETNY",
-    "OK": 12,
-    "BRAK": 3,
+    "status": "PRZYKŁAD – NIE DO ZŁOŻENIA",
+    "OK": 15,
+    "BRAK": 0,
     "DO UZUPEŁNIENIA": 2,
     "N/D": 1,
     "OSTRZEŻENIE": 0,
     "znaczniki_do_uzupelnienia": 19,
     "znaczniki_dokument_zewnetrzny": 0,
-    "znaczniki_dane_przykladowe": 41
+    "znaczniki_dane_przykladowe": 59
   }
 }

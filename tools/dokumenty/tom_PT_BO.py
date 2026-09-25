@@ -44,6 +44,8 @@ sys.path.insert(0, str(REPO / "src"))
 
 import yaml  # noqa: E402
 
+from lamela.dokumenty.formaty import odmiana  # noqa: E402
+
 from lamela.dokumenty import (Arkusz, Dokument, Tom, dane_obiektu, sprawdz_tom, LISTY_KONTROLNE,  # noqa: E402
                               liczba, do_uzup, DANE_PRZYKLADOWE, zamknij_przegladarke)
 
@@ -420,3 +422,72 @@ def rozdz_podstawa(o: Opis, D: dict):
                         "Stan": f"{kiedy} — {'aktualne względem modelu' if akt else NZ + ' (nieaktualne)'}"})
     o.tabela(wiersze, tytul="Dane wejściowe tomu (odczyt przy każdym złożeniu)", wyrownanie={"Plik": "l"},
              szerokosci=["40mm", None, "58mm"])
+
+
+def _zakres_wym(vals, n=2, jedn="m") -> str:
+    vals = sorted({round(float(v), 3) for v in vals if v is not None})
+    if not vals:
+        return "—"
+    return f"{L(vals[0], n)} {jedn}" if len(vals) == 1 else f"{L(vals[0], n)}–{L(vals[-1], n)} {jedn}"
+
+
+def _mat(D, kod) -> str:
+    m = (D["bud"].get("materialy") or {}).get(kod) or {}
+    return m.get("nazwa", kod or "—")
+
+
+def elementy_konstrukcji(D: dict) -> list[dict]:
+    """Zestawienie elementów nośnych z modelu (identyfikatory, wymiary, materiał) z odesłaniem do pozycji obliczeń."""
+    b, wyn = D["bud"], (D["wyniki"] or {}).get("pozycje", [])
+    poz = {p["id"]: p["nr"] for p in wyn}
+
+    def nr(ids):
+        n = sorted({poz[i] for i in ids if i in poz}, key=lambda s: [int(x) for x in s.split(".")])
+        return f"{n[0]}–{n[-1]}" if len(n) > 1 else (n[0] if n else "—")
+    fund = b.get("fundamenty", {}).get("elementy", [])
+    pf = [e for e in fund if "obrys" in e]
+    zf = [e for e in fund if e["id"].startswith("ZF")]
+    sf = [e for e in fund if e["id"].startswith("SF")]
+    przeg = b.get("przegrody", {})
+    nosne = {k for k, v in przeg.items() if v.get("typ") in ("sciana_zewn", "sciana_wewn_nosna")}
+    sc = [s for s in b.get("sciany", []) if s.get("przegroda") in nosne]
+    mat_sc = sorted({w["mat"] for k in {s["przegroda"] for s in sc} for w in przeg[k].get("warstwy", [])
+                     if w.get("konstrukcyjna") and "WELNA" not in w["mat"].upper()})
+    wsp = [w for w in b.get("wsporniki_plyty", []) if str(w.get("mat", "")).startswith("ZB")]
+    R = [
+        dict(e="Płyta fundamentowa", ids=", ".join(e["id"] for e in pf), w="h = " + _zakres_wym([e["h"] for e in pf]),
+             m=_mat(D, pf[0]["mat"]) if pf else "—", p="rozdz. 5 (MES)"),
+        dict(e="Żebra (pogrubienia) płyty pod ścianami", ids=f"{zf[0]['id']}…{zf[-1]['id']} ({len(zf)} szt.)" if zf else "—",
+             w=f"b = {_zakres_wym([e['b'] for e in zf])}, h = {_zakres_wym([e['h'] for e in zf])} (pod płytą)",
+             m=_mat(D, zf[0]["mat"]) if zf else "—", p=nr([e["id"] for e in zf])),
+        dict(e="Pogrubienia płyty pod słupami", ids=", ".join(e["id"] for e in sf) or "—",
+             w=f"{_zakres_wym([e['b'] for e in sf])} × {_zakres_wym([e['b'] for e in sf])}, h = {_zakres_wym([e['h'] for e in sf])}",
+             m=_mat(D, sf[0]["mat"]) if sf else "—", p=nr([e["id"] for e in sf])),
+        dict(e="Ściany nośne murowe i żelbetowe", ids=f"{len(sc)} ścian (P0–P2)", w="wg przegród "
+             + ", ".join(sorted({s['przegroda'] for s in sc})), m="; ".join(_mat(D, k) for k in mat_sc),
+             p=nr([s["id"] for s in sc])),
+        dict(e="Stropy międzykondygnacyjne (płyty)", ids=", ".join(s["id"] for s in b.get("stropy", [])),
+             w="h = " + _zakres_wym([s["grubosc"] for s in b.get("stropy", [])]),
+             m=_mat(D, b["stropy"][0]["mat"]) if b.get("stropy") else "—", p=nr([s["id"] for s in b.get("stropy", [])])),
+        dict(e="Stropodachy (płyty)", ids=", ".join(s["id"] for s in b.get("dachy", [])),
+             w="h = " + _zakres_wym([s["plyta"]["grubosc"] for s in b.get("dachy", []) if s.get("plyta")]),
+             m=_mat(D, "ZB_C25"), p=nr([s["id"] for s in b.get("dachy", [])])),
+        dict(e="Płyty wspornikowe (okapy, daszki) z łącznikami termoizolacyjnymi", ids=", ".join(w["id"] for w in wsp),
+             w="h = " + _zakres_wym([w["grubosc"] for w in wsp]), m=_mat(D, wsp[0]["mat"]) if wsp else "—",
+             p=nr([w["id"] for w in wsp])),
+        dict(e="Belki, podciągi i nadproża żelbetowe (model)", ids=f"{len(b.get('belki', []))} szt.",
+             w=f"b = {_zakres_wym([x['b'] for x in b.get('belki', [])])}, h = {_zakres_wym([x['h'] for x in b.get('belki', [])])}",
+             m="; ".join(sorted({_mat(D, x['mat']) for x in b.get('belki', [])})), p=nr([x["id"] for x in b.get("belki", [])])),
+        dict(e="Słupy", ids=", ".join(s["id"] for s in b.get("slupy", [])),
+             w="; ".join(sorted({str(s.get("przekroj")) for s in b.get("slupy", [])})),
+             m="; ".join(sorted({_mat(D, s['mat']) for s in b.get('slupy', [])})), p=nr([s["id"] for s in b.get("slupy", [])])),
+        dict(e="Schody (płyty biegów i spoczników)", ids=", ".join(s["id"] for s in b.get("schody", [])),
+             w="h = " + _zakres_wym([s.get("plyta", {}).get("grubosc") for s in b.get("schody", [])]),
+             m=_mat(D, b["schody"][0]["mat"]) if b.get("schody") else "—", p=nr([s["id"] for s in b.get("schody", [])])),
+    ]
+    zb = [p for p in wyn if p["rodzaj"] in ("nadproze", "wieniec")]
+    if zb:
+        R.append(dict(e="Nadproża i wieńce (pozycje obliczeń)", ids=f"{len(zb)} {odmiana(len(zb), 'pozycja', 'pozycje', 'pozycji')}", w="wg obliczeń statycznych",
+                      m=_mat(D, "ZB_C25"), p=nr([p["id"] for p in zb])))
+    return [{"Element": r["e"], "Identyfikatory (model)": r["ids"], "Wymiary": r["w"], "Materiał": r["m"],
+             "Poz. obliczeń": r["p"]} for r in R]

@@ -201,8 +201,8 @@ class Sheet(SheetBase):
             if grid_reference:
                 self._grid_reference()
         # oznaczenie formatu w dolnym marginesie przy prawym rogu (PN-EN ISO 5457 / R4-B07)
-        lab = (f"{self.fmt_name} (format niestandardowy)" if getattr(self, "custom", False)
-               else f"{self.fmt_name} ({int(round(W))}×{int(round(H))})")
+        lab = (f"nst. {self.fmt_name}" if getattr(self, "custom", False)      # format niestandardowy (krótko:
+               else f"{self.fmt_name} ({int(round(W))}×{int(round(H))})")     # nie wchodzi na numery siatki)
         self.text((x1, y0 / 2.0), lab, 1.8, 0.0, "right", "middle", layer="R-RAMKA")
 
     def _grid_reference(self):
