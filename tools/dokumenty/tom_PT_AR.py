@@ -392,3 +392,269 @@ def rozdz_U(o: Opis, D: dict):
         o.tabela(wr, tytul=f"{kod.split('|')[0]} — {ROLA_OPIS.get(rola, rola)}: obliczenie U",
                  formaty={"d [mm]": 1, "λ [W/(m·K)]": 3, "R [m²·K/W]": 3}, klasa="zwarta", uwagi=u,
                  szerokosci=["8mm", None, "15mm", "15mm", "17mm", "26mm"])
+
+
+def _karta(mostki: dict, wid: str) -> list[dict]:
+    """Wpisy kart mostków (PN-EN ISO 10211) dla węzła modelu — sam węzeł albo jego podwęzły a/b/c."""
+    k = [w for w in mostki.get("wezly", []) if w["id"] == wid]
+    return k or [w for w in mostki.get("wezly", []) if re.fullmatch(re.escape(wid) + r"[a-z]", w["id"])]
+
+
+def rozdz_mostki(o: Opis, D: dict):
+    ob, mostki, R = D["ob"], D["mostki"], D["R"]
+    fr = R["frsi"]
+    f_wym = fr.f_Rsi_wym
+    o.rozdzial("Mostki cieplne — ψ i f_Rsi (PN-EN ISO 10211, PN-EN ISO 13788)", f"""
+    Węzły liniowe obliczono numerycznie w modelu 2D (PN-EN ISO 10211:2017-09; karty węzłów:
+    `projekt/08_obliczenia/mostki/katalog_mostkow.md`). ψ_oi — w systemie wymiarów wewnętrznych całkowitych.
+    Do bilansu (H_TB) przyjęto wartości projektowe z sekcji `wezly` modelu (runda poprawek; węzły złożone —
+    średnia ważona podwęzłów). Mostki punktowe χ — wartości przykładowe {DANE_PRZYKLADOWE} do zastąpienia
+    deklaracją (ETA) wybranych łączników. Kryterium kondensacji powierzchniowej i pleśni:
+    f_Rsi ≥ f_Rsi,wym = max(f_Rsi,kryt = {L(fr.f_Rsi_kryt, 3)} — miesiąc krytyczny {fr.miesiac_kryt + 1},
+    {fr.opis_wilg}; {L(fr.f_Rsi_WT)} — WT zał. 2 pkt 2.2.1) = **{L(f_wym, 3)}**.
+    """, poziom=2, podstawa="PN-EN ISO 10211, 13788, 14683")
+    rows, rozbiezne = [], []
+    for w in ob.wezly:
+        if w.psi is None:
+            continue
+        kk = _karta(mostki, w.id)
+        psi_k = "; ".join(f"{x['id'][len(w.id):] or ''}{':' if len(kk) > 1 else ''} {L(x['psi_oi'], 3)}".strip()
+                          for x in kk) or "—"
+        fk = min((x["f_rsi"] for x in kk), default=None)
+        if len(kk) == 1 and abs(kk[0]["psi_oi"] - w.psi) > 0.005:
+            rozbiezne.append(w.id)
+        f_ocena = w.f_rsi if w.f_rsi is not None else fk
+        rows.append({"Węzeł": w.id, "Opis": w.nazwa[:70] + ("…" if len(w.nazwa) > 70 else ""),
+                     "ψ_oi karta [W/(m·K)]": psi_k, "ψ projekt [W/(m·K)]": w.psi, "l [m]": w.dlugosc,
+                     "ψ·l [W/K]": w.H, "f_Rsi karta": fk, "f_Rsi projekt": w.f_rsi,
+                     "f_Rsi ≥ wym.": "—" if f_ocena is None else ("tak" if f_ocena >= f_wym - 1e-9 else "NIE"),
+                     "Detal": detale_wezla(D["detale"], w.id)})
+    o.tabela(rows, tytul="Mostki cieplne liniowe — ψ, długości, f_Rsi",
+             formaty={"ψ projekt [W/(m·K)]": 3, "l [m]": 2, "ψ·l [W/K]": 2, "f_Rsi karta": 3, "f_Rsi projekt": 3},
+             klasa="zwarta", wyrownanie={"Opis": "l", "Detal": "l", "ψ_oi karta [W/(m·K)]": "r"},
+             szerokosci=["12mm", None, "17mm", "13mm", "11mm", "11mm", "11mm", "11mm", "10mm", "20mm"],
+             uwagi=[f"Rozbieżność karty i wartości projektowej > 0,005 W/(m·K): {', '.join(rozbiezne)} — wartość "
+                    "projektowa pochodzi z rundy poprawek modelu; karty węzłów należy odświeżyć "
+                    "(tools/mostki_budynku.py) przed wydaniem."] if rozbiezne else None,
+             zrodlo="model/budynek.yaml — wezly; projekt/08_obliczenia/mostki/zestawienie_mostkow.json")
+    pkt = [{"Węzeł": w.id, "Opis": w.nazwa, "n [szt.]": w.liczba, "χ [W/K]": w.chi, "n·χ [W/K]": w.H,
+            "Źródło χ": w.zrodlo_psi or w.status} for w in ob.wezly if w.chi is not None]
+    if pkt:
+        o.tabela(pkt, tytul="Mostki cieplne punktowe χ", formaty={"n [szt.]": 0, "χ [W/K]": 3, "n·χ [W/K]": 2},
+                 klasa="zwarta", wyrownanie={"Źródło χ": "l"})
+    o.tekst(f"""
+    Współczynnik strat przez mostki cieplne **H_TB = Σψ·l + Σχ = {L(ob.H_TB, 2)} W/K** (moduł energii, ψ projektowe
+    z modelu; do charakterystyki energetycznej w PT-3 IS).
+    """)
+    # f_Rsi przegród
+    el = [e for e in fr.elementy if not str(e["id"]).startswith("WZ")]
+    o.tabela([{"Przegroda": e["id"], "Opis": e["opis"], "f_Rsi": e["f_Rsi"], "Metoda": e["zrodlo"],
+               "Ocena": "spełnia" if e["ok"] else "NIE SPEŁNIA"} for e in el],
+             tytul=f"Czynnik temperaturowy f_Rsi przegród w polu (wymagane ≥ {L(f_wym, 3)})",
+             formaty={"f_Rsi": 3}, klasa="zwarta", wyrownanie={"Opis": "l", "Metoda": "l"},
+             zrodlo="lamela.obliczenia.fizyka.kondensacja — f_rsi_przegrody, f_rsi_min")
+
+
+def rozdz_kondensacja(o: Opis, D: dict):
+    R = D["R"]
+    gl = R["glaser"]
+    zal = "; ".join(f"{z.tresc} {z.status}".strip() for z in R["zal"]["wilg"].lista)
+    o.rozdzial("Kondensacja międzywarstwowa (PN-EN ISO 13788, metoda Glasera)", f"""
+    Obliczenie miesięczne dla przegród zewnętrznych i oddzielających od garażu. Założenia: {zal}.
+    Wymaganie: brak kondensacji albo kondensacja okresowa wysychająca w cyklu rocznym (WT zał. 2 pkt 2.2.5; W-248).
+    """, poziom=2, podstawa="PN-EN ISO 13788:2013-05")
+    rows = []
+    for g in gl:
+        rows.append({"Przegroda": g.kod.split("|")[0], "Rola": g.rola.replace("_", " "),
+                     "Kondensacja": "tak" if g.kondensacja else "nie",
+                     "M_a,max [g/m²]": g.M_a_max * 1000, "Wysycha": "tak" if g.wysycha else "nie",
+                     "s_d paroizolacji istn. [m]": g.sd_par_ist, "s_d wym. (brak kond.) [m]": g.sd_par_wym,
+                     "Ocena": ("dopuszczalna" if g.dopuszczalna else "NIEDOPUSZCZALNA") + " — " + g.ocena})
+    o.tabela(rows, tytul="Kondensacja międzywarstwowa — wyniki", klasa="zwarta",
+             formaty={"M_a,max [g/m²]": 1, "s_d paroizolacji istn. [m]": 1, "s_d wym. (brak kond.) [m]": 1},
+             wyrownanie={"Ocena": "l"}, szerokosci=["16mm", "20mm", "15mm", "15mm", "13mm", "17mm", "17mm", None],
+             uwagi=[u for g in gl for u in g.uwagi[:1]][:3] or None,
+             zrodlo="lamela.obliczenia.fizyka.kondensacja — glaser, wymagane_sd_paroizolacji")
+    cg = D["ob"].ciaglosc
+    braki = [(c.kod, u.opis) for c in cg for u in c.braki]
+    o.tekst("Kontrola ciągłości warstw funkcjonalnych w przekroju przegród (izolacja, szczelność, paroizolacja, "
+            "ochrona przed wodą): " + ("**brak braków** w " + ", ".join(c.kod.split("|")[0] for c in cg) + "."
+                                       if not braki else "braki: " + "; ".join(f"{k}: {t}" for k, t in braki) + "."))
+
+
+TYPY_OTW = {"okno": "okno", "fix": "przeszklenie stałe", "drzwi_zewn": "drzwi zewnętrzne",
+            "drzwi_przesuwne_HS": "drzwi podnoszono-przesuwne HS", "brama": "brama garażowa",
+            "drzwi": "drzwi wewnętrzne", "otwor": "otwór bez stolarki"}
+OSLONY = {"zaluzja_zewn": "żaluzja zewn.", "roleta_zewn": "roleta zewn.", "screen_zip": "screen ZIP", "brak": "—"}
+ZEWN = ("okno", "fix", "drzwi_zewn", "drzwi_przesuwne_HS", "brama")
+
+
+def _zakres(v: list, n: int = 2) -> str:
+    v = [x for x in v if x is not None]
+    if not v:
+        return "—"
+    return L(min(v), n) if abs(max(v) - min(v)) < 10 ** -n else f"{L(min(v), n)}–{L(max(v), n)}"
+
+
+def rozdz_stolarka(o: Opis, D: dict):
+    m, ob = D["m"], D["ob"]
+    st = m.raw.get("stolarka") or {}
+    kl_min, kl_zr = wym("energia", "okna_klasa_szczelnosci_min")
+    g_max, g_zr = wym("energia", "g_c_max")
+    grupy: OrderedDict = OrderedDict()
+    montaze: OrderedDict = OrderedDict()
+    for ot in m.otwory():
+        if ot.typ == "otwor":
+            continue
+        g = grupy.setdefault(ot.symbol or ot.id, dict(o=ot, n=0, kond=set(), ids=[], montaz=set()))
+        g["n"] += 1
+        g["kond"].add(ot.kond)
+        g["ids"].append(ot.id)
+        mt = ot.raw.get("montaz")
+        if mt:
+            g["montaz"].add(montaze.setdefault(mt, f"M{len(montaze) + 1}"))
+    o.rozdzial("Zestawienie stolarki okiennej i drzwiowej", f"""
+    Zestawienie stolarki wygenerowano z modelu (sekcje `otwory` i `stolarka`), grupując otwory według symbolu
+    (W-317). Wymiary — w świetle otworu w murze. Parametry cieplne: U_w obliczone wg PN-EN ISO 10077-1:2017-10
+    dla wymiarów otworu i danych przykładowego wyrobu {DANE_PRZYKLADOWE}; U_w wym. — wartość wymagana dla wyrobu
+    (model); U_max — WT zał. 2 pkt 1.2 (W-244). Szczelność: klasa ≥ {kl_min} ({kl_zr}). Całkowita przepuszczalność
+    energii promieniowania słonecznego g = f_C·g_n ≤ {L(g_max)} dla okien E, S, W ({g_zr}).
+    """, podstawa="W-317, W-244, W-247, W-249", nowa_strona=True)
+    U_sym, g_sym = {}, {}
+    for wo in ob.okna.values():
+        U_sym.setdefault(wo.symbol, []).append(wo)
+    for x in ob.g_spr:
+        g_sym.setdefault(x.symbol, []).append(x)
+    r1, r2, r3 = [], [], []
+    for sym, g in grupy.items():
+        ot = g["o"]
+        otw = ot.otwieranie or {}
+        opis = (st.get(sym) or {}).get("opis", "—")
+        wiersz = {"Symbol": sym, "Rodzaj": TYPY_OTW.get(ot.typ, ot.typ), "Opis wyrobu (parametry wymagane)": opis,
+                  "Wymiary [cm]": f"{round(ot.szer * 100)} × {round(ot.wys * 100)}", "Szt.": g["n"],
+                  "Kond.": ", ".join(sorted(g["kond"])),
+                  "Otwieranie": ", ".join(str(x) for x in (otw.get("rodzaj"), otw.get("strona"),
+                                                             str(otw.get("kierunek", "")).replace("_", " ")) if x)
+                  or "stałe"}
+        if ot.typ not in ZEWN:
+            r3.append(wiersz)
+            continue
+        wiersz.update({"Osłona": OSLONY.get(ot.oslona or "brak", ot.oslona), "Montaż": ", ".join(sorted(g["montaz"]))
+                       or "—"})
+        r1.append(wiersz)
+        wos = U_sym.get(sym, [])
+        dn = wos[0].dane if wos else None
+        gs = g_sym.get(sym, [])
+        ms = st.get(sym) or {}
+        r2.append({"Symbol": sym, "U_w obl. [W/(m²·K)]": _zakres([w.U_w for w in wos]),
+                   "U_w wym. [W/(m²·K)]": ms.get("U_w", ms.get("U_D")),
+                   "U_max [W/(m²·K)]": wos[0].U_max if wos else None, "g_n": ms.get("g_n", dn.g_n if dn else None),
+                   "f_C": _zakres([x.f_C for x in gs]), "g": _zakres([x.g for x in gs], 3),
+                   "Ocena g": ("; ".join(sorted({x.zwolnienie for x in gs if x.zwolnienie != "—"})) or
+                               ("spełnia" if all(x.spelnia for x in gs) else "NIE SPEŁNIA")) if gs else "—",
+                   "Klasa szczeln.": dn.klasa_szczelnosci if dn and dn.klasa_szczelnosci else
+                   (f"≥ {kl_min}" if ot.typ in ("okno", "fix", "drzwi_przesuwne_HS") else "—")})
+    o.tabela(r1, tytul="Zestawienie stolarki zewnętrznej — wymiary, otwieranie, osłony, montaż", klasa="zwarta",
+             wyrownanie={"Opis wyrobu (parametry wymagane)": "l", "Otwieranie": "l"},
+             szerokosci=["11mm", "20mm", None, "16mm", "8mm", "12mm", "17mm", "14mm", "11mm"],
+             zrodlo="model/budynek.yaml — otwory, stolarka (grupowanie po symbolu)")
+    o.tabela(r2, tytul="Zestawienie stolarki zewnętrznej — parametry cieplne, g, szczelność", klasa="zwarta",
+             formaty={"U_w wym. [W/(m²·K)]": 2, "U_max [W/(m²·K)]": 1, "g_n": 2}, wyrownanie={"Ocena g": "l"},
+             uwagi=["U_w obl. — zakres dla otworów danego symbolu (PN-EN ISO 10077-1; drzwi — U_D z danych wyrobu). "
+                    "f_C — współczynnik redukcji osłony (WT zał. 2 pkt 2.1.3 lub PN-EN ISO 52022-1 metodą "
+                    f"uproszczoną {NZW}). Deklarowane U_w, g, klasa szczelności wybranego wyrobu — do potwierdzenia "
+                    "deklaracją właściwości użytkowych."],
+             zrodlo="lamela.obliczenia.fizyka.okna — u_okna, sprawdz_g")
+    o.tabela([{"Kod": k, "Sposób montażu (osadzenia) stolarki": t, "Detal": detale_wezla(D["detale"], "WZ-11")}
+              for t, k in montaze.items()], tytul="Montaż stolarki zewnętrznej", klasa="zwarta",
+             wyrownanie={"Sposób montażu (osadzenia) stolarki": "l"}, szerokosci=["12mm", None, "36mm"])
+    if r3:
+        o.tabela(r3, tytul="Zestawienie drzwi wewnętrznych", klasa="zwarta",
+                 wyrownanie={"Opis wyrobu (parametry wymagane)": "l", "Otwieranie": "l"},
+                 szerokosci=["12mm", "22mm", None, "17mm", "9mm", "14mm", "20mm"])
+
+
+def rozdz_wykonczenia(o: Opis, D: dict):
+    m = D["m"]
+    uzyte: OrderedDict = OrderedDict()
+    rows = []
+    for p in m.raw.get("pomieszczenia") or []:
+        kody = [p.get("posadzka"), p.get("sciany_wyk"), p.get("sufit")]
+        for k in kody:
+            if k:
+                uzyte.setdefault(k, None)
+        rows.append({"Nr": nr_iso(p["id"], p["kond"]), "Pomieszczenie": p["nazwa"], "Posadzka": p.get("posadzka") or "—",
+                     "Podłoga / strop": p.get("podloga") or "—", "Ściany": p.get("sciany_wyk") or "—",
+                     "Sufit": p.get("sufit") or "—", "θ_i [°C]": p.get("temp")})
+    o.rozdzial("Zestawienie wykończeń wnętrz", """
+    Wykończenia pomieszczeń wg modelu (kody materiałów — legenda w tabeli następnej; układ warstw podłóg i stropów —
+    rozdz. 2). Numeracja pomieszczeń jak na rzutach (parter = 1.xx).
+    """, podstawa="W-317", nowa_strona=True)
+    o.tabela(rows, tytul="Wykończenia pomieszczeń", klasa="zwarta", formaty={"θ_i [°C]": 0},
+             szerokosci=["10mm", None, "22mm", "22mm", "22mm", "20mm", "12mm"],
+             zrodlo="model/budynek.yaml — pomieszczenia")
+    o.tabela([{"Kod": k, "Wyrób / wykończenie (parametry wymagane)": (m.materialy.get(k).nazwa
+                                                                    if m.materialy.get(k) else k)} for k in uzyte],
+             tytul="Legenda wykończeń", klasa="zwarta", szerokosci=["24mm", None])
+    el = []
+    for x in m.raw.get("lamele") or []:
+        mt = m.materialy.get(x.get("mat"))
+        el.append({"Element": x["id"], "Rodzaj": f"lamele, elewacja {x.get('elewacja', '—')}",
+                   "Opis": f"{mt.nazwa if mt else x.get('mat')}; rozstaw {L(x.get('rozstaw'))} m, "
+                           f"rzędne {L(x.get('z_od'))}…{L(x.get('z_do'))} m; {x.get('uwagi', '')}"})
+    for x in m.raw.get("balustrady") or []:
+        el.append({"Element": x["id"], "Rodzaj": f"balustrada / pochwyt h = {L(x.get('wys'))} m", "Opis": x.get("typ", "")})
+    for x in m.raw.get("tarasy") or []:
+        el.append({"Element": x["id"], "Rodzaj": f"taras / podest, rzędna {L(x.get('rzedna'))} m",
+                   "Opis": f"{x.get('nawierzchnia', '')}; {x.get('uwagi', '')}"})
+    if el:
+        o.tabela(el, tytul="Lamele, balustrady, tarasy i podesty", klasa="zwarta", wyrownanie={"Opis": "l"},
+                 szerokosci=["16mm", "40mm", None], zrodlo="model/budynek.yaml — lamele, balustrady, tarasy")
+
+
+def rozdz_4linie(o: Opis, D: dict):
+    m, mostki = D["m"], D["mostki"]
+    from lamela.obliczenia.fizyka.warstwy import funkcja_warstwy, mat_props
+    zewn = [p for p in m.przegrody.values() if p.typ in ("sciana_zewn", "stropodach", "podloga_na_gruncie", "attyka")
+            or p.kod in ("SUF-ZEW", "SWG")]
+    fun: dict[str, OrderedDict] = {k: OrderedDict() for k in ("izolacja", "hydro", "szczel", "par")}
+    for p in zewn:
+        for k, w in enumerate(p.warstwy):
+            raw = (p.raw.get("warstwy") or [{}])[k] if k < len(p.raw.get("warstwy") or []) else {}
+            fn = funkcja_warstwy(mat_props(m.materialy, w.mat), raw)
+            klucz = {"izolacja": "izolacja", "hydroizolacja": "hydro", "przeciwwilgociowa": "hydro",
+                     "szczelnosc": "szczel", "paroizolacja": "par", "wiatroizolacja": "hydro"}.get(fn)
+            if klucz:
+                fun[klucz].setdefault(w.mat, []).append(p.kod)
+    def opis(k):
+        return "; ".join(f"{(m.materialy.get(mt).nazwa if m.materialy.get(mt) else mt)} ({', '.join(pp)})"
+                         for mt, pp in fun[k].items()) or "—"
+    o.rozdzial("Zasada „4 linii” — ciągłość warstw obudowy", f"""
+    Obudowę części ogrzewanej projektuje się tak, aby cztery warstwy funkcjonalne były ciągłe w każdym węźle
+    i były możliwe do narysowania jedną linią bez odrywania ołówka na każdym detalu:
+
+    1. **I — izolacja cieplna:** {opis('izolacja')}; w węzłach — łączniki termoizolacyjne płyt wysuniętych i bloki
+       termoizolacyjne u podstawy attyk (parametry wg PT-2 BO, W-272);
+    2. **H — ochrona przed wodą (hydroizolacja, izolacja przeciwwilgociowa, wiatroizolacja):** {opis('hydro')};
+    3. **S — szczelność powietrzna:** {opis('szczel')}; połączenia ze stolarką i przejścia instalacji — taśmy
+       i mankiety systemowe; próba szczelności budynku PN-EN ISO 9972 (W-249);
+    4. **P — kontrola pary wodnej:** {opis('par')}; opór dyfuzyjny warstw maleje ku stronie zimnej (rozdz. 4.4).
+
+    Ocenę ciągłości w węzłach (karty mostków, PN-EN ISO 10211) i odesłania do detali zawiera tabela poniżej.
+    """, podstawa="§ 24 pkt 2 RPB; W-248, W-249", nowa_strona=True)
+    zn = {"OK": "✓", "UWAGA": "!", "BRAK": "✗"}
+    rows = []
+    for w in mostki.get("wezly", []):
+        l4 = w.get("linie4") or {}
+        st = {k: zn.get((l4.get(k) or ["—"])[0], (l4.get(k) or ["—"])[0]) for k in "IHSP"}
+        ci = str(l4.get("ciaglosc", "—"))
+        rows.append({"Węzeł": w["id"], "Opis": w["nazwa"][:60] + ("…" if len(w["nazwa"]) > 60 else ""),
+                     "I": st["I"], "H": st["H"], "S": st["S"], "P": st["P"],
+                     "Ciągłość / uwaga": ci[:150] + ("…" if len(ci) > 150 else ""),
+                     "Detal": detale_wezla(D["detale"], w["id"])})
+    o.tabela(rows, tytul="Ciągłość „4 linii” w węzłach obudowy", klasa="zwarta",
+             wyrownanie={"I": "c", "H": "c", "S": "c", "P": "c", "Opis": "l", "Ciągłość / uwaga": "l", "Detal": "l"},
+             szerokosci=["12mm", "42mm", "5mm", "5mm", "5mm", "5mm", None, "22mm"],
+             uwagi=["✓ — ciągłość zachowana; ! — uwaga wykonawcza (opis w kolumnie „Ciągłość / uwaga” i na karcie "
+                    "węzła); ✗ — brak ciągłości."],
+             zrodlo="projekt/08_obliczenia/mostki/zestawienie_mostkow.json — linie4")
