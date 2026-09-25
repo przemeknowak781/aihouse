@@ -331,7 +331,6 @@ def test_zgodnosc_wsteczna_arkusz():
 def test_arkusz_rzutu_z_modelu():
     """Rzut parteru modelu testowego: układ ekonomiczny bez kolizji, QA bez błędów, tabliczka na wierzchu."""
     from lamela.draft import plot
-    ctx = _ctx()
     spec = next(s for s in ctx_cfg_arkusze() if s["nr"] == "T-AR-01")
     sh, info = _build(spec)
     assert not info["uklad"]["kolizje"], info["uklad"]["kolizje"]

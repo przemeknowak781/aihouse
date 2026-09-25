@@ -277,20 +277,21 @@ Garaż stoi na tej samej płycie. Jego posadzka ma spadek 0,8 % do bramy: −0,0
 ## 6. Materiały, przegrody, fizyka budowli i woda
 
 Przegrody mają pełne warstwy w `przegrody`, a materiały opisują λ, ρ, c_p i μ lub sd ze źródłem w polu `zrodlo` (PN-EN ISO 10456, PN-EN 1745,
-DWU typowych wyrobów „lub równoważne”). U podano orientacyjnie wg PN-EN ISO 6946; dokładne wartości z mostkami liczy moduł fizyki.
+DWU typowych wyrobów „lub równoważne”). U — wartości OBLICZONE modułem fizyki (PN-EN ISO 6946 z poprawkami ΔU, klin zał. C; podłoga
+PN-EN ISO 13370) — runda 2 (weryfikacja §6 C8); nazwy przegród w modelu podają te same wartości.
 
-| kod | przegroda | U ≈ [W/(m²K)] | wymaganie |
+| kod | przegroda | U [W/(m²K)] | wymaganie |
 |---|---|---|---|
-| SZ1 | silikat 18 + ETICS EPS 031 20 cm | 0,15 | ≤ 0,20 (W-243) |
-| SZ2 | P2 za lamelami: silikat 18 + wełna fasadowa 20 cm + membrana UV, szczelina wentylowana, lamele | 0,16 | ≤ 0,20 |
-| SZL | ściana lekka A' na wsporniku: szkielet KVH z wełną, OSB (szczelność), DWD, wełna fasadowa 18 cm | 0,10 | ≤ 0,20 |
-| SWG | ściana dom–garaż: silikat 18 + wełna 12 cm od garażu | 0,26 | ≤ 0,30 |
-| SD1 | stropodach bryły A: TPO, PIR spadkowy 12–32 cm, paroizolacja z Al, ŻB 22 | 0,10 | ≤ 0,15 |
-| SD2 | dachy nad P1: żwir, TPO, PIR 14–26 cm, paroizolacja, ŻB 22 | 0,11 | ≤ 0,15 |
-| DZ1 | dach zielony ekstensywny garażu i pasa gosp.: substrat 8 cm, geowłóknina, mata drenażowa, bariera przeciwkorzenna, 2 × papa SBS, PIR 12–24 cm, paroizolacja, ŻB 24 | 0,12 | ≤ 0,15 nad pasem ogrzewanym |
-| POD-0 | płyta fundamentowa: posadzka, jastrych z ogrzewaniem, EPS 6,5 cm, membrana SBS, ŻB 25, XPS 20 cm | 0,13 | ≤ 0,30 |
+| SZ1 | silikat 18 + ETICS EPS 031 20 cm | 0,17 | ≤ 0,20 (W-243); cel 0,15 (W-245) nieosiągnięty — patrz §14.2 |
+| SZ2 | P2 za lamelami: silikat 18 + wełna fasadowa 20 cm + membrana UV, szczelina wentylowana, lamele | 0,17 | ≤ 0,20 |
+| SZL | ściana lekka A' na wsporniku: szkielet KVH z wełną, OSB (szczelność), DWD, wełna fasadowa 18 cm | 0,099 | ≤ 0,20 |
+| SWG | ściana dom–garaż: silikat 18 + wełna 12 cm od garażu | 0,27 | ≤ 0,30 |
+| SD1 | stropodach bryły A: TPO, PIR spadkowy 12–32 cm, paroizolacja z Al, ŻB 22 | 0,11 | ≤ 0,15 |
+| SD2 | dachy nad P1: żwir, TPO, PIR 14–26 cm, paroizolacja, ŻB 22 | 0,12 | ≤ 0,15 |
+| DZ1 | dach zielony ekstensywny garażu i pasa gosp.: substrat 8 cm, geowłóknina, mata drenażowa, bariera przeciwkorzenna, 2 × papa SBS, PIR 12–24 cm, paroizolacja, ŻB 24 | 0,13 | ≤ 0,15 nad pasem ogrzewanym |
+| POD-0 | płyta fundamentowa: posadzka, jastrych z ogrzewaniem, EPS 6,5 cm, membrana SBS, ŻB 25, XPS 20 cm | 0,11 (U_equiv) | ≤ 0,30 |
 | POD-1 | strop międzykondygnacyjny: deska/gres, jastrych z wężownicą, EPS 100 + EPS T | — | akustyka R'w, L'n,w (W-230) |
-| SUF-ZEW | spód stropu nad powietrzem (wspornik A): wełna 20 cm + podsufitka wentylowana | 0,15 | ≤ 0,15 |
+| SUF-ZEW | spód stropu nad powietrzem (wspornik A): wełna 20 cm + podsufitka wentylowana | 0,13 | ≤ 0,15 |
 | AT1 | attyka ŻB 18 w osi muru, izolowana z 3 stron (PIR 10 cm od dachu, ETICS/wełna ściany ciągła od zewnątrz, PIR na koronie) | — | f_Rsi ≥ 0,72 (W-248) |
 
 **Zasada „4 linii”** (brief §9.1) jest ciągła wokół całej obudowy ogrzewanej:

@@ -41,7 +41,7 @@ import numpy as np
 
 from ..draft import text as T
 from ..draft.sheet import ISO_A, ISO_ELONGATED, custom_size, sheet_size
-from ..draft.skladanie import ocena_skladania, pasy_pionowe
+from ..draft.skladanie import ocena_skladania
 
 MARG_L, MARG = 20.0, 10.0           # ramka: margines na oprawę 20 mm, pozostałe 10 mm
 TB_W = 180.0                        # szerokość tabliczki (PN-EN ISO 7200)

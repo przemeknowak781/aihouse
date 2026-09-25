@@ -32,6 +32,7 @@ wspolne:
     - "Obciążenie posadzki garażu i pasa gospodarczego (kat. F / sprzęt techniczny) — model nie przypisuje kategorii obciążenia użytkowego do płyty fundamentowej; w MES płyty przyjęto kat. A (2,0 kN/m²) na całej powierzchni."
     - "Obrysy stropów/dachów w modelu po licu ocieplenia (płyty nad warstwą EPS) — do korekty w audycie A2 (lico warstwy konstrukcyjnej); rysunki są generowane z modelu i zaktualizują się automatycznie."
     - "Beton krawędzi wysuniętych: model XC4 + XF1 (C30/37, c_nom 40 mm) — biblioteka wymiaruje dla XC4 (c_nom 40 mm, zgodne); klasa XF1 wymaga napowietrzenia/w/c wg PN-B-06265 — wpisać w specyfikacji betonu."
+    - "Zmiany modelu wymagane do spełnienia wszystkich warunków (słupy ŻB w węzłach A/1, A/3, C/3, D/3 ze stopami, jawny schemat wsporników B3–B5, ścieżka obciążeń fasady S1-01 przez B1, naroże PL-2, elementy niekonstrukcyjne w wspornikach) — projekt/04_PT_konstrukcja/REKOMENDACJE_MODEL.md."
   uwagi: []
 arkusze:
   # --- fundamenty

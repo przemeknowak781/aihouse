@@ -18,7 +18,12 @@ wspolne:                         # wartości domyślne dla wszystkich arkuszy
   rewizja: "0"
   rewizje: [["0", "Wydanie", "2026-09-25"]]
   skala: 50                      # domyślna podziałka widoków (1:50)
-  format: auto                   # auto | A3 | A2 | A1 | A0 | A3x3 | A2x3 …
+  format: auto                   # auto = ekonomiczny (lamela.views.uklad: ISO 216, wydłużone i niestandardowe H×L)
+                                 # | standardowy | klasyczny (dawny dobór) | A3 | A2 | A3x3 … | [H, L] | "780x594"
+  wysokosci: [297, 420, 594, 841, 891]   # wysokości arkuszy niestandardowych [mm] (≤ 914 — rolka plotera 36″)
+  modul_skladania: auto          # auto (koszt z oceną składania) | 190 (L = 210 + 190·n) | 0 (bez dopasowania)
+  kara_niestandard: 0.03         # lekka preferencja formatów ISO przy remisie kosztu
+  metryki: true                  # wypełnienie arkusza (metoda tools/metryki_arkuszy.py) w raport_widokow.json
   numeracja_pomieszczen: iso     # iso (parter = 1.xx, PN-B-01025/R4 pkt 3.9) | model (identyfikatory modelu)
   wysokosc_ciecia: 1.10          # płaszczyzna cięcia rzutów nad posadzką [m]
   glebokosc_widoku: 1.5          # zasięg „widoku w dół” na rzutach kondygnacji powyżej parteru [m]
@@ -38,9 +43,14 @@ arkusze:                         # brak = komplet: rzuty wszystkich kondygnacji,
 Każdy arkusz: ``nr``, ``tytul``, ``typ`` (rzut | dach | przekroj | elewacja) z parametrami (``kond`` / ``przekroj`` /
 ``strona``), ``skala``, ``format``, ``uwagi``, ``opcje`` (słownik przekazywany do generatora widoku) albo ``widoki``
 (lista widoków na jednym arkuszu).
+
+Format i rozmieszczenie (widoki, bloki kolumny opisowej, tabliczka w prawym dolnym rogu) dobiera wspólny silnik
+``lamela.views.uklad`` (ekonomiczne ustawienie na arkuszach — opis parametrów tamże); w ``raport_widokow.json``
+każdy arkusz ma: format, wymiary, pole, plan i ocenę składania do A4, wypełnienie oraz kandydatów doboru.
 """
 from __future__ import annotations
 
+import dataclasses
 import datetime as _dt
 import json
 from dataclasses import dataclass
@@ -52,10 +62,13 @@ from ..draft import fmt, hatch, plot, symbols as S
 from ..draft.core import Viewport
 from ..draft.sheet import Sheet, TitleBlock, notes_box, scale_bar, sheet_size, table
 from ..draft.sheet import wrap as _wrap
+from ..draft.sheet import draw_title_block
+from ..draft.skladanie import ocena_skladania
 from .common import ViewContext, load_furniture, slug
 from .elevation import NAMES as EL_NAMES, draw_elevation
 from .plan import draw_plan, draw_roof_plan
 from .section import auto_sections, draw_section, normalize_section
+from . import uklad as U
 
 TB_W = 180.0
 FORMATS = ["A3", "A2", "A3x3", "A1", "A3x4", "A2x3", "A0", "A1x3", "A2x4", "A0x2"]
@@ -426,8 +439,8 @@ def _arrange(views, gap=12.0, title_h=12.0, avail_w=1e9):
     return max(ws), sum(hs) + gap * (len(views) - 1), "col"
 
 
-def build_sheet(ctx: ViewContext, spec: dict, idx: int, total: int):
-    """Tworzy arkusz wg ``spec``. Zwraca (Sheet, info)."""
+def _przygotuj(ctx: ViewContext, spec: dict) -> dict:
+    """Widoki i bloki kolumny opisowej arkusza (wspólne dla układu klasycznego i silnika ``uklad``)."""
     m = ctx.model
     scale = float(spec.get("skala", ctx.cfg.get("skala", 50)))
     vspecs = [dict(vs) for vs in (spec.get("widoki") or [spec])]
@@ -438,7 +451,6 @@ def build_sheet(ctx: ViewContext, spec: dict, idx: int, total: int):
     views = [make_view(ctx, dict(vs, **({"skala": scale} if "skala" not in vs else {})),
                        float(vs.get("skala", scale))) for vs in vspecs]
     kinds = {v.kind for v in views}
-    # kolumna opisowa
     col = Column()
     if kinds & {"rzut", "dach"} or any(getattr(v.result, "north", False) for v in views):
         col.add("north", _north(m))
@@ -483,10 +495,48 @@ def build_sheet(ctx: ViewContext, spec: dict, idx: int, total: int):
     skalowane = [v for v in views if not getattr(v.result, "bez_skali", False)]   # schematy: bez podziałki
     if skalowane:
         col.add("scale", _scalebar(skalowane[0].vp.scale))
+    rodzaj = {"rzut": "rzut", "dach": "rzut", "przekroj": "przekrój", "elewacja": "elewacja",
+              **{k: v["rodzaj"] for k, v in VIEW_TYPES.items()}}[views[0].kind]
+    scales = sorted({int(v.vp.scale) for v in skalowane})
+    scale_txt = ("1:" + " / 1:".join(str(s) for s in scales)) if scales else "—"
+    return dict(views=views, kinds=kinds, col=col, notes=notes, skalowane=skalowane, rodzaj=rodzaj,
+                scale_txt=scale_txt)
+
+
+def _info(spec, views, fmt_name, scale_txt, W, H, tb_h):
+    info = dict(nr=spec["nr"], tytul=spec.get("tytul"), format=fmt_name, typ=[v.kind for v in views],
+                skala=scale_txt, widoki=[v.title for v in views],
+                qa_kind=next((VIEW_TYPES[v.kind].get("qa") for v in views if v.kind in VIEW_TYPES), None),
+                wymiary_mm=[round(W, 1), round(H, 1)], pole_m2=round(W * H / 1e6, 4),
+                skladanie=ocena_skladania(W, H, tb_h))
+    for v in views:
+        if v.kind == "przekroj" or v.kind == "elewacja":
+            info["wysokosc_budynku"] = getattr(v.result, "height", None)
+    return info
+
+
+def _place_views(sh, views, positions):
+    for v, (x, y) in zip(views, positions):
+        above = v.kind == "przekroj"
+        sh.viewports.append(v.vp)
+        sh.place(v.vp, x, y, "bl", pad=3.0)
+        sh.view_title(v.vp, v.title, where="above" if above else "below", dx=2.0,
+                      scale=not getattr(v.result, "bez_skali", False))
+
+
+def _tb_h(tb: TitleBlock) -> float:
+    """Wysokość tabliczki z tabelą zmian [mm] (pomiar na arkuszu próbnym)."""
+    probe = Sheet("A0", draw_frame=False)
+    r = draw_title_block(probe, dataclasses.replace(tb, format=tb.format or "A0"))
+    return float(r[3] - r[1])
+
+
+def _arkusz_klasyczny(ctx, spec, idx, total, P, fmt_req: str):
+    """Układ klasyczny (dotychczasowy): pierwszy mieszczący się format z FORMATS, kolumna opisowa 180 mm na całą
+    wysokość nad tabliczką, widoki w wierszu lub kolumnie. Także zapas, gdy silnik ``uklad`` nic nie zmieści."""
+    views, col = P["views"], P["col"]
     col_h = col.measure(TB_W)
-    # dobór formatu
-    fmt_req = str(spec.get("format", ctx.cfg.get("format", "auto")))
-    cands = FORMATS if fmt_req.lower() == "auto" else [fmt_req]
+    cands = FORMATS if fmt_req.lower() in ("auto", "klasyczny") else [fmt_req]
     chosen = None
     for f in sorted(cands, key=lambda f: sheet_size(f)[0] * sheet_size(f)[1]):
         W, Hh = sheet_size(f)
@@ -500,21 +550,16 @@ def build_sheet(ctx: ViewContext, spec: dict, idx: int, total: int):
             chosen = (f, mode)
             break
     if chosen is None:
-        f = cands[-1] if fmt_req.lower() != "auto" else FORMATS[-1]
+        f = cands[-1] if fmt_req.lower() not in ("auto", "klasyczny") else FORMATS[-1]
         W, Hh = sheet_size(f)
         vw, vh, mode = _arrange(views, avail_w=(W - 10.0 - TB_W - 8.0) - 26.0)
         chosen = (f, mode)
         ctx.note(f"arkusz {spec['nr']}", f"widok nie mieści się w formacie {f} — przycięty")
     f, mode = chosen
-    rodzaj = {"rzut": "rzut", "dach": "rzut", "przekroj": "przekrój", "elewacja": "elewacja",
-              **{k: v["rodzaj"] for k, v in VIEW_TYPES.items()}}[views[0].kind]
-    scales = sorted({int(v.vp.scale) for v in skalowane})
-    scale_txt = ("1:" + " / 1:".join(str(s) for s in scales)) if scales else "—"
-    tb = _title_block(ctx, spec, idx, total, scale_txt, rodzaj)
+    tb = _title_block(ctx, spec, idx, total, P["scale_txt"], P["rodzaj"])
     sh = Sheet(f, title_block=tb)
     fx0, fy0, fx1, fy1 = sh.frame
     area = (fx0 + 6.0, fy0 + 6.0, fx1 - TB_W - 8.0, fy1 - 4.0)
-    # rozmieszczenie widoków
     vw, vh, mode = _arrange(views, avail_w=area[2] - area[0])
     cx = (area[0] + area[2]) / 2.0
     cy = (area[1] + area[3]) / 2.0
@@ -538,16 +583,91 @@ def build_sheet(ctx: ViewContext, spec: dict, idx: int, total: int):
             sh.view_title(v.vp, v.title, where="above" if above else "below", dx=2.0,
                           scale=not getattr(v.result, "bez_skali", False))
             y -= v.h_mm + 12.0 + 12.0
-    # kolumna
     col.draw(sh, fx1 - TB_W, fy1 - 3.0, TB_W)
     plot.add_control_marks(sh)
-    info = dict(nr=spec["nr"], tytul=spec.get("tytul"), format=f, typ=[v.kind for v in views],
-                skala=scale_txt, widoki=[v.title for v in views],
-                qa_kind=next((VIEW_TYPES[v.kind].get("qa") for v in views if v.kind in VIEW_TYPES), None))
-    for v in views:
-        if v.kind == "przekroj" or v.kind == "elewacja":
-            info["wysokosc_budynku"] = getattr(v.result, "height", None)
+    tbr = sh.tb_rect or (0, 0, 0, 0)
+    info = _info(spec, views, f, P["scale_txt"], sh.width, sh.height, tbr[3] - tbr[1])
+    info["uklad"] = dict(tryb="klasyczny", format=f)
     return sh, info
+
+
+def _bloki_ukladu(ctx, P) -> list:
+    """Bloki kolumny opisowej dla silnika ``uklad``: róża kierunków + podziałka w jednym wierszu nad tabliczką,
+    uwagi dzielone na kolumny, pozostałe bloki w kolejności kolumny."""
+    col, m = P["col"], ctx.model
+    names = [n for n, _f in col.blocks]
+    sc = P["skalowane"][0].vp.scale if P["skalowane"] else None
+    out = []
+    if "north" in names or sc:
+        nfn = _north(m) if "north" in names else None
+        sfn = _scalebar(sc) if sc else None
+
+        def ns(sh, x, y, w, nfn=nfn, sfn=sfn):
+            yb = y
+            if sfn is not None:
+                yb = min(yb, sfn(sh, x, y - (8.0 if nfn is not None else 0.0), w))
+            if nfn is not None:
+                yb = min(yb, nfn(sh, x, y, w))
+            return yb
+        out.append(U.blok("róża i podziałka" if nfn and sfn else ("róża" if nfn else "podziałka"), ns,
+                          kotwica="nad_tabliczka"))
+    for nm, fn in col.blocks:
+        if nm in ("north", "scale"):
+            continue
+        if nm == "notes":
+            b = U.Blok("uwagi", None, TB_W)
+            b.uwagi = U.BlokUwag(P["notes"], "OBJAŚNIENIA I UWAGI", h=1.8, w=TB_W)
+            out.append(b)
+            continue
+        out.append(U.blok(nm, fn))
+    return out
+
+
+def _arkusz_uklad(ctx, spec, idx, total, P, fmt_req):
+    """Układ ekonomiczny (``lamela.views.uklad``): dobór formatu (także niestandardowego) i upakowanie. Zwraca None,
+    gdy treść nie mieści się w żadnym kandydacie (wtedy układ klasyczny)."""
+    views = P["views"]
+    o = U.opcje(ctx.cfg, spec)
+    tb = _title_block(ctx, spec, idx, total, P["scale_txt"], P["rodzaj"])
+    tb_h = _tb_h(tb)
+    kiesz = bool(o.get("wolne_obszary", True))
+    widoki = [U.widok_z_rzutni(f"{i + 1}. {v.title}", v.vp, v.w_mm, v.h_mm, v.title,
+                               skala=not getattr(v.result, "bez_skali", False), podtytul=bool(v.vp.subtitle),
+                               nad=v.kind == "przekroj", kieszenie=kiesz) for i, v in enumerate(views)]
+    bloki = _bloki_ukladu(ctx, P)
+    lay = U.rozmiesc(widoki, bloki, tb_h, o, fmt=fmt_req)
+    if lay is None:
+        return None
+    bledy = U.sprawdz_nakladanie(lay.roz)
+    sh = Sheet(lay.sheet_fmt, orientation=lay.orientacja, title_block=tb)
+    _place_views(sh, views, lay.roz.widoki)
+    for b, x, y_top, w in lay.roz.bloki:
+        b.fn(sh, x, y_top, w)
+    plot.add_control_marks(sh)
+    tbr = sh.tb_rect or lay.roz.tabliczka
+    if abs((tbr[3] - tbr[1]) - tb_h) > 0.5:
+        bledy.append(f"wysokość tabliczki {tbr[3] - tbr[1]:.1f} ≠ pomiar {tb_h:.1f} mm")
+    info = _info(spec, views, lay.nazwa, P["scale_txt"], lay.W, lay.H, tb_h)
+    info["uklad"] = dict(lay.info(), bloki=[[n, [round(v, 1) for v in r]] for k, n, r in lay.roz.prostokaty
+                                           if k != "widok"], kolizje=bledy)
+    if bledy:
+        ctx.note(f"arkusz {spec['nr']}", "układ: " + "; ".join(bledy[:3]))
+    return sh, info
+
+
+def build_sheet(ctx: ViewContext, spec: dict, idx: int, total: int):
+    """Tworzy arkusz wg ``spec``. Zwraca (Sheet, info). Format i rozmieszczenie: ``lamela.views.uklad`` (tryb
+    ekonomiczny — domyślny dla ``format: auto``) albo układ klasyczny (``format: klasyczny``)."""
+    P = _przygotuj(ctx, spec)
+    fmt_req = spec.get("format", ctx.cfg.get("format", "auto"))
+    tryb, _j = U.tryb_formatu(fmt_req)
+    if tryb != "klasyczny":
+        r = _arkusz_uklad(ctx, spec, idx, total, P, fmt_req)
+        if r is not None:
+            return r
+        ctx.note(f"arkusz {spec['nr']}", f"układ ekonomiczny: treść nie mieści się w formacie {fmt_req} — "
+                                         "układ klasyczny")
+    return _arkusz_klasyczny(ctx, spec, idx, total, P, str(fmt_req) if tryb == "jawny" else "auto")
 
 
 def _tb_height(ctx, spec) -> float:
@@ -608,9 +728,17 @@ def generate(budynek, dzialka=None, arkusze=None, wyposazenie=None, out_dir="bui
         info.update(pliki=files, qa=qa, czas_s=round(time.time() - t1, 1))
         if "png" in files:
             info["png_kontrola"] = plot.check_png(files["png"], sh, min_dpi=min(150, dpi))
+        if "pdf" in files and cfg["wspolne"].get("metryki", True):
+            try:                            # wypełnienie arkusza — ta sama metoda co tools/metryki_arkuszy.py
+                info["wypelnienie"] = U.wypelnienie_pdf(files["pdf"])
+            except Exception as ex:        # noqa: BLE001 — pomiar pomocniczy, nie blokuje generowania
+                ctx.note(f"arkusz {spec['nr']}", f"pomiar wypełnienia: {type(ex).__name__}: {ex}")
         report["arkusze"].append(info)
         sheets.append(sh)
-        log(f"  {spec['nr']} {info['tytul']}: {info['format']} {info['skala']}  QA: "
+        wyp = (info.get("wypelnienie") or {}).get("wypelnienie")
+        log(f"  {spec['nr']} {info['tytul']}: {info['format']} ({info['wymiary_mm'][0]:.0f}×{info['wymiary_mm'][1]:.0f}) "
+            f"{info['skala']}" + (f", wypełnienie {wyp * 100:.0f} %" if wyp is not None else "")
+            + f", składanie {info['skladanie']['ocena']}  QA: "
             f"{'OK' if qa['ok'] else 'BŁĘDY ' + str(len(qa['errors']))}, ostrz. {len(qa['warnings'])}  "
             f"({info['czas_s']} s)")
     if tom and sheets and "pdf" in formats:
@@ -624,6 +752,16 @@ def generate(budynek, dzialka=None, arkusze=None, wyposazenie=None, out_dir="bui
         plot.volume(sheets, tp, str(w.get("tytul_tomu") or "Tom rysunków architektury — widoki z modelu"), toc=True,
                     toc_tb=toc_tb)
         report["tom"] = str(tp)
+    ok_ark = [a for a in report["arkusze"] if "blad" not in a and a.get("pole_m2")]
+    if ok_ark:                              # zużycie papieru na egzemplarz (ekonomia arkuszy)
+        pole = sum(a["pole_m2"] for a in ok_ark)
+        wz = [a for a in ok_ark if (a.get("wypelnienie") or {}).get("wypelnienie") is not None]
+        report["papier"] = dict(
+            arkuszy=len(ok_ark), pole_m2=round(pole, 3), a4_ekw=round(pole / (0.210 * 0.297), 1),
+            warstwy_a4=sum(a["skladanie"]["warstwy"] for a in ok_ark),
+            skladanie={o: sum(1 for a in ok_ark if a["skladanie"]["ocena"] == o) for o in ("dobre", "poprawne", "słabe")},
+            wypelnienie_wazone=(round(sum(a["wypelnienie"]["wypelnienie"] * a["wypelnienie"]["pole_ramki_m2"] for a in wz)
+                                      / sum(a["wypelnienie"]["pole_ramki_m2"] for a in wz), 3) if wz else None))
     report["problemy"] = list(ctx.problems)
     report["czas_s"] = round(time.time() - t0, 1)
     (out / "raport_widokow.json").write_text(json.dumps(report, indent=2, ensure_ascii=False, default=str),

@@ -17,7 +17,8 @@ wspolne:
   data: null                   # null → meta.data z budynek.yaml
   rewizja: "0"
   skala: 500
-  format: auto                 # najmniejszy arkusz mieszczący widok i kolumnę opisową
+  format: auto                 # auto = ekonomiczny (lamela.views.uklad): najmniejszy koszt papieru — ISO 216, wydłużone lub H×L „na miarę”
+                               # (H: 297/420/594/841/891; składanie do A4 w ocenie); klasyczny | A2 | [H, L] — patrz uklad.py
   plik_tomu: "tom_PZT.pdf"
   tytul_tomu: "Projekt zagospodarowania działki — część rysunkowa"
   uwagi: []

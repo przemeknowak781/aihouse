@@ -130,17 +130,29 @@ Statusy pozycji: OK · BRAK · DO UZUPEŁNIENIA (jest, ale z polem `[DO UZUPEŁN
 
 ## 7. Wersja papierowa — składanie arkuszy do A4
 
-Plik elektroniczny zachowuje oryginalne formaty arkuszy (RPB § 2b; wektor). Dla postaci papierowej (RPB § 2a —
-oprawa do formatu A4; 3 egzemplarze do wniosku, PB art. 33 ust. 2 pkt 1) arkusze składa się „do wpięcia”
-(PN-N-01603 / DIN 824 A, uogólnione na formaty wydłużone), zgodnie ze znakami składania na arkuszach `lamela.draft`:
+Plik elektroniczny zachowuje oryginalne formaty arkuszy (RPB § 2b; wektor), także formaty niestandardowe
+„na miarę” treści (np. 630×594, 760×297 — dobór: `lamela.views.uklad`). Dla postaci papierowej (RPB § 2a — oprawa
+do formatu A4; 3 egzemplarze do wniosku, PB art. 33 ust. 2 pkt 1) arkusze składa się „do wpięcia” wg praktyki
+DIN 824:1981-03 forma A, uogólnionej na formaty wydłużone i niestandardowe [przyjęcie; PN-N-01603:1986 — wycofana
+bez następcy, przywołanie informacyjne], zgodnie ze znakami składania na arkuszach `lamela.draft`
+(geometria: `lamela.draft.skladanie`):
 
-1. najpierw zgięcia **pionowe** w harmonijkę: pierwszy pas od lewej ma 210 mm (z marginesem 20 mm na oprawę),
-   pas z tabliczką przy prawej krawędzi 190 mm, pasy pośrednie dzielą resztę po równo (≤ 210 mm);
-   A3: zgięcia w 105 i 230 mm od lewej krawędzi (pas 105 mm zagięty do tyłu);
-2. potem zgięcia **poziome** co 297 mm od dołu (A2 i większe, A3×n);
-3. tabliczka rysunkowa pozostaje na wierzchu w prawym dolnym rogu, lewy margines 20 mm do dziurkowania/oprawy.
+1. najpierw zgięcia **pionowe** w harmonijkę o **nieparzystej** liczbie pasów: pierwszy pas od lewej (z marginesem
+   20 mm na oprawę) leży na spodzie licem do góry, pas z tabliczką przy prawej krawędzi (≥ 190 mm) — na wierzchu;
+   pasy pośrednie w **parach równych** (≤ 210 mm), bo tylko wtedy prawa krawędź arkusza wraca do rogu paczki A4:
+   * szerokość ≤ 590 mm: trzy pasy w₁ + (w₁ − 20) + 190, w₁ = (W − 170)/2 (A3: 125 + 105 + 190 — margines na
+     krawędzi paczki);
+   * szerokość > 590 mm: 210 + p par — wszystkie równe (190–210 mm), inaczej para z tabliczką 190 mm i pozostałe
+     pary równe (A2: 210 + 192 + 192; A3×3: 210 + 150,5 + 150,5 + 190 + 190);
+   * „ładnie” (pasy 180–210 mm) składają się długości ≈ 570–630, 960–1050, 1330–1470, 1700–1890 mm …; długość
+     L = 210 + 190·n tylko dla parzystego n (590, 970, 1350 mm) — dla nieparzystego jedna para musi być węższa;
+2. potem zgięcia **poziome** co 297 mm od dołu (wysokości „ładne”: 297, 594, 891 mm; 420 mm → górny rząd 123 mm);
+3. tabliczka rysunkowa pozostaje na wierzchu w prawym dolnym rogu, lewy margines 20 mm do dziurkowania/oprawy;
+   na marginesie arkusza znaki zgięć z numerami kolejności (pionowe od pasa z tabliczką, potem poziome).
 
-`plan_skladania(arkusze)` zwraca dla każdego arkusza format, wymiary i położenie zgięć (demo: `plan_skladania.json`).
+`plan_skladania(arkusze)` zwraca dla każdego arkusza format, wymiary, położenie zgięć, pasy, rzędy, liczbę warstw,
+ocenę („dobre” / „poprawne” / „słabe” — progi jak `tools/metryki_arkuszy.py`) i warunek „tabliczka na wierzchu”
+(demo: `plan_skladania.json`). Generator widoków zapisuje ten sam plan w `raport_widokow.json` (pole `skladanie`).
 Część opisowa jest drukowana dwustronnie lub jednostronnie na A4 z marginesem na oprawę 25 mm (lewy).
 
 ## 8. Ograniczenia

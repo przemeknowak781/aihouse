@@ -1,18 +1,18 @@
 {
- "czas": "2026-09-25 08:20",
+ "czas": "2026-09-25 08:23",
  "aktywni": [
   {
    "id": "a82012b772f4804f3",
    "opis": "Build catalog website for LAMELA",
    "idle_min": 0.0,
-   "bez_narzedzi_min": 0.1,
+   "bez_narzedzi_min": null,
    "limity": 0,
    "powody": []
   },
   {
    "id": "a5045de9ee0554cc8",
    "opis": "Build structural drawings generator",
-   "idle_min": 0.1,
+   "idle_min": 0.0,
    "bez_narzedzi_min": 0.1,
    "limity": 0,
    "powody": []
@@ -20,8 +20,8 @@
   {
    "id": "a348d2a8e7cf1f6c5",
    "opis": "wf_dad224e5-cd8:silnik",
-   "idle_min": 0.4,
-   "bez_narzedzi_min": 0.4,
+   "idle_min": 0.3,
+   "bez_narzedzi_min": 0.3,
    "limity": 0,
    "powody": []
   },
@@ -29,7 +29,7 @@
    "id": "ae5de9b3855116702",
    "opis": "wf_10e1a801-dd6:poprawki:fizyka-woda",
    "idle_min": 0.1,
-   "bez_narzedzi_min": 0.2,
+   "bez_narzedzi_min": 0.1,
    "limity": 0,
    "powody": []
   }

@@ -68,7 +68,7 @@ materialy:
 # Przegrody — ściany od wnętrza do zewnątrz; poziome od góry do dołu (brief §9: pełne warstwy)
 przegrody:
   SZ1:
-    nazwa: 'Ściana zewnętrzna nośna: silikat 18 + ETICS EPS 031 20 cm (U ≈ 0,15)'
+    nazwa: 'Ściana zewnętrzna nośna: silikat 18 + ETICS EPS 031 20 cm (U = 0,17 z ΔU łączników — obl. PN-EN ISO 6946)'
     typ: sciana_zewn
     warstwy:
       - {mat: TYNK_GIPS, d: 0.015, funkcja: szczelnosc}
@@ -76,7 +76,7 @@ przegrody:
       - {mat: EPS031, d: 0.2}
       - {mat: TYNK_SIL, d: 0.01}
   SZ2:
-    nazwa: 'Ściana zewnętrzna bryły A (P2) za lamelami: silikat 18 + wełna fasadowa 20 cm + membrana UV-stabilna (czarna); szczelina wentylowana ok. 11 cm i lamele na ruszcie — element `lamele` (U ≈ 0,16)'
+    nazwa: 'Ściana zewnętrzna bryły A (P2) za lamelami: silikat 18 + wełna fasadowa 20 cm + membrana UV-stabilna (czarna); szczelina wentylowana ok. 11 cm i lamele na ruszcie — element `lamele` (U = 0,17 — obl. PN-EN ISO 6946)'
     typ: sciana_zewn
     warstwy:
       - {mat: TYNK_GIPS, d: 0.015, funkcja: szczelnosc}
@@ -84,7 +84,7 @@ przegrody:
       - {mat: WELNA_FAS, d: 0.2}
       - {mat: MEMB_WIATR, d: 0.01}
   SZL:
-    nazwa: 'Ściana zewnętrzna lekka A'' (na wsporniku P2): GK + OSB (szczelność) + szkielet KVH 45×200 z wełną + DWD + wełna fasadowa 18 cm + membrana UV (lico zewn. 0,30 m od osi — jak SZ2, ciągłość warstw w narożu); bez funkcji nośnej (U ≈ 0,10)'
+    nazwa: 'Ściana zewnętrzna lekka A'' (na wsporniku P2): GK + OSB (szczelność) + szkielet KVH 45×200 z wełną + DWD + wełna fasadowa 18 cm + membrana UV (lico zewn. 0,30 m od osi — jak SZ2, ciągłość warstw w narożu); bez funkcji nośnej (U = 0,099)'
     typ: sciana_zewn
     warstwy:
       - {mat: GK, d: 0.025}
@@ -108,7 +108,7 @@ przegrody:
       - {mat: ZB_C25, d: 0.18, konstrukcyjna: true}
       - {mat: TYNK_GIPS, d: 0.015}
   SWG:
-    nazwa: 'Ściana nośna dom–garaż nieogrzewany: silikat 18 + wełna 12 cm od strony garażu + tynk (U ≈ 0,24 ≤ 0,30; szczelna na spaliny)'
+    nazwa: 'Ściana nośna dom–garaż nieogrzewany: silikat 18 + wełna 12 cm od strony garażu + tynk (U = 0,27 ≤ 0,30; szczelna na spaliny)'
     typ: sciana_wewn_nosna
     warstwy:
       - {mat: TYNK_GIPS, d: 0.015}
@@ -162,7 +162,7 @@ przegrody:
       - {mat: EPS031, d: 0.2}
       - {mat: TYNK_SIL, d: 0.005}
   POD-0:
-    nazwa: 'Podłoga na płycie fundamentowej (P0): deska/gres, jastrych z ogrzewaniem podł., EPS 100, membrana SBS (przeciwwilgociowa, przeciwradonowa), płyta ŻB 25 cm, XPS 300 20 cm, folia PE, podsypka (U ≈ 0,14)'
+    nazwa: 'Podłoga na płycie fundamentowej (P0): deska/gres, jastrych z ogrzewaniem podł., EPS 100, membrana SBS (przeciwwilgociowa, przeciwradonowa), płyta ŻB 25 cm, XPS 300 20 cm, folia PE, podsypka (U_equiv = 0,11 — PN-EN ISO 13370)'
     typ: podloga_na_gruncie
     warstwy:
       - {mat: DESKA_DEB, d: 0.015}
@@ -221,7 +221,7 @@ przegrody:
       - {mat: ZB_C25, d: 0.22, konstrukcyjna: true}
       - {mat: TYNK_GIPS, d: 0.01}
   SUF-ZEW:
-    nazwa: 'Sufit pod stropem nad powietrzem zewnętrznym (wspornik bryły A): wełna 20 cm na kołkach + podsufitka włóknocementowa na ruszcie z pustką wentylowaną (U stropu ≈ 0,15)'
+    nazwa: 'Sufit pod stropem nad powietrzem zewnętrznym (wspornik bryły A): wełna 20 cm na kołkach + podsufitka włóknocementowa na ruszcie z pustką wentylowaną (U stropu ST2Z = 0,13)'
     typ: strop
     warstwy:
       - {mat: WELNA_035, d: 0.2, konstrukcyjna: true}
@@ -235,7 +235,7 @@ przegrody:
       - {mat: WELNA_035, d: 0.1, konstrukcyjna: true}
       - {mat: TYNK_CW, d: 0.01}
   SD1:
-    nazwa: 'Stropodach bryły A (P2): membrana TPO, PIR spadkowy 12–32 cm (śr. 22), paroizolacja z Al, płyta ŻB 22 cm, tynk; spadek ≥ 2 % do wpustów WP1/WP2 (U ≈ 0,10)'
+    nazwa: 'Stropodach bryły A (P2): membrana TPO, PIR spadkowy 12–32 cm (śr. 22), paroizolacja z Al, płyta ŻB 22 cm, tynk; spadek ≥ 2 % do wpustów WP1/WP2 (U = 0,11 — klin wg PN-EN ISO 6946 zał. C)'
     typ: stropodach
     warstwy:
       - {mat: MEMB_TPO, d: 0.002}
@@ -244,7 +244,7 @@ przegrody:
       - {mat: ZB_C25, d: 0.22, konstrukcyjna: true}
       - {mat: TYNK_GIPS, d: 0.01}
   SD2:
-    nazwa: 'Stropodach nad P1 (pola pn. poza bryłą A): żwir 5 cm, włóknina, membrana TPO, PIR spadkowy 14–26 cm, paroizolacja, płyta ŻB 22 cm (U ≈ 0,11)'
+    nazwa: 'Stropodach nad P1 (pola pn. poza bryłą A): żwir 5 cm, włóknina, membrana TPO, PIR spadkowy 14–26 cm, paroizolacja, płyta ŻB 22 cm (U = 0,12 — klin wg PN-EN ISO 6946 zał. C)'
     typ: stropodach
     warstwy:
       - {mat: ZWIR_16, d: 0.05}
@@ -255,7 +255,7 @@ przegrody:
       - {mat: ZB_C25, d: 0.22, konstrukcyjna: true}
       - {mat: TYNK_GIPS, d: 0.01}
   DZ1:
-    nazwa: 'Dach zielony ekstensywny NIEUŻYTKOWY nad garażem (pom. nieogrzewane) i pasem gospodarczym: substrat 8 cm, geowłóknina, mata drenażowa, włóknina, bariera przeciwkorzenna, 2 × papa SBS, PIR spadkowy 12–24 cm, paroizolacja, płyta ŻB 24 cm (dwukierunkowa); opaska żwirowa 0,5 m przy attykach i wpustach (U ≈ 0,12)'
+    nazwa: 'Dach zielony ekstensywny NIEUŻYTKOWY nad garażem (pom. nieogrzewane) i pasem gospodarczym: substrat 8 cm, geowłóknina, mata drenażowa, włóknina, bariera przeciwkorzenna, 2 × papa SBS, PIR spadkowy 12–24 cm, paroizolacja, płyta ŻB 24 cm (dwukierunkowa); opaska żwirowa 0,5 m przy attykach i wpustach (U = 0,13); nad garażem: pole PV biosolarne (8 modułów)'
     typ: stropodach
     warstwy:
       - {mat: SUBSTRAT, d: 0.08}

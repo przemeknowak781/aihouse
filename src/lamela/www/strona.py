@@ -160,7 +160,7 @@ def parametry(D: dict, tr: dict, W: dict, sep: str) -> str:
         _wiersz("Energia pierwotna EP", f'{fm(en.get("EP"), 1)} kWh/(m²·rok)',
                 f'wymaganie ≤ {fm(en.get("EP_max"), 0)}; klasa energetyczna — nie wyznaczana przez moduł obliczeń'),
     ]
-    tab = (f'<div class="tab-wrap"><table><thead><tr><th>Parametr</th><th class="l">Wartość</th><th>Podstawa i metoda</th>'
+    tab = (f'<div class="tab-wrap"><table class="t-param"><thead><tr><th>Parametr</th><th class="l">Wartość</th><th>Podstawa i metoda</th>'
            f'</tr></thead><tbody>{"".join(rows)}</tbody></table></div>')
     meta = D["meta"]
     extra = (f'<p class="nota">Wartości z modelu projektu w wersji {E(str(meta.get("wersja", "")))} '

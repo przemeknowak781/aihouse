@@ -74,16 +74,17 @@ print(plot.qa(sh))                               # kontrola wg R4 pkt 3.14
 ### `sheet` — arkusze (PN-EN ISO 5457, 7200, 9431)
 | Funkcja / klasa | Opis |
 |---|---|
-| `sheet_size(fmt, orientation=None) -> (W, H)` | A0–A4, wydłużone `A3x3`, `A2×3`, ogólnie `Ak×n` (A4 pionowo, reszta poziomo) |
-| `fold_positions(W, H) -> (xs, ys)` | linie składania do A4 „do wpięcia” (tabliczka na wierzchu, pas 210 mm z marginesem 20 mm; wg PN-N-01603/DIN 824, uogólnione na formaty wydłużone) |
-| `Sheet(fmt="A3", orientation=None, title_block=None, binding=20, margin=10, fold_marks=True, centring_marks=True, grid_reference=None, draw_frame=True)` | ramka 0,7 mm; znaki centrujące 0,7 mm do 10 mm za ramkę; siatka odniesień 50 mm od osi symetrii (litery bez I/O, 3,5 mm, 0,35 mm — domyślnie dla ≥ A2); oznaczenie formatu w dolnym marginesie |
+| `sheet_size(fmt, orientation=None) -> (W, H)` | A0–A4, wydłużone `A3x3`, `A2×3`, ogólnie `Ak×n` (A4 pionowo, reszta poziomo); niestandardowe `"780x594"` (szer. × wys., jak zapisano; `custom_size`) |
+| `fold_positions(W, H) -> (xs, ys)` | linie składania do A4 „do wpięcia” (praktyka DIN 824 forma A, uogólniona na formaty wydłużone i niestandardowe): harmonijka o nieparzystej liczbie pasów w parach równych ≤ 210 mm, pierwszy pas z marginesem 20 mm, pas z tabliczką ≥ 190 mm na wierzchu; potem co 297 mm od dołu — `lamela.draft.skladanie` |
+| `skladanie.pasy_pionowe(W)`, `rzedy_poziome(H)`, `ocena_skladania(W, H, tb_h=None)`, `opis_skladania(W, H)` | pasy harmonijki, rzędy, plan i ocena „dobre/poprawne/słabe” (progi jak `tools/metryki_arkuszy.py`) + warunek „tabliczka na wierzchu” |
+| `Sheet(fmt="A3", orientation=None, title_block=None, binding=20, margin=10, fold_marks=True, centring_marks=True, grid_reference=None, draw_frame=True)` | ramka 0,7 mm; znaki centrujące 0,7 mm do 10 mm za ramkę; siatka odniesień 50 mm od osi symetrii (litery bez I/O, 3,5 mm, 0,35 mm — domyślnie dla ≥ A2); oznaczenie formatu w dolnym marginesie; znaki składania z numerami kolejności zgięć (1,8 mm, przy krawędzi arkusza); format niestandardowy: `Sheet("780x594")` (`sh.custom`, opis „format niestandardowy”) |
 | `Sheet.add_viewport(scale, title, subtitle=None) -> Viewport` | nowa rzutnia |
 | `Sheet.place(vp, x, y, anchor="tl", pad=3.0, clip_model=None)` | umieszczenie rzutni (kotwica `tl/tr/bl/br/mc…`) |
 | `Sheet.view_title(vp, text=None, scale=True, where="below"|"above", dx, dy, h=5.0)` | tytuł widoku z podziałką i podkreśleniem (dla przekrojów `where="above"` — ISO 128-3) |
 | `Sheet.free_above_title_block() -> rect` | pole tekstowe nad tabliczką |
 | `Sheet.save(base, formats=("dxf","pdf","png"), dpi=200, mode="branze", dxf_mode="layout")` | zapis |
 | `TitleBlock(...)`, `Osoba(funkcja, imie_nazwisko="", specjalnosc_uprawnienia="", data="")` | pola: pracownia, adres pracowni, inwestor, obiekt, lokalizacja (działka/obręb/jedn. ewid.), kategoria, stadium, branża, tytuł, skala, nr rysunku, format (auto), data wydania, rewizja, **arkusz**, **rodzaj dokumentu**, `sprawdzenie` (False — bez wiersza „Sprawdzający”), `osoby` (Projektant / Projektant (wsp.) / Sprawdzający / Opracował — pola PUSTE do ręcznego uzupełnienia, kolumna PODPIS zawsze pusta), `rewizje` (tabela zmian nad tabliczką) |
-| `notes_box(sh, x, y_top, w, lines, title="UWAGI", h=2.5)` | uwagi numerowane, zawijane |
+| `notes_box(sh, x, y_top, w, lines, title="UWAGI", h=2.5, start=1)` | uwagi numerowane, zawijane (`start` — numer pierwszej uwagi, ciąg dalszy bloku dzielonego) |
 | `table(sh, x, y_top, cols, rows, h=2.5, row_h=5, title=None, align=None)` | zestawienia (pomieszczeń, stolarki…) |
 | `scale_bar(c, pos, scale, length_m=None, h=1.8)` | podziałka liniowa (ISO 5455) |
 | `control_segment(sh, pos, length=100, vertical=False)` | odcinek kontrolny wydruku 1:1 |
