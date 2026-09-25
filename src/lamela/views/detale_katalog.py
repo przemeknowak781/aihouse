@@ -1454,7 +1454,7 @@ def detal_rura_cokol(m, opts: dict) -> Detal:
     import re
     r, d = rura_zewn(m, opts.get("rura"))
     det = detal_cokol(m, {"_xR": 1.40, "_yT": 0.85, "_yB": -1.30})
-    det.id, det.tytul = "D-14", f"Rura spustowa {r.get('id', 'RS')} przy cokole — czyszczak i odpływ do KD"
+    det.id, det.tytul = "D-07", f"Rura spustowa {r.get('id', 'RS')} przy cokole — czyszczak i odpływ do KD"
     P = det.pom
     x_out, tz, xR, yT, yB = P["x_out"], P["tz"], P["xR"], P["yT"], P["yB"]
     det.opisy = [o for o in det.opisy if (o.tytul or "").startswith(("SZ", "POD")) or
@@ -1573,7 +1573,7 @@ def detal_prog_dz2(m, opts: dict) -> Detal:
         n_out = s_.n * (1 if s_.wnetrze == "prawa" else -1)
         tz_abs = teren_projektowany(m, mid + n_out * 0.6)
     tz = (tz_abs if tz_abs is not None else teren(m)) - z_f          # teren wzgl. posadzki garażu (y = 0)
-    det = Detal(m, "D-15", f"Próg drzwi {sym} garażu — odwodnienie liniowe i uszczelnienie", (), 10, z0=z_f)
+    det = Detal(m, "D-14", f"Próg drzwi {sym} garażu — odwodnienie liniowe i uszczelnienie", (), 10, z0=z_f)
     Ws = det.warstwy(sz)
     ks = next(i for i, w in enumerate(Ws) if w["konstr"])
     xs1 = sum(w["d"] for w in Ws[:ks + 1])

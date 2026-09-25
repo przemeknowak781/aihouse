@@ -52,8 +52,8 @@ Teren przy obwodzie parteru: istniejący 101,33…101,48, projektowany 101,32…
 | 0.16 | Schowek pod spocznikiem (h < 1,40) | pomocnicza | — | 2,93 | 0,00 | zmienna 1,39…1,40 | 1,39 | — | — |
 | 0.06 | Salon + jadalnia + kuchnia | podstawowa | tak | 54,44 | 54,44 | 2,77 | — | O0-01, O0-02, O0-03, O0-04, O0-05, O0-11 | 0,592 |
 | 0.07 | Pas komunikacyjny przy schodach | ruchu | — | 3,51 | 3,51 | 2,77 | — | — | — |
-| 0.08 | Przedpokój gościnny | ruchu | — | 1,46 | 1,46 | 2,77 | — | — | — |
-| 0.09 | Łazienka gościnna (natrysk) | pomocnicza | — | 3,86 | 3,86 | 2,53 | — | O0-13 | 0,073 |
+| 0.08 | Przedpokój gościnny | ruchu | — | 1,44 | 1,44 | 2,77 | — | — | — |
+| 0.09 | Łazienka gościnna (natrysk) | pomocnicza | — | 3,84 | 3,84 | 2,53 | — | O0-13 | 0,073 |
 | 0.10 | Pokój gościnny / gabinet | podstawowa | tak | 12,52 | 12,52 | 2,77 | — | O0-12 | 0,176 |
 | 0.11 | Przedsionek gospodarczy | ruchu | — | 7,18 | 7,18 | 2,75 | — | — | — |
 | 0.12 | Pomieszczenie techniczne | techniczna | — | 8,85 | 8,85 | 2,75 | — | — | — |
@@ -68,16 +68,16 @@ Teren przy obwodzie parteru: istniejący 101,33…101,48, projektowany 101,32…
 | 1.08 | Pralnia z suszarnią | pomocnicza | — | 6,64 | 6,64 | 2,77 | — | O1-04 | 0,069 |
 | 2.01 | Hol | ruchu | — | 5,74 | 5,74 | 2,77 | — | — | — |
 | 2.02 | Sypialnia rodziców | podstawowa | tak | 21,43 | 21,43 | 2,77 | — | O2-01, O2-04 | 0,436 |
-| 2.03 | Garderoba (przedpokój apartamentu) | pomocnicza | — | 10,57 | 10,57 | 2,77 | — | O2-02 | 0,156 |
+| 2.03 | Garderoba (przedpokój apartamentu) | pomocnicza | — | 10,49 | 10,49 | 2,77 | — | O2-02 | 0,158 |
 | 2.04 | Łazienka rodziców | pomocnicza | — | 5,51 | 5,51 | 2,53 | — | O2-06 | 0,059 |
-| 2.05 | Gabinet / pokój | podstawowa | tak | 16,32 | 16,32 | 2,77 | — | O2-03, O2-05 | 0,354 |
+| 2.05 | Gabinet / pokój gościnny okazjonalny | podstawowa | tak | 16,25 | 16,25 | 2,77 | — | O2-03, O2-05 | 0,355 |
 | 2.06 | Klatka schodowa (wyjście z biegu 2, pustka) | ruchu | — | 0,24 | 0,24 | otwarta (pustka) |  / 2,50 (B10) | O2-07 | 8,598 |
-| 2.07 | Pom. techniczne (centrala rekuperacyjna, wyłaz na dach) | techniczna | — | 6,05 | 6,05 | 2,77 | — | — | — |
+| 2.07 | Pom. techniczne (centrala rekuperacyjna, wyłaz na dach) | techniczna | — | 5,90 | 5,90 | 2,77 | — | — | — |
 | 0.14 | Szacht instalacyjny SI | techniczna | — | 0,45 | 0,45 | 2,77 | — | — | — |
 | 1.09 | Szacht instalacyjny SI | techniczna | — | 0,45 | 0,45 | 2,77 | — | — | — |
 | 2.08 | Szacht instalacyjny SI | techniczna | — | 0,45 | 0,45 | 2,77 | — | — | — |
 
-PU mieszkalna (podstawowa 158,78 + pomocnicza bez garażu 40,26 + komunikacja bez klatek 40,31) = **239,35 m²**; PU wg PN-ISO 9836 (podstawowa + pomocnicza, bez garażu) = 199,04 m²; garaż 37,42 m²; techniczna 16,25 m²; klatki schodowe (wyłączone) 3,51 m². Założenia: światło ościeżnicy = światło muru − 2 × 0,08 m; sufit podwieszany SUF_GK obniża o 0,25 m.
+PU mieszkalna (podstawowa 158,71 + pomocnicza bez garażu 40,16 + komunikacja bez klatek 40,29) = **239,16 m²**; PU wg PN-ISO 9836 (podstawowa + pomocnicza, bez garażu) = 198,87 m²; garaż 37,42 m²; techniczna 16,10 m²; klatki schodowe (wyłączone) 3,51 m². Założenia: światło ościeżnicy = światło muru − 2 × 0,08 m; sufit podwieszany SUF_GK obniża o 0,25 m.
 
 ## 4. Schody
 
@@ -165,7 +165,7 @@ Najbardziej wysunięty ku drodze element budynku leży 0,95 m przed nieprzekracz
 | Wysokości | 2.02 Sypialnia rodziców | h w świetle | 2,77 | ≥ 2,50 (cel 2,70–2,80) | OK | WT §72 ust. 1 [W-050] |
 | Wysokości | 2.03 Garderoba (przedpokój apartamentu) | h w świetle | 2,77 | ≥ 2,20 | OK | brief §5 |
 | Wysokości | 2.04 Łazienka rodziców | h w świetle | 2,53 | ≥ 2,20 (went. mech.) | OK | WT §77 ust. 3 [W-052] |
-| Wysokości | 2.05 Gabinet / pokój | h w świetle | 2,77 | ≥ 2,50 (cel 2,70–2,80) | OK | WT §72 ust. 1 [W-050] |
+| Wysokości | 2.05 Gabinet / pokój gościnny okazjonalny | h w świetle | 2,77 | ≥ 2,50 (cel 2,70–2,80) | OK | WT §72 ust. 1 [W-050] |
 | Wysokości | 2.06 Klatka schodowa (wyjście z biegu 2, pustka) | h pod belką B10 | 2,50 | ≥ 2,20 (lokalnie) | OK | WT §72 (lokalne obniżenie) |
 | Wysokości | 2.07 Pom. techniczne (centrala rekuperacyjna, wyłaz na dach) | h w świetle | 2,77 | ≥ 2,00 | OK | WT §97 ust. 1 [W-053] |
 | Wysokości | 0.14 Szacht instalacyjny SI | h w świetle | 2,77 | ≥ 2,00 | OK | WT §97 ust. 1 [W-053] |
@@ -177,8 +177,8 @@ Najbardziej wysunięty ku drodze element budynku leży 0,95 m przed nieprzekracz
 | Powierzchnie | 1.03 Pokój dziecka 1 | pow. netto | 13,19 m² | ≥ 12,0 m² | OK | brief §4 [W-068] |
 | Powierzchnie | 1.04 Pokój dziecka 2 | pow. netto | 12,52 m² | ≥ 12,0 m² | OK | brief §4 [W-068] |
 | Powierzchnie | 2.02 Sypialnia rodziców | pow. netto | 21,43 m² | ≥ 14,0 m² | OK | brief §4 / założenie (sypialnia rodziców ≥ 14 m²) |
-| Powierzchnie | 2.05 Gabinet / pokój | pow. netto | 16,32 m² | ≥ 8,0 m² | OK | brief §5 (nie WT; dawny §94 ust. 2 uchylony Dz.U. 2017 poz. 2285) [W-068] |
-| Powierzchnie | budynek | PU mieszkalna (podst.+pomocn.+komunikacja, bez klatek, garażu, techn.) | 239,35 m² | 230–270 m² | OK | brief §4 [W-068]; RPB §20 / PN-ISO 9836 [W-316] |
+| Powierzchnie | 2.05 Gabinet / pokój gościnny okazjonalny | pow. netto | 16,25 m² | ≥ 8,0 m² | OK | brief §5 (nie WT; dawny §94 ust. 2 uchylony Dz.U. 2017 poz. 2285) [W-068] |
+| Powierzchnie | budynek | PU mieszkalna (podst.+pomocn.+komunikacja, bez klatek, garażu, techn.) | 239,16 m² | 230–270 m² | OK | brief §4 [W-068]; RPB §20 / PN-ISO 9836 [W-316] |
 | Powierzchnie | 0.06 | strefa dzienna otwarta (salon+jadalnia+kuchnia) | 54,44 m² | ≥ 50,0 m² | OK | brief §4 (TWARDE ZAŁOŻENIA) |
 | Oświetlenie | 0.06 Salon + jadalnia + kuchnia | A_okien/A_podłogi (w świetle ościeżnic, szac.) | 0,592 (mur: 0,677; O0-01, O0-02, O0-03, O0-04, O0-05, O0-11) | ≥ 0,125 | OK | WT §57 ust. 2 (1/8, w świetle ościeżnic) [W-080] |
 | Oświetlenie | 0.10 Pokój gościnny / gabinet | A_okien/A_podłogi (w świetle ościeżnic, szac.) | 0,176 (mur: 0,216; O0-12) | ≥ 0,125 | OK | WT §57 ust. 2 (1/8, w świetle ościeżnic) [W-080] |
@@ -186,7 +186,7 @@ Najbardziej wysunięty ku drodze element budynku leży 0,95 m przed nieprzekracz
 | Oświetlenie | 1.03 Pokój dziecka 1 | A_okien/A_podłogi (w świetle ościeżnic, szac.) | 0,167 (mur: 0,205; O1-06) | ≥ 0,125 | OK | WT §57 ust. 2 (1/8, w świetle ościeżnic) [W-080] |
 | Oświetlenie | 1.04 Pokój dziecka 2 | A_okien/A_podłogi (w świetle ościeżnic, szac.) | 0,176 (mur: 0,216; O1-05) | ≥ 0,125 | OK | WT §57 ust. 2 (1/8, w świetle ościeżnic) [W-080] |
 | Oświetlenie | 2.02 Sypialnia rodziców | A_okien/A_podłogi (w świetle ościeżnic, szac.) | 0,436 (mur: 0,504; O2-01, O2-04) | ≥ 0,125 | OK | WT §57 ust. 2 (1/8, w świetle ościeżnic) [W-080] |
-| Oświetlenie | 2.05 Gabinet / pokój | A_okien/A_podłogi (w świetle ościeżnic, szac.) | 0,354 (mur: 0,423; O2-03, O2-05) | ≥ 0,125 | OK | WT §57 ust. 2 (1/8, w świetle ościeżnic) [W-080] |
+| Oświetlenie | 2.05 Gabinet / pokój gościnny okazjonalny | A_okien/A_podłogi (w świetle ościeżnic, szac.) | 0,355 (mur: 0,425; O2-03, O2-05) | ≥ 0,125 | OK | WT §57 ust. 2 (1/8, w świetle ościeżnic) [W-080] |
 | Schody | SCH1 | wysokość stopnia h | 0,175 | ≤ 0,190 (projekt ≈ 0,175) | OK | WT §68 ust. 1 [W-090] |
 | Schody | SCH1 | 2h+s | 0,630 | 0,60–0,65 | OK | WT §69 ust. 4 [W-091] |
 | Schody | SCH1 | Σ podnóżków × h = Δ kondygnacji | 18 × 0,175 = 3,150 vs 3,150 | równe | OK | geometria |

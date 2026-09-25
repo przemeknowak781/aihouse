@@ -250,7 +250,8 @@ def rekomendacje_woda_md(m, dane) -> str:
     # B4 — DZ2, podsufitka, konwencja
     L += ["### R-W4. Cokół przy drzwiach DZ2 garażu", "",
           "Weryfikacja koncepcji (§6 A5): cokół 0,14 m przy DZ2 (strona wsch., teren wyższy) < 0,30 m, brak odwodnienia "
-          "liniowego. Zalecenie (detal PT-AR-D): odwodnienie liniowe przed progiem DZ2 na całą szerokość drzwi + 0,15 m "
+          "liniowego." + _dz2_z_modelu(m) + " Zalecenie (detal PT-AR-D-14): odwodnienie liniowe przed progiem DZ2 na "
+          "całą szerokość drzwi + 0,15 m "
           "z każdej strony, podłączone do KD-E; nawierzchnia ze spadkiem 2 % od drzwi; uszczelnienie progu taśmą "
           "EPDM / masą KMB wywiniętą ≥ 15 cm na ościeża poza strefę rozbryzgu i połączoną z izolacją przeciwwilgociową "
           "płyty; lokalne obniżenie terenu przy DZ2 (niecka NT-E) tak, by cokół poza drzwiami ≥ 0,30 m "
@@ -265,6 +266,25 @@ def rekomendacje_woda_md(m, dane) -> str:
           "wspornikowych zrównać ze stropem, łącznik termoizolacyjny w strefie izolacji, attyka 0,18 m w osi muru. "
           "Obliczenia mostków i detale PT-AR-D wykonano wg tej docelowej konwencji.", ""]
     return "\n".join(L)
+
+
+def _dz2_z_modelu(m) -> str:
+    """Cokół przy DZ2 z bieżącego modelu (posadzka garażu, teren projektowany TIN 0,6 m przed drzwiami)."""
+    try:
+        from lamela.views.detale_katalog import teren_projektowany
+        o = next(o for o in m.otwory() if o.raw.get("symbol") == "DZ2")
+        s_ = o.sciana
+        t_ = (s_.p2 - s_.p1) / s_.L
+        mid = s_.p1 + t_ * (float(o.raw.get("odl", 0)) + float(o.szer) / 2)
+        tz = teren_projektowany(m, mid + s_.n * (1 if s_.wnetrze == "prawa" else -1) * 0.6)
+        gar = next(p for p in m.pomieszczenia("P0") if (p.raw or {}).get("rodzaj") == "garaz")
+        zf = float(gar.raw.get("rzedna"))
+    except Exception:
+        return ""
+    if tz is None:
+        return ""
+    return (f" Bieżący model: posadzka garażu {zf:+.2f}, teren projektowany przed DZ2 (TIN) {tz:+.3f} → cokół "
+            f"{zf - tz:.2f} m.").replace(".", ",")
 
 
 def rekomendacje_reszta_md(m, dane) -> str:

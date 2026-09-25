@@ -439,9 +439,9 @@ Obszar oddziaływania mieści się w całości na działce (W-012).
 
 | wskaźnik | wartość | wymaganie | ocena |
 |---|---|---|---|
-| PU wg RPB §20 / W-316 (bez klatek, garażu i techn.) | **239,32 m²** (P0 95,36, P1 84,39, P2 59,57) | 230–270 m² | ✓ |
-| kontrolnie PN-ISO 9836 (rdzeń `lamela.model`, pipeline): podstawowa / pomocnicza z garażem / ruchu / techniczna | 158,78 / 77,64 / 43,82 / 16,25 m² („PU” rdzenia = podst. + pomocn. = 236,42 m² — z garażem, bez komunikacji) | — | — |
-| garaż (osobno) / pom. techniczne (osobno) / klatki | 37,42 / 16,25 / 3,51 m² | — | — |
+| PU wg RPB §20 / W-316 (bez klatek, garażu i techn.) | **239,13 m²** (P0 95,33, P1 84,39, P2 59,42) | 230–270 m² | ✓ |
+| kontrolnie PN-ISO 9836 (rdzeń `lamela.model`, pipeline): podstawowa / pomocnicza z garażem / ruchu / techniczna | 158,70 / 77,55 / 43,81 / 16,10 m² („PU” rdzenia = podst. + pomocn. = 236,25 m² — z garażem, bez komunikacji) | — | — |
+| garaż (osobno) / pom. techniczne (osobno) / klatki | 37,42 / 16,10 / 3,51 m² | — | — |
 | strefa dzienna salon + jadalnia + kuchnia | 54,44 m² | ≥ 50 m² | ✓ |
 | powierzchnia zabudowy (obrysy kondygnacji) | 187,50 m² (11,72 %); z płytami 218,08 m² | ≤ 480 m² (30 %) | ✓ |
 | powierzchnia biologicznie czynna | 1 281,57 m² (80,10 %); rezerwa 50 % dachu zielonego 29,53 m² | ≥ 800 m² (50 %) | ✓ |
@@ -489,7 +489,7 @@ Obszar oddziaływania mieści się w całości na działce (W-012).
 | 1.03 Pokój dziecka 1 | 13,19 | O1-06 | 2,26 | 1:5,8 | ✓ |
 | 1.04 Pokój dziecka 2 | 12,52 | O1-05 | 2,26 | 1:5,5 | ✓ |
 | 2.02 Sypialnia rodziców | 21,43 | O2-01, O2-04 | 9,52 | 1:2,3 | ✓ |
-| 2.05 Gabinet / pokój | 16,32 | O2-03, O2-05 | 5,91 | 1:2,8 | ✓ |
+| 2.05 Gabinet / pokój gościnny okazjonalny | 16,25 | O2-03, O2-05 | 5,91 | 1:2,7 | ✓ |
 
 **Wierność szkicowi** (krawędzie elewacji S od lica zach. bryły B; szkic: brief §1.1, 45,8 px/m):
 
@@ -518,8 +518,8 @@ Obszar oddziaływania mieści się w całości na działce (W-012).
 | 0.16 | Schowek pod spocznikiem (h < 1,40) | pomocnicza | 2,91 | 1,37 | 0,00 |
 | 0.06 | Salon + jadalnia + kuchnia | podstawowa | 54,44 | 2,77 | 54,44 |
 | 0.07 | Pas komunikacyjny przy schodach | ruchu | 3,51 | 2,77 | 3,51 |
-| 0.08 | Przedpokój gościnny | ruchu | 1,46 | 2,77 | 1,46 |
-| 0.09 | Łazienka gościnna (natrysk) | pomocnicza | 3,86 | 2,77 | 3,86 |
+| 0.08 | Przedpokój gościnny | ruchu | 1,44 | 2,77 | 1,44 |
+| 0.09 | Łazienka gościnna (natrysk) | pomocnicza | 3,84 | 2,77 | 3,84 |
 | 0.10 | Pokój gościnny / gabinet | podstawowa | 12,52 | 2,77 | 12,52 |
 | 0.11 | Przedsionek gospodarczy | ruchu | 7,18 | 2,76 | 7,18 |
 | 0.12 | Pomieszczenie techniczne | techniczna | 8,85 | 2,76 | 8,85 |
@@ -534,11 +534,11 @@ Obszar oddziaływania mieści się w całości na działce (W-012).
 | 1.08 | Pralnia z suszarnią | pomocnicza | 6,64 | 2,77 | 6,64 |
 | 2.01 | Hol | ruchu | 5,74 | 2,77 | 5,74 |
 | 2.02 | Sypialnia rodziców | podstawowa | 21,43 | 2,77 | 21,43 |
-| 2.03 | Garderoba (przedpokój apartamentu) | pomocnicza | 10,57 | 2,77 | 10,57 |
+| 2.03 | Garderoba (przedpokój apartamentu) | pomocnicza | 10,49 | 2,77 | 10,49 |
 | 2.04 | Łazienka rodziców | pomocnicza | 5,51 | 2,77 | 5,51 |
-| 2.05 | Gabinet / pokój | podstawowa | 16,32 | 2,77 | 16,32 |
+| 2.05 | Gabinet / pokój gościnny okazjonalny | podstawowa | 16,25 | 2,77 | 16,25 |
 | 2.06 | Klatka schodowa (wyjście z biegu 2, pustka) | ruchu | 0,24 | 2,77 | 0,24 |
-| 2.07 | Pom. techniczne (centrala rekuperacyjna, wyłaz na dach) | techniczna | 6,05 | 2,77 | 6,05 |
+| 2.07 | Pom. techniczne (centrala rekuperacyjna, wyłaz na dach) | techniczna | 5,90 | 2,77 | 5,90 |
 | 0.14 | Szacht instalacyjny SI | techniczna | 0,45 | 2,77 | 0,45 |
 | 1.09 | Szacht instalacyjny SI | techniczna | 0,45 | 2,77 | 0,45 |
 | 2.08 | Szacht instalacyjny SI | techniczna | 0,45 | 2,77 | 0,45 |

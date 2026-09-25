@@ -1,0 +1,61 @@
+# Konfiguracja arkuszy DETALI ARCHITEKTONICZNYCH (projekt techniczny, PT-AR-D) — generator lamela.views.detale
+# (budowniczy detali: lamela.views.detale_katalog). Plik NIE zawiera danych budynku: grubości i kolejność warstw
+# z przegród model/budynek.yaml, rzędne z płyt/dachów/attyk, ψ i f_Rsi z katalogu mostków 2D
+# (projekt/08_obliczenia/mostki/zestawienie_mostkow.json — tools/mostki_budynku.py).
+# Widok `detal`: `rodzaj: <budowniczy>` albo `wezel: <id węzła sekcji wezly>`; `skala` 10 lub 5; `id_detalu` (opcja)
+# nadpisuje numer domyślny (odsyłacze w opisach używają numerów domyślnych D-01…D-14).
+# Uruchomienie (PT — detale):
+#   PYTHONPATH=src python3 tools/generuj_widoki.py --arkusze model/arkusze_detale.yaml \
+#       --out projekt/10_PT_architektura/detale
+wspolne:
+  pracownia: "PRACOWNIA PROJEKTOWA — nazwa do uzupełnienia"
+  pracownia_adres: "adres pracowni do uzupełnienia"
+  inwestor: "(do uzupełnienia)"
+  obiekt: "Budynek mieszkalny jednorodzinny wolnostojący „Dom LAMELA”"
+  lokalizacja: null
+  kategoria: "I"
+  stadium: "PT"
+  branza: "ARCHITEKTURA (AR)"
+  prefiks_nr: "PT-AR-D"
+  data: null
+  rewizja: "0"
+  skala: 10
+  format: auto                 # dobór formatu i upakowania — wspólny silnik arkuszy (views/sheets.py)
+  raport_detali: projekt/10_PT_architektura/detale/raport_detali.md
+  wyniki_mostkow: projekt/08_obliczenia/mostki/zestawienie_mostkow.json
+  uwagi: []
+# Grupowanie: kilka detali jednego tematu na arkuszu — wspólna legenda materiałów, „4 linii” i wyników mostków.
+arkusze:
+  - nr: PT-AR-D-01
+    tytul: "DETALE — COKÓŁ, PRÓG HS, RURA SPUSTOWA"
+    widoki:
+      - {typ: detal, rodzaj: cokol, skala: 10}
+      - {typ: detal, rodzaj: prog_hs, skala: 10}
+      - {typ: detal, rodzaj: rura_cokol, skala: 10}
+  - nr: PT-AR-D-02
+    tytul: "DETALE — OKNO (CIEPŁY MONTAŻ), OKAP PL-E"
+    widoki:
+      - {typ: detal, rodzaj: okno, skala: 5}
+      - {typ: detal, rodzaj: okap, skala: 10}
+  - nr: PT-AR-D-03
+    tytul: "DETALE — ATTYKI, WPUSTY, PRZELEW AWARYJNY"
+    widoki:
+      - {typ: detal, rodzaj: attyka_przelew, skala: 10}
+      - {typ: detal, rodzaj: attyka_wpust, skala: 10}
+      - {typ: detal, rodzaj: wpust, skala: 10}
+  - nr: PT-AR-D-04
+    tytul: "DETALE — WSPORNIK BRYŁY A, LAMELE ELEWACYJNE"
+    widoki:
+      - {typ: detal, rodzaj: wspornik_A, skala: 10}
+      - {typ: detal, rodzaj: lamele, skala: 5}
+  - nr: PT-AR-D-05
+    tytul: "DETALE — GARAŻ (ŚCIANA DOM–GARAŻ, DACH ZIELONY, DRZWI DZ2)"
+    widoki:
+      - {typ: detal, rodzaj: garaz_dach, skala: 10}
+      - {typ: detal, rodzaj: garaz_plyta, skala: 10}
+      - {typ: detal, rodzaj: prog_dz2, skala: 10}
+  - nr: PT-AR-D-06
+    tytul: "DETALE — WYŁAZ DACHOWY I ŚWIETLIK"
+    widoki:
+      - {typ: detal, rodzaj: wylaz, skala: 10}
+      - {typ: detal, rodzaj: wylaz, element: SW1, id_detalu: D-13a, skala: 10}

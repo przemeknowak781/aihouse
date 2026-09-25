@@ -506,7 +506,8 @@ def widok_detalu(ctx, spec: dict, scale: float, opts: dict):
     if rodzaj not in DK.RODZAJE:
         raise KeyError(f"detal: nieznany rodzaj/węzeł „{spec.get('rodzaj') or spec.get('wezel')}” "
                        f"(rodzaje: {', '.join(DK.RODZAJE)})")
-    det: Detal = DK.RODZAJE[rodzaj](ctx.model, dict(opts, **{k: v for k, v in spec.items() if k in ("id_detalu",)}))
+    det: Detal = DK.RODZAJE[rodzaj](ctx.model, dict(opts, **{k: v for k, v in spec.items()
+                                                            if k in ("id_detalu", "element", "symbol", "rura")}))
     if spec.get("id_detalu"):
         det.id = str(spec["id_detalu"])
     sk = int(spec.get("skala") or det.skala or scale)
