@@ -1,4 +1,5 @@
 {
+ "nr": 55,
  "title": "Statystyki sesji: 80 agentów, 49,7 h pracy agentów w 9,5 h, koszt wg API ≈ 1,1 tys. USD · konstrukcja: runda 1 ►",
  "stages": [
   [
@@ -52,6 +53,17 @@
  ],
  "notes": [
   "Biuro projektowe: zwykle 60–95 tys. zł netto i 10–32 tygodnie.",
-  "Porównanie nie 1:1 — brak podpisów, uprawnień i realnych danych działki."
+  "Porównanie nie 1:1 — brak podpisów, uprawnień i realnych danych działki.",
+  "NADZÓR (11:23): 2 agentów aktywnych, bez zastojów; najdłuższa bezczynność 2 min; zmiany w repo 0 min temu."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/docs/50_statystyki/agenci_w_czasie.png",
+   "caption": "Agenci w czasie i liczba pracujących naraz (maks. 9)"
+  },
+  {
+   "path": "/home/user/aihouse/docs/50_statystyki/koszt_przeplywow.png",
+   "caption": "Koszt wg cennika API Opus 5.5 — przepływy i agenci"
+  }
  ]
 }
