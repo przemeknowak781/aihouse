@@ -1,4 +1,5 @@
 {
+ "nr": 26,
  "title": "Koncepcja LAMELA: synteza zakończona → audyty A1 (WT/MPZP) i A2 (geometria) w toku",
  "stages": [
   [
@@ -55,9 +56,24 @@
   ]
  ],
  "notes": [
+  "NADZÓR (06:04): 4 agentów aktywnych, bez zastojów; najdłuższa bezczynność 2 min; zmiany w repo 0 min temu.",
   "Synteza: baza W2 + 15 przeszczepów z W1/W3 (m.in. PC R290 7,0 m od granicy, zbiornik 5 m³ + niecka 24 m², fasada E w osiach boksu C, pralnia + osobne WC, klatka poszerzona).",
   "Wskaźniki wg syntezy (do weryfikacji w audycie): PU 241,07 m², pow. zabudowy 187,51 m², wysokość 10,02 m od śr. terenu (limit MPZP 11,0 m).",
   "Fundament: płyta na XPS z żebrami (ciągłość izolacji, ISO 13793) — do potwierdzenia opinią geotechniczną (kat. II).",
   "Incydent: równoległe wykonanie syntezy (skutek mojej wiadomości do agenta przepływu) — pliki zweryfikowane, model generuje się poprawnie; opis koncepcja.md i podglądy final/ zlecone osobnemu agentowi."
+ ],
+ "images": [
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/podglad_lamela/PB-AR-07_elewacja_poludniowa_ogrodowa.png",
+   "caption": "Elewacja południowa (ogrodowa) — sylweta S z brył A/B/C/E"
+  },
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/podglad_lamela/PB-AR-01_rzut_parteru.png",
+   "caption": "Rzut parteru 1:50 — model po syntezie"
+  },
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/podglad_lamela/PB-AR-05_przekroj_a_a.png",
+   "caption": "Przekrój A-A"
+  }
  ]
 }

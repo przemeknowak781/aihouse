@@ -148,3 +148,49 @@ obsługuje łazienki P0, P1 i P2 ustawione jedna nad drugą (x 3,98–5,77).
 * drzwi wejściowe 1,10 × 2,40, próg ≤ 0,02 (W-055);
 * okna ≥ 1/8 powierzchni podłogi we wszystkich pokojach (W-080);
 * niskie parapety P1/P2: dolna część stała VSG do 0,85 m, skrzydła P2 otwierane do wewnątrz (W-097/W-098).
+
+## 4. Przeszczepy i poprawki obowiązkowe — rozliczenie
+
+| źródło | wymaganie / przeszczep | rozwiązanie w modelu |
+|---|---|---|
+| J1, J2, J3 | drzwi ≥ 0,90 × 2,10 w murze; łazienki/WC na zewnątrz lub przesuwne; wejście ≥ 1,10 × 2,15 | symbole D1/D2/D2P/D4 0,90 × 2,10; O0-16 przesuwne; O0-19, O1-10, O1-11, O2-10 na zewnątrz; DZ1 1,10 × 2,40 |
+| J1 | schody: szerokość użytkowa ≥ 1,00 m | biegi 1,15 / 1,145 m, jeden pochwyt ciągły (BL1, BL2) → ≈ 1,05 m |
+| J1, J2 | PC monoblok R290, ≥ 6,0 m od granicy E, strefa 1,0 m, ekran, L_Aeq,N ≤ 40 (cel 35) dB | jednostka przy ścianie pd. pasa gospodarczego, 7,0 m od granicy E (PC-JZ w `dzialka.yaml`); strefa R290 bez okien/drzwi/wpustów; osłona lamelowa z ekranem od tarasu; szacunek hałasu §7 |
+| J1, J2 (z W3) | retencja: szczelny zbiornik ≤ 5 m³ + niecka ≈ 24 m² (W-145) | zbiornik 5,0 m³ + niecka NCH-1 24 m² × 0,30 m w ogrodzie pd., ≥ 3 m od fundamentów, ≥ 2 m od granic |
+| J1, J2, J3 | PU wg RPB §20 / W-316 bez klatek, garaż i techniczne osobno | bilans §9 (podgląd liczy wg W-316; spiżarnia pod biegiem w 50 %) |
+| J1 (z W3) | stopa schodów dostępna z holu bez strefy mebli | pas komunikacyjny 0.07 + ekran z lamel LAM-P0 (h 2,10) |
+| J1 (z W3) | szklana przegroda wiatrołap/hol, doświetle drzwi | ścianka SGL S0-21 z drzwiami DS1 w osi wejścia; FX3 |
+| J1 (z W1) | kuchnia z ciągłą zabudową; drzwi przedsionek → kuchnia przy fasadzie | O0-21 w S0-15 na y 0,25–1,15; blaty y 1,30–5,02 + wyspa |
+| J1 | pralnia ≈ 6,5 m²; zysk dla łazienki/pokoju | pralnia 1.08 ≈ 6,6 m² + WC z natryskiem 1.07 (drugi punkt sanitarny P1) |
+| J1 | czerpnia W-166, wyrzutnia W-167 | czerpnia i wyrzutnia dachowe ≥ 0,40 m nad pokryciem, ≥ 6 m od wywiewki K1 i od siebie (`energia.wentylacja`) |
+| J1 | niskie parapety W-097 | OP1/OP3 i BC1 z dolną częścią stałą VSG do 0,85 m; brak siedziska w boksie |
+| J1, J2 | linia zabudowy: zapas ≥ 0,30–0,50 m | daszek PL-DA i podest 0,95 m za linią zabudowy |
+| J2 | odwodnienie stropodachu P2 wpustami (nie rzygaczami), przelewy w każdym polu | D1: WP1/WP2 DN100 podgrzewane → RS1/RS2 w izolowanym szachcie SI; przelewy PA1–PA3; D2, D3, D4 z własnymi wpustami, przelewami i rurami (§6) |
+| J2 | strop garażu dwukierunkowy / pogrubiony; zaspa, B2, dach zielony nasycony | płyta D4 24 cm dwukierunkowa na ścianach E, F, osi 2 i 5 (6,375 × 6,50 m) |
+| J2 | mostki pasa gospodarczego pod dachem garażu | ciągły ETICS wokół całego P0 (garaż jako bufor wewnątrz obudowy); SWG z wełną 12 cm od garażu; docieplenie spodu stropu garażu pasem 1,0 m (SUF-G); węzły WZ-09 |
+| J2 | mimośród sztywności P0 (fasada na słupach) | ściany trzonu klatki C i D na P0 żelbetowe 18 cm (przegroda SWZB) |
+| J2 | wsporniki: EQU, ugięcia, łączniki z ETA, szczelina nad stolarką | `konstrukcja.sciezka_obciazen`; wszystkie płyty wysunięte `lacznik_termiczny: true` |
+| J2 (z W3) | słupy E w osiach ramy C (jedna linia pionowa) | SL3/SL4 (x 6,435 / 8,77) = SL5/SL6 boksu C; kwatery 1,90/1,90/2,335/2,335/2,93 |
+| J2 (z W1) | lekka rama C na konsolach punktowych | PL-C1/PL-C2 z materiału RAMA_C (stal w okładzinie), węzeł χ WZ-14 |
+| J2 | HS na taras zach.; drzwi gospodarcze w systemie fasady E | O0-11 (HS2 2,40 × 2,75); O0-06 (DZ3) w podziale fasady |
+| J3 | garaż w licu ogrodowym, linia D jedną krawędzią do narożnika | bryła G x 12,30–18,675, lico y −0,30; linia D +3,85 do x 18,675 |
+| J3 | rama górna C przedłużona na wschód | PL-C2 do x 13,45 |
+| J3 | elewacja północna i widok od ogrodu | arkusze PB-AR-07…10 i model 3D (pipeline) |
+
+**Wytyczne koordynatora z symulacji mostków 2D** (katalog `projekt/08_obliczenia/demo_test/mostki`) wprowadzono do przegród, otworów
+i sekcji `wezly`:
+1. **Ciepły montaż stolarki.** Rama wsunięta 5 cm w mur i 4 cm w izolację, izolacja ościeża z zakładem 3 cm na ramę, taśmy
+   paroszczelne wewnątrz i paroprzepuszczalne na zewnątrz (pole `montaz` każdego otworu zewnętrznego).
+2. **Brak kaset osłon w ociepleniu** (`oslona_montaz`):
+   * P0: kasety screenów w podsufitce okapu PL-E;
+   * boks C: w pasie górnym ramy;
+   * P2: w szczelinie wentylowanej za lamelami;
+   * okna zachodnie: kasety nadstawne przed licem ETICS.
+3. **Posadowienie.** Płyta fundamentowa na XPS 20 cm z ciągłą izolacją cokołu (WZ-GF2 „dobry”).
+4. **Garaż.** Izolacja domu ciągła po zewnątrz, a ściany i strop garażu jej nie przerywają (WZ-G1).
+5. **Progi HS i drzwi na płycie P0.** Profil progowy termoizolacyjny na podwalinie XPS/PUR-GF, odwodnienie liniowe OL-2/OL-2W/OL-3
+   (pole `prog`, węzeł WZ-11T).
+6. **Płyty wysunięte.** Wszystkie na łącznikach z ETA, ze spadkiem 2 % od budynku i okapnikiem.
+7. **Rury spustowe.** Zewnętrzne RS3–RS5 przed licem na obejmach dystansowych. Wewnętrzne RS1/RS2 w izolowanym szachcie SI, RS6
+   w pomieszczeniu technicznym. Żadna nie jest we wnęce ocieplenia.
+8. **Typy węzłów** wg `ALIASY_WEZLOW` (`mostki2d/katalog.py`), więc `tools/katalog_mostkow.py` policzy je automatycznie.

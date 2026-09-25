@@ -1,32 +1,40 @@
 {
- "czas": "2026-09-25 06:02",
+ "czas": "2026-09-25 06:04",
  "aktywni": [
   {
    "id": "a26849570eda26834",
    "opis": "Build RC wall-beam FEM/STM module",
-   "idle_min": 0.0,
+   "idle_min": 0.1,
    "bez_narzedzi_min": 0.1,
+   "limity": 0,
+   "powody": []
+  },
+  {
+   "id": "a31322d115de1ad9a",
+   "opis": "Write koncepcja.md + final previews",
+   "idle_min": 0.0,
+   "bez_narzedzi_min": 0.0,
    "limity": 0,
    "powody": []
   },
   {
    "id": "a160d071c58d17dd8",
    "opis": "wf_44634517-034:audyt:A1",
-   "idle_min": 0.0,
-   "bez_narzedzi_min": 0.0,
+   "idle_min": 1.4,
+   "bez_narzedzi_min": 1.4,
    "limity": 0,
    "powody": []
   },
   {
    "id": "afaa6d6581e71147d",
    "opis": "wf_44634517-034:audyt:A2",
-   "idle_min": 0.0,
-   "bez_narzedzi_min": 0.0,
+   "idle_min": 1.9,
+   "bez_narzedzi_min": 1.9,
    "limity": 0,
    "powody": []
   }
  ],
  "zakonczeni": 0,
  "zastoje": [],
- "repo_bez_zmian_min": 0.0
+ "repo_bez_zmian_min": 0.4
 }

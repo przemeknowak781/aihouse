@@ -227,6 +227,9 @@ class AnalizaKonstrukcji:
         self.pos_slupy: list[Pozycja] = []
         self.pos_fund: list[Pozycja] = []
         self.pos_wience: list[Pozycja] = []
+        self.pos_tarcze: list[Pozycja] = []
+        self.tarcze: dict = {}                  # id ściany-tarczy → WynikTarczy
+        self.tarcze_ids: set = set()
         self.pos_obc: Pozycja | None = None
         self.q_p = None
         self.wiatr_sc = None
@@ -263,8 +266,11 @@ class AnalizaKonstrukcji:
         self._ogolne()
         self._grupy_plyt()
         self._bezp(self._schody, opis="schody")
+        self.tarcze_ids = {w.id for w in self.m.sciany() if self._czy_tarcza(w)}
         zdarz = [(g.wierzch + 0.001, "g", g) for g in self.grupy]
-        zdarz += [(w.z_do, "s", w) for w in self.m.sciany() if w.typ in TYPY_NOSNE]
+        # ściana-tarcza: po płycie, na której stoi (zbiera reakcje stropu podwieszonego), przed ścianami poniżej
+        zdarz += [((w.z_od - 0.0005) if w.id in self.tarcze_ids else w.z_do, "t" if w.id in self.tarcze_ids else "s", w)
+                  for w in self.m.sciany() if w.typ in TYPY_NOSNE]
         zdarz.sort(key=lambda t: -t[0])
         for _, typ, ob in zdarz:
             if typ == "g":
@@ -273,6 +279,9 @@ class AnalizaKonstrukcji:
                 self._bezp(self._analiza_grupy, ob, opis=f"płyta {ob.nazwa}")
                 self._bezp(self._belki_grupy, ob, opis=f"belki pod {ob.nazwa}")
                 self._bezp(self._slupy_pod_grupa, ob, opis=f"słupy pod {ob.nazwa}")
+            elif typ == "t":
+                if self._bezp(self._tarcza, ob, opis=f"ściana-tarcza {ob.id}") is None and ob.id not in self.prof:
+                    self._bezp(self._sciana, ob, opis=f"ściana {ob.id}")
             else:
                 self._bezp(self._sciana, ob, opis=f"ściana {ob.id}")
         self._bezp(self._nadproza, opis="nadproża")
@@ -513,6 +522,27 @@ class AnalizaKonstrukcji:
                 sid = w.id if k == 0 else f"{w.id}#{k + 1}"
                 g.podp_l.append(PodporaLiniowa(sid, piece, "przegub", "sciana"))
                 g.sciany_pod.append((sid, w))
+        # ściany-tarcze stojące na płycie: płyta podwieszona do tarczy poza odcinkami podpartymi ścianą poniżej [UPR]
+        g.tarcze_pod = []
+        for w in m.sciany():
+            if w.id not in self.tarcze_ids or not any(abs(w.z_od - t_) < TOL_Z for t_ in tops):
+                continue
+            ln = LineString([tuple(w.p1), tuple(w.p2)])
+            if ln.distance(g.poly) > 0.05:
+                continue
+            pod = [LineString([tuple(v.p1), tuple(v.p2)]) for v in m.sciany() if v.typ in TYPY_NOSNE and v.id != w.id
+                   and any(abs(v.z_do - s_) < TOL_Z for s_ in spody) and self._wspolliniowe(w, v) > 0.05]
+            rest = ln.difference(unary_union(pod).buffer(0.02)) if pod else ln
+            geoms = [rest] if isinstance(rest, LineString) else list(getattr(rest, "geoms", []))
+            k = 0
+            for gg in geoms:
+                if not isinstance(gg, LineString) or gg.length < 0.3:
+                    continue
+                for piece in self._snap_linia(gg, g.poly):
+                    k += 1
+                    sid = f"{w.id}~T{k}"
+                    g.podp_l.append(PodporaLiniowa(sid, piece, "przegub", "tarcza"))
+                    g.tarcze_pod.append((sid, w))
         g.belki = []
         linie_scian = [(sp.linia, ww.warstwa_konstr.d) for (sid_, ww), sp in zip(g.sciany_pod, g.podp_l)]
         for b in m.belki():
@@ -649,7 +679,7 @@ class AnalizaKonstrukcji:
         m = self.m
         self._podpory_grupy(g)
         for w in m.sciany():
-            if abs(w.z_od - g.wierzch) > TOL_Z:
+            if abs(w.z_od - g.wierzch) > TOL_Z or w.id in self.tarcze_ids:
                 continue
             ln = LineString([tuple(w.p1), tuple(w.p2)])
             if ln.distance(g.poly) > 0.05:
