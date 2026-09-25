@@ -687,10 +687,11 @@ def ground_line(c, pts, layer: str = "A-TEREN", band: bool = True, depth_mm: flo
 
 # ------------------------------------------------------------------------------------------------ legenda
 def legend(c, x: float, y_top: float, codes, cols: int = 1, col_w: float = 88.0, sw: tuple = (14.0, 7.0),
-           h: float = 2.2, title: str | None = "OZNACZENIA MATERIAŁÓW (PN-B-01030)", row_gap: float = 2.2,
+           h: float = 1.8, title: str | None = "OZNACZENIA MATERIAŁÓW (PN-B-01030)", row_gap: float = 2.0,
            show_source: bool = True, layer: str = "R-LEGENDA"):
-    """Legenda materiałów: próbka (kreskowanie w ramce) + nazwa (+ źródło oznaczenia). Rysowana na płótnie ``c``
-    (zwykle arkusz, mm). Zwraca prostokąt (x0, y0, x1, y1)."""
+    """Legenda materiałów: próbka (kreskowanie w ramce) + nazwa (+ źródło oznaczenia, kursywą). Rysowana na płótnie
+    ``c`` (zwykle arkusz, mm). Opisy zawijane do szerokości kolumny, wysokość wiersza dopasowana do treści.
+    Zwraca prostokąt (x0, y0, x1, y1)."""
     from .sheet import wrap
     k = c.k
     y = y_top
@@ -704,31 +705,35 @@ def legend(c, x: float, y_top: float, codes, cols: int = 1, col_w: float = 88.0,
         rows.append((cd, label))
     n = len(rows)
     per_col = int(math.ceil(n / cols))
+    avail = col_w - sw[0] - 4.5
+    hs = 1.8
     ymin = y
-    for i, (cd, label) in enumerate(rows):
-        col = i // per_col
-        r = i % per_col
-        x0 = x + col * col_w * k
-        rh = sw[1] * k + row_gap * k
-        y0 = y - (r + 1) * rh + row_gap * k
-        box = Polygon(rect_pts(x0, y0, x0 + sw[0] * k, y0 + sw[1] * k))
-        pat = PATTERNS[cd]
-        if pat.kind == "membrane":
-            PATTERNS[cd].fn(c, box, HATCH_LAYER, axis=[(x0, y0 + sw[1] * k / 2), (x0 + sw[0] * k, y0 + sw[1] * k / 2)])
-            c.rect(x0, y0, x0 + sw[0] * k, y0 + sw[1] * k, layer=layer, pen="b_cienka", lt="KROPKOWA")
-        elif cd == "GRUNT_RODZIMY":
-            ground_line(c, [(x0, y0 + sw[1] * k * 0.8), (x0 + sw[0] * k, y0 + sw[1] * k * 0.8)], layer=layer)
-        else:
-            hatch(c, box, cd, HATCH_LAYER)
-            c.rect(x0, y0, x0 + sw[0] * k, y0 + sw[1] * k, layer=layer, pen="srednia")
-        tx = x0 + (sw[0] + 2.5) * k
-        avail = col_w - sw[0] - 4.0
-        ls = wrap(label, avail, h)
-        yy = y0 + sw[1] * k / 2 + (len(ls) - 1) * h * 1.5 * k / 2 + (0.8 * k if show_source else -h * k / 2)
-        for j, s in enumerate(ls):
-            c.text((tx, yy - j * h * 1.5 * k), s, h, layer=layer)
-        if show_source:
-            c.text((tx, yy - len(ls) * h * 1.5 * k + 0.2 * k), PATTERNS[cd].source, 1.8, layer=layer,
-                   style="italic", color="#505050")
-        ymin = min(ymin, y0)
+    for col in range(cols):
+        yy = y
+        for cd, label in rows[col * per_col:(col + 1) * per_col]:
+            x0 = x + col * col_w * k
+            lab_ls = wrap(label, avail, h)
+            src_ls = wrap(PATTERNS[cd].source, avail, hs, "italic") if show_source else []
+            block = len(lab_ls) * h * 1.5 + len(src_ls) * hs * 1.45
+            rh = max(sw[1], block) + row_gap
+            y0 = yy - row_gap - max(sw[1], block) / 2.0 - sw[1] / 2.0   # dół próbki (wyśrodkowanej w wierszu)
+            box = Polygon(rect_pts(x0, y0, x0 + sw[0] * k, y0 + sw[1] * k))
+            pat = PATTERNS[cd]
+            if pat.kind == "membrane":
+                pat.fn(c, box, HATCH_LAYER, axis=[(x0, y0 + sw[1] * k / 2), (x0 + sw[0] * k, y0 + sw[1] * k / 2)])
+                c.rect(x0, y0, x0 + sw[0] * k, y0 + sw[1] * k, layer=layer, pen="b_cienka", lt="KROPKOWA")
+            elif cd == "GRUNT_RODZIMY":
+                ground_line(c, [(x0, y0 + sw[1] * k * 0.8), (x0 + sw[0] * k, y0 + sw[1] * k * 0.8)], layer=layer)
+            else:
+                hatch(c, box, cd, HATCH_LAYER, band_mm=None)
+                c.rect(x0, y0, x0 + sw[0] * k, y0 + sw[1] * k, layer=layer, pen="srednia")
+            tx = x0 + (sw[0] + 2.5) * k
+            ty = y0 + sw[1] * k / 2 + block * k / 2 - h * k       # linia bazowa pierwszego wiersza opisu
+            for j, s_ in enumerate(lab_ls):
+                c.text((tx, ty - j * h * 1.5 * k), s_, h, layer=layer)
+            ty2 = ty - len(lab_ls) * h * 1.5 * k + (h - hs) * k
+            for j, s_ in enumerate(src_ls):
+                c.text((tx, ty2 - j * hs * 1.45 * k), s_, hs, layer=layer, style="italic", color="#505050")
+            yy -= rh * k
+        ymin = min(ymin, yy)
     return (x, ymin, x + cols * col_w * k, y_top)

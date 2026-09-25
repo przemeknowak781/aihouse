@@ -405,7 +405,7 @@ def demo_legend():
     sh = Sheet("A2", title_block=tb)
     x0, y0, x1, y1 = sh.frame
     codes = list(hatch.PATTERNS)
-    lg = hatch.legend(sh, x0 + 8.0, y1 - 14.0, codes, cols=3, col_w=92.0, sw=(16.0, 8.0), h=1.8, row_gap=1.8,
+    lg = hatch.legend(sh, x0 + 8.0, y1 - 12.0, codes, cols=3, col_w=92.0, sw=(14.0, 7.0), h=1.8, row_gap=1.5,
                       title="OZNACZENIA MATERIAŁÓW W PRZEKROJACH (PN-B-01030:2000 + oznaczenia przyjęte)")
     # symbole — siatka komórek
     cells = []
@@ -417,13 +417,13 @@ def demo_legend():
     cell("Strzałka północy", lambda c, p: S.north_arrow(c, p + (0, -2), 14.0))
     cell("Oś konstrukcyjna", lambda c, p: S.axis_line(c, p + (-14, 0), p + (14, 0), "B", "start", 4.0, 3.5))
     cell("Oznaczenie przekroju", lambda c, p: S.section_mark(c, p + (-18, -3), p + (18, -3), "A", 1.0, 5.0, 7, 5.5))
-    cell("Oznaczenie pomieszczenia", lambda c, p: S.room_tag(c, p, "0.05", "Salon", 32.45, level_z=0.0, h=2.5))
+    cell("Oznaczenie pomieszczenia", lambda c, p: S.room_tag(c, p, "1.05", "Salon", 32.45, level_z=0.0, h=2.5))
     cell("Symbol stolarki", lambda c, p: (S.tag(c, p + (-8, 0), "O1"), S.tag(c, p + (8, 0), "HS1", "ellipse")))
     cell("Rzędna — rzut (X / ramka)", lambda c, p: (dims.level_plan(c, p + (-18, 2), 0.0),
                                                      dims.level_plan(c, p + (10, -4), -0.02, style="box")))
     cell("Rzędne — przekrój (±0,00 / wyk. / konstr.)",
          lambda c, p: dims.levels(c, p[0] - 22, [(p[1] - 6, "zero", 101.65)], nd=2) if False else (
-             dims.level_section(c, p + (-22, -8), text="±0,00", kind="zero", abs_z=101.65, stub_mm=3),
+             dims.level_section(c, p + (-22, -8), text="±0,000", kind="zero", abs_z=101.65, stub_mm=3),
              dims.level_section(c, p + (-2, -5), 3.15, "wyk", stub_mm=3),
              dims.level_section(c, p + (15, -5), 2.95, "konstr", stub_mm=3)))
     cell("Spadek / pochylnia", lambda c, p: (dims.slope(c, p + (-22, 3), p + (-4, 3), 2.0),
@@ -448,8 +448,8 @@ def demo_legend():
                                                         c.line(p + (10, -1), p + (26, -1), "A-SCIANY-KONSTR"),
                                                         S.window(c, p + (-10, -1), p + (10, -1), 3.0, -5.0, -0.5,
                                                                  -2.2, 1.0, sill_in_over=0.6, sill_out_over=0.8)))
-    cell("Schody — bieg z linią cięcia", lambda c, p: S.stairs(c, p + (-24, -1), 0.0, 10.0, 8, 5.6, 3.5, cut_after=5,
-                                                               h=2.0, total_steps=18, label_values=(0.175, 0.28)))
+    cell("Schody — bieg z linią cięcia", lambda c, p: S.stairs(c, p + (-24, -3), 0.0, 10.0, 8, 5.6, 3.5, cut_after=5,
+                                                               h=1.8, total_steps=18, label_values=(0.175, 0.28)))
     # elektryka (PN-EN 60617) — rozmiar ×1,6
     z = 1.6
     cell("11-13-04 gniazdo z st. ochr. / ×2 / IP44 / 3~", lambda c, p: (S.socket(c, p + (-21, -6), 90, s_mm=3 * z),
@@ -483,7 +483,7 @@ def demo_legend():
                                                               label=S.media(m)[1], h=1.8, label_at=0.5)
                                                        for i, m in enumerate(["WZ", "WC", "CYRK", "KS"])])
     cell("Rozdzielacz / zasobnik / pompa ciepła", lambda c, p: (S.manifold(c, p + (-27, -2), n=3, pitch_mm=3.0),
-                                                                 S.tank(c, p + (-1, 0), 11.0, "CWU", h=2.0),
+                                                                 S.tank(c, p + (-1, 0), 11.0, "CWU", h=1.8),
                                                                  S.heat_pump(c, p + (17, -4), 0, 13, 8, "PC")))
     cell("Czyszczak / wpust / rewizja", lambda c, p: (S.cleanout(c, p + (-17, 0), s_mm=4.0),
                                                        S.floor_drain(c, p + (0, 0), 6.0),

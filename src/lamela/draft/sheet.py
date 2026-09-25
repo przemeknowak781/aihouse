@@ -622,7 +622,7 @@ LINE_LEGEND = [
 ]
 
 
-def lines_legend(c, x: float, y_top: float, entries=None, scales=(20, 50, 100, 500), h: float = 2.0,
+def lines_legend(c, x: float, y_top: float, entries=None, scales=(20, 50, 100, 500), h: float = 1.8,
                  title: str = "RODZAJE I GRUBOŚCI LINII (PN-EN ISO 128-2, grupy linii wg podziałki)",
                  layer: str = "R-LEGENDA"):
     """Tabela rodzajów linii: próbka, nazwa, zastosowanie i grubości [mm] w podziałkach ``scales``."""
@@ -669,7 +669,7 @@ def lettering_sample(c, x: float, y_top: float, heights=(1.8, 2.5, 3.5, 5.0, 7.0
         y -= 3.0
         for hh in heights:
             y -= hh * 1.6
-            c.text((x, y), f"h = {fmt.num(hh, 1)} mm", 2.0)
+            c.text((x, y), f"h = {fmt.num(hh, 1)} mm", 1.8)
             c.text((x + 22, y), None, hh, runs=[("ĄĆĘŁŃÓŚŹŻ ąćęłńóśźż 0123456789 ±0,00 −1,20 24", 1.0, 0.0),
                                                  ("5", T.SUP_SIZE, T.SUP_RAISE)])
     return (x, y - 2.0, x + 200, y_top)

@@ -68,10 +68,21 @@ SUP_SIZE = 0.72   # wysokość indeksu górnego względem h (2,5 → 1,8 mm — 
 SUP_RAISE = 0.50  # podniesienie linii bazowej indeksu względem h
 
 
+_SERIES = (1.8, 2.5, 3.5, 5.0, 7.0, 10.0, 14.0, 20.0)
+
+
+def run_h(h_cap: float, f: float) -> float:
+    """Wysokość przebiegu: indeks górny (f == SUP_SIZE) = poprzednia wartość szeregu ISO 3098 (min. 1,8 mm)."""
+    if abs(f - SUP_SIZE) < 1e-9:
+        below = [x for x in _SERIES if x < h_cap - 1e-6]
+        return below[-1] if below else _SERIES[0]
+    return h_cap * f
+
+
 def runs_width(runs, h_cap: float, style: str = "normal") -> float:
     w = 0.0
     for i, (s, f, _r) in enumerate(runs):
-        w += width(s, h_cap * f, style)
+        w += width(s, run_h(h_cap, f), style)
         if i and f != runs[i - 1][1]:
             w += 0.06 * h_cap
     return w
@@ -85,7 +96,7 @@ def layout_runs(runs, h_cap: float, style: str = "normal", ha: str = "left", va:
     """
     W = runs_width(runs, h_cap, style)
     x0 = {"left": 0.0, "center": -W / 2.0, "right": -W}[ha]
-    top = max((f + r) for (_s, f, r) in runs) * h_cap
+    top = max((run_h(h_cap, f) / h_cap + r) for (_s, f, r) in runs) * h_cap
     if va == "baseline":
         y0 = 0.0
     elif va == "middle":
@@ -101,6 +112,7 @@ def layout_runs(runs, h_cap: float, style: str = "normal", ha: str = "left", va:
     for i, (s, f, r) in enumerate(runs):
         if i and f != runs[i - 1][1]:
             x += 0.06 * h_cap
-        out.append((x, y0 + r * h_cap, s, h_cap * f))
-        x += width(s, h_cap * f, style)
+        hh = run_h(h_cap, f)
+        out.append((x, y0 + r * h_cap, s, hh))
+        x += width(s, hh, style)
     return out, (W, top)
