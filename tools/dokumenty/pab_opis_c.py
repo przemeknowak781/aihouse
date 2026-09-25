@@ -7,9 +7,24 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 
 from lamela.dokumenty import do_uzup, liczba as L  # noqa: E402
-from lamela.dokumenty.znaczniki import DANE_PRZYKLADOWE, ZAL  # noqa: E402
+from lamela.dokumenty.znaczniki import DANE_PRZYKLADOWE, INT, ZAL  # noqa: E402
 
 from pab_opis_a import ok, tyt  # noqa: E402
+
+POJEMNOSC = {"bardzo_lekka": "bardzo lekka", "lekka": "lekka", "srednia": "średnia", "ciezka": "ciężka",
+             "bardzo_ciezka": "bardzo ciężka"}   # klasy pojemności cieplnej — metodologia ChE (lamela.obliczenia.energia)
+
+
+def bufor_modelu(D):
+    """Pojemność bufora c.o. z modelu (wyposazenie.yaml, zasobnik z „bufor” w opisie) [dm³] albo None."""
+    import re
+    for x in D.Wy:
+        op = str(x.get("opis", ""))
+        if x.get("typ") == "zasobnik" and "bufor" in op.lower():
+            m = re.search(r"(\d+(?:[.,]\d+)?)\s*dm³", op)
+            if m:
+                return float(m.group(1).replace(",", "."))
+    return None
 
 NOSNIKI = {"woda": None, "kan_sanit": None, "tele": None, "en": "energia elektryczna z sieci nN",
            "gaz": "gaz ziemny z sieci gazowej", "cieplo": "ciepło sieciowe"}
@@ -94,11 +109,14 @@ def r10(pab, D, d):
     wymaganie WT (EP = {L(wyb.EP, 1) if wyb else '—'} kWh/(m²·rok), udział OZE {L(wyb.U_oze, 0) if wyb else '—'} %).{zwrot}
     System konwencjonalny (kocioł gazowy) {'nie spełnia' if base and not base.spelnia else 'spełnia'} wymagania EP_max.
     Instalacja fotowoltaiczna: produkcja {L(pv['E_PV_kWh_a'], 0)} kWh/rok, autokonsumpcja {L(100 * pv['autokonsumpcja'], 0)} %
-    (symulacja godzinowa TMY/PVGIS; `lamela.obliczenia.elektryka.pv`). Magazyn ciepła: zasobnik c.w.u.
+    (symulacja godzinowa TMY/PVGIS; `lamela.obliczenia.elektryka.pv`); w obliczeniu EP przyjęto produkcję
+    E_{{PV}} = {L(ep.E_PV, 0)} kWh/rok, z której systemy budynku zużywają {L(ep.E_PV_sys, 0)} kWh/rok (bilans miesięczny
+    metodologii charakterystyki energetycznej, `lamela.obliczenia.energia`) — {'wartość niższa od symulacji godzinowej, wynik EP po stronie bezpiecznej' if ep.E_PV <= pv['E_PV_kWh_a'] else 'wartość wyższa od symulacji godzinowej — do ujednolicenia w PT-3 IS'}. Magazyn ciepła: zasobnik c.w.u.
     {wo['zasobnik_l']} dm³ ładowany w pierwszej kolejności z nadwyżek PV (sterowanie c.w.u. z PV:
-    {'tak' if getattr(ep.system, 'sterowanie_cwu_pv', False) else 'nie'}), bufor instalacji grzewczej min.
-    {og['bufor_l']} dm³ oraz akumulacja ciepła w masywnych stropach i jastrychach (klasa pojemności cieplnej:
-    „{en.get('pojemnosc', '—')}”). Magazyn energii elektrycznej nie jest przewidywany. Wrażliwość wyniku: {wr}.
+    {'tak' if getattr(ep.system, 'sterowanie_cwu_pv', False) else 'nie'}), bufor instalacji grzewczej
+    {(L(bufor_modelu(D), 0) + ' dm³ (wymagane min. ' + str(og['bufor_l']) + ' dm³ wg obliczeń ogrzewania)') if bufor_modelu(D) else 'min. ' + str(og['bufor_l']) + ' dm³'}
+    oraz akumulacja ciepła w masywnych stropach i jastrychach (klasa pojemności cieplnej:
+    {POJEMNOSC.get(str(en.get('pojemnosc')), en.get('pojemnosc', '—'))}). Magazyn energii elektrycznej nie jest przewidywany. Wrażliwość wyniku: {wr}.
     """)
 
 
@@ -114,6 +132,7 @@ def r11(pab, D, d):
     chl = bool(en.get("chlodzenie"))
     te = D.obc.theta_e
     tg = (D.obc.dobor or {}).get("t_graniczna")
+    n_pom = len(pom_reg)
     pab.rozdzial(tyt("Analiza technicznych i ekonomicznych możliwości automatycznej regulacji temperatury", 11))
     pab.markdown(f"""
     **Wymaganie:** instalacje ogrzewcze wyposaża się w urządzenia automatycznie regulujące temperaturę oddzielnie
@@ -132,12 +151,18 @@ def r11(pab, D, d):
     temperatury wewnętrznej przy granicy grzania {L(tg, 0)} °C {ZAL}.
 
     **Możliwość ekonomiczna:** roczne zużycie energii końcowej na ogrzewanie Q_{{K,H}} = {L(ep.Q_K_H, 0)} kWh/rok, koszt
-    C_{{H}} = {L(C_H, 0)} zł/rok przy cenie {L(c_el, 2)} zł/kWh {ZAL}. Kryterium ust. 9 pkt 2: SPBT = K / (s·C_{{H}}) ≤ 5 lat,
-    gdzie K — nakład na termostaty i siłowniki {do_uzup('K — oferta (PT-IS)')}, s — względna oszczędność energii na
-    ogrzewanie {do_uzup('s — dane producenta systemu regulacji / PT-IS')}. Ze względu na małą bezwładność sterowania
-    pojedynczych pętli, zyski słoneczne od południa (przeszklenia strefy dziennej) i zróżnicowane temperatury pomieszczeń
-    przyjęto **regulację pomieszczeniową w każdym pomieszczeniu ogrzewanym** bez korzystania z odstępstwa z ust. 8–9;
-    obliczenie okresu zwrotu — w PT-3 IS.
+    C_{{H}} = {L(C_H, 0)} zł/rok przy cenie {L(c_el, 2)} zł/kWh {ZAL}. Kryterium ust. 9 pkt 2 — okres zwrotu nakładów
+    SPBT = K / (s·C_{{H}}) ≤ 5 lat — jest spełnione, gdy nakład na urządzenia regulacji pomieszczeniowej nie przekracza
+    wartości granicznej **K_{{gr}} = 5·s·C_{{H}} = {L(5 * C_H / 100, 0)} zł na każdy punkt procentowy względnej oszczędności
+    energii na ogrzewanie s** (np. przy s = {L(n_pom, 0)} % — {L(5 * C_H * n_pom / 100, 0)} zł, tj. {L(5 * C_H / 100, 0)} zł
+    na każde z {n_pom} pomieszczeń z regulacją {INT}). Nakład K na termostaty i siłowniki {do_uzup('K — oferta (PT-IS)')}
+    oraz oszczędność s {do_uzup('s — dane producenta systemu regulacji / PT-IS')} potwierdza się w PT-3 IS.
+
+    **Wynik analizy:** regulacja temperatury oddzielnie w poszczególnych pomieszczeniach jest technicznie możliwa, a jej
+    ekonomiczna zasadność zależy od relacji K do K_{{gr}}. Niezależnie od tej relacji — ze względu na małą bezwładność
+    sterowania pojedynczych pętli, zyski słoneczne od południa (przeszklenia strefy dziennej) i zróżnicowane temperatury
+    pomieszczeń — przyjęto **regulację pomieszczeniową w każdym pomieszczeniu ogrzewanym**, tj. pełne spełnienie WT § 135
+    ust. 7, bez korzystania z regulacji strefowej (ust. 8) ani z ograniczenia z ust. 9.
     """)
     fig, ax = plt.subplots(figsize=(4.8, 2.2))
     ti = max((float(r.temp) for r in D.m.pomieszczenia() if r.pobyt_ludzi and r.temp), default=og.theta_V)

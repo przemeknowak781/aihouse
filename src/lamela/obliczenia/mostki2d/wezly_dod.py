@@ -478,7 +478,8 @@ def wezel_garaz_plyta(sciana: Sequence[Warstwa], podloga_lewa: Sequence[Warstwa]
                     ob.append(_obsz(g, w))
             yl, yr = yl - w.d, yr - w.d
         y = min(yl, yr, y_w - (zebro[1] if zebro else 0.0))
-        ob.append(_obsz(box(-L, y - h_gruntu, D + L, y), MATERIALY_DOMYSLNE["GRUNT"], "grunt"))
+        gr = box(-L, y - h_gruntu, D + L, max(yl, yr)).difference(_uu([o.wielobok for o in ob]))
+        ob.append(_obsz(gr, MATERIALY_DOMYSLNE["GRUNT"], "grunt"))
     for a, b, w in st:
         ob.append(_obsz(box(a, y_w, b, H), w))
     if blok:            # blok termoizolacyjny w pierwszej warstwie muru (wariant)

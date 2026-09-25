@@ -5,6 +5,8 @@ from lamela.dokumenty import DANE_PRZYKLADOWE, liczba as L, rzedna
 from lamela.dokumenty.znaczniki import INT
 
 from pab_opis_a import KAT_OPIS, tyt
+from redakcja import czysc
+from lamela.dokumenty.znaczniki import ZAL
 
 KOL_POM = ["Nr", "Pomieszczenie", "Kategoria", "h w świetle [m]", "Pow. netto [m²]", "Współczynnik", "Pow. do PU [m²]", "Uwagi"]
 
@@ -67,7 +69,7 @@ def r04(pab, D, d):
     # b) zestawienie powierzchni
     pk = w["pow_kondygnacji"]["wartosc"]
     rows = [{"Pozycja": "Powierzchnia zabudowy (informacyjnie — PZT)", "Powierzchnia [m²]": w["pow_zabudowy"]["wartosc"],
-             "Podstawa / reguła": w["pow_zabudowy"]["podstawa"]},
+             "Podstawa / reguła": czysc(w["pow_zabudowy"]["podstawa"])},
             {"_klasa": "grupa", "Pozycja": "Powierzchnia całkowita (Σ kondygnacji po obrysie zewnętrznym, bez tarasów, "
              "balkonów i loggii)", "Powierzchnia [m²]": w["suma_pow_kondygnacji"]["wartosc"],
              "Podstawa / reguła": "PN-ISO 9836; RPB § 20 ust. 1 pkt 4 lit. b tiret 5"}]
@@ -112,7 +114,12 @@ def r04(pab, D, d):
                szerokosci=["10mm", None, "23mm", "17mm", "16mm", "15mm", "16mm", "33mm"],
                uwagi=["Numeracja wg PN-B-01025 (parter = 1.xx; identyfikator modelu K.NN → K+1.NN). Współczynnik: h ≥ 2,20 m — "
                       "1,00; 1,40 ≤ h < 2,20 m — 0,50; h < 1,40 m — 0 (RPB § 20 ust. 1 pkt 4 lit. b tiret 3). Pomieszczenia pod "
-                      "biegiem schodów — powierzchnie stref wysokości z próbkowania geometrii (audyt A1)."],
+                      "biegiem schodów — powierzchnie stref wysokości z próbkowania geometrii modelu.",
+                      "Zestawienia pomieszczeń na arkuszach rzutów PB-AR podają powierzchnie netto; wiersz „w tym użytkowa "
+                      "(podst. + pomoc.)” na arkuszach jest sumą powierzchni netto pomieszczeń kategorii podstawowej "
+                      "i pomocniczej wg modelu — bez współczynników wysokości i bez komunikacji — i ma charakter "
+                      "informacyjny. Powierzchnię użytkową lokalu wg RPB § 20 ust. 1 pkt 4 lit. b podaje wyłącznie "
+                      "niniejsza tabela i tabela zestawienia powierzchni budynku."],
                zrodlo="model/budynek.yaml; tools/audyt_wt.py")
     _wysokosc(pab, D)
 
@@ -126,7 +133,7 @@ def _wysokosc(pab, D):
         {"Parametr": "Wysokość zabudowy", "Wartość": f"{L(hz['wartosc'])} m",
          "Sposób wyznaczenia": f"od średniej rzędnej terenu na obwodzie ścian zewn. t_śr = ({L(hz['t_min'], 2)} + "
          f"{L(hz['t_max'], 2)}) / 2 = {L(hz['t_sr'], 2)} m n.p.m. do najwyższego punktu: {hz['element']} "
-         f"({L(hz['z_top_abs'], 2)} m n.p.m.)", "Podstawa": hz["podstawa"]},
+         f"({L(hz['z_top_abs'], 2)} m n.p.m.)", "Podstawa": czysc(hz["podstawa"])},
         {"Parametr": "Wysokość budynku wg WT", "Wartość": f"{L(h6['wartosc'])} m",
          "Sposób wyznaczenia": f"od terenu przy najniżej położonym wejściu ({h6['wejscie']}, {L(h6['H_teren'], 2)} m n.p.m.) "
          f"do górnej powierzchni stropodachu {h6['dach']} z warstwami; grupa wysokości: niski ({h6['grupa']})",
@@ -136,7 +143,7 @@ def _wysokosc(pab, D):
          f"i okapami {L(D.wymiary['dl_calk'])} × {L(D.wymiary['szer_calk'])} m", "Podstawa": "lit. c; lamela.wskazniki"},
         {"Parametr": "Liczba kondygnacji nadziemnych / podziemnych", "Wartość": f"{w['kondygnacje_nadziemne']['wartosc']} / 0",
          "Sposób wyznaczenia": "kondygnacja nadziemna — niezagłębiona poniżej terenu o więcej niż połowę wysokości "
-         "w świetle; budynek niepodpiwniczony", "Podstawa": w["kondygnacje_nadziemne"]["podstawa"]},
+         "w świetle; budynek niepodpiwniczony", "Podstawa": czysc(w["kondygnacje_nadziemne"]["podstawa"])},
     ], tytul="Wysokość, wymiary i liczba kondygnacji", wyrownanie={"Wartość": "r"}, klasa="zwarta",
         szerokosci=["30mm", "25mm", None, "38mm"],
         uwagi=[f"Poziom ±0,000 = {L(z0, 2)} m n.p.m. (posadzka parteru). Rzędne terenu {DANE_PRZYKLADOWE} — wg mapy do "
@@ -151,14 +158,24 @@ def _wysokosc(pab, D):
                uwagi=[f"Wymaganie: {D.zr('usytuowanie', 'odl_ppoz_ZL_ZL')}; ściany zewnętrzne i przekrycie dachu projektowane "
                       "jako nierozprzestrzeniające ognia (bez zwiększenia odległości wg WT § 271 ust. 2; W-213). Położenie "
                       f"budynków sąsiednich — do potwierdzenia na mapie do celów projektowych {INT}."])
+    lim_wt = {"ściany z otworami": D.v("usytuowanie", "odl_granica_z_otworami"),
+              "ściany bez otworów": D.v("usytuowanie", "odl_granica_bez_otworow"),
+              "elementy wysunięte (płyty, okapy, lamele)": D.v("usytuowanie", "odl_granica_okap_gzyms_balkon_schody")}
+
+    def wym(o):
+        lw = lim_wt.get(o["grupa"])
+        if lw is not None and o["lim"] > lw + 1e-6:
+            return f"WT ≥ {L(lw)}; przyjęto ≥ {L(o['lim'])} {ZAL}"
+        return f"≥ {L(o['lim'])}"
     pab.tabela([{"Granica": f"{o['kier']}", "Elementy": o["grupa"], "Min. odległość [m]": o["d"],
-                 "Element": o["el"], "Wymaganie [m]": o["lim"], "Ocena": "spełnia" if o["d"] >= o["lim"] - 1e-6 else "NIE SPEŁNIA"}
+                 "Element": o["el"], "Wymaganie [m]": wym(o), "Ocena": "spełnia" if o["d"] >= o["lim"] - 1e-6 else "NIE SPEŁNIA"}
                 for o in D.odl_min], tytul="Najmniejsze odległości od granic działki (bez granicy z drogą)",
-               klasa="zwarta", szerokosci=["16mm", None, "22mm", "18mm", "20mm", "18mm"],
+               klasa="zwarta", szerokosci=["14mm", None, "20mm", "18mm", "30mm", "17mm"],
                uwagi=[f"Ściany z otworami ≥ {L(D.v('usytuowanie', 'odl_granica_z_otworami'))} m "
                       f"({D.zr('usytuowanie', 'odl_granica_z_otworami')}); bez otworów ≥ "
                       f"{L(D.v('usytuowanie', 'odl_granica_bez_otworow'))} m ({D.zr('usytuowanie', 'odl_granica_bez_otworow')}); "
                       f"okapy, gzymsy, tarasy ≥ {L(D.v('usytuowanie', 'odl_granica_okap_gzyms_balkon_schody'))} m "
                       f"({D.zr('usytuowanie', 'odl_granica_okap_gzyms_balkon_schody')}); dla płyt wysuniętych i okapów przyjęto "
-                      "wymaganie ostrzejsze (założenie projektowe audytu A1). Od granicy z drogą — linia zabudowy MPZP (rozdz. 3)."],
+                      f"wymaganie ostrzejsze od WT {ZAL} — to samo w opisie PZT (obszar oddziaływania). Od granicy z drogą — "
+                      "linia zabudowy MPZP (rozdz. 3)."],
                zrodlo="tools/audyt_wt.py (odległości każdej płaszczyzny ściany i elementu)")

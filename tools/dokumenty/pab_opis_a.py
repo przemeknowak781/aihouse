@@ -6,6 +6,8 @@ import re
 from lamela.dokumenty import DANE_PRZYKLADOWE, do_uzup, liczba as L, rzedna
 from lamela.dokumenty.znaczniki import INT, ZAL
 
+from redakcja import LEGENDA, czysc
+
 RPB = "rozporządzenie w sprawie szczegółowego zakresu i formy projektu budowlanego (Dz.U. 2020 poz. 1609; t.j. Dz.U. 2022 " \
       "poz. 1679, zm. Dz.U. 2023 poz. 2405 i Dz.U. 2026 poz. 597)"
 WT = "rozporządzenie w sprawie warunków technicznych, jakim powinny odpowiadać budynki i ich usytuowanie (t.j. Dz.U. " \
@@ -39,11 +41,10 @@ def wstep(pab, D, d):
     energetyczna, instalacje), moduł wskaźników `lamela.wskazniki` (definicje ustawy o planowaniu i zagospodarowaniu
     przestrzennym, art. 2 pkt 28–35), audyt zgodności z WT `tools/audyt_wt.py` oraz wyniki symulacji mostków cieplnych
     wg PN-EN ISO 10211 (`projekt/08_obliczenia/mostki`). Wszystkie wartości zestawień są generowane z tych źródeł przy
-    każdym wydaniu opisu; powierzchnie i kubatura podane z dokładnością do 0,01 (RPB § 20 ust. 1 pkt 4, W-316).
+    każdym wydaniu opisu; powierzchnie podano w m² i kubaturę w m³ z dokładnością do 0,01 (przyjęta dokładność
+    zapisu {ZAL}; W-316).
 
-    **Oznaczenia:** {do_uzup()} — dane do uzupełnienia przed złożeniem; {DANE_PRZYKLADOWE} — dane przykładowe
-    (działka, ustalenia MPZP, badania podłoża, wyroby); {ZAL} — założenie projektowe; {INT} — interpretacja przepisu.
-    Numery pomieszczeń wg PN-B-01025 (parter = 1.xx), zgodnie z częścią rysunkową.
+    {LEGENDA} Numery pomieszczeń wg PN-B-01025 (parter = 1.xx), zgodnie z częścią rysunkową.
     """)
 
 
@@ -68,9 +69,9 @@ def r01(pab, D, d):
         {"Cecha": "Kategoria obiektu budowlanego", "Ustalenie": f"kategoria {d['kategoria']}",
          "Podstawa / źródło": "załącznik do PB"},
         {"Cecha": "Kategoria geotechniczna", "Ustalenie": f"{geo.get('kategoria', do_uzup('kategoria'))} — rozdz. 5 "
-         "i załącznik nr 1", "Podstawa / źródło": "rozp. Dz.U. 2012 poz. 463 § 4; " + D.zr("geotechnika", "kategoria_geotechniczna")},
+         "i opinia geotechniczna (rozdz. 5)", "Podstawa / źródło": D.zr("geotechnika", "kategoria_geotechniczna")},
         {"Cecha": "Liczba kondygnacji nadziemnych / podziemnych", "Ustalenie": f"{kn} / 0",
-         "Podstawa / źródło": D.w["kondygnacje_nadziemne"]["podstawa"]},
+         "Podstawa / źródło": czysc(D.w["kondygnacje_nadziemne"]["podstawa"])},
         {"Cecha": "Grupa wysokości", "Ustalenie": f"niski ({wt6.get('grupa')}) — H = {L(wt6['wartosc'])} m",
          "Podstawa / źródło": "WT § 6, § 8 pkt 1"},
         {"Cecha": "Kategoria zagrożenia ludzi", "Ustalenie": str(D.v("ppoz", "kategoria_ZL")),
@@ -258,9 +259,13 @@ def r03(pab, D, d):
 
     Ustalenia MPZP dla terenu {DANE_PRZYKLADOWE} i wartości projektu (definicje: ustawa o planowaniu i zagospodarowaniu
     przestrzennym, t.j. Dz.U. 2026 poz. 538, art. 2 pkt 28–35 — obliczenia `lamela.wskazniki`; szczegóły bilansu terenu
-    w opisie PZT, RPB § 14 pkt 4). Dla zamierzenia nie ustalono pozwoleń, uzgodnień ani opinii innych organów, o których
-    mowa w art. 32 ust. 1 pkt 2 PB {INT}; do projektu dołącza się decyzję zarządcy drogi o lokalizacji zjazdu (PB art. 33
-    ust. 2 pkt 1; u.d.p. art. 29 ust. 3a; W-020) — element „Załączniki”.
+    w opisie PZT, RPB § 14 pkt 4). Spośród pozwoleń, uzgodnień i opinii wymaganych przepisami szczególnymi (PB art. 32
+    ust. 1 pkt 2, art. 33 ust. 2 pkt 1) zamierzenie wymaga wyłącznie rozstrzygnięć zarządcy drogi gminnej dotyczących
+    zjazdu {INT}: zezwolenia na lokalizację zjazdu, dołączanego do wniosku o pozwolenie na budowę (u.d.p. art. 29 ust. 1
+    i 3a; W-020), oraz uzgodnienia z zarządcą drogi projektu zagospodarowania działki i projektu
+    architektoniczno-budowlanego zjazdu, o którego obowiązku poucza zezwolenie (u.d.p. art. 29 ust. 3 pkt 2). Projekt
+    dostosowano do tych rozstrzygnięć w zakresie lokalizacji i parametrów zjazdu (opis PZT — dostęp do drogi publicznej)
+    {do_uzup('nr i data zezwolenia oraz uzgodnienia zarządcy drogi')}; dokumenty — element „Załączniki”.
     """)
     pab.tabela(mpzp_wiersze(D), tytul="Zgodność z ustaleniami MPZP", klasa="zwarta",
                szerokosci=["36mm", "30mm", None, "18mm", "44mm"], zrodlo="lamela.wskazniki; tools/audyt_wt.py; "

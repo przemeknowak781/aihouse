@@ -119,7 +119,7 @@ MAT = [
                    kreskowanie="MUR_SILIKAT", kolor="#dcd7cd", ciezar=18.0), "jw."),
     ("STAL_S355", dict(nazwa="Stal konstrukcyjna S355 (słupy RK, rama boksu C), cynkowana ogniowo + malowana proszkowo RAL 7016", **{"lambda": 50.0},
                        rho=7850, cp=450, mu=1000000, kreskowanie="STAL", kolor="#383e42", ciezar=78.5), "PN-EN ISO 10456 tab. 3: stal λ 50"),
-    ("STAL_OCYNK", dict(nazwa="Stal S235 ocynkowana ogniowo, malowana proszkowo RAL 7016 — kratownica pnączy (pręty ⌀12 w siatce 0,30 m, rama 40×40)",
+    ("STAL_OCYNK", dict(nazwa="Stal S235 ocynkowana ogniowo, malowana proszkowo RAL 7016 — kratownica pnączy (pręty Ø12 w siatce 0,30 m, rama 40×40)",
                         **{"lambda": 50.0}, rho=7850, cp=450, mu=1000000, kreskowanie="STAL", kolor="#4a5055", ciezar=78.5),
      "PN-EN ISO 10456 tab. 3: stal λ 50 (wydanie, K-13)"),
     ("RAMA_C", dict(nazwa="Rama boksu C: ruszt stalowy ocynkowany w okładzinie z blachy aluminiowej RAL 7016 (pusta w środku)", **{"lambda": 50.0},

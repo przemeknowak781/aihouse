@@ -3,17 +3,37 @@ from __future__ import annotations
 
 from lamela.dokumenty import DANE_PRZYKLADOWE, do_uzup, liczba as L
 from lamela.dokumenty.znaczniki import INT
+from redakcja import liczby_pl
 
 import re
 
 from pab_opis_a import ok, tyt
+from redakcja import czysc as _czysc_red
 
 
 def czysc(txt: str) -> str:
-    """Usuwa z opisów modelu odsyłacze do wewnętrznych audytów (A1–A3, J1–J3, K-n); zostawia id rejestru W-xxx."""
+    """Usuwa z opisów modelu odsyłacze do wewnętrznych audytów (A1–A3, J1–J3, K-n) i inne adnotacje robocze
+    (``redakcja.czysc``); zostawia id rejestru W-xxx."""
     t = re.sub(r"\b(?:A\d|J\d) [A-Z]-?\d+;?\s*", "", str(txt))
     t = re.sub(r"\((?:\s*;?\s*)\)", "", t)
-    return re.sub(r"\s{2,}", " ", t).strip()
+    return _czysc_red(re.sub(r"\s{2,}", " ", t).strip())
+
+
+def przykanalik(D) -> str:
+    """Przykanalik z obliczeń kanalizacji (ten sam odcinek co w opisie PZT): rura i spadek."""
+    k = D.W["kanalizacja"]
+    prz = next((o for o in getattr(k, "odcinki", []) or [] if o.rodzaj == "przykanalik"), None)
+    return f"{prz.rura}, i = {L(100 * prz.i, 1)} %" if prz else liczby_pl(D.Wd["kanalizacja"].get("przykanalik", "—"))
+
+
+def niecka(D) -> dict:
+    """Niecka chłonna z modelu (dzialka.yaml: retencja.rozsaczanie) — powierzchnia i pojemność projektowana."""
+    from lamela.model import make_polygon
+    ro = ((D.Dz.get("retencja") or {}).get("rozsaczanie") or {})
+    ob = ro.get("obrys") or []
+    A = make_polygon(ob).area if len(ob) >= 3 else 0.0
+    h = float(ro.get("glebokosc") or 0.0)
+    return dict(A=A, h=h, V=A * h)
 
 
 def dane_posadowienia(D) -> dict:
@@ -78,7 +98,7 @@ def r05(pab, D, d):
 
     **Uzasadnienie wyboru płyty na XPS zamiast ław fundamentowych:**
 
-    1. *Ciągłość izolacji termicznej* pod całą kubaturą ogrzewaną (brief § 9 pkt 1): węzeł cokołu ściana–płyta
+    1. *Ciągłość izolacji termicznej* pod całą kubaturą ogrzewaną: węzeł cokołu ściana–płyta
        {P['cokol']['id'] if P['cokol'] else ''} — Ψ_{{oi}} = {L(P['cokol']['psi_oi'], 3) if P['cokol'] else '—'} W/(m·K),
        f_{{Rsi}} = {L(P['cokol']['f_rsi'], 3) if P['cokol'] else '—'} ≥ {L(frsi_min, 2)} ({D.zr('energia', 'fRsi_min')}) —
        symulacja PN-EN ISO 10211 (`projekt/08_obliczenia/mostki`).
@@ -115,8 +135,10 @@ def r06_08(pab, D, d):
 def r09(pab, D, d):
     wo, ka, de, og = D.Wd["woda"], D.Wd["kanalizacja"], D.Wd["deszczowa"], D.Wd["ogrzewanie"]
     ep = D.ep
-    pc = (D.obc.dobor or {}).get("pc") or {}
-    odp = (D.Dz.get("odpady") or {}).get("opis", do_uzup("miejsce gromadzenia odpadów"))
+    ogo = D.W["ogrzewanie"]
+    pco, ha = ogo.pc, ogo.halas
+    nc = niecka(D)
+    odp = czysc((D.Dz.get("odpady") or {}).get("opis", do_uzup("miejsce gromadzenia odpadów")))
     drz = D.Dz.get("drzewa") or []
     istn = [x for x in drz if x.get("istn")]
     wyc = [x for x in istn if x.get("do_wyciecia")]
@@ -131,11 +153,13 @@ def r09(pab, D, d):
     obliczeniowy q = {L(wo['q_obl_dm3s'], 3)} dm³/s; ciepła woda — {L(wo['cwu_V_d_l'], 0)} dm³/d. Jakość wody — woda
     przeznaczona do spożycia z sieci; zabezpieczenie przed przepływem zwrotnym za wodomierzem (PN-EN 1717, W-131).
     Ścieki bytowe odprowadzane do sieci kanalizacji sanitarnej: przepływ obliczeniowy Q_{{ww}} = {L(ka['Q_ww_l_s'], 2)} dm³/s,
-    przykanalik {ka['przykanalik']}; ilość ścieków równa zużyciu wody. Ścieki przemysłowe nie powstają.
+    przykanalik {przykanalik(D)}; ilość ścieków równa zużyciu wody. Ścieki przemysłowe nie powstają.
     Wody opadowe z dachów (A = {L(de['A_dachow_m2'], 1)} m², Q = {L(de['Q_dachy_l_s'], 2)} dm³/s) zagospodarowane w całości
     na działce: szczelny zbiornik retencyjny V = {L(de['V_zbiornika_m3'], 1)} m³ (podlewanie ogrodu — pokrycie potrzeb
-    {L(100 * de['pokrycie_podlewania'], 0)} %) z przelewem do niecki chłonnej A = {L(de['niecka_A_m2'], 1)} m²
-    (V_{{min}} = {L(de['niecka_V_min_m3'], 2)} m³); wody z podjazdu przez osadnik z separatorem; brak odprowadzania wód na
+    {L(100 * de['pokrycie_podlewania'], 0)} %) z przelewem do niecki chłonnej (ogrodu deszczowego) o powierzchni
+    {L(nc['A'], 1)} m² i pojemności {L(nc['V'], 2)} m³ przy głębokości {L(nc['h'], 2)} m — {ok(nc['V'] >= de['niecka_V_min_m3'])}
+    warunek pojemności V ≥ V_{{min}} = {L(de['niecka_V_min_m3'], 2)} m³ (minimalna powierzchnia wg obliczenia
+    {L(de['niecka_A_m2'], 1)} m²); wody z podjazdu przez osadnik z separatorem; brak odprowadzania wód na
     drogę publiczną i na działki sąsiednie (W-143…W-145; obliczenia `lamela.obliczenia.sanitarne.deszczowa`).
 
     ## Emisje zanieczyszczeń (lit. b)
@@ -155,13 +179,14 @@ def r09(pab, D, d):
 
     ## Akustyka, drgania, promieniowanie, pola elektromagnetyczne (lit. d)
 
-    Źródłem hałasu jest jednostka zewnętrzna pompy ciepła: poziom mocy akustycznej L_{{WA}} = {L(pc.get('L_WA_dB'), 0)} dB(A)
-    (dane wyrobu przykładowego {DANE_PRZYKLADOWE}); poziom na granicy działki L_{{A}} = {L(og['L_A_granica_dB'], 1)} dB(A);
-    dopuszczalny poziom w porze nocy {L(D.v('usytuowanie', 'halas_LAeq_noc_max'), 0)} dB —
-    {ok(og['L_A_granica_dB'] <= D.v('usytuowanie', 'halas_LAeq_noc_max'))}, w porze dnia
-    {L(D.v('usytuowanie', 'halas_LAeq_dzien_max'), 0)} dB — {ok(og['L_A_granica_dB'] <= D.v('usytuowanie', 'halas_LAeq_dzien_max'))}
+    Źródłem hałasu jest jednostka zewnętrzna pompy ciepła {pco['model']} (dane wyrobu przykładowego {DANE_PRZYKLADOWE}):
+    poziom mocy akustycznej L_{{WA}} = {L(pco['L_WA'], 0)} dB(A) w porze dnia i {L(pco['L_WA_noc'], 0)} dB(A) w trybie
+    nocnym; odległość od granicy ({ha['granica']}) {L(ha['r'], 2)} m; poziom na granicy działki: noc
+    L_{{A}} = {L(ha['L_A_granica'], 1)} dB(A) ≤ {L(D.v('usytuowanie', 'halas_LAeq_noc_max'), 0)} dB —
+    {ok(ha['L_A_granica'] <= D.v('usytuowanie', 'halas_LAeq_noc_max'))}, dzień L_{{A}} = {L(ha['L_A_dzien'], 1)} dB(A)
+    ≤ {L(D.v('usytuowanie', 'halas_LAeq_dzien_max'), 0)} dB — {ok(ha['L_A_dzien'] <= D.v('usytuowanie', 'halas_LAeq_dzien_max'))}
     ({D.zr('usytuowanie', 'halas_LAeq_noc_max')}) — obliczenia `lamela.obliczenia.sanitarne.ogrzewanie`
-    (propagacja w półprzestrzeni z kierunkowością). Centrala wentylacyjna w pomieszczeniu technicznym: {ce}.
+    (propagacja w półprzestrzeni z kierunkowością; te same wartości w opisie PZT). Centrala wentylacyjna w pomieszczeniu technicznym: {ce}.
     Drgania — brak źródeł poza urządzeniami na podkładkach antywibracyjnych. Promieniowanie jonizujące i pola
     elektromagnetyczne — brak źródeł poza instalacją elektryczną nN i instalacją fotowoltaiczną (falownik z deklaracją
     zgodności). Ochrona przed radonem z podłoża — {rad.nazwa.lower() if rad else do_uzup('izolacja przeciwradonowa')}.
