@@ -853,6 +853,176 @@ def _laczniki(vp, placer, D, lv, e: KD.ElementPl, res: KResult):
                          "łącznika (W-268, W-272).")
 
 
+# ------------------------------------------------------------------------------------------------ k_fundamenty
+L_UZ = "E-UZIOM"
+KOL_UZ = "#b0006a"
+
+
+def _instalacje(ctx) -> dict:
+    """``instalacje.yaml`` obok pliku modelu (piony, przybory — przejścia przez płytę)."""
+    import yaml
+    from pathlib import Path
+    p = Path(ctx.src or "model/budynek.yaml").with_name("instalacje.yaml")
+    if not p.exists():
+        return {}
+    d = yaml.safe_load(p.read_text(encoding="utf-8")) or {}
+    return d.get("instalacje") or {}
+
+
+def _przylacza(ctx, P) -> list:
+    """Przyłącza projektowane (dzialka.yaml → uzbrojenie.projektowane) przechodzące przez obrys fundamentu:
+    [(branża, punkt przejścia (x, y), opis)] w układzie budynku."""
+    m = ctx.model
+    dz = getattr(m, "dz", None)
+    if dz is None:
+        return []
+    out = []
+    for u in ((dz.raw.get("uzbrojenie") or {}).get("projektowane") or []):
+        pts = np.asarray(u.get("linia") or [], float)
+        if len(pts) < 2:
+            continue
+        ln = LineString(dz.do_budynku(pts))
+        for end in (Point(ln.coords[0]), Point(ln.coords[-1])):
+            if end.distance(P) < 1.0:
+                q = P.exterior.interpolate(P.exterior.project(end))
+                out.append((str(u.get("branza")), (q.x, q.y), str(u.get("opis") or "")))
+                break
+    return out
+
+
+def widok_fundamenty(ctx: ViewContext, spec: dict, scale: float, opts: dict):
+    D = KD.dane(ctx)
+    m = ctx.model
+    fu = m.fundamenty()
+    els = fu.get("elementy") or []
+    title = spec.get("tytul_widoku") or "RZUT FUNDAMENTÓW"
+    vp = Viewport(scale, title)
+    res = KResult(north=True)
+    placer = Placer(vp.k)
+    k = vp.k
+    plyty = [e for e in els if "obrys" in e]
+    P = unary_union([Polygon(e["obrys"]) for e in plyty]) if plyty else None
+    liniowe = [e for e in els if "os" in e]
+    geom_l = {str(e["id"]): LineString(e["os"]).buffer(float(e.get("b", 0.6)) / 2, cap_style=3 if LineString(e["os"]).length
+                                                        < float(e.get("b", 0.6)) else 2) for e in liniowe}
+    allg = unary_union(([P] if P is not None else []) + list(geom_l.values()))
+    bnd = allg.bounds
+    # izolacja obwodowa (PN-EN ISO 13793)
+    iz = fu.get("izolacja_obwodowa") or {}
+    if iz and P is not None:
+        Dz = float(iz.get("D", 1.0))
+        ring = P.buffer(Dz, join_style=2).difference(P)
+        vp.geom(P.buffer(Dz, join_style=2).exterior, L_OBR, pen="cienka", lt="KRESKOWA")
+        placer.add_lines(P.buffer(Dz, join_style=2).exterior, w=0.4)
+        bnd = P.buffer(Dz, join_style=2).bounds
+    offs = osie_i_wymiary(vp, ctx, bnd, placer, sides=("dol", "lewo", "gora", "prawo"),
+                          extra={"dol": [c[0] for c in (P.exterior.coords if P is not None else [])],
+                                 "lewo": [c[1] for c in (P.exterior.coords if P is not None else [])]})
+    # ściany parteru (obrys konstrukcji) i słupy
+    k0 = m.kondygnacje[0].id
+    for w in m.sciany(k0):
+        g = w.warstwa_konstr.polygon
+        if g is not None and not g.is_empty and w.typ in NOSNE:
+            vp.geom(g, L_OBR, pen="cienka")
+    for c in m.slupy():
+        if float(c["z_od"]) < 0.5:
+            a, b = _przekroj_slupa(c.get("przekroj"))
+            x, y = c["xy"]
+            vp.fill(box(x - a / 2, y - b / 2, x + a / 2, y + b / 2), L_OBR, "#000000", z=23)
+    # płyta
+    if P is not None:
+        vp.geom(P, L_OBR, pen="gruba")
+        placer.add_lines(P.boundary, w=0.6, buf_mm=0.6)
+    for e in liniowe:
+        g = geom_l[str(e["id"])]
+        vp.geom(g, L_OBR, pen="srednia", lt="KRESKOWA" if P is not None else None)
+        placer.add_lines(g.boundary, w=0.3)
+    # opisy elementów
+    fz = {z.id: z for z in D.zebra}
+    fs = {s_.id: s_ for s_ in D.stopy}
+    for e in liniowe:
+        eid = str(e["id"])
+        ln = LineString(e["os"])
+        B, hf, sp = float(e.get("b", 0.6)), float(e.get("h", 0.3)), float(e.get("spod", -0.7))
+        poz = (fz.get(eid) or fs.get(eid))
+        if ln.length < B:
+            txt = f"{eid} {_cm(B)}×{_cm(B)}, spód {fmt.level(sp)}" + (f" (poz. {poz.poz})" if poz else "")
+            etykieta(vp, placer, np.asarray(ln.interpolate(0.5, normalized=True).coords[0]) + np.array([0, -B / 2 - 0.1]),
+                     (1.0, 0.0), txt, None, 1.8, offs=(1.5, 4.5, 8.0), ts=(0.0, -0.6, 0.6), layer=L_OPS)
+            continue
+        txt = f"{eid}: b = {_cm(B)} cm, spód {fmt.level(sp)}" + (f" (poz. {poz.poz})" if poz else "")
+        u = np.asarray(e["os"][1], float) - np.asarray(e["os"][0], float)
+        etykieta(vp, placer, np.asarray(ln.interpolate(0.5, normalized=True).coords[0]), u, txt, None, 2.5,
+                 offs=(B * 1000 / scale / 2 + 1.5, B * 1000 / scale / 2 + 5.0), ts=(0.0, -0.25 * ln.length, 0.25 * ln.length,
+                                                                                    -0.4 * ln.length, 0.4 * ln.length),
+                 layer=L_OPS)
+    if P is not None:
+        F = D.plyta_f
+        e0 = plyty[0]
+        top = float(e0.get("spod", -0.4)) + float(e0.get("h", 0.25))
+        txt = (f"{e0.get('id')} (poz. {F.poz if F else '—'}): płyta ŻB h = {_cm(float(e0.get('h', 0.25)))} cm, "
+               f"{F.beton if F else ''}, {F.eksp if F else ''}; wierzch {fmt.level(top)}, spód {fmt.level(float(e0.get('spod', -0.4)))}")
+        from shapely.ops import polylabel
+        c0 = polylabel(P if P.geom_type == "Polygon" else max(P.geoms, key=lambda q: q.area), 0.05)
+        etykieta(vp, placer, (c0.x, c0.y), (1.0, 0.0), txt, None, 2.5, offs=(0.0, 4.0, 8.0),
+                 ts=(0.0, -2.0, 2.0, -4.0, 4.0), layer=L_OPS)
+    # przejścia instalacyjne
+    inst = _instalacje(ctx)
+    n_prz = 0
+    if P is not None:
+        for pion in inst.get("piony") or []:
+            xy = pion.get("xy")
+            if xy and P.contains(Point(*xy)):
+                n_prz += 1
+                _przejscie(vp, placer, xy, f"{pion.get('id')}: {str(pion.get('opis') or '')[:40]}", 0.16)
+        for pr in inst.get("przybory_dodatkowe") or []:
+            if pr.get("typ") in ("wpust_podlogowy", "odplyw") and P.contains(Point(*pr["xy"])):
+                n_prz += 1
+                _przejscie(vp, placer, pr["xy"], "wpust podłogowy — przejście DN110", 0.16)
+        for br, xy, op in _przylacza(ctx, P):
+            n_prz += 1
+            _przejscie(vp, placer, xy, f"przyłącze {br}: rura osłonowa, przejście szczelne", 0.2)
+    # uziom fundamentowy
+    if P is not None:
+        _uziom(vp, placer, ctx, P, inst, res)
+    # ślady przekrojów charakterystycznych
+    for nm, eid, frac in _przekroje_fund(ctx, liniowe):
+        e = next(x for x in liniowe if str(x["id"]) == eid)
+        ln = LineString(e["os"])
+        B = float(e.get("b", 0.6))
+        c = np.asarray(ln.interpolate(frac, normalized=True).coords[0])
+        u = _unit(np.asarray(e["os"][1], float) - np.asarray(e["os"][0], float))
+        n = np.array([-u[1], u[0]])
+        L_ = B / 2 + (float(iz.get("D", 1.0)) + 0.4 if iz else 0.8)
+        S.section_mark(vp, c - n * L_, c + n * L_, nm, look=1.0, h=3.5, end_mm=6.0, arrow_mm=4.0, layer=L_OPS)
+        placer.add_lines(LineString([c - n * L_, c + n * L_]), w=0.8, buf_mm=3.0)
+    res.column_blocks.append(("legenda_k", blok_legendy([
+        ("kreskowa_gruba", "żebra / pogrubienia płyty (pod płytą — widok zasłonięty)"),
+        ("kreskowa", "zasięg izolacji obwodowej przeciwprzemarzaniowej XPS (PN-EN ISO 13793)"),
+        ("uziom", "uziom otokowy — w gruncie pod warstwą XPS"),
+        ("wyrownawczy", "przewód wyrównawczy funkcjonalny w płycie (połączony ze zbrojeniem)"),
+        ("zacisk", "wyprowadzenie uziomu / złącze kontrolne (punkt stały uziemienia)"),
+        ("przejscie", "przejście instalacyjne przez płytę (tuleja ochronna, szczelne)"),
+        ("slup", "słup stalowy (baza na pogrubieniu płyty)")])))
+    res.notes += _uwagi_fundamentow(D, m, fu, iz, n_prz)
+    kol = kolizje_napisow(vp)
+    if kol:
+        ctx.note(f"{spec.get('nr', '')} {title}", f"kolizje napisów: {kol}")
+    KD.zapisz_raporty(D, ctx)
+    return vp, res, title
+
+
+def _przejscie(vp, placer, xy, txt, r=0.15):
+    k = vp.k
+    C = np.asarray(xy, float)
+    vp.circle(C, r, L_OBR, pen="srednia")
+    vp.line(C - [r * 1.4, 0], C + [r * 1.4, 0], L_OBR, pen="cienka")
+    vp.line(C - [0, r * 1.4], C + [0, r * 1.4], L_OBR, pen="cienka")
+    placer.add(Point(*C).buffer(r * 1.2), "area", 1.0)
+    etykieta(vp, placer, C, (1.0, 0.0), txt, None, 1.8, offs=(4.0, 7.0, 10.0), ts=(0.0, -0.6, 0.6, -1.2, 1.2),
+             layer=L_OPS)
+
+
 # ================================================================================================ rejestracja
 def widok_zbrojenie(ctx: ViewContext, spec: dict, scale: float, opts: dict):
     """Dyspozytor typu ``k_zbrojenie``: element = strop | plyta | fundament | belki | nadproza | schody | wsporniki."""
@@ -868,3 +1038,4 @@ _ZBROJENIE = {"strop": widok_zbrojenie_plyt, "plyta": widok_zbrojenie_plyt, "str
 register_view("k_zbrojenie", widok_zbrojenie, "rysunek zbrojenia")
 
 register_view("k_strop", widok_strop, "rzut konstrukcji")
+register_view("k_fundamenty", widok_fundamenty, "rzut fundamentów")

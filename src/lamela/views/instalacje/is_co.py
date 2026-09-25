@@ -212,3 +212,102 @@ class RysCO(Rysunek):
                 self.pipe(path, "Z", layer="S-PC")
                 self.g.mark(path, "PCB")
         self.leg.sym(lambda c, p: S.tank(c, p, d=6.0, label="B"), "bufor c.o. / zasobnik c.w.u. (wymiar rzeczywisty)")
+
+    # --------------------------------------------------------------------------------------------- piony, rozdzielacze
+    def _rozdz(self, kid):
+        return next((r for r in self.W.ogrzewanie.rozdzielacze if r["kond"] == kid), None)
+
+    def piony_co(self):
+        """Pion c.o. zasilający rozdzielacze wyższych kondygnacji (model nie zawiera pionów c.o. — proponowany przy
+        rozdzielaczu najniższej z wyższych kondygnacji)."""
+        wyzsze = [k for k in self.kids[1:] if k in self.rozdz_xy and self._rozdz(k)]
+        if not wyzsze:
+            return
+        i = self.kids.index(self.kid)
+        top = max(self.kids.index(k) for k in wyzsze)
+        if i > top:
+            return
+        base = self.rozdz_xy[wyzsze[0]]
+        kids_rng = self.kids[:top + 1]
+        pp = self.pion_punkty("PCO", base, kids_rng, n=2, step=0.10)
+        flows = [(k, self._rozdz(k)["m_kgh"]) for k in wyzsze if self.kids.index(k) > i]
+        lines = [f"{BRAK} pion c.o. PCO (proponowany)"]
+        for k, mk in flows:
+            lines.append(f"Z/P {rura_dla(mk)} → R-{k} (ṁ = {num(mk, 0)} kg/h)")
+        if i > 0:
+            lines.append("↓ z kondygnacji niższej")
+        for q in pp:
+            self.sym(S.riser, q, None, "Z", s_mm=2.2)
+        self.tag(pp[0], lines, "I-BRAKI", color="#b0008a", style="bold")
+        self.brak("Piony c.o. (zasilanie rozdzielaczy P1, P2)", "brak tras pionów c.o. w instalacje.yaml — przyjęto pion "
+                  "proponowany przy rozdzielaczu R-" + wyzsze[0], "piony: [{id: PCO, xy: [x, y], rodzaj: co, kond: "
+                  "[P0, P1, P2], opis}]")
+        # połączenie z modułem (P0) lub z rozdzielaczem na tej kondygnacji
+        src = self.mod_xy if (i == 0 and getattr(self, "mod_xy", None) is not None) else None
+        R = self.rozdz_xy.get(self.kid)
+        if src is not None:
+            path = self.g.route(src, pp[0], "PCR")
+            self.pipe(path, "Z", layer="S-PC")
+            self.g.mark(path, "PCR")
+            self.label(path, f"Z/P {rura_dla(sum(m for _k, m in flows))}", "S-OPISY")
+        if R is not None and i > 0:
+            path = self.g.route(pp[0], R, "PCR")
+            self.pipe(path, "Z", layer="S-PC")
+            self.g.mark(path, "PCR")
+        self.leg.sym(lambda c, p: S.riser(c, p, None, "Z", s_mm=2.2), "pion c.o. (zasilanie/powrót rozdzielaczy)")
+
+    def rozdzielacz(self):
+        R = self.rozdz_xy.get(self.kid)
+        r = self._rozdz(self.kid)
+        if R is None or r is None:
+            return
+        e = next((e for e in self.W.dane.wyposazenie if str(e.get("kond")) == self.kid and "rozdzielacz" in
+                  str(e.get("opis", "")).lower()), None)
+        rot = float(e.get("obrot", 90.0)) - 90.0 if e else 0.0
+        n = int(max(r.get("sekcje") or [r["petle"]]))
+        pitch = min(3.0, 36.0 / max(n, 1))
+        d = dir_deg(rot)
+        L = (min(n, 12) + 1) * pitch * self.k
+        self.sym(S.manifold, R - d * L / 2, rot, n=min(n, 12), pitch_mm=pitch, label=None)
+        sek = " + ".join(str(s) for s in (r.get("sekcje") or []))
+        self.tag(R, [f"R-{self.kid}: rozdzielacz ogrzewania podłogowego {r['petle']} obiegów "
+                     f"({r['rozdzielacze']} szt.: {sek})",
+                     f"Σṁ = {num(r['m_kgh'], 0)} kg/h, ∆p_max pętli = {num(r['dp_max'], 1)} kPa; przepływomierze, "
+                     "siłowniki 230 V, listwa sterująca, szafka podtynkowa"], "S-OPISY", style="bold")
+        if self.kid == self.kids[0] and getattr(self, "mod_xy", None) is not None:
+            path = self.g.route(self.mod_xy, R, "PCR0")
+            self.pipe(path, "Z", layer="S-PC")
+            self.g.mark(path, "PCR0")
+            self.label(path, f"Z/P {rura_dla(r['m_kgh'])}", "S-OPISY")
+        self.leg.sym(lambda c, p: S.manifold(c, p - np.array([7.5, 0.0]), 0.0, n=4, label=None),
+                     "R — rozdzielacz ogrzewania podłogowego z przepływomierzami i siłownikami")
+
+    def opisy(self):
+        og = self.W.ogrzewanie
+        d = og.do_dict()
+        self.notes += [
+            "Ogrzewanie podłogowe niskotemperaturowe wg PN-EN 1264-1…5; obciążenie cieplne pomieszczeń wg PN-EN 12831-1 "
+            f"({og.phi_zrodlo}); θ_V,des = {num(og.theta_V, 1)} °C, σ ≤ 5 K; rury PE-X/Al/PE-X 16×2 (lub równoważne) "
+            "na płycie systemowej z izolacją; regulacja pomieszczeniowa — termostaty i siłowniki (WT § 135 ust. 7).",
+            "Strefy pętli (obszar, rozstaw T, długość L) z obliczeń lamela.obliczenia.sanitarne.ogrzewanie; granice "
+            "stref i przebieg przyłączy pętli wyznaczono algorytmicznie (podział pomieszczenia na pasy o równych "
+            "polach, przyłącza ortogonalnie od rozdzielacza) — do uściślenia w projekcie wykonawczym dostawcy systemu.",
+            f"Źródło ciepła: PC powietrze–woda R290 (W-155), θ_biv = {num(d['theta_biv'], 1)} °C, SCOP {num(d['SCOP_dekl'], 1)}; "
+            f"bufor ≥ {d['bufor_l']} dm³, NW c.o. {d['naczynie_co_l']} dm³, NW c.w.u. {d['naczynie_cwu_l']} dm³ "
+            "(obliczenia) — dane PC przykładowe, zastąpić DTR wybranego wyrobu (lub równoważnego).",
+            "Próba szczelności instalacji ogrzewania podłogowego wg PN-EN 1264-4 (przed wylaniem jastrychu, "
+            "ciśnienie 1,5 × p_rob ≥ 6 bar); wygrzewanie jastrychu wg PN-EN 1264-4.",
+        ]
+        bad = [w for w in og.warunki if w.ok is False]
+        for w in bad[:5]:
+            self.notes.append(f"SPRAWDZENIE NIESPEŁNIONE (obliczenia): {w.opis} ({w.podstawa}) — dogrzewanie "
+                              "(np. grzejnik łazienkowy elektryczny) lub zmniejszenie T/zwiększenie θ_V do analizy.")
+        if bad:
+            self.brak("Ogrzewanie — pomieszczenia z niedoborem mocy podłogi", "; ".join(w.opis for w in bad[:6]),
+                      "wyposazenie.yaml: {typ: grzejnik, xy, obrot, moc_W} (grzejnik łazienkowy) lub decyzja projektowa")
+        rows = [[f"{p.pom}/{p.nr}", num(100 * p.T, 0), num(p.L, 1), num(p.m_kgh, 0), num(p.dp, 1)]
+                for p in og.petle if (self.m.pomieszczenie(p.pom) and self.m.pomieszczenie(p.pom).kond == self.kid)]
+        self.res.column_blocks.append(("petle", table_block(
+            f"PĘTLE OGRZEWANIA PODŁOGOWEGO — {self.kid} (PN-EN 1264)",
+            [("Pętla", 30), ("T [cm]", 22), ("L [m]", 22), ("ṁ [kg/h]", 26), ("∆p [kPa]", 26)], rows,
+            align=["left", "right", "right", "right", "right"])))

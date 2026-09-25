@@ -180,6 +180,7 @@ def wezel_attyka_wspornik(sciana: Sequence[Warstwa], dach: Sequence[Warstwa], at
                           h_nad_pokryciem: float = 0.30, d_izol_gora: float = 0.05,
                           t_wsp: float | None = None, dy_wsp: float = 0.0, mat_wsp: Material | None = None,
                           wysieg: float = 1.0, lacznik: Material | None = LACZNIK_PRZYKLAD, d_lacznika: float = 0.08,
+                          blok_attyki: tuple[Material, float] | None = None,
                           H: float | None = None, L: float | None = None, theta_i: float | None = None,
                           theta_e: float | None = None, id: str = "WZ-RW", nazwa: str | None = None) -> Wezel:
     """Stropodach z attyką w licu ściany i okapem (płyta wspornikowa) przez łącznik termoizolacyjny.
@@ -218,6 +219,8 @@ def wezel_attyka_wspornik(sciana: Sequence[Warstwa], dach: Sequence[Warstwa], at
     for y0, y1, w in _stos(list(reversed(nad)), t, +1):
         ob.append(_obsz(box(-L, y0, x_s0 - iz_w.d, y1), w))
     ob.append(_obsz(box(x_s0, t, x_s1, y_p), mat_att, "attyka"))
+    if blok_attyki:
+        ob.append(_obsz(box(x_s0, t, x_s1, t + blok_attyki[1]), blok_attyki[0], "blok termiczny u podstawy attyki"))
     ob.append(_obsz(box(x_s0 - iz_w.d, t, x_s0, y_p), iz_w.mat, "izolacja attyki (wewn.)"))
     x_iz_z = x_out if iz_z is None else x_s1 + iz_z.d
     mat_z = (iz_z.mat if iz_z is not None else sciana[-1].mat)

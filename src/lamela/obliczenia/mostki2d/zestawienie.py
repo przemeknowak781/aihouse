@@ -417,3 +417,61 @@ def ocena_4_linii(model, wezel, wynik: dict, kody: list[str], cache: dict | None
     zle = [f"{LINIE4[k]}: {out[k][1]}" for k in "IHSP" if out[k][0] != "OK"]
     out["ciaglosc"] = "zachowana" if not zle else "uwaga — " + "; ".join(zle)
     return out
+
+
+# ================================================================================================ przelewy
+def poziomy_dachu(model, dach: dict, xy) -> dict:
+    """Rzędne w punkcie rzutu dachu [m]: wierzch płyty, hydroizolacja (pokrycie) i wierzch warstw nad nią; grubość
+    warstwy spadkowej d = d_min + spadek·(odległość od najbliższego wpustu) ≤ d_max [INT — powierzchnia stożkowa]."""
+    p = model.przegroda(dach["przegroda"])
+    pl = dach["plyta"]
+    z0 = float(pl["wierzch"])
+    ki = p.idx_konstr
+    raw = (p.raw or {}).get("warstwy") or []
+    wp = [np.asarray(w["xy"] if isinstance(w, dict) else w, float) for w in dach.get("wpusty") or []]
+    dist = min((float(np.linalg.norm(np.asarray(xy, float) - q)) for q in wp), default=0.0)
+    sp = float(dach.get("spadek") or 0.02)
+    z = z0
+    z_memb = None
+    nad = list(range(ki - 1, -1, -1))           # od płyty w górę
+    for j in nad:
+        w = p.warstwy[j]
+        kl = raw[j].get("klin") if j < len(raw) and isinstance(raw[j], dict) else None
+        d = float(w.d)
+        if kl:
+            d = min(float(kl["d_max"]), float(kl["d_min"]) + sp * dist)
+        z += d
+        f = str((raw[j].get("funkcja") if j < len(raw) and isinstance(raw[j], dict) else "") or "")
+        m_ = model.material(w.mat)
+        fm = str(((getattr(m_, "raw", None) or {}).get("funkcja")) or "")
+        if "hydro" in f or "hydro" in fm:
+            z_memb = z
+    return {"plyta": z0, "pokrycie": z_memb if z_memb is not None else z, "wierzch": z, "odl_wpustu": dist}
+
+
+def poziomy_przelewow(model) -> list[dict]:
+    """Kontrola rzędnych przelewów awaryjnych: dno ≥ pokrycie przy wpuście + 0,03 m (W-142 / J2 5.1: 30–50 mm),
+    dno ≥ pokrycie lokalne (przelew nie może leżeć pod pokryciem), górna krawędź otworu ≤ wierzch wywinięć (pokrycie
+    lokalne + 0,15 m, DAFA) i ≤ korona attyki."""
+    out = []
+    for d in model.dachy():
+        att = d.get("attyka") or {}
+        wp = [w["xy"] if isinstance(w, dict) else w for w in d.get("wpusty") or []]
+        if not wp:
+            continue
+        pw = min((poziomy_dachu(model, d, q) for q in wp), key=lambda r: r["pokrycie"])
+        p = model.przegroda(d["przegroda"])
+        z_korona = float(d["plyta"]["wierzch"]) + p.d_nad_konstr() + float(att.get("wys_nad_pokryciem", 0.0))
+        for pa in d.get("przelewy_awaryjne") or []:
+            lok = poziomy_dachu(model, d, pa["xy"])
+            dno = float(pa["rzedna_dna"])
+            h = float(pa.get("wys", 0.10))
+            dno_min = max(pw["pokrycie"] + 0.03, lok["pokrycie"])
+            dno_max = min(pw["pokrycie"] + 0.05, lok["pokrycie"] + 0.15 - h, z_korona - h - 0.05)
+            dno_max = max(dno_max, dno_min)
+            ok = dno_min - 1e-3 <= dno <= dno_max + 1e-3
+            out.append(dict(dach=d["id"], opis=str(pa.get("opis", "")), xy=pa["xy"], dno=dno, h=h,
+                            pokrycie_wpust=pw["pokrycie"], pokrycie_lok=lok["pokrycie"], wierzch_lok=lok["wierzch"],
+                            korona=z_korona, dno_min=dno_min, dno_max=dno_max, ok=ok,
+                            zalecane=round(min(max(dno, dno_min), dno_max), 3)))
+    return out
