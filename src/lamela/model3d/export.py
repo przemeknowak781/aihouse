@@ -322,9 +322,41 @@ def export_obj(ir: IR, path, model=None) -> dict:
     written = [str(path)]
     for fn, blob in (tex or {}).items():
         fp = path.parent / fn
-        fp.write_bytes(blob if isinstance(blob, (bytes, bytearray)) else bytes(blob))
+        data = blob if isinstance(blob, (bytes, bytearray)) else bytes(blob)
+        if fn == mtl_name:
+            data = _rewrite_mtl(data.decode("utf-8"), model).encode("utf-8")
+        fp.write_bytes(data)
         written.append(str(fp))
     return {"plik": str(path), "pliki": written}
+
+
+def _rewrite_mtl(txt: str, model=None) -> str:
+    """MTL wg biblioteki PBR: Kd w sRGB, niski połysk dla materiałów matowych, przezroczystość d, map_Kd."""
+    maps: dict[str, str] = {}
+    cur = None
+    order = []
+    for line in txt.splitlines():
+        t = line.strip().split()
+        if not t:
+            continue
+        if t[0] == "newmtl":
+            cur = " ".join(t[1:])
+            order.append(cur)
+        elif t[0] == "map_Kd" and cur:
+            maps[cur] = " ".join(t[1:])
+    out = ["# lamela.model3d — materiały wg lamela/model3d/materials.py"]
+    for name in order:
+        p = pbr_for(name, model)
+        r, g, b = hex_rgb(p.color)
+        spec = 0.5 if p.metallic > 0.3 else 0.04 + 0.2 * (1 - p.roughness)
+        ns = max(2.0, (1.0 - p.roughness) * 250.0)
+        out += [f"newmtl {name}", "Ka 0.000 0.000 0.000", f"Kd {r:.4f} {g:.4f} {b:.4f}",
+                f"Ks {spec:.3f} {spec:.3f} {spec:.3f}", f"Ns {ns:.1f}", f"d {p.alpha:.3f}",
+                f"Tr {1 - p.alpha:.3f}", "illum 2"]
+        if name in maps:
+            out.append(f"map_Kd {maps[name]}")
+        out.append("")
+    return "\n".join(out)
 
 
 def load_glb_check(path) -> dict:
