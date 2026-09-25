@@ -8,16 +8,16 @@ Podstawy: PN-EN ISO 10211:2017-09 (metoda numeryczna 2D, warunki brzegowe, płas
 
 | węzeł | nazwa | L_2D (i–e) | ψ_oi | ψ_e | ψ_i | θ_si,min [°C] | f_Rsi | f_Rsi ≥ min | Δ siatki |
 |---|---|---|---|---|---|---|---|---|---|
-| WZ-01 | Attyka stropodachu bryły A (D1) | 0,5038 | 0,174 | 0,063 | 0,176 | 16,15 | 0,899 | tak | 0,02 % |
+| WZ-01 | Attyka stropodachu bryły A (D1) | 0,4159 | 0,086 | −0,025 | 0,088 | 17,42 | 0,932 | tak | 0,01 % |
 | WZ-02 | Attyki dachów P1 (D2, D3) — poza ścianami bryły A | 0,5044 | 0,171 | 0,059 | 0,173 | 16,20 | 0,900 | tak | 0,02 % |
 | WZ-03 | Attyka dachu zielonego nad pasem gospodarczym (linia D, część ogrzewana) | 0,5611 | 0,195 | 0,069 | 0,195 | 15,81 | 0,890 | tak | 0,02 % |
-| WZ-04 | Okap E (PL-E) i daszek wejścia — łącznik termoizolacyjny | 0,6061 | 0,220 | 0,220 | 0,309 | 16,33 | 0,903 | tak | 0,02 % |
-| WZ-05 | Krawędź ST2 (PL-2) — łącznik termoizolacyjny pod bryłą A | 0,6254 | 0,226 | 0,218 | 0,315 | 16,28 | 0,902 | tak | 0,03 % |
-| WZ-06 | Krawędź ST3 (PL-3) — łącznik termoizolacyjny przy attyce bryły A | 0,7150 | 0,385 | 0,274 | 0,387 | 13,36 | 0,825 | tak | 0,04 % |
-| WZ-07a | Krawędź stropu ST2Z nad powietrzem: ściana SZL na belce B3 + płyta PL-2 (łącznik) | 0,5616 | 0,182 | 0,058 | 0,182 | 13,82 | 0,837 | tak | 0,05 % |
+| WZ-04 | Okap E (PL-E) i daszek wejścia — łącznik termoizolacyjny | 0,5138 | 0,128 | 0,128 | 0,217 | 17,29 | 0,929 | tak | 0,01 % |
+| WZ-05 | Krawędź ST2 (PL-2) — łącznik termoizolacyjny pod bryłą A | 0,5333 | 0,134 | 0,126 | 0,223 | 17,24 | 0,927 | tak | 0,01 % |
+| WZ-06 | Krawędź ST3 (PL-3) — łącznik termoizolacyjny przy attyce bryły A | 0,5342 | 0,205 | 0,093 | 0,206 | 15,79 | 0,889 | tak | 0,02 % |
+| WZ-07a | Krawędź stropu ST2Z nad powietrzem: ściana SZL na belce B3 + płyta PL-2 (łącznik) | 0,5317 | 0,152 | 0,028 | 0,152 | 14,33 | 0,851 | tak | 0,04 % |
 | WZ-07b | Krawędź stropu ST2Z nad ścianą SZ1 niższej kondygnacji (ocieplenie spodu SUF-ZEW) | 0,5006 | −0,061 | −0,014 | 0,027 | 18,17 | 0,952 | tak | 0,01 % |
 | WZ-08 | Cokół: ściana zewn. – płyta fundamentowa na XPS (część ogrzewana) | 0,5654 | 0,100 | 0,058 | 0,100 | 16,32 | 0,903 | tak | 0,03 % |
-| WZ-09a | Ściana dom–garaż (SWG) na płycie fundamentowej (POD-0 / POD-G) | 0,8695 | 0,616 | 0,616 | 0,616 | 12,70 | 0,760 | tak | 0,07 % |
+| WZ-09a | Ściana dom–garaż (SWG) na płycie fundamentowej (POD-0 / POD-G) | 0,5545 | 0,301 | 0,301 | 0,301 | 17,05 | 0,903 | tak | 0,03 % |
 | WZ-09b | Ściana SWG pod płytą: dom — D4, garaż — D4, pas docieplenia SUF-G 1.0 m | 0,2982 | 0,071 | 0,052 | 0,071 | 13,77 | 0,836 | tak | 0,03 % |
 | WZ-09c | Ściana SWG pod płytą: dom — ST1 + ściana SZ1, garaż — D4, pas docieplenia SUF-G 1.0 m | 0,2581 | 0,081 | 0,070 | 0,081 | 15,64 | 0,885 | tak | 0,03 % |
 | WZ-10 | Strop pośredni ST1/ST2 – ściana zewn. z ETICS ciągłym (wieniec) | 0,3856 | 0,000 | 0,000 | 0,089 | 18,60 | 0,963 | tak | 0,00 % |
@@ -26,7 +26,7 @@ Podstawy: PN-EN ISO 10211:2017-09 (metoda numeryczna 2D, warunki brzegowe, płas
 | WZ-11P | Podokienniki — parapet zewn. z okapnikiem na profilu z XPS | 0,4375 | 0,006 | 0,015 | 0,015 | 16,62 | 0,911 | tak | 0,08 % |
 | WZ-11T | Progi HS / drzwi zewn. na płycie P0 — profil progowy termoizolacyjny na podwalinie XPS/PUR-GF, odwodnienie liniowe | 0,7286 | 0,118 | 0,076 | 0,118 | 14,10 | 0,845 | tak | 0,07 % |
 | WZ-12 | Narożniki wypukłe ścian zewnętrznych | 0,5370 | 0,066 | −0,052 | 0,066 | 17,17 | 0,926 | tak | 0,01 % |
-| WZ-16a | Krawędź stropu ST2Z nad powietrzem: ściana SZ2 na belce B4 + płyta PL-2 (łącznik) | 0,6687 | 0,236 | 0,057 | 0,236 | 13,92 | 0,840 | tak | 0,03 % |
+| WZ-16a | Krawędź stropu ST2Z nad powietrzem: ściana SZ2 na belce B4 + płyta PL-2 (łącznik) | 0,6258 | 0,194 | 0,014 | 0,194 | 14,46 | 0,854 | tak | 0,02 % |
 | WZ-16b | Krawędź stropu ST2Z nad powietrzem: ściana SZ1 na belce B5 | 0,5415 | 0,123 | −0,044 | 0,123 | 15,46 | 0,880 | tak | 0,01 % |
 | WZ-X1 | Dach D2/D3 (SD2) – ściana SZ1 wyższej kondygnacji na krawędzi (pod spodem ściana SW18, pomieszczenia ogrzewane) — węzeł spoza sekcji `wezly` | 0,3936 | 0,022 | −0,006 | 0,022 | 18,64 | 0,964 | tak | 0,01 % |
 | WZ-X2 | Dach D4 (DZ1) – ściana SZ1 wyższej kondygnacji na krawędzi (pod spodem ściana SW18, pomieszczenia ogrzewane) — węzeł spoza sekcji `wezly` | 0,4097 | 0,022 | −0,001 | 0,022 | 18,64 | 0,964 | tak | 0,01 % |
@@ -37,30 +37,30 @@ System wymiarów jak w obliczeniu obudowy (`energia.bryla`: ściany po licach we
 
 | węzeł | nazwa | ψ_oi [W/(m·K)] | l_oi [m] | ψ·l [W/K] |
 |---|---|---|---|---|
-| WZ-01 | Attyka stropodachu bryły A (D1) | 0,1742 | 45,9000 | 7,9969 |
-| WZ-02 | Attyki dachów P1 (D2, D3) — poza ścianami bryły A | 0,1714 | 14,6200 | 2,5061 |
-| WZ-03 | Attyka dachu zielonego nad pasem gospodarczym (linia D, część ogrzewana) | 0,1953 | 9,5500 | 1,8647 |
-| WZ-04 | Okap E (PL-E) i daszek wejścia — łącznik termoizolacyjny | 0,2204 | 21,8200 | 4,8098 |
-| WZ-05 | Krawędź ST2 (PL-2) — łącznik termoizolacyjny pod bryłą A | 0,2262 | 19,3200 | 4,3704 |
-| WZ-06 | Krawędź ST3 (PL-3) — łącznik termoizolacyjny przy attyce bryły A | 0,3855 | 25,0500 | 9,6564 |
-| WZ-07a | Krawędź stropu ST2Z nad powietrzem: ściana SZL na belce B3 + płyta PL-2 (łącznik) | 0,1821 | 6,7250 | 1,2249 |
-| WZ-07b | Krawędź stropu ST2Z nad ścianą SZ1 niższej kondygnacji (ocieplenie spodu SUF-ZEW) | −0,0607 | 6,7250 | −0,4079 |
-| WZ-08 | Cokół: ściana zewn. – płyta fundamentowa na XPS (część ogrzewana) | 0,1002 | 43,4000 | 4,3501 |
-| WZ-09a | Ściana dom–garaż (SWG) na płycie fundamentowej (POD-0 / POD-G) | 0,6156 | 12,2500 | 7,5409 |
-| WZ-09b | Ściana SWG pod płytą: dom — D4, garaż — D4, pas docieplenia SUF-G 1.0 m | 0,0710 | 6,3750 | 0,4527 |
-| WZ-09c | Ściana SWG pod płytą: dom — ST1 + ściana SZ1, garaż — D4, pas docieplenia SUF-G 1.0 m | 0,0813 | 5,8750 | 0,4777 |
-| WZ-10 | Strop pośredni ST1/ST2 – ściana zewn. z ETICS ciągłym (wieniec) | 0,0000 | 55,1200 | −0,0006 |
+| WZ-01 | Attyka stropodachu bryły A (D1) | 0,0863 | 19,9400 | 1,7209 |
+| WZ-02 | Attyki dachów P1 (D2, D3) — poza ścianami bryły A | 0,1714 | 13,4100 | 2,2987 |
+| WZ-03 | Attyka dachu zielonego nad pasem gospodarczym (linia D, część ogrzewana) | 0,1953 | 7,1700 | 1,4000 |
+| WZ-04 | Okap E (PL-E) i daszek wejścia — łącznik termoizolacyjny | 0,1281 | 22,4700 | 2,8795 |
+| WZ-05 | Krawędź ST2 (PL-2) — łącznik termoizolacyjny pod bryłą A | 0,1341 | 18,7100 | 2,5091 |
+| WZ-06 | Krawędź ST3 (PL-3) — łącznik termoizolacyjny przy attyce bryły A | 0,2046 | 24,3000 | 4,9725 |
+| WZ-07a | Krawędź stropu ST2Z nad powietrzem: ściana SZL na belce B3 + płyta PL-2 (łącznik) | 0,1522 | 5,7200 | 0,8707 |
+| WZ-07b | Krawędź stropu ST2Z nad ścianą SZ1 niższej kondygnacji (ocieplenie spodu SUF-ZEW) | −0,0607 | 5,7200 | −0,3469 |
+| WZ-08 | Cokół: ściana zewn. – płyta fundamentowa na XPS (część ogrzewana) | 0,1002 | 27,7700 | 2,7835 |
+| WZ-09a | Ściana dom–garaż (SWG) na płycie fundamentowej (POD-0 / POD-G) | 0,3006 | 12,2550 | 3,6838 |
+| WZ-09b | Ściana SWG pod płytą: dom — D4, garaż — D4, pas docieplenia SUF-G 1.0 m | 0,0710 | 6,3780 | 0,4529 |
+| WZ-09c | Ściana SWG pod płytą: dom — ST1 + ściana SZ1, garaż — D4, pas docieplenia SUF-G 1.0 m | 0,0813 | 5,8770 | 0,4779 |
+| WZ-10 | Strop pośredni ST1/ST2 – ściana zewn. z ETICS ciągłym (wieniec) | 0,0000 | 18,2000 | −0,0002 |
 | WZ-11 | Ościeża okien/drzwi — ciepły montaż (rama 5 cm w murze, 4 cm w izolacji, zakład izolacji 3 cm na ramę) | 0,0053 | 96,2800 | 0,5123 |
 | WZ-11N | Nadproża — BEZ kaset osłon w ociepleniu (kasety w okapach / ramie C / szczelinie lamel / nadstawne) | 0,0078 | 45,0300 | 0,3515 |
 | WZ-11P | Podokienniki — parapet zewn. z okapnikiem na profilu z XPS | 0,0059 | 29,4200 | 0,1744 |
-| WZ-11T | Progi HS / drzwi zewn. na płycie P0 — profil progowy termoizolacyjny na podwalinie XPS/PUR-GF, odwodnienie liniowe | 0,1185 | 15,6100 | 1,8491 |
-| WZ-12 | Narożniki wypukłe ścian zewnętrznych | 0,0655 | 49,5000 | 3,2439 |
-| WZ-16a | Krawędź stropu ST2Z nad powietrzem: ściana SZ2 na belce B4 + płyta PL-2 (łącznik) | 0,2365 | 1,0000 | 0,2365 |
-| WZ-16b | Krawędź stropu ST2Z nad powietrzem: ściana SZ1 na belce B5 | 0,1229 | 1,0000 | 0,1229 |
+| WZ-11T | Progi HS / drzwi zewn. na płycie P0 — profil progowy termoizolacyjny na podwalinie XPS/PUR-GF, odwodnienie liniowe | 0,1185 | 15,6700 | 1,8562 |
+| WZ-12 | Narożniki wypukłe ścian zewnętrznych | 0,0655 | 40,0500 | 2,6246 |
+| WZ-16a | Krawędź stropu ST2Z nad powietrzem: ściana SZ2 na belce B4 + płyta PL-2 (łącznik) | 0,1936 | 1,0100 | 0,1955 |
+| WZ-16b | Krawędź stropu ST2Z nad powietrzem: ściana SZ1 na belce B5 | 0,1229 | 1,0100 | 0,1241 |
 | WZ-X1 | Dach D2/D3 (SD2) – ściana SZ1 wyższej kondygnacji na krawędzi (pod spodem ściana SW18, pomieszczenia ogrzewane) — węzeł spoza sekcji `wezly` | 0,0224 | 13,7850 | 0,3082 |
 | WZ-X2 | Dach D4 (DZ1) – ściana SZ1 wyższej kondygnacji na krawędzi (pod spodem ściana SW18, pomieszczenia ogrzewane) — węzeł spoza sekcji `wezly` | 0,0219 | 2,7930 | 0,0611 |
 
-**H_TB = Σ ψ_oi·l_oi = 51,70 W/K** (węzły liniowe 2D; mostki punktowe χ — poza zakresem)
+**H_TB = Σ ψ_oi·l_oi = 29,91 W/K** (węzły liniowe 2D; mostki punktowe χ — poza zakresem)
 
 ## WZ-01 — Attyka stropodachu bryły A (D1)
 
@@ -87,7 +87,7 @@ System wymiarów jak w obliczeniu obudowy (`energia.bryla`: ściany po licach we
 | ZB_C25 | Żelbet C25/30, B500SP (stropy, płyta fundamentowa, ściany) | 0,2200 | 2,3000 | 0,0957 |
 | TYNK_GIPS | Tynk gipsowy maszynowy 1,5 cm | 0,0100 | 0,4000 | 0,0250 |
 
-* attyka: SIL18, wys. nad pokryciem 0.25 m; izolacja PIR022: wewn. 0.1 m, korona 0.05 m
+* attyka: SIL18, wys. nad pokryciem 0.35 m; izolacja PIR022: wewn. 0.1 m, korona 0.05 m; blok termiczny BLOK_TERM_MODEL h = 0.15 m
 
 **Warunki brzegowe** (przekrój pionowy; płaszczyzny odcięcia i osie symetrii adiabatyczne)
 
@@ -100,31 +100,31 @@ System wymiarów jak w obliczeniu obudowy (`energia.bryla`: ściany po licach we
 
 | siatka | komórek | Φ_całk [W/m] |
 |---|---|---|
-| 129 × 149 = 19221 komórek; Δx ∈ [1.65; 93.5] mm, Δy ∈ [1; 94.72] mm | 19221 | 19,1396 |
-| 258 × 298 = 76884 komórek; Δx ∈ [0.825; 46.75] mm, Δy ∈ [0.5; 47.36] mm | 76884 | 19,1435 |
+| 129 × 164 = 21156 komórek; Δx ∈ [1.65; 93.5] mm, Δy ∈ [1; 94.72] mm | 21156 | 15,8008 |
+| 258 × 328 = 84624 komórek; Δx ∈ [0.825; 46.75] mm, Δy ∈ [0.5; 47.36] mm | 84624 | 15,8026 |
 
-Zmiana strumienia przy podwojeniu liczby podziałów: **0,021 %** (kryterium ISO 10211 < 1 %: spełnione); zmiana L_2D (= zmiana ψ): 0,00010 W/(m·K) (kryterium ≤ max(1 % |ψ|; 0,001) = 0,00174: spełnione); bilans energii Σ Φ / (½ Σ|Φ|) = 4.1e-13 (kryterium < 10⁻⁴: spełnione).
+Zmiana strumienia przy podwojeniu liczby podziałów: **0,011 %** (kryterium ISO 10211 < 1 %: spełnione); zmiana L_2D (= zmiana ψ): 0,00005 W/(m·K) (kryterium ≤ max(1 % |ψ|; 0,001) = 0,00100: spełnione); bilans energii Σ Φ / (½ Σ|Φ|) = 5.9e-13 (kryterium < 10⁻⁴: spełnione).
 
 **Współczynniki sprzężenia i ψ**
 
-*Para i–e:* L_2D = **0,5038 W/(m·K)**
+*Para i–e:* L_2D = **0,4159 W/(m·K)**
 
 | element flankujący | U [W/(m²K)] | l_e [m] | l_i [m] | l_oi [m] | U·l_e | U·l_i | U·l_oi |
 |---|---|---|---|---|---|---|---|
 | ściana | 0,1618 | 1,6610 | 1,2050 | 1,2150 | 0,2687 | 0,1950 | 0,1966 |
 | stropodach | 0,0972 | 1,7730 | 1,3680 | 1,3680 | 0,1723 | 0,1330 | 0,1330 |
 
-ψ_oi (wymiary wewnętrzne całkowite — system projektu, H_TB) = 0,5038 − 0,3296 = **0,174 W/(m·K)**; ψ_e (zewnętrzne) = 0,5038 − 0,4411 = 0,063 W/(m·K); ψ_i (wewnętrzne) = 0,5038 − 0,3279 = 0,176 W/(m·K)
+ψ_oi (wymiary wewnętrzne całkowite — system projektu, H_TB) = 0,4159 − 0,3296 = **0,086 W/(m·K)**; ψ_e (zewnętrzne) = 0,4159 − 0,4411 = −0,025 W/(m·K); ψ_i (wewnętrzne) = 0,4159 − 0,3279 = 0,088 W/(m·K)
 
 **Temperatura powierzchni wewnętrznej i ryzyko pleśni** (R_si = 0,25 — PN-EN ISO 13788)
 
-* θ_si,min = **16,15 °C** w punkcie (0,000; −0,010) m przy θ_i = 20,0 °C, θ_e = −18,0 °C
-* f_Rsi = (θ_si,min − θ_e)/(θ_i − θ_e) = **0,899**; wymaganie f_Rsi ≥ 0,72 (WT zał. 2 pkt 2.2.1–2.2.5 (uproszczenie; φ_i = 50 %) (W-248)) → **SPEŁNIA**
+* θ_si,min = **17,42 °C** w punkcie (0,000; −0,010) m przy θ_i = 20,0 °C, θ_e = −18,0 °C
+* f_Rsi = (θ_si,min − θ_e)/(θ_i − θ_e) = **0,932**; wymaganie f_Rsi ≥ 0,72 (WT zał. 2 pkt 2.2.1–2.2.5 (uproszczenie; φ_i = 50 %) (W-248)) → **SPEŁNIA**
 * informacyjnie przy θ_e obliczeniowej i φ_i = 50 %: θ_si,kryt (φ_si = 80 %) = 12,6 °C (f = 0,806), punkt rosy 9,3 °C → θ_si,min ≥ θ_si,kryt (ocena miesięczna wg ISO 13788 — łagodniejsza; kryterium formalne: f_Rsi ≥ 0,72)
 
 **Porównanie**
 
-* PN-EN ISO 14683 — wartość domyślna (dach płaski–ściana z attyką, izolacja ciągła (R)): ψ_e = 0,55, ψ_i = 0,75 W/(m·K) [NZW] — obliczone ψ_e = 0,063, ψ_i = 0,176 (poniżej wartości domyślnej — porównanie w tym samym systemie wymiarów)
+* PN-EN ISO 14683 — wartość domyślna (dach płaski–ściana z attyką, izolacja ciągła (R)): ψ_e = 0,55, ψ_i = 0,75 W/(m·K) [NZW] — obliczone ψ_e = −0,025, ψ_i = 0,088 (poniżej wartości domyślnej — porównanie w tym samym systemie wymiarów)
 
 ![WZ-01 — temperatura](rys/WZ-01_temperatura.png)
 
@@ -328,7 +328,7 @@ Przekrój pionowy; pomieszczenia nad i pod stropem ogrzewane (grupa „i”).
 | TYNK_GIPS | Tynk gipsowy maszynowy 1,5 cm | 0,0100 | 0,4000 | 0,0250 |
 
 * płyta wspornikowa: ZB_C30, t = 0.2999999999999998 m, wierzch +0.00 m wzgl. wierzchu stropu, wysięg 1.31 m od lica ocieplenia
-* łącznik: Łącznik termoizolacyjny 80 mm (moduł izolacyjny + pręty nierdzewne), λ_eq: λ_eq = 0.09 W/(m·K), d = 0.08 m — [DANE PRZYKŁADOWE – FIKCYJNE] λ_eq typowej deklaracji (ETA) łącznika 80 mm do płyt 20–22 cm; do zastąpienia wartością z ETA wybranego wyrobu (W-272)
+* łącznik: Łącznik termoizolacyjny 120 mm, λ_eq = 0.08 W/(m·K) (model): λ_eq = 0.08 W/(m·K), d = 0.12 m — model: wsporniki_plyty[].lacznik (wymaganie — do potwierdzenia ETA)
 * geometria z modelu: PL-E przy stropie ST1, ściana dolna SZ1, górna SZ1; wysięg zastępczy A/L = 1.31 m; styk z obrysem 18.07 m; łącznik: dane przykładowe (ETA do uzupełnienia); wierzch wspornika zrównany z wierzchem płyty (konwencja audytu A2 K-1) [ZAŁ]
 * długość z geometrii modelu [m]: 18,070
 
@@ -344,26 +344,26 @@ Przekrój pionowy; pomieszczenia nad i pod stropem ogrzewane (grupa „i”).
 
 | siatka | komórek | Φ_całk [W/m] |
 |---|---|---|
-| 171 × 194 = 33174 komórek; Δx ∈ [1.65; 97.75] mm, Δy ∈ [1.65; 96.83] mm | 33174 | 23,0252 |
-| 342 × 388 = 132696 komórek; Δx ∈ [0.825; 48.87] mm, Δy ∈ [0.825; 48.41] mm | 132696 | 23,0309 |
+| 171 × 194 = 33174 komórek; Δx ∈ [1.65; 97.75] mm, Δy ∈ [1.65; 96.83] mm | 33174 | 19,5213 |
+| 342 × 388 = 132696 komórek; Δx ∈ [0.825; 48.87] mm, Δy ∈ [0.825; 48.41] mm | 132696 | 19,5241 |
 
-Zmiana strumienia przy podwojeniu liczby podziałów: **0,025 %** (kryterium ISO 10211 < 1 %: spełnione); zmiana L_2D (= zmiana ψ): 0,00015 W/(m·K) (kryterium ≤ max(1 % |ψ|; 0,001) = 0,00220: spełnione); bilans energii Σ Φ / (½ Σ|Φ|) = 8.3e-13 (kryterium < 10⁻⁴: spełnione).
+Zmiana strumienia przy podwojeniu liczby podziałów: **0,014 %** (kryterium ISO 10211 < 1 %: spełnione); zmiana L_2D (= zmiana ψ): 0,00007 W/(m·K) (kryterium ≤ max(1 % |ψ|; 0,001) = 0,00128: spełnione); bilans energii Σ Φ / (½ Σ|Φ|) = 8.7e-13 (kryterium < 10⁻⁴: spełnione).
 
 **Współczynniki sprzężenia i ψ**
 
-*Para i–e:* L_2D = **0,6061 W/(m·K)**
+*Para i–e:* L_2D = **0,5138 W/(m·K)**
 
 | element flankujący | U [W/(m²K)] | l_e [m] | l_i [m] | l_oi [m] | U·l_e | U·l_i | U·l_oi |
 |---|---|---|---|---|---|---|---|
 | ściana górna | 0,1455 | 1,3250 | 0,8350 | 0,8350 | 0,1928 | 0,1215 | 0,1215 |
 | ściana dolna | 0,1455 | 1,3250 | 1,2050 | 1,8150 | 0,1928 | 0,1754 | 0,2641 |
 
-ψ_oi (wymiary wewnętrzne całkowite — system projektu, H_TB) = 0,6061 − 0,3856 = **0,220 W/(m·K)**; ψ_e (zewnętrzne) = 0,6061 − 0,3856 = 0,220 W/(m·K); ψ_i (wewnętrzne) = 0,6061 − 0,2969 = 0,309 W/(m·K)
+ψ_oi (wymiary wewnętrzne całkowite — system projektu, H_TB) = 0,5138 − 0,3856 = **0,128 W/(m·K)**; ψ_e (zewnętrzne) = 0,5138 − 0,3856 = 0,128 W/(m·K); ψ_i (wewnętrzne) = 0,5138 − 0,2969 = 0,217 W/(m·K)
 
 **Temperatura powierzchni wewnętrznej i ryzyko pleśni** (R_si = 0,25 — PN-EN ISO 13788)
 
-* θ_si,min = **16,33 °C** w punkcie (0,000; −0,010) m przy θ_i = 20,0 °C, θ_e = −18,0 °C
-* f_Rsi = (θ_si,min − θ_e)/(θ_i − θ_e) = **0,903**; wymaganie f_Rsi ≥ 0,72 (WT zał. 2 pkt 2.2.1–2.2.5 (uproszczenie; φ_i = 50 %) (W-248)) → **SPEŁNIA**
+* θ_si,min = **17,29 °C** w punkcie (0,000; −0,010) m przy θ_i = 20,0 °C, θ_e = −18,0 °C
+* f_Rsi = (θ_si,min − θ_e)/(θ_i − θ_e) = **0,929**; wymaganie f_Rsi ≥ 0,72 (WT zał. 2 pkt 2.2.1–2.2.5 (uproszczenie; φ_i = 50 %) (W-248)) → **SPEŁNIA**
 * informacyjnie przy θ_e obliczeniowej i φ_i = 50 %: θ_si,kryt (φ_si = 80 %) = 12,6 °C (f = 0,806), punkt rosy 9,3 °C → θ_si,min ≥ θ_si,kryt (ocena miesięczna wg ISO 13788 — łagodniejsza; kryterium formalne: f_Rsi ≥ 0,72)
 
 ![WZ-04 — temperatura](rys/WZ-04_temperatura.png)
@@ -420,7 +420,7 @@ Przekrój pionowy; pomieszczenia nad i pod stropem ogrzewane (grupa „i”).
 | TYNK_GIPS | Tynk gipsowy maszynowy 1,5 cm | 0,0100 | 0,4000 | 0,0250 |
 
 * płyta wspornikowa: ZB_C30, t = 0.3000000000000007 m, wierzch +0.00 m wzgl. wierzchu stropu, wysięg 0.92 m od lica ocieplenia
-* łącznik: Łącznik termoizolacyjny 80 mm (moduł izolacyjny + pręty nierdzewne), λ_eq: λ_eq = 0.09 W/(m·K), d = 0.08 m — [DANE PRZYKŁADOWE – FIKCYJNE] λ_eq typowej deklaracji (ETA) łącznika 80 mm do płyt 20–22 cm; do zastąpienia wartością z ETA wybranego wyrobu (W-272)
+* łącznik: Łącznik termoizolacyjny 120 mm, λ_eq = 0.08 W/(m·K) (model): λ_eq = 0.08 W/(m·K), d = 0.12 m — model: wsporniki_plyty[].lacznik (wymaganie — do potwierdzenia ETA)
 * geometria z modelu: PL-2 przy stropie ST2, ściana dolna SZ1, górna SZ2; wysięg zastępczy A/L = 0.92 m; styk z obrysem 25.09 m; łącznik: dane przykładowe (ETA do uzupełnienia); wierzch wspornika zrównany z wierzchem płyty (konwencja audytu A2 K-1) [ZAŁ]
 * długość z geometrii modelu [m]: 25,090
 
@@ -436,26 +436,26 @@ Przekrój pionowy; pomieszczenia nad i pod stropem ogrzewane (grupa „i”).
 
 | siatka | komórek | Φ_całk [W/m] |
 |---|---|---|
-| 167 × 194 = 32398 komórek; Δx ∈ [1.65; 97.75] mm, Δy ∈ [1.65; 96.83] mm | 32398 | 23,7608 |
-| 334 × 388 = 129592 komórek; Δx ∈ [0.825; 48.87] mm, Δy ∈ [0.825; 48.41] mm | 129592 | 23,7668 |
+| 167 × 194 = 32398 komórek; Δx ∈ [1.65; 97.75] mm, Δy ∈ [1.65; 96.83] mm | 32398 | 20,2638 |
+| 334 × 388 = 129592 komórek; Δx ∈ [0.825; 48.87] mm, Δy ∈ [0.825; 48.41] mm | 129592 | 20,2668 |
 
-Zmiana strumienia przy podwojeniu liczby podziałów: **0,025 %** (kryterium ISO 10211 < 1 %: spełnione); zmiana L_2D (= zmiana ψ): 0,00016 W/(m·K) (kryterium ≤ max(1 % |ψ|; 0,001) = 0,00226: spełnione); bilans energii Σ Φ / (½ Σ|Φ|) = 2.3e-13 (kryterium < 10⁻⁴: spełnione).
+Zmiana strumienia przy podwojeniu liczby podziałów: **0,015 %** (kryterium ISO 10211 < 1 %: spełnione); zmiana L_2D (= zmiana ψ): 0,00008 W/(m·K) (kryterium ≤ max(1 % |ψ|; 0,001) = 0,00134: spełnione); bilans energii Σ Φ / (½ Σ|Φ|) = 3.5e-13 (kryterium < 10⁻⁴: spełnione).
 
 **Współczynniki sprzężenia i ψ**
 
-*Para i–e:* L_2D = **0,6254 W/(m·K)**
+*Para i–e:* L_2D = **0,5333 W/(m·K)**
 
 | element flankujący | U [W/(m²K)] | l_e [m] | l_i [m] | l_oi [m] | U·l_e | U·l_i | U·l_oi |
 |---|---|---|---|---|---|---|---|
 | ściana górna | 0,1618 | 1,3250 | 0,8350 | 0,8350 | 0,2144 | 0,1351 | 0,1351 |
 | ściana dolna | 0,1455 | 1,3250 | 1,2050 | 1,8150 | 0,1928 | 0,1754 | 0,2641 |
 
-ψ_oi (wymiary wewnętrzne całkowite — system projektu, H_TB) = 0,6254 − 0,3992 = **0,226 W/(m·K)**; ψ_e (zewnętrzne) = 0,6254 − 0,4072 = 0,218 W/(m·K); ψ_i (wewnętrzne) = 0,6254 − 0,3105 = 0,315 W/(m·K)
+ψ_oi (wymiary wewnętrzne całkowite — system projektu, H_TB) = 0,5333 − 0,3992 = **0,134 W/(m·K)**; ψ_e (zewnętrzne) = 0,5333 − 0,4072 = 0,126 W/(m·K); ψ_i (wewnętrzne) = 0,5333 − 0,3105 = 0,223 W/(m·K)
 
 **Temperatura powierzchni wewnętrznej i ryzyko pleśni** (R_si = 0,25 — PN-EN ISO 13788)
 
-* θ_si,min = **16,28 °C** w punkcie (0,000; −0,010) m przy θ_i = 20,0 °C, θ_e = −18,0 °C
-* f_Rsi = (θ_si,min − θ_e)/(θ_i − θ_e) = **0,902**; wymaganie f_Rsi ≥ 0,72 (WT zał. 2 pkt 2.2.1–2.2.5 (uproszczenie; φ_i = 50 %) (W-248)) → **SPEŁNIA**
+* θ_si,min = **17,24 °C** w punkcie (0,000; −0,010) m przy θ_i = 20,0 °C, θ_e = −18,0 °C
+* f_Rsi = (θ_si,min − θ_e)/(θ_i − θ_e) = **0,927**; wymaganie f_Rsi ≥ 0,72 (WT zał. 2 pkt 2.2.1–2.2.5 (uproszczenie; φ_i = 50 %) (W-248)) → **SPEŁNIA**
 * informacyjnie przy θ_e obliczeniowej i φ_i = 50 %: θ_si,kryt (φ_si = 80 %) = 12,6 °C (f = 0,806), punkt rosy 9,3 °C → θ_si,min ≥ θ_si,kryt (ocena miesięczna wg ISO 13788 — łagodniejsza; kryterium formalne: f_Rsi ≥ 0,72)
 
 ![WZ-05 — temperatura](rys/WZ-05_temperatura.png)
@@ -499,10 +499,10 @@ Zmiana strumienia przy podwojeniu liczby podziałów: **0,025 %** (kryterium ISO
 | ZB_C30 | Żelbet C30/37 XC4/XF1 (krawędzie płyt wysuniętych, attyki, belki) | 0,1800 | 2,5000 | 0,0720 |
 | EPS031 | Styropian grafitowy EPS 031 (ETICS, NRO w systemie) | 0,2000 | 0,0310 | 6,4516 |
 | TYNK_SIL | ETICS: warstwa zbrojona + tynk silikonowy 1,5 mm (biały / jasnoszary NCS S 1500-N) | 0,0050 | 0,8000 | 0,0062 |
-| wys. nad pokryciem | 0,2500 |
+| wys. nad pokryciem | 0,3500 |
 
 * okap: t = 0.3200000000000003 m, wierzch +0.00 m wzgl. płyty, wysięg 0.92 m
-* łącznik: Łącznik termoizolacyjny 80 mm (moduł izolacyjny + pręty nierdzewne), λ_eq: λ_eq = 0.09, d = 0.08 m — [DANE PRZYKŁADOWE – FIKCYJNE] λ_eq typowej deklaracji (ETA) łącznika 80 mm do płyt 20–22 cm; do zastąpienia wartością z ETA wybranego wyrobu (W-272)
+* łącznik: Łącznik termoizolacyjny 120 mm, λ_eq = 0.08 W/(m·K) (model): λ_eq = 0.08, d = 0.12 m — model: wsporniki_plyty[].lacznik (wymaganie — do potwierdzenia ETA)
 * geometria z modelu: PL-3 przy dachu D1 (SD1), attyka AT1, ściana SZ2; wysięg zastępczy A/L = 0.92 m; styk z obrysem 25.09 m; łącznik: dane przykładowe (ETA do uzupełnienia); wierzch wspornika zrównany z wierzchem płyty (konwencja audytu A2 K-1) [ZAŁ]
 * długość z geometrii modelu [m]: 25,090
 
@@ -517,31 +517,31 @@ Zmiana strumienia przy podwojeniu liczby podziałów: **0,025 %** (kryterium ISO
 
 | siatka | komórek | Φ_całk [W/m] |
 |---|---|---|
-| 179 × 165 = 29535 komórek; Δx ∈ [1.65; 94.63] mm, Δy ∈ [1; 95.12] mm | 29535 | 27,1607 |
-| 358 × 330 = 118140 komórek; Δx ∈ [0.825; 47.32] mm, Δy ∈ [0.5; 47.56] mm | 118140 | 27,1714 |
+| 179 × 180 = 32220 komórek; Δx ∈ [1.65; 94.63] mm, Δy ∈ [1; 95.12] mm | 32220 | 20,2952 |
+| 358 × 360 = 128880 komórek; Δx ∈ [0.825; 47.32] mm, Δy ∈ [0.5; 47.56] mm | 128880 | 20,2989 |
 
-Zmiana strumienia przy podwojeniu liczby podziałów: **0,039 %** (kryterium ISO 10211 < 1 %: spełnione); zmiana L_2D (= zmiana ψ): 0,00028 W/(m·K) (kryterium ≤ max(1 % |ψ|; 0,001) = 0,00385: spełnione); bilans energii Σ Φ / (½ Σ|Φ|) = 3.3e-13 (kryterium < 10⁻⁴: spełnione).
+Zmiana strumienia przy podwojeniu liczby podziałów: **0,019 %** (kryterium ISO 10211 < 1 %: spełnione); zmiana L_2D (= zmiana ψ): 0,00010 W/(m·K) (kryterium ≤ max(1 % |ψ|; 0,001) = 0,00205: spełnione); bilans energii Σ Φ / (½ Σ|Φ|) = 6.4e-13 (kryterium < 10⁻⁴: spełnione).
 
 **Współczynniki sprzężenia i ψ**
 
-*Para i–e:* L_2D = **0,7150 W/(m·K)**
+*Para i–e:* L_2D = **0,5342 W/(m·K)**
 
 | element flankujący | U [W/(m²K)] | l_e [m] | l_i [m] | l_oi [m] | U·l_e | U·l_i | U·l_oi |
 |---|---|---|---|---|---|---|---|
 | ściana | 0,1618 | 1,6610 | 1,2050 | 1,2150 | 0,2687 | 0,1950 | 0,1966 |
 | stropodach | 0,0972 | 1,7730 | 1,3680 | 1,3680 | 0,1723 | 0,1330 | 0,1330 |
 
-ψ_oi (wymiary wewnętrzne całkowite — system projektu, H_TB) = 0,7150 − 0,3296 = **0,385 W/(m·K)**; ψ_e (zewnętrzne) = 0,7150 − 0,4411 = 0,274 W/(m·K); ψ_i (wewnętrzne) = 0,7150 − 0,3279 = 0,387 W/(m·K)
+ψ_oi (wymiary wewnętrzne całkowite — system projektu, H_TB) = 0,5342 − 0,3296 = **0,205 W/(m·K)**; ψ_e (zewnętrzne) = 0,5342 − 0,4411 = 0,093 W/(m·K); ψ_i (wewnętrzne) = 0,5342 − 0,3279 = 0,206 W/(m·K)
 
 **Temperatura powierzchni wewnętrznej i ryzyko pleśni** (R_si = 0,25 — PN-EN ISO 13788)
 
-* θ_si,min = **13,36 °C** w punkcie (0,000; −0,010) m przy θ_i = 20,0 °C, θ_e = −18,0 °C
-* f_Rsi = (θ_si,min − θ_e)/(θ_i − θ_e) = **0,825**; wymaganie f_Rsi ≥ 0,72 (WT zał. 2 pkt 2.2.1–2.2.5 (uproszczenie; φ_i = 50 %) (W-248)) → **SPEŁNIA**
+* θ_si,min = **15,79 °C** w punkcie (0,000; −0,010) m przy θ_i = 20,0 °C, θ_e = −18,0 °C
+* f_Rsi = (θ_si,min − θ_e)/(θ_i − θ_e) = **0,889**; wymaganie f_Rsi ≥ 0,72 (WT zał. 2 pkt 2.2.1–2.2.5 (uproszczenie; φ_i = 50 %) (W-248)) → **SPEŁNIA**
 * informacyjnie przy θ_e obliczeniowej i φ_i = 50 %: θ_si,kryt (φ_si = 80 %) = 12,6 °C (f = 0,806), punkt rosy 9,3 °C → θ_si,min ≥ θ_si,kryt (ocena miesięczna wg ISO 13788 — łagodniejsza; kryterium formalne: f_Rsi ≥ 0,72)
 
 **Porównanie**
 
-* PN-EN ISO 14683 — wartość domyślna (dach płaski–ściana z attyką, izolacja ciągła (R)): ψ_e = 0,55, ψ_i = 0,75 W/(m·K) [NZW] — obliczone ψ_e = 0,274, ψ_i = 0,387 (poniżej wartości domyślnej — porównanie w tym samym systemie wymiarów)
+* PN-EN ISO 14683 — wartość domyślna (dach płaski–ściana z attyką, izolacja ciągła (R)): ψ_e = 0,55, ψ_i = 0,75 W/(m·K) [NZW] — obliczone ψ_e = 0,093, ψ_i = 0,206 (poniżej wartości domyślnej — porównanie w tym samym systemie wymiarów)
 
 ![WZ-06 — temperatura](rys/WZ-06_temperatura.png)
 
@@ -591,7 +591,7 @@ Przekrój pionowy; pod stropem powietrze zewnętrzne (ocieplenie spodu).
 | MEMB_WIATR | Membrana fasadowa wiatroizolacyjna UV-stabilna, czarna (sd ≈ 0,02 m) | 0,0010 | 0,1700 | 0,0059 |
 
 * płyta wspornikowa: ZB_C30, t = 0.3000000000000007 m, wierzch +0.00 m wzgl. wierzchu stropu, wysięg 1.0 m od lica ocieplenia
-* łącznik: Łącznik termoizolacyjny 80 mm (moduł izolacyjny + pręty nierdzewne), λ_eq: λ_eq = 0.09 W/(m·K), d = 0.08 m — [DANE PRZYKŁADOWE – FIKCYJNE] λ_eq typowej deklaracji (ETA) łącznika 80 mm do płyt 20–22 cm; do zastąpienia wartością z ETA wybranego wyrobu (W-272)
+* łącznik: Łącznik termoizolacyjny 120 mm, λ_eq = 0.08 W/(m·K) (model): λ_eq = 0.08 W/(m·K), d = 0.12 m — model: wsporniki_plyty[].lacznik (wymaganie — do potwierdzenia ETA)
 * belka odwrócona: b = 0.2 m, h nad płytą = 0.38 m (w linii ściany górnej)
 * wpis sekcji wezly: WZ-07: Strop P2 nad powietrzem zewnętrznym (ST2Z) — krawędzie wspornika bryły A
 * geometria z modelu: strop ST2Z (sufit SUF-ZEW); krawędzie typu ściana na krawędzi — łącznie 5.72 m
@@ -608,26 +608,26 @@ Przekrój pionowy; pod stropem powietrze zewnętrzne (ocieplenie spodu).
 
 | siatka | komórek | Φ_całk [W/m] |
 |---|---|---|
-| 185 × 220 = 40700 komórek; Δx ∈ [1.67; 97.2] mm, Δy ∈ [0.5; 96.69] mm | 40700 | 21,3296 |
-| 370 × 440 = 162800 komórek; Δx ∈ [0.835; 48.6] mm, Δy ∈ [0.25; 48.35] mm | 162800 | 21,3395 |
+| 186 × 220 = 40920 komórek; Δx ∈ [1.67; 97.2] mm, Δy ∈ [0.5; 96.69] mm | 40920 | 20,1951 |
+| 372 × 440 = 163680 komórek; Δx ∈ [0.835; 48.6] mm, Δy ∈ [0.25; 48.35] mm | 163680 | 20,2028 |
 
-Zmiana strumienia przy podwojeniu liczby podziałów: **0,046 %** (kryterium ISO 10211 < 1 %: spełnione); zmiana L_2D (= zmiana ψ): 0,00026 W/(m·K) (kryterium ≤ max(1 % |ψ|; 0,001) = 0,00182: spełnione); bilans energii Σ Φ / (½ Σ|Φ|) = 2.7e-13 (kryterium < 10⁻⁴: spełnione).
+Zmiana strumienia przy podwojeniu liczby podziałów: **0,038 %** (kryterium ISO 10211 < 1 %: spełnione); zmiana L_2D (= zmiana ψ): 0,00020 W/(m·K) (kryterium ≤ max(1 % |ψ|; 0,001) = 0,00152: spełnione); bilans energii Σ Φ / (½ Σ|Φ|) = 6.6e-14 (kryterium < 10⁻⁴: spełnione).
 
 **Współczynniki sprzężenia i ψ**
 
-*Para i–e:* L_2D = **0,5616 W/(m·K)**
+*Para i–e:* L_2D = **0,5317 W/(m·K)**
 
 | element flankujący | U [W/(m²K)] | l_e [m] | l_i [m] | l_oi [m] | U·l_e | U·l_i | U·l_oi |
 |---|---|---|---|---|---|---|---|
 | ściana górna | 0,0875 | 1,7410 | 0,9400 | 0,9400 | 0,1524 | 0,0823 | 0,0823 |
 | strop nad powietrzem zewn. | 0,1237 | 2,8430 | 2,4030 | 2,4030 | 0,3516 | 0,2972 | 0,2972 |
 
-ψ_oi (wymiary wewnętrzne całkowite — system projektu, H_TB) = 0,5616 − 0,3794 = **0,182 W/(m·K)**; ψ_e (zewnętrzne) = 0,5616 − 0,5039 = 0,058 W/(m·K); ψ_i (wewnętrzne) = 0,5616 − 0,3794 = 0,182 W/(m·K)
+ψ_oi (wymiary wewnętrzne całkowite — system projektu, H_TB) = 0,5317 − 0,3794 = **0,152 W/(m·K)**; ψ_e (zewnętrzne) = 0,5317 − 0,5039 = 0,028 W/(m·K); ψ_i (wewnętrzne) = 0,5317 − 0,3794 = 0,152 W/(m·K)
 
 **Temperatura powierzchni wewnętrznej i ryzyko pleśni** (R_si = 0,25 — PN-EN ISO 13788)
 
-* θ_si,min = **13,82 °C** w punkcie (0,000; 0,600) m przy θ_i = 20,0 °C, θ_e = −18,0 °C
-* f_Rsi = (θ_si,min − θ_e)/(θ_i − θ_e) = **0,837**; wymaganie f_Rsi ≥ 0,72 (WT zał. 2 pkt 2.2.1–2.2.5 (uproszczenie; φ_i = 50 %) (W-248)) → **SPEŁNIA**
+* θ_si,min = **14,33 °C** w punkcie (0,000; 0,600) m przy θ_i = 20,0 °C, θ_e = −18,0 °C
+* f_Rsi = (θ_si,min − θ_e)/(θ_i − θ_e) = **0,851**; wymaganie f_Rsi ≥ 0,72 (WT zał. 2 pkt 2.2.1–2.2.5 (uproszczenie; φ_i = 50 %) (W-248)) → **SPEŁNIA**
 * informacyjnie przy θ_e obliczeniowej i φ_i = 50 %: θ_si,kryt (φ_si = 80 %) = 12,6 °C (f = 0,806), punkt rosy 9,3 °C → θ_si,min ≥ θ_si,kryt (ocena miesięczna wg ISO 13788 — łagodniejsza; kryterium formalne: f_Rsi ≥ 0,72)
 
 *Uwaga:* Pustka wentylowana pod ociepleniem spodu stropu i podsufitka pominięte (PN-EN ISO 6946 — warstwy za pustką dobrze wentylowaną); R_se = 0,04 na spodzie ocieplenia (wariant ostrożny) [ZAŁ].
@@ -850,7 +850,10 @@ Zmiana strumienia przy podwojeniu liczby podziałów: **0,028 %** (kryterium ISO
 | kod | materiał | d [m] | λ [W/(m·K)] | R [m²K/W] |
 |---|---|---|---|---|
 | ZYWICA | Posadzka żywiczna epoksydowa antypoślizgowa R11 (garaż) | 0,0030 | 0,2000 | 0,0150 |
-| JASTRYCH | Jastrych cementowy CT-C25-F5 z wężownicą ogrzewania podłogowego | 0,0470 | 1,2000 | 0,0392 |
+| JASTRYCH_G | Jastrych cementowy CT-C30-F5 zbrojony (siatka/włókna), dylatacja obwodowa — posadzka garażu na XPS | 0,0920 | 1,2000 | 0,0767 |
+| FOLIA_PE | Folia PE 0,2 mm — warstwa rozdzielająca pod XPS (nie pełni funkcji paroizolacji) | 0,0002 | 0,3300 | 0,0006 |
+| XPS300 | Polistyren ekstrudowany XPS 300 (pod płytą fundamentową, cokół, izolacja obwodowa) | 0,1000 | 0,0360 | 2,7778 |
+| MEMB_SBS_POD | Izolacja przeciwwilgociowa i przeciwradonowa: membrana SBS 4 mm na płycie fundamentowej | 0,0050 | 0,2300 | 0,0217 |
 | ZB_C25 | Żelbet C25/30, B500SP (stropy, płyta fundamentowa, ściany) | 0,2500 | 2,3000 | 0,1087 |
 | XPS300 | Polistyren ekstrudowany XPS 300 (pod płytą fundamentową, cokół, izolacja obwodowa) | 0,2000 | 0,0360 | 5,5556 |
 | FOLIA_PE | Folia PE 0,2 mm — warstwa rozdzielająca pod XPS (nie pełni funkcji paroizolacji) | 0,0002 | 0,3300 | 0,0006 |
@@ -872,25 +875,25 @@ Zmiana strumienia przy podwojeniu liczby podziałów: **0,028 %** (kryterium ISO
 
 | siatka | komórek | Φ_całk [W/m] |
 |---|---|---|
-| 158 × 196 = 30968 komórek; Δx ∈ [1.65; 97.1] mm, Δy ∈ [1.5; 93.27] mm | 30968 | 26,4144 |
-| 316 × 392 = 123872 komórek; Δx ∈ [0.825; 48.55] mm, Δy ∈ [0.75; 46.63] mm | 123872 | 26,4329 |
+| 158 × 241 = 38078 komórek; Δx ∈ [1.65; 97.1] mm, Δy ∈ [0.1; 93.6] mm | 38078 | 16,8529 |
+| 316 × 482 = 152312 komórek; Δx ∈ [0.825; 48.55] mm, Δy ∈ [0.05; 46.8] mm | 152312 | 16,8571 |
 
-Zmiana strumienia przy podwojeniu liczby podziałów: **0,070 %** (kryterium ISO 10211 < 1 %: spełnione); zmiana L_2D (= zmiana ψ): 0,00061 W/(m·K) (kryterium ≤ max(1 % |ψ|; 0,001) = 0,00616: spełnione); bilans energii Σ Φ / (½ Σ|Φ|) = 1.2e-12 (kryterium < 10⁻⁴: spełnione).
+Zmiana strumienia przy podwojeniu liczby podziałów: **0,025 %** (kryterium ISO 10211 < 1 %: spełnione); zmiana L_2D (= zmiana ψ): 0,00014 W/(m·K) (kryterium ≤ max(1 % |ψ|; 0,001) = 0,00301: spełnione); bilans energii Σ Φ / (½ Σ|Φ|) = 9.3e-12 (kryterium < 10⁻⁴: spełnione).
 
 **Współczynniki sprzężenia i ψ**
 
-*Para i–u:* L_2D = **0,8695 W/(m·K)**
+*Para i–u:* L_2D = **0,5545 W/(m·K)**
 
 | element flankujący | U [W/(m²K)] | l_e [m] | l_i [m] | l_oi [m] | U·l_e | U·l_i | U·l_oi |
 |---|---|---|---|---|---|---|---|
 | ściana dom–garaż (od posadzki domu) | 0,2539 | 1,0000 | 1,0000 | 1,0000 | 0,2539 | 0,2539 | 0,2539 |
 
-ψ_oi (wymiary wewnętrzne całkowite — system projektu, H_TB) = 0,8695 − 0,2539 = **0,616 W/(m·K)**; ψ_e (zewnętrzne) = 0,8695 − 0,2539 = 0,616 W/(m·K); ψ_i (wewnętrzne) = 0,8695 − 0,2539 = 0,616 W/(m·K)
+ψ_oi (wymiary wewnętrzne całkowite — system projektu, H_TB) = 0,5545 − 0,2539 = **0,301 W/(m·K)**; ψ_e (zewnętrzne) = 0,5545 − 0,2539 = 0,301 W/(m·K); ψ_i (wewnętrzne) = 0,5545 − 0,2539 = 0,301 W/(m·K)
 
 **Temperatura powierzchni wewnętrznej i ryzyko pleśni** (R_si = 0,25 — PN-EN ISO 13788)
 
-* θ_si,min = **12,70 °C** w punkcie (0,000; 0,000) m przy θ_i = 20,0 °C, θ_e = −10,4 °C
-* f_Rsi = (θ_si,min − θ_e)/(θ_i − θ_e) = **0,760**; wymaganie f_Rsi ≥ 0,72 (WT zał. 2 pkt 2.2.1–2.2.5 (uproszczenie; φ_i = 50 %) (W-248)) → **SPEŁNIA**
+* θ_si,min = **17,05 °C** w punkcie (0,000; 0,000) m przy θ_i = 20,0 °C, θ_e = −10,4 °C
+* f_Rsi = (θ_si,min − θ_e)/(θ_i − θ_e) = **0,903**; wymaganie f_Rsi ≥ 0,72 (WT zał. 2 pkt 2.2.1–2.2.5 (uproszczenie; φ_i = 50 %) (W-248)) → **SPEŁNIA**
 * informacyjnie przy θ_e obliczeniowej i φ_i = 50 %: θ_si,kryt (φ_si = 80 %) = 12,6 °C (f = 0,757), punkt rosy 9,3 °C → θ_si,min ≥ θ_si,kryt (ocena miesięczna wg ISO 13788 — łagodniejsza; kryterium formalne: f_Rsi ≥ 0,72)
 
 *Uwaga:* ψ_iu = L_2D,iu − U_ściany·h (podłogi po obu stronach nie wymieniają ciepła z gruntem w modelu węzła — dół adiabatyczny); strata do garażu wchodzi do H_U = H_iu·b_u (PN-EN ISO 13789).
@@ -1622,7 +1625,7 @@ Przekrój pionowy; pod stropem powietrze zewnętrzne (ocieplenie spodu).
 | MEMB_WIATR | Membrana fasadowa wiatroizolacyjna UV-stabilna, czarna (sd ≈ 0,02 m) | 0,0010 | 0,1700 | 0,0059 |
 
 * płyta wspornikowa: ZB_C30, t = 0.3000000000000007 m, wierzch +0.00 m wzgl. wierzchu stropu, wysięg 1.0 m od lica ocieplenia
-* łącznik: Łącznik termoizolacyjny 80 mm (moduł izolacyjny + pręty nierdzewne), λ_eq: λ_eq = 0.09 W/(m·K), d = 0.08 m — [DANE PRZYKŁADOWE – FIKCYJNE] λ_eq typowej deklaracji (ETA) łącznika 80 mm do płyt 20–22 cm; do zastąpienia wartością z ETA wybranego wyrobu (W-272)
+* łącznik: Łącznik termoizolacyjny 120 mm, λ_eq = 0.08 W/(m·K) (model): λ_eq = 0.08 W/(m·K), d = 0.12 m — model: wsporniki_plyty[].lacznik (wymaganie — do potwierdzenia ETA)
 * belka odwrócona: b = 0.18 m, h nad płytą = 0.58 m (w linii ściany górnej)
 * wpis sekcji wezly: WZ-16: Belki wspornikowe B4/B5 i belka B3 w linii izolacji wspornika bryły A (ciągłość wełny pod ST2Z)
 * geometria z modelu: strop ST2Z (sufit SUF-ZEW); krawędzie typu ściana na krawędzi — łącznie 1.01 m
@@ -1639,26 +1642,26 @@ Przekrój pionowy; pod stropem powietrze zewnętrzne (ocieplenie spodu).
 
 | siatka | komórek | Φ_całk [W/m] |
 |---|---|---|
-| 174 × 240 = 41760 komórek; Δx ∈ [1.65; 97.2] mm, Δy ∈ [0.5; 95.99] mm | 41760 | 25,4038 |
-| 348 × 480 = 167040 komórek; Δx ∈ [0.825; 48.6] mm, Δy ∈ [0.25; 47.99] mm | 167040 | 25,4112 |
+| 174 × 240 = 41760 komórek; Δx ∈ [1.65; 97.2] mm, Δy ∈ [0.5; 95.99] mm | 41760 | 23,7761 |
+| 348 × 480 = 167040 komórek; Δx ∈ [0.825; 48.6] mm, Δy ∈ [0.25; 47.99] mm | 167040 | 23,7813 |
 
-Zmiana strumienia przy podwojeniu liczby podziałów: **0,029 %** (kryterium ISO 10211 < 1 %: spełnione); zmiana L_2D (= zmiana ψ): 0,00019 W/(m·K) (kryterium ≤ max(1 % |ψ|; 0,001) = 0,00236: spełnione); bilans energii Σ Φ / (½ Σ|Φ|) = 7.6e-13 (kryterium < 10⁻⁴: spełnione).
+Zmiana strumienia przy podwojeniu liczby podziałów: **0,022 %** (kryterium ISO 10211 < 1 %: spełnione); zmiana L_2D (= zmiana ψ): 0,00014 W/(m·K) (kryterium ≤ max(1 % |ψ|; 0,001) = 0,00194: spełnione); bilans energii Σ Φ / (½ Σ|Φ|) = 7.8e-13 (kryterium < 10⁻⁴: spełnione).
 
 **Współczynniki sprzężenia i ψ**
 
-*Para i–e:* L_2D = **0,6687 W/(m·K)**
+*Para i–e:* L_2D = **0,6258 W/(m·K)**
 
 | element flankujący | U [W/(m²K)] | l_e [m] | l_i [m] | l_oi [m] | U·l_e | U·l_i | U·l_oi |
 |---|---|---|---|---|---|---|---|
 | ściana górna | 0,1618 | 1,6360 | 0,8350 | 0,8350 | 0,2647 | 0,1351 | 0,1351 |
 | strop nad powietrzem zewn. | 0,1237 | 2,8080 | 2,4030 | 2,4030 | 0,3472 | 0,2972 | 0,2972 |
 
-ψ_oi (wymiary wewnętrzne całkowite — system projektu, H_TB) = 0,6687 − 0,4323 = **0,236 W/(m·K)**; ψ_e (zewnętrzne) = 0,6687 − 0,6119 = 0,057 W/(m·K); ψ_i (wewnętrzne) = 0,6687 − 0,4323 = 0,236 W/(m·K)
+ψ_oi (wymiary wewnętrzne całkowite — system projektu, H_TB) = 0,6258 − 0,4323 = **0,194 W/(m·K)**; ψ_e (zewnętrzne) = 0,6258 − 0,6119 = 0,014 W/(m·K); ψ_i (wewnętrzne) = 0,6258 − 0,4323 = 0,194 W/(m·K)
 
 **Temperatura powierzchni wewnętrznej i ryzyko pleśni** (R_si = 0,25 — PN-EN ISO 13788)
 
-* θ_si,min = **13,92 °C** w punkcie (0,000; 0,600) m przy θ_i = 20,0 °C, θ_e = −18,0 °C
-* f_Rsi = (θ_si,min − θ_e)/(θ_i − θ_e) = **0,840**; wymaganie f_Rsi ≥ 0,72 (WT zał. 2 pkt 2.2.1–2.2.5 (uproszczenie; φ_i = 50 %) (W-248)) → **SPEŁNIA**
+* θ_si,min = **14,46 °C** w punkcie (0,000; 0,600) m przy θ_i = 20,0 °C, θ_e = −18,0 °C
+* f_Rsi = (θ_si,min − θ_e)/(θ_i − θ_e) = **0,854**; wymaganie f_Rsi ≥ 0,72 (WT zał. 2 pkt 2.2.1–2.2.5 (uproszczenie; φ_i = 50 %) (W-248)) → **SPEŁNIA**
 * informacyjnie przy θ_e obliczeniowej i φ_i = 50 %: θ_si,kryt (φ_si = 80 %) = 12,6 °C (f = 0,806), punkt rosy 9,3 °C → θ_si,min ≥ θ_si,kryt (ocena miesięczna wg ISO 13788 — łagodniejsza; kryterium formalne: f_Rsi ≥ 0,72)
 
 *Uwaga:* Pustka wentylowana pod ociepleniem spodu stropu i podsufitka pominięte (PN-EN ISO 6946 — warstwy za pustką dobrze wentylowaną); R_se = 0,04 na spodzie ocieplenia (wariant ostrożny) [ZAŁ].

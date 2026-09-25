@@ -220,10 +220,17 @@ def analiza_plyty_fundamentowej(an, siatka: float = 0.25, c_dol: float = 50.0, c
     pl_el = [e for e in els if "obrys" in e]
     if not pl_el:
         return None
-    e0 = pl_el[0]
-    P = Polygon(e0["obrys"]).buffer(0)
-    h = float(e0.get("h", 0.25))
-    spod = float(e0.get("spod", -0.4))
+    # kilka płyt (np. dom + garaż obniżony o uskok nad żebrem): jeden model MES na sumie obrysów — różnica poziomów
+    # pominięta w zginaniu płyty (uskok w żebrze) [ZAŁ]; grubość = najmniejsza, grubsze płyty jako strefy; spód do
+    # nośności podłoża — najpłytszy (zachowawczo)
+    e0 = max(pl_el, key=lambda e_: Polygon(e_["obrys"]).area)
+    P = unary_union([Polygon(e_["obrys"]).buffer(0) for e_ in pl_el]).buffer(1e-4, join_style=2).buffer(-1e-4,
+                                                                                                        join_style=2)
+    if P.geom_type != "Polygon":
+        P = max(P.geoms, key=lambda q: q.area)
+    h = min(float(e_.get("h", 0.25)) for e_ in pl_el)
+    spod = max(float(e_.get("spod", -0.4)) for e_ in pl_el)
+    e0 = dict(e0, id="+".join(str(e_.get("id")) for e_ in pl_el))
     beton = Beton.z_parametrow(_klasa(m, e0.get("mat"), p), p)
     E = beton.E_cm * 1000.0
     strefy, lx, ly, nazwy = [], set(), set(), []
@@ -241,6 +248,12 @@ def analiza_plyty_fundamentowej(an, siatka: float = 0.25, c_dol: float = 50.0, c
         x0, y0, x1, y1 = g.bounds
         lx.update([x0, x1])
         ly.update([y0, y1])
+    for e in pl_el:                              # płyty składowe grubsze od najcieńszej — strefy grubości
+        if float(e.get("h", h)) > h + 1e-6:
+            g = Polygon(e["obrys"]).buffer(0).intersection(P)
+            if not g.is_empty:
+                strefy.insert(0, (g, float(e["h"]), E))
+                nazwy.insert(0, "")          # nie żebro — elementy płyty (siatki), tylko grubość
     k0 = m.kondygnacje[0].id
     for w in m.sciany(k0):
         (xa, ya), (xb, yb) = w.p1, w.p2

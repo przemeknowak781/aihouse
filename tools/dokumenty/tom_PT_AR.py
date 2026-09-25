@@ -306,3 +306,89 @@ def rozdz_przegrody(o: Opis, D: dict):
             o.tabela(rows, tytul=f"{kod} — {nazwa_przegrody(p.nazwa)}", formaty={"d [mm]": 1, "λ [W/(m·K)]": 3},
                      szerokosci=["8mm", None, "13mm", "15mm", "30mm", "34mm"], wyrownanie={"Uwagi": "l"},
                      klasa="zwarta")
+
+
+def rozdz_akustyka(o: Opis, D: dict):
+    m = D["m"]
+    n_pz, z_pz = wym("akustyka", "norma_izolacyjnosc_przegrod")
+    n_hal, z_hal = wym("akustyka", "norma_poziomy_w_pomieszczeniach")
+    akust = [f"{k} — {nazwa_przegrody(p.nazwa)}" for k, p in m.przegrody.items()
+             if re.search(r"akust|R'?w|R'A1", p.nazwa)]
+    akust += [f"{k} — {v.get('opis', '')}" for k, v in (m.raw.get("stolarka") or {}).items()
+              if re.search(r"akust|R_w", str(v.get("opis", "")))]
+    o.rozdzial("Analiza akustyczna (§ 23 pkt 4a RPB) — nie dotyczy", f"""
+    **Nie dotyczy.** Zgodnie z § 23 pkt 4a RPB (dodanym rozp. Dz.U. 2023 poz. 2405) analizę w zakresie rozwiązań
+    technicznych i materiałowych mających na celu spełnienie wymagań akustycznych sporządza się „w przypadku budynku
+    mieszkalnego jednorodzinnego z dwoma lokalami, budynku mieszkalnego jednorodzinnego w zabudowie szeregowej lub
+    bliźniaczej lub budynku mieszkalnego wielorodzinnego”. Projektowany budynek jest wolnostojącym budynkiem
+    mieszkalnym jednorodzinnym z **jednym** lokalem (rejestr W-231).
+
+    Wymagania WT § 326 ust. 1–3 obowiązują niezależnie od analizy: poziom hałasu w pomieszczeniach wg {n_hal}
+    ({z_hal}), izolacyjność akustyczna przegród wg {n_pz} ({z_pz}). Rozwiązania ograniczające przenoszenie
+    dźwięku przyjęte w modelu:
+    """, podstawa="§ 23 pkt 4a RPB")
+    if akust:
+        o.dok.lista(akust)
+        o.md.append("\n".join(f"* {a}" for a in akust))
+
+
+def rozdz_U(o: Opis, D: dict):
+    ob = D["ob"]
+    from lamela.obliczenia.fizyka.u_przegrody import ROLA_OPIS
+    o.rozdzial("Obliczenia cieplno-wilgotnościowe przegród i węzłów", podstawa="W-243…W-250", nowa_strona=True)
+    zal = "; ".join(f"{z.tresc} {z.status}".strip() for z in D["R"]["zal"]["U"].lista[:6])
+    o.rozdzial("Współczynniki przenikania ciepła U (PN-EN ISO 6946, PN-EN ISO 13370)", f"""
+    Opory przejmowania ciepła R_si/R_se wg kierunku strumienia (PN-EN ISO 6946:2017-10 p. 6.8); warstwy niejednorodne
+    — metoda kresów (p. 6.7.2); poprawki ΔU wg zał. F (nieszczelności ΔU_g, łączniki ΔU_f, dach odwrócony ΔU_r);
+    izolacja spadkowa — zał. C (U średnie po powierzchni). Wymagania U_C,max — WT zał. 2 pkt 1.1–1.2 (W-243, W-244);
+    cele projektowe — W-245 {ZAL}. Założenia obliczeń: {zal}.
+    """, poziom=2, podstawa="PN-EN ISO 6946:2017-10")
+    rows, szczeg = [], []
+    for (kod, rola), wu in ob.u.items():
+        if rola in ROLE_WEWN:
+            continue
+        ocena = "—" if wu.spelnia_WT is None else ("spełnia" if wu.spelnia_WT else "NIE SPEŁNIA")
+        rows.append({"Przegroda": kod.split("|")[0], "Rola": ROLA_OPIS.get(rola, rola), "R_T [m²·K/W]": wu.R_T,
+                     "U₀ [W/(m²·K)]": wu.U0, "ΔU [W/(m²·K)]": wu.dU, "U [W/(m²·K)]": wu.U_zaokr,
+                     "U_max [W/(m²·K)]": wu.U_max, "U_cel [W/(m²·K)]": wu.U_cel, "Ocena": ocena})
+        szczeg.append((kod, rola, wu))
+    g = ob.grunt
+    if g is not None:
+        rows.append({"Przegroda": "POD-0 (grunt)", "Rola": "podłoga na gruncie — U_equiv wg PN-EN ISO 13370",
+                     "R_T [m²·K/W]": g.R_f, "U₀ [W/(m²·K)]": g.U0, "ΔU [W/(m²·K)]": None, "U [W/(m²·K)]": g.U_zaokr,
+                     "U_max [W/(m²·K)]": g.U_max, "U_cel [W/(m²·K)]": g.U_cel,
+                     "Ocena": "—" if g.spelnia_WT is None else ("spełnia" if g.spelnia_WT else "NIE SPEŁNIA")})
+    o.tabela(rows, tytul="Współczynniki przenikania ciepła przegród zewnętrznych — zestawienie",
+             formaty={"R_T [m²·K/W]": 2, "U₀ [W/(m²·K)]": 3, "ΔU [W/(m²·K)]": 3, "U [W/(m²·K)]": 2,
+                      "U_max [W/(m²·K)]": 2, "U_cel [W/(m²·K)]": 2}, klasa="zwarta", wyrownanie={"Ocena": "c"},
+             uwagi=["U — wartość do bilansu (U₀ + ΔU; dla izolacji spadkowej — średnia wg zał. C), 2 cyfry znaczące. "
+                    "Dla podłogi na gruncie R_T oznacza R_f (bez R_si/R_se)."],
+             zrodlo="lamela.obliczenia.fizyka (u_przegrody, grunt); wymagania.yaml — sekcja energia")
+    if g is not None:
+        iz = g.izolacja
+        o.tekst(f"""
+        Podłoga na gruncie (PN-EN ISO 13370:2017-09): A = {L(g.A, 1)} m², P = {L(g.P, 1)} m, B' = {L(g.B, 2)} m,
+        d_t = {L(g.d_t, 2)} m, U = {L(g.U_zaokr)} W/(m²·K). Izolacja krawędziowa
+        {iz.typ if iz else '—'} D = {L(iz.D if iz else None)} m, d_n = {L(iz.d_n if iz else None)} m,
+        λ_n = {L(iz.lam_n if iz else None, 3)} W/(m·K) — R_n ≥ R_min = {L(g.R_obwod_min, 1)} m²·K/W:
+        {'spełnia' if g.spelnia_obwodowa else 'do sprawdzenia'} (WT zał. 2 pkt 1.4; W-246).
+        """)
+    o.rozdzial("Obliczenie U — układy warstw z oporami cieplnymi", poziom=2)
+    for kod, rola, wu in szczeg:
+        wr = [{"Lp.": w.lp, "Warstwa": w.nazwa, "d [mm]": w.d * 1000, "λ [W/(m·K)]": w.lam, "R [m²·K/W]": w.R,
+               "Rodzaj": w.rodzaj.replace("_", " ")} for w in wu.warstwy]
+        wr.insert(0, {"_klasa": "pod", "Lp.": "", "Warstwa": "R_si", "d [mm]": None, "λ [W/(m·K)]": None,
+                      "R [m²·K/W]": wu.Rsi, "Rodzaj": wu.kierunek})
+        wr.append({"_klasa": "pod", "Lp.": "", "Warstwa": "R_se", "d [mm]": None, "λ [W/(m·K)]": None,
+                   "R [m²·K/W]": wu.Rse, "Rodzaj": ""})
+        wr.append({"_klasa": "suma", "Lp.": "", "Warstwa": "R_T (kresy: " + (f"{L(wu.R_gorny, 2)}/{L(wu.R_dolny, 2)}"
+                   if wu.R_gorny else "—") + ")", "d [mm]": sum(w.d for w in wu.warstwy) * 1000,
+                   "λ [W/(m·K)]": None, "R [m²·K/W]": wu.R_T, "Rodzaj": ""})
+        u = [f"U₀ = 1/R_T = {L(wu.U0, 3)}; ΔU_g = {L(wu.dU_g, 3)}, ΔU_f = {L(wu.dU_f, 3)}, ΔU_r = {L(wu.dU_r, 3)}; "
+             f"U_c = {L(wu.U_c, 3)}" + (f"; izolacja spadkowa: U_śr = {L(wu.klin.get('U_sr'), 3)} "
+                                        f"({wu.klin.get('metoda', 'zał. C')})" if wu.klin else "")
+             + f"; **U = {L(wu.U_zaokr)} W/(m²·K)** (U_max = {L(wu.U_max)}; {wu.wym_zrodlo or 'WT zał. 2 pkt 1.1'})."]
+        u += [x for x in wu.uwagi][:3]
+        o.tabela(wr, tytul=f"{kod.split('|')[0]} — {ROLA_OPIS.get(rola, rola)}: obliczenie U",
+                 formaty={"d [mm]": 1, "λ [W/(m·K)]": 3, "R [m²·K/W]": 3}, klasa="zwarta", uwagi=u,
+                 szerokosci=["8mm", None, "15mm", "15mm", "17mm", "26mm"])

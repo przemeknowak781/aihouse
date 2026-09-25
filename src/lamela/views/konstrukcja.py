@@ -1629,9 +1629,12 @@ def widok_zbrojenie_schodow(ctx: ViewContext, spec: dict, scale: float, opts: di
         f"Beton {D.biegi[0].beton if D.biegi else ''}, klasa ekspozycji XC1, c_nom = "
         f"{D.biegi[0].c_nom if D.biegi else 25:.0f} mm; stal B500SP."], None)))
     res.notes += [
-        "Płyty biegów i spoczników monolityczne; pręty dolne w załamaniu bieg–spocznik krzyżować (nie prowadzić po "
-        "wklęsłym narożu), zakotwienie ≥ l_bd za załamaniem; pręty górne przy podporach na 0,25·L (PN-EN 1992-1-1 "
-        "9.3.1.2(2)); stopnie betonowe/okładzina wg projektu architektury.",
+        "Płyty biegów i spoczników monolityczne. Załamanie z narożem wklęsłym od strony rozciąganej (bieg → spocznik "
+        "górny): pręty dolne NIE są prowadzone po narożu (wypadkowa sił w pręcie odspaja otulinę) — dwa pręty proste "
+        "krzyżujące się, każdy przedłużony za załamanie do krawędzi przeciwległej (strefa ściskana) i zakotwiony tam "
+        "łącznie ≥ l_bd (PN-EN 1992-1-1 8.4.3–8.4.4; zasada jak dla naroży z momentem otwierającym — zał. J.2.3, "
+        "informacyjny). Załamanie z narożem wypukłym od strony rozciąganej (spocznik dolny → bieg) — pręt odgięty "
+        "(trzpień wg tabl. 8.1N). Pręty górne przy podporach na 0,25·L (9.3.1.2(2)); stopnie wg projektu architektury.",
         "Biegi identyczne geometrycznie i obliczeniowo przedstawiono jednym rysunkiem (lista w tytule); liczby sztuk w "
         "zestawieniu — łącznie.",
     ] + UWAGI_ZBR[3:5]

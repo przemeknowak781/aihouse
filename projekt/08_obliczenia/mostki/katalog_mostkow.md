@@ -16,16 +16,16 @@ Model: `model/budynek.yaml`; źródło węzłów: sekcja `wezly` modelu (20 węz
 
 | węzeł | nazwa | ψ_e | ψ_i | ψ_oi | θ_si,min [°C] | f_Rsi | izolacja | woda / wilgoć* | ocena |
 |---|---|---|---|---|---|---|---|---|---|
-| [WZ-01](#wz-01) | Attyka stropodachu bryły A (D1) | +0,063 | +0,176 | +0,174 | 16,15 | 0,899 | ciągła | ✓ | **DOBRY** |
+| [WZ-01](#wz-01) | Attyka stropodachu bryły A (D1) | −0,025 | +0,088 | +0,086 | 17,42 | 0,932 | ciągła | ✓ | **BEZMOSTKOWY** |
 | [WZ-02](#wz-02) | Attyki dachów P1 (D2, D3) — poza ścianami bryły A | +0,059 | +0,173 | +0,171 | 16,20 | 0,900 | ciągła | ✓ | **DOBRY** |
 | [WZ-03](#wz-03) | Attyka dachu zielonego nad pasem gospodarczym (linia D, część ogrzewana) | +0,069 | +0,195 | +0,195 | 15,81 | 0,890 | ciągła | ✓ | **DOBRY** |
-| [WZ-04](#wz-04) | Okap E (PL-E) i daszek wejścia — łącznik termoizolacyjny | +0,220 | +0,309 | +0,220 | 16,33 | 0,903 | ciągła | 0 ✗ / 2 ! | **DO POPRAWY** |
-| [WZ-05](#wz-05) | Krawędź ST2 (PL-2) — łącznik termoizolacyjny pod bryłą A | +0,218 | +0,315 | +0,226 | 16,28 | 0,902 | ciągła | 0 ✗ / 2 ! | **DO POPRAWY** |
-| [WZ-06](#wz-06) | Krawędź ST3 (PL-3) — łącznik termoizolacyjny przy attyce bryły A | +0,274 | +0,387 | +0,385 | 13,36 | 0,825 | ciągła | ✓ | **DO POPRAWY** |
-| [WZ-07a](#wz-07a) | Krawędź stropu ST2Z nad powietrzem: ściana SZL na belce B3 + płyta PL-2 (łącznik) | +0,058 | +0,182 | +0,182 | 13,82 | 0,837 | ciągła | ✓ | **DO POPRAWY** |
+| [WZ-04](#wz-04) | Okap E (PL-E) i daszek wejścia — łącznik termoizolacyjny | +0,128 | +0,217 | +0,128 | 17,29 | 0,929 | ciągła | 0 ✗ / 1 ! | **DOBRY** |
+| [WZ-05](#wz-05) | Krawędź ST2 (PL-2) — łącznik termoizolacyjny pod bryłą A | +0,126 | +0,223 | +0,134 | 17,24 | 0,927 | ciągła | 0 ✗ / 1 ! | **DOBRY** |
+| [WZ-06](#wz-06) | Krawędź ST3 (PL-3) — łącznik termoizolacyjny przy attyce bryły A | +0,093 | +0,206 | +0,205 | 15,79 | 0,889 | ciągła | ✓ | **DO POPRAWY** |
+| [WZ-07a](#wz-07a) | Krawędź stropu ST2Z nad powietrzem: ściana SZL na belce B3 + płyta PL-2 (łącznik) | +0,028 | +0,152 | +0,152 | 14,33 | 0,851 | ciągła | ✓ | **DO POPRAWY** |
 | [WZ-07b](#wz-07b) | Krawędź stropu ST2Z nad ścianą SZ1 niższej kondygnacji (ocieplenie spodu SUF-ZEW) | −0,014 | +0,027 | −0,061 | 18,17 | 0,952 | ciągła | ✓ | **BEZMOSTKOWY** |
 | [WZ-08](#wz-08) | Cokół: ściana zewn. – płyta fundamentowa na XPS (część ogrzewana) | +0,058 | +0,100 | +0,100 | 16,32 | 0,903 | ciągła | ✓ | **DOBRY** |
-| [WZ-09a](#wz-09a) | Ściana dom–garaż (SWG) na płycie fundamentowej (POD-0 / POD-G) | +0,616 | +0,616 | +0,616 | 12,70 | 0,760 | **PRZERWANA** | ✓ | **ZŁY** |
+| [WZ-09a](#wz-09a) | Ściana dom–garaż (SWG) na płycie fundamentowej (POD-0 / POD-G) | +0,301 | +0,301 | +0,301 | 17,05 | 0,903 | **PRZERWANA** | ✓ | **ZŁY** |
 | [WZ-09b](#wz-09b) | Ściana SWG pod płytą: dom — D4, garaż — D4, pas docieplenia SUF-G 1.0 m | +0,052 | +0,071 | +0,071 | 13,77 | 0,836 | **PRZERWANA** | ✓ | **ZŁY** |
 | [WZ-09c](#wz-09c) | Ściana SWG pod płytą: dom — ST1 + ściana SZ1, garaż — D4, pas docieplenia SUF-G 1.0 m | +0,070 | +0,081 | +0,081 | 15,64 | 0,885 | **PRZERWANA** | ✓ | **ZŁY** |
 | [WZ-10](#wz-10) | Strop pośredni ST1/ST2 – ściana zewn. z ETICS ciągłym (wieniec) | −0,000 | +0,089 | −0,000 | 18,60 | 0,963 | ciągła | ✓ | **BEZMOSTKOWY** |
@@ -34,14 +34,14 @@ Model: `model/budynek.yaml`; źródło węzłów: sekcja `wezly` modelu (20 węz
 | [WZ-11P](#wz-11p) | Podokienniki — parapet zewn. z okapnikiem na profilu z XPS | +0,015 | +0,015 | +0,006 | 16,62 | 0,911 | ciągła | ✓ | **DOBRY** |
 | [WZ-11T](#wz-11t) | Progi HS / drzwi zewn. na płycie P0 — profil progowy termoizolacyjny na podwalinie XPS/PUR-GF, odwodnienie liniowe | +0,076 | +0,118 | +0,118 | 14,10 | 0,845 | ciągła | ✓ | **DOBRY** |
 | [WZ-12](#wz-12) | Narożniki wypukłe ścian zewnętrznych | −0,052 | +0,066 | +0,066 | 17,17 | 0,926 | ciągła | ✓ | **BEZMOSTKOWY** |
-| [WZ-16a](#wz-16a) | Krawędź stropu ST2Z nad powietrzem: ściana SZ2 na belce B4 + płyta PL-2 (łącznik) | +0,057 | +0,236 | +0,236 | 13,92 | 0,840 | ciągła | ✓ | **DO POPRAWY** |
+| [WZ-16a](#wz-16a) | Krawędź stropu ST2Z nad powietrzem: ściana SZ2 na belce B4 + płyta PL-2 (łącznik) | +0,014 | +0,194 | +0,194 | 14,46 | 0,854 | ciągła | ✓ | **DO POPRAWY** |
 | [WZ-16b](#wz-16b) | Krawędź stropu ST2Z nad powietrzem: ściana SZ1 na belce B5 | −0,044 | +0,123 | +0,123 | 15,46 | 0,880 | ciągła | ✓ | **BEZMOSTKOWY** |
 | [WZ-X1](#wz-x1) | Dach D2/D3 (SD2) – ściana SZ1 wyższej kondygnacji na krawędzi (pod spodem ściana SW18, pomieszczenia ogrzewane) — węzeł spoza sekcji `wezly` | −0,006 | +0,022 | +0,022 | 18,64 | 0,964 | ciągła | ✓ | **BEZMOSTKOWY** |
 | [WZ-X2](#wz-x2) | Dach D4 (DZ1) – ściana SZ1 wyższej kondygnacji na krawędzi (pod spodem ściana SW18, pomieszczenia ogrzewane) — węzeł spoza sekcji `wezly` | −0,001 | +0,022 | +0,022 | 18,64 | 0,964 | ciągła | ✓ | **BEZMOSTKOWY** |
 
 \* woda / wilgoć: liczba pozycji listy kontrolnej ✗ BRAK / ! UWAGA (bez pozycji „izolacja”) — dane do uzupełnienia w modelu lub rozwiązania do pokazania na detalu; ✓ — bez braków.
 
-Pominięte wpisy sekcji `wezly`: WZ-13: typ „konsola_lamel” nieobsługiwany w modelu 2D (mostek punktowy χ / węzeł 3D) — pominięty; WZ-14: typ „kotwa” nieobsługiwany w modelu 2D (mostek punktowy χ / węzeł 3D) — pominięty; WZ-15: typ „przejscie_instalacji” nieobsługiwany w modelu 2D (mostek punktowy χ / węzeł 3D) — pominięty
+Pominięte wpisy sekcji `wezly`: WZ-13: typ „konsola_lamel” nieobsługiwany w modelu 2D (mostek punktowy χ / węzeł 3D) — pominięty; WZ-14: typ „kotwa” nieobsługiwany w modelu 2D (mostek punktowy χ / węzeł 3D) — pominięty; WZ-15: typ „przejscie_instalacji” nieobsługiwany w modelu 2D (mostek punktowy χ / węzeł 3D) — pominięty; WZ-X1: typ „dach_sciana” nieobsługiwany w modelu 2D (mostek punktowy χ / węzeł 3D) — pominięty; WZ-X2: typ „dach_sciana” nieobsługiwany w modelu 2D (mostek punktowy χ / węzeł 3D) — pominięty
 
 ## Woda, wilgoć, ciągłość — pozycje do uzupełnienia
 
@@ -49,52 +49,51 @@ Zestawienie pozycji ✗ BRAK / ! UWAGA z list kontrolnych wszystkich węzłów (
 
 | status | pozycja | węzły |
 |---|---|---|
+| ✗ BRAK | linia izolacji PRZERWANA: TYNK_GIPS → BET_KOM_600 → ZB_C25 → TYNK_CW | WZ-09a |
 | ✗ BRAK | linia izolacji PRZERWANA: TYNK_GIPS → SIL18 → ZB_C25 | WZ-09b, WZ-09c |
-| ✗ BRAK | linia izolacji PRZERWANA: TYNK_GIPS → SIL18 → ZB_C25 → TYNK_CW | WZ-09a |
 | ! UWAGA | odprowadzenie wody z krawędzi płyty (rynna / okapnik / rzygacz → rura spustowa) — nieokreślone w modelu; obróbka czoła płyty z okapnikiem ≥ 3 cm | WZ-04, WZ-05 |
-| ! UWAGA | spadek płyty od budynku: nieokreślony w modelu (wymagany ≥ 1,5–2 %) | WZ-04, WZ-05 |
 
 ## H_TB z wartości symulowanych (ψ_oi)
 
 | węzeł | nazwa | ψ_oi [W/(m·K)] | l_oi [m] | ψ·l [W/K] |
 |---|---|---|---|---|
-| WZ-01 | Attyka stropodachu bryły A (D1) | +0,174 | 45,90 | +8,00 |
-| WZ-02 | Attyki dachów P1 (D2, D3) — poza ścianami bryły A | +0,171 | 14,62 | +2,51 |
-| WZ-03 | Attyka dachu zielonego nad pasem gospodarczym (linia D, część ogrzewana) | +0,195 | 9,55 | +1,86 |
-| WZ-04 | Okap E (PL-E) i daszek wejścia — łącznik termoizolacyjny | +0,220 | 21,82 | +4,81 |
-| WZ-05 | Krawędź ST2 (PL-2) — łącznik termoizolacyjny pod bryłą A | +0,226 | 19,32 | +4,37 |
-| WZ-06 | Krawędź ST3 (PL-3) — łącznik termoizolacyjny przy attyce bryły A | +0,385 | 25,05 | +9,66 |
-| WZ-07a | Krawędź stropu ST2Z nad powietrzem: ściana SZL na belce B3 + płyta PL-2 (łącznik) | +0,182 | 6,72 | +1,22 |
-| WZ-07b | Krawędź stropu ST2Z nad ścianą SZ1 niższej kondygnacji (ocieplenie spodu SUF-ZEW) | −0,061 | 6,72 | −0,41 |
-| WZ-08 | Cokół: ściana zewn. – płyta fundamentowa na XPS (część ogrzewana) | +0,100 | 43,40 | +4,35 |
-| WZ-09a | Ściana dom–garaż (SWG) na płycie fundamentowej (POD-0 / POD-G) | +0,616 | 12,25 | +7,54 |
+| WZ-01 | Attyka stropodachu bryły A (D1) | +0,086 | 19,94 | +1,72 |
+| WZ-02 | Attyki dachów P1 (D2, D3) — poza ścianami bryły A | +0,171 | 13,41 | +2,30 |
+| WZ-03 | Attyka dachu zielonego nad pasem gospodarczym (linia D, część ogrzewana) | +0,195 | 7,17 | +1,40 |
+| WZ-04 | Okap E (PL-E) i daszek wejścia — łącznik termoizolacyjny | +0,128 | 22,47 | +2,88 |
+| WZ-05 | Krawędź ST2 (PL-2) — łącznik termoizolacyjny pod bryłą A | +0,134 | 18,71 | +2,51 |
+| WZ-06 | Krawędź ST3 (PL-3) — łącznik termoizolacyjny przy attyce bryły A | +0,205 | 24,30 | +4,97 |
+| WZ-07a | Krawędź stropu ST2Z nad powietrzem: ściana SZL na belce B3 + płyta PL-2 (łącznik) | +0,152 | 5,72 | +0,87 |
+| WZ-07b | Krawędź stropu ST2Z nad ścianą SZ1 niższej kondygnacji (ocieplenie spodu SUF-ZEW) | −0,061 | 5,72 | −0,35 |
+| WZ-08 | Cokół: ściana zewn. – płyta fundamentowa na XPS (część ogrzewana) | +0,100 | 27,77 | +2,78 |
+| WZ-09a | Ściana dom–garaż (SWG) na płycie fundamentowej (POD-0 / POD-G) | +0,301 | 12,26 | +3,68 |
 | WZ-09b | Ściana SWG pod płytą: dom — D4, garaż — D4, pas docieplenia SUF-G 1.0 m | +0,071 | 6,38 | +0,45 |
 | WZ-09c | Ściana SWG pod płytą: dom — ST1 + ściana SZ1, garaż — D4, pas docieplenia SUF-G 1.0 m | +0,081 | 5,88 | +0,48 |
-| WZ-10 | Strop pośredni ST1/ST2 – ściana zewn. z ETICS ciągłym (wieniec) | −0,000 | 55,12 | −0,00 |
+| WZ-10 | Strop pośredni ST1/ST2 – ściana zewn. z ETICS ciągłym (wieniec) | −0,000 | 18,20 | −0,00 |
 | WZ-11 | Ościeża okien/drzwi — ciepły montaż (rama 5 cm w murze, 4 cm w izolacji, zakład izolacji 3 cm na ramę) | +0,005 | 96,28 | +0,51 |
 | WZ-11N | Nadproża — BEZ kaset osłon w ociepleniu (kasety w okapach / ramie C / szczelinie lamel / nadstawne) | +0,008 | 45,03 | +0,35 |
 | WZ-11P | Podokienniki — parapet zewn. z okapnikiem na profilu z XPS | +0,006 | 29,42 | +0,17 |
-| WZ-11T | Progi HS / drzwi zewn. na płycie P0 — profil progowy termoizolacyjny na podwalinie XPS/PUR-GF, odwodnienie liniowe | +0,118 | 15,61 | +1,85 |
-| WZ-12 | Narożniki wypukłe ścian zewnętrznych | +0,066 | 49,50 | +3,24 |
-| WZ-16a | Krawędź stropu ST2Z nad powietrzem: ściana SZ2 na belce B4 + płyta PL-2 (łącznik) | +0,236 | 1,00 | +0,24 |
-| WZ-16b | Krawędź stropu ST2Z nad powietrzem: ściana SZ1 na belce B5 | +0,123 | 1,00 | +0,12 |
+| WZ-11T | Progi HS / drzwi zewn. na płycie P0 — profil progowy termoizolacyjny na podwalinie XPS/PUR-GF, odwodnienie liniowe | +0,118 | 15,67 | +1,86 |
+| WZ-12 | Narożniki wypukłe ścian zewnętrznych | +0,066 | 40,05 | +2,62 |
+| WZ-16a | Krawędź stropu ST2Z nad powietrzem: ściana SZ2 na belce B4 + płyta PL-2 (łącznik) | +0,194 | 1,01 | +0,20 |
+| WZ-16b | Krawędź stropu ST2Z nad powietrzem: ściana SZ1 na belce B5 | +0,123 | 1,01 | +0,12 |
 | WZ-X1 | Dach D2/D3 (SD2) – ściana SZ1 wyższej kondygnacji na krawędzi (pod spodem ściana SW18, pomieszczenia ogrzewane) — węzeł spoza sekcji `wezly` | +0,022 | 13,79 | +0,31 |
 | WZ-X2 | Dach D4 (DZ1) – ściana SZ1 wyższej kondygnacji na krawędzi (pod spodem ściana SW18, pomieszczenia ogrzewane) — węzeł spoza sekcji `wezly` | +0,022 | 2,79 | +0,06 |
 
-**H_TB = Σ ψ_oi·l_oi = 51,70 W/K** (węzły liniowe wg modelu; warianty porównawcze bez długości nie są sumowane; mostki punktowe χ — poza zakresem 2D).
+**H_TB = Σ ψ_oi·l_oi = 29,91 W/K** (węzły liniowe wg modelu; warianty porównawcze bez długości nie są sumowane; mostki punktowe χ — poza zakresem 2D).
 
 ## Karty węzłów
 
 ### WZ-01
 
-**Attyka stropodachu bryły A (D1)** — ocena **DOBRY** (ψ_oi ≤ dobra praktyka, f_Rsi spełnione)
+**Attyka stropodachu bryły A (D1)** — ocena **BEZMOSTKOWY** (ψ_e ≤ 0,01 W/(m·K), f_Rsi spełnione, izolacja ciągła)
 
 ![WZ-01 — karta węzła](WZ-01_karta.png)
 
-* ψ_e = +0,063, ψ_i = +0,176, ψ_oi = +0,174 W/(m·K); L_2D = 0,5038 W/(m·K); odniesienie ψ_oi: domyślna 0,75, dobra praktyka 0,20 (stropodach–ściana zewnętrzna z attyką (izolacja attyki z 3 stron))
-* θ_si,min = 16,15 °C, f_Rsi = 0,899 (≥ 0,72 — brak ryzyka pleśni i kondensacji powierzchniowej)
+* ψ_e = −0,025, ψ_i = +0,088, ψ_oi = +0,086 W/(m·K); L_2D = 0,4159 W/(m·K); odniesienie ψ_oi: domyślna 0,75, dobra praktyka 0,20 (stropodach–ściana zewnętrzna z attyką (izolacja attyki z 3 stron))
+* θ_si,min = 17,42 °C, f_Rsi = 0,932 (≥ 0,72 — brak ryzyka pleśni i kondensacji powierzchniowej)
 * izolacja: ciągła (brak drogi przez materiały o λ > 0,12 W/(m·K) z wnętrza na zewnątrz)
-* siatka: 76884 komórek, zmiana Φ przy podwojeniu 0,021 %, bilans 4.1e-13
+* siatka: 84624 komórek, zmiana Φ przy podwojeniu 0,011 %, bilans 5.9e-13
 
 | | temat | pozycja listy kontrolnej |
 |---|---|---|
@@ -105,11 +104,11 @@ Zestawienie pozycji ✗ BRAK / ! UWAGA z list kontrolnych wszystkich węzłów (
 | ✓ OK | hydro | wywinięcie hydroizolacji na attykę ≥ 15 cm ponad warstwę wierzchnią (brief 9.4) |
 | ✓ OK | woda | spadek dachu 0.02 (wymagany ≥ 2 %, izolacja spadkowa) |
 | ✓ OK | woda | wpusty dachowe: 2 szt. |
-| ✓ OK | woda | przelewy awaryjne w attyce: 3 szt. |
+| ✓ OK | woda | przelewy awaryjne w attyce: 2 szt. |
 | ✓ OK | rury | rury spustowe: RS1 (wewn_szacht → zbiornik), RS2 (wewn_szacht → zbiornik) |
 | i INFO | woda | obróbka korony attyki ze spadkiem ≥ 5 % do dachu i okapnikami; wpust / przelew przez attykę — mostek punktowy χ (poza modelem 2D; kołnierz izolowany) |
 
-*Na rysunku:* hydroizolacja (MEMB_TPO) wywinięta na attykę i koronę — 25 cm ponad pokrycie (≥ 15 cm); obróbka korony attyki: spadek ≥ 5 % do dachu, okapniki ≥ 3 cm od lic; paroizolacja na płycie (PAROIZ_AL) wywinięta na attykę ponad izolację dachu, połączona z płytą ŻB (szczelność); spadek dachu ≥ 2 % do wpustów; przelew awaryjny w attyce (mostek punktowy χ).
+*Na rysunku:* hydroizolacja (MEMB_TPO) wywinięta na attykę i koronę — 35 cm ponad pokrycie (≥ 15 cm); obróbka korony attyki: spadek ≥ 5 % do dachu, okapniki ≥ 3 cm od lic; paroizolacja na płycie (PAROIZ_AL) wywinięta na attykę ponad izolację dachu, połączona z płytą ŻB (szczelność); spadek dachu ≥ 2 % do wpustów; przelew awaryjny w attyce (mostek punktowy χ).
 
 Wykresy szczegółowe: [temperatura](rys/WZ-01_temperatura.png), [strumien](rys/WZ-01_strumien.png), [powierzchnia](rys/WZ-01_theta_si.png); dane wejściowe, warunki brzegowe, siatka, elementy flankujące — [szczegoly_obliczen.md](szczegoly_obliczen.md)
 
@@ -133,7 +132,7 @@ Wykresy szczegółowe: [temperatura](rys/WZ-01_temperatura.png), [strumien](rys/
 | ✓ OK | hydro | wywinięcie hydroizolacji na attykę ≥ 15 cm ponad warstwę wierzchnią (brief 9.4) |
 | ✓ OK | woda | spadek dachu 0.02 (wymagany ≥ 2 %, izolacja spadkowa) |
 | ✓ OK | woda | wpusty dachowe: 2 szt. |
-| ✓ OK | woda | przelewy awaryjne w attyce: 3 szt. |
+| ✓ OK | woda | przelewy awaryjne w attyce: 2 szt. |
 | ✓ OK | rury | rury spustowe: RS1 (wewn_szacht → zbiornik), RS2 (wewn_szacht → zbiornik) |
 | i INFO | woda | obróbka korony attyki ze spadkiem ≥ 5 % do dachu i okapnikami; wpust / przelew przez attykę — mostek punktowy χ (poza modelem 2D; kołnierz izolowany) |
 
@@ -161,7 +160,7 @@ Wykresy szczegółowe: [temperatura](rys/WZ-02_temperatura.png), [strumien](rys/
 | ✓ OK | hydro | wywinięcie hydroizolacji na attykę ≥ 15 cm ponad warstwę wierzchnią (brief 9.4) |
 | ✓ OK | woda | spadek dachu 0.02 (wymagany ≥ 2 %, izolacja spadkowa) |
 | ✓ OK | woda | wpusty dachowe: 2 szt. |
-| ✓ OK | woda | przelewy awaryjne w attyce: 3 szt. |
+| ✓ OK | woda | przelewy awaryjne w attyce: 2 szt. |
 | ✓ OK | rury | rury spustowe: RS1 (wewn_szacht → zbiornik), RS2 (wewn_szacht → zbiornik) |
 | i INFO | woda | obróbka korony attyki ze spadkiem ≥ 5 % do dachu i okapnikami; wpust / przelew przez attykę — mostek punktowy χ (poza modelem 2D; kołnierz izolowany) |
 
@@ -171,21 +170,21 @@ Wykresy szczegółowe: [temperatura](rys/WZ-03_temperatura.png), [strumien](rys/
 
 ### WZ-04
 
-**Okap E (PL-E) i daszek wejścia — łącznik termoizolacyjny** — ocena **DO POPRAWY** (ψ_oi = 0,220 > dobra praktyka 0,15)
+**Okap E (PL-E) i daszek wejścia — łącznik termoizolacyjny** — ocena **DOBRY** (ψ_oi ≤ dobra praktyka, f_Rsi spełnione)
 
 ![WZ-04 — karta węzła](WZ-04_karta.png)
 
-* ψ_e = +0,220, ψ_i = +0,309, ψ_oi = +0,220 W/(m·K); L_2D = 0,6061 W/(m·K); odniesienie ψ_oi: domyślna 0,30, dobra praktyka 0,15 (płyta wspornikowa z łącznikiem termoizolacyjnym)
-* θ_si,min = 16,33 °C, f_Rsi = 0,903 (≥ 0,72 — brak ryzyka pleśni i kondensacji powierzchniowej)
+* ψ_e = +0,128, ψ_i = +0,217, ψ_oi = +0,128 W/(m·K); L_2D = 0,5138 W/(m·K); odniesienie ψ_oi: domyślna 0,30, dobra praktyka 0,15 (płyta wspornikowa z łącznikiem termoizolacyjnym)
+* θ_si,min = 17,29 °C, f_Rsi = 0,929 (≥ 0,72 — brak ryzyka pleśni i kondensacji powierzchniowej)
 * izolacja: ciągła (brak drogi przez materiały o λ > 0,12 W/(m·K) z wnętrza na zewnątrz)
-* siatka: 132696 komórek, zmiana Φ przy podwojeniu 0,025 %, bilans 8.3e-13
+* siatka: 132696 komórek, zmiana Φ przy podwojeniu 0,014 %, bilans 8.7e-13
 
 | | temat | pozycja listy kontrolnej |
 |---|---|---|
 | ✓ OK | izolacja | linia izolacji ciągła („test ołówka” na siatce: brak drogi przez materiały o λ > 0,12) |
 | ✓ OK | paro | szczelność powietrzna ściany SZ1: tynk wewnętrzny ciągły (TYNK_GIPS) — do stropu i posadzki |
 | ✓ OK | hydro | hydroizolacja płyty OK1: MEMB_TPO |
-| ! UWAGA | woda | spadek płyty od budynku: nieokreślony w modelu (wymagany ≥ 1,5–2 %) |
+| ✓ OK | woda | spadek płyty od budynku: 0.02 (wymagany ≥ 1,5–2 %) |
 | ! UWAGA | woda | odprowadzenie wody z krawędzi płyty (rynna / okapnik / rzygacz → rura spustowa) — nieokreślone w modelu; obróbka czoła płyty z okapnikiem ≥ 3 cm |
 | i INFO | hydro | hydroizolacja wywinięta na ścianę ≥ 15 cm ponad nawierzchnię, pod cokolikiem XPS; ciągła nad łącznikiem termoizolacyjnym |
 
@@ -195,21 +194,21 @@ Wykresy szczegółowe: [temperatura](rys/WZ-04_temperatura.png), [strumien](rys/
 
 ### WZ-05
 
-**Krawędź ST2 (PL-2) — łącznik termoizolacyjny pod bryłą A** — ocena **DO POPRAWY** (ψ_oi = 0,226 > dobra praktyka 0,15)
+**Krawędź ST2 (PL-2) — łącznik termoizolacyjny pod bryłą A** — ocena **DOBRY** (ψ_oi ≤ dobra praktyka, f_Rsi spełnione)
 
 ![WZ-05 — karta węzła](WZ-05_karta.png)
 
-* ψ_e = +0,218, ψ_i = +0,315, ψ_oi = +0,226 W/(m·K); L_2D = 0,6254 W/(m·K); odniesienie ψ_oi: domyślna 0,30, dobra praktyka 0,15 (płyta wspornikowa z łącznikiem termoizolacyjnym)
-* θ_si,min = 16,28 °C, f_Rsi = 0,902 (≥ 0,72 — brak ryzyka pleśni i kondensacji powierzchniowej)
+* ψ_e = +0,126, ψ_i = +0,223, ψ_oi = +0,134 W/(m·K); L_2D = 0,5333 W/(m·K); odniesienie ψ_oi: domyślna 0,30, dobra praktyka 0,15 (płyta wspornikowa z łącznikiem termoizolacyjnym)
+* θ_si,min = 17,24 °C, f_Rsi = 0,927 (≥ 0,72 — brak ryzyka pleśni i kondensacji powierzchniowej)
 * izolacja: ciągła (brak drogi przez materiały o λ > 0,12 W/(m·K) z wnętrza na zewnątrz)
-* siatka: 129592 komórek, zmiana Φ przy podwojeniu 0,025 %, bilans 2.3e-13
+* siatka: 129592 komórek, zmiana Φ przy podwojeniu 0,015 %, bilans 3.5e-13
 
 | | temat | pozycja listy kontrolnej |
 |---|---|---|
 | ✓ OK | izolacja | linia izolacji ciągła („test ołówka” na siatce: brak drogi przez materiały o λ > 0,12) |
 | ✓ OK | paro | szczelność powietrzna ściany SZ2: tynk wewnętrzny ciągły (TYNK_GIPS) — do stropu i posadzki |
 | ✓ OK | hydro | hydroizolacja płyty OK1: MEMB_TPO |
-| ! UWAGA | woda | spadek płyty od budynku: nieokreślony w modelu (wymagany ≥ 1,5–2 %) |
+| ✓ OK | woda | spadek płyty od budynku: 0.02 (wymagany ≥ 1,5–2 %) |
 | ! UWAGA | woda | odprowadzenie wody z krawędzi płyty (rynna / okapnik / rzygacz → rura spustowa) — nieokreślone w modelu; obróbka czoła płyty z okapnikiem ≥ 3 cm |
 | i INFO | hydro | hydroizolacja wywinięta na ścianę ≥ 15 cm ponad nawierzchnię, pod cokolikiem XPS; ciągła nad łącznikiem termoizolacyjnym |
 
@@ -219,14 +218,14 @@ Wykresy szczegółowe: [temperatura](rys/WZ-05_temperatura.png), [strumien](rys/
 
 ### WZ-06
 
-**Krawędź ST3 (PL-3) — łącznik termoizolacyjny przy attyce bryły A** — ocena **DO POPRAWY** (ψ_oi = 0,385 > dobra praktyka 0,20)
+**Krawędź ST3 (PL-3) — łącznik termoizolacyjny przy attyce bryły A** — ocena **DO POPRAWY** (ψ_oi = 0,205 > dobra praktyka 0,20)
 
 ![WZ-06 — karta węzła](WZ-06_karta.png)
 
-* ψ_e = +0,274, ψ_i = +0,387, ψ_oi = +0,385 W/(m·K); L_2D = 0,7150 W/(m·K); odniesienie ψ_oi: domyślna 0,75, dobra praktyka 0,20 (stropodach–ściana zewnętrzna z attyką (izolacja attyki z 3 stron))
-* θ_si,min = 13,36 °C, f_Rsi = 0,825 (≥ 0,72 — brak ryzyka pleśni i kondensacji powierzchniowej)
+* ψ_e = +0,093, ψ_i = +0,206, ψ_oi = +0,205 W/(m·K); L_2D = 0,5342 W/(m·K); odniesienie ψ_oi: domyślna 0,75, dobra praktyka 0,20 (stropodach–ściana zewnętrzna z attyką (izolacja attyki z 3 stron))
+* θ_si,min = 15,79 °C, f_Rsi = 0,889 (≥ 0,72 — brak ryzyka pleśni i kondensacji powierzchniowej)
 * izolacja: ciągła (brak drogi przez materiały o λ > 0,12 W/(m·K) z wnętrza na zewnątrz)
-* siatka: 118140 komórek, zmiana Φ przy podwojeniu 0,039 %, bilans 3.3e-13
+* siatka: 128880 komórek, zmiana Φ przy podwojeniu 0,019 %, bilans 6.4e-13
 
 | | temat | pozycja listy kontrolnej |
 |---|---|---|
@@ -237,24 +236,24 @@ Wykresy szczegółowe: [temperatura](rys/WZ-05_temperatura.png), [strumien](rys/
 | ✓ OK | hydro | wywinięcie hydroizolacji na attykę ≥ 15 cm ponad warstwę wierzchnią (brief 9.4) |
 | ✓ OK | woda | spadek dachu 0.02 (wymagany ≥ 2 %, izolacja spadkowa) |
 | ✓ OK | woda | wpusty dachowe: 2 szt. |
-| ✓ OK | woda | przelewy awaryjne w attyce: 3 szt. |
+| ✓ OK | woda | przelewy awaryjne w attyce: 2 szt. |
 | ✓ OK | rury | rury spustowe: RS1 (wewn_szacht → zbiornik), RS2 (wewn_szacht → zbiornik) |
 | i INFO | woda | obróbka korony attyki ze spadkiem ≥ 5 % do dachu i okapnikami; wpust / przelew przez attykę — mostek punktowy χ (poza modelem 2D; kołnierz izolowany) |
 
-*Na rysunku:* hydroizolacja wywinięta na attykę i koronę — 25 cm ponad pokrycie (≥ 15 cm); membrana okapu wywinięta na izolację attyki ≥ 15 cm; obróbka czoła okapu z okapnikiem; obróbka korony attyki: spadek ≥ 5 % do dachu, okapniki; paroizolacja na płycie wywinięta na attykę ponad izolację dachu (szczelność); spadek dachu ≥ 2 % do wpustów; przelew awaryjny w attyce (χ).
+*Na rysunku:* hydroizolacja wywinięta na attykę i koronę — 35 cm ponad pokrycie (≥ 15 cm); membrana okapu wywinięta na izolację attyki ≥ 15 cm; obróbka czoła okapu z okapnikiem; obróbka korony attyki: spadek ≥ 5 % do dachu, okapniki; paroizolacja na płycie wywinięta na attykę ponad izolację dachu (szczelność); spadek dachu ≥ 2 % do wpustów; przelew awaryjny w attyce (χ).
 
 Wykresy szczegółowe: [temperatura](rys/WZ-06_temperatura.png), [strumien](rys/WZ-06_strumien.png), [powierzchnia](rys/WZ-06_theta_si.png); dane wejściowe, warunki brzegowe, siatka, elementy flankujące — [szczegoly_obliczen.md](szczegoly_obliczen.md)
 
 ### WZ-07a
 
-**Krawędź stropu ST2Z nad powietrzem: ściana SZL na belce B3 + płyta PL-2 (łącznik)** — ocena **DO POPRAWY** (ψ_oi = 0,182 > dobra praktyka 0,15)
+**Krawędź stropu ST2Z nad powietrzem: ściana SZL na belce B3 + płyta PL-2 (łącznik)** — ocena **DO POPRAWY** (ψ_oi = 0,152 > dobra praktyka 0,15)
 
 ![WZ-07a — karta węzła](WZ-07a_karta.png)
 
-* ψ_e = +0,058, ψ_i = +0,182, ψ_oi = +0,182 W/(m·K); L_2D = 0,5616 W/(m·K); odniesienie ψ_oi: domyślna 0,60, dobra praktyka 0,15 (strop nad powietrzem zewnętrznym – ściana (wspornik bryły))
-* θ_si,min = 13,82 °C, f_Rsi = 0,837 (≥ 0,72 — brak ryzyka pleśni i kondensacji powierzchniowej)
+* ψ_e = +0,028, ψ_i = +0,152, ψ_oi = +0,152 W/(m·K); L_2D = 0,5317 W/(m·K); odniesienie ψ_oi: domyślna 0,60, dobra praktyka 0,15 (strop nad powietrzem zewnętrznym – ściana (wspornik bryły))
+* θ_si,min = 14,33 °C, f_Rsi = 0,851 (≥ 0,72 — brak ryzyka pleśni i kondensacji powierzchniowej)
 * izolacja: ciągła (brak drogi przez materiały o λ > 0,12 W/(m·K) z wnętrza na zewnątrz)
-* siatka: 162800 komórek, zmiana Φ przy podwojeniu 0,046 %, bilans 2.7e-13
+* siatka: 163680 komórek, zmiana Φ przy podwojeniu 0,038 %, bilans 6.6e-14
 
 | | temat | pozycja listy kontrolnej |
 |---|---|---|
@@ -302,7 +301,7 @@ Wykresy szczegółowe: [temperatura](rys/WZ-07b_temperatura.png), [strumien](rys
 | ✓ OK | hydro | izolacja przeciwwilgociowa podłogi na gruncie POD-0: MEMB_SBS_POD |
 | ✓ OK | hydro | izolacja pionowa fundamentu i izolacja obwodowa XPS (nienasiąkliwa) — w modelu węzła |
 | ✓ OK | hydro | strefa cokołu ≥ 30 cm nad terenem (uszczelnienie, tynk mozaikowy) |
-| ✓ OK | drenaz | odwodnienie przy budynku (`dzialka.odwodnienia`: opaska żwirowa / drenaż opaskowy / odwodnienie liniowe): liniowe, liniowe, liniowe, liniowe, liniowe, opaska_zwirowa, niecka, niecka, niecka, drenaz_opaskowy |
+| ✓ OK | drenaz | odwodnienie przy budynku (`dzialka.odwodnienia`: opaska żwirowa / drenaż opaskowy / odwodnienie liniowe): liniowe, liniowe, liniowe, liniowe, liniowe, opaska_zwirowa, niecka, niecka, liniowe, liniowe, niecka, drenaz_opaskowy |
 | ✓ OK | woda | spadek terenu ≥ 2 % od budynku na 1,5–2 m: rzędne projektowane w modelu |
 
 *Uwaga:* Ściana liczona od poziomu posadzki (±0,00) we wszystkich systemach wymiarów (ψ_oi = ψ_i); podłoga wg PN-EN ISO 13370 z B' = b [INT]; b = B' = A/(0,5·P) budynku, gdy podane z modelu.
@@ -313,18 +312,18 @@ Wykresy szczegółowe: [temperatura](rys/WZ-08_temperatura.png), [strumien](rys/
 
 ### WZ-09a
 
-**Ściana dom–garaż (SWG) na płycie fundamentowej (POD-0 / POD-G)** — ocena **ZŁY** (izolacja przerwana: TYNK_GIPS → SIL18 → ZB_C25 → TYNK_CW; ψ_oi = 0,616 > domyślna 0,20)
+**Ściana dom–garaż (SWG) na płycie fundamentowej (POD-0 / POD-G)** — ocena **ZŁY** (izolacja przerwana: TYNK_GIPS → BET_KOM_600 → ZB_C25 → TYNK_CW; ψ_oi = 0,301 > domyślna 0,20)
 
 ![WZ-09a — karta węzła](WZ-09a_karta.png)
 
-* ψ_e = +0,616, ψ_i = +0,616, ψ_oi = +0,616 W/(m·K); L_2D = 0,8695 W/(m·K); odniesienie ψ_oi: domyślna 0,20, dobra praktyka 0,10 (połączenie przegród dom–garaż nieogrzewany (ściana/strop))
-* θ_si,min = 12,70 °C, f_Rsi = 0,760 (≥ 0,72 — brak ryzyka pleśni i kondensacji powierzchniowej)
-* izolacja: PRZERWANA — droga mostka: TYNK_GIPS → SIL18 → ZB_C25 → TYNK_CW
-* siatka: 123872 komórek, zmiana Φ przy podwojeniu 0,070 %, bilans 1.2e-12
+* ψ_e = +0,301, ψ_i = +0,301, ψ_oi = +0,301 W/(m·K); L_2D = 0,5545 W/(m·K); odniesienie ψ_oi: domyślna 0,20, dobra praktyka 0,10 (połączenie przegród dom–garaż nieogrzewany (ściana/strop))
+* θ_si,min = 17,05 °C, f_Rsi = 0,903 (≥ 0,72 — brak ryzyka pleśni i kondensacji powierzchniowej)
+* izolacja: PRZERWANA — droga mostka: TYNK_GIPS → BET_KOM_600 → ZB_C25 → TYNK_CW
+* siatka: 152312 komórek, zmiana Φ przy podwojeniu 0,025 %, bilans 9.3e-12
 
 | | temat | pozycja listy kontrolnej |
 |---|---|---|
-| ✗ BRAK | izolacja | linia izolacji PRZERWANA: TYNK_GIPS → SIL18 → ZB_C25 → TYNK_CW |
+| ✗ BRAK | izolacja | linia izolacji PRZERWANA: TYNK_GIPS → BET_KOM_600 → ZB_C25 → TYNK_CW |
 | ✓ OK | paro | szczelność powietrzna ściany SZ1: tynk wewnętrzny ciągły (TYNK_GIPS) — do stropu i posadzki |
 | i INFO | paro | ściana dom–garaż: szczelność na spaliny (WT § 106 ust. 1) — tynk ciągły, uszczelnione przejścia instalacji, drzwi z samozamykaczem i uszczelką |
 
@@ -485,7 +484,7 @@ Wykresy szczegółowe: [temperatura](rys/WZ-11P_temperatura.png), [strumien](rys
 | ✓ OK | hydro | izolacja przeciwwilgociowa podłogi na gruncie POD-0: MEMB_SBS_POD |
 | ✓ OK | hydro | izolacja pionowa fundamentu i izolacja obwodowa XPS (nienasiąkliwa) — w modelu węzła |
 | ✓ OK | hydro | strefa cokołu ≥ 30 cm nad terenem (uszczelnienie, tynk mozaikowy) |
-| ✓ OK | drenaz | odwodnienie przy budynku (`dzialka.odwodnienia`: opaska żwirowa / drenaż opaskowy / odwodnienie liniowe): liniowe, liniowe, liniowe, liniowe, liniowe, opaska_zwirowa, niecka, niecka, niecka, drenaz_opaskowy |
+| ✓ OK | drenaz | odwodnienie przy budynku (`dzialka.odwodnienia`: opaska żwirowa / drenaż opaskowy / odwodnienie liniowe): liniowe, liniowe, liniowe, liniowe, liniowe, opaska_zwirowa, niecka, niecka, liniowe, liniowe, niecka, drenaz_opaskowy |
 | ✓ OK | woda | spadek terenu ≥ 2 % od budynku na 1,5–2 m: rzędne projektowane w modelu |
 | i INFO | woda | próg bezbarierowy: odwodnienie liniowe przed drzwiami, hydroizolacja pod próg |
 
@@ -517,14 +516,14 @@ Wykresy szczegółowe: [temperatura](rys/WZ-12_temperatura.png), [strumien](rys/
 
 ### WZ-16a
 
-**Krawędź stropu ST2Z nad powietrzem: ściana SZ2 na belce B4 + płyta PL-2 (łącznik)** — ocena **DO POPRAWY** (ψ_oi = 0,236 > dobra praktyka 0,15)
+**Krawędź stropu ST2Z nad powietrzem: ściana SZ2 na belce B4 + płyta PL-2 (łącznik)** — ocena **DO POPRAWY** (ψ_oi = 0,194 > dobra praktyka 0,15)
 
 ![WZ-16a — karta węzła](WZ-16a_karta.png)
 
-* ψ_e = +0,057, ψ_i = +0,236, ψ_oi = +0,236 W/(m·K); L_2D = 0,6687 W/(m·K); odniesienie ψ_oi: domyślna 0,60, dobra praktyka 0,15 (strop nad powietrzem zewnętrznym – ściana (wspornik bryły))
-* θ_si,min = 13,92 °C, f_Rsi = 0,840 (≥ 0,72 — brak ryzyka pleśni i kondensacji powierzchniowej)
+* ψ_e = +0,014, ψ_i = +0,194, ψ_oi = +0,194 W/(m·K); L_2D = 0,6258 W/(m·K); odniesienie ψ_oi: domyślna 0,60, dobra praktyka 0,15 (strop nad powietrzem zewnętrznym – ściana (wspornik bryły))
+* θ_si,min = 14,46 °C, f_Rsi = 0,854 (≥ 0,72 — brak ryzyka pleśni i kondensacji powierzchniowej)
 * izolacja: ciągła (brak drogi przez materiały o λ > 0,12 W/(m·K) z wnętrza na zewnątrz)
-* siatka: 167040 komórek, zmiana Φ przy podwojeniu 0,029 %, bilans 7.6e-13
+* siatka: 167040 komórek, zmiana Φ przy podwojeniu 0,022 %, bilans 7.8e-13
 
 | | temat | pozycja listy kontrolnej |
 |---|---|---|
@@ -575,7 +574,7 @@ Wykresy szczegółowe: [temperatura](rys/WZ-16b_temperatura.png), [strumien](rys
 | ✓ OK | hydro | wywinięcie hydroizolacji na attykę ≥ 15 cm ponad warstwę wierzchnią (brief 9.4) |
 | ✓ OK | woda | spadek dachu 0.02 (wymagany ≥ 2 %, izolacja spadkowa) |
 | ✓ OK | woda | wpusty dachowe: 2 szt. |
-| ✓ OK | woda | przelewy awaryjne w attyce: 3 szt. |
+| ✓ OK | woda | przelewy awaryjne w attyce: 2 szt. |
 | ✓ OK | rury | rury spustowe: RS1 (wewn_szacht → zbiornik), RS2 (wewn_szacht → zbiornik) |
 | i INFO | woda | obróbka korony attyki ze spadkiem ≥ 5 % do dachu i okapnikami; wpust / przelew przez attykę — mostek punktowy χ (poza modelem 2D; kołnierz izolowany) |
 
@@ -604,7 +603,7 @@ Wykresy szczegółowe: [temperatura](rys/WZ-X1_temperatura.png), [strumien](rys/
 | ✓ OK | hydro | wywinięcie hydroizolacji na attykę ≥ 15 cm ponad warstwę wierzchnią (brief 9.4) |
 | ✓ OK | woda | spadek dachu 0.02 (wymagany ≥ 2 %, izolacja spadkowa) |
 | ✓ OK | woda | wpusty dachowe: 2 szt. |
-| ✓ OK | woda | przelewy awaryjne w attyce: 3 szt. |
+| ✓ OK | woda | przelewy awaryjne w attyce: 2 szt. |
 | ✓ OK | rury | rury spustowe: RS1 (wewn_szacht → zbiornik), RS2 (wewn_szacht → zbiornik) |
 | i INFO | woda | obróbka korony attyki ze spadkiem ≥ 5 % do dachu i okapnikami; wpust / przelew przez attykę — mostek punktowy χ (poza modelem 2D; kołnierz izolowany) |
 

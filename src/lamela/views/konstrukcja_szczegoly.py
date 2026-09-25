@@ -208,7 +208,8 @@ def szczegol_fundamentu(ctx, spec, vp, res, placer):
     if obw and F.poly.buffer(-0.01).contains(Point(*(Q + n * 0.8))):
         n = -n
     R = Rama(Q, n)
-    top, sp_p = F.spod + F.h, F.spod
+    h_p, sp_p = F.czesc(Q - n * 0.6 if obw else Q) if hasattr(F, "czesc") else (F.h, F.spod)  # płyta składowa (wnętrze)
+    top = sp_p + h_p
     x_edge = _promien(F.poly, Q, n) if obw else 1.4
     x_in = -1.3 if not stopa else -(B / 2 + 0.7)
     x_out = x_edge if obw else (-x_in)

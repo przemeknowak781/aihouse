@@ -6,26 +6,26 @@
     "system_wymiarow": "oi — wewnętrzne całkowite",
     "zrodlo": "symulacja PN-EN ISO 10211 (mostki2d)",
     "zbieznosc_ok": true,
-    "psi_oi": 0.17422,
-    "psi_e": 0.0627,
-    "psi_i": 0.17584,
-    "L2D": 0.50378,
-    "f_rsi": 0.8987,
-    "theta_si_min": 16.152,
-    "dlugosc": 45.9,
-    "dlugosc_oi": 45.9,
+    "psi_oi": 0.08631,
+    "psi_e": -0.02522,
+    "psi_i": 0.08792,
+    "L2D": 0.41586,
+    "f_rsi": 0.932,
+    "theta_si_min": 17.416,
+    "dlugosc": 19.94,
+    "dlugosc_oi": 19.94,
     "psi_pary": {
       "i-e": {
-        "psi_oi": 0.17422,
-        "psi_e": 0.0627,
-        "L2D": 0.50378
+        "psi_oi": 0.08631,
+        "psi_e": -0.02522,
+        "L2D": 0.41586
       }
     },
     "theta_grup": {
       "i": 20.0,
       "e": -18.0
     },
-    "ocena": "DOBRY",
+    "ocena": "BEZMOSTKOWY",
     "izolacja_ciagla": true,
     "droga_mostka": null,
     "woda_braki": [],
@@ -44,8 +44,8 @@
     "L2D": 0.50442,
     "f_rsi": 0.9001,
     "theta_si_min": 16.204,
-    "dlugosc": 14.62,
-    "dlugosc_oi": 14.62,
+    "dlugosc": 13.41,
+    "dlugosc_oi": 13.41,
     "psi_pary": {
       "i-e": {
         "psi_oi": 0.17142,
@@ -76,8 +76,8 @@
     "L2D": 0.56113,
     "f_rsi": 0.8897,
     "theta_si_min": 15.808,
-    "dlugosc": 9.55,
-    "dlugosc_oi": 9.55,
+    "dlugosc": 7.17,
+    "dlugosc_oi": 7.17,
     "psi_pary": {
       "i-e": {
         "psi_oi": 0.19526,
@@ -102,31 +102,30 @@
     "system_wymiarow": "oi — wewnętrzne całkowite",
     "zrodlo": "symulacja PN-EN ISO 10211 (mostki2d)",
     "zbieznosc_ok": true,
-    "psi_oi": 0.22043,
-    "psi_e": 0.22043,
-    "psi_i": 0.3092,
-    "L2D": 0.60608,
-    "f_rsi": 0.9033,
-    "theta_si_min": 16.325,
-    "dlugosc": 21.82,
-    "dlugosc_oi": 21.82,
+    "psi_oi": 0.12815,
+    "psi_e": 0.12815,
+    "psi_i": 0.21692,
+    "L2D": 0.51379,
+    "f_rsi": 0.9287,
+    "theta_si_min": 17.29,
+    "dlugosc": 22.47,
+    "dlugosc_oi": 22.47,
     "psi_pary": {
       "i-e": {
-        "psi_oi": 0.22043,
-        "psi_e": 0.22043,
-        "L2D": 0.60608
+        "psi_oi": 0.12815,
+        "psi_e": 0.12815,
+        "L2D": 0.51379
       }
     },
     "theta_grup": {
       "i": 20.0,
       "e": -18.0
     },
-    "ocena": "DO POPRAWY",
+    "ocena": "DOBRY",
     "izolacja_ciagla": true,
     "droga_mostka": null,
     "woda_braki": [],
     "woda_uwagi": [
-      "spadek płyty od budynku: nieokreślony w modelu (wymagany ≥ 1,5–2 %)",
       "odprowadzenie wody z krawędzi płyty (rynna / okapnik / rzygacz → rura spustowa) — nieokreślone w modelu; obróbka czoła płyty z okapnikiem ≥ 3 cm"
     ]
   },
@@ -137,31 +136,30 @@
     "system_wymiarow": "oi — wewnętrzne całkowite",
     "zrodlo": "symulacja PN-EN ISO 10211 (mostki2d)",
     "zbieznosc_ok": true,
-    "psi_oi": 0.22621,
-    "psi_e": 0.21824,
-    "psi_i": 0.31498,
-    "L2D": 0.62544,
-    "f_rsi": 0.9021,
-    "theta_si_min": 16.278,
-    "dlugosc": 19.32,
-    "dlugosc_oi": 19.32,
+    "psi_oi": 0.13411,
+    "psi_e": 0.12613,
+    "psi_i": 0.22288,
+    "L2D": 0.53334,
+    "f_rsi": 0.9274,
+    "theta_si_min": 17.241,
+    "dlugosc": 18.71,
+    "dlugosc_oi": 18.71,
     "psi_pary": {
       "i-e": {
-        "psi_oi": 0.22621,
-        "psi_e": 0.21824,
-        "L2D": 0.62544
+        "psi_oi": 0.13411,
+        "psi_e": 0.12613,
+        "L2D": 0.53334
       }
     },
     "theta_grup": {
       "i": 20.0,
       "e": -18.0
     },
-    "ocena": "DO POPRAWY",
+    "ocena": "DOBRY",
     "izolacja_ciagla": true,
     "droga_mostka": null,
     "woda_braki": [],
     "woda_uwagi": [
-      "spadek płyty od budynku: nieokreślony w modelu (wymagany ≥ 1,5–2 %)",
       "odprowadzenie wody z krawędzi płyty (rynna / okapnik / rzygacz → rura spustowa) — nieokreślone w modelu; obróbka czoła płyty z okapnikiem ≥ 3 cm"
     ]
   },
@@ -172,19 +170,19 @@
     "system_wymiarow": "oi — wewnętrzne całkowite",
     "zrodlo": "symulacja PN-EN ISO 10211 (mostki2d)",
     "zbieznosc_ok": true,
-    "psi_oi": 0.38548,
-    "psi_e": 0.27396,
-    "psi_i": 0.3871,
-    "L2D": 0.71504,
-    "f_rsi": 0.8252,
-    "theta_si_min": 13.359,
-    "dlugosc": 25.05,
-    "dlugosc_oi": 25.05,
+    "psi_oi": 0.20463,
+    "psi_e": 0.0931,
+    "psi_i": 0.20625,
+    "L2D": 0.53418,
+    "f_rsi": 0.8893,
+    "theta_si_min": 15.792,
+    "dlugosc": 24.3,
+    "dlugosc_oi": 24.3,
     "psi_pary": {
       "i-e": {
-        "psi_oi": 0.38548,
-        "psi_e": 0.27396,
-        "L2D": 0.71504
+        "psi_oi": 0.20463,
+        "psi_e": 0.0931,
+        "L2D": 0.53418
       }
     },
     "theta_grup": {
@@ -204,19 +202,19 @@
     "system_wymiarow": "oi — wewnętrzne całkowite",
     "zrodlo": "symulacja PN-EN ISO 10211 (mostki2d)",
     "zbieznosc_ok": true,
-    "psi_oi": 0.18214,
-    "psi_e": 0.05763,
-    "psi_i": 0.18214,
-    "L2D": 0.56157,
-    "f_rsi": 0.8373,
-    "theta_si_min": 13.817,
-    "dlugosc": 6.725,
-    "dlugosc_oi": 6.725,
+    "psi_oi": 0.15223,
+    "psi_e": 0.02771,
+    "psi_i": 0.15223,
+    "L2D": 0.53165,
+    "f_rsi": 0.8507,
+    "theta_si_min": 14.328,
+    "dlugosc": 5.72,
+    "dlugosc_oi": 5.72,
     "psi_pary": {
       "i-e": {
-        "psi_oi": 0.18214,
-        "psi_e": 0.05763,
-        "L2D": 0.56157
+        "psi_oi": 0.15223,
+        "psi_e": 0.02771,
+        "L2D": 0.53165
       }
     },
     "theta_grup": {
@@ -242,8 +240,8 @@
     "L2D": 0.50063,
     "f_rsi": 0.9518,
     "theta_si_min": 18.169,
-    "dlugosc": 6.725,
-    "dlugosc_oi": 6.725,
+    "dlugosc": 5.72,
+    "dlugosc_oi": 5.72,
     "psi_pary": {
       "i-e": {
         "psi_oi": -0.06066,
@@ -274,8 +272,8 @@
     "L2D": 0.56544,
     "f_rsi": 0.9032,
     "theta_si_min": 16.32,
-    "dlugosc": 43.4,
-    "dlugosc_oi": 43.4,
+    "dlugosc": 27.77,
+    "dlugosc_oi": 27.77,
     "psi_pary": {
       "i-e": {
         "psi_oi": 0.10023,
@@ -300,19 +298,19 @@
     "system_wymiarow": "oi — wewnętrzne całkowite",
     "zrodlo": "symulacja PN-EN ISO 10211 (mostki2d)",
     "zbieznosc_ok": true,
-    "psi_oi": 0.61558,
-    "psi_e": 0.61558,
-    "psi_i": 0.61558,
-    "L2D": 0.8695,
-    "f_rsi": 0.7598,
-    "theta_si_min": 12.699,
-    "dlugosc": 12.25,
-    "dlugosc_oi": 12.25,
+    "psi_oi": 0.30059,
+    "psi_e": 0.30059,
+    "psi_i": 0.30059,
+    "L2D": 0.55451,
+    "f_rsi": 0.903,
+    "theta_si_min": 17.05,
+    "dlugosc": 12.255,
+    "dlugosc_oi": 12.255,
     "psi_pary": {
       "i-u": {
-        "psi_oi": 0.61558,
-        "psi_e": 0.61558,
-        "L2D": 0.8695
+        "psi_oi": 0.30059,
+        "psi_e": 0.30059,
+        "L2D": 0.55451
       }
     },
     "theta_grup": {
@@ -323,12 +321,12 @@
     "izolacja_ciagla": false,
     "droga_mostka": [
       "TYNK_GIPS",
-      "SIL18",
+      "BET_KOM_600",
       "ZB_C25",
       "TYNK_CW"
     ],
     "woda_braki": [
-      "linia izolacji PRZERWANA: TYNK_GIPS → SIL18 → ZB_C25 → TYNK_CW"
+      "linia izolacji PRZERWANA: TYNK_GIPS → BET_KOM_600 → ZB_C25 → TYNK_CW"
     ],
     "woda_uwagi": []
   },
@@ -345,8 +343,8 @@
     "L2D": 0.29823,
     "f_rsi": 0.836,
     "theta_si_min": 13.769,
-    "dlugosc": 6.375,
-    "dlugosc_oi": 6.375,
+    "dlugosc": 6.378,
+    "dlugosc_oi": 6.378,
     "psi_pary": {
       "i-u": {
         "psi_oi": 0.31694,
@@ -394,8 +392,8 @@
     "L2D": 0.25813,
     "f_rsi": 0.8853,
     "theta_si_min": 15.64,
-    "dlugosc": 5.875,
-    "dlugosc_oi": 5.875,
+    "dlugosc": 5.877,
+    "dlugosc_oi": 5.877,
     "psi_pary": {
       "i-u": {
         "psi_oi": 0.17777,
@@ -443,8 +441,8 @@
     "L2D": 0.38563,
     "f_rsi": 0.9632,
     "theta_si_min": 18.603,
-    "dlugosc": 55.12,
-    "dlugosc_oi": 55.12,
+    "dlugosc": 18.2,
+    "dlugosc_oi": 18.2,
     "psi_pary": {
       "i-e": {
         "psi_oi": -1e-05,
@@ -571,8 +569,8 @@
     "L2D": 0.72855,
     "f_rsi": 0.8447,
     "theta_si_min": 14.097,
-    "dlugosc": 15.61,
-    "dlugosc_oi": 15.61,
+    "dlugosc": 15.67,
+    "dlugosc_oi": 15.67,
     "psi_pary": {
       "i-e": {
         "psi_oi": 0.11846,
@@ -603,8 +601,8 @@
     "L2D": 0.53704,
     "f_rsi": 0.9256,
     "theta_si_min": 17.173,
-    "dlugosc": 49.5,
-    "dlugosc_oi": 49.5,
+    "dlugosc": 40.05,
+    "dlugosc_oi": 40.05,
     "psi_pary": {
       "i-e": {
         "psi_oi": 0.06553,
@@ -629,19 +627,19 @@
     "system_wymiarow": "oi — wewnętrzne całkowite",
     "zrodlo": "symulacja PN-EN ISO 10211 (mostki2d)",
     "zbieznosc_ok": true,
-    "psi_oi": 0.23646,
-    "psi_e": 0.05678,
-    "psi_i": 0.23646,
-    "L2D": 0.66872,
-    "f_rsi": 0.8399,
-    "theta_si_min": 13.916,
-    "dlugosc": 1.0,
-    "dlugosc_oi": 1.0,
+    "psi_oi": 0.19356,
+    "psi_e": 0.01388,
+    "psi_i": 0.19356,
+    "L2D": 0.62582,
+    "f_rsi": 0.8541,
+    "theta_si_min": 14.458,
+    "dlugosc": 1.01,
+    "dlugosc_oi": 1.01,
     "psi_pary": {
       "i-e": {
-        "psi_oi": 0.23646,
-        "psi_e": 0.05678,
-        "L2D": 0.66872
+        "psi_oi": 0.19356,
+        "psi_e": 0.01388,
+        "L2D": 0.62582
       }
     },
     "theta_grup": {
@@ -667,8 +665,8 @@
     "L2D": 0.54153,
     "f_rsi": 0.8804,
     "theta_si_min": 15.456,
-    "dlugosc": 1.0,
-    "dlugosc_oi": 1.0,
+    "dlugosc": 1.01,
+    "dlugosc_oi": 1.01,
     "psi_pary": {
       "i-e": {
         "psi_oi": 0.12286,

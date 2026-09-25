@@ -39,7 +39,7 @@ class DaneZag:
         self.m = load_model(self.p_bud, self.p_dz, strict=False)
         self.ir = build_ir(self.m, otoczenie=True, auta=False)
         self.W = WS.wskazniki(self.m, ir=self.ir)
-        self.G = self.W["_geom"]
+        self.G = WS.geometria(self.m)          # geometrie w układzie działki (plot, footprint, p0, utw., zieleń…)
         self.dz = self.m.raw_dz or {}
         self.bud = self.m.raw or {}
         self.WYM = yaml.safe_load(open(repo / "docs/10_podstawy_prawne/wymagania.yaml", encoding="utf-8"))

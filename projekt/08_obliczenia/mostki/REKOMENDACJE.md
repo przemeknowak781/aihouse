@@ -2,7 +2,7 @@
 
 Rekomendacje zmian projektu wynikające z katalogu mostków (symulacja 2D PN-EN ISO 10211) i kontroli detali. **Modelu nie zmieniano** — zmiany do wprowadzenia w parametrach `tools/buduj_model.py` przez zespół modelu. Warianty policzono tym samym solverem (`tools/mostki_budynku.py`, funkcja `warianty`).
 
-**f_Rsi:** wszystkie węzły spełniają f_Rsi ≥ 0,72 (WT zał. 2 pkt 2.2.1 / PN-EN ISO 13788) — minimum 0,760 w węźle WZ-09a.
+**f_Rsi:** wszystkie węzły spełniają f_Rsi ≥ 0,72 (WT zał. 2 pkt 2.2.1 / PN-EN ISO 13788) — minimum 0,836 w węźle WZ-09b.
 
 ## A. Węzły z ψ wyraźnie gorszym od wytycznych albo z przerwaną linią izolacji
 
@@ -10,21 +10,14 @@ Kryterium: ψ_oi > dobra praktyka + 0,03 W/(m·K) [ZAŁ] albo ocena „ZŁY” (
 
 | węzeł | ψ_oi | dobra pr. | ocena | wariant policzony | ψ_oi wariantu | f_Rsi wariantu |
 |---|---|---|---|---|---|---|
-| WZ-04 | +0,220 | 0,15 | DO POPRAWY | łącznik 120 mm, λ_eq 0,08 (zamiast 80 mm / 0,09) | +0,128 | 0,929 |
-| WZ-05 | +0,226 | 0,15 | DO POPRAWY | łącznik 120 mm, λ_eq 0,08 (zamiast 80 mm / 0,09) | +0,134 | 0,927 |
-| WZ-06 | +0,385 | 0,20 | DO POPRAWY | łącznik 120 mm, λ_eq 0,08 (zamiast 80 mm / 0,09) | +0,305 | 0,853 |
-|  |  |  |  | łącznik 120 mm + blok termoizolacyjny nośny 15 cm u podstawy attyki | +0,203 | 0,890 |
-| WZ-07a | +0,182 | 0,15 | DO POPRAWY | łącznik 120 mm, λ_eq 0,08 (zamiast 80 mm / 0,09) | +0,152 | 0,851 |
-| WZ-09a | +0,616 | 0,10 | ZŁY | XPS 10 cm na płycie pod posadzką garażu | +0,344 | 0,852 |
-|  |  |  |  | XPS 10 cm pod posadzką garażu + blok z betonu komórkowego 400 (24 cm) u podstawy ściany | +0,299 | 0,911 |
+| WZ-09a | +0,301 | 0,10 | ZŁY | XPS 10 cm na płycie pod posadzką garażu | +0,240 | 0,887 |
+|  |  |  |  | XPS 10 cm pod posadzką garażu + blok z betonu komórkowego 400 (24 cm) u podstawy ściany | +0,216 | 0,931 |
 | WZ-09b | +0,071 | 0,10 | ZŁY | — (patrz opis) | — | — |
 | WZ-09c | +0,081 | 0,10 | ZŁY | — (patrz opis) | — | — |
-| WZ-16a | +0,236 | 0,15 | DO POPRAWY | łącznik 120 mm, λ_eq 0,08 (zamiast 80 mm / 0,09) | +0,194 | 0,854 |
+| WZ-16a | +0,194 | 0,15 | DO POPRAWY | łącznik 120 mm, λ_eq 0,08 (zamiast 80 mm / 0,09) | +0,194 | 0,854 |
 
-* **WZ-04, WZ-05** — Płyta wspornikowa: łącznik termoizolacyjny z modułem izolacyjnym **120 mm** (w warstwie ocieplenia 20 cm) i λ_eq ≤ 0,08 W/(m·K) wg ETA (zamiast przykładowego 80 mm / 0,09) — ψ spada do poziomu dobrej praktyki; łącznik w strefie izolacji, płyta stropu do lica konstrukcji (audyt A2 K-1).
-* **WZ-06** — Attyka z okapem PL-3: łącznik 120 mm **oraz** nośny blok termoizolacyjny u podstawy attyki (element attykowy z ETA / szkło piankowe klasy nośności wg PT-K, h ≈ 15 cm) — ψ ≈ dobra praktyka (wariant policzony); alternatywa: attyka lekka (rama drewniana/stalowa z przekładką) na płycie ocieplonej z góry.
-* **WZ-07a, WZ-16a** — Krawędź stropu nad powietrzem z płytą PL-2: jak wyżej — łącznik 120 mm; belki odwrócone B3/B4/B5 w linii ściany obłożyć ociepleniem ściany na całą wysokość (wełna elewacji A ciągła do podsufitki); podsufitka jedna płaszczyzna pod wspornikiem A i pasem zach. PL-2 (audyt A2 I-5) — ψ < dobra praktyka możliwe dopiero przy łączniku 120 mm.
 * **WZ-09a, WZ-09b, WZ-09c** — Połączenie z garażem na ciągłej płycie: płyta fundamentowa jest ciągła pod ścianą SWG (XPS tylko pod płytą) — ciepło z domu przepływa płytą do posadzki garażu (ψ_iu duże). Zalecane: **XPS ≥ 10 cm na płycie pod posadzką garażu** (cała posadzka albo pas ≥ 1,5–2,0 m przy SWG; jastrych garażu zbrojony, z dylatacją obwodową) + blok termoizolacyjny w 1. warstwie muru SWG (nośność — PT-K). Pod stropem (WZ-09b/c) pas docieplenia SUF-G 1,0 m ogranicza mostek (f_Rsi spełnione); ocena „ZŁY” wynika z testu ołówka (płyta ŻB dochodzi do przestrzeni nieogrzewanej) — akceptowalne przy ψ_ie ≤ 0,10; alternatywa: docieplenie całego spodu stropu garażu przy ścianach E i 2 pasem 1,5 m.
+* **WZ-16a** — Krawędź stropu nad powietrzem z płytą PL-2: jak wyżej — łącznik 120 mm; belki odwrócone B3/B4/B5 w linii ściany obłożyć ociepleniem ściany na całą wysokość (wełna elewacji A ciągła do podsufitki); podsufitka jedna płaszczyzna pod wspornikiem A i pasem zach. PL-2 (audyt A2 I-5) — ψ < dobra praktyka możliwe dopiero przy łączniku 120 mm.
 
 ## B. Woda, hydroizolacja, detale (weryfikacja koncepcji / audyt A2 — uwzględnione w detalach PT-AR-D)
 
@@ -47,13 +40,12 @@ Kryteria: dno przelewu ≥ pokrycie przy wpuście + 0,03 m (W-142; J2 poprawka 5
 
 | dach | przelew | dno model | pokrycie przy wpuście | pokrycie w miejscu przelewu | zakres dna | ocena | zalecane dno |
 |---|---|---|---|---|---|---|---|
-| D1 | przelew PA1 — attyka pn. nadbudowy (na d | 9,480 | 9,426 | 9,441 | 9,456…9,476 | ✗ | **9,476** |
-| D1 | przelew PA2 — na dach D2 (pole zach., z  | 9,520 | 9,426 | 9,498 | 9,498…9,498 | ✗ | **9,498** |
-| D1 | przelew PA3 — na dach D3 (pole wsch., z  | 9,520 | 9,426 | 9,527 | 9,527…9,527 | ✗ | **9,527** |
-| D2 | przelew PA4 — attyka zach. | 6,460 | 6,296 | 6,325 | 6,326…6,346 | ✗ | **6,346** |
-| D3 | przelew PA5 — attyka wsch. (awaryjnie na | 6,460 | 6,296 | 6,360 | 6,360…6,360 | ✗ | **6,360** |
-| D4 | przelew PA6 — attyka wsch. (garaż) | 3,360 | 3,134 | 3,185 | 3,185…3,185 | ✗ | **3,185** |
-| D4 | przelew PA7 — attyka wsch. (pas gosp.; > | 3,360 | 3,134 | 3,176 | 3,176…3,183 | ✗ | **3,183** |
+| D1 | przelew PA1 — attyka pn. nadbudowy (na t | 9,460 | 9,426 | 9,441 | 9,456…9,476 | ✓ | **9,460** |
+| D1 | przelew PA2 — attyka zach. nadbudowy (na | 9,470 | 9,426 | 9,462 | 9,462…9,476 | ✓ | **9,470** |
+| D2 | przelew PA4 — attyka zach., 0,60 m od WP | 6,330 | 6,296 | 6,308 | 6,326…6,346 | ✓ | **6,330** |
+| D3 | przelew PA5 — attyka pn., 0,35 m od WP4; | 6,330 | 6,296 | 6,303 | 6,326…6,346 | ✓ | **6,330** |
+| D4 | przelew PA6 — attyka wsch. (garaż), 0,57 | 3,170 | 3,134 | 3,146 | 3,163…3,183 | ✓ | **3,170** |
+| D4 | przelew PA7 — attyka wsch. (pas gosp.),  | 3,170 | 3,134 | 3,149 | 3,163…3,183 | ✓ | **3,170** |
 
 Wniosek: rzędne przelewów w modelu odnoszą się do pokrycia **średniego** (grubość średnia izolacji spadkowej), a nie do pokrycia przy wpuście — przy izolacji spadkowej przelewy D2/D3/D4 leżą 0,13–0,23 m nad pokryciem przy wpuście (spiętrzenie wody ponad dopuszczalne), a przy odniesieniu do pokrycia średniego — D1 poniżej pokrycia (uwaga weryfikacji A3). Zalecenie: w modelu podać rzędne pokrycia przy wpustach (pole `rzedna_pokrycia`), dno przelewu = pokrycie przy wpuście + 0,03…0,05 m; przelewy, dla których pokrycie lokalne jest wyższe niż ten zakres (PA2, PA3, PA5, PA6), przenieść na odcinki attyki bliżej wpustów (najniższa strefa pola) albo wykonać w attyce kosz/obniżenie izolacji spadkowej do rzędnej dna.
 
@@ -61,7 +53,7 @@ Wniosek: rzędne przelewów w modelu odnoszą się do pokrycia **średniego** (g
 
 | dach | korona attyki | max wierzch warstw dachu przy attyce | wywinięcie min. | ocena |
 |---|---|---|---|---|
-| D1 | 9,776 | 9,599 | 0,18 m | ✓ |
+| D1 | 9,876 | 9,599 | 0,28 m | ✓ |
 | D2 | 6,660 | 6,439 | 0,22 m | ✓ |
 | D3 | 6,660 | 6,435 | 0,22 m | ✓ |
 | D4 | 3,850 | 3,365 | 0,49 m | ✓ |
@@ -70,7 +62,7 @@ Wniosek: rzędne przelewów w modelu odnoszą się do pokrycia **średniego** (g
 
 ### R-W4. Cokół przy drzwiach DZ2 garażu
 
-Weryfikacja koncepcji (§6 A5): cokół 0,14 m przy DZ2 (strona wsch., teren wyższy) < 0,30 m, brak odwodnienia liniowego. Bieżący model: posadzka garażu −0,10, teren projektowany przed DZ2 (TIN) −0,177 → cokół 0,08 m — poniżej 0,15 m. Zalecenie (detal PT-AR-D-14): odwodnienie liniowe przed progiem DZ2 na całą szerokość drzwi + 0,15 m z każdej strony, podłączone do KD-E; nawierzchnia ze spadkiem 2 % od drzwi; uszczelnienie progu taśmą EPDM / masą KMB wywiniętą ≥ 15 cm na ościeża poza strefę rozbryzgu i połączoną z izolacją przeciwwilgociową płyty; lokalne obniżenie terenu przy DZ2 (niecka NT-E) tak, by cokół poza drzwiami ≥ 0,30 m (DIN 18533-1: uszczelnienie cokołu ok. 30 cm, min. 15 cm nad terenem w stanie końcowym).
+Weryfikacja koncepcji (§6 A5): cokół 0,14 m przy DZ2 (strona wsch., teren wyższy) < 0,30 m, brak odwodnienia liniowego. Bieżący model: posadzka garażu −0,10, teren projektowany przed DZ2 (TIN) −0,134 → cokół 0,03 m — poniżej 0,15 m. Zalecenie (detal PT-AR-D-14): odwodnienie liniowe przed progiem DZ2 na całą szerokość drzwi + 0,15 m z każdej strony, podłączone do KD-E; nawierzchnia ze spadkiem 2 % od drzwi; uszczelnienie progu taśmą EPDM / masą KMB wywiniętą ≥ 15 cm na ościeża poza strefę rozbryzgu i połączoną z izolacją przeciwwilgociową płyty; lokalne obniżenie terenu przy DZ2 (niecka NT-E) tak, by cokół poza drzwiami ≥ 0,30 m (DIN 18533-1: uszczelnienie cokołu ok. 30 cm, min. 15 cm nad terenem w stanie końcowym).
 
 ### R-W5. Podsufitka i czoło wspornika bryły A
 
