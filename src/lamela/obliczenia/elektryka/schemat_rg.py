@@ -57,7 +57,12 @@ def _spd(ax, x, y, label):
     ax.text(x + 2.2, y - 5.5, label, fontsize=5.5, va="center")
 
 
-def rysuj_schemat_rg(wynik, plik, tytul: str | None = None, dpi: int = 200) -> str:
+LEGENDA_RG = ["× na zestyku — wyłącznik nadprądowy (B/C I_n)", "owal na torze — człon różnicowoprądowy 30 mA (typ A/F/B)",
+              "kreska na zestyku — rozłącznik izolacyjny", "kreski na torze — liczba faz (1f / 3f)",
+              "prostokąt ze skosem — SPD (warystor)"]
+
+
+def rysuj_schemat_rg(wynik, plik, tytul: str | None = None, dpi: int = 200, legenda: bool = True) -> str:
     """Rysuje schemat jednokreskowy RG do pliku PNG; zwraca ścieżkę."""
     obw = wynik.obwody
     n = len(obw) + 2                      # + rezerwa
@@ -144,12 +149,11 @@ def rysuj_schemat_rg(wynik, plik, tytul: str | None = None, dpi: int = 200) -> s
         if len(ls) > 2:
             ls = [ls[0], " ".join(ls[1:])]
         ax.text(x, yb - 69, "\n".join(ls), fontsize=4.6, rotation=90, ha="center", va="top", linespacing=1.05)
-    lx, ly = W - 74, 178
-    ax.text(lx, ly, "Legenda (PN-EN 60617, uproszczone):", fontsize=5.5, weight="bold")
-    items = ["× na zestyku — wyłącznik nadprądowy (B/C I_n)", "owal na torze — człon różnicowoprądowy 30 mA (typ A/F/B)",
-             "kreska na zestyku — rozłącznik izolacyjny", "kreski na torze — liczba faz (1f / 3f)", "prostokąt ze skosem — SPD (warystor)"]
-    for i, t in enumerate(items):
-        ax.text(lx, ly - 3.2 * (i + 1), t, fontsize=5)
+    if legenda:                          # arkusz rysunkowy: legenda w bloku OZNACZENIA kolumny opisowej
+        lx, ly = W - 74, 178
+        ax.text(lx, ly, "Legenda (PN-EN 60617, uproszczone):", fontsize=5.5, weight="bold")
+        for i, t in enumerate(LEGENDA_RG):
+            ax.text(lx, ly - 3.2 * (i + 1), t, fontsize=5)
     ax.text(56, 3, tytul or f"Schemat ideowy RG — {wynik.dane.nazwa}. Dane przykładowe [ZAŁ]; wartości z obliczeń obwodów "
             "(lamela.obliczenia.elektryka.obwody).", fontsize=6)
     fig.savefig(plik, dpi=dpi, bbox_inches="tight")

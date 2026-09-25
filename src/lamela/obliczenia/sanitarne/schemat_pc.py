@@ -16,6 +16,12 @@ from matplotlib.patches import Circle, FancyBboxPatch, Polygon, Rectangle  # noq
 from ..inst_wspolne import f  # noqa: E402
 
 CZ, NB, ZW, CW, CY = "#c0392b", "#2e6db4", "#2e8b57", "#d35400", "#8e44ad"
+LEGENDA_PC_LINIE = ((CZ, "zasilanie c.o. / wężownicy"), (NB, "powrót c.o."), (ZW, "woda zimna"), (CW, "c.w.u."),
+                    (CY, "cyrkulacja"))
+LEGENDA_PC_SYMBOLE = ["koło z trójkątem — pompa", "kokarda — zawór odcinający / antyzamarzaniowy",
+                      "ZP3D — zawór przełączający 3-drogowy", "NW — naczynie wzbiorcze przeponowe",
+                      "ZB — zawór bezpieczeństwa; GB — grupa bezpieczeństwa", "TZM — termostatyczny zawór mieszający",
+                      "WM — wodomierz; F — filtr; EA — zawór antyskażeniowy; RED — reduktor"]
 
 
 def _linia(ax, pts, c, lw=1.6, ls="-"):
@@ -54,7 +60,7 @@ def _zb(ax, x, y, label):
     ax.text(x + 2.5, y + 4.5, label, fontsize=5)
 
 
-def rysuj_schemat_pc(og, woda, plik, dpi: int = 200) -> str:
+def rysuj_schemat_pc(og, woda, plik, dpi: int = 200, legenda: bool = True) -> str:
     pc = og.pc
     fig, ax = plt.subplots(figsize=(16, 10))
     ax.set_xlim(0, 270)
@@ -145,18 +151,15 @@ def rysuj_schemat_pc(og, woda, plik, dpi: int = 200) -> str:
         _pompa(ax, 124, 58, r=1.8, kier=1)
         ax.text(127, 58, f"cyrkulacja czasowa {f(woda.cwu['V_cyrk_dm3h'], 0)} dm³/h, {f(woda.cwu['h_cyrk'], 0)} h/d;\n"
                          f"η_W,d = {f(woda.cwu['eta_W_d'], 2)} (metodologia EP)", fontsize=4.8, va="center")
-    # legenda
-    lx, ly = 200, 64
-    ax.text(lx, ly, "Legenda:", fontsize=6, weight="bold")
-    for i, (c, t) in enumerate(((CZ, "zasilanie c.o. / wężownicy"), (NB, "powrót c.o."), (ZW, "woda zimna"), (CW, "c.w.u."),
-                                 (CY, "cyrkulacja"))):
-        ax.plot([lx, lx + 8], [ly - 5 - i * 4, ly - 5 - i * 4], color=c, lw=1.6, ls="--" if c == CY else "-")
-        ax.text(lx + 10, ly - 5 - i * 4, t, fontsize=5, va="center")
-    oth = ["koło z trójkątem — pompa", "kokarda — zawór odcinający / antyzamarzaniowy", "ZP3D — zawór przełączający 3-drogowy",
-           "NW — naczynie wzbiorcze przeponowe", "ZB — zawór bezpieczeństwa; GB — grupa bezpieczeństwa",
-           "TZM — termostatyczny zawór mieszający", "WM — wodomierz; F — filtr; EA — zawór antyskażeniowy; RED — reduktor"]
-    for i, t in enumerate(oth):
-        ax.text(lx, ly - 27 - i * 3.6, t, fontsize=5)
+    # legenda (``legenda=False`` — arkusz rysunkowy: legenda w bloku OZNACZENIA kolumny opisowej, LEGENDA_PC)
+    if legenda:
+        lx, ly = 200, 64
+        ax.text(lx, ly, "Legenda:", fontsize=6, weight="bold")
+        for i, (c, t) in enumerate(LEGENDA_PC_LINIE):
+            ax.plot([lx, lx + 8], [ly - 5 - i * 4, ly - 5 - i * 4], color=c, lw=1.6, ls="--" if c == CY else "-")
+            ax.text(lx + 10, ly - 5 - i * 4, t, fontsize=5, va="center")
+        for i, t in enumerate(LEGENDA_PC_SYMBOLE):
+            ax.text(lx, ly - 27 - i * 3.6, t, fontsize=5)
     ax.text(2, -4, "Schemat ideowy PC / c.w.u. — dane przykładowe [ZAŁ]; wartości z modułów lamela.obliczenia.sanitarne "
                    "(ogrzewanie, woda).", fontsize=6)
     ax.set_ylim(-6, 170)

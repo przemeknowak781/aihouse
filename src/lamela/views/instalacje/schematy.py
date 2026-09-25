@@ -213,19 +213,20 @@ def rysuj(ctx, W, spec, scale, opts):
 def _mpl(vp, W, kind, res):
     if kind == "pc":
         from ...obliczenia.sanitarne.schemat_pc import rysuj_schemat_pc
-        fig = przechwyc(rysuj_schemat_pc, W.ogrzewanie, W.woda)
+        fig = przechwyc(rysuj_schemat_pc, W.ogrzewanie, W.woda, legenda=False)
         zr = "lamela.obliczenia.sanitarne.schemat_pc (dane: ogrzewanie, woda)"
     else:
         from ...obliczenia.elektryka.schemat_rg import rysuj_schemat_rg
-        fig = przechwyc(rysuj_schemat_rg, W.obwody)
+        fig = przechwyc(rysuj_schemat_rg, W.obwody, legenda=False)
         zr = "lamela.obliczenia.elektryka.schemat_rg (dane: obwody, WLZ, SPD, PWP)"
     if fig is None:
         raise RuntimeError(f"schemat {kind}: nie przechwycono figury matplotlib")
     f = odtworz(fig, vp)
     n = rozsun_napisy(vp)
-    # legenda symboli jest częścią schematu — osobny blok „OZNACZENIA” z jedną pozycją pominięty (weryf. C 2.6)
-    res.notes += ["Legenda symboli — na schemacie (PN-EN 60617 / PN-EN ISO 14617 w uproszczeniu; oznaczenia "
-                  "instalacji sanitarnych — praktyka branżowa).",f"Schemat odtworzony wektorowo z funkcji {zr} — treść i wartości z obliczeń na aktualnym modelu; "
+    # legenda schematu przeniesiona z rysunku do bloku OZNACZENIA (dawniej blok z jedną pozycją „wg legendy na
+    # rysunku” — weryfikacja C 2.6)
+    res.column_blocks.append(("legenda", _legenda_schematu(kind).block()))
+    res.notes += [f"Schemat odtworzony wektorowo z funkcji {zr} — treść i wartości z obliczeń na aktualnym modelu; "
                   f"skala rysunkowa {f:.2f} mm/jedn. (pismo ≥ 1,8 mm), przesunięto {n} napisów kolidujących.",
                   "Dane urządzeń przykładowe (bez nazw handlowych) — do zastąpienia DTR wybranych wyrobów "
                   "(lub równoważnych)."]
@@ -238,3 +239,34 @@ def _mpl(vp, W, kind, res):
     else:
         res.notes += ["Ogrzewanie wg PN-EN 1264, PN-EN 12828 (zabezpieczenie instalacji wodnych), c.w.u. wg "
                       "PN-EN 806 i WT § 120; naczynia wzbiorcze i zawory bezpieczeństwa z obliczeń."]
+
+
+def _legenda_schematu(kind: str):
+    """Blok OZNACZENIA schematu PC / RG — pozycje legendy dotąd rysowanej na schemacie (matplotlib)."""
+    from .wspolne import Legenda
+    if kind == "pc":
+        from ...obliczenia.sanitarne.schemat_pc import CY, LEGENDA_PC_LINIE, LEGENDA_PC_SYMBOLE
+        leg = Legenda("OZNACZENIA", zrodlo="Symbole umowne (PN-EN ISO 10628 / praktyka branżowa; PN-B-01410 "
+                                          "wycofana bez następcy).")
+        for c, t in LEGENDA_PC_LINIE:
+            leg.line("I-SCHEMAT", t, lt="KRESKOWA" if c == CY else None, pen=0.5, color=c)
+        items = LEGENDA_PC_SYMBOLE
+    else:
+        from ...obliczenia.elektryka.schemat_rg import LEGENDA_RG
+        leg = Legenda("OZNACZENIA", zrodlo="Symbole wg PN-EN 60617 (uproszczone).")
+        items = LEGENDA_RG
+    from ...draft import symbols_inst as SI
+    for t in items:
+        kod, _s, opis = t.partition(" — ")
+        if len(kod) <= 6 and opis:                 # skrót (NW, ZB, TZM …) w kolumnie symbolu, opis obok
+
+            def fn(c, p, kod=kod):
+                c.text((p[0], p[1]), kod, 1.8, 0.0, "center", "middle", style="bold")
+            leg.sym(fn, opis, key=("T", t))
+        elif kod.startswith("koło z trójkątem"):
+            leg.sym(lambda c, p: SI.pump(c, (p[0], p[1]), 0.0, s_mm=3.0), opis or t, key=("T", t))
+        elif kod.startswith("kokarda"):
+            leg.sym(lambda c, p: SI.valve(c, (p[0], p[1]), 0.0, s_mm=2.4), opis or t, key=("T", t))
+        else:
+            leg.sym(lambda c, p: None, t, key=("T", t))
+    return leg

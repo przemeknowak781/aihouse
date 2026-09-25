@@ -1364,6 +1364,9 @@ class AnalizaKonstrukcji:
         for s in g.podp_l:
             if s.linia.distance(c["rect"]) > 0.05:
                 continue
+            # podpora styka się z polem tylko w narożu (< 0,3 m wspólnej krawędzi) — reakcja nie dotyczy pola
+            if s.linia.intersection(c["rect"].buffer(0.05)).length < min(0.3, 0.5 * s.linia.length):
+                continue
             both = sum(1 for cc in g.komorki if s.linia.distance(cc["rect"]) < 0.05 and cc is not c) > 0
             v_ = g.env["rmax"].get(s.id, 0.0) * (0.6 if both else 1.0)
             if v_ > vmax:
