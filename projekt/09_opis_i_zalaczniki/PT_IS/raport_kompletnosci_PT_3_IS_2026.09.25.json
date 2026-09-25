@@ -1,7 +1,7 @@
 {
   "plik": "PT_3_IS_2026.09.25.pdf",
   "lista": "PT-3 IS — projekt techniczny, instalacje sanitarne (rejestr C.2)",
-  "status": "NIEKOMPLETNY",
+  "status": "PRZYKŁAD – NIE DO ZŁOŻENIA",
   "pozycje": [
     {
       "id": "F-01",
@@ -116,7 +116,7 @@
       "element": "PT",
       "opis": "Dane dotyczące warunków ochrony ludności (w PT — „nie dotyczy” z podstawą)",
       "podstawa": "RPB § 23 pkt 12 (Dz.U. 2026 poz. 597 § 1 pkt 6)",
-      "status": "BRAK",
+      "status": "OK",
       "obowiazkowa": true,
       "szczegoly": ""
     },
@@ -230,12 +230,12 @@
       "arkusze": 11
     }
   },
-  "rozmiar_mb": 3.041235,
+  "rozmiar_mb": 3.041663,
   "strony": 82,
   "podsumowanie": {
-    "status": "NIEKOMPLETNY",
-    "OK": 18,
-    "BRAK": 1,
+    "status": "PRZYKŁAD – NIE DO ZŁOŻENIA",
+    "OK": 19,
+    "BRAK": 0,
     "DO UZUPEŁNIENIA": 2,
     "N/D": 0,
     "OSTRZEŻENIE": 0,

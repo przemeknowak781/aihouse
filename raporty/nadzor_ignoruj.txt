@@ -21,3 +21,4 @@ a9f2ed8bb74c2c0d9  # detale PT-AR-D + katalog mostków — zakończony
 a5045de9ee0554cc8  # rysunki BO — zakończony
 wf_10e1a801-dd6  # runda 2 — zatrzymana celowo (przejęta przez wydanie)
 a82012b772f4804f3  # strona www — zakończony
+wf_6070a5f0-602

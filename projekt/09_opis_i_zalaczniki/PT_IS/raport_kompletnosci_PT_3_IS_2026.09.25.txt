@@ -1,7 +1,7 @@
 RAPORT KOMPLETNOŚCI — PT_3_IS_2026.09.25.pdf
 Lista kontrolna: PT-3 IS — projekt techniczny, instalacje sanitarne (rejestr C.2)
-Status: NIEKOMPLETNY
-Pozycje: OK 18 · BRAK 1 · DO UZUPEŁNIENIA 2 · N/D 0 · OSTRZEŻENIE 0
+Status: PRZYKŁAD – NIE DO ZŁOŻENIA
+Pozycje: OK 19 · BRAK 0 · DO UZUPEŁNIENIA 2 · N/D 0 · OSTRZEŻENIE 0
 Znaczniki: [DO UZUPEŁNIENIA] ×91, [DOKUMENT ZEWNĘTRZNY] ×0, [DANE PRZYKŁADOWE] ×99
 Plik: 82 stron, 3.04 MB
 
@@ -19,7 +19,7 @@ Plik: 82 stron, 3.04 MB
 ✓ C2-06    [ PT] OK               Oświadczenie projektanta PT (brzmienie art. 41 ust. 4a pkt 2 PB) (PB art. 34 ust. 3d pkt 3, art. 41 ust. 4a pkt 2)
 ✓ C2-07    [ PT] OK               Dane dotyczące warunków ochrony przeciwpożarowej stosownie do zakresu (RPB § 23 pkt 10)
 ✓ C2-08    [ PT] OK               Skale rysunków nie mniejsze niż 1:100 (RPB § 9 ust. 3) — 9 rysunków w skali nie mniejszej niż 1:100
-✗ C2-09    [ PT] BRAK             Dane dotyczące warunków ochrony ludności (w PT — „nie dotyczy” z podstawą) (RPB § 23 pkt 12 (Dz.U. 2026 poz. 597 § 1 pkt 6))
+✓ C2-09    [ PT] OK               Dane dotyczące warunków ochrony ludności (w PT — „nie dotyczy” z podstawą) (RPB § 23 pkt 12 (Dz.U. 2026 poz. 597 § 1 pkt 6))
 ✓ C2-10    [  *] OK               Metryki arkuszy: projektant (dane lub [DO UZUPEŁNIENIA]), sprawdzający (osoba lub „nie dotyczy (art. 20 ust. 3 pkt 2 PB)”) (RPB § 10 ust. 1 pkt 3; W-305, W-320) — 11 tabliczek z wypełnioną metryką
 ✓ C2-IS-01 [ PT] OK               Ogrzewanie z automatyczną regulacją temperatury (RPB § 23 pkt 7 lit. a)
 ✓ C2-IS-02 [ PT] OK               Wentylacja (RPB § 23 pkt 7 lit. d)

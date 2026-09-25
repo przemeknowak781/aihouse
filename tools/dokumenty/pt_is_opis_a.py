@@ -291,7 +291,7 @@ def rozdz_deszczowa(o: Opis, D: DanePTIS):
     na podlewanie {L(100 * Dd['pokrycie_podlewania'], 0)} %; bilans IMGW 1991–2020) i przelewem do niecki chłonnej
     (ogród deszczowy). Powierzchnia zredukowana zlewni A_red = {L(Dd['A_red_m2'], 1)} m²; wymagana objętość niecki
     (PANDa 2050, C = 10 lat, f_b = 1,2; W-143) V_min = **{L(Dd['niecka_V_min_m3'], 2)} m³**. Niecka przyjęta
-    ({ret.get('zrodlo_niecki', 'dzialka.yaml')}): A_n = **{L(ret.get('A_n'), 1)} m²**, głębokość
+    — {ret.get('zrodlo_niecki', 'dzialka.yaml')}: A_n = **{L(ret.get('A_n'), 1)} m²**, głębokość
     {L(ret.get('h_n', nie.get('glebokosc')), 2)} m, V = **{L(ret.get('V_n'), 2)} m³** ≥ V_min (minimalna powierzchnia
     z doboru {L(ret.get('A_n_min'), 1)} m²) — czas opróżniania {L(ret.get('t_opr'), 1)} h (≤ 24 h). Deszczówka — instalacja odrębna, bez połączenia z wodociągiem (W-136).
     Odwodnienia liniowe przy drzwiach bez progu i przed bramą garażu ({len(de.odwodnienia_liniowe or [])} korytek

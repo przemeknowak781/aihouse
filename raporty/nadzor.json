@@ -1,19 +1,19 @@
 {
- "czas": "2026-09-25 10:23",
+ "czas": "2026-09-25 10:26",
  "aktywni": [
   {
    "id": "af672122528919503",
    "opis": "wf_a8783476-2a1:model:domkniecie",
-   "idle_min": 2.0,
-   "bez_narzedzi_min": 2.0,
+   "idle_min": 1.1,
+   "bez_narzedzi_min": 1.1,
    "limity": 0,
    "powody": []
   },
   {
-   "id": "aa91fab19d57ad831",
-   "opis": "wf_dad224e5-cd8:zastosowanie:IE",
-   "idle_min": 0.0,
-   "bez_narzedzi_min": 0.1,
+   "id": "a2e2d61b96c7d28ef",
+   "opis": "wf_dad224e5-cd8:silnik:poprawki",
+   "idle_min": 0.3,
+   "bez_narzedzi_min": 0.3,
    "limity": 0,
    "powody": []
   },
@@ -21,14 +21,14 @@
    "id": "ac29e899834d24a29",
    "opis": "wf_c5f7e298-4b9:poprawki:IS",
    "idle_min": 0.0,
-   "bez_narzedzi_min": 0.0,
+   "bez_narzedzi_min": 1.2,
    "limity": 0,
    "powody": []
   },
   {
    "id": "aaf84ceed94d857ba",
    "opis": "wf_c5f7e298-4b9:poprawki:AR",
-   "idle_min": 0.1,
+   "idle_min": 0.0,
    "bez_narzedzi_min": 0.1,
    "limity": 0,
    "powody": []
@@ -36,5 +36,5 @@
  ],
  "zakonczeni": 0,
  "zastoje": [],
- "repo_bez_zmian_min": 0.0
+ "repo_bez_zmian_min": 0.1
 }
