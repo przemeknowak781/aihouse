@@ -450,8 +450,26 @@ class AnalizaKonstrukcji:
                 return True
         return False
 
+    def _plyta_konstrukcyjna(self, pl: dict) -> bool:
+        """Płyta konstrukcyjna: materiał żelbetowy/betonowy (pole ``mat`` lub warstwa konstrukcyjna przegrody); elementy
+        z materiałów niekonstrukcyjnych (podsufitki, izolacje, szkło, ramy okładzin) — poza analizą płyt."""
+        kod = pl.get("mat")
+        if not kod:
+            return True
+        mt = self.m.material(str(kod))
+        if mt is None:
+            return True
+        k = (mt.kreskowanie or "").upper()
+        return k in ("ZELBET", "BETON") or "elbet" in (mt.nazwa or "") or "eton" in (mt.nazwa or "")
+
     def _grupy_plyt(self):
-        els = [self._element_plyty(pl) for pl in self.m.plyty()]
+        els = []
+        for pl in self.m.plyty():
+            if not self._plyta_konstrukcyjna(pl):
+                self.log(f"{pl['id']}: element płytowy z materiału niekonstrukcyjnego ({pl.get('mat')}) — pominięty w analizie "
+                         "płyt (ciężar ujęty w warstwach przegród / do sprawdzenia w pozycji elementu nośnego).")
+                continue
+            els.append(self._element_plyty(pl))
         n = len(els)
         par = list(range(n))
 
@@ -1972,6 +1990,17 @@ class AnalizaKonstrukcji:
             gm2 = pr["gm2"]
             for o in pr["otw"]:
                 gap = w.z_do - o.z1
+                bel = None
+                for b in m.belki():
+                    lb = LineString([tuple(b["os"][0]), tuple(b["os"][1])])
+                    if (lb.distance(LineString([tuple(o.p0), tuple(o.p1)])) < 0.15 and float(b["spod"]) >= o.z1 - 0.1
+                            and lb.buffer(0.15).contains(LineString([tuple(o.p0), tuple(o.p1)]).buffer(0.01))):
+                        bel = b
+                        break
+                if bel is not None:
+                    self.log(f"Otwór {o.id} ({w.id}): nadprożem jest belka modelu {bel['id']} — pozycja nadproża pominięta "
+                             "(belka wymiarowana w pozycji belek).")
+                    continue
                 slab = None
                 for g in self.grupy:
                     for e in g.el:
@@ -2000,6 +2029,13 @@ class AnalizaKonstrukcji:
                 kand = [hn] + ([h_ for h_ in (0.30, 0.35, 0.40, 0.45, 0.50, 0.60) if hn < h_ <= gap + 1e-6] if not zint else [])
                 if not zint and slab is not None and gap + slab.h > kand[-1] + 1e-6:
                     kand.append(gap + slab.h)
+                if slab is not None:
+                    # belka odwrócona w ścianie kondygnacji wyższej (współosiowa ściana nośna nad otworem) [ZAŁ]
+                    nad = [v for v in m.sciany() if v.typ in TYPY_NOSNE and abs(v.z_od - slab.wierzch) < 0.1
+                           and self._wspolliniowe(w, v) > 0.3
+                           and v.axis_line().buffer(0.1).contains(LineString([tuple(o.p0), tuple(o.p1)]).buffer(0.01))]
+                    if nad:
+                        kand += [gap + slab.h + dh for dh in (0.2, 0.4, 0.6)]
                 for i_h, hn in enumerate(kand):
                     zint = zint or (slab is not None and abs(hn - (gap + slab.h)) < 1e-6)
                     q = dict(q0)

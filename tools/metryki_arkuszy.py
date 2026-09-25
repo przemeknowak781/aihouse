@@ -344,3 +344,117 @@ def fold_plan(W: float, H: float) -> dict:
                 rzedy=rzedy, n_pasow=len(pasy), n_rzedow=len(rzedy), warstwy=n_pan,
                 wykorzystanie_paczki=W * H / (n_pan * 210.0 * 297.0), ocena=ocena, ocena_pion=ov, ocena_poziom=oh,
                 uwagi=uw)
+
+
+# ================================================================================================ komplet
+def format_name(W: float, H: float) -> str:
+    try:
+        from lamela.dokumenty.formaty import wykryj_format
+        return wykryj_format(W, H) or f"{W:.0f}×{H:.0f}"
+    except Exception:      # pragma: no cover
+        return f"{W:.0f}×{H:.0f}"
+
+
+def measure_set(nazwa: str, katalog: Path, odstep: float = 6.0, podglad: Path | None = None) -> dict:
+    wiersze = []
+    for a in load_set(katalog):
+        r = analyze_pdf(a["pdf"], odstep)
+        r["skladanie"] = fold_plan(r["W"], r["H"])
+        r["przyciety"]["W"] = float(min(r["przyciety"]["W"], r["W"]))
+        r["przyciety"]["H"] = float(min(r["przyciety"]["H"], r["H"]))
+        r["przyciety"]["pole_m2"] = r["przyciety"]["W"] * r["przyciety"]["H"] / 1e6
+        r.update(nr=a["nr"], tytul=a["tytul"], skala=a["skala"], pdf=str(a["pdf"]),
+                 format=a["format_cfg"] or format_name(r["W"], r["H"]))
+        if podglad:
+            r["podglad"] = str(preview(a["pdf"], r, Path(podglad) / nazwa / f"{a['nr']}.png"))
+        r["bloki"] = [[round(v, 1) for v in b] for b in r["bloki"]]
+        wiersze.append(r)
+    return dict(komplet=nazwa, katalog=str(katalog), arkusze=wiersze, sumy=totals(wiersze))
+
+
+def totals(ws: list[dict]) -> dict:
+    if not ws:
+        return dict(arkuszy=0)
+    pole = sum(w["pole_arkusza_m2"] for w in ws)
+    ramka = sum(w["pole_ramki_m2"] for w in ws)
+    tresc = sum(w["wypelnienie"] * w["pole_ramki_m2"] for w in ws)
+    fmts: dict = {}
+    for w in ws:
+        fmts[w["format"]] = fmts.get(w["format"], 0) + 1
+    oceny = {o: sum(1 for w in ws if w["skladanie"]["ocena"] == o) for o in ("dobre", "poprawne", "słabe")}
+    worst = min(ws, key=lambda w: w["wypelnienie"])
+    return dict(arkuszy=len(ws), pole_m2=pole, a4_ekw=pole / A4_AREA, pole_ramki_m2=ramka,
+                wypelnienie_wazone=tresc / ramka, wypelnienie_srednie=sum(w["wypelnienie"] for w in ws) / len(ws),
+                wypelnienie_min=worst["wypelnienie"], najgorsze=worst["nr"],
+                puste_m2=ramka - tresc, przyciete_m2=sum(w["przyciety"]["pole_m2"] for w in ws),
+                warstwy_a4=sum(w["skladanie"]["warstwy"] for w in ws), formaty=fmts, oceny_skladania=oceny)
+
+
+# ================================================================================================ raport
+def _pl(x: float, n: int = 2) -> str:
+    return f"{x:.{n}f}".replace(".", ",")
+
+
+def _pct(x: float) -> str:
+    return f"{x * 100:.0f} %"
+
+
+def markdown_set(k: dict) -> str:
+    s = k["sumy"]
+    L = [f"### {k['komplet']} — `{k['katalog']}`", ""]
+    if not s.get("arkuszy"):
+        return "\n".join(L + ["Brak arkuszy PDF.", ""])
+    L += ["| Nr | Format | W×H [mm] | Pow. [m²] | W obw. | W rys. | W kontur | Największy pusty prostokąt | "
+          "Przycięty [mm] | Pasy [mm] | Rzędy [mm] | Warstwy | Składanie |",
+          "|---|---|---|---|---|---|---|---|---|---|---|---|---|"]
+    for w in k["arkusze"]:
+        e, p, f = w["pusty_prostokat"], w["przyciety"], w["skladanie"]
+        ocena = f["ocena"] + (" — " + "; ".join(f["uwagi"]) if f["uwagi"] else "")
+        L.append(f"| {w['nr']} | {w['format']} | {w['W']:.0f}×{w['H']:.0f} | {_pl(w['pole_arkusza_m2'], 3)} | "
+                 f"{_pct(w['wypelnienie'])} | {_pct(w['wypelnienie_rys'])} | {_pct(w['wypelnienie_kontur'])} | "
+                 f"{e['w']:.0f}×{e['h']:.0f} ({_pl(e['pole_m2'], 3)} m²) | {p['W']:.0f}×{p['H']:.0f} | "
+                 f"{' + '.join(f'{x:.0f}' for x in f['pasy'])} | {' + '.join(f'{x:.0f}' for x in f['rzedy'])} | "
+                 f"{f['warstwy']} | {ocena} |")
+    fm = ", ".join(f"{n}× {f}" for f, n in s["formaty"].items())
+    oc = ", ".join(f"{o}: {n}" for o, n in s["oceny_skladania"].items() if n)
+    L += ["", f"**Suma:** {s['arkuszy']} ark. ({fm}); papier {_pl(s['pole_m2'])} m² (≈ {s['a4_ekw']:.1f} A4); "
+          f"wypełnienie ważone {_pct(s['wypelnienie_wazone'])}, średnie {_pct(s['wypelnienie_srednie'])}, "
+          f"najniższe {_pct(s['wypelnienie_min'])} ({s['najgorsze']}); puste pole w ramkach "
+          f"{_pl(s['puste_m2'])} m²; po samym przycięciu pustych pasów {_pl(s['przyciete_m2'])} m² "
+          f"(−{_pct(1 - s['przyciete_m2'] / s['pole_m2'])}); warstw A4 po złożeniu: {s['warstwy_a4']}; "
+          f"składanie — {oc}.", ""]
+    return "\n".join(L)
+
+
+def main(argv=None):
+    ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    ap.add_argument("komplety", nargs="+", help="NAZWA=katalog (lub sam katalog)")
+    ap.add_argument("--md", help="raport Markdown (tabele kompletów)")
+    ap.add_argument("--json", help="wyniki JSON")
+    ap.add_argument("--podglad", help="katalog na podglądy PNG z obwiedniami bloków")
+    ap.add_argument("--odstep", type=float, default=6.0, help="promień domknięcia bloków [mm] (domyślnie 6)")
+    a = ap.parse_args(argv)
+    wyniki = []
+    for spec in a.komplety:
+        nazwa, _, kat = spec.partition("=") if "=" in spec else (Path(spec).name, "", spec)
+        if not Path(kat).is_dir():
+            print(f"[pominięto] {nazwa}: brak katalogu {kat}", file=sys.stderr)
+            continue
+        k = measure_set(nazwa, Path(kat), a.odstep, Path(a.podglad) if a.podglad else None)
+        wyniki.append(k)
+        s = k["sumy"]
+        if s.get("arkuszy"):
+            print(f"{nazwa:8s} {s['arkuszy']:3d} ark.  {s['pole_m2']:6.2f} m²  W={s['wypelnienie_wazone']:.2f} "
+                  f"(min {s['wypelnienie_min']:.2f} {s['najgorsze']})  warstw A4 {s['warstwy_a4']}  "
+                  f"{s['oceny_skladania']}")
+    if a.json:
+        Path(a.json).parent.mkdir(parents=True, exist_ok=True)
+        Path(a.json).write_text(json.dumps(wyniki, ensure_ascii=False, indent=1, default=float), encoding="utf-8")
+    if a.md:
+        Path(a.md).parent.mkdir(parents=True, exist_ok=True)
+        Path(a.md).write_text("\n".join(markdown_set(k) for k in wyniki), encoding="utf-8")
+    return wyniki
+
+
+if __name__ == "__main__":
+    main()

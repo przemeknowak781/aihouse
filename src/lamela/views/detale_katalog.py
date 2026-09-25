@@ -186,7 +186,7 @@ def detal_cokol(m, opts: dict) -> Detal:
     det.wymiar([(x_out, tz), (x_out, y_cok)], x_out + 0.05, "v")
     det.rzedna((xL + 0.06, 0.0), 0.0, "zero", "right")
     det.rzedna((xR - 0.03, tz), tz, "wyk", "left")
-    det.spadek((x_out + 0.10, tz + 0.03), (x_out + 0.28, tz + 0.026), 2.0)
+    det.spadek((x_out + 0.06, tz + 0.08), (x_out + 0.24, tz + 0.076), 2.0)
     det.pom = dict(sc=sc, x_out=x_out, xs1=xs1, d_x=d_x, tz=tz, y_cok=y_cok, x_g=x_g, gl=gl, d_n=d_n, D_n=D_n,
                    xL=xL, xR=xR, yT=yT, yB=yB, y_pl=y_pl)
     det.uwagi.append("drenażu opaskowego nie projektuje się — decyzja w modelu działki (DR-0, W-285): piaski "

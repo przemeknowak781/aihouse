@@ -543,7 +543,7 @@ PAS = (5.90, 3.85, 8.90, Y3_s)
 PMS("0.01", "P0", "Wiatrołap", (10.9, 7.6), kat="ruchu", posadzka="GRES", temp=16, rodzaj="komunikacja", podloga="POD-0L",
     uwagi="szklana przegroda z drzwiami w osi wejścia; ławka")
 PMS("0.02", "P0", "Hol", (10.0, 5.9), kat="ruchu", posadzka="GRES", temp=20, rodzaj="komunikacja", podloga="POD-0L",
-    uwagi="drzwi DG2 z garażu (O0-24, A3 I-4): garaż → hol → OT1 → pas 0.07 → schody ≈ 7 m bez przejścia przez ciąg roboczy kuchni; "
+    uwagi="drzwi DG2 z garażu (O0-24, A3 I-4): garaż → hol → OT1 → pas 0.07 → schody ≈ 6–7 m bez przejścia przez ciąg roboczy kuchni; "
           "szafa płytka 0,45 m przy ścianie osi 3")
 PMS("0.03", "P0", "WC gościnne", (9.2, 7.6), kat="pomocnicza", posadzka="GRES", sciany="PLYTKI_SC", sufit="SUF_GK", temp=20, wyw=30, rodzaj="wc",
     podloga="POD-0L", uwagi="szer. 1,195 m ≥ 0,90 (W-060); wentylacja mechaniczna")
