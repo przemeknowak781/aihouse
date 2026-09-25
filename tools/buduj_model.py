@@ -548,3 +548,217 @@ PMS("2.06", "P2", "Klatka schodowa (wyjście z biegu 2, pustka)", None, [(XC_e, 
     temp=20, rodzaj="komunikacja", uwagi="świetlik SW1 nad spocznikiem, okno pn. ON4; wyłączona z PU")
 PMS("2.07", "P2", "Pom. techniczne (centrala rekuperacyjna, wyłaz na dach)", (7.2, 1.3), kat="techniczna", posadzka="GRES", temp=16,
     rodzaj="techniczne", podloga="POD-1L", uwagi="centrala 450 m³/h; wyłaz 0,90 × 0,90 m z drabiną (W-065)")
+
+
+# =====================================================================================================================
+# 7. STROPY, DACHY (z attykami, spadkami, wpustami, przelewami awaryjnymi, rurami spustowymi), PŁYTY WYSUNIĘTE
+#    Konwencja SCHEMAT p. 5.1: odsłonięte fragmenty stropów = `dachy`; dach garażu = osobny element `dachy`.
+# =====================================================================================================================
+OB_P1 = R(-EXT, -EXT, xE + EXT, y4 + EXT)                                          # −0,30…12,30 × −0,30…9,05
+OB_P2 = P((xA2 - 0.18, -EXT), (xE + EXT, -EXT), (xE + EXT, y3 + EXT), (xD + EXT, y3 + EXT), (xD + EXT, y4 + EXT),
+          (xB - EXT, y4 + EXT), (xB - EXT, y3 + EXT), (xA2 - 0.18, y3 + EXT))
+OTW_SCH = R(XC_e, Y3_n, XD_w, Y4_i)                                                 # otwór klatki w ST1/ST2
+X2o = xA2 - 0.18                                                                     # lico zach. bryły A (−1,30)
+
+STROPY = [
+    {"id": "ST1", "nad": "P0", "wierzch": Z_ST1, "grubosc": T_STR, "obrys": OB_P1, "otwory": [OTW_SCH], "podloga": "POD-1", "sufit": "TYNK_GIPS",
+     "mat": "ZB_C25", "uwagi": "strop nad P0 (część mieszkalna): N–S, ciągły 2-przęsłowy B1 (oś 1) – oś 3 – oś 4, rozpiętości 5,125 / 3,625 m"},
+    {"id": "ST2", "nad": "P1", "wierzch": Z_ST2, "grubosc": T_STR,
+     "obrys": P((-EXT, -EXT), (xE + EXT, -EXT), (xE + EXT, y3 + EXT), (xD + EXT, y3 + EXT), (xD + EXT, y4 + EXT), (xB - EXT, y4 + EXT),
+                (xB - EXT, y3 + EXT), (-EXT, y3 + EXT)),
+     "otwory": [OTW_SCH], "podloga": "POD-1", "sufit": "TYNK_GIPS", "mat": "ZB_C25",
+     "uwagi": "strop nad P1 pod bryłą A i nadbudową; pola pn. poza bryłą A — dachy D2/D3"},
+    {"id": "ST2Z", "nad": "P1", "wierzch": Z_ST2, "grubosc": T_STR, "obrys": R(X2o, -EXT, -EXT, y3 + EXT), "podloga": "POD-1", "sufit": "SUF-ZEW",
+     "mat": "ZB_C25", "uwagi": "strop P2 nad powietrzem zewnętrznym (wspornik bryły A 1,00 m lico–lico): E–W oś A – belka B3, docieplenie spodu"},
+]
+
+WP = lambda x, y, dn=100, grz=True, **kw: {"xy": [r(x), r(y)], "dn": dn, "podgrzewany": grz, **kw}          # noqa: E731
+PA = lambda x, y, sc, dno, **kw: {"xy": [r(x), r(y)], "sciana_attyki": sc, "szer": 0.20, "wys": 0.10, "rzedna_dna": r(dno), **kw}  # noqa: E731
+
+DACHY = [
+    {"id": "D1", "obrys": OB_P2, "plyta": {"wierzch": Z_ST3, "grubosc": T_STR}, "przegroda": "SD1", "spadek": 0.02,
+     "attyka": {"wys_nad_pokryciem": 0.25, "szer": 0.25, "przegroda": "AT1"},
+     "otwory": [R(6.10, 7.55, 8.30, 8.55), R(6.70, 0.90, 7.60, 1.80)],
+     "wpusty": [WP(5.57, 5.45, opis="WP1 — nad szachtem SI (najniższy punkt spadków)"),
+                WP(4.40, 8.35, opis="WP2 — przy attyce pn. nadbudowy; podejście w stropie łazienki P2 do SI")],
+     "przelewy_awaryjne": [PA(5.00, y4 + EXT, "N", 9.48, opis="przelew PA1 — attyka pn. nadbudowy (na dach D2/teren)"),
+                           PA(2.00, y3 + EXT, "N", 9.52, opis="przelew PA2 — na dach D2 (pole zach., z własnym wpustem)"),
+                           PA(10.60, y3 + EXT, "N", 9.52, opis="przelew PA3 — na dach D3 (pole wsch., z własnym wpustem)")],
+     "rury_spustowe": [{"id": "RS1", "od_wpustu": 0, "trasa": "wewn_szacht", "xy_pion": [5.57, 5.45], "dn": 100, "do": "zbiornik",
+                        "opis": "w izolowanym szachcie SI (otulina 20 mm, izolacja akustyczna), pod płytą do kolektora KD-W"},
+                       {"id": "RS2", "od_wpustu": 1, "trasa": "wewn_szacht", "xy_pion": [5.57, 5.85], "dn": 100, "do": "zbiornik",
+                        "opis": "w szachcie SI; podejście poziome DN100 w suficie podwieszanym łazienki P2 (izolowane)"}],
+     "spadki": [{"od": [X2o, -EXT], "do": [5.57, 5.45], "spadek": 0.02}, {"od": [xE + EXT, -EXT], "do": [5.57, 5.45], "spadek": 0.02},
+                {"od": [xD + EXT, y4 + EXT], "do": [4.40, 8.35], "spadek": 0.02}],
+     "uwagi": "stropodach bryły A: PV ≤ 6,5 kWp na niskich stelażach (≤ +9,78, nie ponad attykę); świetlik SW1 2,20 × 1,00 nad spocznikiem; "
+              "wyłaz 0,90 × 0,90 w pom. 2.07; czerpnia i wyrzutnia reku (≥ 0,40 m nad pokryciem), wywiewka K1 nad SI"},
+    {"id": "D2", "obrys": R(-EXT, y3 + EXT, xB - EXT, y4 + EXT), "plyta": {"wierzch": Z_ST2, "grubosc": T_STR}, "przegroda": "SD2", "spadek": 0.02,
+     "attyka": {"wys_nad_pokryciem": 0.25, "szer": 0.25, "przegroda": "AT1"},
+     "wpusty": [WP(0.40, y4 - 0.05, opis="wpust attykowy (boczny) WP3 — narożnik NW")],
+     "przelewy_awaryjne": [PA(-EXT, 7.20, "W", 6.46, opis="przelew PA4 — attyka zach.")],
+     "rury_spustowe": [{"id": "RS3", "od_wpustu": 0, "trasa": "zewn", "xy_pion": [0.40, y4 + EXT + 0.06], "dn": 100, "do": "zbiornik",
+                        "opis": "zewnętrzna na elewacji pn., czyszczak 0,5 m nad terenem, kolektor KD-W"}],
+     "spadki": [{"od": [xB - EXT, y3 + EXT], "do": [0.40, y4 - 0.05], "spadek": 0.02}],
+     "uwagi": "dach nad P1 (pole zach.), żwirowy, nieużytkowy"},
+    {"id": "D3", "obrys": R(xD + EXT, y3 + EXT, xE + EXT, y4 + EXT), "plyta": {"wierzch": Z_ST2, "grubosc": T_STR}, "przegroda": "SD2", "spadek": 0.02,
+     "attyka": {"wys_nad_pokryciem": 0.25, "szer": 0.25, "przegroda": "AT1"},
+     "wpusty": [WP(9.20, y4 - 0.05, opis="wpust attykowy (boczny) WP4 — przy attyce pn.")],
+     "przelewy_awaryjne": [PA(xE + EXT, 7.20, "E", 6.46, opis="przelew PA5 — attyka wsch. (awaryjnie na dach D4)")],
+     "rury_spustowe": [{"id": "RS4", "od_wpustu": 0, "trasa": "zewn", "xy_pion": [9.20, y4 + EXT + 0.06], "dn": 100, "do": "zbiornik",
+                        "opis": "zewnętrzna na elewacji pn. obok daszku wejścia, czyszczak, kolektor KD-W"}],
+     "spadki": [{"od": [xE + EXT, y3 + EXT], "do": [9.20, y4 - 0.05], "spadek": 0.02}],
+     "uwagi": "dach nad P1 (pole wsch.), żwirowy, nieużytkowy"},
+    {"id": "D4", "obrys": P((xE + EXT, -EXT), (xF + EXT, -EXT), (xF + EXT, y5 + EXT), (xE - EXT, y5 + EXT), (xE - EXT, y4 + EXT), (xE + EXT, y4 + EXT)),
+     "plyta": {"wierzch": Z_DG, "grubosc": T_DG}, "przegroda": "DZ1", "spadek": 0.02,
+     "attyka": {"wys_nad_pokryciem": 0.545, "szer": 0.25, "przegroda": "AT1"},
+     "wpusty": [WP(18.05, 9.05, opis="WP5 — garaż, narożnik NE, studzienka kontrolna w opasce żwirowej"),
+                WP(17.95, 0.35, opis="WP6 — pas gospodarczy, narożnik SE (poza strefą R290)")],
+     "przelewy_awaryjne": [PA(xF + EXT, 6.50, "E", 3.36, opis="przelew PA6 — attyka wsch. (garaż)"),
+                           PA(xF + EXT, 2.40, "E", 3.36, opis="przelew PA7 — attyka wsch. (pas gosp.; > 1 m od jedn. PC)")],
+     "rury_spustowe": [{"id": "RS5", "od_wpustu": 0, "trasa": "zewn", "xy_pion": [xF + EXT + 0.06, 9.05], "dn": 100, "do": "zbiornik",
+                        "opis": "zewnętrzna w narożu NE, czyszczak, kolektor KD-E"},
+                       {"id": "RS6", "od_wpustu": 1, "trasa": "wewn_szacht", "xy_pion": [17.95, 0.35], "dn": 100, "do": "zbiornik",
+                        "opis": "w pom. technicznym 0.12 (obudowa izolowana), pod płytą do kolektora KD-E"}],
+     "spadki": [{"od": [xE + EXT, 4.5], "do": [18.05, 9.05], "spadek": 0.02}, {"od": [xE + EXT, 1.2], "do": [17.95, 0.35], "spadek": 0.02}],
+     "uwagi": "dach zielony ekstensywny NIEUŻYTKOWY nad garażem i pasem gospodarczym (bez tarasu, bez wyjścia — decyzja Inwestora); "
+              "attyka pd. +3,85 = linia D do narożnika garażu; opaska żwirowa 0,5 m przy attykach i wpustach"},
+]
+
+WSP = [
+    {"id": "PL-E", "obrys": P((-1.80, -1.30), (13.80, -1.30), (13.80, -EXT), (-EXT, -EXT), (-EXT, y3), (-1.80, y3)), "wierzch": Z_OKAP_E[1],
+     "grubosc": Z_OKAP_E[1] - Z_OKAP_E[0], "przegroda": "OK1", "lacznik_termiczny": True, "mat": "ZB_C30",
+     "uwagi": "E — okap ST1: 1,00 m pd. (x −1,80…13,80, także nad drzwiami gospodarczymi) i 1,50 m zach.; łączniki termoizolacyjne (ETA)"},
+    {"id": "PL-DA", "obrys": R(9.40, y4 + EXT, xE - EXT, 10.35), "wierzch": 3.05, "grubosc": 0.25, "przegroda": "OK1", "lacznik_termiczny": True,
+     "mat": "ZB_C30", "uwagi": "daszek nad wejściem 2,30 × 1,30 m (≥ drzwi + 1,0 × ≥ 1,0 — W-057); 0,95 m za linią zabudowy"},
+    {"id": "PL-C1", "obrys": R(3.60, -1.30, 12.60, -EXT), "wierzch": Z_RAMA_D[1], "grubosc": 0.20, "mat": "RAMA_C", "lacznik_termiczny": True,
+     "uwagi": "rama boksu C — pas dolny = linia D (+3,65…+3,85), lekka rama stalowa w okładzinie na konsolach punktowych z przekładką (J2)"},
+    {"id": "PL-C2", "obrys": R(3.60, -1.30, 13.45, -EXT), "wierzch": Z_RAMA_G[1], "grubosc": 0.20, "mat": "RAMA_C", "lacznik_termiczny": True,
+     "uwagi": "rama boksu C — pas górny (+5,35…+5,55), przedłużony na wschód do x 13,45 (szkic: 13,76 m od lica B)"},
+    {"id": "PL-2", "obrys": P((-2.40, -1.30), (12.60, -1.30), (12.60, -EXT), (X2o, -EXT), (X2o, y3 + EXT), (-2.40, y3 + EXT)),
+     "wierzch": Z_OKAP_2[1], "grubosc": Z_OKAP_2[1] - Z_OKAP_2[0], "przegroda": "OK1", "lacznik_termiczny": True, "mat": "ZB_C30",
+     "uwagi": "krawędź ST2 — spód bryły A: wysunięcie 1,00 m pd., 1,10 m zach. (od lica A), 0,30 m wsch."},
+    {"id": "PL-3", "obrys": P((-2.40, -1.30), (12.60, -1.30), (12.60, y3 + EXT), (xE + EXT, y3 + EXT), (xE + EXT, -EXT), (X2o, -EXT), (X2o, y3 + EXT),
+                              (-2.40, y3 + EXT)),
+     "wierzch": Z_OKAP_3[1], "grubosc": Z_OKAP_3[1] - Z_OKAP_3[0], "przegroda": "OK1", "lacznik_termiczny": True, "mat": "ZB_C30",
+     "uwagi": "krawędź ST3 — stropodach bryły A: 1,00 m pd., 1,10 m zach., 0,30 m wsch.; attyka cofnięta w licu ściany"},
+]
+
+
+# =====================================================================================================================
+# 8. SŁUPY, BELKI, NADPROŻA, FUNDAMENTY, SCHODY, BALUSTRADY/POCHWYTY, LAMELE, TARASY
+# =====================================================================================================================
+Z_SPOD_ST1 = Z_ST1 - T_STR           # 2,78
+SLUPY = [{"id": f"SL{i + 1}", "xy": [r(x), 0.0], "przekroj": "RK 120x120x8", "mat": "STAL_S355", "z_od": Z_PLYTA_F, "z_do": Z_SPOD_ST1,
+          "uwagi": "słup fasady E w szprosie przeszklenia; podpora belki B1"} for i, x in enumerate(E_KW[1:5])]
+SLUPY += [{"id": f"SL{5 + i}", "xy": [r(x), 0.0], "przekroj": "RK 100x100x6", "mat": "STAL_S355", "z_od": Z_RAMA_D[1], "z_do": Z_RAMA_G[0],
+           "uwagi": "słupek boksu C w szprosie (w jednej linii ze słupem fasady E — przeszczep J2), podpora nadproża B2"}
+          for i, x in enumerate(E_KW[3:5])]
+SLUPY += [{"id": f"SL{7 + i}", "xy": [r(x), -0.80], "przekroj": "150x1000", "mat": "RAMA_C", "z_od": Z_RAMA_D[1], "z_do": Z_RAMA_G[0],
+           "uwagi": "bok ramy boksu C (płaskownik w okładzinie) przy krawędzi przeszklenia"} for i, x in enumerate((4.025, 11.18))]
+
+BELKI = [
+    {"id": "B1", "os": [[0.0, 0.0], [xE, 0.0]], "b": 0.25, "h": 1.07, "spod": Z_SPOD_ST1, "mat": "ZB_C30",
+     "uwagi": "podciąg fasady E, odwrócony (+2,78…+3,85 = parapet boksu C); przęsła 2,20/1,90/2,335/2,335/3,23 na SL1–SL4 i ścianach A, E"},
+    {"id": "B2", "os": [[3.85, 0.0], [11.355, 0.0]], "b": 0.25, "h": r(Z_ST2 - Z_RAMA_G[0]), "spod": Z_RAMA_G[0], "mat": "ZB_C30",
+     "uwagi": "nadproże boksu C 25×80, 3 przęsła 2,335 m na słupkach SL5/SL6"},
+    {"id": "B3", "os": [[xA2, 0.0], [xA2, y3]], "b": 0.20, "h": 0.60, "spod": r(Z_ST2 - T_STR), "mat": "ZB_C30",
+     "uwagi": "belka krawędziowa ST2 w osi A' (odwrócona, pod parapetem okna O2-04) — niesie lekką ścianę A' i okap PL-2; oparta na końcach B4/B5"},
+    {"id": "B4", "os": [[xA2, 0.0], [xB, 0.0]], "b": 0.18, "h": 0.80, "spod": r(Z_ST2 - T_STR), "mat": "ZB_C30",
+     "uwagi": "belka wspornikowa w osi 1 (w licu ściany P2, pod parapetem O2-01 +6,90): wspornik 1,12 m na ścianie A, przęsło zakotwienia A–B 3,875 m"},
+    {"id": "B5", "os": [[xA2, y3], [xB, y3]], "b": 0.18, "h": 0.80, "spod": r(Z_ST2 - T_STR), "mat": "ZB_C30",
+     "uwagi": "belka wspornikowa w osi 3 (w ścianie pn. P2): wspornik 1,12 m, zakotwienie A–B"},
+    {"id": "B6", "os": [[xA2, 0.0], [xA2, y3]], "b": 0.20, "h": 0.40, "spod": r(Z_ST3 - T_STR - 0.18), "mat": "ZB_C30",
+     "uwagi": "belka krawędziowa ST3 w osi A' (nad oknem O2-04) — okap zach. stropodachu; oparta na narożach ścian osi 1 i 3"},
+    {"id": "B7", "os": [[12.50, y5], [17.95, y5]], "b": 0.25, "h": r(Z_DG - 2.15), "spod": 2.15, "mat": "ZB_C30",
+     "uwagi": "nadproże bramy garażu (rozp. 5,00 m w świetle)"},
+    {"id": "B8", "os": [[xC, y3], [xD, y3]], "b": 0.25, "h": 0.50, "spod": r(Z_ST1 - 0.50), "mat": "ZB_C25",
+     "uwagi": "podciąg ST1 w osi 3 nad wejściem na schody (C–D, 2,625 m); prześwit nad stopą biegu 1 ≥ 2,30 m"},
+    {"id": "B9", "os": [[xC, y3], [xD, y3]], "b": 0.25, "h": 0.50, "spod": r(Z_ST2 - 0.50), "mat": "ZB_C25",
+     "uwagi": "podciąg ST2 w osi 3 nad wyjściem ze schodów P1 (C–D)"},
+]
+# nadproża otworów ≥ 1,50 m w ścianach murowanych (pozostałe — prefabrykowane nadproża systemowe / wieniec)
+_nadp = 0
+for o in OT:
+    s = _SC[o["sciana"]]
+    if s["przegroda"] not in ("SZ1", "SZ2", "SW18", "SWG") or o["szer"] < 1.45 or o["id"] in ("O0-01", "O0-02", "O0-03", "O0-04", "O0-05", "O1-01", "O0-07"):
+        continue
+    kz = {"P0": 0.0, "P1": Z_P1, "P2": Z_P2}[s["kond"]]
+    top = kz + o["parapet"] + o["wys"]
+    spod_pl = {"P0": Z_SPOD_ST1, "P1": Z_ST2 - T_STR, "P2": Z_ST3 - T_STR}[s["kond"]]
+    if spod_pl - top < 0.12:
+        continue                                              # otwór pod wieńcem — nadprożem jest wieniec/płyta
+    (ax, ay), (bx, by) = s["os"]
+    L_ = seg_len((ax, ay), (bx, by))
+    ux, uy = (bx - ax) / L_, (by - ay) / L_
+    s0, s1 = o["odl"] - 0.20, o["odl"] + o["szer"] + 0.20
+    _nadp += 1
+    BELKI.append({"id": f"N{_nadp}", "os": [[r(ax + ux * s0), r(ay + uy * s0)], [r(ax + ux * s1), r(ay + uy * s1)]], "b": 0.18,
+                  "h": r(min(0.24, spod_pl - top)), "spod": r(top), "mat": "ZB_C25", "uwagi": f"nadproże otworu {o['id']} ({o['szer']:.2f} m), oparcie 0,20 m"})
+
+# ---- fundamenty: PŁYTA FUNDAMENTOWA na XPS (uzasadnienie — koncepcja.md p. 5.4)
+OB_P0 = P((-EXT, -EXT), (xF + EXT, -EXT), (xF + EXT, y5 + EXT), (xE - EXT, y5 + EXT), (xE - EXT, y4 + EXT), (-EXT, y4 + EXT))
+OB_PF = P((-0.10, -0.10), (xF + 0.10, -0.10), (xF + 0.10, y5 + 0.10), (xE - 0.10, y5 + 0.10), (xE - 0.10, y4 + 0.10), (-0.10, y4 + 0.10))
+FUND_EL = [{"id": "PF1", "obrys": OB_PF, "spod": r(Z_PLYTA_F - T_PLYTA_F), "h": T_PLYTA_F, "mat": "ZB_C25",
+            "uwagi": "płyta fundamentowa ŻB 25 cm C25/30 XC2 na XPS 300 20 cm; krawędź do lica konstrukcji, XPS pionowy 20 cm na czole płyty"}]
+_zi = 0
+for s in SC:
+    if s["kond"] != "P0" or s["przegroda"] not in ("SZ1", "SW18", "SWZB", "SWG"):
+        continue
+    _zi += 1
+    zew = s["przegroda"] == "SZ1"
+    FUND_EL.append({"id": f"ZF{_zi}", "os": s["os"], "b": 0.60 if zew else 0.50, "h": 0.30 if zew else 0.25,
+                    "spod": r(Z_PLYTA_F - T_PLYTA_F - (0.30 if zew else 0.25)), "mat": "ZB_C25",
+                    "uwagi": f"pogrubienie (żebro) płyty pod ścianą {s['id']}" + (" — krawędź z izolacją obwodową XPS (PN-EN ISO 13793)" if zew else "")})
+for sl in SLUPY[:4]:
+    x, y = sl["xy"]
+    FUND_EL.append({"id": f"SF{sl['id'][2:]}", "os": [[r(x - 0.005), y], [r(x + 0.005), y]], "b": 1.00, "h": 0.45, "spod": r(Z_PLYTA_F - T_PLYTA_F - 0.45),
+                    "mat": "ZB_C25", "uwagi": f"pogrubienie płyty 1,0 × 1,0 m pod słupem {sl['id']} (przebicie)"})
+FUND = {"typ": "plyta", "elementy": FUND_EL,
+        "izolacja_obwodowa": {"typ": "pozioma", "D": 1.00, "d_n": 0.10, "mat": "XPS300", "glebokosc": 0.45,
+                              "opis": "izolacja przeciwprzemarzaniowa XPS 10 cm × 1,00 m (garaż 1,20 m) wokół płyty, spadek 2 % od budynku"},
+        "uwagi": "posadowienie bezpośrednie na piaskach średnich (I_D ≈ 0,6), niewysadzinowych; ZWG ≈ 3,8 m p.p.t. — drenaż opaskowy zbędny (W-285); "
+                 "zdjęcie humusu 0,4 m, podsypka zagęszczona; uziom otokowy w gruncie pod XPS (W-286/W-187)"}
+
+# ---- schody SCH1 (P0→P1) i SCH2 (P1→P2): dwubiegowe, 2 × 9 podnóżków 17,5 / 28 cm (2h + s = 0,63 m), biegi 1,15 / 1,145 m
+def schody(sid, z_k, na_k, z0):
+    return {"id": sid, "z_kond": z_k, "na_kond": na_k, "liczba_stopni": 2 * N_BIEG, "wys_stopnia": H_ST, "szer_stopnia": S_ST,
+            "biegi": [{"start": [r((B1_X0 + B1_X1) / 2), Y_SCH0], "kierunek": [0, 1], "szer": r(B1_X1 - B1_X0), "stopni": N_BIEG},
+                      {"start": [7.82, Y_SPOCZ], "kierunek": [0, -1], "szer": r(B2_X1 - B2_X0), "stopni": N_BIEG}],
+            "spoczniki": [{"obrys": R(XC_e, Y_SPOCZ, XD_w, Y4_i), "rzedna": r(z0 + N_BIEG * H_ST)}],
+            "plyta": {"grubosc": 0.18}, "mat": "ZB_C25",
+            "uwagi": "płyty biegów ŻB 18 cm oparte na ścianach C/D i ściance środkowej; stopnie dębowe; prześwit nad biegiem ≈ 2,75 m (≥ 2,00)"}
+
+
+SCHODY = [schody("SCH1", "P0", "P1", 0.0), schody("SCH2", "P1", "P2", Z_P1)]
+
+
+def pochwyty(z0, n):
+    xw, xe = XC_e + 0.05, XD_w - 0.05
+    zs = z0 + N_BIEG * H_ST
+    return [{"id": f"BL{n}", "polilinia": [[r(xw), Y_SCH0, r(z0 + H_ST)], [r(xw), Y_SPOCZ, r(zs)], [r(xw), r(Y4_i - 0.05), r(zs)],
+                                          [r(xe), r(Y4_i - 0.05), r(zs)], [r(xe), Y_SPOCZ, r(zs)], [r(xe), Y3_n, r(z0 + 2 * N_BIEG * H_ST)]],
+             "wys": 0.90, "typ": "pochwyt przyścienny stal nierdzewna Ø42, 0,05 m od ściany (W-096); szerokość użytkowa biegu ≥ 1,05 m (W-091)"}]
+
+
+BALUSTRADY = pochwyty(0.0, 1) + pochwyty(Z_P1, 2)
+
+LAMELE = [
+    {"id": "LAM-S", "elewacja": "S", "linia": [[X2o, -EXT], [xE + EXT, -EXT]], "z_od": Z_OKAP_2[1], "z_do": Z_OKAP_3[0], "rozstaw": 0.12, "b": 0.04,
+     "h": 0.08, "odsuniecie": 0.15, "mat": "DREWNO_TERMO", "uwagi": "bryła A — pionowe lamele na 2 ryglach, konsole z przekładką (χ); stała osłona okien P2"},
+    {"id": "LAM-W", "elewacja": "W", "linia": [[X2o, -EXT], [X2o, y3 + EXT]], "z_od": Z_OKAP_2[1], "z_do": Z_OKAP_3[0], "rozstaw": 0.12, "b": 0.04,
+     "h": 0.08, "odsuniecie": 0.15, "mat": "DREWNO_TERMO", "uwagi": "czoło wspornika bryły A"},
+    {"id": "LAM-E", "elewacja": "E", "linia": [[xE + EXT, -EXT], [xE + EXT, y3 + EXT]], "z_od": 6.20, "z_do": Z_OKAP_3[0], "rozstaw": 0.12, "b": 0.04,
+     "h": 0.08, "odsuniecie": 0.15, "mat": "DREWNO_TERMO", "uwagi": "czoło wsch. bryły A"},
+    {"id": "LAM-P0", "elewacja": "S", "linia": [[5.90, 3.80], [8.70, 3.80]], "z_od": 0.0, "z_do": 2.10, "rozstaw": 0.10, "b": 0.03, "h": 0.06,
+     "odsuniecie": 0.0, "mat": "DAB_LAMELA", "uwagi": "ekran wewnętrzny P0 wydzielający pas komunikacyjny przy schodach (przeszczep J1 z W3)"},
+]
+
+TARASY = [
+    {"id": "T1", "obrys": P((-3.30, -3.30), (xE + EXT, -3.30), (xE + EXT, -EXT), (-EXT, -EXT), (-EXT, y3), (-3.30, y3)), "rzedna": -0.02,
+     "nawierzchnia": "deska kompozytowa na legarach i wspornikach regulowanych, szczeliny 5 mm; odwodnienie liniowe przy progach HS", "grubosc": 0.05,
+     "uwagi": "taras ogrodowy w kształcie L (pd. przed E pod okapem 1,00 m, zach. pod okapem 1,50 m) — 4,30 m od granicy zach."},
+    {"id": "T2", "obrys": R(9.40, y4 + EXT, xE - EXT, 10.35), "rzedna": -0.02, "nawierzchnia": "płyty betonowe 60×60 na podsypce, spadek 2 % od drzwi",
+     "grubosc": 0.08, "uwagi": "podest wejścia głównego pod daszkiem (bez stopni — cokół przejęty rzędną terenu)"},
+    {"id": "T3", "obrys": R(12.10, -1.30, 13.40, -EXT), "rzedna": -0.02, "nawierzchnia": "płyty betonowe 60×60, spadek 2 % od drzwi", "grubosc": 0.08,
+     "uwagi": "podest drzwi gospodarczych pod okapem E"},
+]

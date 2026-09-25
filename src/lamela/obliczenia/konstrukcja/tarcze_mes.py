@@ -95,6 +95,38 @@ class ObcLiniowe:
 
 
 @dataclass
+class ObcProfil:
+    """Obciążenie liniowe pionowe o dowolnym rozkładzie q(s) [kN/m] (dodatnie w dół) na poziomie z — punkty (s, q)
+    z interpolacją liniową (np. profil reakcji płyty z MES płytowego); nie zagęszcza siatki w kierunku x."""
+    przypadek: str
+    s: np.ndarray
+    q: np.ndarray
+    z: float
+    opis: str = ""
+
+    def __post_init__(self):
+        self.s = np.asarray(self.s, float)
+        self.q = np.asarray(self.q, float)
+        o = np.argsort(self.s)
+        self.s, self.q = self.s[o], self.q[o]
+
+    @property
+    def s0(self) -> float:
+        return float(self.s[0])
+
+    @property
+    def s1(self) -> float:
+        return float(self.s[-1])
+
+    def qf(self, x):
+        return np.interp(x, self.s, self.q, left=0.0, right=0.0)
+
+    @property
+    def wypadkowa(self) -> float:
+        return float(np.trapezoid(self.q, self.s))
+
+
+@dataclass
 class ObcSkupione:
     """Siła skupiona P [kN] (dodatnia w dół) i pozioma Px [kN] (dodatnia w +x) w punkcie (s, z)."""
     przypadek: str
@@ -253,6 +285,8 @@ class TarczaMES:
         for o in self.obciazenia:
             if isinstance(o, ObcLiniowe):
                 xs.update([round(o.s0, 6), round(o.s1, 6)])
+                zs.add(round(o.z, 6))
+            elif isinstance(o, ObcProfil):
                 zs.add(round(o.z, 6))
             elif isinstance(o, ObcSkupione):
                 xs.add(round(o.s, 6))
@@ -425,7 +459,8 @@ class TarczaMES:
                 self._linia_do_wektora(f, o, a)
         return f
 
-    def _linia_do_wektora(self, f: np.ndarray, o: ObcLiniowe, a: float):
+    def _linia_do_wektora(self, f: np.ndarray, o, a: float):
+        qfun = o.qf if isinstance(o, ObcProfil) else o.q
         edg = self._krawedzie_linii(o.z)
         j = int(np.argmin(np.abs(self.gz - o.z)))
         gxs = self.gx
@@ -439,9 +474,11 @@ class TarczaMES:
                 continue
             na, nb = self.node_grid[j, i], self.node_grid[j, i + 1]
             L = gxs[i + 1] - gxs[i]
-            for gp in _GP:
+            ngp = _GP if not isinstance(o, ObcProfil) else np.array([-0.8, -0.4, 0.0, 0.4, 0.8])   # reguła punktów środkowych
+            wgp = 1.0 if not isinstance(o, ObcProfil) else 2.0 / len(ngp)
+            for gp in ngp:
                 x = 0.5 * (xa + xb) + 0.5 * (xb - xa) * gp
-                q = float(o.q(x)) * a * 0.5 * (xb - xa)
+                q = float(qfun(x)) * a * 0.5 * (xb - xa) * wgp
                 Na = (gxs[i + 1] - x) / L
                 f[2 * na + 1] -= q * Na
                 f[2 * nb + 1] -= q * (1 - Na)
@@ -454,8 +491,8 @@ class TarczaMES:
                 else:
                     grp.append([s0, s1])
             for s0, s1 in grp:
-                xs_ = np.linspace(s0, s1, 21)
-                qq = o.q(xs_) * a
+                xs_ = np.linspace(s0, s1, 41)
+                qq = qfun(xs_) * a
                 R = float(np.trapezoid(qq, xs_))
                 if abs(R) < 1e-12:
                     continue
