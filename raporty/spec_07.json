@@ -1,5 +1,6 @@
 {
- "title": "Korekta Inwestora: „S” z przesuniętych brył, garaż w parterze — panel koncepcji uruchomiony ponownie",
+ "nr": 7,
+ "title": "Wariant W1 kompletny: przekroje, zagospodarowanie działki i wskaźniki MPZP; W2/W3 w toku",
  "stages": [
   [
    "Analiza szkicu — interpretacja v2 („S” z brył, garaż)",
@@ -51,5 +52,15 @@
   "W1 konstrukcja: wspornik II piętra przenoszony przez żelbetowe ściany-tarcze N i S; łączniki termoizolacyjne w płytach wspornikowych; ławy fundamentowe −1,10.",
   "W2 (ekonomia) — agent przekroczył limit długości odpowiedzi i kontynuuje; W3 czeka w kolejce (limit 2 agentów naraz na przepływ).",
   "Rejestr prawny: R1–R5, R8 zapisane; R6 (energia/sanitarne), R7 (elektryka) i weryfikacje adwersarskie w toku."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/docs/20_koncepcja/W1/zagospodarowanie.png",
+   "caption": "W1: zagospodarowanie działki 32×50 m (wskaźniki MPZP)"
+  },
+  {
+   "path": "/home/user/aihouse/docs/20_koncepcja/W1/przekroj.png",
+   "caption": "W1: przekroje A-A i B-B (ścieżka obciążeń wspornika)"
+  }
  ]
 }

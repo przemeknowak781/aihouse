@@ -49,7 +49,8 @@
   .val { font-variant-numeric: tabular-nums; min-width: 58px; text-align: right; font-size: 13px; }
   #info { font-size: 13px; color: var(--muted); min-height: 20px; }
   #info b { color: var(--ink); }
-  #toggle { display: none; position: fixed; top: 10px; left: 10px; z-index: 5; }
+  .head { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+  #toggle { display: none; min-width: 40px; }
   #msg { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; }
   #msg .box { pointer-events: auto; background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
     padding: 18px 20px; max-width: 420px; text-align: center; box-shadow: 0 6px 24px rgba(0,0,0,0.12); }
@@ -60,8 +61,8 @@
   @media (max-width: 700px) {
     .panel { top: auto; bottom: 0; left: 0; right: 0; width: auto; max-height: 52%; border-radius: 14px 14px 0 0;
       padding-bottom: calc(10px + env(safe-area-inset-bottom)); }
-    .panel.collapsed { max-height: 56px; overflow: hidden; }
-    #toggle { display: inline-block; top: auto; bottom: calc(10px + env(safe-area-inset-bottom)); left: auto; right: 12px; z-index: 6; }
+    .panel.collapsed { max-height: calc(70px + env(safe-area-inset-bottom)); overflow: hidden; }
+    #toggle { display: inline-block; }
   }
 </style>
 <script type="importmap">
@@ -75,10 +76,12 @@
 </head>
 <body>
 <div id="view"></div>
-<button id="toggle" aria-controls="panel" aria-expanded="true">Panel</button>
 <aside class="panel" id="panel" aria-label="Sterowanie modelem">
-  <h1 id="title">Model 3D</h1>
-  <div class="sub" id="subtitle">Generowany z <code>model/budynek.yaml</code></div>
+  <div class="head">
+    <div><h1 id="title">Model 3D</h1>
+    <div class="sub" id="subtitle">Generowany z <code>model/budynek.yaml</code></div></div>
+    <button id="toggle" aria-controls="panel" aria-expanded="true" title="Pokaż/ukryj panel">▾</button>
+  </div>
 
   <div class="sec">
     <h2>Warstwy</h2>
@@ -149,12 +152,12 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.shadowMap.type = THREE.PCFShadowMap;
 renderer.localClippingEnabled = true;
 $('view').appendChild(renderer.domElement);
 
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 6000);
+const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 4000);
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.maxPolarAngle = Math.PI * 0.495;
@@ -334,7 +337,9 @@ function setView(v) {
   const [cx, cy] = [T2B(c)[0], T2B(c)[1]];
   const zb = T2B(bbox.min)[2];
   const yS = T2B(new THREE.Vector3(0, 0, bbox.max.z))[1], yN = T2B(new THREE.Vector3(0, 0, bbox.min.z))[1];
-  const fitD = R / Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * (camera.aspect < 1 ? 1.5 : 1.05);
+  const vf = THREE.MathUtils.degToRad(camera.fov / 2);
+  const hf = Math.atan(Math.tan(vf) * camera.aspect);
+  const fitD = R / Math.tan(Math.min(vf, hf)) * 1.05;
   let pos, tgt;
   if (v === 'ogrod') { pos = [cx, yS - fitD * 0.9, zb + 1.9]; tgt = [cx, cy, zb + s.y * 0.38]; }
   else if (v === 'ulica') { pos = [cx, yN + fitD * 0.9, zb + 1.9]; tgt = [cx, cy, zb + s.y * 0.38]; }
@@ -409,7 +414,9 @@ renderer.domElement.addEventListener('pointerup', (e) => {
 });
 
 // ---------------- panel (telefon) ----------------
-$('toggle').addEventListener('click', () => { const c = $('panel').classList.toggle('collapsed'); $('toggle').setAttribute('aria-expanded', String(!c)); });
+function setCollapsed(c) { $('panel').classList.toggle('collapsed', c); $('toggle').setAttribute('aria-expanded', String(!c)); $('toggle').textContent = c ? '▴' : '▾'; }
+$('toggle').addEventListener('click', () => setCollapsed(!$('panel').classList.contains('collapsed')));
+if (window.matchMedia('(max-width: 700px)').matches) setCollapsed(true);
 
 function resize() {
   const w = window.innerWidth, h = window.innerHeight;
@@ -419,7 +426,15 @@ function resize() {
 }
 window.addEventListener('resize', resize);
 resize();
-renderer.setAnimationLoop(() => { controls.update(); sky.position.copy(camera.position); renderer.render(scene, camera); });
+renderer.setAnimationLoop(() => {
+  controls.update();
+  // płaszczyzna bliska zależna od odległości — precyzja bufora głębi dla cienkich warstw (np. membrana 1,5 mm)
+  const d = camera.position.distanceTo(controls.target);
+  const near = THREE.MathUtils.clamp(d / 120, 0.05, 4);
+  if (Math.abs(near - camera.near) > 0.01) { camera.near = near; camera.updateProjectionMatrix(); }
+  sky.position.copy(camera.position);
+  renderer.render(scene, camera);
+});
 loadUrl(MODEL_URL);
 window.__viewer = { scene, camera, groups: () => groups, setView, applyLighting, ready: () => !!root };
 </script>

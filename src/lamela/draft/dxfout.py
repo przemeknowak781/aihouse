@@ -95,8 +95,7 @@ def _emit(doc, space, canvas, off, ltscale, text_only_paper=False):
             if p.full:
                 space.add_circle(c, p.r, dxfattribs=a)
             else:
-                space.add_arc(c, p.r, p.a0 % 360.0, p.a1 % 360.0 if (p.a1 % 360.0) != (p.a0 % 360.0) else p.a0 + 360.0,
-                              dxfattribs=a)
+                space.add_arc(c, p.r, p.a0, p.a1, dxfattribs=a)
         elif isinstance(p, PFill):
             _ensure_layer(doc, p.layer)
             h = space.add_hatch(dxfattribs={"layer": p.layer})
@@ -180,8 +179,12 @@ def to_dxf(sheet, path, mode: str = "layout", layout_name: str | None = None) ->
         pass
     psp = doc.layouts.get(name)
     psp.page_setup(size=(sheet.width, sheet.height), margins=(0, 0, 0, 0), units="mm", offset=(0, 0),
-                   rotation=0, scale=1)
-    # usuń domyślną rzutnię główną tworzoną przez page_setup (zostaje wymagana rzutnia nr 1)
+                   rotation=0, scale=(1, 1), name="LAMELA")
+    # rzutnia główna (ID 1) = cały arkusz 1:1
+    try:
+        psp.reset_main_viewport(center=(sheet.width / 2, sheet.height / 2), size=(sheet.width, sheet.height))
+    except Exception:
+        pass
     _emit(doc, psp, sheet, (0.0, 0.0), 1.0)
     offs = vp_offsets(sheet)
     for vp, off in zip(sheet.viewports, offs):

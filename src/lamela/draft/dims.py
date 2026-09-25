@@ -53,9 +53,9 @@ def dim_runs(value_m: float, unit_: str = "cm", prefix: str = "", suffix: str = 
 
 # ================================================================================================ łańcuch wymiarowy
 def dim_chain(c, pts, at, direction="h", layer: str = DIM_LAYER, h: float = 2.5, unit_: str = "cm",
-              ext: str = "short", ext_len=(2.0, 1.8), gap_mm: float = 1.5, tick_mm: float = 2.6,
-              overshoot_mm: float = 1.8, text_gap_mm: float = 0.7, labels=None, min_seg: float = 1e-4,
-              tick_pen="srednia", mask: float = 0.0):
+              ext: str = "short", ext_len=(2.0, 2.0), gap_mm: float = 2.0, tick_mm: float = 3.0,
+              overshoot_mm: float = 2.0, text_gap_mm: float = 1.0, labels=None, min_seg: float = 1e-4,
+              tick_pen="cienka", mask: float = 0.0):
     """Łańcuch wymiarowy.
 
     pts        — punkty wymiarowane (współrzędne płótna); rzutowane na linię wymiarową,
@@ -63,6 +63,9 @@ def dim_chain(c, pts, at, direction="h", layer: str = DIM_LAYER, h: float = 2.5,
     direction  — 'h' | 'v' | kąt [°] kierunku linii wymiarowej,
     ext        — 'short': krótkie linie pomocnicze jednakowej długości (ext_len = (od strony obiektu, poza linię)
                  [mm]); 'full': od punktu (z odstępem gap_mm) do linii wymiarowej + nadmiar,
+    Wartości domyślne wg R4 pkt 3.5: ogranicznik 45° dł. 3 mm grubości linii wymiarowej, linia wymiarowa wystaje
+    2 mm poza skrajne pomocnicze, pomocnicze 2 mm poza linię wymiarową, zaczynają się 2 mm od obrysu, liczby 1 mm
+    nad linią; pierwszy ciąg ok. 10 mm od obrysu, kolejne co 7 mm (odległości ustala wywołujący).
     labels     — opcjonalne własne opisy odcinków (lista napisów/None),
     Zwraca słownik z pozycjami (do łączenia z kolejnymi łańcuchami).
     """
@@ -129,7 +132,11 @@ def dim_chain(c, pts, at, direction="h", layer: str = DIM_LAYER, h: float = 2.5,
             w = T.runs_width(runs, h) * k
             segs.append({"i": i, "t0": tt[i], "t1": tt[i + 1], "L": L, "w": w, "runs": runs})
         _place_dim_texts(c, segs, foot, d, r, up, sgn, ang, h, text_gap_mm, tick_mm, layer, mask)
-    return {"t": tt, "s": s_line, "d": d, "n": n}
+    info = {"t": tt, "s": s_line, "d": d, "n": n, "unit": unit_, "labels": labels}
+    if not hasattr(c, "dim_chains"):
+        c.dim_chains = []
+    c.dim_chains.append(info)
+    return info
 
 
 def _place_dim_texts(c, segs, foot, d, r, up, sgn, ang, h, gap_mm, tick_mm, layer, mask=0.0):
@@ -268,7 +275,7 @@ def opening_dim(c, center, wall_dir, width: float, height: float, sill: float | 
 
 # ================================================================================================ rzędne
 def level_section(c, pt, z: float | None = None, kind: str = "wyk", side: str = "right", text: str | None = None,
-                  abs_z: float | None = None, h: float = 2.5, nd: int = 2, stub_mm: float = 5.0,
+                  abs_z: float | None = None, h: float = 2.5, nd: int | None = None, stub_mm: float = 5.0,
                   layer: str = LEVEL_LAYER, size_mm: float = 2.2, stem_mm: float = 1.2, mask: float = 0.4):
     """Rzędna na przekroju/elewacji. ``pt`` — punkt na poziomie (wierzchołek trójkąta).
 
@@ -310,17 +317,17 @@ def level_section(c, pt, z: float | None = None, kind: str = "wyk", side: str = 
         c.line(top, stem_top)
         w = T.width(label, h) * k
         if abs_z is not None:
-            w = max(w, T.width(fmt.level_abs(abs_z), h) * k)
+            w = max(w, T.width(fmt.level_abs(abs_z, nd), h) * k)
         ref_end = stem_top + np.array([sg * (w + 1.5 * k), 0.0])
         c.line(stem_top, ref_end)
         tx = stem_top + np.array([sg * 0.8 * k, 0.7 * k])
         c.text(tx, label, h, 0.0, "left" if sg > 0 else "right", "baseline", mask=mask)
         if abs_z is not None:
-            c.text(stem_top + np.array([sg * 0.8 * k, -0.9 * k]), fmt.level_abs(abs_z), h, 0.0,
+            c.text(stem_top + np.array([sg * 0.8 * k, -0.9 * k]), fmt.level_abs(abs_z, nd), h, 0.0,
                    "left" if sg > 0 else "right", "top", mask=mask)
 
 
-def levels(c, x: float, items, side: str = "right", h: float = 2.5, nd: int = 2, gap_mm: float = 1.5,
+def levels(c, x: float, items, side: str = "right", h: float = 2.5, nd: int | None = None, gap_mm: float = 1.5,
            layer: str = LEVEL_LAYER, stub_mm: float = 4.0, **kw):
     """Zestaw rzędnych przy jednej krawędzi przekroju z automatycznym rozsuwaniem: znaczniki, które zachodziłyby
     na siebie w pionie, są przesuwane do kolejnej "kolumny" (w stronę ``side``).
@@ -350,7 +357,7 @@ def levels(c, x: float, items, side: str = "right", h: float = 2.5, nd: int = 2,
 
 
 def level_plan(c, pt, z: float | None = None, style: str = "x", text: str | None = None, h: float = 2.5,
-               nd: int = 2, layer: str = LEVEL_LAYER, direction: float = 1.0):
+               nd: int | None = None, layer: str = LEVEL_LAYER, direction: float = 1.0):
     """Rzędna na rzucie. style: 'x' — znak „X” + linia odniesienia z wartością nad nią (PN-B-01025);
     'o' — kółko (punkt wyznaczony przecięciem linii zarysu); 'box' — wartość w ramce (praktyka: rzędna posadzki)."""
     k = c.k

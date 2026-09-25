@@ -14,20 +14,38 @@ from dataclasses import dataclass, field
 ISO_LINEWEIGHTS = (0.13, 0.18, 0.25, 0.35, 0.5, 0.7, 1.0, 1.4, 2.0)
 PEN_ROLES = ("b_cienka", "cienka", "srednia", "gruba", "b_gruba")
 
-# Grupy linii zależne od podziałki (stosunek cienka:gruba:b.gruba ≈ 1:2:4 wg ISO 128-23, z linią średnią
-# stosowaną w polskiej praktyce dla krawędzi widocznych i warstw nienośnych).
-LINE_GROUPS: dict[str, dict[str, float]] = {
-    # arkusz (ramka, tabliczka, legendy — przestrzeń papieru)
-    "arkusz": {"b_cienka": 0.13, "cienka": 0.18, "srednia": 0.25, "gruba": 0.35, "b_gruba": 0.7},
-    # detale 1:1 … 1:25
-    "detal": {"b_cienka": 0.13, "cienka": 0.18, "srednia": 0.35, "gruba": 0.7, "b_gruba": 1.0},
-    # 1:50
-    "1:50": {"b_cienka": 0.13, "cienka": 0.18, "srednia": 0.25, "gruba": 0.5, "b_gruba": 0.7},
-    # 1:100
-    "1:100": {"b_cienka": 0.13, "cienka": 0.18, "srednia": 0.25, "gruba": 0.35, "b_gruba": 0.7},
-    # 1:200 … 1:1000 (PZT, sytuacje)
-    "1:200+": {"b_cienka": 0.13, "cienka": 0.13, "srednia": 0.18, "gruba": 0.35, "b_gruba": 0.5},
+# Grupy linii zależne od podziałki — profil "R4" (domyślny) wg docs/10_podstawy_prawne/R4_rysunek_budowlany_normy.md
+# pkt 3.2 (ISO 128-23 tabl. 2 / ISO 128-2 zał. B): 1:100 — grupa 0,5 (cienka 0,25 / gruba 0,5 / b. gruba 1,0,
+# symbole 0,35); 1:50 i detale — grupa 0,7 (0,35 / 0,7 / 1,4, symbole 0,5); PZT 1:500 — grubości z PN-B-01027
+# (obrys budynku 1,4; linie rozgraniczające, kanalizacja 0,7; wodociąg, jezdnie 0,5; granice działki, ogrodzenia 0,35;
+# opisy 0,25; wymiary i warstwice istniejące 0,18).
+# Rola "b_cienka" (kreskowanie, meble, łuki drzwi) = jeden stopień szeregu poniżej linii cienkiej grupy —
+# przyjęcie silnika dla czytelności (ISO: kreskowanie linią cienką); profil "R4-scisly" wyrównuje ją do cienkiej.
+LINE_PROFILES: dict[str, dict[str, dict[str, float]]] = {
+    "R4": {
+        "arkusz": {"b_cienka": 0.13, "cienka": 0.18, "srednia": 0.25, "gruba": 0.35, "b_gruba": 0.7},
+        "detal": {"b_cienka": 0.25, "cienka": 0.35, "srednia": 0.5, "gruba": 0.7, "b_gruba": 1.4},
+        "1:50": {"b_cienka": 0.25, "cienka": 0.35, "srednia": 0.5, "gruba": 0.7, "b_gruba": 1.4},
+        "1:100": {"b_cienka": 0.18, "cienka": 0.25, "srednia": 0.35, "gruba": 0.5, "b_gruba": 1.0},
+        "1:200+": {"b_cienka": 0.18, "cienka": 0.25, "srednia": 0.35, "gruba": 0.7, "b_gruba": 1.4},
+    },
+    # profil lżejszy (praktyka biur, wydruki A3 zmniejszone)
+    "lekki": {
+        "arkusz": {"b_cienka": 0.13, "cienka": 0.18, "srednia": 0.25, "gruba": 0.35, "b_gruba": 0.7},
+        "detal": {"b_cienka": 0.13, "cienka": 0.18, "srednia": 0.35, "gruba": 0.7, "b_gruba": 1.0},
+        "1:50": {"b_cienka": 0.13, "cienka": 0.18, "srednia": 0.25, "gruba": 0.5, "b_gruba": 0.7},
+        "1:100": {"b_cienka": 0.13, "cienka": 0.18, "srednia": 0.25, "gruba": 0.35, "b_gruba": 0.7},
+        "1:200+": {"b_cienka": 0.13, "cienka": 0.13, "srednia": 0.18, "gruba": 0.35, "b_gruba": 0.5},
+    },
 }
+LINE_PROFILES["R4-scisly"] = {g: dict(v, b_cienka=v["cienka"]) for g, v in LINE_PROFILES["R4"].items()}
+LINE_GROUPS: dict[str, dict[str, float]] = dict(LINE_PROFILES["R4"])
+
+
+def use_profile(name: str = "R4"):
+    """Przełącza profil grup linii: 'R4' (domyślny), 'R4-scisly', 'lekki'."""
+    LINE_GROUPS.clear()
+    LINE_GROUPS.update(LINE_PROFILES[name])
 
 
 def line_group_name(scale: float, paper: bool = False) -> str:
@@ -68,23 +86,40 @@ class Linetype:
         return sum(abs(x) for x in self.pattern)
 
 
+# Wzory wg PN-EN ISO 128-2 tabl. 4 (R4-C03): kreska 12d, przerwa 3d, kreska długa 24d, kropka ≤ d — dla d = 0,35 mm
+# (linia cienka grupy 0,7 / symbole grupy 0,5). Wzór jest wspólny dla linii cienkich i grubych jednego rodzaju.
+D_REF = 0.35
+_d = D_REF
 LINETYPES: dict[str, Linetype] = {lt.name: lt for lt in [
-    Linetype("CIAGLA", "Linia ciągła ________", ()),
-    Linetype("KRESKOWA", "Linia kreskowa (krawędzie niewidoczne, elementy nad płaszczyzną cięcia) __ __ __",
-             (4.0, -1.5)),
-    Linetype("KRESKOWA_DROBNA", "Linia kreskowa drobna _ _ _ _", (2.0, -1.0)),
-    Linetype("PUNKTOWA", "Linia punktowa (osie, osie symetrii) ____ . ____ . ____", (12.0, -1.5, 0.0, -1.5)),
-    Linetype("PUNKTOWA_KROTKA", "Linia punktowa krótka (linie cięcia) __ . __ . __", (6.0, -1.2, 0.0, -1.2)),
-    Linetype("DWUPUNKTOWA", "Linia dwupunktowa (elementy usuwane/projektowane, granice) ____ .. ____",
-             (12.0, -1.5, 0.0, -1.5, 0.0, -1.5)),
-    Linetype("KROPKOWA", "Linia kropkowa . . . . . .", (0.0, -1.0)),
-    Linetype("KRESKA_DLUGA", "Linia kreskowa długa (instalacje) ____  ____", (8.0, -2.0)),
+    Linetype("CIAGLA", "Linia ciągła (01)", ()),
+    Linetype("KRESKOWA", "Linia kreskowa (02): krawędzie niewidoczne, elementy pod/nad płaszczyzną cięcia",
+             (12 * _d, -3 * _d)),
+    Linetype("KRESKOWA_DROBNA", "Linia kreskowa drobna (kreska krótka 6d)", (6 * _d, -3 * _d)),
+    Linetype("PUNKTOWA", "Linia punktowa (04): osie, płaszczyzny przekroju", (24 * _d, -3 * _d, 0.0, -3 * _d)),
+    Linetype("PUNKTOWA_KROTKA", "Linia punktowa z kreską zwykłą (końce przekrojów, gaz)",
+             (12 * _d, -3 * _d, 0.0, -3 * _d)),
+    Linetype("DWUPUNKTOWA", "Linia dwupunktowa (05): położenia skrajne, części przyległe",
+             (24 * _d, -3 * _d, 0.0, -3 * _d, 0.0, -3 * _d)),
+    Linetype("KROPKOWA", "Linia kropkowa (07): elementy nieobjęte projektem", (0.0, -3 * _d)),
+    Linetype("KRESKA_DLUGA", "Linia kreskowa długa (instalacje)", (24 * _d, -3 * _d)),
+    Linetype("KRESKOWA_3_1", "Linia kreskowa 3/1 mm (paroizolacja, R4 pkt 3.8)", (3.0, -1.0)),
+    Linetype("HYDRO_OKNA", "Białe okna pasa izolacji przeciwwodnej (czarny 3 / biały 1,5 mm)", (1.5, -3.0)),
+    Linetype("WIELOPUNKTOWA", "Linia wielopunktowa (telekomunikacja, PN-B-01027)",
+             (9.0, -1.2, 0.0, -1.0, 0.0, -1.0, 0.0, -1.2)),
+    Linetype("KABEL_E", "Kabel elektroenergetyczny (PN-B-01027: kreskowa 2·9·2)", (9.0, -2.0)),
 ]}
 
 
 # ------------------------------------------------------------------------------------------------ pismo
-# Wysokości pisma (h = wysokość wielkich liter, PN-EN ISO 3098-0): szereg 1,8 · 2,5 · 3,5 · 5 · 7 · 10 · 14 mm
+# Wysokości pisma (h = wysokość wielkich liter, PN-EN ISO 3098-1 5.1): szereg 1,8 · 2,5 · 3,5 · 5 · 7 · 10 · 14 · 20 mm
 TEXT_H = {"xs": 1.8, "s": 2.5, "m": 3.5, "l": 5.0, "xl": 7.0, "xxl": 10.0}
+TEXT_SERIES = (1.8, 2.5, 3.5, 5.0, 7.0, 10.0, 14.0, 20.0)
+
+
+def snap_text_h(h: float) -> float:
+    """Największa wysokość z szeregu ISO 3098 nie większa od h (min. 1,8 mm)."""
+    ok = [x for x in TEXT_SERIES if x <= h + 1e-6]
+    return ok[-1] if ok else TEXT_SERIES[0]
 
 FONT_FILES = {
     "normal": ["/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf",

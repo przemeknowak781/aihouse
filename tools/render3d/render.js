@@ -27,7 +27,7 @@ function initRenderer() {
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.0;
   renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.shadowMap.type = THREE.PCFShadowMap;
   document.body.appendChild(renderer.domElement);
   pmrem = new THREE.PMREMGenerator(renderer);
   scene = new THREE.Scene();
@@ -61,7 +61,7 @@ function initRenderer() {
         c += sunCol * glow * (pow(s, 900.0)*6.0 + pow(s, 24.0)*0.18 + pow(s, 4.0)*0.06);
         gl_FragColor = vec4(c, 1.0); }`,
   });
-  skyMesh = new THREE.Mesh(new THREE.SphereGeometry(4000, 48, 24), skyMat);
+  skyMesh = new THREE.Mesh(new THREE.SphereGeometry(5000, 48, 24), skyMat);
   skyMesh.frustumCulled = false;
   scene.add(skyMesh);
 
@@ -207,7 +207,9 @@ async function render(cfg) {
     const hh = c.halfHeight;
     cam = new THREE.OrthographicCamera(-hh * aspect, hh * aspect, hh, -hh, 0.1, 5000);
   } else {
-    cam = new THREE.PerspectiveCamera(c.fov || 35, aspect, 0.1, 9000);
+    const dist = Math.hypot(c.pos[0] - c.target[0], c.pos[1] - c.target[1], c.pos[2] - c.target[2]);
+    const tgtDist = c.shift ? 20 : dist;
+    cam = new THREE.PerspectiveCamera(c.fov || 35, aspect, Math.max(0.2, Math.min(tgtDist, 120) / 90), 6000);
   }
   if (c.type !== 'ortho' && c.shift) {
     // obiektyw przesuwny (pion bez zbieżności): widok = górna część wirtualnej klatki wyższej o 2·shift

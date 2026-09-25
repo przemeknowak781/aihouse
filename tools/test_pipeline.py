@@ -438,6 +438,23 @@ def _serve_root():
     return httpd, port
 
 
+def _route_cdn_local(ctx):
+    """Żądania do cdn.jsdelivr.net/npm/three@X/… obsługiwane z tools/render3d/node_modules/three (ta sama wersja).
+    Sandbox przeglądarki nie ufa CA proxy; test sprawdza kod podglądu offline, URL-e CDN sprawdza curl/produkcja."""
+    base = ROOT / "tools" / "render3d" / "node_modules" / "three"
+
+    def handler(route):
+        url = route.request.url.split("?")[0]
+        rel = url.split("/npm/", 1)[1].split("/", 1)[1]
+        fp = base / rel
+        if fp.exists():
+            route.fulfill(status=200, body=fp.read_bytes(), headers={"Content-Type": "text/javascript",
+                                                                     "Access-Control-Allow-Origin": "*"})
+        else:
+            route.fulfill(status=404, body=b"")
+    ctx.route("https://cdn.jsdelivr.net/npm/three@*/**", handler)
+
+
 def test_podglad_www():
     from playwright.sync_api import sync_playwright
     glb = OUT / "dom_testowy.glb"
@@ -451,6 +468,7 @@ def test_podglad_www():
                                    args=["--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist"])
             for name, vp in (("desktop", {"width": 1440, "height": 900}), ("telefon", {"width": 390, "height": 844})):
                 ctx = br.new_context(viewport=vp, device_scale_factor=1)
+                _route_cdn_local(ctx)
                 pg = ctx.new_page()
                 errs = []
                 pg.on("console", lambda m: errs.append(m.text) if m.type == "error" else None)
@@ -463,8 +481,7 @@ def test_podglad_www():
                 shots.append(fp)
                 if name == "desktop":
                     pg.select_option("#clipMode", "z")
-                    pg.fill("#clip", "0.40")
-                    pg.dispatch_event("#clip", "input")
+                    pg.eval_on_selector("#clip", "e => { e.value = '0.40'; e.dispatchEvent(new Event('input')); }")
                     pg.click("#evening")
                     pg.click("[data-view=se]")
                     pg.wait_for_timeout(2500)

@@ -58,7 +58,8 @@ Skróty użyte w dokumencie:
    > **4.** W przypadku złożenia przez inwestora oświadczenia, o którym mowa w ust. 1, przepisy wydane na podstawie art. 7 ust. 2 pkt 1, obowiązujące do dnia 19 września 2026 r. stosuje się do decyzji administracyjnych dotyczących całego zamierzenia budowlanego.
 
    Pozostałe przepisy epizodyczne:
-   * **Art. 102b** pozwala stosować stare WT do budowy z art. 29 ust. 2 i robót z art. 29 ust. 4, czyli bez projektu.
+   * **Art. 102a ust. 3** rozciąga ust. 1 na dokumenty legalizacyjne (art. 48b ust. 2 i 3 PB) i obowiązek z art. 51 ust. 1 pkt 3 PB. Dom LAMELA tego nie dotyczy.
+   * **Art. 102b** pozwala inwestorowi stosować stare WT do budowy z art. 29 ust. 2 i robót z art. 29 ust. 4 PB, czyli takich, które nie wymagają ani pozwolenia na budowę, ani zgłoszenia. *(Poprawka weryfikacji: wcześniej było „czyli bez projektu”.)*
    * **Art. 102c** pozwala przez 18 miesięcy utrzymywać i użytkować budynki mieszkalne według przepisów wydanych na podstawie art. 7 ust. 3 pkt 1, tj. rozp. z 1999 r.
 4. **Stan dla wniosków składanych po 20.09.2026.**
    * **Z oświadczeniem z art. 102a:** PZT, PAB i PT sporządza się według WT w brzmieniu obowiązującym do 19.09.2026. Brzmienie to nie zmieniło się od 15.08.2024 (ostatnia zmiana: Dz.U. 2024 poz. 726). WT stosuje się także do wszystkich decyzji dotyczących zamierzenia, w tym zmian pozwolenia.
@@ -129,7 +130,7 @@ Kolumna „2023–24” = zmiana z Dz.U. 2023/2442 lub 2024/726. Linki w kolumni
 
 | ID | Wymaganie | Podstawa | URL | Pierw.? | Uwagi |
 |---|---|---|---|---|---|
-| D-01 | **Wysokość budynku** mierzy się „od poziomu terenu przy najniżej położonym wejściu do budynku lub jego części, znajdującym się na pierwszej kondygnacji nadziemnej budynku, do górnej powierzchni najwyżej położonego stropu, łącznie z grubością izolacji cieplnej i warstwy ją osłaniającej, bez uwzględniania wyniesionych ponad tę płaszczyznę maszynowni dźwigów i innych pomieszczeń technicznych” | WT § 6 | [WT] | TAK | Attyki i PV nie wliczają się do wysokości wg WT. MPZP może mierzyć inaczej |
+| D-01 | **Wysokość budynku** mierzy się „od poziomu terenu przy najniżej położonym wejściu do budynku lub jego części, znajdującym się na pierwszej kondygnacji nadziemnej budynku, do górnej powierzchni najwyżej położonego stropu, łącznie z grubością izolacji cieplnej i warstwy ją osłaniającej, bez uwzględniania wyniesionych ponad tę płaszczyznę maszynowni dźwigów i innych pomieszczeń technicznych, **bądź do najwyżej położonego punktu stropodachu lub konstrukcji przekrycia budynku znajdującego się bezpośrednio nad pomieszczeniami przeznaczonymi na pobyt ludzi**” | WT § 6 | [WT] | TAK | Attyki i PV nie wliczają się do wysokości wg WT. MPZP może mierzyć inaczej. *Weryfikacja: uzupełniono pominiętą drugą część definicji (wariant „bądź do najwyżej położonego punktu stropodachu…”). Przy stropodachach ze spadkiem liczyć do najwyższego punktu nad pomieszczeniami.* |
 | D-02 | Grupa wysokości: **niski (N)**, tj. „do 12 m włącznie nad poziomem terenu lub mieszkalne o wysokości do 4 kondygnacji nadziemnych włącznie” | WT § 8 pkt 1 | [WT] | TAK | Dom LAMELA = N |
 | D-03 | **Kondygnacja**: pozioma część budynku między posadzkami. Za kondygnację uważa się też „przestrzeń na urządzenia techniczne, mającą średnią wysokość w świetle większą niż 2 m”. Nie są kondygnacją nadbudówki ponad dachem (obudowa wyjścia z klatki, pomieszczenia techniczne) | WT § 3 pkt 16 | [WT] | TAK | Pilnować limitu 3 kondygnacji nadziemnych (zob. P-02) |
 | D-04 | Kondygnacja podziemna: zagłębiona co najmniej w połowie wysokości w świetle. Nadziemna: każda inna | WT § 3 pkt 17–18 | [WT] | TAK | Brak podziemia |
@@ -203,10 +204,10 @@ Kolumna „2023–24” = zmiana z Dz.U. 2023/2442 lub 2024/726. Linki w kolumni
 | B-20 | Pomieszczenie techniczne z urządzeniami hałaśliwymi (np. jednostka wewnętrzna pompy ciepła, centrala) obok pomieszczeń na stały pobyt wymaga rozwiązań chroniących przed hałasem i drganiami. Podpory i złącza nie mogą przenosić drgań | WT § 96 ust. 1–2 | [WT] | TAK | — |
 | B-21 | Pomieszczenie techniczne i gospodarcze: wysokość **≥ 2,0 m**. Drzwi i przejścia pod przewodami **≥ 1,9 m** | WT § 97 ust. 1–2 | [WT] | TAK | — |
 | B-22 | Garaż: wysokość w świetle konstrukcji **≥ 2,2 m**, do spodu instalacji ≥ 2,0 m. Wrota **≥ 2,3 m** szerokości i **≥ 2,0 m** wysokości w świetle. Oświetlenie elektryczne | WT § 102 pkt 1–3 | [WT] | TAK | — |
-| B-23 | Odległość dłuższej krawędzi stanowiska od ściany **≥ 0,3 m**, od słupa ≥ 0,1 m. Droga manewrowa w garażu jednoprzestrzennym przy ustawieniu prostopadłym ≥ 5,0 m | WT § 104 ust. 1 pkt 1, ust. 3 | [WT] | TAK | Minimum: 0,3 + 2 × 2,5 + 0,3 = **5,6 m** szerokości w świetle (= brief). Zalecane 5,9–6,0 m dla komfortu |
+| B-23 | Odległość dłuższej krawędzi stanowiska od ściany **≥ 0,3 m**, od słupa ≥ 0,1 m. Droga manewrowa w garażu jednoprzestrzennym przy ustawieniu prostopadłym ≥ 5,0 m | WT § 104 ust. 1 pkt 1, ust. 3 | [WT] | TAK | Minimum: 0,3 + 2 × 2,5 + 0,3 = **5,6 m** szerokości w świetle (= brief). Zalecane 5,9–6,0 m dla komfortu. *Weryfikacja: § 104 nie podaje szerokości stanowiska w garażu. Wartość 2,5 m wzięto z § 21 ust. 1 pkt 1, który dotyczy stanowisk postojowych na działce (Dział II rozdz. 3), więc przeniesienie jej do garażu to interpretacja* |
 | B-24 | Garaż w budynku o innym przeznaczeniu: ściany i stropy z izolacyjnością akustyczną wg § 326 oraz **szczelne na spaliny i opary** względem pomieszczeń na pobyt ludzi | WT § 106 ust. 1 | [WT] | TAK | Drzwi garaż–dom szczelne, z samozamykaczem (zalecenie) |
 | B-25 | Posadzka garażu ze spadkiem do wpustu. W zabudowie jednorodzinnej dopuszcza się spadek na nieutwardzony teren. Krawędzie posadzki z progiem **30 mm**, z zastrzeżeniem ust. 1 | WT § 107 ust. 1–2 | [WT] | TAK | — |
-| B-26 | Wentylacja garażu zamkniętego. **Nieogrzewany** nadziemny: otwory netto **≥ 0,04 m²** na stanowisko (2 st. = 0,08 m²). **Ogrzewany** do 10 stanowisk: co najmniej grawitacyjna, **1,5 wymiany/h** | WT § 108 ust. 1 pkt 1–2 | [WT] | TAK | Zależnie od decyzji: garaż ogrzewany czy nie |
+| B-26 | Wentylacja garażu zamkniętego. **Nieogrzewany** nadziemny: otwory netto **≥ 0,04 m²** na stanowisko (2 st. = 0,08 m²). **Ogrzewany** do 10 stanowisk: co najmniej grawitacyjna, **1,5 wymiany/h** | WT § 108 ust. 1 pkt 1–2 | [WT] | TAK | Zależnie od decyzji: garaż ogrzewany czy nie. *Weryfikacja: przepis mówi o 0,04 m² „na każde, wydzielone przegrodami budowlanymi, stanowisko postojowe”, a otwory mają być w ścianach przeciwległych, bocznych lub we wrotach. Dla garażu 2-stanowiskowego bez przegród przyjęcie 2 × 0,04 = 0,08 m² jest ostrożną interpretacją* |
 
 ### 2.6 Schody, balustrady, okna, bezpieczeństwo użytkowania
 
@@ -227,7 +228,7 @@ Kolumna „2023–24” = zmiana z Dz.U. 2023/2442 lub 2024/726. Linki w kolumni
 | K-13 | Daszki, balkony i osłony nad chodnikiem: ≥ 2,4 m nad chodnikiem | WT § 293 ust. 2 | [WT] | TAK | Dotyczy chodników publicznych, więc raczej nie nas |
 | K-14 | Zakaz odbojów i wycieraczek wystających ponad płaszczyznę dojścia w szerokości drzwi wejściowych. Kratki ażurowe na trasie przejścia: prześwit ≤ 20 mm | WT § 294 ust. 2–3 | [WT] | TAK | Wycieraczka wpuszczana |
 | K-15 | Przezroczyste skrzydła drzwi: oznakowane i ze szkła bezpiecznego | WT § 295 | [WT] | TAK | Drzwi HS i przeszklenia salonu |
-| K-16 | **Okna powyżej drugiej kondygnacji nadziemnej** (u nas P2) otwierane do wewnątrz. Dopuszcza się okna uchylne na zewnątrz o poziomej osi, wychylenie ≤ 0,6 m, ze szkłem bezpiecznym | WT § 299 ust. 1–2 | [WT] | TAK | Okna przesuwne: interpretacja (zob. ryzyka) |
+| K-16 | **Okna powyżej drugiej kondygnacji nadziemnej** (u nas P2) otwierane do wewnątrz. To samo dotyczy okien na niższych kondygnacjach, które wychodzą na chodniki lub inne przejścia dla pieszych *(uzupełnienie weryfikacji)*. Dopuszcza się okna uchylne na zewnątrz o poziomej osi, wychylenie ≤ 0,6 m, ze szkłem bezpiecznym | WT § 299 ust. 1–2 | [WT] | TAK | Okna przesuwne: interpretacja (zob. ryzyka) |
 | K-17 | **Podokiennik ≥ 0,85 m** nad podłogą na kondygnacjach < 25 m, z wyjątkiem przyziemia. Można go obniżyć, stosując balustradę do wymaganej wysokości albo w tej części skrzydło nieotwierane ze szkłem o podwyższonej wytrzymałości | WT § 301 ust. 1, 3 | [WT] | TAK | P1 (boks C) i P2: dolna część stała ze szkła laminowanego do ≥ 0,85 m lub balustrada ≥ 0,90 m |
 | K-18 | Temperatura powierzchni nieosłoniętych elementów c.o. ≤ 90 °C | WT § 302 ust. 1 | [WT] | TAK | Ogrzewanie podłogowe spełnia |
 | K-19 | Nawierzchnie dojść, schodów i podłóg niepowodujące poślizgu, także w garażu | WT § 305 ust. 1 | [WT] | TAK | — |
@@ -244,7 +245,7 @@ Kolumna „2023–24” = zmiana z Dz.U. 2023/2442 lub 2024/726. Linki w kolumni
 | IW-03 | Zestaw wodomierza głównego wg PN-B-10720:1998. Za nim zabezpieczenie przed przepływem zwrotnym | WT § 115 ust. 1–2 | [WT] | TAK | — |
 | IW-04 | Wodomierz główny w piwnicy lub **na parterze** w wydzielonym, dostępnym miejscu, zabezpieczonym przed zalaniem, mrozem i dostępem osób postronnych. Studzienka poza budynkiem tylko wtedy, gdy nie da się wydzielić miejsca na parterze budynku niepodpiwniczonego. Metalową instalację łączy się przewodem przed i za wodomierzem | WT § 116 ust. 1–3 | [WT] | TAK | Pomieszczenie techniczne P0 |
 | IW-05 | Studzienka wodomierzowa (jeśli jest): właz ≥ 0,6 m, dwie pokrywy, zagłębienie do wyczerpywania wody, wentylacja | WT § 117 | [WT] | TAK | Wariant awaryjny |
-| IW-06 | C.w.u.: temperatura w punktach czerpalnych **55–60 °C**. Możliwość dezynfekcji termicznej **70–80 °C**. Zabezpieczenie przed przekroczeniem ciśnienia i temperatury (PN-B-02440:1976). Ciepła woda podłączona z lewej strony | WT § 120 ust. 2, 2a, 4, 5 | [WT] | TAK | Pompa ciepła + grzałka / cykl antylegionella |
+| IW-06 | C.w.u.: temperatura w punktach czerpalnych **55–60 °C**. Instalacja musi umożliwiać ciągłą lub okresową dezynfekcję metodą chemiczną lub fizyczną, w tym okresowo metodą cieplną. **Przy dezynfekcji cieplnej** w punktach czerpalnych trzeba uzyskać **70–80 °C** (§ 120 ust. 2a). *Weryfikacja: wcześniej było „możliwość dezynfekcji termicznej 70–80 °C”, a przepis nie narzuca metody termicznej.* Zabezpieczenie przed przekroczeniem ciśnienia i temperatury (PN-B-02440:1976). Ciepła woda podłączona z lewej strony | WT § 120 ust. 2, 2a, 4, 5 | [WT] | TAK | Pompa ciepła + grzałka / cykl antylegionella |
 | IW-07 | Cyrkulacja c.w.u. **nie jest wymagana** w domach jednorodzinnych | WT § 120 ust. 1 | [WT] | TAK | Decyzja projektowa |
 | IW-08 | Gdy c.w.u. przygotowuje instalacja ogrzewcza, w przerwach jej pracy trzeba zapewnić inny sposób podgrzewania | WT § 119 | [WT] | TAK | Grzałka w zasobniku |
 | IW-09 | Izolacja przewodów c.w.u. i c.o. wg zał. 2 pkt 1.5 (λ = 0,035). Średnica wewnętrzna ≤ 22 mm: 20 mm; 22–35 mm: 30 mm; 35–100 mm: równa średnicy; > 100 mm: 100 mm. Przejścia przez przegrody: 50%. Przewody w podłodze (lp. 7): 6 mm | WT § 118 ust. 3, § 133 ust. 9, zał. 2 pkt 1.5 | [WT] | TAK | Lp. 6–7 mówią o „różnych użytkownikach”. Stosowanie 6 mm dla podłogi w domu jednorodzinnym to interpretacja |
@@ -277,7 +278,7 @@ Kolumna „2023–24” = zmiana z Dz.U. 2023/2442 lub 2024/726. Linki w kolumni
 | IV-14 | Moc właściwa wentylatorów (SFP). Nawiew z odzyskiem ciepła **≤ 1,60 kW/(m³/s)**, wywiew z odzyskiem **≤ 1,00**. Dodatek +0,3 przy odzysku > 67% | WT § 154 ust. 10–11 | [WT] | TAK | Dobór centrali w PT |
 | IV-15 | Połączenia wentylatorów z przewodami elastyczne, ≤ 0,25 m, materiał co najmniej trudno zapalny | WT § 154 ust. 8, § 267 ust. 7 | [WT] | TAK | — |
 | IV-16 | Przy wentylacji innej niż mechaniczna nawiewna: nawiewniki w oknach lub przegrodach, a okna otwierane co najmniej w 50% wymaganej powierzchni | WT § 155 ust. 1, 3 | [WT] | TAK | Nie dotyczy przy wentylacji mechanicznej nawiewno-wywiewnej |
-| IE-01 | Instalacja elektryczna zapewnia dostawę energii (w tym infrastrukturę ładowania EV wg ustawy o elektromobilności), ochronę przed porażeniem, przepięciami, pożarem i szkodliwym oddziaływaniem | WT § 180 pkt 1–3 | [WT] | TAK | Wymogi ustawy o elektromobilności dla domu jednorodzinnego: NIEZWERYFIKOWANE |
+| IE-01 | Instalacja elektryczna zapewnia dostawę energii (w tym infrastrukturę ładowania EV wg ustawy o elektromobilności), ochronę przed porażeniem, przepięciami, pożarem i szkodliwym oddziaływaniem | WT § 180 pkt 1–3 | [WT], [EM1243] | TAK | *Weryfikacja (było: NIEZWERYFIKOWANE):* ustawa o elektromobilności i paliwach alternatywnych, t.j. **Dz.U. 2026 poz. 1243**, nakłada obowiązki projektowe infrastruktury ładowania tylko na: budynki UP i mieszkalne wielorodzinne w gminach z art. 60 ust. 1 (art. 12 ust. 1: moc przyłączeniowa pod punkty ≥ 3,7 kW) oraz budynki niemieszkalne z > 10 stanowiskami (art. 12a). **Dla domu jednorodzinnego obowiązku nie ma.** Obwód EV to dobra praktyka |
 | IE-02 | Stosuje się: (1) złącze w miejscu dostępnym i zabezpieczonym; (2) **oddzielny przewód ochronny i neutralny**; (3) **wyłączniki różnicowoprądowe**; (4) wyłączniki nadprądowe; (5) **selektywność**; (6) przeciwpożarowe wyłączniki prądu; (7) **połączenia wyrównawcze główne i miejscowe**; (8) trasy w liniach prostych równoległych do krawędzi; (9) **żyły wyłącznie miedziane do 10 mm²**; (10) **ochronę przeciwprzepięciową** | WT § 183 ust. 1 pkt 1–10 | [WT] | TAK | TN-S |
 | IE-03 | Połączeniami wyrównawczymi obejmuje się m.in. metalowe instalacje wodne, kanalizacyjne i c.o., kanały wentylacyjne, osłony urządzeń teletechnicznych | WT § 183 ust. 1a | [WT] | TAK | — |
 | IE-04 | **Przeciwpożarowy wyłącznik prądu** w strefach pożarowych o kubaturze **> 1000 m³**. Umieszczony przy głównym wejściu lub złączu, oznakowany | WT § 183 ust. 2–3 | [WT] | TAK | Obliczyć kubaturę strefy (cały budynek z garażem). Prawdopodobnie > 1000 m³, więc **PWP wymagany** |
@@ -443,7 +444,7 @@ Kolumna „2023–24” = zmiana z Dz.U. 2023/2442 lub 2024/726. Linki w kolumni
 20. **Woda:**
    * wodomierz w budynku na P0 (§ 116), zawór antyskażeniowy za wodomierzem wg PN-EN 1717 (§ 115 ust. 2);
    * ciśnienie przy punktach 0,05–0,6 MPa (reduktor, gdy sieć przekracza);
-   * c.w.u. 55–60 °C i możliwość dezynfekcji 70–80 °C (grzałka lub cykl pompy ciepła);
+   * c.w.u. 55–60 °C i możliwość dezynfekcji (§ 120 ust. 2a). Przy wybranej metodzie cieplnej trzeba uzyskać 70–80 °C w punktach czerpalnych (grzałka lub cykl pompy ciepła);
    * cyrkulacja opcjonalna;
    * izolacje wg zał. 2 pkt 1.5.
 21. **Kanalizacja:**
@@ -473,7 +474,7 @@ Kolumna „2023–24” = zmiana z Dz.U. 2023/2442 lub 2024/726. Linki w kolumni
    **PWP:** obliczyć kubaturę strefy pożarowej (cały budynek z garażem, § 3 pkt 24). Jeśli **> 1000 m³**, co jest prawdopodobne, zaprojektować przeciwpożarowy wyłącznik prądu przy wejściu lub złączu.
 
    **LPS:** analiza ryzyka wg PN-EN 62305-2 (PV na dachu). Dodatkowo obwód dla ładowarki EV w garażu (§ 180 pkt 1, dobra praktyka).
-25. **Przepusty** instalacji przez ściany i płytę poniżej terenu **gazoszczelne** (§ 234 ust. 4, bo w ulicy jest gaz).
+25. **Przepusty** instalacji przez ściany zewnętrzne poniżej terenu muszą być **gazoszczelne** (§ 234 ust. 4). Wymóg obowiązuje zawsze, niezależnie od sieci gazowej w ulicy. Przepusty przez płytę na gruncie wykonać tak samo jako dobrą praktykę, bo przepis wymienia tylko ściany. *(Poprawka weryfikacji: wcześniej było „przez ściany i płytę… bo w ulicy jest gaz”.)*
 
 ### 3.6 Energia i fizyka budowli
 26. Przyjąć wartości docelowe z zapasem względem Umax:
@@ -527,8 +528,8 @@ Kolumna „2023–24” = zmiana z Dz.U. 2023/2442 lub 2024/726. Linki w kolumni
 12. **Okna przesuwne (HS) na P2** a § 299 ust. 1 („skrzydła otwierane do wewnątrz”): przepis nie odnosi się do okien przesuwnych, co jest przedmiotem interpretacji. Bezpieczniej: HS przesuwne od wewnątrz z dolną szybą stałą lub balustradą (K-17).
 13. **Wysokość budynku wg MPZP vs § 6 WT:** MPZP (fikcyjny) musi jednoznacznie określić sposób pomiaru, w tym attyki i wyłazu. Przy 3 kondygnacjach po ok. 3,15 m zapas do 11,0 m wynosi ok. 0,6–1,0 m.
 14. **Analiza akustyczna z § 23 pkt 4a rozporządzenia o projekcie budowlanym** (od 01.08.2024) i jej zakres dla domu z 1 lokalem: poza R3, do rozstrzygnięcia w R2.
-15. **§ 180 pkt 1 WT: infrastruktura ładowania EV „zgodnie z przepisami ustawy o elektromobilności”.** Czy ustawa stawia wymagania dla nowych domów jednorodzinnych: NIEZWERYFIKOWANE.
-16. **Dezynfekcja termiczna c.w.u. 70–80 °C w punktach czerpalnych** (§ 120 ust. 2a) przy pompie ciepła wymaga grzałki lub zasobnika o odpowiedniej temperaturze. Potwierdzić w PT.
+15. **§ 180 pkt 1 WT: infrastruktura ładowania EV „zgodnie z przepisami ustawy o elektromobilności”.** *Rozstrzygnięte w weryfikacji.* Ustawa (t.j. Dz.U. 2026 poz. 1243, art. 12 i 12a) nie nakłada obowiązków na domy jednorodzinne.
+16. **Dezynfekcja c.w.u.** (§ 120 ust. 2a): wymagana jest możliwość dezynfekcji chemicznej lub fizycznej. Jeśli wybierzemy metodę cieplną, w punktach czerpalnych musi być 70–80 °C, co przy pompie ciepła wymaga grzałki lub zasobnika o odpowiedniej temperaturze. Metodę wskazać w PT.
 17. **Postępowanie po 20.03.2028** (np. zmiana pozwolenia): obejmuje je art. 102a ust. 4 („decyzji administracyjnych dotyczących całego zamierzenia”). Użytkowanie (art. 102c) stare przepisy obejmują tylko przez 18 miesięcy, co jest poza zakresem projektu.
 
 ---
@@ -553,6 +554,7 @@ Kolumna „2023–24” = zmiana z Dz.U. 2023/2442 lub 2024/726. Linki w kolumni
 [N1847]: https://api.sejm.gov.pl/eli/acts/DU/2025/1847/text.pdf
 [RZF597]: https://api.sejm.gov.pl/eli/acts/DU/2026/597/text.pdf
 [H112]: https://api.sejm.gov.pl/eli/acts/DU/2014/112/text.pdf
+[EM1243]: https://api.sejm.gov.pl/eli/acts/DU/2026/1243/text.pdf
 [DU2026]: https://api.sejm.gov.pl/eli/acts/DU/2026
 [SEARCH]: https://api.sejm.gov.pl/eli/acts/search?publisher=DU&title=warunk%C3%B3w%20technicznych%2C%20jakim%20powinny%20odpowiada%C4%87%20budynki&limit=50
 
@@ -596,3 +598,81 @@ Kolumna „2023–24” = zmiana z Dz.U. 2023/2442 lub 2024/726. Linki w kolumni
 * RCL, projekt 12398903 (niedostępny przy weryfikacji): <https://legislacja.rcl.gov.pl/projekt/12398903>
 * pozytywniezbudowani.pl, 19.07.2026: <https://pozytywniezbudowani.pl/blog/wt2026-warunki-techniczne-co-oznaczaja-dla-projektu/>
 * klimatyzacja.pl (wartości PN-B-03430/Az3): <https://www.klimatyzacja.pl/wentylacja/poradnik/normy-i-przepisy/ilosci-powietrza-w-polskich-normach>
+
+---
+
+## 6. Weryfikacja niezależna (2026-09-25)
+
+**Kto i jak weryfikował.** Weryfikację przeprowadził niezależny weryfikator-adwersarz. Wszystkie teksty aktów pobrał od nowa z API ELI Sejmu (PDF → pymupdf) do katalogu `scratchpad/research/R3ver/`, bez korzystania z plików roboczych autora.
+
+**Stan Dz.U. na 25.09.2026:**
+* wykaz DU/2026 kończy się na poz. **1244** (23.09.2026);
+* poz. 1245, 1246, 1247, 1250 i 1260 zwracają HTTP 404;
+* wyszukiwanie ELI po tytule „warunków technicznych” od 01.01.2025 nie zwraca nowego rozporządzenia o WT dla budynków, a jedynie WT dla budowli hydrotechnicznych (2026/692), budowli kolejowych (2026/1225), budowli ochronnych (2025/1548, MSWiA) i inne akty niezwiązane z tematem.
+
+### 6.1 Potwierdzone (źródło pierwotne, tekst aktu)
+
+**Status prawny WT**
+* **S-01, CF-01.** WT z 2002 r. oraz t.j. 2022/1225, 2022/248, 2023/2442, 2024/474 i 2024/726 mają w ELI status „uznany za uchylony”, repealDate 2026-09-21 i „Uchylenia wynikające z: DU/2019/1696”.
+* **Art. 66 UD.** Historia terminu potwierdzona na tekstach: 36 mies. (2019/1696), 60 mies. (2022/975, art. 2, w życie dzień po ogłoszeniu 10.05.2022), 84 mies. (2024/1081, art. 1, w życie 03.08.2024).
+* **Wejście w życie UD:** 20.09.2019.
+* **Inne akty uznane za uchylone:** 1999/836, 2013/640 (sieci gazowe) i 1995/271.
+
+**Przepis epizodyczny (Dz.U. 2026 poz. 1161)**
+* **S-02, CF-02.** Brak nowych WT dla budynków.
+* **S-03 do S-05, CF-03, CF-04.** Brzmienie art. 102a ust. 1, 2 i 4, art. 102b i art. 102c potwierdzono słowo w słowo.
+* **Daty 1161:** ogłoszenie 01.09.2026; art. 5 (art. 2 pkt 4 w życie dzień po ogłoszeniu, reszta po 30 dniach); ELI entryIntoForce 2026-10-02.
+
+**PB i wzór PB-1**
+* **S-06, S-07, CF-05.** Art. 35 ust. 1 pkt 2 i art. 5 ust. 1 PB (t.j. 2026/524). Art. 35 ust. 1 nie przewiduje sprawdzania zgodności PAB z WT.
+* **PB-1.** Wzór PB-1 (Dz.U. 2026 poz. 255, MFiG z 17.02.2026, w życie 04.03.2026) nie ma pola na oświadczenie z art. 102a. Ma pole „Inne (wymagane przepisami prawa)”.
+
+**Ministerstwo i zmiany WT**
+* **Minister.** Odnośnik 1 do Dz.U. 2026 poz. 597: działem budownictwa kieruje Minister Finansów i Gospodarki (rozp. PRM z 25.07.2025, Dz.U. 2025 poz. 997).
+* **Tabela 1.2.** Zakres zmian 2022/248 (w życie 17.02.2022), 2023/2442 (§ 3 pkt 27, § 12 ust. 1–3, 6, 8, 10, 11, § 20, § 39, § 40, § 56a, § 76, § 85a, § 95a, § 98a, § 326, zał. 1) oraz 2024/474 (przesunięcie na 01.08.2024).
+* **2024/726.** Zmiany § 12 ust. 1 (część wspólna), ust. 1a i 10a, zał. 1a, § 216 ust. 2 pkt 4–5, § 232 ust. 8–9, § 249 ust. 5a; w życie 3 miesiące od ogłoszenia 14.05.2024, czyli 15.08.2024.
+* **E-13, B-19, CF-14.** A0max był w zał. 2 pkt 2.1.1 w brzmieniu 2013/926. Dawny § 94 ust. 2 (16 m²) był w t.j. 2015/1422. Rozp. 2017/2285 zmieniło: § 1 pkt 21 (uchylenie § 80), pkt 27 (nowy § 94), pkt 67 (nowy zał. 2); w życie 01.01.2018.
+
+**Wymagania WT: identyfikatory potwierdzone na tekście t.j. 2022/1225 i zmian**
+* **D:** D-02 do D-09.
+* **U:** U-01 do U-09.
+* **Z:** Z-01 do Z-19.
+* **B:** B-01 do B-22, B-24, B-25.
+* **K:** K-01 do K-15, K-17 do K-22.
+* **Instalacje:** IW-01 do IW-05, IW-07 do IW-09, IK-01 do IK-04, IO-01 do IO-09, IV-01, IV-02, IV-04 do IV-16, IE-02 do IE-10.
+* **Pożar:** P-01 do P-19.
+* **Higiena i hałas:** H-01 do H-11 (H-11 sprawdzono w t.j. Dz.U. 2014 poz. 112, tab. 1 lp. 2a: 50/40 dB).
+* **Energia:** E-01 do E-19. Zał. 2 pkt 1.1, 1.2, 1.4, 1.5, 2.1.1–2.1.4, 2.2.1–2.2.5 i 2.3.1–2.3.4; § 328–§ 329 (EP_H+W = 70; ΔEP_C = 5·Af,C/Af).
+
+**Pozostałe potwierdzenia**
+* **Normy przywołane w zał. 1 WT** (numery lp. zgodne z rejestrem): lp. 1, 4, 5, 6, 8, 10 (PN-EN 12056-1…5:2002, PN-EN 12109:2003), 14, 16 (PN-EN 12831:2006), 17, 26, 28, 32, 33, 41, 44, 59 (PN-EN 1990/1991), 69–73.
+* **Kluczowe ustalenia JSON:** CF-07 do CF-19 i CF-20 w części sprawdzalnej (§ 280 ust. 3, § 279 ust. 1–2, § 281, § 106 ust. 1, § 107, § 108). Uwaga do CF-20: odległość **w pionie** 1,5 m z § 279 ust. 1 dotyczy wszystkich okien budynku, a nie tylko okien pomieszczeń na pobyt ludzi. Wiersz P-07 w tabeli ujmuje to poprawnie.
+* **Ryzyko 14.** § 23 pkt 4a rozp. o projekcie budowlanym (analiza akustyczna) dodał § 1 pkt 3 rozp. 2023/2405. W życie 01.08.2024 według 2024/473.
+
+**Źródła wtórne (NIE, sprawdzone WebFetch)**
+* **CF-06.** Inżynier Budownictwa, 22.09.2026: „Oświadczenie składa inwestor, nie projektant”; nie wymaga „przyjęcia, zatwierdzenia ani potwierdzenia przez organ”; „Treści wzoru nie należy zmieniać”; koniec okresu 20.03.2028.
+* **Komunikat.** prawo.pl, 18.09.2026: komunikat przypisany MRiT, cytat „Od dnia 20 września 2026 r. w okresie 18 miesięcy…”, prace nad rozporządzeniem „są nadal prowadzone”.
+
+### 6.2 Poprawione (było → jest)
+
+| ID | Było | Jest | Źródło |
+|---|---|---|---|
+| 1.1 pkt 3 (art. 102b) | „robót z art. 29 ust. 4, czyli bez projektu” | Budowa i roboty, które nie wymagają ani pozwolenia, ani zgłoszenia (art. 29 ust. 2 i 4 PB). Dodano też art. 102a ust. 3 | Dz.U. 2026 poz. 1161 art. 2 pkt 4; Dz.U. 2026 poz. 524 art. 29 ust. 2 i 4 |
+| D-01 | Cytat § 6 urwany po „pomieszczeń technicznych” | Dodano wariant „bądź do najwyżej położonego punktu stropodachu lub konstrukcji przekrycia budynku znajdującego się bezpośrednio nad pomieszczeniami przeznaczonymi na pobyt ludzi” | WT § 6 (t.j. 2022/1225) |
+| IW-06, impl. 20, ryzyko 16 | „Możliwość dezynfekcji termicznej 70–80 °C” | Wymagana możliwość dezynfekcji chemicznej lub fizycznej. 70–80 °C obowiązuje tylko przy metodzie cieplnej | WT § 120 ust. 2a |
+| IE-01, ryzyko 15 | Wymogi ustawy o elektromobilności dla domu jednorodzinnego: NIEZWERYFIKOWANE | Brak obowiązku dla domów jednorodzinnych. Art. 12 dotyczy UP i wielorodzinnych, art. 12a budynków niemieszkalnych z > 10 stanowiskami | Dz.U. 2026 poz. 1243 (t.j.), art. 12, 12a |
+| Impl. 25 (§ 234 ust. 4) | „przez ściany i płytę… bo w ulicy jest gaz” | Wymóg bezwarunkowy i tylko dla ścian zewnętrznych poniżej terenu. Płyta: dobra praktyka | WT § 234 ust. 4 |
+| K-16 | Tylko okna powyżej 2. kondygnacji | Także okna niższych kondygnacji wychodzące na chodniki lub przejścia dla pieszych | WT § 299 ust. 1 |
+| B-23 | Szerokość stanowiska 2,5 m podana jak wymóg dla garażu | Oznaczono jako interpretację (§ 21 dotyczy stanowisk na działce; § 104 nie podaje szerokości stanowiska) | WT § 21 ust. 1, § 104 |
+| B-26 | 0,04 m² na stanowisko, 2 st. = 0,08 m² | Doprecyzowano: „na każde, wydzielone przegrodami budowlanymi, stanowisko”, więc 0,08 m² to ostrożna interpretacja | WT § 108 ust. 1 pkt 1 |
+
+### 6.3 Niemożliwe do weryfikacji (stan na 25.09.2026)
+* **Projekt RCL 12398903** (etap, treść, przepisy przejściowe): legislacja.gov.pl i legislacja.rcl.gov.pl zrywają połączenie (curl exit 35).
+* **Wartości z Polskich Norm** (treść płatna): IV-03 (PN-B-03430/Az3), θe dla Poznania (PN-B-02403 / PN-EN 12831), wartości akustyczne (PN-B-02151-2/-3), wynik analizy ryzyka piorunowego (PN-EN 62305-2) oraz ekwiwalent klasy G4 w ISO 16890.
+* **Autorstwo komunikatu z 18.09.2026** (MRiT według źródeł wtórnych, a według Dz.U. 2026/597 właściwy jest MFiG): brak źródła pierwotnego.
+* **Interpretacje**, dla których nie ma rozstrzygnięcia w źródle pierwotnym:
+  * dokładny dzień końca okresu 18 miesięcy (19 czy 20.03.2028);
+  * stosowanie § 271 ust. 4–5 do budynków z § 213;
+  * okna przesuwne HS a § 299 ust. 1;
+  * U stropu nad powietrzem zewnętrznym;
+  * zakres art. 102a ust. 4 po 20.03.2028.

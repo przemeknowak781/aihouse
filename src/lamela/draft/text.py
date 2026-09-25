@@ -64,8 +64,8 @@ def width(s: str, h_cap: float, style: str = "normal") -> float:
 # ---------------------------------------------------------------------------------------- napisy złożone
 # Napis może składać się z "przebiegów" (runs): (tekst, względna wysokość, względne podniesienie linii bazowej).
 # Służy to np. do zapisu wymiaru 24⁵ (mm w indeksie górnym) jako dwóch zwykłych napisów — tak samo w PDF i DXF.
-SUP_SIZE = 0.62   # wysokość indeksu górnego względem h
-SUP_RAISE = 0.52  # podniesienie linii bazowej indeksu względem h
+SUP_SIZE = 0.72   # wysokość indeksu górnego względem h (2,5 → 1,8 mm — najmniejsza z szeregu ISO 3098)
+SUP_RAISE = 0.50  # podniesienie linii bazowej indeksu względem h
 
 
 def runs_width(runs, h_cap: float, style: str = "normal") -> float:

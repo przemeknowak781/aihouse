@@ -58,17 +58,18 @@ def dim_text(length_m: float, unit: str = "cm") -> str:
     return main + sup.translate(sup_map)
 
 
-def level(z: float, nd: int = 2) -> str:
-    """Rzędna wysokościowa: ±0,00 / +3,15 / −1,20 (PN-B-01025:2004, pkt oznaczenia poziomów)."""
+def level(z: float, nd: int | None = None) -> str:
+    """Rzędna wysokościowa: ±0,000 / +3,150 / −1,200 (PN-B-01025:2004 pkt 3.5; nd domyślnie LEVEL_DECIMALS)."""
+    nd = LEVEL_DECIMALS if nd is None else nd
     q = 10 ** nd
     if round_half_up(abs(z) * q) == 0:
         return PLUSMINUS + num(0.0, nd)
     return ("+" if z > 0 else MINUS) + num(abs(z), nd)
 
 
-def level_abs(h: float, nd: int = 2) -> str:
-    """Rzędna bezwzględna (m n.p.m.), bez znaku: 101,65."""
-    return num(h, nd)
+def level_abs(h: float, nd: int | None = None) -> str:
+    """Rzędna bezwzględna (m n.p.m.), bez znaku: 101,650."""
+    return num(h, LEVEL_DECIMALS if nd is None else nd)
 
 
 def area(a_m2: float, nd: int = 2, unit: bool = True) -> str:

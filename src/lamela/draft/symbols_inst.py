@@ -25,7 +25,7 @@ __all__ = [
     "socket", "switch", "light", "light_linear", "panel", "junction_box", "motion_sensor", "bell", "videophone",
     "data_outlet", "earth", "spd", "riser", "valve", "check_valve", "water_meter", "filter_", "manifold", "pump",
     "tank", "heat_pump", "pipe", "cleanout", "floor_drain", "inspection", "grille", "anemostat", "air_terminal",
-    "recuperator", "radiator", "floor_heating", "MEDIA",
+    "recuperator", "radiator", "floor_heating", "MEDIA", "media",
 ]
 
 
@@ -265,23 +265,32 @@ def spd(c, pos, rot=90.0, s_mm: float = 3.5, layer: str = "E-ROZDZIELNICE", labe
 
 # ================================================================================================ sanitarne
 MEDIA = {
-    # kod: (warstwa, opis, rodzaj linii)
-    "W": ("S-WODA", "woda zimna", None),
-    "C": ("S-CWU", "ciepła woda użytkowa", "KRESKOWA"),
-    "CY": ("S-CYRK", "cyrkulacja CWU", "PUNKTOWA_KROTKA"),
-    "K": ("S-KANAL", "kanalizacja sanitarna", None),
-    "KD": ("S-DESZCZ", "kanalizacja deszczowa", "KRESKA_DLUGA"),
-    "Z": ("S-OGRZ", "ogrzewanie — zasilanie", None),
-    "P": ("S-OGRZ", "ogrzewanie — powrót", "KRESKOWA"),
-    "WN": ("S-WENT", "wentylacja — nawiew", None),
-    "WW": ("S-WENT", "wentylacja — wywiew", "KRESKOWA"),
+    # kod: (warstwa, opis, rodzaj linii) — oznaczenia literowe mediów wg praktyki PL (R4 pkt 3.12), zawsze w legendzie
+    "WZ": ("S-WODA", "Wz — woda zimna", None),
+    "WC": ("S-CWU", "Wc — woda ciepła (CWU)", "KRESKOWA"),
+    "CYRK": ("S-CYRK", "Cyrk — cyrkulacja CWU", "PUNKTOWA_KROTKA"),
+    "KS": ("S-KANAL", "Ks — kanalizacja sanitarna", None),
+    "KD": ("S-DESZCZ", "Kd — kanalizacja deszczowa", "KRESKA_DLUGA"),
+    "Z": ("S-OGRZ", "Z — ogrzewanie, zasilanie", None),
+    "P": ("S-OGRZ", "P — ogrzewanie, powrót", "KRESKOWA"),
+    # rodzaje powietrza wg EN 16798-3 (kod literowy obowiązkowy, kolor pomocniczy)
+    "ODA": ("S-WENT", "ODA — powietrze zewnętrzne (czerpane)", "PUNKTOWA_KROTKA"),
+    "SUP": ("S-WENT", "SUP — powietrze nawiewane", None),
+    "ETA": ("S-WENT", "ETA — powietrze wywiewane", "KRESKOWA"),
+    "EHA": ("S-WENT", "EHA — powietrze wyrzutowe", "KRESKOWA"),
 }
+_MEDIA_ALIAS = {"W": "WZ", "C": "WC", "CY": "CYRK", "K": "KS", "WN": "SUP", "WW": "ETA"}
 
 
-def pipe(c, pts, medium: str = "W", label: str | None = None, h: float = 2.0, label_at: float = 0.5,
+def media(code: str):
+    c_ = code.upper()
+    return MEDIA[_MEDIA_ALIAS.get(c_, c_)]
+
+
+def pipe(c, pts, medium: str = "WZ", label: str | None = None, h: float = 2.0, label_at: float = 0.5,
          pen=None):
     """Przewód instalacji wg medium (warstwa i rodzaj linii z ``MEDIA``) z opisem nad przewodem (np. 'W PE-X 16×2')."""
-    ly, _desc, lt = MEDIA[medium.upper()]
+    ly, _desc, lt = media(medium)
     P = arr(pts)
     c.polyline(P, ly, pen=pen, lt=lt)
     if label:
@@ -298,9 +307,9 @@ def pipe(c, pts, medium: str = "W", label: str | None = None, h: float = 2.0, la
         c.text(q + up * 0.8 * c.k, label, h, ang, "center", "baseline", ly)
 
 
-def riser(c, pos, label: str | None = None, medium: str = "K", s_mm: float = 2.6, h: float = 2.0):
+def riser(c, pos, label: str | None = None, medium: str = "KS", s_mm: float = 2.6, h: float = 2.0):
     """Pion instalacyjny (okrąg + opis, np. „Pion K1 ∅110”)."""
-    ly = MEDIA[medium.upper()][0]
+    ly = media(medium)[0]
     R = s_mm * c.k / 2
     c.circle(pos, R, ly, pen="srednia")
     c.dot(pos, 0.7, ly)
@@ -483,18 +492,18 @@ def air_terminal(c, pos, rot=0.0, kind: str = "czerpnia", w: float = 0.4, layer:
         L = 6.0 * k
         if kind == "czerpnia":
             a0, a1 = xf.pt(0.08 + L + 0.02, 0), xf.pt(0.10, 0)
-            lab = "CZ"
+            lab = "ODA"
         else:
             a0, a1 = xf.pt(0.10, 0), xf.pt(0.08 + L + 0.02, 0)
-            lab = "WY"
+            lab = "EHA"
         c.line(a0, a1, pen="cienka")
         arrowhead(c, a1, a1 - a0, 2.0, 12, True, layer)
         c.text((a0 + a1) / 2 + np.array([0.0, 1.0 * k]), lab, 2.0, 0.0, "center", "baseline")
 
 
 def recuperator(c, pos, rot=0.0, w: float = 0.75, d: float = 0.6, layer: str = "S-WENT", label: str = "REKUPERATOR"):
-    """Centrala wentylacyjna z odzyskiem ciepła: prostokąt z krzyżowym wymiennikiem, 4 króćce
-    (ZEW — czerpnia, WYR — wyrzut, NAW — nawiew, WYW — wywiew)."""
+    """Centrala wentylacyjna z odzyskiem ciepła: prostokąt z krzyżowym wymiennikiem, 4 króćce opisane kodami
+    EN 16798-3 (R4 pkt 3.12): ODA — powietrze zewnętrzne, EHA — wyrzutowe, ETA — wywiewane, SUP — nawiewane."""
     k = c.k
     xf = Xf.make(np.asarray(pos, float), rot)
     with c.on(layer):
@@ -503,8 +512,8 @@ def recuperator(c, pos, rot=0.0, w: float = 0.75, d: float = 0.6, layer: str = "
         c.line(xf.pt(-w * 0.22, 0), xf.pt(w * 0.22, 0), pen="b_cienka")
         c.line(xf.pt(0, -d * 0.3), xf.pt(0, d * 0.3), pen="b_cienka")
         r = min(w, d) * 0.1
-        for (x, y, lab) in ((-w / 2 + r * 1.6, d / 2, "ZEW"), (w / 2 - r * 1.6, d / 2, "WYR"),
-                            (-w / 2 + r * 1.6, -d / 2, "WYW"), (w / 2 - r * 1.6, -d / 2, "NAW")):
+        for (x, y, lab) in ((-w / 2 + r * 1.6, d / 2, "ODA"), (w / 2 - r * 1.6, d / 2, "EHA"),
+                            (-w / 2 + r * 1.6, -d / 2, "ETA"), (w / 2 - r * 1.6, -d / 2, "SUP")):
             c.circle(xf.pt(x, y + math.copysign(r, y)), r, pen="cienka")
             if y > 0:
                 c.text(xf.pt(x, y + 2 * r + 0.8 * k), lab, 1.8, 0.0, "center", "baseline")

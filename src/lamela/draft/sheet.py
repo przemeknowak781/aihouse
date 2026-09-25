@@ -116,6 +116,9 @@ class TitleBlock:
     format: str = ""             # uzupełniany automatycznie
     data: str = ""
     rewizja: str = ""
+    arkusz: str = ""             # nr arkusza / liczba arkuszy (ISO 7200), np. "1/3"
+    rodzaj: str = ""             # rodzaj dokumentu (ISO 7200): rzut / przekrój / elewacja / zestawienie / schemat
+    sprawdzenie: bool = True     # False — bez wiersza "Sprawdzający" (art. 20 ust. 3 pkt 2 PB, R4 pkt 3.1)
     osoby: list = field(default_factory=_osoby_domyslne)
     rewizje: list = field(default_factory=list)   # [(rew, opis, data), ...] — tabela zmian nad tabliczką
 
@@ -139,11 +142,14 @@ def wrap(s: str, max_w: float, h: float, style: str = "normal") -> list[str]:
 
 
 def fit(s: str, max_w: float, h: float, min_h: float = 1.8, style: str = "normal") -> float:
-    """Największa wysokość pisma ≤ h (krok co 0,1 mm, min. min_h), przy której napis mieści się w max_w."""
-    hh = h
-    while hh > min_h and T.width(s, hh, style) > max_w:
-        hh -= 0.1
-    return max(hh, min_h)
+    """Największa wysokość pisma z szeregu ISO 3098 (≤ h, ≥ min_h), przy której napis mieści się w max_w
+    (jeśli nie mieści się nawet przy min_h — zwraca min_h)."""
+    for hh in reversed(styles.TEXT_SERIES):
+        if hh > h + 1e-6 or hh < min_h - 1e-6:
+            continue
+        if T.width(s, hh, style) <= max_w:
+            return hh
+    return min_h
 
 
 # ------------------------------------------------------------------------------------------------ arkusz
@@ -159,7 +165,7 @@ class Sheet(SheetBase):
 
     def __init__(self, fmt_name: str = "A3", orientation: str | None = None, title_block: TitleBlock | None = None,
                  binding: float = 20.0, margin: float = 10.0, fold_marks: bool = True, centring_marks: bool = True,
-                 grid_reference: bool = False, draw_frame: bool = True):
+                 grid_reference: bool | None = None, draw_frame: bool = True):
         W, H = sheet_size(fmt_name, orientation)
         super().__init__(W, H)
         self.fmt_name = fmt_name.replace("x", "×").replace("X", "×")
@@ -180,13 +186,13 @@ class Sheet(SheetBase):
         x0, y0, x1, y1 = self.frame
         with self.on("R-RAMKA"):
             self.rect(x0, y0, x1, y1, pen=0.7)
-            if centring_marks:  # PN-EN ISO 5457: od krawędzi arkusza do 5 mm za ramkę, gr. 0,7 mm
-                cx = (x0 + x1) / 2.0
-                cy = (y0 + y1) / 2.0
-                self.line((cx, 0.0), (cx, y0 + 5.0), pen=0.7)
-                self.line((cx, H), (cx, y1 - 5.0), pen=0.7)
-                self.line((0.0, cy), (x0 + 5.0, cy), pen=0.7)
-                self.line((W, cy), (x1 - 5.0, cy), pen=0.7)
+            if centring_marks:  # PN-EN ISO 5457 4.3: na osiach symetrii arkusza, 0,7 mm, 10 mm za ramkę
+                cx = W / 2.0
+                cy = H / 2.0
+                self.line((cx, 0.0), (cx, y0 + 10.0), pen=0.7)
+                self.line((cx, H), (cx, y1 - 10.0), pen=0.7)
+                self.line((0.0, cy), (x0 + 10.0, cy), pen=0.7)
+                self.line((W, cy), (x1 - 10.0, cy), pen=0.7)
             if fold_marks:
                 xs, ys = fold_positions(W, H)
                 for x in xs:
@@ -195,36 +201,60 @@ class Sheet(SheetBase):
                 for y in ys:
                     self.line((0.0, y), (min(5.0, x0), y), pen=0.35)
                     self.line((W, y), (W - min(5.0, W - x1), y), pen=0.35)
+            if grid_reference is None:
+                grid_reference = W * H >= 420 * 594 - 1   # R4 pkt 3.1: A2 i większe
             if grid_reference:
                 self._grid_reference()
+        # oznaczenie formatu w dolnym marginesie przy prawym rogu (PN-EN ISO 5457 / R4-B07)
+        self.text((x1, y0 / 2.0), f"{self.fmt_name} ({int(round(W))}×{int(round(H))})", 1.8, 0.0, "right", "middle",
+                  layer="R-RAMKA")
 
     def _grid_reference(self):
-        """Pola siatki (PN-EN ISO 5457): litery pionowo, cyfry poziomo, podział co ~50 mm."""
+        """Siatka odniesień (PN-EN ISO 5457 4.4): pola 50 mm liczone od osi symetrii arkusza, różnice w polach
+        narożnych; wiersze literami od góry (bez I i O), kolumny cyframi od lewej; znaki 3,5 mm, linie 0,35 mm.
+        Na A4 opisy tylko u góry i z prawej."""
         W, H = self.width, self.height
         x0, y0, x1, y1 = self.frame
-        nx = max(2, int(round((x1 - x0) / 50.0)))
-        ny = max(2, int(round((y1 - y0) / 50.0)))
-        if nx % 2:
-            nx += 1
-        if ny % 2:
-            ny += 1
-        for i in range(1, nx):
-            x = x0 + (x1 - x0) * i / nx
-            self.line((x, y0), (x, y0 - 5), pen=0.35)
-            self.line((x, y1), (x, y1 + 5), pen=0.35)
-        for i in range(nx):
-            x = x0 + (x1 - x0) * (i + 0.5) / nx
-            self.text((x, y1 + 2.5), str(i + 1), 2.5, ha="center", va="middle")
-            self.text((x, y0 - 2.5), str(i + 1), 2.5, ha="center", va="middle")
-        for j in range(1, ny):
-            y = y0 + (y1 - y0) * j / ny
-            self.line((x0, y), (x0 - 5, y), pen=0.35)
-            self.line((x1, y), (x1 + 5, y), pen=0.35)
-        for j in range(ny):
-            y = y1 - (y1 - y0) * (j + 0.5) / ny
-            ch = "ABCDEFGHJKLMNPRSTUVWXYZ"[j]
-            self.text((x1 + 2.5, y), ch, 2.5, ha="center", va="middle")
-            self.text((x0 - 2.5, y), ch, 2.5, ha="center", va="middle")
+        letters = "ABCDEFGHJKLMNPQRSTUVWXYZ"
+        a4 = min(W, H) < 220 and max(W, H) < 310
+
+        def splits(lo, hi, c):
+            pos = [c]
+            k = 1
+            while c - 50 * k > lo + 25:
+                pos.append(c - 50 * k)
+                k += 1
+            k = 1
+            while c + 50 * k < hi - 25:
+                pos.append(c + 50 * k)
+                k += 1
+            return sorted(pos)
+
+        xs = splits(x0, x1, W / 2.0)
+        ys = splits(y0, y1, H / 2.0)
+        with self.on("R-RAMKA"):
+            for x in xs:
+                if not a4:
+                    self.line((x, y0), (x, y0 - 5.0), pen=0.35)
+                self.line((x, y1), (x, y1 + 5.0), pen=0.35)
+            for y in ys:
+                if not a4:
+                    self.line((x0, y), (x0 - 5.0, y), pen=0.35)
+                self.line((x1, y), (x1 + 5.0, y), pen=0.35)
+            bx = [x0] + xs + [x1]
+            by = [y0] + ys + [y1]
+            for i in range(len(bx) - 1):
+                xm = (bx[i] + bx[i + 1]) / 2.0
+                self.text((xm, y1 + 5.0), str(i + 1), 3.5, ha="center", va="middle")
+                if not a4:
+                    self.text((xm, y0 - 5.0), str(i + 1), 3.5, ha="center", va="middle")
+            nrow = len(by) - 1
+            for j in range(nrow):
+                ym = (by[nrow - j] + by[nrow - j - 1]) / 2.0
+                ch = letters[j % len(letters)]
+                self.text((x1 + 5.0, ym), ch, 3.5, ha="center", va="middle")
+                if not a4:
+                    self.text((x0 - 5.0, ym), ch, 3.5, ha="center", va="middle")
 
     # ------------------------------------------------------------------ pola robocze
     @property
@@ -310,14 +340,12 @@ def _cell(sh, x, y, w, h, label, value="", vh=2.5, style="normal", lines_max=1, 
         xx = x + pad if align == "left" else x + w / 2.0
         sh.text((xx, yy), value, hh, style=style, layer="R-TABLICZKA", ha="left" if align == "left" else "center")
     else:
-        hh = vh
-        ls = wrap(value, avail, hh, style)
-        while hh > 1.8:
+        cands = [x for x in reversed(styles.TEXT_SERIES) if x <= vh + 1e-6] or [1.8]
+        for hh in cands:
             ls = wrap(value, avail, hh, style)
             block = hh * 1.45 * (len(ls[:lines_max]) - 1) + hh
             if len(ls) <= lines_max and block <= (top - y) - (0.24 * hh + 0.5):
                 break
-            hh -= 0.1
         gap = hh * 1.45
         block = gap * (len(ls[:lines_max]) - 1) + hh
         bot = y + max(0.9, 0.24 * hh + 0.5)
@@ -333,7 +361,8 @@ def draw_title_block(sh: Sheet, tb: TitleBlock):
     x0 = fx1 - W
     # wysokości wierszy (od góry)
     rows = {"prac": 12.0, "inw": 8.0, "obj": 10.5, "lok": 9.0, "hdr": 4.5, "os": 7.0, "tyt": 12.0, "dol": 9.0}
-    n_os = len(tb.osoby)
+    osoby = [o for o in tb.osoby if tb.sprawdzenie or not o.funkcja.lower().startswith("sprawdz")]
+    n_os = len(osoby)
     Htot = rows["prac"] + rows["inw"] + rows["obj"] + rows["lok"] + rows["hdr"] + n_os * rows["os"] + rows["tyt"] + rows["dol"]
     y1 = fy0 + Htot
     ly = "R-TABLICZKA"
@@ -388,7 +417,7 @@ def draw_title_block(sh: Sheet, tb: TitleBlock):
         y_hdr_top = y + h
         # --- osoby
         h = rows["os"]
-        for o in tb.osoby:
+        for o in osoby:
             y -= h
             vals = [o.funkcja, o.imie_nazwisko, o.specjalnosc_uprawnienia, o.data, ""]
             xx = x0
@@ -419,9 +448,10 @@ def draw_title_block(sh: Sheet, tb: TitleBlock):
         # --- skala | format | data | nr rysunku | rewizja
         h = rows["dol"]
         y -= h
-        bottom = [("SKALA", tb.skala, 28.0, "bold", 3.5), ("FORMAT", tb.format, 22.0, "normal", 3.0),
-                  ("DATA", tb.data, 28.0, "normal", 2.5), ("NR RYSUNKU", tb.nr_rysunku, 80.0, "bold", 5.0),
-                  ("REWIZJA", tb.rewizja, 22.0, "bold", 3.5)]
+        bottom = [("SKALA", tb.skala, 24.0, "bold", 3.5), ("FORMAT", tb.format, 16.0, "normal", 2.5),
+                  ("DATA WYDANIA", tb.data, 24.0, "normal", 2.5), ("RODZAJ DOK.", tb.rodzaj, 28.0, "normal", 2.5),
+                  ("NR RYSUNKU", tb.nr_rysunku, 52.0, "bold", 5.0), ("ARKUSZ", tb.arkusz, 18.0, "normal", 2.5),
+                  ("REW.", tb.rewizja, 18.0, "bold", 3.5)]
         xx = x0
         for i, (lab, val, w, st, vh) in enumerate(bottom):
             _cell(sh, xx, y, w, h, lab, val, vh, st, align="center")
@@ -480,7 +510,7 @@ def notes_box(sh: Sheet, x: float, y_top: float, w: float, lines: list[str], tit
     return (x, y0 - pad + 1.0, x + w, y_top)
 
 
-def table(sh, x: float, y_top: float, cols: list[tuple[str, float]], rows: list[list[str]], h: float = 2.2,
+def table(sh, x: float, y_top: float, cols: list[tuple[str, float]], rows: list[list[str]], h: float = 2.5,
           row_h: float = 5.0, title: str | None = None, layer: str = "R-OPISY", align: list[str] | None = None,
           header_h: float | None = None) -> tuple:
     """Prosta tabela (np. zestawienie pomieszczeń, stolarki). cols: [(nagłówek, szerokość), …]."""
@@ -494,9 +524,9 @@ def table(sh, x: float, y_top: float, cols: list[tuple[str, float]], rows: list[
         xx = x
         for name, w in cols:
             ls = name.split("\n")
-            for i, s in enumerate(ls):
-                yy = y - header_h / 2.0 + (len(ls) - 1) * 1.6 / 2 * 1.0 - i * 2.6
-                sh.text((xx + w / 2.0, yy), s, 1.8, ha="center", va="middle", style="bold")
+            for i, s_ in enumerate(ls):
+                yy = y - header_h / 2.0 + (len(ls) - 1) * 1.3 - i * 2.6
+                sh.text((xx + w / 2.0, yy), s_, 1.8, ha="center", va="middle", style="bold")
             xx += w
         y -= header_h
         sh.line((x, y), (x + W, y), pen=0.25)

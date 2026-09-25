@@ -196,43 +196,85 @@ def _strip(poly, axis=None):
 
 
 # ================================================================================================ wzory — PN-B-01030
-@register("ZELBET", "Beton zbrojony (żelbet)", "PN-B-01030:2000 poz. 4")
-def _zelbet(c, poly, layer, angle=45.0, spacing=1.0, **kw):
+# Parametry (mm na arkuszu) wg R4 pkt 3.8 [przyjęcia R4 w granicach rysunku normy].
+def _parallel_alt(poly, angle, spacing, dash, gap):
+    """Linie 45° na przemian ciągłe i przerywane (żelbet wg PN-B-01030 poz. 4)."""
+    d = dir_deg(angle)
+    n = perp(d)
+    x0, y0, x1, y1 = poly.bounds
+    corners = np.array([[x0, y0], [x1, y0], [x1, y1], [x0, y1]])
+    s_, t = corners @ n, corners @ d
+    per = dash + gap
+    segs = []
+    for k in range(math.floor(s_.min() / spacing), math.ceil(s_.max() / spacing) + 1):
+        ss = k * spacing
+        if k % 2 == 0:
+            segs.append([n * ss + d * (t.min() - spacing), n * ss + d * (t.max() + spacing)])
+        else:
+            j0 = math.floor(t.min() / per) - 1
+            j1 = math.ceil(t.max() / per) + 1
+            for j in range(j0, j1 + 1):
+                ta = j * per + (k % 4 == 1) * per / 2
+                segs.append([n * ss + d * ta, n * ss + d * (ta + dash)])
+    return lines_of(MultiLineString(segs).intersection(poly))
+
+
+def _circle_groups(c, poly, layer, rng, every_mm=8.0, d_mm=0.8):
+    """Grupy 2–3 małych kółek (kruszywo lekkie) co ok. ``every_mm``."""
     k = c.k
-    _emit_lines(c, _parallel_dashed(poly, angle, spacing * k, 4.5 * k, 0.7 * k, stagger=0.37), layer)
+    centers = _random_points(poly, 1.0 / every_mm ** 2, k, rng, inset=1.2 * k)
+    for p in centers:
+        n = 2 + int(rng.random() * 2)
+        for i in range(n):
+            a = rng.random() * 2 * math.pi
+            q = p + np.array([math.cos(a), math.sin(a)]) * (0.55 * k if i else 0.0)
+            r = (0.5 + 0.5 * rng.random()) * d_mm / 2 * k
+            c.circle(q, r, layer, pen="b_cienka")
 
 
-@register("BETON", "Beton niezbrojony, kamień", "PN-B-01030:2000 poz. 3")
-def _beton(c, poly, layer, angle=45.0, spacing=1.4, **kw):
+@register("ZELBET", "Beton zbrojony (żelbet) — 45° na przemian ciągłe i przerywane", "PN-B-01030:2000 poz. 4")
+def _zelbet(c, poly, layer, angle=45.0, spacing=1.5, **kw):
     k = c.k
-    _emit_lines(c, _parallel_dashed(poly, angle, spacing * k, 2.0 * k, 1.1 * k, stagger=0.45), layer)
+    _emit_lines(c, _parallel_alt(poly, angle, spacing * k, 3.0 * k, 1.0 * k), layer)
 
 
-@register("BETON_LEKKI", "Beton lekki", "PN-B-01030:2000 poz. 5")
-def _beton_lekki(c, poly, layer, angle=45.0, spacing=1.6, seed=None, **kw):
+@register("BETON", "Beton niezbrojony, kamień — 45° przerywane", "PN-B-01030:2000 poz. 3")
+def _beton(c, poly, layer, angle=45.0, spacing=2.0, **kw):
     k = c.k
-    _emit_lines(c, _parallel(poly, angle, spacing * k), layer)
-    _circles(c, poly, 0.10, (0.28, 0.40), layer, _rng(poly, seed))
+    _emit_lines(c, _parallel_dashed(poly, angle, spacing * k, 3.0 * k, 1.0 * k, stagger=1.5 / 4.0), layer)
 
 
-@register("BETON_KOMORKOWY", "Beton komórkowy (autoklawizowany)", "PN-B-01030:2000 poz. 5 (beton lekki)")
+@register("BETON_LEKKI", "Beton lekki — jak beton + grupy kółek", "PN-B-01030:2000 poz. 5")
+def _beton_lekki(c, poly, layer, angle=45.0, spacing=2.0, seed=None, **kw):
+    k = c.k
+    _emit_lines(c, _parallel_dashed(poly, angle, spacing * k, 3.0 * k, 1.0 * k, stagger=1.5 / 4.0), layer)
+    _circle_groups(c, poly, layer, _rng(poly, seed))
+
+
+@register("BETON_LEKKI_ZBROJONY", "Beton lekki zbrojony — jak żelbet + grupy kółek", "PN-B-01030:2000 poz. 6")
+def _beton_lekki_zb(c, poly, layer, angle=45.0, spacing=1.5, seed=None, **kw):
+    k = c.k
+    _emit_lines(c, _parallel_alt(poly, angle, spacing * k, 3.0 * k, 1.0 * k), layer)
+    _circle_groups(c, poly, layer, _rng(poly, seed))
+
+
+@register("BETON_KOMORKOWY", "Beton komórkowy — jak beton lekki (45° przerywane + grupy kółek Ø0,8)",
+          "oznaczenie przyjęte (PN-B-01030 poz. 5)")
 def _beton_kom(c, poly, layer, angle=45.0, spacing=2.0, seed=None, **kw):
-    k = c.k
-    _emit_lines(c, _parallel(poly, angle, spacing * k), layer)
-    _circles(c, poly, 0.16, (0.22, 0.34), layer, _rng(poly, seed))
+    _beton_lekki(c, poly, layer, angle, spacing, seed)
 
 
-@register("MUR_CERAMIKA", "Mur z cegieł i pustaków ceramicznych", "PN-B-01030:2000 poz. 7")
-def _ceramika(c, poly, layer, angle=45.0, spacing=1.2, **kw):
+@register("MUR_CERAMIKA", "Mur z cegieł i pustaków ceramicznych — 45° ciągłe", "PN-B-01030:2000 poz. 7")
+def _ceramika(c, poly, layer, angle=45.0, spacing=1.5, **kw):
     _emit_lines(c, _parallel(poly, angle, spacing * c.k), layer)
 
 
-@register("MUR_SILIKAT", "Mur z bloczków wapienno-piaskowych (silikatowych)",
-          "oznaczenie przyjęte (odmiana poz. 7 PN-B-01030)")
-def _silikat(c, poly, layer, angle=45.0, spacing=1.2, **kw):
+@register("MUR_SILIKAT", "Mur z bloczków wapienno-piaskowych (silikatowych) — kratka ukośna 45°/135°",
+          "oznaczenie przyjęte (brak w PN-B-01030; R4 pkt 3.8)")
+def _silikat(c, poly, layer, angle=45.0, spacing=2.0, **kw):
     k = c.k
     _emit_lines(c, _parallel(poly, angle, spacing * k), layer)
-    _emit_lines(c, _parallel_dashed(poly, angle + 90.0, 3.6 * k, 0.9 * k, 2.7 * k, stagger=0.5), layer)
+    _emit_lines(c, _parallel(poly, angle + 90.0, spacing * k), layer)
 
 
 @register("DREWNO_POPRZ", "Drewno — przekrój prostopadły do włókien", "PN-B-01030:2000 poz. 8a")
@@ -286,9 +328,8 @@ def _stal(c, poly, layer, **kw):
     ctr, u, v, L, t = strip_frame(poly)
     if t / c.k <= 3.0:
         c.fill(poly, "A-WYPELNIENIA", "#000000")
-    else:
-        _emit_lines(c, _parallel(poly, 45.0, 0.5 * c.k), layer)
-        _emit_lines(c, _parallel(poly, 135.0, 0.5 * c.k), layer)
+    else:  # duże przekroje: kreskowanie 45° gęste 0,7 mm (ISO 128-3 7.5, R4 pkt 3.8)
+        _emit_lines(c, _parallel(poly, 45.0, 0.7 * c.k), layer)
 
 
 def _meander(c, poly, layer, axis, pitch_rel, pitch_min, pitch_max, gap_mm=0.15):
@@ -348,21 +389,22 @@ def _zigzag(c, poly, layer, axis, per_rel, per_min, per_max, gap_mm=0.15, double
         _emit_lines(c, lines_of(ls2.intersection(poly)), layer)
 
 
-@register("IZOL_MIEKKA", "Izolacja termiczna miękka (wełna mineralna) — „wężyk”", "PN-B-01030:2000 poz. 12",
-          kind="strip")
-def _welna(c, poly, layer, axis=None, **kw):
-    _meander(c, poly, layer, axis, 0.33, 0.7, 2.6)
+@register("IZOL_MIEKKA", "Izolacja termiczna miękka (wełna mineralna) — meander „UUU”",
+          "PN-B-01030:2000 poz. 12 (przypisanie do wełny — konwencja projektu)", kind="strip")
+def _welna(c, poly, layer, axis=None, pitch=2.0, **kw):
+    _meander(c, poly, layer, axis, 0.0, pitch, pitch)
 
 
-@register("IZOL_TWARDA", "Izolacja termiczna twarda (EPS) — zygzak", "PN-B-01030:2000 poz. 12", kind="strip")
-def _eps(c, poly, layer, axis=None, **kw):
-    _zigzag(c, poly, layer, axis, 0.55, 1.0, 4.0)
+@register("IZOL_TWARDA", "Izolacja termiczna twarda (EPS) — zygzak „VVV”",
+          "PN-B-01030:2000 poz. 12 (przypisanie do EPS — konwencja projektu)", kind="strip")
+def _eps(c, poly, layer, axis=None, pitch=2.0, **kw):
+    _zigzag(c, poly, layer, axis, 0.0, pitch, pitch)
 
 
 @register("IZOL_XPS", "Izolacja termiczna twarda (XPS) — zygzak podwójny", "oznaczenie przyjęte (odmiana poz. 12)",
           kind="strip")
-def _xps(c, poly, layer, axis=None, **kw):
-    _zigzag(c, poly, layer, axis, 0.7, 1.4, 4.4, double=True)
+def _xps(c, poly, layer, axis=None, pitch=2.8, **kw):
+    _zigzag(c, poly, layer, axis, 0.0, pitch, pitch, double=True)
 
 
 @register("IZOL_PIR", "Izolacja termiczna twarda (PIR/PUR) — zygzak z okładzinami",
@@ -376,7 +418,7 @@ def _pir(c, poly, layer, axis=None, **kw):
         for y in (-t / 2 + g, t / 2 - g):
             ls = LineString(f([[-L, y], [L, y]]).tolist())
             _emit_lines(c, lines_of(ls.intersection(poly)), layer)
-    _zigzag(c, poly, layer, axis, 0.55, 1.0, 4.0, gap_mm=0.5)
+    _zigzag(c, poly, layer, axis, 0.0, 2.0, 2.0, gap_mm=0.5)
 
 
 def _membrane_center(poly, axis):
@@ -391,14 +433,15 @@ def _hydro(c, poly, layer, axis=None, **kw):
     membrane(c, [a, b], "przeciwwodna", width_mm=max(0.8, min(t / c.k, 1.4)))
 
 
-@register("IZOL_PRZECIWWILGOCIOWA", "Izolacja przeciwwilgociowa — linia pogrubiona", "praktyka (PN-B-01025:2004)",
-          kind="membrane")
+@register("IZOL_PRZECIWWILGOCIOWA", "Izolacja przeciwwilgociowa (cienka warstwa) — linia bardzo gruba",
+          "PN-B-01030 poz. 13 / R4 pkt 3.8", kind="membrane")
 def _hydro2(c, poly, layer, axis=None, **kw):
     a, b, t = _membrane_center(poly, axis)
     membrane(c, [a, b], "przeciwwilgociowa")
 
 
-@register("PAROIZOLACJA", "Paroizolacja (folia PE) — linia kreskowa", "oznaczenie przyjęte", kind="membrane")
+@register("PAROIZOLACJA", "Paroizolacja (folia PE) — linia kreskowa cienka 3/1 po ciepłej stronie",
+          "oznaczenie przyjęte (R4 pkt 3.8)", kind="membrane")
 def _paro(c, poly, layer, axis=None, **kw):
     a, b, t = _membrane_center(poly, axis)
     membrane(c, [a, b], "paroizolacja")
@@ -433,12 +476,15 @@ def _tworzywo(c, poly, layer, angle=45.0, **kw):
     _emit_lines(c, _parallel(poly, angle, 0.35 * c.k), layer)
 
 
-@register("TYNK", "Tynk, zaprawa", "PN-B-01030:2000 poz. 2")
-def _tynk(c, poly, layer, seed=None, **kw):
+DOTS_PER_MM2 = 0.25   # kropki: 25/cm² [przyjęcie silnika; R4 pkt 3.8 proponuje ok. 8/cm² — tu gęściej, wg reprodukcji PN]
+
+
+@register("TYNK", "Tynk, zaprawa — kropki nieregularne", "PN-B-01030:2000 poz. 2")
+def _tynk(c, poly, layer, seed=None, density=None, **kw):
     ctr, u, v, L, t = strip_frame(poly)
     if t / c.k < 0.5:
         return
-    _dots(c, poly, 3.0, _rng(poly, seed), layer, 0.1)
+    _dots(c, poly, density or DOTS_PER_MM2 * 1.4, _rng(poly, seed), layer, 0.12)
 
 
 @register("PLYTA_GK", "Płyta gipsowo-kartonowa", "oznaczenie przyjęte (odmiana poz. 2)")
@@ -446,23 +492,15 @@ def _gk(c, poly, layer, seed=None, **kw):
     ctr, u, v, L, t = strip_frame(poly)
     if t / c.k < 0.5:
         return
-    _dots(c, poly, 5.0, _rng(poly, seed), layer, 0.08)
+    _dots(c, poly, DOTS_PER_MM2 * 2.5, _rng(poly, seed), layer, 0.08)
 
 
-@register("JASTRYCH", "Jastrych (wylewka) cementowy/anhydrytowy", "oznaczenie przyjęte (zaprawa + kruszywo)")
-def _jastrych(c, poly, layer, seed=None, **kw):
-    rng = _rng(poly, seed)
+@register("JASTRYCH", "Jastrych (wylewka) cementowy/anhydrytowy — kropki", "PN-B-01030:2000 poz. 2 (zaprawa)")
+def _jastrych(c, poly, layer, seed=None, density=None, **kw):
     ctr, u, v, L, t = strip_frame(poly)
     if t / c.k < 0.5:
         return
-    _dots(c, poly, 1.6, rng, layer, 0.12)
-    pts = _random_points(poly, 0.10, c.k, rng, inset=0.5 * c.k)
-    s = 0.55 * c.k
-    for p in pts:
-        a = rng.random() * 2 * math.pi
-        tri = np.array([[math.cos(a + i * 2 * math.pi / 3), math.sin(a + i * 2 * math.pi / 3)] for i in range(3)]) * s / 1.732
-        tri = tri + p
-        c.polygon(tri, layer)
+    _dots(c, poly, density or DOTS_PER_MM2, _rng(poly, seed), layer, 0.14)
 
 
 @register("PLYTKI", "Płytki ceramiczne / gres (okładzina)", "oznaczenie przyjęte")
@@ -491,7 +529,7 @@ def _circles(c, poly, density, r_mm, layer, rng):
 
 
 @register("GRUNT_RODZIMY", "Grunt rodzimy (powierzchnia gruntu w przekroju)", "PN-B-01030:2000 poz. 1")
-def _grunt(c, poly, layer, depth_mm=2.4, **kw):
+def _grunt(c, poly, layer, depth_mm=2.0, **kw):
     """Pas oznaczenia przy krawędziach "górnych" wieloboku (normalna zewn. skierowana w górę)."""
     k = c.k
     ext = np.asarray(poly.exterior.coords)
@@ -509,12 +547,14 @@ def _grunt(c, poly, layer, depth_mm=2.4, **kw):
         ground_band(c, [a, b], layer=layer, depth_mm=depth_mm, below=-nout, clip=poly)
 
 
-def ground_band(c, pts, layer=HATCH_LAYER, depth_mm=2.4, period_mm=2.4, below=None, clip=None):
-    """Symbol powierzchni gruntu wg PN-B-01030 (poz. 1): pod linią terenu pas trójkątów z kreskowaniem."""
+def ground_band(c, pts, layer=HATCH_LAYER, depth_mm=2.0, period_mm=2.0, below=None, clip=None):
+    """Symbol powierzchni gruntu wg PN-B-01030 poz. 1 (R4-I02): pod linią terenu krótkie ukośne kreski
+    (dł. ok. 2 mm, co 2 mm) na przemian „/” i „\\”."""
     k = c.k
     pts = arr(pts)
     D = depth_mm * k
     per = period_mm * k
+    segs = []
     for a, b in zip(pts[:-1], pts[1:]):
         d = b - a
         L = float(np.hypot(*d))
@@ -523,46 +563,40 @@ def ground_band(c, pts, layer=HATCH_LAYER, depth_mm=2.4, period_mm=2.4, below=No
         uu = d / L
         nb = below if below is not None else np.array([uu[1], -uu[0]])
         nb = np.asarray(nb) / np.hypot(*nb)
-        n = max(1, int(round(L / per)))
-        pp = L / n
-        zig = []
-        segs = []
-        for i in range(n + 1):
-            x = i * pp
-            zig.append(a + uu * x + (nb * D if i % 2 else 0 * nb))
+        n = max(1, int(L // per))
+        off = (L - (n - 1) * per) / 2.0
+        h = D * 0.7071
         for i in range(n):
-            x0 = i * pp
-            if i % 2 == 0:  # trójkąt o wierzchołku w dole: kreski równoległe do boku
-                p0 = a + uu * x0
-                p1 = a + uu * (x0 + pp) + nb * D
-                for f in (0.35, 0.7):
-                    s0 = p0 + uu * pp * f
-                    segs.append([s0, s0 + (p1 - p0) * (1 - f) * 0.98])
-        geo = MultiLineString([np.asarray(zig).tolist()] + [np.asarray(s).tolist() for s in segs])
-        if clip is not None:
-            geo = geo.intersection(clip)
-        _emit_lines(c, lines_of(geo), layer)
+            x = off + i * per
+            P = a + uu * x
+            if i % 2 == 0:   # "/"
+                segs.append([P - uu * h / 2 + nb * h, P + uu * h / 2])
+            else:            # "\\"
+                segs.append([P - uu * h / 2, P + uu * h / 2 + nb * h])
+    if not segs:
+        return
+    geo = MultiLineString([np.asarray(s_).tolist() for s_ in segs])
+    if clip is not None:
+        geo = geo.intersection(clip)
+    _emit_lines(c, lines_of(geo), layer)
 
 
 @register("NASYP", "Nasyp, zasypka (grunt nasypowy)", "oznaczenie przyjęte")
 def _nasyp(c, poly, layer, seed=None, **kw):
     rng = _rng(poly, seed)
     k = c.k
-    pts = _random_points(poly, 0.35, k, rng, inset=0.6 * k)
-    for i, p in enumerate(pts):
+    pts = _random_points(poly, 0.25, k, rng, inset=0.6 * k)
+    for p in pts:
         a = rng.random() * math.pi
-        L = (0.5 + 0.5 * rng.random()) * k
-        if i % 3 == 0:
-            c.circle(p, 0.22 * k, layer, pen="b_cienka")
-        else:
-            dvec = np.array([math.cos(a), math.sin(a)]) * L / 2
-            c.prims.append(_seg(layer, None, p - dvec, p + dvec))
-    _dots(c, poly, 0.5, rng, layer, 0.12)
+        L = (0.5 + 0.6 * rng.random()) * k
+        dvec = np.array([math.cos(a), math.sin(a)]) * L / 2
+        c.prims.append(_seg(layer, None, p - dvec, p + dvec))
+    _dots(c, poly, DOTS_PER_MM2 * 1.2, rng, layer, 0.12)
 
 
 @register("PIASEK", "Piasek, podsypka piaskowa", "PN-B-01030:2000 poz. 2 (podsypka)")
 def _piasek(c, poly, layer, seed=None, **kw):
-    _dots(c, poly, 1.3, _rng(poly, seed), layer, 0.12)
+    _dots(c, poly, DOTS_PER_MM2 * 2.0, _rng(poly, seed), layer, 0.12)
 
 
 @register("ZWIR", "Żwir, tłuczeń", "oznaczenie przyjęte")
@@ -574,7 +608,7 @@ def _zwir(c, poly, layer, seed=None, **kw):
 def _pospolka(c, poly, layer, seed=None, **kw):
     rng = _rng(poly, seed)
     _circles(c, poly, 0.22, (0.25, 0.5), layer, rng)
-    _dots(c, poly, 0.9, rng, layer, 0.12)
+    _dots(c, poly, DOTS_PER_MM2 * 1.5, rng, layer, 0.12)
 
 
 @register("HUMUS", "Ziemia urodzajna (humus)", "oznaczenie przyjęte")
@@ -586,7 +620,7 @@ def _humus(c, poly, layer, seed=None, **kw):
         for dx in (-0.35, 0.0, 0.35):
             a = p + np.array([dx * k, 0])
             c.prims.append(_seg(layer, None, a, a + np.array([dx * 0.6 * k, 0.6 * k])))
-    _dots(c, poly, 0.6, rng, layer, 0.12)
+    _dots(c, poly, DOTS_PER_MM2, rng, layer, 0.12)
 
 
 # ================================================================================================ API
@@ -600,10 +634,21 @@ def hatch(c, shape, material: str, layer: str = HATCH_LAYER, outline: bool = Fal
     """
     code = resolve(material)
     g = to_polygon(shape)
+    band = params.pop("band_mm", "auto")
     for poly in polygons_of(g):
         if poly.area <= 0:
             continue
-        PATTERNS[code].fn(c, poly, layer, **params)
+        target = poly
+        if PATTERNS[code].kind == "area" and code not in ("GRUNT_RODZIMY", "STAL") and band:
+            # duże pola kreskuje się pasem przy brzegu (PN-EN ISO 128-3 / R4 pkt 3.8: pas 5 mm)
+            bw = 5.0 if band == "auto" else float(band)
+            _c, _u, _v, _L, t = strip_frame(poly)
+            if band != "auto" or t / c.k > 30.0:
+                inner = poly.buffer(-bw * c.k)
+                if not inner.is_empty:
+                    target = poly.difference(inner)
+        for part in polygons_of(target):
+            PATTERNS[code].fn(c, part, layer, **params)
         if outline:
             c.geom(poly, outline_layer or layer, pen=outline_pen)
 
@@ -618,21 +663,22 @@ def membrane(c, pts, kind: str = "przeciwwodna", layer: str = "A-IZOL-WODNA", wi
     """
     pts = arr(pts)
     if kind == "przeciwwodna":
-        w = width_mm or 0.9
+        # pas czarny z białymi prostokątami: czarny 3 mm / biały 1,5 mm (R4 pkt 3.8), szer. pasa ≥ 0,7 mm
+        w = max(0.7, width_mm or 0.9)
         c.polyline(pts, layer, pen=w, color="#000000")
-        c.polyline(pts, layer, pen=max(0.25, w * 0.45), lt="KRESKOWA_DROBNA", color="#ffffff", z=23.5,
-                   lt_scale=0.9)
+        from .core import PLine
+        c.add(PLine(layer, max(0.25, w * 0.5), "HYDRO_OKNA", "#ffffff", 23.5, pts, False, 1.0))
     elif kind == "przeciwwilgociowa":
-        c.polyline(pts, layer, pen=width_mm or 0.7)
+        c.polyline(pts, layer, pen=width_mm or "b_gruba")
     elif kind == "paroizolacja":
-        c.polyline(pts, layer, pen=width_mm or 0.35, lt="KRESKOWA_DROBNA")
+        c.polyline(pts, layer, pen=width_mm or "cienka", lt="KRESKOWA_3_1")
     elif kind == "paroprzepuszczalna":
-        c.polyline(pts, layer, pen=width_mm or 0.25, lt="PUNKTOWA_KROTKA", lt_scale=0.6)
+        c.polyline(pts, layer, pen=width_mm or "cienka", lt="PUNKTOWA_KROTKA", lt_scale=0.6)
     else:
         raise ValueError(kind)
 
 
-def ground_line(c, pts, layer: str = "A-TEREN", band: bool = True, depth_mm: float = 2.4):
+def ground_line(c, pts, layer: str = "A-TEREN", band: bool = True, depth_mm: float = 2.0):
     """Linia terenu w przekroju/elewacji: linia gruba + (opcjonalnie) pas oznaczenia gruntu pod nią."""
     c.polyline(pts, layer, pen="b_gruba")
     if band:

@@ -94,7 +94,7 @@ def north_arrow(c, pos, size_mm: float = 16.0, north_deg: float = 0.0, layer: st
         c.text(xf.pt(0, R * 1.15 + 1.2 * k), "N", h, north_deg, "center", "bottom", style="bold")
 
 
-def axis_line(c, p1, p2, label: str, bubbles: str = "both", r_mm: float = 4.0, h: float = 3.5,
+def axis_line(c, p1, p2, label: str, bubbles: str = "both", r_mm: float = 5.0, h: float = 3.5,
               layer: str = "A-OSIE", gap_mm: float = 0.0):
     """Oś konstrukcyjna: linia punktowa cienka p1–p2, kółka z oznaczeniem na końcach (PN-B-01025)."""
     k = c.k
@@ -122,7 +122,7 @@ def axis_line(c, p1, p2, label: str, bubbles: str = "both", r_mm: float = 4.0, h
         c.text(C, label, h, 0.0, "center", "middle", layer, z=12.7)
 
 
-def axes_grid(c, xs: dict, ys: dict, bbox, ext_mm: float = 14.0, r_mm: float = 4.0, h: float = 3.5,
+def axes_grid(c, xs: dict, ys: dict, bbox, ext_mm: float = 14.0, r_mm: float = 5.0, h: float = 3.5,
               layer: str = "A-OSIE", sides: str = "all"):
     """Siatka osi: xs = {nazwa: x} (osie pionowe), ys = {nazwa: y} (osie poziome); bbox = zasięg obiektu
     (x0, y0, x1, y1) — linie wychodzą ``ext_mm`` poza obiekt. sides: 'all' | 'bl' (kółka tylko dół/lewo)."""
@@ -135,10 +135,11 @@ def axes_grid(c, xs: dict, ys: dict, bbox, ext_mm: float = 14.0, r_mm: float = 4
         axis_line(c, (x0 - e, y), (x1 + e, y), name, "both" if sides == "all" else "start", r_mm, h, layer)
 
 
-def section_mark(c, p1, p2, label: str = "A", look: float = 1.0, h: float = 5.0, end_mm: float = 9.0,
+def section_mark(c, p1, p2, label: str = "A", look: float = 1.0, h: float = 5.0, end_mm: float = 10.0,
                  arrow_mm: float = 6.0, full: bool = True, layer: str = "A-PRZEKROJE", label2: str | None = None):
-    """Oznaczenie przekroju na rzucie (PN-B-01025 / PN-EN ISO 128-3): gruba linia punktowa na końcach
-    (i cienka na całej długości), strzałki kierunku patrzenia (linia gruba) i litery (h ≈ 1,4 × h pisma).
+    """Oznaczenie przekroju na rzucie (PN-B-01025 3.3, ISO 128-2 04.1/04.2): cienka linia punktowa na całej
+    długości, gruba linia punktowa na końcach (``end_mm`` = 10 mm, R4 pkt 3.7), strzałki kierunku patrzenia
+    linią grubą i wielkie litery 5 mm (≈1,41 × pismo 3,5 mm).
 
     look = +1: patrzymy w lewo od kierunku p1→p2; −1: w prawo."""
     k = c.k
@@ -148,8 +149,8 @@ def section_mark(c, p1, p2, label: str = "A", look: float = 1.0, h: float = 5.0,
     with c.on(layer):
         if full:
             c.line(A, B, pen="cienka", lt="PUNKTOWA")
-        c.line(A, A + d * end_mm * k, pen="gruba", lt="PUNKTOWA_KROTKA", lt_scale=0.7)
-        c.line(B, B - d * end_mm * k, pen="gruba", lt="PUNKTOWA_KROTKA", lt_scale=0.7)
+        c.line(A, A + d * end_mm * k, pen="gruba", lt="PUNKTOWA_KROTKA", lt_scale=0.6)
+        c.line(B, B - d * end_mm * k, pen="gruba", lt="PUNKTOWA_KROTKA", lt_scale=0.6)
         for P in (A, B):
             c.line(P, P + n * (arrow_mm - 2.5) * k, pen="gruba", lt="CIAGLA")
             arrowhead(c, P + n * arrow_mm * k, n, 2.8, 12, True, layer, pen="srednia")
@@ -174,50 +175,39 @@ def detail_callout(c, center, r_mm: float, label: str, leader_to=None, h: float 
         c.text(E + np.array([1.0 * k, 0.8 * k]), label, h, 0.0, "left", "baseline", style="bold")
 
 
-def room_tag(c, pos, number: str, name: str, area_m2: float | None = None, floor: str | None = None,
+def room_tag(c, pos, number: str, name: str | None, area_m2: float | None = None, floor: str | None = None,
              level_z: float | None = None, h: float = 2.5, layer: str = "A-POMIESZCZENIA", mask: bool = True,
-             upper: bool = False):
-    """Oznaczenie pomieszczenia (PN-EN ISO 4157, PN-B-01025): numer w ramce, nazwa, powierzchnia [m², 2 miejsca],
-    opcjonalnie rodzaj posadzki i rzędna posadzki."""
+             upper: bool = False, h_num: float = 3.5):
+    """Oznaczenie pomieszczenia (PN-EN ISO 4157-2 4.3, PN-B-01025 3.4): numer i nazwa PODKREŚLONE, powierzchnia
+    [m², 2 miejsca po przecinku], opcjonalnie posadzka i rzędna posadzki (w ramce). ``name=None`` — tylko numer
+    (małe pomieszczenia, nazwa w tabeli)."""
     k = c.k
     P = np.asarray(pos, float)
-    nm = name.upper() if upper else name
-    lines = []
-    num_h = h * 1.1
-    lines.append(("num", number))
-    lines.append(("name", nm))
+    items = [("num", number, h_num, "bold", True)]
+    if name:
+        items.append(("name", name.upper() if upper else name, h, "normal", True))
     if area_m2 is not None:
-        lines.append(("area", fmt.area(area_m2)))
+        items.append(("area", fmt.area(area_m2), h, "normal", False))
     if floor:
-        lines.append(("floor", floor))
+        items.append(("floor", floor, 1.8, "italic", False))
     if level_z is not None:
-        lines.append(("level", fmt.level(level_z)))
-    gap = 1.15
-    heights = {"num": num_h, "name": h, "area": h, "floor": h * 0.8, "level": h * 0.9}
-    tot = sum(heights[t] * (1 + gap) for t, _ in lines) - heights[lines[-1][0]] * gap
+        items.append(("level", fmt.level(level_z), 1.8, "normal", False))
+    gap = 1.0
+    tot = sum(hh * (1 + gap) for _t, _s, hh, _st, _u in items) - items[-1][2] * gap
     y = P[1] + tot / 2 * k
     with c.on(layer):
-        for t, s in lines:
-            hh = heights[t]
+        for t, s_, hh, st, underline in items:
             y -= hh * k
-            st = "bold" if t in ("num",) else "normal"
-            w = T.width(s, hh, st) * k
-            if t == "num":
-                pad = 0.8 * k
-                box = rect_pts(P[0] - w / 2 - pad * 1.5, y - pad, P[0] + w / 2 + pad * 1.5, y + hh * k + pad)
-                if mask:
-                    c.fill(box, layer, "#ffffff", z=26.0)
-                c.polygon(box, pen="cienka")
-            elif mask:
-                pad = 0.5 * k
-                c.fill(rect_pts(P[0] - w / 2 - pad, y - pad * 1.2, P[0] + w / 2 + pad, y + hh * k + pad), layer,
+            w = T.width(s_, hh, st) * k
+            pad = 0.6 * k
+            if mask:
+                c.fill(rect_pts(P[0] - w / 2 - pad, y - pad * 1.5, P[0] + w / 2 + pad, y + hh * k + pad), layer,
                        "#ffffff", z=26.0)
-            if t == "area":
-                c.line((P[0] - w / 2, y - 0.6 * k), (P[0] + w / 2, y - 0.6 * k), pen="cienka")
+            if underline:
+                c.line((P[0] - w / 2, y - 0.7 * k), (P[0] + w / 2, y - 0.7 * k), pen="cienka")
             if t == "level":
-                pad = 0.6 * k
                 c.polygon(rect_pts(P[0] - w / 2 - pad, y - pad, P[0] + w / 2 + pad, y + hh * k + pad), pen="cienka")
-            c.text((P[0], y), s, hh, 0.0, "center", "baseline", style=st)
+            c.text((P[0], y), s_, hh, 0.0, "center", "baseline", style=st)
             y -= hh * gap * k
 
 
@@ -410,7 +400,7 @@ def stairs(c, start, direction, width: float, n_steps: int, tread: float, riser:
            first_no: int = 1, cut_after: int | None = None, numbering: bool = True, arrow: bool = True,
            label: bool = True, layer: str = "A-SCHODY", side_label: float = 1.0, show_above: str = "dashed",
            h: float = 2.0, total_steps: int | None = None, arrow_end_extra: float = 0.0,
-           label_at: float | None = None, label_values: tuple | None = None):
+           label_at: float | None = None, label_values: tuple | None = None, label_style: str = "inline"):
     """Bieg schodów prostych na rzucie (PN-B-01025).
 
     start      — środek krawędzi pierwszego stopnia (początek biegu), direction — kierunek wejścia [° lub wektor],
@@ -460,7 +450,7 @@ def stairs(c, start, direction, width: float, n_steps: int, tread: float, riser:
             last = n_steps if cut_s is None or show_above != "none" else cut_after
             for i in range(last):
                 P = S + d * (i + 0.5) * tread + n * width * 0.33 * side_label
-                c.text(P, str(first_no + i), h * 0.8, readable_angle(math.degrees(math.atan2(d[1], d[0]))),
+                c.text(P, str(first_no + i), 1.8, readable_angle(math.degrees(math.atan2(d[1], d[0]))),
                        "center", "middle", color=None)
         if arrow:
             a0 = S + d * tread * 0.5
@@ -477,22 +467,42 @@ def stairs(c, start, direction, width: float, n_steps: int, tread: float, riser:
                 s_lab = (end_s + tread * 0.5) / 2.0 if label_at is None else label_at
                 M = S + d * s_lab
                 rv, tv = label_values if label_values else (riser, tread)
-                top = [(f"{nsteps}×", 1.0, 0.0)] + dim_runs(rv, "cm")
-                c.text(M + up * 0.7 * k, None, h, ang, "center", "baseline", runs=top, mask=0.3)
-                c.text(M - up * (0.7 * k + h * k), None, h, ang, "center", "baseline", runs=dim_runs(tv, "cm"),
-                       mask=0.3)
+                if label_style == "fraction":   # wariant: n × h nad strzałką, s pod strzałką (PN-B-01025, AGH)
+                    top = [(f"{nsteps}×", 1.0, 0.0)] + dim_runs(rv, "cm")
+                    c.text(M + up * 0.7 * k, None, h, ang, "center", "baseline", runs=top, mask=0.3)
+                    c.text(M - up * (0.7 * k + h * k), None, h, ang, "center", "baseline",
+                           runs=dim_runs(tv, "cm"), mask=0.3)
+                else:                           # "n × h × s" przy strzałce biegu (R4 pkt 3.5)
+                    runs = [(f"{nsteps} × ", 1.0, 0.0)] + dim_runs(rv, "cm") + [(" × ", 1.0, 0.0)] + \
+                        dim_runs(tv, "cm")
+                    c.text(M + up * 0.7 * k, None, h, ang, "center", "baseline", runs=runs, mask=0.3)
 
 
-def floor_opening(c, poly, layer: str = "A-WIDOK", pen="cienka", closed_opening: bool = False):
-    """Otwór w stropie na rzucie: obrys + przekątne (PN-B-01025, otwór odkryty); ``closed_opening``
-    — otwór zakryty (przekątne linią kreskową)."""
+def floor_opening(c, poly, layer: str = "A-WIDOK", pen="cienka", closed_opening: bool = False, kind: str = "otwor"):
+    """Otwór w stropie/ścianie na rzucie (PN-B-01025 4.6, ISO 7519 6.1): obrys + dwie przekątne (otwór odkryty;
+    ``closed_opening`` — przekątne kreskowe); kind='wneka' — jedna przekątna (wnęka)."""
     P = arr(poly)
     with c.on(layer):
         c.polygon(P, pen=pen)
         if len(P) == 4:
             lt = "KRESKOWA" if closed_opening else None
             c.line(P[0], P[2], pen="cienka", lt=lt)
-            c.line(P[1], P[3], pen="cienka", lt=lt)
+            if kind != "wneka":
+                c.line(P[1], P[3], pen="cienka", lt=lt)
+
+
+def duct(c, poly, kind: str = "went", layer: str = "A-WIDOK"):
+    """Kanał w ścianie (PN-B-01025, R4-H11): 'went' — wentylacyjny (przekątna), 'spalinowy' — przekątna z zaczernioną
+    połową, 'dymowy' — całość zaczerniona."""
+    P = arr(poly)
+    with c.on(layer):
+        if kind == "dymowy":
+            c.fill(P, layer, "#000000")
+        elif kind == "spalinowy" and len(P) == 4:
+            c.fill([P[0], P[1], P[2]], layer, "#000000")
+        c.polygon(P, pen="cienka")
+        if len(P) == 4 and kind != "dymowy":
+            c.line(P[0], P[2], pen="cienka")
 
 
 def entrance_arrow(c, pos, direction, filled: bool = True, size_mm: float = 7.0, layer: str = "A-SYMBOLE"):

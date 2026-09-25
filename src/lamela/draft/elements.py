@@ -87,13 +87,50 @@ class CutSet:
             acc = it.poly if acc is None else acc.union(it.poly)
         return out
 
-    def draw(self, c, hatch: bool = True, outlines: bool = True, fill_konstr: str | None = None):
-        """Rysuje przekrój: kreskowanie (każdy element osobno — własny kierunek warstwy) i kontury scalonych grup."""
-        res = self.resolve()
+    def draw(self, c, hatch: bool = True, outlines: bool = True, fill_konstr: str | None = None,
+             merge_thin_mm: float = 0.7, blacken_mm: float = 1.5, black_gap_mm: float = 0.7):
+        """Rysuje przekrój: kreskowanie (każdy element osobno — własny kierunek warstwy) i kontury scalonych grup.
+
+        Reguły (R4-C04, PN-EN ISO 128-3 7.5, R4 pkt 3.8):
+        * warstwy cieńsze niż ``merge_thin_mm`` na papierze (tynki, okładziny, cienkie warstwy — bez membran)
+          dołącza się do sąsiedniego elementu o najwyższym priorytecie (jedna linia obrysu zamiast dwóch < 0,7 mm),
+        * przekroje konstrukcyjne węższe niż ``blacken_mm`` zaczernia się, zostawiając prześwit ``black_gap_mm``
+          między stykającymi się zaczernionymi przekrojami.
+        """
+        res = [[it, g] for it, g in self.resolve()]
+        k = c.k
+        # --- 1) scalanie cienkich warstw
+        if merge_thin_mm:
+            thick = [_width(g) for _it, g in res]
+            for i, (it, g) in enumerate(res):
+                if it.kind in ("membrana", "grunt") or thick[i] >= merge_thin_mm * k:
+                    continue
+                best = None
+                for j, (jt, jg) in enumerate(res):
+                    if j == i or thick[j] < merge_thin_mm * k or jt.kind in ("membrana", "grunt"):
+                        continue
+                    if g.distance(jg) > 1e-6 * max(1.0, k):
+                        continue
+                    if best is None or jt.priority > res[best][0].priority:
+                        best = j
+                if best is not None:
+                    res[best][1] = res[best][1].union(g).buffer(1e-9 * k).buffer(-1e-9 * k)
+                    res[i][1] = None
+            res = [r for r in res if r[1] is not None and not r[1].is_empty]
+        # --- 2) zaczernianie wąskich przekrojów konstrukcyjnych
+        blacks = []
         groups: dict[tuple, list] = {}
         for it, g in res:
+            is_black = (blacken_mm and it.kind in ("konstr", "strop", "fund", "dzial")
+                        and _width(g) < blacken_mm * k)
+            if is_black:
+                fillg = g
+                for bg in blacks:
+                    fillg = fillg.difference(bg.buffer(black_gap_mm * k, join_style=2))
+                c.fill(fillg, "A-WYPELNIENIA", "#000000")
+                blacks.append(g)
+                continue
             if hatch:
-                pat = H.PATTERNS[H.resolve(it.mat)]
                 kw = dict(it.params)
                 if it.axis is not None:
                     kw["axis"] = it.axis
@@ -111,10 +148,24 @@ class CutSet:
                     continue
                 if not any(it.outline for it, _ in lst):
                     continue
-                u = unary_union([g for _, g in lst]).buffer(1e-7).buffer(-1e-7)
+                u = unary_union([g for _, g in lst]).buffer(1e-7 * k).buffer(-1e-7 * k)
                 ly, pen, _ = KIND_STYLE[kind]
                 c.geom(u, ly, pen=pen)
         return res
+
+
+def _width(g) -> float:
+    """Szerokość elementu = średnica największego koła wpisanego (miara "grubości" warstwy)."""
+    try:
+        import shapely
+        best = 0.0
+        for pg in polygons_of(g):
+            ln = shapely.maximum_inscribed_circle(pg, tolerance=max(pg.length, 1e-9) * 1e-4)
+            best = max(best, 2.0 * ln.length)
+        return best
+    except Exception:  # pragma: no cover
+        from .geom import strip_frame
+        return min(strip_frame(pg)[4] for pg in polygons_of(g))
 
 
 # ================================================================================================ ściany w rzucie
