@@ -631,10 +631,25 @@ class PlanBuilder:
 
         def score(r):
             if r is None:
-                return (2, 0.0)
-            return (1 if r.kategoria == "ruchu" else 0, r.pow_netto)
-        into = 1 if score(rp) <= score(rm) else -1   # „do wnętrza” = do pomieszczenia (nie komunikacji; mniejszego)
+                return (9, 9, 0.0)
+            return (self._door_count(r), 1 if r.kategoria == "ruchu" else 0, r.pow_netto)
+        # „do wnętrza” = do pomieszczenia „głębszego”: mniej drzwi (ślepe), nie komunikacja, mniejsze
+        into = 1 if score(rp) <= score(rm) else -1
         return into if kier != "na_zewn" else -into
+
+    def _door_count(self, r) -> int:
+        if not hasattr(self, "_dc"):
+            self._dc = {}
+            for w in self.cut_walls_k:
+                for o in w.otwory:
+                    if o.typ not in ("drzwi", "otwor", "drzwi_zewn", "drzwi_przesuwne_HS"):
+                        continue
+                    mid = (o.s0 + o.s1) / 2
+                    for t in (w.t_max + 0.35, w.t_min - 0.35):
+                        rr = self._room_at(w.pt(mid, t))
+                        if rr is not None:
+                            self._dc[rr.id] = self._dc.get(rr.id, 0) + 1
+        return self._dc.get(r.id, 0)
 
     def _room_at(self, pt):
         P = Point(float(pt[0]), float(pt[1]))
@@ -1145,10 +1160,20 @@ def draw_roof_plan(vp, ctx: ViewContext, opts: dict | None = None) -> PlanResult
         allg.append(g.lines)
     if allg:
         placer.add_lines(unary_union(allg), w=0.3)
-    foot = unary_union([g.poly for g in groups if g.poly is not None])
-    outline = clean(unary_union([Polygon(pg.exterior) for pg in polygons_of(foot)])) if not foot.is_empty else Polygon()
-    # obrys budynku (lica ścian najwyższych kondygnacji) pod okapami — linią kreskową
     walls_out = unary_union([m.obrys_kondygnacji(kk.id) for kk in m.kondygnacje])
+    parts = [walls_out]
+    for d in list(m.dachy()) + list(m.wsporniki()):
+        try:
+            parts.append(Polygon(d["obrys"]))
+        except Exception:
+            pass
+    foot = clean(unary_union(parts))
+    outline = clean(unary_union([Polygon(pg.exterior) for pg in polygons_of(foot)])) if not foot.is_empty else Polygon()
+    # lica ścian kondygnacji zasłonięte dachem / wyższą bryłą — linią kreskową
+    if allg:
+        visb = unary_union(allg).buffer(0.03)
+        hid = unary_union([m.obrys_kondygnacji(kk.id).boundary for kk in m.kondygnacje]).difference(visb)
+        draw_lines(vp, hid, "A-NIEWIDOCZNE", pen="cienka", lt="KRESKOWA", min_len=0.1)
     # spadki i wpusty
     for d in m.dachy():
         try:

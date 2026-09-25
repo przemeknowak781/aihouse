@@ -134,6 +134,8 @@ class ElevationBuilder:
                 continue
             draw_lines(vp, g.lines, "A-ELEWACJE", pen="cienka", min_len=0.01)
             allg.append(g.lines)
+        gv = [g.vis for g in order if g.kind == "glass" and g.vis is not None and not g.vis.is_empty]
+        self.glass_vis = unary_union(gv) if gv else Polygon()
         # sylweta — linia średnia
         silb = self.sil.boundary.difference(ground.buffer(1e-3))
         draw_lines(vp, silb, "A-ELEWACJE", pen="srednia", min_len=0.02)
@@ -149,6 +151,8 @@ class ElevationBuilder:
         vp, k, m = self.vp, self.vp.k, self.m
         if self.sil.is_empty:
             return
+        # kierunki otwierania stolarki (trójkąty — wierzchołek po stronie zawiasów; kreskowo: do wewnątrz)
+        self.opening_marks()
         # oznaczenia materiałów
         rows = []
         mats = sorted(self.mats.items(), key=lambda kv: -kv[1]["area"])
@@ -168,7 +172,21 @@ class ElevationBuilder:
 
             def fn(cv, pos, nr=nr):
                 S.tag(cv, pos, str(nr), shape="hex", r_mm=2.6, h=2.5)
-            self.placer.place(vp, fn, cands, max_cost=6.0)
+            if self.placer.place(vp, fn, cands, max_cost=6.0)[0] is None:
+                # poza obszarem materiału — z odnośnikiem (kropka w polu materiału)
+                oc = []
+                for dx in (14.0, -14.0, 22.0, -22.0):
+                    for dy in (10.0, -10.0, 16.0, -16.0, 0.0):
+                        oc.append((c, (c[0] + dx * k, c[1] + dy * k)))
+
+                def fn2(cv, cc, nr=nr):
+                    P, Q = np.asarray(cc[0]), np.asarray(cc[1])
+                    d = Q - P
+                    L = float(np.hypot(*d))
+                    cv.line(P, Q - d / L * 3.0 * k, "A-OPISY", pen="cienka")
+                    cv.dot(P, 0.9, "A-OPISY")
+                    S.tag(cv, Q, str(nr), shape="hex", r_mm=2.6, h=2.5)
+                self.placer.place(vp, fn2, oc)
         self.res.materials = rows
         # rzędne — po prawej
         ext = vp.extents()
@@ -182,8 +200,9 @@ class ElevationBuilder:
                 items.append((float(sl["top"]), "wyk"))
                 if sl.get("top_attyki"):
                     items.append((float(sl["top_attyki"]), "wyk"))
-        items.append((round(self.z_max, 3), "wyk"))
-        zt_r = float(np.interp(self.s_max + 0.5, self.profile[:, 0], self.profile[:, 1]))
+        if all(abs(self.z_max - it[0]) > 0.05 for it in items):
+            items.append((round(self.z_max, 3), "wyk"))
+        zt_r = round(float(np.interp(self.s_max + 0.5, self.profile[:, 0], self.profile[:, 1])), 3)
         items.append((zt_r, "wyk"))
         out = []
         for it in sorted(items, key=lambda t: (t[0], 0 if t[1] == "zero" else 1)):
@@ -191,19 +210,19 @@ class ElevationBuilder:
                 continue
             out.append(it)
         n0 = len(vp.prims)
-        dims.levels(vp, max(X1, self.s_max) + 6.0 * k, out, side="right")
+        dims.levels(vp, self.s_max + 8.0 * k, out, side="right")
         self.placer.add_prims(vp.prims[n0:])
         # teren przy narożnikach (rzędna)
-        zt_l = float(np.interp(self.s_min - 0.5, self.profile[:, 0], self.profile[:, 1]))
+        zt_l = round(float(np.interp(self.s_min - 0.5, self.profile[:, 0], self.profile[:, 1])), 3)
         # wysokość budynku wg § 6 WT — po lewej
         Hh = building_height(self.ctx)
         self.res.height = Hh
         xh = self.s_min - 14.0 * k
         n0 = len(vp.prims)
         dims.level_section(vp, (self.s_min - 3.0 * k, zt_l), zt_l, "wyk", side="left", stub_mm=4.0)
-        dims.dim_v(vp, [Hh["z_ent"], Hh["z_top"]], xh - 10.0 * k, xh)
-        dims.dim_v(vp, [zt_l, 0.0] + [kk.rzedna for kk in m.kondygnacje[1:]] + [Hh["z_top"], self.z_max],
-                   xh, xh + 2 * k)
+        dims.dim_v(vp, [round(Hh["z_ent"], 3), round(Hh["z_top"], 3)], xh - 10.0 * k, xh)
+        dims.dim_v(vp, [zt_l, 0.0] + [kk.rzedna for kk in m.kondygnacje[1:]] +
+                   [round(Hh["z_top"], 3), round(self.z_max, 3)], xh, xh + 2 * k)
         wt = f"wysokość budynku wg § 6 WT: H = {fmt.num(Hh['H'], 2)} m"
         vp.text((xh - 15.0 * k, (Hh["z_ent"] + Hh["z_top"]) / 2), wt, 2.5, 90.0, "center", "baseline",
                 layer="A-WYMIARY", mask=0.4)
@@ -215,6 +234,62 @@ class ElevationBuilder:
         n0 = len(vp.prims)
         dims.dim_h(vp, [self.s_min, self.s_max], zb - 7.0 * k, zb)
         self.placer.add_prims(vp.prims[n0:])
+
+    def opening_marks(self):
+        vp, k, m = self.vp, self.vp.k, self.m
+        if self.glass_vis.is_empty:
+            return
+        from ..draft.dims import arrowhead
+        for o in m.otwory():
+            w = o.sciana
+            if w is None or w.ext_side is None or o.typ not in ("okno", "drzwi_przesuwne_HS"):
+                continue
+            if float((w.n * w.ext_side) @ self.L) > -0.9:
+                continue
+            ow = o.otwieranie or {}
+            rodzaj = str(ow.get("rodzaj", "")).upper()
+            if not rodzaj or rodzaj == "F":
+                continue
+            nk = o.raw.get("kwatery")
+            if not isinstance(nk, (int, float)):
+                pane = {"okno": 1.6, "drzwi_przesuwne_HS": 3.0}.get(o.typ, 1.6)
+                nk = max(2 if o.typ == "drzwi_przesuwne_HS" else 1, math.ceil((o.szer - 1e-6) / pane))
+            nk = int(nk)
+            fw = {"okno": 0.075, "drzwi_przesuwne_HS": 0.085}.get(o.typ, 0.075)
+            fb = 0.03 if o.typ == "drzwi_przesuwne_HS" or o.parapet < 0.05 else fw
+            inner = o.szer - 2 * fw
+            pw = (inner - (nk - 1) * fw) / nk
+            z0, z1 = o.z0 + fb, o.z1 - fw
+            # strona zawiasów: „lewa” patrząc od wewnątrz → prawa na elewacji (widok od zewnątrz)
+            hinge_right = str(ow.get("strona", "lewa")) != "prawa"
+            inward = str(ow.get("kierunek", "do_wewn")) != "na_zewn"
+            lt = "KRESKOWA" if inward else None
+            segs = []
+            for i in range(nk):
+                a = o.s0 + fw + i * (pw + fw)
+                b = a + pw
+                sa, sb = sorted([self.s_of(w.pt(a, 0.0)), self.s_of(w.pt(b, 0.0))])
+                if o.typ == "drzwi_przesuwne_HS":
+                    moving = (i == nk - 1) if hinge_right else (i == 0)
+                    if moving:
+                        zc = z0 + (z1 - z0) * 0.45
+                        d = -1.0 if hinge_right else 1.0
+                        p0 = ((sa + sb) / 2 - d * pw * 0.25, zc)
+                        p1 = ((sa + sb) / 2 + d * pw * 0.25, zc)
+                        if self.glass_vis.buffer(1e-3).contains(Point(p1)):
+                            vp.line(p0, (p1[0] - d * 2.0 * k, zc), "A-ELEWACJE", pen="cienka")
+                            arrowhead(vp, p1, (d, 0.0), 2.4, 12, True, "A-ELEWACJE")
+                    continue
+                hs = sb if hinge_right else sa
+                os_ = sa if hinge_right else sb
+                if "R" in rodzaj or "D" in rodzaj:
+                    segs.append([(os_, z1), (hs, (z0 + z1) / 2), (os_, z0)])
+                if "U" in rodzaj or "K" in rodzaj:
+                    segs.append([(sa, z1), ((sa + sb) / 2, z0), (sb, z1)])
+            if segs:
+                from shapely.geometry import MultiLineString
+                g = MultiLineString(segs).intersection(self.glass_vis)
+                draw_lines(vp, g, "A-ELEWACJE", pen="b_cienka", lt=lt, min_len=0.02)
 
     def axes(self):
         vp, k, m = self.vp, self.vp.k, self.m

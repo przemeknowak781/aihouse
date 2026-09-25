@@ -311,8 +311,12 @@ class SectionBuilder:
             pen = "b_cienka" if g.material in ("SZKLO", "SZKLO_BAL") else "cienka"
             draw_lines(self.vp, g.lines, "A-WIDOK", pen=pen, min_len=0.01)
             allg.append(g.lines)
+        self.bx = [self.s_min, self.z_min, self.s_max, self.z_max]
         if allg:
-            self.placer.add_lines(unary_union(allg), w=0.2)
+            U = unary_union(allg)
+            self.placer.add_lines(U, w=0.2)
+            b = U.bounds
+            self.bx = [min(self.s_min, b[0]), min(self.z_min, b[1]), max(self.s_max, b[2]), max(self.z_max, b[3])]
 
     def terrain_line(self):
         prof = self.profile
@@ -353,7 +357,7 @@ class SectionBuilder:
         zt_r = float(np.interp(self.s_max + 0.6, self.profile[:, 0], self.profile[:, 1]))
         items.append((zt_r, "wyk"))
         items = _dedupe_levels(items)
-        x_lv = X1 + 6.0 * k
+        x_lv = self.bx[2] + 8.0 * k
         n0 = len(vp.prims)
         dims.levels(vp, x_lv, items, side="right")
         self.placer.add_prims(vp.prims[n0:])
@@ -385,8 +389,11 @@ class SectionBuilder:
                 chain_storey.add(z)
         chain_detail.add(ztop_l)
         chain_storey.add(ztop_l)
-        chains = [sorted(chain_detail), sorted(chain_storey), [min(zt_l, 0.0), max(self.z_max, ztop_l)]]
-        base = X0 - 2.0 * k
+        rnd = lambda v: round(float(v), 3)    # noqa: E731 — punkty na siatce 1 mm (sumy łańcuchów = całość)
+        chain_detail = {rnd(v) for v in chain_detail}
+        chain_storey = {rnd(v) for v in chain_storey}
+        chains = [sorted(chain_detail), sorted(chain_storey), [rnd(min(zt_l, 0.0)), rnd(max(self.z_max, ztop_l))]]
+        base = self.bx[0] - 2.0 * k
         off = 10.0
         n0 = len(vp.prims)
         prev = None
@@ -399,7 +406,7 @@ class SectionBuilder:
             off += 7.0
         # wysokość budynku wg § 6 WT
         xh = base - off * k
-        info = dims.dim_v(vp, [H["z_ent"], H["z_top"]], xh, base)
+        info = dims.dim_v(vp, [round(H["z_ent"], 3), round(H["z_top"], 3)], xh, base)
         wt = f"wysokość budynku wg § 6 WT: H = {fmt.num(H['H'], 2)} m"
         vp.text((xh - 5.0 * k, (H["z_ent"] + H["z_top"]) / 2), wt, 2.5, 90.0, "center", "baseline",
                 layer="A-WYMIARY", mask=0.4)
@@ -408,10 +415,9 @@ class SectionBuilder:
         self.placer.add_prims(vp.prims[n0:])
         # osie
         self.axes()
-        # wysokości w świetle i opisy pomieszczeń
-        self.rooms()
-        # opis warstw
+        # opis warstw (duże bloki — najpierw), potem wysokości w świetle i opisy pomieszczeń
         self.callouts()
+        self.rooms()
 
     def _dedupe(self):
         pass
@@ -574,17 +580,18 @@ class SectionBuilder:
         s0 = min(it["s0"] for it in its)
         s1 = max(it["s1"] for it in its)
         cands = []
-        for f in (0.5, 0.35, 0.65, 0.2, 0.8, 0.45, 0.55, 0.28, 0.72, 0.12, 0.88):
+        n = max(6, int((s1 - s0) / 0.35))
+        fr = sorted(np.linspace(0.06, 0.94, n), key=lambda f: abs(f - 0.5))
+        for f in fr:
             s = s0 + f * (s1 - s0)
             here = [it for it in its if it["s0"] + 0.05 <= s <= it["s1"] - 0.05]
             if len(here) < max(1, len(texts) // 2):
                 continue
             here.sort(key=lambda it: -it["z1"])
             ztop = here[0]["z1"]
-            zbot = here[-1]["z0"]
             marks = [(s, (it["z0"] + it["z1"]) / 2) for it in here[:-1]]
             pstart = (s, (here[-1]["z0"] + here[-1]["z1"]) / 2)
-            for rise in (8.0, 14.0):
+            for rise in (6.0, 10.0, 16.0, 24.0):
                 for side in ("right", "left"):
                     cands.append((pstart, (s, ztop + rise * k), side, marks))
 
@@ -604,7 +611,7 @@ class SectionBuilder:
         texts = [layer_text(m, x.mat, x.d) for x in order]
         title = f"{w.przegroda_kod} — {w.przegroda.nazwa}"
         cands = []
-        for zf in (0.55, 0.45, 0.65, 0.35, 0.25):
+        for zf in (0.55, 0.45, 0.65, 0.35, 0.25, 0.72, 0.18, 0.8):
             z = kk.rzedna + kk.wys_kondygnacji * zf
             here = [it for it in its if it["z0"] <= z <= it["z1"]]
             if len(here) < 2:
@@ -613,7 +620,7 @@ class SectionBuilder:
             outer = here[0] if left else here[-1]
             ps = ((outer["s0"] + outer["s1"]) / 2, z)
             marks = [((it["s0"] + it["s1"]) / 2, z) for it in here]
-            for dx in (12.0, 20.0, 30.0):
+            for dx in (10.0, 16.0, 24.0, 34.0, 46.0):
                 pe = (sb + dx * k, z) if left else (sa - dx * k, z)
                 cands.append((ps, pe, "right" if left else "left", marks))
 
