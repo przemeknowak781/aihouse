@@ -109,6 +109,12 @@ class DanePTIE:
         return next((x for x in ((self.Dz.get("uzbrojenie") or {}).get("projektowane") or [])
                      if x.get("branza") == branza), {})
 
+    def trasa_wlz(self) -> str:
+        """Opis trasy WLZ z modelu (uzbrojenie „en”) z przekrojem kabla wg bieżących obliczeń (opis w modelu może
+        zawierać przekrój z wcześniejszej wersji — rozbieżność wykazywana w sprawach otwartych)."""
+        t = str(self.uzbrojenie("en").get("opis") or "—")
+        return re.sub(r"YKY \d×\d+", self.obw.wlz["przewod"], t)
+
     def obiekt(self, ident: str) -> dict:
         return next((x for x in ((self.Dz.get("uzbrojenie") or {}).get("obiekty") or []) if x.get("id") == ident), {})
 
@@ -240,6 +246,12 @@ class DanePTIE:
                 opis += (f" — rozwiązanie: {roz} (∆U ≈ {L(dU2, 2)} {x.jedn} ≤ {L(x.limit, 2)} {x.jedn}; przeliczenie "
                          "proporcjonalne do przekroju); zmienić w parametrach obliczeń i przeliczyć")
             self.otwarte.append(opis + ".")
+        t_en = str(self.uzbrojenie("en").get("opis") or "")
+        for m in sorted(set(re.findall(r"YKY \d×\d+", t_en))):
+            if m != self.obw.wlz["przewod"]:
+                self.otwarte.append(f"Opis trasy WLZ w modelu działki (uzbrojenie projektowane „en”) podaje {m}, obliczenia "
+                                    f"— {self.obw.wlz['przewod']}; w tomie obowiązuje przekrój z obliczeń — poprawić opis "
+                                    "w modelu i ponownie wygenerować rysunki PZT (tom I).")
         if not (self.I.get("wyroby") or {}):
             self.otwarte.append("`instalacje.wyroby` w modelu puste — moduł PV, falownik, pompa ciepła i aparatura przyjęte "
                                 "z danych przykładowych bibliotek [DANE PRZYKŁADOWE – FIKCYJNE]; zastąpić danymi DTR/DWU wyrobów "

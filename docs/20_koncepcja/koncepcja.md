@@ -160,7 +160,7 @@ obsługuje łazienki P0, P1 i P2 ustawione jedna nad drugą (x 3,98–5,77).
 
 | źródło | wymaganie / przeszczep | rozwiązanie w modelu |
 |---|---|---|
-| J1, J2, J3 | drzwi ≥ 0,90 × 2,10 w murze; łazienki/WC na zewnątrz lub przesuwne; wejście ≥ 1,10 × 2,15 | symbole D1/D2/D2P/D4 0,90 × 2,10; O0-16 przesuwne; O0-19, O1-10, O1-11, O2-10 na zewnątrz; DZ1 1,10 × 2,40 |
+| J1, J2, J3 | drzwi ≥ 0,90 × 2,10 w murze; łazienki/WC na zewnątrz lub przesuwne; wejście ≥ 1,10 × 2,15 | symbole D1/D2/D1P/D4/D4A 0,90 × 2,10; O0-14 przesuwne naścienne (D1P), O0-16 skrzydłowe D2 na zewnątrz (runda 2, A3 I-3); O0-19, O1-10, O1-11, O2-10 na zewnątrz; DZ1 1,10 × 2,40 |
 | J1 | schody: szerokość użytkowa ≥ 1,00 m | biegi 1,15 / 1,145 m, jeden pochwyt ciągły (BL1, BL2) → ≈ 1,05 m |
 | J1, J2 | PC monoblok R290, ≥ 6,0 m od granicy E, strefa 1,0 m, ekran, L_Aeq,N ≤ 40 (cel 35) dB | jednostka przy ścianie pd. pasa gospodarczego, 7,0 m od granicy E (PC-JZ w `dzialka.yaml`); strefa R290 bez okien/drzwi/wpustów; osłona lamelowa z ekranem od tarasu; szacunek hałasu §7 |
 | J1, J2 (z W3) | retencja: szczelny zbiornik ≤ 5 m³ + niecka ≈ 24 m² (W-145) | zbiornik 5,0 m³ + niecka NCH-1 24 m² × 0,30 m w ogrodzie pd., ≥ 3 m od fundamentów, ≥ 2 m od granic |
@@ -352,19 +352,21 @@ Woda nie spływa na drogę ani na działki sąsiednie (W-018, W-019).
   od sypialni (brak okien sypialni nad jednostką — P1 nad nią to ściana wsch. pokoju rodzinnego bez okna od pd.), a od tarasów T1/T3
   i drzwi O0-06 oddziela je ekran akustyczny (płyta z wełną, h ≥ 1,5 m, strona zach.). Szacunek na tarasie T3 (r ≈ 3 m, Q = 2, ekran
   −10 dB): ≈ 55 + 10·log(2/(4π·9)) − 10 ≈ 33 dB(A); na tarasie T1 (r ≥ 5 m) < 33 dB(A). Na granicy E (niżej) ≈ 33 dB(A) ≤ 40 dB noc.
-  Elewacja G pozostaje czysta: jednostka niska (≤ 1,4 m) w osłonie z lamel w kolorze elewacji, pod okapem PL-D. Strefa R290
+  Elewacja ogrodowa G (S0-02): zielona ściana z pnączy na kratownicy stalowej odsuniętej od ETICS i ażurowa osłona z lamel wokół
+  jednostki (decyzja Inwestora K-13 — §15), pod okapem PL-D. Strefa R290
   1,0 m jest wolna od otworów, wpustów i studzienek (W-156). Skropliny odprowadza studnia chłonna ≥ 0,8 m p.p.t. Szacunek hałasu:
   L_WA ≈ 55 dB(A), Q = 4, r ≈ 7 m → L_p ≈ 55 + 10·log(4/(4π·7²)) ≈ 33 dB(A) na granicy. To mniej niż 40 dB (noc) i mniej niż cel 35 dB
   (W-024); w PT potwierdzić DTR wyrobu.
 * **Wentylacja mechaniczna z odzyskiem ciepła.** Centrala ≈ 450 m³/h (η ≈ 0,85) stoi na P2 w pomieszczeniu 2.07 (frontem serwisowym na
-  wschód, drzwi otwierane do holu, wyłaz przesunięty na x 7,20–8,10). Czerpnia i wyrzutnia są dachowe (W-166/W-167, WT §152):
-  **czerpnia (11,60; 1,00), dolna krawędź wlotu +10,00; wyrzutnia (1,90; 4,00), wylot +10,00** — odległość 10,15 m ≥ 10,00 m (ust. 10;
-  bez wymogu różnicy wysokości), obie ≥ 0,40 m nad **lokalnym** pokryciem z klinem PIR (czerpnia 0,42 m, wyrzutnia 0,50 m), czerpnia 7,96 m
-  od wywiewki K1, wyrzutnia 3,00 m od krawędzi konstrukcji dachu nad oknem O2-04 (3,20 m od lica) i 4,1 m od krawędzi pd. Wariant
-  z wyrzutnią podniesioną o 1 m (+10,95) dałby wysokość zabudowy ≈ 11,3 m > 11,0 m (MPZP) — odrzucony. Świetlik SW1 (5,4 m od wyrzutni)
-  jest **stały, nieotwierany i bez funkcji wentylacyjnej**; wymóg WT §152 ust. 12 (wylot ≥ 1 m nad górną krawędzią okna w odległości
+  wschód, drzwi otwierane do holu, wyłaz przesunięty na x 7,20–8,10). Czerpnia i wyrzutnia są dachowe (W-166/W-167, WT §152 — wydanie, §15):
+  **czerpnia na dachu D3** (pole wsch. nad P1, `energia.wentylacja.czerpnia`), dolna krawędź wlotu ≥ 0,40 m nad powierzchnią dachu
+  (ust. 4), ≥ 6 m od wywiewki K1; **wyrzutnia na D1 z wylotem pionowym** (1,90; 4,00), ≥ 0,40 m nad lokalnym pokryciem z klinem,
+  3,00 m od krawędzi konstrukcji dachu nad oknem O2-04 (ust. 12); czerpnia–wyrzutnia ≥ 6 m i wyrzutnia ≥ 1,0 m ponad czerpnią (ust. 10
+  w brzmieniu dosłownym); ust. 7 (0,4 m nad linią najwyższych punktów w promieniu 10 m) dotyczy wylotu poziomego — nie ma zastosowania.
+  Maks. wysokości urządzeń (`czerpnia_z_top`, `wyrzutnia_z_top`) wchodzą do wysokości zabudowy (`lamela.wskazniki`). Świetlik SW1
+  jest **stały, nieotwierany i bez funkcji wentylacyjnej**; wymóg WT §152 ust. 12–13 (wylot ≥ 1 m nad górną krawędzią okna w odległości
   3–10 m) odnosimy do okien otwieranych, przez które powietrze wyrzucane mogłoby wrócić do budynku — interpretację potwierdzić
-  w uzgodnieniu z rzeczoznawcą ds. sanitarnohigienicznych (wylot +10,75 przekroczyłby MPZP). Kanały biegną pionowo w szachcie SI, poziomo w sufitach podwieszanych holi i łazienek. Wywiew wg PN-83/B-03430/Az3
+  w uzgodnieniu z rzeczoznawcą ds. sanitarnohigienicznych. Kanały biegną pionowo w szachcie SI, poziomo w sufitach podwieszanych holi i łazienek. Wywiew wg PN-83/B-03430/Az3
   (`pomieszczenia[].went`, W-162):
   * kuchnia 50 (okresowo 120) m³/h;
   * łazienki i WC z natryskiem po 50 m³/h;
@@ -613,6 +615,8 @@ Model zweryfikowano podglądem (`final/*.png`), arkuszami PB (`projekt/01_koncep
 
 ## 12. Weryfikacja niezależna i podglądy 3D
 
+> **Stan historyczny** (przed rundą 2 i wydaniem) — wartości aktualne: §9 (bilans z modelu) i §15.
+
 Szczegóły są w `docs/20_koncepcja/weryfikacja_koncepcji.md`. Weryfikację wykonano na tym samym stanie modelu co bilans §9
 (`budynek.yaml` SHA-256 `d238ec0e…`).
 
@@ -640,6 +644,8 @@ PBC wychodzi 1 271,31 m² (79,5 %) wobec 1 281,57 m² w §9 — różnica wynika
 * `3D_aksonometria_rozwarstwiona.png`, `3D_widok_lotniczy_SE.png`, `3D_widok_od_ulicy_N.png`.
 
 ## 13. Rejestr zmian po audycie (A1 — zgodność z WT/MPZP, A2 — spójność geometryczna)
+
+> **Stan historyczny** (runda 1) — wartości wysokości i położenia czerpni/wyrzutni zastąpione w §14.2 i §15.
 
 Stan wyjściowy: audyt A1 — 3 niezgodności, 5 uwag, 152 kontrole OK (`audyt_A1.md`); audyt A2 — 1 krytyczna, 9 istotnych, 12 drobnych
 (`audyt_A2.md`). Poprawki wprowadzono w `tools/buduj_model.py` (model regenerowany), w rdzeniu `src/lamela/model.py` i IR

@@ -30,20 +30,20 @@ Obiekt: Dom testowy pipeline'u 3D. Wymaganie Inwestora 25.09.2026 (brief §9 pkt
 
 | Ściana | L [m] | Teren przy ścianie [m] | Teren 2 m dalej [m] | Spadek |
 |---:|---:|---:|---:|---:|
-| 1 | 10,6 | −0,325 | −0,342 | 0,008 |
-| 2 | 8,6 | −0,273 | −0,256 | −0,009 |
-| 3 | 10,6 | −0,252 | −0,233 | −0,009 |
-| 4 | 8,6 | −0,316 | −0,320 | 0,002 |
+| 1 | 10,6 | −0,320 | −0,327 | 0,004 |
+| 2 | 8,6 | −0,268 | −0,250 | −0,009 |
+| 3 | 10,6 | −0,255 | −0,236 | −0,010 |
+| 4 | 8,6 | −0,306 | −0,309 | 0,002 |
 
 ## 4. Sprawdzenia
 
 | ID | Warunek | Wartość | Wymaganie | Wynik | Podstawa / uwagi |
 |:---|:---|---:|---:|:---|:---|
-| W-019 | Spadek terenu od budynku, ściana 1 (śr. 5,0; −0,3) | 0,008 | ≥ 0,020 | **NIESPEŁNIONY** | W-019; brief §9 pkt 6 (teren istniejący (brak rzędnych projektowanych)) |
-| W-019 | Spadek terenu od budynku, ściana 2 (śr. 10,3; 4,0) | −0,009 | ≥ 0,020 | **NIESPEŁNIONY** | W-019; brief §9 pkt 6 (teren istniejący (brak rzędnych projektowanych)) |
-| W-019 | Spadek terenu od budynku, ściana 3 (śr. 5,0; 8,3) | −0,009 | ≥ 0,020 | **NIESPEŁNIONY** | W-019; brief §9 pkt 6 (teren istniejący (brak rzędnych projektowanych)) |
-| W-019 | Spadek terenu od budynku, ściana 4 (śr. −0,3; 4,0) | 0,002 | ≥ 0,020 | **NIESPEŁNIONY** | W-019; brief §9 pkt 6 (teren istniejący (brak rzędnych projektowanych)) |
-| W-019 | Wysokość cokołu (posadzka parteru − teren), minimum na obwodzie | 0,20 m | ≥ 0,30 m | **NIESPEŁNIONY** | brief §9 pkt 4 (≥ 0,30 m lub odwodnienie liniowe przy drzwiach bezprogowych) |
+| W-019 | Spadek terenu od budynku (minimum na odcinku), ściana 1 (x 8,1; y −0,3) | 0,004 | ≥ 0,020 | **NIESPEŁNIONY** | W-019; brief §9 pkt 6 (teren z punktów działki (IDW); co 0,10 m) |
+| W-019 | Spadek terenu od budynku (minimum na odcinku), ściana 2 (x 10,3; y 4,4) | −0,009 | ≥ 0,020 | **NIESPEŁNIONY** | W-019; brief §9 pkt 6 (teren z punktów działki (IDW); co 0,10 m) |
+| W-019 | Spadek terenu od budynku (minimum na odcinku), ściana 3 (x 4,9; y 8,3) | −0,010 | ≥ 0,020 | **NIESPEŁNIONY** | W-019; brief §9 pkt 6 (teren z punktów działki (IDW); co 0,10 m) |
+| W-019 | Spadek terenu od budynku (minimum na odcinku), ściana 4 (x −0,3; y 5,0) | 0,002 | ≥ 0,020 | **NIESPEŁNIONY** | W-019; brief §9 pkt 6 (teren z punktów działki (IDW); co 0,10 m) |
+| W-019 | Wysokość cokołu (posadzka parteru − teren TIN, co 0,10 m), minimum na obwodzie | 0,20 m | ≥ 0,30 m | **NIESPEŁNIONY** | brief §9 pkt 4 (≥ 0,30 m lub odwodnienie liniowe przy drzwiach bezprogowych) |
 
 ## Podsumowanie sprawdzeń
 
@@ -51,11 +51,11 @@ Warunków: 5; spełnionych: 0; niespełnionych: 5; informacyjnych: 0.
 
 Niespełnione:
 
-* W-019 — Spadek terenu od budynku, ściana 1 (śr. 5,0; −0,3): 0,008  (wymaganie >= 0,020 )
-* W-019 — Spadek terenu od budynku, ściana 2 (śr. 10,3; 4,0): −0,009  (wymaganie >= 0,020 )
-* W-019 — Spadek terenu od budynku, ściana 3 (śr. 5,0; 8,3): −0,009  (wymaganie >= 0,020 )
-* W-019 — Spadek terenu od budynku, ściana 4 (śr. −0,3; 4,0): 0,002  (wymaganie >= 0,020 )
-* W-019 — Wysokość cokołu (posadzka parteru − teren), minimum na obwodzie: 0,20 m (wymaganie >= 0,30 m)
+* W-019 — Spadek terenu od budynku (minimum na odcinku), ściana 1 (x 8,1; y −0,3): 0,004  (wymaganie >= 0,020 )
+* W-019 — Spadek terenu od budynku (minimum na odcinku), ściana 2 (x 10,3; y 4,4): −0,009  (wymaganie >= 0,020 )
+* W-019 — Spadek terenu od budynku (minimum na odcinku), ściana 3 (x 4,9; y 8,3): −0,010  (wymaganie >= 0,020 )
+* W-019 — Spadek terenu od budynku (minimum na odcinku), ściana 4 (x −0,3; y 5,0): 0,002  (wymaganie >= 0,020 )
+* W-019 — Wysokość cokołu (posadzka parteru − teren TIN, co 0,10 m), minimum na obwodzie: 0,20 m (wymaganie >= 0,30 m)
 
 ## Źródła
 

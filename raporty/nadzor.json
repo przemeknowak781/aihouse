@@ -1,5 +1,5 @@
 {
- "czas": "2026-09-25 09:56",
+ "czas": "2026-09-25 09:59",
  "aktywni": [
   {
    "id": "a46d9e0323adf8ae2",
@@ -18,33 +18,33 @@
    "powody": []
   },
   {
-   "id": "a472cdd66d2cb0c0b",
-   "opis": "wf_dad224e5-cd8:zastosowanie:PZT",
-   "idle_min": 0.0,
-   "bez_narzedzi_min": 0.0,
+   "id": "ac4887df55cb098ed",
+   "opis": "wf_dad224e5-cd8:zastosowanie:IS",
+   "idle_min": 0.8,
+   "bez_narzedzi_min": 0.8,
    "limity": 0,
    "powody": []
   },
   {
-   "id": "ac4887df55cb098ed",
-   "opis": "wf_dad224e5-cd8:zastosowanie:IS",
-   "idle_min": 2.1,
-   "bez_narzedzi_min": 2.1,
+   "id": "aa91fab19d57ad831",
+   "opis": "wf_dad224e5-cd8:zastosowanie:IE",
+   "idle_min": 0.8,
+   "bez_narzedzi_min": 0.8,
    "limity": 0,
    "powody": []
   },
   {
    "id": "abd1c424d0164d558",
    "opis": "wf_c5f7e298-4b9:poprawki:BO",
-   "idle_min": 0.0,
-   "bez_narzedzi_min": 0.1,
+   "idle_min": 0.2,
+   "bez_narzedzi_min": 0.2,
    "limity": 0,
    "powody": []
   },
   {
    "id": "ab7ed15ee18c7f9ed",
    "opis": "wf_c5f7e298-4b9:poprawki:IE",
-   "idle_min": 0.1,
+   "idle_min": 0.0,
    "bez_narzedzi_min": 0.1,
    "limity": 0,
    "powody": []
@@ -52,5 +52,5 @@
  ],
  "zakonczeni": 0,
  "zastoje": [],
- "repo_bez_zmian_min": 0.4
+ "repo_bez_zmian_min": 0.0
 }

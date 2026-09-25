@@ -10,9 +10,9 @@ Biblioteka `lamela.obliczenia.sanitarne` i `lamela.obliczenia.elektryka`. Model:
 | [Instalacja wodociągowa i c.w.u.](01_woda.md) | 12 | 12 | 0 | — |
 | [Kanalizacja sanitarna](02_kanalizacja.md) | 19 | 19 | 0 | — |
 | [Odwodnienie dachów, retencja](03_deszczowa.md) | 16 | 16 | 0 | — |
-| [Drenaż i odwodnienie powierzchniowe](04_drenaz.md) | 5 | 0 | 5 | W-019 Spadek terenu od budynku, ściana 1 (śr. 5,0; −0,3); W-019 Spadek terenu od budynku, ściana 2 (śr. 10,3; 4,0); W-019 Spadek terenu od budynku, ściana 3 (śr. 5,0; 8,3); W-019 Spadek terenu od budynku, ściana 4 (śr. −0,3; 4,0); W-019 Wysokość cokołu (posadzka parteru − teren), minimum na obwodzie |
+| [Drenaż i odwodnienie powierzchniowe](04_drenaz.md) | 5 | 0 | 5 | W-019 Spadek terenu od budynku (minimum na odcinku), ściana 1 (x 8,1; y −0,3); W-019 Spadek terenu od budynku (minimum na odcinku), ściana 2 (x 10,3; y 4,4); W-019 Spadek terenu od budynku (minimum na odcinku), ściana 3 (x 4,9; y 8,3); W-019 Spadek terenu od budynku (minimum na odcinku), ściana 4 (x |
 | [Pompa ciepła, ogrzewanie podłogowe, hałas](05_ogrzewanie.md) | 43 | 40 | 3 | W-153 1.01 Sypialnia: moc podłogi przy θ_V,des (T = 10 cm) ≥ Φ_HL; W-153 1.02 Hol: moc podłogi przy θ_V,des (T = 10 cm) ≥ Φ_HL; W-153 1.04 Garderoba: moc podłogi przy θ_V,des (T = 10 cm) ≥ Φ_HL |
-| [Bilans mocy](06_bilans_mocy.md) | 7 | 7 | 0 | — |
+| [Bilans mocy](06_bilans_mocy.md) | 8 | 8 | 0 | — |
 | [Obwody, zabezpieczenia, SPD, PWP](07_obwody.md) | 84 | 83 | 0 | — |
 | [Fotowoltaika](08_pv.md) | 12 | 12 | 0 | — |
 | [Ochrona odgromowa, uziom](09_odgromowa.md) | 3 | 2 | 0 | — |
@@ -26,8 +26,8 @@ Schematy: [schemat ideowy RG](schemat_RG.png), [schemat PC / c.w.u.](schemat_PC_
 * Wody opadowe: dachy 102,8 m², Q = 4,73 l/s; zbiornik 5,0 m³ + niecka 9,0 m² (V_min 2,66 m³); pokrycie podlewania 85 %.
 * Drenaż opaskowy: NIEWYMAGANY (W1.1-E (wilgoć gruntowa, woda nienaporowa)).
 * Ogrzewanie: Φ_HL = 5,71 kW (moduł fizyki/energii (PN-EN 12831)); PC PC-R290-05 (przykład), θ_biv = −8,4 °C; θ_V = 35,0 °C; bufor 40 dm³; hałas na granicy 24,6 dB(A).
-* Bilans mocy: P_inst = 43,0 kW, P_szczyt (DLM) = 24,0 kW ≤ P_przył = 27 kW / 40 A.
-* Obwody: 24; WLZ YKY 5×16 (∆U = 0,38 %); maks. ∆U = 2,37 %; CRL = 315 → SPD T1+2; PWP: PROJEKTOWAĆ (rekomendacja D-04 — spełnia WT §183 ust. 2 i jest zgodne z ROPoż).
+* Bilans mocy: P_inst = 42,9 kW, P_szczyt (DLM) = 23,9 kW ≤ P_przył = 27 kW / 40 A.
+* Obwody: 24; WLZ YKY 5×25 (∆U = 0,23 %); maks. ∆U = 2,22 %; CRL = 315 → SPD T1+2; PWP: PROJEKTOWAĆ (rekomendacja D-04 — spełnia WT §183 ust. 2 i jest zgodne z ROPoż).
 * PV: 15 × moduł = 6,45 kWp (EW10), E = 5610 kWh/a, autokonsumpcja 49 %.
 * Odgromowa: A_D = 2165 m²; LPS NIEWYMAGANY (R1 ≤ R_T przy SPD T1 dla obu klas obciążenia ogniowego); uziom: fundamentowy w ławach.
 

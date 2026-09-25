@@ -547,34 +547,127 @@ def rozdz_stan(o: Opis, D: dict, S: dict, ark_uwagi: list[str]):
                  szerokosci=["26mm", "26mm", None], zrodlo="BRAKI_DANYCH.md (zespół BO)")
 
 
+REJESTR = REPO / "docs/10_podstawy_prawne/00_rejestr_wymagan.md"
+# Normy stosowane w tomie poza wykazem biblioteki obliczeń (uwagi na arkuszach, specyfikacja wykonania) — numer i zakres;
+# wydanie i status odczytywane z rejestru wymagań (A.3); brak w rejestrze → pole do uzupełnienia (bez domysłów).
+NORMY_DODATKOWE = [
+    ("PN-EN 206+A2:2021-08", "Beton — wymagania, właściwości użytkowe, produkcja i zgodność (specyfikacja betonu)"),
+    ("PN-B-06265:2022-08", "Krajowe uzupełnienie PN-EN 206 (specyfikacja betonu)"),
+    ("PN-EN 13670", "Wykonywanie konstrukcji z betonu (otulina, pielęgnacja, rozszalowanie — uwagi na arkuszach)"),
+    ("PN-EN 10080", "Stal do zbrojenia betonu — spajalna stal zbrojeniowa"),
+    ("PN-EN 1090-2", "Wykonanie konstrukcji stalowych (słupy stalowe fasady)"),
+    ("PN-EN ISO 13793", "Właściwości cieplne budynków — projektowanie fundamentów chroniących przed wysadziną"),
+]
+
+
+def _rejestr_a3() -> list[list[str]]:
+    """Wiersze tabeli A.3 rejestru wymagań (normy, status PKN): [norma, status, zastępcza/uwaga, rola]."""
+    t = REJESTR.read_text(encoding="utf-8") if REJESTR.exists() else ""
+    m = re.search(r"^### A\.3[^\n]*\n(.*?)(?=^### )", t, flags=re.M | re.S)
+    out = []
+    for ln in (m.group(1) if m else "").splitlines():
+        kom = [c.strip() for c in ln.strip().strip("|").split("|")]
+        if ln.startswith("|") and len(kom) >= 4 and not set("".join(kom)) <= set("-: ") and kom[0] != "Norma":
+            out.append(kom)
+    return out
+
+
+def _numer_normy(n: str) -> str:
+    """Rdzeń oznaczenia normy do wyszukania w rejestrze: „1992-1-1”, „ISO 3766”, „206+A2”, „PN-B-06265”."""
+    m = re.match(r"PN-(?:EN )?(?:(ISO|IEC) )?([\dA-Z][\w+-]*?)(?=:|\s|$)", n)
+    if not m:
+        return n
+    rdzen = m.group(2)
+    if n.startswith(("PN-B-", "PN-H-")):
+        return n.split(":")[0].split(" ")[0]
+    return f"{m.group(1)} {rdzen}" if m.group(1) else rdzen
+
+
+def status_normy(norma: str, a3: list) -> tuple[str, str]:
+    """(oznaczenie z wydaniem, status wg rejestru A.3). Wydanie uzupełniane z rejestru, gdy go brak."""
+    num = _numer_normy(norma)
+    rx = re.compile(rf"(?<![\d.-]){re.escape(num)}(?![\d])")
+    wiersz = next((r for r in a3 if rx.search(r[0])), None)
+    ozn = norma
+    if ":" not in norma.split(" — ")[0]:
+        w = re.search(rf"(?<![\d.-]){re.escape(num)}((?:\+A\d+)?:[\d-]+)", wiersz[0]) if wiersz else None
+        ozn = norma + w.group(1) if w else f"{norma} {do_uzup('rok wydania — poza rejestrem wymagań A.3')}"
+    if not wiersz:
+        return ozn, do_uzup("status w katalogu PKN — poza rejestrem wymagań A.3")
+    st = re.sub(r"\*\*WYCOF\.\*\*", "wycofana", wiersz[1]).replace("aktualne", "aktualna").strip()
+    zast = re.sub(r"\*\*WYCOF\.\*\*", "wycofaną", wiersz[2]).replace("**", "")
+    zast = re.sub(r"\s*\([^()]*\)", "", zast).strip()                # bez dopowiedzeń w nawiasach
+    if "wycofana" in st and zast not in ("", "—"):
+        st += f"; zastępcza: {zast}"
+    elif zast not in ("", "—") and "zastąpiła" not in zast:
+        st += f" ({zast})"
+    return ozn, st
+
+
+def normy_bo(D: dict) -> list[dict]:
+    """Wykaz norm tomu: z biblioteki obliczeń (``NORMY``) + stosowane w uwagach arkuszy; wydanie i status z rejestru."""
+    a3, W = _rejestr_a3(), []
+    for wpis in D["RAP"].NORMY:
+        czesci = [c.strip().partition(" — ") for c in wpis.split("; ")]
+        for k, (n, _, tyt) in enumerate(czesci):
+            if not n.startswith("PN"):
+                continue                              # akty prawne — w podrozdziale „Przepisy”
+            tyt = tyt or next((t for _, _, t in czesci[k + 1:] if t), "—")   # „A; B — tytuł” → tytuł wspólny
+            if n.startswith("(+") and W:                                    # „(+Ap2…)” — poprawka poprzedniej
+                W[-1] = (W[-1][0] + " " + n, W[-1][1])
+                continue
+            W.append((n, tyt[:1].upper() + tyt[1:]))
+    W += NORMY_DODATKOWE
+    out = []
+    for n, tyt in W:
+        ozn, st = status_normy(n, a3)
+        out.append({"Norma (wydanie)": ozn, "Zakres": tyt, "Status (rejestr wymagań A.3, PKN)": st})
+    return out
+
+
 def rozdz_podstawa(o: Opis, D: dict):
-    """2. Podstawa opracowania: przepisy, normy (z biblioteki obliczeń), dane wejściowe z datami."""
+    """2. Podstawa opracowania: przepisy, normy (wydanie i status), dane wejściowe z datami."""
     o.rozdzial("Podstawa opracowania", podstawa="§ 23 pkt 1 RPB")
     meta = D["bud"].get("meta", {})
     o.tekst(f"""
     ## Przepisy
-    * ustawa — Prawo budowlane (PB), w szczególności art. 34 ust. 3 pkt 4 (projekt techniczny), art. 41 ust. 4a
-      pkt 2 (oświadczenie projektanta PT), art. 102a (stosowanie WT w dotychczasowym brzmieniu);
+    * ustawa z dnia 7 lipca 1994 r. — Prawo budowlane (PB, t.j. Dz.U. 2026 poz. 524 ze zm.): art. 34 ust. 3 pkt 3
+      lit. a (projektowane rozwiązania konstrukcyjne obiektu wraz z wynikami obliczeń statyczno-wytrzymałościowych)
+      i lit. d (geotechniczne warunki posadowienia) — zakres projektu technicznego, art. 41 ust. 4a pkt 2
+      (oświadczenie projektanta PT), art. 102a (stosowanie WT w dotychczasowym brzmieniu);
     * rozporządzenie w sprawie szczegółowego zakresu i formy projektu budowlanego (RPB, Dz.U. 2020 poz. 1609,
       t.j. Dz.U. 2022 poz. 1679 ze zm.) — § 23 pkt 1–3 i 10 (część opisowa PT), § 24 pkt 1 (część rysunkowa);
+      § 23 pkt 12 (dane dotyczące warunków ochrony ludności, dodany przez Dz.U. 2026 poz. 597) — nie dotyczy:
+      PZT i PAB nie przewidują obiektu zbiorowej ochrony ani miejsca doraźnego schronienia (PAB, § 20 ust. 1
+      pkt 14 RPB — nie dotyczy);
     * rozporządzenie w sprawie warunków technicznych, jakim powinny odpowiadać budynki i ich usytuowanie (WT,
       t.j. Dz.U. 2022 poz. 1225 ze zm.) — w brzmieniu stosowanym na podstawie art. 102a PB ({meta.get('uwagi', '—')});
     * rozporządzenie MTBiGM z 25.04.2012 w sprawie ustalania geotechnicznych warunków posadawiania obiektów
       budowlanych (Dz.U. 2012 poz. 463) — § 7 ust. 2 (kat. II: dokumentacja badań podłoża i projekt geotechniczny),
       § 9, § 10.
 
-    ## Normy (Eurokody z załącznikami krajowymi)
+    ## Normy
+    Eurokody 1. generacji z załącznikami krajowymi — bez mieszania z 2. generacją (rejestr wymagań A.3). Wycofanie
+    normy nie zakazuje jej stosowania (stanowisko PKN); normy wycofane podano ze statusem i normą zastępczą.
     """)
-    o.tekst("\n".join(f"* {n}" for n in D["RAP"].NORMY))
-    wiersze = [{"Dane wejściowe": "model budynku", "Plik": "model/budynek.yaml",
-                "Stan": f"wersja {meta.get('wersja', '—')}, {D['t_modelu']}"}]
+    o.tabela(normy_bo(D), tytul="Normy stosowane w projekcie konstrukcji — wydanie i status", klasa="zwarta",
+             wyrownanie={"Norma (wydanie)": "l", "Zakres": "l", "Status (rejestr wymagań A.3, PKN)": "l"},
+             szerokosci=["52mm", None, "58mm"], zrodlo="rejestr wymagań, sekcja A.3 (status PKN)")
+    o.tekst("""
+    Specyfikacja betonu (klasa wytrzymałości, klasa ekspozycji XC/XF, maksymalny w/c, kruszywo, konsystencja)
+    w opisie i w uwagach na arkuszach — wg PN-EN 206+A2:2021-08 i PN-B-06265:2022-08: normy wycofane, stosowane
+    jako wiedza techniczna dla spójności z PN-EN 1992-1-1:2008 (rejestr wymagań D-09). Przed wydaniem PT normę
+    deklaracji betonu (PN-EN 206-1:2026-09) potwierdzić z wytwórnią betonu.
+    """)
+    wiersze = [{"Dane wejściowe": "model budynku", "Źródło": f"wersja {meta.get('wersja', '—')}",
+                "Stan": D["t_modelu"]}]
+    zr = {"obliczenia statyczne": "rozdz. 4", "MES płyty fundamentowej": "rozdz. 5",
+          "kontrola zbrojenia": "rozdz. 6"}
     for nazwa, (akt, kiedy) in D["aktualnosc"].items():
-        wiersze.append({"Dane wejściowe": nazwa, "Plik": {"obliczenia statyczne": rel(D["kat_obl"] / "wyniki.json"),
-                        "MES płyty fundamentowej": rel(KAT_OBL / "plyta_fundamentowa_MES.md"),
-                        "kontrola zbrojenia": rel(KAT_RYS / "kontrola_zbrojenia.json")}[nazwa],
-                        "Stan": f"{kiedy} — {'aktualne względem modelu' if akt else NZ + ' (nieaktualne)'}"})
-    o.tabela(wiersze, tytul="Dane wejściowe tomu (odczyt przy każdym złożeniu)", wyrownanie={"Plik": "l"},
-             szerokosci=["40mm", None, "58mm"])
+        wiersze.append({"Dane wejściowe": nazwa, "Źródło": f"zespół konstrukcji — {zr[nazwa]}",
+                        "Stan": f"{kiedy} — {'aktualne względem modelu' if akt else NZ + ' (starsze niż model)'}"})
+    o.tabela(wiersze, tytul="Dane wejściowe tomu (odczyt przy każdym złożeniu)", wyrownanie={"Źródło": "l"},
+             szerokosci=["46mm", None, "64mm"])
 
 
 def _zakres_wym(vals, n=2, jedn="m") -> str:
@@ -652,6 +745,26 @@ def podsekcja_md(tekst: str, naglowek: str) -> str:
     return m.group(1).strip() if m else ""
 
 
+def substrat_w_obliczeniach(D: dict, zal_modelu) -> str:
+    """Ciężar substratu dachu zielonego przyjęty w obliczeniach (wiersz „Substrat…” zestawienia obciążeń) i jego
+    porównanie z założeniem modelu (konstrukcja.obciazenia.dach_zielony) — rozbieżność jawnie."""
+    out = []
+    for el, (nr, t) in sekcje_pozycji(D["obl_md"]).items():
+        m = re.search(r"^\| (Substrat[^|]*)\| ([^|]+)\| ([\d,]+) \|", zestawienie_obciazen(t), flags=re.M)
+        if m:
+            out.append((el, nr, m.group(2).strip(), _f(m.group(3))))
+    if not out:
+        return ""
+    el, nr, obl, gk = out[0]
+    txt = (f"; dach zielony w obliczeniach (poz. {', '.join(f'{n} {e}' for e, n, _, _ in out)}): substrat "
+           f"g_k = {L(gk, 2)} kN/m² ({obl})")
+    m = re.search(r"≈\s*([\d,]+)\s*kN/m²", str(zal_modelu or ""))
+    if m and abs(_f(m.group(1)) - gk) > 0.05:
+        txt += (f" — mniej niż założenie modelu ({m.group(1)} kN/m², stan nasycony): brak wody retencyjnej, "
+                f"pozycja {NZ} (rozdz. 1)")
+    return txt
+
+
 def rozdz_konstrukcja(o: Opis, D: dict):
     """3. Rozwiązania konstrukcyjne, schematy statyczne, założenia i obciążenia, materiały (§ 23 pkt 1 RPB)."""
     b, p, obl = D["bud"], D["p"], D["obl_md"] or ""
@@ -695,8 +808,9 @@ def rozdz_konstrukcja(o: Opis, D: dict):
         {"Oddziaływanie": "użytkowe (PN-EN 1991-1-1 + NA)", "Założenie": obc.get("uzytkowe", "—"),
          "Wartość": f"stropy q_k = {L(p.q_strop)} kN/m² (Q_k = {L(p.Q_strop, 1)} kN); schody {L(p.q_schody)}; "
                     f"tarasy {L(p.q_taras)}; dach H {L(p.q_dach_H)}; garaż kat. F {L(p.q_garaz)} kN/m² (Q_k = {L(p.Q_garaz, 0)} kN)"},
-        {"Oddziaływanie": "stałe (ciężar własny, warstwy)", "Założenie": obc.get("dach_zielony", "—"),
-         "Wartość": f"żelbet {L(p.ciezar_zelbetu, 1)} kN/m³; warstwy przegród z modelu (materiały, grubości)"},
+        {"Oddziaływanie": "stałe (ciężar własny, warstwy)", "Założenie": f"dach zielony (model): {obc.get('dach_zielony', '—')}",
+         "Wartość": f"żelbet {L(p.ciezar_zelbetu, 1)} kN/m³; warstwy przegród z modelu (materiały, grubości)"
+                    + substrat_w_obliczeniach(D, obc.get("dach_zielony"))},
         {"Oddziaływanie": "kombinacje (PN-EN 1990 + NA)", "Założenie": f"{p.klasa_konsekwencji}, K_FI = {L(p.K_FI, 1)}",
          "Wartość": f"STR/GEO 6.10a/6.10b: γ_G = {L(p.gG_sup)}, ξ = {L(p.xi)}, γ_Q = {L(p.gQ)}; EQU: "
                     f"{L(p.EQU_gG_dst)}·G_dst + {L(p.EQU_gQ)}·Q_dst ≤ {L(p.EQU_gG_stb)}·G_stb"},
@@ -884,6 +998,11 @@ def rozdz_geotechnika(o: Opis, D: dict):
     o.rozdzial("Projekt geotechniczny", poziom=2, podstawa="Dz.U. 2012 poz. 463 § 10 pkt 1–10")
     m0_mes = re.search(r"E_s = M₀[^=]*= ([\d ]+)·\(1\+([\d,]+)\)", mes)
     mes_war = [r for t in tabele_md(mes) for r in t if "Stan" in r]
+    # parametry MES z pierwszej listy „Parametry podłoża …: φ'_k; c'_k; γ = **φ; c; γ — opis**”
+    par_mes = [x.strip() for x in (wartosc_md(mes, "Parametry podłoża") or "").split("—")[0].split(";")]
+    par_mes += [""] * (3 - len(par_mes))
+    id_obl = re.search(r"I_D\s*≈\s*([\d,]+)", p.grunt.nazwa)
+    id_mes = re.search(r"I_D\s*≈\s*([\d,]+)", wartosc_md(mes, "Parametry podłoża") or "")
     o.tekst(f"""
     ### Prognoza zmian właściwości podłoża w czasie {{podstawa: § 10 pkt 1}}
     Piaski średnie niewysadzinowe, ZWG ok. {L(abs(geo.get('ZWG', 0)), 1)} m p.p.t. — poniżej strefy wpływu
@@ -895,24 +1014,28 @@ def rozdz_geotechnika(o: Opis, D: dict):
     Podejście obliczeniowe DA2* (PN-EN 1997-1 + NA): parametry materiałowe M1 (γ_φ' = γ_c' = γ_γ = 1,0) — wartości
     obliczeniowe równe charakterystycznym z tabeli poniżej (kolumna „Model”).
     """)
+    rozbiezne = [w for w in kontrole_spojnosci(D) if w["obszar"] == "Projekt geotechniczny"]
     o.tabela([
         {"Parametr (wartość charakterystyczna)": "rodzaj gruntu nośnego", "Model (geotechnika)": gr.get("rodzaj", "—"),
          "Obliczenia statyczne": p.grunt.nazwa, "MES płyty": "jw. (M1)"},
         {"Parametr (wartość charakterystyczna)": "stopień zagęszczenia I_D", "Model (geotechnika)": L(gr.get("I_D")),
-         "Obliczenia statyczne": "≈ 0,6 (opis)", "MES płyty": "—"},
+         "Obliczenia statyczne": f"≈ {id_obl.group(1)} (opis gruntu)" if id_obl else "—",
+         "MES płyty": f"≈ {id_mes.group(1)} (opis gruntu)" if id_mes else "—"},
         {"Parametr (wartość charakterystyczna)": "kąt tarcia wewnętrznego φ'_k [°]", "Model (geotechnika)": L(gr.get("phi"), 1),
-         "Obliczenia statyczne": L(p.grunt.fi_k, 1), "MES płyty": (wartosc_md(mes, "Parametry podłoża") or "—").split(";")[0]},
+         "Obliczenia statyczne": L(p.grunt.fi_k, 1), "MES płyty": par_mes[0].rstrip("°") or "—"},
         {"Parametr (wartość charakterystyczna)": "ciężar objętościowy γ [kN/m³]", "Model (geotechnika)": L(gr.get("gamma"), 1),
-         "Obliczenia statyczne": L(p.grunt.gamma, 1), "MES płyty": "18,5" if "18,5 kN/m³" in mes else "—"},
+         "Obliczenia statyczne": L(p.grunt.gamma, 1), "MES płyty": par_mes[2].replace("kN/m³", "").strip() or "—"},
         {"Parametr (wartość charakterystyczna)": "moduł edometryczny M₀ [kPa]", "Model (geotechnika)": L(gr.get("M0"), 0),
-         "Obliczenia statyczne": L(p.grunt.M0, 0), "MES płyty": m0_mes.group(1).strip() if m0_mes else "—"},
+         "Obliczenia statyczne": L(p.grunt.M0, 0), "MES płyty": L(_f(m0_mes.group(1)), 0) if m0_mes else "—"},
         {"Parametr (wartość charakterystyczna)": "ZWG [m p.p.t.]", "Model (geotechnika)": L(abs(geo.get("ZWG", 0)), 1),
          "Obliczenia statyczne": L(p.grunt.ZWG, 1), "MES płyty": "γ' pod fundamentem" if "γ'" in mes else "—"},
     ], tytul=f"Parametry geotechniczne podłoża {FIKCJA}", klasa="zwarta",
         wyrownanie={"Parametr (wartość charakterystyczna)": "l", "Model (geotechnika)": "l", "Obliczenia statyczne": "l"},
-        uwagi=["Rozbieżności między kolumnami wskazują parametr do ujednolicenia po badaniach (jedno źródło: model "
-               "`geotechnika`); w II kat. geotechnicznej korelacje PN-81/B-03020 niedopuszczalne (W-282)."],
-        zrodlo="model/budynek.yaml (geotechnika); Parametry.z_wymagan; plyta_fundamentowa_MES.md")
+        uwagi=["Źródłem parametrów projektu geotechnicznego jest model geotechniczny (kolumna „Model”). Rozbieżność "
+               "w innej kolumnie oznacza obliczenia do powtórzenia na parametrach modelu — pozycja "
+               f"„Projekt geotechniczny” w rozdz. 1 (stan: {'brak rozbieżności' if not rozbiezne else NZ}). "
+               "W II kat. geotechnicznej korelacje PN-81/B-03020 niedopuszczalne (W-282)."],
+        zrodlo="model budynku (geotechnika); parametry obliczeń; raport MES płyty fundamentowej")
     o.tekst(f"""
 
     ### Częściowe współczynniki bezpieczeństwa {{podstawa: § 10 pkt 3}}
@@ -996,18 +1119,26 @@ def rozdz_braki(o: Opis, D: dict, ark_info: list[str]):
             "wyroby równoważne spełniające parametry wymagane (nośność, klasa, deklaracja właściwości użytkowych, "
             "ETA/EAD dla łączników termoizolacyjnych).")
     if ark_info:
-        o.tekst("Uwagi kontroli jakości arkuszy (raport_widokow.json, AUD-RYS):\n\n" + "\n".join(f"* {u}" for u in ark_info))
+        o.tekst("Uwagi kontroli jakości arkuszy (AUD-RYS):\n\n" + "\n".join(f"* {u}" for u in ark_info))
+
+
+def _tekst_pdf(pdf: Path) -> str:
+    import pymupdf
+    with pymupdf.open(str(pdf)) as doc:
+        return " ".join(pg.get_text() for pg in doc)
 
 
 def arkusze_bo(bez: bool = False) -> tuple[list[Arkusz], list[str], list[str]]:
     """Arkusze PT-BO z ``raport_widokow.json`` (+ arkusze konfiguracji ``model/arkusze_bo.yaml`` bez wpisu w raporcie).
-    Zwraca (arkusze, braki → NIEZAMKNIĘTE, uwagi QA)."""
+    Zwraca (arkusze, braki → NIEZAMKNIĘTE „NR: opis”, uwagi informacyjne). Uwagi kontroli jakości z raportu widoków
+    przypisuje do arkusza tylko przy zgodnym numerze i tytule — pozostałe (nieaktualne) zgłasza zbiorczo."""
     rap = _czytaj(KAT_RYS / "raport_widokow.json") or {"arkusze": []}
     cfg = yaml.safe_load((REPO / "model/arkusze_bo.yaml").read_text(encoding="utf-8")) or {}
-    ark, braki, info = [], [], [p.strip() for p in rap.get("problemy", [])]
+    ark, braki, info = [], [], []
     w_rap = {a["nr"] for a in rap.get("arkusze", [])}
     lista = list(rap.get("arkusze", [])) + [dict(nr=c["nr"], tytul=c["tytul"], skala=f"1:{c.get('skala', 50)}",
                                                  pliki={"pdf": ""}) for c in cfg.get("arkusze", []) if c["nr"] not in w_rap]
+    nst, normy_wycof = [], []
     for a in lista:
         pdf = Path(a["pliki"].get("pdf") or "")
         pdf = pdf if pdf.is_absolute() else REPO / pdf
@@ -1017,8 +1148,36 @@ def arkusze_bo(bez: bool = False) -> tuple[list[Arkusz], list[str], list[str]]:
                 braki.append(f"{a['nr']}: brak pliku PDF arkusza „{a['tytul']}” — strona zastępcza")
             continue
         if not a.get("qa", {}).get("ok", True):
-            braki.append(f"{a['nr']}: kontrola QA arkusza z błędami: {a['qa'].get('errors')}")
-        ark.append(Arkusz.z_pdf(pdf))
+            braki.append(f"{a['nr']}: kontrola jakości arkusza z błędami: {a['qa'].get('errors')}")
+        ar = Arkusz.z_pdf(pdf)
+        ark.append(ar)
+        if str(ar.format or "").startswith("nst."):
+            nst.append(f"{ar.nr} ({ar.wymiar_tekst()})")
+        t = _tekst_pdf(pdf)
+        if re.search(r"PN-EN\s*206\+A2|PN-B-06265", t) and not re.search(r"wycofan", t, re.I):
+            normy_wycof.append(ar.nr)
+    # uwagi QA raportu widoków: „NR TYTUŁ: problem” — aktualne tylko przy zgodnym numerze i tytule arkusza
+    tyt = {a.nr: a.tytul for a in ark}
+    stare, kolizje = [], OrderedDict()
+    for pr in (x.strip() for x in rap.get("problemy", [])):
+        m = re.match(r"^(PT-BO-\d+)\s+(.*?):\s*(.*)$", pr)
+        if m and tyt.get(m.group(1)) == m.group(2).strip():
+            kolizje.setdefault(m.group(1), []).append(m.group(3))
+        else:
+            stare.append(m.group(1) if m else pr.split(":")[0].strip()[:40])
+    for nr, lst in kolizje.items():
+        braki.append(f"{nr}: {'; '.join(lst)} — usunąć przed wydaniem (kontrola jakości arkusza)")
+    if stare:
+        braki.append(f"Raport kontroli arkuszy: {len(stare)} {odmiana(len(stare), 'uwaga', 'uwagi', 'uwag')} dotyczy "
+                     f"numerów lub tytułów niezgodnych z wykazem rysunków ({', '.join(sorted(set(stare))[:8])}) — raport "
+                     "nieaktualny; wygenerować ponownie arkusze konstrukcji wraz z raportem kontroli")
+    if nst:
+        braki.append(f"Formaty arkuszy: {len(nst)} {odmiana(len(nst), 'arkusz', 'arkusze', 'arkuszy')} w formacie "
+                     f"niestandardowym ({', '.join(nst)}) — dobrać format z szeregu PN-EN ISO 5457 (A0–A4, formaty "
+                     "wydłużone; W-313)")
+    if normy_wycof:
+        braki.append(f"Uwagi na arkuszach: {', '.join(normy_wycof)} — specyfikacja betonu powołuje PN-EN 206+A2 "
+                     "i PN-B-06265 bez statusu (normy wycofane, rejestr D-09) — ujednolicić z rozdz. 2.2")
     return ark, braki, info
 
 

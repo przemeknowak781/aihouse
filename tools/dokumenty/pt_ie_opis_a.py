@@ -40,8 +40,8 @@ def rozdz_stan(o: Opis, D: DanePTIE):
                    "Wynik po zmianie": f"≈ {L(p['wartosc_po'], 2)} {p['jedn']}"} for p in D.propozycje],
                  tytul="Warunki niespełnione i rozwiązania wyznaczone z wyników obliczeń",
                  uwagi="Spadek napięcia przeliczono proporcjonalnie do przekroju żył (∆U ∝ 1/s; reaktancja pominięta). "
-                       "Rozwiązanie wprowadzić w parametrach obliczeń (ParametryObwody.WLZ_przekroj, ParametryPV.s_DC) "
-                       "i przeliczyć tom — do tego czasu obowiązuje przekrój z kolumny „Rozwiązanie”.")
+                       "Rozwiązanie należy wprowadzić do danych obliczeń i przeliczyć tom wraz z arkuszami; tom "
+                       "z niespełnionym warunkiem nie nadaje się do wydania.")
     if D.otwarte:
         o.tekst("**Sprawy otwarte** (do zamknięcia przed wydaniem tomu do realizacji; po uzupełnieniu modelu status "
                 "aktualizuje się przy ponownym generowaniu):\n\n" + "\n".join(f"{i}. {t}" for i, t in enumerate(D.otwarte, 1)))
@@ -61,7 +61,16 @@ def rozdz_podstawy(o: Opis, D: DanePTIE, d: dict):
     wtyczkowych i zasilania urządzeń (w tym pompy ciepła, centrali wentylacyjnej, punktu ładowania pojazdu
     elektrycznego), mikroinstalacja fotowoltaiczna, ochrona przeciwporażeniowa i przeciwprzepięciowa, uziemienia
     i połączenia wyrównawcze, ocena ryzyka piorunowego, instalacje telekomunikacyjne (przyłącze światłowodowe,
-    okablowanie strukturalne), przeciwpożarowy wyłącznik prądu, bilans mocy.
+    okablowanie strukturalne, RTV/SAT, SSWiN, wideodomofon), przeciwpożarowy wyłącznik prądu, bilans mocy.
+
+    **Autorzy i specjalności.** Tom obejmuje dwie specjalności uprawnień budowlanych: instalacyjną w zakresie
+    sieci, instalacji i urządzeń elektrycznych i elektroenergetycznych (PB art. 15a ust. 22) — wszystkie rozdziały
+    i arkusze z wyjątkiem wymienionych dalej; instalacyjną
+    w zakresie sieci, instalacji i urządzeń telekomunikacyjnych (PB art. 15a ust. 18 — telekomunikacja przewodowa
+    wraz z infrastrukturą telekomunikacyjną) — rozdz. „Instalacje telekomunikacyjne” i arkusze
+    {D.arkusze_nr('teletechnika')}. Współautorów z zakresem opracowania wymieniono na stronie tytułowej
+    i w oświadczeniu projektanta (PB art. 34 ust. 3e). Tom obejmujący więcej niż jedną specjalność ma w nazwie pliku
+    symbol **WB** (zał. 1 RPB); oznaczenie tomu w odesłaniach innych tomów: PT-4.
 
     **Zakres wg RPB (rozporządzenie w sprawie szczegółowego zakresu i formy projektu budowlanego, Dz.U. 2020
     poz. 1609, t.j. Dz.U. 2022 poz. 1679 ze zm.):**
@@ -76,8 +85,11 @@ def rozdz_podstawy(o: Opis, D: DanePTIE, d: dict):
     * § 23 pkt 10 — dane dotyczące warunków ochrony przeciwpożarowej stosownie do zakresu tomu;
     * § 23 pkt 11 lit. a — bilans mocy urządzeń elektrycznych stanowiących stałe wyposażenie budynku (bez urządzeń
       technologicznych — budynek mieszkalny); lit. b–d — tom PT-3 IS (charakterystyka energetyczna);
-    * § 23 pkt 1–6, 9 i 12 — nie dotyczy tomu (konstrukcja, geotechnika, przegrody — PT-1 AR / PT-2 BO; budynek
-      mieszkalny, nie liniowy); § 23 pkt 4a — nie dotyczy (W-231);
+    * § 23 pkt 1–5 i 9 — nie dotyczy tomu (konstrukcja, geotechnika, przegrody, urządzenia instalacji sanitarnych —
+      PT-1 AR, PT-2 BO, PT-3 IS); § 23 pkt 4a — nie dotyczy (W-231); § 23 pkt 6 — nie dotyczy (budynek
+      mieszkalny, nie obiekt liniowy);
+    * § 23 pkt 12 (dodany Dz.U. 2026 poz. 597 § 1 pkt 6) — nie dotyczy: PZT i PAB nie przewidują budowli
+      ochronnej ani miejsca doraźnego schronienia (PAB § 20 ust. 1 pkt 14 — n/d);
     * § 24 pkt 4 lit. b — rzuty instalacji elektroenergetycznych, telekomunikacyjnych i piorunochronnej, schemat
       rozdzielnicy głównej, uziom i połączenia wyrównawcze (część rysunkowa).
 
@@ -94,15 +106,20 @@ def rozdz_podstawy(o: Opis, D: DanePTIE, d: dict):
 
     **Normy (sekcja A.3 rejestru).** PN-HD 60364-1:2010; -4-41:2017-09; -4-42:2011; -4-43:2024-04; -4-443:2016-03;
     -5-52:2011; -5-53:2022-10; -5-54:2011; -6:2016-07; -7-701:2025-02; -7-712:2016-05; -7-714:2012; -7-722:2019-01;
-    PN-EN 62305-1…-4 (wydania powołane w WT) i kontrolnie PN-EN IEC 62305-1…-4:2025-09; PN-EN IEC 61643-11:2026-04;
+    PN-EN 62305-1…-4:2008/2011/2012 (wycofane; wydania powołane w zał. 1 WT — stosowane) i PN-EN IEC
+    62305-1…-4:2025-09 (aktualne, wersja angielska — rozdz. „Ocena ryzyka piorunowego”); PN-EN 12464-1:2012
+    (natężenie oświetlenia; wydanie powołane w zał. 1 WT lp. 41); PN-EN IEC 61643-11:2026-04;
     PN-EN 62446-1:2016-08; PN-EN 50549-1:2019-02; PN-EN 50618:2015-03; PN-EN 50173-4:2018-07; PN-EN 50174-2:2018-08;
-    PN-EN 50310:2016-09; PN-EN 14604:2006; PN-EN IEC 61439-3:2025-09; PN-EN 61082-1:2015-03. Wartości tablicowe
+    PN-EN 50310:2016-09; PN-EN 14604:2006; PN-EN IEC 61439-3:2025-09; PN-EN 61082-1:2015-03. Normy wycofane
+    przywoływane wyłącznie z podaniem statusu: PN-HD 60364-5-534:2012/2016-04 (zastąpiona przez PN-HD
+    60364-5-53:2022-10 — dobór SPD wg wydania aktualnego), PN-86/E-05003/01 (źródło historycznej mapy N_G —
+    dane informacyjne). Wartości tablicowe
     z literatury (obciążalności wg PN-HD 60364-5-52 zał. B, spadki napięć wg N SEP-E-002) oznaczono w obliczeniach
     [NZW] — do potwierdzenia z tekstem norm przed wydaniem do realizacji (D-19).
 
     **Materiały wyjściowe:** PZT i PAB (tom I), PT-1 AR, PT-2 BO (zbrojenie i uziom), PT-3 IS (moc pompy ciepła,
     centrali, grzałki; charakterystyka energetyczna), model `model/budynek.yaml`, `dzialka.yaml`, `instalacje.yaml`,
-    `wyposazenie.yaml`; dane PVGIS 5.3 (JRC) dla Poznania. Warunki przyłączenia OSD — {FIKCJA}
+    `wyposazenie.yaml` (stan z {D.t_modelu}); dane PVGIS 5.3 (JRC) dla Poznania. Warunki przyłączenia OSD — {FIKCJA}
     (moc przyłączeniowa i parametry sieci jako [ZAŁ], E-05).
     """)
 
@@ -139,7 +156,7 @@ def rozdz_zasilanie(o: Opis, D: DanePTIE):
     I_z = {L(w['I_z'], 1)} A (metoda {w['metoda']}), spadek napięcia przy prądzie zabezpieczenia przedlicznikowego
     ∆U = {L(w['dU'], 2)} % (temperatura robocza). Kabel w ziemi na głębokości ≥ 0,7 m w piasku z taśmą ostrzegawczą
     niebieską, pod utwardzeniami i przy wejściu do budynku w rurze osłonowej; przejście przez ścianę/płytę poniżej
-    terenu gazoszczelne (W-214). Trasa w terenie: {en.get('opis', '—')}.
+    terenu gazoszczelne (W-214). Trasa w terenie: {D.trasa_wlz()}.
 
     **Układ sieci w budynku: TN-S** — oddzielne przewody ochronny PE i neutralny N w obwodach rozdzielczych
     i odbiorczych (WT § 183 ust. 1 pkt 2). Rozdział PEN — preferowany w ZKP z WLZ 5-żyłowym (wymaga zgody OSD);

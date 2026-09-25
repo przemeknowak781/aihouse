@@ -62,24 +62,24 @@
   }
  },
  "bilans": {
-  "P_inst_kW": 43.0,
-  "P_szczyt_bez_DLM_kW": 24.0,
-  "P_szczyt_DLM_kW": 24.0,
+  "P_inst_kW": 42.9,
+  "P_szczyt_bez_DLM_kW": 23.9,
+  "P_szczyt_DLM_kW": 23.9,
   "P_przylaczeniowa_kW": 27.0,
   "I_zab_A": 40.0,
   "fazy_kW": {
    "L1": 7.94,
-   "L2": 8.06,
-   "L3": 8.05
+   "L2": 8.05,
+   "L3": 7.94
   },
-  "asymetria": 0.015
+  "asymetria": 0.014
  },
  "obwody": {
-  "WLZ": "YKY 5×16",
-  "dU_WLZ_proc": 0.38,
+  "WLZ": "YKY 5×25",
+  "dU_WLZ_proc": 0.234,
   "obwody": 24,
-  "dU_max_proc": 2.37,
-  "Z_s_max_ohm": 0.839,
+  "dU_max_proc": 2.22,
+  "Z_s_max_ohm": 0.821,
   "CRL": 315.0,
   "PWP": "PROJEKTOWAĆ (rekomendacja D-04 — spełnia WT §183 ust. 2 i jest zgodne z ROPoż)"
  },

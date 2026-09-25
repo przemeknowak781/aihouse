@@ -13,7 +13,7 @@ Obiekt: Dom testowy pipeline'u 3D. PN-EN 62305-2 (WT: 2008; aktualna PN-EN IEC 6
 
 * Wysokość budynku nad terenem (najwyższa attyka), części: 1: H = **6,85** m — _model_
 * Powierzchnia zbierania wyładowań bezpośrednich: A_D = pole(∪ bufor(obrys_i; 3H_i)) = **2165** m² — _PN-EN 62305-2 zał. A (A.2)_
-* Liczba wyładowań w obiekt: N_D = N_G·A_D·C_D·10⁻⁶ = 1,8·2165·1,0·10⁻⁶ = **0,0039** 1/rok — _W-186: PN-86/E-05003/01 wg SEP (na północ od 51°30′) [niezweryfikowane]_
+* Liczba wyładowań w obiekt: N_D = N_G·A_D·C_D·10⁻⁶ = 1,8·2165·1,0·10⁻⁶ = **0,0039** 1/rok — _W-186: SEP (Boczkowski 2013) z mapy PN-86/E-05003/01 — norma wycofana, dane historyczne (na północ od 51°30′) [niezweryfikowane]_
 * Liczba wyładowań w linię zasilającą (kabel nN): N_L = N_G·40·L_L·C_I·C_E·C_T·10⁻⁶ = 1,8·40·1000·0,5·0,5·1,0·10⁻⁶ = **0,0180** 1/rok — _zał. A (A.4)_
 * Klasa ryzyka pożaru: q_f,śr / q_f,80%: q_f = 780 / 948 MJ/m² = **zwykłe / wysokie** — _PN-EN 1991-1-2 zał. E tabl. E.4 [W]; progi 400/800 MJ/m² (R7-K02)_
 
@@ -79,8 +79,8 @@ Warunków: 3; spełnionych: 2; niespełnionych: 0; informacyjnych: 1.
 
 ## Źródła
 
-1. PN-EN 62305-2:2008/2012 (zał. A–C) — metodyka; PN-EN IEC 62305-2:2025-09 (EN) — do PT
-2. Rejestr R7: R7-K01…K05, R7-G01…G08; D-13
-3. SEP (Boczkowski 2013) — N_G = 1,8 dla Poznania [W]
+1. PN-EN 62305-2:2008 (wycofana; wydanie powołane w zał. 1 WT) i PN-EN 62305-2:2012 (wycofana), zał. A–C — metodyka obliczeń; PN-EN IEC 62305-2:2025-09 (aktualna, wersja angielska) — sprawdzenie kontrolne nie wykonane, uzasadnienie w części opisowej PT
+2. Rejestr R7: R7-A05, R7-K01…K05, R7-G01…G08; D-13
+3. SEP (Boczkowski 2013) — N_G = 1,8 dla Poznania, z mapy PN-86/E-05003/01 (norma wycofana — dane historyczne) [W]
 4. PN-EN 1991-1-2 zał. E tabl. E.4 — gęstość obciążenia ogniowego [W]
 5. DEHN, Lightning Protection Guide — rezystancja uziomów otokowych/fundamentowych [W]

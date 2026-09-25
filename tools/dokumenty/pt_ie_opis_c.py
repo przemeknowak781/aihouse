@@ -62,9 +62,10 @@ def rozdz_ochrona(o: Opis, D: DanePTIE):
     obwodu ≥ 1,6); zwarciowa — częściowa, do granicy wynikającej z tabel producenta aparatów (zestawienie w obliczeniach
     obwodów); aparat główny RG — rozłącznik (nie wyzwala przy zwarciu).
 
-    **Ochrona przed przepięciami** (WT § 183 ust. 1 pkt 10 — obowiązkowa; PN-HD 60364-4-443): krytyczna długość linii
-    CRL = {L(spd['CRL'], 0)} < {L(_e(D, 'CRL_prog'), 0)} (f_env = {L(spd['f_env'], 0)}, N_g = {L(spd['Ng'], 1)}) —
-    ochrona wymagana także z warunku normy. W RG: {spd['RG']}. Dalej: {spd['DC']}; {spd['tele']}; {spd['T3']}.
+    **Ochrona przed przepięciami** (WT § 183 ust. 1 pkt 10 — obowiązkowa; PN-HD 60364-4-443:2016-03 p. 443.5):
+    obliczeniowy poziom ryzyka CRL = f_env/(L_P·N_g) = {L(spd['CRL'], 0)} < {L(_e(D, 'CRL_prog'), 0)}
+    (f_env = {L(spd['f_env'], 0)}, L_P = {L(spd['L_P'], 2)} km, N_g = {L(spd['Ng'], 1)}) — ochrona wymagana także
+    z warunku normy. W RG: {spd['RG']}. Dalej: {spd['DC']}; {spd['tele']}; {spd['T3']}.
     Kategorie wytrzymałości udarowej: złącze — IV (6 kV), RG i oprzewodowanie — III (4 kV), odbiorniki — II (2,5 kV),
     elektronika chroniona — I (1,5 kV); U_p ochronników w RG ≤ {L(_e(D, 'SPD_Up_max'), 1)} kV (W-186).
     """)
@@ -98,19 +99,34 @@ def rozdz_bilans(o: Opis, D: DanePTIE):
     hvac = [x for x in b.odbiorniki if x.grupa in ("pc", "grzalka", "went", "sterowanie")]
     o.tabela([{"Urządzenie": x.nazwa, "Obwód": x.id, "P_el [kW]": x.P, "Fazy": x.fazy} for x in hvac],
              tytul="Moc elektryczna urządzeń ogrzewczych i wentylacyjnych (§ 23 pkt 8 lit. b)",
-             formaty={"P_el [kW]": 2}, suma=["P_el [kW]"], zrodlo="dobór urządzeń — PT-3 IS; bilans — PT-4 IE")
+             formaty={"P_el [kW]": 2}, suma=["P_el [kW]"],
+             uwagi="Centrala wentylacyjna: moc wentylatorów P = SFP·V przy strumieniu projektowym — ta sama wartość "
+                   "co w doborze centrali w PT-3 IS.",
+             zrodlo="dobór urządzeń — PT-3 IS; bilans — PT-4")
+    P_st = sum(x.P_s for x in b.odbiorniki if x.sterowany)
+    P_nst = sum(x.P_s for x in b.odbiorniki if not x.sterowany)
+    _w0 = ("; przy obliczeniowej mocy szczytowej odbiorników niesterowanych DLM wstrzymuje ładowanie EV i grzałkę "
+           "rezerwową (w = 0) — ładowanie odbywa się poza szczytem poboru" if b.wsp_dlm <= 1e-6 else "")
     o.tekst(f"""
     **Moc szczytowa bez zarządzania mocą** P_s = {L(b.P_s_bez, 1)} kW > moc przyłączeniowa {L(b.P_przyl, 0)} kW —
     **wymagane dynamiczne zarządzanie mocą (DLM)**: ograniczenie prądu ładowania EV i blokada grzałki rezerwowej
-    przy przekroczeniu mocy (pomiar prądów faz za licznikiem, sterownik DLM w RG). **Moc szczytowa z DLM**
-    P_s,DLM = {L(b.P_s_dlm, 1)} kW ≤ {L(b.P_przyl, 0)} kW; prąd szczytowy I_B = {L(b.I_B, 1)} A ≤
-    {L(b.I_zab, 0)} A (zabezpieczenie przedlicznikowe). Kontrolnie wg N SEP-E-002 (30 kVA + ogrzewanie elektryczne):
+    przy przekroczeniu mocy (pomiar prądów faz za licznikiem, sterownik DLM w RG). **Nastawa DLM** z zapasem
+    regulacji z = {L(100 * b.par.zapas_DLM, 0)} % [ZAŁ] (czas reakcji, histereza): moc P_lim = {L(b.P_lim, 2)} kW,
+    prąd fazowy I_nast = {L(b.I_nast, 1)} A (przy zabezpieczeniu {L(b.I_zab, 0)} A). **Moc szczytowa z DLM**
+    P_s,DLM = P_nst + w·P_st = {L(P_nst, 2)} + {L(b.wsp_dlm, 3)}·{L(P_st, 2)} = {L(b.P_s_dlm, 2)} kW ≤
+    {L(b.P_przyl, 0)} kW, gdzie w — współczynnik ograniczenia odbiorników sterowanych, ten sam w mocy całkowitej
+    i w podziale na fazy (tabela niżej){_w0}; prąd szczytowy I_B = {L(b.I_B, 1)} A ≤ {L(b.I_zab, 0)} A
+    (zabezpieczenie przedlicznikowe). Kontrolnie wg N SEP-E-002 (30 kVA + ogrzewanie elektryczne):
     {L(b.sep, 1)} kW [NZW]. Moc przyłączeniowa {L(b.P_przyl, 0)} kW ≤ {L(_e(D, 'grupa_przylaczeniowa_V_moc_max'), 0)} kW
     (grupa V) — do wniosku o warunki przyłączenia.
     """)
     o.tabela([{"Faza": k, "P_s [kW]": v, "I [A]": v * 1000 / (U0 * b.par.cosphi_sr)} for k, v in b.fazy.items()],
              tytul="Podział mocy szczytowej (z DLM) na fazy", formaty={"P_s [kW]": 2, "I [A]": 1},
-             uwagi=f"Asymetria (max − min)/średnia = {L(100 * b.asymetria, 1)} %; cos φ = {L(b.par.cosphi_sr, 2)}.")
+             uwagi=f"Moc faz z DLM (ten sam współczynnik w = {L(b.wsp_dlm, 3)}); suma faz = P_s,DLM = "
+                   f"{L(sum(b.fazy.values()), 2)} kW. Prąd najbardziej obciążonej fazy "
+                   f"{L(max(b.fazy.values()) * 1000 / (U0 * b.par.cosphi_sr), 1)} A ≤ nastawa DLM {L(b.I_nast, 1)} A "
+                   f"< {L(b.I_zab, 0)} A. Asymetria (max − min)/średnia = {L(100 * b.asymetria, 1)} %; "
+                   f"cos φ = {L(b.par.cosphi_sr, 2)}.")
 
 
 def rozdz_obliczenia(o: Opis, D: DanePTIE):

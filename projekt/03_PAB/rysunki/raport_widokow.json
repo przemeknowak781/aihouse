@@ -207,15 +207,15 @@
         "ok": true,
         "errors": [],
         "warnings": [
-          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
+          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 3136,
-          "napisy": 650,
+          "prymitywy": 3144,
+          "napisy": 658,
           "sprawdzone_lancuchy": 19
         }
       },
-      "czas_s": 44.6,
+      "czas_s": 43.6,
       "png_kontrola": {
         "px": [
           3721,
@@ -452,15 +452,15 @@
         "ok": true,
         "errors": [],
         "warnings": [
-          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
+          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 2460,
-          "napisy": 514,
+          "prymitywy": 2468,
+          "napisy": 522,
           "sprawdzone_lancuchy": 12
         }
       },
-      "czas_s": 22.0,
+      "czas_s": 18.8,
       "png_kontrola": {
         "px": [
           4548,
@@ -679,15 +679,15 @@
         "ok": true,
         "errors": [],
         "warnings": [
-          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
+          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 3029,
-          "napisy": 687,
+          "prymitywy": 3037,
+          "napisy": 695,
           "sprawdzone_lancuchy": 22
         }
       },
-      "czas_s": 33.9,
+      "czas_s": 23.8,
       "png_kontrola": {
         "px": [
           3485,
@@ -778,12 +778,13 @@
         ]
       },
       "wysokosc_budynku": {
-        "z_ent": -0.2668000000000006,
-        "wejscie": "O0-06",
-        "z_top": 9.526000000000002,
+        "z_ent": -0.347999999999999,
+        "wejscie": "O0-03",
+        "z_top": 9.626000000000001,
         "dach": "D1",
-        "H": 9.792800000000002,
-        "z_attyka": 9.876000000000001
+        "H": 9.974000000000004,
+        "z_attyka": 9.876000000000001,
+        "zrodlo": "lamela.wskazniki"
       },
       "uklad": {
         "format": "1130×420",
@@ -795,7 +796,7 @@
         "standardowy": false,
         "tryb": "ekonomiczny",
         "koszt": 0.5279,
-        "wypelnienie_szac": 0.6,
+        "wypelnienie_szac": 0.602,
         "uklad_widokow": "wiersz",
         "skladanie": {
           "zgiecia_pionowe": [
@@ -880,18 +881,18 @@
             "hatch",
             [
               754.0,
-              20.7,
+              18.7,
               934.0,
-              111.1
+              109.1
             ]
           ],
           [
             "uwagi[1–7]",
             [
               568.0,
-              67.3,
+              65.3,
               748.0,
-              111.1
+              109.1
             ]
           ]
         ],
@@ -906,15 +907,15 @@
         "ok": true,
         "errors": [],
         "warnings": [
-          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
+          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 7412,
-          "napisy": 404,
+          "prymitywy": 7354,
+          "napisy": 412,
           "sprawdzone_lancuchy": 2
         }
       },
-      "czas_s": 56.2,
+      "czas_s": 43.1,
       "png_kontrola": {
         "px": [
           6674,
@@ -931,14 +932,14 @@
         "ok": true
       },
       "wypelnienie": {
-        "wypelnienie": 0.741,
-        "wypelnienie_rys": 0.73,
-        "wypelnienie_kontur": 0.45,
+        "wypelnienie": 0.738,
+        "wypelnienie_rys": 0.727,
+        "wypelnienie_kontur": 0.451,
         "pole_arkusza_m2": 0.4746,
         "pole_ramki_m2": 0.44,
         "pusty_prostokat_mm": [
           410,
-          114
+          112
         ],
         "przyciety_mm": [
           1121,
@@ -1010,12 +1011,13 @@
         "uwagi": []
       },
       "wysokosc_budynku": {
-        "z_ent": -0.2668000000000006,
-        "wejscie": "O0-06",
-        "z_top": 9.526000000000002,
+        "z_ent": -0.347999999999999,
+        "wejscie": "O0-03",
+        "z_top": 9.626000000000001,
         "dach": "D1",
-        "H": 9.792800000000002,
-        "z_attyka": 9.876000000000001
+        "H": 9.974000000000004,
+        "z_attyka": 9.876000000000001,
+        "zrodlo": "lamela.wskazniki"
       },
       "uklad": {
         "format": "2050×297",
@@ -1027,7 +1029,7 @@
         "standardowy": false,
         "tryb": "ekonomiczny",
         "koszt": 0.6271,
-        "wypelnienie_szac": 0.752,
+        "wypelnienie_szac": 0.755,
         "uklad_widokow": "wiersz",
         "skladanie": {
           "zgiecia_pionowe": [
@@ -1169,15 +1171,15 @@
         "ok": true,
         "errors": [],
         "warnings": [
-          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
+          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 7324,
-          "napisy": 403,
+          "prymitywy": 7063,
+          "napisy": 411,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 53.9,
+      "czas_s": 48.9,
       "png_kontrola": {
         "px": [
           12107,
@@ -1194,8 +1196,8 @@
         "ok": true
       },
       "wypelnienie": {
-        "wypelnienie": 0.837,
-        "wypelnienie_rys": 0.831,
+        "wypelnienie": 0.842,
+        "wypelnienie_rys": 0.836,
         "wypelnienie_kontur": 0.534,
         "pole_arkusza_m2": 0.6088,
         "pole_ramki_m2": 0.5595,
@@ -1223,7 +1225,7 @@
       "poprawne": 2,
       "słabe": 0
     },
-    "wypelnienie_wazone": 0.837
+    "wypelnienie_wazone": 0.838
   },
-  "czas_s": 232.5
+  "czas_s": 195.7
 }

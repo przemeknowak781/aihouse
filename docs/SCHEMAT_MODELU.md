@@ -92,6 +92,12 @@ lamele:
   - {id: LAM-S, elewacja: S, linia: [[x, y], [x, y]], z_od: 6.05, z_do: 9.45, rozstaw: 0.12, b: 0.04, h: 0.08,
      odsuniecie: 0.15, mat: DREWNO_TERMO}
 tarasy: [{id: T1, obrys: [[..]], rzedna: -0.02, nawierzchnia: "deska kompozytowa na legarach"}]
+elementy_zewn:    # wyposażenie zewnętrzne elewacji (wydanie; decyzja Inwestora K-13) — rdzeń: walidacja, IR, elewacje, PZT, 3D
+  - {id: KR-1, typ: kratownica_pnacza, elewacja: S, sciana: S0-02, linia: [[x, y], [x, y]],   # linia = lico ocieplenia
+     z_od: 0.05, z_do: 3.45, odsuniecie: 0.15, oczko: 0.30, pret: 0.012, rama: 0.04, mat: STAL_OCYNK,
+     konsole: {xz: [[x_lub_y, z], ...], wezel: WZ-17}, pnacza: {pas_gruntu: Z7, rodzaj: "..."}}
+  - {id: OS-PC, typ: oslona_lamelowa, obiekt: PC-JZ, linia: [[x, y], ...], z_od: -0.26, z_do: 1.20, rozstaw: 0.10, b: 0.04,
+     h: 0.06, mat: DREWNO_TERMO, urzadzenie: {obrys: [[..]], z_od: -0.15, z_do: 0.75}}
 ```
 
 ## 3. `dzialka.yaml` — sekcje
@@ -225,3 +231,48 @@ Pełna lista: docstring `src/lamela/obliczenia/energia/__init__.py`. Braki są r
   podpory = współliniowe ściany nośne poniżej (z_do w zakresie z_od − 0,6 … z_od; odcinki bez ich otworów; sztywność k = E·t/h) i słupy
   pod osią; obciążenia = reakcje płyt nad tarczą (krawędź górna), płyty pod tarczą poza ścianami poniżej (płyta podwieszona — krawędź
   dolna), ściany wyżej, belki oparte na ścianie. Tarcze podparte wyłącznie na ścianach poprzecznych — poza zakresem (analiza indywidualna).
+
+## 10. Rozszerzenia — wydanie (25.09.2026; rejestr decyzji: `docs/20_koncepcja/koncepcja.md` §15)
+Pola rozpoznawane przez rdzeń (`lamela.model` — walidacja, `lamela.ir` — bryły) lub przez biblioteki obliczeń / generatory rysunków.
+Rdzeń zgłasza pola spoza tabeli `F` jako INFO („ignorowane przez rdzeń”) — to pola dla bibliotek, nie błędy.
+
+### 10.1 `elementy_zewn` (rdzeń: `F["elementy_zewn"]`, `Model.elementy_zewn()`, `IR._elementy_zewn`, PZT `site_data.elem_zewn`)
+| pole | typ | znaczenie |
+|---|---|---|
+| `typ` | `kratownica_pnacza` \| `oslona_lamelowa` | rodzaj elementu (enum `TYPY_ELEMENTOW_ZEWN`) |
+| `linia` | polilinia [[x, y], ...] | kratownica: lico ocieplenia ściany (linia odniesienia); osłona: oś osłony |
+| `z_od`, `z_do` | liczba | rzędne względne; `z_do > z_od` (walidacja) |
+| `odsuniecie` | liczba > 0 | kratownica: odległość płaszczyzny od lica ETICS (walidacja: > 0 — bez styku z ociepleniem) |
+| `oczko`, `pret`, `rama` | liczba | siatka prętów, przekrój pręta, profil ramy obwodowej [m] |
+| `konsole.xz` | [[s, z], ...] | konsole (s = x dla linii wzdłuż x, y dla linii wzdłuż y); `wezel` — węzeł punktowy χ w `wezly` |
+| `pnacza` | słownik | roślinność na kratownicy (IR: kind `vegetation`, grupa `otoczenie` — tylko 3D) |
+| `rozstaw`, `b`, `h` | liczba | osłona: lamele pionowe b × h co `rozstaw`; walidacja `rozstaw > b` (osłona ażurowa) |
+| `urzadzenie` | {obrys, z_od, z_do, opis} | bryła osłanianego urządzenia (IR: kind `context`, grupa `otoczenie`) |
+| `sciana`, `obiekt`, `elewacja`, `mat`, `uwagi` | tekst | odwołania (ściana — walidacja istnienia; materiał — walidacja) |
+IR: kratownica → kind `railing` (części `rama`, `pret`, `konsola`), osłona → kind `lamella` (+ `rygiel`); elewacje i przekroje
+rysują je jak balustrady/lamele; PZT — linia kratownicy (zieleń) i osłona z kreskami lamel (legenda: `kratownica`, `oslona_pc`).
+
+### 10.2 Pola dla bibliotek obliczeń i rysunków (rdzeń: INFO)
+* `przegrody.<kod>.uwagi` — opis rozwiązań węzłowych przegrody (np. POD-G: belka progowa).
+* `otwory[].prog` — {typ: belka_progowa, mat, wierzch, szer, hydroizolacja, odwodnienie, nawierzchnia_przed, detal}.
+* `pomieszczenia[].went.doplyw` — {z, przez, V_m3h, opis} — dopływ powietrza do pomieszczenia z wywiewem (przepust transferowy).
+* `stolarka.<symbol>.przepust_transferowy` — {V_m3h, tlumiony, R_w_zestawu_min}.
+* `dachy[]`: `rzedna_pokrycia {przy_wpustach, maks}`; `wpusty[].rzedna_pokrycia`, `przelewy_awaryjne[].rzedna_pokrycia`;
+  `attyka.blok_termoizolacyjny {h, lambda, mat}`.
+* `wsporniki_plyty[]`: `spadek`; `lacznik {d, lambda_eq}`; `odwodnienie {typ: rynna_ukryta | na_powierzchnie | nie_dotyczy,
+  odbiornik, przelew, rzedna_wywiniecia_przy_scianie, Q_rynny_min_ls}`; `wpusty[]` (wyloty rynien; `rzedna_pokrycia` = dno
+  korytka); `przelewy_awaryjne[]` ({typ: rzygacz_w_blendzie, xy, sciana_attyki, szer, wys, rzedna_dna, rzedna_pokrycia});
+  `rury_spustowe[].do` — `zbiornik` | id pola (dopływ do pola) | id rury (trójnik — `obliczenia.sanitarne.deszczowa`).
+* `wezly[]`: `psi`, `f_rsi`, `zrodlo_psi`, `zrodlo_frsi`, `podwezly {id: {psi_oi, dlugosc}}`, `blok_u_podstawy {mat, h}`,
+  `izolacja_czola_uskoku` (węzeł dom–garaż: uskok PF1/PF2 i żebro z `fundamenty` — `mostki2d.katalog_dod._uskok_zebro`);
+  węzły punktowe (`typ: kotwa`): `liczba`, `chi` [W/K], `zrodlo_chi` — χ z modelu wchodzi do H_TB (`fizyka.mostki`).
+* `energia.wentylacja`: `wyrzut: poziomy | pionowy`, `czerpnia_dach`, `wyrzutnia_dach`, `czerpnia_z_top`, `wyrzutnia_z_top`
+  (maks. wysokość urządzenia — `lamela.wskazniki` bierze max(z, z_top) do wysokości zabudowy), `zestaw_zblokowany`,
+  `wywiewki_kanalizacyjne: [[x, y, z]]`; `energia.n50_uwagi`; `energia.pv {z_max, pola: [{dach, n, moduly, z_max, korona_attyki}]}`.
+* `instalacje.piony[]`: `rodzaj` (kanalizacja | deszczowa | co | …), `kond`; `instalacje.grzejniki[]` (ściany grzewcze wodne).
+* `dzialka.odwodnienia[].przy_licu: true` — korytko wzdłuż lica (≤ 0,30 m): strefa zwolniona z cokołu ≥ 0,30 m
+  (`obliczenia.sanitarne.drenaz`: cokół i spadki na TIN rzędnych projektowanych co 0,10 m; progi drzwi z OL ≤ 1,5 m — strefa
+  szer. otworu + 0,15 m).
+* `dzialka.uzbrojenie.obiekty[PC-JZ]`: `strefa_r`, `wym`, `wym_zrodlo`, `oslona`; `dzialka.zielen[].opis`.
+* `wyposazenie.yaml`: `wyspa` — `hokery` (liczba), `plyta_strona` (N/S/E/W); `pompa_ciepla`, `zasobnik`, `rekuperator` — `xy`
+  na licu ściany, `obrot` od ściany do pomieszczenia (jak pozostałe meble; `views.plan.draw_furniture`).

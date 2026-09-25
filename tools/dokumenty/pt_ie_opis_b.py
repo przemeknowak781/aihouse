@@ -53,7 +53,10 @@ def rozdz_pv(o: Opis, D: DanePTIE):
     **Produkcja energii** (PVGIS 5.3, Poznań): E = {L(pv.E_y, 0)} kWh/rok; autokonsumpcja (bilans godzinowy)
     {L(100 * s['autokonsumpcja'], 1)} %, pokrycie zużycia {L(100 * s['pokrycie'], 1)} %; energia PV zużyta przez
     systemy techniczne (ogrzewanie, c.w.u., pomocnicze) {L(s['E_auto_H'] + s['E_auto_W'] + s['E_auto_pom'], 0)}
-    kWh/rok — przekazana do charakterystyki energetycznej (PT-3 IS). Odbiór: PN-EN 62446-1 (rozdz. „Próby”).
+    kWh/rok — wartości informacyjne doboru instalacji. Charakterystyka energetyczna (PT-3 IS) przyjmuje wg
+    metodologii świadectw produkcję E_PV = {L(D.ep.E_PV, 0)} kWh/rok i energię zużytą przez systemy techniczne
+    E_PV,sys = {L(D.ep.E_PV_sys, 0)} kWh/rok (inne dane klimatyczne i model autokonsumpcji); dla wskaźnika EP
+    wiążące są wartości PT-3 IS. Odbiór: PN-EN 62446-1 (rozdz. „Próby”).
     """)
 
 
@@ -87,6 +90,11 @@ def rozdz_tele(o: Opis, D: DanePTIE):
     o.rozdzial("Instalacje telekomunikacyjne", podstawa="§ 23 pkt 7 lit. h RPB; rozp. (UE) 2024/1309 art. 10; W-196",
                nowa_strona=True)
     o.tekst(f"""
+    **Autor.** Rozdział i arkusze {D.arkusze_nr('teletechnika')} opracowuje współautor tomu ze specjalnością
+    instalacyjną w zakresie sieci, instalacji i urządzeń telekomunikacyjnych bez ograniczeń (PB art. 15a ust. 18)
+    — [DO UZUPEŁNIENIA: imię i nazwisko, nr uprawnień]; zasilanie urządzeń teletechnicznych z instalacji
+    elektrycznej (obwód, zabezpieczenie) i połączenia wyrównawcze — projektant instalacji elektrycznych.
+
     **Przyłącze światłowodowe.** Budynek wyposaża się w infrastrukturę fizyczną przystosowaną do sieci światłowodowej
     i okablowanie światłowodowe do punktu zakończenia sieci (rozp. (UE) 2024/1309 art. 10 ust. 1 — wniosek o pozwolenie
     na budowę po 12.02.2026; W-196). Kanalizacja od granicy działki do budynku: {t.get('opis', '—')}, długość
@@ -123,12 +131,14 @@ def rozdz_odgromowa(o: Opis, D: DanePTIE):
     RT = _e(D, "odgromowa_RT", 1e-5)
     o.rozdzial("Instalacja piorunochronna, uziom i połączenia wyrównawcze",
                podstawa="§ 23 pkt 7 lit. i RPB; WT § 53 ust. 2, § 184; W-187, W-188, W-191", nowa_strona=True)
-    o.rozdzial("Ocena ryzyka piorunowego", poziom=2, podstawa="PN-EN 62305-2; W-191")
+    o.rozdzial("Ocena ryzyka piorunowego", poziom=2, podstawa="PN-EN 62305-2:2008 (zał. 1 WT); W-191")
     o.tekst(f"""
     Potrzebę instalacji piorunochronnej (WT § 53 ust. 2, § 184 ust. 3) oceniono metodą analizy ryzyka utraty życia
-    R1 wg PN-EN 62305-2 (wydanie powołane w WT; kontrolnie PN-EN IEC 62305-2:2025-09): wysokość budynku
+    R1 wg PN-EN 62305-2:2008 (norma wycofana; wydanie powołane w zał. 1 WT, stosowane na podstawie art. 102a PB;
+    ryzyko tolerowane i klasy ryzyka pożaru — jak w wydaniu PN-EN 62305-2:2012, również wycofanym): wysokość budynku
     H = {L(g.H, 2)} m, powierzchnia zbierania wyładowań A_D = {L(g.A_D, 0)} m², gęstość wyładowań
-    N_G = {L(_e(D, 'Ng'), 1)} 1/(km²·rok) [NZW], liczba wyładowań w obiekt N_D = {L(g.N_D, 4)} 1/rok, w linię zasilającą
+    N_G = {L(_e(D, 'Ng'), 1)} 1/(km²·rok) [NZW] (dane SEP z mapy PN-86/E-05003/01 — norma wycofana, dane
+    historyczne; aktualizacja z danych systemu detekcji wyładowań — do potwierdzenia), liczba wyładowań w obiekt N_D = {L(g.N_D, 4)} 1/rok, w linię zasilającą
     N_L = {L(g.N_L, 4)} 1/rok; ryzyko tolerowane R_T = {_wykl(RT)} 1/rok. Klasę ryzyka pożaru przyjęto z gęstości
     obciążenia ogniowego (progi {' / '.join(L(p, 0) for p in _e(D, 'obciazenie_ogniowe_progi', [400, 800]))} MJ/m²)
     — rozstrzygające są oba warianty klasy.
@@ -138,6 +148,19 @@ def rozdz_odgromowa(o: Opis, D: DanePTIE):
              tytul="Ryzyko R1 w scenariuszach ochrony", zrodlo="lamela.obliczenia.elektryka.odgromowa")
     o.wniosek(f"Decyzja: {g.decyzja}. Uziom wykonuje się z wyprowadzeniami pod przewody odprowadzające (rezerwa "
               f"na LPS klasy {lps['klasa']}); w RG ochronniki przepięć typu 1+2 (warunek scenariusza).")
+    o.tekst(f"""
+    **Wydanie aktualne PN-EN IEC 62305-2:2025-09 — sprawdzenie kontrolne pominięto (uzasadnienie).** Rejestr
+    wymagań (A.1 pkt 5) przewiduje stosowanie wydania powołanego w WT obok wydania aktualnego. Sprawdzenia
+    kontrolnego wg wydania 2025 nie wykonano, ponieważ: (1) obowiązek wykonania instalacji piorunochronnej wynika
+    z WT § 53 ust. 2 i § 184 ust. 3 w związku z normą powołaną w zał. 1 WT — rozstrzyga ocena wykonana powyżej;
+    (2) PN-EN IEC 62305-2:2025-09 jest dostępna wyłącznie w języku angielskim, a jej metodyka nie jest ujęta
+    w obliczeniach projektu (rejestr R7-A05, D-13) — obliczenie „kontrolne” bez tekstu normy nie byłoby
+    sprawdzeniem; (3) rozwiązania tomu nie zależą od wyniku: uziom z wyprowadzeniami pod przewody odprowadzające,
+    ochronniki typu 1+2 w RG oraz parametry LPS klasy {lps['klasa']} (podrozdział „Parametry LPS (rezerwa)”)
+    pozwalają wykonać LPS bez zmian konstrukcji i instalacji. Jeżeli ocena wg wydania 2025 wykaże R1 > R_T,
+    LPS wykonuje się wg podrozdziału „Parametry LPS (rezerwa)” —
+    [DO UZUPEŁNIENIA: decyzja projektanta o sprawdzeniu wg PN-EN IEC 62305-2:2025-09 przed realizacją].
+    """)
     o.rozdzial("Uziom", poziom=2, podstawa="WT § 184 ust. 1; PN-HD 60364-5-54 zał. C; W-187")
     o.tekst(f"""
     Typ: **{u['typ']}**. Materiał: {u['material']}. Średnica zastępcza obrysu D = {L(u['D'], 2)} m, rezystancja
@@ -154,7 +177,7 @@ def rozdz_odgromowa(o: Opis, D: DanePTIE):
                    f"≥ {L(_e(D, 'wyrownawczy_glowny_min'), 0)} mm² Cu i nie więcej niż "
                    f"{L(_e(D, 'wyrownawczy_glowny_nie_wiecej_niz'), 0)} mm² Cu (W-188).",
              zrodlo="lamela.obliczenia.elektryka.odgromowa")
-    o.rozdzial("Parametry LPS (rezerwa)", poziom=2, podstawa="PN-EN 62305-3")
+    o.rozdzial("Parametry LPS (rezerwa)", poziom=2, podstawa="PN-EN 62305-3:2011 (wycofana, powołana w WT)")
     o.tekst(f"""
     Gdyby Inwestor zdecydował o wykonaniu LPS (np. po zmianie wyposażenia lub klasy pożarowej): klasa
     {lps['klasa']}, oczka zwodów {lps['oczko']}, promień kuli toczącej {lps['kula']}, przewody odprowadzające:
