@@ -60,8 +60,3 @@ Lista generowana automatycznie przez `lamela.views.konstrukcja` z: (1) braków z
 - Biblioteka (uwaga analizy): ST1: podpora punktowa SL4 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
 - Biblioteka (uwaga analizy): Grupa płyt PL-E: MES niewykonalny (MES płyty: za mało podpór) — pominięto
 - Biblioteka (uwaga analizy): Grupa płyt PL-DA: MES niewykonalny (MES płyty: za mało podpór) — pominięto
-
-## Kontrola zbrojenia — pozycje niespełnione (szczegóły: raport kontroli zbrojenia)
-
-- B9 / dołem (przęsło) (poz. 5.8): Nośność krzyżulców betonowych (η = 103%); Nośność strzemion (η = 142%); 8Ø12 nie mieści się w jednej warstwie przy b = 25 cm (odstęp w świetle ≥ 21 mm — 8.2(2))
-- N-O1-10 / dołem (przęsło) (poz. 6.27): Nośność strzemion (η = 167%); 4Ø16 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2))

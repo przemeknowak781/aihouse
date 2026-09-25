@@ -58,7 +58,8 @@ def m2(v):
 
 
 def mm(v):
-    return fmt.num(v, 2)
+    """Liczba z dokładnością 0,01 (zaokrąglenie połówkowe w górę — bez błędu reprezentacji binarnej)."""
+    return fmt.num(fmt.round_half_up(round(float(v) * 100.0, 6)) / 100.0, 2)
 
 
 def _site(ctx, opts) -> SiteData:
@@ -247,6 +248,8 @@ def _dims_plan(lab, s, used, detail=False):
         if "wys" in rr and (rr["wys"]["d"] < wmin - 0.01) and (detail or not rr["wys"]["droga"]):
             sel.append(rr["wys"])
         seg = next(g["seg"] for g in s.granice if g["i"] == gi)
+        if detail and any(r["droga"] for r in sel):
+            sel = []                      # od drogi — wymiarowana linia zabudowy (6,00 + odległość lica)
         for r in sel:
             on_a, avoid = _el_geoms(s, r)
             place_ok = D.place_dim(lab, r["p_el"], r["p_gr"], on_a=on_a, on_b=seg, avoid=avoid, span=14.0,
@@ -287,7 +290,7 @@ def _short(txt, n=28):
     return t if len(t) <= n else t[:n - 1].rstrip() + "…"
 
 
-def _labels_project(lab, s, W, used, detail=False):
+def _labels_project(lab, s, W, used, detail=False, utilities=True):
     """Opisy elementów projektu (priorytet przed opisami podkładu)."""
     k = lab.k
     h = D.H
@@ -312,7 +315,7 @@ def _labels_project(lab, s, W, used, detail=False):
                                                                         "podest"], h, dists=(0.0, 1.5, 4.0, 8.0))
     for u in s.utwardzenia:
         nm = _short(u["raw"].get("nawierzchnia"), 22)
-        if u["poly"].area < (3.0 if not detail else 1.0) or "fundament" in nm or "pojemnik" in nm:
+        if u["poly"].area < 3.0 or "fundament" in nm or "pojemnik" in nm:
             continue
         L(np.asarray(u["poly"].representative_point().coords[0]), [nm], h, dists=(0.0, 1.5, 4.0, 8.0, 12.0))
     for q in s.miejsca:
@@ -355,7 +358,7 @@ def _labels_project(lab, s, W, used, detail=False):
         nm = "furtka" if b["typ"] == "furtka" else "brama przesuwna"
         L(b["xy"], [f"{nm} {mm(b['szer'])}"], h, dists=(3.0, 5.0, 8.0, 12.0), leader_from=2.5,
                   dirs=[(0, -1), (1, -1), (-1, -1), (1, 0), (-1, 0)])
-    for sx in [x for x in s.sieci if not x.istn]:
+    for sx in [x for x in s.sieci if not x.istn] if utilities else []:
         g = sx.geom.difference(s.p0) if not s.p0.is_empty else sx.geom
         parts = sorted(getattr(g, "geoms", [g]), key=lambda q: -q.length)
         if not parts or parts[0].is_empty:
@@ -605,7 +608,7 @@ def _slopes(lab, s, used):
         elif abs(d[1]) > 2.5 * abs(d[0]):
             d = np.array([0.0, np.sign(d[1])])
         L = min(12.0, max(6.0, min(pg.bounds[2] - pg.bounds[0], pg.bounds[3] - pg.bounds[1]) / k * 0.8))
-        pos, _c = D.slope_arrow(lab, pg, d, sp, length_mm=L)
+        pos, _c = D.slope_arrow(lab, pg, d, sp, length_mm=L, max_cost=8.0)
         if pos is not None:
             used.add("spadek")
     # kierunki spływu na terenie (spadek terenu projektowanego)
@@ -694,8 +697,26 @@ def _lab_m(v):
     return fmt.num(fmt.round_half_up(round(abs(v) * 100.0, 6)) / 100.0, 2)
 
 
-def _levels(lab, s, used, all_existing=True):
-    """Rzędne: projektowane (punkty modelu, tarasy/podesty), istniejące (siatka pikiet)."""
+def _levels(lab, s, used, all_existing=True, projected=True, existing=True):
+    """Rzędne: projektowane (punkty modelu, tarasy/podesty), istniejące (siatka pikiet — poza strefą zmian terenu,
+    gdzie obowiązują rzędne projektowane)."""
+    if projected:
+        _levels_proj(lab, s, used)
+    if not existing:
+        return
+    zone = s.strefa_zmian.buffer(0.5) if not s.strefa_zmian.is_empty else None
+    for p in s.pkt_ist:
+        if lab.bounds is not None and not lab.bounds.contains(Point(p[:2])):
+            continue
+        if s.p0.buffer(0.2).contains(Point(p[:2])) or (zone is not None and zone.contains(Point(p[:2]))):
+            continue
+        pos, _c = D.spot(lab, p[:2], p[2], projected=False, max_cost=None if all_existing else 4.0,
+                         dists=(0.6, 1.5, 3.0, 5.0, 8.0))
+        if pos is not None:
+            used.add("spot_ist")
+
+
+def _levels_proj(lab, s, used):
     for t in s.tarasy:
         if t["rz"] is None:
             continue
@@ -704,18 +725,9 @@ def _levels(lab, s, used, all_existing=True):
             continue
         D.spot(lab, np.asarray(pg.representative_point().coords[0]), s.zero_abs + float(t["rz"]), projected=True)
     for p in s.pkt_proj:
-        pos, _c = D.spot(lab, p[:2], p[2], projected=True, dists=(0.6, 1.5, 3.0, 5.0, 8.0))
+        pos, _c = D.spot(lab, p[:2], p[2], projected=True, dists=(0.6, 1.5, 3.0, 5.0, 8.0, 11.0, 14.0))
         if pos is not None:
             used.add("spot_proj")
-    for p in s.pkt_ist:
-        if lab.bounds is not None and not lab.bounds.contains(Point(p[:2])):
-            continue
-        if s.p0.buffer(0.2).contains(Point(p[:2])):
-            continue
-        pos, _c = D.spot(lab, p[:2], p[2], projected=False, max_cost=None if all_existing else 4.0,
-                         dists=(0.6, 1.5, 3.0, 5.0))
-        if pos is not None:
-            used.add("spot_ist")
 
 
 def view_szczegoly(ctx, spec, scale, opts):
@@ -748,17 +760,17 @@ def view_szczegoly(ctx, spec, scale, opts):
     used.add("zero")
     _label_garage(lab, s)
     for nm, p in tycz:
-        lab.label(p, [nm], D.H, "Z-TYCZENIE", style="bold", dists=(1.2, 2.5, 4.0), leader_from=3.0,
+        lab.label(p, [nm], D.H, "Z-TYCZENIE", style="bold", dists=(1.2, 2.5, 4.0, 6.0, 9.0), leader_from=3.0,
                   dirs=[(1, 1), (-1, 1), (1, -1), (-1, -1), (1, 0), (-1, 0), (0, 1), (0, -1)])
-    lab.area(s.footprint.buffer(-0.3), 1.5)
     _dims_plan(lab, s, used, detail=True)
     _chains(lab, s)
     for u in s.utwardzenia:
-        if u["poly"].area > 3.0 and "fundament" not in str(u["raw"].get("nawierzchnia", "")):
+        if u["poly"].area > 3.0 and not any(w_ in str(u["raw"].get("nawierzchnia", "")) for w_ in
+                                            ("fundament", "pojemnik")):
             _rect_dims(lab, u["poly"])
-    for q in s.miejsca:
-        if q["poly"].difference(s.p0).area > 0.1:
-            _rect_dims(lab, q["poly"], offs=(2.0, 4.0, 6.0))
+    zew = [q for q in s.miejsca if q["poly"].difference(s.p0).area > 0.1]
+    if zew:
+        _rect_dims(lab, zew[0]["poly"], offs=(2.0, 4.0, 6.0))
     for b in s.bramy:
         d = b["kier"]
         D.place_dim(lab, b["xy"] - d * b["szer"] / 2, b["xy"] + d * b["szer"] / 2,
@@ -776,9 +788,10 @@ def view_szczegoly(ctx, spec, scale, opts):
         gw = min(s.granice, key=lambda g_: g_["seg"].distance(geom))
         a, b = nearest_points(geom, gw["seg"])
         D.place_dim(lab, (a.x, a.y), (b.x, b.y), on_b=gw["seg"], span=3.0, step=0.25)
-    _labels_project(lab, s, W, used, detail=True)
+    _levels(lab, s, used, existing=False)
     _drain_labels(lab, s)
-    _levels(lab, s, used)
+    _labels_project(lab, s, W, used, detail=True, utilities=False)
+    _levels(lab, s, used, projected=False)
     _slopes(lab, s, used)
     # tabele obok rysunku
     x_t = wb[2] + 8.0 * k
@@ -797,8 +810,7 @@ def _tab_tyczenie(s, tycz):
     rows = [[nm, mm(p[0]), mm(p[1]), "narożnik obrysu parteru"] for nm, p in tycz]
     for i, p in enumerate(s.corners):
         rows.append([chr(ord("A") + i), mm(p[0]), mm(p[1]), "punkt graniczny działki"])
-    return dict(title="WYKAZ PUNKTÓW TYCZENIA I GRANICZNYCH", cols=[("Pkt", 0), ("x [m] (→ E)", 0), ("y [m] (→ N)", 0),
-                                                                     ("Opis", 0)],
+    return dict(title="WYKAZ PUNKTÓW TYCZENIA I GRANICZNYCH", cols=[("Pkt", 0), ("x [m]", 0), ("y [m]", 0), ("Opis", 0)],
                 rows=rows, align=["center", "right", "right", "left"],
                 notes=["Układ lokalny działki: początek — narożnik A, x → wschód, y → północ. W projekcie rzeczywistym "
                        "współrzędne w układzie PL-2000 (X — północ, Y — wschód) z mapy do celów projektowych; tyczenie "

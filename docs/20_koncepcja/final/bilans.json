@@ -700,9 +700,9 @@
    ],
    "model": [
     4.4,
-    6.69
+    11.42
    ],
-   "odchylka": 4.99
+   "odchylka": 0.26
   },
   {
    "element": "C — rama górna",
@@ -724,9 +724,9 @@
    ],
    "model": [
     3.9,
-    18.765
+    18.975
    ],
-   "odchylka": 0.23
+   "odchylka": 0.08
   },
   {
    "element": "D — pion (narożnik G)",

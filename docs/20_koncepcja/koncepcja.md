@@ -455,9 +455,9 @@ Obszar oddziaływania mieści się w całości na działce (W-012).
 | A — bryła II p. (lamele) | -0,98 … 12,23 | -1,00 … 12,60 | 0,37 |
 | A — płyty (dół/góra) | -2,40 … 12,55 | -2,10 … 12,90 | 0,35 |
 | B — bryła I p. | 0,00 … 12,01 | 0,00 … 12,60 | 0,59 |
-| C — boks (przeszklenie) | 4,48 … 11,68 | 4,40 … 6,69 | 4,99 |
+| C — boks (przeszklenie) | 4,48 … 11,68 | 4,40 … 11,42 | 0,26 |
 | C — rama górna | 3,93 … 13,76 | 3,90 … 13,75 | 0,03 |
-| D — linia pozioma | 3,82 … 19,00 | 3,90 … 18,77 | 0,23 |
+| D — linia pozioma | 3,82 … 19,00 | 3,90 … 18,98 | 0,08 |
 | D — pion (narożnik G) | 19,17 … 19,17 | 18,98 … 18,98 | 0,20 |
 | E — przeszklenie parteru | 0,98 … 13,21 | 0,66 … 13,55 | 0,34 |
 | E — płyta dachu parteru | -1,53 … 14,08 | -1,50 … 14,10 | 0,03 |

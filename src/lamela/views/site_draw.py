@@ -972,9 +972,9 @@ def slope_arrow(lab: Labeler, poly, direction, pct, length_mm=10.0, max_cost=Non
     P0 = np.asarray(poly.representative_point().coords[0])
     inner = poly.buffer(-1.0 * k)
     cands = []
-    for r in (0.0, 2.0, 4.0, 6.0, 9.0):
-        for i in range(8 if r else 1):
-            a = 2 * math.pi * i / 8
+    for r in (0.0, 2.0, 4.0, 6.0, 9.0, 12.0, 16.0):
+        for i in range(12 if r else 1):
+            a = 2 * math.pi * i / 12
             q = P0 + np.array([math.cos(a), math.sin(a)]) * r * k
             A, B = q - d * L / 2, q + d * L / 2
             if inner.is_empty or inner.contains(LineString([A, B])):

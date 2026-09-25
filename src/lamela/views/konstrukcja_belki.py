@@ -10,7 +10,8 @@ from __future__ import annotations
 import math
 
 import numpy as np
-from shapely.geometry import LineString, Point, box
+from shapely.geometry import LineString, Point, Polygon, box
+from shapely.ops import unary_union
 
 from ..draft import dims, hatch as H
 from . import konstrukcja_dane as KD
@@ -176,3 +177,101 @@ def kontrola_belki(D, B: KD.BelkaZ, pr: dict, arkusz: str):
                  As_max=0.04 * B.b * B.h * 1e6, arkusz=arkusz, uwagi=uw, wymuszone_ok=miesci and not B.niesp)
     KD.rejestruj(D, B.id, "górą (podpory; ≥ 0,15·A_s,dół — 9.2.1.2(1))", B.poz, max(B.As_gora[0], 0.15 * As_d), 0.0,
                  As_g, f"{B.gora[0]}Ø{B.gora[1]}", jedn="mm²", arkusz=arkusz)
+
+
+# ================================================================================================ schody
+def rysuj_bieg(vp, placer: Placer, b: KD.BiegZ, odc: list, hs: float, ss: float, szer: float, zest, X0: float,
+               Y0: float, tytul: str) -> tuple:
+    """Przekrój podłużny biegu (płyta + stopnie + spoczniki) z prętami: dołem główne (załamane, krzyżowane
+    w narożu wklęsłym), rozdzielcze (kropki), górą przy podporach (0,25·L). Zwraca prostokąt zajęty."""
+    from .konstrukcja import etykieta
+    k = vp.k
+    h = b.h
+    c = b.c_nom / 1000.0
+    alfa = math.atan2(hs, ss)
+    ca = math.cos(alfa)
+    # linia wierzchu płyty (pod stopniami — linia wewnętrznych naroży) i spodu
+    top = [(X0 + odc[0].x0, Y0)]
+    z = Y0
+    for o in odc:
+        if o.typ == "bieg":
+            n = int(round((o.x1 - o.x0) / ss)) + 1
+            z1 = z + n * hs
+            top.append((X0 + o.x1, z1 - hs))
+            z = z1
+            top.append((X0 + o.x1, z)) if False else None
+        else:
+            top.append((X0 + o.x1, z))
+    top = [p for p in top if p is not None]
+    # spód: przesunięcie prostopadłe o h
+    from shapely.geometry import LineString as LS
+    tl = LS(top)
+    bl = tl.parallel_offset(h if True else 0, "right", join_style=2)
+    bot = list(bl.coords) if bl.geom_type == "LineString" else list(max(bl.geoms, key=lambda q: q.length).coords)
+    if np.hypot(*(np.subtract(bot[0], top[0]))) > np.hypot(*(np.subtract(bot[-1], top[0]))):
+        bot = bot[::-1]
+    poly = Polygon(top + bot[::-1]).buffer(0)
+    # stopnie
+    z = Y0
+    steps = []
+    for o in odc:
+        if o.typ == "bieg":
+            n = int(round((o.x1 - o.x0) / ss)) + 1
+            for i in range(n):
+                x = X0 + o.x0 + i * ss
+                steps.append(box(x - ss if i else x - 0.001, z + i * hs, x, z + (i + 1) * hs))
+            z += n * hs
+    stp = unary_union([s_.difference(poly) for s_ in steps]).buffer(0)
+    H.hatch(vp, poly, "ZELBET")
+    vp.geom(poly, L_OBR, pen="gruba")
+    if not stp.is_empty:
+        H.hatch(vp, stp, "BETON")
+        vp.geom(stp, L_OBR, pen="srednia")
+    placer.add(poly.union(stp).buffer(0.02), "area", 0.6)
+    # pręty dolne (główne) — przesunięcie spodu o c + φ/2 do wnętrza
+    g = b.glowne
+    lnb = LS(bot).parallel_offset(c + g.fi / 2000.0, "left" if True else "right", join_style=2)
+    pts = list(lnb.coords) if lnb.geom_type == "LineString" else list(max(lnb.geoms, key=lambda q: q.length).coords)
+    if not poly.buffer(0.001).contains(Point(*pts[len(pts) // 2])):
+        lnb = LS(bot).parallel_offset(c + g.fi / 2000.0, "right", join_style=2)
+        pts = list(lnb.coords) if lnb.geom_type == "LineString" else list(max(lnb.geoms, key=lambda q: q.length).coords)
+    vp.polyline(pts, L_ZBR, pen=0.5)
+    Lr = LS(pts).length
+    p_gl = zest.dodaj(KD.Pret(g.fi, "26" if len(pts) > 2 else "00", tuple(
+        np.hypot(*(np.subtract(q, p_))) * 1000 for p_, q in zip(pts[:-1], pts[1:])), int(math.ceil(szer / (g.s / 1000))) + 1,
+        f"{b.schody}/{b.nr}", "dołem"))
+    fr, sr = b.rozdz
+    p_r = zest.dodaj(KD.Pret(fr, "00", ((szer - 2 * c) * 1000,), int(math.ceil(Lr / (sr / 1000))) + 1, f"{b.schody}/{b.nr}",
+                             "rozdzielcze"))
+    line = LS(pts)
+    for i in range(int(Lr / (sr / 1000)) + 1):
+        q = line.interpolate(i * sr / 1000 + 0.02)
+        nrm = 1.5 * g.fi / 1000
+        vp.fill(Point(q.x, q.y + nrm).buffer(max(fr / 2000, 0.4 * k), 12), L_ZBR, "#000000")
+    fg, sg = b.gorne
+    lg = 0.25 * b.L + 0.3
+    leg = h - 2 * c
+    p_g = zest.dodaj(KD.Pret(fg, "11", ((lg - leg) * 1000, leg * 1000), 2 * (int(math.ceil(szer / (sg / 1000))) + 1),
+                             f"{b.schody}/{b.nr}", "górą przy podporach"))
+    tlo = LS(top).parallel_offset(c + fg / 2000.0, "right", join_style=2)
+    tpts = list(tlo.coords) if tlo.geom_type == "LineString" else list(max(tlo.geoms, key=lambda q: q.length).coords)
+    if not poly.buffer(0.001).contains(Point(*tpts[len(tpts) // 2])):
+        tlo = LS(top).parallel_offset(c + fg / 2000.0, "left", join_style=2)
+        tpts = list(tlo.coords)
+    tl2 = LS(tpts)
+    for s0, s1 in ((0.0, lg - leg), (tl2.length - (lg - leg), tl2.length)):
+        seg = [tl2.interpolate(t).coords[0] for t in np.linspace(s0, s1, 12)]
+        vp.polyline(seg, L_ZBR, pen=0.5)
+    etykieta(vp, placer, pts[len(pts) // 2], np.subtract(pts[-1], pts[0]),
+             f"{p_gl.n if False else int(math.ceil(szer / (g.s / 1000))) + 1} Ø{g.fi} co {g.s / 10:g} l={p_gl.L_mm / 10:g}",
+             p_gl.nr, 2.5, offs=(3.0, 7.0), ts=(0.0, -0.8, 0.8))
+    etykieta(vp, placer, tpts[1] if len(tpts) > 1 else tpts[0], np.subtract(tpts[-1], tpts[0]),
+             f"Ø{fg} co {sg / 10:g} l={p_g.L_mm / 10:g} (obie podpory)", p_g.nr, 2.5, offs=(3.0, 7.0),
+             ts=(0.0, 0.4, 0.8))
+    q = line.interpolate(0.35, normalized=True)
+    etykieta(vp, placer, (q.x, q.y), (1, 0), f"Ø{fr} co {sr / 10:g} l={p_r.L_mm / 10:g} (rozdzielcze)", p_r.nr, 2.5,
+             offs=(5.0, 9.0, 13.0), ts=(0.0, 0.5, -0.5))
+    x0, y0, x1, y1 = poly.union(stp).bounds
+    dims.dim_h(vp, [x0, x1], y0 - 8 * k, None, layer="K-WYMIARY")
+    vp.text((x0, y1 + 8 * k), tytul, 3.5, 0, "left", "baseline", L_OPS, style="bold")
+    return (x0 - 10 * k, y0 - 16 * k, x1 + 30 * k, y1 + 14 * k), (p_gl, p_r, p_g)

@@ -1332,10 +1332,14 @@ def widok_zbrojenie_belek(ctx: ViewContext, spec: dict, scale: float, opts: dict
         title = spec.get("tytul_widoku") or ("ZBROJENIE BELEK " + ", ".join(i[0] for i in items))
     else:
         typy = KD.typy_nadprozy(D)
-        items = [(nm, lst[0], f"{nm} — {_cm(lst[0].b)}×{_cm(lst[0].h)} cm, {lst[0].beton}; otwory: "
-                  + ", ".join(x.ids[0] for x in lst)[:70] + f" (poz. {', '.join(sorted({x.poz for x in lst}))[:30]})")
+        items = [(nm, lst[0], f"{nm} — {_cm(lst[0].b)}×{_cm(lst[0].h)} cm, L = {_pl(lst[0].L, 2)} m, {lst[0].beton}")
                  for nm, lst in typy]
         items = _czesc(items, spec)
+        wiersze = [[nm, ", ".join(x.ids[0] for x in lst), ", ".join(sorted({x.poz for x in lst})), str(len(lst))]
+                   for nm, lst in typy if nm in {i[0] for i in items}]
+        res.column_blocks.append(("typy_nadprozy", blok_tabeli(
+            "TYPY NADPROŻY — OTWORY I POZYCJE OBLICZEŃ", [("Typ", 12), ("Otwory", 88), ("Poz. obl.", 60), ("Szt.", 12)],
+            wiersze)))
         title = spec.get("tytul_widoku") or ("ZBROJENIE NADPROŻY " + ", ".join(i[0] for i in items))
     vp = Viewport(scale, title)
     placer = Placer(vp.k)
@@ -1401,6 +1405,55 @@ def _stopka_belek(D, rows) -> list:
     return out
 
 
+def widok_zbrojenie_schodow(ctx: ViewContext, spec: dict, scale: float, opts: dict):
+    from . import konstrukcja_belki as KB
+    D = KD.dane(ctx)
+    nr_ark = spec.get("nr", "")
+    zest = KD.Zestawienie()
+    res = KResult()
+    title = spec.get("tytul_widoku") or "ZBROJENIE SCHODÓW"
+    vp = Viewport(scale, title)
+    placer = Placer(vp.k)
+    k = vp.k
+    grupy = {}
+    for b in D.biegi:
+        pz = next((q for q in D.an.pos_schody if q.ident == b.schody), None)
+        if pz is None or len(pz.dane.get("biegi", [])) < b.nr:
+            continue
+        odc, hs, ss, szer, _bt = pz.dane["biegi"][b.nr - 1]
+        key = (round(b.h, 3), round(b.L, 2), b.glowne.fi, b.glowne.s, b.rozdz, b.gorne,
+               tuple((o.typ, round(o.x0, 2), round(o.x1, 2)) for o in odc), round(hs, 3), round(ss, 3), round(szer, 2))
+        grupy.setdefault(key, []).append((b, odc, hs, ss, szer))
+    Y = 0.0
+    for key, lst in grupy.items():
+        b, odc, hs, ss, szer = lst[0]
+        nazwy = ", ".join(f"{x[0].schody} bieg {x[0].nr}" for x in lst)
+        tyt = f"{nazwy} — płyta h = {_cm(b.h)} cm, {b.beton} (poz. {', '.join(sorted({x[0].poz for x in lst}))})"
+        tmp = Viewport(scale)
+        bb, _ = KB.rysuj_bieg(tmp, Placer(k), b, odc, hs, ss, szer, KD.Zestawienie(), 0.0, 0.0, tyt)
+        bb2, prs = KB.rysuj_bieg(vp, placer, b, odc, hs, ss, szer, zest, -bb[0], Y - bb[3], tyt)
+        for p in prs:
+            p.n = p.n * len(lst) if len(lst) > 1 and p.element == f"{b.schody}/{b.nr}" else p.n
+        Y -= (bb[3] - bb[1]) + 8 * k
+        for x in lst:
+            w = x[0].glowne
+            KD.rejestruj(D, f"{x[0].schody}/bieg {x[0].nr}", "płyta biegu — dołem (główne)", x[0].poz, w.As_req, w.As_min,
+                         KD.pole_preta(w.fi) * 1000 / w.s, f"Ø{w.fi} co {w.s / 10:g}", s=w.s,
+                         s_max=KD.s_max_plyty(x[0].h), arkusz=nr_ark, uwagi="; ".join(x[0].niesp[:2]))
+    res.column_blocks.append(("zestawienie", blok_zestawienia(zest, "ZESTAWIENIE STALI — SCHODY", [
+        f"Beton {D.biegi[0].beton if D.biegi else ''}, klasa ekspozycji XC1, c_nom = "
+        f"{D.biegi[0].c_nom if D.biegi else 25:.0f} mm; stal B500SP."], None)))
+    res.notes += [
+        "Płyty biegów i spoczników monolityczne; pręty dolne w załamaniu bieg–spocznik krzyżować (nie prowadzić po "
+        "wklęsłym narożu), zakotwienie ≥ l_bd za załamaniem; pręty górne przy podporach na 0,25·L (PN-EN 1992-1-1 "
+        "9.3.1.2(2)); stopnie betonowe/okładzina wg projektu architektury.",
+        "Biegi identyczne geometrycznie i obliczeniowo przedstawiono jednym rysunkiem (lista w tytule); liczby sztuk w "
+        "zestawieniu — łącznie.",
+    ] + UWAGI_ZBR[3:5]
+    KD.zapisz_raporty(D, ctx)
+    return vp, res, title
+
+
 # ================================================================================================ rejestracja
 def widok_zbrojenie(ctx: ViewContext, spec: dict, scale: float, opts: dict):
     """Dyspozytor typu ``k_zbrojenie``: element = strop | plyta | fundament | belki | nadproza | schody | wsporniki."""
@@ -1413,7 +1466,7 @@ def widok_zbrojenie(ctx: ViewContext, spec: dict, scale: float, opts: dict):
 
 _ZBROJENIE = {"strop": widok_zbrojenie_plyt, "plyta": widok_zbrojenie_plyt, "stropodach": widok_zbrojenie_plyt,
               "fundament": widok_zbrojenie_fundamentu, "belki": widok_zbrojenie_belek,
-              "nadproza": widok_zbrojenie_belek}
+              "nadproza": widok_zbrojenie_belek, "schody": widok_zbrojenie_schodow}
 
 register_view("k_zbrojenie", widok_zbrojenie, "rysunek zbrojenia")
 
