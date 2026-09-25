@@ -48,12 +48,12 @@
   {% if s.autorzy %}
   <table class="st-autorzy">
     <caption>Opracowanie — autorzy (§ 7 ust. 2 pkt 3 RPB)</caption>
-    <thead><tr><th style="width:21mm">Funkcja</th><th style="width:32mm">Imię i nazwisko</th>
-      <th>Specjalność i nr uprawnień budowlanych</th><th style="width:40mm">Zakres opracowania</th><th style="width:28mm">Podpis</th></tr></thead>
+    <thead><tr><th style="width:23mm">Funkcja, branża</th><th style="width:30mm">Imię i nazwisko</th>
+      <th style="width:38mm">Specjalność i nr uprawnień budowlanych</th><th>Zakres opracowania</th><th style="width:24mm">Podpis</th></tr></thead>
     <tbody>
     {% for p in s.autorzy %}
-      <tr><td><b>{{ p.funkcja }}</b><br><span class="mn">{{ p.branza }}</span></td><td>{{ p.imie_nazwisko }}</td>
-          <td>{{ p.specjalnosc }}<br><span class="mn">nr upr.:</span> {{ p.nr_uprawnien }}</td><td>{{ p.zakres }}</td><td class="podpis"></td></tr>
+      <tr><td><b>{{ p.funkcja }}</b><br>{{ p.branza }}</td><td>{{ p.imie_nazwisko }}</td>
+          <td>{{ p.specjalnosc_skrot }}<br>nr upr.: {{ p.nr_uprawnien }}</td><td>{{ p.zakres }}</td><td class="podpis"></td></tr>
     {% endfor %}
       <tr class="spr"><td>Sprawdzający</td><td colspan="4">{{ d.sprawdzajacy }}</td></tr>
     </tbody>
@@ -309,7 +309,7 @@ Postać papierowa: podpis własnoręczny w polu.</p>
     <div class="k">Obiekt</div><div>{{ d.obiekt }}</div>
     <div class="k">Element projektu</div><div>{{ o.element }}</div>
     {% if o.branza %}<div class="k">Branża</div><div>{{ o.branza }}</div>{% endif %}
-    <div class="k">Autor rysunków</div><div>{% for p in o.autorzy %}{{ p.imie_nazwisko }}, {{ p.specjalnosc_krotka }}, nr upr. {{ p.nr_uprawnien }}{% if not loop.last %}<br>{% endif %}{% endfor %}</div>
+    <div class="k">Autorzy rysunków</div><div>{% for p in o.autorzy %}{{ p.imie_nazwisko }} — {{ p.specjalnosc_skrot }}, nr upr. {{ p.nr_uprawnien }}{% if not loop.last %}<br>{% endif %}{% endfor %}</div>
     <div class="k">Sprawdzający</div><div>{{ d.sprawdzajacy }}</div>
     <div class="k">Data</div><div>{{ o.data }}</div>
     <div class="k">Liczba rysunków</div><div>{{ o.liczba }}</div>

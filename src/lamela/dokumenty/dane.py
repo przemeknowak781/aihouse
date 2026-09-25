@@ -43,19 +43,24 @@ ELEMENTY = {
     "WN": ("Dokumenty do wniosku o pozwolenie na budowę", "dokumenty do wniosku", "dokumentów do wniosku"),
 }
 
-# symbol specjalności (zał. 1 RPB) → (nazwa krótka, pełna specjalność uprawnień, nazwa branży)
+# symbol specjalności (zał. 1 RPB) → (nazwa krótka, pełna specjalność uprawnień, nazwa branży, forma skrócona
+# na stronę tytułową)
 SPECJALNOSCI = {
-    "AR": ("architektoniczna", "architektoniczna do projektowania bez ograniczeń", "architektura"),
-    "BO": ("konstrukcyjno-budowlana", "konstrukcyjno-budowlana do projektowania bez ograniczeń", "konstrukcja"),
+    "AR": ("architektoniczna", "architektoniczna do projektowania bez ograniczeń", "architektura",
+           "architektoniczna bez ograniczeń"),
+    "BO": ("konstrukcyjno-budowlana", "konstrukcyjno-budowlana do projektowania bez ograniczeń", "konstrukcja",
+           "konstrukcyjno-budowlana bez ograniczeń"),
     "IS": ("instalacyjna sanitarna",
            "instalacyjna w zakresie sieci, instalacji i urządzeń cieplnych, wentylacyjnych, gazowych, wodociągowych "
-           "i kanalizacyjnych do projektowania bez ograniczeń", "instalacje sanitarne"),
+           "i kanalizacyjnych do projektowania bez ograniczeń", "instalacje sanitarne",
+           "instalacyjna (cieplne, wentylacyjne, gazowe, wod.-kan.) bez ograniczeń"),
     "IE": ("instalacyjna elektryczna",
            "instalacyjna w zakresie sieci, instalacji i urządzeń elektrycznych i elektroenergetycznych "
-           "do projektowania bez ograniczeń", "instalacje elektryczne"),
+           "do projektowania bez ograniczeń", "instalacje elektryczne",
+           "instalacyjna (elektryczne i elektroenergetyczne) bez ograniczeń"),
     "BT": ("instalacyjna telekomunikacyjna",
            "instalacyjna w zakresie sieci, instalacji i urządzeń telekomunikacyjnych do projektowania bez ograniczeń",
-           "instalacje telekomunikacyjne"),
+           "instalacje telekomunikacyjne", "instalacyjna (telekomunikacyjne) bez ograniczeń"),
 }
 
 
@@ -86,9 +91,16 @@ class Projektant:
         e = element.upper()
         return e in self.elementy or (e.startswith("PT") and "PT" in self.elementy)
 
+    @property
+    def specjalnosc_skrot(self) -> str:
+        """Forma skrócona na stronę tytułową i metryki (pełna — w oświadczeniach)."""
+        s = SPECJALNOSCI.get(self.branza)
+        return s[3] if s and self.specjalnosc == s[1] else self.specjalnosc
+
     def slownik(self) -> dict:
         d = asdict(self)
         d["specjalnosc_krotka"] = self.specjalnosc_krotka
+        d["specjalnosc_skrot"] = self.specjalnosc_skrot
         return d
 
 

@@ -132,43 +132,43 @@ figure.ilustr figcaption .et { font-weight: bold; color: var(--akcent); margin-r
 .zn-status { color: #7a5a00; font-size: 85%; font-weight: bold; }
 
 /* ------------------------------------------------------------------------------------------ znak wodny */
-.znak-wodny { position: fixed; left: 0; right: 0; top: 118mm; text-align: center; transform: rotate(-33deg);
-              font-size: 38pt; font-weight: bold; letter-spacing: 0.08em; color: rgba(163, 38, 42, 0.07);
+.znak-wodny { position: fixed; left: -10mm; right: -10mm; top: 120mm; text-align: center; transform: rotate(-35deg);
+              font-size: 30pt; font-weight: bold; letter-spacing: 0.1em; color: rgba(163, 38, 42, 0.055);
               white-space: nowrap; z-index: -1; }
 
 /* ------------------------------------------------------------------------------------------ strona tytułowa */
-section.st { page: tytulowa; break-after: page; height: 268mm; display: flex; flex-direction: column; font-size: 9pt; }
+section.st { page: tytulowa; break-after: page; min-height: 266mm; display: flex; flex-direction: column; font-size: 9pt; }
 .st .et { display: block; font-size: 6.6pt; letter-spacing: 0.09em; text-transform: uppercase; color: var(--szary); margin-bottom: 0.6mm; }
 .st-gora { display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 2.5mm;
            border-bottom: 0.6pt solid var(--akcent); }
 .st-gora .st-stadium { text-align: right; }
 .st-gora .b { font-weight: bold; letter-spacing: 0.05em; color: var(--akcent); }
-.st-element { display: flex; gap: 6mm; align-items: center; margin: 15mm 0 7mm; }
-.st-kod { flex: 0 0 auto; min-width: 25mm; height: 25mm; padding: 0 3mm; border: 1.6pt solid var(--akcent); color: var(--akcent);
+.st-element { display: flex; gap: 6mm; align-items: center; margin: 11mm 0 6mm; }
+.st-kod { flex: 0 0 auto; min-width: 23mm; height: 23mm; padding: 0 3mm; border: 1.6pt solid var(--akcent); color: var(--akcent);
           display: flex; align-items: center; justify-content: center; font-size: 17pt; font-weight: bold; letter-spacing: 0.04em; }
 .st-nazwa { font-size: 20pt; line-height: 1.15; font-weight: bold; letter-spacing: 0.03em; color: var(--akcent); text-transform: uppercase; }
 .st-podtytul { font-size: 11pt; margin-top: 2mm; color: var(--ink); }
 .st-tom { font-size: 8.4pt; margin-top: 2.5mm; color: var(--szary); letter-spacing: 0.02em; }
-.st-status { border: 1.3pt solid var(--czerw); color: var(--czerw); padding: 2.2mm 3.5mm; margin: 0 0 6mm;
+.st-status { border: 1.3pt solid var(--czerw); color: var(--czerw); padding: 1.8mm 3.5mm; margin: 0 0 5mm;
              display: flex; align-items: center; gap: 5mm; }
 .st-status b { font-size: 13pt; letter-spacing: 0.07em; white-space: nowrap; }
 .st-status span { font-size: 7.4pt; line-height: 1.35; color: #6d1f22; }
-table.st-dane { width: 100%; border-collapse: collapse; margin-bottom: 6mm; font-size: 8.8pt; }
-table.st-dane th { width: 44mm; text-align: left; vertical-align: top; font-weight: normal; color: var(--szary);
-                   font-size: 7.2pt; letter-spacing: 0.05em; text-transform: uppercase; padding: 1.6mm 3mm 1.6mm 0; }
-table.st-dane td { padding: 1.4mm 0; vertical-align: top; }
+table.st-dane { width: 100%; border-collapse: collapse; margin-bottom: 5mm; font-size: 8.6pt; line-height: 1.34; }
+table.st-dane th { width: 42mm; text-align: left; vertical-align: top; font-weight: normal; color: var(--szary);
+                   font-size: 6.9pt; letter-spacing: 0.05em; text-transform: uppercase; padding: 1.35mm 3mm 1.2mm 0; }
+table.st-dane td { padding: 1.1mm 0; vertical-align: top; }
 table.st-dane tr { border-bottom: 0.35pt solid var(--linia-m); }
 table.st-dane tr:first-child { border-top: 0.35pt solid var(--linia-m); }
-table.st-dane .duze { font-size: 10.2pt; font-weight: bold; }
-table.st-autorzy { width: 100%; border-collapse: collapse; font-size: 7.6pt; line-height: 1.28; }
+table.st-dane .duze { font-size: 9.8pt; font-weight: bold; }
+table.st-autorzy { width: 100%; border-collapse: collapse; font-size: 7.3pt; line-height: 1.26; }
 table.st-autorzy caption { caption-side: top; text-align: left; font-size: 6.6pt; letter-spacing: 0.09em; text-transform: uppercase;
                           color: var(--szary); padding-bottom: 1.2mm; }
 table.st-autorzy th { text-align: left; font-weight: bold; background: var(--tlo-nagl); padding: 1.1mm 1.4mm;
                       border-top: 0.8pt solid var(--akcent); border-bottom: 0.5pt solid var(--akcent); font-size: 7pt; }
-table.st-autorzy td { padding: 1.3mm 1.4mm; border-bottom: 0.35pt solid var(--linia); vertical-align: top; }
-table.st-autorzy td.podpis { width: 28mm; height: 13mm; border-left: 0.35pt solid var(--linia); }
+table.st-autorzy td { padding: 1.1mm 1.4mm; border-bottom: 0.35pt solid var(--linia); vertical-align: top; }
+table.st-autorzy td.podpis { height: 11mm; border-left: 0.35pt solid var(--linia); }
 table.st-autorzy tr.spr td { color: var(--szary); height: auto; }
-.st-dol { margin-top: auto; }
+.st-dol { margin-top: auto; padding-top: 4mm; }
 .st-dol-siatka { display: grid; grid-template-columns: 1fr 1fr 1.6fr; gap: 3mm; padding-top: 2.5mm;
                  border-top: 0.6pt solid var(--akcent); font-size: 8.4pt; }
 .st-uwaga { font-size: 6.8pt; color: var(--szary); margin-top: 2.5mm; line-height: 1.35; text-align: left; }
@@ -199,9 +199,9 @@ a.spis-w.el { font-size: 10.2pt; font-weight: bold; color: var(--akcent); margin
 
 /* ------------------------------------------------------------------------------------------ oświadczenia */
 section.osw { break-before: page; font-size: 9.8pt; }
-.osw-miejsce { text-align: right; margin-bottom: 9mm; }
+.osw-miejsce { text-align: right; margin-bottom: 7mm; }
 .osw-tyt { text-align: center; font-size: 13pt; font-weight: bold; letter-spacing: 0.08em; color: var(--akcent); margin: 0 0 1.5mm; }
-.osw-podst { text-align: center; font-size: 8.3pt; color: var(--szary); margin: 0 12mm 7mm; line-height: 1.4; }
+.osw-podst { text-align: center; font-size: 8.3pt; color: var(--szary); margin: 0 12mm 6mm; line-height: 1.4; white-space: pre-line; }
 table.osw-dane { width: 100%; border-collapse: collapse; margin: 0 0 6mm; font-size: 9pt; }
 table.osw-dane th { width: 38mm; text-align: left; font-weight: normal; color: var(--szary); vertical-align: top;
                     padding: 1.2mm 3mm 1.2mm 0; font-size: 8pt; }
