@@ -869,6 +869,10 @@ def _instalacje(ctx) -> dict:
     return d.get("instalacje") or {}
 
 
+BRANZE_PRZYL = {"woda": "wody", "kan_sanit": "kanalizacji sanitarnej", "en": "elektroenergetyczne (WLZ)",
+                "tele": "teletechniczne", "gaz": "gazu", "cieplo": "ciepłownicze"}
+
+
 def _przylacza(ctx, P) -> list:
     """Przyłącza projektowane (dzialka.yaml → uzbrojenie.projektowane) przechodzące przez obrys fundamentu:
     [(branża, punkt przejścia (x, y), opis)] w układzie budynku."""
@@ -878,6 +882,8 @@ def _przylacza(ctx, P) -> list:
         return []
     out = []
     for u in ((dz.raw.get("uzbrojenie") or {}).get("projektowane") or []):
+        if str(u.get("branza")) not in BRANZE_PRZYL:
+            continue                      # np. kanalizacja deszczowa — rury spustowe poza obrysem
         pts = np.asarray(u.get("linia") or [], float)
         if len(pts) < 2:
             continue
@@ -981,7 +987,7 @@ def widok_fundamenty(ctx: ViewContext, spec: dict, scale: float, opts: dict):
                 _przejscie(vp, placer, pr["xy"], "wpust podłogowy — przejście DN110", 0.16)
         for br, xy, op in _przylacza(ctx, P):
             n_prz += 1
-            _przejscie(vp, placer, xy, f"przyłącze {br}: rura osłonowa, przejście szczelne", 0.2)
+            _przejscie(vp, placer, xy, f"przyłącze {BRANZE_PRZYL.get(br, br)}: rura osłonowa, przejście szczelne", 0.2)
     # uziom fundamentowy
     if P is not None:
         _uziom(vp, placer, ctx, P, inst, res)
@@ -1021,6 +1027,134 @@ def _przejscie(vp, placer, xy, txt, r=0.15):
     placer.add(Point(*C).buffer(r * 1.2), "area", 1.0)
     etykieta(vp, placer, C, (1.0, 0.0), txt, None, 1.8, offs=(4.0, 7.0, 10.0), ts=(0.0, -0.6, 0.6, -1.2, 1.2),
              layer=L_OPS)
+
+
+def _uziom(vp, placer, ctx, P, inst, res: KResult):
+    """Uziom fundamentowy przy płycie na izolacji (PN-HD 60364-5-54 p. 542.2, PN-EN 62305-3 p. 5.4.2.2 i E.5.4.3.2):
+    otok w gruncie POD warstwą XPS (izolacja odcina płytę od gruntu), przewód wyrównawczy funkcjonalny w płycie
+    połączony ze zbrojeniem, połączenia otoku z przewodem wyrównawczym i wyprowadzenia (GSU, złącza kontrolne)."""
+    k = vp.k
+    m = ctx.model
+    fu = m.fundamenty()
+    obw = [e for e in fu.get("elementy") or [] if "os" in e and LineString(e["os"]).length > 1.0
+           and P.exterior.distance(Point(*LineString(e["os"]).interpolate(0.5, normalized=True).coords[0])) < 0.5]
+    d_otok = float(np.median([P.exterior.distance(Point(*LineString(e["os"]).interpolate(0.5, normalized=True).coords[0]))
+                              for e in obw])) if obw else 0.3
+    otok = P.buffer(-max(d_otok, 0.1), join_style=2).exterior
+    wyr = P.buffer(-max(d_otok, 0.1) - 0.25, join_style=2).exterior
+    vp.geom(otok, L_UZ, pen=0.5, lt="KRESKOWA", color=KOL_UZ)
+    vp.geom(wyr, L_UZ, pen=0.35, lt="PUNKTOWA", color=KOL_UZ)
+    placer.add_lines(otok, w=0.5)
+    placer.add_lines(wyr, w=0.5)
+    # połączenia otok ↔ przewód wyrównawczy w narożach wypukłych obrysu (odstęp ≤ 20 m po obwodzie)
+    cs = list(P.exterior.coords)[:-1]
+    xs = [c[0] for c in cs]
+    ys = [c[1] for c in cs]
+    naroza = [(min(xs), min(ys)), (max(xs), min(ys)), (max(xs), max(ys)), (min(xs), max(ys))]
+    polacz = []
+    for c in naroza:
+        a = otok.interpolate(otok.project(Point(*c)))
+        b = wyr.interpolate(wyr.project(Point(*c)))
+        vp.line((a.x, a.y), (b.x, b.y), L_UZ, pen=0.35, color=KOL_UZ)
+        vp.dot((a.x, a.y), 1.0, L_UZ, color=KOL_UZ)
+        vp.dot((b.x, b.y), 1.0, L_UZ, color=KOL_UZ)
+        polacz.append((a, b))
+    L_obw = otok.length
+    # wyprowadzenia: GSU przy rozdzielnicy (instalacje.lokalizacje.RG) + złącza kontrolne LPS w narożach
+    wypr = []
+    rg = (inst.get("lokalizacje") or {}).get("RG")
+    if rg:
+        q = wyr.interpolate(wyr.project(Point(rg[0], rg[1])))
+        wypr.append(((q.x, q.y), "wyprowadzenie do GSU (główna szyna uziemiająca przy RG)"))
+    for a, b in polacz:
+        wypr.append(((a.x, a.y), "złącze kontrolne — przewód odprowadzający LPS"))
+    for i, (xy, txt) in enumerate(wypr):
+        C = np.asarray(xy, float)
+        vp.circle(C, 1.3 * k, L_UZ, pen=0.35, color=KOL_UZ)
+        vp.line(C - np.array([0.9, 0.9]) * k, C + np.array([0.9, 0.9]) * k, L_UZ, pen=0.35, color=KOL_UZ)
+        placer.add(Point(*C).buffer(1.6 * k), "area", 1.0)
+        if i < 2:
+            etykieta(vp, placer, C, (1.0, 0.0), txt, None, 1.8, offs=(4.0, 7.0, 10.0), ts=(0.0, -1.0, 1.0, -2.0, 2.0),
+                     layer=L_OPS)
+    etykieta(vp, placer, np.asarray(otok.interpolate(0.12, normalized=True).coords[0]), (1.0, 0.0),
+             "uziom otokowy: pręt nierdzewny V4A Ø10 w gruncie pod XPS", None, 1.8, offs=(3.0, 6.0, 9.0),
+             ts=(0.0, -2.0, 2.0), layer=L_OPS)
+    etykieta(vp, placer, np.asarray(wyr.interpolate(0.62, normalized=True).coords[0]), (1.0, 0.0),
+             "przewód wyrównawczy funkcjonalny FeZn 30×4 w płycie", None, 1.8, offs=(3.0, 6.0, 9.0),
+             ts=(0.0, -2.0, 2.0), layer=L_OPS)
+    res.notes.append(
+        f"Uziom fundamentowy (PN-HD 60364-5-54 p. 542.2.3, PN-EN 62305-3 p. 5.4.2.2 i E.5.4.3.2; praktyka DIN 18014): "
+        f"płyta na XPS jest odizolowana od gruntu — uziom otokowy ze stali nierdzewnej V4A (1.4571) Ø10 mm lub "
+        f"30×3,5 mm ułożyć w gruncie POD warstwą XPS wzdłuż żeber obwodowych (obwód ≈ {_pl(L_obw, 1)} m); w płycie "
+        f"przewód wyrównawczy funkcjonalny FeZn 30×4 (lub Ø10) połączony ze zbrojeniem co ≤ 2 m (zaciski), oczka ≤ "
+        f"20 × 20 m; połączenia otoku z przewodem wyrównawczym (stal nierdzewna przez izolację, szczelnie) w "
+        f"{len(polacz)} narożach (odstęp po obwodzie ≤ 20 m); wyprowadzenia (V4A, min. 1,5 m zapasu) do GSU i złączy "
+        f"kontrolnych LPS (jeżeli LPS wymagany wg analizy ryzyka PN-EN 62305-2). Połączenia — zaciski wg PN-EN 62561-1; "
+        f"pomiar ciągłości i rezystancji przed betonowaniem (protokół). Trasa i wyprowadzenia do uzgodnienia z branżą E.")
+
+
+def _przekroje_fund(ctx, liniowe) -> list:
+    """Przekroje charakterystyczne fundamentu: 1 — żebro obwodowe (najdłuższe przy krawędzi), 2 — żebro wewnętrzne
+    (najdłuższe), 3 — pogrubienie pod słupem (pierwsze). Zwraca [(etykieta, id elementu, położenie 0…1)]."""
+    D = KD.dane(ctx)
+    if "przekroje_fund" in D.cache:
+        return D.cache["przekroje_fund"]
+    m = ctx.model
+    plyty = [Polygon(e["obrys"]) for e in (m.fundamenty().get("elementy") or []) if "obrys" in e]
+    P = unary_union(plyty) if plyty else None
+    out = []
+    dl = [e for e in liniowe if LineString(e["os"]).length >= float(e.get("b", 0.6))]
+    if P is not None:
+        ob = [e for e in dl if P.exterior.distance(Point(*LineString(e["os"]).interpolate(0.5, normalized=True).coords[0])) < 0.5]
+        wn = [e for e in dl if e not in ob]
+    else:
+        ob, wn = dl, []
+    if ob:
+        out.append(("1", str(max(ob, key=lambda e: LineString(e["os"]).length)["id"]), 0.3))
+    if wn:
+        out.append(("2", str(max(wn, key=lambda e: LineString(e["os"]).length)["id"]), 0.5))
+    kr = [e for e in liniowe if LineString(e["os"]).length < float(e.get("b", 0.6))]
+    if kr:
+        out.append(("3", str(kr[0]["id"]), 0.5))
+    D.cache["przekroje_fund"] = out
+    return out
+
+
+def _uwagi_fundamentow(D, m, fu, iz, n_prz) -> list:
+    geo = m.raw.get("geotechnika") or {}
+    gr = geo.get("grunt") or {}
+    kon = m.raw.get("konstrukcja") or {}
+    out = [
+        f"Posadowienie bezpośrednie — {fu.get('uwagi', '')} Kategoria geotechniczna {geo.get('kategoria', '?')}; "
+        f"grunt: {gr.get('rodzaj', '?')}, φ' = {gr.get('phi', '?')}°, γ = {gr.get('gamma', '?')} kN/m³, "
+        f"M₀ = {gr.get('M0', '?')} kPa; ZWG {fmt.level(float(geo.get('ZWG', 0)))}, h_z = {geo.get('h_z', '?')} m "
+        f"(PN-EN 1997-1 + NA; dane wg modelu — do potwierdzenia dokumentacją badań podłoża).",
+        f"Beton fundamentu: {(kon.get('beton') or {}).get('fundament', '')}; otulina: wierzch {D.c_fund[0]:.0f} mm, "
+        f"spód i czoła (na XPS/podsypce) {D.c_fund[1]:.0f} mm (PN-EN 1992-1-1 4.4.1.3(4) + NA). Stal "
+        f"{kon.get('stal_zbrojeniowa', 'B500SP')}. Zbrojenie — arkusz zbrojenia płyty fundamentowej.",
+    ]
+    if iz:
+        out.append(f"Izolacja obwodowa przeciwprzemarzaniowa: {iz.get('opis', '')} — typ {iz.get('typ')}, szerokość "
+                   f"D = {_pl(float(iz.get('D', 1.0)), 2)} m, grubość d_n = {_cm(float(iz.get('d_n', 0.1)))} cm "
+                   f"({iz.get('mat')}), głębokość {_pl(float(iz.get('glebokosc', 0.45)), 2)} m p.p.t. — "
+                   f"PN-EN ISO 13793 (zastępuje wymaganie posadowienia poniżej h_z; uzasadnienie — obliczenia wg "
+                   f"normy dla strefy klimatycznej lokalizacji).")
+    if n_prz:
+        out.append(f"Przejścia instalacyjne ({n_prz}) wykonać w tulejach ochronnych (rury osłonowe PVC/PE osadzone przed "
+                   "betonowaniem), szczelnie w warstwie przeciwwilgociowej/przeciwradonowej (kołnierze systemowe); "
+                   "położenie wg projektów branż S i E — koordynacja przed betonowaniem.")
+    bad = []
+    for z in D.zebra + D.stopy:
+        if z.niesp:
+            bad.append(f"{z.id}: {z.niesp[0]}")
+    if bad:
+        out.append("UWAGA — obliczenia (biblioteka, model ław/stóp izolowanych) wykazują niespełnione warunki: "
+                   + "; ".join(bad[:6]) + ("…" if len(bad) > 6 else "") + ". Model ław nie uwzględnia współpracy z "
+                   "płytą i izolacji obwodowej (PN-EN ISO 13793) — wymagana analiza płyty z żebrami na podłożu "
+                   "sprężystym i ocena głębokości przemarzania [WYMAGA ANALIZY].")
+    if D.plyta_f is not None:
+        out += D.plyta_f.uwagi
+    return out
 
 
 # ================================================================================================ rejestracja

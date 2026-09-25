@@ -357,8 +357,7 @@ def _wskazniki_cd(model, ir, g, out, A, z0) -> dict:
     out["intensywnosc_nadziemna"] = _poz(s_nadz / A if A else 0.0, "–", POD["32"],
                                          "suma_pow_kondygnacji_nadziemnych / pow_dzialki")
     # --- teren na obwodzie rzutu ścian zewnętrznych (niższa z istn./proj. w każdym punkcie)
-    Q = g["P"](obwod_punkty(model.obrys_kondygnacji(model.kondygnacje[0].id), 0.25)) if False else \
-        obwod_punkty(g["footprint"], 0.25)
+    Q = obwod_punkty(g["footprint"], 0.25)
     tn, ti, tp = T.nizsza(Q)
     ok = np.isfinite(tn)
     i_min, i_max = int(np.nanargmin(np.where(ok, tn, np.nan))), int(np.nanargmax(np.where(ok, tn, np.nan)))
