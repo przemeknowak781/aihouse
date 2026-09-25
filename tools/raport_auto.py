@@ -64,7 +64,7 @@ def main():
             if n.get("zastoje"):
                 notes.insert(0, "NADZÓR: ZASTÓJ — " + "; ".join(f"{z['opis']}: {', '.join(z['powody'])}" for z in n["zastoje"]))
             else:
-                notes.append(f"NADZÓR ({n.get('czas','')[-5:]}): {len(akt)} agentów aktywnych, bez zastojów; najdłuższa bezczynność {maxidle:.0f} min; zmiany w repo {n.get('repo_bez_zmian_min',0):.0f} min temu.")
+                notes.append(f"NADZÓR ({n.get('czas','')[-5:]}): {len(akt)} agentów aktywnych, bez zastojów; najdłuższa bezczynność {max(0.0, maxidle):.0f} min; zmiany w repo {max(0.0, n.get('repo_bez_zmian_min') or 0.0):.0f} min temu.")
         except Exception:
             pass
     spec = {"nr": nr, "title": a.title or stan.get("title", "Postęp prac"), "stages": stan["stages"],

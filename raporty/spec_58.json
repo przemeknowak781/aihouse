@@ -1,4 +1,5 @@
 {
+ "nr": 58,
  "title": "Silnik arkuszy: 16 zgłoszeń poprawionych, QA 33/33, testy 28/28 → weryfikacja ► · konstrukcja: runda 1 ►",
  "stages": [
   [
@@ -52,6 +53,17 @@
  ],
  "notes": [
   "Bloki uwag na arkuszach już się nie dzielą; kolejność czytania kolumnami.",
-  "Konstrukcja: przeliczenie rundy 1 bez pozycji niespełnionych — do weryfikacji."
+  "Konstrukcja: przeliczenie rundy 1 bez pozycji niespełnionych — do weryfikacji.",
+  "NADZÓR (11:56): 3 agentów aktywnych, bez zastojów; najdłuższa bezczynność 2 min; zmiany w repo 0 min temu."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/projekt/05_PT_instalacje_sanitarne/rysunki/PT-IS-07_ogrzewanie_rzuty_i_pietra_i_ii_pietra.png",
+   "caption": "PT-IS-07 ogrzewanie — rzuty I i II piętra (legenda → P1 → P2 → uwagi)"
+  },
+  {
+   "path": "/home/user/aihouse/projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-06_gniazda_i_zasilanie_urzadzen_rzut_ii_pietra.png",
+   "caption": "PT-IE-06 — uwagi w jednym bloku"
+  }
  ]
 }
