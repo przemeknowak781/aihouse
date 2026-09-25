@@ -514,3 +514,73 @@ def faq(tr: dict, W: dict, sep: str) -> str:
     t = tr["faq"]
     q = "".join(f'<details class="faq"><summary>{tx(x["p"], W)}</summary><p>{tx(x["o"], W)}</p></details>' for x in t["lista"])
     return sekcja("pytania", "FAQ", t["tytul"], "", f"<div>{q}</div>", sep)
+
+
+def formularz(tr: dict, W: dict, sep: str) -> str:
+    t, mk = tr["formularz"], tr["marka"]
+    tem = "".join(f'<option>{E(x)}</option>' for x in t["tematy"])
+    pak = "".join(f'<option>{E(p["nazwa"])}</option>' for p in tr["pakiety"]["lista"])
+
+    def pole(id_, lab, inp, pelna=False):
+        return (f'<div class="pole{" pelna" if pelna else ""}"><label for="{id_}">{lab}</label>{inp}'
+                f'<span class="blad" id="{id_}-blad" aria-live="polite"></span></div>')
+    f = (f'<form class="zap" id="form-zap" novalidate>'
+         + pole("z-imie", "Imię i nazwisko *", '<input id="z-imie" name="imie" type="text" autocomplete="name" required '
+                'aria-describedby="z-imie-blad">')
+         + pole("z-email", "E-mail *", '<input id="z-email" name="email" type="email" autocomplete="email" required '
+                'aria-describedby="z-email-blad">')
+         + pole("z-tel", "Telefon (opcjonalnie)", '<input id="z-tel" name="tel" type="tel" autocomplete="tel" '
+                'aria-describedby="z-tel-blad">')
+         + pole("z-temat", "Temat *", f'<select id="z-temat" name="temat" required aria-describedby="z-temat-blad">'
+                f'<option value="">— wybierz —</option>{tem}</select>')
+         + pole("z-pakiet", "Pakiet", f'<select id="z-pakiet" name="pakiet"><option value="">— bez wskazania —</option>{pak}</select>')
+         + pole("z-miejsce", "Gmina lub miejscowość działki", '<input id="z-miejsce" name="miejsce" type="text" '
+                'autocomplete="address-level2">')
+         + pole("z-tresc", "Treść zapytania *", '<textarea id="z-tresc" name="tresc" required maxlength="2000" '
+                'aria-describedby="z-tresc-blad"></textarea>', True)
+         + f'<div class="pole pelna"><label class="zgoda" for="z-zgoda"><input type="checkbox" id="z-zgoda" name="zgoda" '
+           f'aria-describedby="z-zgoda-blad"> <span>{E(t["zgoda"])} *</span></label>'
+           f'<span class="blad" id="z-zgoda-blad" aria-live="polite"></span></div>'
+         + '<div class="pelna cta"><button class="btn btn-g" type="submit">Wyślij zapytanie</button>'
+           '<button class="btn" type="reset">Wyczyść</button></div></form>')
+    wynik = ('<div class="wynik" id="wynik" role="status" tabindex="-1" hidden><h3>Zapytanie sprawdzone — nic nie zostało wysłane</h3>'
+             '<p>To strona demonstracyjna. Dane pozostały wyłącznie w tej karcie przeglądarki i znikną po jej zamknięciu. '
+             'Tak wyglądałoby zapytanie:</p><dl id="wynik-dl"></dl></div>')
+    body = (f'<p class="demo"><b>{E(t["demo"])}</b></p>{f}{wynik}'
+            f'<p class="adres">{E(t["kontakt"])} <code id="adres-txt">{E(mk["adres_tekst"])}</code>'
+            f'<button type="button" data-kopiuj="adres-txt">Kopiuj adres</button></p>')
+    return sekcja("zapytanie", "Formularz — demonstracja", t["tytul"], '<p class="nota">Pola z gwiazdką są wymagane. '
+                  'Formularz nie zbiera danych płatniczych ani haseł.</p>', body, sep)
+
+
+def stopka(D: dict, tr: dict, W: dict, sep_svg: str, teraz: datetime) -> str:
+    mk, st = tr["marka"], tr["stopka"]
+    meta = D["meta"]
+    li = "".join(f"<li>{tx(x, W)}</li>" for x in st["zastrzezenia"])
+    return (f'<footer class="stopka"><div class="wrap"><div>{sep_svg}<b>{E(mk["nazwa"])}</b><p>{E(mk["podtytul"])} · '
+            f'{E(mk["oznaczenie"])}</p><p class="mono">Wygenerowano {teraz.strftime("%d.%m.%Y %H:%M")} skryptem '
+            f'tools/buduj_www.py z modelu „{E(str(meta.get("nazwa", "")))}” w wersji {E(str(meta.get("wersja", "")))} '
+            f'({E(str(meta.get("data", "")))}).</p></div><ul>{li}</ul></div></footer>')
+
+
+def zloz(D: dict, tr: dict, R: dict, szkic: dict, glb_mb: float, model_dir: Path, teraz: datetime) -> str:
+    """Pełna treść index.html (bez szkieletu dokumentu)."""
+    W = wartosci(D, tr, teraz)
+    W["glb_mb"] = fm(glb_mb, 1)
+    css = (STATIC / "strona.css").read_text(encoding="utf-8")
+    js = (STATIC / "strona.js").read_text(encoding="utf-8")
+    js3 = (STATIC / "widok3d.js").read_text(encoding="utf-8")
+    sep = SC.separator_svg(D["model"])
+    arkusze = model_dir / "arkusze.yaml"
+    secs = EL.przekroje_def(D["model"], arkusze)
+    top = max(p.z1 for p in D["ir"].prisms if p.meta.get("group") not in ("otoczenie", "teren") and p.kind != "terrain")
+    prz = EL.przekroj(D, secs[0], (-1.4, top + 1.1)).replace(f'id="prz-{secs[0].get("id")}"', 'id="prz-linie"') if secs else ""
+    czesci = [glowa(D, tr, css, W), naglowek(tr, W), '<main id="tresc">', hero(D, tr, W, R, sep), parametry(D, tr, W, sep),
+              idea(D, tr, W, szkic, sep), galeria(D, tr, W, R, sep), rzuty_sekcja(D, tr, W, sep),
+              elewacje_sekcja(D, tr, W, arkusze, sep), model3d(D, tr, W, sep), technologia(D, tr, W, sep),
+              jakosc(D, tr, W, prz, sep), energia(D, tr, W, sep), dzialka(D, tr, W, sep),
+              dokumentacja(D, tr, W, model_dir, sep), pakiety(tr, W, sep), faq(tr, W, sep), formularz(tr, W, sep),
+              '</main>', stopka(D, tr, W, sep, teraz)]
+    czesci += [f'<script src="{u}"></script>' for u in CDN]
+    czesci += [f"<script>\n{js}\n</script>", f"<script>\n{js3}\n</script>"]
+    return "\n".join(czesci) + "\n", W

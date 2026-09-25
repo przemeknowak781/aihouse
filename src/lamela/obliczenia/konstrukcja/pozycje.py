@@ -1429,11 +1429,80 @@ class AnalizaKonstrukcji:
     # ============================================================================================
     # 3. Belki
     # ============================================================================================
+    def _podpory_belki_rozszerzone(self, b, p0, u, L: float, spod: float, pods: list) -> list:
+        """Podpory belki bez dwóch podpór na końcach (np. belka wspornikowa w licu ściany kondygnacji wyższej, belka
+        krawędziowa oparta na końcach wsporników) [ZAŁ]: (1) ściana nośna pod belką współliniowa — podparcie ciągłe
+        modelowane podporami przegubowymi co ≤ 0,5 m na odcinkach muru poza otworami; (2) ściana przecinająca oś belki
+        w przęśle; (3) koniec belki oparty na innej belce — podpora „belka”, reakcja przekazywana jako siła skupiona na
+        belkę podpierającą (liczoną później)."""
+        m = self.m
+        x0, y0 = p0
+        ux, uy = u
+        lnb = LineString([(x0, y0), (x0 + ux * L, y0 + uy * L)])
+        out = list(pods)
+
+        def pr(pt):
+            return (pt[0] - x0) * ux + (pt[1] - y0) * uy
+        for w in m.sciany():
+            if w.typ not in TYPY_NOSNE or not (w.z_od < spod + 0.05 <= w.z_do + TOL_Z):
+                continue
+            lw = w.axis_line()
+            if lw.distance(lnb) > w.grubosc / 2 + 0.05:
+                continue
+            cosang = abs(ux * w.u[0] + uy * w.u[1])
+            if cosang > 0.98:                                     # (1) współliniowa
+                sa, sb = sorted((pr(w.p1), pr(w.p2)))
+                sa, sb = max(sa, 0.0), min(sb, L)
+                if sb - sa < 0.3:
+                    continue
+                otw = sorted(tuple(sorted((pr(w.pt(o.s0, 0.0)), pr(w.pt(o.s1, 0.0))))) for o in m.otwory(sciana=w.id))
+                n_ = max(int(math.ceil((sb - sa) / 0.5)), 1)
+                for k in range(n_ + 1):
+                    s_ = sa + (sb - sa) * k / n_
+                    if not any(lo + 0.05 < s_ < hi - 0.05 for lo, hi in otw):
+                        out.append((s_, "sciana", w))
+            else:                                                 # (2) poprzeczna
+                ip = lw.intersection(lnb)
+                s_ = lnb.project(ip if (not ip.is_empty and ip.geom_type == "Point") else
+                                 lw.interpolate(lw.project(lnb.interpolate(0.5, normalized=True))))
+                if 0.0 <= s_ <= L:
+                    out.append((s_, "sciana", w))
+        for b2 in m.belki():                                      # (3) końce na innej belce
+            if b2 is b or str(b2["id"]) == str(b["id"]):
+                continue
+            l2 = LineString([tuple(b2["os"][0]), tuple(b2["os"][1])])
+            if not (float(b2["spod"]) - TOL_Z <= spod <= float(b2["spod"]) + float(b2["h"]) + TOL_Z):
+                continue
+            for xe, s_ in (((x0, y0), 0.0), ((x0 + ux * L, y0 + uy * L), L)):
+                if l2.distance(Point(*xe)) <= float(b2["b"]) / 2 + 0.05 and not any(abs(q[0] - s_) < 0.3 for q in out):
+                    out.append((s_, "belka", b2))
+        if len(out) > len(pods):
+            self.log(f"Belka {b['id']}: podpory wyznaczone rozszerzenie (ściany współliniowe/poprzeczne, oparcie na belce) — "
+                     + ", ".join(sorted({(o.id if t == 'sciana' else str(o['id'])) for _, t, o in out})) + " [ZAŁ].")
+        return out
+
+    def _na_belce(self, b) -> bool:
+        """Koniec belki oparty na innej belce (bez ściany/słupa przy tym końcu) — belkę liczyć przed podpierającą."""
+        m = self.m
+        spod = float(b["spod"])
+        for xe in (b["os"][0], b["os"][1]):
+            pt = Point(*xe)
+            if any(w.typ in TYPY_NOSNE and w.z_od < spod + 0.05 <= w.z_do + TOL_Z
+                   and w.axis_line().distance(pt) <= w.grubosc / 2 + 0.12 for w in m.sciany()):
+                continue
+            for b2 in m.belki():
+                if str(b2["id"]) != str(b["id"]) and LineString([tuple(b2["os"][0]), tuple(b2["os"][1])]).distance(pt) \
+                        <= float(b2["b"]) / 2 + 0.05 and float(b2["spod"]) - TOL_Z <= spod <= float(b2["spod"]) + float(b2["h"]):
+                    return True
+        return False
+
     def _belki_grupy(self, g: Grupa):
         if g.fe is None:
             return
         p, m, fe = self.p, self.m, g.fe
-        for sid, b in g.belki:
+        if not hasattr(self, "pending_belki"):
+            self.pending_belki = {}         # id belki → [(przypadek, P [kN], współrzędna/punkt)] — reakcje belek opartych
+        for sid, b in sorted(g.belki, key=lambda sb: 0 if self._na_belce(sb[1]) else 1):
             if "#" in sid:
                 continue
             bid = str(b["id"])
@@ -1461,6 +1530,8 @@ class AnalizaKonstrukcji:
                 dperp = abs(-(cx - x0) * uy + (cy - y0) * ux)
                 if -0.2 <= s <= L + 0.2 and dperp <= bw / 2 + 0.1:
                     pods.append((min(max(s, 0.0), L), "slup", c))
+            if len(pods) < 2:
+                pods = self._podpory_belki_rozszerzone(b, (x0, y0), (ux, uy), L, spod, pods)
             pods = sorted({round(s, 3): (s, t, o) for s, t, o in pods}.values(), key=lambda q: q[0])
             poz = Pozycja("", bid, f"Belka {bid}", "belka")
             if len(pods) < 2:
