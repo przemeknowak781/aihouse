@@ -611,15 +611,12 @@ def _bloki_ukladu(ctx, P) -> list:
             return yb
         out.append(U.blok("róża i podziałka" if nfn and sfn else ("róża" if nfn else "podziałka"), ns,
                           kotwica="nad_tabliczka"))
-    for nm, fn in col.blocks:
-        if nm in ("north", "scale"):
-            continue
-        if nm == "notes":
-            b = U.Blok("uwagi", None, TB_W)
-            b.uwagi = U.BlokUwag(P["notes"], "OBJAŚNIENIA I UWAGI", h=1.8, w=TB_W)
-            out.append(b)
-            continue
-        out.append(U.blok(nm, fn))
+    pary = [(nm, fn) for nm, fn in col.blocks if nm not in ("north", "scale", "notes")]
+    out += U.bloki_z_kolumny(pary, TB_W)      # pomiar sekwencyjny: bloki zależne od poprzednich — razem
+    if any(nm == "notes" for nm, _f in col.blocks):
+        b = U.Blok("uwagi", None, TB_W)
+        b.uwagi = U.BlokUwag(P["notes"], "OBJAŚNIENIA I UWAGI", h=1.8, w=TB_W)
+        out.append(b)
     return out
 
 

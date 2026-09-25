@@ -130,9 +130,34 @@ class DanePTIS:
             if not (a.get("qa") or {}).get("ok", True):
                 self.ark_braki.append(f"{a['nr']}: kontrola QA arkusza z błędami: {a['qa'].get('errors')}")
             self.arkusze.append(Arkusz.z_pdf(pdf))
+        self._aktualnosc_rysunkow()
         if p.exists() and p.stat().st_mtime < self.p_bud.stat().st_mtime:
             self.otwarte.append("Arkusze IS wygenerowano przed ostatnią zmianą modelu — przed wydaniem wygenerować "
                                 "ponownie (tools/generuj_widoki.py --arkusze model/arkusze_is.yaml).")
+
+    def _aktualnosc_rysunkow(self):
+        """Porównanie treści arkuszy z bieżącymi obliczeniami: model PC i „SPRAWDZENIE NIESPEŁNIONE” na rysunkach."""
+        import pymupdf
+        pc = (self.W["ogrzewanie"].pc or {}).get("model", "")
+        pc_id = (re.search(r"PC-R290-\d+", pc) or [None])[0] if pc else None
+        n_nok = sum(1 for k in MODULY for x in self.warunki(k) if x.ok is False)
+        inne_pc, nok = {}, []
+        for a in self.arkusze:
+            if not a.istnieje:
+                continue
+            with pymupdf.open(a.plik) as doc:
+                tx = " ".join(pg.get_text() for pg in doc)
+            for m in set(re.findall(r"PC-R290-\d+", tx)):
+                if pc_id and m != pc_id:
+                    inne_pc.setdefault(m, []).append(a.nr)
+            if "NIESPEŁNIONE" in tx.upper() and n_nok == 0:
+                nok.append(a.nr)
+        for m, nr in inne_pc.items():
+            self.otwarte.append(f"Rysunki {', '.join(nr)} podają pompę ciepła {m}, a bieżące obliczenia — {pc} — "
+                                "rysunki nieaktualne wobec obliczeń; wygenerować ponownie przed wydaniem.")
+        if nok:
+            self.otwarte.append(f"Rysunki {', '.join(nok)} zawierają uwagi „SPRAWDZENIE NIESPEŁNIONE” z poprzedniej wersji "
+                                "obliczeń, a bieżące obliczenia nie wykazują warunków niespełnionych — wygenerować ponownie.")
 
     def arkusze_nr(self, *slowa) -> str:
         """Numery arkuszy, których tytuł zawiera wszystkie ``slowa`` (bez rozróżniania wielkości liter)."""

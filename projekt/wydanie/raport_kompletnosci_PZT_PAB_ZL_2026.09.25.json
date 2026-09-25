@@ -1,0 +1,986 @@
+{
+  "plik": "PZT_PAB_ZL_2026.09.25.pdf",
+  "lista": "TOM I — PZT + PAB + ZL w jednym pliku (rejestr C.1)",
+  "status": "PRZYKŁAD – NIE DO ZŁOŻENIA",
+  "pozycje": [
+    {
+      "id": "F-01",
+      "element": "*",
+      "opis": "Nazwa pliku wg zał. 1 RPB (PZT_PAB_ZL_rrrr.mm.dd.pdf)",
+      "podstawa": "RPB § 2b ust. 4, zał. 1; W-301",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "nazwa zgodna z zał. 1 RPB (PZT_PAB_ZL)"
+    },
+    {
+      "id": "F-02",
+      "element": "*",
+      "opis": "Rozmiar pliku ≤ 150 MB",
+      "podstawa": "RPB § 2b ust. 3; W-300",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "4.45 MB (limit 150 MB)"
+    },
+    {
+      "id": "F-03",
+      "element": "*",
+      "opis": "Część rysunkowa w postaci wektorowej (raster tylko jako podkład mapy)",
+      "podstawa": "RPB § 2b ust. 2; W-300",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "13 arkuszy wektorowych"
+    },
+    {
+      "id": "F-04",
+      "element": "*",
+      "opis": "Metadane PDF (tytuł, temat)",
+      "podstawa": "dobra praktyka; AUD-RYS",
+      "status": "OK",
+      "obowiazkowa": false,
+      "szczegoly": "Title: „Dom LAMELA — TOM I: PZT + PAB + ZL (PRZYKŁAD – NIE DO ZŁOŻENIA)”"
+    },
+    {
+      "id": "F-05",
+      "element": "*",
+      "opis": "PT nie jest objęty wspólną oprawą z PZT/PAB",
+      "podstawa": "RPB § 5 ust. 3; § 7 ust. 8",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "brak PT w pliku"
+    },
+    {
+      "id": "C1-0-01",
+      "element": "*",
+      "opis": "Łączny spis treści ze spisem załączników (opcjonalny przy wspólnej oprawie)",
+      "podstawa": "RPB § 7 ust. 7 pkt 1",
+      "status": "OK",
+      "obowiazkowa": false,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-1-01",
+      "element": "PZT",
+      "opis": "Strona tytułowa: nazwa elementu",
+      "podstawa": "RPB § 7 ust. 2 pkt 1",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-1-02",
+      "element": "PZT",
+      "opis": "Strona tytułowa: nazwa zamierzenia budowlanego",
+      "podstawa": "RPB § 7 ust. 2 pkt 2 lit. a",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-1-03",
+      "element": "PZT",
+      "opis": "Strona tytułowa: adres i kategoria obiektu (kat. I)",
+      "podstawa": "RPB § 7 ust. 2 pkt 2 lit. b; W-303",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-1-04",
+      "element": "PZT",
+      "opis": "Strona tytułowa PZT: identyfikator działki ewidencyjnej",
+      "podstawa": "RPB § 7 ust. 2 pkt 2 lit. c, ust. 7 pkt 2",
+      "status": "DO UZUPEŁNIENIA",
+      "obowiazkowa": true,
+      "szczegoly": "pola [DO UZUPEŁNIENIA] na stronie tytułowej"
+    },
+    {
+      "id": "C1-1-05",
+      "element": "PZT",
+      "opis": "Strona tytułowa: inwestor i jego adres",
+      "podstawa": "RPB § 7 ust. 2 pkt 2 lit. d",
+      "status": "DO UZUPEŁNIENIA",
+      "obowiazkowa": true,
+      "szczegoly": "pola [DO UZUPEŁNIENIA] na stronie tytułowej"
+    },
+    {
+      "id": "C1-1-06",
+      "element": "PZT",
+      "opis": "Strona tytułowa: data opracowania; autorzy — imię, nazwisko, specjalność, nr uprawnień, zakres",
+      "podstawa": "RPB § 7 ust. 2 pkt 3",
+      "status": "DO UZUPEŁNIENIA",
+      "obowiazkowa": true,
+      "szczegoly": "pola [DO UZUPEŁNIENIA] na stronie tytułowej"
+    },
+    {
+      "id": "C1-1-07",
+      "element": "PZT",
+      "opis": "Spis treści z numerami stron",
+      "podstawa": "RPB § 7 ust. 1 pkt 2, ust. 5",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-1-08",
+      "element": "PZT",
+      "opis": "Numeracja stron elementu („strona X z Y”)",
+      "podstawa": "RPB § 6 ust. 1",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "13 stron numerowanych"
+    },
+    {
+      "id": "C1-1-09",
+      "element": "PZT",
+      "opis": "Oświadczenie projektanta z listą współautorów",
+      "podstawa": "PB art. 34 ust. 3d pkt 3, ust. 3e",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-1-10",
+      "element": "PZT",
+      "opis": "Opis: przedmiot zamierzenia",
+      "podstawa": "RPB § 14 pkt 1",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-1-11",
+      "element": "PZT",
+      "opis": "Opis: istniejący stan zagospodarowania",
+      "podstawa": "RPB § 14 pkt 2",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-1-12",
+      "element": "PZT",
+      "opis": "Opis: projektowane zagospodarowanie (lit. a–f)",
+      "podstawa": "RPB § 14 pkt 3",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-1-13",
+      "element": "PZT",
+      "opis": "Opis: zestawienie powierzchni i wskaźników MPZP",
+      "podstawa": "RPB § 14 pkt 4; W-030…W-041",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-1-14",
+      "element": "PZT",
+      "opis": "Opis: ograniczenia z MPZP, zabytki, szkody górnicze, zagrożenia dla środowiska",
+      "podstawa": "RPB § 14 pkt 5",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-1-15",
+      "element": "PZT",
+      "opis": "Opis: dane dotyczące warunków ochrony przeciwpożarowej",
+      "podstawa": "RPB § 14 pkt 6",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-1-16",
+      "element": "PZT",
+      "opis": "Opis: ochrona ludności — „nie dotyczy” z podstawą",
+      "podstawa": "RPB § 14 pkt 6a",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-1-17",
+      "element": "PZT",
+      "opis": "Opis: informacja o obszarze oddziaływania obiektu",
+      "podstawa": "RPB § 14 pkt 8, § 18; W-012",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-1-18",
+      "element": "PZT",
+      "opis": "Rysunek: plan zagospodarowania na mapie do celów projektowych (≥ 1:500)",
+      "podstawa": "RPB § 15 ust. 1–2, § 9 ust. 5; PZT-01",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "PZT-01 — PLAN ZAGOSPODAROWANIA DZIAŁKI (1:500)"
+    },
+    {
+      "id": "C1-1-19",
+      "element": "PZT",
+      "opis": "Rysunek: plan szczegółowy — wymiary, odległości (0,01 m), rzędne (1:200)",
+      "podstawa": "RPB § 15 ust. 2 pkt 3, ust. 3; § 17 ust. 1; PZT-02",
+      "status": "OK",
+      "obowiazkowa": false,
+      "szczegoly": "PZT-02 — PLAN SZCZEGÓŁOWY — WYMIARY I RZĘDNE (1:200)"
+    },
+    {
+      "id": "C1-1-20",
+      "element": "PZT",
+      "opis": "Rysunek: koordynacyjny uzbrojenia terenu",
+      "podstawa": "RPB § 17 ust. 2; PZT-03",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "PZT-03 — RYSUNEK KOORDYNACYJNY UZBROJENIA TERENU (1:200)"
+    },
+    {
+      "id": "C1-1-21",
+      "element": "PZT",
+      "opis": "Skale rysunków PZT nie mniejsze niż 1:500",
+      "podstawa": "RPB § 9 ust. 5; W-306",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "3 rysunki w skali nie mniejszej niż 1:500"
+    },
+    {
+      "id": "C1-2-01",
+      "element": "PAB",
+      "opis": "Strona tytułowa: nazwa elementu",
+      "podstawa": "RPB § 7 ust. 2 pkt 1",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-2-02",
+      "element": "PAB",
+      "opis": "Strona tytułowa: zamierzenie, adres, kategoria I, inwestor",
+      "podstawa": "RPB § 7 ust. 2 pkt 2",
+      "status": "DO UZUPEŁNIENIA",
+      "obowiazkowa": true,
+      "szczegoly": "pola [DO UZUPEŁNIENIA] na stronie tytułowej"
+    },
+    {
+      "id": "C1-2-03",
+      "element": "PAB",
+      "opis": "Strona tytułowa: data, autorzy ze specjalnością, nr uprawnień i zakresem",
+      "podstawa": "RPB § 7 ust. 2 pkt 3",
+      "status": "DO UZUPEŁNIENIA",
+      "obowiazkowa": true,
+      "szczegoly": "pola [DO UZUPEŁNIENIA] na stronie tytułowej"
+    },
+    {
+      "id": "C1-2-04",
+      "element": "PAB",
+      "opis": "Spis treści",
+      "podstawa": "RPB § 7 ust. 5",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-2-05",
+      "element": "PAB",
+      "opis": "Numeracja stron elementu",
+      "podstawa": "RPB § 6 ust. 1",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "21 stron numerowanych"
+    },
+    {
+      "id": "C1-2-06",
+      "element": "PAB",
+      "opis": "Oświadczenie projektanta(-ów) z listą współautorów",
+      "podstawa": "PB art. 34 ust. 3d pkt 3, ust. 3e",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-2-07",
+      "element": "PAB",
+      "opis": "Opis pkt 1: rodzaj i kategoria obiektu",
+      "podstawa": "RPB § 20 ust. 1 pkt 1",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-2-08",
+      "element": "PAB",
+      "opis": "Opis pkt 2: sposób użytkowania i program użytkowy",
+      "podstawa": "RPB § 20 ust. 1 pkt 2",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-2-09",
+      "element": "PAB",
+      "opis": "Opis pkt 3: układ przestrzenny, forma, wyroby wykończeniowe, kolorystyka, zgodność z MPZP",
+      "podstawa": "RPB § 20 ust. 1 pkt 3",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-2-10",
+      "element": "PAB",
+      "opis": "Opis pkt 4: kubatura, zestawienie powierzchni (PN-ISO 9836 + § 20), wysokość, wymiary, kondygnacje",
+      "podstawa": "RPB § 20 ust. 1 pkt 4; W-316",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-2-11",
+      "element": "PAB",
+      "opis": "Opis pkt 5: opinia geotechniczna i sposób posadowienia",
+      "podstawa": "RPB § 20 ust. 1 pkt 5; W-281",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-2-12",
+      "element": "PAB",
+      "opis": "Opis pkt 6–8: liczba lokali; lokale dostępne i dostępność — „nie dotyczy”",
+      "podstawa": "RPB § 20 ust. 1 pkt 6–8",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-2-13",
+      "element": "PAB",
+      "opis": "Opis pkt 9: wpływ na środowisko i zdrowie (charakterystyka ekologiczna)",
+      "podstawa": "RPB § 20 ust. 1 pkt 9",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-2-14",
+      "element": "PAB",
+      "opis": "Opis pkt 10: analiza wysoce wydajnych systemów alternatywnych",
+      "podstawa": "RPB § 20 ust. 1 pkt 10; W-157",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-2-15",
+      "element": "PAB",
+      "opis": "Opis pkt 11: analiza automatycznej regulacji temperatury",
+      "podstawa": "RPB § 20 ust. 1 pkt 11; W-152",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-2-16",
+      "element": "PAB",
+      "opis": "Opis pkt 12: wyposażenie budowlano-instalacyjne, źródło ciepła i c.w.u.",
+      "podstawa": "RPB § 20 ust. 1 pkt 12",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-2-17",
+      "element": "PAB",
+      "opis": "Opis pkt 13: dane dotyczące warunków ochrony przeciwpożarowej",
+      "podstawa": "RPB § 20 ust. 1 pkt 13",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-2-18",
+      "element": "PAB",
+      "opis": "Opis pkt 14: ochrona ludności — „nie dotyczy”",
+      "podstawa": "RPB § 20 ust. 1 pkt 14",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-2-19",
+      "element": "PAB",
+      "opis": "Opinia geotechniczna (kat. II)",
+      "podstawa": "rozp. Dz.U. 2012 poz. 463 § 7 ust. 1, § 8; D-08",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-2-20",
+      "element": "PAB",
+      "opis": "Rysunki: rzuty kondygnacji (P0, P1, P2)",
+      "podstawa": "RPB § 21 pkt 1 lit. a; W-315",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "rysunków: 3 (wymagane ≥ 3)"
+    },
+    {
+      "id": "C1-2-21",
+      "element": "PAB",
+      "opis": "Rysunek: rzut (widok) dachu",
+      "podstawa": "RPB § 21 pkt 1 lit. a, c",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "PB-AR-04 — RZUT DACHU (1:50)"
+    },
+    {
+      "id": "C1-2-22",
+      "element": "PAB",
+      "opis": "Rysunki: co najmniej 2 przekroje z terenem i podłożem",
+      "podstawa": "RPB § 21 pkt 1 lit. b; W-315",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "rysunków: 2 (wymagane ≥ 2)"
+    },
+    {
+      "id": "C1-2-23",
+      "element": "PAB",
+      "opis": "Rysunki: elewacje ze wszystkich stron z wyrobami i kolorystyką",
+      "podstawa": "RPB § 21 pkt 1 lit. c",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "rysunków: 4 (wymagane ≥ 2)"
+    },
+    {
+      "id": "C1-2-24",
+      "element": "PAB",
+      "opis": "Skale rysunków PAB nie mniejsze niż 1:100",
+      "podstawa": "RPB § 9 ust. 3; W-306",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "10 rysunków w skali nie mniejszej niż 1:100"
+    },
+    {
+      "id": "C1-3-01",
+      "element": "ZL",
+      "opis": "Strona tytułowa elementu „Załączniki”",
+      "podstawa": "RPB § 7 ust. 1a pkt 1",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-3-02",
+      "element": "ZL",
+      "opis": "Spis załączników",
+      "podstawa": "RPB § 7 ust. 1a pkt 2",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-3-03",
+      "element": "ZL",
+      "opis": "Informacja BIOZ — strona tytułowa (obiekt, adres, inwestor, projektant z adresem)",
+      "podstawa": "rozp. BIOZ § 2 ust. 2; RPB § 5 ust. 1 pkt 4 lit. c",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-3-04",
+      "element": "ZL",
+      "opis": "Informacja BIOZ pkt 1: zakres robót i kolejność realizacji",
+      "podstawa": "rozp. BIOZ § 2 ust. 3 pkt 1",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-3-05",
+      "element": "ZL",
+      "opis": "Informacja BIOZ pkt 2: wykaz istniejących obiektów",
+      "podstawa": "rozp. BIOZ § 2 ust. 3 pkt 2",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-3-06",
+      "element": "ZL",
+      "opis": "Informacja BIOZ pkt 3: elementy zagospodarowania stwarzające zagrożenie",
+      "podstawa": "rozp. BIOZ § 2 ust. 3 pkt 3",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-3-07",
+      "element": "ZL",
+      "opis": "Informacja BIOZ pkt 4: przewidywane zagrożenia (skala, rodzaj, miejsce, czas); wskazanie planu BIOZ",
+      "podstawa": "rozp. BIOZ § 2 ust. 3 pkt 4, § 6; PB art. 21a",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-3-08",
+      "element": "ZL",
+      "opis": "Informacja BIOZ pkt 5: instruktaż pracowników",
+      "podstawa": "rozp. BIOZ § 2 ust. 3 pkt 5",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-3-09",
+      "element": "ZL",
+      "opis": "Informacja BIOZ pkt 6: środki techniczne i organizacyjne, komunikacja ewakuacyjna",
+      "podstawa": "rozp. BIOZ § 2 ust. 3 pkt 6",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-3-10",
+      "element": "ZL",
+      "opis": "Decyzja zarządcy drogi o lokalizacji zjazdu (albo strona zastępcza)",
+      "podstawa": "PB art. 33 ust. 2 pkt 1; u.d.p. art. 29 ust. 3a; W-020",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-3-11",
+      "element": "ZL",
+      "opis": "Oświadczenie projektanta IS o sieci ciepłowniczej (formalnie załącznik wniosku)",
+      "podstawa": "PB art. 33 ust. 2 pkt 10; W-158",
+      "status": "OK",
+      "obowiazkowa": false,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-3-12",
+      "element": "ZL",
+      "opis": "Oświadczenie zarządcy drogi krajowej/wojewódzkiej",
+      "podstawa": "RPB § 5 ust. 1 pkt 4 lit. b",
+      "status": "N/D",
+      "obowiazkowa": true,
+      "szczegoly": "nie dotyczy — zjazd z drogi 1KDD (ul. Lipowa (fikcyjna), klasa D; model/dzialka.yaml) — droga gminna, nie krajowa ani wojewódzka; zezwolenie na zjazd: ZL zał. 2 (u.d.p. art. 29)"
+    }
+  ],
+  "znaczniki": {
+    "DO UZUPEŁNIENIA": 162,
+    "DOKUMENT ZEWNĘTRZNY": 1,
+    "DANE PRZYKŁADOWE": 108,
+    "ZAŁ": 16,
+    "NZW": 1,
+    "INT": 9,
+    "PROG": 0,
+    "lista": {
+      "[DO UZUPEŁNIENIA: nazwa pracowni projektowej]": 4,
+      "[DO UZUPEŁNIENIA: adres pracowni]": 4,
+      "[DANE PRZYKŁADOWE – FIKCYJNE]": 108,
+      "[DO UZUPEŁNIENIA: jednostka ewidencyjna — kod TERYT WWPPGG_R i nazwa]": 4,
+      "[DO UZUPEŁNIENIA: kod TERYT jedn. ewid. WWPPGG_R]": 9,
+      "[DO UZUPEŁNIENIA: imię i nazwisko lub nazwa inwestora]": 12,
+      "[DO UZUPEŁNIENIA: adres inwestora]": 10,
+      "[DO UZUPEŁNIENIA: imię i nazwisko]": 32,
+      "[DO UZUPEŁNIENIA: nr uprawnień budowlanych]": 32,
+      "[DO UZUPEŁNIENIA: miejscowość]": 4,
+      "[DO UZUPEŁNIENIA: data złożenia oświadczenia z art. 102a PB]": 3,
+      "[DO UZUPEŁNIENIA: potwierdzenie wpisu w e-CRUB albo dołączenie kopii]": 2,
+      "[DO UZUPEŁNIENIA: nr i data warunków przyłączenia (E-05)]": 1,
+      "[DO UZUPEŁNIENIA: mapa do celów projektowych z klauzulą urzędową lub oświadczeniem geodety (E-01)]": 1,
+      "[DO UZUPEŁNIENIA: nr i data zezwolenia zarządcy drogi]": 1,
+      "[ZAŁ]": 16,
+      "[DO UZUPEŁNIENIA: warunki przyłączenia: ENEA Operator (nN), gestor wod.-kan., operator telekomunikacyjny — E-05]": 1,
+      "[DO UZUPEŁNIENIA: obwód na wys. 5 cm — mapa do celów projektowych (u.o.p. art. 83f)]": 1,
+      "[DO UZUPEŁNIENIA: wypis i wyrys z MPZP (E-02)]": 1,
+      "[DO UZUPEŁNIENIA: wypis z EGiB (E-03)]": 1,
+      "[DO UZUPEŁNIENIA: potwierdzenie lokalizacji i wydajności hydrantu przez gestora sieci]": 1,
+      "[DO UZUPEŁNIENIA: k_f z badań podłoża (E-04)]": 1,
+      "[DO UZUPEŁNIENIA: opinia geotechniczna (E-04)]": 1,
+      "[DO UZUPEŁNIENIA: mapa do celów projektowych z klauzulą lub oświadczeniem geodety (E- 01)]": 1,
+      "[DO UZUPEŁNIENIA]": 13,
+      "[DO UZUPEŁNIENIA: data oświadczenia Inwestora (art. 102a ust. 1 PB)]": 1,
+      "[DO UZUPEŁNIENIA: nr ewidencyjny PZGiK i data]": 1,
+      "[INT]": 9,
+      "[DO UZUPEŁNIENIA: interpretacja zgodności z MPZP]": 1,
+      "[DO UZUPEŁNIENIA: kolor pokrycia]": 1,
+      "[DO UZUPEŁNIENIA: kolor ram (RAL)]": 1,
+      "[DO UZUPEŁNIENIA: paleta MPZP]": 1,
+      "[DO UZUPEŁNIENIA: karta kolorystyki elewacji]": 1,
+      "[DO UZUPEŁNIENIA: wskaźnik nagromadzenia odpadów z regulaminu gminy]": 1,
+      "[DO UZUPEŁNIENIA: imię, nazwisko, nr uprawnień]": 1,
+      "[DO UZUPEŁNIENIA: K — oferta (PT-IS)]": 1,
+      "[DO UZUPEŁNIENIA: s — dane producenta systemu regulacji / PT-IS]": 1,
+      "[DO UZUPEŁNIENIA: metryki otworów, protokoły sondowań, data badań]": 1,
+      "[DO UZUPEŁNIENIA: imię i nazwisko, kwalifikacje zawodowe (świadectwo/uprawnienia), podpis]": 1,
+      "[DO UZUPEŁNIENIA: data opinii]": 1,
+      "[DO UZUPEŁNIENIA: osoba odbierająca podłoże]": 1,
+      "[DO UZUPEŁNIENIA: adres projektanta]": 1,
+      "[DO UZUPEŁNIENIA: głębokość posadowienia zbiornika]": 1,
+      "[NZW]": 1,
+      "[DOKUMENT ZEWNĘTRZNY – do dołączenia: Decyzja zarządcy drogi o lokalizacji zjazdu z drogi gminnej 1KDD, Wójt (burmistrz) Gminy Przykładowo (fikcyjna) — zarządca drogi gminnej (u.d.p. art. 19 ust. 2 pkt 4), art. 29 ust. 1 i 3a ustawy o drogach publicznych (t.j. Dz.U. 2025 poz. 889 ze zm.); PB art. 33 ust. 2 pkt 1]": 1,
+      "[DO UZUPEŁNIENIA: numer i data dokumentu]": 1,
+      "[DO UZUPEŁNIENIA: data audytu, autor]": 1,
+      "[DO UZUPEŁNIENIA: potwierdzenie braku sieci ciepłowniczej: mapa do celów projektowych lub informacja przedsiębiorstwa energetycznego]": 1,
+      "[DO UZUPEŁNIENIA: data]": 1,
+      "[DO UZUPEŁNIENIA: powiat]": 1
+    }
+  },
+  "elementy": {
+    "PZT": {
+      "od": 5,
+      "do": 21,
+      "strony_opisu": 14,
+      "arkusze": 3
+    },
+    "PAB": {
+      "od": 22,
+      "do": 53,
+      "strony_opisu": 22,
+      "arkusze": 10
+    },
+    "ZL": {
+      "od": 54,
+      "do": 62,
+      "strony_opisu": 9,
+      "arkusze": 0
+    }
+  },
+  "rozmiar_mb": 4.4495697021484375,
+  "strony": 62,
+  "podsumowanie": {
+    "status": "PRZYKŁAD – NIE DO ZŁOŻENIA",
+    "OK": 57,
+    "BRAK": 0,
+    "DO UZUPEŁNIENIA": 5,
+    "N/D": 1,
+    "OSTRZEŻENIE": 0,
+    "znaczniki_do_uzupelnienia": 162,
+    "znaczniki_dokument_zewnetrzny": 1,
+    "znaczniki_dane_przykladowe": 108
+  },
+  "kontrole_pliku": [
+    {
+      "id": "K-ROZMIAR",
+      "opis": "Rozmiar pliku ≤ 150 MB",
+      "podstawa": "RPB § 2b ust. 3; W-300; D-26",
+      "status": "OK",
+      "szczegoly": "4.45 MB"
+    },
+    {
+      "id": "K-WEKTOR",
+      "opis": "Arkusze rysunkowe w postaci wektorowej",
+      "podstawa": "RPB § 2b ust. 2; W-300",
+      "status": "OK",
+      "szczegoly": "13 arkuszy wektorowych (łącznie 24522 ścieżek); największy udział rastra 0.0 % (próg 35 %)"
+    },
+    {
+      "id": "K-META",
+      "opis": "Metadane PDF i zakładki",
+      "podstawa": "dobra praktyka; AUD-RYS",
+      "status": "OK",
+      "szczegoly": "Title: „Dom LAMELA — TOM I: PZT + PAB + ZL (PRZYKŁAD – NIE DO ZŁOŻENIA)”; zakładek: 103"
+    },
+    {
+      "id": "K-SPIS-ZL",
+      "opis": "Łączny spis treści obejmuje spis załączników (ZL)",
+      "podstawa": "RPB § 7 ust. 7 pkt 1, ust. 1a",
+      "status": "OK",
+      "szczegoly": "załączników w zakładkach: 5, w łącznym spisie: 5"
+    },
+    {
+      "id": "K-PZT-RAP",
+      "opis": "Arkusze PZT zgodne z raport_widokow.json",
+      "podstawa": "RPB § 7 ust. 1 pkt 4, § 15–17 (PZT), § 21 (PAB); raport_widokow.json",
+      "status": "OK",
+      "szczegoly": "3 z 3 arkuszy z projekt/02_PZT/rysunki; generator zgłasza 9 brak(i) danych modelu (poniżej, pkt „Sprawy otwarte”)"
+    },
+    {
+      "id": "K-PAB-RAP",
+      "opis": "Arkusze PAB zgodne z raport_widokow.json",
+      "podstawa": "RPB § 7 ust. 1 pkt 4, § 15–17 (PZT), § 21 (PAB); raport_widokow.json",
+      "status": "OK",
+      "szczegoly": "10 z 10 arkuszy z projekt/01_koncepcja/widoki"
+    },
+    {
+      "id": "K-PZT-AKT",
+      "opis": "Aktualność rysunków PZT względem modelu",
+      "podstawa": "spójność części opisowej i rysunkowej (model jedynym źródłem danych)",
+      "status": "OSTRZEŻENIE",
+      "szczegoly": "rysunki z 2026-09-25 05:36, model zmieniony 2026-09-25 06:48 (budynek.yaml, dzialka.yaml, instalacje.yaml, wyposazenie.yaml) — przed wydaniem wygenerować ponownie (tools/generuj_widoki.py)"
+    },
+    {
+      "id": "K-PAB-AKT",
+      "opis": "Aktualność rysunków PAB względem modelu",
+      "podstawa": "spójność części opisowej i rysunkowej (model jedynym źródłem danych)",
+      "status": "OSTRZEŻENIE",
+      "szczegoly": "rysunki z 2026-09-25 05:19, model zmieniony 2026-09-25 06:48 (budynek.yaml, dzialka.yaml, instalacje.yaml, wyposazenie.yaml) — przed wydaniem wygenerować ponownie (tools/generuj_widoki.py)"
+    }
+  ],
+  "arkusze": [
+    {
+      "nr": "PZT-01",
+      "strona": 19,
+      "format": "A2",
+      "skala": "1:500",
+      "wymiary_mm": [
+        594,
+        420
+      ],
+      "sciezki": 1050,
+      "znaki": 9731,
+      "udzial_rastra": 0.0,
+      "zastepczy": false,
+      "status": "OK"
+    },
+    {
+      "nr": "PZT-02",
+      "strona": 20,
+      "format": "A2",
+      "skala": "1:200",
+      "wymiary_mm": [
+        594,
+        420
+      ],
+      "sciezki": 1544,
+      "znaki": 8354,
+      "udzial_rastra": 0.0,
+      "zastepczy": false,
+      "status": "OK"
+    },
+    {
+      "nr": "PZT-03",
+      "strona": 21,
+      "format": "A2",
+      "skala": "1:200",
+      "wymiary_mm": [
+        594,
+        420
+      ],
+      "sciezki": 1080,
+      "znaki": 8630,
+      "udzial_rastra": 0.0,
+      "zastepczy": false,
+      "status": "OK"
+    },
+    {
+      "nr": "PB-AR-01",
+      "strona": 44,
+      "format": "A1",
+      "skala": "1:50",
+      "wymiary_mm": [
+        841,
+        594
+      ],
+      "sciezki": 2631,
+      "znaki": 5834,
+      "udzial_rastra": 0.0,
+      "zastepczy": false,
+      "status": "OK"
+    },
+    {
+      "nr": "PB-AR-02",
+      "strona": 45,
+      "format": "A3×3",
+      "skala": "1:50",
+      "wymiary_mm": [
+        891,
+        420
+      ],
+      "sciezki": 2134,
+      "znaki": 4848,
+      "udzial_rastra": 0.0,
+      "zastepczy": false,
+      "status": "OK"
+    },
+    {
+      "nr": "PB-AR-03",
+      "strona": 46,
+      "format": "A3×3",
+      "skala": "1:50",
+      "wymiary_mm": [
+        891,
+        420
+      ],
+      "sciezki": 2087,
+      "znaki": 4616,
+      "udzial_rastra": 0.0,
+      "zastepczy": false,
+      "status": "OK"
+    },
+    {
+      "nr": "PB-AR-04",
+      "strona": 47,
+      "format": "A2×3",
+      "skala": "1:50",
+      "wymiary_mm": [
+        1261,
+        594
+      ],
+      "sciezki": 593,
+      "znaki": 2887,
+      "udzial_rastra": 0.0,
+      "zastepczy": false,
+      "status": "OK"
+    },
+    {
+      "nr": "PB-AR-05",
+      "strona": 48,
+      "format": "A3×3",
+      "skala": "1:50",
+      "wymiary_mm": [
+        891,
+        420
+      ],
+      "sciezki": 2725,
+      "znaki": 5552,
+      "udzial_rastra": 0.0,
+      "zastepczy": false,
+      "status": "OK"
+    },
+    {
+      "nr": "PB-AR-06",
+      "strona": 49,
+      "format": "A3×3",
+      "skala": "1:50",
+      "wymiary_mm": [
+        891,
+        420
+      ],
+      "sciezki": 4453,
+      "znaki": 6896,
+      "udzial_rastra": 0.0,
+      "zastepczy": false,
+      "status": "OK"
+    },
+    {
+      "nr": "PB-AR-07",
+      "strona": 50,
+      "format": "A3×3",
+      "skala": "1:50",
+      "wymiary_mm": [
+        891,
+        420
+      ],
+      "sciezki": 2719,
+      "znaki": 2957,
+      "udzial_rastra": 0.0,
+      "zastepczy": false,
+      "status": "OK"
+    },
+    {
+      "nr": "PB-AR-08",
+      "strona": 51,
+      "format": "A3×3",
+      "skala": "1:50",
+      "wymiary_mm": [
+        891,
+        420
+      ],
+      "sciezki": 777,
+      "znaki": 2752,
+      "udzial_rastra": 0.0,
+      "zastepczy": false,
+      "status": "OK"
+    },
+    {
+      "nr": "PB-AR-09",
+      "strona": 52,
+      "format": "A2",
+      "skala": "1:50",
+      "wymiary_mm": [
+        594,
+        420
+      ],
+      "sciezki": 1299,
+      "znaki": 2832,
+      "udzial_rastra": 0.0,
+      "zastepczy": false,
+      "status": "OK"
+    },
+    {
+      "nr": "PB-AR-10",
+      "strona": 53,
+      "format": "A2",
+      "skala": "1:50",
+      "wymiary_mm": [
+        594,
+        420
+      ],
+      "sciezki": 1430,
+      "znaki": 2906,
+      "udzial_rastra": 0.0,
+      "zastepczy": false,
+      "status": "OK"
+    }
+  ],
+  "zrodla_rysunkow": {
+    "PZT": "projekt/02_PZT/rysunki",
+    "PAB": "projekt/01_koncepcja/widoki",
+    "PAB_info": "brak projekt/03_PAB/rysunki/raport_widokow.json — dołączono arkusze PB-AR z projekt/01_koncepcja/widoki (ten sam generator lamela.views i ta sama numeracja wg model/arkusze.yaml); przed wydaniem zastąpić kompletem z projekt/03_PAB/rysunki"
+  },
+  "sprawy_otwarte": {
+    "PAB": [
+      "Audyt A1 — UWAGA: Wysokości / 0.15 Schowek pod schodami (h 1,40–2,20) / strefy h pod schodami: ≥2,20: 0,00 m²; 1,40–2,20: 1,49 m²; <1,40: 0,00 m²; h_min 1,40 (wymóg pomocnicze ≥ 2,20 (brief §5); gospodarcze ≥ 2,00 (WT §97); brief §5; WT §97 ust. 1 [W-053]; RPB §20 / PN-ISO 9836 [W-316]).",
+      "Audyt A1 — UWAGA: Wysokości / 0.16 Schowek pod spocznikiem (h < 1,40) / strefy h pod schodami: ≥2,20: 0,00 m²; 1,40–2,20: 0,00 m²; <1,40: 2,93 m²; h_min 1,39 (wymóg pomocnicze ≥ 2,20 (brief §5); gospodarcze ≥ 2,00 (WT §97); brief §5; WT §97 ust. 1 [W-053]; RPB §20 / PN-ISO 9836 [W-316]).",
+      "Audyt A1 — UWAGA: Wentylacja / wyrzutnia ↔ okno w dachu SW1 / odległość / wylot ponad oknem: 5,29 m / 0,25 m (wymóg 3–10 m ⇒ wylot ≥ 1,00 m nad górną krawędzią okna (≥ +10,75); WT §152 ust. 12 [W-167]; R6-43).",
+      "Audyt A1 — UWAGA: Zagospodarowanie / PC-JZ (jedn. zewn. PC) / elewacja, przy której stoi jednostka: S (x 24,40, y 31,65 w ukł. działki; 0,75 m od lica) (wymóg N lub E (TWARDE ZAŁOŻENIA); TWARDE ZAŁOŻENIA (energia i światło); W-024 (hałas)).",
+      "Pompa ciepła: parametry (moc, SCOP, L_WA) z karty wyrobu przykładowego — do zastąpienia DTR wybranego wyrobu (PT-IS); wpływa na EP, hałas na granicy i dobór mocy.",
+      "Bufor c.o.: w modelu (wyposazenie.yaml) „bufor 100 dm³”, z obliczeń ogrzewania min. 80 dm³ — ujednolicić w modelu (PT-IS).",
+      "Dane osobowe (Inwestor, projektanci, nr uprawnień, pracownia) — brak sekcji `projekt:` w model/budynek.yaml; pola [DO UZUPEŁNIENIA].",
+      "Rysunki PAB: brak projekt/03_PAB/rysunki/raport_widokow.json — dołączono arkusze PB-AR z projekt/01_koncepcja/widoki (ten sam generator lamela.views i ta sama numeracja wg model/arkusze.yaml); przed wydaniem zastąpić kompletem z projekt/03_PAB/rysunki.",
+      "Posadowienie: spód żeber obwodowych 0.34 m p.p.t. < h_z = 0.80 m — płytkie posadowienie z izolacją obwodową wymaga sprawdzenia wg PN-EN ISO 13793 w PT-2 BO (W-284).",
+      "Kolorystyka: ściany zewnętrzne: SZ2, SZL — Membrana fasadowa wiatroizolacyjna UV-stabilna, czarna (sd ≈ 0,02 m): kolor/zgodność z paletą MPZP do ustalenia (karta kolorystyki; decyzja Inwestora).",
+      "Kolorystyka: pokrycie dachu: D1 — Membrana dachowa TPO 1,5 mm, mocowana mechanicznie (hydroizolacja stro: kolor/zgodność z paletą MPZP do ustalenia (karta kolorystyki; decyzja Inwestora).",
+      "Kolorystyka: stolarka okienna i drzwiowa zewnętrzna — ramy: ALU, PVC (model: stolarka); szyby 3-szybowe: kolor/zgodność z paletą MPZP do ustalenia (karta kolorystyki; decyzja Inwestora).",
+      "Kubatura i pow. zabudowy: algorytmy lamela.model powołują PN-ISO 9836:2015 — potwierdzić zgodność definicji z PN-ISO 9836:2022-07 (W-316).",
+      "Analiza ekonomiczna regulacji pomieszczeniowej (WT § 135 ust. 9 pkt 2): nakład K i oszczędność s — z ofert/danych producenta w PT-3 IS; opinia techniczna projektanta IS (imię, nr uprawnień).",
+      "Opinia geotechniczna: zastąpić opinią z badań (autor, kwalifikacje, metryki sondowań); hydrant i budynki sąsiednie potwierdzić na mapie do celów projektowych."
+    ],
+    "rysunki_PZT": [
+      "PZT — brak danych: dzialka.yaml: sasiedzi[].kondygnacje, sasiedzi[].funkcja: liczba kondygnacji i funkcja budynków sąsiednich (opis budynku na mapie wg BDOT500: np. „m2”)",
+      "PZT — brak danych: dzialka.yaml: drzewa[].obwod: obwód pnia drzew istniejących na wys. 5 cm (u.o.p. art. 83f ust. 4",
+      "PZT — brak danych: dzialka.yaml: bramy[].otwieranie: strona zawiasów i kierunek otwierania furtki (WT § 42 ust. 1",
+      "PZT — brak danych: dzialka.yaml: zjazd: zjazd z drogi 1KDD w pasie drogowym (szerokość, skosy/łuki, nawierzchnia, przepust)",
+      "PZT — brak danych: dzialka.yaml: retencja.zbiornik.{obrys|sr, rzedna_dna, rzedna_wlotu, rzedna_przelewu}: wymiary rzutu zbiornika retencyjnego i rzędne (dno, wlot, przelew)",
+      "PZT — brak danych: dzialka.yaml: uzbrojenie.projektowane[].{dn, material, spadek, rzedne}: średnice, spadki i rzędne dna/wierzchu przewodów w punktach załamania i włączenia (RPB § 15 ust. 2 pkt 11)",
+      "PZT — brak danych: dzialka.yaml: uzbrojenie.obiekty (studzienki deszczowe): studzienki rewizyjne/połączeniowe na kolektorach deszczowych KD (włączenia rur spustowych, załamania trasy, osadnik przed zbiornikiem)",
+      "PZT — brak danych: dzialka.yaml: uzbrojenie.obiekty[PC-JZ].{strefa_r, wym}: promień strefy bezpieczeństwa czynnika R290 (bez otworów, wpustów, studzienek) i wymiary jednostki",
+      "PZT — brak danych: dzialka.yaml: dzialka.mpzp (wskaźniki): wskaźniki i parametry MPZP potrzebne do tabeli zgodności PZT (RPB § 14 pkt 4 lit. d)"
+    ],
+    "rysunki_PAB": []
+  },
+  "elementy_tomu": [
+    {
+      "kod": "PZT",
+      "tytul": "Projekt zagospodarowania działki",
+      "start": 5,
+      "strony": 17,
+      "strony_opisu": 14,
+      "arkusze": 3
+    },
+    {
+      "kod": "PAB",
+      "tytul": "Projekt architektoniczno-budowlany",
+      "start": 22,
+      "strony": 32,
+      "strony_opisu": 22,
+      "arkusze": 10
+    },
+    {
+      "kod": "ZL",
+      "tytul": "Załączniki",
+      "start": 54,
+      "strony": 9,
+      "strony_opisu": 9,
+      "arkusze": 0
+    }
+  ],
+  "wygenerowano": "2026-09-25 07:13"
+}

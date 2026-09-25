@@ -211,6 +211,36 @@ def test_uwagi_dzielone():
     _sprawdz_uklad(u, [], 103.0)
 
 
+def test_bloki_zalezne_od_arkusza():
+    """Bloki ze stanem arkusza (jak w detalach: legenda raz na arkusz, wyniki z nagłówkiem tylko przy pierwszym) —
+    powtórzenia pomijane, ciągi dalsze łączone z poprzednim blokiem (jak w kolumnie klasycznej)."""
+    def legenda(sh, x, y, w):
+        if getattr(sh, "_t_leg", False):
+            return y
+        sh._t_leg = True
+        sh.rect(x, y - 30, x + w, y)
+        return y - 30
+
+    def wyniki(i):
+        def fn(sh, x, y, w):
+            if not getattr(sh, "_t_wyn", False):
+                sh._t_wyn = True
+                sh.text((x, y - 3.5), "WYNIKI", 3.5)
+                y -= 8.0
+            sh.text((x, y - 2), f"wynik {i}", 1.8)
+            return y - 6.0
+        return fn
+    pary = [("leg", legenda), ("wyn-1", wyniki(1)), ("leg", legenda), ("wyn-2", wyniki(2)), ("leg", legenda),
+            ("wyn-3", wyniki(3)), ("tab", lambda sh, x, y, w: (sh.rect(x, y - 20, x + w, y), y - 20)[1])]
+    bl = U.bloki_z_kolumny(pary)
+    assert [b.nazwa for b in bl] == ["leg", "wyn-1 + wyn-2 + wyn-3", "tab"], [b.nazwa for b in bl]
+    sh = Sheet("A0", draw_frame=False)
+    yb = bl[1].fn(sh, 10.0, 500.0, U.TB_W)
+    assert abs((500.0 - yb) - bl[1].h) < 0.5
+    txt = [p.string for p in sh.prims if hasattr(p, "runs")]
+    assert txt.count("WYNIKI") == 1 and {"wynik 1", "wynik 2", "wynik 3"} <= set(txt)
+
+
 def test_tryby_i_opcje():
     assert U.tryb_formatu("auto")[0] == "ekonomiczny" and U.tryb_formatu(None)[0] == "ekonomiczny"
     assert U.tryb_formatu("klasyczny")[0] == "klasyczny" and U.tryb_formatu("standardowy")[0] == "standardowy"

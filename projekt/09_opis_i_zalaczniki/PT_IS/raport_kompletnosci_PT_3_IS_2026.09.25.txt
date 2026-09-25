@@ -1,14 +1,14 @@
 RAPORT KOMPLETNOŚCI — PT_3_IS_2026.09.25.pdf
 Lista kontrolna: PT-3 IS — projekt techniczny, instalacje sanitarne (rejestr C.2)
 Status: PRZYKŁAD – NIE DO ZŁOŻENIA
-Pozycje: OK 15 · BRAK 0 · DO UZUPEŁNIENIA 3 · N/D 0 · OSTRZEŻENIE 0
-Znaczniki: [DO UZUPEŁNIENIA] ×53, [DOKUMENT ZEWNĘTRZNY] ×0, [DANE PRZYKŁADOWE] ×99
-Plik: 85 stron, 2.13 MB
+Pozycje: OK 16 · BRAK 0 · DO UZUPEŁNIENIA 2 · N/D 0 · OSTRZEŻENIE 0
+Znaczniki: [DO UZUPEŁNIENIA] ×36, [DOKUMENT ZEWNĘTRZNY] ×0, [DANE PRZYKŁADOWE] ×99
+Plik: 85 stron, 3.31 MB
 
   element PT: strony 1–85 (opis 68, arkusze 17)
 
 ✓ F-01     [  *] OK               Nazwa pliku wg zał. 1 RPB (PT_x_y_rrrr.mm.dd.pdf) (RPB zał. 1; W-301) — nazwa zgodna z zał. 1 RPB (PT)
-✓ F-02     [  *] OK               Rozmiar pliku ≤ 150 MB (RPB § 2b ust. 3) — 2.13 MB (limit 150 MB)
+✓ F-02     [  *] OK               Rozmiar pliku ≤ 150 MB (RPB § 2b ust. 3) — 3.31 MB (limit 150 MB)
 ✓ F-03     [  *] OK               Część rysunkowa wektorowa (RPB § 2b ust. 2) — 17 arkuszy wektorowych
 ✓ F-05     [  *] OK               Tom PT w osobnym pliku (bez wspólnej oprawy z PZT/PAB/ZL) (RPB § 5 ust. 3) — plik zawiera tylko tom PT
 … C2-01    [ PT] DO UZUPEŁNIENIA  Strona tytułowa: „Projekt techniczny”, zamierzenie, kategoria I, inwestor (RPB § 7 ust. 2 pkt 1–2) — pola [DO UZUPEŁNIENIA] na stronie tytułowej
@@ -24,10 +24,10 @@ Plik: 85 stron, 2.13 MB
 ✓ C2-IS-03 [ PT] OK               Instalacje wodociągowe, kanalizacyjne, wody opadowe (RPB § 23 pkt 7 lit. e)
 ✓ C2-IS-04 [ PT] OK               Powiązania z sieciami, obliczenia i dobory (obciążenie cieplne, strumienie, woda, retencja, hałas PC) (RPB § 23 pkt 8)
 ✓ C2-IS-05 [ PT] OK               Charakterystyka energetyczna (EP, U, sprawności) (RPB § 23 pkt 11; W-251)
-… C2-IS-06 [ PT] DO UZUPEŁNIENIA  Rzuty i schematy instalacji (RPB § 24 pkt 4 lit. a) — PT-IS-01 — INSTALACJA WODOCIĄGOWA — RZUT PARTERU (1:50); PT-IS-02 — INSTALACJA WODOCIĄGOWA — RZUT I PIĘTRA (1:50); PT-IS-03 — INSTALACJA WODOCIĄGOWA — RZUT II P; tylko arkusz zastępczy — rysunek niedołączony
+✓ C2-IS-06 [ PT] OK               Rzuty i schematy instalacji (RPB § 24 pkt 4 lit. a) — PT-IS-01 — INSTALACJA WODOCIĄGOWA — RZUT PARTERU (1:50); PT-IS-02 — INSTALACJA WODOCIĄGOWA — RZUT I PIĘTRA (1:50); PT-IS-03 — INSTALACJA WODOCIĄGOWA — RZUT II P
 
 Pola do uzupełnienia i dokumenty zewnętrzne (wystąpienia):
-   34 × [DO UZUPEŁNIENIA: arkusz do wygenerowania z modelu]
+   17 × [DO UZUPEŁNIENIA]
     3 × [DO UZUPEŁNIENIA: imię i nazwisko]
     3 × [DO UZUPEŁNIENIA: nr uprawnień budowlanych]
     2 × [DO UZUPEŁNIENIA: adres inwestora]

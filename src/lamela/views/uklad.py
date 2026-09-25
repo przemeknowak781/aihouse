@@ -191,6 +191,41 @@ def blok(nazwa: str, fn, w: float = TB_W, kotwica: str = "") -> Blok:
     return Blok(nazwa, fn, w, h, dx0, dx1, dy1, kotwica)
 
 
+def bloki_z_kolumny(pary, w: float = TB_W, gap: float = GAP_B) -> list[Blok]:
+    """Bloki kolumny opisowej z listy ``(nazwa, fn)`` z pomiarem sekwencyjnym jak ``sheets.Column``: bloki zależne od
+    poprzednich (stan arkusza — np. legenda rysowana raz na arkusz, ciąg dalszy wyników bez nagłówka w detalach) są
+    łączone z poprzednim blokiem w jeden blok złożony, a bloki, które w sekwencji nic nie rysują — pomijane.
+    Dzięki temu rozmieszczenie w wielu kolumnach nie rozrywa bloków, które dotąd rysowały się jeden pod drugim."""
+    from ..draft.sheet import Sheet
+    seq = Sheet("A0", draw_frame=False)
+    X, y = 100.0, 5000.0
+    grupy = []
+    for nm, fn in pary:
+        h_sam = zmierz_blok(fn, w)[0]
+        yb = float(fn(seq, X, y, w))
+        h_seq = y - yb
+        y = yb - gap
+        if h_seq <= 0.05:
+            continue                                   # nic nie narysował (np. legenda już jest na arkuszu)
+        if grupy and abs(h_seq - h_sam) > 0.5:
+            grupy[-1].append((nm, fn))                 # zależny od poprzednich — ciąg dalszy
+        else:
+            grupy.append([(nm, fn)])
+    out = []
+    for g in grupy:
+        if len(g) == 1:
+            out.append(blok(g[0][0], g[0][1], w))
+            continue
+        fns = [f for _n, f in g]
+
+        def zlozony(sh, x, yy, ww, fns=fns):
+            for i, f in enumerate(fns):
+                yy = float(f(sh, x, yy, ww)) - (gap if i < len(fns) - 1 else 0.0)
+            return yy
+        out.append(blok(" + ".join(n for n, _f in g), zlozony, w))
+    return out
+
+
 class BlokUwag:
     """Uwagi numerowane dzielone na części (kolumny): wysokości liczone jak w ``draft.sheet.notes_box``."""
 

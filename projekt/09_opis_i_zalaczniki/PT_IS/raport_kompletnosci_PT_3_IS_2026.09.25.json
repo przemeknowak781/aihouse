@@ -19,7 +19,7 @@
       "podstawa": "RPB § 2b ust. 3",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "2.13 MB (limit 150 MB)"
+      "szczegoly": "3.31 MB (limit 150 MB)"
     },
     {
       "id": "F-03",
@@ -161,16 +161,16 @@
       "element": "PT",
       "opis": "Rzuty i schematy instalacji",
       "podstawa": "RPB § 24 pkt 4 lit. a",
-      "status": "DO UZUPEŁNIENIA",
+      "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "PT-IS-01 — INSTALACJA WODOCIĄGOWA — RZUT PARTERU (1:50); PT-IS-02 — INSTALACJA WODOCIĄGOWA — RZUT I PIĘTRA (1:50); PT-IS-03 — INSTALACJA WODOCIĄGOWA — RZUT II P; tylko arkusz zastępczy — rysunek niedołączony"
+      "szczegoly": "PT-IS-01 — INSTALACJA WODOCIĄGOWA — RZUT PARTERU (1:50); PT-IS-02 — INSTALACJA WODOCIĄGOWA — RZUT I PIĘTRA (1:50); PT-IS-03 — INSTALACJA WODOCIĄGOWA — RZUT II P"
     }
   ],
   "znaczniki": {
-    "DO UZUPEŁNIENIA": 53,
+    "DO UZUPEŁNIENIA": 36,
     "DOKUMENT ZEWNĘTRZNY": 0,
     "DANE PRZYKŁADOWE": 99,
-    "ZAŁ": 75,
+    "ZAŁ": 83,
     "NZW": 45,
     "INT": 2,
     "PROG": 1,
@@ -188,11 +188,11 @@
       "[DO UZUPEŁNIENIA: nr i data decyzji o pozwoleniu na budowę, organ]": 1,
       "[DO UZUPEŁNIENIA: data złożenia oświadczenia z art. 102a PB]": 1,
       "[DO UZUPEŁNIENIA: potwierdzenie wpisu w e-CRUB albo dołączenie kopii]": 1,
-      "[ZAŁ]": 75,
+      "[ZAŁ]": 83,
       "[NZW]": 45,
       "[PROG]": 1,
       "[INT]": 2,
-      "[DO UZUPEŁNIENIA: arkusz do wygenerowania z modelu]": 34
+      "[DO UZUPEŁNIENIA]": 17
     }
   },
   "elementy": {
@@ -203,16 +203,16 @@
       "arkusze": 17
     }
   },
-  "rozmiar_mb": 2.1315698623657227,
+  "rozmiar_mb": 3.3072853088378906,
   "strony": 85,
   "podsumowanie": {
     "status": "PRZYKŁAD – NIE DO ZŁOŻENIA",
-    "OK": 15,
+    "OK": 16,
     "BRAK": 0,
-    "DO UZUPEŁNIENIA": 3,
+    "DO UZUPEŁNIENIA": 2,
     "N/D": 0,
     "OSTRZEŻENIE": 0,
-    "znaczniki_do_uzupelnienia": 53,
+    "znaczniki_do_uzupelnienia": 36,
     "znaczniki_dokument_zewnetrzny": 0,
     "znaczniki_dane_przykladowe": 99
   }
