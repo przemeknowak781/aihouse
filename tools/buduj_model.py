@@ -1334,11 +1334,17 @@ WYP = [
     F("P0", "lozko", (2.20, Y4_i), -90, (1.60, 2.00)), F("P0", "biurko", (XA_i, 6.10), 0, (1.20, 0.60)),
     F("P0", "szafa", (1.90, Y3_n), 90, (1.80, 0.60)),
     F("P0", "sofa", (2.30, 3.40), -90, (2.80, 0.95), opis="salon — widok na ogród"),
-    F("P0", "stol", (6.60, 2.10), 0, (2.20, 1.00), krzesla=8),
-    F("P0", "wyspa", (9.80, 2.70), 90, (2.20, 1.00), opis="wyspa z płytą indukcyjną i okapem"),
+    # audyt A3 I-1 (runda 2): stół wzdłuż E–W (x 5,20–7,40, y 1,85–2,85) — przejście przy szkle y 0,105–1,20 ≈ 1,10 m do HS1,
+    # strefa krzeseł pn. do ekranu LAM-P0 (y 3,80) 0,95 m; szczyt wsch. (x 8,00) → wyspa (x 9,10) 1,10 m; szczyt zach. (x 4,60) → sofa 0,90 m
+    F("P0", "stol", (6.30, 2.35), 90, (2.20, 1.00), krzesla=8, opis="stół 6–8 os. (3 + 3 + 2 szczytowe)"),
+    # audyt A3 K-1 (runda 2): wyspa RÓWNOLEGLE do zabudowy osi E (x 9,10–10,10, y 1,80–4,00) — ciąg roboczy między wyspą a frontami
+    # zabudowy (x 11,295) 1,195 m (1,00–1,20); od pn. do lica ściany osi 3 (y 5,02) 1,02 m; zlew, zmywarka, słupek piekarnika i lodówka
+    # na ścianie E bez zmian, płyta indukcyjna na wyspie naprzeciw odcinka blatu roboczego między zlewem a słupkiem (trójkąt ≈ 5,8 m)
+    F("P0", "wyspa", (9.60, 2.90), 0, (2.20, 1.00), opis="wyspa z płytą indukcyjną i okapem (bez hokerów — przejście do jadalni ≥ 1,10 m)"),
     {"kond": "P0", "typ": "blat", "linia": [[XE_i, 1.40], [XE_i, Y3_s]], "gl": 0.6, "strona": 1, "gorne": True},
     F("P0", "zlew", (XE_i, 2.60), 180, (0.80, 0.50)), F("P0", "zmywarka", (XE_i, 1.90), 180, (0.60, 0.58)),
-    F("P0", "plyta", (9.80, 2.70), 90, (0.80, 0.52), opis="płyta indukcyjna na wyspie"),
+    F("P0", "plyta", (10.10, 3.25), 180, (0.80, 0.52), opis="płyta indukcyjna na wyspie od strony ciągu roboczego (y 2,85–3,65), "
+                                                             "kucharz przodem do jadalni i ogrodu; 0,55 m blatu wyspy po obu stronach"),
     F("P0", "lodowka", (XE_i, 4.60), 180, (0.60, 0.65)), F("P0", "urzadzenie", (XE_i, 3.90), 180, (0.60, 0.60), opis="piekarnik + mikrofala w słupku"),
     F("P0", "szafa", (XD_w, 6.80), 180, (1.20, 0.40), opis="regały spiżarni / schowka (y 6,20–7,40 — poza skrzydłem O0-17, A2 D-1)"),
     F("P0", "szafa", (xE + INT, 2.00), 0, (1.40, 0.60), opis="szafa przedsionka (odzież, obuwie)"),

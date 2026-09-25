@@ -611,6 +611,26 @@ def widok_zbrojenie_plyt(ctx: ViewContext, spec: dict, scale: float, opts: dict)
             "STREFY ZBROJENIA NAROŻNEGO (górą i dołem, 2 kierunki — PN-EN 1992-1-1 9.3.1.3)",
             [("Strefa", 14.0), ("Pole", 26.0), ("Bok [m]", 16.0), ("Pozycje (kierunek)", 84.0), ("Pręty", 40.0)],
             wiersze_n)))
+    if warstwa == "gora" and P.get("scinanie"):
+        wiersze_s = []
+        for i, z in enumerate(P["scinanie"], 1):
+            vp.geom(z["strefa"], L_OPI, pen="cienka", lt="PUNKTOWA")
+            placer.add_lines(z["strefa"].boundary, w=0.3)
+            c0 = z["strefa"].representative_point()
+
+            def draw_z(c_, pos, _t=f"Z{i}"):
+                S.tag(c_, pos, _t, shape="diamond", r_mm=2.8, h=1.8, layer=L_OPI)
+            placer.place(vp, draw_z, [(c0.x, c0.y)] + [(c0.x + dx, c0.y + dy) for dx in (-0.4, 0.4, 0.0)
+                                                       for dy in (0.0, -0.4, 0.4)], penalty_step=0.2)
+            wiersze_s.append([f"Z{i}", f"{z['element']}/{z['pole']}", z["podpora"], str(z["pret"].nr),
+                              f"Ø{z['pret'].fi} co {_s(z['s'])}, {z['ramiona']} ramion/m", f"{z['V']:.0f}"])
+        res.column_blocks.append(("scinanie", blok_tabeli(
+            "ZBROJENIE NA ŚCINANIE PŁYT (V_Ed > V_Rd,c — PN-EN 1992-1-1 9.3.2; pas 0,75 m od osi podpory)",
+            [("Strefa", 14), ("Pole", 28), ("Podpora", 22), ("Poz.", 12), ("Strzemiona", 70), ("V_Ed [kN/m]", 34)],
+            wiersze_s)))
+        res.notes.append("Strefy Z…: strzemiona zamknięte φ8 obejmujące pręty dolne i górne (kształt 51), rozstaw podłużny "
+                         "wg tabeli, poprzeczny ≤ 1,5d (9.3.2(5)); pierwsze strzemię ≤ 0,5d od lica podpory; V_Ed — reakcja "
+                         "podpory uśredniona na 1,0 m (osobliwości MES płyty na końcach podpór) [ZAŁ].")
     for e in lv.elementy:
         _opis_elementu(vp, placer, e)
     # kontrola A_s: zbrojenie narysowane vs wymagane
@@ -630,7 +650,7 @@ def widok_zbrojenie_plyt(ctx: ViewContext, spec: dict, scale: float, opts: dict)
                      wymuszone_ok=None)
     fis = sorted({g.pret.fi for g in grupy})
     masa = P["zest"].masa
-    res.column_blocks.append(("legenda_k", blok_legendy(_legenda_zbrojenia(warstwa))))
+    res.column_blocks.insert(0, ("legenda_k", blok_legendy(_legenda_zbrojenia(warstwa))))
     res.column_blocks.append(("zestawienie", blok_zestawienia(
         P["zest"], f"ZESTAWIENIE STALI — PŁYTY {ids} (warstwy dolna i górna)",
         _stopka_materialow(D, lv.elementy, [p.fi for p in P["zest"].prety]), masa)))
@@ -649,11 +669,22 @@ def widok_zbrojenie_plyt(ctx: ViewContext, spec: dict, scale: float, opts: dict)
         res.notes.append("UWAGA — obliczenia (biblioteka) wykazują niespełnione warunki: " + "; ".join(
             f"{e.id} (poz. {e.poz}): {e.niesp[0]}" for e in n_bad[:4]) + " — wymagana zmiana przekroju/zbrojenie na "
             "ścinanie przed wydaniem do realizacji [WYMAGA ANALIZY].")
+    _tabele_osobno(res, spec)
     kol = kolizje_napisow(vp)
     if kol:
         ctx.note(f"{nr_ark} {title}", f"kolizje napisów: {kol}")
     KD.zapisz_raporty(D, ctx)
     return vp, res, title
+
+
+def _tabele_osobno(res: KResult, spec: dict):
+    """``zestawienie_osobno: <nr arkusza>`` — tabele (zestawienie stali, strefy) przeniesione na osobny arkusz
+    (typ ``k_zestawienie``); w kolumnie pozostaje legenda i uwagi (arkusz rzutu w formacie A1/A2)."""
+    nr = spec.get("zestawienie_osobno")
+    if not nr:
+        return
+    res.column_blocks = [b for b in res.column_blocks if b[0] == "legenda_k"]
+    res.notes.insert(0, f"Zestawienie stali, strefy zbrojenia narożnego/na ścinanie i dozbrojenia — arkusz {nr}.")
 
 
 def prety_poziomu(D, lv):
@@ -1278,6 +1309,7 @@ def widok_zbrojenie_fundamentu(ctx: ViewContext, spec: dict, scale: float, opts:
         "zbrojenie żeber i płyty, uziom/przewód wyrównawczy, tuleje przejść → betonowanie płyty z żebrami jednym "
         "zabiegiem (bez przerw roboczych) → pielęgnacja ≥ 7 dni (PN-EN 13670 p. 8.5).",
     ] + (F.uwagi if F is not None else [])
+    _tabele_osobno(res, spec)
     kol = kolizje_napisow(vp)
     if kol:
         ctx.note(f"{nr_ark} {title}", f"kolizje napisów: {kol}")
@@ -1532,6 +1564,89 @@ def widok_zbrojenie_schodow(ctx: ViewContext, spec: dict, scale: float, opts: di
     return vp, res, title
 
 
+# ------------------------------------------------------------------------------------------------ k_zestawienie
+class _PlotnoMm:
+    """Nakładka płótna rzutni: współrzędne w mm papieru → jednostki rzutni (bloki kolumny opisowej w polu rysunku)."""
+
+    def __init__(self, vp, x0: float = 0.0, y0: float = 0.0):
+        self.vp, self.x0, self.y0 = vp, x0, y0
+        self.k = 1.0
+
+    def _p(self, p):
+        return ((p[0] + self.x0) * self.vp.k, (p[1] + self.y0) * self.vp.k)
+
+    def on(self, layer):
+        return self.vp.on(layer)
+
+    def text(self, pos, s, h=2.5, rot=0.0, ha="left", va="baseline", layer=None, style="normal", color=None, z=None,
+             mask=0.0, runs=None):
+        return self.vp.text(self._p(pos), s, h, rot, ha, va, layer, style, color, z, mask, runs)
+
+    def line(self, p1, p2, layer=None, **kw):
+        return self.vp.line(self._p(p1), self._p(p2), layer, **kw)
+
+    def polyline(self, pts, layer=None, **kw):
+        return self.vp.polyline([self._p(q) for q in pts], layer, **kw)
+
+    def polygon(self, pts, layer=None, **kw):
+        return self.vp.polygon([self._p(q) for q in pts], layer, **kw)
+
+    def rect(self, x0, y0, x1, y1, layer=None, **kw):
+        a, b = self._p((x0, y0)), self._p((x1, y1))
+        return self.vp.rect(a[0], a[1], b[0], b[1], layer, **kw)
+
+    def circle(self, c, r, layer=None, **kw):
+        return self.vp.circle(self._p(c), r * self.vp.k, layer, **kw)
+
+    def fill(self, shape, layer=None, color="#000000", z=None):
+        if hasattr(shape, "exterior"):
+            shape = list(shape.exterior.coords)
+        return self.vp.fill([self._p(q) for q in shape], layer, color, z)
+
+    def dot(self, c, d_mm=0.8, layer=None, color="#000000", z=None):
+        return self.vp.dot(self._p(c), d_mm, layer, color, z)
+
+
+def widok_zestawienie(ctx: ViewContext, spec: dict, scale: float, opts: dict):
+    """Osobny arkusz tabel zbrojenia elementu: zestawienie stali, strefy narożne, strefy zbrojenia na ścinanie,
+    dozbrojenia — bloki generowane przez widok zbrojenia (``element``, ``kond``/``poziom``) i rozmieszczone w kolumnach
+    (maks. wysokość kolumny ``wys_kolumny`` mm)."""
+    bloki, seen = [], set()
+    warstwy = ("dolna", "gorna")
+    for wa in warstwy:
+        sp = dict(spec, typ="k_zbrojenie", warstwa=wa, zestawienie_osobno=None)
+        _vp, r, _t = widok_zbrojenie(ctx, sp, 50.0, opts)
+        for nm, fn in r.column_blocks:
+            if nm == "legenda_k" or (nm == "zestawienie" and nm in seen):
+                continue
+            key = nm + (wa if nm not in ("zestawienie", "naroza") else "")
+            if key in seen or (nm == "naroza" and "naroza" in seen):
+                continue
+            seen.add(key)
+            seen.add(nm)
+            bloki.append((nm, fn))
+    title = spec.get("tytul_widoku") or spec.get("tytul") or "ZESTAWIENIE STALI"
+    vp = Viewport(1.0, title)
+    res = KResult()
+    H_max = float(spec.get("wys_kolumny", 380.0))
+    W = 180.0
+    x = 0.0
+    y = 0.0
+    for nm, fn in bloki:
+        from ..draft.sheet import Sheet
+        probe = Sheet("A0", draw_frame=False)
+        hb = 800.0 - fn(probe, 20.0, 800.0, W)
+        if y - hb < -H_max and y < 0.0:
+            x += W + 12.0
+            y = 0.0
+        yb = fn(_PlotnoMm(vp, x, 0.0), 0.0, y, W)
+        y = yb - 8.0
+    res.notes.append("Tabele wygenerowane z obliczeń i geometrii zbrojenia (numery pozycji jak na arkuszach zbrojenia "
+                     "elementu); masy — ρ = 7850 kg/m³, długości rozwinięcia wg PN-EN ISO 3766.")
+    res.units_note = "Długości prętów w cm, średnice w mm, masy w kg; tabele w skali 1:1 (bez podziałki rysunku)."
+    return vp, res, title
+
+
 # ================================================================================================ rejestracja
 def widok_zbrojenie(ctx: ViewContext, spec: dict, scale: float, opts: dict):
     """Dyspozytor typu ``k_zbrojenie``: element = strop | plyta | fundament | belki | nadproza | schody | wsporniki."""
@@ -1551,3 +1666,4 @@ register_view("k_zbrojenie", widok_zbrojenie, "rysunek zbrojenia")
 register_view("k_strop", widok_strop, "rzut konstrukcji")
 register_view("k_fundamenty", widok_fundamenty, "rzut fundamentów")
 register_view("k_przekroj", widok_przekroj, "przekrój konstrukcyjny")
+register_view("k_zestawienie", widok_zestawienie, "zestawienie stali")

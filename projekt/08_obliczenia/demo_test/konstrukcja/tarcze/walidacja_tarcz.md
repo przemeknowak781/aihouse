@@ -66,7 +66,7 @@ Wspornik smukły (l/h ≥ 5): MES = teoria belek z dokładnością 0,24 % (grani
 |---|---|---|---|---|---|---|---|
 | 0,20 | 719 | 0,3154 | 102,69 | 413,89 | 262,1 | 2,785 | 0,8 |
 | 0,10 | 2483 | 0,3218 | 107,82 | 413,84 | 264,1 | 3,823 | 2,6 |
-| 0,05 | 9808 | 0,3244 | 109,61 | 413,79 | 265,0 | 4,491 | 12,1 |
+| 0,05 | 9808 | 0,3244 | 109,61 | 413,79 | 265,0 | 4,491 | 10,0 |
 
 Ekstrapolacja Richardsona: w_wsp → 0,3263 (rząd 1,27) mm, T → 110,58 (rząd 1,52) kN, R_A zbieżne (zmiana < 0,1 %). Wielkości całkowe (ugięcie, reakcje, momenty, siły w pasach) zbieżne — różnica h = 0,10 vs 0,05 m ≤ 2 %; σ₁,max i szczyt reakcji r_A,max rosną z zagęszczaniem (osobliwość w narożach wklęsłych otworów — dlatego wymiarowanie opiera się na wypadkowych, nie na wartościach szczytowych).
 

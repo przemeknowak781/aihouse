@@ -105,7 +105,7 @@ def detal_cokol(m, opts: dict) -> Detal:
     f = fundament_pod(m)
     tz = teren(m)
     y_cok = tz + 0.30                                      # górna krawędź strefy cokołowej (≥ 30 cm nad terenem)
-    xL, xR, yT, yB = -0.30, float(opts.get("_xR", 0.72)), float(opts.get("_yT", 0.50)), -1.05
+    xL, xR, yT, yB = -0.30, float(opts.get("_xR", 0.72)), float(opts.get("_yT", 0.50)), float(opts.get("_yB", -1.05))
     det.okno = (xL, yB, xR, yT)
     W = det.warstwy(pd)
     ki = next(i for i, w in enumerate(W) if w["konstr"])
@@ -1454,7 +1454,7 @@ def detal_rura_cokol(m, opts: dict) -> Detal:
     import re
     from shapely.geometry import Point as _Pt, box as _box
     r, d = rura_zewn(m, opts.get("rura"))
-    det = detal_cokol(m, {"_xR": 1.40, "_yT": 0.85})
+    det = detal_cokol(m, {"_xR": 1.40, "_yT": 0.85, "_yB": -1.30})
     det.id, det.tytul = "D-14", f"Rura spustowa {r.get('id', 'RS')} przy cokole — czyszczak i odpływ do KD"
     P = det.pom
     x_out, tz, xR, yT, yB = P["x_out"], P["tz"], P["xR"], P["yT"], P["yB"]
@@ -1483,7 +1483,7 @@ def detal_rura_cokol(m, opts: dict) -> Detal:
         a = np.linspace(np.pi, 1.5 * np.pi, 16)
         det.kontur([(xa + rk + rr * np.cos(t_), y_k + rk + rr * np.sin(t_)) for t_ in a], zamkniety=False, pen=0.5)
     for sy in (-1, 1):
-        det.kontur([(xa + rk, y_k + sy * ro), (xR + 0.1, y_k + sy * ro - 0.02 * (xR + 0.1 - xa - rk))],
+        det.kontur([(xa + rk, y_k + sy * ro), (xR, y_k + sy * ro - 0.02 * (xR - xa - rk))],
                    zamkniety=False, pen=0.5)
     det.kontur([(xa - ro - 0.006, y_c0), (xa + ro + 0.006, y_c0), (xa + ro + 0.006, y_c1), (xa - ro - 0.006, y_c1)],
                pen=0.5)
@@ -1496,10 +1496,48 @@ def detal_rura_cokol(m, opts: dict) -> Detal:
         det.rect(xa + sx * ro, y_x0, xa + sx * (ro + 0.008), y_x1, "PIANKA")
     # obejma dystansowa na elemencie montażowym ETICS
     y_o = yT - 0.18
-    x_iz0 = x_out - P["d_x"] if False else P["xs1"]
+    x_iz0 = P["xs1"]
     det.rect(x_iz0, y_o - 0.035, x_out - 0.01, y_o + 0.035, "PIANKA")
     det.kontur([(x_out - 0.06, y_o), (xa - ro, y_o)], zamkniety=False, pen=0.5)
     det.kontur([(xa - ro - 0.004, y_o - 0.015), (xa - ro - 0.004, y_o + 0.015)], zamkniety=False, pen=0.7)
     det.kontur([(xa + ro + 0.004, y_o - 0.015), (xa + ro + 0.004, y_o + 0.015)], zamkniety=False, pen=0.7)
     return _rura_opisy(det, dict(r=r, d=d, xa=xa, ro=ro, y_c0=y_c0, y_c1=y_c1, y_k=y_k, rk=rk, y_o=y_o, h_cz=h_cz,
                                  y_x0=y_x0, y_x1=y_x1, x_iz0=x_iz0))
+
+
+def _rura_opisy(det: Detal, g: dict) -> Detal:
+    m = det.model
+    P = det.pom
+    r, xa, ro, tz = g["r"], g["xa"], g["ro"], P["tz"]
+    zb = ((getattr(getattr(m, "dz", None), "raw", None) or {}).get("retencja") or {}).get("zbiornik") or {}
+    import re
+    kol = re.search(r"kolektor\s+(KD-\w+)", str(r.get("opis", "")))
+    kol = kol.group(1) if kol else "KD"
+    det.opis([(xa + ro, g["y_o"] + 0.08)], [f"rura spustowa {r.get('id', 'RS')} DN{int(r.get('dn', 100))} "
+                                           "(stal powlekana / tytan-cynk), obejmy co ≤ 2,0 m"])
+    det.opis([((g["x_iz0"] + P["x_out"]) / 2, g["y_o"])], ["element montażowy ETICS (walec z twardej pianki PU, "
+                                                           "klejony do muru) — obejma bez przebicia izolacji"])
+    det.opis([(xa + ro + 0.02, (g["y_c0"] + g["y_c1"]) / 2)],
+             [f"czyszczak (rewizja z klapką i osadnikiem) {g['h_cz']:.2f} m nad terenem".replace(".", ",")])
+    det.opis([(xa + ro, tz + 0.06)], ["złączka rura spustowa / PVC-U KD 110 SN8 z uszczelką, w opasce żwirowej"])
+    det.opis([(xa + ro + 0.01, tz - 0.25)], ["otulina PE 20 mm w strefie nad izolacją obwodową"])
+    det.opis([(xa + ro + 0.004, (g["y_x0"] + g["y_x1"]) / 2)],
+             ["przejście przez XPS obwodowy: otwór dopasowany, szczelina wypełniona pianką niskoprężną"])
+    det.opis([(xa + g["rk"] + 0.25, g["y_k"])],
+             [f"kolano 87° + PVC-U 110, i ≥ 2 % → kolektor {kol} PVC 160 → "
+              + (f"zbiornik retencyjny {str(zb.get('V', '')).replace('.', ',')} m³" if zb else "zbiornik retencyjny (PZT)")])
+    sc, yT = P["sc"], P["yT"]
+    det.wymiar([(a, yT) for a, _b, _w in sc] + [(sc[-1][1], yT), (xa - ro, yT), (xa + ro, yT)], yT + 0.06, "h")
+    det.wymiar([(xa + ro + 0.10, g["y_k"]), (xa + ro + 0.10, tz), (xa + ro + 0.10, tz + g["h_cz"])],
+               xa + ro + 0.12, "v")
+    for o in det.opisy:                      # odnośnik warstw ściany — między obejmą a czyszczakiem
+        if (o.tytul or "").startswith("SZ"):
+            yy = (g["y_c1"] + g["y_o"]) / 2
+            o.pts = [(p_[0], yy) for p_ in o.pts]
+    for p1, p2 in (((0.0, P["yT"]), (P["x_out"], P["yT"])), ((P["xL"], P["yB"]), (P["xR"], P["yB"])),
+                   ((P["xL"], 0.0), (P["xL"], P["yB"])), ((P["xR"], tz), (P["xR"], P["yB"]))):
+        det.przerwa(p1, p2)
+    det.spadek((P["x_out"] + 0.62, tz + 0.03), (P["x_out"] + 0.80, tz + 0.026), 2.0)
+    det.uwagi.append(f"{r.get('id', 'RS')}: {r.get('opis', '')}; odpływ do zbiornika — sieć KD wg PZT / PT-IS "
+                     "(zagłębienie ≥ h_z 0,8 m lub w strefie izolacji obwodowej)")
+    return det

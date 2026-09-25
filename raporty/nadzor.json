@@ -1,48 +1,40 @@
 {
- "czas": "2026-09-25 07:32",
+ "czas": "2026-09-25 07:35",
  "aktywni": [
-  {
-   "id": "a076389c324f1eb11",
-   "opis": "Build PZT site-plan generator",
-   "idle_min": 0.3,
-   "bez_narzedzi_min": null,
-   "limity": 0,
-   "powody": []
-  },
   {
    "id": "a82012b772f4804f3",
    "opis": "Build catalog website for LAMELA",
-   "idle_min": 1.4,
-   "bez_narzedzi_min": 1.4,
+   "idle_min": 0.0,
+   "bez_narzedzi_min": 0.2,
    "limity": 0,
    "powody": []
   },
   {
    "id": "a9f2ed8bb74c2c0d9",
    "opis": "Build construction details generator",
-   "idle_min": 0.3,
-   "bez_narzedzi_min": 0.4,
+   "idle_min": 0.1,
+   "bez_narzedzi_min": 0.1,
    "limity": 0,
    "powody": []
   },
   {
    "id": "a5045de9ee0554cc8",
    "opis": "Build structural drawings generator",
-   "idle_min": -0.0,
-   "bez_narzedzi_min": 0.3,
+   "idle_min": 0.1,
+   "bez_narzedzi_min": 0.2,
    "limity": 0,
    "powody": []
   },
   {
    "id": "ae99c9ea523904793",
    "opis": "wf_10e1a801-dd6:poprawki:funkcja",
-   "idle_min": 3.5,
-   "bez_narzedzi_min": 3.5,
+   "idle_min": 6.5,
+   "bez_narzedzi_min": 6.5,
    "limity": 0,
    "powody": []
   }
  ],
  "zakonczeni": 0,
  "zastoje": [],
- "repo_bez_zmian_min": 0.2
+ "repo_bez_zmian_min": -0.0
 }

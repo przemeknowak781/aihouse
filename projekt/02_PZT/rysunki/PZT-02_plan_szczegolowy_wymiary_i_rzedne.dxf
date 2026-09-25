@@ -493,7 +493,7 @@ $SKPOLY
   9
 $TDCREATE
  40
-2461309.229409722
+2461309.233252315
   9
 $TDUCREATE
  40
@@ -501,7 +501,7 @@ $TDUCREATE
   9
 $TDUPDATE
  40
-2461309.229409722
+2461309.233252315
   9
 $TDUUPDATE
  40
@@ -933,11 +933,11 @@ $PSTYLEMODE
   9
 $FINGERPRINTGUID
   2
-{3F04DBC1-0573-488E-AB3E-F490B145632D}
+{95BF4DFC-4402-474B-A475-D6C04F291A92}
   9
 $VERSIONGUID
   2
-{EB5E76CB-99BA-49F1-BE18-0C405221B4CD}
+{288385E8-E60B-480A-B7BB-83FC05BB28CD}
   9
 $EXTNAMES
 290
@@ -115231,7 +115231,7 @@ AcDbText
  40
 1.8
   1
-Rysunek wygenerowany automatycznie z modelu /home/user/aihouse/model/budynek.yaml (wersja 1.0, 2026-09-25) — generatory lamela.views.
+Rysunek wygenerowany automatycznie z modelu model/budynek.yaml (wersja 1.0, 2026-09-25) — generatory lamela.views.
   7
 PL_ARIAL
  11
@@ -119961,7 +119961,7 @@ DictionaryVariables
 280
 0
   1
-1.4.4 @ 2026-09-25T05:30:21.774663+00:00
+1.4.4 @ 2026-09-25T05:35:53.560722+00:00
   0
 DICTIONARYVAR
   5
@@ -119973,7 +119973,7 @@ DictionaryVariables
 280
 0
   1
-1.4.4 @ 2026-09-25T05:30:21.985491+00:00
+1.4.4 @ 2026-09-25T05:35:53.771838+00:00
   0
 ENDSEC
   0

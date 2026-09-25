@@ -1159,10 +1159,33 @@ def prety_poziomu(D: DaneKonstr, lv: Poziom) -> dict:
                 return (pa.distance(bnd) < 0.02, pb.distance(bnd) < 0.02)
             gora += _grupy_z_skanu(sk, kier, "gora", w.fi, w.s, (L_ or R_)[0].id, sid, w, zest, "podpora", haki,
                                    h_lv - 2 * cmax)
-    D.cache[key] = dict(dol=dol, gora=gora, zest=zest)
+    D.cache[key] = dict(dol=dol, gora=gora, zest=zest, scinanie=[])
     _gora_wsporniki(D, lv, zest, gora, Ping, h_lv, cmax)
     _naroza(D, lv, zest, dol, gora)
+    _scinanie(D, lv, zest, D.cache[key]["scinanie"])
     return D.cache[key]
+
+
+def _scinanie(D, lv, zest, out):
+    """Strefy zbrojenia na ścinanie płyt (biblioteka: V_Ed > V_Rd,c po uśrednieniu → strzemiona φ8, 9.3.2): pas 0,75 m
+    od osi podpory w polu; strzemiona zamknięte obejmujące pręty dolne i górne (kształt 51, szer. 10 cm)."""
+    pod = {sid: ln for sid, ln, _r in lv.podpory}
+    for el in lv.elementy:
+        for pol in el.pola:
+            z = pol.sc_zbr
+            if not z or z.get("podpora") not in pod:
+                continue
+            ln = pod[z["podpora"]]
+            zone = ln.buffer(0.75, cap_style=2).intersection(pol.poly)
+            if zone.is_empty or zone.area < 0.05:
+                continue
+            L_al = ln.intersection(pol.poly.buffer(0.8)).length or ln.length
+            n_row = int(math.ceil(0.75 / (z["s"] / 1000.0))) + 1
+            n = int(math.ceil(L_al * z["ramiona"] / 2.0)) * n_row          # strzemię = 2 ramiona
+            c = el.c_nom / 1000.0
+            pr = zest.dodaj(Pret(int(z["fi"]), "51", (100.0, (el.h - 2 * c) * 1000.0), n, el.id, "strzemię płyty"))
+            out.append(dict(element=el.id, pole=pol.pole, strefa=zone, pret=pr, opis=z["opis"], V=z["V"],
+                            podpora=z["podpora"], s=z["s"], ramiona=z["ramiona"]))
 
 
 def odcinki_proste(g) -> list:

@@ -21,23 +21,23 @@ Model: `dom_testowy.yaml` (wersja 1.0, 2026-09-25) · biblioteka `lamela.oblicze
 | **5** |  | **Belki i podciągi** |  |  |
 | 5.1 | `B1` | Belka B1 | 75% | spełnione |
 | **6** |  | **Nadproża** |  |  |
-| 6.1 | `N-O0-01` | Nadproże N-O0-01 nad otworem O0-01 w ścianie S0-01 (światło 4,00 m) | 142% | **niespełnione** |
+| 6.1 | `N-O0-01` | Nadproże N-O0-01 nad otworem O0-01 w ścianie S0-01 (światło 4,00 m) | 141% | **niespełnione** |
 | 6.2 | `N-O0-02` | Nadproże N-O0-02 nad otworem O0-02 w ścianie S0-01 (światło 1,80 m) | 73% | spełnione |
-| 6.3 | `N-O0-03` | Nadproże N-O0-03 nad otworem O0-03 w ścianie S0-03 (światło 1,10 m) | 39% | spełnione |
-| 6.4 | `N-O0-04` | Nadproże N-O0-04 nad otworem O0-04 w ścianie S0-03 (światło 1,60 m) | 97% | spełnione |
+| 6.3 | `N-O0-03` | Nadproże N-O0-03 nad otworem O0-03 w ścianie S0-03 (światło 1,10 m) | 37% | spełnione |
+| 6.4 | `N-O0-04` | Nadproże N-O0-04 nad otworem O0-04 w ścianie S0-03 (światło 1,60 m) | 94% | spełnione |
 | 6.5 | `N-O0-05` | Nadproże N-O0-05 nad otworem O0-05 w ścianie S0-02 (światło 1,50 m) | 73% | spełnione |
-| 6.6 | `N-O0-06` | Nadproże N-O0-06 nad otworem O0-06 w ścianie S0-05 (światło 1,20 m) | 93% | spełnione |
-| 6.7 | `N-O0-08` | Nadproże N-O0-08 nad otworem O0-08 w ścianie S0-02 (światło 2,00 m) | 95% | spełnione |
+| 6.6 | `N-O0-06` | Nadproże N-O0-06 nad otworem O0-06 w ścianie S0-05 (światło 1,20 m) | 100% | spełnione |
+| 6.7 | `N-O0-08` | Nadproże N-O0-08 nad otworem O0-08 w ścianie S0-02 (światło 2,00 m) | 100% | spełnione |
 | 6.8 | `N-O0-09` | Nadproże N-O0-09 nad otworem O0-09 w ścianie S0-04 (światło 1,50 m) | 73% | spełnione |
 | 6.9 | `N-O1-01` | Nadproże N-O1-01 nad otworem O1-01 w ścianie S1-01 (światło 2,40 m) | 73% | spełnione |
-| 6.10 | `N-O1-02` | Nadproże N-O1-02 nad otworem O1-02 w ścianie S1-01 (światło 3,60 m) | 99% | spełnione |
-| 6.11 | `N-O1-03` | Nadproże N-O1-03 nad otworem O1-03 w ścianie S1-02 (światło 2,40 m) | 91% | spełnione |
+| 6.10 | `N-O1-02` | Nadproże N-O1-02 nad otworem O1-02 w ścianie S1-01 (światło 3,60 m) | 90% | spełnione |
+| 6.11 | `N-O1-03` | Nadproże N-O1-03 nad otworem O1-03 w ścianie S1-02 (światło 2,40 m) | 86% | spełnione |
 | 6.12 | `N-O1-04` | Nadproże N-O1-04 nad otworem O1-04 w ścianie S1-03 (światło 1,00 m) | 33% | spełnione |
 | 6.13 | `N-O1-05` | Nadproże N-O1-05 nad otworem O1-05 w ścianie S1-03 (światło 1,60 m) | 73% | spełnione |
 | 6.14 | `N-O1-06` | Nadproże N-O1-06 nad otworem O1-06 w ścianie S1-03 (światło 1,80 m) | 73% | spełnione |
 | 6.15 | `N-O1-07` | Nadproże N-O1-07 nad otworem O1-07 w ścianie S1-04 (światło 1,40 m) | 73% | spełnione |
-| 6.16 | `N-O1-08` | Nadproże N-O1-08 nad otworem O1-08 w ścianie S1-05 (światło 0,90 m) | 60% | spełnione |
-| 6.17 | `N-O1-09` | Nadproże N-O1-09 nad otworem O1-09 w ścianie S1-05 (światło 0,90 m) | 57% | spełnione |
+| 6.16 | `N-O1-08` | Nadproże N-O1-08 nad otworem O1-08 w ścianie S1-05 (światło 0,90 m) | 59% | spełnione |
+| 6.17 | `N-O1-09` | Nadproże N-O1-09 nad otworem O1-09 w ścianie S1-05 (światło 0,90 m) | 56% | spełnione |
 | **7** |  | **Wieńce** |  |  |
 | 7.1 | `W-D1` | Wieńce pod płytą D1 (poziom 5,970 m) | 31% | spełnione |
 | 7.2 | `W-ST1` | Wieńce pod płytą ST1 (poziom 2,910 m) | 31% | spełnione |
@@ -334,7 +334,7 @@ Podpory: S1-01 (ściana), S1-02 (ściana), S1-03 (ściana), S1-04 (ściana), S1-
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Ścinanie bez zbrojenia poprzecznego (6.2.2) | V_Ed = 34,69 kN | V_Rd,c = 92,18 kN | 38% | spełniony | PN-EN 1992-1-1 6.2.2 |
+| Ścinanie bez zbrojenia poprzecznego (6.2.2) | V_Ed = 34,63 kN | V_Rd,c = 92,18 kN | 38% | spełniony | PN-EN 1992-1-1 6.2.2 |
 
 ##### Pole P2 — ugięcie (l = 5,80 m, K = 1,3)
 
@@ -534,7 +534,7 @@ Podpory: S0-01 (ściana), S0-02 (ściana), S0-03 (ściana), S0-04 (ściana), S0-
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Ścinanie bez zbrojenia poprzecznego (6.2.2) | V_Ed = 66,21 kN | V_Rd,c = 84,15 kN | 79% | spełniony | PN-EN 1992-1-1 6.2.2 |
+| Ścinanie bez zbrojenia poprzecznego (6.2.2) | V_Ed = 61,51 kN | V_Rd,c = 84,15 kN | 73% | spełniony | PN-EN 1992-1-1 6.2.2 |
 
 ##### Pole P2 — ugięcie (l = 5,80 m, K = 1,3)
 
@@ -742,7 +742,7 @@ Podpory: S0-02 (ściana), B1 (belka), słupy: SL2
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Ścinanie bez zbrojenia poprzecznego (6.2.2) | V_Ed = 56,00 kN | V_Rd,c = 84,04 kN | 67% | spełniony | PN-EN 1992-1-1 6.2.2 |
+| Ścinanie bez zbrojenia poprzecznego (6.2.2) | V_Ed = 27,98 kN | V_Rd,c = 84,04 kN | 33% | spełniony | PN-EN 1992-1-1 6.2.2 |
 
 ##### Pole P1 — ugięcie (l = 3,91 m, K = 1,0)
 
@@ -1056,7 +1056,7 @@ Belka żelbetowa b × h = 20 × 30 cm, oś (10,09, 4,85) → (13,91, 4,85), L = 
 
 ### Poz. 6.1 — Nadproże N-O0-01 nad otworem O0-01 w ścianie S0-01 (światło 4,00 m)
 
-Element modelu: `N-O0-01` · maks. wykorzystanie nośności η = 142% · **WARUNKI NIESPEŁNIONE — patrz tabele warunków i wnioski**
+Element modelu: `N-O0-01` · maks. wykorzystanie nośności η = 141% · **WARUNKI NIESPEŁNIONE — patrz tabele warunków i wnioski**
 
 #### Obliczenia
 
@@ -1064,34 +1064,34 @@ Element modelu: `N-O0-01` · maks. wykorzystanie nośności η = 142% · **WARUN
 
 - Rozpiętość obliczeniowa: l_eff = l_n + min(a; h) = 4,00 + 0,25 = **4,25** m *(5.3.2.2)*
 - Przekrój: b × h = **18 × 31 cm (zespolone z płytą stropu)**
-- Obciążenie (średnio nad otworem; bez efektu przesklepienia [UPR]): g_k; q_k = **15,97; 6,46** kN/m
-- Obciążenie obliczeniowe: q_d = **25,24** kN/m
-- Moment: M_Ed = q_d·l_eff²/8 = 25,24·4,250²/8 = **56,99** kNm
-- Siła poprzeczna: V_Ed = q_d·l_n/2 = 25,24·4,00/2 = **50,48** kN
+- Obciążenie (średnio nad otworem; bez efektu przesklepienia [UPR]): g_k; q_k = **15,58; 6,46** kN/m
+- Obciążenie obliczeniowe: q_d = **24,72** kN/m
+- Moment: M_Ed = q_d·l_eff²/8 = 24,72·4,250²/8 = **55,81** kNm
+- Siła poprzeczna: V_Ed = q_d·l_n/2 = 24,72·4,00/2 = **49,43** kN
 
 ##### N-O0-01 — zginanie
 
 - Wysokość użyteczna: d = **273** mm
-- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 56,99·10⁶/(180·273²·1,0·17,86) = **0,2379** *(3.1.7(3))*
-- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,2379) = **0,2760**
-- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,276 ≤ 0,493 = **spełniony**
-- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,2760·180·273·1,0·17,86/434,8 = **557** mm²
+- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 55,81·10⁶/(180·273²·1,0·17,86) = **0,2330** *(3.1.7(3))*
+- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,2330) = **0,2692**
+- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,269 ≤ 0,493 = **spełniony**
+- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,2692·180·273·1,0·17,86/434,8 = **543** mm²
 - Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,6/500·180·273; 0,0013·180·273) = **66** mm² *((9.1N) + NA)*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Zbrojenie dolne | A_s,req = 557 mm² | A_s,prov = 565 mm² | 98% | spełniony | 6.1 |
+| Zbrojenie dolne | A_s,req = 543 mm² | A_s,prov = 550 mm² | 99% | spełniony | 6.1 |
 
 ##### N-O0-01 — ścinanie
 
 - Współczynnik skali: k = 1 + √(200/d) ≤ 2,0 = 1 + √(200/273) = **1,856**
-- Stopień zbrojenia podłużnego: ρ_l = A_sl/(b_w·d) ≤ 0,02 = 565/(180·273) = **0,01151**
-- Nośność na ścinanie: V_Rd,c = C_Rd,c·k·(100·ρ_l·f_ck)^(1/3)·b_w·d = 0,1286·1,856·(100·0,01151·25)^(1/3)·180·273·10⁻³ = **35,93** kN *((6.2.a); C_Rd,c = 0,18/γ_c)*
+- Stopień zbrojenia podłużnego: ρ_l = A_sl/(b_w·d) ≤ 0,02 = 550/(180·273) = **0,01119**
+- Nośność na ścinanie: V_Rd,c = C_Rd,c·k·(100·ρ_l·f_ck)^(1/3)·b_w·d = 0,1286·1,856·(100·0,01119·25)^(1/3)·180·273·10⁻³ = **35,59** kN *((6.2.a); C_Rd,c = 0,18/γ_c)*
 - Wartość minimalna: V_Rd,c,min = v_min·b_w·d, v_min = 0,035·k^(3/2)·f_ck^(1/2) = 0,4425·180·273·10⁻³ = **21,74** kN *((6.2.b), (6.3N))*
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·273 = **246** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 180·246·0,540·17,86/(2,00 + 0,500)·10⁻³ = **170,59** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 56,5·246·434,8·2,00/(50,48·10³) = **239** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 56,5·246·434,8·2,00/(49,43·10³) = **244** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·273 = **205** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 56,5/(0,00080·180) = **393** mm *((9.5N))*
 - Przyjęto strzemiona: φ6 2-cięte co s = **200** mm
@@ -1099,33 +1099,33 @@ Element modelu: `N-O0-01` · maks. wykorzystanie nośności η = 142% · **WARUN
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Nośność krzyżulców betonowych | V_Ed = 50,48 kN | V_Rd,max = 170,59 kN | 30% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 50,48 kN | V_Rd,s = 60,41 kN | 84% | spełniony | (6.8) |
+| Nośność krzyżulców betonowych | V_Ed = 49,43 kN | V_Rd,max = 170,59 kN | 29% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 49,43 kN | V_Rd,s = 60,41 kN | 82% | spełniony | (6.8) |
 
 ##### N-O0-01 — ugięcie
 
-- Stopień zbrojenia wymagany: ρ = A_s,req/(b·d) = 557/(180·273) = **0,01133**
+- Stopień zbrojenia wymagany: ρ = A_s,req/(b·d) = 543/(180·273) = **0,01106**
 - Wartość odniesienia: ρ₀ = √f_ck·10⁻³ = √25·10⁻³ = **0,00500**
-- Graniczne l/d (ρ > ρ₀): K·[11 + 1,5·√f_ck·ρ₀/(ρ − ρ') + 1/12·√f_ck·√(ρ'/ρ₀)] = **14,3** *((7.16b))*
-- Mnożnik od naprężeń w stali: 310/σ_s ≈ 500/(f_yk·A_s,req/A_s,prov) ≤ 1,5 = 500/(500·557/565) = **1,015** *((7.17))*
+- Graniczne l/d (ρ > ρ₀): K·[11 + 1,5·√f_ck·ρ₀/(ρ − ρ') + 1/12·√f_ck·√(ρ'/ρ₀)] = **14,4** *((7.16b))*
+- Mnożnik od naprężeń w stali: 310/σ_s ≈ 500/(f_yk·A_s,req/A_s,prov) ≤ 1,5 = 500/(500·543/550) = **1,012** *((7.17))*
 - Smukłość rzeczywista: l_eff/d = 4,25/0,273 = **15,6**
 - *Obliczenie ugięcia (7.4.3)*
 - Efektywny moduł sprężystości: E_c,eff = E_cm/(1 + φ) = 31000/(1 + 2,5) = **8857** MPa *((7.20))*
 - Stosunek modułów: α_e = E_s/E_c,eff = 200000/8857 = **22,58**
-- Przekrój niezarysowany: x_I; I_I = **177,0 mm; 591,6·10⁶ mm⁴**
-- Przekrój zarysowany: x_II; I_II = **138,3 mm; 390,4·10⁶ mm⁴**
-- Moment rysujący: M_cr = f_ctm·I_I/(h − x_I) = 2,6·591,6·10⁶/(310 − 177,0) = **11,56** kNm
-- Współczynnik rozkładu: ζ = 1 − β·(M_cr/M_qp)², β = 0,5 = 1 − 0,5·(11,56/37,97)² = **0,954** *((7.19))*
-- Ugięcie od obciążeń (quasi-stała): w_q = ζ·w_II + (1 − ζ)·w_I = 0,954·20,66 + 0,046·13,63 = **20,33** mm *((7.18))*
-- Ugięcie od skurczu: w_cs = k·(1/r_cs)·l², 1/r_cs = ε_cs·α_e·S/I = 0,125·1,719·10⁻⁶·4250² = **3,88** mm *((7.21))*
-- Ugięcie całkowite: w = w_q + w_cs = 20,33 + 3,88 = **24,21** mm
+- Przekrój niezarysowany: x_I; I_I = **176,5 mm; 588,3·10⁶ mm⁴**
+- Przekrój zarysowany: x_II; I_II = **137,0 mm; 383,9·10⁶ mm⁴**
+- Moment rysujący: M_cr = f_ctm·I_I/(h − x_I) = 2,6·588,3·10⁶/(310 − 176,5) = **11,45** kNm
+- Współczynnik rozkładu: ζ = 1 − β·(M_cr/M_qp)², β = 0,5 = 1 − 0,5·(11,45/37,09)² = **0,952** *((7.19))*
+- Ugięcie od obciążeń (quasi-stała): w_q = ζ·w_II + (1 − ζ)·w_I = 0,952·20,52 + 0,048·13,39 = **20,18** mm *((7.18))*
+- Ugięcie od skurczu: w_cs = k·(1/r_cs)·l², 1/r_cs = ε_cs·α_e·S/I = 0,125·1,714·10⁻⁶·4250² = **3,87** mm *((7.21))*
+- Ugięcie całkowite: w = w_q + w_cs = 20,18 + 3,87 = **24,05** mm
 - Ugięcie dopuszczalne: w_lim = L/250 = 4250/250 = **17,0** mm *(7.4.1(4))*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Ugięcie długotrwałe (quasi-stała) ≤ L/250 | w = 24,2 mm | w_lim = 17,0 mm | 142% | **NIESPEŁNIONY** | 7.4.1(4), 7.4.3 |
+| Ugięcie długotrwałe (quasi-stała) ≤ L/250 | w = 24,1 mm | w_lim = 17,0 mm | 141% | **NIESPEŁNIONY** | 7.4.1(4), 7.4.3 |
 
-> l/d niespełnione (15,6 > 14,5) — miarodajne obliczenie ugięcia (7.4.3).
+> l/d niespełnione (15,6 > 14,6) — miarodajne obliczenie ugięcia (7.4.3).
 
 ##### N-O0-01 — docisk na murze (oparcie 25 cm)
 
@@ -1136,13 +1136,13 @@ Element modelu: `N-O0-01` · maks. wykorzystanie nośności η = 142% · **WARUN
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Docisk | N_Edc = 53,64 kN | N_Rdc = 279,23 kN | 19% | spełniony | PN-EN 1996-1-1 (6.9) |
+| Docisk | N_Edc = 52,52 kN | N_Rdc = 279,23 kN | 19% | spełniony | PN-EN 1996-1-1 (6.9) |
 
 > Dodatkowo sprawdzić ścianę w połowie wysokości pod oparciem (6.1.3(4)) — obejmuje to sprawdzenie ściany/filarka.
 
 #### Wnioski
 
-**Przyjęto:** N-O0-01: nadproże zespolone z płytą 18×31 cm, C25/30, dołem 5φ12, strzemiona φ6 co 20 cm (2-cięte), oparcie ≥ 25 cm.  
+**Przyjęto:** N-O0-01: nadproże zespolone z płytą 18×31 cm, C25/30, dołem 7φ10, strzemiona φ6 co 20 cm (2-cięte), oparcie ≥ 25 cm.  
 
 ### Poz. 6.2 — Nadproże N-O0-02 nad otworem O0-02 w ścianie S0-01 (światło 1,80 m)
 
@@ -1154,18 +1154,18 @@ Element modelu: `N-O0-02` · maks. wykorzystanie nośności η = 73% · wszystki
 
 - Rozpiętość obliczeniowa: l_eff = l_n + min(a; h) = 1,80 + 0,25 = **2,05** m *(5.3.2.2)*
 - Przekrój: b × h = **18 × 51 cm (zespolone z płytą stropu)**
-- Obciążenie (średnio nad otworem; bez efektu przesklepienia [UPR]): g_k; q_k = **13,26; 4,48** kN/m
-- Obciążenie obliczeniowe: q_d = **20,16** kN/m
-- Moment: M_Ed = q_d·l_eff²/8 = 20,16·2,050²/8 = **10,59** kNm
-- Siła poprzeczna: V_Ed = q_d·l_n/2 = 20,16·1,80/2 = **18,15** kN
+- Obciążenie (średnio nad otworem; bez efektu przesklepienia [UPR]): g_k; q_k = **12,17; 4,48** kN/m
+- Obciążenie obliczeniowe: q_d = **18,69** kN/m
+- Moment: M_Ed = q_d·l_eff²/8 = 18,69·2,050²/8 = **9,82** kNm
+- Siła poprzeczna: V_Ed = q_d·l_n/2 = 18,69·1,80/2 = **16,82** kN
 
 ##### N-O0-02 — zginanie
 
 - Wysokość użyteczna: d = **473** mm
-- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 10,59·10⁶/(180·473²·1,0·17,86) = **0,0147** *(3.1.7(3))*
-- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0147) = **0,0148**
-- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,015 ≤ 0,493 = **spełniony**
-- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0148·180·473·1,0·17,86/434,8 = **52** mm²
+- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 9,82·10⁶/(180·473²·1,0·17,86) = **0,0137** *(3.1.7(3))*
+- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0137) = **0,0137**
+- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,014 ≤ 0,493 = **spełniony**
+- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0137·180·473·1,0·17,86/434,8 = **48** mm²
 - Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,6/500·180·473; 0,0013·180·473) = **115** mm² *((9.1N) + NA)*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
@@ -1181,7 +1181,7 @@ Element modelu: `N-O0-02` · maks. wykorzystanie nośności η = 73% · wszystki
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·473 = **426** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 180·426·0,540·17,86/(2,00 + 0,500)·10⁻³ = **295,56** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 56,5·426·434,8·2,00/(18,15·10³) = **1153** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 56,5·426·434,8·2,00/(16,82·10³) = **1244** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·473 = **355** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 56,5/(0,00080·180) = **393** mm *((9.5N))*
 - Przyjęto strzemiona: φ6 2-cięte co s = **350** mm
@@ -1189,17 +1189,17 @@ Element modelu: `N-O0-02` · maks. wykorzystanie nośności η = 73% · wszystki
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Nośność krzyżulców betonowych | V_Ed = 18,15 kN | V_Rd,max = 295,56 kN | 6% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 18,15 kN | V_Rd,s = 59,81 kN | 30% | spełniony | (6.8) |
+| Nośność krzyżulców betonowych | V_Ed = 16,82 kN | V_Rd,max = 295,56 kN | 6% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 16,82 kN | V_Rd,s = 59,81 kN | 28% | spełniony | (6.8) |
 
 > V_Ed ≤ V_Rd,c = 31,59 kN — zbrojenie poprzeczne minimalne (9.2.2(5)).
 
 ##### N-O0-02 — ugięcie
 
-- Stopień zbrojenia wymagany: ρ = A_s,req/(b·d) = 52/(180·473) = **0,00061**
+- Stopień zbrojenia wymagany: ρ = A_s,req/(b·d) = 48/(180·473) = **0,00056**
 - Wartość odniesienia: ρ₀ = √f_ck·10⁻³ = √25·10⁻³ = **0,00500**
-- Graniczne l/d (ρ ≤ ρ₀): K·[11 + 1,5·√f_ck·ρ₀/ρ + 3,2·√f_ck·(ρ₀/ρ − 1)^(3/2)] = 1,0·[11 + 1,5·5,000·8,203 + 3,2·5,000·(8,203 − 1)^1,5] = **381,9** *((7.16a))*
-- Mnożnik od naprężeń w stali: 310/σ_s ≈ 500/(f_yk·A_s,req/A_s,prov) ≤ 1,5 = 500/(500·52/157) = **1,500** *((7.17))*
+- Graniczne l/d (ρ ≤ ρ₀): K·[11 + 1,5·√f_ck·ρ₀/ρ + 3,2·√f_ck·(ρ₀/ρ − 1)^(3/2)] = 1,0·[11 + 1,5·5,000·8,855 + 3,2·5,000·(8,855 − 1)^1,5] = **429,7** *((7.16a))*
+- Mnożnik od naprężeń w stali: 310/σ_s ≈ 500/(f_yk·A_s,req/A_s,prov) ≤ 1,5 = 500/(500·48/157) = **1,500** *((7.17))*
 - Smukłość rzeczywista: l_eff/d = 2,05/0,473 = **4,3**
 - *Obliczenie ugięcia (7.4.3)*
 - Efektywny moduł sprężystości: E_c,eff = E_cm/(1 + φ) = 31000/(1 + 2,5) = **8857** MPa *((7.20))*
@@ -1208,14 +1208,14 @@ Element modelu: `N-O0-02` · maks. wykorzystanie nośności η = 73% · wszystki
 - Przekrój zarysowany: x_II; I_II = **118,2 mm; 545,6·10⁶ mm⁴**
 - Moment rysujący: M_cr = f_ctm·I_I/(h − x_I) = 2,6·2152,1·10⁶/(510 − 263,1) = **22,66** kNm
 - Współczynnik rozkładu: ζ = 1 − β·(M_cr/M_qp)², β = 0,5 = M_qp ≤ M_cr → 0 = **0,000** *((7.19))*
-- Ugięcie od obciążeń (quasi-stała): w_q = ζ·w_II + (1 − ζ)·w_I = 0,000·0,66 + 1,000·0,17 = **0,17** mm *((7.18))*
+- Ugięcie od obciążeń (quasi-stała): w_q = ζ·w_II + (1 − ζ)·w_I = 0,000·0,61 + 1,000·0,15 = **0,15** mm *((7.18))*
 - Ugięcie od skurczu: w_cs = k·(1/r_cs)·l², 1/r_cs = ε_cs·α_e·S/I = 0,125·0,138·10⁻⁶·2050² = **0,07** mm *((7.21))*
-- Ugięcie całkowite: w = w_q + w_cs = 0,17 + 0,07 = **0,24** mm
+- Ugięcie całkowite: w = w_q + w_cs = 0,15 + 0,07 = **0,23** mm
 - Ugięcie dopuszczalne: w_lim = L/250 = 2050/250 = **8,2** mm *(7.4.1(4))*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Ugięcie — graniczna smukłość l/d (7.4.2) | l/d = 4,3  | (l/d)_lim = 572,8  | 1% | spełniony | (7.16), tabl. 7.4N |
+| Ugięcie — graniczna smukłość l/d (7.4.2) | l/d = 4,3  | (l/d)_lim = 644,5  | 1% | spełniony | (7.16), tabl. 7.4N |
 
 > l/d spełnione — obliczenie (7.4.3) informacyjnie: w = 0,2 mm ≤? 8,2 mm.
 
@@ -1228,7 +1228,7 @@ Element modelu: `N-O0-02` · maks. wykorzystanie nośności η = 73% · wszystki
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Docisk | N_Edc = 20,67 kN | N_Rdc = 286,14 kN | 7% | spełniony | PN-EN 1996-1-1 (6.9) |
+| Docisk | N_Edc = 19,16 kN | N_Rdc = 286,14 kN | 7% | spełniony | PN-EN 1996-1-1 (6.9) |
 
 > Dodatkowo sprawdzić ścianę w połowie wysokości pod oparciem (6.1.3(4)) — obejmuje to sprawdzenie ściany/filarka.
 
@@ -1238,7 +1238,7 @@ Element modelu: `N-O0-02` · maks. wykorzystanie nośności η = 73% · wszystki
 
 ### Poz. 6.3 — Nadproże N-O0-03 nad otworem O0-03 w ścianie S0-03 (światło 1,10 m)
 
-Element modelu: `N-O0-03` · maks. wykorzystanie nośności η = 39% · wszystkie warunki spełnione
+Element modelu: `N-O0-03` · maks. wykorzystanie nośności η = 37% · wszystkie warunki spełnione
 
 #### Obliczenia
 
@@ -1246,23 +1246,23 @@ Element modelu: `N-O0-03` · maks. wykorzystanie nośności η = 39% · wszystki
 
 - Rozpiętość obliczeniowa: l_eff = l_n + min(a; h) = 1,10 + 0,20 = **1,30** m *(5.3.2.2)*
 - Przekrój: b × h = **18 × 25 cm**
-- Obciążenie (średnio nad otworem; bez efektu przesklepienia [UPR]): g_k; q_k = **18,09; 2,83** kN/m
-- Obciążenie obliczeniowe: q_d = **26,01** kN/m
-- Moment: M_Ed = q_d·l_eff²/8 = 26,01·1,300²/8 = **5,50** kNm
-- Siła poprzeczna: V_Ed = q_d·l_n/2 = 26,01·1,10/2 = **14,31** kN
+- Obciążenie (średnio nad otworem; bez efektu przesklepienia [UPR]): g_k; q_k = **17,21; 2,83** kN/m
+- Obciążenie obliczeniowe: q_d = **24,82** kN/m
+- Moment: M_Ed = q_d·l_eff²/8 = 24,82·1,300²/8 = **5,24** kNm
+- Siła poprzeczna: V_Ed = q_d·l_n/2 = 24,82·1,10/2 = **13,65** kN
 
 ##### N-O0-03 — zginanie
 
 - Wysokość użyteczna: d = **213** mm
-- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 5,50·10⁶/(180·213²·1,0·17,86) = **0,0377** *(3.1.7(3))*
-- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0377) = **0,0384**
-- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,038 ≤ 0,493 = **spełniony**
-- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0384·180·213·1,0·17,86/434,8 = **60** mm²
+- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 5,24·10⁶/(180·213²·1,0·17,86) = **0,0360** *(3.1.7(3))*
+- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0360) = **0,0366**
+- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,037 ≤ 0,493 = **spełniony**
+- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0366·180·213·1,0·17,86/434,8 = **58** mm²
 - Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,6/500·180·213; 0,0013·180·213) = **52** mm² *((9.1N) + NA)*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Zbrojenie dolne | A_s,req = 60 mm² | A_s,prov = 157 mm² | 39% | spełniony | 6.1 |
+| Zbrojenie dolne | A_s,req = 58 mm² | A_s,prov = 157 mm² | 37% | spełniony | 6.1 |
 
 ##### N-O0-03 — ścinanie
 
@@ -1273,7 +1273,7 @@ Element modelu: `N-O0-03` · maks. wykorzystanie nośności η = 39% · wszystki
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·213 = **192** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 180·192·0,540·17,86/(2,00 + 0,500)·10⁻³ = **133,09** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 56,5·192·434,8·2,00/(14,31·10³) = **659** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 56,5·192·434,8·2,00/(13,65·10³) = **690** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·213 = **160** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 56,5/(0,00080·180) = **393** mm *((9.5N))*
 - Przyjęto strzemiona: φ6 2-cięte co s = **150** mm
@@ -1281,17 +1281,17 @@ Element modelu: `N-O0-03` · maks. wykorzystanie nośności η = 39% · wszystki
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Nośność krzyżulców betonowych | V_Ed = 14,31 kN | V_Rd,max = 133,09 kN | 11% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 14,31 kN | V_Rd,s = 62,84 kN | 23% | spełniony | (6.8) |
+| Nośność krzyżulców betonowych | V_Ed = 13,65 kN | V_Rd,max = 133,09 kN | 10% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 13,65 kN | V_Rd,s = 62,84 kN | 22% | spełniony | (6.8) |
 
 > V_Ed ≤ V_Rd,c = 21,08 kN — zbrojenie poprzeczne minimalne (9.2.2(5)).
 
 ##### N-O0-03 — ugięcie
 
-- Stopień zbrojenia wymagany: ρ = A_s,req/(b·d) = 60/(180·213) = **0,00158**
+- Stopień zbrojenia wymagany: ρ = A_s,req/(b·d) = 58/(180·213) = **0,00150**
 - Wartość odniesienia: ρ₀ = √f_ck·10⁻³ = √25·10⁻³ = **0,00500**
-- Graniczne l/d (ρ ≤ ρ₀): K·[11 + 1,5·√f_ck·ρ₀/ρ + 3,2·√f_ck·(ρ₀/ρ − 1)^(3/2)] = 1,0·[11 + 1,5·5,000·3,169 + 3,2·5,000·(3,169 − 1)^1,5] = **85,9** *((7.16a))*
-- Mnożnik od naprężeń w stali: 310/σ_s ≈ 500/(f_yk·A_s,req/A_s,prov) ≤ 1,5 = 500/(500·60/157) = **1,500** *((7.17))*
+- Graniczne l/d (ρ ≤ ρ₀): K·[11 + 1,5·√f_ck·ρ₀/ρ + 3,2·√f_ck·(ρ₀/ρ − 1)^(3/2)] = 1,0·[11 + 1,5·5,000·3,323 + 3,2·5,000·(3,323 − 1)^1,5] = **92,6** *((7.16a))*
+- Mnożnik od naprężeń w stali: 310/σ_s ≈ 500/(f_yk·A_s,req/A_s,prov) ≤ 1,5 = 500/(500·58/157) = **1,500** *((7.17))*
 - Smukłość rzeczywista: l_eff/d = 1,30/0,213 = **6,1**
 - *Obliczenie ugięcia (7.4.3)*
 - Efektywny moduł sprężystości: E_c,eff = E_cm/(1 + φ) = 31000/(1 + 2,5) = **8857** MPa *((7.20))*
@@ -1300,14 +1300,14 @@ Element modelu: `N-O0-03` · maks. wykorzystanie nośności η = 39% · wszystki
 - Przekrój zarysowany: x_II; I_II = **74,0 mm; 92,8·10⁶ mm⁴**
 - Moment rysujący: M_cr = f_ctm·I_I/(h − x_I) = 2,6·259,8·10⁶/(250 − 131,4) = **5,70** kNm
 - Współczynnik rozkładu: ζ = 1 − β·(M_cr/M_qp)², β = 0,5 = M_qp ≤ M_cr → 0 = **0,000** *((7.19))*
-- Ugięcie od obciążeń (quasi-stała): w_q = ζ·w_II + (1 − ζ)·w_I = 0,000·0,82 + 1,000·0,29 = **0,29** mm *((7.18))*
+- Ugięcie od obciążeń (quasi-stała): w_q = ζ·w_II + (1 − ζ)·w_I = 0,000·0,78 + 1,000·0,28 = **0,28** mm *((7.18))*
 - Ugięcie od skurczu: w_cs = k·(1/r_cs)·l², 1/r_cs = ε_cs·α_e·S/I = 0,125·0,445·10⁻⁶·1300² = **0,09** mm *((7.21))*
-- Ugięcie całkowite: w = w_q + w_cs = 0,29 + 0,09 = **0,39** mm
+- Ugięcie całkowite: w = w_q + w_cs = 0,28 + 0,09 = **0,37** mm
 - Ugięcie dopuszczalne: w_lim = L/250 = 1300/250 = **5,2** mm *(7.4.1(4))*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Ugięcie — graniczna smukłość l/d (7.4.2) | l/d = 6,1  | (l/d)_lim = 128,8  | 5% | spełniony | (7.16), tabl. 7.4N |
+| Ugięcie — graniczna smukłość l/d (7.4.2) | l/d = 6,1  | (l/d)_lim = 138,9  | 4% | spełniony | (7.16), tabl. 7.4N |
 
 > l/d spełnione — obliczenie (7.4.3) informacyjnie: w = 0,4 mm ≤? 5,2 mm.
 
@@ -1320,7 +1320,7 @@ Element modelu: `N-O0-03` · maks. wykorzystanie nośności η = 39% · wszystki
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Docisk | N_Edc = 16,91 kN | N_Rdc = 243,20 kN | 7% | spełniony | PN-EN 1996-1-1 (6.9) |
+| Docisk | N_Edc = 16,14 kN | N_Rdc = 243,20 kN | 7% | spełniony | PN-EN 1996-1-1 (6.9) |
 
 > Dodatkowo sprawdzić ścianę w połowie wysokości pod oparciem (6.1.3(4)) — obejmuje to sprawdzenie ściany/filarka.
 
@@ -1330,7 +1330,7 @@ Element modelu: `N-O0-03` · maks. wykorzystanie nośności η = 39% · wszystki
 
 ### Poz. 6.4 — Nadproże N-O0-04 nad otworem O0-04 w ścianie S0-03 (światło 1,60 m)
 
-Element modelu: `N-O0-04` · maks. wykorzystanie nośności η = 97% · wszystkie warunki spełnione
+Element modelu: `N-O0-04` · maks. wykorzystanie nośności η = 94% · wszystkie warunki spełnione
 
 #### Obliczenia
 
@@ -1338,23 +1338,23 @@ Element modelu: `N-O0-04` · maks. wykorzystanie nośności η = 97% · wszystki
 
 - Rozpiętość obliczeniowa: l_eff = l_n + min(a; h) = 1,60 + 0,25 = **1,85** m *(5.3.2.2)*
 - Przekrój: b × h = **18 × 25 cm**
-- Obciążenie (średnio nad otworem; bez efektu przesklepienia [UPR]): g_k; q_k = **29,17; 8,26** kN/m
-- Obciążenie obliczeniowe: q_d = **44,20** kN/m
-- Moment: M_Ed = q_d·l_eff²/8 = 44,20·1,850²/8 = **18,91** kNm
-- Siła poprzeczna: V_Ed = q_d·l_n/2 = 44,20·1,60/2 = **35,36** kN
+- Obciążenie (średnio nad otworem; bez efektu przesklepienia [UPR]): g_k; q_k = **28,29; 8,26** kN/m
+- Obciążenie obliczeniowe: q_d = **43,01** kN/m
+- Moment: M_Ed = q_d·l_eff²/8 = 43,01·1,850²/8 = **18,40** kNm
+- Siła poprzeczna: V_Ed = q_d·l_n/2 = 43,01·1,60/2 = **34,41** kN
 
 ##### N-O0-04 — zginanie
 
 - Wysokość użyteczna: d = **213** mm
-- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 18,91·10⁶/(180·213²·1,0·17,86) = **0,1297** *(3.1.7(3))*
-- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,1297) = **0,1394**
-- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,139 ≤ 0,493 = **spełniony**
-- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,1394·180·213·1,0·17,86/434,8 = **219** mm²
+- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 18,40·10⁶/(180·213²·1,0·17,86) = **0,1262** *(3.1.7(3))*
+- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,1262) = **0,1353**
+- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,135 ≤ 0,493 = **spełniony**
+- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,1353·180·213·1,0·17,86/434,8 = **213** mm²
 - Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,6/500·180·213; 0,0013·180·213) = **52** mm² *((9.1N) + NA)*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Zbrojenie dolne | A_s,req = 219 mm² | A_s,prov = 226 mm² | 97% | spełniony | 6.1 |
+| Zbrojenie dolne | A_s,req = 213 mm² | A_s,prov = 226 mm² | 94% | spełniony | 6.1 |
 
 ##### N-O0-04 — ścinanie
 
@@ -1365,7 +1365,7 @@ Element modelu: `N-O0-04` · maks. wykorzystanie nośności η = 97% · wszystki
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·213 = **192** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 180·192·0,540·17,86/(2,00 + 0,500)·10⁻³ = **133,09** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 56,5·192·434,8·2,00/(35,36·10³) = **267** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 56,5·192·434,8·2,00/(34,41·10³) = **274** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·213 = **160** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 56,5/(0,00080·180) = **393** mm *((9.5N))*
 - Przyjęto strzemiona: φ6 2-cięte co s = **150** mm
@@ -1373,15 +1373,15 @@ Element modelu: `N-O0-04` · maks. wykorzystanie nośności η = 97% · wszystki
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Nośność krzyżulców betonowych | V_Ed = 35,36 kN | V_Rd,max = 133,09 kN | 27% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 35,36 kN | V_Rd,s = 62,84 kN | 56% | spełniony | (6.8) |
+| Nośność krzyżulców betonowych | V_Ed = 34,41 kN | V_Rd,max = 133,09 kN | 26% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 34,41 kN | V_Rd,s = 62,84 kN | 55% | spełniony | (6.8) |
 
 ##### N-O0-04 — ugięcie
 
-- Stopień zbrojenia wymagany: ρ = A_s,req/(b·d) = 219/(180·213) = **0,00572**
+- Stopień zbrojenia wymagany: ρ = A_s,req/(b·d) = 213/(180·213) = **0,00556**
 - Wartość odniesienia: ρ₀ = √f_ck·10⁻³ = √25·10⁻³ = **0,00500**
-- Graniczne l/d (ρ > ρ₀): K·[11 + 1,5·√f_ck·ρ₀/(ρ − ρ') + 1/12·√f_ck·√(ρ'/ρ₀)] = **17,6** *((7.16b))*
-- Mnożnik od naprężeń w stali: 310/σ_s ≈ 500/(f_yk·A_s,req/A_s,prov) ≤ 1,5 = 500/(500·219/226) = **1,031** *((7.17))*
+- Graniczne l/d (ρ > ρ₀): K·[11 + 1,5·√f_ck·ρ₀/(ρ − ρ') + 1/12·√f_ck·√(ρ'/ρ₀)] = **17,7** *((7.16b))*
+- Mnożnik od naprężeń w stali: 310/σ_s ≈ 500/(f_yk·A_s,req/A_s,prov) ≤ 1,5 = 500/(500·213/226) = **1,061** *((7.17))*
 - Smukłość rzeczywista: l_eff/d = 1,85/0,213 = **8,7**
 - *Obliczenie ugięcia (7.4.3)*
 - Efektywny moduł sprężystości: E_c,eff = E_cm/(1 + φ) = 31000/(1 + 2,5) = **8857** MPa *((7.20))*
@@ -1389,17 +1389,17 @@ Element modelu: `N-O0-04` · maks. wykorzystanie nośności η = 97% · wszystki
 - Przekrój niezarysowany: x_I; I_I = **134,0 mm; 269,9·10⁶ mm⁴**
 - Przekrój zarysowany: x_II; I_II = **85,2 mm; 120,5·10⁶ mm⁴**
 - Moment rysujący: M_cr = f_ctm·I_I/(h − x_I) = 2,6·269,9·10⁶/(250 − 134,0) = **6,05** kNm
-- Współczynnik rozkładu: ζ = 1 − β·(M_cr/M_qp)², β = 0,5 = 1 − 0,5·(6,05/12,89)² = **0,890** *((7.19))*
-- Ugięcie od obciążeń (quasi-stała): w_q = ζ·w_II + (1 − ζ)·w_I = 0,890·4,30 + 0,110·1,92 = **4,04** mm *((7.18))*
-- Ugięcie od skurczu: w_cs = k·(1/r_cs)·l², 1/r_cs = ε_cs·α_e·S/I = 0,125·1,994·10⁻⁶·1850² = **0,85** mm *((7.21))*
-- Ugięcie całkowite: w = w_q + w_cs = 4,04 + 0,85 = **4,89** mm
+- Współczynnik rozkładu: ζ = 1 − β·(M_cr/M_qp)², β = 0,5 = 1 − 0,5·(6,05/12,51)² = **0,883** *((7.19))*
+- Ugięcie od obciążeń (quasi-stała): w_q = ζ·w_II + (1 − ζ)·w_I = 0,883·4,18 + 0,117·1,87 = **3,91** mm *((7.18))*
+- Ugięcie od skurczu: w_cs = k·(1/r_cs)·l², 1/r_cs = ε_cs·α_e·S/I = 0,125·1,983·10⁻⁶·1850² = **0,85** mm *((7.21))*
+- Ugięcie całkowite: w = w_q + w_cs = 3,91 + 0,85 = **4,76** mm
 - Ugięcie dopuszczalne: w_lim = L/250 = 1850/250 = **7,4** mm *(7.4.1(4))*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Ugięcie — graniczna smukłość l/d (7.4.2) | l/d = 8,7  | (l/d)_lim = 18,1  | 48% | spełniony | (7.16), tabl. 7.4N |
+| Ugięcie — graniczna smukłość l/d (7.4.2) | l/d = 8,7  | (l/d)_lim = 18,8  | 46% | spełniony | (7.16), tabl. 7.4N |
 
-> l/d spełnione — obliczenie (7.4.3) informacyjnie: w = 4,9 mm ≤? 7,4 mm.
+> l/d spełnione — obliczenie (7.4.3) informacyjnie: w = 4,8 mm ≤? 7,4 mm.
 
 ##### N-O0-04 — docisk na murze (oparcie 25 cm)
 
@@ -1410,7 +1410,7 @@ Element modelu: `N-O0-04` · maks. wykorzystanie nośności η = 97% · wszystki
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Docisk | N_Edc = 40,88 kN | N_Rdc = 279,23 kN | 15% | spełniony | PN-EN 1996-1-1 (6.9) |
+| Docisk | N_Edc = 39,78 kN | N_Rdc = 279,23 kN | 14% | spełniony | PN-EN 1996-1-1 (6.9) |
 
 > Dodatkowo sprawdzić ścianę w połowie wysokości pod oparciem (6.1.3(4)) — obejmuje to sprawdzenie ściany/filarka.
 
@@ -1428,18 +1428,18 @@ Element modelu: `N-O0-05` · maks. wykorzystanie nośności η = 73% · wszystki
 
 - Rozpiętość obliczeniowa: l_eff = l_n + min(a; h) = 1,50 + 0,20 = **1,70** m *(5.3.2.2)*
 - Przekrój: b × h = **18 × 51 cm (zespolone z płytą stropu)**
-- Obciążenie (średnio nad otworem; bez efektu przesklepienia [UPR]): g_k; q_k = **27,09; 20,33** kN/m
-- Obciążenie obliczeniowe: q_d = **49,60** kN/m
-- Moment: M_Ed = q_d·l_eff²/8 = 49,60·1,700²/8 = **17,92** kNm
-- Siła poprzeczna: V_Ed = q_d·l_n/2 = 49,60·1,50/2 = **37,20** kN
+- Obciążenie (średnio nad otworem; bez efektu przesklepienia [UPR]): g_k; q_k = **25,99; 20,33** kN/m
+- Obciążenie obliczeniowe: q_d = **48,12** kN/m
+- Moment: M_Ed = q_d·l_eff²/8 = 48,12·1,700²/8 = **17,38** kNm
+- Siła poprzeczna: V_Ed = q_d·l_n/2 = 48,12·1,50/2 = **36,09** kN
 
 ##### N-O0-05 — zginanie
 
 - Wysokość użyteczna: d = **473** mm
-- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 17,92·10⁶/(180·473²·1,0·17,86) = **0,0249** *(3.1.7(3))*
-- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0249) = **0,0252**
-- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,025 ≤ 0,493 = **spełniony**
-- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0252·180·473·1,0·17,86/434,8 = **88** mm²
+- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 17,38·10⁶/(180·473²·1,0·17,86) = **0,0242** *(3.1.7(3))*
+- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0242) = **0,0245**
+- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,024 ≤ 0,493 = **spełniony**
+- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0245·180·473·1,0·17,86/434,8 = **86** mm²
 - Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,6/500·180·473; 0,0013·180·473) = **115** mm² *((9.1N) + NA)*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
@@ -1455,7 +1455,7 @@ Element modelu: `N-O0-05` · maks. wykorzystanie nośności η = 73% · wszystki
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·473 = **426** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 180·426·0,540·17,86/(2,00 + 0,500)·10⁻³ = **295,56** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 56,5·426·434,8·2,00/(37,20·10³) = **563** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 56,5·426·434,8·2,00/(36,09·10³) = **580** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·473 = **355** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 56,5/(0,00080·180) = **393** mm *((9.5N))*
 - Przyjęto strzemiona: φ6 2-cięte co s = **350** mm
@@ -1463,15 +1463,15 @@ Element modelu: `N-O0-05` · maks. wykorzystanie nośności η = 73% · wszystki
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Nośność krzyżulców betonowych | V_Ed = 37,20 kN | V_Rd,max = 295,56 kN | 13% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 37,20 kN | V_Rd,s = 59,81 kN | 62% | spełniony | (6.8) |
+| Nośność krzyżulców betonowych | V_Ed = 36,09 kN | V_Rd,max = 295,56 kN | 12% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 36,09 kN | V_Rd,s = 59,81 kN | 60% | spełniony | (6.8) |
 
 ##### N-O0-05 — ugięcie
 
-- Stopień zbrojenia wymagany: ρ = A_s,req/(b·d) = 88/(180·473) = **0,00104**
+- Stopień zbrojenia wymagany: ρ = A_s,req/(b·d) = 86/(180·473) = **0,00101**
 - Wartość odniesienia: ρ₀ = √f_ck·10⁻³ = √25·10⁻³ = **0,00500**
-- Graniczne l/d (ρ ≤ ρ₀): K·[11 + 1,5·√f_ck·ρ₀/ρ + 3,2·√f_ck·(ρ₀/ρ − 1)^(3/2)] = 1,0·[11 + 1,5·5,000·4,824 + 3,2·5,000·(4,824 − 1)^1,5] = **166,8** *((7.16a))*
-- Mnożnik od naprężeń w stali: 310/σ_s ≈ 500/(f_yk·A_s,req/A_s,prov) ≤ 1,5 = 500/(500·88/157) = **1,500** *((7.17))*
+- Graniczne l/d (ρ ≤ ρ₀): K·[11 + 1,5·√f_ck·ρ₀/ρ + 3,2·√f_ck·(ρ₀/ρ − 1)^(3/2)] = 1,0·[11 + 1,5·5,000·4,974 + 3,2·5,000·(4,974 − 1)^1,5] = **175,1** *((7.16a))*
+- Mnożnik od naprężeń w stali: 310/σ_s ≈ 500/(f_yk·A_s,req/A_s,prov) ≤ 1,5 = 500/(500·86/157) = **1,500** *((7.17))*
 - Smukłość rzeczywista: l_eff/d = 1,70/0,473 = **3,6**
 - *Obliczenie ugięcia (7.4.3)*
 - Efektywny moduł sprężystości: E_c,eff = E_cm/(1 + φ) = 31000/(1 + 2,5) = **8857** MPa *((7.20))*
@@ -1480,14 +1480,14 @@ Element modelu: `N-O0-05` · maks. wykorzystanie nośności η = 73% · wszystki
 - Przekrój zarysowany: x_II; I_II = **118,2 mm; 545,6·10⁶ mm⁴**
 - Moment rysujący: M_cr = f_ctm·I_I/(h − x_I) = 2,6·2152,1·10⁶/(510 − 263,1) = **22,66** kNm
 - Współczynnik rozkładu: ζ = 1 − β·(M_cr/M_qp)², β = 0,5 = M_qp ≤ M_cr → 0 = **0,000** *((7.19))*
-- Ugięcie od obciążeń (quasi-stała): w_q = ζ·w_II + (1 − ζ)·w_I = 0,000·0,68 + 1,000·0,17 = **0,17** mm *((7.18))*
+- Ugięcie od obciążeń (quasi-stała): w_q = ζ·w_II + (1 − ζ)·w_I = 0,000·0,65 + 1,000·0,17 = **0,17** mm *((7.18))*
 - Ugięcie od skurczu: w_cs = k·(1/r_cs)·l², 1/r_cs = ε_cs·α_e·S/I = 0,125·0,138·10⁻⁶·1700² = **0,05** mm *((7.21))*
 - Ugięcie całkowite: w = w_q + w_cs = 0,17 + 0,05 = **0,22** mm
 - Ugięcie dopuszczalne: w_lim = L/250 = 1700/250 = **6,8** mm *(7.4.1(4))*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Ugięcie — graniczna smukłość l/d (7.4.2) | l/d = 3,6  | (l/d)_lim = 250,3  | 1% | spełniony | (7.16), tabl. 7.4N |
+| Ugięcie — graniczna smukłość l/d (7.4.2) | l/d = 3,6  | (l/d)_lim = 262,6  | 1% | spełniony | (7.16), tabl. 7.4N |
 
 > l/d spełnione — obliczenie (7.4.3) informacyjnie: w = 0,2 mm ≤? 6,8 mm.
 
@@ -1500,7 +1500,7 @@ Element modelu: `N-O0-05` · maks. wykorzystanie nośności η = 73% · wszystki
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Docisk | N_Edc = 42,16 kN | N_Rdc = 243,20 kN | 17% | spełniony | PN-EN 1996-1-1 (6.9) |
+| Docisk | N_Edc = 40,91 kN | N_Rdc = 243,20 kN | 17% | spełniony | PN-EN 1996-1-1 (6.9) |
 
 > Dodatkowo sprawdzić ścianę w połowie wysokości pod oparciem (6.1.3(4)) — obejmuje to sprawdzenie ściany/filarka.
 
@@ -1510,7 +1510,7 @@ Element modelu: `N-O0-05` · maks. wykorzystanie nośności η = 73% · wszystki
 
 ### Poz. 6.6 — Nadproże N-O0-06 nad otworem O0-06 w ścianie S0-05 (światło 1,20 m)
 
-Element modelu: `N-O0-06` · maks. wykorzystanie nośności η = 93% · wszystkie warunki spełnione
+Element modelu: `N-O0-06` · maks. wykorzystanie nośności η = 100% · wszystkie warunki spełnione
 
 #### Obliczenia
 
@@ -1518,23 +1518,23 @@ Element modelu: `N-O0-06` · maks. wykorzystanie nośności η = 93% · wszystki
 
 - Rozpiętość obliczeniowa: l_eff = l_n + min(a; h) = 1,20 + 0,20 = **1,40** m *(5.3.2.2)*
 - Przekrój: b × h = **18 × 25 cm**
-- Obciążenie (średnio nad otworem; bez efektu przesklepienia [UPR]): g_k; q_k = **77,18; 30,71** kN/m
-- Obciążenie obliczeniowe: q_d = **121,55** kN/m
-- Moment: M_Ed = q_d·l_eff²/8 = 121,55·1,400²/8 = **29,78** kNm
-- Siła poprzeczna: V_Ed = q_d·l_n/2 = 121,55·1,20/2 = **72,93** kN
+- Obciążenie (średnio nad otworem; bez efektu przesklepienia [UPR]): g_k; q_k = **76,29; 30,71** kN/m
+- Obciążenie obliczeniowe: q_d = **120,35** kN/m
+- Moment: M_Ed = q_d·l_eff²/8 = 120,35·1,400²/8 = **29,49** kNm
+- Siła poprzeczna: V_Ed = q_d·l_n/2 = 120,35·1,20/2 = **72,21** kN
 
 ##### N-O0-06 — zginanie
 
 - Wysokość użyteczna: d = **213** mm
-- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 29,78·10⁶/(180·213²·1,0·17,86) = **0,2042** *(3.1.7(3))*
-- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,2042) = **0,2309**
-- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,231 ≤ 0,493 = **spełniony**
-- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,2309·180·213·1,0·17,86/434,8 = **364** mm²
+- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 29,49·10⁶/(180·213²·1,0·17,86) = **0,2022** *(3.1.7(3))*
+- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,2022) = **0,2282**
+- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,228 ≤ 0,493 = **spełniony**
+- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,2282·180·213·1,0·17,86/434,8 = **359** mm²
 - Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,6/500·180·213; 0,0013·180·213) = **52** mm² *((9.1N) + NA)*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Zbrojenie dolne | A_s,req = 364 mm² | A_s,prov = 393 mm² | 93% | spełniony | 6.1 |
+| Zbrojenie dolne | A_s,req = 359 mm² | A_s,prov = 393 mm² | 92% | spełniony | 6.1 |
 
 ##### N-O0-06 — ścinanie
 
@@ -1545,23 +1545,23 @@ Element modelu: `N-O0-06` · maks. wykorzystanie nośności η = 93% · wszystki
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·213 = **192** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 180·192·0,540·17,86/(2,00 + 0,500)·10⁻³ = **133,09** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 56,5·192·434,8·2,00/(72,93·10³) = **129** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 56,5·192·434,8·2,00/(72,21·10³) = **131** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·213 = **160** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 56,5/(0,00080·180) = **393** mm *((9.5N))*
-- Przyjęto strzemiona: φ6 2-cięte co s = **120** mm
-- Nośność zbrojenia na ścinanie: V_Rd,s = A_sw/s·z·f_ywd·cot θ = 56,5/120·192·434,8·2,00·10⁻³ = **78,55** kN
+- Przyjęto strzemiona: φ6 2-cięte co s = **130** mm
+- Nośność zbrojenia na ścinanie: V_Rd,s = A_sw/s·z·f_ywd·cot θ = 56,5/130·192·434,8·2,00·10⁻³ = **72,51** kN
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Nośność krzyżulców betonowych | V_Ed = 72,93 kN | V_Rd,max = 133,09 kN | 55% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 72,93 kN | V_Rd,s = 78,55 kN | 93% | spełniony | (6.8) |
+| Nośność krzyżulców betonowych | V_Ed = 72,21 kN | V_Rd,max = 133,09 kN | 54% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 72,21 kN | V_Rd,s = 72,51 kN | 100% | spełniony | (6.8) |
 
 ##### N-O0-06 — ugięcie
 
-- Stopień zbrojenia wymagany: ρ = A_s,req/(b·d) = 364/(180·213) = **0,00948**
+- Stopień zbrojenia wymagany: ρ = A_s,req/(b·d) = 359/(180·213) = **0,00937**
 - Wartość odniesienia: ρ₀ = √f_ck·10⁻³ = √25·10⁻³ = **0,00500**
 - Graniczne l/d (ρ > ρ₀): K·[11 + 1,5·√f_ck·ρ₀/(ρ − ρ') + 1/12·√f_ck·√(ρ'/ρ₀)] = **15,0** *((7.16b))*
-- Mnożnik od naprężeń w stali: 310/σ_s ≈ 500/(f_yk·A_s,req/A_s,prov) ≤ 1,5 = 500/(500·364/393) = **1,080** *((7.17))*
+- Mnożnik od naprężeń w stali: 310/σ_s ≈ 500/(f_yk·A_s,req/A_s,prov) ≤ 1,5 = 500/(500·359/393) = **1,093** *((7.17))*
 - Smukłość rzeczywista: l_eff/d = 1,40/0,213 = **6,6**
 - *Obliczenie ugięcia (7.4.3)*
 - Efektywny moduł sprężystości: E_c,eff = E_cm/(1 + φ) = 31000/(1 + 2,5) = **8857** MPa *((7.20))*
@@ -1569,15 +1569,15 @@ Element modelu: `N-O0-06` · maks. wykorzystanie nośności η = 93% · wszystki
 - Przekrój niezarysowany: x_I; I_I = **139,5 mm; 291,7·10⁶ mm⁴**
 - Przekrój zarysowany: x_II; I_II = **103,7 mm; 172,8·10⁶ mm⁴**
 - Moment rysujący: M_cr = f_ctm·I_I/(h − x_I) = 2,6·291,7·10⁶/(250 − 139,5) = **6,86** kNm
-- Współczynnik rozkładu: ζ = 1 − β·(M_cr/M_qp)², β = 0,5 = 1 − 0,5·(6,86/19,64)² = **0,939** *((7.19))*
-- Ugięcie od obciążeń (quasi-stała): w_q = ζ·w_II + (1 − ζ)·w_I = 0,939·2,62 + 0,061·1,55 = **2,55** mm *((7.18))*
-- Ugięcie od skurczu: w_cs = k·(1/r_cs)·l², 1/r_cs = ε_cs·α_e·S/I = 0,125·2,160·10⁻⁶·1400² = **0,53** mm *((7.21))*
-- Ugięcie całkowite: w = w_q + w_cs = 2,55 + 0,53 = **3,08** mm
+- Współczynnik rozkładu: ζ = 1 − β·(M_cr/M_qp)², β = 0,5 = 1 − 0,5·(6,86/19,42)² = **0,938** *((7.19))*
+- Ugięcie od obciążeń (quasi-stała): w_q = ζ·w_II + (1 − ζ)·w_I = 0,938·2,59 + 0,062·1,53 = **2,52** mm *((7.18))*
+- Ugięcie od skurczu: w_cs = k·(1/r_cs)·l², 1/r_cs = ε_cs·α_e·S/I = 0,125·2,158·10⁻⁶·1400² = **0,53** mm *((7.21))*
+- Ugięcie całkowite: w = w_q + w_cs = 2,52 + 0,53 = **3,05** mm
 - Ugięcie dopuszczalne: w_lim = L/250 = 1400/250 = **5,6** mm *(7.4.1(4))*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Ugięcie — graniczna smukłość l/d (7.4.2) | l/d = 6,6  | (l/d)_lim = 16,2  | 41% | spełniony | (7.16), tabl. 7.4N |
+| Ugięcie — graniczna smukłość l/d (7.4.2) | l/d = 6,6  | (l/d)_lim = 16,4  | 40% | spełniony | (7.16), tabl. 7.4N |
 
 > l/d spełnione — obliczenie (7.4.3) informacyjnie: w = 3,1 mm ≤? 5,6 mm.
 
@@ -1590,17 +1590,17 @@ Element modelu: `N-O0-06` · maks. wykorzystanie nośności η = 93% · wszystki
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Docisk | N_Edc = 85,09 kN | N_Rdc = 224,77 kN | 38% | spełniony | PN-EN 1996-1-1 (6.9) |
+| Docisk | N_Edc = 84,25 kN | N_Rdc = 224,77 kN | 37% | spełniony | PN-EN 1996-1-1 (6.9) |
 
 > Dodatkowo sprawdzić ścianę w połowie wysokości pod oparciem (6.1.3(4)) — obejmuje to sprawdzenie ściany/filarka.
 
 #### Wnioski
 
-**Przyjęto:** N-O0-06: nadproże żelbetowe 18×25 cm, C25/30, dołem 5φ10, strzemiona φ6 co 12 cm (2-cięte), oparcie ≥ 20 cm.  
+**Przyjęto:** N-O0-06: nadproże żelbetowe 18×25 cm, C25/30, dołem 5φ10, strzemiona φ6 co 13 cm (2-cięte), oparcie ≥ 20 cm.  
 
 ### Poz. 6.7 — Nadproże N-O0-08 nad otworem O0-08 w ścianie S0-02 (światło 2,00 m)
 
-Element modelu: `N-O0-08` · maks. wykorzystanie nośności η = 95% · wszystkie warunki spełnione
+Element modelu: `N-O0-08` · maks. wykorzystanie nośności η = 100% · wszystkie warunki spełnione
 
 #### Obliczenia
 
@@ -1608,34 +1608,34 @@ Element modelu: `N-O0-08` · maks. wykorzystanie nośności η = 95% · wszystki
 
 - Rozpiętość obliczeniowa: l_eff = l_n + min(a; h) = 2,00 + 0,25 = **2,25** m *(5.3.2.2)*
 - Przekrój: b × h = **18 × 25 cm**
-- Obciążenie (średnio nad otworem; bez efektu przesklepienia [UPR]): g_k; q_k = **39,46; 11,76** kN/m
-- Obciążenie obliczeniowe: q_d = **59,77** kN/m
-- Moment: M_Ed = q_d·l_eff²/8 = 59,77·2,250²/8 = **37,82** kNm
-- Siła poprzeczna: V_Ed = q_d·l_n/2 = 59,77·2,00/2 = **59,77** kN
+- Obciążenie (średnio nad otworem; bez efektu przesklepienia [UPR]): g_k; q_k = **38,58; 11,76** kN/m
+- Obciążenie obliczeniowe: q_d = **58,58** kN/m
+- Moment: M_Ed = q_d·l_eff²/8 = 58,58·2,250²/8 = **37,07** kNm
+- Siła poprzeczna: V_Ed = q_d·l_n/2 = 58,58·2,00/2 = **58,58** kN
 
 ##### N-O0-08 — zginanie
 
 - Wysokość użyteczna: d = **213** mm
-- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 37,82·10⁶/(180·213²·1,0·17,86) = **0,2594** *(3.1.7(3))*
-- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,2594) = **0,3063**
-- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,306 ≤ 0,493 = **spełniony**
-- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,3063·180·213·1,0·17,86/434,8 = **482** mm²
+- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 37,07·10⁶/(180·213²·1,0·17,86) = **0,2542** *(3.1.7(3))*
+- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,2542) = **0,2989**
+- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,299 ≤ 0,493 = **spełniony**
+- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,2989·180·213·1,0·17,86/434,8 = **471** mm²
 - Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,6/500·180·213; 0,0013·180·213) = **52** mm² *((9.1N) + NA)*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Zbrojenie dolne | A_s,req = 482 mm² | A_s,prov = 550 mm² | 88% | spełniony | 6.1 |
+| Zbrojenie dolne | A_s,req = 471 mm² | A_s,prov = 471 mm² | 100% | spełniony | 6.1 |
 
 ##### N-O0-08 — ścinanie
 
 - Współczynnik skali: k = 1 + √(200/d) ≤ 2,0 = 1 + √(200/213) = **1,969**
-- Stopień zbrojenia podłużnego: ρ_l = A_sl/(b_w·d) ≤ 0,02 = 550/(180·213) = **0,01434**
-- Nośność na ścinanie: V_Rd,c = C_Rd,c·k·(100·ρ_l·f_ck)^(1/3)·b_w·d = 0,1286·1,969·(100·0,01434·25)^(1/3)·180·213·10⁻³ = **32,00** kN *((6.2.a); C_Rd,c = 0,18/γ_c)*
+- Stopień zbrojenia podłużnego: ρ_l = A_sl/(b_w·d) ≤ 0,02 = 471/(180·213) = **0,01229**
+- Nośność na ścinanie: V_Rd,c = C_Rd,c·k·(100·ρ_l·f_ck)^(1/3)·b_w·d = 0,1286·1,969·(100·0,01229·25)^(1/3)·180·213·10⁻³ = **30,40** kN *((6.2.a); C_Rd,c = 0,18/γ_c)*
 - Wartość minimalna: V_Rd,c,min = v_min·b_w·d, v_min = 0,035·k^(3/2)·f_ck^(1/2) = 0,4835·180·213·10⁻³ = **18,54** kN *((6.2.b), (6.3N))*
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·213 = **192** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 180·192·0,540·17,86/(2,00 + 0,500)·10⁻³ = **133,09** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 56,5·192·434,8·2,00/(59,77·10³) = **158** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 56,5·192·434,8·2,00/(58,58·10³) = **161** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·213 = **160** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 56,5/(0,00080·180) = **393** mm *((9.5N))*
 - Przyjęto strzemiona: φ6 2-cięte co s = **150** mm
@@ -1643,33 +1643,33 @@ Element modelu: `N-O0-08` · maks. wykorzystanie nośności η = 95% · wszystki
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Nośność krzyżulców betonowych | V_Ed = 59,77 kN | V_Rd,max = 133,09 kN | 45% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 59,77 kN | V_Rd,s = 62,84 kN | 95% | spełniony | (6.8) |
+| Nośność krzyżulców betonowych | V_Ed = 58,58 kN | V_Rd,max = 133,09 kN | 44% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 58,58 kN | V_Rd,s = 62,84 kN | 93% | spełniony | (6.8) |
 
 ##### N-O0-08 — ugięcie
 
-- Stopień zbrojenia wymagany: ρ = A_s,req/(b·d) = 482/(180·213) = **0,01258**
+- Stopień zbrojenia wymagany: ρ = A_s,req/(b·d) = 471/(180·213) = **0,01227**
 - Wartość odniesienia: ρ₀ = √f_ck·10⁻³ = √25·10⁻³ = **0,00500**
-- Graniczne l/d (ρ > ρ₀): K·[11 + 1,5·√f_ck·ρ₀/(ρ − ρ') + 1/12·√f_ck·√(ρ'/ρ₀)] = **14,0** *((7.16b))*
-- Mnożnik od naprężeń w stali: 310/σ_s ≈ 500/(f_yk·A_s,req/A_s,prov) ≤ 1,5 = 500/(500·482/550) = **1,140** *((7.17))*
+- Graniczne l/d (ρ > ρ₀): K·[11 + 1,5·√f_ck·ρ₀/(ρ − ρ') + 1/12·√f_ck·√(ρ'/ρ₀)] = **14,1** *((7.16b))*
+- Mnożnik od naprężeń w stali: 310/σ_s ≈ 500/(f_yk·A_s,req/A_s,prov) ≤ 1,5 = 500/(500·471/471) = **1,001** *((7.17))*
 - Smukłość rzeczywista: l_eff/d = 2,25/0,213 = **10,6**
 - *Obliczenie ugięcia (7.4.3)*
 - Efektywny moduł sprężystości: E_c,eff = E_cm/(1 + φ) = 31000/(1 + 2,5) = **8857** MPa *((7.20))*
 - Stosunek modułów: α_e = E_s/E_c,eff = 200000/8857 = **22,58**
-- Przekrój niezarysowany: x_I; I_I = **144,0 mm; 309,7·10⁶ mm⁴**
-- Przekrój zarysowany: x_II; I_II = **115,8 mm; 210,5·10⁶ mm⁴**
-- Moment rysujący: M_cr = f_ctm·I_I/(h − x_I) = 2,6·309,7·10⁶/(250 − 144,0) = **7,60** kNm
-- Współczynnik rozkładu: ζ = 1 − β·(M_cr/M_qp)², β = 0,5 = 1 − 0,5·(7,60/25,73)² = **0,956** *((7.19))*
-- Ugięcie od obciążeń (quasi-stała): w_q = ζ·w_II + (1 − ζ)·w_I = 0,956·7,28 + 0,044·4,95 = **7,18** mm *((7.18))*
-- Ugięcie od skurczu: w_cs = k·(1/r_cs)·l², 1/r_cs = ε_cs·α_e·S/I = 0,125·2,242·10⁻⁶·2250² = **1,42** mm *((7.21))*
-- Ugięcie całkowite: w = w_q + w_cs = 7,18 + 1,42 = **8,59** mm
+- Przekrój niezarysowany: x_I; I_I = **141,8 mm; 301,0·10⁶ mm⁴**
+- Przekrój zarysowany: x_II; I_II = **110,2 mm; 192,7·10⁶ mm⁴**
+- Moment rysujący: M_cr = f_ctm·I_I/(h − x_I) = 2,6·301,0·10⁶/(250 − 141,8) = **7,24** kNm
+- Współczynnik rozkładu: ζ = 1 − β·(M_cr/M_qp)², β = 0,5 = 1 − 0,5·(7,24/25,17)² = **0,959** *((7.19))*
+- Ugięcie od obciążeń (quasi-stała): w_q = ζ·w_II + (1 − ζ)·w_I = 0,959·7,77 + 0,041·4,98 = **7,66** mm *((7.18))*
+- Ugięcie od skurczu: w_cs = k·(1/r_cs)·l², 1/r_cs = ε_cs·α_e·S/I = 0,125·2,217·10⁻⁶·2250² = **1,40** mm *((7.21))*
+- Ugięcie całkowite: w = w_q + w_cs = 7,66 + 1,40 = **9,06** mm
 - Ugięcie dopuszczalne: w_lim = L/250 = 2250/250 = **9,0** mm *(7.4.1(4))*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Ugięcie — graniczna smukłość l/d (7.4.2) | l/d = 10,6  | (l/d)_lim = 15,9  | 66% | spełniony | (7.16), tabl. 7.4N |
+| Ugięcie — graniczna smukłość l/d (7.4.2) | l/d = 10,6  | (l/d)_lim = 14,1  | 75% | spełniony | (7.16), tabl. 7.4N |
 
-> l/d spełnione — obliczenie (7.4.3) informacyjnie: w = 8,6 mm ≤? 9,0 mm.
+> l/d spełnione — obliczenie (7.4.3) informacyjnie: w = 9,1 mm ≤? 9,0 mm.
 
 ##### N-O0-08 — docisk na murze (oparcie 25 cm)
 
@@ -1680,13 +1680,13 @@ Element modelu: `N-O0-08` · maks. wykorzystanie nośności η = 95% · wszystki
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Docisk | N_Edc = 67,24 kN | N_Rdc = 279,23 kN | 24% | spełniony | PN-EN 1996-1-1 (6.9) |
+| Docisk | N_Edc = 65,90 kN | N_Rdc = 279,23 kN | 24% | spełniony | PN-EN 1996-1-1 (6.9) |
 
 > Dodatkowo sprawdzić ścianę w połowie wysokości pod oparciem (6.1.3(4)) — obejmuje to sprawdzenie ściany/filarka.
 
 #### Wnioski
 
-**Przyjęto:** N-O0-08: nadproże żelbetowe 18×25 cm, C25/30, dołem 7φ10, strzemiona φ6 co 15 cm (2-cięte), oparcie ≥ 25 cm.  
+**Przyjęto:** N-O0-08: nadproże żelbetowe 18×25 cm, C25/30, dołem 6φ10, strzemiona φ6 co 15 cm (2-cięte), oparcie ≥ 25 cm.  
 
 ### Poz. 6.8 — Nadproże N-O0-09 nad otworem O0-09 w ścianie S0-04 (światło 1,50 m)
 
@@ -1698,18 +1698,18 @@ Element modelu: `N-O0-09` · maks. wykorzystanie nośności η = 73% · wszystki
 
 - Rozpiętość obliczeniowa: l_eff = l_n + min(a; h) = 1,50 + 0,20 = **1,70** m *(5.3.2.2)*
 - Przekrój: b × h = **18 × 51 cm (zespolone z płytą stropu)**
-- Obciążenie (średnio nad otworem; bez efektu przesklepienia [UPR]): g_k; q_k = **24,34; 7,69** kN/m
-- Obciążenie obliczeniowe: q_d = **36,89** kN/m
-- Moment: M_Ed = q_d·l_eff²/8 = 36,89·1,700²/8 = **13,33** kNm
-- Siła poprzeczna: V_Ed = q_d·l_n/2 = 36,89·1,50/2 = **27,67** kN
+- Obciążenie (średnio nad otworem; bez efektu przesklepienia [UPR]): g_k; q_k = **23,25; 7,69** kN/m
+- Obciążenie obliczeniowe: q_d = **35,41** kN/m
+- Moment: M_Ed = q_d·l_eff²/8 = 35,41·1,700²/8 = **12,79** kNm
+- Siła poprzeczna: V_Ed = q_d·l_n/2 = 35,41·1,50/2 = **26,56** kN
 
 ##### N-O0-09 — zginanie
 
 - Wysokość użyteczna: d = **473** mm
-- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 13,33·10⁶/(180·473²·1,0·17,86) = **0,0185** *(3.1.7(3))*
-- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0185) = **0,0187**
-- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,019 ≤ 0,493 = **spełniony**
-- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0187·180·473·1,0·17,86/434,8 = **65** mm²
+- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 12,79·10⁶/(180·473²·1,0·17,86) = **0,0178** *(3.1.7(3))*
+- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0178) = **0,0180**
+- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,018 ≤ 0,493 = **spełniony**
+- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0180·180·473·1,0·17,86/434,8 = **63** mm²
 - Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,6/500·180·473; 0,0013·180·473) = **115** mm² *((9.1N) + NA)*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
@@ -1725,7 +1725,7 @@ Element modelu: `N-O0-09` · maks. wykorzystanie nośności η = 73% · wszystki
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·473 = **426** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 180·426·0,540·17,86/(2,00 + 0,500)·10⁻³ = **295,56** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 56,5·426·434,8·2,00/(27,67·10³) = **757** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 56,5·426·434,8·2,00/(26,56·10³) = **788** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·473 = **355** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 56,5/(0,00080·180) = **393** mm *((9.5N))*
 - Przyjęto strzemiona: φ6 2-cięte co s = **350** mm
@@ -1733,17 +1733,17 @@ Element modelu: `N-O0-09` · maks. wykorzystanie nośności η = 73% · wszystki
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Nośność krzyżulców betonowych | V_Ed = 27,67 kN | V_Rd,max = 295,56 kN | 9% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 27,67 kN | V_Rd,s = 59,81 kN | 46% | spełniony | (6.8) |
+| Nośność krzyżulców betonowych | V_Ed = 26,56 kN | V_Rd,max = 295,56 kN | 9% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 26,56 kN | V_Rd,s = 59,81 kN | 44% | spełniony | (6.8) |
 
 > V_Ed ≤ V_Rd,c = 31,59 kN — zbrojenie poprzeczne minimalne (9.2.2(5)).
 
 ##### N-O0-09 — ugięcie
 
-- Stopień zbrojenia wymagany: ρ = A_s,req/(b·d) = 65/(180·473) = **0,00077**
+- Stopień zbrojenia wymagany: ρ = A_s,req/(b·d) = 63/(180·473) = **0,00074**
 - Wartość odniesienia: ρ₀ = √f_ck·10⁻³ = √25·10⁻³ = **0,00500**
-- Graniczne l/d (ρ ≤ ρ₀): K·[11 + 1,5·√f_ck·ρ₀/ρ + 3,2·√f_ck·(ρ₀/ρ − 1)^(3/2)] = 1,0·[11 + 1,5·5,000·6,508 + 3,2·5,000·(6,508 − 1)^1,5] = **266,6** *((7.16a))*
-- Mnożnik od naprężeń w stali: 310/σ_s ≈ 500/(f_yk·A_s,req/A_s,prov) ≤ 1,5 = 500/(500·65/157) = **1,500** *((7.17))*
+- Graniczne l/d (ρ ≤ ρ₀): K·[11 + 1,5·√f_ck·ρ₀/ρ + 3,2·√f_ck·(ρ₀/ρ − 1)^(3/2)] = 1,0·[11 + 1,5·5,000·6,782 + 3,2·5,000·(6,782 − 1)^1,5] = **284,3** *((7.16a))*
+- Mnożnik od naprężeń w stali: 310/σ_s ≈ 500/(f_yk·A_s,req/A_s,prov) ≤ 1,5 = 500/(500·63/157) = **1,500** *((7.17))*
 - Smukłość rzeczywista: l_eff/d = 1,70/0,473 = **3,6**
 - *Obliczenie ugięcia (7.4.3)*
 - Efektywny moduł sprężystości: E_c,eff = E_cm/(1 + φ) = 31000/(1 + 2,5) = **8857** MPa *((7.20))*
@@ -1752,14 +1752,14 @@ Element modelu: `N-O0-09` · maks. wykorzystanie nośności η = 73% · wszystki
 - Przekrój zarysowany: x_II; I_II = **118,2 mm; 545,6·10⁶ mm⁴**
 - Moment rysujący: M_cr = f_ctm·I_I/(h − x_I) = 2,6·2152,1·10⁶/(510 − 263,1) = **22,66** kNm
 - Współczynnik rozkładu: ζ = 1 − β·(M_cr/M_qp)², β = 0,5 = M_qp ≤ M_cr → 0 = **0,000** *((7.19))*
-- Ugięcie od obciążeń (quasi-stała): w_q = ζ·w_II + (1 − ζ)·w_I = 0,000·0,57 + 1,000·0,14 = **0,14** mm *((7.18))*
+- Ugięcie od obciążeń (quasi-stała): w_q = ζ·w_II + (1 − ζ)·w_I = 0,000·0,54 + 1,000·0,14 = **0,14** mm *((7.18))*
 - Ugięcie od skurczu: w_cs = k·(1/r_cs)·l², 1/r_cs = ε_cs·α_e·S/I = 0,125·0,138·10⁻⁶·1700² = **0,05** mm *((7.21))*
 - Ugięcie całkowite: w = w_q + w_cs = 0,14 + 0,05 = **0,19** mm
 - Ugięcie dopuszczalne: w_lim = L/250 = 1700/250 = **6,8** mm *(7.4.1(4))*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Ugięcie — graniczna smukłość l/d (7.4.2) | l/d = 3,6  | (l/d)_lim = 400,0  | 1% | spełniony | (7.16), tabl. 7.4N |
+| Ugięcie — graniczna smukłość l/d (7.4.2) | l/d = 3,6  | (l/d)_lim = 426,4  | 1% | spełniony | (7.16), tabl. 7.4N |
 
 > l/d spełnione — obliczenie (7.4.3) informacyjnie: w = 0,2 mm ≤? 6,8 mm.
 
@@ -1772,7 +1772,7 @@ Element modelu: `N-O0-09` · maks. wykorzystanie nośności η = 73% · wszystki
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Docisk | N_Edc = 31,36 kN | N_Rdc = 233,05 kN | 13% | spełniony | PN-EN 1996-1-1 (6.9) |
+| Docisk | N_Edc = 30,10 kN | N_Rdc = 233,05 kN | 13% | spełniony | PN-EN 1996-1-1 (6.9) |
 
 > Dodatkowo sprawdzić ścianę w połowie wysokości pod oparciem (6.1.3(4)) — obejmuje to sprawdzenie ściany/filarka.
 
@@ -1790,18 +1790,18 @@ Element modelu: `N-O1-01` · maks. wykorzystanie nośności η = 73% · wszystki
 
 - Rozpiętość obliczeniowa: l_eff = l_n + min(a; h) = 2,40 + 0,25 = **2,65** m *(5.3.2.2)*
 - Przekrój: b × h = **18 × 51 cm (zespolone z płytą stropu)**
-- Obciążenie (średnio nad otworem; bez efektu przesklepienia [UPR]): g_k; q_k = **8,21; 1,69** kN/m
-- Obciążenie obliczeniowe: q_d = **12,16** kN/m
-- Moment: M_Ed = q_d·l_eff²/8 = 12,16·2,650²/8 = **10,68** kNm
-- Siła poprzeczna: V_Ed = q_d·l_n/2 = 12,16·2,40/2 = **14,60** kN
+- Obciążenie (średnio nad otworem; bez efektu przesklepienia [UPR]): g_k; q_k = **7,12; 1,69** kN/m
+- Obciążenie obliczeniowe: q_d = **10,69** kN/m
+- Moment: M_Ed = q_d·l_eff²/8 = 10,69·2,650²/8 = **9,38** kNm
+- Siła poprzeczna: V_Ed = q_d·l_n/2 = 10,69·2,40/2 = **12,83** kN
 
 ##### N-O1-01 — zginanie
 
 - Wysokość użyteczna: d = **473** mm
-- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 10,68·10⁶/(180·473²·1,0·17,86) = **0,0148** *(3.1.7(3))*
-- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0148) = **0,0150**
-- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,015 ≤ 0,493 = **spełniony**
-- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0150·180·473·1,0·17,86/434,8 = **52** mm²
+- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 9,38·10⁶/(180·473²·1,0·17,86) = **0,0130** *(3.1.7(3))*
+- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0130) = **0,0131**
+- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,013 ≤ 0,493 = **spełniony**
+- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0131·180·473·1,0·17,86/434,8 = **46** mm²
 - Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,6/500·180·473; 0,0013·180·473) = **115** mm² *((9.1N) + NA)*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
@@ -1817,7 +1817,7 @@ Element modelu: `N-O1-01` · maks. wykorzystanie nośności η = 73% · wszystki
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·473 = **426** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 180·426·0,540·17,86/(2,00 + 0,500)·10⁻³ = **295,56** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 56,5·426·434,8·2,00/(14,60·10³) = **1434** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 56,5·426·434,8·2,00/(12,83·10³) = **1632** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·473 = **355** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 56,5/(0,00080·180) = **393** mm *((9.5N))*
 - Przyjęto strzemiona: φ6 2-cięte co s = **350** mm
@@ -1825,17 +1825,17 @@ Element modelu: `N-O1-01` · maks. wykorzystanie nośności η = 73% · wszystki
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Nośność krzyżulców betonowych | V_Ed = 14,60 kN | V_Rd,max = 295,56 kN | 5% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 14,60 kN | V_Rd,s = 59,81 kN | 24% | spełniony | (6.8) |
+| Nośność krzyżulców betonowych | V_Ed = 12,83 kN | V_Rd,max = 295,56 kN | 4% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 12,83 kN | V_Rd,s = 59,81 kN | 21% | spełniony | (6.8) |
 
 > V_Ed ≤ V_Rd,c = 31,59 kN — zbrojenie poprzeczne minimalne (9.2.2(5)).
 
 ##### N-O1-01 — ugięcie
 
-- Stopień zbrojenia wymagany: ρ = A_s,req/(b·d) = 52/(180·473) = **0,00061**
+- Stopień zbrojenia wymagany: ρ = A_s,req/(b·d) = 46/(180·473) = **0,00054**
 - Wartość odniesienia: ρ₀ = √f_ck·10⁻³ = √25·10⁻³ = **0,00500**
-- Graniczne l/d (ρ ≤ ρ₀): K·[11 + 1,5·√f_ck·ρ₀/ρ + 3,2·√f_ck·(ρ₀/ρ − 1)^(3/2)] = 1,0·[11 + 1,5·5,000·8,137 + 3,2·5,000·(8,137 − 1)^1,5] = **377,1** *((7.16a))*
-- Mnożnik od naprężeń w stali: 310/σ_s ≈ 500/(f_yk·A_s,req/A_s,prov) ≤ 1,5 = 500/(500·52/157) = **1,500** *((7.17))*
+- Graniczne l/d (ρ ≤ ρ₀): K·[11 + 1,5·√f_ck·ρ₀/ρ + 3,2·√f_ck·(ρ₀/ρ − 1)^(3/2)] = 1,0·[11 + 1,5·5,000·9,268 + 3,2·5,000·(9,268 − 1)^1,5] = **460,9** *((7.16a))*
+- Mnożnik od naprężeń w stali: 310/σ_s ≈ 500/(f_yk·A_s,req/A_s,prov) ≤ 1,5 = 500/(500·46/157) = **1,500** *((7.17))*
 - Smukłość rzeczywista: l_eff/d = 2,65/0,473 = **5,6**
 - *Obliczenie ugięcia (7.4.3)*
 - Efektywny moduł sprężystości: E_c,eff = E_cm/(1 + φ) = 31000/(1 + 2,5) = **8857** MPa *((7.20))*
@@ -1844,14 +1844,14 @@ Element modelu: `N-O1-01` · maks. wykorzystanie nośności η = 73% · wszystki
 - Przekrój zarysowany: x_II; I_II = **118,2 mm; 545,6·10⁶ mm⁴**
 - Moment rysujący: M_cr = f_ctm·I_I/(h − x_I) = 2,6·2152,1·10⁶/(510 − 263,1) = **22,66** kNm
 - Współczynnik rozkładu: ζ = 1 − β·(M_cr/M_qp)², β = 0,5 = M_qp ≤ M_cr → 0 = **0,000** *((7.19))*
-- Ugięcie od obciążeń (quasi-stała): w_q = ζ·w_II + (1 − ζ)·w_I = 0,000·1,09 + 1,000·0,28 = **0,28** mm *((7.18))*
+- Ugięcie od obciążeń (quasi-stała): w_q = ζ·w_II + (1 − ζ)·w_I = 0,000·0,95 + 1,000·0,24 = **0,24** mm *((7.18))*
 - Ugięcie od skurczu: w_cs = k·(1/r_cs)·l², 1/r_cs = ε_cs·α_e·S/I = 0,125·0,138·10⁻⁶·2650² = **0,12** mm *((7.21))*
-- Ugięcie całkowite: w = w_q + w_cs = 0,28 + 0,12 = **0,40** mm
+- Ugięcie całkowite: w = w_q + w_cs = 0,24 + 0,12 = **0,36** mm
 - Ugięcie dopuszczalne: w_lim = L/250 = 2650/250 = **10,6** mm *(7.4.1(4))*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Ugięcie — graniczna smukłość l/d (7.4.2) | l/d = 5,6  | (l/d)_lim = 565,7  | 1% | spełniony | (7.16), tabl. 7.4N |
+| Ugięcie — graniczna smukłość l/d (7.4.2) | l/d = 5,6  | (l/d)_lim = 691,4  | 1% | spełniony | (7.16), tabl. 7.4N |
 
 > l/d spełnione — obliczenie (7.4.3) informacyjnie: w = 0,4 mm ≤? 10,6 mm.
 
@@ -1864,7 +1864,7 @@ Element modelu: `N-O1-01` · maks. wykorzystanie nośności η = 73% · wszystki
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Docisk | N_Edc = 16,12 kN | N_Rdc = 279,91 kN | 6% | spełniony | PN-EN 1996-1-1 (6.9) |
+| Docisk | N_Edc = 14,16 kN | N_Rdc = 279,91 kN | 5% | spełniony | PN-EN 1996-1-1 (6.9) |
 
 > Dodatkowo sprawdzić ścianę w połowie wysokości pod oparciem (6.1.3(4)) — obejmuje to sprawdzenie ściany/filarka.
 
@@ -1874,7 +1874,7 @@ Element modelu: `N-O1-01` · maks. wykorzystanie nośności η = 73% · wszystki
 
 ### Poz. 6.10 — Nadproże N-O1-02 nad otworem O1-02 w ścianie S1-01 (światło 3,60 m)
 
-Element modelu: `N-O1-02` · maks. wykorzystanie nośności η = 99% · wszystkie warunki spełnione
+Element modelu: `N-O1-02` · maks. wykorzystanie nośności η = 90% · wszystkie warunki spełnione
 
 #### Obliczenia
 
@@ -1882,23 +1882,23 @@ Element modelu: `N-O1-02` · maks. wykorzystanie nośności η = 99% · wszystki
 
 - Rozpiętość obliczeniowa: l_eff = l_n + min(a; h) = 3,60 + 0,25 = **3,85** m *(5.3.2.2)*
 - Przekrój: b × h = **18 × 51 cm (zespolone z płytą stropu)**
-- Obciążenie (średnio nad otworem; bez efektu przesklepienia [UPR]): g_k; q_k = **11,23; 2,76** kN/m
-- Obciążenie obliczeniowe: q_d = **16,92** kN/m
-- Moment: M_Ed = q_d·l_eff²/8 = 16,92·3,850²/8 = **31,34** kNm
-- Siła poprzeczna: V_Ed = q_d·l_n/2 = 16,92·3,60/2 = **30,45** kN
+- Obciążenie (średnio nad otworem; bez efektu przesklepienia [UPR]): g_k; q_k = **10,13; 2,76** kN/m
+- Obciążenie obliczeniowe: q_d = **15,44** kN/m
+- Moment: M_Ed = q_d·l_eff²/8 = 15,44·3,850²/8 = **28,61** kNm
+- Siła poprzeczna: V_Ed = q_d·l_n/2 = 15,44·3,60/2 = **27,80** kN
 
 ##### N-O1-02 — zginanie
 
 - Wysokość użyteczna: d = **473** mm
-- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 31,34·10⁶/(180·473²·1,0·17,86) = **0,0436** *(3.1.7(3))*
-- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0436) = **0,0446**
-- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,045 ≤ 0,493 = **spełniony**
-- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0446·180·473·1,0·17,86/434,8 = **156** mm²
+- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 28,61·10⁶/(180·473²·1,0·17,86) = **0,0398** *(3.1.7(3))*
+- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0398) = **0,0406**
+- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,041 ≤ 0,493 = **spełniony**
+- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0406·180·473·1,0·17,86/434,8 = **142** mm²
 - Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,6/500·180·473; 0,0013·180·473) = **115** mm² *((9.1N) + NA)*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Zbrojenie dolne | A_s,req = 156 mm² | A_s,prov = 157 mm² | 99% | spełniony | 6.1 |
+| Zbrojenie dolne | A_s,req = 142 mm² | A_s,prov = 157 mm² | 90% | spełniony | 6.1 |
 
 ##### N-O1-02 — ścinanie
 
@@ -1909,7 +1909,7 @@ Element modelu: `N-O1-02` · maks. wykorzystanie nośności η = 99% · wszystki
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·473 = **426** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 180·426·0,540·17,86/(2,00 + 0,500)·10⁻³ = **295,56** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 56,5·426·434,8·2,00/(30,45·10³) = **687** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 56,5·426·434,8·2,00/(27,80·10³) = **753** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·473 = **355** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 56,5/(0,00080·180) = **393** mm *((9.5N))*
 - Przyjęto strzemiona: φ6 2-cięte co s = **350** mm
@@ -1917,17 +1917,17 @@ Element modelu: `N-O1-02` · maks. wykorzystanie nośności η = 99% · wszystki
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Nośność krzyżulców betonowych | V_Ed = 30,45 kN | V_Rd,max = 295,56 kN | 10% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 30,45 kN | V_Rd,s = 59,81 kN | 51% | spełniony | (6.8) |
+| Nośność krzyżulców betonowych | V_Ed = 27,80 kN | V_Rd,max = 295,56 kN | 9% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 27,80 kN | V_Rd,s = 59,81 kN | 46% | spełniony | (6.8) |
 
 > V_Ed ≤ V_Rd,c = 31,59 kN — zbrojenie poprzeczne minimalne (9.2.2(5)).
 
 ##### N-O1-02 — ugięcie
 
-- Stopień zbrojenia wymagany: ρ = A_s,req/(b·d) = 156/(180·473) = **0,00183**
+- Stopień zbrojenia wymagany: ρ = A_s,req/(b·d) = 142/(180·473) = **0,00167**
 - Wartość odniesienia: ρ₀ = √f_ck·10⁻³ = √25·10⁻³ = **0,00500**
-- Graniczne l/d (ρ ≤ ρ₀): K·[11 + 1,5·√f_ck·ρ₀/ρ + 3,2·√f_ck·(ρ₀/ρ − 1)^(3/2)] = 1,0·[11 + 1,5·5,000·2,731 + 3,2·5,000·(2,731 − 1)^1,5] = **67,9** *((7.16a))*
-- Mnożnik od naprężeń w stali: 310/σ_s ≈ 500/(f_yk·A_s,req/A_s,prov) ≤ 1,5 = 500/(500·156/157) = **1,008** *((7.17))*
+- Graniczne l/d (ρ ≤ ρ₀): K·[11 + 1,5·√f_ck·ρ₀/ρ + 3,2·√f_ck·(ρ₀/ρ − 1)^(3/2)] = 1,0·[11 + 1,5·5,000·2,998 + 3,2·5,000·(2,998 − 1)^1,5] = **78,7** *((7.16a))*
+- Mnożnik od naprężeń w stali: 310/σ_s ≈ 500/(f_yk·A_s,req/A_s,prov) ≤ 1,5 = 500/(500·142/157) = **1,106** *((7.17))*
 - Smukłość rzeczywista: l_eff/d = 3,85/0,473 = **8,1**
 - *Obliczenie ugięcia (7.4.3)*
 - Efektywny moduł sprężystości: E_c,eff = E_cm/(1 + φ) = 31000/(1 + 2,5) = **8857** MPa *((7.20))*
@@ -1936,16 +1936,16 @@ Element modelu: `N-O1-02` · maks. wykorzystanie nośności η = 99% · wszystki
 - Przekrój zarysowany: x_II; I_II = **118,2 mm; 545,6·10⁶ mm⁴**
 - Moment rysujący: M_cr = f_ctm·I_I/(h − x_I) = 2,6·2152,1·10⁶/(510 − 263,1) = **22,66** kNm
 - Współczynnik rozkładu: ζ = 1 − β·(M_cr/M_qp)², β = 0,5 = M_qp ≤ M_cr → 0 = **0,000** *((7.19))*
-- Ugięcie od obciążeń (quasi-stała): w_q = ζ·w_II + (1 − ζ)·w_I = 0,000·6,65 + 1,000·1,68 = **1,68** mm *((7.18))*
+- Ugięcie od obciążeń (quasi-stała): w_q = ζ·w_II + (1 − ζ)·w_I = 0,000·6,00 + 1,000·1,52 = **1,52** mm *((7.18))*
 - Ugięcie od skurczu: w_cs = k·(1/r_cs)·l², 1/r_cs = ε_cs·α_e·S/I = 0,125·0,138·10⁻⁶·3850² = **0,26** mm *((7.21))*
-- Ugięcie całkowite: w = w_q + w_cs = 1,68 + 0,26 = **1,94** mm
+- Ugięcie całkowite: w = w_q + w_cs = 1,52 + 0,26 = **1,78** mm
 - Ugięcie dopuszczalne: w_lim = L/250 = 3850/250 = **15,4** mm *(7.4.1(4))*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Ugięcie — graniczna smukłość l/d (7.4.2) | l/d = 8,1  | (l/d)_lim = 68,4  | 12% | spełniony | (7.16), tabl. 7.4N |
+| Ugięcie — graniczna smukłość l/d (7.4.2) | l/d = 8,1  | (l/d)_lim = 87,0  | 9% | spełniony | (7.16), tabl. 7.4N |
 
-> l/d spełnione — obliczenie (7.4.3) informacyjnie: w = 1,9 mm ≤? 15,4 mm.
+> l/d spełnione — obliczenie (7.4.3) informacyjnie: w = 1,8 mm ≤? 15,4 mm.
 
 ##### N-O1-02 — docisk na murze (oparcie 25 cm)
 
@@ -1956,7 +1956,7 @@ Element modelu: `N-O1-02` · maks. wykorzystanie nośności η = 99% · wszystki
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Docisk | N_Edc = 32,56 kN | N_Rdc = 287,00 kN | 11% | spełniony | PN-EN 1996-1-1 (6.9) |
+| Docisk | N_Edc = 29,73 kN | N_Rdc = 287,00 kN | 10% | spełniony | PN-EN 1996-1-1 (6.9) |
 
 > Dodatkowo sprawdzić ścianę w połowie wysokości pod oparciem (6.1.3(4)) — obejmuje to sprawdzenie ściany/filarka.
 
@@ -1966,7 +1966,7 @@ Element modelu: `N-O1-02` · maks. wykorzystanie nośności η = 99% · wszystki
 
 ### Poz. 6.11 — Nadproże N-O1-03 nad otworem O1-03 w ścianie S1-02 (światło 2,40 m)
 
-Element modelu: `N-O1-03` · maks. wykorzystanie nośności η = 91% · wszystkie warunki spełnione
+Element modelu: `N-O1-03` · maks. wykorzystanie nośności η = 86% · wszystkie warunki spełnione
 
 #### Obliczenia
 
@@ -1974,23 +1974,23 @@ Element modelu: `N-O1-03` · maks. wykorzystanie nośności η = 91% · wszystki
 
 - Rozpiętość obliczeniowa: l_eff = l_n + min(a; h) = 2,40 + 0,25 = **2,65** m *(5.3.2.2)*
 - Przekrój: b × h = **18 × 25 cm**
-- Obciążenie (średnio nad otworem; bez efektu przesklepienia [UPR]): g_k; q_k = **13,30; 3,77** kN/m
-- Obciążenie obliczeniowe: q_d = **20,36** kN/m
-- Moment: M_Ed = q_d·l_eff²/8 = 20,36·2,650²/8 = **17,88** kNm
-- Siła poprzeczna: V_Ed = q_d·l_n/2 = 20,36·2,40/2 = **24,44** kN
+- Obciążenie (średnio nad otworem; bez efektu przesklepienia [UPR]): g_k; q_k = **12,42; 3,77** kN/m
+- Obciążenie obliczeniowe: q_d = **19,17** kN/m
+- Moment: M_Ed = q_d·l_eff²/8 = 19,17·2,650²/8 = **16,83** kNm
+- Siła poprzeczna: V_Ed = q_d·l_n/2 = 19,17·2,40/2 = **23,01** kN
 
 ##### N-O1-03 — zginanie
 
 - Wysokość użyteczna: d = **213** mm
-- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 17,88·10⁶/(180·213²·1,0·17,86) = **0,1226** *(3.1.7(3))*
-- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,1226) = **0,1312**
-- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,131 ≤ 0,493 = **spełniony**
-- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,1312·180·213·1,0·17,86/434,8 = **207** mm²
+- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 16,83·10⁶/(180·213²·1,0·17,86) = **0,1154** *(3.1.7(3))*
+- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,1154) = **0,1230**
+- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,123 ≤ 0,493 = **spełniony**
+- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,1230·180·213·1,0·17,86/434,8 = **194** mm²
 - Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,6/500·180·213; 0,0013·180·213) = **52** mm² *((9.1N) + NA)*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Zbrojenie dolne | A_s,req = 207 mm² | A_s,prov = 226 mm² | 91% | spełniony | 6.1 |
+| Zbrojenie dolne | A_s,req = 194 mm² | A_s,prov = 226 mm² | 86% | spełniony | 6.1 |
 
 ##### N-O1-03 — ścinanie
 
@@ -2001,7 +2001,7 @@ Element modelu: `N-O1-03` · maks. wykorzystanie nośności η = 91% · wszystki
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·213 = **192** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 180·192·0,540·17,86/(2,00 + 0,500)·10⁻³ = **133,09** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 56,5·192·434,8·2,00/(24,44·10³) = **386** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 56,5·192·434,8·2,00/(23,01·10³) = **410** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·213 = **160** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 56,5/(0,00080·180) = **393** mm *((9.5N))*
 - Przyjęto strzemiona: φ6 2-cięte co s = **150** mm
@@ -2009,15 +2009,17 @@ Element modelu: `N-O1-03` · maks. wykorzystanie nośności η = 91% · wszystki
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Nośność krzyżulców betonowych | V_Ed = 24,44 kN | V_Rd,max = 133,09 kN | 18% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 24,44 kN | V_Rd,s = 62,84 kN | 39% | spełniony | (6.8) |
+| Nośność krzyżulców betonowych | V_Ed = 23,01 kN | V_Rd,max = 133,09 kN | 17% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 23,01 kN | V_Rd,s = 62,84 kN | 37% | spełniony | (6.8) |
+
+> V_Ed ≤ V_Rd,c = 23,80 kN — zbrojenie poprzeczne minimalne (9.2.2(5)).
 
 ##### N-O1-03 — ugięcie
 
-- Stopień zbrojenia wymagany: ρ = A_s,req/(b·d) = 207/(180·213) = **0,00539**
+- Stopień zbrojenia wymagany: ρ = A_s,req/(b·d) = 194/(180·213) = **0,00505**
 - Wartość odniesienia: ρ₀ = √f_ck·10⁻³ = √25·10⁻³ = **0,00500**
-- Graniczne l/d (ρ > ρ₀): K·[11 + 1,5·√f_ck·ρ₀/(ρ − ρ') + 1/12·√f_ck·√(ρ'/ρ₀)] = **18,0** *((7.16b))*
-- Mnożnik od naprężeń w stali: 310/σ_s ≈ 500/(f_yk·A_s,req/A_s,prov) ≤ 1,5 = 500/(500·207/226) = **1,095** *((7.17))*
+- Graniczne l/d (ρ > ρ₀): K·[11 + 1,5·√f_ck·ρ₀/(ρ − ρ') + 1/12·√f_ck·√(ρ'/ρ₀)] = **18,4** *((7.16b))*
+- Mnożnik od naprężeń w stali: 310/σ_s ≈ 500/(f_yk·A_s,req/A_s,prov) ≤ 1,5 = 500/(500·194/226) = **1,168** *((7.17))*
 - Smukłość rzeczywista: l_eff/d = 2,65/0,213 = **12,4**
 - *Obliczenie ugięcia (7.4.3)*
 - Efektywny moduł sprężystości: E_c,eff = E_cm/(1 + φ) = 31000/(1 + 2,5) = **8857** MPa *((7.20))*
@@ -2025,17 +2027,17 @@ Element modelu: `N-O1-03` · maks. wykorzystanie nośności η = 91% · wszystki
 - Przekrój niezarysowany: x_I; I_I = **134,0 mm; 269,9·10⁶ mm⁴**
 - Przekrój zarysowany: x_II; I_II = **85,2 mm; 120,5·10⁶ mm⁴**
 - Moment rysujący: M_cr = f_ctm·I_I/(h − x_I) = 2,6·269,9·10⁶/(250 − 134,0) = **6,05** kNm
-- Współczynnik rozkładu: ζ = 1 − β·(M_cr/M_qp)², β = 0,5 = 1 − 0,5·(6,05/11,67)² = **0,866** *((7.19))*
-- Ugięcie od obciążeń (quasi-stała): w_q = ζ·w_II + (1 − ζ)·w_I = 0,866·8,00 + 0,134·3,57 = **7,40** mm *((7.18))*
-- Ugięcie od skurczu: w_cs = k·(1/r_cs)·l², 1/r_cs = ε_cs·α_e·S/I = 0,125·1,956·10⁻⁶·2650² = **1,72** mm *((7.21))*
-- Ugięcie całkowite: w = w_q + w_cs = 7,40 + 1,72 = **9,12** mm
+- Współczynnik rozkładu: ζ = 1 − β·(M_cr/M_qp)², β = 0,5 = 1 − 0,5·(6,05/10,90)² = **0,846** *((7.19))*
+- Ugięcie od obciążeń (quasi-stała): w_q = ζ·w_II + (1 − ζ)·w_I = 0,846·7,47 + 0,154·3,34 = **6,83** mm *((7.18))*
+- Ugięcie od skurczu: w_cs = k·(1/r_cs)·l², 1/r_cs = ε_cs·α_e·S/I = 0,125·1,925·10⁻⁶·2650² = **1,69** mm *((7.21))*
+- Ugięcie całkowite: w = w_q + w_cs = 6,83 + 1,69 = **8,52** mm
 - Ugięcie dopuszczalne: w_lim = L/250 = 2650/250 = **10,6** mm *(7.4.1(4))*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Ugięcie — graniczna smukłość l/d (7.4.2) | l/d = 12,4  | (l/d)_lim = 19,7  | 63% | spełniony | (7.16), tabl. 7.4N |
+| Ugięcie — graniczna smukłość l/d (7.4.2) | l/d = 12,4  | (l/d)_lim = 21,5  | 58% | spełniony | (7.16), tabl. 7.4N |
 
-> l/d spełnione — obliczenie (7.4.3) informacyjnie: w = 9,1 mm ≤? 10,6 mm.
+> l/d spełnione — obliczenie (7.4.3) informacyjnie: w = 8,5 mm ≤? 10,6 mm.
 
 ##### N-O1-03 — docisk na murze (oparcie 25 cm)
 
@@ -2046,7 +2048,7 @@ Element modelu: `N-O1-03` · maks. wykorzystanie nośności η = 91% · wszystki
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Docisk | N_Edc = 26,98 kN | N_Rdc = 287,00 kN | 9% | spełniony | PN-EN 1996-1-1 (6.9) |
+| Docisk | N_Edc = 25,41 kN | N_Rdc = 287,00 kN | 9% | spełniony | PN-EN 1996-1-1 (6.9) |
 
 > Dodatkowo sprawdzić ścianę w połowie wysokości pod oparciem (6.1.3(4)) — obejmuje to sprawdzenie ściany/filarka.
 
@@ -2064,18 +2066,18 @@ Element modelu: `N-O1-04` · maks. wykorzystanie nośności η = 33% · wszystki
 
 - Rozpiętość obliczeniowa: l_eff = l_n + min(a; h) = 1,00 + 0,20 = **1,20** m *(5.3.2.2)*
 - Przekrój: b × h = **18 × 25 cm**
-- Obciążenie (średnio nad otworem; bez efektu przesklepienia [UPR]): g_k; q_k = **11,59; 3,17** kN/m
-- Obciążenie obliczeniowe: q_d = **17,67** kN/m
-- Moment: M_Ed = q_d·l_eff²/8 = 17,67·1,200²/8 = **3,18** kNm
-- Siła poprzeczna: V_Ed = q_d·l_n/2 = 17,67·1,00/2 = **8,84** kN
+- Obciążenie (średnio nad otworem; bez efektu przesklepienia [UPR]): g_k; q_k = **10,71; 3,17** kN/m
+- Obciążenie obliczeniowe: q_d = **16,49** kN/m
+- Moment: M_Ed = q_d·l_eff²/8 = 16,49·1,200²/8 = **2,97** kNm
+- Siła poprzeczna: V_Ed = q_d·l_n/2 = 16,49·1,00/2 = **8,24** kN
 
 ##### N-O1-04 — zginanie
 
 - Wysokość użyteczna: d = **213** mm
-- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 3,18·10⁶/(180·213²·1,0·17,86) = **0,0218** *(3.1.7(3))*
-- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0218) = **0,0221**
-- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,022 ≤ 0,493 = **spełniony**
-- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0221·180·213·1,0·17,86/434,8 = **35** mm²
+- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 2,97·10⁶/(180·213²·1,0·17,86) = **0,0203** *(3.1.7(3))*
+- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0203) = **0,0206**
+- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,021 ≤ 0,493 = **spełniony**
+- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0206·180·213·1,0·17,86/434,8 = **32** mm²
 - Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,6/500·180·213; 0,0013·180·213) = **52** mm² *((9.1N) + NA)*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
@@ -2091,7 +2093,7 @@ Element modelu: `N-O1-04` · maks. wykorzystanie nośności η = 33% · wszystki
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·213 = **192** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 180·192·0,540·17,86/(2,00 + 0,500)·10⁻³ = **133,09** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 56,5·192·434,8·2,00/(8,84·10³) = **1067** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 56,5·192·434,8·2,00/(8,24·10³) = **1144** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·213 = **160** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 56,5/(0,00080·180) = **393** mm *((9.5N))*
 - Przyjęto strzemiona: φ6 2-cięte co s = **150** mm
@@ -2099,17 +2101,17 @@ Element modelu: `N-O1-04` · maks. wykorzystanie nośności η = 33% · wszystki
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Nośność krzyżulców betonowych | V_Ed = 8,84 kN | V_Rd,max = 133,09 kN | 7% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 8,84 kN | V_Rd,s = 62,84 kN | 14% | spełniony | (6.8) |
+| Nośność krzyżulców betonowych | V_Ed = 8,24 kN | V_Rd,max = 133,09 kN | 6% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 8,24 kN | V_Rd,s = 62,84 kN | 13% | spełniony | (6.8) |
 
 > V_Ed ≤ V_Rd,c = 21,08 kN — zbrojenie poprzeczne minimalne (9.2.2(5)).
 
 ##### N-O1-04 — ugięcie
 
-- Stopień zbrojenia wymagany: ρ = A_s,req/(b·d) = 35/(180·213) = **0,00091**
+- Stopień zbrojenia wymagany: ρ = A_s,req/(b·d) = 32/(180·213) = **0,00084**
 - Wartość odniesienia: ρ₀ = √f_ck·10⁻³ = √25·10⁻³ = **0,00500**
-- Graniczne l/d (ρ ≤ ρ₀): K·[11 + 1,5·√f_ck·ρ₀/ρ + 3,2·√f_ck·(ρ₀/ρ − 1)^(3/2)] = 1,0·[11 + 1,5·5,000·5,519 + 3,2·5,000·(5,519 − 1)^1,5] = **206,1** *((7.16a))*
-- Mnożnik od naprężeń w stali: 310/σ_s ≈ 500/(f_yk·A_s,req/A_s,prov) ≤ 1,5 = 500/(500·35/157) = **1,500** *((7.17))*
+- Graniczne l/d (ρ ≤ ρ₀): K·[11 + 1,5·√f_ck·ρ₀/ρ + 3,2·√f_ck·(ρ₀/ρ − 1)^(3/2)] = 1,0·[11 + 1,5·5,000·5,921 + 3,2·5,000·(5,921 − 1)^1,5] = **230,1** *((7.16a))*
+- Mnożnik od naprężeń w stali: 310/σ_s ≈ 500/(f_yk·A_s,req/A_s,prov) ≤ 1,5 = 500/(500·32/157) = **1,500** *((7.17))*
 - Smukłość rzeczywista: l_eff/d = 1,20/0,213 = **5,6**
 - *Obliczenie ugięcia (7.4.3)*
 - Efektywny moduł sprężystości: E_c,eff = E_cm/(1 + φ) = 31000/(1 + 2,5) = **8857** MPa *((7.20))*
@@ -2118,14 +2120,14 @@ Element modelu: `N-O1-04` · maks. wykorzystanie nośności η = 33% · wszystki
 - Przekrój zarysowany: x_II; I_II = **74,0 mm; 92,8·10⁶ mm⁴**
 - Moment rysujący: M_cr = f_ctm·I_I/(h − x_I) = 2,6·259,8·10⁶/(250 − 131,4) = **5,70** kNm
 - Współczynnik rozkładu: ζ = 1 − β·(M_cr/M_qp)², β = 0,5 = M_qp ≤ M_cr → 0 = **0,000** *((7.19))*
-- Ugięcie od obciążeń (quasi-stała): w_q = ζ·w_II + (1 − ζ)·w_I = 0,000·0,38 + 1,000·0,14 = **0,14** mm *((7.18))*
+- Ugięcie od obciążeń (quasi-stała): w_q = ζ·w_II + (1 − ζ)·w_I = 0,000·0,35 + 1,000·0,13 = **0,13** mm *((7.18))*
 - Ugięcie od skurczu: w_cs = k·(1/r_cs)·l², 1/r_cs = ε_cs·α_e·S/I = 0,125·0,445·10⁻⁶·1200² = **0,08** mm *((7.21))*
-- Ugięcie całkowite: w = w_q + w_cs = 0,14 + 0,08 = **0,22** mm
+- Ugięcie całkowite: w = w_q + w_cs = 0,13 + 0,08 = **0,21** mm
 - Ugięcie dopuszczalne: w_lim = L/250 = 1200/250 = **4,8** mm *(7.4.1(4))*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Ugięcie — graniczna smukłość l/d (7.4.2) | l/d = 5,6  | (l/d)_lim = 309,1  | 2% | spełniony | (7.16), tabl. 7.4N |
+| Ugięcie — graniczna smukłość l/d (7.4.2) | l/d = 5,6  | (l/d)_lim = 345,1  | 2% | spełniony | (7.16), tabl. 7.4N |
 
 > l/d spełnione — obliczenie (7.4.3) informacyjnie: w = 0,2 mm ≤? 4,8 mm.
 
@@ -2138,7 +2140,7 @@ Element modelu: `N-O1-04` · maks. wykorzystanie nośności η = 33% · wszystki
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Docisk | N_Edc = 10,60 kN | N_Rdc = 231,02 kN | 5% | spełniony | PN-EN 1996-1-1 (6.9) |
+| Docisk | N_Edc = 9,89 kN | N_Rdc = 231,02 kN | 4% | spełniony | PN-EN 1996-1-1 (6.9) |
 
 > Dodatkowo sprawdzić ścianę w połowie wysokości pod oparciem (6.1.3(4)) — obejmuje to sprawdzenie ściany/filarka.
 
@@ -2156,18 +2158,18 @@ Element modelu: `N-O1-05` · maks. wykorzystanie nośności η = 73% · wszystki
 
 - Rozpiętość obliczeniowa: l_eff = l_n + min(a; h) = 1,60 + 0,25 = **1,85** m *(5.3.2.2)*
 - Przekrój: b × h = **18 × 51 cm (zespolone z płytą stropu)**
-- Obciążenie (średnio nad otworem; bez efektu przesklepienia [UPR]): g_k; q_k = **6,72; 1,17** kN/m
-- Obciążenie obliczeniowe: q_d = **9,82** kN/m
-- Moment: M_Ed = q_d·l_eff²/8 = 9,82·1,850²/8 = **4,20** kNm
-- Siła poprzeczna: V_Ed = q_d·l_n/2 = 9,82·1,60/2 = **7,86** kN
+- Obciążenie (średnio nad otworem; bez efektu przesklepienia [UPR]): g_k; q_k = **5,63; 1,17** kN/m
+- Obciążenie obliczeniowe: q_d = **8,35** kN/m
+- Moment: M_Ed = q_d·l_eff²/8 = 8,35·1,850²/8 = **3,57** kNm
+- Siła poprzeczna: V_Ed = q_d·l_n/2 = 8,35·1,60/2 = **6,68** kN
 
 ##### N-O1-05 — zginanie
 
 - Wysokość użyteczna: d = **473** mm
-- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 4,20·10⁶/(180·473²·1,0·17,86) = **0,0058** *(3.1.7(3))*
-- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0058) = **0,0059**
-- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,006 ≤ 0,493 = **spełniony**
-- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0059·180·473·1,0·17,86/434,8 = **20** mm²
+- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 3,57·10⁶/(180·473²·1,0·17,86) = **0,0050** *(3.1.7(3))*
+- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0050) = **0,0050**
+- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,005 ≤ 0,493 = **spełniony**
+- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0050·180·473·1,0·17,86/434,8 = **17** mm²
 - Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,6/500·180·473; 0,0013·180·473) = **115** mm² *((9.1N) + NA)*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
@@ -2183,7 +2185,7 @@ Element modelu: `N-O1-05` · maks. wykorzystanie nośności η = 73% · wszystki
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·473 = **426** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 180·426·0,540·17,86/(2,00 + 0,500)·10⁻³ = **295,56** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 56,5·426·434,8·2,00/(7,86·10³) = **2665** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 56,5·426·434,8·2,00/(6,68·10³) = **3135** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·473 = **355** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 56,5/(0,00080·180) = **393** mm *((9.5N))*
 - Przyjęto strzemiona: φ6 2-cięte co s = **350** mm
@@ -2191,17 +2193,17 @@ Element modelu: `N-O1-05` · maks. wykorzystanie nośności η = 73% · wszystki
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Nośność krzyżulców betonowych | V_Ed = 7,86 kN | V_Rd,max = 295,56 kN | 3% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 7,86 kN | V_Rd,s = 59,81 kN | 13% | spełniony | (6.8) |
+| Nośność krzyżulców betonowych | V_Ed = 6,68 kN | V_Rd,max = 295,56 kN | 2% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 6,68 kN | V_Rd,s = 59,81 kN | 11% | spełniony | (6.8) |
 
 > V_Ed ≤ V_Rd,c = 31,59 kN — zbrojenie poprzeczne minimalne (9.2.2(5)).
 
 ##### N-O1-05 — ugięcie
 
-- Stopień zbrojenia wymagany: ρ = A_s,req/(b·d) = 20/(180·473) = **0,00024**
+- Stopień zbrojenia wymagany: ρ = A_s,req/(b·d) = 17/(180·473) = **0,00020**
 - Wartość odniesienia: ρ₀ = √f_ck·10⁻³ = √25·10⁻³ = **0,00500**
-- Graniczne l/d (ρ ≤ ρ₀): K·[11 + 1,5·√f_ck·ρ₀/ρ + 3,2·√f_ck·(ρ₀/ρ − 1)^(3/2)] = 1,0·[11 + 1,5·5,000·20,778 + 3,2·5,000·(20,778 − 1)^1,5] = **1574,2** *((7.16a))*
-- Mnożnik od naprężeń w stali: 310/σ_s ≈ 500/(f_yk·A_s,req/A_s,prov) ≤ 1,5 = 500/(500·20/157) = **1,500** *((7.17))*
+- Graniczne l/d (ρ ≤ ρ₀): K·[11 + 1,5·√f_ck·ρ₀/ρ + 3,2·√f_ck·(ρ₀/ρ − 1)^(3/2)] = 1,0·[11 + 1,5·5,000·24,460 + 3,2·5,000·(24,460 − 1)^1,5] = **2012,5** *((7.16a))*
+- Mnożnik od naprężeń w stali: 310/σ_s ≈ 500/(f_yk·A_s,req/A_s,prov) ≤ 1,5 = 500/(500·17/157) = **1,500** *((7.17))*
 - Smukłość rzeczywista: l_eff/d = 1,85/0,473 = **3,9**
 - *Obliczenie ugięcia (7.4.3)*
 - Efektywny moduł sprężystości: E_c,eff = E_cm/(1 + φ) = 31000/(1 + 2,5) = **8857** MPa *((7.20))*
@@ -2210,14 +2212,14 @@ Element modelu: `N-O1-05` · maks. wykorzystanie nośności η = 73% · wszystki
 - Przekrój zarysowany: x_II; I_II = **118,2 mm; 545,6·10⁶ mm⁴**
 - Moment rysujący: M_cr = f_ctm·I_I/(h − x_I) = 2,6·2152,1·10⁶/(510 − 263,1) = **22,66** kNm
 - Współczynnik rozkładu: ζ = 1 − β·(M_cr/M_qp)², β = 0,5 = M_qp ≤ M_cr → 0 = **0,000** *((7.19))*
-- Ugięcie od obciążeń (quasi-stała): w_q = ζ·w_II + (1 − ζ)·w_I = 0,000·0,21 + 1,000·0,05 = **0,05** mm *((7.18))*
+- Ugięcie od obciążeń (quasi-stała): w_q = ζ·w_II + (1 − ζ)·w_I = 0,000·0,18 + 1,000·0,05 = **0,05** mm *((7.18))*
 - Ugięcie od skurczu: w_cs = k·(1/r_cs)·l², 1/r_cs = ε_cs·α_e·S/I = 0,125·0,138·10⁻⁶·1850² = **0,06** mm *((7.21))*
-- Ugięcie całkowite: w = w_q + w_cs = 0,05 + 0,06 = **0,11** mm
+- Ugięcie całkowite: w = w_q + w_cs = 0,05 + 0,06 = **0,10** mm
 - Ugięcie dopuszczalne: w_lim = L/250 = 1850/250 = **7,4** mm *(7.4.1(4))*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Ugięcie — graniczna smukłość l/d (7.4.2) | l/d = 3,9  | (l/d)_lim = 2361,3  | 0% | spełniony | (7.16), tabl. 7.4N |
+| Ugięcie — graniczna smukłość l/d (7.4.2) | l/d = 3,9  | (l/d)_lim = 3018,7  | 0% | spełniony | (7.16), tabl. 7.4N |
 
 > l/d spełnione — obliczenie (7.4.3) informacyjnie: w = 0,1 mm ≤? 7,4 mm.
 
@@ -2230,7 +2232,7 @@ Element modelu: `N-O1-05` · maks. wykorzystanie nośności η = 73% · wszystki
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Docisk | N_Edc = 9,08 kN | N_Rdc = 304,01 kN | 3% | spełniony | PN-EN 1996-1-1 (6.9) |
+| Docisk | N_Edc = 7,72 kN | N_Rdc = 304,01 kN | 3% | spełniony | PN-EN 1996-1-1 (6.9) |
 
 > Dodatkowo sprawdzić ścianę w połowie wysokości pod oparciem (6.1.3(4)) — obejmuje to sprawdzenie ściany/filarka.
 
@@ -2248,18 +2250,18 @@ Element modelu: `N-O1-06` · maks. wykorzystanie nośności η = 73% · wszystki
 
 - Rozpiętość obliczeniowa: l_eff = l_n + min(a; h) = 1,80 + 0,25 = **2,05** m *(5.3.2.2)*
 - Przekrój: b × h = **18 × 51 cm (zespolone z płytą stropu)**
-- Obciążenie (średnio nad otworem; bez efektu przesklepienia [UPR]): g_k; q_k = **9,04; 1,99** kN/m
-- Obciążenie obliczeniowe: q_d = **13,48** kN/m
-- Moment: M_Ed = q_d·l_eff²/8 = 13,48·2,050²/8 = **7,08** kNm
-- Siła poprzeczna: V_Ed = q_d·l_n/2 = 13,48·1,80/2 = **12,13** kN
+- Obciążenie (średnio nad otworem; bez efektu przesklepienia [UPR]): g_k; q_k = **7,95; 1,99** kN/m
+- Obciążenie obliczeniowe: q_d = **12,00** kN/m
+- Moment: M_Ed = q_d·l_eff²/8 = 12,00·2,050²/8 = **6,31** kNm
+- Siła poprzeczna: V_Ed = q_d·l_n/2 = 12,00·1,80/2 = **10,80** kN
 
 ##### N-O1-06 — zginanie
 
 - Wysokość użyteczna: d = **473** mm
-- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 7,08·10⁶/(180·473²·1,0·17,86) = **0,0098** *(3.1.7(3))*
-- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0098) = **0,0099**
-- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,010 ≤ 0,493 = **spełniony**
-- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0099·180·473·1,0·17,86/434,8 = **35** mm²
+- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 6,31·10⁶/(180·473²·1,0·17,86) = **0,0088** *(3.1.7(3))*
+- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0088) = **0,0088**
+- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,009 ≤ 0,493 = **spełniony**
+- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0088·180·473·1,0·17,86/434,8 = **31** mm²
 - Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,6/500·180·473; 0,0013·180·473) = **115** mm² *((9.1N) + NA)*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
@@ -2275,7 +2277,7 @@ Element modelu: `N-O1-06` · maks. wykorzystanie nośności η = 73% · wszystki
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·473 = **426** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 180·426·0,540·17,86/(2,00 + 0,500)·10⁻³ = **295,56** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 56,5·426·434,8·2,00/(12,13·10³) = **1726** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 56,5·426·434,8·2,00/(10,80·10³) = **1938** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·473 = **355** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 56,5/(0,00080·180) = **393** mm *((9.5N))*
 - Przyjęto strzemiona: φ6 2-cięte co s = **350** mm
@@ -2283,17 +2285,17 @@ Element modelu: `N-O1-06` · maks. wykorzystanie nośności η = 73% · wszystki
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Nośność krzyżulców betonowych | V_Ed = 12,13 kN | V_Rd,max = 295,56 kN | 4% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 12,13 kN | V_Rd,s = 59,81 kN | 20% | spełniony | (6.8) |
+| Nośność krzyżulców betonowych | V_Ed = 10,80 kN | V_Rd,max = 295,56 kN | 4% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 10,80 kN | V_Rd,s = 59,81 kN | 18% | spełniony | (6.8) |
 
 > V_Ed ≤ V_Rd,c = 31,59 kN — zbrojenie poprzeczne minimalne (9.2.2(5)).
 
 ##### N-O1-06 — ugięcie
 
-- Stopień zbrojenia wymagany: ρ = A_s,req/(b·d) = 35/(180·473) = **0,00041**
+- Stopień zbrojenia wymagany: ρ = A_s,req/(b·d) = 31/(180·473) = **0,00036**
 - Wartość odniesienia: ρ₀ = √f_ck·10⁻³ = √25·10⁻³ = **0,00500**
-- Graniczne l/d (ρ ≤ ρ₀): K·[11 + 1,5·√f_ck·ρ₀/ρ + 3,2·√f_ck·(ρ₀/ρ − 1)^(3/2)] = 1,0·[11 + 1,5·5,000·12,305 + 3,2·5,000·(12,305 − 1)^1,5] = **711,4** *((7.16a))*
-- Mnożnik od naprężeń w stali: 310/σ_s ≈ 500/(f_yk·A_s,req/A_s,prov) ≤ 1,5 = 500/(500·35/157) = **1,500** *((7.17))*
+- Graniczne l/d (ρ ≤ ρ₀): K·[11 + 1,5·√f_ck·ρ₀/ρ + 3,2·√f_ck·(ρ₀/ρ − 1)^(3/2)] = 1,0·[11 + 1,5·5,000·13,823 + 3,2·5,000·(13,823 − 1)^1,5] = **849,4** *((7.16a))*
+- Mnożnik od naprężeń w stali: 310/σ_s ≈ 500/(f_yk·A_s,req/A_s,prov) ≤ 1,5 = 500/(500·31/157) = **1,500** *((7.17))*
 - Smukłość rzeczywista: l_eff/d = 2,05/0,473 = **4,3**
 - *Obliczenie ugięcia (7.4.3)*
 - Efektywny moduł sprężystości: E_c,eff = E_cm/(1 + φ) = 31000/(1 + 2,5) = **8857** MPa *((7.20))*
@@ -2302,14 +2304,14 @@ Element modelu: `N-O1-06` · maks. wykorzystanie nośności η = 73% · wszystki
 - Przekrój zarysowany: x_II; I_II = **118,2 mm; 545,6·10⁶ mm⁴**
 - Moment rysujący: M_cr = f_ctm·I_I/(h − x_I) = 2,6·2152,1·10⁶/(510 − 263,1) = **22,66** kNm
 - Współczynnik rozkładu: ζ = 1 − β·(M_cr/M_qp)², β = 0,5 = M_qp ≤ M_cr → 0 = **0,000** *((7.19))*
-- Ugięcie od obciążeń (quasi-stała): w_q = ζ·w_II + (1 − ζ)·w_I = 0,000·0,43 + 1,000·0,11 = **0,11** mm *((7.18))*
+- Ugięcie od obciążeń (quasi-stała): w_q = ζ·w_II + (1 − ζ)·w_I = 0,000·0,38 + 1,000·0,10 = **0,10** mm *((7.18))*
 - Ugięcie od skurczu: w_cs = k·(1/r_cs)·l², 1/r_cs = ε_cs·α_e·S/I = 0,125·0,138·10⁻⁶·2050² = **0,07** mm *((7.21))*
-- Ugięcie całkowite: w = w_q + w_cs = 0,11 + 0,07 = **0,18** mm
+- Ugięcie całkowite: w = w_q + w_cs = 0,10 + 0,07 = **0,17** mm
 - Ugięcie dopuszczalne: w_lim = L/250 = 2050/250 = **8,2** mm *(7.4.1(4))*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Ugięcie — graniczna smukłość l/d (7.4.2) | l/d = 4,3  | (l/d)_lim = 1067,1  | 0% | spełniony | (7.16), tabl. 7.4N |
+| Ugięcie — graniczna smukłość l/d (7.4.2) | l/d = 4,3  | (l/d)_lim = 1274,1  | 0% | spełniony | (7.16), tabl. 7.4N |
 
 > l/d spełnione — obliczenie (7.4.3) informacyjnie: w = 0,2 mm ≤? 8,2 mm.
 
@@ -2322,7 +2324,7 @@ Element modelu: `N-O1-06` · maks. wykorzystanie nośności η = 73% · wszystki
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Docisk | N_Edc = 13,81 kN | N_Rdc = 279,91 kN | 5% | spełniony | PN-EN 1996-1-1 (6.9) |
+| Docisk | N_Edc = 12,30 kN | N_Rdc = 279,91 kN | 4% | spełniony | PN-EN 1996-1-1 (6.9) |
 
 > Dodatkowo sprawdzić ścianę w połowie wysokości pod oparciem (6.1.3(4)) — obejmuje to sprawdzenie ściany/filarka.
 
@@ -2340,18 +2342,18 @@ Element modelu: `N-O1-07` · maks. wykorzystanie nośności η = 73% · wszystki
 
 - Rozpiętość obliczeniowa: l_eff = l_n + min(a; h) = 1,40 + 0,20 = **1,60** m *(5.3.2.2)*
 - Przekrój: b × h = **18 × 51 cm (zespolone z płytą stropu)**
-- Obciążenie (średnio nad otworem; bez efektu przesklepienia [UPR]): g_k; q_k = **11,10; 2,71** kN/m
-- Obciążenie obliczeniowe: q_d = **16,72** kN/m
-- Moment: M_Ed = q_d·l_eff²/8 = 16,72·1,600²/8 = **5,35** kNm
-- Siła poprzeczna: V_Ed = q_d·l_n/2 = 16,72·1,40/2 = **11,70** kN
+- Obciążenie (średnio nad otworem; bez efektu przesklepienia [UPR]): g_k; q_k = **10,01; 2,71** kN/m
+- Obciążenie obliczeniowe: q_d = **15,24** kN/m
+- Moment: M_Ed = q_d·l_eff²/8 = 15,24·1,600²/8 = **4,88** kNm
+- Siła poprzeczna: V_Ed = q_d·l_n/2 = 15,24·1,40/2 = **10,67** kN
 
 ##### N-O1-07 — zginanie
 
 - Wysokość użyteczna: d = **473** mm
-- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 5,35·10⁶/(180·473²·1,0·17,86) = **0,0074** *(3.1.7(3))*
-- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0074) = **0,0075**
+- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 4,88·10⁶/(180·473²·1,0·17,86) = **0,0068** *(3.1.7(3))*
+- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0068) = **0,0068**
 - Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,007 ≤ 0,493 = **spełniony**
-- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0075·180·473·1,0·17,86/434,8 = **26** mm²
+- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0068·180·473·1,0·17,86/434,8 = **24** mm²
 - Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,6/500·180·473; 0,0013·180·473) = **115** mm² *((9.1N) + NA)*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
@@ -2367,7 +2369,7 @@ Element modelu: `N-O1-07` · maks. wykorzystanie nośności η = 73% · wszystki
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·473 = **426** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 180·426·0,540·17,86/(2,00 + 0,500)·10⁻³ = **295,56** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 56,5·426·434,8·2,00/(11,70·10³) = **1789** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 56,5·426·434,8·2,00/(10,67·10³) = **1962** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·473 = **355** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 56,5/(0,00080·180) = **393** mm *((9.5N))*
 - Przyjęto strzemiona: φ6 2-cięte co s = **350** mm
@@ -2375,17 +2377,17 @@ Element modelu: `N-O1-07` · maks. wykorzystanie nośności η = 73% · wszystki
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Nośność krzyżulców betonowych | V_Ed = 11,70 kN | V_Rd,max = 295,56 kN | 4% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 11,70 kN | V_Rd,s = 59,81 kN | 20% | spełniony | (6.8) |
+| Nośność krzyżulców betonowych | V_Ed = 10,67 kN | V_Rd,max = 295,56 kN | 4% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 10,67 kN | V_Rd,s = 59,81 kN | 18% | spełniony | (6.8) |
 
 > V_Ed ≤ V_Rd,c = 31,59 kN — zbrojenie poprzeczne minimalne (9.2.2(5)).
 
 ##### N-O1-07 — ugięcie
 
-- Stopień zbrojenia wymagany: ρ = A_s,req/(b·d) = 26/(180·473) = **0,00031**
+- Stopień zbrojenia wymagany: ρ = A_s,req/(b·d) = 24/(180·473) = **0,00028**
 - Wartość odniesienia: ρ₀ = √f_ck·10⁻³ = √25·10⁻³ = **0,00500**
-- Graniczne l/d (ρ ≤ ρ₀): K·[11 + 1,5·√f_ck·ρ₀/ρ + 3,2·√f_ck·(ρ₀/ρ − 1)^(3/2)] = 1,0·[11 + 1,5·5,000·16,304 + 3,2·5,000·(16,304 − 1)^1,5] = **1091,2** *((7.16a))*
-- Mnożnik od naprężeń w stali: 310/σ_s ≈ 500/(f_yk·A_s,req/A_s,prov) ≤ 1,5 = 500/(500·26/157) = **1,500** *((7.17))*
+- Graniczne l/d (ρ ≤ ρ₀): K·[11 + 1,5·√f_ck·ρ₀/ρ + 3,2·√f_ck·(ρ₀/ρ − 1)^(3/2)] = 1,0·[11 + 1,5·5,000·17,887 + 3,2·5,000·(17,887 − 1)^1,5] = **1255,5** *((7.16a))*
+- Mnożnik od naprężeń w stali: 310/σ_s ≈ 500/(f_yk·A_s,req/A_s,prov) ≤ 1,5 = 500/(500·24/157) = **1,500** *((7.17))*
 - Smukłość rzeczywista: l_eff/d = 1,60/0,473 = **3,4**
 - *Obliczenie ugięcia (7.4.3)*
 - Efektywny moduł sprężystości: E_c,eff = E_cm/(1 + φ) = 31000/(1 + 2,5) = **8857** MPa *((7.20))*
@@ -2394,14 +2396,14 @@ Element modelu: `N-O1-07` · maks. wykorzystanie nośności η = 73% · wszystki
 - Przekrój zarysowany: x_II; I_II = **118,2 mm; 545,6·10⁶ mm⁴**
 - Moment rysujący: M_cr = f_ctm·I_I/(h − x_I) = 2,6·2152,1·10⁶/(510 − 263,1) = **22,66** kNm
 - Współczynnik rozkładu: ζ = 1 − β·(M_cr/M_qp)², β = 0,5 = M_qp ≤ M_cr → 0 = **0,000** *((7.19))*
-- Ugięcie od obciążeń (quasi-stała): w_q = ζ·w_II + (1 − ζ)·w_I = 0,000·0,20 + 1,000·0,05 = **0,05** mm *((7.18))*
+- Ugięcie od obciążeń (quasi-stała): w_q = ζ·w_II + (1 − ζ)·w_I = 0,000·0,18 + 1,000·0,04 = **0,04** mm *((7.18))*
 - Ugięcie od skurczu: w_cs = k·(1/r_cs)·l², 1/r_cs = ε_cs·α_e·S/I = 0,125·0,138·10⁻⁶·1600² = **0,04** mm *((7.21))*
-- Ugięcie całkowite: w = w_q + w_cs = 0,05 + 0,04 = **0,09** mm
+- Ugięcie całkowite: w = w_q + w_cs = 0,04 + 0,04 = **0,09** mm
 - Ugięcie dopuszczalne: w_lim = L/250 = 1600/250 = **6,4** mm *(7.4.1(4))*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Ugięcie — graniczna smukłość l/d (7.4.2) | l/d = 3,4  | (l/d)_lim = 1636,9  | 0% | spełniony | (7.16), tabl. 7.4N |
+| Ugięcie — graniczna smukłość l/d (7.4.2) | l/d = 3,4  | (l/d)_lim = 1883,3  | 0% | spełniony | (7.16), tabl. 7.4N |
 
 > l/d spełnione — obliczenie (7.4.3) informacyjnie: w = 0,1 mm ≤? 6,4 mm.
 
@@ -2414,7 +2416,7 @@ Element modelu: `N-O1-07` · maks. wykorzystanie nośności η = 73% · wszystki
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Docisk | N_Edc = 13,37 kN | N_Rdc = 225,35 kN | 6% | spełniony | PN-EN 1996-1-1 (6.9) |
+| Docisk | N_Edc = 12,19 kN | N_Rdc = 225,35 kN | 5% | spełniony | PN-EN 1996-1-1 (6.9) |
 
 > Dodatkowo sprawdzić ścianę w połowie wysokości pod oparciem (6.1.3(4)) — obejmuje to sprawdzenie ściany/filarka.
 
@@ -2424,7 +2426,7 @@ Element modelu: `N-O1-07` · maks. wykorzystanie nośności η = 73% · wszystki
 
 ### Poz. 6.16 — Nadproże N-O1-08 nad otworem O1-08 w ścianie S1-05 (światło 0,90 m)
 
-Element modelu: `N-O1-08` · maks. wykorzystanie nośności η = 60% · wszystkie warunki spełnione
+Element modelu: `N-O1-08` · maks. wykorzystanie nośności η = 59% · wszystkie warunki spełnione
 
 #### Obliczenia
 
@@ -2432,23 +2434,23 @@ Element modelu: `N-O1-08` · maks. wykorzystanie nośności η = 60% · wszystki
 
 - Rozpiętość obliczeniowa: l_eff = l_n + min(a; h) = 0,90 + 0,20 = **1,10** m *(5.3.2.2)*
 - Przekrój: b × h = **18 × 25 cm**
-- Obciążenie (średnio nad otworem; bez efektu przesklepienia [UPR]): g_k; q_k = **36,30; 11,60** kN/m
-- Obciążenie obliczeniowe: q_d = **56,42** kN/m
-- Moment: M_Ed = q_d·l_eff²/8 = 56,42·1,100²/8 = **8,53** kNm
-- Siła poprzeczna: V_Ed = q_d·l_n/2 = 56,42·0,90/2 = **25,39** kN
+- Obciążenie (średnio nad otworem; bez efektu przesklepienia [UPR]): g_k; q_k = **35,41; 11,60** kN/m
+- Obciążenie obliczeniowe: q_d = **55,22** kN/m
+- Moment: M_Ed = q_d·l_eff²/8 = 55,22·1,100²/8 = **8,35** kNm
+- Siła poprzeczna: V_Ed = q_d·l_n/2 = 55,22·0,90/2 = **24,85** kN
 
 ##### N-O1-08 — zginanie
 
 - Wysokość użyteczna: d = **213** mm
-- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 8,53·10⁶/(180·213²·1,0·17,86) = **0,0585** *(3.1.7(3))*
-- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0585) = **0,0603**
-- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,060 ≤ 0,493 = **spełniony**
-- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0603·180·213·1,0·17,86/434,8 = **95** mm²
+- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 8,35·10⁶/(180·213²·1,0·17,86) = **0,0573** *(3.1.7(3))*
+- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0573) = **0,0590**
+- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,059 ≤ 0,493 = **spełniony**
+- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0590·180·213·1,0·17,86/434,8 = **93** mm²
 - Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,6/500·180·213; 0,0013·180·213) = **52** mm² *((9.1N) + NA)*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Zbrojenie dolne | A_s,req = 95 mm² | A_s,prov = 157 mm² | 60% | spełniony | 6.1 |
+| Zbrojenie dolne | A_s,req = 93 mm² | A_s,prov = 157 mm² | 59% | spełniony | 6.1 |
 
 ##### N-O1-08 — ścinanie
 
@@ -2459,7 +2461,7 @@ Element modelu: `N-O1-08` · maks. wykorzystanie nośności η = 60% · wszystki
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·213 = **192** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 180·192·0,540·17,86/(2,00 + 0,500)·10⁻³ = **133,09** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 56,5·192·434,8·2,00/(25,39·10³) = **371** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 56,5·192·434,8·2,00/(24,85·10³) = **379** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·213 = **160** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 56,5/(0,00080·180) = **393** mm *((9.5N))*
 - Przyjęto strzemiona: φ6 2-cięte co s = **150** mm
@@ -2467,15 +2469,15 @@ Element modelu: `N-O1-08` · maks. wykorzystanie nośności η = 60% · wszystki
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Nośność krzyżulców betonowych | V_Ed = 25,39 kN | V_Rd,max = 133,09 kN | 19% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 25,39 kN | V_Rd,s = 62,84 kN | 40% | spełniony | (6.8) |
+| Nośność krzyżulców betonowych | V_Ed = 24,85 kN | V_Rd,max = 133,09 kN | 19% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 24,85 kN | V_Rd,s = 62,84 kN | 40% | spełniony | (6.8) |
 
 ##### N-O1-08 — ugięcie
 
-- Stopień zbrojenia wymagany: ρ = A_s,req/(b·d) = 95/(180·213) = **0,00248**
+- Stopień zbrojenia wymagany: ρ = A_s,req/(b·d) = 93/(180·213) = **0,00242**
 - Wartość odniesienia: ρ₀ = √f_ck·10⁻³ = √25·10⁻³ = **0,00500**
-- Graniczne l/d (ρ ≤ ρ₀): K·[11 + 1,5·√f_ck·ρ₀/ρ + 3,2·√f_ck·(ρ₀/ρ − 1)^(3/2)] = 1,0·[11 + 1,5·5,000·2,018 + 3,2·5,000·(2,018 − 1)^1,5] = **42,6** *((7.16a))*
-- Mnożnik od naprężeń w stali: 310/σ_s ≈ 500/(f_yk·A_s,req/A_s,prov) ≤ 1,5 = 500/(500·95/157) = **1,500** *((7.17))*
+- Graniczne l/d (ρ ≤ ρ₀): K·[11 + 1,5·√f_ck·ρ₀/ρ + 3,2·√f_ck·(ρ₀/ρ − 1)^(3/2)] = 1,0·[11 + 1,5·5,000·2,063 + 3,2·5,000·(2,063 − 1)^1,5] = **44,0** *((7.16a))*
+- Mnożnik od naprężeń w stali: 310/σ_s ≈ 500/(f_yk·A_s,req/A_s,prov) ≤ 1,5 = 500/(500·93/157) = **1,500** *((7.17))*
 - Smukłość rzeczywista: l_eff/d = 1,10/0,213 = **5,2**
 - *Obliczenie ugięcia (7.4.3)*
 - Efektywny moduł sprężystości: E_c,eff = E_cm/(1 + φ) = 31000/(1 + 2,5) = **8857** MPa *((7.20))*
@@ -2484,14 +2486,14 @@ Element modelu: `N-O1-08` · maks. wykorzystanie nośności η = 60% · wszystki
 - Przekrój zarysowany: x_II; I_II = **74,0 mm; 92,8·10⁶ mm⁴**
 - Moment rysujący: M_cr = f_ctm·I_I/(h − x_I) = 2,6·259,8·10⁶/(250 − 131,4) = **5,70** kNm
 - Współczynnik rozkładu: ζ = 1 − β·(M_cr/M_qp)², β = 0,5 = M_qp ≤ M_cr → 0 = **0,000** *((7.19))*
-- Ugięcie od obciążeń (quasi-stała): w_q = ζ·w_II + (1 − ζ)·w_I = 0,000·0,84 + 1,000·0,30 = **0,30** mm *((7.18))*
+- Ugięcie od obciążeń (quasi-stała): w_q = ζ·w_II + (1 − ζ)·w_I = 0,000·0,82 + 1,000·0,29 = **0,29** mm *((7.18))*
 - Ugięcie od skurczu: w_cs = k·(1/r_cs)·l², 1/r_cs = ε_cs·α_e·S/I = 0,125·0,445·10⁻⁶·1100² = **0,07** mm *((7.21))*
-- Ugięcie całkowite: w = w_q + w_cs = 0,30 + 0,07 = **0,37** mm
+- Ugięcie całkowite: w = w_q + w_cs = 0,29 + 0,07 = **0,36** mm
 - Ugięcie dopuszczalne: w_lim = L/250 = 1100/250 = **4,4** mm *(7.4.1(4))*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Ugięcie — graniczna smukłość l/d (7.4.2) | l/d = 5,2  | (l/d)_lim = 63,8  | 8% | spełniony | (7.16), tabl. 7.4N |
+| Ugięcie — graniczna smukłość l/d (7.4.2) | l/d = 5,2  | (l/d)_lim = 66,0  | 8% | spełniony | (7.16), tabl. 7.4N |
 
 > l/d spełnione — obliczenie (7.4.3) informacyjnie: w = 0,4 mm ≤? 4,4 mm.
 
@@ -2504,7 +2506,7 @@ Element modelu: `N-O1-08` · maks. wykorzystanie nośności η = 60% · wszystki
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Docisk | N_Edc = 31,03 kN | N_Rdc = 243,20 kN | 13% | spełniony | PN-EN 1996-1-1 (6.9) |
+| Docisk | N_Edc = 30,37 kN | N_Rdc = 243,20 kN | 12% | spełniony | PN-EN 1996-1-1 (6.9) |
 
 > Dodatkowo sprawdzić ścianę w połowie wysokości pod oparciem (6.1.3(4)) — obejmuje to sprawdzenie ściany/filarka.
 
@@ -2514,7 +2516,7 @@ Element modelu: `N-O1-08` · maks. wykorzystanie nośności η = 60% · wszystki
 
 ### Poz. 6.17 — Nadproże N-O1-09 nad otworem O1-09 w ścianie S1-05 (światło 0,90 m)
 
-Element modelu: `N-O1-09` · maks. wykorzystanie nośności η = 57% · wszystkie warunki spełnione
+Element modelu: `N-O1-09` · maks. wykorzystanie nośności η = 56% · wszystkie warunki spełnione
 
 #### Obliczenia
 
@@ -2522,23 +2524,23 @@ Element modelu: `N-O1-09` · maks. wykorzystanie nośności η = 57% · wszystki
 
 - Rozpiętość obliczeniowa: l_eff = l_n + min(a; h) = 0,90 + 0,20 = **1,10** m *(5.3.2.2)*
 - Przekrój: b × h = **18 × 25 cm**
-- Obciążenie (średnio nad otworem; bez efektu przesklepienia [UPR]): g_k; q_k = **34,34; 10,91** kN/m
-- Obciążenie obliczeniowe: q_d = **53,33** kN/m
-- Moment: M_Ed = q_d·l_eff²/8 = 53,33·1,100²/8 = **8,07** kNm
-- Siła poprzeczna: V_Ed = q_d·l_n/2 = 53,33·0,90/2 = **24,00** kN
+- Obciążenie (średnio nad otworem; bez efektu przesklepienia [UPR]): g_k; q_k = **33,45; 10,91** kN/m
+- Obciążenie obliczeniowe: q_d = **52,13** kN/m
+- Moment: M_Ed = q_d·l_eff²/8 = 52,13·1,100²/8 = **7,89** kNm
+- Siła poprzeczna: V_Ed = q_d·l_n/2 = 52,13·0,90/2 = **23,46** kN
 
 ##### N-O1-09 — zginanie
 
 - Wysokość użyteczna: d = **213** mm
-- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 8,07·10⁶/(180·213²·1,0·17,86) = **0,0553** *(3.1.7(3))*
-- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0553) = **0,0569**
-- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,057 ≤ 0,493 = **spełniony**
-- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0569·180·213·1,0·17,86/434,8 = **90** mm²
+- Moment względny: μ = M_Ed/(b·d²·η·f_cd) = 7,89·10⁶/(180·213²·1,0·17,86) = **0,0541** *(3.1.7(3))*
+- Względna wysokość strefy ściskanej: ξ_eff = 1 − √(1 − 2μ) = 1 − √(1 − 2·0,0541) = **0,0556**
+- Warunek ciągliwości: ξ_eff ≤ ξ_eff,lim = λ·ε_cu3/(ε_cu3 + f_yd/E_s) = 0,056 ≤ 0,493 = **spełniony**
+- Wymagane zbrojenie rozciągane: A_s1 = ξ_eff·b·d·η·f_cd/f_yd = 0,0556·180·213·1,0·17,86/434,8 = **88** mm²
 - Zbrojenie minimalne: A_s,min = max(0,26·f_ctm/f_yk·b·d; 0,0013·b·d) = max(0,26·2,6/500·180·213; 0,0013·180·213) = **52** mm² *((9.1N) + NA)*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Zbrojenie dolne | A_s,req = 90 mm² | A_s,prov = 157 mm² | 57% | spełniony | 6.1 |
+| Zbrojenie dolne | A_s,req = 88 mm² | A_s,prov = 157 mm² | 56% | spełniony | 6.1 |
 
 ##### N-O1-09 — ścinanie
 
@@ -2549,7 +2551,7 @@ Element modelu: `N-O1-09` · maks. wykorzystanie nośności η = 57% · wszystki
 - Ramię sił wewnętrznych: z = 0,9·d = 0,9·213 = **192** mm
 - Przyjęto nachylenie krzyżulców betonowych: cot θ = (1,0 ≤ cot θ ≤ 2,0 — NA) = **2,00** *((6.7N))*
 - Nośność krzyżulców ściskanych: V_Rd,max = b_w·z·ν₁·f_cd/(cot θ + tan θ) = 180·192·0,540·17,86/(2,00 + 0,500)·10⁻³ = **133,09** kN *((6.9), ν₁ = ν (6.6N))*
-- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 56,5·192·434,8·2,00/(24,00·10³) = **393** mm *((6.8))*
+- Rozstaw z warunku nośności: s = A_sw·z·f_ywd·cot θ/V_Ed = 56,5·192·434,8·2,00/(23,46·10³) = **402** mm *((6.8))*
 - Rozstaw maksymalny: s_l,max = 0,75·d = 0,75·213 = **160** mm *((9.6N))*
 - Stopień zbrojenia minimalny: ρ_w,min = 0,08·√f_ck/f_yk → s ≤ A_sw/(ρ_w,min·b_w) = 56,5/(0,00080·180) = **393** mm *((9.5N))*
 - Przyjęto strzemiona: φ6 2-cięte co s = **150** mm
@@ -2557,15 +2559,15 @@ Element modelu: `N-O1-09` · maks. wykorzystanie nośności η = 57% · wszystki
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Nośność krzyżulców betonowych | V_Ed = 24,00 kN | V_Rd,max = 133,09 kN | 18% | spełniony | (6.9) |
-| Nośność strzemion | V_Ed = 24,00 kN | V_Rd,s = 62,84 kN | 38% | spełniony | (6.8) |
+| Nośność krzyżulców betonowych | V_Ed = 23,46 kN | V_Rd,max = 133,09 kN | 18% | spełniony | (6.9) |
+| Nośność strzemion | V_Ed = 23,46 kN | V_Rd,s = 62,84 kN | 37% | spełniony | (6.8) |
 
 ##### N-O1-09 — ugięcie
 
-- Stopień zbrojenia wymagany: ρ = A_s,req/(b·d) = 90/(180·213) = **0,00234**
+- Stopień zbrojenia wymagany: ρ = A_s,req/(b·d) = 88/(180·213) = **0,00228**
 - Wartość odniesienia: ρ₀ = √f_ck·10⁻³ = √25·10⁻³ = **0,00500**
-- Graniczne l/d (ρ ≤ ρ₀): K·[11 + 1,5·√f_ck·ρ₀/ρ + 3,2·√f_ck·(ρ₀/ρ − 1)^(3/2)] = 1,0·[11 + 1,5·5,000·2,138 + 3,2·5,000·(2,138 − 1)^1,5] = **46,5** *((7.16a))*
-- Mnożnik od naprężeń w stali: 310/σ_s ≈ 500/(f_yk·A_s,req/A_s,prov) ≤ 1,5 = 500/(500·90/157) = **1,500** *((7.17))*
+- Graniczne l/d (ρ ≤ ρ₀): K·[11 + 1,5·√f_ck·ρ₀/ρ + 3,2·√f_ck·(ρ₀/ρ − 1)^(3/2)] = 1,0·[11 + 1,5·5,000·2,189 + 3,2·5,000·(2,189 − 1)^1,5] = **48,2** *((7.16a))*
+- Mnożnik od naprężeń w stali: 310/σ_s ≈ 500/(f_yk·A_s,req/A_s,prov) ≤ 1,5 = 500/(500·88/157) = **1,500** *((7.17))*
 - Smukłość rzeczywista: l_eff/d = 1,10/0,213 = **5,2**
 - *Obliczenie ugięcia (7.4.3)*
 - Efektywny moduł sprężystości: E_c,eff = E_cm/(1 + φ) = 31000/(1 + 2,5) = **8857** MPa *((7.20))*
@@ -2574,16 +2576,16 @@ Element modelu: `N-O1-09` · maks. wykorzystanie nośności η = 57% · wszystki
 - Przekrój zarysowany: x_II; I_II = **74,0 mm; 92,8·10⁶ mm⁴**
 - Moment rysujący: M_cr = f_ctm·I_I/(h − x_I) = 2,6·259,8·10⁶/(250 − 131,4) = **5,70** kNm
 - Współczynnik rozkładu: ζ = 1 − β·(M_cr/M_qp)², β = 0,5 = M_qp ≤ M_cr → 0 = **0,000** *((7.19))*
-- Ugięcie od obciążeń (quasi-stała): w_q = ζ·w_II + (1 − ζ)·w_I = 0,000·0,80 + 1,000·0,28 = **0,28** mm *((7.18))*
+- Ugięcie od obciążeń (quasi-stała): w_q = ζ·w_II + (1 − ζ)·w_I = 0,000·0,78 + 1,000·0,28 = **0,28** mm *((7.18))*
 - Ugięcie od skurczu: w_cs = k·(1/r_cs)·l², 1/r_cs = ε_cs·α_e·S/I = 0,125·0,445·10⁻⁶·1100² = **0,07** mm *((7.21))*
-- Ugięcie całkowite: w = w_q + w_cs = 0,28 + 0,07 = **0,35** mm
+- Ugięcie całkowite: w = w_q + w_cs = 0,28 + 0,07 = **0,34** mm
 - Ugięcie dopuszczalne: w_lim = L/250 = 1100/250 = **4,4** mm *(7.4.1(4))*
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Ugięcie — graniczna smukłość l/d (7.4.2) | l/d = 5,2  | (l/d)_lim = 69,7  | 7% | spełniony | (7.16), tabl. 7.4N |
+| Ugięcie — graniczna smukłość l/d (7.4.2) | l/d = 5,2  | (l/d)_lim = 72,2  | 7% | spełniony | (7.16), tabl. 7.4N |
 
-> l/d spełnione — obliczenie (7.4.3) informacyjnie: w = 0,4 mm ≤? 4,4 mm.
+> l/d spełnione — obliczenie (7.4.3) informacyjnie: w = 0,3 mm ≤? 4,4 mm.
 
 ##### N-O1-09 — docisk na murze (oparcie 20 cm)
 
@@ -2594,7 +2596,7 @@ Element modelu: `N-O1-09` · maks. wykorzystanie nośności η = 57% · wszystki
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Docisk | N_Edc = 29,33 kN | N_Rdc = 243,20 kN | 12% | spełniony | PN-EN 1996-1-1 (6.9) |
+| Docisk | N_Edc = 28,67 kN | N_Rdc = 243,20 kN | 12% | spełniony | PN-EN 1996-1-1 (6.9) |
 
 > Dodatkowo sprawdzić ścianę w połowie wysokości pod oparciem (6.1.3(4)) — obejmuje to sprawdzenie ściany/filarka.
 
@@ -3668,13 +3670,13 @@ Element modelu: `L1` · maks. wykorzystanie nośności η = 133% · **WARUNKI NI
 
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
+| QA_pB | 2,57 | 11,6 |
+| QA | 3,92 | 18,3 |
+| S1 | 1,44 | 6,5 |
+| S2 | 1,44 | 6,5 |
+| QA_pA | 1,51 | 6,7 |
 | H | 0,80 | 3,6 |
 | G | 49,85 | 244,2 |
-| S2 | 1,44 | 6,5 |
-| S1 | 1,44 | 6,5 |
-| QA | 3,92 | 18,3 |
-| QA_pB | 2,57 | 11,6 |
-| QA_pA | 1,51 | 6,7 |
 
 #### Obliczenia
 
@@ -3737,14 +3739,14 @@ Element modelu: `L2` · maks. wykorzystanie nośności η = 118% · **WARUNKI NI
 
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
-| H | 1,52 | 5,5 |
-| QA | 17,03 | 61,5 |
-| QA_pB | 7,35 | 29,1 |
-| QA_pA | 0,00 | 0,0 |
-| S2 | 6,72 | 23,4 |
-| S1 | 4,55 | 15,9 |
-| G | 90,48 | 377,4 |
 | SB2 | 3,96 | 13,6 |
+| S2 | 6,72 | 23,4 |
+| QA_pA | 0,00 | 0,0 |
+| H | 1,52 | 5,5 |
+| G | 90,48 | 377,4 |
+| QA_pB | 7,35 | 29,1 |
+| QA | 17,03 | 61,5 |
+| S1 | 4,55 | 15,9 |
 
 #### Obliczenia
 
@@ -3807,13 +3809,13 @@ Element modelu: `L3` · maks. wykorzystanie nośności η = 119% · **WARUNKI NI
 
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
+| QA_pB | 3,74 | 11,7 |
+| QA | 3,90 | 27,7 |
+| S1 | 1,34 | 6,5 |
+| S2 | 1,34 | 6,5 |
+| QA_pA | 0,00 | 2,5 |
 | H | 0,74 | 3,6 |
 | G | 50,78 | 314,4 |
-| S2 | 1,34 | 6,5 |
-| S1 | 1,34 | 6,5 |
-| QA | 3,90 | 27,7 |
-| QA_pB | 3,74 | 11,7 |
-| QA_pA | 0,00 | 2,5 |
 
 #### Obliczenia
 
@@ -3876,13 +3878,13 @@ Element modelu: `L4` · maks. wykorzystanie nośności η = 134% · **WARUNKI NI
 
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
+| QA_pB | 0,00 | 0,0 |
+| QA | 4,40 | 14,4 |
+| S1 | 1,46 | 7,4 |
+| S2 | 1,46 | 7,4 |
+| QA_pA | 5,25 | 17,0 |
 | H | 0,81 | 4,1 |
 | G | 52,08 | 271,2 |
-| S2 | 1,46 | 7,4 |
-| S1 | 1,46 | 7,4 |
-| QA | 4,40 | 14,4 |
-| QA_pB | 0,00 | 0,0 |
-| QA_pA | 5,25 | 17,0 |
 
 #### Obliczenia
 
@@ -3945,13 +3947,13 @@ Element modelu: `L5` · maks. wykorzystanie nośności η = 96% · wszystkie war
 
 | Przypadek | q_k [kN/m] (miarodajne) | Σ na ławie [kN] |
 |---|---|---|
+| QA_pB | 8,68 | 46,4 |
+| QA | 16,31 | 83,8 |
+| S1 | 5,23 | 29,4 |
+| S2 | 5,23 | 29,4 |
+| QA_pA | 7,63 | 37,4 |
 | H | 2,90 | 16,4 |
 | G | 123,00 | 687,3 |
-| S2 | 5,23 | 29,4 |
-| S1 | 5,23 | 29,4 |
-| QA | 16,31 | 83,8 |
-| QA_pB | 8,68 | 46,4 |
-| QA_pA | 7,63 | 37,4 |
 
 #### Obliczenia
 
@@ -4143,7 +4145,7 @@ Kody kształtu wg PN-EN ISO 3766: 00 — pręt prosty, 11 — odgięty 90°, 21 
 | B1 | 1 | 14 | 00 dołem | 4,22 | 2 |  |  |  |  | 8,44 |
 | B1 | 2 | 12 | 00 górą | 4,22 | 2 |  |  |  | 8,44 |  |
 | B1 | 3 | 8 | 51 14×44 cm | 1,36 | 12 |  | 16,32 |  |  |  |
-| N-O0-01 | 1 | 12 | 00 dołem | 4,70 | 5 |  |  |  | 23,50 |  |
+| N-O0-01 | 1 | 10 | 00 dołem | 4,70 | 7 |  |  | 32,90 |  |  |
 | N-O0-01 | 2 | 10 | 00 górą montażowe | 4,70 | 2 |  |  | 9,40 |  |  |
 | N-O0-01 | 3 | 6 | 51 | 0,93 | 23 | 21,39 |  |  |  |  |
 | N-O0-02 | 1 | 10 | 00 dołem | 2,50 | 2 |  |  | 5,00 |  |  |
@@ -4160,8 +4162,8 @@ Kody kształtu wg PN-EN ISO 3766: 00 — pręt prosty, 11 — odgięty 90°, 21 
 | N-O0-05 | 3 | 6 | 51 | 1,33 | 6 | 7,98 |  |  |  |  |
 | N-O0-06 | 1 | 10 | 00 dołem | 1,80 | 5 |  |  | 9,00 |  |  |
 | N-O0-06 | 2 | 10 | 00 górą montażowe | 1,80 | 2 |  |  | 3,60 |  |  |
-| N-O0-06 | 3 | 6 | 51 | 0,81 | 14 | 11,34 |  |  |  |  |
-| N-O0-08 | 1 | 10 | 00 dołem | 2,70 | 7 |  |  | 18,90 |  |  |
+| N-O0-06 | 3 | 6 | 51 | 0,81 | 13 | 10,53 |  |  |  |  |
+| N-O0-08 | 1 | 10 | 00 dołem | 2,70 | 6 |  |  | 16,20 |  |  |
 | N-O0-08 | 2 | 10 | 00 górą montażowe | 2,70 | 2 |  |  | 5,40 |  |  |
 | N-O0-08 | 3 | 6 | 51 | 0,81 | 17 | 13,77 |  |  |  |  |
 | N-O0-09 | 1 | 10 | 00 dołem | 2,10 | 2 |  |  | 4,20 |  |  |
@@ -4212,11 +4214,11 @@ Kody kształtu wg PN-EN ISO 3766: 00 — pręt prosty, 11 — odgięty 90°, 21 
 | L5 | 2 | 6 | 51 40×20 cm | 1,40 | 29 | 40,60 |  |  |  |  |
 | F1 | 1 | 12 | 21 z odgięciem 15 cm | 0,80 | 6 |  |  |  | 4,80 |  |
 | F2 | 1 | 12 | 21 z odgięciem 15 cm | 0,80 | 6 |  |  |  | 4,80 |  |
-| **Długość łączna [m]** |  |  |  |  |  | 734,8 | 3648,3 | 892,0 | 631,9 | 8,4 |
+| **Długość łączna [m]** |  |  |  |  |  | 734,0 | 3648,3 | 922,2 | 608,4 | 8,4 |
 | Masa 1 m [kg/m] |  |  |  |  |  | 0,222 | 0,395 | 0,617 | 0,888 | 1,208 |
-| **Masa [kg]** |  |  |  |  |  | 163,1 | 1439,6 | 549,9 | 561,0 | 10,2 |
+| **Masa [kg]** |  |  |  |  |  | 162,9 | 1439,6 | 568,6 | 540,2 | 10,2 |
 
-Masa całkowita stali B500SP: **2723,8 kg**.
+Masa całkowita stali B500SP: **2721,4 kg**.
 
 ## Uwagi, uproszczenia i dane do uzupełnienia
 

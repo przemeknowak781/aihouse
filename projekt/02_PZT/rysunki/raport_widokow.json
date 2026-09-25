@@ -56,7 +56,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 17.6,
+      "czas_s": 13.0,
       "png_kontrola": {
         "px": [
           3508,
@@ -102,7 +102,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 20.4,
+      "czas_s": 18.5,
       "png_kontrola": {
         "px": [
           3508,
@@ -148,7 +148,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 16.0,
+      "czas_s": 11.9,
       "png_kontrola": {
         "px": [
           3508,
@@ -178,5 +178,5 @@
     "PZT — brak danych: dzialka.yaml: dzialka.mpzp (wskaźniki): wskaźniki i parametry MPZP potrzebne do tabeli zgodności PZT (RPB § 14 pkt 4 lit. d)"
   ],
   "tom": "projekt/02_PZT/rysunki/tom_PZT.pdf",
-  "czas_s": 64.5
+  "czas_s": 52.1
 }
