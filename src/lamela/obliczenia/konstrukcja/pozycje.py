@@ -1108,6 +1108,18 @@ class AnalizaKonstrukcji:
         My = float(env["dol_y"][mg].max())
         Mgx = float(env["gora_x"][mg].min())
         Mgy = float(env["gora_y"][mg].min())
+        if e.typ == "wspornik":
+            # płyta wspornikowa: momenty MES uśrednione poprzecznie na długości B_USR (osobliwości w narożach linii
+            # podparcia/łączników); naroża wspornika — łączniki narożne i pręty ukośne górą [ZAŁ]
+            Mgx_u = _m_usrednione(fe, env["gora_x"], mg, "y", B_USR)
+            Mgy_u = _m_usrednione(fe, env["gora_y"], mg, "x", B_USR)
+            if Mgx_u > Mgx + 1e-6 or Mgy_u > Mgy + 1e-6:
+                self.log(f"{e.id}, pole {c['id']}: momenty wspornika uśrednione na szerokości {f(B_USR, 1)} m "
+                         f"(M_x,góra {f(Mgx, 1)} → {f(Mgx_u, 1)}; M_y,góra {f(Mgy, 1)} → {f(Mgy_u, 1)} kNm/m) — "
+                         "osobliwość MES w narożu linii podparcia [ZAŁ].")
+            Mgx, Mgy = Mgx_u, Mgy_u
+            Mx = max(_m_usrednione(fe, -env["dol_x"], mg, "y", B_USR) * -1.0, 0.0)
+            My = max(_m_usrednione(fe, -env["dol_y"], mg, "x", B_USR) * -1.0, 0.0)
         mn = msk & nz
         M_nar = float(max(np.maximum(env["dol_x"][mn], env["dol_y"][mn]).max(),
                           (-np.minimum(env["gora_x"][mn], env["gora_y"][mn])).max())) if mn.any() else 0.0
@@ -1156,6 +1168,11 @@ class AnalizaKonstrukcji:
         wmx = p.w_max.get(e.ekspozycja, 0.3)
         qx, qy = float(wa_qp["dol_x"][mg].max()), float(wa_qp["dol_y"][mg].max())
         qgx, qgy = float(wa_qp["gora_x"][mg].min()), float(wa_qp["gora_y"][mg].min())
+        if e.typ == "wspornik":                  # jw. — uśrednienie poprzeczne (quasi-stałe, do rys)
+            qx = max(-_m_usrednione(fe, -wa_qp["dol_x"], mg, "y", B_USR), 0.0)
+            qy = max(-_m_usrednione(fe, -wa_qp["dol_y"], mg, "x", B_USR), 0.0)
+            qgx = _m_usrednione(fe, wa_qp["gora_x"], mg, "y", B_USR)
+            qgy = _m_usrednione(fe, wa_qp["gora_y"], mg, "x", B_USR)
         zx, fx, sx, Ax = zelbet.wymiaruj_plyte(MxD, h, dx, beton, self.stal, smax, nazwa=f"Pole {c['id']} — zginanie dół, kierunek x",
                                                M_qp=qx, w_max=wmx)
         zy, fy, sy, Ay = zelbet.wymiaruj_plyte(MyD, h, dy, beton, self.stal, smax, nazwa=f"Pole {c['id']} — zginanie dół, kierunek y",
@@ -2464,6 +2481,28 @@ class AnalizaKonstrukcji:
 def _kat(ln: LineString) -> float:
     (x0, y0), (x1, y1) = ln.coords[0], ln.coords[-1]
     return math.atan2(y1 - y0, x1 - x0) % math.pi
+
+
+B_USR = 1.0   # [m] szerokość uśredniania momentów płyt wspornikowych (długość modułu łącznika termoizolacyjnego) [ZAŁ]
+
+
+def _m_usrednione(fe, vals: np.ndarray, mask: np.ndarray, os_usr: str, b: float) -> float:
+    """Najmniejsza (najbardziej ujemna) średnia krocząca wartości elementowych ``vals`` w oknie o długości ``b`` wzdłuż
+    osi ``os_usr`` ('x' lub 'y'), w obrębie kolumny/wiersza elementów siatki prostokątnej (maska ``mask``); średnia
+    ważona wymiarem elementu, przy krawędzi — po długości dostępnej (bez „rozcieńczania”)."""
+    idx = np.nonzero(mask)[0]
+    if not len(idx):
+        return 0.0
+    c = fe.el_c[idx]
+    ab = fe.el_ab[idx]
+    k, kp = (0, 1) if os_usr == "x" else (1, 0)
+    best = 0.0
+    for j in range(len(idx)):
+        row = (np.abs(c[:, kp] - c[j, kp]) < 0.5 * ab[j, kp]) & (np.abs(c[:, k] - c[j, k]) <= b / 2)
+        w = ab[row, k]
+        v = float((vals[idx][row] * w).sum() / w.sum())
+        best = min(best, v)
+    return best
 
 
 def _slug(s: str) -> str:
