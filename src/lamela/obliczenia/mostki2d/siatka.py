@@ -10,6 +10,7 @@ dokładności maszynowej), a podwajanie podziałów (każda komórka → 2) jest
 """
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass
 
 import numpy as np
@@ -70,27 +71,50 @@ def _podwoj(e: np.ndarray) -> np.ndarray:
     return out
 
 
-def podzial(a: float, b: float, h_min: float, h_max: float, r: float = 1.25, n_min: int = 2) -> np.ndarray:
-    """Krawędzie komórek na odcinku [a, b]: komórki h_min przy obu końcach, rosnące geometrycznie (×r) do h_max."""
+def podzial(a: float, b: float, h_min: float, h_max: float, r: float = 1.25, n_min: int = 2,
+            h_b: float | None = None) -> np.ndarray:
+    """Krawędzie komórek na odcinku [a, b]: komórka h_min przy końcu a (h_b przy końcu b; domyślnie h_min),
+    rosnące geometrycznie (×r) do h_max. Odcinek krótszy niż suma komórek końcowych (cienkie warstwy, membrany) —
+    podział równomierny na max(n_min, ⌈L/h⌉) komórek. Wzrost jest ograniczany przed potęgowaniem (brak przepełnienia
+    r**k dla długich odcinków i małego h_max — weryfikacja niezależna, uwaga 5)."""
+    h_a = float(h_min)
+    h_b = float(h_min if h_b is None else h_b)
+    h_max = max(float(h_max), h_a, h_b)
     L = b - a
     if L <= 0:
         return np.array([a, b])
-    if L <= n_min * h_min * 1.0000001 or L <= 2 * h_min:
-        return np.linspace(a, b, max(1, n_min) + 1)     # cienkie warstwy (membrany): n_min komórek
-    pol = []
-    acc = 0.0
-    k = 0
-    while acc < L / 2:
-        s = min(h_min * r ** k, h_max)
-        pol.append(s)
-        acc += s
-        k += 1
-    # dwa warianty: parzysta (pol + odwr(pol)) lub nieparzysta (środkowa komórka wspólna)
-    war1 = pol + pol[::-1]
-    war2 = pol + pol[-2::-1]
-    sizes = war2 if sum(war2) >= L else war1
-    tot = sum(sizes)
-    sizes = np.array(sizes) * (L / tot)
+    h_lo = min(h_a, h_b)
+    if L <= (h_a + h_b) * 1.0000001 or L <= n_min * h_lo * 1.0000001:
+        n = max(1, n_min, int(math.ceil(L / h_lo - 1e-9)))
+        return np.linspace(a, b, n + 1)
+
+    def k_cap(h0: float) -> int:          # liczba kroków wzrostu do osiągnięcia h_max
+        return int(math.ceil(math.log(h_max / h0) / math.log(r))) if h0 < h_max and r > 1 else 0
+
+    ka, kb = k_cap(h_a), k_cap(h_b)
+    lewe: list[float] = []
+    prawe: list[float] = []
+    sl = sp = 0.0
+    kl = kp = 0
+    while sl + sp < L:
+        nl = min(h_a * r ** kl, h_max) if kl < ka else h_max
+        np_ = min(h_b * r ** kp, h_max) if kp < kb else h_max
+        if nl >= h_max and np_ >= h_max:
+            # pozostała część — komórki h_max (bez pętli po tysiącach komórek)
+            n = int(math.ceil((L - sl - sp) / h_max - 1e-12))
+            lewe += [h_max] * n
+            break
+        # rozbudowa strony o mniejszej kolejnej komórce (przy równych — lewej): ciągi symetryczne dla h_a = h_b
+        if nl <= np_:
+            lewe.append(nl)
+            sl += nl
+            kl += 1
+        else:
+            prawe.append(np_)
+            sp += np_
+            kp += 1
+    sizes = np.array(lewe + prawe[::-1])
+    sizes *= L / sizes.sum()
     if len(sizes) < n_min:
         return np.linspace(a, b, n_min + 1)
     e = a + np.concatenate([[0.0], np.cumsum(sizes)])
@@ -98,8 +122,12 @@ def podzial(a: float, b: float, h_min: float, h_max: float, r: float = 1.25, n_m
     return e
 
 
-def _unikalne(v: np.ndarray, tol: float = 1e-7) -> np.ndarray:
-    v = np.sort(np.asarray(v, float))
+SNAP = 1e-6         # siatka przyciągania współrzędnych wierzchołków [m] (1 µm)
+R_GRANICY = 2.0     # maks. iloraz rozmiarów sąsiednich komórek na granicy odcinków (warstw)
+
+
+def _unikalne(v: np.ndarray, tol: float = 0.5 * SNAP) -> np.ndarray:
+    v = np.sort(np.round(np.asarray(v, float) / SNAP) * SNAP)
     out = [v[0]]
     for t in v[1:]:
         if t - out[-1] > tol:
@@ -107,10 +135,43 @@ def _unikalne(v: np.ndarray, tol: float = 1e-7) -> np.ndarray:
     return np.array(out)
 
 
-def krawedzie(punkty: np.ndarray, h_min: float, h_max: float, r: float, n_min: int) -> np.ndarray:
+def krawedzie(punkty: np.ndarray, h_min: float, h_max: float, r: float, n_min: int,
+              r_granicy: float = R_GRANICY) -> np.ndarray:
+    """Krawędzie komórek wzdłuż osi: linie siatki przez wszystkie (przyciągnięte do 1 µm) współrzędne wierzchołków,
+    zagęszczenie geometryczne przy każdej linii. Rozmiar komórki przy linii granicznej jest ograniczany do
+    r_granicy × rozmiar komórki po drugiej stronie linii (cienkie warstwy dobrze przewodzące — blachy, obróbki —
+    nie sąsiadują z komórkami 10–40 razy większymi; weryfikacja niezależna, uwaga 4)."""
     p = _unikalne(punkty)
-    czesci = [podzial(p[i], p[i + 1], h_min, h_max, r, n_min)[:-1] for i in range(len(p) - 1)]
-    return np.concatenate(czesci + [[p[-1]]])
+    n = len(p) - 1
+    if n < 1:
+        return p
+    h_pt = np.full(n + 1, float(h_min))
+    for _ in range(30):
+        czesci = [podzial(p[k], p[k + 1], h_pt[k], h_max, r, n_min, h_b=h_pt[k + 1]) for k in range(n)]
+        nowe = h_pt.copy()
+        for k in range(n):
+            d = np.diff(czesci[k])
+            nowe[k] = min(nowe[k], r_granicy * d[0])            # linia k: komórka po prawej (początek odcinka k)
+            nowe[k + 1] = min(nowe[k + 1], r_granicy * d[-1])  # linia k+1: komórka po lewej (koniec odcinka k)
+        if np.allclose(nowe, h_pt, rtol=1e-9, atol=0.0):
+            break
+        h_pt = nowe
+    return np.concatenate([c[:-1] for c in czesci] + [[p[-1]]])
+
+
+def grubosc_min_przewodzacych(wezel: Wezel, lam_min: float = 1.0) -> float | None:
+    """Najmniejsza grubość obszaru o λ ≥ lam_min (szacowana 2A/P — dla pasa t×L ≈ t; dla prostokąta min. bok)."""
+    t = None
+    for o in wezel.obszary:
+        if o.mat.lam < lam_min:
+            continue
+        for part in getattr(o.wielobok, "geoms", [o.wielobok]):
+            if part.is_empty or part.area <= 0:
+                continue
+            minx, miny, maxx, maxy = part.bounds
+            est = min(2 * part.area / part.length, maxx - minx, maxy - miny) if part.length > 0 else 0.0
+            t = est if t is None else min(t, est)
+    return t
 
 
 def wspolrzedne_wierzcholkow(geoms) -> tuple[np.ndarray, np.ndarray]:
@@ -136,6 +197,10 @@ def siatka_dla_wezla(wezel: Wezel, h_min: float | None = None, h_max: float | No
     for k, v in (("h_min", h_min), ("h_max", h_max), ("r", r), ("n_min", n_min)):
         if v is not None:
             par[k] = v
+    # cienkie warstwy dobrze przewodzące (λ ≥ 1 — blachy, obróbki, profile): h_min ≤ ich grubość
+    t_c = grubosc_min_przewodzacych(wezel)
+    if t_c is not None and t_c > 0:
+        par["h_min"] = min(par["h_min"], t_c)
     geoms = [o.wielobok for o in wezel.obszary] + [s.wielobok for s in wezel.strefy]
     xs, ys = wspolrzedne_wierzcholkow(geoms)
     minx, miny, maxx, maxy = wezel.bounds()

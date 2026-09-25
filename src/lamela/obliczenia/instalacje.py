@@ -3,7 +3,10 @@
     PYTHONPATH=src python3 -m lamela.obliczenia.instalacje \\
         --budynek model/test/dom_testowy.yaml --dzialka model/test/dzialka_testowa.yaml \\
         --wyposazenie model/test/wyposazenie_testowe.yaml --instalacje model/test/instalacje_testowe.yaml \\
-        --out projekt/08_obliczenia/demo_test/instalacje [--phi-hl plik.yaml] [--wentylacja plik.yaml|330]
+        --out projekt/08_obliczenia/demo_test/instalacje [--phi-hl plik.yaml|energia] [--wentylacja plik.yaml|330|energia]
+
+``energia`` = Φ_HL pomieszczeń i strumienie powietrza liczone modułem ``lamela.obliczenia.energia`` (PN-EN 12831)
+przez :func:`z_modulu_energii`; bez tych danych ogrzewanie używa wskaźników zastępczych [ZAŁ].
 
 Kolejność (zależności): woda → kanalizacja → deszczowa → drenaż → ogrzewanie (c.w.u. z wody; Φ_HL z modułu energii)
 → bilans mocy (PC, grzałka) → obwody → PV (profil zużycia z ogrzewania/wody) → odgromowa (PV) → schematy PNG.
@@ -152,25 +155,46 @@ def zapisz(wyn: dict, out, schematy: bool = True) -> Path:
     return out
 
 
+def z_modulu_energii(budynek, dzialka=None):
+    """Uruchamia łańcuch modułu energii (``lamela.obliczenia.energia``: obudowa → bilans wentylacji → obciążenie
+    cieplne PN-EN 12831) i zwraca ``(WynikObc, WynikWent)`` — do przekazania jako ``phi_hl`` i ``wentylacja``."""
+    from lamela.model import load_model
+
+    from .energia.obciazenie_cieplne import obciazenie_cieplne
+    from .energia.obudowa import oblicz_obudowe
+    from .energia.wentylacja import bilans_wentylacji
+    m = load_model(budynek, dzialka, strict=False)
+    ob = oblicz_obudowe(m)
+    went = bilans_wentylacji(ob.bryla, cfg=ob.cfg)
+    return obciazenie_cieplne(ob, went), went
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description="Obliczenia instalacji sanitarnych i elektrycznych (Dom LAMELA)")
     ap.add_argument("--budynek", required=True)
     ap.add_argument("--dzialka")
     ap.add_argument("--wyposazenie")
     ap.add_argument("--instalacje")
-    ap.add_argument("--phi-hl", help="Φ_HL pomieszczeń (YAML/JSON {id: W}) z modułu energii")
-    ap.add_argument("--wentylacja", help="strumienie powietrza (YAML/JSON) lub liczba m³/h")
+    ap.add_argument("--phi-hl", help="Φ_HL pomieszczeń: plik YAML/JSON {id: W} albo 'energia' (liczy moduł energii)")
+    ap.add_argument("--wentylacja", help="strumienie powietrza: plik YAML/JSON, liczba m³/h albo 'energia'")
     ap.add_argument("--out", required=True)
     ap.add_argument("--bez-schematow", action="store_true")
     a = ap.parse_args(argv)
     went = None
-    if a.wentylacja:
+    phi = None
+    if "energia" in (a.phi_hl, a.wentylacja):
+        obc, went_e = z_modulu_energii(a.budynek, a.dzialka)
+        phi = obc if a.phi_hl == "energia" else None
+        went = went_e if a.wentylacja == "energia" else None
+    if a.phi_hl and a.phi_hl != "energia":
+        phi = phi_hl_z(a.phi_hl)
+    if a.wentylacja and a.wentylacja != "energia":
         try:
             went = float(a.wentylacja)
         except ValueError:
             import yaml
             went = yaml.safe_load(Path(a.wentylacja).read_text(encoding="utf-8"))
-    wyn = oblicz_wszystko(a.budynek, a.dzialka, a.wyposazenie, a.instalacje, phi_hl=phi_hl_z(a.phi_hl) if a.phi_hl else None,
+    wyn = oblicz_wszystko(a.budynek, a.dzialka, a.wyposazenie, a.instalacje, phi_hl=phi,
                           wentylacja=went, out=a.out, schematy=not a.bez_schematow)
     print(f"Zapisano raporty do {a.out}")
     for klucz, plik, _ in RAPORTY:

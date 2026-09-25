@@ -304,15 +304,16 @@ class Rozwiazanie:
 
     def temperatura(self, x: float, y: float, tol: float = 1e-9) -> float:
         """Temperatura w punkcie (rekonstrukcja liniowa w komórce między środkiem a ścianami; punkty na
-        powierzchni → temperatura powierzchni). nan poza materiałem."""
+        powierzchni → temperatura powierzchni; punkt na ścianie lub w wierzchołku siatki — średnia rekonstrukcji
+        z przyległych komórek ważona λ). nan poza materiałem."""
         s, sol = self.model.s, self.model.solid
         Tfx, Tfy = self._temp_scian()
         ic = [i for i in range(max(0, np.searchsorted(s.x, x - tol) - 1), min(s.nx, np.searchsorted(s.x, x + tol) + 1))
               if s.x[i] - tol <= x <= s.x[i + 1] + tol]
         jc = [j for j in range(max(0, np.searchsorted(s.y, y - tol) - 1), min(s.ny, np.searchsorted(s.y, y + tol) + 1))
               if s.y[j] - tol <= y <= s.y[j + 1] + tol]
-        vals = []
-        T = self.T
+        vals, wagi = [], []
+        T, lam = self.T, self.model.kl.lam
         for j in jc:
             for i in ic:
                 if not sol[j, i]:
@@ -328,7 +329,15 @@ class Rozwiazanie:
                 else:
                     ty = Tc + (Tfy[j + 1, i] - Tc) * (y - yc) / (s.y[j + 1] - yc)
                 vals.append(tx + ty - Tc)
-        return float(np.mean(vals)) if vals else float("nan")
+                wagi.append(lam[j, i])
+        if not vals:
+            return float("nan")
+        # punkt na ścianie/wierzchołku kilku komórek: średnia ważona przewodnościami λ (dla jednego materiału —
+        # zwykła średnia). Na styku materiałów o różnym λ (np. wierzchołek G przypadku 2: aluminium/drewno/korek)
+        # temperatura wierzchołka jest wyznaczona przez materiał najlepiej przewodzący — średnia arytmetyczna
+        # rekonstrukcji z 4 komórek jest tam tylko 1. rzędu i obciążona (weryfikacja niezależna, uwaga 1).
+        w = np.asarray(wagi, float)
+        return float(np.dot(w, vals) / w.sum())
 
     # ---- strumienie w komórkach (wizualizacja)
     def strumien_komorek(self) -> tuple[np.ndarray, np.ndarray]:

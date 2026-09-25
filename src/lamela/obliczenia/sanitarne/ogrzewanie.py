@@ -36,7 +36,7 @@ from dataclasses import dataclass, field
 
 import numpy as np
 
-from ..inst_wspolne import (DaneBudynku, Krok, Raport, Warunek, ceil_to, f, fa, manhattan, phi_hl_z, tmy, wym, wym_zrodlo)
+from ..inst_wspolne import (DaneBudynku, Krok, Raport, Warunek, ceil_to, f, fa, manhattan, phi_hl_budynku_z, phi_hl_z, tmy, wym, wym_zrodlo)
 from .woda import RURY_WIELOWARSTWOWE, dobierz_rure, grubosc_izolacji_WT, rho_wody, spadek_jednostkowy
 
 # --------------------------------------------------------------------------------------------------
@@ -329,11 +329,16 @@ def oblicz_ogrzewanie(dane: DaneBudynku, phi_hl=None, par: ParametryOgrz | None 
         zr = "WSKAŹNIKOWE ZASTĘPCZE [ZAŁ] — do zastąpienia wynikami PN-EN 12831 (moduł energii)"
         zal.append(f"Φ_HL pomieszczeń przyjęto wskaźnikowo: {f(par.q_wsk_20, 0)} W/m² (20 °C), {f(par.q_wsk_24, 0)} W/m² (24 °C) — "
                    "WYŁĄCZNIE do czasu otrzymania wyników z modułu obciążenia cieplnego.")
-    Phi = sum(phi.values())
+    Phi_sum = sum(phi.values())
+    Phi_bud = phi_hl_budynku_z(phi_hl) if phi_hl is not None else phi_hl_budynku_z(dane.inst.get("obciazenie_cieplne"))
+    Phi = Phi_bud if Phi_bud else Phi_sum
     osoby = dane.osoby
     Phi_W = par.phi_cwu_os * 1000 * osoby
     kroki["moc"] = [
-        Krok("Projektowe obciążenie cieplne budynku", "Φ_HL = ΣΦ_HL,i", "", Phi / 1000, "kW", zr, 2),
+        Krok("Suma obciążeń cieplnych pomieszczeń (do wymiarowania podłogówki)", "ΣΦ_HL,i", "", Phi_sum / 1000, "kW", zr, 2),
+        Krok("Projektowe obciążenie cieplne budynku (do doboru źródła)",
+             "Φ_HL,bud (bez strumieni między pomieszczeniami ogrzewanymi)" if Phi_bud else "Φ_HL = ΣΦ_HL,i", "", Phi / 1000, "kW",
+             "PN-EN 12831-1 — wynik modułu energii" if Phi_bud else zr, 2),
         Krok("Dodatek na przygotowanie c.w.u.", "Φ_W = 0,25 kW/os·N", f"0,25·{osoby}", Phi_W / 1000, "kW", "VDI 4645 [W]", 2),
         Krok("Wymagana moc źródła przy θ_e (układ monowalentny)", "Φ_PC = Φ_HL + Φ_W", f"{f(Phi / 1000, 2)} + {f(Phi_W / 1000, 2)}",
              (Phi + Phi_W) / 1000, "kW", "", 2),

@@ -674,7 +674,7 @@ def phi_hl_z(zrodlo) -> dict[str, float] | None:
         return phi_hl_z(d)
     if isinstance(zrodlo, dict):
         if all(isinstance(v, (int, float)) for v in zrodlo.values()):
-            return {str(k): float(v) for k, v in zrodlo.items()}
+            return {str(k): float(v) for k, v in zrodlo.items() if k not in ("Phi_HL_budynku", "Phi_HL_bud", "Phi_HL")}
         for k in ("pomieszczenia", "per_pomieszczenie", "obciazenie_cieplne", "phi_HL"):
             if k in zrodlo:
                 return phi_hl_z(zrodlo[k])
@@ -691,6 +691,24 @@ def phi_hl_z(zrodlo) -> dict[str, float] | None:
                 out[str(i)] = float(v)
         return out or None
     return None
+
+
+def phi_hl_budynku_z(zrodlo) -> float | None:
+    """Projektowe obciążenie cieplne BUDYNKU [W] (PN-EN 12831-1: bez strumieni między pomieszczeniami ogrzewanymi —
+    do doboru źródła), gdy źródło je podaje: atrybut liczbowy ``Phi_HL`` (np. ``energia.obciazenie_cieplne.WynikObc``)
+    albo klucz ``Phi_HL_budynku`` / ``Phi_HL`` (liczba) słownika obok ``pomieszczenia``. Inaczej None (→ ΣΦ_HL,i)."""
+    if zrodlo is None or isinstance(zrodlo, (str, Path, list, tuple)):
+        if isinstance(zrodlo, (str, Path)):
+            p = Path(zrodlo)
+            return phi_hl_budynku_z(json.loads(p.read_text(encoding="utf-8")) if p.suffix == ".json" else _yaml(p))
+        return None
+    if isinstance(zrodlo, dict):
+        for k in ("Phi_HL_budynku", "Phi_HL_bud", "Phi_HL"):
+            if isinstance(zrodlo.get(k), (int, float)):
+                return float(zrodlo[k])
+        return None
+    v = getattr(zrodlo, "Phi_HL", None)
+    return float(v) if isinstance(v, (int, float)) else None
 
 
 def wentylacja_z(zrodlo, dane: DaneBudynku | None = None) -> dict:

@@ -255,6 +255,29 @@ def test_integracja_model_testowy(out: Path | None = None):
     return wyn
 
 
+def test_integracja_z_modulem_energii():
+    """Kontrakt z modułem energii: WynikObc (Φ_HL pomieszczeń + Φ_HL budynku) i WynikWent przyjęte bez konwersji;
+    podłogówka z ΣΦ_HL,i, dobór PC z Φ_HL,bud; θ_V,des ≤ 35 °C (niedobory jako warunki pomieszczeń)."""
+    try:
+        from lamela.obliczenia.instalacje import z_modulu_energii
+        obc, went = z_modulu_energii(B, DZ)
+    except ImportError as e:
+        return f"pominięty (brak modułu energii: {e})"
+    from lamela.obliczenia.inst_wspolne import dane_z_modelu, phi_hl_budynku_z, phi_hl_z, wentylacja_z
+    from lamela.obliczenia.sanitarne.ogrzewanie import oblicz_ogrzewanie
+    ph = phi_hl_z(obc)
+    assert ph and abs(sum(ph.values()) - sum(p.Phi_HL for p in obc.pomieszczenia)) < 1e-6
+    assert abs(phi_hl_budynku_z(obc) - obc.Phi_HL) < 1e-9
+    w = wentylacja_z(went)
+    assert abs(w["suma_naw"] - went.suma_naw) < 1e-6 and w["zrodlo"] == "moduł wentylacji"
+    dane = dane_z_modelu(B, DZ, WY, IN)
+    og = oblicz_ogrzewanie(dane, phi_hl=obc)
+    assert abs(og.Phi_HL - obc.Phi_HL) < 1e-6 and og.phi_zrodlo.startswith("moduł")
+    assert og.theta_V <= 35.0 + 1e-9
+    nied = [x for x in og.warunki if "moc podłogi" in x.opis and x.ok is False]
+    return f"OK (Φ_HL,bud {obc.Phi_HL / 1000:.2f} kW, ΣΦ_HL,i {sum(ph.values()) / 1000:.2f} kW, niedobory podłogówki: {len(nied)})"
+
+
 def test_model_docelowy_jesli_istnieje():
     """Drugi test: model/budynek.yaml (+ dzialka/wyposazenie/instalacje) — tylko odczyt; pominięty, gdy brak pliku."""
     b = ROOT / "model" / "budynek.yaml"
