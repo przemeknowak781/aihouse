@@ -486,8 +486,9 @@ def raport_glaser(wyniki: Sequence[WynikGlaser], wykresy: dict | None = None, za
                           "PN-EN ISO 13788:2013-05 rozdz. 6; WT § 321 ust. 2, zał. 2 pkt 2.2.4–2.2.5; "
                           "dane klimatyczne TMY Poznań (MIiR, WMO 12330)",
                           ["s_d = μ·d; g_c = δ₀·[(p_{c−1} − p_c)/Δs' − (p_c − p_{c+1})/Δs''], δ₀ = 2·10⁻¹⁰ kg/(m·s·Pa).",
-                           "Wymagane s_d paroizolacji — najmniejsze s_d po ciepłej stronie izolacji, przy którym nie "
-                           "występuje kondensacja w żadnym miesiącu (obliczenie iteracyjne)."])]
+                           "Wymagane s_d paroizolacji — najmniejsze s_d warstwy po ciepłej stronie izolacji: (1) przy którym "
+                           "nie występuje kondensacja w żadnym miesiącu; (2) przy którym kondensat wysycha w cyklu rocznym "
+                           "i M_a,max ≤ kryterium (WT zał. 2 pkt 2.2.5) — bisekcja do 1500 m."])]
     rows = []
     for r in wyniki:
         rows.append([r.kod, r.nazwa[:50], r.rola, "tak" if r.kondensacja else "nie",

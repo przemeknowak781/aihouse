@@ -324,3 +324,82 @@ x = −2,20. Bryła A (z lamelami) ma w elewacji 13,60 m (x −1,30 … 12,30).
 | 2.06 | Przestrzeń nad klatką (latarnia) | prostokąt (4,155; 5,505 – 6,295; 8,795) | 7,04 | - | nie wlicza się do PU (rzut biegów liczony na P0 i P1) |
 | | **PU P2** | | **59,08** | | |
 
+
+### 3.7 Elementy zewnętrzne: płyty wysunięte, rama C, lamele, słupy, dachy (z `geo_ext.py`)
+
+| id | opis | rzut (x; y) [m] | rzędne [m] | łącznik termoizol. |
+|---|---|---|---|---|
+| E-okap | okap pd. strefy dziennej (linia E), wysunięcie 1,00 m poza lico; nad patio do x 13,80 | −1,80…13,80; −1,30…−0,30 | +2,75 / +3,05 | tak |
+| E-okap-W | okap zach. salonu (taras zach.), wysunięcie 1,50 m | −1,80…−0,30; −0,30…5,40 | +2,75 / +3,05 | tak |
+| daszek | daszek nad wejściem na osi | 6,90…9,60; 11,60…12,80 | +2,80 / +3,05 | tak |
+| C-dol / C-gora | rama C — płyta dolna (linia D) / górna, wysunięcie 1,00 m | 3,60…12,90; −1,30…−0,30 | +3,45/+3,65 ; +5,15/+5,35 | tak |
+| C-boki | żebra boczne ramy 0,20 m | x 3,60…3,80 i 12,70…12,90 | +3,45 … +5,35 | tak |
+| ST2L | płyta loggii P2 (obniżona) — krawędź pd. 0,90 m i zach. 0,90 m poza lico A | −2,20…12,60; −1,20…1,20 (+ pas zach. do y 5,70) | +5,70 / +5,90 | tak (w linii 1 / A) |
+| ST3-okap | stropodach A — wysunięcie S 0,90, W 0,90, E 0,30 m | −2,20…12,60; −1,20…5,70 | +9,10 / +9,40 (+ attyka +9,85) | — (płyta w obrębie ocieplenia dachu, okap ocieplony) |
+| G-okap | okap pd. garażu nad patio (linia D), 1,00 m | 12,30…18,70; 3,50…4,50 | +2,76 / +3,65 | nie (garaż nieogrzewany) |
+| LAMELE | ekran lamel 40×80 co 12 cm (drewno termo / alu drewnopodobne) | x −1,30…12,30; y −0,40 | +5,90 … +9,10 | mocowania punktowe |
+| SL1–SL4 | słupy fasady E, RK 120×120×8 S355 w słupkach | x 2,60 / 4,50 / 6,90 / 9,30; y 0 | 0,00 … +2,80 | — (w warstwie ocieplenia, przekładka) |
+| SLC1–SLC2 | słupki boksu C, RK 120×120×8 | x 6,90 / 9,30; y 0 | +3,00 … +5,70 | — |
+| SLA1–SLA5 | słupy loggii w płaszczyźnie lamel, RK 100×100×6 | x −1,00 / 2,60 / 6,90 / 9,30 / 12,00; y 0 | +5,90 … +9,10 | na zewnątrz izolacji |
+| SW1 | latarnia nad klatką (szkło 3-szyb., stała, bez wyniesienia ponad attykę) | 4,30…6,15; 5,70…8,60 | ≤ +9,85 | — |
+| SW2 | świetlik nad wiatrołapem | 7,40…8,60; 9,60…11,00 | +3,05…+3,35 | — |
+| Dachy | zielony ekstensywny: garaż (attyka +3,65), skrzydło wejściowe (+3,40); żwir/rozchodnik: dach P1 poza P2 (+6,70); P2: PV ≤ 6,5 kWp (+9,85) | — | — | — |
+
+### 3.8 Schody SCH1 (P0→P1) i SCH2 (P1→P2) — jeden rdzeń, identyczne, jedne nad drugimi
+
+* Rdzeń w osiach B–C / 3–4, wymiary w świetle **x 4,155–6,295 (2,14 m) × y 5,505–8,795 (3,29 m)**, doświetlony latarnią SW1 i oknem pn. ON3 na P2;
+  od strony holu P0 otwarty przez ekran z lamel (oś C), na P1 i P2 otwarty otworem 2,14 m w ścianie grzbietowej.
+* Wysokość kondygnacji 3,15 m = **18 podnóżków × 0,175 m**; 2 biegi po **9 podnóżków / 8 stopni × 0,28 m** (rzut biegu 2,24 m); **2h + s = 0,63 m**;
+  nachylenie 32°; szerokość użytkowa biegu **1,00 m**; oko 0,14 m z balustradą szklaną; poręcze obustronne (od ściany ≥ 0,05 m).
+* **Bieg 1 / 3** (pas wschodni x 5,295–6,295): pierwszy podnóżek y = 5,505 (przy ścianie grzbietowej), kierunek **na północ**, ostatni podnóżek y = 7,745.
+* **Spocznik** x 4,155–6,295, y 7,745–8,795 (**2,14 × 1,05 m ≥ 1,00 m**), rzędna +1,575 (SCH1) i +4,725 (SCH2), płyta 18 cm oparta na ścianie osi 4.
+* **Bieg 2 / 4** (pas zachodni x 4,155–5,155): od spocznika **na południe**, ostatni podnóżek y = 5,505 — wyjście przez otwór w ścianie grzbietowej na
+  galerię P1 (+3,15) / hol P2 (+6,30).
+* Dostęp: na P0 stopa biegu 1 w otworze ściany grzbietowej x 5,295–6,295 (nadproże +2,60) przy wylocie holu; na P1 wejście na bieg 3 z galerii.
+* **Prześwit**: biegi i spoczniki SCH2 leżą dokładnie 3,15 m nad SCH1 ⇒ prześwit pionowy nad każdym biegiem ≈ 3,15 − 0,21 (płyta 18 cm / cos 32°) =
+  **≈ 2,94 m ≥ 2,00 m**; pod nadprożem otworu stopy biegu 2,60 m; nad biegami SCH2 strop ST3 (+9,10) — prześwit > 3 m.
+* Balustrady: szklana w oku (h 0,90 m), na P2 wzdłuż krawędzi y = 5,40 nad biegiem 3 (x 5,245–6,295, h 1,00 m); galeria P1 nad pustką — szkło VSG h 1,00 m.
+
+## 4. Koncepcja konstrukcji
+
+**System:** ściany nośne murowane (silikat 18 cm) + stropy żelbetowe monolityczne; stalowe słupy tylko w liniach przeszkleń południowych
+(w jednej pionowej linii przez 3 kondygnacje), żelbetowe podciągi w stropach nad otwartymi strefami.
+
+**Ściany nośne w pionie (jedna nad drugą):**
+* oś **3** (grzbietowa) — P0, P1, P2 (na P2: ściana pn. bryły A i wewnętrzna nadbudowy); otwory P0: stopa schodów 1,00 m i wylot holu 2,60 m (nadproża
+  żelbetowe w ST1, filar 0,65 m z szachtem SI między nimi);
+* oś **A** — P0, P1 (P2: lekka ściana A' na wsporniku); oś **E** — P0, P1, P2 (P0 odc. y 4,80–11,30 jako ściana dom/garaż SWG);
+* oś **4** — P0, P1, P2 (P2 tylko x 4,05–9,65 — nadbudowa); P0 odcinek x 6,40–9,65 = przegroda szklana ⇒ **podciąg PD-4** w ST1 (rozp. 3,25 m);
+* osie **B** i **D** — pasmo północne P0–P2 (P2 — ściany nadbudowy); oś **C** — P1 i P2 na **podciągu PD-C** w ST1 (rozp. 3,50 m, oś 3→4), bo na P0 jest ekran lamel;
+* osie **5** i **F** oraz ściana pd. garażu (oś 2) — tylko P0 (skrzydło wejściowe i garaż).
+
+**Linia południowa (oś 1) — ścieżka obciążeń:** SLA (P2, dach) → SLC / mur P1 → podciąg krawędziowy **PD-1** w ST1 (30 × 45, schowany w pasie
+okapu E +2,55…+3,05) → słupy SL1–SL4 fasady E → stopy/ława w osi 1. Słupy SLA3/SLA4, SLC1/SLC2 i SL3/SL4 leżą w osiach x = 6,90 i 9,30 — jedna
+pionowa linia do fundamentu; SLA2 (x 2,60) stoi na ścianie murowanej P1 nad SL1 (x 2,60); SLA5 na narożniku ściany E. Rozpiętości PD-1 między
+podporami ≤ 2,70 m; krawędź ST2L (**PD-5**) między murem P1 (x ≤ 4,50), SLC1, SLC2 i filarem x 11,70–12,30 — ≤ 2,40 m.
+
+**Stropy (płyty 20 cm, jednokierunkowe N–S):** ST1: pasmo pd. 5,40 m (PD-1 → oś 3), pasmo pn. 3,50 m, skrzydło 2,40 m; ST2: 5,40 / 3,50 m
+(uskok ST2L/ST2 na osi 1' — belka-próg 20 × 45 cm, na niej lekka ściana przeszkleń P2); ST3 (22 cm): 5,40 m od osi 3 do linii słupów SLA + wspornik
+1,20 m (okap S), nadbudowa 3,50 m; **dach garażu STG 24 cm, rozpiętość 6,40 m E–W** (oś E → F) — dach zielony (obciążenie stałe wg producenta)
++ śnieg s = 0,72 kN/m² + zaspa przy uskoku do ściany P1 (W-264). Wszystkie rozpiętości ≤ 6,50 m.
+
+**Pustka nad jadalnią (otwór w ST1 x 4,50–8,40, y 0,15–4,00):** podciągi **PD-2** w osi B' (x = 4,50; oś 1 → 3, rozp. 5,40 m; podpory: SL2 i ściana
+grzbietowa; niesie lekką ścianę GK pokoju dziecka 1) i **PD-3** (x = 8,40; rozp. 5,40 m, podparty na PD-1 i osi 3), belka wymianowa wzdłuż y = 4,00
+(rozp. 3,90 m) — pas galerii 4,00–5,40 m opiera się na niej i na ścianie osi 3. Nad pustką strop ST2 (+5,95) bez zmian.
+
+**Wsporniki:**
+* **Bryła A — wspornik 1,00 m na zachód**: ściany P2 na wsporniku są **lekkie** (SZL, szkielet + wełna); naroże niosą belki-wsporniki w ST2:
+  **PD-6** w osi 1 (nad murem P1 x 0…4,50, wspornik 1,00 m, zaplecze 4,50 m) i **PD-7** w osi 3 (nad ścianą grzbietową, zaplecze 4,05 m) oraz
+  **żelbetowa ściana-tarcza P2 w osi 3** na odcinku x −1,00…2,00 (h = 2,80 m) wiążąca ST2 i ST3; stosunek zaplecze / wspornik ≥ 4 (EQU wg W-262).
+  Słup SLA1 (x −1,00) przekazuje na koniec PD-6 wyłącznie reakcję dachu (≈ 25–30 kN).
+* **Płyty wysunięte** 0,90–1,50 m (E-okap 1,00 S / 1,50 W, ST2L 0,90, ST3 0,90, rama C 1,00, daszek 1,20) — płyty żelbetowe 20 cm połączone ze
+  stropami **łącznikami termoizolacyjnymi** (typ z przenoszeniem momentu) w płaszczyźnie ocieplenia; zbrojenie i ψ do weryfikacji symulacją 2D/3D (brief §9).
+  Najdłuższy wspornik płyty: okap zach. E 1,80 m od osi A (bez obciążeń ścian) — łącznik z podwyższoną nośnością lub pogrubienie do 25 cm.
+* Rama C: płyty dolna i górna zawieszone na łącznikach w krawędzi PD-1 (dolna) i wieńcu nad boksem (górna), żebra boczne 0,20 m jako tarcze
+  usztywniające; ciężkich ścian na wspornikach brak.
+
+**Fundamenty:** ławy żelbetowe pod ścianami (spód −1,10 m, poniżej h_z = 0,80 m), ława/belka w osi 1 pod progami HS z pogrubieniem pod słupami SL;
+posadowienie bezpośrednie w piaskach średnich (ZWG ≈ 3,8 m p.p.t.), II kategoria geotechniczna (brief §8). Alternatywa do porównania w PT: płyta
+fundamentowa (korzystna przy ciągłej izolacji XPS pod całym budynkiem — brief §9 p. 1).
+
+**Klasa odporności pożarowej:** zwolnienie wg WT §213 (dom jednorodzinny, 3 kondygnacje) — stal słupów bez wymagań R.

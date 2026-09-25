@@ -108,8 +108,7 @@ def oblicz_wszystko(m, *, wyniki_symulacji: dict | None = None, wariant_psi: str
     wB = EP.oblicz_ep(ob, went, sB, obc=obc, zal=Zalozenia())
     sC = EP.system_pc_domyslny(ob.bryla.A_f, went)
     wC = EP.oblicz_ep(ob, went, sC, obc=obc, zal=Zalozenia())
-    sA2 = EP.system_projektowy(ob.cfg, went, ob.bryla.A_f, obc.dobor)
-    sA2.pv = None
+    sA2 = EP.system_projektowy(ob.cfg, went, ob.bryla.A_f, obc.dobor, z_pv=False)
     sA2.nazwa = "A0: PC R290 + rekuperacja, bez PV"
     wA0 = EP.oblicz_ep(ob, went, sA2, obc=obc, zal=Zalozenia())
     wA4 = EP.oblicz_ep(ob, went, EP.system_projektowy(ob.cfg, went, ob.bryla.A_f, obc.dobor), obc=obc, n50=4.0,

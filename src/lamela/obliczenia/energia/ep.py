@@ -159,7 +159,8 @@ def q_w_nd(A_f: float, V_Wi: float | None = None, k_R: float | None = None, thet
 # --------------------------------------------------------------------------------------------------
 # Systemy
 # --------------------------------------------------------------------------------------------------
-def system_projektowy(cfg: dict, went, A_f: float, dobor: dict | None = None, zal: Zalozenia | None = None) -> System:
+def system_projektowy(cfg: dict, went, A_f: float, dobor: dict | None = None, zal: Zalozenia | None = None,
+                      *, z_pv: bool = True) -> System:
     """PC powietrze–woda R290 + ogrzewanie podłogowe z regulacją pokojową + c.w.u. z PC (zasobnik) + wentylacja z odzyskiem
     + PV (autokonsumpcja). Parametry z `energia.ogrzewanie/cwu/pv` modelu, domyślnie dane przykładowe."""
     og = cfg.get("ogrzewanie") or {}
@@ -187,7 +188,7 @@ def system_projektowy(cfg: dict, went, A_f: float, dobor: dict | None = None, za
     if cyrk:
         pom.append(Pomocnicze("pompa cyrkulacyjna c.w.u. z zegarem", float(cyrk.get("moc_W", 5)),
                               float(cyrk.get("h_doba", 8)) * 365, "W", "ciagly"))
-    pvc = cfg.get("pv", {} if cfg.get("pv") is None else cfg.get("pv"))
+    pvc = cfg.get("pv", {} if cfg.get("pv") is None else cfg.get("pv")) if z_pv else False
     s = System("A: PC R290 + PV + rekuperacja", "pompa ciepła powietrze–woda (R290) + ogrzewanie podłogowe 35/28 °C "
                "z regulacją pokojową + c.w.u. z PC (zasobnik) + wentylacja z odzyskiem + PV",
                "el", scop, float(og.get("eta_H_s", 1.0)), float(og.get("eta_H_d", 0.96)), float(og.get("eta_H_e", 0.89)),

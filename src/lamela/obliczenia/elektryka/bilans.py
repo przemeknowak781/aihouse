@@ -218,10 +218,10 @@ def odbiorniki_z_modelu(dane: DaneBudynku, par: ParametryBilans | None = None, o
         out.append(Odbiornik(f"D{d}", nazwa, grupa, P, fazy, kw.pop("cosphi", 0.95), kj.get(grupa, 1.0), sterowany=ster, lok=lok,
                              typ_obwodu=kw.pop("typ", "staly"), In_min=In_min, char=char, s_min=s_min, rcd=rcd, podstawa=podst, **kw))
     for e in _wyp(dane, "plyta"):
-        D("Płyta indukcyjna", "gotowanie", par.plyta_kW, 3, (*e["xy"], e.get("kond", "P0")), rcd="RCD 4P 40 A/30 mA typ A")
+        D("Płyta indukcyjna", "gotowanie", par.plyta_kW, 3, (*e["xy"], e.get("kond", "P0")), rcd="RCD 4P 40 A/30 mA typ A", cosphi=1.0)
     kuch = [p for p in poms if rodzaj(p) == "kuchnia"]
     if kuch:
-        D("Piekarnik", "gotowanie", par.piekarnik_kW, 1, (*kuch[0].centroid, kuch[0].kond))
+        D("Piekarnik", "gotowanie", par.piekarnik_kW, 1, (*kuch[0].centroid, kuch[0].kond), cosphi=1.0)
     for typ, naz, P in (("zmywarka", "Zmywarka", 2.2), ("pralka", "Pralka", 2.2), ("suszarka", "Suszarka", 2.5)):
         for e in _wyp(dane, typ):
             D(naz, "agd", P, 1, (*e["xy"], e.get("kond", "P0")))
@@ -240,7 +240,7 @@ def odbiorniki_z_modelu(dane: DaneBudynku, par: ParametryBilans | None = None, o
       rcd="RCD typ F/B 30 mA wg DTR (falownik sprężarki)", przewod="YKY (zewn.) / YDYp", metoda="C",
       podst="R7 D6; PN-HD 60364-5-53 (typ RCD wg DTR)", L_dodatkowa=2.0)
     D(f"Grzałka rezerwowa PC / zasobnika c.w.u. ({f(grz, 1)} kW)", "grzalka", grz, 3, zas, In_min=10, ster=True,
-      rcd="RCD 4P 40 A/30 mA typ A", podst="R7 D7 — blokada w systemie zarządzania mocą (DLM)")
+      rcd="RCD 4P 40 A/30 mA typ A", podst="R7 D7 — blokada w systemie zarządzania mocą (DLM)", cosphi=1.0)
     D("Sterowanie PC, pompy obiegowe, listwy ogrzewania podłogowego", "sterowanie", 0.3, 1, zas, In_min=10, s_min=1.5)
     V = wentylacja_m3h if wentylacja_m3h is not None else 330.0
     rek = _wyp(dane, "rekuperator")
