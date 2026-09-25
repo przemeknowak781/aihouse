@@ -30,7 +30,7 @@
     {
       "nr": "PZT-01",
       "tytul": "PLAN ZAGOSPODAROWANIA DZIAŁKI",
-      "format": "A2",
+      "format": "420×530",
       "typ": [
         "pzt_plan"
       ],
@@ -41,9 +41,9 @@
       "qa_kind": "PZT",
       "wymiary_mm": [
         420.0,
-        594.0
+        530.0
       ],
-      "pole_m2": 0.2495,
+      "pole_m2": 0.2226,
       "skladanie": {
         "zgiecia_pionowe": [
           125.0,
@@ -59,28 +59,30 @@
         ],
         "rzedy": [
           297.0,
-          297.0
+          233.0
         ],
         "n_pasow": 3,
         "n_rzedow": 2,
         "warstwy": 6,
-        "ocena": "dobre",
+        "ocena": "poprawne",
         "ocena_pion": "dobre",
-        "ocena_poziom": "dobre",
+        "ocena_poziom": "poprawne",
         "tabliczka_na_wierzchu": true,
-        "uwagi": []
+        "uwagi": [
+          "górny rząd 233 mm (niepełny)"
+        ]
       },
       "uklad": {
-        "format": "A2",
+        "format": "420×530",
         "wymiary_mm": [
           420.0,
-          594.0
+          530.0
         ],
-        "pole_m2": 0.2495,
-        "standardowy": true,
+        "pole_m2": 0.2226,
+        "standardowy": false,
         "tryb": "ekonomiczny",
-        "koszt": 0.2495,
-        "wypelnienie_szac": 0.67,
+        "koszt": 0.2384,
+        "wypelnienie_szac": 0.847,
         "uklad_widokow": "wiersz",
         "skladanie": {
           "zgiecia_pionowe": [
@@ -97,21 +99,33 @@
           ],
           "rzedy": [
             297.0,
-            297.0
+            233.0
           ],
           "n_pasow": 3,
           "n_rzedow": 2,
           "warstwy": 6,
-          "ocena": "dobre",
+          "ocena": "poprawne",
           "ocena_pion": "dobre",
-          "ocena_poziom": "dobre",
+          "ocena_poziom": "poprawne",
           "tabliczka_na_wierzchu": true,
-          "uwagi": []
+          "uwagi": [
+            "górny rząd 233 mm (niepełny)"
+          ]
         },
         "czesci_uwag": 1,
         "kolejnosc_czytania": true,
-        "znaki_rezerwowane": true,
+        "znaki_rezerwowane": false,
         "kandydaci": [
+          {
+            "format": "420×530",
+            "wymiary_mm": [
+              420,
+              530
+            ],
+            "koszt": 0.2384,
+            "pole_m2": 0.2226,
+            "skladanie": "poprawne"
+          },
           {
             "format": "A2",
             "wymiary_mm": [
@@ -123,14 +137,34 @@
             "skladanie": "dobre"
           },
           {
+            "format": "610×370",
+            "wymiary_mm": [
+              610,
+              370
+            ],
+            "koszt": 0.2634,
+            "pole_m2": 0.2257,
+            "skladanie": "słabe"
+          },
+          {
             "format": "600×420",
             "wymiary_mm": [
               600,
               420
             ],
-            "koszt": 0.2699,
+            "koszt": 0.2726,
             "pole_m2": 0.252,
             "skladanie": "poprawne"
+          },
+          {
+            "format": "410×610",
+            "wymiary_mm": [
+              410,
+              610
+            ],
+            "koszt": 0.2834,
+            "pole_m2": 0.2501,
+            "skladanie": "słabe"
           },
           {
             "format": "410×841",
@@ -141,16 +175,6 @@
             "koszt": 0.3694,
             "pole_m2": 0.3448,
             "skladanie": "poprawne"
-          },
-          {
-            "format": "A3×3",
-            "wymiary_mm": [
-              420,
-              891
-            ],
-            "koszt": 0.3742,
-            "pole_m2": 0.3742,
-            "skladanie": "dobre"
           }
         ],
         "bloki": [
@@ -168,43 +192,43 @@
             [
               230.0,
               118.0,
-              410.0,
+              407.0,
               148.8
             ]
           ],
           [
             "legenda",
             [
-              44.0,
-              150.6,
+              43.8,
+              34.0,
               224.0,
-              298.8
+              234.8
             ]
           ],
           [
             "oo",
             [
               230.0,
-              274.0,
-              410.0,
-              295.1
+              251.8,
+              407.0,
+              285.2
             ]
           ],
           [
             "uwagi[1–8]",
             [
               230.0,
-              218.9,
-              410.0,
-              269.0
+              162.2,
+              407.0,
+              246.8
             ]
           ]
         ],
         "kolizje": [],
         "znaki_centrujace": {
-          "g": 7.5,
+          "g": 10.0,
           "d": 10.0,
-          "l": 10.0,
+          "l": 7.5,
           "p": 10.0
         }
       },
@@ -220,16 +244,16 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 1463,
-          "napisy": 492,
+          "prymitywy": 1483,
+          "napisy": 512,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 14.3,
+      "czas_s": 16.2,
       "png_kontrola": {
         "px": [
           2481,
-          3508
+          3130
         ],
         "dpi_eff": [
           150.0,
@@ -242,19 +266,19 @@
         "ok": true
       },
       "wypelnienie": {
-        "wypelnienie": 0.81,
-        "wypelnienie_rys": 0.793,
-        "wypelnienie_skl": 0.631,
-        "wypelnienie_kontur": 0.606,
-        "pole_arkusza_m2": 0.2495,
-        "pole_ramki_m2": 0.2239,
+        "wypelnienie": 0.943,
+        "wypelnienie_rys": 0.937,
+        "wypelnienie_skl": 0.943,
+        "wypelnienie_kontur": 0.807,
+        "pole_arkusza_m2": 0.2226,
+        "pole_ramki_m2": 0.1989,
         "pusty_prostokat_mm": [
           210,
-          140
+          24
         ],
         "przyciety_mm": [
-          408,
-          588
+          412,
+          524
         ],
         "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
       }
@@ -262,7 +286,7 @@
     {
       "nr": "PZT-02",
       "tytul": "PLAN SZCZEGÓŁOWY — WYMIARY I RZĘDNE",
-      "format": "400×594",
+      "format": "594×430",
       "typ": [
         "pzt_szczegoly"
       ],
@@ -272,97 +296,121 @@
       ],
       "qa_kind": "PZT",
       "wymiary_mm": [
-        400.0,
-        594.0
+        594.0,
+        430.0
       ],
-      "pole_m2": 0.2376,
+      "pole_m2": 0.2554,
       "skladanie": {
         "zgiecia_pionowe": [
-          115.0,
-          210.0
+          210.0,
+          402.0
         ],
         "zgiecia_poziome": [
           297.0
         ],
         "pasy": [
-          115.0,
-          95.0,
-          190.0
+          210.0,
+          192.0,
+          192.0
         ],
         "rzedy": [
           297.0,
-          297.0
+          133.0
         ],
         "n_pasow": 3,
         "n_rzedow": 2,
         "warstwy": 6,
-        "ocena": "dobre",
+        "ocena": "poprawne",
         "ocena_pion": "dobre",
-        "ocena_poziom": "dobre",
+        "ocena_poziom": "poprawne",
         "tabliczka_na_wierzchu": true,
-        "uwagi": []
+        "uwagi": [
+          "górny rząd 133 mm (niepełny)"
+        ]
       },
       "uklad": {
-        "format": "400×594",
+        "format": "594×430",
         "wymiary_mm": [
-          400.0,
-          594.0
+          594.0,
+          430.0
         ],
-        "pole_m2": 0.2376,
+        "pole_m2": 0.2554,
         "standardowy": false,
         "tryb": "ekonomiczny",
-        "koszt": 0.2447,
-        "wypelnienie_szac": 0.753,
+        "koszt": 0.2736,
+        "wypelnienie_szac": 0.778,
         "uklad_widokow": "wiersz",
         "skladanie": {
           "zgiecia_pionowe": [
-            115.0,
-            210.0
+            210.0,
+            402.0
           ],
           "zgiecia_poziome": [
             297.0
           ],
           "pasy": [
-            115.0,
-            95.0,
-            190.0
+            210.0,
+            192.0,
+            192.0
           ],
           "rzedy": [
             297.0,
-            297.0
+            133.0
           ],
           "n_pasow": 3,
           "n_rzedow": 2,
           "warstwy": 6,
-          "ocena": "dobre",
+          "ocena": "poprawne",
           "ocena_pion": "dobre",
-          "ocena_poziom": "dobre",
+          "ocena_poziom": "poprawne",
           "tabliczka_na_wierzchu": true,
-          "uwagi": []
+          "uwagi": [
+            "górny rząd 133 mm (niepełny)"
+          ]
         },
         "czesci_uwag": 1,
         "kolejnosc_czytania": true,
         "znaki_rezerwowane": true,
         "kandydaci": [
           {
-            "format": "400×594",
-            "wymiary_mm": [
-              400,
-              594
-            ],
-            "koszt": 0.2447,
-            "pole_m2": 0.2376,
-            "skladanie": "dobre"
-          },
-          {
-            "format": "A2",
+            "format": "594×430",
             "wymiary_mm": [
               594,
-              420
+              430
             ],
-            "koszt": 0.2595,
-            "pole_m2": 0.2495,
+            "koszt": 0.2736,
+            "pole_m2": 0.2554,
             "skladanie": "poprawne"
+          },
+          {
+            "format": "610×430",
+            "wymiary_mm": [
+              610,
+              430
+            ],
+            "koszt": 0.281,
+            "pole_m2": 0.2623,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "420×640",
+            "wymiary_mm": [
+              420,
+              640
+            ],
+            "koszt": 0.3046,
+            "pole_m2": 0.2688,
+            "skladanie": "słabe"
+          },
+          {
+            "format": "570×594",
+            "wymiary_mm": [
+              570,
+              594
+            ],
+            "koszt": 0.3487,
+            "pole_m2": 0.3386,
+            "skladanie": "dobre"
           },
           {
             "format": "400×841",
@@ -389,43 +437,43 @@
           [
             "tabliczka",
             [
-              210.0,
+              404.0,
               10.0,
-              390.0,
+              584.0,
               113.0
             ]
           ],
           [
             "róża i podziałka",
             [
-              210.0,
+              404.0,
               118.0,
-              390.0,
+              581.0,
               148.8
             ]
           ],
           [
             "legenda",
             [
-              24.0,
-              79.1,
-              204.0,
-              193.6
+              400.8,
+              257.3,
+              581.0,
+              417.0
             ]
           ],
           [
             "uwagi[1–8]",
             [
-              24.0,
-              26.9,
-              204.0,
-              74.1
+              395.5,
+              179.7,
+              572.5,
+              252.3
             ]
           ]
         ],
         "kolizje": [],
         "znaki_centrujace": {
-          "g": 7.5,
+          "g": 9.9,
           "d": 10.0,
           "l": 7.5,
           "p": 10.0
@@ -443,19 +491,19 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 1991,
-          "napisy": 607,
+          "prymitywy": 2089,
+          "napisy": 670,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 21.8,
+      "czas_s": 22.5,
       "png_kontrola": {
         "px": [
-          2363,
-          3508
+          3508,
+          2540
         ],
         "dpi_eff": [
-          150.1,
+          150.0,
           150.0
         ],
         "dpi_meta": [
@@ -465,19 +513,19 @@
         "ok": true
       },
       "wypelnienie": {
-        "wypelnienie": 0.852,
-        "wypelnienie_rys": 0.837,
-        "wypelnienie_skl": 0.851,
-        "wypelnienie_kontur": 0.691,
-        "pole_arkusza_m2": 0.2376,
-        "pole_ramki_m2": 0.2124,
+        "wypelnienie": 0.861,
+        "wypelnienie_rys": 0.849,
+        "wypelnienie_skl": 0.861,
+        "wypelnienie_kontur": 0.709,
+        "pole_arkusza_m2": 0.2554,
+        "pole_ramki_m2": 0.2312,
         "pusty_prostokat_mm": [
-          164,
-          78
+          182,
+          40
         ],
         "przyciety_mm": [
-          400,
-          588
+          587,
+          430
         ],
         "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
       }
@@ -485,7 +533,7 @@
     {
       "nr": "PZT-03",
       "tytul": "RYSUNEK KOORDYNACYJNY UZBROJENIA TERENU",
-      "format": "620×420",
+      "format": "610×450",
       "typ": [
         "pzt_uzbrojenie"
       ],
@@ -495,26 +543,26 @@
       ],
       "qa_kind": "PZT",
       "wymiary_mm": [
-        620.0,
-        420.0
+        610.0,
+        450.0
       ],
-      "pole_m2": 0.2604,
+      "pole_m2": 0.2745,
       "skladanie": {
         "zgiecia_pionowe": [
           210.0,
-          415.0
+          410.0
         ],
         "zgiecia_poziome": [
           297.0
         ],
         "pasy": [
           210.0,
-          205.0,
-          205.0
+          200.0,
+          200.0
         ],
         "rzedy": [
           297.0,
-          123.0
+          153.0
         ],
         "n_pasow": 3,
         "n_rzedow": 2,
@@ -524,37 +572,37 @@
         "ocena_poziom": "poprawne",
         "tabliczka_na_wierzchu": true,
         "uwagi": [
-          "górny rząd 123 mm (niepełny)"
+          "górny rząd 153 mm (niepełny)"
         ]
       },
       "uklad": {
-        "format": "620×420",
+        "format": "610×450",
         "wymiary_mm": [
-          620.0,
-          420.0
+          610.0,
+          450.0
         ],
-        "pole_m2": 0.2604,
+        "pole_m2": 0.2745,
         "standardowy": false,
-        "tryb": "jawny",
-        "koszt": 0.2817,
-        "wypelnienie_szac": 0.828,
+        "tryb": "ekonomiczny",
+        "koszt": 0.3029,
+        "wypelnienie_szac": 0.844,
         "uklad_widokow": "wiersz",
         "skladanie": {
           "zgiecia_pionowe": [
             210.0,
-            415.0
+            410.0
           ],
           "zgiecia_poziome": [
             297.0
           ],
           "pasy": [
             210.0,
-            205.0,
-            205.0
+            200.0,
+            200.0
           ],
           "rzedy": [
             297.0,
-            123.0
+            153.0
           ],
           "n_pasow": 3,
           "n_rzedow": 2,
@@ -564,99 +612,169 @@
           "ocena_poziom": "poprawne",
           "tabliczka_na_wierzchu": true,
           "uwagi": [
-            "górny rząd 123 mm (niepełny)"
+            "górny rząd 153 mm (niepełny)"
           ]
         },
-        "czesci_uwag": 1,
+        "czesci_uwag": 2,
         "kolejnosc_czytania": false,
-        "znaki_rezerwowane": true,
-        "kandydaci": [],
+        "znaki_rezerwowane": false,
+        "kandydaci": [
+          {
+            "format": "610×450",
+            "wymiary_mm": [
+              610,
+              450
+            ],
+            "koszt": 0.3029,
+            "pole_m2": 0.2745,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "420×660",
+            "wymiary_mm": [
+              420,
+              660
+            ],
+            "koszt": 0.3172,
+            "pole_m2": 0.2772,
+            "skladanie": "słabe"
+          },
+          {
+            "format": "580×594",
+            "wymiary_mm": [
+              580,
+              594
+            ],
+            "koszt": 0.3584,
+            "pole_m2": 0.3445,
+            "skladanie": "dobre"
+          },
+          {
+            "format": "400×841",
+            "wymiary_mm": [
+              400,
+              841
+            ],
+            "koszt": 0.3604,
+            "pole_m2": 0.3364,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "400×891",
+            "wymiary_mm": [
+              400,
+              891
+            ],
+            "koszt": 0.3671,
+            "pole_m2": 0.3564,
+            "skladanie": "dobre"
+          },
+          {
+            "format": "790×420",
+            "wymiary_mm": [
+              790,
+              420
+            ],
+            "koszt": 0.3728,
+            "pole_m2": 0.3318,
+            "skladanie": "poprawne"
+          }
+        ],
         "bloki": [
           [
             "tabliczka",
             [
-              430.0,
+              420.0,
               10.0,
-              610.0,
+              600.0,
               113.0
             ]
           ],
           [
             "róża i podziałka",
             [
-              430.0,
+              420.0,
               118.0,
-              610.0,
+              597.0,
               148.8
             ]
           ],
           [
             "legenda",
             [
-              430.0,
-              267.5,
-              610.0,
-              407.0
+              416.8,
+              244.9,
+              597.0,
+              437.0
             ]
           ],
           [
             "tab_przylacza",
             [
-              418.5,
-              160.2,
-              598.5,
-              262.5
+              237.0,
+              137.6,
+              414.0,
+              239.9
             ]
           ],
           [
             "tab_skrzyzowania",
             [
-              244.0,
-              338.6,
-              424.0,
-              398.5
+              420.0,
+              180.0,
+              597.0,
+              239.9
             ]
           ],
           [
             "tab_kolizje",
             [
-              244.0,
-              312.6,
-              424.0,
-              333.6
+              420.0,
+              154.0,
+              597.0,
+              175.0
             ]
           ],
           [
             "tab_obiekty",
             [
-              244.0,
-              89.4,
-              424.0,
-              155.2
+              237.0,
+              24.2,
+              414.0,
+              90.0
             ]
           ],
           [
             "tab_koordynacja",
             [
-              232.5,
-              170.3,
-              412.5,
-              307.6
+              233.8,
+              299.8,
+              410.8,
+              437.0
             ]
           ],
           [
-            "uwagi[1–8]",
+            "uwagi[1–6]",
             [
-              244.0,
-              31.4,
-              424.0,
-              84.4
+              23.0,
+              23.0,
+              200.0,
+              90.0
+            ]
+          ],
+          [
+            "uwagi[7–8]",
+            [
+              226.0,
+              270.7,
+              403.0,
+              294.8
             ]
           ]
         ],
         "kolizje": [],
         "znaki_centrujace": {
-          "g": 10.0,
+          "g": 0.0,
           "d": 10.0,
           "l": 7.5,
           "p": 10.0
@@ -674,16 +792,16 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 1740,
-          "napisy": 622,
+          "prymitywy": 1763,
+          "napisy": 647,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 18.5,
+      "czas_s": 19.7,
       "png_kontrola": {
         "px": [
-          3662,
-          2481
+          3603,
+          2658
         ],
         "dpi_eff": [
           150.0,
@@ -696,19 +814,19 @@
         "ok": true
       },
       "wypelnienie": {
-        "wypelnienie": 0.823,
-        "wypelnienie_rys": 0.808,
-        "wypelnienie_skl": 0.806,
-        "wypelnienie_kontur": 0.681,
-        "pole_arkusza_m2": 0.2604,
-        "pole_ramki_m2": 0.236,
+        "wypelnienie": 0.936,
+        "wypelnienie_rys": 0.93,
+        "wypelnienie_skl": 0.792,
+        "wypelnienie_kontur": 0.737,
+        "pole_arkusza_m2": 0.2745,
+        "pole_ramki_m2": 0.2494,
         "pusty_prostokat_mm": [
-          410,
-          20
+          190,
+          44
         ],
         "przyciety_mm": [
-          612,
-          420
+          610,
+          450
         ],
         "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
       }
@@ -725,15 +843,15 @@
   "tom": "projekt/02_PZT/rysunki/tom_PZT.pdf",
   "papier": {
     "arkuszy": 3,
-    "pole_m2": 0.748,
-    "a4_ekw": 12.0,
+    "pole_m2": 0.752,
+    "a4_ekw": 12.1,
     "warstwy_a4": 18,
     "skladanie": {
-      "dobre": 2,
-      "poprawne": 1,
+      "dobre": 0,
+      "poprawne": 3,
       "słabe": 0
     },
-    "wypelnienie_wazone": 0.828
+    "wypelnienie_wazone": 0.913
   },
-  "czas_s": 64.3
+  "czas_s": 71.3
 }

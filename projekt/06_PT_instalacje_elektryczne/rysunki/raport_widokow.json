@@ -30,7 +30,7 @@
     {
       "nr": "PT-IE-01",
       "tytul": "INSTALACJA OŚWIETLENIA — RZUT PARTERU",
-      "format": "690×420",
+      "format": "594×440",
       "typ": [
         "inst_rzut"
       ],
@@ -40,92 +40,102 @@
       ],
       "qa_kind": null,
       "wymiary_mm": [
-        690.0,
-        420.0
+        594.0,
+        440.0
       ],
-      "pole_m2": 0.2898,
+      "pole_m2": 0.2614,
       "skladanie": {
         "zgiecia_pionowe": [
-          140.0,
-          260.0,
-          380.0,
-          500.0
+          210.0,
+          402.0
         ],
         "zgiecia_poziome": [
           297.0
         ],
         "pasy": [
-          140.0,
-          120.0,
-          120.0,
-          120.0,
-          190.0
+          210.0,
+          192.0,
+          192.0
         ],
         "rzedy": [
           297.0,
-          123.0
+          143.0
         ],
-        "n_pasow": 5,
+        "n_pasow": 3,
         "n_rzedow": 2,
-        "warstwy": 10,
+        "warstwy": 6,
         "ocena": "poprawne",
-        "ocena_pion": "poprawne",
+        "ocena_pion": "dobre",
         "ocena_poziom": "poprawne",
         "tabliczka_na_wierzchu": true,
         "uwagi": [
-          "najwęższy pas pośredni 120 mm",
-          "górny rząd 123 mm (niepełny)"
+          "górny rząd 143 mm (niepełny)"
         ]
       },
       "uklad": {
-        "format": "690×420",
+        "format": "594×440",
         "wymiary_mm": [
-          690.0,
-          420.0
+          594.0,
+          440.0
         ],
-        "pole_m2": 0.2898,
+        "pole_m2": 0.2614,
         "standardowy": false,
         "tryb": "ekonomiczny",
-        "koszt": 0.3256,
-        "wypelnienie_szac": 0.693,
+        "koszt": 0.28,
+        "wypelnienie_szac": 0.771,
         "uklad_widokow": "wiersz",
         "skladanie": {
           "zgiecia_pionowe": [
-            140.0,
-            260.0,
-            380.0,
-            500.0
+            210.0,
+            402.0
           ],
           "zgiecia_poziome": [
             297.0
           ],
           "pasy": [
-            140.0,
-            120.0,
-            120.0,
-            120.0,
-            190.0
+            210.0,
+            192.0,
+            192.0
           ],
           "rzedy": [
             297.0,
-            123.0
+            143.0
           ],
-          "n_pasow": 5,
+          "n_pasow": 3,
           "n_rzedow": 2,
-          "warstwy": 10,
+          "warstwy": 6,
           "ocena": "poprawne",
-          "ocena_pion": "poprawne",
+          "ocena_pion": "dobre",
           "ocena_poziom": "poprawne",
           "tabliczka_na_wierzchu": true,
           "uwagi": [
-            "najwęższy pas pośredni 120 mm",
-            "górny rząd 123 mm (niepełny)"
+            "górny rząd 143 mm (niepełny)"
           ]
         },
         "czesci_uwag": 1,
-        "kolejnosc_czytania": false,
+        "kolejnosc_czytania": true,
         "znaki_rezerwowane": true,
         "kandydaci": [
+          {
+            "format": "594×440",
+            "wymiary_mm": [
+              594,
+              440
+            ],
+            "koszt": 0.28,
+            "pole_m2": 0.2614,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "610×440",
+            "wymiary_mm": [
+              610,
+              440
+            ],
+            "koszt": 0.2875,
+            "pole_m2": 0.2684,
+            "skladanie": "poprawne"
+          },
           {
             "format": "690×420",
             "wymiary_mm": [
@@ -147,6 +157,16 @@
             "skladanie": "dobre"
           },
           {
+            "format": "550×610",
+            "wymiary_mm": [
+              550,
+              610
+            ],
+            "koszt": 0.3939,
+            "pole_m2": 0.3355,
+            "skladanie": "słabe"
+          },
+          {
             "format": "570×841",
             "wymiary_mm": [
               570,
@@ -155,68 +175,58 @@
             "koszt": 0.5135,
             "pole_m2": 0.4794,
             "skladanie": "poprawne"
-          },
-          {
-            "format": "570×891",
-            "wymiary_mm": [
-              570,
-              891
-            ],
-            "koszt": 0.5231,
-            "pole_m2": 0.5079,
-            "skladanie": "dobre"
           }
         ],
         "bloki": [
           [
             "tabliczka",
             [
-              500.0,
+              404.0,
               10.0,
-              680.0,
+              584.0,
               113.0
-            ]
-          ],
-          [
-            "róża i podziałka",
-            [
-              500.0,
-              118.0,
-              680.0,
-              148.8
             ]
           ],
           [
             "legenda",
             [
-              314.0,
-              48.8,
-              494.0,
-              97.0
+              38.0,
+              58.3,
+              215.0,
+              106.5
             ]
           ],
           [
             "obw",
             [
-              500.0,
-              211.9,
-              680.0,
-              237.0
+              221.0,
+              91.9,
+              398.0,
+              117.0
             ]
           ],
           [
             "uwagi[1–6]",
             [
-              128.0,
-              40.4,
-              308.0,
-              86.5
+              221.0,
+              40.8,
+              398.0,
+              86.9
+            ]
+          ],
+          [
+            "róża i podziałka",
+            [
+              38.0,
+              22.5,
+              215.0,
+              53.3
             ]
           ]
         ],
         "kolizje": [],
         "znaki_centrujace": {
-          "g": 9.5,
+          "g": 10.0,
           "d": 10.0,
           "l": 10.0,
           "p": 10.0
@@ -234,16 +244,16 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 1343,
-          "napisy": 255,
+          "prymitywy": 1334,
+          "napisy": 252,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 7.3,
+      "czas_s": 8.1,
       "png_kontrola": {
         "px": [
-          4075,
-          2481
+          3508,
+          2599
         ],
         "dpi_eff": [
           150.0,
@@ -256,19 +266,19 @@
         "ok": true
       },
       "wypelnienie": {
-        "wypelnienie": 0.914,
-        "wypelnienie_rys": 0.908,
-        "wypelnienie_skl": 0.708,
-        "wypelnienie_kontur": 0.605,
-        "pole_arkusza_m2": 0.2898,
-        "pole_ramki_m2": 0.264,
+        "wypelnienie": 0.859,
+        "wypelnienie_rys": 0.847,
+        "wypelnienie_skl": 0.793,
+        "wypelnienie_kontur": 0.679,
+        "pole_arkusza_m2": 0.2614,
+        "pole_ramki_m2": 0.2369,
         "pusty_prostokat_mm": [
-          480,
-          30
+          58,
+          316
         ],
         "przyciety_mm": [
-          683,
-          412
+          587,
+          432
         ],
         "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
       }
@@ -329,7 +339,7 @@
         "standardowy": false,
         "tryb": "ekonomiczny",
         "koszt": 0.2195,
-        "wypelnienie_szac": 0.858,
+        "wypelnienie_szac": 0.857,
         "uklad_widokow": "wiersz",
         "skladanie": {
           "zgiecia_pionowe": [
@@ -395,6 +405,16 @@
             "skladanie": "poprawne"
           },
           {
+            "format": "490×610",
+            "wymiary_mm": [
+              490,
+              610
+            ],
+            "koszt": 0.351,
+            "pole_m2": 0.2989,
+            "skladanie": "słabe"
+          },
+          {
             "format": "490×841",
             "wymiary_mm": [
               490,
@@ -430,7 +450,7 @@
             [
               500.0,
               118.0,
-              667.5,
+              667.0,
               148.8
             ]
           ],
@@ -439,7 +459,7 @@
             [
               500.0,
               241.0,
-              680.0,
+              677.0,
               284.0
             ]
           ],
@@ -448,7 +468,7 @@
             [
               500.0,
               219.3,
-              680.0,
+              677.0,
               236.0
             ]
           ],
@@ -457,7 +477,7 @@
             [
               500.0,
               168.2,
-              680.0,
+              677.0,
               214.3
             ]
           ]
@@ -482,12 +502,12 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 812,
-          "napisy": 162,
+          "prymitywy": 884,
+          "napisy": 200,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 4.2,
+      "czas_s": 5.0,
       "png_kontrola": {
         "px": [
           4075,
@@ -571,7 +591,7 @@
         "standardowy": false,
         "tryb": "ekonomiczny",
         "koszt": 0.1744,
-        "wypelnienie_szac": 0.81,
+        "wypelnienie_szac": 0.808,
         "uklad_widokow": "wiersz",
         "skladanie": {
           "zgiecia_pionowe": [
@@ -621,6 +641,16 @@
             "skladanie": "poprawne"
           },
           {
+            "format": "420×420",
+            "wymiary_mm": [
+              420,
+              420
+            ],
+            "koszt": 0.189,
+            "pole_m2": 0.1764,
+            "skladanie": "poprawne"
+          },
+          {
             "format": "400×594",
             "wymiary_mm": [
               400,
@@ -631,6 +661,16 @@
             "skladanie": "dobre"
           },
           {
+            "format": "400×610",
+            "wymiary_mm": [
+              400,
+              610
+            ],
+            "koszt": 0.2765,
+            "pole_m2": 0.244,
+            "skladanie": "słabe"
+          },
+          {
             "format": "400×841",
             "wymiary_mm": [
               400,
@@ -639,16 +679,6 @@
             "koszt": 0.3604,
             "pole_m2": 0.3364,
             "skladanie": "poprawne"
-          },
-          {
-            "format": "400×891",
-            "wymiary_mm": [
-              400,
-              891
-            ],
-            "koszt": 0.3671,
-            "pole_m2": 0.3564,
-            "skladanie": "dobre"
           }
         ],
         "bloki": [
@@ -666,7 +696,7 @@
             [
               380.0,
               118.0,
-              547.5,
+              547.0,
               148.8
             ]
           ],
@@ -675,7 +705,7 @@
             [
               380.0,
               241.0,
-              560.0,
+              557.0,
               284.0
             ]
           ],
@@ -684,7 +714,7 @@
             [
               380.0,
               219.3,
-              560.0,
+              557.0,
               236.0
             ]
           ],
@@ -693,7 +723,7 @@
             [
               380.0,
               168.2,
-              560.0,
+              557.0,
               214.3
             ]
           ]
@@ -718,12 +748,12 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 913,
-          "napisy": 155,
+          "prymitywy": 973,
+          "napisy": 187,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.8,
+      "czas_s": 4.1,
       "png_kontrola": {
         "px": [
           3367,
@@ -743,7 +773,7 @@
         "wypelnienie": 0.832,
         "wypelnienie_rys": 0.808,
         "wypelnienie_skl": 0.832,
-        "wypelnienie_kontur": 0.71,
+        "wypelnienie_kontur": 0.711,
         "pole_arkusza_m2": 0.1693,
         "pole_ramki_m2": 0.1496,
         "pusty_prostokat_mm": [
@@ -760,7 +790,7 @@
     {
       "nr": "PT-IE-04",
       "tytul": "GNIAZDA I ZASILANIE URZĄDZEŃ — RZUT PARTERU",
-      "format": "570×594",
+      "format": "594×500",
       "typ": [
         "inst_rzut"
       ],
@@ -770,78 +800,102 @@
       ],
       "qa_kind": null,
       "wymiary_mm": [
-        570.0,
-        594.0
+        594.0,
+        500.0
       ],
-      "pole_m2": 0.3386,
+      "pole_m2": 0.297,
       "skladanie": {
         "zgiecia_pionowe": [
-          200.0,
-          380.0
+          210.0,
+          402.0
         ],
         "zgiecia_poziome": [
           297.0
         ],
         "pasy": [
-          200.0,
-          180.0,
-          190.0
+          210.0,
+          192.0,
+          192.0
         ],
         "rzedy": [
           297.0,
-          297.0
+          203.0
         ],
         "n_pasow": 3,
         "n_rzedow": 2,
         "warstwy": 6,
-        "ocena": "dobre",
+        "ocena": "poprawne",
         "ocena_pion": "dobre",
-        "ocena_poziom": "dobre",
+        "ocena_poziom": "poprawne",
         "tabliczka_na_wierzchu": true,
-        "uwagi": []
+        "uwagi": [
+          "górny rząd 203 mm (niepełny)"
+        ]
       },
       "uklad": {
-        "format": "570×594",
+        "format": "594×500",
         "wymiary_mm": [
-          570.0,
-          594.0
+          594.0,
+          500.0
         ],
-        "pole_m2": 0.3386,
+        "pole_m2": 0.297,
         "standardowy": false,
         "tryb": "ekonomiczny",
-        "koszt": 0.3487,
-        "wypelnienie_szac": 0.685,
+        "koszt": 0.3213,
+        "wypelnienie_szac": 0.781,
         "uklad_widokow": "wiersz",
         "skladanie": {
           "zgiecia_pionowe": [
-            200.0,
-            380.0
+            210.0,
+            402.0
           ],
           "zgiecia_poziome": [
             297.0
           ],
           "pasy": [
-            200.0,
-            180.0,
-            190.0
+            210.0,
+            192.0,
+            192.0
           ],
           "rzedy": [
             297.0,
-            297.0
+            203.0
           ],
           "n_pasow": 3,
           "n_rzedow": 2,
           "warstwy": 6,
-          "ocena": "dobre",
+          "ocena": "poprawne",
           "ocena_pion": "dobre",
-          "ocena_poziom": "dobre",
+          "ocena_poziom": "poprawne",
           "tabliczka_na_wierzchu": true,
-          "uwagi": []
+          "uwagi": [
+            "górny rząd 203 mm (niepełny)"
+          ]
         },
         "czesci_uwag": 1,
-        "kolejnosc_czytania": true,
+        "kolejnosc_czytania": false,
         "znaki_rezerwowane": true,
         "kandydaci": [
+          {
+            "format": "594×500",
+            "wymiary_mm": [
+              594,
+              500
+            ],
+            "koszt": 0.3213,
+            "pole_m2": 0.297,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "610×500",
+            "wymiary_mm": [
+              610,
+              500
+            ],
+            "koszt": 0.33,
+            "pole_m2": 0.305,
+            "skladanie": "poprawne"
+          },
           {
             "format": "570×594",
             "wymiary_mm": [
@@ -863,6 +917,16 @@
             "skladanie": "poprawne"
           },
           {
+            "format": "570×610",
+            "wymiary_mm": [
+              570,
+              610
+            ],
+            "koszt": 0.3939,
+            "pole_m2": 0.3477,
+            "skladanie": "słabe"
+          },
+          {
             "format": "570×841",
             "wymiary_mm": [
               570,
@@ -871,62 +935,52 @@
             "koszt": 0.5135,
             "pole_m2": 0.4794,
             "skladanie": "poprawne"
-          },
-          {
-            "format": "570×891",
-            "wymiary_mm": [
-              570,
-              891
-            ],
-            "koszt": 0.5231,
-            "pole_m2": 0.5079,
-            "skladanie": "dobre"
           }
         ],
         "bloki": [
           [
             "tabliczka",
             [
-              380.0,
+              404.0,
               10.0,
-              560.0,
+              584.0,
               113.0
             ]
           ],
           [
             "róża i podziałka",
             [
-              380.0,
+              404.0,
               118.0,
-              560.0,
+              581.0,
               148.8
             ]
           ],
           [
             "legenda",
             [
-              194.0,
-              194.6,
-              374.0,
-              241.2
+              221.0,
+              100.6,
+              398.0,
+              147.2
             ]
           ],
           [
             "obw",
             [
-              194.0,
-              63.4,
-              374.0,
-              189.6
+              38.0,
+              18.4,
+              215.0,
+              147.2
             ]
           ],
           [
             "uwagi[1–7]",
             [
-              380.0,
-              196.4,
-              560.0,
-              251.7
+              221.0,
+              40.3,
+              398.0,
+              95.6
             ]
           ]
         ],
@@ -934,7 +988,7 @@
         "znaki_centrujace": {
           "g": 10.0,
           "d": 10.0,
-          "l": 10.0,
+          "l": 7.5,
           "p": 10.0
         }
       },
@@ -950,16 +1004,16 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 1508,
-          "napisy": 451,
+          "prymitywy": 1509,
+          "napisy": 452,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 5.3,
+      "czas_s": 5.0,
       "png_kontrola": {
         "px": [
-          3367,
-          3508
+          3508,
+          2953
         ],
         "dpi_eff": [
           150.0,
@@ -972,19 +1026,19 @@
         "ok": true
       },
       "wypelnienie": {
-        "wypelnienie": 0.9,
-        "wypelnienie_rys": 0.894,
-        "wypelnienie_skl": 0.729,
-        "wypelnienie_kontur": 0.609,
-        "pole_arkusza_m2": 0.3386,
-        "pole_ramki_m2": 0.31,
+        "wypelnienie": 0.899,
+        "wypelnienie_rys": 0.891,
+        "wypelnienie_skl": 0.835,
+        "wypelnienie_kontur": 0.66,
+        "pole_arkusza_m2": 0.297,
+        "pole_ramki_m2": 0.2707,
         "pusty_prostokat_mm": [
-          360,
-          52
+          44,
+          338
         ],
         "przyciety_mm": [
-          556,
-          586
+          587,
+          492
         ],
         "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
       }
@@ -1044,7 +1098,7 @@
         "standardowy": true,
         "tryb": "ekonomiczny",
         "koszt": 0.2595,
-        "wypelnienie_szac": 0.728,
+        "wypelnienie_szac": 0.726,
         "uklad_widokow": "wiersz",
         "skladanie": {
           "zgiecia_pionowe": [
@@ -1089,6 +1143,26 @@
             "skladanie": "poprawne"
           },
           {
+            "format": "A2",
+            "wymiary_mm": [
+              594,
+              420
+            ],
+            "koszt": 0.2595,
+            "pole_m2": 0.2495,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "610×410",
+            "wymiary_mm": [
+              610,
+              410
+            ],
+            "koszt": 0.2679,
+            "pole_m2": 0.2501,
+            "skladanie": "poprawne"
+          },
+          {
             "format": "860×297",
             "wymiary_mm": [
               860,
@@ -1109,24 +1183,14 @@
             "skladanie": "poprawne"
           },
           {
-            "format": "490×841",
+            "format": "490×610",
             "wymiary_mm": [
               490,
-              841
+              610
             ],
-            "koszt": 0.4584,
-            "pole_m2": 0.4121,
-            "skladanie": "poprawne"
-          },
-          {
-            "format": "490×891",
-            "wymiary_mm": [
-              490,
-              891
-            ],
-            "koszt": 0.4677,
-            "pole_m2": 0.4366,
-            "skladanie": "poprawne"
+            "koszt": 0.351,
+            "pole_m2": 0.2989,
+            "skladanie": "słabe"
           }
         ],
         "bloki": [
@@ -1142,25 +1206,25 @@
           [
             "legenda",
             [
-              32.0,
+              38.0,
               86.5,
-              212.0,
+              215.0,
               126.1
             ]
           ],
           [
             "obw",
             [
-              32.0,
+              38.0,
               31.8,
-              212.0,
+              215.0,
               81.5
             ]
           ],
           [
             "uwagi[1–7]",
             [
-              218.0,
+              221.0,
               70.8,
               398.0,
               126.1
@@ -1169,7 +1233,7 @@
           [
             "róża i podziałka",
             [
-              218.0,
+              221.0,
               35.0,
               398.0,
               65.8
@@ -1201,7 +1265,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.0,
+      "czas_s": 2.9,
       "png_kontrola": {
         "px": [
           3508,
@@ -1218,18 +1282,18 @@
         "ok": true
       },
       "wypelnienie": {
-        "wypelnienie": 0.783,
-        "wypelnienie_rys": 0.763,
-        "wypelnienie_skl": 0.783,
-        "wypelnienie_kontur": 0.651,
+        "wypelnienie": 0.782,
+        "wypelnienie_rys": 0.762,
+        "wypelnienie_skl": 0.782,
+        "wypelnienie_kontur": 0.649,
         "pole_arkusza_m2": 0.2495,
         "pole_ramki_m2": 0.2256,
         "pusty_prostokat_mm": [
-          110,
+          106,
           296
         ],
         "przyciety_mm": [
-          583,
+          580,
           412
         ],
         "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
@@ -1238,7 +1302,7 @@
     {
       "nr": "PT-IE-06",
       "tytul": "GNIAZDA I ZASILANIE URZĄDZEŃ — RZUT II PIĘTRA",
-      "format": "730×297",
+      "format": "420×450",
       "typ": [
         "inst_rzut"
       ],
@@ -1248,84 +1312,112 @@
       ],
       "qa_kind": null,
       "wymiary_mm": [
-        730.0,
-        297.0
+        420.0,
+        450.0
       ],
-      "pole_m2": 0.2168,
+      "pole_m2": 0.189,
       "skladanie": {
         "zgiecia_pionowe": [
-          150.0,
-          280.0,
-          410.0,
-          540.0
+          125.0,
+          230.0
         ],
-        "zgiecia_poziome": [],
+        "zgiecia_poziome": [
+          297.0
+        ],
         "pasy": [
-          150.0,
-          130.0,
-          130.0,
-          130.0,
+          125.0,
+          105.0,
           190.0
         ],
         "rzedy": [
-          297.0
+          297.0,
+          153.0
         ],
-        "n_pasow": 5,
-        "n_rzedow": 1,
-        "warstwy": 5,
+        "n_pasow": 3,
+        "n_rzedow": 2,
+        "warstwy": 6,
         "ocena": "poprawne",
-        "ocena_pion": "poprawne",
-        "ocena_poziom": "dobre",
+        "ocena_pion": "dobre",
+        "ocena_poziom": "poprawne",
         "tabliczka_na_wierzchu": true,
         "uwagi": [
-          "najwęższy pas pośredni 130 mm"
+          "górny rząd 153 mm (niepełny)"
         ]
       },
       "uklad": {
-        "format": "730×297",
+        "format": "420×450",
         "wymiary_mm": [
-          730.0,
-          297.0
+          420.0,
+          450.0
         ],
-        "pole_m2": 0.2168,
+        "pole_m2": 0.189,
         "standardowy": false,
         "tryb": "ekonomiczny",
-        "koszt": 0.2322,
-        "wypelnienie_szac": 0.665,
+        "koszt": 0.2025,
+        "wypelnienie_szac": 0.768,
         "uklad_widokow": "wiersz",
         "skladanie": {
           "zgiecia_pionowe": [
-            150.0,
-            280.0,
-            410.0,
-            540.0
+            125.0,
+            230.0
           ],
-          "zgiecia_poziome": [],
+          "zgiecia_poziome": [
+            297.0
+          ],
           "pasy": [
-            150.0,
-            130.0,
-            130.0,
-            130.0,
+            125.0,
+            105.0,
             190.0
           ],
           "rzedy": [
-            297.0
+            297.0,
+            153.0
           ],
-          "n_pasow": 5,
-          "n_rzedow": 1,
-          "warstwy": 5,
+          "n_pasow": 3,
+          "n_rzedow": 2,
+          "warstwy": 6,
           "ocena": "poprawne",
-          "ocena_pion": "poprawne",
-          "ocena_poziom": "dobre",
+          "ocena_pion": "dobre",
+          "ocena_poziom": "poprawne",
           "tabliczka_na_wierzchu": true,
           "uwagi": [
-            "najwęższy pas pośredni 130 mm"
+            "górny rząd 153 mm (niepełny)"
           ]
         },
         "czesci_uwag": 1,
         "kolejnosc_czytania": true,
-        "znaki_rezerwowane": false,
+        "znaki_rezerwowane": true,
         "kandydaci": [
+          {
+            "format": "420×450",
+            "wymiary_mm": [
+              420,
+              450
+            ],
+            "koszt": 0.2025,
+            "pole_m2": 0.189,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "594×320",
+            "wymiary_mm": [
+              594,
+              320
+            ],
+            "koszt": 0.2154,
+            "pole_m2": 0.1901,
+            "skladanie": "słabe"
+          },
+          {
+            "format": "610×310",
+            "wymiary_mm": [
+              610,
+              310
+            ],
+            "koszt": 0.2207,
+            "pole_m2": 0.1891,
+            "skladanie": "słabe"
+          },
           {
             "format": "730×297",
             "wymiary_mm": [
@@ -1355,72 +1447,52 @@
             "koszt": 0.2564,
             "pole_m2": 0.2394,
             "skladanie": "poprawne"
-          },
-          {
-            "format": "400×841",
-            "wymiary_mm": [
-              400,
-              841
-            ],
-            "koszt": 0.3604,
-            "pole_m2": 0.3364,
-            "skladanie": "poprawne"
-          },
-          {
-            "format": "400×891",
-            "wymiary_mm": [
-              400,
-              891
-            ],
-            "koszt": 0.3671,
-            "pole_m2": 0.3564,
-            "skladanie": "dobre"
           }
         ],
         "bloki": [
           [
             "tabliczka",
             [
-              540.0,
+              230.0,
               10.0,
-              720.0,
+              410.0,
               113.0
             ]
           ],
           [
             "róża i podziałka",
             [
-              540.0,
+              230.0,
               118.0,
-              720.0,
+              407.0,
               148.8
             ]
           ],
           [
             "legenda",
             [
-              351.0,
-              212.0,
-              531.0,
-              251.6
+              47.0,
+              134.5,
+              224.0,
+              174.1
             ]
           ],
           [
             "obw",
             [
-              540.0,
-              235.9,
-              720.0,
-              284.0
+              47.0,
+              81.4,
+              224.0,
+              129.5
             ]
           ],
           [
             "uwagi[1–7]",
             [
-              540.0,
-              175.6,
-              720.0,
-              230.9
+              31.2,
+              21.1,
+              208.2,
+              76.4
             ]
           ]
         ],
@@ -1428,8 +1500,8 @@
         "znaki_centrujace": {
           "g": 10.0,
           "d": 10.0,
-          "l": 7.5,
-          "p": 7.9
+          "l": 10.0,
+          "p": 10.0
         }
       },
       "pliki": {
@@ -1444,16 +1516,16 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 1005,
-          "napisy": 230,
+          "prymitywy": 1062,
+          "napisy": 261,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.9,
+      "czas_s": 3.1,
       "png_kontrola": {
         "px": [
-          4312,
-          1754
+          2481,
+          2658
         ],
         "dpi_eff": [
           150.0,
@@ -1466,19 +1538,19 @@
         "ok": true
       },
       "wypelnienie": {
-        "wypelnienie": 0.929,
-        "wypelnienie_rys": 0.921,
-        "wypelnienie_skl": 0.661,
-        "wypelnienie_kontur": 0.592,
-        "pole_arkusza_m2": 0.2168,
-        "pole_ramki_m2": 0.1939,
+        "wypelnienie": 0.864,
+        "wypelnienie_rys": 0.847,
+        "wypelnienie_skl": 0.764,
+        "wypelnienie_kontur": 0.689,
+        "pole_arkusza_m2": 0.189,
+        "pole_ramki_m2": 0.1677,
         "pusty_prostokat_mm": [
-          520,
-          24
+          44,
+          288
         ],
         "przyciety_mm": [
-          722,
-          297
+          412,
+          442
         ],
         "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
       }
@@ -1486,7 +1558,7 @@
     {
       "nr": "PT-IE-07",
       "tytul": "TELETECHNIKA — RZUT PARTERU",
-      "format": "520×594",
+      "format": "594×470",
       "typ": [
         "inst_rzut"
       ],
@@ -1496,82 +1568,102 @@
       ],
       "qa_kind": null,
       "wymiary_mm": [
-        520.0,
-        594.0
+        594.0,
+        470.0
       ],
-      "pole_m2": 0.3089,
+      "pole_m2": 0.2792,
       "skladanie": {
         "zgiecia_pionowe": [
-          175.0,
-          330.0
+          210.0,
+          402.0
         ],
         "zgiecia_poziome": [
           297.0
         ],
         "pasy": [
-          175.0,
-          155.0,
-          190.0
+          210.0,
+          192.0,
+          192.0
         ],
         "rzedy": [
           297.0,
-          297.0
+          173.0
         ],
         "n_pasow": 3,
         "n_rzedow": 2,
         "warstwy": 6,
         "ocena": "poprawne",
-        "ocena_pion": "poprawne",
-        "ocena_poziom": "dobre",
+        "ocena_pion": "dobre",
+        "ocena_poziom": "poprawne",
         "tabliczka_na_wierzchu": true,
         "uwagi": [
-          "najwęższy pas pośredni 155 mm"
+          "górny rząd 173 mm (niepełny)"
         ]
       },
       "uklad": {
-        "format": "520×594",
+        "format": "594×470",
         "wymiary_mm": [
-          520.0,
-          594.0
+          594.0,
+          470.0
         ],
-        "pole_m2": 0.3089,
+        "pole_m2": 0.2792,
         "standardowy": false,
         "tryb": "ekonomiczny",
-        "koszt": 0.3309,
-        "wypelnienie_szac": 0.686,
+        "koszt": 0.2991,
+        "wypelnienie_szac": 0.755,
         "uklad_widokow": "wiersz",
         "skladanie": {
           "zgiecia_pionowe": [
-            175.0,
-            330.0
+            210.0,
+            402.0
           ],
           "zgiecia_poziome": [
             297.0
           ],
           "pasy": [
-            175.0,
-            155.0,
-            190.0
+            210.0,
+            192.0,
+            192.0
           ],
           "rzedy": [
             297.0,
-            297.0
+            173.0
           ],
           "n_pasow": 3,
           "n_rzedow": 2,
           "warstwy": 6,
           "ocena": "poprawne",
-          "ocena_pion": "poprawne",
-          "ocena_poziom": "dobre",
+          "ocena_pion": "dobre",
+          "ocena_poziom": "poprawne",
           "tabliczka_na_wierzchu": true,
           "uwagi": [
-            "najwęższy pas pośredni 155 mm"
+            "górny rząd 173 mm (niepełny)"
           ]
         },
         "czesci_uwag": 1,
         "kolejnosc_czytania": true,
-        "znaki_rezerwowane": true,
+        "znaki_rezerwowane": false,
         "kandydaci": [
+          {
+            "format": "594×470",
+            "wymiary_mm": [
+              594,
+              470
+            ],
+            "koszt": 0.2991,
+            "pole_m2": 0.2792,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "610×470",
+            "wymiary_mm": [
+              610,
+              470
+            ],
+            "koszt": 0.3071,
+            "pole_m2": 0.2867,
+            "skladanie": "poprawne"
+          },
           {
             "format": "520×594",
             "wymiary_mm": [
@@ -1593,6 +1685,16 @@
             "skladanie": "poprawne"
           },
           {
+            "format": "520×610",
+            "wymiary_mm": [
+              520,
+              610
+            ],
+            "koszt": 0.3725,
+            "pole_m2": 0.3172,
+            "skladanie": "słabe"
+          },
+          {
             "format": "520×841",
             "wymiary_mm": [
               520,
@@ -1601,61 +1703,51 @@
             "koszt": 0.4865,
             "pole_m2": 0.4373,
             "skladanie": "poprawne"
-          },
-          {
-            "format": "520×891",
-            "wymiary_mm": [
-              520,
-              891
-            ],
-            "koszt": 0.4963,
-            "pole_m2": 0.4633,
-            "skladanie": "poprawne"
           }
         ],
         "bloki": [
           [
             "tabliczka",
             [
-              330.0,
+              404.0,
               10.0,
-              510.0,
+              584.0,
               113.0
             ]
           ],
           [
             "legenda",
             [
-              330.0,
-              529.2,
-              510.0,
-              581.0
+              221.0,
+              68.7,
+              398.0,
+              120.5
             ]
           ],
           [
             "uwagi[1–6]",
             [
-              330.0,
-              475.2,
-              510.0,
-              524.2
+              221.0,
+              14.7,
+              398.0,
+              63.7
             ]
           ],
           [
             "róża i podziałka",
             [
-              144.0,
-              541.7,
-              324.0,
-              572.5
+              38.0,
+              79.2,
+              215.0,
+              110.0
             ]
           ]
         ],
         "kolizje": [],
         "znaki_centrujace": {
           "g": 10.0,
-          "d": 10.0,
-          "l": 7.5,
+          "d": 3.2,
+          "l": 10.0,
           "p": 10.0
         }
       },
@@ -1671,16 +1763,16 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 1086,
-          "napisy": 217,
+          "prymitywy": 1078,
+          "napisy": 213,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.9,
+      "czas_s": 3.5,
       "png_kontrola": {
         "px": [
-          3071,
-          3508
+          3508,
+          2776
         ],
         "dpi_eff": [
           150.0,
@@ -1693,19 +1785,19 @@
         "ok": true
       },
       "wypelnienie": {
-        "wypelnienie": 0.707,
-        "wypelnienie_rys": 0.686,
-        "wypelnienie_skl": 0.691,
-        "wypelnienie_kontur": 0.533,
-        "pole_arkusza_m2": 0.3089,
-        "pole_ramki_m2": 0.2813,
+        "wypelnienie": 0.859,
+        "wypelnienie_rys": 0.848,
+        "wypelnienie_skl": 0.764,
+        "wypelnienie_kontur": 0.599,
+        "pole_arkusza_m2": 0.2792,
+        "pole_ramki_m2": 0.2538,
         "pusty_prostokat_mm": [
-          310,
-          120
+          82,
+          346
         ],
         "przyciety_mm": [
-          513,
-          594
+          587,
+          462
         ],
         "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
       }
@@ -1766,7 +1858,7 @@
         "standardowy": false,
         "tryb": "ekonomiczny",
         "koszt": 0.2195,
-        "wypelnienie_szac": 0.83,
+        "wypelnienie_szac": 0.829,
         "uklad_widokow": "wiersz",
         "skladanie": {
           "zgiecia_pionowe": [
@@ -1832,6 +1924,16 @@
             "skladanie": "poprawne"
           },
           {
+            "format": "490×610",
+            "wymiary_mm": [
+              490,
+              610
+            ],
+            "koszt": 0.351,
+            "pole_m2": 0.2989,
+            "skladanie": "słabe"
+          },
+          {
             "format": "490×841",
             "wymiary_mm": [
               490,
@@ -1867,7 +1969,7 @@
             [
               500.0,
               118.0,
-              667.5,
+              667.0,
               148.8
             ]
           ],
@@ -1876,7 +1978,7 @@
             [
               500.0,
               251.4,
-              680.0,
+              677.0,
               284.0
             ]
           ],
@@ -1885,7 +1987,7 @@
             [
               500.0,
               197.4,
-              680.0,
+              677.0,
               246.4
             ]
           ]
@@ -1910,12 +2012,12 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 684,
-          "napisy": 143,
+          "prymitywy": 756,
+          "napisy": 181,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.1,
+      "czas_s": 2.0,
       "png_kontrola": {
         "px": [
           4075,
@@ -1939,7 +2041,7 @@
         "pole_arkusza_m2": 0.2049,
         "pole_ramki_m2": 0.1828,
         "pusty_prostokat_mm": [
-          170,
+          168,
           60
         ],
         "przyciety_mm": [
@@ -1999,7 +2101,7 @@
         "standardowy": false,
         "tryb": "ekonomiczny",
         "koszt": 0.1744,
-        "wypelnienie_szac": 0.776,
+        "wypelnienie_szac": 0.775,
         "uklad_widokow": "wiersz",
         "skladanie": {
           "zgiecia_pionowe": [
@@ -2049,6 +2151,16 @@
             "skladanie": "poprawne"
           },
           {
+            "format": "420×420",
+            "wymiary_mm": [
+              420,
+              420
+            ],
+            "koszt": 0.189,
+            "pole_m2": 0.1764,
+            "skladanie": "poprawne"
+          },
+          {
             "format": "400×594",
             "wymiary_mm": [
               400,
@@ -2059,6 +2171,16 @@
             "skladanie": "dobre"
           },
           {
+            "format": "400×610",
+            "wymiary_mm": [
+              400,
+              610
+            ],
+            "koszt": 0.2765,
+            "pole_m2": 0.244,
+            "skladanie": "słabe"
+          },
+          {
             "format": "400×841",
             "wymiary_mm": [
               400,
@@ -2067,16 +2189,6 @@
             "koszt": 0.3604,
             "pole_m2": 0.3364,
             "skladanie": "poprawne"
-          },
-          {
-            "format": "400×891",
-            "wymiary_mm": [
-              400,
-              891
-            ],
-            "koszt": 0.3671,
-            "pole_m2": 0.3564,
-            "skladanie": "dobre"
           }
         ],
         "bloki": [
@@ -2094,7 +2206,7 @@
             [
               380.0,
               118.0,
-              547.5,
+              547.0,
               148.8
             ]
           ],
@@ -2103,7 +2215,7 @@
             [
               380.0,
               251.4,
-              560.0,
+              557.0,
               284.0
             ]
           ],
@@ -2112,7 +2224,7 @@
             [
               380.0,
               197.4,
-              560.0,
+              557.0,
               246.4
             ]
           ]
@@ -2137,8 +2249,8 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 809,
-          "napisy": 134,
+          "prymitywy": 869,
+          "napisy": 166,
           "sprawdzone_lancuchy": 0
         }
       },
@@ -2166,7 +2278,7 @@
         "pole_arkusza_m2": 0.1693,
         "pole_ramki_m2": 0.1496,
         "pusty_prostokat_mm": [
-          162,
+          160,
           60
         ],
         "przyciety_mm": [
@@ -2179,7 +2291,7 @@
     {
       "nr": "PT-IE-10",
       "tytul": "INSTALACJA FOTOWOLTAICZNA — RZUT DACHU",
-      "format": "690×420",
+      "format": "594×440",
       "typ": [
         "inst_rzut"
       ],
@@ -2189,92 +2301,102 @@
       ],
       "qa_kind": null,
       "wymiary_mm": [
-        690.0,
-        420.0
+        594.0,
+        440.0
       ],
-      "pole_m2": 0.2898,
+      "pole_m2": 0.2614,
       "skladanie": {
         "zgiecia_pionowe": [
-          140.0,
-          260.0,
-          380.0,
-          500.0
+          210.0,
+          402.0
         ],
         "zgiecia_poziome": [
           297.0
         ],
         "pasy": [
-          140.0,
-          120.0,
-          120.0,
-          120.0,
-          190.0
+          210.0,
+          192.0,
+          192.0
         ],
         "rzedy": [
           297.0,
-          123.0
+          143.0
         ],
-        "n_pasow": 5,
+        "n_pasow": 3,
         "n_rzedow": 2,
-        "warstwy": 10,
+        "warstwy": 6,
         "ocena": "poprawne",
-        "ocena_pion": "poprawne",
+        "ocena_pion": "dobre",
         "ocena_poziom": "poprawne",
         "tabliczka_na_wierzchu": true,
         "uwagi": [
-          "najwęższy pas pośredni 120 mm",
-          "górny rząd 123 mm (niepełny)"
+          "górny rząd 143 mm (niepełny)"
         ]
       },
       "uklad": {
-        "format": "690×420",
+        "format": "594×440",
         "wymiary_mm": [
-          690.0,
-          420.0
+          594.0,
+          440.0
         ],
-        "pole_m2": 0.2898,
+        "pole_m2": 0.2614,
         "standardowy": false,
         "tryb": "ekonomiczny",
-        "koszt": 0.3256,
-        "wypelnienie_szac": 0.688,
+        "koszt": 0.28,
+        "wypelnienie_szac": 0.764,
         "uklad_widokow": "wiersz",
         "skladanie": {
           "zgiecia_pionowe": [
-            140.0,
-            260.0,
-            380.0,
-            500.0
+            210.0,
+            402.0
           ],
           "zgiecia_poziome": [
             297.0
           ],
           "pasy": [
-            140.0,
-            120.0,
-            120.0,
-            120.0,
-            190.0
+            210.0,
+            192.0,
+            192.0
           ],
           "rzedy": [
             297.0,
-            123.0
+            143.0
           ],
-          "n_pasow": 5,
+          "n_pasow": 3,
           "n_rzedow": 2,
-          "warstwy": 10,
+          "warstwy": 6,
           "ocena": "poprawne",
-          "ocena_pion": "poprawne",
+          "ocena_pion": "dobre",
           "ocena_poziom": "poprawne",
           "tabliczka_na_wierzchu": true,
           "uwagi": [
-            "najwęższy pas pośredni 120 mm",
-            "górny rząd 123 mm (niepełny)"
+            "górny rząd 143 mm (niepełny)"
           ]
         },
         "czesci_uwag": 1,
-        "kolejnosc_czytania": false,
-        "znaki_rezerwowane": true,
+        "kolejnosc_czytania": true,
+        "znaki_rezerwowane": false,
         "kandydaci": [
+          {
+            "format": "594×440",
+            "wymiary_mm": [
+              594,
+              440
+            ],
+            "koszt": 0.28,
+            "pole_m2": 0.2614,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "610×440",
+            "wymiary_mm": [
+              610,
+              440
+            ],
+            "koszt": 0.2875,
+            "pole_m2": 0.2684,
+            "skladanie": "poprawne"
+          },
           {
             "format": "690×420",
             "wymiary_mm": [
@@ -2296,6 +2418,16 @@
             "skladanie": "dobre"
           },
           {
+            "format": "570×610",
+            "wymiary_mm": [
+              570,
+              610
+            ],
+            "koszt": 0.3939,
+            "pole_m2": 0.3477,
+            "skladanie": "słabe"
+          },
+          {
             "format": "570×841",
             "wymiary_mm": [
               570,
@@ -2304,68 +2436,58 @@
             "koszt": 0.5135,
             "pole_m2": 0.4794,
             "skladanie": "poprawne"
-          },
-          {
-            "format": "570×891",
-            "wymiary_mm": [
-              570,
-              891
-            ],
-            "koszt": 0.5231,
-            "pole_m2": 0.5079,
-            "skladanie": "dobre"
           }
         ],
         "bloki": [
           [
             "tabliczka",
             [
-              500.0,
+              404.0,
               10.0,
-              680.0,
+              584.0,
               113.0
-            ]
-          ],
-          [
-            "róża i podziałka",
-            [
-              500.0,
-              118.0,
-              680.0,
-              148.8
             ]
           ],
           [
             "legenda",
             [
-              500.0,
-              327.1,
-              680.0,
-              357.0
+              38.0,
+              76.6,
+              215.0,
+              106.5
             ]
           ],
           [
             "pv",
             [
-              314.0,
-              63.5,
-              494.0,
-              97.0
+              38.0,
+              38.1,
+              215.0,
+              71.6
             ]
           ],
           [
             "uwagi[1–7]",
             [
-              128.0,
-              34.1,
-              308.0,
-              86.5
+              221.0,
+              54.1,
+              398.0,
+              106.5
+            ]
+          ],
+          [
+            "róża i podziałka",
+            [
+              221.0,
+              18.3,
+              398.0,
+              49.1
             ]
           ]
         ],
         "kolizje": [],
         "znaki_centrujace": {
-          "g": 9.5,
+          "g": 10.0,
           "d": 10.0,
           "l": 10.0,
           "p": 10.0
@@ -2383,16 +2505,16 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 511,
-          "napisy": 189,
+          "prymitywy": 501,
+          "napisy": 185,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 8.6,
+      "czas_s": 8.8,
       "png_kontrola": {
         "px": [
-          4075,
-          2481
+          3508,
+          2599
         ],
         "dpi_eff": [
           150.0,
@@ -2405,19 +2527,19 @@
         "ok": true
       },
       "wypelnienie": {
-        "wypelnienie": 0.913,
-        "wypelnienie_rys": 0.906,
-        "wypelnienie_skl": 0.715,
-        "wypelnienie_kontur": 0.614,
-        "pole_arkusza_m2": 0.2898,
-        "pole_ramki_m2": 0.264,
+        "wypelnienie": 0.878,
+        "wypelnienie_rys": 0.868,
+        "wypelnienie_skl": 0.802,
+        "wypelnienie_kontur": 0.648,
+        "pole_arkusza_m2": 0.2614,
+        "pole_ramki_m2": 0.2369,
         "pusty_prostokat_mm": [
-          480,
-          24
+          48,
+          316
         ],
         "przyciety_mm": [
-          683,
-          412
+          587,
+          432
         ],
         "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
       }
@@ -2425,7 +2547,7 @@
     {
       "nr": "PT-IE-11",
       "tytul": "INSTALACJA FOTOWOLTAICZNA — RZUT PARTERU (FALOWNIK, SPD)",
-      "format": "690×420",
+      "format": "594×440",
       "typ": [
         "inst_rzut"
       ],
@@ -2435,92 +2557,102 @@
       ],
       "qa_kind": null,
       "wymiary_mm": [
-        690.0,
-        420.0
+        594.0,
+        440.0
       ],
-      "pole_m2": 0.2898,
+      "pole_m2": 0.2614,
       "skladanie": {
         "zgiecia_pionowe": [
-          140.0,
-          260.0,
-          380.0,
-          500.0
+          210.0,
+          402.0
         ],
         "zgiecia_poziome": [
           297.0
         ],
         "pasy": [
-          140.0,
-          120.0,
-          120.0,
-          120.0,
-          190.0
+          210.0,
+          192.0,
+          192.0
         ],
         "rzedy": [
           297.0,
-          123.0
+          143.0
         ],
-        "n_pasow": 5,
+        "n_pasow": 3,
         "n_rzedow": 2,
-        "warstwy": 10,
+        "warstwy": 6,
         "ocena": "poprawne",
-        "ocena_pion": "poprawne",
+        "ocena_pion": "dobre",
         "ocena_poziom": "poprawne",
         "tabliczka_na_wierzchu": true,
         "uwagi": [
-          "najwęższy pas pośredni 120 mm",
-          "górny rząd 123 mm (niepełny)"
+          "górny rząd 143 mm (niepełny)"
         ]
       },
       "uklad": {
-        "format": "690×420",
+        "format": "594×440",
         "wymiary_mm": [
-          690.0,
-          420.0
+          594.0,
+          440.0
         ],
-        "pole_m2": 0.2898,
+        "pole_m2": 0.2614,
         "standardowy": false,
         "tryb": "ekonomiczny",
-        "koszt": 0.3224,
-        "wypelnienie_szac": 0.676,
+        "koszt": 0.28,
+        "wypelnienie_szac": 0.753,
         "uklad_widokow": "wiersz",
         "skladanie": {
           "zgiecia_pionowe": [
-            140.0,
-            260.0,
-            380.0,
-            500.0
+            210.0,
+            402.0
           ],
           "zgiecia_poziome": [
             297.0
           ],
           "pasy": [
-            140.0,
-            120.0,
-            120.0,
-            120.0,
-            190.0
+            210.0,
+            192.0,
+            192.0
           ],
           "rzedy": [
             297.0,
-            123.0
+            143.0
           ],
-          "n_pasow": 5,
+          "n_pasow": 3,
           "n_rzedow": 2,
-          "warstwy": 10,
+          "warstwy": 6,
           "ocena": "poprawne",
-          "ocena_pion": "poprawne",
+          "ocena_pion": "dobre",
           "ocena_poziom": "poprawne",
           "tabliczka_na_wierzchu": true,
           "uwagi": [
-            "najwęższy pas pośredni 120 mm",
-            "górny rząd 123 mm (niepełny)"
+            "górny rząd 143 mm (niepełny)"
           ]
         },
         "czesci_uwag": 1,
         "kolejnosc_czytania": true,
-        "znaki_rezerwowane": true,
+        "znaki_rezerwowane": false,
         "kandydaci": [
+          {
+            "format": "594×440",
+            "wymiary_mm": [
+              594,
+              440
+            ],
+            "koszt": 0.28,
+            "pole_m2": 0.2614,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "610×440",
+            "wymiary_mm": [
+              610,
+              440
+            ],
+            "koszt": 0.2875,
+            "pole_m2": 0.2684,
+            "skladanie": "poprawne"
+          },
           {
             "format": "690×420",
             "wymiary_mm": [
@@ -2542,6 +2674,16 @@
             "skladanie": "dobre"
           },
           {
+            "format": "570×610",
+            "wymiary_mm": [
+              570,
+              610
+            ],
+            "koszt": 0.3939,
+            "pole_m2": 0.3477,
+            "skladanie": "słabe"
+          },
+          {
             "format": "570×841",
             "wymiary_mm": [
               570,
@@ -2550,60 +2692,50 @@
             "koszt": 0.5135,
             "pole_m2": 0.4794,
             "skladanie": "poprawne"
-          },
-          {
-            "format": "570×891",
-            "wymiary_mm": [
-              570,
-              891
-            ],
-            "koszt": 0.5231,
-            "pole_m2": 0.5079,
-            "skladanie": "dobre"
           }
         ],
         "bloki": [
           [
             "tabliczka",
             [
-              500.0,
+              404.0,
               10.0,
-              680.0,
+              584.0,
               113.0
-            ]
-          ],
-          [
-            "róża i podziałka",
-            [
-              500.0,
-              118.0,
-              680.0,
-              148.8
             ]
           ],
           [
             "legenda",
             [
-              128.0,
-              58.4,
-              308.0,
-              86.5
+              221.0,
+              78.4,
+              398.0,
+              106.5
             ]
           ],
           [
             "uwagi[1–8]",
             [
-              314.0,
-              38.3,
-              494.0,
-              97.0
+              221.0,
+              14.7,
+              398.0,
+              73.4
+            ]
+          ],
+          [
+            "róża i podziałka",
+            [
+              38.0,
+              75.7,
+              215.0,
+              106.5
             ]
           ]
         ],
         "kolizje": [],
         "znaki_centrujace": {
-          "g": 9.5,
-          "d": 10.0,
+          "g": 10.0,
+          "d": 3.2,
           "l": 10.0,
           "p": 10.0
         }
@@ -2620,16 +2752,16 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 1032,
-          "napisy": 203,
+          "prymitywy": 1022,
+          "napisy": 199,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.2,
+      "czas_s": 3.4,
       "png_kontrola": {
         "px": [
-          4075,
-          2481
+          3508,
+          2599
         ],
         "dpi_eff": [
           150.0,
@@ -2642,19 +2774,19 @@
         "ok": true
       },
       "wypelnienie": {
-        "wypelnienie": 0.764,
-        "wypelnienie_rys": 0.745,
-        "wypelnienie_skl": 0.763,
-        "wypelnienie_kontur": 0.599,
-        "pole_arkusza_m2": 0.2898,
-        "pole_ramki_m2": 0.264,
+        "wypelnienie": 0.904,
+        "wypelnienie_rys": 0.895,
+        "wypelnienie_skl": 0.783,
+        "wypelnienie_kontur": 0.646,
+        "pole_arkusza_m2": 0.2614,
+        "pole_ramki_m2": 0.2369,
         "pusty_prostokat_mm": [
-          144,
-          258
+          48,
+          316
         ],
         "przyciety_mm": [
-          683,
-          412
+          587,
+          432
         ],
         "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
       }
@@ -2662,7 +2794,7 @@
     {
       "nr": "PT-IE-12",
       "tytul": "UZIOM I POŁĄCZENIA WYRÓWNAWCZE — RZUT PARTERU",
-      "format": "720×420",
+      "format": "610×480",
       "typ": [
         "inst_rzut"
       ],
@@ -2672,92 +2804,92 @@
       ],
       "qa_kind": null,
       "wymiary_mm": [
-        720.0,
-        420.0
+        610.0,
+        480.0
       ],
-      "pole_m2": 0.3024,
+      "pole_m2": 0.2928,
       "skladanie": {
         "zgiecia_pionowe": [
-          147.5,
-          275.0,
-          402.5,
-          530.0
+          210.0,
+          410.0
         ],
         "zgiecia_poziome": [
           297.0
         ],
         "pasy": [
-          147.5,
-          127.5,
-          127.5,
-          127.5,
-          190.0
+          210.0,
+          200.0,
+          200.0
         ],
         "rzedy": [
           297.0,
-          123.0
+          183.0
         ],
-        "n_pasow": 5,
+        "n_pasow": 3,
         "n_rzedow": 2,
-        "warstwy": 10,
+        "warstwy": 6,
         "ocena": "poprawne",
-        "ocena_pion": "poprawne",
+        "ocena_pion": "dobre",
         "ocena_poziom": "poprawne",
         "tabliczka_na_wierzchu": true,
         "uwagi": [
-          "najwęższy pas pośredni 128 mm",
-          "górny rząd 123 mm (niepełny)"
+          "górny rząd 183 mm (niepełny)"
         ]
       },
       "uklad": {
-        "format": "720×420",
+        "format": "610×480",
         "wymiary_mm": [
-          720.0,
-          420.0
+          610.0,
+          480.0
         ],
-        "pole_m2": 0.3024,
+        "pole_m2": 0.2928,
         "standardowy": false,
         "tryb": "ekonomiczny",
-        "koszt": 0.3398,
-        "wypelnienie_szac": 0.719,
+        "koszt": 0.3293,
+        "wypelnienie_szac": 0.756,
         "uklad_widokow": "wiersz",
         "skladanie": {
           "zgiecia_pionowe": [
-            147.5,
-            275.0,
-            402.5,
-            530.0
+            210.0,
+            410.0
           ],
           "zgiecia_poziome": [
             297.0
           ],
           "pasy": [
-            147.5,
-            127.5,
-            127.5,
-            127.5,
-            190.0
+            210.0,
+            200.0,
+            200.0
           ],
           "rzedy": [
             297.0,
-            123.0
+            183.0
           ],
-          "n_pasow": 5,
+          "n_pasow": 3,
           "n_rzedow": 2,
-          "warstwy": 10,
+          "warstwy": 6,
           "ocena": "poprawne",
-          "ocena_pion": "poprawne",
+          "ocena_pion": "dobre",
           "ocena_poziom": "poprawne",
           "tabliczka_na_wierzchu": true,
           "uwagi": [
-            "najwęższy pas pośredni 128 mm",
-            "górny rząd 123 mm (niepełny)"
+            "górny rząd 183 mm (niepełny)"
           ]
         },
-        "czesci_uwag": 1,
+        "czesci_uwag": 3,
         "kolejnosc_czytania": false,
-        "znaki_rezerwowane": true,
+        "znaki_rezerwowane": false,
         "kandydaci": [
+          {
+            "format": "610×480",
+            "wymiary_mm": [
+              610,
+              480
+            ],
+            "koszt": 0.3293,
+            "pole_m2": 0.2928,
+            "skladanie": "poprawne"
+          },
           {
             "format": "720×420",
             "wymiary_mm": [
@@ -2767,6 +2899,16 @@
             "koszt": 0.3398,
             "pole_m2": 0.3024,
             "skladanie": "poprawne"
+          },
+          {
+            "format": "841×350",
+            "wymiary_mm": [
+              841,
+              350
+            ],
+            "koszt": 0.3456,
+            "pole_m2": 0.2944,
+            "skladanie": "słabe"
           },
           {
             "format": "600×594",
@@ -2779,77 +2921,95 @@
             "skladanie": "dobre"
           },
           {
-            "format": "600×841",
+            "format": "914×350",
             "wymiary_mm": [
-              600,
-              841
+              914,
+              350
             ],
-            "koszt": 0.5405,
-            "pole_m2": 0.5046,
-            "skladanie": "poprawne"
+            "koszt": 0.3756,
+            "pole_m2": 0.3199,
+            "skladanie": "słabe"
           },
           {
-            "format": "600×891",
+            "format": "600×610",
             "wymiary_mm": [
               600,
-              891
+              610
             ],
-            "koszt": 0.5506,
-            "pole_m2": 0.5346,
-            "skladanie": "dobre"
+            "koszt": 0.4188,
+            "pole_m2": 0.366,
+            "skladanie": "słabe"
           }
         ],
         "bloki": [
           [
             "tabliczka",
             [
-              530.0,
+              420.0,
               10.0,
-              710.0,
+              600.0,
               113.0
             ]
           ],
           [
             "róża i podziałka",
             [
-              530.0,
+              420.0,
               118.0,
-              710.0,
+              597.0,
               148.8
             ]
           ],
           [
             "legenda",
             [
-              530.0,
-              315.4,
-              710.0,
-              350.5
+              237.0,
+              104.9,
+              414.0,
+              140.0
             ]
           ],
           [
             "wyr",
             [
-              314.2,
-              35.0,
-              524.0,
-              90.5
+              204.2,
+              44.4,
+              414.0,
+              99.9
             ]
           ],
           [
-            "uwagi[1–7]",
+            "uwagi[1–3]",
             [
-              128.2,
-              27.6,
-              308.2,
-              80.0
+              23.0,
+              109.9,
+              200.0,
+              140.0
+            ]
+          ],
+          [
+            "uwagi[4–5]",
+            [
+              23.0,
+              15.6,
+              200.0,
+              39.4
+            ]
+          ],
+          [
+            "uwagi[6–7]",
+            [
+              206.0,
+              18.5,
+              383.0,
+              39.4
             ]
           ]
         ],
         "kolizje": [],
         "znaki_centrujace": {
-          "g": 9.5,
-          "d": 10.0,
+          "g": 10.0,
+          "d": 7.0,
           "l": 10.0,
           "p": 10.0
         }
@@ -2866,7 +3026,7 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 1108,
+          "prymitywy": 1106,
           "napisy": 238,
           "sprawdzone_lancuchy": 0
         }
@@ -2874,8 +3034,8 @@
       "czas_s": 3.8,
       "png_kontrola": {
         "px": [
-          4252,
-          2481
+          3603,
+          2835
         ],
         "dpi_eff": [
           150.0,
@@ -2888,19 +3048,19 @@
         "ok": true
       },
       "wypelnienie": {
-        "wypelnienie": 0.933,
-        "wypelnienie_rys": 0.928,
-        "wypelnienie_skl": 0.784,
-        "wypelnienie_kontur": 0.661,
-        "pole_arkusza_m2": 0.3024,
-        "pole_ramki_m2": 0.276,
+        "wypelnienie": 0.96,
+        "wypelnienie_rys": 0.957,
+        "wypelnienie_skl": 0.839,
+        "wypelnienie_kontur": 0.67,
+        "pole_arkusza_m2": 0.2928,
+        "pole_ramki_m2": 0.2668,
         "pusty_prostokat_mm": [
-          510,
-          16
+          184,
+          68
         ],
         "przyciety_mm": [
-          710,
-          412
+          610,
+          472
         ],
         "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
       }
@@ -2908,7 +3068,7 @@
     {
       "nr": "PT-IE-13",
       "tytul": "OCHRONA ODGROMOWA I WYRÓWNANIE POTENCJAŁÓW — RZUT DACHU",
-      "format": "690×420",
+      "format": "594×440",
       "typ": [
         "inst_rzut"
       ],
@@ -2918,92 +3078,102 @@
       ],
       "qa_kind": null,
       "wymiary_mm": [
-        690.0,
-        420.0
+        594.0,
+        440.0
       ],
-      "pole_m2": 0.2898,
+      "pole_m2": 0.2614,
       "skladanie": {
         "zgiecia_pionowe": [
-          140.0,
-          260.0,
-          380.0,
-          500.0
+          210.0,
+          402.0
         ],
         "zgiecia_poziome": [
           297.0
         ],
         "pasy": [
-          140.0,
-          120.0,
-          120.0,
-          120.0,
-          190.0
+          210.0,
+          192.0,
+          192.0
         ],
         "rzedy": [
           297.0,
-          123.0
+          143.0
         ],
-        "n_pasow": 5,
+        "n_pasow": 3,
         "n_rzedow": 2,
-        "warstwy": 10,
+        "warstwy": 6,
         "ocena": "poprawne",
-        "ocena_pion": "poprawne",
+        "ocena_pion": "dobre",
         "ocena_poziom": "poprawne",
         "tabliczka_na_wierzchu": true,
         "uwagi": [
-          "najwęższy pas pośredni 120 mm",
-          "górny rząd 123 mm (niepełny)"
+          "górny rząd 143 mm (niepełny)"
         ]
       },
       "uklad": {
-        "format": "690×420",
+        "format": "594×440",
         "wymiary_mm": [
-          690.0,
-          420.0
+          594.0,
+          440.0
         ],
-        "pole_m2": 0.2898,
+        "pole_m2": 0.2614,
         "standardowy": false,
         "tryb": "ekonomiczny",
-        "koszt": 0.3224,
-        "wypelnienie_szac": 0.659,
+        "koszt": 0.28,
+        "wypelnienie_szac": 0.736,
         "uklad_widokow": "wiersz",
         "skladanie": {
           "zgiecia_pionowe": [
-            140.0,
-            260.0,
-            380.0,
-            500.0
+            210.0,
+            402.0
           ],
           "zgiecia_poziome": [
             297.0
           ],
           "pasy": [
-            140.0,
-            120.0,
-            120.0,
-            120.0,
-            190.0
+            210.0,
+            192.0,
+            192.0
           ],
           "rzedy": [
             297.0,
-            123.0
+            143.0
           ],
-          "n_pasow": 5,
+          "n_pasow": 3,
           "n_rzedow": 2,
-          "warstwy": 10,
+          "warstwy": 6,
           "ocena": "poprawne",
-          "ocena_pion": "poprawne",
+          "ocena_pion": "dobre",
           "ocena_poziom": "poprawne",
           "tabliczka_na_wierzchu": true,
           "uwagi": [
-            "najwęższy pas pośredni 120 mm",
-            "górny rząd 123 mm (niepełny)"
+            "górny rząd 143 mm (niepełny)"
           ]
         },
         "czesci_uwag": 1,
         "kolejnosc_czytania": true,
         "znaki_rezerwowane": true,
         "kandydaci": [
+          {
+            "format": "594×440",
+            "wymiary_mm": [
+              594,
+              440
+            ],
+            "koszt": 0.28,
+            "pole_m2": 0.2614,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "610×440",
+            "wymiary_mm": [
+              610,
+              440
+            ],
+            "koszt": 0.2875,
+            "pole_m2": 0.2684,
+            "skladanie": "poprawne"
+          },
           {
             "format": "690×420",
             "wymiary_mm": [
@@ -3025,6 +3195,16 @@
             "skladanie": "poprawne"
           },
           {
+            "format": "510×610",
+            "wymiary_mm": [
+              510,
+              610
+            ],
+            "koszt": 0.3653,
+            "pole_m2": 0.3111,
+            "skladanie": "słabe"
+          },
+          {
             "format": "510×841",
             "wymiary_mm": [
               510,
@@ -3033,53 +3213,43 @@
             "koszt": 0.4771,
             "pole_m2": 0.4289,
             "skladanie": "poprawne"
-          },
-          {
-            "format": "510×891",
-            "wymiary_mm": [
-              510,
-              891
-            ],
-            "koszt": 0.4868,
-            "pole_m2": 0.4544,
-            "skladanie": "poprawne"
           }
         ],
         "bloki": [
           [
             "tabliczka",
             [
-              500.0,
+              404.0,
               10.0,
-              680.0,
+              584.0,
               113.0
-            ]
-          ],
-          [
-            "róża i podziałka",
-            [
-              500.0,
-              118.0,
-              680.0,
-              148.8
             ]
           ],
           [
             "legenda",
             [
-              500.0,
-              384.1,
-              680.0,
-              407.0
+              221.0,
+              83.6,
+              398.0,
+              106.5
             ]
           ],
           [
             "uwagi[1–7]",
             [
-              500.0,
-              326.7,
-              680.0,
-              379.1
+              221.0,
+              26.2,
+              398.0,
+              78.6
+            ]
+          ],
+          [
+            "róża i podziałka",
+            [
+              38.0,
+              75.7,
+              215.0,
+              106.5
             ]
           ]
         ],
@@ -3087,7 +3257,7 @@
         "znaki_centrujace": {
           "g": 10.0,
           "d": 10.0,
-          "l": 7.5,
+          "l": 10.0,
           "p": 10.0
         }
       },
@@ -3103,16 +3273,16 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 460,
-          "napisy": 163,
+          "prymitywy": 450,
+          "napisy": 159,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 1.8,
+      "czas_s": 2.1,
       "png_kontrola": {
         "px": [
-          4075,
-          2481
+          3508,
+          2599
         ],
         "dpi_eff": [
           150.0,
@@ -3125,19 +3295,19 @@
         "ok": true
       },
       "wypelnienie": {
-        "wypelnienie": 0.664,
-        "wypelnienie_rys": 0.638,
-        "wypelnienie_skl": 0.663,
-        "wypelnienie_kontur": 0.564,
-        "pole_arkusza_m2": 0.2898,
-        "pole_ramki_m2": 0.264,
+        "wypelnienie": 0.816,
+        "wypelnienie_rys": 0.8,
+        "wypelnienie_skl": 0.716,
+        "wypelnienie_kontur": 0.632,
+        "pole_arkusza_m2": 0.2614,
+        "pole_ramki_m2": 0.2369,
         "pusty_prostokat_mm": [
-          192,
-          174
+          96,
+          316
         ],
         "przyciety_mm": [
-          683,
-          420
+          587,
+          432
         ],
         "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
       }
@@ -3199,7 +3369,7 @@
         "standardowy": false,
         "tryb": "ekonomiczny",
         "koszt": 0.2768,
-        "wypelnienie_szac": 0.733,
+        "wypelnienie_szac": 0.74,
         "uklad_widokow": "wiersz",
         "skladanie": {
           "zgiecia_pionowe": [
@@ -3246,6 +3416,16 @@
             "skladanie": "poprawne"
           },
           {
+            "format": "914×300",
+            "wymiary_mm": [
+              914,
+              300
+            ],
+            "koszt": 0.322,
+            "pole_m2": 0.2742,
+            "skladanie": "słabe"
+          },
+          {
             "format": "690×420",
             "wymiary_mm": [
               690,
@@ -3266,6 +3446,16 @@
             "skladanie": "poprawne"
           },
           {
+            "format": "690×610",
+            "wymiary_mm": [
+              690,
+              610
+            ],
+            "koszt": 0.4942,
+            "pole_m2": 0.4209,
+            "skladanie": "słabe"
+          },
+          {
             "format": "690×841",
             "wymiary_mm": [
               690,
@@ -3273,16 +3463,6 @@
             ],
             "koszt": 0.6455,
             "pole_m2": 0.5803,
-            "skladanie": "poprawne"
-          },
-          {
-            "format": "690×891",
-            "wymiary_mm": [
-              690,
-              891
-            ],
-            "koszt": 0.6586,
-            "pole_m2": 0.6148,
             "skladanie": "poprawne"
           }
         ],
@@ -3300,8 +3480,8 @@
             "legenda",
             [
               680.0,
-              265.6,
-              860.0,
+              255.2,
+              857.0,
               284.0
             ]
           ],
@@ -3309,9 +3489,9 @@
             "uwagi[1–7]",
             [
               680.0,
-              216.8,
-              860.0,
-              260.6
+              206.4,
+              857.0,
+              250.2
             ]
           ]
         ],
@@ -3336,11 +3516,11 @@
         ],
         "stats": {
           "prymitywy": 916,
-          "napisy": 401,
+          "napisy": 402,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 4.7,
+      "czas_s": 5.1,
       "png_kontrola": {
         "px": [
           5138,
@@ -3357,15 +3537,15 @@
         "ok": true
       },
       "wypelnienie": {
-        "wypelnienie": 0.785,
-        "wypelnienie_rys": 0.766,
-        "wypelnienie_skl": 0.785,
-        "wypelnienie_kontur": 0.703,
+        "wypelnienie": 0.792,
+        "wypelnienie_rys": 0.774,
+        "wypelnienie_skl": 0.792,
+        "wypelnienie_kontur": 0.708,
         "pole_arkusza_m2": 0.2584,
         "pole_ramki_m2": 0.2327,
         "pusty_prostokat_mm": [
           198,
-          102
+          92
         ],
         "przyciety_mm": [
           860,
@@ -3381,15 +3561,15 @@
   "tom": "projekt/06_PT_instalacje_elektryczne/rysunki/tom_PT-IE.pdf",
   "papier": {
     "arkuszy": 14,
-    "pole_m2": 3.582,
-    "a4_ekw": 57.4,
-    "warstwy_a4": 94,
+    "pole_m2": 3.36,
+    "a4_ekw": 53.9,
+    "warstwy_a4": 75,
     "skladanie": {
-      "dobre": 3,
-      "poprawne": 11,
+      "dobre": 2,
+      "poprawne": 12,
       "słabe": 0
     },
-    "wypelnienie_wazone": 0.831
+    "wypelnienie_wazone": 0.859
   },
-  "czas_s": 75.0
+  "czas_s": 85.5
 }

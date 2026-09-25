@@ -1,4 +1,5 @@
 {
+ "nr": 63,
  "title": "Konstrukcja, runda 1: kontrola zbrojenia 315/315, rzut fundamentów przegenerowany ► · arkusze: poprawki 4 uwag ►",
  "stages": [
   [
@@ -52,6 +53,17 @@
  ],
  "notes": [
   "Konstrukcja: runda 1 trwa ok. 2,5 h — agent aktywny, bez zastoju.",
-  "Wynik rundy czeka na niezależną weryfikację pętli."
+  "Wynik rundy czeka na niezależną weryfikację pętli.",
+  "NADZÓR (12:51): 2 agentów aktywnych, bez zastojów; najdłuższa bezczynność 2 min; zmiany w repo 0 min temu."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/projekt/04_PT_konstrukcja/rysunki/PT-BO-01_rzut_fundamentow.png",
+   "caption": "PT-BO-01 rzut fundamentów (runda 1)"
+  },
+  {
+   "path": "/home/user/aihouse/projekt/04_PT_konstrukcja/rysunki/PT-BO-02_przekroje_charakterystyczne_fundamentu.png",
+   "caption": "PT-BO-02 przekroje charakterystyczne fundamentu"
+  }
  ]
 }

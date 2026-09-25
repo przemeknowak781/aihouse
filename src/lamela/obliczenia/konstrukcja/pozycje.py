@@ -1070,7 +1070,7 @@ class AnalizaKonstrukcji:
                 n += 1
                 A_sum += A
             if n:
-                out[e.id] = (f"**Moduły PV (pole fotowoltaiczne na dachu {e.id})** — obciążenie stałe na obrysie {n} modułów: "
+                out[e.id] = (f"- **Moduły PV (pole fotowoltaiczne na dachu {e.id})** — obciążenie stałe na obrysie {n} modułów: "
                              f"g_PV = (m_modułu + m_stelaża)·g/A_modułu = {f(m_kg, 1)}·9,81·10⁻³/{f(A_sum / n, 3)} = "
                              f"**{f(m_kg * 9.81 / 1000.0 / (A_sum / n), 3)}** kN/m² (balast systemu biosolarnego — substrat, "
                              f"w warstwach dachu); masy — dane wyrobu {status}.")
