@@ -19,7 +19,7 @@
       "podstawa": "RPB § 2b ust. 3; W-300",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "1.54 MB (limit 150 MB)"
+      "szczegoly": "1.50 MB (limit 150 MB)"
     },
     {
       "id": "F-03",
@@ -266,7 +266,7 @@
     }
   ],
   "znaczniki": {
-    "DO UZUPEŁNIENIA": 78,
+    "DO UZUPEŁNIENIA": 73,
     "DOKUMENT ZEWNĘTRZNY": 0,
     "DANE PRZYKŁADOWE": 57,
     "ZAŁ": 8,
@@ -291,10 +291,10 @@
       "[DO UZUPEŁNIENIA]": 1,
       "[ZAŁ]": 8,
       "[INT]": 10,
-      "[DO UZUPEŁNIENIA: kolor czarny spoza palety MPZP — interpretacja: tło szczeliny za lamelami]": 1,
-      "[DO UZUPEŁNIENIA: kolor wg karty kolorystyki (RAL/NCS)]": 3,
-      "[DO UZUPEŁNIENIA: paleta MPZP]": 4,
+      "[DO UZUPEŁNIENIA: interpretacja zgodności z MPZP]": 1,
+      "[DO UZUPEŁNIENIA: kolor pokrycia]": 1,
       "[DO UZUPEŁNIENIA: kolor ram (RAL)]": 1,
+      "[DO UZUPEŁNIENIA: paleta MPZP]": 1,
       "[DO UZUPEŁNIENIA: karta kolorystyki elewacji]": 1,
       "[DO UZUPEŁNIENIA: wskaźnik nagromadzenia odpadów z regulaminu gminy]": 1,
       "[DO UZUPEŁNIENIA: imię, nazwisko, nr uprawnień]": 1,
@@ -315,7 +315,7 @@
       "arkusze": 10
     }
   },
-  "rozmiar_mb": 1.5409650802612305,
+  "rozmiar_mb": 1.5047407150268555,
   "strony": 33,
   "podsumowanie": {
     "status": "PRZYKŁAD – NIE DO ZŁOŻENIA",
@@ -324,7 +324,7 @@
     "DO UZUPEŁNIENIA": 3,
     "N/D": 0,
     "OSTRZEŻENIE": 0,
-    "znaczniki_do_uzupelnienia": 78,
+    "znaczniki_do_uzupelnienia": 73,
     "znaczniki_dokument_zewnetrzny": 0,
     "znaczniki_dane_przykladowe": 57
   }

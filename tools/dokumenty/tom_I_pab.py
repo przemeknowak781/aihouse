@@ -65,6 +65,9 @@ def arkusze_pab(D) -> list:
 def buduj_pab(d: dict, D: DanePAB, arkusze: list | None = None, data: str | None = None) -> Dokument:
     pab = Dokument("Projekt architektoniczno-budowlany", "PAB", d, data=data or d.get("data"))
     pab.oswiadczenie_projektanta()
+    # zagęszczenie składu oświadczenia (tylko ten element): 4 autorów z polami [DO UZUPEŁNIENIA] mieści się na 1 stronie
+    pab.html("<style>section.osw { font-size: 8.9pt; } .osw-tresc p { line-height: 1.36; } "
+             "table.osw-dane td, table.osw-dane th { padding-top: 0.6mm; padding-bottom: 0.6mm; }</style>")
     A.wstep(pab, D, d)
     A.r01(pab, D, d)
     A.r02(pab, D, d)

@@ -123,21 +123,21 @@ def _wysokosc(pab, D):
     z0 = float(D.m.zero_abs)
     pab.markdown("## Wysokość, długość, szerokość, liczba kondygnacji (lit. c–d)")
     pab.tabela([
-        {"Parametr": "Wysokość zabudowy", "Wartość [m]": hz["wartosc"],
+        {"Parametr": "Wysokość zabudowy", "Wartość": f"{L(hz['wartosc'])} m",
          "Sposób wyznaczenia": f"od średniej rzędnej terenu na obwodzie ścian zewn. t_śr = ({L(hz['t_min'], 2)} + "
          f"{L(hz['t_max'], 2)}) / 2 = {L(hz['t_sr'], 2)} m n.p.m. do najwyższego punktu: {hz['element']} "
          f"({L(hz['z_top_abs'], 2)} m n.p.m.)", "Podstawa": hz["podstawa"]},
-        {"Parametr": "Wysokość budynku wg WT", "Wartość [m]": h6["wartosc"],
+        {"Parametr": "Wysokość budynku wg WT", "Wartość": f"{L(h6['wartosc'])} m",
          "Sposób wyznaczenia": f"od terenu przy najniżej położonym wejściu ({h6['wejscie']}, {L(h6['H_teren'], 2)} m n.p.m.) "
          f"do górnej powierzchni stropodachu {h6['dach']} z warstwami; grupa wysokości: niski ({h6['grupa']})",
          "Podstawa": "WT § 6, § 8 pkt 1"},
-        {"Parametr": "Długość × szerokość budynku", "Wartość [m]": f"{L(D.wymiary['dl'])} × {L(D.wymiary['szer'])}",
+        {"Parametr": "Długość × szerokość budynku", "Wartość": f"{L(D.wymiary['dl'])} × {L(D.wymiary['szer'])} m",
          "Sposób wyznaczenia": "obrys zewnętrzny ścian wszystkich kondygnacji (kierunek W–E × N–S); z płytami wysuniętymi "
          f"i okapami {L(D.wymiary['dl_calk'])} × {L(D.wymiary['szer_calk'])} m", "Podstawa": "lit. c; lamela.wskazniki"},
-        {"Parametr": "Liczba kondygnacji nadziemnych / podziemnych", "Wartość [m]": f"{w['kondygnacje_nadziemne']['wartosc']} / 0",
+        {"Parametr": "Liczba kondygnacji nadziemnych / podziemnych", "Wartość": f"{w['kondygnacje_nadziemne']['wartosc']} / 0",
          "Sposób wyznaczenia": "kondygnacja nadziemna — niezagłębiona poniżej terenu o więcej niż połowę wysokości "
          "w świetle; budynek niepodpiwniczony", "Podstawa": w["kondygnacje_nadziemne"]["podstawa"]},
-    ], tytul="Wysokość, wymiary i liczba kondygnacji", wyrownanie={"Wartość [m]": "r"}, klasa="zwarta",
+    ], tytul="Wysokość, wymiary i liczba kondygnacji", wyrownanie={"Wartość": "r"}, klasa="zwarta",
         szerokosci=["30mm", "25mm", None, "38mm"],
         uwagi=[f"Poziom ±0,000 = {L(z0, 2)} m n.p.m. (posadzka parteru). Rzędne terenu {DANE_PRZYKLADOWE} — wg mapy do "
                f"celów projektowych. Średnica — nie dotyczy."], zrodlo="lamela.wskazniki (upzp art. 2 pkt 30 lit. a; WT § 6)")

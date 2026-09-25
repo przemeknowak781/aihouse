@@ -100,7 +100,9 @@ class Arkusz:
                 s, l = rozmiar_formatu(self.format)
                 return f"{l}×{s}"
             except ValueError:
-                pass
+                m = re.search(r"(\d+(?:[.,]\d+)?)\s*[x×]\s*(\d+(?:[.,]\d+)?)", str(self.format))
+                if m:                                   # format niestandardowy „630×594” / „nst. 630×594”
+                    return f"{round(float(m.group(1).replace(',', '.')))}×{round(float(m.group(2).replace(',', '.')))}"
         return "—"
 
 

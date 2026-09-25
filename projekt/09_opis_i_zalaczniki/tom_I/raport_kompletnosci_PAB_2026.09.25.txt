@@ -2,13 +2,13 @@ RAPORT KOMPLETNOŚCI — PAB_2026.09.25.pdf
 Lista kontrolna: Element PAB (rejestr C.1 poz. 2)
 Status: PRZYKŁAD – NIE DO ZŁOŻENIA
 Pozycje: OK 26 · BRAK 0 · DO UZUPEŁNIENIA 3 · N/D 0 · OSTRZEŻENIE 0
-Znaczniki: [DO UZUPEŁNIENIA] ×78, [DOKUMENT ZEWNĘTRZNY] ×0, [DANE PRZYKŁADOWE] ×57
-Plik: 33 stron, 1.54 MB
+Znaczniki: [DO UZUPEŁNIENIA] ×73, [DOKUMENT ZEWNĘTRZNY] ×0, [DANE PRZYKŁADOWE] ×57
+Plik: 33 stron, 1.50 MB
 
   element PAB: strony 1–33 (opis 23, arkusze 10)
 
 ✓ F-01    [  *] OK               Nazwa pliku wg zał. 1 RPB (PZT_PAB_ZL_rrrr.mm.dd.pdf) (RPB § 2b ust. 4, zał. 1; W-301) — nazwa zgodna z zał. 1 RPB (PAB)
-✓ F-02    [  *] OK               Rozmiar pliku ≤ 150 MB (RPB § 2b ust. 3; W-300) — 1.54 MB (limit 150 MB)
+✓ F-02    [  *] OK               Rozmiar pliku ≤ 150 MB (RPB § 2b ust. 3; W-300) — 1.50 MB (limit 150 MB)
 ✓ F-03    [  *] OK               Część rysunkowa w postaci wektorowej (raster tylko jako podkład mapy) (RPB § 2b ust. 2; W-300) — 10 arkuszy wektorowych
 ✓ F-04    [  *] OK               Metadane PDF (tytuł, temat) (dobra praktyka; AUD-RYS) — Title: „Dom LAMELA — PAB: PAB (PRZYKŁAD – NIE DO ZŁOŻENIA)”
 ✓ F-05    [  *] OK               PT nie jest objęty wspólną oprawą z PZT/PAB (RPB § 5 ust. 3; § 7 ust. 8) — brak PT w pliku
@@ -41,9 +41,7 @@ Pola do uzupełnienia i dokumenty zewnętrzne (wystąpienia):
    20 × [DO UZUPEŁNIENIA: arkusz do wygenerowania z modelu]
    12 × [DO UZUPEŁNIENIA: imię i nazwisko]
    12 × [DO UZUPEŁNIENIA: nr uprawnień budowlanych]
-    4 × [DO UZUPEŁNIENIA: paleta MPZP]
     3 × [DO UZUPEŁNIENIA: imię i nazwisko lub nazwa inwestora]
-    3 × [DO UZUPEŁNIENIA: kolor wg karty kolorystyki (RAL/NCS)]
     2 × [DO UZUPEŁNIENIA: adres inwestora]
     2 × [DO UZUPEŁNIENIA: kod TERYT jedn. ewid. WWPPGG_R]
     1 × [DO UZUPEŁNIENIA: K — oferta (PT-IS)]
@@ -53,15 +51,17 @@ Pola do uzupełnienia i dokumenty zewnętrzne (wystąpienia):
     1 × [DO UZUPEŁNIENIA: data złożenia oświadczenia z art. 102a PB]
     1 × [DO UZUPEŁNIENIA: imię i nazwisko, kwalifikacje zawodowe (świadectwo/uprawnienia), podpis]
     1 × [DO UZUPEŁNIENIA: imię, nazwisko, nr uprawnień]
+    1 × [DO UZUPEŁNIENIA: interpretacja zgodności z MPZP]
     1 × [DO UZUPEŁNIENIA: jednostka ewidencyjna — kod TERYT WWPPGG_R i nazwa]
     1 × [DO UZUPEŁNIENIA: karta kolorystyki elewacji]
-    1 × [DO UZUPEŁNIENIA: kolor czarny spoza palety MPZP — interpretacja: tło szczeliny za lamelami]
+    1 × [DO UZUPEŁNIENIA: kolor pokrycia]
     1 × [DO UZUPEŁNIENIA: kolor ram (RAL)]
     1 × [DO UZUPEŁNIENIA: metryki otworów, protokoły sondowań, data badań]
     1 × [DO UZUPEŁNIENIA: miejscowość]
     1 × [DO UZUPEŁNIENIA: nazwa pracowni projektowej]
     1 × [DO UZUPEŁNIENIA: nr ewidencyjny PZGiK i data]
     1 × [DO UZUPEŁNIENIA: osoba odbierająca podłoże]
+    1 × [DO UZUPEŁNIENIA: paleta MPZP]
     1 × [DO UZUPEŁNIENIA: potwierdzenie wpisu w e-CRUB albo dołączenie kopii]
     1 × [DO UZUPEŁNIENIA: s — dane producenta systemu regulacji / PT-IS]
     1 × [DO UZUPEŁNIENIA: wskaźnik nagromadzenia odpadów z regulaminu gminy]

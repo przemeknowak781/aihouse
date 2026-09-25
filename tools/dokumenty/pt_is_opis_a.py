@@ -96,3 +96,127 @@ def rozdz_podstawy(o: Opis, D: DanePTIS, d: dict):
     `wyposazenie.yaml`, dane klimatyczne Poznań (TMY, WMO 12330). Tom jest zgodny z PZT i PAB oraz rozstrzygnięciami
     dotyczącymi zamierzenia budowlanego (oświadczenie projektanta).
     """)
+
+
+def _obj(D: DanePTIS, ident: str) -> dict:
+    return next((x for x in ((D.Dz.get("uzbrojenie") or {}).get("obiekty") or []) if x.get("id") == ident), {})
+
+
+def _pom_nazwa(D: DanePTIS, pid: str) -> str:
+    p = next((x for x in D.went.pomieszczenia if x.id == pid), None)
+    return f"{pid} {p.nazwa}" if p else pid
+
+
+def rozdz_ogrzewanie(o: Opis, D: DanePTIS):
+    """3.1 Źródło ciepła i ogrzewanie z automatyczną regulacją (§ 23 pkt 7 lit. a)."""
+    og, obc, pc = D.og, D.obc, D.og.pc
+    biw, Wd = og.biwalentny, D.Wd["ogrzewanie"]
+    n_pom = len({p.pom for p in og.petle})
+    rozdz = "; ".join(f"{r['kond']}: {r['rozdzielacze']} rozdzielacz, {r['petle']} "
+                      f"{'pętle' if 2 <= r['petle'] % 10 <= 4 and not 12 <= r['petle'] % 100 <= 14 else 'pętli'}, "
+                      f"{L(r['m_kgh'], 0)} kg/h, Δp_max {L(r['dp_max'], 1)} kPa" for r in og.rozdzielacze)
+    sg = D.I.get("grzejniki") or []
+    o.rozdzial("Opis instalacji", podstawa="§ 23 pkt 7 RPB", nowa_strona=True)
+    o.rozdzial("Źródło ciepła i instalacja ogrzewcza z automatyczną regulacją temperatury", poziom=2,
+               podstawa="§ 23 pkt 7 lit. a RPB; W-150…W-156")
+    o.tekst(f"""
+    **Obciążenie cieplne.** Projektowe obciążenie cieplne budynku Φ_HL = **{L(obc.Phi_HL / 1000, 2)} kW**
+    (PN-EN 12831, θ_e = {L(obc.theta_e, 0)} °C, średnia roczna θ_m,e = {L(obc.theta_me, 1)} °C; W-150, W-151),
+    z dodatkiem na c.w.u. Φ_W = {L(og.Phi_W, 2)} kW. Temperatury wewnętrzne wg WT § 134 ust. 2 (model
+    `pomieszczenia[].temp`); garaż nieogrzewany (θ_u = {', '.join(L(v, 1) for v in obc.theta_u.values()) or '—'} °C).
+
+    **Źródło ciepła.** Pompa ciepła powietrze–woda typu monoblok na czynniku naturalnym R290 (W-155) —
+    dane urządzenia przykładowego „{pc.get('model')}” {FIKCJA}: moc grzewcza P(A−7/W35) =
+    {L(dict(zip(pc['T'], pc['P'])).get(-7), 1)} kW, SCOP (35 °C) = {L(pc.get('SCOP_35'), 2)}, η_s = {L(100 * (pc.get('eta_s_35') or 0), 0)} %,
+    poziom mocy akustycznej L_WA = {L(pc.get('L_WA'), 0)} dB (tryb nocny {L(pc.get('L_WA_noc'), 0)} dB). Układ
+    monoenergetyczny: punkt biwalentny θ_biv = **{L(biw['theta_biv'], 1)} °C**, grzałka elektryczna
+    {L(og.par.grzalka_kW, 1)} kW pokrywa {L(100 * biw['udzial_grzalki'], 2)} % rocznego zapotrzebowania (bilans godzinowy
+    TMY Poznań). Jednostka zewnętrzna: {_obj(D, 'PC-JZ').get('opis', 'lokalizacja wg PZT')}. Skropliny —
+    {_obj(D, 'SK-PC').get('opis', 'odprowadzenie wg W-146')}. Moduł hydrauliczny, zasobnik c.w.u. i bufor —
+    pomieszczenie techniczne parteru.
+
+    **Instalacja ogrzewcza.** Ogrzewanie podłogowe wodne niskotemperaturowe: θ_V = **{L(og.theta_V, 0)} °C**,
+    Δθ = {L(og.par.sigma, 0)} K, rura {og.par.d_rury_petli[0]}×{L(og.par.d_rury_petli[1], 1)} mm (PE-X/PE-RT z barierą
+    antydyfuzyjną), {len(og.petle)} pętli w {n_pom} pomieszczeniach (długość pętli ≤ {L(og.par.L_petli_max, 0)} m,
+    Δp pętli ≤ {L(og.par.dp_petli_max, 0)} kPa). Rozdzielacze kondygnacyjne: {rozdz}.
+    {'Uzupełniające ściany grzewcze wodne (model `instalacje.grzejniki`): ' + ', '.join(f"{g['pom']} — {L(g.get('moc_W'), 0)} W" for g in sg) + '.' if sg else ''}
+    Bufor szeregowy {Wd.get('bufor_l')} dm³ (odszranianie i minimalny czas pracy sprężarki przy zamkniętych
+    pętlach), naczynie wzbiorcze przeponowe c.o. {og.naczynie_co.get('V_dob')} dm³, zawór bezpieczeństwa
+    {L(og.par.p_SV, 1)} bar. Przewody PC ↔ budynek: {og.przewody_pc.get('rura')}, izolacja wewnątrz
+    {L(og.przewody_pc.get('izol_WT'), 0)} mm, na zewnątrz {L(og.przewody_pc.get('izol_zewn'), 0)} mm z płaszczem UV.
+
+    **Automatyczna regulacja (§ 23 pkt 7 lit. a–c RPB, WT § 135 ust. 7–10, W-152).** Regulacja pogodowa temperatury
+    zasilania (krzywa grzewcza sterownika PC, czujnik zewnętrzny) oraz regulacja **oddzielnie w każdym
+    pomieszczeniu**: termostat pokojowy + siłowniki termoelektryczne na pętlach rozdzielacza (sterownik listwowy
+    z funkcją sterowania zależną od zapotrzebowania). Pomieszczenia bez stałego pobytu ludzi (komunikacja,
+    schowki) — regulacja strefowa z pomieszczeniem sąsiednim. Hydrauliczne zrównoważenie pętli — nastawy
+    przepływu na rozdzielaczach (tabela pętli w obliczeniach).
+    """)
+
+
+def rozdz_wentylacja(o: Opis, D: DanePTIS):
+    """3.2 Wentylacja mechaniczna nawiewno-wywiewna z odzyskiem ciepła (§ 23 pkt 7 lit. d)."""
+    w, c = D.went, D.went.centrala or {}
+    lok = D.I.get("lokalizacje") or {}
+    rek = next((x for x in D.Wy if x.get("typ") == "rekuperator"), {})
+    o.rozdzial("Wentylacja mechaniczna nawiewno-wywiewna z odzyskiem ciepła", poziom=2,
+               podstawa="§ 23 pkt 7 lit. d RPB; W-160…W-169")
+    o.tekst(f"""
+    Wentylacja mechaniczna zrównoważona z odzyskiem ciepła (WT § 148 ust. 2 — w pomieszczeniach z wentylacją
+    mechaniczną bez wentylacji grawitacyjnej; W-160). Strumienie wg PN-83/B-03430/Az3 i WT § 149: nawiew
+    Σ = **{L(w.suma_naw, 0)} m³/h**, wywiew Σ = **{L(w.suma_wyw, 0)} m³/h** (minimum wywiewu {L(w.suma_wyw_min, 0)} m³/h,
+    minimum powietrza zewnętrznego {L(w.naw_min_osoby, 0)} m³/h = 20 m³/h × {w.osoby} os.); tryb okresowy (kuchnia)
+    {L(w.V_boost, 0)} m³/h. Nawiew do pokoi, wywiew z kuchni, łazienek, WC, pralni i pomieszczeń bezokiennych;
+    przepływ powietrza przez podcięcia/kratki drzwi. Bilans: {w.zrodlo_bilansu}.
+
+    **Centrala** (urządzenie przykładowe — lub równoważne; {c.get('status', FIKCJA)}): {c.get('opis', '—')};
+    wydajność nominalna {L(c.get('V_nom_m3h'), 0)} m³/h (maks. {L(c.get('V_max_m3h'), 0)} m³/h), sprawność odzysku
+    η_t = {L(100 * (c.get('eta_t') or 0), 0)} %, SFP = {L(w.SFP_naw, 2)} kW/(m³/s) (limit WT {L(w.SFP_lim_naw, 2)}),
+    klasa SEC {c.get('SEC_klasa', '—')} (SEC = {L(c.get('SEC_kWh_m2a'), 0)} kWh/(m²·a); (UE) 1253/2014), filtry
+    {c.get('filtry', '—')}, moc wentylatorów {L(w.P_el_W, 0)} W. Lokalizacja: {rek.get('kond', '—')} — {rek.get('opis', '—')}.
+    Kanał główny Ø{L(w.kanal_glowny_D_mm, 0)} mm; przewody powietrza zewnętrznego i wyrzutowego izolowane cieplnie
+    z paroizolacją (W-168); tłumiki akustyczne na króćcach centrali; skropliny do kanalizacji przez syfon
+    z zamknięciem wodnym. Czerpnia na wys. {L((lok.get('czerpnia') or [None] * 3)[2], 1)} m, wyrzutnia na wys.
+    {L((lok.get('wyrzutnia') or [None] * 3)[2], 1)} m (odległości wg WT § 152 — sprawdzenia w obliczeniach).
+    Garaż — wentylacja naturalna, bez połączenia z centralą ({'; '.join(g[1] for g in w.garaz) if w.garaz else '—'}).
+    """)
+    rows = [{"Pomieszczenie": f"{p.id} {p.nazwa}", "Nawiew [m³/h]": p.naw, "Wywiew [m³/h]": p.wyw,
+             "Podstawa": p.podstawa or ("pokój — rozdział nawiewu" if p.naw else "—")}
+            for p in w.pomieszczenia if p.naw or p.wyw]
+    rows.append({"Pomieszczenie": "Razem", "Nawiew [m³/h]": w.suma_naw, "Wywiew [m³/h]": w.suma_wyw,
+                 "Podstawa": "bilans ±10 %", "_klasa": "suma"})
+    o.tabela(rows, tytul="Strumienie powietrza wentylacji mechanicznej",
+             formaty={"Nawiew [m³/h]": 0, "Wywiew [m³/h]": 0}, wyrownanie={"Podstawa": "l"},
+             zrodlo="model/budynek.yaml (pomieszczenia[].went); lamela.obliczenia.energia.wentylacja")
+
+
+def rozdz_woda(o: Opis, D: DanePTIS):
+    """3.3 Instalacja wodociągowa i c.w.u. (§ 23 pkt 7 lit. e)."""
+    wd, Wd = D.W["woda"], D.Wd["woda"]
+    cw, cis = wd.cwu, wd.cisnienia
+    typy = Counter(p.typ for p in wd.przybory)
+    rury = sorted({od.rura.split(" ")[0] for od in wd.odcinki if getattr(od, "rura", None)})
+    o.rozdzial("Instalacja wodociągowa wody zimnej i ciepłej", poziom=2, podstawa="§ 23 pkt 7 lit. e RPB; W-130…W-137")
+    o.tekst(f"""
+    Zasilanie z sieci wodociągowej przyłączem (PZT); wodomierz główny **{Wd['wodomierz']}** w pomieszczeniu
+    technicznym parteru (W-131), za nim filtr, zawór antyskażeniowy EA (PN-EN 1717) i
+    {'reduktor ciśnienia (nastawa ' + L(cis.get('p_stat_za_reduktorem'), 0) + ' kPa)' if cis.get('reduktor') else 'bez reduktora'}.
+    Przybory ({len(wd.przybory)}): {', '.join(f'{k} ×{v}' for k, v in sorted(typy.items()))}. Zapotrzebowanie:
+    Q_d,śr = {L(Wd['Q_d_sr_m3'], 2)} m³/d, Q_h,max = {L(Wd['Q_h_max_m3'], 2)} m³/h; przepływ obliczeniowy
+    q = **{L(Wd['q_obl_dm3s'], 3)} dm³/s** (W-132); wymagane ciśnienie przed wodomierzem p_wym = **{L(Wd['p_wym_kPa'], 0)} kPa**
+    (punkt krytyczny: {Wd['punkt_krytyczny']}); ciśnienie w punktach czerpalnych 0,05–0,60 MPa (W-130).
+    Przewody: {', '.join(rury)} (materiał przykładowy — lub równoważny o klasie ciśnienia i temperatury nie niższej;
+    wyroby w kontakcie z wodą do spożycia — W-137); prowadzenie w bruzdach i przestrzeniach instalacyjnych,
+    piony w szachcie SI.
+
+    **Ciepła woda użytkowa.** Zasobnik c.w.u. **{Wd['zasobnik_l']} dm³** z wężownicą o powierzchni
+    {L(cw.get('A_wez'), 1)} m² ogrzewany pompą ciepła (czas ładowania {L(cw.get('t_lad'), 1)} h); zapotrzebowanie
+    V_d = {L(Wd['cwu_V_d_l'], 0)} dm³/d (55 °C). Cyrkulacja: {Wd['cyrkulacja']} (W-134). Dezynfekcja termiczna
+    ≥ {L(wd.par.theta_dez_punkt, 0)} °C w punktach (zasobnik {L(wd.par.theta_dez_zas, 0)} °C, co {wd.par.dezynfekcja_co_dni} dni —
+    {L(Wd['dezynfekcja_kWh_a'], 0)} kWh/a) z termostatycznym zaworem mieszającym (W-133). Grupa bezpieczeństwa
+    zasobnika, naczynie przeponowe c.w.u. {D.og.naczynie_cwu.get('V_dob')} dm³. Izolacja cieplna przewodów c.w.u.,
+    cyrkulacji i c.o. wg WT zał. 2 pkt 1.5 (W-135).
+    """)
+    o.tabela([{"Miejsce": r[0], "Kategoria cieczy": r[1], "Zabezpieczenie": r[2], "Podstawa": r[3]}
+              for r in wd.zabezpieczenia_1717], tytul="Zabezpieczenia przed przepływem zwrotnym (PN-EN 1717)",
+             wyrownanie={"Miejsce": "l", "Zabezpieczenie": "l", "Podstawa": "l"}, zrodlo="lamela.obliczenia.sanitarne.woda")
