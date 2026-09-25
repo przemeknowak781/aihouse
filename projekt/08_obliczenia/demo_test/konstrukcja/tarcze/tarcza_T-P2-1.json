@@ -1,0 +1,226 @@
+{
+ "nazwa": "Ściana-tarcza T-P2-1",
+ "L": 13.0,
+ "H": 3.1,
+ "t": 0.18,
+ "beton": "C30/37",
+ "n_elementow": 2483,
+ "kombinacja_miarodajna": "6.10a (wiodące: QA)",
+ "sigma1_max": 3.823053472891547,
+ "sigma2_min": -4.382553143801411,
+ "T_max": 123.31765809206561,
+ "C_max": 106.57273476806473,
+ "w_max": 0.7128609797696748,
+ "w_dop": 12.0,
+ "eta_EQU": 0.04862843253276767,
+ "masa_stali": 481.1727915091048,
+ "sum_R": 883.8896999998528,
+ "blad_rownowagi": 1.666929048807949e-13,
+ "wykorzystanie": 0.9212,
+ "ok": true,
+ "reakcje_k": {
+  "G": {
+   "A": 273.827,
+   "B": 192.073,
+   "C": 116.423
+  },
+  "S": {
+   "A": 12.221,
+   "B": 7.615,
+   "C": 4.264
+  },
+  "H": {
+   "A": 5.944,
+   "B": 4.213,
+   "C": 2.843
+  },
+  "QA": {
+   "A": 42.068,
+   "B": 33.383,
+   "C": 17.649
+  }
+ },
+ "ciegna": [
+  {
+   "opis": "krawędź górna",
+   "F_Ed": 123.32,
+   "F_STM": 123.32,
+   "F_MES": 107.82,
+   "zbrojenie": "2φ14",
+   "As_prov": 307.9,
+   "w_k": 0.254
+  },
+  {
+   "opis": "nad otworem O4",
+   "F_Ed": 78.03,
+   "F_STM": 78.03,
+   "F_MES": 72.77,
+   "zbrojenie": "2φ12",
+   "As_prov": 226.2,
+   "w_k": 0.24
+  },
+  {
+   "opis": "koniec lewy tarczy (x = −1,50)",
+   "F_Ed": 69.55,
+   "F_STM": 43.87,
+   "F_MES": 69.55,
+   "zbrojenie": "2φ12",
+   "As_prov": 226.2,
+   "w_k": 0.203
+  },
+  {
+   "opis": "pod otworem O1",
+   "F_Ed": 52.69,
+   "F_STM": 49.92,
+   "F_MES": 52.69,
+   "zbrojenie": "2φ12",
+   "As_prov": 226.2,
+   "w_k": 0.169
+  },
+  {
+   "opis": "krawędź dolna",
+   "F_Ed": 47.53,
+   "F_STM": 31.81,
+   "F_MES": 47.53,
+   "zbrojenie": "2φ12",
+   "As_prov": 226.2,
+   "w_k": 0.152
+  },
+  {
+   "opis": "nad otworem O1",
+   "F_Ed": 38.21,
+   "F_STM": 20.21,
+   "F_MES": 38.21,
+   "zbrojenie": "2φ12",
+   "As_prov": 226.2,
+   "w_k": 0.191
+  },
+  {
+   "opis": "pod otworem O2",
+   "F_Ed": 36.75,
+   "F_STM": 36.75,
+   "F_MES": 24.65,
+   "zbrojenie": "2φ12",
+   "As_prov": 226.2,
+   "w_k": 0.075
+  },
+  {
+   "opis": "nad otworem O2",
+   "F_Ed": 29.39,
+   "F_STM": 19.12,
+   "F_MES": 29.39,
+   "zbrojenie": "2φ12",
+   "As_prov": 226.2,
+   "w_k": 0.091
+  },
+  {
+   "opis": "nad otworem O3",
+   "F_Ed": 27.47,
+   "F_STM": 17.69,
+   "F_MES": 27.47,
+   "zbrojenie": "2φ12",
+   "As_prov": 226.2,
+   "w_k": 0.091
+  },
+  {
+   "opis": "ościeże lewe otworu O4",
+   "F_Ed": 27.42,
+   "F_STM": 5.2,
+   "F_MES": 27.42,
+   "zbrojenie": "2φ12",
+   "As_prov": 226.2,
+   "w_k": 0.073
+  },
+  {
+   "opis": "pod otworem O4",
+   "F_Ed": 25.4,
+   "F_STM": 25.4,
+   "F_MES": 11.82,
+   "zbrojenie": "2φ12",
+   "As_prov": 226.2,
+   "w_k": 0.038
+  },
+  {
+   "opis": "pod otworem O3",
+   "F_Ed": 20.22,
+   "F_STM": 15.11,
+   "F_MES": 20.22,
+   "zbrojenie": "2φ12",
+   "As_prov": 226.2,
+   "w_k": 0.068
+  },
+  {
+   "opis": "ościeże prawe otworu O2",
+   "F_Ed": 13.07,
+   "F_STM": 0.0,
+   "F_MES": 13.07,
+   "zbrojenie": "2φ12",
+   "As_prov": 226.2,
+   "w_k": 0.036
+  },
+  {
+   "opis": "ościeże prawe otworu O1",
+   "F_Ed": 11.98,
+   "F_STM": 0.0,
+   "F_MES": 11.98,
+   "zbrojenie": "2φ12",
+   "As_prov": 226.2,
+   "w_k": 0.036
+  },
+  {
+   "opis": "ościeże lewe otworu O2",
+   "F_Ed": 7.82,
+   "F_STM": 0.0,
+   "F_MES": 7.82,
+   "zbrojenie": "2φ12",
+   "As_prov": 226.2,
+   "w_k": 0.017
+  }
+ ],
+ "ugiecia": [
+  {
+   "typ": "wspornik",
+   "x": -1.5,
+   "x_t": 0.0,
+   "l": 1.5,
+   "opis": "wspornik (zachód)",
+   "w_I": 0.7129,
+   "w_II": 0.7129,
+   "w_0": 0.2097,
+   "w_dop": 12.0,
+   "w_inc": 0.5031,
+   "w_inc_dop": 6.0,
+   "L_ref": 3.0
+  },
+  {
+   "typ": "przeslo",
+   "x": 3.65,
+   "xa": 2.9,
+   "xb": 4.4,
+   "l": 1.5,
+   "opis": "przęsło między podporami A–B",
+   "w_I": 0.1285,
+   "w_II": 0.1285,
+   "w_0": 0.0325,
+   "w_dop": 6.0,
+   "w_inc": 0.096,
+   "w_inc_dop": 3.0,
+   "L_ref": 1.5
+  },
+  {
+   "typ": "przeslo",
+   "x": 8.4,
+   "xa": 7.6,
+   "xb": 9.2,
+   "l": 1.6,
+   "opis": "przęsło między podporami B–C",
+   "w_I": 0.0604,
+   "w_II": 0.0604,
+   "w_0": 0.0172,
+   "w_dop": 6.4,
+   "w_inc": 0.0432,
+   "w_inc_dop": 3.2,
+   "L_ref": 1.6
+  }
+ ]
+}

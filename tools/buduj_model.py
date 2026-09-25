@@ -32,7 +32,7 @@ OUT = ROOT / "model"
 # =====================================================================================================================
 # 1. PARAMETRY — osie, poziomy, grubości (wszystkie wymiary w m)
 # =====================================================================================================================
-X = {"A'": -1.120, "A": 0.000, "B": 3.875, "C": 5.875, "M": 7.190, "D": 8.500, "D'": 9.875, "E": 12.000,
+X = {"A'": -1.000, "A": 0.000, "B": 3.875, "C": 5.875, "M": 7.190, "D": 8.500, "D'": 9.875, "E": 12.000,
      "P": 14.875, "F": 18.375}
 Y = {"1": 0.000, "2": 2.875, "H": 3.750, "3": 5.125, "4": 8.750, "5": 9.375}
 
@@ -222,12 +222,12 @@ PRZ = {
                       "szczelina wentylowana ok. 11 cm i lamele na ruszcie — element `lamele` (U ≈ 0,16)", typ="sciana_zewn", warstwy=[
         L("TYNK_GIPS", 0.015, funkcja="szczelnosc_powietrzna"), L("SIL18", 0.18, konstrukcyjna=True), L("WELNA_FAS", 0.20),
         L("MEMB_WIATR", 0.010)]),
-    "SZL": dict(nazwa="Ściana zewnętrzna lekka A' (na wsporniku P2): szkielet KVH 45×200 z wełną + OSB (szczelność) + DWD + membrana UV + "
-                      "pustka wentylowana; bez funkcji nośnej dla stropodachu (U ≈ 0,15)", typ="sciana_zewn", warstwy=[
+    "SZL": dict(nazwa="Ściana zewnętrzna lekka A' (na wsporniku P2): szkielet KVH 45×200 z wełną + OSB (szczelność) + DWD + wełna fasadowa 18 cm + "
+                      "membrana UV (lico zewn. 0,30 m od osi — jak SZ2, ciągłość warstw w narożu); bez funkcji nośnej (U ≈ 0,10)", typ="sciana_zewn", warstwy=[
         L("GK", 0.025), L("WELNA_035", 0.05, frakcje=[{"mat": "WELNA_035", "udzial": 0.9}, {"mat": "DREWNO_KVH", "udzial": 0.1}]),
         L("OSB", 0.015, funkcja="paroizolacja"),
         L("WELNA_035", 0.20, konstrukcyjna=True, frakcje=[{"mat": "WELNA_035", "udzial": 0.88}, {"mat": "DREWNO_KVH", "udzial": 0.12}]),
-        L("DWD16", 0.016), L("WELNA_FAS", 0.060), L("MEMB_WIATR", 0.004)]),
+        L("DWD16", 0.016), L("WELNA_FAS", 0.180), L("MEMB_WIATR", 0.004)]),
     "SW18": dict(nazwa="Ściana wewnętrzna nośna: silikat 18, tynk gipsowy obustronnie", typ="sciana_wewn_nosna", warstwy=[
         L("TYNK_GIPS", 0.015), L("SIL18", 0.18, konstrukcyjna=True), L("TYNK_GIPS", 0.015)]),
     "SWZB": dict(nazwa="Ściana wewnętrzna nośna żelbetowa 18 cm (trzon klatki na P0 — usztywnienie w kierunku x, J2)", typ="sciana_wewn_nosna", warstwy=[
@@ -354,7 +354,7 @@ W("S1-13", "P1", "DZ12", (xD2, y3), (xD2, y4), uwagi="WC z natryskiem / pralnia 
 W("S1-14", "P1", "GK10", (X_SI, y3), (X_SI, Y_SI), uwagi="obudowa szachtu SI")
 W("S1-15", "P1", "GK10", (X_SI, Y_SI), (xC, Y_SI), uwagi="obudowa szachtu SI")
 
-# ---- P2 (II piętro — bryła A w lamelach, wspornik 1,12 m w osi / 1,00 m lico–lico na zachód; nadbudowa B–D od pn.)
+# ---- P2 (II piętro — bryła A w lamelach, wspornik 1,00 m w osi i lico–lico na zachód; nadbudowa B–D od pn.)
 W("S2-01", "P2", "SZ2", (xA2, y1), (xE, y1), "lewa", "ściana pd. bryły A za lamelami; odc. A'–A na wsporniku (belka B4)")
 W("S2-02", "P2", "SZ2", (xE, y1), (xE, y3), "lewa", "ściana wsch. bryły A za lamelami")
 W("S2-03", "P2", "SZ1", (xE, y3), (xD, y3), "lewa", "ściana pn. bryły A nad dachem P1 (pole wsch.)")
@@ -559,10 +559,10 @@ PMS("2.07", "P2", "Pom. techniczne (centrala rekuperacyjna, wyłaz na dach)", (7
 #    Konwencja SCHEMAT p. 5.1: odsłonięte fragmenty stropów = `dachy`; dach garażu = osobny element `dachy`.
 # =====================================================================================================================
 OB_P1 = R(-EXT, -EXT, xE + EXT, y4 + EXT)                                          # −0,30…12,30 × −0,30…9,05
-OB_P2 = P((xA2 - 0.18, -EXT), (xE + EXT, -EXT), (xE + EXT, y3 + EXT), (xD + EXT, y3 + EXT), (xD + EXT, y4 + EXT),
-          (xB - EXT, y4 + EXT), (xB - EXT, y3 + EXT), (xA2 - 0.18, y3 + EXT))
+OB_P2 = P((xA2 - EXT, -EXT), (xE + EXT, -EXT), (xE + EXT, y3 + EXT), (xD + EXT, y3 + EXT), (xD + EXT, y4 + EXT),
+          (xB - EXT, y4 + EXT), (xB - EXT, y3 + EXT), (xA2 - EXT, y3 + EXT))
 OTW_SCH = R(XC_e, Y3_n, XD_w, Y4_i)                                                 # otwór klatki w ST1/ST2
-X2o = xA2 - 0.18                                                                     # lico zach. bryły A (−1,30)
+X2o = xA2 - EXT                                                                      # lico zach. bryły A (−1,30)
 
 STROPY = [
     {"id": "ST1", "nad": "P0", "wierzch": Z_ST1, "grubosc": T_STR, "obrys": OB_P1, "otwory": [OTW_SCH], "podloga": "POD-1", "sufit": "TYNK_GIPS",
@@ -675,9 +675,9 @@ BELKI = [
     {"id": "B3", "os": [[xA2, 0.0], [xA2, y3]], "b": 0.20, "h": 0.60, "spod": r(Z_ST2 - T_STR), "mat": "ZB_C30",
      "uwagi": "belka krawędziowa ST2 w osi A' (odwrócona, pod parapetem okna O2-04) — niesie lekką ścianę A' i okap PL-2; oparta na końcach B4/B5"},
     {"id": "B4", "os": [[xA2, 0.0], [xB, 0.0]], "b": 0.18, "h": 0.80, "spod": r(Z_ST2 - T_STR), "mat": "ZB_C30",
-     "uwagi": "belka wspornikowa w osi 1 (w licu ściany P2, pod parapetem O2-01 +6,90): wspornik 1,12 m na ścianie A, przęsło zakotwienia A–B 3,875 m"},
+     "uwagi": "belka wspornikowa w osi 1 (w licu ściany P2, pod parapetem O2-01 +6,90): wspornik 1,00 m na ścianie A, przęsło zakotwienia A–B 3,875 m"},
     {"id": "B5", "os": [[xA2, y3], [xB, y3]], "b": 0.18, "h": 0.80, "spod": r(Z_ST2 - T_STR), "mat": "ZB_C30",
-     "uwagi": "belka wspornikowa w osi 3 (w ścianie pn. P2): wspornik 1,12 m, zakotwienie A–B"},
+     "uwagi": "belka wspornikowa w osi 3 (w ścianie pn. P2): wspornik 1,00 m, zakotwienie A–B"},
     {"id": "B6", "os": [[xA2, 0.0], [xA2, y3]], "b": 0.20, "h": 0.40, "spod": r(Z_ST3 - T_STR - 0.18), "mat": "ZB_C30",
      "uwagi": "belka krawędziowa ST3 w osi A' (nad oknem O2-04) — okap zach. stropodachu; oparta na narożach ścian osi 1 i 3"},
     {"id": "B7", "os": [[12.50, y5], [17.95, y5]], "b": 0.25, "h": r(Z_DG - 2.15), "spod": 2.15, "mat": "ZB_C30",
@@ -912,7 +912,7 @@ WEZLY = [
     {"id": "WZ-15", "nazwa": "Przejścia instalacji przez przegrody zewnętrzne (wywiewka K1, czerpnia, wyrzutnia, PC, wpusty, przyłącza)",
      "typ": "przejscie_instalacji", "przegrody": ["SD1", "DZ1", "SZ1", "POD-0"], "liczba": 16},
     {"id": "WZ-16", "nazwa": "Belki wspornikowe B4/B5 i belka B3 w linii izolacji wspornika bryły A (ciągłość wełny pod ST2Z)",
-     "typ": "strop_zewn_krawedz", "przegrody": ["SZ1", "SZL", "SUF-ZEW"], "dlugosc": r(2 * 1.12, 2)},
+     "typ": "strop_zewn_krawedz", "przegrody": ["SZ1", "SZL", "SUF-ZEW"], "dlugosc": r(2 * (xA - xA2), 2)},
 ]
 
 ENERGIA = {

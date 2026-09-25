@@ -5,7 +5,7 @@
 meta: {nazwa: Dom LAMELA, wersja: '1.0', data: '2026-09-25', stadium: koncepcja ostateczna (synteza W2 + przeszczepy W1/W3 + poprawki J1–J3), autor: (do uzupełnienia — projektant z uprawnieniami bez ograniczeń), zrodlo: tools/buduj_model.py (model parametryczny), uwagi: 'WT (t.j. Dz.U. 2022 poz. 1225 ze zm.) w brzmieniu do 19.09.2026, stosowane na podstawie art. 102a PB (oświadczenie Inwestora)'}
 uklad: {zero_abs: 101.65, azymut_osi_y: 0.0}
 osie:
-  x: {A': -1.12, A: 0.0, B: 3.875, C: 5.875, M: 7.19, D: 8.5, D': 9.875, E: 12.0, P: 14.875, F: 18.375}   # A' = oś lekkiej ściany wspornika; M = ścianka środkowa schodów; D' = ścianka WC
+  x: {A': -1.0, A: 0.0, B: 3.875, C: 5.875, M: 7.19, D: 8.5, D': 9.875, E: 12.0, P: 14.875, F: 18.375}   # A' = oś lekkiej ściany wspornika; M = ścianka środkowa schodów; D' = ścianka WC
   y: {'1': 0.0, '2': 2.875, H: 3.75, '3': 5.125, '4': 8.75, '5': 9.375}   # H = ścianka holu P1
 
 kondygnacje:
@@ -81,7 +81,7 @@ przegrody:
       - {mat: WELNA_FAS, d: 0.2}
       - {mat: MEMB_WIATR, d: 0.01}
   SZL:
-    nazwa: 'Ściana zewnętrzna lekka A'' (na wsporniku P2): szkielet KVH 45×200 z wełną + OSB (szczelność) + DWD + membrana UV + pustka wentylowana; bez funkcji nośnej dla stropodachu (U ≈ 0,15)'
+    nazwa: 'Ściana zewnętrzna lekka A'' (na wsporniku P2): szkielet KVH 45×200 z wełną + OSB (szczelność) + DWD + wełna fasadowa 18 cm + membrana UV (lico zewn. 0,30 m od osi — jak SZ2, ciągłość warstw w narożu); bez funkcji nośnej (U ≈ 0,10)'
     typ: sciana_zewn
     warstwy:
       - {mat: GK, d: 0.025}
@@ -89,7 +89,7 @@ przegrody:
       - {mat: OSB, d: 0.015, funkcja: paroizolacja}
       - {mat: WELNA_035, d: 0.2, konstrukcyjna: true, frakcje: [{mat: WELNA_035, udzial: 0.88}, {mat: DREWNO_KVH, udzial: 0.12}]}
       - {mat: DWD16, d: 0.016}
-      - {mat: WELNA_FAS, d: 0.06}
+      - {mat: WELNA_FAS, d: 0.18}
       - {mat: MEMB_WIATR, d: 0.004}
   SW18:
     nazwa: 'Ściana wewnętrzna nośna: silikat 18, tynk gipsowy obustronnie'
@@ -297,14 +297,14 @@ sciany:
   - {id: S1-14, kond: P1, przegroda: GK10, os: [[5.32, 5.125], [5.32, 6.4]], wnetrze: srodek, z_od: null, z_do: null, uwagi: obudowa szachtu SI}
   - {id: S1-15, kond: P1, przegroda: GK10, os: [[5.32, 6.4], [5.875, 6.4]], wnetrze: srodek, z_od: null, z_do: null, uwagi: obudowa szachtu SI}
   # --- P2
-  - {id: S2-01, kond: P2, przegroda: SZ2, os: [[-1.12, 0.0], [12.0, 0.0]], wnetrze: lewa, z_od: null, z_do: null, uwagi: ściana pd. bryły A za lamelami; odc. A'–A na wsporniku (belka B4)}
+  - {id: S2-01, kond: P2, przegroda: SZ2, os: [[-1.0, 0.0], [12.0, 0.0]], wnetrze: lewa, z_od: null, z_do: null, uwagi: ściana pd. bryły A za lamelami; odc. A'–A na wsporniku (belka B4)}
   - {id: S2-02, kond: P2, przegroda: SZ2, os: [[12.0, 0.0], [12.0, 5.125]], wnetrze: lewa, z_od: null, z_do: null, uwagi: ściana wsch. bryły A za lamelami}
   - {id: S2-03, kond: P2, przegroda: SZ1, os: [[12.0, 5.125], [8.5, 5.125]], wnetrze: lewa, z_od: null, z_do: null, uwagi: ściana pn. bryły A nad dachem P1 (pole wsch.)}
   - {id: S2-04, kond: P2, przegroda: SZ1, os: [[8.5, 5.125], [8.5, 8.75]], wnetrze: lewa, z_od: null, z_do: null, uwagi: nadbudowa klatki i łazienki — ściana wsch.}
   - {id: S2-05, kond: P2, przegroda: SZ1, os: [[8.5, 8.75], [3.875, 8.75]], wnetrze: lewa, z_od: null, z_do: null, uwagi: 'nadbudowa — ściana pn. (okno klatki, okno łazienki)'}
   - {id: S2-06, kond: P2, przegroda: SZ1, os: [[3.875, 8.75], [3.875, 5.125]], wnetrze: lewa, z_od: null, z_do: null, uwagi: nadbudowa — ściana zach.}
-  - {id: S2-07, kond: P2, przegroda: SZ1, os: [[3.875, 5.125], [-1.12, 5.125]], wnetrze: lewa, z_od: null, z_do: null, uwagi: ściana pn. bryły A nad dachem P1 (pole zach.); odc. A'–A na wsporniku (belka B5)}
-  - {id: S2-08, kond: P2, przegroda: SZL, os: [[-1.12, 5.125], [-1.12, 0.0]], wnetrze: lewa, z_od: null, z_do: null, uwagi: 'ściana zach. lekka na wsporniku (belka krawędziowa B3), za lamelami'}
+  - {id: S2-07, kond: P2, przegroda: SZ1, os: [[3.875, 5.125], [-1.0, 5.125]], wnetrze: lewa, z_od: null, z_do: null, uwagi: ściana pn. bryły A nad dachem P1 (pole zach.); odc. A'–A na wsporniku (belka B5)}
+  - {id: S2-08, kond: P2, przegroda: SZL, os: [[-1.0, 5.125], [-1.0, 0.0]], wnetrze: lewa, z_od: null, z_do: null, uwagi: 'ściana zach. lekka na wsporniku (belka krawędziowa B3), za lamelami'}
   - {id: S2-09, kond: P2, przegroda: SW18, os: [[3.875, 5.125], [7.19, 5.125]], wnetrze: srodek, z_od: null, z_do: null, uwagi: oś 3 — łazienka / garderoba; zamknięcie pustki nad biegiem 1}
   - {id: S2-10, kond: P2, przegroda: SW18, os: [[5.875, 5.125], [5.875, 8.75]], wnetrze: srodek, z_od: null, z_do: null, uwagi: oś C — klatka}
   - {id: S2-11, kond: P2, przegroda: SC12, os: [[7.19, 5.125], [7.19, 7.47]], wnetrze: srodek, z_od: null, z_do: null, uwagi: ścianka środkowa schodów (do stropodachu)}
@@ -354,9 +354,9 @@ otwory:
   - {id: O1-11, sciana: S1-06, symbol: D2, typ: drzwi, odl: 0.21, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: na_zewn, rodzaj: R}, uwagi: WC z natryskiem — na zewnątrz (pion K2 nad WC P0)}
   - {id: O1-12, sciana: S1-06, symbol: D1, typ: drzwi, odl: 1.65, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: pralnia z suszarnią}
   # --- P2
-  - {id: O2-01, sciana: S2-01, symbol: OP1, typ: okno, odl: 1.12, szer: 3.0, wys: 2.0, parapet: 0.6, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: RU}, oslona: screen_zip, uwagi: sypialnia — południe (za lamelami), montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)', oslona_montaz: 'screen ZIP w szczelinie wentylowanej za lamelami, kaseta nadstawna przed membraną pod okapem PL-3 (bez podcięcia wełny)'}
-  - {id: O2-02, sciana: S2-01, symbol: OP2, typ: okno, odl: 5.22, szer: 1.2, wys: 1.75, parapet: 0.85, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: RU}, oslona: screen_zip, uwagi: garderoba — południe, montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)', oslona_montaz: 'screen ZIP w szczelinie wentylowanej za lamelami, kaseta nadstawna przed membraną pod okapem PL-3 (bez podcięcia wełny)'}
-  - {id: O2-03, sciana: S2-01, symbol: OP3, typ: okno, odl: 10.12, szer: 2.4, wys: 2.0, parapet: 0.6, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: RU}, oslona: screen_zip, uwagi: gabinet — południe, montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)', oslona_montaz: 'screen ZIP w szczelinie wentylowanej za lamelami, kaseta nadstawna przed membraną pod okapem PL-3 (bez podcięcia wełny)'}
+  - {id: O2-01, sciana: S2-01, symbol: OP1, typ: okno, odl: 1.0, szer: 3.0, wys: 2.0, parapet: 0.6, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: RU}, oslona: screen_zip, uwagi: sypialnia — południe (za lamelami), montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)', oslona_montaz: 'screen ZIP w szczelinie wentylowanej za lamelami, kaseta nadstawna przed membraną pod okapem PL-3 (bez podcięcia wełny)'}
+  - {id: O2-02, sciana: S2-01, symbol: OP2, typ: okno, odl: 5.1, szer: 1.2, wys: 1.75, parapet: 0.85, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: RU}, oslona: screen_zip, uwagi: garderoba — południe, montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)', oslona_montaz: 'screen ZIP w szczelinie wentylowanej za lamelami, kaseta nadstawna przed membraną pod okapem PL-3 (bez podcięcia wełny)'}
+  - {id: O2-03, sciana: S2-01, symbol: OP3, typ: okno, odl: 10.0, szer: 2.4, wys: 2.0, parapet: 0.6, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: RU}, oslona: screen_zip, uwagi: gabinet — południe, montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)', oslona_montaz: 'screen ZIP w szczelinie wentylowanej za lamelami, kaseta nadstawna przed membraną pod okapem PL-3 (bez podcięcia wełny)'}
   - {id: O2-04, sciana: S2-08, symbol: OP3, typ: okno, odl: 1.425, szer: 2.4, wys: 2.0, parapet: 0.6, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: RU}, oslona: screen_zip, uwagi: 'sypialnia — zachód (ściana lekka, za lamelami)', montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)', oslona_montaz: screen ZIP w szczelinie za lamelami (kaseta przed membraną)}
   - {id: O2-05, sciana: S2-02, symbol: OP2, typ: okno, odl: 1.9, szer: 1.2, wys: 1.75, parapet: 0.85, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: RU}, oslona: screen_zip, uwagi: gabinet — wschód, montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)', oslona_montaz: screen ZIP w szczelinie za lamelami (kaseta przed membraną)}
   - {id: O2-06, sciana: S2-05, symbol: ON2, typ: okno, odl: 3.3, szer: 0.9, wys: 0.6, parapet: 1.6, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: U}, oslona: brak, uwagi: łazienka rodziców, montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)'}
@@ -436,10 +436,10 @@ slupy:
 belki:
   - {id: B1, os: [[0.0, 0.0], [12.0, 0.0]], b: 0.25, h: 1.07, spod: 2.78, mat: ZB_C30, uwagi: 'podciąg fasady E, odwrócony (+2,78…+3,85 = parapet boksu C); przęsła 2,20/1,90/2,34/2,34/3,22 na SL1–SL4 i ścianach A, E'}
   - {id: B2, os: [[3.85, 0.0], [11.37, 0.0]], b: 0.25, h: 0.8, spod: 5.35, mat: ZB_C30, uwagi: 'nadproże boksu C 25×80, 3 przęsła 2,34 m na słupkach SL5/SL6'}
-  - {id: B3, os: [[-1.12, 0.0], [-1.12, 5.125]], b: 0.2, h: 0.6, spod: 5.93, mat: ZB_C30, uwagi: 'belka krawędziowa ST2 w osi A'' (odwrócona, pod parapetem okna O2-04) — niesie lekką ścianę A'' i okap PL-2; oparta na końcach B4/B5'}
-  - {id: B4, os: [[-1.12, 0.0], [3.875, 0.0]], b: 0.18, h: 0.8, spod: 5.93, mat: ZB_C30, uwagi: 'belka wspornikowa w osi 1 (w licu ściany P2, pod parapetem O2-01 +6,90): wspornik 1,12 m na ścianie A, przęsło zakotwienia A–B 3,875 m'}
-  - {id: B5, os: [[-1.12, 5.125], [3.875, 5.125]], b: 0.18, h: 0.8, spod: 5.93, mat: ZB_C30, uwagi: 'belka wspornikowa w osi 3 (w ścianie pn. P2): wspornik 1,12 m, zakotwienie A–B'}
-  - {id: B6, os: [[-1.12, 0.0], [-1.12, 5.125]], b: 0.2, h: 0.4, spod: 8.9, mat: ZB_C30, uwagi: belka krawędziowa ST3 w osi A' (nad oknem O2-04) — okap zach. stropodachu; oparta na narożach ścian osi 1 i 3}
+  - {id: B3, os: [[-1.0, 0.0], [-1.0, 5.125]], b: 0.2, h: 0.6, spod: 5.93, mat: ZB_C30, uwagi: 'belka krawędziowa ST2 w osi A'' (odwrócona, pod parapetem okna O2-04) — niesie lekką ścianę A'' i okap PL-2; oparta na końcach B4/B5'}
+  - {id: B4, os: [[-1.0, 0.0], [3.875, 0.0]], b: 0.18, h: 0.8, spod: 5.93, mat: ZB_C30, uwagi: 'belka wspornikowa w osi 1 (w licu ściany P2, pod parapetem O2-01 +6,90): wspornik 1,00 m na ścianie A, przęsło zakotwienia A–B 3,875 m'}
+  - {id: B5, os: [[-1.0, 5.125], [3.875, 5.125]], b: 0.18, h: 0.8, spod: 5.93, mat: ZB_C30, uwagi: 'belka wspornikowa w osi 3 (w ścianie pn. P2): wspornik 1,00 m, zakotwienie A–B'}
+  - {id: B6, os: [[-1.0, 0.0], [-1.0, 5.125]], b: 0.2, h: 0.4, spod: 8.9, mat: ZB_C30, uwagi: belka krawędziowa ST3 w osi A' (nad oknem O2-04) — okap zach. stropodachu; oparta na narożach ścian osi 1 i 3}
   - {id: B7, os: [[12.5, 9.375], [17.95, 9.375]], b: 0.25, h: 0.85, spod: 2.15, mat: ZB_C30, uwagi: 'nadproże bramy garażu (rozp. 5,00 m w świetle)'}
   - {id: B8, os: [[5.875, 5.125], [8.5, 5.125]], b: 0.25, h: 0.5, spod: 2.5, mat: ZB_C25, uwagi: 'podciąg ST1 w osi 3 nad wejściem na schody (C–D, 2,625 m); prześwit nad stopą biegu 1 ≥ 2,30 m'}
   - {id: B9, os: [[5.875, 5.125], [8.5, 5.125]], b: 0.25, h: 0.5, spod: 5.65, mat: ZB_C25, uwagi: podciąg ST2 w osi 3 nad wyjściem ze schodów P1 (C–D)}
@@ -548,7 +548,7 @@ wezly:
   - {id: WZ-13, nazwa: Konsole rusztu lamel (przekładka termiczna), typ: konsola_lamel, przegrody: [SZ2, SZL], liczba: 50}
   - {id: WZ-14, nazwa: 'Konsole ramy boksu C i pasa D (punktowe, przekładka termiczna)', typ: kotwa, przegrody: [SZ1], liczba: 10}
   - {id: WZ-15, nazwa: 'Przejścia instalacji przez przegrody zewnętrzne (wywiewka K1, czerpnia, wyrzutnia, PC, wpusty, przyłącza)', typ: przejscie_instalacji, przegrody: [SD1, DZ1, SZ1, POD-0], liczba: 16}
-  - {id: WZ-16, nazwa: Belki wspornikowe B4/B5 i belka B3 w linii izolacji wspornika bryły A (ciągłość wełny pod ST2Z), typ: strop_zewn_krawedz, przegrody: [SZ1, SZL, SUF-ZEW], dlugosc: 2.24}
+  - {id: WZ-16, nazwa: Belki wspornikowe B4/B5 i belka B3 w linii izolacji wspornika bryły A (ciągłość wełny pod ST2Z), typ: strop_zewn_krawedz, przegrody: [SZ1, SZL, SUF-ZEW], dlugosc: 2.0}
 
 energia:
   n50: 1.0
