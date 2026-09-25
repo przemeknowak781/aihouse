@@ -97,7 +97,10 @@ def zestawienie_przegrody(model, kod: str, p: Parametry | None = None, grubosc_k
         mat = model.material(w.mat)
         gam, _ = ciezar_materialu(mat, p)
         d = grubosc_konstr if (is_k and grubosc_konstr is not None) else w.d
-        z.dodaj(mat.nazwa if mat else w.mat, w.mat, d, gam, "warstwa konstrukcyjna" if is_k else "")
+        nm = mat.nazwa if mat else w.mat
+        if mat is not None and str((getattr(mat, "raw", None) or {}).get("funkcja") or "") == "substrat":
+            nm += " — ciężar w stanie nasycenia wodą"          # dach zielony: substrat nasycony (obciążenie stałe)
+        z.dodaj(nm, w.mat, d, gam, "warstwa konstrukcyjna" if is_k else "")
     return z
 
 

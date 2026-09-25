@@ -1352,10 +1352,11 @@ def draw_roof_plan(vp, ctx: ViewContext, opts: dict | None = None) -> PlanResult
                 rows = [text[1]] if text[1] else []
 
             def fn(cv, pos, text=text, top=top, rows=rows):
-                cv.text(pos, text[0], 3.5, 0.0, "center", "baseline", layer="A-OPISY", style="bold", mask=0.4)
+                # maska 0,8 mm — domyka odstępy między wierszami (osie nie przechodzą między wierszami; weryf. C 2.12)
+                cv.text(pos, text[0], 3.5, 0.0, "center", "baseline", layer="A-OPISY", style="bold", mask=0.8)
                 for j, s in enumerate(rows):
                     cv.text((pos[0], pos[1] - (4.2 + 3.4 * j) * k), s, 2.5, 0.0, "center", "baseline",
-                            layer="A-OPISY", mask=0.4)
+                            layer="A-OPISY", mask=0.8)
                 dy = 9.5 + 3.4 * max(0, len(rows) - 1)
                 dims.level_plan(cv, (pos[0] - 6.0 * k, pos[1] - dy * k), top, style="x")
             placer.place(vp, fn, [p for p in cands if inner.buffer(-0.1).contains(Point(p))] or [tuple(c)])

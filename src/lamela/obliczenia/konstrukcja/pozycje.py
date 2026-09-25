@@ -2573,9 +2573,15 @@ class AnalizaKonstrukcji:
                     zint = zint or (slab is not None and abs(hn - (gap + slab.h)) < 1e-6)
                     q = dict(q0)
                     q["G"] = q.get("G", 0.0) + gm2 * max(gap - (hn if not zint else gap), 0) + t * hn * p.ciezar_zelbetu
-                    qd = max(p.gG_sup * q["G"] + p.gQ * 0.7 * sum(v for c, v in q.items() if c in ("QA", "S2", "H")),
-                             p.xi * p.gG_sup * q["G"] + p.gQ * max([v for c, v in q.items() if c in ("QA", "S2", "H")] or [0])
-                             + p.gQ * 0.7 * 0)
+                    # kombinacja STR (PN-EN 1990 6.10a/6.10b + NA): użytkowe — maks. z układów (QA, QA_pA, QA_pB); dach —
+                    # śnieg (maks. S1/S2) albo kat. H, nie łączone (PN-EN 1991-1-1 3.3.2); zmienne towarzyszące z ψ₀
+                    qA = max([q.get(c_, 0.0) for c_ in ("QA", "QA_pA", "QA_pB")] + [0.0])
+                    qS, qH = max(q.get("S1", 0.0), q.get("S2", 0.0), 0.0), max(q.get("H", 0.0), 0.0)
+                    psiA, psiS, psiH = p.psi_of("A")[0], p.psi_of("S")[0], p.psi_of("H")[0]
+                    qR, psiR = (qS, psiS) if qS * p.gQ >= qH * p.gQ else (qH, psiH)
+                    qd = max(p.gG_sup * q["G"] + p.gQ * (psiA * qA + psiR * qR),
+                             p.xi * p.gG_sup * q["G"] + p.gQ * qA + p.gQ * psiR * qR,
+                             p.xi * p.gG_sup * q["G"] + p.gQ * qR + p.gQ * psiA * qA)
                     qqp = q["G"] + p.psi_of("A")[2] * q.get("QA", 0.0)
                     kl = p.beton_dla("nadproze")[1]
                     beton = Beton.z_parametrow(kl, p)
@@ -2588,9 +2594,14 @@ class AnalizaKonstrukcji:
                     w0 = Wynik(nazwa=f"{nid} — schemat i obciążenie")
                     w0.krok("Rozpiętość obliczeniowa", "l_eff = l_n + min(a; h)", f"{f(o.szer)} + {f(min(a, hn))}", Lef, "m", zrodlo="5.3.2.2")
                     w0.krok("Przekrój", "b × h", "", f"{f(t * 100, 0)} × {f(hn * 100, 0)} cm" + (" (zespolone z płytą stropu)" if zint else ""))
-                    w0.krok("Obciążenie (średnio nad otworem; bez efektu przesklepienia [UPR])", "g_k; q_k",
-                            "", f"{f(q['G'], 2)}; {f(sum(v for c_, v in q.items() if c_ != 'G'), 2)}", "kN/m")
-                    w0.krok("Obciążenie obliczeniowe", "q_d", "", qd, "kN/m")
+                    w0.krok("Obciążenie stałe (średnio nad otworem; bez efektu przesklepienia [UPR])", "g_k", "", q["G"], "kN/m")
+                    w0.krok("Obciążenia zmienne: użytkowe (maks. z układów obciążenia) / dach (śnieg lub kat. H — nie łączone, "
+                            "PN-EN 1991-1-1 3.3.2)", "q_k,A / q_k,dach", "", f"{f(qA, 2)} / {f(qR, 2)}", "kN/m")
+                    w0.krok("Obciążenie obliczeniowe", "q_d = max(6.10a; 6.10b — wiodące użytkowe; 6.10b — wiodący dach)",
+                            f"max({f(p.gG_sup, 2)}·{f(q['G'], 2)} + {f(p.gQ, 1)}·({f(psiA, 1)}·{f(qA, 2)} + {f(psiR, 1)}·{f(qR, 2)}); "
+                            f"{f(p.xi * p.gG_sup, 3)}·{f(q['G'], 2)} + {f(p.gQ, 1)}·{f(qA, 2)} + {f(p.gQ, 1)}·{f(psiR, 1)}·{f(qR, 2)}; "
+                            f"{f(p.xi * p.gG_sup, 3)}·{f(q['G'], 2)} + {f(p.gQ, 1)}·{f(qR, 2)} + {f(p.gQ, 1)}·{f(psiA, 1)}·{f(qA, 2)})",
+                            qd, "kN/m", zrodlo="PN-EN 1990 (6.10a), (6.10b) + NA")
                     w0.krok("Moment", "M_Ed = q_d·l_eff²/8", f"{f(qd)}·{f(Lef, 3)}²/8", MEd, "kNm")
                     w0.krok("Siła poprzeczna", "V_Ed = q_d·l_n/2", f"{f(qd)}·{f(o.szer)}/2", VEd, "kN")
                     poz.wyniki.append(w0)

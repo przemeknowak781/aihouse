@@ -666,6 +666,13 @@ def _bloki_ukladu(ctx, P) -> list:
         out.append(U.blok("róża i podziałka" if nfn and sfn else ("róża" if nfn else "podziałka"), ns, U.B_W,
                           kotwica="nad_tabliczka", w_min=155.0 if sfn else 30.0))
     pary = [(nm, fn) for nm, fn in col.blocks if nm not in ("north", "scale", "notes")]
+    nm_ = [nm for nm, _f in pary]
+    if "hatch" in nm_ and "lines" in nm_:          # legendy kreskowań i linii — jeden blok (weryfikacja C 2.11:
+        fh, fl = dict(pary)["hatch"], dict(pary)["lines"]   # legenda linii nie może odrywać się od pozostałych)
+
+        def legendy(sh, x, y, w, fh=fh, fl=fl):
+            return fl(sh, x, fh(sh, x, y, w) - 5.0, w)
+        pary = [(("hatch + lines", legendy) if nm == "hatch" else (nm, fn)) for nm, fn in pary if nm != "lines"]
     # szerokość bloków U.B_W = 177 mm: lewa krawędź jak tabliczka, 3 mm od prawej ramki (weryfikacja C 2.10)
     out += U.bloki_z_kolumny(pary, U.B_W)     # pomiar sekwencyjny: bloki zależne od poprzednich — razem
     if any(nm == "notes" for nm, _f in col.blocks):

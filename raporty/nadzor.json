@@ -1,5 +1,5 @@
 {
- "czas": "2026-09-25 12:29",
+ "czas": "2026-09-25 12:32",
  "aktywni": [
   {
    "id": "abfdfaca2ef13a7b4",
@@ -12,8 +12,8 @@
   {
    "id": "aa50b84b155499c75",
    "opis": "wf_dad224e5-cd8:poprawki",
-   "idle_min": 0.4,
-   "bez_narzedzi_min": 0.4,
+   "idle_min": 0.2,
+   "bez_narzedzi_min": 0.2,
    "limity": 0,
    "powody": []
   }
