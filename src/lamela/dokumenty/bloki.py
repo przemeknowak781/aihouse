@@ -248,7 +248,7 @@ def dodaj_informacje_bioz(dok, *, tresc=None, projektant=None, zagrozenia=None, 
              "Występuje": Markup("<b class='nok'>tak</b>" if wyst else "<span class='nd'>nie</span>")}
             for r, zg, m, c, par, wyst in z]
     dok.tabela(rows, tytul="Skala i rodzaje zagrożeń, miejsce i czas ich wystąpienia", lp=True, klasa="zwarta",
-               html_komorki=False, szerokosci=["7mm", None, "30mm", "31mm", "25mm", "19mm", "15mm"],
+               html_komorki=False, szerokosci=["7mm", None, "27mm", "28mm", "24mm", "21mm", "17mm"],
                wyrownanie={"Występuje": "c"},
                uwagi=["Katalog robót stwarzających szczególnie wysokie ryzyko — § 6 pkt 1 rozporządzenia BIOZ "
                       "(Dz.U. 2003 nr 120 poz. 1126); art. 21a ust. 2 PB."])

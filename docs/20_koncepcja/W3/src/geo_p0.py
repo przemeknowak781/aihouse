@@ -60,7 +60,7 @@ POM_P0 = [
     R("0.03", "Pokój gościnny / gabinet", "P0", (0.105, 5.505, 3.945, 8.795), "podstawowa", True, 8.0, "dąb"),
     R("0.04", "Klatka schodowa", "P0", (SCH_X[0], SCH_Y[0], SCH_X[1], SCH_Y[1]), "ruchu", posadzka="dąb"),
     R("0.05", "Hol (oś światła)", "P0", box(6.44, 5.505, 9.545, 8.87).difference(SZACHT_SI), "ruchu", posadzka="dąb"),
-    R("0.06", "Pomieszczenie techniczne", "P0", box(9.755, 5.505, 11.895, 8.795).difference(SZACHT_S2), "techniczna", 6.0, "gres",
+    R("0.06", "Pomieszczenie techniczne", "P0", box(9.755, 5.505, 11.895, 8.795).difference(SZACHT_S2), "techniczna", minimum=6.0, posadzka="gres", uw=
       "PC split (hydrobox), zasobnik CWU 300 l, bufor 100 l, centrala wentylacyjna, rozdzielacze, RG, wodomierz"),
     R("0.07", "Wiatrołap / hol wejściowy", "P0", (6.475, 8.93, 9.545, 11.195), "ruchu", posadzka="gres", uw="świetlik 1,2x2,0 m w stropodachu skrzydła"),
     R("0.08", "Przedsionek gospodarczy", "P0", (9.755, 9.005, 11.895, 11.195), "ruchu", posadzka="gres", uw="garaż - dom; szafa na buty/kurtki robocze"),

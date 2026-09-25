@@ -138,7 +138,14 @@
 
 {# ================================================================================ podpisy #}
 {% macro podpisy(osoby, jeden=False) %}
-<div class="podpisy{% if jeden %} jeden{% elif osoby|length >= 3 %} trzy{% endif %}">
+{% if jeden and osoby|length == 1 %}{% set o = osoby[0] %}
+<div class="podpis-linia">
+  <div class="pole-podpisu"></div>
+  <div class="opis-pola">{{ o.pole or "data i podpis" }} — <b>{{ o.rola }}</b></div>
+  <div>{{ o.imie_nazwisko }}{% if o.opis %}<span class="mn"> · {{ o.opis }}</span>{% endif %}</div>
+</div>
+{% else %}
+<div class="podpisy{% if osoby|length >= 3 %} trzy{% endif %}">
   {% for o in osoby %}
   <div class="karta-podpisu">
     <div class="rola">{{ o.rola }}</div>
@@ -149,6 +156,7 @@
   </div>
   {% endfor %}
 </div>
+{% endif %}
 <p class="podpis-uwaga">Postać elektroniczna: podpis kwalifikowany, osobisty albo zaufany pliku (§ 7 ust. 4a RPB) — pola pozostają puste.
 Postać papierowa: podpis własnoręczny w polu.</p>
 {% endmacro %}

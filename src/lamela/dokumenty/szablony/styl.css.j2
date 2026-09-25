@@ -213,14 +213,14 @@ table.osw-dane th { width: 36mm; text-align: left; font-weight: normal; color: v
 table.osw-dane td { padding: 0.9mm 0; vertical-align: top; }
 table.osw-dane tr { border-bottom: 0.35pt solid var(--linia-m); }
 .osw-tresc p { text-align: justify; line-height: 1.45; }
-.osw-klauzula { margin: 5mm 0; padding: 2.5mm 4mm; border-left: 2pt solid var(--akcent); background: var(--tlo-jasne); font-weight: bold; }
+.osw-klauzula { margin: 3.5mm 0 2mm; padding: 2mm 4mm; border-left: 2pt solid var(--akcent); background: var(--tlo-jasne); font-weight: bold; }
 .osw-wzor { border: 1pt solid #8a6d00; background: #fff8dc; color: #4d3d00; padding: 2mm 3.5mm; margin: 0 0 6mm; font-size: 8pt; line-height: 1.4; }
 .osw-wzor b { letter-spacing: 0.06em; }
-.wybor { display: flex; gap: 3mm; margin: 0 0 2.6mm; align-items: flex-start; }
+.wybor { display: flex; gap: 3mm; margin: 0 0 1.8mm; align-items: flex-start; }
 .wybor .pole { flex: 0 0 4.2mm; height: 4.2mm; border: 0.8pt solid var(--ink); text-align: center; line-height: 4.2mm;
                font-size: 9pt; font-weight: bold; margin-top: 0.3mm; }
 .wybor .opis { flex: 1 1 auto; text-align: justify; }
-.osw-pouczenie { font-size: 7.6pt; color: var(--szary); margin-top: 6mm; line-height: 1.4; }
+.osw-pouczenie { font-size: 7.2pt; color: var(--szary); margin-top: 3mm; line-height: 1.35; }
 .osw-pouczenie p { text-align: left; margin-bottom: 1mm; }
 
 .zal-etykieta { text-align: right; font-size: 7.4pt; font-weight: bold; letter-spacing: 0.1em; text-transform: uppercase;
@@ -228,13 +228,17 @@ table.osw-dane tr { border-bottom: 0.35pt solid var(--linia-m); }
 
 /* ------------------------------------------------------------------------------------------ podpisy */
 .podpisy { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm 6mm; margin: 6mm 0 2mm; break-inside: avoid; }
-.podpisy.jeden { grid-template-columns: 1fr; margin-left: 50%; }
+.podpisy.jeden { grid-template-columns: 1fr; margin: 4mm 0 1mm 50%; }
 .podpisy.trzy { grid-template-columns: 1fr 1fr 1fr; gap: 3mm 4mm; }
 .karta-podpisu { border: 0.5pt solid var(--linia); padding: 1.8mm 2.6mm 1.8mm; break-inside: avoid; font-size: 7.6pt; line-height: 1.3; }
 .karta-podpisu .rola { font-size: 6.8pt; letter-spacing: 0.08em; text-transform: uppercase; color: var(--akcent); font-weight: bold; }
 .karta-podpisu .pole-podpisu { height: 11mm; border-bottom: 0.5pt dotted #7c8793; margin: 1.2mm 0 1mm; }
 .karta-podpisu .opis-pola { font-size: 6.6pt; color: var(--szary); }
 .podpis-uwaga { font-size: 6.9pt; color: var(--szary); margin-top: 1.5mm; }
+.podpis-linia { width: 92mm; margin: 4mm 0 0 auto; font-size: 7.8pt; line-height: 1.35; break-inside: avoid; }
+.podpis-linia .pole-podpisu { height: 11mm; border-bottom: 0.7pt dotted #6f7b87; margin-bottom: 1mm; }
+.podpis-linia .opis-pola { font-size: 6.9pt; color: var(--szary); }
+.podpis-linia + .podpis-uwaga { text-align: right; }
 
 /* ------------------------------------------------------------------------------------------ BIOZ, karty, strony zastępcze */
 section.bioz-st { page: tytul-wew; break-before: page; break-after: page; }

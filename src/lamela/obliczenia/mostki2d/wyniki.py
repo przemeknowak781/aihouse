@@ -441,7 +441,7 @@ def raport_wezla(w: WynikWezla, katalog_raportu: str | Path | None = None) -> st
     L += ["**Dane wejściowe**", ""]
     for k, v in wz.dane.items():
         if isinstance(v, list) and v and isinstance(v[0], list):
-            L += [f"*{k}:*", "", _tab(["kod", "materiał", "d [m]", "λ [W/(m·K)]", "R [m²K/W]"], v), ""]
+            L += ["", f"*{k}:*", "", _tab(["kod", "materiał", "d [m]", "λ [W/(m·K)]", "R [m²K/W]"], v), ""]
         elif isinstance(v, list):
             continue
         else:

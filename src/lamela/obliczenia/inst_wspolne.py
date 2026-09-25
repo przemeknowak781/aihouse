@@ -463,9 +463,12 @@ class DaneBudynku:
             return (float(xy[0]), float(xy[1]), v.get("kond", "P0"))
         return (float(v[0]), float(v[1]), v[2] if len(v) > 2 else "P0")
 
-    def teren_z(self, xy) -> float:
-        """Rzędna terenu (względna) w punkcie — interpolacja IDW z punktów działki (brak → −0,30 m)."""
-        pts = self.dzialka.get("teren")
+    def teren_z(self, xy, projektowany: bool = True) -> float:
+        """Rzędna terenu (względna) w punkcie — interpolacja IDW z punktów działki (brak → −0,30 m); gdy
+        ``projektowany`` i w ``dzialka.yaml`` są ``teren.punkty_projektowane`` — z rzędnych projektowanych."""
+        pts = self.dzialka.get("teren_proj") if projektowany and self.dzialka.get("teren_proj") is not None else None
+        if pts is None:
+            pts = self.dzialka.get("teren")
         if pts is None or len(pts) == 0:
             return -0.30
         d = np.hypot(pts[:, 0] - xy[0], pts[:, 1] - xy[1])
@@ -614,6 +617,10 @@ def dane_z_modelu(budynek, dzialka=None, wyposazenie=None, instalacje=None, stri
         dz["raw"] = D.raw
         dz["obrys"] = D.obrys
         dz["teren"] = D.teren_punkty()
+        pp = ((D.raw.get("teren") or {}).get("punkty_projektowane") or [])
+        if pp:
+            arr = np.asarray(pp, float)
+            dz["teren_proj"] = np.column_stack([D.do_budynku(arr[:, :2]), arr[:, 2] - D.zero_abs])
         dz["sasiedzi_zabudowa"] = [D.poly_bud(s["zabudowa"]) for s in D.lista("sasiedzi") if s.get("zabudowa")]
         dr = D.raw.get("droga") or {}
         dz["droga"] = {k: D.poly_bud(v) for k, v in dr.items() if k in ("linie_rozgraniczajace", "jezdnia") and v}

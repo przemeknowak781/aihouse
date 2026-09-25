@@ -132,9 +132,9 @@ def waliduj_przypadek1(h_min: float = 0.002, h_max: float = 0.02) -> tuple[Wynik
         wiersze.append([nazwa, f"({x:.2f}; {y:.2f})", ref, t, d])
         wiersze_a.append([nazwa, f"({x:.2f}; {y:.2f})", ta, t, da])
     w1 = WynikWalidacji("ISO 10211 zał. C — przypadek 1 (28 punktów, tabela normy)", mx <= TOL_T, mx, None,
-                        "|Δθ| ≤ 0,1 K", wiersze, siatka=s.opis())
+                        "Δθ w ± 0,1 K", wiersze, siatka=s.opis())
     w2 = WynikWalidacji("A2 — przypadek 1 vs szereg Fouriera (bez zaokrągleń)", mxa <= 0.02, mxa, None,
-                        "|Δθ| ≤ 0,02 K", wiersze_a, siatka=s.opis())
+                        "Δθ w ± 0,02 K", wiersze_a, siatka=s.opis())
     w1.uwagi.append(f"bilans energii: {roz.bilans():.1e}")
     return w1, w2
 
@@ -185,7 +185,7 @@ def waliduj_przypadek2(h_min: float = 0.1e-3, h_max: float = 2e-3) -> WynikWalid
     dphi = phi - PRZYPADEK2_PHI
     wiersze.append(["Φ [W/m]", "HI → AB", PRZYPADEK2_PHI, phi, dphi])
     w = WynikWalidacji("ISO 10211 zał. C — przypadek 2 (punkty A…I + strumień)", mx <= TOL_T and abs(dphi) <= TOL_PHI,
-                       mx, dphi, "|Δθ| ≤ 0,1 K; |ΔΦ| ≤ 0,1 W/m", wiersze, siatka=s.opis())
+                       mx, dphi, "Δθ w ± 0,1 K; ΔΦ w ± 0,1 W/m", wiersze, siatka=s.opis())
     w.uwagi.append(f"bilans energii: {roz.bilans():.1e}; Φ_AB = {-roz.Phi_grup()['e']:.4f} W/m")
     return w
 
@@ -228,13 +228,13 @@ def waliduj_1d() -> WynikWalidacji:
     wiersze.append(["U [W/(m²K)]", "—", U, Ud, Ud - U])
     ok = mx < 1e-6 and abs(Ud - U) < 1e-9
     return WynikWalidacji("A1 — ściana warstwowa 1D (Robin), rozwiązanie dokładne", ok, mx, None,
-                          "|Δθ| < 10⁻⁶ K; |ΔU| < 10⁻⁹", wiersze, siatka=s.opis())
+                          "Δθ w ± 10⁻⁶ K; ΔU w ± 10⁻⁹", wiersze, siatka=s.opis())
 
 
 # --------------------------------------------------------------------------------------------------
 # A3 — naroże z izotermicznymi powierzchniami
 # --------------------------------------------------------------------------------------------------
-DELTA_S_NAROZA = 0.559        # przybliżenie rozwiązania konforemnego (literatura: 0,56; Langmuir 0,54)
+DELTA_S_NAROZA = 0.559        # rozwiązanie konforemne ≈ 0,5587 (literatura: „0,56 kwadratu”; Langmuir 0,54)
 
 
 def waliduj_naroze(t: float = 0.3, a: float = 1.2, h_min: float = 0.001, h_max: float = 0.02) -> WynikWalidacji:
@@ -257,7 +257,7 @@ def waliduj_naroze(t: float = 0.3, a: float = 1.2, h_min: float = 0.001, h_max: 
     dS2 = roz2.Phi_grup()["i"] - 2 * a / t
     ok = abs(dS2 - DELTA_S_NAROZA) <= 0.01
     w = WynikWalidacji("A3 — naroże 90°, powierzchnie izotermiczne: ΔS = S − (a+b)/t", ok, None, None,
-                       "|ΔS − 0,559| ≤ 0,01",
+                       "ΔS = 0,559 ± 0,01",
                        [["ΔS (siatka n)", f"t = {t}, a = b = {a}", DELTA_S_NAROZA, dS, dS - DELTA_S_NAROZA],
                         ["ΔS (siatka 2n)", "", DELTA_S_NAROZA, dS2, dS2 - DELTA_S_NAROZA]], siatka=s2.opis())
     w.uwagi.append("Wartość odniesienia 0,559 — kwadrat narożny ≈ 0,56 „kwadratu” (odwzorowanie konforemne); "
@@ -278,7 +278,7 @@ def raport_walidacji(wyniki: list[WynikWalidacji] | None = None, plik: str | Pat
          "Metoda: objętości skończone na siatce prostokątnej zagęszczanej przy granicach materiałów, warunki Robina "
          "(h = 1/R_s), rozwiązanie bezpośrednie (scipy.sparse, SuperLU). Kryterium normy dla metody dokładnej 2D: "
          "temperatury ± 0,1 K, strumień ± 0,1 W/m.", "",
-         "| Przypadek | Wynik | max |Δθ| [K] | ΔΦ [W/m] | Tolerancja |", "|---|---|---|---|---|"]
+         "| Przypadek | Wynik | max. odchyłka θ [K] | odchyłka Φ [W/m] | Tolerancja |", "|---|---|---|---|---|"]
     for w in wyniki:
         L.append(f"| {w.nazwa} | {'**SPEŁNIA**' if w.ok else '**NIE SPEŁNIA**'} | "
                  f"{f(w.max_odch_T, 4) if w.max_odch_T is not None else '—'} | "
