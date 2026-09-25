@@ -41,6 +41,9 @@ class ParametryDrenaz:
     spadek_min: float = 0.02
     pas_spadku: float = 2.0                # m
     cokol_min: float = 0.30                # m
+    krok: float = 0.10                     # m — krok próbkowania obwodu (weryfikacja V2 N-13a)
+    odl_OL_max: float = 1.5                # m — odwodnienie liniowe „przy drzwiach” (≤ 1,5 m od progu; OL-3 pod daszkiem 1,35 m) [ZAŁ]
+    strefa_poza_drzwiami: float = 0.15     # m — strefa progu: szer. drzwi + 0,15 m z każdej strony (V1-02; R-W4)
 
 
 @dataclass
@@ -81,7 +84,7 @@ def ocen_drenaz(dane: DaneBudynku, par: ParametryDrenaz | None = None) -> WynikD
     obrys = dane.obrysy.get(dane.kondygnacje[0]["id"])
     per = obrys.exterior
     pts = [per.interpolate(t, normalized=True) for t in np.linspace(0, 1, 60, endpoint=False)]
-    tz = [dane.teren_z((p.x, p.y)) for p in pts]
+    tz = [_teren_tin(dane)[0]((p.x, p.y)) for p in pts]
     teren_sr = float(np.mean(tz))
     h_pos = teren_sr - spod
     d_ZWG = ZWG - h_pos
@@ -107,40 +110,60 @@ def ocen_drenaz(dane: DaneBudynku, par: ParametryDrenaz | None = None) -> WynikD
         uz.append("Grunt słabo przepuszczalny (k_f ≤ 10⁻⁴ m/s) lub zasypka nieprzepuszczalna — możliwa woda zastoiskowa przy "
                   "ścianach i płycie; drenaż opaskowy DN100 (rura perforowana w obsypce żwirowej 8/16 w geowłókninie, spadek "
                   "≥ 0,5 %, studzienki kontrolne w narożach) z odprowadzeniem do niecki/zbiornika [W — DIN 4095].")
-    # spadki terenu wokół budynku (istniejące / projektowane)
-    spadki = []
-    proj = ((dane.dzialka.get("raw") or {}).get("teren") or {}).get("punkty_projektowane")
-    zrodlo = "rzędne projektowane (dzialka.yaml)" if proj else "teren istniejący (brak rzędnych projektowanych)"
-    for k, (a, b) in enumerate(zip(list(per.coords)[:-1], list(per.coords)[1:])):
-        mx, my = (a[0] + b[0]) / 2, (a[1] + b[1]) / 2
-        dx, dy = b[0] - a[0], b[1] - a[1]
-        L = math.hypot(dx, dy)
-        if L < 1.0:
-            continue
-        nx, ny = dy / L, -dx / L           # normalna zewnętrzna dla obiegu CCW
-        p1 = (mx + nx * 0.3, my + ny * 0.3)
-        p2 = (mx + nx * (0.3 + par.pas_spadku), my + ny * (0.3 + par.pas_spadku))
-        z1, z2 = dane.teren_z(p1), dane.teren_z(p2)
-        s = (z1 - z2) / par.pas_spadku
-        spadki.append({"odcinek": k + 1, "srodek": (mx, my), "L": L, "z_przy": z1, "z_2m": z2, "spadek": s})
-    war = []
-    for s in spadki:
-        war.append(Warunek(f"Spadek terenu od budynku, ściana {s['odcinek']} (śr. {f(s['srodek'][0], 1)}; {f(s['srodek'][1], 1)})",
-                           s["spadek"], ">=", par.spadek_min, "", f"W-019; brief §9 pkt 6 ({zrodlo})", "W-019", nd=3))
-    # brief §9 pkt 4: cokół ≥ 0,30 m ALBO odwodnienie liniowe przy drzwiach bezprogowych — punkty obwodu w strefie drzwi
-    # parteru (parapet ≤ 5 cm, ± 0,30 m) z odwodnieniem liniowym ≤ 2,5 m od drzwi wyłączone z minimum (runda 2, K-1)
-    strefy = _strefy_drzwi_z_odwodnieniem(dane)
+    # spadki terenu i cokół (wydanie — weryfikacja V2 N-3/N-4/N-13a, V1-02): TIN liniowy rzędnych projektowanych (ta sama metoda co
+    # lamela.wskazniki.Teren) na całym obwodzie P0 co `krok` m, punkt 0,05 m od lica; spadek na pasie 0,05…(0,05 + pas_spadku) m
+    # wzdłuż normalnej (pomijane promienie wchodzące w budynek — naroża wklęsłe). Strefy zwolnione z cokołu ≥ 0,30 m: próg drzwi
+    # z odwodnieniem liniowym ≤ `odl_OL_max` m (szer. drzwi + 0,15 m z każdej strony) oraz odcinki lica z korytkiem przy licu
+    # (`odwodnienia[].przy_licu: true`) — cokół w strefach raportowany informacyjnie (uszczelnienie ≥ 0,15 m nad nawierzchnią).
+    from shapely.geometry import LineString, Point
+    from shapely.geometry.polygon import orient
+    fz, zrodlo = _teren_tin(dane)
+    P0 = orient(obrys, 1.0)
+    strefy = _strefy_drzwi_z_odwodnieniem(dane, par)
     z0 = dane.rzedna(dane.kondygnacje[0]["id"])
-    poza = [z0 - z for p, z in zip(pts, tz) if not any(g.distance(p) <= 1e-6 for g, _o in strefy)]
-    cokol = min(poza) if poza else min(z0 - z for z in tz)
-    war.append(Warunek("Wysokość cokołu (posadzka parteru − teren), minimum na obwodzie" + (" poza strefami drzwi z odwodnieniem "
-                       "liniowym" if strefy else ""), cokol, ">=", par.cokol_min, "m",
+    probki = []
+    C = list(P0.exterior.coords)
+    for k, (a, b) in enumerate(zip(C[:-1], C[1:])):
+        L = math.hypot(b[0] - a[0], b[1] - a[1])
+        if L < 0.05:
+            continue
+        ux, uy = (b[0] - a[0]) / L, (b[1] - a[1]) / L
+        nx, ny = uy, -ux                                   # normalna zewnętrzna (obieg CCW)
+        n = max(1, int(round(L / par.krok)))
+        for q in range(n):
+            t = (q + 0.5) * L / n
+            px, py = a[0] + ux * t, a[1] + uy * t
+            p1 = (px + nx * 0.05, py + ny * 0.05)
+            p2 = (px + nx * (0.05 + par.pas_spadku), py + ny * (0.05 + par.pas_spadku))
+            z1, z2 = fz(p1), fz(p2)
+            ray_ok = not LineString([p1, p2]).intersects(P0.buffer(-1e-4)) and \
+                LineString([(px + nx * 0.06, py + ny * 0.06), p2]).distance(P0) > 1e-3
+            wz = next((opis for g, opis in strefy if g.contains(Point(p1))), None)
+            probki.append({"odcinek": k + 1, "xy": p1, "L": L, "z": z1, "z2": z2, "spadek": (z1 - z2) / par.pas_spadku if ray_ok else None,
+                           "strefa": wz, "cokol": z0 - z1})
+    spadki = []
+    for k in sorted({q["odcinek"] for q in probki}):
+        qq = [q for q in probki if q["odcinek"] == k and q["spadek"] is not None and q["strefa"] is None]
+        if not qq or qq[0]["L"] < 1.0:
+            continue
+        qm = min(qq, key=lambda q: q["spadek"])
+        spadki.append({"odcinek": k, "srodek": qm["xy"], "L": qm["L"], "z_przy": qm["z"], "z_2m": qm["z2"], "spadek": qm["spadek"]})
+    war = []
+    for s_ in spadki:
+        war.append(Warunek(f"Spadek terenu od budynku (minimum na odcinku), ściana {s_['odcinek']} (x {f(s_['srodek'][0], 1)}; "
+                           f"y {f(s_['srodek'][1], 1)})", s_["spadek"], ">=", par.spadek_min, "",
+                           f"W-019; brief §9 pkt 6 ({zrodlo}; co {f(par.krok, 2)} m)", "W-019", nd=3))
+    poza = [q["cokol"] for q in probki if q["strefa"] is None]
+    cokol = min(poza) if poza else min(q["cokol"] for q in probki)
+    war.append(Warunek("Wysokość cokołu (posadzka parteru − teren TIN, co " + f(par.krok, 2) + " m), minimum na obwodzie" +
+                       (" poza strefami z odwodnieniem liniowym" if strefy else ""), cokol, ">=", par.cokol_min, "m",
                        "brief §9 pkt 4 (≥ 0,30 m lub odwodnienie liniowe przy drzwiach bezprogowych)", "W-019", nd=2))
     for g, opis in strefy:
-        zs = [z0 - z for p, z in zip(pts, tz) if g.distance(p) <= 1e-6]
-        war.append(Warunek(f"Strefa drzwi {opis} — próg z odwodnieniem liniowym; cokół w strefie", min(zs) if zs else None, "info",
-                           None, "m", "brief §9 pkt 4; DIN 18533-1 (pomocniczo) — uszczelnienie progu wywinięte ≥ 0,15 m",
-                           "W-019", nd=2))
+        zs = [q["cokol"] for q in probki if q["strefa"] == opis]
+        if zs:
+            war.append(Warunek(f"Strefa {opis} — odwodnienie liniowe; cokół w strefie", min(zs), "info", None, "m",
+                               "brief §9 pkt 4; DIN 18533-1 (pomocniczo) — uszczelnienie cokołu/progu ≥ 0,15 m nad nawierzchnią",
+                               "W-019", nd=2))
     zal = ["Odwodnienie powierzchniowe: profilowanie terenu ze spadkiem ≥ 2 % od budynku na pasie ≥ 2,0 m (rzędne projektowane "
            "w dzialka.yaml: teren.punkty_projektowane) — wymagane niezależnie od drenażu.",
            "Opaska żwirowa szer. 0,5 m wokół budynku (żwir płukany 16/32 mm na geowłókninie, obrzeże), spadek od ściany; "

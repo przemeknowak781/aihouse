@@ -1,14 +1,14 @@
 {
  "model": "2026-09-25 07:28",
- "podglad": true,
+ "podglad": false,
  "sprawy_otwarte": [
-  "Arkusze nieaktualne wobec bieżących obliczeń — przed wydaniem wygenerować ponownie (rozdz. „Część rysunkowa — zgodność z obliczeniami”): PT-IE-04, PT-IE-06, PT-IE-14 (3 rozbieżności).",
+  "Arkusze nieaktualne wobec bieżących obliczeń — przed wydaniem wygenerować ponownie (rozdz. „Braki danych i zgodność części rysunkowej”): PT-IE-04, PT-IE-06, PT-IE-14 (3 rozbieżności).",
   "Arkusze IE wygenerowano przed ostatnią zmianą modelu — przed wydaniem wygenerować ponownie (tools/generuj_widoki.py --arkusze model/arkusze_ie.yaml).",
-  "Obliczenia (WLZ, obwody, zabezpieczenia, ∆U, samoczynne wyłączenie, SPD, PWP) — warunek niespełniony: WLZ: spadek napięcia ZKP → RG: 0,61 % (wymaganie <= 0,50 %; W-185: N SEP-E-002 [niezweryfikowane]) — rozwiązanie: WLZ YKY 5×25 mm² (∆U ≈ 0,39 % ≤ 0,50 %; przeliczenie proporcjonalne do przekroju); zmienić w parametrach obliczeń i przeliczyć.",
-  "Obliczenia (Instalacja fotowoltaiczna (≤ 6,5 kWp)) — warunek niespełniony: Spadek napięcia po stronie DC: 1,04 % (wymaganie <= 1,00 %; [ZAŁ]) — rozwiązanie: przewody DC H1Z2Z2-K 10 mm² (∆U ≈ 0,62 % ≤ 1,00 %; przeliczenie proporcjonalne do przekroju); zmienić w parametrach obliczeń i przeliczyć.",
+  "Obliczenia (WLZ, obwody, zabezpieczenia, ∆U, samoczynne wyłączenie, SPD, PWP) — warunek niespełniony: WLZ: spadek napięcia ZKP → RG: 0,61 % (wymaganie ≤ 0,50 %; W-185: N SEP-E-002 [niezweryfikowane]) — rozwiązanie: WLZ YKY 5×25 mm² (∆U ≈ 0,39 % ≤ 0,50 %; przeliczenie proporcjonalne do przekroju); zmienić w parametrach obliczeń i przeliczyć.",
+  "Obliczenia (Instalacja fotowoltaiczna (≤ 6,5 kWp)) — warunek niespełniony: Spadek napięcia po stronie DC: 1,04 % (wymaganie ≤ 1,00 %; [ZAŁ]) — rozwiązanie: przewody DC H1Z2Z2-K 10 mm² (∆U ≈ 0,62 % ≤ 1,00 %; przeliczenie proporcjonalne do przekroju); zmienić w parametrach obliczeń i przeliczyć.",
   "`instalacje.wyroby` w modelu puste — moduł PV, falownik, pompa ciepła i aparatura przyjęte z danych przykładowych bibliotek [DANE PRZYKŁADOWE – FIKCYJNE]; zastąpić danymi DTR/DWU wyrobów wybranych przez wykonawcę (wyroby równoważne spełniające parametry wymagane — rozdz. „Wyroby”).",
   "Dane osobowe (Inwestor, projektanci, nr uprawnień, pracownia) — brak sekcji `projekt:` w model/budynek.yaml; pola oznaczone jako do uzupełnienia (strona tytułowa, oświadczenie).",
-  "Warunki przyłączenia OSD [DOKUMENT ZEWNĘTRZNY] — moc przyłączeniowa, typ zabezpieczenia przedlicznikowego, impedancja pętli zwarcia Z_Q i prąd zwarciowy w ZKP, rozdział PEN przyjęte jako [ZAŁ]; po otrzymaniu warunków przeliczyć obwody (D-12, W-192, E-05)."
+  "Warunki przyłączenia OSD (E-05) — nieuzyskane; moc przyłączeniowa, typ zabezpieczenia przedlicznikowego, impedancja pętli zwarcia Z_Q i prąd zwarciowy w ZKP, rozdział PEN przyjęte jako [ZAŁ]; po otrzymaniu warunków przeliczyć obwody (D-12, W-192, E-05)."
  ],
  "arkusze_braki": [],
  "rozbieznosci_rysunkow": [

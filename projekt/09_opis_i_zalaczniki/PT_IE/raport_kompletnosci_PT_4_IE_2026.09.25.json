@@ -19,7 +19,7 @@
       "podstawa": "RPB § 2b ust. 3",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "2.74 MB (limit 150 MB)"
+      "szczegoly": "2.73 MB (limit 150 MB)"
     },
     {
       "id": "F-03",
@@ -159,7 +159,7 @@
   ],
   "znaczniki": {
     "DO UZUPEŁNIENIA": 26,
-    "DOKUMENT ZEWNĘTRZNY": 1,
+    "DOKUMENT ZEWNĘTRZNY": 0,
     "DANE PRZYKŁADOWE": 55,
     "ZAŁ": 37,
     "NZW": 49,
@@ -180,7 +180,6 @@
       "[DO UZUPEŁNIENIA: data złożenia oświadczenia z art. 102a PB]": 1,
       "[DO UZUPEŁNIENIA: potwierdzenie wpisu w e-CRUB albo dołączenie kopii]": 1,
       "[ZAŁ]": 37,
-      "[DOKUMENT ZEWNĘTRZNY]": 1,
       "[DO UZUPEŁNIENIA: data oświadczenia Inwestora (art. 102a PB)]": 1,
       "[NZW]": 49,
       "[DO UZUPEŁNIENIA: nr i data warunków przyłączenia OSD]": 1,
@@ -196,7 +195,7 @@
       "arkusze": 14
     }
   },
-  "rozmiar_mb": 2.736203193664551,
+  "rozmiar_mb": 2.7274227142333984,
   "strony": 48,
   "podsumowanie": {
     "status": "PRZYKŁAD – NIE DO ZŁOŻENIA",
@@ -206,7 +205,7 @@
     "N/D": 0,
     "OSTRZEŻENIE": 0,
     "znaczniki_do_uzupelnienia": 26,
-    "znaczniki_dokument_zewnetrzny": 1,
+    "znaczniki_dokument_zewnetrzny": 0,
     "znaczniki_dane_przykladowe": 55
   }
 }

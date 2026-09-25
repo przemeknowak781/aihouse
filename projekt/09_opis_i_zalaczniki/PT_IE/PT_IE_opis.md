@@ -38,15 +38,13 @@ Spadek napięcia przeliczono proporcjonalnie do przekroju żył (∆U ∝ 1/s; r
 
 **Sprawy otwarte** (do zamknięcia przed wydaniem tomu do realizacji; po uzupełnieniu modelu status aktualizuje się przy ponownym generowaniu):
 
-1. Arkusze nieaktualne wobec bieżących obliczeń — przed wydaniem wygenerować ponownie (rozdz. „Część rysunkowa — zgodność z obliczeniami”): PT-IE-04, PT-IE-06, PT-IE-14 (3 rozbieżności).
+1. Arkusze nieaktualne wobec bieżących obliczeń — przed wydaniem wygenerować ponownie (rozdz. „Braki danych i zgodność części rysunkowej”): PT-IE-04, PT-IE-06, PT-IE-14 (3 rozbieżności).
 2. Arkusze IE wygenerowano przed ostatnią zmianą modelu — przed wydaniem wygenerować ponownie (tools/generuj_widoki.py --arkusze model/arkusze_ie.yaml).
-3. Obliczenia (WLZ, obwody, zabezpieczenia, ∆U, samoczynne wyłączenie, SPD, PWP) — warunek niespełniony: WLZ: spadek napięcia ZKP → RG: 0,61 % (wymaganie <= 0,50 %; W-185: N SEP-E-002 [niezweryfikowane]) — rozwiązanie: WLZ YKY 5×25 mm² (∆U ≈ 0,39 % ≤ 0,50 %; przeliczenie proporcjonalne do przekroju); zmienić w parametrach obliczeń i przeliczyć.
-4. Obliczenia (Instalacja fotowoltaiczna (≤ 6,5 kWp)) — warunek niespełniony: Spadek napięcia po stronie DC: 1,04 % (wymaganie <= 1,00 %; [ZAŁ]) — rozwiązanie: przewody DC H1Z2Z2-K 10 mm² (∆U ≈ 0,62 % ≤ 1,00 %; przeliczenie proporcjonalne do przekroju); zmienić w parametrach obliczeń i przeliczyć.
+3. Obliczenia (WLZ, obwody, zabezpieczenia, ∆U, samoczynne wyłączenie, SPD, PWP) — warunek niespełniony: WLZ: spadek napięcia ZKP → RG: 0,61 % (wymaganie ≤ 0,50 %; W-185: N SEP-E-002 [niezweryfikowane]) — rozwiązanie: WLZ YKY 5×25 mm² (∆U ≈ 0,39 % ≤ 0,50 %; przeliczenie proporcjonalne do przekroju); zmienić w parametrach obliczeń i przeliczyć.
+4. Obliczenia (Instalacja fotowoltaiczna (≤ 6,5 kWp)) — warunek niespełniony: Spadek napięcia po stronie DC: 1,04 % (wymaganie ≤ 1,00 %; [ZAŁ]) — rozwiązanie: przewody DC H1Z2Z2-K 10 mm² (∆U ≈ 0,62 % ≤ 1,00 %; przeliczenie proporcjonalne do przekroju); zmienić w parametrach obliczeń i przeliczyć.
 5. `instalacje.wyroby` w modelu puste — moduł PV, falownik, pompa ciepła i aparatura przyjęte z danych przykładowych bibliotek [DANE PRZYKŁADOWE – FIKCYJNE]; zastąpić danymi DTR/DWU wyrobów wybranych przez wykonawcę (wyroby równoważne spełniające parametry wymagane — rozdz. „Wyroby”).
 6. Dane osobowe (Inwestor, projektanci, nr uprawnień, pracownia) — brak sekcji `projekt:` w model/budynek.yaml; pola oznaczone jako do uzupełnienia (strona tytułowa, oświadczenie).
-7. Warunki przyłączenia OSD [DOKUMENT ZEWNĘTRZNY] — moc przyłączeniowa, typ zabezpieczenia przedlicznikowego, impedancja pętli zwarcia Z_Q i prąd zwarciowy w ZKP, rozdział PEN przyjęte jako [ZAŁ]; po otrzymaniu warunków przeliczyć obwody (D-12, W-192, E-05).
-
-> PODGLĄD — obliczenia odczytane z pamięci podręcznej; wersja nie do wydania.
+7. Warunki przyłączenia OSD (E-05) — nieuzyskane; moc przyłączeniowa, typ zabezpieczenia przedlicznikowego, impedancja pętli zwarcia Z_Q i prąd zwarciowy w ZKP, rozdział PEN przyjęte jako [ZAŁ]; po otrzymaniu warunków przeliczyć obwody (D-12, W-192, E-05).
 
 ## Przedmiot, zakres i podstawy opracowania — § 23 RPB
 
@@ -411,21 +409,21 @@ jednoczesności k_j [ZAŁ] dla grup odbiorników; mikroinstalacja PV (generacja)
 
 | Grupa odbiorników | Obwody | P_i [kW] | k_j | P_s [kW] | DLM |
 |---|---|---|---|---|---|
-| oswietlenie | L1, L2, L3, L4, L5 | 1,77 | 0,70 | 1,24 | — |
-| gniazda | G1, G2, G3, G4, G5, G13 | 12,00 | 0,20 | 2,40 | — |
-| gniazda_kuchnia | G6, G7 | 4,00 | 0,50 | 2,00 | — |
-| gniazda_lazienka | G8, G9, G10, G11, G12 | 10,00 | 0,30 | 3,00 | — |
-| zewn | G14 | 2,00 | 0,30 | 0,60 | — |
+| oświetlenie | L1, L2, L3, L4, L5 | 1,77 | 0,70 | 1,24 | — |
+| gniazda ogólne | G1, G2, G3, G4, G5, G13 | 12,00 | 0,20 | 2,40 | — |
+| gniazda kuchenne | G6, G7 | 4,00 | 0,50 | 2,00 | — |
+| gniazda w łazienkach | G8, G9, G10, G11, G12 | 10,00 | 0,30 | 3,00 | — |
+| gniazda zewnętrzne | G14 | 2,00 | 0,30 | 0,60 | — |
 | gotowanie | D1, D2 | 10,90 | 0,60 | 6,54 | — |
-| agd | D3, D4, D5 | 6,90 | 0,60 | 4,14 | — |
-| pc | D6 | 2,67 | 1,00 | 2,67 | — |
-| grzalka | D7 | 6,00 | 1,00 | 6,00 | tak |
-| sterowanie | D8 | 0,30 | 1,00 | 0,30 | — |
-| went | D9 | 0,18 | 1,00 | 0,18 | — |
-| ev | D11 | 11,00 | 1,00 | 11,00 | tak |
-| napedy | D12, D13, D16 | 2,70 | 0,30 | 0,81 | — |
-| tele | D14 | 0,20 | 1,00 | 0,20 | — |
-| pompa | D15 | 0,80 | 0,30 | 0,24 | — |
+| AGD (zmywarka, pralka, suszarka) | D3, D4, D5 | 6,90 | 0,60 | 4,14 | — |
+| pompa ciepła | D6 | 2,67 | 1,00 | 2,67 | — |
+| grzałka rezerwowa | D7 | 6,00 | 1,00 | 6,00 | tak |
+| sterowanie ogrzewania | D8 | 0,30 | 1,00 | 0,30 | — |
+| wentylacja mechaniczna | D9 | 0,18 | 1,00 | 0,18 | — |
+| ładowanie EV | D11 | 11,00 | 1,00 | 11,00 | tak |
+| napędy (bramy, osłony) | D12, D13, D16 | 2,70 | 0,30 | 0,81 | — |
+| teletechnika | D14 | 0,20 | 1,00 | 0,20 | — |
+| pompa wody deszczowej | D15 | 0,80 | 0,30 | 0,24 | — |
 | Razem (bez zarządzania mocą) |  | 71,43 | — | 41,32 |  |
 
 *Źródło: lamela.obliczenia.elektryka.bilans (odbiorniki z modelu i z doboru urządzeń PT-3 IS)*
@@ -491,7 +489,7 @@ jedną strefę pożarową tworzy cały budynek z garażem (WT § 226 ust. 1; W-2
 **Przeciwpożarowy wyłącznik prądu — sprawdzenie warunku WT § 183 ust. 2.** Przepis wymaga PWP „w strefach
 pożarowych o kubaturze przekraczającej 1000 m³ lub zawierających strefy zagrożone wybuchem” (brzmienie z t.j.
 Dz.U. 2022 poz. 1225). Kubatura strefy = kubatura brutto budynku z modelu (PN-ISO 9836; W-069):
-V = 1 354,40 m³ (P0 578,05, P1 345,18, P2 283,63, plyta ST1 26,78, plyta ST2 21,49, plyta ST2Z 2,05, plyta D1 44,14, plyta D2 8,43, plyta D3 7,69, plyta D4 36,98); próg 1 000 m³ → warunek **spełniony — PWP wymagany**;
+V = 1 354,40 m³ (P0 578,05, P1 345,18, P2 283,63, płyta ST1 26,78, płyta ST2 21,49, płyta ST2Z 2,05, płyta D1 44,14, płyta D2 8,43, płyta D3 7,69, płyta D4 36,98); próg 1 000 m³ → warunek **spełniony — PWP wymagany**;
 stref zagrożonych wybuchem brak. ROPoż § 4 ust. 2 pkt 2 wyłącza z obowiązku wyposażania obiektów w PWP
 właścicieli budynków mieszkalnych jednorodzinnych — rozbieżność interpretacyjna (D-04). **Decyzja: PWP
 projektuje się** (spełnia obie interpretacje, W-190).

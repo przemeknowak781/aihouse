@@ -12,6 +12,13 @@ from lamela.obliczenia.elektryka.bilans import U0
 FIKCJA = "[DANE PRZYKŁADOWE – FIKCYJNE]"
 
 
+GRUPY = {"oswietlenie": "oświetlenie", "gniazda": "gniazda ogólne", "gniazda_kuchnia": "gniazda kuchenne",
+         "gniazda_lazienka": "gniazda w łazienkach", "zewn": "gniazda zewnętrzne", "gotowanie": "gotowanie",
+         "agd": "AGD (zmywarka, pralka, suszarka)", "pc": "pompa ciepła", "grzalka": "grzałka rezerwowa",
+         "sterowanie": "sterowanie ogrzewania", "went": "wentylacja mechaniczna", "ev": "ładowanie EV",
+         "napedy": "napędy (bramy, osłony)", "tele": "teletechnika", "pompa": "pompa wody deszczowej"}
+
+
 def _e(D: DanePTIE, k: str, d=None):
     return D.v("elektryka", k, d)
 
@@ -71,7 +78,7 @@ def rozdz_bilans(o: Opis, D: DanePTIE):
     for x in b.odbiorniki:
         if x.generacja:
             continue
-        g = grp.setdefault(x.grupa, {"Grupa odbiorników": x.grupa, "Obwody": [], "P_i [kW]": 0.0, "k_j": x.k_j,
+        g = grp.setdefault(x.grupa, {"Grupa odbiorników": GRUPY.get(x.grupa, x.grupa), "Obwody": [], "P_i [kW]": 0.0, "k_j": x.k_j,
                                      "P_s [kW]": 0.0, "DLM": "—"})
         g["Obwody"].append(x.id)
         g["P_i [kW]"] += x.P
@@ -156,7 +163,7 @@ def rozdz_ppoz(o: Opis, D: DanePTIE):
     prog = _e(D, "PWP_kubatura_strefy_prog", 1000)
     V = D.kubatura
     pv = D.pv
-    skl = ", ".join(f"{k} {L(v, 2)}" for k, v in D.kubatura_skl.items())
+    skl = ", ".join(f"{k.replace('plyta', 'płyta')} {L(v, 2)}" for k, v in D.kubatura_skl.items())
     o.rozdzial("Dane dotyczące warunków ochrony przeciwpożarowej",
                podstawa="§ 23 pkt 10 RPB; WT § 183 ust. 2–4; ROPoż § 4 ust. 2 pkt 2, § 28a", nowa_strona=True)
     o.tekst(f"""

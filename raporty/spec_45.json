@@ -1,4 +1,5 @@
 {
+ "nr": 45,
  "title": "Silnik ekonomicznego układu arkuszy: −29 % papieru, wypełnienie 53 → 80 % · tomy PT-2 BO i PT-3 IS złożone roboczo · wydanie: domknięcie modelu",
  "stages": [
   [
@@ -58,6 +59,13 @@
   "Silnik układu arkuszy (formaty niestandardowe składane do A4): PB-AR-01 z A1 na 630 × 594 mm (−25 % papieru, wypełnienie 62 → 93 %, 6 warstw A4 zamiast 10); elewacja 760 × 297 (−40 %); komplety AR+IE: 9,23 → 6,53 m² (−29 %), wypełnienie 53 → 80 %.",
   "Tomy robocze: Tom I (PZT_PAB_ZL), PT-1 AR, PT-2 BO (11 MB), PT-3 IS; w toku PT-4 IE i weryfikacje prawne/faktów.",
   "Wykryta niespójność na rzucie AR: „w tym użytkowa” 115,91 m² (garaż wliczony) vs PU wg W-316 95,33 m² w PAB i na stronie → dopisana do listy wydania (K-14), podobnie przycięty tekst w kolumnie posadzek.",
-  "Pakiet postępu (5 archiwów ZIP ≤ 27 MiB) przekazany Inwestorowi."
+  "Pakiet postępu (5 archiwów ZIP ≤ 27 MiB) przekazany Inwestorowi.",
+  "NADZÓR (09:30): 5 agentów aktywnych, bez zastojów; najdłuższa bezczynność 10 min; zmiany w repo 1 min temu."
+ ],
+ "images": [
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/arkusze/silnik/AR/PB-AR-01_rzut_parteru.png",
+   "caption": "PB-AR-01 na formacie niestandardowym 630 × 594 mm (wcześniej A1): wypełnienie 93 %, składanie do A4 w 6 warstwach"
+  }
  ]
 }
