@@ -1186,10 +1186,13 @@ def arkusze_bo(bez: bool = False) -> tuple[list[Arkusz], list[str], list[str]]:
         braki.append(f"Raport kontroli arkuszy: {len(stare)} {odmiana(len(stare), 'uwaga', 'uwagi', 'uwag')} dotyczy "
                      f"numerów lub tytułów niezgodnych z wykazem rysunków ({', '.join(sorted(set(stare))[:8])}) — raport "
                      "nieaktualny; wygenerować ponownie arkusze konstrukcji wraz z raportem kontroli")
-    if nst:
-        braki.append(f"Formaty arkuszy: {len(nst)} {odmiana(len(nst), 'arkusz', 'arkusze', 'arkuszy')} w formacie "
-                     f"niestandardowym ({', '.join(nst)}; wymiary — wykaz rysunków) — dobrać format z szeregu PN-EN ISO 5457 (A0–A4, formaty "
-                     "wydłużone; W-313)")
+    if nst:                                # decyzja Inwestora (brief § 10): formaty ekonomiczne, niestandardowe — nie brak
+        info.append(f"Formaty arkuszy: {len(nst)} {odmiana(len(nst), 'arkusz', 'arkusze', 'arkuszy')} w formacie "
+                    f"niestandardowym ({', '.join(nst)}; wymiary — wykaz rysunków), dobranym ekonomicznie wg decyzji "
+                    "Inwestora (brief § 10); arkusze składane do A4 z marginesem 20 mm do wpięcia i tabliczką na wierzchu "
+                    "(RPB § 2a: projekt w postaci papierowej oprawia się do formatu A4 — przepis nie określa formatów "
+                    "arkuszy); odstępstwo od zalecenia PN-EN ISO 5457 p. 3.2 (unikać formatów wydłużonych) — świadome, "
+                    "oznaczenie formatu na marginesie arkusza (W-313)")
     if normy_wycof:
         braki.append(f"Uwagi na arkuszach: {', '.join(normy_wycof)} — specyfikacja betonu powołuje PN-EN 206+A2 "
                      "i PN-B-06265 bez statusu (normy wycofane, rejestr D-09) — ujednolicić z rozdz. 2.2")
