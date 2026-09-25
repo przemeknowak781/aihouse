@@ -10,6 +10,9 @@ PYTHONPATH=src python3 -m lamela.obliczenia.mostki2d walidacja --out projekt/08_
 PYTHONPATH=src python3 -m lamela.obliczenia.mostki2d katalog --budynek model/budynek.yaml --dzialka model/dzialka.yaml \
     --out projekt/08_obliczenia/mostki2d/katalog [--tylko WZ-C1,WZ-R1] [--teren -0.30]
 PYTHONPATH=src python3 tools/test_mostki2d.py [--szybko]
+# katalog kart węzłów (ciągłość izolacji, woda/wilgoć, ocena; PNG + Markdown): sekcja `wezly` modelu albo katalog
+# demonstracyjny z wariantami porównawczymi (model bez `wezly`, --demo)
+PYTHONPATH=src python3 tools/katalog_mostkow.py [--budynek model/budynek.yaml] [--dzialka …] [--out …] [--tylko …] [--demo]
 ```
 
 ## API
@@ -35,7 +38,8 @@ eksport_wynikow([w, ...], dlugosci, "out/wyniki_mostki2d.json")  # {id: {psi_oi,
 | `solver.py` | `ModelMOS(wezel, siatka, tryb="psi"/"fRsi")` — MOS, średnia harmoniczna λ, Robin h = 1/R_s, SuperLU; iteracyjny wybór R_si (0,10/0,13/0,17) wg kierunku strumienia; `Rozwiazanie`: `T`, `q_brzeg`, `theta_pow`, `Phi_grup()`, `bilans()`, `temperatura(x, y)` (w wierzchołkach — średnia ważona λ), `theta_si_min()` (środki ścian + wierzchołki powierzchni), `strumien_komorek()` |
 | `wyniki.py` | `oblicz_wezel` (siatka n → 2n [→ 4n] do zmiany Φ < 1 % i zmiany ψ ≤ max(1 %; 0,001); bilans < 10⁻⁴ wymuszany; macierz L, ψ_oi/ψ_e/ψ_i, f_Rsi, g, θ krytyczne), wykresy, `raport_wezla`, `raport_katalogu`, `zestawienie_HTB(system="oi")`, `eksport_wynikow` |
 | `walidacja.py` | ISO 10211 zał. C: przypadek 1 (28 punktów), przypadek 2 (A…I + Φ; także na siatce zgrubnej); A1 ściana 1D, A2 Fourier, A3 naroże izotermiczne; `kontrole_poprawek`; `raport_walidacji` (+ sekcja „Weryfikacja niezależna i poprawki”) |
-| `katalog.py` | `katalog_z_modelu(model)` — węzły typowe z przegród modelu (osadzenie okien z `rama_t`, b = B'); `otwory_zewnetrzne` (tylko ściany `sciana_zewn`); `dlugosci_z_modelu` — długości do H_TB w systemie oi [INT] |
+| `karta.py` | `ciaglosc_izolacji` („test ołówka” na siatce: najkrótsza droga przez materiały λ > 0,12 z wnętrza na zewnątrz — mostek konstrukcyjny / przez grunt), `kontrola_wody` (hydro/przeciwwilgociowa, paro/szczelność, spadki, obróbki, wpusty, przelewy, rury spustowe, drenaż — z warstw przegród i `dachy[]`, `dzialka.odwodnienia`), `ocena_wezla` (BEZMOSTKOWY / DOBRY / DO POPRAWY / ZŁY / NIE SPEŁNIA), `rysuj_karte` (przekrój z materiałami i liniami „4 linii” z `Wezel.linie` + mapa temperatur), `raport_kart` |
+| `katalog.py` | `katalog_z_modelu(model)` — węzły typowe z przegród modelu (osadzenie okien z `rama_t`, b = B'); `otwory_zewnetrzne` (tylko ściany `sciana_zewn`); `dlugosci_z_modelu` — długości do H_TB w systemie oi [INT]; `katalog_demonstracyjny` (+ warianty: ościeże w murze, płyta fundamentowa, blok termiczny, wspornik bez łącznika); `wezly_z_sekcji` (sekcja `wezly` modelu → węzły, `ALIASY_WEZLOW`, `wariant`, `parametry`, `dlugosc`) |
 
 ## Konwencje i założenia
 * Wnętrze po stronie x < 0 (przekroje pionowe: lico wewn. ściany x = 0, posadzka/płyta y = 0); rzuty: `przekroj="poziomy"`
@@ -62,4 +66,6 @@ eksport_wynikow([w, ...], dlugosci, "out/wyniki_mostki2d.json")  # {id: {psi_oi,
   przestrzeń zewnętrzna (wariant ostrożny).
 * Krawędzie ukośne aproksymowane schodkowo (siatka prostokątna).
 * Rama okna jako materiał zastępczy (λ_eq z U_f) — nie zastępuje obliczeń ramy wg ISO 10077-2; ψ_g poza zakresem.
+* `Wezel.linie` (membrany, taśmy, obróbki, drenaż, rura spustowa) — tylko rysunek (schemat wymagań detalu), cieplnie
+  pominięte; lista kontrolna wody opiera się na danych modelu — brak danych = pozycja „BRAK”.
 * Ustalony przepływ ciepła (bez pojemności cieplnej i transportu wilgoci); ocena pleśni — kryterium f_Rsi.

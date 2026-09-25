@@ -9,7 +9,10 @@ Moduły:
 * `wyniki` — `oblicz_wezel` (kontrola siatki: Φ i ψ, bilans; L_2D, ψ_oi/ψ_e/ψ_i, f_Rsi przy R_si = 0,25), wykresy,
   raport Markdown, H_TB (ψ_oi — system wymiarów projektu), `eksport_wynikow` (JSON dla `fizyka.mostki`);
 * `walidacja` — ISO 10211 zał. C przypadki 1 i 2 + przypadki analityczne; raport walidacji;
-* `katalog` — katalog węzłów z modelu budynku (także nadproża, podokienniki, progi) i długości do H_TB (system oi).
+* `katalog` — katalog węzłów z modelu budynku (także nadproża, podokienniki, progi) i długości do H_TB (system oi),
+  katalog demonstracyjny z wariantami, węzły z sekcji `wezly` modelu;
+* `karta` — ciągłość izolacji („test ołówka”), kontrola wody i wilgoci, ocena, karta PNG i raport kart
+  (`tools/katalog_mostkow.py`).
 
 CLI: `PYTHONPATH=src python3 -m lamela.obliczenia.mostki2d {walidacja|katalog} --out KATALOG [...]`.
 """

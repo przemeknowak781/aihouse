@@ -324,12 +324,88 @@ def test_raport_walidacji():
     assert "Weryfikacja niezależna i poprawki" in txt and "**BŁĄD**" not in txt
 
 
+def test_ciaglosc_izolacji_test_olowka():
+    # płyta ciągła i ściana garażu w ociepleniu — linia izolacji przerwana; łącznik, naroże, ETICS ciągły — ciągła;
+    # ława — domyka się przez grunt, blok termiczny — ciągła; płyta fundamentowa na XPS — ciągła
+    from lamela.obliczenia.mostki2d import karta as K
+    sz = _sz()
+    zb = G.MATERIALY_DOMYSLNE["ZB"]
+    c = K.ciaglosc_izolacji(G.wezel_wspornik(sz, 0.2, zb, wysieg=1.0, lacznik=None, id="B0"))
+    assert not c.ciagla and not c.przez_grunt and "ZB" in c.materialy and len(c.sciezka) > 2
+    assert K.ciaglosc_izolacji(G.wezel_wspornik(sz, 0.2, zb, wysieg=1.0, id="B1")).ciagla
+    assert K.ciaglosc_izolacji(G.wezel_naroznik_zewnetrzny(sz)).ciagla
+    wg = [G.Warstwa(G.MATERIALY_DOMYSLNE["SIL24"], 0.24, True)]
+    assert K.ciaglosc_izolacji(G.wezel_garaz(sz, wg, przerwa_izolacji=False)).ciagla
+    c2 = K.ciaglosc_izolacji(G.wezel_garaz(sz, wg, przerwa_izolacji=True))
+    assert not c2.ciagla and "SIL24" in c2.materialy
+    m = _model()
+    pod = G.warstwy_z_modelu(m, "POD-0")
+    c3 = K.ciaglosc_izolacji(G.wezel_cokol(sz, pod, b=4.74))
+    assert not c3.ciagla and c3.przez_grunt
+    assert K.ciaglosc_izolacji(G.wezel_cokol(sz, pod, b=4.74,
+                                             blok_termiczny=(G.MATERIALY_DOMYSLNE["BET_KOM_400"], 0.24))).ciagla
+    from lamela.obliczenia.mostki2d.katalog import _warstwy_plyty_fundamentowej
+    assert K.ciaglosc_izolacji(G.wezel_cokol(sz, _warstwy_plyty_fundamentowej(m, "POD-0"), fundament="plyta",
+                                             b=4.74)).ciagla
+    # rama okna (λ_eq > 0,12 przy dużym U_f) nie jest traktowana jako przerwa
+    assert K.ciaglosc_izolacji(G.wezel_prog_strop(sz, 0.2, zb, prog={"U_f": 1.4})).ciagla
+
+
+def test_kontrola_wody_i_ocena():
+    from lamela.obliczenia.mostki2d import karta as K
+    m = _model()
+    sz = _sz()
+    att = G.wezel_attyka(sz, G.warstwy_z_modelu(m, "SD-D1"), h_nad_pokryciem=0.10)
+    kt = K.kontrola_wody(att, m)
+    tx = {(k.status, k.tekst.split(":")[0]) for k in kt}
+    assert ("OK", "paroizolacja stropodachu SD-D1") in tx and ("OK", "hydroizolacja stropodachu SD-D1") in tx
+    assert ("BRAK", "przelewy awaryjne w attyce") in tx and ("BRAK", "rury spustowe") in tx
+    assert any(k.status == "BRAK" and "15 cm" in k.tekst for k in kt)          # attyka 10 cm < 15 cm
+    kc = K.kontrola_wody(G.wezel_cokol(sz, G.warstwy_z_modelu(m, "POD-0"), b=4.74), m)
+    assert any(k.status == "BRAK" and "przeciwwilgociowa podłogi" in k.tekst for k in kc)   # POD-0 bez izolacji
+    assert any(k.temat == "drenaz" and k.status == "BRAK" for k in kc)                       # brak odwodnień działki
+    assert {ln["rodzaj"] for ln in att.linie} >= {"paro", "hydro", "obrobka", "woda"}
+    # ocena: płyta ciągła ZŁY, łącznik — lepiej; naroże ETICS — BEZMOSTKOWY
+    zb = G.MATERIALY_DOMYSLNE["ZB"]
+    w0 = R.oblicz_wezel(G.wezel_wspornik(sz, 0.2, zb, wysieg=1.0, lacznik=None, id="B0"))
+    o0 = K.ocena_wezla(w0, K.ciaglosc_izolacji(w0))
+    assert o0["klasa"] == "ZŁY"
+    wc = R.oblicz_wezel(G.wezel_naroznik_zewnetrzny(sz))
+    assert K.ocena_wezla(wc, K.ciaglosc_izolacji(wc))["klasa"] == "BEZMOSTKOWY"
+
+
+def test_karta_i_katalog_z_sekcji_wezly():
+    import copy
+    from lamela.obliczenia.mostki2d import karta as K
+    from lamela.obliczenia.mostki2d.katalog import katalog_demonstracyjny, wezly_z_sekcji
+    m = _model()
+    ids = [w.id for w in katalog_demonstracyjny(m)]
+    for k in ("WZ-R1", "WZ-B0", "WZ-B1", "WZ-W0", "WZ-W2", "WZ-N1", "WZ-GF1", "WZ-GF2", "WZ-C1", "WZ-G1", "WZ-RS1"):
+        assert k in ids, k
+    m2 = copy.copy(m)
+    m2.raw = dict(m.raw, wezly=[
+        {"id": "WZ-01", "typ": "R_attyka", "przegrody": ["SD-D1", "SZ1"], "dlugosc": 36.0},
+        {"id": "WZ-02", "typ": "oscieze", "przegrody": ["SZ1"], "wariant": "w_murze"},
+        {"id": "WZ-03", "typ": "garaz", "przegrody": ["SZ1"], "parametry": {"przerwa_izolacji": True}},
+        {"id": "WZ-04", "typ": "konsola_lamel", "przegrody": ["SZ1"]}])
+    wz, dl, pom, kody = wezly_z_sekcji(m2)
+    assert [w.id for w in wz] == ["WZ-01", "WZ-02", "WZ-03"] and dl == {"WZ-01": 36.0}
+    assert len(pom) == 1 and "WZ-04" in pom[0] and kody["WZ-01"] == ["SD-D1", "SZ1"]
+    assert wz[0].typ == "attyka" and "w murze" in wz[1].nazwa
+    w = R.oblicz_wezel(wz[2])
+    k = K.karta_wezla(w, m2, {"przegrody": kody["WZ-03"]}, OUT / "karta_WZ-03.png")
+    assert Path(k.png).stat().st_size > 50_000 and not k.ciag.ciagla
+    txt = K.raport_kart([k], OUT / "karty.md", "Karty — test", dlugosci=dl)
+    assert "Tabela zbiorcza" in txt and "WZ-03" in txt and "karta_WZ-03.png" in txt
+
+
 # ------------------------------------------------------------------------------------------ runner
 def main() -> int:
     szybko = "--szybko" in sys.argv
     testy = [(n, f) for n, f in globals().items() if n.startswith("test_") and callable(f)]
     if szybko:
-        testy = [(n, f) for n, f in testy if n not in ("test_katalog_modelu_testowego",)]
+        testy = [(n, f) for n, f in testy if n not in ("test_katalog_modelu_testowego",
+                                                        "test_karta_i_katalog_z_sekcji_wezly")]
     OUT.mkdir(parents=True, exist_ok=True)
     bledy = 0
     for n, f in testy:
