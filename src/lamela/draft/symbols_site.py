@@ -38,7 +38,7 @@ def _along(ls: LineString, step: float, offset: float = 0.0):
     return out
 
 
-def _label_along(c, ls, text, every_mm, layer, h=2.0):
+def _label_along(c, ls, text, every_mm, layer, h=2.5):
     k = c.k
     for s, p, d in _along(ls, every_mm * k, every_mm * k * 0.5):
         ang = readable_angle(math.degrees(math.atan2(d[1], d[0])))
@@ -72,7 +72,7 @@ def tree(c, pos, crown_d: float = 5.0, existing: bool = True, remove: bool = Fal
             c.line(P + [-a, -a], P + [a, a], pen=0.5)
             c.line(P + [-a, a], P + [a, -a], pen=0.5)
         if label:
-            c.text(P + np.array([R * 0.75, -R * 0.75]), label, 2.0, 0.0, "left", "top")
+            c.text(P + np.array([R * 0.75, -R * 0.75]), label, 2.5, 0.0, "left", "top")
 
 
 def shrub(c, pos, d: float = 1.2, layer: str = "Z-ZIELEN"):
@@ -192,11 +192,11 @@ def hydrant(c, pos, s_mm: float = 3.0, underground: bool = False, layer: str = "
     with c.on(layer):
         c.circle(pos, R, pen=0.35)
         c.dot(pos, 0.8, layer)
-        c.text(np.asarray(pos) + np.array([R + 0.8 * k, 0.0]), "HP" if underground else "H", 2.0, 0.0, "left",
+        c.text(np.asarray(pos) + np.array([R + 0.8 * k, 0.0]), "HP" if underground else "H", 2.5, 0.0, "left",
                "middle")
 
 
-def manhole(c, pos, d: float = 1.0, label: str | None = "Sk", layer: str = "Z-UZBROJENIE", h: float = 2.0):
+def manhole(c, pos, d: float = 1.0, label: str | None = "Sk", layer: str = "Z-UZBROJENIE", h: float = 2.5):
     """Studzienka (okrąg o średnicy rzeczywistej, min. 2 mm na papierze) z oznaczeniem."""
     R = max(d / 2, 1.0 * c.k)
     with c.on(layer):
@@ -261,7 +261,7 @@ def boundary_line(c, pts, label: str | None = None, layer: str = "Z-GRANICE"):
 
 
 def building_line(c, p1, p2, kind: str = "nieprzekraczalna", side: float = 1.0, layer: str = "Z-LINIE-ZABUDOWY",
-                  label: str | None = None, h: float = 2.0):
+                  label: str | None = None, h: float = 2.5):
     """Linia zabudowy (PN-B-01027 poz. 2.1–2.2): linia ciągła 0,35 z trójkątami równobocznymi o boku 2 mm
     w rytmie 12·2·12 mm po stronie terenu zabudowy (``side`` +1 = lewa strona p1→p2); obowiązująca — trójkąty
     zaczernione, nieprzekraczalna — niezaczernione."""

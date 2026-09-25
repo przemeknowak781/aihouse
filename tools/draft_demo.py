@@ -43,7 +43,7 @@ TB_COMMON = dict(
 
 # ==================================================================================================== model próbny
 # osie konstrukcyjne (m) — układ budynku: x → wschód, y → północ
-AX = {"A": 0.00, "B": 4.20, "C": 7.50}
+AX = {"A": 0.00, "B": 4.20, "C": 7.20}
 AY = {"1": 0.00, "2": 5.70}
 SZ1 = [("TYNK", 0.015, "wyk"), ("MUR_SILIKAT", 0.18, "konstr"), ("IZOL_TWARDA", 0.20, "izol"),
        ("TYNK", 0.007, "wyk")]
@@ -54,10 +54,10 @@ F_EXT = T_STR / 2 + T_INS             # lico ocieplenia od osi (wymiary w stanie
 Y_PART = 2.05                          # oś ścianki działowej łazienka/hol
 OPEN = {
     # symbol: (ściana (p1, p2 osi), a, b, wys., parapet)
-    "O1": (((0.0, 0.0), (7.5, 0.0)), 1.30, 2.20, 0.90, 1.30),
-    "HS1": (((0.0, 0.0), (7.5, 0.0)), 4.80, 7.00, 2.40, 0.00),
+    "O1": (((0.0, 0.0), (7.2, 0.0)), 1.30, 2.20, 0.90, 1.30),
+    "HS1": (((0.0, 0.0), (7.2, 0.0)), 4.80, 6.80, 2.40, 0.00),
     "O2": (((0.0, 0.0), (0.0, 5.7)), 3.90, 5.10, 1.50, 0.90),
-    "O3": (((7.5, 0.0), (7.5, 5.7)), 0.90, 2.30, 1.50, 0.85),
+    "O3": (((7.2, 0.0), (7.2, 5.7)), 0.90, 2.30, 1.50, 0.85),
     "D1": (((0.0, Y_PART), (4.2, Y_PART)), 2.90, 3.80, 2.05, None),
     "D2": (((4.2, 0.0), (4.2, 5.7)), 2.80, 3.70, 2.05, None),
 }
@@ -122,7 +122,7 @@ def demo_plan():
     S.washbasin_counter(vp, (1.35, y_bath_in), -90.0, w=1.2, d=0.5)
     S.washing_machine(vp, (2.35, y_bath_in), -90.0)
     S.shower_walkin(vp, (AX["B"] - F_IN, F_IN + 0.50), 180.0, w=1.0, d=1.05, glass_side="right")
-    S.bed(vp, (5.95, AY["2"] - F_IN), -90.0, 1.6, 2.0)
+    S.bed(vp, (5.80, AY["2"] - F_IN), -90.0, 1.6, 2.0)
     S.wardrobe(vp, (AX["B"] + F_IN, 4.75), 0.0, 1.5, 0.6, doors="sliding")
     S.desk(vp, (AX["B"] + F_IN, 1.40), 0.0, 1.2, 0.6)
 
@@ -133,7 +133,7 @@ def demo_plan():
                                                          (x_b_in, AY["2"] - F_IN), (F_IN, AY["2"] - F_IN)]), "gres"),
         ("1.02", "Łazienka", (2.45, 0.80), Polygon([(F_IN, F_IN), (x_b_in, F_IN), (x_b_in, Y_PART - 0.075),
                                                     (F_IN, Y_PART - 0.075)]), "gres"),
-        ("1.03", "Pokój", (5.75, 1.62), Polygon([(AX["B"] + F_IN, F_IN), (AX["C"] - F_IN, F_IN),
+        ("1.03", "Pokój", (5.55, 1.62), Polygon([(AX["B"] + F_IN, F_IN), (AX["C"] - F_IN, F_IN),
                                                  (AX["C"] - F_IN, AY["2"] - F_IN), (AX["B"] + F_IN, AY["2"] - F_IN)]),
          "deska"),
     ]
@@ -178,12 +178,12 @@ def demo_plan():
     dims.dim_h(vp, list(AX.values()), y_top_ch, y_max)
     # wewnętrzne
     dims.dim_h(vp, [AX["B"] + F_STR, AX["C"] - F_STR], 2.45, 2.2, ext="short")
-    dims.dim_v(vp, [AY["1"] + F_STR, AY["2"] - F_STR], 6.80, 7.0, ext="short")
+    dims.dim_v(vp, [AY["1"] + F_STR, AY["2"] - F_STR], 6.55, 6.75, ext="short")
     dims.dim_h(vp, [AX["A"] + F_STR, 2.90, 3.80, AX["B"] - F_STR], Y_PART + 0.34, Y_PART + 0.1, ext="short")
 
     # ---------------------------------------------------------------- oznaczenia otworów (symbol + ułamek)
     dims.opening_dim(vp, (1.75, F_IN), (1, 0), 0.90, 0.90, 1.30, side=1, symbol="O1", axis_mm=8.0)
-    dims.opening_dim(vp, (5.90, F_IN), (1, 0), 2.20, 2.40, None, side=1, symbol="HS1", axis_mm=10.0,
+    dims.opening_dim(vp, (5.80, F_IN), (1, 0), 2.00, 2.40, None, side=1, symbol="HS1", axis_mm=10.0,
                      symbol_shape="ellipse")
     dims.opening_dim(vp, (F_IN, 4.50), (0, 1), 1.20, 1.50, 0.90, side=-1, symbol="O2", axis_mm=8.0)
     dims.opening_dim(vp, (AX["C"] - F_IN, 1.60), (0, 1), 1.40, 1.50, 0.85, side=1, symbol="O3", axis_mm=8.0)
@@ -192,7 +192,7 @@ def demo_plan():
     dims.opening_dim(vp, (AX["B"] - F_IN, 3.25), (0, 1), None, None, symbol="D2", side=1, axis_mm=4.0)
 
     # ---------------------------------------------------------------- przekrój, północ
-    S.section_mark(vp, (6.55, y_ax_bot - 5.0 * k), (6.55, y_top_ch + 16 * k), "A", look=1.0)
+    S.section_mark(vp, (6.30, y_ax_bot - 5.0 * k), (6.30, y_top_ch + 16 * k), "A", look=1.0)
 
     x0, y0, x1, y1 = sh.frame
     sh.place(vp, x0 + 3.0, y1 - 3.0, "tl")

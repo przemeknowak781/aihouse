@@ -399,7 +399,7 @@ def window(c, p_a, p_b, s_int: float, s_ext: float, frame_in: float, frame_out: 
 def stairs(c, start, direction, width: float, n_steps: int, tread: float, riser: float | None = None,
            first_no: int = 1, cut_after: int | None = None, numbering: bool = True, arrow: bool = True,
            label: bool = True, layer: str = "A-SCHODY", side_label: float = 1.0, show_above: str = "dashed",
-           h: float = 2.0, total_steps: int | None = None, arrow_end_extra: float = 0.0,
+           h: float = 2.5, total_steps: int | None = None, arrow_end_extra: float = 0.0,
            label_at: float | None = None, label_values: tuple | None = None, label_style: str = "inline"):
     """Bieg schodów prostych na rzucie (PN-B-01025).
 
@@ -644,7 +644,7 @@ def hob(c, pos, rot=0.0, w=0.60, d=0.52, zones=4, layer="A-SANITARNE"):
             _circ(c, xf, x, y, r, pen="b_cienka")
 
 
-def appliance(c, pos, rot=0.0, w=0.60, d=0.60, label="LOD", layer="A-SANITARNE", h=2.0):
+def appliance(c, pos, rot=0.0, w=0.60, d=0.60, label="LOD", layer="A-SANITARNE", h=1.8):
     """Urządzenie w zabudowie (lodówka 'LOD', zmywarka 'ZM', piekarnik 'PK', …): prostokąt z opisem."""
     xf = X(pos, rot - 90.0)
     with c.on(layer):

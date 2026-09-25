@@ -287,7 +287,7 @@ def media(code: str):
     return MEDIA[_MEDIA_ALIAS.get(c_, c_)]
 
 
-def pipe(c, pts, medium: str = "WZ", label: str | None = None, h: float = 2.0, label_at: float = 0.5,
+def pipe(c, pts, medium: str = "WZ", label: str | None = None, h: float = 2.5, label_at: float = 0.5,
          pen=None):
     """Przewód instalacji wg medium (warstwa i rodzaj linii z ``MEDIA``) z opisem nad przewodem (np. 'W PE-X 16×2')."""
     ly, _desc, lt = media(medium)
@@ -307,7 +307,7 @@ def pipe(c, pts, medium: str = "WZ", label: str | None = None, h: float = 2.0, l
         c.text(q + up * 0.8 * c.k, label, h, ang, "center", "baseline", ly)
 
 
-def riser(c, pos, label: str | None = None, medium: str = "KS", s_mm: float = 2.6, h: float = 2.0):
+def riser(c, pos, label: str | None = None, medium: str = "KS", s_mm: float = 2.6, h: float = 2.5):
     """Pion instalacyjny (okrąg + opis, np. „Pion K1 ∅110”)."""
     ly = media(medium)[0]
     R = s_mm * c.k / 2
@@ -377,7 +377,7 @@ def manifold(c, pos, rot=0.0, n: int = 4, pitch_mm: float = 3.0, layer: str = "S
             x = (i + 1) * pitch_mm * k
             c.line(xf.pt(x, 0.6 * k), xf.pt(x, 2.4 * k))
         if label:
-            c.text(xf.pt(L + 1.0 * k, 0), label, 2.0, 0.0, "left", "middle")
+            c.text(xf.pt(L + 1.0 * k, 0), label, 1.8, 0.0, "left", "middle")
 
 
 def pump(c, pos, rot=0.0, s_mm: float = 4.0, layer: str = "S-URZADZENIA"):
@@ -390,7 +390,7 @@ def pump(c, pos, rot=0.0, s_mm: float = 4.0, layer: str = "S-URZADZENIA"):
         c.polygon(xf([[-R * 0.55, R * 0.8], [-R * 0.55, -R * 0.8], [R, 0.0]]), z=23.9)
 
 
-def tank(c, pos, d: float = 0.65, label: str = "CWU 300 l", layer: str = "S-URZADZENIA", h: float = 2.0):
+def tank(c, pos, d: float = 0.65, label: str = "CWU 300 l", layer: str = "S-URZADZENIA", h: float = 1.8):
     """Zasobnik/zbiornik pionowy w rzucie (okrąg o średnicy rzeczywistej d [m] + opis)."""
     with c.on(layer):
         c.circle(pos, d / 2, pen="srednia")
@@ -445,7 +445,7 @@ def inspection(c, pos, w: float = 0.3, d: float = 0.3, label: str = "R", layer: 
     P = np.asarray(pos, float)
     with c.on(layer):
         c.polygon(rect_c(P[0], P[1], w, d), pen="cienka", lt="KRESKOWA_DROBNA")
-        c.text(P, label, 2.0, 0.0, "center", "middle")
+        c.text(P, label, 1.8, 0.0, "center", "middle")
 
 
 def grille(c, pos, rot=0.0, w: float = 0.4, d: float = 0.15, layer: str = "S-WENT", label: str | None = None):
@@ -498,7 +498,7 @@ def air_terminal(c, pos, rot=0.0, kind: str = "czerpnia", w: float = 0.4, layer:
             lab = "EHA"
         c.line(a0, a1, pen="cienka")
         arrowhead(c, a1, a1 - a0, 2.0, 12, True, layer)
-        c.text((a0 + a1) / 2 + np.array([0.0, 1.0 * k]), lab, 2.0, 0.0, "center", "baseline")
+        c.text((a0 + a1) / 2 + np.array([0.0, 1.0 * k]), lab, 1.8, 0.0, "center", "baseline")
 
 
 def recuperator(c, pos, rot=0.0, w: float = 0.75, d: float = 0.6, layer: str = "S-WENT", label: str = "REKUPERATOR"):
@@ -520,7 +520,7 @@ def recuperator(c, pos, rot=0.0, w: float = 0.75, d: float = 0.6, layer: str = "
             else:
                 c.text(xf.pt(x, y - 2 * r - 0.8 * k), lab, 1.8, 0.0, "center", "top")
         if label:
-            c.text(xf.pt(0, d / 2 + 2 * r + 3.6 * k), label, 2.0, 0.0, "center", "baseline")
+            c.text(xf.pt(0, d / 2 + 2 * r + 3.6 * k), label, 1.8, 0.0, "center", "baseline")
 
 
 def radiator(c, p1, p2, depth: float = 0.10, side: float = 1.0, layer: str = "S-OGRZ", label: str | None = None):
@@ -567,4 +567,4 @@ def floor_heating(c, poly, spacing: float = 0.15, margin: float = 0.12, directio
     c.geom(pg, layer, pen="b_cienka", lt="KRESKOWA_DROBNA")
     if label:
         cx, cy = pg.centroid.x, pg.centroid.y
-        c.text((cx, cy), label, 2.0, 0.0, "center", "middle", layer, mask=0.6)
+        c.text((cx, cy), label, 2.5, 0.0, "center", "middle", layer, mask=0.6)

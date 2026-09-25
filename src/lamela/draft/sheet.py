@@ -334,7 +334,7 @@ def _cell(sh, x, y, w, h, label, value="", vh=2.5, style="normal", lines_max=1, 
     top = y + h - (pad + label_h + 0.7 if label else pad)
     if lines_max <= 1:
         hh = fit(value, avail, vh, 1.8, style)
-        hh = min(hh, max(1.8, (top - y) - 1.0))
+        hh = styles.snap_text_h(min(hh, max(1.8, (top - y) - 1.0)))
         bot = y + max(0.9, 0.24 * hh + 0.5)
         yy = bot + max(0.0, (top - bot - hh) / 2.0) if value_dy is None else y + value_dy
         xx = x + pad if align == "left" else x + w / 2.0
@@ -471,7 +471,7 @@ def draw_title_block(sh: Sheet, tb: TitleBlock):
                 vals = [c[1] for c in cw] if row is None else list(row)
                 xx = x0
                 for (w, _n), v in zip(cw, vals):
-                    sh.text((xx + 1.2, yy + rh / 2.0), str(v), 1.8 if row is None else 2.2, va="middle")
+                    sh.text((xx + 1.2, yy + rh / 2.0), str(v), 1.8 if row is None else 2.5, va="middle")
                     xx += w
                 yy += rh
                 sh.line((x0, yy), (fx1, yy), pen=thin)
@@ -553,7 +553,7 @@ def table(sh, x: float, y_top: float, cols: list[tuple[str, float]], rows: list[
     return (x, y, x + W, y_top)
 
 
-def scale_bar(c, pos, scale: float, length_m: float | None = None, h: float = 2.0, layer: str = "R-OPISY",
+def scale_bar(c, pos, scale: float, length_m: float | None = None, h: float = 1.8, layer: str = "R-OPISY",
               unit_label: str = "m"):
     """Podziałka liniowa (PN-EN ISO 5455 / praktyka kartograficzna) rysowana NA ARKUSZU dla rzutni 1:scale.
 
@@ -587,7 +587,7 @@ def scale_bar(c, pos, scale: float, length_m: float | None = None, h: float = 2.
             v = i * step
             c.text((xz + i * step * mm_per_m, y0 + bh + 1.0), fmt.num(v, 2, strip=True), h, ha="center")
         c.text((xz + n * step * mm_per_m + 2.0, y0), unit_label, h)
-        c.text((x0, y0 - 1.2 - h), "PODZIAŁKA " + fmt.scale_str(scale), h * 0.9, style="bold")
+        c.text((x0, y0 - 1.2 - h), "PODZIAŁKA " + fmt.scale_str(scale), h, style="bold")
     return (x0, y0, xz + n * step * mm_per_m + 4.0, y0 + bh + 1.0 + h)
 
 

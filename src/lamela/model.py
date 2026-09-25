@@ -957,6 +957,7 @@ class Model:
         for s in self._sciany:
             self._layer_classes(s)
             self._layer_z(s)
+        self._harmonize_ext_bottoms()
 
         # otwory
         self._build_openings()
@@ -1440,6 +1441,33 @@ class Model:
             if lay.strona == es:
                 lay.z0, lay.z1 = z_bot, z_top
 
+    def _harmonize_ext_bottoms(self):
+        """Naroża L: warstwy zewnętrzne obu ścian schodzą do tej samej rzędnej (brak odsłoniętych czół izolacji).
+        Przedłużenie w dół chowa się w płycie/cokole — bez wpływu na widoczną geometrię."""
+        for _ in range(3):
+            changed = False
+            for s in self._sciany:
+                if s.ext_side is None or s.typ != "sciana_zewn":
+                    continue
+                for end in (0, 1):
+                    inf = s.polaczenia.get(end) or {}
+                    if inf.get("typ") != "L" or not inf.get("z"):
+                        continue
+                    v = self._sc_by_id.get(inf["z"][0])
+                    if v is None or v.ext_side is None or v.typ != "sciana_zewn":
+                        continue
+                    es = [l for l in s.warstwy if l.strona == s.ext_side]
+                    ev = [l for l in v.warstwy if l.strona == v.ext_side]
+                    if not es or not ev:
+                        continue
+                    z0 = min(min(l.z0 for l in es), min(l.z0 for l in ev))
+                    for l in es + ev:
+                        if l.z0 > z0 + 1e-6:
+                            l.z0 = z0
+                            changed = True
+            if not changed:
+                break
+
     # ---------------- otwory ----------------
     def _build_openings(self):
         by_wall: dict[str, list[Otwor]] = {}
@@ -1842,9 +1870,16 @@ class Model:
                 a = sl["poly_full"].buffer(0.40, join_style=2).intersection(R).area
                 v = a * (sl["wierzch"] - sl["spod"])
             else:
-                below = [outl[k] for k in self._kond if not outl[k].is_empty]
-                R = unary_union(below) if below else Polygon()
-                a = sl["poly"].buffer(0.40, join_style=2).intersection(R).area
+                # dach: w obrysie kondygnacji bezpośrednio pod płytą (okapy poza obrysem — nie wliczane)
+                below = None
+                for k in reversed(list(self._kond.values())):
+                    if self.kond_z_od(k.id) < sl["wierzch"] - 0.5:
+                        below = k.id
+                        break
+                R = outl.get(below) if below else Polygon()
+                if R is None or R.is_empty:
+                    continue
+                a = sl["poly_full"].buffer(0.40, join_style=2).intersection(R).area
                 p = self._prz.get(str(sl["raw"].get("przegroda")))
                 d_pod = p.d_pod_konstr() if p is not None else 0.0
                 v = a * (sl["top"] - sl["spod"] + d_pod)
