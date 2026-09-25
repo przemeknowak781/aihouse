@@ -716,7 +716,7 @@ DACHY = [
                         "opis": "w szachcie SI; podejście poziome DN100 w suficie podwieszanym łazienki P2 (izolowane)"}],
      "spadki": [{"od": [xA2 - ZL, -ZK], "do": [5.57, 5.45], "spadek": 0.02}, {"od": [xE + ZK, -ZK], "do": [5.57, 5.45], "spadek": 0.02},
                 {"od": [xD + ZK, y4 + ZK], "do": [4.40, 8.35], "spadek": 0.02}],
-     "uwagi": "stropodach bryły A: PV ≤ 6,5 kWp na niskich stelażach (≤ +9,78, nie ponad attykę); świetlik SW1 2,10 × 1,00 nad spocznikiem; "
+     "uwagi": "stropodach bryły A: 7 modułów PV EW10 na niskich stelażach (górna krawędź ≤ korona attyki +9,88 — energia.pv); świetlik SW1 2,10 × 1,00 nad spocznikiem; "
               "wyłaz 0,90 × 0,90 w pom. 2.07 (x 7,20–8,10); czerpnia i wyrzutnia reku (≥ 0,40 m nad pokryciem lokalnym z klinem), wywiewka K1 nad SI; "
               "obrys po licu konstrukcji ścian P2 (attyka ŻB 18 w osi muru, ETICS/wełna ścian ciągła po zewnątrz)"},
     {"id": "D2", "obrys": R(-ZK, y3 + EXT, xB - EXT, y4 + ZK), "plyta": {"wierzch": Z_ST2, "grubosc": T_STR}, "przegroda": "SD2", "spadek": 0.02,
@@ -843,7 +843,14 @@ _ODW = {
              "wpusty": [{"xy": [13.90, -1.20], "dn": 70, "podgrzewany": True, "opis": "wylot rynny linii D (W)"}],
              "rury_spustowe": [_RS("RS8", (13.70, -EXT - 0.06), "zbiornik", "wspólna z PL-E")]},
 }
+# ---- runda 2 — MOSTKI (REKOMENDACJE mostków, część A; WZ-04…07, WZ-16): łącznik termoizolacyjny płyt wspornikowych z modułem
+#      izolacyjnym 120 mm w warstwie ocieplenia 20 cm, λ_eq ≤ 0,08 W/(m·K) wg ETA wybranego wyrobu (WYMAGANIE — wartości do potwierdzenia
+#      ETA; W-248, W-272); płyta stropu do lica konstrukcji, łącznik w strefie izolacji (A2 K-1)
+LACZNIK = {"d": 0.12, "lambda_eq": 0.08, "opis": "łącznik termoizolacyjny (ETA) — moduł izolacyjny 120 mm, λ_eq ≤ 0,08 W/(m·K) "
+                                                "(wymaganie; zamiast przykładowego 80 mm / 0,09)"}
 for _w in WSP:
+    if _w.get("lacznik_termiczny") and _w.get("przegroda"):
+        _w["lacznik"] = dict(LACZNIK)
     _o = _ODW.get(_w["id"])
     if _o:
         _w.update(_o, spadek=0.02)
@@ -1135,11 +1142,71 @@ WEZLY = [
 
 CZERPNIA = [11.60, 1.00, 10.00]      # [x, y, z dolnej krawędzi wlotu] — audyt A1 (WT §152 ust. 4, 10)
 WYRZUTNIA = [1.90, 4.00, 10.00]     # [x, y, z wylotu] — 3,00 m od krawędzi konstrukcji D1 nad O2-04, 10,15 m od czerpni
+WYWIEWKA_K1 = [5.57, 6.20, r(pokrycie("SD1", Z_ST3, math.hypot(6.20 - _W1[1], 0.0)) + 0.50, 2)]   # pokrycie lokalne + 0,50 m
+
+# ---- runda 2 (K-7, weryfikacja §6 A4, BRAKI PT-IE poz. 1): FAKTYCZNE rozmieszczenie modułów PV. Moduł 1,722 × 1,134 m (dane
+#      przykładowe biblioteki, 430 Wp), układ wschód–zachód 10° (pary W/E, pochylenie po krótszym boku: rzut 1,117 × 1,722 m, górna
+#      krawędź 0,197 + 0,10 m stelaż = 0,30 m nad pokryciem lokalnym). Pole montażu: 1,0 m od wewn. lica attyki (attyka 0,18 +
+#      izolacja 0,10; strefa brzegowa wiatru), 0,30 m od otworów/świetlika/wyłazu, 1,0 m od czerpni, wyrzutni i wywiewki, 0,50 m od
+#      wpustów. Na D1 mieści się 7 modułów (3,01 kWp) → pozostałe 8 na dachu garażu D4 jako dach BIOSOLARNY (stelaże na substracie
+#      z roślinnością pod modułami, balast = substrat; PBC dachu bez zmian) — razem 15 × 430 = 6,45 kWp ≤ 6,5 (W-194). Warunek W-033/D-15:
+#      górna krawędź modułów ≤ korona attyki przy pokryciu LOKALNYM (klin izolacji spadkowej) — sprawdzane asercją.
+def _pv_pole(dach_obrys, off, przeszkody):
+    from shapely.ops import unary_union
+    pole = Polygon(dach_obrys).buffer(-off, join_style=2)
+    return pole.difference(unary_union(przeszkody)) if przeszkody else pole
+
+
+def _pv_uklad(pole, n_max, x_rng, y_start, dy=1.722, dx=1.117, szczelina=0.05, przejscie=0.60):
+    """Rzędy par W/E wzdłuż x (grzbiet N–S), przejście serwisowe co 2 pary; zwraca prostokąty [x0, y0, x1, y1]."""
+    from shapely.prepared import prep
+    P = prep(pole)
+    out, y = [], y_start
+    while len(out) < n_max:
+        x, k, dodano = x_rng[0], 0, False
+        while x + dx <= x_rng[1] + 1e-9 and len(out) < n_max:
+            para = [box(x, y, x + dx, y + dy), box(x + dx + szczelina, y, x + 2 * dx + szczelina, y + dy)]
+            if len(out) <= n_max - 2 and all(P.contains(b) for b in para):
+                out += [list(b.bounds) for b in para]
+                k, dodano = k + 1, True
+                x += 2 * dx + szczelina + (przejscie if k % 2 == 0 else 0.0)
+            elif P.contains(para[0]):
+                out.append(list(para[0].bounds))
+                dodano = True
+                x += dx + szczelina
+            else:
+                x += 0.05
+        y += dy + 0.02
+        if y > pole.bounds[3] or (not dodano and y > y_start + 10):
+            break
+    return [[r(v, 3) for v in b] for b in out]
+
+
+_D1 = next(d_ for d_ in DACHY if d_["id"] == "D1")
+_D4 = next(d_ for d_ in DACHY if d_["id"] == "D4")
+_pw = lambda xy, rr: Polygon([(xy[0] + rr * math.cos(a_ / 8 * math.pi), xy[1] + rr * math.sin(a_ / 8 * math.pi)) for a_ in range(16)])  # noqa: E731
+_prz1 = ([Polygon(o).buffer(0.30, join_style=2) for o in _D1["otwory"]] + [_pw(CZERPNIA, 1.0), _pw(WYRZUTNIA, 1.0), _pw(WYWIEWKA_K1, 1.0)]
+         + [_pw(w["xy"], 0.5) for w in _D1["wpusty"]])
+_POLE_D1 = _pv_pole(_D1["obrys"], 0.28 + 1.0, _prz1)
+_MOD_D1 = _pv_uklad(_POLE_D1, 15, (_POLE_D1.bounds[0], _POLE_D1.bounds[2]), _POLE_D1.bounds[1])
+# D4: od ściany bryły B (zach., h ≈ 3,4 m nad pokryciem) 1,5 m — ograniczenie zacienienia popołudniowego; pozostałe krawędzie jak D1
+_POLE_D4 = _pv_pole(_D4["obrys"], 0.28 + 1.0, [box(-99, -99, xE + EXT + 1.5, 99)] + [_pw(w["xy"], 0.5) for w in _D4["wpusty"]])
+_MOD_D4 = _pv_uklad(_POLE_D4, 15 - len(_MOD_D1), (_POLE_D4.bounds[0], _POLE_D4.bounds[2]), _POLE_D4.bounds[1])
+_KOR_D1 = r(pokrycie("SD1", Z_ST3, 99.0) - (0.32 - 0.22) + ATT_D1, 3)            # korona attyki D1 = pokrycie średnie + ATT_D1
+_ZPV_D1 = max(pokrycie("SD1", Z_ST3, min(math.hypot(cx - wx, cy - wy) for wx, wy in (_W1, _W2))) + 0.30
+              for b in _MOD_D1 for cx, cy in ((b[0], b[1]), (b[2], b[1]), (b[0], b[3]), (b[2], b[3])))
+_ZPV_D4 = pokrycie("DZ1", Z_DG, 99.0) + 0.45                                         # stelaż biosolarny ≤ 0,45 m nad hydroizolacją
+assert len(_MOD_D1) + len(_MOD_D4) == 15 and _ZPV_D1 <= _KOR_D1 and _ZPV_D4 <= Z_RAMA_D[1], (len(_MOD_D1), len(_MOD_D4), _ZPV_D1, _KOR_D1)
 ENERGIA = {
     "n50": 1.0, "osoby": 5, "pojemnosc": "ciezka", "chlodzenie": False, "psi_wariant": "domyslna",
     "grunt": {"typ": "piasek", "lambda": 2.0, "izolacja_obwodowa": {"typ": "pozioma", "D": 1.0, "d_n": 0.10, "lam_n": 0.036}},
-    "wentylacja": {"centrala": "RVU_450", "czerpnia": CZERPNIA, "wyrzutnia": WYRZUTNIA, "wyrzut": "pionowy",
-                   "zestaw_zblokowany": False, "wywiewki_kanalizacyjne": [[5.57, 6.20]], "rzedna_terenu": -0.25,
+    # runda 2: wyrzutnia dachowa z wylotem POZIOMYM (kołpak) — 10,15 m od czerpni ≥ 10 m (WT §152 ust. 10, W-167; flaga była
+    # niespójna z uwagą rundy 1); wywiewka K1 z jawną rzędną (pokrycie lokalne + 0,50) — wysokość zabudowy bez założeń (K-3)
+    "wentylacja": {"centrala": "RVU_450", "czerpnia": CZERPNIA, "wyrzutnia": WYRZUTNIA, "wyrzut": "poziomy",
+                   "zestaw_zblokowany": False, "wywiewki_kanalizacyjne": [WYWIEWKA_K1], "rzedna_terenu": -0.33,
+                   "bilans": {"nawiew_m3h": 365, "wywiew_m3h": 365, "okresowo_m3h": 435,
+                              "opis": "runda 2 (K-9): Σnaw = Σwyw = 365 m³/h (pom. went); centrala 450 m³/h (V_max 500) — praca 81 % nominału, "
+                                      "tryb okresowy (okap 120) 435 ≤ 450 (weryfikacja §6 B5)"},
                    "uwagi": "po audycie A1: czerpnia (11,60; 1,00) i wyrzutnia (1,90; 4,00) — odległość 10,15 m ≥ 10,00 m (WT §152 ust. 10, "
                             "bez wymogu różnicy wysokości); dolna krawędź wlotu czerpni i wylot wyrzutni +10,00 ≥ pokrycie lokalne z klinem "
                             "+ 0,40 (W-166); czerpnia 7,96 m od wywiewki K1 (≥ 6 m); wyrzutnia 3,00 m od krawędzi konstrukcji dachu nad "
@@ -1149,8 +1216,16 @@ ENERGIA = {
                    "uwagi": "PC powietrze–woda monoblok R290 (W-155), moduł hydrauliczny w pom. 0.12; ogrzewanie podłogowe z regulacją pokojową (W-152)"},
     "cwu": {"zasobnik": "Z250", "V_projekt_dm3": 300, "cyrkulacja": False,
             "uwagi": "projektowo zasobnik 300 dm³ (brief) — w bibliotece dane przykładowe Z250; zastąpić DWU wyrobu"},
-    "pv": {"moduly": 15, "P_modul_Wp": 430, "azymut": 180, "nachylenie": 10, "PR": 0.80,
-           "uwagi": "Σ 6,45 kWp ≤ 6,5 kWp (W-194, art. 29 ust. 4 pkt 3 lit. c PB); niskie stelaże na D1, górna krawędź ≤ +9,78 (nie ponad attykę)"},
+    "pv": {"moduly": len(_MOD_D1) + len(_MOD_D4), "P_modul_Wp": 430, "azymut": 180, "nachylenie": 10, "PR": 0.78,
+           "uklad": "EW10", "z_max": r(_ZPV_D1, 3),
+           "pola": [{"dach": "D1", "n": len(_MOD_D1), "moduly": _MOD_D1, "z_max": r(_ZPV_D1, 3), "korona_attyki": _KOR_D1,
+                     "pole": [[r(a_), r(b_)] for a_, b_ in list(_POLE_D1.exterior.coords)[:-1]] if _POLE_D1.geom_type == "Polygon" else None},
+                    {"dach": "D4", "n": len(_MOD_D4), "moduly": _MOD_D4, "z_max": r(_ZPV_D4, 3), "korona_attyki": Z_RAMA_D[1],
+                     "typ": "biosolarny (stelaże na substracie, roślinność pod modułami; kotwienie balastem substratu — bez przebić hydroizolacji)"}],
+           "uwagi": "Σ 15 × 430 Wp = 6,45 kWp ≤ 6,5 kWp (W-194, art. 29 ust. 4 pkt 3 lit. c PB): D1 — 7 modułów (więcej się nie mieści: "
+                    "strefa brzegowa 1,0 m, wyłaz, czerpnia/wyrzutnia, wywiewka), D4 — 8 modułów na dachu biosolarnym; górna krawędź modułów "
+                    "≤ korona attyki przy pokryciu lokalnym (D1: z_max ≤ korona, D4: ≤ +3,85) — W-033, D-15; PR 0,78 = 0,80 − 0,02 na "
+                    "popołudniowe zacienienie pola D4 bryłami A/B [ZAŁ — do symulacji w PT-IE]; trasa DC i przepusty — PT-IE"},
     "garaz": {"stanowiska": 2, "otwory_went_m2": 0.10, "n_went": 1.0},
 }
 

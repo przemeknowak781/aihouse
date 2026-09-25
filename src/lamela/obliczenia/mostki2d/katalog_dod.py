@@ -35,8 +35,17 @@ WIERZCH_WSPORNIKA_ZROWNANY = True
 LACZNIK: tuple | None = None
 
 
-def _lacznik():
-    return LACZNIK if LACZNIK is not None else (G.LACZNIK_PRZYKLAD, 0.08)
+def _lacznik(wsp: dict | None = None):
+    """(materiał, grubość) łącznika: wariant porównawczy (LACZNIK) > dane płyty z modelu (`wsporniki_plyty[].lacznik`:
+    {d, lambda_eq} — runda 2) > dane przykładowe 80 mm."""
+    if LACZNIK is not None:
+        return LACZNIK
+    lc = (wsp or {}).get("lacznik") if isinstance(wsp, dict) else None
+    if isinstance(lc, dict) and lc.get("lambda_eq") and lc.get("d"):
+        return (G.Material("LACZNIK_MODEL", float(lc["lambda_eq"]), f"Łącznik termoizolacyjny {float(lc['d']) * 1000:.0f} mm, "
+                           f"λ_eq = {float(lc['lambda_eq']):.2f} W/(m·K) (model)", "#d1495b",
+                           zrodlo="model: wsporniki_plyty[].lacznik (wymaganie — do potwierdzenia ETA)"), float(lc["d"]))
+    return (G.LACZNIK_PRZYKLAD, 0.08)
 TOL_XY = 0.45      # [m] odległość osi ściany od krawędzi płyty (oś — lico zewn. ≈ 0,30 m)
 TOL_STYK = 0.50    # [m] styk płyta stropu ↔ płyta wspornikowa (między nimi strefa łącznika / ocieplenia, A2 K-1)
 
@@ -166,7 +175,7 @@ def wezel_plyty_wspornikowej(model, e: dict):
     wysieg = round(min(1.5, max(0.5, P.area / max(L_styk, 1e-6))), 2)
     sc_dol = _max(sciany_wzdluz(model, P, k_dol))
     sc_gora = _max(sciany_wzdluz(model, P, k_gora))
-    lac, d_lac = _lacznik()
+    lac, d_lac = _lacznik(wsp)
     kw = dict(t_wsp=float(wsp["grubosc"]), dy_wsp=_dy(wsp, z), mat_wsp=_mat(model, wsp.get("mat")), wysieg=wysieg,
               lacznik=lac, d_lacznika=d_lac, id=str(e["id"]), nazwa=e.get("nazwa"))
     if rodz == "dach":
@@ -279,8 +288,8 @@ def wezly_stropu_zewn(model, e: dict):
             kw = {}
             if ws is not None:
                 kw = dict(t_wsp=float(ws["grubosc"]), dy_wsp=_dy(ws, z),
-                          mat_wsp=_mat(model, ws.get("mat")), wysieg=1.0, lacznik=_lacznik()[0],
-                          d_lacznika=_lacznik()[1])
+                          mat_wsp=_mat(model, ws.get("mat")), wysieg=1.0, lacznik=_lacznik(ws)[0],
+                          d_lacznika=_lacznik(ws)[1])
             else:
                 kw = dict(wysieg=0.0)
             bl = k["belka"]

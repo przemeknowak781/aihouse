@@ -1377,7 +1377,11 @@ def _kontrola_fund(D, F, PF, warstwa: str, nr_ark: str):
                      As_max=0.04 * F.h * 1e6, arkusz=nr_ark)
         for i, (pg, fi, s_x, nd, prov) in enumerate(dz.get((warstwa, kier), []), 1):
             KD.rejestruj(D, F.id, f"dozbrojenie D{i} {'dół' if warstwa == 'dol' else 'góra'} {kier}", "MES-PF", nd, 0.0,
-                         prov, f"{w.opis} + Ø{fi} co {s_x / 10:g}", s=s_x, arkusz=nr_ark)
+                         prov, f"{w.opis} + Ø{fi} co {s_x / 10:g}", s=s_x, arkusz=nr_ark,
+                         uwagi="" if prov + 1e-6 >= nd else
+                         "wymagane zbrojenie niewykonalne w grubości płyty (rozstaw w świetle 8.2(2)) — obciążenie "
+                         "skupione węzła ścian/belek: pogrubienie płyty (stopa) pod węzłem — REKOMENDACJE_MODEL.md "
+                         "[WYMAGA ZMIANY MODELU]")
     if warstwa == "dol":
         for i, pg in enumerate(dz.get("mu", []), 1):
             msk = np.array([pg.buffer(0.05).contains(Point(*c)) for c in W.el_c]) & W.mu_przekr

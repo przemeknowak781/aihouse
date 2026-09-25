@@ -1601,8 +1601,10 @@ def dozbrojenia_fund(D: DaneKonstr, W, siatki: dict) -> dict:
                         break
                 if fi_x is not None:
                     break
-            if fi_x is None:
-                fi_x, s_x = 25, w.s / 2
+            if fi_x is None:                    # brak układu wykonalnego — największe A_s spełniające 8.2(2); kontrola
+                fi_x, s_x = max(((fi, s_c) for s_c in (w.s, w.s / 2) for fi in SREDNICE_PL + (25,)   # wykaże niedobór
+                                 if s_c / 2 - (fi + w.fi) / 2 >= max(fi, 21, 20)),
+                                key=lambda t: pole_preta(t[0]) / t[1], default=(20, w.s))
             prov = w.As_prov + pole_preta(fi_x) * 1000.0 / s_x
             lst.append((pg, fi_x, s_x, need, prov))
         out[key] = lst
