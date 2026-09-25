@@ -1,0 +1,21 @@
+{
+ "opis": "Normy klimatyczne 1991–2020, stacja POZNAŃ (12330): miesięczne sumy opadów [mm]",
+ "zrodlo": "IMGW-PIB, Portal Klimat — Normy klimatyczne 1991–2020 (OPAD_SUMA)",
+ "url": "https://klimat.imgw.pl/pl/climate-normals/OPAD_SUMA",
+ "data_pobrania": "2026-09-25",
+ "miesiace_mm": [
+  37.7,
+  30.7,
+  39.9,
+  28.6,
+  53.8,
+  57.5,
+  84.4,
+  55.9,
+  41.2,
+  35.4,
+  33.6,
+  40.1
+ ],
+ "rok_mm": 538.9
+}
