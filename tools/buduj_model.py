@@ -1083,6 +1083,13 @@ for s in SC:
                                  + (" — pogłębione pod trzpieniami ŻB w osi 3 (przebicie)" if _os3 else "")
                                  + (" — krawędź z izolacją obwodową XPS (PN-EN ISO 13793)" if zew else "")
                                  + (" — uskok płyty dom/garaż" if s["przegroda"] == "SWG" else "") + (" (garaż)" if w_gar else "")})
+# runda konstrukcyjna 1: żebro łączące w osi 3 pod podciągiem B8 (C–M, bez ściany nad nim — pod posadzką) — ciągłe żebro osi 3
+# (ZF9 + ZF18 + ZF10 + ZF11) rozkłada siły trzpieni ŻB B/3, C/3, D/3 na płytę (MES: bez niego momenty płyty przy końcu żebra
+# ZF9 pod C/3 m_y ≈ 390 kNm/m — zbrojenie niewykonalne w h = 0,25 m)
+_zi += 1
+FUND_EL.append({"id": f"ZF{_zi}", "os": [[xC, y3], [xM, y3]], "b": 0.50, "h": 0.45, "spod": r(Z_PLYTA_F - T_PLYTA_F - 0.45),
+                "mat": "ZB_C25", "uwagi": "żebro łączące płyty w osi 3 pod podciągiem B8 (C–M, bez ściany) — ciągłość żebra osi 3 pod "
+                                          "trzpieniami ŻB B/3, C/3, D/3"})
 for sl in SLUPY[:4]:
     x, y = sl["xy"]
     FUND_EL.append({"id": f"SF{sl['id'][2:]}", "os": [[r(x - 0.005), y], [r(x + 0.005), y]], "b": 1.00, "h": 0.45, "spod": r(Z_PLYTA_F - T_PLYTA_F - 0.45),
