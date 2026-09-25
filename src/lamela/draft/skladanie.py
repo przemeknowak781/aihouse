@@ -93,7 +93,7 @@ def ocena_skladania(W: float, H: float, tb_h: float | None = None) -> dict:
     if W <= A4_W + 0.5:
         ov = "dobre"
     elif W <= 2 * A4_W + 0.5:
-        ov = "dobre" if W >= 399.5 else "poprawne"
+        ov = "dobre" if W >= 399.5 else ("poprawne" if min(pasy) >= 60.0 else "słabe")
         if W < 399.5:
             uw.append(f"pas pośredni {pasy[1]:.0f} mm (klasyczne A3: 105 mm)")
     else:

@@ -127,9 +127,20 @@ def ocen_drenaz(dane: DaneBudynku, par: ParametryDrenaz | None = None) -> WynikD
     for s in spadki:
         war.append(Warunek(f"Spadek terenu od budynku, ściana {s['odcinek']} (śr. {f(s['srodek'][0], 1)}; {f(s['srodek'][1], 1)})",
                            s["spadek"], ">=", par.spadek_min, "", f"W-019; brief §9 pkt 6 ({zrodlo})", "W-019", nd=3))
-    cokol = min(dane.rzedna(dane.kondygnacje[0]["id"]) - z for z in tz)
-    war.append(Warunek("Wysokość cokołu (posadzka parteru − teren), minimum na obwodzie", cokol, ">=", par.cokol_min, "m",
+    # brief §9 pkt 4: cokół ≥ 0,30 m ALBO odwodnienie liniowe przy drzwiach bezprogowych — punkty obwodu w strefie drzwi
+    # parteru (parapet ≤ 5 cm, ± 0,30 m) z odwodnieniem liniowym ≤ 1,5 m od drzwi wyłączone z minimum (runda 2, K-1)
+    strefy = _strefy_drzwi_z_odwodnieniem(dane)
+    z0 = dane.rzedna(dane.kondygnacje[0]["id"])
+    poza = [z0 - z for p, z in zip(pts, tz) if not any(g.distance(p) <= 1e-6 for g, _o in strefy)]
+    cokol = min(poza) if poza else min(z0 - z for z in tz)
+    war.append(Warunek("Wysokość cokołu (posadzka parteru − teren), minimum na obwodzie" + (" poza strefami drzwi z odwodnieniem "
+                       "liniowym" if strefy else ""), cokol, ">=", par.cokol_min, "m",
                        "brief §9 pkt 4 (≥ 0,30 m lub odwodnienie liniowe przy drzwiach bezprogowych)", "W-019", nd=2))
+    for g, opis in strefy:
+        zs = [z0 - z for p, z in zip(pts, tz) if g.distance(p) <= 1e-6]
+        war.append(Warunek(f"Strefa drzwi {opis} — próg z odwodnieniem liniowym; cokół w strefie", min(zs) if zs else None, "info",
+                           None, "m", "brief §9 pkt 4; DIN 18533-1 (pomocniczo) — uszczelnienie progu wywinięte ≥ 0,15 m",
+                           "W-019", nd=2))
     zal = ["Odwodnienie powierzchniowe: profilowanie terenu ze spadkiem ≥ 2 % od budynku na pasie ≥ 2,0 m (rzędne projektowane "
            "w dzialka.yaml: teren.punkty_projektowane) — wymagane niezależnie od drenażu.",
            "Opaska żwirowa szer. 0,5 m wokół budynku (żwir płukany 16/32 mm na geowłókninie, obrzeże), spadek od ściany; "
@@ -143,6 +154,34 @@ def ocen_drenaz(dane: DaneBudynku, par: ParametryDrenaz | None = None) -> WynikD
     return WynikDrenaz(dane=dane, par=par, decyzja=dec, klasa=klasa, uzasadnienie=uz, spod_fund=spod, teren_sr=teren_sr,
                        glebokosc_posadowienia=h_pos, odl_ZWG_pod_fund=d_ZWG, spadki=spadki, cokol_min=cokol, warunki=war,
                        zalecenia=zal)
+
+
+def _strefy_drzwi_z_odwodnieniem(dane: DaneBudynku) -> list:
+    """[(strefa — bufor 0,30 m wokół otworu drzwiowego parteru na licu, opis)] dla drzwi zewnętrznych / HS / bramy z parapetem
+    ≤ 5 cm, przed którymi w modelu działki jest odwodnienie liniowe (typ 'liniowe') w odległości ≤ 1,5 m."""
+    from shapely.geometry import LineString
+    m = dane.model
+    dz = getattr(m, "dz", None)
+    if m is None or dz is None:
+        return []
+    ol = []
+    for o in dane.dzialka.get("odwodnienia") or []:
+        if str(o.get("typ")) == "liniowe" and len(o.get("linia") or []) >= 2:
+            ol.append((str(o.get("id")), LineString([tuple(p) for p in dz.do_budynku(np.asarray(o["linia"], float)[:, :2])])))
+    if not ol:
+        return []
+    k0 = dane.kondygnacje[0]["id"]
+    out = []
+    for o in m.otwory(kond=k0):
+        if o.typ not in ("drzwi_zewn", "drzwi_przesuwne_HS", "brama") or float(o.parapet or 0.0) > 0.05:
+            continue
+        es = o.sciana.ext_side      # odcinek otworu na licu zewnętrznym ściany
+        tf = o.sciana.face_t(es) if es is not None else 0.0
+        seg = LineString([tuple(o.sciana.pt(o.s0, tf)), tuple(o.sciana.pt(o.s1, tf))])
+        bl = [i for i, g in ol if g.distance(seg) <= 1.5]
+        if bl:
+            out.append((seg.buffer(0.30), f"{o.id} ({o.symbol or o.typ}; {', '.join(bl)})"))
+    return out
 
 
 def _raport(w: WynikDrenaz) -> Raport:

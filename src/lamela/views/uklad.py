@@ -512,7 +512,8 @@ def pakuj(W: float, H: float, widoki: list[Widok], grupa: Grupa, bloki: list[Blo
             return R
         for v, (x, y) in zip(widoki, grupa.poz):
             R.widoki.append((ox + x, oy + y))
-            R.prostokaty.append(("widok", v.nazwa, (ox + x, oy + y - v.dol, ox + x + v.slot_w, oy + y + v.gora)))
+            for r in v.prostokaty():               # zajętość (pasy treści + tytuł) — bloki mogą wejść w kieszenie
+                R.prostokaty.append(("widok", v.nazwa, (ox + x + r[0], oy + y + r[1], ox + x + r[2], oy + y + r[3])))
     wolne = Wolne((fx0 + PAD_B, fy0 + PAD_B, fx1, fy1 - PAD_B))
     wolne.zajmij(_napompuj(tb, GAP_C, GAP_B, 0, GAP_B))
     if grupa.poz:
@@ -659,3 +660,83 @@ def wypelnienie_ukladu(R: Rozmieszczenie, res: float = 2.0) -> float:
         r0, r1 = int((r[1] - fy0) / res), int(math.ceil((r[3] - fy0) / res))
         occ[max(0, r0):max(0, r1), max(0, c0):max(0, c1)] = True
     return float(occ.sum()) / (nx * ny)
+
+
+def rozmiesc(widoki: list[Widok], bloki: list[Blok], tb_h: float, o: dict | None = None,
+             fmt=None) -> Uklad | None:
+    """Dobór formatu i rozmieszczenie treści arkusza. ``fmt`` — wartość pola ``format`` (domyślnie z ``o``).
+    Zwraca None, gdy nic się nie mieści (wtedy ``sheets.py`` używa układu klasycznego z uwagą)."""
+    o = opcje(o)
+    tryb, jawny = tryb_formatu(o["format"] if fmt is None else fmt)
+    grupy = uklady_widokow(widoki)
+    if tryb == "jawny":
+        nm, W, H = jawny
+        std = nazwa_standardowa(W, H)
+        for g in grupy:
+            r = pakuj(W, H, widoki, g, bloki, tb_h)
+            if r.ok:
+                need = _dociagnij(W, H, widoki, g, bloki, tb_h)
+                r = _pakuj_wysrodkuj(W, H, widoki, g, bloki, tb_h, need) or r
+                k, oc = koszt(W, H, std is not None, o, tb_h)
+                return Uklad(std[0] if std else nm, W, H, std[1] if std else None, std is not None, tryb, r, k, oc,
+                             [], wypelnienie_ukladu(r))
+        return None
+    stdf = formaty_standardowe(float(o["max_wysokosc"]), float(o["max_dlugosc"]))
+    heights = sorted({float(h) for h in o["wysokosci"] if float(h) <= float(o["max_wysokosc"]) + 1e-6}
+                     | {f[2] for f in stdf})
+    cands = []
+    for H in heights:
+        mw = min_szerokosc(H, widoki, grupy, bloki, tb_h, o)
+        if mw is None:
+            continue
+        W_need, g, _r = mw
+        opts = []
+        for nm, Ws, Hs, ori in stdf:
+            if abs(Hs - H) < 0.5 and Ws >= W_need - 1e-6:
+                k, oc = koszt(Ws, Hs, True, o, tb_h)
+                opts.append((k, nm, Ws, ori, True, oc))
+        if tryb == "ekonomiczny" and any(abs(float(h) - H) < 0.5 for h in o["wysokosci"]):
+            for L in dlugosci_kandydaci(W_need, o):
+                std = nazwa_standardowa(L, H)
+                k, oc = koszt(L, H, std is not None, o, tb_h)
+                opts.append((k, std[0] if std else f"{L:.0f}×{H:.0f}", L, std[1] if std else None, std is not None,
+                             oc))
+        opts.sort(key=lambda t: (round(t[0], 6), not t[4], t[2]))
+        for k, nm, L, ori, is_std, oc in opts[:12]:
+            r = _pakuj_wysrodkuj(L, H, widoki, g, bloki, tb_h, W_need)
+            if r is not None:
+                cands.append(Uklad(nm, L, H, ori, is_std, tryb, r, k, oc))
+                break
+    if not cands:
+        return None
+    cands.sort(key=lambda u: (round(u.koszt, 6), not u.standard, u.W * u.H, u.W))
+    best = cands[0]
+    best.kandydaci = [dict(format=u.nazwa, wymiary_mm=[round(u.W), round(u.H)], koszt=round(u.koszt, 4),
+                           pole_m2=round(u.W * u.H / 1e6, 4), skladanie=u.skladanie["ocena"]) for u in cands]
+    best.wypelnienie_szac = wypelnienie_ukladu(best.roz)
+    return best
+
+
+def _dociagnij(W, H, widoki, g, bloki, tb_h) -> float:
+    """Najmniejsza szerokość ≤ W, przy której treść się mieści (do wyśrodkowania w formacie jawnym)."""
+    lo = MARG_L + TB_W + MARG
+    Wn = W
+    while Wn - 20.0 >= lo and pakuj(Wn - 20.0, H, widoki, g, bloki, tb_h).ok:
+        Wn -= 20.0
+    return Wn
+
+
+def sprawdz_nakladanie(R: Rozmieszczenie, tol: float = 0.5) -> list[str]:
+    """Kontrola rozmieszczenia: nakładanie się prostokątów (widoki, bloki, tabliczka) i wyjście poza ramkę."""
+    bledy = []
+    fx0, fy0, fx1, fy1 = rama(R.W, R.H)
+    P = R.prostokaty
+    for i, (k1, n1, a) in enumerate(P):
+        if a[0] < fx0 - tol or a[1] < fy0 - tol or a[2] > fx1 + tol or a[3] > fy1 + tol:
+            bledy.append(f"{k1} „{n1}” poza ramką {tuple(round(v, 1) for v in a)}")
+        for k2, n2, b in P[i + 1:]:
+            if k1 == k2 == "widok" and n1 == n2:
+                continue                           # pasy zajętości jednego widoku
+            if _przec(a, b, tol):
+                bledy.append(f"{k1} „{n1}” nakłada się na {k2} „{n2}”")
+    return bledy

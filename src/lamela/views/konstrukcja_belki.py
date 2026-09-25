@@ -169,8 +169,12 @@ def podpory_belki(m, B: KD.BelkaZ) -> list:
                 out.append((ln.project(c), "sciana"))
         elif cos_ > 0.98 and w.axis_line().distance(ln) < 0.05:     # mur współliniowy pod belką — podparcie ciągłe
             sa, sb = sorted((ln.project(Point(*w.p1)), ln.project(Point(*w.p2))))
-            if sb - sa > 0.3:
-                out.append((sa, "sciana", sb))
+            if sb - sa > 0.3:                   # odcinki muru między otworami (np. filarki fasady pod podciągiem)
+                segs = [(sa, sb)]
+                for o in m.otwory(sciana=w.id):
+                    lo, hi = sorted((ln.project(Point(*w.pt(o.s0, 0.0))), ln.project(Point(*w.pt(o.s1, 0.0)))))
+                    segs = [q for a_, b_ in segs for q in ((a_, min(b_, lo)), (max(a_, hi), b_)) if q[1] - q[0] > 0.05]
+                out += [(a_, "sciana", b_) for a_, b_ in segs]
     for c in m.slupy():
         if abs(float(c["z_do"]) - B.spod) < 0.1 and ln.distance(Point(*c["xy"])) < 0.15:
             out.append((ln.project(Point(*c["xy"])), "slup"))

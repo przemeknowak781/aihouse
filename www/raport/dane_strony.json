@@ -1,5 +1,5 @@
 {
- "wygenerowano": "2026-09-25T06:00:31",
+ "wygenerowano": "2026-09-25T06:04:36",
  "model": {
   "nazwa": "Dom LAMELA",
   "wersja": "1.0",
@@ -18,7 +18,7 @@
   "kondygnacje": "3",
   "garaz_st": "2",
   "garaz_A": "37,42 m²",
-  "EP": "57,8",
+  "EP": "55,6",
   "EP_max": "70",
   "pv_kWp": "6,45",
   "dz_szer": "28,20",
@@ -71,7 +71,7 @@
    "pow": 1600.0
   }
  },
- "EP": 57.76629902837829,
+ "EP": 55.60821218749498,
  "EP_max": 70.0,
  "rendery": {
   "ogrod_169": {
@@ -83,7 +83,7 @@
    },
    "W": 1920,
    "H": 1080,
-   "czas_s": 15.5
+   "czas_s": 21.4
   },
   "ogrod_43": {
    "slonce": {
@@ -94,7 +94,7 @@
    },
    "W": 1600,
    "H": 1200,
-   "czas_s": 11.6
+   "czas_s": 24.6
   },
   "ulica_169": {
    "slonce": {
@@ -105,7 +105,7 @@
    },
    "W": 1920,
    "H": 1080,
-   "czas_s": 16.3
+   "czas_s": 33.5
   },
   "ulica_43": {
    "slonce": {
@@ -116,7 +116,7 @@
    },
    "W": 1600,
    "H": 1200,
-   "czas_s": 14.0
+   "czas_s": 32.0
   },
   "lotniczy_169": {
    "slonce": {
@@ -127,7 +127,7 @@
    },
    "W": 1920,
    "H": 1080,
-   "czas_s": 17.6
+   "czas_s": 31.9
   },
   "lotniczy_43": {
    "slonce": {
@@ -138,7 +138,7 @@
    },
    "W": 1600,
    "H": 1200,
-   "czas_s": 19.6
+   "czas_s": 28.2
   },
   "aksonometria_169": {
    "slonce": {
@@ -149,7 +149,7 @@
    },
    "W": 1920,
    "H": 1080,
-   "czas_s": 15.0
+   "czas_s": 17.8
   },
   "aksonometria_43": {
    "slonce": {
@@ -160,7 +160,7 @@
    },
    "W": 1600,
    "H": 1200,
-   "czas_s": 14.4
+   "czas_s": 10.9
   }
  },
  "kotwice": {
@@ -217,5 +217,5 @@
    }
   }
  },
- "cache_renderow": "build/www/rendery/27fa83e9b672146f"
+ "cache_renderow": "build/www/rendery/4fd8b4088d911cf1"
 }
