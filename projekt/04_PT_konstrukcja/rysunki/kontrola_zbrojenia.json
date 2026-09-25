@@ -1,6 +1,6 @@
 {
- "ok": 272,
- "razem": 307,
+ "ok": 276,
+ "razem": 311,
  "wiersze": [
   {
    "element": "B10",
@@ -3673,6 +3673,78 @@
    "ok": false,
    "uwagi": "Zbrojenie na zginanie (η = 1426%); Rysy: średnica prętów (tabl. 7.2N) (η = 1600000000%)",
    "zapas": -0.713
+  },
+  {
+   "element": "SCH1/bieg 1",
+   "miejsce": "płyta biegu — dołem (główne)",
+   "poz": "4.1",
+   "arkusze": [
+    "PT-BO-21"
+   ],
+   "As_req": 386.2,
+   "As_min": 201.4,
+   "As_prov": 392.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.017
+  },
+  {
+   "element": "SCH1/bieg 2",
+   "miejsce": "płyta biegu — dołem (główne)",
+   "poz": "4.1",
+   "arkusze": [
+    "PT-BO-21"
+   ],
+   "As_req": 386.2,
+   "As_min": 201.4,
+   "As_prov": 392.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.017
+  },
+  {
+   "element": "SCH2/bieg 1",
+   "miejsce": "płyta biegu — dołem (główne)",
+   "poz": "4.2",
+   "arkusze": [
+    "PT-BO-21"
+   ],
+   "As_req": 386.2,
+   "As_min": 201.4,
+   "As_prov": 392.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.017
+  },
+  {
+   "element": "SCH2/bieg 2",
+   "miejsce": "płyta biegu — dołem (główne)",
+   "poz": "4.2",
+   "arkusze": [
+    "PT-BO-21"
+   ],
+   "As_req": 386.2,
+   "As_min": 201.4,
+   "As_prov": 392.7,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø10 co 20",
+   "s": 200.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.017
   },
   {
    "element": "SF1",

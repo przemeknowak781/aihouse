@@ -2,7 +2,7 @@
 
 Plik generowany automatycznie przez `lamela.views.konstrukcja` (moduł `konstrukcja_dane.rejestruj`) przy rysowaniu arkuszy. A_s,req, A_s,min — z obiektów wyników biblioteki `lamela.obliczenia.konstrukcja` (pozycje obliczeń statycznych); A_s,prov — zbrojenie NARYSOWANE na arkuszach (φ/s lub n·φ). Warunki: PN-EN 1992-1-1 6.1, 9.2.1.1(1) (9.1N) + NA, 9.2.1.1(3) (A_s,max = 0,04·A_c), 9.3.1.1(3) (s_max).
 
-**Wynik: 272/307 pozycji spełnia warunek A_s,prov ≥ A_s,req** (35 niespełnionych — kolumna „Uwagi”).
+**Wynik: 276/311 pozycji spełnia warunek A_s,prov ≥ A_s,req** (35 niespełnionych — kolumna „Uwagi”).
 
 | Element | Miejsce | Poz. obl. | A_s,req | A_s,min | A_s,prov | Jedn. | Zbrojenie | Zapas | Wynik | Arkusze | Uwagi |
 |---|---|---|---:|---:|---:|---|---|---:|---|---|---|
@@ -210,6 +210,10 @@ Plik generowany automatycznie przez `lamela.views.konstrukcja` (moduł `konstruk
 | PL-2 | pole P1 — dół x | 3.1 | 38241 | 392 | 2513 | mm²/m | Ø16 co 8 | -93% | ✗ | PT-BO-10 | Zbrojenie na zginanie (η = 1426%); Rysy: średnica prętów (tabl. 7.2N) (η = 1600000000%) |
 | PL-2 | pole P1 — dół y | 3.1 | 9501 | 377 | 2513 | mm²/m | Ø16 co 8 | -74% | ✗ | PT-BO-10 | Zbrojenie na zginanie (η = 1426%); Rysy: średnica prętów (tabl. 7.2N) (η = 1600000000%) |
 | PL-2 | wspornik — góra y | 3.1 | 8770 | 377 | 2513 | mm²/m | Ø16 co 8 | -71% | ✗ | PT-BO-11 | Zbrojenie na zginanie (η = 1426%); Rysy: średnica prętów (tabl. 7.2N) (η = 1600000000%) |
+| SCH1/bieg 1 | płyta biegu — dołem (główne) | 4.1 | 386 | 201 | 393 | mm²/m | Ø10 co 20 | +2% | ✓ | PT-BO-21 |  |
+| SCH1/bieg 2 | płyta biegu — dołem (główne) | 4.1 | 386 | 201 | 393 | mm²/m | Ø10 co 20 | +2% | ✓ | PT-BO-21 |  |
+| SCH2/bieg 1 | płyta biegu — dołem (główne) | 4.2 | 386 | 201 | 393 | mm²/m | Ø10 co 20 | +2% | ✓ | PT-BO-21 |  |
+| SCH2/bieg 2 | płyta biegu — dołem (główne) | 4.2 | 386 | 201 | 393 | mm²/m | Ø10 co 20 | +2% | ✓ | PT-BO-21 |  |
 | SF1 | pogrubienie — siatka dolna (MES) | 10.18 | 8118 | 538 | 539 | mm²/m | Ø12 co 21 | -93% | ✗ | PT-BO-03 | MES: A_s,req = 8119 mm²/m — nie do rozmieszczenia (φ ≤ 20, s ≥ 7 cm); przekrój pogrubienia niewystarczający [WYMAGA ZMIANY MODELU] |
 | SF2 | pogrubienie — siatka dolna (MES) | 10.19 | 7155 | 538 | 539 | mm²/m | Ø12 co 21 | -92% | ✗ | PT-BO-03 | MES: A_s,req = 7155 mm²/m — nie do rozmieszczenia (φ ≤ 20, s ≥ 7 cm); przekrój pogrubienia niewystarczający [WYMAGA ZMIANY MODELU] |
 | SF3 | pogrubienie — siatka dolna (MES) | 10.20 | 4069 | 538 | 4189 | mm²/m | Ø20 co 7.5 | +3% | ✓ | PT-BO-03 |  |
