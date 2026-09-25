@@ -520,6 +520,11 @@ class PlanBuilder:
                     arrowhead(vp, last[-1], last[-1] - last[-2], 2.4, 12, True, "A-SCHODY")
                 self._stair_label.append((sch, path, starting))
             self.placer.add_prims(vp.prims[n0:], w_text=1.0, w_line=0.6)
+            foot = unary_union([st["poly"] for st in steps] + [pg for pg, _ in landings])
+            vis_foot = foot.difference(occb) if not starting else foot
+            if not vis_foot.is_empty:
+                self.placer.add(vis_foot, "area", 0.6)
+                self.stair_areas.append(vis_foot)
 
     @staticmethod
     def _landing_between(landings, e, s):
@@ -764,10 +769,10 @@ class PlanBuilder:
         ob = self.outline.bounds if not self.outline.is_empty else ext
         axb = draw_axes(vp, self.ctx, ext, offs, ob)
         self.placer.add(box(*axb).difference(box(*ext).buffer(6 * k)), "line", 0.1)
+        # stolarka (położenie ograniczone do osi otworu) — przed opisami pomieszczeń
+        self.opening_tags()
         # pomieszczenia
         self.room_tags()
-        # stolarka
-        self.opening_tags()
         # schody — opis n × h × s
         self.stair_labels()
         # rzędne (spoczniki, tarasy)
@@ -879,7 +884,7 @@ class PlanBuilder:
         rooms = [r for r in self.rooms if r.polygon.area > 1.2]
         if not rooms or self.struct.is_empty:
             return
-        S_ = self.struct.difference(self.voids.buffer(1e-4)) if not self.voids.is_empty else self.struct
+        S_ = self.struct
         X0, Y0, X1, Y1 = self.outline.bounds if not self.outline.is_empty else self.cut_region.bounds
         for axis in ("h", "v"):
             todo = {r.id: r for r in rooms}
@@ -987,6 +992,9 @@ class PlanBuilder:
         pen = 0.0
         if not self.voids.is_empty and ln.intersects(self.voids):
             pen += 4.0
+        for sa in self.stair_areas:
+            if ln.intersects(sa):
+                pen += 3.0
         score = len(covered) * 4.0 - cost * 0.35 - pen
         return dict(score=score, c=c, chains=out_ch, covered=covered)
 
@@ -1112,6 +1120,7 @@ def draw_plan(vp, ctx: ViewContext, kond: str, opts: dict | None = None) -> Plan
     b = PlanBuilder(vp, ctx, kond, dict(opts or {}))
     b._later_levels = []
     b._stair_label = []
+    b.stair_areas = []
     return b.run()
 
 

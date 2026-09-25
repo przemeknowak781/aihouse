@@ -304,14 +304,15 @@ def label_point(poly, tol: float = 0.02) -> np.ndarray:
 
 
 # ------------------------------------------------------------------------------------------------ kolizje adnotacji
-def prim_shapes(prims, k: float, line_buf_mm: float = 0.35):
+def prim_shapes(prims, k: float, line_buf_mm: float = 0.35, text_pad_mm: float = 0.0):
     """Obrysy prymitywów: (napisy [Polygon], linie [Polygon — pas wokół linii], wypełnienia [Polygon])."""
     texts, lines, fills = [], [], []
     b = line_buf_mm * k
     for p in prims:
         if isinstance(p, PText):
             _it, bx = text_items(p, k)
-            texts.append(Polygon(bx))
+            g = Polygon(bx)
+            texts.append(g.buffer(text_pad_mm * k, join_style=2) if text_pad_mm else g)
         elif isinstance(p, PLine):
             pts = p.pts if not p.closed else np.vstack([p.pts, p.pts[:1]])
             if len(pts) >= 2:
@@ -400,7 +401,7 @@ class Placer:
     def trial_cost(self, vp: Viewport, draw_fn, cand, bounds=None) -> tuple[float, list]:
         tmp = Viewport(vp.scale)
         draw_fn(tmp, cand)
-        t, l, f = prim_shapes(tmp.prims, vp.k, line_buf_mm=0.2)
+        t, l, f = prim_shapes(tmp.prims, vp.k, line_buf_mm=0.2, text_pad_mm=0.6)
         c = self.cost(t, l, f)
         if bounds is not None:
             B = bounds
