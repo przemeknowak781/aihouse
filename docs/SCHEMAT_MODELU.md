@@ -188,3 +188,14 @@ Pełna lista: docstring `src/lamela/obliczenia/energia/__init__.py`. Braki są r
   `wentylacja {centrala, czerpnia: [x,y,z], wyrzutnia: [x,y,z], wywiewki_kanalizacyjne: [[x,y,z]]}`, `ogrzewanie {zrodlo: moce A−15/A−7/A2,
   SCOP_35, COP_cwu}`, `cwu {zasobnik, cyrkulacja}`, `pv {moduly, P_modul_Wp (Σ ≤ 6,5 kWp), azymut, nachylenie}`, `garaz {stanowiska,
   otwory_went_m2 ≥ 0,08}`, `capex_A`, `capex_B` (analiza alternatyw).
+
+## 8. Dane wymagane przez obliczenia instalacji (`lamela.obliczenia.instalacje`, lista: `instalacje.DANE_WYMAGANE`)
+* **model/wyposazenie.yaml:** przybory sanitarne z typem z katalogu `przybory.KATALOG`: `bidet, pisuar, pralka, prysznic, suszarka,
+  umywalka, umywalka_blat, wanna, wc, wpust_podlogowy, wpust_podlogowy_100, zawor_czerpalny, zawor_ogrodowy, zlew, zlewik, zmywarka`
+  — z punktem na licu ściany i obrotem; urządzenia z mocą (płyta, piekarnik, zmywarka, pralka, suszarka, lodówka…).
+* **model/instalacje.yaml (nowy):** `osoby`; `lokalizacje` (RG, wodomierz, zasobnik c.w.u., rozdzielacze o.p. per kondygnacja, ZKP,
+  studzienka rewizyjna, czerpnia, jednostka zewn. PC — ≥ 6,0 m od granicy, w osłonie lamelowej); `piony` (trasy); `wyroby` (karty
+  przykładowe: PC — moce/COP/SCOP/L_WA, PV — moduł/falownik, wpusty, k_v, Δp wodomierza); opcjonalnie `przybory_dodatkowe`.
+* **dachy[]:** `wpusty`, `przelewy_awaryjne`, `rury_spustowe` (odbiornik: zbiornik/niecka), warstwy dachu zielonego.
+* **dzialka.yaml:** rzędne projektowane terenu, ZWG, rodzaj gruntu, położenie zbiornika i niecki; **otwory:** flaga `bezprogowe: true`
+  dla HS, brama garażowa.

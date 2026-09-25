@@ -1399,7 +1399,7 @@ class AnalizaKonstrukcji:
                 zg.krok("Przyjęto dołem", f"{n}φ{fi}" + (f" ({rows_} warstwy)" if rows_ > 1 else ""), "", As / 100, "cm²", nd=2)
                 zg.warunek("Zbrojenie dolne", max(zg.As_req, zg.As_min), As, "mm²", "6.1", nd=0, symbol_E="A_s,req", symbol_R="A_s,prov")
                 poz.wyniki.append(zg)
-                if MEd_m < -1e-3:
+                if MEd_m < -1.0:
                     zt = zelbet.zginanie_prostokat(abs(MEd_m), bw, h_tot, d, beton, self.stal, nazwa=f"{bid} — zginanie nad podporą")
                     nt, fit, _, Ast = zelbet.dobierz_belka(max(zt.As_req, zt.As_min), bw, c, 8)
                     zt.warunek("Zbrojenie górne", max(zt.As_req, zt.As_min), Ast, "mm²", "6.1", nd=0, symbol_E="A_s,req", symbol_R="A_s,prov")
@@ -1561,7 +1561,7 @@ class AnalizaKonstrukcji:
         wk = max(abs(self.wiatr_sc.w_max_parcie), abs(self.wiatr_sc.w_max_ssanie)) if (zewn and self.wiatr_sc) else 0.0
         h = pr["h"]
         # mimośród stropu: zewn. — jednostronnie t/6; wewn. — różnica
-        best = None
+        best, best_k = None, -1.0
         segs = self._segmenty(w, pr)
         for kb in kombs:
             ctop = top.kombinacja({c: a for c, a in kb.wsp.items() if c != "W"})
@@ -1587,11 +1587,13 @@ class AnalizaKonstrukcji:
                     Nss = float(np.trapezoid(np.where(msk, ctop, 0), dol.s))
                     r = murm.filarek(max(Ng, 1e-3), max(Nd, 1e-3), b, t, h, mur, M_g=Nss * t / 6 * (1 if zewn else 0.3), p=p,
                                      nazwa=f"{w.id} — filarek {f(sg[0])}–{f(sg[1])} m (b = {f(b)} m), {kb.nazwa}")
-                if best is None or r.wykorzystanie > best.wykorzystanie:
-                    best = r
+                kl = max((wv.eta for wv in r.warunki if "Smukłość" not in wv.opis), default=0.0)
+                if best is None or kl > best_k:
+                    best, best_k = r, kl
         if best is not None:
             poz.wyniki.append(best)
-            poz.opis.append(f"Sprawdzono {len(segs)} odcinków (filarki między otworami i pasma ściany) dla {len(kombs)} kombinacji; "
+            poz.opis.append(f"Sprawdzono {len(segs)} odcinków (filarki ≤ 2 m między otworami — siła całkowita; dłuższe pasma — maks. "
+                            f"średnia krocząca 1 m) dla {len(kombs)} kombinacji; "
                             "poniżej przypadek miarodajny. Mimośród reakcji stropu e = t/6 (zewn.) / 0,3·t/6 (wewn., niesymetria) [UPR]; "
                             "wiatr jako moment w połowie wysokości w·h²/8.")
         if zewn and wk:
@@ -1630,10 +1632,10 @@ class AnalizaKonstrukcji:
         prev = 0.0
         for o in otw:
             if o.s0 - prev > 0.05:
-                out.append((prev, o.s0, "filarek"))
+                out.append((prev, o.s0, "filarek" if o.s0 - prev <= 2.0 else "sciana"))
             prev = max(prev, o.s1)
         if w.L - prev > 0.05:
-            out.append((prev, w.L, "filarek"))
+            out.append((prev, w.L, "filarek" if w.L - prev <= 2.0 else "sciana"))
         return out
 
     # ============================================================================================

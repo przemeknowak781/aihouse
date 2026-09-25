@@ -182,6 +182,8 @@ def zginanie_teowy(M_Ed: float, b_eff: float, b_w: float, h: float, h_f: float, 
     if w.xi_eff * w.d <= h_f * 1000 + 1e-9:
         w.krok("Strefa ściskana w półce", "x_eff = ξ_eff·d ≤ h_f", f"{f(w.xi_eff * w.d, 0)} ≤ {f(h_f * 1000, 0)}", "przekrój pozornie teowy")
         w.As_min = max(0.26 * beton.f_ctm / stal.f_yk * b_w * 1000 * w.d, 0.0013 * b_w * 1000 * w.d)
+        w.krok("Zbrojenie minimalne (b_t = b_w — strefa rozciągana w środniku)", "A_s,min = max(0,26·f_ctm/f_yk·b_w·d; 0,0013·b_w·d)",
+               "", w.As_min, "mm²", nd=0, zrodlo="(9.1N)")
         return w
     fcd = beton.f_cd
     Mf = (b_eff - b_w) * 1000 * h_f * 1000 * fcd * (w.d - h_f * 500) / 1e6

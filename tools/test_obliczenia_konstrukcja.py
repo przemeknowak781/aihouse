@@ -330,8 +330,8 @@ def porownanie_reczne(an) -> list[dict]:
     Mp = -kx * qd * lx ** 2 / 8
     out.append({"poz": "D1 / P2", "wielkosc": "M_x,przęsło [kNm/m]", "reczne": Mx, "biblioteka_MES": P2["Mx"],
                 "biblioteka_tabl": P2["Mx_tabl"],
-                "opis": f"q_d = max(1,35·{gk:.3f} + 1,5·0,5·{sk:.2f}; 0,85·1,35·{gk:.3f} + 1,5·{sk:.2f}) = {qd:.3f} kN/m²; "
-                        f"k_x = c_y·l_y⁴/(c_x·l_x⁴ + c_y·l_y⁴) = {kx:.4f}; M_x = 9/128·k_x·q_d·l_x² (pasmo bez skręcania — "
+                "opis": f"q_d = max(1,35·{f(gk, 3)} + 1,5·0,5·{f(sk)}; 0,85·1,35·{f(gk, 3)} + 1,5·{f(sk)}) = {f(qd, 3)} kN/m²; "
+                        f"k_x = c_y·l_y⁴/(c_x·l_x⁴ + c_y·l_y⁴) = {f(kx, 4)}; M_x = 9/128·k_x·q_d·l_x² (pasmo bez skręcania — "
                         "górne oszacowanie)"})
     out.append({"poz": "D1 / P2", "wielkosc": "M_x,podpora [kNm/m]", "reczne": Mp, "biblioteka_MES": P2["Mgx"],
                 "biblioteka_tabl": None, "opis": "M = −k_x·q_d·l_x²/8 (pasmo utwierdzone–przegubowe)"})
@@ -352,8 +352,8 @@ def porownanie_reczne(an) -> list[dict]:
     Mb = qd_b * Ls ** 2 / 8
     M_lib = b1.wyniki[0].kroki[0].wynik
     out.append({"poz": "B1", "wielkosc": "M_Ed,przęsło [kNm]", "reczne": Mb, "biblioteka_MES": M_lib, "biblioteka_tabl": None,
-                "opis": f"q_G = ΣR_G/L + b·h·25 = {RG:.2f}/{L_line:.2f} + {bw * hb * 25:.2f} = {qG:.2f}; q_Q = {qQ:.2f}; q_S = {qS:.2f} "
-                        f"kN/m; q_d = {qd_b:.2f} kN/m; M = q_d·l²/8, l = {Ls} m (rozkład równomierny zamiast rzeczywistego)"})
+                "opis": f"q_G = ΣR_G/L + b·h·25 = {f(RG)}/{f(L_line)} + {f(bw * hb * 25)} = {f(qG)}; q_Q = {f(qQ)}; q_S = {f(qS)} "
+                        f"kN/m; q_d = {f(qd_b)} kN/m; M = q_d·l²/8, l = {f(Ls)} m (rozkład równomierny zamiast rzeczywistego)"})
     # A_s (przekrój teowy, strefa ściskana w półce): x = d − √(d² − 2M/(b_eff·f_cd))
     fcd = 30 / 1.4 * 1000
     d = 0.5 - 0.037 - 0.008
@@ -362,7 +362,7 @@ def porownanie_reczne(an) -> list[dict]:
     As = M_lib / (435e3 * (d - x / 2)) * 1e6
     As_lib = next(w for w in b1.wyniki if "przęśle" in w.nazwa).As_req
     out.append({"poz": "B1", "wielkosc": "A_s,req [mm²]", "reczne": As, "biblioteka_MES": As_lib, "biblioteka_tabl": None,
-                "opis": f"b_eff = {beff:.2f} m, d = {d:.3f} m, x = d − √(d² − 2M/(b_eff·f_cd)) = {x * 1000:.1f} mm, "
+                "opis": f"b_eff = {f(beff)} m, d = {f(d, 3)} m, x = d − √(d² − 2M/(b_eff·f_cd)) = {f(x * 1000, 1)} mm, "
                         "A_s = M/(f_yd·(d − x/2))"})
     # --- (3) ława L1 — nośność podłoża wzorem zał. D (warunki z odpływem, pasmo) i warunek ławy niezbrojonej
     l1 = next(pz for pz in an.pos_fund if pz.ident == "L1")
@@ -378,10 +378,10 @@ def porownanie_reczne(an) -> list[dict]:
     Rd = qR * B / 1.4
     lib = next(w for w in l1.wyniki[0].warunki if "Nośność podłoża" in w.opis)
     out.append({"poz": "L1", "wielkosc": "V_d [kN/m]", "reczne": Vd, "biblioteka_MES": lib.E, "biblioteka_tabl": None,
-                "opis": f"G = {Gk:.2f} + ława {B * h * 25:.2f} + odsadzki {(B - 0.18) * (D - h) * 18:.2f}; Q ≈ {Qk:.2f} kN/m "
+                "opis": f"G = {f(Gk)} + ława {f(B * h * 25)} + odsadzki {f((B - 0.18) * (D - h) * 18)}; Q ≈ {f(Qk)} kN/m "
                         "(Q — suma obciążeń zmiennych, ψ₀ = 0,7 dla wszystkich — bezpiecznie)"})
     out.append({"poz": "L1", "wielkosc": "R_d [kN/m]", "reczne": Rd, "biblioteka_MES": lib.R, "biblioteka_tabl": None,
-                "opis": f"N_q = {Nq:.3f}, N_γ = {Ng:.3f}; R_k/A' = γD·N_q + ½γB'N_γ = {qR:.1f} kPa; R_d = R_k·B/1,4"})
+                "opis": f"N_q = {f(Nq, 3)}, N_γ = {f(Ng, 3)}; R_k/A' = γD·N_q + ½γB'N_γ = {f(qR, 1)} kPa; R_d = R_k·B/1,4"})
     sig = Vd / B / 1000
     ok_pl = 0.85 * h / ((B - 0.18) / 2) >= math.sqrt(3 * sig / (0.8 * 1.8 / 1.4))
     out.append({"poz": "L1", "wielkosc": "ława niezbrojona (12.13)", "reczne": float(ok_pl), "biblioteka_MES": float(
