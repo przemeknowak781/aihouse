@@ -38,7 +38,7 @@ FIXED: dict[str, PBR] = {
     "PARAPET_WEWN": PBR("#f1f0ec", 0.45),
     "SCHODY": PBR("#c7a276", 0.55, texture="parkiet", uv=1.0),
     "TEREN_TRAWA": PBR("#61803d", 0.96, texture="trawa", uv=4.0),
-    "TEREN_POZA": PBR("#6f8544", 0.97, texture="trawa", uv=6.0),
+    "TEREN_POZA": PBR("#66823f", 0.97, texture="trawa", uv=5.0),
     "NAW_KOSTKA": PBR("#6c6e71", 0.85, texture="kostka", uv=1.0),
     "NAW_KOSTKA_JASNA": PBR("#a9a59d", 0.85, texture="kostka", uv=1.0),
     "NAW_PLYTY": PBR("#bdb9b0", 0.8, texture="plyty", uv=1.2),

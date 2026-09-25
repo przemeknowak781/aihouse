@@ -342,8 +342,16 @@ function setView(v) {
   const hf = Math.atan(Math.tan(vf) * camera.aspect);
   const fitD = R / Math.tan(Math.min(vf, hf)) * 1.05;
   let pos, tgt;
-  if (v === 'ogrod') { pos = [cx, yS - fitD * 0.9, zb + 1.9]; tgt = [cx, cy, zb + s.y * 0.38]; }
-  else if (v === 'ulica') { pos = [cx, yN + fitD * 0.9, zb + 1.9]; tgt = [cx, cy, zb + s.y * 0.38]; }
+  const dz = meta.dzialka || {};
+  const zt = dz.teren_z_budynek ?? zb + 0.2;
+  const eyeD = s.x / 2 / Math.tan(hf) * 1.15;
+  if (v === 'ogrod') {
+    pos = [cx, yS - eyeD, zt + 1.7]; tgt = [cx, cy, zt + s.y * 0.40];
+  } else if (v === 'ulica') {
+    let y = yN + eyeD;
+    if (dz.jezdnia) y = Math.min(y, Math.max(...dz.jezdnia.map((q) => q[1])) - 0.8);
+    pos = [cx, y, zt + 1.7]; tgt = [cx, cy, zt + s.y * 0.40];
+  }
   else if (v === 'gora') { pos = [cx, cy - 0.01, zb + fitD * 1.8]; tgt = [cx, cy, zb]; }
   else { const a = THREE.MathUtils.degToRad(140), e = THREE.MathUtils.degToRad(28);
     pos = [cx + Math.sin(a) * Math.cos(e) * fitD, cy + Math.cos(a) * Math.cos(e) * fitD, zb + s.y / 2 + Math.sin(e) * fitD];
@@ -422,10 +430,25 @@ if (window.matchMedia('(max-width: 700px)').matches) setCollapsed(true);
 function resize() {
   const w = window.innerWidth, h = window.innerHeight;
   renderer.setSize(w, h, false);
-  camera.aspect = w / h;
+  // przesunięcie rzutu: środek kadru w części okna niezasłoniętej panelem
+  const r = $('panel').getBoundingClientRect();
+  const mobile = window.matchMedia('(max-width: 700px)').matches;
+  if (!mobile && r.right < w * 0.5) {
+    const pw = r.right;
+    camera.aspect = (w + pw) / h;
+    camera.setViewOffset(w + pw, h, 0, 0, w, h);
+  } else if (mobile) {
+    const ph = Math.max(0, h - r.top);
+    camera.aspect = w / (h + ph);
+    camera.setViewOffset(w, h + ph, 0, ph, w, h);
+  } else {
+    camera.aspect = w / h;
+    camera.clearViewOffset();
+  }
   camera.updateProjectionMatrix();
 }
 window.addEventListener('resize', resize);
+new ResizeObserver(resize).observe($('panel'));
 resize();
 renderer.setAnimationLoop(() => {
   controls.update();
