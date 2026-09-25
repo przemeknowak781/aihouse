@@ -478,11 +478,14 @@ class Dokument:
         return self
 
     def oswiadczenie_inwestora_102a(self, *, organ: str | None = None, zakres: str | None = None,
-                                    postepowanie: str | None = None, w_spisie: bool = True):
-        """WZÓR oświadczenia Inwestora o stosowaniu WT w brzmieniu do 19.09.2026 (art. 102a ust. 1 PB)."""
+                                    postepowanie: str | None = None, w_spisie: bool = True,
+                                    zalacznik: bool | str = False):
+        """WZÓR oświadczenia Inwestora o stosowaniu WT w brzmieniu do 19.09.2026 (art. 102a ust. 1 PB).
+        ``zalacznik`` — numerowany załącznik elementu ZL (tytuł: True = domyślny lub tekst)."""
         from .bloki import kontekst_oswiadczenia_102a
-        o = kontekst_oswiadczenia_102a(self, organ=organ, zakres=zakres, postepowanie=postepowanie)
-        self._osw_w_spisie(o["id"], "Oświadczenie Inwestora z art. 102a ust. 1 PB — wzór", w_spisie)
+        o = kontekst_oswiadczenia_102a(self, organ=organ, zakres=zakres, postepowanie=postepowanie, zalacznik=zalacznik)
+        if not zalacznik:
+            self._osw_w_spisie(o["id"], "Oświadczenie Inwestora z art. 102a ust. 1 PB — wzór", w_spisie)
         self._bloki.append(("oswiadczenie_102a", o))
         return self
 

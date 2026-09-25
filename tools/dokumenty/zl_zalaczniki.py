@@ -11,6 +11,16 @@ def L(v, nd=2):
     return liczba(v, nd)
 
 
+def _siec(s) -> str:
+    """Opis sieci z modelu bez komentarza po myślniku („gazociąg PE 63 — NIE wykorzystywany …” → „gazociąg PE 63”)."""
+    return str(s.get("opis", "—")).split(" — ")[0]
+
+
+def _bez_naw(t: str) -> str:
+    import re
+    return re.sub(r"\s*\([^)]*\)", "", str(t)).strip()
+
+
 def bioz_tresc(z, d) -> tuple[dict, list]:
     b, dz = z.bud, z.dz
     dr = z.droga()
@@ -41,17 +51,15 @@ bez podpiwniczenia, garaż w bryle parteru) — wraz z zagospodarowaniem działk
 1. roboty przygotowawcze: geodezyjne wytyczenie obiektu, ogrodzenie placu budowy, zaplecze, tablica informacyjna, zdjęcie warstwy ziemi urodzajnej (ok. {L(geo.get('humus', 0), 1)} m);
 2. przyłącza wodociągowe, kanalizacyjne, elektroenergetyczne i telekomunikacyjne — wykopy wąskoprzestrzenne na działce i w pasie drogi {dr['symbol']} (włączenie do kanału sanitarnego na głębokości ok. {L(gl_k, 1)} m p.p.t. {ZAL});
 3. stan zerowy: wykop pod płytę fundamentową (głębokość ok. {L(gl_f, 1)} m od terenu), płyta fundamentowa żelbetowa na izolacji termicznej, izolacje przeciwwilgociowe, uziom (PT-2 BO, PT-4 IE);
-4. stan surowy: ściany, stropy i {len(wsp)} płyt wysuniętych/wsporników żelbetowych monolitycznych (deskowania i podparcia tymczasowe), słupy i rama stalowa przeszklenia, attyki;
+4. stan surowy: ściany, stropy oraz płyty wysunięte, okapy i wsporniki żelbetowe monolityczne ({len(wsp)} elementów) (deskowania i podparcia tymczasowe), słupy i rama stalowa przeszklenia, attyki;
 5. stropodachy ({len(dachy)} pola, w tym dach zielony garażu), instalacja fotowoltaiczna ({pv.get('moduly', '—')} modułów);
 6. stolarka zewnętrzna (w tym przeszklenia wielkoformatowe), elewacje, osłony z lamel ({len(lam)} pól) — z rusztowań;
 7. instalacje wewnętrzne i roboty wykończeniowe;
 8. zagospodarowanie terenu: zbiornik retencyjny {L(zb.get('V', 0), 1)} m³, niecka chłonna, separator, utwardzenia, ogrodzenie z bramą i furtką, zieleń."""
     t[2] = (f"Działka nr ewid. {d['dzialka']['nr']} jest niezabudowana — **brak istniejących obiektów budowlanych** na działce "
-            f"{DANE_PRZYKLADOWE}. W pasie drogi {dr['symbol']} znajdują się sieci: " + "; ".join(s["opis"] for s in ist) + ". "
-            + " ".join(f"Działka {s['nr']}: {s['opis']} — {L(s['odl_granicy'], 1)} m od granicy." for s in sas))
-    t[3] = f"""Elementy zagospodarowania mogące stwarzać zagrożenie bezpieczeństwa i zdrowia ludzi:
-
-* uzbrojenie terenu w pasie drogowym {dr['symbol']} ({', '.join(s['opis'].split(' (')[0].split(' —')[0] for s in ist)}) w rejonie wykopów pod przyłącza;
+            f"{DANE_PRZYKLADOWE}. W pasie drogi {dr['symbol']} znajdują się sieci: " + "; ".join(_siec(s) for s in ist) + ". "
+            + " ".join(f"Działka {s['nr']}: {_bez_naw(s['opis'])} — {L(s['odl_granicy'], 1)} m od granicy." for s in sas))
+    t[3] = f"""* uzbrojenie terenu w pasie drogowym {dr['symbol']} ({', '.join(_siec(s).split(' (')[0].split(',')[0] for s in ist)}) w rejonie wykopów pod przyłącza;
 * ruch pojazdów na drodze {dr['symbol']} przy wjeździe na plac budowy i przy robotach w pasie drogowym;
 * wykopy otwarte (fundament, przyłącza, zbiornik retencyjny) oraz składowiska materiałów;
 * drzewa istniejące zachowywane ({len(drz)} szt.) — ryzyko uszkodzenia systemu korzeniowego i koron przez sprzęt."""
@@ -89,9 +97,7 @@ brygady; pracownicy potwierdzają go podpisem. Zakres instruktażu określa plan
 
 def tresc_6(z) -> str:
     dr = z.droga()
-    return f"""Środki techniczne i organizacyjne zapobiegające niebezpieczeństwom:
-
-* ogrodzenie i oznakowanie placu budowy; wyznaczenie i wygrodzenie **stref niebezpiecznych** przy obiekcie, pod rusztowaniami i w zasięgu pracy żurawia {NZW};
+    return f"""* ogrodzenie i oznakowanie placu budowy; wyznaczenie i wygrodzenie **stref niebezpiecznych** przy obiekcie, pod rusztowaniami i w zasięgu pracy żurawia {NZW};
 * **ochrony zbiorowe na krawędziach** stropów, płyt wysuniętych, otworów i biegów schodowych (balustrady z poręczą i krawężnikiem), rusztowania systemowe z pomostami, siatki ochronne; sprzęt chroniący przed upadkiem z wysokości tam, gdzie ochrony zbiorowe nie są możliwe;
 * **zabezpieczenie wykopów**: skarpy o bezpiecznym nachyleniu albo obudowa ścian wykopów pionowych; zejścia do wykopów; składowanie urobku poza klinem odłamu;
 * lokalizacja sieci podziemnych przed robotami ziemnymi, przekopy kontrolne ręcznie w pobliżu gazociągu i kabli; roboty w pasie drogowym wg zezwolenia zarządcy drogi i zatwierdzonej organizacji ruchu (u.d.p. art. 29 ust. 3 pkt 1 lit. b);
@@ -117,11 +123,10 @@ def buduj_zl(zp, z, d):
             "oswiadczenie_sieci_cieplowniczej",
             zalacznik="Oświadczenie projektanta dotyczące sieci ciepłowniczej (art. 33 ust. 2 pkt 10 PB)",
             uzasadnienie=("Stan uzbrojenia terenu wg modelu (dzialka.yaml): w drodze " + dr["symbol"] + " — "
-                          + "; ".join(s["opis"] for s in (z.dz.get("uzbrojenie") or {}).get("istniejace") or [])
+                          + "; ".join(_siec(s) for s in (z.dz.get("uzbrojenie") or {}).get("istniejace") or [])
                           + "; sieci ciepłowniczej brak " + DANE_PRZYKLADOWE + ". "
                           + do_uzup("potwierdzenie braku sieci ciepłowniczej: mapa do celów projektowych lub informacja "
                                     "przedsiębiorstwa energetycznego") + "."))
-    zp.zalacznik("Oświadczenie Inwestora o stosowaniu przepisów techniczno-budowlanych w brzmieniu obowiązującym do "
-                 "19.09.2026 r. (art. 102a ust. 1 PB) — wzór", nowa_strona=True)
     zp.blok("Wzór oświadczenia Inwestora (art. 102a ust. 1, 2, 4 PB; Dz.U. 2026 poz. 1161)", "oswiadczenie_inwestora_102a",
-            w_spisie=False)
+            zalacznik="Oświadczenie Inwestora o stosowaniu przepisów techniczno-budowlanych w brzmieniu obowiązującym "
+                      "do 19.09.2026 r. (art. 102a ust. 1 PB) — wzór")

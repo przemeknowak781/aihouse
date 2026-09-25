@@ -226,6 +226,7 @@ Postać papierowa: podpis własnoręczny w polu.</p>{% endif %}
 {# ================================================================================ oświadczenie Inwestora z art. 102a PB — WZÓR #}
 {% macro oswiadczenie_102a(o, d) %}
 <section class="osw" id="{{ o.id }}">
+  {% if o.etykieta_zal %}<div class="zal-etykieta">{{ o.etykieta_zal }}</div>{% endif %}
   <div class="osw-wzor"><b>WZÓR</b> — brak urzędowego wzoru oświadczenia (stan prawny na {{ o.stan_prawny }}; rejestr wymagań D-02, E-09).
     Treść opracowano na podstawie art. 102a ust. 1, 2 i 4 PB (Dz.U. 2026 poz. 1161); przed użyciem porównać z aktualnym wzorem
     lub komunikatem organu (wzór PIIB z 22.09.2026 — źródło wtórne). Oświadczenie nie jest częścią projektu budowlanego:

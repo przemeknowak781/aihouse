@@ -1,19 +1,11 @@
 {
- "czas": "2026-09-25 08:50",
+ "czas": "2026-09-25 08:53",
  "aktywni": [
   {
    "id": "a82012b772f4804f3",
    "opis": "Build catalog website for LAMELA",
-   "idle_min": 7.4,
-   "bez_narzedzi_min": 7.4,
-   "limity": 0,
-   "powody": []
-  },
-  {
-   "id": "a5045de9ee0554cc8",
-   "opis": "Build structural drawings generator",
    "idle_min": 0.2,
-   "bez_narzedzi_min": 0.3,
+   "bez_narzedzi_min": 0.2,
    "limity": 0,
    "powody": []
   },
@@ -28,47 +20,47 @@
   {
    "id": "aecd6e8f26140c2ed",
    "opis": "wf_ce63599a-15f:opis:PAB",
-   "idle_min": 0.0,
-   "bez_narzedzi_min": 0.0,
+   "idle_min": 0.4,
+   "bez_narzedzi_min": 0.5,
    "limity": 0,
    "powody": []
   },
   {
    "id": "a348d2a8e7cf1f6c5",
    "opis": "wf_dad224e5-cd8:silnik",
-   "idle_min": 2.1,
-   "bez_narzedzi_min": 2.2,
+   "idle_min": 5.2,
+   "bez_narzedzi_min": 5.2,
    "limity": 0,
    "powody": []
   },
   {
    "id": "a018fbab99b79a8e9",
    "opis": "wf_10e1a801-dd6:weryfikacja:V1",
-   "idle_min": 0.1,
-   "bez_narzedzi_min": 0.1,
+   "idle_min": 1.4,
+   "bez_narzedzi_min": 1.4,
    "limity": 0,
    "powody": []
   },
   {
    "id": "a82de0c2412aaa264",
    "opis": "wf_10e1a801-dd6:weryfikacja:V2",
-   "idle_min": 0.0,
-   "bez_narzedzi_min": 0.0,
-   "limity": 0,
-   "powody": []
-  },
-  {
-   "id": "aa312e69fff4fc1f4",
-   "opis": "wf_c5f7e298-4b9:PT:AR",
-   "idle_min": 0.0,
-   "bez_narzedzi_min": 0.1,
+   "idle_min": 0.3,
+   "bez_narzedzi_min": 0.3,
    "limity": 0,
    "powody": []
   },
   {
    "id": "ad07d221db9b5c09f",
    "opis": "wf_c5f7e298-4b9:PT:BO",
-   "idle_min": 0.3,
+   "idle_min": 2.5,
+   "bez_narzedzi_min": 2.5,
+   "limity": 0,
+   "powody": []
+  },
+  {
+   "id": "a40bbe274c6070548",
+   "opis": "wf_c5f7e298-4b9:PT:IS",
+   "idle_min": 0.5,
    "bez_narzedzi_min": 0.5,
    "limity": 0,
    "powody": []
@@ -76,5 +68,5 @@
  ],
  "zakonczeni": 0,
  "zastoje": [],
- "repo_bez_zmian_min": 0.1
+ "repo_bez_zmian_min": 1.8
 }

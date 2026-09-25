@@ -143,10 +143,11 @@ def kontekst_oswiadczenia_sieci(dok, *, projektant=None, wariant="brak_sieci", z
 
 
 # ------------------------------------------------------------------------------------ oświadczenie Inwestora 102a
-def kontekst_oswiadczenia_102a(dok, *, organ=None, zakres=None, postepowanie=None) -> dict:
+def kontekst_oswiadczenia_102a(dok, *, organ=None, zakres=None, postepowanie=None, zalacznik=False) -> dict:
     powiat = dok.dane.get("dzialka", {}).get("powiat") or do_uzup("powiat")
+    id_, et = _zal(dok, "Oświadczenie Inwestora z art. 102a ust. 1 PB — wzór", zalacznik)
     return dict(
-        id=dok._nowe_id("osw"), miejscowosc=do_uzup("miejscowość"), data=do_uzup("data"),
+        id=id_, etykieta_zal=et, miejscowosc=do_uzup("miejscowość"), data=do_uzup("data"),
         stan_prawny="25.09.2026 (Dz.U. do poz. 1244)",
         organ=organ or f"Starosta — organ administracji architektoniczno-budowlanej ({powiat})",
         zakres=zakres or "projektu zagospodarowania działki oraz projektu architektoniczno-budowlanego",
