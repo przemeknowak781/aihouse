@@ -14,7 +14,7 @@ NAZWY_MOD = {"woda": "Instalacja wodociągowa i c.w.u.", "kanalizacja": "Kanaliz
 
 def rozdz_stan(o: Opis, D: DanePTIS):
     """1. Stan opracowania — wynik sprawdzeń obliczeniowych i sprawy otwarte."""
-    o.rozdzial("Stan opracowania i sprawy otwarte", podstawa="E.1 rejestru; W-272", nowa_strona=False)
+    o.rozdzial("Stan opracowania i sprawy otwarte", podstawa="rejestr wymagań, sekcja E")
     wiersze = []
     for k in MODULY:
         w = D.warunki(k)

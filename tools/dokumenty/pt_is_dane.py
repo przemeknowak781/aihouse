@@ -180,8 +180,9 @@ class DanePTIS:
         buf_o = self.Wd["ogrzewanie"].get("bufor_l")
         if buf_m and buf_o:
             m = re.search(r"(\d{2,4})\s*(?:dm³|l\b|dm3)", str(buf_m[0].get("opis", "")))
-            if m and abs(int(m.group(1)) - buf_o) > 1:
-                self.otwarte.append(f"Bufor c.o.: w modelu „{buf_m[0].get('opis')}”, z obliczeń {buf_o} dm³ — ujednolicić.")
+            if m and int(m.group(1)) < buf_o - 1:
+                self.otwarte.append(f"Bufor c.o.: w modelu „{buf_m[0].get('opis')}” < wymagane z obliczeń {buf_o} dm³ — "
+                                    "zwiększyć w modelu.")
         rozb = [p for p in self.went.pomieszczenia
                 if (p.naw_model or p.wyw_model) and (abs(p.naw_model - p.naw) > 1 or abs(p.wyw_model - p.wyw) > 1)]
         if rozb:
@@ -191,7 +192,7 @@ class DanePTIS:
                 "przyjęto wartości z bilansu (PN-83/B-03430/Az3); zaktualizować model.")
         if not self.B.get("projekt"):
             self.otwarte.append("Dane osobowe (Inwestor, projektanci, nr uprawnień, pracownia) — brak sekcji "
-                                "`projekt:` w model/budynek.yaml; pola [DO UZUPEŁNIENIA].")
+                                "`projekt:` w model/budynek.yaml; pola oznaczone jako do uzupełnienia (strona tytułowa, oświadczenie).")
         self.otwarte += self.ark_braki
 
     # ------------------------------------------------------------------ BRAKI_DANYCH.md (tabela)

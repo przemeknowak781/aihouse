@@ -329,7 +329,7 @@ def rozdz_proby(o: Opis, D: DanePTIS):
 
 def rozdz_braki(o: Opis, D: DanePTIS):
     """10. Dane do uzupełnienia i uzgodnienia międzybranżowe."""
-    o.rozdzial("Dane do uzupełnienia i uzgodnienia międzybranżowe", podstawa="W-272, W-286, E-04", nowa_strona=True)
+    o.rozdzial("Dane do uzupełnienia i uzgodnienia międzybranżowe", podstawa="rejestr wymagań, sekcje D i E", nowa_strona=True)
     o.tekst("Uzgodnienia: PT-1 AR (przejścia przez przegrody, szachty, wyłaz), PT-2 BO (przejścia przez płytę "
             "fundamentową i stropy, podstawy urządzeń), PT-4 IE (zasilanie PC, grzałki, centrali, sterowników; "
             "połączenia wyrównawcze rur metalowych). Braki modelu zgłoszone przez generator rysunków IS "
@@ -338,7 +338,7 @@ def rozdz_braki(o: Opis, D: DanePTIS):
     if rows:
         o.tabela(rows, tytul="Braki danych modelu — rysunki IS", wyrownanie={"Element": "l", "Brak / stan w modelu": "l"},
                  szerokosci=["8mm", "38mm", None, "30mm"],
-                 uwagi="Pozycje wyznaczone algorytmicznie są na rysunkach oznaczone [DO UZUPEŁNIENIA] (warstwa I-BRAKI). "
+                 uwagi="Pozycje wyznaczone algorytmicznie są na rysunkach oznaczone znacznikiem braku danych (linia kreskowa purpurowa, warstwa I-BRAKI). "
                        "Pozycje nieaktualne wobec bieżących obliczeń — patrz „Stan opracowania i sprawy otwarte”.",
                  zrodlo="projekt/05_PT_instalacje_sanitarne/BRAKI_DANYCH.md")
     if D.ark_info:

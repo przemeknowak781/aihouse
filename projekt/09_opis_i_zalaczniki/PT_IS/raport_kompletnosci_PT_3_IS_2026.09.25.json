@@ -1,0 +1,220 @@
+{
+  "plik": "PT_3_IS_2026.09.25.pdf",
+  "lista": "PT-3 IS — projekt techniczny, instalacje sanitarne (rejestr C.2)",
+  "status": "PRZYKŁAD – NIE DO ZŁOŻENIA",
+  "pozycje": [
+    {
+      "id": "F-01",
+      "element": "*",
+      "opis": "Nazwa pliku wg zał. 1 RPB (PT_x_y_rrrr.mm.dd.pdf)",
+      "podstawa": "RPB zał. 1; W-301",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "nazwa zgodna z zał. 1 RPB (PT)"
+    },
+    {
+      "id": "F-02",
+      "element": "*",
+      "opis": "Rozmiar pliku ≤ 150 MB",
+      "podstawa": "RPB § 2b ust. 3",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "2.13 MB (limit 150 MB)"
+    },
+    {
+      "id": "F-03",
+      "element": "*",
+      "opis": "Część rysunkowa wektorowa",
+      "podstawa": "RPB § 2b ust. 2",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "17 arkuszy wektorowych"
+    },
+    {
+      "id": "F-05",
+      "element": "*",
+      "opis": "Tom PT w osobnym pliku (bez wspólnej oprawy z PZT/PAB/ZL)",
+      "podstawa": "RPB § 5 ust. 3",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "plik zawiera tylko tom PT"
+    },
+    {
+      "id": "C2-01",
+      "element": "PT",
+      "opis": "Strona tytułowa: „Projekt techniczny”, zamierzenie, kategoria I, inwestor",
+      "podstawa": "RPB § 7 ust. 2 pkt 1–2",
+      "status": "DO UZUPEŁNIENIA",
+      "obowiazkowa": true,
+      "szczegoly": "pola [DO UZUPEŁNIENIA] na stronie tytułowej"
+    },
+    {
+      "id": "C2-02",
+      "element": "PT",
+      "opis": "Strona tytułowa: nr tomu i liczba tomów PT",
+      "podstawa": "RPB § 7 ust. 6",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C2-03",
+      "element": "PT",
+      "opis": "Strona tytułowa: data, autorzy ze specjalnością, nr uprawnień i zakresem",
+      "podstawa": "RPB § 7 ust. 2 pkt 3",
+      "status": "DO UZUPEŁNIENIA",
+      "obowiazkowa": true,
+      "szczegoly": "pola [DO UZUPEŁNIENIA] na stronie tytułowej"
+    },
+    {
+      "id": "C2-04",
+      "element": "PT",
+      "opis": "Spis treści",
+      "podstawa": "RPB § 7 ust. 5",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C2-05",
+      "element": "PT",
+      "opis": "Numeracja stron tomu",
+      "podstawa": "RPB § 6 ust. 2",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "67 stron numerowanych"
+    },
+    {
+      "id": "C2-06",
+      "element": "PT",
+      "opis": "Oświadczenie projektanta PT (brzmienie art. 41 ust. 4a pkt 2 PB)",
+      "podstawa": "PB art. 34 ust. 3d pkt 3, art. 41 ust. 4a pkt 2",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C2-07",
+      "element": "PT",
+      "opis": "Dane dotyczące warunków ochrony przeciwpożarowej stosownie do zakresu",
+      "podstawa": "RPB § 23 pkt 10",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C2-08",
+      "element": "PT",
+      "opis": "Skale rysunków nie mniejsze niż 1:100",
+      "podstawa": "RPB § 9 ust. 3",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "14 rysunków w skali nie mniejszej niż 1:100"
+    },
+    {
+      "id": "C2-IS-01",
+      "element": "PT",
+      "opis": "Ogrzewanie z automatyczną regulacją temperatury",
+      "podstawa": "RPB § 23 pkt 7 lit. a",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C2-IS-02",
+      "element": "PT",
+      "opis": "Wentylacja",
+      "podstawa": "RPB § 23 pkt 7 lit. d",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C2-IS-03",
+      "element": "PT",
+      "opis": "Instalacje wodociągowe, kanalizacyjne, wody opadowe",
+      "podstawa": "RPB § 23 pkt 7 lit. e",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C2-IS-04",
+      "element": "PT",
+      "opis": "Powiązania z sieciami, obliczenia i dobory (obciążenie cieplne, strumienie, woda, retencja, hałas PC)",
+      "podstawa": "RPB § 23 pkt 8",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C2-IS-05",
+      "element": "PT",
+      "opis": "Charakterystyka energetyczna (EP, U, sprawności)",
+      "podstawa": "RPB § 23 pkt 11; W-251",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C2-IS-06",
+      "element": "PT",
+      "opis": "Rzuty i schematy instalacji",
+      "podstawa": "RPB § 24 pkt 4 lit. a",
+      "status": "DO UZUPEŁNIENIA",
+      "obowiazkowa": true,
+      "szczegoly": "PT-IS-01 — INSTALACJA WODOCIĄGOWA — RZUT PARTERU (1:50); PT-IS-02 — INSTALACJA WODOCIĄGOWA — RZUT I PIĘTRA (1:50); PT-IS-03 — INSTALACJA WODOCIĄGOWA — RZUT II P; tylko arkusz zastępczy — rysunek niedołączony"
+    }
+  ],
+  "znaczniki": {
+    "DO UZUPEŁNIENIA": 55,
+    "DOKUMENT ZEWNĘTRZNY": 0,
+    "DANE PRZYKŁADOWE": 99,
+    "ZAŁ": 75,
+    "NZW": 45,
+    "INT": 2,
+    "PROG": 1,
+    "lista": {
+      "[DO UZUPEŁNIENIA: nazwa pracowni projektowej]": 1,
+      "[DO UZUPEŁNIENIA: adres pracowni]": 1,
+      "[DANE PRZYKŁADOWE – FIKCYJNE]": 99,
+      "[DO UZUPEŁNIENIA: jednostka ewidencyjna — kod TERYT WWPPGG_R i nazwa]": 1,
+      "[DO UZUPEŁNIENIA: kod TERYT jedn. ewid. WWPPGG_R]": 2,
+      "[DO UZUPEŁNIENIA: imię i nazwisko lub nazwa inwestora]": 2,
+      "[DO UZUPEŁNIENIA: adres inwestora]": 2,
+      "[DO UZUPEŁNIENIA: imię i nazwisko]": 3,
+      "[DO UZUPEŁNIENIA: nr uprawnień budowlanych]": 3,
+      "[DO UZUPEŁNIENIA: miejscowość]": 1,
+      "[DO UZUPEŁNIENIA: nr i data decyzji o pozwoleniu na budowę, organ]": 1,
+      "[DO UZUPEŁNIENIA: data złożenia oświadczenia z art. 102a PB]": 1,
+      "[DO UZUPEŁNIENIA: potwierdzenie wpisu w e-CRUB albo dołączenie kopii]": 1,
+      "[ZAŁ]": 75,
+      "[DO UZUPEŁNIENIA]": 2,
+      "[NZW]": 45,
+      "[PROG]": 1,
+      "[INT]": 2,
+      "[DO UZUPEŁNIENIA: arkusz do wygenerowania z modelu]": 34
+    }
+  },
+  "elementy": {
+    "PT": {
+      "od": 1,
+      "do": 85,
+      "strony_opisu": 68,
+      "arkusze": 17
+    }
+  },
+  "rozmiar_mb": 2.1334686279296875,
+  "strony": 85,
+  "podsumowanie": {
+    "status": "PRZYKŁAD – NIE DO ZŁOŻENIA",
+    "OK": 15,
+    "BRAK": 0,
+    "DO UZUPEŁNIENIA": 3,
+    "N/D": 0,
+    "OSTRZEŻENIE": 0,
+    "znaczniki_do_uzupelnienia": 55,
+    "znaczniki_dokument_zewnetrzny": 0,
+    "znaczniki_dane_przykladowe": 99
+  }
+}
