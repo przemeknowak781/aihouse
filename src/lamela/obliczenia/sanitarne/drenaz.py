@@ -173,14 +173,15 @@ def _strefy_drzwi_z_odwodnieniem(dane: DaneBudynku) -> list:
     k0 = dane.kondygnacje[0]["id"]
     out = []
     for o in m.otwory(kond=k0):
-        if o.typ not in ("drzwi_zewn", "drzwi_przesuwne_HS", "brama") or float(o.parapet or 0.0) > 0.05:
+        if o.typ not in ("drzwi_zewn", "drzwi_przesuwne_HS", "brama", "fix") or float(o.parapet or 0.0) > 0.05:
             continue
         es = o.sciana.ext_side      # odcinek otworu na licu zewnętrznym ściany
         tf = o.sciana.face_t(es) if es is not None else 0.0
         seg = LineString([tuple(o.sciana.pt(o.s0, tf)), tuple(o.sciana.pt(o.s1, tf))])
         bl = [i for i, g in ol if g.distance(seg) <= 2.5]
         if bl:
-            out.append((seg.buffer(0.30), f"{o.id} ({o.symbol or o.typ}; {', '.join(bl)})"))
+            # brama — cały fartuch przed bramą (± 1,0 m), pozostałe ± 0,30 m (przeszklenia stałe do posadzki z progiem jak drzwi)
+            out.append((seg.buffer(1.0 if o.typ == "brama" else 0.30), f"{o.id} ({o.symbol or o.typ}; {', '.join(bl)})"))
     return out
 
 

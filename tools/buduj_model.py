@@ -981,8 +981,9 @@ TARASY = [
     {"id": "T1", "obrys": P((-3.30, -3.30), (xE + EXT, -3.30), (xE + EXT, -EXT), (-EXT, -EXT), (-EXT, y3), (-3.30, y3)), "rzedna": -0.02,
      "nawierzchnia": "deska kompozytowa na legarach i wspornikach regulowanych, szczeliny 5 mm; odwodnienie liniowe przy progach HS", "grubosc": 0.05,
      "uwagi": "taras ogrodowy w kształcie L (pd. przed E pod okapem 1,00 m, zach. pod okapem 1,50 m) — 4,30 m od granicy zach."},
-    {"id": "T2", "obrys": R(9.40, y4 + EXT, xE - EXT, 10.35), "rzedna": -0.02, "nawierzchnia": "płyty betonowe 60×60 na podsypce, spadek 2 % od drzwi",
-     "grubosc": 0.08, "uwagi": "podest wejścia głównego pod daszkiem (bez stopni — cokół przejęty rzędną terenu)"},
+    {"id": "T2", "obrys": R(9.80, y4 + EXT, xE - EXT, 10.35), "rzedna": -0.02, "nawierzchnia": "płyty betonowe 60×60 na podsypce, spadek 2 % od drzwi",
+     "grubosc": 0.08, "uwagi": "podest wejścia głównego pod daszkiem (x 9,80–11,70: DZ1 + FX3 + 0,25 m), bez stopni, odwodnienie liniowe OL-3 "
+                                 "przy krawędzi pn.; poza podestem teren −0,32 (cokół ≥ 0,30 — runda 2, K-1)"},
     {"id": "T3", "obrys": R(12.20, -1.30, 13.50, -EXT), "rzedna": -0.02, "nawierzchnia": "płyty betonowe 60×60, spadek 2 % od drzwi", "grubosc": 0.08,
      "uwagi": "podest drzwi gospodarczych pod okapem E"},
 ]
@@ -995,7 +996,11 @@ TARASY = [
 STOLARKA = {
     "FX1": {"wyrob": "fix_ALU_3sz", "opis": "przeszklenie stałe ALU 3-szybowe, 1,90 × 2,75 m, VSG od wewn. (strefa uderzeń)", "U_w": 0.75, "g_n": 0.50},
     "FX2": {"wyrob": "fix_ALU_3sz", "opis": "przeszklenie stałe ALU 3-szybowe, 2,92 × 2,75 m", "U_w": 0.73, "g_n": 0.50},
-    "FX3": {"wyrob": "fix_ALU_3sz", "opis": "doświetle drzwi wejściowych 0,35 × 2,40 m, VSG mleczne", "U_w": 0.85, "g_n": 0.40},
+    # runda 2 (weryfikacja §6 A6): wąskie doświetle — udział ramy ≈ 43 %; przy ramie typowej (U_f 1,1) U_w = 1,0 > 0,9 → WYMAGANIE
+    # profilu ramy o podwyższonej izolacyjności U_f ≤ 0,80 W/(m²K) (PN-EN ISO 10077-2; np. rama z rdzeniem izolacyjnym, klasa phA),
+    # U_g ≤ 0,50, Ψ_g ≤ 0,040 (ciepła ramka) — wartości wymagane, nie deklaracja wyrobu; do potwierdzenia DoP (lub równoważne)
+    "FX3": {"wyrob": "fix_ALU_3sz", "opis": "doświetle drzwi wejściowych 0,35 × 2,40 m, VSG mleczne; rama o podwyższonej izolacyjności "
+                                            "(wymagane U_f ≤ 0,80, U_w ≤ 0,90 — WT zał. 2 pkt 1.2, W-244)", "U_w": 0.87, "U_f": 0.80, "g_n": 0.40},
     "HS1": {"wyrob": "HS_ALU_3sz", "opis": "drzwi podnoszono-przesuwne ALU 2,34 × 2,75 m, próg termiczny bezprogowy, odwodnienie liniowe", "U_w": 0.85, "g_n": 0.50},
     "HS2": {"wyrob": "HS_ALU_3sz", "opis": "drzwi HS ALU 2,40 × 2,75 m (taras zach.)", "U_w": 0.85, "g_n": 0.50},
     "BC1": {"wyrob": "okno_ALU_3sz", "opis": "boks C: 3 kwatery 2,34 × 1,50 m (środkowa RU), dolna część stała VSG do 0,85 m", "U_w": 0.80, "g_n": 0.50},
@@ -1287,7 +1292,7 @@ def teren_projekt():
     * dalej — ogród pd. i pas zach. ze spadkiem ≈ 0,5 % ku niecce NCH-1; przed elewacją pn. powrót do terenu istniejącego (skarpa
       niecki ≤ 1:8); na granicach E, W, S i przy drodze rzędne istniejące (W-019). Jednostka PC na fundamencie (U5) — nie jest terenem."""
     H0, I = 101.33, 0.03
-    stref = {"T2": (box(9.40, 9.04, 11.70, 11.60), 2.31), "BR1": (box(11.70, 9.66, 18.05, 12.20), 2.31),
+    stref = {"T2": (box(9.75, 9.04, 11.70, 11.60), 2.31), "BR1": (box(11.70, 9.66, 18.05, 12.20), 2.31),
              "DZ2": (box(18.66, 4.60, 20.10, 6.20), 1.49), "T3": (box(12.20, -1.70, 13.50, -0.29), 1.31)}
     P_ = []
     for dd in (0.0, 0.3, 0.8, 1.5, 2.3):
@@ -1302,7 +1307,7 @@ def teren_projekt():
                     continue
                 P_.append([r(x + T_DZ[0], 2), r(y + T_DZ[1], 2), r(H0 - I * dd, 3)])
     spec = []
-    for x in (9.45, 10.00, 10.60, 11.15, 11.65):                                   # T2 — podest wejścia pod daszkiem, OL-3
+    for x in (9.85, 10.30, 10.75, 11.20, 11.65):                                   # T2 — podest wejścia pod daszkiem, OL-3
         spec += [((x, 9.10), 101.63), ((x, 9.70), 101.62), ((x, 10.30), 101.61), ((x, 10.40), 101.60)]
     for x in (9.95, 10.60, 11.25):                                                 # dojście U2 (spadek do posesji)
         spec += [((x, 11.50), 101.58), ((x, 13.50), 101.52), ((x, 17.10), 101.47)]
@@ -1453,7 +1458,7 @@ DZIALKA.update({
          "opis": "odwodnienie liniowe przy progach HS (bezprogowe) pod deską tarasu"},
         {"id": "OL-2W", "typ": "liniowe", "linia": [d(-EXT - 0.10, 1.10), d(-EXT - 0.10, 3.70)], "spadek": 0.005, "odbiornik": "KD-W",
          "opis": "odwodnienie liniowe przy HS zach."},
-        {"id": "OL-3", "typ": "liniowe", "linia": [d(9.50, 10.40), d(11.60, 10.40)], "spadek": 0.005, "odbiornik": "KD-W", "opis": "odwodnienie liniowe podestu wejścia"},
+        {"id": "OL-3", "typ": "liniowe", "linia": [d(9.85, 10.40), d(11.60, 10.40)], "spadek": 0.005, "odbiornik": "KD-W", "opis": "odwodnienie liniowe podestu wejścia"},
         {"id": "OL-4", "typ": "liniowe", "linia": [d(xE + EXT + 0.2, 16.90), d(xF + EXT - 0.2, 16.90)], "spadek": 0.005, "odbiornik": "SEP-1 → NT-E",
          "opis": "odwodnienie liniowe przy bramie wjazdowej — woda nie spływa na drogę (MPZP, u.d.p. art. 39)"},
         {"id": "OZ-1", "typ": "opaska_zwirowa", "obrys": [[r(x + T_DZ[0], 3), r(y + T_DZ[1], 3)] for x, y in

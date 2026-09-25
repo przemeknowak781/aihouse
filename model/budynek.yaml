@@ -547,14 +547,14 @@ lamele:
 
 tarasy:
   - {id: T1, obrys: [[-3.3, -3.3], [12.3, -3.3], [12.3, -0.3], [-0.3, -0.3], [-0.3, 5.125], [-3.3, 5.125]], rzedna: -0.02, nawierzchnia: 'deska kompozytowa na legarach i wspornikach regulowanych, szczeliny 5 mm; odwodnienie liniowe przy progach HS', grubosc: 0.05, uwagi: 'taras ogrodowy w kształcie L (pd. przed E pod okapem 1,00 m, zach. pod okapem 1,50 m) — 4,30 m od granicy zach.'}
-  - {id: T2, obrys: [[9.4, 9.05], [11.7, 9.05], [11.7, 10.35], [9.4, 10.35]], rzedna: -0.02, nawierzchnia: 'płyty betonowe 60×60 na podsypce, spadek 2 % od drzwi', grubosc: 0.08, uwagi: podest wejścia głównego pod daszkiem (bez stopni — cokół przejęty rzędną terenu)}
+  - {id: T2, obrys: [[9.8, 9.05], [11.7, 9.05], [11.7, 10.35], [9.8, 10.35]], rzedna: -0.02, nawierzchnia: 'płyty betonowe 60×60 na podsypce, spadek 2 % od drzwi', grubosc: 0.08, uwagi: 'podest wejścia głównego pod daszkiem (x 9,80–11,70: DZ1 + FX3 + 0,25 m), bez stopni, odwodnienie liniowe OL-3 przy krawędzi pn.; poza podestem teren −0,32 (cokół ≥ 0,30 — runda 2, K-1)'}
   - {id: T3, obrys: [[12.2, -1.3], [13.5, -1.3], [13.5, -0.3], [12.2, -0.3]], rzedna: -0.02, nawierzchnia: 'płyty betonowe 60×60, spadek 2 % od drzwi', grubosc: 0.08, uwagi: podest drzwi gospodarczych pod okapem E}
 
 # Stolarka — dane PRZYKŁADOWE typowych wyrobów (klucze: src/lamela/obliczenia/dane/wyroby_przykladowe.yaml), „lub równoważne”
 stolarka:
   FX1: {wyrob: fix_ALU_3sz, opis: 'przeszklenie stałe ALU 3-szybowe, 1,90 × 2,75 m, VSG od wewn. (strefa uderzeń)', U_w: 0.75, g_n: 0.5}
   FX2: {wyrob: fix_ALU_3sz, opis: 'przeszklenie stałe ALU 3-szybowe, 2,92 × 2,75 m', U_w: 0.73, g_n: 0.5}
-  FX3: {wyrob: fix_ALU_3sz, opis: 'doświetle drzwi wejściowych 0,35 × 2,40 m, VSG mleczne', U_w: 0.85, g_n: 0.4}
+  FX3: {wyrob: fix_ALU_3sz, opis: 'doświetle drzwi wejściowych 0,35 × 2,40 m, VSG mleczne; rama o podwyższonej izolacyjności (wymagane U_f ≤ 0,80, U_w ≤ 0,90 — WT zał. 2 pkt 1.2, W-244)', U_w: 0.87, U_f: 0.8, g_n: 0.4}
   HS1: {wyrob: HS_ALU_3sz, opis: 'drzwi podnoszono-przesuwne ALU 2,34 × 2,75 m, próg termiczny bezprogowy, odwodnienie liniowe', U_w: 0.85, g_n: 0.5}
   HS2: {wyrob: HS_ALU_3sz, opis: 'drzwi HS ALU 2,40 × 2,75 m (taras zach.)', U_w: 0.85, g_n: 0.5}
   BC1: {wyrob: okno_ALU_3sz, opis: 'boks C: 3 kwatery 2,34 × 1,50 m (środkowa RU), dolna część stała VSG do 0,85 m', U_w: 0.8, g_n: 0.5}
