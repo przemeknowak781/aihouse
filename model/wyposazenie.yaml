@@ -30,7 +30,7 @@ wyposazenie:
   - {kond: P0, typ: urzadzenie, xy: [14.95, 0.9], obrot: 0, wym: [0.8, 0.25], opis: rozdzielnica główna RG}
   - {kond: P0, typ: urzadzenie, xy: [18.27, 1.2], obrot: 180, wym: [0.4, 0.2], opis: wodomierz + zawór antyskażeniowy (PN-EN 1717)}
   - {kond: P0, typ: urzadzenie, xy: [16.0, 0.105], obrot: 90, wym: [0.8, 0.15], opis: rozdzielacz ogrzewania podłogowego P0}
-  - {kond: P0, typ: zlewik, xy: [18.27, 2.2], obrot: 180, wym: [0.5, 0.4]}
+  - {kond: P0, typ: zlew, xy: [18.27, 2.2], obrot: 180, wym: [0.5, 0.4], opis: zlewik gospodarczy}
   - {kond: P0, typ: szafa, xy: [18.27, 8.0], obrot: 180, wym: [2.4, 0.6], opis: rowery i sprzęt ogrodowy — strefa przednia przy ścianie osi F (przeszczep J1)}
   # --- P1
   - {kond: P1, typ: lozko, xy: [3.8, 1.2], obrot: 180, wym: [0.9, 2.0]}
@@ -50,7 +50,7 @@ wyposazenie:
   - {kond: P1, typ: umywalka, xy: [8.605, 6.4], obrot: 0, wym: [0.5, 0.35]}
   - {kond: P1, typ: pralka, xy: [9.95, 8.2], obrot: 0, wym: [0.6, 0.6]}
   - {kond: P1, typ: suszarka, xy: [9.95, 7.55], obrot: 0, wym: [0.6, 0.6]}
-  - {kond: P1, typ: zlewik, xy: [11.895, 8.2], obrot: 180, wym: [0.5, 0.4]}
+  - {kond: P1, typ: zlew, xy: [11.895, 8.2], obrot: 180, wym: [0.5, 0.4], opis: zlewik gospodarczy}
   - {kond: P1, typ: szafa, xy: [11.895, 6.4], obrot: 180, wym: [1.6, 0.6], opis: szafa gospodarcza}
   - {kond: P1, typ: urzadzenie, xy: [11.895, 4.4], obrot: 180, wym: [0.8, 0.15], opis: rozdzielacz ogrzewania podłogowego P1 (w holu)}
   # --- P2

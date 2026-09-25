@@ -13,6 +13,10 @@ Układ: x → wschód, y → północ, z → góra; (0,0) = przecięcie osi A i 
 Moduł wymiarowy osi: 0,125 m (bloczki silikatowe 1/8-modułowe); otwory w wielokrotnościach 0,05 m (tam, gdzie możliwe);
 współrzędne zaokrąglane do 0,005 m.
 """
+# KOORDYNACJA (2026-09-25 ~03:55): nad tym plikiem pracują równolegle dwa agenty syntezy. Agent a3a8ae3b05a6e1fbd (autor sekcji 1–8)
+#   edytuje sekcje 1–10 (parametry, ściany, otwory, pomieszczenia, stropy/dachy, konstrukcja, stolarka/węzły/energia, zapis budynku)
+#   oraz pisze tools/podglad_modelu.py i docs/20_koncepcja/koncepcja.md. Drugi agent (autor sekcji 11+: działka, teren, wyposażenie,
+#   instalacje, main) — proszę edytować tylko sekcje 11+ narzędziem Edit (bez dopisywania na końcu i bez nadpisywania całego pliku).
 from __future__ import annotations
 
 import math
@@ -841,6 +845,19 @@ L_ATT_P1 = r((y4 - y3) * 2 + (xB - EXT + EXT) + (xE + EXT - xD - EXT), 2)
 L_ATT_D4 = r((xF - xE) + (y2 + EXT), 2)
 
 
+def _dl_otw() -> dict:
+    """Długości krawędzi otworów w ścianach zewnętrznych części ogrzewanej (bez bramy i otworów garażu)."""
+    d = {"oscieze": 0.0, "nadproze": 0.0, "podokiennik": 0.0, "prog": 0.0}
+    for o in OT:
+        s = _SC[o["sciana"]]
+        if s["przegroda"] not in ("SZ1", "SZ2", "SZL") or o["typ"] in ("otwor", "brama") or s["id"] in ("S0-03", "S0-04", "S0-05"):
+            continue
+        d["oscieze"] += 2 * o["wys"]
+        d["nadproze"] += o["szer"]
+        d["podokiennik" if o["parapet"] > 0.05 else "prog"] += o["szer"]
+    return {k: r(v, 2) for k, v in d.items()}
+
+
 def _obwod_otw(zewn_only=True):
     tot = 0.0
     for o in OT:
@@ -872,8 +889,14 @@ WEZLY = [
      "typ": "polaczenie_nieogrz", "przegrody": ["SWG", "POD-0", "DZ1", "SUF-G"], "dlugosc": L_GAR},
     {"id": "WZ-10", "nazwa": "Strop pośredni ST1/ST2 – ściana zewn. z ETICS ciągłym (wieniec)", "typ": "strop_posredni", "przegrody": ["POD-1", "SZ1"],
      "dlugosc": r(2 * (12.6 + 9.35) - 12.6 - 5.425 + 2 * (xE - xD + y4 - y3) + 2 * (xB + y4 - y3), 2)},
-    {"id": "WZ-11", "nazwa": "Ościeża, nadproża, podokienniki i progi — ciepły montaż w warstwie izolacji", "typ": "oscieze", "przegrody": ["SZ1", "SZ2", "SZL"],
-     "dlugosc": _obwod_otw()},
+    {"id": "WZ-11", "nazwa": "Ościeża okien/drzwi — ciepły montaż (rama 5 cm w murze, 4 cm w izolacji, zakład izolacji 3 cm na ramę)", "typ": "oscieze",
+     "przegrody": ["SZ1", "SZ2", "SZL"], "dlugosc": _dl_otw()["oscieze"], "wariant": "czesciowo"},
+    {"id": "WZ-11N", "nazwa": "Nadproża — BEZ kaset osłon w ociepleniu (kasety w okapach / ramie C / szczelinie lamel / nadstawne)", "typ": "nadproze",
+     "przegrody": ["SZ1", "SZ2", "SZL"], "dlugosc": _dl_otw()["nadproze"], "wariant": "czesciowo"},
+    {"id": "WZ-11P", "nazwa": "Podokienniki — parapet zewn. z okapnikiem na profilu z XPS", "typ": "podokiennik", "przegrody": ["SZ1", "SZ2", "SZL"],
+     "dlugosc": _dl_otw()["podokiennik"], "wariant": "czesciowo"},
+    {"id": "WZ-11T", "nazwa": "Progi HS / drzwi zewn. na płycie P0 — profil progowy termoizolacyjny na podwalinie XPS/PUR-GF, odwodnienie liniowe",
+     "typ": "prog", "przegrody": ["SZ1", "POD-0"], "dlugosc": _dl_otw()["prog"], "wariant": "grunt"},
     {"id": "WZ-12", "nazwa": "Narożniki wypukłe ścian zewnętrznych", "typ": "naroznik_wypukly", "przegrody": ["SZ1", "SZ2"],
      "dlugosc": r(4 * 3.15 + 2 * 3.15 + 4 * 3.15 + 6 * 3.00, 2)},
     {"id": "WZ-13", "nazwa": "Konsole rusztu lamel (przekładka termiczna)", "typ": "konsola_lamel", "przegrody": ["SZ2", "SZL"],

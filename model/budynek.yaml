@@ -1,3495 +1,602 @@
-# Dom LAMELA — MODEL BUDYNKU (jedno źródło prawdy). PLIK GENEROWANY: tools/buduj_model.py — nie edytować ręcznie.
-# Schemat: docs/SCHEMAT_MODELU.md; koncepcja: docs/20_koncepcja/koncepcja.md. Układ: x→E, y→N, (0,0)=A×1, ±0,00=101,65 m n.p.m.
-# Wartości materiałowe — typowe (PN-EN ISO 10456, PN-EN 1745, DWU typowych wyrobów, „lub równoważne”) — pole `zrodlo`.
-meta:
-  nazwa: Dom LAMELA
-  wersja: 2.0 — koncepcja ostateczna (synteza W2 + przeszczepy W1/W3 + poprawki J1–J3)
-  data: '2026-09-25'
-  autor: Główny projektant — dane do uzupełnienia (brief §7 p. 4)
-  zrodlo: tools/buduj_model.py (model parametryczny)
-  stadium: koncepcja
-  podstawa_WT: WT 2002 (t.j. Dz.U. 2022 poz. 1225 ze zm.) stosowane na podstawie art. 102a PB — W-A.1
-uklad:
-  zero_abs: 101.65
-  azymut_osi_y: 0.0
-  uklad_wysokosci: PL-EVRF2007-NH
-  opis: x → wschód, y → północ; (0,0) = oś A × oś 1; ±0,00 = posadzka P0
+# Model budynku „Dom LAMELA” — KONCEPCJA OSTATECZNA (jedno źródło prawdy; schemat: docs/SCHEMAT_MODELU.md).
+# PLIK GENEROWANY skryptem tools/buduj_model.py — NIE EDYTOWAĆ RĘCZNIE (zmiany wprowadzać w parametrach skryptu).
+# Układ: x → wschód, y → północ, z → góra; (0,0) = oś A × oś 1; ±0,00 = posadzka P0. Wymiary w m.
+
+meta: {nazwa: Dom LAMELA, wersja: '1.0', data: '2026-09-25', stadium: koncepcja ostateczna (synteza W2 + przeszczepy W1/W3 + poprawki J1–J3), autor: (do uzupełnienia — projektant z uprawnieniami bez ograniczeń), zrodlo: tools/buduj_model.py (model parametryczny), uwagi: 'WT (t.j. Dz.U. 2022 poz. 1225 ze zm.) w brzmieniu do 19.09.2026, stosowane na podstawie art. 102a PB (oświadczenie Inwestora)'}
+uklad: {zero_abs: 101.65, azymut_osi_y: 0.0}
 osie:
-  x:
-    A': -1.12
-    A: 0.0
-    B: 3.875
-    C: 5.875
-    M: 7.19
-    D: 8.5
-    D': 9.875
-    E: 12.0
-    P: 14.875
-    F: 18.375
-  y:
-    '1': 0.0
-    '2': 2.875
-    H: 3.75
-    '3': 5.125
-    '4': 8.75
-    '5': 9.375
+  x: {A': -1.12, A: 0.0, B: 3.875, C: 5.875, M: 7.19, D: 8.5, D': 9.875, E: 12.0, P: 14.875, F: 18.375}   # A' = oś lekkiej ściany wspornika; M = ścianka środkowa schodów; D' = ścianka WC
+  y: {'1': 0.0, '2': 2.875, H: 3.75, '3': 5.125, '4': 8.75, '5': 9.375}   # H = ścianka holu P1
+
 kondygnacje:
-- id: P0
-  nazwa: Parter
-  rzedna: 0.0
-  wys_kondygnacji: 3.15
-  wys_w_swietle: 2.77
-  podloga: POD-0
-- id: P1
-  nazwa: I piętro
-  rzedna: 3.15
-  wys_kondygnacji: 3.15
-  wys_w_swietle: 2.77
-  podloga: POD-1
-- id: P2
-  nazwa: II piętro
-  rzedna: 6.3
-  wys_kondygnacji: 3.0
-  wys_w_swietle: 2.77
-  podloga: POD-1
+  - {id: P0, nazwa: Parter, rzedna: 0.0, wys_kondygnacji: 3.15, wys_w_swietle: 2.77, podloga: POD-0}
+  - {id: P1, nazwa: I piętro, rzedna: 3.15, wys_kondygnacji: 3.15, wys_w_swietle: 2.77, podloga: POD-1}
+  - {id: P2, nazwa: II piętro, rzedna: 6.3, wys_kondygnacji: 3.0, wys_w_swietle: 2.77, podloga: POD-1}
+
+# Materiały — wartości typowe (λ obliczeniowa, ρ, c_p, μ lub sd); źródło w komentarzu każdej pozycji
 materialy:
-  ZB_C25:
-    nazwa: Żelbet C25/30, B500SP (stropy, płyta fundamentowa, ściany)
-    lambda: 2.3
-    rho: 2400
-    cp: 1000
-    mu: 130
-    kreskowanie: ZELBET
-    kolor: '#b9b6ae'
-    ciezar: 25.0
-    zrodlo: 'PN-EN ISO 10456 tab. 3: beton zbrojony 1 % stali λ 2,3; μ 80/130'
-  ZB_C30:
-    nazwa: Żelbet C30/37 XC4/XF1 (krawędzie płyt wysuniętych, attyki, belki)
-    lambda: 2.5
-    rho: 2500
-    cp: 1000
-    mu: 130
-    kreskowanie: ZELBET
-    kolor: '#b4b1a9'
-    ciezar: 25.0
-    zrodlo: 'PN-EN ISO 10456 tab. 3: beton zbrojony 2 % stali λ 2,5'
-  SIL18:
-    nazwa: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej
-    lambda: 0.9
-    rho: 1800
-    cp: 1000
-    mu: 15
-    kreskowanie: MUR_SILIKAT
-    kolor: '#d9d4ca'
-    ciezar: 18.0
-    zrodlo: PN-EN 1745 zał. A (ρ 1800, P=50 %) λ ≈ 0,8–1,0 → 0,90 z zapasem; μ 5/25 (PN-EN ISO 10456)
-  SIL12:
-    nazwa: Bloczek wapienno-piaskowy 12 cm, kl. 15 (ścianki działowe, licowy w klatce)
-    lambda: 0.9
-    rho: 1800
-    cp: 1000
-    mu: 15
-    kreskowanie: MUR_SILIKAT
-    kolor: '#dcd7cd'
-    ciezar: 18.0
-    zrodlo: jw.
-  STAL_S355:
-    nazwa: Stal konstrukcyjna S355 (słupy RK, rama boksu C), cynkowana ogniowo + malowana proszkowo RAL 7016
-    lambda: 50.0
-    rho: 7850
-    cp: 450
-    mu: 1000000
-    kreskowanie: STAL
-    kolor: '#383e42'
-    ciezar: 78.5
-    zrodlo: 'PN-EN ISO 10456 tab. 3: stal λ 50'
-  RAMA_C:
-    nazwa: 'Rama boksu C: ruszt stalowy ocynkowany w okładzinie z blachy aluminiowej RAL 7016 (pusta w środku)'
-    lambda: 50.0
-    rho: 1200
-    cp: 450
-    mu: 1000000
-    kreskowanie: STAL
-    kolor: '#3b4044'
-    ciezar: 6.0
-    zrodlo: lekka rama — przeszczep J2 z W1; ρ zastępcza przekroju
-  DREWNO_KVH:
-    nazwa: Drewno konstrukcyjne KVH C24 (szkielet lekkiej ściany A')
-    lambda: 0.13
-    rho: 450
-    cp: 1600
-    mu: 50
-    kreskowanie: DREWNO_POPRZ
-    kolor: '#c9a36b'
-    ciezar: 4.2
-    zrodlo: 'PN-EN ISO 10456 tab. 3: drewno iglaste 450 kg/m³ λ 0,12–0,13; μ 20/50'
-  EPS031:
-    nazwa: Styropian grafitowy EPS 031 (ETICS, NRO w systemie)
-    lambda: 0.031
-    rho: 15
-    cp: 1450
-    mu: 40
-    kreskowanie: IZOL_TWARDA
-    kolor: '#8f9296'
-    funkcja: izolacja
-    zrodlo: DWU typowego EPS 70-031 (PN-EN 13163); μ 20–40 → 40
-  EPS038:
-    nazwa: Styropian podłogowy EPS 100-038 (pod jastrychem)
-    lambda: 0.038
-    rho: 18
-    cp: 1450
-    mu: 40
-    kreskowanie: IZOL_TWARDA
-    kolor: '#ececec'
-    funkcja: izolacja
-    zrodlo: DWU typowego EPS 100 (PN-EN 13163)
-  EPS_T:
-    nazwa: Styropian elastyfikowany EPS T (akustyczny, pod jastrychem)
-    lambda: 0.04
-    rho: 12
-    cp: 1450
-    mu: 20
-    kreskowanie: IZOL_TWARDA
-    kolor: '#f1efe6'
-    funkcja: izolacja
-    zrodlo: DWU typowego EPS T 30 (PN-EN 13163)
-  XPS300:
-    nazwa: Polistyren ekstrudowany XPS 300 (pod płytą fundamentową, cokół, izolacja obwodowa)
-    lambda: 0.036
-    rho: 32
-    cp: 1450
-    mu: 150
-    kreskowanie: IZOL_XPS
-    kolor: '#9cc7a4'
-    funkcja: izolacja
-    zrodlo: DWU typowego XPS 300 λ_D 0,034–0,036 (PN-EN 13164); w gruncie przyjęto 0,036
-  PIR022:
-    nazwa: Płyty PIR z okładziną (izolacja spadkowa stropodachów)
-    lambda: 0.022
-    rho: 32
-    cp: 1400
-    mu: 60
-    kreskowanie: IZOL_PIR
-    kolor: '#d8c98a'
-    funkcja: izolacja
-    zrodlo: DWU typowego PIR (PN-EN 13165) λ_D 0,022
-  WELNA_FAS:
-    nazwa: Wełna mineralna fasadowa (elewacja wentylowana bryły A, A1)
-    lambda: 0.035
-    rho: 60
-    cp: 1030
-    mu: 1
-    kreskowanie: IZOL_MIEKKA
-    kolor: '#e7d9a2'
-    funkcja: izolacja
-    zrodlo: DWU typowej wełny fasadowej (PN-EN 13162) λ_D 0,034–0,035
-  WELNA_035:
-    nazwa: Wełna mineralna 035 (szkielet, docieplenia, ściana dom–garaż)
-    lambda: 0.035
-    rho: 40
-    cp: 1030
-    mu: 1
-    kreskowanie: IZOL_MIEKKA
-    kolor: '#efe3b0'
-    funkcja: izolacja
-    zrodlo: PN-EN 13162, DWU typowego wyrobu
-  PAROIZ_AL:
-    nazwa: Paroizolacja bitumiczna z wkładką Al (na płycie stropodachów)
-    lambda: 0.23
-    rho: 1100
-    cp: 1000
-    sd: 1500.0
-    mu: 375000
-    kreskowanie: PAROIZOLACJA
-    kolor: '#3a3a3a'
-    funkcja: paroizolacja
-    zrodlo: DWU typowej papy paroizolacyjnej z Al, sd ≥ 1500 m
-  MEMB_TPO:
-    nazwa: Membrana dachowa TPO 1,5 mm, mocowana mechanicznie (hydroizolacja stropodachów)
-    lambda: 0.2
-    rho: 1000
-    cp: 1000
-    mu: 100000
-    kreskowanie: IZOL_PRZECIWWODNA
-    kolor: '#6e7275'
-    funkcja: hydroizolacja
-    zrodlo: DWU typowej membrany TPO; μ ~ 10⁵
-  PAPA_SBS:
-    nazwa: Hydroizolacja 2 × papa SBS (podkładowa + wierzchniego krycia, dach zielony)
-    lambda: 0.23
-    rho: 1100
-    cp: 1000
-    mu: 20000
-    kreskowanie: IZOL_PRZECIWWODNA
-    kolor: '#2f3032'
-    funkcja: hydroizolacja
-    zrodlo: PN-EN 13707, DWU; PN-EN ISO 10456 tab. 4 bitum λ 0,23
-  BARIERA_KORZ:
-    nazwa: Bariera przeciwkorzenna PE-HD 0,5 mm (PN-EN 13948)
-    lambda: 0.4
-    rho: 950
-    cp: 1800
-    mu: 100000
-    kreskowanie: TWORZYWO
-    kolor: '#1f4f35'
-    funkcja: bariera_korzenna
-    zrodlo: 'PN-EN ISO 10456: PE-HD λ 0,40'
-  MEMB_SBS_POD:
-    nazwa: 'Izolacja przeciwwilgociowa i przeciwradonowa: membrana SBS 4 mm na płycie fundamentowej'
-    lambda: 0.23
-    rho: 1100
-    cp: 1000
-    mu: 20000
-    kreskowanie: IZOL_PRZECIWWILGOCIOWA
-    kolor: '#2f3032'
-    funkcja: przeciwwilgociowa
-    zrodlo: PN-EN 13969, DWU
-  FOLIA_PE:
-    nazwa: Folia PE 0,2 mm (warstwa rozdzielająca)
-    lambda: 0.33
-    rho: 950
-    cp: 1800
-    mu: 100000
-    kreskowanie: PAROIZOLACJA
-    kolor: '#5d6d7e'
-    funkcja: paroizolacja
-    zrodlo: 'PN-EN ISO 10456: PE λ 0,33'
-  MEMB_WIATR:
-    nazwa: Membrana fasadowa wiatroizolacyjna UV-stabilna, czarna (sd ≈ 0,02 m)
-    lambda: 0.17
-    rho: 600
-    cp: 1000
-    sd: 0.02
-    mu: 40
-    kreskowanie: MEMBRANA_PAROPRZEP
-    kolor: '#1d1d1d'
-    funkcja: wiatroizolacja
-    zrodlo: DWU typowej membrany fasadowej UV (PN-EN 13859-2)
-  MEMB_PAROSZ:
-    nazwa: Membrana paroszczelna (warstwa szczelności powietrznej w ścianie szkieletowej), sd ≥ 10 m
-    lambda: 0.17
-    rho: 600
-    cp: 1000
-    sd: 10.0
-    mu: 25000
-    kreskowanie: PAROIZOLACJA
-    kolor: '#2e7d32'
-    funkcja: paroizolacja
-    zrodlo: PN-EN 13984, DWU
-  MATA_DREN:
-    nazwa: Mata drenażowo-retencyjna HDPE 25 mm (dach zielony)
-    lambda: 0.5
-    rho: 80
-    cp: 1800
-    mu: 1
-    kreskowanie: TWORZYWO
-    kolor: '#4a4a4a'
-    funkcja: drenaz
-    zrodlo: DWU typowej maty drenażowej (pustki — λ zastępcza, poza obliczeniem U)
-  GEOWL:
-    nazwa: Geowłóknina filtracyjna PP 150 g/m²
-    lambda: 0.5
-    rho: 150
-    cp: 1800
-    mu: 1
-    kreskowanie: TWORZYWO
-    kolor: '#bdbdbd'
-    funkcja: geowloknina
-    zrodlo: PN-EN 13252, DWU
-  WLOKN_OCHR:
-    nazwa: Włóknina ochronna PP 300 g/m²
-    lambda: 0.5
-    rho: 150
-    cp: 1800
-    mu: 1
-    kreskowanie: TWORZYWO
-    kolor: '#a7a7a7'
-    funkcja: geowloknina
-    zrodlo: PN-EN 13252, DWU
-  SUBSTRAT:
-    nazwa: Substrat ekstensywny 8 cm z matą rozchodnikową (sedum)
-    lambda: 0.8
-    rho: 1100
-    cp: 1500
-    mu: 5
-    kreskowanie: HUMUS
-    kolor: '#6d8b3a'
-    funkcja: substrat
-    ciezar: 14.0
-    zrodlo: FLL / DWU typowego substratu; ciężar w stanie nasyconym ≈ 1,4 t/m³
-  ZWIR_16:
-    nazwa: Żwir płukany 16/32 mm (balast dachu P1, opaska przy attyce)
-    lambda: 2.0
-    rho: 1700
-    cp: 1000
-    mu: 1
-    kreskowanie: ZWIR
-    kolor: '#bdb6a4'
-    ciezar: 17.0
-    zrodlo: 'PN-EN ISO 10456 tab. 3: żwir λ 2,0'
-  PIASEK:
-    nazwa: Podsypka piaskowa zagęszczona (I_s ≥ 0,98)
-    lambda: 2.0
-    rho: 1900
-    cp: 1000
-    mu: 50
-    kreskowanie: PIASEK
-    kolor: '#d8c7a0'
-    zrodlo: 'PN-EN ISO 10456 tab. 3: piasek λ 2,0'
-  PUSTKA_WENT:
-    nazwa: Pustka wentylowana 40 mm (ruszt lamel)
-    lambda: 0.25
-    rho: 1.2
-    cp: 1000
-    mu: 1
-    kreskowanie: POSPOLKA
-    kolor: '#ffffff'
-    zrodlo: 'PN-EN ISO 6946 p. 6.9: pustka dobrze wentylowana — warstwy zewnętrzne pomijane, R_se = R_si'
-  TYNK_GIPS:
-    nazwa: Tynk gipsowy maszynowy 1,5 cm
-    lambda: 0.4
-    rho: 1200
-    cp: 1000
-    mu: 10
-    kreskowanie: TYNK
-    kolor: '#f3f1ec'
-    zrodlo: 'PN-EN ISO 10456 tab. 3: tynk gipsowy 1200 kg/m³ λ 0,43 → 0,40 (DWU)'
-  TYNK_CW:
-    nazwa: Tynk cementowo-wapienny 1,5 cm (garaż, pom. techniczne)
-    lambda: 0.82
-    rho: 1850
-    cp: 1000
-    mu: 15
-    kreskowanie: TYNK
-    kolor: '#e9e6df'
-    zrodlo: 'PN-EN 1745 / PN-EN ISO 10456: zaprawa 1800 kg/m³ λ 0,82'
-  TYNK_SIL:
-    nazwa: 'ETICS: warstwa zbrojona + tynk silikonowy 1,5 mm (biały / jasnoszary NCS S 1500-N)'
-    lambda: 0.8
-    rho: 1700
-    cp: 1000
-    mu: 50
-    kreskowanie: TYNK
-    kolor: '#f5f4f0'
-    zrodlo: DWU typowego systemu ETICS (ETA)
-  GK:
-    nazwa: Płyta gipsowo-kartonowa 12,5 mm (GKB / GKBI w łazienkach)
-    lambda: 0.25
-    rho: 700
-    cp: 1000
-    mu: 10
-    kreskowanie: PLYTA_GK
-    kolor: '#eeeeee'
-    zrodlo: 'PN-EN ISO 10456 tab. 3: płyta gipsowa λ 0,25'
-  OSB:
-    nazwa: Płyta OSB/3 15 mm (usztywnienie i warstwa szczelności ściany A')
-    lambda: 0.13
-    rho: 600
-    cp: 1700
-    mu: 200
-    kreskowanie: PLYTA_DREWNOPOCHODNA
-    kolor: '#d8b27a'
-    zrodlo: 'PN-EN ISO 10456 tab. 3: OSB 650 kg/m³ λ 0,13; μ 30/50 (przyjęto 200 — DWU)'
-  DWD16:
-    nazwa: Płyta drewnopochodna wiatroizolacyjna DWD/MDF.RWH 16 mm
-    lambda: 0.1
-    rho: 550
-    cp: 1700
-    mu: 11
-    kreskowanie: PLYTA_DREWNOPOCHODNA
-    kolor: '#b7925c'
-    zrodlo: DWU typowej płyty DWD λ 0,10, μ 11
-  JASTRYCH:
-    nazwa: Jastrych cementowy CT-C25-F5 z wężownicą ogrzewania podłogowego
-    lambda: 1.2
-    rho: 2000
-    cp: 1000
-    mu: 50
-    kreskowanie: JASTRYCH
-    kolor: '#c9c5bb'
-    ciezar: 22.0
-    zrodlo: 'PN-EN ISO 10456 tab. 3: jastrych 2000 kg/m³ λ 1,35 → 1,20 (DWU)'
-  DESKA_DEB:
-    nazwa: Deska warstwowa dębowa 15 mm, klejona
-    lambda: 0.18
-    rho: 700
-    cp: 1600
-    mu: 50
-    kreskowanie: DREWNO_WZDL
-    kolor: '#b58a5a'
-    zrodlo: 'PN-EN ISO 10456 tab. 3: drewno liściaste 700 kg/m³ λ 0,18'
-  GRES:
-    nazwa: Płytki gresowe 60×120 na kleju C2TE S1
-    lambda: 1.3
-    rho: 2300
-    cp: 840
-    mu: 200
-    kreskowanie: PLYTKI
-    kolor: '#cfc9bf'
-    zrodlo: 'PN-EN ISO 10456 tab. 3: ceramika λ 1,3'
-  HYDRO_PODPL:
-    nazwa: Hydroizolacja podpłytkowa (masa uszczelniająca + taśmy), strefy mokre
-    lambda: 0.2
-    rho: 1400
-    cp: 1000
-    mu: 3000
-    kreskowanie: IZOL_PRZECIWWODNA
-    kolor: '#3f7fbf'
-    funkcja: hydroizolacja
-    zrodlo: PN-EN 14891, DWU
-  PLYTKI_SC:
-    nazwa: Płytki ścienne ceramiczne (łazienki, WC, pralnia — do 2,0 m / do sufitu w natryskach)
-    lambda: 1.3
-    rho: 2300
-    cp: 840
-    mu: 200
-    kreskowanie: PLYTKI
-    kolor: '#e3ded6'
-    zrodlo: jw.
-  ZYWICA:
-    nazwa: Posadzka żywiczna epoksydowa antypoślizgowa R11 (garaż)
-    lambda: 0.2
-    rho: 1400
-    cp: 1000
-    mu: 10000
-    kreskowanie: TWORZYWO
-    kolor: '#8c8f91'
-    zrodlo: DWU typowej posadzki żywicznej
-  SUF_GK:
-    nazwa: Sufit podwieszany GK (strefy kanałów wentylacji)
-    lambda: 0.25
-    rho: 700
-    cp: 1000
-    mu: 10
-    kreskowanie: PLYTA_GK
-    kolor: '#f2f2f2'
-    zrodlo: jw. GK
-  PODSUF:
-    nazwa: 'Podsufitka zewnętrzna: płyta włóknocementowa 12 mm na ruszcie, RAL 7016'
-    lambda: 0.35
-    rho: 1500
-    cp: 1000
-    mu: 50
-    kreskowanie: PLYTA_GK
-    kolor: '#474b4f'
-    zrodlo: DWU typowej płyty włóknocementowej
-  SZKLO_VSG:
-    nazwa: Ścianka szklana VSG 2 × 8 mm w ramie aluminiowej (wiatrołap / hol)
-    lambda: 1.0
-    rho: 2500
-    cp: 750
-    mu: 1000000
-    kreskowanie: SZKLO
-    kolor: '#bcd9e6'
-    zrodlo: 'PN-EN ISO 10456 tab. 3: szkło λ 1,0'
-  DREWNO_TERMO:
-    nazwa: Lamele elewacyjne 40×80 mm, drewno termojesion (klasa 1 trwałości), olejowane
-    lambda: 0.13
-    rho: 600
-    cp: 1600
-    mu: 50
-    kreskowanie: DREWNO_POPRZ
-    kolor: '#9b6b41'
-    pbr:
-      kolor: '#9b6b41'
-      szorstkosc: 0.8
-      tekstura: drewno
-    zrodlo: 'PN-EN ISO 10456 tab. 3: drewno 600 kg/m³ λ 0,13 (lamele poza izolacją — bez wpływu na U)'
-  DAB_LAMELA:
-    nazwa: Lamele dębowe 30×60 mm (ekran komunikacji P0, h 2,10 m)
-    lambda: 0.18
-    rho: 700
-    cp: 1600
-    mu: 50
-    kreskowanie: DREWNO_POPRZ
-    kolor: '#b58a5a'
-    zrodlo: jw.
+  ZB_C25: {nazwa: 'Żelbet C25/30, B500SP (stropy, płyta fundamentowa, ściany)', lambda: 2.3, rho: 2400, cp: 1000, mu: 130, kreskowanie: ZELBET, kolor: '#b9b6ae', ciezar: 25.0}   # PN-EN ISO 10456 tab. 3: beton zbrojony 1 % stali λ 2,3; μ 80/130
+  ZB_C30: {nazwa: 'Żelbet C30/37 XC4/XF1 (krawędzie płyt wysuniętych, attyki, belki)', lambda: 2.5, rho: 2500, cp: 1000, mu: 130, kreskowanie: ZELBET, kolor: '#b4b1a9', ciezar: 25.0}   # PN-EN ISO 10456 tab. 3: beton zbrojony 2 % stali λ 2,5
+  SIL18: {nazwa: 'Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej', lambda: 0.9, rho: 1800, cp: 1000, mu: 15, kreskowanie: MUR_SILIKAT, kolor: '#d9d4ca', ciezar: 18.0}   # PN-EN 1745 zał. A (ρ 1800, P=50 %) λ ≈ 0,8–1,0 → 0,90 z zapasem; μ 5/25 (PN-EN ISO 10456)
+  SIL12: {nazwa: 'Bloczek wapienno-piaskowy 12 cm, kl. 15 (ścianki działowe, licowy w klatce)', lambda: 0.9, rho: 1800, cp: 1000, mu: 15, kreskowanie: MUR_SILIKAT, kolor: '#dcd7cd', ciezar: 18.0}   # jw.
+  STAL_S355: {nazwa: 'Stal konstrukcyjna S355 (słupy RK, rama boksu C), cynkowana ogniowo + malowana proszkowo RAL 7016', lambda: 50.0, rho: 7850, cp: 450, mu: 1000000, kreskowanie: STAL, kolor: '#383e42', ciezar: 78.5}   # PN-EN ISO 10456 tab. 3: stal λ 50
+  RAMA_C: {nazwa: 'Rama boksu C: ruszt stalowy ocynkowany w okładzinie z blachy aluminiowej RAL 7016 (pusta w środku)', lambda: 50.0, rho: 1200, cp: 450, mu: 1000000, kreskowanie: STAL, kolor: '#3b4044', ciezar: 6.0}   # lekka rama — przeszczep J2 z W1; ρ zastępcza przekroju
+  DREWNO_KVH: {nazwa: Drewno konstrukcyjne KVH C24 (szkielet lekkiej ściany A'), lambda: 0.13, rho: 450, cp: 1600, mu: 50, kreskowanie: DREWNO_POPRZ, kolor: '#c9a36b', ciezar: 4.2}   # PN-EN ISO 10456 tab. 3: drewno iglaste 450 kg/m³ λ 0,12–0,13; μ 20/50
+  EPS031: {nazwa: 'Styropian grafitowy EPS 031 (ETICS, NRO w systemie)', lambda: 0.031, rho: 15, cp: 1450, mu: 40, kreskowanie: IZOL_TWARDA, kolor: '#8f9296', funkcja: izolacja}   # DWU typowego EPS 70-031 (PN-EN 13163); μ 20–40 → 40
+  EPS038: {nazwa: Styropian podłogowy EPS 100-038 (pod jastrychem), lambda: 0.038, rho: 18, cp: 1450, mu: 40, kreskowanie: IZOL_TWARDA, kolor: '#ececec', funkcja: izolacja}   # DWU typowego EPS 100 (PN-EN 13163)
+  EPS_T: {nazwa: 'Styropian elastyfikowany EPS T (akustyczny, pod jastrychem)', lambda: 0.04, rho: 12, cp: 1450, mu: 20, kreskowanie: IZOL_TWARDA, kolor: '#f1efe6', funkcja: izolacja}   # DWU typowego EPS T 30 (PN-EN 13163)
+  XPS300: {nazwa: 'Polistyren ekstrudowany XPS 300 (pod płytą fundamentową, cokół, izolacja obwodowa)', lambda: 0.036, rho: 32, cp: 1450, mu: 150, kreskowanie: IZOL_XPS, kolor: '#9cc7a4', funkcja: izolacja}   # DWU typowego XPS 300 λ_D 0,034–0,036 (PN-EN 13164); w gruncie przyjęto 0,036
+  PIR022: {nazwa: Płyty PIR z okładziną (izolacja spadkowa stropodachów), lambda: 0.022, rho: 32, cp: 1400, mu: 60, kreskowanie: IZOL_PIR, kolor: '#d8c98a', funkcja: izolacja}   # DWU typowego PIR (PN-EN 13165) λ_D 0,022
+  WELNA_FAS: {nazwa: 'Wełna mineralna fasadowa (elewacja wentylowana bryły A, A1)', lambda: 0.035, rho: 60, cp: 1030, mu: 1, kreskowanie: IZOL_MIEKKA, kolor: '#e7d9a2', funkcja: izolacja}   # DWU typowej wełny fasadowej (PN-EN 13162) λ_D 0,034–0,035
+  WELNA_035: {nazwa: 'Wełna mineralna 035 (szkielet, docieplenia, ściana dom–garaż)', lambda: 0.035, rho: 40, cp: 1030, mu: 1, kreskowanie: IZOL_MIEKKA, kolor: '#efe3b0', funkcja: izolacja}   # PN-EN 13162, DWU typowego wyrobu
+  PAROIZ_AL: {nazwa: Paroizolacja bitumiczna z wkładką Al (na płycie stropodachów), lambda: 0.23, rho: 1100, cp: 1000, sd: 1500.0, mu: 375000, kreskowanie: PAROIZOLACJA, kolor: '#3a3a3a', funkcja: paroizolacja}   # DWU typowej papy paroizolacyjnej z Al, sd ≥ 1500 m
+  MEMB_TPO: {nazwa: 'Membrana dachowa TPO 1,5 mm, mocowana mechanicznie (hydroizolacja stropodachów)', lambda: 0.2, rho: 1000, cp: 1000, mu: 100000, kreskowanie: IZOL_PRZECIWWODNA, kolor: '#6e7275', funkcja: hydroizolacja}   # DWU typowej membrany TPO; μ ~ 10⁵
+  PAPA_SBS: {nazwa: 'Hydroizolacja 2 × papa SBS (podkładowa + wierzchniego krycia, dach zielony)', lambda: 0.23, rho: 1100, cp: 1000, mu: 20000, kreskowanie: IZOL_PRZECIWWODNA, kolor: '#2f3032', funkcja: hydroizolacja}   # PN-EN 13707, DWU; PN-EN ISO 10456 tab. 4 bitum λ 0,23
+  BARIERA_KORZ: {nazwa: 'Bariera przeciwkorzenna PE-HD 0,5 mm (PN-EN 13948)', lambda: 0.4, rho: 950, cp: 1800, mu: 100000, kreskowanie: TWORZYWO, kolor: '#1f4f35', funkcja: bariera_korzenna}   # PN-EN ISO 10456: PE-HD λ 0,40
+  MEMB_SBS_POD: {nazwa: 'Izolacja przeciwwilgociowa i przeciwradonowa: membrana SBS 4 mm na płycie fundamentowej', lambda: 0.23, rho: 1100, cp: 1000, mu: 20000, kreskowanie: IZOL_PRZECIWWILGOCIOWA, kolor: '#2f3032', funkcja: przeciwwilgociowa}   # PN-EN 13969, DWU
+  FOLIA_PE: {nazwa: 'Folia PE 0,2 mm (warstwa rozdzielająca)', lambda: 0.33, rho: 950, cp: 1800, mu: 100000, kreskowanie: PAROIZOLACJA, kolor: '#5d6d7e', funkcja: paroizolacja}   # PN-EN ISO 10456: PE λ 0,33
+  MEMB_WIATR: {nazwa: 'Membrana fasadowa wiatroizolacyjna UV-stabilna, czarna (sd ≈ 0,02 m)', lambda: 0.17, rho: 600, cp: 1000, sd: 0.02, mu: 40, kreskowanie: MEMBRANA_PAROPRZEP, kolor: '#1d1d1d', funkcja: wiatroizolacja}   # DWU typowej membrany fasadowej UV (PN-EN 13859-2)
+  MEMB_PAROSZ: {nazwa: 'Membrana paroszczelna (warstwa szczelności powietrznej w ścianie szkieletowej), sd ≥ 10 m', lambda: 0.17, rho: 600, cp: 1000, sd: 10.0, mu: 25000, kreskowanie: PAROIZOLACJA, kolor: '#2e7d32', funkcja: paroizolacja}   # PN-EN 13984, DWU
+  MATA_DREN: {nazwa: Mata drenażowo-retencyjna HDPE 25 mm (dach zielony), lambda: 0.5, rho: 80, cp: 1800, mu: 1, kreskowanie: TWORZYWO, kolor: '#4a4a4a', funkcja: drenaz}   # DWU typowej maty drenażowej (pustki — λ zastępcza, poza obliczeniem U)
+  GEOWL: {nazwa: Geowłóknina filtracyjna PP 150 g/m², lambda: 0.5, rho: 150, cp: 1800, mu: 1, kreskowanie: TWORZYWO, kolor: '#bdbdbd', funkcja: geowloknina}   # PN-EN 13252, DWU
+  WLOKN_OCHR: {nazwa: Włóknina ochronna PP 300 g/m², lambda: 0.5, rho: 150, cp: 1800, mu: 1, kreskowanie: TWORZYWO, kolor: '#a7a7a7', funkcja: geowloknina}   # PN-EN 13252, DWU
+  SUBSTRAT: {nazwa: Substrat ekstensywny 8 cm z matą rozchodnikową (sedum), lambda: 0.8, rho: 1100, cp: 1500, mu: 5, kreskowanie: HUMUS, kolor: '#6d8b3a', funkcja: substrat, ciezar: 14.0}   # FLL / DWU typowego substratu; ciężar w stanie nasyconym ≈ 1,4 t/m³
+  ZWIR_16: {nazwa: 'Żwir płukany 16/32 mm (balast dachu P1, opaska przy attyce)', lambda: 2.0, rho: 1700, cp: 1000, mu: 1, kreskowanie: ZWIR, kolor: '#bdb6a4', ciezar: 17.0}   # PN-EN ISO 10456 tab. 3: żwir λ 2,0
+  PIASEK: {nazwa: 'Podsypka piaskowa zagęszczona (I_s ≥ 0,98)', lambda: 2.0, rho: 1900, cp: 1000, mu: 50, kreskowanie: PIASEK, kolor: '#d8c7a0'}   # PN-EN ISO 10456 tab. 3: piasek λ 2,0
+  PUSTKA_WENT: {nazwa: Pustka wentylowana 40 mm (ruszt lamel), lambda: 0.25, rho: 1.2, cp: 1000, mu: 1, kreskowanie: POSPOLKA, kolor: '#ffffff'}   # PN-EN ISO 6946 p. 6.9: pustka dobrze wentylowana — warstwy zewnętrzne pomijane, R_se = R_si
+  TYNK_GIPS: {nazwa: 'Tynk gipsowy maszynowy 1,5 cm', lambda: 0.4, rho: 1200, cp: 1000, mu: 10, kreskowanie: TYNK, kolor: '#f3f1ec'}   # PN-EN ISO 10456 tab. 3: tynk gipsowy 1200 kg/m³ λ 0,43 → 0,40 (DWU)
+  TYNK_CW: {nazwa: 'Tynk cementowo-wapienny 1,5 cm (garaż, pom. techniczne)', lambda: 0.82, rho: 1850, cp: 1000, mu: 15, kreskowanie: TYNK, kolor: '#e9e6df'}   # PN-EN 1745 / PN-EN ISO 10456: zaprawa 1800 kg/m³ λ 0,82
+  TYNK_SIL: {nazwa: 'ETICS: warstwa zbrojona + tynk silikonowy 1,5 mm (biały / jasnoszary NCS S 1500-N)', lambda: 0.8, rho: 1700, cp: 1000, mu: 50, kreskowanie: TYNK, kolor: '#f5f4f0'}   # DWU typowego systemu ETICS (ETA)
+  GK: {nazwa: 'Płyta gipsowo-kartonowa 12,5 mm (GKB / GKBI w łazienkach)', lambda: 0.25, rho: 700, cp: 1000, mu: 10, kreskowanie: PLYTA_GK, kolor: '#eeeeee'}   # PN-EN ISO 10456 tab. 3: płyta gipsowa λ 0,25
+  OSB: {nazwa: Płyta OSB/3 15 mm (usztywnienie i warstwa szczelności ściany A'), lambda: 0.13, rho: 600, cp: 1700, mu: 200, kreskowanie: PLYTA_DREWNOPOCHODNA, kolor: '#d8b27a'}   # PN-EN ISO 10456 tab. 3: OSB 650 kg/m³ λ 0,13; μ 30/50 (przyjęto 200 — DWU)
+  DWD16: {nazwa: Płyta drewnopochodna wiatroizolacyjna DWD/MDF.RWH 16 mm, lambda: 0.1, rho: 550, cp: 1700, mu: 11, kreskowanie: PLYTA_DREWNOPOCHODNA, kolor: '#b7925c'}   # DWU typowej płyty DWD λ 0,10, μ 11
+  JASTRYCH: {nazwa: Jastrych cementowy CT-C25-F5 z wężownicą ogrzewania podłogowego, lambda: 1.2, rho: 2000, cp: 1000, mu: 50, kreskowanie: JASTRYCH, kolor: '#c9c5bb', ciezar: 22.0}   # PN-EN ISO 10456 tab. 3: jastrych 2000 kg/m³ λ 1,35 → 1,20 (DWU)
+  DESKA_DEB: {nazwa: 'Deska warstwowa dębowa 15 mm, klejona', lambda: 0.18, rho: 700, cp: 1600, mu: 50, kreskowanie: DREWNO_WZDL, kolor: '#b58a5a'}   # PN-EN ISO 10456 tab. 3: drewno liściaste 700 kg/m³ λ 0,18
+  GRES: {nazwa: Płytki gresowe 60×120 na kleju C2TE S1, lambda: 1.3, rho: 2300, cp: 840, mu: 200, kreskowanie: PLYTKI, kolor: '#cfc9bf'}   # PN-EN ISO 10456 tab. 3: ceramika λ 1,3
+  HYDRO_PODPL: {nazwa: 'Hydroizolacja podpłytkowa (masa uszczelniająca + taśmy), strefy mokre', lambda: 0.2, rho: 1400, cp: 1000, mu: 3000, kreskowanie: IZOL_PRZECIWWODNA, kolor: '#3f7fbf', funkcja: hydroizolacja}   # PN-EN 14891, DWU
+  PLYTKI_SC: {nazwa: 'Płytki ścienne ceramiczne (łazienki, WC, pralnia — do 2,0 m / do sufitu w natryskach)', lambda: 1.3, rho: 2300, cp: 840, mu: 200, kreskowanie: PLYTKI, kolor: '#e3ded6'}   # jw.
+  ZYWICA: {nazwa: Posadzka żywiczna epoksydowa antypoślizgowa R11 (garaż), lambda: 0.2, rho: 1400, cp: 1000, mu: 10000, kreskowanie: TWORZYWO, kolor: '#8c8f91'}   # DWU typowej posadzki żywicznej
+  SUF_GK: {nazwa: Sufit podwieszany GK (strefy kanałów wentylacji), lambda: 0.25, rho: 700, cp: 1000, mu: 10, kreskowanie: PLYTA_GK, kolor: '#f2f2f2'}   # jw. GK
+  PODSUF: {nazwa: 'Podsufitka zewnętrzna: płyta włóknocementowa 12 mm na ruszcie, RAL 7016', lambda: 0.35, rho: 1500, cp: 1000, mu: 50, kreskowanie: PLYTA_GK, kolor: '#474b4f'}   # DWU typowej płyty włóknocementowej
+  SZKLO_VSG: {nazwa: Ścianka szklana VSG 2 × 8 mm w ramie aluminiowej (wiatrołap / hol), lambda: 1.0, rho: 2500, cp: 750, mu: 1000000, kreskowanie: SZKLO, kolor: '#bcd9e6'}   # PN-EN ISO 10456 tab. 3: szkło λ 1,0
+  DREWNO_TERMO: {nazwa: 'Lamele elewacyjne 40×80 mm, drewno termojesion (klasa 1 trwałości), olejowane', lambda: 0.13, rho: 600, cp: 1600, mu: 50, kreskowanie: DREWNO_POPRZ, kolor: '#9b6b41', pbr: {kolor: '#9b6b41', szorstkosc: 0.8, tekstura: drewno}}   # PN-EN ISO 10456 tab. 3: drewno 600 kg/m³ λ 0,13 (lamele poza izolacją — bez wpływu na U)
+  DAB_LAMELA: {nazwa: 'Lamele dębowe 30×60 mm (ekran komunikacji P0, h 2,10 m)', lambda: 0.18, rho: 700, cp: 1600, mu: 50, kreskowanie: DREWNO_POPRZ, kolor: '#b58a5a'}   # jw.
+
+# Przegrody — ściany od wnętrza do zewnątrz; poziome od góry do dołu (brief §9: pełne warstwy)
 przegrody:
   SZ1:
     nazwa: 'Ściana zewnętrzna nośna: silikat 18 + ETICS EPS 031 20 cm (U ≈ 0,15)'
     typ: sciana_zewn
     warstwy:
-    - mat: TYNK_GIPS
-      d: 0.015
-      funkcja: szczelnosc_powietrzna
-    - mat: SIL18
-      d: 0.18
-      konstrukcyjna: true
-    - mat: EPS031
-      d: 0.2
-    - mat: TYNK_SIL
-      d: 0.01
+      - {mat: TYNK_GIPS, d: 0.015, funkcja: szczelnosc_powietrzna}
+      - {mat: SIL18, d: 0.18, konstrukcyjna: true}
+      - {mat: EPS031, d: 0.2}
+      - {mat: TYNK_SIL, d: 0.01}
   SZ2:
-    nazwa: 'Ściana zewnętrzna bryły A (P2) za lamelami: silikat 18 + wełna fasadowa 20 cm + membrana UV-stabilna (czarna); szczelina wentylowana ok. 11 cm i lamele na ruszcie — element
-      `lamele` (U ≈ 0,16)'
+    nazwa: 'Ściana zewnętrzna bryły A (P2) za lamelami: silikat 18 + wełna fasadowa 20 cm + membrana UV-stabilna (czarna); szczelina wentylowana ok. 11 cm i lamele na ruszcie — element `lamele` (U ≈ 0,16)'
     typ: sciana_zewn
     warstwy:
-    - mat: TYNK_GIPS
-      d: 0.015
-      funkcja: szczelnosc_powietrzna
-    - mat: SIL18
-      d: 0.18
-      konstrukcyjna: true
-    - mat: WELNA_FAS
-      d: 0.2
-    - mat: MEMB_WIATR
-      d: 0.01
+      - {mat: TYNK_GIPS, d: 0.015, funkcja: szczelnosc_powietrzna}
+      - {mat: SIL18, d: 0.18, konstrukcyjna: true}
+      - {mat: WELNA_FAS, d: 0.2}
+      - {mat: MEMB_WIATR, d: 0.01}
   SZL:
-    nazwa: 'Ściana zewnętrzna lekka A'' (na wsporniku P2): szkielet KVH 45×200 z wełną + OSB (szczelność) + DWD + membrana UV + pustka wentylowana; bez funkcji nośnej dla stropodachu
-      (U ≈ 0,15)'
+    nazwa: 'Ściana zewnętrzna lekka A'' (na wsporniku P2): szkielet KVH 45×200 z wełną + OSB (szczelność) + DWD + membrana UV + pustka wentylowana; bez funkcji nośnej dla stropodachu (U ≈ 0,15)'
     typ: sciana_zewn
     warstwy:
-    - mat: GK
-      d: 0.025
-    - mat: WELNA_035
-      d: 0.05
-      frakcje:
-      - mat: WELNA_035
-        udzial: 0.9
-      - mat: DREWNO_KVH
-        udzial: 0.1
-    - mat: OSB
-      d: 0.015
-      funkcja: paroizolacja
-    - mat: WELNA_035
-      d: 0.2
-      konstrukcyjna: true
-      frakcje:
-      - mat: WELNA_035
-        udzial: 0.88
-      - mat: DREWNO_KVH
-        udzial: 0.12
-    - mat: DWD16
-      d: 0.016
-    - mat: WELNA_FAS
-      d: 0.06
-    - mat: MEMB_WIATR
-      d: 0.004
+      - {mat: GK, d: 0.025}
+      - {mat: WELNA_035, d: 0.05, frakcje: [{mat: WELNA_035, udzial: 0.9}, {mat: DREWNO_KVH, udzial: 0.1}]}
+      - {mat: OSB, d: 0.015, funkcja: paroizolacja}
+      - {mat: WELNA_035, d: 0.2, konstrukcyjna: true, frakcje: [{mat: WELNA_035, udzial: 0.88}, {mat: DREWNO_KVH, udzial: 0.12}]}
+      - {mat: DWD16, d: 0.016}
+      - {mat: WELNA_FAS, d: 0.06}
+      - {mat: MEMB_WIATR, d: 0.004}
   SW18:
     nazwa: 'Ściana wewnętrzna nośna: silikat 18, tynk gipsowy obustronnie'
     typ: sciana_wewn_nosna
     warstwy:
-    - mat: TYNK_GIPS
-      d: 0.015
-    - mat: SIL18
-      d: 0.18
-      konstrukcyjna: true
-    - mat: TYNK_GIPS
-      d: 0.015
+      - {mat: TYNK_GIPS, d: 0.015}
+      - {mat: SIL18, d: 0.18, konstrukcyjna: true}
+      - {mat: TYNK_GIPS, d: 0.015}
   SWZB:
     nazwa: Ściana wewnętrzna nośna żelbetowa 18 cm (trzon klatki na P0 — usztywnienie w kierunku x, J2)
     typ: sciana_wewn_nosna
     warstwy:
-    - mat: TYNK_GIPS
-      d: 0.015
-    - mat: ZB_C25
-      d: 0.18
-      konstrukcyjna: true
-    - mat: TYNK_GIPS
-      d: 0.015
+      - {mat: TYNK_GIPS, d: 0.015}
+      - {mat: ZB_C25, d: 0.18, konstrukcyjna: true}
+      - {mat: TYNK_GIPS, d: 0.015}
   SWG:
     nazwa: 'Ściana nośna dom–garaż nieogrzewany: silikat 18 + wełna 12 cm od strony garażu + tynk (U ≈ 0,24 ≤ 0,30; szczelna na spaliny)'
     typ: sciana_wewn_nosna
     warstwy:
-    - mat: TYNK_GIPS
-      d: 0.015
-    - mat: SIL18
-      d: 0.18
-      konstrukcyjna: true
-    - mat: WELNA_035
-      d: 0.12
-    - mat: TYNK_CW
-      d: 0.01
+      - {mat: TYNK_GIPS, d: 0.015}
+      - {mat: SIL18, d: 0.18, konstrukcyjna: true}
+      - {mat: WELNA_035, d: 0.12}
+      - {mat: TYNK_CW, d: 0.01}
   SC12:
     nazwa: 'Ścianka środkowa klatki schodowej: silikat 12 licowy (P0–P2)'
     typ: scianka_dzialowa
     warstwy:
-    - mat: SIL12
-      d: 0.12
-      konstrukcyjna: true
+      - {mat: SIL12, d: 0.12, konstrukcyjna: true}
   DZ12:
     nazwa: 'Ścianka działowa: silikat 12 + tynk gipsowy obustronnie (R''w ≥ 45 dB)'
     typ: scianka_dzialowa
     warstwy:
-    - mat: TYNK_GIPS
-      d: 0.015
-    - mat: SIL12
-      d: 0.12
-      konstrukcyjna: true
-    - mat: TYNK_GIPS
-      d: 0.015
+      - {mat: TYNK_GIPS, d: 0.015}
+      - {mat: SIL12, d: 0.12, konstrukcyjna: true}
+      - {mat: TYNK_GIPS, d: 0.015}
   GK10:
     nazwa: 'Obudowa szachtu SI: 2 × GKF 12,5 + profil CW 50 z wełną + 2 × GKF 12,5 (EI 30)'
     typ: scianka_dzialowa
     warstwy:
-    - mat: GK
-      d: 0.025
-    - mat: WELNA_035
-      d: 0.05
-      konstrukcyjna: true
-    - mat: GK
-      d: 0.025
+      - {mat: GK, d: 0.025}
+      - {mat: WELNA_035, d: 0.05, konstrukcyjna: true}
+      - {mat: GK, d: 0.025}
   SGL:
     nazwa: 'Ścianka szklana wiatrołap/hol: VSG w ramie aluminiowej z drzwiami szklanymi 0,90 m'
     typ: scianka_dzialowa
     warstwy:
-    - mat: SZKLO_VSG
-      d: 0.05
-      konstrukcyjna: true
+      - {mat: SZKLO_VSG, d: 0.05, konstrukcyjna: true}
   AT1:
-    nazwa: 'Attyka: żelbet 18 cm (wieniec podniesiony), izolacja z 3 stron (EPS 031 10 cm od dachu, ETICS od zewnątrz, PIR 4 cm na koronie), obróbka blacharska ze spadkiem do dachu,
-      wywinięcie membrany ≥ 0,15 m'
+    nazwa: 'Attyka: żelbet 18 cm (wieniec podniesiony), izolacja z 3 stron (EPS 031 10 cm od dachu, ETICS od zewnątrz, PIR 4 cm na koronie), obróbka blacharska ze spadkiem do dachu, wywinięcie membrany ≥ 0,15 m'
     typ: attyka
     warstwy:
-    - mat: PIR022
-      d: 0.1
-    - mat: ZB_C30
-      d: 0.18
-      konstrukcyjna: true
-    - mat: EPS031
-      d: 0.2
-    - mat: TYNK_SIL
-      d: 0.005
+      - {mat: PIR022, d: 0.1}
+      - {mat: ZB_C30, d: 0.18, konstrukcyjna: true}
+      - {mat: EPS031, d: 0.2}
+      - {mat: TYNK_SIL, d: 0.005}
   POD-0:
-    nazwa: 'Podłoga na płycie fundamentowej (P0): deska/gres, jastrych z ogrzewaniem podł., EPS 100, membrana SBS (przeciwwilgociowa, przeciwradonowa), płyta ŻB 25 cm, XPS 300 20 cm,
-      folia PE, podsypka (U ≈ 0,14)'
+    nazwa: 'Podłoga na płycie fundamentowej (P0): deska/gres, jastrych z ogrzewaniem podł., EPS 100, membrana SBS (przeciwwilgociowa, przeciwradonowa), płyta ŻB 25 cm, XPS 300 20 cm, folia PE, podsypka (U ≈ 0,14)'
     typ: podloga_na_gruncie
     warstwy:
-    - mat: DESKA_DEB
-      d: 0.015
-    - mat: JASTRYCH
-      d: 0.065
-    - mat: EPS038
-      d: 0.065
-    - mat: MEMB_SBS_POD
-      d: 0.005
-    - mat: ZB_C25
-      d: 0.25
-      konstrukcyjna: true
-    - mat: XPS300
-      d: 0.2
-    - mat: FOLIA_PE
-      d: 0.0002
-    - mat: PIASEK
-      d: 0.2
+      - {mat: DESKA_DEB, d: 0.015}
+      - {mat: JASTRYCH, d: 0.065}
+      - {mat: EPS038, d: 0.065}
+      - {mat: MEMB_SBS_POD, d: 0.005}
+      - {mat: ZB_C25, d: 0.25, konstrukcyjna: true}
+      - {mat: XPS300, d: 0.2}
+      - {mat: FOLIA_PE, d: 0.0002}
+      - {mat: PIASEK, d: 0.2}
   POD-0L:
     nazwa: 'Podłoga na płycie (P0) — łazienki, WC, przedsionek, pom. techniczne: gres na hydroizolacji podpłytkowej'
     typ: podloga_na_gruncie
     warstwy:
-    - mat: GRES
-      d: 0.012
-    - mat: HYDRO_PODPL
-      d: 0.003
-    - mat: JASTRYCH
-      d: 0.065
-    - mat: EPS038
-      d: 0.065
-    - mat: MEMB_SBS_POD
-      d: 0.005
-    - mat: ZB_C25
-      d: 0.25
-      konstrukcyjna: true
-    - mat: XPS300
-      d: 0.2
-    - mat: FOLIA_PE
-      d: 0.0002
-    - mat: PIASEK
-      d: 0.2
+      - {mat: GRES, d: 0.012}
+      - {mat: HYDRO_PODPL, d: 0.003}
+      - {mat: JASTRYCH, d: 0.065}
+      - {mat: EPS038, d: 0.065}
+      - {mat: MEMB_SBS_POD, d: 0.005}
+      - {mat: ZB_C25, d: 0.25, konstrukcyjna: true}
+      - {mat: XPS300, d: 0.2}
+      - {mat: FOLIA_PE, d: 0.0002}
+      - {mat: PIASEK, d: 0.2}
   POD-G:
     nazwa: 'Posadzka garażu (nieogrzewany): żywica R11 na warstwie wyrównawczej, spadek 1,5 % do bramy, płyta ŻB 25 cm na XPS 20 cm'
     typ: podloga_na_gruncie
     warstwy:
-    - mat: ZYWICA
-      d: 0.003
-    - mat: JASTRYCH
-      d: 0.047
-    - mat: ZB_C25
-      d: 0.25
-      konstrukcyjna: true
-    - mat: XPS300
-      d: 0.2
-    - mat: FOLIA_PE
-      d: 0.0002
-    - mat: PIASEK
-      d: 0.2
+      - {mat: ZYWICA, d: 0.003}
+      - {mat: JASTRYCH, d: 0.047}
+      - {mat: ZB_C25, d: 0.25, konstrukcyjna: true}
+      - {mat: XPS300, d: 0.2}
+      - {mat: FOLIA_PE, d: 0.0002}
+      - {mat: PIASEK, d: 0.2}
   POD-1:
     nazwa: 'Strop międzykondygnacyjny: deska dębowa, jastrych z ogrzewaniem podł., EPS 100, EPS T (akustyczny), płyta ŻB 22 cm, tynk'
     typ: strop
     warstwy:
-    - mat: DESKA_DEB
-      d: 0.015
-    - mat: JASTRYCH
-      d: 0.065
-    - mat: EPS038
-      d: 0.04
-    - mat: EPS_T
-      d: 0.03
-    - mat: ZB_C25
-      d: 0.22
-      konstrukcyjna: true
-    - mat: TYNK_GIPS
-      d: 0.01
+      - {mat: DESKA_DEB, d: 0.015}
+      - {mat: JASTRYCH, d: 0.065}
+      - {mat: EPS038, d: 0.04}
+      - {mat: EPS_T, d: 0.03}
+      - {mat: ZB_C25, d: 0.22, konstrukcyjna: true}
+      - {mat: TYNK_GIPS, d: 0.01}
   POD-1L:
     nazwa: 'Strop międzykondygnacyjny — łazienki, WC, pralnia: gres na hydroizolacji podpłytkowej'
     typ: strop
     warstwy:
-    - mat: GRES
-      d: 0.012
-    - mat: HYDRO_PODPL
-      d: 0.003
-    - mat: JASTRYCH
-      d: 0.065
-    - mat: EPS038
-      d: 0.04
-    - mat: EPS_T
-      d: 0.03
-    - mat: ZB_C25
-      d: 0.22
-      konstrukcyjna: true
-    - mat: TYNK_GIPS
-      d: 0.01
+      - {mat: GRES, d: 0.012}
+      - {mat: HYDRO_PODPL, d: 0.003}
+      - {mat: JASTRYCH, d: 0.065}
+      - {mat: EPS038, d: 0.04}
+      - {mat: EPS_T, d: 0.03}
+      - {mat: ZB_C25, d: 0.22, konstrukcyjna: true}
+      - {mat: TYNK_GIPS, d: 0.01}
   SUF-ZEW:
     nazwa: 'Sufit pod stropem nad powietrzem zewnętrznym (wspornik bryły A): wełna 20 cm na kołkach + podsufitka włóknocementowa na ruszcie z pustką wentylowaną (U stropu ≈ 0,15)'
     typ: strop
     warstwy:
-    - mat: WELNA_035
-      d: 0.2
-      konstrukcyjna: true
-    - mat: PUSTKA_WENT
-      d: 0.04
-      pustka: dw
-    - mat: PODSUF
-      d: 0.012
+      - {mat: WELNA_035, d: 0.2, konstrukcyjna: true}
+      - {mat: PUSTKA_WENT, d: 0.04, pustka: dw}
+      - {mat: PODSUF, d: 0.012}
   SUF-G:
     nazwa: Docieplenie spodu stropu garażu pasem 1,0 m przy ścianach osi E i 2 (wełna 10 cm + płyta) — ograniczenie mostka (J2)
     typ: strop
     warstwy:
-    - mat: WELNA_035
-      d: 0.1
-      konstrukcyjna: true
-    - mat: TYNK_CW
-      d: 0.01
+      - {mat: WELNA_035, d: 0.1, konstrukcyjna: true}
+      - {mat: TYNK_CW, d: 0.01}
   SD1:
     nazwa: 'Stropodach bryły A (P2): membrana TPO, PIR spadkowy 12–32 cm (śr. 22), paroizolacja z Al, płyta ŻB 22 cm, tynk; spadek ≥ 2 % do wpustów WP1/WP2 (U ≈ 0,10)'
     typ: stropodach
     warstwy:
-    - mat: MEMB_TPO
-      d: 0.002
-    - mat: PIR022
-      d: 0.22
-      klin:
-        d_min: 0.12
-        d_max: 0.32
-        ksztalt: prostokat
-    - mat: PAROIZ_AL
-      d: 0.004
-    - mat: ZB_C25
-      d: 0.22
-      konstrukcyjna: true
-    - mat: TYNK_GIPS
-      d: 0.01
+      - {mat: MEMB_TPO, d: 0.002}
+      - {mat: PIR022, d: 0.22, klin: {d_min: 0.12, d_max: 0.32, ksztalt: prostokat}}
+      - {mat: PAROIZ_AL, d: 0.004}
+      - {mat: ZB_C25, d: 0.22, konstrukcyjna: true}
+      - {mat: TYNK_GIPS, d: 0.01}
   SD2:
     nazwa: 'Stropodach nad P1 (pola pn. poza bryłą A): żwir 5 cm, włóknina, membrana TPO, PIR spadkowy 14–26 cm, paroizolacja, płyta ŻB 22 cm (U ≈ 0,11)'
     typ: stropodach
     warstwy:
-    - mat: ZWIR_16
-      d: 0.05
-    - mat: WLOKN_OCHR
-      d: 0.004
-    - mat: MEMB_TPO
-      d: 0.002
-    - mat: PIR022
-      d: 0.2
-      klin:
-        d_min: 0.14
-        d_max: 0.26
-        ksztalt: prostokat
-    - mat: PAROIZ_AL
-      d: 0.004
-    - mat: ZB_C25
-      d: 0.22
-      konstrukcyjna: true
-    - mat: TYNK_GIPS
-      d: 0.01
+      - {mat: ZWIR_16, d: 0.05}
+      - {mat: WLOKN_OCHR, d: 0.004}
+      - {mat: MEMB_TPO, d: 0.002}
+      - {mat: PIR022, d: 0.2, klin: {d_min: 0.14, d_max: 0.26, ksztalt: prostokat}}
+      - {mat: PAROIZ_AL, d: 0.004}
+      - {mat: ZB_C25, d: 0.22, konstrukcyjna: true}
+      - {mat: TYNK_GIPS, d: 0.01}
   DZ1:
-    nazwa: 'Dach zielony ekstensywny NIEUŻYTKOWY nad garażem (pom. nieogrzewane) i pasem gospodarczym: substrat 8 cm, geowłóknina, mata drenażowa, włóknina, bariera przeciwkorzenna,
-      2 × papa SBS, PIR spadkowy 12–24 cm, paroizolacja, płyta ŻB 24 cm (dwukierunkowa); opaska żwirowa 0,5 m przy attykach i wpustach (U ≈ 0,12)'
+    nazwa: 'Dach zielony ekstensywny NIEUŻYTKOWY nad garażem (pom. nieogrzewane) i pasem gospodarczym: substrat 8 cm, geowłóknina, mata drenażowa, włóknina, bariera przeciwkorzenna, 2 × papa SBS, PIR spadkowy 12–24 cm, paroizolacja, płyta ŻB 24 cm (dwukierunkowa); opaska żwirowa 0,5 m przy attykach i wpustach (U ≈ 0,12)'
     typ: stropodach
     warstwy:
-    - mat: SUBSTRAT
-      d: 0.08
-    - mat: GEOWL
-      d: 0.002
-    - mat: MATA_DREN
-      d: 0.025
-    - mat: WLOKN_OCHR
-      d: 0.004
-    - mat: BARIERA_KORZ
-      d: 0.0005
-    - mat: PAPA_SBS
-      d: 0.0095
-    - mat: PIR022
-      d: 0.18
-      klin:
-        d_min: 0.12
-        d_max: 0.24
-        ksztalt: prostokat
-    - mat: PAROIZ_AL
-      d: 0.004
-    - mat: ZB_C25
-      d: 0.24
-      konstrukcyjna: true
+      - {mat: SUBSTRAT, d: 0.08}
+      - {mat: GEOWL, d: 0.002}
+      - {mat: MATA_DREN, d: 0.025}
+      - {mat: WLOKN_OCHR, d: 0.004}
+      - {mat: BARIERA_KORZ, d: 0.0005}
+      - {mat: PAPA_SBS, d: 0.0095}
+      - {mat: PIR022, d: 0.18, klin: {d_min: 0.12, d_max: 0.24, ksztalt: prostokat}}
+      - {mat: PAROIZ_AL, d: 0.004}
+      - {mat: ZB_C25, d: 0.24, konstrukcyjna: true}
   OK1:
     nazwa: 'Płyta wysunięta (okap, daszek, krawędź ST2/ST3): obróbka/membrana ze spadkiem 2 % od budynku, płyta ŻB C30/37 z łącznikiem termoizolacyjnym (ETA), podsufitka z okapnikiem'
     typ: taras
     warstwy:
-    - mat: MEMB_TPO
-      d: 0.002
-    - mat: ZB_C30
-      d: 0.3
-      konstrukcyjna: true
-    - mat: PODSUF
-      d: 0.012
-stolarka:
-  FX1:
-    wyrob: fix_ALU_3sz
-    opis: Przeszklenie stałe fasady E 1,90 × 2,75 m, Al z przekładką, 3 szyby, VSG od wewn.
-    U_w_max: 0.9
-    g_n: 0.5
-  FX2:
-    wyrob: fix_ALU_3sz
-    opis: Przeszklenie stałe fasady E 2,93 × 2,75 m (kuchnia)
-    U_w_max: 0.9
-    g_n: 0.5
-  FX3:
-    wyrob: fix_ALU_3sz
-    opis: Doświetle boczne drzwi wejściowych 0,545 × 2,40 m, VSG satynowane
-    U_w_max: 0.9
-    g_n: 0.5
-  HS1:
-    wyrob: HS_ALU_3sz
-    opis: Drzwi podnoszono-przesuwne HS 2,335 × 2,75 m, próg termiczny ≤ 2 cm
-    U_w_max: 0.9
-    g_n: 0.5
-  HS2:
-    wyrob: HS_ALU_3sz
-    opis: Drzwi HS 2,40 × 2,75 m — taras zachodni
-    U_w_max: 0.9
-    g_n: 0.5
-  BC1:
-    wyrob: okno_ALU_3sz
-    opis: 'Boks C: okno 3-kwaterowe 7,005 × 1,50 m, skrzydła RU, dolna część stała VSG 44.2 do 0,85 m'
-    U_w_max: 0.9
-    g_n: 0.5
-  OZ1:
-    wyrob: okno_PVC_3sz
-    opis: Okno 1,80 × 1,50 m RU (zachód)
-    U_w_max: 0.9
-    g_n: 0.5
-  OE1:
-    wyrob: okno_PVC_3sz
-    opis: Okno 1,50 × 1,50 m RU (wschód, pokój rodzinny)
-    U_w_max: 0.9
-    g_n: 0.5
-  OP1:
-    wyrob: okno_ALU_3sz
-    opis: Okno 3,00 × 2,00 m za lamelami, parapet 0,60, dolna część stała VSG do 0,85 m, skrzydła do wewn. (W-098)
-    U_w_max: 0.9
-    g_n: 0.5
-  OP2:
-    wyrob: okno_ALU_3sz
-    opis: Okno 1,20 × 1,75 m za lamelami, skrzydła do wewn.
-    U_w_max: 0.9
-    g_n: 0.5
-  OP3:
-    wyrob: okno_ALU_3sz
-    opis: Okno 2,40 × 2,00 m za lamelami, parapet 0,60, dolna część stała VSG do 0,85 m
-    U_w_max: 0.9
-    g_n: 0.5
-  ON1:
-    wyrob: okno_PVC_3sz
-    opis: Okno wysokie 0,80 × 0,60 m U (łazienka gościnna)
-    U_w_max: 0.9
-    g_n: 0.5
-  ON2:
-    wyrob: okno_PVC_3sz
-    opis: Okno wysokie 0,90 × 0,60 m U (łazienki P1/P2)
-    U_w_max: 0.9
-    g_n: 0.5
-  ON3:
-    wyrob: okno_PVC_3sz
-    opis: Okno wysokie 1,20 × 0,60 m U (pralnia)
-    U_w_max: 0.9
-    g_n: 0.5
-  ON4:
-    wyrob: okno_PVC_3sz
-    opis: Okno 1,70 × 1,50 m U (klatka schodowa, północ)
-    U_w_max: 0.9
-    g_n: 0.5
-  DZ1:
-    wyrob: drzwi_zewn
-    opis: Drzwi wejściowe 1,10 × 2,40 w murze (≥ 0,90 × 2,00 w świetle ościeżnicy), próg ≤ 0,02, U_D ≤ 1,1
-    U_D: 0.9
-  DZ2:
-    wyrob: drzwi_zewn
-    opis: Drzwi boczne garażu 1,00 × 2,10, stalowe ocieplone
-    U_D: 1.3
-  DZ3:
-    wyrob: drzwi_zewn
-    opis: Drzwi gospodarcze przeszklone 0,90 × 2,75 w systemie fasady E, otwierane na zewnątrz
-    U_D: 1.1
-  BR1:
-    wyrob: brama_segmentowa
-    opis: Brama segmentowa ocieplona 5,00 × 2,25 m z kratkami went. ≥ 0,08 m²
-    U_D: 1.5
-  DG1:
-    wyrob: drzwi_dom_garaz
-    opis: Drzwi garaż–dom 0,90 × 2,10, stalowe ocieplone, uszczelka, samozamykacz (W-113)
-    U_D: 1.1
-  D1:
-    opis: Drzwi wewnętrzne 0,90 × 2,10 w murze (≈ 0,80 × 2,00 w świetle ościeżnicy), bez progu (WT §75)
-  D2:
-    opis: Drzwi łazienek/WC 0,90 × 2,10 w murze, otwierane na zewnątrz, podcięcie/kratka ≥ 0,022 m² (WT §79)
-  D2P:
-    opis: Drzwi przesuwne naścienne łazienki 0,90 × 2,10, szczelina ≥ 0,022 m² (WT §79 ust. 1)
-  D3:
-    opis: Drzwi spiżarni 0,80 × 2,00
-  D4:
-    opis: Drzwi pom. technicznych 0,90 × 2,10, pełne, akustyczne R_w ≥ 32 dB (WT §96)
-  DS1:
-    opis: Drzwi szklane VSG 0,90 × 2,10 w ściance szklanej wiatrołapu (oznakowanie kontrastowe — WT §295)
-  OT1:
-    opis: Otwór 1,50 × 2,40 bez stolarki
-  OT2:
-    opis: Otwór 2,40 × 2,40 bez stolarki
+      - {mat: MEMB_TPO, d: 0.002}
+      - {mat: ZB_C30, d: 0.3, konstrukcyjna: true}
+      - {mat: PODSUF, d: 0.012}
+
 sciany:
-- id: S0-01
-  kond: P0
-  przegroda: SZ1
-  os: &id004 [[0.0, 0.0], [12.0, 0.0]]
-  wnetrze: lewa
-  z_od: null
-  z_do: null
-  uwagi: fasada pd. strefy dziennej — przeszklenie E (5 kwater) na słupach SL1–SL4 + belka B1
-- id: S0-02
-  kond: P0
-  przegroda: SZ1
-  os: &id005 [[12.0, 0.0], [18.375, 0.0]]
-  wnetrze: lewa
-  z_od: null
-  z_do: null
-  uwagi: ściana pd. pasa gospodarczego (bryła G, pełna) z drzwiami gospodarczymi w systemie fasady E
-- id: S0-03
-  kond: P0
-  przegroda: SZ1
-  os: &id006 [[18.375, 0.0], [18.375, 9.375]]
-  wnetrze: lewa
-  z_od: null
-  z_do: null
-  uwagi: ściana wsch. garażu = pion D (narożnik 18,975 m od lica zach. bryły B)
-- id: S0-04
-  kond: P0
-  przegroda: SZ1
-  os: &id007 [[18.375, 9.375], [12.0, 9.375]]
-  wnetrze: lewa
-  z_od: null
-  z_do: null
-  uwagi: ściana pn. garażu z bramą segmentową
-- id: S0-05
-  kond: P0
-  przegroda: SZ1
-  os: &id008 [[12.0, 9.375], [12.0, 8.75]]
-  wnetrze: lewa
-  z_od: null
-  z_do: null
-  uwagi: odcinek zach. garażu (przy daszku wejścia)
-- id: S0-06
-  kond: P0
-  przegroda: SZ1
-  os: &id009 [[12.0, 8.75], [0.0, 8.75]]
-  wnetrze: lewa
-  z_od: null
-  z_do: null
-  uwagi: ściana pn. — wejście główne, okno łazienki gościnnej
-- id: S0-07
-  kond: P0
-  przegroda: SZ1
-  os: &id010 [[0.0, 8.75], [0.0, 0.0]]
-  wnetrze: lewa
-  z_od: null
-  z_do: null
-  uwagi: ściana zach. — drzwi HS na taras zach., okno pokoju gościnnego
-- id: S0-08
-  kond: P0
-  przegroda: SW18
-  os: &id011 [[0.0, 5.125], [5.875, 5.125]]
-  wnetrze: srodek
-  z_od: null
-  z_do: null
-  uwagi: ściana grzbietowa (oś 3), odcinek zach.
-- id: S0-09
-  kond: P0
-  przegroda: DZ12
-  os: [[7.19, 5.125], [8.5, 5.125]]
-  wnetrze: srodek
-  z_od: null
-  z_do: null
-  uwagi: ścianka spiżarni pod biegiem 2 (strop nad nią — belka B8 w osi 3)
-- id: S0-10
-  kond: P0
-  przegroda: SW18
-  os: &id012 [[8.5, 5.125], [12.0, 5.125]]
-  wnetrze: srodek
-  z_od: null
-  z_do: null
-  uwagi: ściana grzbietowa (oś 3), odcinek wsch. — otwór hol/strefa dzienna
-- id: S0-11
-  kond: P0
-  przegroda: SW18
-  os: &id013 [[3.875, 5.125], [3.875, 8.75]]
-  wnetrze: srodek
-  z_od: null
-  z_do: null
-  uwagi: oś B
-- id: S0-12
-  kond: P0
-  przegroda: SWZB
-  os: &id014 [[5.875, 5.125], [5.875, 8.75]]
-  wnetrze: srodek
-  z_od: null
-  z_do: null
-  uwagi: oś C — ściana trzonu klatki, żelbet (sztywność P0 w kier. x)
-- id: S0-13
-  kond: P0
-  przegroda: SWZB
-  os: &id015 [[8.5, 5.125], [8.5, 8.75]]
-  wnetrze: srodek
-  z_od: null
-  z_do: null
-  uwagi: oś D — ściana trzonu klatki, żelbet
-- id: S0-14
-  kond: P0
-  przegroda: SC12
-  os: [[7.19, 5.125], [7.19, 7.47]]
-  wnetrze: srodek
-  z_od: null
-  z_do: null
-  uwagi: ścianka środkowa schodów
-- id: S0-15
-  kond: P0
-  przegroda: SW18
-  os: &id016 [[12.0, 0.0], [12.0, 2.875]]
-  wnetrze: srodek
-  z_od: null
-  z_do: null
-  uwagi: oś E — kuchnia / przedsionek gospodarczy
-- id: S0-16
-  kond: P0
-  przegroda: SWG
-  os: &id017 [[12.0, 2.875], [12.0, 8.75]]
-  wnetrze: lewa
-  z_od: null
-  z_do: null
-  uwagi: oś E — dom / garaż (izolacja od garażu, szczelna)
-- id: S0-17
-  kond: P0
-  przegroda: SWG
-  os: &id018 [[18.375, 2.875], [12.0, 2.875]]
-  wnetrze: lewa
-  z_od: null
-  z_do: null
-  uwagi: oś 2 — pas gospodarczy / garaż (izolacja od garażu, szczelna)
-- id: S0-18
-  kond: P0
-  przegroda: DZ12
-  os: [[14.875, 0.0], [14.875, 2.875]]
-  wnetrze: srodek
-  z_od: null
-  z_do: null
-  uwagi: przedsionek / pom. techniczne
-- id: S0-19
-  kond: P0
-  przegroda: DZ12
-  os: [[3.875, 6.425], [5.875, 6.425]]
-  wnetrze: srodek
-  z_od: null
-  z_do: null
-  uwagi: przedpokój gościnny / łazienka gościnna
-- id: S0-20
-  kond: P0
-  przegroda: DZ12
-  os: [[8.5, 6.625], [9.875, 6.625]]
-  wnetrze: srodek
-  z_od: null
-  z_do: null
-  uwagi: hol / WC
-- id: S0-21
-  kond: P0
-  przegroda: SGL
-  os: [[9.875, 6.625], [12.0, 6.625]]
-  wnetrze: srodek
-  z_od: null
-  z_do: null
-  uwagi: przeszklona ścianka wiatrołap / hol z drzwiami szklanymi (przeszczep z W3)
-- id: S0-22
-  kond: P0
-  przegroda: DZ12
-  os: [[9.875, 6.625], [9.875, 8.75]]
-  wnetrze: srodek
-  z_od: null
-  z_do: null
-  uwagi: WC / wiatrołap
-- id: S0-23
-  kond: P0
-  przegroda: GK10
-  os: [[5.32, 5.125], [5.32, 6.425]]
-  wnetrze: srodek
-  z_od: null
-  z_do: null
-  uwagi: obudowa szachtu SI
-- id: S1-01
-  kond: P1
-  przegroda: SZ1
-  os: [[0.0, 0.0], [12.0, 0.0]]
-  wnetrze: lewa
-  z_od: null
-  z_do: null
-  uwagi: ściana pd. bryły B na belce B1; boks C (3 kwatery) w ramie
-- id: S1-02
-  kond: P1
-  przegroda: SZ1
-  os: [[12.0, 0.0], [12.0, 8.75]]
-  wnetrze: lewa
-  z_od: null
-  z_do: null
-  uwagi: ściana wsch. (oś E)
-- id: S1-03
-  kond: P1
-  przegroda: SZ1
-  os: [[12.0, 8.75], [0.0, 8.75]]
-  wnetrze: lewa
-  z_od: null
-  z_do: null
-  uwagi: ściana pn.
-- id: S1-04
-  kond: P1
-  przegroda: SZ1
-  os: [[0.0, 8.75], [0.0, 0.0]]
-  wnetrze: lewa
-  z_od: null
-  z_do: null
-  uwagi: ściana zach. — okna pokoi dzieci
-- id: S1-05
-  kond: P1
-  przegroda: SW18
-  os: [[0.0, 5.125], [5.875, 5.125]]
-  wnetrze: srodek
-  z_od: null
-  z_do: null
-  uwagi: oś 3, odcinek zach.
-- id: S1-06
-  kond: P1
-  przegroda: SW18
-  os: [[8.5, 5.125], [12.0, 5.125]]
-  wnetrze: srodek
-  z_od: null
-  z_do: null
-  uwagi: oś 3, odcinek wsch. (między C i D — otwarcie klatki, belka B9)
-- id: S1-07
-  kond: P1
-  przegroda: SW18
-  os: [[3.875, 5.125], [3.875, 8.75]]
-  wnetrze: srodek
-  z_od: null
-  z_do: null
-  uwagi: oś B
-- id: S1-08
-  kond: P1
-  przegroda: SW18
-  os: [[5.875, 5.125], [5.875, 8.75]]
-  wnetrze: srodek
-  z_od: null
-  z_do: null
-  uwagi: oś C — klatka
-- id: S1-09
-  kond: P1
-  przegroda: SW18
-  os: [[8.5, 5.125], [8.5, 8.75]]
-  wnetrze: srodek
-  z_od: null
-  z_do: null
-  uwagi: oś D — klatka
-- id: S1-10
-  kond: P1
-  przegroda: SC12
-  os: [[7.19, 5.125], [7.19, 7.47]]
-  wnetrze: srodek
-  z_od: null
-  z_do: null
-  uwagi: ścianka środkowa schodów
-- id: S1-11
-  kond: P1
-  przegroda: DZ12
-  os: [[0.0, 3.75], [12.0, 3.75]]
-  wnetrze: srodek
-  z_od: null
-  z_do: null
-  uwagi: hol / pokój dziecka 1 i pokój rodzinny
-- id: S1-12
-  kond: P1
-  przegroda: DZ12
-  os: [[3.875, 0.0], [3.875, 3.75]]
-  wnetrze: srodek
-  z_od: null
-  z_do: null
-  uwagi: pokój dziecka 1 / pokój rodzinny
-- id: S1-13
-  kond: P1
-  przegroda: DZ12
-  os: [[9.875, 5.125], [9.875, 8.75]]
-  wnetrze: srodek
-  z_od: null
-  z_do: null
-  uwagi: WC z natryskiem / pralnia (nad ścianką S0-22)
-- id: S1-14
-  kond: P1
-  przegroda: GK10
-  os: [[5.32, 5.125], [5.32, 6.4]]
-  wnetrze: srodek
-  z_od: null
-  z_do: null
-  uwagi: obudowa szachtu SI
-- id: S1-15
-  kond: P1
-  przegroda: GK10
-  os: [[5.32, 6.4], [5.875, 6.4]]
-  wnetrze: srodek
-  z_od: null
-  z_do: null
-  uwagi: obudowa szachtu SI
-- id: S2-01
-  kond: P2
-  przegroda: SZ2
-  os: [[-1.12, 0.0], [12.0, 0.0]]
-  wnetrze: lewa
-  z_od: null
-  z_do: null
-  uwagi: ściana pd. bryły A za lamelami; odc. A'–A na wsporniku (belka B4)
-- id: S2-02
-  kond: P2
-  przegroda: SZ2
-  os: [[12.0, 0.0], [12.0, 5.125]]
-  wnetrze: lewa
-  z_od: null
-  z_do: null
-  uwagi: ściana wsch. bryły A za lamelami
-- id: S2-03
-  kond: P2
-  przegroda: SZ1
-  os: [[12.0, 5.125], [8.5, 5.125]]
-  wnetrze: lewa
-  z_od: null
-  z_do: null
-  uwagi: ściana pn. bryły A nad dachem P1 (pole wsch.)
-- id: S2-04
-  kond: P2
-  przegroda: SZ1
-  os: [[8.5, 5.125], [8.5, 8.75]]
-  wnetrze: lewa
-  z_od: null
-  z_do: null
-  uwagi: nadbudowa klatki i łazienki — ściana wsch.
-- id: S2-05
-  kond: P2
-  przegroda: SZ1
-  os: [[8.5, 8.75], [3.875, 8.75]]
-  wnetrze: lewa
-  z_od: null
-  z_do: null
-  uwagi: nadbudowa — ściana pn. (okno klatki, okno łazienki)
-- id: S2-06
-  kond: P2
-  przegroda: SZ1
-  os: [[3.875, 8.75], [3.875, 5.125]]
-  wnetrze: lewa
-  z_od: null
-  z_do: null
-  uwagi: nadbudowa — ściana zach.
-- id: S2-07
-  kond: P2
-  przegroda: SZ1
-  os: [[3.875, 5.125], [-1.12, 5.125]]
-  wnetrze: lewa
-  z_od: null
-  z_do: null
-  uwagi: ściana pn. bryły A nad dachem P1 (pole zach.); odc. A'–A na wsporniku (belka B5)
-- id: S2-08
-  kond: P2
-  przegroda: SZL
-  os: [[-1.12, 5.125], [-1.12, 0.0]]
-  wnetrze: lewa
-  z_od: null
-  z_do: null
-  uwagi: ściana zach. lekka na wsporniku (belka krawędziowa B3), za lamelami
-- id: S2-09
-  kond: P2
-  przegroda: SW18
-  os: [[3.875, 5.125], [7.19, 5.125]]
-  wnetrze: srodek
-  z_od: null
-  z_do: null
-  uwagi: oś 3 — łazienka / garderoba; zamknięcie pustki nad biegiem 1
-- id: S2-10
-  kond: P2
-  przegroda: SW18
-  os: [[5.875, 5.125], [5.875, 8.75]]
-  wnetrze: srodek
-  z_od: null
-  z_do: null
-  uwagi: oś C — klatka
-- id: S2-11
-  kond: P2
-  przegroda: SC12
-  os: [[7.19, 5.125], [7.19, 7.47]]
-  wnetrze: srodek
-  z_od: null
-  z_do: null
-  uwagi: ścianka środkowa schodów (do stropodachu)
-- id: S2-12
-  kond: P2
-  przegroda: DZ12
-  os: [[3.575, 0.0], [3.575, 5.125]]
-  wnetrze: srodek
-  z_od: null
-  z_do: null
-  uwagi: sypialnia / garderoba
-- id: S2-13
-  kond: P2
-  przegroda: DZ12
-  os: [[5.875, 0.0], [5.875, 5.125]]
-  wnetrze: srodek
-  z_od: null
-  z_do: null
-  uwagi: garderoba / hol i pom. techniczne
-- id: S2-14
-  kond: P2
-  przegroda: DZ12
-  os: [[8.5, 0.0], [8.5, 5.125]]
-  wnetrze: srodek
-  z_od: null
-  z_do: null
-  uwagi: hol / gabinet
-- id: S2-15
-  kond: P2
-  przegroda: DZ12
-  os: [[5.875, 2.625], [8.5, 2.625]]
-  wnetrze: srodek
-  z_od: null
-  z_do: null
-  uwagi: pom. techniczne / hol
-- id: S2-16
-  kond: P2
-  przegroda: GK10
-  os: [[5.32, 5.125], [5.32, 6.4]]
-  wnetrze: srodek
-  z_od: null
-  z_do: null
-  uwagi: obudowa szachtu SI
-- id: S2-17
-  kond: P2
-  przegroda: GK10
-  os: [[5.32, 6.4], [5.875, 6.4]]
-  wnetrze: srodek
-  z_od: null
-  z_do: null
-  uwagi: obudowa szachtu SI
+  # --- P0
+  - {id: S0-01, kond: P0, przegroda: SZ1, os: [[0.0, 0.0], [12.0, 0.0]], wnetrze: lewa, z_od: null, z_do: null, uwagi: fasada pd. strefy dziennej — przeszklenie E (5 kwater) na słupach SL1–SL4 + belka B1}
+  - {id: S0-02, kond: P0, przegroda: SZ1, os: [[12.0, 0.0], [18.375, 0.0]], wnetrze: lewa, z_od: null, z_do: null, uwagi: 'ściana pd. pasa gospodarczego (bryła G, pełna) z drzwiami gospodarczymi w systemie fasady E'}
+  - {id: S0-03, kond: P0, przegroda: SZ1, os: [[18.375, 0.0], [18.375, 9.375]], wnetrze: lewa, z_od: null, z_do: null, uwagi: 'ściana wsch. garażu = pion D (narożnik 18,975 m od lica zach. bryły B)'}
+  - {id: S0-04, kond: P0, przegroda: SZ1, os: [[18.375, 9.375], [12.0, 9.375]], wnetrze: lewa, z_od: null, z_do: null, uwagi: ściana pn. garażu z bramą segmentową}
+  - {id: S0-05, kond: P0, przegroda: SZ1, os: [[12.0, 9.375], [12.0, 8.75]], wnetrze: lewa, z_od: null, z_do: null, uwagi: odcinek zach. garażu (przy daszku wejścia)}
+  - {id: S0-06, kond: P0, przegroda: SZ1, os: [[12.0, 8.75], [0.0, 8.75]], wnetrze: lewa, z_od: null, z_do: null, uwagi: 'ściana pn. — wejście główne, okno łazienki gościnnej'}
+  - {id: S0-07, kond: P0, przegroda: SZ1, os: [[0.0, 8.75], [0.0, 0.0]], wnetrze: lewa, z_od: null, z_do: null, uwagi: 'ściana zach. — drzwi HS na taras zach., okno pokoju gościnnego'}
+  - {id: S0-08, kond: P0, przegroda: SW18, os: [[0.0, 5.125], [5.875, 5.125]], wnetrze: srodek, z_od: null, z_do: null, uwagi: 'ściana grzbietowa (oś 3), odcinek zach.'}
+  - {id: S0-09, kond: P0, przegroda: DZ12, os: [[7.19, 5.125], [8.5, 5.125]], wnetrze: srodek, z_od: null, z_do: null, uwagi: ścianka spiżarni pod biegiem 2 (strop nad nią — belka B8 w osi 3)}
+  - {id: S0-10, kond: P0, przegroda: SW18, os: [[8.5, 5.125], [12.0, 5.125]], wnetrze: srodek, z_od: null, z_do: null, uwagi: 'ściana grzbietowa (oś 3), odcinek wsch. — otwór hol/strefa dzienna'}
+  - {id: S0-11, kond: P0, przegroda: SW18, os: [[3.875, 5.125], [3.875, 8.75]], wnetrze: srodek, z_od: null, z_do: null, uwagi: oś B}
+  - {id: S0-12, kond: P0, przegroda: SWZB, os: [[5.875, 5.125], [5.875, 8.75]], wnetrze: srodek, z_od: null, z_do: null, uwagi: 'oś C — ściana trzonu klatki, żelbet (sztywność P0 w kier. x)'}
+  - {id: S0-13, kond: P0, przegroda: SWZB, os: [[8.5, 5.125], [8.5, 8.75]], wnetrze: srodek, z_od: null, z_do: null, uwagi: 'oś D — ściana trzonu klatki, żelbet'}
+  - {id: S0-14, kond: P0, przegroda: SC12, os: [[7.19, 5.125], [7.19, 7.47]], wnetrze: srodek, z_od: null, z_do: null, uwagi: ścianka środkowa schodów}
+  - {id: S0-15, kond: P0, przegroda: SW18, os: [[12.0, 0.0], [12.0, 2.875]], wnetrze: srodek, z_od: null, z_do: null, uwagi: oś E — kuchnia / przedsionek gospodarczy}
+  - {id: S0-16, kond: P0, przegroda: SWG, os: [[12.0, 2.875], [12.0, 8.75]], wnetrze: lewa, z_od: null, z_do: null, uwagi: 'oś E — dom / garaż (izolacja od garażu, szczelna)'}
+  - {id: S0-17, kond: P0, przegroda: SWG, os: [[18.375, 2.875], [12.0, 2.875]], wnetrze: lewa, z_od: null, z_do: null, uwagi: 'oś 2 — pas gospodarczy / garaż (izolacja od garażu, szczelna)'}
+  - {id: S0-18, kond: P0, przegroda: DZ12, os: [[14.875, 0.0], [14.875, 2.875]], wnetrze: srodek, z_od: null, z_do: null, uwagi: przedsionek / pom. techniczne}
+  - {id: S0-19, kond: P0, przegroda: DZ12, os: [[3.875, 6.425], [5.875, 6.425]], wnetrze: srodek, z_od: null, z_do: null, uwagi: przedpokój gościnny / łazienka gościnna}
+  - {id: S0-20, kond: P0, przegroda: DZ12, os: [[8.5, 6.625], [9.875, 6.625]], wnetrze: srodek, z_od: null, z_do: null, uwagi: hol / WC}
+  - {id: S0-21, kond: P0, przegroda: SGL, os: [[9.875, 6.625], [12.0, 6.625]], wnetrze: srodek, z_od: null, z_do: null, uwagi: przeszklona ścianka wiatrołap / hol z drzwiami szklanymi (przeszczep z W3)}
+  - {id: S0-22, kond: P0, przegroda: DZ12, os: [[9.875, 6.625], [9.875, 8.75]], wnetrze: srodek, z_od: null, z_do: null, uwagi: WC / wiatrołap}
+  - {id: S0-23, kond: P0, przegroda: GK10, os: [[5.32, 5.125], [5.32, 6.425]], wnetrze: srodek, z_od: null, z_do: null, uwagi: obudowa szachtu SI}
+  # --- P1
+  - {id: S1-01, kond: P1, przegroda: SZ1, os: [[0.0, 0.0], [12.0, 0.0]], wnetrze: lewa, z_od: null, z_do: null, uwagi: ściana pd. bryły B na belce B1; boks C (3 kwatery) w ramie}
+  - {id: S1-02, kond: P1, przegroda: SZ1, os: [[12.0, 0.0], [12.0, 8.75]], wnetrze: lewa, z_od: null, z_do: null, uwagi: ściana wsch. (oś E)}
+  - {id: S1-03, kond: P1, przegroda: SZ1, os: [[12.0, 8.75], [0.0, 8.75]], wnetrze: lewa, z_od: null, z_do: null, uwagi: ściana pn.}
+  - {id: S1-04, kond: P1, przegroda: SZ1, os: [[0.0, 8.75], [0.0, 0.0]], wnetrze: lewa, z_od: null, z_do: null, uwagi: ściana zach. — okna pokoi dzieci}
+  - {id: S1-05, kond: P1, przegroda: SW18, os: [[0.0, 5.125], [5.875, 5.125]], wnetrze: srodek, z_od: null, z_do: null, uwagi: 'oś 3, odcinek zach.'}
+  - {id: S1-06, kond: P1, przegroda: SW18, os: [[8.5, 5.125], [12.0, 5.125]], wnetrze: srodek, z_od: null, z_do: null, uwagi: 'oś 3, odcinek wsch. (między C i D — otwarcie klatki, belka B9)'}
+  - {id: S1-07, kond: P1, przegroda: SW18, os: [[3.875, 5.125], [3.875, 8.75]], wnetrze: srodek, z_od: null, z_do: null, uwagi: oś B}
+  - {id: S1-08, kond: P1, przegroda: SW18, os: [[5.875, 5.125], [5.875, 8.75]], wnetrze: srodek, z_od: null, z_do: null, uwagi: oś C — klatka}
+  - {id: S1-09, kond: P1, przegroda: SW18, os: [[8.5, 5.125], [8.5, 8.75]], wnetrze: srodek, z_od: null, z_do: null, uwagi: oś D — klatka}
+  - {id: S1-10, kond: P1, przegroda: SC12, os: [[7.19, 5.125], [7.19, 7.47]], wnetrze: srodek, z_od: null, z_do: null, uwagi: ścianka środkowa schodów}
+  - {id: S1-11, kond: P1, przegroda: DZ12, os: [[0.0, 3.75], [12.0, 3.75]], wnetrze: srodek, z_od: null, z_do: null, uwagi: hol / pokój dziecka 1 i pokój rodzinny}
+  - {id: S1-12, kond: P1, przegroda: DZ12, os: [[3.875, 0.0], [3.875, 3.75]], wnetrze: srodek, z_od: null, z_do: null, uwagi: pokój dziecka 1 / pokój rodzinny}
+  - {id: S1-13, kond: P1, przegroda: DZ12, os: [[9.875, 5.125], [9.875, 8.75]], wnetrze: srodek, z_od: null, z_do: null, uwagi: WC z natryskiem / pralnia (nad ścianką S0-22)}
+  - {id: S1-14, kond: P1, przegroda: GK10, os: [[5.32, 5.125], [5.32, 6.4]], wnetrze: srodek, z_od: null, z_do: null, uwagi: obudowa szachtu SI}
+  - {id: S1-15, kond: P1, przegroda: GK10, os: [[5.32, 6.4], [5.875, 6.4]], wnetrze: srodek, z_od: null, z_do: null, uwagi: obudowa szachtu SI}
+  # --- P2
+  - {id: S2-01, kond: P2, przegroda: SZ2, os: [[-1.12, 0.0], [12.0, 0.0]], wnetrze: lewa, z_od: null, z_do: null, uwagi: ściana pd. bryły A za lamelami; odc. A'–A na wsporniku (belka B4)}
+  - {id: S2-02, kond: P2, przegroda: SZ2, os: [[12.0, 0.0], [12.0, 5.125]], wnetrze: lewa, z_od: null, z_do: null, uwagi: ściana wsch. bryły A za lamelami}
+  - {id: S2-03, kond: P2, przegroda: SZ1, os: [[12.0, 5.125], [8.5, 5.125]], wnetrze: lewa, z_od: null, z_do: null, uwagi: ściana pn. bryły A nad dachem P1 (pole wsch.)}
+  - {id: S2-04, kond: P2, przegroda: SZ1, os: [[8.5, 5.125], [8.5, 8.75]], wnetrze: lewa, z_od: null, z_do: null, uwagi: nadbudowa klatki i łazienki — ściana wsch.}
+  - {id: S2-05, kond: P2, przegroda: SZ1, os: [[8.5, 8.75], [3.875, 8.75]], wnetrze: lewa, z_od: null, z_do: null, uwagi: 'nadbudowa — ściana pn. (okno klatki, okno łazienki)'}
+  - {id: S2-06, kond: P2, przegroda: SZ1, os: [[3.875, 8.75], [3.875, 5.125]], wnetrze: lewa, z_od: null, z_do: null, uwagi: nadbudowa — ściana zach.}
+  - {id: S2-07, kond: P2, przegroda: SZ1, os: [[3.875, 5.125], [-1.12, 5.125]], wnetrze: lewa, z_od: null, z_do: null, uwagi: ściana pn. bryły A nad dachem P1 (pole zach.); odc. A'–A na wsporniku (belka B5)}
+  - {id: S2-08, kond: P2, przegroda: SZL, os: [[-1.12, 5.125], [-1.12, 0.0]], wnetrze: lewa, z_od: null, z_do: null, uwagi: 'ściana zach. lekka na wsporniku (belka krawędziowa B3), za lamelami'}
+  - {id: S2-09, kond: P2, przegroda: SW18, os: [[3.875, 5.125], [7.19, 5.125]], wnetrze: srodek, z_od: null, z_do: null, uwagi: oś 3 — łazienka / garderoba; zamknięcie pustki nad biegiem 1}
+  - {id: S2-10, kond: P2, przegroda: SW18, os: [[5.875, 5.125], [5.875, 8.75]], wnetrze: srodek, z_od: null, z_do: null, uwagi: oś C — klatka}
+  - {id: S2-11, kond: P2, przegroda: SC12, os: [[7.19, 5.125], [7.19, 7.47]], wnetrze: srodek, z_od: null, z_do: null, uwagi: ścianka środkowa schodów (do stropodachu)}
+  - {id: S2-12, kond: P2, przegroda: DZ12, os: [[3.575, 0.0], [3.575, 5.125]], wnetrze: srodek, z_od: null, z_do: null, uwagi: sypialnia / garderoba}
+  - {id: S2-13, kond: P2, przegroda: DZ12, os: [[5.875, 0.0], [5.875, 5.125]], wnetrze: srodek, z_od: null, z_do: null, uwagi: garderoba / hol i pom. techniczne}
+  - {id: S2-14, kond: P2, przegroda: DZ12, os: [[8.5, 0.0], [8.5, 5.125]], wnetrze: srodek, z_od: null, z_do: null, uwagi: hol / gabinet}
+  - {id: S2-15, kond: P2, przegroda: DZ12, os: [[5.875, 2.625], [8.5, 2.625]], wnetrze: srodek, z_od: null, z_do: null, uwagi: pom. techniczne / hol}
+  - {id: S2-16, kond: P2, przegroda: GK10, os: [[5.32, 5.125], [5.32, 6.4]], wnetrze: srodek, z_od: null, z_do: null, uwagi: obudowa szachtu SI}
+  - {id: S2-17, kond: P2, przegroda: GK10, os: [[5.32, 6.4], [5.875, 6.4]], wnetrze: srodek, z_od: null, z_do: null, uwagi: obudowa szachtu SI}
+
 otwory:
-- id: O0-01
-  sciana: S0-01
-  symbol: FX1
-  typ: fix
-  odl: 0.3
-  szer: 1.9
-  wys: 2.75
-  parapet: 0.0
-  oslona: screen_zip
-  uwagi: przeszklenie E — kwatera 1
-  montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz;
-    parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)'
-  oslona_montaz: screen ZIP — kaseta w podsufitce okapu PL-E (poza warstwą izolacji), prowadnice przy słupach fasady
-  prog:
-    profil: próg termiczny ≤ 0,02 m (HS/drzwi) na podwalinie progowej z XPS 300 / PUR-GF (λ ≤ 0,05) na płycie
-    odwodnienie_liniowe: true
-    hydroizolacja: wywinięcie membrany SBS płyty ≥ 0,15 m pod profil + taśma EPDM
-- id: O0-02
-  sciana: S0-01
-  symbol: FX1
-  typ: fix
-  odl: 2.2
-  szer: 1.9
-  wys: 2.75
-  parapet: 0.0
-  oslona: screen_zip
-  uwagi: przeszklenie E — kwatera 2
-  montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz;
-    parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)'
-  oslona_montaz: screen ZIP — kaseta w podsufitce okapu PL-E (poza warstwą izolacji), prowadnice przy słupach fasady
-  prog:
-    profil: próg termiczny ≤ 0,02 m (HS/drzwi) na podwalinie progowej z XPS 300 / PUR-GF (λ ≤ 0,05) na płycie
-    odwodnienie_liniowe: true
-    hydroizolacja: wywinięcie membrany SBS płyty ≥ 0,15 m pod profil + taśma EPDM
-- id: O0-03
-  sciana: S0-01
-  symbol: HS1
-  typ: drzwi_przesuwne_HS
-  odl: 4.1
-  szer: 2.335
-  wys: 2.75
-  parapet: 0.0
-  otwieranie: &id001
-    strona: prawa
-    kierunek: do_wewn
-    rodzaj: HS
-  oslona: screen_zip
-  bezprogowe: true
-  uwagi: kwatera 3 — HS salon
-  montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz;
-    parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)'
-  oslona_montaz: screen ZIP — kaseta w podsufitce okapu PL-E (poza warstwą izolacji), prowadnice przy słupach fasady
-  prog:
-    profil: próg termiczny ≤ 0,02 m (HS/drzwi) na podwalinie progowej z XPS 300 / PUR-GF (λ ≤ 0,05) na płycie
-    odwodnienie_liniowe: true
-    hydroizolacja: wywinięcie membrany SBS płyty ≥ 0,15 m pod profil + taśma EPDM
-- id: O0-04
-  sciana: S0-01
-  symbol: HS1
-  typ: drzwi_przesuwne_HS
-  odl: 6.435
-  szer: 2.335
-  wys: 2.75
-  parapet: 0.0
-  otwieranie: *id001
-  oslona: screen_zip
-  bezprogowe: true
-  uwagi: kwatera 4 — HS jadalnia
-  montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz;
-    parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)'
-  oslona_montaz: screen ZIP — kaseta w podsufitce okapu PL-E (poza warstwą izolacji), prowadnice przy słupach fasady
-  prog:
-    profil: próg termiczny ≤ 0,02 m (HS/drzwi) na podwalinie progowej z XPS 300 / PUR-GF (λ ≤ 0,05) na płycie
-    odwodnienie_liniowe: true
-    hydroizolacja: wywinięcie membrany SBS płyty ≥ 0,15 m pod profil + taśma EPDM
-- id: O0-05
-  sciana: S0-01
-  symbol: FX2
-  typ: fix
-  odl: 8.77
-  szer: 2.93
-  wys: 2.75
-  parapet: 0.0
-  oslona: screen_zip
-  uwagi: przeszklenie E — kwatera 5 (kuchnia)
-  montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz;
-    parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)'
-  oslona_montaz: screen ZIP — kaseta w podsufitce okapu PL-E (poza warstwą izolacji), prowadnice przy słupach fasady
-  prog:
-    profil: próg termiczny ≤ 0,02 m (HS/drzwi) na podwalinie progowej z XPS 300 / PUR-GF (λ ≤ 0,05) na płycie
-    odwodnienie_liniowe: true
-    hydroizolacja: wywinięcie membrany SBS płyty ≥ 0,15 m pod profil + taśma EPDM
-- id: O0-06
-  sciana: S0-02
-  symbol: DZ3
-  typ: drzwi_zewn
-  odl: 0.35
-  szer: 0.9
-  wys: 2.75
-  parapet: 0.0
-  otwieranie:
-    strona: lewa
-    kierunek: na_zewn
-    rodzaj: R
-  oslona: screen_zip
-  uwagi: drzwi gospodarcze przeszklone w systemie i podziale fasady E (przeszczep J2) — pas E czytany ≈ 12,85 m; pod okapem E
-  montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz;
-    parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)'
-  oslona_montaz: screen ZIP — kaseta w podsufitce okapu PL-E
-  prog:
-    profil: próg termiczny ≤ 0,02 m (HS/drzwi) na podwalinie progowej z XPS 300 / PUR-GF (λ ≤ 0,05) na płycie
-    odwodnienie_liniowe: true
-    hydroizolacja: wywinięcie membrany SBS płyty ≥ 0,15 m pod profil + taśma EPDM
-- id: O0-07
-  sciana: S0-04
-  symbol: BR1
-  typ: brama
-  odl: 0.625
-  szer: 5.0
-  wys: 2.25
-  parapet: -0.1
-  otwieranie:
-    strona: lewa
-    kierunek: do_wewn
-    rodzaj: segmentowa
-  uwagi: brama segmentowa 5,00 × 2,25 m w świetle, kratki went. ≥ 0,08 m² (W-111, W-115); posadzka garażu −0,10
-  montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz;
-    parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)'
-- id: O0-08
-  sciana: S0-03
-  symbol: DZ2
-  typ: drzwi_zewn
-  odl: 4.9
-  szer: 1.0
-  wys: 2.1
-  parapet: 0.0
-  otwieranie:
-    strona: lewa
-    kierunek: na_zewn
-    rodzaj: R
-  uwagi: drzwi boczne garażu (rowery, ogród) — 5,70 m od granicy E
-  montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz;
-    parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)'
-  prog:
-    profil: próg termiczny ≤ 0,02 m (HS/drzwi) na podwalinie progowej z XPS 300 / PUR-GF (λ ≤ 0,05) na płycie
-    odwodnienie_liniowe: true
-    hydroizolacja: wywinięcie membrany SBS płyty ≥ 0,15 m pod profil + taśma EPDM
-- id: O0-09
-  sciana: S0-06
-  symbol: DZ1
-  typ: drzwi_zewn
-  odl: 0.85
-  szer: 1.1
-  wys: 2.4
-  parapet: 0.0
-  otwieranie:
-    strona: prawa
-    kierunek: do_wewn
-    rodzaj: R
-  uwagi: drzwi wejściowe 1,10 × 2,40 w murze (≥ 0,90 × 2,00 w świetle ościeżnicy), próg ≤ 0,02 (W-055); pod daszkiem
-  montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz;
-    parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)'
-  prog:
-    profil: próg termiczny ≤ 0,02 m (HS/drzwi) na podwalinie progowej z XPS 300 / PUR-GF (λ ≤ 0,05) na płycie
-    odwodnienie_liniowe: true
-    hydroizolacja: wywinięcie membrany SBS płyty ≥ 0,15 m pod profil + taśma EPDM
-- id: O0-10
-  sciana: S0-06
-  symbol: FX3
-  typ: fix
-  odl: 0.4
-  szer: 0.35
-  wys: 2.4
-  parapet: 0.0
-  oslona: brak
-  uwagi: doświetle boczne drzwi wejściowych, VSG mleczne (przeszczep z W3)
-  montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz;
-    parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)'
-  prog:
-    profil: próg termiczny ≤ 0,02 m (HS/drzwi) na podwalinie progowej z XPS 300 / PUR-GF (λ ≤ 0,05) na płycie
-    odwodnienie_liniowe: true
-    hydroizolacja: wywinięcie membrany SBS płyty ≥ 0,15 m pod profil + taśma EPDM
-- id: O0-11
-  sciana: S0-07
-  symbol: HS2
-  typ: drzwi_przesuwne_HS
-  odl: 5.15
-  szer: 2.4
-  wys: 2.75
-  parapet: 0.0
-  otwieranie: *id001
-  oslona: screen_zip
-  bezprogowe: true
-  uwagi: HS salonu na taras zach. pod okapem 1,50 m (przeszczep J2 z W1/W3)
-  montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz;
-    parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)'
-  oslona_montaz: screen ZIP — kaseta w podsufitce okapu zach. PL-E (1,50 m)
-  prog:
-    profil: próg termiczny ≤ 0,02 m (HS/drzwi) na podwalinie progowej z XPS 300 / PUR-GF (λ ≤ 0,05) na płycie
-    odwodnienie_liniowe: true
-    hydroizolacja: wywinięcie membrany SBS płyty ≥ 0,15 m pod profil + taśma EPDM
-- id: O0-12
-  sciana: S0-07
-  symbol: OZ1
-  typ: okno
-  odl: 1.15
-  szer: 1.8
-  wys: 1.5
-  parapet: 0.9
-  otwieranie: &id002
-    strona: lewa
-    kierunek: do_wewn
-    rodzaj: RU
-  oslona: zaluzja_zewn
-  uwagi: pokój gościnny — zachód
-  montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz;
-    parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)'
-  oslona_montaz: screen ZIP — kaseta w podsufitce okapu zach. PL-E (1,50 m)
-- id: O0-13
-  sciana: S0-06
-  symbol: ON1
-  typ: okno
-  odl: 6.9
-  szer: 0.8
-  wys: 0.6
-  parapet: 1.6
-  otwieranie:
-    strona: lewa
-    kierunek: do_wewn
-    rodzaj: U
-  oslona: brak
-  uwagi: łazienka gościnna — okno wysokie
-  montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz;
-    parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)'
-- id: O0-14
-  sciana: S0-08
-  symbol: D1
-  typ: drzwi
-  odl: 4.2
-  szer: 0.9
-  wys: 2.1
-  parapet: 0.0
-  otwieranie:
-    strona: lewa
-    kierunek: do_wewn
-    rodzaj: R
-  uwagi: salon → przedpokój gościnny
-- id: O0-15
-  sciana: S0-11
-  symbol: D1
-  typ: drzwi
-  odl: 0.205
-  szer: 0.9
-  wys: 2.1
-  parapet: 0.0
-  otwieranie:
-    strona: lewa
-    kierunek: do_wewn
-    rodzaj: R
-  uwagi: przedpokój → pokój gościnny
-- id: O0-16
-  sciana: S0-19
-  symbol: D2P
-  typ: drzwi
-  odl: 0.325
-  szer: 0.9
-  wys: 2.1
-  parapet: 0.0
-  otwieranie:
-    strona: lewa
-    kierunek: na_zewn
-    rodzaj: przesuwne
-    przesuwne: true
-  uwagi: łazienka gościnna — drzwi przesuwne naścienne (WT §79 ust. 1), podcięcie ≥ 0,022 m²
-- id: O0-17
-  sciana: S0-09
-  symbol: D3
-  typ: drzwi
-  odl: 0.21
-  szer: 0.8
-  wys: 2.0
-  parapet: 0.0
-  otwieranie:
-    strona: lewa
-    kierunek: do_wewn
-    rodzaj: R
-  uwagi: spiżarnia pod biegiem 2 (przeszczep J2)
-- id: O0-18
-  sciana: S0-10
-  symbol: OT1
-  typ: otwor
-  odl: 0.4
-  szer: 1.5
-  wys: 2.4
-  parapet: 0.0
-  uwagi: hol → pas komunikacyjny przy schodach / strefa dzienna
-- id: O0-19
-  sciana: S0-20
-  symbol: D2
-  typ: drzwi
-  odl: 0.21
-  szer: 0.9
-  wys: 2.1
-  parapet: 0.0
-  otwieranie:
-    strona: lewa
-    kierunek: na_zewn
-    rodzaj: R
-  uwagi: WC gościnne — na zewnątrz, kratka ≥ 0,022 m²
-- id: O0-20
-  sciana: S0-21
-  symbol: DS1
-  typ: drzwi
-  odl: 0.275
-  szer: 0.9
-  wys: 2.1
-  parapet: 0.0
-  otwieranie:
-    strona: lewa
-    kierunek: do_wewn
-    rodzaj: R
-  uwagi: drzwi szklane VSG w osi wejścia (x ≈ 10,60)
-- id: O0-21
-  sciana: S0-15
-  symbol: D1
-  typ: drzwi
-  odl: 0.35
-  szer: 0.9
-  wys: 2.1
-  parapet: 0.0
-  otwieranie:
-    strona: lewa
-    kierunek: do_wewn
-    rodzaj: R
-  uwagi: przedsionek → kuchnia; przesunięte do fasady (przeszczep J1) — ciągła zabudowa kuchni y 1,40–5,02
-- id: O0-22
-  sciana: S0-17
-  symbol: DG1
-  typ: drzwi
-  odl: 3.875
-  szer: 0.9
-  wys: 2.1
-  parapet: 0.0
-  otwieranie:
-    strona: lewa
-    kierunek: do_wewn
-    rodzaj: R
-  uwagi: 'garaż → przedsionek: szczelne, samozamykacz, U ≤ 1,3 (W-113, W-244)'
-- id: O0-23
-  sciana: S0-18
-  symbol: D4
-  typ: drzwi
-  odl: 1.6
-  szer: 0.9
-  wys: 2.1
-  parapet: 0.0
-  otwieranie:
-    strona: lewa
-    kierunek: do_wewn
-    rodzaj: R
-  uwagi: pom. techniczne dostępne z domu przez przedsionek (poprawka J2)
-- id: O1-01
-  sciana: S1-01
-  symbol: BC1
-  typ: okno
-  odl: 4.1
-  szer: 7.005
-  wys: 1.5
-  parapet: 0.7
-  otwieranie:
-    strona: lewa
-    kierunek: do_wewn
-    rodzaj: RU
-  oslona: screen_zip
-  kwatery: 3
-  uwagi: boks C — 3 kwatery 2,335 m w ramie wysuniętej 1,00 m; dolna część stała VSG do 0,85 m (W-097); słupki SLC1/SLC2 nad SL3/SL4
-  montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz;
-    parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)'
-  oslona_montaz: screen ZIP — kaseta w pasie górnym ramy C (PL-C2), poza izolacją
-- id: O1-02
-  sciana: S1-02
-  symbol: OE1
-  typ: okno
-  odl: 1.2
-  szer: 1.5
-  wys: 1.5
-  parapet: 0.85
-  otwieranie: *id002
-  oslona: zaluzja_zewn
-  uwagi: pokój rodzinny — wschód (parapet +4,00 > attyka garażu +3,85)
-  montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz;
-    parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)'
-  oslona_montaz: kaseta elewacyjna nadstawna PRZED licem ETICS (bez kasety w ociepleniu), prowadnice na konsolach dystansowych z przekładką
-- id: O1-03
-  sciana: S1-03
-  symbol: ON2
-  typ: okno
-  odl: 6.8
-  szer: 0.9
-  wys: 0.6
-  parapet: 1.6
-  otwieranie:
-    strona: lewa
-    kierunek: do_wewn
-    rodzaj: U
-  oslona: brak
-  uwagi: łazienka dzieci
-  montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz;
-    parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)'
-- id: O1-04
-  sciana: S1-03
-  symbol: ON3
-  typ: okno
-  odl: 0.4
-  szer: 1.2
-  wys: 0.6
-  parapet: 1.6
-  otwieranie:
-    strona: lewa
-    kierunek: do_wewn
-    rodzaj: U
-  oslona: brak
-  uwagi: pralnia
-  montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz;
-    parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)'
-- id: O1-05
-  sciana: S1-04
-  symbol: OZ1
-  typ: okno
-  odl: 0.95
-  szer: 1.8
-  wys: 1.5
-  parapet: 0.9
-  otwieranie: *id002
-  oslona: zaluzja_zewn
-  uwagi: pokój dziecka 2 — zachód
-  montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz;
-    parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)'
-  oslona_montaz: kaseta elewacyjna nadstawna PRZED licem ETICS (bez kasety w ociepleniu), prowadnice na konsolach dystansowych z przekładką
-- id: O1-06
-  sciana: S1-04
-  symbol: OZ1
-  typ: okno
-  odl: 5.95
-  szer: 1.8
-  wys: 1.5
-  parapet: 0.9
-  otwieranie: *id002
-  oslona: zaluzja_zewn
-  uwagi: pokój dziecka 1 — zachód (elewacja pd. bryły B pełna)
-  montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz;
-    parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)'
-  oslona_montaz: kaseta elewacyjna nadstawna PRZED licem ETICS (bez kasety w ociepleniu), prowadnice na konsolach dystansowych z przekładką
-- id: O1-07
-  sciana: S1-11
-  symbol: D1
-  typ: drzwi
-  odl: 2.6
-  szer: 0.9
-  wys: 2.1
-  parapet: 0.0
-  otwieranie:
-    strona: lewa
-    kierunek: do_wewn
-    rodzaj: R
-  uwagi: pokój dziecka 1
-- id: O1-08
-  sciana: S1-11
-  symbol: OT2
-  typ: otwor
-  odl: 6.0
-  szer: 2.4
-  wys: 2.4
-  parapet: 0.0
-  uwagi: hol → pokój rodzinny (galeria przy schodach)
-- id: O1-09
-  sciana: S1-05
-  symbol: D1
-  typ: drzwi
-  odl: 2.6
-  szer: 0.9
-  wys: 2.1
-  parapet: 0.0
-  otwieranie:
-    strona: lewa
-    kierunek: do_wewn
-    rodzaj: R
-  uwagi: pokój dziecka 2
-- id: O1-10
-  sciana: S1-05
-  symbol: D2
-  typ: drzwi
-  odl: 4.2
-  szer: 0.9
-  wys: 2.1
-  parapet: 0.0
-  otwieranie:
-    strona: lewa
-    kierunek: na_zewn
-    rodzaj: R
-  uwagi: łazienka dzieci — na zewnątrz
-- id: O1-11
-  sciana: S1-06
-  symbol: D2
-  typ: drzwi
-  odl: 0.21
-  szer: 0.9
-  wys: 2.1
-  parapet: 0.0
-  otwieranie:
-    strona: lewa
-    kierunek: na_zewn
-    rodzaj: R
-  uwagi: WC z natryskiem — na zewnątrz (pion K2 nad WC P0)
-- id: O1-12
-  sciana: S1-06
-  symbol: D1
-  typ: drzwi
-  odl: 1.65
-  szer: 0.9
-  wys: 2.1
-  parapet: 0.0
-  otwieranie:
-    strona: lewa
-    kierunek: do_wewn
-    rodzaj: R
-  uwagi: pralnia z suszarnią
-- id: O2-01
-  sciana: S2-01
-  symbol: OP1
-  typ: okno
-  odl: 1.12
-  szer: 3.0
-  wys: 2.0
-  parapet: 0.6
-  otwieranie:
-    strona: lewa
-    kierunek: do_wewn
-    rodzaj: RU
-  oslona: screen_zip
-  uwagi: sypialnia — południe (za lamelami)
-  montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz;
-    parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)'
-  oslona_montaz: screen ZIP w szczelinie wentylowanej za lamelami, kaseta nadstawna przed membraną pod okapem PL-3 (bez podcięcia wełny)
-- id: O2-02
-  sciana: S2-01
-  symbol: OP2
-  typ: okno
-  odl: 5.22
-  szer: 1.2
-  wys: 1.75
-  parapet: 0.85
-  otwieranie: *id002
-  oslona: screen_zip
-  uwagi: garderoba — południe
-  montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz;
-    parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)'
-  oslona_montaz: screen ZIP w szczelinie wentylowanej za lamelami, kaseta nadstawna przed membraną pod okapem PL-3 (bez podcięcia wełny)
-- id: O2-03
-  sciana: S2-01
-  symbol: OP3
-  typ: okno
-  odl: 10.12
-  szer: 2.4
-  wys: 2.0
-  parapet: 0.6
-  otwieranie:
-    strona: lewa
-    kierunek: do_wewn
-    rodzaj: RU
-  oslona: screen_zip
-  uwagi: gabinet — południe
-  montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz;
-    parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)'
-  oslona_montaz: screen ZIP w szczelinie wentylowanej za lamelami, kaseta nadstawna przed membraną pod okapem PL-3 (bez podcięcia wełny)
-- id: O2-04
-  sciana: S2-08
-  symbol: OP3
-  typ: okno
-  odl: 1.425
-  szer: 2.4
-  wys: 2.0
-  parapet: 0.6
-  otwieranie:
-    strona: lewa
-    kierunek: do_wewn
-    rodzaj: RU
-  oslona: screen_zip
-  uwagi: sypialnia — zachód (ściana lekka, za lamelami)
-  montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz;
-    parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)'
-  oslona_montaz: jw. — szczelina za lamelami
-- id: O2-05
-  sciana: S2-02
-  symbol: OP2
-  typ: okno
-  odl: 1.9
-  szer: 1.2
-  wys: 1.75
-  parapet: 0.85
-  otwieranie: *id002
-  oslona: screen_zip
-  uwagi: gabinet — wschód
-  montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz;
-    parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)'
-  oslona_montaz: jw. — szczelina za lamelami
-- id: O2-06
-  sciana: S2-05
-  symbol: ON2
-  typ: okno
-  odl: 3.3
-  szer: 0.9
-  wys: 0.6
-  parapet: 1.6
-  otwieranie:
-    strona: lewa
-    kierunek: do_wewn
-    rodzaj: U
-  oslona: brak
-  uwagi: łazienka rodziców
-  montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz;
-    parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)'
-- id: O2-07
-  sciana: S2-05
-  symbol: ON4
-  typ: okno
-  odl: 0.4
-  szer: 1.7
-  wys: 1.5
-  parapet: 0.9
-  otwieranie:
-    strona: lewa
-    kierunek: do_wewn
-    rodzaj: U
-  oslona: brak
-  uwagi: klatka schodowa — północ (nad biegami)
-  montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz;
-    parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)'
-- id: O2-08
-  sciana: S2-12
-  symbol: D1
-  typ: drzwi
-  odl: 3.9
-  szer: 0.9
-  wys: 2.1
-  parapet: 0.0
-  otwieranie:
-    strona: lewa
-    kierunek: do_wewn
-    rodzaj: R
-  uwagi: garderoba → sypialnia
-- id: O2-09
-  sciana: S2-13
-  symbol: D1
-  typ: drzwi
-  odl: 3.9
-  szer: 0.9
-  wys: 2.1
-  parapet: 0.0
-  otwieranie:
-    strona: lewa
-    kierunek: do_wewn
-    rodzaj: R
-  uwagi: hol → garderoba (przedpokój apartamentu)
-- id: O2-10
-  sciana: S2-09
-  symbol: D2
-  typ: drzwi
-  odl: 0.325
-  szer: 0.9
-  wys: 2.1
-  parapet: 0.0
-  otwieranie:
-    strona: lewa
-    kierunek: na_zewn
-    rodzaj: R
-  uwagi: garderoba → łazienka rodziców (na zewnątrz)
-- id: O2-11
-  sciana: S2-14
-  symbol: D1
-  typ: drzwi
-  odl: 3.9
-  szer: 0.9
-  wys: 2.1
-  parapet: 0.0
-  otwieranie:
-    strona: lewa
-    kierunek: do_wewn
-    rodzaj: R
-  uwagi: hol → gabinet
-- id: O2-12
-  sciana: S2-15
-  symbol: D4
-  typ: drzwi
-  odl: 0.325
-  szer: 0.9
-  wys: 2.1
-  parapet: 0.0
-  otwieranie:
-    strona: lewa
-    kierunek: do_wewn
-    rodzaj: R
-  uwagi: hol → pom. techniczne (centrala reku, wyłaz na dach)
+  # --- P0
+  - {id: O0-01, sciana: S0-01, symbol: FX1, typ: fix, odl: 0.3, szer: 1.9, wys: 2.75, parapet: 0.0, oslona: screen_zip, uwagi: przeszklenie E — kwatera 1, montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)', oslona_montaz: 'screen ZIP — kaseta w podsufitce okapu PL-E (poza warstwą izolacji), prowadnice przy słupach fasady', prog: {profil: 'próg termiczny ≤ 0,02 m na podwalinie progowej XPS 300 / PUR-GF (λ ≤ 0,05) na płycie fundamentowej', odwodnienie_liniowe: true, hydroizolacja: 'wywinięcie membrany SBS płyty ≥ 0,15 m pod profil + taśma EPDM; spadek nawierzchni 2 % od budynku'}}
+  - {id: O0-02, sciana: S0-01, symbol: FX1, typ: fix, odl: 2.2, szer: 1.9, wys: 2.75, parapet: 0.0, oslona: screen_zip, uwagi: przeszklenie E — kwatera 2, montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)', oslona_montaz: 'screen ZIP — kaseta w podsufitce okapu PL-E (poza warstwą izolacji), prowadnice przy słupach fasady', prog: {profil: 'próg termiczny ≤ 0,02 m na podwalinie progowej XPS 300 / PUR-GF (λ ≤ 0,05) na płycie fundamentowej', odwodnienie_liniowe: true, hydroizolacja: 'wywinięcie membrany SBS płyty ≥ 0,15 m pod profil + taśma EPDM; spadek nawierzchni 2 % od budynku'}}
+  - {id: O0-03, sciana: S0-01, symbol: HS1, typ: drzwi_przesuwne_HS, odl: 4.1, szer: 2.34, wys: 2.75, parapet: 0.0, otwieranie: {strona: prawa, kierunek: do_wewn, rodzaj: HS}, oslona: screen_zip, bezprogowe: true, uwagi: kwatera 3 — HS salon, montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)', oslona_montaz: 'screen ZIP — kaseta w podsufitce okapu PL-E (poza warstwą izolacji), prowadnice przy słupach fasady', prog: {profil: 'próg termiczny ≤ 0,02 m na podwalinie progowej XPS 300 / PUR-GF (λ ≤ 0,05) na płycie fundamentowej', odwodnienie_liniowe: true, hydroizolacja: 'wywinięcie membrany SBS płyty ≥ 0,15 m pod profil + taśma EPDM; spadek nawierzchni 2 % od budynku'}}
+  - {id: O0-04, sciana: S0-01, symbol: HS1, typ: drzwi_przesuwne_HS, odl: 6.44, szer: 2.34, wys: 2.75, parapet: 0.0, otwieranie: {strona: prawa, kierunek: do_wewn, rodzaj: HS}, oslona: screen_zip, bezprogowe: true, uwagi: kwatera 4 — HS jadalnia, montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)', oslona_montaz: 'screen ZIP — kaseta w podsufitce okapu PL-E (poza warstwą izolacji), prowadnice przy słupach fasady', prog: {profil: 'próg termiczny ≤ 0,02 m na podwalinie progowej XPS 300 / PUR-GF (λ ≤ 0,05) na płycie fundamentowej', odwodnienie_liniowe: true, hydroizolacja: 'wywinięcie membrany SBS płyty ≥ 0,15 m pod profil + taśma EPDM; spadek nawierzchni 2 % od budynku'}}
+  - {id: O0-05, sciana: S0-01, symbol: FX2, typ: fix, odl: 8.78, szer: 2.92, wys: 2.75, parapet: 0.0, oslona: screen_zip, uwagi: przeszklenie E — kwatera 5 (kuchnia), montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)', oslona_montaz: 'screen ZIP — kaseta w podsufitce okapu PL-E (poza warstwą izolacji), prowadnice przy słupach fasady', prog: {profil: 'próg termiczny ≤ 0,02 m na podwalinie progowej XPS 300 / PUR-GF (λ ≤ 0,05) na płycie fundamentowej', odwodnienie_liniowe: true, hydroizolacja: 'wywinięcie membrany SBS płyty ≥ 0,15 m pod profil + taśma EPDM; spadek nawierzchni 2 % od budynku'}}
+  - {id: O0-06, sciana: S0-02, symbol: DZ3, typ: drzwi_zewn, odl: 0.35, szer: 0.9, wys: 2.75, parapet: 0.0, otwieranie: {strona: lewa, kierunek: na_zewn, rodzaj: R}, oslona: screen_zip, uwagi: 'drzwi gospodarcze przeszklone w systemie i podziale fasady E (przeszczep J2) — pas E czytany ≈ 12,85 m; pod okapem E', montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)', oslona_montaz: screen ZIP — kaseta w podsufitce okapu PL-E, prog: {profil: 'próg termiczny ≤ 0,02 m na podwalinie progowej XPS 300 / PUR-GF (λ ≤ 0,05) na płycie fundamentowej', odwodnienie_liniowe: true, hydroizolacja: 'wywinięcie membrany SBS płyty ≥ 0,15 m pod profil + taśma EPDM; spadek nawierzchni 2 % od budynku'}}
+  - {id: O0-07, sciana: S0-04, symbol: BR1, typ: brama, odl: 0.625, szer: 5.0, wys: 2.25, parapet: -0.1, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: segmentowa}, uwagi: 'brama segmentowa 5,00 × 2,25 m w świetle, kratki went. ≥ 0,08 m² (W-111, W-115); posadzka garażu −0,10'}
+  - {id: O0-08, sciana: S0-03, symbol: DZ2, typ: drzwi_zewn, odl: 4.9, szer: 1.0, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: na_zewn, rodzaj: R}, uwagi: 'drzwi boczne garażu (rowery, ogród) — 5,70 m od granicy E', montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)', prog: {profil: 'próg termiczny ≤ 0,02 m na podwalinie progowej XPS 300 / PUR-GF (λ ≤ 0,05) na płycie fundamentowej', odwodnienie_liniowe: true, hydroizolacja: 'wywinięcie membrany SBS płyty ≥ 0,15 m pod profil + taśma EPDM; spadek nawierzchni 2 % od budynku'}}
+  - {id: O0-09, sciana: S0-06, symbol: DZ1, typ: drzwi_zewn, odl: 0.85, szer: 1.1, wys: 2.4, parapet: 0.0, otwieranie: {strona: prawa, kierunek: do_wewn, rodzaj: R}, uwagi: 'drzwi wejściowe 1,10 × 2,40 w murze (≥ 0,90 × 2,00 w świetle ościeżnicy), próg ≤ 0,02 (W-055); pod daszkiem', montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)', prog: {profil: 'próg termiczny ≤ 0,02 m na podwalinie progowej XPS 300 / PUR-GF (λ ≤ 0,05) na płycie fundamentowej', odwodnienie_liniowe: true, hydroizolacja: 'wywinięcie membrany SBS płyty ≥ 0,15 m pod profil + taśma EPDM; spadek nawierzchni 2 % od budynku'}}
+  - {id: O0-10, sciana: S0-06, symbol: FX3, typ: fix, odl: 0.4, szer: 0.35, wys: 2.4, parapet: 0.0, oslona: brak, uwagi: 'doświetle boczne drzwi wejściowych, VSG mleczne (przeszczep z W3)', montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)', prog: {profil: 'próg termiczny ≤ 0,02 m na podwalinie progowej XPS 300 / PUR-GF (λ ≤ 0,05) na płycie fundamentowej', odwodnienie_liniowe: true, hydroizolacja: 'wywinięcie membrany SBS płyty ≥ 0,15 m pod profil + taśma EPDM; spadek nawierzchni 2 % od budynku'}}
+  - {id: O0-11, sciana: S0-07, symbol: HS2, typ: drzwi_przesuwne_HS, odl: 5.15, szer: 2.4, wys: 2.75, parapet: 0.0, otwieranie: {strona: prawa, kierunek: do_wewn, rodzaj: HS}, oslona: screen_zip, bezprogowe: true, uwagi: 'HS salonu na taras zach. pod okapem 1,50 m (przeszczep J2 z W1/W3)', montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)', oslona_montaz: 'screen ZIP — kaseta w podsufitce okapu zach. PL-E (1,50 m)', prog: {profil: 'próg termiczny ≤ 0,02 m na podwalinie progowej XPS 300 / PUR-GF (λ ≤ 0,05) na płycie fundamentowej', odwodnienie_liniowe: true, hydroizolacja: 'wywinięcie membrany SBS płyty ≥ 0,15 m pod profil + taśma EPDM; spadek nawierzchni 2 % od budynku'}}
+  - {id: O0-12, sciana: S0-07, symbol: OZ1, typ: okno, odl: 1.15, szer: 1.8, wys: 1.5, parapet: 0.9, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: RU}, oslona: zaluzja_zewn, uwagi: pokój gościnny — zachód, montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)', oslona_montaz: 'screen ZIP — kaseta w podsufitce okapu zach. PL-E (1,50 m)'}
+  - {id: O0-13, sciana: S0-06, symbol: ON1, typ: okno, odl: 6.9, szer: 0.8, wys: 0.6, parapet: 1.6, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: U}, oslona: brak, uwagi: łazienka gościnna — okno wysokie, montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)'}
+  - {id: O0-14, sciana: S0-08, symbol: D1, typ: drzwi, odl: 4.2, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: salon → przedpokój gościnny}
+  - {id: O0-15, sciana: S0-11, symbol: D1, typ: drzwi, odl: 0.205, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: przedpokój → pokój gościnny}
+  - {id: O0-16, sciana: S0-19, symbol: D2P, typ: drzwi, odl: 0.325, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: na_zewn, rodzaj: przesuwne, przesuwne: true}, uwagi: 'łazienka gościnna — drzwi przesuwne naścienne (WT §79 ust. 1), podcięcie ≥ 0,022 m²'}
+  - {id: O0-17, sciana: S0-09, symbol: D3, typ: drzwi, odl: 0.21, szer: 0.8, wys: 2.0, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: spiżarnia pod biegiem 2 (przeszczep J2)}
+  - {id: O0-18, sciana: S0-10, symbol: OT1, typ: otwor, odl: 0.4, szer: 1.5, wys: 2.4, parapet: 0.0, uwagi: hol → pas komunikacyjny przy schodach / strefa dzienna}
+  - {id: O0-19, sciana: S0-20, symbol: D2, typ: drzwi, odl: 0.21, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: na_zewn, rodzaj: R}, uwagi: 'WC gościnne — na zewnątrz, kratka ≥ 0,022 m²'}
+  - {id: O0-20, sciana: S0-21, symbol: DS1, typ: drzwi, odl: 0.275, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: 'drzwi szklane VSG w osi wejścia (x ≈ 10,60)'}
+  - {id: O0-21, sciana: S0-15, symbol: D1, typ: drzwi, odl: 0.35, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: 'przedsionek → kuchnia; przesunięte do fasady (przeszczep J1) — ciągła zabudowa kuchni y 1,40–5,02'}
+  - {id: O0-22, sciana: S0-17, symbol: DG1, typ: drzwi, odl: 3.875, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: 'garaż → przedsionek: szczelne, samozamykacz, U ≤ 1,3 (W-113, W-244)'}
+  - {id: O0-23, sciana: S0-18, symbol: D4, typ: drzwi, odl: 1.6, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: pom. techniczne dostępne z domu przez przedsionek (poprawka J2)}
+  # --- P1
+  - {id: O1-01, sciana: S1-01, symbol: BC1, typ: okno, odl: 4.1, szer: 7.02, wys: 1.5, parapet: 0.7, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: RU}, oslona: screen_zip, kwatery: 3, uwagi: 'boks C — 3 kwatery 2,34 m w ramie wysuniętej 1,00 m; dolna część stała VSG do 0,85 m (W-097); słupki SLC1/SLC2 nad SL3/SL4', montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)', oslona_montaz: 'screen ZIP — kaseta w pasie górnym ramy C (PL-C2), poza izolacją'}
+  - {id: O1-02, sciana: S1-02, symbol: OE1, typ: okno, odl: 1.2, szer: 1.5, wys: 1.5, parapet: 0.85, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: RU}, oslona: zaluzja_zewn, uwagi: 'pokój rodzinny — wschód (parapet +4,00 > attyka garażu +3,85)', montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)', oslona_montaz: 'kaseta elewacyjna nadstawna PRZED licem ETICS (bez kasety w ociepleniu), prowadnice na konsolach dystansowych z przekładką termiczną'}
+  - {id: O1-03, sciana: S1-03, symbol: ON2, typ: okno, odl: 6.8, szer: 0.9, wys: 0.6, parapet: 1.6, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: U}, oslona: brak, uwagi: łazienka dzieci, montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)'}
+  - {id: O1-04, sciana: S1-03, symbol: ON3, typ: okno, odl: 0.4, szer: 1.2, wys: 0.6, parapet: 1.6, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: U}, oslona: brak, uwagi: pralnia, montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)'}
+  - {id: O1-05, sciana: S1-04, symbol: OZ1, typ: okno, odl: 0.95, szer: 1.8, wys: 1.5, parapet: 0.9, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: RU}, oslona: zaluzja_zewn, uwagi: pokój dziecka 2 — zachód, montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)', oslona_montaz: 'kaseta elewacyjna nadstawna PRZED licem ETICS (bez kasety w ociepleniu), prowadnice na konsolach dystansowych z przekładką termiczną'}
+  - {id: O1-06, sciana: S1-04, symbol: OZ1, typ: okno, odl: 5.95, szer: 1.8, wys: 1.5, parapet: 0.9, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: RU}, oslona: zaluzja_zewn, uwagi: pokój dziecka 1 — zachód (elewacja pd. bryły B pełna), montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)', oslona_montaz: 'kaseta elewacyjna nadstawna PRZED licem ETICS (bez kasety w ociepleniu), prowadnice na konsolach dystansowych z przekładką termiczną'}
+  - {id: O1-07, sciana: S1-11, symbol: D1, typ: drzwi, odl: 2.6, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: pokój dziecka 1}
+  - {id: O1-08, sciana: S1-11, symbol: OT2, typ: otwor, odl: 6.0, szer: 2.4, wys: 2.4, parapet: 0.0, uwagi: hol → pokój rodzinny (galeria przy schodach)}
+  - {id: O1-09, sciana: S1-05, symbol: D1, typ: drzwi, odl: 2.6, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: pokój dziecka 2}
+  - {id: O1-10, sciana: S1-05, symbol: D2, typ: drzwi, odl: 4.2, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: na_zewn, rodzaj: R}, uwagi: łazienka dzieci — na zewnątrz}
+  - {id: O1-11, sciana: S1-06, symbol: D2, typ: drzwi, odl: 0.21, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: na_zewn, rodzaj: R}, uwagi: WC z natryskiem — na zewnątrz (pion K2 nad WC P0)}
+  - {id: O1-12, sciana: S1-06, symbol: D1, typ: drzwi, odl: 1.65, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: pralnia z suszarnią}
+  # --- P2
+  - {id: O2-01, sciana: S2-01, symbol: OP1, typ: okno, odl: 1.12, szer: 3.0, wys: 2.0, parapet: 0.6, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: RU}, oslona: screen_zip, uwagi: sypialnia — południe (za lamelami), montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)', oslona_montaz: 'screen ZIP w szczelinie wentylowanej za lamelami, kaseta nadstawna przed membraną pod okapem PL-3 (bez podcięcia wełny)'}
+  - {id: O2-02, sciana: S2-01, symbol: OP2, typ: okno, odl: 5.22, szer: 1.2, wys: 1.75, parapet: 0.85, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: RU}, oslona: screen_zip, uwagi: garderoba — południe, montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)', oslona_montaz: 'screen ZIP w szczelinie wentylowanej za lamelami, kaseta nadstawna przed membraną pod okapem PL-3 (bez podcięcia wełny)'}
+  - {id: O2-03, sciana: S2-01, symbol: OP3, typ: okno, odl: 10.12, szer: 2.4, wys: 2.0, parapet: 0.6, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: RU}, oslona: screen_zip, uwagi: gabinet — południe, montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)', oslona_montaz: 'screen ZIP w szczelinie wentylowanej za lamelami, kaseta nadstawna przed membraną pod okapem PL-3 (bez podcięcia wełny)'}
+  - {id: O2-04, sciana: S2-08, symbol: OP3, typ: okno, odl: 1.425, szer: 2.4, wys: 2.0, parapet: 0.6, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: RU}, oslona: screen_zip, uwagi: 'sypialnia — zachód (ściana lekka, za lamelami)', montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)', oslona_montaz: screen ZIP w szczelinie za lamelami (kaseta przed membraną)}
+  - {id: O2-05, sciana: S2-02, symbol: OP2, typ: okno, odl: 1.9, szer: 1.2, wys: 1.75, parapet: 0.85, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: RU}, oslona: screen_zip, uwagi: gabinet — wschód, montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)', oslona_montaz: screen ZIP w szczelinie za lamelami (kaseta przed membraną)}
+  - {id: O2-06, sciana: S2-05, symbol: ON2, typ: okno, odl: 3.3, szer: 0.9, wys: 0.6, parapet: 1.6, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: U}, oslona: brak, uwagi: łazienka rodziców, montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)'}
+  - {id: O2-07, sciana: S2-05, symbol: ON4, typ: okno, odl: 0.4, szer: 1.7, wys: 1.5, parapet: 0.9, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: U}, oslona: brak, uwagi: klatka schodowa — północ (nad biegami), montaz: 'ciepły montaż: rama wsunięta 5 cm w mur, 4 cm w warstwie ocieplenia; izolacja ościeża z zakładem 3 cm na ramę; taśma paroszczelna od wewnątrz, paroprzepuszczalna od zewnątrz; parapet zewn. z okapnikiem na profilu nośnym z XPS (bez przerywania izolacji)'}
+  - {id: O2-08, sciana: S2-12, symbol: D1, typ: drzwi, odl: 3.9, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: garderoba → sypialnia}
+  - {id: O2-09, sciana: S2-13, symbol: D1, typ: drzwi, odl: 3.9, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: hol → garderoba (przedpokój apartamentu)}
+  - {id: O2-10, sciana: S2-09, symbol: D2, typ: drzwi, odl: 0.325, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: na_zewn, rodzaj: R}, uwagi: garderoba → łazienka rodziców (na zewnątrz)}
+  - {id: O2-11, sciana: S2-14, symbol: D1, typ: drzwi, odl: 3.9, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: hol → gabinet}
+  - {id: O2-12, sciana: S2-15, symbol: D4, typ: drzwi, odl: 0.325, szer: 0.9, wys: 2.1, parapet: 0.0, otwieranie: {strona: lewa, kierunek: do_wewn, rodzaj: R}, uwagi: 'hol → pom. techniczne (centrala reku, wyłaz na dach)'}
+
 pomieszczenia:
-- id: '0.01'
-  kond: P0
-  nazwa: Wiatrołap
-  punkt: [10.9, 7.6]
-  wielobok: null
-  kategoria: ruchu
-  pobyt_ludzi: false
-  posadzka: GRES
-  sciany_wyk: TYNK_GIPS
-  sufit: TYNK_GIPS
-  temp: 16
-  went:
-    naw: 0
-    wyw: 0
-  rodzaj: komunikacja
-  podloga: POD-0L
-  uwagi: szklana przegroda z drzwiami w osi wejścia; ławka
-- id: '0.02'
-  kond: P0
-  nazwa: Hol
-  punkt: [10.0, 5.9]
-  wielobok: null
-  kategoria: ruchu
-  pobyt_ludzi: false
-  posadzka: GRES
-  sciany_wyk: TYNK_GIPS
-  sufit: TYNK_GIPS
-  temp: 20
-  went:
-    naw: 0
-    wyw: 0
-  rodzaj: komunikacja
-  podloga: POD-0L
-  uwagi: szafa wejściowa 0,60 m przy ścianie E
-- id: '0.03'
-  kond: P0
-  nazwa: WC gościnne
-  punkt: [9.2, 7.6]
-  wielobok: null
-  kategoria: pomocnicza
-  pobyt_ludzi: false
-  posadzka: GRES
-  sciany_wyk: PLYTKI_SC
-  sufit: SUF_GK
-  temp: 20
-  went:
-    naw: 0
-    wyw: 30
-  rodzaj: wc
-  podloga: POD-0L
-  uwagi: szer. 1,195 m ≥ 0,90 (W-060); wentylacja mechaniczna
-- id: '0.04'
-  kond: P0
-  nazwa: Klatka schodowa
-  punkt: null
-  wielobok: [[5.98, 5.02], [7.13, 5.02], [7.13, 7.47], [5.98, 7.47]]
-  kategoria: ruchu
-  pobyt_ludzi: false
-  posadzka: DESKA_DEB
-  sciany_wyk: TYNK_GIPS
-  sufit: TYNK_GIPS
-  temp: 20
-  went:
-    naw: 0
-    wyw: 0
-  rodzaj: komunikacja
-  uwagi: bieg 1 SCH1; wyłączona z PU (W-316)
-- id: '0.05'
-  kond: P0
-  nazwa: Spiżarnia (pod schodami)
-  punkt: null
-  wielobok: [[7.25, 5.23], [8.395, 5.23], [8.395, 8.645], [5.98, 8.645], [5.98, 7.47], [7.25, 7.47]]
-  kategoria: pomocnicza
-  pobyt_ludzi: false
-  posadzka: GRES
-  sciany_wyk: TYNK_GIPS
-  sufit: TYNK_GIPS
-  temp: 16
-  went:
-    naw: 0
-    wyw: 15
-  rodzaj: pomocnicze
-  podloga: POD-0L
-  wys: 1.9
-  uwagi: wysokość zmienna 2,77 → 1,39 m pod biegiem 2 i spocznikiem — PU liczona w 50 % (wys. zastępcza 1,90; W-316)
-- id: '0.06'
-  kond: P0
-  nazwa: Salon + jadalnia + kuchnia
-  punkt: null
-  wielobok: [[0.105, 0.105], [11.895, 0.105], [11.895, 5.02], [8.9, 5.02], [8.9, 3.85], [5.9, 3.85], [5.9, 5.02], [0.105, 5.02]]
-  kategoria: podstawowa
-  pobyt_ludzi: true
-  posadzka: DESKA_DEB
-  sciany_wyk: TYNK_GIPS
-  sufit: TYNK_GIPS
-  temp: 20
-  went:
-    naw: 100
-    wyw: 50
-  rodzaj: kuchnia
-  uwagi: strefa dzienna; kuchnia z wyspą — zabudowa ciągła przy ścianie osi E (y 1,30–5,02, przeszczep J1); wywiew okap 50/120 m³/h
-- id: '0.07'
-  kond: P0
-  nazwa: Pas komunikacyjny przy schodach
-  punkt: null
-  wielobok: [[5.9, 3.85], [8.9, 3.85], [8.9, 5.02], [5.9, 5.02]]
-  kategoria: ruchu
-  pobyt_ludzi: false
-  posadzka: DESKA_DEB
-  sciany_wyk: TYNK_GIPS
-  sufit: TYNK_GIPS
-  temp: 20
-  went:
-    naw: 0
-    wyw: 0
-  rodzaj: komunikacja
-  uwagi: wydzielony ekranem z lamel h 2,10 m (LAM-P0); dojście hol → stopa schodów bez przechodzenia przez strefę mebli
-- id: '0.08'
-  kond: P0
-  nazwa: Przedpokój gościnny
-  punkt: [4.6, 5.8]
-  wielobok: null
-  kategoria: ruchu
-  pobyt_ludzi: false
-  posadzka: DESKA_DEB
-  sciany_wyk: TYNK_GIPS
-  sufit: TYNK_GIPS
-  temp: 20
-  went:
-    naw: 0
-    wyw: 0
-  rodzaj: komunikacja
-- id: '0.09'
-  kond: P0
-  nazwa: Łazienka gościnna (natrysk)
-  punkt: [4.8, 7.6]
-  wielobok: null
-  kategoria: pomocnicza
-  pobyt_ludzi: false
-  posadzka: GRES
-  sciany_wyk: PLYTKI_SC
-  sufit: SUF_GK
-  temp: 24
-  went:
-    naw: 0
-    wyw: 50
-  rodzaj: lazienka
-  podloga: POD-0L
-- id: '0.10'
-  kond: P0
-  nazwa: Pokój gościnny / gabinet
-  punkt: [1.9, 6.9]
-  wielobok: null
-  kategoria: podstawowa
-  pobyt_ludzi: true
-  posadzka: DESKA_DEB
-  sciany_wyk: TYNK_GIPS
-  sufit: TYNK_GIPS
-  temp: 20
-  went:
-    naw: 40
-    wyw: 0
-  rodzaj: pokoj
-- id: '0.11'
-  kond: P0
-  nazwa: Przedsionek gospodarczy
-  punkt: [13.4, 1.4]
-  wielobok: null
-  kategoria: ruchu
-  pobyt_ludzi: false
-  posadzka: GRES
-  sciany_wyk: TYNK_GIPS
-  sufit: TYNK_GIPS
-  temp: 20
-  went:
-    naw: 0
-    wyw: 0
-  rodzaj: komunikacja
-  podloga: POD-0L
-  uwagi: garaż → przedsionek → kuchnia ≈ 6 m; szafa na odzież i obuwie; drzwi do ogrodu
-- id: '0.12'
-  kond: P0
-  nazwa: Pomieszczenie techniczne
-  punkt: [16.6, 1.4]
-  wielobok: null
-  kategoria: techniczna
-  pobyt_ludzi: false
-  posadzka: GRES
-  sciany_wyk: TYNK_CW
-  sufit: TYNK_GIPS
-  temp: 16
-  went:
-    naw: 0
-    wyw: 15
-  rodzaj: techniczne
-  podloga: POD-0L
-  uwagi: moduł hydrauliczny PC R290 (monoblok zewn.), zasobnik CWU 300 l, bufor 100 l, rozdzielacze, RG, wodomierz; dostęp z przedsionka
-- id: '0.13'
-  kond: P0
-  nazwa: Garaż 2-stanowiskowy
-  punkt: [15.3, 6.2]
-  wielobok: null
-  kategoria: pomocnicza
-  pobyt_ludzi: false
-  posadzka: ZYWICA
-  sciany_wyk: TYNK_CW
-  sufit: TYNK_CW
-  temp: null
-  went:
-    naw: 0
-    wyw: 0
-  rodzaj: garaz
-  podloga: POD-G
-  ogrzewane: false
-  uwagi: w świetle 6,05 × 6,175 m (≥ 5,60 × 6,00; W-112); nieogrzewany, wentylacja naturalna ≥ 0,08 m² (W-115); posadzka −0,10, spadek 1,5 % do bramy
-- id: '1.01'
-  kond: P1
-  nazwa: Hol
-  punkt: null
-  wielobok: [[0.105, 3.825], [11.895, 3.825], [11.895, 5.02], [8.395, 5.02], [8.395, 5.23], [5.98, 5.23], [5.98, 5.02], [0.105, 5.02]]
-  kategoria: ruchu
-  pobyt_ludzi: false
-  posadzka: DESKA_DEB
-  sciany_wyk: TYNK_GIPS
-  sufit: TYNK_GIPS
-  temp: 20
-  went:
-    naw: 0
-    wyw: 0
-  rodzaj: komunikacja
-- id: '1.02'
-  kond: P1
-  nazwa: Pokój rodzinny / biblioteka (boks C)
-  punkt: [8.0, 1.8]
-  wielobok: null
-  kategoria: podstawowa
-  pobyt_ludzi: true
-  posadzka: DESKA_DEB
-  sciany_wyk: TYNK_GIPS
-  sufit: TYNK_GIPS
-  temp: 20
-  went:
-    naw: 40
-    wyw: 0
-  rodzaj: pokoj
-- id: '1.03'
-  kond: P1
-  nazwa: Pokój dziecka 1
-  punkt: [1.9, 1.8]
-  wielobok: null
-  kategoria: podstawowa
-  pobyt_ludzi: true
-  posadzka: DESKA_DEB
-  sciany_wyk: TYNK_GIPS
-  sufit: TYNK_GIPS
-  temp: 20
-  went:
-    naw: 40
-    wyw: 0
-  rodzaj: pokoj
-- id: '1.04'
-  kond: P1
-  nazwa: Pokój dziecka 2
-  punkt: [1.9, 6.9]
-  wielobok: null
-  kategoria: podstawowa
-  pobyt_ludzi: true
-  posadzka: DESKA_DEB
-  sciany_wyk: TYNK_GIPS
-  sufit: TYNK_GIPS
-  temp: 20
-  went:
-    naw: 40
-    wyw: 0
-  rodzaj: pokoj
-- id: '1.05'
-  kond: P1
-  nazwa: Łazienka dzieci (wanna)
-  punkt: [4.6, 7.5]
-  wielobok: null
-  kategoria: pomocnicza
-  pobyt_ludzi: false
-  posadzka: GRES
-  sciany_wyk: PLYTKI_SC
-  sufit: SUF_GK
-  temp: 24
-  went:
-    naw: 0
-    wyw: 50
-  rodzaj: lazienka
-  podloga: POD-1L
-- id: '1.06'
-  kond: P1
-  nazwa: Klatka schodowa
-  punkt: null
-  wielobok: [[5.98, 5.23], [8.395, 5.23], [8.395, 8.645], [5.98, 8.645]]
-  kategoria: ruchu
-  pobyt_ludzi: false
-  posadzka: DESKA_DEB
-  sciany_wyk: TYNK_GIPS
-  sufit: TYNK_GIPS
-  temp: 20
-  went:
-    naw: 0
-    wyw: 0
-  rodzaj: komunikacja
-  uwagi: wyłączona z PU (W-316)
-- id: '1.07'
-  kond: P1
-  nazwa: WC z natryskiem
-  punkt: [9.2, 7.0]
-  wielobok: null
-  kategoria: pomocnicza
-  pobyt_ludzi: false
-  posadzka: GRES
-  sciany_wyk: PLYTKI_SC
-  sufit: SUF_GK
-  temp: 24
-  went:
-    naw: 0
-    wyw: 50
-  rodzaj: lazienka
-  podloga: POD-1L
-  uwagi: nad WC P0 — pion K2 (zawór napowietrzający, K1 wentylowany ponad dach)
-- id: '1.08'
-  kond: P1
-  nazwa: Pralnia z suszarnią
-  punkt: [10.9, 7.0]
-  wielobok: null
-  kategoria: pomocnicza
-  pobyt_ludzi: false
-  posadzka: GRES
-  sciany_wyk: PLYTKI_SC
-  sufit: TYNK_GIPS
-  temp: 20
-  went:
-    naw: 0
-    wyw: 40
-  rodzaj: pralnia
-  podloga: POD-1L
-  uwagi: zmniejszona do ≈ 6,6 m² (przeszczep J1); wywiew ≥ 2 h⁻¹
-- id: '2.01'
-  kond: P2
-  nazwa: Hol
-  punkt: null
-  wielobok: [[5.95, 2.7], [8.425, 2.7], [8.425, 5.02], [5.95, 5.02]]
-  kategoria: ruchu
-  pobyt_ludzi: false
-  posadzka: DESKA_DEB
-  sciany_wyk: TYNK_GIPS
-  sufit: TYNK_GIPS
-  temp: 20
-  went:
-    naw: 0
-    wyw: 0
-  rodzaj: komunikacja
-- id: '2.02'
-  kond: P2
-  nazwa: Sypialnia rodziców
-  punkt: [1.3, 2.4]
-  wielobok: null
-  kategoria: podstawowa
-  pobyt_ludzi: true
-  posadzka: DESKA_DEB
-  sciany_wyk: TYNK_GIPS
-  sufit: TYNK_GIPS
-  temp: 20
-  went:
-    naw: 50
-    wyw: 0
-  rodzaj: pokoj
-  uwagi: naroże S+W nad wspornikiem; okna za lamelami
-- id: '2.03'
-  kond: P2
-  nazwa: Garderoba (przedpokój apartamentu)
-  punkt: [4.7, 2.4]
-  wielobok: null
-  kategoria: pomocnicza
-  pobyt_ludzi: false
-  posadzka: DESKA_DEB
-  sciany_wyk: TYNK_GIPS
-  sufit: TYNK_GIPS
-  temp: 20
-  went:
-    naw: 0
-    wyw: 0
-  rodzaj: pomocnicze
-- id: '2.04'
-  kond: P2
-  nazwa: Łazienka rodziców
-  punkt: [4.6, 7.5]
-  wielobok: null
-  kategoria: pomocnicza
-  pobyt_ludzi: false
-  posadzka: GRES
-  sciany_wyk: PLYTKI_SC
-  sufit: SUF_GK
-  temp: 24
-  went:
-    naw: 0
-    wyw: 50
-  rodzaj: lazienka
-  podloga: POD-1L
-  uwagi: nad łazienkami P1 i P0 (pion SI)
-- id: '2.05'
-  kond: P2
-  nazwa: Gabinet / pokój
-  punkt: [10.2, 2.4]
-  wielobok: null
-  kategoria: podstawowa
-  pobyt_ludzi: true
-  posadzka: DESKA_DEB
-  sciany_wyk: TYNK_GIPS
-  sufit: TYNK_GIPS
-  temp: 20
-  went:
-    naw: 40
-    wyw: 0
-  rodzaj: pokoj
-- id: '2.06'
-  kond: P2
-  nazwa: Klatka schodowa (wyjście z biegu 2, pustka)
-  punkt: null
-  wielobok: [[5.98, 5.02], [8.395, 5.02], [8.395, 8.645], [5.98, 8.645]]
-  kategoria: ruchu
-  pobyt_ludzi: false
-  posadzka: DESKA_DEB
-  sciany_wyk: TYNK_GIPS
-  sufit: TYNK_GIPS
-  temp: 20
-  went:
-    naw: 0
-    wyw: 0
-  rodzaj: komunikacja
-  uwagi: świetlik SW1 nad spocznikiem, okno pn. ON4; wyłączona z PU
-- id: '2.07'
-  kond: P2
-  nazwa: Pom. techniczne (centrala rekuperacyjna, wyłaz na dach)
-  punkt: [7.2, 1.3]
-  wielobok: null
-  kategoria: techniczna
-  pobyt_ludzi: false
-  posadzka: GRES
-  sciany_wyk: TYNK_GIPS
-  sufit: TYNK_GIPS
-  temp: 16
-  went:
-    naw: 0
-    wyw: 0
-  rodzaj: techniczne
-  podloga: POD-1L
-  uwagi: centrala 450 m³/h; wyłaz 0,90 × 0,90 m z drabiną (W-065)
+  # --- P0
+  - {id: '0.01', kond: P0, nazwa: Wiatrołap, punkt: [10.9, 7.6], wielobok: null, kategoria: ruchu, pobyt_ludzi: false, posadzka: GRES, sciany_wyk: TYNK_GIPS, sufit: TYNK_GIPS, temp: 16, went: {naw: 0, wyw: 0}, rodzaj: komunikacja, podloga: POD-0L, uwagi: szklana przegroda z drzwiami w osi wejścia; ławka}
+  - {id: '0.02', kond: P0, nazwa: Hol, punkt: [10.0, 5.9], wielobok: null, kategoria: ruchu, pobyt_ludzi: false, posadzka: GRES, sciany_wyk: TYNK_GIPS, sufit: TYNK_GIPS, temp: 20, went: {naw: 0, wyw: 0}, rodzaj: komunikacja, podloga: POD-0L, uwagi: 'szafa wejściowa 0,60 m przy ścianie E'}
+  - {id: '0.03', kond: P0, nazwa: WC gościnne, punkt: [9.2, 7.6], wielobok: null, kategoria: pomocnicza, pobyt_ludzi: false, posadzka: GRES, sciany_wyk: PLYTKI_SC, sufit: SUF_GK, temp: 20, went: {naw: 0, wyw: 30}, rodzaj: wc, podloga: POD-0L, uwagi: 'szer. 1,195 m ≥ 0,90 (W-060); wentylacja mechaniczna'}
+  - {id: '0.04', kond: P0, nazwa: Klatka schodowa, punkt: null, wielobok: [[5.98, 5.02], [7.13, 5.02], [7.13, 7.47], [5.98, 7.47]], kategoria: ruchu, pobyt_ludzi: false, posadzka: DESKA_DEB, sciany_wyk: TYNK_GIPS, sufit: TYNK_GIPS, temp: 20, went: {naw: 0, wyw: 0}, rodzaj: komunikacja, uwagi: bieg 1 SCH1; wyłączona z PU (W-316)}
+  - {id: '0.05', kond: P0, nazwa: Spiżarnia (pod schodami), punkt: null, wielobok: [[7.25, 5.23], [8.395, 5.23], [8.395, 8.645], [5.98, 8.645], [5.98, 7.47], [7.25, 7.47]], kategoria: pomocnicza, pobyt_ludzi: false, posadzka: GRES, sciany_wyk: TYNK_GIPS, sufit: TYNK_GIPS, temp: 16, went: {naw: 0, wyw: 15}, rodzaj: pomocnicze, podloga: POD-0L, wys: 1.9, uwagi: 'wysokość zmienna 2,77 → 1,39 m pod biegiem 2 i spocznikiem — PU liczona w 50 % (wys. zastępcza 1,90; W-316)'}
+  - {id: '0.06', kond: P0, nazwa: Salon + jadalnia + kuchnia, punkt: null, wielobok: [[0.105, 0.105], [11.895, 0.105], [11.895, 5.02], [8.9, 5.02], [8.9, 3.85], [5.9, 3.85], [5.9, 5.02], [0.105, 5.02]], kategoria: podstawowa, pobyt_ludzi: true, posadzka: DESKA_DEB, sciany_wyk: TYNK_GIPS, sufit: TYNK_GIPS, temp: 20, went: {naw: 100, wyw: 50}, rodzaj: kuchnia, uwagi: 'strefa dzienna; kuchnia z wyspą — zabudowa ciągła przy ścianie osi E (y 1,30–5,02, przeszczep J1); wywiew okap 50/120 m³/h'}
+  - {id: '0.07', kond: P0, nazwa: Pas komunikacyjny przy schodach, punkt: null, wielobok: [[5.9, 3.85], [8.9, 3.85], [8.9, 5.02], [5.9, 5.02]], kategoria: ruchu, pobyt_ludzi: false, posadzka: DESKA_DEB, sciany_wyk: TYNK_GIPS, sufit: TYNK_GIPS, temp: 20, went: {naw: 0, wyw: 0}, rodzaj: komunikacja, uwagi: 'wydzielony ekranem z lamel h 2,10 m (LAM-P0); dojście hol → stopa schodów bez przechodzenia przez strefę mebli'}
+  - {id: '0.08', kond: P0, nazwa: Przedpokój gościnny, punkt: [4.6, 5.8], wielobok: null, kategoria: ruchu, pobyt_ludzi: false, posadzka: DESKA_DEB, sciany_wyk: TYNK_GIPS, sufit: TYNK_GIPS, temp: 20, went: {naw: 0, wyw: 0}, rodzaj: komunikacja}
+  - {id: '0.09', kond: P0, nazwa: Łazienka gościnna (natrysk), punkt: [4.8, 7.6], wielobok: null, kategoria: pomocnicza, pobyt_ludzi: false, posadzka: GRES, sciany_wyk: PLYTKI_SC, sufit: SUF_GK, temp: 24, went: {naw: 0, wyw: 50}, rodzaj: lazienka, podloga: POD-0L}
+  - {id: '0.10', kond: P0, nazwa: Pokój gościnny / gabinet, punkt: [1.9, 6.9], wielobok: null, kategoria: podstawowa, pobyt_ludzi: true, posadzka: DESKA_DEB, sciany_wyk: TYNK_GIPS, sufit: TYNK_GIPS, temp: 20, went: {naw: 40, wyw: 0}, rodzaj: pokoj}
+  - {id: '0.11', kond: P0, nazwa: Przedsionek gospodarczy, punkt: [13.4, 1.4], wielobok: null, kategoria: ruchu, pobyt_ludzi: false, posadzka: GRES, sciany_wyk: TYNK_GIPS, sufit: TYNK_GIPS, temp: 20, went: {naw: 0, wyw: 0}, rodzaj: komunikacja, podloga: POD-0L, uwagi: garaż → przedsionek → kuchnia ≈ 6 m; szafa na odzież i obuwie; drzwi do ogrodu}
+  - {id: '0.12', kond: P0, nazwa: Pomieszczenie techniczne, punkt: [16.6, 1.4], wielobok: null, kategoria: techniczna, pobyt_ludzi: false, posadzka: GRES, sciany_wyk: TYNK_CW, sufit: TYNK_GIPS, temp: 16, went: {naw: 0, wyw: 15}, rodzaj: techniczne, podloga: POD-0L, uwagi: 'moduł hydrauliczny PC R290 (monoblok zewn.), zasobnik CWU 300 l, bufor 100 l, rozdzielacze, RG, wodomierz; dostęp z przedsionka'}
+  - {id: '0.13', kond: P0, nazwa: Garaż 2-stanowiskowy, punkt: [15.3, 6.2], wielobok: null, kategoria: pomocnicza, pobyt_ludzi: false, posadzka: ZYWICA, sciany_wyk: TYNK_CW, sufit: TYNK_CW, temp: null, went: {naw: 0, wyw: 0}, rodzaj: garaz, podloga: POD-G, ogrzewane: false, uwagi: 'w świetle 6,05 × 6,175 m (≥ 5,60 × 6,00; W-112); nieogrzewany, wentylacja naturalna ≥ 0,08 m² (W-115); posadzka −0,10, spadek 1,5 % do bramy'}
+  # --- P1
+  - {id: '1.01', kond: P1, nazwa: Hol, punkt: null, wielobok: [[0.105, 3.825], [11.895, 3.825], [11.895, 5.02], [8.395, 5.02], [8.395, 5.23], [5.98, 5.23], [5.98, 5.02], [0.105, 5.02]], kategoria: ruchu, pobyt_ludzi: false, posadzka: DESKA_DEB, sciany_wyk: TYNK_GIPS, sufit: TYNK_GIPS, temp: 20, went: {naw: 0, wyw: 0}, rodzaj: komunikacja}
+  - {id: '1.02', kond: P1, nazwa: Pokój rodzinny / biblioteka (boks C), punkt: [8.0, 1.8], wielobok: null, kategoria: podstawowa, pobyt_ludzi: true, posadzka: DESKA_DEB, sciany_wyk: TYNK_GIPS, sufit: TYNK_GIPS, temp: 20, went: {naw: 40, wyw: 0}, rodzaj: pokoj}
+  - {id: '1.03', kond: P1, nazwa: Pokój dziecka 1, punkt: [1.9, 1.8], wielobok: null, kategoria: podstawowa, pobyt_ludzi: true, posadzka: DESKA_DEB, sciany_wyk: TYNK_GIPS, sufit: TYNK_GIPS, temp: 20, went: {naw: 40, wyw: 0}, rodzaj: pokoj}
+  - {id: '1.04', kond: P1, nazwa: Pokój dziecka 2, punkt: [1.9, 6.9], wielobok: null, kategoria: podstawowa, pobyt_ludzi: true, posadzka: DESKA_DEB, sciany_wyk: TYNK_GIPS, sufit: TYNK_GIPS, temp: 20, went: {naw: 40, wyw: 0}, rodzaj: pokoj}
+  - {id: '1.05', kond: P1, nazwa: Łazienka dzieci (wanna), punkt: [4.6, 7.5], wielobok: null, kategoria: pomocnicza, pobyt_ludzi: false, posadzka: GRES, sciany_wyk: PLYTKI_SC, sufit: SUF_GK, temp: 24, went: {naw: 0, wyw: 50}, rodzaj: lazienka, podloga: POD-1L}
+  - {id: '1.06', kond: P1, nazwa: Klatka schodowa, punkt: null, wielobok: [[5.98, 5.23], [8.395, 5.23], [8.395, 8.645], [5.98, 8.645]], kategoria: ruchu, pobyt_ludzi: false, posadzka: DESKA_DEB, sciany_wyk: TYNK_GIPS, sufit: TYNK_GIPS, temp: 20, went: {naw: 0, wyw: 0}, rodzaj: komunikacja, uwagi: wyłączona z PU (W-316)}
+  - {id: '1.07', kond: P1, nazwa: WC z natryskiem, punkt: [9.2, 7.0], wielobok: null, kategoria: pomocnicza, pobyt_ludzi: false, posadzka: GRES, sciany_wyk: PLYTKI_SC, sufit: SUF_GK, temp: 24, went: {naw: 0, wyw: 50}, rodzaj: lazienka, podloga: POD-1L, uwagi: 'nad WC P0 — pion K2 (zawór napowietrzający, K1 wentylowany ponad dach)'}
+  - {id: '1.08', kond: P1, nazwa: Pralnia z suszarnią, punkt: [10.9, 7.0], wielobok: null, kategoria: pomocnicza, pobyt_ludzi: false, posadzka: GRES, sciany_wyk: PLYTKI_SC, sufit: TYNK_GIPS, temp: 20, went: {naw: 0, wyw: 40}, rodzaj: pralnia, podloga: POD-1L, uwagi: 'zmniejszona do ≈ 6,6 m² (przeszczep J1); wywiew ≥ 2 h⁻¹'}
+  # --- P2
+  - {id: '2.01', kond: P2, nazwa: Hol, punkt: null, wielobok: [[5.95, 2.7], [8.425, 2.7], [8.425, 5.02], [5.95, 5.02]], kategoria: ruchu, pobyt_ludzi: false, posadzka: DESKA_DEB, sciany_wyk: TYNK_GIPS, sufit: TYNK_GIPS, temp: 20, went: {naw: 0, wyw: 0}, rodzaj: komunikacja}
+  - {id: '2.02', kond: P2, nazwa: Sypialnia rodziców, punkt: [1.3, 2.4], wielobok: null, kategoria: podstawowa, pobyt_ludzi: true, posadzka: DESKA_DEB, sciany_wyk: TYNK_GIPS, sufit: TYNK_GIPS, temp: 20, went: {naw: 50, wyw: 0}, rodzaj: pokoj, uwagi: naroże S+W nad wspornikiem; okna za lamelami}
+  - {id: '2.03', kond: P2, nazwa: Garderoba (przedpokój apartamentu), punkt: [4.7, 2.4], wielobok: null, kategoria: pomocnicza, pobyt_ludzi: false, posadzka: DESKA_DEB, sciany_wyk: TYNK_GIPS, sufit: TYNK_GIPS, temp: 20, went: {naw: 0, wyw: 0}, rodzaj: pomocnicze}
+  - {id: '2.04', kond: P2, nazwa: Łazienka rodziców, punkt: [4.6, 7.5], wielobok: null, kategoria: pomocnicza, pobyt_ludzi: false, posadzka: GRES, sciany_wyk: PLYTKI_SC, sufit: SUF_GK, temp: 24, went: {naw: 0, wyw: 50}, rodzaj: lazienka, podloga: POD-1L, uwagi: nad łazienkami P1 i P0 (pion SI)}
+  - {id: '2.05', kond: P2, nazwa: Gabinet / pokój, punkt: [10.2, 2.4], wielobok: null, kategoria: podstawowa, pobyt_ludzi: true, posadzka: DESKA_DEB, sciany_wyk: TYNK_GIPS, sufit: TYNK_GIPS, temp: 20, went: {naw: 40, wyw: 0}, rodzaj: pokoj}
+  - {id: '2.06', kond: P2, nazwa: 'Klatka schodowa (wyjście z biegu 2, pustka)', punkt: null, wielobok: [[5.98, 5.02], [8.395, 5.02], [8.395, 8.645], [5.98, 8.645]], kategoria: ruchu, pobyt_ludzi: false, posadzka: DESKA_DEB, sciany_wyk: TYNK_GIPS, sufit: TYNK_GIPS, temp: 20, went: {naw: 0, wyw: 0}, rodzaj: komunikacja, uwagi: 'świetlik SW1 nad spocznikiem, okno pn. ON4; wyłączona z PU'}
+  - {id: '2.07', kond: P2, nazwa: 'Pom. techniczne (centrala rekuperacyjna, wyłaz na dach)', punkt: [7.2, 1.3], wielobok: null, kategoria: techniczna, pobyt_ludzi: false, posadzka: GRES, sciany_wyk: TYNK_GIPS, sufit: TYNK_GIPS, temp: 16, went: {naw: 0, wyw: 0}, rodzaj: techniczne, podloga: POD-1L, uwagi: 'centrala 450 m³/h; wyłaz 0,90 × 0,90 m z drabiną (W-065)'}
+
 stropy:
-- id: ST1
-  nad: P0
-  wierzch: 3.0
-  grubosc: 0.22
-  obrys: [[-0.3, -0.3], [12.3, -0.3], [12.3, 9.05], [-0.3, 9.05]]
-  otwory: [&id003 [[5.98, 5.23], [8.395, 5.23], [8.395, 8.645], [5.98, 8.645]]]
-  podloga: POD-1
-  sufit: TYNK_GIPS
-  mat: ZB_C25
-  uwagi: 'strop nad P0 (część mieszkalna): N–S, ciągły 2-przęsłowy B1 (oś 1) – oś 3 – oś 4, rozpiętości 5,125 / 3,625 m'
-- id: ST2
-  nad: P1
-  wierzch: 6.15
-  grubosc: 0.22
-  obrys: [[-0.3, -0.3], [12.3, -0.3], [12.3, 5.425], [8.8, 5.425], [8.8, 9.05], [3.575, 9.05], [3.575, 5.425], [-0.3, 5.425]]
-  otwory: [*id003]
-  podloga: POD-1
-  sufit: TYNK_GIPS
-  mat: ZB_C25
-  uwagi: strop nad P1 pod bryłą A i nadbudową; pola pn. poza bryłą A — dachy D2/D3
-- id: ST2Z
-  nad: P1
-  wierzch: 6.15
-  grubosc: 0.22
-  obrys: [[-1.3, -0.3], [-0.3, -0.3], [-0.3, 5.425], [-1.3, 5.425]]
-  podloga: POD-1
-  sufit: SUF-ZEW
-  mat: ZB_C25
-  uwagi: 'strop P2 nad powietrzem zewnętrznym (wspornik bryły A 1,00 m lico–lico): E–W oś A – belka B3, docieplenie spodu'
+  - {id: ST1, nad: P0, wierzch: 3.0, grubosc: 0.22, obrys: [[-0.3, -0.3], [12.3, -0.3], [12.3, 9.05], [-0.3, 9.05]], otwory: [[[5.98, 5.23], [8.395, 5.23], [8.395, 8.645], [5.98, 8.645]]], podloga: POD-1, sufit: TYNK_GIPS, mat: ZB_C25, uwagi: 'strop nad P0 (część mieszkalna): N–S, ciągły 2-przęsłowy B1 (oś 1) – oś 3 – oś 4, rozpiętości 5,125 / 3,625 m'}
+  - {id: ST2, nad: P1, wierzch: 6.1499999999999995, grubosc: 0.22, obrys: [[-0.3, -0.3], [12.3, -0.3], [12.3, 5.425], [8.8, 5.425], [8.8, 9.05], [3.575, 9.05], [3.575, 5.425], [-0.3, 5.425]], otwory: [[[5.98, 5.23], [8.395, 5.23], [8.395, 8.645], [5.98, 8.645]]], podloga: POD-1, sufit: TYNK_GIPS, mat: ZB_C25, uwagi: strop nad P1 pod bryłą A i nadbudową; pola pn. poza bryłą A — dachy D2/D3}
+  - {id: ST2Z, nad: P1, wierzch: 6.1499999999999995, grubosc: 0.22, obrys: [[-1.3, -0.3], [-0.3, -0.3], [-0.3, 5.425], [-1.3, 5.425]], podloga: POD-1, sufit: SUF-ZEW, mat: ZB_C25, uwagi: 'strop P2 nad powietrzem zewnętrznym (wspornik bryły A 1,00 m lico–lico): E–W oś A – belka B3, docieplenie spodu'}
+
+# odsłonięte fragmenty stropów = dachy (SCHEMAT p. 5.1); D1 — stropodach bryły A (pierwszy = dach główny)
 dachy:
-- id: D1
-  obrys: [[-1.3, -0.3], [12.3, -0.3], [12.3, 5.425], [8.8, 5.425], [8.8, 9.05], [3.575, 9.05], [3.575, 5.425], [-1.3, 5.425]]
-  plyta:
-    wierzch: 9.3
-    grubosc: 0.22
-  przegroda: SD1
-  spadek: 0.02
-  attyka:
-    wys_nad_pokryciem: 0.25
-    szer: 0.25
-    przegroda: AT1
-  otwory: [[[6.1, 7.55], [8.3, 7.55], [8.3, 8.55], [6.1, 8.55]], [[6.7, 0.9], [7.6, 0.9], [7.6, 1.8], [6.7, 1.8]]]
-  wpusty:
-  - xy: [5.57, 5.45]
-    dn: 100
-    podgrzewany: true
-    opis: WP1 — nad szachtem SI (najniższy punkt spadków)
-  - xy: [4.4, 8.35]
-    dn: 100
-    podgrzewany: true
-    opis: WP2 — przy attyce pn. nadbudowy; podejście w stropie łazienki P2 do SI
-  przelewy_awaryjne:
-  - xy: [5.0, 9.05]
-    sciana_attyki: N
-    szer: 0.2
-    wys: 0.1
-    rzedna_dna: 9.48
-    opis: przelew PA1 — attyka pn. nadbudowy (na dach D2/teren)
-  - xy: [2.0, 5.425]
-    sciana_attyki: N
-    szer: 0.2
-    wys: 0.1
-    rzedna_dna: 9.52
-    opis: przelew PA2 — na dach D2 (pole zach., z własnym wpustem)
-  - xy: [10.6, 5.425]
-    sciana_attyki: N
-    szer: 0.2
-    wys: 0.1
-    rzedna_dna: 9.52
-    opis: przelew PA3 — na dach D3 (pole wsch., z własnym wpustem)
-  rury_spustowe:
-  - id: RS1
-    od_wpustu: 0
-    trasa: wewn_szacht
-    xy_pion: [5.57, 5.45]
-    dn: 100
-    do: zbiornik
-    opis: w izolowanym szachcie SI (otulina 20 mm, izolacja akustyczna), pod płytą do kolektora KD-W
-  - id: RS2
-    od_wpustu: 1
-    trasa: wewn_szacht
-    xy_pion: [5.57, 5.85]
-    dn: 100
-    do: zbiornik
-    opis: w szachcie SI; podejście poziome DN100 w suficie podwieszanym łazienki P2 (izolowane)
-  spadki:
-  - od: [-1.3, -0.3]
-    do: [5.57, 5.45]
-    spadek: 0.02
-  - od: [12.3, -0.3]
-    do: [5.57, 5.45]
-    spadek: 0.02
-  - od: [8.8, 9.05]
-    do: [4.4, 8.35]
-    spadek: 0.02
-  uwagi: 'stropodach bryły A: PV ≤ 6,5 kWp na niskich stelażach (≤ +9,78, nie ponad attykę); świetlik SW1 2,20 × 1,00 nad spocznikiem; wyłaz 0,90 × 0,90 w pom. 2.07; czerpnia i wyrzutnia
-    reku (≥ 0,40 m nad pokryciem), wywiewka K1 nad SI'
-- id: D2
-  obrys: [[-0.3, 5.425], [3.575, 5.425], [3.575, 9.05], [-0.3, 9.05]]
-  plyta:
-    wierzch: 6.15
-    grubosc: 0.22
-  przegroda: SD2
-  spadek: 0.02
-  attyka:
-    wys_nad_pokryciem: 0.25
-    szer: 0.25
-    przegroda: AT1
-  wpusty:
-  - xy: [0.4, 8.7]
-    dn: 100
-    podgrzewany: true
-    opis: wpust attykowy (boczny) WP3 — narożnik NW
-  przelewy_awaryjne:
-  - xy: [-0.3, 7.2]
-    sciana_attyki: W
-    szer: 0.2
-    wys: 0.1
-    rzedna_dna: 6.46
-    opis: przelew PA4 — attyka zach.
-  rury_spustowe:
-  - id: RS3
-    od_wpustu: 0
-    trasa: zewn
-    xy_pion: [0.4, 9.11]
-    dn: 100
-    do: zbiornik
-    opis: zewnętrzna na elewacji pn., czyszczak 0,5 m nad terenem, kolektor KD-W
-  spadki:
-  - od: [3.575, 5.425]
-    do: [0.4, 8.7]
-    spadek: 0.02
-  uwagi: dach nad P1 (pole zach.), żwirowy, nieużytkowy
-- id: D3
-  obrys: [[8.8, 5.425], [12.3, 5.425], [12.3, 9.05], [8.8, 9.05]]
-  plyta:
-    wierzch: 6.15
-    grubosc: 0.22
-  przegroda: SD2
-  spadek: 0.02
-  attyka:
-    wys_nad_pokryciem: 0.25
-    szer: 0.25
-    przegroda: AT1
-  wpusty:
-  - xy: [9.2, 8.7]
-    dn: 100
-    podgrzewany: true
-    opis: wpust attykowy (boczny) WP4 — przy attyce pn.
-  przelewy_awaryjne:
-  - xy: [12.3, 7.2]
-    sciana_attyki: E
-    szer: 0.2
-    wys: 0.1
-    rzedna_dna: 6.46
-    opis: przelew PA5 — attyka wsch. (awaryjnie na dach D4)
-  rury_spustowe:
-  - id: RS4
-    od_wpustu: 0
-    trasa: zewn
-    xy_pion: [9.2, 9.11]
-    dn: 100
-    do: zbiornik
-    opis: zewnętrzna na elewacji pn. obok daszku wejścia, czyszczak, kolektor KD-W
-  spadki:
-  - od: [12.3, 5.425]
-    do: [9.2, 8.7]
-    spadek: 0.02
-  uwagi: dach nad P1 (pole wsch.), żwirowy, nieużytkowy
-- id: D4
-  obrys: [[12.3, -0.3], [18.675, -0.3], [18.675, 9.675], [11.7, 9.675], [11.7, 9.05], [12.3, 9.05]]
-  plyta:
-    wierzch: 3.0
-    grubosc: 0.24
-  przegroda: DZ1
-  spadek: 0.02
-  attyka:
-    wys_nad_pokryciem: 0.545
-    szer: 0.25
-    przegroda: AT1
-  wpusty:
-  - xy: [18.05, 9.05]
-    dn: 100
-    podgrzewany: true
-    opis: WP5 — garaż, narożnik NE, studzienka kontrolna w opasce żwirowej
-  - xy: [17.95, 0.35]
-    dn: 100
-    podgrzewany: true
-    opis: WP6 — pas gospodarczy, narożnik SE (poza strefą R290)
-  przelewy_awaryjne:
-  - xy: [18.675, 6.5]
-    sciana_attyki: E
-    szer: 0.2
-    wys: 0.1
-    rzedna_dna: 3.36
-    opis: przelew PA6 — attyka wsch. (garaż)
-  - xy: [18.675, 2.4]
-    sciana_attyki: E
-    szer: 0.2
-    wys: 0.1
-    rzedna_dna: 3.36
-    opis: przelew PA7 — attyka wsch. (pas gosp.; > 1 m od jedn. PC)
-  rury_spustowe:
-  - id: RS5
-    od_wpustu: 0
-    trasa: zewn
-    xy_pion: [18.735, 9.05]
-    dn: 100
-    do: zbiornik
-    opis: zewnętrzna w narożu NE, czyszczak, kolektor KD-E
-  - id: RS6
-    od_wpustu: 1
-    trasa: wewn_szacht
-    xy_pion: [17.95, 0.35]
-    dn: 100
-    do: zbiornik
-    opis: w pom. technicznym 0.12 (obudowa izolowana), pod płytą do kolektora KD-E
-  spadki:
-  - od: [12.3, 4.5]
-    do: [18.05, 9.05]
-    spadek: 0.02
-  - od: [12.3, 1.2]
-    do: [17.95, 0.35]
-    spadek: 0.02
-  uwagi: dach zielony ekstensywny NIEUŻYTKOWY nad garażem i pasem gospodarczym (bez tarasu, bez wyjścia — decyzja Inwestora); attyka pd. +3,85 = linia D do narożnika garażu; opaska żwirowa
-    0,5 m przy attykach i wpustach
+  - {id: D1, obrys: [[-1.3, -0.3], [12.3, -0.3], [12.3, 5.425], [8.8, 5.425], [8.8, 9.05], [3.575, 9.05], [3.575, 5.425], [-1.3, 5.425]], plyta: {wierzch: 9.3, grubosc: 0.22}, przegroda: SD1, spadek: 0.02, attyka: {wys_nad_pokryciem: 0.25, szer: 0.25, przegroda: AT1}, otwory: [[[6.1, 7.55], [8.3, 7.55], [8.3, 8.55], [6.1, 8.55]], [[6.7, 0.9], [7.6, 0.9], [7.6, 1.8], [6.7, 1.8]]], wpusty: [{xy: [5.57, 5.45], dn: 100, podgrzewany: true, opis: WP1 — nad szachtem SI (najniższy punkt spadków)}, {xy: [4.4, 8.35], dn: 100, podgrzewany: true, opis: WP2 — przy attyce pn. nadbudowy; podejście w stropie łazienki P2 do SI}], przelewy_awaryjne: [{xy: [5.0, 9.05], sciana_attyki: N, szer: 0.2, wys: 0.1, rzedna_dna: 9.48, opis: przelew PA1 — attyka pn. nadbudowy (na dach D2/teren)}, {xy: [2.0, 5.425], sciana_attyki: N, szer: 0.2, wys: 0.1, rzedna_dna: 9.52, opis: 'przelew PA2 — na dach D2 (pole zach., z własnym wpustem)'}, {xy: [10.6, 5.425], sciana_attyki: N, szer: 0.2, wys: 0.1, rzedna_dna: 9.52, opis: 'przelew PA3 — na dach D3 (pole wsch., z własnym wpustem)'}], rury_spustowe: [{id: RS1, od_wpustu: 0, trasa: wewn_szacht, xy_pion: [5.57, 5.45], dn: 100, do: zbiornik, opis: 'w izolowanym szachcie SI (otulina 20 mm, izolacja akustyczna), pod płytą do kolektora KD-W'}, {id: RS2, od_wpustu: 1, trasa: wewn_szacht, xy_pion: [5.57, 5.85], dn: 100, do: zbiornik, opis: w szachcie SI; podejście poziome DN100 w suficie podwieszanym łazienki P2 (izolowane)}], spadki: [{od: [-1.3, -0.3], do: [5.57, 5.45], spadek: 0.02}, {od: [12.3, -0.3], do: [5.57, 5.45], spadek: 0.02}, {od: [8.8, 9.05], do: [4.4, 8.35], spadek: 0.02}], uwagi: 'stropodach bryły A: PV ≤ 6,5 kWp na niskich stelażach (≤ +9,78, nie ponad attykę); świetlik SW1 2,20 × 1,00 nad spocznikiem; wyłaz 0,90 × 0,90 w pom. 2.07; czerpnia i wyrzutnia reku (≥ 0,40 m nad pokryciem), wywiewka K1 nad SI'}
+  - {id: D2, obrys: [[-0.3, 5.425], [3.575, 5.425], [3.575, 9.05], [-0.3, 9.05]], plyta: {wierzch: 6.1499999999999995, grubosc: 0.22}, przegroda: SD2, spadek: 0.02, attyka: {wys_nad_pokryciem: 0.25, szer: 0.25, przegroda: AT1}, wpusty: [{xy: [0.4, 8.7], dn: 100, podgrzewany: true, opis: wpust attykowy (boczny) WP3 — narożnik NW}], przelewy_awaryjne: [{xy: [-0.3, 7.2], sciana_attyki: W, szer: 0.2, wys: 0.1, rzedna_dna: 6.46, opis: przelew PA4 — attyka zach.}], rury_spustowe: [{id: RS3, od_wpustu: 0, trasa: zewn, xy_pion: [0.4, 9.110000000000001], dn: 100, do: zbiornik, opis: 'zewnętrzna na elewacji pn., czyszczak 0,5 m nad terenem, kolektor KD-W'}], spadki: [{od: [3.575, 5.425], do: [0.4, 8.7], spadek: 0.02}], uwagi: 'dach nad P1 (pole zach.), żwirowy, nieużytkowy'}
+  - {id: D3, obrys: [[8.8, 5.425], [12.3, 5.425], [12.3, 9.05], [8.8, 9.05]], plyta: {wierzch: 6.1499999999999995, grubosc: 0.22}, przegroda: SD2, spadek: 0.02, attyka: {wys_nad_pokryciem: 0.25, szer: 0.25, przegroda: AT1}, wpusty: [{xy: [9.2, 8.7], dn: 100, podgrzewany: true, opis: wpust attykowy (boczny) WP4 — przy attyce pn.}], przelewy_awaryjne: [{xy: [12.3, 7.2], sciana_attyki: E, szer: 0.2, wys: 0.1, rzedna_dna: 6.46, opis: przelew PA5 — attyka wsch. (awaryjnie na dach D4)}], rury_spustowe: [{id: RS4, od_wpustu: 0, trasa: zewn, xy_pion: [9.2, 9.110000000000001], dn: 100, do: zbiornik, opis: 'zewnętrzna na elewacji pn. obok daszku wejścia, czyszczak, kolektor KD-W'}], spadki: [{od: [12.3, 5.425], do: [9.2, 8.7], spadek: 0.02}], uwagi: 'dach nad P1 (pole wsch.), żwirowy, nieużytkowy'}
+  - {id: D4, obrys: [[12.3, -0.3], [18.675, -0.3], [18.675, 9.675], [11.7, 9.675], [11.7, 9.05], [12.3, 9.05]], plyta: {wierzch: 3.0, grubosc: 0.24}, przegroda: DZ1, spadek: 0.02, attyka: {wys_nad_pokryciem: 0.545, szer: 0.25, przegroda: AT1}, wpusty: [{xy: [18.05, 9.05], dn: 100, podgrzewany: true, opis: 'WP5 — garaż, narożnik NE, studzienka kontrolna w opasce żwirowej'}, {xy: [17.95, 0.35], dn: 100, podgrzewany: true, opis: 'WP6 — pas gospodarczy, narożnik SE (poza strefą R290)'}], przelewy_awaryjne: [{xy: [18.675, 6.5], sciana_attyki: E, szer: 0.2, wys: 0.1, rzedna_dna: 3.36, opis: przelew PA6 — attyka wsch. (garaż)}, {xy: [18.675, 2.4], sciana_attyki: E, szer: 0.2, wys: 0.1, rzedna_dna: 3.36, opis: przelew PA7 — attyka wsch. (pas gosp.; > 1 m od jedn. PC)}], rury_spustowe: [{id: RS5, od_wpustu: 0, trasa: zewn, xy_pion: [18.735, 9.05], dn: 100, do: zbiornik, opis: 'zewnętrzna w narożu NE, czyszczak, kolektor KD-E'}, {id: RS6, od_wpustu: 1, trasa: wewn_szacht, xy_pion: [17.95, 0.35], dn: 100, do: zbiornik, opis: 'w pom. technicznym 0.12 (obudowa izolowana), pod płytą do kolektora KD-E'}], spadki: [{od: [12.3, 4.5], do: [18.05, 9.05], spadek: 0.02}, {od: [12.3, 1.2], do: [17.95, 0.35], spadek: 0.02}], uwagi: 'dach zielony ekstensywny NIEUŻYTKOWY nad garażem i pasem gospodarczym (bez tarasu, bez wyjścia — decyzja Inwestora); attyka pd. +3,85 = linia D do narożnika garażu; opaska żwirowa 0,5 m przy attykach i wpustach'}
+
 wsporniki_plyty:
-- id: PL-E
-  obrys: [[-1.8, -1.3], [13.8, -1.3], [13.8, -0.3], [-0.3, -0.3], [-0.3, 5.125], [-1.8, 5.125]]
-  wierzch: 3.05
-  grubosc: 0.3
-  przegroda: OK1
-  lacznik_termiczny: true
-  mat: ZB_C30
-  uwagi: 'E — okap ST1: 1,00 m pd. (x −1,80…13,80, także nad drzwiami gospodarczymi) i 1,50 m zach.; łączniki termoizolacyjne (ETA)'
-- id: PL-DA
-  obrys: [[9.4, 9.05], [11.7, 9.05], [11.7, 10.35], [9.4, 10.35]]
-  wierzch: 3.05
-  grubosc: 0.25
-  przegroda: OK1
-  lacznik_termiczny: true
-  mat: ZB_C30
-  uwagi: daszek nad wejściem 2,30 × 1,30 m (≥ drzwi + 1,0 × ≥ 1,0 — W-057); 0,95 m za linią zabudowy
-- id: PL-C1
-  obrys: [[3.6, -1.3], [12.6, -1.3], [12.6, -0.3], [3.6, -0.3]]
-  wierzch: 3.85
-  grubosc: 0.2
-  mat: RAMA_C
-  lacznik_termiczny: true
-  uwagi: rama boksu C — pas dolny = linia D (+3,65…+3,85), lekka rama stalowa w okładzinie na konsolach punktowych z przekładką (J2)
-- id: PL-C2
-  obrys: [[3.6, -1.3], [13.45, -1.3], [13.45, -0.3], [3.6, -0.3]]
-  wierzch: 5.55
-  grubosc: 0.2
-  mat: RAMA_C
-  lacznik_termiczny: true
-  uwagi: 'rama boksu C — pas górny (+5,35…+5,55), przedłużony na wschód do x 13,45 (szkic: 13,76 m od lica B)'
-- id: PL-2
-  obrys: [[-2.4, -1.3], [12.6, -1.3], [12.6, -0.3], [-1.3, -0.3], [-1.3, 5.425], [-2.4, 5.425]]
-  wierzch: 6.25
-  grubosc: 0.3
-  przegroda: OK1
-  lacznik_termiczny: true
-  mat: ZB_C30
-  uwagi: 'krawędź ST2 — spód bryły A: wysunięcie 1,00 m pd., 1,10 m zach. (od lica A), 0,30 m wsch.'
-- id: PL-3
-  obrys: [[-2.4, -1.3], [12.6, -1.3], [12.6, 5.425], [12.3, 5.425], [12.3, -0.3], [-1.3, -0.3], [-1.3, 5.425], [-2.4, 5.425]]
-  wierzch: 9.4
-  grubosc: 0.32
-  przegroda: OK1
-  lacznik_termiczny: true
-  mat: ZB_C30
-  uwagi: 'krawędź ST3 — stropodach bryły A: 1,00 m pd., 1,10 m zach., 0,30 m wsch.; attyka cofnięta w licu ściany'
+  - {id: PL-E, obrys: [[-1.8, -1.3], [13.8, -1.3], [13.8, -0.3], [-0.3, -0.3], [-0.3, 5.125], [-1.8, 5.125]], wierzch: 3.05, grubosc: 0.2999999999999998, przegroda: OK1, lacznik_termiczny: true, mat: ZB_C30, uwagi: 'E — okap ST1: 1,00 m pd. (x −1,80…13,80, także nad drzwiami gospodarczymi) i 1,50 m zach.; łączniki termoizolacyjne (ETA)'}
+  - {id: PL-DA, obrys: [[9.4, 9.05], [11.7, 9.05], [11.7, 10.35], [9.4, 10.35]], wierzch: 3.05, grubosc: 0.25, przegroda: OK1, lacznik_termiczny: true, mat: ZB_C30, uwagi: 'daszek nad wejściem 2,30 × 1,30 m (≥ drzwi + 1,0 × ≥ 1,0 — W-057); 0,95 m za linią zabudowy'}
+  - {id: PL-C1, obrys: [[3.6, -1.3], [12.6, -1.3], [12.6, -0.3], [3.6, -0.3]], wierzch: 3.85, grubosc: 0.2, mat: RAMA_C, lacznik_termiczny: true, uwagi: 'rama boksu C — pas dolny = linia D (+3,65…+3,85), lekka rama stalowa w okładzinie na konsolach punktowych z przekładką (J2)'}
+  - {id: PL-C2, obrys: [[3.6, -1.3], [13.45, -1.3], [13.45, -0.3], [3.6, -0.3]], wierzch: 5.55, grubosc: 0.2, mat: RAMA_C, lacznik_termiczny: true, uwagi: 'rama boksu C — pas górny (+5,35…+5,55), przedłużony na wschód do x 13,45 (szkic: 13,76 m od lica B)'}
+  - {id: PL-2, obrys: [[-2.4, -1.3], [12.6, -1.3], [12.6, -0.3], [-1.3, -0.3], [-1.3, 5.425], [-2.4, 5.425]], wierzch: 6.25, grubosc: 0.2999999999999998, przegroda: OK1, lacznik_termiczny: true, mat: ZB_C30, uwagi: 'krawędź ST2 — spód bryły A: wysunięcie 1,00 m pd., 1,10 m zach. (od lica A), 0,30 m wsch.'}
+  - {id: PL-3, obrys: [[-2.4, -1.3], [12.6, -1.3], [12.6, 5.425], [12.3, 5.425], [12.3, -0.3], [-1.3, -0.3], [-1.3, 5.425], [-2.4, 5.425]], wierzch: 9.4, grubosc: 0.3200000000000003, przegroda: OK1, lacznik_termiczny: true, mat: ZB_C30, uwagi: 'krawędź ST3 — stropodach bryły A: 1,00 m pd., 1,10 m zach., 0,30 m wsch.; attyka cofnięta w licu ściany'}
+
 slupy:
-- id: SL1
-  xy: [2.2, 0.0]
-  przekroj: RK 120x120x8
-  mat: STAL_S355
-  z_od: -0.15
-  z_do: 2.78
-  uwagi: słup fasady E w szprosie przeszklenia; podpora belki B1
-- id: SL2
-  xy: [4.1, 0.0]
-  przekroj: RK 120x120x8
-  mat: STAL_S355
-  z_od: -0.15
-  z_do: 2.78
-  uwagi: słup fasady E w szprosie przeszklenia; podpora belki B1
-- id: SL3
-  xy: [6.435, 0.0]
-  przekroj: RK 120x120x8
-  mat: STAL_S355
-  z_od: -0.15
-  z_do: 2.78
-  uwagi: słup fasady E w szprosie przeszklenia; podpora belki B1
-- id: SL4
-  xy: [8.77, 0.0]
-  przekroj: RK 120x120x8
-  mat: STAL_S355
-  z_od: -0.15
-  z_do: 2.78
-  uwagi: słup fasady E w szprosie przeszklenia; podpora belki B1
-- id: SL5
-  xy: [6.435, 0.0]
-  przekroj: RK 100x100x6
-  mat: STAL_S355
-  z_od: 3.85
-  z_do: 5.35
-  uwagi: słupek boksu C w szprosie (w jednej linii ze słupem fasady E — przeszczep J2), podpora nadproża B2
-- id: SL6
-  xy: [8.77, 0.0]
-  przekroj: RK 100x100x6
-  mat: STAL_S355
-  z_od: 3.85
-  z_do: 5.35
-  uwagi: słupek boksu C w szprosie (w jednej linii ze słupem fasady E — przeszczep J2), podpora nadproża B2
-- id: SL7
-  xy: [4.025, -0.8]
-  przekroj: 150x1000
-  mat: RAMA_C
-  z_od: 3.85
-  z_do: 5.35
-  uwagi: bok ramy boksu C (płaskownik w okładzinie) przy krawędzi przeszklenia
-- id: SL8
-  xy: [11.18, -0.8]
-  przekroj: 150x1000
-  mat: RAMA_C
-  z_od: 3.85
-  z_do: 5.35
-  uwagi: bok ramy boksu C (płaskownik w okładzinie) przy krawędzi przeszklenia
+  - {id: SL1, xy: [2.2, 0.0], przekroj: RK 120x120x8, mat: STAL_S355, z_od: -0.15, z_do: 2.78, uwagi: słup fasady E w szprosie przeszklenia; podpora belki B1}
+  - {id: SL2, xy: [4.1, 0.0], przekroj: RK 120x120x8, mat: STAL_S355, z_od: -0.15, z_do: 2.78, uwagi: słup fasady E w szprosie przeszklenia; podpora belki B1}
+  - {id: SL3, xy: [6.44, 0.0], przekroj: RK 120x120x8, mat: STAL_S355, z_od: -0.15, z_do: 2.78, uwagi: słup fasady E w szprosie przeszklenia; podpora belki B1}
+  - {id: SL4, xy: [8.78, 0.0], przekroj: RK 120x120x8, mat: STAL_S355, z_od: -0.15, z_do: 2.78, uwagi: słup fasady E w szprosie przeszklenia; podpora belki B1}
+  - {id: SL5, xy: [6.44, 0.0], przekroj: RK 100x100x6, mat: STAL_S355, z_od: 3.85, z_do: 5.35, uwagi: 'słupek boksu C w szprosie (w jednej linii ze słupem fasady E — przeszczep J2), podpora nadproża B2'}
+  - {id: SL6, xy: [8.78, 0.0], przekroj: RK 100x100x6, mat: STAL_S355, z_od: 3.85, z_do: 5.35, uwagi: 'słupek boksu C w szprosie (w jednej linii ze słupem fasady E — przeszczep J2), podpora nadproża B2'}
+  - {id: SL7, xy: [4.025, -0.8], przekroj: 150x1000, mat: RAMA_C, z_od: 3.85, z_do: 5.35, uwagi: bok ramy boksu C (płaskownik w okładzinie) przy krawędzi przeszklenia}
+  - {id: SL8, xy: [11.195, -0.8], przekroj: 150x1000, mat: RAMA_C, z_od: 3.85, z_do: 5.35, uwagi: bok ramy boksu C (płaskownik w okładzinie) przy krawędzi przeszklenia}
+
 belki:
-- id: B1
-  os: [[0.0, 0.0], [12.0, 0.0]]
-  b: 0.25
-  h: 1.07
-  spod: 2.78
-  mat: ZB_C30
-  uwagi: podciąg fasady E, odwrócony (+2,78…+3,85 = parapet boksu C); przęsła 2,20/1,90/2,335/2,335/3,23 na SL1–SL4 i ścianach A, E
-- id: B2
-  os: [[3.85, 0.0], [11.355, 0.0]]
-  b: 0.25
-  h: 0.8
-  spod: 5.35
-  mat: ZB_C30
-  uwagi: nadproże boksu C 25×80, 3 przęsła 2,335 m na słupkach SL5/SL6
-- id: B3
-  os: [[-1.12, 0.0], [-1.12, 5.125]]
-  b: 0.2
-  h: 0.6
-  spod: 5.93
-  mat: ZB_C30
-  uwagi: belka krawędziowa ST2 w osi A' (odwrócona, pod parapetem okna O2-04) — niesie lekką ścianę A' i okap PL-2; oparta na końcach B4/B5
-- id: B4
-  os: [[-1.12, 0.0], [3.875, 0.0]]
-  b: 0.18
-  h: 0.8
-  spod: 5.93
-  mat: ZB_C30
-  uwagi: 'belka wspornikowa w osi 1 (w licu ściany P2, pod parapetem O2-01 +6,90): wspornik 1,12 m na ścianie A, przęsło zakotwienia A–B 3,875 m'
-- id: B5
-  os: [[-1.12, 5.125], [3.875, 5.125]]
-  b: 0.18
-  h: 0.8
-  spod: 5.93
-  mat: ZB_C30
-  uwagi: 'belka wspornikowa w osi 3 (w ścianie pn. P2): wspornik 1,12 m, zakotwienie A–B'
-- id: B6
-  os: [[-1.12, 0.0], [-1.12, 5.125]]
-  b: 0.2
-  h: 0.4
-  spod: 8.9
-  mat: ZB_C30
-  uwagi: belka krawędziowa ST3 w osi A' (nad oknem O2-04) — okap zach. stropodachu; oparta na narożach ścian osi 1 i 3
-- id: B7
-  os: [[12.5, 9.375], [17.95, 9.375]]
-  b: 0.25
-  h: 0.85
-  spod: 2.15
-  mat: ZB_C30
-  uwagi: nadproże bramy garażu (rozp. 5,00 m w świetle)
-- id: B8
-  os: [[5.875, 5.125], [8.5, 5.125]]
-  b: 0.25
-  h: 0.5
-  spod: 2.5
-  mat: ZB_C25
-  uwagi: podciąg ST1 w osi 3 nad wejściem na schody (C–D, 2,625 m); prześwit nad stopą biegu 1 ≥ 2,30 m
-- id: B9
-  os: [[5.875, 5.125], [8.5, 5.125]]
-  b: 0.25
-  h: 0.5
-  spod: 5.65
-  mat: ZB_C25
-  uwagi: podciąg ST2 w osi 3 nad wyjściem ze schodów P1 (C–D)
-- id: N1
-  os: [[0.0, 7.8], [0.0, 5.6]]
-  b: 0.18
-  h: 0.24
-  spod: 2.4
-  mat: ZB_C25
-  uwagi: nadproże otworu O0-12 (1.80 m), oparcie 0,20 m
-- id: N2
-  os: [[8.7, 5.125], [10.6, 5.125]]
-  b: 0.18
-  h: 0.24
-  spod: 2.4
-  mat: ZB_C25
-  uwagi: nadproże otworu O0-18 (1.50 m), oparcie 0,20 m
-- id: N3
-  os: [[12.0, 1.0], [12.0, 2.9]]
-  b: 0.18
-  h: 0.24
-  spod: 5.5
-  mat: ZB_C25
-  uwagi: nadproże otworu O1-02 (1.50 m), oparcie 0,20 m
-- id: N4
-  os: [[0.0, 8.0], [0.0, 5.8]]
-  b: 0.18
-  h: 0.24
-  spod: 5.55
-  mat: ZB_C25
-  uwagi: nadproże otworu O1-05 (1.80 m), oparcie 0,20 m
-- id: N5
-  os: [[0.0, 3.0], [0.0, 0.8]]
-  b: 0.18
-  h: 0.24
-  spod: 5.55
-  mat: ZB_C25
-  uwagi: nadproże otworu O1-06 (1.80 m), oparcie 0,20 m
-- id: N6
-  os: [[-0.2, 0.0], [3.2, 0.0]]
-  b: 0.18
-  h: 0.18
-  spod: 8.9
-  mat: ZB_C25
-  uwagi: nadproże otworu O2-01 (3.00 m), oparcie 0,20 m
-- id: N7
-  os: [[8.8, 0.0], [11.6, 0.0]]
-  b: 0.18
-  h: 0.18
-  spod: 8.9
-  mat: ZB_C25
-  uwagi: nadproże otworu O2-03 (2.40 m), oparcie 0,20 m
-- id: N8
-  os: [[8.3, 8.75], [6.2, 8.75]]
-  b: 0.18
-  h: 0.24
-  spod: 8.7
-  mat: ZB_C25
-  uwagi: nadproże otworu O2-07 (1.70 m), oparcie 0,20 m
+  - {id: B1, os: [[0.0, 0.0], [12.0, 0.0]], b: 0.25, h: 1.07, spod: 2.78, mat: ZB_C30, uwagi: 'podciąg fasady E, odwrócony (+2,78…+3,85 = parapet boksu C); przęsła 2,20/1,90/2,34/2,34/3,22 na SL1–SL4 i ścianach A, E'}
+  - {id: B2, os: [[3.85, 0.0], [11.37, 0.0]], b: 0.25, h: 0.8, spod: 5.35, mat: ZB_C30, uwagi: 'nadproże boksu C 25×80, 3 przęsła 2,34 m na słupkach SL5/SL6'}
+  - {id: B3, os: [[-1.12, 0.0], [-1.12, 5.125]], b: 0.2, h: 0.6, spod: 5.93, mat: ZB_C30, uwagi: 'belka krawędziowa ST2 w osi A'' (odwrócona, pod parapetem okna O2-04) — niesie lekką ścianę A'' i okap PL-2; oparta na końcach B4/B5'}
+  - {id: B4, os: [[-1.12, 0.0], [3.875, 0.0]], b: 0.18, h: 0.8, spod: 5.93, mat: ZB_C30, uwagi: 'belka wspornikowa w osi 1 (w licu ściany P2, pod parapetem O2-01 +6,90): wspornik 1,12 m na ścianie A, przęsło zakotwienia A–B 3,875 m'}
+  - {id: B5, os: [[-1.12, 5.125], [3.875, 5.125]], b: 0.18, h: 0.8, spod: 5.93, mat: ZB_C30, uwagi: 'belka wspornikowa w osi 3 (w ścianie pn. P2): wspornik 1,12 m, zakotwienie A–B'}
+  - {id: B6, os: [[-1.12, 0.0], [-1.12, 5.125]], b: 0.2, h: 0.4, spod: 8.9, mat: ZB_C30, uwagi: belka krawędziowa ST3 w osi A' (nad oknem O2-04) — okap zach. stropodachu; oparta na narożach ścian osi 1 i 3}
+  - {id: B7, os: [[12.5, 9.375], [17.95, 9.375]], b: 0.25, h: 0.85, spod: 2.15, mat: ZB_C30, uwagi: 'nadproże bramy garażu (rozp. 5,00 m w świetle)'}
+  - {id: B8, os: [[5.875, 5.125], [8.5, 5.125]], b: 0.25, h: 0.5, spod: 2.5, mat: ZB_C25, uwagi: 'podciąg ST1 w osi 3 nad wejściem na schody (C–D, 2,625 m); prześwit nad stopą biegu 1 ≥ 2,30 m'}
+  - {id: B9, os: [[5.875, 5.125], [8.5, 5.125]], b: 0.25, h: 0.5, spod: 5.65, mat: ZB_C25, uwagi: podciąg ST2 w osi 3 nad wyjściem ze schodów P1 (C–D)}
+  - {id: N1, os: [[0.0, 7.8], [0.0, 5.6]], b: 0.18, h: 0.24, spod: 2.4, mat: ZB_C25, uwagi: 'nadproże otworu O0-12 (1.80 m), oparcie 0,20 m'}
+  - {id: N2, os: [[8.7, 5.125], [10.6, 5.125]], b: 0.18, h: 0.24, spod: 2.4, mat: ZB_C25, uwagi: 'nadproże otworu O0-18 (1.50 m), oparcie 0,20 m'}
+  - {id: N3, os: [[12.0, 1.0], [12.0, 2.9]], b: 0.18, h: 0.24, spod: 5.5, mat: ZB_C25, uwagi: 'nadproże otworu O1-02 (1.50 m), oparcie 0,20 m'}
+  - {id: N4, os: [[0.0, 8.0], [0.0, 5.8]], b: 0.18, h: 0.24, spod: 5.55, mat: ZB_C25, uwagi: 'nadproże otworu O1-05 (1.80 m), oparcie 0,20 m'}
+  - {id: N5, os: [[0.0, 3.0], [0.0, 0.8]], b: 0.18, h: 0.24, spod: 5.55, mat: ZB_C25, uwagi: 'nadproże otworu O1-06 (1.80 m), oparcie 0,20 m'}
+  - {id: N6, os: [[-0.2, 0.0], [3.2, 0.0]], b: 0.18, h: 0.18, spod: 8.9, mat: ZB_C25, uwagi: 'nadproże otworu O2-01 (3.00 m), oparcie 0,20 m'}
+  - {id: N7, os: [[8.8, 0.0], [11.6, 0.0]], b: 0.18, h: 0.18, spod: 8.9, mat: ZB_C25, uwagi: 'nadproże otworu O2-03 (2.40 m), oparcie 0,20 m'}
+  - {id: N8, os: [[8.3, 8.75], [6.2, 8.75]], b: 0.18, h: 0.24, spod: 8.7, mat: ZB_C25, uwagi: 'nadproże otworu O2-07 (1.70 m), oparcie 0,20 m'}
+
 fundamenty:
   typ: plyta
+  izolacja_obwodowa: {typ: pozioma, D: 1.0, d_n: 0.1, mat: XPS300, glebokosc: 0.45, opis: 'izolacja przeciwprzemarzaniowa XPS 10 cm × 1,00 m (garaż 1,20 m) wokół płyty, spadek 2 % od budynku'}
+  uwagi: posadowienie bezpośrednie na piaskach średnich (I_D ≈ 0,6), niewysadzinowych; ZWG ≈ 3,8 m p.p.t. — drenaż opaskowy zbędny (W-285); zdjęcie humusu 0,4 m, podsypka zagęszczona; uziom otokowy w gruncie pod XPS (W-286/W-187)
   elementy:
-  - id: PF1
-    obrys: [[-0.1, -0.1], [18.475, -0.1], [18.475, 9.475], [11.9, 9.475], [11.9, 8.85], [-0.1, 8.85]]
-    spod: -0.4
-    h: 0.25
-    mat: ZB_C25
-    uwagi: płyta fundamentowa ŻB 25 cm C25/30 XC2 na XPS 300 20 cm; krawędź do lica konstrukcji, XPS pionowy 20 cm na czole płyty
-  - id: ZF1
-    os: *id004
-    b: 0.6
-    h: 0.3
-    spod: -0.7
-    mat: ZB_C25
-    uwagi: pogrubienie (żebro) płyty pod ścianą S0-01 — krawędź z izolacją obwodową XPS (PN-EN ISO 13793)
-  - id: ZF2
-    os: *id005
-    b: 0.6
-    h: 0.3
-    spod: -0.7
-    mat: ZB_C25
-    uwagi: pogrubienie (żebro) płyty pod ścianą S0-02 — krawędź z izolacją obwodową XPS (PN-EN ISO 13793)
-  - id: ZF3
-    os: *id006
-    b: 0.6
-    h: 0.3
-    spod: -0.7
-    mat: ZB_C25
-    uwagi: pogrubienie (żebro) płyty pod ścianą S0-03 — krawędź z izolacją obwodową XPS (PN-EN ISO 13793)
-  - id: ZF4
-    os: *id007
-    b: 0.6
-    h: 0.3
-    spod: -0.7
-    mat: ZB_C25
-    uwagi: pogrubienie (żebro) płyty pod ścianą S0-04 — krawędź z izolacją obwodową XPS (PN-EN ISO 13793)
-  - id: ZF5
-    os: *id008
-    b: 0.6
-    h: 0.3
-    spod: -0.7
-    mat: ZB_C25
-    uwagi: pogrubienie (żebro) płyty pod ścianą S0-05 — krawędź z izolacją obwodową XPS (PN-EN ISO 13793)
-  - id: ZF6
-    os: *id009
-    b: 0.6
-    h: 0.3
-    spod: -0.7
-    mat: ZB_C25
-    uwagi: pogrubienie (żebro) płyty pod ścianą S0-06 — krawędź z izolacją obwodową XPS (PN-EN ISO 13793)
-  - id: ZF7
-    os: *id010
-    b: 0.6
-    h: 0.3
-    spod: -0.7
-    mat: ZB_C25
-    uwagi: pogrubienie (żebro) płyty pod ścianą S0-07 — krawędź z izolacją obwodową XPS (PN-EN ISO 13793)
-  - id: ZF8
-    os: *id011
-    b: 0.5
-    h: 0.25
-    spod: -0.65
-    mat: ZB_C25
-    uwagi: pogrubienie (żebro) płyty pod ścianą S0-08
-  - id: ZF9
-    os: *id012
-    b: 0.5
-    h: 0.25
-    spod: -0.65
-    mat: ZB_C25
-    uwagi: pogrubienie (żebro) płyty pod ścianą S0-10
-  - id: ZF10
-    os: *id013
-    b: 0.5
-    h: 0.25
-    spod: -0.65
-    mat: ZB_C25
-    uwagi: pogrubienie (żebro) płyty pod ścianą S0-11
-  - id: ZF11
-    os: *id014
-    b: 0.5
-    h: 0.25
-    spod: -0.65
-    mat: ZB_C25
-    uwagi: pogrubienie (żebro) płyty pod ścianą S0-12
-  - id: ZF12
-    os: *id015
-    b: 0.5
-    h: 0.25
-    spod: -0.65
-    mat: ZB_C25
-    uwagi: pogrubienie (żebro) płyty pod ścianą S0-13
-  - id: ZF13
-    os: *id016
-    b: 0.5
-    h: 0.25
-    spod: -0.65
-    mat: ZB_C25
-    uwagi: pogrubienie (żebro) płyty pod ścianą S0-15
-  - id: ZF14
-    os: *id017
-    b: 0.5
-    h: 0.25
-    spod: -0.65
-    mat: ZB_C25
-    uwagi: pogrubienie (żebro) płyty pod ścianą S0-16
-  - id: ZF15
-    os: *id018
-    b: 0.5
-    h: 0.25
-    spod: -0.65
-    mat: ZB_C25
-    uwagi: pogrubienie (żebro) płyty pod ścianą S0-17
-  - id: SF1
-    os: [[2.195, 0.0], [2.205, 0.0]]
-    b: 1.0
-    h: 0.45
-    spod: -0.85
-    mat: ZB_C25
-    uwagi: pogrubienie płyty 1,0 × 1,0 m pod słupem SL1 (przebicie)
-  - id: SF2
-    os: [[4.095, 0.0], [4.105, 0.0]]
-    b: 1.0
-    h: 0.45
-    spod: -0.85
-    mat: ZB_C25
-    uwagi: pogrubienie płyty 1,0 × 1,0 m pod słupem SL2 (przebicie)
-  - id: SF3
-    os: [[6.43, 0.0], [6.44, 0.0]]
-    b: 1.0
-    h: 0.45
-    spod: -0.85
-    mat: ZB_C25
-    uwagi: pogrubienie płyty 1,0 × 1,0 m pod słupem SL3 (przebicie)
-  - id: SF4
-    os: [[8.765, 0.0], [8.775, 0.0]]
-    b: 1.0
-    h: 0.45
-    spod: -0.85
-    mat: ZB_C25
-    uwagi: pogrubienie płyty 1,0 × 1,0 m pod słupem SL4 (przebicie)
-  izolacja_obwodowa:
-    typ: pozioma
-    D: 1.0
-    d_n: 0.1
-    mat: XPS300
-    glebokosc: 0.45
-    opis: izolacja przeciwprzemarzaniowa XPS 10 cm × 1,00 m (garaż 1,20 m) wokół płyty, spadek 2 % od budynku
-  uwagi: posadowienie bezpośrednie na piaskach średnich (I_D ≈ 0,6), niewysadzinowych; ZWG ≈ 3,8 m p.p.t. — drenaż opaskowy zbędny (W-285); zdjęcie humusu 0,4 m, podsypka zagęszczona;
-    uziom otokowy w gruncie pod XPS (W-286/W-187)
+    - {id: PF1, obrys: [[-0.1, -0.1], [18.475, -0.1], [18.475, 9.475], [11.9, 9.475], [11.9, 8.85], [-0.1, 8.85]], spod: -0.4, h: 0.25, mat: ZB_C25, uwagi: 'płyta fundamentowa ŻB 25 cm C25/30 XC2 na XPS 300 20 cm; krawędź do lica konstrukcji, XPS pionowy 20 cm na czole płyty'}
+    - {id: ZF1, os: [[0.0, 0.0], [12.0, 0.0]], b: 0.6, h: 0.3, spod: -0.7, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-01 — krawędź z izolacją obwodową XPS (PN-EN ISO 13793)}
+    - {id: ZF2, os: [[12.0, 0.0], [18.375, 0.0]], b: 0.6, h: 0.3, spod: -0.7, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-02 — krawędź z izolacją obwodową XPS (PN-EN ISO 13793)}
+    - {id: ZF3, os: [[18.375, 0.0], [18.375, 9.375]], b: 0.6, h: 0.3, spod: -0.7, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-03 — krawędź z izolacją obwodową XPS (PN-EN ISO 13793)}
+    - {id: ZF4, os: [[18.375, 9.375], [12.0, 9.375]], b: 0.6, h: 0.3, spod: -0.7, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-04 — krawędź z izolacją obwodową XPS (PN-EN ISO 13793)}
+    - {id: ZF5, os: [[12.0, 9.375], [12.0, 8.75]], b: 0.6, h: 0.3, spod: -0.7, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-05 — krawędź z izolacją obwodową XPS (PN-EN ISO 13793)}
+    - {id: ZF6, os: [[12.0, 8.75], [0.0, 8.75]], b: 0.6, h: 0.3, spod: -0.7, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-06 — krawędź z izolacją obwodową XPS (PN-EN ISO 13793)}
+    - {id: ZF7, os: [[0.0, 8.75], [0.0, 0.0]], b: 0.6, h: 0.3, spod: -0.7, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-07 — krawędź z izolacją obwodową XPS (PN-EN ISO 13793)}
+    - {id: ZF8, os: [[0.0, 5.125], [5.875, 5.125]], b: 0.5, h: 0.25, spod: -0.65, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-08}
+    - {id: ZF9, os: [[8.5, 5.125], [12.0, 5.125]], b: 0.5, h: 0.25, spod: -0.65, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-10}
+    - {id: ZF10, os: [[3.875, 5.125], [3.875, 8.75]], b: 0.5, h: 0.25, spod: -0.65, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-11}
+    - {id: ZF11, os: [[5.875, 5.125], [5.875, 8.75]], b: 0.5, h: 0.25, spod: -0.65, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-12}
+    - {id: ZF12, os: [[8.5, 5.125], [8.5, 8.75]], b: 0.5, h: 0.25, spod: -0.65, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-13}
+    - {id: ZF13, os: [[12.0, 0.0], [12.0, 2.875]], b: 0.5, h: 0.25, spod: -0.65, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-15}
+    - {id: ZF14, os: [[12.0, 2.875], [12.0, 8.75]], b: 0.5, h: 0.25, spod: -0.65, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-16}
+    - {id: ZF15, os: [[18.375, 2.875], [12.0, 2.875]], b: 0.5, h: 0.25, spod: -0.65, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-17}
+    - {id: SF1, os: [[2.195, 0.0], [2.205, 0.0]], b: 1.0, h: 0.45, spod: -0.85, mat: ZB_C25, uwagi: 'pogrubienie płyty 1,0 × 1,0 m pod słupem SL1 (przebicie)'}
+    - {id: SF2, os: [[4.095, 0.0], [4.105, 0.0]], b: 1.0, h: 0.45, spod: -0.85, mat: ZB_C25, uwagi: 'pogrubienie płyty 1,0 × 1,0 m pod słupem SL2 (przebicie)'}
+    - {id: SF3, os: [[6.435, 0.0], [6.445, 0.0]], b: 1.0, h: 0.45, spod: -0.85, mat: ZB_C25, uwagi: 'pogrubienie płyty 1,0 × 1,0 m pod słupem SL3 (przebicie)'}
+    - {id: SF4, os: [[8.775, 0.0], [8.785, 0.0]], b: 1.0, h: 0.45, spod: -0.85, mat: ZB_C25, uwagi: 'pogrubienie płyty 1,0 × 1,0 m pod słupem SL4 (przebicie)'}
+
 schody:
-- id: SCH1
-  z_kond: P0
-  na_kond: P1
-  liczba_stopni: 18
-  wys_stopnia: 0.175
-  szer_stopnia: 0.28
-  biegi:
-  - start: [6.555, 5.23]
-    kierunek: [0, 1]
-    szer: 1.15
-    stopni: 9
-  - start: [7.82, 7.47]
-    kierunek: [0, -1]
-    szer: 1.145
-    stopni: 9
-  spoczniki:
-  - obrys: [[5.98, 7.47], [8.395, 7.47], [8.395, 8.645], [5.98, 8.645]]
-    rzedna: 1.575
-  plyta:
-    grubosc: 0.18
-  mat: ZB_C25
-  uwagi: płyty biegów ŻB 18 cm oparte na ścianach C/D i ściance środkowej; stopnie dębowe; prześwit nad biegiem ≈ 2,75 m (≥ 2,00)
-- id: SCH2
-  z_kond: P1
-  na_kond: P2
-  liczba_stopni: 18
-  wys_stopnia: 0.175
-  szer_stopnia: 0.28
-  biegi:
-  - start: [6.555, 5.23]
-    kierunek: [0, 1]
-    szer: 1.15
-    stopni: 9
-  - start: [7.82, 7.47]
-    kierunek: [0, -1]
-    szer: 1.145
-    stopni: 9
-  spoczniki:
-  - obrys: [[5.98, 7.47], [8.395, 7.47], [8.395, 8.645], [5.98, 8.645]]
-    rzedna: 4.725
-  plyta:
-    grubosc: 0.18
-  mat: ZB_C25
-  uwagi: płyty biegów ŻB 18 cm oparte na ścianach C/D i ściance środkowej; stopnie dębowe; prześwit nad biegiem ≈ 2,75 m (≥ 2,00)
+  - {id: SCH1, z_kond: P0, na_kond: P1, liczba_stopni: 18, wys_stopnia: 0.175, szer_stopnia: 0.28, biegi: [{start: [6.555, 5.23], kierunek: [0, 1], szer: 1.15, stopni: 9}, {start: [7.82, 7.47], kierunek: [0, -1], szer: 1.145, stopni: 9}], spoczniki: [{obrys: [[5.98, 7.47], [8.395, 7.47], [8.395, 8.645], [5.98, 8.645]], rzedna: 1.575}], plyta: {grubosc: 0.18}, mat: ZB_C25, uwagi: 'płyty biegów ŻB 18 cm oparte na ścianach C/D i ściance środkowej; stopnie dębowe; prześwit nad biegiem ≈ 2,75 m (≥ 2,00)'}
+  - {id: SCH2, z_kond: P1, na_kond: P2, liczba_stopni: 18, wys_stopnia: 0.175, szer_stopnia: 0.28, biegi: [{start: [6.555, 5.23], kierunek: [0, 1], szer: 1.15, stopni: 9}, {start: [7.82, 7.47], kierunek: [0, -1], szer: 1.145, stopni: 9}], spoczniki: [{obrys: [[5.98, 7.47], [8.395, 7.47], [8.395, 8.645], [5.98, 8.645]], rzedna: 4.725}], plyta: {grubosc: 0.18}, mat: ZB_C25, uwagi: 'płyty biegów ŻB 18 cm oparte na ścianach C/D i ściance środkowej; stopnie dębowe; prześwit nad biegiem ≈ 2,75 m (≥ 2,00)'}
+
 balustrady:
-- id: BL1
-  polilinia: [[7.059, 5.23, 0.175], [7.059, 7.47, 1.575], [7.059, 7.541, 1.575], [7.321, 7.541, 1.575], [7.321, 7.47, 1.75], [7.321, 5.23, 3.15]]
-  wys: 0.9
-  typ: pochwyt stal nierdzewna Ø42 na wspornikach, ciągły wokół ścianki środkowej (W-095/W-096); od strony ścian C/D — ściany pełne, brak krawędzi otwartej
-- id: BL2
-  polilinia: [[7.059, 5.23, 3.325], [7.059, 7.47, 4.725], [7.059, 7.541, 4.725], [7.321, 7.541, 4.725], [7.321, 7.47, 4.9], [7.321, 5.23, 6.3]]
-  wys: 0.9
-  typ: pochwyt stal nierdzewna Ø42 na wspornikach, ciągły wokół ścianki środkowej (W-095/W-096); od strony ścian C/D — ściany pełne, brak krawędzi otwartej
+  - {id: BL1, polilinia: [[7.059, 5.23, 0.175], [7.059, 7.47, 1.575], [7.059, 7.541, 1.575], [7.321, 7.541, 1.575], [7.321, 7.47, 1.75], [7.321, 5.23, 3.15]], wys: 0.9, typ: 'pochwyt stal nierdzewna Ø42 na wspornikach, ciągły wokół ścianki środkowej (W-095/W-096); od strony ścian C/D — ściany pełne, brak krawędzi otwartej'}
+  - {id: BL2, polilinia: [[7.059, 5.23, 3.325], [7.059, 7.47, 4.725], [7.059, 7.541, 4.725], [7.321, 7.541, 4.725], [7.321, 7.47, 4.9], [7.321, 5.23, 6.3]], wys: 0.9, typ: 'pochwyt stal nierdzewna Ø42 na wspornikach, ciągły wokół ścianki środkowej (W-095/W-096); od strony ścian C/D — ściany pełne, brak krawędzi otwartej'}
+
 lamele:
-- id: LAM-S
-  elewacja: S
-  linia: [[-1.3, -0.3], [12.3, -0.3]]
-  z_od: 6.25
-  z_do: 9.08
-  rozstaw: 0.12
-  b: 0.04
-  h: 0.08
-  odsuniecie: 0.15
-  mat: DREWNO_TERMO
-  uwagi: bryła A — pionowe lamele na 2 ryglach, konsole z przekładką (χ); stała osłona okien P2
-- id: LAM-W
-  elewacja: W
-  linia: [[-1.3, -0.3], [-1.3, 5.425]]
-  z_od: 6.25
-  z_do: 9.08
-  rozstaw: 0.12
-  b: 0.04
-  h: 0.08
-  odsuniecie: 0.15
-  mat: DREWNO_TERMO
-  uwagi: czoło wspornika bryły A
-- id: LAM-E
-  elewacja: E
-  linia: [[12.3, -0.3], [12.3, 5.425]]
-  z_od: 6.2
-  z_do: 9.08
-  rozstaw: 0.12
-  b: 0.04
-  h: 0.08
-  odsuniecie: 0.15
-  mat: DREWNO_TERMO
-  uwagi: czoło wsch. bryły A
-- id: LAM-P0
-  elewacja: S
-  linia: [[5.9, 3.8], [8.7, 3.8]]
-  z_od: 0.0
-  z_do: 2.1
-  rozstaw: 0.1
-  b: 0.03
-  h: 0.06
-  odsuniecie: 0.0
-  mat: DAB_LAMELA
-  uwagi: ekran wewnętrzny P0 wydzielający pas komunikacyjny przy schodach (przeszczep J1 z W3)
+  - {id: LAM-S, elewacja: S, linia: [[-1.3, -0.3], [12.3, -0.3]], z_od: 6.25, z_do: 9.08, rozstaw: 0.12, b: 0.04, h: 0.08, odsuniecie: 0.15, mat: DREWNO_TERMO, uwagi: 'bryła A — pionowe lamele na 2 ryglach, konsole z przekładką (χ); stała osłona okien P2'}
+  - {id: LAM-W, elewacja: W, linia: [[-1.3, -0.3], [-1.3, 5.425]], z_od: 6.25, z_do: 9.08, rozstaw: 0.12, b: 0.04, h: 0.08, odsuniecie: 0.15, mat: DREWNO_TERMO, uwagi: czoło wspornika bryły A}
+  - {id: LAM-E, elewacja: E, linia: [[12.3, -0.3], [12.3, 5.425]], z_od: 6.2, z_do: 9.08, rozstaw: 0.12, b: 0.04, h: 0.08, odsuniecie: 0.15, mat: DREWNO_TERMO, uwagi: czoło wsch. bryły A}
+  - {id: LAM-P0, elewacja: S, linia: [[5.9, 3.8], [8.7, 3.8]], z_od: 0.0, z_do: 2.1, rozstaw: 0.1, b: 0.03, h: 0.06, odsuniecie: 0.0, mat: DAB_LAMELA, uwagi: ekran wewnętrzny P0 wydzielający pas komunikacyjny przy schodach (przeszczep J1 z W3)}
+
 tarasy:
-- id: T1
-  obrys: [[-3.3, -3.3], [12.3, -3.3], [12.3, -0.3], [-0.3, -0.3], [-0.3, 5.125], [-3.3, 5.125]]
-  rzedna: -0.02
-  nawierzchnia: deska kompozytowa na legarach i wspornikach regulowanych, szczeliny 5 mm; odwodnienie liniowe przy progach HS
-  grubosc: 0.05
-  uwagi: taras ogrodowy w kształcie L (pd. przed E pod okapem 1,00 m, zach. pod okapem 1,50 m) — 4,30 m od granicy zach.
-- id: T2
-  obrys: [[9.4, 9.05], [11.7, 9.05], [11.7, 10.35], [9.4, 10.35]]
-  rzedna: -0.02
-  nawierzchnia: płyty betonowe 60×60 na podsypce, spadek 2 % od drzwi
-  grubosc: 0.08
-  uwagi: podest wejścia głównego pod daszkiem (bez stopni — cokół przejęty rzędną terenu)
-- id: T3
-  obrys: [[12.2, -1.3], [13.5, -1.3], [13.5, -0.3], [12.2, -0.3]]
-  rzedna: -0.02
-  nawierzchnia: płyty betonowe 60×60, spadek 2 % od drzwi
-  grubosc: 0.08
-  uwagi: podest drzwi gospodarczych pod okapem E
+  - {id: T1, obrys: [[-3.3, -3.3], [12.3, -3.3], [12.3, -0.3], [-0.3, -0.3], [-0.3, 5.125], [-3.3, 5.125]], rzedna: -0.02, nawierzchnia: 'deska kompozytowa na legarach i wspornikach regulowanych, szczeliny 5 mm; odwodnienie liniowe przy progach HS', grubosc: 0.05, uwagi: 'taras ogrodowy w kształcie L (pd. przed E pod okapem 1,00 m, zach. pod okapem 1,50 m) — 4,30 m od granicy zach.'}
+  - {id: T2, obrys: [[9.4, 9.05], [11.7, 9.05], [11.7, 10.35], [9.4, 10.35]], rzedna: -0.02, nawierzchnia: 'płyty betonowe 60×60 na podsypce, spadek 2 % od drzwi', grubosc: 0.08, uwagi: podest wejścia głównego pod daszkiem (bez stopni — cokół przejęty rzędną terenu)}
+  - {id: T3, obrys: [[12.2, -1.3], [13.5, -1.3], [13.5, -0.3], [12.2, -0.3]], rzedna: -0.02, nawierzchnia: 'płyty betonowe 60×60, spadek 2 % od drzwi', grubosc: 0.08, uwagi: podest drzwi gospodarczych pod okapem E}
+
+# Stolarka — dane PRZYKŁADOWE typowych wyrobów (klucze: src/lamela/obliczenia/dane/wyroby_przykladowe.yaml), „lub równoważne”
+stolarka:
+  FX1: {wyrob: fix_ALU_3sz, opis: 'przeszklenie stałe ALU 3-szybowe, 1,90 × 2,75 m, VSG od wewn. (strefa uderzeń)', U_w: 0.75, g_n: 0.5}
+  FX2: {wyrob: fix_ALU_3sz, opis: 'przeszklenie stałe ALU 3-szybowe, 2,92 × 2,75 m', U_w: 0.73, g_n: 0.5}
+  FX3: {wyrob: fix_ALU_3sz, opis: 'doświetle drzwi wejściowych 0,35 × 2,40 m, VSG mleczne', U_w: 0.85, g_n: 0.4}
+  HS1: {wyrob: HS_ALU_3sz, opis: 'drzwi podnoszono-przesuwne ALU 2,34 × 2,75 m, próg termiczny bezprogowy, odwodnienie liniowe', U_w: 0.85, g_n: 0.5}
+  HS2: {wyrob: HS_ALU_3sz, opis: 'drzwi HS ALU 2,40 × 2,75 m (taras zach.)', U_w: 0.85, g_n: 0.5}
+  BC1: {wyrob: okno_ALU_3sz, opis: 'boks C: 3 kwatery 2,34 × 1,50 m (środkowa RU), dolna część stała VSG do 0,85 m', U_w: 0.8, g_n: 0.5}
+  OZ1: {wyrob: okno_ALU_3sz, opis: 'okno RU 1,80 × 1,50 m', U_w: 0.8, g_n: 0.5}
+  OE1: {wyrob: okno_ALU_3sz, opis: 'okno RU 1,50 × 1,50 m', U_w: 0.8, g_n: 0.5}
+  ON1: {wyrob: okno_PVC_3sz, opis: 'okno uchylne 0,80 × 0,60 m, szkło mleczne', U_w: 0.9, g_n: 0.5}
+  ON2: {wyrob: okno_PVC_3sz, opis: 'okno uchylne 0,90 × 0,60 m, szkło mleczne', U_w: 0.9, g_n: 0.5}
+  ON3: {wyrob: okno_PVC_3sz, opis: 'okno uchylne 1,20 × 0,60 m', U_w: 0.88, g_n: 0.5}
+  ON4: {wyrob: okno_ALU_3sz, opis: 'okno klatki 1,70 × 1,50 m (P2), uchylne do wewn.', U_w: 0.8, g_n: 0.5}
+  OP1: {wyrob: okno_ALU_3sz, opis: 'okno P2 3,00 × 2,00 m, parapet 0,60 — dolna część stała VSG do 0,85, skrzydła do wewn. (W-097/098)', U_w: 0.78, g_n: 0.5}
+  OP2: {wyrob: okno_ALU_3sz, opis: 'okno P2 1,20 × 1,75 m, skrzydło RU do wewn.', U_w: 0.82, g_n: 0.5}
+  OP3: {wyrob: okno_ALU_3sz, opis: 'okno P2 2,40 × 2,00 m, parapet 0,60 — dolna część stała VSG do 0,85', U_w: 0.79, g_n: 0.5}
+  DZ1: {wyrob: drzwi_zewn, opis: 'drzwi wejściowe ALU ocieplone 1,10 × 2,40 w murze (światło ościeżnicy ≥ 0,96 × 2,33), próg ≤ 2 cm', U_D: 0.9}
+  DZ2: {wyrob: drzwi_zewn, opis: 'drzwi boczne garażu 1,00 × 2,10 (garaż nieogrzewany)', U_D: 1.3}
+  DZ3: {wyrob: drzwi_zewn, opis: 'drzwi gospodarcze przeszklone ALU 0,90 × 2,75 w systemie fasady E, otwierane na zewn.', U_D: 1.0}
+  BR1: {wyrob: brama_segmentowa, opis: 'brama segmentowa ocieplona 5,00 × 2,25 m, napęd, kratki went. ≥ 0,08 m²', U_D: 1.5}
+  DG1: {wyrob: drzwi_dom_garaz, opis: 'drzwi garaż–dom stalowe ocieplone, szczelne, z samozamykaczem 0,90 × 2,10', U_D: 1.1}
+  D1: {opis: 'drzwi wewnętrzne pełne 0,90 × 2,10 w murze (światło ościeżnicy ≥ 0,80 × 2,00), bez progu'}
+  D2: {opis: 'drzwi łazienkowe/WC 0,90 × 2,10, otwierane na zewnątrz, z tuleją/podcięciem ≥ 0,022 m²'}
+  D2P: {opis: 'drzwi przesuwne naścienne 0,90 × 2,10 (łazienka gościnna), szczelina ≥ 0,022 m²'}
+  D3: {opis: 'drzwi spiżarni 0,80 × 2,00 z kratką'}
+  D4: {opis: 'drzwi pom. technicznego 0,90 × 2,10 z kratką, akustyczne R_w ≥ 32 dB'}
+  DS1: {opis: 'drzwi szklane VSG 0,90 × 2,10 w ściance wiatrołapu, oznakowane (W-067)'}
+  OT1: {opis: 'otwór 1,50 × 2,40 bez stolarki'}
+  OT2: {opis: 'otwór 2,40 × 2,40 bez stolarki'}
+
+# Katalog węzłów cieplno-wilgotnościowych (brief §9.2; symulacja PN-EN ISO 10211 — src/lamela/obliczenia/mostki2d)
 wezly:
-- id: WZ-R1
-  nazwa: Attyka stropodachu D1 (bryła A) — ściana SZ2 za lamelami, płyta wysunięta PL-3 na łączniku
-  typ: attyka
-  przegrody: [SZ2, SD1, AT1]
-  dlugosc: 45.9
-  parametry:
-    h_nad_pokryciem: 0.25
-- id: WZ-R2
-  nazwa: Attyka dachów D2/D3 nad P1 (styk ze ścianą P2 — cokolik izolacji ≥ 0,30 m ponad pokrycie)
-  typ: attyka
-  przegrody: [SZ1, SD2, AT1]
-  dlugosc: 18.5
-- id: WZ-R3
-  nazwa: Attyka dachu zielonego D4 (garaż, pas gospodarczy) — linia D +3,85
-  typ: attyka
-  przegrody: [SZ1, DZ1, AT1]
-  dlugosc: 24.55
-  parametry:
-    h_nad_pokryciem: 0.545
-- id: WZ-IF1
-  nazwa: Strop pośredni ST1/ST2 z wieńcem — ETICS ciągły
-  typ: strop_posredni
-  przegrody: [SZ1, POD-1]
-  dlugosc: 75.2
-- id: WZ-B1
-  nazwa: Okap E (PL-E) — płyta 30 cm na łączniku termoizolacyjnym (ETA), spadek 2 % od budynku, okapnik
-  typ: plyta_wspornikowa_lacznik
-  przegrody: [SZ1, OK1]
-  dlugosc: 19.53
-  parametry:
-    wysieg: 1.5
-- id: WZ-B2
-  nazwa: Krawędź ST2 (PL-2) pod bryłą A — łącznik termoizolacyjny
-  typ: plyta_wspornikowa_lacznik
-  przegrody: [SZ1, OK1]
-  dlugosc: 19.33
-  parametry:
-    wysieg: 1.1
-- id: WZ-B3
-  nazwa: Krawędź stropodachu ST3 (PL-3) — łącznik termoizolacyjny, attyka cofnięta
-  typ: plyta_wspornikowa_lacznik
-  przegrody: [SZ2, OK1]
-  dlugosc: 25.05
-  parametry:
-    wysieg: 1.1
-- id: WZ-B4
-  nazwa: Daszek nad wejściem PL-DA — łącznik termoizolacyjny
-  typ: plyta_wspornikowa_lacznik
-  przegrody: [SZ1, OK1]
-  dlugosc: 2.3
-  parametry:
-    wysieg: 1.3
-- id: WZ-B5
-  nazwa: Rama boksu C — konsole punktowe ze stali nierdzewnej z przekładką termiczną (2 pasy × 9 szt.)
-  typ: kotwa
-  przegrody: [SZ1]
-  liczba: 18
-- id: WZ-Z1
-  nazwa: Strop ST2Z nad powietrzem zewn. (wspornik bryły A) — styk ze ścianą osi A, docieplenie spodu 20 cm
-  typ: strop_zewn_krawedz
-  przegrody: [SZ1, SUF-ZEW]
-  dlugosc: 7.72
-- id: WZ-C1
-  nazwa: Narożniki zewnętrzne ścian (wypukłe)
-  typ: naroznik_wypukly
-  przegrody: [SZ1]
-  dlugosc: 46.5
-- id: WZ-W1
-  nazwa: Ościeża okien/drzwi — ciepły montaż (rama 5 cm w murze, 4 cm w izolacji, zakład izolacji 3 cm)
-  typ: oscieze
-  przegrody: [SZ1]
-  dlugosc: 94.1
-  wariant: czesciowo
-- id: WZ-N1
-  nazwa: Nadproża — bez kaset osłon w ociepleniu (kasety w okapach / ramie C / nadstawne)
-  typ: nadproze
-  przegrody: [SZ1]
-  dlugosc: 46.75
-  wariant: czesciowo
-- id: WZ-P1
-  nazwa: Podokienniki — parapet zewn. na profilu z XPS, okapnik
-  typ: podokiennik
-  przegrody: [SZ1]
-  dlugosc: 29.6
-  wariant: czesciowo
-- id: WZ-T1
-  nazwa: Progi HS i drzwi na płycie P0 — profil progowy termoizolacyjny na podwalinie XPS/PUR-GF, odwodnienie liniowe
-  typ: prog
-  przegrody: [SZ1, POD-0]
-  dlugosc: 17.15
-  wariant: grunt
-- id: WZ-GF1
-  nazwa: Cokół — płyta fundamentowa na XPS 20 cm, XPS na czole płyty i cokole (izolacja ciągła)
-  typ: sciana_grunt
-  przegrody: [SZ1, POD-0]
-  dlugosc: 27.05
-  parametry:
-    y_teren: -0.25
-- id: WZ-G1
-  nazwa: 'Dom–garaż (pion): ściana SWG dochodzi do ściany zewn. — ETICS ciągły po zewnątrz całego P0, garaż buforem wewnątrz obudowy'
-  typ: polaczenie_nieogrz
-  przegrody: [SZ1, SWG]
-  dlugosc: 6.0
-  parametry:
-    przerwa_izolacji: false
-- id: WZ-G2
-  nazwa: 'Dom–garaż (poziom): strop ST1/D4 ciągły nad ścianą SWG — docieplenie spodu stropu garażu pasem 1,0 m (SUF-G)'
-  typ: polaczenie_nieogrz
-  przegrody: [SZ1, SWG, SUF-G]
-  dlugosc: 12.25
-- id: WZ-G3
-  nazwa: 'Dom–garaż (posadzka): dylatacja posadzki XPS 3 cm w osi SWG, płyta ciągła na XPS'
-  typ: polaczenie_nieogrz
-  przegrody: [SWG, POD-0, POD-G]
-  dlugosc: 12.25
-- id: WZ-L1
-  nazwa: Konsole rusztu lamel (stal nierdzewna, przekładka termiczna)
-  typ: konsola_lamel
-  przegrody: [SZ2, SZL]
-  liczba: 62
-- id: WZ-S1
-  nazwa: Słupy stalowe fasady E w płaszczyźnie przeszklenia (w ciepłej strefie, obudowane profilem termicznym)
-  typ: slup
-  przegrody: [SZ1]
-  dlugosc: 1.11
-- id: WZ-I1
-  nazwa: Przejścia instalacji przez przegrody zewn. (mankiety paroszczelne/EPDM)
-  typ: przejscie_instalacji
-  przegrody: [SZ1, SD1, POD-0]
-  liczba: 14
+  - {id: WZ-01, nazwa: Attyka stropodachu bryły A (D1), typ: attyka, przegrody: [SD1, AT1, SZ2, SZ1], dlugosc: 45.9}
+  - {id: WZ-02, nazwa: 'Attyki dachów P1 (D2, D3) — poza ścianami bryły A', typ: attyka, przegrody: [SD2, AT1, SZ1], dlugosc: 14.62}
+  - {id: WZ-03, nazwa: 'Attyka dachu zielonego nad pasem gospodarczym (linia D, część ogrzewana)', typ: attyka, przegrody: [DZ1, AT1, SZ1], dlugosc: 9.55}
+  - {id: WZ-04, nazwa: Okap E (PL-E) i daszek wejścia — łącznik termoizolacyjny, typ: plyta_wspornikowa_lacznik, przegrody: [OK1, POD-1, SZ1], dlugosc: 21.82}
+  - {id: WZ-05, nazwa: Krawędź ST2 (PL-2) — łącznik termoizolacyjny pod bryłą A, typ: plyta_wspornikowa_lacznik, przegrody: [OK1, POD-1, SZ2], dlugosc: 19.32}
+  - {id: WZ-06, nazwa: Krawędź ST3 (PL-3) — łącznik termoizolacyjny przy attyce bryły A, typ: plyta_wspornikowa_lacznik, przegrody: [OK1, SD1, SZ2], dlugosc: 25.05}
+  - {id: WZ-07, nazwa: Strop P2 nad powietrzem zewnętrznym (ST2Z) — krawędzie wspornika bryły A, typ: strop_zewn_krawedz, przegrody: [POD-1, SUF-ZEW, SZL, SZ1], dlugosc: 13.45}
+  - {id: WZ-08, nazwa: 'Cokół: ściana zewn. – płyta fundamentowa na XPS (część ogrzewana)', typ: sciana_grunt, przegrody: [SZ1, POD-0], dlugosc: 43.4}
+  - {id: WZ-09, nazwa: 'Połączenia dom–garaż nieogrzewany (ściany osi E i 2 z płytą i stropem; docieplenie pasem 1,0 m — SUF-G)', typ: polaczenie_nieogrz, przegrody: [SWG, POD-0, DZ1, SUF-G], dlugosc: 24.5}
+  - {id: WZ-10, nazwa: Strop pośredni ST1/ST2 – ściana zewn. z ETICS ciągłym (wieniec), typ: strop_posredni, przegrody: [POD-1, SZ1], dlugosc: 55.12}
+  - {id: WZ-11, nazwa: 'Ościeża okien/drzwi — ciepły montaż (rama 5 cm w murze, 4 cm w izolacji, zakład izolacji 3 cm na ramę)', typ: oscieze, przegrody: [SZ1, SZ2, SZL], dlugosc: 89.9, wariant: czesciowo}
+  - {id: WZ-11N, nazwa: Nadproża — BEZ kaset osłon w ociepleniu (kasety w okapach / ramie C / szczelinie lamel / nadstawne), typ: nadproze, przegrody: [SZ1, SZ2, SZL], dlugosc: 45.77, wariant: czesciowo}
+  - {id: WZ-11P, nazwa: Podokienniki — parapet zewn. z okapnikiem na profilu z XPS, typ: podokiennik, przegrody: [SZ1, SZ2, SZL], dlugosc: 29.62, wariant: czesciowo}
+  - {id: WZ-11T, nazwa: 'Progi HS / drzwi zewn. na płycie P0 — profil progowy termoizolacyjny na podwalinie XPS/PUR-GF, odwodnienie liniowe', typ: prog, przegrody: [SZ1, POD-0], dlugosc: 16.15, wariant: grunt}
+  - {id: WZ-12, nazwa: Narożniki wypukłe ścian zewnętrznych, typ: naroznik_wypukly, przegrody: [SZ1, SZ2], dlugosc: 49.5}
+  - {id: WZ-13, nazwa: Konsole rusztu lamel (przekładka termiczna), typ: konsola_lamel, przegrody: [SZ2, SZL], liczba: 50}
+  - {id: WZ-14, nazwa: 'Konsole ramy boksu C i pasa D (punktowe, przekładka termiczna)', typ: kotwa, przegrody: [SZ1], liczba: 10}
+  - {id: WZ-15, nazwa: 'Przejścia instalacji przez przegrody zewnętrzne (wywiewka K1, czerpnia, wyrzutnia, PC, wpusty, przyłącza)', typ: przejscie_instalacji, przegrody: [SD1, DZ1, SZ1, POD-0], liczba: 16}
+  - {id: WZ-16, nazwa: Belki wspornikowe B4/B5 i belka B3 w linii izolacji wspornika bryły A (ciągłość wełny pod ST2Z), typ: strop_zewn_krawedz, przegrody: [SZ1, SZL, SUF-ZEW], dlugosc: 2.24}
+
 energia:
   n50: 1.0
   osoby: 5
   pojemnosc: ciezka
   chlodzenie: false
   psi_wariant: domyslna
-  wezly_wyniki: projekt/08_obliczenia/mostki2d/wyniki_mostki.json
   grunt:
     typ: piasek
     lambda: 2.0
-    G_w: 1.0
-    izolacja_obwodowa:
-      typ: pozioma
-      D: 1.0
-      d_n: 0.1
-      lam_n: 0.036
+    izolacja_obwodowa: {typ: pozioma, D: 1.0, d_n: 0.1, lam_n: 0.036}
   wentylacja:
     centrala: RVU_450
-    czerpnia: [8.2, 2.9, 10.1]
-    wyrzutnia: [8.2, 2.9, 10.1]
+    czerpnia: [11.4, 1.0, 9.95]
+    wyrzutnia: [1.8, 3.0, 10.0]
     wyrzut: pionowy
-    zestaw_zblokowany: true
-    wywiewki_kanalizacyjne: [[4.3, 8.3]]
+    zestaw_zblokowany: false
+    wywiewki_kanalizacyjne:
+    - [5.57, 6.2]
     rzedna_terenu: -0.25
-    uwagi: czerpnio-wyrzutnia dachowa zblokowana (certyfikowana) ≥ 0,40 m nad pokryciem, ≥ 3,0 m od krawędzi dachu z oknami, 6,7 m od wywiewki K1 (W-166/W-167); pion K2 — zawór napowietrzający
-      (K1 wentylowany ponad dach)
-  ogrzewanie:
-    zrodlo: PC_R290_monoblok
-    temp_zasilania: 35
-    pompy_W: 25
-    uwagi: monoblok R290 (W-155) — jednostka zewn. przy ścianie pd. pasa gospodarczego, 7,1 m od granicy E (W-024), strefa R290 1,0 m bez otworów (W-156); moduł hydrauliczny w pom. 0.12
-  cwu:
-    zasobnik: Z250
-    cyrkulacja:
-      moc_W: 5.0
-      h_doba: 6.0
-    dezynfekcja_kWh_rok: 272
-    uwagi: 'projekt: zasobnik 300 dm³ (klasa B, strata ≤ 65 W) + bufor 100 dm³ — w EP dane przykładowe Z250 do wyboru wyrobu'
-  pv:
-    moduly: 15
-    P_modul_Wp: 430
-    azymut: 180
-    nachylenie: 12
-    PR: 0.8
-    autokonsumpcja: symulacja
-    uwagi: 15 × 430 Wp = 6,45 kWp ≤ 6,5 kWp (W-194); stelaże niskie ≤ +9,78 (nie ponad attykę D1)
-  garaz:
-    stanowiska: 2
-    otwory_went_m2: 0.1
-    n_went: 0.5
+    uwagi: czerpnia i wyrzutnia dachowe ≥ 0,40 m nad pokryciem; czerpnia ≥ 6 m od wywiewki K1 (7,8 m) i ≥ 6 m od wyrzutni (9,8 m); wyrzutnia ≥ 3 m od krawędzi
+      dachu (W-166, W-167); K2 zakończony zaworem napowietrzającym (W-139)
+  ogrzewanie: {zrodlo: PC_R290_monoblok, temp_zasilania: 35, uwagi: 'PC powietrze–woda monoblok R290 (W-155), moduł hydrauliczny w pom. 0.12; ogrzewanie podłogowe
+      z regulacją pokojową (W-152)'}
+  cwu: {zasobnik: Z250, V_projekt_dm3: 300, cyrkulacja: false, uwagi: projektowo zasobnik 300 dm³ (brief) — w bibliotece dane przykładowe Z250; zastąpić DWU
+      wyrobu}
+  pv: {moduly: 15, P_modul_Wp: 430, azymut: 180, nachylenie: 10, PR: 0.8, uwagi: 'Σ 6,45 kWp ≤ 6,5 kWp (W-194, art. 29 ust. 4 pkt 3 lit. c PB); niskie stelaże
+      na D1, górna krawędź ≤ +9,78 (nie ponad attykę)'}
+  garaz: {stanowiska: 2, otwory_went_m2: 0.1, n_went: 1.0}
+
 konstrukcja:
   klasa_konsekwencji: CC2
   klasa_niezawodnosci: RC2
   K_FI: 1.0
   okres_uzytkowania: 50
   klasa_konstrukcji: S4
-  eurokody: 1. generacja z NA (W-260)
-  beton:
-    stropy_sciany_plyta: C25/30 XC1/XC2
-    krawedzie_wysuniete_attyki_belki: C30/37 XC4+XF1
-    stal: B500SP (W-269)
-  mur: silikat kl. 20 gr. 1, zaprawa cienkowarstwowa, f_d = 4,50 MPa (klasa wykonania A, W-270)
-  sciezka_obciazen: ['Stropy ST1/ST2 jednokierunkowe N–S (22 cm): oś 1 (B1 / ściana) – oś 3 – oś 4; rozpiętości 5,125 / 3,625 m; płyta ciągła.', 'Fasada pd. P0: belka odwrócona B1 25×107
-      na słupach RK120 SL1–SL4 (w szprosach) i ścianach A, E; przęsła ≤ 3,23 m.', 'Boks C: nadproże B2 na słupkach SL5/SL6 w jednej linii pionowej z SL3/SL4 (siły skupione nad podporami
-      B1).', 'Wspornik bryły A (1,12 m w osi): belki wspornikowe ŻB B4 (oś 1) i B5 (oś 3) 18×80 w licu ścian P2 (pod parapetami), zakotwione w przęśle A–B 3,875 m dociążonym ścianami
-      P2 i stropem ST3; belka krawędziowa B3 (oś A'') podparta na końcach B4/B5 niesie lekką ścianę SZL (≤ 1,0 kN/m²) i okap PL-2; ST3 nad wspornikiem na belce B6. Brak ścian-tarcz —
-      elementy prętowe sprawdzalne (SCHEMAT p. 9). EQU: 1,10·G_dst + 1,5·Q_dst ≤ 0,90·G_stb (W-262), ugięcie końca ≤ l/125 (W-268).', 'Dach garażu D4: płyta 24 cm dwukierunkowa na ścianach
-      E, F, oś 2 i oś 5 (6,375 × 6,50 m), l/d ≈ 27; zaspa przy uskoku do bryły B μ_w ≤ 4,0 (W-264), sytuacja wyjątkowa B2, dach zielony nasycony ≈ 1,6 kN/m².', 'Trzon klatki: ściany
-      C i D na P0 żelbetowe 18 cm (sztywność w kierunku x przy przeszklonej fasadzie pd. — J2), P1–P2 silikat.', 'Płyty wysunięte ≤ 1,50 m na łącznikach termoizolacyjnych z ETA (W-272);
-      rama C lekka stalowa na konsolach punktowych.']
+  beton: {stropy_sciany: C25/30 XC1 c_nom 25 mm, fundament: C25/30 XC2 c_nom 35 mm (50 mm od gruntu), krawedzie_wysuniete: C30/37 XC4+XF1 c_nom 40 mm}
+  stal_zbrojeniowa: B500SP
+  mur: silikat kl. 20 gr. 1, zaprawa cienkowarstwowa, kat. wykonania A (f_d = 4,50 MPa, W-270)
+  obciazenia: {snieg: 'strefa 2, s_k = 0,90 kN/m², zaspy przy uskokach (D4 przy P1, D2/D3 przy P2) + sytuacja wyjątkowa B2 (W-264)', wiatr: 'strefa 1, q_p(h
+      ≤ 11 m) = 0,71 kN/m² (W-265)', dach_zielony: 'substrat nasycony ≈ 1,4 kN/m² (stałe)', uzytkowe: 'stropy kat. A 2,0 kN/m², schody 4,0 kN/m², dachy kat.
+      H 0,4 kN/m² (W-263)'}
+  wsporniki: 'EQU: 1,10·G_dst + 1,5·Q_dst ≤ 0,90·G_stb (W-262); ugięcie końca ≤ wysięg/125 (W-268); łączniki termoizolacyjne z ETA (W-272); szczelina dylatacyjna
+    nad stolarką pod krawędzią okapu E i ramy C'
+  sciezka_obciazen_wspornika_A: lekka ściana A' → belka B3 → końce belek wspornikowych B4/B5 (osie 1 i 3, w licu ścian P2) → ściana A P1 (podpora) i przęsło
+    zakotwienia A–B dociążone ścianami P2 i stropem; ST3 w osi A' na belce B6 opartej na narożach ścian
+
 geotechnika:
   kategoria: II
-  grunt:
-    rodzaj: piasek średni, średniozagęszczony
-    I_D: 0.6
-    phi: 33.0
-    gamma: 18.5
-    M0: 80000
+  grunt: {rodzaj: 'piasek średni (MSa), średniozagęszczony', I_D: 0.6, phi: 33, gamma: 18.5, M0: 80000}
   ZWG: -3.8
   h_z: 0.8
   humus: 0.4
-  uwagi: opinia geotechniczna + dokumentacja badań (≥ 3 sondowania CPT/DPL do ≥ 6 m) + projekt geotechniczny (W-281/W-282)
+  uwagi: opinia geotechniczna + dokumentacja badań podłoża (≥ 3 sondowania do 6 m) + projekt geotechniczny (W-280…W-282)
