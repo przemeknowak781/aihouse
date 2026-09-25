@@ -540,9 +540,9 @@ fundamenty:
     - {id: ZF6, os: [[12.0, 9.375], [12.0, 8.75]], b: 0.6, h: 0.3, spod: -0.85, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-05 — krawędź z izolacją obwodową XPS (PN-EN ISO 13793) (garaż)}
     - {id: ZF7, os: [[12.0, 8.75], [0.0, 8.75]], b: 0.6, h: 0.3, spod: -0.7, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-06 — krawędź z izolacją obwodową XPS (PN-EN ISO 13793)}
     - {id: ZF8, os: [[0.0, 8.75], [0.0, 0.0]], b: 0.6, h: 0.3, spod: -0.7, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-07 — krawędź z izolacją obwodową XPS (PN-EN ISO 13793)}
-    - {id: ZF9, os: [[0.0, 5.125], [5.875, 5.125]], b: 0.5, h: 0.25, spod: -0.65, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-08}
-    - {id: ZF10, os: [[7.19, 5.125], [8.5, 5.125]], b: 0.5, h: 0.25, spod: -0.65, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-09}
-    - {id: ZF11, os: [[8.5, 5.125], [12.0, 5.125]], b: 0.5, h: 0.25, spod: -0.65, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-10}
+    - {id: ZF9, os: [[0.0, 5.125], [5.875, 5.125]], b: 0.5, h: 0.45, spod: -0.85, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-08 — pogłębione pod trzpieniami ŻB w osi 3 (przebicie)}
+    - {id: ZF10, os: [[7.19, 5.125], [8.5, 5.125]], b: 0.5, h: 0.45, spod: -0.85, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-09 — pogłębione pod trzpieniami ŻB w osi 3 (przebicie)}
+    - {id: ZF11, os: [[8.5, 5.125], [12.0, 5.125]], b: 0.5, h: 0.45, spod: -0.85, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-10 — pogłębione pod trzpieniami ŻB w osi 3 (przebicie)}
     - {id: ZF12, os: [[3.875, 5.125], [3.875, 8.75]], b: 0.5, h: 0.25, spod: -0.65, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-11}
     - {id: ZF13, os: [[5.875, 5.125], [5.875, 8.75]], b: 0.5, h: 0.25, spod: -0.65, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-12}
     - {id: ZF14, os: [[8.5, 5.125], [8.5, 8.75]], b: 0.5, h: 0.25, spod: -0.65, mat: ZB_C25, uwagi: pogrubienie (żebro) płyty pod ścianą S0-13}

@@ -2329,6 +2329,8 @@ class AnalizaKonstrukcji:
         if mur is None:
             if self._sciana_zelbetowa(w):
                 self._sciana_zb_pasmo(w, pr, poz, cases)
+            elif self._sciana_szkieletowa(w):
+                self._sciana_szkielet_wiatr(w, pr, poz)
             else:
                 poz.uwagi.append("Warstwa konstrukcyjna nie jest murem ani żelbetem — sprawdzenie indywidualne [WYMAGA ANALIZY].")
             self.pos_sciany.append(poz)
@@ -2419,6 +2421,39 @@ class AnalizaKonstrukcji:
             poz.rysunki += rysunki.rys_sciana(w, pr, self.rys(f"sciana_{_slug(w.id)}.png"))
         poz.przyjeto.append(f"Mur: {mur.nazwa}, f_d = {f(mur.f_d, 2)} MPa (klasa wykonania A, γ_M = {f(mur.gamma_M, 1)}).")
         self.pos_sciany.append(poz)
+
+    def _sciana_szkieletowa(self, w) -> bool:
+        kod = getattr(w.przegroda, "kod", None) or (getattr(w, "raw", {}) or {}).get("przegroda")
+        wl = ((self.m.raw.get("przegrody") or {}).get(kod) or {}).get("warstwy") or []
+        fr = [str((q or {}).get("mat") or "") for x in wl if x.get("konstrukcyjna") for q in (x.get("frakcje") or [])]
+        return any("DREWNO" in x.upper() or "KVH" in x.upper() for x in fr)
+
+    def _sciana_szkielet_wiatr(self, w, pr, poz):
+        """Ściana szkieletowa drewniana bez funkcji nośnej (ciężar własny → belka/ściana poniżej): słupek na parcie wiatru
+        jako belka swobodnie podparta na wysokości ściany — PN-EN 1995-1-1 6.1.6: σ_m,d = M_d/W ≤ f_m,d = k_mod·f_m,k/γ_M
+        (klasa C24: f_m,k = 24 MPa — PN-EN 338; k_mod = 0,9 (oddziaływanie krótkotrwałe, kl. użytkowania 1–2); γ_M = 1,3;
+        słupek b × d z nazwy przegrody „KVH b×d”, rozstaw 0,625 m [ZAŁ])."""
+        p = self.p
+        nazwa = str(getattr(w.przegroda, "nazwa", "") or "")
+        mm_ = re.search(r"KVH\s*(\d+)\s*[×x]\s*(\d+)", nazwa)
+        b_, d_ = (float(mm_.group(1)) / 1000, float(mm_.group(2)) / 1000) if mm_ else (0.045, w.warstwa_konstr.d)
+        s_r = 0.625
+        wk = max(abs(self.wiatr_sc.w_max_parcie), abs(self.wiatr_sc.w_max_ssanie)) if self.wiatr_sc else 0.0
+        h = pr["h"]
+        r = Wynik(nazwa=f"{w.id} — słupek szkieletu na wiatr (PN-EN 1995-1-1 6.1.6)")
+        Md = p.gQ * wk * s_r * h * h / 8
+        Wm = b_ * d_ ** 2 / 6
+        fmd = 0.9 * 24.0 / 1.3
+        r.krok("Słupek", "b × d; rozstaw", "", f"{f(b_ * 1000, 0)} × {f(d_ * 1000, 0)} mm; {f(s_r, 3)} m [ZAŁ]")
+        r.krok("Moment od wiatru", "M_d = γ_Q·w_k·s·h²/8", f"1,5·{f(wk, 2)}·{f(s_r, 3)}·{f(h, 2)}²/8", Md, "kNm", nd=3)
+        r.krok("Wytrzymałość obliczeniowa na zginanie", "f_m,d = k_mod·f_m,k/γ_M", "0,9·24/1,3", fmd, "MPa", nd=2,
+               zrodlo="PN-EN 1995-1-1 2.4.1, PN-EN 338 (C24) [ZAŁ]")
+        r.warunek("Zginanie słupka (6.11)", Md / Wm / 1000, fmd, "MPa", "PN-EN 1995-1-1 (6.11)", nd=2, symbol_E="σ_m,d", symbol_R="f_m,d")
+        poz.wyniki.append(r)
+        poz.uwagi.append("Ściana szkieletowa bez funkcji nośnej — obciążenia pionowe (ciężar własny) przekazane na belkę "
+                         f"({', '.join(str(q) for q in ((getattr(w, 'raw', {}) or {}).get('oparta_na') or [])) or 'element poniżej'}); "
+                         "połączenia i usztywnienie poszycia — projekt wykonawczy ściany.")
+        poz.przyjeto.append(f"Szkielet KVH C24 {f(b_ * 1000, 0)}×{f(d_ * 1000, 0)} mm co {f(s_r * 100, 1)} cm [ZAŁ].")
 
     def _sciana_zb_pasmo(self, w, pr, poz, cases):
         """Ściana żelbetowa (monolityczna) obciążona pionowo — pasmo 1,0 m jak słup (PN-EN 1992-1-1 5.8, 6.1): N_Ed —

@@ -1065,6 +1065,11 @@ for s in SC:
         continue
     zew = s["przegroda"] == "SZ1"
     h_z = 0.30 if zew else (0.30 if s["przegroda"] == "SWG" else 0.25)
+    # runda konstrukcyjna 1: żebra w osi 3 pod trzpieniami ŻB B/3, C/3, D/3 (N_Ed ≈ 1,3–1,5 MN) pogłębione do h = 0,45 m pod płytą
+    # (łącznie 0,70 m) — przebicie płyty/żebra pod słupem (PN-EN 1992-1-1 6.4.4) i rozkład nacisku
+    _os3 = s["id"] in ("S0-08", "S0-09", "S0-10")
+    if _os3:
+        h_z = 0.45
     (xa, ya), (xb, yb) = s["os"]
     odc = [s["os"]]
     if s["id"] == "S0-03":                   # ściana wsch.: pas gospodarczy (płyta −0,15) | garaż (płyta −0,30)
@@ -1075,6 +1080,7 @@ for s in SC:
         z_pl = (Z_PLYTA_G if (w_gar or s["przegroda"] == "SWG") else Z_PLYTA_F) - T_PLYTA_F
         FUND_EL.append({"id": f"ZF{_zi}", "os": [pa_, pb_], "b": 0.60 if zew else 0.50, "h": h_z, "spod": r(z_pl - h_z), "mat": "ZB_C25",
                         "uwagi": f"pogrubienie (żebro) płyty pod ścianą {s['id']}"
+                                 + (" — pogłębione pod trzpieniami ŻB w osi 3 (przebicie)" if _os3 else "")
                                  + (" — krawędź z izolacją obwodową XPS (PN-EN ISO 13793)" if zew else "")
                                  + (" — uskok płyty dom/garaż" if s["przegroda"] == "SWG" else "") + (" (garaż)" if w_gar else "")})
 for sl in SLUPY[:4]:
