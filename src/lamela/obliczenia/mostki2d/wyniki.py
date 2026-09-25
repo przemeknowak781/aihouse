@@ -5,7 +5,9 @@ Procedura dla węzła (PN-EN ISO 10211:2017):
    (kryterium: zmiana całkowitego strumienia < 1 % przy podwojeniu liczby podziałów; w razie potrzeby 4n);
 2. współczynniki sprzężenia L_2D między grupami stref (superpozycja rozwiązań jednostkowych; dla 2 temperatur
    L_2D = Φ/(θ_i − θ_e));
-3. ψ = L_2D − Σ U_j·l_j — osobno dla wymiarów zewnętrznych (l_e) i wewnętrznych (l_i) (PN-EN ISO 14683 — systemy wymiarów);
+3. ψ = L_2D − Σ U_j·l_j — w trzech systemach wymiarów (PN-EN ISO 13789 / 14683): zewnętrznych (l_e), wewnętrznych
+   (l_i) i wewnętrznych całkowitych (l_oi — system projektu: `energia.bryla`, `fizyka.mostki`; H_TB liczone z ψ_oi);
+   zbieżność: zmiana Φ < 1 % ORAZ zmiana L_2D (= zmiana ψ) ≤ max(1 % |ψ|; 0,001 W/(m·K)) przy podwojeniu siatki;
 4. przebieg „f_Rsi” — R_si = 0,25 (0,13 ramy/szyby) wg PN-EN ISO 13788 / PN-EN ISO 10211:
    f_Rsi = (θ_si,min − θ_e)/(θ_i − θ_e); ocena f_Rsi ≥ f_Rsi,min (W-248: 0,72 — WT zał. 2 pkt 2.2);
    dla 3 temperatur — współczynniki wagowe g (θ_si = Σ g_k·θ_k);
@@ -25,6 +27,8 @@ from .siatka import Siatka, siatka_dla_wezla
 from .solver import ModelMOS, Rozwiazanie
 
 KRYT_ZBIEZNOSCI = 0.01        # 1 % (ISO 10211 — podwojenie liczby podziałów)
+KRYT_PSI_WZGL = 0.01          # zbieżność ψ: |Δψ| ≤ max(1 % |ψ|, 0,001 W/(m·K)) (ψ — mała różnica dużych liczb)
+KRYT_PSI_BEZWZGL = 0.001
 KRYT_BILANSU = 1e-4
 MAX_KOMOREK = 3_000_000
 
@@ -91,7 +95,8 @@ class WynikPsi:
     L2D: float
     sum_Ul_e: float
     sum_Ul_i: float
-    elementy: list = field(default_factory=list)    # [nazwa, U, l_e, l_i, U·l_e, U·l_i]
+    elementy: list = field(default_factory=list)    # [nazwa, U, l_e, l_i, l_oi, U·l_e, U·l_i, U·l_oi]
+    sum_Ul_oi: float | None = None
 
     @property
     def psi_e(self) -> float:
@@ -101,12 +106,18 @@ class WynikPsi:
     def psi_i(self) -> float:
         return self.L2D - self.sum_Ul_i
 
+    @property
+    def psi_oi(self) -> float:
+        """ψ w wymiarach wewnętrznych całkowitych (system projektu — `energia.bryla`)."""
+        return self.L2D - (self.sum_Ul_i if self.sum_Ul_oi is None else self.sum_Ul_oi)
+
 
 @dataclass
 class WynikWezla:
     wezel: Wezel
     siatki: list                  # [(opis, n, Φ)]
     zmiana: float                 # względna zmiana Φ przy ostatnim podwojeniu
+    # (zmiana_psi: max |ΔL_2D| par grup przy ostatnim podwojeniu [W/(m·K)] i jej dopuszczalna wartość)
     zbieznosc_ok: bool
     bilans: float
     L: dict                       # {(a, b): L_ab}
@@ -118,6 +129,8 @@ class WynikWezla:
     wykresy: dict = field(default_factory=dict)
     fRsi_min: float = 0.72
     fRsi_min_zrodlo: str = ""
+    zmiana_psi: float = float("nan")
+    dop_zmiana_psi: float = float("nan")
 
     @property
     def psi_glowne(self) -> WynikPsi | None:
@@ -132,25 +145,81 @@ class WynikWezla:
 
 
 # --------------------------------------------------------------------------------------------------
+def _psi_par(wezel: Wezel, L: dict, cache: dict) -> dict[tuple[str, str], tuple[float, float, float, float, list]]:
+    """ψ par grup z elementami flankującymi: {(a, b): (L_ab, Σ U·l_e, Σ U·l_i, Σ U·l_oi, elementy)}."""
+    th = wezel.theta_grup()
+    pary: list[tuple[str, str]] = []
+    for el in wezel.flankujace:
+        p = tuple(el.grupy)
+        if p not in pary and p[::-1] not in pary:
+            pary.append(p)
+    if not pary and len(th) == 2:
+        pary.append(tuple(wezel.grupy()))
+    out = {}
+    for (a, b) in pary:
+        Lab = L.get((a, b), 0.0)
+        se = si = soi = 0.0
+        els = []
+        for el in wezel.flankujace:
+            if set(el.grupy) != {a, b}:
+                continue
+            if el.wezel_ref is not None:
+                key = id(el.wezel_ref)
+                if key not in cache:
+                    cache[key] = L2D_prosty(el.wezel_ref)
+                Lr = cache[key]
+                se += Lr
+                si += Lr
+                soi += Lr
+                els.append([el.nazwa, "L_2D = " + f_(Lr, 4), "—", "—", "—", Lr, Lr, Lr])
+            else:
+                U = el.U_obl()
+                se += U * el.l_e
+                si += U * el.l_i
+                soi += U * el.l_oi_
+                els.append([el.nazwa, U, el.l_e, el.l_i, el.l_oi_, U * el.l_e, U * el.l_i, U * el.l_oi_])
+        out[(a, b)] = (Lab, se, si, soi, els)
+    return out
+
+
 def _rozwiaz_zbieznie(wezel: Wezel, siatka: Siatka | None = None, tryb: str = "psi", h_min=None, h_max=None,
-                      max_podwojen: int = 2):
+                      max_podwojen: int = 2, kontrola_psi: bool = True, cache: dict | None = None):
+    """Rozwiązania na siatce n, 2n (, 4n) do spełnienia kryteriów: zmiana Φ < 1 % (ISO 10211) oraz — gdy
+    kontrola_psi — zmiana L_2D par grup ≤ max(1 % |ψ_oi|; 0,001 W/(m·K)). Każde rozwiązanie musi domykać bilans
+    energii (< 10⁻⁴) — w przeciwnym razie ValueError (np. szczelina adiabatyczna w geometrii)."""
+    cache = {} if cache is None else cache
     s = siatka or siatka_dla_wezla(wezel, h_min=h_min, h_max=h_max)
-    m = ModelMOS(wezel, s, tryb)
-    r = m.rozwiaz()
+
+    def licz(s_):
+        m_ = ModelMOS(wezel, s_, tryb)
+        r_ = m_.rozwiaz()
+        bil = r_.bilans()
+        if not bil < KRYT_BILANSU:
+            raise ValueError(f"Węzeł {wezel.id}: bilans energii {bil:.2e} ≥ {KRYT_BILANSU:g} na siatce {s_.opis()} — "
+                             f"wynik odrzucony (sprawdź geometrię: szczeliny, strefy, izolowane obszary)")
+        Lp = _psi_par(wezel, macierz_L(m_), cache) if kontrola_psi else {}
+        return m_, r_, Lp
+
+    m, r, Lp = licz(s)
     hist = [(s.opis(), s.n, r.Phi_calk())]
     zmiana = float("nan")
+    zm_psi, dop_psi = float("nan"), float("nan")
     for _ in range(max_podwojen):
         s2 = s.podwojona()
         if s2.n > MAX_KOMOREK:
             break
-        m2 = ModelMOS(wezel, s2, tryb)
-        r2 = m2.rozwiaz()
+        m2, r2, Lp2 = licz(s2)
         hist.append((s2.opis(), s2.n, r2.Phi_calk()))
         zmiana = abs(hist[-1][2] - hist[-2][2]) / abs(hist[-1][2])
-        s, m, r = s2, m2, r2
-        if zmiana < KRYT_ZBIEZNOSCI:
+        ok_psi = True
+        if kontrola_psi and Lp2:
+            zm_psi = max(abs(Lp2[k][0] - Lp[k][0]) for k in Lp2)
+            dop_psi = min(max(KRYT_PSI_WZGL * abs(v[0] - v[3]), KRYT_PSI_BEZWZGL) for v in Lp2.values())
+            ok_psi = zm_psi <= dop_psi
+        s, m, r, Lp = s2, m2, r2, Lp2
+        if zmiana < KRYT_ZBIEZNOSCI and ok_psi:
             break
-    return s, m, r, hist, zmiana
+    return s, m, r, hist, zmiana, zm_psi, dop_psi
 
 
 def macierz_L(model: ModelMOS) -> dict[tuple[str, str], float]:
@@ -173,7 +242,7 @@ def macierz_L(model: ModelMOS) -> dict[tuple[str, str], float]:
 
 def L2D_prosty(wezel: Wezel) -> float:
     """L_2D węzła o dwóch grupach (i, e) — np. podmodel okna bez ściany."""
-    s, m, r, hist, zm = _rozwiaz_zbieznie(wezel)
+    s, m, r, hist, zm, _, _ = _rozwiaz_zbieznie(wezel, kontrola_psi=False)
     th = wezel.theta_grup()
     a, b = wezel.grupy()[:2]
     return abs(r.Phi_grup()[a]) / abs(th[a] - th[b])
@@ -181,36 +250,12 @@ def L2D_prosty(wezel: Wezel) -> float:
 
 def oblicz_wezel(wezel: Wezel, h_min: float | None = None, h_max: float | None = None,
                  katalog_wykresow: str | Path | None = None, fRsi_min: float | None = None) -> WynikWezla:
-    s, m, r, hist, zmiana = _rozwiaz_zbieznie(wezel, h_min=h_min, h_max=h_max)
+    cache: dict = {}
+    s, m, r, hist, zmiana, zm_psi, dop_psi = _rozwiaz_zbieznie(wezel, h_min=h_min, h_max=h_max, cache=cache)
     L = macierz_L(m)
     th = wezel.theta_grup()
-    # ψ dla par grup, między którymi są elementy flankujące
-    pary: list[tuple[str, str]] = []
-    for el in wezel.flankujace:
-        p = tuple(el.grupy)
-        if p not in pary and p[::-1] not in pary:
-            pary.append(p)
-    if not pary and len(th) == 2:
-        pary.append(tuple(wezel.grupy()))
-    psi = []
-    for (a, b) in pary:
-        Lab = L.get((a, b), 0.0)
-        se = si = 0.0
-        els = []
-        for el in wezel.flankujace:
-            if set(el.grupy) != {a, b}:
-                continue
-            if el.wezel_ref is not None:
-                Lr = L2D_prosty(el.wezel_ref)
-                se += Lr
-                si += Lr
-                els.append([el.nazwa, "L_2D = " + f_(Lr, 4), "—", "—", Lr, Lr])
-            else:
-                U = el.U_obl()
-                se += U * el.l_e
-                si += U * el.l_i
-                els.append([el.nazwa, U, el.l_e, el.l_i, U * el.l_e, U * el.l_i])
-        psi.append(WynikPsi((a, b), Lab, se, si, els))
+    psi = [WynikPsi((a, b), Lab, se, si, els, soi)
+           for (a, b), (Lab, se, si, soi, els) in _psi_par(wezel, L, cache).items()]
     # f_Rsi
     mf = ModelMOS(wezel, s, "fRsi")
     rf = mf.rozwiaz()
@@ -233,8 +278,13 @@ def oblicz_wezel(wezel: Wezel, h_min: float | None = None, h_max: float | None =
     f["theta_rosy"] = tdp
     f["f_krytyczne_obl"] = (tk - te) / (ti - te)
     fmin, zr = (fRsi_min, "zadane") if fRsi_min is not None else _wym("fRsi_min", "energia", 0.72)
-    w = WynikWezla(wezel, hist, zmiana, bool(zmiana < KRYT_ZBIEZNOSCI) if math.isfinite(zmiana) else False,
-                   r.bilans(), L, psi, th, f, r, rf, fRsi_min=fmin, fRsi_min_zrodlo=zr)
+    zb_ok = bool(math.isfinite(zmiana) and zmiana < KRYT_ZBIEZNOSCI
+                 and (not math.isfinite(zm_psi) or zm_psi <= dop_psi))
+    bil_f = rf.bilans()
+    if not bil_f < KRYT_BILANSU:
+        raise ValueError(f"Węzeł {wezel.id}: bilans energii przebiegu f_Rsi {bil_f:.2e} ≥ {KRYT_BILANSU:g}")
+    w = WynikWezla(wezel, hist, zmiana, zb_ok, r.bilans(), L, psi, th, f, r, rf, fRsi_min=fmin, fRsi_min_zrodlo=zr,
+                   zmiana_psi=zm_psi, dop_zmiana_psi=dop_psi)
     if katalog_wykresow:
         w.wykresy = rysuj_wszystko(w, katalog_wykresow)
     return w
@@ -453,7 +503,9 @@ def raport_wezla(w: WynikWezla, katalog_raportu: str | Path | None = None) -> st
     L += ["**Siatka i dokładność** (MOS, siatka prostokątna zagęszczana przy granicach materiałów)", "",
           _tab(["siatka", "komórek", "Φ_całk [W/m]"], [[o, str(n), phi] for o, n, phi in w.siatki]), "",
           f"Zmiana strumienia przy podwojeniu liczby podziałów: **{f_(100 * w.zmiana, 3)} %** "
-          f"(kryterium ISO 10211 < 1 %: {'spełnione' if w.zbieznosc_ok else 'NIESPEŁNIONE'}); "
+          f"(kryterium ISO 10211 < 1 %: {'spełnione' if w.zmiana < KRYT_ZBIEZNOSCI else 'NIESPEŁNIONE'}); "
+          f"zmiana L_2D (= zmiana ψ): {f_(w.zmiana_psi, 5)} W/(m·K) (kryterium ≤ max(1 % |ψ|; 0,001) = "
+          f"{f_(w.dop_zmiana_psi, 5)}: {'spełnione' if not (w.zmiana_psi > w.dop_zmiana_psi) else 'NIESPEŁNIONE'}); "
           f"bilans energii Σ Φ / (½ Σ|Φ|) = {w.bilans:.1e} (kryterium < 10⁻⁴: "
           f"{'spełnione' if w.bilans < KRYT_BILANSU else 'NIESPEŁNIONE'}).", ""]
     L += ["**Współczynniki sprzężenia i ψ**", ""]
@@ -461,9 +513,12 @@ def raport_wezla(w: WynikWezla, katalog_raportu: str | Path | None = None) -> st
         L += [_tab(["para grup", "L_2D [W/(m·K)]"], [[f"{a}–{b}", v] for (a, b), v in w.L.items() if a < b]), ""]
     for p in w.psi:
         L += [f"*Para {p.grupy[0]}–{p.grupy[1]}:* L_2D = **{f_(p.L2D, 4)} W/(m·K)**", "",
-              _tab(["element flankujący", "U [W/(m²K)]", "l_e [m]", "l_i [m]", "U·l_e", "U·l_i"], p.elementy), "",
-              f"ψ_e (wymiary zewnętrzne) = {f_(p.L2D, 4)} − {f_(p.sum_Ul_e, 4)} = **{f_(p.psi_e, 3)} W/(m·K)**; "
-              f"ψ_i (wymiary wewnętrzne) = {f_(p.L2D, 4)} − {f_(p.sum_Ul_i, 4)} = **{f_(p.psi_i, 3)} W/(m·K)**", ""]
+              _tab(["element flankujący", "U [W/(m²K)]", "l_e [m]", "l_i [m]", "l_oi [m]", "U·l_e", "U·l_i",
+                    "U·l_oi"], p.elementy), "",
+              f"ψ_oi (wymiary wewnętrzne całkowite — system projektu, H_TB) = {f_(p.L2D, 4)} − "
+              f"{f_(p.L2D - p.psi_oi, 4)} = **{f_(p.psi_oi, 3)} W/(m·K)**; "
+              f"ψ_e (zewnętrzne) = {f_(p.L2D, 4)} − {f_(p.sum_Ul_e, 4)} = {f_(p.psi_e, 3)} W/(m·K); "
+              f"ψ_i (wewnętrzne) = {f_(p.L2D, 4)} − {f_(p.sum_Ul_i, 4)} = {f_(p.psi_i, 3)} W/(m·K)", ""]
     fr = w.f
     L += ["**Temperatura powierzchni wewnętrznej i ryzyko pleśni** (R_si = 0,25 — PN-EN ISO 13788)", "",
           f"* θ_si,min = **{f_(fr['theta_si_min'], 2)} °C** w punkcie ({f_(fr['x'], 3)}; {f_(fr['y'], 3)}) m "
@@ -487,7 +542,8 @@ def raport_wezla(w: WynikWezla, katalog_raportu: str | Path | None = None) -> st
             d = PSI_DOMYSLNE_14683[wz.psi_domyslne]
             L.append(f"* PN-EN ISO 14683 — wartość domyślna ({d['opis']}): ψ_e = {f_(d['psi_e'], 2)}, "
                      f"ψ_i = {f_(d['psi_i'], 2)} W/(m·K) {d['status']} — obliczone ψ_e = {f_(pg.psi_e, 3)}, "
-                     f"ψ_i = {f_(pg.psi_i, 3)} ({'poniżej' if pg.psi_e <= d['psi_e'] else 'POWYŻEJ'} wartości domyślnej)")
+                     f"ψ_i = {f_(pg.psi_i, 3)} ({'poniżej' if pg.psi_e <= d['psi_e'] else 'POWYŻEJ'} wartości domyślnej"
+                     f" — porównanie w tym samym systemie wymiarów)")
         if wz.psi_deklarowane:
             d = wz.psi_deklarowane
             L.append(f"* deklaracja wyrobu: ψ = {f_(d.get('psi'), 3)} W/(m·K)"
@@ -509,15 +565,20 @@ def tabela_zbiorcza(wyniki: Sequence[WynikWezla]) -> str:
     wiersze = []
     for w in wyniki:
         p = w.psi_glowne
-        wiersze.append([w.wezel.id, w.wezel.nazwa, f_(p.L2D, 4) if p else "—", f_(p.psi_e, 3) if p else "—",
-                        f_(p.psi_i, 3) if p else "—", f_(w.f["theta_si_min"], 2), f_(w.f["f_Rsi"], 3),
-                        "tak" if w.fRsi_ok else "**NIE**", f_(100 * w.zmiana, 2) + " %"])
-    return _tab(["węzeł", "nazwa", "L_2D (i–e)", "ψ_e", "ψ_i", "θ_si,min [°C]", "f_Rsi", "f_Rsi ≥ min", "Δ siatki"],
-                wiersze)
+        wiersze.append([w.wezel.id, w.wezel.nazwa, f_(p.L2D, 4) if p else "—", f_(p.psi_oi, 3) if p else "—",
+                        f_(p.psi_e, 3) if p else "—", f_(p.psi_i, 3) if p else "—", f_(w.f["theta_si_min"], 2),
+                        f_(w.f["f_Rsi"], 3), "tak" if w.fRsi_ok else "**NIE**", f_(100 * w.zmiana, 2) + " %"])
+    return _tab(["węzeł", "nazwa", "L_2D (i–e)", "ψ_oi", "ψ_e", "ψ_i", "θ_si,min [°C]", "f_Rsi", "f_Rsi ≥ min",
+                 "Δ siatki"], wiersze)
 
 
-def zestawienie_HTB(wyniki: Sequence[WynikWezla], dlugosci: dict[str, float], system: str = "e") -> tuple[float, list]:
-    """H_TB = Σ ψ_k·l_k [W/K] z wartości symulowanych (system wymiarów 'e' lub 'i' — zgodny z pomiarem pól U·A)."""
+SYSTEMY_WYMIAROW = {"oi": "wewnętrzne całkowite (ψ_oi)", "e": "zewnętrzne (ψ_e)", "i": "wewnętrzne (ψ_i)"}
+
+
+def zestawienie_HTB(wyniki: Sequence[WynikWezla], dlugosci: dict[str, float], system: str = "oi") -> tuple[float, list]:
+    """H_TB = Σ ψ_k·l_k [W/K] z wartości symulowanych. system wymiarów: 'oi' (domyślnie — zgodny z `energia.bryla`
+    i `fizyka.mostki`), 'e' lub 'i'; długości `dlugosci` MUSZĄ być w tym samym systemie co ψ i pola U·A
+    (PN-EN ISO 10211:2017 pkt 7.1; PN-EN ISO 13789)."""
     tot = 0.0
     wiersze = []
     for w in wyniki:
@@ -525,7 +586,7 @@ def zestawienie_HTB(wyniki: Sequence[WynikWezla], dlugosci: dict[str, float], sy
         p = w.psi_glowne
         if l is None or p is None:
             continue
-        psi = p.psi_e if system == "e" else p.psi_i
+        psi = {"e": p.psi_e, "i": p.psi_i, "oi": p.psi_oi}[system]
         tot += psi * l
         wiersze.append([w.wezel.id, w.wezel.nazwa, psi, l, psi * l])
     return tot, wiersze
@@ -542,13 +603,57 @@ def raport_katalogu(wyniki: Sequence[WynikWezla], plik: str | Path, tytul: str, 
          "wg zał. C ISO 10211 — " + (walidacja_md or "patrz raport walidacji") + ").", "",
          "## Zestawienie", "", tabela_zbiorcza(wyniki), ""]
     if dlugosci:
-        H, wiersze = zestawienie_HTB(wyniki, dlugosci)
-        L += ["## H_TB (wymiary zewnętrzne)", "",
-              _tab(["węzeł", "nazwa", "ψ_e [W/(m·K)]", "l [m]", "ψ·l [W/K]"], wiersze), "",
-              f"**H_TB = Σ ψ_e·l = {f_(H, 2)} W/K**", ""]
+        H, wiersze = zestawienie_HTB(wyniki, dlugosci, "oi")
+        L += ["## H_TB — wymiary wewnętrzne całkowite (ψ_oi)", "",
+              "System wymiarów jak w obliczeniu obudowy (`energia.bryla`: ściany po licach wewnętrznych × wysokość "
+              "„od podłogi do podłogi”, pod dachem do spodu płyty; okna w świetle otworu w murze) — ψ i długości w tym "
+              "samym systemie (PN-EN ISO 10211:2017 pkt 7.1; PN-EN ISO 13789; PN-EN ISO 14683). Wartości ψ_e/ψ_i "
+              "powyżej — wyłącznie do porównań z tabelami PN-EN ISO 14683 (nie sumować z polami w innym systemie).", "",
+              _tab(["węzeł", "nazwa", "ψ_oi [W/(m·K)]", "l_oi [m]", "ψ·l [W/K]"], wiersze), "",
+              f"**H_TB = Σ ψ_oi·l_oi = {f_(H, 2)} W/K** (węzły liniowe 2D; mostki punktowe χ — poza zakresem)", ""]
     for w in wyniki:
         L += [raport_wezla(w, plik.parent), ""]
     txt = "\n".join(L)
     plik.parent.mkdir(parents=True, exist_ok=True)
     plik.write_text(txt, encoding="utf-8")
     return txt
+
+
+# --------------------------------------------------------------------------------------------------
+# Eksport wyników do `fizyka.mostki` (wczytaj_wyniki_symulacji / wezly_z_modelu)
+# --------------------------------------------------------------------------------------------------
+TYPY_FIZYKA = {"naroze": "naroznik_wypukly", "strop_posredni": "strop_posredni", "wspornik": "plyta_wspornikowa_lacznik",
+               "attyka": "attyka", "oscieze": "oscieze", "nadproze": "oscieze", "podokiennik": "oscieze",
+               "prog": "oscieze", "cokol": "sciana_grunt", "garaz": "polaczenie_nieogrz", "sciana": "sciana",
+               "rura_spustowa": "inny"}
+
+
+def eksport_wynikow(wyniki: Sequence[WynikWezla], dlugosci: dict[str, float] | None = None,
+                    plik: str | Path | None = None) -> dict[str, dict]:
+    """Wyniki w formacie `fizyka.mostki.wczytaj_wyniki_symulacji`: {id: {psi_oi, psi_e, psi_i, f_rsi, dlugosc,
+    dlugosc_oi, system_wymiarow, typ, zrodlo}}; `dlugosc` = `dlugosc_oi` (system wewnętrzny całkowity)."""
+    import json
+    out: dict[str, dict] = {}
+    for w in wyniki:
+        p = w.psi_glowne
+        typ = w.wezel.typ
+        if typ == "wspornik" and w.wezel.psi_domyslne == "B_balkon":
+            typ_f = "plyta_wspornikowa"
+        else:
+            typ_f = TYPY_FIZYKA.get(typ, typ)
+        d: dict[str, Any] = {"nazwa": w.wezel.nazwa, "typ": typ_f, "typ_mostki2d": typ,
+                             "system_wymiarow": "oi — wewnętrzne całkowite",
+                             "zrodlo": "symulacja PN-EN ISO 10211 (mostki2d)",
+                             "zbieznosc_ok": bool(w.zbieznosc_ok)}
+        if p is not None:
+            d.update({"psi_oi": round(p.psi_oi, 5), "psi_e": round(p.psi_e, 5), "psi_i": round(p.psi_i, 5),
+                      "L2D": round(p.L2D, 5)})
+        d["f_rsi"] = round(float(w.f["f_Rsi"]), 4)
+        d["theta_si_min"] = round(float(w.f["theta_si_min"]), 3)
+        if dlugosci and w.wezel.id in dlugosci:
+            d["dlugosc"] = d["dlugosc_oi"] = round(float(dlugosci[w.wezel.id]), 3)
+        out[w.wezel.id] = d
+    if plik:
+        Path(plik).parent.mkdir(parents=True, exist_ok=True)
+        Path(plik).write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
+    return out

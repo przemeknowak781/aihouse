@@ -332,7 +332,7 @@ def test_wspornik_swobodny_EQU():
     equ = next(w for w in pz.wyniki if "EQU" in w.nazwa)
     wz = next(w for w in equ.warunki)
     lc = 11.6 - 10.0
-    gc = pz_g = next(e for e in g.el if e.id == "PL-D").zest.g_k
+    gc = next(e for e in g.el if e.id == "PL-D").zest.g_k
     close(wz.E, (1.1 * gc + 1.5 * 4.0) * lc ** 2 / 2, 0.02, "M_dst wspornika")
     assert wz.ok
     ug = [w for w in pz.podpozycje[0].wyniki if "ugięcie" in w.nazwa]
@@ -395,7 +395,6 @@ def porownanie_reczne(an) -> list[dict]:
     qQ = RQ / L_line
     qS = RS / L_line
     qd_b = max(1.35 * qG + 1.5 * 0.7 * qQ + 1.5 * 0.5 * qS, 0.85 * 1.35 * qG + 1.5 * qQ + 1.5 * 0.5 * qS)
-    rea = b1.dane["reakcje"]
     Ls = 3.76                                         # rozstaw podpór: ściana S0-02 (x = 10,09 → 0) — słup SL1 (13,85)
     Mb = qd_b * Ls ** 2 / 8
     M_lib = b1.wyniki[0].kroki[0].wynik

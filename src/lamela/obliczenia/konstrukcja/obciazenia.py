@@ -17,7 +17,7 @@ from dataclasses import dataclass, field
 
 import numpy as np
 
-from .wspolne import G_GRAV, BladDanych, Krok, Parametry, Wynik, f, tabela
+from .wspolne import G_GRAV, BladDanych, Parametry, Wynik, f, tabela
 
 
 # ==================================================================================================

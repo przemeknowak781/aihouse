@@ -20,8 +20,6 @@ from __future__ import annotations
 import math
 from dataclasses import dataclass, field
 
-import numpy as np
-
 from .materialy import Beton, StalZbrojeniowa, pole_preta
 from .wspolne import Grunt, Parametry, Wynik, f
 from . import zelbet

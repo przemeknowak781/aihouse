@@ -830,6 +830,105 @@ def wezel_podokiennik(warstwy_sciany: Sequence[Warstwa], U_f: float = 0.95, b_f:
                                parapet_wewn=parapet_wewn, parapet_zewn=parapet_zewn)
 
 
+# ---- progi drzwi / okien do podłogi -------------------------------------------------------------------------
+def _param_progu(prog: dict) -> dict:
+    """Parametry progu: U_f, b_f, d_f, U_g, d_g, wsuniecie (głębokość ramy w murze od lica zewn. konstrukcji),
+    L_g (długość szyby w modelu), mat (podwalina progowa), U_w, psi_g, zrodlo."""
+    p = {"U_f": 1.40, "b_f": 0.13, "d_f": 0.09, "U_g": 0.50, "d_g": 0.044, "wsuniecie": 0.05, "L_g": 0.25,
+         "mat": MATERIALY_DOMYSLNE["PROG_TERM"], "U_w": None, "psi_g": 0.0, "zrodlo": ""}
+    p.update({k: v for k, v in (prog or {}).items() if v is not None})
+    if p["U_w"] is None:
+        p["U_w"] = U_w_okna(p["U_f"], p["U_g"], p["b_f"], p["psi_g"])
+    return p
+
+
+def _rama_progu(p: dict, x_f0: float, y_f: float, ti: float, te: float, id: str) -> tuple[Obszar, Obszar, Wezel]:
+    """Rama (dolny profil) na poziomie y_f i szyba nad nią (przekrój pionowy) + podmodel „drzwi bez ściany”."""
+    m_r = material_rama(p["U_f"], p["d_f"], zrodlo=p["zrodlo"])
+    m_g = material_szyba(p["U_g"], p["d_g"], zrodlo=p["zrodlo"])
+    rama = _obsz(box(x_f0, y_f, x_f0 + p["d_f"], y_f + p["b_f"]), m_r, "rama (próg)")
+    xg0 = x_f0 + (p["d_f"] - p["d_g"]) / 2
+    szyba = _obsz(box(xg0, y_f + p["b_f"], xg0 + p["d_g"], y_f + p["b_f"] + p["L_g"]), m_g, "szyba")
+    return rama, szyba, _okno_model(rama, szyba, ti, te, id, "podokiennik")
+
+
+def _opis_progu(p: dict, x_f0: float, y_pod: float) -> str:
+    return (f"rama U_f = {p['U_f']}, b_f = {p['b_f']} m, d_f = {p['d_f']} m, lico wewn. ramy x = {x_f0:.3f} m "
+            f"(wsunięcie w mur {p['wsuniecie']} m); U_g = {p['U_g']}; U_w = {p['U_w']:.3f}; podwalina "
+            f"{p['mat'].kod} (λ = {p['mat'].lam}) od y = {y_pod:.3f} m do poziomu posadzki {p['zrodlo']}")
+
+
+def wezel_prog_strop(warstwy_sciany: Sequence[Warstwa], t_plyty: float = 0.20, mat_plyty: Material | None = None,
+                     warstwy_podlogi: Sequence[Warstwa] = (), warstwy_sufitu: Sequence[Warstwa] = (),
+                     wysieg: float = 0.0, lacznik: Material | None = LACZNIK_PRZYKLAD, d_lacznika: float = 0.08,
+                     prog: dict | None = None, H: float | None = None, L_in: float | None = None,
+                     theta_i: float | None = None, theta_e: float | None = None, id: str = "WZ-T2",
+                     nazwa: str | None = None) -> Wezel:
+    """Próg drzwi / okna do podłogi na kondygnacji powyżej parteru (przekrój pionowy): ściana dolna, strop z wieńcem
+    (wysieg = 0) albo płyta wspornikowa balkonu/tarasu z łącznikiem termoizolacyjnym (wysieg > 0), warstwy podłogi
+    do lica wewn. ramy, rama na podwalinie progowej, szyba; ocieplenie ściany do spodu ramy (cokolik izolacji nad
+    płytą). Układ jak `wezel_wspornik` (wnętrze x < 0, płyta y ∈ [0, t]).
+    ψ = L_2D − U_ściany·l − L_2D,drzwi; l_oi = l_e — ściana dolna do poziomu podłogi (= spód ramy)."""
+    ti, te = _temperatury(theta_i, theta_e)
+    p = _param_progu(prog or {})
+    mat_plyty = mat_plyty or MATERIALY_DOMYSLNE["ZB"]
+    st = _stos(warstwy_sciany, 0.0)
+    ks = indeks_konstrukcyjnej(warstwy_sciany)
+    x_s1 = st[ks][1]
+    x_out = st[-1][1]
+    t = t_plyty
+    t_pod, t_suf = grubosc(warstwy_podlogi), grubosc(warstwy_sufitu)
+    H = H or odl_ciecia(x_out)
+    L_in = L_in or odl_ciecia(t)
+    x_end = x_s1 if wysieg <= 0 else x_out + wysieg
+    x_f0 = x_s1 - p["wsuniecie"]
+    x_f1 = x_f0 + p["d_f"]
+    y_f = t + t_pod
+    y_top = y_f + p["b_f"] + p["L_g"]
+    ob: list[Obszar] = []
+    for k, (a, b, w) in enumerate(st):
+        ob.append(_obsz(box(a, -H, b, 0.0 if k <= ks else y_f), w))
+    for y0, y1, w in _stos(warstwy_podlogi, y_f, -1):
+        ob.append(_obsz(box(-L_in, y0, x_f0, y1), w))
+    for y0, y1, w in _stos(warstwy_sufitu, 0.0, -1):
+        ob.append(_obsz(box(-L_in, y0, 0.0, y1), w))
+    ob.append(_obsz(box(-L_in, 0.0, x_end, t), mat_plyty, "płyta stropu" + (" / wspornik" if wysieg > 0 else "")))
+    if wysieg > 0 and lacznik is not None:
+        ob.append(_obsz(box(x_s1, 0.0, x_s1 + d_lacznika, t), lacznik))
+    if t_pod > 0:
+        ob.append(_obsz(box(x_f0, t, x_f1, y_f), p["mat"], "podwalina progowa (ciepły montaż)"))
+    rama, szyba, okno = _rama_progu(p, x_f0, y_f, ti, te, id)
+    ob += [rama, szyba]
+    S = S_STREFY
+    ramka = box(-L_in, -H, max(x_end, x_out) + S, y_top)
+    strefy = strefy_z_dopelnienia(ob, ramka, [
+        ((-L_in / 2, -H / 2), _nas("pomieszczenie dolne", ti, "wewn")),
+        ((-L_in / 2, y_f + (y_top - y_f) / 2), _nas("pomieszczenie górne", ti, "wewn")),
+        ((x_out + S / 2, -H / 2), _nas("zewnętrze", te, "zewn"))])
+    fl = [ElementFlankujacy("ściana dolna (do poziomu podłogi / spodu ramy)", ("i", "e"), H + y_f, H - t_suf,
+                            warstwy=list(warstwy_sciany), l_oi=H + y_f),
+          ElementFlankujacy("drzwi (L_2D ramy z szybą, model bez ściany)", ("i", "e"), 1.0, 1.0, wezel_ref=okno)]
+    if wysieg > 0:
+        nz = nazwa or ("Próg drzwi na płycie wspornikowej (balkon/taras) — " +
+                       ("łącznik termoizolacyjny" if lacznik else "płyta ciągła"))
+    else:
+        nz = nazwa or "Próg okna/drzwi do podłogi na stropie pośrednim (wieniec)"
+    dane = {"warstwy ściany": dane_warstw(warstwy_sciany), "płyta": f"{mat_plyty.kod}, t = {t} m, wysięg = {wysieg} m",
+            "warstwy podłogi": dane_warstw(warstwy_podlogi), "warstwy sufitu": dane_warstw(warstwy_sufitu),
+            "próg": _opis_progu(p, x_f0, t)}
+    if wysieg > 0:
+        dane["łącznik"] = (f"{lacznik.nazwa}: λ_eq = {lacznik.lam} W/(m·K), d = {d_lacznika} m — {lacznik.zrodlo}"
+                           if lacznik else "brak (płyta ciągła przez izolację)")
+    uw = ["Ocieplenie ściany prowadzone do spodu ramy (cokolik izolacji XPS nad płytą) — ciągłość izolacji w "
+          "płaszczyźnie ramy; hydroizolacja tarasu/balkonu wywinięta ≥ 15 cm lub pod próg (taśma EPDM do ramy), "
+          "spadek płyty ≥ 1,5–2 % od budynku, odwodnienie liniowe/rynna przy progu bezbarierowym."]
+    return Wezel(id, nz, "prog", ob, strefy, fl, przekroj="pionowy",
+                 punkty={"styk podłoga–rama": (x_f0, y_f), "naroże sufit": (0.0, -t_suf)},
+                 widok=(-min(L_in, 1.0), -min(H, 1.0), max(x_end, x_out) + 0.1, y_top),
+                 dane=dane, uwagi=uw,
+                 opis="Przekrój pionowy przez próg; pomieszczenia nad i pod stropem ogrzewane (grupa „i”).")
+
+
 def U_podlogi_13370(B: float, w: float, R_f: float, lam: float = LAMBDA_GRUNTU, Rsi: float = RSI_DOL,
                     Rse: float = RSE) -> tuple[float, float]:
     """U podłogi na gruncie wg PN-EN ISO 13370:2017 (płyta na gruncie) [NZW — wzory poza próbką normy, rejestr R6-30]:
@@ -848,9 +947,14 @@ def wezel_cokol(warstwy_sciany: Sequence[Warstwa], warstwy_podlogi: Sequence[War
                 hydro: tuple[Material, float] | None = None, glebokosc_izol: float | None = None,
                 y_teren: float = -0.30, h_cokolu: float = 0.30, blok_termiczny: tuple[Material, float] | None = None,
                 b: float = B_DOMYSLNE, H: float | None = None, theta_i: float | None = None,
-                theta_e: float | None = None, id: str = "WZ-GF1", nazwa: str | None = None) -> Wezel:
+                theta_e: float | None = None, id: str = "WZ-GF1", nazwa: str | None = None,
+                prog: dict | None = None) -> Wezel:
     """Cokół: ściana zewnętrzna – podłoga na gruncie – fundament (ława z murem fundamentowym albo płyta fundamentowa)
     z gruntem (λ = 2,0). Przekrój pionowy; lico wewn. ściany x = 0, posadzka ±0,00 = y 0, teren y_teren.
+    prog — przekrój przez PRÓG drzwi (HS / wejściowe) w poziomie posadzki zamiast ściany nad posadzką: słownik
+    parametrów stolarki (`_param_progu`): rama (U_f, b_f, d_f, wsunięcie w mur) na podwalinie progowej (materiał
+    `mat`, od wierzchu płyty konstrukcyjnej do poziomu posadzki), warstwy posadzki do lica wewn. ramy, ocieplenie
+    ściany fundamentowej do spodu ramy; ψ_prog = L_2D − U_podłogi·l − L_2D,drzwi (model ramy z szybą).
     Obszar gruntu wg ISO 10211 (model 2D z podłogą): wewnątrz 0,5·b od lica zewn., na zewnątrz 2,5·b, w głąb 2,5·b
     poniżej terenu (b — szerokość budynku; 8 m, gdy nieznana) [NZW]; płaszczyzny odcięcia w gruncie adiabatyczne.
     ψ_g = L_2D − U_ściany·h − U_podłogi(ISO 13370, B' = b)·l_podłogi (wymiary zewn.: l = 0,5·b; wewn.: 0,5·b − w)."""
@@ -869,6 +973,11 @@ def wezel_cokol(warstwy_sciany: Sequence[Warstwa], warstwy_podlogi: Sequence[War
     izol = izol_obwodowa or MATERIALY_DOMYSLNE["XPS"]
     hydro = hydro if hydro is not None else (MATERIALY_DOMYSLNE["HYDRO"], 0.004)
     y_prz = y_teren + h_cokolu
+    if prog is not None:
+        prog = _param_progu(prog)
+        x_f0 = x_s1 - prog["wsuniecie"]
+        x_f1 = x_f0 + prog["d_f"]
+        H = prog["b_f"] + prog["L_g"]
     x_in = x_out - 0.5 * b
     x_pr = x_out + 2.5 * b
     y_dol = y_teren - 2.5 * b
@@ -886,54 +995,81 @@ def wezel_cokol(warstwy_sciany: Sequence[Warstwa], warstwy_podlogi: Sequence[War
         x_pod = x_s1 - d_fw
         y_izol_dol = y_lt if glebokosc_izol is None else max(y_lt, y_teren - glebokosc_izol)
         for k, (y0, y1, w) in enumerate(fl_st):
-            ob.append(_obsz(box(x_in, y0, x_s0 if k < kf else x_pod, y1), w))
+            ob.append(_obsz(box(x_in, y0, (x_s0 if prog is None else x_f0) if k < kf else x_pod, y1), w))
         opis_f = f"ława {b_l}×{h_l} m (spód {spod}), mur fundamentowy {sciana_fund[0].kod} {d_fw} m"
     elif fundament == "plyta":
         for k, (y0, y1, w) in enumerate(fl_st):
-            x_k = x_s0 if k < kf else (x_s1 if k == kf else x_out)
+            x_k = (x_s0 if prog is None else x_f0) if k < kf else (x_s1 if k == kf else x_out)
             ob.append(_obsz(box(x_in, y0, x_k, y1), w))
         y_izol_dol = fl_st[kf][0]          # spód płyty — izolacja pod płytą (warstwy niżej) sięga do lica zewn.
         spod = y_fb
         opis_f = f"płyta fundamentowa {warstwy_podlogi[kf].mat.kod} {warstwy_podlogi[kf].d} m"
     else:
         raise ValueError(fundament)
-    # ściana nad fundamentem
+    # ściana nad fundamentem (przy progu — tylko do poziomu posadzki; nad posadzką drzwi)
+    y_sc = H if prog is None else 0.0
     for k, (a, bb, w) in enumerate(st):
         if k < ks:
-            ob.append(_obsz(box(a, 0.0, bb, H), w))
+            if prog is None:
+                ob.append(_obsz(box(a, 0.0, bb, H), w))
         elif k == ks:
-            ob.append(_obsz(box(a, y_w0, bb, H), w))
-        else:
-            ob.append(_obsz(box(a, y_prz, bb, H), w))
-    if blok_termiczny:
+            ob.append(_obsz(box(a, y_w0, bb, y_sc), w))
+        elif y_prz < y_sc:
+            ob.append(_obsz(box(a, y_prz, bb, y_sc), w))
+    if blok_termiczny and prog is None:
         ob.append(_obsz(box(x_s0, y_w0, x_s1, y_w0 + blok_termiczny[1]), blok_termiczny[0], "blok termiczny"))
     # izolacja obwodowa + hydroizolacja (strefa cokołu i poniżej terenu)
     d_h = hydro[1] if hydro else 0.0
     if hydro:
         ob.append(_obsz(box(x_s1, y_izol_dol, x_s1 + d_h, y_prz), hydro[0], "hydroizolacja pionowa"))
+    if prog is not None and y_prz < 0.0 and hydro:
+        ob.append(_obsz(box(x_s1, y_prz, x_s1 + d_h, 0.0), hydro[0], "hydroizolacja pod progiem"))
     ob.append(_obsz(box(x_s1 + d_h, y_izol_dol, x_out, y_prz), izol, "izolacja obwodowa (cokół)"))
+    okno = None
+    if prog is not None:
+        rama, szyba, okno = _rama_progu(prog, x_f0, 0.0, ti, te, id)
+        ob.append(_obsz(box(x_f0, y_w0, x_f1, 0.0), prog["mat"], "podwalina progowa (ciepły montaż)"))
+        ob += [rama, szyba]
     strefy = strefy_z_dopelnienia(ob, box(x_in, y_dol, x_pr, H), [
         ((-0.5, H / 2), _nas("pomieszczenie", ti, "wewn")),
         ((x_out + 1.0, y_teren + (H - y_teren) / 2), _nas("zewnętrze", te, "zewn"))])
     R_f = R_warstw(warstwy_podlogi)
     U_fl, d_t = U_podlogi_13370(b, x_out, R_f)
-    fl = [ElementFlankujacy("ściana (od poziomu posadzki)", ("i", "e"), H, H, warstwy=list(warstwy_sciany)),
-          ElementFlankujacy(f"podłoga na gruncie (U wg ISO 13370, B' = {b} m, d_t = {d_t:.2f} m)", ("i", "e"),
-                            0.5 * b, 0.5 * b - x_out, U=U_fl, zrodlo="PN-EN ISO 13370:2017 [NZW]")]
-    return Wezel(id, nazwa or f"Cokół — ściana / podłoga na gruncie / {'ława' if fundament == 'lawa' else 'płyta'}",
-                 "cokol", ob, strefy, fl, przekroj="pionowy",
-                 punkty={"naroże ściana–posadzka": (0.0, 0.0)},
+    fl_pod = ElementFlankujacy(f"podłoga na gruncie (U wg ISO 13370, B' = {b:.2f} m, d_t = {d_t:.2f} m)", ("i", "e"),
+                               0.5 * b, 0.5 * b - x_out, U=U_fl, zrodlo="PN-EN ISO 13370:2017 [NZW]")
+    if prog is None:
+        fl = [ElementFlankujacy("ściana (od poziomu posadzki)", ("i", "e"), H, H, warstwy=list(warstwy_sciany)), fl_pod]
+    else:
+        fl = [fl_pod, ElementFlankujacy("drzwi (L_2D ramy z szybą, model bez ściany)", ("i", "e"), 1.0, 1.0,
+                                        wezel_ref=okno)]
+    wz_nazwa = nazwa or (f"Cokół — ściana / podłoga na gruncie / {'ława' if fundament == 'lawa' else 'płyta'}"
+                         if prog is None else "Próg drzwi (HS / wejściowe) na płycie parteru — grunt")
+    dane_prog = {}
+    if prog is not None:
+        dane_prog = {"próg": _opis_progu(prog, x_f0, y_w0)}
+    return Wezel(id, wz_nazwa,
+                 "cokol" if prog is None else "prog", ob, strefy, fl, przekroj="pionowy",
+                 punkty={"naroże ściana–posadzka": (0.0, 0.0)} if prog is None else
+                 {"styk posadzka–rama": (x_f0, 0.0)},
                  siatka={"h_min": 0.003, "h_max": 0.40, "r": 1.25},
-                 widok=(-1.2, min(spod, y_fb) - 0.4, x_out + 1.0, 1.0), psi_domyslne="GF_cokol",
+                 widok=(-1.2, min(spod, y_fb) - 0.4, x_out + 1.0, 1.0 if prog is None else H),
+                 psi_domyslne="GF_cokol" if prog is None else None,
                  dane={"warstwy ściany": dane_warstw(warstwy_sciany), "warstwy podłogi": dane_warstw(warstwy_podlogi),
                        "fundament": opis_f, "izolacja obwodowa": f"{izol.kod} do rzędnej {y_izol_dol:.2f}, "
                        f"cokół do {y_prz:.2f} (teren {y_teren:.2f})",
                        "grunt": f"λ = {grunt.lam} W/(m·K); obszar: wewn. 0,5·b = {0.5 * b} m od lica zewn., "
                                 f"zewn. 2,5·b = {2.5 * b} m, głęb. 2,5·b = {2.5 * b} m (b = {b} m)",
                        "U podłogi (ISO 13370)": f"R_f = {R_f:.3f} m²K/W, d_t = {d_t:.3f} m, U = {U_fl:.4f} W/(m²K)"}
-                 | ({"blok termiczny": f"{blok_termiczny[0].kod} h = {blok_termiczny[1]} m"} if blok_termiczny else {}),
-                 uwagi=["Ściana liczona od poziomu posadzki (±0,00) w obu systemach wymiarów; podłoga wg PN-EN ISO "
-                        "13370 z B' = b (pas nieskończony) [INT]."])
+                 | ({"blok termiczny": f"{blok_termiczny[0].kod} h = {blok_termiczny[1]} m"} if blok_termiczny else {})
+                 | dane_prog,
+                 uwagi=["Ściana liczona od poziomu posadzki (±0,00) we wszystkich systemach wymiarów (ψ_oi = ψ_i); "
+                        "podłoga wg PN-EN ISO 13370 z B' = b [INT]; b = B' = A/(0,5·P) budynku, gdy podane z modelu.",
+                        "Hydroizolacja pionowa ściany fundamentowej (bitumiczna/KMB) i izolacja obwodowa XPS "
+                        "(odporna na wodę) do spodu ławy; drenaż opaskowy i odprowadzenie wody opadowej od cokołu "
+                        "— poza zakresem cieplnym (wpływ na λ gruntu pominięty, λ = 2,0)."]
+                 + (["Próg: wierzch podwaliny = poziom posadzki; uszczelnienie progu taśmą EPDM / hydroizolacją "
+                     "wywiniętą na podwalinę; odwodnienie liniowe przed drzwiami HS zalecane (brak spadku przy "
+                     "progu bezbarierowym)."] if prog is not None else []))
 
 
 def wezel_garaz(warstwy_sciany: Sequence[Warstwa], warstwy_sciany_garazu: Sequence[Warstwa],

@@ -1995,8 +1995,6 @@ class AnalizaKonstrukcji:
 
     # ============================================================================================
     def _numeruj(self):
-        # dołącz zaległe obciążenia schodów do opisu (informacyjnie)
-        grupy_poz = []
         order = [("Dachy i stropodachy", [p_ for p_ in self.pos_plyty if p_.tytul.startswith("Stropodach")]),
                  ("Stropy", [p_ for p_ in self.pos_plyty if p_.tytul.startswith("Strop ")]),
                  ("Płyty wspornikowe", [p_ for p_ in self.pos_plyty if p_.tytul.startswith("Płyta wspornikowa")]),

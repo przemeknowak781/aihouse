@@ -12,7 +12,7 @@ from __future__ import annotations
 import math
 from dataclasses import dataclass, field
 
-from .materialy import Beton, StalZbrojeniowa, pole_preta
+from .materialy import Beton, StalZbrojeniowa
 from .obciazenia import ZestawienieStale, krok_obliczeniowe, obciazenie_uzytkowe
 from .statyka import Belka, ObcQ, Podpora, obwiednia_ULS, kombinacja_SLS
 from .wspolne import Parametry, Wynik, f
@@ -75,8 +75,8 @@ def plyta_schodowa(nazwa: str, odcinki: list[OdcinekSchodow], h: float, h_st: fl
     w.krok("Obciążenie stałe biegu (rzut)", "g_k,b", "", zb.g_k, "kN/m²", nd=3)
     w.krok("Obciążenie stałe spocznika", "g_k,s", "", zs.g_k, "kN/m²", nd=3)
     w.krok("Obciążenie użytkowe schodów (kat. A)", "q_k", "", uz.q_k, "kN/m²", nd=2, zrodlo=uz.zrodlo)
-    qdb = krok_obliczeniowe(w, zb.g_k, uz.q_k, uz.psi[0], p, "q_b")
-    qds = krok_obliczeniowe(w, zs.g_k, uz.q_k, uz.psi[0], p, "q_s")
+    krok_obliczeniowe(w, zb.g_k, uz.q_k, uz.psi[0], p, "q_b")
+    krok_obliczeniowe(w, zs.g_k, uz.q_k, uz.psi[0], p, "q_s")
     pods = [Podpora(0.0, podpory[0], nazwa="A"), Podpora(L, podpory[1], nazwa="B")]
     bel = Belka(L, pods, EI=1.0, dx=0.02)
     G = [ObcQ(zb.g_k if o.typ == "bieg" else zs.g_k, o.x0, o.x1) for o in odcinki]
