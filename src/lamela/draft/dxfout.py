@@ -22,7 +22,7 @@ from ezdxf import colors as ezcolors
 from ezdxf.enums import TextEntityAlignment
 
 from . import styles
-from .core import PArc, PFill, PLine, PText, text_items
+from .core import PArc, PFill, PLine, PText, text_items, z_of
 
 _LW_VALID = [0, 5, 9, 13, 15, 18, 20, 25, 30, 35, 40, 50, 53, 60, 70, 80, 90, 100, 106, 120, 140, 158, 200, 211]
 
@@ -82,7 +82,7 @@ def _attribs(doc, p, canvas, ltscale):
 
 def _emit(doc, space, canvas, off, ltscale, text_only_paper=False):
     ox, oy = off
-    for p in canvas.prims:
+    for p in sorted(canvas.prims, key=z_of):  # kolejność rysowania jak w PDF (maski pod napisami)
         if isinstance(p, PLine):
             pts = p.pts + (ox, oy)
             a = _attribs(doc, p, canvas, ltscale)

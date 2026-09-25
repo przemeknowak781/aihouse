@@ -56,7 +56,7 @@ OPEN = {
     "O1": (((0.0, 0.0), (7.5, 0.0)), 1.30, 2.20, 0.90, 1.30),
     "HS1": (((0.0, 0.0), (7.5, 0.0)), 4.80, 7.00, 2.40, 0.00),
     "O2": (((0.0, 0.0), (0.0, 5.7)), 3.90, 5.10, 1.50, 0.90),
-    "O3": (((7.5, 0.0), (7.5, 5.7)), 2.10, 3.50, 1.50, 0.85),
+    "O3": (((7.5, 0.0), (7.5, 5.7)), 0.90, 2.30, 1.50, 0.85),
     "D1": (((0.0, Y_PART), (4.2, Y_PART)), 2.90, 3.80, 2.05, None),
     "D2": (((4.2, 0.0), (4.2, 5.7)), 2.80, 3.70, 2.05, None),
 }
@@ -179,7 +179,7 @@ def demo_plan():
     dims.opening_dim(vp, (5.90, F_IN), (1, 0), 2.20, 2.40, None, side=1, symbol="HS1", axis_mm=10.0,
                      symbol_shape="ellipse")
     dims.opening_dim(vp, (F_IN, 4.50), (0, 1), 1.20, 1.50, 0.90, side=-1, symbol="O2", axis_mm=8.0)
-    dims.opening_dim(vp, (AX["C"] - F_IN, 2.80), (0, 1), 1.40, 1.50, 0.85, side=1, symbol="O3", axis_mm=8.0)
+    dims.opening_dim(vp, (AX["C"] - F_IN, 1.60), (0, 1), 1.40, 1.50, 0.85, side=1, symbol="O3", axis_mm=8.0)
     # drzwi: tylko symbol (wymiary w zestawieniu otworów — PN-B-01029)
     dims.opening_dim(vp, (3.35, Y_PART - 0.075), (1, 0), None, None, symbol="D1", side=-1, axis_mm=3.0)
     dims.opening_dim(vp, (AX["B"] - F_IN, 3.25), (0, 1), None, None, symbol="D2", side=1, axis_mm=4.0)
@@ -193,7 +193,8 @@ def demo_plan():
 
     # ---------------------------------------------------------------- kolumna prawa: północ, legendy, zestawienia
     fx0, fy0, fx1, fy1 = sh.free_above_title_block()
-    colx = fx0 + 2.0
+    fx0 = max(fx0, vp.clip[2] + 1.0)        # kolumna opisowa na prawo od rzutni
+    colx = fx0 + 1.0
     S.north_arrow(sh, (fx1 - 14.0, fy1 - 16.0), 15.0, 0.0)
     ytab = fy1 - 6.0
     rows = []
@@ -209,7 +210,8 @@ def demo_plan():
     r2 = table(sh, colx, r[1] - 10.0, [("Symbol", 16), ("Szer. [cm]", 20), ("Wys. [cm]", 20), ("Parapet [cm]", 22)],
                rows2, h=2.2, row_h=4.6, title="ZESTAWIENIE OTWORÓW (w świetle muru)")
     lg = hatch.legend(sh, colx, r2[1] - 4.0, ["MUR_SILIKAT", "MUR_CERAMIKA", "IZOL_TWARDA", "TYNK"], cols=2,
-                      col_w=82.0, sw=(11.0, 5.5), h=2.0, title="OZNACZENIA MATERIAŁÓW", show_source=False, row_gap=1.6)
+                      col_w=(fx1 - colx) / 2.0, sw=(11.0, 5.5), h=2.0, title="OZNACZENIA MATERIAŁÓW",
+                      show_source=False, row_gap=1.6)
     notes = ["Wymiary w cm (mm w indeksie górnym), rzędne w m. Rzędna ±0,00 = posadzka parteru = 101,65 m n.p.m.",
              "Wymiary otworów w świetle muru: licznik — szerokość, mianownik — wysokość, w nawiasie wysokość parapetu.",
              "Rysunek testowy silnika — dane nie stanowią projektu."]
