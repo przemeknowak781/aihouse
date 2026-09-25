@@ -225,7 +225,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 14.6,
+      "czas_s": 14.3,
       "png_kontrola": {
         "px": [
           2481,
@@ -448,7 +448,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 21.6,
+      "czas_s": 21.8,
       "png_kontrola": {
         "px": [
           2363,
@@ -679,7 +679,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 18.8,
+      "czas_s": 18.5,
       "png_kontrola": {
         "px": [
           3662,
@@ -735,5 +735,5 @@
     },
     "wypelnienie_wazone": 0.828
   },
-  "czas_s": 65.1
+  "czas_s": 64.3
 }
