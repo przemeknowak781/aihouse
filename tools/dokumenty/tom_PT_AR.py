@@ -11,6 +11,7 @@ Wynik:
   obliczenia (U — PN-EN ISO 6946, ψ/f_Rsi — PN-EN ISO 10211 i 13788, kondensacja — PN-EN ISO 13788, g — WT zał. 2),
   zestawienia (przegrody, stolarka — W-317, wykończenia), zasada „4 linii” i odwodnienie, część rysunkowa
   (§ 24 pkt 1–2: rzuty, przekroje, elewacje AR + detale PT-AR-D);
+* ``projekt/10_PT_architektura/rysunki/`` — arkusze PT-AR-01… (stadium PT, układ z ``model/arkusze.yaml``);
 * ``projekt/09_opis_i_zalaczniki/PT_AR/`` — źródło Markdown części opisowej i raport walidatora (txt/json).
 
 ŹRÓDŁA LICZB (odczyt przy każdym uruchomieniu — brak wartości wpisanych na sztywno):
@@ -45,7 +46,7 @@ KAT_PT_RYS = REPO / "projekt/10_PT_architektura/rysunki"     # arkusze PT-AR-01�
 KAT_AR = [KAT_PT_RYS, REPO / "projekt/03_PAB/rysunki", REPO / "projekt/01_koncepcja/widoki"]   # pierwszy istniejący
 KAT_ZRODLA = REPO / "projekt/09_opis_i_zalaczniki/PT_AR"
 KAT_WYDANIE = REPO / "projekt/wydanie"
-PT_TOMY = 4                                  # PT-1 AR, PT-2 BO, PT-3 IS, PT-4 IE (rejestr C.2)
+PT_TOMY = 4                                  # PT-1 AR, PT-2 BO, PT-3 IS, PT-4 IE+BT (plik PT_4_WB; rejestr C.2)
 ROLE_WEWN = ("sciana_wewn", "strop_wewn")
 
 
@@ -340,7 +341,7 @@ def rozdz_zakres(o: Opis, D: dict, kat_ar: Path | None):
 
     **Pozostałe punkty § 23 RPB — gdzie opracowano:** pkt 1–2 (konstrukcja, posadowienie) — PT-2 BO; pkt 3
     (dokumentacja geologiczno-inżynierska) — nie dotyczy (warunki proste, rejestr C.2); pkt 5 i 6 — nie dotyczy
-    (obiekt mieszkalny, niebędący obiektem liniowym); pkt 7–9 i 11 — PT-3 IS i PT-4 IE (instalacje, charakterystyka
+    (obiekt mieszkalny, niebędący obiektem liniowym); pkt 7–9 i 11 — PT-3 IS i PT-4 IE+BT (instalacje, charakterystyka
     energetyczna); pkt 10 — w każdym tomie stosownie do zakresu (tu: rozdział „Dane dotyczące warunków ochrony przeciwpożarowej”);
     § 23 pkt 12 (dane dotyczące warunków ochrony ludności, dodany Dz.U. 2026 poz. 597 § 1 pkt 6) — nie dotyczy:
     PZT i PAB nie przewidują budowli ochronnej ani miejsca doraźnego schronienia (PAB § 20 ust. 1 pkt 14 — nie dotyczy).
@@ -911,7 +912,7 @@ def rozdz_odwodnienie(o: Opis, D: dict):
     o.tabela(rows, tytul="Odwodnienie dachów i pola PV", klasa="zwarta", formaty={"Spadek [%]": 1},
              wyrownanie={"Wpusty": "l", "Rury spustowe": "l"}, szerokosci=["10mm", "16mm", "13mm", None, None, "20mm"],
              uwagi=["PV — liczba modułów fotowoltaicznych na dachu (jedyne źródło rozmieszczenia: pola PV modelu; "
-                    "instalacja — PT-4 IE, obciążenie dachu — PT-2 BO)."],
+                    "instalacja — PT-4 IE+BT, obciążenie dachu — PT-2 BO)."],
              zrodlo="model/budynek.yaml — dachy; energia.pv.pola")
     if att:
         o.tabela(att, tytul="Attyki — rzędne korony i wysokość ponad dach (zakres wynikający ze spadków)",
@@ -958,14 +959,19 @@ def rozdz_ppoz(o: Opis, D: dict):
     * okładziny elewacyjne i lamele mocowane mechanicznie do konstrukcji (W-216);
     * obudowy szachtów instalacyjnych: {'; '.join(ei) or 'nie występują'};
     * przejścia instalacji przez przegrody zewnętrzne poniżej terenu — gazoszczelne (W-214), uszczelnienia
-      systemowe wg PT-3 IS i PT-4 IE;
+      systemowe wg PT-3 IS i PT-4 IE+BT;
     * klasy odporności ogniowej podaje się na rysunkach wyłącznie dla elementów, dla których są wymagane (W-219).
     """, podstawa="§ 23 pkt 10 RPB", nowa_strona=True)
 
 
 # ============================================================================================ składanie
 def buduj(D: dict, arkusze: list, kat_ar: Path | None, data: str) -> tuple[Dokument, Opis]:
+    import dataclasses
     d = dane_obiektu()
+    # zakres opracowania w tomie PT — wyłącznie zakres tego tomu (RPB § 7 ust. 2 pkt 3; weryfikacja PT, D-4)
+    d["projektanci"] = [dataclasses.replace(p, zakres="projekt techniczny — architektura: tom PT-1 AR (część opisowa, "
+                                            "obliczenia cieplno-wilgotnościowe, zestawienia, rysunki i detale PT-AR)")
+                        if p.dotyczy("PT-AR") else p for p in d["projektanci"]]
     dok = Dokument("Projekt techniczny", "PT-AR", d, kod="PT-1 AR", branza="architektura", data=data,
                    tom=(1, PT_TOMY), podtytul="Tom PT-1 — architektura (AR)")
     dok.oswiadczenie_projektanta()           # PB art. 34 ust. 3d pkt 3 w brzmieniu art. 41 ust. 4a pkt 2 (PT)
@@ -983,12 +989,14 @@ def buduj(D: dict, arkusze: list, kat_ar: Path | None, data: str) -> tuple[Dokum
     rozdz_4linie(o, D)
     rozdz_odwodnienie(o, D)
     rozdz_ppoz(o, D)
-    zr = kat_ar.relative_to(REPO) if kat_ar else "—"
+    pt = kat_ar == KAT_PT_RYS
     o.rozdzial("Wykaz rysunków — część rysunkowa", f"""
     Część rysunkowa (§ 24 pkt 1–2 RPB) obejmuje rzuty wszystkich kondygnacji z rzutem dachu, przekroje i elewacje
-    w skali 1:50 (arkusze AR z katalogu `{zr}` — rysunki PAB dołączone jako podstawa rozwiązań PT, generowane
-    z tego samego modelu co część opisowa) oraz detale cieplne i szczelności PT-AR-D w skalach 1:5 i 1:10. Wykaz rysunków z numerami,
-    skalami i formatami — karta części rysunkowej (generowana z tabliczek arkuszy).
+    w skali 1:50 ({"arkusze PT-AR w stadium projektu technicznego, wykonane z tego samego stanu modelu co rysunki PAB "
+                   "w tomie I i uzupełnione odesłaniami do detali i zestawień tego tomu" if pt else
+                   "arkusze PAB z tomu I — brak arkuszy PT-AR [DO UZUPEŁNIENIA: arkusze PT-AR]"}) oraz detale cieplne
+    i szczelności PT-AR-D w skalach 1:5 i 1:10. Wykaz rysunków z numerami, skalami i formatami — karta części
+    rysunkowej (generowana z tabliczek arkuszy).
     """, podstawa="§ 24 RPB", nowa_strona=True)
     rys = [{"Nr rysunku": a.nr, "Tytuł": a.tytul, "Skala": a.skala or "—", "Format": a.format or "—"}
            for a in arkusze if not a.nr.startswith("PT-AR-D")]
@@ -1008,6 +1016,7 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--wyjscie", default=str(KAT_WYDANIE))
     ap.add_argument("--bez-arkuszy", action="store_true", help="bez dołączania arkuszy (szybki podgląd opisu)")
+    ap.add_argument("--rysunki-od-nowa", action="store_true", help="wymuś ponowną generację arkuszy PT-AR")
     a = ap.parse_args(argv)
     t0 = time.time()
     out = Path(a.wyjscie)
@@ -1015,6 +1024,9 @@ def main(argv=None) -> int:
     KAT_ZRODLA.mkdir(parents=True, exist_ok=True)
     D = wczytaj_dane()
     data = dane_obiektu()["data"]
+    print(f"  {D['stan']['tekst']}")
+    if not a.bez_arkuszy:
+        print("  " + generuj_arkusze_pt(D["stan"], wymus=a.rysunki_od_nowa))
     arkusze, uw_ark, kat_ar = arkusze_branzy()
     for u in uw_ark:
         print("  ! arkusze:", u)

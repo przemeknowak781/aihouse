@@ -16,7 +16,7 @@
 | SWG | Ściana dom–garaż, silikat 18 + EPS 12 od garażu | ściana do pom. nieogrzewanego | 4,41 | 0,020 | 0,25 | 0,30 | ✔ spełnia | 0,25 | ✔ spełnia |
 | SZG | Ściana zewnętrzna garażu nieogrzewanego, silikat 24 | ściana zewnętrzna | 0,51 | 0,000 | 2,0 | — | — | — | — |
 | SD-G | Dach garażu (nieogrzewany) | stropodach/dach | 0,23 | 0,000 | 4,3 | — | — | — | — |
-| ST3\|P1\|zewn | podłoga POD-1 + płyta ZB_C30 20 cm + sufit SUF-Z | strop nad powietrzem zewn. | 11,76 | 0,005 | 0,090 | 0,15 | ✔ spełnia | — | — |
+| ST3\|P1\|zewn | podłoga POD-1 + płyta ZB_C30 20 cm + sufit SUF-Z | strop nad powietrzem zewn. | 11,76 | 0,017 | 0,10 | 0,15 | ✔ spełnia | — | — |
 | SD-D1 | Stropodach PIR 24 cm, EPDM | stropodach/dach | 11,18 | 0,010 | 0,082 | 0,15 | ✔ spełnia | 0,12 | ✔ spełnia |
 | ST2\|P1\|dol | podłoga POD-1 + płyta ZB_C30 20 cm + sufit SUF-G | strop nad pom. nieogrzewanym | 10,28 | 0,004 | 0,10 | 0,25 | ✔ spełnia | — | — |
 
@@ -156,9 +156,9 @@ Kierunek strumienia: dol; R_si = 0,17 m²K/W, R_se = 0,04 m²K/W.
 
 R_T = 0,17 + Σ R_j + 0,04 = 11,760 m²K/W; U₀ = 1/R_T = 0,0850 W/(m²K).
 
-Poprawki (zał. F): ΔU_g = 0,0047, ΔU_f = 0,0000, ΔU_r = 0,0000 W/(m²K); U_c = 0,0897 W/(m²K).
+Poprawki (zał. F): ΔU_g = 0,0047, ΔU_f = 0,0120, ΔU_r = 0,0000 W/(m²K); U_c = 0,1017 W/(m²K).
 
-**U = 0,090 W/(m²K)**; wymaganie WT: U ≤ 0,15 (✔ spełnia); cel: — (—). Źródło wymagania: WT zał. 2 pkt 1.1 lp. 5 („nad przejazdami”) — spód wspornika P2 (W-243) [INT].
+**U = 0,10 W/(m²K)**; wymaganie WT: U ≤ 0,15 (✔ spełnia); cel: — (—). Źródło wymagania: WT zał. 2 pkt 1.1 lp. 5 („nad przejazdami”) — spód wspornika P2 (W-243) [INT].
 
 ### SD-D1 — Stropodach PIR 24 cm, EPDM (stropodach/dach)
 
@@ -205,7 +205,7 @@ Poprawki (zał. F): ΔU_g = 0,0039, ΔU_f = 0,0000, ΔU_r = 0,0000 W/(m²K); U_c
 * Grunt: piasek — λ = 2,0 W/(m·K), ρc = 2,0 MJ/(m³·K) (PN-EN ISO 13370 tab. kategorii gruntu; opinia geotechniczna przykładowa: piaski średnie) [NZW]
 * f_g1 = 1,45, G_w = 1,00 (ZWG ≈ 3,8 m p.p.t. > 1 m), θ_m,e = 7,9 °C [NZW] — źródło: PN-EN 12831:2006 p. 7.1.3 i NA; rejestr W-150
 * Stolarka: U_g, U_f, Ψ_g, szerokości ram, g_n — dane przykładowe typowych wyrobów (dane/wyroby_przykladowe.yaml); do zastąpienia deklaracjami wybranego producenta [DANE PRZYKŁADOWE – FIKCYJNE]
-* Łączniki ETICS: n_f = 6,0 szt./m², χ_p = 0,002 W/K (ΔU_f = n_f·χ_p, PN-EN ISO 6946:2017 zał. F.3) [DANE PRZYKŁADOWE – FIKCYJNE] — źródło: dane przykładowe z ETA typowego łącznika ETICS z trzpieniem stalowym, χ_p = 0,002 W/K (lub równoważny)
+* Łączniki izolacji mocowanej mechanicznie (ETICS, elewacja wentylowana, docieplenie spodu stropu): n_f = 6,0 szt./m², χ_p = 0,002 W/K (ΔU_f = n_f·χ_p, PN-EN ISO 6946:2017 zał. F.3) [DANE PRZYKŁADOWE – FIKCYJNE] — źródło: dane przykładowe z ETA typowego łącznika ETICS z trzpieniem stalowym, χ_p = 0,002 W/K (lub równoważny)
 * Nieszczelności w warstwie izolacji: poziom 1 (ΔU'' = 0,01 W/(m²·K)), chyba że wykazano poziom 0 [NZW] — źródło: PN-EN ISO 6946:2017 zał. F.2; rejestr W-250
 * Ψ węzłów bez wyników symulacji — wartości domyślne (fallback) PN-EN ISO 14683:2017 zał. C w systemie wymiarów wewnętrznych całkowitych (Ψ_oi); do zastąpienia wynikami ISO 10211 [NZW]
 * Zacienienie stałe (okapy — płyty wysunięte, lamele) — F_sh z danych godzinowych TMY Poznań i położenia Słońca; model izotropowy nieba, ρ_g = 0,2 [ZAŁ] — źródło: PN-EN ISO 52016-1 p. 6.5.13 (idea); lamela.sun

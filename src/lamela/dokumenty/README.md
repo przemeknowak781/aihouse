@@ -121,6 +121,7 @@ lub słownik; `None` — dobór po nazwie pliku. Pozycje (`listy_kontrolne.yaml`
 plik (nazwa, ≤ 150 MB, wektor, metadane, oprawa PT), strona tytułowa (§ 7 ust. 2 pkt 1–3), spis, numeracja,
 oświadczenie, punkty opisu (§ 14 pkt 1–8 PZT, § 20 ust. 1 pkt 1–14 PAB, § 23 PT), rysunki (w tym minimalna liczba
 rzutów/przekrojów/elewacji i skale ≤ 1:100 / 1:500), metryki arkuszy (`spec: tabliczki` — wiersz „Projektant” niepusty, „Sprawdzający” z osobą albo „nie dotyczy (art. 20 ust. 3 pkt 2 PB)”; W-305, W-320), § 23 pkt 12 w każdym tomie PT, ZL (informacja BIOZ pkt 1–6, zjazd, oświadczenie IS).
+Stan modelu (`spec: stan_modelu`, F-06 w PT_WSPOLNE): tom zawiera znacznik „stan modelu: SHA-256 xxxxxxxxxxxx (…)” z `stan_modelu()` (skrót plików danych `model/budynek.yaml`, `dzialka.yaml`, `instalacje.yaml`, `wyposazenie.yaml`); znacznik ≠ bieżący model → BRAK (tom nieaktualny, weryfikacja PT K-1), brak znacznika → OSTRZEŻENIE. Ten sam znacznik we wszystkich tomach PT i w tomie I wykazuje, że powstały z jednego stanu modelu.
 Wyszukuje po zakładkach, tekście strony tytułowej, tekście opisu i tytułach rysunków (wyrażenia regularne).
 
 Klucze pozycji poza `szukaj`: `uzupelnic_gdy` (+ `uzupelnic_opis`) — znaleziona treść zawiera znacznik zastępczy

@@ -8,7 +8,7 @@ Model: `model/test/dom_testowy.yaml` + `model/test/dzialka_testowa.yaml` — mod
 |:---|:---|:---|
 | A_f (pow. o regulowanej temperaturze) | 139,52 m² |  |
 | Kubatura netto strefy ogrzewanej | 376,7 m³ |  |
-| H_tr / H_ve | 141,8 / 13,8 W/K |  |
+| H_tr / H_ve | 141,9 / 13,8 W/K |  |
 | H_TB (mostki) | 67,8 W/K | Ψ: deklaracja (przykładowa), domyślna |
 | Obciążenie cieplne Φ_HL (θ_e = −18 °C) | 5,71 kW | 40,9 W/m² |
 | Wentylacja — strumień projektowy | 100 m³/h | ✔ spełnia |

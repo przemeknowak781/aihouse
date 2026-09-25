@@ -29,7 +29,7 @@ Miesiąc krytyczny: **II**, f_Rsi,max = **0,661**; wartość dopuszczona przez W
 | SZ1 | przegroda (sciana_zewn), U = 0,17 | 0,959 | 1 − U·0,25 (PN-EN ISO 13788 p. 4.3) | ✔ spełnia |
 | DZ-P0 | przegroda (dach), U = 0,10 | 0,974 | 1 − U·0,25 (PN-EN ISO 13788 p. 4.3) | ✔ spełnia |
 | SWG | przegroda (sciana_nieogrz), U = 0,25 | 0,938 | 1 − U·0,25 (PN-EN ISO 13788 p. 4.3) | ✔ spełnia |
-| ST3\|P1\|zewn | przegroda (strop_zewn), U = 0,090 | 0,978 | 1 − U·0,25 (PN-EN ISO 13788 p. 4.3) | ✔ spełnia |
+| ST3\|P1\|zewn | przegroda (strop_zewn), U = 0,10 | 0,975 | 1 − U·0,25 (PN-EN ISO 13788 p. 4.3) | ✔ spełnia |
 | SD-D1 | przegroda (dach), U = 0,082 | 0,979 | 1 − U·0,25 (PN-EN ISO 13788 p. 4.3) | ✔ spełnia |
 | ST2\|P1\|dol | przegroda (strop_nieogrz), U = 0,10 | 0,975 | 1 − U·0,25 (PN-EN ISO 13788 p. 4.3) | ✔ spełnia |
 | WZ-R1 | Attyka stropodachu D1 (attyka) | — | do wyznaczenia — symulacja PN-EN ISO 10211 (mostki2d) | — |
@@ -107,7 +107,7 @@ Wymagane s_d paroizolacji (po ciepłej stronie izolacji): brak kondensacji — 0
 Wymagane s_d paroizolacji (po ciepłej stronie izolacji): brak kondensacji — 0 (nie wymaga) m; kondensacja dopuszczalna (wysycha, M_a ≤ 500 g/m²) — 0 (nie wymaga) m; istniejąca warstwa: brak.
 
 ![Glaser SWG](glaser_SWG.png)
-* strona zimna — przestrzeń nieogrzewana 0.04: θ_u,n = 20 − b_u·(20 − θ_e,n), b_u = 0,87; ciśnienie pary jak na zewnątrz
+* strona zimna — przestrzeń nieogrzewana (Garaż): θ_u,n = 20 − b_u·(20 − θ_e,n), b_u = 0,87; ciśnienie pary jak na zewnątrz
 
 ### ST3|P1|zewn — podłoga POD-1 + płyta ZB_C30 20 cm + sufit SUF-Z
 
@@ -153,7 +153,7 @@ Wymagane s_d paroizolacji (po ciepłej stronie izolacji): brak kondensacji — 0
 
 Płaszczyzny kondensacji (numer granicy za warstwą): 4 — między „PIR” a „EPDM”
 
-**Ocena:** kondensacja okresowa, M_a,max = 0 g/m² — wysycha w okresie letnim (dopuszczalna wg WT zał. 2 pkt 2.2.5). Warunki wewnętrzne: klasa wilgotności 3 (PN-EN ISO 13788 zał. A: budynki o nieznanym zagęszczeniu), p_i = p_e + 1,10·Δp.
+**Ocena:** kondensacja okresowa, M_a,max = 0,070 g/m² — wysycha w okresie letnim (dopuszczalna wg WT zał. 2 pkt 2.2.5). Warunki wewnętrzne: klasa wilgotności 3 (PN-EN ISO 13788 zał. A: budynki o nieznanym zagęszczeniu), p_i = p_e + 1,10·Δp.
 
 Wymagane s_d paroizolacji (po ciepłej stronie izolacji): brak kondensacji — > 1500 (nieosiągalne) m; kondensacja dopuszczalna (wysycha, M_a ≤ 500 g/m²) — 43,0 m; istniejąca warstwa: PAROIZ, s_d = 1 500,0 m (✔ spełnia).
 
@@ -175,7 +175,7 @@ Wymagane s_d paroizolacji (po ciepłej stronie izolacji): brak kondensacji — >
 Wymagane s_d paroizolacji (po ciepłej stronie izolacji): brak kondensacji — 0 (nie wymaga) m; kondensacja dopuszczalna (wysycha, M_a ≤ 500 g/m²) — 0 (nie wymaga) m; istniejąca warstwa: brak.
 
 ![Glaser ST2|P1|dol](glaser_ST2_P1_dol.png)
-* strona zimna — przestrzeń nieogrzewana 0.04: θ_u,n = 20 − b_u·(20 − θ_e,n), b_u = 0,87; ciśnienie pary jak na zewnątrz
+* strona zimna — przestrzeń nieogrzewana (Garaż): θ_u,n = 20 − b_u·(20 − θ_e,n), b_u = 0,87; ciśnienie pary jak na zewnątrz
 
 **Założenia i dane wejściowe:**
 

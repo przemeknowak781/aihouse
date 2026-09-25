@@ -1,0 +1,69 @@
+# WYGENEROWANO (tools/dokumenty/tom_PT_AR.py) z model/arkusze.yaml — nie edytować ręcznie
+wspolne:
+  pracownia: PRACOWNIA PROJEKTOWA — nazwa do uzupełnienia
+  pracownia_adres: adres pracowni do uzupełnienia
+  inwestor: (do uzupełnienia)
+  obiekt: Budynek mieszkalny jednorodzinny wolnostojący „Dom LAMELA”
+  lokalizacja: null
+  kategoria: I
+  stadium: PT
+  branza: ARCHITEKTURA (AR)
+  prefiks_nr: PT-AR
+  data: null
+  rewizja: '0'
+  skala: 50
+  format: auto
+  numeracja_pomieszczen: iso
+  wysokosc_ciecia: 1.1
+  glebokosc_widoku: 1.5
+  wymiary_wewnetrzne: true
+  kolorystyka: true
+  uwagi:
+  - 'Rysunek projektu technicznego (RPB § 24 pkt 1) wykonany z tego samego stanu modelu co rysunki PB-AR-xx projektu architektoniczno-budowlanego
+    (tom I); stan modelu: SHA-256 42ac7a811873 (budynek, dzialka, instalacje, wyposazenie).'
+  - Układ warstw przegród, stolarka, wykończenia, odwodnienie — część opisowa PT-1 AR; węzły — detale PT-AR-D.
+przekroje:
+- id: A
+  x: 6.55
+  patrz: E
+- id: B
+  y: 3.3
+  patrz: N
+arkusze:
+- nr: PT-AR-01
+  tytul: RZUT PARTERU
+  typ: rzut
+  kond: P0
+- nr: PT-AR-02
+  tytul: RZUT I PIĘTRA
+  typ: rzut
+  kond: P1
+- nr: PT-AR-03
+  tytul: RZUT II PIĘTRA I RZUT DACHU
+  widoki:
+  - typ: rzut
+    kond: P2
+  - typ: dach
+    opcje:
+      opis_dachu_szer: 90
+- nr: PT-AR-04
+  tytul: PRZEKROJE A-A I B-B
+  max_wysokosc: 594
+  widoki:
+  - typ: przekroj
+    przekroj: A
+  - typ: przekroj
+    przekroj: B
+- nr: PT-AR-05
+  tytul: ELEWACJE
+  widoki:
+  - typ: elewacja
+    strona: S
+    tytul_widoku: ELEWACJA POŁUDNIOWA (OGRODOWA)
+  - typ: elewacja
+    strona: E
+  - typ: elewacja
+    strona: N
+    tytul_widoku: ELEWACJA PÓŁNOCNA (OD ULICY)
+  - typ: elewacja
+    strona: W

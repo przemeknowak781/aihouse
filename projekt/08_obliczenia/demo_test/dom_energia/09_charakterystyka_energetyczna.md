@@ -14,11 +14,11 @@
 | okna i drzwi balkonowe | 16,00 |
 | drzwi zewnętrzne | 1,89 |
 | dachy/stropodachy | 9,03 |
-| stropy nad powietrzem zewn. | 0,55 |
+| stropy nad powietrzem zewn. | 0,63 |
 | grunt (f_g1·f_g2·G_w·A·U) | 4,64 |
 | przestrzenie nieogrzewane (b_u) | 8,22 |
 | mostki cieplne H_TB | 60,21 |
-| **H_tr razem** | **126,98** |
+| **H_tr razem** | **127,06** |
 | H_ve = 0,34·[(1 − η_oc)·V_su + V_x] (V_su = 150 m³/h, η_oc = 0,85, V_x = 29,9 m³/h) | 17,46 |
 
 A_f = 158,69 m²; V = 426,9 m³; θ_int,H = 20,64 °C; C_m = 41,3 MJ/K; τ = 79,3 h; a_H = 6,29.
@@ -28,15 +28,15 @@ A_f = 158,69 m²; V = 426,9 m³; θ_int,H = 20,64 °C; C_m = 41,3 MJ/K; τ = 79,
 | Wielkość | I | II | III | IV | V | VI | VII | VIII | IX | X | XI | XII | Rok |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
 | θ_e [°C] | 0,2 | −1,8 | 2,7 | 8,3 | 13,0 | 16,8 | 18,2 | 18,4 | 13,5 | 7,0 | 2,2 | −0,1 |  |
-| Q_tr | 1 935 | 1 911 | 1 692 | 1 132 | 726 | 348 | 226 | 213 | 651 | 1 288 | 1 689 | 1 963 | 13 773 |
+| Q_tr | 1 936 | 1 913 | 1 693 | 1 132 | 726 | 348 | 226 | 214 | 651 | 1 288 | 1 690 | 1 964 | 13 781 |
 | Q_ve | 266 | 263 | 233 | 156 | 100 | 48 | 31 | 29 | 90 | 177 | 232 | 270 | 1 894 |
 | Q_int | 803 | 725 | 803 | 777 | 803 | 777 | 803 | 803 | 777 | 803 | 777 | 803 | 9 453 |
 | Q_sol | 264 | 295 | 507 | 618 | 708 | 753 | 738 | 645 | 514 | 348 | 250 | 150 | 5 789 |
 | γ | 0,48 | 0,47 | 0,68 | 1,08 | 1,83 | 3,86 | 6,00 | 5,96 | 1,74 | 0,79 | 0,53 | 0,43 |  |
 | η_H,gn | 0,995 | 0,995 | 0,970 | 0,826 | 0,541 | 0,259 | 0,167 | 0,168 | 0,566 | 0,943 | 0,991 | 0,997 |  |
-| Q_H,nd | 1 139 | 1 159 | 655 | 135 | 8 | 0 | 0 | 0 | 10 | 379 | 903 | 1 283 | 5 672 |
+| Q_H,nd | 1 140 | 1 160 | 656 | 136 | 9 | 0 | 0 | 0 | 10 | 380 | 904 | 1 284 | 5 679 |
 | Q_W,nd | 325 | 293 | 325 | 314 | 325 | 314 | 325 | 325 | 314 | 325 | 314 | 325 | 3 822 |
-| Q_K,H | 296 | 301 | 170 | 35 | 2 | 0 | 0 | 0 | 3 | 99 | 235 | 334 | 1 475 |
+| Q_K,H | 297 | 302 | 171 | 35 | 2 | 0 | 0 | 0 | 3 | 99 | 235 | 334 | 1 477 |
 | Q_K,W | 162 | 146 | 162 | 157 | 162 | 157 | 162 | 162 | 157 | 162 | 157 | 162 | 1 908 |
 | E_pom | 62 | 56 | 62 | 60 | 44 | 42 | 44 | 44 | 42 | 62 | 60 | 62 | 641 |
 | E_PV | 126 | 154 | 303 | 396 | 516 | 517 | 492 | 421 | 311 | 184 | 121 | 73 | 3 614 |
@@ -50,7 +50,7 @@ A_f = 158,69 m²; V = 426,9 m³; θ_int,H = 20,64 °C; C_m = 41,3 MJ/K; τ = 79,
 | System | η_g | η_s | η_d | η_e | η_tot | Źródło |
 |:---|---:|---:|---:|---:|---:|:---|
 | ogrzewanie | 4,500 | 1,00 | 0,96 | 0,89 | 3,845 | SCOP = 4,50 (PN-EN 14825, dane przykładowe z karty katalogowej typowej pompy ciepła powietrze–woda R290 klasy A+++ (35 °C) 7–8 kW (lub równoważna)); η_H,e = 0,89 (tab. 3 lp. 6b), η_H,d = 0,96 (tab. 6 lp. 3a), η_H,s = 1,00 (tab. 8 lp. 3) |
-| c.w.u. | 3,200 | 0,888 | 0,80 | — | 2,273 | COP_cwu = 3,20 (PN-EN 16147); η_W,s = 0,888 (strata zasobnika 55 W); η_W,d = 0,80 (tab. 12 lp. 6.1a — cyrkulacja z ograniczeniem czasu pracy) |
+| c.w.u. | 3,200 | 0,888 | 0,80 | — | 2,273 | COP_cwu = 3,20 (PN-EN 16147); η_W,s = 0,888 (zasobnik 250 dm³, strata postojowa 55 W); η_W,d = 0,80 (tab. 12 lp. 6.1a — cyrkulacja z ograniczeniem czasu pracy) |
 
 | Urządzenie pomocnicze | P [W] | t [h/rok] | E [kWh/rok] | System |
 |:---|---:|---:|---:|:---|
@@ -63,10 +63,10 @@ A_f = 158,69 m²; V = 426,9 m³; θ_int,H = 20,64 °C; C_m = 41,3 MJ/K; τ = 79,
 
 | Wskaźnik | Wartość | Jedn. |
 |:---|---:|:---|
-| Q_H,nd (ogrzewanie i wentylacja) | 5 672 | kWh/rok |
+| Q_H,nd (ogrzewanie i wentylacja) | 5 679 | kWh/rok |
 | Q_W,nd (c.w.u., wzór (61)) | 3 822 | kWh/rok |
-| EU = (Q_H,nd + Q_W,nd)/A_f | 59,8 | kWh/(m²·rok) |
-| Q_K = Q_K,H + Q_K,W + E_el,pom | 4 025 | kWh/rok |
+| EU = (Q_H,nd + Q_W,nd)/A_f | 59,9 | kWh/(m²·rok) |
+| Q_K = Q_K,H + Q_K,W + E_el,pom | 4 026 | kWh/rok |
 | EK = Q_K/A_f | 25,4 | kWh/(m²·rok) |
 | Produkcja PV / zużyta przez systemy (w = 0) | 3 614 / 1 505 | kWh/rok |
 | EP_H (ogrzewanie + pomocnicze H) | 23,9 | kWh/(m²·rok) |
@@ -76,7 +76,7 @@ A_f = 158,69 m²; V = 426,9 m³; θ_int,H = 20,64 °C; C_m = 41,3 MJ/K; τ = 79,
 | Wynik | ✔ spełnia |  |
 | E_CO2 | 0,0088 | t CO2/(m²·rok) |
 | U_oze (wzór (100)) [INT] | 76,9 | % |
-| Koszt energii (eksploatacja) [ZAŁ] | 3 186 | zł/rok |
+| Koszt energii (eksploatacja) [ZAŁ] | 3 188 | zł/rok |
 
 Autokonsumpcja PV (symulacja godzinowa TMY): produkcja 3 614 kWh/rok, zużyta przez systemy techniczne 1 505 kWh/rok (a = 0,42), przez urządzenia domowe 682 kWh/rok; reszta oddana do sieci (nie obniża EP).
 
@@ -98,7 +98,7 @@ Autokonsumpcja PV (symulacja godzinowa TMY): produkcja 3 614 kWh/rok, zużyta 
 | Wariant | EP [kWh/(m²·rok)] | EP ≤ EP_max |
 |:---|:---|:---|
 | A (n50 = 4 h⁻¹ — brak próby szczelności) | 50,2 | ✔ spełnia |
-| A (Ψ „dobra praktyka” zamiast domyślnych PN-EN ISO 14683: H_TB = 15,9 zamiast 60,2 W/K) | 26,3 | ✔ spełnia |
+| A (Ψ „dobra praktyka” zamiast domyślnych PN-EN ISO 14683: H_TB = 15,9 zamiast 60,2 W/K) | 26,4 | ✔ spełnia |
 
 ---
 *Wygenerowano: 2026-09-25 — biblioteka `lamela.obliczenia` (PRZYKŁAD – NIE DO ZŁOŻENIA; dane wyrobów: [DANE PRZYKŁADOWE – FIKCYJNE]).*

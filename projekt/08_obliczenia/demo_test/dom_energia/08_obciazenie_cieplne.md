@@ -11,10 +11,10 @@
 | 0.01 | Pokój dzienny | 20 | 45,3 | 1 497 | 7,3 | 59 | 0 | 160 | 0 | 1 657 | 36,6 |
 | 0.02 | Łazienka | 24 | 10,8 | 584 | 1,2 | 0 | 50 | 83 | 0 | 667 | 61,9 |
 | 0.03 | Kuchnia | 20 | 18,4 | 490 | 2,0 | 0 | 50 | 25 | 0 | 515 | 28,0 |
-| 1.01 | Sypialnia | 20 | 51,2 | 1 302 | 5,5 | 67 | 0 | 146 | 0 | 1 448 | 28,3 |
-| 1.02 | Łazienka | 24 | 14,6 | 693 | 1,6 | 0 | 50 | 89 | 0 | 782 | 53,6 |
+| 1.01 | Sypialnia | 20 | 51,2 | 1 303 | 5,5 | 67 | 0 | 146 | 0 | 1 450 | 28,3 |
+| 1.02 | Łazienka | 24 | 14,6 | 694 | 1,6 | 0 | 50 | 89 | 0 | 783 | 53,7 |
 | 1.03 | Pokój | 20 | 18,4 | 504 | 2,0 | 24 | 0 | 53 | 0 | 557 | 30,2 |
-|  | **Budynek** |  | 158,7 | 5 070 |  |  |  | 430 | 0 | **5 500** | 34,7 |
+|  | **Budynek** |  | 158,7 | 5 073 |  |  |  | 430 | 0 | **5 503** | 34,7 |
 
 θ_e = −18 °C; nawiew po odzysku θ_su = 16,6 °C (η = 0,85); n50 = 1,0 h⁻¹. Budynek: infiltracja z wsp. jednoczesności 0,5.
 Przestrzeń nieogrzewana 0.04: θ_u = −13,0 °C (b_u = 0,87).
@@ -76,7 +76,7 @@ Charakterystyka mocy PC — interpolacja liniowa punktów A−15/A−7/A2 (W35) 
 | F019 | grunt POD-0 (f_g1·f_g2·G_w = 0,462) | 18,41 | 0,130 | 38,0 | 42 |
 | TB | mostki (H_TB rozdzielone proporcjonalnie do pola obudowy) | 45,71 | — | 38,0 | 253 |
 
-**1.01 Sypialnia** (θ = 20 °C): Φ_T = 1 302 W
+**1.01 Sypialnia** (θ = 20 °C): Φ_T = 1 303 W
 
 | Element | Opis | A [m²] | U [W/(m²K)] | ΔT [K] | Φ [W] |
 |:---|:---|---:|---:|---:|---:|
@@ -85,11 +85,11 @@ Charakterystyka mocy PC — interpolacja liniowa punktów A−15/A−7/A2 (W35) 
 | W027 | sciana_zewn SZ1 | 6,51 | 0,166 | 38,0 | 41 |
 | W029 | sciana_zewn SZ1 | 15,71 | 0,166 | 38,0 | 99 |
 | F030 | strop_wewn → 0.02 (24 °C) | 8,04 | 0,268 | −4,0 | −9 |
-| F031 | strop_zewn ST3 | 3,42 | 0,090 | 38,0 | 12 |
+| F031 | strop_zewn ST3 | 3,42 | 0,102 | 38,0 | 13 |
 | R032 | dach SD-D1 | 51,16 | 0,082 | 38,0 | 160 |
 | TB | mostki (H_TB rozdzielone proporcjonalnie do pola obudowy) | 109,74 | — | 38,0 | 608 |
 
-**1.02 Łazienka** (θ = 24 °C): Φ_T = 693 W
+**1.02 Łazienka** (θ = 24 °C): Φ_T = 694 W
 
 | Element | Opis | A [m²] | U [W/(m²K)] | ΔT [K] | Φ [W] |
 |:---|:---|---:|---:|---:|---:|
@@ -99,7 +99,7 @@ Charakterystyka mocy PC — interpolacja liniowa punktów A−15/A−7/A2 (W35) 
 | O1-02 | okno OP2 | 0,48 | 0,889 | 42,0 | 18 |
 | W036 | sciana_zewn SZ1 | 9,83 | 0,166 | 42,0 | 68 |
 | F037 | strop_nieogrz → 0.04 (θ_u = −13,0 °C) | 7,47 | 0,101 | 37,0 | 28 |
-| F038 | strop_zewn ST3 | 2,74 | 0,090 | 42,0 | 10 |
+| F038 | strop_zewn ST3 | 2,74 | 0,102 | 42,0 | 12 |
 | R039 | dach SD-D1 | 14,59 | 0,082 | 42,0 | 50 |
 | TB | mostki (H_TB rozdzielone proporcjonalnie do pola obudowy) | 45,43 | — | 42,0 | 278 |
 
