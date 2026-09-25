@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<title>LAMELA — renderer</title>
+<link rel="icon" href="data:,">
+<style>
+  html, body { margin: 0; background: #202020; }
+  canvas { display: block; width: 640px !important; height: auto !important; }
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "./node_modules/three/build/three.module.js",
+    "three/addons/": "./node_modules/three/examples/jsm/",
+    "three/examples/jsm/": "./node_modules/three/examples/jsm/",
+    "postprocessing": "./node_modules/postprocessing/build/index.js",
+    "n8ao": "./node_modules/n8ao/dist/N8AO.js"
+  }
+}
+</script>
+</head>
+<body>
+<script type="module" src="./render.js"></script>
+</body>
+</html>

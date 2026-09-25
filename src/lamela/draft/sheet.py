@@ -312,9 +312,12 @@ def _cell(sh, x, y, w, h, label, value="", vh=2.5, style="normal", lines_max=1, 
     else:
         hh = vh
         ls = wrap(value, avail, hh, style)
-        while len(ls) > lines_max and hh > 1.8:
-            hh -= 0.1
+        while hh > 1.8:
             ls = wrap(value, avail, hh, style)
+            block = hh * 1.45 * (len(ls[:lines_max]) - 1) + hh
+            if len(ls) <= lines_max and block <= (top - y) - (0.24 * hh + 0.5):
+                break
+            hh -= 0.1
         gap = hh * 1.45
         block = gap * (len(ls[:lines_max]) - 1) + hh
         bot = y + max(0.9, 0.24 * hh + 0.5)
@@ -329,7 +332,7 @@ def draw_title_block(sh: Sheet, tb: TitleBlock):
     W = TB_WIDTH
     x0 = fx1 - W
     # wysokości wierszy (od góry)
-    rows = {"prac": 12.0, "inw": 7.0, "obj": 9.0, "lok": 9.0, "hdr": 4.5, "os": 7.0, "tyt": 12.0, "dol": 9.0}
+    rows = {"prac": 12.0, "inw": 7.0, "obj": 10.5, "lok": 9.0, "hdr": 4.5, "os": 7.0, "tyt": 12.0, "dol": 9.0}
     n_os = len(tb.osoby)
     Htot = rows["prac"] + rows["inw"] + rows["obj"] + rows["lok"] + rows["hdr"] + n_os * rows["os"] + rows["tyt"] + rows["dol"]
     y1 = fy0 + Htot

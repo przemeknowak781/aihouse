@@ -326,32 +326,31 @@ def sliding_door(c, p_a, p_b, wall_t: float, side: float = 1.0, kind: str = "HS"
         if kind == "HS":
             O = n * frame_pos
             fd = frame_depth
-            # rama
-            c.polygon([A + O + n * fd / 2, B + O + n * fd / 2, B + O - n * fd / 2, A + O - n * fd / 2], pen="cienka")
-            sash_t = 0.065
-            pw = (W - 0.08) / panels + 0.05
-            tracks = [-fd / 4, fd / 4]
+            # ościeżnica (rama) na całej szerokości otworu
+            c.polygon([A + O + n * fd / 2, B + O + n * fd / 2, B + O - n * fd / 2, A + O - n * fd / 2], pen="srednia")
+            sash_t = 0.06
+            fw = 0.045
+            inner = W - 2 * fw
+            pw = inner / panels + 0.04
+            # prowadnice: zewnętrzna (skrzydło stałe) i wewnętrzna (skrzydło przesuwne)
+            tr_out, tr_in = -fd / 4, fd / 4
             for i in range(panels):
-                s0 = 0.04 + i * (W - 0.08 - pw) / max(1, panels - 1)
-                tr = tracks[i % 2] if fixed == "a" else tracks[(i + 1) % 2]
+                s0 = fw + i * (inner - pw) / max(1, panels - 1)
+                is_fixed = (i == 0 and fixed == "a") or (i == panels - 1 and fixed == "b")
+                tr = tr_out if is_fixed else tr_in
                 P0 = A + d * s0 + O + n * tr
                 q = [P0 - n * sash_t / 2, P0 + d * pw - n * sash_t / 2, P0 + d * pw + n * sash_t / 2,
                      P0 + n * sash_t / 2]
-                c.polygon(q, pen="srednia")
-                c.line(P0 + d * 0.05, P0 + d * (pw - 0.05), pen="b_cienka")  # szyba
-                is_fixed = (i == 0 and fixed == "a") or (i == panels - 1 and fixed == "b")
+                c.polygon(q, pen="cienka")
+                c.line(P0 + d * 0.04, P0 + d * (pw - 0.04), pen="b_cienka")  # szyba
                 if arrow and not is_fixed:
-                    y = n * (tr + (0.09 if tr > 0 else -0.09) + math.copysign(2.0 * k, tr))
-                    a0 = P0 + d * pw * 0.25 + y
-                    a1 = P0 + d * pw * 0.75 + y
+                    y = O + n * (fd / 2 + 1.8 * k)
+                    a0 = A + d * (s0 + pw * 0.15) + y
+                    a1 = A + d * (s0 + pw * 0.85) + y
                     if fixed == "a":
                         a0, a1 = a1, a0
                     c.line(a0, a1, pen="cienka")
-                    arrowhead(c, a1, a1 - a0, 2.0, 12, True, layer)
-                if is_fixed:
-                    mid = P0 + d * pw / 2
-                    c.line(mid - d * 1.2 * k - n * 1.2 * k, mid + d * 1.2 * k + n * 1.2 * k, pen="b_cienka")
-                    c.line(mid - d * 1.2 * k + n * 1.2 * k, mid + d * 1.2 * k - n * 1.2 * k, pen="b_cienka")
+                    arrowhead(c, a1, a1 - a0, 2.2, 12, True, layer)
         else:
             off = (wall_t / 2 + 0.03) if kind == "naścienne" else 0.0
             leaf_t = 0.04
@@ -410,7 +409,8 @@ def window(c, p_a, p_b, s_int: float, s_ext: float, frame_in: float, frame_out: 
 def stairs(c, start, direction, width: float, n_steps: int, tread: float, riser: float | None = None,
            first_no: int = 1, cut_after: int | None = None, numbering: bool = True, arrow: bool = True,
            label: bool = True, layer: str = "A-SCHODY", side_label: float = 1.0, show_above: str = "dashed",
-           h: float = 2.0, total_steps: int | None = None, arrow_end_extra: float = 0.0):
+           h: float = 2.0, total_steps: int | None = None, arrow_end_extra: float = 0.0,
+           label_at: float | None = None):
     """Bieg schodów prostych na rzucie (PN-B-01025).
 
     start      — środek krawędzi pierwszego stopnia (początek biegu), direction — kierunek wejścia [° lub wektor],
@@ -459,12 +459,12 @@ def stairs(c, start, direction, width: float, n_steps: int, tread: float, riser:
         if numbering:
             last = n_steps if cut_s is None or show_above != "none" else cut_after
             for i in range(last):
-                P = S + d * (i + 0.5) * tread + n * width * 0.32
+                P = S + d * (i + 0.5) * tread + n * width * 0.33 * side_label
                 c.text(P, str(first_no + i), h * 0.8, readable_angle(math.degrees(math.atan2(d[1], d[0]))),
                        "center", "middle", color=None)
         if arrow:
             a0 = S + d * tread * 0.5
-            end_s = L - tread * 0.3 + arrow_end_extra
+            end_s = (L - tread * 0.3 if cut_s is None else cut_s + tread * 0.1) + arrow_end_extra
             a1 = S + d * end_s
             c.circle(a0, 0.9 * k, pen="cienka")
             c.line(a0 + d * 0.9 * k, a1 - d * 2.0 * k, pen="cienka")
@@ -474,10 +474,12 @@ def stairs(c, start, direction, width: float, n_steps: int, tread: float, riser:
                 r = dir_deg(ang)
                 up = perp(r)
                 nsteps = total_steps or n_steps
-                M = S + d * L * 0.5 - n * width * 0.12 * side_label
+                s_lab = (end_s + tread * 0.5) / 2.0 if label_at is None else label_at
+                M = S + d * s_lab
                 top = [(f"{nsteps}×", 1.0, 0.0)] + dim_runs(riser, "cm")
-                c.text(M + up * 0.8 * k, None, h, ang, "center", "baseline", runs=top)
-                c.text(M - up * (0.8 * k + h * k), None, h, ang, "center", "baseline", runs=dim_runs(tread, "cm"))
+                c.text(M + up * 0.7 * k, None, h, ang, "center", "baseline", runs=top, mask=0.3)
+                c.text(M - up * (0.7 * k + h * k), None, h, ang, "center", "baseline", runs=dim_runs(tread, "cm"),
+                       mask=0.3)
 
 
 def floor_opening(c, poly, layer: str = "A-WIDOK", pen="cienka", closed_opening: bool = False):

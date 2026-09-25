@@ -1,0 +1,97 @@
+{
+  "DEMO-01": {
+    "pliki": {
+      "pdf": "/home/user/aihouse/projekt/00_demo_silnika/DEMO-01_rzut_1-50.pdf",
+      "png": "/home/user/aihouse/projekt/00_demo_silnika/DEMO-01_rzut_1-50.png",
+      "dxf": "/home/user/aihouse/projekt/00_demo_silnika/DEMO-01_rzut_1-50.dxf"
+    },
+    "png": {
+      "px": [
+        3308,
+        2339
+      ],
+      "dpi_eff": [
+        200.1,
+        200.0
+      ],
+      "dpi_meta": [
+        199.9996,
+        199.9996
+      ],
+      "ok": true
+    },
+    "skala_lico_N": {
+      "expected_mm": 161.6,
+      "measured_mm": 161.599998304579,
+      "endpoint_err_mm": 6.5993175068645075e-06,
+      "page_mm": [
+        419.9999881320529,
+        297.0000023735894
+      ],
+      "sheet_mm": [
+        420.0,
+        297.0
+      ],
+      "ok": true
+    },
+    "skala_os_B": {
+      "expected_mm": 176.6,
+      "measured_mm": 176.6000086466471,
+      "endpoint_err_mm": 5.847110550375656e-06,
+      "page_mm": [
+        419.9999881320529,
+        297.0000023735894
+      ],
+      "sheet_mm": [
+        420.0,
+        297.0
+      ],
+      "ok": true
+    }
+  },
+  "DEMO-02": {
+    "pliki": {
+      "pdf": "/home/user/aihouse/projekt/00_demo_silnika/DEMO-02_przekroj_1-50.pdf",
+      "png": "/home/user/aihouse/projekt/00_demo_silnika/DEMO-02_przekroj_1-50.png",
+      "dxf": "/home/user/aihouse/projekt/00_demo_silnika/DEMO-02_przekroj_1-50.dxf"
+    },
+    "png": {
+      "px": [
+        3308,
+        2339
+      ],
+      "dpi_eff": [
+        200.1,
+        200.0
+      ],
+      "dpi_meta": [
+        199.9996,
+        199.9996
+      ],
+      "ok": true
+    }
+  },
+  "DEMO-03": {
+    "pliki": {
+      "pdf": "/home/user/aihouse/projekt/00_demo_silnika/DEMO-03_legendy.pdf",
+      "png": "/home/user/aihouse/projekt/00_demo_silnika/DEMO-03_legendy.png",
+      "dxf": "/home/user/aihouse/projekt/00_demo_silnika/DEMO-03_legendy.dxf"
+    },
+    "png": {
+      "px": [
+        4678,
+        3308
+      ],
+      "dpi_eff": [
+        200.0,
+        200.1
+      ],
+      "dpi_meta": [
+        199.9996,
+        199.9996
+      ],
+      "ok": true
+    }
+  },
+  "tom": "/home/user/aihouse/projekt/00_demo_silnika/DEMO_tom.pdf"
+}

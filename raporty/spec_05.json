@@ -1,5 +1,6 @@
 {
- "title": "Korekta Inwestora: „S” z przesuniętych brył, garaż w parterze — panel koncepcji uruchomiony ponownie",
+ "nr": 5,
+ "title": "Narzędzia działają: silnik rysunkowy wg PN (DXF/PDF) i pipeline 3D z wizualizacjami — testy na modelu próbnym",
  "stages": [
   [
    "Analiza szkicu — interpretacja v2 („S” z brył, garaż)",
@@ -52,5 +53,23 @@
   "Do poprawy w produkcji: kolizje części opisów wymiarowych (automatyczne rozsuwanie).",
   "Model testowy ≠ projekt: dom LAMELA powstaje w panelu koncepcji (wersja v2 „S” + garaż).",
   "Podstawa prawna: WT z 19.09.2026 wg art. 102a PB + oświadczenie inwestora; śnieg strefa 2 (0,9 kN/m²)."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/projekt/00_demo_silnika/DEMO-01_rzut_1-50.png",
+   "caption": "Silnik: rzut próbny A3 1:50"
+  },
+  {
+   "path": "/home/user/aihouse/projekt/00_demo_silnika/DEMO-02_przekroj_1-50.png",
+   "caption": "Silnik: przekrój próbny 1:50"
+  },
+  {
+   "path": "/home/user/aihouse/build/test/rendery/a_lotniczy_SE.png",
+   "caption": "Pipeline 3D: render testowy"
+  },
+  {
+   "path": "/home/user/aihouse/projekt/00_demo_silnika/DEMO-03_legendy.png",
+   "caption": "Legenda kreskowań i symboli"
+  }
  ]
 }

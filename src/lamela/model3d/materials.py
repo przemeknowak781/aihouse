@@ -71,7 +71,7 @@ RULES: list[tuple[str, PBR]] = [
     (r"SZKL|GLASS|SZYB", FIXED["SZKLO"]),
     (r"^TYNK.*(SIL|ZEW|ELEW|AKR|MINER)|ELEWAC", PBR("#f3f2ee", 0.92, texture="tynk", uv=2.0)),
     (r"TYNK|GLAD|GŁAD|GK|FARB|MALOW", PBR("#f4f2ee", 0.9)),
-    (r"TERMO|LAMEL|MODRZ|DREWNO|TIMBER|WOOD|JESION|SOSN", PBR("#9b6a40", 0.68, texture="drewno", uv=1.0)),
+    (r"TERMO_?(DREW|JES|SOSN|WOOD)|DREWNO|LAMEL|MODRZ|TIMBER|WOOD|JESION", PBR("#9b6a40", 0.68, texture="drewno", uv=1.0)),
     (r"KOMPOZ|DESKA_KOMP|WPC", PBR("#6d5a49", 0.75, texture="deski", uv=1.0)),
     (r"DESKA|PARKIET|DEB|DĄB|PODLOG|PANEL", PBR("#b58a5a", 0.55, texture="parkiet", uv=1.0)),
     (r"GRES|PLYTK|PŁYTK|TERAKOT|KAMIEN|KAMIEŃ|KONGL", PBR("#cdc7bd", 0.45, texture="plyty", uv=1.2)),
@@ -90,6 +90,21 @@ RULES: list[tuple[str, PBR]] = [
 ]
 
 
+# dopasowanie po NAZWIE materiału (gdy kod nic nie mówi) — kolejność: przegrody techniczne przed wykończeniem
+NAME_RULES: list[tuple[str, PBR]] = [
+    (r"SZKŁ|SZKL", FIXED["SZKLO"]),
+    (r"PAPA|PAP |MEMBRAN|HYDROIZ|PAROIZ|FOLI|EPDM|TPO", PBR("#303133", 0.8)),
+    (r"STYROPIAN|POLISTYREN|WEŁN|WELN|PIANK|PIR|PUR", PBR("#dedcd5", 0.95)),
+    (r"TYNK", PBR("#f4f2ee", 0.9)),
+    (r"ŻELBET|ZELBET|BETON", PBR("#bdb9b1", 0.85, texture="beton", uv=2.0)),
+    (r"DREWN|MODRZEW|JESION|DESK", PBR("#9b6a40", 0.68, texture="drewno", uv=1.0)),
+    (r"STAL|ALUMIN|BLACH", PBR("#3a3e42", 0.45, 0.55)),
+    (r"SILIKAT|CEGŁ|CEGL|BLOCZ|PUSTAK|CERAMI", PBR("#d9d4ca", 0.95)),
+    (r"ZIELON|ROZCHODNIK|SEDUM", PBR("#6e7d3e", 0.95, texture="sedum", uv=2.0)),
+    (r"ŻWIR|ZWIR", PBR("#a39d91", 0.95, texture="zwir", uv=1.0)),
+]
+
+
 def pbr_for(code: str, model=None) -> PBR:
     """Parametry PBR dla kodu materiału (z uwzględnieniem danych z modelu)."""
     mat = model.material(code) if model is not None and hasattr(model, "material") else None
@@ -102,9 +117,14 @@ def pbr_for(code: str, model=None) -> PBR:
         key = code.upper()
         name = (getattr(mat, "nazwa", "") or "").upper()
         for pat, p in RULES:
-            if re.search(pat, key) or (name and re.search(pat, name)):
+            if re.search(pat, key):
                 base = p
                 break
+        if base is None and name:
+            for pat, p in NAME_RULES:
+                if re.search(pat, name):
+                    base = p
+                    break
         if base is not None and re.search(r"EPS", key) and re.search(r"GRAFIT|031|032", key + " " + name):
             base = replace(base, color="#8f9296")
         if base is None:

@@ -122,7 +122,8 @@ def dim_chain(c, pts, at, direction="h", layer: str = DIM_LAYER, h: float = 2.5,
         for i in range(len(tt) - 1):
             L = tt[i + 1] - tt[i]
             if labels is not None and i < len(labels) and labels[i] is not None:
-                runs = [(str(labels[i]), 1.0, 0.0)]
+                lab = labels[i]
+                runs = list(lab) if isinstance(lab, (list, tuple)) else [(str(lab), 1.0, 0.0)]
             else:
                 runs = dim_runs(L, unit_)
             w = T.runs_width(runs, h) * k
@@ -237,6 +238,16 @@ def opening_dim(c, center, wall_dir, width: float, height: float, sill: float | 
     d = unit(wall_dir)
     n = perp(d) * side
     C = np.asarray(center, float)
+    top_runs = dim_runs(width, unit_) if width is not None else None
+    bot_runs = None
+    if height is not None:
+        bot_runs = dim_runs(height, unit_)
+        if sill is not None:
+            m, sp = fmt.dim_parts(sill, unit_)
+            bot_runs = [("(" + m, 1.0, 0.0)] + ([(sp, T.SUP_SIZE, T.SUP_RAISE)] if sp else []) + \
+                [(") ", 1.0, 0.0)] + bot_runs
+    wtxt = max([T.runs_width(r, h) for r in (top_runs, bot_runs) if r] or [0.0])
+    axis_mm = max(axis_mm, wtxt + 2.0) if wtxt else axis_mm
     A = C + n * start_mm * k
     B = C + n * (start_mm + axis_mm) * k
     with c.on(layer):
@@ -245,15 +256,10 @@ def opening_dim(c, center, wall_dir, width: float, height: float, sill: float | 
         r = dir_deg(ang)
         up = perp(r)
         M = (A + B) / 2.0
-        if width is not None:
-            c.text(M + up * 0.7 * k, None, h, ang, "center", "baseline", runs=dim_runs(width, unit_))
-        if height is not None:
-            runs = dim_runs(height, unit_)
-            if sill is not None:
-                runs = [("(" + fmt.dim_parts(sill, unit_)[0], 1.0, 0.0)] + (
-                    [(fmt.dim_parts(sill, unit_)[1], T.SUP_SIZE, T.SUP_RAISE)] if fmt.dim_parts(sill, unit_)[1] else []) + [
-                    (") ", 1.0, 0.0)] + runs
-            c.text(M - up * (0.7 * k + h * k), None, h, ang, "center", "baseline", runs=runs)
+        if top_runs:
+            c.text(M + up * 0.7 * k, None, h, ang, "center", "baseline", runs=top_runs)
+        if bot_runs:
+            c.text(M - up * (0.7 * k + h * k), None, h, ang, "center", "baseline", runs=bot_runs)
         if symbol:
             from .symbols import tag
             tag(c, B + n * sym_r_mm * k, symbol, shape=symbol_shape, r_mm=sym_r_mm, layer="A-OPISY")

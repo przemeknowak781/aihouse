@@ -122,6 +122,11 @@ def build_figure(sheet, mode: str = "branze") -> Figure:
 
         batch = []   # linie o wspólnym stylu
         bkey = None
+        zc = [1.0]   # jawna kolejność rysowania (matplotlib sortuje artystów po zorder, nie po kolejności dodania)
+
+        def znext():
+            zc[0] += 1e-4
+            return zc[0]
 
         def flush():
             nonlocal batch, bkey
@@ -132,6 +137,7 @@ def build_figure(sheet, mode: str = "branze") -> Figure:
                                 antialiaseds=True)
             if dash is not None:
                 lc.set_linestyle(dash)
+            lc.set_zorder(znext())
             cp = ctx.clip_patch(clip)
             if cp is not None:
                 lc.set_clip_path(cp)
@@ -173,7 +179,7 @@ def build_figure(sheet, mode: str = "branze") -> Figure:
                     continue
                 color = p.fill if p.fill else prim_color(p, mode)
                 patch = PathPatch(Path(verts, codes), facecolor=color, edgecolor="none", linewidth=0,
-                                  antialiased=True)
+                                  antialiased=True, zorder=znext())
                 cp = ctx.clip_patch(clip)
                 if cp is not None:
                     patch.set_clip_path(cp)
@@ -188,7 +194,7 @@ def build_figure(sheet, mode: str = "branze") -> Figure:
                     q = _xf_pts(xf, xy.reshape(1, 2))[0]
                     fp = FontProperties(fname=T.font_file(p.style), size=T.em_mm(hh, p.style) * MM2PT)
                     t = ax.text(q[0], q[1], s, fontproperties=fp, rotation=p.rot, rotation_mode="anchor",
-                                ha="left", va="baseline", color=color)
+                                ha="left", va="baseline", color=color, zorder=znext())
                     cp = ctx.clip_patch(clip)
                     if cp is not None:
                         t.set_clip_path(cp)

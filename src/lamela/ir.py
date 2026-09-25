@@ -230,9 +230,17 @@ class _Builder:
         if isinstance(geom, (list, tuple)):
             geom = Polygon([tuple(map(float, q[:2])) for q in geom])
         out = []
+        if not geom.is_valid:
+            geom = shapely.make_valid(geom)
         for p in iter_polys(geom):
             if p.area < 1e-6:
                 continue
+            if not p.is_valid or len(p.exterior.coords) > 5:
+                p = p.buffer(0)
+                if p.is_empty or not isinstance(p, Polygon):
+                    for q in iter_polys(p):
+                        self.add(base_id, kind, q, z0, z1, material, level, group=group, **meta)
+                    continue
             p = orient(p, 1.0)
             ext = [(round(x, 6), round(y, 6)) for x, y in list(p.exterior.coords)[:-1]]
             holes = [[(round(x, 6), round(y, 6)) for x, y in list(r.coords)[:-1]] for r in p.interiors]
@@ -300,7 +308,20 @@ class _Builder:
                           "z": m.kondygnacja(r.kond).rzedna, "wys": r.wysokosc, "pow": round(r.pow_netto, 2),
                           "kategoria": r.kategoria})
         b = self.ir.bounds(groups=tuple(self.kondy) + ("dach",))
+        dzm = {}
+        if m.dz is not None:
+            ob = m.dz.obrys
+            if ob is not None:
+                dzm["obrys"] = [[round(x, 3), round(y, 3)] for x, y in list(ob.exterior.coords)[:-1]]
+            dr = m.dz.raw.get("droga") or {}
+            if _is_ring(dr.get("jezdnia")):
+                jz = m.dz.poly_bud(dr["jezdnia"])
+                dzm["jezdnia"] = [[round(x, 3), round(y, 3)] for x, y in list(jz.exterior.coords)[:-1]]
+            if self.ir.terrain is not None:
+                c = self.footprint.centroid if not self.footprint.is_empty else Point(0, 0)
+                dzm["teren_z_budynek"] = round(self.h(c.x, c.y), 3)
         self.ir.meta.update({
+            "dzialka": dzm,
             "nazwa": (m.meta or {}).get("nazwa", ""),
             "wersja": (m.meta or {}).get("wersja", ""),
             "zero_abs": m.zero_abs,

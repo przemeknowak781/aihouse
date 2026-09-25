@@ -149,6 +149,13 @@ def clean_geom(g, min_area=SLIVER_AREA):
     return MultiPolygon(ps)
 
 
+def snap(g, grid: float = 1e-6):
+    """Przyciąga współrzędne do siatki (usuwa rozbieżności numeryczne na stykach); model precyzji — zmiennoprzecinkowy."""
+    if g is None or g.is_empty:
+        return g
+    return shapely.set_precision(shapely.set_precision(g, grid), 0.0)
+
+
 def _unit(v):
     v = np.asarray(v, float)
     n = float(np.hypot(v[0], v[1]))
@@ -1226,6 +1233,7 @@ class Model:
             g = lay.polygon
             if g is None or g.is_empty:
                 continue
+            g = snap(g)
             if occ is not None and g.intersects(occ):
                 g = clean_geom(g.difference(occ))
             else:
@@ -1502,11 +1510,17 @@ class Model:
         if not geoms:
             self._free_cache[kid] = []
             return []
-        U = unary_union(geoms)
+        U = unary_union([snap(g) for g in geoms])
         env = box(*U.bounds).buffer(5.0)
         free = env.difference(U)
-        regs = [orient(p, 1.0) for p in _iter_polys(free)
-                if p.area > 0.05 and not p.exterior.intersects(env.exterior)]
+        regs = []
+        for p in _iter_polys(free):
+            if p.area <= 0.05 or p.exterior.intersects(env.exterior):
+                continue
+            # usunięcie zerowej szerokości „kolców” (styki skosów tynku) — otwarcie morfologiczne
+            q = p.buffer(-1e-5, join_style=2).buffer(1e-5, join_style=2)
+            q = clean_geom(snap(q))
+            regs.extend(orient(x, 1.0) for x in _iter_polys(q))
         self._free_cache[kid] = regs
         return regs
 
@@ -1545,7 +1559,7 @@ class Model:
                     self._warn(loc, f"'punkt' {list(rm.punkt)} leży poza jawnym wielobokiem")
             else:
                 P = Point(rm.punkt)
-                hit = [g for g in regs if g.buffer(1e-9).contains(P)]
+                hit = [g for g in regs if g.distance(P) < 1e-9]
                 if hit:
                     rm.polygon, rm.zrodlo = hit[0], "punkt"
                 else:
