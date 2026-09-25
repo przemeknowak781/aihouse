@@ -193,6 +193,7 @@ def view_plan(ctx, spec, scale, opts):
     if opts.get("podklad", True):
         D.label_base_map(vp, s, lab, win, used, opts, contours=opts.get("warstwice", True))
         _spots_map(lab, s, win, used, float(opts.get("pikiety_co", 9.0)))
+    lab.fix_overlaps()
     top = _frame_and_note(vp, wb, used)
     # --- tabele obok mapy (w rzutni — pismo 2,5 mm)
     x_t = wb[2] + 8.0 * k
@@ -805,6 +806,7 @@ def view_szczegoly(ctx, spec, scale, opts):
     _labels_project(lab, s, W, used, detail=True, utilities=False)
     _levels(lab, s, used, projected=False)
     _slopes(lab, s, used)
+    lab.fix_overlaps()
     # tabele obok rysunku
     x_t = wb[2] + 8.0 * k
     r1 = D.vp_table(vp, x_t, wb[3], **_tab_tyczenie(s, tycz))
@@ -988,7 +990,7 @@ def view_uzbrojenie(ctx, spec, scale, opts):
             continue
         a, b = nearest_points(r["a"].geom, r["b"].geom)
         if D.place_dim(lab, (a.x, a.y), (b.x, b.y), on_a=r["a"].geom, on_b=r["b"].geom, span=4.0, step=0.25,
-                       max_cost=4.0) is not None:
+                       max_cost=10.0) is not None:
             used.add("wymiar")
     for r in K["drzewa"]:
         if r["d"] < r["req"] + 2.0:
@@ -1013,6 +1015,7 @@ def view_uzbrojenie(ctx, spec, scale, opts):
     for t in s.drzewa:
         if win.contains(Point(t["xy"])):
             lab.label(t["xy"], [t["id"]], D.H, dists=(0.8, 2.0, 4.0), leader_from=2.5, max_cost=6.0)
+    lab.fix_overlaps()
     x_t = wb[2] + 8.0 * k
     y = wb[3]
     for t in (_tab_przylacza(s), _tab_obiekty(s, win), _tab_koord(K), _tab_skrzyz(K), _tab_kolizje(K)):

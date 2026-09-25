@@ -284,7 +284,7 @@ class Legenda:
                 sh.text((x, y - 3.5), tytul, 3.5, style="bold")
                 yy = y - 8.5
                 if zrodlo:
-                    for s in wrap(zrodlo, w, 1.8):
+                    for s in wrap(zrodlo, w - 8.0, 1.8, "italic"):
                         sh.text((x, yy), s, 1.8, style="italic")
                         yy -= 2.7
                     yy -= 1.0

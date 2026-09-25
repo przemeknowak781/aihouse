@@ -38,6 +38,7 @@ LACZNIK: tuple | None = None
 def _lacznik():
     return LACZNIK if LACZNIK is not None else (G.LACZNIK_PRZYKLAD, 0.08)
 TOL_XY = 0.45      # [m] odległość osi ściany od krawędzi płyty (oś — lico zewn. ≈ 0,30 m)
+TOL_STYK = 0.50    # [m] styk płyta stropu ↔ płyta wspornikowa (między nimi strefa łącznika / ocieplenia, A2 K-1)
 
 
 def _dy(wsp: dict, z: float) -> float:
@@ -104,13 +105,13 @@ def plyta_pod_wspornikiem(model, wsp: dict) -> tuple[dict | None, str]:
     z = float(wsp["wierzch"])
     best = None
     for st in model.stropy():
-        if abs(float(st["wierzch"]) - z) <= TOL_Z and Polygon(st["obrys"]).distance(P) < 0.05:
+        if abs(float(st["wierzch"]) - z) <= TOL_Z and Polygon(st["obrys"]).distance(P) < TOL_STYK:
             d = abs(float(st["wierzch"]) - z)
             if best is None or d < best[0]:
                 best = (d, st, "strop")
     for dd in model.dachy():
         pl = dd.get("plyta") or {}
-        if pl and abs(float(pl["wierzch"]) - z) <= TOL_Z and Polygon(dd["obrys"]).distance(P) < 0.05:
+        if pl and abs(float(pl["wierzch"]) - z) <= TOL_Z and Polygon(dd["obrys"]).distance(P) < TOL_STYK:
             d = abs(float(pl["wierzch"]) - z)
             if best is None or d < best[0] - 1e-9:
                 best = (d, dd, "dach")
@@ -197,6 +198,24 @@ def _krawedzie(poly: Polygon):
             yield LineString([a, b])
 
 
+def _zaklad(P: Polygon, ed: LineString, tol: float = TOL_STYK) -> float:
+    """Długość odcinka krawędzi `ed`, wzdłuż którego wielobok P leży w pasie ± tol (rzut na kierunek krawędzi)."""
+    import numpy as np
+    g = P.intersection(ed.buffer(tol, cap_style=2))
+    if g.is_empty:
+        return 0.0
+    c = np.asarray(ed.coords)
+    u = (c[-1] - c[0]) / ed.length
+    from shapely.geometry import MultiPoint
+    pts = MultiPoint([q for gg in getattr(g, "geoms", [g]) for q in
+                      (gg.exterior.coords if hasattr(gg, "exterior") else getattr(gg, "coords", []))])
+    if pts.is_empty or getattr(g, "area", 0.0) <= 1e-6:
+        return 0.0
+    xs = [float(np.dot(np.asarray(q.coords[0]) - c[0], u)) for q in pts.geoms]
+    a, b = max(min(xs), 0.0), min(max(xs), ed.length)
+    return max(0.0, b - a)
+
+
 def krawedzie_stropu_zewn(model, st: dict) -> list[dict]:
     """Krawędzie stropu nad powietrzem: {typ 'a'|'b', L, sciana, belka, belka_rodzaj, wsp} (sygnatury węzłów)."""
     Q = Polygon(st["obrys"])
@@ -220,7 +239,7 @@ def krawedzie_stropu_zewn(model, st: dict) -> list[dict]:
         wsp = None
         for w in model.wsporniki():
             if w.get("lacznik_termiczny") and w.get("przegroda") and abs(float(w["wierzch"]) - z) <= TOL_Z \
-                    and Polygon(w["obrys"]).intersection(ed.buffer(0.02)).length > 0.3:
+                    and _zaklad(Polygon(w["obrys"]), ed) > min(0.3, 0.5 * ed.length):
                 wsp = w
                 break
         out.append(dict(typ="a", L=ed.length, sciana=gora, belka=belka, belka_rodzaj=rodz_b, wsp=wsp))

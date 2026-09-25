@@ -343,7 +343,8 @@ class RysW(Rysunek):
             d = wo.do_dict()
             self.res.column_blocks.append(("wyn", table_block(
                 "WYNIKI OBLICZEŃ — WODA (lamela.obliczenia.sanitarne.woda)", [("Wielkość", 90), ("Wartość", 90)],
-                [["przepływ obliczeniowy q", f"{num(d['q_obl_dm3s'], 3)} dm³/s"], ["wodomierz", d["wodomierz"]],
+                [["przepływ obliczeniowy q", f"{num(d['q_obl_dm3s'], 3)} dm³/s"],
+                 ["wodomierz", f"DN{wo.wodomierz['DN']}, Q3 = {num(wo.wodomierz['Q3'], 1)} m³/h"],
                  ["p_wym (punkt krytyczny)", f"{num(d['p_wym_kPa'], 0)} kPa ({d['punkt_krytyczny']})"],
                  ["zasobnik c.w.u.", f"{d['zasobnik_l']} dm³"], ["cyrkulacja", str(d["cyrkulacja"])],
                  ["zapotrzebowanie Q_d,śr", f"{num(d['Q_d_sr_m3'], 2)} m³/d"]], align=["left", "left"])))

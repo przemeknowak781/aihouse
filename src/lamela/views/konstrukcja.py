@@ -60,6 +60,11 @@ class KResult:
     units_note: str | None = None
 
 
+def _s(s_mm: float) -> str:
+    """Rozstaw w cm (przecinek dziesiętny)."""
+    return f"{s_mm / 10:g}".replace(".", ",")
+
+
 def _pl(x: float, nd: int = 2) -> str:
     return fmt.num(x, nd)
 
@@ -352,7 +357,7 @@ def opis_grupy(g: KD.GrupaPr) -> str:
     else:
         t = f"{g.n} Ø{g.pret.fi}"
     if g.s:
-        t += f" co {g.s / 10:g}"
+        t += f" co {_s(g.s)}"
     t += f" l={g.pret.L_mm / 10:g}"
     if g.kawalki > 1:
         t += f" (zakład {g.l0 * 100:.0f})"
@@ -1200,14 +1205,34 @@ def widok_zbrojenie_fundamentu(ctx: ViewContext, spec: dict, scale: float, opts:
         for pg, *_ in lst:
             vp.geom(pg, L_OPI, pen="cienka", lt="KRESKOWA")
             placer.add_lines(pg.boundary, w=0.3)
-    for g in PF[warstwa]:
+    siatka = [g for g in PF[warstwa] if g.rola != "dozbrojenie"]
+    for g in siatka:
         rysuj_grupe(vp, placer, g, opis=False)
-    for g in sorted(PF[warstwa], key=lambda q: -LineString(q.linia).length):
+    for g in sorted(siatka, key=lambda q: -LineString(q.linia).length):
         a, b = np.asarray(g.linia[0]), np.asarray(g.linia[1])
         L = float(np.hypot(*(b - a)))
-        txt = opis_grupy(g) + (f" — dozbrojenie {g.pole}" if g.rola == "dozbrojenie" else "")
-        etykieta(vp, placer, (a + b) / 2, b - a, txt, g.pret.nr, 2.5,
+        etykieta(vp, placer, (a + b) / 2, b - a, opis_grupy(g), g.pret.nr, 2.5,
                  ts=[0.0] + [s_ * f * L for f in (0.15, 0.3) for s_ in (-1, 1)], bounds=P.buffer(2.0))
+    # dozbrojenia (MES): obszary z oznaczeniem D… (pręty — tabela w kolumnie, pozycje w zestawieniu)
+    wiersze_d = []
+    for (wa, k_), lst in sorted([(k_, v) for k_, v in dz.items() if k_ != "mu" and k_[0] == warstwa]):
+        for i, (pg, fi, s_x, need, prov) in enumerate(lst, 1):
+            tag = f"D{i}{k_}"
+            c0 = pg.representative_point()
+
+            def draw_d(c_, pos, _t=tag):
+                S.tag(c_, pos, _t, shape="hex", r_mm=2.6, h=1.8, layer=L_OPI)
+            placer.place(vp, draw_d, [(c0.x, c0.y)] + [(c0.x + dx, c0.y + dy) for dx in (-0.4, 0.4, 0) for dy in
+                                                       (0, -0.4, 0.4)], penalty_step=0.2)
+            gs = [g for g in PF[warstwa] if g.rola == "dozbrojenie" and g.kier == k_ and g.pole == f"D{i}"]
+            wiersze_d.append([tag, f"{'dół' if wa == 'dol' else 'góra'} {k_}",
+                              ", ".join(sorted({str(g.pret.nr) for g in gs})),
+                              f"{sum(g.n for g in gs)} Ø{fi} co {_s(s_x)}", f"{need:.0f} / {prov:.0f}"])
+    if wiersze_d:
+        res.column_blocks.append(("dozbrojenia", blok_tabeli(
+            f"DOZBROJENIA PŁYTY {'DOLNE' if warstwa == 'dol' else 'GÓRNE'} (MES; pręty między prętami siatki, zasięg "
+            "obszaru + l_bd)", [("Obszar", 16), ("Warstwa", 18), ("Poz.", 30), ("Pręty", 60),
+                                ("A_s,req / A_s,prov [mm²/m]", 56)], wiersze_d)))
     _kontrola_fund(D, F, PF, warstwa, nr_ark)
     przek = {eid: nm for nm, eid, _ in _przekroje_fund(ctx, [e for e in els if "os" in e])}
     for Z in D.zebra:

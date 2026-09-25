@@ -117,7 +117,7 @@ def klasyfikuj_obwod(model) -> dict[tuple, float]:
                 if _w(gora, (s0 + s1) / 2):
                     add(("dach_sciana", d["id"]), s1 - s0)
                     continue
-                wid = next((i for i, W in wsp if W.distance(Point(pm)) <= 0.06), None)
+                wid = next((i for i, W in wsp if W.distance(Point(pm)) <= 0.45), None)
                 add(("wsp", wid) if wid else ("attyka", d["id"]), s1 - s0)
     # --- B. krawędzie stropów pośrednich (obrys kondygnacji nad stropem)
     for st in model.stropy():
@@ -128,7 +128,7 @@ def klasyfikuj_obwod(model) -> dict[tuple, float]:
         if not k_g or not k_d:
             continue
         obr = model.obrys_kondygnacji(k_g[0], lico="zewn")
-        Q = Polygon(st["obrys"]).buffer(0.05)
+        Q = Polygon(st["obrys"]).buffer(0.45)
         dachy = [Polygon(d_["obrys"]) for d_ in model.dachy()
                  if d_.get("plyta") and abs(float(d_["plyta"]["wierzch"]) - z) <= TOL_Z]
         wsp = [(w["id"], Polygon(w["obrys"])) for w in model.wsporniki()
@@ -143,10 +143,10 @@ def klasyfikuj_obwod(model) -> dict[tuple, float]:
                 n_in = _do_wnetrza(obr, pm, n)
                 if _ogrzewane_pod(model, pm + n_in * 0.6, z) is False:
                     continue
-                wid = next((i for i, W in wsp if W.distance(Point(pm)) <= 0.06), None)
+                wid = next((i for i, W in wsp if W.distance(Point(pm)) <= 0.10), None)
                 if wid:
                     add(("wsp", wid), s1 - s0)
-                elif _blisko(pm, dachy):
+                elif _blisko(pm, dachy, 0.30):
                     continue                                   # dach – ściana (część A)
                 else:
                     add(("strop_posredni", st["id"]), s1 - s0)

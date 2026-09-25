@@ -213,6 +213,10 @@ class Rysunek:
             P.opisy_pomieszczen(self.vp, self.pl, self.ctx, self.pod, self.room_extra)
         P.osie(self.vp, self.ctx)
         self.res.column_blocks.insert(0, ("legenda", self.leg.block()))
+        from ...draft import fmt
+        self.res.units_note = (f"Średnice przewodów w mm (d_z×s — rury wielowarstwowe, Ø/DN — kanalizacja, kanały "
+                               f"wentylacyjne), przekroje żył w mm², odległości i rzędne w m; ±0,000 = "
+                               f"{fmt.level_abs(self.m.zero_abs)} m n.p.m. (PL-EVRF2007-NH).")
         self.res.notes = list(self.notes) + list(notes_extra)
         self.res.kolizje = text_collisions(self.vp)
         if self.res.kolizje:

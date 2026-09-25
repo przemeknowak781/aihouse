@@ -601,9 +601,9 @@
   {
    "element": "płyta SW1",
    "W": 13.6,
-   "E": 16.0,
-   "S": 40.15,
-   "N_linia_zab": 2.65,
+   "E": 16.1,
+   "S": 40.05,
+   "N_linia_zab": 2.75,
    "otwory": false
   },
   {

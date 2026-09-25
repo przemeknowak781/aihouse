@@ -128,6 +128,7 @@ class Labeler:
         self.pl = Placer(vp.k)
         self.bounds = bounds
         self.failed = []
+        self.entries = []          # umieszczone opisy (do poprawek kolizji): prymitywy, geometrie w Placer, argumenty
 
     def mark(self) -> int:
         return len(self.vp.prims)
@@ -147,6 +148,11 @@ class Labeler:
               dists=(0.8, 2.0, 4.0, 7.0, 11.0, 16.0, 22.0), dirs=None, leader_from=3.0, dot=False,
               max_cost=None, frame=False, register=True, leader_color=None, penalty=0.02, own=None):
         k = self.k
+        call = (anchor, lines, dict(h=h, layer=layer, style=style, color=color, mask=mask, dists=dists, dirs=dirs,
+                                    leader_from=leader_from, dot=dot, max_cost=max_cost, frame=frame,
+                                    register=register, leader_color=leader_color, penalty=penalty, own=own),
+                self.bounds)
+        n0, g0 = len(self.vp.prims), len(self.pl.geoms)
         saved = self._mute(own)
         if leader_from < 50 and max(dists) < 25.0:        # dalsze położenia (z odnośnikiem), gdy blisko brak miejsca
             dists = tuple(dists) + tuple(d_ for d_ in (14.0, 19.0, 25.0) if d_ > max(dists))
@@ -182,7 +188,67 @@ class Labeler:
         self._unmute(saved)
         if pos is None:
             self.failed.append(lines)
+        else:
+            self.entries.append(dict(prims=self.vp.prims[n0:], g=(g0, len(self.pl.geoms)), call=call))
         return pos, cost
+
+    def fix_overlaps(self, min_area_mm2=0.3, rounds=2):
+        """Poprawka kolizji napisów: opisy (``label``), których napisy nachodzą na inne napisy rzutni, są usuwane
+        i umieszczane ponownie z szerszym zakresem położeń (odnośnik). Zwraca liczbę przeniesionych opisów."""
+        import copy
+        from shapely.strtree import STRtree
+        from ..draft.core import PText, text_items
+        moved = 0
+        for _r in range(rounds):
+            owner = {}
+            for ei, e in enumerate(self.entries):
+                for p in e["prims"]:
+                    owner[id(p)] = ei
+            texts = [p for p in self.vp.prims if isinstance(p, PText)]
+            boxes = []
+            for p in texts:
+                q = copy.copy(p)
+                q.mask = 0.0
+                boxes.append(Polygon(text_items(q, self.k)[1]).buffer(-0.15 * self.k, join_style=2))
+            tree = STRtree(boxes)
+            bad = set()
+            k2 = self.k * self.k
+            for i, g in enumerate(boxes):
+                if g.is_empty:
+                    continue
+                for j in tree.query(g):
+                    if j <= i or boxes[j].is_empty:
+                        continue
+                    ei, ej = owner.get(id(texts[i])), owner.get(id(texts[j]))
+                    if ei is not None and ei == ej:
+                        continue
+                    if g.intersection(boxes[j]).area / k2 > min_area_mm2:
+                        cand = [e_ for e_ in (ei, ej) if e_ is not None]
+                        if cand:
+                            bad.add(max(cand))
+            if not bad:
+                break
+            redo = []
+            for ei in sorted(bad, reverse=True):
+                e = self.entries.pop(ei)
+                ids = {id(p) for p in e["prims"]}
+                self.vp.prims = [p for p in self.vp.prims if id(p) not in ids]
+                for gi in range(*e["g"]):
+                    self.pl.w[gi] = 0.0
+                redo.append(e)
+            for e in reversed(redo):
+                anchor, lines, kw, bounds = e["call"]
+                kw = dict(kw)
+                kw["dists"] = tuple(kw.get("dists") or ()) + (30.0, 38.0)
+                kw["max_cost"] = None
+                if kw.get("leader_from", 3.0) >= 50:
+                    kw["leader_from"] = 3.0
+                old_b = self.bounds
+                self.bounds = bounds
+                self.label(anchor, lines, **kw)
+                self.bounds = old_b
+            moved += len(redo)
+        return moved
 
     def label_in(self, region, *a, **kw):
         """Opis z preferencją obszaru ``region`` (np. działka): kandydaci poza nim są karani (``Placer`` — bounds)."""
