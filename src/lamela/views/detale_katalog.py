@@ -105,7 +105,7 @@ def detal_cokol(m, opts: dict) -> Detal:
     f = fundament_pod(m)
     tz = teren(m)
     y_cok = tz + 0.30                                      # górna krawędź strefy cokołowej (≥ 30 cm nad terenem)
-    xL, xR, yT, yB = -0.30, 0.72, 0.50, -1.05
+    xL, xR, yT, yB = -0.30, float(opts.get("_xR", 0.72)), float(opts.get("_yT", 0.50)), -1.05
     det.okno = (xL, yB, xR, yT)
     W = det.warstwy(pd)
     ki = next(i for i, w in enumerate(W) if w["konstr"])
@@ -187,6 +187,8 @@ def detal_cokol(m, opts: dict) -> Detal:
     det.rzedna((xL + 0.06, 0.0), 0.0, "zero", "right")
     det.rzedna((xR - 0.03, tz), tz, "wyk", "left")
     det.spadek((x_out + 0.10, tz + 0.03), (x_out + 0.28, tz + 0.026), 2.0)
+    det.pom = dict(sc=sc, x_out=x_out, xs1=xs1, d_x=d_x, tz=tz, y_cok=y_cok, x_g=x_g, gl=gl, d_n=d_n, D_n=D_n,
+                   xL=xL, xR=xR, yT=yT, yB=yB, y_pl=y_pl)
     det.uwagi.append("drenażu opaskowego nie projektuje się — decyzja w modelu działki (DR-0, W-285): piaski "
                      "średnie, ZWG ≈ 3,8 m p.p.t. (uzasadnienie: REKOMENDACJE mostków, rozdz. C)")
     det.uwagi.append("żebro płyty licowane z czołem płyty (lico konstrukcji muru — audyt A2 K-1); w modelu żebro "

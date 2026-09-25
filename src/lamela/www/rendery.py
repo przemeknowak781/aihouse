@@ -20,16 +20,16 @@ R3D = ROOT / "tools" / "render3d"
 UJECIA = {
     "ogrod": ("c", "2026-06-21", "16:00", {"exposure": 1.0}),
     "ulica": ("d", "2026-06-21", "19:30", {"exposure": 1.05}),
-    "lotniczy": ("b", "2026-06-21", "15:00", {"exposure": 1.0}),
+    "lotniczy": ("a", "2026-05-20", "12:30", {"exposure": 1.0}),
     "aksonometria": ("e", "2026-03-21", "12:00", {}),
 }
 PROPORCJE = {"169": (1920, 1080), "43": (1600, 1200)}
 WERSJA = "www-1"
 
 
-def klucz_cache(glb: Path, ujecia: dict, proporcje: dict, ss: int) -> str:
+def klucz_cache(glb: Path, ujecia: dict, proporcje: dict, ss: int, extra=None) -> str:
     h = hashlib.sha256(glb.read_bytes())
-    h.update(json.dumps([WERSJA, ujecia, proporcje, ss], sort_keys=True).encode())
+    h.update(json.dumps([WERSJA, ujecia, proporcje, ss, extra], sort_keys=True, default=str).encode())
     for f in ("render.js", "render.py"):
         h.update((R3D / f).read_bytes())
     return h.hexdigest()[:16]
