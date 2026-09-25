@@ -15,7 +15,7 @@ uwaga programu obliczeń wymagająca analizy, wynik starszy niż model albo arku
 **ZASTĄPIONE** — wynik modelu uproszczonego zastąpiony analizą dokładniejszą (wskazaną w opisie). Po domknięciu
 analiz i ponownym złożeniu tomu wiersze znikają z zestawienia.
 
-> **PROJEKT KONSTRUKCJI NIEZAMKNIĘTY — 4 pozycje NIEZAMKNIĘTE.** Tom jest wersją roboczą. Do czasu domknięcia wszystkich pozycji z tabeli poniżej — zmiany modelu wg zaleceń zespołu konstrukcji, ponowna analiza (obliczenia statyczne, MES płyty fundamentowej, kontrola zbrojenia rysunków) na zamrożonej wersji modelu i ponowne złożenie tomu — **nie podpisywać** oświadczenia projektanta PT (art. 41 ust. 4a pkt 2 PB) i nie przekazywać tomu do realizacji robót.
+> **PROJEKT KONSTRUKCJI NIEZAMKNIĘTY — 3 pozycje NIEZAMKNIĘTE.** Tom jest wersją roboczą. Do czasu domknięcia wszystkich pozycji z tabeli poniżej — zmiany modelu wg zaleceń zespołu konstrukcji, ponowna analiza (obliczenia statyczne, MES płyty fundamentowej, kontrola zbrojenia rysunków) na zamrożonej wersji modelu i ponowne złożenie tomu — **nie podpisywać** oświadczenia projektanta PT (art. 41 ust. 4a pkt 2 PB) i nie przekazywać tomu do realizacji robót.
 
 **Tabela 1. Stan analiz według obszarów**
 
@@ -24,7 +24,7 @@ analiz i ponownym złożeniu tomu wiersze znikają z zestawienia.
 | Obliczenia statyczne | 148 z 148 | zamknięte |
 | MES płyty fundamentowej | 13 z 13 | zamknięte |
 | Kontrola zbrojenia rysunków | 315 z 315 | zamknięte |
-| Część rysunkowa (arkusze i kontrola jakości arkuszy) | brak 4 | NIEZAMKNIĘTE |
+| Część rysunkowa (arkusze i kontrola jakości arkuszy) | brak 3 | NIEZAMKNIĘTE |
 
 *Źródło: wyniki obliczeń statycznych, raport MES płyty fundamentowej (rozdz. 5), kontrola zbrojenia rysunków (rozdz. 6)*
 
@@ -32,10 +32,9 @@ analiz i ponownym złożeniu tomu wiersze znikają z zestawienia.
 
 | Obszar | Element | Wynik | Opis | Źródło |
 |---|---|---|---|---|
-| Część rysunkowa | PT-BO-01 | — | kolizje napisów: 11 — usunąć przed wydaniem (kontrola jakości arkusza) | arkusze; raport kontroli arkuszy |
+| Część rysunkowa | PT-BO-01 | — | kolizje napisów: 7 — usunąć przed wydaniem (kontrola jakości arkusza) | arkusze; raport kontroli arkuszy |
 | Część rysunkowa | Raport kontroli arkuszy | — | 19 uwag dotyczy numerów lub tytułów niezgodnych z wykazem rysunków (PT-BO-03, PT-BO-04, PT-BO-05, PT-BO-07, PT-BO-08, PT-BO-09, PT-BO-10, PT-BO-11) — raport nieaktualny; wygenerować ponownie arkusze konstrukcji wraz z raportem kontroli | arkusze; raport kontroli arkuszy |
 | Część rysunkowa | Formaty arkuszy | — | 25 arkuszy w formacie niestandardowym (PT-BO-01, PT-BO-02, PT-BO-05, PT-BO-06, PT-BO-07, PT-BO-08, PT-BO-09, PT-BO-10, PT-BO-11, PT-BO-12, PT-BO-13, PT-BO-14, PT-BO-15, PT-BO-16, PT-BO-17, PT-BO-18, PT-BO-19, PT-BO-20, PT-BO-21, PT-BO-22, PT-BO-23, PT-BO-24, PT-BO-25, PT-BO-26, PT-BO-27; wymiary — wykaz rysunków) — dobrać format z szeregu PN-EN ISO 5457 (A0–A4, formaty wydłużone; W-313) | arkusze; raport kontroli arkuszy |
-| Część rysunkowa | Uwagi na arkuszach | — | PT-BO-09, PT-BO-10, PT-BO-12, PT-BO-13, PT-BO-15, PT-BO-16, PT-BO-20, PT-BO-21, PT-BO-22, PT-BO-23, PT-BO-24, PT-BO-25, PT-BO-26 — specyfikacja betonu powołuje PN-EN 206+A2 i PN-B-06265 bez statusu (normy wycofane, rejestr D-09) — ujednolicić z rozdz. 2.2 | arkusze; raport kontroli arkuszy |
 
 ## Podstawa opracowania — § 23 pkt 1 RPB
 
@@ -95,8 +94,8 @@ deklaracji betonu (PN-EN 206-1:2026-09) potwierdzić z wytwórnią betonu.
 |---|---|---|
 | model budynku | wersja 1.0 | 2026-09-25 10:33 |
 | obliczenia statyczne | zespół konstrukcji — rozdz. 4 | 2026-09-25 10:55 — aktualne względem modelu |
-| MES płyty fundamentowej | zespół konstrukcji — rozdz. 5 | 2026-09-25 10:56 — aktualne względem modelu |
-| kontrola zbrojenia | zespół konstrukcji — rozdz. 6 | 2026-09-25 10:56 — aktualne względem modelu |
+| MES płyty fundamentowej | zespół konstrukcji — rozdz. 5 | 2026-09-25 11:12 — aktualne względem modelu |
+| kontrola zbrojenia | zespół konstrukcji — rozdz. 6 | 2026-09-25 11:12 — aktualne względem modelu |
 
 ## Rozwiązania konstrukcyjne obiektu — § 23 pkt 1 RPB
 
@@ -391,15 +390,15 @@ Wyroby wskazane z nazwy w dokumentacji zespołu BO należy traktować jako przyk
 | PT-BO-09 | ZBROJENIE DOLNE STROPU NAD PARTEREM | 1:50 | nst. 594×440 |  |
 | PT-BO-10 | ZBROJENIE GÓRNE STROPU NAD PARTEREM | 1:50 | nst. 594×440 |  |
 | PT-BO-11 | ZESTAWIENIE STALI — STROP NAD PARTEREM | — | nst. 420×510 |  |
-| PT-BO-12 | ZBROJENIE DOLNE STROPU NAD I PIĘTREM | 1:50 | nst. 420×430 |  |
-| PT-BO-13 | ZBROJENIE GÓRNE STROPU NAD I PIĘTREM | 1:50 | nst. 420×440 |  |
+| PT-BO-12 | ZBROJENIE DOLNE STROPU NAD I PIĘTREM | 1:50 | nst. 420×440 |  |
+| PT-BO-13 | ZBROJENIE GÓRNE STROPU NAD I PIĘTREM | 1:50 | nst. 420×450 |  |
 | PT-BO-14 | ZESTAWIENIE STALI — STROP NAD I PIĘTREM | — | nst. 420×450 |  |
-| PT-BO-15 | ZBROJENIE DOLNE STROPODACHU | 1:50 | nst. 420×430 |  |
-| PT-BO-16 | ZBROJENIE GÓRNE STROPODACHU | 1:50 | nst. 420×440 |  |
+| PT-BO-15 | ZBROJENIE DOLNE STROPODACHU | 1:50 | nst. 420×440 |  |
+| PT-BO-16 | ZBROJENIE GÓRNE STROPODACHU | 1:50 | nst. 420×450 |  |
 | PT-BO-17 | ZESTAWIENIE STALI — STROPODACH | — | nst. 230×594 |  |
 | PT-BO-18 | WĘZŁY WSPORNIKÓW Z ŁĄCZNIKAMI TERMOIZOLACYJNYMI | 1:20 | nst. 310×594 |  |
 | PT-BO-19 | WIENIEC I OPARCIE STROPU NA MURZE SILIKATOWYM | 1:20 | nst. 470×297 |  |
-| PT-BO-20 | ZBROJENIE BELEK (1) | 1:25 | nst. 610×800 |  |
+| PT-BO-20 | ZBROJENIE BELEK (1) | 1:25 | nst. 610×810 |  |
 | PT-BO-21 | ZBROJENIE BELEK (2) | 1:25 | nst. 594×700 |  |
 | PT-BO-22 | ZBROJENIE BELEK (3) | 1:25 | nst. 470×594 |  |
 | PT-BO-23 | ZBROJENIE NADPROŻY (1) | 1:25 | nst. 410×420 |  |

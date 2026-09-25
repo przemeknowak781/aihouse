@@ -14,12 +14,11 @@
    315
   ]
  },
- "niezamkniete": 4,
+ "niezamkniete": 3,
  "wiersze": [],
  "arkusze_braki": [
-  "PT-BO-01: kolizje napisów: 11 — usunąć przed wydaniem (kontrola jakości arkusza)",
+  "PT-BO-01: kolizje napisów: 7 — usunąć przed wydaniem (kontrola jakości arkusza)",
   "Raport kontroli arkuszy: 19 uwag dotyczy numerów lub tytułów niezgodnych z wykazem rysunków (PT-BO-03, PT-BO-04, PT-BO-05, PT-BO-07, PT-BO-08, PT-BO-09, PT-BO-10, PT-BO-11) — raport nieaktualny; wygenerować ponownie arkusze konstrukcji wraz z raportem kontroli",
-  "Formaty arkuszy: 25 arkuszy w formacie niestandardowym (PT-BO-01, PT-BO-02, PT-BO-05, PT-BO-06, PT-BO-07, PT-BO-08, PT-BO-09, PT-BO-10, PT-BO-11, PT-BO-12, PT-BO-13, PT-BO-14, PT-BO-15, PT-BO-16, PT-BO-17, PT-BO-18, PT-BO-19, PT-BO-20, PT-BO-21, PT-BO-22, PT-BO-23, PT-BO-24, PT-BO-25, PT-BO-26, PT-BO-27; wymiary — wykaz rysunków) — dobrać format z szeregu PN-EN ISO 5457 (A0–A4, formaty wydłużone; W-313)",
-  "Uwagi na arkuszach: PT-BO-09, PT-BO-10, PT-BO-12, PT-BO-13, PT-BO-15, PT-BO-16, PT-BO-20, PT-BO-21, PT-BO-22, PT-BO-23, PT-BO-24, PT-BO-25, PT-BO-26 — specyfikacja betonu powołuje PN-EN 206+A2 i PN-B-06265 bez statusu (normy wycofane, rejestr D-09) — ujednolicić z rozdz. 2.2"
+  "Formaty arkuszy: 25 arkuszy w formacie niestandardowym (PT-BO-01, PT-BO-02, PT-BO-05, PT-BO-06, PT-BO-07, PT-BO-08, PT-BO-09, PT-BO-10, PT-BO-11, PT-BO-12, PT-BO-13, PT-BO-14, PT-BO-15, PT-BO-16, PT-BO-17, PT-BO-18, PT-BO-19, PT-BO-20, PT-BO-21, PT-BO-22, PT-BO-23, PT-BO-24, PT-BO-25, PT-BO-26, PT-BO-27; wymiary — wykaz rysunków) — dobrać format z szeregu PN-EN ISO 5457 (A0–A4, formaty wydłużone; W-313)"
  ]
 }
