@@ -1,0 +1,2005 @@
+{
+ "opis": "Niezalezna weryfikacja tokenow i liczby agentow sesji d6e847b4 (Dom LAMELA). Wlasne skrypty weryfikacja_tokenow*.py; nie uzyto analyze_main.py ani analiza_podagentow.py (main.json przejrzany tylko po to, by znalezc przyczyne rozbieznosci SendMessage).",
+ "czas_wykonania_UTC": "2026-09-25T09:08:45Z",
+ "zrodla": {
+  "watek_glowny": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de.jsonl",
+  "podagenci": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/**/*.jsonl (99 plikow: 88 agent-*.jsonl + 11 journal.jsonl bez usage)",
+  "repo": "git (tylko odczyt: rev-list, log, ls-tree, show) na HEAD d4716b00"
+ },
+ "migawki": {
+  "watek_glowny_do": "2026-09-25T08:29:16Z (timestamp pierwszej linii danego message.id <= migawka)",
+  "podagenci_do": "2026-09-25T08:38:50Z",
+  "uwaga": "Pliki nadal rosna; porownanie robione z tymi samymi odcieciami co raporty. Stan \"teraz\" podany osobno."
+ },
+ "regula_deduplikacji": {
+  "wynik_kontroli": {
+   "main": {
+    "ids_multi": 397,
+    "usage_identical": 397,
+    "core_identical": 397,
+    "ids": 746,
+    "lines": 1319
+   },
+   "agent": {
+    "ids_multi": 2109,
+    "usage_differs": 778,
+    "core_identical": 2109,
+    "output_grows": 778,
+    "output_monotonic": 778,
+    "ids": 2895,
+    "lines": 5405,
+    "usage_identical": 1331
+   },
+   "wf_agent": {
+    "ids_multi": 4222,
+    "usage_identical": 3047,
+    "core_identical": 4222,
+    "ids": 5481,
+    "lines": 10438,
+    "usage_differs": 1175,
+    "output_grows": 1175,
+    "output_monotonic": 1175
+   }
+  },
+  "wnioski": [
+   "Watek glowny: 1319 linii -> 746 id; w 397 id z >1 linia usage identyczne w 100%; wszystkie 746 odpowiedzi maja koncowe usage (output_tokens_details), wiec output jest dokladny.",
+   "Podagenci: pola input/cache_read/cache_creation (z 5m/1h) identyczne w 100% linii danego id (6331 id wieloliniowych); output_tokens rosnie monotonicznie w 1953 id (ostatnia linia = max). Linia koncowa ma dodatkowo output_tokens_details, iterations, server_tool_use, speed.",
+   "Regula: usage liczone raz na message.id z linii o najwiekszym output_tokens (= ostatnia linia). Dodatkowo deduplikacja globalna po message.id miedzy plikami: 1 id (msg_011CfPVW3ohSESrTEdG7pAvt) wystepuje w obu plikach agenta a3a8ae3b05a6e1fbd; bez deduplikacji cache_read bylby zawyzony o 502 256.",
+   "requestId -> message.id jest 1:1 (0 requestId z wieloma id). Pole iterations ma zawsze 1 element typu message; web_search/web_fetch serwerowe = 0; jedyny model claude-opus-5-5 (17 754 linii assistant).",
+   "Podagenci: tylko 2486 z 8375 odpowiedzi (29,7%) ma koncowe usage; pozostale 5889 maja stop_reason=null i output z poczatku strumienia (suma 66 990). Output podagentow z transkryptow to dolna granica."
+  ]
+ },
+ "agenci": {
+  "top_level_agent_jsonl": 16,
+  "top_level_meta": 15,
+  "top_level_without_meta": [
+   "a3a8ae3b05a6e1fbd"
+  ],
+  "workflow_agent_jsonl": 72,
+  "workflow_meta": 72,
+  "journals": 11,
+  "workflow_agent_jsonl_per_dir": {
+   "wf_0e783e5d-4ab": 8,
+   "wf_10e1a801-dd6": 5,
+   "wf_44634517-034": 12,
+   "wf_6070a5f0-602": 7,
+   "wf_725a3592-fa1": 2,
+   "wf_88c0988f-4a5": 8,
+   "wf_a0d51b50-592": 5,
+   "wf_a8783476-2a1": 2,
+   "wf_c5f7e298-4b9": 10,
+   "wf_ce63599a-15f": 6,
+   "wf_dad224e5-cd8": 7
+  },
+  "unique_agent_ids_all_files": 87,
+  "ids_in_both_top_and_wf": [
+   "a3a8ae3b05a6e1fbd"
+  ],
+  "workflow_agent_files_started_before_CUT_SUB": 68,
+  "top_agent_files_started_before_CUT_SUB": 16,
+  "workflow_dirs_started_before_CUT_SUB": [
+   "wf_0e783e5d-4ab",
+   "wf_10e1a801-dd6",
+   "wf_44634517-034",
+   "wf_6070a5f0-602",
+   "wf_725a3592-fa1",
+   "wf_88c0988f-4a5",
+   "wf_a0d51b50-592",
+   "wf_a8783476-2a1",
+   "wf_c5f7e298-4b9",
+   "wf_ce63599a-15f",
+   "wf_dad224e5-cd8"
+  ],
+  "stan_na_migawke_podagentow": {
+   "samodzielni": 15,
+   "pliki_agentow_przeplywow": 68,
+   "unikalne_agentId": 83,
+   "egzekucje": 84,
+   "przeplywy_runId": 11,
+   "uwaga": "16 plikow agent-*.jsonl na gornym poziomie = 15 samodzielnych (z meta.json) + druga egzekucja agenta przeplywu a3a8ae3b05a6e1fbd (bez meta.json). Kopia potwierdzona drzewem parentUuid: rozwidlenie 03:42:39 (wiadomosc SendMessage), 147 odpowiedzi, 03:42:39-04:24:18."
+  },
+  "stan_teraz": {
+   "pliki_agentow_przeplywow": 72,
+   "unikalne_agentId": 87,
+   "uwaga": "przyrost o 4 pliki w wf_6070a5f0-602 (przeplyw statystyk, w tym ten weryfikator)"
+  }
+ },
+ "tokeny_na_migawkach": {
+  "watek_glowny": {
+   "responses": 746,
+   "input": 1706,
+   "output": 694008,
+   "thinking": 236043,
+   "cache_read": 322522223,
+   "cache_write": 1677969,
+   "cw5m": 0,
+   "cw1h": 1677969,
+   "resp_with_output_details": 746,
+   "output_in_resp_with_details": 694008,
+   "resp_stop_null": 0
+  },
+  "podagenci_razem": {
+   "responses": 8375,
+   "input": 16758,
+   "output": 3179977,
+   "thinking": 1190306,
+   "cache_read": 2523616467,
+   "cache_write": 49047507,
+   "cw5m": 49047507,
+   "cw1h": 0,
+   "resp_with_output_details": 2486,
+   "output_in_resp_with_details": 3112987,
+   "resp_stop_null": 5889
+  },
+  "podagenci_grupy": {
+   "samodzielni": {
+    "responses": 2807,
+    "input": 5622,
+    "output_recorded": 1547495,
+    "cache_read": 1125574262,
+    "cw5m": 19272452,
+    "cw1h": 0,
+    "tool_use": 2923,
+    "complete": 919
+   },
+   "kopia_syntezy": {
+    "responses": 147,
+    "input": 294,
+    "output_recorded": 66122,
+    "cache_read": 78718809,
+    "cw5m": 655012,
+    "cw1h": 0,
+    "tool_use": 147,
+    "complete": 51
+   },
+   "przeplywy": {
+    "responses": 5421,
+    "input": 10842,
+    "output_recorded": 1566360,
+    "cache_read": 1319323396,
+    "cw5m": 29120043,
+    "cw1h": 0,
+    "tool_use": 5936,
+    "complete": 1516
+   }
+  },
+  "podagenci_wg_przeplywu": {
+   "samodzielny": {
+    "minutes": 1185.5000000000002,
+    "responses": 2895,
+    "cache_read": 1179529595,
+    "output_recorded": 1599118,
+    "cw5m": 19459598,
+    "files": 16
+   },
+   "wf_0e783e5d-4ab": {
+    "minutes": 210.1,
+    "responses": 1028,
+    "cache_read": 258129550,
+    "output_recorded": 174071,
+    "cw5m": 4540599,
+    "files": 8
+   },
+   "wf_10e1a801-dd6": {
+    "minutes": 135.9,
+    "responses": 424,
+    "cache_read": 114947553,
+    "output_recorded": 151460,
+    "cw5m": 2251103,
+    "files": 5
+   },
+   "wf_44634517-034": {
+    "minutes": 474.5,
+    "responses": 658,
+    "cache_read": 190791823,
+    "output_recorded": 190741,
+    "cw5m": 6265954,
+    "files": 12
+   },
+   "wf_6070a5f0-602": {
+    "minutes": 22.6,
+    "responses": 83,
+    "cache_read": 10372153,
+    "output_recorded": 17741,
+    "cw5m": 493243,
+    "files": 3
+   },
+   "wf_725a3592-fa1": {
+    "minutes": 7.6,
+    "responses": 8,
+    "cache_read": 359860,
+    "output_recorded": 98,
+    "cw5m": 104761,
+    "files": 2
+   },
+   "wf_88c0988f-4a5": {
+    "minutes": 138.29999999999998,
+    "responses": 659,
+    "cache_read": 142895706,
+    "output_recorded": 152676,
+    "cw5m": 3249946,
+    "files": 8
+   },
+   "wf_a0d51b50-592": {
+    "minutes": 115.7,
+    "responses": 276,
+    "cache_read": 54406887,
+    "output_recorded": 107601,
+    "cw5m": 1350175,
+    "files": 5
+   },
+   "wf_a8783476-2a1": {
+    "minutes": 85.0,
+    "responses": 301,
+    "cache_read": 117287063,
+    "output_recorded": 123187,
+    "cw5m": 1461270,
+    "files": 2
+   },
+   "wf_c5f7e298-4b9": {
+    "minutes": 230.3,
+    "responses": 897,
+    "cache_read": 183891073,
+    "output_recorded": 292531,
+    "cw5m": 4031208,
+    "files": 10
+   },
+   "wf_ce63599a-15f": {
+    "minutes": 126.19999999999999,
+    "responses": 570,
+    "cache_read": 147315277,
+    "output_recorded": 230013,
+    "cw5m": 2031536,
+    "files": 6
+   },
+   "wf_dad224e5-cd8": {
+    "minutes": 232.10000000000002,
+    "responses": 576,
+    "cache_read": 123689927,
+    "output_recorded": 140740,
+    "cw5m": 3808114,
+    "files": 7
+   }
+  },
+  "globalnie": {
+   "responses": 9121,
+   "input": 18464,
+   "output": 3873985,
+   "thinking": 1426349,
+   "cache_read": 2846138690,
+   "cache_write": 50725476,
+   "cw5m": 49047507,
+   "cw1h": 1677969,
+   "resp_with_output_details": 3232,
+   "output_in_resp_with_details": 3806995,
+   "resp_stop_null": 5889,
+   "output_szacowany_warstwowo": 13654144,
+   "output_szacowany_stosunek_sum": 12980223
+  },
+  "wg_modelu": {
+   "claude-opus-5-5": {
+    "responses": 9121,
+    "input": 18464,
+    "output": 3873985,
+    "thinking": 1426349,
+    "cache_read": 2846138690,
+    "cache_write": 50725476,
+    "cw5m": 49047507,
+    "cw1h": 1677969,
+    "resp_with_output_details": 3232,
+    "output_in_resp_with_details": 3806995,
+    "resp_stop_null": 5889
+   }
+  },
+  "kontekst_watku_glownego": {
+   "max": 783552,
+   "mean": 434587,
+   "median": 436174.5,
+   "median_low": 436036,
+   "median_high": 436313,
+   "median_incl_output": 436320.5
+  }
+ },
+ "tokeny_teraz": {
+  "czas": "~09:01Z",
+  "razem": {
+   "responses": 9404,
+   "input": 19042,
+   "output": 3941135,
+   "thinking": 1445325,
+   "cache_read": 2908151687,
+   "cache_write": 51538849,
+   "cw5m": 49801171,
+   "cw1h": 1737678,
+   "resp_with_output_details": 3312,
+   "output_in_resp_with_details": 3872132,
+   "resp_stop_null": 6092
+  },
+  "wg_rodzaju": {
+   "main": {
+    "responses": 779,
+    "input": 1784,
+    "output": 713024,
+    "thinking": 239626,
+    "cache_read": 332579176,
+    "cache_write": 1737678,
+    "cw5m": 0,
+    "cw1h": 1737678,
+    "resp_with_output_details": 779,
+    "output_in_resp_with_details": 713024,
+    "resp_stop_null": 0
+   },
+   "agent": {
+    "responses": 2895,
+    "input": 5798,
+    "output": 1599118,
+    "thinking": 599750,
+    "cache_read": 1179529595,
+    "cache_write": 19459598,
+    "cw5m": 19459598,
+    "cw1h": 0,
+    "resp_with_output_details": 962,
+    "output_in_resp_with_details": 1573059,
+    "resp_stop_null": 1933
+   },
+   "wf_agent": {
+    "responses": 5730,
+    "input": 11460,
+    "output": 1628993,
+    "thinking": 605949,
+    "cache_read": 1396042916,
+    "cache_write": 30341573,
+    "cw5m": 30341573,
+    "cw1h": 0,
+    "resp_with_output_details": 1571,
+    "output_in_resp_with_details": 1586049,
+    "resp_stop_null": 4159
+   }
+  }
+ },
+ "per_plik_na_migawkach": {
+  "MAIN": {
+   "responses": 746,
+   "input": 1706,
+   "output": 694008,
+   "thinking": 236043,
+   "cache_read": 322522223,
+   "cache_write": 1677969,
+   "cw5m": 0,
+   "cw1h": 1677969,
+   "resp_with_output_details": 746,
+   "output_in_resp_with_details": 694008,
+   "resp_stop_null": 0
+  },
+  "subagents/agent-a076389c324f1eb11.jsonl": {
+   "responses": 236,
+   "input": 472,
+   "output": 165330,
+   "thinking": 59065,
+   "cache_read": 117537734,
+   "cache_write": 780229,
+   "cw5m": 780229,
+   "cw1h": 0,
+   "resp_with_output_details": 87,
+   "output_in_resp_with_details": 163885,
+   "resp_stop_null": 149
+  },
+  "subagents/agent-a15e57952f52b96b8.jsonl": {
+   "responses": 138,
+   "input": 276,
+   "output": 32144,
+   "thinking": 12410,
+   "cache_read": 67997159,
+   "cache_write": 1748362,
+   "cw5m": 1748362,
+   "cw1h": 0,
+   "resp_with_output_details": 20,
+   "output_in_resp_with_details": 30056,
+   "resp_stop_null": 118
+  },
+  "subagents/agent-a26849570eda26834.jsonl": {
+   "responses": 135,
+   "input": 270,
+   "output": 95575,
+   "thinking": 35953,
+   "cache_read": 53195172,
+   "cache_write": 1597785,
+   "cw5m": 1597785,
+   "cw1h": 0,
+   "resp_with_output_details": 41,
+   "output_in_resp_with_details": 93838,
+   "resp_stop_null": 94
+  },
+  "subagents/agent-a27284e7b67190ca8.jsonl": {
+   "responses": 115,
+   "input": 230,
+   "output": 114738,
+   "thinking": 45989,
+   "cache_read": 53177375,
+   "cache_write": 1248488,
+   "cw5m": 1248488,
+   "cw1h": 0,
+   "resp_with_output_details": 59,
+   "output_in_resp_with_details": 114197,
+   "resp_stop_null": 56
+  },
+  "subagents/agent-a31322d115de1ad9a.jsonl": {
+   "responses": 119,
+   "input": 238,
+   "output": 38693,
+   "thinking": 18252,
+   "cache_read": 35078638,
+   "cache_write": 451251,
+   "cw5m": 451251,
+   "cw1h": 0,
+   "resp_with_output_details": 31,
+   "output_in_resp_with_details": 37867,
+   "resp_stop_null": 88
+  },
+  "subagents/agent-a358500c03b62940a.jsonl": {
+   "responses": 149,
+   "input": 298,
+   "output": 47636,
+   "thinking": 14087,
+   "cache_read": 58190512,
+   "cache_write": 823416,
+   "cw5m": 823416,
+   "cw1h": 0,
+   "resp_with_output_details": 36,
+   "output_in_resp_with_details": 45547,
+   "resp_stop_null": 113
+  },
+  "subagents/agent-a3a8ae3b05a6e1fbd.jsonl": {
+   "responses": 88,
+   "input": 176,
+   "output": 51623,
+   "thinking": 14522,
+   "cache_read": 53955333,
+   "cache_write": 187146,
+   "cw5m": 187146,
+   "cw1h": 0,
+   "resp_with_output_details": 43,
+   "output_in_resp_with_details": 50209,
+   "resp_stop_null": 45
+  },
+  "subagents/agent-a5045de9ee0554cc8.jsonl": {
+   "responses": 546,
+   "input": 1094,
+   "output": 308761,
+   "thinking": 126266,
+   "cache_read": 196557890,
+   "cache_write": 2683407,
+   "cw5m": 2683407,
+   "cw1h": 0,
+   "resp_with_output_details": 209,
+   "output_in_resp_with_details": 304690,
+   "resp_stop_null": 337
+  },
+  "subagents/agent-a68a8b74f8ab79b44.jsonl": {
+   "responses": 192,
+   "input": 386,
+   "output": 105043,
+   "thinking": 44456,
+   "cache_read": 86654522,
+   "cache_write": 671768,
+   "cw5m": 671768,
+   "cw1h": 0,
+   "resp_with_output_details": 69,
+   "output_in_resp_with_details": 103330,
+   "resp_stop_null": 123
+  },
+  "subagents/agent-a70b2709f5f62a5a2.jsonl": {
+   "responses": 173,
+   "input": 348,
+   "output": 110675,
+   "thinking": 33170,
+   "cache_read": 71560398,
+   "cache_write": 764145,
+   "cw5m": 764145,
+   "cw1h": 0,
+   "resp_with_output_details": 45,
+   "output_in_resp_with_details": 108944,
+   "resp_stop_null": 128
+  },
+  "subagents/agent-a7447ed7be6bcdaf1.jsonl": {
+   "responses": 149,
+   "input": 298,
+   "output": 59869,
+   "thinking": 14318,
+   "cache_read": 57091894,
+   "cache_write": 590949,
+   "cw5m": 590949,
+   "cw1h": 0,
+   "resp_with_output_details": 53,
+   "output_in_resp_with_details": 58717,
+   "resp_stop_null": 96
+  },
+  "subagents/agent-a82012b772f4804f3.jsonl": {
+   "responses": 232,
+   "input": 464,
+   "output": 82017,
+   "thinking": 25255,
+   "cache_read": 96839363,
+   "cache_write": 3213515,
+   "cw5m": 3213515,
+   "cw1h": 0,
+   "resp_with_output_details": 74,
+   "output_in_resp_with_details": 80462,
+   "resp_stop_null": 158
+  },
+  "subagents/agent-a87415027562c59a6.jsonl": {
+   "responses": 144,
+   "input": 288,
+   "output": 59173,
+   "thinking": 19130,
+   "cache_read": 63543243,
+   "cache_write": 780455,
+   "cw5m": 780455,
+   "cw1h": 0,
+   "resp_with_output_details": 53,
+   "output_in_resp_with_details": 58199,
+   "resp_stop_null": 91
+  },
+  "subagents/agent-a9f2ed8bb74c2c0d9.jsonl": {
+   "responses": 318,
+   "input": 636,
+   "output": 229909,
+   "thinking": 113427,
+   "cache_read": 109004296,
+   "cache_write": 1047619,
+   "cw5m": 1047619,
+   "cw1h": 0,
+   "resp_with_output_details": 104,
+   "output_in_resp_with_details": 227594,
+   "resp_stop_null": 214
+  },
+  "subagents/agent-af72e8de1f1d66b66.jsonl": {
+   "responses": 46,
+   "input": 94,
+   "output": 4912,
+   "thinking": 245,
+   "cache_read": 16806037,
+   "cache_write": 1076592,
+   "cw5m": 1076592,
+   "cw1h": 0,
+   "resp_with_output_details": 2,
+   "output_in_resp_with_details": 4155,
+   "resp_stop_null": 44
+  },
+  "subagents/agent-affb914430bd01f17.jsonl": {
+   "responses": 115,
+   "input": 230,
+   "output": 93020,
+   "thinking": 23205,
+   "cache_read": 42340029,
+   "cache_write": 1794471,
+   "cw5m": 1794471,
+   "cw1h": 0,
+   "resp_with_output_details": 36,
+   "output_in_resp_with_details": 91369,
+   "resp_stop_null": 79
+  },
+  "subagents/workflows/wf_0e783e5d-4ab/agent-a22be4196b0ee4bd5.jsonl": {
+   "responses": 93,
+   "input": 186,
+   "output": 24117,
+   "thinking": 7374,
+   "cache_read": 17392454,
+   "cache_write": 246519,
+   "cw5m": 246519,
+   "cw1h": 0,
+   "resp_with_output_details": 33,
+   "output_in_resp_with_details": 23383,
+   "resp_stop_null": 60
+  },
+  "subagents/workflows/wf_0e783e5d-4ab/agent-a578b42bbb76113c0.jsonl": {
+   "responses": 170,
+   "input": 340,
+   "output": 34251,
+   "thinking": 18163,
+   "cache_read": 55088908,
+   "cache_write": 1133283,
+   "cw5m": 1133283,
+   "cw1h": 0,
+   "resp_with_output_details": 42,
+   "output_in_resp_with_details": 33122,
+   "resp_stop_null": 128
+  },
+  "subagents/workflows/wf_0e783e5d-4ab/agent-a696982f79a420808.jsonl": {
+   "responses": 114,
+   "input": 228,
+   "output": 10851,
+   "thinking": 3410,
+   "cache_read": 24167311,
+   "cache_write": 286217,
+   "cw5m": 286217,
+   "cw1h": 0,
+   "resp_with_output_details": 22,
+   "output_in_resp_with_details": 9892,
+   "resp_stop_null": 92
+  },
+  "subagents/workflows/wf_0e783e5d-4ab/agent-a7411b6f706bccb73.jsonl": {
+   "responses": 166,
+   "input": 332,
+   "output": 19541,
+   "thinking": 3724,
+   "cache_read": 45256696,
+   "cache_write": 958431,
+   "cw5m": 958431,
+   "cw1h": 0,
+   "resp_with_output_details": 38,
+   "output_in_resp_with_details": 18146,
+   "resp_stop_null": 128
+  },
+  "subagents/workflows/wf_0e783e5d-4ab/agent-a8644aa76ec49b856.jsonl": {
+   "responses": 168,
+   "input": 336,
+   "output": 25224,
+   "thinking": 8636,
+   "cache_read": 37939892,
+   "cache_write": 399222,
+   "cw5m": 399222,
+   "cw1h": 0,
+   "resp_with_output_details": 35,
+   "output_in_resp_with_details": 23704,
+   "resp_stop_null": 133
+  },
+  "subagents/workflows/wf_0e783e5d-4ab/agent-aaaef594c4e189d71.jsonl": {
+   "responses": 156,
+   "input": 312,
+   "output": 27812,
+   "thinking": 12403,
+   "cache_read": 46340793,
+   "cache_write": 1020824,
+   "cw5m": 1020824,
+   "cw1h": 0,
+   "resp_with_output_details": 36,
+   "output_in_resp_with_details": 26630,
+   "resp_stop_null": 120
+  },
+  "subagents/workflows/wf_0e783e5d-4ab/agent-ab0444d746ccddbb2.jsonl": {
+   "responses": 83,
+   "input": 166,
+   "output": 15962,
+   "thinking": 5822,
+   "cache_read": 16691107,
+   "cache_write": 252182,
+   "cw5m": 252182,
+   "cw1h": 0,
+   "resp_with_output_details": 10,
+   "output_in_resp_with_details": 15184,
+   "resp_stop_null": 73
+  },
+  "subagents/workflows/wf_0e783e5d-4ab/agent-af7b73e4c9674da0a.jsonl": {
+   "responses": 78,
+   "input": 156,
+   "output": 16313,
+   "thinking": 6045,
+   "cache_read": 15252389,
+   "cache_write": 243921,
+   "cw5m": 243921,
+   "cw1h": 0,
+   "resp_with_output_details": 20,
+   "output_in_resp_with_details": 15671,
+   "resp_stop_null": 58
+  },
+  "subagents/workflows/wf_10e1a801-dd6/agent-a018fbab99b79a8e9.jsonl": {
+   "responses": 70,
+   "input": 140,
+   "output": 24590,
+   "thinking": 11028,
+   "cache_read": 10905841,
+   "cache_write": 251660,
+   "cw5m": 251660,
+   "cw1h": 0,
+   "resp_with_output_details": 28,
+   "output_in_resp_with_details": 24223,
+   "resp_stop_null": 42
+  },
+  "subagents/workflows/wf_10e1a801-dd6/agent-a5a0bd0b27c74a819.jsonl": {
+   "responses": 18,
+   "input": 36,
+   "output": 3188,
+   "thinking": 646,
+   "cache_read": 1663627,
+   "cache_write": 90586,
+   "cw5m": 90586,
+   "cw1h": 0,
+   "resp_with_output_details": 13,
+   "output_in_resp_with_details": 3153,
+   "resp_stop_null": 5
+  },
+  "subagents/workflows/wf_10e1a801-dd6/agent-a82de0c2412aaa264.jsonl": {
+   "responses": 89,
+   "input": 178,
+   "output": 50985,
+   "thinking": 26238,
+   "cache_read": 17525178,
+   "cache_write": 286282,
+   "cw5m": 286282,
+   "cw1h": 0,
+   "resp_with_output_details": 47,
+   "output_in_resp_with_details": 50498,
+   "resp_stop_null": 42
+  },
+  "subagents/workflows/wf_10e1a801-dd6/agent-ae5de9b3855116702.jsonl": {
+   "responses": 189,
+   "input": 378,
+   "output": 61723,
+   "thinking": 14907,
+   "cache_read": 74573182,
+   "cache_write": 1178968,
+   "cw5m": 1178968,
+   "cw1h": 0,
+   "resp_with_output_details": 53,
+   "output_in_resp_with_details": 60275,
+   "resp_stop_null": 136
+  },
+  "subagents/workflows/wf_10e1a801-dd6/agent-ae99c9ea523904793.jsonl": {
+   "responses": 58,
+   "input": 116,
+   "output": 10974,
+   "thinking": 1934,
+   "cache_read": 10279725,
+   "cache_write": 443607,
+   "cw5m": 443607,
+   "cw1h": 0,
+   "resp_with_output_details": 12,
+   "output_in_resp_with_details": 10536,
+   "resp_stop_null": 46
+  },
+  "subagents/workflows/wf_44634517-034/agent-a160d071c58d17dd8.jsonl": {
+   "responses": 46,
+   "input": 92,
+   "output": 69286,
+   "thinking": 30942,
+   "cache_read": 9774394,
+   "cache_write": 378885,
+   "cw5m": 378885,
+   "cw1h": 0,
+   "resp_with_output_details": 10,
+   "output_in_resp_with_details": 68975,
+   "resp_stop_null": 36
+  },
+  "subagents/workflows/wf_44634517-034/agent-a1db260ecb346c8f0.jsonl": {
+   "responses": 53,
+   "input": 106,
+   "output": 29637,
+   "thinking": 12973,
+   "cache_read": 18277151,
+   "cache_write": 982270,
+   "cw5m": 982270,
+   "cw1h": 0,
+   "resp_with_output_details": 12,
+   "output_in_resp_with_details": 29157,
+   "resp_stop_null": 41
+  },
+  "subagents/workflows/wf_44634517-034/agent-a26a33699e730c1d9.jsonl": {
+   "responses": 103,
+   "input": 206,
+   "output": 17892,
+   "thinking": 4266,
+   "cache_read": 30723337,
+   "cache_write": 443900,
+   "cw5m": 443900,
+   "cw1h": 0,
+   "resp_with_output_details": 14,
+   "output_in_resp_with_details": 17051,
+   "resp_stop_null": 89
+  },
+  "subagents/workflows/wf_44634517-034/agent-a3a8ae3b05a6e1fbd.jsonl": {
+   "responses": 166,
+   "input": 332,
+   "output": 23020,
+   "thinking": 10512,
+   "cache_read": 68099748,
+   "cache_write": 1428193,
+   "cw5m": 1428193,
+   "cw1h": 0,
+   "resp_with_output_details": 13,
+   "output_in_resp_with_details": 21478,
+   "resp_stop_null": 153
+  },
+  "subagents/workflows/wf_44634517-034/agent-a453edcfacb946a30.jsonl": {
+   "responses": 67,
+   "input": 134,
+   "output": 8983,
+   "thinking": 4313,
+   "cache_read": 21239683,
+   "cache_write": 611714,
+   "cw5m": 611714,
+   "cw1h": 0,
+   "resp_with_output_details": 13,
+   "output_in_resp_with_details": 8405,
+   "resp_stop_null": 54
+  },
+  "subagents/workflows/wf_44634517-034/agent-a50e0a2cf661f1fa2.jsonl": {
+   "responses": 23,
+   "input": 46,
+   "output": 554,
+   "thinking": 187,
+   "cache_read": 3111272,
+   "cache_write": 191826,
+   "cw5m": 191826,
+   "cw1h": 0,
+   "resp_with_output_details": 1,
+   "output_in_resp_with_details": 336,
+   "resp_stop_null": 22
+  },
+  "subagents/workflows/wf_44634517-034/agent-a6577b608fd30ce04.jsonl": {
+   "responses": 26,
+   "input": 52,
+   "output": 189,
+   "thinking": 0,
+   "cache_read": 4091392,
+   "cache_write": 314042,
+   "cw5m": 314042,
+   "cw1h": 0,
+   "resp_with_output_details": 0,
+   "output_in_resp_with_details": 0,
+   "resp_stop_null": 26
+  },
+  "subagents/workflows/wf_44634517-034/agent-a7dce8cf36be08d2a.jsonl": {
+   "responses": 28,
+   "input": 56,
+   "output": 4567,
+   "thinking": 3952,
+   "cache_read": 4854334,
+   "cache_write": 276483,
+   "cw5m": 276483,
+   "cw1h": 0,
+   "resp_with_output_details": 2,
+   "output_in_resp_with_details": 4336,
+   "resp_stop_null": 26
+  },
+  "subagents/workflows/wf_44634517-034/agent-a856d66efb0614c73.jsonl": {
+   "responses": 35,
+   "input": 70,
+   "output": 252,
+   "thinking": 0,
+   "cache_read": 7010032,
+   "cache_write": 362788,
+   "cw5m": 362788,
+   "cw1h": 0,
+   "resp_with_output_details": 0,
+   "output_in_resp_with_details": 0,
+   "resp_stop_null": 35
+  },
+  "subagents/workflows/wf_44634517-034/agent-aa7ccab5f3db17a8f.jsonl": {
+   "responses": 60,
+   "input": 120,
+   "output": 28692,
+   "thinking": 18595,
+   "cache_read": 16088904,
+   "cache_write": 501854,
+   "cw5m": 501854,
+   "cw1h": 0,
+   "resp_with_output_details": 11,
+   "output_in_resp_with_details": 28243,
+   "resp_stop_null": 49
+  },
+  "subagents/workflows/wf_44634517-034/agent-ac1298b42425dadc5.jsonl": {
+   "responses": 15,
+   "input": 30,
+   "output": 169,
+   "thinking": 0,
+   "cache_read": 987069,
+   "cache_write": 517201,
+   "cw5m": 517201,
+   "cw1h": 0,
+   "resp_with_output_details": 0,
+   "output_in_resp_with_details": 0,
+   "resp_stop_null": 15
+  },
+  "subagents/workflows/wf_44634517-034/agent-afaa6d6581e71147d.jsonl": {
+   "responses": 36,
+   "input": 72,
+   "output": 7500,
+   "thinking": 4551,
+   "cache_read": 6534507,
+   "cache_write": 256798,
+   "cw5m": 256798,
+   "cw1h": 0,
+   "resp_with_output_details": 8,
+   "output_in_resp_with_details": 7232,
+   "resp_stop_null": 28
+  },
+  "subagents/workflows/wf_6070a5f0-602/agent-a012aca67076b9fbb.jsonl": {
+   "responses": 9,
+   "input": 18,
+   "output": 372,
+   "thinking": 119,
+   "cache_read": 467251,
+   "cache_write": 25701,
+   "cw5m": 25701,
+   "cw1h": 0,
+   "resp_with_output_details": 1,
+   "output_in_resp_with_details": 318,
+   "resp_stop_null": 8
+  },
+  "subagents/workflows/wf_6070a5f0-602/agent-adbc4996248a95aee.jsonl": {
+   "responses": 33,
+   "input": 66,
+   "output": 6118,
+   "thinking": 1484,
+   "cache_read": 3490027,
+   "cache_write": 209075,
+   "cw5m": 209075,
+   "cw1h": 0,
+   "resp_with_output_details": 4,
+   "output_in_resp_with_details": 5811,
+   "resp_stop_null": 29
+  },
+  "subagents/workflows/wf_6070a5f0-602/agent-ae7b216d63b87111a.jsonl": {
+   "responses": 41,
+   "input": 82,
+   "output": 11251,
+   "thinking": 3893,
+   "cache_read": 6414875,
+   "cache_write": 258467,
+   "cw5m": 258467,
+   "cw1h": 0,
+   "resp_with_output_details": 8,
+   "output_in_resp_with_details": 10996,
+   "resp_stop_null": 33
+  },
+  "subagents/workflows/wf_725a3592-fa1/agent-a9e78ae7ccac9a016.jsonl": {
+   "responses": 4,
+   "input": 8,
+   "output": 50,
+   "thinking": 0,
+   "cache_read": 163451,
+   "cache_write": 69742,
+   "cw5m": 69742,
+   "cw1h": 0,
+   "resp_with_output_details": 0,
+   "output_in_resp_with_details": 0,
+   "resp_stop_null": 4
+  },
+  "subagents/workflows/wf_725a3592-fa1/agent-ada7bb335c1f75108.jsonl": {
+   "responses": 4,
+   "input": 8,
+   "output": 48,
+   "thinking": 0,
+   "cache_read": 196409,
+   "cache_write": 35019,
+   "cw5m": 35019,
+   "cw1h": 0,
+   "resp_with_output_details": 0,
+   "output_in_resp_with_details": 0,
+   "resp_stop_null": 4
+  },
+  "subagents/workflows/wf_88c0988f-4a5/agent-a22224bb5bb6f6eb4.jsonl": {
+   "responses": 63,
+   "input": 126,
+   "output": 3064,
+   "thinking": 1033,
+   "cache_read": 12020605,
+   "cache_write": 269417,
+   "cw5m": 269417,
+   "cw1h": 0,
+   "resp_with_output_details": 6,
+   "output_in_resp_with_details": 2500,
+   "resp_stop_null": 57
+  },
+  "subagents/workflows/wf_88c0988f-4a5/agent-a5b9e2ca4f94e31d6.jsonl": {
+   "responses": 75,
+   "input": 150,
+   "output": 14531,
+   "thinking": 6711,
+   "cache_read": 15382975,
+   "cache_write": 263917,
+   "cw5m": 263917,
+   "cw1h": 0,
+   "resp_with_output_details": 30,
+   "output_in_resp_with_details": 14082,
+   "resp_stop_null": 45
+  },
+  "subagents/workflows/wf_88c0988f-4a5/agent-a61836a2ea5fc4730.jsonl": {
+   "responses": 98,
+   "input": 196,
+   "output": 15913,
+   "thinking": 6786,
+   "cache_read": 24648877,
+   "cache_write": 468267,
+   "cw5m": 468267,
+   "cw1h": 0,
+   "resp_with_output_details": 22,
+   "output_in_resp_with_details": 15084,
+   "resp_stop_null": 76
+  },
+  "subagents/workflows/wf_88c0988f-4a5/agent-a9ebc43460570e3a3.jsonl": {
+   "responses": 108,
+   "input": 216,
+   "output": 50885,
+   "thinking": 7671,
+   "cache_read": 27563865,
+   "cache_write": 731553,
+   "cw5m": 731553,
+   "cw1h": 0,
+   "resp_with_output_details": 20,
+   "output_in_resp_with_details": 50085,
+   "resp_stop_null": 88
+  },
+  "subagents/workflows/wf_88c0988f-4a5/agent-ab410b91c71817e86.jsonl": {
+   "responses": 73,
+   "input": 146,
+   "output": 12002,
+   "thinking": 4527,
+   "cache_read": 14241720,
+   "cache_write": 299188,
+   "cw5m": 299188,
+   "cw1h": 0,
+   "resp_with_output_details": 18,
+   "output_in_resp_with_details": 11418,
+   "resp_stop_null": 55
+  },
+  "subagents/workflows/wf_88c0988f-4a5/agent-ab92472aad18124f8.jsonl": {
+   "responses": 89,
+   "input": 178,
+   "output": 20525,
+   "thinking": 6140,
+   "cache_read": 16449731,
+   "cache_write": 239005,
+   "cw5m": 239005,
+   "cw1h": 0,
+   "resp_with_output_details": 33,
+   "output_in_resp_with_details": 19988,
+   "resp_stop_null": 56
+  },
+  "subagents/workflows/wf_88c0988f-4a5/agent-aeadd220793a2d41c.jsonl": {
+   "responses": 83,
+   "input": 166,
+   "output": 25916,
+   "thinking": 20624,
+   "cache_read": 19668567,
+   "cache_write": 734465,
+   "cw5m": 734465,
+   "cw1h": 0,
+   "resp_with_output_details": 13,
+   "output_in_resp_with_details": 25281,
+   "resp_stop_null": 70
+  },
+  "subagents/workflows/wf_88c0988f-4a5/agent-af2104359985592da.jsonl": {
+   "responses": 70,
+   "input": 140,
+   "output": 9840,
+   "thinking": 4175,
+   "cache_read": 12919366,
+   "cache_write": 244134,
+   "cw5m": 244134,
+   "cw1h": 0,
+   "resp_with_output_details": 14,
+   "output_in_resp_with_details": 9384,
+   "resp_stop_null": 56
+  },
+  "subagents/workflows/wf_a0d51b50-592/agent-a40ae4c2ae04c6ee0.jsonl": {
+   "responses": 37,
+   "input": 74,
+   "output": 11872,
+   "thinking": 6466,
+   "cache_read": 4621145,
+   "cache_write": 175060,
+   "cw5m": 175060,
+   "cw1h": 0,
+   "resp_with_output_details": 6,
+   "output_in_resp_with_details": 11622,
+   "resp_stop_null": 31
+  },
+  "subagents/workflows/wf_a0d51b50-592/agent-a5f39a533b5f2ff8b.jsonl": {
+   "responses": 79,
+   "input": 158,
+   "output": 6655,
+   "thinking": 566,
+   "cache_read": 17449054,
+   "cache_write": 304211,
+   "cw5m": 304211,
+   "cw1h": 0,
+   "resp_with_output_details": 7,
+   "output_in_resp_with_details": 5955,
+   "resp_stop_null": 72
+  },
+  "subagents/workflows/wf_a0d51b50-592/agent-a8cd211c9e4499948.jsonl": {
+   "responses": 68,
+   "input": 136,
+   "output": 18036,
+   "thinking": 6511,
+   "cache_read": 13920749,
+   "cache_write": 336907,
+   "cw5m": 336907,
+   "cw1h": 0,
+   "resp_with_output_details": 14,
+   "output_in_resp_with_details": 16559,
+   "resp_stop_null": 54
+  },
+  "subagents/workflows/wf_a0d51b50-592/agent-a97b89276bf7931f1.jsonl": {
+   "responses": 55,
+   "input": 110,
+   "output": 67428,
+   "thinking": 33777,
+   "cache_read": 12421291,
+   "cache_write": 337564,
+   "cw5m": 337564,
+   "cw1h": 0,
+   "resp_with_output_details": 19,
+   "output_in_resp_with_details": 67119,
+   "resp_stop_null": 36
+  },
+  "subagents/workflows/wf_a0d51b50-592/agent-ac86cc1c1bb85cbe9.jsonl": {
+   "responses": 37,
+   "input": 74,
+   "output": 3610,
+   "thinking": 1063,
+   "cache_read": 5994648,
+   "cache_write": 196433,
+   "cw5m": 196433,
+   "cw1h": 0,
+   "resp_with_output_details": 6,
+   "output_in_resp_with_details": 3308,
+   "resp_stop_null": 31
+  },
+  "subagents/workflows/wf_a8783476-2a1/agent-abfdfaca2ef13a7b4.jsonl": {
+   "responses": 38,
+   "input": 76,
+   "output": 773,
+   "thinking": 50,
+   "cache_read": 4858590,
+   "cache_write": 235340,
+   "cw5m": 235340,
+   "cw1h": 0,
+   "resp_with_output_details": 2,
+   "output_in_resp_with_details": 430,
+   "resp_stop_null": 36
+  },
+  "subagents/workflows/wf_a8783476-2a1/agent-af672122528919503.jsonl": {
+   "responses": 263,
+   "input": 526,
+   "output": 122414,
+   "thinking": 42752,
+   "cache_read": 112428473,
+   "cache_write": 1225930,
+   "cw5m": 1225930,
+   "cw1h": 0,
+   "resp_with_output_details": 112,
+   "output_in_resp_with_details": 120804,
+   "resp_stop_null": 151
+  },
+  "subagents/workflows/wf_c5f7e298-4b9/agent-a040f53d8a1485535.jsonl": {
+   "responses": 78,
+   "input": 156,
+   "output": 23943,
+   "thinking": 17346,
+   "cache_read": 18823183,
+   "cache_write": 359808,
+   "cw5m": 359808,
+   "cw1h": 0,
+   "resp_with_output_details": 22,
+   "output_in_resp_with_details": 23472,
+   "resp_stop_null": 56
+  },
+  "subagents/workflows/wf_c5f7e298-4b9/agent-a29aabd1271c5fd68.jsonl": {
+   "responses": 73,
+   "input": 146,
+   "output": 9359,
+   "thinking": 3272,
+   "cache_read": 11876743,
+   "cache_write": 221178,
+   "cw5m": 221178,
+   "cw1h": 0,
+   "resp_with_output_details": 16,
+   "output_in_resp_with_details": 8914,
+   "resp_stop_null": 57
+  },
+  "subagents/workflows/wf_c5f7e298-4b9/agent-a40bbe274c6070548.jsonl": {
+   "responses": 90,
+   "input": 180,
+   "output": 46337,
+   "thinking": 12754,
+   "cache_read": 19002492,
+   "cache_write": 288278,
+   "cw5m": 288278,
+   "cw1h": 0,
+   "resp_with_output_details": 46,
+   "output_in_resp_with_details": 45950,
+   "resp_stop_null": 44
+  },
+  "subagents/workflows/wf_c5f7e298-4b9/agent-a6d1d5701b925cf41.jsonl": {
+   "responses": 68,
+   "input": 136,
+   "output": 17977,
+   "thinking": 6928,
+   "cache_read": 13426901,
+   "cache_write": 261684,
+   "cw5m": 261684,
+   "cw1h": 0,
+   "resp_with_output_details": 14,
+   "output_in_resp_with_details": 17506,
+   "resp_stop_null": 54
+  },
+  "subagents/workflows/wf_c5f7e298-4b9/agent-aa312e69fff4fc1f4.jsonl": {
+   "responses": 100,
+   "input": 200,
+   "output": 53816,
+   "thinking": 17098,
+   "cache_read": 23064406,
+   "cache_write": 347652,
+   "cw5m": 347652,
+   "cw1h": 0,
+   "resp_with_output_details": 54,
+   "output_in_resp_with_details": 53402,
+   "resp_stop_null": 46
+  },
+  "subagents/workflows/wf_c5f7e298-4b9/agent-aaf84ceed94d857ba.jsonl": {
+   "responses": 109,
+   "input": 218,
+   "output": 14596,
+   "thinking": 2097,
+   "cache_read": 21835488,
+   "cache_write": 250072,
+   "cw5m": 250072,
+   "cw1h": 0,
+   "resp_with_output_details": 18,
+   "output_in_resp_with_details": 13611,
+   "resp_stop_null": 91
+  },
+  "subagents/workflows/wf_c5f7e298-4b9/agent-ab7ed15ee18c7f9ed.jsonl": {
+   "responses": 103,
+   "input": 206,
+   "output": 29452,
+   "thinking": 9404,
+   "cache_read": 21563662,
+   "cache_write": 276666,
+   "cw5m": 276666,
+   "cw1h": 0,
+   "resp_with_output_details": 41,
+   "output_in_resp_with_details": 28825,
+   "resp_stop_null": 62
+  },
+  "subagents/workflows/wf_c5f7e298-4b9/agent-abd1c424d0164d558.jsonl": {
+   "responses": 86,
+   "input": 172,
+   "output": 25884,
+   "thinking": 6527,
+   "cache_read": 14913806,
+   "cache_write": 655419,
+   "cw5m": 655419,
+   "cw1h": 0,
+   "resp_with_output_details": 29,
+   "output_in_resp_with_details": 25247,
+   "resp_stop_null": 57
+  },
+  "subagents/workflows/wf_c5f7e298-4b9/agent-ac29e899834d24a29.jsonl": {
+   "responses": 100,
+   "input": 200,
+   "output": 18537,
+   "thinking": 4827,
+   "cache_read": 20762687,
+   "cache_write": 259850,
+   "cw5m": 259850,
+   "cw1h": 0,
+   "resp_with_output_details": 23,
+   "output_in_resp_with_details": 17713,
+   "resp_stop_null": 77
+  },
+  "subagents/workflows/wf_c5f7e298-4b9/agent-ad07d221db9b5c09f.jsonl": {
+   "responses": 90,
+   "input": 180,
+   "output": 52630,
+   "thinking": 12224,
+   "cache_read": 18621705,
+   "cache_write": 1110601,
+   "cw5m": 1110601,
+   "cw1h": 0,
+   "resp_with_output_details": 51,
+   "output_in_resp_with_details": 52319,
+   "resp_stop_null": 39
+  },
+  "subagents/workflows/wf_ce63599a-15f/agent-a46d9e0323adf8ae2.jsonl": {
+   "responses": 138,
+   "input": 276,
+   "output": 46888,
+   "thinking": 13237,
+   "cache_read": 41350814,
+   "cache_write": 434368,
+   "cw5m": 434368,
+   "cw1h": 0,
+   "resp_with_output_details": 48,
+   "output_in_resp_with_details": 46038,
+   "resp_stop_null": 90
+  },
+  "subagents/workflows/wf_ce63599a-15f/agent-a55aa437470dfb767.jsonl": {
+   "responses": 44,
+   "input": 88,
+   "output": 9630,
+   "thinking": 7124,
+   "cache_read": 6585246,
+   "cache_write": 238534,
+   "cw5m": 238534,
+   "cw1h": 0,
+   "resp_with_output_details": 9,
+   "output_in_resp_with_details": 9342,
+   "resp_stop_null": 35
+  },
+  "subagents/workflows/wf_ce63599a-15f/agent-a80c6f35e28eacfc1.jsonl": {
+   "responses": 49,
+   "input": 98,
+   "output": 18689,
+   "thinking": 6308,
+   "cache_read": 6109324,
+   "cache_write": 176049,
+   "cw5m": 176049,
+   "cw1h": 0,
+   "resp_with_output_details": 24,
+   "output_in_resp_with_details": 17571,
+   "resp_stop_null": 25
+  },
+  "subagents/workflows/wf_ce63599a-15f/agent-ad025dee132028c71.jsonl": {
+   "responses": 76,
+   "input": 152,
+   "output": 19155,
+   "thinking": 13354,
+   "cache_read": 14956337,
+   "cache_write": 272286,
+   "cw5m": 272286,
+   "cw1h": 0,
+   "resp_with_output_details": 21,
+   "output_in_resp_with_details": 18603,
+   "resp_stop_null": 55
+  },
+  "subagents/workflows/wf_ce63599a-15f/agent-ae8a033bfce42ab47.jsonl": {
+   "responses": 111,
+   "input": 222,
+   "output": 67067,
+   "thinking": 27041,
+   "cache_read": 30712237,
+   "cache_write": 435444,
+   "cw5m": 435444,
+   "cw1h": 0,
+   "resp_with_output_details": 69,
+   "output_in_resp_with_details": 66555,
+   "resp_stop_null": 42
+  },
+  "subagents/workflows/wf_ce63599a-15f/agent-aecd6e8f26140c2ed.jsonl": {
+   "responses": 152,
+   "input": 304,
+   "output": 68584,
+   "thinking": 19269,
+   "cache_read": 47601319,
+   "cache_write": 474855,
+   "cw5m": 474855,
+   "cw1h": 0,
+   "resp_with_output_details": 86,
+   "output_in_resp_with_details": 67987,
+   "resp_stop_null": 66
+  },
+  "subagents/workflows/wf_dad224e5-cd8/agent-a2e2d61b96c7d28ef.jsonl": {
+   "responses": 35,
+   "input": 70,
+   "output": 1037,
+   "thinking": 59,
+   "cache_read": 6120366,
+   "cache_write": 225145,
+   "cw5m": 225145,
+   "cw1h": 0,
+   "resp_with_output_details": 4,
+   "output_in_resp_with_details": 743,
+   "resp_stop_null": 31
+  },
+  "subagents/workflows/wf_dad224e5-cd8/agent-a348d2a8e7cf1f6c5.jsonl": {
+   "responses": 173,
+   "input": 346,
+   "output": 87209,
+   "thinking": 32983,
+   "cache_read": 57530641,
+   "cache_write": 2406402,
+   "cw5m": 2406402,
+   "cw1h": 0,
+   "resp_with_output_details": 61,
+   "output_in_resp_with_details": 85988,
+   "resp_stop_null": 112
+  },
+  "subagents/workflows/wf_dad224e5-cd8/agent-a472cdd66d2cb0c0b.jsonl": {
+   "responses": 84,
+   "input": 168,
+   "output": 11035,
+   "thinking": 1565,
+   "cache_read": 13040284,
+   "cache_write": 264874,
+   "cw5m": 264874,
+   "cw1h": 0,
+   "resp_with_output_details": 17,
+   "output_in_resp_with_details": 10363,
+   "resp_stop_null": 67
+  },
+  "subagents/workflows/wf_dad224e5-cd8/agent-a6358d5d8ad207531.jsonl": {
+   "responses": 39,
+   "input": 78,
+   "output": 3220,
+   "thinking": 759,
+   "cache_read": 4317596,
+   "cache_write": 167747,
+   "cw5m": 167747,
+   "cw1h": 0,
+   "resp_with_output_details": 6,
+   "output_in_resp_with_details": 2869,
+   "resp_stop_null": 33
+  },
+  "subagents/workflows/wf_dad224e5-cd8/agent-aa91fab19d57ad831.jsonl": {
+   "responses": 94,
+   "input": 188,
+   "output": 17077,
+   "thinking": 4908,
+   "cache_read": 15944483,
+   "cache_write": 230419,
+   "cw5m": 230419,
+   "cw1h": 0,
+   "resp_with_output_details": 25,
+   "output_in_resp_with_details": 16517,
+   "resp_stop_null": 69
+  },
+  "subagents/workflows/wf_dad224e5-cd8/agent-ac4887df55cb098ed.jsonl": {
+   "responses": 83,
+   "input": 166,
+   "output": 14867,
+   "thinking": 5112,
+   "cache_read": 15754107,
+   "cache_write": 264609,
+   "cw5m": 264609,
+   "cw1h": 0,
+   "resp_with_output_details": 22,
+   "output_in_resp_with_details": 14283,
+   "resp_stop_null": 61
+  },
+  "subagents/workflows/wf_dad224e5-cd8/agent-af726fb2109d239e4.jsonl": {
+   "responses": 68,
+   "input": 136,
+   "output": 6295,
+   "thinking": 1391,
+   "cache_read": 10982450,
+   "cache_write": 248918,
+   "cw5m": 248918,
+   "cw1h": 0,
+   "resp_with_output_details": 10,
+   "output_in_resp_with_details": 5736,
+   "resp_stop_null": 58
+  }
+ },
+ "szacowanie_output_podagentow": {
+  "odtworzenie_metody_raportu": {
+   "metoda": "thinking = 0,2371 tok/znak podpisu; widoczny = 0,5562 tok/znak (tekst + JSON wejscia narzedzi); stosunek sum na 2486 pelnych odpowiedziach",
+   "wynik": 12286215,
+   "thinking": 5595808,
+   "cv": [
+    1.0003,
+    0.9998
+   ],
+   "blad_per_agent_p10_p50_p90": [
+    -0.113,
+    -0.002,
+    0.075
+   ]
+  },
+  "metoda_warstwowa": {
+   "method": "warstwowy (przedzialy dlugosci podpisu thinking i znakow tresci)",
+   "total_output_est": 12960136,
+   "thinking_est": 6343912,
+   "visible_est_incomplete": 4693543,
+   "cv": [
+    1.0174,
+    0.9857
+   ],
+   "thinking_coef_by_sig_bin": {
+    "0-1": 2.3797,
+    "1-1000": 0.0544,
+    "1000-2000": 0.1454,
+    "2000-3000": 0.226,
+    "3000-4000": 0.2617,
+    "4000-6000": 0.2768,
+    "6000-8000": 0.2962,
+    "8000-12000": 0.3076,
+    "12000-20000": 0.3236,
+    "20000-1000000000": 0.3298
+   },
+   "visible_coef_by_char_bin": {
+    "0-200": 0.8946,
+    "200-500": 0.7262,
+    "500-1000": 0.6262,
+    "1000-2000": 0.5685,
+    "2000-5000": 0.5218,
+    "5000-10000": 0.5093,
+    "10000-20000": 0.5275,
+    "20000-1000000000": 0.4911
+   }
+  },
+  "inne": {
+   "MNK_laczny_bez_wyrazu_wolnego": 13145010,
+   "MNK_cv": [
+    1.0763,
+    1.0318
+   ],
+   "srednia_z_pelnych_x_liczba_niepelnych": 10487235
+  },
+  "wniosek": "Wspolczynnik thinking/znak podpisu nie jest staly: rosnie od ~0,05 (podpis <1000 zn.) do ~0,33 (>12000 zn.). Niepelne odpowiedzi maja dluzsze podpisy (srednio 3155 vs 2019 zn.; 241 vs 47 odpowiedzi z podpisem >12000 zn.), wiec jeden wspolczynnik zaniza thinking. Estymator warstwowy: 12,96 mln output (thinking 6,34 mln), CV 1,017/0,986. Zakres wiarygodny ok. 12,3-13,2 mln; 3,18 mln to twarda dolna granica."
+ },
+ "koszt_porownawczy": {
+  "stawki_USD_za_MTok": {
+   "input": 4,
+   "output": 20,
+   "cache_read": 0.2,
+   "cw5m": 5,
+   "cw1h": 8
+  },
+  "uwaga_stawki": "Stawki przejete z raportow (skill claude-api); ich poprawnosci nie weryfikowalem - to zadanie agenta od cennika. Sprawdzilem tylko arytmetyke.",
+  "watek_glowny": 91.82,
+  "podagenci_output_zapisany": 813.63,
+  "podagenci_output_stosunek_sum": 995.75,
+  "podagenci_output_warstwowo": 1009.23,
+  "podagenci_output_MNK": 1012.93,
+  "sesja_razem_dolna_granica": 905.45,
+  "sesja_razem_szacunek": 1101.05,
+  "bez_cache_watek_glowny": 1310.69
+ },
+ "porownanie": [
+  {
+   "obszar": "watek glowny",
+   "miara": "odpowiedzi API (unikalne message.id)",
+   "zgloszone": 746,
+   "zweryfikowane": 746,
+   "roznica_proc": 0.0,
+   "status": "OK"
+  },
+  {
+   "obszar": "watek glowny",
+   "miara": "linie assistant",
+   "zgloszone": 1319,
+   "zweryfikowane": 1319,
+   "roznica_proc": 0.0,
+   "status": "OK"
+  },
+  {
+   "obszar": "watek glowny",
+   "miara": "unikalne requestId",
+   "zgloszone": 746,
+   "zweryfikowane": 746,
+   "roznica_proc": 0.0,
+   "status": "OK"
+  },
+  {
+   "obszar": "watek glowny",
+   "miara": "input_tokens",
+   "zgloszone": 1706,
+   "zweryfikowane": 1706,
+   "roznica_proc": 0.0,
+   "status": "OK"
+  },
+  {
+   "obszar": "watek glowny",
+   "miara": "output_tokens",
+   "zgloszone": 694008,
+   "zweryfikowane": 694008,
+   "roznica_proc": 0.0,
+   "status": "OK"
+  },
+  {
+   "obszar": "watek glowny",
+   "miara": "thinking_tokens",
+   "zgloszone": 236043,
+   "zweryfikowane": 236043,
+   "roznica_proc": 0.0,
+   "status": "OK"
+  },
+  {
+   "obszar": "watek glowny",
+   "miara": "cache_read",
+   "zgloszone": 322522223,
+   "zweryfikowane": 322522223,
+   "roznica_proc": 0.0,
+   "status": "OK"
+  },
+  {
+   "obszar": "watek glowny",
+   "miara": "cache_write 5m",
+   "zgloszone": 0,
+   "zweryfikowane": 0,
+   "roznica_proc": 0,
+   "status": "OK"
+  },
+  {
+   "obszar": "watek glowny",
+   "miara": "cache_write 1h",
+   "zgloszone": 1677969,
+   "zweryfikowane": 1677969,
+   "roznica_proc": 0.0,
+   "status": "OK"
+  },
+  {
+   "obszar": "watek glowny",
+   "miara": "kontekst max",
+   "zgloszone": 783552,
+   "zweryfikowane": 783552,
+   "roznica_proc": 0.0,
+   "status": "OK"
+  },
+  {
+   "obszar": "watek glowny",
+   "miara": "kontekst srednia",
+   "zgloszone": 434587,
+   "zweryfikowane": 434587,
+   "roznica_proc": 0.0,
+   "status": "OK"
+  },
+  {
+   "obszar": "watek glowny",
+   "miara": "kontekst mediana",
+   "zgloszone": 436313,
+   "zweryfikowane": 436174.5,
+   "roznica_proc": 0.03,
+   "status": "OK"
+  },
+  {
+   "obszar": "watek glowny",
+   "miara": "stop_reason tool_use",
+   "zgloszone": 616,
+   "zweryfikowane": 616,
+   "roznica_proc": 0.0,
+   "status": "OK"
+  },
+  {
+   "obszar": "watek glowny",
+   "miara": "stop_reason end_turn",
+   "zgloszone": 130,
+   "zweryfikowane": 130,
+   "roznica_proc": 0.0,
+   "status": "OK"
+  },
+  {
+   "obszar": "watek glowny",
+   "miara": "bloki tool_use",
+   "zgloszone": 747,
+   "zweryfikowane": 747,
+   "roznica_proc": 0.0,
+   "status": "OK"
+  },
+  {
+   "obszar": "watek glowny",
+   "miara": "wywolania Agent",
+   "zgloszone": 15,
+   "zweryfikowane": 15,
+   "roznica_proc": 0.0,
+   "status": "OK"
+  },
+  {
+   "obszar": "watek glowny",
+   "miara": "wywolania Workflow",
+   "zgloszone": 12,
+   "zweryfikowane": 12,
+   "roznica_proc": 0.0,
+   "status": "OK"
+  },
+  {
+   "obszar": "watek glowny",
+   "miara": "SendMessage lacznie",
+   "zgloszone": 17,
+   "zweryfikowane": 17,
+   "roznica_proc": 0.0,
+   "status": "OK"
+  },
+  {
+   "obszar": "watek glowny",
+   "miara": "SendMessage: liczba adresatow",
+   "zgloszone": 9,
+   "zweryfikowane": 8,
+   "roznica_proc": 12.5,
+   "status": "ROZBIEZNOSC >1%"
+  },
+  {
+   "obszar": "watek glowny",
+   "miara": "SendMessage do a5045de9ee0554cc8",
+   "zgloszone": 7,
+   "zweryfikowane": 6,
+   "roznica_proc": 16.67,
+   "status": "ROZBIEZNOSC >1%"
+  },
+  {
+   "obszar": "watek glowny",
+   "miara": "kompakcje",
+   "zgloszone": 2,
+   "zweryfikowane": 2,
+   "roznica_proc": 0.0,
+   "status": "OK"
+  },
+  {
+   "obszar": "watek glowny",
+   "miara": "wiadomosci czlowieka (origin.kind=human)",
+   "zgloszone": 12,
+   "zweryfikowane": 12,
+   "roznica_proc": 0.0,
+   "status": "OK"
+  },
+  {
+   "obszar": "watek glowny",
+   "miara": "koszt USD",
+   "zgloszone": 91.82,
+   "zweryfikowane": 91.82,
+   "roznica_proc": 0.0,
+   "status": "OK"
+  },
+  {
+   "obszar": "watek glowny",
+   "miara": "powiadomienia agentow: suma tool_uses",
+   "zgloszone": 3618,
+   "zweryfikowane": 3070,
+   "roznica_proc": 17.85,
+   "status": "ROZBIEZNOSC >1%"
+  },
+  {
+   "obszar": "watek glowny",
+   "miara": "powiadomienia agentow: suma duration_ms",
+   "zgloszone": 82098091,
+   "zweryfikowane": 72319469,
+   "roznica_proc": 13.52,
+   "status": "ROZBIEZNOSC >1%"
+  },
+  {
+   "obszar": "podagenci",
+   "miara": "odpowiedzi API razem",
+   "zgloszone": 8375,
+   "zweryfikowane": 8375,
+   "roznica_proc": 0.0,
+   "status": "OK"
+  },
+  {
+   "obszar": "podagenci",
+   "miara": "odpowiedzi samodzielnych (15)",
+   "zgloszone": 2807,
+   "zweryfikowane": 2807,
+   "roznica_proc": 0.0,
+   "status": "OK"
+  },
+  {
+   "obszar": "podagenci",
+   "miara": "odpowiedzi przeplywow (68)",
+   "zgloszone": 5421,
+   "zweryfikowane": 5421,
+   "roznica_proc": 0.0,
+   "status": "OK"
+  },
+  {
+   "obszar": "podagenci",
+   "miara": "odpowiedzi kopii syntezy",
+   "zgloszone": 147,
+   "zweryfikowane": 147,
+   "roznica_proc": 0.0,
+   "status": "OK"
+  },
+  {
+   "obszar": "podagenci",
+   "miara": "wywolania narzedzi razem",
+   "zgloszone": 9006,
+   "zweryfikowane": 9006,
+   "roznica_proc": 0.0,
+   "status": "OK"
+  },
+  {
+   "obszar": "podagenci",
+   "miara": "input",
+   "zgloszone": 16758,
+   "zweryfikowane": 16758,
+   "roznica_proc": 0.0,
+   "status": "OK"
+  },
+  {
+   "obszar": "podagenci",
+   "miara": "output zapisany (dolna granica)",
+   "zgloszone": 3180000,
+   "zweryfikowane": 3179977,
+   "roznica_proc": 0.0,
+   "status": "OK"
+  },
+  {
+   "obszar": "podagenci",
+   "miara": "odpowiedzi z pelnym usage",
+   "zgloszone": 2486,
+   "zweryfikowane": 2486,
+   "roznica_proc": 0.0,
+   "status": "OK"
+  },
+  {
+   "obszar": "podagenci",
+   "miara": "cache_read",
+   "zgloszone": 2523600000,
+   "zweryfikowane": 2523616467,
+   "roznica_proc": -0.0,
+   "status": "OK"
+  },
+  {
+   "obszar": "podagenci",
+   "miara": "cache_write 5m",
+   "zgloszone": 49050000,
+   "zweryfikowane": 49047507,
+   "roznica_proc": 0.01,
+   "status": "OK"
+  },
+  {
+   "obszar": "podagenci",
+   "miara": "cache_write 1h",
+   "zgloszone": 0,
+   "zweryfikowane": 0,
+   "roznica_proc": 0,
+   "status": "OK"
+  },
+  {
+   "obszar": "podagenci",
+   "miara": "output szacowany (ta sama metoda: stosunek sum)",
+   "zgloszone": 12280000,
+   "zweryfikowane": 12286215,
+   "roznica_proc": -0.05,
+   "status": "OK"
+  },
+  {
+   "obszar": "podagenci",
+   "miara": "output szacowany (metoda warstwowa, zalecana)",
+   "zgloszone": 12280000,
+   "zweryfikowane": 12960136,
+   "roznica_proc": -5.25,
+   "status": "ROZBIEZNOSC >1%"
+  },
+  {
+   "obszar": "podagenci",
+   "miara": "thinking szacowany (metoda warstwowa)",
+   "zgloszone": 5590000,
+   "zweryfikowane": 6343912,
+   "roznica_proc": -11.88,
+   "status": "ROZBIEZNOSC >1%"
+  },
+  {
+   "obszar": "podagenci",
+   "miara": "koszt USD przy output szacowanym (warstwowo)",
+   "zgloszone": 996,
+   "zweryfikowane": 1009.23,
+   "roznica_proc": -1.31,
+   "status": "ROZBIEZNOSC >1%"
+  },
+  {
+   "obszar": "podagenci",
+   "miara": "koszt USD przy output zapisanym",
+   "zgloszone": 814,
+   "zweryfikowane": 813.63,
+   "roznica_proc": 0.05,
+   "status": "OK"
+  },
+  {
+   "obszar": "podagenci",
+   "miara": "a5045de9: odpowiedzi",
+   "zgloszone": 546,
+   "zweryfikowane": 546,
+   "roznica_proc": 0.0,
+   "status": "OK"
+  },
+  {
+   "obszar": "podagenci",
+   "miara": "a5045de9: cache_read",
+   "zgloszone": 196600000,
+   "zweryfikowane": 196557890,
+   "roznica_proc": 0.02,
+   "status": "OK"
+  },
+  {
+   "obszar": "podagenci",
+   "miara": "suma czasu samodzielnych [min]",
+   "zgloszone": 1163.7,
+   "zweryfikowane": 1163.9,
+   "roznica_proc": -0.02,
+   "status": "OK"
+  },
+  {
+   "obszar": "repo",
+   "miara": "commity na HEAD d4716b00",
+   "zgloszone": 402,
+   "zweryfikowane": 402,
+   "roznica_proc": 0.0,
+   "status": "OK"
+  },
+  {
+   "obszar": "repo",
+   "miara": "autocommity",
+   "zgloszone": 287,
+   "zweryfikowane": 287,
+   "roznica_proc": 0.0,
+   "status": "OK"
+  },
+  {
+   "obszar": "repo",
+   "miara": "pliki sledzone na HEAD",
+   "zgloszone": 1300,
+   "zweryfikowane": 1300,
+   "roznica_proc": 0.0,
+   "status": "OK"
+  },
+  {
+   "obszar": "repo",
+   "miara": "pliki .py",
+   "zgloszone": 235,
+   "zweryfikowane": 235,
+   "roznica_proc": 0.0,
+   "status": "OK"
+  },
+  {
+   "obszar": "repo",
+   "miara": "pliki .png",
+   "zgloszone": 547,
+   "zweryfikowane": 547,
+   "roznica_proc": 0.0,
+   "status": "OK"
+  },
+  {
+   "obszar": "repo",
+   "miara": "funkcje test* w tools/test_*.py",
+   "zgloszone": 158,
+   "zweryfikowane": 158,
+   "roznica_proc": 0.0,
+   "status": "OK"
+  },
+  {
+   "obszar": "repo",
+   "miara": "plansze raport_*.png (01-50)",
+   "zgloszone": 50,
+   "zweryfikowane": 50,
+   "roznica_proc": 0.0,
+   "status": "OK"
+  },
+  {
+   "obszar": "repo",
+   "miara": "rozmiar sledzony MB (10^6 B)",
+   "zgloszone": 350.45,
+   "zweryfikowane": 350.45,
+   "roznica_proc": 0.0,
+   "status": "OK"
+  },
+  {
+   "obszar": "repo",
+   "miara": "commity do migawki watku glownego 08:29:16Z",
+   "zgloszone": 395,
+   "zweryfikowane": 396,
+   "roznica_proc": -0.25,
+   "status": "OK"
+  }
+ ],
+ "rozbieznosci_ponad_1proc": [
+  {
+   "raport": "watek glowny, sekcja 4 (SendMessage)",
+   "zgloszone": "17 wiadomosci do 9 agentow; a5045de9ee0554cc8 dostal 7",
+   "poprawne": "17 wiadomosci do 8 agentow; a5045de9ee0554cc8 dostal 6 (a3a8ae3b 3, a9f2ed8b 3, pozostalych 5 po 1)",
+   "przyczyna": "Blad przepisania w tekscie raportu; wlasny plik main.json tego agenta (4_narzedzia/SendMessage/wg_adresata) ma poprawne 8 adresatow i 6. Raport podagentow podaje poprawnie."
+  },
+  {
+   "raport": "watek glowny, sekcja 6 (powiadomienia agentow)",
+   "zgloszone": "tool_uses 3618; duration_ms 82 098 091 (~22,8 h)",
+   "poprawne": "tool_uses 3070; duration_ms 72 319 469 (~20,1 h)",
+   "przyczyna": "Agent a5045de9 ma 2 powiadomienia, a drugie jest narastajace (tool_uses 548->549, duration 9 778 622->10 054 052 ms). Suma liczy pierwsze podwojnie. Kontrola: 3070 = 2923 wywolan w transkryptach 15 samodzielnych + 147 kopii syntezy. (Suma subagent_tokens tez zawiera to podwojenie: 8 944 161 -> 8 377 967, ale i tak nie jest miara zuzycia.)"
+  },
+  {
+   "raport": "podagenci, sekcja 2 (output szacowany)",
+   "zgloszone": "12,28 mln (thinking 5,59 mln); koszt ok. $996",
+   "poprawne": "ok. 12,96 mln (thinking 6,34 mln), zakres 12,3-13,2 mln; koszt ok. $1 010 (zakres $996-1 010; dolna granica $814)",
+   "przyczyna": "Metode raportu odtworzylem co do 0,05% (12 286 215), ale zaklada staly wspolczynnik thinking/znak podpisu. Dane pelnych odpowiedzi pokazuja zaleznosc rosnaca, a odpowiedzi bez koncowego usage maja dluzsze podpisy, wiec szacunek jest zanizony o ok. 5%. To roznica miedzy estymatorami, nie blad danych; zgloszone przez raport alternatywne 13,01 mln jest blizsze."
+  }
+ ],
+ "uwagi_ponizej_1proc": [
+  "Mediana kontekstu watku glownego: 436 313 to median_high; mediana 746 wartosci = 436 174,5 (roznica 0,03%).",
+  "Commity do migawki 08:29:16Z: 396 (raport glowny: 395 = stan na ostatnia linie transkryptu 08:28:04; autocommit 08:28:22 w przerwie).",
+  "Raport podagentow: \"miedzy egzekucjami nie powtarza sie zaden message.id\" jest prawdziwe po podziale na galezie, ale oba PLIKI agenta a3a8ae3b dziela 1 message.id; raport go deduplikowal (jego sumy zgadzaja sie z moimi po deduplikacji).",
+  "Kontekst ostatniej odpowiedzi a87415027562c59a6: 62 597 (input+cache), raport 62 605 (prawdopodobnie z output 8). a5045de9: 453 556 vs 453 559.",
+  "Suma czasu aktywnosci: samodzielni 1163,9 min (raport 1163,7), przeplywy 1778,3 (1778,2); kopia syntezy 41,65 min potwierdzona galezia parentUuid."
+ ],
+ "skrypty": [
+  "weryfikacja_tokenow.py",
+  "weryfikacja_tokenow_2.py",
+  "weryfikacja_tokenow_3.py",
+  "weryfikacja_tokenow_4.py",
+  "weryfikacja_tokenow_5.py",
+  "weryfikacja_tokenow_6.py",
+  "weryfikacja_tokenow_7.py",
+  "weryfikacja_tokenow_zapis.py"
+ ]
+}

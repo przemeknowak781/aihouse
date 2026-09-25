@@ -1,0 +1,7307 @@
+{
+ "stan_na": "2026-09-25T08:38:50Z",
+ "sesja_start": "2026-09-24T23:07:30.353Z",
+ "uwaga": "migawka; część przepływów trwa",
+ "zrodla": {
+  "agenci_samodzielni": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/agent-*.jsonl (+.meta.json)",
+  "agenci_przeplywow": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_*/agent-*.jsonl (+.meta.json, journal.jsonl)",
+  "definicje": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/workflows/wf_*.json, /root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/workflows/scripts/*.js, /tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/wydanie_workflow.js",
+  "watek_glowny": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de.jsonl",
+  "zadania": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/tasks"
+ },
+ "reguly": {
+  "deduplikacja": "usage liczone raz na message.id; wybierana linia z największym output_tokens (input/cache są identyczne we wszystkich liniach danego id – niespójności: 0)",
+  "czas_aktywnosci": "ostatni minus pierwszy timestamp w transkrypcie egzekucji (dowolny typ linii)",
+  "wywolania_narzedzi": "unikalne tool_use.id w wiadomościach asystenta",
+  "output_rejestrowany": "suma output_tokens wg reguły dedup – DOLNA GRANICA: tylko 2486 z 8375 odpowiedzi ma końcowe usage (pole output_tokens_details); pozostałe mają tylko usage z początku strumienia (output_tokens zwykle 2–24)",
+  "output_szacowany": "dla odpowiedzi bez końcowego usage: 0.5573 tok/znak widocznej treści (text + JSON wejścia tool_use) + 0.2366 tok/znak podpisu bloku thinking; współczynniki skalibrowane na 2486 odpowiedziach z pełnym usage; błąd sumy na zbiorze kalibracyjnym: -0.0%",
+  "metryki_harnessu": "pola tokens (wf_*.json) i subagent_tokens (<usage> w powiadomieniach) = rozmiar kontekstu ostatniej odpowiedzi (input+cache_read+cache_write+output), NIE zużycie skumulowane – zgodność 1,000 dla agentów przepływów"
+ },
+ "kalibracja": {
+  "tok_na_znak_widoczny": 0.5573067559510265,
+  "tok_na_znak_podpisu_thinking": 0.23655152814736352,
+  "n": 2486,
+  "suma_real": 3112987,
+  "suma_szac": 3112987
+ },
+ "liczby": {
+  "agenci_samodzielni": 15,
+  "wywolania_Agent_w_watku": 15,
+  "agenci_przeplywow_unikalne_id": 68,
+  "egzekucje_lacznie": 84,
+  "unikalne_agentId_lacznie": 83,
+  "przeplywy_runId": 11,
+  "uruchomienia_Workflow": 12,
+  "per_przeplyw": {
+   "wf_0e783e5d-4ab": 8,
+   "wf_10e1a801-dd6": 5,
+   "wf_44634517-034": 12,
+   "wf_6070a5f0-602": 3,
+   "wf_725a3592-fa1": 2,
+   "wf_88c0988f-4a5": 8,
+   "wf_a0d51b50-592": 5,
+   "wf_a8783476-2a1": 2,
+   "wf_c5f7e298-4b9": 10,
+   "wf_ce63599a-15f": 6,
+   "wf_dad224e5-cd8": 7
+  },
+  "duplikaty_message_id_miedzy_egzekucjami": 0
+ },
+ "tokeny": {
+  "samodzielni": {
+   "input": 5622,
+   "output_recorded": 1547495,
+   "thinking_recorded": 585228,
+   "cache_read": 1125574262,
+   "cache_write": 19272452,
+   "cache_write_5m": 19272452,
+   "cache_write_1h": 0,
+   "output_estimated": 5304472,
+   "output_estimated_alt": 5505442,
+   "thinking_estimated": 2053400
+  },
+  "przeplywy": {
+   "input": 10842,
+   "output_recorded": 1566360,
+   "thinking_recorded": 583563,
+   "cache_read": 1319323396,
+   "cache_write": 29120043,
+   "cache_write_5m": 29120043,
+   "cache_write_1h": 0,
+   "output_estimated": 6788768,
+   "output_estimated_alt": 7310526,
+   "thinking_estimated": 3445037
+  },
+  "kopia_syntezy": {
+   "input": 294,
+   "output_recorded": 66122,
+   "thinking_recorded": 21515,
+   "cache_read": 78718809,
+   "cache_write": 655012,
+   "cache_write_5m": 655012,
+   "cache_write_1h": 0,
+   "output_estimated": 188323,
+   "output_estimated_alt": 197563,
+   "thinking_estimated": 88575
+  },
+  "razem": {
+   "input": 16758,
+   "output_recorded": 3179977,
+   "thinking_recorded": 1190306,
+   "cache_read": 2523616467,
+   "cache_write": 49047507,
+   "cache_write_5m": 49047507,
+   "cache_write_1h": 0,
+   "output_estimated": 12281563,
+   "output_estimated_alt": 13013531,
+   "thinking_estimated": 5587012
+  }
+ },
+ "odpowiedzi_api": {
+  "samodzielni": 2807,
+  "przeplywy": 5421,
+  "kopia": 147,
+  "razem": 8375
+ },
+ "wywolania_narzedzi": {
+  "samodzielni": 2923,
+  "przeplywy": 5936,
+  "kopia": 147,
+  "razem": 9006,
+  "wg_narzedzia": {
+   "Bash": 6862,
+   "Read": 1113,
+   "Write": 290,
+   "WebSearch": 204,
+   "Edit": 193,
+   "WebFetch": 164,
+   "Monitor": 51,
+   "StructuredOutput": 49,
+   "ToolSearch": 39,
+   "SubagentHandback": 19,
+   "SendMessage": 9,
+   "Skill": 6,
+   "Grep": 3,
+   "ListAgents": 3,
+   "TaskStop": 1
+  }
+ },
+ "czas": {
+  "sesja_zegar_min": 571.3,
+  "suma_aktywnosci_agentow_min": 2983.4,
+  "suma_samodzielni_min": 1163.7,
+  "suma_przeplywy_min": 1778.2,
+  "suma_kopia_min": 41.7,
+  "wspolczynnik_rownoleglosci_do_sesji": 5.22,
+  "czas_z_co_najmniej_1_agentem_min": 551.2,
+  "srednia_rownoleglosc_gdy_ktos_pracuje": 5.41,
+  "max_rownoleglosc": 9,
+  "max_rownoleglosc_od": "2026-09-25T04:08:41Z",
+  "agenci_w_szczycie": [
+   [
+    "Build PZT site-plan generator",
+    "a076389c324f1eb11"
+   ],
+   [
+    "Build RC wall-beam FEM/STM module",
+    "a26849570eda26834"
+   ],
+   [
+    "Write koncepcja.md + final previews",
+    "a31322d115de1ad9a"
+   ],
+   [
+    "Build structural drawings generator",
+    "a5045de9ee0554cc8"
+   ],
+   [
+    "Build MEP installation drawings",
+    "a68a8b74f8ab79b44"
+   ],
+   [
+    "Build construction details generator",
+    "a9f2ed8bb74c2c0d9"
+   ],
+   [
+    "audyt:A1",
+    "a160d071c58d17dd8"
+   ],
+   [
+    "audyt:A2",
+    "afaa6d6581e71147d"
+   ],
+   [
+    "synteza (kopia)",
+    "a3a8ae3b05a6e1fbd"
+   ]
+  ],
+  "rozklad_rownoleglosci_min": {
+   "1": 0.0,
+   "2": 5.4,
+   "3": 101.0,
+   "4": 71.2,
+   "5": 119.6,
+   "6": 112.3,
+   "7": 44.2,
+   "8": 74.3,
+   "9": 23.3
+  },
+  "szczyty": [
+   [
+    "2026-09-24T23:31:47Z",
+    8
+   ],
+   [
+    "2026-09-24T23:37:58Z",
+    8
+   ],
+   [
+    "2026-09-24T23:48:01Z",
+    8
+   ],
+   [
+    "2026-09-24T23:51:00Z",
+    8
+   ],
+   [
+    "2026-09-25T00:04:10Z",
+    8
+   ],
+   [
+    "2026-09-25T00:11:00Z",
+    8
+   ],
+   [
+    "2026-09-25T00:11:30Z",
+    8
+   ],
+   [
+    "2026-09-25T00:17:34Z",
+    8
+   ],
+   [
+    "2026-09-25T00:21:43Z",
+    8
+   ],
+   [
+    "2026-09-25T00:29:07Z",
+    8
+   ],
+   [
+    "2026-09-25T04:08:17Z",
+    8
+   ],
+   [
+    "2026-09-25T04:08:41Z",
+    9
+   ],
+   [
+    "2026-09-25T04:22:09Z",
+    9
+   ],
+   [
+    "2026-09-25T06:33:46Z",
+    8
+   ],
+   [
+    "2026-09-25T06:48:07Z",
+    8
+   ],
+   [
+    "2026-09-25T06:48:07Z",
+    9
+   ],
+   [
+    "2026-09-25T06:52:46Z",
+    9
+   ]
+  ]
+ },
+ "najdluzszy": "a5045de9ee0554cc8",
+ "najdrozszy_cache_read": "a5045de9ee0554cc8",
+ "koszt_usd": {
+  "cennik": {
+   "input": 4.0,
+   "output": 20.0,
+   "cw5": 5.0,
+   "cw1h": 8.0,
+   "cr": 0.2
+  },
+  "zrodlo_cennika": "pakiet skill claude-api: shared/models.md:77 i shared/model-migration.md:2023 (claude-opus-5-5: $4/$20, odczyt cache $0,20; zapis 5m $5 i 1h $8 wyprowadzone z mnożników 1,25x/2x – do potwierdzenia)",
+  "dolny": 813.63,
+  "srodkowy": 995.66,
+  "alt": 1010.3,
+  "samodzielni_srodkowy": 427.59,
+  "przeplywy_srodkowy": 545.28,
+  "kopia_srodkowy": 22.79,
+  "per_przeplyw_srodkowy": {
+   "wf_0e783e5d-4ab": 92.01,
+   "wf_10e1a801-dd6": 42.59,
+   "wf_44634517-034": 102.07,
+   "wf_6070a5f0-602": 7.26,
+   "wf_725a3592-fa1": 0.63,
+   "wf_88c0988f-4a5": 57.87,
+   "wf_a0d51b50-592": 28.4,
+   "wf_a8783476-2a1": 36.21,
+   "wf_c5f7e298-4b9": 72.42,
+   "wf_ce63599a-15f": 49.91,
+   "wf_dad224e5-cd8": 55.92
+  },
+  "skladniki_srodkowe": {
+   "input": 0.07,
+   "output": 245.63,
+   "cache_write": 245.24,
+   "cache_read": 504.72
+  }
+ },
+ "estymator": {
+  "ilorazowy": {
+   "tok_na_znak": 0.5573067559510265,
+   "tok_na_znak_podpisu": 0.23655152814736352
+  },
+  "regresja": {
+   "vis": [
+    0.40988025183573323,
+    0.4979657579950044,
+    83.08190671219097
+   ],
+   "thinking": [
+    0.33623994500542187,
+    -264.4297004070804
+   ]
+  },
+  "walidacja_krzyzowa_suma_szac_do_real": [
+   0.9869,
+   1.0117
+  ]
+ },
+ "speed_service_tier": {
+  "('standard', 'standard')": 2486,
+  "(None, 'standard')": 5889
+ },
+ "rownoleglosc_tylko_przeplywy": [
+  7,
+  "2026-09-25T06:48:07Z"
+ ],
+ "rownoleglosc_per_przeplyw": {
+  "wf_0e783e5d-4ab": [
+   2,
+   "2026-09-24T23:28:40Z"
+  ],
+  "wf_10e1a801-dd6": [
+   2,
+   "2026-09-25T06:48:07Z"
+  ],
+  "wf_44634517-034": [
+   2,
+   "2026-09-24T23:37:58Z"
+  ],
+  "wf_6070a5f0-602": [
+   2,
+   "2026-09-25T08:27:31Z"
+  ],
+  "wf_725a3592-fa1": [
+   2,
+   "2026-09-24T23:30:08Z"
+  ],
+  "wf_88c0988f-4a5": [
+   2,
+   "2026-09-24T23:27:37Z"
+  ],
+  "wf_a0d51b50-592": [
+   2,
+   "2026-09-25T02:30:57Z"
+  ],
+  "wf_a8783476-2a1": [
+   1,
+   "2026-09-25T07:13:34Z"
+  ],
+  "wf_c5f7e298-4b9": [
+   2,
+   "2026-09-25T06:33:46Z"
+  ],
+  "wf_ce63599a-15f": [
+   2,
+   "2026-09-25T06:33:03Z"
+  ],
+  "wf_dad224e5-cd8": [
+   2,
+   "2026-09-25T07:20:15Z"
+  ]
+ },
+ "najdrozszy_srodkowy": "a5045de9ee0554cc8",
+ "przeplywy": [
+  {
+   "runId": "wf_0e783e5d-4ab",
+   "nazwa": "rejestr-norm-B",
+   "fazy": [
+    "Badanie",
+    "Weryfikacja"
+   ],
+   "uruchomienia": [
+    {
+     "taskId": "wqihva7xz",
+     "uruchomiony": "2026-09-24T23:28:40.603Z",
+     "resumeFromRunId": null,
+     "koniec": "2026-09-25T01:14:09.307Z",
+     "jak": "zakończony (powiadomienie completed)",
+     "czas_min": 105.5,
+     "powiadomienie": {
+      "taskId": "wqihva7xz",
+      "status": "completed",
+      "ts": "2026-09-25T01:14:09.307Z",
+      "summary": "Dynamic workflow \"Normy techniczne: rysunek budowlany, konstrukcja/obciążenia, energia/instalacje, elektryka — z weryfik",
+      "subagent_tokens": 3320506,
+      "tool_uses": 1141,
+      "duration_ms": 6328688,
+      "agent_count": 8,
+      "agents_done": 8,
+      "agents_error": 0
+     }
+    }
+   ],
+   "liczba_uruchomien": 1,
+   "start": "2026-09-24T23:28:40Z",
+   "koniec": "2026-09-25T01:14:09Z",
+   "stan_na": null,
+   "czas_zegarowy_min": 105.5,
+   "status": "zakończony (powiadomienie completed)",
+   "agenci_pliki": 8,
+   "agenci_journal_started": 8,
+   "agenci_journal_result": 8,
+   "agentCount_wf_json": 8,
+   "wf_json_status": "completed",
+   "wf_json_durationMs": 6328688,
+   "wf_json_totalTokens": 3320506,
+   "wf_json_totalToolCalls": 1141,
+   "logs": [],
+   "suma_czasu_agentow_min": 210.1,
+   "odpowiedzi_api": 1028,
+   "wywolania_narzedzi": 1141,
+   "tokeny": {
+    "input": 2056,
+    "output_recorded": 174071,
+    "thinking_recorded": 65577,
+    "cache_read": 258129550,
+    "cache_write": 4540599,
+    "cache_write_5m": 4540599,
+    "cache_write_1h": 0,
+    "output_estimated": 883413,
+    "output_estimated_alt": 875394,
+    "thinking_estimated": 338684
+   },
+   "etykiety": [
+    [
+     "badanie:R4",
+     "a578b42bbb76113c0",
+     "2026-09-24T23:28:40Z",
+     "2026-09-25T00:10:58Z",
+     "zakończony"
+    ],
+    [
+     "badanie:R5",
+     "a8644aa76ec49b856",
+     "2026-09-24T23:28:40Z",
+     "2026-09-25T00:04:08Z",
+     "zakończony"
+    ],
+    [
+     "badanie:R6",
+     "aaaef594c4e189d71",
+     "2026-09-25T00:04:10Z",
+     "2026-09-25T00:38:11Z",
+     "zakończony"
+    ],
+    [
+     "badanie:R7",
+     "a7411b6f706bccb73",
+     "2026-09-25T00:11:00Z",
+     "2026-09-25T00:46:49Z",
+     "zakończony"
+    ],
+    [
+     "weryfikacja:R5",
+     "a22be4196b0ee4bd5",
+     "2026-09-25T00:38:12Z",
+     "2026-09-25T00:54:42Z",
+     "zakończony"
+    ],
+    [
+     "weryfikacja:R4",
+     "af7b73e4c9674da0a",
+     "2026-09-25T00:46:50Z",
+     "2026-09-25T01:01:55Z",
+     "zakończony"
+    ],
+    [
+     "weryfikacja:R6",
+     "a696982f79a420808",
+     "2026-09-25T00:54:43Z",
+     "2026-09-25T01:13:27Z",
+     "zakończony"
+    ],
+    [
+     "weryfikacja:R7",
+     "ab0444d746ccddbb2",
+     "2026-09-25T01:01:56Z",
+     "2026-09-25T01:14:08Z",
+     "zakończony"
+    ]
+   ]
+  },
+  {
+   "runId": "wf_10e1a801-dd6",
+   "nazwa": "poprawki-runda2",
+   "fazy": [
+    "Funkcja",
+    "Fizyka i woda",
+    "Weryfikacja",
+    "Domknięcie"
+   ],
+   "uruchomienia": [
+    {
+     "taskId": "wbied9nrs",
+     "uruchomiony": "2026-09-25T05:21:51.440Z",
+     "resumeFromRunId": null,
+     "koniec": "2026-09-25T07:13:27.747Z",
+     "jak": "zatrzymany TaskStop",
+     "czas_min": 111.6,
+     "powiadomienie": null
+    }
+   ],
+   "liczba_uruchomien": 1,
+   "start": "2026-09-25T05:21:51Z",
+   "koniec": "2026-09-25T07:13:27Z",
+   "stan_na": null,
+   "czas_zegarowy_min": 111.6,
+   "status": "zatrzymany TaskStop",
+   "agenci_pliki": 5,
+   "agenci_journal_started": 5,
+   "agenci_journal_result": 4,
+   "agentCount_wf_json": 5,
+   "wf_json_status": "killed",
+   "wf_json_durationMs": 6696291,
+   "wf_json_totalTokens": 1567807,
+   "wf_json_totalToolCalls": 444,
+   "logs": [],
+   "suma_czasu_agentow_min": 135.9,
+   "odpowiedzi_api": 424,
+   "wywolania_narzedzi": 444,
+   "tokeny": {
+    "input": 848,
+    "output_recorded": 151460,
+    "thinking_recorded": 54753,
+    "cache_read": 114947553,
+    "cache_write": 2251103,
+    "cache_write_5m": 2251103,
+    "cache_write_1h": 0,
+    "output_estimated": 416988,
+    "output_estimated_alt": 442636,
+    "thinking_estimated": 214566
+   },
+   "etykiety": [
+    [
+     "poprawki:funkcja",
+     "ae99c9ea523904793",
+     "2026-09-25T05:21:51Z",
+     "2026-09-25T05:48:45Z",
+     "zakończony"
+    ],
+    [
+     "poprawki:fizyka-woda",
+     "ae5de9b3855116702",
+     "2026-09-25T05:48:46Z",
+     "2026-09-25T06:48:05Z",
+     "zakończony"
+    ],
+    [
+     "weryfikacja:V1",
+     "a018fbab99b79a8e9",
+     "2026-09-25T06:48:07Z",
+     "2026-09-25T07:09:56Z",
+     "zakończony"
+    ],
+    [
+     "weryfikacja:V2",
+     "a82de0c2412aaa264",
+     "2026-09-25T06:48:07Z",
+     "2026-09-25T07:12:31Z",
+     "zakończony"
+    ],
+    [
+     "weryfikacja:V3",
+     "a5a0bd0b27c74a819",
+     "2026-09-25T07:09:57Z",
+     "2026-09-25T07:13:27Z",
+     "przerwany (przepływ zatrzymany TaskStop)"
+    ]
+   ]
+  },
+  {
+   "runId": "wf_44634517-034",
+   "nazwa": "koncepcja-panel",
+   "fazy": [
+    "Warianty",
+    "Ocena",
+    "Synteza",
+    "Audyt",
+    "Poprawki"
+   ],
+   "uruchomienia": [
+    {
+     "taskId": "we1mlli53",
+     "uruchomiony": "2026-09-24T23:37:57.058Z",
+     "resumeFromRunId": null,
+     "koniec": "2026-09-25T02:03:24.149Z",
+     "jak": "zatrzymany TaskStop",
+     "czas_min": 145.5,
+     "powiadomienie": null
+    },
+    {
+     "taskId": "wy0zakhf7",
+     "uruchomiony": "2026-09-25T02:03:52.378Z",
+     "resumeFromRunId": "wf_44634517-034",
+     "koniec": "2026-09-25T05:20:05.841Z",
+     "jak": "zakończony (powiadomienie completed)",
+     "czas_min": 196.2,
+     "powiadomienie": {
+      "taskId": "wy0zakhf7",
+      "status": "completed",
+      "ts": "2026-09-25T05:20:05.841Z",
+      "summary": "Dynamic workflow \"Panel architektów: 3 warianty koncepcji z szkicu, ocena przez 3 sędziów, synteza do modelu danych, aud",
+      "subagent_tokens": 3388090,
+      "tool_uses": 531,
+      "duration_ms": 11773462,
+      "agent_count": 11,
+      "agents_done": 11,
+      "agents_error": 0
+     }
+    }
+   ],
+   "liczba_uruchomien": 2,
+   "start": "2026-09-24T23:37:57Z",
+   "koniec": "2026-09-25T05:20:05Z",
+   "stan_na": null,
+   "czas_zegarowy_min": 342.1,
+   "status": "zakończony (powiadomienie completed)",
+   "agenci_pliki": 12,
+   "agenci_journal_started": 12,
+   "agenci_journal_result": 11,
+   "agentCount_wf_json": 11,
+   "wf_json_status": "completed",
+   "wf_json_durationMs": 11773462,
+   "wf_json_totalTokens": 3388090,
+   "wf_json_totalToolCalls": 531,
+   "logs": [
+    "Gotowe warianty: W1, W2, W3",
+    "Audyt: 51 uwag (krytyczne: 2)"
+   ],
+   "suma_czasu_agentow_min": 474.6,
+   "odpowiedzi_api": 599,
+   "wywolania_narzedzi": 674,
+   "tokeny": {
+    "input": 1198,
+    "output_recorded": 176242,
+    "thinking_recorded": 83298,
+    "cache_read": 166028347,
+    "cache_write": 5798088,
+    "cache_write_5m": 5798088,
+    "cache_write_1h": 0,
+    "output_estimated": 1993301,
+    "output_estimated_alt": 2441962,
+    "thinking_estimated": 1409586
+   },
+   "etykiety": [
+    [
+     "wariant:W1",
+     "a1db260ecb346c8f0",
+     "2026-09-24T23:37:57Z",
+     "2026-09-25T00:37:34Z",
+     "zakończony"
+    ],
+    [
+     "wariant:W2",
+     "a453edcfacb946a30",
+     "2026-09-24T23:37:58Z",
+     "2026-09-25T01:11:36Z",
+     "zakończony"
+    ],
+    [
+     "wariant:W3",
+     "ac1298b42425dadc5",
+     "2026-09-25T00:37:35Z",
+     "2026-09-25T02:03:24Z",
+     "przerwany (TaskStop we1mlli53, 02:03:24)"
+    ],
+    [
+     "wariant:W3",
+     "aa7ccab5f3db17a8f",
+     "2026-09-25T02:03:52Z",
+     "2026-09-25T02:39:46Z",
+     "zakończony"
+    ],
+    [
+     "sędzia:J1",
+     "a856d66efb0614c73",
+     "2026-09-25T02:39:48Z",
+     "2026-09-25T02:55:58Z",
+     "zakończony"
+    ],
+    [
+     "sędzia:J2",
+     "a6577b608fd30ce04",
+     "2026-09-25T02:39:49Z",
+     "2026-09-25T02:55:42Z",
+     "zakończony"
+    ],
+    [
+     "sędzia:J3",
+     "a7dce8cf36be08d2a",
+     "2026-09-25T02:55:43Z",
+     "2026-09-25T03:09:40Z",
+     "zakończony"
+    ],
+    [
+     "synteza",
+     "a3a8ae3b05a6e1fbd",
+     "2026-09-25T03:09:41Z",
+     "2026-09-25T04:02:30Z",
+     "zakończony"
+    ],
+    [
+     "audyt:A1",
+     "a160d071c58d17dd8",
+     "2026-09-25T04:02:33Z",
+     "2026-09-25T04:25:51Z",
+     "zakończony"
+    ],
+    [
+     "audyt:A2",
+     "afaa6d6581e71147d",
+     "2026-09-25T04:02:33Z",
+     "2026-09-25T04:22:08Z",
+     "zakończony"
+    ],
+    [
+     "audyt:A3",
+     "a50e0a2cf661f1fa2",
+     "2026-09-25T04:22:09Z",
+     "2026-09-25T04:34:16Z",
+     "zakończony"
+    ],
+    [
+     "poprawki",
+     "a26a33699e730c1d9",
+     "2026-09-25T04:34:17Z",
+     "2026-09-25T05:20:04Z",
+     "zakończony"
+    ]
+   ]
+  },
+  {
+   "runId": "wf_6070a5f0-602",
+   "nazwa": "statystyki-sesji",
+   "fazy": [
+    "Zbieranie",
+    "Weryfikacja"
+   ],
+   "uruchomienia": [
+    {
+     "taskId": "w4z4krxmz",
+     "uruchomiony": "2026-09-25T08:27:30.323Z",
+     "resumeFromRunId": null,
+     "koniec": null,
+     "jak": "trwa",
+     "czas_min": 11.3,
+     "powiadomienie": null
+    }
+   ],
+   "liczba_uruchomien": 1,
+   "start": "2026-09-25T08:27:30Z",
+   "koniec": null,
+   "stan_na": "2026-09-25T08:38:50Z",
+   "czas_zegarowy_min": 11.3,
+   "status": "trwa",
+   "agenci_pliki": 3,
+   "agenci_journal_started": 3,
+   "agenci_journal_result": 1,
+   "agentCount_wf_json": null,
+   "wf_json_status": null,
+   "wf_json_durationMs": null,
+   "wf_json_totalTokens": null,
+   "wf_json_totalToolCalls": null,
+   "logs": null,
+   "suma_czasu_agentow_min": 22.6,
+   "odpowiedzi_api": 83,
+   "wywolania_narzedzi": 91,
+   "tokeny": {
+    "input": 166,
+    "output_recorded": 17741,
+    "thinking_recorded": 5496,
+    "cache_read": 10372153,
+    "cache_write": 493243,
+    "cache_write_5m": 493243,
+    "cache_write_1h": 0,
+    "output_estimated": 135991,
+    "output_estimated_alt": 133647,
+    "thinking_estimated": 43718
+   },
+   "etykiety": [
+    [
+     "dane:watek-glowny",
+     "adbc4996248a95aee",
+     "2026-09-25T08:27:30Z",
+     "2026-09-25T08:36:25Z",
+     "zakończony"
+    ],
+    [
+     "dane:podagenci-przeplywy",
+     "ae7b216d63b87111a",
+     "2026-09-25T08:27:31Z",
+     "2026-09-25T08:38:47Z",
+     "trwa (ten raport)"
+    ],
+    [
+     "dane:repozytorium",
+     "a012aca67076b9fbb",
+     "2026-09-25T08:36:26Z",
+     "2026-09-25T08:38:50Z",
+     "trwa (brak wpisu result w journal.jsonl)"
+    ]
+   ]
+  },
+  {
+   "runId": "wf_725a3592-fa1",
+   "nazwa": "koncepcja-panel",
+   "fazy": [
+    "Warianty",
+    "Ocena",
+    "Synteza",
+    "Audyt",
+    "Poprawki"
+   ],
+   "uruchomienia": [
+    {
+     "taskId": "whby2u54e",
+     "uruchomiony": "2026-09-24T23:30:07.987Z",
+     "resumeFromRunId": null,
+     "koniec": "2026-09-24T23:33:56.079Z",
+     "jak": "zatrzymany TaskStop",
+     "czas_min": 3.8,
+     "powiadomienie": null
+    }
+   ],
+   "liczba_uruchomien": 1,
+   "start": "2026-09-24T23:30:07Z",
+   "koniec": "2026-09-24T23:33:56Z",
+   "stan_na": null,
+   "czas_zegarowy_min": 3.8,
+   "status": "zatrzymany TaskStop",
+   "agenci_pliki": 2,
+   "agenci_journal_started": 2,
+   "agenci_journal_result": 0,
+   "agentCount_wf_json": 3,
+   "wf_json_status": "killed",
+   "wf_json_durationMs": 228073,
+   "wf_json_totalTokens": 138780,
+   "wf_json_totalToolCalls": 11,
+   "logs": [],
+   "suma_czasu_agentow_min": 7.6,
+   "odpowiedzi_api": 8,
+   "wywolania_narzedzi": 11,
+   "tokeny": {
+    "input": 16,
+    "output_recorded": 98,
+    "thinking_recorded": 0,
+    "cache_read": 359860,
+    "cache_write": 104761,
+    "cache_write_5m": 104761,
+    "cache_write_1h": 0,
+    "output_estimated": 1683,
+    "output_estimated_alt": 1544,
+    "thinking_estimated": 857
+   },
+   "etykiety": [
+    [
+     "wariant:W1",
+     "a9e78ae7ccac9a016",
+     "2026-09-24T23:30:08Z",
+     "2026-09-24T23:33:56Z",
+     "przerwany (przepływ zatrzymany TaskStop)"
+    ],
+    [
+     "wariant:W2",
+     "ada7bb335c1f75108",
+     "2026-09-24T23:30:08Z",
+     "2026-09-24T23:33:56Z",
+     "przerwany (przepływ zatrzymany TaskStop)"
+    ]
+   ]
+  },
+  {
+   "runId": "wf_88c0988f-4a5",
+   "nazwa": "rejestr-prawny-A",
+   "fazy": [
+    "Badanie",
+    "Weryfikacja"
+   ],
+   "uruchomienia": [
+    {
+     "taskId": "w3j43xp0k",
+     "uruchomiony": "2026-09-24T23:27:36.473Z",
+     "resumeFromRunId": null,
+     "koniec": "2026-09-25T00:41:13.889Z",
+     "jak": "zakończony (powiadomienie completed)",
+     "czas_min": 73.6,
+     "powiadomienie": {
+      "taskId": "w3j43xp0k",
+      "status": "completed",
+      "ts": "2026-09-25T00:41:13.889Z",
+      "summary": "Dynamic workflow \"Weryfikacja stanu prawnego (PB, zakres projektu, WT, planowanie/PZT) na źródłach pierwotnych\" complete",
+      "subagent_tokens": 2766442,
+      "tool_uses": 715,
+      "duration_ms": 4417397,
+      "agent_count": 8,
+      "agents_done": 8,
+      "agents_error": 0
+     }
+    }
+   ],
+   "liczba_uruchomien": 1,
+   "start": "2026-09-24T23:27:36Z",
+   "koniec": "2026-09-25T00:41:13Z",
+   "stan_na": null,
+   "czas_zegarowy_min": 73.6,
+   "status": "zakończony (powiadomienie completed)",
+   "agenci_pliki": 8,
+   "agenci_journal_started": 8,
+   "agenci_journal_result": 8,
+   "agentCount_wf_json": 8,
+   "wf_json_status": "completed",
+   "wf_json_durationMs": 4417397,
+   "wf_json_totalTokens": 2766442,
+   "wf_json_totalToolCalls": 715,
+   "logs": [],
+   "suma_czasu_agentow_min": 138.2,
+   "odpowiedzi_api": 659,
+   "wywolania_narzedzi": 715,
+   "tokeny": {
+    "input": 1318,
+    "output_recorded": 152676,
+    "thinking_recorded": 57667,
+    "cache_read": 142895706,
+    "cache_write": 3249946,
+    "cache_write_5m": 3249946,
+    "cache_write_1h": 0,
+    "output_estimated": 651735,
+    "output_estimated_alt": 638634,
+    "thinking_estimated": 244332
+   },
+   "etykiety": [
+    [
+     "badanie:R1",
+     "a61836a2ea5fc4730",
+     "2026-09-24T23:27:36Z",
+     "2026-09-24T23:50:59Z",
+     "zakończony"
+    ],
+    [
+     "badanie:R2",
+     "ab410b91c71817e86",
+     "2026-09-24T23:27:37Z",
+     "2026-09-24T23:48:00Z",
+     "zakończony"
+    ],
+    [
+     "badanie:R3",
+     "aeadd220793a2d41c",
+     "2026-09-24T23:48:01Z",
+     "2026-09-25T00:11:29Z",
+     "zakończony"
+    ],
+    [
+     "badanie:R8",
+     "a9ebc43460570e3a3",
+     "2026-09-24T23:51:00Z",
+     "2026-09-25T00:17:33Z",
+     "zakończony"
+    ],
+    [
+     "weryfikacja:R2",
+     "a22224bb5bb6f6eb4",
+     "2026-09-25T00:11:30Z",
+     "2026-09-25T00:21:43Z",
+     "zakończony"
+    ],
+    [
+     "weryfikacja:R1",
+     "af2104359985592da",
+     "2026-09-25T00:17:34Z",
+     "2026-09-25T00:29:06Z",
+     "zakończony"
+    ],
+    [
+     "weryfikacja:R3",
+     "a5b9e2ca4f94e31d6",
+     "2026-09-25T00:21:43Z",
+     "2026-09-25T00:32:17Z",
+     "zakończony"
+    ],
+    [
+     "weryfikacja:R8",
+     "ab92472aad18124f8",
+     "2026-09-25T00:29:07Z",
+     "2026-09-25T00:41:12Z",
+     "zakończony"
+    ]
+   ]
+  },
+  {
+   "runId": "wf_a0d51b50-592",
+   "nazwa": "mostki-2d-solver",
+   "fazy": [
+    "Budowa",
+    "Weryfikacja",
+    "Poprawki",
+    "Demo"
+   ],
+   "uruchomienia": [
+    {
+     "taskId": "wmqylk5tf",
+     "uruchomiony": "2026-09-25T01:58:43.430Z",
+     "resumeFromRunId": null,
+     "koniec": "2026-09-25T03:42:04.012Z",
+     "jak": "zakończony (powiadomienie completed)",
+     "czas_min": 103.3,
+     "powiadomienie": {
+      "taskId": "wmqylk5tf",
+      "status": "completed",
+      "ts": "2026-09-25T03:42:04.012Z",
+      "summary": "Dynamic workflow \"Walidowany solver 2D mostków termicznych wg PN-EN ISO 10211 (ψ, f_Rsi) z niezależną weryfikacją\" compl",
+      "subagent_tokens": 1421353,
+      "tool_uses": 298,
+      "duration_ms": 6200557,
+      "agent_count": 5,
+      "agents_done": 5,
+      "agents_error": 0
+     }
+    }
+   ],
+   "liczba_uruchomien": 1,
+   "start": "2026-09-25T01:58:43Z",
+   "koniec": "2026-09-25T03:42:04Z",
+   "stan_na": null,
+   "czas_zegarowy_min": 103.3,
+   "status": "zakończony (powiadomienie completed)",
+   "agenci_pliki": 5,
+   "agenci_journal_started": 5,
+   "agenci_journal_result": 5,
+   "agentCount_wf_json": 5,
+   "wf_json_status": "completed",
+   "wf_json_durationMs": 6200557,
+   "wf_json_totalTokens": 1421353,
+   "wf_json_totalToolCalls": 298,
+   "logs": [
+    "Uwagi weryfikatorów: 20 (krytyczne: 0)"
+   ],
+   "suma_czasu_agentow_min": 115.7,
+   "odpowiedzi_api": 276,
+   "wywolania_narzedzi": 298,
+   "tokeny": {
+    "input": 552,
+    "output_recorded": 107601,
+    "thinking_recorded": 48383,
+    "cache_read": 54406887,
+    "cache_write": 1350175,
+    "cache_write_5m": 1350175,
+    "cache_write_1h": 0,
+    "output_estimated": 538138,
+    "output_estimated_alt": 567525,
+    "thinking_estimated": 241967
+   },
+   "etykiety": [
+    [
+     "budowa-solvera",
+     "a8cd211c9e4499948",
+     "2026-09-25T01:58:43Z",
+     "2026-09-25T02:30:55Z",
+     "zakończony"
+    ],
+    [
+     "weryfikacja:numeryka",
+     "a40ae4c2ae04c6ee0",
+     "2026-09-25T02:30:56Z",
+     "2026-09-25T02:49:30Z",
+     "zakończony"
+    ],
+    [
+     "weryfikacja:normy",
+     "ac86cc1c1bb85cbe9",
+     "2026-09-25T02:30:57Z",
+     "2026-09-25T02:43:24Z",
+     "zakończony"
+    ],
+    [
+     "poprawki",
+     "a97b89276bf7931f1",
+     "2026-09-25T02:49:31Z",
+     "2026-09-25T03:15:47Z",
+     "zakończony"
+    ],
+    [
+     "demo-katalog",
+     "a5f39a533b5f2ff8b",
+     "2026-09-25T03:15:49Z",
+     "2026-09-25T03:42:02Z",
+     "zakończony"
+    ]
+   ]
+  },
+  {
+   "runId": "wf_a8783476-2a1",
+   "nazwa": "wydanie-lamela",
+   "fazy": [
+    "Model",
+    "Konstrukcja",
+    "Zamrożenie",
+    "Obliczenia",
+    "Rysunki",
+    "Tomy",
+    "Weryfikacja",
+    "Poprawki",
+    "Raport"
+   ],
+   "uruchomienia": [
+    {
+     "taskId": "wzwhv71tc",
+     "uruchomiony": "2026-09-25T07:13:34.322Z",
+     "resumeFromRunId": null,
+     "koniec": null,
+     "jak": "trwa",
+     "czas_min": 85.3,
+     "powiadomienie": null
+    }
+   ],
+   "liczba_uruchomien": 1,
+   "start": "2026-09-25T07:13:34Z",
+   "koniec": null,
+   "stan_na": "2026-09-25T08:38:50Z",
+   "czas_zegarowy_min": 85.3,
+   "status": "trwa",
+   "agenci_pliki": 2,
+   "agenci_journal_started": 2,
+   "agenci_journal_result": 1,
+   "agentCount_wf_json": null,
+   "wf_json_status": null,
+   "wf_json_durationMs": null,
+   "wf_json_totalTokens": null,
+   "wf_json_totalToolCalls": null,
+   "logs": null,
+   "suma_czasu_agentow_min": 85.0,
+   "odpowiedzi_api": 301,
+   "wywolania_narzedzi": 311,
+   "tokeny": {
+    "input": 602,
+    "output_recorded": 123187,
+    "thinking_recorded": 42802,
+    "cache_read": 117287063,
+    "cache_write": 1461270,
+    "cache_write_5m": 1461270,
+    "cache_write_1h": 0,
+    "output_estimated": 272387,
+    "output_estimated_alt": 288198,
+    "thinking_estimated": 136742
+   },
+   "etykiety": [
+    [
+     "model:domkniecie",
+     "af672122528919503",
+     "2026-09-25T07:13:34Z",
+     "2026-09-25T08:29:21Z",
+     "zakończony"
+    ],
+    [
+     "konstrukcja:1",
+     "abfdfaca2ef13a7b4",
+     "2026-09-25T08:29:23Z",
+     "2026-09-25T08:38:38Z",
+     "trwa (brak wpisu result w journal.jsonl)"
+    ]
+   ]
+  },
+  {
+   "runId": "wf_c5f7e298-4b9",
+   "nazwa": "opisy-PT",
+   "fazy": [
+    "Opisy",
+    "Tomy",
+    "Weryfikacja",
+    "Poprawki"
+   ],
+   "uruchomienia": [
+    {
+     "taskId": "wifid07x3",
+     "uruchomiony": "2026-09-25T06:33:45.421Z",
+     "resumeFromRunId": null,
+     "koniec": null,
+     "jak": "trwa",
+     "czas_min": 125.1,
+     "powiadomienie": null
+    }
+   ],
+   "liczba_uruchomien": 1,
+   "start": "2026-09-25T06:33:45Z",
+   "koniec": null,
+   "stan_na": "2026-09-25T08:38:50Z",
+   "czas_zegarowy_min": 125.1,
+   "status": "trwa",
+   "agenci_pliki": 10,
+   "agenci_journal_started": 10,
+   "agenci_journal_result": 9,
+   "agentCount_wf_json": null,
+   "wf_json_status": null,
+   "wf_json_durationMs": null,
+   "wf_json_totalTokens": null,
+   "wf_json_totalToolCalls": null,
+   "logs": null,
+   "suma_czasu_agentow_min": 230.1,
+   "odpowiedzi_api": 897,
+   "wywolania_narzedzi": 966,
+   "tokeny": {
+    "input": 1794,
+    "output_recorded": 292531,
+    "thinking_recorded": 92477,
+    "cache_read": 183891073,
+    "cache_write": 4031208,
+    "cache_write_5m": 4031208,
+    "cache_write_1h": 0,
+    "output_estimated": 773984,
+    "output_estimated_alt": 761629,
+    "thinking_estimated": 296893
+   },
+   "etykiety": [
+    [
+     "PT:AR",
+     "aa312e69fff4fc1f4",
+     "2026-09-25T06:33:45Z",
+     "2026-09-25T06:52:44Z",
+     "zakończony"
+    ],
+    [
+     "PT:BO",
+     "ad07d221db9b5c09f",
+     "2026-09-25T06:33:46Z",
+     "2026-09-25T07:28:20Z",
+     "zakończony"
+    ],
+    [
+     "PT:IS",
+     "a40bbe274c6070548",
+     "2026-09-25T06:52:46Z",
+     "2026-09-25T07:18:03Z",
+     "zakończony"
+    ],
+    [
+     "PT:IE",
+     "a6d1d5701b925cf41",
+     "2026-09-25T07:18:05Z",
+     "2026-09-25T07:32:14Z",
+     "zakończony"
+    ],
+    [
+     "weryfikacja:OBLICZENIA",
+     "a040f53d8a1485535",
+     "2026-09-25T07:32:17Z",
+     "2026-09-25T07:50:30Z",
+     "zakończony"
+    ],
+    [
+     "weryfikacja:PRAWO",
+     "a29aabd1271c5fd68",
+     "2026-09-25T07:32:18Z",
+     "2026-09-25T07:44:16Z",
+     "zakończony"
+    ],
+    [
+     "poprawki:BO",
+     "abd1c424d0164d558",
+     "2026-09-25T07:50:31Z",
+     "2026-09-25T08:23:35Z",
+     "zakończony"
+    ],
+    [
+     "poprawki:IE",
+     "ab7ed15ee18c7f9ed",
+     "2026-09-25T07:50:32Z",
+     "2026-09-25T08:10:49Z",
+     "zakończony"
+    ],
+    [
+     "poprawki:IS",
+     "ac29e899834d24a29",
+     "2026-09-25T08:10:51Z",
+     "2026-09-25T08:29:12Z",
+     "zakończony"
+    ],
+    [
+     "poprawki:AR",
+     "aaf84ceed94d857ba",
+     "2026-09-25T08:23:36Z",
+     "2026-09-25T08:38:49Z",
+     "trwa (brak wpisu result w journal.jsonl)"
+    ]
+   ]
+  },
+  {
+   "runId": "wf_ce63599a-15f",
+   "nazwa": "opisy-tom-I",
+   "fazy": [
+    "Opisy",
+    "Tom",
+    "Weryfikacja",
+    "Poprawki"
+   ],
+   "uruchomienia": [
+    {
+     "taskId": "w9d1ib8kz",
+     "uruchomiony": "2026-09-25T06:33:02.277Z",
+     "resumeFromRunId": null,
+     "koniec": "2026-09-25T08:05:09.864Z",
+     "jak": "zakończony (powiadomienie completed)",
+     "czas_min": 92.1,
+     "powiadomienie": {
+      "taskId": "w9d1ib8kz",
+      "status": "completed",
+      "ts": "2026-09-25T08:05:09.864Z",
+      "summary": "Dynamic workflow \"Tom I (PZT + PAB + ZL): części opisowe, oświadczenia, BIOZ, opinia geotechniczna (przykład), składanie",
+      "subagent_tokens": 2137951,
+      "tool_uses": 610,
+      "duration_ms": 5527562,
+      "agent_count": 6,
+      "agents_done": 6,
+      "agents_error": 0
+     }
+    }
+   ],
+   "liczba_uruchomien": 1,
+   "start": "2026-09-25T06:33:02Z",
+   "koniec": "2026-09-25T08:05:09Z",
+   "stan_na": null,
+   "czas_zegarowy_min": 92.1,
+   "status": "zakończony (powiadomienie completed)",
+   "agenci_pliki": 6,
+   "agenci_journal_started": 6,
+   "agenci_journal_result": 6,
+   "agentCount_wf_json": 6,
+   "wf_json_status": "completed",
+   "wf_json_durationMs": 5527562,
+   "wf_json_totalTokens": 2137951,
+   "wf_json_totalToolCalls": 610,
+   "logs": [],
+   "suma_czasu_agentow_min": 126.2,
+   "odpowiedzi_api": 570,
+   "wywolania_narzedzi": 610,
+   "tokeny": {
+    "input": 1140,
+    "output_recorded": 230013,
+    "thinking_recorded": 86333,
+    "cache_read": 147315277,
+    "cache_write": 2031536,
+    "cache_write_5m": 2031536,
+    "cache_write_1h": 0,
+    "output_estimated": 514225,
+    "output_estimated_alt": 508964,
+    "thinking_estimated": 202817
+   },
+   "etykiety": [
+    [
+     "opis:PZT_ZL",
+     "ae8a033bfce42ab47",
+     "2026-09-25T06:33:02Z",
+     "2026-09-25T06:57:29Z",
+     "zakończony"
+    ],
+    [
+     "opis:PAB",
+     "aecd6e8f26140c2ed",
+     "2026-09-25T06:33:03Z",
+     "2026-09-25T07:07:40Z",
+     "zakończony"
+    ],
+    [
+     "tom:I",
+     "a80c6f35e28eacfc1",
+     "2026-09-25T07:07:41Z",
+     "2026-09-25T07:19:15Z",
+     "zakończony"
+    ],
+    [
+     "weryfikacja:FAKTY",
+     "a55aa437470dfb767",
+     "2026-09-25T07:19:16Z",
+     "2026-09-25T07:29:02Z",
+     "zakończony"
+    ],
+    [
+     "weryfikacja:PRAWO",
+     "ad025dee132028c71",
+     "2026-09-25T07:19:19Z",
+     "2026-09-25T07:32:11Z",
+     "zakończony"
+    ],
+    [
+     "poprawki:tom-I",
+     "a46d9e0323adf8ae2",
+     "2026-09-25T07:32:12Z",
+     "2026-09-25T08:05:08Z",
+     "zakończony"
+    ]
+   ]
+  },
+  {
+   "runId": "wf_dad224e5-cd8",
+   "nazwa": "arkusze-ekonomiczne",
+   "fazy": [
+    "Pomiar",
+    "Silnik",
+    "Zastosowanie",
+    "Weryfikacja",
+    "Poprawki"
+   ],
+   "uruchomienia": [
+    {
+     "taskId": "wf4hulepa",
+     "uruchomiony": "2026-09-25T05:38:43.399Z",
+     "resumeFromRunId": null,
+     "koniec": null,
+     "jak": "trwa",
+     "czas_min": 180.1,
+     "powiadomienie": null
+    }
+   ],
+   "liczba_uruchomien": 1,
+   "start": "2026-09-25T05:38:43Z",
+   "koniec": null,
+   "stan_na": "2026-09-25T08:38:50Z",
+   "czas_zegarowy_min": 180.1,
+   "status": "trwa",
+   "agenci_pliki": 7,
+   "agenci_journal_started": 7,
+   "agenci_journal_result": 6,
+   "agentCount_wf_json": null,
+   "wf_json_status": null,
+   "wf_json_durationMs": null,
+   "wf_json_totalTokens": null,
+   "wf_json_totalToolCalls": null,
+   "logs": null,
+   "suma_czasu_agentow_min": 232.2,
+   "odpowiedzi_api": 576,
+   "wywolania_narzedzi": 675,
+   "tokeny": {
+    "input": 1152,
+    "output_recorded": 140740,
+    "thinking_recorded": 46777,
+    "cache_read": 123689927,
+    "cache_write": 3808114,
+    "cache_write_5m": 3808114,
+    "cache_write_1h": 0,
+    "output_estimated": 606923,
+    "output_estimated_alt": 650393,
+    "thinking_estimated": 314875
+   },
+   "etykiety": [
+    [
+     "pomiar",
+     "a6358d5d8ad207531",
+     "2026-09-25T05:38:43Z",
+     "2026-09-25T05:47:31Z",
+     "zakończony"
+    ],
+    [
+     "silnik",
+     "a348d2a8e7cf1f6c5",
+     "2026-09-25T05:47:32Z",
+     "2026-09-25T07:20:11Z",
+     "zakończony"
+    ],
+    [
+     "zastosowanie:AR",
+     "af726fb2109d239e4",
+     "2026-09-25T07:20:14Z",
+     "2026-09-25T07:47:27Z",
+     "zakończony"
+    ],
+    [
+     "zastosowanie:PZT",
+     "a472cdd66d2cb0c0b",
+     "2026-09-25T07:20:15Z",
+     "2026-09-25T07:58:48Z",
+     "zakończony"
+    ],
+    [
+     "zastosowanie:IS",
+     "ac4887df55cb098ed",
+     "2026-09-25T07:47:29Z",
+     "2026-09-25T08:12:28Z",
+     "zakończony"
+    ],
+    [
+     "zastosowanie:IE",
+     "aa91fab19d57ad831",
+     "2026-09-25T07:58:49Z",
+     "2026-09-25T08:25:50Z",
+     "zakończony"
+    ],
+    [
+     "silnik:poprawki",
+     "a2e2d61b96c7d28ef",
+     "2026-09-25T08:25:51Z",
+     "2026-09-25T08:38:47Z",
+     "trwa (brak wpisu result w journal.jsonl)"
+    ]
+   ]
+  }
+ ],
+ "iteracje": [
+  {
+   "runId": "wf_0e783e5d-4ab",
+   "nazwa": "rejestr-norm-B",
+   "kategorie": {
+    "produkcja": 4,
+    "weryfikacja/kontrola/audyt": 4
+   },
+   "etykiety": [
+    "badanie:R4",
+    "badanie:R5",
+    "badanie:R6",
+    "badanie:R7",
+    "weryfikacja:R5",
+    "weryfikacja:R4",
+    "weryfikacja:R6",
+    "weryfikacja:R7"
+   ],
+   "rundy_weryfikacja_poprawki": 1,
+   "opis": "potok badanie→weryfikacja dla 4 dziedzin (R4–R7): 4 pary; korekty nanosili weryfikatorzy"
+  },
+  {
+   "runId": "wf_10e1a801-dd6",
+   "nazwa": "poprawki-runda2",
+   "kategorie": {
+    "poprawki": 2,
+    "weryfikacja/kontrola/audyt": 3
+   },
+   "etykiety": [
+    "poprawki:funkcja",
+    "poprawki:fizyka-woda",
+    "weryfikacja:V1",
+    "weryfikacja:V2",
+    "weryfikacja:V3"
+   ],
+   "rundy_weryfikacja_poprawki": 1,
+   "opis": "„runda 2” poprawek modelu (runda 1 = poprawki w panelu koncepcji): poprawki funkcja → poprawki fizyka/woda → weryfikacja V1, V2, V3 (V3 przerwany po 3,5 min) → faza Domknięcie nieuruchomiona (TaskStop 07:13:25, zakres przejął przepływ wydania)"
+  },
+  {
+   "runId": "wf_44634517-034",
+   "nazwa": "koncepcja-panel",
+   "kategorie": {
+    "produkcja": 5,
+    "ocena (sędzia)": 3,
+    "weryfikacja/kontrola/audyt": 3,
+    "poprawki": 1
+   },
+   "etykiety": [
+    "wariant:W1",
+    "wariant:W2",
+    "wariant:W3",
+    "wariant:W3",
+    "sędzia:J1",
+    "sędzia:J2",
+    "sędzia:J3",
+    "synteza",
+    "audyt:A1",
+    "audyt:A2",
+    "audyt:A3",
+    "poprawki"
+   ],
+   "rundy_weryfikacja_poprawki": 1,
+   "opis": "panel koncepcji, podejście 2 (brief v2): Warianty W1–W3 → Ocena 3 sędziów → Synteza → Audyt A1–A3 (log: 51 uwag, 2 krytyczne) → 1 agent poprawek. Uruchomienie we1mlli53 zatrzymane 02:03:24 (W3 zawieszony ~86 min, 3× limit długości odpowiedzi), wznowione jako wy0zakhf7 z resumeFromRunId: W1/W2 z pamięci podręcznej, W3 od nowa. Dodatkowo kopia agenta syntezy uruchomiona przypadkiem przez SendMessage"
+  },
+  {
+   "runId": "wf_6070a5f0-602",
+   "nazwa": "statystyki-sesji",
+   "kategorie": {
+    "produkcja": 3
+   },
+   "etykiety": [
+    "dane:watek-glowny",
+    "dane:podagenci-przeplywy",
+    "dane:repozytorium"
+   ],
+   "rundy_weryfikacja_poprawki": 0,
+   "opis": "ten przepływ statystyk: faza Zbieranie (2 z 5 agentów uruchomione w chwili migawki), potem Weryfikacja"
+  },
+  {
+   "runId": "wf_725a3592-fa1",
+   "nazwa": "koncepcja-panel",
+   "kategorie": {
+    "produkcja": 2
+   },
+   "etykiety": [
+    "wariant:W1",
+    "wariant:W2"
+   ],
+   "rundy_weryfikacja_poprawki": 0,
+   "opis": "panel koncepcji, podejście 1: zatrzymany po 3,8 min (użytkownik zmienił interpretację elementu D: „elewacja w S-ke”); W1, W2 zaczęte, W3 tylko w kolejce"
+  },
+  {
+   "runId": "wf_88c0988f-4a5",
+   "nazwa": "rejestr-prawny-A",
+   "kategorie": {
+    "produkcja": 4,
+    "weryfikacja/kontrola/audyt": 4
+   },
+   "etykiety": [
+    "badanie:R1",
+    "badanie:R2",
+    "badanie:R3",
+    "badanie:R8",
+    "weryfikacja:R2",
+    "weryfikacja:R1",
+    "weryfikacja:R3",
+    "weryfikacja:R8"
+   ],
+   "rundy_weryfikacja_poprawki": 1,
+   "opis": "potok badanie→weryfikacja dla 4 dziedzin (R1,R2,R3,R8): 4 pary; weryfikatorzy sami nanosili korekty w plikach (brak osobnych agentów poprawek)"
+  },
+  {
+   "runId": "wf_a0d51b50-592",
+   "nazwa": "mostki-2d-solver",
+   "kategorie": {
+    "produkcja": 2,
+    "weryfikacja/kontrola/audyt": 2,
+    "poprawki": 1
+   },
+   "etykiety": [
+    "budowa-solvera",
+    "weryfikacja:numeryka",
+    "weryfikacja:normy",
+    "poprawki",
+    "demo-katalog"
+   ],
+   "rundy_weryfikacja_poprawki": 1,
+   "opis": "budowa → 2 weryfikatorów (numeryka, normy; log: 20 uwag, 0 krytycznych) → poprawki → demo"
+  },
+  {
+   "runId": "wf_a8783476-2a1",
+   "nazwa": "wydanie-lamela",
+   "kategorie": {
+    "produkcja": 1,
+    "poprawki": 1
+   },
+   "etykiety": [
+    "model:domkniecie",
+    "konstrukcja:1"
+   ],
+   "rundy_weryfikacja_poprawki": 0,
+   "opis": "wydanie: domknięcie modelu zakończone; trwa pętla Konstrukcja, runda 1 (konstrukcja:1); skrypt przewiduje do 3 rund konstrukcja↔weryfikacja i do 3 rund poprawki↔kontrola po weryfikacji w kilku soczewkach"
+  },
+  {
+   "runId": "wf_c5f7e298-4b9",
+   "nazwa": "opisy-PT",
+   "kategorie": {
+    "produkcja": 4,
+    "weryfikacja/kontrola/audyt": 2,
+    "poprawki": 4
+   },
+   "etykiety": [
+    "PT:AR",
+    "PT:BO",
+    "PT:IS",
+    "PT:IE",
+    "weryfikacja:OBLICZENIA",
+    "weryfikacja:PRAWO",
+    "poprawki:BO",
+    "poprawki:IE",
+    "poprawki:IS",
+    "poprawki:AR"
+   ],
+   "rundy_weryfikacja_poprawki": 1,
+   "opis": "4 tomy PT (AR, BO, IS, IE) → 2 weryfikatorów (OBLICZENIA, PRAWO) → 4 równoległe poprawki (BO, IE, IS zakończone; AR trwa)"
+  },
+  {
+   "runId": "wf_ce63599a-15f",
+   "nazwa": "opisy-tom-I",
+   "kategorie": {
+    "produkcja": 3,
+    "weryfikacja/kontrola/audyt": 2,
+    "poprawki": 1
+   },
+   "etykiety": [
+    "opis:PZT_ZL",
+    "opis:PAB",
+    "tom:I",
+    "weryfikacja:FAKTY",
+    "weryfikacja:PRAWO",
+    "poprawki:tom-I"
+   ],
+   "rundy_weryfikacja_poprawki": 1,
+   "opis": "2 opisy → złożenie tomu I → 2 weryfikatorów (FAKTY, PRAWO) → 1 agent poprawek"
+  },
+  {
+   "runId": "wf_dad224e5-cd8",
+   "nazwa": "arkusze-ekonomiczne",
+   "kategorie": {
+    "produkcja": 6,
+    "poprawki": 1
+   },
+   "etykiety": [
+    "pomiar",
+    "silnik",
+    "zastosowanie:AR",
+    "zastosowanie:PZT",
+    "zastosowanie:IS",
+    "zastosowanie:IE",
+    "silnik:poprawki"
+   ],
+   "rundy_weryfikacja_poprawki": 0,
+   "opis": "pomiar → silnik → zastosowanie AR/PZT/IS/IE (potok) → poprawki silnika wg błędów zgłoszonych przez zespoły (trwa); fazy Weryfikacja (M, C) i Poprawki jeszcze nie ruszyły"
+  }
+ ],
+ "agenci": [
+  {
+   "agentId": "a076389c324f1eb11",
+   "execution": "jedyna",
+   "typ": "samodzielny",
+   "runId": null,
+   "label": "Build PZT site-plan generator",
+   "opis_meta": "Build PZT site-plan generator",
+   "agentType": "general-purpose",
+   "faza": null,
+   "model": {
+    "claude-opus-5-5": 236
+   },
+   "start": "2026-09-25T04:07:27Z",
+   "koniec": "2026-09-25T05:37:21Z",
+   "czas_min": 89.89,
+   "najdluzsza_przerwa_min": 1.6,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 236,
+   "odpowiedzi_z_pelnym_usage": 87,
+   "linie_asystenta": 431,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 245,
+   "narzedzia": {
+    "Bash": 194,
+    "Read": 37,
+    "Write": 6,
+    "Edit": 6,
+    "SubagentHandback": 2
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 1,
+   "kontekst_max": 778577,
+   "kontekst_koncowy": 66236,
+   "tokeny": {
+    "input": 472,
+    "output_recorded": 165330,
+    "thinking_recorded": 59065,
+    "cache_read": 117537734,
+    "cache_write": 780229,
+    "cache_write_5m": 780229,
+    "cache_write_1h": 0,
+    "output_estimated": 379108,
+    "output_estimated_alt": 390903,
+    "thinking_estimated": 151680
+   },
+   "koszt_usd": {
+    "dolny": 30.72,
+    "srodkowy": 34.99,
+    "alt": 35.23,
+    "udzial_cache_read_w_srodkowym": 0.672
+   },
+   "status": "zakończony",
+   "harness_wf_json": null,
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/agent-a076389c324f1eb11.jsonl",
+   "sendmessage_od_orkiestratora": 1
+  },
+  {
+   "agentId": "a15e57952f52b96b8",
+   "execution": "jedyna",
+   "typ": "samodzielny",
+   "runId": null,
+   "label": "Build model-to-drawing view generators",
+   "opis_meta": "Build model-to-drawing view generators",
+   "agentType": "general-purpose",
+   "faza": null,
+   "model": {
+    "claude-opus-5-5": 138
+   },
+   "start": "2026-09-25T00:49:54Z",
+   "koniec": "2026-09-25T01:51:04Z",
+   "czas_min": 61.16,
+   "najdluzsza_przerwa_min": 7.1,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 138,
+   "odpowiedzi_z_pelnym_usage": 20,
+   "linie_asystenta": 295,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 148,
+   "narzedzia": {
+    "Bash": 94,
+    "Read": 42,
+    "Write": 11,
+    "SubagentHandback": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 757356,
+   "kontekst_koncowy": 757356,
+   "tokeny": {
+    "input": 276,
+    "output_recorded": 32144,
+    "thinking_recorded": 12410,
+    "cache_read": 67997159,
+    "cache_write": 1748362,
+    "cache_write_5m": 1748362,
+    "cache_write_1h": 0,
+    "output_estimated": 307751,
+    "output_estimated_alt": 340184,
+    "thinking_estimated": 146162
+   },
+   "koszt_usd": {
+    "dolny": 22.99,
+    "srodkowy": 28.5,
+    "alt": 29.15,
+    "udzial_cache_read_w_srodkowym": 0.477
+   },
+   "status": "zakończony",
+   "harness_wf_json": null,
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/agent-a15e57952f52b96b8.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a26849570eda26834",
+   "execution": "jedyna",
+   "typ": "samodzielny",
+   "runId": null,
+   "label": "Build RC wall-beam FEM/STM module",
+   "opis_meta": "Build RC wall-beam FEM/STM module",
+   "agentType": "general-purpose",
+   "faza": null,
+   "model": {
+    "claude-opus-5-5": 135
+   },
+   "start": "2026-09-25T03:15:04Z",
+   "koniec": "2026-09-25T04:29:33Z",
+   "czas_min": 74.48,
+   "najdluzsza_przerwa_min": 5.1,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 135,
+   "odpowiedzi_z_pelnym_usage": 41,
+   "linie_asystenta": 285,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 143,
+   "narzedzia": {
+    "Bash": 107,
+    "Read": 28,
+    "Write": 4,
+    "SendMessage": 2,
+    "ToolSearch": 1,
+    "SubagentHandback": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 671891,
+   "kontekst_koncowy": 671891,
+   "tokeny": {
+    "input": 270,
+    "output_recorded": 95575,
+    "thinking_recorded": 35953,
+    "cache_read": 53195172,
+    "cache_write": 1597785,
+    "cache_write_5m": 1597785,
+    "cache_write_1h": 0,
+    "output_estimated": 347446,
+    "output_estimated_alt": 364822,
+    "thinking_estimated": 135904
+   },
+   "koszt_usd": {
+    "dolny": 20.54,
+    "srodkowy": 25.58,
+    "alt": 25.93,
+    "udzial_cache_read_w_srodkowym": 0.416
+   },
+   "status": "zakończony",
+   "harness_wf_json": null,
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/agent-a26849570eda26834.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a27284e7b67190ca8",
+   "execution": "jedyna",
+   "typ": "samodzielny",
+   "runId": null,
+   "label": "Build structural Eurocode calc library",
+   "opis_meta": "Build structural Eurocode calc library",
+   "agentType": "general-purpose",
+   "faza": null,
+   "model": {
+    "claude-opus-5-5": 115
+   },
+   "start": "2026-09-25T01:52:36Z",
+   "koniec": "2026-09-25T03:14:16Z",
+   "czas_min": 81.66,
+   "najdluzsza_przerwa_min": 10.8,
+   "przerwy_ponad_10min": 1,
+   "odpowiedzi_api": 115,
+   "odpowiedzi_z_pelnym_usage": 59,
+   "linie_asystenta": 230,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 120,
+   "narzedzia": {
+    "Bash": 92,
+    "Write": 14,
+    "Read": 12,
+    "Skill": 1,
+    "SubagentHandback": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 731084,
+   "kontekst_koncowy": 731084,
+   "tokeny": {
+    "input": 230,
+    "output_recorded": 114738,
+    "thinking_recorded": 45989,
+    "cache_read": 53177375,
+    "cache_write": 1248488,
+    "cache_write_5m": 1248488,
+    "cache_write_1h": 0,
+    "output_estimated": 429473,
+    "output_estimated_alt": 440066,
+    "thinking_estimated": 141101
+   },
+   "koszt_usd": {
+    "dolny": 19.17,
+    "srodkowy": 25.47,
+    "alt": 25.68,
+    "udzial_cache_read_w_srodkowym": 0.418
+   },
+   "status": "zakończony",
+   "harness_wf_json": null,
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/agent-a27284e7b67190ca8.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a31322d115de1ad9a",
+   "execution": "jedyna",
+   "typ": "samodzielny",
+   "runId": null,
+   "label": "Write koncepcja.md + final previews",
+   "opis_meta": "Write koncepcja.md + final previews",
+   "agentType": "general-purpose",
+   "faza": null,
+   "model": {
+    "claude-opus-5-5": 119
+   },
+   "start": "2026-09-25T04:04:40Z",
+   "koniec": "2026-09-25T04:30:33Z",
+   "czas_min": 25.88,
+   "najdluzsza_przerwa_min": 1.1,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 119,
+   "odpowiedzi_z_pelnym_usage": 31,
+   "linie_asystenta": 210,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 123,
+   "narzedzia": {
+    "Bash": 92,
+    "Read": 26,
+    "Write": 3,
+    "Edit": 1,
+    "SubagentHandback": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 483555,
+   "kontekst_koncowy": 483555,
+   "tokeny": {
+    "input": 238,
+    "output_recorded": 38693,
+    "thinking_recorded": 18252,
+    "cache_read": 35078638,
+    "cache_write": 451251,
+    "cache_write_5m": 451251,
+    "cache_write_1h": 0,
+    "output_estimated": 123580,
+    "output_estimated_alt": 129411,
+    "thinking_estimated": 63333
+   },
+   "koszt_usd": {
+    "dolny": 10.05,
+    "srodkowy": 11.74,
+    "alt": 11.86,
+    "udzial_cache_read_w_srodkowym": 0.597
+   },
+   "status": "zakończony",
+   "harness_wf_json": null,
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/agent-a31322d115de1ad9a.jsonl",
+   "sendmessage_od_orkiestratora": 1
+  },
+  {
+   "agentId": "a358500c03b62940a",
+   "execution": "jedyna",
+   "typ": "samodzielny",
+   "runId": null,
+   "label": "Build MEP and electrical calc library",
+   "opis_meta": "Build MEP and electrical calc library",
+   "agentType": "general-purpose",
+   "faza": null,
+   "model": {
+    "claude-opus-5-5": 149
+   },
+   "start": "2026-09-25T01:53:01Z",
+   "koniec": "2026-09-25T02:57:48Z",
+   "czas_min": 64.8,
+   "najdluzsza_przerwa_min": 4.2,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 149,
+   "odpowiedzi_z_pelnym_usage": 36,
+   "linie_asystenta": 256,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 154,
+   "narzedzia": {
+    "Bash": 115,
+    "Write": 17,
+    "Read": 13,
+    "WebFetch": 4,
+    "WebSearch": 3,
+    "ToolSearch": 1,
+    "SubagentHandback": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 1,
+   "kontekst_max": 783465,
+   "kontekst_koncowy": 105280,
+   "tokeny": {
+    "input": 298,
+    "output_recorded": 47636,
+    "thinking_recorded": 14087,
+    "cache_read": 58190512,
+    "cache_write": 823416,
+    "cache_write_5m": 823416,
+    "cache_write_1h": 0,
+    "output_estimated": 367339,
+    "output_estimated_alt": 369140,
+    "thinking_estimated": 98279
+   },
+   "koszt_usd": {
+    "dolny": 16.71,
+    "srodkowy": 23.1,
+    "alt": 23.14,
+    "udzial_cache_read_w_srodkowym": 0.504
+   },
+   "status": "zakończony",
+   "harness_wf_json": null,
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/agent-a358500c03b62940a.jsonl",
+   "sendmessage_od_orkiestratora": 1
+  },
+  {
+   "agentId": "a5045de9ee0554cc8",
+   "execution": "jedyna",
+   "typ": "samodzielny",
+   "runId": null,
+   "label": "Build structural drawings generator",
+   "opis_meta": "Build structural drawings generator",
+   "agentType": "general-purpose",
+   "faza": null,
+   "model": {
+    "claude-opus-5-5": 546
+   },
+   "start": "2026-09-25T04:08:17Z",
+   "koniec": "2026-09-25T06:55:51Z",
+   "czas_min": 167.57,
+   "najdluzsza_przerwa_min": 7.1,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 546,
+   "odpowiedzi_z_pelnym_usage": 209,
+   "linie_asystenta": 952,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 549,
+   "narzedzia": {
+    "Bash": 459,
+    "Monitor": 43,
+    "Read": 28,
+    "Write": 10,
+    "Edit": 4,
+    "Grep": 2,
+    "SubagentHandback": 2,
+    "ToolSearch": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 1,
+   "kontekst_max": 786441,
+   "kontekst_koncowy": 453559,
+   "tokeny": {
+    "input": 1094,
+    "output_recorded": 308761,
+    "thinking_recorded": 126266,
+    "cache_read": 196557890,
+    "cache_write": 2683407,
+    "cache_write_5m": 2683407,
+    "cache_write_1h": 0,
+    "output_estimated": 620869,
+    "output_estimated_alt": 633025,
+    "thinking_estimated": 276891
+   },
+   "koszt_usd": {
+    "dolny": 58.91,
+    "srodkowy": 65.15,
+    "alt": 65.39,
+    "udzial_cache_read_w_srodkowym": 0.603
+   },
+   "status": "zakończony",
+   "harness_wf_json": null,
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/agent-a5045de9ee0554cc8.jsonl",
+   "sendmessage_od_orkiestratora": 6
+  },
+  {
+   "agentId": "a68a8b74f8ab79b44",
+   "execution": "jedyna",
+   "typ": "samodzielny",
+   "runId": null,
+   "label": "Build MEP installation drawings",
+   "opis_meta": "Build MEP installation drawings",
+   "agentType": "general-purpose",
+   "faza": null,
+   "model": {
+    "claude-opus-5-5": 192
+   },
+   "start": "2026-09-25T04:07:53Z",
+   "koniec": "2026-09-25T05:20:32Z",
+   "czas_min": 72.65,
+   "najdluzsza_przerwa_min": 3.5,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 192,
+   "odpowiedzi_z_pelnym_usage": 69,
+   "linie_asystenta": 360,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 207,
+   "narzedzia": {
+    "Bash": 148,
+    "Read": 34,
+    "Write": 17,
+    "Edit": 6,
+    "Grep": 1,
+    "SubagentHandback": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 704396,
+   "kontekst_koncowy": 704396,
+   "tokeny": {
+    "input": 386,
+    "output_recorded": 105043,
+    "thinking_recorded": 44456,
+    "cache_read": 86654522,
+    "cache_write": 671768,
+    "cache_write_5m": 671768,
+    "cache_write_1h": 0,
+    "output_estimated": 292565,
+    "output_estimated_alt": 293531,
+    "thinking_estimated": 103182
+   },
+   "koszt_usd": {
+    "dolny": 22.79,
+    "srodkowy": 26.54,
+    "alt": 26.56,
+    "udzial_cache_read_w_srodkowym": 0.653
+   },
+   "status": "zakończony",
+   "harness_wf_json": null,
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/agent-a68a8b74f8ab79b44.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a70b2709f5f62a5a2",
+   "execution": "jedyna",
+   "typ": "samodzielny",
+   "runId": null,
+   "label": "Build PN drafting engine",
+   "opis_meta": "Build PN drafting engine",
+   "agentType": "general-purpose",
+   "faza": null,
+   "model": {
+    "claude-opus-5-5": 173
+   },
+   "start": "2026-09-24T23:31:18Z",
+   "koniec": "2026-09-25T00:49:12Z",
+   "czas_min": 77.91,
+   "najdluzsza_przerwa_min": 5.0,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 173,
+   "odpowiedzi_z_pelnym_usage": 45,
+   "linie_asystenta": 375,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 186,
+   "narzedzia": {
+    "Bash": 104,
+    "Read": 58,
+    "Write": 17,
+    "WebSearch": 4,
+    "ToolSearch": 1,
+    "WebFetch": 1,
+    "SubagentHandback": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 764569,
+   "kontekst_koncowy": 764569,
+   "tokeny": {
+    "input": 348,
+    "output_recorded": 110675,
+    "thinking_recorded": 33170,
+    "cache_read": 71560398,
+    "cache_write": 764145,
+    "cache_write_5m": 764145,
+    "cache_write_1h": 0,
+    "output_estimated": 462131,
+    "output_estimated_alt": 482737,
+    "thinking_estimated": 166328
+   },
+   "koszt_usd": {
+    "dolny": 20.35,
+    "srodkowy": 27.38,
+    "alt": 27.79,
+    "udzial_cache_read_w_srodkowym": 0.523
+   },
+   "status": "zakończony",
+   "harness_wf_json": null,
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/agent-a70b2709f5f62a5a2.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a7447ed7be6bcdaf1",
+   "execution": "jedyna",
+   "typ": "samodzielny",
+   "runId": null,
+   "label": "Build document assembly framework",
+   "opis_meta": "Build document assembly framework",
+   "agentType": "general-purpose",
+   "faza": null,
+   "model": {
+    "claude-opus-5-5": 149
+   },
+   "start": "2026-09-25T01:47:13Z",
+   "koniec": "2026-09-25T02:34:46Z",
+   "czas_min": 47.55,
+   "najdluzsza_przerwa_min": 3.4,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 149,
+   "odpowiedzi_z_pelnym_usage": 53,
+   "linie_asystenta": 258,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 149,
+   "narzedzia": {
+    "Bash": 100,
+    "Read": 32,
+    "Write": 15,
+    "Skill": 1,
+    "SubagentHandback": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 590973,
+   "kontekst_koncowy": 590973,
+   "tokeny": {
+    "input": 298,
+    "output_recorded": 59869,
+    "thinking_recorded": 14318,
+    "cache_read": 57091894,
+    "cache_write": 590949,
+    "cache_write_5m": 590949,
+    "cache_write_1h": 0,
+    "output_estimated": 291498,
+    "output_estimated_alt": 299347,
+    "thinking_estimated": 87707
+   },
+   "koszt_usd": {
+    "dolny": 15.57,
+    "srodkowy": 20.2,
+    "alt": 20.36,
+    "udzial_cache_read_w_srodkowym": 0.565
+   },
+   "status": "zakończony",
+   "harness_wf_json": null,
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/agent-a7447ed7be6bcdaf1.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a82012b772f4804f3",
+   "execution": "jedyna",
+   "typ": "samodzielny",
+   "runId": null,
+   "label": "Build catalog website for LAMELA",
+   "opis_meta": "Build catalog website for LAMELA",
+   "agentType": "general-purpose",
+   "faza": null,
+   "model": {
+    "claude-opus-5-5": 232
+   },
+   "start": "2026-09-25T05:23:18Z",
+   "koniec": "2026-09-25T07:16:45Z",
+   "czas_min": 113.46,
+   "najdluzsza_przerwa_min": 10.0,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 232,
+   "odpowiedzi_z_pelnym_usage": 74,
+   "linie_asystenta": 410,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 237,
+   "narzedzia": {
+    "Bash": 168,
+    "Read": 39,
+    "Write": 18,
+    "ToolSearch": 3,
+    "Edit": 3,
+    "WebSearch": 2,
+    "Skill": 1,
+    "Monitor": 1,
+    "TaskStop": 1,
+    "SubagentHandback": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 679758,
+   "kontekst_koncowy": 679758,
+   "tokeny": {
+    "input": 464,
+    "output_recorded": 82017,
+    "thinking_recorded": 25255,
+    "cache_read": 96839363,
+    "cache_write": 3213515,
+    "cache_write_5m": 3213515,
+    "cache_write_1h": 0,
+    "output_estimated": 280516,
+    "output_estimated_alt": 283174,
+    "thinking_estimated": 100913
+   },
+   "koszt_usd": {
+    "dolny": 37.08,
+    "srodkowy": 41.05,
+    "alt": 41.1,
+    "udzial_cache_read_w_srodkowym": 0.472
+   },
+   "status": "zakończony",
+   "harness_wf_json": null,
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/agent-a82012b772f4804f3.jsonl",
+   "sendmessage_od_orkiestratora": 1
+  },
+  {
+   "agentId": "a87415027562c59a6",
+   "execution": "jedyna",
+   "typ": "samodzielny",
+   "runId": null,
+   "label": "Build physics and energy calc library",
+   "opis_meta": "Build physics and energy calc library",
+   "agentType": "general-purpose",
+   "faza": null,
+   "model": {
+    "claude-opus-5-5": 144
+   },
+   "start": "2026-09-25T01:52:12Z",
+   "koniec": "2026-09-25T02:52:53Z",
+   "czas_min": 60.68,
+   "najdluzsza_przerwa_min": 3.8,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 144,
+   "odpowiedzi_z_pelnym_usage": 53,
+   "linie_asystenta": 277,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 147,
+   "narzedzia": {
+    "Bash": 117,
+    "Write": 20,
+    "Read": 8,
+    "SubagentHandback": 2
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 1,
+   "kontekst_max": 782454,
+   "kontekst_koncowy": 62605,
+   "tokeny": {
+    "input": 288,
+    "output_recorded": 59173,
+    "thinking_recorded": 19130,
+    "cache_read": 63543243,
+    "cache_write": 780455,
+    "cache_write_5m": 780455,
+    "cache_write_1h": 0,
+    "output_estimated": 358349,
+    "output_estimated_alt": 367619,
+    "thinking_estimated": 114314
+   },
+   "koszt_usd": {
+    "dolny": 17.8,
+    "srodkowy": 23.78,
+    "alt": 23.96,
+    "udzial_cache_read_w_srodkowym": 0.534
+   },
+   "status": "zakończony",
+   "harness_wf_json": null,
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/agent-a87415027562c59a6.jsonl",
+   "sendmessage_od_orkiestratora": 1
+  },
+  {
+   "agentId": "a9f2ed8bb74c2c0d9",
+   "execution": "jedyna",
+   "typ": "samodzielny",
+   "runId": null,
+   "label": "Build construction details generator",
+   "opis_meta": "Build construction details generator",
+   "agentType": "general-purpose",
+   "faza": null,
+   "model": {
+    "claude-opus-5-5": 318
+   },
+   "start": "2026-09-25T04:08:41Z",
+   "koniec": "2026-09-25T05:48:17Z",
+   "czas_min": 99.6,
+   "najdluzsza_przerwa_min": 2.6,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 318,
+   "odpowiedzi_z_pelnym_usage": 104,
+   "linie_asystenta": 555,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 328,
+   "narzedzia": {
+    "Bash": 273,
+    "Read": 33,
+    "Write": 9,
+    "Edit": 5,
+    "WebSearch": 4,
+    "WebFetch": 2,
+    "ToolSearch": 1,
+    "SubagentHandback": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 1,
+   "kontekst_max": 789778,
+   "kontekst_koncowy": 330909,
+   "tokeny": {
+    "input": 636,
+    "output_recorded": 229909,
+    "thinking_recorded": 113427,
+    "cache_read": 109004296,
+    "cache_write": 1047619,
+    "cache_write_5m": 1047619,
+    "cache_write_1h": 0,
+    "output_estimated": 500156,
+    "output_estimated_alt": 529381,
+    "thinking_estimated": 259843
+   },
+   "koszt_usd": {
+    "dolny": 31.64,
+    "srodkowy": 37.04,
+    "alt": 37.63,
+    "udzial_cache_read_w_srodkowym": 0.589
+   },
+   "status": "zakończony",
+   "harness_wf_json": null,
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/agent-a9f2ed8bb74c2c0d9.jsonl",
+   "sendmessage_od_orkiestratora": 3
+  },
+  {
+   "agentId": "af72e8de1f1d66b66",
+   "execution": "jedyna",
+   "typ": "samodzielny",
+   "runId": null,
+   "label": "Consolidate requirements register",
+   "opis_meta": "Consolidate requirements register",
+   "agentType": "general-purpose",
+   "faza": null,
+   "model": {
+    "claude-opus-5-5": 46
+   },
+   "start": "2026-09-25T01:14:45Z",
+   "koniec": "2026-09-25T01:46:10Z",
+   "czas_min": 31.42,
+   "najdluzsza_przerwa_min": 13.1,
+   "przerwy_ponad_10min": 1,
+   "odpowiedzi_api": 46,
+   "odpowiedzi_z_pelnym_usage": 2,
+   "linie_asystenta": 79,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 48,
+   "narzedzia": {
+    "Read": 31,
+    "Bash": 14,
+    "Write": 2,
+    "SubagentHandback": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 672110,
+   "kontekst_koncowy": 672110,
+   "tokeny": {
+    "input": 94,
+    "output_recorded": 4912,
+    "thinking_recorded": 245,
+    "cache_read": 16806037,
+    "cache_write": 1076592,
+    "cache_write_5m": 1076592,
+    "cache_write_1h": 0,
+    "output_estimated": 158209,
+    "output_estimated_alt": 170304,
+    "thinking_estimated": 56922
+   },
+   "koszt_usd": {
+    "dolny": 8.84,
+    "srodkowy": 11.91,
+    "alt": 12.15,
+    "udzial_cache_read_w_srodkowym": 0.282
+   },
+   "status": "zakończony",
+   "harness_wf_json": null,
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/agent-af72e8de1f1d66b66.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "affb914430bd01f17",
+   "execution": "jedyna",
+   "typ": "samodzielny",
+   "runId": null,
+   "label": "Build model core and 3D pipeline",
+   "opis_meta": "Build model core and 3D pipeline",
+   "agentType": "general-purpose",
+   "faza": null,
+   "model": {
+    "claude-opus-5-5": 115
+   },
+   "start": "2026-09-24T23:31:47Z",
+   "koniec": "2026-09-25T01:06:44Z",
+   "czas_min": 94.96,
+   "najdluzsza_przerwa_min": 9.1,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 115,
+   "odpowiedzi_z_pelnym_usage": 36,
+   "linie_asystenta": 276,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 139,
+   "narzedzia": {
+    "Bash": 84,
+    "Read": 39,
+    "Write": 14,
+    "ToolSearch": 1,
+    "SubagentHandback": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 567980,
+   "kontekst_koncowy": 567980,
+   "tokeny": {
+    "input": 230,
+    "output_recorded": 93020,
+    "thinking_recorded": 23205,
+    "cache_read": 42340029,
+    "cache_write": 1794471,
+    "cache_write_5m": 1794471,
+    "cache_write_1h": 0,
+    "output_estimated": 385482,
+    "output_estimated_alt": 411798,
+    "thinking_estimated": 150841
+   },
+   "koszt_usd": {
+    "dolny": 19.3,
+    "srodkowy": 25.15,
+    "alt": 25.68,
+    "udzial_cache_read_w_srodkowym": 0.337
+   },
+   "status": "zakończony",
+   "harness_wf_json": null,
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/agent-affb914430bd01f17.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a22be4196b0ee4bd5",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_0e783e5d-4ab",
+   "label": "weryfikacja:R5",
+   "opis_meta": "weryfikacja:R5",
+   "agentType": "workflow-subagent",
+   "faza": "Weryfikacja",
+   "model": {
+    "claude-opus-5-5": 93
+   },
+   "start": "2026-09-25T00:38:12Z",
+   "koniec": "2026-09-25T00:54:42Z",
+   "czas_min": 16.49,
+   "najdluzsza_przerwa_min": 1.5,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 93,
+   "odpowiedzi_z_pelnym_usage": 33,
+   "linie_asystenta": 184,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 111,
+   "narzedzia": {
+    "Bash": 66,
+    "Edit": 27,
+    "WebSearch": 8,
+    "WebFetch": 6,
+    "Read": 2,
+    "ToolSearch": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 280604,
+   "kontekst_koncowy": 280604,
+   "tokeny": {
+    "input": 186,
+    "output_recorded": 24117,
+    "thinking_recorded": 7374,
+    "cache_read": 17392454,
+    "cache_write": 246519,
+    "cache_write_5m": 246519,
+    "cache_write_1h": 0,
+    "output_estimated": 71645,
+    "output_estimated_alt": 70994,
+    "thinking_estimated": 27521
+   },
+   "koszt_usd": {
+    "dolny": 5.19,
+    "srodkowy": 6.14,
+    "alt": 6.13,
+    "udzial_cache_read_w_srodkowym": 0.566
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 280604,
+    "toolCalls": 111,
+    "durationMs": 989464,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_0e783e5d-4ab/agent-a22be4196b0ee4bd5.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a578b42bbb76113c0",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_0e783e5d-4ab",
+   "label": "badanie:R4",
+   "opis_meta": "badanie:R4",
+   "agentType": "workflow-subagent",
+   "faza": "Badanie",
+   "model": {
+    "claude-opus-5-5": 170
+   },
+   "start": "2026-09-24T23:28:40Z",
+   "koniec": "2026-09-25T00:10:58Z",
+   "czas_min": 42.3,
+   "najdluzsza_przerwa_min": 8.7,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 170,
+   "odpowiedzi_z_pelnym_usage": 42,
+   "linie_asystenta": 338,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 213,
+   "narzedzia": {
+    "Bash": 128,
+    "Read": 40,
+    "WebSearch": 33,
+    "WebFetch": 5,
+    "Edit": 4,
+    "ToolSearch": 1,
+    "Write": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 634139,
+   "kontekst_koncowy": 634139,
+   "tokeny": {
+    "input": 340,
+    "output_recorded": 34251,
+    "thinking_recorded": 18163,
+    "cache_read": 55088908,
+    "cache_write": 1133283,
+    "cache_write_5m": 1133283,
+    "cache_write_1h": 0,
+    "output_estimated": 188790,
+    "output_estimated_alt": 184144,
+    "thinking_estimated": 68201
+   },
+   "koszt_usd": {
+    "dolny": 17.37,
+    "srodkowy": 20.46,
+    "alt": 20.37,
+    "udzial_cache_read_w_srodkowym": 0.538
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 634139,
+    "toolCalls": 213,
+    "durationMs": 2538355,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_0e783e5d-4ab/agent-a578b42bbb76113c0.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a696982f79a420808",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_0e783e5d-4ab",
+   "label": "weryfikacja:R6",
+   "opis_meta": "weryfikacja:R6",
+   "agentType": "workflow-subagent",
+   "faza": "Weryfikacja",
+   "model": {
+    "claude-opus-5-5": 114
+   },
+   "start": "2026-09-25T00:54:43Z",
+   "koniec": "2026-09-25T01:13:27Z",
+   "czas_min": 18.74,
+   "najdluzsza_przerwa_min": 2.4,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 114,
+   "odpowiedzi_z_pelnym_usage": 22,
+   "linie_asystenta": 195,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 115,
+   "narzedzia": {
+    "Bash": 108,
+    "Read": 3,
+    "WebSearch": 2,
+    "ToolSearch": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 320283,
+   "kontekst_koncowy": 320283,
+   "tokeny": {
+    "input": 228,
+    "output_recorded": 10851,
+    "thinking_recorded": 3410,
+    "cache_read": 24167311,
+    "cache_write": 286217,
+    "cache_write_5m": 286217,
+    "cache_write_1h": 0,
+    "output_estimated": 61106,
+    "output_estimated_alt": 58137,
+    "thinking_estimated": 23691
+   },
+   "koszt_usd": {
+    "dolny": 6.48,
+    "srodkowy": 7.49,
+    "alt": 7.43,
+    "udzial_cache_read_w_srodkowym": 0.646
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 320283,
+    "toolCalls": 115,
+    "durationMs": 1124685,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_0e783e5d-4ab/agent-a696982f79a420808.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a7411b6f706bccb73",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_0e783e5d-4ab",
+   "label": "badanie:R7",
+   "opis_meta": "badanie:R7",
+   "agentType": "workflow-subagent",
+   "faza": "Badanie",
+   "model": {
+    "claude-opus-5-5": 166
+   },
+   "start": "2026-09-25T00:11:00Z",
+   "koniec": "2026-09-25T00:46:49Z",
+   "czas_min": 35.81,
+   "najdluzsza_przerwa_min": 6.0,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 166,
+   "odpowiedzi_z_pelnym_usage": 38,
+   "linie_asystenta": 288,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 188,
+   "narzedzia": {
+    "Bash": 126,
+    "WebSearch": 38,
+    "WebFetch": 18,
+    "Edit": 3,
+    "ToolSearch": 1,
+    "Write": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 520657,
+   "kontekst_koncowy": 520657,
+   "tokeny": {
+    "input": 332,
+    "output_recorded": 19541,
+    "thinking_recorded": 3724,
+    "cache_read": 45256696,
+    "cache_write": 958431,
+    "cache_write_5m": 958431,
+    "cache_write_1h": 0,
+    "output_estimated": 155253,
+    "output_estimated_alt": 159861,
+    "thinking_estimated": 59534
+   },
+   "koszt_usd": {
+    "dolny": 14.24,
+    "srodkowy": 16.95,
+    "alt": 17.04,
+    "udzial_cache_read_w_srodkowym": 0.534
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 520657,
+    "toolCalls": 188,
+    "durationMs": 2148612,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_0e783e5d-4ab/agent-a7411b6f706bccb73.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a8644aa76ec49b856",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_0e783e5d-4ab",
+   "label": "badanie:R5",
+   "opis_meta": "badanie:R5",
+   "agentType": "workflow-subagent",
+   "faza": "Badanie",
+   "model": {
+    "claude-opus-5-5": 168
+   },
+   "start": "2026-09-24T23:28:40Z",
+   "koniec": "2026-09-25T00:04:08Z",
+   "czas_min": 35.47,
+   "najdluzsza_przerwa_min": 4.8,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 168,
+   "odpowiedzi_z_pelnym_usage": 35,
+   "linie_asystenta": 272,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 169,
+   "narzedzia": {
+    "Bash": 100,
+    "WebSearch": 33,
+    "WebFetch": 31,
+    "Read": 2,
+    "ToolSearch": 1,
+    "Write": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 433323,
+   "kontekst_koncowy": 433323,
+   "tokeny": {
+    "input": 336,
+    "output_recorded": 25224,
+    "thinking_recorded": 8636,
+    "cache_read": 37939892,
+    "cache_write": 399222,
+    "cache_write_5m": 399222,
+    "cache_write_1h": 0,
+    "output_estimated": 143776,
+    "output_estimated_alt": 146401,
+    "thinking_estimated": 57469
+   },
+   "koszt_usd": {
+    "dolny": 10.09,
+    "srodkowy": 12.46,
+    "alt": 12.51,
+    "udzial_cache_read_w_srodkowym": 0.609
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 433323,
+    "toolCalls": 169,
+    "durationMs": 2128183,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_0e783e5d-4ab/agent-a8644aa76ec49b856.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "aaaef594c4e189d71",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_0e783e5d-4ab",
+   "label": "badanie:R6",
+   "opis_meta": "badanie:R6",
+   "agentType": "workflow-subagent",
+   "faza": "Badanie",
+   "model": {
+    "claude-opus-5-5": 156
+   },
+   "start": "2026-09-25T00:04:10Z",
+   "koniec": "2026-09-25T00:38:11Z",
+   "czas_min": 34.02,
+   "najdluzsza_przerwa_min": 5.8,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 156,
+   "odpowiedzi_z_pelnym_usage": 36,
+   "linie_asystenta": 283,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 169,
+   "narzedzia": {
+    "Bash": 116,
+    "WebSearch": 25,
+    "WebFetch": 24,
+    "ToolSearch": 1,
+    "Write": 1,
+    "Edit": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 567244,
+   "kontekst_koncowy": 567244,
+   "tokeny": {
+    "input": 312,
+    "output_recorded": 27812,
+    "thinking_recorded": 12403,
+    "cache_read": 46340793,
+    "cache_write": 1020824,
+    "cache_write_5m": 1020824,
+    "cache_write_1h": 0,
+    "output_estimated": 150817,
+    "output_estimated_alt": 147565,
+    "thinking_estimated": 57487
+   },
+   "koszt_usd": {
+    "dolny": 14.93,
+    "srodkowy": 17.39,
+    "alt": 17.32,
+    "udzial_cache_read_w_srodkowym": 0.533
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 567244,
+    "toolCalls": 169,
+    "durationMs": 2041216,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_0e783e5d-4ab/agent-aaaef594c4e189d71.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "ab0444d746ccddbb2",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_0e783e5d-4ab",
+   "label": "weryfikacja:R7",
+   "opis_meta": "weryfikacja:R7",
+   "agentType": "workflow-subagent",
+   "faza": "Weryfikacja",
+   "model": {
+    "claude-opus-5-5": 83
+   },
+   "start": "2026-09-25T01:01:56Z",
+   "koniec": "2026-09-25T01:14:08Z",
+   "czas_min": 12.19,
+   "najdluzsza_przerwa_min": 0.9,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 83,
+   "odpowiedzi_z_pelnym_usage": 10,
+   "linie_asystenta": 140,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 85,
+   "narzedzia": {
+    "Bash": 68,
+    "WebFetch": 6,
+    "WebSearch": 4,
+    "Read": 3,
+    "Edit": 2,
+    "ToolSearch": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 286267,
+   "kontekst_koncowy": 286267,
+   "tokeny": {
+    "input": 166,
+    "output_recorded": 15962,
+    "thinking_recorded": 5822,
+    "cache_read": 16691107,
+    "cache_write": 252182,
+    "cache_write_5m": 252182,
+    "cache_write_1h": 0,
+    "output_estimated": 53287,
+    "output_estimated_alt": 52478,
+    "thinking_estimated": 24028
+   },
+   "koszt_usd": {
+    "dolny": 4.92,
+    "srodkowy": 5.67,
+    "alt": 5.65,
+    "udzial_cache_read_w_srodkowym": 0.589
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 286267,
+    "toolCalls": 85,
+    "durationMs": 731523,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_0e783e5d-4ab/agent-ab0444d746ccddbb2.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "af7b73e4c9674da0a",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_0e783e5d-4ab",
+   "label": "weryfikacja:R4",
+   "opis_meta": "weryfikacja:R4",
+   "agentType": "workflow-subagent",
+   "faza": "Weryfikacja",
+   "model": {
+    "claude-opus-5-5": 78
+   },
+   "start": "2026-09-25T00:46:50Z",
+   "koniec": "2026-09-25T01:01:55Z",
+   "czas_min": 15.08,
+   "najdluzsza_przerwa_min": 0.9,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 78,
+   "odpowiedzi_z_pelnym_usage": 20,
+   "linie_asystenta": 206,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 91,
+   "narzedzia": {
+    "Bash": 65,
+    "Read": 16,
+    "Edit": 4,
+    "WebFetch": 2,
+    "WebSearch": 2,
+    "ToolSearch": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 277989,
+   "kontekst_koncowy": 277989,
+   "tokeny": {
+    "input": 156,
+    "output_recorded": 16313,
+    "thinking_recorded": 6045,
+    "cache_read": 15252389,
+    "cache_write": 243921,
+    "cache_write_5m": 243921,
+    "cache_write_1h": 0,
+    "output_estimated": 58739,
+    "output_estimated_alt": 55814,
+    "thinking_estimated": 20753
+   },
+   "koszt_usd": {
+    "dolny": 4.6,
+    "srodkowy": 5.45,
+    "alt": 5.39,
+    "udzial_cache_read_w_srodkowym": 0.56
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 277989,
+    "toolCalls": 91,
+    "durationMs": 904950,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_0e783e5d-4ab/agent-af7b73e4c9674da0a.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a018fbab99b79a8e9",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_10e1a801-dd6",
+   "label": "weryfikacja:V1",
+   "opis_meta": "weryfikacja:V1",
+   "agentType": "workflow-subagent",
+   "faza": "Weryfikacja",
+   "model": {
+    "claude-opus-5-5": 70
+   },
+   "start": "2026-09-25T06:48:07Z",
+   "koniec": "2026-09-25T07:09:56Z",
+   "czas_min": 21.82,
+   "najdluzsza_przerwa_min": 4.7,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 70,
+   "odpowiedzi_z_pelnym_usage": 28,
+   "linie_asystenta": 129,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 70,
+   "narzedzia": {
+    "Bash": 65,
+    "Read": 3,
+    "Write": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 251686,
+   "kontekst_koncowy": 251686,
+   "tokeny": {
+    "input": 140,
+    "output_recorded": 24590,
+    "thinking_recorded": 11028,
+    "cache_read": 10905841,
+    "cache_write": 251660,
+    "cache_write_5m": 251660,
+    "cache_write_1h": 0,
+    "output_estimated": 58594,
+    "output_estimated_alt": 59675,
+    "thinking_estimated": 29928
+   },
+   "koszt_usd": {
+    "dolny": 3.93,
+    "srodkowy": 4.61,
+    "alt": 4.63,
+    "udzial_cache_read_w_srodkowym": 0.473
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 251686,
+    "toolCalls": 70,
+    "durationMs": 1309429,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_10e1a801-dd6/agent-a018fbab99b79a8e9.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a5a0bd0b27c74a819",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_10e1a801-dd6",
+   "label": "weryfikacja:V3",
+   "opis_meta": "weryfikacja:V3",
+   "agentType": "workflow-subagent",
+   "faza": "Weryfikacja",
+   "model": {
+    "claude-opus-5-5": 18
+   },
+   "start": "2026-09-25T07:09:57Z",
+   "koniec": "2026-09-25T07:13:27Z",
+   "czas_min": 3.5,
+   "najdluzsza_przerwa_min": 1.6,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 18,
+   "odpowiedzi_z_pelnym_usage": 13,
+   "linie_asystenta": 32,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 19,
+   "narzedzia": {
+    "Bash": 18,
+    "Read": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 125868,
+   "kontekst_koncowy": 125868,
+   "tokeny": {
+    "input": 36,
+    "output_recorded": 3188,
+    "thinking_recorded": 646,
+    "cache_read": 1663627,
+    "cache_write": 90586,
+    "cache_write_5m": 90586,
+    "cache_write_1h": 0,
+    "output_estimated": 5087,
+    "output_estimated_alt": 4955,
+    "thinking_estimated": 2004
+   },
+   "koszt_usd": {
+    "dolny": 0.85,
+    "srodkowy": 0.89,
+    "alt": 0.88,
+    "udzial_cache_read_w_srodkowym": 0.375
+   },
+   "status": "przerwany (przepływ zatrzymany TaskStop)",
+   "harness_wf_json": {
+    "tokens": 125868,
+    "toolCalls": 19,
+    "durationMs": null,
+    "cached": false,
+    "state": "progress"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_10e1a801-dd6/agent-a5a0bd0b27c74a819.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a82de0c2412aaa264",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_10e1a801-dd6",
+   "label": "weryfikacja:V2",
+   "opis_meta": "weryfikacja:V2",
+   "agentType": "workflow-subagent",
+   "faza": "Weryfikacja",
+   "model": {
+    "claude-opus-5-5": 89
+   },
+   "start": "2026-09-25T06:48:07Z",
+   "koniec": "2026-09-25T07:12:31Z",
+   "czas_min": 24.4,
+   "najdluzsza_przerwa_min": 2.5,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 89,
+   "odpowiedzi_z_pelnym_usage": 47,
+   "linie_asystenta": 156,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 90,
+   "narzedzia": {
+    "Bash": 86,
+    "Write": 1,
+    "ToolSearch": 1,
+    "Monitor": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 321580,
+   "kontekst_koncowy": 321580,
+   "tokeny": {
+    "input": 178,
+    "output_recorded": 50985,
+    "thinking_recorded": 26238,
+    "cache_read": 17525178,
+    "cache_write": 286282,
+    "cache_write_5m": 286282,
+    "cache_write_1h": 0,
+    "output_estimated": 88445,
+    "output_estimated_alt": 90244,
+    "thinking_estimated": 45236
+   },
+   "koszt_usd": {
+    "dolny": 5.96,
+    "srodkowy": 6.71,
+    "alt": 6.74,
+    "udzial_cache_read_w_srodkowym": 0.523
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 321580,
+    "toolCalls": 90,
+    "durationMs": 1463946,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_10e1a801-dd6/agent-a82de0c2412aaa264.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "ae5de9b3855116702",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_10e1a801-dd6",
+   "label": "poprawki:fizyka-woda",
+   "opis_meta": "poprawki:fizyka-woda",
+   "agentType": "workflow-subagent",
+   "faza": "Fizyka i woda",
+   "model": {
+    "claude-opus-5-5": 189
+   },
+   "start": "2026-09-25T05:48:46Z",
+   "koniec": "2026-09-25T06:48:05Z",
+   "czas_min": 59.31,
+   "najdluzsza_przerwa_min": 5.7,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 189,
+   "odpowiedzi_z_pelnym_usage": 53,
+   "linie_asystenta": 341,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 199,
+   "narzedzia": {
+    "Bash": 187,
+    "Edit": 10,
+    "Write": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 618373,
+   "kontekst_koncowy": 618373,
+   "tokeny": {
+    "input": 378,
+    "output_recorded": 61723,
+    "thinking_recorded": 14907,
+    "cache_read": 74573182,
+    "cache_write": 1178968,
+    "cache_write_5m": 1178968,
+    "cache_write_1h": 0,
+    "output_estimated": 199208,
+    "output_estimated_alt": 215990,
+    "thinking_estimated": 102451
+   },
+   "koszt_usd": {
+    "dolny": 22.05,
+    "srodkowy": 24.8,
+    "alt": 25.13,
+    "udzial_cache_read_w_srodkowym": 0.602
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 618373,
+    "toolCalls": 199,
+    "durationMs": 3558648,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_10e1a801-dd6/agent-ae5de9b3855116702.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "ae99c9ea523904793",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_10e1a801-dd6",
+   "label": "poprawki:funkcja",
+   "opis_meta": "poprawki:funkcja",
+   "agentType": "workflow-subagent",
+   "faza": "Funkcja",
+   "model": {
+    "claude-opus-5-5": 58
+   },
+   "start": "2026-09-25T05:21:51Z",
+   "koniec": "2026-09-25T05:48:45Z",
+   "czas_min": 26.9,
+   "najdluzsza_przerwa_min": 7.8,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 58,
+   "odpowiedzi_z_pelnym_usage": 12,
+   "linie_asystenta": 112,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 66,
+   "narzedzia": {
+    "Bash": 48,
+    "Read": 8,
+    "Edit": 8,
+    "Write": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 250300,
+   "kontekst_koncowy": 250300,
+   "tokeny": {
+    "input": 116,
+    "output_recorded": 10974,
+    "thinking_recorded": 1934,
+    "cache_read": 10279725,
+    "cache_write": 443607,
+    "cache_write_5m": 443607,
+    "cache_write_1h": 0,
+    "output_estimated": 65654,
+    "output_estimated_alt": 71772,
+    "thinking_estimated": 34947
+   },
+   "koszt_usd": {
+    "dolny": 4.49,
+    "srodkowy": 5.59,
+    "alt": 5.71,
+    "udzial_cache_read_w_srodkowym": 0.368
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 250300,
+    "toolCalls": 66,
+    "durationMs": 1614186,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_10e1a801-dd6/agent-ae99c9ea523904793.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a160d071c58d17dd8",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_44634517-034",
+   "label": "audyt:A1",
+   "opis_meta": "audyt:A1",
+   "agentType": "workflow-subagent",
+   "faza": "Audyt",
+   "model": {
+    "claude-opus-5-5": 46
+   },
+   "start": "2026-09-25T04:02:33Z",
+   "koniec": "2026-09-25T04:25:51Z",
+   "czas_min": 23.31,
+   "najdluzsza_przerwa_min": 4.6,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 46,
+   "odpowiedzi_z_pelnym_usage": 10,
+   "linie_asystenta": 83,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 46,
+   "narzedzia": {
+    "Bash": 40,
+    "Read": 3,
+    "Write": 2,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 378894,
+   "kontekst_koncowy": 378894,
+   "tokeny": {
+    "input": 92,
+    "output_recorded": 69286,
+    "thinking_recorded": 30942,
+    "cache_read": 9774394,
+    "cache_write": 378885,
+    "cache_write_5m": 378885,
+    "cache_write_1h": 0,
+    "output_estimated": 126753,
+    "output_estimated_alt": 134432,
+    "thinking_estimated": 66003
+   },
+   "koszt_usd": {
+    "dolny": 5.24,
+    "srodkowy": 6.38,
+    "alt": 6.54,
+    "udzial_cache_read_w_srodkowym": 0.306
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 378894,
+    "toolCalls": 46,
+    "durationMs": 1398377,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_44634517-034/agent-a160d071c58d17dd8.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a1db260ecb346c8f0",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_44634517-034",
+   "label": "wariant:W1",
+   "opis_meta": "wariant:W1",
+   "agentType": "workflow-subagent",
+   "faza": "Warianty",
+   "model": {
+    "claude-opus-5-5": 53
+   },
+   "start": "2026-09-24T23:37:57Z",
+   "koniec": "2026-09-25T00:37:34Z",
+   "czas_min": 59.62,
+   "najdluzsza_przerwa_min": 17.0,
+   "przerwy_ponad_10min": 1,
+   "odpowiedzi_api": 53,
+   "odpowiedzi_z_pelnym_usage": 12,
+   "linie_asystenta": 109,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 57,
+   "narzedzia": {
+    "Bash": 31,
+    "Read": 17,
+    "Write": 8,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 544676,
+   "kontekst_koncowy": 544676,
+   "tokeny": {
+    "input": 106,
+    "output_recorded": 29637,
+    "thinking_recorded": 12973,
+    "cache_read": 18277151,
+    "cache_write": 982270,
+    "cache_write_5m": 982270,
+    "cache_write_1h": 0,
+    "output_estimated": 282920,
+    "output_estimated_alt": 345483,
+    "thinking_estimated": 188406
+   },
+   "koszt_usd": {
+    "dolny": 9.16,
+    "srodkowy": 14.23,
+    "alt": 15.48,
+    "udzial_cache_read_w_srodkowym": 0.257
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": null,
+    "toolCalls": null,
+    "durationMs": null,
+    "cached": true,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_44634517-034/agent-a1db260ecb346c8f0.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a26a33699e730c1d9",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_44634517-034",
+   "label": "poprawki",
+   "opis_meta": "poprawki",
+   "agentType": "workflow-subagent",
+   "faza": "Poprawki",
+   "model": {
+    "claude-opus-5-5": 103
+   },
+   "start": "2026-09-25T04:34:17Z",
+   "koniec": "2026-09-25T05:20:04Z",
+   "czas_min": 45.79,
+   "najdluzsza_przerwa_min": 4.0,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 103,
+   "odpowiedzi_z_pelnym_usage": 14,
+   "linie_asystenta": 205,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 117,
+   "narzedzia": {
+    "Bash": 84,
+    "Edit": 20,
+    "Read": 12,
+    "Write": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 443909,
+   "kontekst_koncowy": 443909,
+   "tokeny": {
+    "input": 206,
+    "output_recorded": 17892,
+    "thinking_recorded": 4266,
+    "cache_read": 30723337,
+    "cache_write": 443900,
+    "cache_write_5m": 443900,
+    "cache_write_1h": 0,
+    "output_estimated": 138662,
+    "output_estimated_alt": 150866,
+    "thinking_estimated": 73931
+   },
+   "koszt_usd": {
+    "dolny": 8.72,
+    "srodkowy": 11.14,
+    "alt": 11.38,
+    "udzial_cache_read_w_srodkowym": 0.552
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 443909,
+    "toolCalls": 117,
+    "durationMs": 2747251,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_44634517-034/agent-a26a33699e730c1d9.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a453edcfacb946a30",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_44634517-034",
+   "label": "wariant:W2",
+   "opis_meta": "wariant:W2",
+   "agentType": "workflow-subagent",
+   "faza": "Warianty",
+   "model": {
+    "claude-opus-5-5": 67
+   },
+   "start": "2026-09-24T23:37:58Z",
+   "koniec": "2026-09-25T01:11:36Z",
+   "czas_min": 93.65,
+   "najdluzsza_przerwa_min": 22.2,
+   "przerwy_ponad_10min": 3,
+   "odpowiedzi_api": 67,
+   "odpowiedzi_z_pelnym_usage": 13,
+   "linie_asystenta": 119,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 69,
+   "narzedzia": {
+    "Bash": 43,
+    "Read": 17,
+    "Write": 8,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 486648,
+   "kontekst_koncowy": 486648,
+   "tokeny": {
+    "input": 134,
+    "output_recorded": 8983,
+    "thinking_recorded": 4313,
+    "cache_read": 21239683,
+    "cache_write": 611714,
+    "cache_write_5m": 611714,
+    "cache_write_1h": 0,
+    "output_estimated": 414792,
+    "output_estimated_alt": 533893,
+    "thinking_estimated": 319050
+   },
+   "koszt_usd": {
+    "dolny": 7.49,
+    "srodkowy": 15.6,
+    "alt": 17.98,
+    "udzial_cache_read_w_srodkowym": 0.272
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": null,
+    "toolCalls": null,
+    "durationMs": null,
+    "cached": true,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_44634517-034/agent-a453edcfacb946a30.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a50e0a2cf661f1fa2",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_44634517-034",
+   "label": "audyt:A3",
+   "opis_meta": "audyt:A3",
+   "agentType": "workflow-subagent",
+   "faza": "Audyt",
+   "model": {
+    "claude-opus-5-5": 23
+   },
+   "start": "2026-09-25T04:22:09Z",
+   "koniec": "2026-09-25T04:34:16Z",
+   "czas_min": 12.12,
+   "najdluzsza_przerwa_min": 2.5,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 23,
+   "odpowiedzi_z_pelnym_usage": 1,
+   "linie_asystenta": 44,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 26,
+   "narzedzia": {
+    "Bash": 18,
+    "Read": 6,
+    "Write": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 227101,
+   "kontekst_koncowy": 227101,
+   "tokeny": {
+    "input": 46,
+    "output_recorded": 554,
+    "thinking_recorded": 187,
+    "cache_read": 3111272,
+    "cache_write": 191826,
+    "cache_write_5m": 191826,
+    "cache_write_1h": 0,
+    "output_estimated": 54144,
+    "output_estimated_alt": 64698,
+    "thinking_estimated": 35588
+   },
+   "koszt_usd": {
+    "dolny": 1.59,
+    "srodkowy": 2.66,
+    "alt": 2.88,
+    "udzial_cache_read_w_srodkowym": 0.234
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 227101,
+    "toolCalls": 26,
+    "durationMs": 727201,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_44634517-034/agent-a50e0a2cf661f1fa2.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a6577b608fd30ce04",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_44634517-034",
+   "label": "sędzia:J2",
+   "opis_meta": "sędzia:J2",
+   "agentType": "workflow-subagent",
+   "faza": "Ocena",
+   "model": {
+    "claude-opus-5-5": 26
+   },
+   "start": "2026-09-25T02:39:49Z",
+   "koniec": "2026-09-25T02:55:42Z",
+   "czas_min": 15.89,
+   "najdluzsza_przerwa_min": 4.5,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 26,
+   "odpowiedzi_z_pelnym_usage": 0,
+   "linie_asystenta": 65,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 42,
+   "narzedzia": {
+    "Read": 20,
+    "Bash": 19,
+    "Write": 1,
+    "Edit": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 349383,
+   "kontekst_koncowy": 349383,
+   "tokeny": {
+    "input": 52,
+    "output_recorded": 189,
+    "thinking_recorded": 0,
+    "cache_read": 4091392,
+    "cache_write": 314042,
+    "cache_write_5m": 314042,
+    "cache_write_1h": 0,
+    "output_estimated": 69965,
+    "output_estimated_alt": 86562,
+    "thinking_estimated": 52980
+   },
+   "koszt_usd": {
+    "dolny": 2.39,
+    "srodkowy": 3.79,
+    "alt": 4.12,
+    "udzial_cache_read_w_srodkowym": 0.216
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 349383,
+    "toolCalls": 42,
+    "durationMs": 953498,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_44634517-034/agent-a6577b608fd30ce04.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a7dce8cf36be08d2a",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_44634517-034",
+   "label": "sędzia:J3",
+   "opis_meta": "sędzia:J3",
+   "agentType": "workflow-subagent",
+   "faza": "Ocena",
+   "model": {
+    "claude-opus-5-5": 28
+   },
+   "start": "2026-09-25T02:55:43Z",
+   "koniec": "2026-09-25T03:09:40Z",
+   "czas_min": 13.94,
+   "najdluzsza_przerwa_min": 3.1,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 28,
+   "odpowiedzi_z_pelnym_usage": 2,
+   "linie_asystenta": 62,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 38,
+   "narzedzia": {
+    "Read": 20,
+    "Bash": 16,
+    "Write": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 311827,
+   "kontekst_koncowy": 311827,
+   "tokeny": {
+    "input": 56,
+    "output_recorded": 4567,
+    "thinking_recorded": 3952,
+    "cache_read": 4854334,
+    "cache_write": 276483,
+    "cache_write_5m": 276483,
+    "cache_write_1h": 0,
+    "output_estimated": 66820,
+    "output_estimated_alt": 80721,
+    "thinking_estimated": 49317
+   },
+   "koszt_usd": {
+    "dolny": 2.44,
+    "srodkowy": 3.69,
+    "alt": 3.97,
+    "udzial_cache_read_w_srodkowym": 0.263
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 311827,
+    "toolCalls": 38,
+    "durationMs": 836487,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_44634517-034/agent-a7dce8cf36be08d2a.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a856d66efb0614c73",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_44634517-034",
+   "label": "sędzia:J1",
+   "opis_meta": "sędzia:J1",
+   "agentType": "workflow-subagent",
+   "faza": "Ocena",
+   "model": {
+    "claude-opus-5-5": 35
+   },
+   "start": "2026-09-25T02:39:48Z",
+   "koniec": "2026-09-25T02:55:58Z",
+   "czas_min": 16.16,
+   "najdluzsza_przerwa_min": 2.8,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 35,
+   "odpowiedzi_z_pelnym_usage": 0,
+   "linie_asystenta": 78,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 43,
+   "narzedzia": {
+    "Bash": 21,
+    "Read": 20,
+    "Write": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 362793,
+   "kontekst_koncowy": 362793,
+   "tokeny": {
+    "input": 70,
+    "output_recorded": 252,
+    "thinking_recorded": 0,
+    "cache_read": 7010032,
+    "cache_write": 362788,
+    "cache_write_5m": 362788,
+    "cache_write_1h": 0,
+    "output_estimated": 76458,
+    "output_estimated_alt": 91862,
+    "thinking_estimated": 56130
+   },
+   "koszt_usd": {
+    "dolny": 3.22,
+    "srodkowy": 4.75,
+    "alt": 5.05,
+    "udzial_cache_read_w_srodkowym": 0.295
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 362793,
+    "toolCalls": 43,
+    "durationMs": 969939,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_44634517-034/agent-a856d66efb0614c73.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "aa7ccab5f3db17a8f",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_44634517-034",
+   "label": "wariant:W3",
+   "opis_meta": "wariant:W3",
+   "agentType": "workflow-subagent",
+   "faza": "Warianty",
+   "model": {
+    "claude-opus-5-5": 60
+   },
+   "start": "2026-09-25T02:03:52Z",
+   "koniec": "2026-09-25T02:39:46Z",
+   "czas_min": 35.9,
+   "najdluzsza_przerwa_min": 14.8,
+   "przerwy_ponad_10min": 1,
+   "odpowiedzi_api": 60,
+   "odpowiedzi_z_pelnym_usage": 11,
+   "linie_asystenta": 112,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 63,
+   "narzedzia": {
+    "Bash": 39,
+    "Write": 12,
+    "Read": 10,
+    "Edit": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 395335,
+   "kontekst_koncowy": 395335,
+   "tokeny": {
+    "input": 120,
+    "output_recorded": 28692,
+    "thinking_recorded": 18595,
+    "cache_read": 16088904,
+    "cache_write": 501854,
+    "cache_write_5m": 501854,
+    "cache_write_1h": 0,
+    "output_estimated": 178462,
+    "output_estimated_alt": 201328,
+    "thinking_estimated": 102546
+   },
+   "koszt_usd": {
+    "dolny": 6.3,
+    "srodkowy": 9.3,
+    "alt": 9.75,
+    "udzial_cache_read_w_srodkowym": 0.346
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 395335,
+    "toolCalls": 63,
+    "durationMs": 2154329,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_44634517-034/agent-aa7ccab5f3db17a8f.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "ac1298b42425dadc5",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_44634517-034",
+   "label": "wariant:W3",
+   "opis_meta": "wariant:W3",
+   "agentType": "workflow-subagent",
+   "faza": "Warianty",
+   "model": {
+    "claude-opus-5-5": 15
+   },
+   "start": "2026-09-25T00:37:35Z",
+   "koniec": "2026-09-25T02:03:24Z",
+   "czas_min": 85.81,
+   "najdluzsza_przerwa_min": 21.7,
+   "przerwy_ponad_10min": 4,
+   "odpowiedzi_api": 15,
+   "odpowiedzi_z_pelnym_usage": 0,
+   "linie_asystenta": 28,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 17,
+   "narzedzia": {
+    "Bash": 13,
+    "Read": 4
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 155915,
+   "kontekst_koncowy": 155915,
+   "tokeny": {
+    "input": 30,
+    "output_recorded": 169,
+    "thinking_recorded": 0,
+    "cache_read": 987069,
+    "cache_write": 517201,
+    "cache_write_5m": 517201,
+    "cache_write_1h": 0,
+    "output_estimated": 282912,
+    "output_estimated_alt": 400395,
+    "thinking_estimated": 281297
+   },
+   "koszt_usd": {
+    "dolny": 2.79,
+    "srodkowy": 8.44,
+    "alt": 10.79,
+    "udzial_cache_read_w_srodkowym": 0.023
+   },
+   "status": "przerwany (TaskStop we1mlli53, 02:03:24)",
+   "harness_wf_json": null,
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_44634517-034/agent-ac1298b42425dadc5.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "afaa6d6581e71147d",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_44634517-034",
+   "label": "audyt:A2",
+   "opis_meta": "audyt:A2",
+   "agentType": "workflow-subagent",
+   "faza": "Audyt",
+   "model": {
+    "claude-opus-5-5": 36
+   },
+   "start": "2026-09-25T04:02:33Z",
+   "koniec": "2026-09-25T04:22:08Z",
+   "czas_min": 19.58,
+   "najdluzsza_przerwa_min": 5.0,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 36,
+   "odpowiedzi_z_pelnym_usage": 8,
+   "linie_asystenta": 68,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 42,
+   "narzedzia": {
+    "Bash": 20,
+    "Read": 20,
+    "Write": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 292073,
+   "kontekst_koncowy": 292073,
+   "tokeny": {
+    "input": 72,
+    "output_recorded": 7500,
+    "thinking_recorded": 4551,
+    "cache_read": 6534507,
+    "cache_write": 256798,
+    "cache_write_5m": 256798,
+    "cache_write_1h": 0,
+    "output_estimated": 68977,
+    "output_estimated_alt": 82067,
+    "thinking_estimated": 46912
+   },
+   "koszt_usd": {
+    "dolny": 2.74,
+    "srodkowy": 3.97,
+    "alt": 4.23,
+    "udzial_cache_read_w_srodkowym": 0.329
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 292073,
+    "toolCalls": 42,
+    "durationMs": 1174733,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_44634517-034/agent-afaa6d6581e71147d.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a012aca67076b9fbb",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_6070a5f0-602",
+   "label": "dane:repozytorium",
+   "opis_meta": "dane:repozytorium",
+   "agentType": "workflow-subagent",
+   "faza": "Zbieranie",
+   "model": {
+    "claude-opus-5-5": 9
+   },
+   "start": "2026-09-25T08:36:26Z",
+   "koniec": "2026-09-25T08:38:50Z",
+   "czas_min": 2.41,
+   "najdluzsza_przerwa_min": 0.6,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 9,
+   "odpowiedzi_z_pelnym_usage": 1,
+   "linie_asystenta": 24,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 10,
+   "narzedzia": {
+    "Bash": 9,
+    "Write": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 60829,
+   "kontekst_koncowy": 60829,
+   "tokeny": {
+    "input": 18,
+    "output_recorded": 372,
+    "thinking_recorded": 119,
+    "cache_read": 467251,
+    "cache_write": 25701,
+    "cache_write_5m": 25701,
+    "cache_write_1h": 0,
+    "output_estimated": 7042,
+    "output_estimated_alt": 6257,
+    "thinking_estimated": 2352
+   },
+   "koszt_usd": {
+    "dolny": 0.23,
+    "srodkowy": 0.36,
+    "alt": 0.35,
+    "udzial_cache_read_w_srodkowym": 0.258
+   },
+   "status": "trwa (brak wpisu result w journal.jsonl)",
+   "harness_wf_json": null,
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_6070a5f0-602/agent-a012aca67076b9fbb.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "adbc4996248a95aee",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_6070a5f0-602",
+   "label": "dane:watek-glowny",
+   "opis_meta": "dane:watek-glowny",
+   "agentType": "workflow-subagent",
+   "faza": "Zbieranie",
+   "model": {
+    "claude-opus-5-5": 33
+   },
+   "start": "2026-09-25T08:27:30Z",
+   "koniec": "2026-09-25T08:36:25Z",
+   "czas_min": 8.91,
+   "najdluzsza_przerwa_min": 1.6,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 33,
+   "odpowiedzi_z_pelnym_usage": 4,
+   "linie_asystenta": 68,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 39,
+   "narzedzia": {
+    "Bash": 29,
+    "Edit": 7,
+    "Write": 1,
+    "Skill": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 209085,
+   "kontekst_koncowy": 209085,
+   "tokeny": {
+    "input": 66,
+    "output_recorded": 6118,
+    "thinking_recorded": 1484,
+    "cache_read": 3490027,
+    "cache_write": 209075,
+    "cache_write_5m": 209075,
+    "cache_write_1h": 0,
+    "output_estimated": 60499,
+    "output_estimated_alt": 58784,
+    "thinking_estimated": 16249
+   },
+   "koszt_usd": {
+    "dolny": 1.87,
+    "srodkowy": 2.95,
+    "alt": 2.92,
+    "udzial_cache_read_w_srodkowym": 0.236
+   },
+   "status": "zakończony",
+   "harness_wf_json": null,
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_6070a5f0-602/agent-adbc4996248a95aee.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "ae7b216d63b87111a",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_6070a5f0-602",
+   "label": "dane:podagenci-przeplywy",
+   "opis_meta": "dane:podagenci-przeplywy",
+   "agentType": "workflow-subagent",
+   "faza": "Zbieranie",
+   "model": {
+    "claude-opus-5-5": 41
+   },
+   "start": "2026-09-25T08:27:31Z",
+   "koniec": "2026-09-25T08:38:47Z",
+   "czas_min": 11.27,
+   "najdluzsza_przerwa_min": 1.5,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 41,
+   "odpowiedzi_z_pelnym_usage": 8,
+   "linie_asystenta": 80,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 42,
+   "narzedzia": {
+    "Bash": 40,
+    "Write": 1,
+    "Skill": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 297099,
+   "kontekst_koncowy": 297099,
+   "tokeny": {
+    "input": 82,
+    "output_recorded": 11251,
+    "thinking_recorded": 3893,
+    "cache_read": 6414875,
+    "cache_write": 258467,
+    "cache_write_5m": 258467,
+    "cache_write_1h": 0,
+    "output_estimated": 68450,
+    "output_estimated_alt": 68606,
+    "thinking_estimated": 25117
+   },
+   "koszt_usd": {
+    "dolny": 2.8,
+    "srodkowy": 3.94,
+    "alt": 3.95,
+    "udzial_cache_read_w_srodkowym": 0.325
+   },
+   "status": "trwa (ten raport)",
+   "harness_wf_json": null,
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_6070a5f0-602/agent-ae7b216d63b87111a.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a9e78ae7ccac9a016",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_725a3592-fa1",
+   "label": "wariant:W1",
+   "opis_meta": "wariant:W1",
+   "agentType": "workflow-subagent",
+   "faza": "Warianty",
+   "model": {
+    "claude-opus-5-5": 4
+   },
+   "start": "2026-09-24T23:30:08Z",
+   "koniec": "2026-09-24T23:33:56Z",
+   "czas_min": 3.8,
+   "najdluzsza_przerwa_min": 3.7,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 4,
+   "odpowiedzi_z_pelnym_usage": 0,
+   "linie_asystenta": 9,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 5,
+   "narzedzia": {
+    "Bash": 3,
+    "Read": 2
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 69749,
+   "kontekst_koncowy": 69749,
+   "tokeny": {
+    "input": 8,
+    "output_recorded": 50,
+    "thinking_recorded": 0,
+    "cache_read": 163451,
+    "cache_write": 69742,
+    "cache_write_5m": 69742,
+    "cache_write_1h": 0,
+    "output_estimated": 886,
+    "output_estimated_alt": 803,
+    "thinking_estimated": 418
+   },
+   "koszt_usd": {
+    "dolny": 0.38,
+    "srodkowy": 0.4,
+    "alt": 0.4,
+    "udzial_cache_read_w_srodkowym": 0.082
+   },
+   "status": "przerwany (przepływ zatrzymany TaskStop)",
+   "harness_wf_json": {
+    "tokens": 69749,
+    "toolCalls": 5,
+    "durationMs": null,
+    "cached": false,
+    "state": "progress"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_725a3592-fa1/agent-a9e78ae7ccac9a016.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "ada7bb335c1f75108",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_725a3592-fa1",
+   "label": "wariant:W2",
+   "opis_meta": "wariant:W2",
+   "agentType": "workflow-subagent",
+   "faza": "Warianty",
+   "model": {
+    "claude-opus-5-5": 4
+   },
+   "start": "2026-09-24T23:30:08Z",
+   "koniec": "2026-09-24T23:33:56Z",
+   "czas_min": 3.79,
+   "najdluzsza_przerwa_min": 3.6,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 4,
+   "odpowiedzi_z_pelnym_usage": 0,
+   "linie_asystenta": 9,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 6,
+   "narzedzia": {
+    "Read": 4,
+    "Bash": 2
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 69031,
+   "kontekst_koncowy": 69031,
+   "tokeny": {
+    "input": 8,
+    "output_recorded": 48,
+    "thinking_recorded": 0,
+    "cache_read": 196409,
+    "cache_write": 35019,
+    "cache_write_5m": 35019,
+    "cache_write_1h": 0,
+    "output_estimated": 797,
+    "output_estimated_alt": 741,
+    "thinking_estimated": 439
+   },
+   "koszt_usd": {
+    "dolny": 0.22,
+    "srodkowy": 0.23,
+    "alt": 0.23,
+    "udzial_cache_read_w_srodkowym": 0.171
+   },
+   "status": "przerwany (przepływ zatrzymany TaskStop)",
+   "harness_wf_json": {
+    "tokens": 69031,
+    "toolCalls": 6,
+    "durationMs": null,
+    "cached": false,
+    "state": "progress"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_725a3592-fa1/agent-ada7bb335c1f75108.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a22224bb5bb6f6eb4",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_88c0988f-4a5",
+   "label": "weryfikacja:R2",
+   "opis_meta": "weryfikacja:R2",
+   "agentType": "workflow-subagent",
+   "faza": "Weryfikacja",
+   "model": {
+    "claude-opus-5-5": 63
+   },
+   "start": "2026-09-25T00:11:30Z",
+   "koniec": "2026-09-25T00:21:43Z",
+   "czas_min": 10.21,
+   "najdluzsza_przerwa_min": 0.9,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 63,
+   "odpowiedzi_z_pelnym_usage": 6,
+   "linie_asystenta": 119,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 70,
+   "narzedzia": {
+    "Bash": 56,
+    "Edit": 11,
+    "Read": 2,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 269443,
+   "kontekst_koncowy": 269443,
+   "tokeny": {
+    "input": 126,
+    "output_recorded": 3064,
+    "thinking_recorded": 1033,
+    "cache_read": 12020605,
+    "cache_write": 269417,
+    "cache_write_5m": 269417,
+    "cache_write_1h": 0,
+    "output_estimated": 43170,
+    "output_estimated_alt": 40782,
+    "thinking_estimated": 17304
+   },
+   "koszt_usd": {
+    "dolny": 3.81,
+    "srodkowy": 4.62,
+    "alt": 4.57,
+    "udzial_cache_read_w_srodkowym": 0.521
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 269443,
+    "toolCalls": 70,
+    "durationMs": 612561,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_88c0988f-4a5/agent-a22224bb5bb6f6eb4.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a5b9e2ca4f94e31d6",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_88c0988f-4a5",
+   "label": "weryfikacja:R3",
+   "opis_meta": "weryfikacja:R3",
+   "agentType": "workflow-subagent",
+   "faza": "Weryfikacja",
+   "model": {
+    "claude-opus-5-5": 75
+   },
+   "start": "2026-09-25T00:21:43Z",
+   "koniec": "2026-09-25T00:32:17Z",
+   "czas_min": 10.56,
+   "najdluzsza_przerwa_min": 0.6,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 75,
+   "odpowiedzi_z_pelnym_usage": 30,
+   "linie_asystenta": 141,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 84,
+   "narzedzia": {
+    "Bash": 66,
+    "Edit": 11,
+    "Read": 3,
+    "WebFetch": 2,
+    "ToolSearch": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 297986,
+   "kontekst_koncowy": 297986,
+   "tokeny": {
+    "input": 150,
+    "output_recorded": 14531,
+    "thinking_recorded": 6711,
+    "cache_read": 15382975,
+    "cache_write": 263917,
+    "cache_write_5m": 263917,
+    "cache_write_1h": 0,
+    "output_estimated": 44494,
+    "output_estimated_alt": 42364,
+    "thinking_estimated": 17766
+   },
+   "koszt_usd": {
+    "dolny": 4.69,
+    "srodkowy": 5.29,
+    "alt": 5.24,
+    "udzial_cache_read_w_srodkowym": 0.582
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 297986,
+    "toolCalls": 84,
+    "durationMs": 633649,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_88c0988f-4a5/agent-a5b9e2ca4f94e31d6.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a61836a2ea5fc4730",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_88c0988f-4a5",
+   "label": "badanie:R1",
+   "opis_meta": "badanie:R1",
+   "agentType": "workflow-subagent",
+   "faza": "Badanie",
+   "model": {
+    "claude-opus-5-5": 98
+   },
+   "start": "2026-09-24T23:27:36Z",
+   "koniec": "2026-09-24T23:50:59Z",
+   "czas_min": 23.39,
+   "najdluzsza_przerwa_min": 4.1,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 98,
+   "odpowiedzi_z_pelnym_usage": 22,
+   "linie_asystenta": 174,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 106,
+   "narzedzia": {
+    "Bash": 81,
+    "WebFetch": 14,
+    "WebSearch": 8,
+    "ToolSearch": 1,
+    "Write": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 468272,
+   "kontekst_koncowy": 468272,
+   "tokeny": {
+    "input": 196,
+    "output_recorded": 15913,
+    "thinking_recorded": 6786,
+    "cache_read": 24648877,
+    "cache_write": 468267,
+    "cache_write_5m": 468267,
+    "cache_write_1h": 0,
+    "output_estimated": 108935,
+    "output_estimated_alt": 110113,
+    "thinking_estimated": 41041
+   },
+   "koszt_usd": {
+    "dolny": 7.59,
+    "srodkowy": 9.45,
+    "alt": 9.47,
+    "udzial_cache_read_w_srodkowym": 0.522
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 468272,
+    "toolCalls": 106,
+    "durationMs": 1403173,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_88c0988f-4a5/agent-a61836a2ea5fc4730.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a9ebc43460570e3a3",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_88c0988f-4a5",
+   "label": "badanie:R8",
+   "opis_meta": "badanie:R8",
+   "agentType": "workflow-subagent",
+   "faza": "Badanie",
+   "model": {
+    "claude-opus-5-5": 108
+   },
+   "start": "2026-09-24T23:51:00Z",
+   "koniec": "2026-09-25T00:17:33Z",
+   "czas_min": 26.54,
+   "najdluzsza_przerwa_min": 4.9,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 108,
+   "odpowiedzi_z_pelnym_usage": 20,
+   "linie_asystenta": 289,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 111,
+   "narzedzia": {
+    "Bash": 92,
+    "WebFetch": 8,
+    "WebSearch": 7,
+    "Read": 1,
+    "ToolSearch": 1,
+    "Write": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 419437,
+   "kontekst_koncowy": 419437,
+   "tokeny": {
+    "input": 216,
+    "output_recorded": 50885,
+    "thinking_recorded": 7671,
+    "cache_read": 27563865,
+    "cache_write": 731553,
+    "cache_write_5m": 731553,
+    "cache_write_1h": 0,
+    "output_estimated": 130788,
+    "output_estimated_alt": 132796,
+    "thinking_estimated": 52346
+   },
+   "koszt_usd": {
+    "dolny": 10.19,
+    "srodkowy": 11.79,
+    "alt": 11.83,
+    "udzial_cache_read_w_srodkowym": 0.468
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 419437,
+    "toolCalls": 111,
+    "durationMs": 1592481,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_88c0988f-4a5/agent-a9ebc43460570e3a3.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "ab410b91c71817e86",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_88c0988f-4a5",
+   "label": "badanie:R2",
+   "opis_meta": "badanie:R2",
+   "agentType": "workflow-subagent",
+   "faza": "Badanie",
+   "model": {
+    "claude-opus-5-5": 73
+   },
+   "start": "2026-09-24T23:27:37Z",
+   "koniec": "2026-09-24T23:48:00Z",
+   "czas_min": 20.38,
+   "najdluzsza_przerwa_min": 5.1,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 73,
+   "odpowiedzi_z_pelnym_usage": 18,
+   "linie_asystenta": 124,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 77,
+   "narzedzia": {
+    "Bash": 63,
+    "WebSearch": 5,
+    "WebFetch": 5,
+    "Read": 1,
+    "ToolSearch": 1,
+    "Write": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 333285,
+   "kontekst_koncowy": 333285,
+   "tokeny": {
+    "input": 146,
+    "output_recorded": 12002,
+    "thinking_recorded": 4527,
+    "cache_read": 14241720,
+    "cache_write": 299188,
+    "cache_write_5m": 299188,
+    "cache_write_1h": 0,
+    "output_estimated": 100912,
+    "output_estimated_alt": 100743,
+    "thinking_estimated": 30644
+   },
+   "koszt_usd": {
+    "dolny": 4.58,
+    "srodkowy": 6.36,
+    "alt": 6.36,
+    "udzial_cache_read_w_srodkowym": 0.448
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 333285,
+    "toolCalls": 77,
+    "durationMs": 1222894,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_88c0988f-4a5/agent-ab410b91c71817e86.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "ab92472aad18124f8",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_88c0988f-4a5",
+   "label": "weryfikacja:R8",
+   "opis_meta": "weryfikacja:R8",
+   "agentType": "workflow-subagent",
+   "faza": "Weryfikacja",
+   "model": {
+    "claude-opus-5-5": 89
+   },
+   "start": "2026-09-25T00:29:07Z",
+   "koniec": "2026-09-25T00:41:12Z",
+   "czas_min": 12.08,
+   "najdluzsza_przerwa_min": 0.7,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 89,
+   "odpowiedzi_z_pelnym_usage": 33,
+   "linie_asystenta": 163,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 93,
+   "narzedzia": {
+    "Bash": 84,
+    "Read": 3,
+    "WebSearch": 2,
+    "WebFetch": 2,
+    "ToolSearch": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 273090,
+   "kontekst_koncowy": 273090,
+   "tokeny": {
+    "input": 178,
+    "output_recorded": 20525,
+    "thinking_recorded": 6140,
+    "cache_read": 16449731,
+    "cache_write": 239005,
+    "cache_write_5m": 239005,
+    "cache_write_1h": 0,
+    "output_estimated": 51391,
+    "output_estimated_alt": 49075,
+    "thinking_estimated": 19315
+   },
+   "koszt_usd": {
+    "dolny": 4.9,
+    "srodkowy": 5.51,
+    "alt": 5.47,
+    "udzial_cache_read_w_srodkowym": 0.597
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 273090,
+    "toolCalls": 93,
+    "durationMs": 725140,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_88c0988f-4a5/agent-ab92472aad18124f8.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "aeadd220793a2d41c",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_88c0988f-4a5",
+   "label": "badanie:R3",
+   "opis_meta": "badanie:R3",
+   "agentType": "workflow-subagent",
+   "faza": "Badanie",
+   "model": {
+    "claude-opus-5-5": 83
+   },
+   "start": "2026-09-24T23:48:01Z",
+   "koniec": "2026-09-25T00:11:29Z",
+   "czas_min": 23.46,
+   "najdluzsza_przerwa_min": 5.9,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 83,
+   "odpowiedzi_z_pelnym_usage": 13,
+   "linie_asystenta": 158,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 92,
+   "narzedzia": {
+    "Bash": 69,
+    "WebFetch": 13,
+    "WebSearch": 7,
+    "ToolSearch": 1,
+    "Write": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 426710,
+   "kontekst_koncowy": 426710,
+   "tokeny": {
+    "input": 166,
+    "output_recorded": 25916,
+    "thinking_recorded": 20624,
+    "cache_read": 19668567,
+    "cache_write": 734465,
+    "cache_write_5m": 734465,
+    "cache_write_1h": 0,
+    "output_estimated": 122253,
+    "output_estimated_alt": 118257,
+    "thinking_estimated": 48646
+   },
+   "koszt_usd": {
+    "dolny": 8.13,
+    "srodkowy": 10.05,
+    "alt": 9.97,
+    "udzial_cache_read_w_srodkowym": 0.391
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 426710,
+    "toolCalls": 92,
+    "durationMs": 1407761,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_88c0988f-4a5/agent-aeadd220793a2d41c.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "af2104359985592da",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_88c0988f-4a5",
+   "label": "weryfikacja:R1",
+   "opis_meta": "weryfikacja:R1",
+   "agentType": "workflow-subagent",
+   "faza": "Weryfikacja",
+   "model": {
+    "claude-opus-5-5": 70
+   },
+   "start": "2026-09-25T00:17:34Z",
+   "koniec": "2026-09-25T00:29:06Z",
+   "czas_min": 11.54,
+   "najdluzsza_przerwa_min": 0.7,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 70,
+   "odpowiedzi_z_pelnym_usage": 14,
+   "linie_asystenta": 166,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 82,
+   "narzedzia": {
+    "Bash": 60,
+    "Edit": 13,
+    "WebFetch": 3,
+    "Read": 2,
+    "WebSearch": 2,
+    "ToolSearch": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 278219,
+   "kontekst_koncowy": 278219,
+   "tokeny": {
+    "input": 140,
+    "output_recorded": 9840,
+    "thinking_recorded": 4175,
+    "cache_read": 12919366,
+    "cache_write": 244134,
+    "cache_write_5m": 244134,
+    "cache_write_1h": 0,
+    "output_estimated": 49792,
+    "output_estimated_alt": 44504,
+    "thinking_estimated": 17270
+   },
+   "koszt_usd": {
+    "dolny": 4.0,
+    "srodkowy": 4.8,
+    "alt": 4.7,
+    "udzial_cache_read_w_srodkowym": 0.538
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 278219,
+    "toolCalls": 82,
+    "durationMs": 692525,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_88c0988f-4a5/agent-af2104359985592da.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a40ae4c2ae04c6ee0",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_a0d51b50-592",
+   "label": "weryfikacja:numeryka",
+   "opis_meta": "weryfikacja:numeryka",
+   "agentType": "workflow-subagent",
+   "faza": "Weryfikacja",
+   "model": {
+    "claude-opus-5-5": 37
+   },
+   "start": "2026-09-25T02:30:56Z",
+   "koniec": "2026-09-25T02:49:30Z",
+   "czas_min": 18.56,
+   "najdluzsza_przerwa_min": 3.5,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 37,
+   "odpowiedzi_z_pelnym_usage": 6,
+   "linie_asystenta": 72,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 39,
+   "narzedzia": {
+    "Bash": 35,
+    "WebFetch": 2,
+    "ToolSearch": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 175070,
+   "kontekst_koncowy": 175070,
+   "tokeny": {
+    "input": 74,
+    "output_recorded": 11872,
+    "thinking_recorded": 6466,
+    "cache_read": 4621145,
+    "cache_write": 175060,
+    "cache_write_5m": 175060,
+    "cache_write_1h": 0,
+    "output_estimated": 54700,
+    "output_estimated_alt": 58473,
+    "thinking_estimated": 30947
+   },
+   "koszt_usd": {
+    "dolny": 2.04,
+    "srodkowy": 2.89,
+    "alt": 2.97,
+    "udzial_cache_read_w_srodkowym": 0.319
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 175070,
+    "toolCalls": 39,
+    "durationMs": 1113538,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_a0d51b50-592/agent-a40ae4c2ae04c6ee0.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a5f39a533b5f2ff8b",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_a0d51b50-592",
+   "label": "demo-katalog",
+   "opis_meta": "demo-katalog",
+   "agentType": "workflow-subagent",
+   "faza": "Demo",
+   "model": {
+    "claude-opus-5-5": 79
+   },
+   "start": "2026-09-25T03:15:49Z",
+   "koniec": "2026-09-25T03:42:02Z",
+   "czas_min": 26.23,
+   "najdluzsza_przerwa_min": 2.0,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 79,
+   "odpowiedzi_z_pelnym_usage": 7,
+   "linie_asystenta": 145,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 81,
+   "narzedzia": {
+    "Bash": 62,
+    "Read": 15,
+    "Write": 2,
+    "Skill": 1,
+    "Edit": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 339198,
+   "kontekst_koncowy": 339198,
+   "tokeny": {
+    "input": 158,
+    "output_recorded": 6655,
+    "thinking_recorded": 566,
+    "cache_read": 17449054,
+    "cache_write": 304211,
+    "cache_write_5m": 304211,
+    "cache_write_1h": 0,
+    "output_estimated": 116410,
+    "output_estimated_alt": 117745,
+    "thinking_estimated": 42663
+   },
+   "koszt_usd": {
+    "dolny": 5.14,
+    "srodkowy": 7.34,
+    "alt": 7.37,
+    "udzial_cache_read_w_srodkowym": 0.475
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 339198,
+    "toolCalls": 81,
+    "durationMs": 1573721,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_a0d51b50-592/agent-a5f39a533b5f2ff8b.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a8cd211c9e4499948",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_a0d51b50-592",
+   "label": "budowa-solvera",
+   "opis_meta": "budowa-solvera",
+   "agentType": "workflow-subagent",
+   "faza": "Budowa",
+   "model": {
+    "claude-opus-5-5": 68
+   },
+   "start": "2026-09-25T01:58:43Z",
+   "koniec": "2026-09-25T02:30:55Z",
+   "czas_min": 32.2,
+   "najdluzsza_przerwa_min": 4.1,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 68,
+   "odpowiedzi_z_pelnym_usage": 14,
+   "linie_asystenta": 128,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 81,
+   "narzedzia": {
+    "Bash": 47,
+    "Read": 14,
+    "Write": 8,
+    "WebSearch": 6,
+    "WebFetch": 5,
+    "ToolSearch": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 337807,
+   "kontekst_koncowy": 337807,
+   "tokeny": {
+    "input": 136,
+    "output_recorded": 18036,
+    "thinking_recorded": 6511,
+    "cache_read": 13920749,
+    "cache_write": 336907,
+    "cache_write_5m": 336907,
+    "cache_write_1h": 0,
+    "output_estimated": 171247,
+    "output_estimated_alt": 184315,
+    "thinking_estimated": 71116
+   },
+   "koszt_usd": {
+    "dolny": 4.83,
+    "srodkowy": 7.89,
+    "alt": 8.16,
+    "udzial_cache_read_w_srodkowym": 0.353
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 337807,
+    "toolCalls": 81,
+    "durationMs": 1932008,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_a0d51b50-592/agent-a8cd211c9e4499948.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a97b89276bf7931f1",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_a0d51b50-592",
+   "label": "poprawki",
+   "opis_meta": "poprawki",
+   "agentType": "workflow-subagent",
+   "faza": "Poprawki",
+   "model": {
+    "claude-opus-5-5": 55
+   },
+   "start": "2026-09-25T02:49:31Z",
+   "koniec": "2026-09-25T03:15:47Z",
+   "czas_min": 26.27,
+   "najdluzsza_przerwa_min": 3.2,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 55,
+   "odpowiedzi_z_pelnym_usage": 19,
+   "linie_asystenta": 105,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 57,
+   "narzedzia": {
+    "Bash": 52,
+    "Read": 5
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 337574,
+   "kontekst_koncowy": 337574,
+   "tokeny": {
+    "input": 110,
+    "output_recorded": 67428,
+    "thinking_recorded": 33777,
+    "cache_read": 12421291,
+    "cache_write": 337564,
+    "cache_write_5m": 337564,
+    "cache_write_1h": 0,
+    "output_estimated": 141158,
+    "output_estimated_alt": 141389,
+    "thinking_estimated": 58387
+   },
+   "koszt_usd": {
+    "dolny": 5.52,
+    "srodkowy": 7.0,
+    "alt": 7.0,
+    "udzial_cache_read_w_srodkowym": 0.355
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 337574,
+    "toolCalls": 57,
+    "durationMs": 1576512,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_a0d51b50-592/agent-a97b89276bf7931f1.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "ac86cc1c1bb85cbe9",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_a0d51b50-592",
+   "label": "weryfikacja:normy",
+   "opis_meta": "weryfikacja:normy",
+   "agentType": "workflow-subagent",
+   "faza": "Weryfikacja",
+   "model": {
+    "claude-opus-5-5": 37
+   },
+   "start": "2026-09-25T02:30:57Z",
+   "koniec": "2026-09-25T02:43:24Z",
+   "czas_min": 12.45,
+   "najdluzsza_przerwa_min": 1.2,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 37,
+   "odpowiedzi_z_pelnym_usage": 6,
+   "linie_asystenta": 65,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 40,
+   "narzedzia": {
+    "Bash": 30,
+    "WebSearch": 4,
+    "WebFetch": 3,
+    "Read": 1,
+    "ToolSearch": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 231704,
+   "kontekst_koncowy": 231704,
+   "tokeny": {
+    "input": 74,
+    "output_recorded": 3610,
+    "thinking_recorded": 1063,
+    "cache_read": 5994648,
+    "cache_write": 196433,
+    "cache_write_5m": 196433,
+    "cache_write_1h": 0,
+    "output_estimated": 54623,
+    "output_estimated_alt": 65603,
+    "thinking_estimated": 38854
+   },
+   "koszt_usd": {
+    "dolny": 2.25,
+    "srodkowy": 3.27,
+    "alt": 3.49,
+    "udzial_cache_read_w_srodkowym": 0.366
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 231704,
+    "toolCalls": 40,
+    "durationMs": 747250,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_a0d51b50-592/agent-ac86cc1c1bb85cbe9.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "abfdfaca2ef13a7b4",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_a8783476-2a1",
+   "label": "konstrukcja:1",
+   "opis_meta": "konstrukcja:1",
+   "agentType": "workflow-subagent",
+   "faza": "Konstrukcja",
+   "model": {
+    "claude-opus-5-5": 38
+   },
+   "start": "2026-09-25T08:29:23Z",
+   "koniec": "2026-09-25T08:38:38Z",
+   "czas_min": 9.24,
+   "najdluzsza_przerwa_min": 1.7,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 38,
+   "odpowiedzi_z_pelnym_usage": 2,
+   "linie_asystenta": 69,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 42,
+   "narzedzia": {
+    "Bash": 39,
+    "Read": 3
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 235362,
+   "kontekst_koncowy": 235362,
+   "tokeny": {
+    "input": 76,
+    "output_recorded": 773,
+    "thinking_recorded": 50,
+    "cache_read": 4858590,
+    "cache_write": 235340,
+    "cache_write_5m": 235340,
+    "cache_write_1h": 0,
+    "output_estimated": 32652,
+    "output_estimated_alt": 39934,
+    "thinking_estimated": 27210
+   },
+   "koszt_usd": {
+    "dolny": 2.16,
+    "srodkowy": 2.8,
+    "alt": 2.95,
+    "udzial_cache_read_w_srodkowym": 0.347
+   },
+   "status": "trwa (brak wpisu result w journal.jsonl)",
+   "harness_wf_json": null,
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_a8783476-2a1/agent-abfdfaca2ef13a7b4.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "af672122528919503",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_a8783476-2a1",
+   "label": "model:domkniecie",
+   "opis_meta": "model:domkniecie",
+   "agentType": "workflow-subagent",
+   "faza": "Model",
+   "model": {
+    "claude-opus-5-5": 263
+   },
+   "start": "2026-09-25T07:13:34Z",
+   "koniec": "2026-09-25T08:29:21Z",
+   "czas_min": 75.78,
+   "najdluzsza_przerwa_min": 9.1,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 263,
+   "odpowiedzi_z_pelnym_usage": 112,
+   "linie_asystenta": 445,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 269,
+   "narzedzia": {
+    "Bash": 259,
+    "Read": 8,
+    "ToolSearch": 1,
+    "Monitor": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 655115,
+   "kontekst_koncowy": 655115,
+   "tokeny": {
+    "input": 526,
+    "output_recorded": 122414,
+    "thinking_recorded": 42752,
+    "cache_read": 112428473,
+    "cache_write": 1225930,
+    "cache_write_5m": 1225930,
+    "cache_write_1h": 0,
+    "output_estimated": 239735,
+    "output_estimated_alt": 248264,
+    "thinking_estimated": 109532
+   },
+   "koszt_usd": {
+    "dolny": 31.07,
+    "srodkowy": 33.41,
+    "alt": 33.58,
+    "udzial_cache_read_w_srodkowym": 0.673
+   },
+   "status": "zakończony",
+   "harness_wf_json": null,
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_a8783476-2a1/agent-af672122528919503.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a040f53d8a1485535",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_c5f7e298-4b9",
+   "label": "weryfikacja:OBLICZENIA",
+   "opis_meta": "weryfikacja:OBLICZENIA",
+   "agentType": "workflow-subagent",
+   "faza": "Weryfikacja",
+   "model": {
+    "claude-opus-5-5": 78
+   },
+   "start": "2026-09-25T07:32:17Z",
+   "koniec": "2026-09-25T07:50:30Z",
+   "czas_min": 18.22,
+   "najdluzsza_przerwa_min": 1.4,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 78,
+   "odpowiedzi_z_pelnym_usage": 22,
+   "linie_asystenta": 142,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 78,
+   "narzedzia": {
+    "Bash": 76,
+    "Write": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 359834,
+   "kontekst_koncowy": 359834,
+   "tokeny": {
+    "input": 156,
+    "output_recorded": 23943,
+    "thinking_recorded": 17346,
+    "cache_read": 18823183,
+    "cache_write": 359808,
+    "cache_write_5m": 359808,
+    "cache_write_1h": 0,
+    "output_estimated": 82429,
+    "output_estimated_alt": 86740,
+    "thinking_estimated": 51632
+   },
+   "koszt_usd": {
+    "dolny": 6.04,
+    "srodkowy": 7.21,
+    "alt": 7.3,
+    "udzial_cache_read_w_srodkowym": 0.522
+   },
+   "status": "zakończony",
+   "harness_wf_json": null,
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_c5f7e298-4b9/agent-a040f53d8a1485535.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a29aabd1271c5fd68",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_c5f7e298-4b9",
+   "label": "weryfikacja:PRAWO",
+   "opis_meta": "weryfikacja:PRAWO",
+   "agentType": "workflow-subagent",
+   "faza": "Weryfikacja",
+   "model": {
+    "claude-opus-5-5": 73
+   },
+   "start": "2026-09-25T07:32:18Z",
+   "koniec": "2026-09-25T07:44:16Z",
+   "czas_min": 11.98,
+   "najdluzsza_przerwa_min": 1.2,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 73,
+   "odpowiedzi_z_pelnym_usage": 16,
+   "linie_asystenta": 147,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 87,
+   "narzedzia": {
+    "Bash": 68,
+    "Read": 17,
+    "Write": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 256461,
+   "kontekst_koncowy": 256461,
+   "tokeny": {
+    "input": 146,
+    "output_recorded": 9359,
+    "thinking_recorded": 3272,
+    "cache_read": 11876743,
+    "cache_write": 221178,
+    "cache_write_5m": 221178,
+    "cache_write_1h": 0,
+    "output_estimated": 57096,
+    "output_estimated_alt": 56136,
+    "thinking_estimated": 25743
+   },
+   "koszt_usd": {
+    "dolny": 3.67,
+    "srodkowy": 4.62,
+    "alt": 4.6,
+    "udzial_cache_read_w_srodkowym": 0.514
+   },
+   "status": "zakończony",
+   "harness_wf_json": null,
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_c5f7e298-4b9/agent-a29aabd1271c5fd68.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a40bbe274c6070548",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_c5f7e298-4b9",
+   "label": "PT:IS",
+   "opis_meta": "PT:IS",
+   "agentType": "workflow-subagent",
+   "faza": "Opisy",
+   "model": {
+    "claude-opus-5-5": 90
+   },
+   "start": "2026-09-25T06:52:46Z",
+   "koniec": "2026-09-25T07:18:03Z",
+   "czas_min": 25.28,
+   "najdluzsza_przerwa_min": 1.9,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 90,
+   "odpowiedzi_z_pelnym_usage": 46,
+   "linie_asystenta": 172,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 99,
+   "narzedzia": {
+    "Bash": 77,
+    "Read": 17,
+    "Write": 4,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 323471,
+   "kontekst_koncowy": 323471,
+   "tokeny": {
+    "input": 180,
+    "output_recorded": 46337,
+    "thinking_recorded": 12754,
+    "cache_read": 19002492,
+    "cache_write": 288278,
+    "cache_write_5m": 288278,
+    "cache_write_1h": 0,
+    "output_estimated": 94571,
+    "output_estimated_alt": 90300,
+    "thinking_estimated": 24080
+   },
+   "koszt_usd": {
+    "dolny": 6.17,
+    "srodkowy": 7.13,
+    "alt": 7.05,
+    "udzial_cache_read_w_srodkowym": 0.533
+   },
+   "status": "zakończony",
+   "harness_wf_json": null,
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_c5f7e298-4b9/agent-a40bbe274c6070548.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a6d1d5701b925cf41",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_c5f7e298-4b9",
+   "label": "PT:IE",
+   "opis_meta": "PT:IE",
+   "agentType": "workflow-subagent",
+   "faza": "Opisy",
+   "model": {
+    "claude-opus-5-5": 68
+   },
+   "start": "2026-09-25T07:18:05Z",
+   "koniec": "2026-09-25T07:32:14Z",
+   "czas_min": 14.15,
+   "najdluzsza_przerwa_min": 0.7,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 68,
+   "odpowiedzi_z_pelnym_usage": 14,
+   "linie_asystenta": 135,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 76,
+   "narzedzia": {
+    "Bash": 58,
+    "Read": 11,
+    "Write": 6,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 296861,
+   "kontekst_koncowy": 296861,
+   "tokeny": {
+    "input": 136,
+    "output_recorded": 17977,
+    "thinking_recorded": 6928,
+    "cache_read": 13426901,
+    "cache_write": 261684,
+    "cache_write_5m": 261684,
+    "cache_write_1h": 0,
+    "output_estimated": 80997,
+    "output_estimated_alt": 75775,
+    "thinking_estimated": 23899
+   },
+   "koszt_usd": {
+    "dolny": 4.35,
+    "srodkowy": 5.61,
+    "alt": 5.51,
+    "udzial_cache_read_w_srodkowym": 0.478
+   },
+   "status": "zakończony",
+   "harness_wf_json": null,
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_c5f7e298-4b9/agent-a6d1d5701b925cf41.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "aa312e69fff4fc1f4",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_c5f7e298-4b9",
+   "label": "PT:AR",
+   "opis_meta": "PT:AR",
+   "agentType": "workflow-subagent",
+   "faza": "Opisy",
+   "model": {
+    "claude-opus-5-5": 100
+   },
+   "start": "2026-09-25T06:33:45Z",
+   "koniec": "2026-09-25T06:52:44Z",
+   "czas_min": 18.99,
+   "najdluzsza_przerwa_min": 0.7,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 100,
+   "odpowiedzi_z_pelnym_usage": 54,
+   "linie_asystenta": 191,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 110,
+   "narzedzia": {
+    "Bash": 88,
+    "Read": 20,
+    "Write": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 347660,
+   "kontekst_koncowy": 347660,
+   "tokeny": {
+    "input": 200,
+    "output_recorded": 53816,
+    "thinking_recorded": 17098,
+    "cache_read": 23064406,
+    "cache_write": 347652,
+    "cache_write_5m": 347652,
+    "cache_write_1h": 0,
+    "output_estimated": 88676,
+    "output_estimated_alt": 85535,
+    "thinking_estimated": 29081
+   },
+   "koszt_usd": {
+    "dolny": 7.43,
+    "srodkowy": 8.13,
+    "alt": 8.06,
+    "udzial_cache_read_w_srodkowym": 0.568
+   },
+   "status": "zakończony",
+   "harness_wf_json": null,
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_c5f7e298-4b9/agent-aa312e69fff4fc1f4.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "aaf84ceed94d857ba",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_c5f7e298-4b9",
+   "label": "poprawki:AR",
+   "opis_meta": "poprawki:AR",
+   "agentType": "workflow-subagent",
+   "faza": "Poprawki",
+   "model": {
+    "claude-opus-5-5": 109
+   },
+   "start": "2026-09-25T08:23:36Z",
+   "koniec": "2026-09-25T08:38:49Z",
+   "czas_min": 15.22,
+   "najdluzsza_przerwa_min": 2.6,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 109,
+   "odpowiedzi_z_pelnym_usage": 18,
+   "linie_asystenta": 199,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 115,
+   "narzedzia": {
+    "Bash": 104,
+    "Edit": 6,
+    "Read": 3,
+    "ToolSearch": 1,
+    "Monitor": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 285067,
+   "kontekst_koncowy": 285067,
+   "tokeny": {
+    "input": 218,
+    "output_recorded": 14596,
+    "thinking_recorded": 2097,
+    "cache_read": 21835488,
+    "cache_write": 250072,
+    "cache_write_5m": 250072,
+    "cache_write_1h": 0,
+    "output_estimated": 70823,
+    "output_estimated_alt": 69493,
+    "thinking_estimated": 28901
+   },
+   "koszt_usd": {
+    "dolny": 5.91,
+    "srodkowy": 7.03,
+    "alt": 7.01,
+    "udzial_cache_read_w_srodkowym": 0.621
+   },
+   "status": "trwa (brak wpisu result w journal.jsonl)",
+   "harness_wf_json": null,
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_c5f7e298-4b9/agent-aaf84ceed94d857ba.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "ab7ed15ee18c7f9ed",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_c5f7e298-4b9",
+   "label": "poprawki:IE",
+   "opis_meta": "poprawki:IE",
+   "agentType": "workflow-subagent",
+   "faza": "Poprawki",
+   "model": {
+    "claude-opus-5-5": 103
+   },
+   "start": "2026-09-25T07:50:32Z",
+   "koniec": "2026-09-25T08:10:49Z",
+   "czas_min": 20.3,
+   "najdluzsza_przerwa_min": 3.0,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 103,
+   "odpowiedzi_z_pelnym_usage": 41,
+   "linie_asystenta": 183,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 105,
+   "narzedzia": {
+    "Bash": 100,
+    "Read": 4,
+    "ToolSearch": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 311653,
+   "kontekst_koncowy": 311653,
+   "tokeny": {
+    "input": 206,
+    "output_recorded": 29452,
+    "thinking_recorded": 9404,
+    "cache_read": 21563662,
+    "cache_write": 276666,
+    "cache_write_5m": 276666,
+    "cache_write_1h": 0,
+    "output_estimated": 70568,
+    "output_estimated_alt": 68560,
+    "thinking_estimated": 26742
+   },
+   "koszt_usd": {
+    "dolny": 6.29,
+    "srodkowy": 7.11,
+    "alt": 7.07,
+    "udzial_cache_read_w_srodkowym": 0.607
+   },
+   "status": "zakończony",
+   "harness_wf_json": null,
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_c5f7e298-4b9/agent-ab7ed15ee18c7f9ed.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "abd1c424d0164d558",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_c5f7e298-4b9",
+   "label": "poprawki:BO",
+   "opis_meta": "poprawki:BO",
+   "agentType": "workflow-subagent",
+   "faza": "Poprawki",
+   "model": {
+    "claude-opus-5-5": 86
+   },
+   "start": "2026-09-25T07:50:31Z",
+   "koniec": "2026-09-25T08:23:35Z",
+   "czas_min": 33.05,
+   "najdluzsza_przerwa_min": 10.0,
+   "przerwy_ponad_10min": 2,
+   "odpowiedzi_api": 86,
+   "odpowiedzi_z_pelnym_usage": 29,
+   "linie_asystenta": 156,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 94,
+   "narzedzia": {
+    "Bash": 79,
+    "Read": 13,
+    "ToolSearch": 1,
+    "Monitor": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 265201,
+   "kontekst_koncowy": 265201,
+   "tokeny": {
+    "input": 172,
+    "output_recorded": 25884,
+    "thinking_recorded": 6527,
+    "cache_read": 14913806,
+    "cache_write": 655419,
+    "cache_write_5m": 655419,
+    "cache_write_1h": 0,
+    "output_estimated": 71321,
+    "output_estimated_alt": 71582,
+    "thinking_estimated": 26814
+   },
+   "koszt_usd": {
+    "dolny": 6.78,
+    "srodkowy": 7.69,
+    "alt": 7.69,
+    "udzial_cache_read_w_srodkowym": 0.388
+   },
+   "status": "zakończony",
+   "harness_wf_json": null,
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_c5f7e298-4b9/agent-abd1c424d0164d558.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "ac29e899834d24a29",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_c5f7e298-4b9",
+   "label": "poprawki:IS",
+   "opis_meta": "poprawki:IS",
+   "agentType": "workflow-subagent",
+   "faza": "Poprawki",
+   "model": {
+    "claude-opus-5-5": 100
+   },
+   "start": "2026-09-25T08:10:51Z",
+   "koniec": "2026-09-25T08:29:12Z",
+   "czas_min": 18.35,
+   "najdluzsza_przerwa_min": 1.2,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 100,
+   "odpowiedzi_z_pelnym_usage": 23,
+   "linie_asystenta": 181,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 106,
+   "narzedzia": {
+    "Bash": 97,
+    "Read": 6,
+    "Edit": 2,
+    "ToolSearch": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 294837,
+   "kontekst_koncowy": 294837,
+   "tokeny": {
+    "input": 200,
+    "output_recorded": 18537,
+    "thinking_recorded": 4827,
+    "cache_read": 20762687,
+    "cache_write": 259850,
+    "cache_write_5m": 259850,
+    "cache_write_1h": 0,
+    "output_estimated": 74644,
+    "output_estimated_alt": 75206,
+    "thinking_estimated": 32781
+   },
+   "koszt_usd": {
+    "dolny": 5.82,
+    "srodkowy": 6.95,
+    "alt": 6.96,
+    "udzial_cache_read_w_srodkowym": 0.598
+   },
+   "status": "zakończony",
+   "harness_wf_json": null,
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_c5f7e298-4b9/agent-ac29e899834d24a29.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "ad07d221db9b5c09f",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_c5f7e298-4b9",
+   "label": "PT:BO",
+   "opis_meta": "PT:BO",
+   "agentType": "workflow-subagent",
+   "faza": "Opisy",
+   "model": {
+    "claude-opus-5-5": 90
+   },
+   "start": "2026-09-25T06:33:46Z",
+   "koniec": "2026-09-25T07:28:20Z",
+   "czas_min": 54.57,
+   "najdluzsza_przerwa_min": 10.0,
+   "przerwy_ponad_10min": 1,
+   "odpowiedzi_api": 90,
+   "odpowiedzi_z_pelnym_usage": 51,
+   "linie_asystenta": 170,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 96,
+   "narzedzia": {
+    "Bash": 81,
+    "Read": 11,
+    "Write": 1,
+    "Monitor": 1,
+    "ToolSearch": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 315689,
+   "kontekst_koncowy": 315689,
+   "tokeny": {
+    "input": 180,
+    "output_recorded": 52630,
+    "thinking_recorded": 12224,
+    "cache_read": 18621705,
+    "cache_write": 1110601,
+    "cache_write_5m": 1110601,
+    "cache_write_1h": 0,
+    "output_estimated": 82859,
+    "output_estimated_alt": 82302,
+    "thinking_estimated": 27220
+   },
+   "koszt_usd": {
+    "dolny": 10.33,
+    "srodkowy": 10.94,
+    "alt": 10.92,
+    "udzial_cache_read_w_srodkowym": 0.341
+   },
+   "status": "zakończony",
+   "harness_wf_json": null,
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_c5f7e298-4b9/agent-ad07d221db9b5c09f.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a46d9e0323adf8ae2",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_ce63599a-15f",
+   "label": "poprawki:tom-I",
+   "opis_meta": "poprawki:tom-I",
+   "agentType": "workflow-subagent",
+   "faza": "Poprawki",
+   "model": {
+    "claude-opus-5-5": 138
+   },
+   "start": "2026-09-25T07:32:12Z",
+   "koniec": "2026-09-25T08:05:08Z",
+   "czas_min": 32.93,
+   "najdluzsza_przerwa_min": 4.4,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 138,
+   "odpowiedzi_z_pelnym_usage": 48,
+   "linie_asystenta": 249,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 140,
+   "narzedzia": {
+    "Bash": 132,
+    "Read": 5,
+    "Write": 1,
+    "Edit": 1,
+    "ToolSearch": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 469355,
+   "kontekst_koncowy": 469355,
+   "tokeny": {
+    "input": 276,
+    "output_recorded": 46888,
+    "thinking_recorded": 13237,
+    "cache_read": 41350814,
+    "cache_write": 434368,
+    "cache_write_5m": 434368,
+    "cache_write_1h": 0,
+    "output_estimated": 122126,
+    "output_estimated_alt": 121390,
+    "thinking_estimated": 48276
+   },
+   "koszt_usd": {
+    "dolny": 11.38,
+    "srodkowy": 12.89,
+    "alt": 12.87,
+    "udzial_cache_read_w_srodkowym": 0.642
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 469355,
+    "toolCalls": 140,
+    "durationMs": 1975694,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_ce63599a-15f/agent-a46d9e0323adf8ae2.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a55aa437470dfb767",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_ce63599a-15f",
+   "label": "weryfikacja:FAKTY",
+   "opis_meta": "weryfikacja:FAKTY",
+   "agentType": "workflow-subagent",
+   "faza": "Weryfikacja",
+   "model": {
+    "claude-opus-5-5": 44
+   },
+   "start": "2026-09-25T07:19:16Z",
+   "koniec": "2026-09-25T07:29:02Z",
+   "czas_min": 9.75,
+   "najdluzsza_przerwa_min": 0.9,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 44,
+   "odpowiedzi_z_pelnym_usage": 9,
+   "linie_asystenta": 82,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 45,
+   "narzedzia": {
+    "Bash": 43,
+    "Write": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 238560,
+   "kontekst_koncowy": 238560,
+   "tokeny": {
+    "input": 88,
+    "output_recorded": 9630,
+    "thinking_recorded": 7124,
+    "cache_read": 6585246,
+    "cache_write": 238534,
+    "cache_write_5m": 238534,
+    "cache_write_1h": 0,
+    "output_estimated": 41773,
+    "output_estimated_alt": 41406,
+    "thinking_estimated": 22500
+   },
+   "koszt_usd": {
+    "dolny": 2.7,
+    "srodkowy": 3.35,
+    "alt": 3.34,
+    "udzial_cache_read_w_srodkowym": 0.394
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 238560,
+    "toolCalls": 45,
+    "durationMs": 585349,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_ce63599a-15f/agent-a55aa437470dfb767.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a80c6f35e28eacfc1",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_ce63599a-15f",
+   "label": "tom:I",
+   "opis_meta": "tom:I",
+   "agentType": "workflow-subagent",
+   "faza": "Tom",
+   "model": {
+    "claude-opus-5-5": 49
+   },
+   "start": "2026-09-25T07:07:41Z",
+   "koniec": "2026-09-25T07:19:15Z",
+   "czas_min": 11.55,
+   "najdluzsza_przerwa_min": 2.0,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 49,
+   "odpowiedzi_z_pelnym_usage": 24,
+   "linie_asystenta": 95,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 54,
+   "narzedzia": {
+    "Bash": 42,
+    "Read": 8,
+    "Write": 3,
+    "Edit": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 176933,
+   "kontekst_koncowy": 176933,
+   "tokeny": {
+    "input": 98,
+    "output_recorded": 18689,
+    "thinking_recorded": 6308,
+    "cache_read": 6109324,
+    "cache_write": 176049,
+    "cache_write_5m": 176049,
+    "cache_write_1h": 0,
+    "output_estimated": 36008,
+    "output_estimated_alt": 34294,
+    "thinking_estimated": 12489
+   },
+   "koszt_usd": {
+    "dolny": 2.48,
+    "srodkowy": 2.82,
+    "alt": 2.79,
+    "udzial_cache_read_w_srodkowym": 0.433
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 176933,
+    "toolCalls": 54,
+    "durationMs": 693237,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_ce63599a-15f/agent-a80c6f35e28eacfc1.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "ad025dee132028c71",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_ce63599a-15f",
+   "label": "weryfikacja:PRAWO",
+   "opis_meta": "weryfikacja:PRAWO",
+   "agentType": "workflow-subagent",
+   "faza": "Weryfikacja",
+   "model": {
+    "claude-opus-5-5": 76
+   },
+   "start": "2026-09-25T07:19:19Z",
+   "koniec": "2026-09-25T07:32:11Z",
+   "czas_min": 12.88,
+   "najdluzsza_przerwa_min": 0.7,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 76,
+   "odpowiedzi_z_pelnym_usage": 21,
+   "linie_asystenta": 137,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 81,
+   "narzedzia": {
+    "Bash": 69,
+    "Read": 10,
+    "Write": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 307552,
+   "kontekst_koncowy": 307552,
+   "tokeny": {
+    "input": 152,
+    "output_recorded": 19155,
+    "thinking_recorded": 13354,
+    "cache_read": 14956337,
+    "cache_write": 272286,
+    "cache_write_5m": 272286,
+    "cache_write_1h": 0,
+    "output_estimated": 60569,
+    "output_estimated_alt": 62000,
+    "thinking_estimated": 34914
+   },
+   "koszt_usd": {
+    "dolny": 4.74,
+    "srodkowy": 5.56,
+    "alt": 5.59,
+    "udzial_cache_read_w_srodkowym": 0.538
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 307552,
+    "toolCalls": 81,
+    "durationMs": 772707,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_ce63599a-15f/agent-ad025dee132028c71.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "ae8a033bfce42ab47",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_ce63599a-15f",
+   "label": "opis:PZT_ZL",
+   "opis_meta": "opis:PZT_ZL",
+   "agentType": "workflow-subagent",
+   "faza": "Opisy",
+   "model": {
+    "claude-opus-5-5": 111
+   },
+   "start": "2026-09-25T06:33:02Z",
+   "koniec": "2026-09-25T06:57:29Z",
+   "czas_min": 24.45,
+   "najdluzsza_przerwa_min": 1.1,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 111,
+   "odpowiedzi_z_pelnym_usage": 69,
+   "linie_asystenta": 199,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 114,
+   "narzedzia": {
+    "Bash": 90,
+    "Read": 16,
+    "Write": 7,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 435470,
+   "kontekst_koncowy": 435470,
+   "tokeny": {
+    "input": 222,
+    "output_recorded": 67067,
+    "thinking_recorded": 27041,
+    "cache_read": 30712237,
+    "cache_write": 435444,
+    "cache_write_5m": 435444,
+    "cache_write_1h": 0,
+    "output_estimated": 110721,
+    "output_estimated_alt": 107184,
+    "thinking_estimated": 35716
+   },
+   "koszt_usd": {
+    "dolny": 9.66,
+    "srodkowy": 10.53,
+    "alt": 10.46,
+    "udzial_cache_read_w_srodkowym": 0.583
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 435470,
+    "toolCalls": 114,
+    "durationMs": 1467270,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_ce63599a-15f/agent-ae8a033bfce42ab47.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "aecd6e8f26140c2ed",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_ce63599a-15f",
+   "label": "opis:PAB",
+   "opis_meta": "opis:PAB",
+   "agentType": "workflow-subagent",
+   "faza": "Opisy",
+   "model": {
+    "claude-opus-5-5": 152
+   },
+   "start": "2026-09-25T06:33:03Z",
+   "koniec": "2026-09-25T07:07:40Z",
+   "czas_min": 34.62,
+   "najdluzsza_przerwa_min": 1.9,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 152,
+   "odpowiedzi_z_pelnym_usage": 86,
+   "linie_asystenta": 296,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 176,
+   "narzedzia": {
+    "Bash": 134,
+    "Read": 32,
+    "Write": 8,
+    "Edit": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 515104,
+   "kontekst_koncowy": 515104,
+   "tokeny": {
+    "input": 304,
+    "output_recorded": 68584,
+    "thinking_recorded": 19269,
+    "cache_read": 47601319,
+    "cache_write": 474855,
+    "cache_write_5m": 474855,
+    "cache_write_1h": 0,
+    "output_estimated": 143028,
+    "output_estimated_alt": 142690,
+    "thinking_estimated": 48922
+   },
+   "koszt_usd": {
+    "dolny": 13.27,
+    "srodkowy": 14.76,
+    "alt": 14.75,
+    "udzial_cache_read_w_srodkowym": 0.645
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 510081,
+    "toolCalls": 176,
+    "durationMs": 2077060,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_ce63599a-15f/agent-aecd6e8f26140c2ed.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a2e2d61b96c7d28ef",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_dad224e5-cd8",
+   "label": "silnik:poprawki",
+   "opis_meta": "silnik:poprawki",
+   "agentType": "workflow-subagent",
+   "faza": "Zastosowanie",
+   "model": {
+    "claude-opus-5-5": 35
+   },
+   "start": "2026-09-25T08:25:51Z",
+   "koniec": "2026-09-25T08:38:47Z",
+   "czas_min": 12.94,
+   "najdluzsza_przerwa_min": 4.0,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 35,
+   "odpowiedzi_z_pelnym_usage": 4,
+   "linie_asystenta": 60,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 39,
+   "narzedzia": {
+    "Bash": 28,
+    "Read": 6,
+    "Edit": 4,
+    "Write": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 260140,
+   "kontekst_koncowy": 260140,
+   "tokeny": {
+    "input": 70,
+    "output_recorded": 1037,
+    "thinking_recorded": 59,
+    "cache_read": 6120366,
+    "cache_write": 225145,
+    "cache_write_5m": 225145,
+    "cache_write_1h": 0,
+    "output_estimated": 61358,
+    "output_estimated_alt": 79675,
+    "thinking_estimated": 52122
+   },
+   "koszt_usd": {
+    "dolny": 2.37,
+    "srodkowy": 3.58,
+    "alt": 3.94,
+    "udzial_cache_read_w_srodkowym": 0.342
+   },
+   "status": "trwa (brak wpisu result w journal.jsonl)",
+   "harness_wf_json": null,
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_dad224e5-cd8/agent-a2e2d61b96c7d28ef.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a348d2a8e7cf1f6c5",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_dad224e5-cd8",
+   "label": "silnik",
+   "opis_meta": "silnik",
+   "agentType": "workflow-subagent",
+   "faza": "Silnik",
+   "model": {
+    "claude-opus-5-5": 173
+   },
+   "start": "2026-09-25T05:47:32Z",
+   "koniec": "2026-09-25T07:20:11Z",
+   "czas_min": 92.65,
+   "najdluzsza_przerwa_min": 8.9,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 173,
+   "odpowiedzi_z_pelnym_usage": 61,
+   "linie_asystenta": 366,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 189,
+   "narzedzia": {
+    "Bash": 142,
+    "Read": 26,
+    "Edit": 15,
+    "Write": 4,
+    "ToolSearch": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 544368,
+   "kontekst_koncowy": 544368,
+   "tokeny": {
+    "input": 346,
+    "output_recorded": 87209,
+    "thinking_recorded": 32983,
+    "cache_read": 57530641,
+    "cache_write": 2406402,
+    "cache_write_5m": 2406402,
+    "cache_write_1h": 0,
+    "output_estimated": 247643,
+    "output_estimated_alt": 269557,
+    "thinking_estimated": 129402
+   },
+   "koszt_usd": {
+    "dolny": 25.28,
+    "srodkowy": 28.49,
+    "alt": 28.93,
+    "udzial_cache_read_w_srodkowym": 0.404
+   },
+   "status": "zakończony",
+   "harness_wf_json": null,
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_dad224e5-cd8/agent-a348d2a8e7cf1f6c5.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a472cdd66d2cb0c0b",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_dad224e5-cd8",
+   "label": "zastosowanie:PZT",
+   "opis_meta": "zastosowanie:PZT",
+   "agentType": "workflow-subagent",
+   "faza": "Zastosowanie",
+   "model": {
+    "claude-opus-5-5": 84
+   },
+   "start": "2026-09-25T07:20:15Z",
+   "koniec": "2026-09-25T07:58:48Z",
+   "czas_min": 38.55,
+   "najdluzsza_przerwa_min": 10.0,
+   "przerwy_ponad_10min": 1,
+   "odpowiedzi_api": 84,
+   "odpowiedzi_z_pelnym_usage": 17,
+   "linie_asystenta": 197,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 99,
+   "narzedzia": {
+    "Bash": 67,
+    "Read": 21,
+    "Edit": 9,
+    "Write": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 250412,
+   "kontekst_koncowy": 250412,
+   "tokeny": {
+    "input": 168,
+    "output_recorded": 11035,
+    "thinking_recorded": 1565,
+    "cache_read": 13040284,
+    "cache_write": 264874,
+    "cache_write_5m": 264874,
+    "cache_write_1h": 0,
+    "output_estimated": 69427,
+    "output_estimated_alt": 73163,
+    "thinking_estimated": 33446
+   },
+   "koszt_usd": {
+    "dolny": 4.15,
+    "srodkowy": 5.32,
+    "alt": 5.4,
+    "udzial_cache_read_w_srodkowym": 0.49
+   },
+   "status": "zakończony",
+   "harness_wf_json": null,
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_dad224e5-cd8/agent-a472cdd66d2cb0c0b.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a6358d5d8ad207531",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_dad224e5-cd8",
+   "label": "pomiar",
+   "opis_meta": "pomiar",
+   "agentType": "workflow-subagent",
+   "faza": "Pomiar",
+   "model": {
+    "claude-opus-5-5": 39
+   },
+   "start": "2026-09-25T05:38:43Z",
+   "koniec": "2026-09-25T05:47:31Z",
+   "czas_min": 8.8,
+   "najdluzsza_przerwa_min": 0.7,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 39,
+   "odpowiedzi_z_pelnym_usage": 6,
+   "linie_asystenta": 85,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 50,
+   "narzedzia": {
+    "Bash": 28,
+    "WebFetch": 8,
+    "WebSearch": 5,
+    "Read": 4,
+    "Write": 3,
+    "ToolSearch": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 167756,
+   "kontekst_koncowy": 167756,
+   "tokeny": {
+    "input": 78,
+    "output_recorded": 3220,
+    "thinking_recorded": 759,
+    "cache_read": 4317596,
+    "cache_write": 167747,
+    "cache_write_5m": 167747,
+    "cache_write_1h": 0,
+    "output_estimated": 45727,
+    "output_estimated_alt": 44419,
+    "thinking_estimated": 12371
+   },
+   "koszt_usd": {
+    "dolny": 1.77,
+    "srodkowy": 2.62,
+    "alt": 2.59,
+    "udzial_cache_read_w_srodkowym": 0.33
+   },
+   "status": "zakończony",
+   "harness_wf_json": null,
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_dad224e5-cd8/agent-a6358d5d8ad207531.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "aa91fab19d57ad831",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_dad224e5-cd8",
+   "label": "zastosowanie:IE",
+   "opis_meta": "zastosowanie:IE",
+   "agentType": "workflow-subagent",
+   "faza": "Zastosowanie",
+   "model": {
+    "claude-opus-5-5": 94
+   },
+   "start": "2026-09-25T07:58:49Z",
+   "koniec": "2026-09-25T08:25:50Z",
+   "czas_min": 27.02,
+   "najdluzsza_przerwa_min": 2.5,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 94,
+   "odpowiedzi_z_pelnym_usage": 25,
+   "linie_asystenta": 201,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 123,
+   "narzedzia": {
+    "Bash": 80,
+    "Read": 40,
+    "Edit": 1,
+    "Write": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 265653,
+   "kontekst_koncowy": 265653,
+   "tokeny": {
+    "input": 188,
+    "output_recorded": 17077,
+    "thinking_recorded": 4908,
+    "cache_read": 15944483,
+    "cache_write": 230419,
+    "cache_write_5m": 230419,
+    "cache_write_1h": 0,
+    "output_estimated": 66677,
+    "output_estimated_alt": 64990,
+    "thinking_estimated": 31033
+   },
+   "koszt_usd": {
+    "dolny": 4.68,
+    "srodkowy": 5.68,
+    "alt": 5.64,
+    "udzial_cache_read_w_srodkowym": 0.562
+   },
+   "status": "zakończony",
+   "harness_wf_json": null,
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_dad224e5-cd8/agent-aa91fab19d57ad831.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "ac4887df55cb098ed",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_dad224e5-cd8",
+   "label": "zastosowanie:IS",
+   "opis_meta": "zastosowanie:IS",
+   "agentType": "workflow-subagent",
+   "faza": "Zastosowanie",
+   "model": {
+    "claude-opus-5-5": 83
+   },
+   "start": "2026-09-25T07:47:29Z",
+   "koniec": "2026-09-25T08:12:28Z",
+   "czas_min": 25.0,
+   "najdluzsza_przerwa_min": 3.4,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 83,
+   "odpowiedzi_z_pelnym_usage": 22,
+   "linie_asystenta": 165,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 101,
+   "narzedzia": {
+    "Bash": 66,
+    "Read": 33,
+    "Write": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 299859,
+   "kontekst_koncowy": 299859,
+   "tokeny": {
+    "input": 166,
+    "output_recorded": 14867,
+    "thinking_recorded": 5112,
+    "cache_read": 15754107,
+    "cache_write": 264609,
+    "cache_write_5m": 264609,
+    "cache_write_1h": 0,
+    "output_estimated": 68175,
+    "output_estimated_alt": 69868,
+    "thinking_estimated": 33147
+   },
+   "koszt_usd": {
+    "dolny": 4.77,
+    "srodkowy": 5.84,
+    "alt": 5.87,
+    "udzial_cache_read_w_srodkowym": 0.54
+   },
+   "status": "zakończony",
+   "harness_wf_json": null,
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_dad224e5-cd8/agent-ac4887df55cb098ed.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "af726fb2109d239e4",
+   "execution": "jedyna",
+   "typ": "przepływ",
+   "runId": "wf_dad224e5-cd8",
+   "label": "zastosowanie:AR",
+   "opis_meta": "zastosowanie:AR",
+   "agentType": "workflow-subagent",
+   "faza": "Zastosowanie",
+   "model": {
+    "claude-opus-5-5": 68
+   },
+   "start": "2026-09-25T07:20:14Z",
+   "koniec": "2026-09-25T07:47:27Z",
+   "czas_min": 27.22,
+   "najdluzsza_przerwa_min": 3.9,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 68,
+   "odpowiedzi_z_pelnym_usage": 10,
+   "linie_asystenta": 126,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 74,
+   "narzedzia": {
+    "Bash": 45,
+    "Read": 25,
+    "Edit": 2,
+    "Write": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 248926,
+   "kontekst_koncowy": 248926,
+   "tokeny": {
+    "input": 136,
+    "output_recorded": 6295,
+    "thinking_recorded": 1391,
+    "cache_read": 10982450,
+    "cache_write": 248918,
+    "cache_write_5m": 248918,
+    "cache_write_1h": 0,
+    "output_estimated": 47916,
+    "output_estimated_alt": 48721,
+    "thinking_estimated": 23354
+   },
+   "koszt_usd": {
+    "dolny": 3.57,
+    "srodkowy": 4.4,
+    "alt": 4.42,
+    "udzial_cache_read_w_srodkowym": 0.499
+   },
+   "status": "zakończony",
+   "harness_wf_json": null,
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_dad224e5-cd8/agent-af726fb2109d239e4.jsonl",
+   "sendmessage_od_orkiestratora": 0
+  },
+  {
+   "agentId": "a3a8ae3b05a6e1fbd",
+   "execution": "przepływ (oryginał; gałąź do 04:02:30 + wspólny początek)",
+   "typ": "przepływ",
+   "runId": "wf_44634517-034",
+   "label": "synteza",
+   "opis_meta": "synteza",
+   "agentType": "general-purpose",
+   "faza": "Synteza",
+   "model": {
+    "claude-opus-5-5": 107
+   },
+   "start": "2026-09-25T03:09:41Z",
+   "koniec": "2026-09-25T04:02:30Z",
+   "czas_min": 52.83,
+   "najdluzsza_przerwa_min": 8.1,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 107,
+   "odpowiedzi_z_pelnym_usage": 5,
+   "linie_asystenta": 189,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 114,
+   "narzedzia": {
+    "Bash": 88,
+    "Read": 15,
+    "SendMessage": 4,
+    "Write": 3,
+    "Edit": 1,
+    "ListAgents": 1,
+    "ToolSearch": 1,
+    "StructuredOutput": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 626775,
+   "kontekst_koncowy": 626775,
+   "tokeny": {
+    "input": 214,
+    "output_recorded": 8521,
+    "thinking_recorded": 3519,
+    "cache_read": 43336272,
+    "cache_write": 960327,
+    "cache_write_5m": 960327,
+    "cache_write_1h": 0,
+    "output_estimated": 232436,
+    "output_estimated_alt": 269655,
+    "thinking_estimated": 137426
+   },
+   "koszt_usd": {
+    "dolny": 13.64,
+    "srodkowy": 18.12,
+    "alt": 18.86,
+    "udzial_cache_read_w_srodkowym": 0.478
+   },
+   "status": "zakończony",
+   "harness_wf_json": {
+    "tokens": 626775,
+    "toolCalls": 114,
+    "durationMs": 3170000,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/workflows/wf_44634517-034/agent-a3a8ae3b05a6e1fbd.jsonl",
+   "sendmessage_od_orkiestratora": 3
+  },
+  {
+   "agentId": "a3a8ae3b05a6e1fbd",
+   "execution": "kopia wznowiona przez SendMessage 03:42:38 (równoległa do oryginału)",
+   "typ": "kopia agenta przepływu (wznowienie SendMessage)",
+   "runId": "wf_44634517-034",
+   "label": "synteza (kopia)",
+   "opis_meta": "synteza",
+   "agentType": "general-purpose",
+   "faza": "Synteza",
+   "model": {
+    "claude-opus-5-5": 147
+   },
+   "start": "2026-09-25T03:42:39Z",
+   "koniec": "2026-09-25T04:24:18Z",
+   "czas_min": 41.66,
+   "najdluzsza_przerwa_min": 4.4,
+   "przerwy_ponad_10min": 0,
+   "odpowiedzi_api": 147,
+   "odpowiedzi_z_pelnym_usage": 51,
+   "linie_asystenta": 269,
+   "wiadomosci_synthetic": 0,
+   "niespojne_input_cache_w_id": 0,
+   "wywolania_narzedzi": 147,
+   "narzedzia": {
+    "Bash": 116,
+    "Read": 19,
+    "SendMessage": 3,
+    "Write": 2,
+    "Monitor": 2,
+    "ListAgents": 2,
+    "SubagentHandback": 1,
+    "ToolSearch": 1,
+    "Edit": 1
+   },
+   "web_search": 0,
+   "web_fetch_srv": 0,
+   "kompakcje": 0,
+   "kontekst_max": 690467,
+   "kontekst_koncowy": 502266,
+   "tokeny": {
+    "input": 294,
+    "output_recorded": 66122,
+    "thinking_recorded": 21515,
+    "cache_read": 78718809,
+    "cache_write": 655012,
+    "cache_write_5m": 655012,
+    "cache_write_1h": 0,
+    "output_estimated": 188323,
+    "output_estimated_alt": 197563,
+    "thinking_estimated": 88575
+   },
+   "koszt_usd": {
+    "dolny": 20.34,
+    "srodkowy": 22.79,
+    "alt": 22.97,
+    "udzial_cache_read_w_srodkowym": 0.691
+   },
+   "status": "zakończony (powiadomienie 04:24:18)",
+   "harness_wf_json": {
+    "tokens": 626775,
+    "toolCalls": 114,
+    "durationMs": 3170000,
+    "cached": false,
+    "state": "done"
+   },
+   "plik": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/subagents/agent-a3a8ae3b05a6e1fbd.jsonl (+ gałąź w pliku przepływu od 03:42:39)",
+   "sendmessage_od_orkiestratora": 0
+  }
+ ],
+ "wywolania_Agent": [
+  {
+   "agentId": "a70b2709f5f62a5a2",
+   "description": "Build PN drafting engine",
+   "launched": "2026-09-24T23:31:18.316Z"
+  },
+  {
+   "agentId": "affb914430bd01f17",
+   "description": "Build model core and 3D pipeline",
+   "launched": "2026-09-24T23:31:47.344Z"
+  },
+  {
+   "agentId": "a15e57952f52b96b8",
+   "description": "Build model-to-drawing view generators",
+   "launched": "2026-09-25T00:49:54.658Z"
+  },
+  {
+   "agentId": "af72e8de1f1d66b66",
+   "description": "Consolidate requirements register",
+   "launched": "2026-09-25T01:14:45.787Z"
+  },
+  {
+   "agentId": "a7447ed7be6bcdaf1",
+   "description": "Build document assembly framework",
+   "launched": "2026-09-25T01:47:13.230Z"
+  },
+  {
+   "agentId": "a87415027562c59a6",
+   "description": "Build physics and energy calc library",
+   "launched": "2026-09-25T01:52:12.026Z"
+  },
+  {
+   "agentId": "a27284e7b67190ca8",
+   "description": "Build structural Eurocode calc library",
+   "launched": "2026-09-25T01:52:36.346Z"
+  },
+  {
+   "agentId": "a358500c03b62940a",
+   "description": "Build MEP and electrical calc library",
+   "launched": "2026-09-25T01:53:01.114Z"
+  },
+  {
+   "agentId": "a26849570eda26834",
+   "description": "Build RC wall-beam FEM/STM module",
+   "launched": "2026-09-25T03:15:04.884Z"
+  },
+  {
+   "agentId": "a31322d115de1ad9a",
+   "description": "Write koncepcja.md + final previews",
+   "launched": "2026-09-25T04:04:41.006Z"
+  },
+  {
+   "agentId": "a076389c324f1eb11",
+   "description": "Build PZT site-plan generator",
+   "launched": "2026-09-25T04:07:27.591Z"
+  },
+  {
+   "agentId": "a68a8b74f8ab79b44",
+   "description": "Build MEP installation drawings",
+   "launched": "2026-09-25T04:07:53.802Z"
+  },
+  {
+   "agentId": "a5045de9ee0554cc8",
+   "description": "Build structural drawings generator",
+   "launched": "2026-09-25T04:08:17.806Z"
+  },
+  {
+   "agentId": "a9f2ed8bb74c2c0d9",
+   "description": "Build construction details generator",
+   "launched": "2026-09-25T04:08:41.809Z"
+  },
+  {
+   "agentId": "a82012b772f4804f3",
+   "description": "Build catalog website for LAMELA",
+   "launched": "2026-09-25T05:23:18.386Z"
+  }
+ ],
+ "uruchomienia_Workflow": [
+  {
+   "taskId": "w3j43xp0k",
+   "runId": "wf_88c0988f-4a5",
+   "launched": "2026-09-24T23:27:36.473Z",
+   "resumeFromRunId": null,
+   "scriptPath": null,
+   "inlineScriptName": "rejestr-prawny-A"
+  },
+  {
+   "taskId": "wqihva7xz",
+   "runId": "wf_0e783e5d-4ab",
+   "launched": "2026-09-24T23:28:40.603Z",
+   "resumeFromRunId": null,
+   "scriptPath": null,
+   "inlineScriptName": "rejestr-norm-B"
+  },
+  {
+   "taskId": "whby2u54e",
+   "runId": "wf_725a3592-fa1",
+   "launched": "2026-09-24T23:30:07.987Z",
+   "resumeFromRunId": null,
+   "scriptPath": null,
+   "inlineScriptName": "koncepcja-panel"
+  },
+  {
+   "taskId": "we1mlli53",
+   "runId": "wf_44634517-034",
+   "launched": "2026-09-24T23:37:57.058Z",
+   "resumeFromRunId": null,
+   "scriptPath": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/workflows/scripts/koncepcja-panel-wf_725a3592-fa1.js",
+   "inlineScriptName": null
+  },
+  {
+   "taskId": "wmqylk5tf",
+   "runId": "wf_a0d51b50-592",
+   "launched": "2026-09-25T01:58:43.430Z",
+   "resumeFromRunId": null,
+   "scriptPath": null,
+   "inlineScriptName": "mostki-2d-solver"
+  },
+  {
+   "taskId": "wy0zakhf7",
+   "runId": "wf_44634517-034",
+   "launched": "2026-09-25T02:03:52.378Z",
+   "resumeFromRunId": "wf_44634517-034",
+   "scriptPath": "/root/.claude/projects/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/workflows/scripts/koncepcja-panel-wf_725a3592-fa1.js",
+   "inlineScriptName": null
+  },
+  {
+   "taskId": "wbied9nrs",
+   "runId": "wf_10e1a801-dd6",
+   "launched": "2026-09-25T05:21:51.440Z",
+   "resumeFromRunId": null,
+   "scriptPath": null,
+   "inlineScriptName": "poprawki-runda2"
+  },
+  {
+   "taskId": "wf4hulepa",
+   "runId": "wf_dad224e5-cd8",
+   "launched": "2026-09-25T05:38:43.399Z",
+   "resumeFromRunId": null,
+   "scriptPath": null,
+   "inlineScriptName": "arkusze-ekonomiczne"
+  },
+  {
+   "taskId": "w9d1ib8kz",
+   "runId": "wf_ce63599a-15f",
+   "launched": "2026-09-25T06:33:02.277Z",
+   "resumeFromRunId": null,
+   "scriptPath": null,
+   "inlineScriptName": "opisy-tom-I"
+  },
+  {
+   "taskId": "wifid07x3",
+   "runId": "wf_c5f7e298-4b9",
+   "launched": "2026-09-25T06:33:45.421Z",
+   "resumeFromRunId": null,
+   "scriptPath": null,
+   "inlineScriptName": "opisy-PT"
+  },
+  {
+   "taskId": "wzwhv71tc",
+   "runId": "wf_a8783476-2a1",
+   "launched": "2026-09-25T07:13:34.322Z",
+   "resumeFromRunId": null,
+   "scriptPath": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/wydanie_workflow.js",
+   "inlineScriptName": null
+  },
+  {
+   "taskId": "w4z4krxmz",
+   "runId": "wf_6070a5f0-602",
+   "launched": "2026-09-25T08:27:30.323Z",
+   "resumeFromRunId": null,
+   "scriptPath": null,
+   "inlineScriptName": "statystyki-sesji"
+  }
+ ],
+ "TaskStop": {
+  "whby2u54e": "2026-09-24T23:33:56.079Z",
+  "we1mlli53": "2026-09-25T02:03:24.149Z",
+  "brkrkn2so": "2026-09-25T02:25:12.099Z",
+  "bzxoofwyf": "2026-09-25T02:35:47.970Z",
+  "wbied9nrs": "2026-09-25T07:13:27.747Z"
+ },
+ "powiadomienia": [
+  {
+   "taskId": "w3j43xp0k",
+   "status": "completed",
+   "ts": "2026-09-25T00:41:13.889Z",
+   "summary": "Dynamic workflow \"Weryfikacja stanu prawnego (PB, zakres projektu, WT, planowanie/PZT) na źródłach pierwotnych\" complete",
+   "subagent_tokens": 2766442,
+   "tool_uses": 715,
+   "duration_ms": 4417397,
+   "agent_count": 8,
+   "agents_done": 8,
+   "agents_error": 0
+  },
+  {
+   "taskId": "a70b2709f5f62a5a2",
+   "status": "completed",
+   "ts": "2026-09-25T00:49:12.757Z",
+   "summary": "Agent \"Build PN drafting engine\" finished",
+   "subagent_tokens": 767922,
+   "tool_uses": 186,
+   "duration_ms": 4674470,
+   "agent_count": null,
+   "agents_done": null,
+   "agents_error": null
+  },
+  {
+   "taskId": "affb914430bd01f17",
+   "status": "completed",
+   "ts": "2026-09-25T01:06:44.849Z",
+   "summary": "Agent \"Build model core and 3D pipeline\" finished",
+   "subagent_tokens": 570759,
+   "tool_uses": 139,
+   "duration_ms": 5697523,
+   "agent_count": null,
+   "agents_done": null,
+   "agents_error": null
+  },
+  {
+   "taskId": "wqihva7xz",
+   "status": "completed",
+   "ts": "2026-09-25T01:14:09.307Z",
+   "summary": "Dynamic workflow \"Normy techniczne: rysunek budowlany, konstrukcja/obciążenia, energia/instalacje, elektryka — z weryfik",
+   "subagent_tokens": 3320506,
+   "tool_uses": 1141,
+   "duration_ms": 6328688,
+   "agent_count": 8,
+   "agents_done": 8,
+   "agents_error": 0
+  },
+  {
+   "taskId": "af72e8de1f1d66b66",
+   "status": "completed",
+   "ts": "2026-09-25T01:46:10.701Z",
+   "summary": "Agent \"Consolidate requirements register\" finished",
+   "subagent_tokens": 673287,
+   "tool_uses": 48,
+   "duration_ms": 1884933,
+   "agent_count": null,
+   "agents_done": null,
+   "agents_error": null
+  },
+  {
+   "taskId": "a15e57952f52b96b8",
+   "status": "completed",
+   "ts": "2026-09-25T01:51:04.144Z",
+   "summary": "Agent \"Build model-to-drawing view generators\" finished",
+   "subagent_tokens": 760783,
+   "tool_uses": 148,
+   "duration_ms": 3669505,
+   "agent_count": null,
+   "agents_done": null,
+   "agents_error": null
+  },
+  {
+   "taskId": "a7447ed7be6bcdaf1",
+   "status": "completed",
+   "ts": "2026-09-25T02:34:46.232Z",
+   "summary": "Agent \"Build document assembly framework\" finished",
+   "subagent_tokens": 593591,
+   "tool_uses": 149,
+   "duration_ms": 2853018,
+   "agent_count": null,
+   "agents_done": null,
+   "agents_error": null
+  },
+  {
+   "taskId": "a87415027562c59a6",
+   "status": "completed",
+   "ts": "2026-09-25T02:52:53.140Z",
+   "summary": "Agent \"Build physics and energy calc library\" finished",
+   "subagent_tokens": 65384,
+   "tool_uses": 147,
+   "duration_ms": 3641132,
+   "agent_count": null,
+   "agents_done": null,
+   "agents_error": null
+  },
+  {
+   "taskId": "a358500c03b62940a",
+   "status": "completed",
+   "ts": "2026-09-25T02:57:48.867Z",
+   "summary": "Agent \"Build MEP and electrical calc library\" finished",
+   "subagent_tokens": 108757,
+   "tool_uses": 154,
+   "duration_ms": 3887768,
+   "agent_count": null,
+   "agents_done": null,
+   "agents_error": null
+  },
+  {
+   "taskId": "a27284e7b67190ca8",
+   "status": "completed",
+   "ts": "2026-09-25T03:14:16.291Z",
+   "summary": "Agent \"Build structural Eurocode calc library\" finished",
+   "subagent_tokens": 732823,
+   "tool_uses": 120,
+   "duration_ms": 4899958,
+   "agent_count": null,
+   "agents_done": null,
+   "agents_error": null
+  },
+  {
+   "taskId": "wmqylk5tf",
+   "status": "completed",
+   "ts": "2026-09-25T03:42:04.012Z",
+   "summary": "Dynamic workflow \"Walidowany solver 2D mostków termicznych wg PN-EN ISO 10211 (ψ, f_Rsi) z niezależną weryfikacją\" compl",
+   "subagent_tokens": 1421353,
+   "tool_uses": 298,
+   "duration_ms": 6200557,
+   "agent_count": 5,
+   "agents_done": 5,
+   "agents_error": 0
+  },
+  {
+   "taskId": "a3a8ae3b05a6e1fbd",
+   "status": "completed",
+   "ts": "2026-09-25T04:24:18.725Z",
+   "summary": "Agent \"synteza\" finished",
+   "subagent_tokens": 693621,
+   "tool_uses": 147,
+   "duration_ms": 2499573,
+   "agent_count": null,
+   "agents_done": null,
+   "agents_error": null
+  },
+  {
+   "taskId": "a26849570eda26834",
+   "status": "completed",
+   "ts": "2026-09-25T04:29:33.544Z",
+   "summary": "Agent \"Build RC wall-beam FEM/STM module\" finished",
+   "subagent_tokens": 674690,
+   "tool_uses": 143,
+   "duration_ms": 4468673,
+   "agent_count": null,
+   "agents_done": null,
+   "agents_error": null
+  },
+  {
+   "taskId": "a31322d115de1ad9a",
+   "status": "completed",
+   "ts": "2026-09-25T04:30:33.721Z",
+   "summary": "Agent \"Write koncepcja.md + final previews\" finished",
+   "subagent_tokens": 485185,
+   "tool_uses": 123,
+   "duration_ms": 1552730,
+   "agent_count": null,
+   "agents_done": null,
+   "agents_error": null
+  },
+  {
+   "taskId": "wy0zakhf7",
+   "status": "completed",
+   "ts": "2026-09-25T05:20:05.841Z",
+   "summary": "Dynamic workflow \"Panel architektów: 3 warianty koncepcji z szkicu, ocena przez 3 sędziów, synteza do modelu danych, aud",
+   "subagent_tokens": 3388090,
+   "tool_uses": 531,
+   "duration_ms": 11773462,
+   "agent_count": 11,
+   "agents_done": 11,
+   "agents_error": 0
+  },
+  {
+   "taskId": "a68a8b74f8ab79b44",
+   "status": "completed",
+   "ts": "2026-09-25T05:20:32.643Z",
+   "summary": "Agent \"Build MEP installation drawings\" finished",
+   "subagent_tokens": 708008,
+   "tool_uses": 207,
+   "duration_ms": 4358866,
+   "agent_count": null,
+   "agents_done": null,
+   "agents_error": null
+  },
+  {
+   "taskId": "a076389c324f1eb11",
+   "status": "completed",
+   "ts": "2026-09-25T05:37:21.321Z",
+   "summary": "Agent \"Build PZT site-plan generator\" finished",
+   "subagent_tokens": 69992,
+   "tool_uses": 245,
+   "duration_ms": 5393753,
+   "agent_count": null,
+   "agents_done": null,
+   "agents_error": null
+  },
+  {
+   "taskId": "a9f2ed8bb74c2c0d9",
+   "status": "completed",
+   "ts": "2026-09-25T05:48:17.800Z",
+   "summary": "Agent \"Build construction details generator\" finished",
+   "subagent_tokens": 336080,
+   "tool_uses": 328,
+   "duration_ms": 5976019,
+   "agent_count": null,
+   "agents_done": null,
+   "agents_error": null
+  },
+  {
+   "taskId": "a5045de9ee0554cc8",
+   "status": "completed",
+   "ts": "2026-09-25T06:51:16.414Z",
+   "summary": "Agent \"Build structural drawings generator\" finished",
+   "subagent_tokens": 566194,
+   "tool_uses": 548,
+   "duration_ms": 9778622,
+   "agent_count": null,
+   "agents_done": null,
+   "agents_error": null
+  },
+  {
+   "taskId": "a5045de9ee0554cc8",
+   "status": "completed",
+   "ts": "2026-09-25T06:55:51.850Z",
+   "summary": "Agent \"Build structural drawings generator\" finished",
+   "subagent_tokens": 453831,
+   "tool_uses": 549,
+   "duration_ms": 10054052,
+   "agent_count": null,
+   "agents_done": null,
+   "agents_error": null
+  },
+  {
+   "taskId": "a82012b772f4804f3",
+   "status": "completed",
+   "ts": "2026-09-25T07:16:45.848Z",
+   "summary": "Agent \"Build catalog website for LAMELA\" finished",
+   "subagent_tokens": 683254,
+   "tool_uses": 237,
+   "duration_ms": 6807496,
+   "agent_count": null,
+   "agents_done": null,
+   "agents_error": null
+  },
+  {
+   "taskId": "w9d1ib8kz",
+   "status": "completed",
+   "ts": "2026-09-25T08:05:09.864Z",
+   "summary": "Dynamic workflow \"Tom I (PZT + PAB + ZL): części opisowe, oświadczenia, BIOZ, opinia geotechniczna (przykład), składanie",
+   "subagent_tokens": 2137951,
+   "tool_uses": 610,
+   "duration_ms": 5527562,
+   "agent_count": 6,
+   "agents_done": 6,
+   "agents_error": 0
+  }
+ ]
+}

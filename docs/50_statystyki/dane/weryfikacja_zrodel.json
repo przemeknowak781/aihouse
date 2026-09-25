@@ -1,0 +1,712 @@
+{
+ "meta": {
+  "czas_weryfikacji_utc": "2026-09-25T09:15:24Z",
+  "zakres": "Weryfikacja źródeł dwóch raportów: CENNIK API (ceny Anthropic) i KOSZT PRACY LUDZI (biuro projektowe PL 2024–2026). Tylko odczyt; nic nie zmieniono w /home/user/aihouse.",
+  "metoda": "Każdy URL pobrany ponownie przez curl (proxy, weryfikacja TLS włączona) i przeszukany grepem w tekście wyciągniętym z HTML/PDF (pypdf) lub XLSX (openpyxl). Cytaty w polu 'dowod' są dosłowne, jeśli nie zaznaczono inaczej. Stronę cennika Anthropic sprawdzono dodatkowo przez WebFetch. B5 i część R19 sprawdzono przez WebSearch.",
+  "statusy": {
+   "POTWIERDZONE": "strona zawiera wartość w podanym kontekście",
+   "NIEPOTWIERDZONE": "strona mówi co innego albo wartości na niej nie ma",
+   "NIEDOSTĘPNE": "strona niedostępna (np. 403)",
+   "WYLICZENIE_ZGODNE_Z_REGUŁĄ": "wartości nie ma na stronie wprost, ale wynika z reguły podanej na stronie"
+  },
+  "pliki": {
+   "skrypty": [
+    "weryf/sprawdz_modele.py",
+    "weryf/sprawdz_cache.py",
+    "weryf/przeliczenia.py",
+    "weryf/weryfikacja_zapisz.py"
+   ],
+   "kopie_zrodel": "weryf/src/*.bin (+ .txt, .xlsx), weryf/pricing_live.md, weryf/models_live.md, weryf/claude_com_live.html, weryf/support_max_live.html, weryf/ext_thinking.md, weryf/thinking_cost.md",
+   "sha256": "weryf/sha256_kopii.txt"
+  },
+  "zgodnosc_kopii_z_poprzednim_krokiem": "Pobrane o 09:00Z kopie pricing.md i models/overview.md są identyczne bajt w bajt z raw_platform_pricing.md i raw_models_overview.md. PDF i XLSX z ludzie_zrodla/ (O1, O2, O3, O5b, O5c, B1, B3a–c, B4, R8) też są identyczne. claude.com i support mają inny sha256 (dynamiczny HTML), ale sprawdzana treść się zgadza."
+ },
+ "podsumowanie": {
+  "cennik_api": {
+   "liczba_twierdzen": 20,
+   "POTWIERDZONE": 19,
+   "WYLICZENIE_ZGODNE_Z_REGUŁĄ": 1,
+   "NIEPOTWIERDZONE": 0,
+   "NIEDOSTĘPNE": 0
+  },
+  "koszt_ludzi": {
+   "liczba_pozycji": 32,
+   "POTWIERDZONE": 31,
+   "NIEDOSTĘPNE": 1,
+   "NIEPOTWIERDZONE_elementy_czastkowe": [
+    "R13: zakres „999–15 000 zł” w tytule",
+    "O4: numer „Dz.Urz. 2025 poz. 2948” (brak na stronie frigg)",
+    "B1: zakres stawek „75–600” (dokument: 50–600)",
+    "R17: dokładna suma etapów „590–970 h”",
+    "B5: suma „414–440 h” (strona 403; wyszukiwarka pokazuje tylko zakresy faz)"
+   ]
+  },
+  "najwazniejsze": [
+   "Cena Claude Opus 5.5 ($4 / $5 / $8 / $0,20 / $20 za MTok) i ID claude-opus-5-5 są na oficjalnych stronach Anthropic (platform.claude.com pricing + models overview, claude.com/pricing). Wycena API nie jest przybliżeniem cenowym.",
+   "Mnożnik odczytu cache dla Opus 5.5 to 0,05x (nie 0,1x) — potwierdzony na 3 stronach. To najważniejszy parametr: odczyty to ok. 63% kosztu, a przy 0,1x koszt wzrósłby o ok. 63%.",
+   "Zapis cache 1 h kosztuje 2x ($8), a 5 min 1,25x ($5). claude.com pokazuje tylko $5 (TTL 5 min). W tej sesji zapisy 1 h to 3,4% zapisów, więc wpływ na koszt wynosi ok. 0,6%.",
+   "„thinking = output” jest potwierdzone, ale na stronie o thinkingu, nie na stronie cennika.",
+   "Deduplikacja: w 1992 powtórzonych liniach różni się tylko output_tokens, więc reguła max na message.id jest konieczna; 1 id występuje w 2 plikach subagentów, więc deduplikacja musi być globalna.",
+   "Koszt ludzi: wszystkie liczby ze źródeł poza B5 się potwierdzają. Błędy dotyczą sposobu użycia: BIAMS, Disinn i Energetyczny Projekt liczą od powierzchni podłogi (~300 m²), nie od PU 239,16 m²; BIAMS podaje VAT 8–23%, nie 23%; extradom wprost podaje netto i stan deweloperski; SARP obejmuje pełne PW, szersze niż PT.",
+   "Widełki: dolna granica 30 tys. zaniżona (ok. 40 tys. ze zweryfikowanych składników), środek 60–100 tys. uczciwy, górna 150 tys. zawyżona jako granica rynkowa. Czas 10–32 tyg. uczciwy. Roboczogodziny 550–1 100 h prawdopodobne, ale oparte na niedostępnym B5 i założonej stawce."
+  ]
+ },
+ "cennik_api": [
+  {
+   "id": "A1",
+   "twierdzenie": "Opus 5.5: input $4 / zapis 5 min $5 / zapis 1 h $8 / odczyt $0.20 / output $20 za MTok",
+   "url": "https://platform.claude.com/docs/en/about-claude/pricing (tekst: .../pricing.md)",
+   "status": "POTWIERDZONE",
+   "dowod": "| Claude Opus 5.5 | $4 / MTok | $5 / MTok | $8 / MTok | $0.20 / MTok<sup>2</sup> | $20 / MTok |",
+   "uwagi": "Sprawdzone curl (kopia identyczna bajt w bajt z raw_platform_pricing.md, sha256 cd36fcc6…) i niezależnie WebFetch o ok. 09:10Z. Cena jest na OFICJALNEJ stronie Anthropic — nie jest przybliżeniem."
+  },
+  {
+   "id": "A2",
+   "twierdzenie": "Odczyt z cache Opus 5.5 = 0,05x ceny wejścia (standardowo 0,1x)",
+   "url": "https://platform.claude.com/docs/en/about-claude/pricing (tekst: .../pricing.md)",
+   "status": "POTWIERDZONE",
+   "dowod": "„2 Cache hits and refreshes on Claude Opus 5.5 are priced at 0.05x the base input price.” oraz tabela mnożników: „0.1x base input price (0.025x on Claude Fable 5.1 and Claude Mythos 5.1; 0.05x on Claude Opus 5.5)”; models/overview: „prompt cache reads cost 10% … 5% on Claude Opus 5.5”",
+   "uwagi": "To NAJBARDZIEJ wrażliwy parametr wyceny: odczyty cache to ok. 63% kosztu sesji (patrz wrazliwosc_kosztu_API). Uwaga: ten sam dokument ma też ogólne zdanie „A cache hit costs 10% of the standard input price” — dotyczy modeli ogólnie; dla Opus 5.5 obowiązuje przypis 2."
+  },
+  {
+   "id": "A3",
+   "twierdzenie": "Mnożniki zapisu cache: 5 min = 1,25x ($5), 1 h = 2x ($8)",
+   "url": "https://platform.claude.com/docs/en/about-claude/pricing (tekst: .../pricing.md)",
+   "status": "POTWIERDZONE",
+   "dowod": "„5-minute cache write | 1.25x base input price”; „1-hour cache write | 2x base input price”",
+   "uwagi": "claude.com/pricing podaje tylko „Write $5 / MTok” z dopiskiem „Prompt caching pricing reflects 5-minute TTL” — kto liczy wyłącznie z claude.com, zaniży koszt zapisów 1 h. W tej sesji zapisy 1 h to 1 747 107 z 51 828 839 tokenów zapisu (3,4%), różnica ok. 5,24 USD (0,6% kosztu)."
+  },
+  {
+   "id": "A4",
+   "twierdzenie": "thinking_tokens liczą się jako output",
+   "url": "https://platform.claude.com/docs/en/build-with-claude/thinking-steering-and-cost (.md)",
+   "status": "POTWIERDZONE",
+   "dowod": "„Tokens Claude uses while thinking (billed as output tokens)”; „usage.output_tokens_details.thinking_tokens … is always less than or equal to output_tokens”",
+   "uwagi": "Zastrzeżenie do atrybucji: strona cennika (pricing) NIE zawiera słowa „thinking”; potwierdzenie jest na stronie thinking-steering-and-cost oraz extended-thinking („how many of the billed output tokens were internal reasoning”). Nie doliczać thinking_tokens drugi raz."
+  },
+  {
+   "id": "A5",
+   "twierdzenie": "Batch: Opus 5.5 $2 / $10 (−50%)",
+   "url": "https://platform.claude.com/docs/en/about-claude/pricing (tekst: .../pricing.md)",
+   "status": "POTWIERDZONE",
+   "dowod": "„| Claude Opus 5.5 | $2 / MTok | $10 / MTok |”; „50% discount on both input and output tokens”",
+   "uwagi": "Nieużywany w sesji (service_tier zawsze „standard”)."
+  },
+  {
+   "id": "A6",
+   "twierdzenie": "Fast mode Opus 5.5: $8 / $40",
+   "url": "https://platform.claude.com/docs/en/about-claude/pricing (tekst: .../pricing.md)",
+   "status": "POTWIERDZONE",
+   "dowod": "„| Claude Opus 5.5 | $8 / MTok | $40 / MTok |”; „Fast mode pricing applies across the full context window, including requests over 200k input tokens.”",
+   "uwagi": "claude.com: „fast mode for Opus 5.5 at 2x standard pricing” — zgodne. Nieużywany w sesji."
+  },
+  {
+   "id": "A7",
+   "twierdzenie": "Fast mode — ceny cache $10 / $16 / $0,40 (wyliczone przez autora)",
+   "url": "https://platform.claude.com/docs/en/about-claude/pricing (tekst: .../pricing.md)",
+   "status": "WYLICZENIE_ZGODNE_Z_REGUŁĄ",
+   "dowod": "Strona: „Prompt caching multipliers apply on top of fast mode pricing” → 8×1,25=10; 8×2=16; 8×0,05=0,40",
+   "uwagi": "Wartości nie ma na stronie wprost (autor to zaznaczył). Bez znaczenia dla wyceny — tryb fast nie był używany."
+  },
+  {
+   "id": "A8",
+   "twierdzenie": "Długi kontekst >200k bez dopłaty",
+   "url": "https://platform.claude.com/docs/en/about-claude/pricing (tekst: .../pricing.md)",
+   "status": "POTWIERDZONE",
+   "dowod": "„Claude 4.6 and later models … include the full 1M token context window at standard pricing. (A 900k-token request is billed at the same per-token rate as a 9k-token request.)”",
+   "uwagi": ""
+  },
+  {
+   "id": "A9",
+   "twierdzenie": "US-only inference_geo: mnożnik 1,1x",
+   "url": "https://platform.claude.com/docs/en/about-claude/pricing (tekst: .../pricing.md)",
+   "status": "POTWIERDZONE",
+   "dowod": "„specifying US-only inference through the inference_geo parameter incurs a 1.1x multiplier on all token pricing categories”",
+   "uwagi": "claude.com pisze węziej: „1.1x pricing for input and output tokens”. W sesji inference_geo = „not_available” w 100% linii, więc nie dotyczy."
+  },
+  {
+   "id": "A10",
+   "twierdzenie": "Web search $10 / 1000 wyszukiwań",
+   "url": "https://platform.claude.com/docs/en/about-claude/pricing (tekst: .../pricing.md)",
+   "status": "POTWIERDZONE",
+   "dowod": "„Web search is available on the Claude API for $10 per 1,000 searches”",
+   "uwagi": "W transkryptach server_tool_use.web_search_requests = 0 (max na message.id). Czy WebSearch z Claude Code rozliczany jest poza polem usage — nie da się ustalić z danych (zgodnie z raportem)."
+  },
+  {
+   "id": "A11",
+   "twierdzenie": "ID claude-opus-5-5 = Claude Opus 5.5",
+   "url": "https://platform.claude.com/docs/en/models/overview (.md)",
+   "status": "POTWIERDZONE",
+   "dowod": "„Claude API ID | … | `claude-opus-5-5` |” w kolumnie Claude Opus 5.5",
+   "uwagi": "Kopia identyczna z raw_models_overview.md (sha256 404372e6…)."
+  },
+  {
+   "id": "A12",
+   "twierdzenie": "Przekierowania: docs.claude.com → 302; www.anthropic.com/pricing → 301 claude.com/pricing",
+   "url": "curl -w %{http_code}",
+   "status": "POTWIERDZONE",
+   "dowod": "docs.claude.com/en/docs/about-claude/pricing: 302 → platform.claude.com/docs/en/about-claude/pricing; www.anthropic.com/pricing: 301 → claude.com/pricing",
+   "uwagi": "Sprawdzone 09:00Z."
+  },
+  {
+   "id": "A13",
+   "twierdzenie": "Tabela porównawcza (Fable/Mythos 5.1, Opus 5–4.5, Opus 4.1/4, Sonnet 5, Sonnet 4.6/4.5, Haiku 4.5) i liczba 18 modeli",
+   "url": "https://platform.claude.com/docs/en/about-claude/pricing (tekst: .../pricing.md)",
+   "status": "POTWIERDZONE",
+   "dowod": "Wszystkie wartości w tabeli raportu zgodne z wierszami strony; w tabeli strony jest 18 wierszy modeli.",
+   "uwagi": "Raport pomija Fable 5 / Mythos 5 (odczyt cache $1, nie $0,25) — to nie błąd, tylko wybór; nie mieszać z 5.1."
+  },
+  {
+   "id": "A14",
+   "twierdzenie": "Sonnet 5: $2/$10 jest ceną standardową, podwyżki do $3/$15 od 1.09.2026 nie będzie",
+   "url": "https://platform.claude.com/docs/en/about-claude/pricing (tekst: .../pricing.md)",
+   "status": "POTWIERDZONE",
+   "dowod": "Przypis 3: „… is now the standard price. The previously scheduled increase to $3/$15 … on September 1, 2026 will not occur.”",
+   "uwagi": ""
+  },
+  {
+   "id": "A15",
+   "twierdzenie": "Zastrzeżenie tokenizera (~30% więcej tokenów od Claude 4.7)",
+   "url": "https://platform.claude.com/docs/en/about-claude/pricing (tekst: .../pricing.md)",
+   "status": "POTWIERDZONE",
+   "dowod": "„Claude 4.7 and later models and Claude Mythos Preview use a newer tokenizer … approximately 30% more tokens for the same text … Claude Sonnet 4.6 and earlier models use the previous tokenizer.”",
+   "uwagi": "Wniosek raportu (wycena cenami Sonnet 4.6 / Haiku 4.5 / Opus 4.6 i starszych to przybliżenie) jest poprawny."
+  },
+  {
+   "id": "A16",
+   "twierdzenie": "Free $0; Pro $17 (roczny, $200 z góry) / $20 miesięcznie",
+   "url": "https://claude.com/pricing",
+   "status": "POTWIERDZONE",
+   "dowod": "„Pro For everyday work $17 Per month with annual subscription discount ( $200 billed up front). $20 if billed monthly.”",
+   "uwagi": ""
+  },
+  {
+   "id": "A17",
+   "twierdzenie": "Max: „From $100”; Max 5x $100, Max 20x $200",
+   "url": "https://claude.com/pricing + https://support.claude.com/en/articles/11049741-what-is-the-max-plan",
+   "status": "POTWIERDZONE",
+   "dowod": "claude.com: „Max … From $100 Per month … Choose 5x or 20x more usage than Pro”; support: „Max 5x : $100 per month Max 20x : $200 per month”",
+   "uwagi": "Support dodaje: „These prices are for web subscriptions only. Mobile pricing may vary”."
+  },
+  {
+   "id": "A18",
+   "twierdzenie": "„Both options are billed monthly.” (przypisane artykułowi support)",
+   "url": "https://claude.com/pricing",
+   "status": "POTWIERDZONE",
+   "dowod": "Cytat występuje na claude.com/pricing (FAQ o Max), NIE w artykule support; support mówi to samo innymi słowami: „The Max plan is currently available as a monthly subscription only.”",
+   "uwagi": "Treść potwierdzona, atrybucja źródła w raporcie nieścisła."
+  },
+  {
+   "id": "A19",
+   "twierdzenie": "Team standard $20/$25, premium $100/$125; Enterprise US$20/seat/month + usage at API rates",
+   "url": "https://claude.com/pricing",
+   "status": "POTWIERDZONE",
+   "dowod": "„$20 Per seat / month if billed annually. $25 if billed monthly.” „$100 Per seat / month if billed annually. $125 if billed monthly.” „Seat price + usage at API rates US$20/seat/month, billed annually.”",
+   "uwagi": ""
+  },
+  {
+   "id": "A20",
+   "twierdzenie": "Ceny bez podatku; Claude Code w planach płatnych; limity: okna 5 h + tygodniowe",
+   "url": "https://claude.com/pricing",
+   "status": "POTWIERDZONE",
+   "dowod": "„Prices shown don’t include applicable tax.” „Claude Code is included in all paid plans. It shares the same usage limits …” „usage limits that reset on a rolling five-hour session window, and paid plans add weekly limits on top”",
+   "uwagi": "Wniosek raportu, że nie da się przeliczyć tokenów na „zużycie planu” ani ustalić, czy sesja była rozliczana w planie czy per token — słuszny."
+  }
+ ],
+ "transkrypty_kontrola": {
+  "czas_kontroli_utc": "2026-09-25T09:01:07.838734Z",
+  "wynik": {
+   "czas_utc": "2026-09-25T09:01:07.838734Z",
+   "main": {
+    "lines": 1376,
+    "unique_ids": 779,
+    "models": {
+     "claude-opus-5-5": 1376
+    },
+    "speed": {
+     "standard": 1376
+    },
+    "service_tier": {
+     "standard": 1376
+    },
+    "inference_geo": {
+     "not_available": 1376
+    },
+    "web_search_sum": 0,
+    "ids_with_multiple_lines": 413,
+    "dup_lines_usage_identical": 597,
+    "dup_lines_usage_different": 0
+   },
+   "subagents_files": 99,
+   "subagents": {
+    "lines": 16364,
+    "unique_ids": 8627,
+    "models": {
+     "claude-opus-5-5": 16364
+    },
+    "speed": {
+     "None": 13824,
+     "standard": 2540
+    },
+    "service_tier": {
+     "standard": 16364
+    },
+    "inference_geo": {
+     "not_available": 16364
+    },
+    "web_search_sum": 0,
+    "ids_with_multiple_lines": 6536,
+    "dup_lines_usage_identical": 5745,
+    "dup_lines_usage_different": 1992
+   }
+  },
+  "ocena": {
+   "liczby_z_raportu_08:41-08:43Z": "NIE DA SIĘ ODTWORZYĆ DOKŁADNIE — transkrypty rosną. Kontrola o 09:01Z: plik główny 1376 linii z modelem / 779 unikalnych message.id (raport: 1359 / 768); subagenty 99 plików .jsonl, 16364 linii / 8627 id (raport: 96 plików, 16046 linii / 8468 id). Wzrost monotoniczny, więc zgodne z migawką. Różnica grep 16028 vs parsowanie 16046 w raporcie wynika najpewniej z innego momentu pomiaru (niesprawdzalne).",
+   "model": "POTWIERDZONE: 100% linii ma message.model = claude-opus-5-5 (brak Sonnet/Haiku/Fable).",
+   "speed_tier_geo_websearch": "POTWIERDZONE: speed = 'standard' albo brak pola; service_tier = 'standard'; inference_geo = 'not_available'; suma web_search_requests (max na id) = 0.",
+   "deduplikacja": "POTWIERDZONE empirycznie i istotne: w subagentach 6536 id ma >1 linię; w 1992 powtórzonych liniach usage się RÓŻNI i różni się wyłącznie output_tokens (strumieniowanie). Reguła 'pierwsza linia' zaniżyłaby output; poprawna reguła: max każdego pola usage na message.id. Dodatkowo 1 message.id występuje w 2 różnych plikach subagentów — deduplikacja musi być globalna (nie per plik).",
+   "skrypt": "weryf/sprawdz_modele.py"
+  }
+ },
+ "wrazliwosc_kosztu_API": {
+  "input_tokens": 19284,
+  "output_tokens": 3975517,
+  "cache_read_input_tokens": 2933835212,
+  "cache_creation_input_tokens": 51828839,
+  "e5": 50081732,
+  "e1": 1747107,
+  "unique_ids": 9523,
+  "e5+e1_vs_cache_creation": 0,
+  "koszt_USD_split_5m_1h": 930.74,
+  "koszt_USD_gdyby_wszystkie_zapisy_po_5_USD": 925.5,
+  "koszt_USD_gdyby_odczyt_0.1x_(0.40)": 1517.51,
+  "udzial_skladnikow_split": {
+   "input": 0.0001,
+   "output": 0.0854,
+   "w5": 0.269,
+   "w1": 0.015,
+   "read": 0.6304
+  },
+  "czas_utc": "2026-09-25T09:10:05.531759Z",
+  "opis": "Kontrolne przeliczenie (09:10Z, dedup: max każdego pola na message.id, globalnie) cenami Opus 5.5. NIE jest to wynik końcowy statystyk — służy tylko ocenie wrażliwości. Odczyty cache ≈ 63% kosztu: gdyby przyjąć standardowe 0,1x zamiast 0,05x, koszt wzrósłby o ok. 63%. Rozbicie zapisów 5 min / 1 h zmienia wynik o ok. 0,6%."
+ },
+ "koszt_ludzi": [
+  {
+   "id": "O1",
+   "twierdzenie": "Rozporządzenie MRiT 2021 poz. 2458: W% III 5,45/5,00, IV 7,55/6,90 (Kb 1/2 mln); fazy PK 7–15, PB 30–45, PW 40–60%; §10 ust. 5 wyłącza mapę i geologię; od 1.01.2022; interpolacja liniowa",
+   "url": "https://api.sejm.gov.pl/eli/acts/DU/2021/2458/text.pdf",
+   "status": "POTWIERDZONE",
+   "dowod": "Tab. 1: „1000 3,00 4,20 5,45 7,55”, „2000 2,80 3,90 5,00 6,90 8,65”; §10 ust. 6 pkt 1–3; ust. 5 pkt 1–2; §12 „wchodzi w życie z dniem 1 stycznia 2022 r.”; zał. ust. 3 „stosuje się interpolację liniową”; tab. 2: jednorodzinne z garażami • III ▄ IV ▄ V; z indywidualnymi wymaganiami • IV ▄ V ▄ VI",
+   "porownywalnosc": "Zakres W% = PK + PB + PW (pełny projekt wykonawczy). Porównywany zakres (PZT+PAB+PT) jest węższy niż pełne PW — patrz ocena_widelek."
+  },
+  {
+   "id": "O2",
+   "twierdzenie": "GUS SWZ X 2024: sekcja M 12 145,66 zł / 65,75 zł/h; 216: 8 808,89 / 47,74; 214: 10 918,02 / 58,61; 215: 12 819,97 / 68,57; Polska 8 944,79; publ. 10.02.2026",
+   "url": "https://stat.gov.pl/download/…/tablice_struktura_wynagrodzen_wedlug_zawodow_za_pazdziernik_2024_v01.xlsx",
+   "status": "POTWIERDZONE",
+   "dowod": "openpyxl: tabl.2 „Działalność profesjonalna, naukowa i techniczna (M) a 12145.66”, tabl.3 „… 65.75”, tabl.5 „216 Architekci, geodeci i projektanci a 8808.89”, „214 … 10918.02”, „215 … 12819.97”, „OGÓŁEM a 8944.79”; tabl.6 „216 … 47.74”, „214 … 58.61”, „215 … 68.57”. Strona GUS: „Data publikacji: 10.02.2026”.",
+   "porownywalnosc": "Brutto etatowe, bez narzutów i marży. Dział PKD 71 nie występuje w tablicach (sprawdzone) — potwierdzone."
+  },
+  {
+   "id": "O3",
+   "twierdzenie": "GUS ZiW 2024: sekcja M 11 213,57 zł (109,5 r/r); 1 742 h/rok; tylko firmy ≥10 pracujących",
+   "url": "https://stat.gov.pl/download/…/tablice_informacja_statystyczna_zatrudnienie_i_wynagrodzenia_w_gospodarce_narodowej_w_2024_r.xlsx",
+   "status": "POTWIERDZONE",
+   "dowod": "tabl.11 „Działalność profesjonalna, naukowa i techniczna | 11213.57 | 109.5” (kolumna 2023=100); tabl.7 „Czas przepracowany na 1 zatrudnionego … 01-12 1742”; przypis: „Dane dotyczą podmiotów … o liczbie pracujących 10 i więcej osób”",
+   "porownywalnosc": "1742/12 = 145,2 h/mies. — poprawne."
+  },
+  {
+   "id": "O4",
+   "twierdzenie": "Wielkopolskie 1.04–30.09.2025: 6 207 zł/m² (bez Poznania), Poznań 9 870 zł/m²",
+   "url": "https://frigg.com.pl/pl/blog/59-nowa-wartosc-odtworzeniowa",
+   "status": "POTWIERDZONE",
+   "dowod": "„… w okresie od 1 kwietnia 2025 r. do 30 września 2025 r. wynosi dla województwa wielkopolskiego, z wyłączeniem m. Poznania - 6207 zł dla miasta Poznania - 9870 zł”",
+   "porownywalnosc": "Źródło wtórne. Numer „Dz.Urz. 2025 poz. 2948” podany w ludzie.json NIE występuje na stronie frigg (niesprawdzalny). Serwisy poznan.uw.gov.pl / edziennik.poznan.uw.gov.pl nadal nieosiągalne (curl: brak połączenia, 09:05Z) — wartości na 2026 nie ustalono. Wskaźnik z 2025 H1 jest nieaktualny wobec wartości 2026 sąsiednich województw (6 685–7 829 zł/m²)."
+  },
+  {
+   "id": "O5",
+   "twierdzenie": "1.04–30.09.2026: kuj.-pom. 6 685; zach.-pom. 7 718 (Szczecin 8 723); maz. 7 828,57 (Warszawa 12 149,38) zł/m²",
+   "url": "bip.bydgoszcz.uw.gov.pl/4010/…; e-dziennik.szczecin.uw.gov.pl/eli/POL_WOJ_ZP/2026/1291/ogl/pol/pdf; www.gov.pl/attachment/c2388c48-…",
+   "status": "POTWIERDZONE",
+   "dowod": "kuj.-pom.: „w wysokości 6.685,00 zł” (Bydgoszcz 7.759,00; Toruń 7.774,00); zach.-pom.: „– 7 718 zł … Szczecin – 8 723 zł”; maz.: „– 7 828,57 zł; 2) dla m. st. Warszawy – 12 149,38 zł”",
+   "porownywalnosc": "Wskaźnik ustawowy (prawo lokatorskie), nie kosztorys domu — raport to zaznacza."
+  },
+  {
+   "id": "B1",
+   "twierdzenie": "ZWPP SARP (uchwała nr 70 z 5.04.2014): tabela W% jak O1; podział PB: koord. 10, arch. 50, konstr. 15, sanit. 10, elektr. 5%; nadzór autorski ≥15%; wyłączenie makiet i opracowań graficznych; stawki 2014: 75–600 zł/h",
+   "url": "https://www.sarp.pl/pliki/1_539ec5f989836-zwpp_sarp.pdf",
+   "status": "POTWIERDZONE",
+   "dowod": "„PB 10 50 15 10 5 5 2 3”; „stanowi (dodatkowo) nie mniej niż 15% ceny projektu”; „makiet i specjalnych opracowań graficznych”; „Cenę projektu przyjmuje się w przedziale … dla danej kategorii zadania oraz … kategorii wyższej”; „Cena projektu wyliczona wg ZWPP SARP nie obejmuje podatku VAT.”",
+   "porownywalnosc": "ZASTRZEŻENIE: zakres stawek w dokumencie to 50–600 zł/h (kreślarz/techniczny 50–200; asystent 75–300; szef projektu 100–400; szef biura 150–600) i są to stawki MINIMALNE „wg cen 2014 r.”. „75–600” w raporcie pomija kategorię 50–200."
+  },
+  {
+   "id": "B2",
+   "twierdzenie": "IARP: brak liczb; prawo konkurencji zabrania wiążących cenników",
+   "url": "https://www.izbaarchitektow.pl/kategoria/jak-wycenic-projekt,349/",
+   "status": "POTWIERDZONE",
+   "dowod": "„… z ustawy z dnia 16 lutego 2007 r. o ochronie konkurencji i konsumentów, IARP jako samorząd zawodowy nie może wprowadzić wiążącego cennika prac projektowych.”",
+   "porownywalnosc": "Strona wymienia też ZWPP SARP 2014 i ŚZWPP IPB 2016 — zgodnie z raportem."
+  },
+  {
+   "id": "B3",
+   "twierdzenie": "IPB j.n.p.: 28,70 (2024), 30,80 (2025), 33,30 (2026) zł netto",
+   "url": "https://ipb.org.pl/wp-content/uploads/Stawka_za_jnp_na_rok_202{4r_ok,5r,6r}.pdf",
+   "status": "POTWIERDZONE",
+   "dowod": "„S = 28,70 zł”; „S = 30,80 zł”; „S = 33,30 zł. W stawce tej nie jest uwzględniony podatek VAT”",
+   "porownywalnosc": "Raport słusznie tą metodą nie liczy (tabele j.n.p. w płatnym wydaniu)."
+  },
+  {
+   "id": "B4",
+   "twierdzenie": "PIIB 2024/2025: projektanci kubaturowi 9 698,98 zł, sanitarni 9 014,20 zł netto (na rękę); n=3306",
+   "url": "https://www.piib.org.pl/images/stories/aktualnosci/2026-02/PIIB_raport_wynagrodzenia.pdf",
+   "status": "POTWIERDZONE",
+   "dowod": "Tab. 7 „Średnie wynagrodzenie w roku 2025 [zł netto] 9698,98 … 9014,20 … 10 683,98”; „PK – projektanci kubaturowi … PS – projektanci sanitarni”; „wzięło udział 3306 inżynierów”; „netto … średnia arytmetyczna z przelewów”",
+   "porownywalnosc": "Nagłówki w środku raportu: „Wynagrodzenia inżynierów budownictwa w Polsce 2023–2025”; okładka: „2024/2025”. Próba projektantów kubaturowych n=343."
+  },
+  {
+   "id": "B5",
+   "twierdzenie": "Architektura & Biznes (K. Nieradka): 414–440 h na dom 140–360 m² (koncepcja 98–131, PB 98–126, PW 190–223)",
+   "url": "https://www.architekturaibiznes.pl/biznes-architekta-karol-nieradka,43286.html",
+   "status": "NIEDOSTĘPNE",
+   "dowod": "curl i WebFetch: HTTP 403 (Cloudflare „Just a moment…”). Wynik WebSearch (09:07Z) streszcza: koncepcje 98–131 h, PB 98–126 h, wykonawcze 190–223 h, 4 domy 140–360 m²; inny wynik wspomina 107,40 zł/h netto. Sumy 414–440 h NIE znalazłem w żadnym wyniku.",
+   "porownywalnosc": "Dane nie do zweryfikowania u źródła; zakresy faz dają sumę 386–480 h, więc 414–440 jest arytmetycznie możliwe (sumy per dom), ale niepotwierdzone. Nie wiadomo, czy to godziny tylko architektów."
+  },
+  {
+   "id": "R1",
+   "twierdzenie": "muratordom 13.06.2025: 90–160 zł/m²; koncepcja 20–70 brutto; PAB 50–140 brutto; PT 100–200 zł/m²; gotowy 3–6 tys.; adaptacja 5–10 tys.",
+   "url": "https://muratordom.pl/prawo/finanse/ile-zaplacisz-za-projekt-domu-jednorodzinnego-w-2025-…-aa-nzBw-bGPn-1MP7.html",
+   "status": "POTWIERDZONE",
+   "dowod": "„od 90 do 160 zł za m²”; „między 20 a 70 zł brutto za m²”; „od 50 do 140 zł brutto za metr kwadratowy”; „od 100 do 200 zł za m²” (PT wielobranżowy); „3 000–6 000 zł”; „od 5 000 zł do 10 000 zł”; data „2025-06-13”",
+   "porownywalnosc": "Strona podaje też „od 3 do 8% całkowitego budżetu budowy” i że renomowane pracownie mogą być „nawet dwukrotnie” droższe."
+  },
+  {
+   "id": "R2",
+   "twierdzenie": "Disinn (akt. 22.10.2025): 130–190 zł/m² netto; PZT+PAB+PT; instalacje i PV dopłacane osobno",
+   "url": "https://www.disinn.pl/post/ile-kosztuje-indywidualny-projekt-domu",
+   "status": "POTWIERDZONE",
+   "dowod": "„koszt w naszej pracowni za indywidualny projekt domu w 2026 roku oscyluje w kwocie 130 - 190 zł netto za 1 m2 projektowanej podłogi”; „Zaktualizowano: 22 paź 2025”",
+   "porownywalnosc": "ZASTRZEŻENIE: stawka liczona od powierzchni PODŁOGI (nie PU). Jako płatne dodatki strona wymienia przyłącza, wnętrza, klimatyzację, kosztorys, PV, inteligentny dom — nie „instalacje” ogólnie (PT obejmuje instalacje wewnętrzne w zakresie wymaganym prawem). Od powierzchni netto 299,86 m²: 38 982–56 973 zł netto (raport: 31–45 tys. od PU)."
+  },
+  {
+   "id": "R3",
+   "twierdzenie": "Jura Projekt 25.10.2024: 80–150 zł/m² netto; 10–50 tys. zł",
+   "url": "https://juraprojekt.pl/nowosci/ile-kosztuje-projekt-domu/",
+   "status": "POTWIERDZONE",
+   "dowod": "„od około 80 do 150 zł netto za m²”; „zaczynają się od ok. 10 000 zł i mogą sięgać nawet 50 000 zł lub więcej”; „2024-10-25”",
+   "porownywalnosc": "Ta sama strona podaje też „100-150 zł za m²” dla większości inwestorów."
+  },
+  {
+   "id": "R4",
+   "twierdzenie": "Energetyczny Projekt 22.10.2024: 100–300 zł/m²; koncepcja 2–6 tyg., PB 4–10 tyg., PT do ok. 3 mies.",
+   "url": "https://domy.energetycznyprojekt.pl/projekt-domu-u-architekta-koszt/",
+   "status": "POTWIERDZONE",
+   "dowod": "„od 100 do 300 zł za jeden metr kwadratowy projektowanej przestrzeni podłóg”; „od 2 do 6 tygodni”; „od 4 do 10 tygodni”; „projekt wykonawczy trwa od kilku tygodni do ok. 3 miesięcy”; „22 października, 2024”",
+   "porownywalnosc": "Źródło mówi o projekcie WYKONAWCZYM, raport przypisuje czas do PT — przybliżenie. Stawka od powierzchni podłóg. Firma GW (projekt „za 1 zł” przy budowie) — raport słusznie flaguje konflikt interesów."
+  },
+  {
+   "id": "R5",
+   "twierdzenie": "Archeton 17.08.2026: 60–250 zł/m²",
+   "url": "https://archeton.pl/blog/ile-kosztuje-stworzenie-projektu-domu-n25",
+   "status": "POTWIERDZONE",
+   "dowod": "„Opublikowany: 17–08–2026” „w 2026 roku wydatek rzędu od 60 do 250 zł za każdy metr kwadratowy”",
+   "porownywalnosc": "Strona podaje też: „realnie od 5% do 20%” wartości budowy, „SARP … od 3 do 8%”."
+  },
+  {
+   "id": "R6",
+   "twierdzenie": "Rankomat 11.06.2026: 150–300 zł/m²; indywidualny 3–9 mies.; mapa 1 200, geotechnika 1 800 zł (przykład)",
+   "url": "https://rankomat.pl/nieruchomosci/ile-kosztuje-projekt-domu",
+   "status": "POTWIERDZONE",
+   "dowod": "„od 150 do 300 zł za każdy metr kwadratowy powierzchni użytkowej”; tabela „3-9 miesięcy”; „mapa do celów projektowych (1 200 zł) i badania geotechniczne (1 800 zł)”; „11.06.2026”",
+   "porownywalnosc": "Ta sama strona podaje też szerzej „100–400 zł/mkw.” i „2–8% kosztów budowy”."
+  },
+  {
+   "id": "R7",
+   "twierdzenie": "BIAMS: 280–320 zł/m² brutto dla 180–270 m², z konstrukcją, instalacjami i PT; netto ok. 54–62 tys. zł",
+   "url": "https://biams.pl/cennik/",
+   "status": "POTWIERDZONE",
+   "dowod": "„Cena brutto za m2 powierzchni podłogi obiektu: 1 180 – 270 m 2 280 – 320 zł za m 2”; „PT – pełny techniczny – konstrukcja + wszystkie instalacje wewnętrzne”; „PK – pełna koncepcja z wizualizacjami”; „wszystkie ceny brutto z VAT 8-23%”",
+   "porownywalnosc": "ZASTRZEŻENIA do przeliczenia 54–62 tys.: (1) baza to powierzchnia PODŁOGI, nie PU — dla netto 299,86 m² brutto = 83 961–95 955 zł; (2) strona podaje VAT 8–23%, nie 23%: netto 68 261–78 012 (VAT 23%) albo 77 741–88 847 (VAT 8%). (3) Pakiet obejmuje koncepcję z wizualizacjami i część PW — to najbliższy zakresowo punkt odniesienia i przesuwa „rynek” w górę względem raportu."
+  },
+  {
+   "id": "R8",
+   "twierdzenie": "Projekty Format 2025: arch.+konstr. 16 000 zł + 60 zł/m² ponad 200 m² → 18 350 zł netto; konstrukcja 35 zł/m²",
+   "url": "https://www.projekty-format.com.pl/cennik.pdf",
+   "status": "POTWIERDZONE",
+   "dowod": "„od 200 m2 do 300 m2 16000 zł + 60 zł za 1 m2 p.u. powyzej 200 m2” w sekcji „( ceny netto )”; „Projekt konstrukcyjny budynku mieszkalnego … - pełny 35 zł/m2 p.u.”; metadane PDF: Title 'cennik_format_2025.xlsx'. 16000+60×39,16 = 18 349,60.",
+   "porownywalnosc": "Cennik nie mówi, czy cena obejmuje PT; bez instalacji."
+  },
+  {
+   "id": "R9",
+   "twierdzenie": "Biuro Projektów Konstrukcji: 25,70 zł/m² (PB+PT konstrukcji); nie podano, czy netto",
+   "url": "https://biuroprojektowkonstrukcji.pl/cennik-uslug-projektowych/",
+   "status": "POTWIERDZONE",
+   "dowod": "„25,70 zł / m2 p.w. – projekt budowlany i techniczny”; „Podano ceny brutto (bez VAT).”",
+   "porownywalnosc": "Wartość potwierdzona; uwaga raportu „nie podano, czy netto” jest nieścisła — strona pisze wewnętrznie sprzecznie „brutto (bez VAT)”, co wskazuje na kwotę bez VAT. Baza: powierzchnia wewnętrzna × współczynnik (~1,0–1,05)."
+  },
+  {
+   "id": "R10",
+   "twierdzenie": "DraftSanit: pakiet 180–250 m² z PC i rekuperacją 14 500 zł netto; charakterystyka energetyczna od 900 zł",
+   "url": "https://draftsanit.pl/cennik-uslug-projektowych/",
+   "status": "POTWIERDZONE",
+   "dowod": "„Pakiet MAXI Domy 180-250 m² … 14 500 /zł netto + 23% vat”; „Charakterystyka do projektu (PB) (od 900 zł)”",
+   "porownywalnosc": "Przypis strony: „Pełny zakres instalacji dla budynków bez poddasza użytkowego”."
+  },
+  {
+   "id": "R11",
+   "twierdzenie": "instalacje-ele.pl (15.06.2026): projekt elektryczny 1 500–4 500 zł netto; 30–45 h dla 150 m²",
+   "url": "https://instalacje-ele.pl/ile-kosztuje-projekt-instalacji-elektrycznej",
+   "status": "POTWIERDZONE",
+   "dowod": "„Aktualizacja: 15 czerwca 2026 r.” „od 1 500 do 4 500 zł netto”; „w domu 150 m² rośnie do 30-45 godzin”; „Stawka godzinowa doświadczonego specjalisty waha się od 80 do 150 zł”",
+   "porownywalnosc": "Brak ceny projektu PV — potwierdzone."
+  },
+  {
+   "id": "R12",
+   "twierdzenie": "Rooven 2026: od 520–630 zł netto za ujęcie; model 3D osobno; 5–10 dni roboczych",
+   "url": "https://rooven.pl/cennik-wizualizacji-3d/",
+   "status": "POTWIERDZONE",
+   "dowod": "„od 520 zł netto za ujęcie w pakiecie 5 sztuk …, od 630 zł/szt. netto w pakiecie 3 sztuk (plus koszt wykonania bryły 3D)”; „od 5 do 10 dni roboczych”",
+   "porownywalnosc": "Koszt bryły 3D nieujawniony — dolna granica raportu (2 600 zł za 5 ujęć) go nie zawiera."
+  },
+  {
+   "id": "R13",
+   "twierdzenie": "KC Mobile (13.09.2026): landing page 2 260–4 500 zł netto; „w tytule 999–15 000 zł”",
+   "url": "https://kcmobile.pl/baza-wiedzy/marketing/ile-kosztuje-landing-page-cennik/",
+   "status": "POTWIERDZONE",
+   "dowod": "„od 2 260 zł netto w Smart Agency lub 2 500–4 500 zł netto w Kredo Labs”; „Publikacja: 18 maja 2026 Aktualizacja: 13 września 2026”",
+   "porownywalnosc": "CZĘŚĆ NIEPOTWIERDZONA: obecny <title> to „Ile kosztuje landing page? Zakres, wycena i utrzymanie” — zakresu 999–15 000 zł na stronie nie ma (jedyne „999” to minPrice 2999 w danych strukturalnych). Strona zastrzega, że to przykłady ofert, nie średnia rynkowa."
+  },
+  {
+   "id": "R14",
+   "twierdzenie": "Ciemińscy (8.08.2026): koncepcja 2–8 tyg.; PB z koordynacją 4–12 tyg.; do PnB 4–8 mies.; urząd do 65 dni",
+   "url": "https://www.cieminscy.pl/poradnik/ile-trwa-projekt-domu.html",
+   "status": "POTWIERDZONE",
+   "dowod": "„2–8 tygodni na koncepcję, 4–12 tygodni na dokumentację i koordynację branż oraz do 65 dni na decyzję urzędu”; „około 4–8 miesięcy”; „23 lipca 2026”; „Stan informacji i cen: 8 sierpnia 2026”",
+   "porownywalnosc": "Data publikacji 23.07.2026, 8.08.2026 to data stanu informacji. Nie obejmuje PT."
+  },
+  {
+   "id": "R15",
+   "twierdzenie": "Murator Projekty 13.06.2024: koncepcja 2–6 tyg.; całość 1–2 mies.",
+   "url": "https://projekty.muratordom.pl/etap-2-wybieram-projekt-domu/ile-trwa-stworzenie-indywidualnego-projektu-domu-aa-2VuT-WpPj-zUf8.html",
+   "status": "POTWIERDZONE",
+   "dowod": "„od dwóch do sześciu tygodni”; „około 1-2 miesiące”; „1 - 3 tygodni” (poprawki); „2024-06-13”",
+   "porownywalnosc": "Dotyczy dokumentacji do pozwolenia (bez PT) — raport słusznie oznacza jako optymistyczne."
+  },
+  {
+   "id": "R16",
+   "twierdzenie": "eyecad 15.01.2026: 150–350 zł/m² netto; 4–8% kosztu budowy",
+   "url": "https://eyecad.pl/kariera-i-biznes-inzyniera/wycena-projektu-architektonicznego-jak-kalkulowac-stawki/",
+   "status": "POTWIERDZONE",
+   "dowod": "„typowe widełki to 150–350 zł/m² netto”; „4–8% dla typowych inwestycji, a przy obiektach bardziej wymagających rośnie do 6–10%”; „15.01.2026”",
+   "porownywalnosc": "Strona przyjmuje koszt budowy 6000–7500 zł/m² netto — wspiera scenariusze Kb raportu, a 8 000 zł/m² leży nieco powyżej tego przedziału."
+  },
+  {
+   "id": "R17",
+   "twierdzenie": "architektbudowlany.pl 17.07.2026: 800–2 500 h dla domu 150 m²; suma etapów 590–970 h się nie zgadza",
+   "url": "https://architektbudowlany.pl/ile-zarabia-architekt-za-jeden-projekt",
+   "status": "POTWIERDZONE",
+   "dowod": "„wymaga od 800 do 2 500 godzin pracy architekta”; etapy: koncepcja 40–80, PB 100–150, PW 300–400, nadzór 100–200, koordynacja 20–60 h na branżę",
+   "porownywalnosc": "Wniosek o niespójności POTWIERDZONY. Dokładnej sumy 590–970 h nie odtworzyłem: 440–630 (bez nadzoru), 540–830 (z nadzorem), 600–1010 (z nadzorem i koordynacją 3 branż). Słusznie nieużyte."
+  },
+  {
+   "id": "R18",
+   "twierdzenie": "extradom (Sekocenbud) 24.08.2026: 6 004 zł/m² (Q2 2026); „nie wiadomo, czy netto”",
+   "url": "https://www.extradom.pl/porady/artykul-koszt-budowy-domu-ile-kosztuje-budowa-domu-jednorodzinnego",
+   "status": "POTWIERDZONE",
+   "dowod": "„Koszt budowy za m 2 (netto) … 6004 zł/m 2”; „dom w technologii murowanej, stan deweloperski”; „QII 2026 6004 zł/m2 3,5%”; „Zaktualizowano: 24.08.2026”",
+   "porownywalnosc": "Uwaga raportu jest NIEAKTUALNA/NIEŚCISŁA: strona wprost podaje NETTO i STAN DEWELOPERSKI. Kb do metody SARP to pełny koszt budowy, więc 6 004 zł/m² (bez wykończenia) zaniża Kb — to dolny scenariusz. Strona jest wewnętrznie niespójna („na początku 2026” vs tabela „QII 2026”)."
+  },
+  {
+   "id": "R19a",
+   "twierdzenie": "Mapa do celów projektowych 1 300–1 800 zł (geodetawozniak, 2026)",
+   "url": "https://www.geodetawozniak.pl/mapa-do-celow-projektowych-ile-kosztuje-2026/",
+   "status": "POTWIERDZONE",
+   "dowod": "<title> „Mapa do celów projektowych – cena 2026: od 1300 do 1800 zł”; treść: „zwykle 1300–1800 zł dla typowej działki pod dom jednorodzinny”; „15 marca 2026”",
+   "porownywalnosc": ""
+  },
+  {
+   "id": "R19b",
+   "twierdzenie": "Geotechnika 1 200–3 500 zł netto (w raporcie: „wynik wyszukiwarki, niezweryfikowane”)",
+   "url": "https://dzialkopedia.pl/poradnik/badania-gruntu-przed-zakupem-dzialki",
+   "status": "POTWIERDZONE",
+   "dowod": "„typowy pakiet to ok. 1 200-3 500 zł netto (+23% VAT) - opinia G1 od ok. 1 200 zł, pakiet G2 z dokumentacją 1 800-3 500 zł”; „Aktualizacja: czerwiec 2026”",
+   "porownywalnosc": "Wartość potwierdzona w INNYM źródle (dzialkopedia.pl) niż wskazane w ludzie.json (geodetawozniak/rankomat — tam tej wartości nie ma; rankomat podaje tylko przykład 1 800 zł)."
+  },
+  {
+   "id": "REPO",
+   "twierdzenie": "PU 239,16 m², kubatura 1 354,45 m³ (raport weryfikacji PAB); brief: dane działki/MPZP/geotechniki fikcyjne",
+   "url": "/home/user/aihouse (tylko odczyt)",
+   "status": "POTWIERDZONE",
+   "dowod": "projekt/09_opis_i_zalaczniki/tom_I/weryfikacja_FAKTY.md: „PAB: PU 239,16 m² (95,36 + 84,38 + 59,42) — … netto (299,86) … Kubatura 1 354,45 m³”; docs/00_brief_projektowy.md: „Przyjęta działka (przykładowa, fikcyjna)”, „opinia geotechniczna — przykładowa”, „Przyjęty MPZP (fikcyjny…)”",
+   "porownywalnosc": "PU 239,16 m² to PU mieszkalna BEZ garażu (37,42 m²) i pomieszczeń technicznych (16,10 m²) — docs/20_koncepcja/audyt_A1.md. Cenniki liczone „od powierzchni podłogi” (BIAMS, Disinn, Energetyczny Projekt) należy stosować do ok. 296–300 m², nie do 239,16 m²."
+  },
+  {
+   "id": "PRAWO",
+   "twierdzenie": "PV >6,5 kW wymaga uzgodnienia z rzeczoznawcą ppoż.; urząd do 65 dni",
+   "url": "WebSearch: gov.pl/web/kontaktoze/mikroinstalacja-fotowoltaiczna-powyzej-65-kw; R14",
+   "status": "POTWIERDZONE",
+   "dowod": "Wyniki gov.pl: projekt PV o mocy >6,5 kW uzgadniany z rzeczoznawcą ds. zabezpieczeń ppoż. (art. 56 ust. 1a Prawa budowlanego); R14: „do 65 dni na decyzję urzędu” (sprawdzone przez autorów w Dz.U.)",
+   "porownywalnosc": "Tekst ustawy nie był otwierany bezpośrednio (tylko strony gov.pl w wynikach wyszukiwania i R14)."
+  }
+ ],
+ "obliczenia_kontrola": {
+  "arytmetyka_raportu": "POTWIERDZONA: niezależne przeliczenie (weryf/przeliczenia.py) daje te same Kb i Cp: 75 441 / 104 343; 77 667 / 107 403; 96 411 / 133 095 zł; 18 349,6 zł (Format); 550–1 100 h = 3,79–7,58 etatomiesiąca; 74 000/150 = 493 h, 133 000/120 = 1 108 h; suma faz czasu 2+4+4 … 8+12+12 = 10–32 tyg.; suma oddolna godzin 572–982 h.",
+  "wrazliwosc": {
+   "SARP_PU_6004": {
+    "Kb": 1435917,
+    "Cp_III": 75441,
+    "Cp_IV": 104343
+   },
+   "SARP_PU_6207": {
+    "Kb": 1484466,
+    "Cp_III": 77667,
+    "Cp_IV": 107403
+   },
+   "SARP_PU_8000": {
+    "Kb": 1913280,
+    "Cp_III": 96411,
+    "Cp_IV": 133095
+   },
+   "SARP_NETTO_6004": {
+    "Kb": 1800359,
+    "W_III": 5.09,
+    "W_IV": 7.03,
+    "Cp_III": 91635,
+    "Cp_IV": 126561
+   },
+   "SARP_NETTO_6207": {
+    "Kb": 1861231,
+    "W_III": 5.062,
+    "W_IV": 6.99,
+    "Cp_III": 94224,
+    "Cp_IV": 130104
+   },
+   "BIAMS_PU": {
+    "brutto": [
+     66965,
+     76531
+    ],
+    "netto_VAT23": [
+     54443,
+     62220
+    ],
+    "netto_VAT8": [
+     62004,
+     70862
+    ]
+   },
+   "BIAMS_netto": {
+    "brutto": [
+     83961,
+     95955
+    ],
+    "netto_VAT23": [
+     68261,
+     78012
+    ],
+    "netto_VAT8": [
+     77741,
+     88847
+    ]
+   },
+   "Disinn_netto_od_pow_podlogi": [
+    38982,
+    56973
+   ],
+   "Format_arch_konstr": 18349.6,
+   "dolna_z_weryfikowalnych": [
+    40110,
+    45350
+   ],
+   "dolna_raportu_skladniki": 30650,
+   "SARP_zakres_bez_pelnego_PW_udzial": [
+    0.5700000000000001,
+    0.8999999999999999
+   ],
+   "godziny": {
+    "550/145.2": 3.79,
+    "1100/145.2": 7.58,
+    "74000/150": 493,
+    "133000/120": 1108
+   },
+   "R17_suma_etapow": {
+    "bez_nadzoru": [
+     440,
+     630
+    ],
+    "z_nadzorem": [
+     540,
+     830
+    ],
+    "z_nadzorem_i_koord_3_branze": [
+     600,
+     1010
+    ]
+   },
+   "czas_suma_faz_tyg": [
+    10,
+    32
+   ]
+  },
+  "uwagi": [
+   "Kb liczone od PU 239,16 m² pomija garaż i pomieszczenia techniczne. Od powierzchni netto 299,86 m² przy 6 004 zł/m²: Kb 1,80 mln, Cp 91 635 (III) – 126 561 (IV) zł. Kierunek: w górę.",
+   "6 004 zł/m² to stan deweloperski (R18) — pełny Kb jest wyższy. Kierunek: w górę.",
+   "Cp wg SARP / rozporządzenia obejmuje PK+PB+PW (100%), a porównywany zakres kończy się na PT. Moje założenie (nie dane ze źródła): PT ≈ połowa PW, czyli zakres ≈ 57–90% Cp. Kierunek: w dół.",
+   "Stawka sprzedażowa 120–150 zł/h, od której zależą roboczogodziny liczone odgórnie, jest założeniem bez źródła. Mieści się w przedziałach ze źródeł: R11 80–150, R17 60–250, SARP 2014 (minima) 50–600 zł/h."
+  ]
+ },
+ "ocena_widelek": {
+  "koszt_30_150_tys_netto": {
+   "dolna_30_tys": "ZANIŻONA dla deklarowanego zakresu. Składnik sanitarny ~4 000 zł pochodzi z niezweryfikowanego wyniku wyszukiwarki, a jedyna zweryfikowana oferta za pełny zakres IS z PC i rekuperacją (R10) to 14 500 zł. Do tego 5 wizualizacji za 2 600 zł nie obejmuje ceny bryły 3D (R12). Z samych zweryfikowanych składników wychodzi 40 110–45 350 zł (+ model 3D, cena nieznana). Uczciwsza dolna granica: ok. 40 tys. zł netto.",
+   "srodek_60_100_tys": "UCZCIWY. BIAMS policzony poprawnie (powierzchnia podłogi ~300 m², VAT 8–23%) daje 68–89 tys. zł netto za pakiet z wizualizacjami; do tego strona 2,3–4,5 tys. Disinn od powierzchni podłogi (39–57 tys.) + DraftSanit 14,5 + elektryka 1,5–4,5 + CE 0,9 + wizualizacje ≥2,6 + strona 2,3–4,5 daje ok. 61–85 tys. Oba ujęcia mieszczą się w 60–100 tys. Stawki „za m²” z artykułów (R1, R3, R5, R6, R16) dają mniej (14–84 tys. od PU), ale zwykle nie obejmują wszystkich branż.",
+   "gorna_150_tys": "Jako granica normatywna (SARP/rozporządzenie) do obrony, jako granica rynkowa ZAWYŻONA. Opiera się na założeniu 8 000 zł/m² (eyecad podaje 6 000–7 500), kategorii IV i pełnym PW, szerszym niż PT. W przeciwną stronę działają Kb od PU bez garażu i koszt w stanie deweloperskim. Żadne z rynkowych źródeł 2024–2026 nie daje więcej niż ok. 96 tys. zł (BIAMS brutto od ~300 m²).",
+   "rekomendacja_weryfikatora": "Zmienić widełki na ok. 40–130 tys. zł netto; najbardziej prawdopodobne 60–95 tys. zł netto. Należy dopisać, że rynek domów jednorodzinnych rzadko osiąga stawki SARP (R5: „SARP … 3–8%” vs rynek; eyecad 4–8%)."
+  },
+  "czas_10_32_tyg": "UCZCIWY. Arytmetyka poprawna i zgodna z R4 (2–6 + 4–10 + do ~13 tyg.), R14 (2–8 + 4–12 tyg. do złożenia wniosku) oraz R6 (3–9 mies. łącznie). Zastrzeżenia: faza PT jest przybliżona czasem „projektu wykonawczego” z R4; „typowo 16–26 tyg.” nie ma źródła (to ocena autora). W kalendarzu inwestora dochodzą oczekiwanie na mapę, warunki przyłączenia i decyzje oraz do 65 dni urzędu — raport to zaznacza.",
+  "roboczogodziny_550_1100": "PRAWDOPODOBNE, ale niepewność jest większa, niż pokazuje raport. (1) Główna liczba oddolna (architektura 414–440 h, B5) jest NIEDOSTĘPNA u źródła (HTTP 403). (2) Wariant odgórny zależy od stawki 120–150 zł/h bez źródła; przy tańszym biurze (np. 40 tys. zł / 100 zł/h) wychodzi ok. 400 h. (3) „Typowo 700–900 h” i „zespół 5–7 osób” to założenia. (4) R17 (800–2 500 h) słusznie odrzucone. Uczciwiej: ok. 400–1 100 h, z wyraźnym oznaczeniem, że to szacunek.",
+  "porownywalnosc_zakresu_ogolna": "Porównanie zakłada, że biuro dostarcza to samo co sesja. Biuro dostarcza jednak dokumentację kompletną, podpisaną, na realnych danych i z odpowiedzialnością zawodową. Repozytorium ma pliki BRAKI_DANYCH.md w projekt/02_PZT, 04_PT_konstrukcja, 05_PT_instalacje_sanitarne i 06_PT_instalacje_elektryczne z pozycjami [DO UZUPEŁNIENIA] (np. trasy instalacji wyznaczone algorytmicznie, brak danych wyrobów, geotechnika przykładowa), a działka, MPZP i geotechnika są fikcyjne. Koszt biura to więc koszt pełnego odpowiednika zawodowego, a nie wycena tego, co faktycznie powstało."
+ },
+ "sha256_kopii": {
+  "pricing_live.md": "cd36fcc6d6d9e17ac2a8643a3f769e42ec6cf33a8becdbfd98bc3ba8832f1aee",
+  "models_live.md": "404372e69b13defcb4598bb8a8cfbc359c0c31384d809daf53d75c3ca9316bc3",
+  "claude_com_live.html": "b0c8bf88ee613287f162a3578826d148638cb1adf3fb411b00befc9ca5645adb",
+  "support_max_live.html": "57b1e0dc477ec24dacaeec8a28898a273942eff730830872ae562e8eca3cfc27",
+  "ext_thinking.md": "81722c9296c0204a8925ced7ff68321331ba43ceb9e5276c07ebd2e22e6ec2d1",
+  "thinking_cost.md": "77a3c015084155915ce820e8811f9d349f12914bda2706f4d9d3de7b4308af2e",
+  "src/B1.bin": "e859487f7e36e7cb0f11ca0ed16fd5becc03b2a26e98d3e8235d745f49bf5ec7",
+  "src/B2.bin": "a003aa13a42f3e644273f1be5742110beaf5e4f69040f6f91c80b4db86e67710",
+  "src/B3a.bin": "d6de7f380ba534e24dfa5b2d3193e8e1a477f16eb36d51ad5d4f03319bc26778",
+  "src/B3b.bin": "913c1a65568c48648bb7ad496ffc5b677877db3e0ec17f9fed30e14b358a7883",
+  "src/B3c.bin": "5c88e6ff934723a98a531d0c503ef0bd19d94bcf45e165b51873d3a272caa7ba",
+  "src/B4.bin": "b0811b416e5e0f0df21bc3e37a28d155b0005dd6e740cfd203cee766a9b871a8",
+  "src/B5.bin": "2fb2cffeb50a75083cc31ccf83a8ccb76f75667924edb550898f4d018411bc97",
+  "src/O1.bin": "9e6d5db9548cfae31210b7cb42e633b3c94f3ba7300ea1fd98e40ffc8d1359cc",
+  "src/O2.bin": "c7e61cda77c4d70f532f2f2b9676313c91555513a2f2248b343a9f2a6441f736",
+  "src/O3.bin": "d260fbf72d50d195a1b1d197cb7022c4640af8144c5b04fee3d4e8514a3e9991",
+  "src/O4.bin": "3cb854e59345b18df20fcd127ade18f187c8fbb12f582c83812e7bedacac9c63",
+  "src/O5a.bin": "2b621010233ee9066163008fab54069cf0938962262f910e065da278665902cf",
+  "src/O5b.bin": "0ac4f3c4f8f3eefd65ad8e895ca0064eb73a9ff8eac6aaf12881adb54ed195d2",
+  "src/O5c.bin": "2725913095a9b548b3bef1702c3c7b3a009981fee4dcfec6acce13025edee940",
+  "src/R1.bin": "04a1b2ea46bf419a384ee98bbb255bc2d4adb6d2e4c3979306f36f949349433d",
+  "src/R10.bin": "d7dfed954155c805e5129154ff717c903f61ba0cea277c220849d3b6c967ea43",
+  "src/R11.bin": "88e7c3cee3954ec71b076258854e8c142626475cc55fcbf1b4d5295f827d2102",
+  "src/R12.bin": "ea4c1df5840de940c9c741d6c696f74dafcf7d72ab922e69e7715b39a03963a1",
+  "src/R13.bin": "a9e4b9a8670a552db34bf703df740cc334a865458ac9435beeee807adb3937fe",
+  "src/R14.bin": "cab47ddb8227ed65610d676c9606716c78cd5e3bbbb127ac0dbeeb0158088d55",
+  "src/R15.bin": "b3e56890fd60017c3d915b823f77c4d65ac80f5f6156302bf50d95987d8992d3",
+  "src/R16.bin": "e362d768fba311565e5f138931fb3fefb856a5fdd49a8e266a86f52dcb0a0fe0",
+  "src/R17.bin": "6ebee7fc4476c3d822c1eaf237d904dc28eb09dd2bd45586960c9905060ec233",
+  "src/R18.bin": "2480b360d32232f44150c10d5b7f4b18f8df4bbbfa667973b6d7c122ecc9870f",
+  "src/R19.bin": "8354e6dc1ebb36ef4e597659ab71cf6bb6bcf42b855ebb839efcdbb8d6ea689b",
+  "src/R19b.bin": "9b0351d28b819fb955291d3d22d69a49f64e636d17ccff90ab52db98846b58ff",
+  "src/R2.bin": "6e4d65b927a5605fa0c804e01d5cc0dc6bc39d531798fe78055808590707b5c1",
+  "src/R3.bin": "0545384657d1ac4cc14ab6b450e7b5754577aa20eb85de778ac22cf1f85226ad",
+  "src/R4.bin": "bf90b6aed8ab2c30b4cfd7916c163d679ecc6cd2a7c3f5cdfdbd856dc0036b4e",
+  "src/R5.bin": "2cbe67c0e113deeedb5c2aed1188fba25da3691e96f2fb98be63d3be27cc1e04",
+  "src/R6.bin": "4c66a59e27bf7a8d4215d9b7c15a419fbc8e460ada5543abaf079212f7a9a271",
+  "src/R7.bin": "394530adfac15c96701d776ded5ffa0ed9aa6141ebddeaa69e9732d9c779067b",
+  "src/R8.bin": "197316427227dadb4b4a650e882a0dc08d59aba5b8abdd22d27b6c485ebfa51e",
+  "src/R9.bin": "5d8690c396fbc4456d8cd97851f5be08f8cf711ca901ac9f2cb7ef8e11ebffba",
+  "src/O2page.html": "41abc68f88789689c38e61eb318b0695c96fd30845e43b48f9bb1901978e1ad4",
+  "src/O3page.html": "60677d2b2c450ec400b6350226fdb534eee4eb3722b1f603bf9d9809034348cf"
+ }
+}

@@ -24,7 +24,7 @@ Metoda wyznaczania bloków treści (z rzeczywistej zawartości PDF, PyMuPDF):
 4. W (obwiednie) = pole sumy (bez podwójnego liczenia) prostokątów bloków + tabliczki / pole wewnątrz ramki.
    Dodatkowo: W_kontur (pole samej domkniętej maski, bez prostokątów), W_skł (jak W obw., ale składowa wklęsła —
    maska < 75 % obwiedni, np. „L” z bloków sklejonych domknięciem — liczona obwiedniami części po domknięciu
-   2 mm; pokazuje puste pola, które W obw. zamyka w jednej obwiedni), największy pusty prostokąt wewnątrz ramki
+   1 mm; pokazuje puste pola, które W obw. zamyka w jednej obwiedni), największy pusty prostokąt wewnątrz ramki
    oraz „arkusz przycięty” — obwiednia całej treści + marginesy 20/10 mm (ile papieru zostaje przy obecnym
    układzie po odcięciu pustych pasów).
 
@@ -227,9 +227,10 @@ def analyze_pdf(pdf: Path, odstep: float = 6.0, res: float = 1.0) -> dict:
     if tb:
         tb_mask[int(round((tb[1] - fy0) / res)):, int(round((tb[0] - fx0) / res)):] = True
     # W skł. — obwiednie składowych, ale składowa wklęsła (np. „L” z bloków połączonych domknięciem 6 mm, których
-    # obwiednia obejmuje puste pole) — dzielona domknięciem 2 mm na części i liczona obwiedniami części
-    # (odstępy bloków silnika układu ≥ 5 mm; zgłoszenie AR: PB-AR-01 W obw. 93 % przy pustym polu 230×110 mm)
-    k2 = max(1, int(round(2.0 / res)))
+    # obwiednia obejmuje puste pole) — dzielona domknięciem 1 mm na części i liczona obwiedniami części
+    # (odstępy bloków silnika układu ≥ 5 mm, na siatce 1 mm ≥ 4 komórki; zgłoszenie AR: PB-AR-01 W obw. 93 % przy
+    # pustym polu 230×110 mm)
+    k2 = max(1, int(round(1.0 / res)))
     st2 = np.ones((2 * k2 + 1, 2 * k2 + 1), bool)
     closed2 = ndimage.binary_fill_holes(
         ndimage.binary_erosion(ndimage.binary_dilation(occ, structure=st2), structure=st2, border_value=1) | occ)

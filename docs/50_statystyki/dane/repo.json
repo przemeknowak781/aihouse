@@ -1,0 +1,1248 @@
+{
+ "meta": {
+  "repozytorium": "/home/user/aihouse",
+  "galaz": "claude/single-family-house-project-2pkn7l",
+  "head": "d4716b00d8b0494225070defe683a847c379df2a",
+  "head_czas_utc": "2026-09-25T08:36:03+00:00",
+  "pomiar_utc": "2026-09-25T08:36–08:45Z",
+  "zasada": "wszystkie liczby z przypiętego HEAD (git log/ls-tree/show, git archive do scratchpad/snapshot); drzewo robocze pominięte (inne zespoły je zmieniają)",
+  "skrypty": [
+   "commity.py",
+   "pliki.py",
+   "dokumentacja.py",
+   "rejestr_model.py",
+   "agreguj_repo.py"
+  ],
+  "uwagi": [
+   "gałąź przesunęła się w trakcie pomiaru (po HEAD: 5 kolejnych commitów do 08:42:14Z, w tym 'Raport postępu nr 51' i 5 arkuszy PT-AR); nie są wliczone",
+   "czasy w nazwach raport_*.png to czas lokalny UTC+2 (CEST): różnica względem commita dodającego plik ≈ 119–120 min"
+  ]
+ },
+ "commity": {
+  "head": "d4716b00d8b0494225070defe683a847c379df2a",
+  "zrodlo": "git log <HEAD> --root --numstat (commiter date, UTC); pliki binarne = numstat '-\\t-' pominięte w sumach linii; rename detection wg domyślnej konfiguracji git",
+  "liczba_commitow": 402,
+  "merge_commity": 0,
+  "pierwszy": {
+   "hash": "9c732b3d71",
+   "czas_utc": "2026-09-24T23:22:16+00:00",
+   "temat": "Etap 0: szkic wejściowy, interpretacja brył, brief projektowy, schemat modelu, narzędzie raportów"
+  },
+  "ostatni": {
+   "hash": "d4716b00d8",
+   "czas_utc": "2026-09-25T08:36:03+00:00",
+   "temat": "Prace robocze zespołów (autocommit)"
+  },
+  "rozpietosc_godz": 9.23,
+  "rozklad_godzinowy_utc": {
+   "2026-09-24 23:00Z": 5,
+   "2026-09-25 00:00Z": 27,
+   "2026-09-25 01:00Z": 34,
+   "2026-09-25 02:00Z": 56,
+   "2026-09-25 03:00Z": 46,
+   "2026-09-25 04:00Z": 46,
+   "2026-09-25 05:00Z": 56,
+   "2026-09-25 06:00Z": 51,
+   "2026-09-25 07:00Z": 44,
+   "2026-09-25 08:00Z": 37
+  },
+  "autocommity": {
+   "temat": "Prace robocze zespołów (autocommit)",
+   "commits": 287,
+   "added": 10567223,
+   "deleted": 7220708,
+   "binary_file_changes": 2034,
+   "text_file_changes": 2392,
+   "pierwszy_utc": "2026-09-25T00:38:19+00:00",
+   "ostatni_utc": "2026-09-25T08:36:03+00:00",
+   "mediana_odstepu_s": 93.0
+  },
+  "inne_prace_robocze": {
+   "tematy": [
+    [
+     "Prace robocze zespołów",
+     29
+    ],
+    [
+     "Prace robocze zespołów (biblioteki obliczeń, dokumenty)",
+     1
+    ],
+    [
+     "Prace robocze zespołów (bieżące)",
+     3
+    ],
+    [
+     "Prace robocze zespołów (instalacje elektryczne: braki danych)",
+     1
+    ],
+    [
+     "Prace robocze zespołów (poprawki, arkusze, opisy)",
+     1
+    ],
+    [
+     "Prace robocze zespołów (tomy, BO, poprawki, raport 40)",
+     1
+    ],
+    [
+     "Prace robocze zespołów: koncepcja, generatory produkcyjne",
+     1
+    ],
+    [
+     "Prace robocze zespołów: poprawki modelu, detale, www",
+     1
+    ],
+    [
+     "Prace robocze zespołów: wydanie, arkusze, tomy",
+     1
+    ]
+   ],
+   "commits": 39,
+   "added": 1128339,
+   "deleted": 37218,
+   "binary_file_changes": 155,
+   "text_file_changes": 121
+  },
+  "commity_nazwane": {
+   "commits": 76,
+   "added": 3767997,
+   "deleted": 542474,
+   "binary_file_changes": 387,
+   "text_file_changes": 592
+  },
+  "razem": {
+   "commits": 402,
+   "added": 15463559,
+   "deleted": 7800400,
+   "binary_file_changes": 2576,
+   "text_file_changes": 3105
+  },
+  "netto_linii": 7663159,
+  "top5_dodane": [
+   {
+    "hash": "51652b731a",
+    "czas_utc": "2026-09-25T05:32:41+00:00",
+    "temat": "Prace robocze zespołów (autocommit)",
+    "added": 1022781,
+    "deleted": 301
+   },
+   {
+    "hash": "62985c0814",
+    "czas_utc": "2026-09-25T06:36:06+00:00",
+    "temat": "Prace robocze zespołów (autocommit)",
+    "added": 791671,
+    "deleted": 128
+   },
+   {
+    "hash": "dac9ac468c",
+    "czas_utc": "2026-09-25T08:31:03+00:00",
+    "temat": "Raport postępu nr 50",
+    "added": 782457,
+    "deleted": 857
+   },
+   {
+    "hash": "bfc5c79104",
+    "czas_utc": "2026-09-25T05:06:00+00:00",
+    "temat": "Prace robocze zespołów (autocommit)",
+    "added": 752305,
+    "deleted": 27
+   },
+   {
+    "hash": "2544247904",
+    "czas_utc": "2026-09-25T08:09:08+00:00",
+    "temat": "Raport postępu nr 48",
+    "added": 751530,
+    "deleted": 29
+   }
+  ],
+  "linie_wg_rozszerzenia": {
+   ".dxf": {
+    "dodane": 13631680,
+    "usuniete": 6637450
+   },
+   ".py": {
+    "dodane": 879896,
+    "usuniete": 789899
+   },
+   ".obj": {
+    "dodane": 660349,
+    "usuniete": 247276
+   },
+   ".json": {
+    "dodane": 130175,
+    "usuniete": 64600
+   },
+   ".html": {
+    "dodane": 78319,
+    "usuniete": 31730
+   },
+   ".md": {
+    "dodane": 69358,
+    "usuniete": 23374
+   },
+   ".yaml": {
+    "dodane": 9672,
+    "usuniete": 5339
+   },
+   ".txt": {
+    "dodane": 1105,
+    "usuniete": 182
+   },
+   ".js": {
+    "dodane": 904,
+    "usuniete": 29
+   },
+   ".mtl": {
+    "dodane": 893,
+    "usuniete": 328
+   },
+   ".j2": {
+    "dodane": 718,
+    "usuniete": 103
+   },
+   ".css": {
+    "dodane": 383,
+    "usuniete": 18
+   },
+   ".127cf271de51": {
+    "dodane": 72,
+    "usuniete": 72
+   },
+   ".sh": {
+    "dodane": 14,
+    "usuniete": 0
+   },
+   "(brak)": {
+    "dodane": 11,
+    "usuniete": 0
+   },
+   ".svg": {
+    "dodane": 10,
+    "usuniete": 0
+   }
+  },
+  "anomalia_tom_PT_AR": {
+   "opis": "commit dac9ac4 ('Raport postępu nr 50', 08:31:03Z) zapisał do tools/dokumenty/tom_PT_AR.py 48 MB powtórzonych fragmentów kodu (782 371 linii); autocommit ddddb92 24 s później przywrócił plik",
+   "wiersze": [
+    {
+     "commit": "ddddb92",
+     "czas": "2026-09-25T08:31:27+00:00",
+     "added": 824,
+     "deleted": 782371
+    },
+    {
+     "commit": "dac9ac4",
+     "czas": "2026-09-25T08:31:03+00:00",
+     "added": 782371,
+     "deleted": 824
+    }
+   ]
+  },
+  "linie_skorygowane": {
+   "bez_anomalii": {
+    "dodane": 14680364,
+    "usuniete": 7017205
+   },
+   "bez_anomalii_dxf_obj": {
+    "dodane": 388335,
+    "usuniete": 132479
+   },
+   "python_bez_anomalii": {
+    "dodane": 96701,
+    "usuniete": 6704
+   },
+   "opis": "DXF (rysunki CAD) i OBJ (siatki 3D) to tekstowe pliki generowane — dominują sumę linii"
+  },
+  "commity_do_2026-09-25T08:30:00Z": 397,
+  "commity_po_08_30Z_do_HEAD": 5
+ },
+ "pliki": {
+  "head": "d4716b00d8b0494225070defe683a847c379df2a",
+  "zrodlo": "git ls-tree -r -l HEAD (rozmiary blobów), git show HEAD:<plik> (treść); pliki nieśledzone pominięte",
+  "liczba_plikow": 1300,
+  "rozmiar_plikow_sledzonych_B": 350451895,
+  "wg_rozszerzen": {
+   ".png": {
+    "pliki": 547,
+    "bajty": 190793171
+   },
+   ".py": {
+    "pliki": 235,
+    "bajty": 5028397
+   },
+   ".md": {
+    "pliki": 125,
+    "bajty": 4065294
+   },
+   ".pdf": {
+    "pliki": 107,
+    "bajty": 57972692
+   },
+   ".json": {
+    "pliki": 103,
+    "bajty": 8359203
+   },
+   ".dxf": {
+    "pliki": 87,
+    "bajty": 48291685
+   },
+   ".html": {
+    "pliki": 23,
+    "bajty": 1807759
+   },
+   ".yaml": {
+    "pliki": 22,
+    "bajty": 372871
+   },
+   ".txt": {
+    "pliki": 11,
+    "bajty": 93927
+   },
+   ".svg": {
+    "pliki": 10,
+    "bajty": 677005
+   },
+   ".webp": {
+    "pliki": 8,
+    "bajty": 886984
+   },
+   ".jpg": {
+    "pliki": 5,
+    "bajty": 8873003
+   },
+   ".js": {
+    "pliki": 5,
+    "bajty": 56151
+   },
+   ".gz": {
+    "pliki": 3,
+    "bajty": 332905
+   },
+   ".glb": {
+    "pliki": 2,
+    "bajty": 7565576
+   },
+   ".j2": {
+    "pliki": 2,
+    "bajty": 41825
+   },
+   "(brak)": {
+    "pliki": 1,
+    "bajty": 136
+   },
+   ".mtl": {
+    "pliki": 1,
+    "bajty": 7616
+   },
+   ".obj": {
+    "pliki": 1,
+    "bajty": 15195953
+   },
+   ".css": {
+    "pliki": 1,
+    "bajty": 29184
+   },
+   ".sh": {
+    "pliki": 1,
+    "bajty": 558
+   }
+  },
+  "wg_katalogu_glownego": {
+   "projekt": {
+    "pliki": 773,
+    "bajty": 248289523
+   },
+   "raporty": {
+    "pliki": 103,
+    "bajty": 42431718
+   },
+   "docs": {
+    "pliki": 141,
+    "bajty": 30619391
+   },
+   "www": {
+    "pliki": 32,
+    "bajty": 18886297
+   },
+   "00_wejscie": {
+    "pliki": 4,
+    "bajty": 4746162
+   },
+   "src": {
+    "pliki": 168,
+    "bajty": 3946562
+   },
+   "tools": {
+    "pliki": 63,
+    "bajty": 1287406
+   },
+   "model": {
+    "pliki": 15,
+    "bajty": 244700
+   },
+   "(root)": {
+    "pliki": 1,
+    "bajty": 136
+   }
+  },
+  "python": {
+   "src/": {
+    "pliki": 148,
+    "linie_wszystkie": 64746,
+    "linie_niepuste": 58791,
+    "linie_bez_pustych_i_komentarzy": 57087,
+    "funkcje_def": 2757,
+    "klasy": 267
+   },
+   "tools/": {
+    "pliki": 56,
+    "linie_wszystkie": 19338,
+    "linie_niepuste": 17360,
+    "linie_bez_pustych_i_komentarzy": 16618,
+    "funkcje_def": 754,
+    "klasy": 17
+   }
+  },
+  "python_poza_src_tools": [
+   "docs/20_koncepcja/W1/src/draw_common.py",
+   "docs/20_koncepcja/W1/src/draw_elev.py",
+   "docs/20_koncepcja/W1/src/draw_plans.py",
+   "docs/20_koncepcja/W1/src/draw_sections.py",
+   "docs/20_koncepcja/W1/src/draw_site.py",
+   "docs/20_koncepcja/W1/src/make_opis.py",
+   "docs/20_koncepcja/W1/src/model_w1.py",
+   "docs/20_koncepcja/W1/src/tables_w1.py",
+   "docs/20_koncepcja/W2/src/calc_w2.py",
+   "docs/20_koncepcja/W2/src/draw_common.py",
+   "docs/20_koncepcja/W2/src/draw_elev.py",
+   "docs/20_koncepcja/W2/src/draw_plans.py",
+   "docs/20_koncepcja/W2/src/draw_sections.py",
+   "docs/20_koncepcja/W2/src/draw_site.py",
+   "docs/20_koncepcja/W2/src/make_opis.py",
+   "docs/20_koncepcja/W2/src/model_w2.py",
+   "docs/20_koncepcja/W3/src/base_w3.py",
+   "docs/20_koncepcja/W3/src/calc_w3.py",
+   "docs/20_koncepcja/W3/src/draw_common.py",
+   "docs/20_koncepcja/W3/src/draw_elev.py",
+   "docs/20_koncepcja/W3/src/draw_plans.py",
+   "docs/20_koncepcja/W3/src/draw_sections.py",
+   "docs/20_koncepcja/W3/src/draw_site.py",
+   "docs/20_koncepcja/W3/src/geo_ext.py",
+   "docs/20_koncepcja/W3/src/geo_p0.py",
+   "docs/20_koncepcja/W3/src/geo_p1.py",
+   "docs/20_koncepcja/W3/src/geo_p2.py",
+   "docs/20_koncepcja/W3/src/model_w3.py",
+   "docs/20_koncepcja/W3/src/plan_parts.py",
+   "docs/20_koncepcja/W3/src/sec_data.py",
+   "docs/40_prezentacja/generuj_slajdy.py"
+  ],
+  "testy": {
+   "pliki": 8,
+   "funkcje_test_razem": 158,
+   "asserty_razem": 488,
+   "szczegoly": {
+    "tools/test_arkusze_formaty.py": {
+     "funkcje_test": 14,
+     "parametryzowane": 0,
+     "asserty": 89,
+     "pytest": false,
+     "main": true,
+     "linie": 421
+    },
+    "tools/test_mostki2d.py": {
+     "funkcje_test": 26,
+     "parametryzowane": 0,
+     "asserty": 93,
+     "pytest": false,
+     "main": true,
+     "linie": 425
+    },
+    "tools/test_obliczenia_fizyka.py": {
+     "funkcje_test": 24,
+     "parametryzowane": 0,
+     "asserty": 65,
+     "pytest": false,
+     "main": true,
+     "linie": 510
+    },
+    "tools/test_obliczenia_instalacje.py": {
+     "funkcje_test": 24,
+     "parametryzowane": 0,
+     "asserty": 36,
+     "pytest": false,
+     "main": true,
+     "linie": 358
+    },
+    "tools/test_obliczenia_konstrukcja.py": {
+     "funkcje_test": 28,
+     "parametryzowane": 0,
+     "asserty": 52,
+     "pytest": false,
+     "main": true,
+     "linie": 683
+    },
+    "tools/test_pipeline.py": {
+     "funkcje_test": 28,
+     "parametryzowane": 0,
+     "asserty": 108,
+     "pytest": false,
+     "main": true,
+     "linie": 624
+    },
+    "tools/test_rysunki_konstrukcja.py": {
+     "funkcje_test": 12,
+     "parametryzowane": 0,
+     "asserty": 45,
+     "pytest": false,
+     "main": true,
+     "linie": 202
+    },
+    "tools/test_wskazniki.py": {
+     "funkcje_test": 2,
+     "parametryzowane": 0,
+     "asserty": 0,
+     "pytest": false,
+     "main": true,
+     "linie": 119
+    }
+   }
+  },
+  "rozmiar": {
+   "pliki_sledzone_HEAD_B": 350451895,
+   "drzewo_robocze_bez_.git_B": 596867686,
+   ".git_B": 804293721,
+   "build_ignorowany_B": 205451637,
+   "git_count_objects": {
+    "count": "8743",
+    "size": "808952",
+    "in-pack": "0",
+    "packs": "0",
+    "size-pack": "0",
+    "prune-packable": "0",
+    "garbage": "0",
+    "size-garbage": "0"
+   },
+   "uwaga": "du mierzone na dysku w chwili pomiaru (drzewo robocze zmienia się); build/ ignorowany (.gitignore) — artefakty generowane; .git bez spakowanych obiektów (tylko luźne)"
+  }
+ },
+ "dokumentacja": {
+  "head": "d4716b00d8b0494225070defe683a847c379df2a",
+  "zrodlo": "git ls-tree/git show na HEAD; strony PDF: pypdf PdfReader(len(pages)); słowa MD: len(text.split()) (tokeny rozdzielone białymi znakami, łącznie ze składnią Markdown/tabelami)",
+  "arkusze": {
+   "projekt/02_PZT/rysunki": {
+    "arkusze_pdf": 3,
+    "stron_w_arkuszach": 3,
+    "bajty": 523295,
+    "pominiete_tom": [
+     "tom_PZT.pdf"
+    ],
+    "formaty_stron": {
+     "420x594mm": 1,
+     "400x594mm": 1,
+     "620x420mm": 1
+    },
+    "pliki": [
+     "PZT-01_plan_zagospodarowania_dzialki.pdf",
+     "PZT-02_plan_szczegolowy_wymiary_i_rzedne.pdf",
+     "PZT-03_rysunek_koordynacyjny_uzbrojenia_terenu.pdf"
+    ]
+   },
+   "projekt/03_PAB/rysunki": {
+    "arkusze_pdf": 5,
+    "stron_w_arkuszach": 5,
+    "bajty": 1247390,
+    "pominiete_tom": [
+     "tom_widoki.pdf"
+    ],
+    "formaty_stron": {
+     "630x594mm": 1,
+     "770x420mm": 1,
+     "590x891mm": 1,
+     "1130x420mm": 1,
+     "2050x297mm": 1
+    },
+    "pliki": [
+     "PB-AR-01_rzut_parteru.pdf",
+     "PB-AR-02_rzut_i_pietra.pdf",
+     "PB-AR-03_rzut_ii_pietra_i_rzut_dachu.pdf",
+     "PB-AR-04_przekroje_a_a_i_b_b.pdf",
+     "PB-AR-05_elewacje.pdf"
+    ]
+   },
+   "projekt/10_PT_architektura/detale": {
+    "arkusze_pdf": 6,
+    "stron_w_arkuszach": 6,
+    "bajty": 2033905,
+    "pominiete_tom": [
+     "tom_widoki.pdf"
+    ],
+    "formaty_stron": {
+     "1189x420mm": 1,
+     "891x420mm": 2,
+     "594x420mm": 2,
+     "1261x594mm": 1
+    },
+    "pliki": [
+     "PT-AR-D-01_detale_cokol_prog_hs_rura_spustowa.pdf",
+     "PT-AR-D-02_detale_okno_cieply_montaz_okap_pl_e.pdf",
+     "PT-AR-D-03_detale_attyki_wpusty_przelew_awaryjny.pdf",
+     "PT-AR-D-04_detale_wspornik_bryly_a_lamele_elewacyjne.pdf",
+     "PT-AR-D-05_detale_garaz_sciana_dom_garaz_dach_zielony_drzwi.pdf",
+     "PT-AR-D-06_detale_wylaz_dachowy_i_swietlik.pdf"
+    ]
+   },
+   "projekt/04_PT_konstrukcja/rysunki": {
+    "arkusze_pdf": 26,
+    "stron_w_arkuszach": 26,
+    "bajty": 2750294,
+    "pominiete_tom": [
+     "tom_PT-BO.pdf"
+    ],
+    "formaty_stron": {
+     "540x594mm": 1,
+     "250x594mm": 1,
+     "594x420mm": 2,
+     "230x594mm": 2,
+     "520x594mm": 1,
+     "420x594mm": 3,
+     "510x594mm": 2,
+     "400x594mm": 5,
+     "460x420mm": 1,
+     "310x594mm": 1,
+     "470x297mm": 1,
+     "600x841mm": 1,
+     "500x841mm": 1,
+     "470x594mm": 1,
+     "410x420mm": 1,
+     "350x594mm": 1,
+     "400x297mm": 1
+    },
+    "pliki": [
+     "PT-BO-01_rzut_fundamentow.pdf",
+     "PT-BO-02_przekroje_charakterystyczne_fundamentu.pdf",
+     "PT-BO-03_zbrojenie_dolne_plyty_fundamentowej.pdf",
+     "PT-BO-04_zbrojenie_gorne_plyty_fundamentowej.pdf",
+     "PT-BO-05_zestawienie_stali_fundament.pdf",
+     "PT-BO-06_rzut_konstrukcji_stropu_nad_parterem.pdf",
+     "PT-BO-07_rzut_konstrukcji_stropu_nad_i_pietrem.pdf",
+     "PT-BO-08_rzut_konstrukcji_stropodachu.pdf",
+     "PT-BO-09_zbrojenie_dolne_stropu_nad_parterem.pdf",
+     "PT-BO-10_zbrojenie_gorne_stropu_nad_parterem.pdf",
+     "PT-BO-11_zestawienie_stali_strop_nad_parterem.pdf",
+     "PT-BO-12_zbrojenie_dolne_stropu_nad_i_pietrem.pdf",
+     "PT-BO-13_zbrojenie_gorne_stropu_nad_i_pietrem.pdf",
+     "PT-BO-14_zestawienie_stali_strop_nad_i_pietrem.pdf",
+     "PT-BO-15_zbrojenie_dolne_stropodachu.pdf",
+     "PT-BO-16_zbrojenie_gorne_stropodachu.pdf",
+     "PT-BO-17_zestawienie_stali_stropodach.pdf",
+     "PT-BO-18_wezly_wspornikow_z_lacznikami_termoizolacyjnymi.pdf",
+     "PT-BO-19_wieniec_i_oparcie_stropu_na_murze_silikatowym.pdf",
+     "PT-BO-20_zbrojenie_belek_1.pdf",
+     "PT-BO-21_zbrojenie_belek_2.pdf",
+     "PT-BO-22_zbrojenie_belek_3.pdf",
+     "PT-BO-23_zbrojenie_nadprozy_1.pdf",
+     "PT-BO-24_zbrojenie_nadprozy_2.pdf",
+     "PT-BO-25_zbrojenie_nadprozy_3.pdf",
+     "PT-BO-26_zbrojenie_schodow.pdf"
+    ]
+   },
+   "projekt/05_PT_instalacje_sanitarne/rysunki": {
+    "arkusze_pdf": 11,
+    "stron_w_arkuszach": 11,
+    "bajty": 1611272,
+    "pominiete_tom": [
+     "tom_PT-IS.pdf"
+    ],
+    "formaty_stron": {
+     "790x420mm": 1,
+     "1130x297mm": 2,
+     "710x420mm": 3,
+     "590x841mm": 1,
+     "1320x297mm": 2,
+     "1410x297mm": 1,
+     "594x420mm": 1
+    },
+    "pliki": [
+     "PT-IS-01_instalacja_wodociagowa_rzut_parteru.pdf",
+     "PT-IS-02_instalacja_wodociagowa_rzuty_i_pietra_i_ii_pietr.pdf",
+     "PT-IS-03_kanalizacja_sanitarna_rzut_parteru.pdf",
+     "PT-IS-04_kanalizacja_sanitarna_rzuty_i_pietra_i_ii_pietra.pdf",
+     "PT-IS-05_odwodnienie_dachow_rzut_dachu_i_rzut_parteru.pdf",
+     "PT-IS-06_ogrzewanie_rzut_parteru.pdf",
+     "PT-IS-07_ogrzewanie_rzuty_i_pietra_i_ii_pietra.pdf",
+     "PT-IS-08_wentylacja_mechaniczna_rzut_parteru.pdf",
+     "PT-IS-09_wentylacja_mechaniczna_rzuty_i_pietra_i_ii_pietr.pdf",
+     "PT-IS-10_kanalizacja_i_wodociag_rozwiniecia.pdf",
+     "PT-IS-11_schemat_pompy_ciepla_c_o_i_c_w_u.pdf"
+    ]
+   },
+   "projekt/06_PT_instalacje_elektryczne/rysunki": {
+    "arkusze_pdf": 14,
+    "stron_w_arkuszach": 14,
+    "bajty": 1756921,
+    "pominiete_tom": [
+     "tom_PT-IE.pdf"
+    ],
+    "formaty_stron": {
+     "690x420mm": 4,
+     "690x297mm": 2,
+     "570x297mm": 2,
+     "570x594mm": 1,
+     "594x420mm": 1,
+     "730x297mm": 1,
+     "520x594mm": 1,
+     "710x420mm": 1,
+     "870x297mm": 1
+    },
+    "pliki": [
+     "PT-IE-01_instalacja_oswietlenia_rzut_parteru.pdf",
+     "PT-IE-02_instalacja_oswietlenia_rzut_i_pietra.pdf",
+     "PT-IE-03_instalacja_oswietlenia_rzut_ii_pietra.pdf",
+     "PT-IE-04_gniazda_i_zasilanie_urzadzen_rzut_parteru.pdf",
+     "PT-IE-05_gniazda_i_zasilanie_urzadzen_rzut_i_pietra.pdf",
+     "PT-IE-06_gniazda_i_zasilanie_urzadzen_rzut_ii_pietra.pdf",
+     "PT-IE-07_teletechnika_rzut_parteru.pdf",
+     "PT-IE-08_teletechnika_rzut_i_pietra.pdf",
+     "PT-IE-09_teletechnika_rzut_ii_pietra.pdf",
+     "PT-IE-10_instalacja_fotowoltaiczna_rzut_dachu.pdf",
+     "PT-IE-11_instalacja_fotowoltaiczna_rzut_parteru_falownik_.pdf",
+     "PT-IE-12_uziom_i_polaczenia_wyrownawcze_rzut_parteru.pdf",
+     "PT-IE-13_ochrona_odgromowa_i_wyrownanie_potencjalow_rzut_.pdf",
+     "PT-IE-14_schemat_rozdzielnicy_glownej_rg.pdf"
+    ]
+   }
+  },
+  "arkusze_razem": 65,
+  "nieslezone_w_projekt": [],
+  "PT_AR_rysunki_na_dysku_pdf": [
+   "PT-AR-01_rzut_parteru.pdf",
+   "PT-AR-02_rzut_i_pietra.pdf",
+   "PT-AR-03_rzut_ii_pietra_i_rzut_dachu.pdf",
+   "PT-AR-04_przekroje_a_a_i_b_b.pdf",
+   "PT-AR-05_elewacje.pdf"
+  ],
+  "tomy_wydanie": [
+   {
+    "plik": "PT_1_AR_2026.09.25.pdf",
+    "stron": 49,
+    "bajty": 4504286,
+    "MB": 4.5,
+    "formaty_stron": [
+     "210x297mm",
+     "594x420mm",
+     "841x594mm",
+     "891x420mm",
+     "1189x420mm",
+     "1261x594mm"
+    ]
+   },
+   {
+    "plik": "PT_2_BO_2026.09.25.pdf",
+    "stron": 370,
+    "bajty": 11317224,
+    "MB": 11.32,
+    "formaty_stron": [
+     "210x297mm",
+     "230x594mm",
+     "250x594mm",
+     "310x594mm",
+     "350x594mm",
+     "400x297mm",
+     "400x594mm",
+     "410x420mm",
+     "420x594mm",
+     "460x420mm",
+     "470x297mm",
+     "470x594mm",
+     "500x841mm",
+     "510x594mm",
+     "520x594mm",
+     "540x594mm",
+     "594x420mm",
+     "600x841mm"
+    ]
+   },
+   {
+    "plik": "PT_3_IS_2026.09.25.pdf",
+    "stron": 82,
+    "bajty": 3041099,
+    "MB": 3.04,
+    "formaty_stron": [
+     "210x297mm",
+     "590x841mm",
+     "594x420mm",
+     "710x420mm",
+     "790x420mm",
+     "1130x297mm",
+     "1320x297mm",
+     "1410x297mm"
+    ]
+   },
+   {
+    "plik": "PT_4_WB_2026.09.25.pdf",
+    "stron": 49,
+    "bajty": 2892744,
+    "MB": 2.89,
+    "formaty_stron": [
+     "210x297mm",
+     "520x594mm",
+     "570x594mm",
+     "594x420mm",
+     "690x297mm",
+     "690x420mm",
+     "720x420mm",
+     "870x297mm"
+    ]
+   },
+   {
+    "plik": "PZT_PAB_ZL_2026.09.25.pdf",
+    "stron": 59,
+    "bajty": 4521573,
+    "MB": 4.52,
+    "formaty_stron": [
+     "210x297mm",
+     "400x594mm",
+     "420x594mm",
+     "590x891mm",
+     "620x420mm",
+     "630x594mm",
+     "770x420mm",
+     "1130x420mm",
+     "2050x297mm"
+    ]
+   }
+  ],
+  "tomy_wydanie_razem": {
+   "tomy": 5,
+   "stron": 609,
+   "bajty": 26276926
+  },
+  "tomy_robocze_w_kompletach": [
+   {
+    "plik": "projekt/00_demo_silnika/widoki_test/tom_widoki.pdf",
+    "stron": 10,
+    "bajty": 494771
+   },
+   {
+    "plik": "projekt/01_koncepcja/widoki/tom_widoki.pdf",
+    "stron": 11,
+    "bajty": 1092417
+   },
+   {
+    "plik": "projekt/02_PZT/rysunki/tom_PZT.pdf",
+    "stron": 4,
+    "bajty": 435233
+   },
+   {
+    "plik": "projekt/03_PAB/rysunki/tom_widoki.pdf",
+    "stron": 6,
+    "bajty": 1056377
+   },
+   {
+    "plik": "projekt/04_PT_konstrukcja/rysunki/tom_PT-BO.pdf",
+    "stron": 27,
+    "bajty": 1670651
+   },
+   {
+    "plik": "projekt/05_PT_instalacje_sanitarne/rysunki/tom_PT-IS.pdf",
+    "stron": 12,
+    "bajty": 1018579
+   },
+   {
+    "plik": "projekt/06_PT_instalacje_elektryczne/rysunki/tom_PT-IE.pdf",
+    "stron": 15,
+    "bajty": 985717
+   },
+   {
+    "plik": "projekt/10_PT_architektura/detale/tom_widoki.pdf",
+    "stron": 7,
+    "bajty": 1812135
+   }
+  ],
+  "markdown": {
+   "docs/": {
+    "pliki": 35,
+    "slowa": 232298,
+    "linie": 11588,
+    "bajty": 1466514,
+    "wg_podkatalogu": {
+     "docs/00_brief_projektowy.md": {
+      "pliki": 1,
+      "slowa": 2428
+     },
+     "docs/10_podstawy_prawne": {
+      "pliki": 10,
+      "slowa": 122188
+     },
+     "docs/20_koncepcja": {
+      "pliki": 17,
+      "slowa": 89840
+     },
+     "docs/30_arkusze": {
+      "pliki": 5,
+      "slowa": 14869
+     },
+     "docs/40_prezentacja": {
+      "pliki": 1,
+      "slowa": 127
+     },
+     "docs/SCHEMAT_MODELU.md": {
+      "pliki": 1,
+      "slowa": 2846
+     }
+    }
+   },
+   "projekt/": {
+    "pliki": 84,
+    "slowa": 426790,
+    "linie": 33666,
+    "bajty": 2532155,
+    "wg_podkatalogu": {
+     "projekt/02_PZT": {
+      "pliki": 1,
+      "slowa": 692
+     },
+     "projekt/04_PT_konstrukcja": {
+      "pliki": 5,
+      "slowa": 155959
+     },
+     "projekt/05_PT_instalacje_sanitarne": {
+      "pliki": 1,
+      "slowa": 259
+     },
+     "projekt/06_PT_instalacje_elektryczne": {
+      "pliki": 1,
+      "slowa": 250
+     },
+     "projekt/08_obliczenia": {
+      "pliki": 64,
+      "slowa": 213372
+     },
+     "projekt/09_opis_i_zalaczniki": {
+      "pliki": 10,
+      "slowa": 51731
+     },
+     "projekt/10_PT_architektura": {
+      "pliki": 1,
+      "slowa": 398
+     },
+     "projekt/wydanie": {
+      "pliki": 1,
+      "slowa": 4129
+     }
+    }
+   }
+  },
+  "markdown_razem": {
+   "pliki": 119,
+   "slowa": 659088
+  },
+  "markdown_w_calym_repo": 125,
+  "markdown_demo_test": {
+   "pliki": 38,
+   "slowa": 123341,
+   "opis": "projekt/08_obliczenia/demo_test — wyniki przebiegów testowych bibliotek (na domu testowym)"
+  },
+  "markdown_razem_bez_demo_test": {
+   "pliki": 81,
+   "slowa": 535747
+  }
+ },
+ "wymagania": {
+  "plik": "docs/10_podstawy_prawne/wymagania.yaml",
+  "metoda": "wpis = słownik z kluczem 'wartosc' (poza sekcją meta), yaml.safe_load",
+  "pozycje": 418,
+  "sekcje": {
+   "procedura": 17,
+   "usytuowanie": 35,
+   "mpzp": 15,
+   "pomieszczenia": 34,
+   "schody": 23,
+   "garaz": 17,
+   "wodkan": 28,
+   "ogrzewanie": 17,
+   "wentylacja": 31,
+   "elektryka": 45,
+   "ppoz": 5,
+   "akustyka": 2,
+   "energia": 44,
+   "konstrukcja": 61,
+   "geotechnika": 13,
+   "rysunek": 26,
+   "oznaczenia_danych": 5
+  },
+  "status": {
+   "zweryfikowane": 236,
+   "zalozenie": 61,
+   "program": 20,
+   "interpretacja": 5,
+   "niezweryfikowane": 96
+  },
+  "typ": {
+   "rowne": 75,
+   "info": 85,
+   "max": 89,
+   "min": 158,
+   "zakres": 11
+  },
+  "pozycje_bez_id": 14,
+  "unikalne_id_W_w_yaml": 148,
+  "rejestr_md": {
+   "plik": "docs/10_podstawy_prawne/00_rejestr_wymagan.md",
+   "unikalne_id_W_w_tekscie": 207,
+   "wiersze_tabel_z_id_W": 207,
+   "unikalne_id_w_wierszach": 207
+  }
+ },
+ "plansze_postepu": {
+  "metoda": "git ls-tree HEAD, wzorzec raporty/raport_NN_YYYYMMDD_HHMM.png",
+  "plansze": 50,
+  "numery": [
+   1,
+   50
+  ],
+  "brakujace_numery": [],
+  "pierwsza_nazwa": "2026-09-25 01:22",
+  "ostatnia_nazwa": "2026-09-25 10:30",
+  "weryfikacja_strefy": [
+   {
+    "plik": "raporty/raport_01_20260925_0122.png",
+    "czas_z_nazwy": "2026-09-25T01:22:00",
+    "commit_dodania_utc": "2026-09-24T23:22:16",
+    "roznica_min": 119.7
+   },
+   {
+    "plik": "raporty/raport_26_20260925_0605.png",
+    "czas_z_nazwy": "2026-09-25T06:05:00",
+    "commit_dodania_utc": "2026-09-25T04:05:28",
+    "roznica_min": 119.5
+   },
+   {
+    "plik": "raporty/raport_50_20260925_1030.png",
+    "czas_z_nazwy": "2026-09-25T10:30:00",
+    "commit_dodania_utc": "2026-09-25T08:31:03",
+    "roznica_min": 119.0
+   }
+  ],
+  "sredni_odstep_min": 11.2,
+  "pliki_spec_json": 50
+ },
+ "mostki": {
+  "wezly_liniowe_budynku": {
+   "plik": "projekt/08_obliczenia/mostki/wyniki_mostki.json",
+   "liczba": 22,
+   "ids": [
+    "WZ-01",
+    "WZ-02",
+    "WZ-03",
+    "WZ-04",
+    "WZ-05",
+    "WZ-06",
+    "WZ-07a",
+    "WZ-07b",
+    "WZ-08",
+    "WZ-09a",
+    "WZ-09b",
+    "WZ-09c",
+    "WZ-10",
+    "WZ-11",
+    "WZ-11N",
+    "WZ-11P",
+    "WZ-11T",
+    "WZ-12",
+    "WZ-16a",
+    "WZ-16b",
+    "WZ-X1",
+    "WZ-X2"
+   ]
+  },
+  "zestawienie": {
+   "plik": "projekt/08_obliczenia/mostki/zestawienie_mostkow.json",
+   "wezly": 22,
+   "mostki_punktowe_chi": 4,
+   "warianty_wezlow": 6,
+   "przelewy_awaryjne": 6
+  },
+  "katalog_demonstracyjny": {
+   "plik": "src/lamela/obliczenia/mostki2d/katalog.py (KOLEJNOSC_DEMO)",
+   "liczba": 20
+  },
+  "sekcja_wezly_w_budynek_yaml": 22
+ },
+ "obliczenia": {
+  "md": {
+   "plik": "projekt/04_PT_konstrukcja/obliczenia/obliczenia_statyczne.md",
+   "metoda": "nagłówki '## Poz. N —' (grupy) i '### Poz. N.M —' (pozycje)",
+   "grupy": 11,
+   "pozycje": 132,
+   "wg_grup": {
+    "0 Podstawa opracowania, założenia i obciążenia ogólne": 0,
+    "1 Dachy i stropodachy": 4,
+    "2 Stropy": 3,
+    "3 Płyty wspornikowe": 4,
+    "4 Schody": 2,
+    "5 Belki i podciągi": 17,
+    "6 Nadproża": 30,
+    "7 Wieńce": 3,
+    "8 Słupy": 8,
+    "9 Ściany murowe": 38,
+    "10 Fundamenty": 23
+   }
+  },
+  "wyniki_json": {
+   "plik": "projekt/04_PT_konstrukcja/obliczenia/wyniki.json",
+   "pozycje": 132,
+   "uwagi": 48,
+   "brak_danych": 0,
+   "klucze_pozycji": [
+    "nr",
+    "id",
+    "tytul",
+    "rodzaj",
+    "wykorzystanie",
+    "ok",
+    "przyjeto",
+    "warunki",
+    "dane"
+   ],
+   "wg_typu": {
+    "plyta": 11,
+    "schody": 2,
+    "belka": 17,
+    "nadproze": 30,
+    "wieniec": 3,
+    "slup": 8,
+    "sciana": 38,
+    "fundament": 23
+   }
+  },
+  "inne_md_w_08_obliczenia": {
+   "fizyka_energia_runda2": 11,
+   "instalacje_runda2": 10
+  }
+ },
+ "model": {
+  "zrodlo": "lamela.model.load_model na kopii HEAD (git archive src model) + surowe sekcje budynek.yaml (yaml.safe_load)",
+  "load_model": {
+   "kondygnacje": 3,
+   "sciany": 57,
+   "otwory": 50,
+   "pomieszczenia": 33,
+   "przegrody": 24,
+   "materialy": 50,
+   "stropy": 3,
+   "dachy": 4,
+   "plyty": 20,
+   "wsporniki": 13,
+   "slupy": 8,
+   "belki": 38,
+   "schody": 2,
+   "balustrady": 2,
+   "lamele": 4,
+   "tarasy": 3,
+   "elementy_zewn": 3
+  },
+  "fundamenty_klucze": [
+   "typ",
+   "izolacja_obwodowa",
+   "uwagi",
+   "elementy"
+  ],
+  "problemy": 389,
+  "bledy": 0,
+  "ostrzezenia": 0,
+  "yaml_sekcje": {
+   "uklad": 2,
+   "osie": 2,
+   "kondygnacje": 3,
+   "materialy": 50,
+   "przegrody": 24,
+   "sciany": 57,
+   "otwory": 50,
+   "pomieszczenia": 33,
+   "stropy": 3,
+   "dachy": 4,
+   "wsporniki_plyty": 13,
+   "slupy": 8,
+   "belki": 38,
+   "fundamenty": 4,
+   "schody": 2,
+   "balustrady": 2,
+   "lamele": 4,
+   "tarasy": 3,
+   "elementy_zewn": 3,
+   "stolarka": 29,
+   "wezly": 22,
+   "energia": 12,
+   "konstrukcja": 11,
+   "geotechnika": 6
+  },
+  "budynek_yaml_linie": 730,
+  "kondygnacje_ids": [
+   "P0",
+   "P1",
+   "P2"
+  ],
+  "sciany_wg_kondygnacji": {
+   "P0": 23,
+   "P1": 15,
+   "P2": 19
+  },
+  "otwory_wg_kondygnacji": {
+   "P0": 24,
+   "P1": 14,
+   "P2": 12
+  },
+  "pomieszczenia_wg_kondygnacji": {
+   "P0": 16,
+   "P1": 9,
+   "P2": 8
+  },
+  "otwory_wg_typu": {
+   "fix": 4,
+   "drzwi_przesuwne_HS": 3,
+   "drzwi_zewn": 3,
+   "brama": 1,
+   "okno": 17,
+   "drzwi": 20,
+   "otwor": 2
+  },
+  "sciany_wg_przegrody": {
+   "SZ1": 16,
+   "SW18": 12,
+   "SWZB": 2,
+   "SCZB15": 3,
+   "SWG": 2,
+   "DZ12": 11,
+   "SGL": 1,
+   "GK10": 5,
+   "SZ2": 2,
+   "SZL": 1,
+   "DZ18A": 2
+  },
+  "pomieszczenia_wg_kategorii": {
+   "ruchu": 10,
+   "pomocnicza": 11,
+   "podstawowa": 7,
+   "techniczna": 5
+  },
+  "pow_zabudowy_m2": {
+   "budynek": 187.5,
+   "z_plytami": 218.08
+  },
+  "kubatura_brutto": {
+   "razem": 1354.4,
+   "skladniki": {
+    "P0": 578.05,
+    "P1": 345.18,
+    "P2": 283.63,
+    "plyta ST1": 26.78,
+    "plyta ST2": 21.49,
+    "plyta ST2Z": 2.05,
+    "plyta D1": 44.14,
+    "plyta D2": 8.43,
+    "plyta D3": 7.69,
+    "plyta D4": 36.98
+   }
+  }
+ }
+}

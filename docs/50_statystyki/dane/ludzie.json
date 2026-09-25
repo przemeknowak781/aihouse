@@ -1,0 +1,647 @@
+{
+ "meta": {
+  "utworzono": "2026-09-25",
+  "zakres": "Źródła do porównania pracy AI z pracą biura projektowego (Polska 2024–2026) — Dom LAMELA",
+  "metoda": "WebSearch/WebFetch + bezpośrednie pobranie PDF/XLSX (curl) i ekstrakcja (pypdf, openpyxl). Kopie w ludzie_zrodla/. Obliczenia: ludzie_oblicz.py → ludzie_oblicz_wynik.json.",
+  "uwaga_WebFetch": "WebFetch zwraca streszczenie małego modelu — liczby z pól dostep=\"WebFetch\" należy traktować jako mniej pewne niż te z plików pobranych bezpośrednio."
+ },
+ "parametry_obiektu_z_repo": {
+  "PU_m2": 239.16,
+  "kubatura_m3": 1354.45,
+  "kondygnacje": 3,
+  "garaz": "2-stanowiskowy w bryle",
+  "zrodlo": "repozytorium /home/user/aihouse — raport weryfikacji PAB: „PAB: PU 239,16 m² (95,36 + 84,38 + 59,42) … Kubatura 1 354,45 m³”; docs/00_brief_projektowy.md",
+  "uwaga": "Brief: działka, MPZP i opinia geotechniczna są FIKCYJNE/PRZYKŁADOWE („Nazwy, numery i uchwała — fikcyjne”) — biuro pracowałoby na realnych danych wejściowych."
+ },
+ "zrodla": [
+  {
+   "id": "O1",
+   "typ": "OFICJALNE",
+   "nazwa": "Rozporządzenie MRiT z 20.12.2021 (Dz.U. 2021 poz. 2458) — planowane koszty prac projektowych",
+   "url": "https://api.sejm.gov.pl/eli/acts/DU/2021/2458/text.pdf",
+   "rok": 2021,
+   "obowiazuje_od": "2022-01-01",
+   "wartosc": "W% kat. III: 5,45 (Kb 1 mln) / 5,00 (Kb 2 mln); kat. IV: 7,55 / 6,90; fazy: PK 7–15%, PB 30–45%, PW 40–60%",
+   "jednostka": "% planowanych kosztów robót budowlanych",
+   "cytat": "„Planowane koszty prac projektowych oblicza się jako iloczyn wskaźnika procentowego i planowanych kosztów robót budowlanych … WPP = W% × WRB”; tab. 2: „2) budynki mieszkalne jednorodzinne z garażami … [kat. III, wyższa IV/V]”, „3) budynki mieszkalne jednorodzinne z indywidualnymi wymaganiami … [kat. IV, wyższa V/VI]”",
+   "dostep": "PDF pobrany curl, tekst wyciągnięty pypdf (cytat dosłowny) — ludzie_zrodla/rozp_MRiT_2021_poz2458.txt",
+   "porownywalnosc": "Służy zamawiającym publicznym do szacowania wartości zamówienia; nie jest cennikiem rynkowym. Nie obejmuje mapy do celów projektowych, dokumentacji geologiczno-inżynierskiej, inwentaryzacji (§10 ust. 5). Tabela W% identyczna z ZWPP SARP 2014."
+  },
+  {
+   "id": "O2",
+   "typ": "OFICJALNE",
+   "nazwa": "GUS — Struktura wynagrodzeń według zawodów, październik 2024 (publ. 10.02.2026), tabl. 2, 3, 5, 6",
+   "url": "https://stat.gov.pl/download/gfx/portalinformacyjny/pl/defaultaktualnosci/5474/4/12/1/tablice_struktura_wynagrodzen_wedlug_zawodow_za_pazdziernik_2024_v01.xlsx",
+   "rok": 2024,
+   "wartosc": {
+    "sekcja_M_mies_brutto": 12145.66,
+    "sekcja_M_godz_brutto": 65.75,
+    "grupa_216_Architekci_geodeci_projektanci_mies": 8808.89,
+    "grupa_216_godz": 47.74,
+    "grupa_214_Inzynierowie_mies": 10918.02,
+    "grupa_214_godz": 58.61,
+    "grupa_215_Inz_elektrotechnologii_mies": 12819.97,
+    "grupa_215_godz": 68.57,
+    "ogolem_Polska_mies": 8944.79,
+    "wielkopolskie_ogolem_mies": 8127.82
+   },
+   "jednostka": "zł brutto (pracownik, bez kosztów pracodawcy)",
+   "cytat": "tabl.5 wiersz „216 Architekci, geodeci i projektanci a 8808,89”; tabl.6 „216 … a 47,74”; tabl.2 „Działalność profesjonalna, naukowa i techniczna (M) a 12145,66”",
+   "dostep": "XLSX pobrany curl, odczyt openpyxl (liczby dosłowne) — ludzie_zrodla/gus_swz_2024.xlsx",
+   "porownywalnosc": "Płace etatowe (bez B2B/samozatrudnionych, bez narzutów pracodawcy, kosztów biura i zysku) — to dolna granica kosztu pracy, nie stawka rynkowa. Grupa 216 obejmuje też geodetów i projektantów niebudowlanych. Działu PKD 71 nie znaleziono w opublikowanych tablicach — najbliższe przybliżenia: sekcja M i grupa zawodów 216."
+  },
+  {
+   "id": "O3",
+   "typ": "OFICJALNE",
+   "nazwa": "GUS — Zatrudnienie i wynagrodzenia w gospodarce narodowej w 2024 r. (30.04.2025), tabl. 7, 9, 11",
+   "url": "https://stat.gov.pl/download/gfx/portalinformacyjny/pl/defaultaktualnosci/5474/1/57/1/tablice_informacja_statystyczna_zatrudnienie_i_wynagrodzenia_w_gospodarce_narodowej_w_2024_r.xlsx",
+   "rok": 2024,
+   "wartosc": {
+    "sekcja_M_przecietne_mies_brutto_2024": 11213.57,
+    "dynamika_2023=100": 109.5,
+    "czas_przepracowany_na_1_zatrudnionego_M_h_rok": 1742
+   },
+   "jednostka": "zł brutto / h",
+   "cytat": "tabl.11 „Działalność profesjonalna, naukowa i techniczna 11213,57 109,5”; tabl.7 „… 01-12 1742”",
+   "dostep": "XLSX pobrany curl, odczyt openpyxl",
+   "porownywalnosc": "Dane sekcji dotyczą podmiotów o liczbie pracujących 10 i więcej osób (uwagi metodologiczne pkt 9). 1742 h/rok ≈ 145,2 h/mies. użyte do przeliczenia roboczogodzin na etatomiesiące."
+  },
+  {
+   "id": "O4",
+   "typ": "OFICJALNE",
+   "nazwa": "Wskaźnik przeliczeniowy kosztu odtworzenia 1 m² PU budynków mieszkalnych — woj. wielkopolskie 1.04–30.09.2025",
+   "url": "https://frigg.com.pl/pl/blog/59-nowa-wartosc-odtworzeniowa",
+   "rok": 2025,
+   "wartosc": {
+    "wielkopolskie_bez_Poznania": 6207,
+    "Poznan": 9870
+   },
+   "jednostka": "zł/m² PU",
+   "cytat": "(wg WebFetch) „Wskaźnik przeliczeniowy kosztu odtworzenia 1m2 powierzchni użytkowej budynków mieszkalnych w okresie od 1 kwietnia 2025 r. do 30 września 2025 r. wynosi” … Poznań 9870 zł, woj. bez Poznania 6207 zł",
+   "dostep": "Wartość urzędowa (Obwieszczenie Wojewody Wielkopolskiego z 31.03.2025, Dz.Urz. Woj. Wlkp. 2025 poz. 2948) odczytana ze źródła WTÓRNEGO (frigg.com.pl). Źródło pierwotne poznan.uw.gov.pl / edziennik.poznan.uw.gov.pl niedostępne (connection reset / HTTP 503). Obwieszczenie z 30.03.2026 (okres 1.04–30.09.2026) istnieje, ale jego wartości NIE udało się odczytać.",
+   "porownywalnosc": "Wskaźnik ustawowy (ustawa o ochronie praw lokatorów) — dotyczy budynków mieszkalnych ogólnie, nie jest kosztorysem domu jednorodzinnego. Użyty tylko jako urzędowy punkt odniesienia dla Kb."
+  },
+  {
+   "id": "O5",
+   "typ": "OFICJALNE",
+   "nazwa": "Wskaźniki przeliczeniowe 1.04–30.09.2026 — województwa sąsiednie/porównawcze",
+   "url": [
+    "https://bip.bydgoszcz.uw.gov.pl/4010/obwieszczenie-wojewody-kujawsko-pomorskiego-z-dnia-25-marca-2026-r-w-sprawie-ustalenia-wysokosci-wskaznika-przeliczeniowego-kosztu-odtworzenia-1-m-powierzchni-uzytkowej-budynkow-mieszkalnych-w-wojewodztwie-kujawsko-pomorskim.html",
+    "https://e-dziennik.szczecin.uw.gov.pl/eli/POL_WOJ_ZP/2026/1291/ogl/pol/pdf",
+    "https://www.gov.pl/attachment/c2388c48-5a7c-4c73-b52f-775e6013b92a"
+   ],
+   "rok": 2026,
+   "wartosc": {
+    "kujawsko-pomorskie_bez_Bydgoszczy_Torunia": 6685.0,
+    "zachodniopomorskie_bez_Szczecina": 7718,
+    "Szczecin": 8723,
+    "mazowieckie_bez_Warszawy": 7828.57,
+    "Warszawa": 12149.38
+   },
+   "jednostka": "zł/m² PU",
+   "cytat": "zachodniopom.: „dla województwa zachodniopomorskiego z wyłączeniem miasta Szczecin – 7 718 zł”; maz.: „dla województwa mazowieckiego, z wyłączeniem m. st. Warszawy – 7 828,57 zł”",
+   "dostep": "zachpom. i maz. — PDF pobrany curl + pypdf (dosłownie); kuj.-pom. — WebFetch (streszczenie)",
+   "porownywalnosc": "jw.; pokazuje rząd wielkości 2026 (6,7–7,8 tys. zł/m² poza metropoliami)."
+  },
+  {
+   "id": "B1",
+   "typ": "BRANŻOWE",
+   "nazwa": "SARP — Zasady Wyceny Prac Projektowych (ZWPP SARP), uchwała ZG SARP nr 70 z 5.04.2014",
+   "url": "https://www.sarp.pl/pliki/1_539ec5f989836-zwpp_sarp.pdf",
+   "rok": 2014,
+   "wartosc": {
+    "wzor": "Cp = W% × Kb",
+    "W%": "jak O1 (kat. III–IV)",
+    "fazy": "PK 7–15%, PB 30–45%, PW 40–60%",
+    "podzial_branzowy_PB_%": {
+     "koordynacja": 10,
+     "architektura": 50,
+     "konstrukcja": 15,
+     "sanitarne": 10,
+     "elektryczne": 5,
+     "zagospodarowanie": 5,
+     "drogi_zielen": 2,
+     "kosztorys": 3
+    },
+    "podzial_branzowy_PW_%": {
+     "koordynacja": 10,
+     "architektura": 30,
+     "konstrukcja": 25,
+     "sanitarne": 15,
+     "elektryczne": 12,
+     "zagospodarowanie": 5,
+     "drogi_zielen": 3
+    },
+    "nadzor_autorski": "dodatkowo ≥15% ceny projektu",
+    "stawki_godz_2014_zl": {
+     "szef_biura/wysoko kwalif.": "150–600",
+     "architekt_szef_projektu": "100–400",
+     "asystent_projektanta": "75–300",
+     "kreslarz/techniczny": "50–200"
+    }
+   },
+   "jednostka": "% kosztu budowy; zł/h netto (ceny 2014)",
+   "cytat": "„Cenę projektu przyjmuje się w przedziale określonym wartością wskaźnika procentowego dla danej kategorii zadania oraz wartością wskaźnika dla kategorii wyższej.”; „Cena projektu wg ZWPP SARP nie obejmuje … opracowania mapy do celów projektowych, … badania gruntowo-wodne … kosztorysu inwestorskiego, nadzoru autorskiego … makiet i specjalnych opracowań graficznych … projektów wnętrz”",
+   "dostep": "PDF pobrany (WebFetch → plik), tekst pypdf (dosłownie) — ludzie_zrodla/zwpp_sarp_2014.txt",
+   "porownywalnosc": "Rekomendacja środowiskowa, niewiążąca (IARP: prawo konkurencji zabrania wiążących cenników). Stawki godzinowe z 2014 r. — nominalne, bez waloryzacji. Nazwy „Środowiskowe Standardy Wynagradzania (ŚSW)” z zadania nie znaleziono; odpowiedniki to ZWPP SARP (2014) i ŚZWPP IPB."
+  },
+  {
+   "id": "B2",
+   "typ": "BRANŻOWE",
+   "nazwa": "Izba Architektów RP — „Jak wycenić projekt?”",
+   "url": "https://www.izbaarchitektow.pl/kategoria/jak-wycenic-projekt,349/",
+   "rok": "b.d.",
+   "wartosc": "brak liczb; odsyła do rozporządzenia 2021 poz. 2458, ZWPP SARP 2014, ŚZWPP IPB",
+   "jednostka": "-",
+   "cytat": "(wg WebFetch) IARP nie może ustalać wiążących cenników ze względu na prawo konkurencji; dokumenty mają charakter pomocniczy",
+   "dostep": "WebFetch (streszczenie)",
+   "porownywalnosc": "Potwierdza status metod: pomocnicze, nie cennik."
+  },
+  {
+   "id": "B3",
+   "typ": "BRANŻOWE",
+   "nazwa": "Izba Projektowania Budowlanego — ŚZWPP, stawka za jednostkę nakładu pracy (j.n.p.)",
+   "url": [
+    "https://ipb.org.pl/wp-content/uploads/Stawka_za_jnp_na_rok_2024r_ok.pdf",
+    "https://ipb.org.pl/wp-content/uploads/Stawka_za_jnp_na_rok_2025r.pdf",
+    "https://ipb.org.pl/wp-content/uploads/Stawka_za_jnp_na_rok_2026r.pdf"
+   ],
+   "rok": "2024–2026",
+   "wartosc": {
+    "S_2024": 28.7,
+    "S_2025": 30.8,
+    "S_2026": 33.3
+   },
+   "jednostka": "zł netto / j.n.p.",
+   "cytat": "„wysokość stawki za umowną jednostkę nakładu pracy (j.n.p.), przy wycenach dokonywanych w roku 2026 … ustala się na S = 33,30 zł. W stawce tej nie jest uwzględniony podatek VAT”",
+   "dostep": "PDF pobrany curl + pypdf (dosłownie)",
+   "porownywalnosc": "j.n.p. to jednostka umowna, NIE roboczogodzina. Liczby j.n.p. dla domu jednorodzinnego są w płatnym wydaniu ŚZWPP 2016 (550 zł netto) — nie odczytano, więc tą metodą NIE policzono honorarium. PIIB udostępnia ŚZWPP członkom."
+  },
+  {
+   "id": "B4",
+   "typ": "BRANŻOWE",
+   "nazwa": "PIIB — Wynagrodzenia inżynierów budownictwa w Polsce 2024/2025 (K. Kaczorek, 2026), tab. 1 i 7",
+   "url": "https://www.piib.org.pl/images/stories/aktualnosci/2026-02/PIIB_raport_wynagrodzenia.pdf",
+   "rok": 2025,
+   "wartosc": {
+    "projektanci_kubaturowi_z_uprawnieniami_sr_2025": 9698.98,
+    "projektanci_sanitarni_sr_2025": 9014.2,
+    "ogol_uprawnionych_2025": 10683.98,
+    "PK_10-20_lat_2025": 10786.89
+   },
+   "jednostka": "zł NETTO miesięcznie (kwota przelewu)",
+   "cytat": "tab. 7: „Średnie wynagrodzenie w roku 2025 [zł netto] 9698,98 … 9014,20 … 10 683,98”; „podano wynagrodzenia netto wyrażone jako średnia arytmetyczna z przelewów”",
+   "dostep": "PDF pobrany curl + pypdf (dosłownie)",
+   "porownywalnosc": "Ankieta (n=3306; projektanci kubaturowi n=343) — nie próba losowa; kwoty „na rękę”, niezależnie od formy zatrudnienia. Nie jest stawką sprzedażową biura."
+  },
+  {
+   "id": "B5",
+   "typ": "BRANŻOWE (niezweryfikowane bezpośrednio)",
+   "nazwa": "Architektura & Biznes — „Biznes architekta – Karol Nieradka o kosztach projektowania”",
+   "url": "https://www.architekturaibiznes.pl/biznes-architekta-karol-nieradka,43286.html",
+   "rok": "2026 (wg wyszukiwarki, niepotwierdzone)",
+   "wartosc": {
+    "godziny_na_dom_140-360m2": "414–440",
+    "koncepcja_h": "98–131",
+    "projekt_budowlany_h": "98–126",
+    "projekt_wykonawczy_h": "190–223",
+    "liczba_domow": 4
+   },
+   "jednostka": "roboczogodziny pracowni architektonicznej",
+   "cytat": "(wg streszczenia wyszukiwarki) „koncepcje zajęły 98–131 godzin, projekty budowlane 98–126, a wykonawcze 190–223 … między 414 a 440 godzin”",
+   "dostep": "Strona zwraca HTTP 403 (WebFetch i curl) — liczby tylko z wyniku WebSearch; traktować ostrożnie",
+   "porownywalnosc": "Najpewniej godziny samej pracowni architektonicznej (bez projektantów konstrukcji i instalacji) — do weryfikacji."
+  },
+  {
+   "id": "R1",
+   "typ": "RYNKOWE",
+   "nazwa": "muratordom.pl — Ile zapłacisz za projekt domu w 2025",
+   "url": "https://muratordom.pl/prawo/finanse/ile-zaplacisz-za-projekt-domu-jednorodzinnego-w-2025-diabel-tkwi-w-szczegolach-zwroc-uwage-na-dodatkowe-wydatki-aa-nzBw-bGPn-1MP7.html",
+   "rok": "2025-06-13",
+   "wartosc": {
+    "ogolnie_zl_m2": "90–160",
+    "koncepcja_zl_m2_brutto": "20–70",
+    "PAB_zl_m2_brutto": "50–140",
+    "PT_zl_m2": "100–200",
+    "instalacja_elektryczna_zl_m2": "od 10",
+    "wod-kan_i_CO_zl_m2": "od 20",
+    "dom_150m2_indywidualny": "20 000–40 000",
+    "projekt_gotowy": "3 000–6 000",
+    "adaptacja": "5 000–10 000",
+    "badania_geotech": "od 1 500",
+    "konsultacja_zl_h_brutto": "~200"
+   },
+   "cytat": "„między 20 a 70 zł brutto za m²” (koncepcja); „od 50 do 140 zł brutto za metr kwadratowy” (PAB); „od 100 do 200 zł za m²” (PT)",
+   "dostep": "WebFetch (streszczenie modelu — cytat może być niedosłowny)",
+   "porownywalnosc": "Mieszane brutto/netto; fazy wyceniane osobno."
+  },
+  {
+   "id": "R2",
+   "typ": "RYNKOWE",
+   "nazwa": "Disinn — Ile kosztuje indywidualny projekt domu w 2026",
+   "url": "https://www.disinn.pl/post/ile-kosztuje-indywidualny-projekt-domu",
+   "rok": "2022-06-01, aktual. 2025-10-22",
+   "wartosc": {
+    "calosc_zl_m2_netto": "130–190",
+    "koncepcja_zl_m2": "50–90",
+    "projekt_budowlany_zl_m2_netto": "100–160"
+   },
+   "cytat": "„100 - 160 zł netto + VAT 23% za 1 m2 projektowanej przestrzeni podłóg”",
+   "dostep": "WebFetch (streszczenie modelu — cytat może być niedosłowny)",
+   "porownywalnosc": "Obejmuje PZT+PAB+PT; instalacje, PV, kosztorys, nadzór — dodatkowo płatne. Liczone od „przestrzeni podłóg”, nie PU."
+  },
+  {
+   "id": "R3",
+   "typ": "RYNKOWE",
+   "nazwa": "Jura Projekt — Ile kosztuje projekt indywidualny",
+   "url": "https://juraprojekt.pl/nowosci/ile-kosztuje-projekt-domu/",
+   "rok": "2024-10-25",
+   "wartosc": {
+    "zl_m2_netto": "80–150",
+    "ryczalt": "10 000–50 000+",
+    "adaptacja": "2 000–10 000"
+   },
+   "cytat": "„od około 80 do 150 zł netto za m²”",
+   "dostep": "WebFetch (streszczenie modelu — cytat może być niedosłowny)",
+   "porownywalnosc": "Zakres niejednoznaczny."
+  },
+  {
+   "id": "R4",
+   "typ": "RYNKOWE",
+   "nazwa": "Energetyczny Projekt — projekt domu u architekta koszt",
+   "url": "https://domy.energetycznyprojekt.pl/projekt-domu-u-architekta-koszt/",
+   "rok": "2024-10-22",
+   "wartosc": {
+    "zl_m2": "100–300",
+    "minimum": "~11 000",
+    "czas_koncepcja": "2–6 tyg.",
+    "czas_projekt_budowlany": "4–10 tyg.",
+    "czas_wykonawczy": "kilka tyg.–~3 mies."
+   },
+   "cytat": "„Średni koszt projektu indywidualnego w 2025 roku w Polsce to od 100 do 300 zł za jeden metr kwadratowy”",
+   "dostep": "WebFetch (streszczenie modelu — cytat może być niedosłowny)",
+   "porownywalnosc": "Firma wykonawcza (oferuje projekt za 1 zł przy GW) — konflikt interesów."
+  },
+  {
+   "id": "R5",
+   "typ": "RYNKOWE",
+   "nazwa": "Archeton — Ile kosztuje stworzenie projektu domu",
+   "url": "https://archeton.pl/blog/ile-kosztuje-stworzenie-projektu-domu-n25",
+   "rok": "2026-08-17",
+   "wartosc": {
+    "zl_m2": "60–250",
+    "minimum": "~10 000",
+    "udzial_w_koszcie_budowy_realnie": "5–20%"
+   },
+   "cytat": "„Indywidualny projekt domu u architekta to w 2026 roku wydatek rzędu od 60 do 250 zł za każdy metr kwadratowy”",
+   "dostep": "WebFetch (streszczenie modelu — cytat może być niedosłowny)",
+   "porownywalnosc": "Zakres bardzo szeroki."
+  },
+  {
+   "id": "R6",
+   "typ": "RYNKOWE",
+   "nazwa": "Rankomat — Projekt domu 2026",
+   "url": "https://rankomat.pl/nieruchomosci/ile-kosztuje-projekt-domu",
+   "rok": "2026-06-11",
+   "wartosc": {
+    "indywidualny_zl_m2": "150–300",
+    "indywidualny_ryczalt": "15 000–30 000 (złożone 40 000–50 000)",
+    "gotowy": "2 000–8 000",
+    "adaptacja": "2 500–7 000",
+    "mapa_przyklad": 1200,
+    "geotechnika_przyklad": 1800,
+    "czas_indywidualny": "3–9 mies."
+   },
+   "cytat": "(wg WebFetch) „3–9 miesięcy” (projekty indywidualne)",
+   "dostep": "WebFetch (streszczenie modelu — cytat może być niedosłowny)",
+   "porownywalnosc": "Portal porównawczy."
+  },
+  {
+   "id": "R7",
+   "typ": "RYNKOWE",
+   "nazwa": "BIAMS — cennik projektu domu",
+   "url": "https://biams.pl/cennik/",
+   "rok": "b.d. (brak daty na stronie)",
+   "wartosc": {
+    "180-270m2_zl_m2_brutto": "280–320",
+    "netto_przy_VAT23_dla_PU_239": [
+     54443,
+     62220
+    ]
+   },
+   "cytat": "„180–270 m²: 280 – 320 zł za m2”; pakiet: „architekturą i konstrukcją z elementami wykonawczymi, z instalacjami wewnętrznymi i zewnętrznymi wraz z uzyskaniem pozwolenia na budowę”",
+   "dostep": "WebFetch (streszczenie modelu — cytat może być niedosłowny)",
+   "porownywalnosc": "Najbliższy zakresowo (PK+PZT+PAB+PT z konstrukcją i instalacjami); brutto — przeliczenie na netto przy 23% VAT to założenie."
+  },
+  {
+   "id": "R8",
+   "typ": "RYNKOWE",
+   "nazwa": "Projekty Format — Wykaz cen prac projektowych (cennik_format_2025)",
+   "url": "https://www.projekty-format.com.pl/cennik.pdf",
+   "rok": "2025 (metadane pliku)",
+   "wartosc": {
+    "nietypowy_arch+konstr_200-300m2": "16 000 zł + 60 zł/m² PU ponad 200 m²",
+    "dla_PU_239": 18349.6,
+    "PZT": 1800,
+    "konstrukcja_pelna_zl_m2": 35,
+    "obliczenia_statyczne_zl_m2": 10,
+    "adaptacja": 3500,
+    "uzgodnienie": 400
+   },
+   "cytat": "„od 200 m2 do 300 m2 16000 zł + 60 zł za 1 m2 p.u. powyzej 200 m2”",
+   "dostep": "PDF + pypdf (dosłownie)",
+   "porownywalnosc": "Ceny netto; tanie biuro regionalne; bez instalacji. PDF + pypdf (dosłownie)."
+  },
+  {
+   "id": "R9",
+   "typ": "RYNKOWE",
+   "nazwa": "Biuro Projektów Konstrukcji — cennik",
+   "url": "https://biuroprojektowkonstrukcji.pl/cennik-uslug-projektowych/",
+   "rok": "b.d.",
+   "wartosc": {
+    "konstrukcja_PB+PT_zl_m2_pw": 25.7,
+    "wspolczynnik_prosty_dom": 1.0
+   },
+   "cytat": "„25,70 zł / m2 p.w. – projekt budowlany i techniczny”",
+   "dostep": "WebFetch (streszczenie modelu — cytat może być niedosłowny)",
+   "porownywalnosc": "Stawka bazowa × współczynnik; netto/brutto nieokreślone."
+  },
+  {
+   "id": "R10",
+   "typ": "RYNKOWE",
+   "nazwa": "DraftSanit — cennik usług projektowych",
+   "url": "https://draftsanit.pl/cennik-uslug-projektowych/",
+   "rok": "b.d.",
+   "wartosc": {
+    "pakiet_MAXI_180-250m2": "14 500 zł netto",
+    "pakiet_STANDARD_120-180m2": "12 500 zł netto",
+    "przylacza_wod-kan": "od 2 400 netto",
+    "charakterystyka_energetyczna_do_PnB": "od 900"
+   },
+   "cytat": "„14 500 /zł netto + 23% vat” (MAXI: wod-kan, podłogówka, wentylacja mechaniczna, PC powietrzna, dokumentacja formalna)",
+   "dostep": "WebFetch (streszczenie modelu — cytat może być niedosłowny)",
+   "porownywalnosc": "Pełny zakres sanitarny z PC i rekuperacją — zbliżony do zakresu IS domu LAMELA."
+  },
+  {
+   "id": "R11",
+   "typ": "RYNKOWE",
+   "nazwa": "instalacje-ele.pl — ile kosztuje projekt instalacji elektrycznej 2026",
+   "url": "https://instalacje-ele.pl/ile-kosztuje-projekt-instalacji-elektrycznej",
+   "rok": "aktual. 2026-06-15",
+   "wartosc": {
+    "dom_jednorodzinny": "1 500–4 500 zł netto",
+    "duze_zlozone": ">6 000",
+    "150m2": "2 500–4 000",
+    "pracochlonnosc_150m2_h": "30–45"
+   },
+   "cytat": "„W domu 80 m² czas pracy wynosi zwykle 15-20 godzin, w domu 150 m² rośnie do 30-45 godzin”",
+   "dostep": "WebFetch (streszczenie modelu — cytat może być niedosłowny)",
+   "porownywalnosc": "Bez wyceny projektu PV (tylko koszt instalacji PV)."
+  },
+  {
+   "id": "R12",
+   "typ": "RYNKOWE",
+   "nazwa": "Rooven — cennik wizualizacji 3D 2026",
+   "url": "https://rooven.pl/cennik-wizualizacji-3d/",
+   "rok": "2026",
+   "wartosc": {
+    "ujecie_pakiet_5": "od 520 zł netto",
+    "ujecie_pakiet_3": "od 630 zł netto",
+    "model_3D": "jednorazowo, osobno",
+    "czas": "5–10 dni roboczych"
+   },
+   "cytat": "„od 520 zł” netto w pakiecie 5 wizualizacji zewnętrznych",
+   "dostep": "WebFetch (streszczenie modelu — cytat może być niedosłowny)",
+   "porownywalnosc": "Typowo 3–5 ujęć na dom; koszt modelu nieujawniony."
+  },
+  {
+   "id": "R13",
+   "typ": "RYNKOWE",
+   "nazwa": "KC Mobile — ile kosztuje landing page",
+   "url": "https://kcmobile.pl/baza-wiedzy/marketing/ile-kosztuje-landing-page-cennik/",
+   "rok": "2026-05-18, aktual. 2026-09-13",
+   "wartosc": {
+    "landing_page": "2 260–4 500 zł netto (przykłady agencji); tytuł artykułu: 999–15 000 zł"
+   },
+   "cytat": "„2 500–4 500 zł netto” (Kredo Labs); „od 2 260 zł netto” (Smart Agency)",
+   "dostep": "WebFetch (streszczenie modelu — cytat może być niedosłowny)",
+   "porownywalnosc": "Brak czasu realizacji w źródle."
+  },
+  {
+   "id": "R14",
+   "typ": "RYNKOWE",
+   "nazwa": "Ciemińscy — ile trwa projekt domu",
+   "url": "https://www.cieminscy.pl/poradnik/ile-trwa-projekt-domu.html",
+   "rok": "2026-08-08",
+   "wartosc": {
+    "koncepcja": "2–8 tyg.",
+    "projekt_budowlany_i_koordynacja_branz": "4–12 tyg.",
+    "pozwolenie": "do 65 dni",
+    "od_rozmowy_do_PnB": "4–8 mies."
+   },
+   "cytat": "„od pierwszej rozmowy do pozwolenia na budowę mija zwykle około 4–8 miesięcy”",
+   "dostep": "WebFetch (streszczenie modelu — cytat może być niedosłowny)",
+   "porownywalnosc": "Nie obejmuje PT (po PnB)."
+  },
+  {
+   "id": "R15",
+   "typ": "RYNKOWE",
+   "nazwa": "Murator Projekty — ile trwa stworzenie indywidualnego projektu",
+   "url": "https://projekty.muratordom.pl/etap-2-wybieram-projekt-domu/ile-trwa-stworzenie-indywidualnego-projektu-domu-aa-2VuT-WpPj-zUf8.html",
+   "rok": "2024-06-13",
+   "wartosc": {
+    "koncepcja": "2–6 tyg.",
+    "korekty": "1–3 tyg.",
+    "caly_projekt": "ok. 1–2 mies. (przy komplecie dokumentów)"
+   },
+   "cytat": "„zazwyczaj czas oczekiwania na jego ostateczny kształt wynosi około 1-2 miesiące”",
+   "dostep": "WebFetch (streszczenie modelu — cytat może być niedosłowny)",
+   "porownywalnosc": "Optymistyczne; raczej PZT+PAB bez PT."
+  },
+  {
+   "id": "R16",
+   "typ": "RYNKOWE",
+   "nazwa": "eyecad.pl — Wycena projektu architektonicznego",
+   "url": "https://eyecad.pl/kariera-i-biznes-inzyniera/wycena-projektu-architektonicznego-jak-kalkulowac-stawki/",
+   "rok": "2026-01-15",
+   "wartosc": {
+    "dom_jednorodzinny_zl_m2_netto": "150–350",
+    "udzial_w_koszcie_budowy": "4–8% (złożone 6–10%)"
+   },
+   "cytat": "(wg WebFetch) koncepcja „10–20 tys. zł”, projekt budowlany „20 tys. zł+”, techniczny „10–20 tys. zł+” (dom ~150 m²)",
+   "dostep": "WebFetch (streszczenie modelu — cytat może być niedosłowny)",
+   "porownywalnosc": "Stawki godzinowe tam cytowane = ZWPP SARP 2014."
+  },
+  {
+   "id": "R17",
+   "typ": "RYNKOWE",
+   "nazwa": "architektbudowlany.pl — ile zarabia architekt za jeden projekt",
+   "url": "https://architektbudowlany.pl/ile-zarabia-architekt-za-jeden-projekt",
+   "rok": "2026-07-17",
+   "wartosc": {
+    "godziny_dom_150m2": "800–2 500",
+    "stawka_zl_h": "60–250"
+   },
+   "cytat": "„Standardowy projekt domu jednorodzinnego o powierzchni użytkowej 150 m² wymaga od 800 do 2 500 godzin pracy architekta”",
+   "dostep": "WebFetch (streszczenie modelu — cytat może być niedosłowny)",
+   "porownywalnosc": "NISKA WIARYGODNOŚĆ: brak źródła; suma etapów podanych w tym samym tekście (590–970 h) nie zgadza się z 800–2 500 h. Nie użyte do widełek."
+  },
+  {
+   "id": "R18",
+   "typ": "RYNKOWE",
+   "nazwa": "extradom.pl — koszt budowy domu 2026 (dane Sekocenbud)",
+   "url": "https://www.extradom.pl/porady/artykul-koszt-budowy-domu-ile-kosztuje-budowa-domu-jednorodzinnego",
+   "rok": "2026-08-24",
+   "wartosc": {
+    "Q1_2025": 5681,
+    "Q2_2025": 5695,
+    "Q4_2025": 5765,
+    "Q1_2026": 5802,
+    "Q2_2026": 6004,
+    "min_lubelskie_Q2_2026": 5717,
+    "max_zachpom_Q2_2026": 6316
+   },
+   "cytat": "„Średni koszt budowy domu na początku 2026 roku wyniósł 6004 zł/m2”",
+   "dostep": "WebFetch (streszczenie modelu — cytat może być niedosłowny)",
+   "porownywalnosc": "Sekocenbud (branżowy, płatny) cytowany wtórnie; netto/brutto i zakres (stan deweloperski) nie w pełni jasne."
+  },
+  {
+   "id": "R19",
+   "typ": "RYNKOWE",
+   "nazwa": "Mapa do celów projektowych / geotechnika (rynkowe)",
+   "url": [
+    "https://www.geodetawozniak.pl/mapa-do-celow-projektowych-ile-kosztuje-2026/",
+    "https://rankomat.pl/nieruchomosci/ile-kosztuje-projekt-domu"
+   ],
+   "rok": "2026",
+   "wartosc": {
+    "mapa_do_celow_projektowych": "1 300–1 800 zł (tytuł strony geodetawozniak.pl, 2026)",
+    "geotechnika_opinia": "1 200–3 500 zł netto (wynik wyszukiwarki, niezweryfikowane)"
+   },
+   "cytat": "tytuł: „Mapa do celów projektowych – cena 2026: od 1300 do 1800 zł”",
+   "dostep": "wynik wyszukiwarki / tytuł strony",
+   "porownywalnosc": "Czynności wykonywane przez uprawnionych geodetów/geotechników w terenie — AI ich nie zastępuje."
+  }
+ ],
+ "obliczenia": {
+  "metoda_normatywna_SARP_rozporzadzenie": {
+   "niski_Sekocenbud_Q2_2026_srednia_PL": {
+    "zl_m2": 6004,
+    "Kb_zl": 1435917,
+    "W%_III": 5.254,
+    "W%_IV": 7.267,
+    "Cp_III_zl": 75441,
+    "Cp_IV_zl": 104343
+   },
+   "WUW_wlkp_bez_Poznania_2025H1": {
+    "zl_m2": 6207,
+    "Kb_zl": 1484466,
+    "W%_III": 5.232,
+    "W%_IV": 7.235,
+    "Cp_III_zl": 77667,
+    "Cp_IV_zl": 107403
+   },
+   "podwyzszony_zalozenie_8000": {
+    "zl_m2": 8000,
+    "Kb_zl": 1913280,
+    "W%_III": 5.039,
+    "W%_IV": 6.956,
+    "Cp_III_zl": 96411,
+    "Cp_IV_zl": 133095
+   }
+  },
+  "opis": "Kb = PU × koszt 1 m²; W% interpolowane liniowo między wierszami 1 000 i 2 000 tys. zł tabeli (O1/B1); kategoria III (jednorodzinny z garażem) do IV (z indywidualnymi wymaganiami) — zgodnie z regułą SARP „przedział kat. i kat. wyższej”. 8 000 zł/m² to ZAŁOŻENIE dla standardu podwyższonego (wsporniki, duże przeszklenia, lamele, PC, PV), nie dana źródłowa.",
+  "rynek_zl_m2_razy_PU": {
+   "archeton_2026_60_250": [
+    14350,
+    59790
+   ],
+   "juraprojekt_2024_80_150_netto": [
+    19133,
+    35874
+   ],
+   "disinn_2026_130_190_netto": [
+    31091,
+    45440
+   ],
+   "rankomat_2026_150_300": [
+    35874,
+    71748
+   ],
+   "eyecad_2026_150_350_netto": [
+    35874,
+    83706
+   ],
+   "BIAMS_280_320_brutto_180_270m2": [
+    66965,
+    76531
+   ]
+  },
+  "godziny_z_honorarium_(zł/stawka)": {
+   "74000/120": 617,
+   "74000/150": 493,
+   "74000/250": 296,
+   "133000/120": 1108,
+   "133000/150": 887,
+   "133000/250": 532
+  },
+  "h_na_etatomiesiac": 145.2
+ },
+ "widelki_propozycja": {
+  "zakres_porownywany": "koncepcja + PZT + PAB + PT (architektura z detalami, konstrukcja z obliczeniami, IS z charakterystyką energetyczną, IE z PV) + wizualizacje + strona sprzedażowa; BEZ mapy do celów projektowych, badań geotechnicznych, opłat, uzgodnień urzędowych, nadzoru autorskiego",
+  "koszt_zl_netto": {
+   "dolny_tanie_biuro_z_cennikow": {
+    "wartosc": "ok. 30 000",
+    "skladniki": "arch+konstr 18 350 (R8) + sanit ~4 000 (wynik wyszukiwarki) + elektr 2 500 (R11) + charakterystyka 900 (R10) + 5 wizualizacji ~2 600 (R12) + landing ~2 300 (R13)"
+   },
+   "srodkowy_rynkowy_pelny_zakres": {
+    "wartosc": "60 000–100 000",
+    "skladniki": "pakiet BIAMS 54–62 tys. netto (R7) albo Disinn 31–45 tys. + DraftSanit 14,5 tys. + elektr/PV 4,5–6 tys. (R2,R10,R11); + wizualizacje z modelem 3–6 tys. + strona 4,5–15 tys."
+   },
+   "gorny_metoda_SARP_rozporzadzenie": {
+    "wartosc": "75 000–133 000 (+ wizualizacje/strona 5–20 tys. → ok. 80 000–150 000)",
+    "skladniki": "Cp dla Kb 1,44–1,91 mln zł, kat. III–IV (obliczenia); SARP wyłącza makiety/specjalne opracowania graficzne, więc wizualizacje i stronę doliczono"
+   },
+   "rekomendacja": "uczciwe widełki 30 000–150 000 zł netto; najbardziej prawdopodobnie 60 000–100 000 zł netto za pełny zakres u niezależnej pracowni",
+   "dodatkowo_poza_zakresem": "nadzór autorski ≥15% ceny projektu (B1); mapa ~1,3–1,8 tys. zł; geotechnika ~1,2–3,5 tys. zł; opłata za PnB (R5/R6)"
+  },
+  "czas_tygodnie": {
+   "koncepcja": "2–8 (R14, R15, R4)",
+   "PZT+PAB_z_koordynacja_branz": "4–12 (R14, R4)",
+   "PT": "4–12 (R4: „kilka tygodni do ~3 miesięcy”)",
+   "wizualizacje": "1–2, równolegle (R12: 5–10 dni roboczych)",
+   "strona": "2–6, równolegle — ZAŁOŻENIE (brak źródła)",
+   "razem_praca_zespolu": "10–32 tygodni (typowo 16–26), bez czasu urzędu (PnB do 65 dni, R14), bez oczekiwania na mapę/geotechnikę/warunki przyłączenia i decyzje inwestora",
+   "zrodlo_calosci": "R6: 3–9 mies.; R14: 4–8 mies. do PnB"
+  },
+  "roboczogodziny": {
+   "oddolnie": {
+    "architektura_z_PZT": "414–440 (B5, niezweryfikowane bezpośrednio)",
+    "konstrukcja": "40–200 (ZAŁOŻENIE: cena 6–24 tys. / 120–150 zł/h)",
+    "sanitarne_z_CE": "30–130 (ZAŁOŻENIE: 4–14,5 tys. / 120–150 zł/h + 5–10 h CE)",
+    "elektryczne_z_PV": "48–72 (R11: 30–45 h dla 150 m², skalowane liniowo do 239 m² — założenie)",
+    "wizualizacje": "20–40 (ZAŁOŻENIE)",
+    "strona": "20–100 (ZAŁOŻENIE)",
+    "suma": "ok. 575–980 h"
+   },
+   "odgornie": "75–133 tys. zł / 120–150 zł/h ≈ 490–1 110 h",
+   "rekomendacja": "ok. 550–1 100 roboczogodzin (typowo 700–900 h) ≈ 3,8–7,6 etatomiesiąca przy 145,2 h/mies. (O3); zespół 5–7 osób (architekt prowadzący + asystent, konstruktor, projektant sanitarny, projektant elektryczny, grafik 3D, web developer)"
+  }
+ },
+ "czego_AI_nie_zastepuje": [
+  "Uprawnienia budowlane i członkostwo w izbie (IARP/PIIB) z obowiązkowym OC — projekt podpisuje i odpowiada za niego osoba uprawniona; oświadczenia projektantów w PAB.",
+  "Odpowiedzialność zawodowa, cywilna i karna projektanta; sprawdzenie projektu przez osobę z uprawnieniami tam, gdzie wymaga go Prawo budowlane (art. 20 — zakres wyjątków dla domów jednorodzinnych do weryfikacji prawnej).",
+  "Mapa do celów projektowych — uprawniony geodeta, zasób PZGiK (ceny w R6/R19).",
+  "Badania gruntu i opinia geotechniczna — prace terenowe (w repo przyjęto PRZYKŁADOWĄ opinię).",
+  "Realne MPZP/WZ, warunki przyłączenia od gestorów sieci, uzgodnienia (np. rzeczoznawca ppoż. przy PV > 6,5 kW), wniosek i postępowanie o pozwolenie na budowę — w repo działka i MPZP są fikcyjne.",
+  "Wizja lokalna, spotkania i decyzje z inwestorem, nadzór autorski w czasie budowy (≥15% ceny projektu wg SARP).",
+  "Prawa autorskie/licencja do utworu (ZWPP SARP pkt 2–3) i gwarancja jakości w umowie."
+ ],
+ "problemy_dostepu": [
+  "poznan.uw.gov.pl i edziennik.poznan.uw.gov.pl: curl „Connection reset by peer” (proxy: ws_closed_mid_exchange), WebFetch HTTP 503 — nie odczytano obwieszczenia Wojewody Wielkopolskiego z 30.03.2026; użyto wartości 2025 H1 ze źródła wtórnego oraz obwieszczeń 2026 z innych województw.",
+  "bgk.pl: HTTP 403; architekturaibiznes.pl: HTTP 403; z500.pl: HTTP 403; 3d-archi.pl: HTTP 503; inforlex/sip.lex.pl: treść za paywallem.",
+  "Status proxy (curl $HTTPS_PROXY/__agentproxy/status): enabled=true, bundleCoversEveryHost=true — błędy dotyczą pojedynczych hostów (reset/403/503 po stronie serwera), a nie blokady całej sieci.",
+  "ŚZWPP (IPB 2016) — płatne; tablic j.n.p. dla domów nie odczytano.",
+  "GUS: nie znaleziono publikowanych płac dla działu PKD 71 — podano sekcję M i grupę zawodów 216."
+ ]
+}

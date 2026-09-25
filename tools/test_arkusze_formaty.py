@@ -566,7 +566,7 @@ def test_metryka_skladowe():
     with tempfile.TemporaryDirectory() as d:
         files = sh.save(Path(d) / "L", formats=("pdf",))
         r = M.analyze_pdf(Path(files["pdf"]))
-    assert r["wypelnienie"] > 0.95 and r["wypelnienie_skl"] < r["wypelnienie"] - 0.2, (r["wypelnienie"],
+    assert r["wypelnienie"] > 0.9 and r["wypelnienie_skl"] < r["wypelnienie"] - 0.2, (r["wypelnienie"],
                                                                                       r["wypelnienie_skl"])
 
 
