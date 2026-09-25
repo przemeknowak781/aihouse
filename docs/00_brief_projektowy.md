@@ -59,8 +59,8 @@ Grafika: `00_wejscie/interpretacja_szkicu_v2.png`.
   zwierciadło wody gruntowej ≈ 3,8 m p.p.t.; warunki proste, **I kategoria geotechniczna** [DO WERYFIKACJI kryteria].
 * Uzbrojenie w drodze: wodociąg PE 110, kanalizacja sanitarna PVC 200, sieć nN 0,4 kV (złącze kablowo-pomiarowe w linii ogrodzenia),
   światłowód; sieć gazowa istnieje, ale **nie jest wykorzystywana** (dom all-electric); brak kanalizacji deszczowej ⇒ retencja i rozsączanie na działce.
-* Strefy obciążeń (Poznań) [DO WERYFIKACJI]: śnieg strefa 1 (s_k = 0,7 kN/m²), wiatr strefa 1 (v_b,0 = 22 m/s), teren kat. III,
-  głębokość przemarzania h_z = 0,8 m, projektowa temp. zewnętrzna θ_e = −18 °C (III? II? strefa klimatyczna — zweryfikować).
+* Strefy obciążeń (Poznań) — ZWERYFIKOWANE przez R5: śnieg **strefa 2 (s_k = 0,9 kN/m²)**, wiatr strefa 1 (v_b,0 = 22 m/s), teren kat. III,
+  głębokość przemarzania h_z = 0,8 m (mapa PN-81/B-03020, norma wycofana — stosowana w praktyce), θ_e = −18 °C (strefa klimatyczna II), θ_m,e = 7,9 °C.
 
 ## 3. Przyjęty MPZP (fikcyjny, oparty na typowych zapisach) **[do finalizacji w koncepcji]**
 Uchwała nr XII/123/2024 Rady Gminy Przykładowo z dnia 21.03.2024 r. — teren **3MN** (zabudowa mieszkaniowa jednorodzinna wolnostojąca):

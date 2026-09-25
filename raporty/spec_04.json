@@ -1,5 +1,6 @@
 {
- "title": "Korekta Inwestora: „S” z przesuniętych brył, garaż w parterze — panel koncepcji uruchomiony ponownie",
+ "nr": 4,
+ "title": "Parametry obciążeń i klimatu zweryfikowane (korekta strefy śniegowej); koncepcja i narzędzia w toku",
  "stages": [
   [
    "Analiza szkicu — interpretacja v2 („S” z brył, garaż)",
@@ -51,5 +52,15 @@
   "Podstawa prawna: projekt wg WT z 19.09.2026 (art. 102a PB) + oświadczenie inwestora.",
   "Koncepcja v2: 3 niezależne warianty w opracowaniu (sylweta „S”, garaż w parterze).",
   "Silnik rysunkowy: gotowe moduły arkuszy, wymiarowania, symboli (architektura, instalacje, teren); rdzeń modelu i IR 3D w budowie."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/docs/10_podstawy_prawne/grafiki/parametry_lokalizacji.png",
+   "caption": "Parametry lokalizacji (R5)"
+  },
+  {
+   "path": "/home/user/aihouse/docs/10_podstawy_prawne/grafiki/os_czasu_WT.png",
+   "caption": "Stan prawny WT (R1)"
+  }
  ]
 }

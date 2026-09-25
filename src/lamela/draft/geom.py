@@ -199,10 +199,6 @@ def strip_frame(poly: Polygon):
     return ctr, u, v, L, t
 
 
-def seg_intersections_x(pts: np.ndarray, closed: bool = True):
-    return None
-
-
 def bbox_of(arrays: Iterable[np.ndarray]):
     xs0, ys0, xs1, ys1 = [], [], [], []
     for a in arrays:

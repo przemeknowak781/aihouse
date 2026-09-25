@@ -558,12 +558,17 @@ def scale_bar(c, pos, scale: float, length_m: float | None = None, h: float = 2.
     return (x0, y0, xz + n * step * mm_per_m + 4.0, y0 + bh + 1.0 + h)
 
 
-def control_segment(sh: Sheet, pos, length: float = 100.0, h: float = 1.8):
-    """Odcinek kontrolny wydruku (np. 100 mm) — do sprawdzenia, czy arkusz wydrukowano w skali 1:1."""
+def control_segment(sh: Sheet, pos, length: float = 100.0, h: float = 1.8, vertical: bool = False):
+    """Odcinek kontrolny wydruku (np. 100 mm) — do sprawdzenia, czy arkusz wydrukowano w skali 1:1.
+    ``vertical=True`` — pionowo (np. w marginesie na oprawę)."""
     x, y = pos
+    d = np.array([0.0, 1.0]) if vertical else np.array([1.0, 0.0])
+    n = np.array([-1.0, 0.0]) if vertical else np.array([0.0, 1.0])
+    P = np.array([x, y], float)
     with sh.on("R-OPISY"):
-        sh.line((x, y), (x + length, y), pen=0.35)
+        sh.line(P, P + d * length, pen=0.35)
         for i in range(0, int(length) + 1, 10):
             t = 1.6 if i % 50 == 0 else 0.9
-            sh.line((x + i, y), (x + i, y + t), pen=0.18)
-        sh.text((x + length + 1.5, y), f"odcinek kontrolny {int(length)} mm (wydruk 1:1)", h, va="baseline")
+            sh.line(P + d * i, P + d * i + n * t, pen=0.18)
+        sh.text(P + d * (length + 1.5), f"odcinek kontrolny {int(length)} mm (wydruk 1:1)", h,
+                90.0 if vertical else 0.0, "left", "middle" if not vertical else "top")
