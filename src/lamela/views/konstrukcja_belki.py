@@ -283,11 +283,21 @@ def rysuj_bieg(vp, placer: Placer, b: KD.BiegZ, odc: list, hs: float, ss: float,
     if not poly.buffer(0.001).contains(Point(*pts[len(pts) // 2])):
         lnb = LS(bot).parallel_offset(c + g.fi / 2000.0, "right", join_style=2)
         pts = list(lnb.coords) if lnb.geom_type == "LineString" else list(max(lnb.geoms, key=lambda q: q.length).coords)
-    vp.polyline(pts, L_ZBR, pen=0.5)
     Lr = LS(pts).length
-    p_gl = zest.dodaj(KD.Pret(g.fi, "26" if len(pts) > 2 else "00", tuple(
-        np.hypot(*(np.subtract(q, p_))) * 1000 for p_, q in zip(pts[:-1], pts[1:])), int(math.ceil(szer / (g.s / 1000))) + 1,
-        f"{b.schody}/{b.nr}", "dołem"))
+    n_gl = int(math.ceil(szer / (g.s / 1000))) + 1
+    # załamania toru prętów dolnych: wypadkowa sił w pręcie przy załamaniu skierowana do wnętrza kąta toru; gdy po
+    # tej stronie jest otulina (naroże wklęsłe betonu od strony rozciąganej — np. bieg → spocznik górny), pręt
+    # ciągły odspaja otulinę → dwa pręty proste krzyżujące się, każdy przedłużony za załamanie do przeciwległej
+    # (ściskanej) krawędzi i zakotwiony tam ≥ l_bd (PN-EN 1992-1-1 8.4; zasady naroży z momentem „otwierającym” —
+    # zał. J.2.3 (informacyjny)). Naroże wypukłe od strony rozciąganej (spocznik dolny → bieg) — pręt odgięty.
+    tory = _tory_pretow_zalamanych(pts, poly, c + g.fi / 2000.0, KD._lbd(g.fi, b.beton), g.fi / 1000.0)
+    prety_dol = []
+    for tor in tory:
+        vp.polyline(tor, L_ZBR, pen=0.5)
+        seg = tuple(np.hypot(*(np.subtract(q, p_))) * 1000 for p_, q in zip(tor[:-1], tor[1:]))
+        prety_dol.append((zest.dodaj(KD.Pret(g.fi, "26" if len(tor) > 2 else "00", seg, n_gl, f"{b.schody}/{b.nr}",
+                                             "dołem")), tor))
+    p_gl = prety_dol[0][0]
     fr, sr = b.rozdz
     p_r = zest.dodaj(KD.Pret(fr, "00", ((szer - 2 * c) * 1000,), int(math.ceil(Lr / (sr / 1000))) + 1, f"{b.schody}/{b.nr}",
                              "rozdzielcze"))
@@ -314,9 +324,12 @@ def rysuj_bieg(vp, placer: Placer, b: KD.BiegZ, odc: list, hs: float, ss: float,
     vp.text((x0_, y1_ + 8 * k), tytul, 3.5, 0, "left", "baseline", L_OPS, style="bold")
     from ..draft.text import width as _tw
     placer.add(box(x0_, y1_ + 7 * k, x0_ + _tw(tytul, 3.5, "bold") * k, y1_ + 12 * k), "text", 2.0)
-    etykieta(vp, placer, pts[len(pts) // 2], np.subtract(pts[-1], pts[0]),
-             f"{p_gl.n if False else int(math.ceil(szer / (g.s / 1000))) + 1} Ø{g.fi} co {g.s / 10:g} l={p_gl.L_mm / 10:g}",
-             p_gl.nr, 2.5, offs=(3.0, 7.0), ts=(0.0, -0.8, 0.8))
+    for p_d, tor in prety_dol:
+        ld = LS(tor)
+        q_ = ld.interpolate(0.5, normalized=True)
+        etykieta(vp, placer, (q_.x, q_.y), np.subtract(tor[-1], tor[0]),
+                 f"{n_gl} Ø{g.fi} co {g.s / 10:g} l={p_d.L_mm / 10:g}", p_d.nr, 2.5, offs=(3.0, 7.0),
+                 ts=(0.0, -0.25 * ld.length, 0.25 * ld.length))
     etykieta(vp, placer, tpts[1] if len(tpts) > 1 else tpts[0], np.subtract(tpts[-1], tpts[0]),
              f"Ø{fg} co {sg / 10:g} l={p_g.L_mm / 10:g} (obie podpory)", p_g.nr, 2.5, offs=(3.0, 7.0),
              ts=(0.0, 0.4, 0.8))
@@ -325,4 +338,62 @@ def rysuj_bieg(vp, placer: Placer, b: KD.BiegZ, odc: list, hs: float, ss: float,
              offs=(5.0, 9.0, 13.0), ts=(0.0, 0.5, -0.5))
     x0, y0, x1, y1 = poly.union(stp).bounds
     dims.dim_h(vp, [x0, x1], y0 - 8 * k, None, layer="K-WYMIARY")
-    return (x0 - 10 * k, y0 - 16 * k, x1 + 30 * k, y1 + 14 * k), (p_gl, p_r, p_g)
+    return (x0 - 10 * k, y0 - 16 * k, x1 + 30 * k, y1 + 14 * k), tuple(p_ for p_, _ in prety_dol) + (p_r, p_g)
+
+
+def _tory_pretow_zalamanych(pts: list, poly, a_c: float, l_bd: float, fi: float) -> list:
+    """Tor prętów przy spodzie płyty łamanej (``pts`` — linia osi prętów) → lista torów prętów. W wierzchołkach, gdzie
+    wypadkowa sił rozciągających pręt (kierunek −d₁ + d₂) wskazuje na zewnątrz betonu (naroże wklęsłe od strony
+    rozciąganej), tor jest dzielony na dwa pręty krzyżujące się: każdy przedłużony prosto za załamanie do krawędzi
+    przeciwległej (otulina ``a_c`` od lica) i dalej wzdłuż niej tak, by długość za punktem załamania ≥ l_bd."""
+    from shapely.geometry import LineString as LS
+    P = [np.asarray(q, float) for q in pts]
+    inner = poly.buffer(-a_c + 1e-4, join_style=2)
+
+    def unit(v):
+        n_ = float(np.hypot(*v))
+        return v / n_ if n_ > 1e-12 else v
+
+    zle = []
+    for i in range(1, len(P) - 1):
+        d1, d2 = unit(P[i] - P[i - 1]), unit(P[i + 1] - P[i])
+        r = d2 - d1
+        if float(np.hypot(*r)) < 1e-3:
+            continue
+        if not poly.contains(Point(*(P[i] + 0.03 * unit(r)))):
+            zle.append(i)
+    if not zle:
+        return [[tuple(q) for q in P]]
+
+    def przedluz(v, d, d_nogi):
+        """Odcinek prosty z v w kierunku d do krawędzi (wnętrze ``inner``) + noga wzdłuż d_nogi do l_bd."""
+        ray = LS([tuple(v), tuple(v + 3.0 * d)]).intersection(inner)
+        geoms = [ray] if ray.geom_type == "LineString" else list(getattr(ray, "geoms", []))
+        L0 = 0.0
+        for gg in geoms:
+            if gg.geom_type == "LineString" and gg.distance(Point(*v)) < 1e-3:
+                L0 = max(L0, gg.length)
+        E = v + L0 * d
+        out = [E]
+        reszta = l_bd - L0
+        if reszta > 1e-3:
+            leg = LS([tuple(E), tuple(E + max(reszta, 10 * fi) * d_nogi)]).intersection(inner.buffer(1e-3))
+            Ln = leg.length if leg.geom_type == "LineString" else max((q.length for q in getattr(leg, "geoms", [])),
+                                                                       default=0.0)
+            if Ln > 1e-3:
+                out.append(E + Ln * d_nogi)
+        return out
+
+    tory, start = [], 0
+    for i in zle + [len(P) - 1]:
+        kaw = P[start:i + 1]
+        tor = [q for q in kaw]
+        if i in zle:                                   # koniec w złym załamaniu → przedłużenie do przodu
+            d = unit(P[i] - P[i - 1])
+            tor = tor[:-1] + przedluz(P[i], d, unit(P[i + 1] - P[i]))
+        if start in zle:                               # początek w złym załamaniu → przedłużenie wstecz
+            d = unit(P[start] - P[start + 1])
+            tor = list(reversed(przedluz(P[start], d, unit(P[start - 1] - P[start])))) + tor[1:]
+        tory.append([tuple(q) for q in tor])
+        start = i
+    return tory
