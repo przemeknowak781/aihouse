@@ -5,8 +5,10 @@ Wymaganie Inwestora: „Pamiętaj o ekonomicznym ustawieniu na arkuszach, nie mu
 wielokrotności A3, chociaż fajnie jak się ładnie będzie składało.”
 
 1. **Formaty-kandydaci**: ISO 216 (A4 pionowo, A3…A0), wydłużone PN-EN ISO 5457 (A4×n, A3×n, A2×n, A1×n) oraz
-   **niestandardowe** H × L: wysokość H z ``wysokosci`` (domyślnie 297, 420, 594, 841, 891 mm), długość L dopasowana
-   do treści (krok ``krok_dlugosci``, 10 mm). H ≤ 914 mm: arkusz drukuje się na rolce plotera 36″ (914,4 mm; typowe
+   **niestandardowe** H × L: wysokość H z ``wysokosci`` (domyślnie 297, 420, 594, 610, 841, 891, 914 mm), długość L
+   dopasowana do treści (krok ``krok_dlugosci``, 10 mm), oraz **„bokiem na rolkę”**: szerokość L = szerokość rolki
+   (``rolki``: 297, 420, 594, 610, 841, 914 mm), wysokość H docięta do treści (krok 10 mm, ≥ 297 mm) — np. 594 × 440
+   zamiast 690 × 420: mniej papieru i pasy harmonijki 210 + 192 + 192 zamiast 140 + 4 × 120 (weryfikacja_M.md § 3). H ≤ 914 mm: arkusz drukuje się na rolce plotera 36″ (914,4 mm; typowe
    rolki: 297, 420, 594/610 (24″), 841, 914 (36″) mm) z długością L odcinaną z rolki — format niestandardowy nie
    podraża wydruku, liczy się pole papieru. Większe H (A0×n, 1189 mm) wymagają rolki 1189 mm (47″, rzadkie) —
    tylko jawnie.
@@ -41,6 +43,9 @@ L = 210 + m·n, np. 190; 0 — tylko najmniejsza długość), ``max_wysokosc`` (
 ``max_dlugosc`` (2400), ``wolne_obszary`` (true — bloki także w pustych narożnikach obwiedni widoków),
 ``odstep_widok_blok`` (10 mm), ``kara_czesci_uwag`` (0,02 — na każdą część uwag ponad jedną),
 ``max_czesci_uwag`` (4), ``kara_kolejnosci`` (0,01 — bloki, których nie da się ułożyć w kolejności czytania),
+``rolki`` ([297, 420, 594, 610, 841, 914] — szerokości arkuszy „bokiem na rolkę”: szerokość = rolka, wysokość
+docięta do treści, ≤ ``max_wysokosc``; [] — wyłączone), ``pismo_min`` (1,8 mm — pismo uwag i podziałki w kolumnie
+opisowej; PZT: 2,5 mm, W-312),
 ``kolejnosc_uwag`` (``czytania`` | ``dowolna`` — dawny podział: najmniej papieru, bez
 warunku kolejności i bez przestawiania kolumn), ``znaki_centrujace`` (``auto`` | ``rezerwuj`` — zawsze
 rezerwacja stref | ``skracaj`` — bez rezerwacji, znaki skracane).
@@ -72,7 +77,7 @@ ROLKI = [297, 420, 594, 610, 841, 914]   # szerokości rolek plotera [mm] (A-ser
 
 DOMYSLNE = dict(
     format="auto", wysokosci=[297, 420, 594, 610, 841, 891, 914], krok_dlugosci=10.0, modul_skladania="auto",
-    rolki=list(ROLKI), pismo_uwag=1.8,
+    rolki=list(ROLKI), pismo_min=1.8,
     kara_niestandard=0.03, kara_skladania={"dobre": 0.0, "poprawne": 0.04, "słabe": 0.10}, max_dlugosc=2400.0,
     max_wysokosc=914.0, wolne_obszary=True, odstep_widok_blok=GAP_VB, kara_czesci_uwag=0.02, max_czesci_uwag=4,
     znaki_centrujace="auto", kolejnosc_uwag="czytania", kara_kolejnosci=0.01,

@@ -370,11 +370,11 @@ def _north(model):
     return fn
 
 
-def _scalebar(scale):
+def _scalebar(scale, h: float = 1.8):
     def fn(sh, x, y, w):
         # skale spoza słownika (detale 1:5, 1:10 …) — długość dobiera scale_bar (≤ 125 mm na papierze)
         L = {20: 2.0, 25: 2.0, 50: 5.0, 100: 10.0, 200: 20.0, 250: 25.0, 500: 50.0}.get(int(scale))
-        r = scale_bar(sh, (x + 4.0, y - 8.0), scale, L)
+        r = scale_bar(sh, (x + 4.0, y - 8.0 - (h - 1.8)), scale, L, h=h)
         return r[1] - 5.0
     return fn
 
@@ -647,11 +647,12 @@ def _bloki_ukladu(ctx, P) -> list:
     uwagi dzielone na kolumny, pozostałe bloki w kolejności kolumny."""
     col, m = P["col"], ctx.model
     names = [n for n, _f in col.blocks]
+    hp = max(1.8, float(U.opcje(ctx.cfg).get("pismo_min", 1.8)))
     sc = P["skalowane"][0].vp.scale if P["skalowane"] else None
     out = []
     if "north" in names or sc:
         nfn = _north(m) if "north" in names else None
-        sfn = _scalebar(sc) if sc else None
+        sfn = _scalebar(sc, hp) if sc else None
 
         def ns(sh, x, y, w, nfn=nfn, sfn=sfn):
             yb = y
@@ -669,9 +670,8 @@ def _bloki_ukladu(ctx, P) -> list:
     out += U.bloki_z_kolumny(pary, U.B_W)     # pomiar sekwencyjny: bloki zależne od poprzednich — razem
     if any(nm == "notes" for nm, _f in col.blocks):
         b = U.Blok("uwagi", None, U.B_W)
-        # pismo uwag: ``pismo_uwag`` (domyślnie 1,8 mm; PZT — 2,5 mm, W-312)
-        b.uwagi = U.BlokUwag(P["notes"], "OBJAŚNIENIA I UWAGI", h=float(U.opcje(ctx.cfg).get("pismo_uwag", 1.8)),
-                             w=U.B_W)
+        # pismo uwag: ``pismo_min`` (domyślnie 1,8 mm; PZT — 2,5 mm, W-312)
+        b.uwagi = U.BlokUwag(P["notes"], "OBJAŚNIENIA I UWAGI", h=hp, w=U.B_W)
         out.append(b)
     return out
 
