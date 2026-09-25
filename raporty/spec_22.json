@@ -1,5 +1,6 @@
 {
- "title": "Korekta Inwestora: „S” z przesuniętych brył, garaż w parterze — panel koncepcji uruchomiony ponownie",
+ "nr": 22,
+ "title": "Werdykt sędziów: baza W2 z przeszczepami z W1 i W3 — ruszyła synteza modelu danych",
  "stages": [
   [
    "Analiza szkicu — interpretacja v2 („S” z brył, garaż)",
@@ -55,9 +56,24 @@
   ]
  ],
  "notes": [
+  "NADZÓR (05:17): 3 agentów aktywnych, bez zastojów; najdłuższa bezczynność 1 min; zmiany w repo 3 min temu.",
   "Werdykt panelu: baza W2 (średnia 72,7 pkt; J1 i J2 za W2, J3 za W3) + przeszczepy z W1 i W3 + 28 obowiązkowych poprawek.",
   "Trwa SYNTEZA: model budowany skryptem parametrycznym tools/buduj_model.py z walidacją, rysunkami i 3D po każdej sekcji.",
   "Wszystkie 3 biblioteki obliczeń ukończone (konstrukcja 22/22, fizyka 24/24, instalacje 22/22). Dobudowywany moduł ścian-tarcz (MES + STM) dla wspornika II piętra.",
   "Solver mostków zwalidowany i poprawiony — trwa katalog węzłów demonstracyjnych."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/docs/20_koncepcja/werdykt_panelu.png",
+   "caption": "Werdykt panelu sędziów"
+  },
+  {
+   "path": "/home/user/aihouse/docs/20_koncepcja/W2/elewacja_S.png",
+   "caption": "Baza: W2 — elewacja płd."
+  },
+  {
+   "path": "/home/user/aihouse/docs/20_koncepcja/W3/rzut_P0.png",
+   "caption": "Przeszczepy z W3 (oś widokowa, PC, retencja)"
+  }
  ]
 }
