@@ -47,6 +47,8 @@ def separator_svg(m) -> str:
 
 def grubosc_cm(d: float) -> str:
     v = d * 100
+    if v < 0.1:
+        return fm(v, 2)
     return fm(v, 0) if abs(v - round(v)) < 0.05 else fm(v, 1)
 
 

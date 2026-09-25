@@ -84,7 +84,7 @@ Urządzenia budowlane (PB art. 3 pkt 9) projektowane na działce — położenie
 | niecka chłonna | niecka chłonna (ogród deszczowy) 28 m² (powiększona — weryfikacja §6 B6), głęb. 0,30 m, ≥ 3,0 m od fundamentów, ≥ 2,0 m od granic, ≥ 1,0 m od rzutu korony dojrzałych drzew (W-144, K-2) |
 | ogrodzenie od drogi | od drogi: ażurowe; h = 1,50 m; łącznie 25,40 m |
 | ogrodzenie pozostałe | panele siatkowe zgrzewane grafit z żywopłotem, h = 1,50 m, 132,00 m |
-| przesuwna | szer. w świetle 5,60 m, h = 1,50 m |
+| brama przesuwna | szer. w świetle 5,60 m, h = 1,50 m |
 | furtka | szer. w świetle 1,00 m, h = 1,50 m |
 | stanowisko pojemników | osłona z lamel na 4 pojemniki 240 l (segregacja), przy furtce; odległości wg WT §23 ust. 4 nieokreślone dla zabudowy jednorodzinnej (W-016) |
 

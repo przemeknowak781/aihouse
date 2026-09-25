@@ -1,5 +1,5 @@
 {
- "czas": "2026-09-25 08:53",
+ "czas": "2026-09-25 08:57",
  "aktywni": [
   {
    "id": "a82012b772f4804f3",
@@ -10,63 +10,55 @@
    "powody": []
   },
   {
-   "id": "ae8a033bfce42ab47",
-   "opis": "wf_ce63599a-15f:opis:PZT_ZL",
-   "idle_min": 0.0,
-   "bez_narzedzi_min": 0.0,
-   "limity": 0,
-   "powody": []
-  },
-  {
    "id": "aecd6e8f26140c2ed",
    "opis": "wf_ce63599a-15f:opis:PAB",
-   "idle_min": 0.4,
-   "bez_narzedzi_min": 0.5,
+   "idle_min": 0.8,
+   "bez_narzedzi_min": 0.8,
    "limity": 0,
    "powody": []
   },
   {
    "id": "a348d2a8e7cf1f6c5",
    "opis": "wf_dad224e5-cd8:silnik",
-   "idle_min": 5.2,
-   "bez_narzedzi_min": 5.2,
-   "limity": 0,
-   "powody": []
-  },
-  {
-   "id": "a018fbab99b79a8e9",
-   "opis": "wf_10e1a801-dd6:weryfikacja:V1",
-   "idle_min": 1.4,
-   "bez_narzedzi_min": 1.4,
-   "limity": 0,
-   "powody": []
-  },
-  {
-   "id": "a82de0c2412aaa264",
-   "opis": "wf_10e1a801-dd6:weryfikacja:V2",
    "idle_min": 0.3,
    "bez_narzedzi_min": 0.3,
    "limity": 0,
    "powody": []
   },
   {
+   "id": "a018fbab99b79a8e9",
+   "opis": "wf_10e1a801-dd6:weryfikacja:V1",
+   "idle_min": 0.1,
+   "bez_narzedzi_min": 0.2,
+   "limity": 0,
+   "powody": []
+  },
+  {
+   "id": "a82de0c2412aaa264",
+   "opis": "wf_10e1a801-dd6:weryfikacja:V2",
+   "idle_min": 0.0,
+   "bez_narzedzi_min": 0.1,
+   "limity": 0,
+   "powody": []
+  },
+  {
    "id": "ad07d221db9b5c09f",
    "opis": "wf_c5f7e298-4b9:PT:BO",
-   "idle_min": 2.5,
-   "bez_narzedzi_min": 2.5,
+   "idle_min": 6.5,
+   "bez_narzedzi_min": 6.5,
    "limity": 0,
    "powody": []
   },
   {
    "id": "a40bbe274c6070548",
    "opis": "wf_c5f7e298-4b9:PT:IS",
-   "idle_min": 0.5,
-   "bez_narzedzi_min": 0.5,
+   "idle_min": 0.3,
+   "bez_narzedzi_min": 0.3,
    "limity": 0,
    "powody": []
   }
  ],
  "zakonczeni": 0,
  "zastoje": [],
- "repo_bez_zmian_min": 1.8
+ "repo_bez_zmian_min": 0.6
 }
