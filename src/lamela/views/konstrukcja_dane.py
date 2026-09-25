@@ -1568,7 +1568,7 @@ def _klastry(maski_el, W, pad: float = 0.02) -> list:
 
 def dozbrojenia_fund(D: DaneKonstr, W, siatki: dict) -> dict:
     """Dozbrojenia płyty z MES: dla warstwy/kierunku obszary (poza żebrami), gdzie A_s,req > A_s siatki →
-    pręty dodatkowe między prętami siatki (rozstaw s siatki) na obszarze + l_bd; strefy μ > μ_lim — do przeprojektowania.
+    pręty dodatkowe między prętami siatki (rozstaw s siatki) na obszarze + l_bd; strefy μ > μ_lim (podwójnie zbrojone) — 'mu'.
     Zwraca {(warstwa, kier): [(Polygon, φ, s, A_s,req,max, A_s,prov)]} oraz 'mu' (strefy)."""
     out = {}
     rib = np.array([s_ != "" for s_ in W.strefa_el])
@@ -1596,8 +1596,9 @@ def dozbrojenia_fund(D: DaneKonstr, W, siatki: dict) -> dict:
 
 
 def prety_zebra_mes(W, Z, siatki: dict, n_min: tuple) -> dict:
-    """Pręty podłużne żebra z MES: A_s,req [mm²/m] × szerokość żebra (maks. wzdłuż żebra, elementy strefy żebra poza
-    μ > μ_lim) − udział siatki → n·φ (φ 12…20, ≥ liczba z biblioteki). Zwraca {warstwa: (n, φ, A_req, A_prov, mu_zle)}."""
+    """Pręty podłużne żebra z MES: A_s,req [mm²/m] × szerokość żebra (maks. wzdłuż żebra; w strefach
+    μ > μ_lim z A_s2) − udział siatki → n·φ (φ 12…20, ≥ liczba z biblioteki). Zwraca {warstwa: (n, φ, A_req, A_prov,
+    podw)} — podw: żebro ma strefę podwójnie zbrojoną (μ > μ_lim)."""
     kier = "x" if abs(Z.p1[0] - Z.p0[0]) >= abs(Z.p1[1] - Z.p0[1]) else "y"
     msk = np.array([s_ == Z.id for s_ in W.strefa_el])
     out = {}

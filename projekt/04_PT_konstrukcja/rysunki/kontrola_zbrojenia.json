@@ -1,5 +1,942 @@
 {
- "ok": 0,
- "razem": 0,
- "wiersze": []
+ "ok": 51,
+ "razem": 52,
+ "wiersze": [
+  {
+   "element": "PF1",
+   "miejsce": "dozbrojenie D1 dół x",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 2733.6,
+   "As_min": 0.0,
+   "As_prov": 3020.0,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø14 co 15.5 + Ø20 co 15.5",
+   "s": 155.0,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.105
+  },
+  {
+   "element": "PF1",
+   "miejsce": "dozbrojenie D1 dół y",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 3665.8,
+   "As_min": 0.0,
+   "As_prov": 5046.8,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø14 co 15.5 + Ø20 co 7.75",
+   "s": 77.5,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.377
+  },
+  {
+   "element": "PF1",
+   "miejsce": "dozbrojenie D1 góra y",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-04"
+   ],
+   "As_req": 1689.7,
+   "As_min": 0.0,
+   "As_prov": 1719.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø12 co 9.5 + Ø8 co 9.5",
+   "s": 95.0,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.018
+  },
+  {
+   "element": "PF1",
+   "miejsce": "dozbrojenie D2 dół x",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 1383.0,
+   "As_min": 0.0,
+   "As_prov": 1499.9,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø14 co 15.5 + Ø10 co 15.5",
+   "s": 155.0,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.085
+  },
+  {
+   "element": "PF1",
+   "miejsce": "dozbrojenie D2 dół y",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 1125.5,
+   "As_min": 0.0,
+   "As_prov": 1317.4,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø14 co 15.5 + Ø8 co 15.5",
+   "s": 155.0,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.171
+  },
+  {
+   "element": "PF1",
+   "miejsce": "dozbrojenie D3 dół x",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 1005.3,
+   "As_min": 0.0,
+   "As_prov": 1317.4,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø14 co 15.5 + Ø8 co 15.5",
+   "s": 155.0,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.31
+  },
+  {
+   "element": "PF1",
+   "miejsce": "dozbrojenie D3 dół y",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 1958.0,
+   "As_min": 0.0,
+   "As_prov": 1986.3,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø14 co 15.5 + Ø14 co 15.5",
+   "s": 155.0,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.014
+  },
+  {
+   "element": "PF1",
+   "miejsce": "dozbrojenie D4 dół x",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 1150.6,
+   "As_min": 0.0,
+   "As_prov": 1317.4,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø14 co 15.5 + Ø8 co 15.5",
+   "s": 155.0,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.145
+  },
+  {
+   "element": "PF1",
+   "miejsce": "dozbrojenie D4 dół y",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 1444.7,
+   "As_min": 0.0,
+   "As_prov": 1499.9,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø14 co 15.5 + Ø10 co 15.5",
+   "s": 155.0,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.038
+  },
+  {
+   "element": "PF1",
+   "miejsce": "dozbrojenie D5 dół x",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 1247.0,
+   "As_min": 0.0,
+   "As_prov": 1317.4,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø14 co 15.5 + Ø8 co 15.5",
+   "s": 155.0,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.057
+  },
+  {
+   "element": "PF1",
+   "miejsce": "dozbrojenie D6 dół x",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 1016.7,
+   "As_min": 0.0,
+   "As_prov": 1317.4,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø14 co 15.5 + Ø8 co 15.5",
+   "s": 155.0,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.296
+  },
+  {
+   "element": "PF1",
+   "miejsce": "siatka dolna x (MES, poza dozbrojeniami)",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 990.4,
+   "As_min": 246.1,
+   "As_prov": 993.1,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø14 co 15.5",
+   "s": 155.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.003
+  },
+  {
+   "element": "PF1",
+   "miejsce": "siatka dolna y (MES, poza dozbrojeniami)",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 984.0,
+   "As_min": 246.1,
+   "As_prov": 993.1,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø14 co 15.5",
+   "s": 155.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.009
+  },
+  {
+   "element": "PF1",
+   "miejsce": "siatka górna x (MES, poza dozbrojeniami)",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-04"
+   ],
+   "As_req": 1043.3,
+   "As_min": 246.1,
+   "As_prov": 1190.5,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø12 co 9.5",
+   "s": 95.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.141
+  },
+  {
+   "element": "PF1",
+   "miejsce": "siatka górna y (MES, poza dozbrojeniami)",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-04"
+   ],
+   "As_req": 1187.1,
+   "As_min": 246.1,
+   "As_prov": 1190.5,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø12 co 9.5",
+   "s": 95.0,
+   "s_max": 250.0,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.003
+  },
+  {
+   "element": "PF1",
+   "miejsce": "strefa S1 (płyta) — przekrój niewystarczający",
+   "poz": "MES-PF",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 1.0,
+   "As_min": 0.0,
+   "As_prov": 0.0,
+   "jedn": "—",
+   "zbrojenie": "—",
+   "s": null,
+   "s_max": null,
+   "ok": false,
+   "uwagi": "M_Ed = 254 kNm/m > M_lim — wymagana wysokość h ≥ 0.26 m (obecnie 0.25 m) [WYMAGA ZMIANY MODELU]",
+   "zapas": -1.0
+  },
+  {
+   "element": "SF1",
+   "miejsce": "pogrubienie — siatka dolna (MES)",
+   "poz": "10.18",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 324.4,
+   "As_min": 538.1,
+   "As_prov": 538.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø12 co 21",
+   "s": 210.0,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.001
+  },
+  {
+   "element": "SF2",
+   "miejsce": "pogrubienie — siatka dolna (MES)",
+   "poz": "10.19",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 572.7,
+   "As_min": 538.1,
+   "As_prov": 580.0,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø12 co 19.5",
+   "s": 195.0,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.013
+  },
+  {
+   "element": "SF3",
+   "miejsce": "pogrubienie — siatka dolna (MES)",
+   "poz": "10.20",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 359.5,
+   "As_min": 538.1,
+   "As_prov": 538.6,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø12 co 21",
+   "s": 210.0,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.001
+  },
+  {
+   "element": "SF4",
+   "miejsce": "pogrubienie — siatka dolna (MES)",
+   "poz": "10.21",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 714.5,
+   "As_min": 538.1,
+   "As_prov": 716.0,
+   "jedn": "mm²/m",
+   "zbrojenie": "Ø14 co 21.5",
+   "s": 215.0,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.002
+  },
+  {
+   "element": "ZF1",
+   "miejsce": "żebro — dołem (MES: A_s,req·b)",
+   "poz": "10.2",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 848.4,
+   "As_min": 0.0,
+   "As_prov": 935.2,
+   "jedn": "mm²",
+   "zbrojenie": "3Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 0.102
+  },
+  {
+   "element": "ZF1",
+   "miejsce": "żebro — górą (MES: A_s,req·b)",
+   "poz": "10.2",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 1151.7,
+   "As_min": 0.0,
+   "As_prov": 1166.7,
+   "jedn": "mm²",
+   "zbrojenie": "4Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 0.013
+  },
+  {
+   "element": "ZF10",
+   "miejsce": "żebro — dołem (MES: A_s,req·b)",
+   "poz": "10.11",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 1125.8,
+   "As_min": 0.0,
+   "As_prov": 1175.2,
+   "jedn": "mm²",
+   "zbrojenie": "6Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 0.044
+  },
+  {
+   "element": "ZF10",
+   "miejsce": "żebro — górą (MES: A_s,req·b)",
+   "poz": "10.11",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 150.4,
+   "As_min": 0.0,
+   "As_prov": 821.4,
+   "jedn": "mm²",
+   "zbrojenie": "2Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 4.462
+  },
+  {
+   "element": "ZF11",
+   "miejsce": "żebro — dołem (MES: A_s,req·b)",
+   "poz": "10.12",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 1899.2,
+   "As_min": 0.0,
+   "As_prov": 1904.0,
+   "jedn": "mm²",
+   "zbrojenie": "7Ø16 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 0.003
+  },
+  {
+   "element": "ZF11",
+   "miejsce": "żebro — górą (MES: A_s,req·b)",
+   "poz": "10.12",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 250.8,
+   "As_min": 0.0,
+   "As_prov": 821.4,
+   "jedn": "mm²",
+   "zbrojenie": "2Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 2.275
+  },
+  {
+   "element": "ZF12",
+   "miejsce": "żebro — dołem (MES: A_s,req·b)",
+   "poz": "10.13",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 1895.7,
+   "As_min": 0.0,
+   "As_prov": 1904.0,
+   "jedn": "mm²",
+   "zbrojenie": "7Ø16 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 0.004
+  },
+  {
+   "element": "ZF12",
+   "miejsce": "żebro — górą (MES: A_s,req·b)",
+   "poz": "10.13",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 287.5,
+   "As_min": 0.0,
+   "As_prov": 821.4,
+   "jedn": "mm²",
+   "zbrojenie": "2Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 1.858
+  },
+  {
+   "element": "ZF13",
+   "miejsce": "żebro — dołem (MES: A_s,req·b)",
+   "poz": "10.14",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 2249.2,
+   "As_min": 0.0,
+   "As_prov": 2306.1,
+   "jedn": "mm²",
+   "zbrojenie": "9Ø16 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 0.025
+  },
+  {
+   "element": "ZF13",
+   "miejsce": "żebro — górą (MES: A_s,req·b)",
+   "poz": "10.14",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 371.4,
+   "As_min": 0.0,
+   "As_prov": 821.4,
+   "jedn": "mm²",
+   "zbrojenie": "2Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 1.212
+  },
+  {
+   "element": "ZF14",
+   "miejsce": "żebro — dołem (MES: A_s,req·b)",
+   "poz": "10.15",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 170.2,
+   "As_min": 0.0,
+   "As_prov": 722.8,
+   "jedn": "mm²",
+   "zbrojenie": "2Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 3.247
+  },
+  {
+   "element": "ZF14",
+   "miejsce": "żebro — górą (MES: A_s,req·b)",
+   "poz": "10.15",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 721.2,
+   "As_min": 0.0,
+   "As_prov": 821.4,
+   "jedn": "mm²",
+   "zbrojenie": "2Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 0.139
+  },
+  {
+   "element": "ZF15",
+   "miejsce": "żebro — dołem (MES: A_s,req·b)",
+   "poz": "10.16",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 983.1,
+   "As_min": 0.0,
+   "As_prov": 1062.1,
+   "jedn": "mm²",
+   "zbrojenie": "5Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 0.08
+  },
+  {
+   "element": "ZF15",
+   "miejsce": "żebro — górą (MES: A_s,req·b)",
+   "poz": "10.16",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 741.9,
+   "As_min": 0.0,
+   "As_prov": 821.4,
+   "jedn": "mm²",
+   "zbrojenie": "2Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 0.107
+  },
+  {
+   "element": "ZF16",
+   "miejsce": "żebro — dołem (MES: A_s,req·b)",
+   "poz": "10.17",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 748.8,
+   "As_min": 0.0,
+   "As_prov": 835.9,
+   "jedn": "mm²",
+   "zbrojenie": "3Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 0.116
+  },
+  {
+   "element": "ZF16",
+   "miejsce": "żebro — górą (MES: A_s,req·b)",
+   "poz": "10.17",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 569.4,
+   "As_min": 0.0,
+   "As_prov": 821.4,
+   "jedn": "mm²",
+   "zbrojenie": "2Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 0.443
+  },
+  {
+   "element": "ZF2",
+   "miejsce": "żebro — dołem (MES: A_s,req·b)",
+   "poz": "10.3",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 435.2,
+   "As_min": 0.0,
+   "As_prov": 822.1,
+   "jedn": "mm²",
+   "zbrojenie": "2Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 0.889
+  },
+  {
+   "element": "ZF2",
+   "miejsce": "żebro — górą (MES: A_s,req·b)",
+   "poz": "10.3",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 339.2,
+   "As_min": 0.0,
+   "As_prov": 940.5,
+   "jedn": "mm²",
+   "zbrojenie": "2Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 1.773
+  },
+  {
+   "element": "ZF3",
+   "miejsce": "żebro — dołem (MES: A_s,req·b)",
+   "poz": "10.4",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 37.1,
+   "As_min": 0.0,
+   "As_prov": 822.1,
+   "jedn": "mm²",
+   "zbrojenie": "2Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 21.133
+  },
+  {
+   "element": "ZF3",
+   "miejsce": "żebro — górą (MES: A_s,req·b)",
+   "poz": "10.4",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 322.5,
+   "As_min": 0.0,
+   "As_prov": 940.5,
+   "jedn": "mm²",
+   "zbrojenie": "2Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 1.917
+  },
+  {
+   "element": "ZF4",
+   "miejsce": "żebro — dołem (MES: A_s,req·b)",
+   "poz": "10.5",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 100.3,
+   "As_min": 0.0,
+   "As_prov": 822.1,
+   "jedn": "mm²",
+   "zbrojenie": "2Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 7.193
+  },
+  {
+   "element": "ZF4",
+   "miejsce": "żebro — górą (MES: A_s,req·b)",
+   "poz": "10.5",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 1030.3,
+   "As_min": 0.0,
+   "As_prov": 1053.6,
+   "jedn": "mm²",
+   "zbrojenie": "3Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 0.023
+  },
+  {
+   "element": "ZF5",
+   "miejsce": "żebro — dołem (MES: A_s,req·b)",
+   "poz": "10.6",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 3.2,
+   "As_min": 0.0,
+   "As_prov": 822.1,
+   "jedn": "mm²",
+   "zbrojenie": "2Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 252.723
+  },
+  {
+   "element": "ZF5",
+   "miejsce": "żebro — górą (MES: A_s,req·b)",
+   "poz": "10.6",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 419.2,
+   "As_min": 0.0,
+   "As_prov": 940.5,
+   "jedn": "mm²",
+   "zbrojenie": "2Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 1.243
+  },
+  {
+   "element": "ZF6",
+   "miejsce": "żebro — dołem (MES: A_s,req·b)",
+   "poz": "10.7",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 1767.1,
+   "As_min": 0.0,
+   "As_prov": 1840.0,
+   "jedn": "mm²",
+   "zbrojenie": "11Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 0.041
+  },
+  {
+   "element": "ZF6",
+   "miejsce": "żebro — górą (MES: A_s,req·b)",
+   "poz": "10.7",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 921.3,
+   "As_min": 0.0,
+   "As_prov": 940.5,
+   "jedn": "mm²",
+   "zbrojenie": "2Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 0.021
+  },
+  {
+   "element": "ZF7",
+   "miejsce": "żebro — dołem (MES: A_s,req·b)",
+   "poz": "10.8",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 860.6,
+   "As_min": 0.0,
+   "As_prov": 935.2,
+   "jedn": "mm²",
+   "zbrojenie": "3Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 0.087
+  },
+  {
+   "element": "ZF7",
+   "miejsce": "żebro — górą (MES: A_s,req·b)",
+   "poz": "10.8",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 1545.9,
+   "As_min": 0.0,
+   "As_prov": 1619.1,
+   "jedn": "mm²",
+   "zbrojenie": "8Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 0.047
+  },
+  {
+   "element": "ZF8",
+   "miejsce": "żebro — dołem (MES: A_s,req·b)",
+   "poz": "10.9",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 1292.5,
+   "As_min": 0.0,
+   "As_prov": 1401.4,
+   "jedn": "mm²",
+   "zbrojenie": "8Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 0.084
+  },
+  {
+   "element": "ZF8",
+   "miejsce": "żebro — górą (MES: A_s,req·b)",
+   "poz": "10.9",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 1238.0,
+   "As_min": 0.0,
+   "As_prov": 1273.8,
+   "jedn": "mm²",
+   "zbrojenie": "6Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 0.029
+  },
+  {
+   "element": "ZF9",
+   "miejsce": "żebro — dołem (MES: A_s,req·b)",
+   "poz": "10.10",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 1194.4,
+   "As_min": 0.0,
+   "As_prov": 1288.3,
+   "jedn": "mm²",
+   "zbrojenie": "7Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 0.079
+  },
+  {
+   "element": "ZF9",
+   "miejsce": "żebro — górą (MES: A_s,req·b)",
+   "poz": "10.10",
+   "arkusze": [
+    "PT-BO-03"
+   ],
+   "As_req": 55.7,
+   "As_min": 0.0,
+   "As_prov": 821.4,
+   "jedn": "mm²",
+   "zbrojenie": "2Ø12 + siatka",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
+   "zapas": 13.748
+  }
+ ]
 }

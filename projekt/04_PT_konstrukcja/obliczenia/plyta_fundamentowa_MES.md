@@ -9,9 +9,9 @@ Belka nieskończona na podłożu sprężystym (Hetényi 1946): ugięcie pod sił
 ## Współczynnik podatności podłoża (Winkler) z parametrów geotechnicznych
 
 - Moduł sprężystości gruntu z modułu edometrycznego: E_s = M₀·(1+ν)(1−2ν)/(1−ν) = 80000·(1+0,30)(1−2·0,30)/(1−0,30) = **59429** kPa *(teoria sprężystości (jednoosiowy stan odkształcenia); PN-EN 1997-2 zał. K)*
-- Współczynnik wpływu (środek prostokąta, m = L/B): I_c = m = 1,940 = **1,513** *(Bowles (1996) (5-16a); PN-EN 1997-1 zał. F.2)*
+- Współczynnik wpływu (środek prostokąta, m = L/B): I_c(m), m = L/B = I_c(1,940) = **1,513** *(Bowles (1996) (5-16a); PN-EN 1997-1 zał. F.2)*
 - Współczynnik podatności (osiadanie średnie α·s_c): k_s = E_s/(α·B·(1−ν²)·I_c) = 59429/(0,85·9,57·(1−0,30²)·1,513) = **5303** kN/m³
-- Obwiednia wariantów (niepewność modelu Winklera): k_s,min; k_s,max = k_s/r; k_s·r = r = 2,0 = **2652; 10606** kN/m³ *([ZAŁ] Bowles 9.7)*
+- Obwiednia wariantów (niepewność modelu Winklera): k_s,min = k_s/r; k_s,max = k_s·r = 5303/2,0; 5303·2,0 = **2652; 10606** kN/m³ *([ZAŁ] Bowles 9.7)*
 
 ## Nośność podłoża pod płytą fundamentową (PN-EN 1997-1 zał. D, DA2*)
 
@@ -29,7 +29,7 @@ Belka nieskończona na podłożu sprężystym (Hetényi 1946): ugięcie pod sił
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Nośność podłoża (GEO, DA2*) | V_d = 11815,8 kN | R_d = 224314,1 kN | 5% | spełniony | PN-EN 1997-1 (6.1), NA.2.6 |
+| Nośność podłoża (GEO, DA2*) | V_d = 11855,0 kN | R_d = 224314,1 kN | 5% | spełniony | PN-EN 1997-1 (6.1), NA.2.6 |
 
 > Parametry gruntu PRZYKŁADOWE (brief) — w II kat. geotechnicznej wymagane badania CPT/DPL (W-282, E-04).
 
@@ -44,23 +44,23 @@ Belka nieskończona na podłożu sprężystym (Hetényi 1946): ugięcie pod sił
 - Jednostkowy opór graniczny: R_k/A' = c'·N_c·s_c·i_c + q'·N_q·s_q·i_q + ½·γ'·B'·N_γ·s_γ·i_γ = 0,0 + 5,55·26,09·1,000·1,000 + 0,5·18,50·1,000·32,59·1,000·1,000 = **446,3** kPa *((D.2))*
 - Opór graniczny (na 1 m ławy): R_k = (R_k/A')·A' = 446,3·1,000 = **446,3** kN/m
 - Obliczeniowy opór graniczny (DA2*): R_d = R_k/γ_R;v = 446,3/1,40 = **318,8** kN/m *(NA.2.6 (Ap2:2010), tabl. A.5)*
-- Maks. docisk obliczeniowy z MES (obwiednia k_s, kombinacje STR/GEO): p_d,max = **161,6** kPa
+- Maks. docisk obliczeniowy z MES (obwiednia k_s, kombinacje STR/GEO): p_d,max = **162,1** kPa
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Docisk lokalny do podłoża (pasmo pod żebrem) | p_d,max = 161,6 kPa | q_Rd = 318,8 kPa | 51% | spełniony | PN-EN 1997-1 6.5.2, zał. D |
+| Docisk lokalny do podłoża (pasmo pod żebrem) | p_d,max = 162,1 kPa | q_Rd = 318,8 kPa | 51% | spełniony | PN-EN 1997-1 6.5.2, zał. D |
 
 > Parametry gruntu PRZYKŁADOWE (brief) — w II kat. geotechnicznej wymagane badania CPT/DPL (W-282, E-04).
 
 ## Odrywanie płyty od podłoża i osiadanie (MES, kontakt jednostronny)
 
 - Udział powierzchni bez kontaktu (maks. po kombinacjach ULS i wariantach k_s): A_oder/A = **0,0** %
-- Maks. docisk charakterystyczny (SLS): p_k,max = **125,8** kPa
-- Maks. osiadanie sprężyste (SLS, k_s nominalne): w_k,max = **19,6** mm
+- Maks. docisk charakterystyczny (SLS): p_k,max = **126,2** kPa
+- Maks. osiadanie sprężyste (SLS, k_s nominalne): w_k,max = **19,7** mm
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Osiadanie (PN-EN 1997-1 zał. H: s ≤ 50 mm dla fundamentów bezpośrednich) | w_k = 19,6 mm | s_dop = 50,0 mm | 39% | spełniony | PN-EN 1997-1 zał. H |
+| Osiadanie (PN-EN 1997-1 zał. H: s ≤ 50 mm dla fundamentów bezpośrednich) | w_k = 19,7 mm | s_dop = 50,0 mm | 39% | spełniony | PN-EN 1997-1 zał. H |
 
 ## Przebicie płyty pod słupem SL1 (6.4.4(2))
 
@@ -106,10 +106,10 @@ Belka nieskończona na podłożu sprężystym (Hetényi 1946): ugięcie pod sił
 
 | Kierunek | M_Ed ekstremalny [kNm/m] | A_s,req maks. [mm²/m] | A_s,req 90 % pola płyty [mm²/m] |
 |---|---:|---:|---:|
-| dol_x | 579.4 | 2905 | 768 |
-| dol_y | 728.5 | 4432 | 814 |
-| gora_x | -503.6 | 2460 | 548 |
-| gora_y | -520.0 | 2568 | 1179 |
+| dol_x | 586.7 | 2945 | 774 |
+| dol_y | 737.8 | 4498 | 826 |
+| gora_x | -507.1 | 2476 | 550 |
+| gora_y | -521.6 | 2576 | 1187 |
 
 Elementy z μ > μ_lim (przekrój niewystarczający): 3 z 2865.
 
