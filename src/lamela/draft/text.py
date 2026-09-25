@@ -48,8 +48,34 @@ def em_mm(h_cap: float, style: str = "normal") -> float:
     return h_cap / cap_ratio(style)
 
 
+# Znaki spoza kroju Liberation Sans (w PDF rysowałyby się jako pusty prostokąt „tofu”, matplotlib: „Glyph …
+# missing”) — zamieniane na znak o tym samym znaczeniu z kroju. U+2300 ⌀ (średnica) i U+2205 ∅ → Ø (U+00D8),
+# powszechny zapis średnicy na rysunkach (np. „Ø12”).
+ZAMIENNIKI = {"\u2300": "\u00d8", "\u2205": "\u00d8"}
+_TR = str.maketrans(ZAMIENNIKI)
+
+
+def normalizuj(s: str) -> str:
+    """Napis z zamienionymi znakami spoza kroju (``ZAMIENNIKI``) — ten sam napis mierzony, rysowany (PDF) i
+    zapisywany (DXF)."""
+    return s.translate(_TR) if s else s
+
+
+@lru_cache(maxsize=None)
+def _mapa_znakow(style: str) -> frozenset:
+    from matplotlib.ft2font import FT2Font
+    return frozenset(FT2Font(font_file(style)).get_charmap())
+
+
+def brakujace_znaki(s: str, style: str = "normal") -> str:
+    """Znaki napisu (po ``normalizuj``) nieobecne w kroju stylu — do kontroli jakości arkusza."""
+    cm = _mapa_znakow(style)
+    return "".join(sorted({c for c in normalizuj(s) if not c.isspace() and ord(c) not in cm}))
+
+
 @lru_cache(maxsize=65536)
 def _width_ref(s: str, style: str) -> float:
+    s = normalizuj(s)
     if not s:
         return 0.0
     w, _h, _d = _T2P.get_text_width_height_descent(s, font_props(style), ismath=False)
@@ -113,6 +139,6 @@ def layout_runs(runs, h_cap: float, style: str = "normal", ha: str = "left", va:
         if i and f != runs[i - 1][1]:
             x += 0.06 * h_cap
         hh = run_h(h_cap, f)
-        out.append((x, y0 + r * h_cap, s, hh))
+        out.append((x, y0 + r * h_cap, normalizuj(s), hh))
         x += width(s, hh, style)
     return out, (W, top)

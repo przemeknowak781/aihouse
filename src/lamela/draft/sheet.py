@@ -385,6 +385,77 @@ class Sheet(SheetBase):
         return out
 
 
+def _obwiednie_w_pasach(sh, pasy: dict):
+    """Obwiednie (n, 4) [mm arkusza] prymitywów treści arkusza i jego rzutni, leżących przy prostokątach ``pasy``
+    [mm arkusza]. Pomijane: warstwa ramki (R-RAMKA), warstwy niedrukowane i same znaki centrujące. Linie łamane —
+    obwiednia każdego odcinka osobno; tekst — prostokąt napisu; rzutnie — przycięte do okna rzutni."""
+    from .core import PArc, PFill, PLine, PText, prim_points
+    if not pasy:
+        return
+    R = np.array(list(pasy.values()), float)
+    znaki = {id(p) for p in (getattr(sh, "znaki", None) or {}).values()}
+
+    def boxes(prims, k, rects):
+        rx0, ry0 = rects[:, 0].min(), rects[:, 1].min()
+        rx1, ry1 = rects[:, 2].max(), rects[:, 3].max()
+        out = []
+        for p in prims:
+            if id(p) in znaki or p.layer == "R-RAMKA":
+                continue
+            try:
+                if not styles.layer(p.layer).plot:
+                    continue
+            except Exception:                          # noqa: BLE001 — warstwa spoza słownika: treść
+                pass
+            if isinstance(p, PLine):
+                a = np.asarray(p.pts, float)
+                if len(a) < 2:
+                    continue
+                if p.closed:
+                    a = np.vstack([a, a[:1]])
+                b = np.hstack([np.minimum(a[:-1], a[1:]), np.maximum(a[:-1], a[1:])])
+            elif isinstance(p, (PText, PFill, PArc)):
+                if isinstance(p, PText):               # szybki odsiew: punkt wstawienia daleko od pasów
+                    rad = (len(p.string) + 2) * p.h * k
+                    q = p.pos
+                    if q[0] < rx0 - rad or q[0] > rx1 + rad or q[1] < ry0 - rad or q[1] > ry1 + rad:
+                        continue
+                pts = [np.asarray(x, float).reshape(-1, 2) for x in prim_points(p, k)]
+                if not pts:
+                    continue
+                pts = np.vstack(pts)
+                b = np.array([[pts[:, 0].min(), pts[:, 1].min(), pts[:, 0].max(), pts[:, 1].max()]])
+            else:
+                continue
+            m = (b[:, 0] < rx1) & (b[:, 2] > rx0) & (b[:, 1] < ry1) & (b[:, 3] > ry0)
+            if m.any():
+                out.append(b[m])
+        return np.vstack(out) if out else None
+
+    b = boxes(sh.prims, sh.k, R)
+    if b is not None:
+        yield b
+    for vp in getattr(sh, "viewports", []):
+        c = vp.clip
+        if c is None:
+            continue
+        Rc = np.column_stack([np.maximum(R[:, 0], c[0]), np.maximum(R[:, 1], c[1]), np.minimum(R[:, 2], c[2]),
+                              np.minimum(R[:, 3], c[3])])
+        Rc = Rc[(Rc[:, 2] > Rc[:, 0]) & (Rc[:, 3] > Rc[:, 1])]
+        if not len(Rc):
+            continue
+        Rm = np.hstack([vp.to_model(Rc[:, :2]), vp.to_model(Rc[:, 2:])])
+        b = boxes(vp.prims, vp.k, Rm)
+        if b is None:
+            continue
+        bs = np.hstack([vp.to_sheet(b[:, :2]), vp.to_sheet(b[:, 2:])])
+        bs = np.column_stack([np.maximum(bs[:, 0], c[0]), np.maximum(bs[:, 1], c[1]), np.minimum(bs[:, 2], c[2]),
+                              np.minimum(bs[:, 3], c[3])])
+        bs = bs[(bs[:, 2] >= bs[:, 0]) & (bs[:, 3] >= bs[:, 1])]
+        if len(bs):
+            yield bs
+
+
 # ------------------------------------------------------------------------------------------------ rysowanie tabliczki
 def _cell(sh, x, y, w, h, label, value="", vh=2.5, style="normal", lines_max=1, align="left", label_h=1.8,
           value_dy=None):
@@ -577,8 +648,12 @@ def notes_box(sh: Sheet, x: float, y_top: float, w: float, lines: list[str], tit
 
 def table(sh, x: float, y_top: float, cols: list[tuple[str, float]], rows: list[list[str]], h: float = 2.5,
           row_h: float = 5.0, title: str | None = None, layer: str = "R-OPISY", align: list[str] | None = None,
-          header_h: float | None = None) -> tuple:
-    """Prosta tabela (np. zestawienie pomieszczeń, stolarki). cols: [(nagłówek, szerokość), …]."""
+          header_h: float | None = None, zawijaj: bool = False) -> tuple:
+    """Prosta tabela (np. zestawienie pomieszczeń, stolarki). cols: [(nagłówek, szerokość), …].
+
+    Tekst komórki jest zmniejszany (``fit``: szereg ISO 3098 do 1,8 mm). ``zawijaj=True`` — gdy nie mieści się
+    nawet przy 1,8 mm, jest łamany na wiersze (najpierw w wysokości wiersza tabeli, potem wiersz rośnie), zamiast
+    wychodzić na sąsiednią kolumnę. Bez przepełnień tabela jest identyczna jak przy ``zawijaj=False``."""
     W = sum(w for _n, w in cols)
     y = y_top
     header_h = header_h or row_h
@@ -596,19 +671,30 @@ def table(sh, x: float, y_top: float, cols: list[tuple[str, float]], rows: list[
         y -= header_h
         sh.line((x, y), (x + W, y), pen=0.25)
         for r in rows:
-            xx = x
-            for i, ((name, w), v) in enumerate(zip(cols, r)):
-                a = (align[i] if align else ("left" if i else "center"))
+            cells = []
+            rh = row_h
+            for (name, w), v in zip(cols, r):
                 v = str(v)
                 hh = fit(v, w - 2.0, h)
-                if a == "left":
-                    sh.text((xx + 1.0, y - row_h / 2.0), v, hh, va="middle")
-                elif a == "right":
-                    sh.text((xx + w - 1.0, y - row_h / 2.0), v, hh, va="middle", ha="right")
-                else:
-                    sh.text((xx + w / 2.0, y - row_h / 2.0), v, hh, va="middle", ha="center")
+                ls = [v]
+                if zawijaj and T.width(v, hh) > w - 2.0 + 1e-6:
+                    hh, ls = _zawin_komorke(v, w - 2.0, h, row_h)
+                    rh = max(rh, (len(ls) - 1) * hh * 1.45 + hh + 1.6)
+                cells.append((hh, ls))
+            xx = x
+            for i, ((name, w), (hh, ls)) in enumerate(zip(cols, cells)):
+                a = (align[i] if align else ("left" if i else "center"))
+                lh = hh * 1.45
+                for j, v in enumerate(ls):
+                    yy = y - rh / 2.0 + (len(ls) - 1) * lh / 2.0 - j * lh
+                    if a == "left":
+                        sh.text((xx + 1.0, yy), v, hh, va="middle")
+                    elif a == "right":
+                        sh.text((xx + w - 1.0, yy), v, hh, va="middle", ha="right")
+                    else:
+                        sh.text((xx + w / 2.0, yy), v, hh, va="middle", ha="center")
                 xx += w
-            y -= row_h
+            y -= rh
             sh.line((x, y), (x + W, y), pen=0.13)
         xx = x
         for name, w in cols[:-1]:
@@ -616,6 +702,16 @@ def table(sh, x: float, y_top: float, cols: list[tuple[str, float]], rows: list[
             sh.line((xx, y), (xx, y_top), pen=0.13)
         sh.rect(x, y, x + W, y_top, pen=0.35)
     return (x, y, x + W, y_top)
+
+
+def _zawin_komorke(v: str, avail: float, h: float, row_h: float) -> tuple[float, list[str]]:
+    """(wysokość pisma, wiersze) tekstu komórki łamanego do szerokości ``avail``: największe pismo z szeregu
+    ISO 3098 (≤ h, ≥ 1,8 mm), przy którym wiersze mieszczą się w wysokości wiersza tabeli; inaczej 1,8 mm."""
+    for hh in [x for x in reversed(styles.TEXT_SERIES) if 1.8 - 1e-6 <= x <= h + 1e-6]:
+        ls = wrap(v, avail, hh)
+        if all(T.width(s_, hh) <= avail + 1e-6 for s_ in ls) and (len(ls) - 1) * hh * 1.45 + hh <= row_h - 1.0:
+            return hh, ls
+    return 1.8, wrap(v, avail, 1.8)
 
 
 def scale_bar(c, pos, scale: float, length_m: float | None = None, h: float = 1.8, layer: str = "R-OPISY",
@@ -659,9 +755,25 @@ def scale_bar(c, pos, scale: float, length_m: float | None = None, h: float = 1.
     return (x0, y0, xz + n * step * mm_per_m + 4.0, y0 + bh + 1.0 + h)
 
 
-def control_segment(sh: Sheet, pos, length: float = 100.0, h: float = 1.8, vertical: bool = False):
+def control_segment(sh: Sheet, pos, length: float = 100.0, h: float = 1.8, vertical: bool = False,
+                    tekst_obok: bool = False):
     """Odcinek kontrolny wydruku (np. 100 mm) — do sprawdzenia, czy arkusz wydrukowano w skali 1:1.
-    ``vertical=True`` — pionowo (np. w marginesie na oprawę)."""
+    ``vertical=True`` — pionowo (np. w marginesie na oprawę). ``tekst_obok`` — napis równolegle do odcinka, po
+    stronie kresek podziału (zamiast za jego końcem, np. gdy tam jest znak centrujący)."""
+    if tekst_obok:
+        x, y = pos
+        P = np.array([x, y], float)
+        d = np.array([0.0, 1.0]) if vertical else np.array([1.0, 0.0])
+        n = np.array([-1.0, 0.0]) if vertical else np.array([0.0, 1.0])
+        with sh.on("R-OPISY"):
+            sh.line(P, P + d * length, pen=0.35)
+            for i in range(0, int(length) + 1, 10):
+                t = 1.6 if i % 50 == 0 else 0.9
+                sh.line(P + d * i, P + d * i + n * t, pen=0.18)
+            q = P + n * (1.6 + 0.9) + d * 2.0
+            sh.text(q, f"odcinek kontrolny {int(length)} mm (wydruk 1:1)", h, 90.0 if vertical else 0.0, "left",
+                    "baseline")
+        return
     x, y = pos
     d = np.array([0.0, 1.0]) if vertical else np.array([1.0, 0.0])
     n = np.array([-1.0, 0.0]) if vertical else np.array([0.0, 1.0])

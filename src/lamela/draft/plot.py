@@ -10,7 +10,8 @@ from __future__ import annotations
 import numpy as np
 
 from . import render
-from .sheet import Sheet, TitleBlock, control_segment, table
+from . import text as T
+from .sheet import ZNAK_CENTR_DL, Sheet, TitleBlock, control_segment, fit, table, wrap
 
 PT2MM = 25.4 / 72.0
 
@@ -28,9 +29,25 @@ def volume(sheets, pdf_path, title: str = "Tom rysunków", toc: bool = True, toc
             rows.append([str(i + 1), t.nr_rysunku if t else "", t.tytul if t else s.meta.get("title", ""),
                          t.skala if t else "", s.fmt_name])
         x0, y0, x1, y1 = sh.frame
-        sh.text((x0 + 8, y1 - 14), title.upper(), 5.0, style="bold")
-        table(sh, x0 + 8, y1 - 22, [("Lp.", 10), ("Nr rys.", 26), ("Tytuł rysunku", 84), ("Skala", 18),
-                                   ("Format", 22)], rows, h=2.5, row_h=6.0)
+        # pole spisu między znakami centrującymi (lewy/prawy: 10 mm za ramką na osi H/2, górny: 10 mm w dół na osi
+        # W/2) — odstęp 3 mm; nagłówek dopasowany (5 → 3,5 mm) i łamany (≤ 3 wiersze) do szerokości pola
+        tx = x0 + ZNAK_CENTR_DL + 3.0
+        avail = (x1 - ZNAK_CENTR_DL - 3.0) - tx
+        tt = title.upper()
+        hh = fit(tt, avail, 5.0, 3.5, "bold")
+        ls = [tt] if T.width(tt, hh, "bold") <= avail else wrap(tt, avail, hh, "bold")[:3]
+        y = y1 - ZNAK_CENTR_DL - 2.5 - hh
+        for ln in ls:
+            sh.text((tx, y), ln, hh, style="bold")
+            y -= hh * 1.6
+        top = y + hh * 1.6 - 5.5
+        cols = [("Lp.", 9.0), ("Nr rys.", 26.0), ("Tytuł rysunku", 81.0), ("Skala", 18.0), ("Format", 20.0)]
+        k = avail / sum(w for _n, w in cols)
+        cols = [(n, w * k) for n, w in cols]
+        tb_top = (sh.tb_rect[3] if sh.tb_rect else y0) + 6.0
+        row_h = max(4.5, min(6.0, (top - tb_top) / (len(rows) + 1)))
+        table(sh, tx, top, cols, rows, h=2.5, row_h=row_h, zawijaj=True)
+        sh.przytnij_znaki_centrujace()
         pages = [sh] + pages
     render.sheets_to_pdf(pages, pdf_path, mode, title)
     return str(pdf_path)
@@ -84,7 +101,11 @@ def check_png(png_path, sheet, min_dpi: float = 150.0) -> dict:
 def add_control_marks(sheet: Sheet, length: float = 100.0):
     """Odcinek kontrolny w dolnym marginesie arkusza (sprawdzenie wydruku w skali 1:1)."""
     x0, y0, x1, y1 = sheet.frame
-    control_segment(sheet, (x0 * 0.55, y0 + 8.0), length, vertical=True)
+    # napis za odcinkiem nie może trafić na lewy znak centrujący (oś H/2, np. H = 297) — wtedy napis obok odcinka
+    y_s = y0 + 8.0
+    tw = T.width(f"odcinek kontrolny {int(length)} mm (wydruk 1:1)", 1.8)
+    obok = y_s + length + 1.5 < sheet.height / 2.0 + 3.0 and y_s + length + 1.5 + tw > sheet.height / 2.0 - 3.0
+    control_segment(sheet, (x0 * 0.55, y_s), length, vertical=True, tekst_obok=obok)
 
 
 # ------------------------------------------------------------------------------------------------ kontrola jakości
@@ -127,7 +148,7 @@ def qa(sheet, kind: str | None = None) -> dict:
             errors.append(f"rzutnia „{vp.title}”: podziałka 1:{vp.scale:g} mniejsza niż dopuszczalna 1:{lim}")
     # 4. grubości linii i 5. pismo
     series_lw = set(round(x, 2) for x in styles.ISO_LINEWEIGHTS)
-    bad_lw, bad_h = {}, {}
+    bad_lw, bad_h, bad_gl = {}, {}, {}
     min_h = 2.5 if "PZT" in stad else 1.8
     n_txt = 0
     for vp, canvas, p in all_prims:
@@ -140,12 +161,17 @@ def qa(sheet, kind: str | None = None) -> dict:
         elif isinstance(p, PText):
             for _xy, s, hh in text_items(p, canvas.k)[0]:
                 n_txt += 1
+                for ch in T.brakujace_znaki(s, p.style):
+                    bad_gl.setdefault(ch, []).append(s[:20])
                 h2 = round(hh, 2)
                 too_small = vp is not None and h2 < min_h - 0.02   # min. 2,5 mm na PZT — treść rysunku
                 if not any(abs(h2 - x) < 0.02 for x in styles.TEXT_SERIES) or too_small:
                     bad_h.setdefault(h2, []).append(s[:20])
     for lw, n in sorted(bad_lw.items()):
         errors.append(f"grubość linii {lw} mm spoza szeregu ISO 128-2 ({n}×)")
+    for ch, ex in sorted(bad_gl.items()):
+        warnings.append(f"znak „{ch}” (U+{ord(ch):04X}) spoza kroju pisma — w PDF pusty prostokąt ({len(ex)}×, "
+                        f"np. {ex[:2]}); dodać zamiennik w draft.text.ZAMIENNIKI")
     for h, ex in sorted(bad_h.items()):
         errors.append(f"wysokość pisma {h} mm spoza szeregu ISO 3098 / poniżej minimum ({len(ex)}×, np. {ex[:3]})")
     # 7. łańcuchy wymiarowe: suma zaokrąglonych odcinków = zaokrąglony wymiar całkowity
