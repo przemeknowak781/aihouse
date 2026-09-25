@@ -366,9 +366,9 @@ def rozdz_stan(o: Opis, D: dict, S: dict, ark_uwagi: list[str]):
     znikają z zestawienia.
     """)
     if nz:
-        o.wniosek(f"**PROJEKT KONSTRUKCJI NIEZAMKNIĘTY — {nz} {'pozycja' if nz == 1 else 'pozycji'} {NZ}.** "
-                  "Tom nie może być przekazany kierownikowi budowy (art. 42 ust. 1 PB) ani objęty oświadczeniem "
-                  "projektanta z art. 41 ust. 4a pkt 2 PB przed domknięciem wszystkich pozycji z tabeli poniżej.",
+        o.wniosek(f"**PROJEKT KONSTRUKCJI NIEZAMKNIĘTY — {nz} {odmiana(nz, 'pozycja', 'pozycje', 'pozycji')} {NZ}.** "
+                  "Przed domknięciem wszystkich pozycji z tabeli poniżej tom nie nadaje się do podpisania "
+                  "oświadczenia projektanta PT (art. 41 ust. 4a pkt 2 PB) ani do realizacji robót.",
                   alarm=True)
     else:
         o.wniosek("Wszystkie analizy konstrukcji objęte zestawieniem są domknięte (brak pozycji NIEZAMKNIĘTYCH).")
@@ -728,6 +728,18 @@ def rozdz_geotechnika(o: Opis, D: dict):
     """)
     o.rozdzial("Projekt geotechniczny", poziom=2, podstawa="Dz.U. 2012 poz. 463 § 10 pkt 1–10")
     m0_mes = re.search(r"E_s = M₀[^=]*= ([\d ]+)·\(1\+([\d,]+)\)", mes)
+    mes_war = [r for t in tabele_md(mes) for r in t if "Stan" in r]
+    o.tekst(f"""
+    ### Prognoza zmian właściwości podłoża w czasie {{podstawa: § 10 pkt 1}}
+    Piaski średnie niewysadzinowe, ZWG ok. {L(abs(geo.get('ZWG', 0)), 1)} m p.p.t. — poniżej strefy wpływu
+    fundamentu płytkiego; istotnych zmian właściwości w czasie nie przewiduje się pod warunkiem ochrony dna wykopu
+    przed rozluźnieniem, rozmoczeniem i przemarzaniem w czasie robót oraz wykonania izolacji obwodowej
+    ({iz.get('opis', '—')}).
+
+    ### Obliczeniowe parametry geotechniczne {{podstawa: § 10 pkt 2}}
+    Podejście obliczeniowe DA2* (PN-EN 1997-1 + NA): parametry materiałowe M1 (γ_φ' = γ_c' = γ_γ = 1,0) — wartości
+    obliczeniowe równe charakterystycznym z tabeli poniżej (kolumna „Model”).
+    """)
     o.tabela([
         {"Parametr (wartość charakterystyczna)": "rodzaj gruntu nośnego", "Model (geotechnika)": gr.get("rodzaj", "—"),
          "Obliczenia statyczne": p.grunt.nazwa, "MES płyty": "jw. (M1)"},
@@ -746,17 +758,7 @@ def rozdz_geotechnika(o: Opis, D: dict):
         uwagi=["Rozbieżności między kolumnami wskazują parametr do ujednolicenia po badaniach (jedno źródło: model "
                "`geotechnika`); w II kat. geotechnicznej korelacje PN-81/B-03020 niedopuszczalne (W-282)."],
         zrodlo="model/budynek.yaml (geotechnika); Parametry.z_wymagan; plyta_fundamentowa_MES.md")
-    mes_war = [r for t in tabele_md(mes) for r in t if "Stan" in r]
     o.tekst(f"""
-    ### Prognoza zmian właściwości podłoża w czasie {{podstawa: § 10 pkt 1}}
-    Piaski średnie niewysadzinowe, ZWG ok. {L(abs(geo.get('ZWG', 0)), 1)} m p.p.t. — poniżej strefy wpływu
-    fundamentu płytkiego; istotnych zmian właściwości w czasie nie przewiduje się pod warunkiem ochrony dna wykopu
-    przed rozluźnieniem, rozmoczeniem i przemarzaniem w czasie robót oraz wykonania izolacji obwodowej
-    ({iz.get('opis', '—')}).
-
-    ### Obliczeniowe parametry geotechniczne {{podstawa: § 10 pkt 2}}
-    Podejście obliczeniowe DA2* (PN-EN 1997-1 + NA): parametry materiałowe M1 (γ_φ' = γ_c' = γ_γ = 1,0) — wartości
-    obliczeniowe równe charakterystycznym z tabeli powyżej (kolumna „Model”).
 
     ### Częściowe współczynniki bezpieczeństwa {{podstawa: § 10 pkt 3}}
     A1: γ_G = {L(p.gG_sup)} (ξ = {L(p.xi)}), γ_Q = {L(p.gQ)}; M1: 1,0; R2: γ_R;v = {L(p.gR_v, 1)}, γ_R;h = {L(p.gR_h, 1)}
@@ -806,3 +808,131 @@ def rozdz_geotechnika(o: Opis, D: dict):
     """)
     o.rozdzial("Wpływy eksploatacji górniczej", poziom=2, podstawa="§ 23 pkt 2 RPB")
     o.tekst(f"Nie dotyczy — działka poza terenem górniczym {FIKCJA}.")
+
+
+def rozdz_ppoz(o: Opis, D: dict):
+    """8. Dane dotyczące warunków ochrony przeciwpożarowej stosownie do zakresu PT-BO (§ 23 pkt 10 RPB)."""
+    from lamela.obliczenia.wspolne import wymaganie
+    zl, gw, zw = (wymaganie("ppoz", k) for k in ("kategoria_ZL", "grupa_wysokosci", "zwolnienie_213_kondygnacje_max"))
+    n_k = len(D["bud"].get("kondygnacje", []))
+    spelnia = n_k <= zw.wartosc
+    o.rozdzial("Dane dotyczące warunków ochrony przeciwpożarowej", podstawa="§ 23 pkt 10 RPB", nowa_strona=True)
+    o.tekst(f"""
+    Budynek mieszkalny jednorodzinny wolnostojący: kategoria zagrożenia ludzi **{zl.wartosc}** ({zl.zrodlo}; {zl.id}),
+    grupa wysokości **{gw.wartosc}** ({gw.zrodlo}), {n_k} kondygnacje nadziemne. Budynek
+    {'spełnia' if spelnia else '**NIE SPEŁNIA**'} warunek zwolnienia z wymagań klasy odporności pożarowej
+    (≤ {zw.wartosc} kondygnacje nadziemne — {zw.zrodlo}; {zw.id}) — dla elementów konstrukcji (główna konstrukcja
+    nośna, stropy, ściany) przepisy {'nie stawiają' if spelnia else 'stawiają'} wymagań klas odporności ogniowej
+    R/REI; na rysunkach PT-BO klas odporności ogniowej nie podaje się (RPB § 9 ust. 2; W-219).
+
+    Rozwiązania konstrukcyjno-materiałowe: żelbet, mur z bloczków silikatowych i stal konstrukcyjna — wyroby
+    niepalne. Słupy stalowe fasady i łączniki termoizolacyjne wsporników — bez wymagań odporności ogniowej
+    (zwolnienie jw.); przejścia instalacyjne przez stropy — wg PT-3 IS i PT-4 IE. Dane ppoż. zagospodarowania
+    (droga pożarowa, zaopatrzenie w wodę do zewnętrznego gaszenia pożaru) — PZT i PAB.
+    """)
+
+
+def rozdz_braki(o: Opis, D: dict, ark_info: list[str]):
+    """9. Dane do uzupełnienia i uzgodnienia międzybranżowe (z BRAKI_DANYCH.md zespołu BO)."""
+    o.rozdzial("Dane do uzupełnienia i uzgodnienia międzybranżowe", podstawa="W-272, W-286, E-04")
+    lst = sekcja_md(D["braki_md"], "Dane do uzupełnienia")
+    o.tekst(lst or "Brak zgłoszonych braków danych (BRAKI_DANYCH.md).")
+    o.tekst("Wyroby wskazane z nazwy w dokumentacji zespołu BO należy traktować jako przykładowe — dopuszcza się "
+            "wyroby równoważne spełniające parametry wymagane (nośność, klasa, deklaracja właściwości użytkowych, "
+            "ETA/EAD dla łączników termoizolacyjnych).")
+    if ark_info:
+        o.tekst("Uwagi kontroli jakości arkuszy (raport_widokow.json, AUD-RYS):\n\n" + "\n".join(f"* {u}" for u in ark_info))
+
+
+def arkusze_bo(bez: bool = False) -> tuple[list[Arkusz], list[str], list[str]]:
+    """Arkusze PT-BO z ``raport_widokow.json`` (+ arkusze konfiguracji ``model/arkusze_bo.yaml`` bez wpisu w raporcie).
+    Zwraca (arkusze, braki → NIEZAMKNIĘTE, uwagi QA)."""
+    rap = _czytaj(KAT_RYS / "raport_widokow.json") or {"arkusze": []}
+    cfg = yaml.safe_load((REPO / "model/arkusze_bo.yaml").read_text(encoding="utf-8")) or {}
+    ark, braki, info = [], [], [p.strip() for p in rap.get("problemy", [])]
+    w_rap = {a["nr"] for a in rap.get("arkusze", [])}
+    lista = list(rap.get("arkusze", [])) + [dict(nr=c["nr"], tytul=c["tytul"], skala=f"1:{c.get('skala', 50)}",
+                                                 pliki={"pdf": ""}) for c in cfg.get("arkusze", []) if c["nr"] not in w_rap]
+    for a in lista:
+        pdf = Path(a["pliki"].get("pdf") or "")
+        pdf = pdf if pdf.is_absolute() else REPO / pdf
+        if bez or not a["pliki"].get("pdf") or not pdf.exists():
+            ark.append(Arkusz.planowany(a["nr"], a["tytul"], a.get("skala") or "—", a.get("format") or "A3"))
+            if not bez:
+                braki.append(f"{a['nr']}: brak pliku PDF arkusza „{a['tytul']}” — strona zastępcza")
+            continue
+        if not a.get("qa", {}).get("ok", True):
+            braki.append(f"{a['nr']}: kontrola QA arkusza z błędami: {a['qa'].get('errors')}")
+        ark.append(Arkusz.z_pdf(pdf))
+    return ark, braki, info
+
+
+# ============================================================================================ złożenie
+def buduj_pt_bo(d: dict, D: dict, S: dict, ark: list, ark_braki: list, ark_info: list, data: str) -> tuple:
+    nz = S["n_nz"] + len(ark_braki)
+    podt = "Tom PT-2 — konstrukcja (BO): opis, obliczenia statyczne, projekt geotechniczny, rysunki konstrukcyjne"
+    if nz:
+        podt += f" · ANALIZY {NZ}: {nz} {odmiana(nz, 'pozycja', 'pozycje', 'pozycji')} (rozdz. 1)"
+    dok = Dokument("Projekt techniczny", "PT-BO", d, kod="PT-2 BO", branza="konstrukcja (konstrukcyjno-budowlana)",
+                   data=data, tom=(PT_NR, PT_TOMY), podtytul=podt)
+    dok.oswiadczenie_projektanta()
+    o = Opis(dok)
+    o.md += [f"# Projekt techniczny — PT-2 BO (konstrukcja) — tom {PT_NR} z {PT_TOMY}",
+             "*Źródło Markdown części opisowej — generowane przez `tools/dokumenty/tom_PT_BO.py`; wersja wiążąca: PDF. "
+             "Obliczenia statyczne, raport MES i kontrola zbrojenia — w PDF (pliki źródłowe zespołu BO).*",
+             "*[Oświadczenie projektanta PT (art. 34 ust. 3d pkt 3 i art. 41 ust. 4a pkt 2 PB) — blok formalny "
+             "`lamela.dokumenty`; pełna treść w PDF]*"]
+    o.czesc("Opis techniczny — konstrukcja", podstawa="§ 23 RPB")
+    rozdz_stan(o, D, S, ark_braki)
+    rozdz_podstawa(o, D)
+    rozdz_konstrukcja(o, D)
+    rozdz_wyniki(o, D)
+    rozdz_obliczenia(o, D)
+    rozdz_geotechnika(o, D)
+    rozdz_ppoz(o, D)
+    rozdz_braki(o, D, ark_info)
+    dok.czesc_rysunkowa(ark, podstawa="§ 24 pkt 1 RPB; § 7 ust. 1 pkt 4, § 10 RPB")
+    o.md.append("## Część rysunkowa — wykaz rysunków\n\n| Nr | Tytuł | Skala | Format | Uwagi |\n|---|---|---|---|---|\n"
+                + "\n".join(f"| {a.nr} | {a.tytul} | {a.skala or '—'} | {a.format or '—'} | "
+                            f"{'' if a.istnieje else 'brak pliku — strona zastępcza'} |" for a in dok.arkusze))
+    return dok, o
+
+
+def main(argv=None):
+    ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    ap.add_argument("--wyjscie", default=str(KAT_WYDANIE))
+    ap.add_argument("--przelicz", action="store_true", help="uruchom ponownie obliczenia statyczne z modelu")
+    ap.add_argument("--bez-arkuszy", action="store_true", help="arkusze jako strony zastępcze (szybki podgląd)")
+    a = ap.parse_args(argv)
+    t0 = time.time()
+    out = Path(a.wyjscie)
+    out.mkdir(parents=True, exist_ok=True)
+    KAT_ZRODLA.mkdir(parents=True, exist_ok=True)
+    d = dane_obiektu()
+    data = d.get("data")
+    D = wczytaj_dane(a.przelicz)
+    S = stan_analiz(D)
+    ark, ark_braki, ark_info = arkusze_bo(a.bez_arkuszy)
+    print(f"dane: {time.time() - t0:.1f} s; arkusze {len(ark)} (brak {len(ark_braki)}); {NZ}: {S['n_nz']}")
+    dok, o = buduj_pt_bo(d, D, S, ark, ark_braki, ark_info, data)
+    o.zapisz(KAT_ZRODLA / "PT_BO_opis.md")
+    (KAT_ZRODLA / "stan_analiz.json").write_text(json.dumps(dict(
+        model=D["t_modelu"], obszary={k: list(v) for k, v in S["obszary"].items()}, niezamkniete=S["n_nz"] + len(ark_braki),
+        wiersze=S["wiersze"], arkusze_braki=ark_braki), ensure_ascii=False, indent=1), encoding="utf-8")
+    tom = Tom("PT-2 BO", [dok], dane=d, data=data, nr=PT_NR, symbol="BO", strona_tytulowa=False, laczny_spis=False)
+    w = tom.zloz(out)
+    print(f"✓ {w.nazwa}: {w.strony} stron, {w.rozmiar_mb:.2f} MB ({time.time() - t0:.0f} s)")
+    r = sprawdz_tom(w, LISTY_KONTROLNE["PT_BO"])
+    (KAT_ZRODLA / f"raport_kompletnosci_{w.sciezka.stem}.txt").write_text(r.tekst(), encoding="utf-8")
+    r.zapisz_json(KAT_ZRODLA / f"raport_kompletnosci_{w.sciezka.stem}.json")
+    s = r.podsumowanie()
+    print(f"  walidator: {s['status']} — OK {s['OK']}, BRAK {s['BRAK']}, DO UZUPEŁNIENIA {s['DO UZUPEŁNIENIA']}, "
+          f"N/D {s['N/D']}, OSTRZ. {s['OSTRZEŻENIE']}; znaczniki [DO UZUPEŁNIENIA] ×{s['znaczniki_do_uzupelnienia']}")
+    for p in r.braki:
+        print(f"    ✗ {p.id} [{p.element}] {p.opis} — {p.szczegoly}")
+    zamknij_przegladarke()
+    return w, r, S
+
+
+if __name__ == "__main__":
+    main()

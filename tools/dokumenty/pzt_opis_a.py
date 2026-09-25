@@ -17,14 +17,20 @@ def _utw(z, uid):
     return next((u for u in z.dz.get("utwardzenia") or [] if u.get("id") == uid), {})
 
 
+def _naw(z, uid):
+    """Nawierzchnia utwardzenia bez powtórzonej nazwy elementu („podjazd — kostka …” → „kostka …”)."""
+    n = str(_utw(z, uid).get("nawierzchnia", "—"))
+    return n.split("—", 1)[1].strip() if "—" in n else n
+
+
 def _brama(z, typ):
     return next((b for b in z.dz.get("bramy") or [] if b.get("typ") == typ), None)
 
 
 def wstep(zp, z, d):
     zp.markdown(f"""
-    Opis sporządzono w zakresie określonym w § 14 rozporządzenia Ministra Rozwoju, Pracy i Technologii w sprawie
-    szczegółowego zakresu i formy projektu budowlanego (t.j. Dz.U. 2022 poz. 1679, zm. Dz.U. 2023 poz. 2405
+    Opis sporządzono w zakresie określonym w § 14 rozporządzenia Ministra Rozwoju z dnia 11 września 2020 r.
+    w sprawie szczegółowego zakresu i formy projektu budowlanego (t.j. Dz.U. 2022 poz. 1679, zm. Dz.U. 2023 poz. 2405
     i Dz.U. 2026 poz. 597) — dalej **RPB**. Wymagania techniczno-budowlane przyjęto wg rozporządzenia Ministra
     Infrastruktury w sprawie warunków technicznych, jakim powinny odpowiadać budynki i ich usytuowanie (t.j. Dz.U. 2022
     poz. 1225 ze zm.) — dalej **WT** — w brzmieniu obowiązującym do 19.09.2026 r., stosowanego na podstawie art. 102a
@@ -43,7 +49,8 @@ def wstep(zp, z, d):
 # ------------------------------------------------------------------------------------------------ § 14 pkt 1
 def pkt1(zp, z, d):
     kn = z.w("kondygnacje_nadziemne")
-    kond = ", ".join(k.nazwa.lower() for k in z.m.kondygnacje)
+    kond = ", ".join(k.nazwa if k.nazwa.split()[0].isupper() else k.nazwa[0].lower() + k.nazwa[1:]
+                     for k in z.m.kondygnacje)
     mp = z.dz.get("miejsca_postojowe") or []
     n_gar = sum(1 for x in mp if x.get("typ") == "garaz")
     n_zew = sum(1 for x in mp if x.get("typ") != "garaz")
@@ -56,7 +63,8 @@ def pkt1(zp, z, d):
     naz = {"woda": "wodociągowe", "kan_sanit": "kanalizacji sanitarnej", "en": "elektroenergetyczne nN",
            "tele": "telekomunikacyjne (kanalizacja kablowa ze światłowodem)"}
     przyl = [naz[b] for b in dict.fromkeys(p["branza"] for p in proj) if b in naz]
-    gaz = next((p for p in (z.dz.get("uzbrojenie") or {}).get("istniejace") or [] if p.get("branza") == "gaz"), None)
+    gaz = any(p.get("branza") == "gaz" for p in (z.dz.get("uzbrojenie") or {}).get("istniejace") or []) \
+        and not any(p.get("branza") == "gaz" for p in proj)
     sep, skp = z.obiekt("SEP-1"), z.obiekt("SK-PC")
     tar = list(z.m.tarasy())
     drz_n = sum(1 for t in z.drzewa() if not t.get("istn"))
@@ -70,7 +78,7 @@ def pkt1(zp, z, d):
     1. budynek mieszkalny jednorodzinny z garażem w bryle — obiekt kategorii {d['kategoria']} (załącznik do PB);
     2. zjazd z drogi publicznej {dr['symbol']} ({dr['nazwa']}) — w zakresie i na warunkach zezwolenia zarządcy drogi
        (u.d.p. art. 29 ust. 1, 3a; ZL);
-    3. podjazd ({_utw(z, 'U1').get('nawierzchnia', '—')}), dojście ({_utw(z, 'U2').get('nawierzchnia', '—')}),
+    3. podjazd ({_naw(z, 'U1')}), dojście ({_naw(z, 'U2')}),
        {n_zew} stanowiska postojowe naziemne dla gości;
     4. tarasy i podesty naziemne ({len(tar)} szt., łącznie {L(z.w('pow_tarasow'))} m²);
     5. stanowisko pojemników na odpady — {(z.dz.get('odpady') or {}).get('opis', '—').split(';')[0]};
@@ -80,7 +88,7 @@ def pkt1(zp, z, d):
     7. fundament jednostki zewnętrznej pompy ciepła i studnia chłonna skroplin {skp['id'] if skp else '—'};
     8. ogrodzenie z bramą przesuwną ({L(br['szer'])} m) i furtką ({L(fu['szer'])} m);
     9. przyłącza: {', '.join(przyl)} — wg warunków przyłączenia gestorów sieci {do_uzup('nr i data warunków przyłączenia (E-05)')};
-       {('gazu nie przyłącza się (' + gaz['opis'].split('—')[-1].strip() + ')') if gaz else ''};
+       {'przyłącza gazowego nie projektuje się — budynek bez instalacji gazowej (ogrzewanie i c.w.u. z pompy ciepła)' if gaz else ''};
     10. zieleń: trawniki, żywopłoty, rabaty, {drz_n} drzew projektowanych; zachowanie drzew istniejących.
     """, podstawa="§ 14 pkt 1 RPB")
 

@@ -236,7 +236,7 @@ def rozdz_zakres(o: Opis, D: dict, kat_ar: Path | None):
     (obiekt mieszkalny, niebędący obiektem liniowym); pkt 7–9 i 11 — PT-3 IS i PT-4 IE (instalacje, charakterystyka
     energetyczna); pkt 10 — w każdym tomie stosownie do zakresu (tu: rozdział „Dane dotyczące warunków ochrony przeciwpożarowej”).
 
-    **Podstawy:** PB (t.j. Dz.U. 2026 poz. 524 ze zm.) art. 34 ust. 3 pkt 4; RPB (t.j. Dz.U. 2022 poz. 1679 ze zm.)
+    **Podstawy:** PB (t.j. Dz.U. 2026 poz. 524 ze zm.) art. 34 ust. 3 pkt 3 lit. c; RPB (t.j. Dz.U. 2022 poz. 1679 ze zm.)
     § 23–24; WT 2002 (t.j. Dz.U. 2022 poz. 1225 ze zm.) stosowane na podstawie art. 102a PB; PN-EN ISO 6946:2017-10,
     PN-EN ISO 13370:2017-09, PN-EN ISO 10077-1:2017-10, PN-EN ISO 10211:2017-09, PN-EN ISO 13788:2013-05,
     PN-EN ISO 14683:2017-09 (rejestr wymagań, W-243…W-250). Tom jest zgodny z PZT i PAB (PB art. 34 ust. 3c).
@@ -769,8 +769,8 @@ def buduj(D: dict, arkusze: list, kat_ar: Path | None, data: str) -> tuple[Dokum
     zr = kat_ar.relative_to(REPO) if kat_ar else "—"
     o.rozdzial("Wykaz rysunków — część rysunkowa", f"""
     Część rysunkowa (§ 24 pkt 1–2 RPB) obejmuje rzuty wszystkich kondygnacji z rzutem dachu, przekroje i elewacje
-    w skali 1:50 (arkusze AR z katalogu `{zr}` — rysunki PAB dołączone jako podstawa rozwiązań PT; zmiany
-    względem PAB — brak) oraz detale cieplne i szczelności PT-AR-D w skalach 1:5 i 1:10. Wykaz rysunków z numerami,
+    w skali 1:50 (arkusze AR z katalogu `{zr}` — rysunki PAB dołączone jako podstawa rozwiązań PT, generowane
+    z tego samego modelu co część opisowa) oraz detale cieplne i szczelności PT-AR-D w skalach 1:5 i 1:10. Wykaz rysunków z numerami,
     skalami i formatami — karta części rysunkowej (generowana z tabliczek arkuszy).
     """, podstawa="§ 24 RPB", nowa_strona=True)
     rys = [{"Nr rysunku": a.nr, "Tytuł": a.tytul, "Skala": a.skala or "—", "Format": a.format or "—"}

@@ -1,0 +1,403 @@
+{
+  "plik": "PZT_ZL_2026.09.25.pdf",
+  "lista": "TOM I — kontrola elementów PZT i ZL (bez PAB)",
+  "status": "PRZYKŁAD – NIE DO ZŁOŻENIA",
+  "pozycje": [
+    {
+      "id": "F-02",
+      "element": "*",
+      "opis": "Rozmiar pliku ≤ 150 MB",
+      "podstawa": "RPB § 2b ust. 3; W-300",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "1.79 MB (limit 150 MB)"
+    },
+    {
+      "id": "F-03",
+      "element": "*",
+      "opis": "Część rysunkowa w postaci wektorowej (raster tylko jako podkład mapy)",
+      "podstawa": "RPB § 2b ust. 2; W-300",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "3 arkusze wektorowe"
+    },
+    {
+      "id": "F-04",
+      "element": "*",
+      "opis": "Metadane PDF (tytuł, temat)",
+      "podstawa": "dobra praktyka; AUD-RYS",
+      "status": "OK",
+      "obowiazkowa": false,
+      "szczegoly": "Title: „Dom LAMELA — TOM I (PZT + ZL — kontrola): PZT + ZL (PRZYKŁAD – NIE DO ZŁOŻENIA)”"
+    },
+    {
+      "id": "C1-1-01",
+      "element": "PZT",
+      "opis": "Strona tytułowa: nazwa elementu",
+      "podstawa": "RPB § 7 ust. 2 pkt 1",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-1-02",
+      "element": "PZT",
+      "opis": "Strona tytułowa: nazwa zamierzenia budowlanego",
+      "podstawa": "RPB § 7 ust. 2 pkt 2 lit. a",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-1-03",
+      "element": "PZT",
+      "opis": "Strona tytułowa: adres i kategoria obiektu (kat. I)",
+      "podstawa": "RPB § 7 ust. 2 pkt 2 lit. b; W-303",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-1-04",
+      "element": "PZT",
+      "opis": "Strona tytułowa PZT: identyfikator działki ewidencyjnej",
+      "podstawa": "RPB § 7 ust. 2 pkt 2 lit. c, ust. 7 pkt 2",
+      "status": "DO UZUPEŁNIENIA",
+      "obowiazkowa": true,
+      "szczegoly": "pola [DO UZUPEŁNIENIA] na stronie tytułowej"
+    },
+    {
+      "id": "C1-1-05",
+      "element": "PZT",
+      "opis": "Strona tytułowa: inwestor i jego adres",
+      "podstawa": "RPB § 7 ust. 2 pkt 2 lit. d",
+      "status": "DO UZUPEŁNIENIA",
+      "obowiazkowa": true,
+      "szczegoly": "pola [DO UZUPEŁNIENIA] na stronie tytułowej"
+    },
+    {
+      "id": "C1-1-06",
+      "element": "PZT",
+      "opis": "Strona tytułowa: data opracowania; autorzy — imię, nazwisko, specjalność, nr uprawnień, zakres",
+      "podstawa": "RPB § 7 ust. 2 pkt 3",
+      "status": "DO UZUPEŁNIENIA",
+      "obowiazkowa": true,
+      "szczegoly": "pola [DO UZUPEŁNIENIA] na stronie tytułowej"
+    },
+    {
+      "id": "C1-1-07",
+      "element": "PZT",
+      "opis": "Spis treści z numerami stron",
+      "podstawa": "RPB § 7 ust. 1 pkt 2, ust. 5",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-1-08",
+      "element": "PZT",
+      "opis": "Numeracja stron elementu („strona X z Y”)",
+      "podstawa": "RPB § 6 ust. 1",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "13 stron numerowanych"
+    },
+    {
+      "id": "C1-1-09",
+      "element": "PZT",
+      "opis": "Oświadczenie projektanta z listą współautorów",
+      "podstawa": "PB art. 34 ust. 3d pkt 3, ust. 3e",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-1-10",
+      "element": "PZT",
+      "opis": "Opis: przedmiot zamierzenia",
+      "podstawa": "RPB § 14 pkt 1",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-1-11",
+      "element": "PZT",
+      "opis": "Opis: istniejący stan zagospodarowania",
+      "podstawa": "RPB § 14 pkt 2",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-1-12",
+      "element": "PZT",
+      "opis": "Opis: projektowane zagospodarowanie (lit. a–f)",
+      "podstawa": "RPB § 14 pkt 3",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-1-13",
+      "element": "PZT",
+      "opis": "Opis: zestawienie powierzchni i wskaźników MPZP",
+      "podstawa": "RPB § 14 pkt 4; W-030…W-041",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-1-14",
+      "element": "PZT",
+      "opis": "Opis: ograniczenia z MPZP, zabytki, szkody górnicze, zagrożenia dla środowiska",
+      "podstawa": "RPB § 14 pkt 5",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-1-15",
+      "element": "PZT",
+      "opis": "Opis: dane dotyczące warunków ochrony przeciwpożarowej",
+      "podstawa": "RPB § 14 pkt 6",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-1-16",
+      "element": "PZT",
+      "opis": "Opis: ochrona ludności — „nie dotyczy” z podstawą",
+      "podstawa": "RPB § 14 pkt 6a",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-1-17",
+      "element": "PZT",
+      "opis": "Opis: informacja o obszarze oddziaływania obiektu",
+      "podstawa": "RPB § 14 pkt 8, § 18; W-012",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-1-18",
+      "element": "PZT",
+      "opis": "Rysunek: plan zagospodarowania na mapie do celów projektowych (≥ 1:500)",
+      "podstawa": "RPB § 15 ust. 1–2, § 9 ust. 5; PZT-01",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "PZT-01 — PLAN ZAGOSPODAROWANIA DZIAŁKI (1:500)"
+    },
+    {
+      "id": "C1-1-19",
+      "element": "PZT",
+      "opis": "Rysunek: plan szczegółowy — wymiary, odległości (0,01 m), rzędne (1:200)",
+      "podstawa": "RPB § 15 ust. 2 pkt 3, ust. 3; § 17 ust. 1; PZT-02",
+      "status": "OK",
+      "obowiazkowa": false,
+      "szczegoly": "PZT-02 — PLAN SZCZEGÓŁOWY — WYMIARY I RZĘDNE (1:200)"
+    },
+    {
+      "id": "C1-1-20",
+      "element": "PZT",
+      "opis": "Rysunek: koordynacyjny uzbrojenia terenu",
+      "podstawa": "RPB § 17 ust. 2; PZT-03",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "PZT-03 — RYSUNEK KOORDYNACYJNY UZBROJENIA TERENU (1:200)"
+    },
+    {
+      "id": "C1-1-21",
+      "element": "PZT",
+      "opis": "Skale rysunków PZT nie mniejsze niż 1:500",
+      "podstawa": "RPB § 9 ust. 5; W-306",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "3 rysunki w skali nie mniejszej niż 1:500"
+    },
+    {
+      "id": "C1-3-01",
+      "element": "ZL",
+      "opis": "Strona tytułowa elementu „Załączniki”",
+      "podstawa": "RPB § 7 ust. 1a pkt 1",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-3-02",
+      "element": "ZL",
+      "opis": "Spis załączników",
+      "podstawa": "RPB § 7 ust. 1a pkt 2",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-3-03",
+      "element": "ZL",
+      "opis": "Informacja BIOZ — strona tytułowa (obiekt, adres, inwestor, projektant z adresem)",
+      "podstawa": "rozp. BIOZ § 2 ust. 2; RPB § 5 ust. 1 pkt 4 lit. c",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-3-04",
+      "element": "ZL",
+      "opis": "Informacja BIOZ pkt 1: zakres robót i kolejność realizacji",
+      "podstawa": "rozp. BIOZ § 2 ust. 3 pkt 1",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-3-05",
+      "element": "ZL",
+      "opis": "Informacja BIOZ pkt 2: wykaz istniejących obiektów",
+      "podstawa": "rozp. BIOZ § 2 ust. 3 pkt 2",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-3-06",
+      "element": "ZL",
+      "opis": "Informacja BIOZ pkt 3: elementy zagospodarowania stwarzające zagrożenie",
+      "podstawa": "rozp. BIOZ § 2 ust. 3 pkt 3",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-3-07",
+      "element": "ZL",
+      "opis": "Informacja BIOZ pkt 4: przewidywane zagrożenia (skala, rodzaj, miejsce, czas); wskazanie planu BIOZ",
+      "podstawa": "rozp. BIOZ § 2 ust. 3 pkt 4, § 6; PB art. 21a",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-3-08",
+      "element": "ZL",
+      "opis": "Informacja BIOZ pkt 5: instruktaż pracowników",
+      "podstawa": "rozp. BIOZ § 2 ust. 3 pkt 5",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-3-09",
+      "element": "ZL",
+      "opis": "Informacja BIOZ pkt 6: środki techniczne i organizacyjne, komunikacja ewakuacyjna",
+      "podstawa": "rozp. BIOZ § 2 ust. 3 pkt 6",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-3-10",
+      "element": "ZL",
+      "opis": "Decyzja zarządcy drogi o lokalizacji zjazdu (albo strona zastępcza)",
+      "podstawa": "PB art. 33 ust. 2 pkt 1; u.d.p. art. 29 ust. 3a; W-020",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-3-11",
+      "element": "ZL",
+      "opis": "Oświadczenie projektanta IS o sieci ciepłowniczej (formalnie załącznik wniosku)",
+      "podstawa": "PB art. 33 ust. 2 pkt 10; W-158",
+      "status": "OK",
+      "obowiazkowa": false,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-3-12",
+      "element": "ZL",
+      "opis": "Oświadczenie zarządcy drogi krajowej/wojewódzkiej",
+      "podstawa": "RPB § 5 ust. 1 pkt 4 lit. b",
+      "status": "N/D",
+      "obowiazkowa": true,
+      "szczegoly": "nie dotyczy — droga gminna 1KDD"
+    }
+  ],
+  "znaczniki": {
+    "DO UZUPEŁNIENIA": 95,
+    "DOKUMENT ZEWNĘTRZNY": 1,
+    "DANE PRZYKŁADOWE": 47,
+    "ZAŁ": 8,
+    "NZW": 1,
+    "INT": 0,
+    "PROG": 0,
+    "lista": {
+      "[DO UZUPEŁNIENIA: nazwa pracowni projektowej]": 2,
+      "[DO UZUPEŁNIENIA: adres pracowni]": 2,
+      "[DANE PRZYKŁADOWE – FIKCYJNE]": 47,
+      "[DO UZUPEŁNIENIA: jednostka ewidencyjna — kod TERYT WWPPGG_R i nazwa]": 2,
+      "[DO UZUPEŁNIENIA: kod TERYT jedn. ewid. WWPPGG_R]": 6,
+      "[DO UZUPEŁNIENIA: imię i nazwisko lub nazwa inwestora]": 8,
+      "[DO UZUPEŁNIENIA: adres inwestora]": 7,
+      "[DO UZUPEŁNIENIA: imię i nazwisko]": 16,
+      "[DO UZUPEŁNIENIA: nr uprawnień budowlanych]": 16,
+      "[DO UZUPEŁNIENIA: miejscowość]": 3,
+      "[DO UZUPEŁNIENIA: data złożenia oświadczenia z art. 102a PB]": 2,
+      "[DO UZUPEŁNIENIA: potwierdzenie wpisu w e-CRUB albo dołączenie kopii]": 1,
+      "[DO UZUPEŁNIENIA: nr i data warunków przyłączenia (E-05)]": 1,
+      "[DO UZUPEŁNIENIA: mapa do celów projektowych z klauzulą urzędową lub oświadczeniem geodety (E-01)]": 1,
+      "[DO UZUPEŁNIENIA: nr i data zezwolenia zarządcy drogi]": 1,
+      "[ZAŁ]": 8,
+      "[DO UZUPEŁNIENIA: warunki przyłączenia: ENEA Operator (nN), gestor wod.-kan., operator telekomunikacyjny — E-05]": 1,
+      "[DO UZUPEŁNIENIA: obwód na wys. 5 cm — mapa do celów projektowych (u.o.p. art. 83f)]": 1,
+      "[DO UZUPEŁNIENIA: wypis i wyrys z MPZP (E-02)]": 1,
+      "[DO UZUPEŁNIENIA: wypis z EGiB (E-03)]": 1,
+      "[DO UZUPEŁNIENIA: potwierdzenie lokalizacji i wydajności hydrantu przez gestora sieci]": 1,
+      "[DO UZUPEŁNIENIA: k_f z badań podłoża (E-04)]": 1,
+      "[DO UZUPEŁNIENIA: opinia geotechniczna (E-04)]": 1,
+      "[DO UZUPEŁNIENIA: mapa do celów projektowych z klauzulą lub oświadczeniem geodety (E- 01)]": 1,
+      "[DO UZUPEŁNIENIA]": 12,
+      "[DO UZUPEŁNIENIA: adres projektanta]": 1,
+      "[DO UZUPEŁNIENIA: głębokość posadowienia zbiornika]": 1,
+      "[NZW]": 1,
+      "[DOKUMENT ZEWNĘTRZNY – do dołączenia: Decyzja zarządcy drogi o lokalizacji zjazdu z drogi gminnej 1KDD, Wójt (burmistrz) Gminy Przykładowo (fikcyjna) — zarządca drogi gminnej (u.d.p. art. 19 ust. 2 pkt 4), art. 29 ust. 1 i 3a ustawy o drogach publicznych (t.j. Dz.U. 2025 poz. 889 ze zm.); PB art. 33 ust. 2 pkt 1]": 1,
+      "[DO UZUPEŁNIENIA: numer i data dokumentu]": 1,
+      "[DO UZUPEŁNIENIA: data audytu, autor]": 1,
+      "[DO UZUPEŁNIENIA: potwierdzenie braku sieci ciepłowniczej: mapa do celów projektowych lub informacja przedsiębiorstwa energetycznego]": 1,
+      "[DO UZUPEŁNIENIA: data]": 1,
+      "[DO UZUPEŁNIENIA: powiat]": 1
+    }
+  },
+  "elementy": {
+    "PZT": {
+      "od": 1,
+      "do": 17,
+      "strony_opisu": 14,
+      "arkusze": 3
+    },
+    "ZL": {
+      "od": 18,
+      "do": 27,
+      "strony_opisu": 10,
+      "arkusze": 0
+    }
+  },
+  "rozmiar_mb": 1.7875232696533203,
+  "strony": 27,
+  "podsumowanie": {
+    "status": "PRZYKŁAD – NIE DO ZŁOŻENIA",
+    "OK": 32,
+    "BRAK": 0,
+    "DO UZUPEŁNIENIA": 3,
+    "N/D": 1,
+    "OSTRZEŻENIE": 0,
+    "znaczniki_do_uzupelnienia": 95,
+    "znaczniki_dokument_zewnetrzny": 1,
+    "znaczniki_dane_przykladowe": 47
+  }
+}

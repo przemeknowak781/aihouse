@@ -1,0 +1,365 @@
+{
+ "model": "2026-09-25 06:48",
+ "obszary": {
+  "Obliczenia statyczne": [
+   105,
+   132
+  ],
+  "MES płyty fundamentowej": [
+   6,
+   7
+  ],
+  "Kontrola zbrojenia rysunków": [
+   273,
+   275
+  ]
+ },
+ "niezamkniete": 29,
+ "wiersze": [
+  {
+   "obszar": "Aktualność",
+   "element": "obliczenia statyczne",
+   "wynik": "2026-09-25 06:33",
+   "stan": "NIEZAMKNIĘTE",
+   "opis": "wyniki starsze niż model (2026-09-25 06:48) albo brak pliku — ponowić analizę",
+   "zrodlo": "czas modyfikacji plików"
+  },
+  {
+   "obszar": "Obliczenia statyczne",
+   "element": "poz. 3.2 PL-2",
+   "wynik": "336 %",
+   "stan": "NIEZAMKNIĘTE",
+   "opis": "Rysy: średnica prętów (tabl. 7.2N) η = 336 %; Ugięcie długotrwałe (quasi-stała) ≤ L/250 η = 286 %; Zbrojenie na zginanie η = 140 % — wymaga zmiany przekroju / schematu (REKOMENDACJE_MODEL.md)",
+   "zrodlo": "wyniki.json"
+  },
+  {
+   "obszar": "Obliczenia statyczne",
+   "element": "poz. 9.9 S2-09",
+   "wynik": "172 %",
+   "stan": "NIEZAMKNIĘTE",
+   "opis": "Nośność — połowa wysokości η = 172 %; Nośność — przekrój dolny η = 153 %; Nośność — przekrój górny η = 116 % — wymaga zmiany przekroju / schematu (REKOMENDACJE_MODEL.md)",
+   "zrodlo": "wyniki.json"
+  },
+  {
+   "obszar": "Obliczenia statyczne",
+   "element": "poz. 9.13 S1-01",
+   "wynik": "136 %",
+   "stan": "NIEZAMKNIĘTE",
+   "opis": "Nośność — przekrój górny η = 136 %; Nośność — połowa wysokości η = 125 % — wymaga zmiany przekroju / schematu (REKOMENDACJE_MODEL.md)",
+   "zrodlo": "wyniki.json"
+  },
+  {
+   "obszar": "Obliczenia statyczne",
+   "element": "poz. 9.16 S1-04",
+   "wynik": "155 %",
+   "stan": "NIEZAMKNIĘTE",
+   "opis": "Nośność — połowa wysokości η = 155 %; Nośność — przekrój górny η = 135 % — wymaga zmiany przekroju / schematu (REKOMENDACJE_MODEL.md)",
+   "zrodlo": "wyniki.json"
+  },
+  {
+   "obszar": "Obliczenia statyczne",
+   "element": "poz. 9.17 S1-05",
+   "wynik": "230 %",
+   "stan": "NIEZAMKNIĘTE",
+   "opis": "Nośność — połowa wysokości η = 230 %; Nośność — przekrój dolny η = 199 %; Nośność — przekrój górny η = 160 % — wymaga zmiany przekroju / schematu (REKOMENDACJE_MODEL.md)",
+   "zrodlo": "wyniki.json"
+  },
+  {
+   "obszar": "Obliczenia statyczne",
+   "element": "poz. 9.18 S1-06",
+   "wynik": "382 %",
+   "stan": "NIEZAMKNIĘTE",
+   "opis": "Nośność — przekrój dolny η = 382 %; Nośność — połowa wysokości η = 382 %; Nośność — przekrój górny η = 221 % — wymaga zmiany przekroju / schematu (REKOMENDACJE_MODEL.md)",
+   "zrodlo": "wyniki.json"
+  },
+  {
+   "obszar": "Obliczenia statyczne",
+   "element": "poz. 9.20 S1-08",
+   "wynik": "219 %",
+   "stan": "NIEZAMKNIĘTE",
+   "opis": "Docisk η = 219 %; Nośność — połowa wysokości η = 108 % — wymaga zmiany przekroju / schematu (REKOMENDACJE_MODEL.md)",
+   "zrodlo": "wyniki.json"
+  },
+  {
+   "obszar": "Obliczenia statyczne",
+   "element": "poz. 9.21 S1-09",
+   "wynik": "174 %",
+   "stan": "NIEZAMKNIĘTE",
+   "opis": "Docisk η = 174 % — wymaga zmiany przekroju / schematu (REKOMENDACJE_MODEL.md)",
+   "zrodlo": "wyniki.json"
+  },
+  {
+   "obszar": "Obliczenia statyczne",
+   "element": "poz. 9.23 S0-01",
+   "wynik": "541 %",
+   "stan": "NIEZAMKNIĘTE",
+   "opis": "Nośność — połowa wysokości η = 541 %; Nośność — przekrój dolny η = 457 %; Nośność — przekrój górny η = 405 % — wymaga zmiany przekroju / schematu (REKOMENDACJE_MODEL.md)",
+   "zrodlo": "wyniki.json"
+  },
+  {
+   "obszar": "Obliczenia statyczne",
+   "element": "poz. 9.25 S0-07",
+   "wynik": "132 %",
+   "stan": "NIEZAMKNIĘTE",
+   "opis": "Nośność — połowa wysokości η = 132 %; Nośność — przekrój dolny η = 113 % — wymaga zmiany przekroju / schematu (REKOMENDACJE_MODEL.md)",
+   "zrodlo": "wyniki.json"
+  },
+  {
+   "obszar": "Obliczenia statyczne",
+   "element": "poz. 9.26 S0-08",
+   "wynik": "214 %",
+   "stan": "NIEZAMKNIĘTE",
+   "opis": "Nośność — połowa wysokości η = 214 %; Nośność — przekrój dolny η = 177 %; Nośność — przekrój górny η = 161 % — wymaga zmiany przekroju / schematu (REKOMENDACJE_MODEL.md)",
+   "zrodlo": "wyniki.json"
+  },
+  {
+   "obszar": "Obliczenia statyczne",
+   "element": "poz. 9.27 S0-09",
+   "wynik": "107 %",
+   "stan": "NIEZAMKNIĘTE",
+   "opis": "Nośność — połowa wysokości η = 107 % — wymaga zmiany przekroju / schematu (REKOMENDACJE_MODEL.md)",
+   "zrodlo": "wyniki.json"
+  },
+  {
+   "obszar": "Obliczenia statyczne",
+   "element": "poz. 9.28 S0-10",
+   "wynik": "367 %",
+   "stan": "NIEZAMKNIĘTE",
+   "opis": "Nośność — połowa wysokości η = 367 %; Nośność — przekrój dolny η = 338 %; Nośność — przekrój górny η = 246 % — wymaga zmiany przekroju / schematu (REKOMENDACJE_MODEL.md)",
+   "zrodlo": "wyniki.json"
+  },
+  {
+   "obszar": "Obliczenia statyczne",
+   "element": "poz. 10.3 ZF1",
+   "wynik": "289 %",
+   "stan": "ZASTĄPIONE",
+   "opis": "model ławy izolowanej (Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) η = 289 %; Nośność podłoża (GEO, DA2*) η = 235 %) — miarodajna analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia — płyta na XPS z izolacją obwodową (W-284)",
+   "zrodlo": "wyniki.json; BRAKI_DANYCH.md"
+  },
+  {
+   "obszar": "Obliczenia statyczne",
+   "element": "poz. 10.4 ZF2",
+   "wynik": "289 %",
+   "stan": "ZASTĄPIONE",
+   "opis": "model ławy izolowanej (Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) η = 289 %) — miarodajna analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia — płyta na XPS z izolacją obwodową (W-284)",
+   "zrodlo": "wyniki.json; BRAKI_DANYCH.md"
+  },
+  {
+   "obszar": "Obliczenia statyczne",
+   "element": "poz. 10.7 ZF5",
+   "wynik": "143 %",
+   "stan": "ZASTĄPIONE",
+   "opis": "model ławy izolowanej (Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) η = 143 %) — miarodajna analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia — płyta na XPS z izolacją obwodową (W-284)",
+   "zrodlo": "wyniki.json; BRAKI_DANYCH.md"
+  },
+  {
+   "obszar": "Obliczenia statyczne",
+   "element": "poz. 10.9 ZF7",
+   "wynik": "289 %",
+   "stan": "ZASTĄPIONE",
+   "opis": "model ławy izolowanej (Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) η = 289 %) — miarodajna analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia — płyta na XPS z izolacją obwodową (W-284)",
+   "zrodlo": "wyniki.json; BRAKI_DANYCH.md"
+  },
+  {
+   "obszar": "Obliczenia statyczne",
+   "element": "poz. 10.10 ZF8",
+   "wynik": "291 %",
+   "stan": "ZASTĄPIONE",
+   "opis": "model ławy izolowanej (Nośność podłoża (GEO, DA2*) η = 291 %; Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) η = 289 %) — miarodajna analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia — płyta na XPS z izolacją obwodową (W-284)",
+   "zrodlo": "wyniki.json; BRAKI_DANYCH.md"
+  },
+  {
+   "obszar": "Obliczenia statyczne",
+   "element": "poz. 10.11 ZF9",
+   "wynik": "482 %",
+   "stan": "ZASTĄPIONE",
+   "opis": "model ławy izolowanej (Nośność podłoża (GEO, DA2*) η = 482 %) — miarodajna analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia — płyta na XPS z izolacją obwodową (W-284)",
+   "zrodlo": "wyniki.json; BRAKI_DANYCH.md"
+  },
+  {
+   "obszar": "Obliczenia statyczne",
+   "element": "poz. 10.13 ZF11",
+   "wynik": "212 %",
+   "stan": "ZASTĄPIONE",
+   "opis": "model ławy izolowanej (Nośność podłoża (GEO, DA2*) η = 212 %) — miarodajna analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia — płyta na XPS z izolacją obwodową (W-284)",
+   "zrodlo": "wyniki.json; BRAKI_DANYCH.md"
+  },
+  {
+   "obszar": "Obliczenia statyczne",
+   "element": "poz. 10.15 ZF13",
+   "wynik": "386 %",
+   "stan": "ZASTĄPIONE",
+   "opis": "model ławy izolowanej (Nośność podłoża (GEO, DA2*) η = 386 %) — miarodajna analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia — płyta na XPS z izolacją obwodową (W-284)",
+   "zrodlo": "wyniki.json; BRAKI_DANYCH.md"
+  },
+  {
+   "obszar": "Obliczenia statyczne",
+   "element": "poz. 10.16 ZF14",
+   "wynik": "322 %",
+   "stan": "ZASTĄPIONE",
+   "opis": "model ławy izolowanej (Nośność podłoża (GEO, DA2*) η = 322 %) — miarodajna analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia — płyta na XPS z izolacją obwodową (W-284)",
+   "zrodlo": "wyniki.json; BRAKI_DANYCH.md"
+  },
+  {
+   "obszar": "Obliczenia statyczne",
+   "element": "poz. 10.18 ZF16",
+   "wynik": "110 %",
+   "stan": "ZASTĄPIONE",
+   "opis": "model ławy izolowanej (Nośność podłoża (GEO, DA2*) η = 110 %) — miarodajna analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia — płyta na XPS z izolacją obwodową (W-284)",
+   "zrodlo": "wyniki.json; BRAKI_DANYCH.md"
+  },
+  {
+   "obszar": "Obliczenia statyczne",
+   "element": "poz. 10.20 SF1",
+   "wynik": "204 %",
+   "stan": "ZASTĄPIONE",
+   "opis": "model ławy izolowanej (Głębokość posadowienia η = 204 %) — miarodajna analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia — płyta na XPS z izolacją obwodową (W-284)",
+   "zrodlo": "wyniki.json; BRAKI_DANYCH.md"
+  },
+  {
+   "obszar": "Obliczenia statyczne",
+   "element": "poz. 10.21 SF2",
+   "wynik": "204 %",
+   "stan": "ZASTĄPIONE",
+   "opis": "model ławy izolowanej (Głębokość posadowienia η = 204 %) — miarodajna analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia — płyta na XPS z izolacją obwodową (W-284)",
+   "zrodlo": "wyniki.json; BRAKI_DANYCH.md"
+  },
+  {
+   "obszar": "Obliczenia statyczne",
+   "element": "poz. 10.22 SF3",
+   "wynik": "204 %",
+   "stan": "ZASTĄPIONE",
+   "opis": "model ławy izolowanej (Głębokość posadowienia η = 204 %) — miarodajna analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia — płyta na XPS z izolacją obwodową (W-284)",
+   "zrodlo": "wyniki.json; BRAKI_DANYCH.md"
+  },
+  {
+   "obszar": "Obliczenia statyczne",
+   "element": "poz. 10.23 SF4",
+   "wynik": "204 %",
+   "stan": "ZASTĄPIONE",
+   "opis": "model ławy izolowanej (Głębokość posadowienia η = 204 %) — miarodajna analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia — płyta na XPS z izolacją obwodową (W-284)",
+   "zrodlo": "wyniki.json; BRAKI_DANYCH.md"
+  },
+  {
+   "obszar": "Ścinanie płyt",
+   "element": "poz. 1.1 D1",
+   "wynik": "η_max = 72 %",
+   "stan": "NIEZAMKNIĘTE",
+   "opis": "V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P2; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia",
+   "zrodlo": "wyniki.json; obliczenia_statyczne.md; kontrola_zbrojenia.json"
+  },
+  {
+   "obszar": "Ścinanie płyt",
+   "element": "poz. 1.2 D2",
+   "wynik": "η_max = 96 %",
+   "stan": "NIEZAMKNIĘTE",
+   "opis": "V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P5; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia",
+   "zrodlo": "wyniki.json; obliczenia_statyczne.md; kontrola_zbrojenia.json"
+  },
+  {
+   "obszar": "Ścinanie płyt",
+   "element": "poz. 1.3 D3",
+   "wynik": "η_max = 91 %",
+   "stan": "NIEZAMKNIĘTE",
+   "opis": "V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P8; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia",
+   "zrodlo": "wyniki.json; obliczenia_statyczne.md; kontrola_zbrojenia.json"
+  },
+  {
+   "obszar": "Ścinanie płyt",
+   "element": "poz. 1.4 D4",
+   "wynik": "η_max = 44 %",
+   "stan": "NIEZAMKNIĘTE",
+   "opis": "V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P4; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia",
+   "zrodlo": "wyniki.json; obliczenia_statyczne.md; kontrola_zbrojenia.json"
+  },
+  {
+   "obszar": "Ścinanie płyt",
+   "element": "poz. 2.1 ST2",
+   "wynik": "η_max = 96 %",
+   "stan": "NIEZAMKNIĘTE",
+   "opis": "V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P1; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia",
+   "zrodlo": "wyniki.json; obliczenia_statyczne.md; kontrola_zbrojenia.json"
+  },
+  {
+   "obszar": "Ścinanie płyt",
+   "element": "poz. 2.2 ST2Z",
+   "wynik": "η_max = 96 %",
+   "stan": "NIEZAMKNIĘTE",
+   "opis": "V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P2; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia",
+   "zrodlo": "wyniki.json; obliczenia_statyczne.md; kontrola_zbrojenia.json"
+  },
+  {
+   "obszar": "Ścinanie płyt",
+   "element": "poz. 2.3 ST1",
+   "wynik": "η_max = 79 %",
+   "stan": "NIEZAMKNIĘTE",
+   "opis": "V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P2; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia",
+   "zrodlo": "wyniki.json; obliczenia_statyczne.md; kontrola_zbrojenia.json"
+  },
+  {
+   "obszar": "Ścinanie płyt",
+   "element": "poz. 3.2 PL-2",
+   "wynik": "η_max = 96 %",
+   "stan": "NIEZAMKNIĘTE",
+   "opis": "V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P1; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia",
+   "zrodlo": "wyniki.json; obliczenia_statyczne.md; kontrola_zbrojenia.json"
+  },
+  {
+   "obszar": "Ścinanie płyt",
+   "element": "poz. 3.3 PL-E",
+   "wynik": "η_max = 81 %",
+   "stan": "NIEZAMKNIĘTE",
+   "opis": "V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P1; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia",
+   "zrodlo": "wyniki.json; obliczenia_statyczne.md; kontrola_zbrojenia.json"
+  },
+  {
+   "obszar": "Ścinanie płyt",
+   "element": "poz. 3.4 PL-DA",
+   "wynik": "η_max = 74 %",
+   "stan": "NIEZAMKNIĘTE",
+   "opis": "V_Ed > V_Rd,c — zbrojenie na ścinanie płyty (PN-EN 1992-1-1 6.2.3, 9.3.2) w polach: Pole P9; brak w kontroli zbrojenia rysunków (A_sw,prov ≥ A_sw,req) — do domknięcia",
+   "zrodlo": "wyniki.json; obliczenia_statyczne.md; kontrola_zbrojenia.json"
+  },
+  {
+   "obszar": "MES płyty fundamentowej",
+   "element": "Docisk lokalny do podłoża (pasmo pod żebrem)",
+   "wynik": "114%",
+   "stan": "NIEZAMKNIĘTE",
+   "opis": "p_d,max = 364,0 kPa > q_Rd = 318,8 kPa (PN-EN 1997-1 6.5.2, zał. D) — pogrubienie / zmiana posadowienia (REKOMENDACJE_MODEL.md)",
+   "zrodlo": "plyta_fundamentowa_MES.md"
+  },
+  {
+   "obszar": "Kontrola zbrojenia",
+   "element": "PF1+PF2 — dozbrojenie D1 dół y",
+   "wynik": "4 299 < 5 243 mm²/m",
+   "stan": "NIEZAMKNIĘTE",
+   "opis": "wymagane zbrojenie niewykonalne w grubości płyty (rozstaw w świetle 8.2(2)) — obciążenie skupione węzła ścian/belek: pogrubienie płyty (stopa) pod węzłem — REKOMENDACJE_MODEL.md [WYMAGA ZMIANY MODELU]",
+   "zrodlo": "kontrola_zbrojenia.json"
+  },
+  {
+   "obszar": "Kontrola zbrojenia",
+   "element": "PF1+PF2 — strefa S1 (płyta) — podwójnie zbrojona, najniekorz. el. (dół y)",
+   "wynik": "4 299 < 5 243 mm²/m",
+   "stan": "NIEZAMKNIĘTE",
+   "opis": "zbrojenie wymagane niewykonalne w grubości płyty — pogrubienie (stopa) pod węzłem, REKOMENDACJE_MODEL.md [WYMAGA ZMIANY MODELU]",
+   "zrodlo": "kontrola_zbrojenia.json"
+  },
+  {
+   "obszar": "Uwagi analizy",
+   "element": "3 ×",
+   "wynik": "—",
+   "stan": "NIEZAMKNIĘTE",
+   "opis": "Ściana nośna S2-07 stoi na płycie ST2 + ST2Z + D2 + D3 + PL-2 bez ściany poniżej — obciążenie liniowe płyty; sprawdzić podciąg/żebro [WYMAGA ANALIZY].; Ściana nośna S2-08 stoi na płycie ST2 + ST2Z + D2 + D3 + PL-2 bez ściany poniżej — obciążenie liniowe płyty; sprawdzić podciąg/żebro [WYMAGA ANALIZY].; Ściana nośna S2-09 stoi na płycie ST2 + ST2Z + D2 + D3 + PL-2 bez ściany poniżej — obciążenie liniowe płyty; sprawdzić podciąg/żebro [WYMAGA ANALIZY].",
+   "zrodlo": "wyniki.json — uwagi"
+  },
+  {
+   "obszar": "Uwagi analizy",
+   "element": "12 ×",
+   "wynik": "—",
+   "stan": "NIEZAMKNIĘTE",
+   "opis": "ST1: podpora punktowa SL1 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]; ST1: podpora punktowa SL2 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]; ST1: podpora punktowa SL3 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY] (i 9 podobnych)",
+   "zrodlo": "wyniki.json — uwagi"
+  }
+ ],
+ "arkusze_braki": []
+}

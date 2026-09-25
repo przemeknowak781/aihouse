@@ -9,13 +9,13 @@ generowane z modelu — po zmianach zaktualizują się automatycznie (pozycje, z
 Oznaczenia: **[ZAŁ]** — przyjęcie projektanta (jawne, do akceptacji), **[MODEL]** — zmiana danych modelu,
 **[BIBL]** — zmiana wprowadzona w bibliotece obliczeń w tej rundzie (opis w p. 9).
 
-## 0. Stan (model z 2026-09-25, po rundzie zmian biblioteki opisanej w p. 9)
+## 0. Stan (model z 2026-09-25 06:24 — po 2. rundzie poprawek modelu; biblioteka wg p. 9)
 
 | Zakres | Wynik | Uwagi |
 |---|---|---|
-| Kontrola zbrojenia rysunków A_s,prov ≥ max(A_s,req; A_s,min), s ≤ s_max, A_s ≤ A_s,max | **275 / 277** | 2 niespełnione — ta sama strefa płyty fundamentowej przy węźle C/3 (p. 5.2): zbrojenie niewykonalne w h = 0,25 m → stopa pod węzłem |
+| Kontrola zbrojenia rysunków A_s,prov ≥ max(A_s,req; A_s,min), s ≤ s_max, A_s ≤ A_s,max | **273 / 275** | 2 niespełnione — ta sama strefa płyty fundamentowej przy węźle C/3 (p. 5, pkt 2): zbrojenie niewykonalne w h = 0,25 m → stopa pod węzłem |
 | Pozycje obliczeń biblioteki (132) | 105 spełnionych, 27 z uwagami | 14 — ławy/stopy izolowane ZF/SF zastąpione MES płyty z żebrami (Z6); 12 — mur (p. 1–3); 1 — PL-2 SGU (p. 6) |
-| MES płyty fundamentowej | docisk lokalny η = 114 % | p. 5.3 |
+| MES płyty fundamentowej | docisk lokalny η = 114 % | p. 5, pkt 4 |
 
 Wszystkie pozostałe niespełnienia wymagają **zmiany modelu** (nie da się ich usunąć zbrojeniem rysunku) — lista
 zmian poniżej, w kolejności wpływu na konstrukcję: p. 1 (wsporniki bryły A) → p. 3 (węzły belek w osi 3) → p. 2
@@ -87,11 +87,15 @@ dodać pole `konstrukcyjny: false`; ramy PL-C1/PL-C2/PL-D (stal) wymagają osobn
    (h = 0,25 m, M_Ed,y ≈ 308 kNm/m, A_s,req ≈ 5250 mm²/m — przekrój podwójnie zbrojony, zbrojenie niewykonalne przy
    rozstawie w świetle wg 8.2(2)). Rekomendacja: pogrubienie płyty (stopa) pod słupami z p. 1 i 3, np. 1,2 × 1,2 m,
    h = 0,60 m, analogicznie do SF1–SF4.
-3. Docisk lokalny do podłoża w MES: p_d,max = 364 kPa > q_Rd,lok = 319 kPa (η = 114 %, pasmo żebro + 2h) oraz
+3. Model ma dwie płyty: PF1 (dom, spód −0,40) i PF2 (garaż obniżony, spód −0,55) z uskokiem nad żebrami ZF16/ZF17.
+   [ZAŁ] MES na sumie obrysów (uskok 15 cm pominięty w zginaniu płyty), siatki osobno dla każdej płyty, dolne
+   przedłużone w żebro uskoku; rekomendacja: w modelu zaznaczyć żebra uskoku jako `uskok: true` (rysunek przekroju
+   uskoku z dwoma poziomami płyt — obecnie przekrój żebra rysowany z poziomem płyty po stronie wnętrza).
+4. Docisk lokalny do podłoża w MES: p_d,max = 364 kPa > q_Rd,lok = 319 kPa (η = 114 %, pasmo żebro + 2h) oraz
    osiadanie w_k,max = 44 mm (≤ 50 mm, ale ≈ 2× więcej niż przed uwzględnieniem wsporników B4/B5) — skutek sił
    skupionych w węzłach A/1, A/3, C/3, D/3. Stopy pod słupami z p. 1 i 3 rozłożą nacisk; do sprawdzenia po zmianie
    modelu (raport `obliczenia/plyta_fundamentowa_MES.md`).
-4. Kategoria obciążenia posadzki garażu (F) — przypisać w modelu (obecnie kat. A w MES płyty).
+5. Kategoria obciążenia posadzki garażu (F) — przypisać w modelu (obecnie kat. A w MES płyty).
 
 ## 6. Naroże wspornika PL-2 (A/1) — [MODEL] + [ZAŁ]
 
@@ -109,6 +113,19 @@ i sprawdzenie ugięcia z podatnością łącznika.
 Belki modelu N1–N28 („nadproże otworu O…”) są jednocześnie pozycjami belek (gdy płyta się na nich opiera: N16, N17,
 N22–N25, N27) i nadproży N-O… (biblioteka). Rysunki biorą belkę, gdy istnieje jej pozycja, w pozostałych przypadkach
 typ nadproża. Rekomendacja: jedna reprezentacja (np. `nadproza:` z polem `otwor:`) — usuwa podwójne pozycje.
+
+## 8a. Schody — załamania płyt (poprawione na rysunku PT-BO-26)
+
+Załamanie bieg → spocznik górny ma naroże wklęsłe od strony rozciąganej: pręty dolne są rysowane jako dwa pręty
+proste krzyżujące się (każdy przedłużony za załamanie do krawędzi ściskanej i zakotwiony łącznie ≥ l_bd — PN-EN
+1992-1-1 8.4; zasada naroży z momentem otwierającym, zał. J.2.3 — informacyjny). Załamanie spocznik dolny → bieg
+(naroże wypukłe od strony rozciąganej) — pręt odgięty. Reguła jest ogólna (kierunek wypadkowej sił w pręcie względem
+betonu) — stosowana do każdego załamania toru prętów dolnych. Sprawdzono pozostałe elementy z załamaniami: płyty
+wspornikowe z pogrubieniem od spodu (PL-E, PL-2, PL-3 — wierzch w poziomie stropu, pręty górne proste, dolne osobno
+w każdej grubości), żebra płyty fundamentowej (siatki proste w poziomie płyty, pręty żeber osobno, uskok PF1/PF2 —
+pręty proste przedłużone w żebro), belki (odgięcia 90° na końcach — naroża wypukłe) — bez prętów prowadzonych po
+narożu wklęsłym. Attyki nie są objęte rysunkami PT-BO (brak pozycji obliczeniowej attyk w bibliotece) — przy ich
+opracowaniu: pręty wierzchu stropu i lica wewnętrznego attyki krzyżować w narożu wklęsłym.
 
 ## 8. Słupy SL1–SL4 pod B1 — [MODEL]
 

@@ -22,7 +22,7 @@ obejmuje rzuty z rzutem dachu, przekroje i elewacje w skali 1:50 oraz detale w s
 (obiekt mieszkalny, niebędący obiektem liniowym); pkt 7–9 i 11 — PT-3 IS i PT-4 IE (instalacje, charakterystyka
 energetyczna); pkt 10 — w każdym tomie stosownie do zakresu (tu: rozdział „Dane dotyczące warunków ochrony przeciwpożarowej”).
 
-**Podstawy:** PB (t.j. Dz.U. 2026 poz. 524 ze zm.) art. 34 ust. 3 pkt 4; RPB (t.j. Dz.U. 2022 poz. 1679 ze zm.)
+**Podstawy:** PB (t.j. Dz.U. 2026 poz. 524 ze zm.) art. 34 ust. 3 pkt 3 lit. c; RPB (t.j. Dz.U. 2022 poz. 1679 ze zm.)
 § 23–24; WT 2002 (t.j. Dz.U. 2022 poz. 1225 ze zm.) stosowane na podstawie art. 102a PB; PN-EN ISO 6946:2017-10,
 PN-EN ISO 13370:2017-09, PN-EN ISO 10077-1:2017-10, PN-EN ISO 10211:2017-09, PN-EN ISO 13788:2013-05,
 PN-EN ISO 14683:2017-09 (rejestr wymagań, W-243…W-250). Tom jest zgodny z PZT i PAB (PB art. 34 ust. 3c).

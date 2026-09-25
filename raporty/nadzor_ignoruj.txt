@@ -18,3 +18,4 @@ a68a8b74f8ab79b44  # rysunki instalacji IS/IE — zakończony
 wf_44634517-034  # przepływ koncepcji — zakończony
 a076389c324f1eb11  # generator PZT — zakończony
 a9f2ed8bb74c2c0d9  # detale PT-AR-D + katalog mostków — zakończony
+a5045de9ee0554cc8  # rysunki BO — zakończony

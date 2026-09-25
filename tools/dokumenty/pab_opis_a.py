@@ -170,3 +170,90 @@ def wyroby_elewacji(D) -> list[dict]:
                  " (model: stolarka); szyby 3-szybowe", "Kolorystyka": do_uzup("kolor ram (RAL)"),
                  "Paleta MPZP": do_uzup("paleta MPZP")})
     return rows
+
+
+def mpzp_wiersze(D) -> list[dict]:
+    """Zgodność z ustaleniami MPZP — wartości z ``lamela.wskazniki`` / audytu A1, limity z rejestru (sekcja mpzp)."""
+    w, v = D.w, D.v
+    kol_ok = all(not str(r["Paleta MPZP"]).startswith("[DO UZUP") for r in wyroby_elewacji(D))
+    iz = v("mpzp", "intensywnosc_zakres", [None, None])
+    rez = D.audyt.info.get("linia_zabudowy_rezerwa")
+    r = [
+        ("Udział powierzchni zabudowy", f"≤ {L(100 * v('mpzp', 'udzial_pow_zabudowy_max'), 0)} %",
+         f"{L(100 * w['udzial_zabudowy']['wartosc'])} % (z płytami wysuniętymi {L(100 * w['udzial_zabudowy_kontrolny']['wartosc'])} %)",
+         w["udzial_zabudowy"]["wartosc"] <= v("mpzp", "udzial_pow_zabudowy_max") and
+         w["udzial_zabudowy_kontrolny"]["wartosc"] <= v("mpzp", "udzial_pow_zabudowy_max"), D.zr("mpzp", "udzial_pow_zabudowy_max")),
+        ("Udział powierzchni biologicznie czynnej", f"≥ {L(100 * v('mpzp', 'udzial_PBC_min'), 0)} %",
+         f"{L(100 * w['udzial_pbc']['wartosc'])} % (bez rezerwy dachu zielonego)",
+         w["udzial_pbc"]["wartosc"] >= v("mpzp", "udzial_PBC_min"), D.zr("mpzp", "udzial_PBC_min")),
+        ("Intensywność zabudowy (nadziemna)", f"{L(iz[0])}–{L(iz[1])}", L(w["intensywnosc_nadziemna"]["wartosc"], 3),
+         iz[0] <= w["intensywnosc_nadziemna"]["wartosc"] <= iz[1], D.zr("mpzp", "intensywnosc_zakres")),
+        ("Wysokość zabudowy", f"≤ {L(v('mpzp', 'wys_zabudowy_max'))} m", f"{L(w['wysokosc_zabudowy']['wartosc'])} m",
+         w["wysokosc_zabudowy"]["wartosc"] <= v("mpzp", "wys_zabudowy_max"), D.zr("mpzp", "wys_zabudowy_max")),
+        ("Liczba kondygnacji nadziemnych", f"≤ {v('mpzp', 'kondygnacje_nadziemne_max')}",
+         str(w["kondygnacje_nadziemne"]["wartosc"]),
+         w["kondygnacje_nadziemne"]["wartosc"] <= v("mpzp", "kondygnacje_nadziemne_max"), D.zr("mpzp", "kondygnacje_nadziemne_max")),
+        ("Geometria dachu (dach płaski)", f"kąt ≤ {L(v('mpzp', 'dach_plaski_spadek_max'), 0)}°",
+         f"{L(w['kat_dachu']['wartosc'], 1)}°", w["kat_dachu"]["wartosc"] <= v("mpzp", "dach_plaski_spadek_max"),
+         D.zr("mpzp", "dach_plaski_spadek_max")),
+        ("Miejsca postojowe", f"≥ {v('mpzp', 'miejsca_postojowe_na_lokal_min')} na lokal",
+         f"{w['miejsca_postojowe']['wartosc']} (w garażu {w['miejsca_postojowe'].get('garaz')})",
+         w["miejsca_postojowe"]["wartosc"] >= v("mpzp", "miejsca_postojowe_na_lokal_min"), D.zr("mpzp", "miejsca_postojowe_na_lokal_min")),
+        ("Nieprzekraczalna linia zabudowy", f"{L(v('usytuowanie', 'linia_zabudowy_od_linii_rozgraniczajacej'))} m od linii "
+         "rozgraniczającej drogi", f"nieprzekroczona; rezerwa {L(rez)} m" if rez is not None else do_uzup("PZT"),
+         rez is not None and rez >= 0, D.zr("usytuowanie", "linia_zabudowy_od_linii_rozgraniczajacej")),
+        ("Kolorystyka elewacji", ", ".join(v("mpzp", "kolorystyka_elewacji") or []), "tabela wyrobów wykończeniowych",
+         kol_ok, D.zr("mpzp", "kolorystyka_elewacji")),
+    ]
+    return [{"Ustalenie MPZP": a, "Wartość dopuszczalna": b, "Projekt": c, "Ocena": ok(e) if e else
+             ("do potwierdzenia" if a.startswith("Kolor") else ok(e)), "Podstawa": f} for a, b, c, e, f in r]
+
+
+def r03(pab, D, d):
+    m = D.m
+    dachy = m.dachy()
+    ziel = [dh["id"] for dh in dachy if "ziel" in (m.przegroda(str(dh.get("przegroda"))).nazwa.lower()
+                                                   if m.przegroda(str(dh.get("przegroda"))) else "")]
+    sp = sorted({float(dh.get("spadek") or 0) for dh in dachy})
+    lam = sorted({lm["elewacja"] for lm in m.lamele() if "wewn" not in str(lm.get("uwagi", "")).lower()})
+    rz = D.arkusze_ref("rzut") + D.arkusze_ref("dach")
+    el = D.arkusze_ref("elewacja")
+    pab.rozdzial(tyt("Układ przestrzenny, forma architektoniczna, wyroby wykończeniowe i kolorystyka; zgodność z MPZP", 3))
+    pab.markdown(f"""
+    ## Układ przestrzenny i forma architektoniczna
+
+    Budynek tworzą {len(m.kondygnacje)} kondygnacje nadziemne o różnych obrysach — trzy poziome bryły przesunięte względem
+    siebie na przemian ku zachodowi i wschodowi, co w elewacji ogrodowej (południowej) daje sylwetę „S”. Parter mieści strefę
+    dzienną otwartą na ogród, część gościnną, pomieszczenia gospodarcze i garaż; I piętro — strefę dzieci i pokój rodzinny
+    w przeszklonym boksie w ramie stalowej; II piętro — apartament rodziców i gabinet w bryle osłoniętej pionowymi lamelami
+    drewnianymi (elewacje: {', '.join(lam) or '—'}). Poziome krawędzie wysuniętych płyt stropowych pełnią funkcję okapów
+    i stałych osłon przeciwsłonecznych od południa. Dachy płaskie ze spadkiem {', '.join(L(100 * s, 1) + ' %' for s in sp)}
+    ukrytym za attykami; dach nad garażem i pasem gospodarczym ({', '.join(ziel) or '—'}) — zielony ekstensywny,
+    nieużytkowy. Wejście główne od strony drogi (północ) pod daszkiem, wjazd do garażu od północy. Układ funkcjonalny
+    przedstawiono na rzutach ({', '.join(rz)}), formę — na elewacjach ({', '.join(el)}) i przekrojach
+    ({', '.join(D.arkusze_ref('przekroj'))}).
+    """)
+    rows = [{"Kondygnacja": f"{v['nazwa']} ({k})", "Rzędna posadzki [m]": rzedna(v["rzedna"]),
+             "Obrys zewn. dł. × szer. [m]": f"{L(v['dl'])} × {L(v['szer'])}", "Wys. kondygnacji [m]": v["h_kond"],
+             "Wys. w świetle [m]": v["h_sw"]} for k, v in D.wym_kond.items()]
+    pab.tabela(rows, tytul="Kondygnacje — obrysy i wysokości", wyrownanie={"Rzędna posadzki [m]": "r",
+               "Obrys zewn. dł. × szer. [m]": "r"}, zrodlo="model/budynek.yaml (kondygnacje; obrys po licach ścian "
+               "zewnętrznych — lamela.model.obrys_kondygnacji)")
+    pab.markdown("## Wyroby wykończeniowe i kolorystyka elewacji")
+    pab.tabela(wyroby_elewacji(D), tytul="Charakterystyczne wyroby wykończeniowe i kolorystyka (z modelu)", klasa="zwarta",
+               szerokosci=["42mm", None, "30mm", "28mm"],
+               uwagi=[f"Wyroby „lub równoważne”; kolory ram stolarki i pokrycia dachu — wg karty kolorystyki "
+                      f"{do_uzup('karta kolorystyki elewacji')}. Przyporządkowanie kodów RAL/NCS do palety MPZP — {INT}."],
+               zrodlo="model/budynek.yaml: materialy, przegrody, lamele, wsporniki_plyty, slupy, dachy, stolarka")
+    pab.markdown(f"""
+    ## Zgodność z ustaleniami miejscowego planu zagospodarowania przestrzennego
+
+    Ustalenia MPZP dla terenu {DANE_PRZYKLADOWE} i wartości projektu (definicje: ustawa o planowaniu i zagospodarowaniu
+    przestrzennym, t.j. Dz.U. 2026 poz. 538, art. 2 pkt 28–35 — obliczenia `lamela.wskazniki`; szczegóły bilansu terenu
+    w opisie PZT, RPB § 14 pkt 4). Dla zamierzenia nie ustalono pozwoleń, uzgodnień ani opinii innych organów, o których
+    mowa w art. 32 ust. 1 pkt 2 PB {INT}; do projektu dołącza się decyzję zarządcy drogi o lokalizacji zjazdu (PB art. 33
+    ust. 2 pkt 1; u.d.p. art. 29 ust. 3a; W-020) — element „Załączniki”.
+    """)
+    pab.tabela(mpzp_wiersze(D), tytul="Zgodność z ustaleniami MPZP", klasa="zwarta",
+               szerokosci=["36mm", "30mm", None, "18mm", "44mm"], zrodlo="lamela.wskazniki; tools/audyt_wt.py; "
+               "docs/10_podstawy_prawne/wymagania.yaml (sekcja mpzp) " + DANE_PRZYKLADOWE)
