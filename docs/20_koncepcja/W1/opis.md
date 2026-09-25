@@ -169,20 +169,20 @@ Porównanie graficzne: `elewacja_S.png` (górny panel — szkic skalibrowany w p
 
 | nr | pomieszczenie | kategoria | wymiary netto [m] (x × y) | pow. netto [m²] | wielobok (x,y) |
 |---|---|---|---|---|---|
-| 0.01 | Wiatrołap | komunikacja | 2,45 × 1,52 | **3,72** | (9,32, 8,88); (9,32, 10,39); (6,88, 10,39); (6,88, 8,88) |
-| 0.02 | Hol | komunikacja | 4,53 × 1,32 | **5,97** | (9,40, 7,41); (9,40, 8,72); (4,88, 8,72); (4,88, 7,41) |
-| 0.03 | Garderoba | pomocnicze | 1,85 × 1,52 | **2,81** | (6,72, 8,88); (6,72, 10,39); (4,88, 10,39); (4,88, 8,88) |
-| 0.04 | WC | pomocnicze | 1,45 × 1,52 | **2,20** | (10,93, 8,88); (10,93, 10,39); (9,47, 10,39); (9,47, 8,88) |
-| 0.05 | Schowek gosp. | pomocnicze | 1,42 × 1,52 | **2,16** | (12,49, 8,88); (12,49, 10,39); (11,07, 10,39); (11,07, 8,88) |
-| 0.06 | Sień gospodarcza | komunikacja | 3,09 × 1,32 | **4,09** | (12,49, 7,41); (12,49, 8,72); (9,40, 8,72); (9,40, 7,41) |
-| 0.07 | Pokój gościnny / gabinet | mieszk./pobyt | 3,62 × 2,99 | **10,82** | (4,72, 7,41); (4,72, 10,39); (1,10, 10,39); (1,10, 7,41) |
-| 0.08 | Łazienka (prysznic) | pomocnicze | 2,49 × 2,29 | **5,70** | (3,60, 4,91); (3,60, 7,20); (1,10, 7,20); (1,10, 4,91) |
-| 0.09 | Schody | schody (poza PU) | 4,59 × 2,29 | **10,51** | (8,39, 4,91); (8,39, 7,20); (3,81, 7,20); (3,81, 4,91) |
-| 0.10 | Spiżarnia | pomocnicze | 1,07 × 2,29 | **2,45** | (9,68, 4,91); (9,68, 7,20); (8,61, 7,20); (8,61, 4,91) |
-| 0.11 | Pom. techniczne | techniczne | 2,67 × 2,29 | **6,11** | (12,49, 4,91); (12,49, 7,20); (9,82, 7,20); (9,82, 4,91) |
-| 0.12 | Salon + jadalnia + kuchnia | mieszk./pobyt | 11,39 × 4,79 | **54,62** | (12,49, -0,10); (12,49, 4,70); (1,10, 4,70); (1,10, -0,10) |
-| 0.13 | Garaż 2-stanowiskowy | garaż / gosp. | 5,68 × 6,49 | **36,83** | (18,50, 3,90); (18,50, 10,39); (12,82, 10,39); (12,82, 3,90) |
-| 0.14 | Pom. gosp. (rowery, ogród) | garaż / gosp. | 5,68 × 3,59 | **20,37** | (18,50, 0,10); (18,50, 3,69); (12,82, 3,69); (12,82, 0,10) |
+| 0.01 | Wiatrołap | komunikacja | 2,45 × 1,52 | **3,72** | (9,325, 8,875); (9,325, 10,395); (6,875, 10,395); (6,875, 8,875) |
+| 0.02 | Hol | komunikacja | 4,53 × 1,32 | **5,97** | (9,400, 7,405); (9,400, 8,725); (4,875, 8,725); (4,875, 7,405) |
+| 0.03 | Garderoba | pomocnicze | 1,85 × 1,52 | **2,81** | (6,725, 8,875); (6,725, 10,395); (4,875, 10,395); (4,875, 8,875) |
+| 0.04 | WC | pomocnicze | 1,45 × 1,52 | **2,20** | (10,925, 8,875); (10,925, 10,395); (9,475, 10,395); (9,475, 8,875) |
+| 0.05 | Schowek gosp. | pomocnicze | 1,42 × 1,52 | **2,16** | (12,495, 8,875); (12,495, 10,395); (11,075, 10,395); (11,075, 8,875) |
+| 0.06 | Sień gospodarcza | komunikacja | 3,09 × 1,32 | **4,09** | (12,495, 7,405); (12,495, 8,725); (9,400, 8,725); (9,400, 7,405) |
+| 0.07 | Pokój gościnny / gabinet | mieszk./pobyt | 3,62 × 2,99 | **10,82** | (4,725, 7,405); (4,725, 10,395); (1,105, 10,395); (1,105, 7,405) |
+| 0.08 | Łazienka (prysznic) | pomocnicze | 2,49 × 2,29 | **5,70** | (3,595, 4,905); (3,595, 7,195); (1,105, 7,195); (1,105, 4,905) |
+| 0.09 | Schody | schody (poza PU) | 4,59 × 2,29 | **10,51** | (8,395, 4,905); (8,395, 7,195); (3,805, 7,195); (3,805, 4,905) |
+| 0.10 | Spiżarnia | pomocnicze | 1,07 × 2,29 | **2,45** | (9,675, 4,905); (9,675, 7,195); (8,605, 7,195); (8,605, 4,905) |
+| 0.11 | Pom. techniczne | techniczne | 2,67 × 2,29 | **6,11** | (12,495, 4,905); (12,495, 7,195); (9,825, 7,195); (9,825, 4,905) |
+| 0.12 | Salon + jadalnia + kuchnia | mieszk./pobyt | 11,39 × 4,79 | **54,62** | (12,495, -0,100); (12,495, 4,695); (1,105, 4,695); (1,105, -0,100) |
+| 0.13 | Garaż 2-stanowiskowy | garaż / gosp. | 5,68 × 6,49 | **36,83** | (18,495, 3,905); (18,495, 10,395); (12,820, 10,395); (12,820, 3,905) |
+| 0.14 | Pom. gosp. (rowery, ogród) | garaż / gosp. | 5,68 × 3,59 | **20,37** | (18,495, 0,105); (18,495, 3,695); (12,820, 3,695); (12,820, 0,105) |
 
 Suma P0: PU (mieszk.+pomocn.+komunik.) **94,55 m²**, pom. techniczne 6,11 m², schody/spoczniki 10,51 m², garaż + pom. gosp. 57,20 m².
 
@@ -224,12 +224,12 @@ Funkcja: wejście od północy (daszek 1,50 m = wysunięcie ST1, x 6,60–10,00)
 
 | nr | pomieszczenie | kategoria | wymiary netto [m] (x × y) | pow. netto [m²] | wielobok (x,y) |
 |---|---|---|---|---|---|
-| 1.01 | Pokój dziecka 1 | mieszk./pobyt | 3,52 × 3,42 | **12,04** | (3,62, 0,10); (3,62, 3,52); (0,10, 3,52); (0,10, 0,10) |
-| 1.02 | Pokój dziecka 2 | mieszk./pobyt | 3,49 × 3,52 | **12,28** | (3,60, 3,67); (3,60, 7,20); (0,10, 7,20); (0,10, 3,67) |
-| 1.03 | Pokój rodzinny / biblioteka + hol | mieszk./pobyt | wielobok | **28,86** | (3,77, 0,10); (11,29, 0,10); (11,29, 2,73); (8,43, 2,73); (8,43, 4,70); (3,77, 4,70) |
-| 1.04 | Pralnia | pomocnicze | 2,72 × 1,82 | **4,95** | (11,29, 2,88); (11,29, 4,70); (8,57, 4,70); (8,57, 2,88) |
-| 1.05 | Łazienka | pomocnicze | 2,69 × 2,29 | **6,16** | (11,29, 4,91); (11,29, 7,20); (8,61, 7,20); (8,61, 4,91) |
-| 1.06 | Schody | schody (poza PU) | 4,59 × 2,29 | **10,51** | (8,39, 4,91); (8,39, 7,20); (3,81, 7,20); (3,81, 4,91) |
+| 1.01 | Pokój dziecka 1 | mieszk./pobyt | 3,52 × 3,42 | **12,04** | (3,625, 0,105); (3,625, 3,525); (0,105, 3,525); (0,105, 0,105) |
+| 1.02 | Pokój dziecka 2 | mieszk./pobyt | 3,49 × 3,52 | **12,28** | (3,595, 3,675); (3,595, 7,195); (0,105, 7,195); (0,105, 3,675) |
+| 1.03 | Pokój rodzinny / biblioteka + hol | mieszk./pobyt | wielobok | **28,86** | (3,775, 0,105); (11,295, 0,105); (11,295, 2,725); (8,425, 2,725); (8,425, 4,695); (3,775, 4,695) |
+| 1.04 | Pralnia | pomocnicze | 2,72 × 1,82 | **4,95** | (11,295, 2,875); (11,295, 4,695); (8,575, 4,695); (8,575, 2,875) |
+| 1.05 | Łazienka | pomocnicze | 2,69 × 2,29 | **6,16** | (11,295, 4,905); (11,295, 7,195); (8,605, 7,195); (8,605, 4,905) |
+| 1.06 | Schody | schody (poza PU) | 4,59 × 2,29 | **10,51** | (8,395, 4,905); (8,395, 7,195); (3,805, 7,195); (3,805, 4,905) |
 
 Suma P1: PU (mieszk.+pomocn.+komunik.) **64,30 m²**, pom. techniczne 0,00 m², schody/spoczniki 10,51 m².
 
@@ -275,14 +275,14 @@ Funkcja: ze spocznika trzonu (x 7,095–8,395) → hol-biblioteka 1.03 (otwarta 
 
 | nr | pomieszczenie | kategoria | wymiary netto [m] (x × y) | pow. netto [m²] | wielobok (x,y) |
 |---|---|---|---|---|---|
-| 2.01 | Sypialnia rodziców | mieszk./pobyt | 4,52 × 4,02 | **18,17** | (3,62, 0,10); (3,62, 4,12); (-0,90, 4,12); (-0,90, 0,10) |
-| 2.02 | Garderoba | pomocnicze | 2,12 × 2,92 | **6,19** | (1,23, 4,28); (1,23, 7,20); (-0,90, 7,20); (-0,90, 4,28) |
-| 2.03 | Łazienka rodziców | pomocnicze | 2,22 × 2,92 | **6,48** | (3,60, 4,28); (3,60, 7,20); (1,38, 7,20); (1,38, 4,28) |
-| 2.04 | Gabinet | mieszk./pobyt | 4,65 × 2,82 | **13,11** | (8,43, 0,10); (8,43, 2,92); (3,77, 2,92); (3,77, 0,10) |
-| 2.05 | Hol | komunikacja | 4,65 × 1,62 | **7,53** | (8,43, 3,08); (8,43, 4,70); (3,77, 4,70); (3,77, 3,08) |
-| 2.06 | Pokój (5. osoba / hobby) | mieszk./pobyt | 2,72 × 4,59 | **12,48** | (11,29, 0,10); (11,29, 4,70); (8,57, 4,70); (8,57, 0,10) |
-| 2.07 | Pom. techn. (rekuperator, wyłaz) | techniczne | 2,69 × 2,29 | **6,16** | (11,29, 4,91); (11,29, 7,20); (8,61, 7,20); (8,61, 4,91) |
-| 2.08 | Spocznik (pustka nad schodami) | schody (poza PU) | 1,30 × 2,29 | **2,98** | (8,39, 4,91); (8,39, 7,20); (7,09, 7,20); (7,09, 4,91) |
+| 2.01 | Sypialnia rodziców | mieszk./pobyt | 4,52 × 4,02 | **18,17** | (3,625, 0,105); (3,625, 4,125); (-0,895, 4,125); (-0,895, 0,105) |
+| 2.02 | Garderoba | pomocnicze | 2,12 × 2,92 | **6,19** | (1,225, 4,275); (1,225, 7,195); (-0,895, 7,195); (-0,895, 4,275) |
+| 2.03 | Łazienka rodziców | pomocnicze | 2,22 × 2,92 | **6,48** | (3,595, 4,275); (3,595, 7,195); (1,375, 7,195); (1,375, 4,275) |
+| 2.04 | Gabinet | mieszk./pobyt | 4,65 × 2,82 | **13,11** | (8,425, 0,105); (8,425, 2,925); (3,775, 2,925); (3,775, 0,105) |
+| 2.05 | Hol | komunikacja | 4,65 × 1,62 | **7,53** | (8,425, 3,075); (8,425, 4,695); (3,775, 4,695); (3,775, 3,075) |
+| 2.06 | Pokój (5. osoba / hobby) | mieszk./pobyt | 2,72 × 4,59 | **12,48** | (11,295, 0,105); (11,295, 4,695); (8,575, 4,695); (8,575, 0,105) |
+| 2.07 | Pom. techn. (rekuperator, wyłaz) | techniczne | 2,69 × 2,29 | **6,16** | (11,295, 4,905); (11,295, 7,195); (8,605, 7,195); (8,605, 4,905) |
+| 2.08 | Spocznik (pustka nad schodami) | schody (poza PU) | 1,30 × 2,29 | **2,98** | (8,395, 4,905); (8,395, 7,195); (7,095, 7,195); (7,095, 4,905) |
 
 Suma P2: PU (mieszk.+pomocn.+komunik.) **63,97 m²**, pom. techniczne 6,16 m², schody/spoczniki 2,98 m².
 
@@ -301,12 +301,12 @@ Funkcja: apartament rodziców w części zach. (sypialnia 2.01 S+W za lamelami i
 
 ### 3.9 Schody SCH1 (trzon ŻB, stos 3 kondygnacji, U-kształtne)
 
-* Trzon w świetle: x 3,81 … 8,39 (4,59 m), y 4,91 … 7,20 (2,29 m); ściany ŻB 18 cm w osiach C, D, 2, 3.
+* Trzon w świetle: x 3,805 … 8,395 (4,59 m), y 4,905 … 7,195 (2,29 m); ściany ŻB 18 cm w osiach C, D, 2, 3.
 * Na kondygnację: **18 podnóżków × 17,5 cm = 3,15 m**, stopnie **s = 28 cm**, **2h + s = 63 cm**, nachylenie 32°; 2 biegi po 9 podnóżków (8 stopni).
-* Bieg „a” (pasmo płn. y 6,11 … 7,20, szer. 1,09 m): pierwszy podnóżek x = 7,095, w górę **na zachód**
+* Bieg „a” (pasmo płn. y 6,105 … 7,195, szer. 1,09 m): pierwszy podnóżek x = 7,095, w górę **na zachód**
   do x = 4,855 (linie krawędzi stopni x = 7,095 − k·0,28, k = 0…8), rzuty 2,24 m; Z → Z + 1,575.
 * Spocznik międzykondygnacyjny: x 3,805 … 4,855 (1,05 m ≥ szer. biegu), y 4,905 … 7,195; rzędne +1,575 i +4,725.
-* Bieg „b” (pasmo płd. y 4,91 … 6,00, szer. 1,09 m): z x = 4,855 w górę **na wschód** do x = 7,095; Z + 1,575 → Z + 3,15.
+* Bieg „b” (pasmo płd. y 4,905 … 5,995, szer. 1,09 m): z x = 4,855 w górę **na wschód** do x = 7,095; Z + 1,575 → Z + 3,15.
 * Spocznik kondygnacyjny (wejście/wyjście na każdej kondygnacji): x 7,095 … 8,395 (1,30 m), y 4,905 … 7,195; przejścia w ścianie osi 2
   (x 7,15–8,35) do holi, w P0 także w ścianie osi 3 (do holu wejściowego); drzwi z podestu: P1 → łazienka 1.05, P2 → pom. techn. 2.07.
 * Między biegami „duszek” 11 cm — pełna ścianka szklana/stalowa (balustrada) na całą wysokość biegów; pochwyty obustronne h = 0,90 m.
@@ -344,7 +344,7 @@ oraz ścianie płd. P2 (tarcza nad boksem C). Sztywność: trzon ŻB + tarcze + 
   pod nią ściana w osi 2 w P0) i 2,50 m.
 * Ścianki działowe P1/P2 nie są nośne (SIL 12 na stropie jako obciążenie liniowe, R5).
 
-**Słupy i belki:** SL1–SL4 — stal RK 120×120×8 (lub ŻB 25×25) w osi 1 za słupkami przeszklenia, x = 3,38, 5,66, 7,94, 10,22;
+**Słupy i belki:** SL1–SL4 — stal RK 120×120×8 (lub ŻB 25×25) w osi 1 za słupkami przeszklenia, x = 3,383, 5,661, 7,939, 10,217;
 na stopach 1,0×1,0 m. Belka ukryta ST1 w osi 1 (od ściany B do ściany F) przenosi krawędź stropu, parapet P1 i siły skupione z tarcz
 (z tarczy wsch. P1 w x = 11,40 — między SL4 a narożnikiem F, rozpiętość 2,38 m). Nadproże-tarcza nad otworem boksu C w ścianie P1
 (x 4,20–11,30, 7,10 m): ŻB 24 cm od +5,20 do +5,93 zespolone z płytą ST2 i ścianą płd. P2 (ŻB) — tarcza o wysokości ~3,7 m (z otworami
@@ -397,7 +397,7 @@ Wg R5: 3 kondygnacje i wsporniki → **II kategoria geotechniczna** (dokumentacj
   Szacunek: A_red ≈ 185 m² × 150 l/(s·ha) × 15 min ≈ 2,5 m³ — zapas. Zakaz odprowadzania na drogę (MPZP) ✔.
   Zbiornik bezodpływowy 5–15 m³ — w PB objęty projektem (zgłoszenie wg art. 29 PB, R1).
 * **Pompa ciepła:** jednostka zewn. powietrze–woda na fundamencie przy wsch. ścianie garażu (x 20,20–21,30, y 5,60–6,20),
-  **3,40 m od granicy wsch.** (≥ 3,0 m), z dala od sypialni (najbliższe okno sypialni: pokój 2.06 — 9,6 m).
+  **3,40 m od granicy wsch.** (≥ 3,0 m), z dala od sypialni (najbliższe okno pokoju: 2.06, okno wsch. — 8,8 m).
 * **Przyłącza:** ZK w linii ogrodzenia przy bramie (x ≈ 12,4) → kabel YKY 5×16 do RG w pom. techn. 0.11; woda PE 40 z sieci PE 110
   (x = 11,20) do wodomierza w 0.11; kanalizacja PVC 160 z kolektora pod skrzydłem płn. (wyjście x = 9,00) przez studzienkę rewizyjną Ø425
   (1,40 m od granicy) do sieci PVC 200; światłowód do 0.11; gaz — nie przyłączany (dom all-electric).
@@ -451,7 +451,7 @@ Wg R5: 3 kondygnacje i wsporniki → **II kategoria geotechniczna** (dokumentacj
 | 2.04 Gabinet | 13,11 | OK8 | 5,70 | 1:2,3 | ✔ |
 | 2.06 Pokój (5. osoba / hobby) | 12,48 | OK9, OK10 | 5,91 | 1:2,1 | ✔ |
 
-Kuchnia — kwatera E5 (x 10,22–12,50) w strefie kuchni ✔. Łazienki bez okien (0.08 ma okno, 1.05 i 2.03 mają małe okna) — wentylacja mechaniczna.
+Kuchnia — kwatera E5 (x 10,22–12,50) w strefie kuchni ✔. Łazienki mogą być bez okien (wentylacja mechaniczna z odzyskiem ciepła); w projekcie 0.08, 1.05 i 2.03 mają małe okna.
 
 ### 7.3 Schody
 

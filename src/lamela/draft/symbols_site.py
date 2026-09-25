@@ -103,9 +103,7 @@ def hedge(c, pts, width: float = 0.8, conifer: bool = False, existing: bool = Fa
         amp = width / 2 * (1 if i % 2 else -1)
         pts_out.append(p + nrm * amp)
     P = np.array(pts_out)
-    if not conifer:  # wygładzenie (fala)
-        from scipy.interpolate import make_interp_spline  # noqa: F401  (opcjonalne)
-    c.polyline(P if conifer else _smooth(P), layer, pen=pen)
+    c.polyline(P if conifer else _smooth(P), layer, pen=pen)   # iglasty — zygzak, liściasty — fala
 
 
 def _smooth(P, n=8):
@@ -281,12 +279,12 @@ def building_line(c, p1, p2, kind: str = "nieprzekraczalna", side: float = 1.0, 
             if kind == "obowiazujaca" or kind == "obowiązująca":
                 c.fill(tri, layer, None or "#000000")
             c.polygon(tri, pen=0.25)
-        if label:
+        if label:   # opis po stronie przeciwnej do trójkątów
             ang = readable_angle(math.degrees(math.atan2(d[1], d[0])))
             up = perp(dir_deg(ang))
             M = A + (B - A) * 0.5
-            c.text(M - n * (hgt + 1.0 * k) * 0 + up * (1.0 * k if (up @ n) < 0 else -(1.0 * k + h * k)), label, h, ang,
-                   "center", "baseline")
+            pos = M + up * 1.0 * k if (up @ n) < 0 else M - up * (1.0 * k + h * k)
+            c.text(pos, label, h, ang, "center", "baseline")
 
 
 def fence(c, pts, layer: str = "Z-OGRODZENIE"):
