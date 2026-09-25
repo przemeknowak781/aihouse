@@ -1,4 +1,5 @@
 {
+ "nr": 27,
  "title": "Zgodność modelu ze szkicem (maks. odchyłka krawędzi 0,59 m) · audyty koncepcji w toku · generatory produkcyjne w budowie",
  "stages": [
   [
@@ -58,6 +59,17 @@
   "Nakładka szkic ↔ elewacja S z modelu: rytm przesunięć brył zachód–wschód–zachód („S”) zachowany; największa odchyłka 0,59 m (bryła B), pozostałe ≤ 0,38 m.",
   "Opis koncepcji koncepcja.md i podglądy final/ (rzuty, elewacje, przekroje, działka, bilans powierzchni) — powstają z modelu.",
   "Uwagi krytyczne do weryfikacji w audycie: pełne drzwi gospodarcze na elewacji ogrodowej; niecka chłonna w zasięgu korony dużego drzewa (korzenie, zacienienie); etykieta „HYDR” poza kadrem podglądu.",
-  "Produkcja: 4 generatory (PZT, instalacje IS/IE, konstrukcja BO, detale) w budowie — pierwsze schematy PC/CWU i rozdzielnicy RG wygenerowane."
+  "Produkcja: 4 generatory (PZT, instalacje IS/IE, konstrukcja BO, detale) w budowie — pierwsze schematy PC/CWU i rozdzielnicy RG wygenerowane.",
+  "NADZÓR (06:15): 8 agentów aktywnych, bez zastojów; najdłuższa bezczynność 2 min; zmiany w repo 0 min temu."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/docs/20_koncepcja/final/elewacja_S_szkic.png",
+   "caption": "Szkic Inwestora vs model — nakładka krawędzi brył"
+  },
+  {
+   "path": "/home/user/aihouse/docs/20_koncepcja/final/dzialka.png",
+   "caption": "Zagospodarowanie działki (podgląd koncepcji)"
+  }
  ]
 }
