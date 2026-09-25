@@ -332,12 +332,20 @@ def analiza_plyty_fundamentowej(an, siatka: float = 0.25, c_dol: float = 50.0, c
             g_pod = 1.5
     q_uz = obciazenie_uzytkowe("strop", p).q_k
     case_q = {"G": p.ciezar_zelbetu * h_el + g_pod, "QA": np.full(len(h_el), q_uz)}
+    wob = Wynik(nazwa="Obciążenia płyty fundamentowej w MES (poza ścianami i słupami)")
+    wob.krok("Ciężar płyty (z żebrami/pogrubieniami) i warstw podłogi nad płytą", "g = 25·h_el + g_podł", "",
+             f"25·h_el + {f(g_pod, 2)}", "kN/m²")
+    uzA = obciazenie_uzytkowe("strop", p)
+    wob.krok(f"Obciążenie użytkowe posadzki — kat. {uzA.kategoria} ({uzA.opis})", "q_k", "", uzA.q_k, "kN/m²", nd=2,
+             zrodlo=uzA.zrodlo)
     # płyty składowe z inną kategorią obciążenia użytkowego (pole modelu obciazenie_uzytkowe, np. garaż — kat. F)
     for e in pl_el:
         kat = e.get("obciazenie_uzytkowe")
         if not kat:
             continue
         uz = obciazenie_uzytkowe(str(kat), p)
+        wob.krok(f"Płyta {e.get('id')}: obciążenie użytkowe — kat. {uz.kategoria} ({uz.opis}); ψ₀/ψ₁/ψ₂ = "
+                 + "/".join(f(v_, 1) for v_ in uz.psi), "q_k; Q_k", "", f"{f(uz.q_k, 2)} kN/m²; {f(uz.Q_k, 0)} kN", zrodlo=uz.zrodlo)
         msk = pl0.elementy_w(Polygon(e["obrys"]).buffer(0))
         case_q["QA"] = np.where(msk, 0.0, case_q["QA"])
         cs = f"Q{uz.kategoria}"
@@ -385,8 +393,10 @@ def analiza_plyty_fundamentowej(an, siatka: float = 0.25, c_dol: float = 50.0, c
                             "QA" if cs.startswith("QA") else ("dach" if cs in ("H", "S1", "S2") else "")))
     kb_uls = kombinacje(odz, p, "STR")
     kb_chr = kombinacje(odz, p, "char")
-    return _obwiednia(pl0, plyty, pod, fvec, kb_uls, kb_chr, e0, P, h, spod, beton, h_el, strefa_el, c_dol, c_gora,
-                      fi_zal, an)
+    W = _obwiednia(pl0, plyty, pod, fvec, kb_uls, kb_chr, e0, P, h, spod, beton, h_el, strefa_el, c_dol, c_gora,
+                   fi_zal, an)
+    W.wyniki.insert(1, wob)
+    return W
 
 
 def _obwiednia(pl0, plyty, pod, fvec, kb_uls, kb_chr, e0, P, h, spod, beton, h_el, strefa_el, c_dol, c_gora, fi_zal,

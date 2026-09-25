@@ -1387,7 +1387,8 @@ class AnalizaKonstrukcji:
                                             nazwa=f"Pole {c['id']} — ścinanie: V_Ed > V_Rd,c — zbrojenie na ścinanie "
                                                   f"płyty (9.3.2), strzemiona φ8, {n_r} ramion/m")
             sc_zbr = {"opis": sc.strzemiona.replace("-cięte", " ramion/m"), "fi": 8, "s": float(sc.s), "ramiona": n_r,
-                      "podpora": v_sid, "V": vmax}
+                      "podpora": v_sid, "V": vmax, "V_Rd_s": float(sc.V_Rd_s), "d": dx,
+                      "rho_w_min": 0.08 * math.sqrt(beton.f_ck) / self.stal.f_yk}
         # ugięcie
         wn = np.unique(fe.el_nodes[msk].ravel())
         EI = e.beton.E_cm * 1000 * h ** 3 / 12

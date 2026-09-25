@@ -501,6 +501,10 @@ class Parametry:
                 self._ustaw(pole, geo[k], "model: geotechnika")
         gr = geo.get("grunt") if isinstance(geo.get("grunt"), dict) else None
         if gr:
+            gr = dict(gr)
+            for a, k in (("phi", "fi_k"), ("c", "c_k")):     # aliasy pól modelu (geotechnika.grunt)
+                if a in gr and k not in gr:
+                    gr[k] = gr[a]
             for k in ("nazwa", "fi_k", "c_k", "gamma", "gamma_sat", "M0", "E", "nu", "ZWG", "humus", "status"):
                 if k in gr:
                     cur = getattr(self.grunt, k)

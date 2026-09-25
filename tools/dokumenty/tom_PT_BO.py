@@ -249,7 +249,7 @@ def wczytaj_dane(przelicz: bool = False) -> dict:
     kat_obl = przelicz_obliczenia(KAT_ZRODLA / "obliczenia") if przelicz else KAT_OBL
     bud = yaml.safe_load((REPO / "model/budynek.yaml").read_text(encoding="utf-8"))
     dz = yaml.safe_load((REPO / "model/dzialka.yaml").read_text(encoding="utf-8"))
-    D = dict(bud=bud, dz=dz, p=Parametry.z_wymagan(), RAP=RAP, kat_obl=kat_obl,
+    D = dict(bud=bud, dz=dz, p=Parametry.z_wymagan().z_modelu(bud), RAP=RAP, kat_obl=kat_obl,
              obl_md=_czytaj(kat_obl / "obliczenia_statyczne.md"), wyniki=_czytaj(kat_obl / "wyniki.json"),
              mes_md=_czytaj(KAT_OBL / "plyta_fundamentowa_MES.md"),
              kz=_czytaj(KAT_RYS / "kontrola_zbrojenia.json"), kz_md=_czytaj(KAT_RYS / "kontrola_zbrojenia.md"),

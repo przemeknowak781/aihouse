@@ -7,6 +7,8 @@
 """
 from __future__ import annotations
 
+from dataclasses import replace
+
 import numpy as np
 
 from . import render
@@ -18,49 +20,94 @@ PT2MM = 25.4 / 72.0
 
 def volume(sheets, pdf_path, title: str = "Tom rysunków", toc: bool = True, toc_tb: TitleBlock | None = None,
            mode: str = "branze") -> str:
-    """Składa arkusze w jeden PDF. ``toc=True`` — pierwsza strona A4 ze spisem rysunków (``spis_rysunkow``)."""
+    """Składa arkusze w jeden PDF. ``toc=True`` — na początku spis rysunków na A4 (``spisy_rysunkow``; gdy spis
+    nie mieści się nad tabliczką, przechodzi na kolejne strony A4)."""
     pages = list(sheets)
     if toc:
-        pages = [spis_rysunkow(pages, title, toc_tb)] + pages
+        pages = spisy_rysunkow(pages, title, toc_tb) + pages
     render.sheets_to_pdf(pages, pdf_path, mode, title)
     return str(pdf_path)
 
 
+def _wys_wiersza(cols, r, h: float, row_h: float) -> float:
+    """Wysokość wiersza tabeli spisu — ta sama reguła co ``table(zawijaj="wiersze")`` (sheet.py)."""
+    rh = row_h
+    for (_n, w), v in zip(cols, r):
+        v = str(v)
+        if T.width(v, h) > w - 2.0 + 1e-6:
+            ls = wrap(v, w - 2.0, h)
+            hh = h if all(T.width(s_, h) <= w - 2.0 + 1e-6 for s_ in ls) else 1.8
+            ls = wrap(v, w - 2.0, hh)
+            rh = max(rh, (len(ls) - 1) * hh * 1.45 + hh + 2.2)
+    return rh
+
+
 def spis_rysunkow(sheets, title: str = "Tom rysunków", toc_tb: TitleBlock | None = None) -> Sheet:
-    """Strona A4 ze spisem rysunków tomu. Pole spisu leży między znakami centrującymi (lewy i prawy: 10 mm za
+    """Pierwsza (zwykle jedyna) strona spisu rysunków — zgodność wsteczna; pełny spis: ``spisy_rysunkow``."""
+    return spisy_rysunkow(sheets, title, toc_tb)[0]
+
+
+def spisy_rysunkow(sheets, title: str = "Tom rysunków", toc_tb: TitleBlock | None = None) -> list[Sheet]:
+    """Strony A4 ze spisem rysunków tomu. Pole spisu leży między znakami centrującymi (lewy i prawy: 10 mm za
     ramką na osi H/2, górny: 10 mm w dół na osi W/2) z odstępem 3 mm. Nagłówek (tytuł tomu) — pismo 5 mm
     (≤ 2 wiersze), a gdy się nie mieści — 3,5 mm (≤ 3 wiersze), łamany do szerokości pola; tytuły rysunków
     łamane w komórce jednolitym pismem 2,5 mm (``table(zawijaj="wiersze")``); wysokość wiersza dopasowana do
-    miejsca nad tabliczką."""
-    tb = toc_tb or TitleBlock(tytul="SPIS RYSUNKÓW", nr_rysunku="00", skala="—")
-    sh = Sheet("A4", title_block=tb)
+    miejsca nad tabliczką. Gdy tabela przy najmniejszym wierszu (4,5 mm) nie mieści się nad tabliczką, spis
+    przechodzi na kolejne strony A4 (tytuł tabliczki „… (k/n)”, pole „arkusz” k/n) — tabela nigdy nie wchodzi
+    na tabliczkę."""
+    tb0 = toc_tb or TitleBlock(tytul="SPIS RYSUNKÓW", nr_rysunku="00", skala="—")
     rows = []
     for i, s in enumerate(sheets):
         t = s.tb
         rows.append([str(i + 1), t.nr_rysunku if t else "", t.tytul if t else s.meta.get("title", ""),
                      t.skala if t else "", s.fmt_name])
-    x0, y0, x1, y1 = sh.frame
-    tx = x0 + ZNAK_CENTR_DL + 3.0
-    avail = (x1 - ZNAK_CENTR_DL - 3.0) - tx
-    tt = title.upper()
-    for hh, nmax in ((5.0, 1), (5.0, 2), (3.5, 1), (3.5, 2), (3.5, 3)):
-        ls = wrap(tt, avail, hh, "bold")
-        if len(ls) <= nmax and all(T.width(x, hh, "bold") <= avail + 1e-6 for x in ls):
-            break
-    ls = ls[:3]
-    y = y1 - ZNAK_CENTR_DL - 2.5 - hh
-    for ln in ls:
-        sh.text((tx, y), ln, hh, style="bold")
-        y -= hh * 1.6
-    top = y + hh * 1.6 - 5.5
-    cols = [("Lp.", 9.0), ("Nr rys.", 26.0), ("Tytuł rysunku", 81.0), ("Skala", 18.0), ("Format", 20.0)]
-    k = avail / sum(w for _n, w in cols)
-    cols = [(n, w * k) for n, w in cols]
-    tb_top = (sh.tb_rect[3] if sh.tb_rect else y0) + 6.0
+
+    def uklad(tb):
+        sh = Sheet("A4", title_block=tb)
+        x0, y0, x1, y1 = sh.frame
+        tx = x0 + ZNAK_CENTR_DL + 3.0
+        avail = (x1 - ZNAK_CENTR_DL - 3.0) - tx
+        tt = title.upper()
+        for hh, nmax in ((5.0, 1), (5.0, 2), (3.5, 1), (3.5, 2), (3.5, 3)):
+            ls = wrap(tt, avail, hh, "bold")
+            if len(ls) <= nmax and all(T.width(x, hh, "bold") <= avail + 1e-6 for x in ls):
+                break
+        ls = ls[:3]
+        y = y1 - ZNAK_CENTR_DL - 2.5 - hh
+        for ln in ls:
+            sh.text((tx, y), ln, hh, style="bold")
+            y -= hh * 1.6
+        top = y + hh * 1.6 - 5.5
+        cols = [("Lp.", 9.0), ("Nr rys.", 26.0), ("Tytuł rysunku", 81.0), ("Skala", 18.0), ("Format", 20.0)]
+        k = avail / sum(w for _n, w in cols)
+        cols = [(n, w * k) for n, w in cols]
+        tb_top = (sh.tb_rect[3] if sh.tb_rect else y0) + 6.0
+        return sh, tx, top, cols, tb_top
+
+    sh, tx, top, cols, tb_top = uklad(tb0)
     row_h = max(4.5, min(6.0, (top - tb_top) / (len(rows) + 1)))
-    table(sh, tx, top, cols, rows, h=2.5, row_h=row_h, zawijaj="wiersze")
-    sh.przytnij_znaki_centrujace()
-    return sh
+    if row_h + sum(_wys_wiersza(cols, r, 2.5, row_h) for r in rows) <= top - tb_top + 1e-6:
+        table(sh, tx, top, cols, rows, h=2.5, row_h=row_h, zawijaj="wiersze")
+        sh.przytnij_znaki_centrujace()
+        return [sh]
+    # podział na strony przy najmniejszym wierszu
+    row_h, miejsce, grupy, cur, zaj = 4.5, top - tb_top - 4.5, [], [], 0.0
+    for r in rows:
+        rh = _wys_wiersza(cols, r, 2.5, row_h)
+        if cur and zaj + rh > miejsce + 1e-6:
+            grupy.append(cur)
+            cur, zaj = [], 0.0
+        cur.append(r)
+        zaj += rh
+    grupy.append(cur)
+    out = []
+    for k, g in enumerate(grupy, 1):
+        tb = replace(tb0, tytul=f"{tb0.tytul} ({k}/{len(grupy)})", arkusz=f"{k}/{len(grupy)}")
+        sh, tx, top, cols, tb_top = uklad(tb)
+        table(sh, tx, top, cols, g, h=2.5, row_h=row_h, zawijaj="wiersze")
+        sh.przytnij_znaki_centrujace()
+        out.append(sh)
+    return out
 
 
 def pdf_segments(pdf_path, page: int = 0):

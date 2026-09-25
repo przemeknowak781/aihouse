@@ -629,6 +629,15 @@ def widok_zbrojenie_plyt(ctx: ViewContext, spec: dict, scale: float, opts: dict)
                                                        for dy in (0.0, -0.4, 0.4)], penalty_step=0.2)
             wiersze_s.append([f"Z{i}", f"{z['element']}/{z['pole']}", z["podpora"], str(z["pret"].nr),
                               f"Ø{z['pret'].fi} co {_s(z['s'])}, {z['ramiona']} ramion/m", f"{z['V']:.0f}"])
+            # kontrola: A_sw/s narysowane (φ, s, ramiona/m) ≥ wymagane z nośności (V_Ed/V_Rd,s) i ≥ ρ_w,min (9.5N)
+            from ..obliczenia.konstrukcja.materialy import pole_preta as _pp
+            A_prov = z["ramiona"] * _pp(z["pret"].fi) / (z["s"] / 1000.0)            # mm² na m² płyty
+            A_req = A_prov * z["V"] / max(z.get("V_Rd_s") or z["V"], 1e-9)
+            el_ = next((e_ for e_ in lv.elementy if e_.id == z["element"]), None)
+            KD.rejestruj(D, z["element"], f"strzemiona na ścinanie — {z['pole']}, pas przy {z['podpora']} (9.3.2)",
+                         el_.poz if el_ else "", A_req, (z.get("rho_w_min") or 0.0) * 1e6, A_prov,
+                         f"Ø{z['pret'].fi} co {_s(z['s'])}, {z['ramiona']} ramion/m", jedn="mm²/m²", s=z["s"],
+                         s_max=0.75 * (z.get("d") or 0.2) * 1000.0, arkusz=spec.get("nr", ""))
         res.column_blocks.append(("scinanie", blok_tabeli(
             "ZBROJENIE NA ŚCINANIE PŁYT (V_Ed > V_Rd,c — PN-EN 1992-1-1 9.3.2; pas 0,75 m od osi podpory)",
             [("Strefa", 14), ("Pole", 28), ("Podpora", 22), ("Poz.", 12), ("Strzemiona", 70), ("V_Ed [kN/m]", 34)],

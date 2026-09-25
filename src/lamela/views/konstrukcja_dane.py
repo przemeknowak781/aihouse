@@ -1257,7 +1257,8 @@ def _scinanie(D, lv, zest, out):
             c = el.c_nom / 1000.0
             pr = zest.dodaj(Pret(int(z["fi"]), "51", (100.0, (el.h - 2 * c) * 1000.0), n, el.id, "strzemię płyty"))
             out.append(dict(element=el.id, pole=pol.pole, strefa=zone, pret=pr, opis=z["opis"], V=z["V"],
-                            podpora=z["podpora"], s=z["s"], ramiona=z["ramiona"]))
+                            podpora=z["podpora"], s=z["s"], ramiona=z["ramiona"], V_Rd_s=z.get("V_Rd_s"), d=z.get("d"),
+                            rho_w_min=z.get("rho_w_min")))
 
 
 def odcinki_proste(g) -> list:
