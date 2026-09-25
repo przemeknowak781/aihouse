@@ -134,3 +134,20 @@ class Prism:
 Ściany z otworami rozbijane są na pryzmy (pas podokienny, nadproże, filary); ościeżnice/szyby jako osobne pryzmy.
 Teren = siatka trójkątów (osobna struktura `TerrainMesh`). IR zasila: model 3D (glTF), przekroje (cięcie płaszczyzną),
 elewacje (rzut prostokątny z usuwaniem linii niewidocznych), kontrolę kolizji.
+
+## 5. Konwencje WYMAGANE przez narzędzia (rdzeń `lamela.model/ir`, generatory `lamela.views`) — obowiązkowe
+1. **Odsłonięte fragmenty stropów** (nieprzykryte wyższą kondygnacją — np. strop nad parterem poza obrysem P1, strop nad P1 poza
+   obrysem P2) zapisuj jako elementy **`dachy`** z przegrodą stropodachu/dachu zielonego, attyką i spadkiem — nie jako `stropy`
+   (inaczej brak warstw, attyki i spadku na przekroju i rzucie dachu). **Dach garażu = osobny element `dachy`.**
+2. **Otwory** nie mogą leżeć w węźle ściany dochodzącej — zachowaj ≥ 0,10 m od lica ściany prostopadłej.
+3. **Schody**: `biegi[].start` = środek krawędzi pierwszego podnóżka (początek biegu), `kierunek` = wektor wejścia; tylko biegi proste.
+4. **Kreskowania materiałów** (`materialy.*.kreskowanie`) — wyłącznie kody silnika (PN-B-01030 + R4):
+   `ZELBET, BETON, BETON_LEKKI, BETON_LEKKI_ZBROJONY, BETON_KOMORKOWY, MUR_CERAMIKA, MUR_SILIKAT, DREWNO_POPRZ, DREWNO_WZDL, SKLEJKA,
+   PLYTA_DREWNOPOCHODNA, STAL, IZOL_MIEKKA (wełna), IZOL_TWARDA (EPS), IZOL_XPS, IZOL_PIR, IZOL_PRZECIWWODNA, IZOL_PRZECIWWILGOCIOWA,
+   PAROIZOLACJA, MEMBRANA_PAROPRZEP, SZKLO, TWORZYWO, TYNK, PLYTA_GK, JASTRYCH, PLYTKI, GRUNT_RODZIMY, NASYP, PIASEK, ZWIR, POSPOLKA, HUMUS`.
+   Styropian/EPS = `IZOL_TWARDA` (nie miękka); wylewka = `JASTRYCH`.
+5. **Wyposażenie** (meble, sanitariaty, kuchnia) w osobnym pliku `model/wyposazenie.yaml` (format: patrz komentarz w
+   `model/test/wyposazenie_testowe.yaml`). **Arkusze** — `model/arkusze.yaml` (patrz `lamela.views.sheets`).
+6. Numeracja pomieszczeń na rysunkach: parter = 1.xx, I piętro = 2.xx, II piętro = 3.xx (R4 / PN-EN ISO 4157) — identyfikatory w modelu
+   mogą pozostać 0.xx/1.xx/2.xx; generator przenumeruje (przełącznik `numeracja_pomieszczen`).
+7. Rzędne na rysunkach AR z 3 miejscami po przecinku (PN-B-01025); PZT — 2 miejsca, wymiary w PZT z dokładnością 0,01 m.
