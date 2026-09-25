@@ -104,7 +104,7 @@ class ElevationBuilder:
             d_front = min(self.d_of(p) for pg in polygons_of(ob) for p in pg.exterior.coords)
         else:
             d_front = 200.0 - 5.0
-        marg = float(self.opts.get("margines_terenu", 2.0))
+        marg = float(self.opts.get("margines_terenu", 1.5))
         prof = terrain_profile(self.ctx, self.o, self.R, self.s_min - marg, self.s_max + marg, 0.25, L=self.L,
                                depth=d_front - 0.3)
         self.profile = prof

@@ -457,3 +457,132 @@ Kolumna „Podstawa” podaje akt/normę z jednostką redakcyjną, a w nawiasie 
 | W-318 | Rysunki instalacji: kody powietrza ODA/SUP/ETA/EHA zawsze tekstem (rysunek czytelny jednobarwnie); schemat PC wg PN-EN 1861; symbole elektryczne IEC 60617 z numerami w legendzie | PN-EN 12792:2006; PN-EN 1861:2001 [R4-O01…O05, N01…N03, R4 3.12] | PT-IS, PT-IE | AUD-RYS |
 | W-319 | Każde stwierdzenie normatywne w opisie ze źródłem (akt z Dz.U. + jednostka redakcyjna / norma z numerem i rokiem); formuła WT wg A.1 pkt 4 | brief §7 pkt 2; PB art. 102a [R1 3.2; R3 1.1 pkt 7] | opisy | KR |
 | W-320 | Dane osobowe, numery uprawnień, podpisy, dane Inwestora — **pola do uzupełnienia**; dane przykładowe jawnie oznaczone (sekcja E) | brief §7 pkt 4 [R1 3.16; R2 3.1 pkt 2] | wszystkie | AUD-RYS |
+
+---
+
+## C. Wymagana zawartość projektu — spis tomów i lista kontrolna
+
+Postać elektroniczna (W-300). **TOM I** = PZT + PAB + ZL w jednym pliku `PZT_PAB_ZL_rrrr.mm.dd.pdf` (alternatywnie `PZT_PAB_…` + `ZL_…`); **TOMY PT** = osobne pliki `PT_x_y_rrrr.mm.dd.pdf`. Oznaczenie „n/d” = nie dotyczy (z podstawą w nawiasie — wpisać do opisu).
+
+### C.0 Pakiet wniosku o pozwolenie na budowę (poza projektem)
+
+| Dokument | Podstawa | W LAMELI |
+|---|---|---|
+| Wniosek **PB-1** | Dz.U. 2026 poz. 255 (od 04.03.2026); PB art. 33 ust. 2c–2d | wymagany; e-Budownictwo lub papier; oświadczenie z art. 102a w poz. „Inne (wymagane przepisami prawa)” |
+| **Oświadczenie Inwestora z art. 102a ust. 1 PB** (stosowanie przepisów z art. 7 ust. 2 pkt 1 obowiązujących do 19.09.2026) | PB art. 102a ust. 1, 2, 4 (Dz.U. 2026 poz. 1161) | wymagane (warunek wariantu A); brak urzędowego wzoru — D-02 |
+| Oświadczenie o prawie do dysponowania nieruchomością na cele budowlane (**PB-5**) | PB art. 32 ust. 4 pkt 2, art. 33 ust. 2 pkt 2; Dz.U. 2021 poz. 1170 | wymagane (każdy współinwestor odrębnie) |
+| PZT + PAB (+ ZL) z opiniami, uzgodnieniami, pozwoleniami | PB art. 33 ust. 2 pkt 1, art. 34 ust. 4a–4b | elektronicznie (albo 3 egz. papierowe) — TOM I |
+| Oświadczenie projektanta instalacyjnego o sieci ciepłowniczej (z klauzulą karną) | PB art. 33 ust. 2 pkt 10; Pr. energ. art. 7b | wymagane (W-158) |
+| Decyzja zarządcy drogi o lokalizacji zjazdu | u.d.p. art. 29 ust. 3a | wymagana przy nowym zjeździe (W-020) |
+| Decyzja o wyłączeniu gruntów z produkcji rolnej | u.o.g.r.l. art. 11 ust. 4a | tylko dla klas I–IIIb / organicznych — założono n/d (W-025) |
+| Zgoda zarządcy drogi na mniejszą odległość od jezdni | u.d.p. art. 43 ust. 2a | n/d (≥ 6 m, W-007) |
+| Pełnomocnictwo + opłata skarbowa 17 zł | ustawa o opłacie skarbowej, zał. cz. IV | jeśli ustanowiono pełnomocnika |
+| Opłata skarbowa za PnB | ustawa o opłacie skarbowej art. 2 ust. 1 pkt 2 | **zwolnienie** (budownictwo mieszkaniowe) |
+| Decyzja WZ / oświadczenie o budowli ochronnej / uzgodnienie ppoż. | PB art. 33 ust. 2 pkt 3 i 13; rozp. 2023 poz. 1563 | n/d (MPZP; dom jednorodzinny bez części podziemnej; ZL IV, N) |
+
+**Dane wyjściowe** (warunkują projekt, nie są załącznikami wniosku z mocy PB): aktualna **mapa do celów projektowych** z klauzulą lub oświadczeniem geodety (PB art. 34 ust. 3 pkt 1, art. 34b) — podkład PZT; **wypis i wyrys z MPZP**; dane EGiB (klasy gruntów, identyfikator działki); **warunki przyłączenia** (ENEA Operator — nN; gestor wod-kan; operator telekomunikacyjny) — przyłącza w PZT albo odrębnie z planem sytuacyjnym (PB art. 29 ust. 1 pkt 23, art. 29a, art. 33 ust. 1a); **badania podłoża** (kat. II); stanowisko PGW Wody Polskie w sprawie rozsączania (D-05). Stan tych danych — sekcja E.
+
+### C.1 TOM I — PZT + PAB + ZL
+
+**0. Część wspólna**
+- [ ] strona tytułowa wspólna lub osobne dla PZT i PAB (RPB §7 ust. 2, 7); identyfikator działki na stronie tytułowej PZT (§7 ust. 7 pkt 2)
+- [ ] łączny spis treści ze spisem załączników — bez PT (§7 ust. 7–8); numeracja stron odrębna dla PZT, PAB i ZL (§6)
+
+**1. Projekt zagospodarowania działki (PZT)**
+- [ ] strona tytułowa (§7 ust. 2 pkt 1–4; kategoria I), spis treści (§7 ust. 5)
+- [ ] oświadczenie projektanta o sporządzeniu projektu zgodnie z przepisami i zasadami wiedzy technicznej, z listą współautorów (PB art. 34 ust. 3d pkt 3, ust. 3e); kopie decyzji o uprawnieniach i zaświadczenia izby **tylko przy braku wpisu w e-CRUB** (art. 34 ust. 3da); przy tym samym autorze PZT i PAB — raz (RPB §8 ust. 1)
+- [ ] opis — RPB §14:
+  - pkt 1 przedmiot zamierzenia (budynek, zjazd, dojazd, miejsca postojowe, taras naziemny, retencja, ogrodzenie, miejsce na odpady, przyłącza — jeśli objęte)
+  - pkt 2 istniejący stan zagospodarowania (działka niezabudowana; brak obiektów do rozbiórki)
+  - pkt 3 lit. a–f projektowane zagospodarowanie: urządzenia budowlane, ścieki (sieć), komunikacja, dostęp do drogi publicznej, parametry sieci i przyłączy, ukształtowanie terenu i zieleń
+  - pkt 4 lit. a–d zestawienie powierzchni i wskaźników MPZP (W-030…W-033, W-036, W-041)
+  - pkt 5 lit. a–d ograniczenia z MPZP; zabytki (brak); teren górniczy (brak); zagrożenia dla środowiska i zdrowia: hałas PC z obliczeniem (W-024), wody opadowe, drzewa, DŚU n/d (W-026), grunty rolne
+  - pkt 6 dane ppoż.: droga pożarowa, woda ppoż., hydrant (W-217); pkt 6a ochrona ludności — n/d (§14 pkt 6a)
+  - pkt 7 inne dane: retencja (V, obliczenie), strefa R290
+  - pkt 8 i §18 informacja o obszarze oddziaływania: wykaz przepisów + „mieści się w całości na działce 123/4” (W-012)
+- [ ] rysunki — RPB §15 ust. 2 (na mapie do celów projektowych, ≥ 1:500, §9 ust. 5), wymiary z dokładnością 0,01 m (§15 ust. 3):
+  - pkt 1 orientacja (strzałka N), sąsiedztwo; pkt 2 granice działki (narożniki A–D ze współrzędnymi)
+  - pkt 3 obrys i usytuowanie budynku (ściany parteru, obrysy brył P1/P2, płyty wysunięte), wejścia i wjazdy, liczba kondygnacji (III), rzędne terenu istniejącego i projektowanego, `0,00=101,65`, wymiary i odległości od granic i obiektów (W-001…W-004)
+  - pkt 4 zasięg ustaleń MPZP: linia rozgraniczająca 1KDD, nieprzekraczalna linia zabudowy 6,00 m (W-006)
+  - pkt 5 teren zamknięty — n/d
+  - pkt 6 komunikacja: zjazd, podjazd, miejsca postojowe, dojście do furtki (W-013…W-015)
+  - pkt 7 drogi pożarowe i dojście od drogi publicznej; pkt 10 zaopatrzenie w wodę ppoż. (hydrant)
+  - pkt 8 ukształtowanie terenu, spadki, niwelacja (W-019); opcjonalnie przekroje terenu
+  - pkt 9 zieleń istniejąca, do usunięcia, projektowana; drzewa zachowywane ze strefami ochronnymi (W-023)
+  - pkt 11 sieci i przyłącza wod-kan ze spadkami, średnicami, rzędnymi; wody opadowe: zbiornik, przelew, niecka/skrzynki z odległościami (W-143…W-145)
+  - pkt 12 linie elektroenergetyczne i telekomunikacyjne, ZKP w linii ogrodzenia, mikrokanalizacja (W-192, W-196)
+  - pkt 13, 14, 15 — n/d (etapowanie, obiekty liniowe, obiekty zbiorowej ochrony)
+  - dodatkowo: jednostka PC ze strefą R290 i odległością od granicy E (W-024, W-156); miejsce na odpady, ogrodzenie, brama, furtka (W-016, W-017, W-038); legenda (§9 ust. 1)
+  - arkusze: **PZT-01** plan zagospodarowania 1:500 na mapie; **PZT-02** plan szczegółowy 1:200 (wymiary, odległości, rzędne); **PZT-03** rysunek koordynacyjny uzbrojenia (§17 ust. 2); opcjonalnie **PZT-04** przekroje terenu
+
+**2. Projekt architektoniczno-budowlany (PAB)**
+- [ ] strona tytułowa, spis treści, oświadczenie projektanta (jak w PZT; przy wielu autorach — lista współautorów)
+- [ ] opis — RPB §20 ust. 1 i ust. 2 (+ §3 ust. 2 — sposób spełnienia wymagań podstawowych art. 5 ust. 1 PB):
+  - pkt 1 rodzaj i kategoria obiektu (budynek mieszkalny jednorodzinny, kat. I)
+  - pkt 2 sposób użytkowania i program użytkowy
+  - pkt 3 układ przestrzenny, forma, wygląd, wyroby wykończeniowe, kolorystyka, dostosowanie do MPZP (W-037)
+  - pkt 4 lit. a–e kubatura; zestawienie powierzchni wg PN-ISO 9836 i §20 (W-316); wysokość (WT i upzp), długość, szerokość; liczba kondygnacji; dane ppoż. usytuowania
+  - pkt 5 opinia geotechniczna i sposób posadowienia (W-281)
+  - pkt 6 liczba lokali: 1 mieszkalny, 0 użytkowych; pkt 7 lokale dostępne — n/d; pkt 8 opis dostępności — n/d (brzmienie od 05.11.2026: dotyczy UP i wielorodzinnych)
+  - pkt 9 lit. a–e wpływ na środowisko: woda, ścieki, wody opadowe, emisje, odpady, hałas PC, drgania, pola EM, drzewostan, gleba, wody
+  - pkt 10 lit. a–e analiza wysoce wydajnych systemów alternatywnych (W-157)
+  - pkt 11 analiza automatycznej regulacji temperatury wg WT §135 ust. 7–10 i §147 ust. 5–7 (W-152)
+  - pkt 12 wyposażenie budowlano-instalacyjne, źródło ciepła i c.w.u. (PC R290)
+  - pkt 13 dane ppoż. (ZL IV, N, zwolnienie §213, NRO, odległości, PWP, czujki)
+  - pkt 14 ochrona ludności — n/d; ust. 2 odstępstwo — n/d
+- [ ] opinia geotechniczna (kategoria II, przydatność gruntów) — rozp. 2012/463 §7 ust. 1, §8
+- [ ] rysunki — RPB §21 pkt 1 (≥ 1:100; oznaczenia wg zał. 2): **A-01** rzut P0; **A-02** rzut P1; **A-03** rzut P2; **A-04** rzut dachu; **A-05** przekrój A-A (schody); **A-06** przekrój B-B (wspornik A, boks C); **A-07** elewacja S; **A-08** elewacja N; **A-09** elewacje E i W; opcjonalnie **A-10** materiały i kolorystyka; §21 pkt 3 — n/d
+
+**3. Załączniki (ZL)** — RPB §5 ust. 1 pkt 4, §7 ust. 1a
+- [ ] strona tytułowa, spis załączników
+- [ ] **informacja BIOZ** (rozp. BIOZ §2): strona tytułowa (nazwa i adres obiektu, inwestor z adresem, imię, nazwisko i adres projektanta) + część opisowa: (1) zakres i kolejność robót, (2) istniejące obiekty, (3) elementy zagospodarowania stwarzające zagrożenie, (4) przewidywane zagrożenia — roboty na wysokości > 5,0 m, wykopy, dźwig ⇒ **plan BIOZ wymagany**, (5) instruktaż, (6) środki techniczne i organizacyjne
+- [ ] opinie, uzgodnienia, pozwolenia z art. 33 ust. 2 pkt 1 PB: decyzja o lokalizacji zjazdu; ewentualnie decyzja o wyłączeniu gruntów
+- [ ] oświadczenie zarządcy drogi krajowej/wojewódzkiej — n/d (droga gminna)
+- [ ] (dla wygody) oświadczenie projektanta IS o sieci ciepłowniczej — formalnie załącznik wniosku (C.0)
+
+### C.2 TOMY PT (osobne pliki; nie są składane z wnioskiem)
+
+Każdy tom: strona tytułowa (§7 ust. 2), spis treści, **oświadczenie projektanta PT** (art. 34 ust. 3d pkt 3; treść zgodna z art. 41 ust. 4a pkt 2 PB: „…zgodnie z przepisami, zasadami wiedzy technicznej, PZT, PAB i rozstrzygnięciami…”), część opisowa (§23), część rysunkowa (§24, ≥ 1:100). W każdym tomie: dane ppoż. stosownie do zakresu (§23 pkt 10); §23 pkt 5, 6, 12 — n/d; §23 pkt 4a analiza akustyczna — n/d (W-231).
+
+- **PT-1 AR** (`PT_1_AR_…`): §23 pkt 4 rozwiązania przegród; §24 pkt 1 rzuty (z dachem), przekroje, elewacje uzupełniające (1:50); **§24 pkt 2 detale cieplne i szczelności**: łączniki termoizolacyjne wsporników, attyki, okapy/płyty wysunięte, rama boksu C, osadzenie stolarki, próg, cokół; zestawienia stolarki (U, g, klasa szczelności, otwieranie), lameli, balustrad; obliczenia U/ψ/f_Rsi/g (W-243…W-250).
+- **PT-2 BO** (`PT_2_BO_…`): §23 pkt 1 konstrukcja (schematy, założenia, obciążenia W-262…W-265, wyniki); **§23 pkt 2 dokumentacja badań podłoża + projekt geotechniczny** (kat. II); §23 pkt 3 dokumentacja geologiczno-inżynierska — n/d; §24 pkt 1 lit. a–c rzuty fundamentów i stropów, wsporniki, rysunki zbrojenia (ISO 3766) z uziomem i wyprowadzeniami (W-187).
+- **PT-3 IS** (`PT_3_IS_…`): §23 pkt 7 lit. a ogrzewanie z automatyczną regulacją, lit. b/c chłodzenie — tylko przy chłodzeniu PC, lit. d wentylacja, lit. e wod-kan i wody opadowe, lit. f gaz — n/d; §23 pkt 8 lit. a–b powiązania z sieciami, obliczenia i dobory (obciążenie cieplne, strumienie, woda, kanalizacja, retencja, hałas PC); §23 pkt 9 urządzenia (PC, zasobnik, centrala); **§23 pkt 11 lit. a–d charakterystyka energetyczna** (W-251); §24 pkt 3–4 lit. a rzuty i schematy.
+- **PT-4 IE** (`PT_4_IE_…`): §23 pkt 7 lit. g elektroenergetyczne, lit. h telekomunikacyjne (światłowód, W-196), lit. i piorunochronne (analiza ryzyka, W-191); §23 pkt 8 lit. b moce elektryczne; §23 pkt 11 lit. a bilans mocy; §24 pkt 4 lit. b rzuty P0–P2 i dachu, schemat jednokreskowy RG, zasilanie ZKP–RG, plan uziomu i połączeń wyrównawczych, schemat PV, strefy łazienek; obliczenia I_B/I_z, ΔU, Z_s, CRL.
+
+### C.3 Etap realizacji i odbioru (informacyjnie; wpływa na treść PT)
+- [ ] zawiadomienie o rozpoczęciu robót (Dz.U. 2026 poz. 254) z danymi kierownika budowy i oświadczeniem projektanta PT (art. 41 ust. 4–4aa PB); PT przekazany kierownikowi (art. 42 ust. 1)
+- [ ] plan BIOZ (kierownik budowy), dziennik budowy, geodezyjne wytyczenie (art. 43 ust. 1)
+- [ ] zawiadomienie o zakończeniu budowy (Dz.U. 2026 poz. 272): PT z uwzględnieniem zmian, oświadczenie kierownika, geodezyjna inwentaryzacja powykonawcza, **świadectwo charakterystyki energetycznej**, protokoły badań przyłączy i instalacji; użytkowanie po 14 dniach bez sprzeciwu (art. 54, 57 PB)
+
+---
+
+## D. Nierozstrzygnięte kwestie i ryzyka
+
+| ID | Kwestia i stan | Rekomendacja w projekcie | Źródło |
+|---|---|---|---|
+| D-01 | **Status WT.** WT „uznany za uchylony” (ELI 21.09.2026); nowych WT brak (Dz.U. do poz. 1244); bez oświadczenia z art. 102a PZT nie ma wzorca, a organ sprawdza PZT „z przepisami, w tym techniczno-budowlanymi” (art. 35 ust. 1 pkt 2 PB). Nowe WT (projekt MFiG nr 29) mogą się ukazać w trakcie. | Oświadczenie z art. 102a — **obowiązkowy element kompletu**; wniosek najpóźniej **19.03.2028**; przed złożeniem sprawdzić Dz.U. poz. > 1244; art. 102a ust. 4 obejmuje wszystkie decyzje zamierzenia (także zmianę PnB). | R1 §4 pkt 1–2; R3 §4 pkt 1–4; R8-R2 |
+| D-02 | **Brak urzędowego wzoru oświadczenia z art. 102a**; PB-1 (2026 poz. 255) nie ma na nie pola. Wzór PIIB z 22.09.2026 — źródło wtórne. | Szablon wg wzoru PIIB bez modyfikacji treści, oznaczony „WZÓR”; musi jednoznacznie wskazywać zamierzenie, działkę, akt (WT, t.j. Dz.U. 2022 poz. 1225 ze zm., w brzmieniu obowiązującym do 19.09.2026) i podstawę (art. 102a ust. 1 PB); podpisuje **Inwestor**; w PB-1 poz. „Inne”; kopia dla projektantów przed rozpoczęciem prac. | R1-02, R1 §4 pkt 3; R3 §4 pkt 6; R2 W09 |
+| D-03 | **§271 ust. 4–5 a budynki z §213** (zwiększenie odległości ZL–ZL przy ścianach z otworami: +0 / +50 / +100 % dla > 65 / 30–65 / < 30 % powierzchni o klasie E) — stosowanie do domów jednorodzinnych NIEZWERYFIKOWANE. Przy +100 % (16 m) i sąsiadach 8 m od granicy ściany E/W musiałyby stać ≥ 8 m od granic. | Ściany i dach NRO (W-213); **ograniczyć duże przeszklenia na elewacjach E i W**; potwierdzić rzeczywiste odległości budynków sąsiadów na mapie do celów projektowych; utrzymać zapas odstępów bocznych (budżet R8 ≈ 5,5 m na stronę); rozważyć konsultację z rzeczoznawcą ppoż. | R3 P-10, §4 pkt 7; R8 3.3 |
+| D-04 | **PWP przy kubaturze > 1000 m³**: WT §183 ust. 2 wymaga (strefa = cały budynek z garażem, §226), ROPoż §4 ust. 2 pkt 2 zwalnia właścicieli domów jednorodzinnych; brak stanowiska KG PSP. | **Projektować PWP** (koszt pomijalny, spełnia obie interpretacje); kubaturę liczyć z modelu (W-069); w opisie wskazać obie podstawy. | R3 IE-04, §4 pkt 8; R7-B05, M01, N-2 |
+| D-05 | **Rozsączanie a pozwolenie wodnoprawne**: „wyloty do ziemi” są urządzeniami wodnymi (PW art. 16 pkt 65 lit. f), ich wykonanie wymaga pozwolenia (art. 389 pkt 6), art. 395 nie zawiera zwolnienia dla wód opadowych; praktyka Wód Polskich niejednolita. | Wariant bazowy: **szczelny zbiornik ≤ 5 m³ + przelew do niecki/ogrodu deszczowego** na podstawie WT §28 ust. 2 (W-145); skrzynki rozsączające jako opcja po uzyskaniu stanowiska PGW WP (RZGW Poznań); ewentualne pozwolenie w harmonogramie (nie jest załącznikiem PnB, potrzebne przed wykonaniem). | R6-66, N-5; R8-55…R8-57, R8-R3 |
+| D-06 | **PN-ISO 9836:2022 a powierzchnia zabudowy z płytami wysuniętymi** (0,8–1,2 m; P0 na W ≈ 1,5 m): norma wyłącza okapy, daszki, poziome osłony (5.1.2); upzp art. 2 pkt 35 liczy rzut po obrysie ścian zewnętrznych; RPB §14 pkt 4 lit. a wyłącza tarasy, gzymsy, balkony, loggie; pełna treść normy (płatna) — NIEZWERYFIKOWANE; MPZP może definiować inaczej. | Liczyć dwa warianty: (1) wiążący — obrys ścian (wspornik A i boks C wliczone); (2) kontrolny — z rzutem płyt; oba ≤ 480,00 m² (szacunek 230–300 m²); na PZT płyty jako przewieszenia (> 1,0 m linią punktową 0,7) z opisem; definicja w fikcyjnym MPZP (W-040). | R2 R-06; R4-P03, §4 pkt 10; R8-06, R8-R8 |
+| D-07 | **EP a dane producenta**: przy wartościach domyślnych metodologii EP ≈ 99 > 70; z danymi producenta ≈ 58. Brak wytycznych: jaki SCOP (klimat) i jak bilansować autokonsumpcję PV (krok czasowy). | Dobór urządzeń z deklaracjami (SCOP wg PN-EN 14825, COP c.w.u. wg PN-EN 16147, η_oc i SFP wg PN-EN 13141-7, klasa zasobnika) przed PT-IS; krótkie przewody c.w.u., cyrkulacja czasowa albo brak, pompy i wentylatory EC; SCOP „average” 35 °C; PV — miesięczny udział autokonsumpcji z symulacji godzinowej; założenia opisać; cel EP z zapasem. | R6 §1 pkt 6, 3.3, N-3, N-4 |
+| D-08 | **Kategoria geotechniczna II** zamiast I z briefu — przepis nie nakazuje jej literalnie; rozstrzyga warunek „statycznie wyznaczalnego schematu” (niespełniony); kategorię ustala opinia i projektant. | Przyjąć II: opinia (PAB) + dokumentacja badań + projekt geotechniczny (PT-BO); zakres badań jak dla kat. II (W-282); dane gruntowe z briefu są przykładowe (sekcja E). | R1-39; R2 A-G, R-07; R5-81 (weryf.) |
+| D-09 | **Beton wg nowej PN-EN 206-1/-2:2026-09** (tylko ang.): PN-EN 206+A2:2021-08 i PN-B-06265:2022-08 wycofane; nie wiadomo, czy EN 206-1:2026 zachowuje klasy XC/XF używane przez EC2 1. generacji. | W PT specyfikować klasę wytrzymałości, klasę ekspozycji XC/XF, maks. w/c, kruszywo F2 i konsystencję „wg PN-EN 206+A2:2021-08 i PN-B-06265:2022-08 (normy wycofane, stosowane jako wiedza techniczna dla spójności z PN-EN 1992-1-1:2008)”; przed wydaniem PT potwierdzić z wytwórnią normę deklaracji. | R5-54, N-11 (weryf.) |
+| D-10 | **Normy powołane w WT — datowane i wycofane** (PN-EN 12831:2006, PN-B-02403, PN-B-03430/Az3, PN-B-01706, PN-EN 1717:2003, PN-EN 779, PN-EN 12207:2001, PN-EN 13829, PN-HD 60364-4-41:2009 i in., PN-EN 62305:2008/2011); „najnowsza norma w języku polskim” z zał. 2 RPB dla PN-EN ISO 6284 jest wycofana (2001). | Powoływać wydania z zał. 1 WT (zgodność z literą WT) i równolegle aktualne jako zasady wiedzy technicznej; projektować tak, by spełnić oba (aktualne zwykle surowsze); tolerancji wg ISO 6284 na rysunkach PB nie stosujemy. | R6 3.1, N-2; R7 §1 pkt 1; R4 §4 pkt 2 |
+| D-11 | **Sprawdzający i uprawnienia**: art. 20 ust. 3 pkt 2 PB zwalnia dom jednorodzinny ze sprawdzenia, ale nietypowa konstrukcja (wsporniki) może budzić wątpliwości; kubatura > 1000 m³ i wsporniki ⇒ uprawnienia bez ograniczeń (art. 15a). | Dobrowolne sprawdzenie PT-BO (W-275); w metrykach „sprawdzający: nie dotyczy” poza PT-BO; pola uprawnień „bez ograniczeń” do uzupełnienia; weryfikacja e-CRUB i braku zawieszenia (art. 12 ust. 7b od 02.10.2026). | R1-27, R1-32, §4 pkt 4; R5 N-10 |
+| D-12 | **Rozdział PEN**: standard ENEA (ZK1x-1P) przewiduje wyjście TN-C (PEN), WT §183 ust. 1 pkt 2 wymaga PE i N w obwodach rozdzielczych. | We wniosku o warunki przyłączenia zapytać o rozdział PEN w ZKP i WLZ 5-żyłowy; wariant zapasowy: 4-żyłowy (PEN ≥ 10 mm² Cu) i rozdział w RG na GSU. | R7-L06, N-3 |
+| D-13 | **Analiza ryzyka piorunowego**: wynik zależy od klasy obciążenia ogniowego (R1 ≈ 5,5·10⁻⁶ „zwykłe” vs 3,0·10⁻⁵ „wysokie”); PN-EN IEC 62305-2:2025 tylko po angielsku; N_g historyczne. | Pełna analiza w PT-IE; uziom otokowy z wyprowadzeniami pod LPS zawsze; przy wyniku pozytywnym LPS kl. III–IV z odstępem separacyjnym od PV. | R7-K05, N-5 |
+| D-14 | **GIA i EPBD**: brak polskiego aktu wykonawczego do GIA art. 10 (normy, wyłączenia); EPBD art. 14 (EV) nietransponowana (termin 29.05.2026 minął). | Projektować infrastrukturę światłowodową (W-196); EV: przy 4 miejscach dobrowolnie spełnić art. 14 ust. 4 albo ograniczyć liczbę miejsc do 3 (MPZP wymaga min. 2); monitorować Dz.U. | R7 N-8, N-9 |
+| D-15 | **Wysokość zabudowy (upzp art. 2 pkt 30)**: nie wiadomo, czy „poziom terenu” to teren istniejący czy projektowany; wyłączenia są zamknięte (PV, balustrady, wyłaz nie są wyłączone). | Liczyć od niższej z rzędnych, wliczać wszystkie elementy nadachowe; rezerwa ≥ 0,30 m (W-033); PV nie ponad attykę, wyłaz zlicowany. | R8-R5 |
+| D-16 | **Reżim definicji wskaźników MPZP** (art. 67 u.zm.upzp) i brak ustawowej definicji linii zabudowy. | W fikcyjnym MPZP § „Definicje” i definicja linii zabudowy (W-040); wskaźniki liczyć w obu ujęciach (upzp oraz RPB + PN-ISO 9836). | R8-07, R8-09, R8-R1 |
+| D-17 | **Okna przesuwne HS na P2** a WT §299 ust. 1 (skrzydła otwierane do wewnątrz) — przepis nie odnosi się do okien przesuwnych. | Na P2 preferować okna otwierane do wewnątrz; HS tylko przesuwne od wewnątrz z dolną szybą stałą lub balustradą ≥ 0,90 m (W-097, W-098). | R3 §4 pkt 12 |
+| D-18 | **Śnieg — sytuacja wyjątkowa B2**: wzory zał. B (B.3, B.4) NIEZWERYFIKOWANE; przy uskoku h ≈ 3 m obciążenie zaspą może sięgać ≈ 6 kN/m² (γ = 1,0) — więcej niż 3,6 kN/m² w sytuacji trwałej. | Sprawdzić wzory w tekście normy przed PT; uwzględnić w płytach przy uskokach (dach P0 i garażu przy bryle P1, dach P1 przy P2). | R5-38, N-12 |
+| D-19 | **Wartości z norm płatnych i NA niezweryfikowane**: q_k/Q_k w NA do PN-EN 1991-1-1, NA:2016/2018 do EC2 (γ_c, c_min,dur), c_pe, l/500, PN-B-03430/Az3 (strumienie), θ_e dla Poznania, PN-B-02151 (akustyka), strefy PN-HD 60364-7-701:2025, N SEP-E-002, R_si, ψ domyślne, mapa h_z. | Przyjęto wartości górne lub bezpieczne; w obliczeniach oznaczać [NZW]; przed wydaniem PT sprawdzić w egzemplarzach norm (PKN) i poprawić `wymagania.yaml` (pole `status`). | R3 §6.3; R5 §C; R6 §C; R7 §„Niemożliwe”; R4 §5.3 |
+| D-20 | **U stropu nad powietrzem zewnętrznym** (spód wspornika P2) — brak pozycji w tabeli zał. 2 WT. | Przyjęto 0,15 (lp. 5 „nad przejazdami”), nie 0,25 (lp. 7) — wariant ostrożny. | R3 E-06, §4 pkt 10 |
+| D-21 | **Garaż ogrzewany czy nieogrzewany** — zmienia wymagania U i wentylacji. | **Nieogrzewany**, poza obrysem cieplnym (W-115, W-243, W-244). | R3 §4 pkt 11; R6-22 (weryf.) |
+| D-22 | **Daty graniczne**: WT „obowiązujące do 19.09.2026” (art. 102a) vs ELI 21.09.2026; koniec okresu 19 czy 20.03.2028. | Formuła ustawowa (19.09.2026); termin 19.03.2028; treść WT bez zmian od 15.08.2024 — bez wpływu na wymagania. | R1 §4 pkt 2; R3 §4 pkt 4 |
+| D-23 | **Warunki przyłączenia fikcyjne** (wodomierz w budynku czy w studzience, typ zaworu antyskażeniowego, spadki i przykrycie przyłączy, moc i zabezpieczenie przedlicznikowe OSD). | W PZT i PT jako założenia oznaczone [ZAŁ] i „do potwierdzenia w warunkach przyłączenia” (sekcja E). | R6 N-10; R7 N-4 |
+| D-24 | **Pompa ciepła — zmiany regulacyjne**: zakaz F-gazów od 01.01.2027; rewizja ekoprojektu 813/2013 w toku. | PC na R290; dobór z aktualnych deklaracji w chwili zakupu; strefa bezpieczeństwa wg DTR wybranego modelu. | R6-68…R6-71, N-9 |
+| D-25 | **Aktualność mapy do celów projektowych** — brak terminu ustawowego (NSA II OSK 909/14 — źródło wtórne). | Zamówić mapę tuż przed finalizacją PZT (praktyka ≤ 12 miesięcy); przy zmianach w terenie aktualizacja. | R2 R-12; R8-34, R8-R7 |
+| D-26 | **Limity e-Budownictwa** (rozmiar i liczba plików, formaty podpisów) mogą być ostrzejsze niż 150 MB z RPB. | Pliki możliwie małe (wektor, bez rastrów poza mapą); sprawdzić przed złożeniem. | R2 R-13 |

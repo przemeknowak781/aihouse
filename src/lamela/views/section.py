@@ -279,7 +279,7 @@ class SectionBuilder:
         self.z_min = min(b[1] for b in bb)
         self.z_max = max(b[3] for b in bb)
         # grunt
-        marg = float(self.opts.get("margines_terenu", 2.0))
+        marg = float(self.opts.get("margines_terenu", 1.5))
         prof = terrain_profile(self.ctx, o, R, self.s_min - marg, self.s_max + marg)
         self.profile = prof
         z_bot = min(self.z_min, float(prof[:, 1].min())) - 0.45
