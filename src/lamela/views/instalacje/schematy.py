@@ -211,7 +211,6 @@ def rysuj(ctx, W, spec, scale, opts):
 
 
 def _mpl(vp, W, kind, res):
-    from .wspolne import Legenda
     if kind == "pc":
         from ...obliczenia.sanitarne.schemat_pc import rysuj_schemat_pc
         fig = przechwyc(rysuj_schemat_pc, W.ogrzewanie, W.woda)

@@ -240,7 +240,7 @@
           "sprawdzone_lancuchy": 4
         }
       },
-      "czas_s": 192.3,
+      "czas_s": 187.2,
       "png_kontrola": {
         "px": [
           3508,
@@ -483,7 +483,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 7.8,
+      "czas_s": 7.5,
       "png_kontrola": {
         "px": [
           1536,
@@ -730,7 +730,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 7.3,
+      "czas_s": 7.4,
       "png_kontrola": {
         "px": [
           3508,
@@ -1207,7 +1207,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 8.3,
+      "czas_s": 8.5,
       "png_kontrola": {
         "px": [
           2481,
@@ -1472,7 +1472,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.5,
+      "czas_s": 2.6,
       "png_kontrola": {
         "px": [
           3508,
@@ -1966,7 +1966,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 1.8,
+      "czas_s": 1.9,
       "png_kontrola": {
         "px": [
           2481,
@@ -2213,7 +2213,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.3,
+      "czas_s": 3.4,
       "png_kontrola": {
         "px": [
           3508,
@@ -2690,7 +2690,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 5.0,
+      "czas_s": 4.9,
       "png_kontrola": {
         "px": [
           2481,
@@ -2937,7 +2937,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.9,
+      "czas_s": 3.1,
       "png_kontrola": {
         "px": [
           2481,
@@ -3423,7 +3423,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 4.8,
+      "czas_s": 4.6,
       "png_kontrola": {
         "px": [
           2481,
@@ -3670,7 +3670,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.1,
+      "czas_s": 2.2,
       "png_kontrola": {
         "px": [
           2481,
@@ -3926,7 +3926,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.8,
+      "czas_s": 3.1,
       "png_kontrola": {
         "px": [
           2481,
@@ -4399,7 +4399,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.5,
+      "czas_s": 2.1,
       "png_kontrola": {
         "px": [
           1831,
@@ -4634,7 +4634,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 1.6,
+      "czas_s": 1.5,
       "png_kontrola": {
         "px": [
           2776,
@@ -5879,7 +5879,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.5,
+      "czas_s": 2.2,
       "png_kontrola": {
         "px": [
           1949,
@@ -5898,7 +5898,7 @@
       "wypelnienie": {
         "wypelnienie": 0.656,
         "wypelnienie_rys": 0.614,
-        "wypelnienie_skl": 0.449,
+        "wypelnienie_skl": 0.447,
         "wypelnienie_kontur": 0.408,
         "pole_arkusza_m2": 0.196,
         "pole_ramki_m2": 0.1722,
@@ -5968,7 +5968,7 @@
         "standardowy": false,
         "tryb": "ekonomiczny",
         "koszt": 0.2384,
-        "wypelnienie_szac": 0.616,
+        "wypelnienie_szac": 0.61,
         "uklad_widokow": "wiersz",
         "skladanie": {
           "zgiecia_pionowe": [
@@ -6086,7 +6086,7 @@
             "zestawienie",
             [
               230.0,
-              445.2,
+              449.7,
               407.0,
               517.0
             ]
@@ -6095,18 +6095,18 @@
             "uwagi[1–7]",
             [
               230.0,
-              393.6,
+              398.1,
               407.0,
-              440.2
+              444.7
             ]
           ],
           [
             "podziałka",
             [
-              47.0,
-              50.5,
-              224.0,
-              63.5
+              230.0,
+              380.1,
+              407.0,
+              393.1
             ]
           ]
         ],
@@ -6131,12 +6131,12 @@
           "brak legendy na arkuszu (R-LEGENDA) — wymagana dla oznaczeń spoza norm z zał. 2 rozp."
         ],
         "stats": {
-          "prymitywy": 1843,
-          "napisy": 409,
+          "prymitywy": 1830,
+          "napisy": 399,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.7,
+      "czas_s": 2.8,
       "png_kontrola": {
         "px": [
           2481,
@@ -6153,10 +6153,10 @@
         "ok": true
       },
       "wypelnienie": {
-        "wypelnienie": 0.564,
-        "wypelnienie_rys": 0.519,
-        "wypelnienie_skl": 0.535,
-        "wypelnienie_kontur": 0.463,
+        "wypelnienie": 0.557,
+        "wypelnienie_rys": 0.511,
+        "wypelnienie_skl": 0.541,
+        "wypelnienie_kontur": 0.458,
         "pole_arkusza_m2": 0.2226,
         "pole_ramki_m2": 0.1989,
         "pusty_prostokat_mm": [
@@ -6374,7 +6374,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.2,
+      "czas_s": 2.1,
       "png_kontrola": {
         "px": [
           2363,
@@ -6634,7 +6634,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.7,
+      "czas_s": 2.9,
       "png_kontrola": {
         "px": [
           5138,
@@ -6704,5 +6704,5 @@
     },
     "wypelnienie_wazone": 0.722
   },
-  "czas_s": 320.0
+  "czas_s": 315.5
 }

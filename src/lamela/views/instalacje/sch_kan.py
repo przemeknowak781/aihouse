@@ -84,7 +84,9 @@ def rozwiniecie_kan(vp, ctx, W, res):
                 vp.line((xf, zf), (xf, z0 + 0.45), "S-KANAL", pen="srednia", lt="CIAGLA")
                 vp.text((xf, z0 + 0.55), f"{SKR.get(q.typ, q.typ[:3].upper())}", H_S, 0.0, "center", "baseline",
                         "S-OPISY")
-                vp.text((xf + 0.06, z0 + 0.28), f"Ø{of.rura.split()[-1] if of else ''}", H_S, 90.0, "left", "bottom",
+                # średnica obok podejścia (1 mm w lewo), nie na jego osi (weryfikacja C 2.5)
+                vp.text((xf - 1.0 * vp.k, z0 + 0.28), f"Ø{of.rura.split()[-1] if of else ''}", H_S, 90.0, "left",
+                        "bottom",
                         "S-OPISY")
             rid = lst[0].pom
             zb_o = odc.get(f"PZ_{rid}")
@@ -117,6 +119,7 @@ def rozwiniecie_kan(vp, ctx, W, res):
     leg.sym(lambda c, p: S.tag(c, p, "ZN", shape="circle", r_mm=2.0, h=1.8, layer="S-KANAL"),
             "zawór napowietrzający pionu")
     from .schematy import rozsun_napisy
+    _maski(vp)
     rozsun_napisy(vp)
     res.column_blocks.append(("legenda", legenda_arkusza(ctx, leg)))
     rows = [[o.id, o.rodzaj, f"Ø{o.rura.split()[-1]}", num(o.sum_DU, 1), num(o.Q, 2), num(o.L, 2)] for o in kn.odcinki
@@ -242,6 +245,7 @@ def rozwiniecie_wody(vp, ctx, W, res):
         S.valve(vp, (x, z0 + 0.9), 90.0, s_mm=2.4)
         vp.text((x + 0.12, z0 + 1.05), f"ZO {rura_krotko(o.rura)}", H_S, 90.0, "left", "bottom", "S-OPISY")
     from .schematy import rozsun_napisy
+    _maski(vp)
     rozsun_napisy(vp)
     leg.sym(lambda c, p: S.water_meter(c, p, 0.0, s_mm=4.0, label="WM"), "wodomierz; F — filtr; EA — zawór "
             "antyskażeniowy (zwrotny); zawory odcinające")
@@ -252,3 +256,11 @@ def rozwiniecie_wody(vp, ctx, W, res):
                   f"woda); punkt krytyczny {pk.przybor.id} ({pk.medium}), p_wym = {num(pk.p_wym, 0)} kPa.",
                   "Oznaczenia przyborów: WC — miska ustępowa, UMY — umywalka, NAT — natrysk, WAN — wanna, ZL — "
                   "zlewozmywak, ZLG — zlew gospodarczy, ZM — zmywarka, PR — pralka, ZO — zawór ogrodowy."]
+
+
+def _maski(vp, m: float = 0.3):
+    """Maska pod opisami rozwinięć: linie przewodów nie przecinają napisów (weryfikacja C 2.5)."""
+    from ...draft.core import PText
+    for p in vp.prims:
+        if isinstance(p, PText) and p.layer == "S-OPISY" and not p.mask:
+            p.mask = m

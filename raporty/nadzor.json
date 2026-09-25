@@ -1,24 +1,24 @@
 {
- "czas": "2026-09-25 12:35",
+ "czas": "2026-09-25 12:39",
  "aktywni": [
   {
    "id": "abfdfaca2ef13a7b4",
    "opis": "wf_a8783476-2a1:konstrukcja:1",
-   "idle_min": 2.7,
-   "bez_narzedzi_min": 2.7,
+   "idle_min": 0.1,
+   "bez_narzedzi_min": 0.1,
    "limity": 0,
    "powody": []
   },
   {
    "id": "aa50b84b155499c75",
    "opis": "wf_dad224e5-cd8:poprawki",
-   "idle_min": 0.2,
-   "bez_narzedzi_min": 0.2,
+   "idle_min": 0.3,
+   "bez_narzedzi_min": 0.3,
    "limity": 0,
    "powody": []
   }
  ],
  "zakonczeni": 0,
  "zastoje": [],
- "repo_bez_zmian_min": 0.3
+ "repo_bez_zmian_min": 0.4
 }

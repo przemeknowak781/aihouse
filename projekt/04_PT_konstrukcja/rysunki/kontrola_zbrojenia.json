@@ -1,6 +1,6 @@
 {
- "ok": 297,
- "razem": 297,
+ "ok": 310,
+ "razem": 310,
  "wiersze": [
   {
    "element": "B1",
@@ -3546,6 +3546,240 @@
    "ok": true,
    "uwagi": "",
    "zapas": 0.005
+  },
+  {
+   "element": "SL10",
+   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
+   "poz": "8.10",
+   "arkusze": [
+    "PT-BO-27"
+   ],
+   "As_req": 678.6,
+   "As_min": 452.4,
+   "As_prov": 678.6,
+   "jedn": "mm²",
+   "zbrojenie": "6Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.0
+  },
+  {
+   "element": "SL11",
+   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
+   "poz": "8.11",
+   "arkusze": [
+    "PT-BO-27"
+   ],
+   "As_req": 678.6,
+   "As_min": 452.4,
+   "As_prov": 678.6,
+   "jedn": "mm²",
+   "zbrojenie": "6Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.0
+  },
+  {
+   "element": "SL12",
+   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
+   "poz": "8.12",
+   "arkusze": [
+    "PT-BO-27"
+   ],
+   "As_req": 678.6,
+   "As_min": 452.4,
+   "As_prov": 678.6,
+   "jedn": "mm²",
+   "zbrojenie": "6Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.0
+  },
+  {
+   "element": "SL13",
+   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
+   "poz": "8.13",
+   "arkusze": [
+    "PT-BO-27"
+   ],
+   "As_req": 904.8,
+   "As_min": 452.4,
+   "As_prov": 904.8,
+   "jedn": "mm²",
+   "zbrojenie": "8Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.0
+  },
+  {
+   "element": "SL14",
+   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
+   "poz": "8.14",
+   "arkusze": [
+    "PT-BO-27"
+   ],
+   "As_req": 904.8,
+   "As_min": 452.4,
+   "As_prov": 904.8,
+   "jedn": "mm²",
+   "zbrojenie": "8Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.0
+  },
+  {
+   "element": "SL15",
+   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
+   "poz": "8.15",
+   "arkusze": [
+    "PT-BO-27"
+   ],
+   "As_req": 904.8,
+   "As_min": 452.4,
+   "As_prov": 904.8,
+   "jedn": "mm²",
+   "zbrojenie": "8Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.0
+  },
+  {
+   "element": "SL16",
+   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
+   "poz": "8.16",
+   "arkusze": [
+    "PT-BO-27"
+   ],
+   "As_req": 904.8,
+   "As_min": 452.4,
+   "As_prov": 904.8,
+   "jedn": "mm²",
+   "zbrojenie": "8Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.0
+  },
+  {
+   "element": "SL17",
+   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
+   "poz": "8.17",
+   "arkusze": [
+    "PT-BO-27"
+   ],
+   "As_req": 904.8,
+   "As_min": 452.4,
+   "As_prov": 904.8,
+   "jedn": "mm²",
+   "zbrojenie": "8Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.0
+  },
+  {
+   "element": "SL18",
+   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
+   "poz": "8.18",
+   "arkusze": [
+    "PT-BO-27"
+   ],
+   "As_req": 904.8,
+   "As_min": 452.4,
+   "As_prov": 904.8,
+   "jedn": "mm²",
+   "zbrojenie": "8Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.0
+  },
+  {
+   "element": "SL19",
+   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
+   "poz": "8.19",
+   "arkusze": [
+    "PT-BO-27"
+   ],
+   "As_req": 678.6,
+   "As_min": 452.4,
+   "As_prov": 678.6,
+   "jedn": "mm²",
+   "zbrojenie": "6Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.0
+  },
+  {
+   "element": "SL20",
+   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
+   "poz": "8.20",
+   "arkusze": [
+    "PT-BO-27"
+   ],
+   "As_req": 678.6,
+   "As_min": 452.4,
+   "As_prov": 678.6,
+   "jedn": "mm²",
+   "zbrojenie": "6Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.0
+  },
+  {
+   "element": "SL21",
+   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
+   "poz": "8.21",
+   "arkusze": [
+    "PT-BO-27"
+   ],
+   "As_req": 678.6,
+   "As_min": 452.4,
+   "As_prov": 678.6,
+   "jedn": "mm²",
+   "zbrojenie": "6Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.0
+  },
+  {
+   "element": "SL9",
+   "miejsce": "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)",
+   "poz": "8.9",
+   "arkusze": [
+    "PT-BO-27"
+   ],
+   "As_req": 678.6,
+   "As_min": 452.4,
+   "As_prov": 678.6,
+   "jedn": "mm²",
+   "zbrojenie": "6Ø12",
+   "s": null,
+   "s_max": null,
+   "ok": true,
+   "uwagi": "",
+   "zapas": 0.0
   },
   {
    "element": "ST1",

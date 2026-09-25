@@ -25,6 +25,7 @@ Metoda wyznaczania bloków treści (z rzeczywistej zawartości PDF, PyMuPDF):
    Dodatkowo: W_kontur (pole samej domkniętej maski, bez prostokątów), W_skł (jak W obw., ale składowa wklęsła —
    maska < 75 % obwiedni, np. „L” z bloków sklejonych domknięciem — liczona obwiedniami części po domknięciu
    1 mm; pokazuje puste pola, które W obw. zamyka w jednej obwiedni), największy pusty prostokąt wewnątrz ramki
+   (na obwiedniach części jak W skł.)
    oraz „arkusz przycięty” — obwiednia całej treści + marginesy 20/10 mm (ile papieru zostaje przy obecnym
    układzie po odcięciu pustych pasów).
 
@@ -251,10 +252,12 @@ def analyze_pdf(pdf: Path, odstep: float = 6.0, res: float = 1.0) -> dict:
     a_contour = float((closed | tb_mask).sum()) * cell
     a_skl = float((union_s | tb_mask).sum()) * cell
     a_tb = float(tb_mask.sum()) * cell
-    # największy pusty prostokąt (siatka 2 mm)
+    # największy pusty prostokąt (siatka 2 mm) — na obwiedniach części składowych (jak W skł.), nie obwiedniach
+    # po domknięciu 6 mm: puste pole wewnątrz „L” z bloków sklejonych domknięciem jest widoczne (weryfikacja C 2.13:
+    # PT-IE-04 — pole 170×235 mm pod tytułem widoku raportowane dawniej jako 360×52 mm)
     s = max(1, int(round(2.0 / res)))
     hh, ww = union.shape[0] // s * s, union.shape[1] // s * s
-    coarse = (union | tb_mask)[:hh, :ww].reshape(hh // s, s, ww // s, s).any(axis=(1, 3))
+    coarse = (union_s | tb_mask)[:hh, :ww].reshape(hh // s, s, ww // s, s).any(axis=(1, 3))
     le = _largest_empty_rect(coarse)
     empty = dict(pole_m2=le[0] * (s * res) ** 2 / 1e6, w=le[4] * s * res, h=le[3] * s * res,
                  x=fx0 + le[2] * s * res, y=fy0 + le[1] * s * res)
