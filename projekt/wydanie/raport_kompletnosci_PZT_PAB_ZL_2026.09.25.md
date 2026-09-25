@@ -1,6 +1,6 @@
 # Raport kompletności — PZT_PAB_ZL_2026.09.25.pdf
 
-*Wygenerowano 2026-09-25 07:13 przez `tools/dokumenty/zloz_tom_I.py` (walidator `lamela.dokumenty.sprawdz_tom`, lista „TOM I — PZT + PAB + ZL w jednym pliku (rejestr C.1)”). Walidator ocenia obecność treści wymaganej przepisami (wyrażenia regularne), nie jej poprawność merytoryczną.*
+*Wygenerowano 2026-09-25 07:16 przez `tools/dokumenty/zloz_tom_I.py` (walidator `lamela.dokumenty.sprawdz_tom`, lista „TOM I — PZT + PAB + ZL w jednym pliku (rejestr C.1)”). Walidator ocenia obecność treści wymaganej przepisami (wyrażenia regularne), nie jej poprawność merytoryczną.*
 
 **Status tomu: PRZYKŁAD – NIE DO ZŁOŻENIA**
 
@@ -102,8 +102,8 @@ Strony 1–2 pliku: strona tytułowa tomu i łączny spis treści (bez numeru el
 | ✓ | K-SPIS-ZL | Łączny spis treści obejmuje spis załączników (ZL) | OK | RPB § 7 ust. 7 pkt 1, ust. 1a | załączników w zakładkach: 5, w łącznym spisie: 5 |
 | ✓ | K-PZT-RAP | Arkusze PZT zgodne z raport_widokow.json | OK | RPB § 7 ust. 1 pkt 4, § 15–17 (PZT), § 21 (PAB); raport_widokow.json | 3 z 3 arkuszy z projekt/02_PZT/rysunki; generator zgłasza 9 brak(i) danych modelu (poniżej, pkt „Sprawy otwarte”) |
 | ✓ | K-PAB-RAP | Arkusze PAB zgodne z raport_widokow.json | OK | RPB § 7 ust. 1 pkt 4, § 15–17 (PZT), § 21 (PAB); raport_widokow.json | 10 z 10 arkuszy z projekt/01_koncepcja/widoki |
-| ! | K-PZT-AKT | Aktualność rysunków PZT względem modelu | OSTRZEŻENIE | spójność części opisowej i rysunkowej (model jedynym źródłem danych) | rysunki z 2026-09-25 05:36, model zmieniony 2026-09-25 06:48 (budynek.yaml, dzialka.yaml, instalacje.yaml, wyposazenie.yaml) — przed wydaniem wygenerować ponownie (tools/generuj_widoki.py) |
-| ! | K-PAB-AKT | Aktualność rysunków PAB względem modelu | OSTRZEŻENIE | spójność części opisowej i rysunkowej (model jedynym źródłem danych) | rysunki z 2026-09-25 05:19, model zmieniony 2026-09-25 06:48 (budynek.yaml, dzialka.yaml, instalacje.yaml, wyposazenie.yaml) — przed wydaniem wygenerować ponownie (tools/generuj_widoki.py) |
+| ! | K-PZT-AKT | Aktualność rysunków PZT względem modelu | OSTRZEŻENIE | spójność części opisowej i rysunkowej (model jedynym źródłem danych) | rysunki z 2026-09-25 05:36, model zmieniony 2026-09-25 07:16 (budynek.yaml, dzialka.yaml, instalacje.yaml, wyposazenie.yaml) — przed wydaniem wygenerować ponownie (tools/generuj_widoki.py) |
+| ! | K-PAB-AKT | Aktualność rysunków PAB względem modelu | OSTRZEŻENIE | spójność części opisowej i rysunkowej (model jedynym źródłem danych) | rysunki z 2026-09-25 05:19, model zmieniony 2026-09-25 07:16 (budynek.yaml, dzialka.yaml, instalacje.yaml, wyposazenie.yaml) — przed wydaniem wygenerować ponownie (tools/generuj_widoki.py) |
 
 ### 3.1. Arkusze rysunkowe w tomie
 

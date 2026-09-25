@@ -652,7 +652,7 @@
       "arkusze": 0
     }
   },
-  "rozmiar_mb": 4.4495697021484375,
+  "rozmiar_mb": 4.454187393188477,
   "strony": 62,
   "podsumowanie": {
     "status": "PRZYKŁAD – NIE DO ZŁOŻENIA",
@@ -713,14 +713,14 @@
       "opis": "Aktualność rysunków PZT względem modelu",
       "podstawa": "spójność części opisowej i rysunkowej (model jedynym źródłem danych)",
       "status": "OSTRZEŻENIE",
-      "szczegoly": "rysunki z 2026-09-25 05:36, model zmieniony 2026-09-25 06:48 (budynek.yaml, dzialka.yaml, instalacje.yaml, wyposazenie.yaml) — przed wydaniem wygenerować ponownie (tools/generuj_widoki.py)"
+      "szczegoly": "rysunki z 2026-09-25 05:36, model zmieniony 2026-09-25 07:16 (budynek.yaml, dzialka.yaml, instalacje.yaml, wyposazenie.yaml) — przed wydaniem wygenerować ponownie (tools/generuj_widoki.py)"
     },
     {
       "id": "K-PAB-AKT",
       "opis": "Aktualność rysunków PAB względem modelu",
       "podstawa": "spójność części opisowej i rysunkowej (model jedynym źródłem danych)",
       "status": "OSTRZEŻENIE",
-      "szczegoly": "rysunki z 2026-09-25 05:19, model zmieniony 2026-09-25 06:48 (budynek.yaml, dzialka.yaml, instalacje.yaml, wyposazenie.yaml) — przed wydaniem wygenerować ponownie (tools/generuj_widoki.py)"
+      "szczegoly": "rysunki z 2026-09-25 05:19, model zmieniony 2026-09-25 07:16 (budynek.yaml, dzialka.yaml, instalacje.yaml, wyposazenie.yaml) — przed wydaniem wygenerować ponownie (tools/generuj_widoki.py)"
     }
   ],
   "arkusze": [
@@ -982,5 +982,5 @@
       "arkusze": 0
     }
   ],
-  "wygenerowano": "2026-09-25 07:13"
+  "wygenerowano": "2026-09-25 07:16"
 }

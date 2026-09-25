@@ -1,5 +1,5 @@
 {
- "model": "2026-09-25 06:48",
+ "model": "2026-09-25 07:16",
  "obszary": {
   "Obliczenia statyczne": [
    105,
@@ -14,14 +14,30 @@
    275
   ]
  },
- "niezamkniete": 29,
+ "niezamkniete": 31,
  "wiersze": [
   {
    "obszar": "Aktualność",
    "element": "obliczenia statyczne",
    "wynik": "2026-09-25 06:33",
    "stan": "NIEZAMKNIĘTE",
-   "opis": "wyniki starsze niż model (2026-09-25 06:48) albo brak pliku — ponowić analizę",
+   "opis": "wyniki starsze niż model (2026-09-25 07:16) albo brak pliku — ponowić analizę",
+   "zrodlo": "czas modyfikacji plików"
+  },
+  {
+   "obszar": "Aktualność",
+   "element": "MES płyty fundamentowej",
+   "wynik": "2026-09-25 06:48",
+   "stan": "NIEZAMKNIĘTE",
+   "opis": "wyniki starsze niż model (2026-09-25 07:16) albo brak pliku — ponowić analizę",
+   "zrodlo": "czas modyfikacji plików"
+  },
+  {
+   "obszar": "Aktualność",
+   "element": "kontrola zbrojenia",
+   "wynik": "2026-09-25 06:48",
+   "stan": "NIEZAMKNIĘTE",
+   "opis": "wyniki starsze niż model (2026-09-25 07:16) albo brak pliku — ponowić analizę",
    "zrodlo": "czas modyfikacji plików"
   },
   {

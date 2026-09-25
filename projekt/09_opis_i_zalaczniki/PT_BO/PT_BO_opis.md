@@ -9,13 +9,13 @@
 ## Stan opracowania i analiz konstrukcji — § 23 pkt 1 RPB; W-274
 
 Zestawienie generowane automatycznie przy każdym złożeniu tomu z wyników obliczeń zespołu BO (model
-`model/budynek.yaml` z 2026-09-25 06:48). Pozycja **NIEZAMKNIĘTE** oznacza analizę nie domkniętą: niespełniony warunek
+`model/budynek.yaml` z 2026-09-25 07:16). Pozycja **NIEZAMKNIĘTE** oznacza analizę nie domkniętą: niespełniony warunek
 stanu granicznego, wymagane obliczeniowo zbrojenie nieujęte w kontroli rysunków, uwagę biblioteki
 „[WYMAGA ANALIZY]” albo brak arkusza rysunkowego. Pozycja **ZASTĄPIONE** — wynik modelu uproszczonego zastąpiony
 analizą dokładniejszą (wskazaną w opisie). Po domknięciu analiz i ponownym uruchomieniu generatora wiersze
 znikają z zestawienia.
 
-> **PROJEKT KONSTRUKCJI NIEZAMKNIĘTY — 29 pozycji NIEZAMKNIĘTE.** Przed domknięciem wszystkich pozycji z tabeli poniżej tom nie nadaje się do podpisania oświadczenia projektanta PT (art. 41 ust. 4a pkt 2 PB) ani do realizacji robót.
+> **PROJEKT KONSTRUKCJI NIEZAMKNIĘTY — 31 pozycji NIEZAMKNIĘTE.** Przed domknięciem wszystkich pozycji z tabeli poniżej tom nie nadaje się do podpisania oświadczenia projektanta PT (art. 41 ust. 4a pkt 2 PB) ani do realizacji robót.
 
 **Tabela 1. Stan analiz według obszarów**
 
@@ -32,7 +32,9 @@ znikają z zestawienia.
 
 | Obszar | Element | Wynik | Opis | Źródło |
 |---|---|---|---|---|
-| Aktualność | obliczenia statyczne | 2026-09-25 06:33 | wyniki starsze niż model (2026-09-25 06:48) albo brak pliku — ponowić analizę | czas modyfikacji plików |
+| Aktualność | obliczenia statyczne | 2026-09-25 06:33 | wyniki starsze niż model (2026-09-25 07:16) albo brak pliku — ponowić analizę | czas modyfikacji plików |
+| Aktualność | MES płyty fundamentowej | 2026-09-25 06:48 | wyniki starsze niż model (2026-09-25 07:16) albo brak pliku — ponowić analizę | czas modyfikacji plików |
+| Aktualność | kontrola zbrojenia | 2026-09-25 06:48 | wyniki starsze niż model (2026-09-25 07:16) albo brak pliku — ponowić analizę | czas modyfikacji plików |
 | Obliczenia statyczne | poz. 3.2 PL-2 | 336 % | Rysy: średnica prętów (tabl. 7.2N) η = 336 %; Ugięcie długotrwałe (quasi-stała) ≤ L/250 η = 286 %; Zbrojenie na zginanie η = 140 % — wymaga zmiany przekroju / schematu (REKOMENDACJE_MODEL.md) | wyniki.json |
 | Obliczenia statyczne | poz. 9.9 S2-09 | 172 % | Nośność — połowa wysokości η = 172 %; Nośność — przekrój dolny η = 153 %; Nośność — przekrój górny η = 116 % — wymaga zmiany przekroju / schematu (REKOMENDACJE_MODEL.md) | wyniki.json |
 | Obliczenia statyczne | poz. 9.13 S1-01 | 136 % | Nośność — przekrój górny η = 136 %; Nośność — połowa wysokości η = 125 % — wymaga zmiany przekroju / schematu (REKOMENDACJE_MODEL.md) | wyniki.json |
@@ -113,10 +115,10 @@ znikają z zestawienia.
 
 | Dane wejściowe | Plik | Stan |
 |---|---|---|
-| model budynku | model/budynek.yaml | wersja 1.0, 2026-09-25 06:48 |
+| model budynku | model/budynek.yaml | wersja 1.0, 2026-09-25 07:16 |
 | obliczenia statyczne | projekt/04_PT_konstrukcja/obliczenia/wyniki.json | 2026-09-25 06:33 — NIEZAMKNIĘTE (nieaktualne) |
-| MES płyty fundamentowej | projekt/04_PT_konstrukcja/obliczenia/plyta_fundamentowa_MES.md | 2026-09-25 06:48 — aktualne względem modelu |
-| kontrola zbrojenia | projekt/04_PT_konstrukcja/rysunki/kontrola_zbrojenia.json | 2026-09-25 06:48 — aktualne względem modelu |
+| MES płyty fundamentowej | projekt/04_PT_konstrukcja/obliczenia/plyta_fundamentowa_MES.md | 2026-09-25 06:48 — NIEZAMKNIĘTE (nieaktualne) |
+| kontrola zbrojenia | projekt/04_PT_konstrukcja/rysunki/kontrola_zbrojenia.json | 2026-09-25 06:48 — NIEZAMKNIĘTE (nieaktualne) |
 
 ## Rozwiązania konstrukcyjne obiektu — § 23 pkt 1 RPB
 
@@ -231,13 +233,13 @@ Wyprowadzenie wartości śniegu (zaspy przy uskokach, sytuacja wyjątkowa B2) i 
 | 7. Wieńce | 3 | 31 % | 7.1 W-D1_PL-3 | — |
 | 8. Słupy | 8 | 15 % | 8.5 SL5 | — |
 | 9. Ściany murowe | 38 | 541 % | 9.23 S0-01 | S2-09, S1-01, S1-04, S1-05, S1-06, S1-08, S1-09, S0-01, S0-07, S0-08, S0-09, S0-10 |
-| 10. Fundamenty | 23 | 482 % | 10.11 ZF9 | ZF1, ZF2, ZF5, ZF7, ZF8, ZF9, ZF11, ZF13, ZF14, ZF16, SF1, SF2, SF3, SF4 |
+| 10. Fundamenty | 23 | 482 % | 10.11 ZF9 | ZF1*, ZF2*, ZF5*, ZF7*, ZF8*, ZF9*, ZF11*, ZF13*, ZF14*, ZF16*, SF1*, SF2*, SF3*, SF4* |
 
-η — maksymalne wykorzystanie nośności / warunku stanu granicznego pozycji (STR, GEO, SLS). Szczegóły, warunki i przyjęte zbrojenie — rozdz. 4; pozycje ZASTĄPIONE — rozdz. 1.
+η — maksymalne wykorzystanie nośności / warunku stanu granicznego pozycji (STR, GEO, SLS). Szczegóły, warunki i przyjęte zbrojenie — rozdz. 4. * — pozycja ZASTĄPIONA analizą dokładniejszą (model ławy izolowanej → MES płyty fundamentowej, rozdz. 1 i 5).
 
 *Źródło: wyniki.json (lamela.obliczenia.konstrukcja)*
 
-*[Wykres: Maksymalne wykorzystanie nośności η pozycji obliczeń (czerwone — warunki niespełnione; wartości > 200 % opisane liczbą) — w PDF]*
+*[Wykres: Maksymalne wykorzystanie nośności η pozycji obliczeń (czerwone — warunki niespełnione, szare — pozycje ZASTĄPIONE; wartości > 200 % opisane liczbą) — w PDF]*
 
 ### Pomiary przemieszczeń i odkształceń — § 23 pkt 1 RPB; W-274
 
@@ -285,11 +287,11 @@ geologiczno-inżynierskiej (§ 7 ust. 3) nie sporządza się (§ 23 pkt 3 RPB �
 
 ### Dokumentacja badań podłoża gruntowego — Dz.U. 2012 poz. 463 § 9
 
-Rozpoznanie przyjęte do projektu [DANE PRZYKŁADOWE – FIKCYJNE]: 0,0–0,4 ziemia urodzajna; piaski średnie I_D ≈ 0,6; ZWG ≈ 3,8 m p.p.t.. Teren istniejący w obrysie działki:
+Rozpoznanie przyjęte do projektu [DANE PRZYKŁADOWE – FIKCYJNE]: 0,0–0,4 ziemia urodzajna; piaski średnie I_D ≈ 0,6; ZWG ≈ 3,8 m p.p.t. Teren istniejący w obrysie działki:
 rzędne 101,05…101,68 m n.p.m.; poziom ±0,000 = 101,65 m n.p.m.;
 zwierciadło wody gruntowej ≈ 3,8 m p.p.t. (rzędna 97,60 m n.p.m.).
 Dokumentacja badań (opis metodyki badań polowych i laboratoryjnych, wyniki, interpretacja, model geologiczny,
-wartości wyprowadzone dla każdej warstwy) — [DO UZUPEŁNIENIA: dokumentacja badań podłoża gruntowego (geotechnik z uprawnieniami, E-04)].
+wartości wyprowadzone dla każdej warstwy) — [DOKUMENT ZEWNĘTRZNY – do dołączenia: dokumentacja badań podłoża gruntowego, geotechnik z uprawnieniami (E-04)].
 
 ### Projekt geotechniczny — Dz.U. 2012 poz. 463 § 10 pkt 1–10
 
@@ -327,7 +329,7 @@ Budynek niepodpiwniczony — parcie gruntu na ściany nie występuje. Nadkład w
 q' = 5,55 kPa; wypór wody nie występuje (ZWG poniżej posadowienia).
 
 ### Model obliczeniowy podłoża {podstawa: § 10 pkt 5}
-Projektowy przekrój geotechniczny: 0,0–0,4 ziemia urodzajna; piaski średnie I_D ≈ 0,6; ZWG ≈ 3,8 m p.p.t.. Model Winklera płyty fundamentowej:
+Projektowy przekrój geotechniczny: 0,0–0,4 ziemia urodzajna; piaski średnie I_D ≈ 0,6; ZWG ≈ 3,8 m p.p.t. Model Winklera płyty fundamentowej:
 k_s = 5303 kN/m³, obwiednia wariantów k_s,min; k_s,max =
 2652; 10606 kN/m³ (rozdz. 5).
 
@@ -351,16 +353,16 @@ s ≤ 50 mm (W-283).
 
 ### Specyfikacja badań kontrolnych robót ziemnych {podstawa: § 10 pkt 8}
 Odbiór dna wykopu przez geotechnika (zgodność gruntu z dokumentacją badań); kontrola zagęszczenia podsypki pod
-płytą (wskaźnik zagęszczenia lub moduł odkształcenia — wartości wymagane [DO UZUPEŁNIENIA: wg dokumentacji badań podłoża]);
+płytą (wskaźnik zagęszczenia lub moduł odkształcenia — wartości wymagane wg dokumentacji badań podłoża, rozdz. 7.1);
 kontrola grubości i ciągłości izolacji XPS pod płytą.
 
 ### Wody gruntowe {podstawa: § 10 pkt 9}
 ZWG ≈ 3,8 m p.p.t. — poniżej poziomu posadowienia; odwodnienie wykopu i drenaż
-opaskowy zbędne (W-285); agresywność wód gruntowych względem betonu [DO UZUPEŁNIENIA: wg dokumentacji badań podłoża].
+opaskowy zbędne (W-285); agresywność wód gruntowych względem betonu — wg dokumentacji badań podłoża (rozdz. 7.1).
 
 ### Monitorowanie {podstawa: § 10 pkt 10}
 Pomiar osiadań płyty (rozdz. 3). Najbliższa zabudowa sąsiednia (dz. 123/5) w odległości
-≈ 13,9 m od płyty fundamentowej [DANE PRZYKŁADOWE – FIKCYJNE]; przy wykopie płytkim (≤ 0,85 m p.p.t.)
+≈ 13,9 m od płyty fundamentowej [DANE PRZYKŁADOWE – FIKCYJNE]; przy wykopie płytkim (spód fundamentów ≤ 0,85 m poniżej ±0,000)
 monitoring obiektów sąsiednich nie jest wymagany [ZAŁ].
 
 ### Wpływy eksploatacji górniczej — § 23 pkt 2 RPB
@@ -422,29 +424,29 @@ Uwagi kontroli jakości arkuszy (raport_widokow.json, AUD-RYS):
 
 | Nr | Tytuł | Skala | Format | Uwagi |
 |---|---|---|---|---|
-| PT-BO-01 | RZUT FUNDAMENTÓW | 1:50 | 540×594 | brak pliku — strona zastępcza |
-| PT-BO-02 | PRZEKROJE CHARAKTERYSTYCZNE FUNDAMENTU | 1:20 | 250×594 | brak pliku — strona zastępcza |
-| PT-BO-03 | ZBROJENIE DOLNE PŁYTY FUNDAMENTOWEJ | 1:50 | A2 | brak pliku — strona zastępcza |
-| PT-BO-04 | ZBROJENIE GÓRNE PŁYTY FUNDAMENTOWEJ | 1:50 | A2 | brak pliku — strona zastępcza |
-| PT-BO-05 | ZESTAWIENIE STALI — FUNDAMENT | — | 230×594 | brak pliku — strona zastępcza |
-| PT-BO-06 | RZUT KONSTRUKCJI STROPU NAD PARTEREM | 1:50 | 520×594 | brak pliku — strona zastępcza |
-| PT-BO-07 | RZUT KONSTRUKCJI STROPU NAD I PIĘTREM | 1:50 | A2 | brak pliku — strona zastępcza |
-| PT-BO-08 | RZUT KONSTRUKCJI STROPODACHU | 1:50 | A2 | brak pliku — strona zastępcza |
-| PT-BO-09 | ZBROJENIE DOLNE STROPU NAD PARTEREM | 1:50 | 510×594 | brak pliku — strona zastępcza |
-| PT-BO-10 | ZBROJENIE GÓRNE STROPU NAD PARTEREM | 1:50 | 510×594 | brak pliku — strona zastępcza |
-| PT-BO-11 | ZESTAWIENIE STALI — STROP NAD PARTEREM | — | A2 | brak pliku — strona zastępcza |
-| PT-BO-12 | ZBROJENIE DOLNE STROPU NAD I PIĘTREM | 1:50 | 400×594 | brak pliku — strona zastępcza |
-| PT-BO-13 | ZBROJENIE GÓRNE STROPU NAD I PIĘTREM | 1:50 | 400×594 | brak pliku — strona zastępcza |
-| PT-BO-14 | ZESTAWIENIE STALI — STROP NAD I PIĘTREM | — | 460×420 | brak pliku — strona zastępcza |
-| PT-BO-15 | ZBROJENIE DOLNE STROPODACHU | 1:50 | 400×594 | brak pliku — strona zastępcza |
-| PT-BO-16 | ZBROJENIE GÓRNE STROPODACHU | 1:50 | 400×594 | brak pliku — strona zastępcza |
-| PT-BO-17 | ZESTAWIENIE STALI — STROPODACH | — | 230×594 | brak pliku — strona zastępcza |
-| PT-BO-18 | WĘZŁY WSPORNIKÓW Z ŁĄCZNIKAMI TERMOIZOLACYJNYMI | 1:20 | 310×594 | brak pliku — strona zastępcza |
-| PT-BO-19 | WIENIEC I OPARCIE STROPU NA MURZE SILIKATOWYM | 1:20 | 470×297 | brak pliku — strona zastępcza |
-| PT-BO-20 | ZBROJENIE BELEK (1) | 1:25 | 600×841 | brak pliku — strona zastępcza |
-| PT-BO-21 | ZBROJENIE BELEK (2) | 1:25 | 500×841 | brak pliku — strona zastępcza |
-| PT-BO-22 | ZBROJENIE BELEK (3) | 1:25 | 470×594 | brak pliku — strona zastępcza |
-| PT-BO-23 | ZBROJENIE NADPROŻY (1) | 1:25 | 410×420 | brak pliku — strona zastępcza |
-| PT-BO-24 | ZBROJENIE NADPROŻY (2) | 1:25 | 350×594 | brak pliku — strona zastępcza |
-| PT-BO-25 | ZBROJENIE NADPROŻY (3) | 1:25 | 400×594 | brak pliku — strona zastępcza |
-| PT-BO-26 | ZBROJENIE SCHODÓW | 1:25 | 400×297 | brak pliku — strona zastępcza |
+| PT-BO-01 | RZUT FUNDAMENTÓW | 1:50 | nst. 540×594 |  |
+| PT-BO-02 | PRZEKROJE CHARAKTERYSTYCZNE FUNDAMENTU | 1:20 | nst. 250×594 |  |
+| PT-BO-03 | ZBROJENIE DOLNE PŁYTY FUNDAMENTOWEJ | 1:50 | A2 |  |
+| PT-BO-04 | ZBROJENIE GÓRNE PŁYTY FUNDAMENTOWEJ | 1:50 | A2 |  |
+| PT-BO-05 | ZESTAWIENIE STALI — FUNDAMENT | — | nst. 230×594 |  |
+| PT-BO-06 | RZUT KONSTRUKCJI STROPU NAD PARTEREM | 1:50 | nst. 520×594 |  |
+| PT-BO-07 | RZUT KONSTRUKCJI STROPU NAD I PIĘTREM | 1:50 | A2 |  |
+| PT-BO-08 | RZUT KONSTRUKCJI STROPODACHU | 1:50 | A2 |  |
+| PT-BO-09 | ZBROJENIE DOLNE STROPU NAD PARTEREM | 1:50 | nst. 510×594 |  |
+| PT-BO-10 | ZBROJENIE GÓRNE STROPU NAD PARTEREM | 1:50 | nst. 510×594 |  |
+| PT-BO-11 | ZESTAWIENIE STALI — STROP NAD PARTEREM | — | A2 |  |
+| PT-BO-12 | ZBROJENIE DOLNE STROPU NAD I PIĘTREM | 1:50 | nst. 400×594 |  |
+| PT-BO-13 | ZBROJENIE GÓRNE STROPU NAD I PIĘTREM | 1:50 | nst. 400×594 |  |
+| PT-BO-14 | ZESTAWIENIE STALI — STROP NAD I PIĘTREM | — | nst. 460×420 |  |
+| PT-BO-15 | ZBROJENIE DOLNE STROPODACHU | 1:50 | nst. 400×594 |  |
+| PT-BO-16 | ZBROJENIE GÓRNE STROPODACHU | 1:50 | nst. 400×594 |  |
+| PT-BO-17 | ZESTAWIENIE STALI — STROPODACH | — | nst. 230×594 |  |
+| PT-BO-18 | WĘZŁY WSPORNIKÓW Z ŁĄCZNIKAMI TERMOIZOLACYJNYMI | 1:20 | nst. 310×594 |  |
+| PT-BO-19 | WIENIEC I OPARCIE STROPU NA MURZE SILIKATOWYM | 1:20 | nst. 470×297 |  |
+| PT-BO-20 | ZBROJENIE BELEK (1) | 1:25 | nst. 600×841 |  |
+| PT-BO-21 | ZBROJENIE BELEK (2) | 1:25 | nst. 500×841 |  |
+| PT-BO-22 | ZBROJENIE BELEK (3) | 1:25 | nst. 470×594 |  |
+| PT-BO-23 | ZBROJENIE NADPROŻY (1) | 1:25 | nst. 410×420 |  |
+| PT-BO-24 | ZBROJENIE NADPROŻY (2) | 1:25 | nst. 350×594 |  |
+| PT-BO-25 | ZBROJENIE NADPROŻY (3) | 1:25 | nst. 400×594 |  |
+| PT-BO-26 | ZBROJENIE SCHODÓW | 1:25 | nst. 400×297 |  |

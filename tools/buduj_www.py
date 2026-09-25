@@ -96,6 +96,34 @@ def podglad(html: str, dist: Path, cel: Path):
     link.symlink_to((dist / "assets").resolve(), target_is_directory=True)
 
 
+
+def wydziel_svg(html: str, assets: Path, prog: int = 6000) -> tuple[str, int]:
+    """Duże rysunki SVG (rzuty, elewacje, przekroje, działka) → osobne pliki assets/svg/*.svg, wstawiane do strony
+    skryptem (fetch → outerHTML), dzięki czemu zachowują tokeny CSS motywu jasnego/ciemnego, a index.html jest lekki
+    (strona czytelna do przeglądu przed publikacją). Małe SVG (separatory, ikony) zostają w treści."""
+    (assets / "svg").mkdir(parents=True, exist_ok=True)
+    n = [0]
+
+    def rep(m):
+        s = m.group(0)
+        if len(s) < prog:
+            return s
+        n[0] += 1
+        name = f"svg/rys{n[0]:02d}.svg"
+        body = s if "xmlns=" in s[:400] else s.replace("<svg", '<svg xmlns="http://www.w3.org/2000/svg"', 1)
+        (assets / name).write_text(body, encoding="utf-8")
+        return f'<div class="svg-ext" data-svg="assets/{name}"></div>'
+
+    html = re.sub(r"<svg\b.*?</svg>", rep, html, flags=re.S)
+    loader = ("<style>.svg-ext{min-height:12rem}</style><script>(function(){"
+              "Array.prototype.forEach.call(document.querySelectorAll('.svg-ext[data-svg]'),function(el){"
+              "fetch(el.getAttribute('data-svg')).then(function(r){if(!r.ok)throw new Error(r.status);return r.text();})"
+              ".then(function(t){el.outerHTML=t;})"
+              ".catch(function(){el.textContent='Rysunek nie wczytał się. Odśwież stronę.';});});})();</script>")
+    i = html.find("</main>")
+    html = html[:i] + loader + html[i:] if i >= 0 else html + loader
+    return html, n[0]
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--budynek", default=str(ROOT / "model" / "budynek.yaml"))
@@ -173,6 +201,8 @@ def _dalej(a, D, tr, glb, dist, assets, cache, teraz, t0) -> int:
     szkic = przetworz(ROOT / "00_wejscie" / "szkic_koncepcyjny.jpg", assets / "szkic.png")
     print("[5] rysunki SVG i index.html…", flush=True)
     html, W = ST.zloz(D, tr, R, szkic, (assets / "model.glb").stat().st_size / 1e6, Path(a.budynek).parent, teraz)
+    html, n_svg = wydziel_svg(html, assets)
+    print(f"    rysunki SVG wydzielone do assets/svg: {n_svg}", flush=True)
     (dist / "index.html").write_text(html, encoding="utf-8")
     podglad(html, dist, cache / "podglad")
     dane = dict(wygenerowano=teraz.isoformat(timespec="seconds"), model=D["meta"], wartosci=W,

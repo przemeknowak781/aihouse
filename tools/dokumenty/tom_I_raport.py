@@ -32,7 +32,9 @@ def raport_md(r, w, kontrole: list, wekt: list, zrodla: dict, otwarte: dict) -> 
         do = e["start"] + e["strony"] - 1
         L.append(f"| {e['kod']} | {_k(e['tytul'])} | {e['start']}–{do} | {e['strony_opisu'] or e['strony']} "
                  f"| {e['arkusze']} |")
-    L += ["", "Strony 1–2 pliku: strona tytułowa tomu i łączny spis treści (bez numeru elementu).", "",
+    n_fr = (w.elementy[0]["start"] - 1) if w.elementy else 0
+    L += ["", f"Strony 1–{n_fr} pliku: strona tytułowa tomu i łączny spis treści ze spisem załączników "
+              f"(numeracja „TOM I · strona X z {n_fr}”).", "",
           "Źródła rysunków: PZT — `" + zrodla["PZT"] + "`; PAB — `" + zrodla["PAB"] + "`.", "",
           f"> PAB: {zrodla['PAB_info']}.", "",
           "## 2. Lista kontrolna TOM_I (rejestr wymagań, sekcja C.1)", "",

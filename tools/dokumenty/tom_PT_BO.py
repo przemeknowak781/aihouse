@@ -47,7 +47,7 @@ import yaml  # noqa: E402
 from lamela.dokumenty.formaty import odmiana  # noqa: E402
 
 from lamela.dokumenty import (Arkusz, Dokument, Tom, dane_obiektu, sprawdz_tom, LISTY_KONTROLNE,  # noqa: E402
-                              liczba, do_uzup, DANE_PRZYKLADOWE, zamknij_przegladarke)
+                              liczba, do_uzup, dok_zewn, DANE_PRZYKLADOWE, zamknij_przegladarke)
 
 KAT_BO = REPO / "projekt/04_PT_konstrukcja"
 KAT_OBL = KAT_BO / "obliczenia"
@@ -349,7 +349,7 @@ def stan_analiz(D: dict) -> dict:
         W.append(dict(obszar="Uwagi analizy", element=f"{len(lst)} ×", wynik="—", stan=NZ,
                       opis="; ".join(lst[:3]) + (f" (i {len(lst) - 3} podobnych)" if len(lst) > 3 else ""),
                       zrodlo="wyniki.json — uwagi"))
-    return dict(wiersze=W, obszary=ok_obszary, n_nz=sum(w["stan"] == NZ for w in W))
+    return dict(wiersze=W, obszary=ok_obszary, n_nz=sum(w["stan"] == NZ for w in W), zast=zast)
 
 
 # ============================================================================================ rozdziały
@@ -386,7 +386,7 @@ def rozdz_stan(o: Opis, D: dict, S: dict, ark_uwagi: list[str]):
              for u in ark_uwagi]
     if rows:
         o.tabela(rows, tytul=f"Pozycje {NZ} (do domknięcia przez zespół BO przed wydaniem PT)", klasa="zwarta",
-                 lp=True, wyrownanie={"Opis": "l", "Element": "l"}, szerokosci=["24mm", "30mm", "20mm", None, "30mm"])
+                 lp=True, wyrownanie={"Opis": "l", "Element": "l"}, szerokosci=["7mm", "24mm", "26mm", "20mm", None, "28mm"])
     zast = [dict(zip(("Element", "Wynik modelu uproszczonego", "Opis"), (w["element"], w["wynik"], w["opis"])))
             for w in S["wiersze"] if w["stan"] == "ZASTĄPIONE"]
     if zast:
@@ -582,7 +582,7 @@ def grupy_pozycji(D: dict) -> OrderedDict:
     return out
 
 
-def _wykres_eta(poz: list, grupy: OrderedDict):
+def _wykres_eta(poz: list, grupy: OrderedDict, zast: set):
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
@@ -591,7 +591,7 @@ def _wykres_eta(poz: list, grupy: OrderedDict):
     eta = [100 * p["wykorzystanie"] for p in poz]
     cap = 200.0
     ax.bar(x, [min(e, cap) for e in eta], width=0.8,
-           color=["#2a78d6" if p["ok"] else "#d03b3b" for p in poz], linewidth=0)
+           color=["#2a78d6" if p["ok"] else "#9a9994" if p["nr"] in zast else "#d03b3b" for p in poz], linewidth=0)
     ax.axhline(100, color="#0b0b0b", lw=0.8, ls="--")
     for i, e in enumerate(eta):
         if e > cap:
@@ -612,7 +612,7 @@ def _wykres_eta(poz: list, grupy: OrderedDict):
     return fig
 
 
-def rozdz_wyniki(o: Opis, D: dict):
+def rozdz_wyniki(o: Opis, D: dict, S: dict):
     """3.5 Podstawowe wyniki obliczeń; 3.6 pomiary przemieszczeń; 3.7 zakres analiz wymagający osobnych obliczeń."""
     poz = (D["wyniki"] or {}).get("pozycje", [])
     grupy = grupy_pozycji(D)
@@ -626,15 +626,16 @@ def rozdz_wyniki(o: Opis, D: dict):
         zle = [p for p in pg if not p["ok"]]
         rows.append({"Grupa": f"{g}. {tyt}", "Pozycje": len(pg), "η_max": pct(mx["wykorzystanie"]),
                      "Element miarodajny": f"{mx['nr']} {mx['id']}",
-                     "Niespełnione": ", ".join(p["id"] for p in zle) if zle else "—"})
+                     "Niespełnione": ", ".join(p["id"] + ("*" if p["nr"] in S["zast"] else "") for p in zle) if zle else "—"})
     o.tabela(rows, tytul="Wyniki obliczeń statycznych — zestawienie grup pozycji", klasa="zwarta",
              wyrownanie={"Grupa": "l", "Niespełnione": "l"}, szerokosci=["46mm", "16mm", "16mm", "28mm", None],
              uwagi=["η — maksymalne wykorzystanie nośności / warunku stanu granicznego pozycji (STR, GEO, SLS). "
-                    "Szczegóły, warunki i przyjęte zbrojenie — rozdz. 4; pozycje ZASTĄPIONE — rozdz. 1."],
+                    "Szczegóły, warunki i przyjęte zbrojenie — rozdz. 4. * — pozycja ZASTĄPIONA analizą dokładniejszą "
+                    "(model ławy izolowanej → MES płyty fundamentowej, rozdz. 1 i 5)."],
              zrodlo="wyniki.json (lamela.obliczenia.konstrukcja)")
     if poz:
-        o.wykres(_wykres_eta(poz, grupy), "Maksymalne wykorzystanie nośności η pozycji obliczeń (czerwone — warunki "
-                 "niespełnione; wartości > 200 % opisane liczbą)")
+        o.wykres(_wykres_eta(poz, grupy, S["zast"]), "Maksymalne wykorzystanie nośności η pozycji obliczeń (czerwone — "
+                 "warunki niespełnione, szare — pozycje ZASTĄPIONE; wartości > 200 % opisane liczbą)")
     o.rozdzial("Pomiary przemieszczeń i odkształceń", poziom=2, podstawa="§ 23 pkt 1 RPB; W-274")
     wsp = [p for p in poz if p["nr"].startswith("3.")]
     o.tekst(f"""
@@ -702,6 +703,7 @@ def rozdz_geotechnika(o: Opis, D: dict):
     geo, fund = b.get("geotechnika", {}), b.get("fundamenty", {})
     gr = geo.get("grunt", {})
     tr = D["dz"].get("teren", {})
+    gr_opis = str(tr.get("grunt", "—")).rstrip(". ")
     H = [pt[2] for pt in tr.get("punkty", [])]
     zero = b.get("uklad", {}).get("zero_abs")
     spody = [e["spod"] for e in fund.get("elementy", []) if "spod" in e]
@@ -720,11 +722,11 @@ def rozdz_geotechnika(o: Opis, D: dict):
     """)
     o.rozdzial("Dokumentacja badań podłoża gruntowego", poziom=2, podstawa="Dz.U. 2012 poz. 463 § 9")
     o.tekst(f"""
-    Rozpoznanie przyjęte do projektu {FIKCJA}: {tr.get('grunt', '—')}. Teren istniejący w obrysie działki:
+    Rozpoznanie przyjęte do projektu {FIKCJA}: {gr_opis}. Teren istniejący w obrysie działki:
     rzędne {L(min(H)) if H else '—'}…{L(max(H)) if H else '—'} m n.p.m.; poziom ±0,000 = {L(zero, 2)} m n.p.m.;
     zwierciadło wody gruntowej ≈ {L(abs(geo.get('ZWG', 0)), 1)} m p.p.t. (rzędna {L(tr.get('ZWG'), 2)} m n.p.m.).
     Dokumentacja badań (opis metodyki badań polowych i laboratoryjnych, wyniki, interpretacja, model geologiczny,
-    wartości wyprowadzone dla każdej warstwy) — {do_uzup('dokumentacja badań podłoża gruntowego (geotechnik z uprawnieniami, E-04)')}.
+    wartości wyprowadzone dla każdej warstwy) — {dok_zewn('dokumentacja badań podłoża gruntowego, geotechnik z uprawnieniami (E-04)')}.
     """)
     o.rozdzial("Projekt geotechniczny", poziom=2, podstawa="Dz.U. 2012 poz. 463 § 10 pkt 1–10")
     m0_mes = re.search(r"E_s = M₀[^=]*= ([\d ]+)·\(1\+([\d,]+)\)", mes)
@@ -769,7 +771,7 @@ def rozdz_geotechnika(o: Opis, D: dict):
     q' = {wartosc_md(mes, 'Naprężenie od nadkładu') or '—'} kPa; wypór wody nie występuje (ZWG poniżej posadowienia).
 
     ### Model obliczeniowy podłoża {{podstawa: § 10 pkt 5}}
-    Projektowy przekrój geotechniczny: {tr.get('grunt', '—')}. Model Winklera płyty fundamentowej:
+    Projektowy przekrój geotechniczny: {gr_opis}. Model Winklera płyty fundamentowej:
     k_s = {wartosc_md(mes, 'Współczynnik podatności') or '—'} kN/m³, obwiednia wariantów k_s,min; k_s,max =
     {wartosc_md(mes, 'Obwiednia wariantów') or '—'} kN/m³ (rozdz. 5).
     """)
@@ -794,16 +796,16 @@ def rozdz_geotechnika(o: Opis, D: dict):
 
     ### Specyfikacja badań kontrolnych robót ziemnych {{podstawa: § 10 pkt 8}}
     Odbiór dna wykopu przez geotechnika (zgodność gruntu z dokumentacją badań); kontrola zagęszczenia podsypki pod
-    płytą (wskaźnik zagęszczenia lub moduł odkształcenia — wartości wymagane {do_uzup('wg dokumentacji badań podłoża')});
+    płytą (wskaźnik zagęszczenia lub moduł odkształcenia — wartości wymagane wg dokumentacji badań podłoża, rozdz. 7.1);
     kontrola grubości i ciągłości izolacji XPS pod płytą.
 
     ### Wody gruntowe {{podstawa: § 10 pkt 9}}
     ZWG ≈ {L(abs(geo.get('ZWG', 0)), 1)} m p.p.t. — poniżej poziomu posadowienia; odwodnienie wykopu i drenaż
-    opaskowy zbędne (W-285); agresywność wód gruntowych względem betonu {do_uzup('wg dokumentacji badań podłoża')}.
+    opaskowy zbędne (W-285); agresywność wód gruntowych względem betonu — wg dokumentacji badań podłoża (rozdz. 7.1).
 
     ### Monitorowanie {{podstawa: § 10 pkt 10}}
     Pomiar osiadań płyty (rozdz. 3). Najbliższa zabudowa sąsiednia (dz. {nr_s or '—'}) w odległości
-    ≈ {L(d_s, 1)} m od płyty fundamentowej {FIKCJA}; przy wykopie płytkim (≤ {L(abs(min(spody)), 2)} m p.p.t.)
+    ≈ {L(d_s, 1)} m od płyty fundamentowej {FIKCJA}; przy wykopie płytkim (spód fundamentów ≤ {L(abs(min(spody)), 2)} m poniżej ±0,000)
     monitoring obiektów sąsiednich nie jest wymagany [ZAŁ].
     """)
     o.rozdzial("Wpływy eksploatacji górniczej", poziom=2, podstawa="§ 23 pkt 2 RPB")
@@ -886,7 +888,7 @@ def buduj_pt_bo(d: dict, D: dict, S: dict, ark: list, ark_braki: list, ark_info:
     rozdz_stan(o, D, S, ark_braki)
     rozdz_podstawa(o, D)
     rozdz_konstrukcja(o, D)
-    rozdz_wyniki(o, D)
+    rozdz_wyniki(o, D, S)
     rozdz_obliczenia(o, D)
     rozdz_geotechnika(o, D)
     rozdz_ppoz(o, D)
