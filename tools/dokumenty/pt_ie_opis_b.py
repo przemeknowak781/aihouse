@@ -106,3 +106,59 @@ def rozdz_tele(o: Opis, D: DanePTIE):
     SPD; linie miedziane wchodzące do budynku (antena, wideodomofon) — SPD na wejściu. Rozmieszczenie — arkusze
     {D.arkusze_nr('teletechnika')}.
     """)
+
+
+def _wykl(x: float) -> str:
+    """1,72·10⁻⁶ — zapis wykładniczy."""
+    if not x:
+        return "0"
+    e = math.floor(math.log10(abs(x)))
+    sup = str(e).translate(str.maketrans("-0123456789", "⁻⁰¹²³⁴⁵⁶⁷⁸⁹"))
+    return f"{L(x / 10 ** e, 2)}·10{sup}"
+
+
+def rozdz_odgromowa(o: Opis, D: DanePTIE):
+    """8. Ochrona odgromowa, uziom, połączenia wyrównawcze (§ 23 pkt 7 lit. i)."""
+    g, u, lps = D.odg, D.odg.uziom, D.odg.lps
+    RT = _e(D, "odgromowa_RT", 1e-5)
+    o.rozdzial("Instalacja piorunochronna, uziom i połączenia wyrównawcze",
+               podstawa="§ 23 pkt 7 lit. i RPB; WT § 53 ust. 2, § 184; W-187, W-188, W-191", nowa_strona=True)
+    o.rozdzial("Ocena ryzyka piorunowego", poziom=2, podstawa="PN-EN 62305-2; W-191")
+    o.tekst(f"""
+    Potrzebę instalacji piorunochronnej (WT § 53 ust. 2, § 184 ust. 3) oceniono metodą analizy ryzyka utraty życia
+    R1 wg PN-EN 62305-2 (wydanie powołane w WT; kontrolnie PN-EN IEC 62305-2:2025-09): wysokość budynku
+    H = {L(g.H, 2)} m, powierzchnia zbierania wyładowań A_D = {L(g.A_D, 0)} m², gęstość wyładowań
+    N_G = {L(_e(D, 'Ng'), 1)} 1/(km²·rok) [NZW], liczba wyładowań w obiekt N_D = {L(g.N_D, 4)} 1/rok, w linię zasilającą
+    N_L = {L(g.N_L, 4)} 1/rok; ryzyko tolerowane R_T = {_wykl(RT)} 1/rok. Klasę ryzyka pożaru przyjęto z gęstości
+    obciążenia ogniowego (progi {' / '.join(L(p, 0) for p in _e(D, 'obciazenie_ogniowe_progi', [400, 800]))} MJ/m²)
+    — rozstrzygające są oba warianty klasy.
+    """)
+    o.tabela([{"Scenariusz": s["nazwa"], "Klasa pożarowa": s["klasa"], "R1 [1/rok]": _wykl(s["R1"]),
+               "R1 ≤ R_T": "tak" if s["ok"] else "NIE"} for s in g.scenariusze],
+             tytul="Ryzyko R1 w scenariuszach ochrony", zrodlo="lamela.obliczenia.elektryka.odgromowa")
+    o.wniosek(f"Decyzja: {g.decyzja}. Uziom wykonuje się z wyprowadzeniami pod przewody odprowadzające (rezerwa "
+              f"na LPS klasy {lps['klasa']}); w RG ochronniki przepięć typu 1+2 (warunek scenariusza).")
+    o.rozdzial("Uziom", poziom=2, podstawa="WT § 184 ust. 1; PN-HD 60364-5-54 zał. C; W-187")
+    o.tekst(f"""
+    Typ: **{u['typ']}**. Materiał: {u['material']}. Średnica zastępcza obrysu D = {L(u['D'], 2)} m, rezystancja
+    orientacyjna R ≈ {L(u['R'], 1)} Ω (rezystywność gruntu [ZAŁ]) — wartość do potwierdzenia pomiarem po wykonaniu.
+    Wyprowadzenia: {'; '.join(u.get('wyprowadzenia') or [])}. Przy uziomie w betonie: otulina ≥
+    {L(100 * _e(D, 'uziom_otulina_min', 0.05), 0)} cm, płaskownik na sztorc mocowany do zbrojenia co ≤
+    {L(_e(D, 'uziom_mocowanie_do_zbrojenia_co_max', 2.0), 1)} m (W-187; koordynacja z PT-2 BO).
+    Plan uziomu — arkusz {D.arkusze_nr('uziom')}.
+    """)
+    o.rozdzial("Połączenia wyrównawcze", poziom=2, podstawa="WT § 183 ust. 1 pkt 7, ust. 1a; PN-HD 60364-5-54; W-188")
+    o.tabela([{"Element": w[0], "Miejsce": w[1] or "—", "Przekrój / uwagi": w[2]} for w in g.wyrownawcze],
+             tytul="Połączenia wyrównawcze główne i miejscowe",
+             uwagi=f"Przewód uziemiający ≥ {L(_e(D, 'przewod_uziemiajacy_min'), 0)} mm² Cu; przewody wyrównawcze główne "
+                   f"≥ {L(_e(D, 'wyrownawczy_glowny_min'), 0)} mm² Cu i nie więcej niż "
+                   f"{L(_e(D, 'wyrownawczy_glowny_nie_wiecej_niz'), 0)} mm² Cu (W-188).",
+             zrodlo="lamela.obliczenia.elektryka.odgromowa")
+    o.rozdzial("Parametry LPS (rezerwa)", poziom=2, podstawa="PN-EN 62305-3")
+    o.tekst(f"""
+    Gdyby Inwestor zdecydował o wykonaniu LPS (np. po zmianie wyposażenia lub klasy pożarowej): klasa
+    {lps['klasa']}, oczka zwodów {lps['oczko']}, promień kuli toczącej {lps['kula']}, przewody odprowadzające:
+    {', '.join(f"klasa {k} — {v}" for k, v in lps['n_odpr'].items())}; odstęp separacyjny instalacji na dachu (PV)
+    od zwodów s ≈ {L(lps['s'], 2)} m [NZW]. {lps['opis']} Arkusz {D.arkusze_nr('odgromow')} pokazuje wyprowadzenia
+    uziomu i połączenia wyrównawcze na dachu.
+    """)
