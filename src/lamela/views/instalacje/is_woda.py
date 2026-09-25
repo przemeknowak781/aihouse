@@ -200,6 +200,8 @@ class RysW(Rysunek):
                 q = a + (b - a) * (dist - acc) / L
                 ang = math.degrees(math.atan2(b[1] - a[1], b[0] - a[0]))
                 self.sym(S.valve, q, ang, s_mm=2.4, kind="kulowy")
+                self.leg.sym(lambda c, p: S.valve(c, p, 0.0, s_mm=3.0, kind="kulowy"),
+                             "zawór odcinający kulowy (na odejściach z rozdzielaczy i odgałęzieniach do pomieszczeń)")
                 return q
             acc += L
         return None
@@ -285,7 +287,8 @@ class RysW(Rysunek):
                 comp = f"ZW:R{'Z'}_{o.do.split('_', 1)[1]}" if med == "CWU" else None
                 p0 = self._route_pipe(a, fx[0][1], med, key, companion=comp)
                 self._valve(p0, 0.25)
-                self.label(p0, f"{SKROT[med]} {rura_krotko(o.rura)}", "S-OPISY")
+                if rura_krotko(o.rura) != "16×2,0":
+                    self.label(p0, f"{SKROT[med]} {rura_krotko(o.rura)}", "S-OPISY")
                 for s, q in fx[1:]:
                     self._route_pipe(q, None, med, key, companion=comp, targets=self.g.occ[key])
                 for s, q in fx:

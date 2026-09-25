@@ -63,8 +63,11 @@ def _klucz(p: dict) -> str:
         if v and Path(v).exists():
             h.update(Path(v).read_bytes())
     root = Path(__file__).resolve().parents[2] / "obliczenia"
-    for f in sorted(root.rglob("*.py")):
-        h.update(str(f.stat().st_mtime_ns).encode())
+    files = [root / "inst_wspolne.py", root / "wspolne.py"] + sorted((root / "sanitarne").glob("*.py")) + \
+        sorted((root / "elektryka").glob("*.py"))
+    for f in files:
+        if f.exists():
+            h.update(f.read_bytes())
     h.update(Path(__file__).read_bytes())
     return h.hexdigest()[:16]
 

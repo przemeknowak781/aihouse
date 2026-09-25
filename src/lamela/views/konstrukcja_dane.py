@@ -156,7 +156,7 @@ class Pret:
 
     def etykieta(self, s_mm: float | None = None) -> str:
         """Oznaczenie pręta na rysunku (PN-EN ISO 3766 p. 5): liczba, nr pozycji, φ, rozstaw, długość."""
-        t = f"{self.n} ⌀{self.fi}"
+        t = f"{self.n} Ø{self.fi}"
         if s_mm:
             t += f" co {s_mm / 10:g}"
         return t + f" l={self.L_mm / 10:g}"
@@ -330,7 +330,7 @@ class Warstwa:
 
     @property
     def opis(self) -> str:
-        return f"⌀{self.fi} co {self.s / 10:g}"
+        return f"Ø{self.fi} co {self.s / 10:g}"
 
 
 @dataclass
