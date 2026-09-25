@@ -210,7 +210,12 @@ class Sheet(SheetBase):
         # oznaczenie formatu w dolnym marginesie przy prawym rogu (PN-EN ISO 5457 / R4-B07)
         lab = (f"nst. {self.fmt_name}" if getattr(self, "custom", False)      # format niestandardowy (krótko:
                else f"{self.fmt_name} ({int(round(W))}×{int(round(H))})")     # nie wchodzi na numery siatki)
-        self.text((x1, y0 / 2.0), lab, 1.8, 0.0, "right", "middle", layer="R-RAMKA")
+        # numery pól siatki w dolnym marginesie stoją na wysokości y0 − 5 (pismo 3,5 mm) — napis formatu pod nimi,
+        # przy krawędzi arkusza, aby nie nachodził na numer ostatniego pola (weryfikacja PT: „18” na „A3×3”)
+        y_lab = y0 / 2.0
+        if getattr(self, "_siatka_dol", False):
+            y_lab = max(0.9 + 0.1, (y0 - 5.0 - 3.5 / 2.0 - 0.4) / 2.0)
+        self.text((x1, y_lab), lab, 1.8, 0.0, "right", "middle", layer="R-RAMKA")
 
     def _grid_reference(self):
         """Siatka odniesień (PN-EN ISO 5457 4.4): pola 50 mm liczone od osi symetrii arkusza, różnice w polach
@@ -235,6 +240,7 @@ class Sheet(SheetBase):
 
         xs = splits(x0, x1, W / 2.0)
         ys = splits(y0, y1, H / 2.0)
+        self._siatka_dol = not a4                   # numery kolumn także w dolnym marginesie (napis formatu niżej)
         with self.on("R-RAMKA"):
             for x in xs:
                 if not a4:

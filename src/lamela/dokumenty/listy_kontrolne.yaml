@@ -150,7 +150,7 @@ PT_IS:
     - {id: C2-IS-06, el: PT, opis: "Rzuty i schematy instalacji", podstawa: "RPB § 24 pkt 4 lit. a", szukaj: {rysunki: ['rzut|schemat']}}
     # pozycja „negatywna” (weryfikacja PT): generator tomu porównuje arkusze z bieżącymi obliczeniami (model PC, wyniki
     # retencji, uwagi „SPRAWDZENIE NIESPEŁNIONE”, czas generowania) i przy niezgodności wpisuje znacznik ARKUSZE NIEAKTUALNE
-    - {id: C2-IS-07, el: PT, opis: "Część rysunkowa zgodna z opisem i obliczeniami tomu (brak arkuszy nieaktualnych)", podstawa: "PB art. 34 ust. 3 pkt 4, art. 41 ust. 4a pkt 2; RPB § 24", brak_gdy: ['(?-i:ARKUSZE NIEAKTUALNE)'], brak_opis: "arkusze nieaktualne wobec obliczeń tomu"}
+    - {id: C2-IS-07, el: PT, opis: "Część rysunkowa zgodna z opisem i obliczeniami tomu (brak arkuszy nieaktualnych)", podstawa: "PB art. 34 ust. 3 pkt 3, art. 41 ust. 4a pkt 2; RPB § 24", brak_gdy: ['(?-i:ARKUSZE NIEAKTUALNE)'], brak_opis: "arkusze nieaktualne wobec obliczeń tomu"}
 
 PT_IE:
   opis: "PT-4 IE — projekt techniczny, instalacje elektryczne (rejestr C.2)"

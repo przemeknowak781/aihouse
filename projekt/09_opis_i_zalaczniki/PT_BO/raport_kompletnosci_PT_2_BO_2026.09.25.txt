@@ -26,7 +26,7 @@ Plik: 370 stron, 11.32 MB
 ✓ C2-BO-03 [ PT] OK               Rzuty fundamentów i stropów, wsporniki (RPB § 24 pkt 1 lit. a) — PT-BO-01 — RZUT FUNDAMENTÓW (1:50); PT-BO-02 — PRZEKROJE CHARAKTERYSTYCZNE FUNDAMENTU (1:20); PT-BO-03 — ZBROJENIE DOLNE PŁYTY FUNDAMENTOWEJ (1:50); PT-BO-04 — 
 ✓ C2-BO-04 [ PT] OK               Rysunki zbrojenia (ISO 3766) z uziomem fundamentowym (RPB § 24 pkt 1; W-187) — PT-BO-03 — ZBROJENIE DOLNE PŁYTY FUNDAMENTOWEJ (1:50); PT-BO-04 — ZBROJENIE GÓRNE PŁYTY FUNDAMENTOWEJ (1:50); PT-BO-09 — ZBROJENIE DOLNE STROPU NAD PARTEREM (1:
 – C2-BO-05 [ PT] N/D              Dokumentacja geologiczno-inżynierska (RPB § 23 pkt 3) — nie dotyczy — warunki proste (P03)
-✗ C2-BO-06 [ PT] BRAK             Analizy konstrukcji zamknięte: brak warunków NIESPEŁNIONYCH, uwag [WYMAGA ANALIZY] i pozycji NIEZAMKNIĘTYCH (PB art. 34 ust. 3 pkt 3 lit. a, art. 41 ust. 4a pkt 2; RPB § 23 pkt 1) — tom zawiera znaczniki niedomkniętych analiz: „NIESPEŁNION” ×76, „WYMAGA ANALIZY” ×27, „NIEZAMKNIĘT” ×14
+✗ C2-BO-06 [ PT] BRAK             Analizy konstrukcji zamknięte: brak warunków NIESPEŁNIONYCH, uwag [WYMAGA ANALIZY] i pozycji NIEZAMKNIĘTYCH (PB art. 34 ust. 3 pkt 3 lit. a, art. 41 ust. 4a pkt 2; RPB § 23 pkt 1) — tom zawiera znaczniki niedomkniętych analiz: „NIESPEŁNION” ×76, „WYMAGA ANALIZY” ×27, „NIEZAMKNIĘT” ×15
 
 Pola do uzupełnienia i dokumenty zewnętrzne (wystąpienia):
    81 × [DO UZUPEŁNIENIA: imię i nazwisko]

@@ -181,7 +181,7 @@
       "podstawa": "PB art. 34 ust. 3 pkt 3 lit. a, art. 41 ust. 4a pkt 2; RPB § 23 pkt 1",
       "status": "BRAK",
       "obowiazkowa": true,
-      "szczegoly": "tom zawiera znaczniki niedomkniętych analiz: „NIESPEŁNION” ×76, „WYMAGA ANALIZY” ×27, „NIEZAMKNIĘT” ×14"
+      "szczegoly": "tom zawiera znaczniki niedomkniętych analiz: „NIESPEŁNION” ×76, „WYMAGA ANALIZY” ×27, „NIEZAMKNIĘT” ×15"
     }
   ],
   "znaczniki": {
@@ -224,7 +224,7 @@
       "arkusze": 26
     }
   },
-  "rozmiar_mb": 11.316986,
+  "rozmiar_mb": 11.317224,
   "strony": 370,
   "podsumowanie": {
     "status": "NIEKOMPLETNY",
