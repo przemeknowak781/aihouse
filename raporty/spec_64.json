@@ -1,4 +1,5 @@
 {
+ "nr": 64,
  "title": "Tom rysunków PT-BO przegenerowany: spis na 2 stronach, właściwy tytuł · konstrukcja, runda 1 ► · arkusze: poprawki ►",
  "stages": [
   [
@@ -52,6 +53,17 @@
  ],
  "notes": [
   "Tom PT-BO: 27 arkuszy + spis 2 str. (29 stron), zbrojenie 315/315.",
-  "Wynik rundy 1 czeka na niezależną weryfikację pętli."
+  "Wynik rundy 1 czeka na niezależną weryfikację pętli.",
+  "NADZÓR (13:00): 2 agentów aktywnych, bez zastojów; najdłuższa bezczynność 1 min; zmiany w repo 1 min temu."
+ ],
+ "images": [
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/tom_bo_spis_nowy.png",
+   "caption": "Tom PT-BO: spis rysunków 1/2 (rzeczywisty, po poprawce)"
+  },
+  {
+   "path": "/home/user/aihouse/projekt/04_PT_konstrukcja/rysunki/PT-BO-27_zbrojenie_slupow_zelbetowych_w_murze.png",
+   "caption": "PT-BO-27 zbrojenie słupów ŻB (przegenerowane)"
+  }
  ]
 }
