@@ -265,10 +265,16 @@ def oblicz_obwody(dane: DaneBudynku, odbiorniki: list[Odbiornik], par: Parametry
     # ---- selektywność
     sel = []
     I_s = T.MNOZNIK_IA[par.zab_przedlicznikowe] * I_zab * 0.5   # dolna granica wyzwalacza C = 5·I_n
+    grupy_zab: dict = {}
+    for x in obw:
+        grupy_zab.setdefault(x.zab, []).append(x.odb.id)
+    for zab, ids in grupy_zab.items():
+        xx = next(x for x in obw if x.zab == zab)
+        prz = I_zab / xx.I_n >= 1.6
+        sel.append([zab, ", ".join(ids), f"{par.zab_przedlicznikowe}{int(I_zab)}", f"tak ({f(I_zab / xx.I_n, 1)})" if prz else "NIE",
+                    f"do {f(I_s, 0)} A (I_k,max w RG ≈ {f(Ik3_rg, 0)} A)", "częściowa" if Ik3_rg > I_s else "pełna"])
     for x in obw:
         prz = I_zab / x.I_n >= 1.6
-        sel.append([x.odb.id, x.zab, f"{par.zab_przedlicznikowe}{int(I_zab)}", "tak" if prz else "NIE",
-                    f"do {f(I_s, 0)} A (I_k,max ≈ {f(Ik3_rg, 0)} A)", "częściowa" if Ik3_rg > I_s else "pełna"])
         if not prz:
             war.append(Warunek(f"{x.odb.id}: selektywność przeciążeniowa (I_n,ZKP/I_n ≥ 1,6)", I_zab / x.I_n, ">=", 1.6, "", "WT §183 ust. 1 pkt 5",
                                "W-180"))
@@ -362,7 +368,7 @@ def _raport(w: WynikObwody) -> Raport:
              "Połączenia wyrównawcze miejscowe w łazienkach — wg PN-HD 60364-7-701:2025-02 (przy instalacjach z tworzyw zwykle nie są "
              "wymagane dla wanny/brodzika); strefy 0/1/2 na rzutach (W-189)."])
     R.h(2, "5. Selektywność (WT §183 ust. 1 pkt 5)")
-    R.tab(["Obw.", "Zabezp.", "Zabezp. przedlicznikowe", "Przeciążeniowa (I_n ratio ≥ 1,6)", "Zwarciowa", "Ocena"], w.selektywnosc, "llllll")
+    R.tab(["Zabezp.", "Obwody", "Zabezp. przedlicznikowe", "Przeciążeniowa (I_n,ZKP/I_n ≥ 1,6)", "Zwarciowa", "Ocena"], w.selektywnosc, "llllll")
     R.p("Selektywność zwarciowa wyłączników B/C za wyłącznikiem C40 w ZKP jest częściowa — do granicy I_s z tabel producenta "
         "(zachowawczo I_s = 5·I_n,C40 = 200 A; dla wyłączników klasy ograniczania 3 typowo 0,3–0,6 kA). Rozwiązania: aparat główny "
         "RG jako rozłącznik (nie wyzwala), RCBO w obwodach odbiorczych; w warunkach przyłączenia zapytać OSD o bezpieczniki gG "

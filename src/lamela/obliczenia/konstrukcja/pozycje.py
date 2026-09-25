@@ -936,10 +936,12 @@ class AnalizaKonstrukcji:
             if best is not None:
                 poz.wyniki.extend(best["wyniki_pelne"])
                 poz.dane["pole_miarodajne"] = best["dane"]["pole"]
-            poz.tabele.append("**Zestawienie wymiarowania pól płyty** (M — obwiednia ULS, Wood–Armer; „tabl.” — metoda "
-                              "tablic, jeżeli stosowalna)\n\n" + tabela(
+            poz.tabele.append("**Zestawienie wymiarowania pól płyty** (M [kNm/m] — obwiednia ULS, Wood–Armer, poza strefami "
+                              "narożnymi; „tabl.” — metoda tablic, jeżeli stosowalna; góra — nad podporami; naroża — strefy "
+                              "0,2·l_min × 0,2·l_min przy narożach podpartych, zbrojenie górą i dołem na moment skręcający)\n\n" + tabela(
                 ["Pole", "l_x × l_y [m]", "Brzegi", "M_x,dół [kNm/m] MES / tabl.", "Zbroj. x dół", "M_y,dół MES / tabl.",
-                 "Zbroj. y dół", "M_x,góra", "Zbroj. x góra", "M_y,góra", "Zbroj. y góra", "w / w_lim [mm]", "η_max"], rows))
+                 "Zbroj. y dół", "M_x,góra", "Zbroj. x góra", "M_y,góra", "Zbroj. y góra", "Naroża M / zbroj.",
+                 "w / w_lim [mm]", "η_max"], rows))
             # EQU wsporników
             if e.typ == "wspornik":
                 self._equ_wspornika(g, e, poz)
@@ -969,40 +971,35 @@ class AnalizaKonstrukcji:
         fi0 = 10
         dx = h - c_nom / 1000 - fi0 / 2000
         dy = dx - fi0 / 1000
-        Mx = float(env["dol_x"][msk].max())
-        My = float(env["dol_y"][msk].max())
-        Mgx = float(env["gora_x"][msk].min())
-        Mgy = float(env["gora_y"][msk].min())
+        # strefy narożne (0,2·l_min przy narożach pola między dwiema krawędziami podpartymi) — moment skręcający
+        a_n = 0.2 * min(c["lx"], c["ly"])
+        br0 = c.get("brzegi", "WWWW")
+        naroza = []
+        for (xx, bx_), (yy, by_) in (((c["x0"], br0[0]), (c["y0"], br0[2])), ((c["x1"], br0[1]), (c["y0"], br0[2])),
+                                     ((c["x1"], br0[1]), (c["y1"], br0[3])), ((c["x0"], br0[0]), (c["y1"], br0[3]))):
+            if bx_ in "SU" and by_ in "SU":
+                naroza.append(box(xx - a_n, yy - a_n, xx + a_n, yy + a_n))
+        nz = np.zeros(len(fe.els), bool)
+        if naroza:
+            U = unary_union(naroza)
+            nz = np.array([U.contains(Point(*cc)) for cc in fe.el_c])
+        mg = msk & ~nz if (msk & ~nz).any() else msk
+        Mx = float(env["dol_x"][mg].max())
+        My = float(env["dol_y"][mg].max())
+        Mgx = float(env["gora_x"][mg].min())
+        Mgy = float(env["gora_y"][mg].min())
+        mn = msk & nz
+        M_nar = float(max(np.maximum(env["dol_x"][mn], env["dol_y"][mn]).max(),
+                          (-np.minimum(env["gora_x"][mn], env["gora_y"][mn])).max())) if mn.any() else 0.0
         Mx_t = My_t = None
         tab_wyn = None
         if c["tablice"]:
             gk = float(np.mean(g.q_el["G"][msk]))
+            # ścianki działowe (obciążenia liniowe G) jako obciążenie zastępcze równomierne pola — tylko do porównania
+            gl = sum(ln.intersection(c["rect"]).length * q for ln, cs_, q, _ in g.linie if ln is not None and cs_ == "G")
+            g_dz = gl / c["rect"].intersection(g.poly).area if gl else 0.0
+            gk += g_dz
             qk = float(np.mean(g.q_el["QA"][msk])) + float(np.mean(np.maximum(g.q_el["H"][msk], g.q_el["S2"][msk])))
-            psi0 = 0.7
-            a = (p.gG_sup * gk, p.gQ * psi0 * qk)
-            b = (p.xi * p.gG_sup * gk, p.gQ * qk)
-            gd, qd = a if sum(a) >= sum(b) else b
-            pc = PoleCiagle(c["lx"], c["ly"], c["brzegi"], gd, qd, p.nu_beton)
-            Mx_t, My_t = pc.mx, pc.my
-            tab_wyn = Wynik(nazwa=f"Sprawdzenie metodą tablic — pole {c['id']} ({f(c['lx'])} × {f(c['ly'])} m, brzegi {c['brzegi']})")
-            tab_wyn.krok("Obciążenia obliczeniowe", "g_d; q_d", f"g_k = {f(gk, 3)}, q_k = {f(qk, 3)} kN/m²", f"{f(gd, 3)}; {f(qd, 3)}", "kN/m²")
-            ar, ss = pc.wsp_rzecz, pc.wsp_ssss
-            tab_wyn.krok(f"Współczynniki (brzegi {c['brzegi']}; x=0, x=l_x, y=0, y=l_y; S — podparta, U — utwierdzona)",
-                         "α_x; α_y; β_x; β_y", "", f"{f(ar.alfa_x, 4)}; {f(ar.alfa_y, 4)}; {f(min(ar.beta_x), 4)}; {f(min(ar.beta_y), 4)}",
-                         zrodlo="MRS (odpowiednik tablic Czernego), ν = " + f(p.nu_beton, 1))
-            tab_wyn.krok("Współczynniki płyty swobodnie podpartej (SSSS)", "α_x⁰; α_y⁰", "", f"{f(ss.alfa_x, 4)}; {f(ss.alfa_y, 4)}")
-            tab_wyn.krok("Moment przęsłowy x", "M_x = [α_x·(g_d + q_d/2) + α_x⁰·q_d/2]·l_x²",
-                         f"[{f(ar.alfa_x, 4)}·{f(gd + qd / 2, 3)} + {f(ss.alfa_x, 4)}·{f(qd / 2, 3)}]·{f(c['lx'])}²", Mx_t, "kNm/m")
-            tab_wyn.krok("Moment przęsłowy y", "M_y = [α_y·(g_d + q_d/2) + α_y⁰·q_d/2]·l_x²",
-                         f"[{f(ar.alfa_y, 4)}·{f(gd + qd / 2, 3)} + {f(ss.alfa_y, 4)}·{f(qd / 2, 3)}]·{f(c['lx'])}²", My_t, "kNm/m")
-            mxp = min(pc.mx_podp)
-            myp = min(pc.my_podp)
-            if mxp < 0 or myp < 0:
-                tab_wyn.krok("Momenty podporowe (utwierdzenie, g_d + q_d)", "M_x,p; M_y,p", "", f"{f(mxp, 2)}; {f(myp, 2)}", "kNm/m")
-            tab_wyn.krok("Porównanie z MES (M_x; M_y dół)", "M_MES/M_tabl", "",
-                         f"{f(Mx / Mx_t if Mx_t else 0, 2)}; {f(My / My_t if My_t else 0, 2)}")
-            Mgx = min(Mgx, mxp)
-            Mgy = min(Mgy, myp)
         MxD = max(Mx, Mx_t or 0)
         MyD = max(My, My_t or 0)
         smax = zelbet.smax_plyta(h, True, True)
@@ -1013,6 +1010,10 @@ class AnalizaKonstrukcji:
         Mgy_d = min(Mgy, -0.25 * MyD if "S" in c["brzegi"][2:] else 0.0)
         zgx, fgx, sgx, Agx = zelbet.wymiaruj_plyte(abs(Mgx_d), h, dx, beton, self.stal, smax, nazwa=f"Pole {c['id']} — zginanie góra, x")
         zgy, fgy, sgy, Agy = zelbet.wymiaruj_plyte(abs(Mgy_d), h, dy, beton, self.stal, smax, nazwa=f"Pole {c['id']} — zginanie góra, y")
+        zn = None
+        if M_nar > 0:
+            zn, fn, sn_, An = zelbet.wymiaruj_plyte(M_nar, h, dy, beton, self.stal, smax,
+                                                    nazwa=f"Pole {c['id']} — zbrojenie narożne (góra i dół, strefy {f(a_n)} × {f(a_n)} m)")
         # ścinanie — maks. reakcja podpór przyległych
         vmax = 0.0
         for s in g.podp_l:
@@ -1047,13 +1048,14 @@ class AnalizaKonstrukcji:
                                     stal=self.stal, nazwa=f"Pole {c['id']} — ugięcie (l = {f(lmin)} m, K = {f(K, 1)})")
         ry = zelbet.rysy_bez_obliczen(Mqp, 1.0, h, dk, As_k, fx if kier == "x" else fy, sx if kier == "x" else sy, beton,
                                       p.w_max.get(e.ekspozycja, 0.3), nazwa=f"Pole {c['id']} — rysy")
-        wyniki = [zx, zy, zgx, zgy, sc, ug, ry]
+        wyniki = [zx, zy, zgx, zgy] + ([zn] if zn is not None else []) + [sc, ug, ry]
         warunki = [w for r in wyniki for w in r.warunki]
         eta = max((w.eta for w in warunki), default=0)
         wobl = ug.obl.w if hasattr(ug, "obl") else 0
         wiersz = [c["id"], f"{f(c['lx'])} × {f(c['ly'])}", br, f"{f(Mx)} / {f(Mx_t) if Mx_t is not None else '—'}", zx.zbrojenie,
                   f"{f(My)} / {f(My_t) if My_t is not None else '—'}", zy.zbrojenie, (Mgx_d, 2), zgx.zbrojenie, (Mgy_d, 2),
-                  zgy.zbrojenie, f"{f(wobl, 1)} / {f(ug.obl.w_dop, 1)}", f"{f(eta * 100, 0)}%" + ("" if eta <= 1 else " ✗")]
+                  zgy.zbrojenie, (f"{f(M_nar)} / {zn.zbrojenie}" if zn is not None else "—"),
+                  f"{f(wobl, 1)} / {f(ug.obl.w_dop, 1)}", f"{f(eta * 100, 0)}%" + ("" if eta <= 1 else " ✗")]
         # pręty (orientacyjnie)
         pr = []
         for (fi, s, L1, L2, nr, opis) in ((fx, sx, c["lx"], c["ly"], 1, "dół x"), (fy, sy, c["ly"], c["lx"], 2, "dół y"),
@@ -1061,9 +1063,14 @@ class AnalizaKonstrukcji:
                                             (fgy, sgy, 0.3 * c["ly"] * 2, c["lx"], 4, "góra y (nad podporami)")):
             n = int(L2 / (s / 1000)) + 1
             pr.append(zelbet.Pret(f"{e.id}/{c['id']}", nr, fi, round(L1 + 0.3, 2), n, "00", opis))
+        if zn is not None:
+            nn = int(a_n / (sn_ / 1000)) + 1
+            pr.append(zelbet.Pret(f"{e.id}/{c['id']}", 5, fn, round(a_n + 0.4, 2), 4 * len(naroza) * nn, "00",
+                                  "narożne góra i dół, 2 kierunki"))
         wyniki_pelne = [r for r in (tab_wyn,) if r is not None] + wyniki
         return {"wiersz": wiersz, "M_max": max(MxD, MyD), "warunki": warunki, "wyniki": wyniki, "wyniki_pelne": wyniki_pelne,
                 "prety": pr, "dane": {"pole": c["id"], "Mx": Mx, "My": My, "Mx_tabl": Mx_t, "My_tabl": My_t, "Mgx": Mgx_d,
+                                      "M_naroze": M_nar,
                                       "Mgy": Mgy_d, "Ax": Ax, "Ay": Ay, "w": wobl, "eta": eta, "lx": c["lx"], "ly": c["ly"],
                                       "brzegi": br, "V": vmax}}
 
@@ -1597,10 +1604,13 @@ class AnalizaKonstrukcji:
                     for e in g.el:
                         if abs(e.spod - w.z_do) < TOL_Z and e.poly_full.buffer(t).intersects(LineString([tuple(o.p0), tuple(o.p1)])):
                             slab = e
-                zint = gap < 0.30 and slab is not None
-                hn = gap + (slab.h if zint else 0.0)
-                if hn < 0.12:
-                    hn = max(hn, 0.12)
+                zint = gap <= 0.35 and slab is not None
+                if zint:
+                    hn = gap + slab.h
+                else:
+                    hn = min(max(gap, 0.12), 0.25)     # nadproże 25 cm, powyżej mur do wieńca [ZAŁ]
+                    if gap < 0.12:
+                        self.log(f"N-{o.id}: nad otworem tylko {f(gap * 100, 0)} cm muru bez płyty — sprawdzić rozwiązanie nadproża")
                 a = 0.25 if o.szer > 1.5 else 0.20
                 Lef = o.szer + min(a, hn)
                 s0, s1 = max(o.s0 - a, 0.0), min(o.s1 + a, w.L)
@@ -1656,7 +1666,7 @@ class AnalizaKonstrukcji:
                                          "51", "")]
                 poz.dane.update({"L": Lef, "M": MEd, "q_d": qd})
                 wyniki.append(poz)
-        self.pos_nadproza = wyniki
+        self.pos_nadproza = sorted(wyniki, key=lambda q: q.ident)
 
     def _wience(self):
         p = self.p

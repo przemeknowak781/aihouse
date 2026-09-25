@@ -399,7 +399,11 @@ def oblicz_ogrzewanie(dane: DaneBudynku, phi_hl=None, par: ParametryOgrz | None 
         Krok("Sezonowy COP z obliczenia godzinowego (informacyjnie; do EP — SCOP deklarowany)", "SCOP = ΣQ_PC/ΣE_el", "", o["SCOP"], "",
              "", 2),
     ]
+    kroki["biw"].append(Krok(f"Uwaga: TMY Poznań — min. θ_e = {f(float(T.min()), 1)} °C (rok typowy nie zawiera temperatury obliczeniowej "
+                             f"{f(te, 0)} °C); w latach mroźnych udział grzałki większy — pokrycie mocy przy θ_e sprawdzono niżej", "", "", None))
     war.append(Warunek("Punkt biwalentny", tb, "<=", par.theta_biv_max, "°C", "VDI 4645 / praktyka [ZAŁ]", "W-155", nd=1))
+    war.append(Warunek("Pokrycie mocy przy θ_e (układ monoenergetyczny): P_PC(θ_e) + P_grzałki ≥ Φ_HL + Φ_W",
+                       o["P_te"] + par.grzalka_kW, ">=", (Phi + Phi_W) / 1000.0, "kW", "PN-EN 12831 / VDI 4645 [W]", "W-155"))
     war.append(Warunek("Udział grzałki w pokryciu Q_H", o["udzial_grzalki"], "<=", par.udzial_grzalki_max, "", "[ZAŁ]", "W-155", nd=3))
     war.append(Warunek("Moc nominalna PC (zakaz F-gazów dotyczy ≤ 12 kW — czynnik R290, GWP₁₀₀ = 0,02)", max(pc["P"]), "<=", 12.0, "kW",
                        "rozp. (UE) 2024/573 zał. IV pkt 8 lit. b", "W-155"))
