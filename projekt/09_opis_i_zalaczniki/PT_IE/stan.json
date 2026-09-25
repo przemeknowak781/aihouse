@@ -1,8 +1,7 @@
 {
- "model": "2026-09-25 07:55",
+ "model": "2026-09-25 08:02",
  "podglad": false,
  "sprawy_otwarte": [
-  "Arkusze IE wygenerowano przed ostatnią zmianą modelu — przed wydaniem wygenerować ponownie (tools/generuj_widoki.py --arkusze model/arkusze_ie.yaml).",
   "Opis trasy WLZ w modelu działki (uzbrojenie projektowane „en”) podaje YKY 5×16, obliczenia — YKY 5×25; w tomie obowiązuje przekrój z obliczeń — poprawić opis w modelu i ponownie wygenerować rysunki PZT (tom I).",
   "`instalacje.wyroby` w modelu puste — moduł PV, falownik, pompa ciepła i aparatura przyjęte z danych przykładowych bibliotek [DANE PRZYKŁADOWE – FIKCYJNE]; zastąpić danymi DTR/DWU wyrobów wybranych przez wykonawcę (wyroby równoważne spełniające parametry wymagane — rozdz. „Wyroby”).",
   "Dane osobowe (Inwestor, projektanci, nr uprawnień, pracownia) — brak sekcji `projekt:` w model/budynek.yaml; pola oznaczone jako do uzupełnienia (strona tytułowa, oświadczenie).",

@@ -8,7 +8,7 @@
 
 ## Stan opracowania i sprawy otwarte — rejestr wymagań, sekcja E
 
-Tom opracowano automatycznie z modelu budynku (`model/*.yaml`, stan z 2026-09-25 07:55) i bibliotek obliczeniowych
+Tom opracowano automatycznie z modelu budynku (`model/*.yaml`, stan z 2026-09-25 08:02) i bibliotek obliczeniowych
 `lamela.obliczenia` (moduły `elektryka`, `energia`, `sanitarne`) uruchamianych przy każdym generowaniu tomu —
 każda liczba w tomie pochodzi z modelu albo z obliczeń. Działka, MPZP, warunki gruntowe i **warunki przyłączenia
 do sieci** są [DANE PRZYKŁADOWE – FIKCYJNE]; parametry urządzeń przyjęto z kart **wyrobów przykładowych** ([ZAŁ]) — dopuszcza się
@@ -29,11 +29,10 @@ Warunki informacyjne — wartości podawane bez kryterium (np. moc szczytowa bez
 
 **Sprawy otwarte** (do zamknięcia przed wydaniem tomu do realizacji; po uzupełnieniu modelu status aktualizuje się przy ponownym generowaniu):
 
-1. Arkusze IE wygenerowano przed ostatnią zmianą modelu — przed wydaniem wygenerować ponownie (tools/generuj_widoki.py --arkusze model/arkusze_ie.yaml).
-2. Opis trasy WLZ w modelu działki (uzbrojenie projektowane „en”) podaje YKY 5×16, obliczenia — YKY 5×25; w tomie obowiązuje przekrój z obliczeń — poprawić opis w modelu i ponownie wygenerować rysunki PZT (tom I).
-3. `instalacje.wyroby` w modelu puste — moduł PV, falownik, pompa ciepła i aparatura przyjęte z danych przykładowych bibliotek [DANE PRZYKŁADOWE – FIKCYJNE]; zastąpić danymi DTR/DWU wyrobów wybranych przez wykonawcę (wyroby równoważne spełniające parametry wymagane — rozdz. „Wyroby”).
-4. Dane osobowe (Inwestor, projektanci, nr uprawnień, pracownia) — brak sekcji `projekt:` w model/budynek.yaml; pola oznaczone jako do uzupełnienia (strona tytułowa, oświadczenie).
-5. Warunki przyłączenia OSD (E-05) — nieuzyskane; moc przyłączeniowa, typ zabezpieczenia przedlicznikowego, impedancja pętli zwarcia Z_Q i prąd zwarciowy w ZKP, rozdział PEN przyjęte jako [ZAŁ]; po otrzymaniu warunków przeliczyć obwody (D-12, W-192, E-05).
+1. Opis trasy WLZ w modelu działki (uzbrojenie projektowane „en”) podaje YKY 5×16, obliczenia — YKY 5×25; w tomie obowiązuje przekrój z obliczeń — poprawić opis w modelu i ponownie wygenerować rysunki PZT (tom I).
+2. `instalacje.wyroby` w modelu puste — moduł PV, falownik, pompa ciepła i aparatura przyjęte z danych przykładowych bibliotek [DANE PRZYKŁADOWE – FIKCYJNE]; zastąpić danymi DTR/DWU wyrobów wybranych przez wykonawcę (wyroby równoważne spełniające parametry wymagane — rozdz. „Wyroby”).
+3. Dane osobowe (Inwestor, projektanci, nr uprawnień, pracownia) — brak sekcji `projekt:` w model/budynek.yaml; pola oznaczone jako do uzupełnienia (strona tytułowa, oświadczenie).
+4. Warunki przyłączenia OSD (E-05) — nieuzyskane; moc przyłączeniowa, typ zabezpieczenia przedlicznikowego, impedancja pętli zwarcia Z_Q i prąd zwarciowy w ZKP, rozdział PEN przyjęte jako [ZAŁ]; po otrzymaniu warunków przeliczyć obwody (D-12, W-192, E-05).
 
 ## Przedmiot, zakres i podstawy opracowania — § 23 RPB
 
@@ -101,7 +100,7 @@ z literatury (obciążalności wg PN-HD 60364-5-52 zał. B, spadki napięć wg N
 
 **Materiały wyjściowe:** PZT i PAB (tom I), PT-1 AR, PT-2 BO (zbrojenie i uziom), PT-3 IS (moc pompy ciepła,
 centrali, grzałki; charakterystyka energetyczna), model `model/budynek.yaml`, `dzialka.yaml`, `instalacje.yaml`,
-`wyposazenie.yaml` (stan z 2026-09-25 07:55); dane PVGIS 5.3 (JRC) dla Poznania. Warunki przyłączenia OSD — [DANE PRZYKŁADOWE – FIKCYJNE]
+`wyposazenie.yaml` (stan z 2026-09-25 08:02); dane PVGIS 5.3 (JRC) dla Poznania. Warunki przyłączenia OSD — [DANE PRZYKŁADOWE – FIKCYJNE]
 (moc przyłączeniowa i parametry sieci jako [ZAŁ], E-05).
 
 ## Zasilanie i powiązanie z siecią elektroenergetyczną — § 23 pkt 8 RPB; W-192, W-193
@@ -599,10 +598,8 @@ Wartość zmierzoną w temperaturze otoczenia porównać z Z_s,max z uwzględnie
 
 | Lp. | Element | Brak / stan w modelu | Arkusze |
 |---|---|---|---|
-| 1 | PV — rozmieszczenie modułów | w polu użytkowym dachu D1 zmieszczono 10 z 15 modułów (odsunięcia od krawędzi, otworów, czerpni/wyrzutni) | PT-IE-10 |
-| 2 | PV — trasa DC | brak w modelu trasy przewodów DC i przepustu dachowego — przyjęto trasę po dachach (poza drogami ewakuacyjnymi) do pom. technicznego | PT-IE-10 |
-| 3 | Punkty instalacji elektrycznych i teletechnicznych | model nie zawiera położeń opraw, łączników, gniazd i punktów teletechnicznych — rozmieszczenie algorytmiczne (opis w uwagach arkuszy) | PT-IE-01, PT-IE-02, PT-IE-03, PT-IE-04, PT-IE-05, PT-IE-06, PT-IE-07, PT-IE-08, PT-IE-09, PT-IE-11, PT-IE-12 |
-| 4 | Trasy teletechniczne (pion, RACK) | brak w modelu pionu/tras teletechnicznych — przyjęto pion proponowany (wspólna lokalizacja z pionem wentylacyjnym) | PT-IE-07, PT-IE-08, PT-IE-09 |
+| 1 | Punkty instalacji elektrycznych i teletechnicznych | model nie zawiera położeń opraw, łączników, gniazd i punktów teletechnicznych — rozmieszczenie algorytmiczne (opis w uwagach arkuszy) | PT-IE-01, PT-IE-02, PT-IE-03, PT-IE-04, PT-IE-05, PT-IE-06, PT-IE-07, PT-IE-08 |
+| 2 | Trasy teletechniczne (pion, RACK) | brak w modelu pionu/tras teletechnicznych — przyjęto pion proponowany (wspólna lokalizacja z pionem wentylacyjnym) | PT-IE-07, PT-IE-08 |
 
 **Założenia projektowe do potwierdzenia [ZAŁ]** (z obliczeń):
 
