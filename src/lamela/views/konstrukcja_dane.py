@@ -1227,9 +1227,9 @@ def typy_nadprozy(D: DaneKonstr) -> list:
         key = (round(n.b, 3), round(n.h, 3), round(math.ceil(n.L * 20 - 1e-6) / 20, 2), n.dol, n.gora, n.strz, n.beton)
         grp.setdefault(key, []).append(n)
     out = []
-    lit = "ABCDEFGHJKLMNPRSTUWZ"
+    lit = "ABCDEFGHJKLMNPRSTUWXYZ"
     for i, (key, lst) in enumerate(sorted(grp.items(), key=lambda t: (t[0][2], t[0][1], t[0][3]))):
-        nm = "N" + (lit[i] if i < len(lit) else str(i + 1))
+        nm = "N" + (lit[i] if i < len(lit) else lit[i // len(lit) - 1] + lit[i % len(lit)])
         out.append((nm, lst))
     D.cache["typy_nadprozy"] = out
     return out

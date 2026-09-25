@@ -316,3 +316,104 @@ def mostki_punktowe(model) -> list[dict]:
             n = n_g
         out.append(dict(id=str(e["id"]), nazwa=str(e.get("nazwa", "")), n=n, chi=chi, zrodlo=zr, opis_n=opis_n))
     return out
+
+
+# ================================================================================================ 4 linie
+LINIE4 = {"I": "izolacja cieplna", "H": "hydroizolacja / ochrona przed wodą", "S": "szczelność powietrzna",
+          "P": "paroizolacja / kontrola pary"}
+ROLA_P = {"sciana_zewn": "sciana_zewn", "stropodach": "dach", "attyka": None, "sciana_wewn_nosna": "sciana_nieogrz",
+          "strop": None, "podloga_na_gruncie": None, "taras": None}
+
+
+def _glaser(model, kod: str, cache: dict):
+    if kod in cache:
+        return cache[kod]
+    p = model.przegroda(kod)
+    rola = ROLA_P.get(p.typ) if p is not None else None
+    r = None
+    if rola:
+        try:
+            from ..fizyka import kondensacja as KD
+            from ..fizyka.u_przegrody import warstwy_przegrody
+            w, Rsi, Rse = KD.warstwy_glaser(warstwy_przegrody(model, kod), model.materialy, rola=rola)
+            r = KD.glaser(w, Rsi, Rse, theta_i=20.0, klasa=3, kod=kod, rola=rola)
+        except Exception:      # pragma: no cover
+            r = None
+    cache[kod] = r
+    return r
+
+
+def _funkcje(model, kod) -> set[str]:
+    """Funkcje warstw przegrody (`fizyka.warstwy.funkcja_warstwy` + pole `funkcja` warstw modelu); tynk wewnętrzny
+    (pierwsza warstwa ściany) = warstwa szczelności powietrznej."""
+    p = model.przegroda(kod)
+    out: set[str] = set()
+    if p is None:
+        return out
+    try:
+        from ..fizyka.warstwy import funkcja_warstwy, mat_props
+        for j_, w in enumerate(p.warstwy):
+            f = funkcja_warstwy(mat_props(model.materialy, w.mat), {"mat": w.mat, "d": w.d})
+            out.add(str(f))
+            if f == "tynk" and j_ == 0:
+                out.add("szczelnosc_powietrzna")
+    except Exception:      # pragma: no cover
+        pass
+    raw = (p.raw or {}).get("warstwy") or []
+    out |= {str(w.get("funkcja")) for w in raw if isinstance(w, dict) and w.get("funkcja")}
+    return out
+
+
+def ocena_4_linii(model, wezel, wynik: dict, kody: list[str], cache: dict | None = None) -> dict:
+    """{'I'|'H'|'S'|'P': (status 'OK'|'UWAGA'|'BRAK', opis), 'ciaglosc': 'zachowana'|'uwaga: …'}"""
+    cache = {} if cache is None else cache
+    typ = wezel.typ
+    out = {}
+    # I — izolacja cieplna (test ołówka z karty)
+    droga = wynik.get("droga_mostka") or []
+    if wynik.get("izolacja_ciagla"):
+        out["I"] = ("OK", "ciągła — brak drogi przez materiały λ > 0,12 z wnętrza na zewnątrz")
+    elif droga and droga[-1] == "GRUNT":
+        out["I"] = ("UWAGA", "domyka się przez grunt: " + " → ".join(droga))
+    else:
+        out["I"] = ("BRAK" if typ != "garaz" else "UWAGA", "przerwana: " + " → ".join(droga)
+                    + (" (płyta ciągła do strefy nieogrzewanej — mostek konstrukcyjny)" if typ == "garaz" else ""))
+    # H — hydroizolacja
+    br = [t for t in (wynik.get("woda_braki") or []) if "izolacji" not in t]
+    uw = [t for t in (wynik.get("woda_uwagi") or []) if "izolacji" not in t]
+    lin = {ln["rodzaj"] for ln in wezel.linie}
+    niskie = [ln["opis"] for ln in wezel.linie if "< WYMAGANE" in ln.get("opis", "")]
+    if br or niskie:
+        out["H"] = ("BRAK", "; ".join(br + niskie))
+    elif uw:
+        out["H"] = ("UWAGA", "; ".join(uw))
+    elif lin & {"hydro", "przeciwwilg"}:
+        out["H"] = ("OK", "; ".join(ln["opis"] for ln in wezel.linie if ln["rodzaj"] in ("hydro", "przeciwwilg"))[:220])
+    else:
+        out["H"] = ("OK", "węzeł poza strefą wody stojącej — wyprawa / okładzina elewacji ciągła")
+    # S — szczelność powietrzna
+    fun = set().union(*[_funkcje(model, k) for k in kody]) if kody else set()
+    if typ in ("oscieze", "nadproze", "podokiennik", "prog"):
+        out["S"] = ("OK", "tynk wewn. do ramy + taśma paroszczelna (od wewn.) na obwodzie ramy — wymaganie detalu")
+    elif typ == "garaz":
+        out["S"] = ("OK", "tynk ciągły po stronie domu + uszczelnienie styków z płytą (szczelność gazowa WT § 106)")
+    elif "szczelnosc_powietrzna" in fun or "paroizolacja" in fun:
+        out["S"] = ("OK", "warstwa szczelna ciągła: " + ", ".join(sorted(fun & {"szczelnosc_powietrzna", "paroizolacja"}))
+                    + (" + płyta ŻB (połączenia taśmą)" if typ in ("attyka", "wspornik", "strop_zewn_krawedz") else ""))
+    else:
+        out["S"] = ("UWAGA", "brak oznaczonej warstwy szczelności w przegrodach węzła")
+    # P — paroizolacja / kontrola pary (Glaser przegród węzła)
+    ocen = []
+    for k in kody:
+        r = _glaser(model, k, cache)
+        if r is not None:
+            ocen.append((k, r.dopuszczalna, r.ocena))
+    if any(not ok for _k, ok, _o in ocen):
+        out["P"] = ("BRAK", "; ".join(f"{k}: {o}" for k, ok, o in ocen if not ok))
+    elif ocen:
+        out["P"] = ("OK", "Glaser (PN-EN ISO 13788): " + "; ".join(f"{k} — {o}" for k, _ok, o in ocen))
+    else:
+        out["P"] = ("OK", "przegrody węzła bez ryzyka kondensacji (wewnętrzne / na gruncie)")
+    zle = [f"{LINIE4[k]}: {out[k][1]}" for k in "IHSP" if out[k][0] != "OK"]
+    out["ciaglosc"] = "zachowana" if not zle else "uwaga — " + "; ".join(zle)
+    return out

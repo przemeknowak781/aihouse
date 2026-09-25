@@ -463,7 +463,7 @@ def rysuj_plyty(vp, lv: KD.Poziom, placer: Placer, pen="gruba", opisy: bool = Tr
 
 
 def _opis_elementu(vp, placer, e: KD.ElementPl, h: float = 2.5, extra: str = ""):
-    txt = f"{e.id} (poz. {e.poz}): h = {_cm(e.h)} cm, {e.beton}, {e.eksp}" + extra
+    txt = f"{e.id} (poz. {e.poz}): h = {_cm(e.h)} cm, {e.beton}, {e.eksp}, wierzch {fmt.level(e.wierzch)}" + extra
     from shapely.ops import polylabel
     try:
         pg = max(getattr(e.poly, "geoms", [e.poly]), key=lambda q: q.area)
@@ -546,6 +546,7 @@ def widok_zbrojenie_plyt(ctx: ViewContext, spec: dict, scale: float, opts: dict)
     m = ctx.model
     P = prety_poziomu(D, lv)
     rysuj_plyty(vp, lv, placer)
+    osie_i_wymiary(vp, ctx, lv.poly.bounds, placer, sides=("dol", "lewo"))
     sc = sciany_pod(m, lv.spod)
     for w in sc:
         g = w.warstwa_konstr.polygon
@@ -601,7 +602,6 @@ def widok_zbrojenie_plyt(ctx: ViewContext, spec: dict, scale: float, opts: dict)
             wiersze_n)))
     for e in lv.elementy:
         _opis_elementu(vp, placer, e)
-    osie_i_wymiary(vp, ctx, lv.poly.bounds, placer, sides=("dol", "lewo"))
     # kontrola A_s: zbrojenie narysowane vs wymagane
     nr_ark = spec.get("nr", "")
     for g in grupy:
@@ -649,6 +649,210 @@ def prety_poziomu(D, lv):
     return KD.prety_poziomu(D, lv)
 
 
+# ------------------------------------------------------------------------------------------------ k_strop
+def _belki_poziomu(m, lv) -> list:
+    """Belki modelu związane z poziomem płyt: przekrój belki przecina pas [spód płyty; wierzch płyty]."""
+    out = []
+    for b in m.belki():
+        sp, hb = float(b["spod"]), float(b["h"])
+        if sp + hb >= lv.spod - 0.06 and sp <= lv.wierzch + 0.06 and LineString(b["os"]).distance(lv.poly) < 0.3:
+            out.append(b)
+    return out
+
+
+def _strzalki_pola(vp, placer, pol: KD.PolePl, typ: str, root_dir=None):
+    """Kierunek pracy pola: płyta krzyżowo zbrojona — krzyż strzałek, jednokierunkowa (l_max/l_min ≥ 2) — strzałka
+    w kierunku krótszym; wspornik — strzałka od zamocowania z kreską utwierdzenia."""
+    k = vp.k
+    from shapely.ops import polylabel
+    try:
+        c = polylabel(max(getattr(pol.poly, "geoms", [pol.poly]), key=lambda q: q.area), 0.02)
+        C = np.array([c.x, c.y])
+    except Exception:  # noqa: BLE001
+        C = np.array(pol.poly.representative_point().coords[0])
+    x0, y0, x1, y1 = pol.poly.bounds
+    lx, ly = x1 - x0, y1 - y0
+    dirs = []
+    if typ == "wspornik" and root_dir is not None:
+        dirs = [np.asarray(root_dir, float)]
+    elif max(lx, ly) / max(min(lx, ly), 1e-6) >= 2.0:
+        dirs = [np.array([1.0, 0.0]) if lx < ly else np.array([0.0, 1.0])]
+    else:
+        dirs = [np.array([1.0, 0.0]), np.array([0.0, 1.0])]
+    for d in dirs:
+        L = min((lx if d[0] else ly) * 0.35, 1.6)
+        a, b = C - d * L / 2, C + d * L / 2
+        vp.line(a, b, L_OPS, pen="cienka")
+        dims.arrowhead(vp, b, d, 2.5, 12, True, L_OPS)
+        if typ != "wspornik":
+            dims.arrowhead(vp, a, -d, 2.5, 12, True, L_OPS)
+        else:
+            nn = np.array([-d[1], d[0]])
+            vp.line(a - nn * 1.6 * k, a + nn * 1.6 * k, L_OPS, pen="srednia")
+        placer.add_lines(LineString([a, b]), w=0.6, buf_mm=1.2)
+    return C
+
+
+def widok_strop(ctx: ViewContext, spec: dict, scale: float, opts: dict):
+    D = KD.dane(ctx)
+    m = ctx.model
+    lv = D.poziom(spec.get("poziom") or spec.get("kond"))
+    if lv is None:
+        raise KeyError(f"k_strop: brak poziomu płyt '{spec.get('poziom') or spec.get('kond')}' w obliczeniach")
+    title = spec.get("tytul_widoku") or f"RZUT KONSTRUKCJI — PŁYTY {', '.join(e.id for e in lv.elementy)}"
+    vp = Viewport(scale, title)
+    res = KResult(north=True)
+    placer = Placer(vp.k)
+    k = vp.k
+    sc = sciany_pod(m, lv.spod)
+    rysuj_sciany(vp, ctx, sc, res, placer)
+    sl = rysuj_slupy(vp, m, lv.spod - 0.4, lv.spod + 0.05, placer)
+    rysuj_plyty(vp, lv, placer)
+    osie_i_wymiary(vp, ctx, lv.poly.bounds, placer, sides=("dol", "lewo", "gora", "prawo"))
+    nr_ark = spec.get("nr", "")
+    # tarcze (jeżeli analiza je wykryła)
+    for wid, wt in (getattr(D.an, "tarcze", {}) or {}).items():
+        w = m.sciana(wid)
+        if w is None or w.warstwa_konstr.polygon is None:
+            continue
+        H.hatch(vp, w.warstwa_konstr.polygon, "ZELBET")
+        pz = next((q for q in D.an.pos_tarcze if q.ident == wid), None)
+        etykieta(vp, placer, w.pt(w.L / 2, 0.0), w.u, f"ściana-tarcza {wid} (poz. {pz.nr if pz else '—'}), "
+                 f"t = {_cm(w.warstwa_konstr.d)} cm", None, 2.5, offs=(3.0, 7.0, 11.0), layer=L_OPS)
+    # belki
+    bel_obl = {b.id: b for b in D.belki}
+    for b in _belki_poziomu(m, lv):
+        sp, hb = float(b["spod"]), float(b["h"])
+        ln = LineString(b["os"])
+        g = ln.buffer(float(b["b"]) / 2, cap_style=2)
+        odwr = sp + hb > lv.wierzch + 0.05
+        vp.geom(g, L_OBR, pen="srednia", lt=None if odwr else "KRESKOWA")
+        placer.add(g, "area", 0.5)
+        B = bel_obl.get(str(b["id"]))
+        txt = f"{b['id']} {_cm(float(b['b']))}×{_cm(hb)}" + (" (odwrócona)" if odwr else "")
+        txt += f", poz. {B.poz}" if B else " — brak wymiarowania [WYMAGA ANALIZY]"
+        u = np.asarray(b["os"][1], float) - np.asarray(b["os"][0], float)
+        etykieta(vp, placer, np.asarray(ln.interpolate(0.5, normalized=True).coords[0]), u, txt, None, 2.5,
+                 offs=(float(b["b"]) * 500 / scale * 2 + 1.5, 6.0, 10.0),
+                 ts=(0.0, -0.25 * ln.length, 0.25 * ln.length), layer=L_OPS)
+    # słupy
+    for c, g in sl:
+        pz = next((q for q in D.an.pos_slupy if q.ident == str(c["id"])), None)
+        etykieta(vp, placer, np.asarray(c["xy"], float) + np.array([0.0, -0.25]), (1.0, 0.0),
+                 f"{c['id']} {c.get('przekroj')}" + (f" (poz. {pz.nr})" if pz else ""), None, 1.8,
+                 offs=(1.5, 4.0, 7.0), ts=(0.0, -0.4, 0.4), layer=L_OPS)
+    # nadproża w ścianach pod płytą
+    ids_sc = {w.id for w in sc}
+    typy_uz = {}
+    for nm, lst in KD.typy_nadprozy(D):
+        for n in lst:
+            if n.sciana in ids_sc:
+                typy_uz.setdefault(nm, []).append(n)
+                p = (np.asarray(n.p0) + np.asarray(n.p1)) / 2
+
+                def draw_t(c_, pos, _t=nm):
+                    S.tag(c_, pos, _t, shape="rect", r_mm=2.2, h=1.8, layer=L_OPS)
+                w = m.sciana(n.sciana)
+                cands = [tuple(p + w.n * d) for d in (0.0, 0.3, -0.3, 0.55, -0.55)]
+                placer.place(vp, draw_t, cands, penalty_step=0.3)
+    # pola, kierunki pracy, łączniki
+    for e in lv.elementy:
+        for pol in e.pola:
+            root = None
+            if e.typ == "wspornik":
+                inne = unary_union([x.poly for x in lv.elementy if x is not e])
+                segs = [q for q in KD.odcinki_proste(e.poly.boundary.intersection(inne.buffer(0.02))) if q.length > 0.3]
+                if segs:
+                    sg = max(segs, key=lambda q: q.length)
+                    (xa, ya), (xb, yb) = sg.coords[0], sg.coords[-1]
+                    nrm = np.array([-(yb - ya), xb - xa]) / sg.length
+                    if not e.poly.buffer(-0.01).contains(Point(*(np.asarray(sg.interpolate(0.5, normalized=True).coords[0]) + nrm * 0.1))):
+                        nrm = -nrm
+                    root = nrm
+            C = _strzalki_pola(vp, placer, pol, e.typ, root)
+            etykieta(vp, placer, C + np.array([0.0, 0.35]), (1.0, 0.0), f"{pol.pole}", None, 2.5, offs=(0.0, 3.0, 6.0),
+                     ts=(0.0, -0.4, 0.4), layer=L_OPS)
+        _opis_elementu(vp, placer, e)
+        if e.lacznik and e.typ == "wspornik":
+            _laczniki(vp, placer, D, lv, e, res)
+    # kolumna: legenda, nadproża, belki, wieńce
+    res.column_blocks.append(("legenda_k", blok_legendy([
+        ("slup", "słup stalowy (przekrój) — pod płytą"),
+        ("kreskowa", "belka / podciąg pod płytą (widok zasłonięty); linia ciągła — belka odwrócona (nad płytą)"),
+        ("lacznik", "łącznik termoizolacyjny płyty wspornikowej (ETA)"),
+        ("tekst", "↔ kierunek pracy pola (krzyż — płyta krzyżowo zbrojona); P1… — pola obliczeniowe MES"),
+        ("tekst", "NA, NB… — typ nadproża (tabela); ściany pod płytą kreskowane wg materiału")])))
+    wiersze = []
+    for nm, lst in KD.typy_nadprozy(D):
+        if nm not in typy_uz:
+            continue
+        n0 = lst[0]
+        wiersze.append([nm, f"{_cm(n0.b)}×{_cm(n0.h)}", _pl(n0.L, 2), f"{n0.dol[0]}Ø{n0.dol[1]} / 2Ø10",
+                        f"Ø{n0.strz[0]} co {n0.strz[1] / 10:g}", ", ".join(x.ids[0] for x in typy_uz[nm])[:44],
+                        ", ".join(sorted({x.poz for x in typy_uz[nm]}))[:24]])
+    if wiersze:
+        res.column_blocks.append(("nadproza", blok_tabeli(
+            "NADPROŻA ŻELBETOWE W ŚCIANACH POD PŁYTĄ (z obliczeń; zbrojenie — arkusz nadproży)",
+            [("Typ", 10), ("b×h [cm]", 16), ("L [m]", 12), ("dół/góra", 24), ("strzemiona", 22), ("otwory", 60),
+             ("poz. obl.", 36)], wiersze)))
+    wn = next((w for w in D.wience if lv.idx in w.ids), None)
+    res.notes += [
+        f"Płyty monolityczne: {', '.join(f'{e.id} h = {_cm(e.h)} cm ({e.beton}, {e.eksp}, c_nom = {e.c_nom:.0f} mm)' for e in lv.elementy)}; "
+        f"wierzch konstrukcji {fmt.level(lv.wierzch)} (średnio), rzędne elementów wg przekrojów i modelu.",
+        (f"Wieńce ({wn.id}, poz. {wn.poz}): na wszystkich ścianach nośnych pod płytą, szerokość = grubość muru, "
+         f"wysokość = grubość płyty, {wn.dol[0] + wn.gora[0]}Ø{wn.dol[1]} + strzemiona Ø{wn.strz[0]} co "
+         f"{wn.strz[1] / 10:g} cm, {wn.beton}; {wn.opis.split(';')[-1].strip()} (PN-EN 1992-1-1 9.10.2.2, 8.7).")
+        if wn else "Wieńce — brak pozycji w obliczeniach [WYMAGA ANALIZY].",
+        "Kierunek pracy pól wg modelu MES płyty (biblioteka — Wood–Armer); pola P… — numeracja komórek siatki podpór "
+        "obliczeń (zbrojenie — arkusze zbrojenia dolnego i górnego).",
+    ]
+    bez = [b for b in _belki_poziomu(m, lv) if str(b["id"]) not in bel_obl]
+    if bez:
+        res.notes.append("Belki bez wymiarowania w bibliotece (" + ", ".join(str(b["id"]) for b in bez) + ") — "
+                         "zbrojenie do obliczenia indywidualnego przed wydaniem do realizacji [WYMAGA ANALIZY].")
+    if not getattr(D.an, "tarcze", None):
+        res.notes.append("Ściany-tarcze: analiza nie wykryła ścian-tarcz na tym poziomie (moduł tarcze — ściana ŻB "
+                         "podparta na < 95 % długości lub pole `tarcza: true`).")
+    kol = kolizje_napisow(vp)
+    if kol:
+        ctx.note(f"{nr_ark} {title}", f"kolizje napisów: {kol}")
+    KD.zapisz_raporty(D, ctx)
+    return vp, res, title
+
+
+def _laczniki(vp, placer, D, lv, e: KD.ElementPl, res: KResult):
+    """Łączniki termoizolacyjne wzdłuż linii zamocowania wspornika: pas (grubość korpusu izolacji 8 cm) po stronie
+    wspornika, opis z siłami m_Ed, v_Ed z obliczeń (pole wspornika)."""
+    inne = unary_union([x.poly for x in lv.elementy if x is not e])
+    segs = [q for q in KD.odcinki_proste(e.poly.boundary.intersection(inne.buffer(0.02))) if q.length >= 1.0]
+    pol = max(e.pola, key=lambda p: p.poly.area) if e.pola else None
+    for sg in segs:
+        (xa, ya), (xb, yb) = sg.coords[0], sg.coords[-1]
+        kier = "y" if abs(ya - yb) < 1e-3 else "x"
+        mid = np.asarray(sg.interpolate(0.5, normalized=True).coords[0])
+        nrm = np.array([-(yb - ya), xb - xa]) / sg.length
+        if not e.poly.buffer(-0.01).contains(Point(*(mid + nrm * 0.1))):
+            nrm = -nrm
+        band = Polygon([sg.coords[0], sg.coords[-1], tuple(np.asarray(sg.coords[-1]) + nrm * 0.08),
+                        tuple(np.asarray(sg.coords[0]) + nrm * 0.08)])
+        vp.fill(band, L_OBR, "#9a9a9a", z=21)
+        vp.geom(band, L_OBR, pen="cienka")
+        placer.add(band, "area", 0.8)
+        w = pol.warstwy.get("gora_" + kier) if pol else None
+        m_ed = f"m_Ed = {_pl(w.M, 1)} kNm/m" if w and w.M else "m_Ed — wg poz."
+        sc_ok = pol is not None and not any("Ścinanie" in t for t in pol.niesp)
+        v_ed = (f", v_Ed ≤ {_pl(pol.V, 1)} kN/m" if sc_ok and pol.V else ", v_Ed — wg poz. [WYMAGA ANALIZY]")
+        txt = f"łącznik termoizol. (ETA), h = {_cm(e.h)} cm: {m_ed}{v_ed} (poz. {e.poz})"
+        etykieta(vp, placer, mid + nrm * 0.04, np.asarray(sg.coords[-1]) - np.asarray(sg.coords[0]), txt, None, 2.5,
+                 offs=(3.0, 7.0, 12.0), ts=(0.0, -0.25 * sg.length, 0.25 * sg.length), layer=L_OPS)
+    if segs:
+        res.notes.append(f"{e.id}: łączniki termoizolacyjne ciągłe na całej linii zamocowania — wyrób z Europejską "
+                         "Oceną Techniczną (EAD 050001-00-0301) „lub równoważny” (np. typ z prętami ze stali "
+                         "nierdzewnej przez izolację gr. 80–120 mm); dobór wg dokumentacji producenta na m_Ed i v_Ed z "
+                         "obliczeń, z uwzględnieniem uskoku wierzchu płyt; sprawdzenie ugięcia wspornika z podatnością "
+                         "łącznika (W-268, W-272).")
+
+
 # ================================================================================================ rejestracja
 def widok_zbrojenie(ctx: ViewContext, spec: dict, scale: float, opts: dict):
     """Dyspozytor typu ``k_zbrojenie``: element = strop | plyta | fundament | belki | nadproza | schody | wsporniki."""
@@ -662,3 +866,5 @@ def widok_zbrojenie(ctx: ViewContext, spec: dict, scale: float, opts: dict):
 _ZBROJENIE = {"strop": widok_zbrojenie_plyt, "plyta": widok_zbrojenie_plyt, "stropodach": widok_zbrojenie_plyt}
 
 register_view("k_zbrojenie", widok_zbrojenie, "rysunek zbrojenia")
+
+register_view("k_strop", widok_strop, "rzut konstrukcji")

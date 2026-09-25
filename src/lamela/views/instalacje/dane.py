@@ -34,6 +34,8 @@ class Wyniki:
     odbiorniki: list
     zrodla: dict
     korekty: list = field(default_factory=list)
+    energia_obc: object = None          # WynikObc (PN-EN 12831) — moduł energii
+    energia_went: object = None         # WynikWent (bilans wentylacji) — moduł energii
 
 
 def sciezki(ctx) -> dict:
@@ -64,7 +66,7 @@ def _klucz(p: dict) -> str:
             h.update(Path(v).read_bytes())
     root = Path(__file__).resolve().parents[2] / "obliczenia"
     files = [root / "inst_wspolne.py", root / "wspolne.py"] + sorted((root / "sanitarne").glob("*.py")) + \
-        sorted((root / "elektryka").glob("*.py"))
+        sorted((root / "elektryka").glob("*.py")) + sorted((root / "energia").glob("*.py"))
     for f in files:
         if f.exists():
             h.update(f.read_bytes())
@@ -123,10 +125,16 @@ def _oblicz(p: dict) -> Wyniki:
         dane.inst = dict(dane.inst, piony=[x for x in piony if not pion_deszczowy(x)], piony_deszczowe=desz)
         korekty.append("Piony deszczowe " + ", ".join(str(x.get("id")) for x in desz) + " wyłączone z grupowania pionów "
                        "wod.-kan. (w modelu `instalacje.piony` bez pola `rodzaj`).")
-    went = wentylacja_z(None, dane)
+    obc = went_e = None
+    try:                                  # Φ_HL i strumienie powietrza z modułu energii (jak CLI: --phi-hl energia)
+        from ...obliczenia.instalacje import z_modulu_energii
+        obc, went_e = z_modulu_energii(p["budynek"], p["dzialka"])
+    except Exception as ex:               # pragma: no cover
+        korekty.append(f"Moduł energii niedostępny ({type(ex).__name__}: {ex}) — Φ_HL wskaźnikowe, strumienie z modelu.")
+    went = wentylacja_z(went_e, dane)
     V = max(went["suma_wyw"], went["suma_naw"]) or 330.0
     woda0 = oblicz_wode(dane, ParametryWoda())
-    og = oblicz_ogrzewanie(dane, cwu=woda0.cwu)
+    og = oblicz_ogrzewanie(dane, phi_hl=obc, cwu=woda0.cwu)
     P7 = float(dict(zip(og.pc["T"], og.pc["P"])).get(7, 6.0))
     woda = oblicz_wode(dane, ParametryWoda(P_PC_cwu_kW=P7))
     kan = oblicz_kanalizacje(dane)
@@ -137,4 +145,4 @@ def _oblicz(p: dict) -> Wyniki:
     bil = bilans_mocy(dane, odb, pv_kWp=pv.P_kWp)
     obw = oblicz_obwody(dane, odb, I_zab=bil.I_zab)
     odg = ocena_ryzyka(dane, pv=pv)
-    return Wyniki(dane, woda, kan, desz_w, dren, og, bil, obw, pv, odg, went, odb, p, korekty)
+    return Wyniki(dane, woda, kan, desz_w, dren, og, bil, obw, pv, odg, went, odb, p, korekty, obc, went_e)

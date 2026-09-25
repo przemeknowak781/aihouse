@@ -107,7 +107,6 @@ class RysCO(Rysunek):
                     continue
                 n0 = len(vp.prims)
                 vp.geom(pg, "S-OGRZ", pen=0.18, lt="KRESKOWA_DROBNA")
-                Hh.hatch(vp, pg, "BRAK_OZN")
                 self._meander(pg, p.T)
                 self.pl.add(pg.boundary.buffer(0.3 * self.k), "line", 0.2)
                 self.regions.append((r, p, pg))
@@ -148,3 +147,68 @@ class RysCO(Rysunek):
         g = LineString(pts).intersection(pg.buffer(-0.08, join_style=2))
         for a in [np.asarray(q.coords) for q in getattr(g, "geoms", [g]) if not q.is_empty and q.length > 0.05]:
             self.vp.polyline(a, "S-OGRZ", pen=0.13, lt="CIAGLA", color="#e59a70")
+
+    # --------------------------------------------------------------------------------------------- źródło ciepła
+    def _wyp(self, typ, szuk=None):
+        for e in self.W.dane.wyposazenie:
+            if e.get("typ") == typ and str(e.get("kond", "P0")) == self.kid and \
+                    (szuk is None or szuk in str(e.get("opis", "")).lower()):
+                return e
+        return None
+
+    def _srodek(self, e):
+        d = dir_deg(float(e.get("obrot", 90.0)))
+        dep = float((e.get("wym") or [0.6, 0.6])[1] if len(e.get("wym") or []) > 1 else (e.get("wym") or [0.6])[0])
+        return np.asarray(e["xy"], float) + d * dep / 2
+
+    def zrodlo(self):
+        og, W = self.W.ogrzewanie, self.W
+        pc = og.pc
+        lok = W.dane.inst.get("lokalizacje") or {}
+        jz = (lok.get("pompa_ciepla_jz") or {}).get("xy")
+        mod = self._wyp("pompa_ciepla")
+        buf = self._wyp("zasobnik", "bufor")
+        zas = self._wyp("zasobnik", "cwu")
+        P7 = dict(zip(pc["T"], pc["P"])).get(-7, None)
+        self.mod_xy = self._srodek(mod) if mod else None
+        if jz:
+            q = np.asarray(jz, float)
+            self.sym(S.heat_pump, q - np.array([0.0, 0.225]), 0.0, w=1.10, d=0.45, label="PC", outdoor=True)
+            h = og.halas
+            self.tag(q, [f"PC — pompa ciepła powietrze–woda monoblok R290 ({pc['model']}, lub równoważna)",
+                         (f"P(A−7/W35) = {num(P7, 1)} kW; " if P7 else "") + f"SCOP {num(pc['SCOP_35'], 1)}; "
+                         f"L_WA = {num(pc['L_WA'], 0)} dB(A); θ_biv = {num(og.biwalentny['theta_biv'], 1)} °C",
+                         f"hałas na granicy działki {num(h['L_A_granica'], 1)} dB(A) (r = {num(h['r'], 1)} m); "
+                         "strefa R290 1,0 m bez otworów i wpustów"], "S-OPISY", style="bold")
+            self.leg.sym(lambda c, p: S.heat_pump(c, p - np.array([0.0, 2.5]), 0.0, w=10.0, d=5.0, label="PC"),
+                         "PC — jednostka zewnętrzna pompy ciepła (monoblok) na fundamencie z tłumieniem drgań")
+        if mod is not None:
+            c = self.mod_xy
+            self.sym(S.heat_pump, c - np.array([0.0, 0.15]), 0.0, w=0.6, d=0.3, label="MH", outdoor=False)
+            self.tag(c, ["MH — moduł hydrauliczny PC: pompa obiegowa (H ≈ "
+                         f"{num(og.przewody_pc['H_pompy_kPa'], 0)} kPa), zawór 3D c.o./c.w.u.,",
+                         f"NW c.o. {og.naczynie_co['V_dob']} dm³ (p₀ = {num(og.naczynie_co['p_0'], 1)} bar), "
+                         f"ZB {num(og.par.p_SV, 1)} bar, grzałka {num(og.par.grzalka_kW, 1)} kW"], "S-OPISY")
+            if jz:
+                a = np.asarray(jz, float) + np.array([0.0, 0.25])
+                for key, off, comp in (("PCZ", -0.06, None), ("PCP", 0.06, "PCZ")):
+                    path = self.g.route(a + np.array([off, 0.0]), c + np.array([off, 0.0]), key, companion=comp)
+                    self.pipe(path, "Z", layer="S-PC", lt="CIAGLA" if key == "PCZ" else "KRESKOWA")
+                    self.g.mark(path, key)
+                self.label(path, f"Z/P {og.przewody_pc['rura']}, izolacja {num(og.przewody_pc['izol_zewn'], 0)} mm "
+                           f"(zewn.) / {num(og.przewody_pc['izol_WT'], 0)} mm", "S-OPISY")
+        V_buf = og.bufor["V_dob"]
+        for e, lab, txt in ((buf, "B", f"bufor c.o. — obl. V ≥ {V_buf} dm³ ({(buf or {}).get('opis', '')})"),
+                            (zas, "", f"zasobnik c.w.u. {W.woda.cwu['V_zas']} dm³ (obl.) z wężownicą "
+                                      f"≥ {num(W.woda.cwu['A_wez'], 1)} m²")):
+            if e is None:
+                continue
+            c = self._srodek(e)
+            dd = float((e.get("wym") or [0.6])[0])
+            self.sym(S.tank, c, d=dd, label=lab)
+            self.tag(c, [txt], "S-OPISY")
+            if self.mod_xy is not None:
+                path = self.g.route(self.mod_xy, c, "PCB")
+                self.pipe(path, "Z", layer="S-PC")
+                self.g.mark(path, "PCB")
+        self.leg.sym(lambda c, p: S.tank(c, p, d=6.0, label="B"), "bufor c.o. / zasobnik c.w.u. (wymiar rzeczywisty)")

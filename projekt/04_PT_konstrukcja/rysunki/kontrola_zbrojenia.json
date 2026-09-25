@@ -1,6 +1,6 @@
 {
- "ok": 52,
- "razem": 52,
+ "ok": 26,
+ "razem": 26,
  "wiersze": [
   {
    "element": "D4",
@@ -76,78 +76,6 @@
   },
   {
    "element": "D4",
-   "miejsce": "pole P3 — dół x",
-   "poz": "1.4",
-   "arkusze": [
-    "PT-BO-10"
-   ],
-   "As_req": 90.2,
-   "As_min": 283.9,
-   "As_prov": 295.7,
-   "jedn": "mm²/m",
-   "zbrojenie": "Ø8 co 17",
-   "s": 170.0,
-   "s_max": 250.0,
-   "ok": true,
-   "uwagi": "Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 200%); Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 161%)",
-   "zapas": 0.041
-  },
-  {
-   "element": "D4",
-   "miejsce": "pole P3 — dół y",
-   "poz": "1.4",
-   "arkusze": [
-    "PT-BO-10"
-   ],
-   "As_req": 91.5,
-   "As_min": 270.4,
-   "As_prov": 279.3,
-   "jedn": "mm²/m",
-   "zbrojenie": "Ø8 co 18",
-   "s": 180.0,
-   "s_max": 250.0,
-   "ok": true,
-   "uwagi": "Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 200%); Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 161%)",
-   "zapas": 0.033
-  },
-  {
-   "element": "D4",
-   "miejsce": "pole P3 — naroże (dół x)",
-   "poz": "1.4",
-   "arkusze": [
-    "PT-BO-10"
-   ],
-   "As_req": 112.9,
-   "As_min": 270.4,
-   "As_prov": 279.3,
-   "jedn": "mm²/m",
-   "zbrojenie": "Ø8 co 18",
-   "s": 180.0,
-   "s_max": 250.0,
-   "ok": true,
-   "uwagi": "Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 200%); Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 161%)",
-   "zapas": 0.033
-  },
-  {
-   "element": "D4",
-   "miejsce": "pole P3 — naroże (dół y)",
-   "poz": "1.4",
-   "arkusze": [
-    "PT-BO-10"
-   ],
-   "As_req": 112.9,
-   "As_min": 270.4,
-   "As_prov": 279.3,
-   "jedn": "mm²/m",
-   "zbrojenie": "Ø8 co 18",
-   "s": 180.0,
-   "s_max": 250.0,
-   "ok": true,
-   "uwagi": "Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 200%); Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 161%)",
-   "zapas": 0.033
-  },
-  {
-   "element": "D4",
    "miejsce": "pole P3 — naroże (góra x)",
    "poz": "1.4",
    "arkusze": [
@@ -172,78 +100,6 @@
     "PT-BO-11"
    ],
    "As_req": 112.9,
-   "As_min": 270.4,
-   "As_prov": 279.3,
-   "jedn": "mm²/m",
-   "zbrojenie": "Ø8 co 18",
-   "s": 180.0,
-   "s_max": 250.0,
-   "ok": true,
-   "uwagi": "Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 200%); Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 161%)",
-   "zapas": 0.033
-  },
-  {
-   "element": "D4",
-   "miejsce": "pole P4 — dół x",
-   "poz": "1.4",
-   "arkusze": [
-    "PT-BO-10"
-   ],
-   "As_req": 161.2,
-   "As_min": 283.9,
-   "As_prov": 295.7,
-   "jedn": "mm²/m",
-   "zbrojenie": "Ø8 co 17",
-   "s": 170.0,
-   "s_max": 250.0,
-   "ok": true,
-   "uwagi": "Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 200%); Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 161%)",
-   "zapas": 0.041
-  },
-  {
-   "element": "D4",
-   "miejsce": "pole P4 — dół y",
-   "poz": "1.4",
-   "arkusze": [
-    "PT-BO-10"
-   ],
-   "As_req": 166.6,
-   "As_min": 270.4,
-   "As_prov": 279.3,
-   "jedn": "mm²/m",
-   "zbrojenie": "Ø8 co 18",
-   "s": 180.0,
-   "s_max": 250.0,
-   "ok": true,
-   "uwagi": "Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 200%); Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 161%)",
-   "zapas": 0.033
-  },
-  {
-   "element": "D4",
-   "miejsce": "pole P4 — naroże (dół x)",
-   "poz": "1.4",
-   "arkusze": [
-    "PT-BO-10"
-   ],
-   "As_req": 209.3,
-   "As_min": 270.4,
-   "As_prov": 279.3,
-   "jedn": "mm²/m",
-   "zbrojenie": "Ø8 co 18",
-   "s": 180.0,
-   "s_max": 250.0,
-   "ok": true,
-   "uwagi": "Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 200%); Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 161%)",
-   "zapas": 0.033
-  },
-  {
-   "element": "D4",
-   "miejsce": "pole P4 — naroże (dół y)",
-   "poz": "1.4",
-   "arkusze": [
-    "PT-BO-10"
-   ],
-   "As_req": 209.3,
    "As_min": 270.4,
    "As_prov": 279.3,
    "jedn": "mm²/m",
@@ -292,42 +148,6 @@
   },
   {
    "element": "PL-DA",
-   "miejsce": "pole P10 — dół x",
-   "poz": "3.4",
-   "arkusze": [
-    "PT-BO-10"
-   ],
-   "As_req": 73.2,
-   "As_min": 309.1,
-   "As_prov": 314.2,
-   "jedn": "mm²/m",
-   "zbrojenie": "Ø8 co 16",
-   "s": 160.0,
-   "s_max": 250.0,
-   "ok": true,
-   "uwagi": "Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 421%)",
-   "zapas": 0.016
-  },
-  {
-   "element": "PL-DA",
-   "miejsce": "pole P10 — dół y",
-   "poz": "3.4",
-   "arkusze": [
-    "PT-BO-10"
-   ],
-   "As_req": 23.1,
-   "As_min": 294.1,
-   "As_prov": 295.7,
-   "jedn": "mm²/m",
-   "zbrojenie": "Ø8 co 17",
-   "s": 170.0,
-   "s_max": 250.0,
-   "ok": true,
-   "uwagi": "Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 421%)",
-   "zapas": 0.006
-  },
-  {
-   "element": "PL-DA",
    "miejsce": "wspornik — góra x",
    "poz": "3.4",
    "arkusze": [
@@ -361,42 +181,6 @@
    "ok": true,
    "uwagi": "Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 421%)",
    "zapas": 0.006
-  },
-  {
-   "element": "PL-E",
-   "miejsce": "pole P1 — dół x",
-   "poz": "3.3",
-   "arkusze": [
-    "PT-BO-10"
-   ],
-   "As_req": 89.4,
-   "As_min": 392.1,
-   "As_prov": 392.7,
-   "jedn": "mm²/m",
-   "zbrojenie": "Ø10 co 20",
-   "s": 200.0,
-   "s_max": 250.0,
-   "ok": true,
-   "uwagi": "Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 239%)",
-   "zapas": 0.002
-  },
-  {
-   "element": "PL-E",
-   "miejsce": "pole P1 — dół y",
-   "poz": "3.3",
-   "arkusze": [
-    "PT-BO-10"
-   ],
-   "As_req": 128.1,
-   "As_min": 377.0,
-   "As_prov": 386.7,
-   "jedn": "mm²/m",
-   "zbrojenie": "Ø8 co 13",
-   "s": 130.0,
-   "s_max": 250.0,
-   "ok": true,
-   "uwagi": "Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 239%)",
-   "zapas": 0.026
   },
   {
    "element": "PL-E",
@@ -616,150 +400,6 @@
   },
   {
    "element": "ST1",
-   "miejsce": "pole P2 — dół x",
-   "poz": "2.3",
-   "arkusze": [
-    "PT-BO-10"
-   ],
-   "As_req": 129.8,
-   "As_min": 256.9,
-   "As_prov": 264.6,
-   "jedn": "mm²/m",
-   "zbrojenie": "Ø8 co 19",
-   "s": 190.0,
-   "s_max": 250.0,
-   "ok": true,
-   "uwagi": "Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 568%); Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 325%)",
-   "zapas": 0.03
-  },
-  {
-   "element": "ST1",
-   "miejsce": "pole P2 — dół y",
-   "poz": "2.3",
-   "arkusze": [
-    "PT-BO-10"
-   ],
-   "As_req": 299.9,
-   "As_min": 243.4,
-   "As_prov": 314.2,
-   "jedn": "mm²/m",
-   "zbrojenie": "Ø8 co 16",
-   "s": 160.0,
-   "s_max": 250.0,
-   "ok": true,
-   "uwagi": "Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 568%); Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 325%)",
-   "zapas": 0.048
-  },
-  {
-   "element": "ST1",
-   "miejsce": "pole P5 — dół x",
-   "poz": "2.3",
-   "arkusze": [
-    "PT-BO-10"
-   ],
-   "As_req": 100.2,
-   "As_min": 256.9,
-   "As_prov": 264.6,
-   "jedn": "mm²/m",
-   "zbrojenie": "Ø8 co 19",
-   "s": 190.0,
-   "s_max": 250.0,
-   "ok": true,
-   "uwagi": "Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 568%); Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 325%)",
-   "zapas": 0.03
-  },
-  {
-   "element": "ST1",
-   "miejsce": "pole P5 — dół y",
-   "poz": "2.3",
-   "arkusze": [
-    "PT-BO-10"
-   ],
-   "As_req": 71.5,
-   "As_min": 243.4,
-   "As_prov": 251.3,
-   "jedn": "mm²/m",
-   "zbrojenie": "Ø8 co 20",
-   "s": 200.0,
-   "s_max": 250.0,
-   "ok": true,
-   "uwagi": "Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 568%); Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 325%)",
-   "zapas": 0.033
-  },
-  {
-   "element": "ST1",
-   "miejsce": "pole P6 — dół x",
-   "poz": "2.3",
-   "arkusze": [
-    "PT-BO-10"
-   ],
-   "As_req": 132.4,
-   "As_min": 256.9,
-   "As_prov": 264.6,
-   "jedn": "mm²/m",
-   "zbrojenie": "Ø8 co 19",
-   "s": 190.0,
-   "s_max": 250.0,
-   "ok": true,
-   "uwagi": "Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 568%); Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 325%)",
-   "zapas": 0.03
-  },
-  {
-   "element": "ST1",
-   "miejsce": "pole P6 — dół y",
-   "poz": "2.3",
-   "arkusze": [
-    "PT-BO-10"
-   ],
-   "As_req": 38.4,
-   "As_min": 243.4,
-   "As_prov": 251.3,
-   "jedn": "mm²/m",
-   "zbrojenie": "Ø8 co 20",
-   "s": 200.0,
-   "s_max": 250.0,
-   "ok": true,
-   "uwagi": "Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 568%); Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 325%)",
-   "zapas": 0.033
-  },
-  {
-   "element": "ST1",
-   "miejsce": "pole P6 — naroże (dół x)",
-   "poz": "2.3",
-   "arkusze": [
-    "PT-BO-10"
-   ],
-   "As_req": 822.7,
-   "As_min": 243.4,
-   "As_prov": 837.8,
-   "jedn": "mm²/m",
-   "zbrojenie": "Ø16 co 24",
-   "s": 240.0,
-   "s_max": 250.0,
-   "ok": true,
-   "uwagi": "Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 568%); Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 325%)",
-   "zapas": 0.018
-  },
-  {
-   "element": "ST1",
-   "miejsce": "pole P6 — naroże (dół y)",
-   "poz": "2.3",
-   "arkusze": [
-    "PT-BO-10"
-   ],
-   "As_req": 822.7,
-   "As_min": 243.4,
-   "As_prov": 837.8,
-   "jedn": "mm²/m",
-   "zbrojenie": "Ø16 co 24",
-   "s": 240.0,
-   "s_max": 250.0,
-   "ok": true,
-   "uwagi": "Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 568%); Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 325%)",
-   "zapas": 0.018
-  },
-  {
-   "element": "ST1",
    "miejsce": "pole P6 — naroże (góra x)",
    "poz": "2.3",
    "arkusze": [
@@ -796,78 +436,6 @@
   },
   {
    "element": "ST1",
-   "miejsce": "pole P7 — dół x",
-   "poz": "2.3",
-   "arkusze": [
-    "PT-BO-10"
-   ],
-   "As_req": 119.1,
-   "As_min": 256.9,
-   "As_prov": 264.6,
-   "jedn": "mm²/m",
-   "zbrojenie": "Ø8 co 19",
-   "s": 190.0,
-   "s_max": 250.0,
-   "ok": true,
-   "uwagi": "Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 568%); Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 325%)",
-   "zapas": 0.03
-  },
-  {
-   "element": "ST1",
-   "miejsce": "pole P7 — dół y",
-   "poz": "2.3",
-   "arkusze": [
-    "PT-BO-10"
-   ],
-   "As_req": 104.5,
-   "As_min": 243.4,
-   "As_prov": 251.3,
-   "jedn": "mm²/m",
-   "zbrojenie": "Ø8 co 20",
-   "s": 200.0,
-   "s_max": 250.0,
-   "ok": true,
-   "uwagi": "Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 568%); Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 325%)",
-   "zapas": 0.033
-  },
-  {
-   "element": "ST1",
-   "miejsce": "pole P7 — naroże (dół x)",
-   "poz": "2.3",
-   "arkusze": [
-    "PT-BO-10"
-   ],
-   "As_req": 1058.5,
-   "As_min": 243.4,
-   "As_prov": 1099.6,
-   "jedn": "mm²/m",
-   "zbrojenie": "Ø14 co 14",
-   "s": 140.0,
-   "s_max": 250.0,
-   "ok": true,
-   "uwagi": "Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 568%); Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 325%)",
-   "zapas": 0.039
-  },
-  {
-   "element": "ST1",
-   "miejsce": "pole P7 — naroże (dół y)",
-   "poz": "2.3",
-   "arkusze": [
-    "PT-BO-10"
-   ],
-   "As_req": 1058.5,
-   "As_min": 243.4,
-   "As_prov": 1099.6,
-   "jedn": "mm²/m",
-   "zbrojenie": "Ø14 co 14",
-   "s": 140.0,
-   "s_max": 250.0,
-   "ok": true,
-   "uwagi": "Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 568%); Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 325%)",
-   "zapas": 0.039
-  },
-  {
-   "element": "ST1",
    "miejsce": "pole P7 — naroże (góra x)",
    "poz": "2.3",
    "arkusze": [
@@ -901,42 +469,6 @@
    "ok": true,
    "uwagi": "Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 568%); Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 325%)",
    "zapas": 0.039
-  },
-  {
-   "element": "ST1",
-   "miejsce": "pole P8 — dół x",
-   "poz": "2.3",
-   "arkusze": [
-    "PT-BO-10"
-   ],
-   "As_req": 73.2,
-   "As_min": 256.9,
-   "As_prov": 264.6,
-   "jedn": "mm²/m",
-   "zbrojenie": "Ø8 co 19",
-   "s": 190.0,
-   "s_max": 250.0,
-   "ok": true,
-   "uwagi": "Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 568%); Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 325%)",
-   "zapas": 0.03
-  },
-  {
-   "element": "ST1",
-   "miejsce": "pole P8 — dół y",
-   "poz": "2.3",
-   "arkusze": [
-    "PT-BO-10"
-   ],
-   "As_req": 63.1,
-   "As_min": 243.4,
-   "As_prov": 251.3,
-   "jedn": "mm²/m",
-   "zbrojenie": "Ø8 co 20",
-   "s": 200.0,
-   "s_max": 250.0,
-   "ok": true,
-   "uwagi": "Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 568%); Ścinanie bez zbrojenia poprzecznego (6.2.2) (η = 325%)",
-   "zapas": 0.033
   }
  ]
 }

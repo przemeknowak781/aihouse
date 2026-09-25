@@ -134,6 +134,10 @@ def main(argv=None) -> int:
     wyn = eksport_wynikow([k.w for k in karty], dl)
     for k in karty:
         d = wyn[k.w.wezel.id]
+        if k.w.psi:                 # ψ każdej pary grup stref (węzły z więcej niż dwiema temperaturami: i-u, u-e)
+            d["psi_pary"] = {f"{p.grupy[0]}-{p.grupy[1]}": {"psi_oi": round(p.psi_oi, 5), "psi_e": round(p.psi_e, 5),
+                                                            "L2D": round(p.L2D, 5)} for p in k.w.psi}
+            d["theta_grup"] = {g: round(t, 2) for g, t in k.w.theta.items()}
         d.update({"ocena": k.ocena["klasa"], "izolacja_ciagla": k.ciag.ciagla,
                   "droga_mostka": k.ciag.materialy or None,
                   "woda_braki": [p.tekst for p in k.kontrola if p.status == "BRAK"],
