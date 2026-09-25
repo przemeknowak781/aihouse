@@ -197,7 +197,7 @@ INFO = {
            "Pokoje dzieci od zachodu (elewacja pd. bryły B pełna jak w szkicu). Pion SI (kanalizacja K1 + kanały rekuperacji) nad pionem P0 i pod P2."),
     "P2": ("W2 - RZUT II PIĘTRA P2   (posadzka +6,30; h w świetle 2,80 m)",
            "Bryła A 13,60 m w lamelach, wspornik 1,00 m na zachód (ściany-tarcze żelbetowe w osiach 1 i 3 na odc. A'–x 2,0), płyty ST2/ST3 wysunięte 1,00-1,10 m. "
-           "Nadbudowa klatki schodówej i łazienki rodziców nad osiami B-D (niewidoczna od południa). Wyjście na dach: klapa 0,9x0,9 w pom. techn. 2.06."),
+           "Nadbudowa klatki schodowej i łazienki rodziców nad osiami B-D (niewidoczna od południa). Wyjście na dach: klapa 0,9x0,9 w pom. techn. 2.06."),
 }
 
 

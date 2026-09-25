@@ -103,12 +103,12 @@ def levels(ax, xpos, items):
 
 def band_labels(ax):
     tags = [("A", -2.9, 7.6, "#1f6fb4"), ("B", -1.4, 4.4, "#7b3fa0"), ("C", 13.35, 4.6, "#e07b00"),
-            ("D", 17.9, 4.45, "#333333"), ("G", 15.2, 1.8, "#c0392b"), ("E", -2.9, 1.4, "#1c8a4a")]
+            ("D", 17.9, 4.45, "#333333"), ("G", 17.6, 2.1, "#c0392b"), ("E", -2.9, 1.4, "#1c8a4a")]
     for t, x, z, c in tags:
         ax.add_patch(Circle((x, z), 0.42, facecolor="white", edgecolor=c, lw=1.4, zorder=15))
         ax.text(x, z, t, fontsize=9, fontweight="bold", color=c, ha="center", va="center", zorder=16)
     # sylweta S (rytm przesuniec zachod-wschod-zachod)
-    pts = np.array([(0.2, 7.6), (9.0, 7.6), (5.2, 4.6), (16.2, 2.2), (9.0, 1.3), (0.8, 1.3)])
+    pts = np.array([(0.2, 7.6), (9.0, 7.6), (5.2, 4.6), (16.9, 2.1), (9.0, 1.3), (0.8, 1.3)])
     ax.plot(pts[:, 0], pts[:, 1], color="#f2c200", lw=5, alpha=0.55, zorder=14, solid_capstyle="round", solid_joinstyle="round")
 
 

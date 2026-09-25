@@ -116,9 +116,10 @@ def section_AA(ax):
     R(ax, -1.30, -1.20, 9.10, 9.42, SLAB, "black", 0.4, 6)
     R(ax, -0.30, 5.20, 9.32, 9.60, INS, "black", 0.3, 5)
     R(ax, 8.10, 8.70, 9.32, 9.60, INS, "black", 0.3, 5)
-    R(ax, 5.05, 5.20, 9.32, 9.95, CUT, "black", 0.3, 6)
-    R(ax, 8.10, 8.25, 9.32, 9.95, CUT, "black", 0.3, 6)
-    ax.plot([5.05, 8.25], [9.95, 9.95], color="#2b6cb0", lw=1.4, zorder=7)
+    R(ax, 5.05, 5.20, 9.32, 9.78, CUT, "black", 0.3, 6)
+    R(ax, 8.10, 8.25, 9.32, 9.78, CUT, "black", 0.3, 6)
+    ax.plot([5.05, 8.25], [9.78, 9.78], color="#2b6cb0", lw=1.4, zorder=7)
+    ax.text(6.65, 10.0, "świetlik płaski ≤ +9,80", fontsize=5.8, ha="center", color="#2b6cb0", zorder=13)
     R(ax, -0.30, -0.10, 9.32, 9.80, "#bdbdbd", "black", 0.3, 5)
     R(ax, 8.50, 8.70, 9.32, 9.80, "#bdbdbd", "black", 0.3, 5)
     # --- schody (bieg 1 w pasie W: P0->spocznik, P1->spocznik)
@@ -127,7 +128,7 @@ def section_AA(ax):
     # przeswit
     ax.annotate("", xy=(5.75, 3.15 + 0.175 * 3 - 0.25), xytext=(5.75, 0.175 * 4),
                 arrowprops=dict(arrowstyle="<->", lw=0.6, color="#b00020"), zorder=12)
-    ax.text(5.85, 2.0, "prześwit\n≈2,75 m\n(≥2,00)", fontsize=5.8, color="#b00020", zorder=12)
+    ax.text(5.85, 2.0, "prześwit\n≈2,76 m\n(≥2,00)", fontsize=5.8, color="#b00020", zorder=12)
     # opisy pomieszczen
     for (y, z, t) in [(2.3, 1.2, "0.06 jadalnia\nh = 2,80"), (6.8, 1.0, "bieg 1\n9 × 17,5/28"), (2.3, 4.5, "1.02 pokój rodzinny\n(boks C) h = 2,80"),
                       (1.3, 7.6, "2.06 pom. techn.\n(reku + wyłaz)"), (3.75, 7.6, "2.01 hol"), (6.6, 7.7, "klatka\n(nadbudowa)"),
