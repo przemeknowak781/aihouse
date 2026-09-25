@@ -607,15 +607,15 @@
     },
     {
      "opis": "Zbrojenie na zginanie",
-     "E": 270.1126,
-     "R": 279.2527,
-     "eta": 0.9673
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
     },
     {
      "opis": "Rysy: średnica prętów (tabl. 7.2N)",
      "E": 8.0,
-     "R": 15.642,
-     "eta": 0.5114
+     "R": 14.2376,
+     "eta": 0.5619
     },
     {
      "opis": "Zbrojenie na zginanie",
@@ -625,21 +625,21 @@
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 327.0558,
+     "E": 206.0523,
      "R": 659.5714,
-     "eta": 0.4959
+     "eta": 0.3124
     },
     {
      "opis": "Nośność strzemion",
-     "E": 327.0558,
-     "R": 339.739,
-     "eta": 0.9627
+     "E": 206.0523,
+     "R": 266.9378,
+     "eta": 0.7719
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 20.1389,
-     "R": 626.0041,
-     "eta": 0.0322
+     "R": 1911.0802,
+     "eta": 0.0105
     },
     {
      "opis": "Zbrojenie na zginanie",
@@ -679,15 +679,15 @@
     },
     {
      "opis": "Zbrojenie na zginanie",
-     "E": 270.1126,
-     "R": 279.2527,
-     "eta": 0.9673
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
     },
     {
      "opis": "Rysy: średnica prętów (tabl. 7.2N)",
      "E": 8.0,
-     "R": 15.642,
-     "eta": 0.5114
+     "R": 14.2376,
+     "eta": 0.5619
     },
     {
      "opis": "Zbrojenie na zginanie",
@@ -697,21 +697,21 @@
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 327.0558,
+     "E": 206.0523,
      "R": 659.5714,
-     "eta": 0.4959
+     "eta": 0.3124
     },
     {
      "opis": "Nośność strzemion",
-     "E": 327.0558,
-     "R": 339.739,
-     "eta": 0.9627
+     "E": 206.0523,
+     "R": 266.9378,
+     "eta": 0.7719
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 20.1389,
-     "R": 626.0041,
-     "eta": 0.0322
+     "R": 1911.0802,
+     "eta": 0.0105
     }
    ],
    "dane": {
@@ -719,29 +719,29 @@
     "pola": [
      {
       "pole": "P5",
-      "Mx": 3.726644098944552,
-      "My": 4.511427484112756,
-      "Mx_tabl": 8.49573563738454,
-      "My_tabl": 9.524809211803133,
-      "Mgx": -19.788548000524823,
-      "M_naroze": 13.163643126771653,
+      "Mx": 3.6722161913659797,
+      "My": 4.501933518780758,
+      "Mx_tabl": 4.121679276145156,
+      "My_tabl": 4.618753868074299,
+      "Mgx": -9.477539656275532,
+      "M_naroze": 12.524026917108017,
       "sc_zbr": {
-       "opis": "φ8 co 11 cm (5 ramion/m)",
+       "opis": "φ8 co 14 cm (5 ramion/m)",
        "fi": 8,
-       "s": 110.0,
+       "s": 140.0,
        "ramiona": 5,
-       "podpora": "S1-04",
-       "V": 327.0557900181967
+       "podpora": "S1-07",
+       "V": 206.0522760247038
       },
-      "Mgy": -20.753066338247148,
+      "Mgy": -14.084646673549626,
       "Ax": 264.55517082861417,
       "Ay": 251.32741228718342,
-      "w": 0.5117837554357025,
+      "w": 0.5164178365604586,
       "eta": 0.9709883923093442,
       "lx": 3.875,
       "ly": 3.625,
       "brzegi": "SUUS",
-      "V": 327.0557900181967
+      "V": 206.0522760247038
      }
     ],
     "pole_miarodajne": "P5"
@@ -752,7 +752,7 @@
    "id": "D3",
    "tytul": "Stropodach / dach D3",
    "rodzaj": "plyta",
-   "wykorzystanie": 0.971,
+   "wykorzystanie": 0.999,
    "ok": true,
    "przyjeto": [
     "Płyta gr. 22 cm z betonu C25/30, stal B500SP, otulenie c_nom = 25 mm; zbrojenie wg zestawienia pól (dołem siatka w obu kierunkach, górą nad podporami).",
@@ -804,8 +804,8 @@
     {
      "opis": "Rysy: średnica prętów (tabl. 7.2N)",
      "E": 8.0,
-     "R": 9.6155,
-     "eta": 0.832
+     "R": 9.6195,
+     "eta": 0.8316
     },
     {
      "opis": "Zbrojenie na zginanie",
@@ -815,20 +815,20 @@
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 241.7997,
+     "E": 266.6832,
      "R": 659.5714,
-     "eta": 0.3666
+     "eta": 0.4043
     },
     {
      "opis": "Nośność strzemion",
-     "E": 241.7997,
+     "E": 266.6832,
      "R": 266.9378,
-     "eta": 0.9058
+     "eta": 0.999
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 18.4211,
-     "R": 2724.7966,
+     "R": 2724.8042,
      "eta": 0.0068
     },
     {
@@ -876,8 +876,8 @@
     {
      "opis": "Rysy: średnica prętów (tabl. 7.2N)",
      "E": 8.0,
-     "R": 9.6155,
-     "eta": 0.832
+     "R": 9.6195,
+     "eta": 0.8316
     },
     {
      "opis": "Zbrojenie na zginanie",
@@ -887,20 +887,20 @@
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 241.7997,
+     "E": 266.6832,
      "R": 659.5714,
-     "eta": 0.3666
+     "eta": 0.4043
     },
     {
      "opis": "Nośność strzemion",
-     "E": 241.7997,
+     "E": 266.6832,
      "R": 266.9378,
-     "eta": 0.9058
+     "eta": 0.999
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 18.4211,
-     "R": 2724.7966,
+     "R": 2724.8042,
      "eta": 0.0068
     }
    ],
@@ -909,29 +909,29 @@
     "pola": [
      {
       "pole": "P8",
-      "Mx": 3.4856405369408234,
-      "My": 4.30007554096605,
-      "Mx_tabl": 4.074393503752822,
-      "My_tabl": 3.8370310103951106,
-      "Mgx": -8.897619848176312,
-      "M_naroze": 15.366646594160276,
+      "Mx": 3.487115129986245,
+      "My": 4.300534364858606,
+      "Mx_tabl": 4.0743859788310335,
+      "My_tabl": 3.8370239005211464,
+      "Mgx": -8.897606084353122,
+      "M_naroze": 15.418980708282627,
       "sc_zbr": {
        "opis": "φ8 co 14 cm (5 ramion/m)",
        "fi": 8,
        "s": 140.0,
        "ramiona": 5,
        "podpora": "S1-09",
-       "V": 241.79965279693664
+       "V": 266.6832308225722
       },
-      "Mgy": -16.258304584535544,
+      "Mgy": -16.267233077911797,
       "Ax": 264.55517082861417,
       "Ay": 251.32741228718342,
-      "w": 0.504624625425911,
-      "eta": 0.9709883923093442,
+      "w": 0.5038808780868828,
+      "eta": 0.9990462956792123,
       "lx": 3.5,
       "ly": 3.625,
       "brzegi": "USUS",
-      "V": 241.79965279693664
+      "V": 266.6832308225722
      }
     ],
     "pole_miarodajne": "P8"
@@ -1230,228 +1230,60 @@
    "id": "ST2",
    "tytul": "Strop ST2",
    "rodzaj": "plyta",
-   "wykorzystanie": 0.9992,
+   "wykorzystanie": 0.9825,
    "ok": true,
    "przyjeto": [
     "Płyta gr. 22 cm z betonu C25/30, stal B500SP, otulenie c_nom = 25 mm; zbrojenie wg zestawienia pól (dołem siatka w obu kierunkach, górą nad podporami).",
-    "Maks. ugięcie długotrwałe ≈ 13,1 mm."
+    "Maks. ugięcie długotrwałe ≈ 5,7 mm."
    ],
    "warunki": [
     {
      "opis": "Zbrojenie na zginanie",
-     "E": 414.286,
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 20.6611,
+     "eta": 0.3872
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 411.3294,
      "R": 418.879,
-     "eta": 0.989
-    },
-    {
-     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
-     "E": 8.0,
-     "R": 10.8549,
-     "eta": 0.737
-    },
-    {
-     "opis": "Zbrojenie na zginanie",
-     "E": 1805.8658,
-     "R": 1827.8357,
-     "eta": 0.988
+     "eta": 0.982
     },
     {
      "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
-     "E": 110.0,
-     "R": 213.3379,
-     "eta": 0.5156
+     "E": 120.0,
+     "R": 181.2894,
+     "eta": 0.6619
     },
     {
      "opis": "Zbrojenie na zginanie",
-     "E": 256.88,
-     "R": 264.5552,
-     "eta": 0.971
-    },
-    {
-     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
-     "E": 8.0,
-     "R": 26.2989,
-     "eta": 0.3042
-    },
-    {
-     "opis": "Zbrojenie na zginanie",
-     "E": 292.2172,
-     "R": 295.6793,
-     "eta": 0.9883
-    },
-    {
-     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
-     "E": 170.0,
-     "R": 181.5779,
-     "eta": 0.9362
-    },
-    {
-     "opis": "Nośność krzyżulców betonowych",
-     "E": 327.0558,
-     "R": 659.5714,
-     "eta": 0.4959
-    },
-    {
-     "opis": "Nośność strzemion",
-     "E": 327.0558,
-     "R": 339.739,
-     "eta": 0.9627
-    },
-    {
-     "opis": "Ugięcie długotrwałe (quasi-stała) ≤ L/250",
-     "E": 13.0875,
-     "R": 25.7,
-     "eta": 0.5092
-    },
-    {
-     "opis": "Zbrojenie na zginanie",
-     "E": 414.286,
-     "R": 418.879,
-     "eta": 0.989
-    },
-    {
-     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
-     "E": 8.0,
-     "R": 10.8549,
-     "eta": 0.737
-    },
-    {
-     "opis": "Zbrojenie na zginanie",
-     "E": 1805.8658,
-     "R": 1827.8357,
-     "eta": 0.988
-    },
-    {
-     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
-     "E": 110.0,
-     "R": 213.3379,
-     "eta": 0.5156
-    },
-    {
-     "opis": "Zbrojenie na zginanie",
-     "E": 256.88,
-     "R": 264.5552,
-     "eta": 0.971
-    },
-    {
-     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
-     "E": 8.0,
-     "R": 26.2989,
-     "eta": 0.3042
-    },
-    {
-     "opis": "Zbrojenie na zginanie",
-     "E": 292.2172,
-     "R": 295.6793,
-     "eta": 0.9883
-    },
-    {
-     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
-     "E": 170.0,
-     "R": 181.5779,
-     "eta": 0.9362
-    },
-    {
-     "opis": "Nośność krzyżulców betonowych",
-     "E": 327.0558,
-     "R": 659.5714,
-     "eta": 0.4959
-    },
-    {
-     "opis": "Nośność strzemion",
-     "E": 327.0558,
-     "R": 339.739,
-     "eta": 0.9627
-    },
-    {
-     "opis": "Ugięcie długotrwałe (quasi-stała) ≤ L/250",
-     "E": 13.0875,
-     "R": 25.7,
-     "eta": 0.5092
-    },
-    {
-     "opis": "Zbrojenie na zginanie",
-     "E": 256.88,
-     "R": 264.5552,
-     "eta": 0.971
-    },
-    {
-     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
-     "E": 8.0,
-     "R": 15.6577,
-     "eta": 0.5109
-    },
-    {
-     "opis": "Zbrojenie na zginanie",
-     "E": 419.6398,
-     "R": 436.3323,
-     "eta": 0.9617
-    },
-    {
-     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
-     "E": 180.0,
-     "R": 186.3379,
-     "eta": 0.966
-    },
-    {
-     "opis": "Zbrojenie na zginanie",
-     "E": 458.4697,
-     "R": 461.9989,
-     "eta": 0.9924
+     "E": 388.4472,
+     "R": 413.3675,
+     "eta": 0.9397
     },
     {
      "opis": "Rysy: średnica prętów (tabl. 7.2N)",
      "E": 10.0,
-     "R": 12.4592,
-     "eta": 0.8026
+     "R": 10.4922,
+     "eta": 0.9531
     },
     {
      "opis": "Zbrojenie na zginanie",
-     "E": 1192.0259,
+     "E": 1210.2524,
      "R": 1256.6371,
-     "eta": 0.9486
+     "eta": 0.9631
     },
     {
      "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
      "E": 160.0,
-     "R": 196.9356,
-     "eta": 0.8124
-    },
-    {
-     "opis": "Zbrojenie na zginanie",
-     "E": 1017.4314,
-     "R": 1026.2536,
-     "eta": 0.9914
-    },
-    {
-     "opis": "Nośność krzyżulców betonowych",
-     "E": 327.0558,
-     "R": 659.5714,
-     "eta": 0.4959
-    },
-    {
-     "opis": "Nośność strzemion",
-     "E": 327.0558,
-     "R": 339.739,
-     "eta": 0.9627
-    },
-    {
-     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
-     "E": 28.4722,
-     "R": 72.8063,
-     "eta": 0.3911
-    },
-    {
-     "opis": "Zbrojenie na zginanie",
-     "E": 256.88,
-     "R": 264.5552,
-     "eta": 0.971
-    },
-    {
-     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
-     "E": 8.0,
-     "R": 22.7976,
-     "eta": 0.3509
+     "R": 193.4139,
+     "eta": 0.8272
     },
     {
      "opis": "Zbrojenie na zginanie",
@@ -1460,58 +1292,22 @@
      "eta": 0.9683
     },
     {
-     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
-     "E": 8.0,
-     "R": 19.7241,
-     "eta": 0.4056
-    },
-    {
-     "opis": "Zbrojenie na zginanie",
-     "E": 256.88,
-     "R": 264.5552,
-     "eta": 0.971
-    },
-    {
-     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
-     "E": 8.0,
-     "R": 20.915,
-     "eta": 0.3825
-    },
-    {
-     "opis": "Zbrojenie na zginanie",
-     "E": 553.6249,
-     "R": 558.5054,
-     "eta": 0.9913
-    },
-    {
-     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
-     "E": 90.0,
-     "R": 178.5692,
-     "eta": 0.504
-    },
-    {
-     "opis": "Zbrojenie na zginanie",
-     "E": 998.2617,
-     "R": 1005.3096,
-     "eta": 0.993
-    },
-    {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 252.3049,
+     "E": 276.0096,
      "R": 659.5714,
-     "eta": 0.3825
+     "eta": 0.4185
     },
     {
      "opis": "Nośność strzemion",
-     "E": 252.3049,
-     "R": 266.9378,
-     "eta": 0.9452
+     "E": 276.0096,
+     "R": 287.4715,
+     "eta": 0.9601
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
-     "E": 10.5263,
-     "R": 471.5892,
-     "eta": 0.0223
+     "E": 28.4722,
+     "R": 73.5182,
+     "eta": 0.3873
     },
     {
      "opis": "Zbrojenie na zginanie",
@@ -1534,6 +1330,138 @@
     {
      "opis": "Rysy: średnica prętów (tabl. 7.2N)",
      "E": 8.0,
+     "R": 17.269,
+     "eta": 0.4633
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 26.2989,
+     "eta": 0.3042
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 286.6576,
+     "R": 295.6793,
+     "eta": 0.9695
+    },
+    {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 170.0,
+     "R": 188.8596,
+     "eta": 0.9001
+    },
+    {
+     "opis": "Ścinanie bez zbrojenia poprzecznego (6.2.2)",
+     "E": 73.8698,
+     "R": 94.0452,
+     "eta": 0.7855
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 35.6944,
+     "R": 238.4136,
+     "eta": 0.1497
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 20.6611,
+     "eta": 0.3872
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 411.3294,
+     "R": 418.879,
+     "eta": 0.982
+    },
+    {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 120.0,
+     "R": 181.2894,
+     "eta": 0.6619
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 388.4472,
+     "R": 413.3675,
+     "eta": 0.9397
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 10.0,
+     "R": 10.4922,
+     "eta": 0.9531
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 1210.2524,
+     "R": 1256.6371,
+     "eta": 0.9631
+    },
+    {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 160.0,
+     "R": 193.4139,
+     "eta": 0.8272
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Nośność krzyżulców betonowych",
+     "E": 276.0096,
+     "R": 659.5714,
+     "eta": 0.4185
+    },
+    {
+     "opis": "Nośność strzemion",
+     "E": 276.0096,
+     "R": 287.4715,
+     "eta": 0.9601
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 28.4722,
+     "R": 73.5182,
+     "eta": 0.3873
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 24.0585,
+     "eta": 0.3325
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
      "R": 19.7241,
      "eta": 0.4056
     },
@@ -1546,44 +1474,116 @@
     {
      "opis": "Rysy: średnica prętów (tabl. 7.2N)",
      "E": 8.0,
-     "R": 13.8696,
-     "eta": 0.5768
+     "R": 21.7934,
+     "eta": 0.3671
     },
     {
      "opis": "Zbrojenie na zginanie",
-     "E": 243.36,
+     "E": 548.7567,
+     "R": 558.5054,
+     "eta": 0.9825
+    },
+    {
+     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
+     "E": 90.0,
+     "R": 184.0369,
+     "eta": 0.489
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 1069.1061,
+     "R": 1099.5574,
+     "eta": 0.9723
+    },
+    {
+     "opis": "Nośność krzyżulców betonowych",
+     "E": 276.0096,
+     "R": 659.5714,
+     "eta": 0.4185
+    },
+    {
+     "opis": "Nośność strzemion",
+     "E": 276.0096,
+     "R": 287.4715,
+     "eta": 0.9601
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 10.5263,
+     "R": 501.9662,
+     "eta": 0.021
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
      "R": 264.5552,
-     "eta": 0.9199
+     "eta": 0.971
     },
     {
      "opis": "Rysy: średnica prętów (tabl. 7.2N)",
      "E": 8.0,
-     "R": 8.1555,
-     "eta": 0.9809
+     "R": 25.942,
+     "eta": 0.3084
     },
     {
      "opis": "Zbrojenie na zginanie",
-     "E": 1281.735,
-     "R": 1282.817,
-     "eta": 0.9992
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 18.5826,
+     "eta": 0.4305
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 16.2712,
+     "eta": 0.4917
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 8.958,
+     "eta": 0.8931
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 1396.5874,
+     "R": 1436.1566,
+     "eta": 0.9724
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 252.3049,
+     "E": 276.0096,
      "R": 659.5714,
-     "eta": 0.3825
+     "eta": 0.4185
     },
     {
      "opis": "Nośność strzemion",
-     "E": 252.3049,
-     "R": 266.9378,
-     "eta": 0.9452
+     "E": 276.0096,
+     "R": 287.4715,
+     "eta": 0.9601
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 13.8158,
-     "R": 651.0961,
-     "eta": 0.0212
+     "R": 612.185,
+     "eta": 0.0226
     }
    ],
    "dane": {
@@ -1591,110 +1591,103 @@
     "pola": [
      {
       "pole": "P1",
-      "Mx": 33.315173621100875,
-      "My": 124.06733296127972,
+      "Mx": 9.860252367790695,
+      "My": 15.584117922070668,
       "Mx_tabl": null,
       "My_tabl": null,
-      "Mgx": -8.372583301728575,
+      "Mgx": -8.18268511264063,
       "M_naroze": 0.0,
-      "sc_zbr": {
-       "opis": "φ8 co 11 cm (5 ramion/m)",
-       "fi": 8,
-       "s": 110.0,
-       "ramiona": 5,
-       "podpora": "S1-04",
-       "V": 327.0557900181967
-      },
-      "Mgy": -22.41719658411693,
-      "Ax": 418.87902047863906,
-      "Ay": 1827.8357257249704,
-      "w": 13.087513315144788,
-      "eta": 0.9890350138255506,
+      "sc_zbr": null,
+      "Mgy": -21.999131805793876,
+      "Ax": 264.55517082861417,
+      "Ay": 251.32741228718342,
+      "w": 0.8741243679201113,
+      "eta": 0.9709883923093442,
       "lx": 14.4,
       "ly": 6.425,
       "brzegi": "WUWU",
-      "V": 327.0557900181967
+      "V": 73.86984839506391
      },
      {
       "pole": "P3",
-      "Mx": 16.82553950157257,
-      "My": 31.90929137136193,
-      "Mx_tabl": 10.431267292162518,
-      "My_tabl": 29.56236901733794,
-      "Mgx": -36.761025802561726,
-      "M_naroze": 74.14592104893008,
+      "Mx": 14.203831995343975,
+      "My": 31.29546561885377,
+      "Mx_tabl": 6.873713527180443,
+      "My_tabl": 19.53375226105898,
+      "Mgx": -31.290449900146903,
+      "M_naroze": 17.295639404143284,
       "sc_zbr": {
-       "opis": "φ8 co 11 cm (5 ramion/m)",
+       "opis": "φ8 co 13 cm (5 ramion/m)",
        "fi": 8,
-       "s": 110.0,
+       "s": 130.0,
        "ramiona": 5,
-       "podpora": "S1-04",
-       "V": 327.0557900181967
+       "podpora": "S1-08",
+       "V": 276.0095939440023
       },
-      "Mgy": -85.76801798500662,
+      "Mgy": -86.96268076065604,
       "Ax": 264.55517082861417,
-      "Ay": 436.33231299858244,
-      "w": 5.812923555537182,
-      "eta": 0.9923610450818633,
+      "Ay": 418.87902047863906,
+      "w": 5.692988184961881,
+      "eta": 0.9819766944194975,
       "lx": 12.0,
       "ly": 5.125,
       "brzegi": "UUUU",
-      "V": 327.0557900181967
+      "V": 276.0095939440023
      },
      {
       "pole": "P6",
-      "Mx": 13.914171355859835,
-      "My": 4.205826055388196,
-      "Mx_tabl": 7.937634024424612,
-      "My_tabl": 3.4195324861935035,
-      "Mgx": -15.520141531835712,
-      "M_naroze": 72.850210772404,
+      "Mx": 13.37598556776556,
+      "My": 4.0282283934290515,
+      "Mx_tabl": 2.3659534421493893,
+      "My_tabl": 1.0159041212261108,
+      "Mgx": -14.028996961901235,
+      "M_naroze": 77.6193333534759,
       "sc_zbr": {
-       "opis": "φ8 co 14 cm (5 ramion/m)",
+       "opis": "φ8 co 13 cm (5 ramion/m)",
        "fi": 8,
-       "s": 140.0,
+       "s": 130.0,
        "ramiona": 5,
        "podpora": "S1-08",
-       "V": 252.30485927513507
+       "V": 276.0095939440023
       },
-      "Mgy": -41.70485588316109,
+      "Mgy": -41.352271659676404,
       "Ax": 264.55517082861417,
       "Ay": 251.32741228718342,
-      "w": 0.13683166487715168,
-      "eta": 0.9929893058764069,
+      "w": 0.13654590911780196,
+      "eta": 0.9825450572316687,
       "lx": 2.0,
       "ly": 3.625,
       "brzegi": "UUUS",
-      "V": 252.30485927513507
+      "V": 276.0095939440023
      },
      {
       "pole": "P7",
-      "Mx": 11.339542007336366,
-      "My": 10.363178998727125,
+      "Mx": 11.793377243382503,
+      "My": 11.193779577397065,
       "Mx_tabl": null,
       "My_tabl": null,
-      "Mgx": -17.143612315349994,
-      "M_naroze": 91.6141101169998,
+      "Mgx": -16.249724378269946,
+      "M_naroze": 98.97436981522725,
       "sc_zbr": {
-       "opis": "φ8 co 14 cm (5 ramion/m)",
+       "opis": "φ8 co 13 cm (5 ramion/m)",
        "fi": 8,
-       "s": 140.0,
+       "s": 130.0,
        "ramiona": 5,
        "podpora": "S1-08",
-       "V": 252.30485927513507
+       "V": 276.0095939440023
       },
-      "Mgy": -18.58405605170819,
+      "Mgy": -16.85064727856252,
       "Ax": 264.55517082861417,
       "Ay": 251.32741228718342,
-      "w": 0.19472298089303988,
-      "eta": 0.9991565472510463,
+      "w": 0.19492545033745673,
+      "eta": 0.9724478459825143,
       "lx": 2.625,
       "ly": 3.625,
       "brzegi": "UUUS",
-      "V": 252.30485927513507
+      "V": 276.0095939440023
      }
     ],
-    "pole_miarodajne": "P1"
+    "pole_miarodajne": "P3"
    }
   },
   {
@@ -1702,156 +1695,144 @@
    "id": "ST2Z",
    "tytul": "Strop ST2Z",
    "rodzaj": "plyta",
-   "wykorzystanie": 0.9972,
+   "wykorzystanie": 0.9901,
    "ok": true,
    "przyjeto": [
     "Płyta gr. 22 cm z betonu C25/30, stal B500SP, otulenie c_nom = 25 mm; zbrojenie wg zestawienia pól (dołem siatka w obu kierunkach, górą nad podporami).",
-    "Maks. ugięcie długotrwałe ≈ 0,1 mm."
+    "Maks. ugięcie długotrwałe ≈ 0,0 mm."
    ],
    "warunki": [
     {
      "opis": "Zbrojenie na zginanie",
-     "E": 470.0124,
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 26.2989,
+     "eta": 0.3042
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 19.7241,
+     "eta": 0.4056
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 17.2801,
+     "eta": 0.463
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 19.7241,
+     "eta": 0.4056
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 485.9906,
      "R": 490.8739,
-     "eta": 0.9575
+     "eta": 0.9901
     },
     {
-     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
-     "E": 10.0,
-     "R": 11.3712,
-     "eta": 0.8794
-    },
-    {
-     "opis": "Zbrojenie na zginanie",
-     "E": 1121.548,
-     "R": 1130.9734,
-     "eta": 0.9917
-    },
-    {
-     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
-     "E": 100.0,
-     "R": 204.3245,
-     "eta": 0.4894
-    },
-    {
-     "opis": "Zbrojenie na zginanie",
-     "E": 260.0255,
-     "R": 264.5552,
-     "eta": 0.9829
-    },
-    {
-     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
-     "E": 8.0,
-     "R": 10.3644,
-     "eta": 0.7719
-    },
-    {
-     "opis": "Zbrojenie na zginanie",
-     "E": 263.8262,
-     "R": 264.5552,
-     "eta": 0.9972
-    },
-    {
-     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
-     "E": 8.0,
-     "R": 18.1903,
-     "eta": 0.4398
-    },
-    {
-     "opis": "Zbrojenie na zginanie",
-     "E": 1176.66,
-     "R": 1182.7172,
-     "eta": 0.9949
-    },
-    {
-     "opis": "Nośność krzyżulców betonowych",
-     "E": 327.0558,
-     "R": 659.5714,
-     "eta": 0.4959
-    },
-    {
-     "opis": "Nośność strzemion",
-     "E": 327.0558,
-     "R": 339.739,
-     "eta": 0.9627
+     "opis": "Ścinanie bez zbrojenia poprzecznego (6.2.2)",
+     "E": 73.8698,
+     "R": 94.0452,
+     "eta": 0.7855
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 5.2632,
-     "R": 66.8478,
-     "eta": 0.0787
+     "R": 1288.608,
+     "eta": 0.0041
     },
     {
      "opis": "Zbrojenie na zginanie",
-     "E": 470.0124,
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 26.2989,
+     "eta": 0.3042
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 19.7241,
+     "eta": 0.4056
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 256.88,
+     "R": 264.5552,
+     "eta": 0.971
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 17.2801,
+     "eta": 0.463
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 243.36,
+     "R": 251.3274,
+     "eta": 0.9683
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 19.7241,
+     "eta": 0.4056
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 485.9906,
      "R": 490.8739,
-     "eta": 0.9575
+     "eta": 0.9901
     },
     {
-     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
-     "E": 10.0,
-     "R": 11.3712,
-     "eta": 0.8794
-    },
-    {
-     "opis": "Zbrojenie na zginanie",
-     "E": 1121.548,
-     "R": 1130.9734,
-     "eta": 0.9917
-    },
-    {
-     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
-     "E": 100.0,
-     "R": 204.3245,
-     "eta": 0.4894
-    },
-    {
-     "opis": "Zbrojenie na zginanie",
-     "E": 260.0255,
-     "R": 264.5552,
-     "eta": 0.9829
-    },
-    {
-     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
-     "E": 8.0,
-     "R": 10.3644,
-     "eta": 0.7719
-    },
-    {
-     "opis": "Zbrojenie na zginanie",
-     "E": 263.8262,
-     "R": 264.5552,
-     "eta": 0.9972
-    },
-    {
-     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
-     "E": 8.0,
-     "R": 18.1903,
-     "eta": 0.4398
-    },
-    {
-     "opis": "Zbrojenie na zginanie",
-     "E": 1176.66,
-     "R": 1182.7172,
-     "eta": 0.9949
-    },
-    {
-     "opis": "Nośność krzyżulców betonowych",
-     "E": 327.0558,
-     "R": 659.5714,
-     "eta": 0.4959
-    },
-    {
-     "opis": "Nośność strzemion",
-     "E": 327.0558,
-     "R": 339.739,
-     "eta": 0.9627
+     "opis": "Ścinanie bez zbrojenia poprzecznego (6.2.2)",
+     "E": 73.8698,
+     "R": 94.0452,
+     "eta": 0.7855
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 5.2632,
-     "R": 66.8478,
-     "eta": 0.0787
+     "R": 1288.608,
+     "eta": 0.0041
     }
    ],
    "dane": {
@@ -1859,29 +1840,22 @@
     "pola": [
      {
       "pole": "P2",
-      "Mx": 37.65782684598327,
-      "My": 81.11540993402505,
-      "Mx_tabl": 2.635862676893688,
-      "My_tabl": 1.0801140489147107,
-      "Mgx": -21.12248842589311,
-      "M_naroze": 84.75811639637612,
-      "sc_zbr": {
-       "opis": "φ8 co 11 cm (5 ramion/m)",
-       "fi": 8,
-       "s": 110.0,
-       "ramiona": 5,
-       "podpora": "S1-04",
-       "V": 327.0557900181967
-      },
-      "Mgy": -20.278852483506263,
-      "Ax": 490.87385212340524,
-      "Ay": 1130.9733552923256,
-      "w": 0.14388409118115011,
-      "eta": 0.9972445624301151,
+      "Mx": 7.308414896554821,
+      "My": 6.005369609451082,
+      "Mx_tabl": 0.6576206210178711,
+      "My_tabl": 0.25210619257436745,
+      "Mgx": -16.955867577232276,
+      "M_naroze": 36.78391096241144,
+      "sc_zbr": null,
+      "Mgy": -7.985840903138541,
+      "Ax": 264.55517082861417,
+      "Ay": 251.32741228718342,
+      "w": 0.04243749980680599,
+      "eta": 0.9900519876868885,
       "lx": 1.0,
       "ly": 5.125,
       "brzegi": "UUUS",
-      "V": 327.0557900181967
+      "V": 73.86984839506391
      }
     ],
     "pole_miarodajne": "P2"
@@ -2725,144 +2699,132 @@
    "id": "PL-2",
    "tytul": "Płyta wspornikowa PL-2",
    "rodzaj": "plyta",
-   "wykorzystanie": 3.3636,
-   "ok": false,
+   "wykorzystanie": 0.9984,
+   "ok": true,
    "przyjeto": [
     "Płyta gr. 30 cm z betonu C30/37, stal B500SP, otulenie c_nom = 35 mm; zbrojenie wg zestawienia pól (dołem siatka w obu kierunkach, górą nad podporami).",
-    "Maks. ugięcie długotrwałe ≈ 329,7 mm."
+    "Maks. ugięcie długotrwałe ≈ 18,3 mm."
    ],
    "warunki": [
     {
      "opis": "Zbrojenie na zginanie",
-     "E": 608.9436,
-     "R": 628.3185,
-     "eta": 0.9692
+     "E": 392.08,
+     "R": 392.6991,
+     "eta": 0.9984
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 10.0,
+     "R": 24.0,
+     "eta": 0.4167
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 377.0,
+     "R": 386.6576,
+     "eta": 0.975
     },
     {
      "opis": "Rysy: średnica prętów (tabl. 7.2N)",
      "E": 8.0,
-     "R": 9.9376,
-     "eta": 0.805
+     "R": 19.2,
+     "eta": 0.4167
     },
     {
      "opis": "Zbrojenie na zginanie",
-     "E": 1621.2919,
-     "R": 1675.5161,
-     "eta": 0.9676
-    },
-    {
-     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
-     "E": 120.0,
-     "R": 163.5599,
-     "eta": 0.7337
-    },
-    {
-     "opis": "Zbrojenie na zginanie",
-     "E": 2245.6921,
-     "R": 2513.2741,
-     "eta": 0.8935
-    },
-    {
-     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
-     "E": 80.0,
-     "R": 191.9563,
-     "eta": 0.4168
-    },
-    {
-     "opis": "Zbrojenie na zginanie",
-     "E": 3756.0203,
-     "R": 2680.8257,
-     "eta": 1.4011
+     "E": 392.08,
+     "R": 392.6991,
+     "eta": 0.9984
     },
     {
      "opis": "Rysy: średnica prętów (tabl. 7.2N)",
-     "E": 16.0,
-     "R": 4.7568,
-     "eta": 3.3636
-    },
-    {
-     "opis": "Nośność krzyżulców betonowych",
-     "E": 327.0558,
-     "R": 1059.0171,
-     "eta": 0.3088
-    },
-    {
-     "opis": "Nośność strzemion",
-     "E": 327.0558,
-     "R": 340.9311,
-     "eta": 0.9593
-    },
-    {
-     "opis": "Ugięcie długotrwałe (quasi-stała) ≤ L/250",
-     "E": 329.7077,
-     "R": 115.2,
-     "eta": 2.862
+     "E": 10.0,
+     "R": 24.0,
+     "eta": 0.4167
     },
     {
      "opis": "Zbrojenie na zginanie",
-     "E": 608.9436,
-     "R": 628.3185,
-     "eta": 0.9692
+     "E": 377.0,
+     "R": 386.6576,
+     "eta": 0.975
     },
     {
      "opis": "Rysy: średnica prętów (tabl. 7.2N)",
      "E": 8.0,
-     "R": 9.9376,
-     "eta": 0.805
+     "R": 19.2,
+     "eta": 0.4167
+    },
+    {
+     "opis": "Ścinanie bez zbrojenia poprzecznego (6.2.2)",
+     "E": 73.8698,
+     "R": 128.1795,
+     "eta": 0.5763
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 55.3846,
+     "R": 123.0285,
+     "eta": 0.4502
     },
     {
      "opis": "Zbrojenie na zginanie",
-     "E": 1621.2919,
-     "R": 1675.5161,
-     "eta": 0.9676
-    },
-    {
-     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
-     "E": 120.0,
-     "R": 163.5599,
-     "eta": 0.7337
-    },
-    {
-     "opis": "Zbrojenie na zginanie",
-     "E": 2245.6921,
-     "R": 2513.2741,
-     "eta": 0.8935
-    },
-    {
-     "opis": "Rysy: rozstaw prętów (tabl. 7.3N)",
-     "E": 80.0,
-     "R": 191.9563,
-     "eta": 0.4168
-    },
-    {
-     "opis": "Zbrojenie na zginanie",
-     "E": 3756.0203,
-     "R": 2680.8257,
-     "eta": 1.4011
+     "E": 392.08,
+     "R": 392.6991,
+     "eta": 0.9984
     },
     {
      "opis": "Rysy: średnica prętów (tabl. 7.2N)",
-     "E": 16.0,
-     "R": 4.7568,
-     "eta": 3.3636
+     "E": 10.0,
+     "R": 24.0,
+     "eta": 0.4167
     },
     {
-     "opis": "Nośność krzyżulców betonowych",
-     "E": 327.0558,
-     "R": 1059.0171,
-     "eta": 0.3088
+     "opis": "Zbrojenie na zginanie",
+     "E": 377.0,
+     "R": 386.6576,
+     "eta": 0.975
     },
     {
-     "opis": "Nośność strzemion",
-     "E": 327.0558,
-     "R": 340.9311,
-     "eta": 0.9593
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 19.2,
+     "eta": 0.4167
     },
     {
-     "opis": "Ugięcie długotrwałe (quasi-stała) ≤ L/250",
-     "E": 329.7077,
-     "R": 115.2,
-     "eta": 2.862
+     "opis": "Zbrojenie na zginanie",
+     "E": 392.08,
+     "R": 392.6991,
+     "eta": 0.9984
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 10.0,
+     "R": 24.0,
+     "eta": 0.4167
+    },
+    {
+     "opis": "Zbrojenie na zginanie",
+     "E": 377.0,
+     "R": 386.6576,
+     "eta": 0.975
+    },
+    {
+     "opis": "Rysy: średnica prętów (tabl. 7.2N)",
+     "E": 8.0,
+     "R": 19.2,
+     "eta": 0.4167
+    },
+    {
+     "opis": "Ścinanie bez zbrojenia poprzecznego (6.2.2)",
+     "E": 73.8698,
+     "R": 128.1795,
+     "eta": 0.5763
+    },
+    {
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 55.3846,
+     "R": 123.0285,
+     "eta": 0.4502
     }
    ],
    "dane": {
@@ -2870,29 +2832,22 @@
     "pola": [
      {
       "pole": "P1",
-      "Mx": 67.20150640852097,
-      "My": 164.63310713314172,
+      "Mx": 15.56441981439495,
+      "My": 15.621717302125857,
       "Mx_tabl": null,
       "My_tabl": null,
-      "Mgx": -231.61639901560406,
+      "Mgx": -19.355684329871014,
       "M_naroze": 0.0,
-      "sc_zbr": {
-       "opis": "φ8 co 12 cm (4 ramion/m)",
-       "fi": 8,
-       "s": 120.0,
-       "ramiona": 4,
-       "podpora": "S1-04",
-       "V": 327.0557900181967
-      },
-      "Mgy": -346.0363467439873,
-      "Ax": 628.3185307179585,
-      "Ay": 1675.5160819145563,
-      "w": 329.70768776416173,
-      "eta": 3.3635999816760744,
+      "sc_zbr": null,
+      "Mgy": -19.500749157557905,
+      "Ax": 392.69908169872417,
+      "Ay": 386.65755736489757,
+      "w": 18.325657608102556,
+      "eta": 0.9984235213995277,
       "lx": 14.4,
       "ly": 6.425,
       "brzegi": "WUWU",
-      "V": 327.0557900181967
+      "V": 73.86984839506391
      }
     ],
     "pole_miarodajne": "P1"
@@ -3808,64 +3763,64 @@
    "id": "B3",
    "tytul": "Belka B3",
    "rodzaj": "belka",
-   "wykorzystanie": 0.962,
+   "wykorzystanie": 0.9857,
    "ok": true,
    "przyjeto": [
-    "Belka B3: 20×60 cm, C30/37; dołem 8φ12, górą 2φ12, strzemiona φ8 co 10 cm (2-cięte)."
+    "Belka B3: 20×60 cm, C30/37; dołem 6φ12, górą 2φ12, strzemiona φ8 co 16 cm (2-cięte)."
    ],
    "warunki": [
     {
      "opis": "Zbrojenie dolne",
-     "E": 861.1873,
-     "R": 904.7787,
-     "eta": 0.9518
+     "E": 640.742,
+     "R": 678.584,
+     "eta": 0.9442
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 423.0936,
+     "E": 270.9543,
      "R": 455.3774,
-     "eta": 0.9291
+     "eta": 0.595
     },
     {
      "opis": "Nośność strzemion",
-     "E": 423.0936,
-     "R": 439.8011,
-     "eta": 0.962
+     "E": 270.9543,
+     "R": 274.8757,
+     "eta": 0.9857
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 9.1682,
-     "R": 17.6944,
-     "eta": 0.5181
+     "R": 19.9652,
+     "eta": 0.4592
     },
     {
      "opis": "Rysy: średnica prętów (tabl. 7.2N)",
      "E": 12.0,
-     "R": 27.4296,
-     "eta": 0.4375
+     "R": 27.6221,
+     "eta": 0.4344
     }
    ],
    "dane": {
     "reakcje": {
      "B4": {
-      "G": 227.83197334884156,
-      "QA": 102.62631621022553,
-      "QA_pA": 104.61745338191113,
+      "G": 148.1651317541685,
+      "QA": 60.369922962297245,
+      "QA_pA": 62.50349449958909,
       "QA_pB": 0.0,
-      "H": 0.6873160143384103,
-      "S1": 6.276113835296333,
-      "S2": 6.307014134881156,
-      "SB2": 0.15159499454148317
+      "H": 0.778913137955988,
+      "S1": 7.042935070761989,
+      "S2": 7.0702964738577,
+      "SB2": 0.11455892195067463
      },
      "B5": {
-      "G": 79.74942461280463,
-      "QA": 27.732687618874973,
-      "QA_pA": 33.93431409833447,
+      "G": 130.29653525727014,
+      "QA": 54.20000526716536,
+      "QA_pA": 58.213090461231985,
       "QA_pB": 0.0,
-      "H": 0.8347756199927222,
-      "S1": 6.506124573644551,
-      "S2": 6.597109335901212,
-      "SB2": 0.3575398356248902
+      "H": 0.6471009194470037,
+      "S1": 5.763644752715344,
+      "S2": 5.825346339738324,
+      "SB2": 0.257748771514116
      }
     }
    }
@@ -3875,10 +3830,10 @@
    "id": "B4",
    "tytul": "Belka B4",
    "rodzaj": "belka",
-   "wykorzystanie": 0.9801,
+   "wykorzystanie": 0.9517,
    "ok": true,
    "przyjeto": [
-    "Belka B4: 18×80 cm, C30/37; dołem 2φ12, górą 3φ25, strzemiona φ8 co 13 cm (2-cięte)."
+    "Belka B4: 18×80 cm, C30/37; dołem 2φ12, górą 6φ16, strzemiona φ8 co 15 cm (2-cięte)."
    ],
    "warunki": [
     {
@@ -3889,46 +3844,62 @@
     },
     {
      "opis": "Zbrojenie górne",
-     "E": 1443.2705,
-     "R": 1472.6216,
-     "eta": 0.9801
+     "E": 1064.4513,
+     "R": 1206.3716,
+     "eta": 0.8824
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 427.3392,
+     "E": 378.8598,
      "R": 556.4728,
-     "eta": 0.7679
+     "eta": 0.6808
     },
     {
      "opis": "Nośność strzemion",
-     "E": 427.3392,
-     "R": 459.3492,
-     "eta": 0.9303
+     "E": 378.8598,
+     "R": 398.1026,
+     "eta": 0.9517
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 6.4229,
-     "R": 10721790.4256,
-     "eta": 0.0
+     "R": 808.5853,
+     "eta": 0.0079
     },
     {
      "opis": "Rysy: średnica prętów (tabl. 7.2N)",
      "E": 12.0,
      "R": 78.0488,
      "eta": 0.1538
+    },
+    {
+     "opis": "EQU — zakotwienie reakcji odrywającej w słupie ŻB",
+     "E": 56.8953,
+     "R": 452.4,
+     "eta": 0.1258
     }
    ],
    "dane": {
     "reakcje": {
-     "S1-01": {
-      "G": 245.38197340611146,
-      "QA": 102.6263162274845,
-      "QA_pA": 104.6174534134916,
-      "QA_pB": 0.0,
-      "H": 0.7300939561879078,
-      "S1": 6.435076477204971,
-      "S2": 6.493130116786597,
-      "SB2": 0.26641818704529624
+     "SL10": {
+      "G": 284.82436618609404,
+      "QA": 109.64699633601516,
+      "QA_pA": 128.13508292787267,
+      "QA_pB": 0.027988065890907635,
+      "H": 2.9062546922387007,
+      "S1": 13.23330968747905,
+      "S2": 13.299604898372133,
+      "SB2": 0.27879953950982195
+     },
+     "SL21": {
+      "G": 55.42435176479949,
+      "QA": 5.426148702907271,
+      "QA_pA": -4.421520896025591,
+      "QA_pB": 0.003575132028089456,
+      "H": 1.370454775656981,
+      "S1": 3.0567432155585266,
+      "S2": 3.048529461149883,
+      "SB2": -0.03442564983151897
      }
     }
    }
@@ -3938,60 +3909,76 @@
    "id": "B5",
    "tytul": "Belka B5",
    "rodzaj": "belka",
-   "wykorzystanie": 0.9939,
+   "wykorzystanie": 0.9821,
    "ok": true,
    "przyjeto": [
-    "Belka B5: 18×80 cm, C30/37; dołem 2φ12, górą 5φ12, strzemiona φ8 co 16 cm (2-cięte)."
+    "Belka B5: 18×80 cm, C30/37; dołem 2φ14, górą 6φ14, strzemiona φ8 co 14 cm (2-cięte)."
    ],
    "warunki": [
     {
      "opis": "Zbrojenie dolne",
-     "E": 206.023,
-     "R": 226.1947,
-     "eta": 0.9108
+     "E": 264.228,
+     "R": 307.8761,
+     "eta": 0.8582
     },
     {
      "opis": "Zbrojenie górne",
-     "E": 539.8454,
-     "R": 565.4867,
-     "eta": 0.9547
+     "E": 809.2849,
+     "R": 923.6282,
+     "eta": 0.8762
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 370.9336,
+     "E": 418.8967,
      "R": 556.4728,
-     "eta": 0.6666
+     "eta": 0.7528
     },
     {
      "opis": "Nośność strzemion",
-     "E": 370.9336,
-     "R": 373.2212,
-     "eta": 0.9939
+     "E": 418.8967,
+     "R": 426.5385,
+     "eta": 0.9821
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 6.4229,
-     "R": 144.8092,
-     "eta": 0.0444
+     "R": 90.5691,
+     "eta": 0.0709
     },
     {
      "opis": "Rysy: średnica prętów (tabl. 7.2N)",
-     "E": 12.0,
-     "R": 36.5366,
-     "eta": 0.3284
+     "E": 14.0,
+     "R": 41.686,
+     "eta": 0.3358
+    },
+    {
+     "opis": "EQU — brak odrywania podpór (R_EQU ≥ 0)",
+     "E": 0.0,
+     "R": 169.0555,
+     "eta": 0.0
     }
    ],
    "dane": {
     "reakcje": {
-     "S1-05": {
-      "G": 421.6486249979664,
-      "QA": 87.66669390633275,
-      "QA_pA": 34.52251538645874,
-      "QA_pB": 59.34580500385337,
-      "H": 8.699636588847461,
-      "S1": 17.667160918939718,
-      "S2": 18.06070108133605,
-      "SB2": 1.6464654721639818
+     "SL12": {
+      "G": 258.2077422559588,
+      "QA": 77.65237472529738,
+      "QA_pA": 73.23582349717617,
+      "QA_pB": 8.93095316272229,
+      "H": 4.3638789629026675,
+      "S1": 10.341497867111023,
+      "S2": 11.032128485214221,
+      "SB2": 2.905343596622221
+     },
+     "SL14": {
+      "G": 249.8097717830013,
+      "QA": 48.85155947842621,
+      "QA_pA": -15.022733020799933,
+      "QA_pB": 77.01411678806713,
+      "H": 1.0393208264113127,
+      "S1": 0.6243778684265067,
+      "S2": 1.0515991628403754,
+      "SB2": 1.8208886071970483
      }
     }
    }
@@ -4001,10 +3988,10 @@
    "id": "B2",
    "tytul": "Belka B2",
    "rodzaj": "belka",
-   "wykorzystanie": 0.9108,
+   "wykorzystanie": 0.9741,
    "ok": true,
    "przyjeto": [
-    "Belka B2: 18×80 cm, C30/37; dołem 2φ12, górą 2φ12, strzemiona φ8 co 40 cm (2-cięte)."
+    "Belka B2: 18×80 cm, C30/37; dołem 2φ12, górą 2φ12, strzemiona φ8 co 34 cm (2-cięte)."
    ],
    "warunki": [
     {
@@ -4015,65 +4002,65 @@
     },
     {
      "opis": "Zbrojenie górne",
-     "E": 206.023,
+     "E": 215.9542,
      "R": 226.1947,
-     "eta": 0.9108
+     "eta": 0.9547
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 55.6743,
+     "E": 171.0824,
      "R": 556.4728,
-     "eta": 0.1
+     "eta": 0.3074
     },
     {
      "opis": "Nośność strzemion",
-     "E": 55.6743,
-     "R": 149.2885,
-     "eta": 0.3729
+     "E": 171.0824,
+     "R": 175.6335,
+     "eta": 0.9741
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 9.9078,
-     "R": 1211.4324,
-     "eta": 0.0082
+     "R": 290.0688,
+     "eta": 0.0342
     },
     {
      "opis": "Rysy: średnica prętów (tabl. 7.2N)",
      "E": 12.0,
-     "R": 78.0488,
-     "eta": 0.1538
+     "R": 65.7367,
+     "eta": 0.1825
     }
    ],
    "dane": {
     "reakcje": {
      "S1-01": {
-      "G": 39.1455493189318,
-      "QA": 12.192646841647598,
-      "QA_pA": 5.948344502684151,
-      "QA_pB": 6.244251282324436,
-      "H": 0.0,
-      "S1": 0.0,
-      "S2": 0.0,
+      "G": 84.17090160857573,
+      "QA": 24.031608863336416,
+      "QA_pA": 12.13616795177411,
+      "QA_pB": 11.87867047933584,
+      "H": 0.4163717294447906,
+      "S1": 1.3424364475281436,
+      "S2": 1.3424364475281436,
       "SB2": 0.0
      },
      "SL5": {
-      "G": 59.69925559064495,
-      "QA": 15.519518326584798,
-      "QA_pA": 6.847991360252333,
-      "QA_pB": 8.67155226597514,
-      "H": 0.0,
-      "S1": 0.0,
-      "S2": 0.0,
+      "G": 192.47640691283868,
+      "QA": 41.579553835989515,
+      "QA_pA": 24.120213063550338,
+      "QA_pB": 17.341417533764897,
+      "H": 1.6346878371168287,
+      "S1": 6.316989668790784,
+      "S2": 6.316989668790784,
       "SB2": 0.0
      },
      "SL6": {
-      "G": 53.865069855364446,
-      "QA": 15.101968911861324,
-      "QA_pA": 6.675762720789569,
-      "QA_pB": 8.426229360467788,
-      "H": 0.0,
-      "S1": 0.0,
-      "S2": 0.0,
+      "G": 162.54701792986128,
+      "QA": 37.822132187530876,
+      "QA_pA": 21.42315353923641,
+      "QA_pB": 16.835679751563966,
+      "H": 1.527769241421755,
+      "S1": 5.339032527472504,
+      "S2": 5.339032527472504,
       "SB2": 0.0
      }
     }
@@ -4084,63 +4071,63 @@
    "id": "B9",
    "tytul": "Belka B9",
    "rodzaj": "belka",
-   "wykorzystanie": 0.9907,
+   "wykorzystanie": 0.9972,
    "ok": true,
    "przyjeto": [
-    "Belka B9: 25×50 cm, C25/30; dołem 6φ12, górą 2φ12, strzemiona φ8 co 7 cm (2-cięte)."
+    "Belka B9: 25×50 cm, C25/30; dołem 5φ12, górą 2φ12, strzemiona φ8 co 8 cm (2-cięte)."
    ],
    "warunki": [
     {
      "opis": "Zbrojenie dolne",
-     "E": 672.2085,
-     "R": 678.584,
-     "eta": 0.9906
+     "E": 548.4534,
+     "R": 565.4867,
+     "eta": 0.9699
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 431.1482,
-     "R": 435.2114,
-     "eta": 0.9907
+     "E": 409.3076,
+     "R": 410.4437,
+     "eta": 0.9972
     },
     {
      "opis": "Nośność strzemion",
-     "E": 431.1482,
-     "R": 438.5086,
-     "eta": 0.9832
+     "E": 409.3076,
+     "R": 428.8356,
+     "eta": 0.9545
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 5.719,
-     "R": 17.5665,
-     "eta": 0.3256
+     "R": 19.5946,
+     "eta": 0.2919
     },
     {
      "opis": "Rysy: średnica prętów (tabl. 7.2N)",
      "E": 12.0,
-     "R": 14.6124,
-     "eta": 0.8212
+     "R": 15.2513,
+     "eta": 0.7868
     }
    ],
    "dane": {
     "reakcje": {
-     "S1-08": {
-      "G": 275.8684569973108,
-      "QA": 46.220092387935736,
+     "SL17": {
+      "G": 258.5170291792408,
+      "QA": 45.60702114127125,
       "QA_pA": 0.0,
-      "QA_pB": 48.791641182822914,
-      "H": 6.263262725261389,
-      "S1": 9.992772404783832,
-      "S2": 9.667805264629228,
+      "QA_pB": 52.13274345978295,
+      "H": 4.6029986118664965,
+      "S1": 7.426993616507389,
+      "S2": 7.426993616507389,
       "SB2": 0.0
      },
-     "S1-09": {
-      "G": 209.45817560268296,
-      "QA": 48.229174597129216,
+     "SL19": {
+      "G": 199.95390977743,
+      "QA": 45.388705099737074,
       "QA_pA": 0.0,
-      "QA_pB": 48.12295892471662,
-      "H": 2.155260902694863,
-      "S1": 3.439981431578417,
-      "S2": 3.3338365114996122,
+      "QA_pB": 51.36314273671492,
+      "H": 1.5803676794121202,
+      "S1": 2.553471799737963,
+      "S2": 2.553471799737963,
       "SB2": 0.0
      }
     }
@@ -4165,20 +4152,20 @@
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 8.673,
+     "E": 8.6995,
      "R": 311.8037,
-     "eta": 0.0278
+     "eta": 0.0279
     },
     {
      "opis": "Nośność strzemion",
-     "E": 8.673,
+     "E": 8.6995,
      "R": 106.1068,
-     "eta": 0.0817
+     "eta": 0.082
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 4.4088,
-     "R": 2116.456,
+     "R": 2104.0385,
      "eta": 0.0021
     },
     {
@@ -4191,14 +4178,14 @@
    "dane": {
     "reakcje": {
      "S1-04": {
-      "G": 10.343835515347187,
+      "G": 10.367164537712815,
       "QA": 0.0,
-      "QA_pA": 0.05529770493418763,
+      "QA_pA": 0.05635767369187275,
       "QA_pB": 0.0,
-      "H": 0.6258927667385914,
-      "S1": 1.1266363967234285,
-      "S2": 1.6197848002826443,
-      "SB2": 1.9829702525624855
+      "H": 0.630591422612703,
+      "S1": 1.1350645606875627,
+      "S2": 1.6321522230706655,
+      "SB2": 1.9993313111822144
      }
     }
    }
@@ -4222,21 +4209,21 @@
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 45.7108,
+     "E": 31.1444,
      "R": 311.8037,
-     "eta": 0.1466
+     "eta": 0.0999
     },
     {
      "opis": "Nośność strzemion",
-     "E": 45.7108,
+     "E": 31.1444,
      "R": 106.1068,
-     "eta": 0.4308
+     "eta": 0.2935
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 4.4088,
-     "R": 172.9964,
-     "eta": 0.0255
+     "R": 296.1846,
+     "eta": 0.0149
     },
     {
      "opis": "Rysy: średnica prętów (tabl. 7.2N)",
@@ -4248,10 +4235,10 @@
    "dane": {
     "reakcje": {
      "S1-04": {
-      "G": 50.79733865409918,
-      "QA": 17.622282786254416,
-      "QA_pA": 4.294373254842217,
-      "QA_pB": 13.327909531425446,
+      "G": 32.02696651210369,
+      "QA": 7.870673932809928,
+      "QA_pA": 0.0,
+      "QA_pB": 13.471361126759259,
       "H": 0.0,
       "S1": 0.0,
       "S2": 0.0,
@@ -4265,10 +4252,10 @@
    "id": "B1",
    "tytul": "Belka B1",
    "rodzaj": "belka",
-   "wykorzystanie": 0.9072,
+   "wykorzystanie": 0.994,
    "ok": true,
    "przyjeto": [
-    "Belka B1: 18×107 cm, C30/37; dołem 2φ14, górą 2φ14, strzemiona φ8 co 40 cm (2-cięte)."
+    "Belka B1: 18×107 cm, C30/37; dołem 2φ14, górą 2φ14, strzemiona φ8 co 34 cm (2-cięte)."
    ],
    "warunki": [
     {
@@ -4285,21 +4272,21 @@
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 47.1961,
+     "E": 236.6777,
      "R": 754.4275,
-     "eta": 0.0626
+     "eta": 0.3137
     },
     {
      "opis": "Nośność strzemion",
-     "E": 47.1961,
-     "R": 202.3951,
-     "eta": 0.2332
+     "E": 236.6777,
+     "R": 238.1118,
+     "eta": 0.994
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 11.6618,
-     "R": 1926.8374,
-     "eta": 0.0061
+     "R": 285.5899,
+     "eta": 0.0408
     },
     {
      "opis": "Rysy: średnica prętów (tabl. 7.2N)",
@@ -4310,65 +4297,65 @@
    ],
    "dane": {
     "reakcje": {
-     "S0-07": {
-      "G": 15.979974472524145,
-      "QA": 9.979185627831445,
-      "QA_pA": 9.966972728365526,
-      "QA_pB": 0.0030211157320711047,
-      "H": 0.0,
-      "S1": 0.0,
-      "S2": 0.0,
-      "SB2": 0.0
+     "SL9": {
+      "G": 22.92045256443798,
+      "QA": 10.882473129061788,
+      "QA_pA": 11.080401611077628,
+      "QA_pB": -0.08156969046551768,
+      "H": -0.02275630552230723,
+      "S1": -0.05605271600637707,
+      "S2": -0.05593965310251292,
+      "SB2": 0.00047483940396353397
      },
      "SL1": {
-      "G": 29.84252564837394,
-      "QA": 7.125580930775424,
-      "QA_pA": 7.115082439569537,
-      "QA_pB": 0.0021326647882808827,
-      "H": 0.0,
-      "S1": 0.0,
-      "S2": 0.0,
-      "SB2": 0.0
+      "G": 82.63165709101705,
+      "QA": 14.638099861076295,
+      "QA_pA": 13.035829388585842,
+      "QA_pB": 0.6194967396138283,
+      "H": 0.16493976899834983,
+      "S1": 0.4063390359584069,
+      "S2": 0.405520476690004,
+      "SB2": -0.0034376875093026227
      },
      "SL2": {
-      "G": 41.97822021421069,
-      "QA": 10.661931987008286,
-      "QA_pA": 10.663110188496587,
-      "QA_pB": 6.237731070904851e-05,
-      "H": 0.0,
-      "S1": 0.0,
-      "S2": 0.0,
-      "SB2": 0.0
+      "G": 197.97477756107205,
+      "QA": 41.15931923505005,
+      "QA_pA": 24.86196030528374,
+      "QA_pB": 6.972919643088133,
+      "H": 1.7575677688675562,
+      "S1": 4.398838517838826,
+      "S2": 4.391121417792874,
+      "SB2": -0.03232068301211838
      },
      "SL3": {
-      "G": 36.16535246232769,
-      "QA": 10.36538376571263,
-      "QA_pA": 10.375295829366573,
-      "QA_pB": -0.0005923327435901626,
-      "H": 0.0,
-      "S1": 0.0,
-      "S2": 0.0,
-      "SB2": 0.0
+      "G": 251.40619873832594,
+      "QA": 58.22415934268832,
+      "QA_pA": 41.716729011759654,
+      "QA_pB": 16.42309997482799,
+      "H": 1.4850296193646528,
+      "S1": 5.886371339551788,
+      "S2": 5.886211452740627,
+      "SB2": -0.0007510847329399439
      },
      "SL4": {
-      "G": 51.300561143675736,
-      "QA": 15.286919471435802,
-      "QA_pA": 15.335479522713813,
-      "QA_pB": 0.0017090420799785733,
-      "H": 0.0,
-      "S1": 0.0,
-      "S2": 0.0,
-      "SB2": 0.0
+      "G": 282.8299538219622,
+      "QA": 75.3344116907635,
+      "QA_pA": 58.05840043555584,
+      "QA_pB": 18.99514087661138,
+      "H": 1.7021615957098823,
+      "S1": 5.9238367595174335,
+      "S2": 5.925307096696832,
+      "SB2": 0.00638211004872602
      },
-     "S0-15": {
-      "G": 13.147217848441448,
-      "QA": 6.576941123341389,
-      "QA_pA": 6.5232307401568255,
-      "QA_pB": 0.010438590280306883,
-      "H": 0.0,
-      "S1": 0.0,
-      "S2": 0.0,
-      "SB2": 0.0
+     "SL20": {
+      "G": 84.1151617553188,
+      "QA": 41.02467011851767,
+      "QA_pA": 43.847264819749185,
+      "QA_pB": 5.5282029503782635,
+      "H": 0.6514372689476371,
+      "S1": 2.282105612889902,
+      "S2": 2.2939614105622406,
+      "SB2": 0.05134668585310681
      }
     }
    }
@@ -4474,7 +4461,7 @@
    ],
    "dane": {
     "reakcje": {
-     "S0-12": {
+     "SL16": {
       "G": 147.62883286793928,
       "QA": 40.51153182427973,
       "QA_pA": 42.242612142357316,
@@ -4484,7 +4471,7 @@
       "S2": 0.03959045738586412,
       "SB2": 0.036926066856035465
      },
-     "S0-13": {
+     "SL18": {
       "G": 90.70253468053077,
       "QA": 26.1909420079154,
       "QA_pA": 28.278207921679115,
@@ -4516,33 +4503,33 @@
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 9.0399,
+     "E": 8.9179,
      "R": 126.846,
-     "eta": 0.0713
+     "eta": 0.0703
     },
     {
      "opis": "Nośność strzemion",
-     "E": 9.0399,
+     "E": 8.9179,
      "R": 59.8924,
-     "eta": 0.1509
+     "eta": 0.1489
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 5.4187,
-     "R": 285.4591,
-     "eta": 0.019
+     "R": 291.6879,
+     "eta": 0.0186
     },
     {
      "opis": "Docisk",
-     "E": 11.0488,
+     "E": 10.8996,
      "R": 206.8492,
-     "eta": 0.0534
+     "eta": 0.0527
     }
    ],
    "dane": {
     "L": 1.1,
-    "M": 3.038422410075968,
-    "q_d": 20.088743207113836
+    "M": 2.9973991777094,
+    "q_d": 19.817515224524954
    }
   },
   {
@@ -4598,7 +4585,7 @@
    "id": "N-O0-09",
    "tytul": "Nadproże N-O0-09 nad otworem O0-09 w ścianie S0-06 (światło 1,10 m)",
    "rodzaj": "nadproze",
-   "wykorzystanie": 0.5465,
+   "wykorzystanie": 0.5464,
    "ok": true,
    "przyjeto": [
     "N-O0-09: nadproże żelbetowe 18×25 cm, C25/30, dołem 2φ10, strzemiona φ6 co 15 cm (2-cięte), oparcie ≥ 20 cm."
@@ -4606,39 +4593,39 @@
    "warunki": [
     {
      "opis": "Zbrojenie dolne",
-     "E": 85.851,
+     "E": 85.8335,
      "R": 157.0796,
-     "eta": 0.5465
+     "eta": 0.5464
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 20.1354,
+     "E": 20.1314,
      "R": 133.0946,
      "eta": 0.1513
     },
     {
      "opis": "Nośność strzemion",
-     "E": 20.1354,
+     "E": 20.1314,
      "R": 62.8428,
-     "eta": 0.3204
+     "eta": 0.3203
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 6.1033,
-     "R": 74.4773,
+     "R": 74.5005,
      "eta": 0.0819
     },
     {
      "opis": "Docisk",
-     "E": 23.7964,
+     "E": 23.7917,
      "R": 220.6548,
      "eta": 0.1078
     }
    ],
    "dane": {
     "L": 1.3,
-    "M": 7.733814040373702,
-    "q_d": 36.6097706053193
+    "M": 7.732286263545119,
+    "q_d": 36.602538525657366
    }
   },
   {
@@ -4694,47 +4681,47 @@
    "id": "N-O0-11",
    "tytul": "Nadproże N-O0-11 nad otworem O0-11 w ścianie S0-07 (światło 2,40 m)",
    "rodzaj": "nadproze",
-   "wykorzystanie": 0.9263,
+   "wykorzystanie": 0.9865,
    "ok": true,
    "przyjeto": [
-    "N-O0-11: nadproże zespolone z płytą 18×42 cm, C25/30, dołem 5φ14, strzemiona φ6 co 11 cm (2-cięte), oparcie ≥ 25 cm."
+    "N-O0-11: nadproże zespolone z płytą 18×42 cm, C25/30, dołem 5φ12, strzemiona φ6 co 14 cm (2-cięte), oparcie ≥ 25 cm."
    ],
    "warunki": [
     {
      "opis": "Zbrojenie dolne",
-     "E": 699.188,
-     "R": 769.6902,
-     "eta": 0.9084
+     "E": 557.8249,
+     "R": 565.4867,
+     "eta": 0.9865
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 142.7255,
+     "E": 117.1119,
      "R": 239.3203,
-     "eta": 0.5964
+     "eta": 0.4894
     },
     {
      "opis": "Nośność strzemion",
-     "E": 142.7255,
-     "R": 154.0895,
-     "eta": 0.9263
+     "E": 117.1119,
+     "R": 121.0703,
+     "eta": 0.9673
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 6.8407,
-     "R": 16.1795,
-     "eta": 0.4228
+     "R": 15.8493,
+     "eta": 0.4316
     },
     {
      "opis": "Docisk",
-     "E": 155.8087,
+     "E": 127.8471,
      "R": 286.1941,
-     "eta": 0.5444
+     "eta": 0.4467
     }
    ],
    "dane": {
     "L": 2.62,
-    "M": 102.05466759757441,
-    "q_d": 118.93790291658341
+    "M": 83.73987761114778,
+    "q_d": 97.59323770310328
    }
   },
   {
@@ -4742,7 +4729,7 @@
    "id": "N-O0-12",
    "tytul": "Nadproże N-O0-12 nad otworem O0-12 w ścianie S0-07 (światło 1,80 m)",
    "rodzaj": "nadproze",
-   "wykorzystanie": 0.9849,
+   "wykorzystanie": 0.9628,
    "ok": true,
    "przyjeto": [
     "N-O0-12: nadproże żelbetowe 18×25 cm, C25/30, dołem 2φ10, strzemiona φ6 co 15 cm (2-cięte), oparcie ≥ 25 cm."
@@ -4750,39 +4737,39 @@
    "warunki": [
     {
      "opis": "Zbrojenie dolne",
-     "E": 154.7047,
+     "E": 151.2389,
      "R": 157.0796,
-     "eta": 0.9849
+     "eta": 0.9628
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 23.3402,
+     "E": 22.8437,
      "R": 133.0946,
-     "eta": 0.1754
+     "eta": 0.1716
     },
     {
      "opis": "Nośność strzemion",
-     "E": 23.3402,
+     "E": 22.8437,
      "R": 62.8428,
-     "eta": 0.3714
+     "eta": 0.3635
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 9.6244,
-     "R": 22.5048,
-     "eta": 0.4277
+     "R": 23.5979,
+     "eta": 0.4078
     },
     {
      "opis": "Docisk",
-     "E": 26.5819,
+     "E": 26.0165,
      "R": 284.4649,
-     "eta": 0.0934
+     "eta": 0.0915
     }
    ],
    "dane": {
     "L": 2.05,
-    "M": 13.623223111363364,
-    "q_d": 25.93355975988267
+    "M": 13.333437903797838,
+    "q_d": 25.38191629515353
    }
   },
   {
@@ -4838,47 +4825,47 @@
    "id": "N-O0-14",
    "tytul": "Nadproże N-O0-14 nad otworem O0-14 w ścianie S0-08 (światło 0,90 m)",
    "rodzaj": "nadproze",
-   "wykorzystanie": 0.9305,
+   "wykorzystanie": 0.5096,
    "ok": true,
    "przyjeto": [
-    "N-O0-14: nadproże żelbetowe 18×25 cm, C25/30, dołem 2φ12, strzemiona φ6 co 15 cm (2-cięte), oparcie ≥ 20 cm."
+    "N-O0-14: nadproże żelbetowe 18×25 cm, C25/30, dołem 2φ10, strzemiona φ6 co 15 cm (2-cięte), oparcie ≥ 20 cm."
    ],
    "warunki": [
     {
      "opis": "Zbrojenie dolne",
-     "E": 210.4651,
-     "R": 226.1947,
-     "eta": 0.9305
+     "E": 80.0407,
+     "R": 157.0796,
+     "eta": 0.5096
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 54.1141,
+     "E": 21.4931,
      "R": 133.0946,
-     "eta": 0.4066
+     "eta": 0.1615
     },
     {
      "opis": "Nośność strzemion",
-     "E": 54.1141,
+     "E": 21.4931,
      "R": 62.8428,
-     "eta": 0.8611
+     "eta": 0.342
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 5.1643,
-     "R": 19.164,
-     "eta": 0.2695
+     "R": 82.9886,
+     "eta": 0.0622
     },
     {
      "opis": "Docisk",
-     "E": 66.1395,
+     "E": 26.2694,
      "R": 218.5797,
-     "eta": 0.3026
+     "eta": 0.1202
     }
    ],
    "dane": {
     "L": 1.1,
-    "M": 18.18836429249845,
-    "q_d": 120.25364821486576
+    "M": 7.2240813082505335,
+    "q_d": 47.76252104628451
    }
   },
   {
@@ -4886,7 +4873,7 @@
    "id": "N-O0-15",
    "tytul": "Nadproże N-O0-15 nad otworem O0-15 w ścianie S0-11 (światło 0,90 m)",
    "rodzaj": "nadproze",
-   "wykorzystanie": 0.4981,
+   "wykorzystanie": 0.3763,
    "ok": true,
    "przyjeto": [
     "N-O0-15: nadproże żelbetowe 18×25 cm, C25/30, dołem 2φ10, strzemiona φ6 co 15 cm (2-cięte), oparcie ≥ 20 cm."
@@ -4894,39 +4881,39 @@
    "warunki": [
     {
      "opis": "Zbrojenie dolne",
-     "E": 78.2474,
+     "E": 59.1049,
      "R": 157.0796,
-     "eta": 0.4981
+     "eta": 0.3763
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 21.0238,
+     "E": 15.9795,
      "R": 133.0946,
-     "eta": 0.158
+     "eta": 0.1201
     },
     {
      "opis": "Nośność strzemion",
-     "E": 21.0238,
+     "E": 15.9795,
      "R": 62.8428,
-     "eta": 0.3345
+     "eta": 0.2543
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 5.1643,
-     "R": 85.963,
-     "eta": 0.0601
+     "R": 133.6314,
+     "eta": 0.0386
     },
     {
      "opis": "Docisk",
-     "E": 25.6958,
+     "E": 19.5305,
      "R": 202.8087,
-     "eta": 0.1267
+     "eta": 0.0963
     }
    ],
    "dane": {
     "L": 1.1,
-    "M": 7.066347944219133,
-    "q_d": 46.719655829547975
+    "M": 5.370898544527066,
+    "q_d": 35.51007302166654
    }
   },
   {
@@ -4934,7 +4921,7 @@
    "id": "N-O0-17",
    "tytul": "Nadproże N-O0-17 nad otworem O0-17 w ścianie S0-09 (światło 0,80 m)",
    "rodzaj": "nadproze",
-   "wykorzystanie": 0.7416,
+   "wykorzystanie": 0.33,
    "ok": true,
    "przyjeto": [
     "N-O0-17: nadproże żelbetowe 18×25 cm, C25/30, dołem 2φ10, strzemiona φ6 co 15 cm (2-cięte), oparcie ≥ 20 cm."
@@ -4942,39 +4929,39 @@
    "warunki": [
     {
      "opis": "Zbrojenie dolne",
-     "E": 116.4979,
+     "E": 51.8357,
      "R": 157.0796,
-     "eta": 0.7416
+     "eta": 0.33
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 33.2468,
+     "E": 7.4848,
      "R": 133.0946,
-     "eta": 0.2498
+     "eta": 0.0562
     },
     {
      "opis": "Nośność strzemion",
-     "E": 33.2468,
+     "E": 7.4848,
      "R": 62.8428,
-     "eta": 0.529
+     "eta": 0.1191
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 4.6948,
-     "R": 42.6613,
-     "eta": 0.11
+     "R": 501.5564,
+     "eta": 0.0094
     },
     {
      "opis": "Docisk",
-     "E": 41.5585,
+     "E": 9.356,
      "R": 202.9471,
-     "eta": 0.2048
+     "eta": 0.0461
     }
    ],
    "dane": {
     "L": 1.0,
-    "M": 10.389634917007882,
-    "q_d": 83.11707933606306
+    "M": 2.3389959515496734,
+    "q_d": 18.711967612397387
    }
   },
   {
@@ -4982,47 +4969,47 @@
    "id": "N-O0-18",
    "tytul": "Nadproże N-O0-18 nad otworem O0-18 w ścianie S0-10 (światło 1,50 m)",
    "rodzaj": "nadproze",
-   "wykorzystanie": 0.9974,
+   "wykorzystanie": 0.9891,
    "ok": true,
    "przyjeto": [
-    "N-O0-18: nadproże żelbetowe 18×25 cm, C25/30, dołem 6φ16, strzemiona φ6 co 5 cm (2-cięte), oparcie ≥ 20 cm."
+    "N-O0-18: nadproże żelbetowe 18×25 cm, C25/30, dołem 7φ10, strzemiona φ6 co 10 cm (2-cięte), oparcie ≥ 20 cm."
    ],
    "warunki": [
     {
      "opis": "Zbrojenie dolne",
-     "E": 1011.982,
-     "R": 1206.3716,
-     "eta": 0.8389
+     "E": 543.7938,
+     "R": 549.7787,
+     "eta": 0.9891
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 147.1039,
-     "R": 147.4856,
-     "eta": 0.9974
+     "E": 86.5006,
+     "R": 133.0946,
+     "eta": 0.6499
     },
     {
      "opis": "Nośność strzemion",
-     "E": 147.1039,
-     "R": 155.5359,
-     "eta": 0.9458
+     "E": 86.5006,
+     "R": 94.2642,
+     "eta": 0.9176
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 7.9812,
-     "R": 14.8066,
-     "eta": 0.539
+     "R": 13.7941,
+     "eta": 0.5786
     },
     {
      "opis": "Docisk",
-     "E": 166.7177,
+     "E": 98.034,
      "R": 208.2041,
-     "eta": 0.8007
+     "eta": 0.4709
     }
    ],
    "dane": {
     "L": 1.7,
-    "M": 70.855039974513,
-    "q_d": 196.13851896058964
+    "M": 41.66445801013199,
+    "q_d": 115.33413982043459
    }
   },
   {
@@ -5030,7 +5017,7 @@
    "id": "N-O0-21",
    "tytul": "Nadproże N-O0-21 nad otworem O0-21 w ścianie S0-15 (światło 0,90 m)",
    "rodzaj": "nadproze",
-   "wykorzystanie": 0.9706,
+   "wykorzystanie": 0.9442,
    "ok": true,
    "przyjeto": [
     "N-O0-21: nadproże żelbetowe 18×25 cm, C25/30, dołem 2φ12, strzemiona φ6 co 15 cm (2-cięte), oparcie ≥ 20 cm."
@@ -5038,39 +5025,39 @@
    "warunki": [
     {
      "opis": "Zbrojenie dolne",
-     "E": 219.5406,
+     "E": 213.5697,
      "R": 226.1947,
-     "eta": 0.9706
+     "eta": 0.9442
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 56.2733,
+     "E": 54.8544,
      "R": 133.0946,
-     "eta": 0.4228
+     "eta": 0.4121
     },
     {
      "opis": "Nośność strzemion",
-     "E": 56.2733,
+     "E": 54.8544,
      "R": 62.8428,
-     "eta": 0.8955
+     "eta": 0.8729
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 5.1643,
-     "R": 18.0808,
-     "eta": 0.2856
+     "R": 18.7802,
+     "eta": 0.275
     },
     {
      "opis": "Docisk",
-     "E": 68.7785,
+     "E": 67.0442,
      "R": 206.8207,
-     "eta": 0.3326
+     "eta": 0.3242
     }
    ],
    "dane": {
     "L": 1.1,
-    "M": 18.91407905659533,
-    "q_d": 125.05176235765506
+    "M": 18.437163466049434,
+    "q_d": 121.89860142842599
    }
   },
   {
@@ -5126,7 +5113,7 @@
    "id": "N-O0-24",
    "tytul": "Nadproże N-O0-24 nad otworem O0-24 w ścianie S0-16 (światło 0,90 m)",
    "rodzaj": "nadproze",
-   "wykorzystanie": 0.9767,
+   "wykorzystanie": 0.9761,
    "ok": true,
    "przyjeto": [
     "N-O0-24: nadproże żelbetowe 18×25 cm, C25/30, dołem 2φ10, strzemiona φ6 co 15 cm (2-cięte), oparcie ≥ 20 cm."
@@ -5134,39 +5121,39 @@
    "warunki": [
     {
      "opis": "Zbrojenie dolne",
-     "E": 153.4133,
+     "E": 153.3228,
      "R": 157.0796,
-     "eta": 0.9767
+     "eta": 0.9761
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 40.2109,
+     "E": 40.1884,
      "R": 133.0946,
-     "eta": 0.3021
+     "eta": 0.302
     },
     {
      "opis": "Nośność strzemion",
-     "E": 40.2109,
+     "E": 40.1884,
      "R": 62.8428,
-     "eta": 0.6399
+     "eta": 0.6395
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 5.1643,
-     "R": 22.9011,
-     "eta": 0.2255
+     "R": 22.9293,
+     "eta": 0.2252
     },
     {
      "opis": "Docisk",
-     "E": 49.1466,
+     "E": 49.1191,
      "R": 243.2045,
-     "eta": 0.2021
+     "eta": 0.202
     }
    ],
    "dane": {
     "L": 1.1,
-    "M": 13.515327551552286,
-    "q_d": 89.35753753092419
+    "M": 13.50776129663652,
+    "q_d": 89.30751270503482
    }
   },
   {
@@ -5174,47 +5161,47 @@
    "id": "N-O1-02",
    "tytul": "Nadproże N-O1-02 nad otworem O1-02 w ścianie S1-02 (światło 1,50 m)",
    "rodzaj": "nadproze",
-   "wykorzystanie": 0.9617,
+   "wykorzystanie": 0.9894,
    "ok": true,
    "przyjeto": [
-    "N-O1-02: nadproże żelbetowe 18×25 cm, C25/30, dołem 3φ10, strzemiona φ6 co 15 cm (2-cięte), oparcie ≥ 20 cm."
+    "N-O1-02: nadproże żelbetowe 18×25 cm, C25/30, dołem 2φ12, strzemiona φ6 co 15 cm (2-cięte), oparcie ≥ 20 cm."
    ],
    "warunki": [
     {
      "opis": "Zbrojenie dolne",
-     "E": 226.5975,
-     "R": 235.6194,
-     "eta": 0.9617
+     "E": 223.7886,
+     "R": 226.1947,
+     "eta": 0.9894
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 40.4326,
+     "E": 39.9698,
      "R": 133.0946,
-     "eta": 0.3038
+     "eta": 0.3003
     },
     {
      "opis": "Nośność strzemion",
-     "E": 40.4326,
+     "E": 39.9698,
      "R": 62.8428,
-     "eta": 0.6434
+     "eta": 0.636
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 7.9812,
-     "R": 18.0355,
-     "eta": 0.4425
+     "R": 17.6119,
+     "eta": 0.4532
     },
     {
      "opis": "Docisk",
-     "E": 45.8236,
+     "E": 45.2991,
      "R": 230.3387,
-     "eta": 0.1989
+     "eta": 0.1967
     }
    ],
    "dane": {
     "L": 1.7,
-    "M": 19.47502654789278,
-    "q_d": 53.91010809105269
+    "M": 19.252101975414448,
+    "q_d": 53.29301584889813
    }
   },
   {
@@ -5236,33 +5223,33 @@
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 8.2101,
+     "E": 8.1989,
      "R": 133.0946,
-     "eta": 0.0617
+     "eta": 0.0616
     },
     {
      "opis": "Nośność strzemion",
-     "E": 8.2101,
+     "E": 8.1989,
      "R": 62.8428,
-     "eta": 0.1306
+     "eta": 0.1305
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 5.1643,
-     "R": 387.0067,
+     "R": 387.8353,
      "eta": 0.0133
     },
     {
      "opis": "Docisk",
-     "E": 10.0346,
+     "E": 10.0209,
      "R": 243.2045,
-     "eta": 0.0413
+     "eta": 0.0412
     }
    ],
    "dane": {
     "L": 1.1,
-    "M": 2.7595040265557396,
-    "q_d": 18.24465472102968
+    "M": 2.75575738544542,
+    "q_d": 18.219883540135005
    }
   },
   {
@@ -5284,33 +5271,33 @@
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 7.4964,
+     "E": 7.4916,
      "R": 133.0946,
      "eta": 0.0563
     },
     {
      "opis": "Nośność strzemion",
-     "E": 7.4964,
+     "E": 7.4916,
      "R": 62.8428,
-     "eta": 0.1193
+     "eta": 0.1192
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 6.5728,
-     "R": 328.5825,
+     "R": 328.919,
      "eta": 0.02
     },
     {
      "opis": "Docisk",
-     "E": 8.7459,
+     "E": 8.7402,
      "R": 208.2041,
      "eta": 0.042
     }
    ],
    "dane": {
     "L": 1.4,
-    "M": 3.0610486788104807,
-    "q_d": 12.49407624004278
+    "M": 3.0590686192668812,
+    "q_d": 12.48599436435462
    }
   },
   {
@@ -5332,33 +5319,33 @@
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 7.2558,
+     "E": 6.4434,
      "R": 133.0946,
-     "eta": 0.0545
+     "eta": 0.0484
     },
     {
      "opis": "Nośność strzemion",
-     "E": 7.2558,
+     "E": 6.4434,
      "R": 62.8428,
-     "eta": 0.1155
+     "eta": 0.1025
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 9.6244,
-     "R": 195.8745,
-     "eta": 0.0491
+     "R": 236.8735,
+     "eta": 0.0406
     },
     {
      "opis": "Docisk",
-     "E": 8.2635,
+     "E": 7.3383,
      "R": 277.5478,
-     "eta": 0.0298
+     "eta": 0.0264
     }
    ],
    "dane": {
     "L": 2.05,
-    "M": 4.23506388338406,
-    "q_d": 8.061989546001781
+    "M": 3.760899940465982,
+    "q_d": 7.1593574119519
    }
   },
   {
@@ -5366,47 +5353,47 @@
    "id": "N-O1-06",
    "tytul": "Nadproże N-O1-06 nad otworem O1-06 w ścianie S1-04 (światło 1,80 m)",
    "rodzaj": "nadproze",
-   "wykorzystanie": 0.868,
+   "wykorzystanie": 0.8132,
    "ok": true,
    "przyjeto": [
-    "N-O1-06: nadproże żelbetowe 18×25 cm, C25/30, dołem 2φ14, strzemiona φ6 co 15 cm (2-cięte), oparcie ≥ 25 cm."
+    "N-O1-06: nadproże żelbetowe 18×25 cm, C25/30, dołem 2φ10, strzemiona φ6 co 15 cm (2-cięte), oparcie ≥ 25 cm."
    ],
    "warunki": [
     {
      "opis": "Zbrojenie dolne",
-     "E": 267.244,
-     "R": 307.8761,
-     "eta": 0.868
+     "E": 127.7415,
+     "R": 157.0796,
+     "eta": 0.8132
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 38.8037,
+     "E": 19.4458,
      "R": 133.0946,
-     "eta": 0.2916
+     "eta": 0.1461
     },
     {
      "opis": "Nośność strzemion",
-     "E": 38.8037,
+     "E": 19.4458,
      "R": 62.8428,
-     "eta": 0.6175
+     "eta": 0.3094
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 9.6244,
-     "R": 18.8703,
-     "eta": 0.51
+     "R": 34.3369,
+     "eta": 0.2803
     },
     {
      "opis": "Docisk",
-     "E": 44.1932,
+     "E": 22.1466,
      "R": 279.2771,
-     "eta": 0.1582
+     "eta": 0.0793
     }
    ],
    "dane": {
     "L": 2.05,
-    "M": 22.64899146191194,
-    "q_d": 43.11527226538859
+    "M": 11.350133341418589,
+    "q_d": 21.606440626138898
    }
   },
   {
@@ -5414,47 +5401,47 @@
    "id": "N-O1-09",
    "tytul": "Nadproże N-O1-09 nad otworem O1-09 w ścianie S1-05 (światło 0,90 m)",
    "rodzaj": "nadproze",
-   "wykorzystanie": 0.8403,
+   "wykorzystanie": 0.33,
    "ok": true,
    "przyjeto": [
-    "N-O1-09: nadproże żelbetowe 18×25 cm, C25/30, dołem 2φ12, strzemiona φ6 co 15 cm (2-cięte), oparcie ≥ 20 cm."
+    "N-O1-09: nadproże żelbetowe 18×25 cm, C25/30, dołem 2φ10, strzemiona φ6 co 15 cm (2-cięte), oparcie ≥ 20 cm."
    ],
    "warunki": [
     {
      "opis": "Zbrojenie dolne",
-     "E": 190.0689,
-     "R": 226.1947,
-     "eta": 0.8403
+     "E": 51.8357,
+     "R": 157.0796,
+     "eta": 0.33
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 49.2091,
+     "E": 1.6221,
      "R": 133.0946,
-     "eta": 0.3697
+     "eta": 0.0122
     },
     {
      "opis": "Nośność strzemion",
-     "E": 49.2091,
+     "E": 1.6221,
      "R": 62.8428,
-     "eta": 0.7831
+     "eta": 0.0258
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 5.1643,
-     "R": 22.108,
-     "eta": 0.2336
+     "R": 4625.5864,
+     "eta": 0.0011
     },
     {
      "opis": "Docisk",
-     "E": 60.1444,
+     "E": 1.9825,
      "R": 243.2045,
-     "eta": 0.2473
+     "eta": 0.0082
     }
    ],
    "dane": {
     "L": 1.1,
-    "M": 16.539720285716946,
-    "q_d": 109.35352255019467
+    "M": 0.5451926312249998,
+    "q_d": 3.6045793799999983
    }
   },
   {
@@ -5462,47 +5449,47 @@
    "id": "N-O1-10",
    "tytul": "Nadproże N-O1-10 nad otworem O1-10 w ścianie S1-05 (światło 0,90 m)",
    "rodzaj": "nadproze",
-   "wykorzystanie": 0.9987,
+   "wykorzystanie": 0.6325,
    "ok": true,
    "przyjeto": [
-    "N-O1-10: nadproże żelbetowe 18×25 cm, C25/30, dołem 3φ16, strzemiona φ6 co 7 cm (2-cięte), oparcie ≥ 20 cm."
+    "N-O1-10: nadproże żelbetowe 18×25 cm, C25/30, dołem 2φ10, strzemiona φ6 co 15 cm (2-cięte), oparcie ≥ 20 cm."
    ],
    "warunki": [
     {
      "opis": "Zbrojenie dolne",
-     "E": 594.701,
-     "R": 603.1858,
-     "eta": 0.9859
+     "E": 99.3458,
+     "R": 157.0796,
+     "eta": 0.6325
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 132.9163,
+     "E": 26.5093,
      "R": 133.0946,
-     "eta": 0.9987
+     "eta": 0.1992
     },
     {
      "opis": "Nośność strzemion",
-     "E": 132.9163,
-     "R": 134.6631,
-     "eta": 0.987
+     "E": 26.5093,
+     "R": 62.8428,
+     "eta": 0.4218
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 5.1643,
-     "R": 13.609,
-     "eta": 0.3795
+     "R": 59.7198,
+     "eta": 0.0865
     },
     {
      "opis": "Docisk",
-     "E": 162.4532,
+     "E": 32.4002,
      "R": 218.5797,
-     "eta": 0.7432
+     "eta": 0.1482
     }
    ],
    "dane": {
     "L": 1.1,
-    "M": 44.67463163672491,
-    "q_d": 295.36946536677624
+    "M": 8.910065071093637,
+    "q_d": 58.909521131197586
    }
   },
   {
@@ -5510,47 +5497,47 @@
    "id": "N-O1-11",
    "tytul": "Nadproże N-O1-11 nad otworem O1-11 w ścianie S1-06 (światło 0,90 m)",
    "rodzaj": "nadproze",
-   "wykorzystanie": 0.95,
+   "wykorzystanie": 0.9475,
    "ok": true,
    "przyjeto": [
-    "N-O1-11: nadproże żelbetowe 18×25 cm, C25/30, dołem 7φ10, strzemiona φ6 co 7 cm (2-cięte), oparcie ≥ 20 cm."
+    "N-O1-11: nadproże żelbetowe 18×25 cm, C25/30, dołem 2φ14, strzemiona φ6 co 14 cm (2-cięte), oparcie ≥ 20 cm."
    ],
    "warunki": [
     {
      "opis": "Zbrojenie dolne",
-     "E": 522.315,
-     "R": 549.7787,
-     "eta": 0.95
+     "E": 251.652,
+     "R": 307.8761,
+     "eta": 0.8174
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 120.0457,
+     "E": 63.7972,
      "R": 133.0946,
-     "eta": 0.902
+     "eta": 0.4793
     },
     {
      "opis": "Nośność strzemion",
-     "E": 120.0457,
-     "R": 134.6631,
-     "eta": 0.8915
+     "E": 63.7972,
+     "R": 67.3316,
+     "eta": 0.9475
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 5.1643,
-     "R": 14.4758,
-     "eta": 0.3568
+     "R": 20.4473,
+     "eta": 0.2526
     },
     {
      "opis": "Docisk",
-     "E": 146.7225,
+     "E": 77.9743,
      "R": 202.9471,
-     "eta": 0.723
+     "eta": 0.3842
     }
    ],
    "dane": {
     "L": 1.1,
-    "M": 40.34868747145949,
-    "q_d": 266.7681816294842
+    "M": 21.442945016549796,
+    "q_d": 141.77153729950277
    }
   },
   {
@@ -5558,7 +5545,7 @@
    "id": "N-O1-12",
    "tytul": "Nadproże N-O1-12 nad otworem O1-12 w ścianie S1-06 (światło 0,90 m)",
    "rodzaj": "nadproze",
-   "wykorzystanie": 0.9284,
+   "wykorzystanie": 0.9113,
    "ok": true,
    "przyjeto": [
     "N-O1-12: nadproże żelbetowe 18×25 cm, C25/30, dołem 2φ10, strzemiona φ6 co 15 cm (2-cięte), oparcie ≥ 20 cm."
@@ -5566,39 +5553,39 @@
    "warunki": [
     {
      "opis": "Zbrojenie dolne",
-     "E": 145.8362,
+     "E": 143.1437,
      "R": 157.0796,
-     "eta": 0.9284
+     "eta": 0.9113
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 38.3215,
+     "E": 37.6477,
      "R": 133.0946,
-     "eta": 0.2879
+     "eta": 0.2829
     },
     {
      "opis": "Nośność strzemion",
-     "E": 38.3215,
+     "E": 37.6477,
      "R": 62.8428,
-     "eta": 0.6098
+     "eta": 0.5991
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 5.1643,
-     "R": 25.5061,
-     "eta": 0.2025
+     "R": 26.5617,
+     "eta": 0.1944
     },
     {
      "opis": "Docisk",
-     "E": 46.8374,
+     "E": 46.0139,
      "R": 223.4216,
-     "eta": 0.2096
+     "eta": 0.206
     }
    ],
    "dane": {
     "L": 1.1,
-    "M": 12.880297958592969,
-    "q_d": 85.1589947675568
+    "M": 12.653826164539248,
+    "q_d": 83.66166059199502
    }
   },
   {
@@ -5894,47 +5881,47 @@
    "id": "N-O2-10",
    "tytul": "Nadproże N-O2-10 nad otworem O2-10 w ścianie S2-09 (światło 0,90 m)",
    "rodzaj": "nadproze",
-   "wykorzystanie": 0.9267,
+   "wykorzystanie": 0.3925,
    "ok": true,
    "przyjeto": [
-    "N-O2-10: nadproże żelbetowe 18×25 cm, C25/30, dołem 2φ12, strzemiona φ6 co 15 cm (2-cięte), oparcie ≥ 20 cm."
+    "N-O2-10: nadproże żelbetowe 18×25 cm, C25/30, dołem 2φ10, strzemiona φ6 co 15 cm (2-cięte), oparcie ≥ 20 cm."
    ],
    "warunki": [
     {
      "opis": "Zbrojenie dolne",
-     "E": 209.6251,
-     "R": 226.1947,
-     "eta": 0.9267
+     "E": 61.6599,
+     "R": 157.0796,
+     "eta": 0.3925
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 53.9136,
+     "E": 16.6565,
      "R": 133.0946,
-     "eta": 0.4051
+     "eta": 0.1251
     },
     {
      "opis": "Nośność strzemion",
-     "E": 53.9136,
+     "E": 16.6565,
      "R": 62.8428,
-     "eta": 0.8579
+     "eta": 0.2651
     },
     {
      "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
      "E": 5.1643,
-     "R": 19.2703,
-     "eta": 0.268
+     "R": 124.9822,
+     "eta": 0.0413
     },
     {
      "opis": "Docisk",
-     "E": 65.8944,
+     "E": 20.358,
      "R": 206.1289,
-     "eta": 0.3197
+     "eta": 0.0988
     }
    ],
    "dane": {
     "L": 1.1,
-    "M": 18.120949654713144,
-    "q_d": 119.8079316014092
+    "M": 5.598442876574089,
+    "q_d": 37.01449835751463
    }
   },
   {
@@ -6002,33 +5989,45 @@
    "id": "SL1",
    "tytul": "Słup SL1 (RK 120x120x8, L = 2,93 m)",
    "rodzaj": "slup",
-   "wykorzystanie": 0.0703,
+   "wykorzystanie": 0.1782,
    "ok": true,
    "przyjeto": [
-    "Słup RK 120x120x8 ze stali S355; N_Ed = 51,5 kN, N_b,Rd = 749,7 kN."
+    "Słup RK 120x120x8 ze stali S355; N_Ed = 132,3 kN, N_b,Rd = 749,7 kN."
    ],
    "warunki": [
     {
      "opis": "Wyboczenie giętne",
-     "E": 51.4621,
+     "E": 132.2544,
      "R": 749.6628,
-     "eta": 0.0686
+     "eta": 0.1764
     },
     {
      "opis": "Interakcja N + M (6.61)",
-     "E": 0.0703,
+     "E": 0.1782,
      "R": 1.0,
-     "eta": 0.0703
+     "eta": 0.1782
     },
     {
      "opis": "Interakcja N + M (6.62)",
-     "E": 0.0696,
+     "E": 0.1775,
      "R": 1.0,
-     "eta": 0.0696
+     "eta": 0.1775
+    },
+    {
+     "opis": "Docisk lokalny betonu pod blachą (6.7)",
+     "E": 132.2544,
+     "R": 1202.5381,
+     "eta": 0.11
+    },
+    {
+     "opis": "Docisk lokalny betonu pod blachą (6.7)",
+     "E": 132.2544,
+     "R": 3348.2143,
+     "eta": 0.0395
     }
    ],
    "dane": {
-    "N_Ed": 51.462107000117825
+    "N_Ed": 132.25440271052867
    }
   },
   {
@@ -6036,33 +6035,45 @@
    "id": "SL2",
    "tytul": "Słup SL2 (RK 120x120x8, L = 2,93 m)",
    "rodzaj": "slup",
-   "wykorzystanie": 0.0977,
+   "wykorzystanie": 0.4281,
    "ok": true,
    "przyjeto": [
-    "Słup RK 120x120x8 ze stali S355; N_Ed = 72,0 kN, N_b,Rd = 749,7 kN."
+    "Słup RK 120x120x8 ze stali S355; N_Ed = 319,4 kN, N_b,Rd = 749,7 kN."
    ],
    "warunki": [
     {
      "opis": "Wyboczenie giętne",
-     "E": 71.9683,
+     "E": 319.4218,
      "R": 749.6628,
-     "eta": 0.096
+     "eta": 0.4261
     },
     {
      "opis": "Interakcja N + M (6.61)",
-     "E": 0.0977,
+     "E": 0.4281,
      "R": 1.0,
-     "eta": 0.0977
+     "eta": 0.4281
     },
     {
      "opis": "Interakcja N + M (6.62)",
-     "E": 0.097,
+     "E": 0.4273,
      "R": 1.0,
-     "eta": 0.097
+     "eta": 0.4273
+    },
+    {
+     "opis": "Docisk lokalny betonu pod blachą (6.7)",
+     "E": 319.4218,
+     "R": 1202.5381,
+     "eta": 0.2656
+    },
+    {
+     "opis": "Docisk lokalny betonu pod blachą (6.7)",
+     "E": 319.4218,
+     "R": 3348.2143,
+     "eta": 0.0954
     }
    ],
    "dane": {
-    "N_Ed": 71.96825934780325
+    "N_Ed": 319.421819141191
    }
   },
   {
@@ -6070,33 +6081,45 @@
    "id": "SL3",
    "tytul": "Słup SL3 (RK 120x120x8, L = 2,93 m)",
    "rodzaj": "slup",
-   "wykorzystanie": 0.0864,
+   "wykorzystanie": 0.5492,
    "ok": true,
    "przyjeto": [
-    "Słup RK 120x120x8 ze stali S355; N_Ed = 63,5 kN, N_b,Rd = 749,7 kN."
+    "Słup RK 120x120x8 ze stali S355; N_Ed = 410,1 kN, N_b,Rd = 749,7 kN."
    ],
    "warunki": [
     {
      "opis": "Wyboczenie giętne",
-     "E": 63.4899,
+     "E": 410.0943,
      "R": 749.6628,
-     "eta": 0.0847
+     "eta": 0.547
     },
     {
      "opis": "Interakcja N + M (6.61)",
-     "E": 0.0864,
+     "E": 0.5492,
      "R": 1.0,
-     "eta": 0.0864
+     "eta": 0.5492
     },
     {
      "opis": "Interakcja N + M (6.62)",
-     "E": 0.0857,
+     "E": 0.5483,
      "R": 1.0,
-     "eta": 0.0857
+     "eta": 0.5483
+    },
+    {
+     "opis": "Docisk lokalny betonu pod blachą (6.7)",
+     "E": 410.0943,
+     "R": 1202.5381,
+     "eta": 0.341
+    },
+    {
+     "opis": "Docisk lokalny betonu pod blachą (6.7)",
+     "E": 410.0943,
+     "R": 3348.2143,
+     "eta": 0.1225
     }
    ],
    "dane": {
-    "N_Ed": 63.48992016109222
+    "N_Ed": 410.0943235412921
    }
   },
   {
@@ -6104,33 +6127,45 @@
    "id": "SL4",
    "tytul": "Słup SL4 (RK 120x120x8, L = 2,93 m)",
    "rodzaj": "slup",
-   "wykorzystanie": 0.1205,
+   "wykorzystanie": 0.6297,
    "ok": true,
    "przyjeto": [
-    "Słup RK 120x120x8 ze stali S355; N_Ed = 89,0 kN, N_b,Rd = 749,7 kN."
+    "Słup RK 120x120x8 ze stali S355; N_Ed = 470,4 kN, N_b,Rd = 749,7 kN."
    ],
    "warunki": [
     {
      "opis": "Wyboczenie giętne",
-     "E": 89.0479,
+     "E": 470.3828,
      "R": 749.6628,
-     "eta": 0.1188
+     "eta": 0.6275
     },
     {
      "opis": "Interakcja N + M (6.61)",
-     "E": 0.1205,
+     "E": 0.6297,
      "R": 1.0,
-     "eta": 0.1205
+     "eta": 0.6297
     },
     {
      "opis": "Interakcja N + M (6.62)",
-     "E": 0.1198,
+     "E": 0.6288,
      "R": 1.0,
-     "eta": 0.1198
+     "eta": 0.6288
+    },
+    {
+     "opis": "Docisk lokalny betonu pod blachą (6.7)",
+     "E": 470.3828,
+     "R": 1202.5381,
+     "eta": 0.3912
+    },
+    {
+     "opis": "Docisk lokalny betonu pod blachą (6.7)",
+     "E": 470.3828,
+     "R": 3348.2143,
+     "eta": 0.1405
     }
    ],
    "dane": {
-    "N_Ed": 89.04785790553392
+    "N_Ed": 470.38284735903017
    }
   },
   {
@@ -6138,33 +6173,33 @@
    "id": "SL5",
    "tytul": "Słup SL5 (RK 100x100x6, L = 1,50 m)",
    "rodzaj": "slup",
-   "wykorzystanie": 0.1526,
+   "wykorzystanie": 0.483,
    "ok": true,
    "przyjeto": [
-    "Słup RK 100x100x6 ze stali S355; N_Ed = 97,2 kN, N_b,Rd = 639,9 kN."
+    "Słup RK 100x100x6 ze stali S355; N_Ed = 308,6 kN, N_b,Rd = 639,9 kN."
    ],
    "warunki": [
     {
      "opis": "Wyboczenie giętne",
-     "E": 97.2268,
+     "E": 308.5768,
      "R": 639.8536,
-     "eta": 0.152
+     "eta": 0.4823
     },
     {
      "opis": "Interakcja N + M (6.61)",
-     "E": 0.1526,
+     "E": 0.483,
      "R": 1.0,
-     "eta": 0.1526
+     "eta": 0.483
     },
     {
      "opis": "Interakcja N + M (6.62)",
-     "E": 0.1523,
+     "E": 0.4827,
      "R": 1.0,
-     "eta": 0.1523
+     "eta": 0.4827
     }
    ],
    "dane": {
-    "N_Ed": 97.22681658625334
+    "N_Ed": 308.5767504076829
    }
   },
   {
@@ -6172,33 +6207,33 @@
    "id": "SL6",
    "tytul": "Słup SL6 (RK 100x100x6, L = 1,50 m)",
    "rodzaj": "slup",
-   "wykorzystanie": 0.1396,
+   "wykorzystanie": 0.4125,
    "ok": true,
    "przyjeto": [
-    "Słup RK 100x100x6 ze stali S355; N_Ed = 88,9 kN, N_b,Rd = 639,9 kN."
+    "Słup RK 100x100x6 ze stali S355; N_Ed = 263,5 kN, N_b,Rd = 639,9 kN."
    ],
    "warunki": [
     {
      "opis": "Wyboczenie giętne",
-     "E": 88.9122,
+     "E": 263.4933,
      "R": 639.8536,
-     "eta": 0.139
+     "eta": 0.4118
     },
     {
      "opis": "Interakcja N + M (6.61)",
-     "E": 0.1396,
+     "E": 0.4125,
      "R": 1.0,
-     "eta": 0.1396
+     "eta": 0.4125
     },
     {
      "opis": "Interakcja N + M (6.62)",
-     "E": 0.1394,
+     "E": 0.4122,
      "R": 1.0,
-     "eta": 0.1394
+     "eta": 0.4122
     }
    ],
    "dane": {
-    "N_Ed": 88.91223895816499
+    "N_Ed": 263.49331469379314
    }
   },
   {
@@ -6222,6 +6257,474 @@
    "przyjeto": [],
    "warunki": [],
    "dane": {}
+  },
+  {
+   "nr": "8.9",
+   "id": "SL9",
+   "tytul": "Słup SL9 (180x400, L = 2,93 m)",
+   "rodzaj": "slup",
+   "wykorzystanie": 0.8843,
+   "ok": true,
+   "przyjeto": [
+    "Słup ŻB 18 × 40 cm, C30/37; zbrojenie 6φ12 (B500SP), strzemiona φ6 co 18 cm (przy głowicy i podstawie co 10 cm); N_Ed = 681,4 kN. Ciągłość prętów przez wieniec/belkę (zakład l₀), zakotwienie w pogrubieniu płyty fundamentowej (l_bd)."
+   ],
+   "warunki": [
+    {
+     "opis": "Nośność słupa — ściskanie mimośrodowe z efektami II rzędu",
+     "E": 38.1288,
+     "R": 43.1186,
+     "eta": 0.8843
+    },
+    {
+     "opis": "Nośność na ściskanie osiowe",
+     "E": 681.4116,
+     "R": 1814.2907,
+     "eta": 0.3756
+    },
+    {
+     "opis": "Zbrojenie minimalne (9.5.2(2))",
+     "E": 156.7247,
+     "R": 678.584,
+     "eta": 0.231
+    }
+   ],
+   "dane": {
+    "zbrojenie": "6φ12",
+    "strzemiona": "φ6 co 18 cm (przy głowicy i podstawie co 10 cm)",
+    "N_Ed": 681.4115528197543
+   }
+  },
+  {
+   "nr": "8.10",
+   "id": "SL10",
+   "tytul": "Słup SL10 (180x400, L = 2,93 m)",
+   "rodzaj": "slup",
+   "wykorzystanie": 0.7437,
+   "ok": true,
+   "przyjeto": [
+    "Słup ŻB 18 × 40 cm, C30/37; zbrojenie 6φ12 (B500SP), strzemiona φ6 co 18 cm (przy głowicy i podstawie co 10 cm); N_Ed = 551,3 kN. Ciągłość prętów przez wieniec/belkę (zakład l₀), zakotwienie w pogrubieniu płyty fundamentowej (l_bd)."
+   ],
+   "warunki": [
+    {
+     "opis": "Nośność słupa — ściskanie mimośrodowe z efektami II rzędu",
+     "E": 31.9515,
+     "R": 42.9645,
+     "eta": 0.7437
+    },
+    {
+     "opis": "Nośność na ściskanie osiowe",
+     "E": 551.3275,
+     "R": 1814.2907,
+     "eta": 0.3039
+    },
+    {
+     "opis": "Zbrojenie minimalne (9.5.2(2))",
+     "E": 144.0,
+     "R": 678.584,
+     "eta": 0.2122
+    }
+   ],
+   "dane": {
+    "zbrojenie": "6φ12",
+    "strzemiona": "φ6 co 18 cm (przy głowicy i podstawie co 10 cm)",
+    "N_Ed": 551.3275065071476
+   }
+  },
+  {
+   "nr": "8.11",
+   "id": "SL11",
+   "tytul": "Słup SL11 (180x400, L = 2,93 m)",
+   "rodzaj": "slup",
+   "wykorzystanie": 0.6929,
+   "ok": true,
+   "przyjeto": [
+    "Słup ŻB 18 × 40 cm, C30/37; zbrojenie 6φ12 (B500SP), strzemiona φ6 co 18 cm (przy głowicy i podstawie co 10 cm); N_Ed = 510,7 kN. Ciągłość prętów przez wieniec/belkę (zakład l₀), zakotwienie w pogrubieniu płyty fundamentowej (l_bd)."
+   ],
+   "warunki": [
+    {
+     "opis": "Nośność słupa — ściskanie mimośrodowe z efektami II rzędu",
+     "E": 29.5945,
+     "R": 42.7101,
+     "eta": 0.6929
+    },
+    {
+     "opis": "Nośność na ściskanie osiowe",
+     "E": 510.6569,
+     "R": 1814.2907,
+     "eta": 0.2815
+    },
+    {
+     "opis": "Zbrojenie minimalne (9.5.2(2))",
+     "E": 144.0,
+     "R": 678.584,
+     "eta": 0.2122
+    }
+   ],
+   "dane": {
+    "zbrojenie": "6φ12",
+    "strzemiona": "φ6 co 18 cm (przy głowicy i podstawie co 10 cm)",
+    "N_Ed": 510.65688955379653
+   }
+  },
+  {
+   "nr": "8.12",
+   "id": "SL12",
+   "tytul": "Słup SL12 (180x400, L = 2,93 m)",
+   "rodzaj": "slup",
+   "wykorzystanie": 0.6346,
+   "ok": true,
+   "przyjeto": [
+    "Słup ŻB 18 × 40 cm, C30/37; zbrojenie 6φ12 (B500SP), strzemiona φ6 co 18 cm (przy głowicy i podstawie co 10 cm); N_Ed = 445,4 kN. Ciągłość prętów przez wieniec/belkę (zakład l₀), zakotwienie w pogrubieniu płyty fundamentowej (l_bd)."
+   ],
+   "warunki": [
+    {
+     "opis": "Nośność słupa — ściskanie mimośrodowe z efektami II rzędu",
+     "E": 25.814,
+     "R": 40.6798,
+     "eta": 0.6346
+    },
+    {
+     "opis": "Nośność na ściskanie osiowe",
+     "E": 445.4241,
+     "R": 1814.2907,
+     "eta": 0.2455
+    },
+    {
+     "opis": "Zbrojenie minimalne (9.5.2(2))",
+     "E": 144.0,
+     "R": 678.584,
+     "eta": 0.2122
+    }
+   ],
+   "dane": {
+    "zbrojenie": "6φ12",
+    "strzemiona": "φ6 co 18 cm (przy głowicy i podstawie co 10 cm)",
+    "N_Ed": 445.4241186611503
+   }
+  },
+  {
+   "nr": "8.13",
+   "id": "SL13",
+   "tytul": "Słup SL13 (700x180, L = 2,93 m)",
+   "rodzaj": "slup",
+   "wykorzystanie": 0.9849,
+   "ok": true,
+   "przyjeto": [
+    "Słup ŻB 18 × 70 cm, C30/37; zbrojenie 8φ12 (B500SP), strzemiona φ6 co 18 cm (przy głowicy i podstawie co 10 cm); N_Ed = 1322,4 kN. Ciągłość prętów przez wieniec/belkę (zakład l₀), zakotwienie w pogrubieniu płyty fundamentowej (l_bd)."
+   ],
+   "warunki": [
+    {
+     "opis": "Nośność słupa — ściskanie mimośrodowe z efektami II rzędu",
+     "E": 70.5956,
+     "R": 71.6786,
+     "eta": 0.9849
+    },
+    {
+     "opis": "Nośność na ściskanie osiowe",
+     "E": 1322.408,
+     "R": 3061.9115,
+     "eta": 0.4319
+    },
+    {
+     "opis": "Zbrojenie minimalne (9.5.2(2))",
+     "E": 304.1538,
+     "R": 904.7787,
+     "eta": 0.3362
+    }
+   ],
+   "dane": {
+    "zbrojenie": "8φ12",
+    "strzemiona": "φ6 co 18 cm (przy głowicy i podstawie co 10 cm)",
+    "N_Ed": 1322.407974301794
+   }
+  },
+  {
+   "nr": "8.14",
+   "id": "SL14",
+   "tytul": "Słup SL14 (700x180, L = 2,93 m)",
+   "rodzaj": "slup",
+   "wykorzystanie": 0.7594,
+   "ok": true,
+   "przyjeto": [
+    "Słup ŻB 18 × 70 cm, C30/37; zbrojenie 8φ12 (B500SP), strzemiona φ6 co 18 cm (przy głowicy i podstawie co 10 cm); N_Ed = 924,8 kN. Ciągłość prętów przez wieniec/belkę (zakład l₀), zakotwienie w pogrubieniu płyty fundamentowej (l_bd)."
+   ],
+   "warunki": [
+    {
+     "opis": "Nośność słupa — ściskanie mimośrodowe z efektami II rzędu",
+     "E": 53.5981,
+     "R": 70.5812,
+     "eta": 0.7594
+    },
+    {
+     "opis": "Nośność na ściskanie osiowe",
+     "E": 924.8435,
+     "R": 3061.9115,
+     "eta": 0.302
+    },
+    {
+     "opis": "Zbrojenie minimalne (9.5.2(2))",
+     "E": 252.0,
+     "R": 904.7787,
+     "eta": 0.2785
+    }
+   ],
+   "dane": {
+    "zbrojenie": "8φ12",
+    "strzemiona": "φ6 co 18 cm (przy głowicy i podstawie co 10 cm)",
+    "N_Ed": 924.8434834771288
+   }
+  },
+  {
+   "nr": "8.15",
+   "id": "SL15",
+   "tytul": "Słup SL15 (700x180, L = 2,93 m)",
+   "rodzaj": "slup",
+   "wykorzystanie": 0.4111,
+   "ok": true,
+   "przyjeto": [
+    "Słup ŻB 18 × 70 cm, C30/37; zbrojenie 8φ12 (B500SP), strzemiona φ6 co 18 cm (przy głowicy i podstawie co 10 cm); N_Ed = 332,7 kN. Ciągłość prętów przez wieniec/belkę (zakład l₀), zakotwienie w pogrubieniu płyty fundamentowej (l_bd)."
+   ],
+   "warunki": [
+    {
+     "opis": "Nośność słupa — ściskanie mimośrodowe z efektami II rzędu",
+     "E": 19.2834,
+     "R": 46.9069,
+     "eta": 0.4111
+    },
+    {
+     "opis": "Nośność na ściskanie osiowe",
+     "E": 332.7377,
+     "R": 3061.9115,
+     "eta": 0.1087
+    },
+    {
+     "opis": "Zbrojenie minimalne (9.5.2(2))",
+     "E": 252.0,
+     "R": 904.7787,
+     "eta": 0.2785
+    }
+   ],
+   "dane": {
+    "zbrojenie": "8φ12",
+    "strzemiona": "φ6 co 18 cm (przy głowicy i podstawie co 10 cm)",
+    "N_Ed": 332.7376800953457
+   }
+  },
+  {
+   "nr": "8.16",
+   "id": "SL16",
+   "tytul": "Słup SL16 (865x180, L = 2,65 m)",
+   "rodzaj": "slup",
+   "wykorzystanie": 0.8684,
+   "ok": true,
+   "przyjeto": [
+    "Słup ŻB 18 × 86 cm, C30/37; zbrojenie 8φ12 (B500SP), strzemiona φ6 co 18 cm (przy głowicy i podstawie co 10 cm); N_Ed = 1460,0 kN. Ciągłość prętów przez wieniec/belkę (zakład l₀), zakotwienie w pogrubieniu płyty fundamentowej (l_bd)."
+   ],
+   "warunki": [
+    {
+     "opis": "Nośność słupa — ściskanie mimośrodowe z efektami II rzędu",
+     "E": 74.3731,
+     "R": 85.643,
+     "eta": 0.8684
+    },
+    {
+     "opis": "Nośność na ściskanie osiowe",
+     "E": 1460.0126,
+     "R": 3698.34,
+     "eta": 0.3948
+    },
+    {
+     "opis": "Zbrojenie minimalne (9.5.2(2))",
+     "E": 335.8029,
+     "R": 904.7787,
+     "eta": 0.3711
+    }
+   ],
+   "dane": {
+    "zbrojenie": "8φ12",
+    "strzemiona": "φ6 co 18 cm (przy głowicy i podstawie co 10 cm)",
+    "N_Ed": 1460.0125689344547
+   }
+  },
+  {
+   "nr": "8.17",
+   "id": "SL17",
+   "tytul": "Słup SL17 (865x180, L = 2,65 m)",
+   "rodzaj": "slup",
+   "wykorzystanie": 0.6176,
+   "ok": true,
+   "przyjeto": [
+    "Słup ŻB 18 × 86 cm, C30/37; zbrojenie 8φ12 (B500SP), strzemiona φ6 co 18 cm (przy głowicy i podstawie co 10 cm); N_Ed = 877,1 kN. Ciągłość prętów przez wieniec/belkę (zakład l₀), zakotwienie w pogrubieniu płyty fundamentowej (l_bd)."
+   ],
+   "warunki": [
+    {
+     "opis": "Nośność słupa — ściskanie mimośrodowe z efektami II rzędu",
+     "E": 46.1798,
+     "R": 74.7732,
+     "eta": 0.6176
+    },
+    {
+     "opis": "Nośność na ściskanie osiowe",
+     "E": 877.11,
+     "R": 3698.34,
+     "eta": 0.2372
+    },
+    {
+     "opis": "Zbrojenie minimalne (9.5.2(2))",
+     "E": 311.4,
+     "R": 904.7787,
+     "eta": 0.3442
+    }
+   ],
+   "dane": {
+    "zbrojenie": "8φ12",
+    "strzemiona": "φ6 co 18 cm (przy głowicy i podstawie co 10 cm)",
+    "N_Ed": 877.1100400477842
+   }
+  },
+  {
+   "nr": "8.18",
+   "id": "SL18",
+   "tytul": "Słup SL18 (700x180, L = 2,65 m)",
+   "rodzaj": "slup",
+   "wykorzystanie": 0.9032,
+   "ok": true,
+   "przyjeto": [
+    "Słup ŻB 18 × 70 cm, C30/37; zbrojenie 8φ12 (B500SP), strzemiona φ6 co 18 cm (przy głowicy i podstawie co 10 cm); N_Ed = 1333,4 kN. Ciągłość prętów przez wieniec/belkę (zakład l₀), zakotwienie w pogrubieniu płyty fundamentowej (l_bd)."
+   ],
+   "warunki": [
+    {
+     "opis": "Nośność słupa — ściskanie mimośrodowe z efektami II rzędu",
+     "E": 64.7247,
+     "R": 71.6631,
+     "eta": 0.9032
+    },
+    {
+     "opis": "Nośność na ściskanie osiowe",
+     "E": 1333.4193,
+     "R": 3061.9115,
+     "eta": 0.4355
+    },
+    {
+     "opis": "Zbrojenie minimalne (9.5.2(2))",
+     "E": 306.6864,
+     "R": 904.7787,
+     "eta": 0.339
+    }
+   ],
+   "dane": {
+    "zbrojenie": "8φ12",
+    "strzemiona": "φ6 co 18 cm (przy głowicy i podstawie co 10 cm)",
+    "N_Ed": 1333.419266568637
+   }
+  },
+  {
+   "nr": "8.19",
+   "id": "SL19",
+   "tytul": "Słup SL19 (300x180, L = 2,65 m)",
+   "rodzaj": "slup",
+   "wykorzystanie": 0.9893,
+   "ok": true,
+   "przyjeto": [
+    "Słup ŻB 18 × 30 cm, C30/37; zbrojenie 6φ12 (B500SP), strzemiona φ6 co 18 cm (przy głowicy i podstawie co 10 cm); N_Ed = 761,2 kN. Ciągłość prętów przez wieniec/belkę (zakład l₀), zakotwienie w pogrubieniu płyty fundamentowej (l_bd)."
+   ],
+   "warunki": [
+    {
+     "opis": "Nośność słupa — ściskanie mimośrodowe z efektami II rzędu",
+     "E": 32.5819,
+     "R": 32.9347,
+     "eta": 0.9893
+    },
+    {
+     "opis": "Nośność na ściskanie osiowe",
+     "E": 761.1734,
+     "R": 1428.5765,
+     "eta": 0.5328
+    },
+    {
+     "opis": "Zbrojenie minimalne (9.5.2(2))",
+     "E": 175.0699,
+     "R": 678.584,
+     "eta": 0.258
+    }
+   ],
+   "dane": {
+    "zbrojenie": "6φ12",
+    "strzemiona": "φ6 co 18 cm (przy głowicy i podstawie co 10 cm)",
+    "N_Ed": 761.1734059192991
+   }
+  },
+  {
+   "nr": "8.20",
+   "id": "SL20",
+   "tytul": "Słup SL20 (180x440, L = 2,93 m)",
+   "rodzaj": "slup",
+   "wykorzystanie": 0.4209,
+   "ok": true,
+   "przyjeto": [
+    "Słup ŻB 18 × 44 cm, C30/37; zbrojenie 6φ12 (B500SP), strzemiona φ6 co 18 cm (przy głowicy i podstawie co 10 cm); N_Ed = 241,4 kN. Ciągłość prętów przez wieniec/belkę (zakład l₀), zakotwienie w pogrubieniu płyty fundamentowej (l_bd)."
+   ],
+   "warunki": [
+    {
+     "opis": "Nośność słupa — ściskanie mimośrodowe z efektami II rzędu",
+     "E": 13.9924,
+     "R": 33.2406,
+     "eta": 0.4209
+    },
+    {
+     "opis": "Nośność na ściskanie osiowe",
+     "E": 241.4414,
+     "R": 1968.5765,
+     "eta": 0.1226
+    },
+    {
+     "opis": "Zbrojenie minimalne (9.5.2(2))",
+     "E": 158.4,
+     "R": 678.584,
+     "eta": 0.2334
+    }
+   ],
+   "dane": {
+    "zbrojenie": "6φ12",
+    "strzemiona": "φ6 co 18 cm (przy głowicy i podstawie co 10 cm)",
+    "N_Ed": 241.44142472982753
+   }
+  },
+  {
+   "nr": "8.21",
+   "id": "SL21",
+   "tytul": "Słup SL21 (400x180, L = 2,08 m)",
+   "rodzaj": "slup",
+   "wykorzystanie": 0.2632,
+   "ok": true,
+   "przyjeto": [
+    "Słup ŻB 18 × 40 cm, C30/37; zbrojenie 6φ12 (B500SP), strzemiona φ6 co 18 cm (przy głowicy i podstawie co 10 cm); N_Ed = 186,5 kN. Ciągłość prętów przez wieniec/belkę (zakład l₀), zakotwienie w pogrubieniu płyty fundamentowej (l_bd)."
+   ],
+   "warunki": [
+    {
+     "opis": "Nośność słupa — ściskanie mimośrodowe z efektami II rzędu",
+     "E": 7.8579,
+     "R": 29.8575,
+     "eta": 0.2632
+    },
+    {
+     "opis": "Nośność na ściskanie osiowe",
+     "E": 186.5334,
+     "R": 1814.2907,
+     "eta": 0.1028
+    },
+    {
+     "opis": "Zbrojenie minimalne (9.5.2(2))",
+     "E": 144.0,
+     "R": 678.584,
+     "eta": 0.2122
+    }
+   ],
+   "dane": {
+    "zbrojenie": "6φ12",
+    "strzemiona": "φ6 co 18 cm (przy głowicy i podstawie co 10 cm)",
+    "N_Ed": 186.5333518641305
+   }
   },
   {
    "nr": "9.1",
@@ -6514,7 +7017,7 @@
    "id": "S2-06",
    "tytul": "Ściana S2-06 (P2, zewnętrzna nośna)",
    "rodzaj": "sciana",
-   "wykorzystanie": 0.8431,
+   "wykorzystanie": 0.4522,
    "ok": true,
    "przyjeto": [
     "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
@@ -6528,21 +7031,27 @@
     },
     {
      "opis": "Nośność — przekrój górny",
-     "E": 18.7608,
+     "E": 2.5094,
      "R": 496.4674,
-     "eta": 0.0378
+     "eta": 0.0051
     },
     {
      "opis": "Nośność — połowa wysokości",
-     "E": 24.8342,
-     "R": 29.4556,
-     "eta": 0.8431
+     "E": 8.3972,
+     "R": 646.4094,
+     "eta": 0.013
     },
     {
      "opis": "Nośność — przekrój dolny",
-     "E": 30.9076,
+     "E": 14.2851,
      "R": 729.6135,
-     "eta": 0.0424
+     "eta": 0.0196
+    },
+    {
+     "opis": "Obciążenie poziome — przesklepienie",
+     "E": 1.4672,
+     "R": 16.9976,
+     "eta": 0.0863
     },
     {
      "opis": "Obciążenie poziome — przesklepienie",
@@ -6558,7 +7067,7 @@
    "id": "S2-07",
    "tytul": "Ściana S2-07 (P2, zewnętrzna nośna)",
    "rodzaj": "sciana",
-   "wykorzystanie": 0.4522,
+   "wykorzystanie": 0.7678,
    "ok": true,
    "przyjeto": [
     "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
@@ -6572,21 +7081,21 @@
     },
     {
      "opis": "Nośność — przekrój górny",
-     "E": 88.5431,
+     "E": 7.6154,
      "R": 496.4674,
-     "eta": 0.1783
+     "eta": 0.0153
     },
     {
      "opis": "Nośność — połowa wysokości",
-     "E": 94.6164,
-     "R": 397.5998,
-     "eta": 0.238
+     "E": 13.6888,
+     "R": 17.8295,
+     "eta": 0.7678
     },
     {
      "opis": "Nośność — przekrój dolny",
-     "E": 100.6898,
+     "E": 19.7622,
      "R": 729.6135,
-     "eta": 0.138
+     "eta": 0.0271
     },
     {
      "opis": "Obciążenie poziome — przesklepienie",
@@ -6602,10 +7111,19 @@
    "id": "S2-08",
    "tytul": "Ściana S2-08 (P2, zewnętrzna nośna)",
    "rodzaj": "sciana",
-   "wykorzystanie": 0.0,
+   "wykorzystanie": 0.1974,
    "ok": true,
-   "przyjeto": [],
-   "warunki": [],
+   "przyjeto": [
+    "Szkielet KVH C24 45×200 mm co 62,5 cm [ZAŁ]."
+   ],
+   "warunki": [
+    {
+     "opis": "Zginanie słupka (6.11)",
+     "E": 3.2802,
+     "R": 16.6154,
+     "eta": 0.1974
+    }
+   ],
    "dane": {}
   },
   {
@@ -6613,35 +7131,35 @@
    "id": "S2-09",
    "tytul": "Ściana S2-09 (P2, wewnętrzna nośna)",
    "rodzaj": "sciana",
-   "wykorzystanie": 1.7197,
-   "ok": false,
+   "wykorzystanie": 0.4522,
+   "ok": true,
    "przyjeto": [
     "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
    ],
    "warunki": [
     {
      "opis": "Smukłość ściany",
-     "E": 16.2778,
+     "E": 12.2083,
      "R": 27.0,
-     "eta": 0.6029
+     "eta": 0.4522
     },
     {
      "opis": "Nośność — przekrój górny",
-     "E": 388.493,
-     "R": 335.4821,
-     "eta": 1.158
+     "E": 101.7589,
+     "R": 685.6265,
+     "eta": 0.1484
     },
     {
      "opis": "Nośność — połowa wysokości",
-     "E": 472.6659,
-     "R": 274.855,
-     "eta": 1.7197
+     "E": 114.0283,
+     "R": 649.8778,
+     "eta": 0.1755
     },
     {
      "opis": "Nośność — przekrój dolny",
-     "E": 556.8389,
-     "R": 364.8067,
-     "eta": 1.5264
+     "E": 126.2977,
+     "R": 729.6135,
+     "eta": 0.1731
     }
    ],
    "dane": {}
@@ -6695,10 +7213,31 @@
    "id": "S2-11",
    "tytul": "Ściana S2-11 (P2, wewnętrzna nośna)",
    "rodzaj": "sciana",
-   "wykorzystanie": 0.0,
+   "wykorzystanie": 0.2653,
    "ok": true,
-   "przyjeto": [],
-   "warunki": [],
+   "przyjeto": [
+    "Ściana ŻB t = 15 cm, C25/30: pionowo 10φ12/m (po połowie przy licach), poziomo φ8 co 35 cm przy obu licach (9.6.3); N_Ed = 24,8 kN/m."
+   ],
+   "warunki": [
+    {
+     "opis": "Nośność słupa — ściskanie mimośrodowe z efektami II rzędu",
+     "E": 0.4964,
+     "R": 30.2674,
+     "eta": 0.0164
+    },
+    {
+     "opis": "Nośność na ściskanie osiowe",
+     "E": 24.8183,
+     "R": 3130.9608,
+     "eta": 0.0079
+    },
+    {
+     "opis": "Zbrojenie minimalne (9.5.2(2))",
+     "E": 300.0,
+     "R": 1130.9734,
+     "eta": 0.2653
+    }
+   ],
    "dane": {}
   },
   {
@@ -6706,10 +7245,31 @@
    "id": "S1-10",
    "tytul": "Ściana S1-10 (P1, wewnętrzna nośna)",
    "rodzaj": "sciana",
-   "wykorzystanie": 0.0,
+   "wykorzystanie": 0.2653,
    "ok": true,
-   "przyjeto": [],
-   "warunki": [],
+   "przyjeto": [
+    "Ściana ŻB t = 15 cm, C25/30: pionowo 10φ12/m (po połowie przy licach), poziomo φ8 co 35 cm przy obu licach (9.6.3); N_Ed = 39,3 kN/m."
+   ],
+   "warunki": [
+    {
+     "opis": "Nośność słupa — ściskanie mimośrodowe z efektami II rzędu",
+     "E": 0.7865,
+     "R": 30.9722,
+     "eta": 0.0254
+    },
+    {
+     "opis": "Nośność na ściskanie osiowe",
+     "E": 39.3271,
+     "R": 3130.9608,
+     "eta": 0.0126
+    },
+    {
+     "opis": "Zbrojenie minimalne (9.5.2(2))",
+     "E": 300.0,
+     "R": 1130.9734,
+     "eta": 0.2653
+    }
+   ],
    "dane": {}
   },
   {
@@ -6717,35 +7277,35 @@
    "id": "S1-01",
    "tytul": "Ściana S1-01 (P1, zewnętrzna nośna)",
    "rodzaj": "sciana",
-   "wykorzystanie": 1.3611,
-   "ok": false,
+   "wykorzystanie": 0.6029,
+   "ok": true,
    "przyjeto": [
     "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
    ],
    "warunki": [
     {
      "opis": "Smukłość ściany",
-     "E": 12.2083,
+     "E": 16.2778,
      "R": 27.0,
-     "eta": 0.4522
+     "eta": 0.6029
     },
     {
      "opis": "Nośność — przekrój górny",
-     "E": 736.8786,
-     "R": 541.3731,
-     "eta": 1.3611
+     "E": 143.8899,
+     "R": 479.2382,
+     "eta": 0.3002
     },
     {
      "opis": "Nośność — połowa wysokości",
-     "E": 684.6165,
-     "R": 548.0571,
-     "eta": 1.2492
+     "E": 153.4628,
+     "R": 393.7957,
+     "eta": 0.3897
     },
     {
      "opis": "Nośność — przekrój dolny",
-     "E": 632.3544,
-     "R": 729.6135,
-     "eta": 0.8667
+     "E": 163.0356,
+     "R": 543.0288,
+     "eta": 0.3002
     },
     {
      "opis": "Obciążenie poziome — przesklepienie",
@@ -6775,21 +7335,21 @@
     },
     {
      "opis": "Nośność — przekrój górny",
-     "E": 63.5749,
-     "R": 662.7121,
-     "eta": 0.0959
+     "E": 63.1938,
+     "R": 663.7147,
+     "eta": 0.0952
     },
     {
      "opis": "Nośność — połowa wysokości",
-     "E": 83.0831,
-     "R": 467.005,
-     "eta": 0.1779
+     "E": 82.5664,
+     "R": 466.273,
+     "eta": 0.1771
     },
     {
      "opis": "Nośność — przekrój dolny",
-     "E": 102.5914,
+     "E": 101.939,
      "R": 729.6135,
-     "eta": 0.1406
+     "eta": 0.1397
     },
     {
      "opis": "Obciążenie poziome — przesklepienie",
@@ -6805,7 +7365,7 @@
    "id": "S1-03",
    "tytul": "Ściana S1-03 (P1, zewnętrzna nośna)",
    "rodzaj": "sciana",
-   "wykorzystanie": 0.5912,
+   "wykorzystanie": 0.5916,
    "ok": true,
    "przyjeto": [
     "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
@@ -6819,19 +7379,19 @@
     },
     {
      "opis": "Nośność — przekrój górny",
-     "E": 20.7375,
-     "R": 654.5106,
+     "E": 20.772,
+     "R": 654.2485,
      "eta": 0.0317
     },
     {
      "opis": "Nośność — połowa wysokości",
-     "E": 23.4003,
-     "R": 39.5791,
-     "eta": 0.5912
+     "E": 23.4067,
+     "R": 39.5677,
+     "eta": 0.5916
     },
     {
      "opis": "Nośność — przekrój dolny",
-     "E": 26.063,
+     "E": 26.0414,
      "R": 729.6135,
      "eta": 0.0357
     },
@@ -6849,8 +7409,8 @@
    "id": "S1-04",
    "tytul": "Ściana S1-04 (P1, zewnętrzna nośna)",
    "rodzaj": "sciana",
-   "wykorzystanie": 1.5532,
-   "ok": false,
+   "wykorzystanie": 0.6029,
+   "ok": true,
    "przyjeto": [
     "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
    ],
@@ -6863,21 +7423,21 @@
     },
     {
      "opis": "Nośność — przekrój górny",
-     "E": 500.6213,
-     "R": 372.0503,
-     "eta": 1.3456
+     "E": 53.7528,
+     "R": 338.6852,
+     "eta": 0.1587
     },
     {
      "opis": "Nośność — połowa wysokości",
-     "E": 525.6345,
-     "R": 338.4115,
-     "eta": 1.5532
+     "E": 76.788,
+     "R": 335.7903,
+     "eta": 0.2287
     },
     {
      "opis": "Nośność — przekrój dolny",
-     "E": 550.6477,
-     "R": 563.4081,
-     "eta": 0.9774
+     "E": 99.8232,
+     "R": 512.8822,
+     "eta": 0.1946
     },
     {
      "opis": "Obciążenie poziome — przesklepienie",
@@ -6887,27 +7447,27 @@
     },
     {
      "opis": "Docisk",
-     "E": 12.2099,
+     "E": 12.2452,
      "R": 274.9539,
-     "eta": 0.0444
+     "eta": 0.0445
     },
     {
      "opis": "Docisk",
-     "E": 9.8702,
+     "E": 9.9307,
      "R": 304.0056,
-     "eta": 0.0325
+     "eta": 0.0327
     },
     {
      "opis": "Docisk",
-     "E": 57.4238,
+     "E": 41.3695,
      "R": 304.0056,
-     "eta": 0.1889
+     "eta": 0.1361
     },
     {
      "opis": "Docisk",
-     "E": 64.0195,
+     "E": 33.88,
      "R": 276.6831,
-     "eta": 0.2314
+     "eta": 0.1225
     }
    ],
    "dane": {}
@@ -6917,35 +7477,35 @@
    "id": "S1-05",
    "tytul": "Ściana S1-05 (P1, wewnętrzna nośna)",
    "rodzaj": "sciana",
-   "wykorzystanie": 2.3021,
-   "ok": false,
+   "wykorzystanie": 0.4522,
+   "ok": true,
    "przyjeto": [
     "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
    ],
    "warunki": [
     {
      "opis": "Smukłość ściany",
-     "E": 16.2778,
+     "E": 12.2083,
      "R": 27.0,
-     "eta": 0.6029
+     "eta": 0.4522
     },
     {
      "opis": "Nośność — przekrój górny",
-     "E": 758.2308,
-     "R": 473.6775,
-     "eta": 1.6007
+     "E": 0.001,
+     "R": 729.6135,
+     "eta": 0.0
     },
     {
      "opis": "Nośność — połowa wysokości",
-     "E": 891.1259,
-     "R": 387.09,
-     "eta": 2.3021
+     "E": 7.8454,
+     "R": 649.8778,
+     "eta": 0.0121
     },
     {
      "opis": "Nośność — przekrój dolny",
-     "E": 1024.0209,
-     "R": 515.0819,
-     "eta": 1.9881
+     "E": 15.6908,
+     "R": 729.6135,
+     "eta": 0.0215
     }
    ],
    "dane": {}
@@ -6955,8 +7515,8 @@
    "id": "S1-06",
    "tytul": "Ściana S1-06 (P1, wewnętrzna nośna)",
    "rodzaj": "sciana",
-   "wykorzystanie": 3.821,
-   "ok": false,
+   "wykorzystanie": 0.7046,
+   "ok": true,
    "przyjeto": [
     "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
    ],
@@ -6969,21 +7529,21 @@
     },
     {
      "opis": "Nośność — przekrój górny",
-     "E": 769.9755,
-     "R": 349.1418,
-     "eta": 2.2053
+     "E": 88.9497,
+     "R": 375.1318,
+     "eta": 0.2371
     },
     {
      "opis": "Nośność — połowa wysokości",
-     "E": 1081.9547,
-     "R": 283.3389,
-     "eta": 3.8186
+     "E": 182.4359,
+     "R": 308.1359,
+     "eta": 0.5921
     },
     {
      "opis": "Nośność — przekrój dolny",
-     "E": 1393.9339,
-     "R": 364.8067,
-     "eta": 3.821
+     "E": 275.922,
+     "R": 391.5916,
+     "eta": 0.7046
     }
    ],
    "dane": {}
@@ -7007,21 +7567,21 @@
     },
     {
      "opis": "Nośność — przekrój górny",
-     "E": 47.2143,
+     "E": 20.6756,
      "R": 729.6135,
-     "eta": 0.0647
+     "eta": 0.0283
     },
     {
      "opis": "Nośność — połowa wysokości",
-     "E": 53.2547,
+     "E": 27.7122,
      "R": 649.8778,
-     "eta": 0.0819
+     "eta": 0.0426
     },
     {
      "opis": "Nośność — przekrój dolny",
-     "E": 59.2951,
+     "E": 34.7488,
      "R": 729.6135,
-     "eta": 0.0813
+     "eta": 0.0476
     }
    ],
    "dane": {}
@@ -7031,8 +7591,8 @@
    "id": "S1-08",
    "tytul": "Ściana S1-08 (P1, wewnętrzna nośna)",
    "rodzaj": "sciana",
-   "wykorzystanie": 2.1878,
-   "ok": false,
+   "wykorzystanie": 0.4522,
+   "ok": true,
    "przyjeto": [
     "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
    ],
@@ -7045,27 +7605,21 @@
     },
     {
      "opis": "Nośność — przekrój górny",
-     "E": 695.1739,
-     "R": 706.7166,
-     "eta": 0.9837
+     "E": 76.6678,
+     "R": 729.6135,
+     "eta": 0.1051
     },
     {
      "opis": "Nośność — połowa wysokości",
-     "E": 702.2803,
+     "E": 83.6593,
      "R": 649.8778,
-     "eta": 1.0806
+     "eta": 0.1287
     },
     {
      "opis": "Nośność — przekrój dolny",
-     "E": 709.3867,
+     "E": 90.6508,
      "R": 729.6135,
-     "eta": 0.9723
-    },
-    {
-     "opis": "Docisk",
-     "E": 553.8258,
-     "R": 253.1447,
-     "eta": 2.1878
+     "eta": 0.1242
     }
    ],
    "dane": {}
@@ -7075,8 +7629,8 @@
    "id": "S1-09",
    "tytul": "Ściana S1-09 (P1, wewnętrzna nośna)",
    "rodzaj": "sciana",
-   "wykorzystanie": 1.7409,
-   "ok": false,
+   "wykorzystanie": 0.4522,
+   "ok": true,
    "przyjeto": [
     "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
    ],
@@ -7089,27 +7643,21 @@
     },
     {
      "opis": "Nośność — przekrój górny",
-     "E": 622.9315,
-     "R": 714.0839,
-     "eta": 0.8724
+     "E": 88.5153,
+     "R": 729.6135,
+     "eta": 0.1213
     },
     {
      "opis": "Nośność — połowa wysokości",
-     "E": 630.0378,
+     "E": 95.5434,
      "R": 649.8778,
-     "eta": 0.9695
+     "eta": 0.147
     },
     {
      "opis": "Nośność — przekrój dolny",
-     "E": 637.1442,
+     "E": 102.5715,
      "R": 729.6135,
-     "eta": 0.8733
-    },
-    {
-     "opis": "Docisk",
-     "E": 440.6904,
-     "R": 253.1447,
-     "eta": 1.7409
+     "eta": 0.1406
     }
    ],
    "dane": {}
@@ -7119,10 +7667,31 @@
    "id": "S0-14",
    "tytul": "Ściana S0-14 (P0, wewnętrzna nośna)",
    "rodzaj": "sciana",
-   "wykorzystanie": 0.0,
+   "wykorzystanie": 0.2653,
    "ok": true,
-   "przyjeto": [],
-   "warunki": [],
+   "przyjeto": [
+    "Ściana ŻB t = 15 cm, C25/30: pionowo 10φ12/m (po połowie przy licach), poziomo φ8 co 35 cm przy obu licach (9.6.3); N_Ed = 55,3 kN/m."
+   ],
+   "warunki": [
+    {
+     "opis": "Nośność słupa — ściskanie mimośrodowe z efektami II rzędu",
+     "E": 1.1055,
+     "R": 31.7456,
+     "eta": 0.0348
+    },
+    {
+     "opis": "Nośność na ściskanie osiowe",
+     "E": 55.2739,
+     "R": 3130.9608,
+     "eta": 0.0177
+    },
+    {
+     "opis": "Zbrojenie minimalne (9.5.2(2))",
+     "E": 300.0,
+     "R": 1130.9734,
+     "eta": 0.2653
+    }
+   ],
    "dane": {}
   },
   {
@@ -7130,8 +7699,8 @@
    "id": "S0-01",
    "tytul": "Ściana S0-01 (P0, zewnętrzna nośna)",
    "rodzaj": "sciana",
-   "wykorzystanie": 5.4063,
-   "ok": false,
+   "wykorzystanie": 0.6029,
+   "ok": true,
    "przyjeto": [
     "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
    ],
@@ -7144,21 +7713,21 @@
     },
     {
      "opis": "Nośność — przekrój górny",
-     "E": 1477.7038,
+     "E": 0.0083,
      "R": 364.8067,
-     "eta": 4.0506
+     "eta": 0.0
     },
     {
      "opis": "Nośność — połowa wysokości",
-     "E": 1572.8498,
+     "E": 8.9356,
      "R": 290.9276,
-     "eta": 5.4063
+     "eta": 0.0307
     },
     {
      "opis": "Nośność — przekrój dolny",
-     "E": 1667.9959,
+     "E": 17.8629,
      "R": 364.8067,
-     "eta": 4.5723
+     "eta": 0.049
     },
     {
      "opis": "Obciążenie poziome — przesklepienie",
@@ -7188,19 +7757,19 @@
     },
     {
      "opis": "Nośność — przekrój górny",
-     "E": 34.7879,
-     "R": 364.3487,
+     "E": 34.7791,
+     "R": 364.3458,
      "eta": 0.0955
     },
     {
      "opis": "Nośność — połowa wysokości",
-     "E": 48.4994,
-     "R": 289.8216,
+     "E": 48.4896,
+     "R": 289.8206,
      "eta": 0.1673
     },
     {
      "opis": "Nośność — przekrój dolny",
-     "E": 62.211,
+     "E": 62.2001,
      "R": 364.8067,
      "eta": 0.1705
     },
@@ -7218,8 +7787,8 @@
    "id": "S0-07",
    "tytul": "Ściana S0-07 (P0, zewnętrzna nośna)",
    "rodzaj": "sciana",
-   "wykorzystanie": 1.3222,
-   "ok": false,
+   "wykorzystanie": 0.6029,
+   "ok": true,
    "przyjeto": [
     "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
    ],
@@ -7232,33 +7801,27 @@
     },
     {
      "opis": "Nośność — przekrój górny",
-     "E": 552.3937,
-     "R": 584.0497,
-     "eta": 0.9458
+     "E": 105.6613,
+     "R": 486.9664,
+     "eta": 0.217
     },
     {
      "opis": "Nośność — połowa wysokości",
-     "E": 617.7202,
-     "R": 467.1939,
-     "eta": 1.3222
+     "E": 176.8652,
+     "R": 413.1482,
+     "eta": 0.4281
     },
     {
      "opis": "Nośność — przekrój dolny",
-     "E": 683.0466,
-     "R": 602.9863,
-     "eta": 1.1328
+     "E": 248.0692,
+     "R": 543.8484,
+     "eta": 0.4561
     },
     {
      "opis": "Obciążenie poziome — przesklepienie",
      "E": 1.4672,
      "R": 16.9976,
      "eta": 0.0863
-    },
-    {
-     "opis": "Docisk",
-     "E": 51.4967,
-     "R": 253.1447,
-     "eta": 0.2034
     }
    ],
    "dane": {}
@@ -7268,35 +7831,35 @@
    "id": "S0-08",
    "tytul": "Ściana S0-08 (P0, wewnętrzna nośna)",
    "rodzaj": "sciana",
-   "wykorzystanie": 2.1396,
-   "ok": false,
+   "wykorzystanie": 0.4522,
+   "ok": true,
    "przyjeto": [
     "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
    ],
    "warunki": [
     {
      "opis": "Smukłość ściany",
-     "E": 16.2778,
+     "E": 12.2083,
      "R": 27.0,
-     "eta": 0.6029
+     "eta": 0.4522
     },
     {
      "opis": "Nośność — przekrój górny",
-     "E": 848.1806,
-     "R": 525.8792,
-     "eta": 1.6129
+     "E": 64.9295,
+     "R": 705.2173,
+     "eta": 0.0921
     },
     {
      "opis": "Nośność — połowa wysokości",
-     "E": 889.7854,
-     "R": 415.8726,
-     "eta": 2.1396
+     "E": 70.1147,
+     "R": 649.8778,
+     "eta": 0.1079
     },
     {
      "opis": "Nośność — przekrój dolny",
-     "E": 931.3903,
-     "R": 526.3692,
-     "eta": 1.7695
+     "E": 75.2999,
+     "R": 729.6135,
+     "eta": 0.1032
     }
    ],
    "dane": {}
@@ -7306,8 +7869,8 @@
    "id": "S0-09",
    "tytul": "Ściana S0-09 (P0, wewnętrzna nośna)",
    "rodzaj": "sciana",
-   "wykorzystanie": 1.0688,
-   "ok": false,
+   "wykorzystanie": 0.6029,
+   "ok": true,
    "przyjeto": [
     "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
    ],
@@ -7320,21 +7883,21 @@
     },
     {
      "opis": "Nośność — przekrój górny",
-     "E": 235.7117,
+     "E": 27.1488,
      "R": 335.4821,
-     "eta": 0.7026
+     "eta": 0.0809
     },
     {
      "opis": "Nośność — połowa wysokości",
-     "E": 294.3142,
-     "R": 275.3628,
-     "eta": 1.0688
+     "E": 53.8929,
+     "R": 282.5622,
+     "eta": 0.1907
     },
     {
      "opis": "Nośność — przekrój dolny",
-     "E": 352.9168,
+     "E": 80.6371,
      "R": 364.8067,
-     "eta": 0.9674
+     "eta": 0.221
     }
    ],
    "dane": {}
@@ -7344,8 +7907,8 @@
    "id": "S0-10",
    "tytul": "Ściana S0-10 (P0, wewnętrzna nośna)",
    "rodzaj": "sciana",
-   "wykorzystanie": 3.666,
-   "ok": false,
+   "wykorzystanie": 0.6029,
+   "ok": true,
    "przyjeto": [
     "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
    ],
@@ -7358,21 +7921,21 @@
     },
     {
      "opis": "Nośność — przekrój górny",
-     "E": 898.5645,
-     "R": 364.8067,
-     "eta": 2.4631
+     "E": 85.8391,
+     "R": 708.3626,
+     "eta": 0.1212
     },
     {
      "opis": "Nośność — połowa wysokości",
-     "E": 1065.9369,
-     "R": 290.7666,
-     "eta": 3.666
+     "E": 119.2772,
+     "R": 564.908,
+     "eta": 0.2111
     },
     {
      "opis": "Nośność — przekrój dolny",
-     "E": 1233.3093,
-     "R": 364.8067,
-     "eta": 3.3807
+     "E": 152.7153,
+     "R": 708.3626,
+     "eta": 0.2156
     }
    ],
    "dane": {}
@@ -7382,7 +7945,7 @@
    "id": "S0-11",
    "tytul": "Ściana S0-11 (P0, wewnętrzna nośna)",
    "rodzaj": "sciana",
-   "wykorzystanie": 0.6155,
+   "wykorzystanie": 0.6029,
    "ok": true,
    "przyjeto": [
     "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
@@ -7396,21 +7959,21 @@
     },
     {
      "opis": "Nośność — przekrój górny",
-     "E": 95.265,
+     "E": 50.2751,
      "R": 364.8067,
-     "eta": 0.2611
+     "eta": 0.1378
     },
     {
      "opis": "Nośność — połowa wysokości",
-     "E": 159.9007,
+     "E": 114.0915,
      "R": 290.9276,
-     "eta": 0.5496
+     "eta": 0.3922
     },
     {
      "opis": "Nośność — przekrój dolny",
-     "E": 224.5363,
+     "E": 177.9079,
      "R": 364.8067,
-     "eta": 0.6155
+     "eta": 0.4877
     }
    ],
    "dane": {}
@@ -7420,10 +7983,31 @@
    "id": "S0-12",
    "tytul": "Ściana S0-12 (P0, wewnętrzna nośna)",
    "rodzaj": "sciana",
-   "wykorzystanie": 0.0,
+   "wykorzystanie": 0.3183,
    "ok": true,
-   "przyjeto": [],
-   "warunki": [],
+   "przyjeto": [
+    "Ściana ŻB t = 18 cm, C25/30: pionowo 10φ12/m (po połowie przy licach), poziomo φ8 co 35 cm przy obu licach (9.6.3); N_Ed = 109,8 kN/m."
+   ],
+   "warunki": [
+    {
+     "opis": "Nośność słupa — ściskanie mimośrodowe z efektami II rzędu",
+     "E": 2.1969,
+     "R": 43.4052,
+     "eta": 0.0506
+    },
+    {
+     "opis": "Nośność na ściskanie osiowe",
+     "E": 109.8475,
+     "R": 3666.6751,
+     "eta": 0.03
+    },
+    {
+     "opis": "Zbrojenie minimalne (9.5.2(2))",
+     "E": 360.0,
+     "R": 1130.9734,
+     "eta": 0.3183
+    }
+   ],
    "dane": {}
   },
   {
@@ -7431,10 +8015,31 @@
    "id": "S0-13",
    "tytul": "Ściana S0-13 (P0, wewnętrzna nośna)",
    "rodzaj": "sciana",
-   "wykorzystanie": 0.0,
+   "wykorzystanie": 0.3183,
    "ok": true,
-   "przyjeto": [],
-   "warunki": [],
+   "przyjeto": [
+    "Ściana ŻB t = 18 cm, C25/30: pionowo 10φ12/m (po połowie przy licach), poziomo φ8 co 35 cm przy obu licach (9.6.3); N_Ed = 121,8 kN/m."
+   ],
+   "warunki": [
+    {
+     "opis": "Nośność słupa — ściskanie mimośrodowe z efektami II rzędu",
+     "E": 6.4124,
+     "R": 44.1571,
+     "eta": 0.1452
+    },
+    {
+     "opis": "Nośność na ściskanie osiowe",
+     "E": 121.7682,
+     "R": 3666.6751,
+     "eta": 0.0332
+    },
+    {
+     "opis": "Zbrojenie minimalne (9.5.2(2))",
+     "E": 360.0,
+     "R": 1130.9734,
+     "eta": 0.3183
+    }
+   ],
    "dane": {}
   },
   {
@@ -7442,7 +8047,7 @@
    "id": "S0-15",
    "tytul": "Ściana S0-15 (P0, wewnętrzna nośna)",
    "rodzaj": "sciana",
-   "wykorzystanie": 0.8297,
+   "wykorzystanie": 0.6029,
    "ok": true,
    "przyjeto": [
     "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
@@ -7456,27 +8061,21 @@
     },
     {
      "opis": "Nośność — przekrój górny",
-     "E": 110.0909,
-     "R": 353.8992,
-     "eta": 0.3111
+     "E": 87.0321,
+     "R": 673.2121,
+     "eta": 0.1293
     },
     {
      "opis": "Nośność — połowa wysokości",
-     "E": 206.3881,
-     "R": 287.7496,
-     "eta": 0.7172
+     "E": 110.2853,
+     "R": 548.021,
+     "eta": 0.2012
     },
     {
      "opis": "Nośność — przekrój dolny",
-     "E": 302.6854,
-     "R": 364.8067,
-     "eta": 0.8297
-    },
-    {
-     "opis": "Docisk",
-     "E": 37.4147,
-     "R": 253.1447,
-     "eta": 0.1478
+     "E": 133.5385,
+     "R": 716.185,
+     "eta": 0.1865
     }
    ],
    "dane": {}
@@ -7500,21 +8099,21 @@
     },
     {
      "opis": "Nośność — przekrój górny",
-     "E": 280.1892,
-     "R": 717.2643,
-     "eta": 0.3906
+     "E": 279.5549,
+     "R": 717.1521,
+     "eta": 0.3898
     },
     {
      "opis": "Nośność — połowa wysokości",
-     "E": 263.3459,
+     "E": 263.0175,
      "R": 649.8778,
-     "eta": 0.4052
+     "eta": 0.4047
     },
     {
      "opis": "Nośność — przekrój dolny",
-     "E": 246.5026,
+     "E": 246.4801,
      "R": 729.6135,
-     "eta": 0.3379
+     "eta": 0.3378
     }
    ],
    "dane": {}
@@ -7524,7 +8123,7 @@
    "id": "S0-02",
    "tytul": "Ściana S0-02 (P0, zewnętrzna nośna)",
    "rodzaj": "sciana",
-   "wykorzystanie": 0.7217,
+   "wykorzystanie": 0.723,
    "ok": true,
    "przyjeto": [
     "Mur: Bloczek wapienno-piaskowy (silikat) 18 cm, kl. 20, gr. 1, na zaprawie cienkowarstwowej, f_d = 4,50 MPa (klasa wykonania A, γ_M = 1,7)."
@@ -7538,19 +8137,19 @@
     },
     {
      "opis": "Nośność — przekrój górny",
-     "E": 16.1014,
+     "E": 16.1013,
      "R": 496.7677,
      "eta": 0.0324
     },
     {
      "opis": "Nośność — połowa wysokości",
-     "E": 24.229,
-     "R": 33.5704,
-     "eta": 0.7217
+     "E": 24.225,
+     "R": 33.5055,
+     "eta": 0.723
     },
     {
      "opis": "Nośność — przekrój dolny",
-     "E": 32.3567,
+     "E": 32.3486,
      "R": 729.6135,
      "eta": 0.0443
     },
@@ -7736,861 +8335,1128 @@
   {
    "nr": "10.1",
    "id": "PF1",
-   "tytul": "Płyta fundamentowa PF1",
+   "tytul": "Płyta fundamentowa PF1+PF2 z żebrami i pogrubieniami — MES na podłożu sprężystym",
    "rodzaj": "fundament",
-   "wykorzystanie": 0.1349,
+   "wykorzystanie": 0.9138,
    "ok": true,
    "przyjeto": [
-    "Płyta gr. 25 cm, C25/30; k_s = 10515 kN/m³ (z osiadania średniego) [UPR]."
-   ],
-   "warunki": [
-    {
-     "opis": "Osiadanie",
-     "E": 6.7468,
-     "R": 50.0,
-     "eta": 0.1349
-    }
-   ],
-   "dane": {}
-  },
-  {
-   "nr": "10.2",
-   "id": "PF2",
-   "tytul": "Płyta fundamentowa PF2",
-   "rodzaj": "fundament",
-   "wykorzystanie": 0.2806,
-   "ok": true,
-   "przyjeto": [
-    "Płyta gr. 25 cm, C25/30; k_s = 14187 kN/m³ (z osiadania średniego) [UPR]."
-   ],
-   "warunki": [
-    {
-     "opis": "Osiadanie",
-     "E": 14.0315,
-     "R": 50.0,
-     "eta": 0.2806
-    }
-   ],
-   "dane": {}
-  },
-  {
-   "nr": "10.3",
-   "id": "ZF1",
-   "tytul": "Ława fundamentowa ZF1 (B = 0,60 m, h = 0,30 m, L = 12,00 m)",
-   "rodzaj": "fundament",
-   "wykorzystanie": 2.8902,
-   "ok": false,
-   "przyjeto": [
-    "Ława 60×30 cm, C25/30; zbrojenie podłużne 4φ12 (A_s = 4,52 cm²), strzemiona φ6 co 30 cm; poprzecznie: φ10 co 22 cm."
+    "Płyta fundamentowa gr. 25 cm, C25/30, otulenie 50 mm (od gruntu) / 35 mm; siatki dół/góra i dozbrojenia — z A_s,req MES (rysunki PT-BO, kontrola zbrojenia)."
    ],
    "warunki": [
     {
      "opis": "Nośność podłoża (GEO, DA2*)",
-     "E": 349.9753,
-     "R": 149.0952,
-     "eta": 2.3473
+     "E": 13797.7972,
+     "R": 224314.1387,
+     "eta": 0.0615
     },
     {
-     "opis": "Osiadanie",
-     "E": 7.29,
+     "opis": "Docisk lokalny do podłoża (pasmo pod żebrem)",
+     "E": 291.2717,
+     "R": 318.7622,
+     "eta": 0.9138
+    },
+    {
+     "opis": "Osiadanie (PN-EN 1997-1 zał. H: s ≤ 50 mm dla fundamentów bezpośrednich)",
+     "E": 35.0342,
      "R": 50.0,
-     "eta": 0.1458
+     "eta": 0.7007
     },
     {
-     "opis": "Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m)",
-     "E": 1.0,
-     "R": 0.346,
-     "eta": 2.8902
+     "opis": "Przebicie — fundament (6.4.4(2), (6.51)–(6.53))",
+     "E": 0.186,
+     "R": 0.3676,
+     "eta": 0.5059
     },
     {
-     "opis": "Zbrojenie poprzeczne ławy",
-     "E": 117.1207,
-     "R": 356.9992,
-     "eta": 0.3281
+     "opis": "Przebicie — fundament (6.4.4(2), (6.51)–(6.53))",
+     "E": 0.1435,
+     "R": 0.3676,
+     "eta": 0.3904
+    },
+    {
+     "opis": "Przebicie — fundament (6.4.4(2), (6.51)–(6.53))",
+     "E": 0.2192,
+     "R": 0.3429,
+     "eta": 0.6391
+    },
+    {
+     "opis": "Przebicie — fundament (6.4.4(2), (6.51)–(6.53))",
+     "E": 0.242,
+     "R": 0.3429,
+     "eta": 0.7056
+    },
+    {
+     "opis": "Przebicie — fundament (6.4.4(2), (6.51)–(6.53))",
+     "E": 0.221,
+     "R": 0.3429,
+     "eta": 0.6444
+    },
+    {
+     "opis": "Przebicie — fundament (6.4.4(2), (6.51)–(6.53))",
+     "E": 0.0816,
+     "R": 0.3796,
+     "eta": 0.215
+    },
+    {
+     "opis": "Zbrojenie płyty dol x ≤ A_s,max (9.2.1.1(3))",
+     "E": 1757.1427,
+     "R": 10000.0,
+     "eta": 0.1757
+    },
+    {
+     "opis": "Zbrojenie płyty dol y ≤ A_s,max (9.2.1.1(3))",
+     "E": 3967.6838,
+     "R": 10000.0,
+     "eta": 0.3968
+    },
+    {
+     "opis": "Zbrojenie płyty gora x ≤ A_s,max (9.2.1.1(3))",
+     "E": 1661.295,
+     "R": 10000.0,
+     "eta": 0.1661
+    },
+    {
+     "opis": "Zbrojenie płyty gora y ≤ A_s,max (9.2.1.1(3))",
+     "E": 2438.1136,
+     "R": 10000.0,
+     "eta": 0.2438
     }
    ],
    "dane": {
-    "G_k": 192.98864081000195,
-    "Q_k": 80.40613768731457,
-    "D": 0.3460000000000008,
-    "sigma_d": 583.2921687823232
+    "mes": true
+   }
+  },
+  {
+   "nr": "10.2",
+   "id": "PF2",
+   "tytul": "Płyta fundamentowa PF2 — część płyty PF1+PF2 (MES wspólny — poz. PF1)",
+   "rodzaj": "fundament",
+   "wykorzystanie": 0.2085,
+   "ok": true,
+   "przyjeto": [
+    "Płyta gr. 25 cm — zbrojenie jak poz. PF1 (MES wspólny)."
+   ],
+   "warunki": [
+    {
+     "opis": "Docisk do podłoża (obszar płyty)",
+     "E": 66.4541,
+     "R": 318.7622,
+     "eta": 0.2085
+    }
+   ],
+   "dane": {
+    "mes": true
+   }
+  },
+  {
+   "nr": "10.3",
+   "id": "ZF1",
+   "tytul": "Żebro płyty fundamentowej ZF1 (b = 0,60 m, h = 0,55 m, L = 12,00 m)",
+   "rodzaj": "fundament",
+   "wykorzystanie": 0.9616,
+   "ok": true,
+   "przyjeto": [
+    "Żebro 60×55 cm, C25/30; 25φ16 (dołem 7φ16, górą 18φ16), strzemiona φ8 co 13 cm."
+   ],
+   "warunki": [
+    {
+     "opis": "Zbrojenie dolne żebra",
+     "E": 1332.2847,
+     "R": 1407.4335,
+     "eta": 0.9466
+    },
+    {
+     "opis": "Zbrojenie górne żebra",
+     "E": 3435.3355,
+     "R": 3619.1147,
+     "eta": 0.9492
+    },
+    {
+     "opis": "Nośność krzyżulców betonowych",
+     "E": 281.6673,
+     "R": 1008.1029,
+     "eta": 0.2794
+    },
+    {
+     "opis": "Nośność strzemion",
+     "E": 281.6673,
+     "R": 292.9183,
+     "eta": 0.9616
+    },
+    {
+     "opis": "Docisk do podłoża pod żebrem",
+     "E": 280.3376,
+     "R": 318.7622,
+     "eta": 0.8795
+    }
+   ],
+   "dane": {
+    "mes": true
    }
   },
   {
    "nr": "10.4",
    "id": "ZF2",
-   "tytul": "Ława fundamentowa ZF2 (B = 0,60 m, h = 0,30 m, L = 6,38 m)",
+   "tytul": "Żebro płyty fundamentowej ZF2 (b = 0,60 m, h = 0,55 m, L = 6,38 m)",
    "rodzaj": "fundament",
-   "wykorzystanie": 2.8902,
-   "ok": false,
+   "wykorzystanie": 0.937,
+   "ok": true,
    "przyjeto": [
-    "Ława 60×30 cm, C25/30; zbrojenie podłużne 4φ12 (A_s = 4,52 cm²), strzemiona φ6 co 30 cm; poprzecznie: nie wymaga zbrojenia poprzecznego (strzemiona konstrukcyjne φ6 co 30 cm)."
+    "Żebro 60×55 cm, C25/30; 14φ12 (dołem 7φ12, górą 7φ12), strzemiona φ8 co 20 cm."
    ],
    "warunki": [
     {
-     "opis": "Nośność podłoża (GEO, DA2*)",
-     "E": 42.3319,
-     "R": 149.0952,
-     "eta": 0.2839
+     "opis": "Zbrojenie dolne żebra",
+     "E": 741.8128,
+     "R": 791.6813,
+     "eta": 0.937
     },
     {
-     "opis": "Osiadanie",
-     "E": 0.6486,
-     "R": 50.0,
-     "eta": 0.013
+     "opis": "Zbrojenie górne żebra",
+     "E": 697.669,
+     "R": 791.6813,
+     "eta": 0.8812
     },
     {
-     "opis": "Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m)",
-     "E": 1.0,
-     "R": 0.346,
-     "eta": 2.8902
+     "opis": "Nośność krzyżulców betonowych",
+     "E": 72.2912,
+     "R": 1008.1029,
+     "eta": 0.0717
     },
     {
-     "opis": "Ława betonowa — odsadzka (12.13)",
-     "E": 0.4536,
-     "R": 1.2143,
-     "eta": 0.3736
+     "opis": "Nośność strzemion",
+     "E": 72.2912,
+     "R": 190.3969,
+     "eta": 0.3797
+    },
+    {
+     "opis": "Docisk do podłoża pod żebrem",
+     "E": 90.8994,
+     "R": 318.7622,
+     "eta": 0.2852
     }
    ],
    "dane": {
-    "G_k": 23.710917506996616,
-    "Q_k": 3.998482719538524,
-    "D": 0.3460000000000008,
-    "sigma_d": 70.55309606654056
+    "mes": true
    }
   },
   {
    "nr": "10.5",
    "id": "ZF3",
-   "tytul": "Ława ZF3",
+   "tytul": "Żebro płyty fundamentowej ZF3 (b = 0,60 m, h = 0,55 m, L = 2,88 m)",
    "rodzaj": "fundament",
-   "wykorzystanie": 0.0,
+   "wykorzystanie": 0.968,
    "ok": true,
-   "przyjeto": [],
-   "warunki": [],
-   "dane": {}
+   "przyjeto": [
+    "Żebro 60×55 cm, C25/30; 8φ12 (dołem 4φ12, górą 4φ12), strzemiona φ8 co 20 cm."
+   ],
+   "warunki": [
+    {
+     "opis": "Zbrojenie dolne żebra",
+     "E": 392.6208,
+     "R": 452.3893,
+     "eta": 0.8679
+    },
+    {
+     "opis": "Zbrojenie górne żebra",
+     "E": 437.9267,
+     "R": 452.3893,
+     "eta": 0.968
+    },
+    {
+     "opis": "Nośność krzyżulców betonowych",
+     "E": 64.8635,
+     "R": 1008.1029,
+     "eta": 0.0643
+    },
+    {
+     "opis": "Nośność strzemion",
+     "E": 64.8635,
+     "R": 190.3969,
+     "eta": 0.3407
+    },
+    {
+     "opis": "Docisk do podłoża pod żebrem",
+     "E": 43.5771,
+     "R": 318.7622,
+     "eta": 0.1367
+    }
+   ],
+   "dane": {
+    "mes": true
+   }
   },
   {
    "nr": "10.6",
    "id": "ZF4",
-   "tytul": "Ława ZF4",
+   "tytul": "Żebro płyty fundamentowej ZF4 (b = 0,60 m, h = 0,55 m, L = 6,50 m)",
    "rodzaj": "fundament",
-   "wykorzystanie": 0.0,
+   "wykorzystanie": 0.9144,
    "ok": true,
-   "przyjeto": [],
-   "warunki": [],
-   "dane": {}
+   "przyjeto": [
+    "Żebro 60×55 cm, C25/30; 9φ12 (dołem 4φ12, górą 5φ12), strzemiona φ8 co 20 cm."
+   ],
+   "warunki": [
+    {
+     "opis": "Zbrojenie dolne żebra",
+     "E": 392.6208,
+     "R": 452.3893,
+     "eta": 0.8679
+    },
+    {
+     "opis": "Zbrojenie górne żebra",
+     "E": 517.0662,
+     "R": 565.4867,
+     "eta": 0.9144
+    },
+    {
+     "opis": "Nośność krzyżulców betonowych",
+     "E": 78.8059,
+     "R": 1008.1029,
+     "eta": 0.0782
+    },
+    {
+     "opis": "Nośność strzemion",
+     "E": 78.8059,
+     "R": 190.3969,
+     "eta": 0.4139
+    },
+    {
+     "opis": "Docisk do podłoża pod żebrem",
+     "E": 43.7042,
+     "R": 318.7622,
+     "eta": 0.1371
+    }
+   ],
+   "dane": {
+    "mes": true
+   }
   },
   {
    "nr": "10.7",
    "id": "ZF5",
-   "tytul": "Ława fundamentowa ZF5 (B = 0,60 m, h = 0,30 m, L = 6,38 m)",
+   "tytul": "Żebro płyty fundamentowej ZF5 (b = 0,60 m, h = 0,55 m, L = 6,38 m)",
    "rodzaj": "fundament",
-   "wykorzystanie": 1.4286,
-   "ok": false,
+   "wykorzystanie": 0.9583,
+   "ok": true,
    "przyjeto": [
-    "Ława 60×30 cm, C25/30; zbrojenie podłużne 4φ12 (A_s = 4,52 cm²), strzemiona φ6 co 30 cm; poprzecznie: nie wymaga zbrojenia poprzecznego (strzemiona konstrukcyjne φ6 co 30 cm)."
+    "Żebro 60×55 cm, C25/30; 13φ12 (dołem 4φ12, górą 9φ12), strzemiona φ8 co 20 cm."
    ],
    "warunki": [
     {
-     "opis": "Nośność podłoża (GEO, DA2*)",
-     "E": 51.8966,
-     "R": 222.328,
-     "eta": 0.2334
+     "opis": "Zbrojenie dolne żebra",
+     "E": 392.6208,
+     "R": 452.3893,
+     "eta": 0.8679
     },
     {
-     "opis": "Osiadanie",
-     "E": 0.8036,
-     "R": 50.0,
-     "eta": 0.0161
+     "opis": "Zbrojenie górne żebra",
+     "E": 975.3949,
+     "R": 1017.876,
+     "eta": 0.9583
     },
     {
-     "opis": "Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m)",
-     "E": 1.0,
-     "R": 0.7,
-     "eta": 1.4286
+     "opis": "Nośność krzyżulców betonowych",
+     "E": 69.2459,
+     "R": 1008.1029,
+     "eta": 0.0687
     },
     {
-     "opis": "Ława betonowa — odsadzka (12.13)",
-     "E": 0.5023,
-     "R": 1.2143,
-     "eta": 0.4136
+     "opis": "Nośność strzemion",
+     "E": 69.2459,
+     "R": 190.3969,
+     "eta": 0.3637
+    },
+    {
+     "opis": "Docisk do podłoża pod żebrem",
+     "E": 64.3638,
+     "R": 318.7622,
+     "eta": 0.2019
     }
    ],
    "dane": {
-    "G_k": 29.60307141763698,
-    "Q_k": 2.2706263889616416,
-    "D": 0.7,
-    "sigma_d": 86.4943951930308
+    "mes": true
    }
   },
   {
    "nr": "10.8",
    "id": "ZF6",
-   "tytul": "Ława fundamentowa ZF6 (B = 0,60 m, h = 0,30 m, L = 0,62 m)",
+   "tytul": "Żebro płyty fundamentowej ZF6 (b = 0,60 m, h = 0,55 m, L = 0,62 m)",
    "rodzaj": "fundament",
-   "wykorzystanie": 0.7143,
+   "wykorzystanie": 0.9831,
    "ok": true,
    "przyjeto": [
-    "Ława 60×30 cm, C25/30; zbrojenie podłużne 4φ12 (A_s = 4,52 cm²), strzemiona φ6 co 30 cm; poprzecznie: nie wymaga zbrojenia poprzecznego (strzemiona konstrukcyjne φ6 co 30 cm)."
+    "Żebro 60×55 cm, C25/30; 9φ12 (dołem 4φ12, górą 5φ12), strzemiona φ8 co 20 cm."
    ],
    "warunki": [
     {
-     "opis": "Nośność podłoża (GEO, DA2*)",
-     "E": 95.3905,
-     "R": 222.328,
-     "eta": 0.4291
+     "opis": "Zbrojenie dolne żebra",
+     "E": 392.6208,
+     "R": 452.3893,
+     "eta": 0.8679
     },
     {
-     "opis": "Osiadanie",
-     "E": 1.701,
-     "R": 50.0,
-     "eta": 0.034
+     "opis": "Zbrojenie górne żebra",
+     "E": 555.9301,
+     "R": 565.4867,
+     "eta": 0.9831
     },
     {
-     "opis": "Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m)",
-     "E": 0.5,
-     "R": 0.7,
-     "eta": 0.7143
+     "opis": "Nośność krzyżulców betonowych",
+     "E": 128.7964,
+     "R": 1008.1029,
+     "eta": 0.1278
     },
     {
-     "opis": "Ława betonowa — odsadzka (12.13)",
-     "E": 0.681,
-     "R": 1.2143,
-     "eta": 0.5608
+     "opis": "Nośność strzemion",
+     "E": 128.7964,
+     "R": 190.3969,
+     "eta": 0.6765
+    },
+    {
+     "opis": "Docisk do podłoża pod żebrem",
+     "E": 66.1604,
+     "R": 318.7622,
+     "eta": 0.2076
     }
    ],
    "dane": {
-    "G_k": 52.28039133726592,
-    "Q_k": 16.342842330471843,
-    "D": 0.7,
-    "sigma_d": 158.98411801383173
+    "mes": true
    }
   },
   {
    "nr": "10.9",
    "id": "ZF7",
-   "tytul": "Ława fundamentowa ZF7 (B = 0,60 m, h = 0,30 m, L = 12,00 m)",
+   "tytul": "Żebro płyty fundamentowej ZF7 (b = 0,60 m, h = 0,55 m, L = 12,00 m)",
    "rodzaj": "fundament",
-   "wykorzystanie": 2.8902,
-   "ok": false,
+   "wykorzystanie": 0.9916,
+   "ok": true,
    "przyjeto": [
-    "Ława 60×30 cm, C25/30; zbrojenie podłużne 4φ12 (A_s = 4,52 cm²), strzemiona φ6 co 30 cm; poprzecznie: nie wymaga zbrojenia poprzecznego (strzemiona konstrukcyjne φ6 co 30 cm)."
+    "Żebro 60×55 cm, C25/30; 22φ12 (dołem 11φ12, górą 11φ12), strzemiona φ8 co 16 cm."
    ],
    "warunki": [
     {
-     "opis": "Nośność podłoża (GEO, DA2*)",
-     "E": 93.6547,
-     "R": 149.0952,
-     "eta": 0.6282
+     "opis": "Zbrojenie dolne żebra",
+     "E": 1217.8509,
+     "R": 1244.0707,
+     "eta": 0.9789
     },
     {
-     "opis": "Osiadanie",
-     "E": 1.6417,
-     "R": 50.0,
-     "eta": 0.0328
+     "opis": "Zbrojenie górne żebra",
+     "E": 1233.6413,
+     "R": 1244.0707,
+     "eta": 0.9916
     },
     {
-     "opis": "Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m)",
-     "E": 1.0,
-     "R": 0.346,
-     "eta": 2.8902
+     "opis": "Nośność krzyżulców betonowych",
+     "E": 229.2095,
+     "R": 1008.1029,
+     "eta": 0.2274
     },
     {
-     "opis": "Ława betonowa — odsadzka (12.13)",
-     "E": 0.6747,
-     "R": 1.2143,
-     "eta": 0.5557
+     "opis": "Nośność strzemion",
+     "E": 229.2095,
+     "R": 237.9961,
+     "eta": 0.9631
+    },
+    {
+     "opis": "Docisk do podłoża pod żebrem",
+     "E": 110.306,
+     "R": 318.7622,
+     "eta": 0.346
     }
    ],
    "dane": {
-    "G_k": 53.8359598191459,
-    "Q_k": 13.780202989066744,
-    "D": 0.3460000000000006,
-    "sigma_d": 156.09115908992192
+    "mes": true
    }
   },
   {
    "nr": "10.10",
    "id": "ZF8",
-   "tytul": "Ława fundamentowa ZF8 (B = 0,60 m, h = 0,30 m, L = 8,75 m)",
+   "tytul": "Żebro płyty fundamentowej ZF8 (b = 0,60 m, h = 0,55 m, L = 8,75 m)",
    "rodzaj": "fundament",
-   "wykorzystanie": 2.9087,
-   "ok": false,
+   "wykorzystanie": 0.9798,
+   "ok": true,
    "przyjeto": [
-    "Ława 60×30 cm, C25/30; zbrojenie podłużne 4φ12 (A_s = 4,52 cm²), strzemiona φ6 co 30 cm; poprzecznie: φ10 co 22 cm."
+    "Żebro 60×55 cm, C25/30; 31φ16 (dołem 11φ16, górą 20φ16), strzemiona φ8 co 9 cm."
    ],
    "warunki": [
     {
-     "opis": "Nośność podłoża (GEO, DA2*)",
-     "E": 433.6803,
-     "R": 149.0952,
-     "eta": 2.9087
+     "opis": "Zbrojenie dolne żebra",
+     "E": 2039.4232,
+     "R": 2211.6812,
+     "eta": 0.9221
     },
     {
-     "opis": "Osiadanie",
-     "E": 9.1391,
-     "R": 50.0,
-     "eta": 0.1828
+     "opis": "Zbrojenie górne żebra",
+     "E": 3939.9023,
+     "R": 4021.2386,
+     "eta": 0.9798
     },
     {
-     "opis": "Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m)",
-     "E": 1.0,
-     "R": 0.346,
-     "eta": 2.8902
+     "opis": "Nośność krzyżulców betonowych",
+     "E": 384.4838,
+     "R": 1008.1029,
+     "eta": 0.3814
     },
     {
-     "opis": "Zbrojenie poprzeczne ławy",
-     "E": 145.3305,
-     "R": 356.9992,
-     "eta": 0.4071
+     "opis": "Nośność strzemion",
+     "E": 384.4838,
+     "R": 423.1042,
+     "eta": 0.9087
+    },
+    {
+     "opis": "Docisk do podłoża pod żebrem",
+     "E": 285.464,
+     "R": 318.7622,
+     "eta": 0.8955
     }
    ],
    "dane": {
-    "G_k": 240.88688512482165,
-    "Q_k": 97.08469040994333,
-    "D": 0.34600000000000075,
-    "sigma_d": 722.8005540128075
+    "mes": true
    }
   },
   {
    "nr": "10.11",
    "id": "ZF9",
-   "tytul": "Ława fundamentowa ZF9 (B = 0,50 m, h = 0,25 m, L = 5,88 m)",
+   "tytul": "Żebro płyty fundamentowej ZF9 (b = 0,50 m, h = 0,70 m, L = 5,88 m)",
    "rodzaj": "fundament",
-   "wykorzystanie": 4.8215,
-   "ok": false,
+   "wykorzystanie": 0.9904,
+   "ok": true,
    "przyjeto": [
-    "Ława 50×25 cm, C25/30; zbrojenie podłużne 4φ12 (A_s = 4,52 cm²), strzemiona φ6 co 30 cm; poprzecznie: φ10 co 25 cm."
+    "Żebro 50×70 cm, C25/30; 16φ16 (dołem 3φ16, górą 13φ16), strzemiona φ8 co 11 cm."
    ],
    "warunki": [
     {
-     "opis": "Nośność podłoża (GEO, DA2*)",
-     "E": 675.1481,
-     "R": 140.0283,
-     "eta": 4.8215
+     "opis": "Zbrojenie dolne żebra",
+     "E": 446.6495,
+     "R": 603.1858,
+     "eta": 0.7405
     },
     {
-     "opis": "Osiadanie",
-     "E": 14.5664,
-     "R": 50.0,
-     "eta": 0.2913
+     "opis": "Zbrojenie górne żebra",
+     "E": 2588.8049,
+     "R": 2613.8051,
+     "eta": 0.9904
     },
     {
-     "opis": "Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m)",
-     "E": 0.5,
-     "R": 0.5,
-     "eta": 1.0
+     "opis": "Nośność krzyżulców betonowych",
+     "E": 435.4879,
+     "R": 1100.4429,
+     "eta": 0.3957
     },
     {
-     "opis": "Zbrojenie poprzeczne ławy",
-     "E": 197.1866,
-     "R": 314.1593,
-     "eta": 0.6277
+     "opis": "Nośność strzemion",
+     "E": 435.4879,
+     "R": 453.4622,
+     "eta": 0.9604
+    },
+    {
+     "opis": "Docisk do podłoża pod żebrem",
+     "E": 131.4195,
+     "R": 318.7622,
+     "eta": 0.4123
     }
    ],
    "dane": {
-    "G_k": 427.72355518169127,
-    "Q_k": 90.16809084938474,
-    "D": 0.5,
-    "sigma_d": 1350.2962650405855
+    "mes": true
    }
   },
   {
    "nr": "10.12",
    "id": "ZF10",
-   "tytul": "Ława fundamentowa ZF10 (B = 0,50 m, h = 0,25 m, L = 1,31 m)",
+   "tytul": "Żebro płyty fundamentowej ZF10 (b = 0,50 m, h = 0,70 m, L = 1,31 m)",
    "rodzaj": "fundament",
-   "wykorzystanie": 1.0,
+   "wykorzystanie": 0.9577,
    "ok": true,
    "przyjeto": [
-    "Ława 50×25 cm, C25/30; zbrojenie podłużne 4φ12 (A_s = 4,52 cm²), strzemiona φ6 co 30 cm; poprzecznie: nie wymaga zbrojenia poprzecznego (strzemiona konstrukcyjne φ6 co 30 cm)."
+    "Żebro 50×70 cm, C25/30; 17φ16 (dołem 14φ16, górą 3φ16), strzemiona φ8 co 19 cm."
    ],
    "warunki": [
     {
-     "opis": "Nośność podłoża (GEO, DA2*)",
-     "E": 130.266,
-     "R": 140.0283,
-     "eta": 0.9303
+     "opis": "Zbrojenie dolne żebra",
+     "E": 2695.8493,
+     "R": 2814.867,
+     "eta": 0.9577
     },
     {
-     "opis": "Osiadanie",
-     "E": 2.4733,
-     "R": 50.0,
-     "eta": 0.0495
+     "opis": "Zbrojenie górne żebra",
+     "E": 428.584,
+     "R": 603.1858,
+     "eta": 0.7105
     },
     {
-     "opis": "Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m)",
-     "E": 0.5,
-     "R": 0.5,
-     "eta": 1.0
+     "opis": "Nośność krzyżulców betonowych",
+     "E": 249.6065,
+     "R": 1100.4429,
+     "eta": 0.2268
     },
     {
-     "opis": "Ława betonowa — odsadzka (12.13)",
-     "E": 0.8717,
-     "R": 1.3281,
-     "eta": 0.6563
+     "opis": "Nośność strzemion",
+     "E": 249.6065,
+     "R": 262.5307,
+     "eta": 0.9508
+    },
+    {
+     "opis": "Docisk do podłoża pod żebrem",
+     "E": 123.5969,
+     "R": 318.7622,
+     "eta": 0.3877
     }
    ],
    "dane": {
-    "G_k": 75.51023041288072,
-    "Q_k": 21.169056509588813,
-    "D": 0.5,
-    "sigma_d": 260.53196365795213
+    "mes": true
    }
   },
   {
    "nr": "10.13",
    "id": "ZF11",
-   "tytul": "Ława fundamentowa ZF11 (B = 0,50 m, h = 0,25 m, L = 3,50 m)",
+   "tytul": "Żebro płyty fundamentowej ZF11 (b = 0,50 m, h = 0,70 m, L = 3,50 m)",
    "rodzaj": "fundament",
-   "wykorzystanie": 2.1175,
-   "ok": false,
+   "wykorzystanie": 0.9877,
+   "ok": true,
    "przyjeto": [
-    "Ława 50×25 cm, C25/30; zbrojenie podłużne 4φ12 (A_s = 4,52 cm²), strzemiona φ6 co 30 cm; poprzecznie: nie wymaga zbrojenia poprzecznego (strzemiona konstrukcyjne φ6 co 30 cm)."
+    "Żebro 50×70 cm, C25/30; 18φ16 (dołem 15φ16, górą 3φ16), strzemiona φ8 co 14 cm."
    ],
    "warunki": [
     {
-     "opis": "Nośność podłoża (GEO, DA2*)",
-     "E": 296.5086,
-     "R": 140.0283,
-     "eta": 2.1175
+     "opis": "Zbrojenie dolne żebra",
+     "E": 2837.3287,
+     "R": 3015.9289,
+     "eta": 0.9408
     },
     {
-     "opis": "Osiadanie",
-     "E": 6.1205,
-     "R": 50.0,
-     "eta": 0.1224
+     "opis": "Zbrojenie górne żebra",
+     "E": 428.584,
+     "R": 603.1858,
+     "eta": 0.7105
     },
     {
-     "opis": "Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m)",
-     "E": 0.5,
-     "R": 0.5,
-     "eta": 1.0
+     "opis": "Nośność krzyżulców betonowych",
+     "E": 351.9147,
+     "R": 1100.4429,
+     "eta": 0.3198
     },
     {
-     "opis": "Ława betonowa — odsadzka (12.13)",
-     "E": 1.3152,
-     "R": 1.3281,
-     "eta": 0.9902
+     "opis": "Nośność strzemion",
+     "E": 351.9147,
+     "R": 356.2917,
+     "eta": 0.9877
+    },
+    {
+     "opis": "Docisk do podłoża pod żebrem",
+     "E": 117.549,
+     "R": 318.7622,
+     "eta": 0.3688
     }
    ],
    "dane": {
-    "G_k": 179.52455123169344,
-    "Q_k": 47.4094553504673,
-    "D": 0.5,
-    "sigma_d": 593.0171019476994
+    "mes": true
    }
   },
   {
    "nr": "10.14",
    "id": "ZF12",
-   "tytul": "Ława fundamentowa ZF12 (B = 0,50 m, h = 0,25 m, L = 3,62 m)",
+   "tytul": "Żebro płyty fundamentowej ZF12 (b = 0,50 m, h = 0,50 m, L = 3,62 m)",
    "rodzaj": "fundament",
-   "wykorzystanie": 1.0,
+   "wykorzystanie": 0.9984,
    "ok": true,
    "przyjeto": [
-    "Ława 50×25 cm, C25/30; zbrojenie podłużne 4φ12 (A_s = 4,52 cm²), strzemiona φ6 co 30 cm; poprzecznie: nie wymaga zbrojenia poprzecznego (strzemiona konstrukcyjne φ6 co 30 cm)."
+    "Żebro 50×50 cm, C25/30; 21φ12 (dołem 18φ12, górą 3φ12), strzemiona φ8 co 16 cm."
    ],
    "warunki": [
     {
-     "opis": "Nośność podłoża (GEO, DA2*)",
-     "E": 59.4209,
-     "R": 140.0283,
-     "eta": 0.4243
+     "opis": "Zbrojenie dolne żebra",
+     "E": 1924.0842,
+     "R": 2035.752,
+     "eta": 0.9451
     },
     {
-     "opis": "Osiadanie",
-     "E": 1.0526,
-     "R": 50.0,
-     "eta": 0.0211
+     "opis": "Zbrojenie górne żebra",
+     "E": 293.384,
+     "R": 339.292,
+     "eta": 0.8647
     },
     {
-     "opis": "Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m)",
-     "E": 0.5,
-     "R": 0.5,
-     "eta": 1.0
+     "opis": "Nośność krzyżulców betonowych",
+     "E": 213.0752,
+     "R": 753.3,
+     "eta": 0.2829
     },
     {
-     "opis": "Ława betonowa — odsadzka (12.13)",
-     "E": 0.5887,
-     "R": 1.3281,
-     "eta": 0.4433
+     "opis": "Nośność strzemion",
+     "E": 213.0752,
+     "R": 213.4098,
+     "eta": 0.9984
+    },
+    {
+     "opis": "Docisk do podłoża pod żebrem",
+     "E": 119.6451,
+     "R": 318.7622,
+     "eta": 0.3753
     }
    ],
    "dane": {
-    "G_k": 30.735459991215702,
-    "Q_k": 11.822702241196183,
-    "D": 0.5,
-    "sigma_d": 118.84179016564256
+    "mes": true
    }
   },
   {
    "nr": "10.15",
    "id": "ZF13",
-   "tytul": "Ława fundamentowa ZF13 (B = 0,50 m, h = 0,25 m, L = 3,62 m)",
+   "tytul": "Żebro płyty fundamentowej ZF13 (b = 0,50 m, h = 0,50 m, L = 3,62 m)",
    "rodzaj": "fundament",
-   "wykorzystanie": 3.8645,
-   "ok": false,
+   "wykorzystanie": 0.9752,
+   "ok": true,
    "przyjeto": [
-    "Ława 50×25 cm, C25/30; zbrojenie podłużne 4φ12 (A_s = 4,52 cm²), strzemiona φ6 co 30 cm; poprzecznie: φ10 co 25 cm."
+    "Żebro 50×50 cm, C25/30; 17φ12 (dołem 14φ12, górą 3φ12), strzemiona φ8 co 17 cm."
    ],
    "warunki": [
     {
-     "opis": "Nośność podłoża (GEO, DA2*)",
-     "E": 541.1397,
-     "R": 140.0283,
-     "eta": 3.8645
+     "opis": "Zbrojenie dolne żebra",
+     "E": 1515.8379,
+     "R": 1583.3627,
+     "eta": 0.9574
     },
     {
-     "opis": "Osiadanie",
-     "E": 11.5473,
-     "R": 50.0,
-     "eta": 0.2309
+     "opis": "Zbrojenie górne żebra",
+     "E": 293.384,
+     "R": 339.292,
+     "eta": 0.8647
     },
     {
-     "opis": "Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m)",
-     "E": 0.5,
-     "R": 0.5,
-     "eta": 1.0
+     "opis": "Nośność krzyżulców betonowych",
+     "E": 195.871,
+     "R": 753.3,
+     "eta": 0.26
     },
     {
-     "opis": "Zbrojenie poprzeczne ławy",
-     "E": 157.6713,
-     "R": 314.1593,
-     "eta": 0.5019
+     "opis": "Nośność strzemion",
+     "E": 195.871,
+     "R": 200.8562,
+     "eta": 0.9752
+    },
+    {
+     "opis": "Docisk do podłoża pod żebrem",
+     "E": 126.5159,
+     "R": 318.7622,
+     "eta": 0.3969
     }
    ],
    "dane": {
-    "G_k": 344.7223002823515,
-    "Q_k": 69.98667319093981,
-    "D": 0.5,
-    "sigma_d": 1082.2794943256183
+    "mes": true
    }
   },
   {
    "nr": "10.16",
    "id": "ZF14",
-   "tytul": "Ława fundamentowa ZF14 (B = 0,50 m, h = 0,25 m, L = 3,62 m)",
+   "tytul": "Żebro płyty fundamentowej ZF14 (b = 0,50 m, h = 0,50 m, L = 3,62 m)",
    "rodzaj": "fundament",
-   "wykorzystanie": 3.2153,
-   "ok": false,
+   "wykorzystanie": 0.9967,
+   "ok": true,
    "przyjeto": [
-    "Ława 50×25 cm, C25/30; zbrojenie podłużne 4φ12 (A_s = 4,52 cm²), strzemiona φ6 co 30 cm; poprzecznie: φ10 co 25 cm."
+    "Żebro 50×50 cm, C25/30; 15φ16 (dołem 13φ16, górą 2φ16), strzemiona φ8 co 16 cm."
    ],
    "warunki": [
     {
-     "opis": "Nośność podłoża (GEO, DA2*)",
-     "E": 450.2396,
-     "R": 140.0283,
-     "eta": 3.2153
+     "opis": "Zbrojenie dolne żebra",
+     "E": 2471.1696,
+     "R": 2613.8051,
+     "eta": 0.9454
     },
     {
-     "opis": "Osiadanie",
-     "E": 9.5255,
-     "R": 50.0,
-     "eta": 0.1905
+     "opis": "Zbrojenie górne żebra",
+     "E": 382.2776,
+     "R": 402.1239,
+     "eta": 0.9506
     },
     {
-     "opis": "Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m)",
-     "E": 0.5,
-     "R": 0.5,
-     "eta": 1.0
+     "opis": "Nośność krzyżulców betonowych",
+     "E": 212.6965,
+     "R": 753.3,
+     "eta": 0.2824
     },
     {
-     "opis": "Zbrojenie poprzeczne ławy",
-     "E": 130.9752,
-     "R": 314.1593,
-     "eta": 0.4169
+     "opis": "Nośność strzemion",
+     "E": 212.6965,
+     "R": 213.4098,
+     "eta": 0.9967
+    },
+    {
+     "opis": "Docisk do podłoża pod żebrem",
+     "E": 121.089,
+     "R": 318.7622,
+     "eta": 0.3799
     }
    ],
    "dane": {
-    "G_k": 283.66250728962575,
-    "Q_k": 61.64541352373328,
-    "D": 0.5,
-    "sigma_d": 900.479118613334
+    "mes": true
    }
   },
   {
    "nr": "10.17",
    "id": "ZF15",
-   "tytul": "Ława fundamentowa ZF15 (B = 0,50 m, h = 0,25 m, L = 2,88 m)",
+   "tytul": "Żebro płyty fundamentowej ZF15 (b = 0,50 m, h = 0,50 m, L = 2,88 m)",
    "rodzaj": "fundament",
-   "wykorzystanie": 1.0,
+   "wykorzystanie": 0.957,
    "ok": true,
    "przyjeto": [
-    "Ława 50×25 cm, C25/30; zbrojenie podłużne 4φ12 (A_s = 4,52 cm²), strzemiona φ6 co 30 cm; poprzecznie: nie wymaga zbrojenia poprzecznego (strzemiona konstrukcyjne φ6 co 30 cm)."
+    "Żebro 50×50 cm, C25/30; 12φ12 (dołem 3φ12, górą 9φ12), strzemiona φ8 co 15 cm."
    ],
    "warunki": [
     {
-     "opis": "Nośność podłoża (GEO, DA2*)",
-     "E": 121.6164,
-     "R": 140.0283,
-     "eta": 0.8685
+     "opis": "Zbrojenie dolne żebra",
+     "E": 293.384,
+     "R": 339.292,
+     "eta": 0.8647
     },
     {
-     "opis": "Osiadanie",
-     "E": 2.2502,
-     "R": 50.0,
-     "eta": 0.045
+     "opis": "Zbrojenie górne żebra",
+     "E": 908.0698,
+     "R": 1017.876,
+     "eta": 0.8921
     },
     {
-     "opis": "Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m)",
-     "E": 0.5,
-     "R": 0.5,
-     "eta": 1.0
+     "opis": "Nośność krzyżulców betonowych",
+     "E": 217.8583,
+     "R": 753.3,
+     "eta": 0.2892
     },
     {
-     "opis": "Ława betonowa — odsadzka (12.13)",
-     "E": 0.8423,
-     "R": 1.3281,
-     "eta": 0.6342
+     "opis": "Nośność strzemion",
+     "E": 217.8583,
+     "R": 227.6371,
+     "eta": 0.957
+    },
+    {
+     "opis": "Docisk do podłoża pod żebrem",
+     "E": 92.1631,
+     "R": 318.7622,
+     "eta": 0.2891
     }
    ],
    "dane": {
-    "G_k": 76.47873453120172,
-    "Q_k": 11.88091114845975,
-    "D": 0.5,
-    "sigma_d": 243.23279657222767
+    "mes": true
    }
   },
   {
    "nr": "10.18",
    "id": "ZF16",
-   "tytul": "Ława fundamentowa ZF16 (B = 0,50 m, h = 0,30 m, L = 5,88 m)",
+   "tytul": "Żebro płyty fundamentowej ZF16 (b = 0,50 m, h = 0,55 m, L = 5,88 m)",
    "rodzaj": "fundament",
-   "wykorzystanie": 1.1006,
-   "ok": false,
+   "wykorzystanie": 0.9787,
+   "ok": true,
    "przyjeto": [
-    "Ława 50×30 cm, C25/30; zbrojenie podłużne 4φ12 (A_s = 4,52 cm²), strzemiona φ6 co 30 cm; poprzecznie: nie wymaga zbrojenia poprzecznego (strzemiona konstrukcyjne φ6 co 30 cm)."
+    "Żebro 50×55 cm, C25/30; 14φ12 (dołem 6φ12, górą 8φ12), strzemiona φ8 co 25 cm."
    ],
    "warunki": [
     {
-     "opis": "Nośność podłoża (GEO, DA2*)",
-     "E": 192.0582,
-     "R": 174.5071,
-     "eta": 1.1006
+     "opis": "Zbrojenie dolne żebra",
+     "E": 664.155,
+     "R": 678.584,
+     "eta": 0.9787
     },
     {
-     "opis": "Osiadanie",
-     "E": 3.785,
-     "R": 50.0,
-     "eta": 0.0757
+     "opis": "Zbrojenie górne żebra",
+     "E": 839.2106,
+     "R": 904.7787,
+     "eta": 0.9275
     },
     {
-     "opis": "Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m)",
-     "E": 0.5,
-     "R": 0.7,
-     "eta": 0.7143
+     "opis": "Nośność krzyżulców betonowych",
+     "E": 121.315,
+     "R": 840.0857,
+     "eta": 0.1444
     },
     {
-     "opis": "Ława betonowa — odsadzka (12.13)",
-     "E": 1.0585,
-     "R": 1.5938,
-     "eta": 0.6641
+     "opis": "Nośność strzemion",
+     "E": 121.315,
+     "R": 152.3175,
+     "eta": 0.7965
+    },
+    {
+     "opis": "Docisk do podłoża pod żebrem",
+     "E": 70.3932,
+     "R": 318.7622,
+     "eta": 0.2208
     }
    ],
    "dane": {
-    "G_k": 125.21302738426988,
-    "Q_k": 18.059217790352193,
-    "D": 0.7,
-    "sigma_d": 384.1163409856452
+    "mes": true
    }
   },
   {
    "nr": "10.19",
    "id": "ZF17",
-   "tytul": "Ława fundamentowa ZF17 (B = 0,50 m, h = 0,30 m, L = 6,38 m)",
+   "tytul": "Żebro płyty fundamentowej ZF17 (b = 0,50 m, h = 0,55 m, L = 6,38 m)",
    "rodzaj": "fundament",
-   "wykorzystanie": 0.7143,
+   "wykorzystanie": 0.8725,
    "ok": true,
    "przyjeto": [
-    "Ława 50×30 cm, C25/30; zbrojenie podłużne 4φ12 (A_s = 4,52 cm²), strzemiona φ6 co 30 cm; poprzecznie: nie wymaga zbrojenia poprzecznego (strzemiona konstrukcyjne φ6 co 30 cm)."
+    "Żebro 50×55 cm, C25/30; 10φ12 (dołem 4φ12, górą 6φ12), strzemiona φ8 co 25 cm."
    ],
    "warunki": [
     {
-     "opis": "Nośność podłoża (GEO, DA2*)",
-     "E": 68.0598,
-     "R": 174.5071,
-     "eta": 0.39
+     "opis": "Zbrojenie dolne żebra",
+     "E": 348.2557,
+     "R": 452.3893,
+     "eta": 0.7698
     },
     {
-     "opis": "Osiadanie",
-     "E": 1.2005,
-     "R": 50.0,
-     "eta": 0.024
+     "opis": "Zbrojenie górne żebra",
+     "E": 592.0863,
+     "R": 678.584,
+     "eta": 0.8725
     },
     {
-     "opis": "Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m)",
-     "E": 0.5,
-     "R": 0.7,
-     "eta": 0.7143
+     "opis": "Nośność krzyżulców betonowych",
+     "E": 85.1133,
+     "R": 840.0857,
+     "eta": 0.1013
     },
     {
-     "opis": "Ława betonowa — odsadzka (12.13)",
-     "E": 0.6301,
-     "R": 1.5938,
-     "eta": 0.3954
+     "opis": "Nośność strzemion",
+     "E": 85.1133,
+     "R": 152.3175,
+     "eta": 0.5588
+    },
+    {
+     "opis": "Docisk do podłoża pod żebrem",
+     "E": 64.9676,
+     "R": 318.7622,
+     "eta": 0.2038
     }
    ],
    "dane": {
-    "G_k": 40.20374626882212,
-    "Q_k": 7.482431670256817,
-    "D": 0.7,
-    "sigma_d": 136.11956243120497
+    "mes": true
    }
   },
   {
    "nr": "10.20",
-   "id": "SF1",
-   "tytul": "Stopa fundamentowa SF1 (1,00 × 1,01 × 0,45 m) pod słupem SL1",
+   "id": "ZF18",
+   "tytul": "Żebro płyty fundamentowej ZF18 (b = 0,50 m, h = 0,70 m, L = 1,32 m)",
    "rodzaj": "fundament",
-   "wykorzystanie": 2.0408,
-   "ok": false,
+   "wykorzystanie": 0.9846,
+   "ok": true,
    "przyjeto": [
-    "Stopa 100×101×45 cm, C25/30; siatka dołem φ12 co 21 cm w obu kierunkach."
+    "Żebro 50×70 cm, C25/30; 14φ12 (dołem 10φ12, górą 4φ12), strzemiona φ8 co 25 cm."
    ],
    "warunki": [
     {
-     "opis": "Nośność podłoża (GEO, DA2*)",
-     "E": 67.7832,
-     "R": 415.5312,
-     "eta": 0.1631
+     "opis": "Zbrojenie dolne żebra",
+     "E": 1113.5725,
+     "R": 1130.9734,
+     "eta": 0.9846
     },
     {
-     "opis": "Osiadanie",
-     "E": 0.5752,
-     "R": 50.0,
-     "eta": 0.0115
+     "opis": "Zbrojenie górne żebra",
+     "E": 428.584,
+     "R": 452.3893,
+     "eta": 0.9474
     },
     {
-     "opis": "Głębokość posadowienia",
-     "E": 1.0,
-     "R": 0.49,
-     "eta": 2.0408
+     "opis": "Nośność krzyżulców betonowych",
+     "E": 0.001,
+     "R": 1100.4429,
+     "eta": 0.0
     },
     {
-     "opis": "Przebicie stopy",
-     "E": 0.0043,
-     "R": 0.7819,
-     "eta": 0.0055
+     "opis": "Nośność strzemion",
+     "E": 0.001,
+     "R": 199.5234,
+     "eta": 0.0
+    },
+    {
+     "opis": "Docisk do podłoża pod żebrem",
+     "E": 123.8246,
+     "R": 318.7622,
+     "eta": 0.3885
     }
    ],
-   "dane": {}
+   "dane": {
+    "mes": true
+   }
   },
   {
    "nr": "10.21",
-   "id": "SF2",
-   "tytul": "Stopa fundamentowa SF2 (1,00 × 1,01 × 0,45 m) pod słupem SL2",
+   "id": "ZF19",
+   "tytul": "Żebro płyty fundamentowej ZF19 (b = 1,80 m, h = 0,70 m, L = 4,00 m)",
    "rodzaj": "fundament",
-   "wykorzystanie": 2.0408,
-   "ok": false,
+   "wykorzystanie": 0.9917,
+   "ok": true,
    "przyjeto": [
-    "Stopa 100×101×45 cm, C25/30; siatka dołem φ12 co 21 cm w obu kierunkach."
+    "Żebro 180×70 cm, C25/30; 58φ12 (dołem 34φ12, górą 24φ12), strzemiona φ8 co 6 cm."
    ],
    "warunki": [
     {
-     "opis": "Nośność podłoża (GEO, DA2*)",
-     "E": 88.2879,
-     "R": 415.5312,
-     "eta": 0.2125
+     "opis": "Zbrojenie dolne żebra",
+     "E": 3780.9729,
+     "R": 3845.3094,
+     "eta": 0.9833
     },
     {
-     "opis": "Osiadanie",
-     "E": 0.7521,
-     "R": 50.0,
-     "eta": 0.015
+     "opis": "Zbrojenie górne żebra",
+     "E": 2691.9111,
+     "R": 2714.3361,
+     "eta": 0.9917
     },
     {
-     "opis": "Głębokość posadowienia",
-     "E": 1.0,
-     "R": 0.49,
-     "eta": 2.0408
+     "opis": "Nośność krzyżulców betonowych",
+     "E": 684.5628,
+     "R": 3961.5943,
+     "eta": 0.1728
     },
     {
-     "opis": "Przebicie stopy",
-     "E": 0.006,
-     "R": 0.7819,
-     "eta": 0.0077
+     "opis": "Nośność strzemion",
+     "E": 684.5628,
+     "R": 831.3474,
+     "eta": 0.8234
+    },
+    {
+     "opis": "Docisk do podłoża pod żebrem",
+     "E": 126.5147,
+     "R": 318.7622,
+     "eta": 0.3969
     }
    ],
-   "dane": {}
+   "dane": {
+    "mes": true
+   }
   },
   {
    "nr": "10.22",
-   "id": "SF3",
-   "tytul": "Stopa fundamentowa SF3 (1,00 × 1,01 × 0,45 m) pod słupem SL3",
+   "id": "SF1",
+   "tytul": "Stopa (pogrubienie płyty) SF1 (1,00 × 1,01 × 0,70 m) pod słupem SL1",
    "rodzaj": "fundament",
-   "wykorzystanie": 2.0408,
-   "ok": false,
+   "wykorzystanie": 0.6279,
+   "ok": true,
    "przyjeto": [
-    "Stopa 100×101×45 cm, C25/30; siatka dołem φ12 co 21 cm w obu kierunkach."
+    "Pogrubienie 100×101×70 cm, C25/30; siatka dołem φ14 co 18 cm w obu kierunkach."
    ],
    "warunki": [
     {
-     "opis": "Nośność podłoża (GEO, DA2*)",
-     "E": 79.8001,
-     "R": 415.5312,
-     "eta": 0.192
+     "opis": "Zbrojenie dolne pogrubienia (MES)",
+     "E": 488.4563,
+     "R": 855.2113,
+     "eta": 0.5712
     },
     {
-     "opis": "Osiadanie",
-     "E": 0.6819,
-     "R": 50.0,
-     "eta": 0.0136
+     "opis": "Docisk do podłoża pod pogrubieniem",
+     "E": 200.1656,
+     "R": 318.7622,
+     "eta": 0.6279
     },
     {
-     "opis": "Głębokość posadowienia",
-     "E": 1.0,
-     "R": 0.49,
-     "eta": 2.0408
-    },
-    {
-     "opis": "Przebicie stopy",
-     "E": 0.0053,
-     "R": 0.7819,
-     "eta": 0.0068
+     "opis": "Przebicie — fundament (6.4.4(2), (6.51)–(6.53))",
+     "E": 0.023,
+     "R": 0.3429,
+     "eta": 0.067
     }
    ],
-   "dane": {}
+   "dane": {
+    "mes": true
+   }
   },
   {
    "nr": "10.23",
-   "id": "SF4",
-   "tytul": "Stopa fundamentowa SF4 (1,00 × 1,01 × 0,45 m) pod słupem SL4",
+   "id": "SF2",
+   "tytul": "Stopa (pogrubienie płyty) SF2 (1,00 × 1,01 × 0,70 m) pod słupem SL2",
    "rodzaj": "fundament",
-   "wykorzystanie": 2.0408,
-   "ok": false,
+   "wykorzystanie": 0.9967,
+   "ok": true,
    "przyjeto": [
-    "Stopa 100×101×45 cm, C25/30; siatka dołem φ12 co 21 cm w obu kierunkach."
+    "Pogrubienie 100×101×70 cm, C25/30; siatka dołem φ12 co 13 cm w obu kierunkach."
    ],
    "warunki": [
     {
-     "opis": "Nośność podłoża (GEO, DA2*)",
-     "E": 105.3147,
-     "R": 415.5312,
-     "eta": 0.2534
+     "opis": "Zbrojenie dolne pogrubienia (MES)",
+     "E": 867.1162,
+     "R": 869.9795,
+     "eta": 0.9967
     },
     {
-     "opis": "Osiadanie",
-     "E": 0.928,
-     "R": 50.0,
-     "eta": 0.0186
+     "opis": "Docisk do podłoża pod pogrubieniem",
+     "E": 151.1072,
+     "R": 318.7622,
+     "eta": 0.474
     },
     {
-     "opis": "Głębokość posadowienia",
-     "E": 1.0,
-     "R": 0.49,
-     "eta": 2.0408
-    },
-    {
-     "opis": "Przebicie stopy",
-     "E": 0.0074,
-     "R": 0.7819,
-     "eta": 0.0095
+     "opis": "Przebicie — fundament (6.4.4(2), (6.51)–(6.53))",
+     "E": 0.0555,
+     "R": 0.3429,
+     "eta": 0.1619
     }
    ],
-   "dane": {}
+   "dane": {
+    "mes": true
+   }
+  },
+  {
+   "nr": "10.24",
+   "id": "SF3",
+   "tytul": "Stopa (pogrubienie płyty) SF3 (1,00 × 1,01 × 0,70 m) pod słupem SL3",
+   "rodzaj": "fundament",
+   "wykorzystanie": 0.979,
+   "ok": true,
+   "przyjeto": [
+    "Pogrubienie 100×101×70 cm, C25/30; siatka dołem φ16 co 19 cm w obu kierunkach."
+   ],
+   "warunki": [
+    {
+     "opis": "Zbrojenie dolne pogrubienia (MES)",
+     "E": 1036.0184,
+     "R": 1058.2207,
+     "eta": 0.979
+    },
+    {
+     "opis": "Docisk do podłoża pod pogrubieniem",
+     "E": 132.4674,
+     "R": 318.7622,
+     "eta": 0.4156
+    },
+    {
+     "opis": "Przebicie — fundament (6.4.4(2), (6.51)–(6.53))",
+     "E": 0.0713,
+     "R": 0.3429,
+     "eta": 0.2079
+    }
+   ],
+   "dane": {
+    "mes": true
+   }
+  },
+  {
+   "nr": "10.25",
+   "id": "SF4",
+   "tytul": "Stopa (pogrubienie płyty) SF4 (1,00 × 1,01 × 0,70 m) pod słupem SL4",
+   "rodzaj": "fundament",
+   "wykorzystanie": 0.9925,
+   "ok": true,
+   "przyjeto": [
+    "Pogrubienie 100×101×70 cm, C25/30; siatka dołem φ16 co 9 cm w obu kierunkach."
+   ],
+   "warunki": [
+    {
+     "opis": "Zbrojenie dolne pogrubienia (MES)",
+     "E": 2217.242,
+     "R": 2234.0214,
+     "eta": 0.9925
+    },
+    {
+     "opis": "Docisk do podłoża pod pogrubieniem",
+     "E": 125.2742,
+     "R": 318.7622,
+     "eta": 0.393
+    },
+    {
+     "opis": "Przebicie — fundament (6.4.4(2), (6.51)–(6.53))",
+     "E": 0.0818,
+     "R": 0.3429,
+     "eta": 0.2384
+    }
+   ],
+   "dane": {
+    "mes": true
+   }
   }
  ],
  "uwagi": [
@@ -8605,33 +9471,32 @@
   "PL-D: element płytowy z materiału niekonstrukcyjnego (RAMA_C) — pominięty w analizie płyt (ciężar ujęty w warstwach przegród / do sprawdzenia w pozycji elementu nośnego).",
   "D1 – PL-3: szczelina 20 cm (łącznik termoizolacyjny w strefie izolacji) — w MES pas ciągły o grubości płyty (łącznik przenosi m_Ed, v_Ed; podatność łącznika pominięta) [ZAŁ].",
   "ST2 – PL-2: szczelina 21 cm (łącznik termoizolacyjny w strefie izolacji) — w MES pas ciągły o grubości płyty (łącznik przenosi m_Ed, v_Ed; podatność łącznika pominięta) [ZAŁ].",
+  "ST2Z – PL-2: szczelina 20 cm (łącznik termoizolacyjny w strefie izolacji) — w MES pas ciągły o grubości płyty (łącznik przenosi m_Ed, v_Ed; podatność łącznika pominięta) [ZAŁ].",
   "D3 – PL-2: szczelina 21 cm (łącznik termoizolacyjny w strefie izolacji) — w MES pas ciągły o grubości płyty (łącznik przenosi m_Ed, v_Ed; podatność łącznika pominięta) [ZAŁ].",
   "ST1 – PL-E: szczelina 21 cm (łącznik termoizolacyjny w strefie izolacji) — w MES pas ciągły o grubości płyty (łącznik przenosi m_Ed, v_Ed; podatność łącznika pominięta) [ZAŁ].",
   "ST1 – PL-DA: szczelina 21 cm (łącznik termoizolacyjny w strefie izolacji) — w MES pas ciągły o grubości płyty (łącznik przenosi m_Ed, v_Ed; podatność łącznika pominięta) [ZAŁ].",
   "D4 – PL-E: szczelina 21 cm (łącznik termoizolacyjny w strefie izolacji) — w MES pas ciągły o grubości płyty (łącznik przenosi m_Ed, v_Ed; podatność łącznika pominięta) [ZAŁ].",
   "D4 – PL-DA: szczelina 21 cm (łącznik termoizolacyjny w strefie izolacji) — w MES pas ciągły o grubości płyty (łącznik przenosi m_Ed, v_Ed; podatność łącznika pominięta) [ZAŁ].",
   "PL-3, pole P1: momenty wspornika uśrednione na szerokości 1,0 m (M_x,góra −29,2 → −21,1; M_y,góra −26,2 → −18,7 kNm/m) — osobliwość MES w narożu linii podparcia [ZAŁ].",
-  "Ściana nośna S2-07 stoi na płycie ST2 + ST2Z + D2 + D3 + PL-2 bez ściany poniżej — obciążenie liniowe płyty; sprawdzić podciąg/żebro [WYMAGA ANALIZY].",
-  "Ściana nośna S2-08 stoi na płycie ST2 + ST2Z + D2 + D3 + PL-2 bez ściany poniżej — obciążenie liniowe płyty; sprawdzić podciąg/żebro [WYMAGA ANALIZY].",
-  "Ściana nośna S2-09 stoi na płycie ST2 + ST2Z + D2 + D3 + PL-2 bez ściany poniżej — obciążenie liniowe płyty; sprawdzić podciąg/żebro [WYMAGA ANALIZY].",
-  "PL-2, pole P1: momenty wspornika uśrednione na szerokości 1,0 m (M_x,góra −351,7 → −231,6; M_y,góra −464,5 → −346,0 kNm/m) — osobliwość MES w narożu linii podparcia [ZAŁ].",
-  "Belka B3: podpory wyznaczone rozszerzenie (ściany współliniowe/poprzeczne, oparcie na belce) — B4, B5 [ZAŁ].",
-  "Belka B4: podpory wyznaczone rozszerzenie (ściany współliniowe/poprzeczne, oparcie na belce) — S1-01, S1-04 [ZAŁ].",
-  "Belka B5: podpory wyznaczone rozszerzenie (ściany współliniowe/poprzeczne, oparcie na belce) — S1-04, S1-05, S1-07 [ZAŁ].",
-  "ST1: podpora punktowa SL1 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]",
-  "ST1: podpora punktowa SL2 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]",
-  "ST1: podpora punktowa SL3 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]",
-  "ST1: podpora punktowa SL4 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]",
-  "ST1: podpora punktowa SL1 w polu P2 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]",
-  "ST1: podpora punktowa SL2 w polu P2 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]",
-  "ST1: podpora punktowa SL3 w polu P2 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]",
-  "ST1: podpora punktowa SL4 w polu P2 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]",
+  "S1-01: odcinki pod belkami w koronie (B4, B2) wyłączone z podparcia płyty ST2 + ST2Z + D2 + D3 + PL-2 — płyta oparta na belce (model: belka_w_koronie).",
+  "S1-05: odcinki pod belkami w koronie (B5) wyłączone z podparcia płyty ST2 + ST2Z + D2 + D3 + PL-2 — płyta oparta na belce (model: belka_w_koronie).",
+  "PL-2, pole P1: momenty wspornika uśrednione na szerokości 1,0 m (M_x,góra −25,3 → −19,4; M_y,góra −21,1 → −19,5 kNm/m) — osobliwość MES w narożu linii podparcia [ZAŁ].",
+  "Belka B3: schemat podparcia z modelu (belki[].podpory): belka B4 (s = 0,000 m), belka B5 (s = 5,125 m).",
+  "Belka B4: schemat podparcia z modelu (belki[].podpory): slup SL10 (s = 1,000 m), slup SL21 (s = 4,875 m).",
+  "Belka B5: schemat podparcia z modelu (belki[].podpory): slup SL12 (s = 1,000 m), slup SL14 (s = 4,875 m).",
+  "Belka B9: schemat podparcia z modelu (belki[].podpory): slup SL17 (s = 0,000 m), slup SL19 (s = 2,625 m).",
+  "S0-01: odcinki pod belkami w koronie (B1) wyłączone z podparcia płyty ST1 + D4 + PL-E + PL-DA — płyta oparta na belce (model: belka_w_koronie).",
+  "ST1: podpora punktowa SL1 w linii podpory B1 (belka) — przebicie płyty nie dotyczy (obwód kontrolny przecięty podporą liniową; docisk — pozycja słupa/belki).",
+  "ST1: podpora punktowa SL2 w linii podpory B1 (belka) — przebicie płyty nie dotyczy (obwód kontrolny przecięty podporą liniową; docisk — pozycja słupa/belki).",
+  "ST1: podpora punktowa SL3 w linii podpory B1 (belka) — przebicie płyty nie dotyczy (obwód kontrolny przecięty podporą liniową; docisk — pozycja słupa/belki).",
+  "ST1: podpora punktowa SL4 w linii podpory B1 (belka) — przebicie płyty nie dotyczy (obwód kontrolny przecięty podporą liniową; docisk — pozycja słupa/belki).",
   "PL-E, pole P1: momenty wspornika uśrednione na szerokości 1,0 m (M_x,góra −36,9 → −28,2; M_y,góra −18,0 → −17,1 kNm/m) — osobliwość MES w narożu linii podparcia [ZAŁ].",
-  "PL-E: podpora punktowa SL1 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]",
-  "PL-E: podpora punktowa SL2 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]",
-  "PL-E: podpora punktowa SL3 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]",
-  "PL-E: podpora punktowa SL4 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]",
+  "PL-E: podpora punktowa SL1 w linii podpory B1 (belka) — przebicie płyty nie dotyczy (obwód kontrolny przecięty podporą liniową; docisk — pozycja słupa/belki).",
+  "PL-E: podpora punktowa SL2 w linii podpory B1 (belka) — przebicie płyty nie dotyczy (obwód kontrolny przecięty podporą liniową; docisk — pozycja słupa/belki).",
+  "PL-E: podpora punktowa SL3 w linii podpory B1 (belka) — przebicie płyty nie dotyczy (obwód kontrolny przecięty podporą liniową; docisk — pozycja słupa/belki).",
+  "PL-E: podpora punktowa SL4 w linii podpory B1 (belka) — przebicie płyty nie dotyczy (obwód kontrolny przecięty podporą liniową; docisk — pozycja słupa/belki).",
   "PL-DA, pole P9: momenty wspornika uśrednione na szerokości 1,0 m (M_x,góra −7,7 → −5,1; M_y,góra −14,6 → −11,7 kNm/m) — osobliwość MES w narożu linii podparcia [ZAŁ].",
+  "Belka B8: schemat podparcia z modelu (belki[].podpory): slup SL16 (s = 0,000 m), slup SL18 (s = 2,625 m).",
   "Otwór O0-01 (S0-01): nadprożem jest belka modelu B1 — pozycja nadproża pominięta (belka wymiarowana w pozycji belek).",
   "Otwór O0-02 (S0-01): nadprożem jest belka modelu B1 — pozycja nadproża pominięta (belka wymiarowana w pozycji belek).",
   "Otwór O0-03 (S0-01): nadprożem jest belka modelu B1 — pozycja nadproża pominięta (belka wymiarowana w pozycji belek).",
