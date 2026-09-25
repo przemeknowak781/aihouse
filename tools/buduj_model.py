@@ -631,6 +631,8 @@ PMS("2.06", "P2", "Klatka schodowa (wyjście z biegu 2, pustka)", None,
     temp=20, rodzaj="komunikacja", uwagi="świetlik SW1 nad spocznikiem, okno pn. ON4; wyłączona z PU")
 PMS("2.07", "P2", "Pom. techniczne (centrala rekuperacyjna, wyłaz na dach)", (7.2, 1.3), kat="techniczna", posadzka="GRES", temp=16, wyw=15,
     rodzaj="techniczne", podloga="POD-1L", uwagi="centrala 450 m³/h; wyłaz 0,90 × 0,90 m z drabiną (W-065)")
+PM[-1]["went"]["doplyw"] = {"z": "2.01", "przez": "tłumiony przepust transferowy nad O2-12 (D4A)", "V_m3h": 15,
+                            "opis": "wydanie (V2 N-9): wywiew 15 m³/h z dopływem z holu — bez podciśnienia przy wyłazie WYL1 (kondensacja)"}
 # szacht instalacyjny SI (0,40 × 1,12 m) — przestrzeń techniczna ogrzewana (obudowa GKF EI 30), bez PU; na każdej kondygnacji
 for _k, _pid in (("P0", "0.14"), ("P1", "1.09"), ("P2", "2.08")):
     PMS(_pid, _k, "Szacht instalacyjny SI", ((SI[0] + SI[2]) / 2, (SI[1] + SI[3]) / 2), kat="techniczna", posadzka=None, sciany=None, sufit=None,
@@ -1069,8 +1071,10 @@ STOLARKA = {
                     "skrzydło 1,00 × 2,15 z zakładem, uszczelka szczotkowa"},
     "D3": {"opis": "drzwi spiżarni 0,80 × 2,00 z kratką"},
     "D4": {"opis": "drzwi pom. technicznego 0,90 × 2,10 z kratką, akustyczne R_w ≥ 32 dB"},
-    "D4A": {"opis": "drzwi pom. technicznego z centralą (P2) 0,90 × 2,10, akustyczne R_w ≥ 32 dB, BEZ kratki, uszczelka obwodowa i próg "
-                    "z uszczelką opadającą (A3 I-8; W-230)"},
+    "D4A": {"opis": "drzwi pom. technicznego z centralą (P2) 0,90 × 2,10, akustyczne R_w ≥ 32 dB, uszczelka obwodowa i próg z uszczelką "
+                    "opadającą (A3 I-8; W-230); dopływ powietrza do 2.07 (wywiew 15 m³/h) przez TŁUMIONY PRZEPUST TRANSFEROWY w ścianie "
+                    "nad drzwiami (kształtka z wkładem dźwiękochłonnym) — izolacyjność zestawu drzwi + przepust R_w ≥ 32 dB (wymaganie; "
+                    "dobór wg danych producenta; weryfikacja V2 N-9)", "przepust_transferowy": {"V_m3h": 15, "tlumiony": True, "R_w_zestawu_min": 32}},
     "DS1": {"opis": "drzwi szklane VSG 0,90 × 2,10 w ściance wiatrołapu, oznakowane (W-067)"},
     "OT1": {"opis": "otwór 1,50 × 2,40 bez stolarki"}, "OT2": {"opis": "otwór 2,40 × 2,40 bez stolarki"},
 }
@@ -1237,7 +1241,7 @@ WYWIEWKA_K1 = [5.57, 6.20, r(pokrycie("SD1", Z_ST3, math.hypot(6.20 - _W1[1], 0.
 #      przykładowe biblioteki, 430 Wp), układ wschód–zachód 10° (pary W/E, pochylenie po krótszym boku: rzut 1,117 × 1,722 m, górna
 #      krawędź 0,197 + 0,10 m stelaż = 0,30 m nad pokryciem lokalnym). Pole montażu: 1,0 m od wewn. lica attyki (attyka 0,18 +
 #      izolacja 0,10; strefa brzegowa wiatru), 0,30 m od otworów/świetlika/wyłazu, 1,0 m od czerpni, wyrzutni i wywiewki, 0,50 m od
-#      wpustów. Na D1 mieści się 7 modułów (3,01 kWp) → pozostałe 8 na dachu garażu D4 jako dach BIOSOLARNY (stelaże na substracie
+#      wpustów. Na D1 tyle, ile mieści pole montażu (wydanie: czerpnia przeniesiona na D3 — o 1 moduł więcej), reszta na dachu garażu D4 jako dach BIOSOLARNY (stelaże na substracie
 #      z roślinnością pod modułami, balast = substrat; PBC dachu bez zmian) — razem 15 × 430 = 6,45 kWp ≤ 6,5 (W-194). Warunek W-033/D-15:
 #      górna krawędź modułów ≤ korona attyki przy pokryciu LOKALNYM (klin izolacji spadkowej) — sprawdzane asercją.
 def _pv_pole(dach_obrys, off, przeszkody):

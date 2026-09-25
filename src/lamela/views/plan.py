@@ -1236,13 +1236,24 @@ def draw_roof_plan(vp, ctx: ViewContext, opts: dict | None = None) -> PlanResult
             c = label_point(inner)
             cands = spiral(c, 0.4, 5, 8)
             text = [f"DACH {d.get('id', '')}", (pz.nazwa if pz is not None else "")]
+            # opcja ``opis_dachu_szer`` [mm na papierze]: opis przegrody zawijany do szerokości pola dachu (bez niej —
+            # jeden wiersz, jak dotąd; podkład rzutu dachu instalacji wywołuje bez opcji)
+            szer = opts.get("opis_dachu_szer")
+            if szer and text[1]:
+                from ..draft.sheet import wrap as _wrap
+                bx0, _by0, bx1, _by1 = inner.bounds
+                ww = max(40.0, min(float(szer), (bx1 - bx0) / k - 8.0))
+                rows = _wrap(text[1], ww, 2.5)
+            else:
+                rows = [text[1]] if text[1] else []
 
-            def fn(cv, pos, text=text, top=top):
+            def fn(cv, pos, text=text, top=top, rows=rows):
                 cv.text(pos, text[0], 3.5, 0.0, "center", "baseline", layer="A-OPISY", style="bold", mask=0.4)
-                if text[1]:
-                    cv.text((pos[0], pos[1] - 4.2 * k), text[1], 2.5, 0.0, "center", "baseline", layer="A-OPISY",
-                            mask=0.4)
-                dims.level_plan(cv, (pos[0] - 6.0 * k, pos[1] - 9.5 * k), top, style="x")
+                for j, s in enumerate(rows):
+                    cv.text((pos[0], pos[1] - (4.2 + 3.4 * j) * k), s, 2.5, 0.0, "center", "baseline",
+                            layer="A-OPISY", mask=0.4)
+                dy = 9.5 + 3.4 * max(0, len(rows) - 1)
+                dims.level_plan(cv, (pos[0] - 6.0 * k, pos[1] - dy * k), top, style="x")
             placer.place(vp, fn, [p for p in cands if inner.buffer(-0.1).contains(Point(p))] or [tuple(c)])
         if at:
             zat = top + float(at.get("wys_nad_pokryciem", 0.3))

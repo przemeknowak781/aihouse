@@ -64,6 +64,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", default=str(ROOT / "build" / "pakiety"))
     ap.add_argument("--bez-png-arkuszy", action="store_true", help="z arkuszy tylko PDF (mniejsze archiwum)")
+    ap.add_argument("--png-tylko", default=None, help="PNG podglądu tylko dla tych folderów (np. PZT,PAB)")
+    ap.add_argument("--podziel", type=float, default=0, help="dziel archiwum na części ≤ N MiB (np. 28)")
     a = ap.parse_args()
     teraz = datetime.datetime.now(TZ)
     nazwa = f"LAMELA_postep_{teraz:%Y-%m-%d_%H%M}"
@@ -104,7 +106,8 @@ def main():
             rozm += kopiuj(p, out / kat / "PDF_wektor")
             n += 1
             png = p.with_suffix(".png")
-            if png.exists() and not a.bez_png_arkuszy:
+            chce_png = not a.bez_png_arkuszy and (not a.png_tylko or any(k in kat for k in a.png_tylko.split(",")))
+            if png.exists() and chce_png:
                 rozm += kopiuj(png, out / kat / "PNG_podglad")
         if n:
             spis.append((kat, f"arkusze: {n} (PDF wektorowy{'' if a.bez_png_arkuszy else ' + PNG'}) z {zr}"))
@@ -138,12 +141,30 @@ def main():
           "- Strona katalogowa (wersja robocza): https://claude.ai/artifact/DVkqc1LzLnchNsDBNVnhTy (prywatna).", ""]
     (out / "README.md").write_text("\n".join(L), encoding="utf-8")
 
-    zp = Path(a.out) / f"{nazwa}.zip"
-    with zipfile.ZipFile(zp, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=6) as z:
-        for p in sorted(out.rglob("*")):
-            if p.is_file():
+    pliki = [p for p in sorted(out.rglob("*")) if p.is_file() and p.name != "README.md"]
+    if not a.podziel:
+        grupy = [pliki]
+    else:                                    # części ≤ N MiB, pliki w kolejności folderów (struktura zachowana)
+        lim, grupy, cur, sz = a.podziel * 1024 * 1024, [], [], 0
+        for p in pliki:
+            n = p.stat().st_size
+            if cur and sz + n > lim:
+                grupy.append(cur)
+                cur, sz = [], 0
+            cur.append(p)
+            sz += n
+        if cur:
+            grupy.append(cur)
+    for i, g in enumerate(grupy, 1):
+        suf = f"_czesc_{i}_z_{len(grupy)}" if len(grupy) > 1 else ""
+        zp = Path(a.out) / f"{nazwa}{suf}.zip"
+        with zipfile.ZipFile(zp, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=6) as z:
+            z.write(out / "README.md", (out / "README.md").relative_to(out.parent))
+            for p in g:
                 z.write(p, p.relative_to(out.parent))
-    print(f"folder: {out}\narchiwum: {zp}  ({zp.stat().st_size / 1e6:.1f} MB; pliki {rozm / 1e6:.1f} MB)")
+        tops = sorted({str(p.relative_to(out)).split("/")[0] for p in g})
+        print(f"archiwum: {zp.name}  {zp.stat().st_size / 1048576:.1f} MiB  ({len(g)} plików: {', '.join(tops)})")
+    print(f"folder: {out}; pliki razem {rozm / 1e6:.1f} MB")
 
 
 if __name__ == "__main__":
