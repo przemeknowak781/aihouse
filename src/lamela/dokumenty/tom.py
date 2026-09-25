@@ -20,7 +20,7 @@ from markupsafe import escape
 
 from . import render as R
 from .arkusze import Arkusz
-from .dane import dane_obiektu, ELEMENTY
+from .dane import dane_obiektu, ELEMENTY, SPECJALNOSCI
 from .dokument import Dokument, WynikDokumentu, _env, _metadane, _plain, stempluj_arkusz, GRUPY
 from .formaty import data_iso, data_slownie, odmiana
 from .nazwy import nazwa_pliku, sprawdz_nazwe
@@ -242,8 +242,8 @@ class Tom:
                        f"Tom {self.tom[0]} z {self.tom[1]}" if self.tom else "",
                        f"{self.nazwa}: {' + '.join(c['kod'] for c in kody)}",
                        "wspólna oprawa elementów w jednym pliku (RPB § 5 ust. 3–4)"] if x),
-                   autorzy=[dict(p.slownik(), branza=__import__('lamela.dokumenty.dane', fromlist=['SPECJALNOSCI'])
-                                 .SPECJALNOSCI.get(p.branza, ("", "", p.branza))[2]) for p in self.dane["projektanci"]],
+                   autorzy=[dict(p.slownik(), branza=SPECJALNOSCI.get(p.branza, ("", "", p.branza))[2])
+                            for p in self.dane["projektanci"]],
                    uwaga_dodatkowa="Łączny spis treści nie obejmuje projektu technicznego (§ 7 ust. 8 RPB).")
         body = []
         if front.znak_wodny:
@@ -259,18 +259,21 @@ class Tom:
                     continue
                 wpisy.append(dict(poziom=1, numer=c["kod"], tytul=c["tytul"], strona="", el=True,
                                   href=f"{URI_EL}{ei}/1", grupa_naglowek=None))
-                if c["wpisy"]:
-                    wpisy.append(dict(poziom=2, numer="", tytul="Strona tytułowa", strona="1",
-                                      href=f"{URI_EL}{ei}/1", grupa_naglowek=None))
-                g = None
+                dok = c.get("dok")
+                if dok is not None:
+                    if dok.strona_tytulowa_wl:
+                        wpisy.append(dict(poziom=2, numer="", tytul="Strona tytułowa", strona="1",
+                                          href=f"{URI_EL}{ei}/1", grupa_naglowek=None))
+                    if dok.spis_wl:
+                        sp = 2 if dok.strona_tytulowa_wl else 1
+                        wpisy.append(dict(poziom=2, numer="", tytul=dok.tytul_spisu, strona=str(sp),
+                                          href=f"{URI_EL}{ei}/{sp}", grupa_naglowek=None))
                 for w in c["wpisy"]:
                     if w["poziom"] > 2 or not w.get("strona"):
                         continue
-                    wpisy.append(dict(poziom=w["poziom"] + (0 if w.get("rys") else 1) if w["poziom"] < 2 else 2,
-                                      numer=w["numer"], tytul=w["tytul"], rys=w.get("rys"),
-                                      strona="rys." if w.get("rys") else str(w["strona"]),
-                                      href=f"{URI_EL}{ei}/{w['strona']}",
-                                      grupa_naglowek=None))
+                    wpisy.append(dict(poziom=min(w["poziom"] + 1, 3), numer=w["numer"], tytul=w["tytul"],
+                                      rys=w.get("rys"), strona="rys." if w.get("rys") else str(w["strona"]),
+                                      href=f"{URI_EL}{ei}/{w['strona']}", grupa_naglowek=None))
             leg = ("Numeracja stron odrębna dla każdego elementu projektu (§ 6 ust. 1 RPB); rysunki oznaczono numerem "
                    "rysunku (§ 6 ust. 3 RPB). Pozycje spisu są odnośnikami do stron pliku. Projekt techniczny nie jest "
                    "objęty łącznym spisem (§ 7 ust. 8 RPB).")

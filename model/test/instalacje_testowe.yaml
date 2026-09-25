@@ -1,0 +1,31 @@
+# Dane instalacyjne MODELU TESTOWEGO (nie jest to projekt Domu LAMELA!) — test biblioteki lamela.obliczenia.sanitarne
+# i lamela.obliczenia.elektryka (tools/test_obliczenia_instalacje.py).
+# Proponowany format pliku model/instalacje.yaml (uzupełnia budynek.yaml i wyposazenie.yaml):
+#   osoby                    — liczba użytkowników (program Inwestora)
+#   lokalizacje              — [x, y, kond] w układzie budynku: RG, wodomierz, zasobnik, rozdzielacze_co, ZKP, studzienka,
+#                              pompa_ciepla_jz: {xy, ustawienie: wolnostojaca|przy_scianie|naroze}
+#   przybory_dodatkowe       — przybory spoza wyposazenie.yaml (format jak wyposażenie: kond, typ, xy na licu ściany, obrot)
+#   piony                    — jawne położenie pionów [{id, xy}] (inaczej grupowanie automatyczne)
+#   wyroby                   — dane wybranych wyrobów (DTR/DWU) nadpisujące dane przykładowe bibliotek
+#   obciazenie_cieplne       — Φ_HL pomieszczeń [W] (zwykle z modułu fizyki/energii; tu brak → wartości wskaźnikowe)
+# UWAGA: model testowy nie ma łazienki — przybory sanitarne dodano w garderobie P1 (1.04) i w holu P0 wyłącznie dla testu.
+instalacje:
+  osoby: 4
+  lokalizacje:
+    RG: [3.40, 7.80, P0]
+    wodomierz: [1.20, 7.70, P0]
+    zasobnik: [1.90, 7.70, P0]
+    rozdzielacze_co: {P0: [3.60, 7.80], P1: [3.40, 7.60]}
+    ZKP: [4.00, 17.80]              # w linii ogrodzenia przy furtce (układ budynku)
+    studzienka: [7.00, 16.50]       # studzienka rewizyjna na przykanaliku (układ budynku)
+    pompa_ciepla_jz: {xy: [8.50, 8.90], ustawienie: przy_scianie}
+  przybory_dodatkowe:
+    - {kond: P0, typ: wc, xy: [4.095, 6.60], obrot: 180}
+    - {kond: P0, typ: umywalka, xy: [4.095, 7.50], obrot: 180}
+    - {kond: P1, typ: wc, xy: [9.895, 7.00], obrot: 180}
+    - {kond: P1, typ: umywalka, xy: [8.60, 7.895], obrot: -90}
+    - {kond: P1, typ: prysznic, xy: [7.075, 7.20], obrot: 0}
+    - {kond: P1, typ: pralka, xy: [9.895, 5.20], obrot: 180}
+    - {kond: P0, typ: zawor_ogrodowy, xy: [2.00, -0.297], obrot: -90}
+    - {kond: P0, typ: zawor_ogrodowy, xy: [9.00, 8.297], obrot: 90}
+  wyroby: {}
