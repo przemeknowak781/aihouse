@@ -137,8 +137,13 @@ def rysuj_schemat_rg(wynik, plik, tytul: str | None = None, dpi: int = 200) -> s
         ax.text(x + 0.9, yb - 45, f"∆U={f(o.dU_calk, 1)}%", fontsize=4.4, rotation=90, va="top")
         ax.text(x, yb - 60, o.odb.id, fontsize=5.4, ha="center", va="top", weight="bold")
         ax.text(x, yb - 64.5, o.odb.faza.replace("L1L2L3", "3f"), fontsize=4.8, ha="center", va="top")
-        nazwa = o.odb.nazwa if len(o.odb.nazwa) <= 46 else o.odb.nazwa[:45] + "…"
-        ax.text(x, yb - 69, nazwa, fontsize=4.6, rotation=90, ha="center", va="top")
+        # pełna nazwa odbiorów: do szyny PE mieści się ok. 70 znaków; dłuższa — 2 wiersze (pas obwodu 11 mm),
+        # bez ucinania „…” (weryfikacja arkuszy C 2.4)
+        import textwrap
+        ls = textwrap.wrap(o.odb.nazwa, 68, break_long_words=False) or [""]
+        if len(ls) > 2:
+            ls = [ls[0], " ".join(ls[1:])]
+        ax.text(x, yb - 69, "\n".join(ls), fontsize=4.6, rotation=90, ha="center", va="top", linespacing=1.05)
     lx, ly = W - 74, 178
     ax.text(lx, ly, "Legenda (PN-EN 60617, uproszczone):", fontsize=5.5, weight="bold")
     items = ["× na zestyku — wyłącznik nadprądowy (B/C I_n)", "owal na torze — człon różnicowoprądowy 30 mA (typ A/F/B)",

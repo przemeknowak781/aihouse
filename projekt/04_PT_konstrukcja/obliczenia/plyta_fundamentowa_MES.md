@@ -13,6 +13,12 @@ Belka nieskończona na podłożu sprężystym (Hetényi 1946): ugięcie pod sił
 - Współczynnik podatności (osiadanie średnie α·s_c): k_s = E_s/(α·B·(1−ν²)·I_c) = 59429/(0,85·9,57·(1−0,30²)·1,513) = **5303** kN/m³
 - Obwiednia wariantów (niepewność modelu Winklera): k_s,min = k_s/r; k_s,max = k_s·r = 5303/2,0; 5303·2,0 = **2652; 10606** kN/m³ *([ZAŁ] Bowles 9.7)*
 
+## Obciążenia płyty fundamentowej w MES (poza ścianami i słupami)
+
+- Ciężar płyty (z żebrami/pogrubieniami) i warstw podłogi nad płytą: g = 25·h_el + g_podł = **25·h_el + 1,60** kN/m²
+- Obciążenie użytkowe posadzki — kat. A (stropy mieszkalne (kat. A)): q_k = **2,00** kN/m² *(PN-EN 1991-1-1 tabl. 6.2 + NA; R5 3.3 [NZW NA — górna granica EN])*
+- Płyta PF2: obciążenie użytkowe — kat. F (garaż (kat. F)); ψ₀/ψ₁/ψ₂ = 0,7/0,7/0,6: q_k; Q_k = **2,50 kN/m²; 20 kN** *(PN-EN 1991-1-1 tabl. 6.8)*
+
 ## Nośność podłoża pod płytą fundamentową (PN-EN 1997-1 zał. D, DA2*)
 
 - Parametry podłoża (charakterystyczne, M1: γ_φ = 1,0): φ'_k; c'_k; γ = **33,0°; 0,0 kPa; 18,5 kN/m³ — Piasek średni (Ps), średnio zagęszczony, I_D ≈ 0,6 [DANE PRZYKŁADOWE]**

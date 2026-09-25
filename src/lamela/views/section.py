@@ -688,10 +688,10 @@ def _callout(cv, ps, pe, texts, side, marks, title):
     k = cv.k
     sg = 1.0 if side == "right" else -1.0
     for i, t_ in enumerate(reversed(tl)):                # wiersze tytułu nad drabinką, ostatni najniżej
-        cv.text((pe[0] + sg * 0.8 * k, r[3] + (0.4 + i * 1.8 * 1.45) * k), t_, 1.8, 0.0,
+        cv.text((pe[0] + sg * 0.8 * k, r[3] + (1.3 + i * 1.8 * 1.45) * k), t_, 1.8, 0.0,
                 "left" if sg > 0 else "right", "baseline", "A-OPISY", style="bold")
     if tl:
-        r = (r[0], r[1], r[2], r[3] + (0.4 + len(tl) * 1.8 * 1.45) * k)
+        r = (r[0], r[1], r[2], r[3] + (1.3 + len(tl) * 1.8 * 1.45) * k)
     for p in cv.prims[n0:]:
         if isinstance(p, PText):
             p.mask = 0.35

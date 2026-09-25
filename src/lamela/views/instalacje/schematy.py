@@ -128,7 +128,8 @@ def odtworz(fig, vp, min_h=1.8, layer="I-SCHEMAT"):
                     continue
                 xc = bx0 + (j + 0.5) * (bx1 - bx0) / n
                 P = X([xc, by0 if r90 == 90 else by1])
-                vp.text(P, lines[i], h, float(r90), "left", "middle", layer, style=style, color=col, z=31.0)
+                vp.text(P, lines[i], h, float(r90), "left", "middle", layer, style=style, color=col, z=31.0,
+                        mask=0.3)
             continue
         if va == "top":
             offs = [-(i * lh) for i in range(n)]
@@ -142,7 +143,8 @@ def odtworz(fig, vp, min_h=1.8, layer="I-SCHEMAT"):
                 continue
             P = X([x, y]) + np.array([-sa * o, ca * o]) * vp.k
             vp.text(P, s_, h, rot, ha, va if n == 1 else ("top" if va == "top" else ("bottom" if va in (
-                "bottom", "baseline") else "middle")), layer, style=style, color=col, z=31.0)
+                "bottom", "baseline") else "middle")), layer, style=style, color=col, z=31.0,
+                mask=0.3)                           # maska: linie schematu nie przecinają napisów (weryf. C 2.6)
     return f
 
 
@@ -222,11 +224,9 @@ def _mpl(vp, W, kind, res):
         raise RuntimeError(f"schemat {kind}: nie przechwycono figury matplotlib")
     f = odtworz(fig, vp)
     n = rozsun_napisy(vp)
-    leg = Legenda("OZNACZENIA", zrodlo="Legenda symboli — na schemacie (PN-EN 60617 / PN-EN ISO 14617 w "
-                  "uproszczeniu; oznaczenia instalacji sanitarnych — praktyka branżowa).")
-    leg.line("I-SCHEMAT", "linie schematu — wg legendy na rysunku", pen=0.35)
-    res.column_blocks.append(("legenda", leg.block()))
-    res.notes += [f"Schemat odtworzony wektorowo z funkcji {zr} — treść i wartości z obliczeń na aktualnym modelu; "
+    # legenda symboli jest częścią schematu — osobny blok „OZNACZENIA” z jedną pozycją pominięty (weryf. C 2.6)
+    res.notes += ["Legenda symboli — na schemacie (PN-EN 60617 / PN-EN ISO 14617 w uproszczeniu; oznaczenia "
+                  "instalacji sanitarnych — praktyka branżowa).",f"Schemat odtworzony wektorowo z funkcji {zr} — treść i wartości z obliczeń na aktualnym modelu; "
                   f"skala rysunkowa {f:.2f} mm/jedn. (pismo ≥ 1,8 mm), przesunięto {n} napisów kolidujących.",
                   "Dane urządzeń przykładowe (bez nazw handlowych) — do zastąpienia DTR wybranych wyrobów "
                   "(lub równoważnych)."]
