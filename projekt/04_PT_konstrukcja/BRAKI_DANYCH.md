@@ -63,13 +63,13 @@ Lista generowana automatycznie przez `lamela.views.konstrukcja` z: (1) braków z
 
 ## Kontrola zbrojenia — pozycje niespełnione (szczegóły: raport kontroli zbrojenia)
 
-- PF1 / strefa S1 (ZF1) — przekrój niewystarczający (poz. MES-PF): A_s,prov = 0 < max(A_s,req; A_s,min) = 1 — M_Ed = 2294 kNm/m > M_lim — wymagana wysokość h ≥ 0.65 m (obecnie 0.55 m) [WYMAGA ZMIANY MODELU]
-- PF1 / strefa S2 (SF2, SF3, ZF1, ZF7, ZF8, płyta) — przekrój niewystarczający (poz. MES-PF): A_s,prov = 0 < max(A_s,req; A_s,min) = 1 — M_Ed = 4757 kNm/m > M_lim — wymagana wysokość h ≥ 0.91 m (obecnie 0.70 m) [WYMAGA ZMIANY MODELU]
+- PF1 / strefa S1 (ZF1) — przekrój niewystarczający (poz. MES-PF): A_s,prov = 0 < max(A_s,req; A_s,min) = 1 — M_Ed = 2295 kNm/m > M_lim — wymagana wysokość h ≥ 0.65 m (obecnie 0.55 m) [WYMAGA ZMIANY MODELU]
+- PF1 / strefa S2 (SF2, SF3, ZF1, ZF7, ZF8, płyta) — przekrój niewystarczający (poz. MES-PF): A_s,prov = 0 < max(A_s,req; A_s,min) = 1 — M_Ed = 4758 kNm/m > M_lim — wymagana wysokość h ≥ 0.91 m (obecnie 0.70 m) [WYMAGA ZMIANY MODELU]
 - PF1 / strefa S3 (płyta) — przekrój niewystarczający (poz. MES-PF): A_s,prov = 0 < max(A_s,req; A_s,min) = 1 — M_Ed = 234 kNm/m > M_lim — wymagana wysokość h ≥ 0.25 m (obecnie 0.25 m) [WYMAGA ZMIANY MODELU]
 - PF1 / strefa S4 (płyta) — przekrój niewystarczający (poz. MES-PF): A_s,prov = 0 < max(A_s,req; A_s,min) = 1 — M_Ed = 387 kNm/m > M_lim — wymagana wysokość h ≥ 0.30 m (obecnie 0.25 m) [WYMAGA ZMIANY MODELU]
 - PF1 / strefa S5 (płyta) — przekrój niewystarczający (poz. MES-PF): A_s,prov = 0 < max(A_s,req; A_s,min) = 1 — M_Ed = 278 kNm/m > M_lim — wymagana wysokość h ≥ 0.27 m (obecnie 0.25 m) [WYMAGA ZMIANY MODELU]
-- SF1 / pogrubienie — siatka dolna (MES) (poz. 10.18): A_s,prov = 539 < max(A_s,req; A_s,min) = 8117 mm²/m MES: A_s,req = 8117 mm²/m — nie do rozmieszczenia (φ ≤ 20, s ≥ 7 cm); przekrój pogrubienia niewystarczający [WYMAGA ZMIANY MODELU]
-- SF2 / pogrubienie — siatka dolna (MES) (poz. 10.19): A_s,prov = 539 < max(A_s,req; A_s,min) = 7153 mm²/m MES: A_s,req = 7153 mm²/m — nie do rozmieszczenia (φ ≤ 20, s ≥ 7 cm); przekrój pogrubienia niewystarczający [WYMAGA ZMIANY MODELU]
+- SF1 / pogrubienie — siatka dolna (MES) (poz. 10.18): A_s,prov = 539 < max(A_s,req; A_s,min) = 8118 mm²/m MES: A_s,req = 8119 mm²/m — nie do rozmieszczenia (φ ≤ 20, s ≥ 7 cm); przekrój pogrubienia niewystarczający [WYMAGA ZMIANY MODELU]
+- SF2 / pogrubienie — siatka dolna (MES) (poz. 10.19): A_s,prov = 539 < max(A_s,req; A_s,min) = 7155 mm²/m MES: A_s,req = 7155 mm²/m — nie do rozmieszczenia (φ ≤ 20, s ≥ 7 cm); przekrój pogrubienia niewystarczający [WYMAGA ZMIANY MODELU]
 - ZF1 / żebro — dołem (MES: A_s,req·b) (poz. 10.2): w strefie żebra μ > μ_lim — pogłębić/poszerzyć żebro [WYMAGA ZMIANY MODELU]
 - ZF1 / żebro — górą (MES: A_s,req·b) (poz. 10.2): w strefie żebra μ > μ_lim — pogłębić/poszerzyć żebro [WYMAGA ZMIANY MODELU]
 - ZF7 / żebro — dołem (MES: A_s,req·b) (poz. 10.8): w strefie żebra μ > μ_lim — pogłębić/poszerzyć żebro [WYMAGA ZMIANY MODELU]

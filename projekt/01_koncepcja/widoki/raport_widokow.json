@@ -56,7 +56,7 @@
           "sprawdzone_lancuchy": 18
         }
       },
-      "czas_s": 41.4,
+      "czas_s": 43.1,
       "png_kontrola": {
         "px": [
           4967,
@@ -102,7 +102,7 @@
           "sprawdzone_lancuchy": 12
         }
       },
-      "czas_s": 17.7,
+      "czas_s": 17.5,
       "png_kontrola": {
         "px": [
           5262,
@@ -148,7 +148,7 @@
           "sprawdzone_lancuchy": 16
         }
       },
-      "czas_s": 15.7,
+      "czas_s": 16.1,
       "png_kontrola": {
         "px": [
           5262,
@@ -194,7 +194,7 @@
           "sprawdzone_lancuchy": 6
         }
       },
-      "czas_s": 7.5,
+      "czas_s": 7.8,
       "png_kontrola": {
         "px": [
           7447,
@@ -248,7 +248,7 @@
           "sprawdzone_lancuchy": 2
         }
       },
-      "czas_s": 17.5,
+      "czas_s": 17.4,
       "png_kontrola": {
         "px": [
           5262,
@@ -302,7 +302,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 25.1,
+      "czas_s": 26.4,
       "png_kontrola": {
         "px": [
           5262,
@@ -356,7 +356,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 11.8,
+      "czas_s": 13.6,
       "png_kontrola": {
         "px": [
           5262,
@@ -405,12 +405,12 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 957,
+          "prymitywy": 961,
           "napisy": 201,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 9.0,
+      "czas_s": 8.9,
       "png_kontrola": {
         "px": [
           5262,
@@ -459,12 +459,12 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 1470,
+          "prymitywy": 1472,
           "napisy": 189,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 9.9,
+      "czas_s": 10.1,
       "png_kontrola": {
         "px": [
           3508,
@@ -513,12 +513,12 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 1605,
+          "prymitywy": 1607,
           "napisy": 194,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 10.7,
+      "czas_s": 10.1,
       "png_kontrola": {
         "px": [
           3508,
@@ -538,5 +538,5 @@
   ],
   "problemy": [],
   "tom": "projekt/01_koncepcja/widoki/tom_widoki.pdf",
-  "czas_s": 183.0
+  "czas_s": 186.7
 }

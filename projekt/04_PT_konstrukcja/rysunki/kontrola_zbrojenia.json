@@ -9,7 +9,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 3316.9,
+   "As_req": 3317.7,
    "As_min": 0.0,
    "As_prov": 3553.2,
    "jedn": "mm²/m",
@@ -27,7 +27,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 3465.5,
+   "As_req": 3466.5,
    "As_min": 0.0,
    "As_prov": 3553.2,
    "jedn": "mm²/m",
@@ -45,7 +45,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 1516.3,
+   "As_req": 1517.1,
    "As_min": 0.0,
    "As_prov": 1733.3,
    "jedn": "mm²/m",
@@ -54,7 +54,7 @@
    "s_max": null,
    "ok": true,
    "uwagi": "",
-   "zapas": 0.143
+   "zapas": 0.142
   },
   {
    "element": "PF1",
@@ -63,7 +63,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 1658.7,
+   "As_req": 1659.7,
    "As_min": 0.0,
    "As_prov": 1733.3,
    "jedn": "mm²/m",
@@ -72,7 +72,7 @@
    "s_max": null,
    "ok": true,
    "uwagi": "",
-   "zapas": 0.045
+   "zapas": 0.044
   },
   {
    "element": "PF1",
@@ -81,7 +81,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 1890.6,
+   "As_req": 1893.2,
    "As_min": 0.0,
    "As_prov": 1928.3,
    "jedn": "mm²/m",
@@ -90,7 +90,7 @@
    "s_max": null,
    "ok": true,
    "uwagi": "",
-   "zapas": 0.02
+   "zapas": 0.019
   },
   {
    "element": "PF1",
@@ -99,7 +99,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 1644.2,
+   "As_req": 1644.9,
    "As_min": 0.0,
    "As_prov": 1733.3,
    "jedn": "mm²/m",
@@ -117,7 +117,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 1636.2,
+   "As_req": 1636.3,
    "As_min": 0.0,
    "As_prov": 1733.3,
    "jedn": "mm²/m",
@@ -135,7 +135,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 3663.3,
+   "As_req": 3669.3,
    "As_min": 0.0,
    "As_prov": 5719.9,
    "jedn": "mm²/m",
@@ -144,7 +144,7 @@
    "s_max": null,
    "ok": true,
    "uwagi": "",
-   "zapas": 0.561
+   "zapas": 0.559
   },
   {
    "element": "PF1",
@@ -153,7 +153,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 1393.6,
+   "As_req": 1394.2,
    "As_min": 0.0,
    "As_prov": 1733.3,
    "jedn": "mm²/m",
@@ -162,7 +162,7 @@
    "s_max": null,
    "ok": true,
    "uwagi": "",
-   "zapas": 0.244
+   "zapas": 0.243
   },
   {
    "element": "PF1",
@@ -171,7 +171,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 3055.7,
+   "As_req": 3057.4,
    "As_min": 0.0,
    "As_prov": 3553.2,
    "jedn": "mm²/m",
@@ -180,7 +180,7 @@
    "s_max": null,
    "ok": true,
    "uwagi": "",
-   "zapas": 0.163
+   "zapas": 0.162
   },
   {
    "element": "PF1",
@@ -189,7 +189,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 2470.8,
+   "As_req": 2472.6,
    "As_min": 0.0,
    "As_prov": 2773.3,
    "jedn": "mm²/m",
@@ -207,7 +207,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 1444.8,
+   "As_req": 1445.1,
    "As_min": 0.0,
    "As_prov": 1733.3,
    "jedn": "mm²/m",
@@ -216,7 +216,7 @@
    "s_max": null,
    "ok": true,
    "uwagi": "",
-   "zapas": 0.2
+   "zapas": 0.199
   },
   {
    "element": "PF1",
@@ -225,7 +225,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 3913.4,
+   "As_req": 3916.4,
    "As_min": 0.0,
    "As_prov": 5719.9,
    "jedn": "mm²/m",
@@ -234,7 +234,7 @@
    "s_max": null,
    "ok": true,
    "uwagi": "",
-   "zapas": 0.462
+   "zapas": 0.46
   },
   {
    "element": "PF1",
@@ -243,7 +243,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 3022.5,
+   "As_req": 3026.1,
    "As_min": 0.0,
    "As_prov": 3553.2,
    "jedn": "mm²/m",
@@ -252,7 +252,7 @@
    "s_max": null,
    "ok": true,
    "uwagi": "",
-   "zapas": 0.176
+   "zapas": 0.174
   },
   {
    "element": "PF1",
@@ -261,7 +261,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 1789.3,
+   "As_req": 1796.0,
    "As_min": 0.0,
    "As_prov": 1928.3,
    "jedn": "mm²/m",
@@ -270,7 +270,7 @@
    "s_max": null,
    "ok": true,
    "uwagi": "",
-   "zapas": 0.078
+   "zapas": 0.074
   },
   {
    "element": "PF1",
@@ -279,7 +279,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 1377.7,
+   "As_req": 1378.0,
    "As_min": 246.1,
    "As_prov": 1386.6,
    "jedn": "mm²/m",
@@ -297,7 +297,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 1385.0,
+   "As_req": 1377.0,
    "As_min": 246.1,
    "As_prov": 1386.6,
    "jedn": "mm²/m",
@@ -306,7 +306,7 @@
    "s_max": 250.0,
    "ok": true,
    "uwagi": "",
-   "zapas": 0.001
+   "zapas": 0.007
   },
   {
    "element": "PF1",
@@ -323,7 +323,7 @@
    "s": null,
    "s_max": null,
    "ok": false,
-   "uwagi": "M_Ed = 2294 kNm/m > M_lim — wymagana wysokość h ≥ 0.65 m (obecnie 0.55 m) [WYMAGA ZMIANY MODELU]",
+   "uwagi": "M_Ed = 2295 kNm/m > M_lim — wymagana wysokość h ≥ 0.65 m (obecnie 0.55 m) [WYMAGA ZMIANY MODELU]",
    "zapas": -1.0
   },
   {
@@ -341,7 +341,7 @@
    "s": null,
    "s_max": null,
    "ok": false,
-   "uwagi": "M_Ed = 4757 kNm/m > M_lim — wymagana wysokość h ≥ 0.91 m (obecnie 0.70 m) [WYMAGA ZMIANY MODELU]",
+   "uwagi": "M_Ed = 4758 kNm/m > M_lim — wymagana wysokość h ≥ 0.91 m (obecnie 0.70 m) [WYMAGA ZMIANY MODELU]",
    "zapas": -1.0
   },
   {
@@ -405,7 +405,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 8116.9,
+   "As_req": 8118.5,
    "As_min": 538.1,
    "As_prov": 538.6,
    "jedn": "mm²/m",
@@ -413,7 +413,7 @@
    "s": 210.0,
    "s_max": null,
    "ok": false,
-   "uwagi": "MES: A_s,req = 8117 mm²/m — nie do rozmieszczenia (φ ≤ 20, s ≥ 7 cm); przekrój pogrubienia niewystarczający [WYMAGA ZMIANY MODELU]",
+   "uwagi": "MES: A_s,req = 8119 mm²/m — nie do rozmieszczenia (φ ≤ 20, s ≥ 7 cm); przekrój pogrubienia niewystarczający [WYMAGA ZMIANY MODELU]",
    "zapas": -0.934
   },
   {
@@ -423,7 +423,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 7153.1,
+   "As_req": 7154.6,
    "As_min": 538.1,
    "As_prov": 538.6,
    "jedn": "mm²/m",
@@ -431,7 +431,7 @@
    "s": 210.0,
    "s_max": null,
    "ok": false,
-   "uwagi": "MES: A_s,req = 7153 mm²/m — nie do rozmieszczenia (φ ≤ 20, s ≥ 7 cm); przekrój pogrubienia niewystarczający [WYMAGA ZMIANY MODELU]",
+   "uwagi": "MES: A_s,req = 7155 mm²/m — nie do rozmieszczenia (φ ≤ 20, s ≥ 7 cm); przekrój pogrubienia niewystarczający [WYMAGA ZMIANY MODELU]",
    "zapas": -0.925
   },
   {
@@ -441,7 +441,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 4067.5,
+   "As_req": 4069.4,
    "As_min": 538.1,
    "As_prov": 4188.8,
    "jedn": "mm²/m",
@@ -450,7 +450,7 @@
    "s_max": null,
    "ok": true,
    "uwagi": "",
-   "zapas": 0.03
+   "zapas": 0.029
   },
   {
    "element": "SF4",
@@ -459,7 +459,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 2716.2,
+   "As_req": 2715.8,
    "As_min": 538.1,
    "As_prov": 2731.8,
    "jedn": "mm²/m",
@@ -477,7 +477,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 4109.4,
+   "As_req": 4110.1,
    "As_min": 0.0,
    "As_prov": 4287.7,
    "jedn": "mm²",
@@ -495,7 +495,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 5582.7,
+   "As_req": 5580.6,
    "As_min": 0.0,
    "As_prov": 5687.7,
    "jedn": "mm²",
@@ -513,7 +513,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 1050.2,
+   "As_req": 1060.5,
    "As_min": 0.0,
    "As_prov": 1145.7,
    "jedn": "mm²",
@@ -522,7 +522,7 @@
    "s_max": null,
    "ok": true,
    "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
-   "zapas": 0.091
+   "zapas": 0.08
   },
   {
    "element": "ZF10",
@@ -531,7 +531,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 241.5,
+   "As_req": 243.9,
    "As_min": 0.0,
    "As_prov": 1284.4,
    "jedn": "mm²",
@@ -540,7 +540,7 @@
    "s_max": null,
    "ok": true,
    "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
-   "zapas": 4.319
+   "zapas": 4.267
   },
   {
    "element": "ZF11",
@@ -549,7 +549,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 3207.9,
+   "As_req": 3209.2,
    "As_min": 0.0,
    "As_prov": 3520.8,
    "jedn": "mm²",
@@ -558,7 +558,7 @@
    "s_max": null,
    "ok": true,
    "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
-   "zapas": 0.098
+   "zapas": 0.097
   },
   {
    "element": "ZF11",
@@ -585,7 +585,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 2945.1,
+   "As_req": 2947.8,
    "As_min": 0.0,
    "As_prov": 3206.6,
    "jedn": "mm²",
@@ -594,7 +594,7 @@
    "s_max": null,
    "ok": true,
    "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
-   "zapas": 0.089
+   "zapas": 0.088
   },
   {
    "element": "ZF12",
@@ -603,7 +603,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 547.0,
+   "As_req": 546.4,
    "As_min": 0.0,
    "As_prov": 1284.4,
    "jedn": "mm²",
@@ -612,7 +612,7 @@
    "s_max": null,
    "ok": true,
    "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
-   "zapas": 1.348
+   "zapas": 1.351
   },
   {
    "element": "ZF13",
@@ -621,7 +621,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 2555.1,
+   "As_req": 2565.8,
    "As_min": 0.0,
    "As_prov": 2703.9,
    "jedn": "mm²",
@@ -630,7 +630,7 @@
    "s_max": null,
    "ok": true,
    "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
-   "zapas": 0.058
+   "zapas": 0.054
   },
   {
    "element": "ZF13",
@@ -639,7 +639,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 473.3,
+   "As_req": 476.1,
    "As_min": 0.0,
    "As_prov": 1284.4,
    "jedn": "mm²",
@@ -648,7 +648,7 @@
    "s_max": null,
    "ok": true,
    "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
-   "zapas": 1.714
+   "zapas": 1.698
   },
   {
    "element": "ZF14",
@@ -657,7 +657,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 219.7,
+   "As_req": 219.2,
    "As_min": 0.0,
    "As_prov": 919.5,
    "jedn": "mm²",
@@ -666,7 +666,7 @@
    "s_max": null,
    "ok": true,
    "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
-   "zapas": 3.186
+   "zapas": 3.196
   },
   {
    "element": "ZF14",
@@ -675,7 +675,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 1636.0,
+   "As_req": 1635.4,
    "As_min": 0.0,
    "As_prov": 1736.8,
    "jedn": "mm²",
@@ -693,7 +693,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 1167.2,
+   "As_req": 1169.8,
    "As_min": 0.0,
    "As_prov": 1258.8,
    "jedn": "mm²",
@@ -702,7 +702,7 @@
    "s_max": null,
    "ok": true,
    "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
-   "zapas": 0.079
+   "zapas": 0.076
   },
   {
    "element": "ZF15",
@@ -711,7 +711,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 902.4,
+   "As_req": 904.0,
    "As_min": 0.0,
    "As_prov": 1284.4,
    "jedn": "mm²",
@@ -720,7 +720,7 @@
    "s_max": null,
    "ok": true,
    "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
-   "zapas": 0.423
+   "zapas": 0.421
   },
   {
    "element": "ZF16",
@@ -729,7 +729,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 639.9,
+   "As_req": 640.3,
    "As_min": 0.0,
    "As_prov": 919.5,
    "jedn": "mm²",
@@ -738,7 +738,7 @@
    "s_max": null,
    "ok": true,
    "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
-   "zapas": 0.437
+   "zapas": 0.436
   },
   {
    "element": "ZF16",
@@ -747,7 +747,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 646.9,
+   "As_req": 648.1,
    "As_min": 0.0,
    "As_prov": 1284.4,
    "jedn": "mm²",
@@ -756,7 +756,7 @@
    "s_max": null,
    "ok": true,
    "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
-   "zapas": 0.985
+   "zapas": 0.982
   },
   {
    "element": "ZF2",
@@ -765,7 +765,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 542.1,
+   "As_req": 541.5,
    "As_min": 0.0,
    "As_prov": 1058.2,
    "jedn": "mm²",
@@ -774,7 +774,7 @@
    "s_max": null,
    "ok": true,
    "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
-   "zapas": 0.952
+   "zapas": 0.954
   },
   {
    "element": "ZF2",
@@ -783,7 +783,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 914.1,
+   "As_req": 913.6,
    "As_min": 0.0,
    "As_prov": 1496.1,
    "jedn": "mm²",
@@ -792,7 +792,7 @@
    "s_max": null,
    "ok": true,
    "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
-   "zapas": 0.637
+   "zapas": 0.638
   },
   {
    "element": "ZF3",
@@ -801,7 +801,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 43.3,
+   "As_req": 43.4,
    "As_min": 0.0,
    "As_prov": 1058.2,
    "jedn": "mm²",
@@ -810,7 +810,7 @@
    "s_max": null,
    "ok": true,
    "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
-   "zapas": 23.433
+   "zapas": 23.399
   },
   {
    "element": "ZF3",
@@ -819,7 +819,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 265.2,
+   "As_req": 264.9,
    "As_min": 0.0,
    "As_prov": 1496.1,
    "jedn": "mm²",
@@ -828,7 +828,7 @@
    "s_max": null,
    "ok": true,
    "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
-   "zapas": 4.641
+   "zapas": 4.648
   },
   {
    "element": "ZF4",
@@ -837,7 +837,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 59.9,
+   "As_req": 58.9,
    "As_min": 0.0,
    "As_prov": 1058.2,
    "jedn": "mm²",
@@ -846,7 +846,7 @@
    "s_max": null,
    "ok": true,
    "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
-   "zapas": 16.677
+   "zapas": 16.957
   },
   {
    "element": "ZF4",
@@ -855,7 +855,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 1092.6,
+   "As_req": 1094.1,
    "As_min": 0.0,
    "As_prov": 1496.1,
    "jedn": "mm²",
@@ -864,7 +864,7 @@
    "s_max": null,
    "ok": true,
    "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
-   "zapas": 0.369
+   "zapas": 0.367
   },
   {
    "element": "ZF5",
@@ -873,7 +873,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 17.5,
+   "As_req": 17.8,
    "As_min": 0.0,
    "As_prov": 1058.2,
    "jedn": "mm²",
@@ -882,7 +882,7 @@
    "s_max": null,
    "ok": true,
    "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
-   "zapas": 59.365
+   "zapas": 58.445
   },
   {
    "element": "ZF5",
@@ -891,7 +891,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 738.1,
+   "As_req": 738.5,
    "As_min": 0.0,
    "As_prov": 1496.1,
    "jedn": "mm²",
@@ -900,7 +900,7 @@
    "s_max": null,
    "ok": true,
    "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
-   "zapas": 1.027
+   "zapas": 1.026
   },
   {
    "element": "ZF6",
@@ -909,7 +909,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 2337.6,
+   "As_req": 2346.1,
    "As_min": 0.0,
    "As_prov": 2415.3,
    "jedn": "mm²",
@@ -918,7 +918,7 @@
    "s_max": null,
    "ok": true,
    "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
-   "zapas": 0.033
+   "zapas": 0.03
   },
   {
    "element": "ZF6",
@@ -927,7 +927,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 2446.1,
+   "As_req": 2446.8,
    "As_min": 0.0,
    "As_prov": 2513.9,
    "jedn": "mm²",
@@ -936,7 +936,7 @@
    "s_max": null,
    "ok": true,
    "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
-   "zapas": 0.028
+   "zapas": 0.027
   },
   {
    "element": "ZF7",
@@ -945,7 +945,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 4009.2,
+   "As_req": 4010.7,
    "As_min": 0.0,
    "As_prov": 4287.7,
    "jedn": "mm²",
@@ -963,7 +963,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 5819.1,
+   "As_req": 5818.7,
    "As_min": 0.0,
    "As_prov": 6178.6,
    "jedn": "mm²",
@@ -981,7 +981,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 2133.4,
+   "As_req": 2132.7,
    "As_min": 0.0,
    "As_prov": 2301.8,
    "jedn": "mm²",
@@ -999,7 +999,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 4084.3,
+   "As_req": 4085.0,
    "As_min": 0.0,
    "As_prov": 4494.3,
    "jedn": "mm²",
@@ -1017,7 +1017,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 828.4,
+   "As_req": 835.7,
    "As_min": 0.0,
    "As_prov": 919.5,
    "jedn": "mm²",
@@ -1026,7 +1026,7 @@
    "s_max": null,
    "ok": true,
    "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
-   "zapas": 0.11
+   "zapas": 0.1
   },
   {
    "element": "ZF9",
@@ -1035,7 +1035,7 @@
    "arkusze": [
     "PT-BO-05"
    ],
-   "As_req": 145.1,
+   "As_req": 142.9,
    "As_min": 0.0,
    "As_prov": 1284.4,
    "jedn": "mm²",
@@ -1044,7 +1044,7 @@
    "s_max": null,
    "ok": true,
    "uwagi": "warunki ław biblioteki (model ławy izolowanej) zastąpione MES płyty z żebrami",
-   "zapas": 7.85
+   "zapas": 7.99
   }
  ]
 }

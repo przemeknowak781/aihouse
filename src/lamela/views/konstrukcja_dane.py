@@ -884,6 +884,33 @@ def zapisz_raporty(D: DaneKonstr, ctx):
         p.write_text("\n".join(L) + "\n", encoding="utf-8")
         p.with_suffix(".json").write_text(json.dumps(dict(ok=n_ok, razem=len(rows), wiersze=rows), indent=1,
                                                      ensure_ascii=False, default=str), encoding="utf-8")
+    mp = cfg.get("raport_mes_fundamentu")
+    W = D.cache.get("fund_mes")
+    if mp and W is not None:
+        L = [f"# Płyta fundamentowa {W.id} — MES na podłożu sprężystym (pozycja PF-MES)", "",
+             "Plik generowany przez `lamela.views.konstrukcja` (moduł obliczeń `lamela.obliczenia.konstrukcja."
+             "plyta_fundamentowa`). Model: płyta ACM z żebrami/pogrubieniami jako strefami zwiększonej grubości, "
+             "sprężyny Winklera w węzłach, kontakt jednostronny (iteracja strefy docisku), obciążenia ścian parteru "
+             "i słupów z obliczeń statycznych (profile obciążeń, średnia krocząca 2,0 m), obwiednia kombinacji STR "
+             f"(PN-EN 1990 + NA) × 3 warianty k_s ({W.kombinacje} rozwiązań). Siatka elementów ≤ 0,30 m, "
+             f"{len(W.el_c)} elementów.", "",
+             "## Weryfikacja modelu", "",
+             "Belka nieskończona na podłożu sprężystym (Hetényi 1946): ugięcie pod siłą — błąd < 0,1 %, moment w środku "
+             "elementu — błąd < 0,5 % (test `tools/test_rysunki_konstrukcja.py::test_hetenyi`).", ""]
+        for w in W.wyniki:
+            L.append(w.md(poziom=2))
+        L += ["## Obwiednia momentów i zbrojenie wymagane", "",
+              "| Kierunek | M_Ed ekstremalny [kNm/m] | A_s,req maks. [mm²/m] | A_s,req 90 % pola płyty [mm²/m] |",
+              "|---|---:|---:|---:|"]
+        rib = np.array([s_ != "" for s_ in W.strefa_el])
+        for k_, M in W.M.items():
+            a = W.As[k_]
+            L.append(f"| {k_} | {float(M[np.argmax(np.abs(M))]):.1f} | {float(a.max()):.0f} | "
+                     f"{float(np.percentile(a[~rib], 90)) if (~rib).any() else 0:.0f} |")
+        L += ["", f"Elementy z μ > μ_lim (przekrój niewystarczający): {int(W.mu_przekr.sum())} z {len(W.el_c)}.", ""]
+        p_ = Path(mp)
+        p_.parent.mkdir(parents=True, exist_ok=True)
+        p_.write_text("\n".join(L) + "\n", encoding="utf-8")
     bp = cfg.get("braki_danych")
     if bp:
         stale = cfg.get("braki_danych_stale") or []
@@ -1343,8 +1370,9 @@ def prety_fundamentu(D: DaneKonstr) -> dict:
             for (wa, k_), lst in [(k, v) for k, v in dz.items() if k != "mu"]:
                 for i, (pg, fi, s_x, need, prov) in enumerate(lst):
                     lbd = _ceil5(_lbd(fi, F.beton))
-                    reg = _rozciagnij(pg, k_, lbd).intersection(Pin)
-                    bx = pg.bounds
+                    # obszar prostokątny (obwiednia strefy) — pręty jednakowej długości w obszarze
+                    reg = _rozciagnij(pg.envelope, k_, lbd).intersection(Pin)
+                    bx = pg.envelope.bounds
                     t_lo, t_hi = (bx[1], bx[3]) if k_ == "x" else (bx[0], bx[2])
                     w_ = Warstwa(k_, wa, fi, s_x, need, 0.0, prov, 0.0, "MES — dozbrojenie")
                     gs = _grupy_z_skanu(skanuj(reg, k_, t_lo, t_hi, s_x / 1000.0), k_, wa, fi, s_x, F.id, f"D{i + 1}",
