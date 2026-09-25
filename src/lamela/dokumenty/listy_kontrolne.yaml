@@ -1,0 +1,111 @@
+# Listy kontrolne kompletności tomów — na podstawie rejestru wymagań, sekcja C
+# (docs/10_podstawy_prawne/00_rejestr_wymagan.md: C.1 TOM I, C.2 TOMY PT; B.16 W-300…W-305; E.1).
+#
+# Pozycja: {id, el, opis, podstawa, szukaj, obowiazkowa (domyślnie true), dane_osobowe, nd}
+#   el — kod elementu w tomie (PZT, PAB, ZL, PT) lub "*" (cały plik)
+#   szukaj — tryby (dowolny pasujący = znaleziono, chyba że wszystkie: true):
+#     tytulowa: [regex]  — tekst strony tytułowej elementu
+#     zakladki: [regex]  — tytuły zakładek elementu (rozdziały, oświadczenia, załączniki)
+#     tekst: [regex]     — tekst części opisowej elementu (strony A4)
+#     rysunki: [regex]   — tytuły rysunków (zakładki arkuszy); min: N — wymagana liczba trafień
+#     skala_max: N       — każdy rysunek ze skalą 1:M ma M ≤ N (rysunki „bez skali” pomijane)
+#     spec: nazwa        — kontrola specjalna (nazwa_pliku, rozmiar, metadane, wektor, numeracja, oprawa_pt, tom_pt)
+#   dane_osobowe: true — pozycja obecna, ale z polem [DO UZUPEŁNIENIA] na stronie tytułowej ⇒ status DO UZUPEŁNIENIA
+#   nd — pozycja nie dotyczy (podstawa); raportowana jako N/D
+# Wyrażenia regularne: Python re, bez rozróżniania wielkości liter; spacje dopasowują dowolne białe znaki.
+
+TOM_I:
+  opis: "TOM I — PZT + PAB + ZL w jednym pliku (rejestr C.1)"
+  nazwa_pliku: PZT_PAB_ZL
+  elementy: [PZT, PAB, ZL]
+  pozycje:
+    # ---------------------------------------------------------------- plik
+    - {id: F-01, el: "*", opis: "Nazwa pliku wg zał. 1 RPB (PZT_PAB_ZL_rrrr.mm.dd.pdf)", podstawa: "RPB § 2b ust. 4, zał. 1; W-301", szukaj: {spec: nazwa_pliku}}
+    - {id: F-02, el: "*", opis: "Rozmiar pliku ≤ 150 MB", podstawa: "RPB § 2b ust. 3; W-300", szukaj: {spec: rozmiar}}
+    - {id: F-03, el: "*", opis: "Część rysunkowa w postaci wektorowej (raster tylko jako podkład mapy)", podstawa: "RPB § 2b ust. 2; W-300", szukaj: {spec: wektor}}
+    - {id: F-04, el: "*", opis: "Metadane PDF (tytuł, temat)", podstawa: "dobra praktyka; AUD-RYS", szukaj: {spec: metadane}, obowiazkowa: false}
+    - {id: F-05, el: "*", opis: "PT nie jest objęty wspólną oprawą z PZT/PAB", podstawa: "RPB § 5 ust. 3; § 7 ust. 8", szukaj: {spec: oprawa_pt}}
+    - {id: C1-0-01, el: "*", opis: "Łączny spis treści ze spisem załączników (opcjonalny przy wspólnej oprawie)", podstawa: "RPB § 7 ust. 7 pkt 1", szukaj: {zakladki: ['łączny spis treści']}, obowiazkowa: false}
+    # ---------------------------------------------------------------- PZT
+    - {id: C1-1-01, el: PZT, opis: "Strona tytułowa: nazwa elementu", podstawa: "RPB § 7 ust. 2 pkt 1", szukaj: {tytulowa: ['projekt zagospodarowania dzia']}}
+    - {id: C1-1-02, el: PZT, opis: "Strona tytułowa: nazwa zamierzenia budowlanego", podstawa: "RPB § 7 ust. 2 pkt 2 lit. a", szukaj: {tytulowa: ['nazwa zamierzenia']}}
+    - {id: C1-1-03, el: PZT, opis: "Strona tytułowa: adres i kategoria obiektu (kat. I)", podstawa: "RPB § 7 ust. 2 pkt 2 lit. b; W-303", szukaj: {tytulowa: ['adres obiektu', 'kategoria obiektu budowlanego\s+I\b'], wszystkie: true}}
+    - {id: C1-1-04, el: PZT, opis: "Strona tytułowa PZT: identyfikator działki ewidencyjnej", podstawa: "RPB § 7 ust. 2 pkt 2 lit. c, ust. 7 pkt 2", szukaj: {tytulowa: ['identyfikator działki']}, dane_osobowe: true}
+    - {id: C1-1-05, el: PZT, opis: "Strona tytułowa: inwestor i jego adres", podstawa: "RPB § 7 ust. 2 pkt 2 lit. d", szukaj: {tytulowa: ['inwestor']}, dane_osobowe: true}
+    - {id: C1-1-06, el: PZT, opis: "Strona tytułowa: data opracowania; autorzy — imię, nazwisko, specjalność, nr uprawnień, zakres", podstawa: "RPB § 7 ust. 2 pkt 3", szukaj: {tytulowa: ['data opracowania', 'nr uprawnie', 'zakres opracowania'], wszystkie: true}, dane_osobowe: true}
+    - {id: C1-1-07, el: PZT, opis: "Spis treści z numerami stron", podstawa: "RPB § 7 ust. 1 pkt 2, ust. 5", szukaj: {zakladki: ['^spis treści']}}
+    - {id: C1-1-08, el: PZT, opis: "Numeracja stron elementu („strona X z Y”)", podstawa: "RPB § 6 ust. 1", szukaj: {spec: numeracja}}
+    - {id: C1-1-09, el: PZT, opis: "Oświadczenie projektanta z listą współautorów", podstawa: "PB art. 34 ust. 3d pkt 3, ust. 3e", szukaj: {zakladki: ['oświadczenie projektanta'], tekst: ['art\. 34 ust\. 3e']}}
+    - {id: C1-1-10, el: PZT, opis: "Opis: przedmiot zamierzenia", podstawa: "RPB § 14 pkt 1", szukaj: {zakladki: ['przedmiot (zamierzenia|inwestycji)'], tekst: ['§ 14 pkt 1\b']}}
+    - {id: C1-1-11, el: PZT, opis: "Opis: istniejący stan zagospodarowania", podstawa: "RPB § 14 pkt 2", szukaj: {zakladki: ['istniejący stan zagospodarowania'], tekst: ['§ 14 pkt 2\b']}}
+    - {id: C1-1-12, el: PZT, opis: "Opis: projektowane zagospodarowanie (lit. a–f)", podstawa: "RPB § 14 pkt 3", szukaj: {zakladki: ['projektowane zagospodarowanie'], tekst: ['§ 14 pkt 3\b']}}
+    - {id: C1-1-13, el: PZT, opis: "Opis: zestawienie powierzchni i wskaźników MPZP", podstawa: "RPB § 14 pkt 4; W-030…W-041", szukaj: {zakladki: ['zestawienie powierzchni'], tekst: ['§ 14 pkt 4\b']}}
+    - {id: C1-1-14, el: PZT, opis: "Opis: ograniczenia z MPZP, zabytki, szkody górnicze, zagrożenia dla środowiska", podstawa: "RPB § 14 pkt 5", szukaj: {tekst: ['§ 14 pkt 5\b'], zakladki: ['(ograniczen|zabyt|górnicz|zagrożeni)']}}
+    - {id: C1-1-15, el: PZT, opis: "Opis: dane dotyczące warunków ochrony przeciwpożarowej", podstawa: "RPB § 14 pkt 6", szukaj: {tekst: ['§ 14 pkt 6\b'], zakladki: ['(przeciwpożarow|ppoż)']}}
+    - {id: C1-1-16, el: PZT, opis: "Opis: ochrona ludności — „nie dotyczy” z podstawą", podstawa: "RPB § 14 pkt 6a", szukaj: {tekst: ['§ 14 pkt 6a', 'ochron\w* ludności']}}
+    - {id: C1-1-17, el: PZT, opis: "Opis: informacja o obszarze oddziaływania obiektu", podstawa: "RPB § 14 pkt 8, § 18; W-012", szukaj: {zakladki: ['obszar\w* oddziaływania'], tekst: ['§ 14 pkt 8\b']}}
+    - {id: C1-1-18, el: PZT, opis: "Rysunek: plan zagospodarowania na mapie do celów projektowych (≥ 1:500)", podstawa: "RPB § 15 ust. 1–2, § 9 ust. 5; PZT-01", szukaj: {rysunki: ['plan zagospodarowania|projekt zagospodarowania']}}
+    - {id: C1-1-19, el: PZT, opis: "Rysunek: plan szczegółowy — wymiary, odległości (0,01 m), rzędne (1:200)", podstawa: "RPB § 15 ust. 2 pkt 3, ust. 3; § 17 ust. 1; PZT-02", szukaj: {rysunki: ['szczegółow|wymiar|odległoś']}, obowiazkowa: false}
+    - {id: C1-1-20, el: PZT, opis: "Rysunek: koordynacyjny uzbrojenia terenu", podstawa: "RPB § 17 ust. 2; PZT-03", szukaj: {rysunki: ['koordynac|uzbrojeni']}}
+    - {id: C1-1-21, el: PZT, opis: "Skale rysunków PZT nie mniejsze niż 1:500", podstawa: "RPB § 9 ust. 5; W-306", szukaj: {skala_max: 500}}
+    # ---------------------------------------------------------------- PAB
+    - {id: C1-2-01, el: PAB, opis: "Strona tytułowa: nazwa elementu", podstawa: "RPB § 7 ust. 2 pkt 1", szukaj: {tytulowa: ['projekt architektoniczno-budowlany']}}
+    - {id: C1-2-02, el: PAB, opis: "Strona tytułowa: zamierzenie, adres, kategoria I, inwestor", podstawa: "RPB § 7 ust. 2 pkt 2", szukaj: {tytulowa: ['nazwa zamierzenia', 'kategoria obiektu budowlanego\s+I\b', 'inwestor'], wszystkie: true}, dane_osobowe: true}
+    - {id: C1-2-03, el: PAB, opis: "Strona tytułowa: data, autorzy ze specjalnością, nr uprawnień i zakresem", podstawa: "RPB § 7 ust. 2 pkt 3", szukaj: {tytulowa: ['data opracowania', 'nr uprawnie', 'zakres opracowania'], wszystkie: true}, dane_osobowe: true}
+    - {id: C1-2-04, el: PAB, opis: "Spis treści", podstawa: "RPB § 7 ust. 5", szukaj: {zakladki: ['^spis treści']}}
+    - {id: C1-2-05, el: PAB, opis: "Numeracja stron elementu", podstawa: "RPB § 6 ust. 1", szukaj: {spec: numeracja}}
+    - {id: C1-2-06, el: PAB, opis: "Oświadczenie projektanta(-ów) z listą współautorów", podstawa: "PB art. 34 ust. 3d pkt 3, ust. 3e", szukaj: {zakladki: ['oświadczenie projektanta']}}
+    - {id: C1-2-07, el: PAB, opis: "Opis pkt 1: rodzaj i kategoria obiektu", podstawa: "RPB § 20 ust. 1 pkt 1", szukaj: {zakladki: ['rodzaj i kategoria'], tekst: ['§ 20 ust\. 1 pkt 1\b']}}
+    - {id: C1-2-08, el: PAB, opis: "Opis pkt 2: sposób użytkowania i program użytkowy", podstawa: "RPB § 20 ust. 1 pkt 2", szukaj: {zakladki: ['program użytkowy|sposób użytkowania'], tekst: ['§ 20 ust\. 1 pkt 2\b']}}
+    - {id: C1-2-09, el: PAB, opis: "Opis pkt 3: układ przestrzenny, forma, wyroby wykończeniowe, kolorystyka, zgodność z MPZP", podstawa: "RPB § 20 ust. 1 pkt 3", szukaj: {zakladki: ['układ przestrzenny|forma architektoniczna'], tekst: ['§ 20 ust\. 1 pkt 3\b']}}
+    - {id: C1-2-10, el: PAB, opis: "Opis pkt 4: kubatura, zestawienie powierzchni (PN-ISO 9836 + § 20), wysokość, wymiary, kondygnacje", podstawa: "RPB § 20 ust. 1 pkt 4; W-316", szukaj: {zakladki: ['parametr|kubatur|powierzchni'], tekst: ['§ 20 ust\. 1 pkt 4\b']}}
+    - {id: C1-2-11, el: PAB, opis: "Opis pkt 5: opinia geotechniczna i sposób posadowienia", podstawa: "RPB § 20 ust. 1 pkt 5; W-281", szukaj: {zakladki: ['geotechni|posadowieni'], tekst: ['§ 20 ust\. 1 pkt 5\b']}}
+    - {id: C1-2-12, el: PAB, opis: "Opis pkt 6–8: liczba lokali; lokale dostępne i dostępność — „nie dotyczy”", podstawa: "RPB § 20 ust. 1 pkt 6–8", szukaj: {tekst: ['§ 20 ust\. 1 pkt 6', 'liczba lokali|lokal\w* mieszkaln'], wszystkie: false}}
+    - {id: C1-2-13, el: PAB, opis: "Opis pkt 9: wpływ na środowisko i zdrowie (charakterystyka ekologiczna)", podstawa: "RPB § 20 ust. 1 pkt 9", szukaj: {zakladki: ['środowisk|ekologiczn'], tekst: ['§ 20 ust\. 1 pkt 9\b']}}
+    - {id: C1-2-14, el: PAB, opis: "Opis pkt 10: analiza wysoce wydajnych systemów alternatywnych", podstawa: "RPB § 20 ust. 1 pkt 10; W-157", szukaj: {zakladki: ['alternatywn|wysoce wydajn'], tekst: ['§ 20 ust\. 1 pkt 10\b']}}
+    - {id: C1-2-15, el: PAB, opis: "Opis pkt 11: analiza automatycznej regulacji temperatury", podstawa: "RPB § 20 ust. 1 pkt 11; W-152", szukaj: {zakladki: ['regulacji temperatury|automatycznej regulacji'], tekst: ['§ 20 ust\. 1 pkt 11\b']}}
+    - {id: C1-2-16, el: PAB, opis: "Opis pkt 12: wyposażenie budowlano-instalacyjne, źródło ciepła i c.w.u.", podstawa: "RPB § 20 ust. 1 pkt 12", szukaj: {zakladki: ['wyposażeni|źródł\w* ciepła'], tekst: ['§ 20 ust\. 1 pkt 12\b']}}
+    - {id: C1-2-17, el: PAB, opis: "Opis pkt 13: dane dotyczące warunków ochrony przeciwpożarowej", podstawa: "RPB § 20 ust. 1 pkt 13", szukaj: {zakladki: ['przeciwpożarow|ppoż'], tekst: ['§ 20 ust\. 1 pkt 13\b']}}
+    - {id: C1-2-18, el: PAB, opis: "Opis pkt 14: ochrona ludności — „nie dotyczy”", podstawa: "RPB § 20 ust. 1 pkt 14", szukaj: {tekst: ['§ 20 ust\. 1 pkt 14', 'ochron\w* ludności']}}
+    - {id: C1-2-19, el: PAB, opis: "Opinia geotechniczna (kat. II)", podstawa: "rozp. Dz.U. 2012 poz. 463 § 7 ust. 1, § 8; D-08", szukaj: {zakladki: ['opinia geotechniczna'], tekst: ['opini\w* geotechniczn']}}
+    - {id: C1-2-20, el: PAB, opis: "Rysunki: rzuty kondygnacji (P0, P1, P2)", podstawa: "RPB § 21 pkt 1 lit. a; W-315", szukaj: {rysunki: ['rzut(?! dachu)'], min: 3}}
+    - {id: C1-2-21, el: PAB, opis: "Rysunek: rzut (widok) dachu", podstawa: "RPB § 21 pkt 1 lit. a, c", szukaj: {rysunki: ['rzut dachu|widok dachu']}}
+    - {id: C1-2-22, el: PAB, opis: "Rysunki: co najmniej 2 przekroje z terenem i podłożem", podstawa: "RPB § 21 pkt 1 lit. b; W-315", szukaj: {rysunki: ['przekr'], min: 2}}
+    - {id: C1-2-23, el: PAB, opis: "Rysunki: elewacje ze wszystkich stron z wyrobami i kolorystyką", podstawa: "RPB § 21 pkt 1 lit. c", szukaj: {rysunki: ['elewac'], min: 2}}
+    - {id: C1-2-24, el: PAB, opis: "Skale rysunków PAB nie mniejsze niż 1:100", podstawa: "RPB § 9 ust. 3; W-306", szukaj: {skala_max: 100}}
+    # ---------------------------------------------------------------- ZL
+    - {id: C1-3-01, el: ZL, opis: "Strona tytułowa elementu „Załączniki”", podstawa: "RPB § 7 ust. 1a pkt 1", szukaj: {tytulowa: ['załączniki']}}
+    - {id: C1-3-02, el: ZL, opis: "Spis załączników", podstawa: "RPB § 7 ust. 1a pkt 2", szukaj: {zakladki: ['spis załączników']}}
+    - {id: C1-3-03, el: ZL, opis: "Informacja BIOZ — strona tytułowa (obiekt, adres, inwestor, projektant z adresem)", podstawa: "rozp. BIOZ § 2 ust. 2; RPB § 5 ust. 1 pkt 4 lit. c", szukaj: {tekst: ['informacja dotycząca bezpieczeństwa', 'projektant sporządzający informację'], wszystkie: true}, dane_osobowe: false}
+    - {id: C1-3-04, el: ZL, opis: "Informacja BIOZ pkt 1: zakres robót i kolejność realizacji", podstawa: "rozp. BIOZ § 2 ust. 3 pkt 1", szukaj: {tekst: ['§ 2 ust\. 3 pkt 1\b']}}
+    - {id: C1-3-05, el: ZL, opis: "Informacja BIOZ pkt 2: wykaz istniejących obiektów", podstawa: "rozp. BIOZ § 2 ust. 3 pkt 2", szukaj: {tekst: ['§ 2 ust\. 3 pkt 2\b']}}
+    - {id: C1-3-06, el: ZL, opis: "Informacja BIOZ pkt 3: elementy zagospodarowania stwarzające zagrożenie", podstawa: "rozp. BIOZ § 2 ust. 3 pkt 3", szukaj: {tekst: ['§ 2 ust\. 3 pkt 3\b']}}
+    - {id: C1-3-07, el: ZL, opis: "Informacja BIOZ pkt 4: przewidywane zagrożenia (skala, rodzaj, miejsce, czas); wskazanie planu BIOZ", podstawa: "rozp. BIOZ § 2 ust. 3 pkt 4, § 6; PB art. 21a", szukaj: {tekst: ['§ 2 ust\. 3 pkt 4\b', 'plan\w* BIOZ'], wszystkie: true}}
+    - {id: C1-3-08, el: ZL, opis: "Informacja BIOZ pkt 5: instruktaż pracowników", podstawa: "rozp. BIOZ § 2 ust. 3 pkt 5", szukaj: {tekst: ['§ 2 ust\. 3 pkt 5\b']}}
+    - {id: C1-3-09, el: ZL, opis: "Informacja BIOZ pkt 6: środki techniczne i organizacyjne, komunikacja ewakuacyjna", podstawa: "rozp. BIOZ § 2 ust. 3 pkt 6", szukaj: {tekst: ['§ 2 ust\. 3 pkt 6\b']}}
+    - {id: C1-3-10, el: ZL, opis: "Decyzja zarządcy drogi o lokalizacji zjazdu (albo strona zastępcza)", podstawa: "PB art. 33 ust. 2 pkt 1; u.d.p. art. 29 ust. 3a; W-020", szukaj: {zakladki: ['zjazd'], tekst: ['lokalizacji zjazdu']}}
+    - {id: C1-3-11, el: ZL, opis: "Oświadczenie projektanta IS o sieci ciepłowniczej (formalnie załącznik wniosku)", podstawa: "PB art. 33 ust. 2 pkt 10; W-158", szukaj: {tekst: ['sieci ciepłowniczej']}, obowiazkowa: false}
+    - {id: C1-3-12, el: ZL, opis: "Oświadczenie zarządcy drogi krajowej/wojewódzkiej", podstawa: "RPB § 5 ust. 1 pkt 4 lit. b", szukaj: {}, nd: "droga gminna 1KDD"}
+
+# ---------------------------------------------------------------------------------------------- tomy PT (rejestr C.2)
+_PT_WSPOLNE: &pt_wspolne
+  - {id: F-01, el: "*", opis: "Nazwa pliku wg zał. 1 RPB (PT_x_y_rrrr.mm.dd.pdf)", podstawa: "RPB zał. 1; W-301", szukaj: {spec: nazwa_pliku}}
+  - {id: F-02, el: "*", opis: "Rozmiar pliku ≤ 150 MB", podstawa: "RPB § 2b ust. 3", szukaj: {spec: rozmiar}}
+  - {id: F-03, el: "*", opis: "Część rysunkowa wektorowa", podstawa: "RPB § 2b ust. 2", szukaj: {spec: wektor}}
+  - {id: F-05, el: "*", opis: "Tom PT w osobnym pliku (bez wspólnej oprawy)", podstawa: "RPB § 5 ust. 3", szukaj: {spec: tom_pt}}
+  - {id: C2-01, el: PT, opis: "Strona tytułowa: „Projekt techniczny”, zamierzenie, adres, kategoria I, inwestor", podstawa: "RPB § 7 ust. 2 pkt 1–2", szukaj: {tytulowa: ['projekt techniczny', 'nazwa zamierzenia', 'kategoria obiektu budowlanego\s+I\b', 'inwestor'], wszystkie: true}, dane_osobowe: true}
+  - {id: C2-02, el: PT, opis: "Strona tytułowa: nr tomu i liczba tomów PT", podstawa: "RPB § 7 ust. 6", szukaj: {tytulowa: ['tom \d+ z \d+']}}
+  - {id: C2-03, el: PT, opis: "Strona tytułowa: data, autorzy ze specjalnością, nr uprawnień i zakresem", podstawa: "RPB § 7 ust. 2 pkt 3", szukaj: {tytulowa: ['data opracowania', 'nr uprawnie'], wszystkie: true}, dane_osobowe: true}
+  - {id: C2-04, el: PT, opis: "Spis treści", podstawa: "RPB § 7 ust. 5", szukaj: {zakladki: ['^spis treści']}}
+  - {id: C2-05, el: PT, opis: "Numeracja stron tomu", podstawa: "RPB § 6 ust. 2", szukaj: {spec: numeracja}}
+  - {id: C2-06, el: PT, opis: "Oświadczenie projektanta PT (brzmienie art. 41 ust. 4a pkt 2 PB)", podstawa: "PB art. 34 ust. 3d pkt 3, art. 41 ust. 4a pkt 2", szukaj: {zakladki: ['oświadczenie projektanta'], tekst: ['rozstrzygnięciami dotyczącymi zamierzenia'], wszystkie: true}}
+  - {id: C2-07, el: PT, opis: "Dane dotyczące warunków ochrony przeciwpożarowej stosownie do zakresu", podstawa: "RPB § 23 pkt 10", szukaj: {tekst: ['§ 23 pkt 10\b', 'przeciwpożarow']}}
+  - {id: C2-08, el: PT, opis: "Skale rysunków nie mniejsze niż 1:100", podstawa: "RPB § 9 ust. 3", szukaj: {skala_max: 100}}
+
+PT_AR:
+  opis: "PT-1 AR — projekt techniczny, architektura (rejestr C.2)"
+  nazwa_pliku: PT
+  symbol: AR
+  elementy: [PT]
+  pozycje:
+    - *pt_wspolne_placeholder
