@@ -88,17 +88,18 @@ TOM_I:
     - {id: C1-3-12, el: ZL, opis: "Oświadczenie zarządcy drogi krajowej/wojewódzkiej", podstawa: "RPB § 5 ust. 1 pkt 4 lit. b", szukaj: {}, nd: "droga gminna 1KDD"}
 
 # ---------------------------------------------------------------------------------------------- tomy PT (rejestr C.2)
-_PT_WSPOLNE: &pt_wspolne
+# Pozycje wspólne każdego tomu PT (klucz „wspolne: PT_WSPOLNE” dołącza je przed pozycjami tomu).
+PT_WSPOLNE:
   - {id: F-01, el: "*", opis: "Nazwa pliku wg zał. 1 RPB (PT_x_y_rrrr.mm.dd.pdf)", podstawa: "RPB zał. 1; W-301", szukaj: {spec: nazwa_pliku}}
   - {id: F-02, el: "*", opis: "Rozmiar pliku ≤ 150 MB", podstawa: "RPB § 2b ust. 3", szukaj: {spec: rozmiar}}
   - {id: F-03, el: "*", opis: "Część rysunkowa wektorowa", podstawa: "RPB § 2b ust. 2", szukaj: {spec: wektor}}
-  - {id: F-05, el: "*", opis: "Tom PT w osobnym pliku (bez wspólnej oprawy)", podstawa: "RPB § 5 ust. 3", szukaj: {spec: tom_pt}}
-  - {id: C2-01, el: PT, opis: "Strona tytułowa: „Projekt techniczny”, zamierzenie, adres, kategoria I, inwestor", podstawa: "RPB § 7 ust. 2 pkt 1–2", szukaj: {tytulowa: ['projekt techniczny', 'nazwa zamierzenia', 'kategoria obiektu budowlanego\s+I\b', 'inwestor'], wszystkie: true}, dane_osobowe: true}
+  - {id: F-05, el: "*", opis: "Tom PT w osobnym pliku (bez wspólnej oprawy z PZT/PAB/ZL)", podstawa: "RPB § 5 ust. 3", szukaj: {spec: tom_pt}}
+  - {id: C2-01, el: PT, opis: "Strona tytułowa: „Projekt techniczny”, zamierzenie, kategoria I, inwestor", podstawa: "RPB § 7 ust. 2 pkt 1–2", szukaj: {tytulowa: ['projekt techniczny', 'nazwa zamierzenia', 'kategoria obiektu budowlanego\s+I\b', 'inwestor'], wszystkie: true}, dane_osobowe: true}
   - {id: C2-02, el: PT, opis: "Strona tytułowa: nr tomu i liczba tomów PT", podstawa: "RPB § 7 ust. 6", szukaj: {tytulowa: ['tom \d+ z \d+']}}
   - {id: C2-03, el: PT, opis: "Strona tytułowa: data, autorzy ze specjalnością, nr uprawnień i zakresem", podstawa: "RPB § 7 ust. 2 pkt 3", szukaj: {tytulowa: ['data opracowania', 'nr uprawnie'], wszystkie: true}, dane_osobowe: true}
   - {id: C2-04, el: PT, opis: "Spis treści", podstawa: "RPB § 7 ust. 5", szukaj: {zakladki: ['^spis treści']}}
   - {id: C2-05, el: PT, opis: "Numeracja stron tomu", podstawa: "RPB § 6 ust. 2", szukaj: {spec: numeracja}}
-  - {id: C2-06, el: PT, opis: "Oświadczenie projektanta PT (brzmienie art. 41 ust. 4a pkt 2 PB)", podstawa: "PB art. 34 ust. 3d pkt 3, art. 41 ust. 4a pkt 2", szukaj: {zakladki: ['oświadczenie projektanta'], tekst: ['rozstrzygnięciami dotyczącymi zamierzenia'], wszystkie: true}}
+  - {id: C2-06, el: PT, opis: "Oświadczenie projektanta PT (brzmienie art. 41 ust. 4a pkt 2 PB)", podstawa: "PB art. 34 ust. 3d pkt 3, art. 41 ust. 4a pkt 2", szukaj: {zakladki: ['oświadczenie projektanta'], tekst: ['rozstrzygnięciami dotyczącymi'], wszystkie: true}}
   - {id: C2-07, el: PT, opis: "Dane dotyczące warunków ochrony przeciwpożarowej stosownie do zakresu", podstawa: "RPB § 23 pkt 10", szukaj: {tekst: ['§ 23 pkt 10\b', 'przeciwpożarow']}}
   - {id: C2-08, el: PT, opis: "Skale rysunków nie mniejsze niż 1:100", podstawa: "RPB § 9 ust. 3", szukaj: {skala_max: 100}}
 
@@ -107,5 +108,51 @@ PT_AR:
   nazwa_pliku: PT
   symbol: AR
   elementy: [PT]
+  wspolne: PT_WSPOLNE
   pozycje:
-    - *pt_wspolne_placeholder
+    - {id: C2-AR-01, el: PT, opis: "Rozwiązania konstrukcyjno-materiałowe przegród zewnętrznych i wewnętrznych", podstawa: "RPB § 23 pkt 4", szukaj: {zakladki: ['przegr'], tekst: ['§ 23 pkt 4\b']}}
+    - {id: C2-AR-02, el: PT, opis: "Obliczenia U / ψ / f_Rsi przegród i detali", podstawa: "W-243…W-250", szukaj: {tekst: ['współczynnik\w* przenikania ciepła|U\s*=']}}
+    - {id: C2-AR-03, el: PT, opis: "Zestawienie stolarki (U, g, szczelność, otwieranie)", podstawa: "W-317", szukaj: {zakladki: ['stolark'], tekst: ['zestawienie stolarki']}}
+    - {id: C2-AR-04, el: PT, opis: "Detale cieplne i szczelności (wsporniki, attyki, okapy, osadzenie stolarki, próg, cokół)", podstawa: "RPB § 24 pkt 2", szukaj: {rysunki: ['detal']}}
+    - {id: C2-AR-05, el: PT, opis: "Rzuty (z dachem), przekroje, elewacje uzupełniające", podstawa: "RPB § 24 pkt 1", szukaj: {rysunki: ['rzut|przekr|elewac'], min: 3}}
+    - {id: C2-AR-06, el: PT, opis: "Analiza akustyczna § 23 pkt 4a", podstawa: "RPB § 23 pkt 4a", szukaj: {}, nd: "dom wolnostojący z 1 lokalem (W-231)"}
+
+PT_BO:
+  opis: "PT-2 BO — projekt techniczny, konstrukcja (rejestr C.2)"
+  nazwa_pliku: PT
+  symbol: BO
+  elementy: [PT]
+  wspolne: PT_WSPOLNE
+  pozycje:
+    - {id: C2-BO-01, el: PT, opis: "Rozwiązania konstrukcyjne, schematy statyczne, założenia i obciążenia, wyniki obliczeń", podstawa: "RPB § 23 pkt 1; W-262…W-265", szukaj: {tekst: ['§ 23 pkt 1\b', 'schemat\w* statyczn'], wszystkie: false}}
+    - {id: C2-BO-02, el: PT, opis: "Dokumentacja badań podłoża gruntowego i projekt geotechniczny (kat. II)", podstawa: "RPB § 23 pkt 2; rozp. 2012/463 § 7 ust. 2", szukaj: {tekst: ['projekt\w* geotechniczn', 'badań podłoża'], wszystkie: true}}
+    - {id: C2-BO-03, el: PT, opis: "Rzuty fundamentów i stropów, wsporniki", podstawa: "RPB § 24 pkt 1 lit. a", szukaj: {rysunki: ['fundament', 'strop|wspornik']}}
+    - {id: C2-BO-04, el: PT, opis: "Rysunki zbrojenia (ISO 3766) z uziomem fundamentowym", podstawa: "RPB § 24 pkt 1; W-187", szukaj: {rysunki: ['zbrojeni']}}
+    - {id: C2-BO-05, el: PT, opis: "Dokumentacja geologiczno-inżynierska", podstawa: "RPB § 23 pkt 3", szukaj: {}, nd: "warunki proste (P03)"}
+
+PT_IS:
+  opis: "PT-3 IS — projekt techniczny, instalacje sanitarne (rejestr C.2)"
+  nazwa_pliku: PT
+  symbol: IS
+  elementy: [PT]
+  wspolne: PT_WSPOLNE
+  pozycje:
+    - {id: C2-IS-01, el: PT, opis: "Ogrzewanie z automatyczną regulacją temperatury", podstawa: "RPB § 23 pkt 7 lit. a", szukaj: {tekst: ['ogrzewa', 'regulac'], wszystkie: true}}
+    - {id: C2-IS-02, el: PT, opis: "Wentylacja", podstawa: "RPB § 23 pkt 7 lit. d", szukaj: {tekst: ['wentylac']}}
+    - {id: C2-IS-03, el: PT, opis: "Instalacje wodociągowe, kanalizacyjne, wody opadowe", podstawa: "RPB § 23 pkt 7 lit. e", szukaj: {tekst: ['wodociąg', 'kanaliza'], wszystkie: true}}
+    - {id: C2-IS-04, el: PT, opis: "Powiązania z sieciami, obliczenia i dobory (obciążenie cieplne, strumienie, woda, retencja, hałas PC)", podstawa: "RPB § 23 pkt 8", szukaj: {tekst: ['§ 23 pkt 8\b', 'obciążeni\w* ciepln']}}
+    - {id: C2-IS-05, el: PT, opis: "Charakterystyka energetyczna (EP, U, sprawności)", podstawa: "RPB § 23 pkt 11; W-251", szukaj: {tekst: ['charakterystyk\w* energetyczn']}}
+    - {id: C2-IS-06, el: PT, opis: "Rzuty i schematy instalacji", podstawa: "RPB § 24 pkt 4 lit. a", szukaj: {rysunki: ['rzut|schemat']}}
+
+PT_IE:
+  opis: "PT-4 IE — projekt techniczny, instalacje elektryczne (rejestr C.2)"
+  nazwa_pliku: PT
+  symbol: IE
+  elementy: [PT]
+  wspolne: PT_WSPOLNE
+  pozycje:
+    - {id: C2-IE-01, el: PT, opis: "Instalacje elektroenergetyczne", podstawa: "RPB § 23 pkt 7 lit. g", szukaj: {tekst: ['elektroenerget']}}
+    - {id: C2-IE-02, el: PT, opis: "Instalacje telekomunikacyjne (światłowód)", podstawa: "RPB § 23 pkt 7 lit. h; W-196", szukaj: {tekst: ['telekomunik|światłow']}}
+    - {id: C2-IE-03, el: PT, opis: "Instalacja piorunochronna / analiza ryzyka", podstawa: "RPB § 23 pkt 7 lit. i; W-191", szukaj: {tekst: ['piorunochron|ryzyk\w* piorun']}}
+    - {id: C2-IE-04, el: PT, opis: "Bilans mocy", podstawa: "RPB § 23 pkt 11 lit. a", szukaj: {tekst: ['bilans\w* mocy']}}
+    - {id: C2-IE-05, el: PT, opis: "Rzuty instalacji, schemat rozdzielnicy, uziom", podstawa: "RPB § 24 pkt 4 lit. b", szukaj: {rysunki: ['rzut|schemat|uziom']}}
