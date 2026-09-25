@@ -172,8 +172,9 @@ def ocena_ryzyka(dane: DaneBudynku, par: ParametryOdgrom | None = None, pv=None)
         R = 2 * par.rho_gruntu / (3 * D)
         mat = "drut/płaskownik Cu 50 mm² lub StCu Ø10 mm lub StSt 30×3,5 mm, ≥ 0,5 m w gruncie, ≥ 1 m od ścian [ZAŁ]"
     else:
-        typ_u = "fundamentowy w ławach (zbrojenie + płaskownik/pręt w betonie) — WT §184 ust. 1" + (
-            "; UWAGA: przy izolacji przeciwwodnej z folii > 0,5 mm lub XPS na ławach — uziom otokowy" if typ_f == "lawy" else "")
+        typ_u = ("fundamentowy w płycie" if typ_f == "plyta" else "fundamentowy w ławach") + \
+            " (zbrojenie + płaskownik/pręt w betonie) — WT §184 ust. 1; UWAGA: przy izolacji przeciwwodnej z folii > 0,5 mm " \
+            "lub XPS pod/na fundamencie — uziom otokowy (PN-HD 60364-5-54 zał. C.2)"
         A_u = obr.area
         D = math.sqrt(4 * A_u / math.pi)
         R = 2 * par.rho_gruntu / (math.pi * D)

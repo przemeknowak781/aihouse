@@ -371,6 +371,7 @@ def test_model_nieogrzewane_bu():
     for p in raw2["pomieszczenia"]:
         if str(p["id"]) == "1.04":
             p["temp"] = None
+            p["ogrzewane"] = False
     m2 = Model(raw2, yaml.safe_load(D_TEST.read_text(encoding="utf-8")))
     ob = oblicz_obudowe(m2, zacienienie=False)
     W = bilans_wentylacji(ob.bryla, cfg=ob.cfg)
@@ -381,6 +382,14 @@ def test_model_nieogrzewane_bu():
     phi1 = {o.id: o.Phi_T for o in R["obc"].pomieszczenia}
     phi2 = {o.id: o.Phi_T for o in O.pomieszczenia}
     assert phi2["1.05"] > phi1["1.05"]
+    # brak `temp` bez `ogrzewane: false` → pomieszczenie ogrzewane, θ_int domyślna wg WT § 134 (+ ostrzeżenie)
+    raw3 = copy.deepcopy(raw)
+    for p in raw3["pomieszczenia"]:
+        if str(p["id"]) == "1.04":
+            p.pop("temp", None)
+    br3 = oblicz_obudowe(Model(raw3, None), zacienienie=False).bryla
+    assert br3.pomieszczenia["1.04"].ogrzewane and br3.pomieszczenia["1.04"].theta == 20.0
+    assert any("brak `temp`" in w for w in br3.ostrzezenia)
     w2 = EP.oblicz_ep(ob, W, EP.system_projektowy(ob.cfg, W, ob.bryla.A_f, O.dobor), obc=O)
     assert w2.H_tr_skladniki["przestrzenie nieogrzewane (b_u)"] > 0
 

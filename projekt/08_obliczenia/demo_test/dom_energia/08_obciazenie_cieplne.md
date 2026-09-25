@@ -9,12 +9,12 @@
 | Pom. | Nazwa | θ_int [°C] | A [m²] | Φ_T [W] | q_inf [m³/h] | q_su [m³/h] | q_tr [m³/h] | Φ_V [W] | Φ_RH [W] | Φ_HL [W] | [W/m²] |
 |:---|:---|:---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | 0.01 | Pokój dzienny | 20 | 45,3 | 1 497 | 7,3 | 59 | 0 | 160 | 0 | 1 657 | 36,6 |
-| 0.02 | Łazienka | 24 | 10,8 | 580 | 1,2 | 0 | 50 | 83 | 0 | 663 | 61,6 |
-| 0.03 | Kuchnia | 20 | 18,4 | 485 | 2,0 | 0 | 50 | 25 | 0 | 510 | 27,7 |
+| 0.02 | Łazienka | 24 | 10,8 | 584 | 1,2 | 0 | 50 | 83 | 0 | 667 | 61,9 |
+| 0.03 | Kuchnia | 20 | 18,4 | 490 | 2,0 | 0 | 50 | 25 | 0 | 515 | 28,0 |
 | 1.01 | Sypialnia | 20 | 51,2 | 1 302 | 5,5 | 67 | 0 | 146 | 0 | 1 448 | 28,3 |
 | 1.02 | Łazienka | 24 | 14,6 | 693 | 1,6 | 0 | 50 | 89 | 0 | 782 | 53,6 |
 | 1.03 | Pokój | 20 | 18,4 | 504 | 2,0 | 24 | 0 | 53 | 0 | 557 | 30,2 |
-|  | **Budynek** |  | 158,7 | 5 061 |  |  |  | 430 | 0 | **5 492** | 34,6 |
+|  | **Budynek** |  | 158,7 | 5 070 |  |  |  | 430 | 0 | **5 500** | 34,7 |
 
 θ_e = −18 °C; nawiew po odzysku θ_su = 16,6 °C (η = 0,85); n50 = 1,0 h⁻¹. Budynek: infiltracja z wsp. jednoczesności 0,5.
 Przestrzeń nieogrzewana 0.04: θ_u = −13,0 °C (b_u = 0,87).
@@ -23,7 +23,7 @@ Przestrzeń nieogrzewana 0.04: θ_u = −13,0 °C (b_u = 0,87).
 
 | Wielkość | Wartość |
 |:---|:---|
-| Projektowe obciążenie cieplne budynku Φ_HL | 5,49 kW |
+| Projektowe obciążenie cieplne budynku Φ_HL | 5,50 kW |
 | Wyrób (dane przykładowe) | Pompa ciepła powietrze–woda typu monoblok, czynnik R290, sterowanie inwerterowe — dane przykładowe z karty katalogowej typowej pompy ciepła powietrze–woda R290 klasy A+++ (35 °C) 7–8 kW (lub równoważna) |
 | Moc PC przy A−7/W35 (deklaracja) | 8,0 kW |
 | Moc PC przy θ_e = −18 °C (ekstrapolacja) | 5,80 kW |
@@ -49,7 +49,7 @@ Charakterystyka mocy PC — interpolacja liniowa punktów A−15/A−7/A2 (W35) 
 | R006 | dach DZ-P0 | 20,16 | 0,104 | 38,0 | 80 |
 | TB | mostki (H_TB rozdzielone proporcjonalnie do pola obudowy) | 125,73 | — | 38,0 | 696 |
 
-**0.02 Łazienka** (θ = 24 °C): Φ_T = 580 W
+**0.02 Łazienka** (θ = 24 °C): Φ_T = 584 W
 
 | Element | Opis | A [m²] | U [W/(m²K)] | ΔT [K] | Φ [W] |
 |:---|:---|---:|---:|---:|---:|
@@ -57,19 +57,19 @@ Charakterystyka mocy PC — interpolacja liniowa punktów A−15/A−7/A2 (W35) 
 | O0-02 | okno OP2 | 0,48 | 0,889 | 42,0 | 18 |
 | W008 | sciana_zewn SZ1 | 11,69 | 0,166 | 42,0 | 81 |
 | W009 | sciana_zewn SZ1 | 0,28 | 0,166 | 42,0 | 2 |
-| W010 | sciana_nieogrz → 0.04 (θ_u = −13,0 °C) | 8,65 | 0,234 | 37,0 | 75 |
+| W010 | sciana_nieogrz → 0.04 (θ_u = −13,0 °C) | 8,65 | 0,246 | 37,0 | 79 |
 | W011 | sciana_wewn → 0.03 (20 °C) | 11,84 | 2,037 | 4,0 | 97 |
 | F012 | grunt POD-0 (f_g1·f_g2·G_w = 0,556) | 10,77 | 0,130 | 42,0 | 33 |
 | C013 | strop_wewn → 1.01 (20 °C) | 8,04 | 0,268 | 4,0 | 9 |
 | TB | mostki (H_TB rozdzielone proporcjonalnie do pola obudowy) | 31,87 | — | 42,0 | 195 |
 
-**0.03 Kuchnia** (θ = 20 °C): Φ_T = 485 W
+**0.03 Kuchnia** (θ = 20 °C): Φ_T = 490 W
 
 | Element | Opis | A [m²] | U [W/(m²K)] | ΔT [K] | Φ [W] |
 |:---|:---|---:|---:|---:|---:|
 | W015 | sciana_wewn → 0.02 (24 °C) | 11,84 | 2,037 | −4,0 | −97 |
 | O0-06@0.03 | drzwi → 0.04 (θ_u = −13,0 °C) | 1,89 | 1,100 | 33,0 | 69 |
-| W016 | sciana_nieogrz → 0.04 (θ_u = −13,0 °C) | 12,96 | 0,234 | 33,0 | 100 |
+| W016 | sciana_nieogrz → 0.04 (θ_u = −13,0 °C) | 12,96 | 0,246 | 33,0 | 105 |
 | W017 | sciana_zewn SZ1 | 0,28 | 0,166 | 38,0 | 2 |
 | O0-03 | okno OP3 | 1,80 | 0,729 | 38,0 | 50 |
 | W018 | sciana_zewn SZ1 | 10,37 | 0,166 | 38,0 | 65 |

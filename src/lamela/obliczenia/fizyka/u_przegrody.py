@@ -442,7 +442,7 @@ def poprawki_domyslne(rola: str, warstwy: list[dict], materialy: Any, zal: Zaloz
     zewnętrzną z tynkiem (dane przykładowe ETA); dach odwrócony — p wg danych klimatycznych (założenie)."""
     fun = [funkcja_warstwy(mat_props(materialy, w.get("mat")), w) for w in warstwy]
     pop = PoprawkiU(poziom_pustek=1)
-    if rola == "sciana_zewn" and "izolacja" in fun:
+    if rola in ("sciana_zewn", "sciana_nieogrz") and "izolacja" in fun:
         i_iz = max(i for i, f in enumerate(fun) if f == "izolacja")
         if any(f == "tynk" for f in fun[i_iz + 1:]):          # ETICS: tynk na izolacji
             L = wyrob("laczniki", "ETICS")

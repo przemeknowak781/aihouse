@@ -282,17 +282,19 @@ def odbiorniki_z_modelu(dane: DaneBudynku, par: ParametryBilans | None = None, o
     return out
 
 
-def _przypisz_fazy(odb: list[Odbiornik]) -> dict:
+def _przypisz_fazy(odb: list[Odbiornik], wsp_dlm: float = 1.0) -> dict:
+    """Przypisanie faz (1f: zachłannie do najmniej obciążonej fazy); odbiorniki sterowane — moc po ograniczeniu DLM."""
     fazy = {"L1": 0.0, "L2": 0.0, "L3": 0.0}
+    Ps = lambda o: o.P_s * (wsp_dlm if o.sterowany else 1.0)  # noqa: E731
     for o in odb:
         if o.fazy == 3:
             o.faza = "L1L2L3"
             for k in fazy:
-                fazy[k] += o.P_s / 3.0
-    for o in sorted([o for o in odb if o.fazy == 1], key=lambda o: -max(o.P_s, 0.05 * o.P)):
+                fazy[k] += Ps(o) / 3.0
+    for o in sorted([o for o in odb if o.fazy == 1], key=lambda o: -max(Ps(o), 0.05 * o.P)):
         k = min(fazy, key=fazy.get)
         o.faza = k
-        fazy[k] += o.P_s
+        fazy[k] += Ps(o)
     return fazy
 
 
@@ -305,8 +307,22 @@ def bilans_mocy(dane: DaneBudynku, odbiorniki: list[Odbiornik], par: ParametryBi
     P_bez = sum(o.P_s for o in odbiorniki)
     P_nster = sum(o.P_s for o in odbiorniki if not o.sterowany)
     P_ster = sum(o.P_s for o in odbiorniki if o.sterowany)
-    P_dlm = P_nster + min(P_ster, max(0.0, P_przyl - P_nster))
-    fazy = _przypisz_fazy(odbiorniki)
+    P_lim = min(P_przyl, math.sqrt(3) * UN * I_zab * par.cosphi_sr / 1000.0)   # granica DLM: moc przyłączeniowa i prąd I_zab
+    P_dlm = P_nster + min(P_ster, max(0.0, P_lim - P_nster))
+    wsp_dlm = (P_dlm - P_nster) / P_ster if P_ster > 0 else 1.0
+    fazy = _przypisz_fazy(odbiorniki, wsp_dlm)
+    P_faza_lim = U0 * I_zab * par.cosphi_sr / 1000.0
+    if P_ster > 0 and max(fazy.values()) > P_faza_lim:          # DLM kontroluje prądy fazowe — dalsze ograniczenie
+        lo, hi = 0.0, wsp_dlm
+        for _ in range(40):
+            mid = 0.5 * (lo + hi)
+            if max(_przypisz_fazy(odbiorniki, mid).values()) > P_faza_lim:
+                hi = mid
+            else:
+                lo = mid
+        wsp_dlm = lo
+        fazy = _przypisz_fazy(odbiorniki, wsp_dlm)
+        P_dlm = P_nster + wsp_dlm * P_ster
     sr = sum(fazy.values()) / 3.0
     asym = (max(fazy.values()) - min(fazy.values())) / sr if sr > 0 else 0.0
     I_B = P_dlm * 1000.0 / (math.sqrt(3) * UN * par.cosphi_sr)
@@ -327,14 +343,15 @@ def bilans_mocy(dane: DaneBudynku, odbiorniki: list[Odbiornik], par: ParametryBi
         war.append(Warunek("Moc PV ≤ moc przyłączeniowa (zgłoszenie mikroinstalacji)", pv_kWp, "<=", P_przyl, "kW",
                            "Pr. energ. art. 7 ust. 8d4", "W-194"))
     if P_bez > P_przyl:
-        war.append(Warunek("Moc szczytowa BEZ zarządzania mocą ≤ moc przyłączeniowa (informacyjnie — wymagany DLM)", P_bez, "<=", P_przyl,
-                           "kW", "R7 §3.1", "W-192", uwagi="DLM: ograniczenie EV i blokada grzałek"))
+        war.append(Warunek(f"Moc szczytowa BEZ zarządzania mocą {f(P_bez, 1)} kW > P_przył — DLM WYMAGANY (ograniczenie EV, blokada grzałek)",
+                           P_bez, "info", P_przyl, "kW", "R7 §3.1", "W-192"))
     kroki = [
         Krok("Moc zainstalowana (bez generacji PV)", "P_i = ΣP", "", P_inst, "kW", "", 1),
         Krok("Moc szczytowa bez zarządzania mocą", "P_s = Σk_j·P", "", P_bez, "kW", "k_j [ZAŁ]", 1),
-        Krok("Moc szczytowa z DLM (odbiorniki sterowane ograniczone do mocy przyłączeniowej)",
-             "P_s,DLM = P_nst + min(P_st; P_przył − P_nst)", f"{f(P_nster, 2)} + min({f(P_ster, 2)}; {f(P_przyl, 1)} − {f(P_nster, 2)})",
-             P_dlm, "kW", "", 1),
+        Krok("Granica zarządzania mocą (moc przyłączeniowa i prąd zabezpieczenia przy cos φ)", "P_lim = min(P_przył; √3·U·I_zab·cos φ)",
+             f"min({f(P_przyl, 1)}; √3·400·{f(I_zab, 0)}·{f(par.cosphi_sr, 2)}/1000)", P_lim, "kW", "", 2),
+        Krok("Moc szczytowa z DLM (odbiorniki sterowane ograniczone)", "P_s,DLM = P_nst + min(P_st; P_lim − P_nst)",
+             f"{f(P_nster, 2)} + min({f(P_ster, 2)}; {f(P_lim, 2)} − {f(P_nster, 2)})", P_dlm, "kW", "", 1),
         Krok("Prąd szczytowy", "I_B = P_s/(√3·U·cos φ)", f"{f(P_dlm * 1000, 0)}/(√3·400·{f(par.cosphi_sr, 2)})", I_B, "A", "", 1),
         Krok("Kontrolnie N SEP-E-002: 30 kVA + ogrzewanie elektryczne (PC + grzałka)", "P = 30·cos φ + P_ogrz",
              f"30·{f(par.cosphi_sr, 2)} + {f(ogrz, 2)}", sep, "kW", "R7-L08 [W]", 1),

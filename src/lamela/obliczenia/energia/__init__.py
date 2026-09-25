@@ -22,7 +22,8 @@ wartości przykładowe / domyślne (oznaczane w raportach):
       hydroizolacja|przeciwwilgociowa|wiatroizolacja|drenaz|geowloknina|bariera_korzenna|substrat|…]
   przegrody.<kod>.warstwy[]: [frakcje: [{mat, udzial}], grupa] (warstwa niejednorodna), [pustka: nw|sw|dw],
       [klin: {d_min, d_max, ksztalt: prostokat|trojkat_max|trojkat_min}], [lambda], [R], [funkcja]
-  pomieszczenia[]: temp (θ_int wg WT § 134; null lub `ogrzewane: false` — nieogrzewane), went {naw, wyw},
+  pomieszczenia[]: temp (θ_int wg WT § 134; brak → 20/24 °C wg rodzaju + ostrzeżenie; nieogrzewane — `ogrzewane: false`
+      albo rodzaj/nazwa „garaż”), went {naw, wyw},
       [rodzaj: kuchnia|lazienka|wc|pralnia|pomocnicze|techniczne|pokoj|komunikacja|garaz], [podloga: <kod przegrody>]
   stropy[]: sufit (kod PRZEGRODY z pełnymi warstwami pod płytą — obowiązkowo nad garażem i nad powietrzem zewn.), mat
   dachy[]: przegroda (pełne warstwy, izolacja spadkowa `klin` albo wpusty + spadek)

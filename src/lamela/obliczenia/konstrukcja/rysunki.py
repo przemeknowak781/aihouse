@@ -132,8 +132,11 @@ def rys_plyta(an, g, path: Path) -> list:
         ax.autoscale_view()
         ax.set_title(tyt, loc="left", fontsize=8.5)
         k = int(np.argmax(val))
-        ax.annotate(f"max {_pl(val[k], 1)}", fe.el_c[k], xytext=(0, 10), textcoords="offset points", fontsize=7, ha="center",
-                    color=INK, arrowprops=dict(arrowstyle="-", color=INK2, lw=0.6))
+        cx0 = np.mean(fe.el_c[:, 0])
+        ha = "right" if fe.el_c[k][0] > cx0 else "left"
+        ax.annotate(f"max {_pl(val[k], 1)}", fe.el_c[k], xytext=(-6 if ha == "right" else 6, 10), textcoords="offset points",
+                    fontsize=7, ha=ha, color=INK, bbox=dict(fc="white", ec="none", alpha=0.8, pad=0.5),
+                    arrowprops=dict(arrowstyle="-", color=INK2, lw=0.6))
         cb = fig.colorbar(pc, ax=ax, shrink=0.8, pad=0.02)
         cb.set_label(lab, fontsize=7)
         cb.ax.tick_params(labelsize=6.5)
@@ -224,8 +227,8 @@ def rys_schody(wyn, odc, path: Path) -> list:
         zz = np.interp(xx, xs, zs) - 0.2
         ax.add_patch(MplPolygon([[xx, zz], [xx - 0.08, zz - 0.14], [xx + 0.08, zz - 0.14]], closed=True, fc="white", ec=INK))
     ax.set_aspect("equal")
-    ax.set_title(f"{wyn.nazwa} — schemat (rzut pionowy, L = {_pl(wyn.L, 3)} m, α = {_pl(wyn.alfa, 1)}°, h = "
-                 f"{_pl(wyn.h * 100, 0)} cm)", loc="left")
+    ax.set_title(f"{wyn.nazwa} — schemat (widok boczny; L = {_pl(wyn.L, 3)} m, α = {_pl(wyn.alfa, 1)}°, h = "
+                 f"{_pl(wyn.h * 100, 0)} cm)", loc="left", fontsize=8.5)
     ax.set_ylabel("z [m]")
     ax.grid(color=GRID, lw=0.4)
     ob = wyn.obwiednia
@@ -245,6 +248,8 @@ def rys_sciana(w, pr, path: Path) -> list:
     for o in pr["otw"]:
         ax.add_patch(Rectangle((o.s0, o.z0), o.s1 - o.s0, o.z1 - o.z0, fc="white", ec=INK2, lw=0.8))
         ax.text((o.s0 + o.s1) / 2, (o.z0 + o.z1) / 2, o.id, ha="center", va="center", fontsize=6.5, color=INK2)
+    ax.set_xlim(-0.2, w.L + 0.2)
+    ax.set_ylim(w.z_od - 0.15, w.z_do + 0.15)
     ax.set_ylabel("z [m]")
     ax.set_title(f"Ściana {w.id} — widok (od punktu początkowego osi)", loc="left")
     ax.grid(color=GRID, lw=0.4)
@@ -343,8 +348,12 @@ def rys_fundamenty(an, path: Path) -> list:
             cx, cy = np.mean(np.asarray(pts), axis=0)
         eta = etas.get(fid, 0)
         ax.add_patch(MplPolygon(pts, closed=True, fc=FILL, ec=INK, lw=0.9))
-        ax.text(cx, cy, f"{fid}\nη = {_pl(eta * 100, 0)}%" + (" ✗" if eta > 1 else ""), ha="center", va="center", fontsize=6.8,
-                color=INK, bbox=dict(fc="white", ec=GRID, lw=0.4, boxstyle="round,pad=0.2"))
+        P = np.asarray(pts, float)
+        maly = max(np.ptp(P[:, 0]), np.ptp(P[:, 1])) < 2.0
+        ax.annotate(f"{fid}\nη = {_pl(eta * 100, 0)}%" + (" ✗" if eta > 1 else ""), (cx, cy),
+                    xytext=(0, 26) if maly else (0, 0), textcoords="offset points", ha="center", va="center", fontsize=6.8,
+                    color=INK, bbox=dict(fc="white", ec=GRID, lw=0.4, boxstyle="round,pad=0.2"),
+                    arrowprops=dict(arrowstyle="-", color=INK2, lw=0.5) if maly else None)
     for c in m.slupy():
         ax.plot(*c["xy"], "s", color=INK, ms=4)
     ax.set_aspect("equal")
@@ -365,11 +374,11 @@ def rys_zaspy(sniegi: list, path: Path) -> list:
     for k, sn in enumerate(sniegi[:4]):
         L = max(sn.l_s * 1.3, 6.0)
         x = np.linspace(0, L, 200)
-        ax.plot(x, sn.profil(x), color=cols[k], lw=1.5, label=sn.nazwa.replace("Śnieg — ", "")[:70])
+        ax.plot(x, sn.profil(x), color=cols[k], lw=1.5, label=sn.nazwa.replace("Śnieg — ", "").split(" — ")[0][:60])
     ax.set_xlabel("odległość od przeszkody / uskoku [m]")
     ax.set_ylabel("s [kN/m²]")
     ax.grid(color=GRID, lw=0.4)
     ax.legend(fontsize=6.3, frameon=False, loc="upper right")
-    ax.set_title("Obciążenie śniegiem — zaspy (wartości charakterystyczne; B2 — sytuacja wyjątkowa)", loc="left")
+    ax.set_title("Zaspy śnieżne — wartości charakterystyczne", loc="left")
     fig.tight_layout()
     return [(_save(fig, path), "Rozkłady obciążenia śniegiem w zaspach (PN-EN 1991-1-3 p. 5.3.6, 6.2, zał. B).")]

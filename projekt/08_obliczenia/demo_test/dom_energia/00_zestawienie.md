@@ -8,11 +8,11 @@ Model: `tools/test_obliczenia_dane/dom_energia.yaml` — model TESTOWY bibliotek
 |:---|:---|:---|
 | A_f (pow. o regulowanej temperaturze) | 158,69 m² |  |
 | Kubatura netto strefy ogrzewanej | 426,9 m³ |  |
-| H_tr / H_ve | 126,8 / 17,5 W/K |  |
+| H_tr / H_ve | 127,0 / 17,5 W/K |  |
 | H_TB (mostki) | 60,2 W/K | Ψ: domyślna, przykładowa |
-| Obciążenie cieplne Φ_HL (θ_e = −18 °C) | 5,49 kW | 34,6 W/m² |
+| Obciążenie cieplne Φ_HL (θ_e = −18 °C) | 5,50 kW | 34,7 W/m² |
 | Wentylacja — strumień projektowy | 150 m³/h | ✔ spełnia |
-| EU / EK / EP | 59,7 / 25,3 / **39,6** kWh/(m²·rok) | EP_max = 70 — ✔ spełnia |
+| EU / EK / EP | 59,8 / 25,4 / **39,7** kWh/(m²·rok) | EP_max = 70 — ✔ spełnia |
 | U_oze / E_CO2 | 76,9 % / 1,39 t/rok |  |
 
 ## Zgodność z wymaganiami (WT zał. 2, cele projektu)
@@ -22,7 +22,7 @@ Model: `tools/test_obliczenia_dane/dom_energia.yaml` — model TESTOWY bibliotek
 | U POD-0 (grunt, PN-EN ISO 13370) | 0,13 | ≤ 0,30 | ✔ spełnia | ≤ 0,20: ✔ spełnia |
 | U SZ1 (sciana_zewn) | 0,17 | ≤ 0,20 | ✔ spełnia | ≤ 0,15: ✘ NIE spełnia |
 | U DZ-P0 (dach) | 0,10 | ≤ 0,15 | ✔ spełnia | ≤ 0,12: ✔ spełnia |
-| U SWG (sciana_nieogrz) | 0,23 | ≤ 0,30 | ✔ spełnia | ≤ 0,25: ✔ spełnia |
+| U SWG (sciana_nieogrz) | 0,25 | ≤ 0,30 | ✔ spełnia | ≤ 0,25: ✔ spełnia |
 | U ST3\|P1\|zewn (strop_zewn) | 0,090 | ≤ 0,15 | ✔ spełnia | — |
 | U SD-D1 (dach) | 0,082 | ≤ 0,15 | ✔ spełnia | ≤ 0,12: ✔ spełnia |
 | U ST2\|P1\|dol (strop_nieogrz) | 0,10 | ≤ 0,25 | ✔ spełnia | — |
@@ -38,7 +38,7 @@ Model: `tools/test_obliczenia_dane/dom_energia.yaml` — model TESTOWY bibliotek
 | Kondensacja międzywarstwowa | 6/6 dopuszczalna | WT zał. 2 pkt 2.2.5 | ✔ spełnia | — |
 | Ciągłość warstw (4 linie) | 7/7 przegród | brief § 9 | ✔ spełnia | — |
 | Izolacja obwodowa R ≥ 2,0 | 4,29 | WT zał. 2 pkt 1.4 | ✔ spełnia |  |
-| EP ≤ EP_max | 39,6 | ≤ 70 (WT § 329) | ✔ spełnia | A: PC R290 + PV + rekuperacja |
+| EP ≤ EP_max | 39,7 | ≤ 70 (WT § 329) | ✔ spełnia | A: PC R290 + PV + rekuperacja |
 
 ## Pliki
 

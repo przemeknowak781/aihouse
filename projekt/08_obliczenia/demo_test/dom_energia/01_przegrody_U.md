@@ -13,7 +13,7 @@
 | POD-G | Posadzka garażu na gruncie | podłoga na gruncie | R_f = 0,07 | 0,000 | 0,93 | — | — | — | — |
 | SZ1 | Ściana zewnętrzna, silikat 18 + ETICS EPS 20 | ściana zewnętrzna | 6,90 | 0,021 | 0,17 | 0,20 | ✔ spełnia | 0,15 | ✘ NIE spełnia |
 | DZ-P0 | Stropodach zielony ekstensywny nad parterem | stropodach/dach | 10,50 | 0,009 | 0,10 | 0,15 | ✔ spełnia | 0,12 | ✔ spełnia |
-| SWG | Ściana dom–garaż, silikat 18 + EPS 12 od garażu | ściana do pom. nieogrzewanego | 4,41 | 0,008 | 0,23 | 0,30 | ✔ spełnia | 0,25 | ✔ spełnia |
+| SWG | Ściana dom–garaż, silikat 18 + EPS 12 od garażu | ściana do pom. nieogrzewanego | 4,41 | 0,020 | 0,25 | 0,30 | ✔ spełnia | 0,25 | ✔ spełnia |
 | SZG | Ściana zewnętrzna garażu nieogrzewanego, silikat 24 | ściana zewnętrzna | 0,51 | 0,000 | 2,0 | — | — | — | — |
 | SD-G | Dach garażu (nieogrzewany) | stropodach/dach | 0,23 | 0,000 | 4,3 | — | — | — | — |
 | ST3\|P1\|zewn | podłoga POD-1 + płyta ZB_C30 20 cm + sufit SUF-Z | strop nad powietrzem zewn. | 11,76 | 0,005 | 0,090 | 0,15 | ✔ spełnia | — | — |
@@ -104,9 +104,9 @@ Kierunek strumienia: poziomo; R_si = 0,13 m²K/W, R_se = 0,13 m²K/W.
 
 R_T = 0,13 + Σ R_j + 0,13 = 4,412 m²K/W; U₀ = 1/R_T = 0,2266 W/(m²K).
 
-Poprawki (zał. F): ΔU_g = 0,0077, ΔU_f = 0,0000, ΔU_r = 0,0000 W/(m²K); U_c = 0,2343 W/(m²K).
+Poprawki (zał. F): ΔU_g = 0,0077, ΔU_f = 0,0120, ΔU_r = 0,0000 W/(m²K); U_c = 0,2463 W/(m²K).
 
-**U = 0,23 W/(m²K)**; wymaganie WT: U ≤ 0,30 (✔ spełnia); cel: 0,25 (✔ spełnia). Źródło wymagania: WT zał. 2 pkt 1.1 lp. 2 (ściana dom–garaż) (W-243); cel: R6 3.2 [ZAŁ].
+**U = 0,25 W/(m²K)**; wymaganie WT: U ≤ 0,30 (✔ spełnia); cel: 0,25 (✔ spełnia). Źródło wymagania: WT zał. 2 pkt 1.1 lp. 2 (ściana dom–garaż) (W-243); cel: R6 3.2 [ZAŁ].
 
 ### SZG — Ściana zewnętrzna garażu nieogrzewanego, silikat 24 (ściana zewnętrzna)
 

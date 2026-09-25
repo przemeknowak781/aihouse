@@ -16,32 +16,32 @@
 | dachy/stropodachy | 9,03 |
 | stropy nad powietrzem zewn. | 0,55 |
 | grunt (f_g1·f_g2·G_w·A·U) | 4,64 |
-| przestrzenie nieogrzewane (b_u) | 8,00 |
+| przestrzenie nieogrzewane (b_u) | 8,22 |
 | mostki cieplne H_TB | 60,21 |
-| **H_tr razem** | **126,76** |
+| **H_tr razem** | **126,98** |
 | H_ve = 0,34·[(1 − η_oc)·V_su + V_x] (V_su = 150 m³/h, η_oc = 0,85, V_x = 29,9 m³/h) | 17,46 |
 
-A_f = 158,69 m²; V = 426,9 m³; θ_int,H = 20,64 °C; C_m = 41,3 MJ/K; τ = 79,5 h; a_H = 6,30.
+A_f = 158,69 m²; V = 426,9 m³; θ_int,H = 20,64 °C; C_m = 41,3 MJ/K; τ = 79,3 h; a_H = 6,29.
 
 ### Bilans miesięczny [kWh]
 
 | Wielkość | I | II | III | IV | V | VI | VII | VIII | IX | X | XI | XII | Rok |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
 | θ_e [°C] | 0,2 | −1,8 | 2,7 | 8,3 | 13,0 | 16,8 | 18,2 | 18,4 | 13,5 | 7,0 | 2,2 | −0,1 |  |
-| Q_tr | 1 931 | 1 908 | 1 689 | 1 130 | 724 | 348 | 225 | 213 | 650 | 1 285 | 1 686 | 1 960 | 13 750 |
+| Q_tr | 1 935 | 1 911 | 1 692 | 1 132 | 726 | 348 | 226 | 213 | 651 | 1 288 | 1 689 | 1 963 | 13 773 |
 | Q_ve | 266 | 263 | 233 | 156 | 100 | 48 | 31 | 29 | 90 | 177 | 232 | 270 | 1 894 |
 | Q_int | 803 | 725 | 803 | 777 | 803 | 777 | 803 | 803 | 777 | 803 | 777 | 803 | 9 453 |
 | Q_sol | 264 | 295 | 507 | 618 | 708 | 753 | 738 | 645 | 514 | 348 | 250 | 150 | 5 789 |
-| γ | 0,49 | 0,47 | 0,68 | 1,08 | 1,83 | 3,87 | 6,01 | 5,97 | 1,75 | 0,79 | 0,54 | 0,43 |  |
-| η_H,gn | 0,995 | 0,995 | 0,970 | 0,825 | 0,540 | 0,258 | 0,166 | 0,167 | 0,565 | 0,943 | 0,991 | 0,997 |  |
-| Q_H,nd | 1 136 | 1 156 | 652 | 134 | 8 | 0 | 0 | 0 | 10 | 377 | 900 | 1 280 | 5 653 |
+| γ | 0,48 | 0,47 | 0,68 | 1,08 | 1,83 | 3,86 | 6,00 | 5,96 | 1,74 | 0,79 | 0,53 | 0,43 |  |
+| η_H,gn | 0,995 | 0,995 | 0,970 | 0,826 | 0,541 | 0,259 | 0,167 | 0,168 | 0,566 | 0,943 | 0,991 | 0,997 |  |
+| Q_H,nd | 1 139 | 1 159 | 655 | 135 | 8 | 0 | 0 | 0 | 10 | 379 | 903 | 1 283 | 5 672 |
 | Q_W,nd | 325 | 293 | 325 | 314 | 325 | 314 | 325 | 325 | 314 | 325 | 314 | 325 | 3 822 |
-| Q_K,H | 295 | 301 | 170 | 35 | 2 | 0 | 0 | 0 | 2 | 98 | 234 | 333 | 1 470 |
+| Q_K,H | 296 | 301 | 170 | 35 | 2 | 0 | 0 | 0 | 3 | 99 | 235 | 334 | 1 475 |
 | Q_K,W | 162 | 146 | 162 | 157 | 162 | 157 | 162 | 162 | 157 | 162 | 157 | 162 | 1 908 |
 | E_pom | 62 | 56 | 62 | 60 | 44 | 42 | 44 | 44 | 42 | 62 | 60 | 62 | 641 |
 | E_PV | 126 | 154 | 303 | 396 | 516 | 517 | 492 | 421 | 311 | 184 | 121 | 73 | 3 614 |
 | a_n | 0,70 | 0,68 | 0,49 | 0,38 | 0,31 | 0,32 | 0,33 | 0,35 | 0,41 | 0,57 | 0,70 | 0,80 |  |
-| E_PV,sys | 88 | 105 | 148 | 151 | 161 | 166 | 162 | 147 | 127 | 105 | 85 | 59 | 1 504 |
+| E_PV,sys | 88 | 105 | 148 | 151 | 161 | 166 | 162 | 147 | 127 | 105 | 85 | 59 | 1 505 |
 
 ![Bilans miesięczny](bilans_energii.png)
 
@@ -63,22 +63,22 @@ A_f = 158,69 m²; V = 426,9 m³; θ_int,H = 20,64 °C; C_m = 41,3 MJ/K; τ = 79,
 
 | Wskaźnik | Wartość | Jedn. |
 |:---|---:|:---|
-| Q_H,nd (ogrzewanie i wentylacja) | 5 653 | kWh/rok |
+| Q_H,nd (ogrzewanie i wentylacja) | 5 672 | kWh/rok |
 | Q_W,nd (c.w.u., wzór (61)) | 3 822 | kWh/rok |
-| EU = (Q_H,nd + Q_W,nd)/A_f | 59,7 | kWh/(m²·rok) |
-| Q_K = Q_K,H + Q_K,W + E_el,pom | 4 020 | kWh/rok |
-| EK = Q_K/A_f | 25,3 | kWh/(m²·rok) |
-| Produkcja PV / zużyta przez systemy (w = 0) | 3 614 / 1 504 | kWh/rok |
-| EP_H (ogrzewanie + pomocnicze H) | 23,8 | kWh/(m²·rok) |
+| EU = (Q_H,nd + Q_W,nd)/A_f | 59,8 | kWh/(m²·rok) |
+| Q_K = Q_K,H + Q_K,W + E_el,pom | 4 025 | kWh/rok |
+| EK = Q_K/A_f | 25,4 | kWh/(m²·rok) |
+| Produkcja PV / zużyta przez systemy (w = 0) | 3 614 / 1 505 | kWh/rok |
+| EP_H (ogrzewanie + pomocnicze H) | 23,9 | kWh/(m²·rok) |
 | EP_W (c.w.u. + pomocnicze W) | 15,8 | kWh/(m²·rok) |
-| **EP = Q_p/A_f** | **39,6** | kWh/(m²·rok) |
+| **EP = Q_p/A_f** | **39,7** | kWh/(m²·rok) |
 | EP_max (WT § 329) | 70,0 | kWh/(m²·rok) |
 | Wynik | ✔ spełnia |  |
 | E_CO2 | 0,0088 | t CO2/(m²·rok) |
 | U_oze (wzór (100)) [INT] | 76,9 | % |
-| Koszt energii (eksploatacja) [ZAŁ] | 3 181 | zł/rok |
+| Koszt energii (eksploatacja) [ZAŁ] | 3 186 | zł/rok |
 
-Autokonsumpcja PV (symulacja godzinowa TMY): produkcja 3 614 kWh/rok, zużyta przez systemy techniczne 1 504 kWh/rok (a = 0,42), przez urządzenia domowe 683 kWh/rok; reszta oddana do sieci (nie obniża EP).
+Autokonsumpcja PV (symulacja godzinowa TMY): produkcja 3 614 kWh/rok, zużyta przez systemy techniczne 1 505 kWh/rok (a = 0,42), przez urządzenia domowe 682 kWh/rok; reszta oddana do sieci (nie obniża EP).
 
 **Założenia i dane wejściowe:**
 
@@ -97,7 +97,7 @@ Autokonsumpcja PV (symulacja godzinowa TMY): produkcja 3 614 kWh/rok, zużyta 
 
 | Wariant | EP [kWh/(m²·rok)] | EP ≤ EP_max |
 |:---|:---|:---|
-| A (n50 = 4 h⁻¹ — brak próby szczelności) | 50,1 | ✔ spełnia |
+| A (n50 = 4 h⁻¹ — brak próby szczelności) | 50,2 | ✔ spełnia |
 | A (Ψ „dobra praktyka” zamiast domyślnych PN-EN ISO 14683: H_TB = 15,9 zamiast 60,2 W/K) | 26,3 | ✔ spełnia |
 
 ---

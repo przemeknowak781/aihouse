@@ -569,7 +569,10 @@ def raport_alternatywy(wyniki: list[WynikEP], zal: Zalozenia | None = None) -> s
     s.append(tabela_md(["System", "EU", "EK", "EP", "EP ≤ 70", "E_CO2 [t/rok]", "U_oze [%]", "Koszt [zł/rok] " + ZAL,
                         "Nakłady [zł] " + ZAL], rows, "lrrrlrrrr"))
     s.append("")
-    s.append("Jednostki: EU, EK, EP — kWh/(m²·rok).")
+    s.append("Jednostki: EU, EK, EP — kWh/(m²·rok). Koszt — energia systemów technicznych (ogrzewanie, c.w.u., urządzenia "
+             "pomocnicze) z sieci wg cen założonych + opłaty stałe; bez urządzeń gospodarstwa domowego i bez wartości energii "
+             "PV oddanej do sieci lub zużytej przez urządzenia domowe (zachowawczo dla wariantów z PV). Nakłady — tylko "
+             "elementy różniące warianty.")
     s.append("")
     wyb = min((w for w in wyniki if w.spelnia), key=lambda w: (w.EP, w.koszt_zl), default=None)
     if wyb:
