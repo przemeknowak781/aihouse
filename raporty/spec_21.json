@@ -1,5 +1,6 @@
 {
- "title": "Korekta Inwestora: „S” z przesuniętych brył, garaż w parterze — panel koncepcji uruchomiony ponownie",
+ "nr": 21,
+ "title": "Biblioteki instalacji ukończone, konstrukcja liczy płyty numerycznie; sędzia J3 kończy ocenę",
  "stages": [
   [
    "Analiza szkicu — interpretacja v2 („S” z brył, garaż)",
@@ -55,9 +56,24 @@
   ]
  ],
  "notes": [
+  "NADZÓR (05:07): 3 agentów aktywnych, bez zastojów; najdłuższa bezczynność 1 min; zmiany w repo 0 min temu.",
   "Biblioteka instalacji ukończona (22/22): woda, kanalizacja, deszczówka z przelewami awaryjnymi, decyzja o drenażu, PC z hałasem na granicy, bilans mocy 24/27 kW, 24 obwody (ΔU ≤ 2,37 %), PV 6,45 kWp, ocena ryzyka piorunowego.",
   "Biblioteka konstrukcyjna (w toku): płyty liczone numerycznie — obwiednia ULS z momentami Wood–Armera, ugięcia SLS; ławy, belki, fundamenty z rysunkami schematów.",
   "Sędzia J3 (wierność szkicowi, potencjał katalogowy) kończy ocenę; J1 i J2 wskazali W2 jako bazę.",
   "Solver mostków: poprawki po niezależnej weryfikacji."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/projekt/08_obliczenia/demo_test/konstrukcja/rys/plyta_1_ST1_mapy.png",
+   "caption": "Demo: płyta ST1 — Wood–Armer ULS, ugięcie SLS"
+  },
+  {
+   "path": "/home/user/aihouse/projekt/08_obliczenia/demo_test/konstrukcja/rys/fundamenty_plan.png",
+   "caption": "Demo: plan fundamentów (model testowy)"
+  },
+  {
+   "path": "/home/user/aihouse/projekt/08_obliczenia/demo_test/konstrukcja/rys/lawa_L1.png",
+   "caption": "Demo: ława L1 — schemat i nośność"
+  }
  ]
 }
