@@ -25,7 +25,7 @@ wyposazenie:
   - {kond: P0, typ: szafa, xy: [12.105, 2.0], obrot: 0, wym: [1.4, 0.6], opis: 'szafa przedsionka (odzież, obuwie)'}
   - {kond: P0, typ: szafa, xy: [14.0, 0.105], obrot: 90, wym: [1.3, 0.35], opis: szafka na obuwie}
   - {kond: P0, typ: pompa_ciepla, xy: [15.75, 2.77], obrot: -90, wym: [0.6, 0.4], opis: 'moduł hydrauliczny PC R290 (monoblok zewn.) — x 15,45–16,05, poza łukiem drzwi O0-23 (A3 D-8)'}
-  - {kond: P0, typ: zasobnik, xy: [16.55, 2.77], obrot: -90, wym: [0.7, 0.7], opis: zasobnik CWU 300 dm³}
+  - {kond: P0, typ: zasobnik, xy: [16.55, 2.77], obrot: -90, wym: [0.75, 0.75], opis: 'zasobnik CWU 400 dm³ z wężownicą dla PC (moduł wody: V_zas ≥ 367 dm³ — runda 2, BRAKI PT-IS poz. 19)'}
   - {kond: P0, typ: zasobnik, xy: [17.5, 2.77], obrot: -90, wym: [0.55, 0.55], opis: bufor 100 dm³}
   - {kond: P0, typ: urzadzenie, xy: [14.95, 0.9], obrot: 0, wym: [0.8, 0.25], opis: rozdzielnica główna RG}
   - {kond: P0, typ: urzadzenie, xy: [18.27, 1.2], obrot: 180, wym: [0.4, 0.2], opis: wodomierz + zawór antyskażeniowy (PN-EN 1717)}

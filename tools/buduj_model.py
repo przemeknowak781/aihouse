@@ -597,7 +597,7 @@ PMS("0.11", "P0", "Przedsionek gospodarczy", (13.4, 1.4), kat="ruchu", posadzka=
     uwagi="zakupy i ogród: garaż → przedsionek → kuchnia ≈ 6 m (codzienne wejście rodziny — DG2 do holu, A3 I-4); szafa na odzież "
           "i obuwie; drzwi do ogrodu")
 PMS("0.12", "P0", "Pomieszczenie techniczne", (16.6, 1.4), kat="techniczna", posadzka="GRES", sciany="TYNK_CW", temp=16, wyw=15, rodzaj="techniczne",
-    podloga="POD-0L", uwagi="moduł hydrauliczny PC R290 (monoblok zewn.), zasobnik CWU 300 l, bufor 100 l, rozdzielacze, RG, wodomierz; dostęp z przedsionka")
+    podloga="POD-0L", uwagi="moduł hydrauliczny PC R290 (monoblok zewn.), zasobnik CWU 400 l, bufor 100 l, rozdzielacze, RG, wodomierz; dostęp z przedsionka")
 PMS("0.13", "P0", "Garaż 2-stanowiskowy", (15.3, 6.2), kat="pomocnicza", posadzka="ZYWICA", sciany="TYNK_CW", sufit="TYNK_CW", temp=None,
     rodzaj="garaz", podloga="POD-G", ogrzewane=False, rzedna=-0.10,
     uwagi="w świetle 6,05 × 6,175 m, po odjęciu przechowywania 0,30 m przy ścianie osi F wolne 5,75 × 6,175 m (≥ 5,60 × 6,00; W-112; "
@@ -768,6 +768,7 @@ DACHY = [
                         "opis": "w pom. technicznym 0.12 (obudowa izolowana), pod płytą do kolektora KD-E"}],
      "spadki": [{"od": [xE + EXT, 4.5], "do": [18.05, 9.05], "spadek": 0.02}, {"od": [xE + EXT, 1.2], "do": [17.95, 0.35], "spadek": 0.02}],
      "uwagi": "dach zielony ekstensywny NIEUŻYTKOWY nad garażem i pasem gospodarczym (bez tarasu, bez wyjścia — decyzja Inwestora); "
+              "runda 2: pole PV biosolarne 8 modułów (x 13,80–16,08; energia.pv), dostęp serwisowy drabiną przenośną; "
               "attyka pd. +3,85 = linia D do narożnika garażu; opaska żwirowa 0,5 m przy attykach i wpustach"},
 ]
 
@@ -1286,9 +1287,12 @@ ENERGIA = {
                             "oknem O2-04 (3,20 m od lica) i ≥ 4 m od krawędzi pd.; SW1 — świetlik stały (W-167 ust. 12 — okna otwierane); "
                             "wysokość zabudowy bez zmian (≤ 11,0 m, MPZP); K2 zakończony zaworem napowietrzającym (W-139)"},
     "ogrzewanie": {"zrodlo": "PC_R290_monoblok", "temp_zasilania": 35,
-                   "uwagi": "PC powietrze–woda monoblok R290 (W-155), moduł hydrauliczny w pom. 0.12; ogrzewanie podłogowe z regulacją pokojową (W-152)"},
-    "cwu": {"zasobnik": "Z250", "V_projekt_dm3": 300, "cyrkulacja": False,
-            "uwagi": "projektowo zasobnik 300 dm³ (brief) — w bibliotece dane przykładowe Z250; zastąpić DWU wyrobu"},
+                   "uwagi": "PC powietrze–woda monoblok R290 (W-155), moduł hydrauliczny w pom. 0.12; ogrzewanie podłogowe z regulacją pokojową (W-152); "
+                            "runda 2 (K-10): po symulacji mostków Φ_HL ≈ 7,4 kW (było 11,7) → klasa mocy ok. 7 kW (≤ 12 kW — W-155, "
+                            "rozp. (UE) 2024/573), dobór wg DTR; łazienki/WC i klatka P2 — ściany grzewcze wodne (instalacje.grzejniki)"},
+    "cwu": {"zasobnik": "Z250", "V_projekt_dm3": 400, "cyrkulacja": False,
+            "uwagi": "zasobnik 400 dm³ (moduł wody: V_zas ≥ 367 dm³); w bibliotece EP dane przykładowe Z250 (strata postojowa) — zastąpić DWU "
+                     "wyrobu; cyrkulacja czasowa wg modułu wody (PT-IS) — w EP przyjęto zachowawczo η_W,d = 0,60 bez pompy cyrkulacyjnej"},
     "pv": {"moduly": len(_MOD_D1) + len(_MOD_D4), "P_modul_Wp": 430, "azymut": 180, "nachylenie": 10, "PR": 0.78,
            "uklad": "EW10", "z_max": r(_ZPV_D1, 3),
            "pola": [{"dach": "D1", "n": len(_MOD_D1), "moduly": _MOD_D1, "z_max": r(_ZPV_D1, 3), "korona_attyki": _KOR_D1,
@@ -1674,7 +1678,8 @@ WYP = [
     F("P0", "szafa", (14.00, Y1_i), 90, (1.30, 0.35), opis="szafka na obuwie"),
     F("P0", "pompa_ciepla", (15.75, y2 - INT), -90, (0.60, 0.40), opis="moduł hydrauliczny PC R290 (monoblok zewn.) — x 15,45–16,05, "
       "poza łukiem drzwi O0-23 (A3 D-8)"),
-    F("P0", "zasobnik", (16.55, y2 - INT), -90, (0.70, 0.70), opis="zasobnik CWU 300 dm³"),
+    F("P0", "zasobnik", (16.55, y2 - INT), -90, (0.75, 0.75), opis="zasobnik CWU 400 dm³ z wężownicą dla PC (moduł wody: V_zas ≥ 367 dm³ — "
+      "runda 2, BRAKI PT-IS poz. 19)"),
     F("P0", "zasobnik", (17.50, y2 - INT), -90, (0.55, 0.55), opis="bufor 100 dm³"),
     F("P0", "urzadzenie", (xP + FD, 0.90), 0, (0.80, 0.25), opis="rozdzielnica główna RG"),
     F("P0", "urzadzenie", (xF - INT, 1.20), 180, (0.40, 0.20), opis="wodomierz + zawór antyskażeniowy (PN-EN 1717)"),
