@@ -187,7 +187,7 @@ class WynikPlytyFund:
     M: dict                              # dol_x, dol_y, gora_x, gora_y → obwiednia ULS [kNm/m] (dół ≥ 0, góra ≤ 0)
     As: dict                             # jw. → A_s,req [mm²/m]
     As_min: np.ndarray                   # A_s,min elementu [mm²/m]
-    mu_przekr: np.ndarray                # maska: μ > μ_lim (przekrój podwójnie zbrojony)
+    mu_przekr: np.ndarray                # maska: μ > μ_lim — przekrój podwójnie zbrojony (A_s2 w As warstwy przeciwnej)
     p_d_max: float
     p_k_max: float
     w_k_max: float
@@ -197,6 +197,7 @@ class WynikPlytyFund:
     c_gora: float
     wyniki: list = field(default_factory=list)
     kombinacje: int = 0
+    As_sc: dict = field(default_factory=dict)   # A_s2 — zbrojenie ściskane (warstwa przeciwna) dla μ > μ_lim [mm²/m]
 
 
 OKNO_SCIANY = 2.0     # [m] rozdział obciążeń ścian na płytę (średnia krocząca)
@@ -346,16 +347,31 @@ def _obwiednia(pl0, plyty, pod, fvec, kb_uls, kb_chr, e0, P, h, spod, beton, h_e
     fcd, fyd = beton.f_cd, StalZbrojeniowa(f_yk=p.f_yk, gamma_s=p.gamma_s).f_yd
     xl = StalZbrojeniowa(f_yk=p.f_yk, gamma_s=p.gamma_s).xi_eff_lim(beton)
     mul = xl * (1 - 0.5 * xl)
-    As, mu_x = {}, np.zeros(n, bool)
+    # μ > μ_lim → przekrój podwójnie zbrojony: M_lim = μ_lim·b·d²·η·f_cd, ΔM = M − M_lim przenosi para A_s2 (strefa
+    # ściskana, warstwa przeciwna) i dodatkowe A_s1; σ_s2 = min(f_yd; E_s·ε_cu3·(1 − a₂/x_lim)), x_lim = ξ_eff,lim·d/λ.
+    As, mu_x, As_sc = {}, np.zeros(n, bool), {}
     d_min = None
+    Es_st = 200000.0
     for key, M in env.items():
         c = (c_dol if key.startswith("dol") else c_gora) / 1000.0
+        c2 = (c_gora if key.startswith("dol") else c_dol) / 1000.0
         d = h_el - c - fi_zal / 2000.0 - (fi_zal / 1000.0 if key.endswith("y") else 0.0)
+        a2 = c2 + fi_zal / 2000.0 + (fi_zal / 1000.0 if key.endswith("y") else 0.0)
         mu = np.abs(M) / (1.0 * d ** 2 * beton.eta * fcd * 1000.0)
         mu_x |= mu > mul
         xi = 1 - np.sqrt(np.clip(1 - 2 * np.minimum(mu, mul), 0.0, None))
-        As[key] = xi * 1000.0 * d * 1000.0 * beton.eta * fcd / fyd
+        dM = np.maximum(np.abs(M) - mul * d ** 2 * beton.eta * fcd * 1000.0, 0.0)          # [kNm/m]
+        x_lim = xl * d / beton.lam
+        sig2 = np.minimum(fyd, Es_st * beton.eps_cu3 * np.clip(1.0 - a2 / x_lim, 0.0, None))
+        As2 = np.where(dM > 0, dM * 1000.0 / (np.maximum(sig2, 1.0) * np.maximum(d - a2, 1e-3)), 0.0)
+        As[key] = xi * 1000.0 * d * 1000.0 * beton.eta * fcd / fyd + As2 * sig2 / fyd
+        As_sc[key] = As2
         d_min = d if d_min is None else np.minimum(d_min, d)
+    for key in list(As):                    # warstwa przeciwna: max(rozciąganie od M przeciwnego znaku; A_s2)
+        wa, kk_ = key.split("_")
+        op = ("gora" if wa == "dol" else "dol") + "_" + kk_
+        if op in As:
+            As[op] = np.maximum(As[op], As_sc[key])
     As_min = np.maximum(0.26 * beton.f_ctm / p.f_yk, 0.0013) * 1000.0 * d_min * 1000.0
     x0, y0, x1, y1 = P.bounds
     # nośność podłoża (DA2*): całość płyty + lokalnie pod żebrem (pasmo b_ż + 2h)
@@ -388,6 +404,7 @@ def _obwiednia(pl0, plyty, pod, fvec, kb_uls, kb_chr, e0, P, h, spod, beton, h_e
     wyniki.append(wo)
     W = WynikPlytyFund(str(e0.get("id")), P, h, spod, beton, pod, pl0.el_c.copy(), pl0.el_ab.copy(), h_el, strefa_el, env,
                        As, As_min, mu_x, p_d, p_k, w_k, odr, q_Rd, c_dol, c_gora, wyniki, len(kb_uls) * len(plyty))
+    W.As_sc = As_sc
     W.wyniki += przebicie_slupow(an, W, plyty, fvec, kb_uls)
     return W
 

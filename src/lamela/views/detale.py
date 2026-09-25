@@ -338,7 +338,7 @@ def ocena_linii(det: Detal, info: dict, wyniki: dict, k: float) -> dict:
             s4, t4 = (r.get("linie4") or {}).get(L, ("OK", ""))
             if s4 != "OK":
                 st = "UWAGA" if st == "OK" else st
-                op.append(f"{r['id']}: {t4[:110]}")
+                op.append(f"{r['id']}: {_skroc(t4, 110)}")
         if L == "I":
             n = len(polygons_of(info["izolacja"])) if not info["izolacja"].is_empty else 0
             if n > 1:

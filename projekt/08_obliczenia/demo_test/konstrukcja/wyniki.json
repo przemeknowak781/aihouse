@@ -826,47 +826,47 @@
    "id": "N-O0-01",
    "tytul": "Nadproże N-O0-01 nad otworem O0-01 w ścianie S0-01 (światło 4,00 m)",
    "rodzaj": "nadproze",
-   "wykorzystanie": 1.415,
-   "ok": false,
+   "wykorzystanie": 0.9658,
+   "ok": true,
    "przyjeto": [
-    "N-O0-01: nadproże zespolone z płytą 18×31 cm, C25/30, dołem 7φ10, strzemiona φ6 co 20 cm (2-cięte), oparcie ≥ 25 cm."
+    "N-O0-01: nadproże zespolone z płytą 18×51 cm, C25/30, dołem 2φ14, strzemiona φ6 co 35 cm (2-cięte), oparcie ≥ 25 cm."
    ],
    "warunki": [
     {
      "opis": "Zbrojenie dolne",
-     "E": 543.2828,
-     "R": 549.7787,
-     "eta": 0.9882
+     "E": 297.3425,
+     "R": 307.8761,
+     "eta": 0.9658
     },
     {
      "opis": "Nośność krzyżulców betonowych",
-     "E": 49.4337,
-     "R": 170.586,
-     "eta": 0.2898
+     "E": 51.8637,
+     "R": 295.5574,
+     "eta": 0.1755
     },
     {
      "opis": "Nośność strzemion",
-     "E": 49.4337,
-     "R": 60.4087,
-     "eta": 0.8183
+     "E": 51.8637,
+     "R": 59.8081,
+     "eta": 0.8672
     },
     {
-     "opis": "Ugięcie długotrwałe (quasi-stała) ≤ L/250",
-     "E": 24.0547,
-     "R": 17.0,
-     "eta": 1.415
+     "opis": "Ugięcie — graniczna smukłość l/d (7.4.2)",
+     "E": 8.9852,
+     "R": 27.2065,
+     "eta": 0.3303
     },
     {
      "opis": "Docisk",
-     "E": 52.5234,
+     "E": 55.1052,
      "R": 279.2329,
-     "eta": 0.1881
+     "eta": 0.1973
     }
    ],
    "dane": {
     "L": 4.25,
-    "M": 55.80606422911708,
-    "q_d": 24.71687273815566
+    "M": 58.54930641661707,
+    "q_d": 25.931872738155658
    }
   },
   {

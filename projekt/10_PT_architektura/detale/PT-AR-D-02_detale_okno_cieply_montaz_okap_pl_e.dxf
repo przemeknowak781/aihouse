@@ -493,7 +493,7 @@ $SKPOLY
   9
 $TDCREATE
  40
-2461309.240335648
+2461309.2409722223
   9
 $TDUCREATE
  40
@@ -501,7 +501,7 @@ $TDUCREATE
   9
 $TDUPDATE
  40
-2461309.240335648
+2461309.2409722223
   9
 $TDUUPDATE
  40
@@ -933,11 +933,11 @@ $PSTYLEMODE
   9
 $FINGERPRINTGUID
   2
-{34169C18-2389-4B41-B5DE-2D8FAC0406EF}
+{8EA106A1-00DD-40B8-B489-22C5C563C4EE}
   9
 $VERSIONGUID
   2
-{793A5A86-6195-4455-9189-B75174E9419E}
+{4BF6433A-50FA-41E4-AEC4-ED5755A6DBAC}
   9
 $EXTNAMES
 290
@@ -1327,9 +1327,9 @@ ISM
   0
 CLASS
   1
-ACDBPLACEHOLDER
+LAYOUT
   2
-AcDbPlaceHolder
+AcDbLayout
   3
 ObjectDBX Classes
  90
@@ -1343,9 +1343,9 @@ ObjectDBX Classes
   0
 CLASS
   1
-LAYOUT
+ACDBPLACEHOLDER
   2
-AcDbLayout
+AcDbPlaceHolder
   3
 ObjectDBX Classes
  90
@@ -64869,7 +64869,7 @@ AcDbText
  40
 0.018000000000000002
   1
-H: WZ-04: spadek płyty od budynku: nieokreślony w modelu (wymagany ≥ 1,5–2 %); odprowadzenie wody z krawędzi płyty (rynn
+H: WZ-04: spadek płyty od budynku: nieokreślony w modelu (wymagany ≥ 1,5–2 %); odprowadzenie wody z krawędzi płyty…
   7
 PL_ARIAL
  11
@@ -75161,7 +75161,7 @@ AcDbText
  40
 1.8
   1
-H: WZ-04: spadek płyty od budynku: nieokreślony w modelu (wymagany ≥ 1,5–2 %); odprowadzenie wody z krawędzi płyty (rynn
+H: WZ-04: spadek płyty od budynku: nieokreślony w modelu (wymagany ≥ 1,5–2 %); odprowadzenie wody z krawędzi płyty…
   7
 PL_ARIAL
  11
@@ -81013,7 +81013,7 @@ DictionaryVariables
 280
 0
   1
-1.4.4 @ 2026-09-25T05:46:05.518638+00:00
+1.4.4 @ 2026-09-25T05:47:00.696745+00:00
   0
 DICTIONARYVAR
   5
@@ -81025,7 +81025,7 @@ DictionaryVariables
 280
 0
   1
-1.4.4 @ 2026-09-25T05:46:05.679229+00:00
+1.4.4 @ 2026-09-25T05:47:00.871459+00:00
   0
 ENDSEC
   0

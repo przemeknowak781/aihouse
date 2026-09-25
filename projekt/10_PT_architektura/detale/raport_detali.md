@@ -26,7 +26,7 @@ Kontrola automatyczna każdego detalu: zgodność grubości warstw narysowanych 
 * **D-03** — 8/8 warstw zgodnych; 4 linie: H — ciągłość zachowana; S — ciągłość zachowana; P — ciągłość zachowana; I — ciągłość zachowana
 * **D-07** — 12/12 warstw zgodnych; 4 linie: H — ciągłość zachowana; S — ciągłość zachowana; P — ciągłość zachowana; I — obrys izolacji: 3 części (w tym warstwy dodatkowe, np. izolacja podłogi)
 * **D-02** — 8/8 warstw zgodnych; 4 linie: H — ciągłość zachowana; S — ciągłość zachowana; P — ciągłość zachowana; I — obrys izolacji: 2 części (w tym warstwy dodatkowe, np. izolacja podłogi)
-* **D-09** — 8/8 warstw zgodnych; 4 linie: H — WZ-04: spadek płyty od budynku: nieokreślony w modelu (wymagany ≥ 1,5–2 %); odprowadzenie wody z krawędzi płyty (rynn; S — ciągłość zachowana; P — ciągłość zachowana; I — obrys izolacji: 2 części (w tym warstwy dodatkowe, np. izolacja podłogi)
+* **D-09** — 8/8 warstw zgodnych; 4 linie: H — WZ-04: spadek płyty od budynku: nieokreślony w modelu (wymagany ≥ 1,5–2 %); odprowadzenie wody z krawędzi płyty…; S — ciągłość zachowana; P — ciągłość zachowana; I — obrys izolacji: 2 części (w tym warstwy dodatkowe, np. izolacja podłogi)
 * **D-04** — 11/11 warstw zgodnych; 4 linie: H — ciągłość zachowana; S — ciągłość zachowana; P — ciągłość zachowana; I — obrys izolacji: 3 części (w tym warstwy dodatkowe, np. izolacja podłogi)
 * **D-05** — 13/13 warstw zgodnych; 4 linie: H — ciągłość zachowana; S — ciągłość zachowana; P — ciągłość zachowana; I — obrys izolacji: 3 części (w tym warstwy dodatkowe, np. izolacja podłogi)
 * **D-06** — 11/11 warstw zgodnych; 4 linie: H — ciągłość zachowana; S — ciągłość zachowana; P — ciągłość zachowana; I — obrys izolacji: 4 części (w tym warstwy dodatkowe, np. izolacja podłogi)

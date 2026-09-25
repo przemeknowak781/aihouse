@@ -60,7 +60,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 5.6,
+      "czas_s": 5.5,
       "png_kontrola": {
         "px": [
           7022,
@@ -108,7 +108,7 @@
           "sprawdzone_lancuchy": 1
         }
       },
-      "czas_s": 3.1,
+      "czas_s": 3.0,
       "png_kontrola": {
         "px": [
           5262,
@@ -206,7 +206,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.0,
+      "czas_s": 2.9,
       "png_kontrola": {
         "px": [
           3508,
@@ -256,7 +256,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 5.7,
+      "czas_s": 5.9,
       "png_kontrola": {
         "px": [
           7447,
@@ -324,5 +324,5 @@
   ],
   "problemy": [],
   "tom": "projekt/10_PT_architektura/detale/tom_widoki.pdf",
-  "czas_s": 33.3
+  "czas_s": 33.0
 }

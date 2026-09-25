@@ -943,7 +943,11 @@ def zapisz_raporty(D: DaneKonstr, ctx):
             a = W.As[k_]
             L.append(f"| {k_} | {float(M[np.argmax(np.abs(M))]):.1f} | {float(a.max()):.0f} | "
                      f"{float(np.percentile(a[~rib], 90)) if (~rib).any() else 0:.0f} |")
-        L += ["", f"Elementy z μ > μ_lim (przekrój niewystarczający): {int(W.mu_przekr.sum())} z {len(W.el_c)}.", ""]
+        n_mu = int(W.mu_przekr.sum())
+        L += ["", f"Elementy z μ > μ_lim — przekrój podwójnie zbrojony: {n_mu} z {len(W.el_c)}"
+              + (f" (A_s2,max = {max(float(v.max()) for v in W.As_sc.values()):.0f} mm²/m; A_s2 = ΔM/(σ_s2·(d − a₂)), "
+                 "ΔM = M_Ed − μ_lim·b·d²·η·f_cd, σ_s2 = min(f_yd; E_s·ε_cu3·(1 − a₂/x_lim)); A_s2 dodane do wymagania "
+                 "warstwy przeciwnej, A_s1 = A_s,lim + A_s2·σ_s2/f_yd)." if n_mu and getattr(W, "As_sc", None) else "."), ""]
         p_ = Path(mp)
         p_.parent.mkdir(parents=True, exist_ok=True)
         p_.write_text("\n".join(L) + "\n", encoding="utf-8")
@@ -1424,7 +1428,7 @@ def prety_fundamentu(D: DaneKonstr) -> dict:
     out["mes"] = W
     if F is not None and W is not None:
         rib = np.array([s_ != "" for s_ in W.strefa_el])
-        pl_el = ~rib & ~W.mu_przekr
+        pl_el = ~rib
         Asm = float(W.As_min[~rib].max()) if (~rib).any() else F.As_min
         for warstwa in ("dol", "gora"):
             req = np.maximum(W.As[f"{warstwa}_x"], W.As[f"{warstwa}_y"])[pl_el]
@@ -1440,15 +1444,16 @@ def prety_fundamentu(D: DaneKonstr) -> dict:
             f"{W.p_d_max:.0f} kPa (q_Rd,lok = {next((w_.warunki[0].R for w_ in W.wyniki if 'Nacisk lokalny' in w_.nazwa), 0):.0f} "
             f"kPa), osiadanie w_k = {W.w_k_max * 1000:.0f} mm, odrywanie {W.oderwanie * 100:.0f} % powierzchni."]
         bad = [x for w_ in W.wyniki for x in w_.warunki if not x.ok]
-        if bad or W.mu_przekr.any():
+        if bad:
             F.uwagi.append(
                 "UWAGA — MES płyty wykazuje niespełnione warunki: " + "; ".join(f"{x.opis} ({x.E:.0f} > {x.R:.0f})"
                                                                                for x in bad[:3])
-                + (f"; przekrój żeber/płyty niewystarczający (μ > μ_lim) na {W.mu_przekr.sum()} elementach — strefy "
-                   "zaznaczone na rysunku" if W.mu_przekr.any() else "")
-                + ". Przyczyna: skupienie obciążeń ścian parteru (profil biblioteki — m.in. obciążenie fasady S0-01 "
-                  "przekazane na filarek narożny, belka B1 bez pozycji obliczeniowej). Wymagane: obliczenie B1 i słupów "
-                  "SL1–SL4, poszerzenie/pogłębienie żeber w strefach zaznaczonych [WYMAGA ZMIANY MODELU].")
+                + " [WYMAGA ZMIANY MODELU].")
+        if W.mu_przekr.any():
+            F.uwagi.append(
+                f"Strefy zakreskowane (μ > μ_lim, {int(W.mu_przekr.sum())} el. MES): przekrój podwójnie zbrojony — "
+                "A_s1 w warstwie rozciąganej (siatka + dozbrojenie/pręty żebra), A_s2 w warstwie przeciwnej (ujęte "
+                "w wymaganiu tej warstwy); pręty ściskane objęte strzemionami żebra s ≤ 15φ (PN-EN 1992-1-1 9.2.1.2(3)).")
     if F is not None:
         P = F.poly
         Pin = P.buffer(-c_bot / 1000.0, join_style=2)
@@ -1507,7 +1512,7 @@ def prety_fundamentu(D: DaneKonstr) -> dict:
         out["naroza"] = zest.dodaj(Pret(fi, "11", (l0 * 1000, l0 * 1000), 4 * n_nar, "naroża", "narożniki żeber"))
     for S_ in D.stopy:
         if W is not None and F is not None:
-            msk = np.array([s_ == S_.id for s_ in W.strefa_el]) & ~W.mu_przekr
+            msk = np.array([s_ == S_.id for s_ in W.strefa_el])
             if msk.any():
                 req = float(np.maximum(W.As["dol_x"], W.As["dol_y"])[msk].max())
                 if req > S_.siatka.As_prov:
@@ -1570,7 +1575,7 @@ def dozbrojenia_fund(D: DaneKonstr, W, siatki: dict) -> dict:
     for key, w in siatki.items():
         warstwa, kier = key
         req = W.As[f"{warstwa}_{kier}"]
-        defic = (req > w.As_prov + 1e-6) & ~rib & ~W.mu_przekr
+        defic = (req > w.As_prov + 1e-6) & ~rib
         lst = []
         for pg in _klastry(defic, W):
             inside = np.array([pg.buffer(0.05).contains(Point(*c)) for c in W.el_c]) & defic
@@ -1598,7 +1603,7 @@ def prety_zebra_mes(W, Z, siatki: dict, n_min: tuple) -> dict:
     out = {}
     for warstwa, nmin in (("dol", n_min[0]), ("gora", n_min[1])):
         req = W.As[f"{warstwa}_{kier}"]
-        ok = msk & ~W.mu_przekr
+        ok = msk
         A_req = float(req[ok].max()) * Z.b if ok.any() else 0.0
         A_siatki = siatki[(warstwa, kier)].As_prov * Z.b
         best = None
