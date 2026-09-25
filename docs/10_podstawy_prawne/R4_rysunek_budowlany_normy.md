@@ -729,3 +729,139 @@ Algorytm dla każdej kondygnacji:
     drzwi w świetle ościeżnicy) i na odesłanie w § 20 ust. 1 pkt 11 rozp. Do potwierdzenia przez R3.
 18. **Font:** ISOCPEUR jest komercyjny. Otwarty font zgodny z ISO 3098 (np. osifont) ma **NIEZWERYFIKOWANE** pokrycie
     polskich znaków. Zalecenie PN-B-01025 „Arial CE, szer. 0,8” pochodzi ze źródła wtórnego.
+
+---
+
+## 5. Weryfikacja niezależna (2026-09-25)
+
+Weryfikator: niezależny agent (adwersarz). Przyjęto założenie, że każde ustalenie może być błędne, i sprawdzono je
+w źródłach pobranych samodzielnie. Materiały i skrypty zapytań:
+`/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/research/R4ver/`
+(`q.py`/`q2.py`/`q3.py`: własne zapytania do katalogu PKN; PDF-y aktów z API ELI; podglądy ISO z iTeh; strony AGH/PCEZ).
+
+### 5.1 Potwierdzone (źródło pierwotne, pobrane ponownie)
+
+**Akty prawne (API ELI i PDF Dz.U.)**
+* **Dz.U. 2020 poz. 1609:** „akt posiada tekst jednolity”. T.j. to Dz.U. 2022 poz. 1679. Akty zmieniające: 2021/1169,
+  2021/2280, 2023/2405 (w mocy od 2024-04-01, zmieniony przez 2024/473) i 2026/597 (w mocy od 2026-05-19).
+* **T.j. 2022/1679**, brzmienie zgodne z plikiem:
+  * § 2, § 2a (A4), § 2b ust. 1–4 (PDF, wektor, 150 MB);
+  * § 5a, § 6 ust. 1–3, § 7 ust. 2 i 4a;
+  * § 9 ust. 1–5 (zał. 2 „lub inne objaśnione w legendzie”; 1:200/1:100; PZT ≥ 1:500);
+  * § 10 ust. 1–2, § 12, § 15 ust. 1, 1a i 2, § 21 pkt 1;
+  * zał. nr 1 (PZT_z … PAB_ZL_z; AR/BO/IS/IE/BT/IN/WB; rrrr.mm.dd);
+  * zał. nr 2 (12 norm, dopisek „Stosuje się najnowszą normę opublikowaną w języku polskim”).
+* **Dz.U. 2023 poz. 2405:**
+  * § 14 pkt 4 lit. a z dopiskiem „oraz loggie”;
+  * § 20 ust. 1 pkt 4 lit. b, tiret 5 (pow. całkowita pomniejszona o tarasy, balkony i loggie);
+  * § 20 ust. 1 pkt 4 lit. b: progi 2,20 m (100 %) i 1,40 m (50 %).
+* **Dz.U. 2026 poz. 597** (MFiG, 27.04.2026, ogłoszony 4.05.2026):
+  * § 15 ust. 3 (0,01 m; pełne metry z 1 miejscem po przecinku);
+  * § 2 ust. 2 (przepis przejściowy);
+  * § 3 (14 dni; § 1 pkt 3 lit. b i pkt 4 lit. a po 6 miesiącach).
+* **PB t.j. Dz.U. 2026 poz. 524:** art. 20 ust. 2–3 pkt 2 brzmi dosłownie jak w pliku. Późniejsze zmiany (2026/605 art. 64;
+  2026/646 art. 33) nie dotyczą art. 20.
+* **WT t.j. Dz.U. 2022 poz. 1225:** § 9 ust. 1 potwierdzony w tekście aktu. Status WT nadal do potwierdzenia przez R3.
+
+**Katalog PKN (własne zapytania 2026-09-25)**
+
+| Norma | Stan w katalogu PKN |
+|---|---|
+| PN-EN ISO 7519:2024-09 | wycofana **2026-04-16**, brak „zastąpiona przez”; wprowadza EN ISO 7519:2024 |
+| PN-EN ISO 128-2:2023-05 | aktualna (EN ISO 128-2:2022) |
+| PN-ISO 128-23:2002 | wycofana 2021-02-04 → PN-EN ISO 128-2:2021-02 |
+| PN-EN ISO 128-3:2023-02 | aktualna (ISO 128-3:2022) |
+| PN-ISO 9836:2022-07 | aktualna (zatw. 2022-05-24, publ. 2022-07-18, IDT ISO 9836:2017) |
+| PN-ISO 9836:2015-12 | wycofana 2022-07-18 |
+| PN-EN 60617-11:2004 | wycofana **2005-12-01**, bez następcy |
+| PN-B-01701:1984 | wycofana 2006-10-09, bez następcy |
+| PN-B-01410:1989 | wycofana 2015-08-25; tytuł zgodny z plikiem |
+| PN-B-01440:1998 | wycofana 2014-10-16 |
+| PN-EN ISO 3098-0:2002 | wycofana 2015-06-30 → PN-EN ISO 3098-1:2015-06 (EN) |
+| PN-EN ISO 3098-2, -4, -5:2002 | aktualne |
+| PN-EN ISO 4066:2001 | wycofana → PN-EN ISO 3766:2006 (aktualna) |
+| PN-EN ISO 6284:2024-06 (EN) | aktualna |
+| PN-EN ISO 6284:2001 (pol.) | wycofana 2024-06-28 |
+| PN-EN ISO 2553:2019-06 | aktualna, jest wersja polska |
+| PN-B-01025:2004, B-01027:2002, B-01029:2000 (8 s.), B-01030:2000 (3 s.) | aktualne; daty zgodne z plikiem |
+| PN-EN ISO 11091:2001, 4157-1/-2/-3:2001 | aktualne |
+| PN-EN ISO 5457:2002 | aktualna; na karcie normy powiązane PN-EN ISO 5457:2002/A1:2010 (EN) |
+| PN-EN ISO 7200:2007, 9431:2011 (EN) | aktualne |
+| PN-EN 12792:2006, PN-EN 1861:2001, PN-B-01700:1999 | aktualne |
+| PN-EN ISO 6412-1:2018-03 | aktualna |
+| PN-EN ISO 128-1:2020-12, 8560:2019-06 | aktualne |
+| PN-ISO 4068:1998 | wycofana 2005-06-21, bez następcy |
+| PN-N-01603:1986 | wycofana 2011-10-10, bez następcy |
+
+Komunikat PKN (KT 232) potwierdza, że stałe ściany działowe wlicza się do powierzchni konstrukcji. Potwierdza też, że wycofanie
+normy nie oznacza zakazu jej stosowania (jeśli strony tak uzgodnią).
+
+**Teksty norm ISO (podglądy iTeh, pobrane ponownie)**
+* **ISO 128-2:2022:** 5.1 (szereg d, 4:2:1), 5.2 (±0,1d), tabl. 4 (≤ d, 3d, 6d, 12d, ≈24d, 18d), 6.1 (0,7 mm) i 6.2.1.
+* **ISO 128-23:1999:** tabl. 1 (zastosowania 01.1–07.1, zgodne z R4-C08) i tabl. 2 (grupy linii, zgodne z R4-C07).
+* **ISO 5457:1999:**
+  * tabl. 1 (formaty i pola rysunkowe) i tabl. 2 (24×16 … 6×4);
+  * 4.1 (A0–A3 poziomo, A4 pionowo);
+  * 4.2 (marginesy 20/10 mm, ramka 0,7);
+  * 4.3 (znaki centrujące: 0,7 mm, +10 mm);
+  * 4.4 (pola 50 mm, 3,5 mm, bez I i O, linie 0,35);
+  * 4.5 (znaczniki obcięcia 10×5 mm).
+* **ISO 7200:2004:** szerokość 180 mm (A4, marginesy 20/10), tabl. 1–3 (pola M/O i liczby znaków).
+* **ISO 9431:1990:** pole tekstu max 170 / min 100 mm.
+* **ISO 3098-1:2015:** 4.2 (odstęp 2d), 5.4 (75°), 5.5 (B i CB zalecane).
+* **ISO 5455:1979:** 4.1–4.2.
+* **ISO 4157-1:1998:** 7.2 (kondygnacje od 1, „0” pod spodem), 7.4, 7.5 (C201/S201/W201/B201).
+* **ISO 4157-2:1998:** 4.3 (podkreślanie), 4.4.1–4.4.3 (101–199, „ROOM 0”, zakaz interpunkcji numerów 4-cyfrowych),
+  4.5.1 (zgodnie z ruchem wskazówek zegara).
+* **ISO 3766:2003:** tabl. 1:
+  * poz. 13: siatka w przekroju linią punktową b. grubą;
+  * poz. 16–17: B/T/N/F/1/2, warstwa dolna lub dalsza linią kreskową b. grubą.
+* **ISO 128-3:2022:** 6.2.2–6.2.3.
+* **ISO 9836:2017:** 5.1.1.2 (m² z 2 miejscami), 5.1.2 (wyłączenia: schody i rampy zewnętrzne, daszki, osłony, okapy),
+  5.1.3.
+* **ISO 5261:1995:** rozdz. 4 i przykład „L 89 × 60 × 7 – 500”.
+* **ISO 7519:2025** (3. wyd., 2025-02, „minor revision” ISO 7519:2024): 4.1.2–4.1.3 i 4.4–4.5 zgodne z R4-B13 i R4-H18.
+
+**Źródła wtórne (pobrane ponownie, odczyt obrazów tablic)**
+* **PN-B-01027:2002 wg [AGH-Z]:**
+  * poz. 1.6 (1,4 / 0,7 / > 1,0 m), 1.7 (trójkąt 4 mm, 0,35), 1.8 („0,00=267,50”, „IV+P”, 2,5 mm);
+  * poz. 2.1–2.2 (0,35, trójkąty 2 mm, 12·2·12), 2.3–2.5, 2.6 (0,5; 6·2·6), 2.7 (0,35, punkty 1,0, 5·1·5);
+  * poz. 4.1 (0,18, 2,5 mm, „//” 0,25, przykład 20,67 / 9,16 / 6,0 / 4,0);
+  * poz. 6.1–6.5 (Ks/Kd 0,7 z trójkątem 3 mm, wpust 4×2 mm, osadnik 7×4 mm, wodociąg 0,5);
+  * poz. 6.9–6.13 (lampa Ø5 i Ø2 mm; gaz 0,7, 3·10·3; „e” 0,7, 2·9·2; „t” 0,5, 4·9·4; „c” 2 × 0,5 co 2 mm).
+* **PN-B-01025 wg [AGH-P]:** rzut ok. 1 m nad podłogą; rzędne w m z 3 miejscami (w praktyce 2); grot zera 90°
+  w połowie zaczerniony; kondygnacja przy terenie = 1, podziemne z „–”; numer pomieszczenia poprzedzony numerem kondygnacji,
+  zgodnie z ruchem wskazówek zegara; wejścia (zaczernione / niewypełnione); kanały (wentylacyjny, spalinowy, dymowy).
+* **PN-B-01029 wg [AGH-W]:** ukośne kreski 45°; ułamek szer./wys. na osi otworu; parapet w nawiasie przed wysokością,
+  liczony od podłogi wykończonej; kanały 140×140 mm nie są wymiarowane.
+* **[PCEZ]:** ograniczniki 45°; pierwsza linia ok. 10 mm, kolejne co 7–8 mm; liczby ok. 1 mm nad linią, ≥ 2 mm;
+  „ARIAL CE, szerokość 0,8 (wg PN-B-01025:2004)”.
+
+### 5.2 Poprawione (było → jest)
+
+| ID | Było | Jest | Źródło |
+|---|---|---|---|
+| R4-A17 | „§ 15 ust. 2 pkt 1–14”; odsyłacz do pkt 3.12 | pkt 1–15 (pkt 15 dodany przez Dz.U. 2026 poz. 597, w mocy od 2026-05-19; obiekty zbiorowej ochrony, nie dotyczy LAMELI); odsyłacz do pkt 3.11 (PZT) | https://api.sejm.gov.pl/eli/acts/DU/2026/597/text.pdf |
+| R4-B13, R4-H18, R4-K01 | „ISO/FDIS 7519:2024 (= ISO 7519:2025)”, URL projektu FDIS | ISO 7519:2025 (3. wyd., 2025-02). ISO 7519:2024 to odrębne 2. wyd., wprowadzone przez wycofaną PN-EN ISO 7519:2024-09. Wyd. 2025 zmieniło klucz 2 rys. 1 (granica terenu) z 04.2 na 04.3 | https://cdn.standards.iteh.ai/samples/89718/3807035b2f954bc98668456e679dc0ce/ISO-7519-2025.pdf |
+| R4-F15 | § 9 WT z cytatu wtórnego (IARP), „NIE” | cytat z tekstu aktu (TAK-A) + § 9 ust. 2–3 (odległości mierzone w poziomie, w miejscu najmniejszego oddalenia; ważne dla PZT) | https://api.sejm.gov.pl/eli/acts/DU/2022/1225/text.pdf |
+| R4-B08 | „Litery I i O nie służą jako indeks zmian” | „należy unikać” liter I i O (ISO 7200 5.1.4: „should be avoided”) | https://cdn.standards.iteh.ai/samples/35446/d3b0887cb4fa47f49f8718807d3b8903/ISO-7200-2004.pdf |
+| pkt 3.9, R4-J03, pkt 4.3 | kolizja numeracji wywodzona z PN-B-01025 **i** ISO 4157-1 7.2 | ISO 4157-1 7.2 dotyczy kondygnacji i identyfikatorów (ISO 4157-3). Numery pomieszczeń opierają się na krajowej numeracji pięter (7.4.2, dopuszcza G01), więc kolizja wynika tylko z PN-B-01025 (wtórnie). Format „1.01” odbiega od zalecanego „101” (4.4.1), więc trzeba go objaśnić w legendzie | https://cdn.standards.iteh.ai/samples/26189/0ee2760f255344578079c1b0fd8f9a3e/ISO-4157-1-1998.pdf |
+| Streszczenie pkt 3 | „PB (t.j. Dz.U. 2026 poz. 524)” | „t.j. Dz.U. 2026 poz. 524 ze zm.” (poz. 605 i 646 nie zmieniają art. 20) | https://api.sejm.gov.pl/eli/acts/DU/2026/524 |
+| R4-A18, pkt 4.13 | data „ok. 5.11.2026” do potwierdzenia | ELI nie ma odrębnej daty; wyliczenie 5.11.2026 sprawdzone i uznane za prawidłowe | https://api.sejm.gov.pl/eli/acts/DU/2026/597 |
+
+Uzupełnienia bez zmiany ustaleń:
+* **R4-M04:** symbol c) dotyczy przewieszeń **> 1,0 m**. Wspornik ≤ 1,0 m można pominąć albo pokazać jako „obrys wyższych
+  kondygnacji” (d).
+* **R4-M06:** wzór normy to „0,00=267,50”, bez „±”.
+* **R4-M07:** nazwa poz. 2.2 w normie to „Maksymalna nieprzekraczalna linia zabudowy”.
+
+### 5.3 Niemożliwe do weryfikacji (dostęp płatny lub brak podglądu)
+* **ISO 128-2:2022 zał. B** (linie w budownictwie): podgląd kończy się przed załącznikiem, więc tożsamość z ISO 128-23
+  pozostaje NIEZWERYFIKOWANA.
+* **Tekst PN-B-01025:2004** (pkt 2.3, 2.5, 3.2, 3.4, 3.5), **PN-B-01029:2000** i **PN-B-01030:2000**: dostępne tylko
+  reprodukcje wtórne. Nie da się sprawdzić odstępów kreskowań ani zalecenia „Arial CE 0,8” w oryginale.
+* **Treść PN-EN ISO 5457:2002/A1:2010** (A4 poziomo): potwierdzono tylko istnienie zmiany w katalogu PKN.
+* **Numery symboli IEC 60617** (R4-N02) oraz kształty symboli PN-EN 12792, PN-EN 1861 i PN-EN ISO 6412: brak dostępu.
+* **Próg 1,90 m** i szczegóły kubatury 5.2.2–5.2.4 w PN-ISO 9836:2022-07: poza podglądem ISO 9836:2017.
+* Kolory rodzajów powietrza wg EN 16798-3 (R4-O04) i zasady PN-70/B-02365 (R4-P08): tylko źródła wtórne, nie sprawdzano
+  ponownie.

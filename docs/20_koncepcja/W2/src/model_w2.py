@@ -96,7 +96,7 @@ OTWORY = [
     O("O0-03", "S0-07", 5.50, 7.30, "okno", 1.50, 0.90, "OZ2", uw="pokój gościnny"),
     O("O0-04", "S0-06", 10.20, 11.30, "drzwi_zewn", 2.40, 0.0, "DZ1", "a", "-y", "drzwi wejściowe 110x240 (w świetle ościeżnicy >= 0,90x2,00), prog <= 2 cm"),
     O("O0-05", "S0-04", 12.75, 17.75, "brama", 2.25, 0.0, "BR1", uw="brama segmentowa 500x225, kratki went. >= 0,08 m2"),
-    O("O0-06", "S0-03", 5.00, 5.90, "drzwi_zewn", 2.10, 0.0, "DZ2", "a", "-x", "drzwi boczne garażu (rowery, ogrod)"),
+    O("O0-06", "S0-03", 5.00, 5.90, "drzwi_zewn", 2.10, 0.0, "DZ2", "a", "-x", "drzwi boczne garażu (rowery, ogród)"),
     O("O0-07", "S0-08", 4.20, 5.10, "otwor", 2.10, 0.0, "", uw="przejście do przedpokóju gościnnego"),
     O("O0-08", "S0-08", 6.20, 7.20, "otwor", 2.55, 0.0, "", uw="wejście na bieg 1 schodów"),
     O("O0-09", "S0-08", 7.40, 8.20, "drzwi", 2.00, 0.0, "D3", "a", "+y", "schowek pod schodami"),
@@ -108,6 +108,7 @@ OTWORY = [
     O("O0-15", "S0-12", 1.00, 1.90, "drzwi", 2.05, 0.0, "D1", "a", "+x", "kuchnia - przedsionek gosp."),
     O("O0-16", "S0-14", 12.50, 13.40, "drzwi", 2.05, 0.0, "DG1", "a", "+y", "przedsionek - garaż: szczelne, samozamykacz, U<=1,3"),
     O("O0-17", "S0-14", 16.60, 17.50, "drzwi", 2.05, 0.0, "DG1", "b", "+y", "pom. techniczne - garaż"),
+    O("O0-19", "S0-02", 12.25, 13.15, "drzwi_zewn", 2.40, 0.0, "DZ3", "a", "-y", "drzwi gospodarcze przeszklone przedsionek - ogród/taras (otwierane na zewnątrz)"),
     O("O0-18", "S0-19", 1.10, 1.90, "drzwi", 2.05, 0.0, "D3", "a", "+x", "spiżarnia"),
     # ---------------- P1
     O("O1-01", "S1-01", 4.10, 11.10, "boks", 1.50, 0.70, "BC1", uw="boks C: 3 kwatery 2,33 m, dolna część stała VSG do 0,85 m (K-17), słupki w szprosach", kw=3),
@@ -118,7 +119,7 @@ OTWORY = [
     O("O1-06", "S1-04", 0.90, 2.70, "okno", 1.50, 0.85, "OZ2", uw="pokój dziecka 1 (elewacja pd. bryły B pełna jak w szkicu)"),
     O("O1-07", "S1-05", 2.70, 3.60, "drzwi", 2.05, 0.0, "D1", "a", "+y", "pokój dziecka 2"),
     O("O1-08", "S1-05", 4.20, 5.00, "drzwi", 2.05, 0.0, "D2", "a", "-y", "łazienka (na zewnątrz)"),
-    O("O1-09", "S1-05", 6.20, 8.32, "otwor", 2.55, 0.0, "", uw="klatka schodowa - oba biegi"),
+    O("O1-09", "S1-05", 6.20, 8.32, "otwor", 2.55, 0.0, "", uw="klatka schodówa - oba biegi"),
     O("O1-10", "S1-05", 9.00, 9.90, "drzwi", 2.05, 0.0, "D1", "b", "+y", "pralnia"),
     O("O1-11", "S1-11", 2.70, 3.60, "drzwi", 2.05, 0.0, "D1", "a", "-y", "pokój dziecka 1"),
     # ---------------- P2
@@ -126,7 +127,7 @@ OTWORY = [
     O("O2-02", "S2-01", 4.30, 5.50, "okno", 1.75, 0.85, "OP2", uw="garderoba; za lamelami"),
     O("O2-03", "S2-01", 8.90, 11.30, "okno", 2.00, 0.60, "OP1", uw="gabinet; za lamelami"),
     O("O2-04", "S2-02", 1.80, 3.00, "okno", 1.75, 0.85, "OP2", uw="gabinet - wschod"),
-    O("O2-05", "S2-05", 6.40, 8.10, "okno", 1.50, 0.90, "ON3", uw="okno nad klatka schodowa (północ)"),
+    O("O2-05", "S2-05", 6.40, 8.10, "okno", 1.50, 0.90, "ON3", uw="okno nad klatka schodówa (północ)"),
     O("O2-06", "S2-05", 4.30, 5.20, "okno", 0.80, 1.50, "ON1", uw="łazienka rodziców"),
     O("O2-07", "S2-08", 1.20, 3.60, "okno", 2.00, 0.60, "OP1", uw="sypialnia - zachod"),
     O("O2-08", "S2-09", 4.20, 5.00, "drzwi", 2.05, 0.0, "D2", "a", "-y", "łazienka rodziców (na zewnątrz)"),
@@ -158,7 +159,7 @@ POMIESZCZENIA = [
     R("0.01", "Wiatrołap", "P0", (9.75, 6.45, 11.895, 8.295), "ruchu", posadzka="gres", uw="szafa wnękowa 0,6 m"),
     R("0.02", "Hol", "P0", (8.53, 4.905, 11.895, 6.30), "ruchu", posadzka="gres"),
     R("0.03", "WC gościnne", "P0", (8.53, 6.45, 9.60, 8.295), "pomocnicza", posadzka="gres", uw="szer. 1,07 >= 0,90 (B-17)"),
-    R("0.04", "Klatka schodowa", "P0", unary_union([BIEG_W, SPOCZNIK]), "ruchu", posadzka="dąb"),
+    R("0.04", "Klatka schodówa", "P0", unary_union([BIEG_W, SPOCZNIK]), "ruchu", posadzka="dąb"),
     R("0.05", "Schowek pod schodami", "P0", BIEG_E, "pomocnicza", posadzka="dąb", uw="wys. zmienna 1,37-2,77 m"),
     R("0.06", "Salon + jadalnia + kuchnia", "P0", (0.105, 0.105, 11.895, 4.695), "podstawowa", True, 50.0, "dąb/gres", "strefa otwarta; kuchnia z wyspą przy ścianie E"),
     R("0.07", "Przedpokój gościnny", "P0", box(3.98, 4.905, 5.99, 6.20).difference(SI), "ruchu", posadzka="dąb"),
@@ -175,7 +176,7 @@ POMIESZCZENIA = [
     R("1.03", "Pokój dziecka 1", "P1", (0.105, 0.105, 3.80, 3.50), "podstawowa", True, 12.0, "dąb"),
     R("1.04", "Pokój dziecka 2", "P1", (0.105, 4.905, 3.77, 8.295), "podstawowa", True, 12.0, "dąb"),
     R("1.05", "Łazienka", "P1", box(3.98, 4.905, 5.99, 8.295).difference(SI), "pomocnicza", posadzka="gres"),
-    R("1.06", "Klatka schodowa", "P1", SCHODY_RDZEN.difference(SCIANKA), "ruchu", posadzka="dąb"),
+    R("1.06", "Klatka schodówa", "P1", SCHODY_RDZEN.difference(SCIANKA), "ruchu", posadzka="dąb"),
     R("1.07", "Pralnia z suszarnią", "P1", box(8.53, 4.905, 11.895, 8.295).difference(S2), "pomocnicza", posadzka="gres"),
     # P2
     R("2.01", "Hol", "P2", (6.20, 2.80, 8.32, 4.695), "ruchu", posadzka="dąb"),
@@ -222,6 +223,31 @@ def teren(x, y):
 
 def teren_wzgl(x, y):
     return teren(x, y) - POZ["zero_abs"]
+
+
+# ------------------------------------------------------------------ zagospodarowanie (uklad budynku; dzialka x -7,60...24,40, y -32,70...17,30)
+TEREN_ELEM = dict(
+    podjazd=dict(poly=box(12.30, 9.30, 18.70, 17.30), opis="podjazd - kostka betonowa szara (dojazd do bramy garażu)", typ="utw"),
+    dojscie=dict(poly=box(9.80, 8.70, 12.30, 17.30), opis="dojście do wejscia 2,50 m - płyty betonowe", typ="utw"),
+    taras=dict(poly=unary_union([box(-1.80, -4.30, 11.70, -0.30), box(-1.80, -0.30, -0.30, 4.80)]), opis="taras ogrodowy -0,05 (deska kompozytowa na legarach / płyty)", typ="utw"),
+    sciezka_E=dict(poly=box(18.70, -1.00, 19.60, 9.30), opis="ścieżka żwirowa wzdłuż ściany wsch. (drzwi boczne garażu, jedn. zewn. PC)", typ="utw"),
+    smietnik=dict(poly=box(6.60, 16.10, 9.00, 17.20), opis="osłona na pojemniki (4 x 240 l, segregacja) w linii ogrodzenia, drzwiczki od ulicy", typ="utw"),
+    pc_plyta=dict(poly=box(19.60, 0.40, 20.60, 1.80), opis="jednostka zewn. pompy ciepła na fundamencie z wibroizolacją", typ="utw"),
+    skrzynki=dict(poly=box(-5.50, 14.00, 1.50, 15.20), opis="skrzynki rozsączające 7,0x1,2x0,66 m (V~5,5 m3) - wyłączone z PBC", typ="rozsacz"),
+)
+MIEJSCA_GOSC = [box(12.90, 10.00, 15.40, 15.00), box(15.60, 10.00, 18.10, 15.00)]
+ZBIORNIK = dict(xy=(-2.50, 12.50), wym=(3.0, 2.0), V=6.0, opis="zbiornik retencyjny na deszczówkę 6 m3 (podlewanie ogrodu), przelew do skrzynek")
+OGRODZENIE = dict(brama=(12.50, 18.10), furtka=(10.30, 11.30), wys=1.50)
+ZK = (11.40, 12.20)          # zlacze kablowo-pomiarowe we wnece ogrodzenia (x od-do)
+PRZYLACZA = dict(
+    woda=dict(pts=[(16.80, 20.50), (16.80, 9.30), (16.80, 2.40)], opis="przyłącze wody PE 40 od sieci PE 110; wodomierz w pom. techn. 0.12"),
+    kan=dict(pts=[(5.00, 8.70), (5.00, 15.00), (5.00, 23.00)], opis="przykanalik PVC 160 do sieci PVC 200; studzienka rewizyjna D425 na dzialce"),
+    en=dict(pts=[(11.80, 18.30), (11.80, 17.30), (11.80, 9.40), (12.10, 9.40)], opis="WLZ YKY 5x10 z ZK do rozdzielnicy RG (pom. techn.)"),
+    tel=dict(pts=[(12.00, 18.80), (12.00, 17.30), (12.00, 9.40)], opis="światłowód (kanalizacja teletechniczna)"),
+    deszcz=dict(pts=[(0.50, 8.70), (0.50, 11.50), (-1.00, 12.50)], opis="kanalizacja deszczowa z rur spustowych elewacji pn. do zbiornika"),
+)
+SIEC = dict(woda=20.50, kan=23.00, en=18.30, tel=18.80, gaz=26.30, jezdnia=(19.55, 25.05), pas=(17.30, 27.30))
+DRZEWA = [(-3.5, -14.0, 4.0), (6.0, -21.0, 5.0), (17.5, -13.0, 4.0), (-4.5, -27.0, 3.5), (20.5, -26.0, 3.5), (3.0, 12.2, 2.0)]
 
 # ------------------------------------------------------------------ geometria pochodna
 def wall_poly(w, ext=True):
