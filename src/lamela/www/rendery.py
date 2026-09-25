@@ -27,8 +27,13 @@ PROPORCJE = {"169": (1920, 1080), "43": (1600, 1200)}
 WERSJA = "www-1"
 
 
-def klucz_cache(glb: Path, ujecia: dict, proporcje: dict, ss: int, extra=None) -> str:
-    h = hashlib.sha256(glb.read_bytes())
+def klucz_cache(pliki: list, ujecia: dict, proporcje: dict, ss: int, extra=None) -> str:
+    """Klucz cache renderów: treść plików wejściowych (model YAML, kod IR/eksportu 3D, renderer) + konfiguracja ujęć.
+    Eksport glb nie jest bajtowo deterministyczny, więc kluczem nie jest sam plik glb."""
+    h = hashlib.sha256()
+    for f in sorted(str(x) for x in pliki):
+        h.update(f.encode())
+        h.update(Path(f).read_bytes())
     h.update(json.dumps([WERSJA, ujecia, proporcje, ss, extra], sort_keys=True, default=str).encode())
     for f in ("render.js", "render.py"):
         h.update((R3D / f).read_bytes())

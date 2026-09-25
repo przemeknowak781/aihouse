@@ -60,11 +60,15 @@ def rysuj_belke(vp, placer: Placer, B: KD.BelkaZ, pr: dict, X0: float, Y0: float
     if B.h_pl > 0:
         vp.line((x0, y1 - B.h_pl), (x1, y1 - B.h_pl), L_OBR, pen="cienka", lt="KRESKOWA")
     # podpory (szkic: mur/słup pod końcami i w punktach pośrednich)
-    for s, typ in podpory:
+    for s, typ, *s_end in podpory:
         w_ = 0.18 if typ == "sciana" else 0.12
         gp = box(X0 + s - w_ / 2, y0 - 0.45, X0 + s + w_ / 2, y0)
+        if s_end:                                   # mur współliniowy — podparcie ciągłe na odcinku
+            gp = box(X0 + max(s, 0.0), y0 - 0.45, X0 + min(s_end[0], B.L), y0)
         if typ == "sciana":
             H.hatch(vp, gp, "MUR_SILIKAT")
+        elif typ == "belka":
+            H.hatch(vp, gp, "ZELBET")
         else:
             vp.fill(gp, L_OBR, "#000000")
         vp.geom(gp, L_OBR, pen="srednia")
@@ -158,16 +162,29 @@ def podpory_belki(m, B: KD.BelkaZ) -> list:
         for p in (Point(*B.p0), Point(*B.p1)):
             if w.axis_line().distance(p) < 0.15:
                 out.append((ln.project(p), "sciana"))
-        if abs(float(w.u @ (np.subtract(B.p1, B.p0) / max(B.L, 1e-9)))) < 0.1:
+        cos_ = abs(float(w.u @ (np.subtract(B.p1, B.p0) / max(B.L, 1e-9))))
+        if cos_ < 0.1:
             c = w.axis_line().intersection(ln)
             if not c.is_empty and c.geom_type == "Point":
                 out.append((ln.project(c), "sciana"))
+        elif cos_ > 0.98 and w.axis_line().distance(ln) < 0.05:     # mur współliniowy pod belką — podparcie ciągłe
+            sa, sb = sorted((ln.project(Point(*w.p1)), ln.project(Point(*w.p2))))
+            if sb - sa > 0.3:
+                out.append((sa, "sciana", sb))
     for c in m.slupy():
         if abs(float(c["z_do"]) - B.spod) < 0.1 and ln.distance(Point(*c["xy"])) < 0.15:
             out.append((ln.project(Point(*c["xy"])), "slup"))
+    for b2 in m.belki():                        # koniec oparty na innej belce (belka krawędziowa na wspornikach)
+        if str(b2["id"]) == B.id or not (float(b2["spod"]) - 0.1 <= B.spod <= float(b2["spod"]) + float(b2["h"])):
+            continue
+        l2 = LineString([tuple(b2["os"][0]), tuple(b2["os"][1])])
+        for p in (Point(*B.p0), Point(*B.p1)):
+            s_ = ln.project(p)
+            if l2.distance(p) <= float(b2["b"]) / 2 + 0.05 and not any(abs(q[0] - s_) < 0.3 for q in out):
+                out.append((s_, "belka"))
     uniq = {}
-    for s, t in out:
-        uniq[round(s, 2)] = (s, t)
+    for q in sorted(out, key=lambda q: len(q)):
+        uniq[round(q[0], 2)] = q
     return sorted(uniq.values())
 
 

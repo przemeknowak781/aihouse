@@ -31,7 +31,7 @@ from .obciazenia import (Oddz, ZestawienieStale, ciezar_materialu, kombinacje, o
                          snieg_B2_attyka, snieg_B2_uskok, snieg_dach_plaski, snieg_uskok, wiatr_dach_plaski, wiatr_qp,
                          wiatr_sciany, zastepcze_dzialowe, zestawienie_przegrody)
 from .plyty import PlytaMES, PodporaLiniowa, PodporaPunktowa, PoleCiagle, WynikMES, wood_armer
-from .statyka import Belka, ObcQ, Podpora
+from .statyka import Belka, ObcP, ObcQ, Podpora
 from .wspolne import BladDanych, Parametry, Wynik, f, tabela
 
 TOL_Z = 0.06
@@ -1461,15 +1461,17 @@ class AnalizaKonstrukcji:
                     s_ = sa + (sb - sa) * k / n_
                     if not any(lo + 0.05 < s_ < hi - 0.05 for lo, hi in otw):
                         out.append((s_, "sciana", w))
-            else:                                                 # (2) poprzeczna
+            else:                                                 # (2) poprzeczna / ściana dochodząca (T)
                 ip = lw.intersection(lnb)
-                s_ = lnb.project(ip if (not ip.is_empty and ip.geom_type == "Point") else
-                                 lw.interpolate(lw.project(lnb.interpolate(0.5, normalized=True))))
+                if ip.is_empty or ip.geom_type != "Point":
+                    ip = min((Point(*w.p1), Point(*w.p2)), key=lnb.distance)
+                s_ = lnb.project(ip)
                 if 0.0 <= s_ <= L:
                     out.append((s_, "sciana", w))
+        oparte = getattr(self, "belki_oparte", set())
         for b2 in m.belki():                                      # (3) końce na innej belce
-            if b2 is b or str(b2["id"]) == str(b["id"]):
-                continue
+            if b2 is b or str(b2["id"]) == str(b["id"]) or (str(b2["id"]), str(b["id"])) in oparte:
+                continue                                          # (belka b2 już oparta na b — bez podparcia wzajemnego)
             l2 = LineString([tuple(b2["os"][0]), tuple(b2["os"][1])])
             if not (float(b2["spod"]) - TOL_Z <= spod <= float(b2["spod"]) + float(b2["h"]) + TOL_Z):
                 continue
@@ -1556,10 +1558,13 @@ class AnalizaKonstrukcji:
             h_pl = next((e.h for e in g.el if abs(spod + hb - e.spod) < TOL_Z), 0.0)
             gw = bw * hb * p.ciezar_zelbetu if not stalowa else 0.0
             obc["G"] = obc.get("G", []) + [ObcQ(gw)]
+            for cs, P_, xy in self.pending_belki.get(bid, []):        # reakcje belek opartych na tej belce
+                obc.setdefault(cs, []).append(ObcP(P_, min(max((xy[0] - x0) * ux + (xy[1] - y0) * uy, 0.0), L)))
             # wspólna siatka węzłów dla wszystkich przypadków (rozwiaz() dogęszcza siatkę w punktach nieciągłości
             # obciążeń — bez tego wektory M(x) przypadków mają różne długości i obwiednia się nie składa)
             belka.dodaj_punkty([t for v in obc.values() for q in v if isinstance(q, ObcQ)
-                                for t in (q.x0, q.x1) if t is not None])
+                                for t in (q.x0, q.x1) if t is not None]
+                               + [q.x for v in obc.values() for q in v if isinstance(q, ObcP)])
             rozw = {cs: belka.rozwiaz(v) for cs, v in obc.items()}
             kombs = [k for k in kombinacje(g.odz, p, "STR") + kombinacje(g.odz, p, "wyj")]
             Ms = np.array([sum(a * rozw[c].M for c, a in kb.wsp.items() if c in rozw) for kb in kombs])
@@ -1569,9 +1574,13 @@ class AnalizaKonstrukcji:
             qp = rozw["G"] * 1.0 + (rozw["QA"] * p.psi_of("A")[2] if "QA" in rozw else rozw["G"] * 0)
             poz.opis.append(f"Belka {'stalowa' if stalowa else 'żelbetowa'} b × h = {f(bw * 100, 0)} × {f(hb * 100, 0)} cm, "
                             f"oś ({f(x0)}, {f(y0)}) → ({f(x1)}, {f(y1)}), L = {f(L, 3)} m; podpory: "
-                            + ", ".join(f"{('ściana ' + o.id) if t == 'sciana' else ('słup ' + str(o['id']))} (x = {f(s, 2)} m)"
-                                        for s, t, o in pods) + ". Obciążenie: reakcje płyty z MES (rozkład wzdłuż belki) + ciężar własny.")
-            rows = [[cs, (sum(q.q0 * ((q.x1 or L) - (q.x0 or 0)) for q in v if isinstance(q, ObcQ)), 1)] for cs, v in obc.items()]
+                            + ", ".join(f"{('ściana ' + o.id) if t == 'sciana' else ({'belka': 'belka ', 'slup': 'słup '}[t] + str(o['id']))} "
+                                        f"(x = {f(s, 2)} m)" for s, t, o in pods)
+                            + ". Obciążenie: reakcje płyty z MES (rozkład wzdłuż belki) + ciężar własny"
+                            + (" + reakcje belek opartych na końcach (siły skupione)" if self.pending_belki.get(bid) else "")
+                            + ".")
+            rows = [[cs, (sum(q.q0 * ((q.x1 or L) - (q.x0 or 0)) for q in v if isinstance(q, ObcQ))
+                          + sum(q.P for q in v if isinstance(q, ObcP)), 1)] for cs, v in obc.items()]
             poz.obciazenia.append("**Obciążenia belki (charakterystyczne, wypadkowe przypadków)**\n\n" +
                                   tabela(["Przypadek", "Σq·l ≈ [kN]"], rows))
             w0 = Wynik(nazwa=f"Siły wewnętrzne — {bid} (obwiednia kombinacji)")
@@ -1635,11 +1644,17 @@ class AnalizaKonstrukcji:
                     R = float(r.R[k])
                     if t == "sciana":
                         self.pending_sciany.setdefault(o.id, []).append((cs, R, o.st((x0 + ux * s, y0 + uy * s))[0], 0.25))
+                    elif t == "belka":
+                        self.pending_belki.setdefault(str(o["id"]), []).append((cs, R, (x0 + ux * s, y0 + uy * s)))
+                        self.belki_oparte = getattr(self, "belki_oparte", set()) | {(bid, str(o["id"]))}
                     else:
                         d_ = self.slupy_N.setdefault(str(o["id"]), {})
                         d_[cs] = d_.get(cs, 0.0) + R
-            poz.dane["reakcje"] = {(o.id if t == "sciana" else str(o["id"])): {cs: float(r.R[k]) for cs, r in rozw.items()}
-                                   for k, (s, t, o) in enumerate(pods)}
+            poz.dane["reakcje"] = {}
+            for k, (s, t, o) in enumerate(pods):          # podparcie ciągłe (wiele podpór jednej ściany) — sumy reakcji
+                dd = poz.dane["reakcje"].setdefault(o.id if t == "sciana" else str(o["id"]), {})
+                for cs, r in rozw.items():
+                    dd[cs] = dd.get(cs, 0.0) + float(r.R[k])
             self.pos_belki.append(poz)
 
     def _slupy_pod_grupa(self, g: Grupa):

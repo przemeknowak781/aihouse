@@ -70,6 +70,14 @@
     dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
   }
 
+  /* przycisk pakietu → wybór pakietu w formularzu (przewinięcie zapewnia kotwica #zapytanie) */
+  $$('[data-pakiet]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      var s = document.getElementById('z-pakiet');
+      if (s) s.value = a.getAttribute('data-pakiet');
+    });
+  });
+
   /* kopiowanie adresu (adres pokazany jako tekst; schowek może być niedostępny) */
   $$('[data-kopiuj]').forEach(function (b) {
     b.addEventListener('click', function () {
