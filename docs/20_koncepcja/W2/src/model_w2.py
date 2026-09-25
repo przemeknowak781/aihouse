@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Wariant W2 koncepcji Domu LAMELA - FUNKCJA / EKONOMIA / KONSTRUKCJA.
-Jedno zrodlo prawdy dla rysunkow i opisu wariantu (uklad budynku: x->E, y->N, z->gora, 0,0 = osie A/1).
+Jedno źródło prawdy dla rysunków i opisu wariantu (układ budynku: x->E, y->N, z->gora, 0,0 = osie A/1).
 Wszystkie wymiary w metrach."""
 from shapely.geometry import Polygon, box, LineString
 from shapely.ops import unary_union
@@ -12,12 +12,12 @@ OSIE_Y = {"1": 0.000, "2": 2.600, "3": 4.800, "4": 8.400, "5": 9.000}
 
 # ------------------------------------------------------------------ typy scian: (odsuniecie lica po stronie 'lewej'/wnetrza, po stronie 'prawej')
 TYPY = {
-    "SZ1":  dict(nazwa="sciana zewn. nosna: tynk 1,5 + silikat 18 + EPS grafit/welna 20 + tynk 1 cm", L=0.105, R=0.300, kol="#8c8c8c"),
-    "SZL":  dict(nazwa="sciana zewn. lekka P2 (wspornik): szkielet stal/drewno + welna 20 + plyta, gr. 40,5 cm", L=0.105, R=0.300, kol="#b0a58c"),
-    "SW18": dict(nazwa="sciana wewn. nosna: silikat 18 + 2x tynk 1,5", L=0.105, R=0.105, kol="#8c8c8c"),
-    "SWG":  dict(nazwa="sciana nosna dom/garaz: tynk 1,5 + silikat 18 + welna 12 + tynk 1 (U~0,28)", L=0.105, R=0.220, kol="#8c8c8c"),
-    "SC12": dict(nazwa="scianka srodkowa schodow: silikat 12 (fair-faced)", L=0.060, R=0.060, kol="#a9a9a9"),
-    "DZ12": dict(nazwa="scianka dzialowa: silikat 12 + 2x tynk 1,5", L=0.075, R=0.075, kol="#c8c8c8"),
+    "SZ1":  dict(nazwa="ściana zewn. nośna: tynk 1,5 + silikat 18 + EPS grafit/welna 20 + tynk 1 cm", L=0.105, R=0.300, kol="#8c8c8c"),
+    "SZL":  dict(nazwa="ściana zewn. lekka P2 (wspornik): szkielet stal/drewno + welna 20 + płyta, gr. 40,5 cm", L=0.105, R=0.300, kol="#b0a58c"),
+    "SW18": dict(nazwa="ściana wewn. nośna: silikat 18 + 2x tynk 1,5", L=0.105, R=0.105, kol="#8c8c8c"),
+    "SWG":  dict(nazwa="ściana nośna dom/garaż: tynk 1,5 + silikat 18 + welna 12 + tynk 1 (U~0,28)", L=0.105, R=0.220, kol="#8c8c8c"),
+    "SC12": dict(nazwa="ścianka środkowa schodów: silikat 12 (fair-faced)", L=0.060, R=0.060, kol="#a9a9a9"),
+    "DZ12": dict(nazwa="ścianka działowa: silikat 12 + 2x tynk 1,5", L=0.075, R=0.075, kol="#c8c8c8"),
 }
 
 # ------------------------------------------------------------------ poziomy
@@ -34,50 +34,50 @@ def W(i, k, t, p1, p2, e1=0.0, e2=0.0, uw=""):
 E = 0.30  # przedluzenie w narozu zewnetrznym
 SCIANY = [
     # ---------------- P0
-    W("S0-01", "P0", "SZ1", (0, 0), (12, 0), E, 0, "fasada pd. strefy dziennej: przeszklenie 5 kwater na slupach stalowych SL1-SL4 + belka B1"),
-    W("S0-02", "P0", "SZ1", (12, 0), (18.4, 0), 0, E, "sciana pd. strefy gospodarczej (pelna - bryla G)"),
-    W("S0-03", "P0", "SZ1", (18.4, 0), (18.4, 9.0), E, E, "sciana wsch. garazu (pion D)"),
-    W("S0-04", "P0", "SZ1", (18.4, 9.0), (12, 9.0), E, E, "sciana pn. garazu z brama"),
-    W("S0-05", "P0", "SZ1", (12, 9.0), (12, 8.4), E, 0, "sciana zach. garazu - odcinek zewn."),
-    W("S0-06", "P0", "SZ1", (12, 8.4), (0, 8.4), 0, E, "sciana pn. czesci mieszkalnej"),
-    W("S0-07", "P0", "SZ1", (0, 8.4), (0, 0), E, E, "sciana zach. (os A)"),
-    W("S0-08", "P0", "SW18", (0, 4.8), (12, 4.8), 0, 0, "sciana grzbietowa (os 3)"),
+    W("S0-01", "P0", "SZ1", (0, 0), (12, 0), E, 0, "fasada pd. strefy dziennej: przeszklenie 5 kwater na słupach stalowych SL1-SL4 + belka B1"),
+    W("S0-02", "P0", "SZ1", (12, 0), (18.4, 0), 0, E, "ściana pd. strefy gospodarczej (pełna - bryła G)"),
+    W("S0-03", "P0", "SZ1", (18.4, 0), (18.4, 9.0), E, E, "ściana wsch. garażu (pion D)"),
+    W("S0-04", "P0", "SZ1", (18.4, 9.0), (12, 9.0), E, E, "ściana pn. garażu z brama"),
+    W("S0-05", "P0", "SZ1", (12, 9.0), (12, 8.4), E, 0, "ściana zach. garażu - odcinek zewn."),
+    W("S0-06", "P0", "SZ1", (12, 8.4), (0, 8.4), 0, E, "ściana pn. częśći mieszkalnej"),
+    W("S0-07", "P0", "SZ1", (0, 8.4), (0, 0), E, E, "ściana zach. (os A)"),
+    W("S0-08", "P0", "SW18", (0, 4.8), (12, 4.8), 0, 0, "ściana grzbietowa (os 3)"),
     W("S0-09", "P0", "SW18", (3.875, 4.8), (3.875, 8.4), 0, 0, "os B"),
     W("S0-10", "P0", "SW18", (6.095, 4.8), (6.095, 8.4), 0, 0, "os C - klatka schodowa"),
     W("S0-11", "P0", "SW18", (8.425, 4.8), (8.425, 8.4), 0, 0, "os D - klatka schodowa"),
     W("S0-12", "P0", "SW18", (12, 0), (12, 2.6), 0, 0, "os E - kuchnia/przedsionek"),
-    W("S0-13", "P0", "SWG", (12, 2.6), (12, 8.4), 0, 0, "os E - dom/garaz (ocieplona od garazu)"),
-    W("S0-14", "P0", "SWG", (18.4, 2.6), (12, 2.6), 0, 0, "os 2 - strefa gosp./garaz"),
-    W("S0-15", "P0", "SC12", (7.26, 4.8), (7.26, 7.145), 0, 0, "scianka srodkowa schodow"),
+    W("S0-13", "P0", "SWG", (12, 2.6), (12, 8.4), 0, 0, "os E - dom/garaż (ocieplona od garażu)"),
+    W("S0-14", "P0", "SWG", (18.4, 2.6), (12, 2.6), 0, 0, "os 2 - strefa gosp./garaż"),
+    W("S0-15", "P0", "SC12", (7.26, 4.8), (7.26, 7.145), 0, 0, "ścianka środkowa schodów"),
     W("S0-16", "P0", "DZ12", (3.875, 6.275), (6.095, 6.275)),
     W("S0-17", "P0", "DZ12", (8.425, 6.375), (12, 6.375)),
     W("S0-18", "P0", "DZ12", (9.675, 6.375), (9.675, 8.4)),
     W("S0-19", "P0", "DZ12", (14.275, 0), (14.275, 2.6)),
     W("S0-20", "P0", "DZ12", (15.475, 0), (15.475, 2.6)),
     # ---------------- P1
-    W("S1-01", "P1", "SZ1", (0, 0), (12, 0), E, E, "sciana pd. bryly B, otwor boksu C na belce B1"),
-    W("S1-02", "P1", "SZ1", (12, 0), (12, 8.4), E, E, "sciana wsch. (os E)"),
-    W("S1-03", "P1", "SZ1", (12, 8.4), (0, 8.4), E, E, "sciana pn."),
-    W("S1-04", "P1", "SZ1", (0, 8.4), (0, 0), E, E, "sciana zach. (os A)"),
-    W("S1-05", "P1", "SW18", (0, 4.8), (12, 4.8), 0, 0, "sciana grzbietowa (os 3)"),
+    W("S1-01", "P1", "SZ1", (0, 0), (12, 0), E, E, "ściana pd. bryły B, otwor boksu C na belce B1"),
+    W("S1-02", "P1", "SZ1", (12, 0), (12, 8.4), E, E, "ściana wsch. (os E)"),
+    W("S1-03", "P1", "SZ1", (12, 8.4), (0, 8.4), E, E, "ściana pn."),
+    W("S1-04", "P1", "SZ1", (0, 8.4), (0, 0), E, E, "ściana zach. (os A)"),
+    W("S1-05", "P1", "SW18", (0, 4.8), (12, 4.8), 0, 0, "ściana grzbietowa (os 3)"),
     W("S1-06", "P1", "SW18", (3.875, 4.8), (3.875, 8.4), 0, 0, "os B"),
     W("S1-07", "P1", "SW18", (6.095, 4.8), (6.095, 8.4), 0, 0, "os C"),
     W("S1-08", "P1", "SW18", (8.425, 4.8), (8.425, 8.4), 0, 0, "os D"),
-    W("S1-09", "P1", "SC12", (7.26, 4.8), (7.26, 7.145), 0, 0, "scianka srodkowa schodow"),
+    W("S1-09", "P1", "SC12", (7.26, 4.8), (7.26, 7.145), 0, 0, "ścianka środkowa schodów"),
     W("S1-10", "P1", "DZ12", (3.875, 0), (3.875, 3.575), 0, 0.075),
     W("S1-11", "P1", "DZ12", (0, 3.575), (3.875, 3.575), 0, 0.075),
     # ---------------- P2
-    W("S2-01", "P2", "SZ1", (-1, 0), (12, 0), E, E, "sciana pd. bryly A; odc. x -1,0...2,0 zelbetowa sciana-tarcza"),
-    W("S2-02", "P2", "SZ1", (12, 0), (12, 4.8), E, E, "sciana wsch."),
-    W("S2-03", "P2", "SZ1", (12, 4.8), (8.425, 4.8), E, 0, "sciana pn. bryly A (nad dachem P1)"),
-    W("S2-04", "P2", "SZ1", (8.425, 4.8), (8.425, 8.4), 0, E, "nadbudowa klatki/lazienki - sciana wsch."),
-    W("S2-05", "P2", "SZ1", (8.425, 8.4), (3.875, 8.4), E, E, "nadbudowa - sciana pn."),
-    W("S2-06", "P2", "SZ1", (3.875, 8.4), (3.875, 4.8), E, 0, "nadbudowa - sciana zach."),
-    W("S2-07", "P2", "SZ1", (3.875, 4.8), (-1, 4.8), 0, E, "sciana pn. bryly A; odc. x -1,0...2,0 zelbetowa sciana-tarcza"),
-    W("S2-08", "P2", "SZL", (-1, 4.8), (-1, 0), E, E, "sciana zach. na wsporniku 1,0 m (lekka)"),
+    W("S2-01", "P2", "SZ1", (-1, 0), (12, 0), E, E, "ściana pd. bryły A; odc. x -1,0...2,0 żelbetowa ściana-tarcza"),
+    W("S2-02", "P2", "SZ1", (12, 0), (12, 4.8), E, E, "ściana wsch."),
+    W("S2-03", "P2", "SZ1", (12, 4.8), (8.425, 4.8), E, 0, "ściana pn. bryły A (nad dachem P1)"),
+    W("S2-04", "P2", "SZ1", (8.425, 4.8), (8.425, 8.4), 0, E, "nadbudowa klatki/łazienki - ściana wsch."),
+    W("S2-05", "P2", "SZ1", (8.425, 8.4), (3.875, 8.4), E, E, "nadbudowa - ściana pn."),
+    W("S2-06", "P2", "SZ1", (3.875, 8.4), (3.875, 4.8), E, 0, "nadbudowa - ściana zach."),
+    W("S2-07", "P2", "SZ1", (3.875, 4.8), (-1, 4.8), 0, E, "ściana pn. bryły A; odc. x -1,0...2,0 żelbetowa ściana-tarcza"),
+    W("S2-08", "P2", "SZL", (-1, 4.8), (-1, 0), E, E, "ściana zach. na wsporniku 1,0 m (lekka)"),
     W("S2-09", "P2", "SW18", (3.875, 4.8), (8.425, 4.8), 0, 0, "os 3 wewn."),
     W("S2-10", "P2", "SW18", (6.095, 4.8), (6.095, 8.4), 0, 0, "os C"),
-    W("S2-11", "P2", "SC12", (7.26, 4.8), (7.26, 7.145), 0, 0, "scianka srodkowa schodow"),
+    W("S2-11", "P2", "SC12", (7.26, 4.8), (7.26, 7.145), 0, 0, "ścianka środkowa schodów"),
     W("S2-12", "P2", "DZ12", (3.675, 0), (3.675, 4.8)),
     W("S2-13", "P2", "DZ12", (6.125, 0), (6.125, 4.8)),
     W("S2-14", "P2", "DZ12", (8.395, 0), (8.395, 4.8)),
@@ -91,50 +91,50 @@ def O(i, s, a, b, typ, wys, par=0.0, sym="", zaw=None, kier=None, uw="", kw=1):
 
 OTWORY = [
     # ---------------- P0
-    O("O0-01", "S0-01", 0.30, 11.70, "fasada", 2.75, 0.0, "FS1", uw="przeszklenie E: 5 kwater po 2,28 m (kw. 2 i 4 - drzwi HS), slupki SL1-SL4 w szprosach", kw=5),
+    O("O0-01", "S0-01", 0.30, 11.70, "fasada", 2.75, 0.0, "FS1", uw="przeszklenie E: 5 kwater po 2,28 m (kw. 2 i 4 - drzwi HS), słupki SL1-SL4 w szprosach", kw=5),
     O("O0-02", "S0-07", 1.20, 3.60, "okno", 2.15, 0.45, "OZ1", uw="okno zach. salonu (siedzisko), pod okapem 1,5 m"),
-    O("O0-03", "S0-07", 5.50, 7.30, "okno", 1.50, 0.90, "OZ2", uw="pokoj goscinny"),
-    O("O0-04", "S0-06", 10.20, 11.30, "drzwi_zewn", 2.40, 0.0, "DZ1", "b", "-y", "drzwi wejsciowe 110x240 (w swietle oscieznicy >= 0,90x2,00), prog <= 2 cm"),
+    O("O0-03", "S0-07", 5.50, 7.30, "okno", 1.50, 0.90, "OZ2", uw="pokój gościnny"),
+    O("O0-04", "S0-06", 10.20, 11.30, "drzwi_zewn", 2.40, 0.0, "DZ1", "a", "-y", "drzwi wejściowe 110x240 (w świetle ościeżnicy >= 0,90x2,00), prog <= 2 cm"),
     O("O0-05", "S0-04", 12.75, 17.75, "brama", 2.25, 0.0, "BR1", uw="brama segmentowa 500x225, kratki went. >= 0,08 m2"),
-    O("O0-06", "S0-03", 5.00, 5.90, "drzwi_zewn", 2.10, 0.0, "DZ2", "a", "-x", "drzwi boczne garazu (rowery, ogrod)"),
-    O("O0-07", "S0-08", 4.20, 5.10, "otwor", 2.10, 0.0, "", uw="przejscie do przedpokoju goscinnego"),
-    O("O0-08", "S0-08", 6.20, 7.20, "otwor", 2.55, 0.0, "", uw="wejscie na bieg 1 schodow"),
+    O("O0-06", "S0-03", 5.00, 5.90, "drzwi_zewn", 2.10, 0.0, "DZ2", "a", "-x", "drzwi boczne garażu (rowery, ogrod)"),
+    O("O0-07", "S0-08", 4.20, 5.10, "otwor", 2.10, 0.0, "", uw="przejście do przedpokóju gościnnego"),
+    O("O0-08", "S0-08", 6.20, 7.20, "otwor", 2.55, 0.0, "", uw="wejście na bieg 1 schodów"),
     O("O0-09", "S0-08", 7.40, 8.20, "drzwi", 2.00, 0.0, "D3", "a", "+y", "schowek pod schodami"),
     O("O0-10", "S0-08", 8.80, 10.20, "otwor", 2.40, 0.0, "", uw="hol - strefa dzienna"),
-    O("O0-11", "S0-09", 5.10, 6.00, "drzwi", 2.05, 0.0, "D1", "a", "-x", "pokoj goscinny"),
-    O("O0-12", "S0-16", 4.20, 5.00, "drzwi", 2.05, 0.0, "D2", "a", "-y", "lazienka goscinna (na zewnatrz, kratka)"),
-    O("O0-13", "S0-17", 10.30, 11.20, "drzwi", 2.05, 0.0, "D1", "b", "-y", "wiatrolap - hol"),
-    O("O0-14", "S0-17", 8.70, 9.50, "drzwi", 2.05, 0.0, "D2", "a", "-y", "WC (na zewnatrz, kratka)"),
+    O("O0-11", "S0-09", 5.10, 6.00, "drzwi", 2.05, 0.0, "D1", "a", "-x", "pokój gościnny"),
+    O("O0-12", "S0-16", 4.20, 5.00, "drzwi", 2.05, 0.0, "D2", "a", "-y", "łazienka gościnna (na zewnątrz, kratka)"),
+    O("O0-13", "S0-17", 10.30, 11.20, "drzwi", 2.05, 0.0, "D1", "b", "-y", "wiatrołap - hol"),
+    O("O0-14", "S0-17", 8.70, 9.50, "drzwi", 2.05, 0.0, "D2", "a", "-y", "WC (na zewnątrz, kratka)"),
     O("O0-15", "S0-12", 1.00, 1.90, "drzwi", 2.05, 0.0, "D1", "a", "+x", "kuchnia - przedsionek gosp."),
-    O("O0-16", "S0-14", 12.50, 13.40, "drzwi", 2.05, 0.0, "DG1", "a", "+y", "przedsionek - garaz: szczelne, samozamykacz, U<=1,3"),
-    O("O0-17", "S0-14", 16.60, 17.50, "drzwi", 2.05, 0.0, "DG1", "b", "+y", "pom. techniczne - garaz"),
-    O("O0-18", "S0-19", 1.10, 1.90, "drzwi", 2.05, 0.0, "D3", "a", "+x", "spizarnia"),
+    O("O0-16", "S0-14", 12.50, 13.40, "drzwi", 2.05, 0.0, "DG1", "a", "+y", "przedsionek - garaż: szczelne, samozamykacz, U<=1,3"),
+    O("O0-17", "S0-14", 16.60, 17.50, "drzwi", 2.05, 0.0, "DG1", "b", "+y", "pom. techniczne - garaż"),
+    O("O0-18", "S0-19", 1.10, 1.90, "drzwi", 2.05, 0.0, "D3", "a", "+x", "spiżarnia"),
     # ---------------- P1
-    O("O1-01", "S1-01", 4.10, 11.10, "boks", 1.50, 0.70, "BC1", uw="boks C: 3 kwatery 2,33 m, dolna czesc stala VSG do 0,85 m (K-17), slupki w szprosach", kw=3),
-    O("O1-02", "S1-02", 1.60, 2.80, "okno", 1.50, 0.85, "OE1", uw="pokoj rodzinny - widok na dach zielony"),
-    O("O1-03", "S1-03", 4.40, 5.30, "okno", 0.60, 1.50, "ON1", uw="lazienka - okno doswietlajace"),
+    O("O1-01", "S1-01", 4.10, 11.10, "boks", 1.50, 0.70, "BC1", uw="boks C: 3 kwatery 2,33 m, dolna część stała VSG do 0,85 m (K-17), słupki w szprosach", kw=3),
+    O("O1-02", "S1-02", 1.60, 2.80, "okno", 1.50, 0.85, "OE1", uw="pokój rodzinny - widok na dach zielony"),
+    O("O1-03", "S1-03", 4.40, 5.30, "okno", 0.60, 1.50, "ON1", uw="łazienka - okno doświetlające"),
     O("O1-04", "S1-03", 10.00, 11.20, "okno", 0.60, 1.50, "ON2", uw="pralnia"),
-    O("O1-05", "S1-04", 5.70, 7.50, "okno", 1.50, 0.85, "OZ2", uw="pokoj dziecka 2"),
-    O("O1-06", "S1-04", 0.90, 2.70, "okno", 1.50, 0.85, "OZ2", uw="pokoj dziecka 1 (elewacja pd. bryly B pelna jak w szkicu)"),
-    O("O1-07", "S1-05", 2.70, 3.60, "drzwi", 2.05, 0.0, "D1", "a", "+y", "pokoj dziecka 2"),
-    O("O1-08", "S1-05", 4.20, 5.00, "drzwi", 2.05, 0.0, "D2", "a", "-y", "lazienka (na zewnatrz)"),
+    O("O1-05", "S1-04", 5.70, 7.50, "okno", 1.50, 0.85, "OZ2", uw="pokój dziecka 2"),
+    O("O1-06", "S1-04", 0.90, 2.70, "okno", 1.50, 0.85, "OZ2", uw="pokój dziecka 1 (elewacja pd. bryły B pełna jak w szkicu)"),
+    O("O1-07", "S1-05", 2.70, 3.60, "drzwi", 2.05, 0.0, "D1", "a", "+y", "pokój dziecka 2"),
+    O("O1-08", "S1-05", 4.20, 5.00, "drzwi", 2.05, 0.0, "D2", "a", "-y", "łazienka (na zewnątrz)"),
     O("O1-09", "S1-05", 6.20, 8.32, "otwor", 2.55, 0.0, "", uw="klatka schodowa - oba biegi"),
     O("O1-10", "S1-05", 9.00, 9.90, "drzwi", 2.05, 0.0, "D1", "b", "+y", "pralnia"),
-    O("O1-11", "S1-11", 2.70, 3.60, "drzwi", 2.05, 0.0, "D1", "a", "-y", "pokoj dziecka 1"),
+    O("O1-11", "S1-11", 2.70, 3.60, "drzwi", 2.05, 0.0, "D1", "a", "-y", "pokój dziecka 1"),
     # ---------------- P2
-    O("O2-01", "S2-01", 0.20, 3.20, "okno", 2.00, 0.60, "OP1", uw="sypialnia; za lamelami; dolna czesc stala do 0,85; skrzydla do wewnatrz (K-16)"),
+    O("O2-01", "S2-01", 0.20, 3.20, "okno", 2.00, 0.60, "OP1", uw="sypialnia; za lamelami; dolna część stała do 0,85; skrzydła do wewnątrz (K-16)"),
     O("O2-02", "S2-01", 4.30, 5.50, "okno", 1.75, 0.85, "OP2", uw="garderoba; za lamelami"),
     O("O2-03", "S2-01", 8.90, 11.30, "okno", 2.00, 0.60, "OP1", uw="gabinet; za lamelami"),
     O("O2-04", "S2-02", 1.80, 3.00, "okno", 1.75, 0.85, "OP2", uw="gabinet - wschod"),
-    O("O2-05", "S2-05", 6.40, 8.10, "okno", 1.50, 0.90, "ON3", uw="okno nad klatka schodowa (polnoc)"),
-    O("O2-06", "S2-05", 4.30, 5.20, "okno", 0.80, 1.50, "ON1", uw="lazienka rodzicow"),
+    O("O2-05", "S2-05", 6.40, 8.10, "okno", 1.50, 0.90, "ON3", uw="okno nad klatka schodowa (północ)"),
+    O("O2-06", "S2-05", 4.30, 5.20, "okno", 0.80, 1.50, "ON1", uw="łazienka rodziców"),
     O("O2-07", "S2-08", 1.20, 3.60, "okno", 2.00, 0.60, "OP1", uw="sypialnia - zachod"),
-    O("O2-08", "S2-09", 4.20, 5.00, "drzwi", 2.05, 0.0, "D2", "a", "-y", "lazienka rodzicow (na zewnatrz)"),
-    O("O2-09", "S2-09", 7.32, 8.32, "otwor", 2.40, 0.0, "", uw="wyjscie z biegu 2 schodow"),
+    O("O2-08", "S2-09", 4.20, 5.00, "drzwi", 2.05, 0.0, "D2", "a", "-y", "łazienka rodziców (na zewnątrz)"),
+    O("O2-09", "S2-09", 7.32, 8.32, "otwor", 2.40, 0.0, "", uw="wyjście z biegu 2 schodów"),
     O("O2-10", "S2-12", 3.40, 4.20, "drzwi", 2.05, 0.0, "D1", "b", "-x", "sypialnia"),
-    O("O2-11", "S2-13", 3.30, 4.10, "drzwi", 2.05, 0.0, "D1", "b", "-x", "garderoba (wejscie do apartamentu)"),
+    O("O2-11", "S2-13", 3.30, 4.10, "drzwi", 2.05, 0.0, "D1", "b", "-x", "garderoba (wejście do apartamentu)"),
     O("O2-12", "S2-14", 3.30, 4.20, "drzwi", 2.05, 0.0, "D1", "b", "+x", "gabinet"),
-    O("O2-13", "S2-15", 6.60, 7.40, "drzwi", 2.05, 0.0, "D3", "a", "-y", "pom. techniczne (rekuperator, wylaz na dach)"),
+    O("O2-13", "S2-15", 6.60, 7.40, "drzwi", 2.05, 0.0, "D3", "a", "-y", "pom. techniczne (rekuperator, wyłaz na dach)"),
 ]
 
 # ------------------------------------------------------------------ pomieszczenia (lica wykonczone): id, nazwa, kond, wielobok/prostokat, kategoria, pobyt, min
@@ -155,35 +155,35 @@ SPOCZNIK = box(6.20, 7.145, 8.32, 8.295)
 
 POMIESZCZENIA = [
     # P0
-    R("0.01", "Wiatrolap", "P0", (9.75, 6.45, 11.895, 8.295), "ruchu", posadzka="gres", uw="szafa wnekowa 0,6 m"),
+    R("0.01", "Wiatrołap", "P0", (9.75, 6.45, 11.895, 8.295), "ruchu", posadzka="gres", uw="szafa wnękowa 0,6 m"),
     R("0.02", "Hol", "P0", (8.53, 4.905, 11.895, 6.30), "ruchu", posadzka="gres"),
-    R("0.03", "WC goscinne", "P0", (8.53, 6.45, 9.60, 8.295), "pomocnicza", posadzka="gres", uw="szer. 1,07 >= 0,90 (B-17)"),
-    R("0.04", "Klatka schodowa", "P0", unary_union([BIEG_W, SPOCZNIK]), "ruchu", posadzka="dab"),
-    R("0.05", "Schowek pod schodami", "P0", BIEG_E, "pomocnicza", posadzka="dab", uw="wys. zmienna 1,37-2,77 m"),
-    R("0.06", "Salon + jadalnia + kuchnia", "P0", (0.105, 0.105, 11.895, 4.695), "podstawowa", True, 50.0, "dab/gres", "strefa otwarta; kuchnia z wyspa przy scianie E"),
-    R("0.07", "Przedpokoj goscinny", "P0", box(3.98, 4.905, 5.99, 6.20).difference(SI), "ruchu", posadzka="dab"),
-    R("0.08", "Lazienka goscinna (prysznic)", "P0", (3.98, 6.35, 5.99, 8.295), "pomocnicza", posadzka="gres"),
-    R("0.09", "Pokoj goscinny / gabinet", "P0", (0.105, 4.905, 3.77, 8.295), "podstawowa", True, 8.0, "dab"),
-    R("0.10", "Przedsionek gospodarczy", "P0", (12.105, 0.105, 14.20, 2.495), "ruchu", posadzka="gres", uw="lawka, buty, zlew gosp."),
-    R("0.11", "Spizarnia", "P0", (14.35, 0.105, 15.40, 2.495), "pomocnicza", posadzka="gres"),
+    R("0.03", "WC gościnne", "P0", (8.53, 6.45, 9.60, 8.295), "pomocnicza", posadzka="gres", uw="szer. 1,07 >= 0,90 (B-17)"),
+    R("0.04", "Klatka schodowa", "P0", unary_union([BIEG_W, SPOCZNIK]), "ruchu", posadzka="dąb"),
+    R("0.05", "Schowek pod schodami", "P0", BIEG_E, "pomocnicza", posadzka="dąb", uw="wys. zmienna 1,37-2,77 m"),
+    R("0.06", "Salon + jadalnia + kuchnia", "P0", (0.105, 0.105, 11.895, 4.695), "podstawowa", True, 50.0, "dąb/gres", "strefa otwarta; kuchnia z wyspą przy ścianie E"),
+    R("0.07", "Przedpokój gościnny", "P0", box(3.98, 4.905, 5.99, 6.20).difference(SI), "ruchu", posadzka="dąb"),
+    R("0.08", "Łazienka gościnna (prysznic)", "P0", (3.98, 6.35, 5.99, 8.295), "pomocnicza", posadzka="gres"),
+    R("0.09", "Pokój gościnny / gabinet", "P0", (0.105, 4.905, 3.77, 8.295), "podstawowa", True, 8.0, "dąb"),
+    R("0.10", "Przedsionek gospodarczy", "P0", (12.105, 0.105, 14.20, 2.495), "ruchu", posadzka="gres", uw="ławka, buty, zlew gosp."),
+    R("0.11", "Spiżarnia", "P0", (14.35, 0.105, 15.40, 2.495), "pomocnicza", posadzka="gres"),
     R("0.12", "Pomieszczenie techniczne", "P0", (15.55, 0.105, 18.295, 2.495), "techniczna", minimum=6.0, posadzka="gres",
       uw="PC split (jedn. wewn.), zasobnik CWU 300 l, bufor, rozdzielacze, rozdzielnica RG, wodomierz"),
-    R("0.13", "Garaz 2-stanowiskowy", "P0", (12.22, 2.82, 18.295, 8.895), "garaz", posadzka="posadzka zywiczna", uw="w swietle 6,08 x 6,08 m"),
+    R("0.13", "Garaż 2-stanowiskowy", "P0", (12.22, 2.82, 18.295, 8.895), "garaż", posadzka="posadzka żywiczna", uw="w świetle 6,08 x 6,08 m"),
     # P1
-    R("1.01", "Hol", "P1", (0.105, 3.65, 8.32, 4.695), "ruchu", posadzka="dab"),
-    R("1.02", "Pokoj rodzinny / biblioteka (boks C)", "P1", unary_union([box(3.95, 0.105, 11.895, 3.65), box(8.32, 3.65, 11.895, 4.695)]), "podstawowa", True, 16.0, "dab"),
-    R("1.03", "Pokoj dziecka 1", "P1", (0.105, 0.105, 3.80, 3.50), "podstawowa", True, 12.0, "dab"),
-    R("1.04", "Pokoj dziecka 2", "P1", (0.105, 4.905, 3.77, 8.295), "podstawowa", True, 12.0, "dab"),
-    R("1.05", "Lazienka", "P1", box(3.98, 4.905, 5.99, 8.295).difference(SI), "pomocnicza", posadzka="gres"),
-    R("1.06", "Klatka schodowa", "P1", SCHODY_RDZEN.difference(SCIANKA), "ruchu", posadzka="dab"),
-    R("1.07", "Pralnia z suszarnia", "P1", box(8.53, 4.905, 11.895, 8.295).difference(S2), "pomocnicza", posadzka="gres"),
+    R("1.01", "Hol", "P1", (0.105, 3.65, 8.32, 4.695), "ruchu", posadzka="dąb"),
+    R("1.02", "Pokój rodzinny / biblioteka (boks C)", "P1", unary_union([box(3.95, 0.105, 11.895, 3.65), box(8.32, 3.65, 11.895, 4.695)]), "podstawowa", True, 16.0, "dąb"),
+    R("1.03", "Pokój dziecka 1", "P1", (0.105, 0.105, 3.80, 3.50), "podstawowa", True, 12.0, "dąb"),
+    R("1.04", "Pokój dziecka 2", "P1", (0.105, 4.905, 3.77, 8.295), "podstawowa", True, 12.0, "dąb"),
+    R("1.05", "Łazienka", "P1", box(3.98, 4.905, 5.99, 8.295).difference(SI), "pomocnicza", posadzka="gres"),
+    R("1.06", "Klatka schodowa", "P1", SCHODY_RDZEN.difference(SCIANKA), "ruchu", posadzka="dąb"),
+    R("1.07", "Pralnia z suszarnią", "P1", box(8.53, 4.905, 11.895, 8.295).difference(S2), "pomocnicza", posadzka="gres"),
     # P2
-    R("2.01", "Hol", "P2", (6.20, 2.80, 8.32, 4.695), "ruchu", posadzka="dab"),
-    R("2.02", "Sypialnia rodzicow", "P2", (-0.895, 0.105, 3.60, 4.695), "podstawowa", True, 14.0, "dab"),
-    R("2.03", "Garderoba", "P2", (3.75, 0.105, 6.05, 4.695), "pomocnicza", posadzka="dab"),
-    R("2.04", "Lazienka rodzicow", "P2", box(3.98, 4.905, 5.99, 8.295).difference(SI), "pomocnicza", posadzka="gres"),
-    R("2.05", "Gabinet", "P2", (8.47, 0.105, 11.895, 4.695), "podstawowa", True, 8.0, "dab"),
-    R("2.06", "Pom. techn. (rekuperator) + wylaz na dach", "P2", (6.20, 0.105, 8.32, 2.65), "techniczna", posadzka="gres", uw="klapa 0,9x0,9 + drabina (K-20, K-21)"),
+    R("2.01", "Hol", "P2", (6.20, 2.80, 8.32, 4.695), "ruchu", posadzka="dąb"),
+    R("2.02", "Sypialnia rodziców", "P2", (-0.895, 0.105, 3.60, 4.695), "podstawowa", True, 14.0, "dąb"),
+    R("2.03", "Garderoba", "P2", (3.75, 0.105, 6.05, 4.695), "pomocnicza", posadzka="dąb"),
+    R("2.04", "Łazienka rodziców", "P2", box(3.98, 4.905, 5.99, 8.295).difference(SI), "pomocnicza", posadzka="gres"),
+    R("2.05", "Gabinet", "P2", (8.47, 0.105, 11.895, 4.695), "podstawowa", True, 8.0, "dąb"),
+    R("2.06", "Pom. techn. (reku + wyłaz)", "P2", (6.20, 0.105, 8.32, 2.65), "techniczna", posadzka="gres", uw="klapa 0,9x0,9 + drabina (K-20, K-21)"),
 ]
 
 # ------------------------------------------------------------------ schody (SCH1: P0->P1, SCH2: P1->P2; identyczne, jedna nad druga)
@@ -195,13 +195,13 @@ SCHODY = dict(h=0.175, s=0.28, n_podn=18, biegi=2, stopni_w_biegu=9, szer=1.00,
 
 # ------------------------------------------------------------------ elementy zewn. (wysuniecia plyt, rama C, lamele) - rzuty
 PLYTY = [
-    dict(id="E-okap", opis="ST1: okap pd. strefy dziennej (linia E) - wysuniecie 1,00 m", poly=box(-1.80, -1.30, 12.60, -0.30), z=(2.75, 3.05), lacznik=True),
-    dict(id="E-okap-W", opis="ST1: okap zach. - wysuniecie 1,50 m", poly=box(-1.80, -0.30, -0.30, 4.80), z=(2.75, 3.05), lacznik=True),
-    dict(id="daszek", opis="ST1: daszek nad wejsciem 2,80 x 1,30 m (K-12)", poly=box(9.50, 8.70, 12.30, 10.00), z=(2.80, 3.05), lacznik=True),
-    dict(id="C-dol", opis="rama C - plyta dolna (linia D) wysuniecie 1,00 m", poly=box(3.60, -1.30, 12.60, -0.30), z=(3.65, 3.85), lacznik=True),
-    dict(id="C-gora", opis="rama C - plyta gorna wysuniecie 1,00 m", poly=box(3.60, -1.30, 12.60, -0.30), z=(5.35, 5.55), lacznik=True),
-    dict(id="ST2-okap", opis="ST2: krawedz pd. + zach. (spod bryly A) - wysuniecie 1,00 / 1,10 m", poly=unary_union([box(-2.40, -1.30, 12.60, -0.30), box(-2.40, -0.30, -1.30, 5.10)]), z=(5.95, 6.25), lacznik=True),
-    dict(id="ST3-okap", opis="ST3: stropodach bryly A - wysuniecie pd. 1,00, zach. 1,10, wsch. 0,30 m", poly=unary_union([box(-2.40, -1.30, 12.60, -0.30), box(-2.40, -0.30, -1.30, 5.10), box(12.30, -0.30, 12.60, 5.10)]), z=(9.10, 9.42), lacznik=True),
+    dict(id="E-okap", opis="ST1: okap pd. strefy dziennej (linia E) - wysunięcie 1,00 m", poly=box(-1.80, -1.30, 12.60, -0.30), z=(2.75, 3.05), lacznik=True),
+    dict(id="E-okap-W", opis="ST1: okap zach. - wysunięcie 1,50 m", poly=box(-1.80, -0.30, -0.30, 4.80), z=(2.75, 3.05), lacznik=True),
+    dict(id="daszek", opis="ST1: daszek nad wejściem 2,80 x 1,30 m (K-12)", poly=box(9.50, 8.70, 12.30, 10.00), z=(2.80, 3.05), lacznik=True),
+    dict(id="C-dol", opis="rama C - płyta dolna (linia D) wysunięcie 1,00 m", poly=box(3.60, -1.30, 12.60, -0.30), z=(3.65, 3.85), lacznik=True),
+    dict(id="C-gora", opis="rama C - płyta górna wysunięcie 1,00 m", poly=box(3.60, -1.30, 12.60, -0.30), z=(5.35, 5.55), lacznik=True),
+    dict(id="ST2-okap", opis="ST2: krawędź pd. + zach. (spód bryły A) - wysunięcie 1,00 / 1,10 m", poly=unary_union([box(-2.40, -1.30, 12.60, -0.30), box(-2.40, -0.30, -1.30, 5.10)]), z=(5.95, 6.25), lacznik=True),
+    dict(id="ST3-okap", opis="ST3: stropodach bryły A - wysunięcie pd. 1,00, zach. 1,10, wsch. 0,30 m", poly=unary_union([box(-2.40, -1.30, 12.60, -0.30), box(-2.40, -0.30, -1.30, 5.10), box(12.30, -0.30, 12.60, 5.10)]), z=(9.10, 9.42), lacznik=True),
 ]
 LAMELE = dict(x=(-1.30, 12.30), y=-0.45, z=(6.15, 9.10), rozstaw=0.12, b=0.04, h=0.08, mat="drewno termo / aluminium drewnopodobne")
 SLUPY = [dict(id=f"SL{i+1}", xy=(0.30 + 2.28 * (i + 1), 0.0), przekroj="RK 120x120x8 S355 w szprosie", z=(0.0, 2.80)) for i in range(4)]
@@ -213,7 +213,7 @@ LINIA_ZAB = DZ["yn"] - 6.0
 H_NAROZ = dict(NW=101.40, NE=101.55, SW=101.10, SE=101.25)
 
 def teren(x, y):
-    """Rzedna istniejacego terenu (interpolacja dwuliniowa narozy dzialki), m n.p.m."""
+    """Rzędna istniejacego terenu (interpolacja dwuliniowa narożników działki), m n.p.m."""
     fx = (x - DZ["xw"]) / (DZ["xe"] - DZ["xw"])
     fy = (y - DZ["ys"]) / (DZ["yn"] - DZ["ys"])
     s = H_NAROZ["SW"] + fx * (H_NAROZ["SE"] - H_NAROZ["SW"])
@@ -249,7 +249,7 @@ def opening_cut(o, margin=0.6):
     return box(x - margin, o["a"], x + margin, o["b"])
 
 def outline(kond):
-    """Obrys zewnetrzny kondygnacji (lica zewn. scian)."""
+    """Obrys zewnętrzny kondygnacji (lica zewn. scian)."""
     polys = [wall_poly(w) for w in SCIANY if w["kond"] == kond]
     u = unary_union(polys)
     from shapely.geometry import Polygon as P
@@ -260,7 +260,7 @@ def room_area(r):
     return round(r["poly"].area, 2)
 
 def okno_w_swietle(o):
-    """Powierzchnia okna w swietle oscieznic (WT par. 57 ust. 2): otwor muru minus oscieznica 7 cm z kazdej strony."""
+    """Powierzchnia okna w świetle ościeżnic (WT par. 57 ust. 2): otwor muru minus ościeżnica 7 cm z kazdej strony."""
     return max(0.0, (o["szer"] - 0.14) * (o["wys"] - 0.14) - (o["kw"] - 1) * 0.10 * (o["wys"] - 0.14))
 
 # przypisanie okien do pomieszczen (do kontroli 1/8)
@@ -275,7 +275,7 @@ def otwor(i):
 
 if __name__ == "__main__":
     for k in ("P0", "P1", "P2"):
-        pu = sum(room_area(r) for r in POMIESZCZENIA if r["kond"] == k and r["kat"] != "garaz")
+        pu = sum(room_area(r) for r in POMIESZCZENIA if r["kond"] == k and r["kat"] != "garaż")
         print(k, "PU", round(pu, 2), "obrys", round(outline(k).area, 2), outline(k).bounds)
     for r in POMIESZCZENIA:
         print(r["id"], r["nazwa"], room_area(r))
