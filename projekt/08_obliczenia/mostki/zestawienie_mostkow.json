@@ -351,10 +351,10 @@
     "i": 20.0,
     "e": -18.0
    },
-   "L_geo": 5.72,
-   "L_geo_opis": "strop ST2Z (sufit SUF-ZEW); krawędzie typu ściana na krawędzi — łącznie 5.72 m",
-   "L_model": 11.44,
-   "L_model_czesc": 5.72,
+   "L_geo": 5.3,
+   "L_geo_opis": "strop ST2Z (sufit SUF-ZEW); krawędzie typu ściana na krawędzi — łącznie 5.30 m",
+   "L_model": 10.6,
+   "L_model_czesc": 5.3,
    "linie4": {
     "I": [
      "OK",
@@ -406,10 +406,10 @@
     "i": 20.0,
     "e": -18.0
    },
-   "L_geo": 5.72,
-   "L_geo_opis": "strop ST2Z (sufit SUF-ZEW); krawędzie typu nad ścianą niższej kondygnacji — łącznie 5.72 m",
-   "L_model": 11.44,
-   "L_model_czesc": 5.72,
+   "L_geo": 5.3,
+   "L_geo_opis": "strop ST2Z (sufit SUF-ZEW); krawędzie typu nad ścianą niższej kondygnacji — łącznie 5.30 m",
+   "L_model": 10.6,
+   "L_model_czesc": 5.3,
    "linie4": {
     "I": [
      "OK",
@@ -493,9 +493,9 @@
    "id": "WZ-09a",
    "nazwa": "Ściana dom–garaż (SWG) na płycie fundamentowej (POD-0 / POD-G)",
    "typ": "garaz",
-   "psi_e": 0.30059,
-   "psi_oi": 0.30059,
-   "f_rsi": 0.903,
+   "psi_e": 0.40643,
+   "psi_oi": 0.40643,
+   "f_rsi": 0.9015,
    "ocena": "ZŁY",
    "ref": [
     0.2,
@@ -505,9 +505,9 @@
    ],
    "pary": {
     "i-u": {
-     "psi_oi": 0.30059,
-     "psi_e": 0.30059,
-     "L2D": 0.55451
+     "psi_oi": 0.40643,
+     "psi_e": 0.40643,
+     "L2D": 0.66035
     }
    },
    "theta": {
@@ -521,7 +521,7 @@
    "linie4": {
     "I": [
      "UWAGA",
-     "przerwana: TYNK_GIPS → BET_KOM_600 → ZB_C25 → TYNK_CW (płyta ciągła do strefy nieogrzewanej — mostek konstrukcyjny)"
+     "przerwana: DESKA_DEB → JASTRYCH → TYNK_GIPS → ZB_C25 → TYNK_CW (płyta ciągła do strefy nieogrzewanej — mostek konstrukcyjny)"
     ],
     "H": [
      "OK",
@@ -535,7 +535,7 @@
      "OK",
      "Glaser (PN-EN ISO 13788): SWG — brak kondensacji międzywarstwowej; DZ1 — kondensacja okresowa, M_a,max = 0 g/m² — wysycha w okresie letnim (dopuszczalna wg WT zał. 2 pkt 2.2.5)"
     ],
-    "ciaglosc": "uwaga — izolacja cieplna: przerwana: TYNK_GIPS → BET_KOM_600 → ZB_C25 → TYNK_CW (płyta ciągła do strefy nieogrzewanej — mostek konstrukcyjny)"
+    "ciaglosc": "uwaga — izolacja cieplna: przerwana: DESKA_DEB → JASTRYCH → TYNK_GIPS → ZB_C25 → TYNK_CW (płyta ciągła do strefy nieogrzewanej — mostek konstrukcyjny)"
    },
    "przegrody": [
     "SWG",
@@ -999,12 +999,12 @@
   },
   {
    "id": "WZ-16a",
-   "nazwa": "Krawędź stropu ST2Z nad powietrzem: ściana SZ2 na belce B4 + płyta PL-2 (łącznik)",
+   "nazwa": "Krawędź stropu ST2Z nad powietrzem: ściana SZ2 na belce B3 + płyta PL-2 (łącznik)",
    "typ": "strop_zewn_krawedz",
-   "psi_e": 0.01388,
-   "psi_oi": 0.19356,
-   "f_rsi": 0.8541,
-   "ocena": "DO POPRAWY",
+   "psi_e": 0.00911,
+   "psi_oi": 0.1888,
+   "f_rsi": 0.8203,
+   "ocena": "BEZMOSTKOWY",
    "ref": [
     0.6,
     0.15,
@@ -1013,9 +1013,9 @@
    ],
    "pary": {
     "i-e": {
-     "psi_oi": 0.19356,
-     "psi_e": 0.01388,
-     "L2D": 0.62582
+     "psi_oi": 0.1888,
+     "psi_e": 0.00911,
+     "L2D": 0.62105
     }
    },
    "theta": {
@@ -1053,11 +1053,11 @@
   },
   {
    "id": "WZ-16b",
-   "nazwa": "Krawędź stropu ST2Z nad powietrzem: ściana SZ1 na belce B5",
+   "nazwa": "Krawędź stropu ST2Z nad powietrzem: ściana SZ1 na belce B3",
    "typ": "strop_zewn_krawedz",
-   "psi_e": -0.04379,
-   "psi_oi": 0.12286,
-   "f_rsi": 0.8804,
+   "psi_e": -0.04677,
+   "psi_oi": 0.11988,
+   "f_rsi": 0.8529,
    "ocena": "BEZMOSTKOWY",
    "ref": [
     0.6,
@@ -1067,9 +1067,9 @@
    ],
    "pary": {
     "i-e": {
-     "psi_oi": 0.12286,
-     "psi_e": -0.04379,
-     "L2D": 0.54153
+     "psi_oi": 0.11988,
+     "psi_e": -0.04677,
+     "L2D": 0.53855
     }
    },
    "theta": {
@@ -1232,6 +1232,14 @@
    "opis_n": "liczba z modelu (sekcja `wezly`)"
   },
   {
+   "id": "WZ-17",
+   "nazwa": "Konsole kratownicy zielonej ściany S0-02 (K-13; punktowe, przekładka termiczna)",
+   "n": 10.0,
+   "chi": 0.01,
+   "zrodlo": "fizyka.mostki.CHI_DOMYSLNE [NZW]",
+   "opis_n": "liczba z modelu (sekcja `wezly`)"
+  },
+  {
    "id": "WZ-15",
    "nazwa": "Przejścia instalacji przez przegrody zewnętrzne (wywiewka K1, czerpnia, wyrzutnia, PC, wpusty, przyłącza)",
    "n": 16.0,
@@ -1284,16 +1292,6 @@
     0.931,
     {
      "i-u": 0.216
-    }
-   ]
-  ],
-  "WZ-16a": [
-   [
-    "łącznik 120 mm, λ_eq 0,08 (zamiast 80 mm / 0,09)",
-    0.194,
-    0.854,
-    {
-     "i-e": 0.194
     }
    ]
   ]

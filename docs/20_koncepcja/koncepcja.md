@@ -892,7 +892,7 @@ Bryły A/B/C/G, linie D/E, sylweta „S”, funkcje pomieszczeń i przejścia �
 | N-9 — pom. 2.07 bez dopływu powietrza | **przyjęta.** Tłumiony przepust transferowy nad O2-12 (D4A), zestaw drzwi + przepust R_w ≥ 32 dB (wymaganie; dobór wg danych producenta); `went.doplyw` z holu 2.01 (15 m³/h); bilans centrali bez zmian (Σnaw = Σwyw) | PN-83/B-03430/Az3 [NZW]; W-161, W-230 |
 | N-12 — zapas EP bez PV i bez próby szczelności | **przyjęta:** `energia.n50_uwagi` — obowiązkowa próba szczelności PN-EN ISO 9972 (n50 ≤ 1,0) w opisie PB/PT; wrażliwość: bez PV i przy n50 = 4 h⁻¹ EP = 67,4 ≤ 70; PV — element obowiązkowy. Zasobnik 400 dm³ w bibliotece EP (dane przykładowe Z250) i cyrkulacja — PT-IS | WT §329; W-240 |
 | N-15 — mostki „DO POPRAWY” (WZ-06 0,205, WZ-07a 0,152, WZ-16a 0,189) | **świadoma akceptacja:** f_Rsi ≥ 0,82 we wszystkich węzłach, ψ w H_TB (EP 35,8 / 58,1 bez PV ≤ 70); dalsza poprawa (attyka lekka nad PL-3, obłożenie belek B3–B5 wełną) — decyzja w PT-AR-D | brief §9 pkt 2; W-248, W-272 |
-| N-10 (azymut/nachylenie PV dla pól EW), N-11 (trasy DC, WLZ — 07_obwody i 08_pv po 1 niespełnionym), N-13 b–f (etykiety i drobne usterki narzędzi) | przekazane do PT-IE / zespołów narzędzi (bez wpływu na wskaźniki formalne); N-13 a (drenaż — TIN, krok 0,10 m) — wykonane | W-194, W-185 |
+| N-10 (azymut/nachylenie PV dla pól EW), N-11 (trasy DC, WLZ), N-13 b–f (etykiety i drobne usterki narzędzi) | N-11: w przeliczeniu wydania spełnione (DC 0,62 % ≤ 1 %, WLZ 0,37 % ≤ 0,5 % — parametry biblioteki PT-IE); N-10 i N-13 b–f — do PT-IE / zespołów narzędzi (bez wpływu na wskaźniki formalne); N-13 a (drenaż — TIN, krok 0,10 m) — wykonane | W-194, W-185 |
 
 ### 15.4 Kontrola funkcji V3 (meble, łuki drzwi, ściany) i pozostałe listy
 

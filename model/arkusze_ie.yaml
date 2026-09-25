@@ -27,14 +27,18 @@ wspolne:
   wyposazenie: null
   uwagi:
     - "Rysunki instalacji na podkładzie rzutów architektury (PB-AR); podkład — linie cienkie szare (warstwy I-PODKLAD*)."
+# Formaty: auto (ekonomiczny) z wyjątkiem PT-IE-04 i PT-IE-07 — jawnie H = 420 mm (docs/30_arkusze/zastosowanie_IE.md):
+# auto wybiera tam 570×594 / 520×594 przy koszcie równym wariantowi 750×420 / 710×420 (różnica < 0,5 %, rozstrzyga
+# tylko kara za niepełny górny rząd 123 mm), a te zużywają o 7 % / 4 % mniej papieru, mają tabele i uwagi w kolumnie
+# obok rzutu i tę samą wysokość 420 mm co pozostałe rzuty parteru i dachu (01, 10–13) — jednolita paczka A4.
 arkusze:
   - {nr: PT-IE-01, tytul: "INSTALACJA OŚWIETLENIA — RZUT PARTERU", typ: inst_rzut, branza: IE-O, kond: P0, tytul_widoku: "INSTALACJA OŚWIETLENIA — RZUT PARTERU"}
   - {nr: PT-IE-02, tytul: "INSTALACJA OŚWIETLENIA — RZUT I PIĘTRA", typ: inst_rzut, branza: IE-O, kond: P1, tytul_widoku: "INSTALACJA OŚWIETLENIA — RZUT I PIĘTRA"}
   - {nr: PT-IE-03, tytul: "INSTALACJA OŚWIETLENIA — RZUT II PIĘTRA", typ: inst_rzut, branza: IE-O, kond: P2, tytul_widoku: "INSTALACJA OŚWIETLENIA — RZUT II PIĘTRA"}
-  - {nr: PT-IE-04, tytul: "GNIAZDA I ZASILANIE URZĄDZEŃ — RZUT PARTERU", typ: inst_rzut, branza: IE-G, kond: P0, tytul_widoku: "GNIAZDA I ZASILANIE URZĄDZEŃ — RZUT PARTERU"}
+  - {nr: PT-IE-04, tytul: "GNIAZDA I ZASILANIE URZĄDZEŃ — RZUT PARTERU", typ: inst_rzut, branza: IE-G, kond: P0, tytul_widoku: "GNIAZDA I ZASILANIE URZĄDZEŃ — RZUT PARTERU", format: [420, 750]}
   - {nr: PT-IE-05, tytul: "GNIAZDA I ZASILANIE URZĄDZEŃ — RZUT I PIĘTRA", typ: inst_rzut, branza: IE-G, kond: P1, tytul_widoku: "GNIAZDA I ZASILANIE URZĄDZEŃ — RZUT I PIĘTRA"}
   - {nr: PT-IE-06, tytul: "GNIAZDA I ZASILANIE URZĄDZEŃ — RZUT II PIĘTRA", typ: inst_rzut, branza: IE-G, kond: P2, tytul_widoku: "GNIAZDA I ZASILANIE URZĄDZEŃ — RZUT II PIĘTRA"}
-  - {nr: PT-IE-07, tytul: "TELETECHNIKA — RZUT PARTERU", typ: inst_rzut, branza: IE-T, kond: P0, tytul_widoku: "TELETECHNIKA — RZUT PARTERU"}
+  - {nr: PT-IE-07, tytul: "TELETECHNIKA — RZUT PARTERU", typ: inst_rzut, branza: IE-T, kond: P0, tytul_widoku: "TELETECHNIKA — RZUT PARTERU", format: [420, 710]}
   - {nr: PT-IE-08, tytul: "TELETECHNIKA — RZUT I PIĘTRA", typ: inst_rzut, branza: IE-T, kond: P1, tytul_widoku: "TELETECHNIKA — RZUT I PIĘTRA"}
   - {nr: PT-IE-09, tytul: "TELETECHNIKA — RZUT II PIĘTRA", typ: inst_rzut, branza: IE-T, kond: P2, tytul_widoku: "TELETECHNIKA — RZUT II PIĘTRA"}
   - {nr: PT-IE-10, tytul: "INSTALACJA FOTOWOLTAICZNA — RZUT DACHU", typ: inst_rzut, branza: IE-PV, kond: dach, tytul_widoku: "INSTALACJA FOTOWOLTAICZNA — RZUT DACHU"}

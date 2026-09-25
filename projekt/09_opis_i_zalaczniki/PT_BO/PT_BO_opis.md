@@ -9,7 +9,7 @@
 ## Stan opracowania i analiz konstrukcji — § 23 pkt 1 RPB; W-274
 
 Zestawienie generowane automatycznie przy każdym złożeniu tomu z wyników obliczeń konstrukcji (model budynku
-z 2026-09-25 07:55). Pozycja niezamknięta to analiza nie domknięta: warunek stanu granicznego niespełniony,
+z 2026-09-25 08:02). Pozycja niezamknięta to analiza nie domknięta: warunek stanu granicznego niespełniony,
 zbrojenie wymagane obliczeniowo nieujęte w kontroli rysunków, obciążenie lub parametr niezgodny z modelem,
 uwaga programu obliczeń wymagająca analizy, wynik starszy niż model albo arkusz rysunkowy z błędem. Pozycja
 **ZASTĄPIONE** — wynik modelu uproszczonego zastąpiony analizą dokładniejszą (wskazaną w opisie). Po domknięciu
@@ -32,9 +32,9 @@ analiz i ponownym złożeniu tomu wiersze znikają z zestawienia.
 
 | Obszar | Element | Wynik | Opis | Źródło |
 |---|---|---|---|---|
-| Aktualność | obliczenia statyczne | 2026-09-25 06:33 | wyniki starsze niż model (2026-09-25 07:55) albo brak pliku — ponowić analizę | czas modyfikacji plików |
-| Aktualność | MES płyty fundamentowej | 2026-09-25 06:48 | wyniki starsze niż model (2026-09-25 07:55) albo brak pliku — ponowić analizę | czas modyfikacji plików |
-| Aktualność | kontrola zbrojenia | 2026-09-25 06:48 | wyniki starsze niż model (2026-09-25 07:55) albo brak pliku — ponowić analizę | czas modyfikacji plików |
+| Aktualność | obliczenia statyczne | 2026-09-25 06:33 | wyniki starsze niż model (2026-09-25 08:02) albo brak pliku — ponowić analizę | czas modyfikacji plików |
+| Aktualność | MES płyty fundamentowej | 2026-09-25 06:48 | wyniki starsze niż model (2026-09-25 08:02) albo brak pliku — ponowić analizę | czas modyfikacji plików |
+| Aktualność | kontrola zbrojenia | 2026-09-25 06:48 | wyniki starsze niż model (2026-09-25 08:02) albo brak pliku — ponowić analizę | czas modyfikacji plików |
 | Obliczenia statyczne | poz. 3.2 PL-2 | 336 % | Rysy: średnica prętów (tabl. 7.2N) η = 336 %; Ugięcie długotrwałe (quasi-stała) ≤ L/250 η = 286 %; Zbrojenie na zginanie η = 140 % — wymaga zmiany przekroju / schematu (zalecenia zmian modelu zespołu konstrukcji) | wyniki obliczeń statycznych |
 | Obliczenia statyczne | poz. 9.9 S2-09 | 172 % | Nośność — połowa wysokości η = 172 %; Nośność — przekrój dolny η = 153 %; Nośność — przekrój górny η = 116 % — wymaga zmiany przekroju / schematu (zalecenia zmian modelu zespołu konstrukcji) | wyniki obliczeń statycznych |
 | Obliczenia statyczne | poz. 9.13 S1-01 | 136 % | Nośność — przekrój górny η = 136 %; Nośność — połowa wysokości η = 125 % — wymaga zmiany przekroju / schematu (zalecenia zmian modelu zespołu konstrukcji) | wyniki obliczeń statycznych |
@@ -72,7 +72,7 @@ analiz i ponownym złożeniu tomu wiersze znikają z zestawienia.
 | Uwagi analizy | 12 × | — | ST1: podpora punktowa SL1 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]; ST1: podpora punktowa SL2 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]; ST1: podpora punktowa SL3 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY] (i 9 podobnych) | wyniki obliczeń statycznych |
 | Część rysunkowa | PT-BO-01 | — | kolizje napisów: 3 — usunąć przed wydaniem (kontrola jakości arkusza) | arkusze; raport kontroli arkuszy |
 | Część rysunkowa | Raport kontroli arkuszy | — | 19 uwag dotyczy numerów lub tytułów niezgodnych z wykazem rysunków (PT-BO-03, PT-BO-04, PT-BO-05, PT-BO-07, PT-BO-08, PT-BO-09, PT-BO-10, PT-BO-11) — raport nieaktualny; wygenerować ponownie arkusze konstrukcji wraz z raportem kontroli | arkusze; raport kontroli arkuszy |
-| Część rysunkowa | Formaty arkuszy | — | 21 arkuszy w formacie niestandardowym (PT-BO-01 (540×594), PT-BO-02 (250×594), PT-BO-05 (230×594), PT-BO-06 (520×594), PT-BO-09 (510×594), PT-BO-10 (510×594), PT-BO-12 (400×594), PT-BO-13 (400×594), PT-BO-14 (460×420), PT-BO-15 (400×594), PT-BO-16 (400×594), PT-BO-17 (230×594), PT-BO-18 (310×594), PT-BO-19 (470×297), PT-BO-20 (600×841), PT-BO-21 (500×841), PT-BO-22 (470×594), PT-BO-23 (410×420), PT-BO-24 (350×594), PT-BO-25 (400×594), PT-BO-26 (400×297)) — dobrać format z szeregu PN-EN ISO 5457 (A0–A4, formaty wydłużone; W-313) | arkusze; raport kontroli arkuszy |
+| Część rysunkowa | Formaty arkuszy | — | 21 arkuszy w formacie niestandardowym (PT-BO-01, PT-BO-02, PT-BO-05, PT-BO-06, PT-BO-09, PT-BO-10, PT-BO-12, PT-BO-13, PT-BO-14, PT-BO-15, PT-BO-16, PT-BO-17, PT-BO-18, PT-BO-19, PT-BO-20, PT-BO-21, PT-BO-22, PT-BO-23, PT-BO-24, PT-BO-25, PT-BO-26; wymiary — wykaz rysunków) — dobrać format z szeregu PN-EN ISO 5457 (A0–A4, formaty wydłużone; W-313) | arkusze; raport kontroli arkuszy |
 | Część rysunkowa | Uwagi na arkuszach | — | PT-BO-09, PT-BO-10, PT-BO-12, PT-BO-13, PT-BO-15, PT-BO-16, PT-BO-20, PT-BO-21, PT-BO-22, PT-BO-23, PT-BO-24, PT-BO-25, PT-BO-26 — specyfikacja betonu powołuje PN-EN 206+A2 i PN-B-06265 bez statusu (normy wycofane, rejestr D-09) — ujednolicić z rozdz. 2.2 | arkusze; raport kontroli arkuszy |
 
 **Tabela 3. Pozycje ZASTĄPIONE analizą dokładniejszą**
@@ -152,7 +152,7 @@ deklaracji betonu (PN-EN 206-1:2026-09) potwierdzić z wytwórnią betonu.
 
 | Dane wejściowe | Źródło | Stan |
 |---|---|---|
-| model budynku | wersja 1.0 | 2026-09-25 07:55 |
+| model budynku | wersja 1.0 | 2026-09-25 08:02 |
 | obliczenia statyczne | zespół konstrukcji — rozdz. 4 | 2026-09-25 06:33 — NIEZAMKNIĘTE (starsze niż model) |
 | MES płyty fundamentowej | zespół konstrukcji — rozdz. 5 | 2026-09-25 06:48 — NIEZAMKNIĘTE (starsze niż model) |
 | kontrola zbrojenia | zespół konstrukcji — rozdz. 6 | 2026-09-25 06:48 — NIEZAMKNIĘTE (starsze niż model) |
@@ -201,7 +201,7 @@ Zastosowane schematy statyczne (konstrukcyjne) i modele obliczeniowe programu ob
 * Ściany murowe: profile obciążeń wzdłuż osi (reakcje płyt z MES + ściany wyżej), przekazanie obciążeń znad otworów na filarki (po 0,5 m z każdej strony), nośność wg PN-EN 1996-1-1 6.1.2 + zał. G, filarki z η_A.
 * Fundamenty: nośność wg PN-EN 1997-1 zał. D (DA2*), osiadanie — sumowanie warstw (Boussinesq), ławy niezbrojone poprzecznie wg PN-EN 1992-1-1 12.9.3; obciążenie ław — maks. średnia krocząca na 2,0 m.
 * Ugięcia żelbetu: l/d (7.4.2), a gdy niespełnione — obliczenie z interpolacją ζ, pełzaniem φ = 2,5 i skurczem (7.4.3).
-* Ściany-tarcze żelbetowe (pole `tarcza` w modelu lub ściana żelbetowa bez ciągłej podpory poniżej): MES płaskiego stanu naprężenia (element QM6, podpory sprężyste k = E·t/h ścian poniżej), obciążenia — reakcje płyt nad tarczą (krawędź górna) i płyty podwieszonej poza ścianami poniżej (krawędź dolna), ściany wyżej, belki; model kratownicowy STM generowany z pola naprężeń (programowanie liniowe, 5.6.4, 6.5), cięgna F = max(STM; całkowanie σ), węzły CCC/CCT/CTT, siatki 9.6/9.7, otwory, rysy, ugięcia MES ze sztywnością zarysowaną, EQU wspornika; reakcje → ściany poniżej (moduł `tarcze`, walidacja: tarcze_walidacja).
+* Ściany-tarcze żelbetowe (tarcza wskazana w modelu lub ściana żelbetowa bez ciągłej podpory poniżej): MES płaskiego stanu naprężenia (element QM6, podpory sprężyste k = E·t/h ścian poniżej), obciążenia — reakcje płyt nad tarczą (krawędź górna) i płyty podwieszonej poza ścianami poniżej (krawędź dolna), ściany wyżej, belki; model kratownicowy STM generowany z pola naprężeń (programowanie liniowe, 5.6.4, 6.5), cięgna F = max(STM; całkowanie σ), węzły CCC/CCT/CTT, siatki 9.6/9.7, otwory, rysy, ugięcia MES ze sztywnością zarysowaną, EQU wspornika; reakcje → ściany poniżej.
 
 ### Założenia do obliczeń i obciążenia — PN-EN 1990, PN-EN 1991 + NA
 
@@ -385,7 +385,8 @@ Stateczność ogólna: teren płaski (spadek 0,63 m na obszarze działki), brak 
 ### Dane do zaprojektowania fundamentów {podstawa: § 10 pkt 7}
 Posadowienie bezpośrednie: płyta fundamentowa z żebrami, spód elementów na rzędnych −0,40…
 −0,85 m (względem ±0,000); usunięcie ziemi urodzajnej 0,4 m; strefa przemarzania
-h_z = 0,8 m — ochrona izolacją obwodową (W-284); osiadanie dopuszczalne
+h_z = 0,8 m — ochrona izolacją obwodową (W-284; wymiary wg PN-EN ISO 13793 —
+pozycja „Posadowienie” NIEZAMKNIĘTE, rozdz. 1); osiadanie dopuszczalne
 s ≤ 50 mm (W-283).
 
 ### Specyfikacja badań kontrolnych robót ziemnych {podstawa: § 10 pkt 8}

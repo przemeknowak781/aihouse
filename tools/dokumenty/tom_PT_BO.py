@@ -7,7 +7,8 @@ Uruchomienie::
 Wynik:
 * ``projekt/wydanie/PT_2_BO_rrrr.mm.dd.pdf`` — tom PT-2 BO (osobny plik, RPB § 5 ust. 3; nazwa wg zał. 1 RPB):
   strona tytułowa (§ 7 ust. 2, „Tom 2 z 4” — § 7 ust. 6), spis treści, oświadczenie projektanta PT
-  (PB art. 34 ust. 3d pkt 3 w brzmieniu art. 41 ust. 4a pkt 2), część opisowa (§ 23 pkt 1, 2, 3, 10 RPB):
+  (PB art. 34 ust. 3d pkt 3 w brzmieniu art. 41 ust. 4a pkt 2), część opisowa (§ 23 pkt 1, 2, 3, 10, 12 RPB;
+  PB art. 34 ust. 3 pkt 3 lit. a i d):
   stan analiz (pozycje NIEZAMKNIĘTE), opis konstrukcji, schematy statyczne, obciążenia (PN-EN 1991 + NA),
   materiały, klasy ekspozycji, otulenia, podstawowe wyniki, pełne obliczenia statyczne, MES płyty fundamentowej,
   kontrola zbrojenia rysunków, projekt geotechniczny (kat. II), dane ppoż., część rysunkowa (§ 24 pkt 1);
@@ -25,6 +26,13 @@ Wynik:
 Analizy niedomknięte (warunki niespełnione, brak kontroli rysunków, uwagi [WYMAGA ANALIZY], brak arkusza) są
 wykazywane jawnie jako NIEZAMKNIĘTE (rozdział 1 i podtytuł strony tytułowej); po domknięciu przez zespół BO
 i ponownym uruchomieniu generatora status aktualizuje się automatycznie.
+Kontrole spójności (``kontrole_spojnosci``, weryfikacja PT 2026-09-25): przekrój podwójnie zbrojony bez warunku
+A_s2 ≤ A_s,górą; q_d < 6.10b z wypisanych g_k/q_k; brak ciężaru PV (model — pola PV) i wody retencyjnej dachu
+zielonego w zestawieniu obciążeń; garaż w MES bez kat. F; głębokość posadowienia bez obliczenia PN-EN ISO 13793;
+parametry gruntu niezgodne z modelem ``geotechnika``. Część rysunkowa: uwagi QA raportu widoków tylko przy zgodnym
+numerze i tytule, formaty spoza PN-EN ISO 5457, wycofane normy betonu bez statusu na arkuszach. Wykaz norm z wydaniem
+i statusem z rejestru wymagań (A.3). Treść PDF bez ścieżek plików i identyfikatorów kodu (``jawne``).
+Walidator: pozycja C2-BO-06 (``brak_gdy``) daje BRAK przy „NIESPEŁNIONY” / „WYMAGA ANALIZY” / „NIEZAMKNIĘTE”.
 Dane osobowe, uprawnienia, podpisy — ``[DO UZUPEŁNIENIA]``; działka/MPZP/grunt — ``[DANE PRZYKŁADOWE – FIKCYJNE]``.
 """
 from __future__ import annotations
@@ -114,6 +122,8 @@ ZRODLA_OPIS = [
     (r"`?(?:model/)?wymagania\.yaml`?", "rejestr wymagań"),
     (r"\(konstrukcja\.obciazenia\)", "(obciążenia)"),
     (r"energia\.pv(?:\.pola)?", "model — instalacja PV"),
+    (r"\s*\(moduł `tarcze`, walidacja: [\w_]+\)", ""),
+    (r"\(pole `tarcza` w modelu", "(tarcza wskazana w modelu"),
 ]
 _RE_ZRODLA = [(re.compile(a), b) for a, b in ZRODLA_OPIS]            # b: tekst albo funkcja(m)
 
@@ -541,7 +551,7 @@ def rozdz_stan(o: Opis, D: dict, S: dict, ark_uwagi: list[str]):
                             "arkusze; raport kontroli arkuszy"))) for u in ark_uwagi]
     if rows:
         o.tabela(rows, tytul=f"Pozycje {NZ} (do domknięcia przez zespół BO przed wydaniem PT)", klasa="zwarta",
-                 lp=True, wyrownanie={"Opis": "l", "Element": "l"}, szerokosci=["7mm", "24mm", "26mm", "20mm", None, "28mm"])
+                 lp=True, wyrownanie={"Opis": "l", "Element": "l"}, szerokosci=["9mm", "22mm", "26mm", "20mm", None, "28mm"])
     zast = [dict(zip(("Element", "Wynik modelu uproszczonego", "Opis"), (w["element"], w["wynik"], w["opis"])))
             for w in S["wiersze"] if w["stan"] == "ZASTĄPIONE"]
     if zast:
@@ -1069,7 +1079,9 @@ def rozdz_geotechnika(o: Opis, D: dict):
     ### Dane do zaprojektowania fundamentów {{podstawa: § 10 pkt 7}}
     Posadowienie bezpośrednie: płyta fundamentowa z żebrami, spód elementów na rzędnych {L(max(spody), 2)}…
     {L(min(spody), 2)} m (względem ±0,000); usunięcie ziemi urodzajnej {L(geo.get('humus'), 1)} m; strefa przemarzania
-    h_z = {L(geo.get('h_z'), 1)} m — ochrona izolacją obwodową (W-284); osiadanie dopuszczalne
+    h_z = {L(geo.get('h_z'), 1)} m — ochrona izolacją obwodową (W-284; wymiary wg PN-EN ISO 13793 —
+    {'pozycja „Posadowienie” ' + NZ + ', rozdz. 1' if any(w['obszar'] == 'Posadowienie' for w in kontrole_spojnosci(D))
+     else 'wg obliczeń statycznych'}); osiadanie dopuszczalne
     s ≤ {L(p.s_max_mm, 0)} mm (W-283).
 
     ### Specyfikacja badań kontrolnych robót ziemnych {{podstawa: § 10 pkt 8}}
@@ -1154,7 +1166,8 @@ def arkusze_bo(bez: bool = False) -> tuple[list[Arkusz], list[str], list[str]]:
         ar = Arkusz.z_pdf(pdf)
         ark.append(ar)
         if str(ar.format or "").startswith("nst."):
-            nst.append(f"{ar.nr} ({ar.wymiar_tekst()})")
+            nst.append(ar.nr)
+            ar.uwagi = ar.uwagi or "format poza szeregiem PN-EN ISO 5457 — rozdz. 1"
         t = _tekst_pdf(pdf)
         if re.search(r"PN-EN\s*206\+A2|PN-B-06265", t) and not re.search(r"wycofan", t, re.I):
             normy_wycof.append(ar.nr)
@@ -1175,7 +1188,7 @@ def arkusze_bo(bez: bool = False) -> tuple[list[Arkusz], list[str], list[str]]:
                      "nieaktualny; wygenerować ponownie arkusze konstrukcji wraz z raportem kontroli")
     if nst:
         braki.append(f"Formaty arkuszy: {len(nst)} {odmiana(len(nst), 'arkusz', 'arkusze', 'arkuszy')} w formacie "
-                     f"niestandardowym ({', '.join(nst)}) — dobrać format z szeregu PN-EN ISO 5457 (A0–A4, formaty "
+                     f"niestandardowym ({', '.join(nst)}; wymiary — wykaz rysunków) — dobrać format z szeregu PN-EN ISO 5457 (A0–A4, formaty "
                      "wydłużone; W-313)")
     if normy_wycof:
         braki.append(f"Uwagi na arkuszach: {', '.join(normy_wycof)} — specyfikacja betonu powołuje PN-EN 206+A2 "

@@ -208,8 +208,8 @@
     "L2D": 0.53165,
     "f_rsi": 0.8507,
     "theta_si_min": 14.328,
-    "dlugosc": 5.72,
-    "dlugosc_oi": 5.72,
+    "dlugosc": 5.3,
+    "dlugosc_oi": 5.3,
     "psi_pary": {
       "i-e": {
         "psi_oi": 0.15223,
@@ -240,8 +240,8 @@
     "L2D": 0.50063,
     "f_rsi": 0.9518,
     "theta_si_min": 18.169,
-    "dlugosc": 5.72,
-    "dlugosc_oi": 5.72,
+    "dlugosc": 5.3,
+    "dlugosc_oi": 5.3,
     "psi_pary": {
       "i-e": {
         "psi_oi": -0.06066,
@@ -298,19 +298,19 @@
     "system_wymiarow": "oi — wewnętrzne całkowite",
     "zrodlo": "symulacja PN-EN ISO 10211 (mostki2d)",
     "zbieznosc_ok": true,
-    "psi_oi": 0.30059,
-    "psi_e": 0.30059,
-    "psi_i": 0.30059,
-    "L2D": 0.55451,
-    "f_rsi": 0.903,
-    "theta_si_min": 17.05,
+    "psi_oi": 0.40643,
+    "psi_e": 0.40643,
+    "psi_i": 0.40643,
+    "L2D": 0.66035,
+    "f_rsi": 0.9015,
+    "theta_si_min": 17.004,
     "dlugosc": 12.255,
     "dlugosc_oi": 12.255,
     "psi_pary": {
       "i-u": {
-        "psi_oi": 0.30059,
-        "psi_e": 0.30059,
-        "L2D": 0.55451
+        "psi_oi": 0.40643,
+        "psi_e": 0.40643,
+        "L2D": 0.66035
       }
     },
     "theta_grup": {
@@ -320,13 +320,14 @@
     "ocena": "ZŁY",
     "izolacja_ciagla": false,
     "droga_mostka": [
+      "DESKA_DEB",
+      "JASTRYCH",
       "TYNK_GIPS",
-      "BET_KOM_600",
       "ZB_C25",
       "TYNK_CW"
     ],
     "woda_braki": [
-      "linia izolacji PRZERWANA: TYNK_GIPS → BET_KOM_600 → ZB_C25 → TYNK_CW"
+      "linia izolacji PRZERWANA: DESKA_DEB → JASTRYCH → TYNK_GIPS → ZB_C25 → TYNK_CW"
     ],
     "woda_uwagi": []
   },
@@ -621,57 +622,57 @@
     "woda_uwagi": []
   },
   "WZ-16a": {
-    "nazwa": "Krawędź stropu ST2Z nad powietrzem: ściana SZ2 na belce B4 + płyta PL-2 (łącznik)",
+    "nazwa": "Krawędź stropu ST2Z nad powietrzem: ściana SZ2 na belce B3 + płyta PL-2 (łącznik)",
     "typ": "strop_zewn_krawedz",
     "typ_mostki2d": "strop_zewn_krawedz",
     "system_wymiarow": "oi — wewnętrzne całkowite",
     "zrodlo": "symulacja PN-EN ISO 10211 (mostki2d)",
     "zbieznosc_ok": true,
-    "psi_oi": 0.19356,
-    "psi_e": 0.01388,
-    "psi_i": 0.19356,
-    "L2D": 0.62582,
-    "f_rsi": 0.8541,
-    "theta_si_min": 14.458,
+    "psi_oi": 0.1888,
+    "psi_e": 0.00911,
+    "psi_i": 0.1888,
+    "L2D": 0.62105,
+    "f_rsi": 0.8203,
+    "theta_si_min": 13.171,
     "dlugosc": 1.01,
     "dlugosc_oi": 1.01,
     "psi_pary": {
       "i-e": {
-        "psi_oi": 0.19356,
-        "psi_e": 0.01388,
-        "L2D": 0.62582
+        "psi_oi": 0.1888,
+        "psi_e": 0.00911,
+        "L2D": 0.62105
       }
     },
     "theta_grup": {
       "i": 20.0,
       "e": -18.0
     },
-    "ocena": "DO POPRAWY",
+    "ocena": "BEZMOSTKOWY",
     "izolacja_ciagla": true,
     "droga_mostka": null,
     "woda_braki": [],
     "woda_uwagi": []
   },
   "WZ-16b": {
-    "nazwa": "Krawędź stropu ST2Z nad powietrzem: ściana SZ1 na belce B5",
+    "nazwa": "Krawędź stropu ST2Z nad powietrzem: ściana SZ1 na belce B3",
     "typ": "strop_zewn_krawedz",
     "typ_mostki2d": "strop_zewn_krawedz",
     "system_wymiarow": "oi — wewnętrzne całkowite",
     "zrodlo": "symulacja PN-EN ISO 10211 (mostki2d)",
     "zbieznosc_ok": true,
-    "psi_oi": 0.12286,
-    "psi_e": -0.04379,
-    "psi_i": 0.12286,
-    "L2D": 0.54153,
-    "f_rsi": 0.8804,
-    "theta_si_min": 15.456,
+    "psi_oi": 0.11988,
+    "psi_e": -0.04677,
+    "psi_i": 0.11988,
+    "L2D": 0.53855,
+    "f_rsi": 0.8529,
+    "theta_si_min": 14.411,
     "dlugosc": 1.01,
     "dlugosc_oi": 1.01,
     "psi_pary": {
       "i-e": {
-        "psi_oi": 0.12286,
-        "psi_e": -0.04379,
-        "L2D": 0.54153
+        "psi_oi": 0.11988,
+        "psi_e": -0.04677,
+        "L2D": 0.53855
       }
     },
     "theta_grup": {

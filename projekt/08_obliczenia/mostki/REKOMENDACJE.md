@@ -2,7 +2,7 @@
 
 Rekomendacje zmian projektu wynikające z katalogu mostków (symulacja 2D PN-EN ISO 10211) i kontroli detali. **Modelu nie zmieniano** — zmiany do wprowadzenia w parametrach `tools/buduj_model.py` przez zespół modelu. Warianty policzono tym samym solverem (`tools/mostki_budynku.py`, funkcja `warianty`).
 
-**f_Rsi:** wszystkie węzły spełniają f_Rsi ≥ 0,72 (WT zał. 2 pkt 2.2.1 / PN-EN ISO 13788) — minimum 0,836 w węźle WZ-09b.
+**f_Rsi:** wszystkie węzły spełniają f_Rsi ≥ 0,72 (WT zał. 2 pkt 2.2.1 / PN-EN ISO 13788) — minimum 0,820 w węźle WZ-16a.
 
 ## A. Węzły z ψ wyraźnie gorszym od wytycznych albo z przerwaną linią izolacji
 
@@ -10,11 +10,11 @@ Kryterium: ψ_oi > dobra praktyka + 0,03 W/(m·K) [ZAŁ] albo ocena „ZŁY” (
 
 | węzeł | ψ_oi | dobra pr. | ocena | wariant policzony | ψ_oi wariantu | f_Rsi wariantu |
 |---|---|---|---|---|---|---|
-| WZ-09a | +0,301 | 0,10 | ZŁY | XPS 10 cm na płycie pod posadzką garażu | +0,240 | 0,887 |
+| WZ-09a | +0,406 | 0,10 | ZŁY | XPS 10 cm na płycie pod posadzką garażu | +0,240 | 0,887 |
 |  |  |  |  | XPS 10 cm pod posadzką garażu + blok z betonu komórkowego 400 (24 cm) u podstawy ściany | +0,216 | 0,931 |
 | WZ-09b | +0,071 | 0,10 | ZŁY | — (patrz opis) | — | — |
 | WZ-09c | +0,081 | 0,10 | ZŁY | — (patrz opis) | — | — |
-| WZ-16a | +0,194 | 0,15 | DO POPRAWY | łącznik 120 mm, λ_eq 0,08 (zamiast 80 mm / 0,09) | +0,194 | 0,854 |
+| WZ-16a | +0,189 | 0,15 | BEZMOSTKOWY | — (patrz opis) | — | — |
 
 * **WZ-09a, WZ-09b, WZ-09c** — Połączenie z garażem na ciągłej płycie: płyta fundamentowa jest ciągła pod ścianą SWG (XPS tylko pod płytą) — ciepło z domu przepływa płytą do posadzki garażu (ψ_iu duże). Zalecane: **XPS ≥ 10 cm na płycie pod posadzką garażu** (cała posadzka albo pas ≥ 1,5–2,0 m przy SWG; jastrych garażu zbrojony, z dylatacją obwodową) + blok termoizolacyjny w 1. warstwie muru SWG (nośność — PT-K). Pod stropem (WZ-09b/c) pas docieplenia SUF-G 1,0 m ogranicza mostek (f_Rsi spełnione); ocena „ZŁY” wynika z testu ołówka (płyta ŻB dochodzi do przestrzeni nieogrzewanej) — akceptowalne przy ψ_ie ≤ 0,10; alternatywa: docieplenie całego spodu stropu garażu przy ścianach E i 2 pasem 1,5 m.
 * **WZ-16a** — Krawędź stropu nad powietrzem z płytą PL-2: jak wyżej — łącznik 120 mm; belki odwrócone B3/B4/B5 w linii ściany obłożyć ociepleniem ściany na całą wysokość (wełna elewacji A ciągła do podsufitki); podsufitka jedna płaszczyzna pod wspornikiem A i pasem zach. PL-2 (audyt A2 I-5) — ψ < dobra praktyka możliwe dopiero przy łączniku 120 mm.
@@ -62,7 +62,7 @@ Wniosek: rzędne przelewów w modelu odnoszą się do pokrycia **średniego** (g
 
 ### R-W4. Cokół przy drzwiach DZ2 garażu
 
-Weryfikacja koncepcji (§6 A5): cokół 0,14 m przy DZ2 (strona wsch., teren wyższy) < 0,30 m, brak odwodnienia liniowego. Bieżący model: posadzka garażu −0,10, teren projektowany przed DZ2 (TIN) −0,134 → cokół 0,03 m — poniżej 0,15 m. Zalecenie (detal PT-AR-D-14): odwodnienie liniowe przed progiem DZ2 na całą szerokość drzwi + 0,15 m z każdej strony, podłączone do KD-E; nawierzchnia ze spadkiem 2 % od drzwi; uszczelnienie progu taśmą EPDM / masą KMB wywiniętą ≥ 15 cm na ościeża poza strefę rozbryzgu i połączoną z izolacją przeciwwilgociową płyty; lokalne obniżenie terenu przy DZ2 (niecka NT-E) tak, by cokół poza drzwiami ≥ 0,30 m (DIN 18533-1: uszczelnienie cokołu ok. 30 cm, min. 15 cm nad terenem w stanie końcowym).
+Weryfikacja koncepcji (§6 A5): cokół 0,14 m przy DZ2 (strona wsch., teren wyższy) < 0,30 m, brak odwodnienia liniowego. Bieżący model: posadzka garażu −0,10, teren projektowany przed DZ2 (TIN) −0,125 → cokół 0,02 m — poniżej 0,15 m. Zalecenie (detal PT-AR-D-14): odwodnienie liniowe przed progiem DZ2 na całą szerokość drzwi + 0,15 m z każdej strony, podłączone do KD-E; nawierzchnia ze spadkiem 2 % od drzwi; uszczelnienie progu taśmą EPDM / masą KMB wywiniętą ≥ 15 cm na ościeża poza strefę rozbryzgu i połączoną z izolacją przeciwwilgociową płyty; lokalne obniżenie terenu przy DZ2 (niecka NT-E) tak, by cokół poza drzwiami ≥ 0,30 m (DIN 18533-1: uszczelnienie cokołu ok. 30 cm, min. 15 cm nad terenem w stanie końcowym).
 
 ### R-W5. Podsufitka i czoło wspornika bryły A
 

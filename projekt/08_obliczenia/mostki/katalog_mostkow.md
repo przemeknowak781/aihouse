@@ -25,7 +25,7 @@ Model: `model/budynek.yaml`; źródło węzłów: sekcja `wezly` modelu (20 węz
 | [WZ-07a](#wz-07a) | Krawędź stropu ST2Z nad powietrzem: ściana SZL na belce B3 + płyta PL-2 (łącznik) | +0,028 | +0,152 | +0,152 | 14,33 | 0,851 | ciągła | ✓ | **DO POPRAWY** |
 | [WZ-07b](#wz-07b) | Krawędź stropu ST2Z nad ścianą SZ1 niższej kondygnacji (ocieplenie spodu SUF-ZEW) | −0,014 | +0,027 | −0,061 | 18,17 | 0,952 | ciągła | ✓ | **BEZMOSTKOWY** |
 | [WZ-08](#wz-08) | Cokół: ściana zewn. – płyta fundamentowa na XPS (część ogrzewana) | +0,058 | +0,100 | +0,100 | 16,32 | 0,903 | ciągła | ✓ | **DOBRY** |
-| [WZ-09a](#wz-09a) | Ściana dom–garaż (SWG) na płycie fundamentowej (POD-0 / POD-G) | +0,301 | +0,301 | +0,301 | 17,05 | 0,903 | **PRZERWANA** | ✓ | **ZŁY** |
+| [WZ-09a](#wz-09a) | Ściana dom–garaż (SWG) na płycie fundamentowej (POD-0 / POD-G) | +0,406 | +0,406 | +0,406 | 17,00 | 0,901 | **PRZERWANA** | ✓ | **ZŁY** |
 | [WZ-09b](#wz-09b) | Ściana SWG pod płytą: dom — D4, garaż — D4, pas docieplenia SUF-G 1.0 m | +0,052 | +0,071 | +0,071 | 13,77 | 0,836 | **PRZERWANA** | ✓ | **ZŁY** |
 | [WZ-09c](#wz-09c) | Ściana SWG pod płytą: dom — ST1 + ściana SZ1, garaż — D4, pas docieplenia SUF-G 1.0 m | +0,070 | +0,081 | +0,081 | 15,64 | 0,885 | **PRZERWANA** | ✓ | **ZŁY** |
 | [WZ-10](#wz-10) | Strop pośredni ST1/ST2 – ściana zewn. z ETICS ciągłym (wieniec) | −0,000 | +0,089 | −0,000 | 18,60 | 0,963 | ciągła | ✓ | **BEZMOSTKOWY** |
@@ -34,14 +34,14 @@ Model: `model/budynek.yaml`; źródło węzłów: sekcja `wezly` modelu (20 węz
 | [WZ-11P](#wz-11p) | Podokienniki — parapet zewn. z okapnikiem na profilu z XPS | +0,015 | +0,015 | +0,006 | 16,62 | 0,911 | ciągła | ✓ | **DOBRY** |
 | [WZ-11T](#wz-11t) | Progi HS / drzwi zewn. na płycie P0 — profil progowy termoizolacyjny na podwalinie XPS/PUR-GF, odwodnienie liniowe | +0,076 | +0,118 | +0,118 | 14,10 | 0,845 | ciągła | ✓ | **DOBRY** |
 | [WZ-12](#wz-12) | Narożniki wypukłe ścian zewnętrznych | −0,052 | +0,066 | +0,066 | 17,17 | 0,926 | ciągła | ✓ | **BEZMOSTKOWY** |
-| [WZ-16a](#wz-16a) | Krawędź stropu ST2Z nad powietrzem: ściana SZ2 na belce B4 + płyta PL-2 (łącznik) | +0,014 | +0,194 | +0,194 | 14,46 | 0,854 | ciągła | ✓ | **DO POPRAWY** |
-| [WZ-16b](#wz-16b) | Krawędź stropu ST2Z nad powietrzem: ściana SZ1 na belce B5 | −0,044 | +0,123 | +0,123 | 15,46 | 0,880 | ciągła | ✓ | **BEZMOSTKOWY** |
+| [WZ-16a](#wz-16a) | Krawędź stropu ST2Z nad powietrzem: ściana SZ2 na belce B3 + płyta PL-2 (łącznik) | +0,009 | +0,189 | +0,189 | 13,17 | 0,820 | ciągła | ✓ | **BEZMOSTKOWY** |
+| [WZ-16b](#wz-16b) | Krawędź stropu ST2Z nad powietrzem: ściana SZ1 na belce B3 | −0,047 | +0,120 | +0,120 | 14,41 | 0,853 | ciągła | ✓ | **BEZMOSTKOWY** |
 | [WZ-X1](#wz-x1) | Dach D2/D3 (SD2) – ściana SZ1 wyższej kondygnacji na krawędzi (pod spodem ściana SW18, pomieszczenia ogrzewane) — węzeł spoza sekcji `wezly` | −0,006 | +0,022 | +0,022 | 18,64 | 0,964 | ciągła | ✓ | **BEZMOSTKOWY** |
 | [WZ-X2](#wz-x2) | Dach D4 (DZ1) – ściana SZ1 wyższej kondygnacji na krawędzi (pod spodem ściana SW18, pomieszczenia ogrzewane) — węzeł spoza sekcji `wezly` | −0,001 | +0,022 | +0,022 | 18,64 | 0,964 | ciągła | ✓ | **BEZMOSTKOWY** |
 
 \* woda / wilgoć: liczba pozycji listy kontrolnej ✗ BRAK / ! UWAGA (bez pozycji „izolacja”) — dane do uzupełnienia w modelu lub rozwiązania do pokazania na detalu; ✓ — bez braków.
 
-Pominięte wpisy sekcji `wezly`: WZ-13: typ „konsola_lamel” nieobsługiwany w modelu 2D (mostek punktowy χ / węzeł 3D) — pominięty; WZ-14: typ „kotwa” nieobsługiwany w modelu 2D (mostek punktowy χ / węzeł 3D) — pominięty; WZ-15: typ „przejscie_instalacji” nieobsługiwany w modelu 2D (mostek punktowy χ / węzeł 3D) — pominięty; WZ-X1: typ „dach_sciana” nieobsługiwany w modelu 2D (mostek punktowy χ / węzeł 3D) — pominięty; WZ-X2: typ „dach_sciana” nieobsługiwany w modelu 2D (mostek punktowy χ / węzeł 3D) — pominięty
+Pominięte wpisy sekcji `wezly`: WZ-13: typ „konsola_lamel” nieobsługiwany w modelu 2D (mostek punktowy χ / węzeł 3D) — pominięty; WZ-14: typ „kotwa” nieobsługiwany w modelu 2D (mostek punktowy χ / węzeł 3D) — pominięty; WZ-17: typ „kotwa” nieobsługiwany w modelu 2D (mostek punktowy χ / węzeł 3D) — pominięty; WZ-15: typ „przejscie_instalacji” nieobsługiwany w modelu 2D (mostek punktowy χ / węzeł 3D) — pominięty; WZ-X1: typ „dach_sciana” nieobsługiwany w modelu 2D (mostek punktowy χ / węzeł 3D) — pominięty; WZ-X2: typ „dach_sciana” nieobsługiwany w modelu 2D (mostek punktowy χ / węzeł 3D) — pominięty
 
 ## Woda, wilgoć, ciągłość — pozycje do uzupełnienia
 
@@ -49,7 +49,7 @@ Zestawienie pozycji ✗ BRAK / ! UWAGA z list kontrolnych wszystkich węzłów (
 
 | status | pozycja | węzły |
 |---|---|---|
-| ✗ BRAK | linia izolacji PRZERWANA: TYNK_GIPS → BET_KOM_600 → ZB_C25 → TYNK_CW | WZ-09a |
+| ✗ BRAK | linia izolacji PRZERWANA: DESKA_DEB → JASTRYCH → TYNK_GIPS → ZB_C25 → TYNK_CW | WZ-09a |
 | ✗ BRAK | linia izolacji PRZERWANA: TYNK_GIPS → SIL18 → ZB_C25 | WZ-09b, WZ-09c |
 | ! UWAGA | odprowadzenie wody z krawędzi płyty (rynna / okapnik / rzygacz → rura spustowa) — nieokreślone w modelu; obróbka czoła płyty z okapnikiem ≥ 3 cm | WZ-04, WZ-05 |
 
@@ -63,10 +63,10 @@ Zestawienie pozycji ✗ BRAK / ! UWAGA z list kontrolnych wszystkich węzłów (
 | WZ-04 | Okap E (PL-E) i daszek wejścia — łącznik termoizolacyjny | +0,128 | 22,47 | +2,88 |
 | WZ-05 | Krawędź ST2 (PL-2) — łącznik termoizolacyjny pod bryłą A | +0,134 | 18,71 | +2,51 |
 | WZ-06 | Krawędź ST3 (PL-3) — łącznik termoizolacyjny przy attyce bryły A | +0,205 | 24,30 | +4,97 |
-| WZ-07a | Krawędź stropu ST2Z nad powietrzem: ściana SZL na belce B3 + płyta PL-2 (łącznik) | +0,152 | 5,72 | +0,87 |
-| WZ-07b | Krawędź stropu ST2Z nad ścianą SZ1 niższej kondygnacji (ocieplenie spodu SUF-ZEW) | −0,061 | 5,72 | −0,35 |
+| WZ-07a | Krawędź stropu ST2Z nad powietrzem: ściana SZL na belce B3 + płyta PL-2 (łącznik) | +0,152 | 5,30 | +0,81 |
+| WZ-07b | Krawędź stropu ST2Z nad ścianą SZ1 niższej kondygnacji (ocieplenie spodu SUF-ZEW) | −0,061 | 5,30 | −0,32 |
 | WZ-08 | Cokół: ściana zewn. – płyta fundamentowa na XPS (część ogrzewana) | +0,100 | 27,77 | +2,78 |
-| WZ-09a | Ściana dom–garaż (SWG) na płycie fundamentowej (POD-0 / POD-G) | +0,301 | 12,26 | +3,68 |
+| WZ-09a | Ściana dom–garaż (SWG) na płycie fundamentowej (POD-0 / POD-G) | +0,406 | 12,26 | +4,98 |
 | WZ-09b | Ściana SWG pod płytą: dom — D4, garaż — D4, pas docieplenia SUF-G 1.0 m | +0,071 | 6,38 | +0,45 |
 | WZ-09c | Ściana SWG pod płytą: dom — ST1 + ściana SZ1, garaż — D4, pas docieplenia SUF-G 1.0 m | +0,081 | 5,88 | +0,48 |
 | WZ-10 | Strop pośredni ST1/ST2 – ściana zewn. z ETICS ciągłym (wieniec) | −0,000 | 18,20 | −0,00 |
@@ -75,12 +75,12 @@ Zestawienie pozycji ✗ BRAK / ! UWAGA z list kontrolnych wszystkich węzłów (
 | WZ-11P | Podokienniki — parapet zewn. z okapnikiem na profilu z XPS | +0,006 | 29,42 | +0,17 |
 | WZ-11T | Progi HS / drzwi zewn. na płycie P0 — profil progowy termoizolacyjny na podwalinie XPS/PUR-GF, odwodnienie liniowe | +0,118 | 15,67 | +1,86 |
 | WZ-12 | Narożniki wypukłe ścian zewnętrznych | +0,066 | 40,05 | +2,62 |
-| WZ-16a | Krawędź stropu ST2Z nad powietrzem: ściana SZ2 na belce B4 + płyta PL-2 (łącznik) | +0,194 | 1,01 | +0,20 |
-| WZ-16b | Krawędź stropu ST2Z nad powietrzem: ściana SZ1 na belce B5 | +0,123 | 1,01 | +0,12 |
+| WZ-16a | Krawędź stropu ST2Z nad powietrzem: ściana SZ2 na belce B3 + płyta PL-2 (łącznik) | +0,189 | 1,01 | +0,19 |
+| WZ-16b | Krawędź stropu ST2Z nad powietrzem: ściana SZ1 na belce B3 | +0,120 | 1,01 | +0,12 |
 | WZ-X1 | Dach D2/D3 (SD2) – ściana SZ1 wyższej kondygnacji na krawędzi (pod spodem ściana SW18, pomieszczenia ogrzewane) — węzeł spoza sekcji `wezly` | +0,022 | 13,79 | +0,31 |
 | WZ-X2 | Dach D4 (DZ1) – ściana SZ1 wyższej kondygnacji na krawędzi (pod spodem ściana SW18, pomieszczenia ogrzewane) — węzeł spoza sekcji `wezly` | +0,022 | 2,79 | +0,06 |
 
-**H_TB = Σ ψ_oi·l_oi = 29,91 W/K** (węzły liniowe wg modelu; warianty porównawcze bez długości nie są sumowane; mostki punktowe χ — poza zakresem 2D).
+**H_TB = Σ ψ_oi·l_oi = 31,16 W/K** (węzły liniowe wg modelu; warianty porównawcze bez długości nie są sumowane; mostki punktowe χ — poza zakresem 2D).
 
 ## Karty węzłów
 
@@ -301,7 +301,7 @@ Wykresy szczegółowe: [temperatura](rys/WZ-07b_temperatura.png), [strumien](rys
 | ✓ OK | hydro | izolacja przeciwwilgociowa podłogi na gruncie POD-0: MEMB_SBS_POD |
 | ✓ OK | hydro | izolacja pionowa fundamentu i izolacja obwodowa XPS (nienasiąkliwa) — w modelu węzła |
 | ✓ OK | hydro | strefa cokołu ≥ 30 cm nad terenem (uszczelnienie, tynk mozaikowy) |
-| ✓ OK | drenaz | odwodnienie przy budynku (`dzialka.odwodnienia`: opaska żwirowa / drenaż opaskowy / odwodnienie liniowe): liniowe, liniowe, liniowe, liniowe, liniowe, opaska_zwirowa, niecka, niecka, liniowe, liniowe, niecka, drenaz_opaskowy |
+| ✓ OK | drenaz | odwodnienie przy budynku (`dzialka.odwodnienia`: opaska żwirowa / drenaż opaskowy / odwodnienie liniowe): liniowe, liniowe, liniowe, liniowe, liniowe, liniowe, liniowe, opaska_zwirowa, niecka, niecka, liniowe, liniowe, niecka, drenaz_opaskowy |
 | ✓ OK | woda | spadek terenu ≥ 2 % od budynku na 1,5–2 m: rzędne projektowane w modelu |
 
 *Uwaga:* Ściana liczona od poziomu posadzki (±0,00) we wszystkich systemach wymiarów (ψ_oi = ψ_i); podłoga wg PN-EN ISO 13370 z B' = b [INT]; b = B' = A/(0,5·P) budynku, gdy podane z modelu.
@@ -312,18 +312,18 @@ Wykresy szczegółowe: [temperatura](rys/WZ-08_temperatura.png), [strumien](rys/
 
 ### WZ-09a
 
-**Ściana dom–garaż (SWG) na płycie fundamentowej (POD-0 / POD-G)** — ocena **ZŁY** (izolacja przerwana: TYNK_GIPS → BET_KOM_600 → ZB_C25 → TYNK_CW; ψ_oi = 0,301 > domyślna 0,20)
+**Ściana dom–garaż (SWG) na płycie fundamentowej (POD-0 / POD-G)** — ocena **ZŁY** (izolacja przerwana: DESKA_DEB → JASTRYCH → TYNK_GIPS → ZB_C25 → TYNK_CW; ψ_oi = 0,406 > domyślna 0,20)
 
 ![WZ-09a — karta węzła](WZ-09a_karta.png)
 
-* ψ_e = +0,301, ψ_i = +0,301, ψ_oi = +0,301 W/(m·K); L_2D = 0,5545 W/(m·K); odniesienie ψ_oi: domyślna 0,20, dobra praktyka 0,10 (połączenie przegród dom–garaż nieogrzewany (ściana/strop))
-* θ_si,min = 17,05 °C, f_Rsi = 0,903 (≥ 0,72 — brak ryzyka pleśni i kondensacji powierzchniowej)
-* izolacja: PRZERWANA — droga mostka: TYNK_GIPS → BET_KOM_600 → ZB_C25 → TYNK_CW
-* siatka: 152312 komórek, zmiana Φ przy podwojeniu 0,025 %, bilans 9.3e-12
+* ψ_e = +0,406, ψ_i = +0,406, ψ_oi = +0,406 W/(m·K); L_2D = 0,6603 W/(m·K); odniesienie ψ_oi: domyślna 0,20, dobra praktyka 0,10 (połączenie przegród dom–garaż nieogrzewany (ściana/strop))
+* θ_si,min = 17,00 °C, f_Rsi = 0,901 (≥ 0,72 — brak ryzyka pleśni i kondensacji powierzchniowej)
+* izolacja: PRZERWANA — droga mostka: DESKA_DEB → JASTRYCH → TYNK_GIPS → ZB_C25 → TYNK_CW
+* siatka: 244280 komórek, zmiana Φ przy podwojeniu 0,045 %, bilans 4.4e-12
 
 | | temat | pozycja listy kontrolnej |
 |---|---|---|
-| ✗ BRAK | izolacja | linia izolacji PRZERWANA: TYNK_GIPS → BET_KOM_600 → ZB_C25 → TYNK_CW |
+| ✗ BRAK | izolacja | linia izolacji PRZERWANA: DESKA_DEB → JASTRYCH → TYNK_GIPS → ZB_C25 → TYNK_CW |
 | ✓ OK | paro | szczelność powietrzna ściany SZ1: tynk wewnętrzny ciągły (TYNK_GIPS) — do stropu i posadzki |
 | i INFO | paro | ściana dom–garaż: szczelność na spaliny (WT § 106 ust. 1) — tynk ciągły, uszczelnione przejścia instalacji, drzwi z samozamykaczem i uszczelką |
 
@@ -484,7 +484,7 @@ Wykresy szczegółowe: [temperatura](rys/WZ-11P_temperatura.png), [strumien](rys
 | ✓ OK | hydro | izolacja przeciwwilgociowa podłogi na gruncie POD-0: MEMB_SBS_POD |
 | ✓ OK | hydro | izolacja pionowa fundamentu i izolacja obwodowa XPS (nienasiąkliwa) — w modelu węzła |
 | ✓ OK | hydro | strefa cokołu ≥ 30 cm nad terenem (uszczelnienie, tynk mozaikowy) |
-| ✓ OK | drenaz | odwodnienie przy budynku (`dzialka.odwodnienia`: opaska żwirowa / drenaż opaskowy / odwodnienie liniowe): liniowe, liniowe, liniowe, liniowe, liniowe, opaska_zwirowa, niecka, niecka, liniowe, liniowe, niecka, drenaz_opaskowy |
+| ✓ OK | drenaz | odwodnienie przy budynku (`dzialka.odwodnienia`: opaska żwirowa / drenaż opaskowy / odwodnienie liniowe): liniowe, liniowe, liniowe, liniowe, liniowe, liniowe, liniowe, opaska_zwirowa, niecka, niecka, liniowe, liniowe, niecka, drenaz_opaskowy |
 | ✓ OK | woda | spadek terenu ≥ 2 % od budynku na 1,5–2 m: rzędne projektowane w modelu |
 | i INFO | woda | próg bezbarierowy: odwodnienie liniowe przed drzwiami, hydroizolacja pod próg |
 
@@ -516,14 +516,14 @@ Wykresy szczegółowe: [temperatura](rys/WZ-12_temperatura.png), [strumien](rys/
 
 ### WZ-16a
 
-**Krawędź stropu ST2Z nad powietrzem: ściana SZ2 na belce B4 + płyta PL-2 (łącznik)** — ocena **DO POPRAWY** (ψ_oi = 0,194 > dobra praktyka 0,15)
+**Krawędź stropu ST2Z nad powietrzem: ściana SZ2 na belce B3 + płyta PL-2 (łącznik)** — ocena **BEZMOSTKOWY** (ψ_e ≤ 0,01 W/(m·K), f_Rsi spełnione, izolacja ciągła)
 
 ![WZ-16a — karta węzła](WZ-16a_karta.png)
 
-* ψ_e = +0,014, ψ_i = +0,194, ψ_oi = +0,194 W/(m·K); L_2D = 0,6258 W/(m·K); odniesienie ψ_oi: domyślna 0,60, dobra praktyka 0,15 (strop nad powietrzem zewnętrznym – ściana (wspornik bryły))
-* θ_si,min = 14,46 °C, f_Rsi = 0,854 (≥ 0,72 — brak ryzyka pleśni i kondensacji powierzchniowej)
+* ψ_e = +0,009, ψ_i = +0,189, ψ_oi = +0,189 W/(m·K); L_2D = 0,6211 W/(m·K); odniesienie ψ_oi: domyślna 0,60, dobra praktyka 0,15 (strop nad powietrzem zewnętrznym – ściana (wspornik bryły))
+* θ_si,min = 13,17 °C, f_Rsi = 0,820 (≥ 0,72 — brak ryzyka pleśni i kondensacji powierzchniowej)
 * izolacja: ciągła (brak drogi przez materiały o λ > 0,12 W/(m·K) z wnętrza na zewnątrz)
-* siatka: 167040 komórek, zmiana Φ przy podwojeniu 0,022 %, bilans 7.8e-13
+* siatka: 154344 komórek, zmiana Φ przy podwojeniu 0,028 %, bilans 1.6e-12
 
 | | temat | pozycja listy kontrolnej |
 |---|---|---|
@@ -536,14 +536,14 @@ Wykresy szczegółowe: [temperatura](rys/WZ-16a_temperatura.png), [strumien](rys
 
 ### WZ-16b
 
-**Krawędź stropu ST2Z nad powietrzem: ściana SZ1 na belce B5** — ocena **BEZMOSTKOWY** (ψ_e ≤ 0,01 W/(m·K), f_Rsi spełnione, izolacja ciągła)
+**Krawędź stropu ST2Z nad powietrzem: ściana SZ1 na belce B3** — ocena **BEZMOSTKOWY** (ψ_e ≤ 0,01 W/(m·K), f_Rsi spełnione, izolacja ciągła)
 
 ![WZ-16b — karta węzła](WZ-16b_karta.png)
 
-* ψ_e = −0,044, ψ_i = +0,123, ψ_oi = +0,123 W/(m·K); L_2D = 0,5415 W/(m·K); odniesienie ψ_oi: domyślna 0,60, dobra praktyka 0,15 (strop nad powietrzem zewnętrznym – ściana (wspornik bryły))
-* θ_si,min = 15,46 °C, f_Rsi = 0,880 (≥ 0,72 — brak ryzyka pleśni i kondensacji powierzchniowej)
+* ψ_e = −0,047, ψ_i = +0,120, ψ_oi = +0,120 W/(m·K); L_2D = 0,5386 W/(m·K); odniesienie ψ_oi: domyślna 0,60, dobra praktyka 0,15 (strop nad powietrzem zewnętrznym – ściana (wspornik bryły))
+* θ_si,min = 14,41 °C, f_Rsi = 0,853 (≥ 0,72 — brak ryzyka pleśni i kondensacji powierzchniowej)
 * izolacja: ciągła (brak drogi przez materiały o λ > 0,12 W/(m·K) z wnętrza na zewnątrz)
-* siatka: 112176 komórek, zmiana Φ przy podwojeniu 0,012 %, bilans 3.5e-13
+* siatka: 103824 komórek, zmiana Φ przy podwojeniu 0,017 %, bilans 1.7e-12
 
 | | temat | pozycja listy kontrolnej |
 |---|---|---|
