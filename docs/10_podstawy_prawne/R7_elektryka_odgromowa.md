@@ -576,3 +576,99 @@ Symbole wg IEC 60617 z legendą (R4-N01…N03).
 12. **Wartości N SEP-E-002** (liczba gniazd i obwodów, strefy instalacyjne, spadki 3 % i 0,5 %): tylko ze źródeł wtórnych. Treści normy SEP nie miałem.
 13. **Wartości liczbowe z IEC 60228 i PN-HD 60364-5-52** (rezystancje, obciążalności): **NIEZWERYFIKOWANE**. Obliczenia w PT wykonać programem (np. wg PN-HD 60364-5-52 zał. B).
 14. **NC RfG i certyfikacja** od 1.01.2027 (etap II PTPiREE): falownik wybrać z aktualnej listy w chwili zakupu.
+
+---
+
+## Weryfikacja niezależna (2026-09-25)
+
+**Weryfikator:** niezależny agent-adwersarz. **Metoda:** Samodzielnie pobrałem z API ELI (PDF, pymupdf) teksty: WT t.j. Dz.U. 2022 poz. 1225, ROPoż t.j. Dz.U. 2023 poz. 822, Dz.U. 2024 poz. 1716, PB t.j. Dz.U. 2026 poz. 524, PE t.j. Dz.U. 2026 poz. 43, OZE t.j. Dz.U. 2026 poz. 68 i RSys t.j. Dz.U. 2025 poz. 919. Sprawdziłem też metadane ELI: daty wejścia w życie, akty zmieniające i wyszukiwanie aktów wdrażających GIA/EPBD. Status 10 norm odpytałem ponownie w wyszukiwarce PKN (wiedza.pkn.pl). Treść IEC (60364-4-41 AMD1:2017, 60364-4-44 AMD1:2015, 60364-5-54:2011, 60364-7-712:2017), tekst PL GIA i EPBD, standardy ENEA oraz źródła wtórne przeczytałem w pobranych kopiach i przez WebFetch/WebSearch. Moje pliki robocze: `scratchpad/research/R7ver/`.
+
+> Status WT („uznany za uchylony” 2026-09-21, tryb art. 102a PB) nadal wymaga potwierdzenia przez zespół R3. Wszystkie odwołania „WT §…” zweryfikowałem wyłącznie co do brzmienia t.j. Dz.U. 2022 poz. 1225. Nowelizacje 2023/2442, 2024/474, 2024/726 nie zmieniają § 53, § 64, § 102, § 180–§ 189 ani lp. 1, 3, 41–47a zał. 1.
+
+### Potwierdzone (brzmienie lub wartość zgodne ze źródłem)
+* **WT:**
+  * § 183 ust. 1 pkt 1–10, ust. 1a pkt 1–8 i ust. 2–4 (PWP > 1000 m³, lokalizacja, zakaz załączania drugiego źródła);
+  * § 184 ust. 1–3, § 185–§ 187 (tynk ≥ 5 mm), § 188 ust. 2, § 189 ust. 1–2, § 64, § 14 ust. 4, § 102 pkt 3, § 98 ust. 2, § 116 ust. 3, § 181, § 213 pkt 1 lit. a, § 226 ust. 1;
+  * § 26 ust. 1, § 56, § 192f ust. 5 (≥ 2 włókna SM, SC/APC, ≤ 1,2 dB, 0,4/0,25 dB/km), § 180 pkt 1 (odesłanie do UEm);
+  * zał. 1: lp. 1 (PN-EN 62305-1:2011, -2:2008), lp. 44 (62305-1…4 + PN-IEC 60364-4-443:1999), lp. 41 (w tym -4-41:2009, -4-43:2012, -5-534:2012, -6:2008, -7-701:2010 i PN-IEC 60364-5-52:2002).
+* **PKN (ponowne zapytanie 25.09.2026):**
+  * PN-HD 60364-4-41:2009 wycofana, zastąpiona przez 2017-09 (wersje PL i EN);
+  * -4-43:2012 → 2024-04 (IEC 60364-4-43:2023);
+  * -5-534:2016-04 → PN-HD 60364-5-53:2022-10;
+  * -6:2008 → 2016-07;
+  * -7-701:2010 → 2025-02 (tylko EN, +A11:2025-05);
+  * PN-EN 62305-2:2012 (i 2008) → PN-EN IEC 62305-2:2025-09 (EN);
+  * PN-EN 60445:2010 → … → PN-EN IEC 60445:2022-04;
+  * aktualne: PN-EN 14604:2006 (+AC:2009), PN-EN 50291-1:2018-06, PN-EN IEC 61439-3:2025-09, PN-EN 50549-1:2019-02 (+A1:2024-08), PN-HD 60364-7-712:2016-05.
+* **IEC (tekst normy bazowej):**
+  * 411.3.3 (gniazda ≤ 32 A „used by ordinary persons… general use”, urządzenia ruchome na zewnątrz ≤ 32 A);
+  * 411.3.4 (RCD ≤ 30 mA dla obwodów oświetleniowych w lokalu jednego gospodarstwa);
+  * tabl. 41.1 (0,4 s przy TN i 230 V; obwody ≤ 63 A z gniazdami i ≤ 32 A stałe);
+  * 443.4 (wyjątek 5× wartości SPD, NOTE 1 dla KT);
+  * 443.5: CRL = f_env/(L_P·N_g), f_env = 85F/850F, F = 1…3 dla mieszkań, L_P = 2L_PAL + L_PCL + 0,4L_PAH + 0,2L_PCH, próg 1000;
+  * tabl. 443.2 (6/4/2,5/1,5 kV);
+  * 5-54: 542.3.1 (6 mm² Cu / 50 mm² Fe; przy LPS 16 mm² Cu), 543.1.3 (2,5/4 mm² Cu), 544.1 (≥ ½ PE, ≥ 6 mm² Cu, ≤ 25 mm² Cu), tabl. 54.1 (Ø10 i 75 mm²×3 mm w betonie; ocynk 90 mm²/3 mm/500 g/m²/63 µm; Ø10 poziomo i Ø16 pionowo 350 g/m²/45 µm), zał. C.2 (folia > 0,5 mm, pełna izolacja termiczna), C.3.2 (5 cm, na sztorc, ≤ 2 m), C.3.3, C.3.5 (zgoda konstruktora na spawanie, zakaz drutu wiązałkowego);
+  * 7-712: 712.443.4.101, tabl. 712.1 (L_crit = 115/N_g i 200/N_g), 712.444.5.5.101, 712.530.3.101 (typ B z trzema wyjątkami).
+* **Obliczenia (przeliczone):**
+  * CRL = 170/(0,1·1,8) = 944, a graniczne L_PCL = 94 m (zgodnie z tabl. 1 RST 2018, F = 2 wg odsyłacza krajowego);
+  * L_crit = 115/1,8 = 63,9 m;
+  * A_D = 19·11 + 6·10,5·30 + π·31,5² = 5216 m², N_D = 0,0094, N_L = 1,8·40 000·0,5·0,5·10⁻⁶ = 0,018;
+  * R1 = R_A + R_B + R_U + R_V = 0,94 + 0,94 + 1,8 + 1,8 = 5,5·10⁻⁶ (r_f = 10⁻²) oraz 3,0·10⁻⁵ (r_f = 10⁻¹). Arytmetyka zgodna, przyjęte współczynniki pozostają NIEZWERYFIKOWANE;
+  * ΔU: WLZ 40 A / 25 m / 16 mm² = 0,50 %, a 10 mm² = 0,79 %; gniazda 16 A / 24 m / 2,5 mm² = 2,47 %; oświetlenie 0,95 %; EV 0,32 %; falownik 0,40 %; D14 1,55 %;
+  * tabela √3·400·I (L09): 11,1…43,6 kW;
+  * bilans ≈ 50,1 kW.
+* **Akty prawne:**
+  * ROPoż § 4 ust. 2 pkt 2 („z wyjątkiem budynków mieszkalnych jednorodzinnych … wyposażają obiekty w przeciwpożarowe wyłączniki prądu”). Akt obowiązujący, jedyna późniejsza zmiana to Dz.U. 2024 poz. 1716 (w życie 2024-12-23 wg ELI);
+  * § 28a ust. 1–4 i § 2 ust. 2–3 rozp. 2024/1716 (istniejące lokale do 1.01.2030);
+  * PB art. 29 ust. 4 pkt 3 lit. c (150 kW / 30 kWh / 6,5 kW, brzmienie z Dz.U. 2025 poz. 1847, w życie 2026-01-07), art. 56 ust. 1a uchylony, art. 57 ust. 1 pkt 4 lit. a;
+  * OZE art. 2 pkt 19 (≤ 50 kW, < 110 kV) i pkt 19b lit. b;
+  * PE art. 7 ust. 8d4 (zgłoszenie, koszt układu po stronie OSD), 8d5–8d7 (30 dni), 8d10 (> 10 kW), ust. 8 pkt 2 (stawki taryfowe, ¼ średniorocznych nakładów) i pkt 3 lit. b (bez opłaty), ust. 8g pkt 1 (21 dni), ust. 8i (2 lata);
+  * RSys: tytuł i data (MKiŚ 22.03.2023, Dz.U. 2023 poz. 819, t.j. 2025/919, zm. 2026/668 — jedyne zmiany wg ELI), § 3 ust. 1 pkt 4–5, § 4 ust. 2 pkt 17, § 6 ust. 1 pkt 7, § 45 ust. 5 (±10 %, 50 Hz ±1 % / +4 % −6 %, P_lt ≤ 1);
+  * UEm art. 12 i 12a (t.j. 2026/1243, stan na 26.08.2026);
+  * EPBD art. 14 ust. 4 (> 3 miejsca, 50 % okablowania wstępnego, kanały, ≥ 1 punkt ładowania, jednoczesne ładowanie) i art. 35 ust. 1 (29.05.2026);
+  * GIA art. 10 ust. 1–8 i art. 19 ust. 3 lit. c (12.02.2026).
+  * Wyszukiwanie ELI (tytuły od 2025-06) nie wykazało polskiego aktu wdrażającego GIA art. 10 ani EPBD art. 14. Jedyna zmiana megaustawy po t.j. 2026/562 (Dz.U. 2026 poz. 815, art. 13) dotyczy tylko art. 29d ust. 6a.
+* **Dokumenty OSD i inne:**
+  * ENEA „Układy pomiarowe” (od 02.04.2024): pkt 8.1 (linia ogrodzenia), tab. (≤ 40 kW bezpośredni, ≤ 63 A), 48 cm i 80–180 cm;
+  * ENEA „Szafy kablowe i złącza” (od 01.02.2024): pkt 8.1 ZK1x-1P (wyłącznik C, rozłącznik ≥ 63 A (6 kA), listwa do 4×35 mm², PEN do listwy, H07V-K 10 mm², rura 50/50 ok. 150 cm);
+  * ENEA „Linie kablowe nn” (od 01.10.2025): 5.4.2 (70/100 cm), oznaczniki ≤ 5 m, taśma niebieska;
+  * PTPiREE v1.3 od 1.11.2024, etap I do 31.12.2026, od 1.01.2027 obowiązkowe certyfikaty NC RfG;
+  * SEP: N_g = 1,8 powyżej 51°30′ (Boczkowski), tabl. 18: domy jednorodzinne III–IV, 30 / 12,5 / 7 kVA, ogrzewanie pomieszczeń liczone osobno;
+  * elektro.info (Czapp): 7-722 — RCD indywidualny ≤ 30 mA, typ B lub A/F + RDC-DD, bez AC i bez TN-C;
+  * elektryka.edu.pl (Wrzosek 2026): 3 %/5 %, 4 % (wyd. 2002), 3 % i 0,5 % wg N SEP-E-002;
+  * Viessmann/SEP: WLZ ≥ 50 A ≈ 10 mm² Cu;
+  * geopoz: klasy obciążenia ogniowego 400/800 MJ/m², R_T = 10⁻⁵;
+  * RST uziom: pręty ≥ Ø10, zakład 70 mm, spoina 50 mm, StCu/Cu/StSt w gruncie przy XPS.
+
+### Poprawione (było → jest)
+1. **Streszczenie pkt 1, tabela:**
+   * było: „PN-HD 60364-5-534:2012 → PN-HD 60364-5-53:2022-10”;
+   * jest: łańcuch w PKN 5-534:2012 → 5-534:2016-04 → 5-53:2022-10 (lp. 41 powołuje 2012, lp. 3 — 2016).
+2. **R7-A02:**
+   * było: „Lp. 3 (§ 98 ust. 2) powtarza część tych norm”;
+   * jest: lp. 3 powołuje nowsze wydania (PN-HD 60364-4-443:2016 z metodą CRL, PN-HD 60364-5-534:2016 i in.). Dopisałem też, że lista norm lp. 41 była niepełna.
+   * Źródło: WT t.j. 2022/1225, zał. 1 (ELI).
+3. **R7-A04 / R7-A06:** uzupełniłem elementy dodatkowe: PN-HD 60364-5-53:2022-10/AC:2025-10 i AC:2025-11, PN-EN IEC 60445:2022-04/A1:2026-09, PN-EN 50291-1:2018-06/AC:2021-03 (PKN).
+4. **R7-F04:**
+   * było: RST 2018 jako źródło „LPL III–IV → I_imp = 12,5 kA; T2 I_n ≥ 5 kA”;
+   * jest: w RST 2018 tych wartości nie ma. I_imp ≥ 12,5 kA dla T1 potwierdza drugi artykuł RST (https://rst.pl/ograniczniki-typu-i-ograniczniki-kombinowane-klasyfikacja-urzadzen/). I_n ≥ 5 kA oznaczyłem **NIEZWERYFIKOWANE**.
+5. **R7-F05:** podstawę wtórną SEP zastąpiłem tekstem IEC 60364-4-44 AMD1:2015, tabl. 443.2 (wartości bez zmian).
+6. **R7-F03:** dopisałem zastrzeżenie z 443.5, że L_P ogranicza się do odległości od pierwszego SPD w sieci, oraz graniczne 94 m. Wniosek „SPD wymagany” się nie zmienia.
+7. **R7-G03 i pkt 3.5:**
+   * było: pierścienie „do 20 m” jako reguła ogólna;
+   * jest: C.3.1 to zalecenie dla fundamentów **niezbrojonych** (IEC 60364-5-54:2011, zał. C.3.1).
+8. **R7-I03 i pkt 3.8.5:**
+   * było: „mocy magazynu nie wlicza się” (bezwarunkowo);
+   * jest: nie wlicza się tylko, gdy moc magazynu i łączna moc możliwa do wprowadzenia do sieci ≤ moc zainstalowana mikroinstalacji.
+   * Źródło: PE art. 7 ust. 8d12 (t.j. Dz.U. 2026 poz. 43).
+9. **„Nierozstrzygnięte” pkt 10:**
+   * było: „PN-HD 60364-5-534 wchłonęła 5-53:2022” (odwrócona relacja);
+   * jest: „PN-HD 60364-5-53:2022-10 wchłonęła PN-HD 60364-5-534:2016” (PKN: 5-534:2016-04 „zastąpiona przez” 5-53:2022-10).
+
+### Niemożliwe do weryfikacji (bez dostępu do płatnej treści PN lub dokumentów)
+* Modyfikacje wspólne CENELEC w PN-HD 60364-4-41:2017 względem IEC AMD1:2017. 411.3.4 potwierdzają źródła wtórne PL, ale nie tekst PN. 5 s dla obwodów rozdzielczych (411.3.2.3).
+* Treść PN-HD 60364-5-53:2022-10 (I_n ≥ 5 kA, zasady doboru typu RCD), PN-HD 60364-4-43:2024 (433.1), PN-HD 60364-4-42 A1/A11 (AFDD).
+* PN-HD 60364-7-701:2025-02: geometria stref (2,25 m / 0,6 m / 1,2 m potwierdzają tylko źródła wtórne dla wydania 2010), wymagania IPX5/IPX7.
+* PN-EN IEC 62305-2:2025: współczynniki analizy ryzyka (r_t, r_f, L_F, C_I, C_E) oraz aktualne N_g z sieci PIORUN.
+* N SEP-E-002 (pełna treść tablic), wartości IEC 60228 (rezystancje przyjęte z pamięci normatywnej, wartości typowe), numery punktów 7-722.
+* Polskie normy lub specyfikacje z GIA art. 10 ust. 4 i kategorie wyłączeń z ust. 7 (nie znalazłem ich w ELI), stanowisko KG PSP co do PWP w domach jednorodzinnych, praktyka ENEA w zakresie rozdziału PEN w ZKP.
