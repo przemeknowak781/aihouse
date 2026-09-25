@@ -1,0 +1,25 @@
+# Konfiguracja arkuszy rysunków KONSTRUKCJI (projekt techniczny, PT-BO) — generator lamela.views.konstrukcja.
+# Plik NIE zawiera danych budynku: geometria z model/budynek.yaml, zbrojenie z obliczeń lamela.obliczenia.konstrukcja
+# (analiza uruchamiana przy generowaniu). Uruchomienie:
+#   PYTHONPATH=src python3 tools/generuj_widoki.py --arkusze model/arkusze_bo.yaml --out projekt/04_PT_konstrukcja/rysunki
+wspolne:
+  pracownia: "PRACOWNIA PROJEKTOWA — nazwa do uzupełnienia"
+  pracownia_adres: "adres pracowni do uzupełnienia"
+  inwestor: "(do uzupełnienia)"
+  obiekt: "Budynek mieszkalny jednorodzinny wolnostojący „Dom LAMELA”"
+  lokalizacja: null
+  kategoria: "I"
+  stadium: "PT"
+  branza: "KONSTRUKCJA (BO)"
+  prefiks_nr: "PT-BO"
+  data: null
+  rewizja: "0"
+  skala: 50
+  format: auto
+  plik_tomu: "tom_PT-BO.pdf"
+  raport_zbrojenia: projekt/04_PT_konstrukcja/rysunki/kontrola_zbrojenia.md
+  braki_danych: projekt/04_PT_konstrukcja/BRAKI_DANYCH.md
+  uwagi: []
+arkusze:
+  - {nr: PT-BO-10, tytul: "ZBROJENIE DOLNE STROPU NAD PARTEREM", typ: k_zbrojenie, element: strop, poziom: ST1, warstwa: dolna}
+  - {nr: PT-BO-11, tytul: "ZBROJENIE GÓRNE STROPU NAD PARTEREM", typ: k_zbrojenie, element: strop, poziom: ST1, warstwa: gorna}

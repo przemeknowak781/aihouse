@@ -80,9 +80,12 @@ def _labels_building(lab, s, W, h=D.H):
 
     def fn(cv, p):
         S.building_label(cv, p, s.zero_abs, rom, h=h, layer="Z-OPISY")
-        cv.text(np.asarray(p) + np.array([0.0, (h * 1.5) * k]), "bud. mieszk. jednorodz.", h, 0.0, "center",
-                "baseline", "Z-OPISY")
     lab.pl.place(lab.vp, fn, cands, penalty_step=0.01)
+    return c0
+
+
+def _label_function(lab, s, anchor, lines=("budynek mieszkalny jednorodzinny", "— projektowany")):
+    lab.label(anchor, list(lines), D.H, dists=(9.0, 12.0, 15.0, 19.0, 24.0), leader_from=2.0, dot=True)
 
 
 def _frame_and_note(vp, win_b, used):
@@ -96,11 +99,12 @@ def _frame_and_note(vp, win_b, used):
     ls = wrap(MAPA_TXT, Wmm, D.H)
     top = y1 + (4.0 + len(ls) * D.H * 1.45 + 5.0) * k
     vp.rect(x0, y1 + 1.5 * k, x1, top, "Z-MAPA-RAMKA", pen=0.35, lt="CIAGLA")
-    vp.text((x0 + 2.0 * k, top - 5.0 * k), "MAPA DO CELÓW PROJEKTOWYCH — PODKŁAD PRZYKŁADOWY (FIKCYJNY)", 3.5, 0.0,
+    vp.text((x0 + 2.0 * k, top - 5.0 * k), "MAPA DO CELÓW PROJEKTOWYCH — PODKŁAD PRZYKŁADOWY", 3.5, 0.0,
             "left", "baseline", "Z-MAPA-RAMKA", style="bold")
     for i, s_ in enumerate(ls):
         vp.text((x0 + 2.0 * k, top - (5.0 + 4.5 + i * D.H * 1.45) * k), s_, D.H, 0.0, "left", "baseline",
                 "Z-MAPA-RAMKA")
+    return top
 
 
 def view_plan(ctx, spec, scale, opts):
@@ -119,7 +123,7 @@ def view_plan(ctx, spec, scale, opts):
     if opts.get("podklad", True):
         D.draw_base_map(vp, s, lab, win, used, opts)
         if opts.get("warstwice", True):
-            D.draw_contours(vp, s, win, used, exclude=s.footprint.buffer(0.3))
+            D.draw_contours(vp, s, win, used, exclude=_contour_mask(s))
     # --- projekt
     zj, zj_todo = D.zjazd_poly(s)
     if zj is not None:
@@ -134,32 +138,55 @@ def view_plan(ctx, spec, scale, opts):
     D.draw_parking(vp, s, used)
     D.draw_bins(vp, s, used)
     D.draw_retention(vp, s, used)
-    D.draw_drainage(vp, s, used)
     D.draw_pc(vp, s, used)
     D.draw_fence(vp, s, used)
-    corners = D.draw_plot_boundary(vp, s, used)
+    D.draw_plot_boundary(vp, s, used)
     D.draw_building_line(vp, s, used, win)
-    D.draw_utilities(vp, s, used, win, inside=s.p0)
+    for sx in [x for x in s.sieci if not x.istn]:
+        g = D.clip(sx.geom.difference(s.p0), win)
+        if g is not None:
+            D.utility(vp, g, sx, pen=0.5, flow=False)
+            used.add(f"proj_{sx.branza}")
     D.draw_objects(vp, s, used, win)
     D.draw_building(vp, s, used, slab_lt=str(opts.get("linia_plyt", "PUNKTOWA")).upper())
     D.register_all(lab)
     # --- opisy i wymiary (kolejność = priorytet)
-    _labels_building(lab, s, W)
+    c0 = _labels_building(lab, s, W)
     used.add("zero")
+    lab.area(s.footprint, 3.0)
     _dims_plan(lab, s, used)
+    _label_function(lab, s, c0)
     _labels_project(lab, s, W, used, detail=False)
     if opts.get("podklad", True):
         D.label_base_map(vp, s, lab, win, used, opts, contours=opts.get("warstwice", True))
         _spots_map(lab, s, win, used, float(opts.get("pikiety_co", 9.0)))
-    _frame_and_note(vp, wb, used)
+    top = _frame_and_note(vp, wb, used)
+    # --- tabele obok mapy (w rzutni — pismo 2,5 mm)
+    x_t = wb[2] + 8.0 * k
+    t1 = _tab_wskazniki(s, W)
+    r1 = D.vp_table(vp, x_t, top, t1["cols"], t1["rows"], t1["title"], align=t1["align"], notes=t1["notes"],
+                    max_w_mm=float(opts.get("szer_tabel", 176.0)))
+    t2 = _tab_odleglosci(s)
+    D.vp_table(vp, x_t, r1[1] - 6.0 * k, t2["cols"], t2["rows"], t2["title"], align=t2["align"], notes=t2["notes"],
+               max_w_mm=float(opts.get("szer_tabel", 176.0)))
     res = SiteResult(site=s, braki=s.braki)
-    res.column_blocks = [("legenda", D.legend_block(used, order=LEGEND_ORDER_PLAN)),
-                         ("wskazniki", _block_wskazniki(s, W)),
-                         ("odleglosci", _block_odleglosci(s)),
-                         ("oo", _block_oo(s))]
+    res.column_blocks = [("legenda", D.legend_block(used, order=LEGEND_ORDER_PLAN)), ("oo", _block_oo(s))]
     res.notes = _notes_plan(s, W, zj_todo, lab)
     res.dane = dict(wskazniki={k_: v for k_, v in W.items() if k_ not in ("cover", "green")}, okno=wb)
+    if lab.failed:
+        ctx.note("PZT-01", f"nie umieszczono {len(lab.failed)} opisów: {[f[0] for f in lab.failed][:8]}")
     return vp, res, title
+
+
+def _contour_mask(s):
+    """Obszar bez warstwic podkładu: budynki (istniejące i projektowany) oraz poza zasięgiem pikiet (+2 m)."""
+    from shapely.geometry import MultiPoint
+    hull = MultiPoint([tuple(p[:2]) for p in s.pkt_ist]).convex_hull.buffer(2.0) if len(s.pkt_ist) >= 3 else None
+    parts = [s.footprint.buffer(0.3)] + [x["bud"] for x in s.sasiedzi if x["bud"] is not None]
+    m = unary_union(parts)
+    if hull is not None:
+        m = unary_union([m, box(-1e4, -1e4, 1e4, 1e4).difference(hull)])
+    return m
 
 
 LEGEND_ORDER_PLAN = ["mapa_ramka", "granica", "rozgraniczajaca", "jezdnia", "bud_sasiedni", "linia_zabudowy",
@@ -219,8 +246,9 @@ def _dims_plan(lab, s, used, detail=False):
     D.place_dim(lab, (x0, y0), (x1, y0), shifts=offs if lab.k > 0.3 else [-v for v in (1.5, 2, 2.5, 3, 3.5)])
     D.place_dim(lab, (x1, y0), (x1, y1), shifts=offs if lab.k > 0.3 else [-v for v in (1.5, 2, 2.5, 3, 3.5)])
     # odległości od budynków sąsiednich (informacyjnie — WT § 271)
+    side_nb = {g["sasiad"] for g in s.granice if not g["droga"]}
     for x in s.sasiedzi:
-        if x["bud"] is None or detail:
+        if x["bud"] is None or detail or x["nr"] not in side_nb:
             continue
         a, b = nearest_points(s.footprint, x["bud"])
         if a.distance(b) > 30.0:
@@ -266,7 +294,8 @@ def _labels_project(lab, s, W, used, detail=False):
         w = s.wjazdy[0]
         lab.label(w["pt"] - w["out"] * 2.0, [f"garaż — {nga} st. post."], h, dists=(0.0, 1.5, 3.0, 5.0))
     if s.odpady and s.odpady["poly"] is not None:
-        lab.label(np.asarray(s.odpady["poly"].centroid.coords[0]), ["pojemniki na odpady"], h, dot=True)
+        lab.label(np.asarray(s.odpady["poly"].centroid.coords[0]), ["odpady"], h, dot=True,
+                  dists=(1.0, 2.5, 4.0, 6.0, 9.0, 12.0))
     if s.pc is not None:
         lab.label(np.asarray(s.pc["body"].centroid.coords[0]),
                   ["PC — jedn. zewn.", f"strefa R290 r = {mm(s.pc['r'])} m"], h, dot=True)
@@ -280,7 +309,9 @@ def _labels_project(lab, s, W, used, detail=False):
         lab.label(np.asarray(r["poly"].centroid.coords[0]), txt, h, dists=(0.0, 3.0, 6.0, 10.0))
     for t in s.drzewa:
         nm = t["id"] + " " + t["gat"].split()[0] + (" (istn.)" if t["istn"] else "")
-        lab.label(t["xy"], [nm], h, dists=(0.8, 2.0, 4.0, 7.0), leader_from=2.5, max_cost=10.0)
+        r_mm = t["d"] / 2.0 / k
+        lab.label(t["xy"], [nm], h, dists=(0.8, 2.0, r_mm * 0.75, r_mm + 1.0, r_mm + 3.0, r_mm + 6.0, r_mm + 10.0),
+                  leader_from=2.5, own=Point(t["xy"]).buffer(t["d"] / 2.0).exterior)
     for o in s.obiekty.values():
         idu = o.id.upper()
         if idu.startswith("PC"):

@@ -481,3 +481,156 @@ def _stopka_materialow(D: KD.DaneKonstr, elementy, fis: list[int]) -> list[str]:
                    f"przekroju; PN-EN 1992-1-1 8.4, 8.7, (8.3), (8.10)): " + "; ".join(zz) + ". W warunkach „innych” "
                    "(górne pręty płyt gr. > 25 cm) długości ×1/0,7.")
     return out
+
+
+UWAGI_ZBR = [
+    "Stal zbrojeniowa B500SP (klasa ciągliwości C, f_yk = 500 MPa) wg PN-H-93220:2018-02 / PN-EN 10080; pręty gięte na "
+    "zimno na trzpieniach φ_m ≥ 4φ (φ ≤ 16 mm) i ≥ 7φ (φ > 16 mm) — PN-EN 1992-1-1 tabl. 8.1N; oznaczenia prętów i "
+    "kształtów wg PN-EN ISO 3766 (liczba, nr pozycji, Ø, rozstaw [cm], długość rozwinięcia l [cm]).",
+    "Otuliny zapewnić podkładkami dystansowymi (rozstaw ≤ 1,0 m, dla siatek górnych — podpórki „kobyłki” ≤ 1,0 m) — "
+    "PN-EN 13670 p. 6.5; odchyłka wykonawcza Δc_dev = 10 mm uwzględniona w c_nom (PN-EN 1992-1-1 4.4.1.3 + NA).",
+    "Pręty łączyć na zakład l₀ (tabela w stopce zestawienia), styki mijankowo — w jednym przekroju ≤ 50 % prętów; "
+    "odstęp w świetle prętów ≥ max(φ; d_g + 5 mm; 20 mm) — PN-EN 1992-1-1 8.2(2), 8.7.2; pręty dolne w strefie "
+    "podpory zakotwić ≥ 10φ za licem (9.3.1.2(1) → 9.2.1.5).",
+    "Betonowanie: beton wg PN-EN 206+A2 i PN-B-06265 (klasa, ekspozycja, D_max 16 mm, konsystencja S3); pielęgnacja ≥ 7 "
+    "dni (klasa pielęgnacji 2 — PN-EN 13670 p. 8.5); przerwy robocze wyłącznie w miejscach uzgodnionych z projektantem.",
+    "Rozszalowanie i usunięcie podpór: płyty i belki po uzyskaniu ≥ 70 % f_ck (PN-EN 13670 p. 5.6 i 8.5), wsporniki — "
+    "nie wcześniej niż po 28 dniach i po wykonaniu elementów dociążających zaplecze; podpory wtórne do 28 dni.",
+    "Zbrojenie wynika z obliczeń statycznych (projekt/04_PT_konstrukcja/obliczenia, numeracja pozycji jak na rysunku); "
+    "kontrola A_s,prov ≥ A_s,req — raport kontrola_zbrojenia.md. Pozycje z niespełnionymi warunkami nośności "
+    "(wynik „NIE” w raporcie) wymagają zmian przed wydaniem do realizacji.",
+]
+
+
+def _legenda_zbrojenia(warstwa: str) -> list:
+    out = [("pret", f"pręt reprezentatywny grupy ({'warstwa dolna' if warstwa == 'dol' else 'warstwa górna'}), "
+                    "linia gruba"),
+           ("pret_hak", "pręt z odgięciem 90° — odgięcie (ramię) pokazane w płaszczyźnie rysunku"),
+           ("rozklad", "linia rozkładu prętów grupy (zasięg), kółko — pręt reprezentatywny"),
+           ("poz", "numer pozycji pręta (zestawienie stali)"),
+           ("naroze", "strefa zbrojenia narożnego (0,2·l_min) — pręty górą i dołem w 2 kierunkach"),
+           ("kreskowa", "ściany / belki / słupy pod płytą (widok zasłonięty)")]
+    if warstwa == "gora":
+        out.append(("lacznik", "łącznik termoizolacyjny (ETA) — pręty wspornika przez izolację"))
+    return out
+
+
+def widok_zbrojenie_plyt(ctx: ViewContext, spec: dict, scale: float, opts: dict):
+    D = KD.dane(ctx)
+    lv = D.poziom(spec.get("poziom") or spec.get("kond") or spec.get("plyta"))
+    if lv is None:
+        raise KeyError(f"brak poziomu płyt '{spec.get('poziom') or spec.get('kond')}' w wynikach obliczeń")
+    warstwa = "gora" if str(spec.get("warstwa", "dolna")).lower().startswith("g") else "dol"
+    ids = ", ".join(e.id for e in lv.elementy)
+    title = spec.get("tytul_widoku") or f"ZBROJENIE {'GÓRNE' if warstwa == 'gora' else 'DOLNE'} PŁYT {ids}"
+    vp = Viewport(scale, title)
+    res = KResult()
+    placer = Placer(vp.k)
+    m = ctx.model
+    P = prety_poziomu(D, lv)
+    rysuj_plyty(vp, lv, placer)
+    sc = sciany_pod(m, lv.spod)
+    for w in sc:
+        g = w.warstwa_konstr.polygon
+        if g is not None and not g.is_empty:
+            vp.geom(g.intersection(lv.poly.buffer(0.5)), L_OBR, pen="cienka", lt="KRESKOWA")
+    for c, g in rysuj_slupy(vp, m, lv.spod - 0.4, lv.spod + 0.05):
+        pass
+    for b in m.belki():
+        top = float(b["spod"]) + float(b["h"])
+        if lv.spod - 0.06 <= top <= lv.wierzch + 1.2 and float(b["spod"]) < lv.spod + 0.3:
+            (x0, y0), (x1, y1) = b["os"]
+            ln = LineString([(x0, y0), (x1, y1)])
+            vp.geom(ln.buffer(float(b["b"]) / 2, cap_style=2), L_OBR, pen="cienka", lt="KRESKOWA")
+    grupy = P[warstwa]
+    bnd = lv.poly.buffer(1.5)
+    naroza = {}
+    for g in grupy:
+        if g.rola == "naroze":
+            naroza.setdefault((g.element, g.pole, round(g.zakres.centroid.x, 2), round(g.zakres.centroid.y, 2)), []).append(g)
+            continue
+    # najpierw rysunek wszystkich prętów (przeszkody), potem opisy — od grup najdłuższych
+    for g in grupy:
+        if g.rola == "naroze":
+            vp.line(g.linia[0], g.linia[1], L_ZBR, pen=0.35)
+        else:
+            rysuj_grupe(vp, placer, g, opis=False)
+    for zone_gs in naroza.values():
+        zn = zone_gs[0].zakres
+        vp.geom(zn.exterior, L_OPI, pen="cienka", lt="KRESKOWA_DROBNA")
+        placer.add_lines(zn.exterior, w=0.3)
+    for g in sorted([g for g in grupy if g.rola != "naroze"], key=lambda q: -LineString(q.linia).length):
+        a, b = np.asarray(g.linia[0]), np.asarray(g.linia[1])
+        L = float(np.hypot(*(b - a)))
+        ts = [0.0] + [s_ * f * L for f in (0.18, 0.32) for s_ in (-1, 1)]
+        etykieta(vp, placer, (a + b) / 2, b - a, opis_grupy(g), g.pret.nr, 2.5, ts=ts, bounds=bnd)
+    for (el, pole, cx, cy), gs in naroza.items():
+        gs = sorted(gs, key=lambda q: q.kier)
+        nrs = "/".join(str(q.pret.nr) for q in gs)
+        n = sum(q.n for q in gs)
+        txt = f"naroże: poz. {nrs} — {n} Ø{gs[0].pret.fi} co {gs[0].s / 10:g}"
+        etykieta(vp, placer, (cx, cy), (1.0, 0.0), txt, None, 1.8, offs=(0.0, 3.5, 7.0), ts=(0.0, -0.5, 0.5),
+                 bounds=bnd)
+    for e in lv.elementy:
+        _opis_elementu(vp, placer, e)
+    osie_i_wymiary(vp, ctx, lv.poly.bounds, placer, sides=("dol", "lewo"))
+    # kontrola A_s: zbrojenie narysowane vs wymagane
+    nr_ark = spec.get("nr", "")
+    for g in grupy:
+        w = g.wym
+        if w is None:
+            continue
+        e = next(x for x in lv.elementy if x.id == g.element)
+        miejsce = {"przeslo": f"pole {g.pole} — {'dół' if warstwa == 'dol' else 'góra'} {g.kier}",
+                   "podpora": f"nad podporą {g.pole} — góra {g.kier}", "wspornik": f"wspornik — góra {g.kier}",
+                   "naroze": f"pole {g.pole} — naroże ({'dół' if warstwa == 'dol' else 'góra'} {g.kier})"}[g.rola]
+        As_prov = KD.pole_preta(g.pret.fi) * 1000.0 / g.s
+        KD.rejestruj(D, e.id, miejsce, e.poz, w.As_req, w.As_min if w.As_req > 0 or warstwa == "dol" else 0.0, As_prov,
+                     f"Ø{g.pret.fi} co {g.s / 10:g}", s=g.s, s_max=KD.s_max_plyty(e.h), As_max=0.04 * e.h * 1e6,
+                     arkusz=nr_ark, uwagi=("; ".join(e.niesp[:2]) if e.niesp else ""),
+                     wymuszone_ok=None)
+    fis = sorted({g.pret.fi for g in grupy})
+    masa = P["zest"].masa
+    res.column_blocks.append(("legenda_k", blok_legendy(_legenda_zbrojenia(warstwa))))
+    res.column_blocks.append(("zestawienie", blok_zestawienia(
+        P["zest"], f"ZESTAWIENIE STALI — PŁYTY {ids} (warstwy dolna i górna)",
+        _stopka_materialow(D, lv.elementy, [p.fi for p in P["zest"].prety]), masa)))
+    res.notes += UWAGI_ZBR
+    if warstwa == "gora":
+        res.notes.append("Warstwa górna: pręty nad podporami — 0,3·l przęsła za osią podpory (≥ l_bd), przy "
+                         "krawędzi płyty z odgięciem w wieńcu (ramię = h − 2c); wsporniki — od krawędzi swobodnej przez "
+                         "łącznik termoizolacyjny do przęsła zaplecza na max(l_c; l_bd) za podporą (PN-EN 1992-1-1 "
+                         "9.3.1.2(2), 9.3.1.4).")
+    else:
+        res.notes.append("Warstwa dolna: siatka pól wg obliczeń MES (Wood–Armer, obwiednia ULS); pręty kierunku x "
+                         "(równoległe do osi x) — warstwa zewnętrzna, kierunek y — wewnętrzna; na podporach pośrednich "
+                         "przedłużenie ≥ 10φ za oś podpory, na skrajnych — do krawędzi płyty.")
+    n_bad = [e for e in lv.elementy if e.niesp]
+    if n_bad:
+        res.notes.append("UWAGA — obliczenia (biblioteka) wykazują niespełnione warunki: " + "; ".join(
+            f"{e.id} (poz. {e.poz}): {e.niesp[0]}" for e in n_bad[:4]) + " — wymagana zmiana przekroju/zbrojenie na "
+            "ścinanie przed wydaniem do realizacji [WYMAGA ANALIZY].")
+    kol = kolizje_napisow(vp)
+    if kol:
+        ctx.note(f"{nr_ark} {title}", f"kolizje napisów: {kol}")
+    KD.zapisz_raporty(D, ctx)
+    return vp, res, title
+
+
+def prety_poziomu(D, lv):
+    return KD.prety_poziomu(D, lv)
+
+
+# ================================================================================================ rejestracja
+def widok_zbrojenie(ctx: ViewContext, spec: dict, scale: float, opts: dict):
+    """Dyspozytor typu ``k_zbrojenie``: element = strop | plyta | fundament | belki | nadproza | schody | wsporniki."""
+    el = str(spec.get("element", "strop")).lower()
+    fn = _ZBROJENIE.get(el)
+    if fn is None:
+        raise ValueError(f"k_zbrojenie: nieznany element '{el}' ({' | '.join(_ZBROJENIE)})")
+    return fn(ctx, spec, scale, opts)
+
+
+_ZBROJENIE = {"strop": widok_zbrojenie_plyt, "plyta": widok_zbrojenie_plyt, "stropodach": widok_zbrojenie_plyt}
+
+register_view("k_zbrojenie", widok_zbrojenie, "rysunek zbrojenia")

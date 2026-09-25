@@ -359,7 +359,7 @@ def draw_contours(c, s, win: Polygon, used: set, projected=False, exclude=None):
         if g.is_empty:
             continue
         draw_geom(c, g, "Z-RZEDNE-PROJ" if projected else "Z-RZEDNE", pen=0.5 if projected else 0.18, lt="CIAGLA",
-                  color=None if projected else "#8a5a2a")
+                  color=None if projected else "#a07850")
         n += 1
     if n:
         used.add("warstwice_proj" if projected else "warstwice")
@@ -851,10 +851,13 @@ def draw_utilities(c, s, used: set, win=None, inside=None, marks=True):
 def dim_pts(c, a, b, h=H, label=None, layer="Z-WYMIARY"):
     """Wymiar odcinka a–b w m (2 miejsca — RPB § 15 ust. 3), linie 0,18 (PN-B-01027 poz. 4.1)."""
     from ..draft import dims
+    from ..draft import fmt
     a, b = np.asarray(a, float), np.asarray(b, float)
     ang = math.degrees(math.atan2(b[1] - a[1], b[0] - a[0]))
+    if label is None:          # zaokrąglenie „połówkowe w górę” do 0,01 m (uniknięcie błędu 18,975 → 18,97)
+        label = fmt.num(fmt.round_half_up(float(np.hypot(*(b - a))) * 100.0) / 100.0, 2)
     return dims.dim_chain(c, [a, b], a, ang, layer=layer, h=h, unit_="m", tick_pen=0.18, ext_len=(1.5, 1.5),
-                          overshoot_mm=1.5, tick_mm=2.5, labels=[label] if label else None, mask=0.3)
+                          overshoot_mm=1.5, tick_mm=2.5, labels=[label], mask=0.3)
 
 
 def place_dim(lab: Labeler, a, b, on_a=None, on_b=None, avoid=None, span=8.0, step=0.25, label=None,
@@ -1330,7 +1333,7 @@ def vp_table(c, x, y_top, cols, rows, title=None, h=H, row_h=5.0, align=None, no
     xx = 0.0
     for j, ls in enumerate(hdr):
         for i, t_ in enumerate(ls):
-            yy = y - (header_h / 2.0 + (len(ls) - 1) * h * 0.725 - i * h * 1.45) * k
+            yy = y - (header_h / 2.0 - (len(ls) - 1) * h * 0.725 + i * h * 1.45) * k
             c.text((X(xx + ws[j] / 2.0), yy), t_, h, 0.0, "center", "middle", layer, style="bold")
         xx += ws[j]
     y -= header_h * k
