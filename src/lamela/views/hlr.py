@@ -16,8 +16,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 
 import numpy as np
-import shapely
-from shapely.geometry import MultiPolygon, Polygon, box
+from shapely.geometry import Polygon, box
 from shapely.geometry.polygon import orient
 from shapely.ops import unary_union
 

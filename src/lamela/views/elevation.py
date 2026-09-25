@@ -19,7 +19,7 @@ import math
 from dataclasses import dataclass, field
 
 import numpy as np
-from shapely.geometry import LineString, Point, Polygon, box
+from shapely.geometry import LineString, Point, Polygon
 from shapely.ops import unary_union
 
 from ..draft import dims, fmt, hatch as H, symbols as S

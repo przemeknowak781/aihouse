@@ -14,8 +14,7 @@ from pathlib import Path
 
 import numpy as np
 import shapely
-from shapely.geometry import (GeometryCollection, LineString, MultiLineString, MultiPolygon, Point, Polygon,
-                              box)
+from shapely.geometry import LineString, MultiLineString, MultiPolygon, Polygon
 from shapely.ops import linemerge, unary_union
 
 from ..draft import hatch as H

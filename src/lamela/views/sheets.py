@@ -41,13 +41,11 @@ Każdy arkusz: ``nr``, ``tytul``, ``typ`` (rzut | dach | przekroj | elewacja) z 
 """
 from __future__ import annotations
 
-import copy
 import datetime as _dt
 import json
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
 
-import numpy as np
 import yaml
 
 from ..draft import fmt, hatch, plot, symbols as S

@@ -18,17 +18,16 @@ Kierunki N/S/E/W w układzie budynku (N = +y, E = +x).
 """
 from __future__ import annotations
 
-import math
 from dataclasses import dataclass, field
 
 import numpy as np
-from shapely.geometry import LineString, MultiLineString, Point, Polygon, box
+from shapely.geometry import LineString, Point, Polygon, box
 from shapely.ops import unary_union
 
-from ..draft import dims, elements as E, fmt, symbols as S, text as T
-from ..draft.geom import lines_of, perp, polygons_of, unit
+from ..draft import dims, elements as E, fmt, symbols as S
+from ..draft.geom import lines_of, perp, unit
 from . import hlr
-from .common import (NO_HATCH, Placer, ViewContext, clean, cut_kind, draw_lines, hatch_code, klasa_mat, label_point,
+from .common import (NO_HATCH, Placer, ViewContext, clean, cut_kind, draw_lines, hatch_code, klasa_mat,
                      layer_text, material_name, room_label)
 
 DIRS = {"N": (0.0, 1.0), "S": (0.0, -1.0), "E": (1.0, 0.0), "W": (-1.0, 0.0),
@@ -415,7 +414,7 @@ class SectionBuilder:
             off += 7.0
         # wysokość budynku wg § 6 WT
         xh = base - off * k
-        info = dims.dim_v(vp, [round(H["z_ent"], 3), round(H["z_top"], 3)], xh, base)
+        dims.dim_v(vp, [round(H["z_ent"], 3), round(H["z_top"], 3)], xh, base)
         wt = f"wysokość budynku wg § 6 WT: H = {fmt.num(H['H'], 2)} m"
         vp.text((xh - 5.0 * k, (H["z_ent"] + H["z_top"]) / 2), wt, 2.5, 90.0, "center", "baseline",
                 layer="A-WYMIARY", mask=0.4)

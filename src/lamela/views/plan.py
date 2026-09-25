@@ -24,13 +24,13 @@ import math
 from dataclasses import dataclass, field
 
 import numpy as np
-from shapely.geometry import LineString, MultiLineString, Point, Polygon, box
+from shapely.geometry import LineString, Point, Polygon, box
 from shapely.ops import unary_union
 
-from ..draft import dims, elements as E, fmt, symbols as S
+from ..draft import dims, elements as E, symbols as S
 from ..draft.geom import lines_of, perp, polygons_of, unit
 from . import hlr
-from .common import (NO_HATCH, Placer, ViewContext, as_lines, clean, cut_kind, draw_lines, hatch_code,
+from .common import (NO_HATCH, Placer, ViewContext, clean, cut_kind, draw_lines, hatch_code,
                      label_point, material_name, room_label, spiral)
 
 EXCL_BELOW = {"frame", "glass", "door_leaf", "railing", "lamella", "stair_step", "landing", "furniture"}
@@ -232,6 +232,9 @@ class PlanBuilder:
         self.res = PlanResult(kid, self.z_cut)
         self.num_mode = ctx.opt("numeracja_pomieszczen", "iso")
         self.rooms = [r for r in self.m.pomieszczenia(kid) if r.polygon is not None and not r.polygon.is_empty]
+        self._later_levels = []     # rzędne do opisania (spoczniki)
+        self._stair_label = []      # opisy „n × h × s” do rozmieszczenia
+        self.stair_areas = []       # obrysy widocznych schodów (przeszkody dla opisów)
 
     # ------------------------------------------------------------------ przebieg
     def run(self):
@@ -455,7 +458,6 @@ class PlanBuilder:
                 draw_lines(vp, vis_line, "A-SCHODY", pen="cienka")
                 ref["vis"] = poly.difference(occ)
             occ = occ.union(poly)
-        occ_final = occ
         below_vis = unary_union([st["vis"] for it in items for st in it["steps"] + it["lands"]
                                  if st.get("vis") is not None and not st["vis"].is_empty] or [Polygon()])
         arr_foot = unary_union([st["poly"] for it in arriving for st in it["steps"]] +
@@ -827,9 +829,6 @@ class PlanBuilder:
         self.section_marks(axb)
         self.res.extent = vp.extents()
 
-    _later_levels: list = []
-    _stair_label: list = []
-
     def room_tags(self):
         vp, k, m = self.vp, self.vp.k, self.m
         for r in sorted(self.rooms, key=lambda r: -r.pow_netto):
@@ -1161,11 +1160,7 @@ def draw_furniture(vp, it: dict):
 
 def draw_plan(vp, ctx: ViewContext, kond: str, opts: dict | None = None) -> PlanResult:
     """Rysuje rzut kondygnacji ``kond`` do rzutni ``vp`` (metry modelu). Zwraca ``PlanResult``."""
-    b = PlanBuilder(vp, ctx, kond, dict(opts or {}))
-    b._later_levels = []
-    b._stair_label = []
-    b.stair_areas = []
-    return b.run()
+    return PlanBuilder(vp, ctx, kond, dict(opts or {})).run()
 
 
 # ================================================================================================ rzut dachu
