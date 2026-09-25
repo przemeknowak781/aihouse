@@ -185,7 +185,8 @@ class RysPV(RysE):
         self.sym(_box, q, "FAL", w_mm=7.0, layer="E-PV")
         dc = pv.dc or {}
         fal = pv.par.falownik
-        self.tag(q, [f"falownik {fal.get('model', '')} (dane przykładowe, lub równoważny): P_AC = "
+        self.tag(q, [f"falownik {str(fal.get('model', '')).replace(' (dane przykładowe)', '')} (dane przykładowe, lub "
+                     "równoważny): P_AC = "
                      f"{num(fal.get('P_AC', 0), 1)} kW, {fal.get('n_mppt', 2)} MPPT",
                      str(dc.get("SPD", "SPD DC typ 2"))[:90], str(dc.get("rozlacznik", "rozłącznik DC"))[:90]],
                      "E-OPISY", style="bold")
@@ -333,10 +334,21 @@ class RysU(RysE):
                       f"przewody odprowadzające {info.get('n_odpr', {}).get(info.get('klasa', 'IV'), 3)} szt."],
                      "E-OPISY", style="bold")
             self.leg.line("E-ODGROM", "zwody poziome LPS na attykach (PN-EN IEC 62305-3)", pen="srednia", lt="CIAGLA")
-        # połączenie konstrukcji PV
+        # połączenie konstrukcji PV (moduły — obrys pomocniczy wg arkusza PV)
         d, pole = RysPV._pole(self)
         if d is not None and pole is not None and not pole.is_empty:
-            c = np.asarray(pole.representative_point().coords[0])
+            mod = self.W.pv.par.modul
+            mods = uklad_modulow(pole, int(self.W.pv.n_mod), float(mod["dl"]), float(mod["szer"]), self.W.pv.wariant)
+            for r, _s in mods:
+                vp.geom(r, "E-PV", pen=0.18, lt="CIAGLA", color="#9a86b5")
+            if mods:
+                c = np.asarray(unary_union([r for r, _s in mods]).centroid.coords[0])
+            else:
+                c = np.asarray(pole.representative_point().coords[0])
+            if not lps:
+                self.tag(c + np.array([0.0, 1.8]), [f"Analiza ryzyka PN-EN IEC 62305-2: {og.decyzja}",
+                                                   "bez zwodów; ochrona przepięciowa SPD T1+T2 (RG) i SPD DC"],
+                         "E-OPISY", style="bold")
             rg = self.W.obwody.rg_xy
             if rg is not None:
                 path = self.g.route(c, np.asarray(rg[:2], float), "PE", margin=10.0)

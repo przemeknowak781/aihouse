@@ -610,9 +610,10 @@ class _Builder:
             if keep:
                 cut = cut.difference(unary_union(keep))
             ring = clean_geom(ring.difference(cut), min_area=1e-3)
-        # attyka nie wchodzi w obrys wyższej kondygnacji
+        # attyka nie wchodzi w obrys wyższej kondygnacji; bez szczątkowych kostek w narożach wklęsłych przy ścianie wyższej
         ring = clean_geom(ring.difference(H), min_area=1e-3)
-        return ring
+        parts = [q for q in iter_polys(ring) if q.area > 1.5 * szer * szer]
+        return clean_geom(unary_union(parts), min_area=1e-3) if parts else Polygon()
 
     def _roof_like(self, rid, obrys_poly, wierzch, grubosc, prz, attyka, kind_slab, lvl, group, below_kond=None,
                    slab_mat=None):

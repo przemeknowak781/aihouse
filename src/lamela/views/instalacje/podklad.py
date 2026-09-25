@@ -141,10 +141,6 @@ def opisy_pomieszczen(vp, placer, ctx, pod: Podklad, extra: dict | None = None, 
         c = label_point(pg)
         bounds = pg.buffer(-0.02)
         for lines in ([num, nm] + list(extra.get(r.id, [])), [num] + list(extra.get(r.id, [])), [num]):
-            def fn_lines(lines=lines):
-                return lines
-            k = vp.k
-            H = len(lines) * H_S * 1.55 * k
             if pg.area < 1.0 and len(lines) > 1:
                 continue
             pos = _room_block(vp, placer, c, lines, bounds, last=(len(lines) == 1))

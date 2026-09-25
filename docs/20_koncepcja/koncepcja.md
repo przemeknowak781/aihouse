@@ -169,7 +169,7 @@ obsługuje łazienki P0, P1 i P2 ustawione jedna nad drugą (x 3,98–5,77).
 | J1 (z W3) | szklana przegroda wiatrołap/hol, doświetle drzwi | ścianka SGL S0-21 z drzwiami DS1 w osi wejścia; FX3 |
 | J1 (z W1) | kuchnia z ciągłą zabudową; drzwi przedsionek → kuchnia przy fasadzie | O0-21 w S0-15 na y 0,25–1,15; blaty y 1,30–5,02 + wyspa |
 | J1 | pralnia ≈ 6,5 m²; zysk dla łazienki/pokoju | pralnia 1.08 ≈ 6,6 m² + WC z natryskiem 1.07 (drugi punkt sanitarny P1) |
-| J1 | czerpnia W-166, wyrzutnia W-167 | czerpnia i wyrzutnia dachowe ≥ 0,40 m nad pokryciem, ≥ 6 m od wywiewki K1 i od siebie (`energia.wentylacja`) |
+| J1 | czerpnia W-166, wyrzutnia W-167 | czerpnia (11,60; 1,00; +10,00) i wyrzutnia (1,90; 4,00; +10,00): ≥ 0,40 m nad lokalnym pokryciem z klinem, **10,15 m od siebie (≥ 10,00 m, WT §152 ust. 10)**, czerpnia 7,96 m od wywiewki K1, wyrzutnia ≥ 3 m od krawędzi dachu nad oknami (`energia.wentylacja`; poprawione po audycie A1 — wcześniej błędnie „≥ 6 m od siebie”) |
 | J1 | niskie parapety W-097 | OP1/OP3 i BC1 z dolną częścią stałą VSG do 0,85 m; brak siedziska w boksie |
 | J1, J2 | linia zabudowy: zapas ≥ 0,30–0,50 m | daszek PL-DA i podest 0,95 m za linią zabudowy |
 | J2 | odwodnienie stropodachu P2 wpustami (nie rzygaczami), przelewy w każdym polu | D1: WP1/WP2 DN100 podgrzewane → RS1/RS2 w izolowanym szachcie SI; przelewy PA1–PA3; D2, D3, D4 z własnymi wpustami, przelewami i rurami (§6) |
@@ -220,10 +220,15 @@ Budynek jest w **II kategorii geotechnicznej** (W-280).
 
 **Ścieżki obciążeń** (`konstrukcja.sciezka_obciazen`):
 * **ST1 i ST2** (22 cm) pracują N–S jako płyty ciągłe dwuprzęsłowe o rozpiętości 5,125 / 3,625 m. Podpory: oś 1 (belka B1 / ściana), oś 3 i oś 4.
-  Nad wejściem na schody i nad wyjściem z nich płyty podpierają podciągi B8/B9 25 × 50 w osi 3 (C–D).
-* **Fasada E na parterze.** Belka odwrócona **B1 25 × 107 cm** (+2,78…+3,85, tworzy pas podokienny boksu C) leży na słupach RK 120×120×8
+  Nad wejściem na schody i nad wyjściem z nich płyty podpierają podciągi B8/B9 25 × 50 w osi 3 (C–D). Stropodach D1 ma w tym miejscu
+  podciąg **B10 25 × 50** (spód +8,80) oparty na ścianach S2-10 i S2-04 — na P2 oś 3 jest przerwana między x 7,19 a 8,50 (wyjście z biegu 2),
+  a ścianki S2-13/S2-14 są działowe (poprawka A2 I-1). Płyty ST1, ST2 i D1 kończą się na licu warstwy konstrukcyjnej ścian (±0,09 od osi);
+  ETICS/wełna ścian przechodzi ciągle przed czołami płyt i attyk (A2 K-1).
+* **Fasada E na parterze.** Belka odwrócona **B1 18 × 107 cm** (w licu muru, bez wejścia w ETICS) (+2,78…+3,85, tworzy pas podokienny boksu C) leży na słupach RK 120×120×8
   SL1–SL4 w szprosach przeszklenia oraz na ścianach A i E. Przęsła mają ≤ 3,23 m. B1 niesie ścianę pd. P1 i P2 i pas trzech stropów.
-  **Słupki boksu C SL5/SL6 stoją w jednej linii pionowej ze słupami SL3/SL4**, więc siły skupione nadproża B2 (25 × 80) trafiają nad podpory B1.
+  **Słupki boksu C SL5/SL6 stoją w jednej linii pionowej ze słupami SL3/SL4**, więc siły skupione nadproża B2 (18 × 80) trafiają nad podpory B1.
+  Słupy stoją w filarkach 0,12 m między kwaterami szklonymi (fasada słupowo-ryglowa), a otwory E sięgają spodu B1 (+2,78) — bez pasa muru
+  nad szkłem (A2 I-6).
 * **Wspornik bryły A (1,00 m w osi).** Obciążenie przechodzi kolejno:
   1. lekka ściana szkieletowa A' (SZL, ≤ 1,0 kN/m²);
   2. belka krawędziowa B3 20 × 60 w osi A' (odwrócona, pod parapetem okna O2-04) wraz z okapem PL-2;
@@ -236,11 +241,21 @@ Budynek jest w **II kategorii geotechnicznej** (W-280).
   * dach zielony w stanie nasyconym ≈ 1,6 kN/m² jako stałe;
   * zaspa przy uskoku do bryły B, μ_w ≤ 4,0 (W-264);
   * sytuacja wyjątkowa B2.
-* **Płyty wysunięte ≤ 1,50 m** (PL-E, PL-DA, PL-2, PL-3) są na łącznikach termoizolacyjnych z ETA (W-272). Rama C to lekki ruszt stalowy
+* **Płyty wysunięte ≤ 1,50 m** (PL-E, PL-DA, PL-2, PL-3) są na łącznikach termoizolacyjnych z ETA (W-272) w płaszczyźnie ocieplenia ściany
+  (pas −0,30…−0,09); wierzch płyty wysuniętej jest równy wierzchowi stropu (+3,00 / +6,15 / +9,30), a „gruba krawędź” 0,30–0,32 m powstaje
+  od spodu — łącznik bez uskoku, spadek 2 % od budynku bez progu (A2 I-4). **Pas zachodni PL-2/PL-3** (1,10 m na belce B3 opartej na końcach
+  wsporników B4/B5, łączny wysięg od osi A 2,40 m): szacunek EQU — moment wywracający od B3 (ściana A' ≈ 3,2 kN/m, pas PL 1,10 m ≈ 9 kN/m,
+  połowa ST2Z ≈ 2,8 kN/m, obciążenia zmienne) ≈ 1,1·50 + 1,5·8 ≈ 70 kNm na belkę, moment utrzymujący przęsła zakotwienia A–B (ściany P2,
+  ST3, ST2 ≈ 35 kN/m × 3,875 m × 1,94 m) · 0,9 ≈ 235 kNm; ugięcie końca PL (l/d ≈ 3,7) i B4/B5 (l/d ≈ 1,3) ≪ l/125 — do wykazania w PT
+  (W-262, W-268), skrócenia pasa nie wprowadzono (A2 D-12). Rama C to lekki ruszt stalowy
   w okładzinie na konsolach punktowych. Nad stolarką pod krawędziami okapu E i ramy C przewidziano szczelinę dylatacyjną.
 * **Usztywnienie.** Ściany w obu kierunkach i stropy jako tarcze. Przy przeszklonej fasadzie pd. parteru sztywność w kierunku x daje trzon
   klatki z **żelbetowymi ścianami C i D na P0** (SWZB, poprawka J2) razem ze ścianami osi 3 i 4.
-* **Schody.** Płyty biegów i spoczników ŻB 18 cm oparte na ścianach C/D i ściance środkowej. Stopnie dębowe.
+* **Schody.** Płyty biegów ŻB 18 cm: dolny koniec na stropie/podciągu osi 3 (B8/B9/B10), górny na płycie spocznika; spocznik na ścianach
+  C/D i **ścianie środkowej ŻB 15 cm** (SCZB15), monolitycznej z płytami biegów, ciągłej P0–P2 przez poziomy stropów i zakotwionej
+  w podciągach osi 3 — zamiast ścianki silikatowej 12 cm o wysokości 9,3 m z wolnym końcem (A2 I-2). Stopnie dębowe.
+* **Dach garażu D4 przy ścianie osi E.** Obrys D4 zaczyna się od lica ocieplenia ściany P1 (x 12,30); płyta D4 łączy się z wieńcem ściany E
+  i płytą ST1 łącznikiem termoizolacyjnym w płaszczyźnie ETICS ściany P1 (pas 12,09–12,30) — podparcie D4 na ścianie E przez łącznik (PT).
 
 **Posadowienie — płyta fundamentowa na XPS (decyzja).** Porównano ją z ławami W2 (60 × 35 cm, spód −1,10). Wybrano płytę ŻB 25 cm C25/30 XC2
 na XPS 300 20 cm, z pogrubieniami (żebrami) pod ścianami nośnymi (60 × 30 / 50 × 25 cm) i pod słupami SL1–SL4 (1,0 × 1,0 × 0,45 m).
@@ -255,7 +270,8 @@ Uzasadnienie:
    (W-286).
 5. **Nośność XPS 300.** Naprężenia pod pogrubieniami ≈ 70–110 kPa, czyli poniżej dopuszczalnego ≈ 130 kPa (pełzanie 50 lat) — do wykazania w PT.
 
-Garaż stoi na tej samej płycie. Jego posadzka −0,10 ma spadek 1,5 % do bramy (W-114). Zakres badań podłoża: opinia geotechniczna,
+Garaż stoi na tej samej płycie. Jego posadzka ma spadek 0,8 % do bramy: −0,05 przy drzwiach O0-22, −0,10 przy bramie, próg dom–garaż
+5 cm ≥ 3 cm (W-114; audyt A1). Zakres badań podłoża: opinia geotechniczna,
 ≥ 3 sondowania CPT/DPL do ≥ 6 m, projekt geotechniczny (W-281/W-282).
 
 ## 6. Materiały, przegrody, fizyka budowli i woda
@@ -275,11 +291,13 @@ DWU typowych wyrobów „lub równoważne”). U podano orientacyjnie wg PN-EN I
 | POD-0 | płyta fundamentowa: posadzka, jastrych z ogrzewaniem, EPS 6,5 cm, membrana SBS, ŻB 25, XPS 20 cm | 0,13 | ≤ 0,30 |
 | POD-1 | strop międzykondygnacyjny: deska/gres, jastrych z wężownicą, EPS 100 + EPS T | — | akustyka R'w, L'n,w (W-230) |
 | SUF-ZEW | spód stropu nad powietrzem (wspornik A): wełna 20 cm + podsufitka wentylowana | 0,15 | ≤ 0,15 |
-| AT1 | attyka ŻB 18, izolowana z 3 stron (PIR 10 cm od dachu, ETICS, PIR na koronie) | — | f_Rsi ≥ 0,72 (W-248) |
+| AT1 | attyka ŻB 18 w osi muru, izolowana z 3 stron (PIR 10 cm od dachu, ETICS/wełna ściany ciągła od zewnątrz, PIR na koronie) | — | f_Rsi ≥ 0,72 (W-248) |
 
 **Zasada „4 linii”** (brief §9.1) jest ciągła wokół całej obudowy ogrzewanej:
-* **izolacja:** XPS pod płytą → XPS cokołu → ETICS / wełna fasadowa → PIR na attykach i dachach → wełna pod wspornikiem; płyty wysunięte
-  przechodzą przez nią tylko łącznikami z ETA; garaż jest buforem wewnątrz ciągłego ETICS parteru;
+* **izolacja:** XPS pod płytą → XPS cokołu → ETICS / wełna fasadowa (ciągła przed czołami stropów i attyk — płyty kończą się na licu
+  konstrukcji) → PIR na attykach i dachach → wełna pod wspornikiem A (z pustką i jedną płaską podsufitką PS-A +5,67 pod wspornikiem i pasem
+  zach. PL-2, czoło obudowane — A2 I-5); płyty wysunięte przechodzą przez nią tylko łącznikami z ETA; garaż jest buforem wewnątrz ciągłego
+  ETICS parteru;
 * **hydroizolacja:** membrana SBS na płycie → wywinięcie na cokół ≥ 0,30 m → pasy przy progach → membrany dachów z wywinięciem na attyki
   ≥ 0,15 m; w łazienkach hydroizolacja podpłytkowa;
 * **szczelność powietrzna i paroizolacja:** tynk wewnętrzny → taśmy przy stolarce → paroizolacja z Al na płytach stropodachów → OSB ściany
@@ -297,6 +315,8 @@ awaryjny w attyce:
   technicznym; przelewy PA6/PA7.
 
 Wszystkie rury prowadzą kolektorami KD-W/KD-E do szczelnego zbiornika 5,0 m³. Jego przelew DN160 idzie do niecki chłonnej 24 m² (W-145).
+Woda z posadzki garażu i podjazdu (odwodnienia OL-1, OL-4 — możliwe węglowodory) **nie trafia do zbiornika**: przez osadnik z separatorem
+SEP-1 (PN-EN 858) odpływa do niecki trawiastej NT-E (audyt A1).
 
 **Woda gruntowa i powierzchniowa.** Drenażu opaskowego się **nie projektuje**: piaski przepuszczalne, ZWG ≈ 3,8 m p.p.t., posadowienie
 ≈ 0,5 m p.p.t. (W-285). Zamiast niego:
@@ -324,12 +344,26 @@ Woda nie spływa na drogę ani na działki sąsiednie (W-018, W-019).
   * rozdzielaczami ogrzewania podłogowego 35/28 °C z regulacją w każdym pomieszczeniu (W-152);
   * rozdzielnicą RG i wodomierzem z zabezpieczeniem przed przepływem zwrotnym (W-131).
 
-  Jednostka zewnętrzna stoi przy ścianie pd. pasa gospodarczego, **7,0 m od granicy E**, w osłonie lamelowej z ekranem od tarasu. Strefa R290
+  Jednostka zewnętrzna stoi przy ścianie pd. pasa gospodarczego, **7,0 m od granicy E**, w osłonie lamelowej z ekranem od tarasu, pod
+  okapem linii D (PL-D). **Odstępstwo od założenia „jednostka od N/E” (uzasadnienie, audyt A1/A2 D-11):** od północy jest wjazd, wejście
+  i strefa ZKP/przyłączy (brak miejsca ≥ 1,0 m strefy R290 poza dojściami), a wariant od wschodu (przy ścianie wsch. pom. 0.12) daje
+  ≈ 4,8 m od granicy E — ≥ 3,0 m, ale < 6,0 m wymaganego w W-024 dla hałasu na granicy MN. Stanowisko pd. jest 7,0 m od granicy E, ≥ 3 m
+  od sypialni (brak okien sypialni nad jednostką — P1 nad nią to ściana wsch. pokoju rodzinnego bez okna od pd.), a od tarasów T1/T3
+  i drzwi O0-06 oddziela je ekran akustyczny (płyta z wełną, h ≥ 1,5 m, strona zach.). Szacunek na tarasie T3 (r ≈ 3 m, Q = 2, ekran
+  −10 dB): ≈ 55 + 10·log(2/(4π·9)) − 10 ≈ 33 dB(A); na tarasie T1 (r ≥ 5 m) < 33 dB(A). Na granicy E (niżej) ≈ 33 dB(A) ≤ 40 dB noc.
+  Elewacja G pozostaje czysta: jednostka niska (≤ 1,4 m) w osłonie z lamel w kolorze elewacji, pod okapem PL-D. Strefa R290
   1,0 m jest wolna od otworów, wpustów i studzienek (W-156). Skropliny odprowadza studnia chłonna ≥ 0,8 m p.p.t. Szacunek hałasu:
   L_WA ≈ 55 dB(A), Q = 4, r ≈ 7 m → L_p ≈ 55 + 10·log(4/(4π·7²)) ≈ 33 dB(A) na granicy. To mniej niż 40 dB (noc) i mniej niż cel 35 dB
   (W-024); w PT potwierdzić DTR wyrobu.
-* **Wentylacja mechaniczna z odzyskiem ciepła.** Centrala ≈ 450 m³/h (η ≈ 0,85) stoi na P2 w pomieszczeniu 2.07. Czerpnia i wyrzutnia są dachowe
-  (W-166/W-167). Kanały biegną pionowo w szachcie SI, poziomo w sufitach podwieszanych holi i łazienek. Wywiew wg PN-83/B-03430/Az3
+* **Wentylacja mechaniczna z odzyskiem ciepła.** Centrala ≈ 450 m³/h (η ≈ 0,85) stoi na P2 w pomieszczeniu 2.07 (frontem serwisowym na
+  wschód, drzwi otwierane do holu, wyłaz przesunięty na x 7,20–8,10). Czerpnia i wyrzutnia są dachowe (W-166/W-167, WT §152):
+  **czerpnia (11,60; 1,00), dolna krawędź wlotu +10,00; wyrzutnia (1,90; 4,00), wylot +10,00** — odległość 10,15 m ≥ 10,00 m (ust. 10;
+  bez wymogu różnicy wysokości), obie ≥ 0,40 m nad **lokalnym** pokryciem z klinem PIR (czerpnia 0,42 m, wyrzutnia 0,50 m), czerpnia 7,96 m
+  od wywiewki K1, wyrzutnia 3,00 m od krawędzi konstrukcji dachu nad oknem O2-04 (3,20 m od lica) i 4,1 m od krawędzi pd. Wariant
+  z wyrzutnią podniesioną o 1 m (+10,95) dałby wysokość zabudowy ≈ 11,3 m > 11,0 m (MPZP) — odrzucony. Świetlik SW1 (5,4 m od wyrzutni)
+  jest **stały, nieotwierany i bez funkcji wentylacyjnej**; wymóg WT §152 ust. 12 (wylot ≥ 1 m nad górną krawędzią okna w odległości
+  3–10 m) odnosimy do okien otwieranych, przez które powietrze wyrzucane mogłoby wrócić do budynku — interpretację potwierdzić
+  w uzgodnieniu z rzeczoznawcą ds. sanitarnohigienicznych (wylot +10,75 przekroczyłby MPZP). Kanały biegną pionowo w szachcie SI, poziomo w sufitach podwieszanych holi i łazienek. Wywiew wg PN-83/B-03430/Az3
   (`pomieszczenia[].went`, W-162):
   * kuchnia 50 (okresowo 120) m³/h;
   * łazienki i WC z natryskiem po 50 m³/h;
@@ -360,7 +394,7 @@ w **y = 11,30**, czyli 6,00 m od drogi.
 |---|---|---|
 | W | ściany P0/P1 z oknami | 7,30 m |
 | W | ściana P2 na wsporniku z oknem | 6,30 m |
-| W | płyty PL-2/PL-3 | 5,20 m |
+| W | płyty PL-2/PL-3 i obudowa czoła OB-A | 5,20 / 5,18 m |
 | W | okap PL-E | 5,80 m |
 | W | taras T1 | 4,30 m |
 | E | ściana wsch. garażu z drzwiami bocznymi | 5,725 m |
@@ -375,6 +409,8 @@ w **y = 11,30**, czyli 6,00 m od drogi.
 * Podjazd z kostki betonowej, szer. 6,375 m, dł. ≈ 7,6 m, ze spadkiem od garażu i odwodnieniem liniowym przed bramą garażu i przy bramie
   wjazdowej.
 * **2 miejsca gościnne** 2,5 × 5,0 m na podjeździe (niezadaszone, ≥ 3 m od granicy E — W-015) i 2 w garażu, razem 4 (MPZP ≥ 2).
+  Stanowiska w garażu 2,50 × 5,90 m: MP1 x_dz 20,12–22,62, MP2 x_dz 22,67–25,17 (dłuższe krawędzie ≥ 0,30 m od ścian i szafy — WT §104,
+  W-112; audyt A1).
 
 **Pozostałe elementy.**
 * Dojście z płyt betonowych 1,30 m od furtki do podestu wejścia pod daszkiem.
@@ -526,7 +562,10 @@ Model zweryfikowano podglądem (`final/*.png`), arkuszami PB (`projekt/01_koncep
    * ścianę spiżarni pod schodami zmieniono na silikat 18.
 
    Wynik: walidacja 0 błędów i 0 ostrzeżeń, audyt ciągłości warstw bez uwag.
-3. **Podgląd** liczy PU wg W-316, odległości od granic, wysokości (upzp i WT §6), okna/podłogę i wierność szkicowi.
+3. **Iteracja 3 — poprawki po audytach A1 i A2** (rejestr w §13): konwencja obrysów płyt po licu konstrukcji, attyki w osi muru,
+   wyrównane wierzchy płyt wysuniętych, B10, ściana środkowa ŻB, fasada E słupowo-ryglowa, PL-D, wentylacja dachowa, garaż, spiżarnia.
+   Wynik: walidacja 0/0, audyt A1 0 niezgodności, kolizje brył IR ściana–płyta–attyka usunięte (zostają zamierzone: belki i słupy w murze).
+4. **Podgląd** liczy PU wg W-316, odległości od granic, wysokości (upzp i WT §6), okna/podłogę i wierność szkicowi.
    Wyniki wstawia do §9.
 
 ## 10. Odstępstwa, ryzyka i dalsze kroki
@@ -534,6 +573,10 @@ Model zweryfikowano podglądem (`final/*.png`), arkuszami PB (`projekt/01_koncep
 * **Świadome odstępstwa od szkicu:**
   * bryła B ma 12,60 m w licach zamiast ≈ 12,0 m: moduł osi 12,00 m + ETICS, ściany w pionie;
   * przeszklenie E zaczyna się ≈ 0,4 m bliżej zachodu niż w szkicu, bo słup narożny i ściana A są w osi A.
+* **Odstępstwo od założeń — jednostka zewnętrzna PC od południa** (nie od N/E): uzasadnienie i szacunek hałasu w §7 (W-024 ≥ 6,0 m
+  od granicy E wyklucza stanowisko wschodnie ≈ 4,8 m; od północy wjazd i wejście).
+* **Świetlik SW1 a wyrzutnia (WT §152 ust. 12)** — przyjęta interpretacja: przepis dotyczy okien otwieranych; SW1 stały. Ryzyko
+  interpretacyjne do potwierdzenia (rzeczoznawca ds. sanitarnohigienicznych); alternatywą jest zestaw zblokowany czerpnia/wyrzutnia.
 * **Wspornik bryły A.** Belki B4/B5 w licach ścian P2 wymagają w PT obliczenia EQU, ugięć (z pełzaniem) i drgań. Wymagają też ciągłości
   zbrojenia z wieńcem ST2 oraz koordynacji z oknami P2 (parapety +6,90 ponad belkami). Zalecane dobrowolne sprawdzenie PT-BO (W-275).
 * **Belka B1 i słupy fasady E.** Wymagają obliczenia ramy i sztywności w kierunku x razem z trzonem ŻB oraz sprawdzenia przebicia pogrubień
@@ -564,6 +607,8 @@ Model zweryfikowano podglądem (`final/*.png`), arkuszami PB (`projekt/01_koncep
 * `tools/generuj_widoki.py` → `projekt/01_koncepcja/widoki/`: arkusze PB-AR-01…10 (DXF, PDF, PNG) i tom PDF.
 * `lamela.pipeline` → `projekt/07_model_3D/wstepne/`: model glTF/OBJ, wskaźniki, walidacja.
 * Oceny panelu: `docs/20_koncepcja/ocena_J1.md`, `ocena_J2.md`, `ocena_J3.md`; warianty: `docs/20_koncepcja/W1…W3/`.
+* Audyty: `audyt_A1.md` (WT/MPZP, stan przed poprawkami), `audyt_A2.md` (geometria), `audyt_A1_po_poprawkach.md` (ponowny przebieg
+  `tools/audyt_wt.py` po poprawkach); rejestr decyzji — §13.
 
 ## 12. Weryfikacja niezależna i podglądy 3D
 
@@ -592,3 +637,51 @@ PBC wychodzi 1 271,31 m² (79,5 %) wobec 1 281,57 m² w §9 — różnica wynika
 * `arkusz_01…10_*.png` — arkusze PB-AR-01…10, 1:50, 170 dpi;
 * `pzt_koncepcja.png`;
 * `3D_aksonometria_rozwarstwiona.png`, `3D_widok_lotniczy_SE.png`, `3D_widok_od_ulicy_N.png`.
+
+## 13. Rejestr zmian po audycie (A1 — zgodność z WT/MPZP, A2 — spójność geometryczna)
+
+Stan wyjściowy: audyt A1 — 3 niezgodności, 5 uwag, 152 kontrole OK (`audyt_A1.md`); audyt A2 — 1 krytyczna, 9 istotnych, 12 drobnych
+(`audyt_A2.md`). Poprawki wprowadzono w `tools/buduj_model.py` (model regenerowany), w rdzeniu `src/lamela/model.py` i IR
+`src/lamela/ir.py` (konwencja płyt/attyk, SCHEMAT §5 pkt 8) oraz w `tools/podglad_modelu.py`. **Wynik po poprawkach:** walidacja rdzenia
+0 błędów / 0 ostrzeżeń; `tools/audyt_wt.py` — **0 niezgodności**, 4 uwagi (opisane niżej), 165 OK (`audyt_A1_po_poprawkach.md`); arkusze
+PB-AR-01…10 QA OK; testy `test_pipeline`, `test_obliczenia_*` zaliczone; bryła bez zmian (zabudowa 187,50 m², H zabudowy 10,33 m,
+H wg WT §6 9,95 m, PU 239,32 m², sylweta „S” — odchyłka ≤ 0,59 m).
+
+| uwaga (audyt, waga) | decyzja | zmiana w modelu / opisie |
+|---|---|---|
+| A1 — czerpnia–wyrzutnia 9,81 m, Δh 0,05 m (WT §152 ust. 10; istotna) | **przyjęta** | czerpnia (11,60; 1,00; +10,00), wyrzutnia (1,90; 4,00; +10,00) → 10,15 m; wyrzutnia przesunięta o 0,2 m względem propozycji A1 (1,70; 3,00), bo po zmianie obrysu D1 na lico konstrukcji odległość od krawędzi nad O2-04 wynosiłaby 2,80 m; zdanie w §4 (J1) poprawione |
+| A1 — czerpnia 0,377 m nad lokalnym pokryciem (W-166; drobna) | **przyjęta** | dolna krawędź wlotu +10,00 → 0,42 m nad pokryciem z klinem; rzędne urządzeń liczone od pokrycia lokalnego |
+| A1 — stanowiska MP1/MP2 0,18 / 0,27 m od ścian (WT §104; drobna) | **przyjęta z modyfikacją** | 2,50 × 5,90 m; MP1 x_dz 20,12–22,62 (0,30 m od S0-16), MP2 22,67–25,17 — 0,30 m od płytkiej szafy na rowery (0,40 m), 0,70 m od S0-03 (A2 D-5 i A1 łącznie) |
+| A1 — próg dom–garaż 0,9 cm; woda z garażu do zbiornika (W-114; drobna) | **przyjęta** | spadek 0,8 %: −0,05 przy O0-22, −0,10 przy bramie (próg 5,1 cm); OL-1 i OL-4 → separator SEP-1 → niecka NT-E; `rzedna: -0.10` pom. 0.13 |
+| A1 — wyrzutnia 6,1 m od SW1 (WT §152 ust. 12; drobna) | **przyjęta (wariant a)** | SW1 zapisany jako świetlik stały, nieotwierany (`otwierany: false`), interpretacja w §7 i §10; audyt nadal zgłasza UWAGĘ (narzędzie nie rozpoznaje interpretacji) |
+| A1 — spiżarnia h 1,37–2,75, PU „wys 1,90” zawyżona (WT §97, W-316; drobna) | **przyjęta** | podział: 0.05 spiżarnia (h ≥ 2,20, 1,02 m²), 0.15 schowek (h 1,40–2,20, 1,45 m², PU 50 %), 0.16 schowek pod spocznikiem (h < 1,40, poza PU); PU 239,32 m²; audyt zgłasza UWAGĘ dla 0.15/0.16 (reguła „pomieszczenie gospodarcze ≥ 2,00”) — to schowki pod schodami, nie pomieszczenia |
+| A1 / A2 D-11 — jednostka PC od S (założenie N/E; drobna) | **odrzucona zmiana lokalizacji, uzasadnienie dopisane** | W-024 (≥ 6,0 m od granicy E) wyklucza stanowisko wsch. (≈ 4,8 m); od N wjazd/wejście; ekran akustyczny od T1/T3/O0-06, szacunek hałasu w §7; jednostka pod okapem PL-D |
+| A1 — WT §6 do średniego pokrycia, H zabudowy od średniego terenu (drobna) | **przyjęta** | `podglad_modelu.py`: WT §6 do najwyższego punktu pokrycia z klinem (9,95 m), H zabudowy kontrolnie od najniższego terenu (10,33 m; wg definicji od średniej 10,25 m) |
+| A2 K-1 — płyty i attyki do lica ETICS, beton przecina izolację (krytyczna) | **przyjęta** | ST1/ST2/D1–D4 po licu warstwy konstrukcyjnej (±0,09; A' ±0,10), przy uskokach bryły do lica ściany wyższej; attyka ŻB 18 w osi muru (`szer: 0.18`) + PIR 10 cm od dachu + ETICS ściany ciągły; rdzeń: nie przedłuża ETICS na czoło płyty ciągłej na zewnątrz i nie obniża go w narożach nad ścianą niższą; IR: okładzina attyki tylko tam, gdzie brak ocieplenia ściany. PL-* zaczynają się od lica ETICS: pas −0,30…−0,09 = łącznik w płaszczyźnie izolacji (**odstępstwo od propozycji „od −0,09”** — płyta nie przecina ETICS geometrycznie, a łącznik z ETA jest w strefie izolacji); kolizje płyta/attyka–ocieplenie: 0 |
+| A2 I-1 — brak podpory D1 w osi 3 (C–D) (istotna) | **przyjęta** | belka B10 25 × 50, spód +8,80, na S2-10 i S2-04 |
+| A2 I-2 — ścianka środkowa urwana na stropach, 12 cm × 9,3 m (istotna) | **przyjęta** | ściana ŻB 15 (SCZB15), `z_do` 3,00 / 6,15, monolityczna z biegami/spocznikami; biegi 1,135 / 1,130 m (użytkowa ≈ 1,04 m ≥ 1,00) |
+| A2 I-3 — końce attyk D2/D3/D4 urwane 0,30 m przed ścianą wyższą (istotna) | **przyjęta** | `ir._attic_ring`: usuwany tylko pas równoległy do lica ściany wyższej; końce attyk dochodzą do lica; węzeł attyka–ściana wyższa w opisie AT1 (wywinięcie ≥ 0,15 m) |
+| A2 I-4 — wierzchy płyt wysuniętych 5–10 cm nad stropem (istotna) | **przyjęta** | PL-E/PL-DA +3,00, PL-2 +6,15, PL-3 +9,30; pogrubienie od spodu (PL-E 0,30, PL-2 0,30, PL-3 0,32) |
+| A2 I-5 — wełna pod wspornikiem A odkryta (istotna) | **przyjęta** | IZ-ST2Z + pustka + jedna płaska podsufitka PS-A (+5,67) pod wspornikiem i pasem zach. PL-2; obudowa czoła OB-A/OB-A2 do spodu podsufitki |
+| A2 I-6 — słupy w otworach, pas muru 3 cm nad E (istotna) | **przyjęta** | kwatery E między licami słupów (1,78 / 1,78 / 2,22 / 2,22 / 2,86 m), wysokość 2,78 do spodu B1; HS2 2,78; DZ3 2,76 (spód D4); boks C w 3 otworach (O1-01, O1-13, O1-14) między słupkami SL5/SL6 |
+| A2 I-7 — drzwi przesuwne łazienki gościnnej bez miejsca na skrzydło (istotna) | **przyjęta (wariant: drzwi chowane)** | O0-16 x 4,08–4,88 (0,80 w świetle), kaseta w ściance GK S0-19 (przegroda DZGK), przesuw do x 5,68; przedpokoju nie powiększano (bez zmiany szachtu SI) |
+| A2 I-8 — linia D urywa się w 3D na x 12,6 (istotna) | **przyjęta** | PL-D: x 12,60–18,675, wysunięcie 1,00 m, +3,65…+3,85, rama stalowa w okładzinie na konsolach (WZ-14: 17 konsol) — do narożnika garażu; nie jest tarasem |
+| A2 I-9 — brak koncepcja.md / final / main w podglądzie (istotna) | **nieaktualna** | koncepcja.md, `final/*` i `podglad_modelu.py main` istniały przed rozpoczęciem poprawek; podglądy i bilans odświeżone po zmianach |
+| A2 D-1 — skrzydło O0-17 w regale | przyjęta | regał y 6,20–7,40 |
+| A2 D-2 — skrzydło O0-23 na module PC | przyjęta | zawias przy y 1,60 (`strona: prawa`) |
+| A2 D-3 — O2-12 vs centrala i drabina | przyjęta | drzwi do holu; wyłaz i drabina x 7,20–8,10 (front serwisowy centrali wolny) |
+| A2 D-4 — szafa wiatrołapu zasłania FX3; skrzydła DZ1/DS1 | przyjęta | szafa y 6,72–8,00; DS1 otwierane do holu |
+| A2 D-5 — szafa rowerowa w świetle bramy | przyjęta | szafa 0,40 × 2,40 m, y 6,45–8,85 (MP2 przesunięte, patrz A1) |
+| A2 D-6 — okno O0-12 poza okapem PL-E | przyjęta (wariant osłony nadstawnej) | kaseta żaluzji nadstawna przed licem ETICS; okapu zach. nie wydłużano (sylweta E bez zmian) |
+| A2 D-7 — PL-2 bez pasa wsch., LAM-E bez płyty, szczeliny lamel w narożach | przyjęta | PL-2 z pasem x 12,30–12,60; LAM-E od +6,15; linie lamel domknięte w narożach |
+| A2 D-8 — brak nadproży | przyjęta | nadproża N* dla wszystkich otworów w ścianach nośnych/zewnętrznych (poza fasadą E/boksem C — belki B1/B2); ≤ 0,12 m muru → wieniec |
+| A2 D-9 — B1/B2 b = 0,25 w EPS | przyjęta | B1 18 × 107, B2 18 × 80 w licu muru |
+| A2 D-10 — powierzchnie klatek 1.06/2.06; rzędna garażu | częściowo | 2.06 bez ściany S2-09; garaż `rzedna: -0.10`. Zapisu klatki P1/P2 jako rzutu biegu nie wprowadzono — rdzeń odejmuje otwór stropu, klatki i tak są poza PU (W-316); do rozstrzygnięcia w zestawieniu PN-ISO 9836 w PT |
+| A2 D-11 — PC przed elewacją S | patrz A1 | uzasadnienie w §7 |
+| A2 D-12 — pas zach. PL-2/PL-3 2,4 m od podpory | **odrzucona (bez skracania)**, uzasadnienie | szacunek EQU i ugięć w §5 (M_dst ≈ 70 kNm ≪ 0,9·M_stb ≈ 235 kNm); skrócenie do 0,80 m osłabiłoby płytę A ze szkicu; pełne obliczenie w PT (W-262, W-268) |
+
+**Pozostałe uwagi audytu A1 po poprawkach (świadome, opisane):** 0.15/0.16 — schowki pod schodami (reguła narzędzia dla pomieszczeń
+gospodarczych), SW1 — interpretacja WT §152 ust. 12, PC-JZ — odstępstwo od założenia N/E. **Poza zakresem A1/A2** (z weryfikacji §12,
+do kolejnej iteracji): spadki terenu przy budynku, rzędne den przelewów awaryjnych D1 względem pokrycia z klinem, wysokość stelaży PV,
+cokół przy DZ2, U_w doświetla FX3; zaleca się też ponowne uruchomienie katalogu mostków (`tools/katalog_mostkow.py`) i pipeline'u 3D
+na nowym modelu.

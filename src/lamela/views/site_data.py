@@ -122,6 +122,7 @@ class Siec:
     istn: bool
     dl: float | None = None
     id: str = ""
+    nr: int | None = None
 
     @property
     def lit(self) -> str:
@@ -416,6 +417,14 @@ class SiteData:
                     continue
                 self.sieci.append(Siec(branza(s.get("branza")), g, str(s.get("opis") or ""), istn,
                                        s.get("dl"), str(s.get("id") or f"{'I' if istn else 'P'}{i + 1}")))
+        cnt = {}
+        for x in self.sieci:                   # numer kolejny w branży (projektowane i istniejące osobno)
+            key = (x.branza, x.istn)
+            cnt[key] = cnt.get(key, 0) + 1
+            x.nr = cnt[key]
+        for x in self.sieci:
+            if cnt[(x.branza, x.istn)] == 1:
+                x.nr = None
         self.obiekty = {}
         for o in u.get("obiekty") or []:
             if isinstance(o, dict) and o.get("xy") is not None:

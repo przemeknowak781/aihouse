@@ -16,6 +16,15 @@ from .trasy import siatka_kondygnacji
 from .wspolne import BRAK, H_S, InstResult, Legenda, braki_of, label_along, tag_leader, text_collisions
 
 
+ZRODLA_OZN = {
+    "IS": "Oznaczenia instalacji sanitarnych — praktyka branżowa (PN-B-01410, PN-B-01411, PN-B-01430 — normy wycofane, "
+          "bez następcy); armatura i urządzenia wg PN-EN ISO 10628-2 / PN-EN ISO 14617; rodzaje powietrza wg "
+          "PN-EN 16798-3 (ODA, SUP, ETA, EHA). Obowiązuje legenda na arkuszu.",
+    "IE": "Symbole instalacji elektrycznych wg IEC 60617 (baza IEC; PN-EN 60617 — wycofana, stosowana jako praktyka "
+          "branżowa) i PN-EN ISO 14617; oznaczenia teletechniczne — praktyka branżowa. Obowiązuje legenda na arkuszu.",
+}
+
+
 class Rysunek:
     br = "IS"                    # IS | IE (plik braków)
     kod = ""                     # np. IS-W
@@ -25,7 +34,7 @@ class Rysunek:
         self.m = ctx.model
         self.k = vp.k
         self.res = InstResult(north=True)
-        self.leg = Legenda()
+        self.leg = Legenda(zrodlo=ZRODLA_OZN.get(self.br, ""))
         self.nr = str(spec.get("nr", ""))
         self.notes: list[str] = []
         self.room_extra: dict = {}
@@ -38,6 +47,7 @@ class Rysunek:
 
     # --------------------------------------------------------------------------------------------- podkład
     def podklad(self, meble=True, urzadzenia=False):
+        meble = bool(self.opts.get("meble", meble))
         if self.dach:
             self.pod = P.dach(self.vp, self.ctx)
         else:
@@ -200,6 +210,7 @@ class Rysunek:
 
     # --------------------------------------------------------------------------------------------- zakończenie
     def finish(self, notes_extra=(), rooms=True):
+        rooms = rooms and bool(self.opts.get("opisy_pomieszczen", True))
         if rooms and not self.dach and self.pod is not None and self.pod.rooms:
             P.opisy_pomieszczen(self.vp, self.pl, self.ctx, self.pod, self.room_extra)
         P.osie(self.vp, self.ctx)

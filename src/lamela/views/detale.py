@@ -105,6 +105,8 @@ def rysuj_elementy(vp: Viewport, det: Detal) -> dict:
         hm.setdefault(hc, [])
         if c.mat not in hm[hc]:
             hm[hc].append(c.mat)
+    for v in det.otwory:
+        cs.cut_out(v)
     res = cs.draw(vp, merge_thin_mm=0.0)
     # obrys izolacji cieplnej (pomarańczowy) — suma elementów izolacyjnych po rozstrzygnięciu nakładania
     iz = [g for it, g in res if it.kind == "izol"]

@@ -397,6 +397,12 @@ class RysG(RysE):
         if o is None:
             return
         q = np.asarray(q, float)
+        if not hasattr(self, "_dedyk_done"):
+            self._dedyk_done = set()
+        key = (o.odb.id, round(float(q[0]), 1), round(float(q[1]), 1))
+        if key in self._dedyk_done:
+            return
+        self._dedyk_done.add(key)
         if rot is None:
             self.sym(S.junction_box, q, s_mm=1.8)
         else:

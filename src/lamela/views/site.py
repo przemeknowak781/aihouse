@@ -898,7 +898,7 @@ def _util_labels(lab, s, used):
             lab.along(part, sx.lit, h, "Z-SIECI-PROJ", sx.kolor, n=2 if part.length > 8 else 1, max_cost=6.0,
                       mask=0.25)
         L = sx.geom.length
-        txt = [f"{sx.lit} — {D.short_desc(sx.opis, 34)}", f"L = {mm(L)} m" + (
+        txt = [f"{_sid(sx)} — {D.short_desc(sx.opis, 34)}", f"L = {mm(L)} m" + (
             f" (model: {mm(float(sx.dl))} m)" if sx.dl is not None and abs(float(sx.dl) - L) > 0.05 else "")]
         anchors = [np.asarray(parts[0].interpolate(f, normalized=True).coords[0]) for f in (0.5, 0.35, 0.65, 0.2, 0.8)]
         lab.label(anchors, txt, h, "Z-SIECI-PROJ", color=sx.kolor, dists=(3.0, 6.0, 9.0, 13.0, 18.0),
@@ -1023,15 +1023,20 @@ def _tab_przylacza(s):
     rows = []
     for x in [q for q in s.sieci if not q.istn]:
         L = x.geom.length
-        rows.append([x.lit, BRANZE.get(x.branza, ("", x.branza))[1].split(" / ")[-1], D.short_desc(x.opis, 30),
+        rows.append([_sid(x), BRANZE.get(x.branza, ("", x.branza))[1].split(" / ")[-1], D.short_desc(x.opis, 30),
                      mm(L), mm(float(x.dl)) if x.dl is not None else "—"])
     for x in [q for q in s.sieci if q.istn]:
-        rows.append([x.lit, "istniejąca (mapa)", D.short_desc(x.opis, 30), "—", "—"])
+        rows.append([_sid(x), "istniejąca (mapa)", D.short_desc(x.opis, 30), "—", "—"])
     return dict(title="SIECI I PRZYŁĄCZA — PROJEKTOWANE I ISTNIEJĄCE",
                 cols=[("Ozn.", 0), ("Sieć", 0), ("Opis", 0), ("L [m]", 0), ("L model [m]", 0)],
-                rows=rows, align=["center", "left", "left", "right", "right"], max_w_mm=150.0,
+                rows=rows, align=["left", "left", "left", "right", "right"], max_w_mm=150.0,
                 notes=["L — długość trasy w rzucie (z częścią pod budynkiem, linia kreskowa); średnice, spadki i "
                        f"rzędne dna przewodów {D_TODO} (RPB § 15 ust. 2 pkt 11 — brak w modelu)."])
+
+
+def _sid(x):
+    """Oznaczenie sieci w tabelach: litera + numer kolejny w branży (np. kd2); istniejące — z „ist.”."""
+    return f"{x.lit}{x.nr}" + (" ist." if x.istn else "") if getattr(x, "nr", None) else x.lit + (" ist." if x.istn else "")
 
 
 def _tab_istn(s):
@@ -1052,10 +1057,10 @@ def _tab_koord(K):
     rows = []
     for r in K["pary"]:
         st = "TAK" if r["ok"] else ("warunk." if r.get("warunkowo") else "NIE")
-        nm = f"{r['a'].lit} – {r['b'].lit}" + (" (istn.)" if r["b"].istn else "")
+        nm = f"{_sid(r['a'])} – {_sid(r['b'])}"
         rows.append([nm, mm(r["d"]), mm(r["req"]), str(r["src"]).replace(" [SPRAWDŹ]", "*"), st])
     for r in K["drzewa"]:
-        rows.append([f"{r['a'].lit} – {r['t']['id']} (pień)", mm(r["d"]), mm(r["req"]), "od pnia*",
+        rows.append([f"{_sid(r['a'])} – {r['t']['id']} (pień)", mm(r["d"]), mm(r["req"]), "od pnia*",
                      "TAK" if r["ok"] else "NIE"])
     if not rows:
         rows.append(["—", "", "", "brak zbliżeń < 3 m", ""])
@@ -1068,7 +1073,7 @@ def _tab_koord(K):
 
 
 def _tab_skrzyz(K):
-    rows = [[f"S{i + 1}", f"{x['a'].lit} × {x['b'].lit}" + (" (istn.)" if x["b"].istn else ""), mm(x["p"][0]),
+    rows = [[f"S{i + 1}", f"{_sid(x['a'])} × {_sid(x['b'])}", mm(x["p"][0]),
              mm(x["p"][1])] for i, x in enumerate(K["skrzyzowania"])]
     if not rows:
         rows = [["—", "brak skrzyżowań", "", ""]]
@@ -1123,3 +1128,66 @@ def _notes_uzbrojenie(s, K, zj_todo):
 register_view("pzt_plan", view_plan, "plan zagospodarowania", qa="PZT")
 register_view("pzt_szczegoly", view_szczegoly, "plan szczegółowy", qa="PZT")
 register_view("pzt_uzbrojenie", view_uzbrojenie, "rysunek koordynacyjny", qa="PZT")
+
+
+# ================================================================================================ braki danych
+def braki_md(ctx, opts=None) -> str:
+    """Wykaz braków danych modelu dla PZT (Markdown) — ``projekt/02_PZT/BRAKI_DANYCH.md``."""
+    import datetime as _dt
+    s = SiteData(ctx, opts or {})
+    W = wskazniki(s)
+    items = list(s.braki)
+    h = W["wys"]
+    if h.get("zalozenie"):
+        from .site_data import Brak
+        items.append(Brak("budynek.yaml: energia.wentylacja.wywiewki_kanalizacyjne[] — rzędna z",
+                          f"rzędna wylotu wywiewki kanalizacyjnej (element najwyższy dla wysokości zabudowy, upzp "
+                          f"art. 2 pkt 30 lit. a) — przyjęto wierzch pokrycia + 0,50 m; bez założenia "
+                          f"H = {mm(h['bez_zalozen'][0])} m", "wywiewki_kanalizacyjne: [[5.57, 6.2, 10.05]]  # [x, y, z]",
+                          "PZT-01 (tabela wskaźników), lamela.wskazniki"))
+    pv = ((s.m.raw.get("energia") or {}).get("pv") or {})
+    if isinstance(pv, dict) and pv and pv.get("z_max") is None:
+        from .site_data import Brak
+        items.append(Brak("budynek.yaml: energia.pv.z_max", "rzędna górnej krawędzi modułów PV (element wliczany do "
+                          "wysokości zabudowy) — obecnie tylko w tekście 'uwagi'", "pv: {..., z_max: 9.78}",
+                          "PZT-01, lamela.wskazniki"))
+    L = ["# PZT — braki danych w modelu (dzialka.yaml / budynek.yaml)", "",
+         f"Wygenerowano: {_dt.date.today().isoformat()} — `lamela.views.site.braki_md` (generator rysunków PZT). "
+         "Model NIE był edytowany; na rysunkach PZT-01…03 elementy oparte na danych zastępczych oznaczono "
+         f"**{D_TODO}**. Proponowane formaty pól — zgodne z `docs/SCHEMAT_MODELU.md` §3 (dzialka.yaml) i §6 "
+         "(rozszerzenia wody/odwodnienia).", "",
+         "Regeneracja: `PYTHONPATH=src python3 -m lamela.views.site --braki projekt/02_PZT/BRAKI_DANYCH.md`", "",
+         "| # | Pole modelu | Czego brakuje / do czego potrzebne | Proponowany format pola | Rysunki |",
+         "|---|---|---|---|---|"]
+    esc = lambda t: str(t).replace("|", "\\|")      # noqa: E731 — kreska pionowa w komórce tabeli Markdown
+    for i, b in enumerate(items):
+        L.append(f"| {i + 1} | `{esc(b.pole)}` | {esc(b.opis)} | `{esc(b.propozycja)}` | {esc(b.arkusze)} |")
+    L += ["", "## Założenia przyjęte na rysunkach do czasu uzupełnienia", "",
+          "* Limity MPZP — z konfiguracji `model/arkusze_pzt.yaml: wspolne.mpzp` (brief § 3, fikcyjny MPZP 3MN).",
+          "* Zjazd — przedłużenie bramy przesuwnej do krawędzi jezdni ze skosami 1,0 m (linia kreskowa).",
+          "* Zbiornik retencyjny — symbol umowny 7 × 4 mm (PN-B-01027 poz. 6); do PBC wyłączono rzut ≈ max(2,0; V/1,6) "
+          "m² (jak audyt A1).",
+          "* Strefa R290 — promień odczytany z tekstu 'opis' obiektu PC-JZ (1,0 m).",
+          "* Liczba kondygnacji budynków sąsiednich — odczytana z tekstu 'opis' (opis BDOT500 „m2”).",
+          "* Minimalne odległości między sieciami — zasady wiedzy technicznej z `arkusze_pzt.yaml` (nie przepis).", ""]
+    return "\n".join(L)
+
+
+if __name__ == "__main__":      # PYTHONPATH=src python3 -m lamela.views.site --braki projekt/02_PZT/BRAKI_DANYCH.md
+    import argparse
+    from pathlib import Path as _P
+    from ..ir import build_ir
+    from ..model import load_model
+    from .sheets import load_config, make_context
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--budynek", default="model/budynek.yaml")
+    ap.add_argument("--dzialka", default="model/dzialka.yaml")
+    ap.add_argument("--arkusze", default="model/arkusze_pzt.yaml")
+    ap.add_argument("--braki", default="projekt/02_PZT/BRAKI_DANYCH.md")
+    a = ap.parse_args()
+    _m = load_model(a.budynek, a.dzialka, strict=False)
+    _cfg = load_config(a.arkusze, _m)
+    _ctx = make_context(_m, build_ir(_m, otoczenie=True, auta=False), _cfg, [], src=a.budynek)
+    _P(a.braki).parent.mkdir(parents=True, exist_ok=True)
+    _P(a.braki).write_text(braki_md(_ctx), encoding="utf-8")
+    print(f"zapisano {a.braki}")

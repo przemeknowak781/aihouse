@@ -199,7 +199,7 @@ class WynikPlytyFund:
     kombinacje: int = 0
 
 
-OKNO_SCIANY = 1.0     # [m] rozdział obciążeń ścian na płytę (średnia krocząca)
+OKNO_SCIANY = 2.0     # [m] rozdział obciążeń ścian na płytę (średnia krocząca)
 
 
 def _klasa(model, mat, p):
@@ -284,8 +284,8 @@ def analiza_plyty_fundamentowej(an, siatka: float = 0.25, c_dol: float = 50.0, c
             if cs in ("QA_pA", "QA_pB"):
                 continue
             q0 = dol.get(cs)
-            # rozdział obciążenia skupionego przez ścianę i żebro — średnia krocząca 1,0 m z zachowaniem wypadkowej
-            # [UPR; biblioteka dla ław przyjmuje 2,0 m] — piki profilu (oparcia belek, filarki) nie są osobliwościami
+            # rozdział obciążenia skupionego przez ścianę i żebro — średnia krocząca OKNO_SCIANY z zachowaniem wypadkowej
+            # [UPR — jak w bibliotece dla ław: 2,0 m] — piki profilu (oparcia belek, filarki) nie są osobliwościami
             q = dol.srednia_ruchoma(q0, OKNO_SCIANY) if dol.L > OKNO_SCIANY else np.full_like(q0, q0.mean())
             I0, I1 = float(np.trapezoid(q0, dol.s)), float(np.trapezoid(q, dol.s))
             if abs(I1) > 1e-9:

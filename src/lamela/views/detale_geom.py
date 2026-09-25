@@ -100,6 +100,7 @@ class Detal:
     przerwy: list = field(default_factory=list)     # (p1, p2)
     znaki: list = field(default_factory=list)       # (rodzaj, dane) — symbole dodatkowe (woda, strzałki)
     kontrola: list = field(default_factory=list)    # (kod, idx, mat, d_model, d_rys, klin)
+    otwory: list = field(default_factory=list)      # wieloboki pustek (otwór w attyce, przejście rury)
     polaczenia: list = field(default_factory=list)  # (rodzaj, pts) — niewidoczne łączniki linii (np. przez ramę
     #                                                  okna w przerwie widoku) — tylko do oceny ciągłości
     uwagi: list = field(default_factory=list)
@@ -224,6 +225,10 @@ class Detal:
         """Linia „4 linii” / taśma: H (hydro), S (szczelność powietrzna), P (paroizolacja), T_in (taśma
         paroszczelna), T_out (taśma paroprzepuszczalna / uszczelnienie zewn.), W (wiatroizolacja), G (inne)."""
         self.linie.append((rodzaj, np.asarray(pts, float), opis))
+
+    def otwor(self, x0, y0, x1, y1):
+        """Pustka odejmowana od wszystkich elementów (np. otwór przelewu w attyce, przejście wpustu)."""
+        self.otwory.append(box(min(x0, x1), min(y0, y1), max(x0, x1), max(y0, y1)))
 
     def polaczenie(self, rodzaj: str, pts):
         """Łącznik ciągłości linii przez element szczelny (rama okna, profil) — nie rysowany."""
