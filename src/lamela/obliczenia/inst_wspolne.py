@@ -104,7 +104,8 @@ def tabela(naglowki: list[str], wiersze: list[list], wyrownanie: str | None = No
     out = ["| " + " | ".join(str(h) for h in naglowki) + " |",
            "|" + "|".join(sep.get(c, "---") for c in wyr[:n].ljust(n, "r")) + "|"]
     for w in wiersze:
-        cells = [(c if isinstance(c, str) else f(c)) for c in w]
+        cells = [(c if isinstance(c, str) else (str(c) if isinstance(c, int) and not isinstance(c, bool) else f(c)))
+                 for c in w]
         cells += [""] * (n - len(cells))
         out.append("| " + " | ".join(c.replace("|", "\\|").replace("\n", " ") for c in cells[:n]) + " |")
     return "\n".join(out)

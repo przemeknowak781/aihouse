@@ -102,7 +102,7 @@ def kontekst_oswiadczenia_projektanta(dok, *, projektant=None, osoby=None, techn
     return dict(
         id=dok._nowe_id("osw"), miejscowosc=dok.miejscowosc, data=data_slownie(dok.data), podtytul=podtytul,
         element_nazwa=f"{dok.tytul} ({dok.kod})", tresc=tresc, art102a=t102,
-        osoby=[dict(_proj_dict(p), specjalnosc=p.specjalnosc) for p in osoby],
+        osoby=[dict(_proj_dict(p), specjalnosc=p.specjalnosc_skrot) for p in osoby],
         sprawdzajacy="nie dotyczy — projekt budynku mieszkalnego jednorodzinnego nie podlega sprawdzeniu "
                      "(art. 20 ust. 3 pkt 2 PB)",
         kopie=kopie, podpisy=karty_podpisow(podpisuja or ([projektant] if projektant else osoby), dok.data))

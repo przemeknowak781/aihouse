@@ -156,6 +156,8 @@ def _analiza(doc: pymupdf.Document, lista: dict) -> dict:
         rng = range(r["od"] - 1, r["do"])
         r["zakladki"] = [t for lvl, t, s in toc if r["od"] <= s <= r["do"] and not (lvl == 1 and _RE_EL.match(t))]
         r["rysunki"] = [t for lvl, t, s in toc if r["od"] <= s <= r["do"] and 0 <= s - 1 < n and not a4[s - 1]]
+        r["zastepcze"] = {t for lvl, t, s in toc if r["od"] <= s <= r["do"] and 0 <= s - 1 < n and not a4[s - 1]
+                          and "ARKUSZ ZASTĘPCZY" in teksty[s - 1]}
         r["tytulowa"] = teksty[r["od"] - 1] if r["od"] - 1 < n else ""
         r["tekst"] = " ".join(teksty[i] for i in rng if a4[i])
         r["strony_opisu"] = sum(1 for i in rng if a4[i])
@@ -272,6 +274,7 @@ def sprawdz_tom(tom, lista_kontrolna: dict | str | None = None) -> RaportKomplet
                       "rysunki": info["rysunki"] if info else []}
             wszystkie = bool(sz.get("wszystkie", False))
             trafione, szczeg = [], []
+            zastepczy = False
             wymagane = 0
             for tryb in ("tytulowa", "zakladki", "tekst", "rysunki"):
                 if tryb not in sz:
@@ -288,14 +291,20 @@ def sprawdz_tom(tom, lista_kontrolna: dict | str | None = None) -> RaportKomplet
                 tr = _szukaj(w, zakres[tryb])
                 trafione += tr
                 if tr and tryb == "rysunki":
-                    rx = re.compile("|".join(tr), re.I)
-                    szczeg.append("; ".join(t for t in zakres["rysunki"] if rx.search(t))[:160])
+                    rx = re.compile("|".join(x.replace(" ", r"\s+") for x in tr), re.I)
+                    pasujace = [t for t in zakres["rysunki"] if rx.search(t)]
+                    szczeg.append("; ".join(pasujace)[:160])
+                    if info and pasujace and all(t in info["zastepcze"] for t in pasujace):
+                        zastepczy = True
             znaleziono = (len(trafione) >= wymagane) if wszystkie else bool(trafione)
             if znaleziono:
                 st = "OK"
                 if poz.get("dane_osobowe") and "DO UZUPEŁNIENIA" in zakres["tytulowa"]:
                     st = "DO UZUPEŁNIENIA"
                     szczeg.append("pola [DO UZUPEŁNIENIA] na stronie tytułowej")
+                if zastepczy:
+                    st = "DO UZUPEŁNIENIA"
+                    szczeg.append("tylko arkusz zastępczy — rysunek niedołączony")
             else:
                 st = "BRAK" if ob else "OSTRZEŻENIE"
                 if wszystkie:

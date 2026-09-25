@@ -536,8 +536,6 @@ def oblicz_wode(dane: DaneBudynku, par: ParametryWoda | None = None) -> WynikWod
             sc = _sciezka(odc, node)
             if not sc:
                 continue
-            if comp == "cw":
-                sc = _sciezka(odc, "ZAS") + sc
             dpu = dpw + dp_ea + dp_f + ((par.dp_podgrzewacz + par.dp_TZM) if comp == "cw" else 0.0)
             punkty.append(Punkt(przybor=p, medium=("c.w.u." if comp == "cw" else "woda zimna"), sciezka=sc,
                                 h=p.z_wyl - z_siec, dp_l=sum(o.dp_l for o in sc), dp_m=sum(o.dp_m for o in sc),
@@ -578,10 +576,11 @@ def oblicz_wode(dane: DaneBudynku, par: ParametryWoda | None = None) -> WynikWod
     if reduktor:
         kroki["stat"].append(Krok("Reduktor ciśnienia za wodomierzem (nastawa)", "p_red", "", par.reduktor_nastawa * 1000, "kPa",
                                   "PN-EN 806-3 p. 4.3: p_st ≤ 500 kPa w punktach", 0))
-        war.append(Warunek("Ciśnienie za reduktorem ≥ wymagane za zestawem wodomierzowym",
-                           par.reduktor_nastawa * 1000, ">=",
-                           p_wym - (RHO_W * G * (wezly["WOD"][2] - z_siec) / 1000.0) - o_wod.dp - sum(
-                               o.dp for o in odc if o.od in ("SIEC", "WEJ")) - dpw, "kPa", "", "W-130", nd=0))
+        p_za_red = p_wym - (RHO_W * G * (wezly["WOD"][2] - z_siec) / 1000.0) - sum(
+            o.dp for o in odc if o.od in ("SIEC", "WEJ", "WOD")) - dpw - dp_ea - dp_f
+        war.append(Warunek("Nastawa reduktora ≥ ciśnienie wymagane za zestawem wodomierzowym (najniekorzystniejszy punkt)",
+                           par.reduktor_nastawa * 1000, ">=", p_za_red, "kPa", "kolejność: wodomierz, filtr, EA, reduktor",
+                           "W-130", nd=0))
     war.append(Warunek("Ciśnienie statyczne w punkcie ≤ 0,60 MPa (WT §114)", p_stat_za / 1000.0, "<=", 0.60, "MPa",
                        "WT §114 ust. 1", "W-130", nd=3))
     war.append(Warunek("Ciśnienie statyczne w punkcie ≤ 500 kPa (PN-EN 806-3 p. 4.3)", p_stat_za, "<=", 500.0, "kPa",
@@ -704,7 +703,6 @@ def _cwu(dane, przybory, odc, par: ParametryWoda, osoby, kroki, war) -> dict:
     t_c = grubosc_rownowazna(16, 20.0, par.lambda_izol)
     Q_loss_cyrk = strata_ciepla_rury(16, t_c, par.lambda_izol, par.theta_cwu - par.cyrk_dT / 2 - par.theta_otocz) * L_cyrk
     Q_petla = Q_loss_zas + Q_loss_cyrk
-    V_cyrk = Q_petla / (1000.0 * 4.19 * par.cyrk_dT) * 1000.0 * 3600.0 / 1000.0  # dm³/h → ...
     V_cyrk_dm3h = Q_petla * 3600.0 / (4190.0 * par.cyrk_dT)                    # kg/h ≈ dm³/h
     q_c = V_cyrk_dm3h / 3600.0
     v_c, R_c, _ = spadek_jednostkowy(q_c, 12.0, par.theta_cwu)
@@ -718,9 +716,10 @@ def _cwu(dane, przybory, odc, par: ParametryWoda, osoby, kroki, war) -> dict:
              V3, "dm³", "reguła 3 litrów (DVGW W 551; R6 §3.6) [W]", 2),
         Krok("Decyzja", "", "", {"brak": "cyrkulacja zbędna (V ≤ 3 dm³)", "czasowa": "cyrkulacja czasowa (V > 3 dm³)",
                                   "ciagla": "cyrkulacja ciągła"}[tryb], "", "WT §120 ust. 1 — w domu jednorodzinnym niewymagana"),
-        Krok("Strata ciepła przewodów rozprowadzających c.w.u. (izolacja wg WT, λ = " + f(par.lambda_izol, 3) + ")",
-             "Q_z = Σ q_l·L", f"L = {f(L_dys, 1)} m", Q_loss_zas, "W", "", 1),
-        Krok("Strata ciepła przewodu cyrkulacyjnego 16×2", "Q_c = q_l·L_c", f"L_c = {f(L_cyrk, 1)} m", Q_loss_cyrk, "W", "", 1),
+        Krok(f"Strata ciepła przewodów rozprowadzających c.w.u., L = {f(L_dys, 1)} m (izolacja wg WT, λ = "
+             + f(par.lambda_izol, 3) + ")", "Q_z = Σ q_l·L", "", Q_loss_zas, "W", "", 1),
+        Krok(f"Strata ciepła przewodu cyrkulacyjnego 16×2, L_c = {f(L_cyrk, 1)} m", "Q_c = q_l·L_c", "", Q_loss_cyrk,
+             "W", "", 1),
         Krok("Strumień cyrkulacji", "V_c = (Q_z + Q_c)/(c·∆θ_c)", f"{f(Q_petla, 1)}·3600/(4190·{f(par.cyrk_dT, 0)})",
              V_cyrk_dm3h, "dm³/h", "∆θ_c = 5 K (DVGW W 551) [W]", 1),
         Krok("Wysokość podnoszenia pompy cyrkulacyjnej", "∆p = 1,5·R·2L_c + ∆p_TV", f"1,5·{f(R_c, 3)}·2·{f(L_cyrk, 1)} + 10",
@@ -742,11 +741,12 @@ def _cwu(dane, przybory, odc, par: ParametryWoda, osoby, kroki, war) -> dict:
         Krok("Energia roczna (cykl co " + str(par.dezynfekcja_co_dni) + " dni)", "E_rok = E_1·365/n", "", E_dez * n_dez,
              "kWh/a", "[ZAŁ]", 0),
     ]
-    war.append(Warunek("Temperatura c.w.u. w punktach", par.theta_cwu, "zakres", (55, 60), "°C", "WT §120 ust. 2", "W-133"))
+    war.append(Warunek("Temperatura c.w.u. w punktach", par.theta_cwu, "zakres", (55, 60), "°C", "WT §120 ust. 2", "W-133",
+                       nd=0))
     war.append(Warunek("Temperatura dezynfekcji w punktach", par.theta_dez_punkt, "zakres", (70, 80), "°C",
-                       "WT §120 ust. 2a", "W-133"))
+                       "WT §120 ust. 2a", "W-133", nd=0))
     war.append(Warunek("Nastawa zasobnika w dezynfekcji ≥ temp. wymagana w punktach", par.theta_dez_zas, ">=",
-                       par.theta_dez_punkt, "°C", "", "W-133"))
+                       par.theta_dez_punkt, "°C", "", "W-133", nd=0))
     war.append(Warunek("Pojemność zasobnika ≥ minimalna", Vzas, ">=", Vzas_min, "dm³", "", "W-133", nd=0))
     if tryb == "brak":
         war.append(Warunek("Objętość przewodu c.w.u. do najdalszego punktu (reguła 3 l)", V3, "<=", 3.0, "dm³",
@@ -868,7 +868,7 @@ def _raport(w: WynikWoda) -> Raport:
     R.h(2, "9. Sprawdzenia")
     R.war(w.warunki)
     R.h(2, "10. Wyniki do innych opracowań")
-    R.tab(["Wielkość", "Wartość"], [[k, (f(v, 3) if isinstance(v, float) else str(v))] for k, v in w.do_dict().items()], "lr")
+    R.tab(["Wielkość", "Wartość"], [[k, (fa(v, 4) if isinstance(v, float) else str(v))] for k, v in w.do_dict().items()], "lr")
     R.zrodlo("WT — rozp. MI z 12.04.2002 (t.j. Dz.U. 2022 poz. 1225 ze zm.) §113–120, zał. 2 pkt 1.5 — stosowane na podst. art. 102a PB",
              "PN-B-01706:1992 (+Az1:1999) — wg PWr, „Materiały pomocnicze do projektu instalacji wodociągowej” (tabl. q_n, przykład obliczeniowy) [W]",
              "PN-EN 806-3:2006 p. 4.3 (ciśnienia) — próbka normy (iTeh, SIST EN 806-3:2006); tabl. LU wg instsani.pl [W]",
