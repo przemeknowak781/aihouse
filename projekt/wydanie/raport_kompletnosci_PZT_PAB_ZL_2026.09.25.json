@@ -19,7 +19,7 @@
       "podstawa": "RPB § 2b ust. 3; W-300",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "4.52 MB (limit 150 MB)"
+      "szczegoly": "4.54 MB (limit 150 MB)"
     },
     {
       "id": "F-03",
@@ -607,7 +607,7 @@
       "[DO UZUPEŁNIENIA: potwierdzenie lokalizacji i wydajności hydrantu przez gestora sieci]": 1,
       "[DO UZUPEŁNIENIA: k_f z badań podłoża (E-04)]": 1,
       "[DO UZUPEŁNIENIA: opinia geotechniczna (E-04)]": 1,
-      "[DO UZUPEŁNIENIA: mapa do celów projektowych z klauzulą lub oświadczeniem geodety (E- 01)]": 1,
+      "[DO UZUPEŁNIENIA: mapa do celów projektowych z klauzulą lub oświadczeniem geodety (E-01)]": 1,
       "[DO UZUPEŁNIENIA]": 60,
       "[DO UZUPEŁNIENIA: data oświadczenia Inwestora (art. 102a ust. 1 PB)]": 1,
       "[DO UZUPEŁNIENIA: nr ewidencyjny PZGiK i data]": 1,
@@ -656,7 +656,7 @@
       "arkusze": 0
     }
   },
-  "rozmiar_mb": 4.521573,
+  "rozmiar_mb": 4.537135,
   "strony": 59,
   "podsumowanie": {
     "status": "PRZYKŁAD – NIE DO ZŁOŻENIA",
@@ -675,14 +675,14 @@
       "opis": "Rozmiar pliku ≤ 150 MB",
       "podstawa": "RPB § 2b ust. 3; W-300; D-26",
       "status": "OK",
-      "szczegoly": "4.31 MB"
+      "szczegoly": "4.33 MB"
     },
     {
       "id": "K-WEKTOR",
       "opis": "Arkusze rysunkowe w postaci wektorowej",
       "podstawa": "RPB § 2b ust. 2; W-300",
       "status": "OK",
-      "szczegoly": "8 arkuszy wektorowych (łącznie 25130 ścieżek); największy udział rastra 0.0 % (próg 35 %)"
+      "szczegoly": "8 arkuszy wektorowych (łącznie 25117 ścieżek); największy udział rastra 0.0 % (próg 35 %)"
     },
     {
       "id": "K-META",
@@ -703,7 +703,7 @@
       "opis": "Arkusze PZT zgodne z raport_widokow.json",
       "podstawa": "RPB § 7 ust. 1 pkt 4, § 15–17 (PZT), § 21 (PAB); raport_widokow.json",
       "status": "OK",
-      "szczegoly": "3 z 3 arkuszy z projekt/02_PZT/rysunki; generator zgłasza 9 brak(i) danych modelu (poniżej, pkt „Sprawy otwarte”)"
+      "szczegoly": "3 z 3 arkuszy z projekt/02_PZT/rysunki; generator zgłasza 6 brak(i) danych modelu (poniżej, pkt „Sprawy otwarte”)"
     },
     {
       "id": "K-PAB-RAP",
@@ -716,15 +716,15 @@
       "id": "K-PZT-AKT",
       "opis": "Aktualność rysunków PZT względem modelu",
       "podstawa": "spójność części opisowej i rysunkowej (model jedynym źródłem danych)",
-      "status": "BRAK",
-      "szczegoly": "rysunki z 2026-09-25 07:56, model zmieniony 2026-09-25 08:02 (budynek.yaml, dzialka.yaml, instalacje.yaml, wyposazenie.yaml) — przed wydaniem wygenerować ponownie (tools/generuj_widoki.py)"
+      "status": "OK",
+      "szczegoly": "rysunki z 2026-09-25 10:50 — nowsze niż model/*.yaml"
     },
     {
       "id": "K-PAB-AKT",
       "opis": "Aktualność rysunków PAB względem modelu",
       "podstawa": "spójność części opisowej i rysunkowej (model jedynym źródłem danych)",
-      "status": "BRAK",
-      "szczegoly": "rysunki z 2026-09-25 07:59, model zmieniony 2026-09-25 08:02 (budynek.yaml, dzialka.yaml, instalacje.yaml, wyposazenie.yaml) — przed wydaniem wygenerować ponownie (tools/generuj_widoki.py)"
+      "status": "OK",
+      "szczegoly": "rysunki z 2026-09-25 10:52 — nowsze niż model/*.yaml"
     },
     {
       "id": "K-METRYKA",
@@ -738,14 +738,14 @@
     {
       "nr": "PZT-01",
       "strona": 19,
-      "format": "A2",
+      "format": "nst. 420×530",
       "skala": "1:500",
       "wymiary_mm": [
         420,
-        594
+        530
       ],
-      "sciezki": 1083,
-      "znaki": 9977,
+      "sciezki": 1084,
+      "znaki": 9985,
       "udzial_rastra": 0.0,
       "zastepczy": false,
       "status": "OK"
@@ -753,14 +753,14 @@
     {
       "nr": "PZT-02",
       "strona": 20,
-      "format": "nst. 400×594",
+      "format": "nst. 594×430",
       "skala": "1:200",
       "wymiary_mm": [
-        400,
-        594
+        594,
+        430
       ],
-      "sciezki": 1592,
-      "znaki": 8812,
+      "sciezki": 1626,
+      "znaki": 9099,
       "udzial_rastra": 0.0,
       "zastepczy": false,
       "status": "OK"
@@ -768,14 +768,14 @@
     {
       "nr": "PZT-03",
       "strona": 21,
-      "format": "nst. 620×420",
+      "format": "nst. 610×450",
       "skala": "1:200",
       "wymiary_mm": [
-        620,
-        420
+        610,
+        450
       ],
       "sciezki": 1228,
-      "znaki": 9805,
+      "znaki": 9885,
       "udzial_rastra": 0.0,
       "zastepczy": false,
       "status": "OK"
@@ -783,14 +783,14 @@
     {
       "nr": "PB-AR-01",
       "strona": 45,
-      "format": "nst. 630×594",
+      "format": "nst. 620×594",
       "skala": "1:50",
       "wymiary_mm": [
-        630,
+        620,
         594
       ],
-      "sciezki": 2710,
-      "znaki": 5954,
+      "sciezki": 2719,
+      "znaki": 6096,
       "udzial_rastra": 0.0,
       "zastepczy": false,
       "status": "OK"
@@ -798,14 +798,14 @@
     {
       "nr": "PB-AR-02",
       "strona": 46,
-      "format": "nst. 770×420",
+      "format": "nst. 594×480",
       "skala": "1:50",
       "wymiary_mm": [
-        770,
-        420
+        594,
+        480
       ],
-      "sciezki": 2127,
-      "znaki": 4963,
+      "sciezki": 2123,
+      "znaki": 5018,
       "udzial_rastra": 0.0,
       "zastepczy": false,
       "status": "OK"
@@ -819,8 +819,8 @@
         590,
         891
       ],
-      "sciezki": 2622,
-      "znaki": 6207,
+      "sciezki": 2628,
+      "znaki": 6296,
       "udzial_rastra": 0.0,
       "zastepczy": false,
       "status": "OK"
@@ -828,14 +828,14 @@
     {
       "nr": "PB-AR-04",
       "strona": 48,
-      "format": "nst. 1130×420",
+      "format": "nst. 1150×420",
       "skala": "1:50",
       "wymiary_mm": [
-        1130,
+        1150,
         420
       ],
-      "sciezki": 7052,
-      "znaki": 9048,
+      "sciezki": 6993,
+      "znaki": 9148,
       "udzial_rastra": 0.0,
       "zastepczy": false,
       "status": "OK"
@@ -879,14 +879,11 @@
       "Opinia geotechniczna: zastąpić opinią z badań (autor, kwalifikacje, metryki sondowań); hydrant i budynki sąsiednie potwierdzić na mapie do celów projektowych."
     ],
     "rysunki_PZT": [
-      "PZT — brak danych: dzialka.yaml: sasiedzi[].kondygnacje, sasiedzi[].funkcja: liczba kondygnacji i funkcja budynków sąsiednich (opis budynku na mapie wg BDOT500: np. „m2”)",
       "PZT — brak danych: dzialka.yaml: drzewa[].obwod: obwód pnia drzew istniejących na wys. 5 cm (u.o.p. art. 83f ust. 4",
-      "PZT — brak danych: dzialka.yaml: bramy[].otwieranie: strona zawiasów i kierunek otwierania furtki (WT § 42 ust. 1",
       "PZT — brak danych: dzialka.yaml: zjazd: zjazd z drogi 1KDD w pasie drogowym (szerokość, skosy/łuki, nawierzchnia, przepust)",
       "PZT — brak danych: dzialka.yaml: retencja.zbiornik.{obrys|sr, rzedna_dna, rzedna_wlotu, rzedna_przelewu}: wymiary rzutu zbiornika retencyjnego i rzędne (dno, wlot, przelew)",
       "PZT — brak danych: dzialka.yaml: uzbrojenie.projektowane[].{dn, material, spadek, rzedne}: średnice, spadki i rzędne dna/wierzchu przewodów w punktach załamania i włączenia (RPB § 15 ust. 2 pkt 11)",
       "PZT — brak danych: dzialka.yaml: uzbrojenie.obiekty (studzienki deszczowe): studzienki rewizyjne/połączeniowe na kolektorach deszczowych KD (włączenia rur spustowych, załamania trasy, osadnik przed zbiornikiem)",
-      "PZT — brak danych: dzialka.yaml: uzbrojenie.obiekty[PC-JZ].{strefa_r, wym}: promień strefy bezpieczeństwa czynnika R290 (bez otworów, wpustów, studzienek) i wymiary jednostki",
       "PZT — brak danych: dzialka.yaml: dzialka.mpzp (wskaźniki): wskaźniki i parametry MPZP potrzebne do tabeli zgodności PZT (RPB § 14 pkt 4 lit. d)"
     ],
     "rysunki_PAB": []
@@ -917,5 +914,5 @@
       "arkusze": 0
     }
   ],
-  "wygenerowano": "2026-09-25 08:04"
+  "wygenerowano": "2026-09-25 10:55"
 }

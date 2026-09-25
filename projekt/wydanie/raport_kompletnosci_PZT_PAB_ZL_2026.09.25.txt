@@ -3,14 +3,14 @@ Lista kontrolna: TOM I — PZT + PAB + ZL w jednym pliku (rejestr C.1)
 Status: PRZYKŁAD – NIE DO ZŁOŻENIA
 Pozycje: OK 53 · BRAK 0 · DO UZUPEŁNIENIA 9 · N/D 1 · OSTRZEŻENIE 0
 Znaczniki: [DO UZUPEŁNIENIA] ×214, [DOKUMENT ZEWNĘTRZNY] ×5, [DANE PRZYKŁADOWE] ×105
-Plik: 59 stron, 4.52 MB
+Plik: 59 stron, 4.54 MB
 
   element PZT: strony 5–21 (opis 14, arkusze 3)
   element PAB: strony 22–49 (opis 23, arkusze 5)
   element ZL: strony 50–59 (opis 10, arkusze 0)
 
 ✓ F-01    [  *] OK               Nazwa pliku wg zał. 1 RPB (PZT_PAB_ZL_rrrr.mm.dd.pdf) (RPB § 2b ust. 4, zał. 1; W-301) — nazwa zgodna z zał. 1 RPB (PZT_PAB_ZL)
-✓ F-02    [  *] OK               Rozmiar pliku ≤ 150 MB (RPB § 2b ust. 3; W-300) — 4.52 MB (limit 150 MB)
+✓ F-02    [  *] OK               Rozmiar pliku ≤ 150 MB (RPB § 2b ust. 3; W-300) — 4.54 MB (limit 150 MB)
 ✓ F-03    [  *] OK               Część rysunkowa w postaci wektorowej (raster tylko jako podkład mapy) (RPB § 2b ust. 2; W-300) — 8 arkuszy wektorowych
 ✓ F-04    [  *] OK               Metadane PDF (tytuł, temat) (dobra praktyka; AUD-RYS) — Title: „Dom LAMELA — TOM I: PZT + PAB + ZL (PRZYKŁAD – NIE DO ZŁOŻENIA)”
 ✓ F-05    [  *] OK               PT nie jest objęty wspólną oprawą z PZT/PAB (RPB § 5 ust. 3; § 7 ust. 8) — brak PT w pliku
@@ -103,7 +103,7 @@ Pola do uzupełnienia i dokumenty zewnętrzne (wystąpienia):
     1 × [DO UZUPEŁNIENIA: karta kolorystyki elewacji]
     1 × [DO UZUPEŁNIENIA: kolor pokrycia]
     1 × [DO UZUPEŁNIENIA: kolor ram (RAL)]
-    1 × [DO UZUPEŁNIENIA: mapa do celów projektowych z klauzulą lub oświadczeniem geodety (E- 01)]
+    1 × [DO UZUPEŁNIENIA: mapa do celów projektowych z klauzulą lub oświadczeniem geodety (E-01)]
     1 × [DO UZUPEŁNIENIA: mapa do celów projektowych z klauzulą urzędową lub oświadczeniem geodety (E-01)]
     1 × [DO UZUPEŁNIENIA: metryki otworów, protokoły sondowań, data badań]
     1 × [DO UZUPEŁNIENIA: nr ewidencyjny PZGiK i data]

@@ -19,7 +19,7 @@
       "podstawa": "RPB § 2b ust. 3; W-300",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "2.37 MB (limit 150 MB)"
+      "szczegoly": "2.38 MB (limit 150 MB)"
     },
     {
       "id": "F-03",
@@ -318,7 +318,7 @@
       "arkusze": 5
     }
   },
-  "rozmiar_mb": 2.37128,
+  "rozmiar_mb": 2.383771,
   "strony": 28,
   "podsumowanie": {
     "status": "PRZYKŁAD – NIE DO ZŁOŻENIA",

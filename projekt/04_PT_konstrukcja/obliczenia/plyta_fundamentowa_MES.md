@@ -35,7 +35,7 @@ Belka nieskończona na podłożu sprężystym (Hetényi 1946): ugięcie pod sił
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Nośność podłoża (GEO, DA2*) | V_d = 13975,6 kN | R_d = 224314,1 kN | 6% | spełniony | PN-EN 1997-1 (6.1), NA.2.6 |
+| Nośność podłoża (GEO, DA2*) | V_d = 13990,7 kN | R_d = 224314,1 kN | 6% | spełniony | PN-EN 1997-1 (6.1), NA.2.6 |
 
 > Parametry gruntu PRZYKŁADOWE (brief) — w II kat. geotechnicznej wymagane badania CPT/DPL (W-282, E-04).
 
@@ -82,10 +82,10 @@ Belka nieskończona na podłożu sprężystym (Hetényi 1946): ugięcie pod sił
 
 ## Przebicie płyty pod słupem SL2 (6.4.4(2))
 
-- Siła od słupa (obwiednia ULS): V_Ed = **319,4** kN
+- Siła od słupa (obwiednia ULS): V_Ed = **319,9** kN
 - Wysokość użyteczna w strefie słupa: d = h = 0,70 m = **638** mm
 - Położenie słupa względem krawędzi płyty; współczynnik β: β (6.39), rys. 6.21N = słup narożny = **1,50** *(PN-EN 1992-1-1 6.4.3(6) [wartości zalecane])*
-- Kombinacja miarodajna: siła słupa i odpór netto w obwodzie (MES, grunt − 1,35·ciężar płyty): V_Ed; ΔV_Ed = **319,4 kN; 64,9 kN** *(6.4.4(2))*
+- Kombinacja miarodajna: siła słupa i odpór netto w obwodzie (MES, grunt − 1,35·ciężar płyty): V_Ed; ΔV_Ed = **319,9 kN; 64,9 kN** *(6.4.4(2))*
 - Obwód miarodajny (maks. v_Ed/v_Rd dla a ≤ 2d; przycięty krawędzią płyty): a; u = **0,447 m; 2,102 m**
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
@@ -94,46 +94,46 @@ Belka nieskończona na podłożu sprężystym (Hetényi 1946): ugięcie pod sił
 
 ## Przebicie płyty pod słupem SL3 (6.4.4(2))
 
-- Siła od słupa (obwiednia ULS): V_Ed = **410,1** kN
+- Siła od słupa (obwiednia ULS): V_Ed = **410,4** kN
 - Wysokość użyteczna w strefie słupa: d = h = 0,70 m = **638** mm
 - Położenie słupa względem krawędzi płyty; współczynnik β: β (6.39), rys. 6.21N = słup narożny = **1,50** *(PN-EN 1992-1-1 6.4.3(6) [wartości zalecane])*
-- Kombinacja miarodajna: siła słupa i odpór netto w obwodzie (MES, grunt − 1,35·ciężar płyty): V_Ed; ΔV_Ed = **410,1 kN; 71,8 kN** *(6.4.4(2))*
+- Kombinacja miarodajna: siła słupa i odpór netto w obwodzie (MES, grunt − 1,35·ciężar płyty): V_Ed; ΔV_Ed = **410,4 kN; 71,8 kN** *(6.4.4(2))*
 - Obwód miarodajny (maks. v_Ed/v_Rd dla a ≤ 2d; przycięty krawędzią płyty): a; u = **0,510 m; 2,303 m**
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Przebicie — fundament (6.4.4(2), (6.51)–(6.53)) | v_Ed = 0,345 MPa | v_Rd = 0,857 MPa | 40% | spełniony | PN-EN 1992-1-1 6.4.4 |
+| Przebicie — fundament (6.4.4(2), (6.51)–(6.53)) | v_Ed = 0,346 MPa | v_Rd = 0,857 MPa | 40% | spełniony | PN-EN 1992-1-1 6.4.4 |
 
 ## Przebicie płyty pod słupem SL4 (6.4.4(2))
 
-- Siła od słupa (obwiednia ULS): V_Ed = **470,4** kN
+- Siła od słupa (obwiednia ULS): V_Ed = **470,6** kN
 - Wysokość użyteczna w strefie słupa: d = h = 0,70 m = **638** mm
 - Położenie słupa względem krawędzi płyty; współczynnik β: β (6.39), rys. 6.21N = słup narożny = **1,50** *(PN-EN 1992-1-1 6.4.3(6) [wartości zalecane])*
-- Kombinacja miarodajna: siła słupa i odpór netto w obwodzie (MES, grunt − 1,35·ciężar płyty): V_Ed; ΔV_Ed = **470,4 kN; 55,7 kN** *(6.4.4(2))*
+- Kombinacja miarodajna: siła słupa i odpór netto w obwodzie (MES, grunt − 1,35·ciężar płyty): V_Ed; ΔV_Ed = **470,6 kN; 55,8 kN** *(6.4.4(2))*
 - Obwód miarodajny (maks. v_Ed/v_Rd dla a ≤ 2d; przycięty krawędzią płyty): a; u = **0,510 m; 2,303 m**
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Przebicie — fundament (6.4.4(2), (6.51)–(6.53)) | v_Ed = 0,423 MPa | v_Rd = 0,857 MPa | 49% | spełniony | PN-EN 1992-1-1 6.4.4 |
+| Przebicie — fundament (6.4.4(2), (6.51)–(6.53)) | v_Ed = 0,424 MPa | v_Rd = 0,857 MPa | 49% | spełniony | PN-EN 1992-1-1 6.4.4 |
 
 ## Przebicie płyty pod słupem SL9 (6.4.4(2))
 
-- Siła od słupa (obwiednia ULS): V_Ed = **661,8** kN
+- Siła od słupa (obwiednia ULS): V_Ed = **662,1** kN
 - Wysokość użyteczna w strefie słupa: d = h = 0,90 m = **838** mm
 - Położenie słupa względem krawędzi płyty; współczynnik β: β (6.39), rys. 6.21N = słup narożny = **1,50** *(PN-EN 1992-1-1 6.4.3(6) [wartości zalecane])*
-- Kombinacja miarodajna: siła słupa i odpór netto w obwodzie (MES, grunt − 1,35·ciężar płyty): V_Ed; ΔV_Ed = **661,8 kN; 141,0 kN** *(6.4.4(2))*
+- Kombinacja miarodajna: siła słupa i odpór netto w obwodzie (MES, grunt − 1,35·ciężar płyty): V_Ed; ΔV_Ed = **662,1 kN; 141,0 kN** *(6.4.4(2))*
 - Obwód miarodajny (maks. v_Ed/v_Rd dla a ≤ 2d; przycięty krawędzią płyty): a; u = **0,754 m; 1,784 m**
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Przebicie — fundament (6.4.4(2), (6.51)–(6.53)) | v_Ed = 0,522 MPa | v_Rd = 0,727 MPa | 72% | spełniony | PN-EN 1992-1-1 6.4.4 |
+| Przebicie — fundament (6.4.4(2), (6.51)–(6.53)) | v_Ed = 0,523 MPa | v_Rd = 0,727 MPa | 72% | spełniony | PN-EN 1992-1-1 6.4.4 |
 
 ## Przebicie płyty pod słupem SL11 (6.4.4(2))
 
-- Siła od słupa (obwiednia ULS): V_Ed = **510,7** kN
+- Siła od słupa (obwiednia ULS): V_Ed = **510,8** kN
 - Wysokość użyteczna w strefie słupa: d = h = 0,55 m = **488** mm
 - Położenie słupa względem krawędzi płyty; współczynnik β: β (6.39), rys. 6.21N = słup narożny = **1,50** *(PN-EN 1992-1-1 6.4.3(6) [wartości zalecane])*
-- Kombinacja miarodajna: siła słupa i odpór netto w obwodzie (MES, grunt − 1,35·ciężar płyty): V_Ed; ΔV_Ed = **510,7 kN; 100,4 kN** *(6.4.4(2))*
+- Kombinacja miarodajna: siła słupa i odpór netto w obwodzie (MES, grunt − 1,35·ciężar płyty): V_Ed; ΔV_Ed = **510,8 kN; 100,5 kN** *(6.4.4(2))*
 - Obwód miarodajny (maks. v_Ed/v_Rd dla a ≤ 2d; przycięty krawędzią płyty): a; u = **0,537 m; 2,466 m**
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
@@ -142,34 +142,34 @@ Belka nieskończona na podłożu sprężystym (Hetényi 1946): ugięcie pod sił
 
 ## Przebicie płyty pod słupem SL13 (6.4.4(2))
 
-- Siła od słupa (obwiednia ULS): V_Ed = **1322,4** kN
+- Siła od słupa (obwiednia ULS): V_Ed = **1326,2** kN
 - Wysokość użyteczna w strefie słupa: d = h = 0,70 m = **638** mm
 - Położenie słupa względem krawędzi płyty; współczynnik β: β (6.39), rys. 6.21N = słup wewnętrzny = **1,15** *(PN-EN 1992-1-1 6.4.3(6) [wartości zalecane])*
-- Kombinacja miarodajna: siła słupa i odpór netto w obwodzie (MES, grunt − 1,35·ciężar płyty): V_Ed; ΔV_Ed = **1322,4 kN; 196,6 kN** *(6.4.4(2))*
+- Kombinacja miarodajna: siła słupa i odpór netto w obwodzie (MES, grunt − 1,35·ciężar płyty): V_Ed; ΔV_Ed = **1326,2 kN; 196,9 kN** *(6.4.4(2))*
 - Obwód miarodajny (maks. v_Ed/v_Rd dla a ≤ 2d; przycięty krawędzią płyty): a; u = **0,638 m; 5,447 m**
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Przebicie — fundament (6.4.4(2), (6.51)–(6.53)) | v_Ed = 0,373 MPa | v_Rd = 0,686 MPa | 54% | spełniony | PN-EN 1992-1-1 6.4.4 |
+| Przebicie — fundament (6.4.4(2), (6.51)–(6.53)) | v_Ed = 0,374 MPa | v_Rd = 0,686 MPa | 54% | spełniony | PN-EN 1992-1-1 6.4.4 |
 
 ## Przebicie płyty pod słupem SL16 (6.4.4(2))
 
-- Siła od słupa (obwiednia ULS): V_Ed = **1460,0** kN
+- Siła od słupa (obwiednia ULS): V_Ed = **1462,4** kN
 - Wysokość użyteczna w strefie słupa: d = h = 0,70 m = **638** mm
 - Położenie słupa względem krawędzi płyty; współczynnik β: β (6.39), rys. 6.21N = słup wewnętrzny = **1,15** *(PN-EN 1992-1-1 6.4.3(6) [wartości zalecane])*
-- Kombinacja miarodajna: siła słupa i odpór netto w obwodzie (MES, grunt − 1,35·ciężar płyty): V_Ed; ΔV_Ed = **1460,0 kN; 223,3 kN** *(6.4.4(2))*
+- Kombinacja miarodajna: siła słupa i odpór netto w obwodzie (MES, grunt − 1,35·ciężar płyty): V_Ed; ΔV_Ed = **1462,3 kN; 223,7 kN** *(6.4.4(2))*
 - Obwód miarodajny (maks. v_Ed/v_Rd dla a ≤ 2d; przycięty krawędzią płyty): a; u = **0,702 m; 5,848 m**
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
 |---|---|---|---|---|---|
-| Przebicie — fundament (6.4.4(2), (6.51)–(6.53)) | v_Ed = 0,381 MPa | v_Rd = 0,624 MPa | 61% | spełniony | PN-EN 1992-1-1 6.4.4 |
+| Przebicie — fundament (6.4.4(2), (6.51)–(6.53)) | v_Ed = 0,382 MPa | v_Rd = 0,624 MPa | 61% | spełniony | PN-EN 1992-1-1 6.4.4 |
 
 ## Przebicie płyty pod słupem SL18 (6.4.4(2))
 
-- Siła od słupa (obwiednia ULS): V_Ed = **1333,4** kN
+- Siła od słupa (obwiednia ULS): V_Ed = **1335,0** kN
 - Wysokość użyteczna w strefie słupa: d = h = 0,70 m = **638** mm
 - Położenie słupa względem krawędzi płyty; współczynnik β: β (6.39), rys. 6.21N = słup wewnętrzny = **1,15** *(PN-EN 1992-1-1 6.4.3(6) [wartości zalecane])*
-- Kombinacja miarodajna: siła słupa i odpór netto w obwodzie (MES, grunt − 1,35·ciężar płyty): V_Ed; ΔV_Ed = **1333,4 kN; 179,0 kN** *(6.4.4(2))*
+- Kombinacja miarodajna: siła słupa i odpór netto w obwodzie (MES, grunt − 1,35·ciężar płyty): V_Ed; ΔV_Ed = **1335,0 kN; 179,3 kN** *(6.4.4(2))*
 - Obwód miarodajny (maks. v_Ed/v_Rd dla a ≤ 2d; przycięty krawędzią płyty): a; u = **0,638 m; 5,447 m**
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
@@ -178,10 +178,10 @@ Belka nieskończona na podłożu sprężystym (Hetényi 1946): ugięcie pod sił
 
 ## Przebicie płyty pod słupem SL20 (6.4.4(2))
 
-- Siła od słupa (obwiednia ULS): V_Ed = **241,1** kN
+- Siła od słupa (obwiednia ULS): V_Ed = **241,0** kN
 - Wysokość użyteczna w strefie słupa: d = h = 0,50 m = **438** mm
 - Położenie słupa względem krawędzi płyty; współczynnik β: β (6.39), rys. 6.21N = słup narożny = **1,50** *(PN-EN 1992-1-1 6.4.3(6) [wartości zalecane])*
-- Kombinacja miarodajna: siła słupa i odpór netto w obwodzie (MES, grunt − 1,35·ciężar płyty): V_Ed; ΔV_Ed = **241,1 kN; 54,4 kN** *(6.4.4(2))*
+- Kombinacja miarodajna: siła słupa i odpór netto w obwodzie (MES, grunt − 1,35·ciężar płyty): V_Ed; ΔV_Ed = **241,0 kN; 54,4 kN** *(6.4.4(2))*
 - Obwód miarodajny (maks. v_Ed/v_Rd dla a ≤ 2d; przycięty krawędzią płyty): a; u = **0,526 m; 2,731 m**
 
 | Warunek | Efekt | Nośność / limit | η | Stan | Podstawa |
@@ -192,10 +192,10 @@ Belka nieskończona na podłożu sprężystym (Hetényi 1946): ugięcie pod sił
 
 | Kierunek | M_Ed ekstremalny [kNm/m] | A_s,req maks. [mm²/m] | A_s,req 90 % pola płyty [mm²/m] |
 |---|---:|---:|---:|
-| dol_x | 1342.5 | 5332 | 488 |
-| dol_y | 770.1 | 4731 | 664 |
+| dol_x | 1344.0 | 5339 | 489 |
+| dol_y | 771.6 | 4742 | 666 |
 | gora_x | -1335.9 | 5153 | 823 |
-| gora_y | -972.0 | 5147 | 1664 |
+| gora_y | -972.2 | 5148 | 1665 |
 
-Elementy z μ > μ_lim — przekrój podwójnie zbrojony: 1 z 3544 (A_s2,max = 389 mm²/m; A_s2 = ΔM/(σ_s2·(d − a₂)), ΔM = M_Ed − μ_lim·b·d²·η·f_cd, σ_s2 = min(f_yd; E_s·ε_cu3·(1 − a₂/x_lim)); A_s2 dodane do wymagania warstwy przeciwnej, A_s1 = A_s,lim + A_s2·σ_s2/f_yd).
+Elementy z μ > μ_lim — przekrój podwójnie zbrojony: 1 z 3544 (A_s2,max = 403 mm²/m; A_s2 = ΔM/(σ_s2·(d − a₂)), ΔM = M_Ed − μ_lim·b·d²·η·f_cd, σ_s2 = min(f_yd; E_s·ε_cu3·(1 − a₂/x_lim)); A_s2 dodane do wymagania warstwy przeciwnej, A_s1 = A_s,lim + A_s2·σ_s2/f_yd).
 

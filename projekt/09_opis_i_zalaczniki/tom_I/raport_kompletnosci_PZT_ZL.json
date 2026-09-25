@@ -10,7 +10,7 @@
       "podstawa": "RPB § 2b ust. 3; W-300",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "1.79 MB (limit 150 MB)"
+      "szczegoly": "1.95 MB (limit 150 MB)"
     },
     {
       "id": "F-03",
@@ -188,9 +188,9 @@
       "element": "PZT",
       "opis": "Rysunek: plan zagospodarowania na mapie do celów projektowych (≥ 1:500)",
       "podstawa": "RPB § 15 ust. 1–2, § 9 ust. 5; PZT-01",
-      "status": "OK",
+      "status": "DO UZUPEŁNIENIA",
       "obowiazkowa": true,
-      "szczegoly": "PZT-01 — PLAN ZAGOSPODAROWANIA DZIAŁKI (1:500)"
+      "szczegoly": "PZT-01 — PLAN ZAGOSPODAROWANIA DZIAŁKI (1:500); podkład przykładowy — [DO UZUPEŁNIENIA: mapa do celów projektowych] (RPB § 15 ust. 1)"
     },
     {
       "id": "C1-1-19",
@@ -305,9 +305,9 @@
       "element": "ZL",
       "opis": "Decyzja zarządcy drogi o lokalizacji zjazdu (albo strona zastępcza)",
       "podstawa": "PB art. 33 ust. 2 pkt 1; u.d.p. art. 29 ust. 3a; W-020",
-      "status": "OK",
+      "status": "DO UZUPEŁNIENIA",
       "obowiazkowa": true,
-      "szczegoly": ""
+      "szczegoly": "strona zastępcza [DOKUMENT ZEWNĘTRZNY] — decyzja do dołączenia"
     },
     {
       "id": "C1-3-11",
@@ -329,17 +329,17 @@
     }
   ],
   "znaczniki": {
-    "DO UZUPEŁNIENIA": 95,
-    "DOKUMENT ZEWNĘTRZNY": 1,
-    "DANE PRZYKŁADOWE": 46,
-    "ZAŁ": 8,
-    "NZW": 1,
-    "INT": 0,
+    "DO UZUPEŁNIENIA": 116,
+    "DOKUMENT ZEWNĘTRZNY": 4,
+    "DANE PRZYKŁADOWE": 49,
+    "ZAŁ": 14,
+    "NZW": 3,
+    "INT": 2,
     "PROG": 0,
     "lista": {
       "[DO UZUPEŁNIENIA: nazwa pracowni projektowej]": 2,
       "[DO UZUPEŁNIENIA: adres pracowni]": 2,
-      "[DANE PRZYKŁADOWE – FIKCYJNE]": 46,
+      "[DANE PRZYKŁADOWE – FIKCYJNE]": 49,
       "[DO UZUPEŁNIENIA: jednostka ewidencyjna — kod TERYT WWPPGG_R i nazwa]": 2,
       "[DO UZUPEŁNIENIA: kod TERYT jedn. ewid. WWPPGG_R]": 6,
       "[DO UZUPEŁNIENIA: imię i nazwisko lub nazwa inwestora]": 8,
@@ -349,10 +349,14 @@
       "[DO UZUPEŁNIENIA: miejscowość]": 3,
       "[DO UZUPEŁNIENIA: data złożenia oświadczenia z art. 102a PB]": 2,
       "[DO UZUPEŁNIENIA: potwierdzenie wpisu w e-CRUB albo dołączenie kopii]": 1,
+      "[DO UZUPEŁNIENIA: …]": 2,
+      "[DOKUMENT ZEWNĘTRZNY – …]": 2,
+      "[ZAŁ]": 14,
+      "[NZW]": 3,
+      "[INT]": 2,
       "[DO UZUPEŁNIENIA: nr i data warunków przyłączenia (E-05)]": 1,
       "[DO UZUPEŁNIENIA: mapa do celów projektowych z klauzulą urzędową lub oświadczeniem geodety (E-01)]": 1,
       "[DO UZUPEŁNIENIA: nr i data zezwolenia zarządcy drogi]": 1,
-      "[ZAŁ]": 8,
       "[DO UZUPEŁNIENIA: warunki przyłączenia: ENEA Operator (nN), gestor wod.-kan., operator telekomunikacyjny — E-05]": 1,
       "[DO UZUPEŁNIENIA: obwód na wys. 5 cm — mapa do celów projektowych (u.o.p. art. 83f)]": 1,
       "[DO UZUPEŁNIENIA: wypis i wyrys z MPZP (E-02)]": 1,
@@ -360,13 +364,13 @@
       "[DO UZUPEŁNIENIA: potwierdzenie lokalizacji i wydajności hydrantu przez gestora sieci]": 1,
       "[DO UZUPEŁNIENIA: k_f z badań podłoża (E-04)]": 1,
       "[DO UZUPEŁNIENIA: opinia geotechniczna (E-04)]": 1,
-      "[DO UZUPEŁNIENIA: mapa do celów projektowych z klauzulą lub oświadczeniem geodety (E- 01)]": 1,
-      "[DO UZUPEŁNIENIA]": 12,
+      "[DO UZUPEŁNIENIA: mapa do celów projektowych z klauzulą lub oświadczeniem geodety (E-01)]": 1,
+      "[DO UZUPEŁNIENIA]": 30,
       "[DO UZUPEŁNIENIA: adres projektanta]": 1,
       "[DO UZUPEŁNIENIA: głębokość posadowienia zbiornika]": 1,
-      "[NZW]": 1,
       "[DOKUMENT ZEWNĘTRZNY – do dołączenia: Decyzja zarządcy drogi o lokalizacji zjazdu z drogi gminnej 1KDD, Wójt (burmistrz) Gminy Przykładowo (fikcyjna) — zarządca drogi gminnej (u.d.p. art. 19 ust. 2 pkt 4), art. 29 ust. 1 i 3a ustawy o drogach publicznych (t.j. Dz.U. 2025 poz. 889 ze zm.); PB art. 33 ust. 2 pkt 1]": 1,
-      "[DO UZUPEŁNIENIA: numer i data dokumentu]": 1,
+      "[DO UZUPEŁNIENIA: numer i data dokumentu]": 2,
+      "[DOKUMENT ZEWNĘTRZNY – do dołączenia: Uzgodnienie z zarządcą drogi gminnej 1KDD projektu zagospodarowania działki oraz projektu architektoniczno-budowlanego zjazdu, Wójt (burmistrz) Gminy Przykładowo (fikcyjna) — zarządca drogi gminnej (u.d.p. art. 19 ust. 2 pkt 4), art. 29 ust. 3 pkt 2 ustawy o drogach publicznych (t.j. Dz.U. 2025 poz. 889 ze zm.)]": 1,
       "[DO UZUPEŁNIENIA: data audytu, autor]": 1,
       "[DO UZUPEŁNIENIA: potwierdzenie braku sieci ciepłowniczej: mapa do celów projektowych lub informacja przedsiębiorstwa energetycznego]": 1,
       "[DO UZUPEŁNIENIA: data]": 1,
@@ -382,22 +386,22 @@
     },
     "ZL": {
       "od": 18,
-      "do": 26,
-      "strony_opisu": 9,
+      "do": 27,
+      "strony_opisu": 10,
       "arkusze": 0
     }
   },
-  "rozmiar_mb": 1.7888145446777344,
-  "strony": 26,
+  "rozmiar_mb": 1.954044,
+  "strony": 27,
   "podsumowanie": {
     "status": "PRZYKŁAD – NIE DO ZŁOŻENIA",
-    "OK": 32,
+    "OK": 30,
     "BRAK": 0,
-    "DO UZUPEŁNIENIA": 3,
+    "DO UZUPEŁNIENIA": 5,
     "N/D": 1,
     "OSTRZEŻENIE": 0,
-    "znaczniki_do_uzupelnienia": 95,
-    "znaczniki_dokument_zewnetrzny": 1,
-    "znaczniki_dane_przykladowe": 46
+    "znaczniki_do_uzupelnienia": 116,
+    "znaczniki_dokument_zewnetrzny": 4,
+    "znaczniki_dane_przykladowe": 49
   }
 }

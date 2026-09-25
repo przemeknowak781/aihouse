@@ -1,6 +1,6 @@
 # Raport kompletności — PZT_PAB_ZL_2026.09.25.pdf
 
-*Wygenerowano 2026-09-25 08:04 przez `tools/dokumenty/zloz_tom_I.py` (walidator `lamela.dokumenty.sprawdz_tom`, lista „TOM I — PZT + PAB + ZL w jednym pliku (rejestr C.1)”). Walidator ocenia obecność treści wymaganej przepisami (wyrażenia regularne), nie jej poprawność merytoryczną.*
+*Wygenerowano 2026-09-25 10:55 przez `tools/dokumenty/zloz_tom_I.py` (walidator `lamela.dokumenty.sprawdz_tom`, lista „TOM I — PZT + PAB + ZL w jednym pliku (rejestr C.1)”). Walidator ocenia obecność treści wymaganej przepisami (wyrażenia regularne), nie jej poprawność merytoryczną.*
 
 **Status tomu: PRZYKŁAD – NIE DO ZŁOŻENIA**
 
@@ -10,7 +10,7 @@
 
 Pozycje „DO UZUPEŁNIENIA”: 9 — dane osobowe i identyfikatory na stronach tytułowych (5: C1-1-04, C1-1-05, C1-1-06, C1-2-02, C1-2-03); treść zastępcza, której nie wolno traktować jako kompletnej (5): C1-1-18 (podkład przykładowy — [DO UZUPEŁNIENIA: mapa do celów projektowych] (RPB § 15 ust. 1)); C1-2-15 (nakład K i oszczędność s — [DO UZUPEŁNIENIA] (dane z ofert / producenta)); C1-2-19 (autor i badania podłoża — [DO UZUPEŁNIENIA]); C1-3-10 (strona zastępcza [DOKUMENT ZEWNĘTRZNY] — decyzja do dołączenia); K-METRYKA (8 arkuszy z polami [DO UZUPEŁNIENIA] (imię i nazwisko, specjalność i nr uprawnień); sprawdzający: nie dotyczy (art. 20 ust. 3 pkt 2 PB)).
 
-Plik: `projekt/wydanie/PZT_PAB_ZL_2026.09.25.pdf` — 59 stron, 4.52 MB; nazwa wg zał. 1 RPB: zgodna.
+Plik: `projekt/wydanie/PZT_PAB_ZL_2026.09.25.pdf` — 59 stron, 4.54 MB; nazwa wg zał. 1 RPB: zgodna.
 
 ## 1. Skład tomu (RPB § 5 ust. 1, 3–4; § 7 ust. 7 pkt 1)
 
@@ -31,7 +31,7 @@ Strony 1–4 pliku: strona tytułowa tomu i łączny spis treści ze spisem zał
 | | id | el. | status | wymaganie | podstawa | szczegóły |
 |---|---|---|---|---|---|---|
 | ✓ | F-01 | * | OK | Nazwa pliku wg zał. 1 RPB (PZT_PAB_ZL_rrrr.mm.dd.pdf) | RPB § 2b ust. 4, zał. 1; W-301 | nazwa zgodna z zał. 1 RPB (PZT_PAB_ZL) |
-| ✓ | F-02 | * | OK | Rozmiar pliku ≤ 150 MB | RPB § 2b ust. 3; W-300 | 4.52 MB (limit 150 MB) |
+| ✓ | F-02 | * | OK | Rozmiar pliku ≤ 150 MB | RPB § 2b ust. 3; W-300 | 4.54 MB (limit 150 MB) |
 | ✓ | F-03 | * | OK | Część rysunkowa w postaci wektorowej (raster tylko jako podkład mapy) | RPB § 2b ust. 2; W-300 | 8 arkuszy wektorowych |
 | ✓ | F-04 | * | OK | Metadane PDF (tytuł, temat) | dobra praktyka; AUD-RYS | Title: „Dom LAMELA — TOM I: PZT + PAB + ZL (PRZYKŁAD – NIE DO ZŁOŻENIA)” |
 | ✓ | F-05 | * | OK | PT nie jest objęty wspólną oprawą z PZT/PAB | RPB § 5 ust. 3; § 7 ust. 8 | brak PT w pliku |
@@ -98,27 +98,27 @@ Strony 1–4 pliku: strona tytułowa tomu i łączny spis treści ze spisem zał
 
 | | id | kontrola | status | podstawa | szczegóły |
 |---|---|---|---|---|---|
-| ✓ | K-ROZMIAR | Rozmiar pliku ≤ 150 MB | OK | RPB § 2b ust. 3; W-300; D-26 | 4.31 MB |
-| ✓ | K-WEKTOR | Arkusze rysunkowe w postaci wektorowej | OK | RPB § 2b ust. 2; W-300 | 8 arkuszy wektorowych (łącznie 25130 ścieżek); największy udział rastra 0.0 % (próg 35 %) |
+| ✓ | K-ROZMIAR | Rozmiar pliku ≤ 150 MB | OK | RPB § 2b ust. 3; W-300; D-26 | 4.33 MB |
+| ✓ | K-WEKTOR | Arkusze rysunkowe w postaci wektorowej | OK | RPB § 2b ust. 2; W-300 | 8 arkuszy wektorowych (łącznie 25117 ścieżek); największy udział rastra 0.0 % (próg 35 %) |
 | ✓ | K-META | Metadane PDF i zakładki | OK | dobra praktyka; AUD-RYS | Title: „Dom LAMELA — TOM I: PZT + PAB + ZL (PRZYKŁAD – NIE DO ZŁOŻENIA)”; zakładek: 91 |
 | ✓ | K-SPIS-ZL | Łączny spis treści obejmuje spis załączników (ZL) | OK | RPB § 7 ust. 7 pkt 1, ust. 1a | załączników w zakładkach: 5, w łącznym spisie: 5 |
-| ✓ | K-PZT-RAP | Arkusze PZT zgodne z raport_widokow.json | OK | RPB § 7 ust. 1 pkt 4, § 15–17 (PZT), § 21 (PAB); raport_widokow.json | 3 z 3 arkuszy z projekt/02_PZT/rysunki; generator zgłasza 9 brak(i) danych modelu (poniżej, pkt „Sprawy otwarte”) |
+| ✓ | K-PZT-RAP | Arkusze PZT zgodne z raport_widokow.json | OK | RPB § 7 ust. 1 pkt 4, § 15–17 (PZT), § 21 (PAB); raport_widokow.json | 3 z 3 arkuszy z projekt/02_PZT/rysunki; generator zgłasza 6 brak(i) danych modelu (poniżej, pkt „Sprawy otwarte”) |
 | ✓ | K-PAB-RAP | Arkusze PAB zgodne z raport_widokow.json | OK | RPB § 7 ust. 1 pkt 4, § 15–17 (PZT), § 21 (PAB); raport_widokow.json | 5 z 5 arkuszy z projekt/03_PAB/rysunki |
-| ✗ | K-PZT-AKT | Aktualność rysunków PZT względem modelu | BRAK | spójność części opisowej i rysunkowej (model jedynym źródłem danych) | rysunki z 2026-09-25 07:56, model zmieniony 2026-09-25 08:02 (budynek.yaml, dzialka.yaml, instalacje.yaml, wyposazenie.yaml) — przed wydaniem wygenerować ponownie (tools/generuj_widoki.py) |
-| ✗ | K-PAB-AKT | Aktualność rysunków PAB względem modelu | BRAK | spójność części opisowej i rysunkowej (model jedynym źródłem danych) | rysunki z 2026-09-25 07:59, model zmieniony 2026-09-25 08:02 (budynek.yaml, dzialka.yaml, instalacje.yaml, wyposazenie.yaml) — przed wydaniem wygenerować ponownie (tools/generuj_widoki.py) |
+| ✓ | K-PZT-AKT | Aktualność rysunków PZT względem modelu | OK | spójność części opisowej i rysunkowej (model jedynym źródłem danych) | rysunki z 2026-09-25 10:50 — nowsze niż model/*.yaml |
+| ✓ | K-PAB-AKT | Aktualność rysunków PAB względem modelu | OK | spójność części opisowej i rysunkowej (model jedynym źródłem danych) | rysunki z 2026-09-25 10:52 — nowsze niż model/*.yaml |
 | … | K-METRYKA | Metryki arkuszy — autorzy, uprawnienia, sprawdzający | DO UZUPEŁNIENIA | RPB § 10 ust. 1 pkt 3; PB art. 20 ust. 3 pkt 2; W-305 | 8 arkuszy z polami [DO UZUPEŁNIENIA] (imię i nazwisko, specjalność i nr uprawnień); sprawdzający: nie dotyczy (art. 20 ust. 3 pkt 2 PB) |
 
 ### 3.1. Arkusze rysunkowe w tomie
 
 | nr | strona pliku | format | wymiary [mm] | skala | ścieżki wektorowe | znaki tekstu | raster [%] | status |
 |---|---:|---|---|---|---:|---:|---:|---|
-| PZT-01 | 19 | A2 | 420 × 594 | 1:500 | 1083 | 9977 | 0.0 | OK |
-| PZT-02 | 20 | nst. 400×594 | 400 × 594 | 1:200 | 1592 | 8812 | 0.0 | OK |
-| PZT-03 | 21 | nst. 620×420 | 620 × 420 | 1:200 | 1228 | 9805 | 0.0 | OK |
-| PB-AR-01 | 45 | nst. 630×594 | 630 × 594 | 1:50 | 2710 | 5954 | 0.0 | OK |
-| PB-AR-02 | 46 | nst. 770×420 | 770 × 420 | 1:50 | 2127 | 4963 | 0.0 | OK |
-| PB-AR-03 | 47 | nst. 590×891 | 590 × 891 | 1:50 | 2622 | 6207 | 0.0 | OK |
-| PB-AR-04 | 48 | nst. 1130×420 | 1130 × 420 | 1:50 | 7052 | 9048 | 0.0 | OK |
+| PZT-01 | 19 | nst. 420×530 | 420 × 530 | 1:500 | 1084 | 9985 | 0.0 | OK |
+| PZT-02 | 20 | nst. 594×430 | 594 × 430 | 1:200 | 1626 | 9099 | 0.0 | OK |
+| PZT-03 | 21 | nst. 610×450 | 610 × 450 | 1:200 | 1228 | 9885 | 0.0 | OK |
+| PB-AR-01 | 45 | nst. 620×594 | 620 × 594 | 1:50 | 2719 | 6096 | 0.0 | OK |
+| PB-AR-02 | 46 | nst. 594×480 | 594 × 480 | 1:50 | 2123 | 5018 | 0.0 | OK |
+| PB-AR-03 | 47 | nst. 590×891 | 590 × 891 | 1:50 | 2628 | 6296 | 0.0 | OK |
+| PB-AR-04 | 48 | nst. 1150×420 | 1150 × 420 | 1:50 | 6993 | 9148 | 0.0 | OK |
 | PB-AR-05 | 49 | nst. 2050×297 | 2050 × 297 | 1:50 | 6716 | 4161 | 0.0 | OK |
 
 ## 4. Pola do uzupełnienia i dokumenty zewnętrzne (wystąpienia w pliku)
@@ -156,7 +156,7 @@ Dane osobowe, numery uprawnień, podpisy i dokumenty organów uzupełnia projekt
 | 1 | [DO UZUPEŁNIENIA: karta kolorystyki elewacji] |
 | 1 | [DO UZUPEŁNIENIA: kolor pokrycia] |
 | 1 | [DO UZUPEŁNIENIA: kolor ram (RAL)] |
-| 1 | [DO UZUPEŁNIENIA: mapa do celów projektowych z klauzulą lub oświadczeniem geodety (E- 01)] |
+| 1 | [DO UZUPEŁNIENIA: mapa do celów projektowych z klauzulą lub oświadczeniem geodety (E-01)] |
 | 1 | [DO UZUPEŁNIENIA: mapa do celów projektowych z klauzulą urzędową lub oświadczeniem geodety (E-01)] |
 | 1 | [DO UZUPEŁNIENIA: metryki otworów, protokoły sondowań, data badań] |
 | 1 | [DO UZUPEŁNIENIA: nr ewidencyjny PZGiK i data] |
@@ -199,13 +199,10 @@ Dane osobowe, numery uprawnień, podpisy i dokumenty organów uzupełnia projekt
 
 **rysunki PZT**
 
-- PZT — brak danych: dzialka.yaml: sasiedzi[].kondygnacje, sasiedzi[].funkcja: liczba kondygnacji i funkcja budynków sąsiednich (opis budynku na mapie wg BDOT500: np. „m2”)
 - PZT — brak danych: dzialka.yaml: drzewa[].obwod: obwód pnia drzew istniejących na wys. 5 cm (u.o.p. art. 83f ust. 4
-- PZT — brak danych: dzialka.yaml: bramy[].otwieranie: strona zawiasów i kierunek otwierania furtki (WT § 42 ust. 1
 - PZT — brak danych: dzialka.yaml: zjazd: zjazd z drogi 1KDD w pasie drogowym (szerokość, skosy/łuki, nawierzchnia, przepust)
 - PZT — brak danych: dzialka.yaml: retencja.zbiornik.{obrys\|sr, rzedna_dna, rzedna_wlotu, rzedna_przelewu}: wymiary rzutu zbiornika retencyjnego i rzędne (dno, wlot, przelew)
 - PZT — brak danych: dzialka.yaml: uzbrojenie.projektowane[].{dn, material, spadek, rzedne}: średnice, spadki i rzędne dna/wierzchu przewodów w punktach załamania i włączenia (RPB § 15 ust. 2 pkt 11)
 - PZT — brak danych: dzialka.yaml: uzbrojenie.obiekty (studzienki deszczowe): studzienki rewizyjne/połączeniowe na kolektorach deszczowych KD (włączenia rur spustowych, załamania trasy, osadnik przed zbiornikiem)
-- PZT — brak danych: dzialka.yaml: uzbrojenie.obiekty[PC-JZ].{strefa_r, wym}: promień strefy bezpieczeństwa czynnika R290 (bez otworów, wpustów, studzienek) i wymiary jednostki
 - PZT — brak danych: dzialka.yaml: dzialka.mpzp (wskaźniki): wskaźniki i parametry MPZP potrzebne do tabeli zgodności PZT (RPB § 14 pkt 4 lit. d)
 
