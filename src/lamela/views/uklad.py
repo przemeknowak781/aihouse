@@ -839,8 +839,9 @@ def _uwagi_szukaj(wolne: Wolne, U, i0: int, prev, P: int, mp: int, budzet: list)
         return None
     budzet[0] -= 1
     usable = [f for f in wolne.free if f[2] - f[0] >= w - 1e-6]
-    hs = sorted((f[3] - f[1] for f in usable), reverse=True)
-    if sum(hs[:P]) < U.wysokosc(i0, n) - 1e-6:           # ograniczenie: nawet P najwyższych pól nie wystarczy
+    hs = sorted((f[3] - f[1] for f in usable for _j in range(max(1, int((f[2] - f[0] + GAP_C) // (w + GAP_C))))),
+                reverse=True)                            # pole szerokie na kilka kolumn liczy się kilka razy
+    if sum(hs[:P]) < U.wysokosc(i0, n) - 1e-6:           # ograniczenie: nawet P najwyższych kolumn nie wystarczy
         return None
     cands = []
     for f in usable:

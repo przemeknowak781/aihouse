@@ -400,11 +400,18 @@ def _obwiednia(pl0, plyty, pod, fvec, kb_uls, kb_chr, e0, P, h, spod, beton, h_e
             p_el = np.maximum(p_el, r.p)
             odr = max(odr, 1.0 - float((pl.A_el * r.aktywne).sum() / pl.A_el.sum()))
             V_d = max(V_d, float(f_[0::3].sum()))
-            for nm, (kier, uq, grp) in zeb.items():       # pasmo żebra: M(u) = Σ m·szer. → V = |dM/du| (równowaga) [UPR]
+            for nm, (kier, uq, grp) in zeb.items():
+                # pasmo żebra: M(u) = Σ m·szer.; V = |ΔM/Δu| na bazie Δu = d żebra (siła poprzeczna średnia na odcinku d —
+                # miarodajna w odległości ≥ d od lica obciążenia skupionego, PN-EN 1992-1-1 6.2.1(8)) [UPR]
                 j = 0 if kier == "x" else 1
                 Mu = np.array([float((r.wynik.m[g_, j] * pl.el_ab[g_, 1 - j]).sum()) for g_ in grp])
                 if len(uq) > 1:
-                    V_z[nm] = max(V_z[nm], float(np.abs(np.diff(Mu) / np.diff(uq)).max()))
+                    dz = max(float(h_el[grp[0]].max()) - c_dol / 1000.0 - 0.02, 0.2)
+                    if uq[-1] - uq[0] > dz:
+                        ua = np.arange(uq[0], uq[-1] - dz + 1e-9, 0.05)
+                        V_z[nm] = max(V_z[nm], float(np.abs(np.interp(ua + dz, uq, Mu) - np.interp(ua, uq, Mu)).max() / dz))
+                    else:
+                        V_z[nm] = max(V_z[nm], float(np.abs(np.diff(Mu) / np.diff(uq)).max()))
                 M_z[nm] = [max(M_z[nm][0], float(Mu.max())), min(M_z[nm][1], float(Mu.min()))]
         for kb in kb_chr:
             f_ = sum(a * fvec[c] for c, a in kb.wsp.items() if c in fvec and a)

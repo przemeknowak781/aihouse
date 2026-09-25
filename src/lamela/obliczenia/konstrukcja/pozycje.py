@@ -946,7 +946,9 @@ class AnalizaKonstrukcji:
         if la.distance(Point(*b.p1)) > tol or la.distance(Point(*b.p2)) > tol:
             lb = LineString([tuple(b.p1), tuple(b.p2)])
             if lb.distance(Point(*a.p1)) > tol or lb.distance(Point(*a.p2)) > tol:
-                return 0.0
+                # częściowe nakładanie osi współliniowych (np. ściana wyżej wysunięta poza koniec ściany niższej)
+                if abs(a.u[0] * b.u[0] + a.u[1] * b.u[1]) < 0.999 or abs(a.st(b.p1)[1]) > tol or abs(a.st(b.p2)[1]) > tol:
+                    return 0.0
         s = sorted([a.st(b.p1)[0], a.st(b.p2)[0]])
         return max(0.0, min(s[1], a.L) - max(s[0], 0.0))
 
