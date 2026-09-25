@@ -109,7 +109,7 @@
       "podstawa": "RPB § 9 ust. 3",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "9 rysunków ze skalą ≥ 1:100"
+      "szczegoly": "9 rysunków w skali nie mniejszej niż 1:100"
     },
     {
       "id": "C2-AR-01",
@@ -201,7 +201,7 @@
       "arkusze": 9
     }
   },
-  "rozmiar_mb": 1.4899120330810547,
+  "rozmiar_mb": 1.4899396896362305,
   "strony": 15,
   "podsumowanie": {
     "status": "NIEKOMPLETNY",

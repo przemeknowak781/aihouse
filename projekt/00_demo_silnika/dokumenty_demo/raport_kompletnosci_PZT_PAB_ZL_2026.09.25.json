@@ -244,7 +244,7 @@
       "podstawa": "RPB § 9 ust. 5; W-306",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "3 rysunków ze skalą ≥ 1:500"
+      "szczegoly": "3 rysunki w skali nie mniejszej niż 1:500"
     },
     {
       "id": "C1-2-01",
@@ -460,7 +460,7 @@
       "podstawa": "RPB § 9 ust. 3; W-306",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "11 rysunków ze skalą ≥ 1:100"
+      "szczegoly": "11 rysunków w skali nie mniejszej niż 1:100"
     },
     {
       "id": "C1-3-01",
@@ -629,7 +629,7 @@
       "arkusze": 0
     }
   },
-  "rozmiar_mb": 3.4224472045898438,
+  "rozmiar_mb": 3.422488212585449,
   "strony": 41,
   "podsumowanie": {
     "status": "PRZYKŁAD – NIE DO ZŁOŻENIA",

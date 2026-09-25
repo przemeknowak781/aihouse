@@ -183,7 +183,7 @@ def zapisz_raporty(R: dict, out, *, tytul: str = "", model_opis: str = "") -> li
     zapisz("00_zestawienie.md", zestawienie_md(R, tytul, model_opis, [Path(p).name for p in pliki]) + stopka)
     # json
     js = wyniki_json(R)
-    (out / "wyniki.json").write_text(json.dumps(js, ensure_ascii=False, indent=1), encoding="utf-8")
+    (out / "wyniki.json").write_text(json.dumps(js, ensure_ascii=False, indent=1, default=_json_conv), encoding="utf-8")
     pliki.append(str(out / "wyniki.json"))
     return pliki
 
@@ -267,6 +267,18 @@ def zestawienie_md(R, tytul, model_opis, pliki) -> str:
     s.append("")
     s.append(f"Dane klimatyczne: {opis_zrodla()}.")
     return "\n".join(s)
+
+
+def _json_conv(o):
+    if isinstance(o, (np.bool_,)):
+        return bool(o)
+    if isinstance(o, np.integer):
+        return int(o)
+    if isinstance(o, np.floating):
+        return float(o)
+    if isinstance(o, np.ndarray):
+        return o.tolist()
+    return str(o)
 
 
 def wyniki_json(R) -> dict:

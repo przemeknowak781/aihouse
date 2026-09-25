@@ -383,39 +383,51 @@ def wymagane_sd_paroizolacji(warstwy: list[WarstwaG], Rsi: float, Rse: float, **
 # Wykres
 # --------------------------------------------------------------------------------------------------
 def wykres_glaser(r: WynikGlaser, plik, miesiac: int | None = None) -> str:
-    """Wykres Glasera (ciśnienie pary rzeczywiste i nasycenia w funkcji s_d) + profil temperatury — PNG."""
+    """Wykres Glasera (PNG): (1) temperatura w przekroju (oś — grubość fizyczna od wnętrza),
+    (2) ciśnienie pary p i p_sat na osi równoważnej dyfuzyjnie grubości s_d (każda warstwa ma szerokość ∝ s_d,
+    ale nie mniejszą niż 4 % całości — odcinki pozostają prostoliniowe, opis osi w [m] s_d narastająco)."""
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-    m = (miesiac - 1) if miesiac else (int(np.argmin(klimat_miesieczny().theta_e)))
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 4.2), dpi=150)
-    xs, xR = r.x_sd, r.x_R
-    # temperatura w funkcji oporu
-    ax1.plot(xR, r.theta[m], color="#c0392b", marker="o", ms=3)
-    for j in range(len(xR)):
-        ax1.axvline(xR[j], color="#dddddd", lw=0.6, zorder=0)
-    ax1.set_xlabel("opór cieplny od wnętrza R' [m²·K/W]")
-    ax1.set_ylabel("temperatura θ [°C]")
-    ax1.set_title(f"Temperatura — miesiąc {miesiace_pl()[m]}")
-    for i, w in enumerate(r.warstwy):
-        xm = 0.5 * (xR[i] + xR[i + 1])
-        if xR[i + 1] - xR[i] > 0.04 * xR[-1]:
-            ax1.text(xm, ax1.get_ylim()[0] if False else min(r.theta[m]), w.kod, rotation=90, fontsize=6,
-                     ha="center", va="bottom", color="#555555")
-    # ciśnienia w funkcji s_d
-    xplot = xs if xs[-1] > 0 else np.arange(len(xs), dtype=float)
-    ax2.plot(xplot, r.psat[m], color="#2471a3", label="p_sat (nasycenia)")
-    ax2.plot(xplot, r.p[m], color="#1e8449", ls="--", label="p (rzeczywiste)")
+    m = (miesiac - 1) if miesiac else int(np.argmin(klimat_miesieczny().theta_e))
+    n = len(r.warstwy)
+    d = np.array([w.d for w in r.warstwy])
+    xd = np.concatenate([[0.0], np.cumsum(d)]) * 100.0
+    sd = np.array([w.sd for w in r.warstwy])
+    sT = max(float(sd.sum()), 1e-6)
+    wid = np.maximum(sd, 0.04 * sT)
+    xs = np.concatenate([[0.0], np.cumsum(wid)])
+    kol = {"izolacja": "#fde0dd", "paroizolacja": "#c7e9c0", "szczelnosc": "#c7e9c0", "hydroizolacja": "#c6dbef",
+           "przeciwwilgociowa": "#c6dbef", "konstrukcja": "#e0e0e0", "tynk": "#f7f7f7"}
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 4.8), dpi=150)
+    for ax, xx in ((ax1, xd), (ax2, xs)):
+        for i, w in enumerate(r.warstwy):
+            ax.axvspan(xx[i], xx[i + 1], color=kol.get(w.funkcja, "#fafafa"), zorder=0, lw=0)
+            ax.axvline(xx[i], color="#bbbbbb", lw=0.5, zorder=1)
+        ax.axvline(xx[-1], color="#bbbbbb", lw=0.5, zorder=1)
+    ax1.plot(xd, r.theta[m], color="#c0392b", marker="o", ms=3, zorder=3)
+    ax1.set_xlabel("grubość od strony wewnętrznej [cm]")
+    ax1.set_ylabel("temperatura na granicach warstw θ [°C]")
+    ax1.set_title(f"Temperatura — miesiąc {miesiace_pl()[m]} (θ_e = {klimat_miesieczny().theta_e[m]:.1f} °C)".replace(".", ","),
+                  fontsize=9)
+    ax2.plot(xs, r.psat[m], color="#2471a3", marker=".", label="p_sat (nasycenia)", zorder=3)
+    ax2.plot(xs, r.p[m], color="#1e8449", ls="--", marker=".", label="p (rzeczywiste)", zorder=3)
     for j in r.plaszczyzny:
-        ax2.plot(xplot[j], r.psat[m][j], "rx", ms=8)
-    for j in range(len(xs)):
-        ax2.axvline(xplot[j], color="#dddddd", lw=0.6, zorder=0)
-    ax2.set_xscale("symlog", linthresh=0.05)
-    ax2.set_xlabel("równoważna dyfuzyjnie grubość s_d narastająco [m] (skala symlog)")
+        ax2.plot(xs[j], r.psat[m][j], "rx", ms=9, mew=2, zorder=4)
+    ax2.set_xticks(xs, [f"{v:.2f}".replace(".", ",") for v in np.concatenate([[0.0], np.cumsum(sd)])], rotation=90,
+                   fontsize=6)
+    ax2.set_xlabel("s_d narastająco [m] (szerokość warstwy ∝ s_d, min. 4 %)")
     ax2.set_ylabel("ciśnienie pary wodnej [Pa]")
-    ax2.set_title(f"Glaser — {r.kod}: {r.ocena[:60]}")
+    ax2.set_title(f"Ciśnienie pary — miesiąc {miesiace_pl()[m]}", fontsize=9)
     ax2.legend(fontsize=7, loc="upper right")
-    fig.suptitle(f"{r.kod} — {r.nazwa} (PN-EN ISO 13788:2013, TMY Poznań)", fontsize=9)
+    ymax = max(float(np.max(r.psat[m])), float(np.max(r.p[m])))
+    for ax, xx in ((ax1, xd), (ax2, xs)):
+        lo, hi = ax.get_ylim()
+        for i, w in enumerate(r.warstwy):
+            if (xx[i + 1] - xx[i]) > 0.035 * (xx[-1] - xx[0]):
+                ax.text(0.5 * (xx[i] + xx[i + 1]), lo + 0.03 * (hi - lo), w.kod, rotation=90, fontsize=6,
+                        ha="center", va="bottom", color="#444444", zorder=5)
+    fig.suptitle(f"{r.kod} — {r.nazwa[:80]} (PN-EN ISO 13788:2013, TMY Poznań)\n{r.ocena}", fontsize=8)
     fig.tight_layout()
     fig.savefig(plik)
     plt.close(fig)

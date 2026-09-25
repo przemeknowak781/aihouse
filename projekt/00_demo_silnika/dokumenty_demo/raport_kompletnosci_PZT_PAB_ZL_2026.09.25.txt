@@ -35,7 +35,7 @@ Plik: 41 stron, 3.42 MB
 … C1-1-18 [PZT] DO UZUPEŁNIENIA  Rysunek: plan zagospodarowania na mapie do celów projektowych (≥ 1:500) (RPB § 15 ust. 1–2, § 9 ust. 5; PZT-01) — PZT-01 — Plan zagospodarowania działki na mapie do celów projektowych (1:500); tylko arkusz zastępczy — rysunek niedołączony
 … C1-1-19 [PZT] DO UZUPEŁNIENIA  Rysunek: plan szczegółowy — wymiary, odległości (0,01 m), rzędne (1:200) (RPB § 15 ust. 2 pkt 3, ust. 3; § 17 ust. 1; PZT-02) — PZT-02 — Plan szczegółowy — wymiary, odległości, rzędne (1:200); tylko arkusz zastępczy — rysunek niedołączony
 … C1-1-20 [PZT] DO UZUPEŁNIENIA  Rysunek: koordynacyjny uzbrojenia terenu (RPB § 17 ust. 2; PZT-03) — PZT-03 — Rysunek koordynacyjny uzbrojenia terenu (1:200); tylko arkusz zastępczy — rysunek niedołączony
-✓ C1-1-21 [PZT] OK               Skale rysunków PZT nie mniejsze niż 1:500 (RPB § 9 ust. 5; W-306) — 3 rysunków ze skalą ≥ 1:500
+✓ C1-1-21 [PZT] OK               Skale rysunków PZT nie mniejsze niż 1:500 (RPB § 9 ust. 5; W-306) — 3 rysunki w skali nie mniejszej niż 1:500
 ✓ C1-2-01 [PAB] OK               Strona tytułowa: nazwa elementu (RPB § 7 ust. 2 pkt 1)
 … C1-2-02 [PAB] DO UZUPEŁNIENIA  Strona tytułowa: zamierzenie, adres, kategoria I, inwestor (RPB § 7 ust. 2 pkt 2) — pola [DO UZUPEŁNIENIA] na stronie tytułowej
 … C1-2-03 [PAB] DO UZUPEŁNIENIA  Strona tytułowa: data, autorzy ze specjalnością, nr uprawnień i zakresem (RPB § 7 ust. 2 pkt 3) — pola [DO UZUPEŁNIENIA] na stronie tytułowej
@@ -59,7 +59,7 @@ Plik: 41 stron, 3.42 MB
 ✓ C1-2-21 [PAB] OK               Rysunek: rzut (widok) dachu (RPB § 21 pkt 1 lit. a, c) — T-AR-03 — RZUT DACHU (1:50)
 ✓ C1-2-22 [PAB] OK               Rysunki: co najmniej 2 przekroje z terenem i podłożem (RPB § 21 pkt 1 lit. b; W-315) — rysunków: 3 (wymagane ≥ 2)
 ✓ C1-2-23 [PAB] OK               Rysunki: elewacje ze wszystkich stron z wyrobami i kolorystyką (RPB § 21 pkt 1 lit. c) — rysunków: 4 (wymagane ≥ 2)
-✓ C1-2-24 [PAB] OK               Skale rysunków PAB nie mniejsze niż 1:100 (RPB § 9 ust. 3; W-306) — 11 rysunków ze skalą ≥ 1:100
+✓ C1-2-24 [PAB] OK               Skale rysunków PAB nie mniejsze niż 1:100 (RPB § 9 ust. 3; W-306) — 11 rysunków w skali nie mniejszej niż 1:100
 ✓ C1-3-01 [ ZL] OK               Strona tytułowa elementu „Załączniki” (RPB § 7 ust. 1a pkt 1)
 ✓ C1-3-02 [ ZL] OK               Spis załączników (RPB § 7 ust. 1a pkt 2)
 ✓ C1-3-03 [ ZL] OK               Informacja BIOZ — strona tytułowa (obiekt, adres, inwestor, projektant z adresem) (rozp. BIOZ § 2 ust. 2; RPB § 5 ust. 1 pkt 4 lit. c)

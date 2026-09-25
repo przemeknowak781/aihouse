@@ -33,8 +33,8 @@ SEC = {
         ("mur", 0.90, 1.35, ST2[1], ST3[0], "ściana lekka 1'"),
         ("mur", 5.20, 5.60, ST2[1], ST3[0], "oś 3"), ("mur", 8.60, 9.20, ST2[1], 7.80, ""), ("gl", 8.85, 8.95, 7.80, 8.60, ""),
         ("mur", 8.60, 9.20, 8.60, ST3[0], ""),
-    ], pom=[(2.2, 1.3, "JADALNIA (pustka)\nh = 5,70 / 5,95"), (7.2, 1.3, "HOL\nh = 2,80"), (10.1, 1.1, "WIATROŁAP\nświetlik SW2"),
-            (6.8, 4.4, "GALERIA / ŁAZ."), (2.5, 4.4, "pustka"), (0.5, 7.3, "loggia"), (3.4, 7.3, "SYPIALNIA"), (7.0, 7.3, "ŁAZIENKA")]),
+    ], pom=[(2.2, 1.3, "JADALNIA (pustka)\nh = 5,70 / 5,95"), (7.4, 2.3, "HOL\nh = 2,80"), (10.1, 1.1, "WIATROŁAP\nświetlik SW2"),
+            (6.9, 5.5, "GALERIA"), (2.5, 4.4, "pustka"), (0.5, 7.3, "loggia"), (3.4, 7.3, "SYPIALNIA"), (7.0, 7.3, "ŁAZIENKA")]),
     "B": dict(x=5.80, tytul="PRZEKRÓJ B-B (x = 5,80 — klatka schodowa pod latarnią SW1)", el=COMMON + [
         ("zb", -1.20, 5.70, ST3[0], ST3[1], "ST3"), ("zb", 8.60, 9.20, ST3[0], ST3[1], ""), ("gl", -0.08, 0.08, 0.0, 2.75, "kw. 3"), ("zb", -1.30, 0.30, ST1[0] - 0.25, ST1[1], "okap E + PD-1"),
         ("zb", -1.30, -0.30, 3.45, 3.65, ""), ("zb", -1.30, -0.30, 5.15, 5.35, ""), ("gl", -0.08, 0.08, 3.65, 5.15, "boks C"),
