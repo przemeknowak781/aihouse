@@ -66,10 +66,15 @@ class PodporaT:
     tylko_docisk: bool = False
     opis: str = ""
     sciana: str = ""            # id ściany/elementu poniżej (bilans ścieżki obciążeń)
+    z1: float | None = None     # podpora pionowa (utwierdzenie w ścianie poprzecznej): x = s0, z…z1 (u_z; u_x gdy kx)
 
     @property
     def dl(self) -> float:
         return max(self.s1 - self.s0, 0.0)
+
+    @property
+    def pionowa(self) -> bool:
+        return self.z1 is not None
 
 
 @dataclass
@@ -282,6 +287,8 @@ class TarczaMES:
         for s in self.podpory:
             xs.update([round(s.s0, 6), round(s.s1, 6)])
             zs.add(round(s.z, 6))
+            if s.z1 is not None:
+                zs.add(round(s.z1, 6))
         for o in self.obciazenia:
             if isinstance(o, ObcLiniowe):
                 xs.update([round(o.s0, 6), round(o.s1, 6)])
@@ -389,6 +396,19 @@ class TarczaMES:
         self.pod_k: dict[str, np.ndarray] = {}        # sztywność sprężyn węzłowych (None → sztywna)
         self.pod_trib: dict[str, np.ndarray] = {}
         for s in self.podpory:
+            if s.z1 is not None:
+                tol = 1e-6
+                nd = np.nonzero((np.abs(self.nodes[:, 0] - s.s0) < tol) & (self.nodes[:, 1] >= min(s.z, s.z1) - tol)
+                                & (self.nodes[:, 1] <= max(s.z, s.z1) + tol))[0]
+                if len(nd) < 2:
+                    raise BladDanych(f"MES tarczy: podpora pionowa {s.id} nie leży na krawędzi tarczy")
+                nd = nd[np.argsort(self.nodes[nd, 1])]
+                zz = self.nodes[nd, 1]
+                bnd = np.concatenate([[zz[0]], 0.5 * (zz[:-1] + zz[1:]), [zz[-1]]])
+                self.pod_wezly[s.id] = nd
+                self.pod_trib[s.id] = np.diff(bnd)
+                self.pod_k[s.id] = None if s.k is None else s.k * np.diff(bnd)
+                continue
             if s.s1 - s.s0 < 1e-9:
                 d = np.hypot(self.nodes[:, 0] - s.s0, self.nodes[:, 1] - s.z)
                 k = int(np.argmin(d))

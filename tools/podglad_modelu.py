@@ -152,3 +152,169 @@ def rzut(m, ir, kid, out: Path):
     fig.tight_layout()
     fig.savefig(out, dpi=150)
     plt.close(fig)
+
+
+# ------------------------------------------------------------------------------------------------ elewacje (rzut prostokątny, malarz)
+KIER = {  # strona: (u(x, y), głębokość(x, y) — mniejsza = bliżej widza), opis
+    "S": (lambda x, y: x, lambda x, y: y, "południowa (ogrodowa) — widok na północ"),
+    "N": (lambda x, y: -x, lambda x, y: -y, "północna (od ulicy) — widok na południe"),
+    "E": (lambda x, y: y, lambda x, y: -x, "wschodnia — widok na zachód"),
+    "W": (lambda x, y: -y, lambda x, y: x, "zachodnia — widok na wschód"),
+}
+POMIN = ("terrain", "vegetation", "context", "vehicle", "road", "fence", "furniture")
+
+
+def _proj(p, fu, fd):
+    xs, ys = zip(*p.polygon)
+    us = [fu(x, y) for x, y in zip(xs, ys)]
+    ds = [fd(x, y) for x, y in zip(xs, ys)]
+    return min(us), max(us), min(ds), max(ds)
+
+
+def elewacja(ax, m, ir, strona, tytul=True):
+    fu, fd, opis = KIER[strona]
+    items = []
+    for p in ir.prisms:
+        if p.kind in POMIN or p.meta.get("group") in ("otoczenie", "fundamenty") or p.z1 < -0.6:
+            continue
+        u0, u1, d0, d1 = _proj(p, fu, fd)
+        items.append((d0, u0, u1, p))
+    items.sort(key=lambda t: -t[0])
+    for d0, u0, u1, p in items:
+        if u1 - u0 < 1e-3 or p.z1 - p.z0 < 1e-3:
+            continue
+        glass = p.kind == "glass"
+        fc = "#9fc9df" if glass else kolor(m, p.material)
+        ax.add_patch(plt.Rectangle((u0, max(p.z0, -0.6)), u1 - u0, p.z1 - max(p.z0, -0.6), fc=fc, ec="#333" if not glass else "#2b6f99",
+                                   lw=0.15 if p.kind in ("lamella", "insulation") else 0.3, alpha=0.9 if glass else 1.0, zorder=2))
+    # teren wzdłuż lica
+    if ir.terrain is not None:
+        bx0, by0, bx1, by1 = m.bbox()
+        if strona in ("S", "N"):
+            yy = (by0 - 1.5) if strona == "S" else (by1 + 1.5)
+            xs = np.linspace(bx0 - 3, bx1 + 3, 80)
+            pts = [(fu(x, yy), ir.terrain.height_at(x, yy)) for x in xs]
+        else:
+            xx = (bx1 + 1.5) if strona == "E" else (bx0 - 1.5)
+            ys = np.linspace(by0 - 3, by1 + 3, 80)
+            pts = [(fu(xx, y), ir.terrain.height_at(xx, y)) for y in ys]
+        pts.sort()
+        u, z = zip(*pts)
+        ax.fill_between(u, [-1.2] * len(u), z, color="#d8ccb4", zorder=3)
+        ax.plot(u, z, color="#6b5a3c", lw=1.0, zorder=3)
+    ax.set_aspect("equal")
+    ax.axhline(0, color="#999", lw=0.3, ls=":")
+    if tytul:
+        ax.set_title(f"Elewacja {opis}", fontsize=8, loc="left")
+    ax.tick_params(labelsize=6)
+
+
+def elewacje(m, ir, out: Path):
+    fig, axs = plt.subplots(2, 2, figsize=(18, 10))
+    for ax, s in zip(axs.flat, ("S", "N", "E", "W")):
+        elewacja(ax, m, ir, s)
+        for zz in (0.0, 3.15, 6.30, 9.30):
+            ax.axhline(zz, color="#c0392b", lw=0.25, ls=(0, (6, 4)), zorder=1)
+    fig.suptitle("Dom LAMELA — elewacje z modelu (rzut prostokątny pryzm IR; kolorystyka wg materiałów modelu)", fontsize=10, x=0.01, ha="left")
+    fig.tight_layout()
+    fig.savefig(out, dpi=140)
+    plt.close(fig)
+
+
+# ------------------------------------------------------------------------------------------------ elewacja S vs szkic (wierność)
+SZKIC_CROP = (563, 865, 2333, 1555)      # wycinek 1770 × 690 px oryginału (brief §1.1)
+SZKIC_SX = 45.8                           # px/m (bryła B 500…1050 px = 12,0 m)
+SZKIC_X_B = 500                           # px lica zach. bryły B
+SZKIC = {  # element: (x0, x1) od lica zach. bryły B [m] — odczyt briefu §1.1 (px/45,8)
+    "A — bryła II p. (lamele)": ((455 - 500) / SZKIC_SX, (1060 - 500) / SZKIC_SX),
+    "A — płyty (dół/góra)": ((390 - 500) / SZKIC_SX, (1075 - 500) / SZKIC_SX),
+    "B — bryła I p.": (0.0, (1050 - 500) / SZKIC_SX),
+    "C — boks (przeszklenie)": ((705 - 500) / SZKIC_SX, (1035 - 500) / SZKIC_SX),
+    "C — rama górna": ((680 - 500) / SZKIC_SX, (1130 - 500) / SZKIC_SX),
+    "D — linia pozioma": ((675 - 500) / SZKIC_SX, (1370 - 500) / SZKIC_SX),
+    "D — pion (narożnik G)": ((1378 - 500) / SZKIC_SX, (1378 - 500) / SZKIC_SX),
+    "E — przeszklenie parteru": ((545 - 500) / SZKIC_SX, (1105 - 500) / SZKIC_SX),
+    "E — płyta dachu parteru": ((430 - 500) / SZKIC_SX, (1145 - 500) / SZKIC_SX),
+}
+
+
+def krawedzie_modelu(m):
+    """Zakresy x kluczowych krawędzi elewacji S z modelu (układ budynku)."""
+    ob1 = m.obrys_kondygnacji("P1")
+    ob2 = m.obrys_kondygnacji("P2")
+    ws = {w["id"]: Polygon(w["obrys"]) for w in m.wsporniki()}
+    dg = {d["id"]: Polygon(d["obrys"]) for d in m.dachy()}
+    ot = {o.id: o for o in m.otwory()}
+
+    def xr(g):
+        b = g.bounds
+        return b[0], b[2]
+
+    def otw(ids):
+        xs = [float(p[0]) for i in ids for p in (ot[i].p0, ot[i].p1)]
+        return min(xs), max(xs)
+    e_ids = [o.id for o in m.otwory() if o.sciana.id in ("S0-01", "S0-02") and o.typ != "otwor"]
+    p0 = m.obrys_kondygnacji("P0")
+    return {
+        "A — bryła II p. (lamele)": xr(ob2),
+        "A — płyty (dół/góra)": xr(unary_union([ws.get("PL-2", Polygon()), ws.get("PL-3", Polygon())])),
+        "B — bryła I p.": xr(ob1),
+        "C — boks (przeszklenie)": otw(["O1-01"]),
+        "C — rama górna": xr(ws["PL-C2"]),
+        "D — linia pozioma": (xr(ws["PL-C1"])[0], xr(dg["D4"])[1]),
+        "D — pion (narożnik G)": (xr(p0)[1], xr(p0)[1]),
+        "E — przeszklenie parteru": otw(e_ids),
+        "E — płyta dachu parteru": xr(ws["PL-E"]),
+    }
+
+
+def wiernosc(m):
+    x_B = m.obrys_kondygnacji("P1").bounds[0]
+    km = krawedzie_modelu(m)
+    rows = []
+    for k, (s0, s1) in SZKIC.items():
+        a, b = km[k]
+        a, b = a - x_B, b - x_B
+        rows.append({"element": k, "szkic": [round(s0, 2), round(s1, 2)], "model": [round(a, 3), round(b, 3)],
+                     "odchylka": round(max(abs(a - s0), abs(b - s1)), 2)})
+    return rows, x_B
+
+
+def elewacja_szkic(m, ir, out: Path):
+    from PIL import Image
+    rows, x_B = wiernosc(m)
+    img = Image.open(ROOT / "00_wejscie" / "szkic_koncepcyjny.jpg").crop(SZKIC_CROP).convert("L")
+    H = max(sl["top_attyki"] or sl["top"] for sl in m.plyty() if sl["typ"] == "dach")
+    fig, (a1, a2) = plt.subplots(2, 1, figsize=(15, 11.5), gridspec_kw={"height_ratios": [1, 1.05]})
+    W_, H_ = img.size
+    x_left = x_B - SZKIC_X_B / SZKIC_SX
+    x_right = x_left + W_ / SZKIC_SX
+    zt, zb = H, -0.30               # pionowo umownie: px 80 → wierzch attyki, px 640 → teren
+
+    def zpx(z):
+        return 640 - (z - zb) / (zt - zb) * (640 - 80)
+    a1.imshow(img, cmap="gray", extent=(x_left, x_right, H_, 0), aspect="auto")
+    km = krawedzie_modelu(m)
+    pas = {"A — bryła II p. (lamele)": (6.30, 9.30), "A — płyty (dół/góra)": (5.95, 9.40), "B — bryła I p.": (3.15, 6.25),
+           "C — boks (przeszklenie)": (3.85, 5.35), "C — rama górna": (5.35, 5.55), "D — linia pozioma": (3.65, 3.85),
+           "E — przeszklenie parteru": (0.0, 2.75), "E — płyta dachu parteru": (2.75, 3.05)}
+    for k, (za, zb_) in pas.items():
+        x0, x1 = km[k]
+        a1.add_patch(plt.Rectangle((x0, zpx(zb_)), x1 - x0, zpx(za) - zpx(zb_), fill=False, ec="#d62728", lw=1.2))
+    xg = km["D — pion (narożnik G)"][0]
+    a1.plot([xg, xg], [zpx(0), zpx(3.85)], color="#d62728", lw=1.6)
+    a1.set_xlim(x_left, x_right)
+    a1.set_ylim(H_, 0)
+    a1.set_yticks([])
+    a1.set_xlabel("x [m] (układ budynku; lico zach. bryły B = %.2f)" % x_B, fontsize=7)
+    a1.set_title("Szkic Inwestora (wycinek, skala pozioma 45,8 px/m wg briefu §1.1; pionowa umowna) + obrys modelu (czerwony)", fontsize=9, loc="left")
+    elewacja(a2, m, ir, "S", tytul=False)
+    a2.set_xlim(x_left, x_right)
+    txt = "; ".join(f"{r['element'].split(' — ')[0]}·{r['element'].split(' — ')[1][:12]}: Δ {fmt(r['odchylka'])} m" for r in rows)
+    a2.set_title("Elewacja południowa z modelu — rytm przesunięć zachód–wschód–zachód („S”); maks. odchyłka krawędzi od szkicu "
+                 f"{fmt(max(r['odchylka'] for r in rows))} m", fontsize=9, loc="left")
+    a2.text(x_left + 0.2, -1.1, txt, fontsize=5.5, va="top", wrap=True)
+    fig.tight_layout()
+    fig.savefig(out, dpi=140)
+    plt.close(fig)
+    return rows
