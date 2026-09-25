@@ -828,3 +828,146 @@ def wymiaruj_plyte(M_Ed: float, h: float, d: float, beton: Beton, stal: StalZbro
     if ry is not None:
         zg.dolacz(ry)
     return zg, fi, float(s_), As
+
+
+# ==================================================================================================
+# Słup żelbetowy (trzpień w murze) — ściskanie mimośrodowe z efektami II rzędu (5.8.8, metoda nominalnej krzywizny)
+# ==================================================================================================
+@dataclass
+class Slup(Wynik):
+    N_Ed: float = 0.0
+    zbrojenie: str = ""
+    strzemiona: str = ""
+    n_pr: int = 0
+    fi: int = 0
+    prety: list = None
+
+
+def _mrd_przekroju(N: float, b: float, h: float, As1: float, As2: float, d: float, d2: float, beton: Beton,
+                   stal: StalZbrojeniowa) -> float:
+    """M_Rd [kNm] przekroju prostokątnego b × h [m] z A_s1 (rozciągane, d) i A_s2 (ściskane, d₂) [mm²] przy sile
+    osiowej N [kN] (ściskanie +): prostokątny wykres naprężeń (λ, η — 3.1.7(3)), zgodność odkształceń (ε_cu3),
+    σ_s = E_s·ε_s ≤ f_yd; x z równowagi (bisekcja). N ≥ nośności przy x = h — interpolacja liniowa do N_Rd,max [UPR]."""
+    fcd, fyd, Es, ecu = beton.f_cd * 1000, stal.f_yd * 1000, stal.E_s * 1000, beton.eps_cu3       # kPa
+    A1, A2 = As1 * 1e-6, As2 * 1e-6
+
+    def sily(x):
+        e1 = ecu * (d - x) / x
+        e2 = ecu * (x - d2) / x
+        s1 = max(min(Es * e1, fyd), -fyd)                 # rozciąganie +
+        s2 = max(min(Es * e2, fyd), -fyd)                 # ściskanie +
+        Cc = beton.eta * fcd * b * min(beton.lam * x, h)
+        Nx = Cc + A2 * s2 - A1 * s1
+        Mx = Cc * (h / 2 - min(beton.lam * x, h) / 2) + A2 * s2 * (h / 2 - d2) + A1 * s1 * (d - h / 2)
+        return Nx, Mx
+    Nh, Mh = sily(h)
+    Nmax = beton.eta * fcd * b * h + (A1 + A2) * min(fyd, Es * 0.002)
+    if N >= Nmax:
+        return 0.0
+    if N >= Nh:
+        return max(Mh * (Nmax - N) / (Nmax - Nh), 0.0)
+    lo, hi = 1e-4, h
+    for _ in range(80):
+        x = 0.5 * (lo + hi)
+        if sily(x)[0] < N:
+            lo = x
+        else:
+            hi = x
+    return max(sily(0.5 * (lo + hi))[1], 0.0)
+
+
+def slup_zelbetowy(N_Ed: float, b: float, h: float, L: float, beton: Beton, stal: StalZbrojeniowa | None = None,
+                   c_nom: float = 30.0, fi_s: int = 8, phi_inf: float = 2.5, M_0Ed: float = 0.0, beta: float = 1.0,
+                   nazwa: str = "Słup żelbetowy") -> Slup:
+    """Słup/filarek żelbetowy b × h [m] (h ≤ b — kierunek miarodajny: wyboczenie z płaszczyzny muru), długość L [m],
+    l₀ = β·L (układ usztywniony, końce przegubowe β = 1,0 [ZAŁ]). Imperfekcja e_i = l₀/400 (5.2(7)), mimośród
+    minimalny e₀ = max(h/30; 20 mm) (6.1(4)), smukłość graniczna λ_lim = 20·A·B·C/√n (5.8.3.1, A = 0,7, B = 1,1,
+    C = 0,7 — wartości zalecane [NZW NA]), efekty II rzędu — metoda nominalnej krzywizny (5.8.8: 1/r₀ = ε_yd/(0,45d),
+    K_r (5.36), K_φ (5.37), e₂ = (1/r)·l₀²/10). Zbrojenie podłużne dobierane (φ12…20, pręty przy dłuższych bokach
+    w rozstawie ≤ 300 mm) do M_Ed ≤ M_Rd(N_Ed); A_s,min = max(0,10·N_Ed/f_yd; 0,002·A_c), A_s,max = 0,04·A_c
+    (9.5.2); strzemiona φ ≥ max(6; φ/4), s ≤ min(20φ; b_min; 400 mm), 0,6·s przy belkach/płytach (9.5.3)."""
+    stal = stal or StalZbrojeniowa()
+    h, b = min(b, h), max(b, h)
+    w = Slup(nazwa=nazwa, N_Ed=N_Ed)
+    Ac = b * h
+    l0 = beta * L
+    w.krok("Długość obliczeniowa (układ usztywniony, końce przegubowe)", "l₀ = β·L", f"{f(beta, 1)}·{f(L, 2)}", l0, "m", nd=2,
+           zrodlo="5.8.3.2 [ZAŁ]")
+    i_r = h / math.sqrt(12)
+    lam = l0 / i_r
+    w.krok("Smukłość (kierunek słabszy, h = grubość muru)", "λ = l₀/i, i = h/√12", f"{f(l0, 2)}/({f(h, 3)}/√12)", lam, nd=1,
+           zrodlo="(5.14)")
+    n = N_Ed / (Ac * beton.f_cd * 1000)
+    w.krok("Siła względna", "n = N_Ed/(A_c·f_cd)", f"{f(N_Ed, 1)}/({f(Ac, 4)}·{f(beton.f_cd, 2)}·10³)", n, nd=3)
+    lam_lim = 20 * 0.7 * 1.1 * 0.7 / math.sqrt(max(n, 1e-6))
+    w.krok("Smukłość graniczna", "λ_lim = 20·A·B·C/√n (A = 0,7; B = 1,1; C = 0,7)", f"10,78/√{f(n, 3)}", lam_lim, nd=1,
+           zrodlo="(5.13N) [NZW NA]")
+    e_i = l0 / 400
+    e_0 = max(h / 30, 0.020)
+    e_1 = max(e_i + (M_0Ed / N_Ed if N_Ed > 0 else 0.0), e_0)
+    w.krok("Mimośród I rzędu (imperfekcja l₀/400, min. e₀ = max(h/30; 20 mm))", "e₁ = max(e_i + M₀/N; e₀)",
+           f"max({f(e_i * 1000, 1)} + {f(M_0Ed / N_Ed * 1000 if N_Ed > 0 else 0, 1)}; {f(e_0 * 1000, 1)})", e_1 * 1000, "mm",
+           nd=1, zrodlo="5.2(7), 6.1(4)")
+    fyd = stal.f_yd
+    kand = []
+    for fi in (12, 16, 20):
+        d = h - c_nom / 1000 - fi_s / 1000 - fi / 2000
+        d2 = h - d
+        n_bok_max = max(2, int(math.floor((b - 2 * (c_nom / 1000 + fi_s / 1000) - fi / 1000) / 0.05)) + 1)
+        for k in range(max(2, int(math.ceil((b - 2 * (c_nom / 1000 + fi_s / 1000)) / 0.30)) + 1), n_bok_max + 1):
+            kand.append((fi, k, d, d2))
+    def ocena(fi, k, d, d2):
+        As_s = k * pole_preta(fi)
+        e2 = 0.0
+        if lam > lam_lim:
+            om = 2 * As_s * fyd / (Ac * 1e6 * beton.f_cd)
+            Kr = min(max((1 + om - n) / (1 + om - 0.4), 0.0), 1.0)
+            bet = 0.35 + beton.f_ck / 200 - lam / 150
+            Kphi = max(1 + bet * phi_inf * 0.7, 1.0)
+            r_inv = Kr * Kphi * (fyd / stal.E_s) / (0.45 * d)
+            e2 = r_inv * l0 ** 2 / 10
+        return (fi, k, d, d2, As_s, e2, N_Ed * (e_1 + e2), _mrd_przekroju(N_Ed, b, h, As_s, As_s, d, d2, beton, stal))
+    wybor = None
+    for fi, k, d, d2 in sorted(kand, key=lambda t: 2 * t[1] * pole_preta(t[0])):
+        As = 2 * k * pole_preta(fi)
+        if As < max(0.10 * N_Ed * 1000 / fyd, 0.002 * Ac * 1e6) or As > 0.04 * Ac * 1e6:
+            continue
+        o_ = ocena(fi, k, d, d2)
+        if o_[7] >= o_[6]:
+            wybor = o_
+            break
+    if wybor is None:
+        wybor = max((ocena(*t) for t in kand if 2 * t[1] * pole_preta(t[0]) <= 0.04 * Ac * 1e6), key=lambda o_: o_[7] - o_[6])
+        w.uwaga("Brak zbrojenia spełniającego warunek nośności (φ ≤ 20, ρ ≤ 4 %) — zwiększyć przekrój lub klasę betonu.")
+    fi, k, d, d2, As_s, e2, MEd, MRd = wybor
+    if lam > lam_lim:
+        w.krok("Mimośród II rzędu (metoda nominalnej krzywizny, K_φ z φ_ef ≈ 0,7·φ(∞,t₀) [ZAŁ])", "e₂ = (1/r)·l₀²/10,"
+               " 1/r = K_r·K_φ·ε_yd/(0,45·d)", "", e2 * 1000, "mm", nd=1, zrodlo="5.8.8.2–5.8.8.3")
+    else:
+        w.krok("Efekty II rzędu", "λ ≤ λ_lim", f"{f(lam, 1)} ≤ {f(lam_lim, 1)}", "pominięte", zrodlo="5.8.3.1(1)")
+    w.krok("Moment obliczeniowy", "M_Ed = N_Ed·(e₁ + e₂)", f"{f(N_Ed, 1)}·({f(e_1 * 1000, 1)} + {f(e2 * 1000, 1)})·10⁻³", MEd,
+           "kNm", nd=2, zrodlo="(5.31)")
+    w.krok("Zbrojenie podłużne (symetryczne, przy dłuższych bokach)", "2 × k·φ", f"2 × {k}φ{fi}", 2 * As_s, "mm²", nd=0)
+    w.krok("Nośność przekroju przy N_Ed", "M_Rd(N_Ed) — zgodność odkształceń, prostokątny wykres σ", "", MRd, "kNm", nd=2,
+           zrodlo="6.1, 3.1.7(3)")
+    w.warunek("Nośność słupa — ściskanie mimośrodowe z efektami II rzędu", MEd, MRd, "kNm", "PN-EN 1992-1-1 5.8.8, 6.1",
+              nd=2, symbol_E="M_Ed", symbol_R="M_Rd(N_Ed)")
+    Nmax = beton.eta * beton.f_cd * 1000 * Ac + 2 * As_s * 1e-6 * min(fyd * 1000, stal.E_s * 1000 * 0.002)
+    w.warunek("Nośność na ściskanie osiowe", N_Ed, Nmax, "kN", "(6.1), 3.1.7(3)", nd=1, symbol_E="N_Ed", symbol_R="N_Rd,max")
+    Asmin = max(0.10 * N_Ed * 1000 / fyd, 0.002 * Ac * 1e6)
+    w.warunek("Zbrojenie minimalne (9.5.2(2))", Asmin, 2 * As_s, "mm²", "(9.12N)", nd=0, symbol_E="A_s,min", symbol_R="A_s,prov")
+    fs = max(6, int(math.ceil(fi / 4)))
+    fs = 6 if fs <= 6 else 8
+    s_t = min(20 * fi, h * 1000, 400)
+    s_t = int(s_t // 10 * 10)
+    s_r = int(0.6 * s_t // 10 * 10)
+    w.krok("Strzemiona", "φ_t ≥ max(6; φ/4); s ≤ min(20φ; b_min; 400); 0,6·s przy belce/płycie", "",
+           f"φ{fs} co {s_t} mm (przy końcach co {s_r} mm)", zrodlo="9.5.3")
+    w.zbrojenie = f"{2 * k}φ{fi}"
+    w.strzemiona = f"φ{fs} co {f(s_t / 10, 0)} cm (przy głowicy i podstawie co {f(s_r / 10, 0)} cm)"
+    w.n_pr, w.fi = 2 * k, fi
+    ns = int(L / (s_t / 1000)) + 1 + 6
+    w.prety = [Pret(nazwa, 1, fi, round(L + 0.6, 2), 2 * k, "00", "(+ zakład/zakotwienie w wieńcu i fundamencie)"),
+               Pret(nazwa, 2, fs, round(2 * (b - 2 * c_nom / 1000) + 2 * (h - 2 * c_nom / 1000) + 0.2, 2), ns, "51",
+                    f"{f((b - 2 * c_nom / 1000) * 100, 0)}×{f((h - 2 * c_nom / 1000) * 100, 0)} cm")]
+    return w

@@ -968,7 +968,7 @@ for _wz, _xy, _odc in _SLZ:
         _prz = _SLZ_PRZ.get(_wz, "180x400")
         _dims = sorted(int(v_) / 10 for v_ in _prz.split("x"))
         SLUPY.append({"id": _id, "xy": [r(_xy[0]), r(_xy[1])], "przekroj": _prz, "mat": "ZB_C30", "z_od": r(_z0), "z_do": r(_z1),
-                      "uwagi": f"słup żelbetowy w murze (trzpień {_dims[0]:g} × {_dims[1]:g} cm) w węźle {_wz} — {_opis}"})
+                      "uwagi": f"słup żelbetowy w murze (trzpień {_dims[0]:g} × {_dims[1]:g} cm)".replace(".", ",") + f" w węźle {_wz} — {_opis}"})
         SLZ_WEZLY.setdefault(_wz, []).append(_id)
 
 BELKI = [
