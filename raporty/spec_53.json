@@ -1,4 +1,5 @@
 {
+ "nr": 53,
  "title": "Konstrukcja, runda 1 ►: model i pozycje żelbetowe · silnik arkuszy: poprawki ► · statystyki sesji: weryfikacja ►",
  "stages": [
   [
@@ -52,6 +53,17 @@
  ],
  "notes": [
   "Pętla konstrukcyjna: zmiany w modelu i pozycjach ŻB, potem ponowna analiza.",
-  "Statystyki sesji: dane zebrane, trwa niezależna weryfikacja."
+  "Statystyki sesji: dane zebrane, trwa niezależna weryfikacja.",
+  "NADZÓR (10:59): 2 agentów aktywnych, bez zastojów; najdłuższa bezczynność 1 min; zmiany w repo 0 min temu."
+ ],
+ "images": [
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/PT-AR-05_elewacje.png",
+   "caption": "PT-AR-05 elewacje (stadium PT)"
+  },
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/PT-AR-03_rzut_ii_pietra_i_rzut_dachu.png",
+   "caption": "PT-AR-03 rzut II piętra i rzut dachu (stadium PT)"
+  }
  ]
 }

@@ -884,8 +884,9 @@ def _porzadek_czytania(R: Rozmieszczenie, baza: Wolne, kolejne: list, n_b: int, 
     lewej i w kolumnie od góry — ponowne ułożenie w tych samych kolumnach (sloty: wolne odcinki kolumn od lewej,
     w kolumnie od góry): kolejne bloki listy i pozycje uwag dzielone na sloty w kolejności tak, aby najbardziej
     wypełniony slot był jak najmniej wypełniony (kolumny wyrównane, bez pustej kolumny obok przepełnionej); część
-    uwag „(cd.)” obciążona karą. Przyjmowane, gdy wszystko się mieści, a części uwag przybywa najwyżej jedna
-    (koszt formatu uwzględnia ją karą ``kara_czesci_uwag``). Zwraca nowy stan wolnych pól albo None (bez zmian)."""
+    uwag „(cd.)” obciążona karą. Przyjmowane, gdy wszystko się mieści, a części uwag nie przybywa (jedna część
+    uwag więcej waży więcej niż bloki poza kolejnością: ``kara_czesci_uwag`` > ``kara_kolejnosci``). Zwraca nowy
+    stan wolnych pól albo None (bez zmian)."""
     wpisy = R.bloki[n_b:]
     rects = [r for k, _n, r in R.prostokaty[n_p:] if k == "blok"]
     if len(rects) < 2 or len(rects) != len(wpisy):
@@ -975,7 +976,7 @@ def _porzadek_czytania(R: Rozmieszczenie, baza: Wolne, kolejne: list, n_b: int, 
             wl.zajmij(_napompuj(r, GAP_C, GAP_B, GAP_C, GAP_B))
             nowe.append((b, r[0], r[1]))
             top = r[1] - GAP_B
-    if czesci > R.czesci_uwag + 1:                  # kolejność czytania wobec co najwyżej jednej części „(cd.)” więcej
+    if czesci > R.czesci_uwag:                      # uwagi w mniejszej liczbie części ważniejsze niż kolejność bloków
         return
     R.bloki = R.bloki[:n_b]
     R.prostokaty = R.prostokaty[:n_p]

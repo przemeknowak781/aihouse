@@ -842,6 +842,36 @@ class AnalizaKonstrukcji:
             return 0.0
         return 0.0
 
+    def _docisk_blachy(self, cid: str, bl: dict, NEd: float, opis: str, klucz: str) -> Wynik:
+        """Docisk lokalny betonu pod blachą słupa stalowego (PN-EN 1992-1-1 6.7): F_Rdu = A_c0·f_cd·√(A_c1/A_c0) ≤
+        3,0·f_cd·A_c0; A_c1 — pole rozdziału podobne do A_c0, ograniczone szerokością elementu podpierającego (belka b) [ZAŁ]."""
+        p, m = self.p, self.m
+        a, b_ = float(bl.get("a", 0.18)), float(bl.get("b", 0.18))
+        c = next(c_ for c_ in m.slupy() if str(c_["id"]) == cid)
+        if klucz == "blacha_gorna":
+            bel = next((b2 for b2 in m.belki() if abs(float(b2["spod"]) - float(c["z_do"])) < TOL_Z
+                        and LineString([tuple(b2["os"][0]), tuple(b2["os"][1])]).distance(Point(*c["xy"])) < 0.15), None)
+            kl = klasa_betonu_z_nazwy(m.material(str(bel.get("mat"))).nazwa if bel else "") or p.beton_dla("belka")[1]
+            szer = float(bel["b"]) if bel else a
+            el = f"belka {bel['id']}" if bel else "element nad słupem"
+        else:
+            kl = p.beton_dla("fundament")[1]
+            szer = 3 * max(a, b_)
+            el = "pogrubienie płyty fundamentowej"
+        bt = Beton.z_parametrow(kl, p)
+        Ac0 = a * b_
+        a1, b1 = min(3 * a, max(szer, a)), min(3 * b_, max(szer if klucz == "blacha_dolna" else 3 * b_, b_))
+        Ac1 = a1 * b1
+        FRdu = min(Ac0 * bt.f_cd * 1000 * math.sqrt(Ac1 / Ac0), 3.0 * bt.f_cd * 1000 * Ac0)
+        w = Wynik(nazwa=f"{cid} — {opis} (6.7)")
+        w.krok("Blacha", "a × b × t", "", f"{f(a * 1000, 0)} × {f(b_ * 1000, 0)} × {f(float(bl.get('t', 0.015)) * 1000, 0)} mm")
+        w.krok("Pole docisku / rozdziału", "A_c0; A_c1 (≤ 3·wymiar, szerokość elementu)", f"{el}, {bt.klasa}",
+               f"{f(Ac0, 4)}; {f(Ac1, 4)}", "m²")
+        w.krok("Nośność na docisk", "F_Rdu = A_c0·f_cd·√(A_c1/A_c0) ≤ 3·f_cd·A_c0", "", FRdu, "kN", nd=1, zrodlo="(6.63)")
+        w.warunek("Docisk lokalny betonu pod blachą (6.7)", NEd, FRdu, "kN", "PN-EN 1992-1-1 6.7", nd=1, symbol_E="N_Ed",
+                  symbol_R="F_Rdu")
+        return w
+
     def _slup_zelbetowy(self, c) -> bool:
         mat = self.m.material(str(c.get("mat"))) if c.get("mat") else None
         if mat is None:
@@ -2494,7 +2524,8 @@ class AnalizaKonstrukcji:
             if not N:
                 poz.uwagi.append("Brak obciążeń przypisanych do słupa (nie podpiera płyty ani belki w modelu).")
             stalowy = mat is not None and ((mat.kreskowanie or "").upper() == "STAL")
-            G0 = 0.0
+            zelbetowy = self._slup_zelbetowy(c)
+            G0 = self._ciezar_slupa(c)
             if stalowy:
                 try:
                     prz = przekroj(str(c.get("przekroj")))
@@ -2502,26 +2533,59 @@ class AnalizaKonstrukcji:
                     poz.uwagi.append(str(ex))
                     self.pos_slupy.append(poz)
                     continue
-                G0 = prz.masa * 9.81 / 1000 * L
             N = dict(N)
             N["G"] = N.get("G", 0.0) + G0
             self.slupy_N[cid] = N
             odz = [Oddz("G", "G")] + [Oddz(cs, "Q", {"QA": "A", "H": "H", "S1": "S", "S2": "S"}.get(cs, "A"),
                                            "QA" if cs.startswith("QA") else "dach") for cs in N if cs not in ("G", "SB2")]
             NEd = max(sum(a * N.get(cs, 0.0) for cs, a in kb.wsp.items()) for kb in kombinacje(odz, p, "STR"))
-            wb = self.q_p * 1.0 * p.gQ * (prz.b / 1000 if stalowy else 0.3)
+            sc_ids = self._slupy_w_scianach_ids().get(cid, [])
+            zewn = any(w.id in sc_ids and w.typ == "sciana_zewn" for w in m.sciany())
+            if zelbetowy:
+                a_s, b_s = _wymiary_slupa(str(c.get("przekroj")))
+                # słup w murze zewnętrznym — wiatr z pasma muru b_słupa + 2·0,25 m (sztywny słup przejmuje parcie
+                # przyległego muru) [ZAŁ]; słup wewnętrzny — bez wiatru
+                wb = self.q_p * 1.0 * p.gQ * (max(a_s, b_s) + 0.5) if zewn else 0.0
+            else:
+                wb = self.q_p * 1.0 * p.gQ * (prz.b / 1000 if stalowy else 0.3)
             Mw = wb * L * L / 8
-            poz.opis.append(f"Słup przegubowo zamocowany na obu końcach (układ usztywniony płytą połączoną z budynkiem) — "
-                            f"L_cr = L = {f(L, 2)} m [ZAŁ]; siła osiowa z reakcji płyty/belek; wiatr na trzon słupa (c_f ≈ 1,0) "
-                            f"jako obciążenie towarzyszące.")
+            if zelbetowy:
+                poz.opis.append(f"Słup żelbetowy monolityczny w murze (trzpień) {f(a_s * 100, 0)} × {f(b_s * 100, 0)} cm w ścianach "
+                                f"{', '.join(sc_ids) or '—'}; układ usztywniony (ściany i stropy — tarcze), końce przegubowe, "
+                                f"l₀ = L = {f(L, 2)} m [ZAŁ]; siła osiowa z oparć belek, reakcji płyt i ścian wyżej w obrysie słupa "
+                                "(mur przerwany słupem) oraz ze słupa kondygnacji wyższej; "
+                                + ("wiatr z pasma muru zewnętrznego (b + 0,5 m) jako oddziaływanie towarzyszące (ψ₀ = 0,6)." if zewn
+                                   else "słup wewnętrzny — bez wiatru."))
+            else:
+                poz.opis.append(f"Słup przegubowo zamocowany na obu końcach (układ usztywniony płytą połączoną z budynkiem) — "
+                                f"L_cr = L = {f(L, 2)} m [ZAŁ]; siła osiowa z reakcji płyty/belek; wiatr na trzon słupa (c_f ≈ 1,0) "
+                                f"jako obciążenie towarzyszące.")
             poz.obciazenia.append(tabela(["Przypadek", "N_k [kN]"], [[cs, (v, 2)] for cs, v in N.items()]))
             if stalowy:
                 st = StalKonstr(str(c.get("mat")) if "S" in str(c.get("mat")).upper() else p.stal_konstr)
                 r = stalm.slup(prz, st, NEd, L, L, M_y_Ed=Mw * 0.6, wykres="rownomierne", p=p, nazwa=f"{cid} — nośność")
                 poz.wyniki.append(r)
                 poz.przyjeto.append(f"Słup {prz.nazwa} ze stali {st.gatunek}; N_Ed = {f(NEd, 1)} kN, N_b,Rd = {f(r.N_Rd, 1)} kN.")
-                poz.uwagi.append("Połączenia (blacha podstawy, kotwy, głowica) — dobór w projekcie wykonawczym; przemieszczenie "
-                                 "poziome ≤ H/150 (R5-71) przy układzie nieusztywnionym.")
+                for klucz, opis_b in (("blacha_gorna", "głowica — docisk belki do blachy czołowej"),
+                                      ("blacha_dolna", "podstawa — docisk blachy do fundamentu")):
+                    bl = c.get(klucz)
+                    if isinstance(bl, dict):
+                        poz.wyniki.append(self._docisk_blachy(cid, bl, NEd, opis_b, klucz))
+                poz.uwagi.append("Kotwy blach (głowica, podstawa) i spoiny — dobór w projekcie wykonawczym (ETA/EN 1993-1-8); "
+                                 "przemieszczenie poziome ≤ H/150 (R5-71) przy układzie nieusztywnionym.")
+            elif zelbetowy:
+                kl = klasa_betonu_z_nazwy(mat.nazwa if mat else None) or p.beton_dla("belka")[1]
+                beton = Beton.z_parametrow(kl, p)
+                c_nom = zelbet.otulina(p.ekspozycja.get("belka", "XC1"), 16, p, fi_strzemion=8).c_nom
+                r = zelbet.slup_zelbetowy(NEd, a_s, b_s, L, beton, self.stal, c_nom=c_nom, phi_inf=p.fi_pelzania,
+                                          M_0Ed=Mw * 0.6, nazwa=f"{cid} — nośność")
+                poz.wyniki.append(r)
+                poz.przyjeto.append(f"Słup ŻB {f(min(a_s, b_s) * 100, 0)} × {f(max(a_s, b_s) * 100, 0)} cm, {beton.klasa}; zbrojenie "
+                                    f"{r.zbrojenie} (B500SP), strzemiona {r.strzemiona}; N_Ed = {f(NEd, 1)} kN. Ciągłość prętów przez "
+                                    "wieniec/belkę (zakład l₀), zakotwienie w pogrubieniu płyty fundamentowej (l_bd).")
+                poz.prety = r.prety
+                poz.dane["zbrojenie"] = r.zbrojenie
+                poz.dane["strzemiona"] = r.strzemiona
             else:
                 poz.uwagi.append("Słup żelbetowy/inny — sprawdzenie wg PN-EN 1992-1-1 5.8 (smukłość, efekty II rzędu) "
                                  "[WYMAGA ANALIZY — poza zakresem automatycznym].")
