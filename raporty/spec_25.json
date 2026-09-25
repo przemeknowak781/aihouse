@@ -1,5 +1,6 @@
 {
- "title": "Korekta Inwestora: „S” z przesuniętych brył, garaż w parterze — panel koncepcji uruchomiony ponownie",
+ "nr": 25,
+ "title": "KAMIEŃ MILOWY: model Domu LAMELA gotowy — pierwsze arkusze PAB wygenerowane automatycznie z modelu",
  "stages": [
   [
    "Analiza szkicu — interpretacja v2 („S” z brył, garaż)",
@@ -55,9 +56,24 @@
   ]
  ],
  "notes": [
+  "NADZÓR (05:50): 2 agentów aktywnych, bez zastojów; najdłuższa bezczynność 0 min; zmiany w repo -0 min temu.",
   "KAMIEŃ MILOWY: model Domu LAMELA zapisany (budynek/dzialka/wyposazenie/instalacje.yaml) — 55 ścian, 47 otworów, 28 pomieszczeń; walidacja rdzenia: 0 błędów.",
   "Wskaźniki (wstępne): pow. zabudowy 187,5 m² (z płytami 213,0 m²), kubatura brutto 1354,6 m³ (> 1000 m³ → PWP), PU 237,7 m², wysokość wg § 6 WT 9,79 m (≤ 11 m).",
   "Pierwsze arkusze PAB wygenerowane z modelu (podgląd): rzuty 1:50, przekroje, 4 elewacje — synteza kończy iteracje, potem 3 audytorów i poprawki.",
   "Wytyczne z symulacji mostków przekazane syntezie (ciepły montaż, płyta na XPS, ciągła izolacja przy garażu, progi HS, łączniki w płytach)."
+ ],
+ "images": [
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/podglad_lamela/PB-AR-07_elewacja_poludniowa_ogrodowa.png",
+   "caption": "LAMELA: elewacja południowa 1:50 (z modelu)"
+  },
+  {
+   "path": "/tmp/claude-0/-home-user-aihouse/d6e847b4-aa7d-5319-ac6c-1cfc7e9fc1de/scratchpad/podglad_lamela/PB-AR-01_rzut_parteru.png",
+   "caption": "LAMELA: rzut parteru 1:50 (z modelu)"
+  },
+  {
+   "path": "/home/user/aihouse/00_wejscie/szkic_koncepcyjny.jpg",
+   "caption": "Szkic wejściowy — porównanie"
+  }
  ]
 }

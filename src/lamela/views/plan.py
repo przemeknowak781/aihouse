@@ -1209,7 +1209,7 @@ def draw_roof_plan(vp, ctx: ViewContext, opts: dict | None = None) -> PlanResult
         pz = m.przegroda(str(d.get("przegroda")))
         top = float(d["plyta"]["wierzch"]) + (pz.d_nad_konstr() if pz is not None else 0.0)
         sp = d.get("spadek")
-        drains = [np.asarray(p, float) for p in (d.get("wpusty") or [])]
+        drains = [np.asarray(p.get("xy") if isinstance(p, dict) else p, float) for p in (d.get("wpusty") or [])]   # SCHEMAT p. 6
         spouts = [np.asarray(p, float) for p in (d.get("rzygacze") or [])]
         n0 = len(vp.prims)
         for pt in drains:
