@@ -1,16 +1,16 @@
 RAPORT KOMPLETNOŚCI — PZT_PAB_ZL_2026.09.25.pdf
 Lista kontrolna: TOM I — PZT + PAB + ZL w jednym pliku (rejestr C.1)
-Status: NIEKOMPLETNY
-Pozycje: OK 51 · BRAK 5 · DO UZUPEŁNIENIA 6 · N/D 1 · OSTRZEŻENIE 0
+Status: PRZYKŁAD – NIE DO ZŁOŻENIA
+Pozycje: OK 54 · BRAK 0 · DO UZUPEŁNIENIA 8 · N/D 1 · OSTRZEŻENIE 0
 Znaczniki: [DO UZUPEŁNIENIA] ×137, [DOKUMENT ZEWNĘTRZNY] ×2, [DANE PRZYKŁADOWE] ×63
-Plik: 48 stron, 3.49 MB
+Plik: 44 stron, 3.46 MB
 
-  element PZT: strony 5–16 (opis 9, arkusze 3)
-  element PAB: strony 17–38 (opis 10, arkusze 12)
-  element ZL: strony 39–48 (opis 10, arkusze 0)
+  element PZT: strony 4–14 (opis 8, arkusze 3)
+  element PAB: strony 15–35 (opis 9, arkusze 12)
+  element ZL: strony 36–44 (opis 9, arkusze 0)
 
 ✓ F-01    [  *] OK               Nazwa pliku wg zał. 1 RPB (PZT_PAB_ZL_rrrr.mm.dd.pdf) (RPB § 2b ust. 4, zał. 1; W-301) — nazwa zgodna z zał. 1 RPB (PZT_PAB_ZL)
-✓ F-02    [  *] OK               Rozmiar pliku ≤ 150 MB (RPB § 2b ust. 3; W-300) — 3.49 MB (limit 150 MB)
+✓ F-02    [  *] OK               Rozmiar pliku ≤ 150 MB (RPB § 2b ust. 3; W-300) — 3.46 MB (limit 150 MB)
 ✓ F-03    [  *] OK               Część rysunkowa w postaci wektorowej (raster tylko jako podkład mapy) (RPB § 2b ust. 2; W-300) — 15 arkuszy wektorowych
 ✓ F-04    [  *] OK               Metadane PDF (tytuł, temat) (dobra praktyka; AUD-RYS) — Title: „Dom LAMELA — TOM I: PZT + PAB + ZL (PRZYKŁAD – NIE DO ZŁOŻENIA)”
 ✓ F-05    [  *] OK               PT nie jest objęty wspólną oprawą z PZT/PAB (RPB § 5 ust. 3; § 7 ust. 8) — brak PT w pliku
@@ -20,9 +20,9 @@ Plik: 48 stron, 3.49 MB
 ✓ C1-1-03 [PZT] OK               Strona tytułowa: adres i kategoria obiektu (kat. I) (RPB § 7 ust. 2 pkt 2 lit. b; W-303)
 … C1-1-04 [PZT] DO UZUPEŁNIENIA  Strona tytułowa PZT: identyfikator działki ewidencyjnej (RPB § 7 ust. 2 pkt 2 lit. c, ust. 7 pkt 2) — pola [DO UZUPEŁNIENIA] na stronie tytułowej
 … C1-1-05 [PZT] DO UZUPEŁNIENIA  Strona tytułowa: inwestor i jego adres (RPB § 7 ust. 2 pkt 2 lit. d) — pola [DO UZUPEŁNIENIA] na stronie tytułowej
-✗ C1-1-06 [PZT] BRAK             Strona tytułowa: data opracowania; autorzy — imię, nazwisko, specjalność, nr uprawnień, zakres (RPB § 7 ust. 2 pkt 3) — nie znaleziono: data opracowania, nr uprawnie, zakres opracowania
+… C1-1-06 [PZT] DO UZUPEŁNIENIA  Strona tytułowa: data opracowania; autorzy — imię, nazwisko, specjalność, nr uprawnień, zakres (RPB § 7 ust. 2 pkt 3) — pola [DO UZUPEŁNIENIA] na stronie tytułowej
 ✓ C1-1-07 [PZT] OK               Spis treści z numerami stron (RPB § 7 ust. 1 pkt 2, ust. 5)
-✗ C1-1-08 [PZT] BRAK             Numeracja stron elementu („strona X z Y”) (RPB § 6 ust. 1) — brak numeru na stronach pliku [6]
+✓ C1-1-08 [PZT] OK               Numeracja stron elementu („strona X z Y”) (RPB § 6 ust. 1) — 7 stron numerowanych
 ✓ C1-1-09 [PZT] OK               Oświadczenie projektanta z listą współautorów (PB art. 34 ust. 3d pkt 3, ust. 3e)
 ✓ C1-1-10 [PZT] OK               Opis: przedmiot zamierzenia (RPB § 14 pkt 1)
 ✓ C1-1-11 [PZT] OK               Opis: istniejący stan zagospodarowania (RPB § 14 pkt 2)
@@ -36,11 +36,11 @@ Plik: 48 stron, 3.49 MB
 … C1-1-19 [PZT] DO UZUPEŁNIENIA  Rysunek: plan szczegółowy — wymiary, odległości (0,01 m), rzędne (1:200) (RPB § 15 ust. 2 pkt 3, ust. 3; § 17 ust. 1; PZT-02) — PZT-02 — Plan szczegółowy — wymiary, odległości, rzędne (1:200); tylko arkusz zastępczy — rysunek niedołączony
 … C1-1-20 [PZT] DO UZUPEŁNIENIA  Rysunek: koordynacyjny uzbrojenia terenu (RPB § 17 ust. 2; PZT-03) — PZT-03 — Rysunek koordynacyjny uzbrojenia terenu (1:200); tylko arkusz zastępczy — rysunek niedołączony
 ✓ C1-1-21 [PZT] OK               Skale rysunków PZT nie mniejsze niż 1:500 (RPB § 9 ust. 5; W-306) — 3 rysunków ze skalą ≥ 1:500
-✗ C1-2-01 [PAB] BRAK             Strona tytułowa: nazwa elementu (RPB § 7 ust. 2 pkt 1)
+✓ C1-2-01 [PAB] OK               Strona tytułowa: nazwa elementu (RPB § 7 ust. 2 pkt 1)
 … C1-2-02 [PAB] DO UZUPEŁNIENIA  Strona tytułowa: zamierzenie, adres, kategoria I, inwestor (RPB § 7 ust. 2 pkt 2) — pola [DO UZUPEŁNIENIA] na stronie tytułowej
-✗ C1-2-03 [PAB] BRAK             Strona tytułowa: data, autorzy ze specjalnością, nr uprawnień i zakresem (RPB § 7 ust. 2 pkt 3) — nie znaleziono: data opracowania, nr uprawnie, zakres opracowania
+… C1-2-03 [PAB] DO UZUPEŁNIENIA  Strona tytułowa: data, autorzy ze specjalnością, nr uprawnień i zakresem (RPB § 7 ust. 2 pkt 3) — pola [DO UZUPEŁNIENIA] na stronie tytułowej
 ✓ C1-2-04 [PAB] OK               Spis treści (RPB § 7 ust. 5)
-✗ C1-2-05 [PAB] BRAK             Numeracja stron elementu (RPB § 6 ust. 1) — brak numeru na stronach pliku [18]
+✓ C1-2-05 [PAB] OK               Numeracja stron elementu (RPB § 6 ust. 1) — 8 stron numerowanych
 ✓ C1-2-06 [PAB] OK               Oświadczenie projektanta(-ów) z listą współautorów (PB art. 34 ust. 3d pkt 3, ust. 3e)
 ✓ C1-2-07 [PAB] OK               Opis pkt 1: rodzaj i kategoria obiektu (RPB § 20 ust. 1 pkt 1)
 ✓ C1-2-08 [PAB] OK               Opis pkt 2: sposób użytkowania i program użytkowy (RPB § 20 ust. 1 pkt 2)

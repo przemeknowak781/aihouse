@@ -1,7 +1,7 @@
 {
   "plik": "PZT_PAB_ZL_2026.09.25.pdf",
   "lista": "TOM I — PZT + PAB + ZL w jednym pliku (rejestr C.1)",
-  "status": "NIEKOMPLETNY",
+  "status": "PRZYKŁAD – NIE DO ZŁOŻENIA",
   "pozycje": [
     {
       "id": "F-01",
@@ -19,7 +19,7 @@
       "podstawa": "RPB § 2b ust. 3; W-300",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "3.49 MB (limit 150 MB)"
+      "szczegoly": "3.46 MB (limit 150 MB)"
     },
     {
       "id": "F-03",
@@ -107,9 +107,9 @@
       "element": "PZT",
       "opis": "Strona tytułowa: data opracowania; autorzy — imię, nazwisko, specjalność, nr uprawnień, zakres",
       "podstawa": "RPB § 7 ust. 2 pkt 3",
-      "status": "BRAK",
+      "status": "DO UZUPEŁNIENIA",
       "obowiazkowa": true,
-      "szczegoly": "nie znaleziono: data opracowania, nr uprawnie, zakres opracowania"
+      "szczegoly": "pola [DO UZUPEŁNIENIA] na stronie tytułowej"
     },
     {
       "id": "C1-1-07",
@@ -125,9 +125,9 @@
       "element": "PZT",
       "opis": "Numeracja stron elementu („strona X z Y”)",
       "podstawa": "RPB § 6 ust. 1",
-      "status": "BRAK",
+      "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "brak numeru na stronach pliku [6]"
+      "szczegoly": "7 stron numerowanych"
     },
     {
       "id": "C1-1-09",
@@ -251,7 +251,7 @@
       "element": "PAB",
       "opis": "Strona tytułowa: nazwa elementu",
       "podstawa": "RPB § 7 ust. 2 pkt 1",
-      "status": "BRAK",
+      "status": "OK",
       "obowiazkowa": true,
       "szczegoly": ""
     },
@@ -269,9 +269,9 @@
       "element": "PAB",
       "opis": "Strona tytułowa: data, autorzy ze specjalnością, nr uprawnień i zakresem",
       "podstawa": "RPB § 7 ust. 2 pkt 3",
-      "status": "BRAK",
+      "status": "DO UZUPEŁNIENIA",
       "obowiazkowa": true,
-      "szczegoly": "nie znaleziono: data opracowania, nr uprawnie, zakres opracowania"
+      "szczegoly": "pola [DO UZUPEŁNIENIA] na stronie tytułowej"
     },
     {
       "id": "C1-2-04",
@@ -287,9 +287,9 @@
       "element": "PAB",
       "opis": "Numeracja stron elementu",
       "podstawa": "RPB § 6 ust. 1",
-      "status": "BRAK",
+      "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "brak numeru na stronach pliku [18]"
+      "szczegoly": "8 stron numerowanych"
     },
     {
       "id": "C1-2-06",
@@ -612,31 +612,31 @@
   },
   "elementy": {
     "PZT": {
-      "od": 5,
-      "do": 16,
-      "strony_opisu": 9,
+      "od": 4,
+      "do": 14,
+      "strony_opisu": 8,
       "arkusze": 3
     },
     "PAB": {
-      "od": 17,
-      "do": 38,
-      "strony_opisu": 10,
+      "od": 15,
+      "do": 35,
+      "strony_opisu": 9,
       "arkusze": 12
     },
     "ZL": {
-      "od": 39,
-      "do": 48,
-      "strony_opisu": 10,
+      "od": 36,
+      "do": 44,
+      "strony_opisu": 9,
       "arkusze": 0
     }
   },
-  "rozmiar_mb": 3.4917774200439453,
-  "strony": 48,
+  "rozmiar_mb": 3.463298797607422,
+  "strony": 44,
   "podsumowanie": {
-    "status": "NIEKOMPLETNY",
-    "OK": 51,
-    "BRAK": 5,
-    "DO UZUPEŁNIENIA": 6,
+    "status": "PRZYKŁAD – NIE DO ZŁOŻENIA",
+    "OK": 54,
+    "BRAK": 0,
+    "DO UZUPEŁNIENIA": 8,
     "N/D": 1,
     "OSTRZEŻENIE": 0,
     "znaczniki_do_uzupelnienia": 137,

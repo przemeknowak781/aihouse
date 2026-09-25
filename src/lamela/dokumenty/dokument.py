@@ -115,6 +115,7 @@ class Dokument:
         self.pokaz_dzialke = pokaz_dzialke
         self.tytul_spisu = tytul_spisu or ("Spis załączników" if self.czesc == "ZL" else "Spis treści")
         self.miejscowosc = miejscowosc or do_uzup("miejscowość")
+        self.autorzy_na_stronie = 4     # więcej autorów → załącznik do strony tytułowej (§ 7 ust. 4 RPB)
         # ustawiane przez Tom
         self.plik_tomu: str | None = None
         self.zawartosc_tomu: list | None = None
@@ -556,7 +557,7 @@ class Dokument:
                     stadium_opis=self.stadium_opis, tom_opis=" · ".join(t for t in tom_opis if t),
                     przyklad=self.przyklad, pokaz_dzialke=self.pokaz_dzialke, autorzy=autorzy,
                     data=data_slownie(self.data), rewizja=f"rew. {self.rewizja}", plik=self.plik_tomu,
-                    zawartosc_tomu=zaw, uwaga_dodatkowa="")
+                    zawartosc_tomu=zaw, uwaga_dodatkowa="", autorzy_osobno=len(autorzy) > self.autorzy_na_stronie)
 
     def _wpisy_spisu(self, strony: dict) -> list[dict]:
         out, g = [], None
@@ -594,7 +595,10 @@ class Dokument:
         if self.znak_wodny:
             body.append(f'<div class="znak-wodny">{STATUS_PRZYKLAD}</div>')
         if self.strona_tytulowa_wl:
-            body.append(str(m.strona_tytulowa(d, self._ctx_tytulowej())))
+            ctx = self._ctx_tytulowej()
+            body.append(str(m.strona_tytulowa(d, ctx)))
+            if ctx["autorzy_osobno"]:
+                body.append(str(m.autorzy_zalacznik(d, ctx)))
         if self.spis_wl:
             leg = ("Numeracja stron odrębna dla elementu (§ 6 ust. 1 RPB); rysunki oznaczono numerem rysunku "
                    "(§ 6 ust. 3 RPB). Pozycje spisu są odnośnikami w pliku PDF.")

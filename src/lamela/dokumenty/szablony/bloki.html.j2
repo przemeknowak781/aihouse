@@ -45,11 +45,13 @@
     <tr><th>Inwestor</th><td>{{ d.inwestor.nazwa }}<br><span class="mn">adres:</span> {{ d.inwestor.adres }}</td></tr>
   </table>
 
-  {% if s.autorzy %}
+  {% if s.autorzy and s.autorzy_osobno %}
+  <div class="st-autorzy-tyt">Opracowanie — autorzy: w załączniku do strony tytułowej (§ 7 ust. 4 RPB); sprawdzający: {{ d.sprawdzajacy }}</div>
+  {% elif s.autorzy %}
   <div class="st-autorzy-tyt">Opracowanie — autorzy (§ 7 ust. 2 pkt 3 RPB)</div>
   <table class="st-autorzy">
-    <thead><tr><th style="width:23mm">Funkcja, branża</th><th style="width:30mm">Imię i nazwisko</th>
-      <th style="width:38mm">Specjalność i nr uprawnień budowlanych</th><th>Zakres opracowania</th><th style="width:24mm">Podpis</th></tr></thead>
+    <thead><tr><th style="width:22mm">Funkcja, branża</th><th style="width:27mm">Imię i nazwisko</th>
+      <th style="width:47mm">Specjalność i nr uprawnień budowlanych</th><th>Zakres opracowania</th><th style="width:20mm">Podpis</th></tr></thead>
     <tbody>
     {% for p in s.autorzy %}
       <tr><td><b>{{ p.funkcja }}</b><br>{{ p.branza }}</td><td>{{ p.imie_nazwisko }}</td>
@@ -71,6 +73,25 @@
       opracowująca daną część w zakresie objętym plikiem (§ 7 ust. 4a RPB); pole „Podpis” wypełnia się wyłącznie w postaci
       papierowej (§ 7 ust. 2 pkt 4 RPB). {{ s.uwaga_dodatkowa }}</p>
   </div>
+</section>
+{% endmacro %}
+
+{# ================================================================================ załącznik do strony tytułowej (§ 7 ust. 4 RPB) #}
+{% macro autorzy_zalacznik(d, s) %}
+<section class="st-zal" id="autorzy">
+  <div class="spis-tyt">Załącznik do strony tytułowej — autorzy</div>
+  <div class="spis-podst">{{ s.kod }} — {{ s.tytul }}; § 7 ust. 2 pkt 3–4 i ust. 4 RPB</div>
+  <table class="st-autorzy">
+    <thead><tr><th style="width:22mm">Funkcja, branża</th><th style="width:30mm">Imię i nazwisko</th>
+      <th style="width:50mm">Specjalność i nr uprawnień budowlanych</th><th>Zakres opracowania</th><th style="width:22mm">Podpis</th></tr></thead>
+    <tbody>
+    {% for p in s.autorzy %}
+      <tr><td><b>{{ p.funkcja }}</b><br>{{ p.branza }}</td><td>{{ p.imie_nazwisko }}</td>
+          <td>{{ p.specjalnosc_skrot }}<br>nr upr.: {{ p.nr_uprawnien }}</td><td>{{ p.zakres }}</td><td class="podpis"></td></tr>
+    {% endfor %}
+      <tr class="spr"><td>Sprawdzający</td><td colspan="4">{{ d.sprawdzajacy }}</td></tr>
+    </tbody>
+  </table>
 </section>
 {% endmacro %}
 
@@ -156,7 +177,7 @@ Postać papierowa: podpis własnoręczny w polu.</p>
   </div>
   <div class="nagl g3"><span class="t">Osoby biorące udział w opracowaniu projektu (art. 34 ust. 3e pkt 1 PB)</span></div>
   <table class="tab zwarta">
-    <thead><tr><th class="lp">Lp.</th><th>Imię i nazwisko</th><th>Specjalność uprawnień budowlanych</th><th>Nr uprawnień / decyzji</th><th>Zakres udziału</th></tr></thead>
+    <thead><tr><th class="lp">Lp.</th><th style="width:36mm">Imię i nazwisko</th><th style="width:40mm">Specjalność uprawnień budowlanych</th><th style="width:36mm">Nr uprawnień / decyzji</th><th>Zakres udziału</th></tr></thead>
     <tbody>{% for p in o.osoby %}<tr><td class="lp">{{ loop.index }}.</td><td>{{ p.imie_nazwisko }}</td><td>{{ p.specjalnosc }}</td><td>{{ p.nr_uprawnien }}</td><td>{{ p.zakres }}</td></tr>{% endfor %}</tbody>
   </table>
   <p class="mn">Projektanci sprawdzający (art. 34 ust. 3e pkt 2 PB): {{ o.sprawdzajacy }}.</p>

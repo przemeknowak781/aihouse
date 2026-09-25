@@ -16,6 +16,7 @@ TYPY = {
     "SWG":  dict(nazwa="ściana nośna dom/garaż: tynk 1,5 + silikat 18 + wełna 12 + tynk 1 (U≈0,28)", L=0.105, R=0.220, kol="#8c8c8c"),
     "DZ12": dict(nazwa="ścianka działowa: silikat 12 + 2x tynk 1,5", L=0.075, R=0.075, kol="#c8c8c8"),
     "DZL":  dict(nazwa="ścianka działowa lekka GK 12,5 cm (na stropie nad otwarciem / krawędzi pustki)", L=0.0625, R=0.0625, kol="#dedede"),
+    "LAM":  dict(nazwa="ekran z pionowych lamel drewnianych 4x8 cm co 12 cm (klatka schodowa / hol)", L=0.040, R=0.040, kol="#c9a66b"),
     "SK":   dict(nazwa="przegroda szklana w ramie stalowej (wiatrołap / hol), gr. 6 cm", L=0.030, R=0.030, kol="#cfe3f7"),
 }
 

@@ -19,7 +19,7 @@
       "podstawa": "RPB § 2b ust. 3",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "1.50 MB (limit 150 MB)"
+      "szczegoly": "1.49 MB (limit 150 MB)"
     },
     {
       "id": "F-03",
@@ -62,9 +62,9 @@
       "element": "PT",
       "opis": "Strona tytułowa: data, autorzy ze specjalnością, nr uprawnień i zakresem",
       "podstawa": "RPB § 7 ust. 2 pkt 3",
-      "status": "BRAK",
+      "status": "DO UZUPEŁNIENIA",
       "obowiazkowa": true,
-      "szczegoly": "nie znaleziono: data opracowania, nr uprawnie"
+      "szczegoly": "pola [DO UZUPEŁNIENIA] na stronie tytułowej"
     },
     {
       "id": "C2-04",
@@ -80,9 +80,9 @@
       "element": "PT",
       "opis": "Numeracja stron tomu",
       "podstawa": "RPB § 6 ust. 2",
-      "status": "BRAK",
+      "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "brak numeru na stronach pliku [2]"
+      "szczegoly": "6 stron numerowanych"
     },
     {
       "id": "C2-06",
@@ -196,18 +196,18 @@
   "elementy": {
     "PT": {
       "od": 1,
-      "do": 17,
-      "strony_opisu": 8,
+      "do": 16,
+      "strony_opisu": 7,
       "arkusze": 9
     }
   },
-  "rozmiar_mb": 1.4957160949707031,
-  "strony": 17,
+  "rozmiar_mb": 1.4944114685058594,
+  "strony": 16,
   "podsumowanie": {
     "status": "NIEKOMPLETNY",
-    "OK": 13,
-    "BRAK": 3,
-    "DO UZUPEŁNIENIA": 1,
+    "OK": 14,
+    "BRAK": 1,
+    "DO UZUPEŁNIENIA": 2,
     "N/D": 1,
     "OSTRZEŻENIE": 0,
     "znaczniki_do_uzupelnienia": 22,
