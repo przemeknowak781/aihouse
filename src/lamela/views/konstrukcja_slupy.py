@@ -80,8 +80,13 @@ def widok_zbrojenie_slupow(ctx, spec: dict, scale: float, opts: dict):
                  offs=(b * 1000 / vp.scale + 4.0, 10.0))
         etykieta(vp, placer, (x0 + b / 2, y0 + 0.3 * L), (0, 1), f"Ø{fs[0]} co {fs[1] / 10:g} (przy końcach co {s_red / 10:g})",
                  p_s.nr, 2.5, offs=(b * 1000 / vp.scale + 4.0, 14.0))
-        vp.text((x0, y0 + L + l0 + 6 * k), f"{ids} — słup ŻB {h * 100:.0f} × {b * 100:.0f} cm, L = {L:.2f} m (poz. {poz})".replace(".", ","),
-                3.5, 0, "left", "baseline", L_OPS, style="bold")
+        t1 = ids
+        t2 = f"słup ŻB {h * 100:.0f} × {b * 100:.0f} cm, L = {L:.2f} m".replace(".", ",")
+        t3 = f"poz. {poz}"
+        vp.text((x0, y0 + L + l0 + 12 * k), t1, 3.5, 0, "left", "baseline", L_OPS, style="bold")
+        vp.text((x0, y0 + L + l0 + 7 * k), t2, 2.5, 0, "left", "baseline", L_OPS)
+        vp.text((x0, y0 + L + l0 + 3 * k), t3, 2.5, 0, "left", "baseline", L_OPS)
+        szer_t = max(len(t1) * 3.5 * 0.62, len(t2) * 2.5 * 0.58, len(t3) * 2.5 * 0.58) + 10.0
         # przekrój A-A
         sx, sy = x0, y0 - 0.35 - 14 * k - h
         gs = box(sx, sy, sx + b, sy + h)
@@ -99,7 +104,7 @@ def widok_zbrojenie_slupow(ctx, spec: dict, scale: float, opts: dict):
             KD.rejestruj(D, str(cc["id"]), "podłużne (symetryczne, M_Rd(N_Ed) ≥ M_Ed — 5.8.8)", pz.nr, As, As_min, As,
                          f"{n}Ø{fi}", jedn="mm²", As_max=0.04 * h * b * 1e6, arkusz=nr_ark,
                          uwagi="; ".join(KD.warunki_niespelnione(pz.wyniki)[:2]), wymuszone_ok=pz.ok)
-        X += b + 75 * k
+        X += max(b + 75 * k, szer_t * k)
     res.column_blocks.append(("legenda_k", blok_legendy([
         ("pret", "pręt podłużny (widok), linia gruba — z zakładem/zakotwieniem poza obrysem słupa"),
         ("poz", "numer pozycji pręta (zestawienie stali)"),
