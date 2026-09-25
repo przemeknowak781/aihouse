@@ -1,7 +1,7 @@
 """Obudowa cieplna budynku z modelu: U wszystkich elementów (PN-EN ISO 6946 / 13370 / 10077-1), mostki (H_TB),
 zacienienie okien, sprawdzenie g (WT zał. 2 pkt 2.1) i kontrola ciągłości warstw przegród zewnętrznych.
 
-Konfiguracja z modelu (opcjonalna sekcja `energia` w budynek.yaml — lista pól: `lamela/obliczenia/README.md`):
+Konfiguracja z modelu (opcjonalna sekcja `energia` w budynek.yaml — pełna lista pól: docstring `lamela.obliczenia.energia`):
   energia.grunt: {typ: piasek|glina|skala, lambda, izolacja_obwodowa: {typ: pionowa|pozioma, D, d_n, lam_n}, psi_wf, G_w}
   energia.wezly_wyniki: ścieżka do wyników symulacji ISO 10211 ({id: {psi, f_rsi, dlugosc}})
   energia.psi_wariant: domyslna | dobra_praktyka

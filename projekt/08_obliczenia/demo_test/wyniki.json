@@ -1,0 +1,184 @@
+{
+ "A_f": 139.51789999999997,
+ "V_netto": 376.69832999999994,
+ "U": {
+  "POD-0|podloga_grunt": {
+   "U": 0.1721917133545201,
+   "U_max": 0.3,
+   "U_cel": 0.2
+  },
+  "SZ1|sciana_zewn": {
+   "U": 0.16560235269208468,
+   "U_max": 0.2,
+   "U_cel": 0.15
+  },
+  "SW1|sciana_wewn": {
+   "U": 1.758191574380637,
+   "U_max": null,
+   "U_cel": null
+  },
+  "SD1|sciana_wewn": {
+   "U": 2.0373065220267232,
+   "U_max": null,
+   "U_cel": null
+  },
+  "SD-D1|dach": {
+   "U": 0.0843153752283652,
+   "U_max": 0.15,
+   "U_cel": 0.12
+  }
+ },
+ "U_grunt": 0.1721917133545201,
+ "okna": {
+  "O0-02": {
+   "symbol": "OP1",
+   "U_w": 0.754886111111111,
+   "A_w": 2.7
+  },
+  "O0-09": {
+   "symbol": "OP3",
+   "U_w": 0.7064422222222222,
+   "A_w": 2.25
+  },
+  "O0-03": {
+   "symbol": "DZ1",
+   "U_w": 0.9,
+   "A_w": 2.53
+  },
+  "O0-01": {
+   "symbol": "HS1",
+   "U_w": 0.7463807692307693,
+   "A_w": 10.4
+  },
+  "O0-05": {
+   "symbol": "OP1",
+   "U_w": 0.7064422222222222,
+   "A_w": 2.25
+  },
+  "O0-08": {
+   "symbol": "FX1",
+   "U_w": 0.72892,
+   "A_w": 2.0
+  },
+  "O0-04": {
+   "symbol": "OP2",
+   "U_w": 0.7238515624999999,
+   "A_w": 1.92
+  },
+  "O1-01": {
+   "symbol": "OP4",
+   "U_w": 0.7146009114583333,
+   "A_w": 3.84
+  },
+  "O1-07": {
+   "symbol": "OP8",
+   "U_w": 0.7129261904761904,
+   "A_w": 2.0999999999999996
+  },
+  "O1-06": {
+   "symbol": "OP7",
+   "U_w": 0.754886111111111,
+   "A_w": 2.7
+  },
+  "O1-02": {
+   "symbol": "OP5",
+   "U_w": 0.6837893518518519,
+   "A_w": 8.64
+  },
+  "O1-03": {
+   "symbol": "HS2",
+   "U_w": 0.8419855072463769,
+   "A_w": 5.52
+  },
+  "O1-04": {
+   "symbol": "OP6",
+   "U_w": 0.790995,
+   "A_w": 1.0
+  },
+  "O1-05": {
+   "symbol": "OP3",
+   "U_w": 0.70076875,
+   "A_w": 2.4000000000000004
+  }
+ },
+ "H_TB": 67.82750000000001,
+ "Phi_HL_W": 5708.890948875442,
+ "pomieszczenia_Phi_HL_W": {
+  "0.01": 710.4568418021473,
+  "0.02": 535.2065839868367,
+  "0.03": 1041.8958097280663,
+  "0.04": 699.5270246221086,
+  "1.01": 576.2816304308926,
+  "1.02": 593.3038527906206,
+  "1.03": 1026.4426218423962,
+  "1.04": 365.2573831756766,
+  "1.05": 289.1171170966965
+ },
+ "wentylacja_m3h": 100.0,
+ "EP": {
+  "A: PC R290 + PV + rekuperacja": {
+   "EU": 64.39374873753307,
+   "EK": 26.584375119607277,
+   "EP": 36.96653411222131,
+   "spelnia": true,
+   "E_CO2_t": 1.140837497966944,
+   "U_oze": 80.62728927718564,
+   "koszt_zl": 2706.1471480385017
+  },
+  "A0: PC R290 + rekuperacja, bez PV": {
+   "EU": 64.39374873753307,
+   "EK": 26.584375119607277,
+   "EP": 66.4609377990182,
+   "spelnia": true,
+   "E_CO2_t": 2.05107489279342,
+   "U_oze": 62.69949404079679,
+   "koszt_zl": 4434.445998974848
+  },
+  "B: kocioł gazowy kondensacyjny + rekuperacja": {
+   "EU": 64.39374873753307,
+   "EK": 98.76654178614605,
+   "EP": 118.31257604172569,
+   "spelnia": false,
+   "E_CO2_t": 3.123981642230628,
+   "U_oze": 0.0,
+   "koszt_zl": 6825.581898539523
+  },
+  "C: PC — wartości domyślne metodologii, bez PV": {
+   "EU": 64.39374873753307,
+   "EK": 41.68792119030866,
+   "EP": 104.21980297577164,
+   "spelnia": false,
+   "E_CO2_t": 3.2163648045700617,
+   "U_oze": 51.962431258837185,
+   "koszt_zl": 6647.021780829231
+  }
+ },
+ "EP_projekt": 36.96653411222131,
+ "EP_max": 70.0,
+ "glaser": {
+  "SZ1": {
+   "kondensacja": false,
+   "wysycha": true,
+   "M_a_max_kg_m2": 0.0,
+   "sd_par_wym": 0.0
+  },
+  "SD-D1": {
+   "kondensacja": true,
+   "wysycha": true,
+   "M_a_max_kg_m2": 0.013260166507609947,
+   "sd_par_wym": null
+  }
+ },
+ "f_Rsi_wym": 0.72,
+ "ciaglosc_braki": {
+  "SZ1": [],
+  "POD-0": [
+   "brak izolacji przeciwwilgociowej/przeciwwodnej podłogi na gruncie (WT § 316 — ochrona przed wilgocią gruntową)"
+  ],
+  "SD-D1": []
+ },
+ "ostrzezenia": [
+  "stolarka: symbol OP1 występuje w różnych wymiarach (1.50×1.50, 1.80×1.50) — ujednolicić zestawienie stolarki",
+  "stolarka: symbol OP3 występuje w różnych wymiarach (1.50×1.50, 1.60×1.50) — ujednolicić zestawienie stolarki"
+ ]
+}

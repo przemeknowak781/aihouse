@@ -455,8 +455,7 @@ class AnalizaKonstrukcji:
                 g.podp_l.append(PodporaLiniowa(sid, piece, "przegub", "sciana"))
                 g.sciany_pod.append((sid, w))
         g.belki = []
-        strefa_scian = unary_union([sp.linia.buffer(ww.warstwa_konstr.d / 2 + 0.05) for (sid_, ww), sp in
-                                    zip(g.sciany_pod, g.podp_l)]) if g.podp_l else Polygon()
+        linie_scian = [(sp.linia, ww.warstwa_konstr.d) for (sid_, ww), sp in zip(g.sciany_pod, g.podp_l)]
         for b in m.belki():
             top = float(b["spod"]) + float(b["h"])
             if not (any(abs(top - s) < TOL_Z for s in spody) or any(abs(top - t) < TOL_Z for t in tops)):
@@ -464,18 +463,36 @@ class AnalizaKonstrukcji:
             ln = LineString([tuple(b["os"][0]), tuple(b["os"][1])])
             if ln.distance(g.poly) > float(b["b"]) / 2 + 0.02:
                 continue
-            pieces = []
-            for piece in self._snap_linia(ln, g.poly):
-                cut = piece.difference(strefa_scian) if not strefa_scian.is_empty else piece
-                pieces += [c for c in ([cut] if isinstance(cut, LineString) else list(getattr(cut, "geoms", [])))
-                           if isinstance(c, LineString) and c.length >= 0.15]
-            for k, piece in enumerate(pieces):
+            for k, piece in enumerate(self._snap_linia(ln, g.poly)):
+                piece = self._dociagnij_do_scian(piece, linie_scian)
                 sid = str(b["id"]) if k == 0 else f"{b['id']}#{k + 1}"
                 g.podp_l.append(PodporaLiniowa(sid, piece, "przegub", "belka"))
                 g.belki.append((sid, b))
         for c in m.slupy():
             if any(abs(float(c["z_do"]) - s) < TOL_Z for s in spody) and g.poly.buffer(0.05).contains(Point(*c["xy"])):
                 g.podp_p.append(PodporaPunktowa(str(c["id"]), tuple(c["xy"])))
+
+    @staticmethod
+    def _dociagnij_do_scian(piece: LineString, linie_scian: list) -> LineString:
+        """Koniec linii belki leżący przy ścianie (≤ t/2 + 0,25 m) przedłużony/skrócony do osi ściany — belka oparta na
+        ścianie (unika sztucznej pary reakcji dwóch bliskich podpór sztywnych w MES)."""
+        (x0, y0), (x1, y1) = piece.coords[0], piece.coords[-1]
+        L = math.hypot(x1 - x0, y1 - y0)
+        ux, uy = (x1 - x0) / L, (y1 - y0) / L
+        pts = [np.array([x0, y0]), np.array([x1, y1])]
+        for k in (0, 1):
+            for lw, t in linie_scian:
+                if lw.distance(Point(*pts[k])) > t / 2 + 0.25:
+                    continue
+                (a0, b0), (a1, b1) = lw.coords[0], lw.coords[-1]
+                dwx, dwy = a1 - a0, b1 - b0
+                den = ux * dwy - uy * dwx
+                if abs(den) < 1e-9:
+                    continue
+                tpar = ((a0 - pts[k][0]) * dwy - (b0 - pts[k][1]) * dwx) / den
+                pts[k] = pts[k] + tpar * np.array([ux, uy])
+                break
+        return LineString([tuple(pts[0]), tuple(pts[1])])
 
     def _komorki(self, g: Grupa):
         """Pola płyty (komórki siatki linii podpór) z klasyfikacją krawędzi S/U/W."""
@@ -509,24 +526,63 @@ class AnalizaKonstrukcji:
                 cells.append({"i": i, "j": j, "rect": r, "x0": xs[i], "x1": xs[i + 1], "y0": ys[j], "y1": ys[j + 1],
                               "lx": xs[i + 1] - xs[i], "ly": ys[j + 1] - ys[j], "wazna": ok, "pelna": a / r.area if r.area else 0})
         valid = {(c["i"], c["j"]): c for c in cells if c["wazna"]}
-        for c in valid.values():
+        # scalanie komórek, między którymi brak podpory (< 20 % długości wspólnej krawędzi) → pola płyty
+        par = {k: k for k in valid}
+
+        def fnd(k):
+            while par[k] != k:
+                par[k] = par[par[k]]
+                k = par[k]
+            return k
+        for (i, j), c in valid.items():
+            for di, dj in ((1, 0), (0, 1)):
+                nb = valid.get((i + di, j + dj))
+                if nb is None:
+                    continue
+                e = LineString([(c["x1"], c["y0"]), (c["x1"], c["y1"])]) if di else LineString([(c["x0"], c["y1"]), (c["x1"], c["y1"])])
+                cov = e.intersection(sup_u).length / e.length if e.length else 0
+                if cov < 0.2:
+                    par[fnd((i, j))] = fnd((i + di, j + dj))
+        grupy_k = {}
+        for k in valid:
+            grupy_k.setdefault(fnd(k), []).append(valid[k])
+        pola = []
+        for lst in grupy_k.values():
+            rect = unary_union([c["rect"] for c in lst])
+            x0, y0, x1, y1 = rect.bounds
+            pc = {"i": min(c["i"] for c in lst), "j": min(c["j"] for c in lst), "rect": rect, "x0": x0, "x1": x1, "y0": y0,
+                  "y1": y1, "lx": x1 - x0, "ly": y1 - y0, "wazna": True,
+                  "pelna": rect.intersection(g.poly).area / box(x0, y0, x1, y1).area,
+                  "prostokat": abs(rect.area - (x1 - x0) * (y1 - y0)) < 1e-6, "n_kom": len(lst)}
+            pola.append(pc)
+        pmap = {}
+        for pc in pola:
+            for i in range(len(xs) - 1):
+                for j in range(len(ys) - 1):
+                    if (i, j) in valid and pc["rect"].buffer(-1e-6).contains(valid[(i, j)]["rect"].centroid):
+                        pmap[(i, j)] = pc
+        for c in pola:
             br = ""
-            for (a, b_), (di, dj) in ((((c["x0"], c["y0"]), (c["x0"], c["y1"])), (-1, 0)),
-                                      (((c["x1"], c["y0"]), (c["x1"], c["y1"])), (1, 0)),
-                                      (((c["x0"], c["y0"]), (c["x1"], c["y0"])), (0, -1)),
-                                      (((c["x0"], c["y1"]), (c["x1"], c["y1"])), (0, 1))):
+            for (a, b_), side in ((((c["x0"], c["y0"]), (c["x0"], c["y1"])), "L"), (((c["x1"], c["y0"]), (c["x1"], c["y1"])), "P"),
+                                  (((c["x0"], c["y0"]), (c["x1"], c["y0"])), "D"), (((c["x0"], c["y1"]), (c["x1"], c["y1"])), "G")):
                 e = LineString([a, b_])
                 cov = e.intersection(sup_u).length / e.length if e.length else 0
-                nb = valid.get((c["i"] + di, c["j"] + dj))
+                off = {"L": (-0.2, 0), "P": (0.2, 0), "D": (0, -0.2), "G": (0, 0.2)}[side]
+                probe = e.interpolate(0.5, normalized=True)
+                q = Point(probe.x + off[0], probe.y + off[1])
+                nb = any(o is not c and o["rect"].buffer(0.01).contains(q) for o in pola)
                 if cov >= 0.8:
-                    br += "U" if nb is not None else "S"
+                    br += "U" if nb else "S"
                 else:
                     br += "W"
             c["brzegi"] = br
-            c["tablice"] = ("W" not in br) and c["pelna"] >= 0.97
-            c["id"] = f"P{c['i'] + 1}.{c['j'] + 1}"
+            c["tablice"] = ("W" not in br) and c["pelna"] >= 0.97 and c["prostokat"]
+        pola.sort(key=lambda c: (c["j"], c["i"]))
+        for k, c in enumerate(pola):
+            c["id"] = f"P{k + 1}"
             c["parzystosc"] = (c["i"] + c["j"]) % 2
-        g.komorki = sorted(valid.values(), key=lambda c: (c["j"], c["i"]))
+        valid = {k: c for k, c in enumerate(pola)}
+        g.komorki = [valid[k] for k in sorted(valid)]
 
     # ---------------- obciążenia na grupie ----------------
     def _obc_na_grupie(self, g: Grupa):
@@ -1457,7 +1513,7 @@ class AnalizaKonstrukcji:
                             "poniżej przypadek miarodajny. Mimośród reakcji stropu e = t/6 (zewn.) / 0,3·t/6 (wewn., niesymetria) [UPR]; "
                             "wiatr jako moment w połowie wysokości w·h²/8.")
         if zewn and wk:
-            nmin = float(top.srednia_ruchoma(top.get("G") + pr["top_a"].get("G"), 1.0).min()) + pr["gm2"] * h / 2
+            nmin = float(np.mean(top.get("G") + pr["top_a"].get("G"))) + pr["gm2"] * h / 2   # średnio [UPR]
             sig = max(nmin, 0) / t / 1000 * p.gG_inf
             poz.wyniki.append(murm.sciana_wiatr(p.gQ * wk, h, t, mur, sigma_d=sig, p=p, nazwa=f"{w.id} — zginanie z płaszczyzny (wiatr)"))
         # docisk pod belkami i schodami

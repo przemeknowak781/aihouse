@@ -90,7 +90,7 @@ class WynikOdgrom:
 
     def do_dict(self) -> dict:
         return {"A_D_m2": round(self.A_D, 0), "N_D": round(self.N_D, 5), "N_L": round(self.N_L, 4), "klasa_pozarowa": self.klasa,
-                "decyzja_LPS": self.decyzja, "uziom": self.uziom["typ"], "R_uziomu_ohm": round(self.uziom["R"], 1)}
+                "decyzja_LPS": self.decyzja, "uziom": self.uziom["typ"].split(" (")[0].split(" —")[0], "R_uziomu_ohm": round(self.uziom["R"], 1)}
 
     def raport(self) -> Raport:
         return _raport(self)
@@ -164,7 +164,8 @@ def ocena_ryzyka(dane: DaneBudynku, par: ParametryOdgrom | None = None, pv=None)
         ik = next((i for i, w in enumerate(podl.warstwy) if w.konstrukcyjna), 0)
         xps_pod = any("XPS" in w.mat.upper() or "EPS" in w.mat.upper() for w in podl.warstwy[ik + 1:])
     obr = dane.obrys_zabudowy
-    if typ_f == "plyta" and xps_pod:
+    otok = typ_f == "plyta" and xps_pod
+    if otok:
         typ_u = "otokowy w gruncie (fundament izolowany termicznie — PN-HD 60364-5-54 zał. C.2)"
         A_u = obr.buffer(par.otok_odsuniecie, join_style=2).area
         D = math.sqrt(4 * A_u / math.pi)
@@ -184,7 +185,8 @@ def ocena_ryzyka(dane: DaneBudynku, par: ParametryOdgrom | None = None, pv=None)
                                                                                "konstrukcja PV (połączenie wyrównawcze, jeden punkt)"]}
     kroki += [Krok(f"Uziom {typ_u.split('(')[0].strip()}: średnica zastępcza", "D = √(4A/π)", f"√(4·{f(A_u, 1)}/π)", D, "m", "", 2),
               Krok("Rezystancja uziemienia (orientacyjnie, ρ = " + f(par.rho_gruntu, 0) + " Ω·m [ZAŁ])",
-                   "R ≈ 2ρ/(3D)" if "otok" in typ_u else "R ≈ 2ρ/(πD)", "", R, "Ω", "DEHN LPG [W]; pomiar po wykonaniu", 1)]
+                   "R ≈ 2ρ/(3D)" if otok else "R ≈ 2ρ/(πD)", f"2·{f(par.rho_gruntu, 0)}/({'3' if otok else 'π'}·{f(D, 2)})", R, "Ω",
+                   "DEHN LPG [W]; pomiar po wykonaniu", 1)]
     # LPS — parametry (jeśli potrzebny / rezerwa)
     n_odpr = {"III": max(2, math.ceil(per / 15)), "IV": max(2, math.ceil(per / 20))}
     k_c = 0.44 if n_odpr["IV"] >= 4 else 0.66

@@ -5,7 +5,8 @@ Hierarchia źródeł Ψ i f_Rsi węzła (od najważniejszego):
      (solver 2D `lamela.obliczenia.mostki2d` — osobny moduł; tu wyłącznie przyjmowanie wyników),
   2. deklaracja producenta wyrobu (łącznik termoizolacyjny płyt wspornikowych, konsola) — DANE PRZYKŁADOWE,
   3. wartość domyślna wg PN-EN ISO 14683:2017 zał. C — **tylko jako rozwiązanie awaryjne** [NZW: wartości zał. C nie
-     zostały zweryfikowane na egzemplarzu normy (rejestr R6-32); dla wsporników R6 zaleca Ψ numeryczne];
+     zostały zweryfikowane na egzemplarzu normy (rejestr R6-32); dla wsporników R6 zaleca Ψ numeryczne]; wartości
+     uzgodnione z tabelą orientacyjną `mostki2d.geometria.PSI_DOMYSLNE_14683` (Ψ_i ≡ Ψ_oi; strop pośredni Ψ_e);
      wariant „dobra_praktyka” — typowe wartości dla ciągłej izolacji zewnętrznej (literatura) [NZW].
 System wymiarów: wewnętrzne całkowite (Ψ_oi) — zgodnie z `energia.bryla`.
 H_TB = Σ l_k·Ψ_k + Σ χ_j (PN-EN ISO 14683 p. 4; PN-EN ISO 13789 p. 6.?).
@@ -29,15 +30,23 @@ PSI_DOMYSLNE: dict[str, tuple[float, float, str]] = {
     "okap": (0.75, 0.25, "stropodach z płytą wysuniętą (okap) — płyta przechodzi przez izolację"),
     "naroznik_wypukly": (0.15, 0.06, "narożnik zewnętrzny ścian (izolacja zewnętrzna)"),
     "naroznik_wklesly": (-0.10, -0.10, "narożnik wewnętrzny ścian"),
-    "strop_posredni": (0.10, 0.02, "strop pośredni – ściana zewnętrzna z izolacją ciągłą (ETICS)"),
+    "strop_posredni": (0.00, 0.00, "strop pośredni – ściana zewnętrzna z izolacją ciągłą (ETICS); Ψ_oi = Ψ_e (wys. „od podłogi do podłogi”)"),
     "strop_zewn_krawedz": (0.60, 0.15, "strop nad powietrzem zewnętrznym – ściana (wspornik bryły)"),
     "oscieze": (0.10, 0.04, "ościeża/nadproża/parapety — okno w warstwie izolacji („ciepły montaż”)"),
-    "sciana_grunt": (0.60, 0.15, "ściana zewnętrzna – podłoga na gruncie / płyta fundamentowa (cokół)"),
+    "sciana_grunt": (0.80, 0.15, "ściana zewnętrzna – podłoga na gruncie / płyta fundamentowa (cokół)"),
     "plyta_wspornikowa": (0.95, 0.95, "płyta wspornikowa (balkon/taras/okap) przechodząca przez izolację bez łącznika"),
     "plyta_wspornikowa_lacznik": (0.30, 0.15, "płyta wspornikowa z łącznikiem termoizolacyjnym"),
     "polaczenie_nieogrz": (0.20, 0.10, "połączenie przegród dom–garaż nieogrzewany (ściana/strop)"),
     "slup": (0.30, 0.10, "słup/rama przechodząca przez izolację (rama boksu, słup stalowy)"),
 }
+# aliasy typów węzłów (np. klucze katalogu `mostki2d.geometria.PSI_DOMYSLNE_14683`, skrócone nazwy w modelu)
+ALIASY_TYPOW = {"R_attyka": "attyka", "C_naroze_zewn": "naroznik_wypukly", "naroze": "naroznik_wypukly",
+                "naroznik": "naroznik_wypukly", "IF_strop": "strop_posredni", "GF_cokol": "sciana_grunt",
+                "cokol": "sciana_grunt", "W_oscieze": "oscieze", "B_balkon": "plyta_wspornikowa",
+                "wspornik": "plyta_wspornikowa_lacznik", "garaz": "polaczenie_nieogrz", "okap_plyty": "okap"}
+# typy, dla których Ψ_oi = Ψ_e (wymiar pionowy „od podłogi do podłogi”); pozostałe: Ψ_oi = Ψ_i
+PSI_OI_Z_E = ("strop_posredni", "plyta_wspornikowa", "plyta_wspornikowa_lacznik")
+
 CHI_DOMYSLNE: dict[str, tuple[float, str]] = {
     "konsola_lamel": (0.010, "konsola mocowania lamel (przekładka termiczna)"),
     "przejscie_instalacji": (0.005, "przejście instalacji przez przegrodę zewnętrzną (mankiet)"),
@@ -83,6 +92,40 @@ def wczytaj_wyniki_symulacji_dict(d) -> dict:
     return {str(k): v for k, v in d.items()}
 
 
+def psi_z_symulacji(s: dict, typ: str) -> tuple[float | None, str]:
+    """Ψ w systemie wymiarów wewnętrznych całkowitych z wyniku symulacji: 'psi_oi' > ('psi_e' dla stropów pośrednich
+    i płyt wspornikowych | 'psi_i' dla pozostałych) > 'psi'."""
+    if s.get("psi_oi") is not None:
+        return float(s["psi_oi"]), "Ψ_oi"
+    if typ in PSI_OI_Z_E and s.get("psi_e") is not None:
+        return float(s["psi_e"]), "Ψ_e ≡ Ψ_oi"
+    if s.get("psi_i") is not None:
+        return float(s["psi_i"]), "Ψ_i ≡ Ψ_oi"
+    if s.get("psi") is not None:
+        return float(s["psi"]), "Ψ"
+    return None, ""
+
+
+def wyniki_z_mostki2d(wyniki, dlugosci: dict | None = None) -> dict:
+    """Adapter wyników `lamela.obliczenia.mostki2d` (lista WynikWezla) → {id: {psi_e, psi_i, f_rsi, dlugosc}}."""
+    out = {}
+    for w in wyniki:
+        wz = getattr(w, "wezel", None)
+        wid = str(getattr(wz, "id", None) or getattr(w, "id", ""))
+        pg = getattr(w, "psi_glowne", None)
+        f = getattr(w, "f", {}) or {}
+        d = {"zrodlo": "symulacja PN-EN ISO 10211 (mostki2d)"}
+        if pg is not None:
+            d["psi_e"] = float(getattr(pg, "psi_e"))
+            d["psi_i"] = float(getattr(pg, "psi_i"))
+        if f.get("f_Rsi") is not None:
+            d["f_rsi"] = float(f["f_Rsi"])
+        if dlugosci and wid in dlugosci:
+            d["dlugosc"] = float(dlugosci[wid])
+        out[wid] = d
+    return out
+
+
 def psi_domyslne(typ: str, wariant: str = "domyslna") -> tuple[float | None, str]:
     if typ in PSI_DOMYSLNE:
         a, b, opis = PSI_DOMYSLNE[typ]
@@ -108,15 +151,17 @@ def wezly_z_modelu(m=None, wyniki_symulacji: dict | None = None, *, wezly_auto: 
     for w in src:
         wid = str(w.get("id"))
         typ = str(w.get("typ", "inny"))
+        typ = ALIASY_TYPOW.get(typ, typ)
         wz = Wezel(id=wid, typ=typ, nazwa=str(w.get("nazwa", typ)), dlugosc=float(w.get("dlugosc") or 0.0),
                    liczba=float(w.get("liczba") or 0.0), przegrody=[str(x) for x in (w.get("przegrody") or [])])
         s = sym.get(wid)
         if s:
             if s.get("dlugosc") is not None:
                 wz.dlugosc = float(s["dlugosc"])
-            if s.get("psi") is not None:
-                wz.psi = float(s["psi"])
-                wz.zrodlo_psi = str(s.get("zrodlo", "symulacja PN-EN ISO 10211 (mostki2d)"))
+            psi, rodz = psi_z_symulacji(s, typ)
+            if psi is not None:
+                wz.psi = psi
+                wz.zrodlo_psi = str(s.get("zrodlo", "symulacja PN-EN ISO 10211 (mostki2d)")) + f" ({rodz})"
             if s.get("chi") is not None:
                 wz.chi = float(s["chi"])
                 wz.zrodlo_psi = str(s.get("zrodlo", "symulacja PN-EN ISO 10211 (mostki2d)"))

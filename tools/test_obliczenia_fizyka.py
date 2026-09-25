@@ -37,7 +37,7 @@ from lamela.obliczenia.fizyka.u_przegrody import (PoprawkiU, oblicz_u, u_klin_pr
                                                    u_klin_trojkat_max_w_wierzcholku, u_klin_trojkat_min_w_wierzcholku,
                                                    u_klin_wielobok)
 from lamela.obliczenia.fizyka.warstwy import sprawdz_ciaglosc  # noqa: E402
-from lamela.obliczenia.raport import oblicz_wszystko, zapisz_raporty  # noqa: E402
+from lamela.obliczenia.fizyka_energia import oblicz_wszystko, zapisz_raporty  # noqa: E402
 
 B_TEST = ROOT / "model" / "test" / "dom_testowy.yaml"
 D_TEST = ROOT / "model" / "test" / "dzialka_testowa.yaml"
@@ -268,6 +268,13 @@ def test_mostki_symulacja_nadpisuje():
     assert w2[0].status == "symulacja" and w2[0].f_rsi == 0.86
     chk = MB.sprawdz_frsi(w2, 0.72)
     assert chk[0]["ok"] and chk[1]["ok"]
+    # wybór Ψ z wyników mostki2d (ψ_e / ψ_i) w systemie wymiarów wewnętrznych całkowitych
+    assert MB.psi_z_symulacji({"psi_e": 0.01, "psi_i": 0.12}, "strop_posredni")[0] == 0.01
+    assert MB.psi_z_symulacji({"psi_e": 0.40, "psi_i": 0.62}, "attyka")[0] == 0.62
+    assert MB.psi_z_symulacji({"psi_oi": 0.3, "psi_i": 0.62}, "attyka")[0] == 0.3
+    raw = type("M", (), {"raw": {"wezly": [{"id": "WZ-R1", "typ": "R_attyka", "dlugosc": 38.4}]}})()
+    w3 = MB.wezly_z_modelu(raw, {"WZ-R1": {"psi_e": 0.1, "psi_i": 0.3, "f_rsi": 0.9}})
+    assert w3[0].typ == "attyka" and w3[0].psi == 0.3 and abs(w3[0].H - 11.52) < 1e-9
 
 
 # --------------------------------------------------------------------------------------------------

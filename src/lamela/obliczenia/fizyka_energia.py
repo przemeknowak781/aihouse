@@ -1,6 +1,6 @@
 """Komplet obliczeń fizyki budowli i charakterystyki energetycznej dla modelu — raporty Markdown + wykresy PNG.
 
-    PYTHONPATH=src python3 -m lamela.obliczenia.raport --budynek model/budynek.yaml --dzialka model/dzialka.yaml \
+    PYTHONPATH=src python3 -m lamela.obliczenia.fizyka_energia --budynek model/budynek.yaml --dzialka model/dzialka.yaml \
         --out projekt/08_obliczenia/<katalog> [--psi domyslna|dobra_praktyka] [--wezly-wyniki plik.json] [--bez-zacienienia]
 
 Pliki wynikowe: 00_zestawienie.md, 01_przegrody_U.md, 02_grunt.md, 03_stolarka_g.md, 04_mostki.md,
