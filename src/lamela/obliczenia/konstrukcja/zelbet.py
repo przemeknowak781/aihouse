@@ -798,3 +798,27 @@ def wymiaruj_plyte(M_Ed: float, h: float, d: float, beton: Beton, stal: StalZbro
     zg.warunek("Zbrojenie na zginanie", max(zg.As_req, zg.As_min), As, "mm²/m", "6.1, (9.1N)", nd=0,
                symbol_E="A_s,req", symbol_R="A_s,prov")
     return zg, fi, s, As
+
+
+def zbrojenie_min_slupa(N_Ed: float, b: float, h: float, stal: StalZbrojeniowa | None = None) -> Wynik:
+    """Słup: A_s,min = max(0,10·N_Ed/f_yd; 0,002·A_c) (9.12N), A_s,max = 0,04·A_c (poza zakładami); pręty ≥ φ12 (NA [NZW])."""
+    stal = stal or StalZbrojeniowa()
+    w = Wynik(nazwa="Zbrojenie minimalne słupa (9.5.2)")
+    Ac = b * h * 1e6
+    As = max(0.10 * N_Ed * 1000 / stal.f_yd, 0.002 * Ac)
+    w.krok("Zbrojenie minimalne", "A_s,min = max(0,10·N_Ed/f_yd; 0,002·A_c)", f"max(0,10·{f(N_Ed, 1)}·10³/{f(stal.f_yd, 1)}; 0,002·{f(Ac, 0)})",
+           As, "mm²", nd=0, zrodlo="(9.12N)")
+    w.krok("Zbrojenie maksymalne", "A_s,max = 0,04·A_c", "", 0.04 * Ac, "mm²", nd=0, zrodlo="9.5.2(3)")
+    return w
+
+
+def zbrojenie_min_sciany(t: float, stal: StalZbrojeniowa | None = None) -> Wynik:
+    """Ściana żelbetowa (na 1 m): pionowe A_s,vmin = 0,002·A_c (po połowie przy każdej powierzchni), poziome
+    A_s,hmin = max(0,25·A_s,v; 0,001·A_c) (9.6.2, 9.6.3)."""
+    w = Wynik(nazwa="Zbrojenie minimalne ściany żelbetowej (9.6)")
+    Ac = t * 1e6
+    Av = 0.002 * Ac
+    Ah = max(0.25 * Av, 0.001 * Ac)
+    w.krok("Pionowe", "A_s,vmin = 0,002·A_c", f"0,002·{f(Ac, 0)}", Av, "mm²/m", nd=0, zrodlo="9.6.2(1)")
+    w.krok("Poziome", "A_s,hmin = max(0,25·A_s,v; 0,001·A_c)", "", Ah, "mm²/m", nd=0, zrodlo="9.6.3(1)")
+    return w

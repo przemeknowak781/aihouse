@@ -310,6 +310,41 @@ def test_model_wyniki_rozsadne():
     assert not pos["L1"].ok     # D = 0,75 m < 1,0 m (W-284)
 
 
+def test_wspornik_swobodny_EQU():
+    """Wariant modelu testowego: płyta PL-D bez belki i słupów → wspornik swobodny 3,91 m połączony momentowo ze stropem ST1
+    (łącznik termiczny) — EQU (PN-EN 1990 tabl. A1.2(A)) i ugięcie wspornika (K = 0,4; L = 2·wysięg)."""
+    import copy
+    import yaml
+    from lamela.model import Model
+    raw = yaml.safe_load(B_TEST.read_text(encoding="utf-8"))
+    rawd = yaml.safe_load(D_TEST.read_text(encoding="utf-8"))
+    raw = copy.deepcopy(raw)
+    raw["slupy"], raw["belki"] = [], []
+    raw["fundamenty"]["elementy"] = [e for e in raw["fundamenty"]["elementy"] if e["id"] not in ("F1", "F2")]
+    for w in raw["wsporniki_plyty"]:
+        w["obrys"] = [[10.09, 0.0], [11.6, 0.0], [11.6, 5.0], [10.09, 5.0]]     # wysięg 1,51 m
+    raw["balustrady"] = [b for b in raw["balustrady"] if b["id"] != "BL4"]
+    m = Model(raw, rawd)
+    an = AnalizaKonstrukcji(m, Parametry()).uruchom()
+    g = next(gg for gg in an.grupy if "PL-D" in gg.nazwa)
+    assert "ST1" in g.nazwa, "wspornik swobodny powinien być liczony wspólnie ze stropem (ciągłość)"
+    pz = next(p_ for p_ in an.pos_plyty if p_.ident == "PL-D")
+    equ = next(w for w in pz.wyniki if "EQU" in w.nazwa)
+    wz = next(w for w in equ.warunki)
+    lc = 11.6 - 10.0
+    gc = pz_g = next(e for e in g.el if e.id == "PL-D").zest.g_k
+    close(wz.E, (1.1 * gc + 1.5 * 4.0) * lc ** 2 / 2, 0.02, "M_dst wspornika")
+    assert wz.ok
+    ug = [w for w in pz.podpozycje[0].wyniki if "ugięcie" in w.nazwa]
+    assert ug and "K = 0,4" in ug[0].nazwa
+
+
+def test_mur_przesklepienie():
+    m = Mur()
+    r = murm.sciana_luk(1.33, 2.86, 0.18, m)
+    close(r.warunki[0].R, 4.504 * 1000 * (0.18 / 2.86) ** 2, 0.001, "q_lat,d = f_d(t/l_a)²")
+
+
 # ==================================================================================================
 # 6. Niezależne przeliczenie ręczne 3 pozycji (wzory zamknięte, bez funkcji biblioteki)
 # ==================================================================================================

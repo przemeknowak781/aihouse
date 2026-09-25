@@ -1,40 +1,32 @@
 {
- "czas": "2026-09-25 04:56",
+ "czas": "2026-09-25 04:59",
  "aktywni": [
-  {
-   "id": "a358500c03b62940a",
-   "opis": "Build MEP and electrical calc library",
-   "idle_min": 0.1,
-   "bez_narzedzi_min": 0.1,
-   "limity": 0,
-   "powody": []
-  },
   {
    "id": "a27284e7b67190ca8",
    "opis": "Build structural Eurocode calc library",
-   "idle_min": 0.0,
-   "bez_narzedzi_min": 0.0,
+   "idle_min": 0.3,
+   "bez_narzedzi_min": 0.6,
    "limity": 0,
    "powody": []
   },
   {
    "id": "a7dce8cf36be08d2a",
    "opis": "wf_44634517-034:sędzia:J3",
-   "idle_min": 0.4,
-   "bez_narzedzi_min": null,
+   "idle_min": 0.1,
+   "bez_narzedzi_min": 0.1,
    "limity": 0,
    "powody": []
   },
   {
    "id": "a97b89276bf7931f1",
    "opis": "wf_a0d51b50-592:poprawki",
-   "idle_min": 0.0,
-   "bez_narzedzi_min": 0.0,
+   "idle_min": 2.1,
+   "bez_narzedzi_min": 2.2,
    "limity": 0,
    "powody": []
   }
  ],
  "zakonczeni": 0,
  "zastoje": [],
- "repo_bez_zmian_min": 0.2
+ "repo_bez_zmian_min": 0.6
 }

@@ -1136,7 +1136,10 @@ class AnalizaKonstrukcji:
             w.uwaga("Płyta nie jest wspornikiem swobodnym — EQU (przewrócenie) nie decyduje.")
             poz.wyniki.append(w)
             return
-        root = [s for s in g.podp_l if s.linia.distance(e.poly_full) < 0.15]
+        brzeg = e.poly_full.boundary
+        cand = [(s.linia.buffer(0.15).intersection(brzeg).length, s) for s in g.podp_l if s.linia.distance(e.poly_full) < 0.15]
+        cand = [c for c in cand if c[0] > 0.3]
+        root = [max(cand, key=lambda c: c[0])[1]] if cand else []
         if not root:
             w.uwaga("Brak podpory przy krawędzi zamocowania — sprawdzić model (wspornik bez podparcia).")
             poz.wyniki.append(w)
@@ -1563,35 +1566,49 @@ class AnalizaKonstrukcji:
         # mimośród stropu: zewn. — jednostronnie t/6; wewn. — różnica
         best, best_k = None, -1.0
         segs = self._segmenty(w, pr)
+
+        def spr(sg, ctop, atop, cdol, Mw, kb):
+            msk = (dol.s >= sg[0] - 1e-9) & (dol.s <= sg[1] + 1e-9)
+            b = sg[1] - sg[0]
+            if sg[2] == "sciana":
+                ns = top.srednia_ruchoma(ctop, 1.0)[msk].max() if msk.any() else 0
+                na = top.srednia_ruchoma(atop, 1.0)[msk].max() if msk.any() else 0
+                Nd = float(top.srednia_ruchoma(cdol, 1.0)[msk].max())
+                Ng = float(ns + na)
+                Ms = ns * t / 6 if zewn else ns * t / 6 * 0.3
+                return murm.sciana_nosnosc(max(Ng, 1e-3), max(0.5 * (Ng + Nd), 1e-3), max(Nd, 1e-3), t, h, mur, M_g=Ms, M_w=Mw, p=p,
+                                           nazwa=f"{w.id} — ściana (odcinek {f(sg[0])}–{f(sg[1])} m), {kb.nazwa}")
+            Ng = float(np.trapezoid(np.where(msk, ctop + atop, 0), dol.s))
+            Nd = float(np.trapezoid(np.where(msk, cdol, 0), dol.s))
+            Nss = float(np.trapezoid(np.where(msk, ctop, 0), dol.s))
+            return murm.filarek(max(Ng, 1e-3), max(Nd, 1e-3), b, t, h, mur, M_g=Nss * t / 6 * (1 if zewn else 0.3), p=p,
+                                nazwa=f"{w.id} — filarek {f(sg[0])}–{f(sg[1])} m (b = {f(b)} m), {kb.nazwa}")
+
+        def eta(r):
+            return max((wv.eta for wv in r.warunki if "Smukłość" not in wv.opis), default=0.0)
         for kb in kombs:
-            ctop = top.kombinacja({c: a for c, a in kb.wsp.items() if c != "W"})
-            atop = pr["top_a"].kombinacja({c: a for c, a in kb.wsp.items() if c != "W"})
-            cdol = dol.kombinacja({c: a for c, a in kb.wsp.items() if c != "W"})
+            wc = {c: a for c, a in kb.wsp.items() if c != "W"}
+            ctop, atop, cdol = top.kombinacja(wc), pr["top_a"].kombinacja(wc), dol.kombinacja(wc)
             Mw = kb.wsp.get("W", 0.0) * wk * h * h / 8
             for sg in segs:
-                msk = (dol.s >= sg[0] - 1e-9) & (dol.s <= sg[1] + 1e-9)
-                b = sg[1] - sg[0]
-                if b < 0.05:
+                if sg[1] - sg[0] < 0.05:
                     continue
-                if sg[2] == "sciana":
-                    ns = top.srednia_ruchoma(ctop, 1.0)[msk].max() if msk.any() else 0
-                    na = top.srednia_ruchoma(atop, 1.0)[msk].max() if msk.any() else 0
-                    Nd = float(top.srednia_ruchoma(cdol, 1.0)[msk].max())
-                    Ng = float(ns + na)
-                    Ms = ns * t / 6 if zewn else ns * t / 6 * 0.3
-                    r = murm.sciana_nosnosc(max(Ng, 1e-3), max(0.5 * (Ng + Nd), 1e-3), max(Nd, 1e-3), t, h, mur, M_g=Ms, M_w=Mw, p=p,
-                                            nazwa=f"{w.id} — ściana (odcinek {f(sg[0])}–{f(sg[1])} m), {kb.nazwa}")
-                else:
-                    Ng = float(np.trapezoid(np.where(msk, ctop + atop, 0), dol.s))
-                    Nd = float(np.trapezoid(np.where(msk, cdol, 0), dol.s))
-                    Nss = float(np.trapezoid(np.where(msk, ctop, 0), dol.s))
-                    r = murm.filarek(max(Ng, 1e-3), max(Nd, 1e-3), b, t, h, mur, M_g=Nss * t / 6 * (1 if zewn else 0.3), p=p,
-                                     nazwa=f"{w.id} — filarek {f(sg[0])}–{f(sg[1])} m (b = {f(b)} m), {kb.nazwa}")
-                kl = max((wv.eta for wv in r.warunki if "Smukłość" not in wv.opis), default=0.0)
-                if best is None or kl > best_k:
-                    best, best_k = r, kl
+                r = spr(sg, ctop, atop, cdol, Mw, kb)
+                wyn, k = [r], eta(r)
+                if Mw > 0 and k > 1.0:
+                    # alternatywa (6.3): obciążenie pionowe bez wiatru + wiatr przez przesklepienie ściany między stropami
+                    r0 = spr(sg, ctop, atop, cdol, 0.0, kb)
+                    rl = murm.sciana_luk(kb.wsp.get("W", 0.0) * wk, h, t, mur, nazwa=f"{w.id} — wiatr: przesklepienie (6.3.2), {kb.nazwa}")
+                    k2 = max(eta(r0), rl.wykorzystanie)
+                    if k2 < k:
+                        r0.uwaga("Przy małej sile pionowej i wietrze wiodącym (e_m > 0,45t) przyjęto nośność na obciążenie poziome "
+                                 "przez przesklepienie ściany między stropami (PN-EN 1996-1-1 6.3.2), a sprawdzenie 6.1.2 — bez "
+                                 "mimośrodu od wiatru [UPR].")
+                        wyn, k = [r0, rl], k2
+                if best is None or k > best_k:
+                    best, best_k = wyn, k
         if best is not None:
-            poz.wyniki.append(best)
+            poz.wyniki.extend(best)
             poz.opis.append(f"Sprawdzono {len(segs)} odcinków (filarki ≤ 2 m między otworami — siła całkowita; dłuższe pasma — maks. "
                             f"średnia krocząca 1 m) dla {len(kombs)} kombinacji; "
                             "poniżej przypadek miarodajny. Mimośród reakcji stropu e = t/6 (zewn.) / 0,3·t/6 (wewn., niesymetria) [UPR]; "
@@ -1609,6 +1626,7 @@ class AnalizaKonstrukcji:
                              "miarodajne sprawdzenie 6.1.2 z mimośrodem e_hm od wiatru.")
                 rw.warunki = []
             poz.wyniki.append(rw)
+            poz.wyniki.append(murm.sciana_luk(p.gQ * wk, h, t, mur, nazwa=f"{w.id} — wiatr: przesklepienie między stropami (6.3.2)"))
         # docisk pod belkami i schodami
         for cs, P, s_c, szer in self.pending_sciany.get(w.id, []):
             if cs != "G" or szer > 0.5:

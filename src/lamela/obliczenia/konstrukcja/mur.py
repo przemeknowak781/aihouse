@@ -238,3 +238,23 @@ def sciana_uproszczona_1996_3(N_Ed: float, t: float, h: float, mur: Mur, l_f: fl
     w.krok("Nośność", "N_Rd = Φ_s·f_d·t", f"{f(Ps, 3)}·{f(mur.f_d, 2)}·{f(t * 1000, 0)}", NR, "kN/m")
     w.warunek("Nośność (PN-EN 1996-3)", N_Ed, NR, "kN/m", "PN-EN 1996-3 4.2.2 [NZW]", symbol_E="N_Ed", symbol_R="N_Rd")
     return w
+
+
+def sciana_luk(w_Ed: float, l_a: float, t: float, mur: Mur, nazwa: str = "Ściana obciążona poziomo — efekt przesklepienia (6.3.2)") -> Wynik:
+    """Ściana wykonana szczelnie między podporami zdolnymi przenieść rozpór (stropy/wieńce): łuk trójprzegubowy w grubości
+    ściany (PN-EN 1996-1-1 p. 6.3.2): q_lat,d = f_d·(t/l_a)² (6.20), rozpór N_ad = 1,5·f_d·t/10 (6.19); ugięcie łuku d_a
+    pominięte dla l_a/t ≤ 25 [NZW — wzory z pamięci, potwierdzić w normie]."""
+    w = Wynik(nazwa=nazwa)
+    sm = l_a / t
+    w.krok("Smukłość łuku", "l_a/t", f"{f(l_a, 2)}/{f(t, 3)}", sm, nd=1)
+    q = mur.f_d * 1000 * (t / l_a) ** 2
+    w.krok("Nośność na obciążenie poziome", "q_lat,d = f_d·(t/l_a)²", f"{f(mur.f_d, 2)}·10³·({f(t, 3)}/{f(l_a, 2)})²", q, "kN/m²",
+           nd=2, zrodlo="(6.20) [NZW]")
+    Nad = 1.5 * mur.f_d * 1000 * t / 10
+    w.krok("Obliczeniowy rozpór łuku (przenoszony przez stropy/wieńce)", "N_ad = 1,5·f_d·t/10", "", Nad, "kN/m", nd=1,
+           zrodlo="(6.19) [NZW]")
+    w.warunek("Obciążenie poziome — przesklepienie", w_Ed, q, "kN/m²", "PN-EN 1996-1-1 6.3.2", nd=2, symbol_E="W_Ed",
+              symbol_R="q_lat,d")
+    if sm > 25:
+        w.uwaga("l_a/t > 25 — uwzględnić ugięcie łuku d_a (6.3.2(3)).")
+    return w
