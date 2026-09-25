@@ -396,20 +396,20 @@ Obszar oddziaływania mieści się w całości na działce (W-012).
 
 | wskaźnik | wartość | wymaganie | ocena |
 |---|---|---|---|
-| PU wg RPB §20 / W-316 (bez klatek, garażu i techn.) | **240,24 m²** (P0 96,29, P1 84,39, P2 59,57) | 230–270 m² | ✓ |
-| kontrolnie PN-ISO 9836 (rdzeń `lamela.model`, pipeline): podstawowa / pomocnicza z garażem / ruchu / techniczna | 158,78 / 78,58 / 43,85 / 16,24 m² („PU” rdzenia = podst. + pomocn. = 237,36 m² — z garażem, bez komunikacji) | — | — |
-| garaż (osobno) / pom. techniczne (osobno) / klatki | 37,42 / 16,24 / 3,55 m² | — | — |
+| PU wg RPB §20 / W-316 (bez klatek, garażu i techn.) | **239,32 m²** (P0 95,36, P1 84,39, P2 59,57) | 230–270 m² | ✓ |
+| kontrolnie PN-ISO 9836 (rdzeń `lamela.model`, pipeline): podstawowa / pomocnicza z garażem / ruchu / techniczna | 158,78 / 77,64 / 43,82 / 16,25 m² („PU” rdzenia = podst. + pomocn. = 236,42 m² — z garażem, bez komunikacji) | — | — |
+| garaż (osobno) / pom. techniczne (osobno) / klatki | 37,42 / 16,25 / 3,51 m² | — | — |
 | strefa dzienna salon + jadalnia + kuchnia | 54,44 m² | ≥ 50 m² | ✓ |
-| powierzchnia zabudowy (obrysy kondygnacji) | 187,50 m² (11,72 %); z płytami 212,99 m² | ≤ 480 m² (30 %) | ✓ |
-| powierzchnia biologicznie czynna | 1 281,57 m² (80,10 %); rezerwa 50 % dachu zielonego 31,98 m² | ≥ 800 m² (50 %) | ✓ |
+| powierzchnia zabudowy (obrysy kondygnacji) | 187,50 m² (11,72 %); z płytami 218,08 m² | ≤ 480 m² (30 %) | ✓ |
+| powierzchnia biologicznie czynna | 1 281,57 m² (80,10 %); rezerwa 50 % dachu zielonego 29,53 m² | ≥ 800 m² (50 %) | ✓ |
 | intensywność zabudowy (Σ brutto kondygnacji / działka) | 0,248 | 0,05–0,80 | ✓ |
 | kubatura brutto | 1 354,5 m³ | — (> 1000 m³ → PWP, W-190) | — |
-| wysokość zabudowy (upzp): najwyższy punkt 10,000 − śr. teren -0,251 | **10,25 m** | ≤ 11,00 m (rezerwa → 10,70) | ✓ |
-| wysokość budynku wg WT §6 (teren przy najniższym wejściu -0,326) | 9,85 m | grupa N ≤ 12 m | ✓ |
+| wysokość zabudowy (upzp art. 2 pkt 30): najwyższy punkt 10,000 − teren; na obwodzie niższa z rzędnych istn./proj. (D-15); kontrolnie od NAJNIŻSZEGO terenu -0,329 (definicja: od średniej -0,251 → 10,25 m) | **10,33 m** | ≤ 11,00 m (rezerwa → 10,70) | ✓ |
+| wysokość budynku wg WT §6: do najwyższego punktu pokrycia z klinem 9,626 − teren przy najniższym wejściu -0,326 | 9,95 m | grupa N ≤ 12 m | ✓ |
 | kondygnacje nadziemne | 3 | ≤ 3 | ✓ |
 | miejsca postojowe (garaż + podjazd) | 4 | ≥ 2 | ✓ |
-| schody SCH1: 18 × h 0,175 / s 0,28; 2h+s; bieg | 2h+s = 0,630 m; bieg 1,150 / 1,145 m | h ≤ 0,19; 0,60–0,65; ≥ 1,00 (cel) | ✓ |
-| schody SCH2: 18 × h 0,175 / s 0,28; 2h+s; bieg | 2h+s = 0,630 m; bieg 1,150 / 1,145 m | h ≤ 0,19; 0,60–0,65; ≥ 1,00 (cel) | ✓ |
+| schody SCH1: 18 × h 0,175 / s 0,28; 2h+s; bieg | 2h+s = 0,630 m; bieg 1,135 / 1,130 m | h ≤ 0,19; 0,60–0,65; ≥ 1,00 (cel) | ✓ |
+| schody SCH2: 18 × h 0,175 / s 0,28; 2h+s; bieg | 2h+s = 0,630 m; bieg 1,135 / 1,130 m | h ≤ 0,19; 0,60–0,65; ≥ 1,00 (cel) | ✓ |
 
 **Odległości od granic działki i linii zabudowy** (lica zewnętrzne; WT §12: ściana z otworami ≥ 4,00 m, bez otworów ≥ 3,00 m; okapy/płyty ≥ 1,50 m — przyjęto ≥ 4,00 m):
 
@@ -425,8 +425,12 @@ Obszar oddziaływania mieści się w całości na działce (W-012).
 | płyta PL-2 | 5,20 | 11,80 | 31,40 | 5,87 |
 | płyta PL-3 | 5,20 | 11,80 | 31,40 | 5,87 |
 | płyta IZ-ST2Z | 6,30 | 24,70 | 32,40 | 5,87 |
+| płyta PS-A | 5,20 | 24,70 | 31,40 | 5,87 |
+| płyta OB-A | 5,18 | 24,70 | 31,38 | 5,85 |
+| płyta OB-A2 | 7,30 | 24,68 | 31,40 | 11,60 |
 | płyta SW1 | 13,60 | 16,00 | 40,15 | 2,65 |
-| płyta WYL1 | 14,20 | 16,70 | 33,50 | 9,40 |
+| płyta WYL1 | 14,70 | 16,20 | 33,50 | 9,40 |
+| płyta PL-D | 20,20 | 5,72 | 31,40 | 11,60 |
 | taras T1 | 4,30 | 12,10 | 29,40 | 6,17 |
 | taras T2 | 17,00 | 12,70 | 41,75 | 0,95 |
 | taras T3 | 19,80 | 10,90 | 31,40 | 11,60 |
@@ -436,9 +440,9 @@ Obszar oddziaływania mieści się w całości na działce (W-012).
 
 | pomieszczenie | pow. [m²] | okna | A okien [m²] | stosunek | ocena |
 |---|---|---|---|---|---|
-| 0.06 Salon + jadalnia + kuchnia | 54,44 | O0-01, O0-02, O0-03, O0-04, O0-05, O0-11 | 33,83 | 1:1,6 | ✓ |
+| 0.06 Salon + jadalnia + kuchnia | 54,44 | O0-01, O0-02, O0-03, O0-04, O0-05, O0-11 | 32,79 | 1:1,7 | ✓ |
 | 0.10 Pokój gościnny / gabinet | 12,52 | O0-12 | 2,26 | 1:5,5 | ✓ |
-| 1.02 Pokój rodzinny / biblioteka (boks C) | 28,36 | O1-01, O1-02 | 11,21 | 1:2,5 | ✓ |
+| 1.02 Pokój rodzinny / biblioteka (boks C) | 28,36 | O1-01, O1-13, O1-14, O1-02 | 10,55 | 1:2,7 | ✓ |
 | 1.03 Pokój dziecka 1 | 13,19 | O1-06 | 2,26 | 1:5,8 | ✓ |
 | 1.04 Pokój dziecka 2 | 12,52 | O1-05 | 2,26 | 1:5,5 | ✓ |
 | 2.02 Sypialnia rodziców | 21,43 | O2-01, O2-04 | 9,52 | 1:2,3 | ✓ |
@@ -451,11 +455,11 @@ Obszar oddziaływania mieści się w całości na działce (W-012).
 | A — bryła II p. (lamele) | -0,98 … 12,23 | -1,00 … 12,60 | 0,37 |
 | A — płyty (dół/góra) | -2,40 … 12,55 | -2,10 … 12,90 | 0,35 |
 | B — bryła I p. | 0,00 … 12,01 | 0,00 … 12,60 | 0,59 |
-| C — boks (przeszklenie) | 4,48 … 11,68 | 4,40 … 11,42 | 0,26 |
+| C — boks (przeszklenie) | 4,48 … 11,68 | 4,40 … 6,69 | 4,99 |
 | C — rama górna | 3,93 … 13,76 | 3,90 … 13,75 | 0,03 |
-| D — linia pozioma | 3,82 … 19,00 | 3,90 … 18,98 | 0,08 |
+| D — linia pozioma | 3,82 … 19,00 | 3,90 … 18,77 | 0,23 |
 | D — pion (narożnik G) | 19,17 … 19,17 | 18,98 … 18,98 | 0,20 |
-| E — przeszklenie parteru | 0,98 … 13,21 | 0,60 … 13,55 | 0,38 |
+| E — przeszklenie parteru | 0,98 … 13,21 | 0,66 … 13,55 | 0,34 |
 | E — płyta dachu parteru | -1,53 … 14,08 | -1,50 … 14,10 | 0,03 |
 
 **Zestawienie pomieszczeń** (PN-ISO 9836:2022; h — wysokość w świetle; zaliczenie 100/50/0 % wg W-316):
@@ -465,12 +469,14 @@ Obszar oddziaływania mieści się w całości na działce (W-012).
 | 0.01 | Wiatrołap | ruchu | 3,89 | 2,77 | 3,89 |
 | 0.02 | Hol | ruchu | 4,44 | 2,77 | 4,44 |
 | 0.03 | WC gościnne | pomocnicza | 2,32 | 2,77 | 2,32 |
-| 0.04 | Klatka schodowa | ruchu | 2,82 | 2,77 | 2,82 |
-| 0.05 | Spiżarnia (pod schodami) | pomocnicza | 5,40 | 1,90 | 2,70 |
+| 0.04 | Klatka schodowa | ruchu | 2,78 | 2,77 | 2,78 |
+| 0.05 | Spiżarnia | pomocnicza | 1,02 | 2,77 | 1,02 |
+| 0.15 | Schowek pod schodami (h 1,40–2,20) | pomocnicza | 1,45 | 1,80 | 0,72 |
+| 0.16 | Schowek pod spocznikiem (h < 1,40) | pomocnicza | 2,91 | 1,37 | 0,00 |
 | 0.06 | Salon + jadalnia + kuchnia | podstawowa | 54,44 | 2,77 | 54,44 |
 | 0.07 | Pas komunikacyjny przy schodach | ruchu | 3,51 | 2,77 | 3,51 |
-| 0.08 | Przedpokój gościnny | ruchu | 1,44 | 2,77 | 1,44 |
-| 0.09 | Łazienka gościnna (natrysk) | pomocnicza | 3,84 | 2,77 | 3,84 |
+| 0.08 | Przedpokój gościnny | ruchu | 1,46 | 2,77 | 1,46 |
+| 0.09 | Łazienka gościnna (natrysk) | pomocnicza | 3,86 | 2,77 | 3,86 |
 | 0.10 | Pokój gościnny / gabinet | podstawowa | 12,52 | 2,77 | 12,52 |
 | 0.11 | Przedsionek gospodarczy | ruchu | 7,18 | 2,76 | 7,18 |
 | 0.12 | Pomieszczenie techniczne | techniczna | 8,85 | 2,76 | 8,85 |

@@ -1340,29 +1340,34 @@ def widok_zbrojenie_belek(ctx: ViewContext, spec: dict, scale: float, opts: dict
     vp = Viewport(scale, title)
     placer = Placer(vp.k)
     k = vp.k
-    Y = 0.0
-    kol = max(int(spec.get("kolumny", 1)), 1)
-    col_w = 0.0
-    col_x = [0.0]
-    rows = []
+    kol = max(int(spec.get("kolumny", 2)), 1)
+    rows, bloki = [], []
     for i, (ident, B, tyt) in enumerate(items):
         pr = KB.prety_belki(B, zest)
-        # dla typu nadproża liczby sztuk × liczba nadproży typu
-        if el != "belki":
+        if el != "belki":           # typ nadproża: liczby sztuk × liczba nadproży typu
             n_typ = len(next(lst for nm, lst in KD.typy_nadprozy(D) if nm == ident))
             for key in ("dol", "gora", "strz"):
                 pr[key].n += (n_typ - 1) * {"dol": B.dol[0], "gora": B.gora[0], "strz": pr["ns"]}[key]
         pods = KB.podpory_belki(m, B)
-        ci = i % kol
-        X0 = sum(col_x[:ci + 1]) if ci else 0.0
-        bb = KB.rysuj_belke(vp, placer, B, pr, X0 + 0.3, Y - B.h, pods, tyt, 2.5)
-        col_w = max(col_w, bb[2] - bb[0])
-        if ci == kol - 1 or i == len(items) - 1:
-            Y = min(Y, bb[1]) - 12 * k
-            col_x = [0.0] + [col_w + 0.8] * (kol - 1)
+        tmp = Viewport(scale)
+        bb = KB.rysuj_belke(tmp, Placer(k), B, pr, 0.0, -B.h, pods, tyt, 2.5)
+        bloki.append((B, pr, pods, tyt, bb))
         rows.append((B, pr))
         for bd in ([B] if el == "belki" else next(lst for nm, lst in KD.typy_nadprozy(D) if nm == ident)):
             KB.kontrola_belki(D, bd, pr, nr_ark)
+    # układ w siatce: kolumny o szerokości maks. bloku, wiersze o wysokości maks. bloku
+    cw = [0.0] * kol
+    for i, (*_, bb) in enumerate(bloki):
+        cw[i % kol] = max(cw[i % kol], bb[2] - bb[0])
+    Y = 0.0
+    for r0 in range(0, len(bloki), kol):
+        rz = bloki[r0:r0 + kol]
+        hmax = max(bb[3] - bb[1] for *_, bb in rz)
+        X = 0.0
+        for j, (B, pr, pods, tyt, bb) in enumerate(rz):
+            KB.rysuj_belke(vp, placer, B, pr, X - bb[0], Y - bb[3] - B.h, pods, tyt, 2.5)
+            X += cw[j] + 20 * k
+        Y -= hmax + 10 * k
     res.column_blocks.append(("zestawienie", blok_zestawienia(zest, "ZESTAWIENIE STALI", _stopka_belek(D, rows), None)))
     bad = [B for B, _ in rows if B.niesp]
     res.notes += [

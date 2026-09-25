@@ -633,8 +633,10 @@ def _slopes(lab, s, used):
 
 def _drain_labels(lab, s):
     h = D.H
+    from .site_data import line as _line
     for o in s.odwodnienia:
-        g = o["geom"] if o["geom"] is not None and o["geom"].length > 0.05 else o["poly"]
+        g = o["geom"] if o["geom"] is not None and o["geom"].length > 0.05 else \
+            (_line(o["pts"]) if o["typ"] == "opaska_zwirowa" else None)
         if g is None or g.is_empty:
             continue
         if o["typ"] == "liniowe":
@@ -652,5 +654,213 @@ def _drain_labels(lab, s):
         lab.label(r["xy"], [r["id"]], h, "Z-ODWODNIENIE", dists=(1.2, 2.5, 4.0, 6.0), leader_from=2.4)
 
 
+def _chains(lab, s):
+    """Łańcuchy wymiarowe obrysu budynku: pd. — taras / płyty / wspornik / parter; pn. — narożniki parteru;
+    wsch. i zach. — narożniki parteru i wyższych kondygnacji."""
+    from ..draft import dims
+    k = lab.k
+    x0, y0, x1, y1 = s.p0.bounds
+    C = np.asarray(s.p0.exterior.coords)
+    groups = [g for g in (unary_union([t["poly"] for t in s.tarasy]) if s.tarasy else None, s.slab_union, s.upper)
+              if g is not None and not g.is_empty]
+    xs_s = sorted({round(float(g.bounds[0]), 3) for g in groups} | {round(x0, 3), round(x1, 3)})
+    xs_n = sorted({round(float(q[0]), 3) for q in C if abs(q[1] - y1) < 0.8})
+    ys_w = sorted({round(float(q[1]), 3) for q in C if abs(q[0] - x0) < 0.05} |
+                  ({round(float(s.upper.bounds[3]), 3)} if not s.upper.is_empty else set()))
+    ys_e = sorted({round(float(q[1]), 3) for q in C if abs(q[0] - x1) < 0.05})
+    ymin_all = min([y0] + [g.bounds[1] for g in groups])
+    xmin_all = min([x0] + [g.bounds[0] for g in groups])
+
+    def chain(pts, direction, base, sgn):
+        def fn(cv, off):
+            at = base + sgn * off * k
+            if direction == "h":
+                dims.dim_chain(cv, [(x, base) for x in pts], (0.0, at), "h", layer="Z-WYMIARY", h=D.H, unit_="m",
+                               tick_pen=0.18, ext_len=(1.5, 1.5), overshoot_mm=1.5, tick_mm=2.5, mask=0.3,
+                               labels=[_lab_m(b - a) for a, b in zip(pts[:-1], pts[1:])])
+            else:
+                dims.dim_chain(cv, [(base, y) for y in pts], (at, 0.0), "v", layer="Z-WYMIARY", h=D.H, unit_="m",
+                               tick_pen=0.18, ext_len=(1.5, 1.5), overshoot_mm=1.5, tick_mm=2.5, mask=0.3,
+                               labels=[_lab_m(b - a) for a, b in zip(pts[:-1], pts[1:])])
+        if len(pts) >= 2:
+            lab.pl.place(lab.vp, fn, [4.0, 6.0, 8.0, 10.0, 13.0, 16.0], penalty_step=0.3)
+    chain(xs_s, "h", ymin_all, -1.0)
+    chain(xs_n, "h", y1, +1.0)
+    chain(ys_w, "v", xmin_all, -1.0)
+    chain(ys_e, "v", x1, +1.0)
+
+
+def _lab_m(v):
+    return fmt.num(fmt.round_half_up(round(abs(v) * 100.0, 6)) / 100.0, 2)
+
+
+def _levels(lab, s, used, all_existing=True):
+    """Rzędne: projektowane (punkty modelu, tarasy/podesty), istniejące (siatka pikiet)."""
+    for t in s.tarasy:
+        if t["rz"] is None:
+            continue
+        pg = t["poly"].difference(s.p0)
+        if pg.area < 0.5:
+            continue
+        D.spot(lab, np.asarray(pg.representative_point().coords[0]), s.zero_abs + float(t["rz"]), projected=True)
+    for p in s.pkt_proj:
+        pos, _c = D.spot(lab, p[:2], p[2], projected=True, dists=(0.6, 1.5, 3.0, 5.0, 8.0))
+        if pos is not None:
+            used.add("spot_proj")
+    for p in s.pkt_ist:
+        if lab.bounds is not None and not lab.bounds.contains(Point(p[:2])):
+            continue
+        if s.p0.buffer(0.2).contains(Point(p[:2])):
+            continue
+        pos, _c = D.spot(lab, p[:2], p[2], projected=False, max_cost=None if all_existing else 4.0,
+                         dists=(0.6, 1.5, 3.0, 5.0))
+        if pos is not None:
+            used.add("spot_ist")
+
+
+def view_szczegoly(ctx, spec, scale, opts):
+    """PZT-02: PLAN SZCZEGÓŁOWY — WYMIARY I RZĘDNE (1:200)."""
+    title = spec.get("tytul_widoku") or spec.get("tytul") or "PLAN SZCZEGÓŁOWY — WYMIARY I RZĘDNE"
+    vp = Viewport(scale, title)
+    k = vp.k
+    s = _site(ctx, opts)
+    used = set()
+    wb = detail_window(s, opts)
+    win = box(*wb)
+    lab = D.Labeler(vp, bounds=win)
+    zj_todo = _draw_context(vp, s, lab, win, used, hatch=False, lawn=False, zone=False, utilities_ist=False)
+    if opts.get("warstwice", True):
+        D.draw_contours(vp, s, win, used, exclude=_contour_mask(s))
+    if opts.get("warstwice_projektowane", False):
+        D.draw_contours(vp, s, win, used, projected=True, exclude=s.footprint.buffer(0.2))
+    D.draw_drainage(vp, s, used, detail=True)
+    D.draw_downpipes(vp, s, used)
+    D.draw_building(vp, s, used, slab_lt=str(opts.get("linia_plyt", "PUNKTOWA")).upper())
+    tycz = punkty_tyczenia(s)
+    for nm, p in tycz:
+        D.tyczenie_mark(vp, p)
+    if tycz:
+        used.add("tyczenie")
+    vp.rect(*wb, "Z-MAPA-RAMKA", pen=0.25, lt="CIAGLA")
+    D.register_all(lab)
+    W = wskazniki(s)
+    _labels_building(lab, s, W)
+    used.add("zero")
+    _label_garage(lab, s)
+    for nm, p in tycz:
+        lab.label(p, [nm], D.H, "Z-TYCZENIE", style="bold", dists=(1.2, 2.5, 4.0), leader_from=3.0,
+                  dirs=[(1, 1), (-1, 1), (1, -1), (-1, -1), (1, 0), (-1, 0), (0, 1), (0, -1)])
+    lab.area(s.footprint.buffer(-0.3), 1.5)
+    _dims_plan(lab, s, used, detail=True)
+    _chains(lab, s)
+    for u in s.utwardzenia:
+        if u["poly"].area > 3.0 and "fundament" not in str(u["raw"].get("nawierzchnia", "")):
+            _rect_dims(lab, u["poly"])
+    for q in s.miejsca:
+        if q["poly"].difference(s.p0).area > 0.1:
+            _rect_dims(lab, q["poly"], offs=(2.0, 4.0, 6.0))
+    for b in s.bramy:
+        d = b["kier"]
+        D.place_dim(lab, b["xy"] - d * b["szer"] / 2, b["xy"] + d * b["szer"] / 2,
+                    shifts=[-3.0 * k, 3.0 * k, -5.0 * k, 5.0 * k, -7.0 * k])
+    if s.pc is not None:
+        g = next((g_ for g_ in s.granice if g_["strona"] == "E"), None)
+        if g is not None:
+            a, b = nearest_points(s.pc["body"], g["seg"])
+            D.place_dim(lab, (a.x, a.y), (b.x, b.y), on_a=s.pc["body"].boundary, on_b=g["seg"], span=2.0, step=0.1)
+    for nm, geom in (("ZB", (s.zbiornik or {}).get("draw_poly")), ("NCH", (s.rozsaczanie or {}).get("poly"))):
+        if geom is None:
+            continue
+        a, b = nearest_points(geom, s.footprint)
+        D.place_dim(lab, (a.x, a.y), (b.x, b.y), span=2.0, step=0.25)
+        gw = min(s.granice, key=lambda g_: g_["seg"].distance(geom))
+        a, b = nearest_points(geom, gw["seg"])
+        D.place_dim(lab, (a.x, a.y), (b.x, b.y), on_b=gw["seg"], span=3.0, step=0.25)
+    _labels_project(lab, s, W, used, detail=True)
+    _drain_labels(lab, s)
+    _levels(lab, s, used)
+    _slopes(lab, s, used)
+    # tabele obok rysunku
+    x_t = wb[2] + 8.0 * k
+    r1 = D.vp_table(vp, x_t, wb[3], **_tab_tyczenie(s, tycz))
+    r2 = D.vp_table(vp, x_t, r1[1] - 6.0 * k, **_tab_rzedne(s, W))
+    D.vp_table(vp, x_t, r2[1] - 6.0 * k, **_tab_odwodnienie(s))
+    res = SiteResult(site=s, braki=s.braki)
+    res.column_blocks = [("legenda", D.legend_block(used))]
+    res.notes = _notes_szczegoly(s, zj_todo)
+    if lab.failed:
+        ctx.note("PZT-02", f"nie umieszczono {len(lab.failed)} opisów: {[f[0] for f in lab.failed][:8]}")
+    return vp, res, title
+
+
+def _tab_tyczenie(s, tycz):
+    rows = [[nm, mm(p[0]), mm(p[1]), "narożnik obrysu parteru"] for nm, p in tycz]
+    for i, p in enumerate(s.corners):
+        rows.append([chr(ord("A") + i), mm(p[0]), mm(p[1]), "punkt graniczny działki"])
+    return dict(title="WYKAZ PUNKTÓW TYCZENIA I GRANICZNYCH", cols=[("Pkt", 0), ("x [m] (→ E)", 0), ("y [m] (→ N)", 0),
+                                                                     ("Opis", 0)],
+                rows=rows, align=["center", "right", "right", "left"],
+                notes=["Układ lokalny działki: początek — narożnik A, x → wschód, y → północ. W projekcie rzeczywistym "
+                       "współrzędne w układzie PL-2000 (X — północ, Y — wschód) z mapy do celów projektowych; tyczenie "
+                       "— geodeta uprawniony (PB art. 43 ust. 1)."], max_w_mm=120.0)
+
+
+def _tab_rzedne(s, W):
+    z0 = s.zero_abs
+    rows = [["±0,00 — posadzka parteru", mm(z0)]]
+    for t in s.tarasy:
+        if t["rz"] is not None:
+            rows.append([f"{t['id']} — {_short(t['naw'], 18)}", mm(z0 + float(t["rz"]))])
+    h, src = s.teren_przy_wejsciu()
+    if h is not None:
+        rows.append(["teren proj. przy wejściu głównym", mm(h)])
+    wz = W["wys"]
+    rows.append(["teren na obwodzie ścian — min.", mm(wz["t_min"])])
+    rows.append(["teren na obwodzie ścian — maks.", mm(wz["t_max"])])
+    rows.append(["najwyższy punkt budynku", mm(wz["z_top_abs"])])
+    if s.zwg is not None:
+        rows.append(["zwierciadło wody gruntowej (ZWG)", mm(float(s.zwg))])
+    return dict(title="RZĘDNE CHARAKTERYSTYCZNE [m n.p.m.]", cols=[("Poziom", 0), ("Rzędna", 0)], rows=rows,
+                align=["left", "right"], max_w_mm=120.0,
+                notes=["Rzędne projektowane terenu: spadek ≥ 2 % od budynku; na granicach działki rzędne istniejące "
+                       "(bez zmiany spływu na działki sąsiednie — WT § 29, PW art. 234)."])
+
+
+def _tab_odwodnienie(s):
+    rows = []
+    for o in s.odwodnienia:
+        if o["typ"] == "drenaz_opaskowy":
+            continue
+        g = o["geom"]
+        wym = f"L = {mm(g.length)} m" if g is not None and g.length > 0.05 else \
+            (f"A = {m2(o['poly'].area)}" if o["poly"] is not None and o["typ"] != "opaska_zwirowa" else
+             f"b = {mm(float(o['szer'] or 0))} m")
+        sp = f"{fmt.num(float(o['spadek']) * 100, 1)} %" if o["spadek"] else "—"
+        typ = {"liniowe": "liniowe", "niecka": "niecka", "opaska_zwirowa": "opaska żwir."}.get(o["typ"], o["typ"])
+        rows.append([o["id"], typ, wym, sp, _short(o["odb"], 20) or "—"])
+    notes = [f"{o['id']}: {o['opis']}" for o in s.odwodnienia if o["typ"] == "drenaz_opaskowy"]
+    return dict(title="ODWODNIENIE POWIERZCHNIOWE", cols=[("Ozn.", 0), ("Typ", 0), ("Wymiar", 0), ("Spadek", 0),
+                                                           ("Odbiornik", 0)],
+                rows=rows, align=["left", "left", "right", "right", "left"], notes=notes, max_w_mm=120.0)
+
+
+def _notes_szczegoly(s, zj_todo):
+    out = ["Wymiary obrysu — lico zewnętrzne ścian parteru (1,0 m nad terenem); odległości od granic w miejscu "
+           "najmniejszego oddalenia (WT § 9), z dokładnością 0,01 m (RPB § 15 ust. 3 w brzmieniu Dz.U. 2026 poz. 597, "
+           "od 5.11.2026 — stosowane).",
+           "Rzędne terenu istniejącego — z mapy (przykładowej); projektowanego — z modelu (dzialka.yaml: "
+           "teren.punkty_projektowane); spadki nawierzchni wg modelu, kierunek wg terenu projektowanego; kierunki "
+           "spływu na trawnikach — wg spadku terenu projektowanego (interpolacja).",
+           "Wody opadowe z nawierzchni i dachów — na teren własny, do niecek i zbiornika (WT § 28 ust. 2); zakaz "
+           "zmiany spływu w kierunku działek sąsiednich (WT § 29) i odprowadzania na drogę (u.d.p. art. 39).",
+           "Punkty tyczenia — narożniki obrysu zewnętrznego ścian parteru; współrzędne w wykazie obok rysunku."]
+    if zj_todo:
+        out.append(f"Zjazd — geometria zastępcza {D_TODO} (wg zezwolenia zarządcy drogi).")
+    if s.braki:
+        out.append(f"Braki danych modelu oznaczono {D_TODO}; wykaz: projekt/02_PZT/BRAKI_DANYCH.md.")
+    return out
+
+
 # ================================================================================================ rejestracja
 register_view("pzt_plan", view_plan, "plan zagospodarowania", qa="PZT")
+register_view("pzt_szczegoly", view_szczegoly, "plan szczegółowy", qa="PZT")

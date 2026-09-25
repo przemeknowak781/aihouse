@@ -118,7 +118,9 @@ class RysPV(RysE):
             return
         mod = pv.par.modul
         n = int(pv.n_mod)
-        mods = uklad_modulow(pole, n, float(mod["dl"]), float(mod["szer"]), pv.wariant)
+        a = uklad_modulow(pole, n, float(mod["dl"]), float(mod["szer"]), pv.wariant)
+        b = uklad_modulow(pole, n, float(mod["szer"]), float(mod["dl"]), pv.wariant)   # moduły obrócone o 90°
+        mods = a if len(a) >= len(b) else b
         if len(mods) < n:
             self.brak("PV — rozmieszczenie modułów", f"w polu użytkowym dachu {d.get('id')} zmieszczono {len(mods)} z {n} "
                       "modułów (odsunięcia od krawędzi, otworów, czerpni/wyrzutni)", "energia.pv.pole: [[x, y], …] "

@@ -35,20 +35,40 @@
    "kond": "P0",
    "nazwa": "Klatka schodowa",
    "kat": "ruchu",
-   "A": 2.82,
+   "A": 2.78,
    "h": 2.77,
    "wsp": 1.0,
-   "A_zal": 2.82
+   "A_zal": 2.78
   },
   {
    "id": "0.05",
    "kond": "P0",
-   "nazwa": "Spiżarnia (pod schodami)",
+   "nazwa": "Spiżarnia",
    "kat": "pomocnicza",
-   "A": 5.4,
-   "h": 1.9,
+   "A": 1.02,
+   "h": 2.77,
+   "wsp": 1.0,
+   "A_zal": 1.02
+  },
+  {
+   "id": "0.15",
+   "kond": "P0",
+   "nazwa": "Schowek pod schodami (h 1,40–2,20)",
+   "kat": "pomocnicza",
+   "A": 1.45,
+   "h": 1.8,
    "wsp": 0.5,
-   "A_zal": 2.7
+   "A_zal": 0.72
+  },
+  {
+   "id": "0.16",
+   "kond": "P0",
+   "nazwa": "Schowek pod spocznikiem (h < 1,40)",
+   "kat": "pomocnicza",
+   "A": 2.91,
+   "h": 1.37,
+   "wsp": 0.0,
+   "A_zal": 0.0
   },
   {
    "id": "0.06",
@@ -75,20 +95,20 @@
    "kond": "P0",
    "nazwa": "Przedpokój gościnny",
    "kat": "ruchu",
-   "A": 1.44,
+   "A": 1.46,
    "h": 2.77,
    "wsp": 1.0,
-   "A_zal": 1.44
+   "A_zal": 1.46
   },
   {
    "id": "0.09",
    "kond": "P0",
    "nazwa": "Łazienka gościnna (natrysk)",
    "kat": "pomocnicza",
-   "A": 3.84,
+   "A": 3.86,
    "h": 2.77,
    "wsp": 1.0,
-   "A_zal": 3.84
+   "A_zal": 3.86
   },
   {
    "id": "0.10",
@@ -312,26 +332,26 @@
   }
  ],
  "PU_W316": {
-  "P0": 96.29,
+  "P0": 95.36,
   "P1": 84.39,
   "P2": 59.57
  },
- "PU_W316_suma": 240.24,
+ "PU_W316_suma": 239.32,
  "garaz": 37.42,
- "techniczne": 16.24,
- "klatki": 3.55,
+ "techniczne": 16.25,
+ "klatki": 3.51,
  "PN_ISO_9836": {
   "podstawowa": 158.78,
-  "pomocnicza (z garażem)": 78.58,
-  "ruchu": 43.85,
-  "techniczna": 16.24,
-  "netto razem": 297.46
+  "pomocnicza (z garażem)": 77.64,
+  "ruchu": 43.82,
+  "techniczna": 16.25,
+  "netto razem": 296.49
  },
  "dzialka_m2": 1600.0,
  "zabudowa": {
   "m2": 187.5,
   "proc": 11.72,
-  "z_plytami_m2": 212.99
+  "z_plytami_m2": 218.08
  },
  "brutto_kondygnacji": {
   "P0": 181.78,
@@ -343,7 +363,7 @@
  "PBC": {
   "m2": 1281.57,
   "proc": 80.1,
-  "rezerwa_dach_zielony_50proc_m2": 31.98,
+  "rezerwa_dach_zielony_50proc_m2": 29.53,
   "utwardzenia_tarasy_m2": 130.93
  },
  "wysokosc": {
@@ -353,7 +373,9 @@
   "teren_obwod_max": -0.172,
   "teren_sredni": -0.251,
   "H_upzp_m": 10.25,
-  "H_WT6_m": 9.85,
+  "H_upzp_od_min_m": 10.33,
+  "pokrycie_max_klin": 9.626,
+  "H_WT6_m": 9.95,
   "teren_najnizsze_wejscie": -0.326,
   "kondygnacje_nadziemne": 3
  },
@@ -370,8 +392,8 @@
     "O0-05",
     "O0-11"
    ],
-   "A_osciez": 33.83,
-   "stosunek": "1:1,6",
+   "A_osciez": 32.79,
+   "stosunek": "1:1,7",
    "ok": true
   },
   {
@@ -391,10 +413,12 @@
    "A_podl": 28.36,
    "okna": [
     "O1-01",
+    "O1-13",
+    "O1-14",
     "O1-02"
    ],
-   "A_osciez": 11.21,
-   "stosunek": "1:2,5",
+   "A_osciez": 10.55,
+   "stosunek": "1:2,7",
    "ok": true
   },
   {
@@ -451,8 +475,8 @@
    "s": 0.28,
    "2h+s": 0.63,
    "biegi_szer": [
-    1.15,
-    1.145
+    1.135,
+    1.13
    ],
    "n": 18
   },
@@ -462,8 +486,8 @@
    "s": 0.28,
    "2h+s": 0.63,
    "biegi_szer": [
-    1.15,
-    1.145
+    1.135,
+    1.13
    ],
    "n": 18
   }
@@ -551,6 +575,30 @@
    "otwory": false
   },
   {
+   "element": "płyta PS-A",
+   "W": 5.2,
+   "E": 24.7,
+   "S": 31.4,
+   "N_linia_zab": 5.87,
+   "otwory": false
+  },
+  {
+   "element": "płyta OB-A",
+   "W": 5.18,
+   "E": 24.7,
+   "S": 31.38,
+   "N_linia_zab": 5.85,
+   "otwory": false
+  },
+  {
+   "element": "płyta OB-A2",
+   "W": 7.3,
+   "E": 24.68,
+   "S": 31.4,
+   "N_linia_zab": 11.6,
+   "otwory": false
+  },
+  {
    "element": "płyta SW1",
    "W": 13.6,
    "E": 16.0,
@@ -560,10 +608,18 @@
   },
   {
    "element": "płyta WYL1",
-   "W": 14.2,
-   "E": 16.7,
+   "W": 14.7,
+   "E": 16.2,
    "S": 33.5,
    "N_linia_zab": 9.4,
+   "otwory": false
+  },
+  {
+   "element": "płyta PL-D",
+   "W": 20.2,
+   "E": 5.72,
+   "S": 31.4,
+   "N_linia_zab": 11.6,
    "otwory": false
   },
   {
@@ -644,9 +700,9 @@
    ],
    "model": [
     4.4,
-    11.42
+    6.69
    ],
-   "odchylka": 0.26
+   "odchylka": 4.99
   },
   {
    "element": "C — rama górna",
@@ -668,9 +724,9 @@
    ],
    "model": [
     3.9,
-    18.975
+    18.765
    ],
-   "odchylka": 0.08
+   "odchylka": 0.23
   },
   {
    "element": "D — pion (narożnik G)",
@@ -691,10 +747,10 @@
     13.21
    ],
    "model": [
-    0.6,
+    0.66,
     13.55
    ],
-   "odchylka": 0.38
+   "odchylka": 0.34
   },
   {
    "element": "E — płyta dachu parteru",

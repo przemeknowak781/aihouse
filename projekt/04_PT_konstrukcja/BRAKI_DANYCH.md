@@ -6,45 +6,62 @@ Lista generowana automatycznie przez `lamela.views.konstrukcja` z: (1) braków z
 
 - Płyta(y) SW1: brak wyników MES w bibliotece (model MES niewykonalny) — zbrojenie nie może być narysowane z obliczeń [WYMAGA ANALIZY].
 - Płyta(y) WYL1: brak wyników MES w bibliotece (model MES niewykonalny) — zbrojenie nie może być narysowane z obliczeń [WYMAGA ANALIZY].
+- Płyta(y) PL-3: brak wyników MES w bibliotece (model MES niewykonalny) — zbrojenie nie może być narysowane z obliczeń [WYMAGA ANALIZY].
 - Płyta(y) IZ-ST2Z: brak wyników MES w bibliotece (model MES niewykonalny) — zbrojenie nie może być narysowane z obliczeń [WYMAGA ANALIZY].
+- Płyta(y) OB-A2: brak wyników MES w bibliotece (model MES niewykonalny) — zbrojenie nie może być narysowane z obliczeń [WYMAGA ANALIZY].
+- Płyta(y) PS-A: brak wyników MES w bibliotece (model MES niewykonalny) — zbrojenie nie może być narysowane z obliczeń [WYMAGA ANALIZY].
 - Płyta(y) PL-C2: brak wyników MES w bibliotece (model MES niewykonalny) — zbrojenie nie może być narysowane z obliczeń [WYMAGA ANALIZY].
-- Płyta(y) PL-C1: brak wyników MES w bibliotece (model MES niewykonalny) — zbrojenie nie może być narysowane z obliczeń [WYMAGA ANALIZY].
-- Belka B1 (podciąg fasady E, odwrócony (+2,78…+3,85 = parapet boksu C);…): brak pozycji wymiarowania w bibliotece (belka nie jest podporą płyty w modelu MES — np. belka odwrócona/wspornikowa) — zbrojenie do obliczenia indywidualnego [WYMAGA ANALIZY].
+- Płyta(y) PL-C1 + PL-D: brak wyników MES w bibliotece (model MES niewykonalny) — zbrojenie nie może być narysowane z obliczeń [WYMAGA ANALIZY].
+- Płyta(y) PL-E: brak wyników MES w bibliotece (model MES niewykonalny) — zbrojenie nie może być narysowane z obliczeń [WYMAGA ANALIZY].
+- Płyta(y) PL-DA: brak wyników MES w bibliotece (model MES niewykonalny) — zbrojenie nie może być narysowane z obliczeń [WYMAGA ANALIZY].
+- Belka B1 (podciąg fasady E, odwrócony (+2,78…+3,85 = parapet boksu C),…): brak pozycji wymiarowania w bibliotece (belka nie jest podporą płyty w modelu MES — np. belka odwrócona/wspornikowa) — zbrojenie do obliczenia indywidualnego [WYMAGA ANALIZY].
 - Belka B3 (belka krawędziowa ST2 w osi A' (odwrócona, pod parapetem okn…): brak pozycji wymiarowania w bibliotece (belka nie jest podporą płyty w modelu MES — np. belka odwrócona/wspornikowa) — zbrojenie do obliczenia indywidualnego [WYMAGA ANALIZY].
 - Belka B4 (belka wspornikowa w osi 1 (w licu ściany P2, pod parapetem O…): brak pozycji wymiarowania w bibliotece (belka nie jest podporą płyty w modelu MES — np. belka odwrócona/wspornikowa) — zbrojenie do obliczenia indywidualnego [WYMAGA ANALIZY].
 - Belka B5 (belka wspornikowa w osi 3 (w ścianie pn. P2): wspornik 1,00 …): brak pozycji wymiarowania w bibliotece (belka nie jest podporą płyty w modelu MES — np. belka odwrócona/wspornikowa) — zbrojenie do obliczenia indywidualnego [WYMAGA ANALIZY].
+- ZF1: żebro (b = 60 cm, oś [[0.0, 0.0], [12.0, 0.0]]) wystaje poza obrys płyty PF1 o 2.39 m² w rzucie — niespójność modelu (krawędź płyty a lico żebra); na przekrojach żebro przycięte do lica płyty. Uzgodnić obrys płyty/osie żeber (audyt A2).
+- ZF2: żebro (b = 60 cm, oś [[12.0, 0.0], [18.375, 0.0]]) wystaje poza obrys płyty PF1 o 1.27 m² w rzucie — niespójność modelu (krawędź płyty a lico żebra); na przekrojach żebro przycięte do lica płyty. Uzgodnić obrys płyty/osie żeber (audyt A2).
+- ZF3: żebro (b = 60 cm, oś [[18.375, 0.0], [18.375, 9.375]]) wystaje poza obrys płyty PF1 o 1.87 m² w rzucie — niespójność modelu (krawędź płyty a lico żebra); na przekrojach żebro przycięte do lica płyty. Uzgodnić obrys płyty/osie żeber (audyt A2).
+- ZF4: żebro (b = 60 cm, oś [[18.375, 9.375], [12.0, 9.375]]) wystaje poza obrys płyty PF1 o 1.27 m² w rzucie — niespójność modelu (krawędź płyty a lico żebra); na przekrojach żebro przycięte do lica płyty. Uzgodnić obrys płyty/osie żeber (audyt A2).
+- ZF5: żebro (b = 60 cm, oś [[12.0, 9.375], [12.0, 8.75]]) wystaje poza obrys płyty PF1 o 0.10 m² w rzucie — niespójność modelu (krawędź płyty a lico żebra); na przekrojach żebro przycięte do lica płyty. Uzgodnić obrys płyty/osie żeber (audyt A2).
+- ZF6: żebro (b = 60 cm, oś [[12.0, 8.75], [0.0, 8.75]]) wystaje poza obrys płyty PF1 o 2.37 m² w rzucie — niespójność modelu (krawędź płyty a lico żebra); na przekrojach żebro przycięte do lica płyty. Uzgodnić obrys płyty/osie żeber (audyt A2).
+- ZF7: żebro (b = 60 cm, oś [[0.0, 8.75], [0.0, 0.0]]) wystaje poza obrys płyty PF1 o 1.74 m² w rzucie — niespójność modelu (krawędź płyty a lico żebra); na przekrojach żebro przycięte do lica płyty. Uzgodnić obrys płyty/osie żeber (audyt A2).
 - Biblioteka: PL-C1: brak przegrody — przyjęto płytę bez warstw
 - Biblioteka: PL-C1: klasa betonu nie wynika z modelu (pole mat / materiał warstwy) — przyjęto C30/37 (XC3)
 - Biblioteka: PL-C2: brak przegrody — przyjęto płytę bez warstw
 - Biblioteka: PL-C2: klasa betonu nie wynika z modelu (pole mat / materiał warstwy) — przyjęto C30/37 (XC3)
 - Biblioteka: IZ-ST2Z: brak przegrody — przyjęto płytę bez warstw
 - Biblioteka: IZ-ST2Z: klasa betonu nie wynika z modelu (pole mat / materiał warstwy) — przyjęto C30/37 (XC3)
+- Biblioteka: PS-A: brak przegrody — przyjęto płytę bez warstw
+- Biblioteka: PS-A: klasa betonu nie wynika z modelu (pole mat / materiał warstwy) — przyjęto C30/37 (XC3)
+- Biblioteka: OB-A: brak przegrody — przyjęto płytę bez warstw
+- Biblioteka: OB-A: klasa betonu nie wynika z modelu (pole mat / materiał warstwy) — przyjęto C30/37 (XC3)
+- Biblioteka: OB-A2: brak przegrody — przyjęto płytę bez warstw
+- Biblioteka: OB-A2: klasa betonu nie wynika z modelu (pole mat / materiał warstwy) — przyjęto C30/37 (XC3)
 - Biblioteka: SW1: brak przegrody — przyjęto płytę bez warstw
 - Biblioteka: SW1: klasa betonu nie wynika z modelu (pole mat / materiał warstwy) — przyjęto C30/37 (XC4)
 - Biblioteka: WYL1: brak przegrody — przyjęto płytę bez warstw
 - Biblioteka: WYL1: klasa betonu nie wynika z modelu (pole mat / materiał warstwy) — przyjęto C30/37 (XC4)
+- Biblioteka: PL-D: brak przegrody — przyjęto płytę bez warstw
+- Biblioteka: PL-D: klasa betonu nie wynika z modelu (pole mat / materiał warstwy) — przyjęto C30/37 (XC4)
 - Biblioteka (uwaga analizy): Grupa płyt SW1: MES niewykonalny (MES płyty: za mało podpór) — pominięto
 - Biblioteka (uwaga analizy): Grupa płyt WYL1: MES niewykonalny (MES płyty: za mało podpór) — pominięto
-- Biblioteka (uwaga analizy): Ściana nośna S2-07 stoi na płycie ST2 + ST2Z + D2 + D3 + PL-2 bez ściany poniżej — obciążenie liniowe płyty; sprawdzić podciąg/żebro [WYMAGA ANALIZY].
-- Biblioteka (uwaga analizy): Ściana nośna S2-08 stoi na płycie ST2 + ST2Z + D2 + D3 + PL-2 bez ściany poniżej — obciążenie liniowe płyty; sprawdzić podciąg/żebro [WYMAGA ANALIZY].
-- Biblioteka (uwaga analizy): Ściana nośna S2-09 stoi na płycie ST2 + ST2Z + D2 + D3 + PL-2 bez ściany poniżej — obciążenie liniowe płyty; sprawdzić podciąg/żebro [WYMAGA ANALIZY].
+- Biblioteka (uwaga analizy): Grupa płyt PL-3: MES niewykonalny (MES płyty: za mało podpór) — pominięto
+- Biblioteka (uwaga analizy): Ściana nośna S2-07 stoi na płycie ST2 + ST2Z + D2 + D3 + PL-2 + OB-A bez ściany poniżej — obciążenie liniowe płyty; sprawdzić podciąg/żebro [WYMAGA ANALIZY].
+- Biblioteka (uwaga analizy): Ściana nośna S2-08 stoi na płycie ST2 + ST2Z + D2 + D3 + PL-2 + OB-A bez ściany poniżej — obciążenie liniowe płyty; sprawdzić podciąg/żebro [WYMAGA ANALIZY].
+- Biblioteka (uwaga analizy): Ściana nośna S2-09 stoi na płycie ST2 + ST2Z + D2 + D3 + PL-2 + OB-A bez ściany poniżej — obciążenie liniowe płyty; sprawdzić podciąg/żebro [WYMAGA ANALIZY].
 - Biblioteka (uwaga analizy): Grupa płyt IZ-ST2Z: MES niewykonalny (MES płyty: za mało podpór) — pominięto
+- Biblioteka (uwaga analizy): Grupa płyt OB-A2: MES niewykonalny (MES płyty: brak elementów (obrys zbyt mały?)) — pominięto
+- Biblioteka (uwaga analizy): Grupa płyt PS-A: MES niewykonalny (MES płyty: za mało podpór) — pominięto
 - Biblioteka (uwaga analizy): Grupa płyt PL-C2: MES niewykonalny (MES płyty: za mało podpór) — pominięto
-- Biblioteka (uwaga analizy): Grupa płyt PL-C1: MES niewykonalny (MES płyty: za mało podpór) — pominięto
+- Biblioteka (uwaga analizy): Grupa płyt PL-C1 + PL-D: MES niewykonalny (MES płyty: za mało podpór) — pominięto
 - Biblioteka (uwaga analizy): ST1: podpora punktowa SL1 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
 - Biblioteka (uwaga analizy): ST1: podpora punktowa SL2 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
 - Biblioteka (uwaga analizy): ST1: podpora punktowa SL3 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
 - Biblioteka (uwaga analizy): ST1: podpora punktowa SL4 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
-- Biblioteka (uwaga analizy): ST1: podpora punktowa SL1 w polu P2 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
-- Biblioteka (uwaga analizy): ST1: podpora punktowa SL2 w polu P2 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
-- Biblioteka (uwaga analizy): ST1: podpora punktowa SL3 w polu P2 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
-- Biblioteka (uwaga analizy): ST1: podpora punktowa SL4 w polu P2 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
-- Biblioteka (uwaga analizy): PL-E: podpora punktowa SL1 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
-- Biblioteka (uwaga analizy): PL-E: podpora punktowa SL2 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
-- Biblioteka (uwaga analizy): PL-E: podpora punktowa SL3 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
-- Biblioteka (uwaga analizy): PL-E: podpora punktowa SL4 w polu P1 — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]
+- Biblioteka (uwaga analizy): Grupa płyt PL-E: MES niewykonalny (MES płyty: za mało podpór) — pominięto
+- Biblioteka (uwaga analizy): Grupa płyt PL-DA: MES niewykonalny (MES płyty: za mało podpór) — pominięto
 
 ## Kontrola zbrojenia — pozycje niespełnione (szczegóły: raport kontroli zbrojenia)
 
-- PF1 / siatka dolna x (poz. 10.1): A_s,prov = 314 < max(A_s,req; A_s,min) = 6504 mm²/m pasmo Winklera bez żeber — patrz uwagi arkusza [WYMAGA ANALIZY]
-- PF1 / siatka dolna y (poz. 10.1): A_s,prov = 314 < max(A_s,req; A_s,min) = 6504 mm²/m pasmo Winklera bez żeber — patrz uwagi arkusza [WYMAGA ANALIZY]
+- B9 / dołem (przęsło) (poz. 5.8): Nośność krzyżulców betonowych (η = 103%); Nośność strzemion (η = 142%); 8Ø12 nie mieści się w jednej warstwie przy b = 25 cm (odstęp w świetle ≥ 21 mm — 8.2(2))
+- N-O1-10 / dołem (przęsło) (poz. 6.27): Nośność strzemion (η = 167%); 4Ø16 nie mieści się w jednej warstwie przy b = 18 cm (odstęp w świetle ≥ 21 mm — 8.2(2))

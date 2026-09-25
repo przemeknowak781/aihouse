@@ -162,7 +162,8 @@ class ViewOut:
 # Wynik może mieć atrybuty (wszystkie opcjonalne): ``notes`` (list[str] — uwagi na arkusz), ``column_blocks``
 # (list[(nazwa, fn(sh, x, y_top, w) -> y_bottom)] — bloki kolumny opisowej, np. legenda symboli instalacji),
 # ``north`` (bool — róża kierunków), ``hatch_mats`` (jak w rzutach), ``rooms`` (tabela pomieszczeń),
-# ``units_note`` (str — zastępuje domyślną uwagę „Wymiary w cm…”, np. dla PZT „wymiary i odległości w m”).
+# ``units_note`` (str — zastępuje domyślną uwagę „Wymiary w cm…”, np. dla PZT „wymiary i odległości w m”),
+# ``bez_skali`` (bool — schemat: tytuł widoku bez podziałki, skala w tabliczce „—”, bez podziałki liniowej).
 # ``rodzaj`` — tekst pola „rodzaj rysunku” w tabliczce (np. „plan zagospodarowania”, „rzut instalacji”, „detal”).
 # ``qa`` — rodzaj kontroli ``plot.qa`` (np. „PZT”: podziałki do 1:500, pismo ≥ 2,5 mm); None — ze stadium tabliczki.
 VIEW_TYPES: dict = {}
@@ -474,7 +475,9 @@ def build_sheet(ctx: ViewContext, spec: dict, idx: int, total: int):
     units = next((getattr(v.result, "units_note", None) for v in views if getattr(v.result, "units_note", None)), None)
     notes = common_notes(ctx, kinds, extra, units=units)
     col.add("notes", _notes(notes))
-    col.add("scale", _scalebar(views[0].vp.scale))
+    skalowane = [v for v in views if not getattr(v.result, "bez_skali", False)]   # schematy: bez podziałki
+    if skalowane:
+        col.add("scale", _scalebar(skalowane[0].vp.scale))
     col_h = col.measure(TB_W)
     # dobór formatu
     fmt_req = str(spec.get("format", ctx.cfg.get("format", "auto")))
@@ -500,8 +503,8 @@ def build_sheet(ctx: ViewContext, spec: dict, idx: int, total: int):
     f, mode = chosen
     rodzaj = {"rzut": "rzut", "dach": "rzut", "przekroj": "przekrój", "elewacja": "elewacja",
               **{k: v["rodzaj"] for k, v in VIEW_TYPES.items()}}[views[0].kind]
-    scales = sorted({int(v.vp.scale) for v in views})
-    scale_txt = "1:" + " / 1:".join(str(s) for s in scales)
+    scales = sorted({int(v.vp.scale) for v in skalowane})
+    scale_txt = ("1:" + " / 1:".join(str(s) for s in scales)) if scales else "—"
     tb = _title_block(ctx, spec, idx, total, scale_txt, rodzaj)
     sh = Sheet(f, title_block=tb)
     fx0, fy0, fx1, fy1 = sh.frame
@@ -517,7 +520,8 @@ def build_sheet(ctx: ViewContext, spec: dict, idx: int, total: int):
             y_c = cy + (-6.0 if above else 6.0)
             sh.viewports.append(v.vp)
             sh.place(v.vp, x + v.w_mm / 2.0, y_c, "mc", pad=3.0)
-            sh.view_title(v.vp, v.title, where="above" if above else "below", dx=2.0)
+            sh.view_title(v.vp, v.title, where="above" if above else "below", dx=2.0,
+                          scale=not getattr(v.result, "bez_skali", False))
             x += v.w_mm + 12.0
     else:
         y = cy + vh / 2.0
@@ -526,7 +530,8 @@ def build_sheet(ctx: ViewContext, spec: dict, idx: int, total: int):
             top = y - (12.0 if above else 0.0)
             sh.viewports.append(v.vp)
             sh.place(v.vp, cx, top, "tc", pad=3.0)
-            sh.view_title(v.vp, v.title, where="above" if above else "below", dx=2.0)
+            sh.view_title(v.vp, v.title, where="above" if above else "below", dx=2.0,
+                          scale=not getattr(v.result, "bez_skali", False))
             y -= v.h_mm + 12.0 + 12.0
     # kolumna
     col.draw(sh, fx1 - TB_W, fy1 - 3.0, TB_W)

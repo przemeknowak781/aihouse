@@ -698,9 +698,20 @@ def bilans(m, wyn_odl, fidelity):
     zw = [float(min(f_proj(np.array([o.srodek[:2]]))[0] if f_proj else 0.0, (f_ist(np.array([o.srodek[:2]]))[0] if f_ist else 0.0)))
           for o in wej]
     d1 = max(dachy, key=lambda sl: sl["top"])
+
+    def top_max(sl):
+        """Najwyższy punkt pokrycia dachu z izolacją spadkową (klin d_max), nie średnia grubość (audyt A1)."""
+        prz = (m.raw.get("przegrody") or {}).get(str(sl["raw"].get("przegroda"))) or {}
+        for w_ in prz.get("warstwy") or []:
+            if isinstance(w_, dict) and isinstance(w_.get("klin"), dict):
+                return sl["top"] - float(w_["d"]) + float(w_["klin"]["d_max"])
+        return sl["top"]
+    z_wt6 = max(top_max(sl) for sl in dachy)
     B["wysokosc"] = {"attyka_max": round(top_att, 3), "najwyzszy_punkt_z_instalacjami": round(top_inst, 3),
                      "teren_obwod_min": round(float(zt.min()), 3), "teren_obwod_max": round(float(zt.max()), 3), "teren_sredni": round(sr, 3),
-                     "H_upzp_m": round(top_inst - sr, 2), "H_WT6_m": round(d1["top"] - min(zw), 2) if zw else None,
+                     "H_upzp_m": round(top_inst - sr, 2), "H_upzp_od_min_m": round(top_inst - float(zt.min()), 2),
+                     "pokrycie_max_klin": round(z_wt6, 3),
+                     "H_WT6_m": round(z_wt6 - min(zw), 2) if zw else None,
                      "teren_najnizsze_wejscie": round(min(zw), 3) if zw else None,
                      "kondygnacje_nadziemne": len(m.kondygnacje)}
     # okna / podłoga
@@ -757,10 +768,12 @@ def bilans_md(B) -> str:
     L.append(f"| intensywność zabudowy (Σ brutto kondygnacji / działka) | {fmt(B['intensywnosc'], 3)} | 0,05–0,80 | "
              f"{'✓' if 0.05 <= B['intensywnosc'] <= 0.8 else '✗'} |")
     L.append(f"| kubatura brutto | {fmt(B['kubatura_brutto_m3'], 1)} m³ | — (> 1000 m³ → PWP, W-190) | — |")
-    L.append(f"| wysokość zabudowy (upzp): najwyższy punkt {fmt(w['najwyzszy_punkt_z_instalacjami'], 3)} − śr. teren {fmt(w['teren_sredni'], 3)} | "
-             f"**{fmt(w['H_upzp_m'])} m** | ≤ 11,00 m (rezerwa → 10,70) | {'✓' if w['H_upzp_m'] <= 10.70 else '✗'} |")
+    L.append(f"| wysokość zabudowy (upzp art. 2 pkt 30): najwyższy punkt {fmt(w['najwyzszy_punkt_z_instalacjami'], 3)} − teren; na obwodzie niższa z rzędnych "
+             f"istn./proj. (D-15); kontrolnie od NAJNIŻSZEGO terenu {fmt(w['teren_obwod_min'], 3)} (definicja: od średniej {fmt(w['teren_sredni'], 3)} "
+             f"→ {fmt(w['H_upzp_m'])} m) | **{fmt(w['H_upzp_od_min_m'])} m** | ≤ 11,00 m (rezerwa → 10,70) | {'✓' if w['H_upzp_od_min_m'] <= 10.70 else '✗'} |")
     if w.get("H_WT6_m") is not None:
-        L.append(f"| wysokość budynku wg WT §6 (teren przy najniższym wejściu {fmt(w['teren_najnizsze_wejscie'], 3)}) | {fmt(w['H_WT6_m'])} m | grupa N ≤ 12 m | "
+        L.append(f"| wysokość budynku wg WT §6: do najwyższego punktu pokrycia z klinem {fmt(w['pokrycie_max_klin'], 3)} − teren przy najniższym wejściu "
+                 f"{fmt(w['teren_najnizsze_wejscie'], 3)} | {fmt(w['H_WT6_m'])} m | grupa N ≤ 12 m | "
                  f"{'✓' if w['H_WT6_m'] <= 12 else '✗'} |")
     L.append(f"| kondygnacje nadziemne | {w['kondygnacje_nadziemne']} | ≤ 3 | ✓ |")
     L.append(f"| miejsca postojowe (garaż + podjazd) | {B['miejsca_postojowe']} | ≥ 2 | {'✓' if B['miejsca_postojowe'] >= 2 else '✗'} |")
@@ -842,7 +855,7 @@ def main(argv=None):
         print(f"Wstawiono bilans do {a.koncepcja}")
     w = B["wysokosc"]
     print(f"PU (W-316) = {B['PU_W316_suma']} m²; zabudowa {B['zabudowa']['m2']} m² ({B['zabudowa']['proc']} %); PBC {B['PBC']['m2']} m² "
-          f"({B['PBC']['proc']} %); intensywność {B['intensywnosc']}; H upzp {w['H_upzp_m']} m; H WT §6 {w['H_WT6_m']} m; "
+          f"({B['PBC']['proc']} %); intensywność {B['intensywnosc']}; H upzp {w['H_upzp_od_min_m']} m (od śr. {w['H_upzp_m']}); H WT §6 {w['H_WT6_m']} m; "
           f"maks. odchyłka od szkicu {max(r['odchylka'] for r in fid)} m")
     print(f"Zapisano: {out}")
 
