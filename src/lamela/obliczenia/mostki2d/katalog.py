@@ -291,3 +291,203 @@ def _naroza_wypukle(poly):
             continue
         if (cr > 0) == ccw:
             yield b
+
+
+# --------------------------------------------------------------------------------------------------
+# Katalog demonstracyjny (warianty porównawcze) i katalog z sekcji `wezly` modelu
+# --------------------------------------------------------------------------------------------------
+# kolejność i warianty katalogu demonstracyjnego: węzły wymagane (brief 9.2) + warianty porównawcze
+KOLEJNOSC_DEMO = ["WZ-R1", "WZ-B0", "WZ-B1", "WZ-W0", "WZ-W2", "WZ-W1", "WZ-N1", "WZ-N2", "WZ-P1", "WZ-GF2",
+                  "WZ-GF1", "WZ-GF1B", "WZ-C1", "WZ-G1", "WZ-G2", "WZ-RS1", "WZ-IF1", "WZ-T1", "WZ-T2", "WZ-T3"]
+# pary/grupy do porównań w raporcie: (tytuł, [id], komentarz)
+POROWNANIA_DEMO = [
+    ("Płyta wspornikowa: bez łącznika vs z łącznikiem termoizolacyjnym", ["WZ-B0", "WZ-B1"],
+     "łącznik przerywa płytę w płaszczyźnie izolacji — linia izolacji ciągła, ψ spada kilkukrotnie"),
+    ("Ościeże okna: montaż w murze vs „ciepły montaż” w warstwie izolacji", ["WZ-W0", "WZ-W1", "WZ-W2"],
+     "we wszystkich wariantach izolacja ościeża zachodzi na ramę (3 cm) — bez tego zakładu ψ montażu w murze "
+     "rośnie wielokrotnie"),
+    ("Cokół: płyta fundamentowa vs ława (z gruntem), blok termiczny", ["WZ-GF2", "WZ-GF1", "WZ-GF1B"],
+     "przy ławie linia izolacji domyka się przez mur fundamentowy i grunt; blok termiczny u podstawy muru ją zamyka"),
+    ("Dom – garaż nieogrzewany: izolacja ciągła vs ściana garażu w ociepleniu", ["WZ-G1", "WZ-G2"],
+     "ściana garażu dochodząca do muru domu przerywa ETICS"),
+]
+
+
+def _warstwy_plyty_fundamentowej(model, kod_pod: str | None) -> list[G.Warstwa]:
+    """Warstwy „ciepłej” płyty fundamentowej [ZAŁ]: wykończenie i jastrych z podłogi modelu, płyta ŻB 0,25 m,
+    XPS 0,20 m pod płytą (izolacja nośna), podsypka 0,15 m — gdy model nie ma przegrody płyty fundamentowej."""
+    mats = getattr(model, "materialy", {})
+    w: list[G.Warstwa] = []
+    if kod_pod:
+        for x in G.warstwy_z_modelu(model, kod_pod):
+            if x.konstrukcyjna:
+                break
+            if x.mat.lam > 0.1:          # wykończenia (bez izolacji nad płytą)
+                w.append(x)
+    zb = G.material_z_modelu(model, "ZB_C30") if "ZB_C30" in mats else G.MATERIALY_DOMYSLNE["ZB"]
+    xps = G.material_z_modelu(model, "XPS300") if "XPS300" in mats else G.MATERIALY_DOMYSLNE["XPS"]
+    pias = G.material_z_modelu(model, "PIASEK") if "PIASEK" in mats else G.MATERIALY_DOMYSLNE["GRUNT"]
+    return w + [G.Warstwa(zb, 0.25, True), G.Warstwa(xps, 0.20), G.Warstwa(pias, 0.15)]
+
+
+def katalog_demonstracyjny(model, y_teren: float = -0.30) -> list[G.Wezel]:
+    """Katalog demonstracyjny: węzły z `katalog_z_modelu` + warianty porównawcze: ościeże „w murze” (WZ-W0), cokół
+    na płycie fundamentowej (WZ-GF2 — gdy model ma ławy) albo na ławie (WZ-GF1 — gdy płytę), cokół z blokiem
+    termicznym (WZ-GF1B); płyta wspornikowa bez łącznika (WZ-B0) — z `katalog_z_modelu`, gdy model ma łącznik. Kolejność: `KOLEJNOSC_DEMO`."""
+    wz = {w.id: w for w in katalog_z_modelu(model, y_teren=y_teren)}
+    kod_sz = _pierwsza_przegroda(model, "sciana_zewn")
+    sz = G.warstwy_z_modelu(model, kod_sz)
+    osad = osadzenie_z_modelu(model, kod_sz)
+    okp = {k: v for k, v in _okna_param(_okno(), osad).items() if k != "wsuniecie"}
+    wz["WZ-W0"] = G.wezel_oscieze_okna(sz, polozenie="w_murze", id="WZ-W0", **okp,
+                                       nazwa="Ościeże okna — montaż w murze (rama w licu zewn. muru, izolacja z zakładem 3 cm)")
+    kp = _pierwsza_przegroda(model, "podloga_na_gruncie")
+    B, _ = B_prim(model)
+    fund = model.fundamenty() or {}
+    el = (fund.get("elementy") or [{}])[0]
+    lawa = (el.get("b", 0.60), el.get("h", 0.30), el.get("spod", -1.10))
+    if kp:
+        if fund.get("typ") == "plyta":
+            wz.setdefault("WZ-GF2", wz.pop("WZ-GF1", None))
+            wz["WZ-GF1"] = G.wezel_cokol(sz, G.warstwy_z_modelu(model, kp), fundament="lawa", lawa=lawa, b=B,
+                                         y_teren=y_teren, id="WZ-GF1",
+                                         nazwa="Cokół — ściana / podłoga na gruncie / ława (wariant porównawczy)")
+        else:
+            wz["WZ-GF2"] = G.wezel_cokol(sz, _warstwy_plyty_fundamentowej(model, kp), fundament="plyta", b=B,
+                                         y_teren=y_teren, id="WZ-GF2",
+                                         nazwa="Cokół — płyta fundamentowa na XPS (wariant porównawczy) [ZAŁ]")
+        wz["WZ-GF1B"] = G.wezel_cokol(sz, G.warstwy_z_modelu(model, kp), fundament="lawa", lawa=lawa, b=B,
+                                      y_teren=y_teren, id="WZ-GF1B",
+                                      blok_termiczny=(G.MATERIALY_DOMYSLNE["BET_KOM_400"], 0.24),
+                                      nazwa="Cokół — ława + blok termiczny (beton komórkowy 400) w 1. warstwie muru")
+    out = [wz[k] for k in KOLEJNOSC_DEMO if wz.get(k) is not None]
+    out += [w for k, w in wz.items() if k not in KOLEJNOSC_DEMO and w is not None]
+    return out
+
+
+ALIASY_WEZLOW = {  # typ z sekcji `wezly` (także aliasy fizyka.mostki / PSI_DOMYSLNE_14683) → budowniczy
+    "attyka": "attyka", "R_attyka": "attyka",
+    "naroznik_wypukly": "naroze", "naroze": "naroze", "naroznik": "naroze", "C_naroze_zewn": "naroze",
+    "strop_posredni": "strop", "IF_strop": "strop",
+    "plyta_wspornikowa": "wspornik_bez", "B_balkon": "wspornik_bez",
+    "plyta_wspornikowa_lacznik": "wspornik", "wspornik": "wspornik",
+    "oscieze": "oscieze", "W_oscieze": "oscieze", "nadproze": "nadproze", "podokiennik": "podokiennik",
+    "sciana_grunt": "cokol", "cokol": "cokol", "GF_cokol": "cokol",
+    "polaczenie_nieogrz": "garaz", "garaz": "garaz",
+    "rura_spustowa": "rura_spustowa", "prog": "prog",
+}
+
+
+def wezly_z_sekcji(model, y_teren: float = -0.30) -> tuple[list[G.Wezel], dict[str, float], list[str],
+                                                              dict[str, list[str]]]:
+    """Węzły z sekcji `wezly` modelu (`docs/SCHEMAT_MODELU.md` p. 6–7): {id, nazwa, typ, przegrody, dlugosc|liczba,
+    wariant (prog: grunt|strop|wspornik; oscieze: w_izolacji|w_murze|czesciowo), parametry (skalary → argumenty
+    budowniczego)}. Zwraca (węzły, długości z modelu, pominięte [opis], przegrody węzłów {id: [kody]})."""
+    wpisy = model.raw.get("wezly") if isinstance(getattr(model, "raw", None), dict) else None
+    if not isinstance(wpisy, list):
+        return [], {}, ["brak sekcji `wezly` w modelu"], {}
+    przeg = getattr(model, "przegrody", {})
+
+    def typ_p(k):
+        p = przeg.get(k)
+        return None if p is None else (p.typ if hasattr(p, "typ") else p.get("typ"))
+
+    def pierwsza(kody, *typy):
+        for k in kody:
+            if typ_p(k) in typy:
+                return k
+        for t in typy:
+            k = _pierwsza_przegroda(model, t)
+            if k:
+                return k
+        return None
+
+    B, _ = B_prim(model)
+    st = (model.stropy() or [None])[0]
+    zb = "ZB_C30" if "ZB_C30" in model.materialy else None
+    mat = (G.material_z_modelu(model, st.get("mat") or zb) if st and (st.get("mat") or zb)
+           else G.MATERIALY_DOMYSLNE["ZB"])
+    pod = G.warstwy_z_modelu(model, st["podloga"]) if st and st.get("podloga") else []
+    suf = _sufit(model, st.get("sufit")) if st else []
+    out, dl, pom, kody_w = [], {}, [], {}
+    for e in wpisy:
+        wid, typ = str(e.get("id")), str(e.get("typ", ""))
+        rodz = ALIASY_WEZLOW.get(typ)
+        kody = [str(k) for k in (e.get("przegrody") or [])]
+        par = {k: v for k, v in (e.get("parametry") or {}).items() if isinstance(v, (int, float, str, bool))}
+        nz = e.get("nazwa")
+        if rodz is None:
+            pom.append(f"{wid}: typ „{typ}” nieobsługiwany w modelu 2D (mostek punktowy χ / węzeł 3D) — pominięty")
+            continue
+        kod_sz = pierwsza(kody, "sciana_zewn")
+        if kod_sz is None:
+            pom.append(f"{wid}: brak przegrody typu sciana_zewn — pominięty")
+            continue
+        sz = G.warstwy_z_modelu(model, kod_sz)
+        osad = osadzenie_z_modelu(model, kod_sz)
+        okp = {k: v for k, v in _okna_param(_okno(), osad).items() if k != "wsuniecie"}
+        pol = e.get("wariant") or ("czesciowo" if osad["wsuniecie"] > 1e-6 else "w_izolacji")
+        kw = dict(id=wid, **({"nazwa": nz} if nz else {}))
+        try:
+            if rodz == "attyka":
+                kod_d = pierwsza(kody, "stropodach", "dach")
+                d = next((x for x in model.dachy() if x.get("przegroda") == kod_d), (model.dachy() or [{}])[0])
+                att = d.get("attyka") or {}
+                w = G.wezel_attyka(sz, G.warstwy_z_modelu(model, kod_d),
+                                   h_nad_pokryciem=par.pop("h_nad_pokryciem", att.get("wys_nad_pokryciem", 0.30)),
+                                   **par, **kw)
+            elif rodz == "naroze":
+                w = G.wezel_naroznik_zewnetrzny(sz, **par, **kw)
+            elif rodz in ("strop", "wspornik", "wspornik_bez"):
+                if st is None:
+                    raise ValueError("brak stropu w modelu")
+                wsp = (model.wsporniki() or [{}])[0]
+                wys = 0.0 if rodz == "strop" else float(par.pop("wysieg", 1.5))
+                lac = None if rodz != "wspornik" else G.LACZNIK_PRZYKLAD
+                w = G.wezel_wspornik(sz, float(wsp.get("grubosc", st["grubosc"])) if wys else st["grubosc"], mat,
+                                     pod, suf, wysieg=wys, lacznik=lac, **par, **kw)
+            elif rodz in ("oscieze", "nadproze", "podokiennik"):
+                f = {"oscieze": G.wezel_oscieze_okna, "nadproze": G.wezel_nadproze,
+                     "podokiennik": G.wezel_podokiennik}[rodz]
+                w = f(sz, polozenie=pol, wsuniecie=osad["wsuniecie"], **okp, **par, **kw)
+            elif rodz in ("cokol", "prog"):
+                wariant = e.get("wariant") or "grunt"
+                kp = pierwsza(kody, "podloga_na_gruncie")
+                fund = model.fundamenty() or {}
+                el = (fund.get("elementy") or [{}])[0]
+                kw_c: dict[str, Any] = {"y_teren": float(par.pop("y_teren", y_teren)), "b": B}
+                if fund.get("typ") == "plyta":
+                    kw_c["fundament"] = "plyta"
+                else:
+                    kw_c.update(fundament="lawa", lawa=(el.get("b", 0.60), el.get("h", 0.30), el.get("spod", -1.10)))
+                ok_hs = _okno("HS_ALU_3sz")
+                prog = {"U_f": ok_hs["U_f"], "b_f": ok_hs["b_f"], "U_g": ok_hs["U_g"], "d_f": osad["d_f"],
+                        "wsuniecie": osad["wsuniecie"], "zrodlo": ok_hs["zrodlo"]}
+                if rodz == "cokol":
+                    w = G.wezel_cokol(sz, G.warstwy_z_modelu(model, kp), **kw_c, **par, **kw)
+                elif wariant == "grunt":
+                    w = G.wezel_cokol(sz, G.warstwy_z_modelu(model, kp), prog=prog, **kw_c, **par, **kw)
+                else:
+                    if st is None:
+                        raise ValueError("brak stropu w modelu")
+                    wys = 1.0 if wariant == "wspornik" else 0.0
+                    w = G.wezel_prog_strop(sz, st["grubosc"], mat, pod, suf, wysieg=wys, prog=prog, **par, **kw)
+            elif rodz == "garaz":
+                kg = next((k for k in kody if k != kod_sz and typ_p(k) and typ_p(k).startswith("sciana")), None)
+                wg = (G.warstwy_z_modelu(model, kg) if kg else
+                      [G.Warstwa(G.MATERIALY_DOMYSLNE["TYNK_CEM"], 0.015),
+                       G.Warstwa(G.MATERIALY_DOMYSLNE["SIL24"], 0.24, True),
+                       G.Warstwa(G.MATERIALY_DOMYSLNE["TYNK_CEM"], 0.015)])
+                w = G.wezel_garaz(sz, wg, przerwa_izolacji=bool(par.pop("przerwa_izolacji", False)), **par, **kw)
+            elif rodz == "rura_spustowa":
+                w = G.wezel_rura_spustowa(sz, **par, **kw)
+            else:   # pragma: no cover
+                raise ValueError(rodz)
+        except (TypeError, ValueError, KeyError) as ex:
+            pom.append(f"{wid}: nie zbudowano węzła ({ex})")
+            continue
+        out.append(w)
+        kody_w[wid] = kody
+        if e.get("dlugosc") is not None:
+            dl[wid] = float(e["dlugosc"])
+    return out, dl, pom, kody_w
