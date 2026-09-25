@@ -77,7 +77,8 @@ print(plot.qa(sh))                               # kontrola wg R4 pkt 3.14
 | `sheet_size(fmt, orientation=None) -> (W, H)` | A0–A4, wydłużone `A3x3`, `A2×3`, ogólnie `Ak×n` (A4 pionowo, reszta poziomo); niestandardowe `"780x594"` (szer. × wys., jak zapisano; `custom_size`) |
 | `fold_positions(W, H) -> (xs, ys)` | linie składania do A4 „do wpięcia” (praktyka DIN 824 forma A, uogólniona na formaty wydłużone i niestandardowe): harmonijka o nieparzystej liczbie pasów ≤ 210 mm (rodzina A: 210 + pary równe; rodzina B: (20 + m) + m… + 190 — wariant o najlepszej ocenie), pierwszy pas z marginesem 20 mm, pas z tabliczką ≥ 190 mm na wierzchu; potem co 297 mm od dołu — `lamela.draft.skladanie` |
 | `skladanie.pasy_pionowe(W)`, `warianty_pasow(W)`, `rzedy_poziome(H)`, `ocena_pionowa(pasy, W)`, `ocena_skladania(W, H, tb_h=None)`, `opis_skladania(W, H)` | pasy harmonijki, rzędy, plan i ocena „dobre/poprawne/słabe” (progi jak `tools/metryki_arkuszy.py`) + warunek „tabliczka na wierzchu” |
-| `Sheet(fmt="A3", orientation=None, title_block=None, binding=20, margin=10, fold_marks=True, centring_marks=True, grid_reference=None, draw_frame=True)` | ramka 0,7 mm; znaki centrujące 0,7 mm do 10 mm za ramkę; siatka odniesień 50 mm od osi symetrii (litery bez I/O, 3,5 mm, 0,35 mm — domyślnie dla ≥ A2); oznaczenie formatu w dolnym marginesie; znaki składania z numerami kolejności zgięć (1,8 mm, przy krawędzi arkusza); format niestandardowy: `Sheet("780x594")` (`sh.custom`, opis na marginesie „nst. 780×594”) |
+| `Sheet(fmt="A3", orientation=None, title_block=None, binding=20, margin=10, fold_marks=True, centring_marks=True, grid_reference=None, draw_frame=True)` | ramka 0,7 mm; znaki centrujące 0,7 mm do 10 mm za ramkę; siatka odniesień 50 mm od osi symetrii (litery bez I/O, 3,5 mm, 0,35 mm — domyślnie dla ≥ A2); oznaczenie formatu w dolnym marginesie; znaki składania z numerami kolejności zgięć (1,8 mm, przy krawędzi arkusza); format niestandardowy: `Sheet("780x594")` (`sh.custom`, opis na marginesie „nst. 780×594”); `centring_marks={strona: mm}` — krótsze wejście znaku za ramkę |
+| `sh.przytnij_znaki_centrujace(odstep=1.5, min_gl=2)` | po narysowaniu treści: znak centrujący (ISO 5457 4.3: 0,7 mm, zalecane 10 mm za ramką; kształt dowolny) kończy się `odstep` przed treścią (prymitywy arkusza i rzutni), wejście < `min_gl` — na ramce; zwraca `{g, d, l, p: mm}` (`sh.znaki`, `sh.znaki_gl`); `znaki_centrujace(W, H, frame)` — geometria znaków |
 | `Sheet.add_viewport(scale, title, subtitle=None) -> Viewport` | nowa rzutnia |
 | `Sheet.place(vp, x, y, anchor="tl", pad=3.0, clip_model=None)` | umieszczenie rzutni (kotwica `tl/tr/bl/br/mc…`) |
 | `Sheet.view_title(vp, text=None, scale=True, where="below"|"above", dx, dy, h=5.0)` | tytuł widoku z podziałką i podkreśleniem (dla przekrojów `where="above"` — ISO 128-3) |
@@ -85,7 +86,7 @@ print(plot.qa(sh))                               # kontrola wg R4 pkt 3.14
 | `Sheet.save(base, formats=("dxf","pdf","png"), dpi=200, mode="branze", dxf_mode="layout")` | zapis |
 | `TitleBlock(...)`, `Osoba(funkcja, imie_nazwisko="", specjalnosc_uprawnienia="", data="")` | pola: pracownia, adres pracowni, inwestor, obiekt, lokalizacja (działka/obręb/jedn. ewid.), kategoria, stadium, branża, tytuł, skala, nr rysunku, format (auto), data wydania, rewizja, **arkusz**, **rodzaj dokumentu**, `sprawdzenie` (False — bez wiersza „Sprawdzający”), `osoby` (Projektant / Projektant (wsp.) / Sprawdzający / Opracował — pola PUSTE do ręcznego uzupełnienia, kolumna PODPIS zawsze pusta), `rewizje` (tabela zmian nad tabliczką) |
 | `notes_box(sh, x, y_top, w, lines, title="UWAGI", h=2.5, start=1)` | uwagi numerowane, zawijane (`start` — numer pierwszej uwagi, ciąg dalszy bloku dzielonego) |
-| `table(sh, x, y_top, cols, rows, h=2.5, row_h=5, title=None, align=None)` | zestawienia (pomieszczeń, stolarki…) |
+| `table(sh, x, y_top, cols, rows, h=2.5, row_h=5, title=None, align=None, zawijaj=False)` | zestawienia (pomieszczeń, stolarki…); tekst zmniejszany do 1,8 mm, `zawijaj=True` — dłuższy łamany w komórce (wiersz rośnie) zamiast wchodzić na sąsiednią kolumnę |
 | `scale_bar(c, pos, scale, length_m=None, h=1.8)` | podziałka liniowa (ISO 5455) |
 | `control_segment(sh, pos, length=100, vertical=False)` | odcinek kontrolny wydruku 1:1 |
 | `lines_legend(c, x, y_top, entries=None, scales=(20,50,100,500))` | tabela rodzajów i grubości linii wg grup |
@@ -189,10 +190,14 @@ pomieszczenia”; wymiary rzeczywiste w m, symbole umowne w mm papieru (`s_mm`, 
 * `dxfout.to_dxf(sheet, path, mode="layout"|"flat")` — layout: model w m + VIEWPORT (każda kolejna rzutnia
   przesunięta w modelu w prawo, adnotacje w skali własnej rzutni); rodzaje linii w mm z `ltscale = scale/1000`
   na encjach modelu (`PSLTSCALE = 0`); flat: wszystko w mm arkusza.
-* `plot.volume(sheets, pdf, title, toc=True)` — tom ze spisem rysunków; `plot.check_scale(pdf, sheet, vp, p1, p2)`
+* `plot.volume(sheets, pdf, title, toc=True)` — tom ze spisem rysunków (`plot.spis_rysunkow`: nagłówek 5 / 3,5 mm
+  łamany do szerokości pola, tytuły łamane w komórkach, pole spisu między znakami centrującymi);
+  `plot.check_scale(pdf, sheet, vp, p1, p2)`
   — pomiar odcinka w PDF; `plot.pdf_segments(pdf)`; `plot.check_png(png, sheet, min_dpi=150)`;
   `plot.add_control_marks(sheet)`; `plot.qa(sheet, kind=None)` — kontrola R4 pkt 3.14 (metryka § 10, legenda,
-  podziałki minimalne, grubości z szeregu ISO 128-2, pismo z szeregu ISO 3098 / ≥ 2,5 mm na PZT, sumy łańcuchów).
+  podziałki minimalne, grubości z szeregu ISO 128-2, pismo z szeregu ISO 3098 / ≥ 2,5 mm na PZT, sumy łańcuchów;
+  ostrzeżenie o znakach spoza kroju pisma). Znaki spoza Liberation Sans z tablicy `text.ZAMIENNIKI` (⌀, ∅ → Ø)
+  są zamieniane w pomiarze, PDF i DXF (`text.normalizuj`).
 
 ## 4. Zgodność z R4 i odstępstwa (przyjęcia silnika)
 * Grupy linii R4 pkt 3.2 (0,5 przy 1:100, 0,7 przy 1:50/detalach); **kreskowanie i meble o stopień cieńsze**
