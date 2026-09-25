@@ -51,12 +51,12 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 1408,
-          "napisy": 472,
+          "prymitywy": 1415,
+          "napisy": 475,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 12.7,
+      "czas_s": 17.6,
       "png_kontrola": {
         "px": [
           3508,
@@ -97,12 +97,12 @@
           "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 1884,
-          "napisy": 564,
+          "prymitywy": 1951,
+          "napisy": 610,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 18.4,
+      "czas_s": 20.4,
       "png_kontrola": {
         "px": [
           3508,
@@ -148,7 +148,7 @@
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 11.5,
+      "czas_s": 16.0,
       "png_kontrola": {
         "px": [
           3508,
@@ -178,5 +178,5 @@
     "PZT — brak danych: dzialka.yaml: dzialka.mpzp (wskaźniki): wskaźniki i parametry MPZP potrzebne do tabeli zgodności PZT (RPB § 14 pkt 4 lit. d)"
   ],
   "tom": "projekt/02_PZT/rysunki/tom_PZT.pdf",
-  "czas_s": 50.5
+  "czas_s": 64.5
 }

@@ -19,7 +19,7 @@ from dataclasses import dataclass, field
 import numpy as np
 import shapely
 from shapely import affinity
-from shapely.geometry import LineString, MultiPoint, Point, Polygon, box
+from shapely.geometry import LineString, Point, Polygon
 from shapely.ops import nearest_points, unary_union
 
 from ..draft.geom import polygons_of

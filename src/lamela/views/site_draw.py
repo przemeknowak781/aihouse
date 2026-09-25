@@ -17,7 +17,7 @@ from shapely.ops import unary_union
 
 from ..draft import styles, text as T
 from ..draft.core import Viewport
-from ..draft.geom import circle_pts, lines_of, perp, polygons_of, readable_angle, unit
+from ..draft.geom import circle_pts, lines_of, perp, readable_angle, unit
 from .common import Placer
 
 # ------------------------------------------------------------------------------------------------ warstwy PZT
@@ -90,7 +90,7 @@ def text_block(c, pos, lines, h=H, ha="left", layer="Z-OPISY", style="normal", c
     k = c.k
     lines = [ln for ln in (lines if isinstance(lines, (list, tuple)) else [lines]) if ln is not None]
     a = math.radians(rot)
-    ex, ey = np.array([math.cos(a), math.sin(a)]), np.array([-math.sin(a), math.cos(a)])
+    ey = np.array([-math.sin(a), math.cos(a)])
     P = np.asarray(pos, float)
     for i, s in enumerate(lines):
         st = style[i] if isinstance(style, (list, tuple)) else style
@@ -352,7 +352,6 @@ def map_window(s, opts: dict, margin=4.0):
 def draw_base_map(c, s, lab: Labeler, win: Polygon, used: set, opts: dict, spot_every=9.0):
     """Treść podkładu (mapy do celów projektowych — SYNTETYCZNEJ, z dzialka.yaml): działki sąsiednie z numerami,
     budynki sąsiednie, droga, uzbrojenie istniejące, warstwice i pikiety terenu istniejącego, zieleń istniejąca."""
-    from ..draft import symbols as S
     k = c.k
     n0 = lab.mark()
     # działki sąsiednie
@@ -566,7 +565,6 @@ def draw_hardscape(c, s, used: set, hatch=True, band_mm=None, opaska_polys=()):
     """Nawierzchnie utwardzone (PN-B-01027 poz. 7.10–7.11), tarasy, opaska żwirowa."""
     from ..draft import symbols as S
     from ..draft.hatch import _dots, _rng
-    k = c.k
     band = band_mm if band_mm is not None else (3.0 if c.scale >= 400 else 5.0)
     for u in s.utwardzenia:
         pg = u["poly"].difference(s.p0)
@@ -1424,7 +1422,7 @@ LAYER_W = {"Z-BUDYNEK": 3.0, "Z-DZIALKA": 0.9, "Z-SIECI-PROJ": 1.0, "Z-SIECI-IST
 def register_all(lab: Labeler, n0=0, n1=None, min_len_mm=0.8, hatch_w=0.12):
     """Rejestruje narysowane prymitywy w ``lab`` z wagami zależnymi od warstwy; pomija kropki/drobne kreski
     (trawnik, żwir), wypełnienia tła; kreskowania (linie cienkie ≤ 0,18 mm) — z małą wagą."""
-    from ..draft.core import PArc, PFill, PLine, PText
+    from ..draft.core import PFill, PLine
     from .common import prim_shapes
     k = lab.k
     prims = lab.vp.prims[n0:n1]

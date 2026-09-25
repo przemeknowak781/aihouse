@@ -430,6 +430,12 @@ def _plyty(an, D):
             pz = pos.get(e.id)
             if pz is None:
                 continue
+            mt = an.m.material(str(e.raw.get("mat"))) if e.raw.get("mat") else None
+            if mt is not None and (mt.kreskowanie or "").upper() != "ZELBET" and "elbet" not in (mt.nazwa or ""):
+                D.braki.append(f"{e.id}: element płytowy z materiału {e.raw.get('mat')} ({mt.nazwa}) — biblioteka liczy go "
+                               f"jako płytę (poz. {pz.nr}); pominięty na rysunkach konstrukcyjnych (element niekonstrukcyjny "
+                               "— do wyłączenia z obliczeń w bibliotece/modelu).")
+                continue
             c_nom = zelbet.otulina(e.ekspozycja, 10, an.p).c_nom
             el = ElementPl(e.id, e.typ, pz.nr, e.poly_full, float(e.h), float(e.wierzch), e.beton.klasa, e.ekspozycja,
                            float(c_nom), bool(e.raw.get("lacznik_termiczny")), raw=e.raw)

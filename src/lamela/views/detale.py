@@ -387,8 +387,17 @@ def wiersze_opisu(det: Detal, wyniki: dict, oc: dict) -> list[tuple[str, str | N
     out.append((f"4 linie: {txt} — " + ("ciągłość zachowana" if not zle else "uwaga"),
                 "#1a7f37" if not zle else "#b7791f"))
     for z in zle:
-        out.append((z[:150], "#b7791f"))
+        out.append((_skroc(z, 165), "#b7791f"))
     return out
+
+
+def _skroc(t: str, n: int) -> str:
+    """Skrót tekstu do n znaków na granicy słowa (z wielokropkiem)."""
+    if len(t) <= n:
+        return t
+    c = t[:n - 1]
+    i = max(c.rfind(" "), c.rfind(";"))
+    return (c[:i] if i > n // 2 else c).rstrip(" ,;(") + "…"
 
 
 def kontrola_grubosci(det: Detal) -> list[tuple]:

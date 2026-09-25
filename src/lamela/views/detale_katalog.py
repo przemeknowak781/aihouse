@@ -1002,15 +1002,29 @@ def wezly_garazu_id(m) -> dict:
         lst = wezly_garazu(m, wpis(m, "WZ-09")) or []
     except Exception:          # pragma: no cover — geometria nietypowa
         lst = []
+    import re
     for w, _L in lst:
         n = w.nazwa or ""
-        if "płycie fundamentowej" in n:
-            out.setdefault("plyta", w.id)
-        elif "+ ściana" in n:
-            out.setdefault("dach_sciana", w.id)
-        else:
-            out.setdefault("dach", w.id)
+        k = "plyta" if "płycie fundamentowej" in n else "dach_sciana" if "+ ściana" in n else "dach"
+        if k not in out:
+            out[k] = w.id
+            out[k + "_sciany"] = re.findall(r"S\d-\d+", str(w.dane.get("geometria z modelu", "")))
     return out
+
+
+def sciana_garazu(m, sg: str, ids: list | None):
+    """Ściana `sg` węzła (pierwsza z listy id z geometrii węzła; inaczej najdłuższa)."""
+    sc = [s for s in m.sciany() if s.przegroda_kod == sg]
+    wyb = [s for s in sc if ids and s.id in ids]
+    return max(wyb or sc, key=lambda s: s.L)
+
+
+def zebro_pod(m, s_g) -> dict:
+    """Żebro płyty fundamentowej wzdłuż ściany (wspólny odcinek > 1 m)."""
+    from shapely.geometry import LineString as _LS
+    Ls = _LS([tuple(s_g.p1), tuple(s_g.p2)]).buffer(0.05)
+    return next((z for z in (m.fundamenty() or {}).get("elementy") or [] if "os" in z and
+                 _LS([tuple(p) for p in z["os"]]).intersection(Ls).length > 1.0), {})
 
 
 def pas_sufg(m, kod: str | None) -> float:
@@ -1033,7 +1047,7 @@ def detal_garaz_dach(m, opts: dict) -> Detal:
     kd = next((k for k in kody if m.przegroda(k) and m.przegroda(k).typ in ("stropodach", "dach")), "DZ1")
     ksuf = next((k for k in kody if m.przegroda(k) and m.przegroda(k).typ == "strop" and k != "POD-1"), None)
     dach = dach_wg(m, kd)
-    s_g = max((s for s in m.sciany() if s.przegroda_kod == sg), key=lambda s: s.L)
+    s_g = sciana_garazu(m, sg, ids.get("dach_sciana_sciany"))
     st = next((s for s in m.stropy() if s["id"] == "ST1"), m.stropy()[0])
     z0, t_L = float(st["wierzch"]), float(st["grubosc"])
     t_R = float(dach["plyta"]["grubosc"])
@@ -1169,11 +1183,8 @@ def detal_garaz_plyta(m, opts: dict) -> Detal:
     pg = next((k for k, p in m.przegrody.items() if p.typ == "podloga_na_gruncie" and k != pd
                and "gara" in (p.nazwa or "").lower()), pd)
     det = Detal(m, "D-11", f"Ściana dom–garaż ({sg}) na płycie fundamentowej", (wid,), 10)
-    s_g = max((s for s in m.sciany() if s.przegroda_kod == sg), key=lambda s: s.L)
-    from shapely.geometry import LineString as _LS
-    zb = next((z for z in (m.fundamenty() or {}).get("elementy") or [] if "os" in z and
-               _LS([tuple(p) for p in z["os"]]).distance(_LS([tuple(s_g.p1), tuple(s_g.p2)])) < 0.05
-               and _LS([tuple(p) for p in z["os"]]).length > 1.0), {})
+    s_g = sciana_garazu(m, sg, ids.get("plyta_sciany"))
+    zb = zebro_pod(m, s_g)
     Wg = det.warstwy(sg)
     kg = next(i for i, w in enumerate(Wg) if w["konstr"])
     xs0 = sum(w["d"] for w in Wg[:kg])
@@ -1190,7 +1201,7 @@ def detal_garaz_plyta(m, opts: dict) -> Detal:
     d_x, m_x = (xps["d"], xps["mat"]) if xps else (0.20, "XPS300")
     pod = next((w for w in W[ki + 1:] if w["d"] >= 0.05 and w is not xps), None)
     d_p = pod["d"] if pod else 0.0
-    xL, xR, yT, yB = -0.45, 1.05, 0.45, -1.05
+    xL, xR, yT, yB = -0.45, 1.05, 0.45, -1.10
     det.okno = (xL, yB, xR, yT)
     xc = (xs0 + xs1) / 2
     y_sp = y_pl - t_pl
@@ -1206,11 +1217,13 @@ def detal_garaz_plyta(m, opts: dict) -> Detal:
               (xL - 0.5, y_sp - d_x)], m_x)
     if xps:
         det._rejestr(pd, xps, d_x)
+    def prof(d):
+        return [(xL - 0.5, y_sp - d), (xc - b_z / 2 - d, y_sp - d), (xc - b_z / 2 - d, y_zb - d),
+                (xc + b_z / 2 + d, y_zb - d), (xc + b_z / 2 + d, y_sp - d), (xR + 0.1, y_sp - d)]
     if pod:
-        det.rect(xc - b_z / 2 - d_x, y_zb - d_x - d_p, xc + b_z / 2 + d_x, y_zb - d_x, pod["mat"])
-    det.cienka([(xL - 0.5, y_sp - d_x), (xc - b_z / 2 - d_x, y_sp - d_x), (xc - b_z / 2 - d_x, y_zb - d_x),
-                (xc + b_z / 2 + d_x, y_zb - d_x), (xc + b_z / 2 + d_x, y_sp - d_x), (xR + 0.1, y_sp - d_x)],
-               "FOLIA_PE", "G")
+        det.poly(prof(d_x) + list(reversed(prof(d_x + d_p))), pod["mat"])
+        det._rejestr(pd, pod, d_p)
+    det.cienka(prof(d_x), "FOLIA_PE", "G")
     # posadzki: dom (membrana SBS pod murem do lica konstrukcji), garaż od lica ściany
     zak = {w["idx"]: (xL - 0.5, 0.0) for w in W[:ki]}
     for w in W[:ki]:
@@ -1243,12 +1256,12 @@ def _garaz_plyta_opisy(det: Detal, g: dict) -> Detal:
     h_bl = 0.24
     det.kontur([(xs0, y_pl), (xs0, y_pl + h_bl), (xs1, y_pl + h_bl), (xs1, y_pl)], zamkniety=False, pen=0.35,
                lt="KRESKOWA")
-    det.kontur([(xg, y_g - 0.05), (xg, y_g - 0.05 - 0.10), (min(xg + 1.0, xR), y_g - 0.15)], zamkniety=False,
-               pen=0.35, lt="KRESKOWA")
+    det.kontur([(min(xg + 1.0, xR), y_g - 0.05), (xg, y_g - 0.05), (xg, y_g - 0.15), (min(xg + 1.0, xR), y_g - 0.15),
+                (min(xg + 1.0, xR), y_g - 0.05)], zamkniety=False, pen=0.35, lt="KRESKOWA")
     for p1, p2 in (((0.0, yT), (xg, yT)), ((xL, yB), (xR, yB)), ((xL, 0.0), (xL, yB)), ((xR, y_g), (xR, yB))):
         det.przerwa(p1, p2)
     det.opis_stosu(g["sc"], "y", 0.30, odwroc=True, tytul=f"{g['sg']} — ściana dom–garaż (szczelna na spaliny)")
-    det.opis_stosu(st[:g["ki"] + 1], "x", -0.22, odwroc=True, wyjscie=(-0.22, yB - 0.03),
+    det.opis_stosu(st[:g["ki"] + 1], "x", -0.22, odwroc=False, wyjscie=(-0.22, yT + 0.03),
                    tytul=f"{g['pd']} — podłoga domu")
     Gs = det_stos_pod(det, g["pg"], y_g, 0.0)[:g["kj"]]
     det.opis_stosu(Gs, "x", xR - 0.12, odwroc=False, tytul=f"{g['pg']} — posadzka garażu (bez izolacji termicznej, "

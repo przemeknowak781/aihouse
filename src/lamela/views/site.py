@@ -18,11 +18,10 @@ Konfiguracja arkuszy: ``model/arkusze_pzt.yaml``; CLI: ``tools/generuj_widoki.py
 """
 from __future__ import annotations
 
-import math
 from dataclasses import dataclass, field
 
 import numpy as np
-from shapely.geometry import LineString, Point, Polygon, box
+from shapely.geometry import Point, box
 from shapely.ops import nearest_points, unary_union
 
 from ..draft import fmt
@@ -115,11 +114,6 @@ def _label_garage(lab, s):
     lab.bounds = old_b
 
 
-def _label_function(lab, s, anchor, lines=("budynek mieszkalny jednorodzinny", "— projektowany")):
-    lab.label_in(s.plot.buffer(-0.5), anchor, list(lines), D.H, dists=(9.0, 12.0, 15.0, 19.0, 24.0), leader_from=2.0,
-                 dot=True)
-
-
 def _frame_and_note(vp, win_b, used):
     """Ramka podkładu i opis „PODKŁAD PRZYKŁADOWY…” nad ramką (poza treścią mapy)."""
     from ..draft.sheet import wrap
@@ -187,7 +181,7 @@ def view_plan(ctx, spec, scale, opts):
     D.draw_building(vp, s, used, slab_lt=str(opts.get("linia_plyt", "PUNKTOWA")).upper())
     D.register_all(lab)
     # --- opisy i wymiary (kolejność = priorytet)
-    c0 = _labels_building(lab, s, W)
+    _labels_building(lab, s, W)
     used.add("zero")
     he, _src = s.teren_przy_wejsciu()          # rzędna terenu przy wejściu głównym (PN-B-01027 poz. 1.8)
     if he is not None and s.wejscie_gl is not None:
@@ -553,7 +547,6 @@ def detail_window(s, opts, margin=3.0):
 
 def _draw_context(vp, s, lab, win, used, hatch=True, lawn=False, zone=True, utilities_ist=True):
     """Treść wspólna 1:200: sąsiednie granice, droga, zieleń, nawierzchnie, budynek, ogrodzenie, retencja."""
-    k = vp.k
     for x in s.sasiedzi:
         g = D.clip(x["poly"].exterior, win) if x["poly"] is not None else None
         D.draw_geom(vp, g, "Z-MAPA", pen=0.25, lt="CIAGLA")
@@ -913,20 +906,6 @@ def _notes_szczegoly(s, zj_todo):
     return out
 
 
-def util_window(s, opts, margin=2.5):
-    """Okno PZT-03: działka (szerokość ± margines) × zasięg sieci, obiektów i urządzeń retencji (+ pas drogowy)."""
-    if opts.get("okno"):
-        return tuple(float(v) for v in opts["okno"])
-    x0, y0, x1, y1 = detail_window(s, opts, margin)
-    geoms = [x.geom for x in s.sieci if not x.istn] + [Point(o.xy) for o in s.obiekty.values()
-                                                       if s.plot.buffer(1.0).contains(Point(o.xy))]
-    if s.rozsaczanie and s.rozsaczanie["poly"] is not None:
-        geoms.append(s.rozsaczanie["poly"])
-    geoms.append(s.footprint)
-    gy0 = unary_union(geoms).bounds[1]
-    return x0, max(y0, gy0 - 4.0), x1, y1
-
-
 def _util_labels(lab, s, used):
     """Opisy sieci projektowanych (litera wzdłuż + opis z długością) i istniejących (w pasie drogowym)."""
     h = D.H
@@ -1058,11 +1037,6 @@ def view_uzbrojenie(ctx, spec, scale, opts):
     if lab.failed:
         ctx.note("PZT-03", f"nie umieszczono {len(lab.failed)} opisów: {[f[0] for f in lab.failed][:8]}")
     return vp, res, title
-
-
-def _dim_between(lab, ga, gb, a, b):
-    """Wymiar odległości między dwiema liniami (sieciami) w miejscu najmniejszego oddalenia (przesuwany wzdłuż)."""
-    D.place_dim(lab, (a.x, a.y), (b.x, b.y), on_a=ga, on_b=gb, span=4.0, step=0.25)
 
 
 def _tab_przylacza(s):

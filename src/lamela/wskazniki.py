@@ -32,7 +32,7 @@ import math
 import numpy as np
 import shapely
 from shapely import affinity
-from shapely.geometry import LineString, MultiPoint, Point, Polygon
+from shapely.geometry import LineString, Point, Polygon
 from shapely.ops import unary_union
 
 UPZP = "upzp (t.j. Dz.U. 2026 poz. 538)"
@@ -344,7 +344,6 @@ def wskazniki(model, ir=None, opcje: dict | None = None) -> dict:
 def _wskazniki_cd(model, ir, g, out, A, z0) -> dict:
     raw = g["raw"]
     T = Teren(raw.get("teren") or {})
-    nums = numery_kondygnacji(model)
     pk = {k: float(q.area) for k, q in g["storeys"].items()}
     out["pow_kondygnacji"] = _poz(pk, "m²", POD["33"], "obrys zewnętrzny ścian zewnętrznych każdej kondygnacji "
                                   "(model.obrys_kondygnacji), bez balkonów, loggii i tarasów")
