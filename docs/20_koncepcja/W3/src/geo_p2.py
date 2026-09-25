@@ -32,7 +32,7 @@ OTWORY_P2 = [
     O("O2-07", "S2-05", 7.40, 8.80, "okno", 0.80, 1.50, "ON2", uw="łazienka rodziców"),
     O("O2-08", "S2-05", 4.40, 6.00, "okno", 1.70, 0.90, "ON3", uw="okno klatki (pn.) - nad biegami P1-P2"),
     O("O2-09", "S2-11", 4.00, 4.90, "drzwi", 2.05, 0.0, "D1", "b", "-x", "gabinet"),
-    O("O2-10", "S2-12", 4.00, 4.90, "drzwi", 2.05, 0.0, "D1", "b", "+x", "garderoba = przedpokój apartamentu"),
+    O("O2-10", "S2-12", 4.00, 4.90, "otwor", 2.05, 0.0, "DP1", uw="drzwi przesuwne (w ścianie) - garderoba = przedpokój apartamentu"),
     O("O2-11", "S2-13", 4.00, 4.90, "drzwi", 2.05, 0.0, "D1", "b", "+x", "sypialnia"),
     O("O2-12", "S2-09", 4.155, 6.295, "otwor", 2.60, 0.0, "", uw="wyjście z biegu 4; balustrada nad biegiem 3"),
     O("O2-13", "S2-09", 7.00, 7.80, "drzwi", 2.05, 0.0, "D2", "a", "-y", "łazienka rodziców (z garderoby)"),

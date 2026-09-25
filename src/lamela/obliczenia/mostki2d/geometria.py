@@ -21,7 +21,7 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass, field
-from typing import Any, Iterable, Sequence
+from typing import Any, Sequence
 
 from shapely.geometry import Point, Polygon, box
 from shapely.geometry.base import BaseGeometry
@@ -460,7 +460,7 @@ def wezel_wspornik(warstwy_sciany: Sequence[Warstwa], t_plyty: float = 0.20, mat
     mat_plyty = mat_plyty or MATERIALY_DOMYSLNE["ZB"]
     st = _stos(warstwy_sciany, 0.0)
     ks = indeks_konstrukcyjnej(warstwy_sciany)
-    x_s0, x_s1 = st[ks][0], st[ks][1]
+    x_s1 = st[ks][1]
     x_out = st[-1][1]
     t = t_plyty
     t_pod, t_suf = grubosc(warstwy_podlogi), grubosc(warstwy_sufitu)
@@ -597,7 +597,7 @@ def wezel_oscieze_okna(warstwy_sciany: Sequence[Warstwa], U_f: float = 0.95, b_f
     ti, te = _temperatury(theta_i, theta_e)
     st = _stos(warstwy_sciany, 0.0)
     ks = indeks_konstrukcyjnej(warstwy_sciany)
-    y_s0, y_s1 = st[ks][0], st[ks][1]
+    y_s1 = st[ks][1]
     D = st[-1][1]
     L = L or odl_ciecia(D)
     m_r = material_rama(U_f, d_f, zrodlo=zrodlo_okna)
@@ -733,7 +733,6 @@ def wezel_cokol(warstwy_sciany: Sequence[Warstwa], warstwy_podlogi: Sequence[War
     if hydro:
         ob.append(_obsz(box(x_s1, y_izol_dol, x_s1 + d_h, y_prz), hydro[0], "hydroizolacja pionowa"))
     ob.append(_obsz(box(x_s1 + d_h, y_izol_dol, x_out, y_prz), izol, "izolacja obwodowa (cokół)"))
-    S = S_STREFY
     strefy = strefy_z_dopelnienia(ob, box(x_in, y_dol, x_pr, H), [
         ((-0.5, H / 2), _nas("pomieszczenie", ti, "wewn")),
         ((x_out + 1.0, y_teren + (H - y_teren) / 2), _nas("zewnętrze", te, "zewn"))])

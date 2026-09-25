@@ -38,7 +38,7 @@ def stairs(ax, kond):
         ax.text((xW0 + xW1) / 2, 6.3, "bieg 2\n(nad)", fontsize=5, ha="center", va="center", color="#555", zorder=6)
     if kond in ("P1", "P2"):
         tr(xW0, xW1, ysW, "-")
-        arrow((xW0 + xW1) / 2, yl0 - 0.2, y0 + 0.05, "D" if kond == "P1" else "")
+        arrow((xW0 + xW1) / 2, yl0 - 0.2, y0 + 0.05, "2" if kond == "P1" else "4")
     if kond == "P2":
         tr(xE0, xE1, ysE, "-")
         ax.text((xE0 + xE1) / 2, 6.5, "bieg 3\n(poniżej)", fontsize=5, ha="center", va="center", color="#555", zorder=6,

@@ -2,12 +2,12 @@ RAPORT KOMPLETNOŚCI — PZT_PAB_ZL_2026.09.25.pdf
 Lista kontrolna: TOM I — PZT + PAB + ZL w jednym pliku (rejestr C.1)
 Status: PRZYKŁAD – NIE DO ZŁOŻENIA
 Pozycje: OK 54 · BRAK 0 · DO UZUPEŁNIENIA 8 · N/D 1 · OSTRZEŻENIE 0
-Znaczniki: [DO UZUPEŁNIENIA] ×122, [DOKUMENT ZEWNĘTRZNY] ×2, [DANE PRZYKŁADOWE] ×61
-Plik: 42 stron, 3.42 MB
+Znaczniki: [DO UZUPEŁNIENIA] ×122, [DOKUMENT ZEWNĘTRZNY] ×2, [DANE PRZYKŁADOWE] ×60
+Plik: 41 stron, 3.42 MB
 
   element PZT: strony 4–13 (opis 7, arkusze 3)
   element PAB: strony 14–33 (opis 8, arkusze 12)
-  element ZL: strony 34–42 (opis 9, arkusze 0)
+  element ZL: strony 34–41 (opis 8, arkusze 0)
 
 ✓ F-01    [  *] OK               Nazwa pliku wg zał. 1 RPB (PZT_PAB_ZL_rrrr.mm.dd.pdf) (RPB § 2b ust. 4, zał. 1; W-301) — nazwa zgodna z zał. 1 RPB (PZT_PAB_ZL)
 ✓ F-02    [  *] OK               Rozmiar pliku ≤ 150 MB (RPB § 2b ust. 3; W-300) — 3.42 MB (limit 150 MB)

@@ -26,7 +26,7 @@ PLYTY = [
          poly=unary_union([box(-2.20, -1.20, 12.60, -0.30), box(-2.20, -0.30, -1.30, 5.70)]), z=(5.70, 5.90), lacznik=True),
     dict(id="ST3-okap", opis="ST3: stropodach bryły A - wysunięcie pd. 0,90, zach. 0,90, wsch. 0,30 m",
          poly=unary_union([box(-2.20, -1.20, 12.60, -0.30), box(-2.20, -0.30, -1.30, 5.70), box(12.30, -0.30, 12.60, 5.70)]),
-         z=(9.10, 9.85), lacznik=True),
+         z=(9.10, 9.40), lacznik=True),
     dict(id="G-okap", opis="STG: okap pd. garażu (linia D nad patio) - wysunięcie 1,00 m", poly=box(12.30, 3.50, 18.70, 4.50), z=(2.76, 3.65), lacznik=False),
 ]
 DACHY = [  # dachy (rzut po obrysie zewn.), attyka

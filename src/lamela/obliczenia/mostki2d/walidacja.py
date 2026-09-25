@@ -30,11 +30,10 @@ import math
 from dataclasses import dataclass, field
 from pathlib import Path
 
-import numpy as np
 from shapely.geometry import box
 
 from .geometria import Material, Obszar, Strefa, Warstwa, Wezel, U_warstw
-from .siatka import Siatka, siatka_dla_wezla
+from .siatka import siatka_dla_wezla
 from .solver import ModelMOS
 
 # --------------------------------------------------------------------------------------------------

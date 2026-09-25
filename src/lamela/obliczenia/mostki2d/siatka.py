@@ -88,8 +88,7 @@ def podzial(a: float, b: float, h_min: float, h_max: float, r: float = 1.25, n_m
     # dwa warianty: parzysta (pol + odwr(pol)) lub nieparzysta (środkowa komórka wspólna)
     war1 = pol + pol[::-1]
     war2 = pol + pol[-2::-1]
-    s1, s2 = sum(war1), sum(war2)
-    sizes = war2 if (s2 >= L) else war1
+    sizes = war2 if sum(war2) >= L else war1
     tot = sum(sizes)
     sizes = np.array(sizes) * (L / tot)
     if len(sizes) < n_min:

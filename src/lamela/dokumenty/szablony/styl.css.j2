@@ -199,15 +199,17 @@ a.spis-w.p3 { padding-left: 20mm; font-size: 8.6pt; color: var(--szary); }
 a.spis-w.rys .nr { min-width: 22mm; font-weight: bold; }
 a.spis-w.rys { font-weight: normal; margin-top: 0; }
 a.spis-w.rys .pg { color: var(--szary); font-size: 8.4pt; }
-a.spis-w.el { font-size: 10.2pt; font-weight: bold; color: var(--akcent); margin-top: 4.5mm; }
+a.spis-w.el { font-size: 10.2pt; font-weight: bold; color: var(--akcent); margin-top: 4.5mm; padding-bottom: 0.8mm;
+               border-bottom: 0.5pt solid var(--linia); }
+a.spis-w.el .kr { border-bottom: none; }
 .spis-legenda { font-size: 7.2pt; color: var(--szary); margin-top: 5mm; border-top: 0.4pt solid var(--linia-m); padding-top: 1.5mm; }
 
 /* ------------------------------------------------------------------------------------------ oświadczenia */
 section.osw { break-before: page; font-size: 9.3pt; }
-.osw-miejsce { text-align: right; margin-bottom: 5mm; }
+.osw-miejsce { text-align: right; margin-bottom: 3.5mm; }
 .osw-tyt { text-align: center; font-size: 13pt; font-weight: bold; letter-spacing: 0.08em; color: var(--akcent); margin: 0 0 1.5mm; }
-.osw-podst { text-align: center; font-size: 8pt; color: var(--szary); margin: 0 12mm 4.5mm; line-height: 1.38; white-space: pre-line; }
-table.osw-dane { width: 100%; border-collapse: collapse; margin: 0 0 4.5mm; font-size: 8.5pt; line-height: 1.33; }
+.osw-podst { text-align: center; font-size: 8pt; color: var(--szary); margin: 0 12mm 3.5mm; line-height: 1.38; white-space: pre-line; }
+table.osw-dane { width: 100%; border-collapse: collapse; margin: 0 0 3.5mm; font-size: 8.5pt; line-height: 1.33; }
 table.osw-dane th { width: 36mm; text-align: left; font-weight: normal; color: var(--szary); vertical-align: top;
                     padding: 0.9mm 3mm 0.9mm 0; font-size: 7.8pt; }
 table.osw-dane td { padding: 0.9mm 0; vertical-align: top; }
@@ -235,8 +237,8 @@ table.osw-dane tr { border-bottom: 0.35pt solid var(--linia-m); }
 .karta-podpisu .pole-podpisu { height: 11mm; border-bottom: 0.5pt dotted #7c8793; margin: 1.2mm 0 1mm; }
 .karta-podpisu .opis-pola { font-size: 6.6pt; color: var(--szary); }
 .podpis-uwaga { font-size: 6.9pt; color: var(--szary); margin-top: 1.5mm; }
-.podpis-linia { width: 92mm; margin: 4mm 0 0 auto; font-size: 7.8pt; line-height: 1.35; break-inside: avoid; }
-.podpis-linia .pole-podpisu { height: 11mm; border-bottom: 0.7pt dotted #6f7b87; margin-bottom: 1mm; }
+.podpis-linia { width: 92mm; margin: 2mm 0 0 auto; font-size: 7.8pt; line-height: 1.35; break-inside: avoid; }
+.podpis-linia .pole-podpisu { height: 10mm; border-bottom: 0.7pt dotted #6f7b87; margin-bottom: 1mm; }
 .podpis-linia .opis-pola { font-size: 6.9pt; color: var(--szary); }
 .podpis-linia + .podpis-uwaga { text-align: right; }
 

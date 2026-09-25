@@ -20,7 +20,7 @@ from typing import Any, Sequence
 
 import numpy as np
 
-from .geometria import PSI_DOMYSLNE_14683, ElementFlankujacy, Wezel
+from .geometria import PSI_DOMYSLNE_14683, Wezel
 from .siatka import Siatka, siatka_dla_wezla
 from .solver import ModelMOS, Rozwiazanie
 
