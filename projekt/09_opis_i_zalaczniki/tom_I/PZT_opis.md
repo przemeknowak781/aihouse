@@ -210,7 +210,7 @@ Drzewa:
 
 | Nr | Gatunek | Stan | Średnica korony [m] | Wysokość [m] |
 |---|---|---|---|---|
-| DR1 | lipa drobnolistna (soliter na osi ogrodu) | projektowane | 7,00 | 10,00 |
+| DR1 | lipa drobnolistna (soliter na osi ogrodu) | projektowane | 10,00 | 12,00 |
 | DR2 | klon polny (cień letni tarasu zach.) | projektowane | 5,00 | 8,00 |
 | DR3 | grab pospolity | projektowane | 4,50 | 7,00 |
 | DR4 | jabłoń | projektowane | 4,00 | 5,00 |
@@ -425,5 +425,5 @@ niedrogowych (sprawdzenie geometryczne modelu — `tools/audyt_wt.py`).
 | Nr | Tytuł | Skala | Format |
 |---|---|---|---|
 | PZT-01 | PLAN ZAGOSPODAROWANIA DZIAŁKI | 1:500 | A2 |
-| PZT-02 | PLAN SZCZEGÓŁOWY — WYMIARY I RZĘDNE | 1:200 | A2 |
-| PZT-03 | RYSUNEK KOORDYNACYJNY UZBROJENIA TERENU | 1:200 | A2 |
+| PZT-02 | PLAN SZCZEGÓŁOWY — WYMIARY I RZĘDNE | 1:200 | nst. 400×594 |
+| PZT-03 | RYSUNEK KOORDYNACYJNY UZBROJENIA TERENU | 1:200 | nst. 620×420 |

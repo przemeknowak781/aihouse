@@ -540,10 +540,12 @@ class Dokument:
         for a in self.arkusze:
             status = a.uwagi or ("" if a.istnieje else do_uzup("brak pliku arkusza"))
             rows.append({"Nr rysunku": Markup(f"<b>{escape(a.nr)}</b>"), "Tytuł rysunku": a.tytul, "Skala": a.skala or "—",
-                         "Format": a.format or "—", "Wymiary [mm]": a.wymiar_tekst(), "Uwagi": status})
+                         # format niestandardowy: „nst.” — wymiary w kolumnie obok (bez łamania „540×5/94”)
+                         "Format": "nst." if str(a.format or "").startswith("nst.") else (a.format or "—"),
+                         "Wymiary [mm]": a.wymiar_tekst(), "Uwagi": status})
         self._n_tab += 1
         wykaz = _tabela_ctx(self._nowe_id("tab"), self._n_tab, "Wykaz rysunków", rows, lp=True,
-                            szerokosci=["7mm", "19mm", None, "13mm", "13mm", "17mm", "46mm"],
+                            szerokosci=["9mm", "19mm", None, "13mm", "14mm", "19mm", "42mm"],
                             wyrown={"Skala": "c", "Format": "c", "Wymiary [mm]": "c"})
         self._bloki.append(("karta_rysunkowa", dict(
             id=id_, podstawa=podstawa, element=f"{self.kod} — {self.tytul}", branza=self.branza,

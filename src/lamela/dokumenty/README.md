@@ -26,7 +26,7 @@ Markdown, PyYAML; opcjonalnie pandas (tabele z DataFrame), matplotlib (wykresy).
 | `bloki.py` | treść oświadczeń, karty podpisów, informacja BIOZ (domyślna treść dla LAMELI) |
 | `tom.py` | `Tom`, `WynikTomu`, `PrzekroczonyRozmiar` |
 | `arkusze.py` | `Arkusz` (odczyt tabliczki z PDF), `arkusze_z_katalogu`, `plan_skladania` |
-| `walidator.py` + `listy_kontrolne.yaml` | `sprawdz_tom`, `LISTY_KONTROLNE` (TOM_I, PT_AR, PT_BO, PT_IS, PT_IE) |
+| `walidator.py` + `listy_kontrolne.yaml` | `sprawdz_tom`, `LISTY_KONTROLNE` (TOM_I, PT_AR, PT_BO, PT_IS, PT_IE, PT_WB) |
 | `nazwy.py` | `nazwa_pliku`, `sprawdz_nazwe` (zał. 1 RPB) |
 | `znaczniki.py` | `do_uzup()`, `dok_zewn()`, `DANE_PRZYKLADOWE`, `STATUS_PRZYKLAD`, `policz_znaczniki` |
 | `formaty.py` | `liczba()` (1 234,56), `rzedna()` (±0,000), daty, `wykryj_format()` (A0…A4, Ak×n) |
@@ -105,7 +105,7 @@ Elementy: `Dokument`, ścieżka PDF (opis z innego programu — zakładka z meta
 `PZT_PAB_ZL`, `PZT_PAB`, `PT`…), `data`, `nr` i `symbol` (PT: `PT_x_y_z`), `tom=(nr, liczba)`,
 `strona_tytulowa` i `laczny_spis` (§ 7 ust. 7 pkt 1; bez PT), `limit_mb=150`.
 
-* Nazwa pliku wg zał. 1 RPB: `PZT_PAB_ZL_2026.09.25.pdf`, `PT_1_AR_…`, `PT_2_BO_…`, `PT_3_IS_…`, `PT_4_IE_…`.
+* Nazwa pliku wg zał. 1 RPB: `PZT_PAB_ZL_2026.09.25.pdf`, `PT_1_AR_…`, `PT_2_BO_…`, `PT_3_IS_…`, `PT_4_WB_…` (tom 4 obejmuje instalacje elektryczne i telekomunikacyjne — dwie specjalności, symbol WB; sam IE → `PT_x_IE_…`). Rozmiar w MB = 10⁶ B.
 * PT w jednym pliku z innym elementem (lub dwa tomy PT w jednym pliku) → `ValueError` (§ 5 ust. 3).
 * Rozmiar > 150 MB → `PrzekroczonyRozmiar` (podzielić: `PZT_PAB_z` + `ZL_z`, `PAB_x_z`; rastry tylko mapy).
 * Zakładki: strona tytułowa tomu, łączny spis, każdy element → strona tytułowa, spis, oświadczenia, rozdziały,
@@ -116,11 +116,11 @@ Elementy: `Dokument`, ścieżka PDF (opis z innego programu — zakładka z meta
 
 ## 6. Walidator — `sprawdz_tom(tom, lista_kontrolna=None) -> RaportKompletnosci`
 
-Czyta gotowy PDF (także spoza systemu). `lista_kontrolna`: klucz (`TOM_I`, `PT_AR`, `PT_BO`, `PT_IS`, `PT_IE`)
+Czyta gotowy PDF (także spoza systemu). `lista_kontrolna`: klucz (`TOM_I`, `PT_AR`, `PT_BO`, `PT_IS`, `PT_IE`, `PT_WB`)
 lub słownik; `None` — dobór po nazwie pliku. Pozycje (`listy_kontrolne.yaml`) odwzorowują sekcję C rejestru:
 plik (nazwa, ≤ 150 MB, wektor, metadane, oprawa PT), strona tytułowa (§ 7 ust. 2 pkt 1–3), spis, numeracja,
 oświadczenie, punkty opisu (§ 14 pkt 1–8 PZT, § 20 ust. 1 pkt 1–14 PAB, § 23 PT), rysunki (w tym minimalna liczba
-rzutów/przekrojów/elewacji i skale ≤ 1:100 / 1:500), ZL (informacja BIOZ pkt 1–6, zjazd, oświadczenie IS).
+rzutów/przekrojów/elewacji i skale ≤ 1:100 / 1:500), metryki arkuszy (`spec: tabliczki` — wiersz „Projektant” niepusty, „Sprawdzający” z osobą albo „nie dotyczy (art. 20 ust. 3 pkt 2 PB)”; W-305, W-320), § 23 pkt 12 w każdym tomie PT, ZL (informacja BIOZ pkt 1–6, zjazd, oświadczenie IS).
 Wyszukuje po zakładkach, tekście strony tytułowej, tekście opisu i tytułach rysunków (wyrażenia regularne).
 
 Statusy pozycji: OK · BRAK · DO UZUPEŁNIENIA (jest, ale z polem `[DO UZUPEŁNIENIA]` / tylko arkusz zastępczy) · N/D

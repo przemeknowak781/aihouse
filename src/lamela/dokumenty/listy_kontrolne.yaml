@@ -176,4 +176,4 @@ PT_WB:
     - {id: C2-IE-03, el: PT, opis: "Instalacja piorunochronna / analiza ryzyka", podstawa: "RPB § 23 pkt 7 lit. i; W-191", szukaj: {tekst: ['piorunochron|ryzyk\w* piorun']}}
     - {id: C2-IE-04, el: PT, opis: "Bilans mocy", podstawa: "RPB § 23 pkt 11 lit. a", szukaj: {tekst: ['bilans\w* mocy']}}
     - {id: C2-IE-05, el: PT, opis: "Rzuty instalacji, schemat rozdzielnicy, uziom", podstawa: "RPB § 24 pkt 4 lit. b", szukaj: {rysunki: ['rzut|schemat|uziom']}}
-    - {id: C2-WB-01, el: PT, opis: "Współautor ze specjalnością telekomunikacyjną na stronie tytułowej i w oświadczeniu", podstawa: "PB art. 15a ust. 18, art. 34 ust. 3e; RPB § 7 ust. 2 pkt 3", szukaj: {tytulowa: ['telekomunikac'], tekst: ['telekomunikacyjn\w* bez ograniczeń'], wszystkie: true}, dane_osobowe: true}
+    - {id: C2-WB-01, el: PT, opis: "Współautor ze specjalnością telekomunikacyjną na stronie tytułowej i w oświadczeniu", podstawa: "PB art. 15a ust. 18, art. 34 ust. 3e; RPB § 7 ust. 2 pkt 3", szukaj: {tytulowa: ['telekomunikac'], tekst: ['telekomunikacyjn\w*\)? bez ograniczeń'], wszystkie: true}, dane_osobowe: true}

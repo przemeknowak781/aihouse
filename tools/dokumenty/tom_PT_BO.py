@@ -91,7 +91,7 @@ def rel(p: Path) -> str:
 # (weryfikacja PT, D-2). Stosowane do całej treści części opisowej, także do dokumentów zespołu BO wstawianych w tom.
 ZRODLA_OPIS = [
     (r"Plik generowany (?:automatycznie )?przez `lamela\.views\.[\w.]+`(?: \([^)]*\))?\s*(?:przy rysowaniu arkuszy)?\.?",
-     "Zestawienie generowane automatycznie z modelu budynku przy rysowaniu arkuszy."),
+     "Opracowanie generowane automatycznie z modelu budynku."),
     (r"Lista generowana automatycznie przez `lamela\.views\.[\w.]+`", "Lista generowana automatycznie"),
     (r"\s*\(test `tools/[^`]+`\)", " (test kontrolny programu obliczeń)"),
     (r"\(moduł `konstrukcja_dane\.rejestruj`\)\s*", ""),
@@ -110,10 +110,12 @@ ZRODLA_OPIS = [
     (r"`?(?:model/)?dzialka\.yaml`?", "model działki"),
     (r"`?(?:model/)?instalacje\.yaml`?", "model instalacji"),
     (r"`?(?:model/)?arkusze_bo\.yaml`?", "konfiguracja arkuszy konstrukcji"),
-    (r"`?Parametry\.z_wymagan`?", "parametry obliczeń z rejestru wymagań"),
+    (r"`?Parametry\.z_wymagan`?(?: \(wymagania\.yaml ([^)]*)\))?", lambda m: "parametry obliczeń z rejestru wymagań" + (f" ({m.group(1)})" if m.group(1) else "")),
+    (r"`?(?:model/)?wymagania\.yaml`?", "rejestr wymagań"),
+    (r"\(konstrukcja\.obciazenia\)", "(obciążenia)"),
     (r"energia\.pv(?:\.pola)?", "model — instalacja PV"),
 ]
-_RE_ZRODLA = [(re.compile(a), b) for a, b in ZRODLA_OPIS]
+_RE_ZRODLA = [(re.compile(a), b) for a, b in ZRODLA_OPIS]            # b: tekst albo funkcja(m)
 
 
 def jawne(t):
@@ -527,7 +529,7 @@ def rozdz_stan(o: Opis, D: dict, S: dict, ark_uwagi: list[str]):
         o.wniosek("Wszystkie analizy konstrukcji objęte zestawieniem są domknięte (brak pozycji NIEZAMKNIĘTYCH).")
     ob = [{"Obszar analizy": k, "Warunki spełnione": f"{a} z {b}", "Stan": "zamknięte" if a == b else NZ}
           for k, (a, b) in S["obszary"].items()]
-    ob.append({"Obszar analizy": "Część rysunkowa (arkusze z raport_widokow.json)",
+    ob.append({"Obszar analizy": "Część rysunkowa (arkusze i kontrola jakości arkuszy)",
                "Warunki spełnione": "komplet" if not ark_uwagi else f"brak {len(ark_uwagi)}",
                "Stan": "zamknięte" if not ark_uwagi else NZ})
     o.tabela(ob, tytul="Stan analiz według obszarów", wyrownanie={"Obszar analizy": "l"},
@@ -535,8 +537,8 @@ def rozdz_stan(o: Opis, D: dict, S: dict, ark_uwagi: list[str]):
     kol = ("Obszar", "Element", "Wynik", "Opis", "Źródło")
     rows = [dict(zip(kol, (w["obszar"], w["element"], w["wynik"], w["opis"], w["zrodlo"])))
             for w in S["wiersze"] if w["stan"] == NZ]
-    rows += [dict(zip(kol, ("Część rysunkowa", u.split(":")[0], "—", u.split(":", 1)[-1].strip(), "raport_widokow.json")))
-             for u in ark_uwagi]
+    rows += [dict(zip(kol, ("Część rysunkowa", u.split(":")[0], "—", u.split(":", 1)[-1].strip(),
+                            "arkusze; raport kontroli arkuszy"))) for u in ark_uwagi]
     if rows:
         o.tabela(rows, tytul=f"Pozycje {NZ} (do domknięcia przez zespół BO przed wydaniem PT)", klasa="zwarta",
                  lp=True, wyrownanie={"Opis": "l", "Element": "l"}, szerokosci=["7mm", "24mm", "26mm", "20mm", None, "28mm"])
@@ -792,8 +794,8 @@ def rozdz_konstrukcja(o: Opis, D: dict):
              wyrownanie={"Element": "l", "Identyfikatory (model)": "l", "Wymiary": "l", "Materiał": "l"},
              szerokosci=["34mm", "30mm", "34mm", None, "20mm"], zrodlo="model/budynek.yaml; wyniki.json")
     o.rozdzial("Schematy statyczne i metody obliczeń", poziom=2)
-    o.tekst("Zastosowane schematy statyczne (konstrukcyjne) i modele obliczeniowe biblioteki "
-            "`lamela.obliczenia.konstrukcja`; schemat statyczny każdego elementu podano w jego pozycji obliczeń "
+    o.tekst("Zastosowane schematy statyczne (konstrukcyjne) i modele obliczeniowe "
+            "programu obliczeń konstrukcji; schemat statyczny każdego elementu podano w jego pozycji obliczeń "
             "(rozdz. 4, podrozdział „Opis i schemat statyczny” z rysunkiem schematu).\n\n"
             + "\n".join(f"* {t}" for t in D["RAP"].METODY))
     o.rozdzial("Założenia do obliczeń i obciążenia", poziom=2, podstawa="PN-EN 1990, PN-EN 1991 + NA")

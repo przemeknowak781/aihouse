@@ -169,7 +169,7 @@ def rozdz_obliczenia(o: Opis, D: DanePTIE):
                         ("obwody", "Obliczenia: WLZ, obwody, zabezpieczenia, spadki napięć, samoczynne wyłączenie, SPD, PWP",
                          "PN-HD 60364-4-41, -4-43, -4-443, -5-52"),
                         ("pv", "Obliczenia: instalacja fotowoltaiczna", "PN-HD 60364-7-712"),
-                        ("odgromowa", "Obliczenia: ocena ryzyka piorunowego, uziom", "PN-EN 62305-2")):
+                        ("odgromowa", "Obliczenia: ocena ryzyka piorunowego, uziom", "PN-EN 62305-2:2008 (zał. 1 WT)")):
         wstaw_raport(o, D.W[k].raport_md(), tytul=tyt, podstawa=pod, katalog=KAT_ZRODLA,
                      zrodlo=f"lamela.obliczenia.elektryka.{k}")
 

@@ -5,7 +5,9 @@ Uruchomienie::
     PYTHONPATH=src python3 tools/dokumenty/tom_PT_IE.py [--wyjscie projekt/wydanie] [--bez-arkuszy] [--cache PLIK]
 
 Wynik:
-* ``projekt/wydanie/PT_4_IE_rrrr.mm.dd.pdf`` — tom PT-4 IE (osobny plik, RPB § 5 ust. 3; nazwa wg zał. 1 RPB):
+* ``projekt/wydanie/PT_4_WB_rrrr.mm.dd.pdf`` — tom PT-4 (osobny plik, RPB § 5 ust. 3; nazwa wg zał. 1 RPB — symbol WB,
+  bo tom obejmuje dwie specjalności: instalacyjną elektryczną i telekomunikacyjną, PB art. 15a ust. 18 i 22;
+  współautor telekomunikacyjny na stronie tytułowej i w oświadczeniu — art. 34 ust. 3e PB):
   strona tytułowa (§ 7 ust. 2, „tom 4 z 4” — § 7 ust. 6), spis treści, oświadczenie projektanta PT
   (PB art. 34 ust. 3d pkt 3 w brzmieniu art. 41 ust. 4a pkt 2), część opisowa (§ 23 RPB): stan opracowania,
   zakres i podstawy, zasilanie i powiązanie z siecią (§ 23 pkt 8), instalacje elektroenergetyczne (§ 23 pkt 7
@@ -41,24 +43,41 @@ import pt_ie_opis_d as E  # noqa: E402
 
 from lamela.dokumenty import (Dokument, Tom, dane_obiektu, sprawdz_tom, LISTY_KONTROLNE,  # noqa: E402
                               zamknij_przegladarke)
+from lamela.dokumenty.dane import Projektant  # noqa: E402
 from lamela.dokumenty.formaty import odmiana  # noqa: E402
 
 KAT_WYDANIE = REPO / "projekt/wydanie"
 PT_TOMY = 4                                  # PT-1 AR, PT-2 BO, PT-3 IS, PT-4 IE (rejestr C.2)
 PT_NR = 4
+SYMBOL = "WB"                                # zał. 1 RPB: więcej niż jedna specjalność (IE + telekomunikacja)
+KOD = "PT-4 IE+BT"
+
+
+def autorzy_pt4(D: DanePTIE) -> list[Projektant]:
+    """Autorzy tomu: projektant instalacji elektrycznych i współautor ze specjalnością telekomunikacyjną
+    (PB art. 15a ust. 18 i 22, art. 34 ust. 3e). Dane osobowe — [DO UZUPEŁNIENIA]."""
+    tele = D.arkusze_nr("teletechnika")
+    return [Projektant("IE", zakres="PT-4 — instalacje elektroenergetyczne, zasilanie i RG, fotowoltaika, punkt "
+                                    "ładowania EV, ochrona odgromowa, uziom i połączenia wyrównawcze, bilans mocy, "
+                                    "zasilanie urządzeń teletechnicznych", elementy=("PT-IE",)),
+            Projektant("BT", funkcja="Projektant (współautor)",
+                       zakres=f"PT-4 — instalacje telekomunikacyjne: przyłącze światłowodowe, okablowanie strukturalne, "
+                              f"RTV/SAT, SSWiN, wideodomofon (rozdz. „Instalacje telekomunikacyjne”, arkusze {tele})",
+                       elementy=("PT-IE",))]
 
 
 def buduj_pt_ie(d: dict, D: DanePTIE, data: str) -> tuple[Dokument, Opis]:
     n = len(D.otwarte)
-    podt = ("Tom PT-4 — instalacje elektryczne (IE): zasilanie i rozdzielnica główna, instalacje elektroenergetyczne, "
-            "fotowoltaika, punkt ładowania EV, instalacje telekomunikacyjne, ochrona odgromowa i uziemienia, bilans mocy")
+    podt = ("Tom PT-4 — instalacje elektryczne (IE) i telekomunikacyjne (BT): zasilanie i rozdzielnica główna, "
+            "instalacje elektroenergetyczne, fotowoltaika, punkt ładowania EV, instalacje telekomunikacyjne, ochrona "
+            "odgromowa i uziemienia, bilans mocy")
     if n:
         podt += f" · SPRAWY OTWARTE: {n} {odmiana(n, 'pozycja', 'pozycje', 'pozycji')} (rozdz. 1)"
-    dok = Dokument("Projekt techniczny", "PT-IE", d, kod="PT-4 IE", branza="instalacje elektryczne",
-                   data=data, tom=(PT_NR, PT_TOMY), podtytul=podt)
+    dok = Dokument("Projekt techniczny", "PT-IE", d, kod=KOD, branza="instalacje elektryczne i telekomunikacyjne",
+                   data=data, tom=(PT_NR, PT_TOMY), podtytul=podt, projektanci=autorzy_pt4(D))
     dok.oswiadczenie_projektanta()
     o = Opis(dok)
-    o.md += [f"# Projekt techniczny — PT-4 IE (instalacje elektryczne) — tom {PT_NR} z {PT_TOMY}",
+    o.md += [f"# Projekt techniczny — {KOD} (instalacje elektryczne i telekomunikacyjne) — tom {PT_NR} z {PT_TOMY}",
              "*Źródło Markdown części opisowej — generowane przez `tools/dokumenty/tom_PT_IE.py`; wersja wiążąca: PDF. "
              "Pełne obliczenia (raporty bibliotek `lamela.obliczenia.elektryka`) i tabele wyników — w PDF.*",
              "*[Oświadczenie projektanta PT (art. 34 ust. 3d pkt 3 i art. 41 ust. 4a pkt 2 PB) — blok formalny "
@@ -109,10 +128,17 @@ def main(argv=None):
         kubatura_m3=round(D.kubatura, 2),
         niespelnione=[(m, x.opis) for m, x in D.niespelnione()]), ensure_ascii=False, indent=1, default=str),
         encoding="utf-8")
-    tom = Tom("PT-4 IE", [dok], dane=d, data=data, nr=PT_NR, symbol="IE", strona_tytulowa=False, laczny_spis=False)
+    tom = Tom(KOD, [dok], dane=d, data=data, nr=PT_NR, symbol=SYMBOL, strona_tytulowa=False, laczny_spis=False)
     w = tom.zloz(out)
     print(f"✓ {w.nazwa}: {w.strony} stron, {w.rozmiar_mb:.2f} MB ({time.time() - t0:.0f} s)")
-    r = sprawdz_tom(w, LISTY_KONTROLNE["PT_IE"])
+    for st in sorted(out.glob("PT_4_*.pdf")):          # poprzednie nazwy tomu 4 (np. PT_4_IE_…) — nieaktualne
+        if st.name != w.nazwa:
+            st.unlink()
+            print(f"  usunięto nieaktualny plik {st.name}")
+    for st in sorted(KAT_ZRODLA.glob("raport_kompletnosci_PT_4_*")):
+        if w.sciezka.stem not in st.name:
+            st.unlink()
+    r = sprawdz_tom(w, LISTY_KONTROLNE["PT_" + SYMBOL])
     (KAT_ZRODLA / f"raport_kompletnosci_{w.sciezka.stem}.txt").write_text(r.tekst(), encoding="utf-8")
     r.zapisz_json(KAT_ZRODLA / f"raport_kompletnosci_{w.sciezka.stem}.json")
     s = r.podsumowanie()

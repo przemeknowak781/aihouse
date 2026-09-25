@@ -27,21 +27,46 @@ wspolne:
   wyposazenie: null
   uwagi:
     - "Rysunki instalacji na podkładzie rzutów architektury (PB-AR); podkład — linie cienkie szare (warstwy I-PODKLAD*)."
+# Układ arkuszy (ekonomiczne ustawienie — wymaganie inwestora; raport: docs/30_arkusze/zastosowanie_IS.md):
+# * rzuty I i II piętra każdej branży na jednym arkuszu (wiersz: te same osie, wspólna legenda i uwagi — legenda
+#   łączna widoków arkusza: lamela.views.instalacje.wspolne.legenda_arkusza),
+# * odwodnienie dachów: rzut dachu nad rzutem parteru (rury spustowe) — jedna tabela wyników (raz na arkusz),
+# * rozwinięcia kanalizacji i wodociągu na jednym pasku H = 297 mm,
+# * rzuty parteru K i WM: max_wysokosc 420 — koszt jak dla 520×594 (różnica 0,2 %), papier −0,011 m² na arkusz,
+#   układ jednolity z pozostałymi rzutami parteru (rzut po lewej, kolumna opisowa nad tabliczką); format dobiera `auto`.
 arkusze:
   - {nr: PT-IS-01, tytul: "INSTALACJA WODOCIĄGOWA — RZUT PARTERU", typ: inst_rzut, branza: IS-W, kond: P0}
-  - {nr: PT-IS-02, tytul: "INSTALACJA WODOCIĄGOWA — RZUT I PIĘTRA", typ: inst_rzut, branza: IS-W, kond: P1}
-  - {nr: PT-IS-03, tytul: "INSTALACJA WODOCIĄGOWA — RZUT II PIĘTRA", typ: inst_rzut, branza: IS-W, kond: P2}
-  - {nr: PT-IS-04, tytul: "KANALIZACJA SANITARNA — RZUT PARTERU", typ: inst_rzut, branza: IS-K, kond: P0}
-  - {nr: PT-IS-05, tytul: "KANALIZACJA SANITARNA — RZUT I PIĘTRA", typ: inst_rzut, branza: IS-K, kond: P1}
-  - {nr: PT-IS-06, tytul: "KANALIZACJA SANITARNA — RZUT II PIĘTRA", typ: inst_rzut, branza: IS-K, kond: P2}
-  - {nr: PT-IS-07, tytul: "ODWODNIENIE DACHÓW — RZUT DACHU", typ: inst_rzut, branza: IS-D, kond: dach}
-  - {nr: PT-IS-08, tytul: "ODWODNIENIE DACHÓW — RZUT PARTERU (RURY SPUSTOWE)", typ: inst_rzut, branza: IS-D, kond: P0}
-  - {nr: PT-IS-09, tytul: "OGRZEWANIE — RZUT PARTERU", typ: inst_rzut, branza: IS-CO, kond: P0}
-  - {nr: PT-IS-10, tytul: "OGRZEWANIE — RZUT I PIĘTRA", typ: inst_rzut, branza: IS-CO, kond: P1}
-  - {nr: PT-IS-11, tytul: "OGRZEWANIE — RZUT II PIĘTRA", typ: inst_rzut, branza: IS-CO, kond: P2}
-  - {nr: PT-IS-12, tytul: "WENTYLACJA MECHANICZNA — RZUT PARTERU", typ: inst_rzut, branza: IS-WM, kond: P0}
-  - {nr: PT-IS-13, tytul: "WENTYLACJA MECHANICZNA — RZUT I PIĘTRA", typ: inst_rzut, branza: IS-WM, kond: P1}
-  - {nr: PT-IS-14, tytul: "WENTYLACJA MECHANICZNA — RZUT II PIĘTRA", typ: inst_rzut, branza: IS-WM, kond: P2}
-  - {nr: PT-IS-15, tytul: "KANALIZACJA SANITARNA — ROZWINIĘCIE PIONÓW", typ: inst_schemat, schemat: kanalizacja}
-  - {nr: PT-IS-16, tytul: "INSTALACJA WODOCIĄGOWA — ROZWINIĘCIE (AKSONOMETRIA)", typ: inst_schemat, schemat: woda}
-  - {nr: PT-IS-17, tytul: "SCHEMAT POMPY CIEPŁA, C.O. I C.W.U.", typ: inst_schemat, schemat: pc}
+  - nr: PT-IS-02
+    tytul: "INSTALACJA WODOCIĄGOWA — RZUTY I PIĘTRA I II PIĘTRA"
+    widoki:
+      - {typ: inst_rzut, branza: IS-W, kond: P1}
+      - {typ: inst_rzut, branza: IS-W, kond: P2}
+  - {nr: PT-IS-03, tytul: "KANALIZACJA SANITARNA — RZUT PARTERU", typ: inst_rzut, branza: IS-K, kond: P0, max_wysokosc: 420}
+  - nr: PT-IS-04
+    tytul: "KANALIZACJA SANITARNA — RZUTY I PIĘTRA I II PIĘTRA"
+    widoki:
+      - {typ: inst_rzut, branza: IS-K, kond: P1}
+      - {typ: inst_rzut, branza: IS-K, kond: P2}
+  - nr: PT-IS-05
+    tytul: "ODWODNIENIE DACHÓW — RZUT DACHU I RZUT PARTERU"
+    widoki:
+      - {typ: inst_rzut, branza: IS-D, kond: dach}
+      - {typ: inst_rzut, branza: IS-D, kond: P0, tytul_widoku: "ODWODNIENIE DACHÓW — RZUT PARTERU (RURY SPUSTOWE)"}
+  - {nr: PT-IS-06, tytul: "OGRZEWANIE — RZUT PARTERU", typ: inst_rzut, branza: IS-CO, kond: P0}
+  - nr: PT-IS-07
+    tytul: "OGRZEWANIE — RZUTY I PIĘTRA I II PIĘTRA"
+    widoki:
+      - {typ: inst_rzut, branza: IS-CO, kond: P1}
+      - {typ: inst_rzut, branza: IS-CO, kond: P2}
+  - {nr: PT-IS-08, tytul: "WENTYLACJA MECHANICZNA — RZUT PARTERU", typ: inst_rzut, branza: IS-WM, kond: P0, max_wysokosc: 420}
+  - nr: PT-IS-09
+    tytul: "WENTYLACJA MECHANICZNA — RZUTY I PIĘTRA I II PIĘTRA"
+    widoki:
+      - {typ: inst_rzut, branza: IS-WM, kond: P1}
+      - {typ: inst_rzut, branza: IS-WM, kond: P2}
+  - nr: PT-IS-10
+    tytul: "KANALIZACJA I WODOCIĄG — ROZWINIĘCIA"
+    widoki:
+      - {typ: inst_schemat, schemat: kanalizacja}
+      - {typ: inst_schemat, schemat: woda}
+  - {nr: PT-IS-11, tytul: "SCHEMAT POMPY CIEPŁA, C.O. I C.W.U.", typ: inst_schemat, schemat: pc}

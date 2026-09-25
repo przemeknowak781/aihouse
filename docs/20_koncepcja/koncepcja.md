@@ -844,3 +844,36 @@ H zabudowy 10,27 m, WT §6 9,97 m (`lamela.wskazniki`).
 | V1-06 żebra osiowe poza czołem płyty, warstwa ŻB POD-P0 = PF1 → licować (BO), usunąć dublowanie | K-12; PN-EN ISO 13793 |
 | V1-07 decyzja Inwestora K-13 (kratownica z pnączami, osłona PC) — niewprowadzona → wprowadzić | K-13; W-024 |
 | V1-08…V1-14 drobne (rzut dachu, PBC w audycie, filarki/słupy, obróbki attyk, stare wartości §12/§13, korona DR1, klatki) | raport V1 §7 |
+
+## 15. Rejestr zmian — wydanie
+
+Wejście: decyzja Inwestora K-13 (brief §10), weryfikacje niezależne `weryfikacja_runda2_V1.md` i `weryfikacja_runda2_V2.md` (w całości),
+kontrola funkcji V3 (niewykonana przez weryfikatora — wykonana w tym etapie skryptem), listy otwarte: `poprawki_runda2_wejscie.md`,
+§13–14 (w tym 14.2 F), `projekt/08_obliczenia/mostki/REKOMENDACJE.md`, `projekt/*/BRAKI_DANYCH.md`. Zmiany konstrukcyjne
+z `projekt/04_PT_konstrukcja/REKOMENDACJE_MODEL.md` — poza zakresem (następny etap „Konstrukcja”). Zapis: uwaga → decyzja → podstawa.
+Źródło zmian: `tools/buduj_model.py` (model/*.yaml generowane); rozszerzenie schematu i rdzenia opisane w `docs/SCHEMAT_MODELU.md` §2, §10.
+Bryły A/B/C/G, linie D/E, sylweta „S”, funkcje pomieszczeń i przejścia — bez zmian.
+
+### 15.1 Decyzja Inwestora K-13 — zielona ściana i osłona jednostki PC (V1-07, V2 N-8, A3 D-12)
+
+| Uwaga | Decyzja | Podstawa |
+|---|---|---|
+| K-13 — elewacja ogrodowa bryły G (S0-02) i jednostka PC na osi widoku | **wprowadzona.** Nowa sekcja modelu `elementy_zewn` (rdzeń: walidacja, IR, elewacje/przekroje, PZT, 3D; SCHEMAT §10.1): **KR-1** — kratownica stalowa ocynkowana (siatka 0,30 m, rama 40×40) w płaszczyźnie 0,15 m przed licem ETICS, pełna wysokość x 14,45–15,95 (+0,05…+3,45, pod PL-D); **KR-2** — panel nad jednostką PC od +1,50 (przestrzeń zasysania za urządzeniem wolna); konsole ze stali nierdzewnej z przekładką termiczną, najniższy rząd +0,40 (≈ 0,7 m nad terenem, poza strefą uszczelnienia cokołu), dolna krawędź kratownicy wolna — **bez przebić hydroizolacji cokołu**; pnącza wijące/owijające (bez przylg na ETICS) z pasa gruntu **Z7** (x 14,45–15,10, poza strefą R290; warstwa drenażowa → rozsączanie w piaski, bez wpustów; od cokołu XPS + membrana kubełkowa + obrzeże), dobór gatunków — [DO UZUPEŁNIENIA] (arch. krajobrazu). **OS-PC** — ażurowa osłona z lamel pionowych (≈ 60 % prześwitu) z 3 stron, otwarta od ściany i od góry (PL-D nad), prześwit ≥ 0,10 m nad terenem (R290 cięższy od powietrza), odstępy od urządzenia 1,0 m (wylot) i 0,6 m (boki) — do potwierdzenia wg DTR; strefa R290 1,0 m wolna od otworów, wpustów, studzienek i zagłębień. Obiekt PC-JZ: `strefa_r`, `wym` (przykładowe — [DO UZUPEŁNIENIA wg DTR]), `oslona`. | brief §10; brief §9 pkt 1–2; W-024, W-156 |
+| mostki punktowe konsol | **WZ-17** (typ `kotwa`): liczba konsol z modelu, χ ≤ 0,010 W/K na konsolę (wymaganie = wartość w H_TB; potwierdzić deklaracją/3D); rdzeń obliczeń energii czyta `chi` z modelu | PN-EN ISO 14683, 10211; W-248 |
+| rysunki / 3D | elewacja S: kratownica i osłona (materiał STAL_OCYNK w legendzie kolorystyki); PZT-01/02: linia zielonej ściany i osłona PC (legenda), opis „zielona ściana”; 3D: pręty, konsole, pnącza, lamele, bryła jednostki; testy `test_pipeline`: `test_elementy_zewn_walidacja`, `_ir`, `_lamela` | RPB §20; SCHEMAT §10.1 |
+
+### 15.2 Weryfikacja V1 (WT/MPZP, geometria) — uwagi istotne i wybrane drobne
+
+| Uwaga V1 | Decyzja | Podstawa |
+|---|---|---|
+| V1-01 / V2 N-6 — WZ-09a „ZŁY”, generator bez uskoku PF1/PF2 | **przyjęta.** Generator węzła dom–garaż odwzorowuje uskok płyt (0,15 m) i żebro pod SWG z `fundamenty` (`mostki2d.katalog_dod._uskok_zebro`); blok u podstawy SWG: beton komórkowy 600 → **nośny blok termoizolacyjny BLOK_TERM** (λ ≤ 0,045, ETA / lub równoważny; nośność 1. warstwy — PT-K); wełna SWG od garażu po czole uskoku do wierzchu PF2. Wynik na geometrii modelu: ψ_iu **0,406** (poprzednie 0,301 dotyczyło płyty bez uskoku), f_Rsi **0,901** ≥ 0,72. Wariant z przerwą termiczną PF2 przy żebrze (XPS 10 cm) daje 0,385 — ścieżka ciepła przez żebro i grunt; przerwy nie wprowadzono (zmiana konstrukcyjna o małym efekcie). **Świadoma akceptacja**: ocena „ZŁY” (test ołówka — płyta ciągła pod SWG) przy spełnionym f_Rsi; ψ wliczone w H_TB (b_u = 0,8); WZ-09a/b/c w pozycjach otwartych PT-AR-D. | brief §9 pkt 1–2; PN-EN ISO 10211, 13789; W-248 |
+| V1-02 / V2 N-3, N-4 — cokół przy filarkach BR1 (0,12 m), filar S0-05 (0,04 m), krawędzie podestów | **przyjęta.** Korytka odwodnienia liniowego **przy licu**: **OL-7** (próg bramy BR1 na całą szerokość ściany pn. garażu z filarkami, → SEP-1) i **OL-7a** (ściana S0-05 we wnęce wejścia); OL-6 przy licu (T3); podest T2 zawężony do szer. drzwi + 0,15 m (x 9,90–11,70), T3 od x 12,30 (bez nakładania na T1), podest DZ2 = szer. drzwi + 0,15 m; krawędzie podestów, fartucha i dojścia U2 w pasie 0–2,3 m jako obrzeża (punkty projektowane 0,03 m za krawędzią). Moduł `drenaz.py`: TIN rzędnych projektowanych co 0,10 m, strefa progu = szer. otworu + 0,15 m, OL ≤ 1,5 m od progu, korytka `przy_licu`. **Wynik (TIN): cokół min 0,316 m poza strefami, spadek ≥ 3,0 % na wszystkich ścianach.** | brief §9 pkt 4, 6; W-019; DIN 18533-1 (pomocniczo) |
+| V1-03 — przekroje/elewacje „H = 9,79 m” | **przyjęta.** `views.section.building_height` → `lamela.wskazniki` (`wysokosc_WT6`); arkusze: H = 9,97 m | K-3; WT §6 |
+| V1-04 — ST2Z do lica ETICS | **przyjęta.** ST2Z y −0,09…5,215 (lico konstrukcji); łącznik PL-2 w pasie ocieplenia; katalog mostków przeliczony: WZ-07a 0,152 (L 5,30 m), WZ-16a 0,189 (f_Rsi 0,820) | A2 K-1; R-W6; W-272 |
+| V1-05 — wyspa z 3 hokerami, płyta od jadalni | **przyjęta.** `wyposazenie`: `hokery: 0`, `plyta_strona: E`; `views.plan` mapuje `hokery`/`krzesla` → `stools` i stronę płyty (symbol `kitchen_island(hob_side)`) | A3 K-1 |
+| V1-06 — żebra poza czołem płyty; izolacja cokołu −0,45 vs żebro −0,40; warstwa ŻB POD-P0 = PF1 | **przyjęta w części modelu:** rdzeń — ocieplenie cokołu do spodu płyty fundamentowej (= wierzch żebra, bez kolizji); IR — podłoga na płycie bez warstwy konstrukcyjnej (płyta = element `fundamenty`), XPS/podsypka pod każdą płytą (PF1, PF2) poza żebrami. **Licowanie żeber z czołem płyty — etap „Konstrukcja”** (REKOMENDACJE_MODEL p. 5.1). | K-12; PN-EN ISO 13793 |
+| V1-09 — PBC i A_z+ w audycie własną metodą | **przyjęta.** `audyt_wt.py`: wartości z `lamela.wskazniki`, metoda audytu kontrolnie w opisie | K-3 |
+| V1-11 — lamele w podsufitce PL-3; T1/T3 | **przyjęta:** LAM-S/W/E do +8,96; T3 od x 12,30. Obróbka attyk przy ścianie wyższej, nadproża N2/N3, dublowanie ETICS w narożach — do PT (drobne, bez wpływu na wskaźniki) | spójność modelu |
+| V1-12 — nieaktualne wartości §4, §7, §12, §13 | **przyjęta:** §4 (D1P, O0-16 D2), §7 (czerpnia/wyrzutnia, elewacja G) zaktualizowane; §12, §13 oznaczone jako stan historyczny | K-3 |
+| V1-13 / V2 N-14 — korona DR1 | **przyjęta:** korona dojrzałej lipy zachowawczo 10 m [DO WERYFIKACJI — dendrolog], pień y −23,5: 1,5 m od NCH-1 (≥ 1,0), 9,2 m od granicy pd. | W-144; K-2 |
+| V1-08 (rzut dachu: PV, PA, czerpnia), V1-10 (filarki ↔ słupy SL — REKOMENDACJE_MODEL p. 3, 8), V1-14 (klatki, PN-ISO 9836) | przekazane: rysunki / etap „Konstrukcja” / PT | — |

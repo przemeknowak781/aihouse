@@ -34,8 +34,9 @@ def rozdz_wyroby(o: Opis, D: DanePTIE):
          f"PN-EN 61008-1; zdolność łączeniowa I_cn ≥ {L(icn.limit if icn else None, 0)} kA; charakterystyki i prądy "
          "znamionowe wg zestawienia obwodów; RCD typ A (min.), typ F/B dla urządzeń z przekształtnikami wg DTR"},
         {"Wyrób": "Ochronniki przepięć (SPD)", "Parametry wymagane": f"PN-EN IEC 61643-11:2026-04; {spd['RG']}"},
-        {"Wyrób": "Przewody i kable", "Parametry wymagane": "YDYp / YDY 450/750 V (Cu); YKY 0,6/1 kV w ziemi; "
-         "H1Z2Z2-K (PN-EN 50618) po stronie DC PV; przekroje wg zestawienia obwodów i rozdz. 1"},
+        {"Wyrób": "Przewody i kable", "Parametry wymagane": "YDYp / YDY 450/750 V (Cu); WLZ "
+         f"{D.obw.wlz['przewod']} 0,6/1 kV w ziemi; H1Z2Z2-K (PN-EN 50618:2015-03) {L(D.pv.par.s_DC, 0)} mm² po stronie "
+         "DC PV; przekroje obwodów odbiorczych wg zestawienia obwodów"},
         {"Wyrób": "Moduł fotowoltaiczny", "Parametry wymagane": f"P_max ≥ {L(m['P'], 0)} Wp; U_oc ≤ {L(m['U_oc'], 1)} V; "
          f"I_sc ≤ {L(m['I_sc'], 1)} A; wymiary ≤ {L(m['dl'], 3)} × {L(m['szer'], 3)} m; PN-EN IEC 61215, PN-EN IEC 61730"},
         {"Wyrób": "Falownik PV 3-fazowy", "Parametry wymagane": f"P_AC ≤ {L(f['P_AC'], 1)} kW; U_DC,max ≥ "

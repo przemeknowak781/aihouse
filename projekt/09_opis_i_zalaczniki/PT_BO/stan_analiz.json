@@ -1,5 +1,5 @@
 {
- "model": "2026-09-25 07:16",
+ "model": "2026-09-25 07:55",
  "obszary": {
   "Obliczenia statyczne": [
    105,
@@ -14,14 +14,14 @@
    275
   ]
  },
- "niezamkniete": 31,
+ "niezamkniete": 42,
  "wiersze": [
   {
    "obszar": "Aktualność",
    "element": "obliczenia statyczne",
    "wynik": "2026-09-25 06:33",
    "stan": "NIEZAMKNIĘTE",
-   "opis": "wyniki starsze niż model (2026-09-25 07:16) albo brak pliku — ponowić analizę",
+   "opis": "wyniki starsze niż model (2026-09-25 07:55) albo brak pliku — ponowić analizę",
    "zrodlo": "czas modyfikacji plików"
   },
   {
@@ -29,7 +29,7 @@
    "element": "MES płyty fundamentowej",
    "wynik": "2026-09-25 06:48",
    "stan": "NIEZAMKNIĘTE",
-   "opis": "wyniki starsze niż model (2026-09-25 07:16) albo brak pliku — ponowić analizę",
+   "opis": "wyniki starsze niż model (2026-09-25 07:55) albo brak pliku — ponowić analizę",
    "zrodlo": "czas modyfikacji plików"
   },
   {
@@ -37,7 +37,7 @@
    "element": "kontrola zbrojenia",
    "wynik": "2026-09-25 06:48",
    "stan": "NIEZAMKNIĘTE",
-   "opis": "wyniki starsze niż model (2026-09-25 07:16) albo brak pliku — ponowić analizę",
+   "opis": "wyniki starsze niż model (2026-09-25 07:55) albo brak pliku — ponowić analizę",
    "zrodlo": "czas modyfikacji plików"
   },
   {
@@ -149,7 +149,7 @@
    "element": "poz. 10.3 ZF1",
    "wynik": "289 %",
    "stan": "ZASTĄPIONE",
-   "opis": "model ławy izolowanej (Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) η = 289 %; Nośność podłoża (GEO, DA2*) η = 235 %) — miarodajna analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia — płyta na XPS z izolacją obwodową (W-284)",
+   "opis": "model ławy izolowanej (Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) η = 289 %; Nośność podłoża (GEO, DA2*) η = 235 %) — nośność i osiadanie: analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia: płyta na XPS z izolacją obwodową (W-284) — sprawdzenie izolacji wg PN-EN ISO 13793 w pozycji „Posadowienie” (rozdz. 1)",
    "zrodlo": "wyniki.json; BRAKI_DANYCH.md"
   },
   {
@@ -157,7 +157,7 @@
    "element": "poz. 10.4 ZF2",
    "wynik": "289 %",
    "stan": "ZASTĄPIONE",
-   "opis": "model ławy izolowanej (Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) η = 289 %) — miarodajna analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia — płyta na XPS z izolacją obwodową (W-284)",
+   "opis": "model ławy izolowanej (Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) η = 289 %) — nośność i osiadanie: analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia: płyta na XPS z izolacją obwodową (W-284) — sprawdzenie izolacji wg PN-EN ISO 13793 w pozycji „Posadowienie” (rozdz. 1)",
    "zrodlo": "wyniki.json; BRAKI_DANYCH.md"
   },
   {
@@ -165,7 +165,7 @@
    "element": "poz. 10.7 ZF5",
    "wynik": "143 %",
    "stan": "ZASTĄPIONE",
-   "opis": "model ławy izolowanej (Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) η = 143 %) — miarodajna analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia — płyta na XPS z izolacją obwodową (W-284)",
+   "opis": "model ławy izolowanej (Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) η = 143 %) — nośność i osiadanie: analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia: płyta na XPS z izolacją obwodową (W-284) — sprawdzenie izolacji wg PN-EN ISO 13793 w pozycji „Posadowienie” (rozdz. 1)",
    "zrodlo": "wyniki.json; BRAKI_DANYCH.md"
   },
   {
@@ -173,7 +173,7 @@
    "element": "poz. 10.9 ZF7",
    "wynik": "289 %",
    "stan": "ZASTĄPIONE",
-   "opis": "model ławy izolowanej (Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) η = 289 %) — miarodajna analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia — płyta na XPS z izolacją obwodową (W-284)",
+   "opis": "model ławy izolowanej (Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) η = 289 %) — nośność i osiadanie: analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia: płyta na XPS z izolacją obwodową (W-284) — sprawdzenie izolacji wg PN-EN ISO 13793 w pozycji „Posadowienie” (rozdz. 1)",
    "zrodlo": "wyniki.json; BRAKI_DANYCH.md"
   },
   {
@@ -181,7 +181,7 @@
    "element": "poz. 10.10 ZF8",
    "wynik": "291 %",
    "stan": "ZASTĄPIONE",
-   "opis": "model ławy izolowanej (Nośność podłoża (GEO, DA2*) η = 291 %; Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) η = 289 %) — miarodajna analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia — płyta na XPS z izolacją obwodową (W-284)",
+   "opis": "model ławy izolowanej (Nośność podłoża (GEO, DA2*) η = 291 %; Głębokość posadowienia (R5 3.8: zewn. ≥ 1,0 m, wewn. ≥ 0,5 m) η = 289 %) — nośność i osiadanie: analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia: płyta na XPS z izolacją obwodową (W-284) — sprawdzenie izolacji wg PN-EN ISO 13793 w pozycji „Posadowienie” (rozdz. 1)",
    "zrodlo": "wyniki.json; BRAKI_DANYCH.md"
   },
   {
@@ -189,7 +189,7 @@
    "element": "poz. 10.11 ZF9",
    "wynik": "482 %",
    "stan": "ZASTĄPIONE",
-   "opis": "model ławy izolowanej (Nośność podłoża (GEO, DA2*) η = 482 %) — miarodajna analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia — płyta na XPS z izolacją obwodową (W-284)",
+   "opis": "model ławy izolowanej (Nośność podłoża (GEO, DA2*) η = 482 %) — nośność i osiadanie: analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia: płyta na XPS z izolacją obwodową (W-284) — sprawdzenie izolacji wg PN-EN ISO 13793 w pozycji „Posadowienie” (rozdz. 1)",
    "zrodlo": "wyniki.json; BRAKI_DANYCH.md"
   },
   {
@@ -197,7 +197,7 @@
    "element": "poz. 10.13 ZF11",
    "wynik": "212 %",
    "stan": "ZASTĄPIONE",
-   "opis": "model ławy izolowanej (Nośność podłoża (GEO, DA2*) η = 212 %) — miarodajna analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia — płyta na XPS z izolacją obwodową (W-284)",
+   "opis": "model ławy izolowanej (Nośność podłoża (GEO, DA2*) η = 212 %) — nośność i osiadanie: analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia: płyta na XPS z izolacją obwodową (W-284) — sprawdzenie izolacji wg PN-EN ISO 13793 w pozycji „Posadowienie” (rozdz. 1)",
    "zrodlo": "wyniki.json; BRAKI_DANYCH.md"
   },
   {
@@ -205,7 +205,7 @@
    "element": "poz. 10.15 ZF13",
    "wynik": "386 %",
    "stan": "ZASTĄPIONE",
-   "opis": "model ławy izolowanej (Nośność podłoża (GEO, DA2*) η = 386 %) — miarodajna analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia — płyta na XPS z izolacją obwodową (W-284)",
+   "opis": "model ławy izolowanej (Nośność podłoża (GEO, DA2*) η = 386 %) — nośność i osiadanie: analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia: płyta na XPS z izolacją obwodową (W-284) — sprawdzenie izolacji wg PN-EN ISO 13793 w pozycji „Posadowienie” (rozdz. 1)",
    "zrodlo": "wyniki.json; BRAKI_DANYCH.md"
   },
   {
@@ -213,7 +213,7 @@
    "element": "poz. 10.16 ZF14",
    "wynik": "322 %",
    "stan": "ZASTĄPIONE",
-   "opis": "model ławy izolowanej (Nośność podłoża (GEO, DA2*) η = 322 %) — miarodajna analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia — płyta na XPS z izolacją obwodową (W-284)",
+   "opis": "model ławy izolowanej (Nośność podłoża (GEO, DA2*) η = 322 %) — nośność i osiadanie: analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia: płyta na XPS z izolacją obwodową (W-284) — sprawdzenie izolacji wg PN-EN ISO 13793 w pozycji „Posadowienie” (rozdz. 1)",
    "zrodlo": "wyniki.json; BRAKI_DANYCH.md"
   },
   {
@@ -221,7 +221,7 @@
    "element": "poz. 10.18 ZF16",
    "wynik": "110 %",
    "stan": "ZASTĄPIONE",
-   "opis": "model ławy izolowanej (Nośność podłoża (GEO, DA2*) η = 110 %) — miarodajna analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia — płyta na XPS z izolacją obwodową (W-284)",
+   "opis": "model ławy izolowanej (Nośność podłoża (GEO, DA2*) η = 110 %) — nośność i osiadanie: analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia: płyta na XPS z izolacją obwodową (W-284) — sprawdzenie izolacji wg PN-EN ISO 13793 w pozycji „Posadowienie” (rozdz. 1)",
    "zrodlo": "wyniki.json; BRAKI_DANYCH.md"
   },
   {
@@ -229,7 +229,7 @@
    "element": "poz. 10.20 SF1",
    "wynik": "204 %",
    "stan": "ZASTĄPIONE",
-   "opis": "model ławy izolowanej (Głębokość posadowienia η = 204 %) — miarodajna analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia — płyta na XPS z izolacją obwodową (W-284)",
+   "opis": "model ławy izolowanej (Głębokość posadowienia η = 204 %) — nośność i osiadanie: analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia: płyta na XPS z izolacją obwodową (W-284) — sprawdzenie izolacji wg PN-EN ISO 13793 w pozycji „Posadowienie” (rozdz. 1)",
    "zrodlo": "wyniki.json; BRAKI_DANYCH.md"
   },
   {
@@ -237,7 +237,7 @@
    "element": "poz. 10.21 SF2",
    "wynik": "204 %",
    "stan": "ZASTĄPIONE",
-   "opis": "model ławy izolowanej (Głębokość posadowienia η = 204 %) — miarodajna analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia — płyta na XPS z izolacją obwodową (W-284)",
+   "opis": "model ławy izolowanej (Głębokość posadowienia η = 204 %) — nośność i osiadanie: analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia: płyta na XPS z izolacją obwodową (W-284) — sprawdzenie izolacji wg PN-EN ISO 13793 w pozycji „Posadowienie” (rozdz. 1)",
    "zrodlo": "wyniki.json; BRAKI_DANYCH.md"
   },
   {
@@ -245,7 +245,7 @@
    "element": "poz. 10.22 SF3",
    "wynik": "204 %",
    "stan": "ZASTĄPIONE",
-   "opis": "model ławy izolowanej (Głębokość posadowienia η = 204 %) — miarodajna analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia — płyta na XPS z izolacją obwodową (W-284)",
+   "opis": "model ławy izolowanej (Głębokość posadowienia η = 204 %) — nośność i osiadanie: analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia: płyta na XPS z izolacją obwodową (W-284) — sprawdzenie izolacji wg PN-EN ISO 13793 w pozycji „Posadowienie” (rozdz. 1)",
    "zrodlo": "wyniki.json; BRAKI_DANYCH.md"
   },
   {
@@ -253,7 +253,7 @@
    "element": "poz. 10.23 SF4",
    "wynik": "204 %",
    "stan": "ZASTĄPIONE",
-   "opis": "model ławy izolowanej (Głębokość posadowienia η = 204 %) — miarodajna analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia — płyta na XPS z izolacją obwodową (W-284)",
+   "opis": "model ławy izolowanej (Głębokość posadowienia η = 204 %) — nośność i osiadanie: analiza MES płyty fundamentowej (rozdz. 5); głębokość posadowienia: płyta na XPS z izolacją obwodową (W-284) — sprawdzenie izolacji wg PN-EN ISO 13793 w pozycji „Posadowienie” (rozdz. 1)",
    "zrodlo": "wyniki.json; BRAKI_DANYCH.md"
   },
   {
@@ -361,6 +361,62 @@
    "zrodlo": "kontrola_zbrojenia.json"
   },
   {
+   "obszar": "Obliczenia statyczne",
+   "element": "poz. 6.11 N-O0-18",
+   "wynik": "A_s2 = 235 mm²",
+   "stan": "NIEZAMKNIĘTE",
+   "opis": "przekrój podwójnie zbrojony — brak warunku A_s2 ≤ A_s,prov (górą) w pozycji i w kontroli zbrojenia rysunków; wysokość użyteczna d do przyjęcia z liczby warstw zbrojenia dolnego — zwiększyć przekrój lub zespolić ze stropem, przeliczyć",
+   "zrodlo": "obliczenia statyczne; kontrola zbrojenia rysunków"
+  },
+  {
+   "obszar": "Obliczenia statyczne",
+   "element": "nadproża / wieńce (26)",
+   "wynik": "—",
+   "stan": "NIEZAMKNIĘTE",
+   "opis": "q_d mniejsze niż 6.10b z wypisanych g_k i q_k — zestawienie niesprawdzalne: wypisywać q_k tylko z przypadków użytych w kombinacji, 6.10b uzupełnić o Σγ_Q·ψ₀·Q_k,i, nie łączyć kat. H ze śniegiem (PN-EN 1991-1-1 p. 3.3.2), przeliczyć — poz. 6.1 N-O0-06 (q_d = 20,09 < 30,53 kN/m); 6.2 N-O0-08 (q_d = 22,93 < 25,64 kN/m); 6.3 N-O0-09 (q_d = 36,61 < 49,44 kN/m); 6.4 N-O0-10 (q_d = 13,11 < 17,65 kN/m); 6.5 N-O0-11 (q_d = 118,94 < 148,68 kN/m); 6.6 N-O0-12 (q_d = 25,93 < 30,56 kN/m) (i 20 innych)",
+   "zrodlo": "obliczenia statyczne"
+  },
+  {
+   "obszar": "Zestawienie obciążeń",
+   "element": "poz. 1.1 D1",
+   "wynik": "100 %",
+   "stan": "NIEZAMKNIĘTE",
+   "opis": "brak w obciążeniach stałych: ciężar pola PV (8 modułów, stelaże i balast wg PT-4 IE) — uzupełnić i przeliczyć",
+   "zrodlo": "obliczenia statyczne; model (PV, warstwy dachu)"
+  },
+  {
+   "obszar": "Zestawienie obciążeń",
+   "element": "poz. 1.4 D4",
+   "wynik": "97 %",
+   "stan": "NIEZAMKNIĘTE",
+   "opis": "brak w obciążeniach stałych: ciężar pola PV (7 modułów, stelaże i balast wg PT-4 IE); woda retencyjna substratu i maty drenażowej (stan nasycony) — uzupełnić i przeliczyć",
+   "zrodlo": "obliczenia statyczne; model (PV, warstwy dachu)"
+  },
+  {
+   "obszar": "MES płyty fundamentowej",
+   "element": "strefa garażu",
+   "wynik": "—",
+   "stan": "NIEZAMKNIĘTE",
+   "opis": "obciążenie użytkowe garażu przyjęte jak kat. A — przypisać kat. F: q_k = 2,50 kN/m², Q_k = 20 kN (PN-EN 1991-1-1 tabl. 6.8 + NA) i przeliczyć MES",
+   "zrodlo": "raport MES płyty fundamentowej"
+  },
+  {
+   "obszar": "Posadowienie",
+   "element": "9 pozycji: ZF1…SF4",
+   "wynik": "—",
+   "stan": "NIEZAMKNIĘTE",
+   "opis": "głębokość posadowienia mniejsza od h_z zastąpiona izolacją obwodową (D = 1,00 m, d_n = 0,10 m wg modelu) — brak obliczenia wg PN-EN ISO 13793 (wskaźnik mrozowy F_d dla lokalizacji)",
+   "zrodlo": "obliczenia statyczne; model (fundamenty)"
+  },
+  {
+   "obszar": "Projekt geotechniczny",
+   "element": "M₀ [kPa]",
+   "wynik": "model 80 000",
+   "stan": "NIEZAMKNIĘTE",
+   "opis": "parametr niezgodny z modelem geotechnicznym: obliczenia statyczne 100 000 — ujednolicić (jedno źródło: model „geotechnika”) i przeliczyć",
+   "zrodlo": "model; obliczenia statyczne; raport MES płyty fundamentowej"
+  },
+  {
    "obszar": "Uwagi analizy",
    "element": "3 ×",
    "wynik": "—",
@@ -377,5 +433,10 @@
    "zrodlo": "wyniki.json — uwagi"
   }
  ],
- "arkusze_braki": []
+ "arkusze_braki": [
+  "PT-BO-01: kolizje napisów: 3 — usunąć przed wydaniem (kontrola jakości arkusza)",
+  "Raport kontroli arkuszy: 19 uwag dotyczy numerów lub tytułów niezgodnych z wykazem rysunków (PT-BO-03, PT-BO-04, PT-BO-05, PT-BO-07, PT-BO-08, PT-BO-09, PT-BO-10, PT-BO-11) — raport nieaktualny; wygenerować ponownie arkusze konstrukcji wraz z raportem kontroli",
+  "Formaty arkuszy: 21 arkuszy w formacie niestandardowym (PT-BO-01 (540×594), PT-BO-02 (250×594), PT-BO-05 (230×594), PT-BO-06 (520×594), PT-BO-09 (510×594), PT-BO-10 (510×594), PT-BO-12 (400×594), PT-BO-13 (400×594), PT-BO-14 (460×420), PT-BO-15 (400×594), PT-BO-16 (400×594), PT-BO-17 (230×594), PT-BO-18 (310×594), PT-BO-19 (470×297), PT-BO-20 (600×841), PT-BO-21 (500×841), PT-BO-22 (470×594), PT-BO-23 (410×420), PT-BO-24 (350×594), PT-BO-25 (400×594), PT-BO-26 (400×297)) — dobrać format z szeregu PN-EN ISO 5457 (A0–A4, formaty wydłużone; W-313)",
+  "Uwagi na arkuszach: PT-BO-09, PT-BO-10, PT-BO-12, PT-BO-13, PT-BO-15, PT-BO-16, PT-BO-20, PT-BO-21, PT-BO-22, PT-BO-23, PT-BO-24, PT-BO-25, PT-BO-26 — specyfikacja betonu powołuje PN-EN 206+A2 i PN-B-06265 bez statusu (normy wycofane, rejestr D-09) — ujednolicić z rozdz. 2.2"
+ ]
 }

@@ -1628,11 +1628,11 @@ DZIALKA = {
     "dzialka": {"nr": "123/4", "obreb": "0005 Przykładowo", "gmina": "Przykładowo (fikcyjna)", "adres": "ul. Lipowa (fikcyjna)", "pow": 1600.0,
                 "obrys": R(0, 0, DZ_W, DZ_H), "mpzp": "uchwała nr XII/123/2024 Rady Gminy Przykładowo z 21.03.2024 — teren 3MN (fikcyjny)"},
     "sasiedzi": [
-        {"nr": "123/3", "obrys": R(-32, 0, 0, 50), "zabudowa": R(-20, 22, -8, 32), "opis": "dom jednorodzinny, 2 kondygnacje, dach dwuspadowy (≥ 8 m od granicy)", "wys": 8.5},
-        {"nr": "123/5", "obrys": R(32, 0, 64, 50), "zabudowa": R(40, 24, 52, 35), "opis": "dom jednorodzinny parterowy z poddaszem (≥ 8 m od granicy)", "wys": 7.5},
+        {"nr": "123/3", "obrys": R(-32, 0, 0, 50), "zabudowa": R(-20, 22, -8, 32), "opis": "dom jednorodzinny, 2 kondygnacje, dach dwuspadowy (≥ 8 m od granicy)", "wys": 8.5, "kondygnacje": 2, "funkcja": "m"},
+        {"nr": "123/5", "obrys": R(32, 0, 64, 50), "zabudowa": R(40, 24, 52, 35), "opis": "dom jednorodzinny parterowy z poddaszem (≥ 8 m od granicy)", "wys": 7.5, "kondygnacje": 2, "funkcja": "m"},
         {"nr": "130", "obrys": R(-32, -40, 64, 0), "zabudowa": [], "opis": "teren rolny (R IVb) — niezabudowany"},
-        {"nr": "118/2", "obrys": R(-10, 60, 22, 95), "zabudowa": R(2, 70, 14, 80), "opis": "dom jednorodzinny, dach płaski", "wys": 6.8, "dach": "plaski"},
-        {"nr": "118/3", "obrys": R(22, 60, 54, 95), "zabudowa": R(30, 72, 42, 82), "opis": "dom jednorodzinny, dach dwuspadowy", "wys": 8.0},
+        {"nr": "118/2", "obrys": R(-10, 60, 22, 95), "zabudowa": R(2, 70, 14, 80), "opis": "dom jednorodzinny, dach płaski", "wys": 6.8, "dach": "plaski", "kondygnacje": 2, "funkcja": "m"},
+        {"nr": "118/3", "obrys": R(22, 60, 54, 95), "zabudowa": R(30, 72, 42, 82), "opis": "dom jednorodzinny, dach dwuspadowy", "wys": 8.0, "kondygnacje": 2, "funkcja": "m"},
     ],
     "droga": {"symbol": "1KDD", "nazwa": "ul. Lipowa (fikcyjna), klasa D", "linie_rozgraniczajace": R(-40, 50, 72, 60), "jezdnia": R(-40, 52.25, 72, 57.75),
               "nawierzchnia": "asfalt"},
@@ -1680,7 +1680,7 @@ DZIALKA = {
         {"linia": [[32.0, 50.0], [32.0, 0.0], [0.0, 0.0], [0.0, 50.0]], "wys": 1.50, "typ": "panele siatkowe zgrzewane grafit z żywopłotem"},
     ],
     "bramy": [{"xy": [23.10, 50.0], "szer": 5.60, "typ": "przesuwna", "kierunek": [1.0, 0.0], "wys": 1.50},
-              {"xy": [18.10, 50.0], "szer": 1.00, "typ": "furtka", "wys": 1.50}],
+              {"xy": [18.10, 50.0], "szer": 1.00, "typ": "furtka", "wys": 1.50, "otwieranie": {"zawiasy": "lewa", "do": "wewnatrz"}}],
     "miejsca_postojowe": [
         # stanowiska 2,50 × 5,90 (A1): MP1 0,30 od lica S0-16 (x 12,22), MP2 0,40 od frontu uchwytów rowerowych 0,30 (x 17,97) i 0,70 od
         # lica S0-03 (audyt A3 I-2, runda 2: szerokość wolna garażu 5,75 m ≥ 5,60 — W-112)
