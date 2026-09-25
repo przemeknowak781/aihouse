@@ -1,0 +1,331 @@
+{
+  "plik": "PAB_2026.09.25.pdf",
+  "lista": "Element PAB (rejestr C.1 poz. 2)",
+  "status": "PRZYKŁAD – NIE DO ZŁOŻENIA",
+  "pozycje": [
+    {
+      "id": "F-01",
+      "element": "*",
+      "opis": "Nazwa pliku wg zał. 1 RPB (PZT_PAB_ZL_rrrr.mm.dd.pdf)",
+      "podstawa": "RPB § 2b ust. 4, zał. 1; W-301",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "nazwa zgodna z zał. 1 RPB (PAB)"
+    },
+    {
+      "id": "F-02",
+      "element": "*",
+      "opis": "Rozmiar pliku ≤ 150 MB",
+      "podstawa": "RPB § 2b ust. 3; W-300",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "1.54 MB (limit 150 MB)"
+    },
+    {
+      "id": "F-03",
+      "element": "*",
+      "opis": "Część rysunkowa w postaci wektorowej (raster tylko jako podkład mapy)",
+      "podstawa": "RPB § 2b ust. 2; W-300",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "10 arkuszy wektorowych"
+    },
+    {
+      "id": "F-04",
+      "element": "*",
+      "opis": "Metadane PDF (tytuł, temat)",
+      "podstawa": "dobra praktyka; AUD-RYS",
+      "status": "OK",
+      "obowiazkowa": false,
+      "szczegoly": "Title: „Dom LAMELA — PAB: PAB (PRZYKŁAD – NIE DO ZŁOŻENIA)”"
+    },
+    {
+      "id": "F-05",
+      "element": "*",
+      "opis": "PT nie jest objęty wspólną oprawą z PZT/PAB",
+      "podstawa": "RPB § 5 ust. 3; § 7 ust. 8",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "brak PT w pliku"
+    },
+    {
+      "id": "C1-2-01",
+      "element": "PAB",
+      "opis": "Strona tytułowa: nazwa elementu",
+      "podstawa": "RPB § 7 ust. 2 pkt 1",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-2-02",
+      "element": "PAB",
+      "opis": "Strona tytułowa: zamierzenie, adres, kategoria I, inwestor",
+      "podstawa": "RPB § 7 ust. 2 pkt 2",
+      "status": "DO UZUPEŁNIENIA",
+      "obowiazkowa": true,
+      "szczegoly": "pola [DO UZUPEŁNIENIA] na stronie tytułowej"
+    },
+    {
+      "id": "C1-2-03",
+      "element": "PAB",
+      "opis": "Strona tytułowa: data, autorzy ze specjalnością, nr uprawnień i zakresem",
+      "podstawa": "RPB § 7 ust. 2 pkt 3",
+      "status": "DO UZUPEŁNIENIA",
+      "obowiazkowa": true,
+      "szczegoly": "pola [DO UZUPEŁNIENIA] na stronie tytułowej"
+    },
+    {
+      "id": "C1-2-04",
+      "element": "PAB",
+      "opis": "Spis treści",
+      "podstawa": "RPB § 7 ust. 5",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-2-05",
+      "element": "PAB",
+      "opis": "Numeracja stron elementu",
+      "podstawa": "RPB § 6 ust. 1",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "22 stron numerowanych"
+    },
+    {
+      "id": "C1-2-06",
+      "element": "PAB",
+      "opis": "Oświadczenie projektanta(-ów) z listą współautorów",
+      "podstawa": "PB art. 34 ust. 3d pkt 3, ust. 3e",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-2-07",
+      "element": "PAB",
+      "opis": "Opis pkt 1: rodzaj i kategoria obiektu",
+      "podstawa": "RPB § 20 ust. 1 pkt 1",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-2-08",
+      "element": "PAB",
+      "opis": "Opis pkt 2: sposób użytkowania i program użytkowy",
+      "podstawa": "RPB § 20 ust. 1 pkt 2",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-2-09",
+      "element": "PAB",
+      "opis": "Opis pkt 3: układ przestrzenny, forma, wyroby wykończeniowe, kolorystyka, zgodność z MPZP",
+      "podstawa": "RPB § 20 ust. 1 pkt 3",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-2-10",
+      "element": "PAB",
+      "opis": "Opis pkt 4: kubatura, zestawienie powierzchni (PN-ISO 9836 + § 20), wysokość, wymiary, kondygnacje",
+      "podstawa": "RPB § 20 ust. 1 pkt 4; W-316",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-2-11",
+      "element": "PAB",
+      "opis": "Opis pkt 5: opinia geotechniczna i sposób posadowienia",
+      "podstawa": "RPB § 20 ust. 1 pkt 5; W-281",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-2-12",
+      "element": "PAB",
+      "opis": "Opis pkt 6–8: liczba lokali; lokale dostępne i dostępność — „nie dotyczy”",
+      "podstawa": "RPB § 20 ust. 1 pkt 6–8",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-2-13",
+      "element": "PAB",
+      "opis": "Opis pkt 9: wpływ na środowisko i zdrowie (charakterystyka ekologiczna)",
+      "podstawa": "RPB § 20 ust. 1 pkt 9",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-2-14",
+      "element": "PAB",
+      "opis": "Opis pkt 10: analiza wysoce wydajnych systemów alternatywnych",
+      "podstawa": "RPB § 20 ust. 1 pkt 10; W-157",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-2-15",
+      "element": "PAB",
+      "opis": "Opis pkt 11: analiza automatycznej regulacji temperatury",
+      "podstawa": "RPB § 20 ust. 1 pkt 11; W-152",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-2-16",
+      "element": "PAB",
+      "opis": "Opis pkt 12: wyposażenie budowlano-instalacyjne, źródło ciepła i c.w.u.",
+      "podstawa": "RPB § 20 ust. 1 pkt 12",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-2-17",
+      "element": "PAB",
+      "opis": "Opis pkt 13: dane dotyczące warunków ochrony przeciwpożarowej",
+      "podstawa": "RPB § 20 ust. 1 pkt 13",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-2-18",
+      "element": "PAB",
+      "opis": "Opis pkt 14: ochrona ludności — „nie dotyczy”",
+      "podstawa": "RPB § 20 ust. 1 pkt 14",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-2-19",
+      "element": "PAB",
+      "opis": "Opinia geotechniczna (kat. II)",
+      "podstawa": "rozp. Dz.U. 2012 poz. 463 § 7 ust. 1, § 8; D-08",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C1-2-20",
+      "element": "PAB",
+      "opis": "Rysunki: rzuty kondygnacji (P0, P1, P2)",
+      "podstawa": "RPB § 21 pkt 1 lit. a; W-315",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "rysunków: 3 (wymagane ≥ 3)"
+    },
+    {
+      "id": "C1-2-21",
+      "element": "PAB",
+      "opis": "Rysunek: rzut (widok) dachu",
+      "podstawa": "RPB § 21 pkt 1 lit. a, c",
+      "status": "DO UZUPEŁNIENIA",
+      "obowiazkowa": true,
+      "szczegoly": "PB-AR-04 — RZUT DACHU (1:50); tylko arkusz zastępczy — rysunek niedołączony"
+    },
+    {
+      "id": "C1-2-22",
+      "element": "PAB",
+      "opis": "Rysunki: co najmniej 2 przekroje z terenem i podłożem",
+      "podstawa": "RPB § 21 pkt 1 lit. b; W-315",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "rysunków: 2 (wymagane ≥ 2)"
+    },
+    {
+      "id": "C1-2-23",
+      "element": "PAB",
+      "opis": "Rysunki: elewacje ze wszystkich stron z wyrobami i kolorystyką",
+      "podstawa": "RPB § 21 pkt 1 lit. c",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "rysunków: 4 (wymagane ≥ 2)"
+    },
+    {
+      "id": "C1-2-24",
+      "element": "PAB",
+      "opis": "Skale rysunków PAB nie mniejsze niż 1:100",
+      "podstawa": "RPB § 9 ust. 3; W-306",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "10 rysunków w skali nie mniejszej niż 1:100"
+    }
+  ],
+  "znaczniki": {
+    "DO UZUPEŁNIENIA": 78,
+    "DOKUMENT ZEWNĘTRZNY": 0,
+    "DANE PRZYKŁADOWE": 57,
+    "ZAŁ": 8,
+    "NZW": 0,
+    "INT": 10,
+    "PROG": 0,
+    "lista": {
+      "[DO UZUPEŁNIENIA: nazwa pracowni projektowej]": 1,
+      "[DO UZUPEŁNIENIA: adres pracowni]": 1,
+      "[DANE PRZYKŁADOWE – FIKCYJNE]": 57,
+      "[DO UZUPEŁNIENIA: jednostka ewidencyjna — kod TERYT WWPPGG_R i nazwa]": 1,
+      "[DO UZUPEŁNIENIA: kod TERYT jedn. ewid. WWPPGG_R]": 2,
+      "[DO UZUPEŁNIENIA: imię i nazwisko lub nazwa inwestora]": 3,
+      "[DO UZUPEŁNIENIA: adres inwestora]": 2,
+      "[DO UZUPEŁNIENIA: imię i nazwisko]": 12,
+      "[DO UZUPEŁNIENIA: nr uprawnień budowlanych]": 12,
+      "[DO UZUPEŁNIENIA: miejscowość]": 1,
+      "[DO UZUPEŁNIENIA: data złożenia oświadczenia z art. 102a PB]": 1,
+      "[DO UZUPEŁNIENIA: potwierdzenie wpisu w e-CRUB albo dołączenie kopii]": 1,
+      "[DO UZUPEŁNIENIA: data oświadczenia Inwestora (art. 102a ust. 1 PB)]": 1,
+      "[DO UZUPEŁNIENIA: nr ewidencyjny PZGiK i data]": 1,
+      "[DO UZUPEŁNIENIA]": 1,
+      "[ZAŁ]": 8,
+      "[INT]": 10,
+      "[DO UZUPEŁNIENIA: kolor czarny spoza palety MPZP — interpretacja: tło szczeliny za lamelami]": 1,
+      "[DO UZUPEŁNIENIA: kolor wg karty kolorystyki (RAL/NCS)]": 3,
+      "[DO UZUPEŁNIENIA: paleta MPZP]": 4,
+      "[DO UZUPEŁNIENIA: kolor ram (RAL)]": 1,
+      "[DO UZUPEŁNIENIA: karta kolorystyki elewacji]": 1,
+      "[DO UZUPEŁNIENIA: wskaźnik nagromadzenia odpadów z regulaminu gminy]": 1,
+      "[DO UZUPEŁNIENIA: imię, nazwisko, nr uprawnień]": 1,
+      "[DO UZUPEŁNIENIA: K — oferta (PT-IS)]": 1,
+      "[DO UZUPEŁNIENIA: s — dane producenta systemu regulacji / PT-IS]": 1,
+      "[DO UZUPEŁNIENIA: metryki otworów, protokoły sondowań, data badań]": 1,
+      "[DO UZUPEŁNIENIA: imię i nazwisko, kwalifikacje zawodowe (świadectwo/uprawnienia), podpis]": 1,
+      "[DO UZUPEŁNIENIA: data opinii]": 1,
+      "[DO UZUPEŁNIENIA: osoba odbierająca podłoże]": 1,
+      "[DO UZUPEŁNIENIA: arkusz do wygenerowania z modelu]": 20
+    }
+  },
+  "elementy": {
+    "PAB": {
+      "od": 1,
+      "do": 33,
+      "strony_opisu": 23,
+      "arkusze": 10
+    }
+  },
+  "rozmiar_mb": 1.5409650802612305,
+  "strony": 33,
+  "podsumowanie": {
+    "status": "PRZYKŁAD – NIE DO ZŁOŻENIA",
+    "OK": 26,
+    "BRAK": 0,
+    "DO UZUPEŁNIENIA": 3,
+    "N/D": 0,
+    "OSTRZEŻENIE": 0,
+    "znaczniki_do_uzupelnienia": 78,
+    "znaczniki_dokument_zewnetrzny": 0,
+    "znaczniki_dane_przykladowe": 57
+  }
+}

@@ -1,0 +1,68 @@
+RAPORT KOMPLETNOŚCI — PAB_2026.09.25.pdf
+Lista kontrolna: Element PAB (rejestr C.1 poz. 2)
+Status: PRZYKŁAD – NIE DO ZŁOŻENIA
+Pozycje: OK 26 · BRAK 0 · DO UZUPEŁNIENIA 3 · N/D 0 · OSTRZEŻENIE 0
+Znaczniki: [DO UZUPEŁNIENIA] ×78, [DOKUMENT ZEWNĘTRZNY] ×0, [DANE PRZYKŁADOWE] ×57
+Plik: 33 stron, 1.54 MB
+
+  element PAB: strony 1–33 (opis 23, arkusze 10)
+
+✓ F-01    [  *] OK               Nazwa pliku wg zał. 1 RPB (PZT_PAB_ZL_rrrr.mm.dd.pdf) (RPB § 2b ust. 4, zał. 1; W-301) — nazwa zgodna z zał. 1 RPB (PAB)
+✓ F-02    [  *] OK               Rozmiar pliku ≤ 150 MB (RPB § 2b ust. 3; W-300) — 1.54 MB (limit 150 MB)
+✓ F-03    [  *] OK               Część rysunkowa w postaci wektorowej (raster tylko jako podkład mapy) (RPB § 2b ust. 2; W-300) — 10 arkuszy wektorowych
+✓ F-04    [  *] OK               Metadane PDF (tytuł, temat) (dobra praktyka; AUD-RYS) — Title: „Dom LAMELA — PAB: PAB (PRZYKŁAD – NIE DO ZŁOŻENIA)”
+✓ F-05    [  *] OK               PT nie jest objęty wspólną oprawą z PZT/PAB (RPB § 5 ust. 3; § 7 ust. 8) — brak PT w pliku
+✓ C1-2-01 [PAB] OK               Strona tytułowa: nazwa elementu (RPB § 7 ust. 2 pkt 1)
+… C1-2-02 [PAB] DO UZUPEŁNIENIA  Strona tytułowa: zamierzenie, adres, kategoria I, inwestor (RPB § 7 ust. 2 pkt 2) — pola [DO UZUPEŁNIENIA] na stronie tytułowej
+… C1-2-03 [PAB] DO UZUPEŁNIENIA  Strona tytułowa: data, autorzy ze specjalnością, nr uprawnień i zakresem (RPB § 7 ust. 2 pkt 3) — pola [DO UZUPEŁNIENIA] na stronie tytułowej
+✓ C1-2-04 [PAB] OK               Spis treści (RPB § 7 ust. 5)
+✓ C1-2-05 [PAB] OK               Numeracja stron elementu (RPB § 6 ust. 1) — 22 stron numerowanych
+✓ C1-2-06 [PAB] OK               Oświadczenie projektanta(-ów) z listą współautorów (PB art. 34 ust. 3d pkt 3, ust. 3e)
+✓ C1-2-07 [PAB] OK               Opis pkt 1: rodzaj i kategoria obiektu (RPB § 20 ust. 1 pkt 1)
+✓ C1-2-08 [PAB] OK               Opis pkt 2: sposób użytkowania i program użytkowy (RPB § 20 ust. 1 pkt 2)
+✓ C1-2-09 [PAB] OK               Opis pkt 3: układ przestrzenny, forma, wyroby wykończeniowe, kolorystyka, zgodność z MPZP (RPB § 20 ust. 1 pkt 3)
+✓ C1-2-10 [PAB] OK               Opis pkt 4: kubatura, zestawienie powierzchni (PN-ISO 9836 + § 20), wysokość, wymiary, kondygnacje (RPB § 20 ust. 1 pkt 4; W-316)
+✓ C1-2-11 [PAB] OK               Opis pkt 5: opinia geotechniczna i sposób posadowienia (RPB § 20 ust. 1 pkt 5; W-281)
+✓ C1-2-12 [PAB] OK               Opis pkt 6–8: liczba lokali; lokale dostępne i dostępność — „nie dotyczy” (RPB § 20 ust. 1 pkt 6–8)
+✓ C1-2-13 [PAB] OK               Opis pkt 9: wpływ na środowisko i zdrowie (charakterystyka ekologiczna) (RPB § 20 ust. 1 pkt 9)
+✓ C1-2-14 [PAB] OK               Opis pkt 10: analiza wysoce wydajnych systemów alternatywnych (RPB § 20 ust. 1 pkt 10; W-157)
+✓ C1-2-15 [PAB] OK               Opis pkt 11: analiza automatycznej regulacji temperatury (RPB § 20 ust. 1 pkt 11; W-152)
+✓ C1-2-16 [PAB] OK               Opis pkt 12: wyposażenie budowlano-instalacyjne, źródło ciepła i c.w.u. (RPB § 20 ust. 1 pkt 12)
+✓ C1-2-17 [PAB] OK               Opis pkt 13: dane dotyczące warunków ochrony przeciwpożarowej (RPB § 20 ust. 1 pkt 13)
+✓ C1-2-18 [PAB] OK               Opis pkt 14: ochrona ludności — „nie dotyczy” (RPB § 20 ust. 1 pkt 14)
+✓ C1-2-19 [PAB] OK               Opinia geotechniczna (kat. II) (rozp. Dz.U. 2012 poz. 463 § 7 ust. 1, § 8; D-08)
+✓ C1-2-20 [PAB] OK               Rysunki: rzuty kondygnacji (P0, P1, P2) (RPB § 21 pkt 1 lit. a; W-315) — rysunków: 3 (wymagane ≥ 3)
+… C1-2-21 [PAB] DO UZUPEŁNIENIA  Rysunek: rzut (widok) dachu (RPB § 21 pkt 1 lit. a, c) — PB-AR-04 — RZUT DACHU (1:50); tylko arkusz zastępczy — rysunek niedołączony
+✓ C1-2-22 [PAB] OK               Rysunki: co najmniej 2 przekroje z terenem i podłożem (RPB § 21 pkt 1 lit. b; W-315) — rysunków: 2 (wymagane ≥ 2)
+✓ C1-2-23 [PAB] OK               Rysunki: elewacje ze wszystkich stron z wyrobami i kolorystyką (RPB § 21 pkt 1 lit. c) — rysunków: 4 (wymagane ≥ 2)
+✓ C1-2-24 [PAB] OK               Skale rysunków PAB nie mniejsze niż 1:100 (RPB § 9 ust. 3; W-306) — 10 rysunków w skali nie mniejszej niż 1:100
+
+Pola do uzupełnienia i dokumenty zewnętrzne (wystąpienia):
+   20 × [DO UZUPEŁNIENIA: arkusz do wygenerowania z modelu]
+   12 × [DO UZUPEŁNIENIA: imię i nazwisko]
+   12 × [DO UZUPEŁNIENIA: nr uprawnień budowlanych]
+    4 × [DO UZUPEŁNIENIA: paleta MPZP]
+    3 × [DO UZUPEŁNIENIA: imię i nazwisko lub nazwa inwestora]
+    3 × [DO UZUPEŁNIENIA: kolor wg karty kolorystyki (RAL/NCS)]
+    2 × [DO UZUPEŁNIENIA: adres inwestora]
+    2 × [DO UZUPEŁNIENIA: kod TERYT jedn. ewid. WWPPGG_R]
+    1 × [DO UZUPEŁNIENIA: K — oferta (PT-IS)]
+    1 × [DO UZUPEŁNIENIA: adres pracowni]
+    1 × [DO UZUPEŁNIENIA: data opinii]
+    1 × [DO UZUPEŁNIENIA: data oświadczenia Inwestora (art. 102a ust. 1 PB)]
+    1 × [DO UZUPEŁNIENIA: data złożenia oświadczenia z art. 102a PB]
+    1 × [DO UZUPEŁNIENIA: imię i nazwisko, kwalifikacje zawodowe (świadectwo/uprawnienia), podpis]
+    1 × [DO UZUPEŁNIENIA: imię, nazwisko, nr uprawnień]
+    1 × [DO UZUPEŁNIENIA: jednostka ewidencyjna — kod TERYT WWPPGG_R i nazwa]
+    1 × [DO UZUPEŁNIENIA: karta kolorystyki elewacji]
+    1 × [DO UZUPEŁNIENIA: kolor czarny spoza palety MPZP — interpretacja: tło szczeliny za lamelami]
+    1 × [DO UZUPEŁNIENIA: kolor ram (RAL)]
+    1 × [DO UZUPEŁNIENIA: metryki otworów, protokoły sondowań, data badań]
+    1 × [DO UZUPEŁNIENIA: miejscowość]
+    1 × [DO UZUPEŁNIENIA: nazwa pracowni projektowej]
+    1 × [DO UZUPEŁNIENIA: nr ewidencyjny PZGiK i data]
+    1 × [DO UZUPEŁNIENIA: osoba odbierająca podłoże]
+    1 × [DO UZUPEŁNIENIA: potwierdzenie wpisu w e-CRUB albo dołączenie kopii]
+    1 × [DO UZUPEŁNIENIA: s — dane producenta systemu regulacji / PT-IS]
+    1 × [DO UZUPEŁNIENIA: wskaźnik nagromadzenia odpadów z regulaminu gminy]
+    1 × [DO UZUPEŁNIENIA]

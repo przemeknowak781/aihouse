@@ -1,4 +1,5 @@
 {
+ "nr": 42,
  "title": "Runda 2 poprawek: EP = 35,6 (bez PV 57,8 ≤ 70), H_TB 30,6 W/K, f_Rsi min 0,836 · konstrukcja: 26 arkuszy BO, zmiany modelu przed wydaniem",
  "stages": [
   [
@@ -58,6 +59,17 @@
   "Energia po rundzie 2: EP = 35,6 kWh/(m²·rok) z PV, 57,8 bez PV (limit 70 — zapas 17 % także bez PV), Φ_HL = 7,41 kW (było 11,65 — do ponownego doboru PC), H_TB = 30,6 W/K (było 138 W/K wg wartości domyślnych), f_Rsi min 0,836 ≥ 0,72.",
   "Wskaźniki: PU 239,13 m², zabudowa 187,50 m² (11,7 %), PBC 79,4 %, wysokość zabudowy 10,27 m (art. 2 pkt 30 upzp, od średniej terenu 101,383) ≤ 11,0; wys. wg WT § 6 9,97 m; audyt WT: 0 niezgodności.",
   "Konstrukcja: 26 arkuszy BO na silniku ekonomicznym, zbrojenie 273/275, błąd schodów usunięty. Otwarte (wymagają zmian modelu): płyta pod węzłem C/3 i docisk 114 %, filarki muru pod belkami (do 541 %), odrywanie B4 −52 kN, naroże PL-2 → pętla konstrukcyjna w przepływie wydania.",
-  "Odkryta zależność cykliczna: tabela ψ wpisana w skrypt modelu z katalogu mostków → przy zamrożeniu odczyt ψ z wyników katalogu (bez ręcznego przepisywania)."
+  "Odkryta zależność cykliczna: tabela ψ wpisana w skrypt modelu z katalogu mostków → przy zamrożeniu odczyt ψ z wyników katalogu (bez ręcznego przepisywania).",
+  "NADZÓR (08:57): 7 agentów aktywnych, bez zastojów; najdłuższa bezczynność 6 min; zmiany w repo 1 min temu."
+ ],
+ "images": [
+  {
+   "path": "/home/user/aihouse/projekt/04_PT_konstrukcja/rysunki/PT-BO-26_zbrojenie_schodow.png",
+   "caption": "PT-BO-26 po poprawce: pręty krzyżowane w załamaniu bieg–spocznik górny (PN-EN 1992-1-1 8.4, zał. J)"
+  },
+  {
+   "path": "/home/user/aihouse/docs/20_koncepcja/final/rzut_P1.png",
+   "caption": "Rzut I piętra po rundzie 2"
+  }
  ]
 }
