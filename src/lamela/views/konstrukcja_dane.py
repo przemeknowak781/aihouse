@@ -83,8 +83,9 @@ def analiza(ctx):
             buf = io.BytesIO()
             _Pickler(buf, protocol=pickle.HIGHEST_PROTOCOL).dump(an)
             pk.write_bytes(buf.getvalue())
-        except Exception:  # noqa: BLE001
-            pass
+        except Exception as ex:  # noqa: BLE001 — cache jest tylko przyspieszeniem
+            import sys
+            print(f"[konstrukcja_dane] cache analizy niezapisany: {type(ex).__name__}: {ex}", file=sys.stderr)
     ctx._konstr_an = an
     return an
 

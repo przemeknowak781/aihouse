@@ -204,8 +204,10 @@ class BlokUwag:
 
     def wysokosc(self, i0: int, i1: int) -> float:
         """Wysokość części z uwagami i0…i1-1 (z tytułem i ramką)."""
+        if getattr(self, "_hs", None) is None:
+            self._hs = [self._item_h(i) for i in range(len(self.lines))]
         pad = 2.0
-        return pad + 3.5 + 3.5 * 1.8 + sum(self._item_h(i) for i in range(i0, i1)) - self.th * 0.9 + pad - 1.0
+        return pad + 3.5 + 3.5 * 1.8 + sum(self._hs[i0:i1]) - self.th * 0.9 + pad - 1.0
 
     def fn(self, i0: int, i1: int):
         from ..draft.sheet import notes_box
@@ -415,7 +417,7 @@ def _grupa_z_wierszy(widoki, wiersze, gap: float = GAP_V) -> Grupa:
         base = y_top - gora                       # linia dolna treści w wierszu
         x = (W - rw) / 2.0
         for i in idx:
-            poz[i] = (x + (widoki[i].slot_w - widoki[i].slot_w) / 2.0, base)
+            poz[i] = (x, base)
             x += widoki[i].slot_w + gap
         y_top = base - dol - gap
     opis = "wiersz" if len(rows) == 1 else ("kolumna" if all(len(r[0]) == 1 for r in rows) else
@@ -451,4 +453,209 @@ def uklady_widokow(widoki: list[Widok], max_warianty: int = 6) -> list[Grupa]:
             best = (None, _grupa_z_wierszy(widoki, rows))
         out.append(best[1])
     out.sort(key=lambda g: (g.w * g.h, g.w))
-    return out[:max_warianty]
+    if len(out) > max_warianty:                     # zawsze: wiersz i kolumna + najmniejsze pola
+        keep = out[:max_warianty - 2] + [g for g in out if g.opis in ("wiersz", "kolumna")]
+        out = sorted({id(g): g for g in keep}.values(), key=lambda g: (g.w * g.h, g.w))
+    return out
+
+
+# ================================================================================================ upakowanie
+@dataclass
+class Rozmieszczenie:
+    ok: bool
+    W: float
+    H: float
+    grupa: Grupa | None = None
+    widoki: list = field(default_factory=list)       # [(x, y)] lewe dolne rogi treści widoków [mm arkusza]
+    bloki: list = field(default_factory=list)        # [(Blok, x, y_top, w)] — wywołania fn(sh, x, y_top, w)
+    prostokaty: list = field(default_factory=list)   # [(rodzaj, nazwa, rect)] — kontrola nakładania
+    tabliczka: tuple = ()
+    brak: str = ""
+
+
+def rama(W: float, H: float) -> tuple:
+    return (MARG_L, MARG, W - MARG, H - MARG)
+
+
+def _umiesc_blok(wolne: Wolne, b: Blok, szer: float, wys: float):
+    """Najlepsza pozycja (x0, y0) prostokąta bloku: najbardziej na prawo, potem najwyżej (kolumny od tabliczki
+    w lewo, w kolumnie od góry)."""
+    best = None
+    for x0, y0, f in wolne.pozycje(szer, wys):
+        key = (-round(f[2], 3), -round(f[3], 3), round(x0, 3), round(y0, 3))
+        if best is None or key < best[0]:
+            best = (key, x0, y0)
+    return None if best is None else best[1:]
+
+
+def pakuj(W: float, H: float, widoki: list[Widok], grupa: Grupa, bloki: list[Blok], tb_h: float,
+          przes: tuple = (0.0, 0.0)) -> Rozmieszczenie:
+    """Rozmieszczenie na arkuszu W × H. ``przes`` — przesunięcie grupy widoków od lewego górnego rogu pola."""
+    fx0, fy0, fx1, fy1 = rama(W, H)
+    R = Rozmieszczenie(False, W, H, grupa)
+    tb = (fx1 - TB_W, fy0, fx1, fy0 + tb_h)
+    R.tabliczka = tb
+    if tb[3] > fy1 - PAD_B or fx1 - fx0 < TB_W:
+        R.brak = "tabliczka nie mieści się w ramce"
+        return R
+    R.prostokaty.append(("tabliczka", "tabliczka", tb))
+    ox = fx0 + PAD_V + przes[0]
+    oy = fy1 - PAD_V - grupa.h - przes[1]
+    if grupa.poz:
+        if ox + grupa.w > fx1 - PAD_B + 1e-6 or oy < fy0 + PAD_B - 1e-6:
+            R.brak = "widoki nie mieszczą się w ramce"
+            return R
+        vr = grupa.prostokaty(widoki, ox, oy)
+        tbz = _napompuj(tb, GAP_VB, 0, 0, GAP_VB)
+        if any(_przec(r, tbz) for r in vr):
+            R.brak = "widoki kolidują z tabliczką"
+            return R
+        for v, (x, y) in zip(widoki, grupa.poz):
+            R.widoki.append((ox + x, oy + y))
+            R.prostokaty.append(("widok", v.nazwa, (ox + x, oy + y - v.dol, ox + x + v.slot_w, oy + y + v.gora)))
+    wolne = Wolne((fx0 + PAD_B, fy0 + PAD_B, fx1, fy1 - PAD_B))
+    wolne.zajmij(_napompuj(tb, GAP_C, GAP_B, 0, GAP_B))
+    if grupa.poz:
+        for r in vr:
+            wolne.zajmij(_napompuj(r, GAP_VB, GAP_VB, GAP_VB, GAP_VB))
+    for b in bloki:
+        if b.uwagi is not None:
+            if not _pakuj_uwagi(wolne, b, R):
+                R.brak = f"blok „{b.nazwa}” nie mieści się"
+                return R
+            continue
+        szer, wys = b.szer, b.wys
+        pos = None
+        if b.kotwica == "nad_tabliczka":
+            r = (fx1 - szer, tb[3] + GAP_B, fx1, tb[3] + GAP_B + wys)
+            if wolne.miesci(r):
+                pos = (r[0], r[1])
+        if pos is None:
+            pos = _umiesc_blok(wolne, b, szer, wys)
+        if pos is None:
+            R.brak = f"blok „{b.nazwa}” ({szer:.0f}×{wys:.0f} mm) nie mieści się"
+            return R
+        _dodaj_blok(wolne, R, b, pos[0], pos[1])
+    R.ok = True
+    return R
+
+
+def _dodaj_blok(wolne: Wolne, R: Rozmieszczenie, b: Blok, x0: float, y0: float):
+    rect = (x0, y0, x0 + b.szer, y0 + b.wys)
+    wolne.zajmij(_napompuj(rect, GAP_C, GAP_B, GAP_C, GAP_B))
+    R.bloki.append((b, x0 + b.dx0, y0 + b.h, b.w))
+    R.prostokaty.append(("blok", b.nazwa, rect))
+
+
+def _pakuj_uwagi(wolne: Wolne, b: Blok, R: Rozmieszczenie) -> bool:
+    """Uwagi: w całości, a gdy się nie mieszczą — częściami (najdłuższa część mieszcząca się w najlepszym miejscu)."""
+    U = b.uwagi
+    n = len(U.lines)
+    i0 = 0
+    while i0 < n:
+        placed = False
+        for k in range(n, i0, -1):
+            hh = U.wysokosc(i0, k)
+            pos = _umiesc_blok(wolne, b, U.w, hh)
+            if pos is not None:
+                part = Blok(f"{b.nazwa}[{i0 + 1}–{k}]", U.fn(i0, k), U.w, hh)
+                _dodaj_blok(wolne, R, part, pos[0], pos[1])
+                i0 = k
+                placed = True
+                break
+        if not placed:
+            return False
+    return True
+
+
+# ================================================================================================ dobór formatu
+def min_szerokosc(H: float, widoki, grupy, bloki, tb_h: float, o: dict):
+    """Najmniejsza szerokość arkusza o wysokości H mieszcząca treść: (W, grupa, rozmieszczenie) lub None."""
+    Wmax = float(o["max_dlugosc"])
+    Hf = H - 2 * MARG
+    a_b = sum(b.szer * b.wys for b in bloki if b.uwagi is None)
+    a_b += sum(b.uwagi.wysokosc(0, len(b.uwagi.lines)) * b.uwagi.w for b in bloki if b.uwagi is not None)
+    best = None
+    for g in grupy:
+        if g.h + PAD_V + PAD_B > Hf:
+            continue
+        lb = max(MARG_L + PAD_V + g.w + PAD_B + MARG, MARG_L + TB_W + MARG,
+                 (g.w * g.h + a_b + TB_W * tb_h) / (Hf - PAD_B) + MARG_L + MARG)
+        if best is not None and lb >= best[0]:
+            continue
+        W = math.ceil(lb / 5.0) * 5.0
+        step, prev, r = 20.0, None, None
+        while W <= Wmax + 1e-6:
+            r = pakuj(W, H, widoki, g, bloki, tb_h)
+            if r.ok:
+                break
+            prev, W = W, W + step
+        if r is None or not r.ok:
+            continue
+        if prev is not None:
+            Wf = prev + 5.0
+            while Wf < W - 1e-6:
+                rf = pakuj(Wf, H, widoki, g, bloki, tb_h)
+                if rf.ok:
+                    W, r = Wf, rf
+                    break
+                Wf += 5.0
+        if best is None or W < best[0] - 1e-6:
+            best = (W, g, r)
+    return best
+
+
+def _pakuj_wysrodkuj(W, H, widoki, g, bloki, tb_h, W_need):
+    """Pakowanie na W × H z grupą widoków wyśrodkowaną w nadwyżce szerokości / wysokości (gdy się da)."""
+    extra = max(0.0, W - W_need)
+    slack = max(0.0, (H - 2 * MARG) - PAD_V - PAD_B - g.h)
+    for p in ((extra / 2.0, slack / 2.0), (extra / 2.0, 0.0), (0.0, slack / 2.0), (0.0, 0.0)):
+        r = pakuj(W, H, widoki, g, bloki, tb_h, p)
+        if r.ok:
+            return r
+    return None
+
+
+@dataclass
+class Uklad:
+    """Wynik doboru: format, rozmieszczenie, koszt i plan składania."""
+    nazwa: str                     # „A2”, „A3×3”, „780×594”
+    W: float
+    H: float
+    orientacja: str | None         # dla Sheet(): standardowe — landscape/portrait; niestandardowe — None
+    standard: bool
+    tryb: str
+    roz: Rozmieszczenie
+    koszt: float = 0.0
+    skladanie: dict = field(default_factory=dict)
+    kandydaci: list = field(default_factory=list)
+    wypelnienie_szac: float = 0.0
+
+    @property
+    def sheet_fmt(self) -> str:
+        """Argument ``fmt_name`` dla ``Sheet``."""
+        return self.nazwa.replace("×", "x") if self.standard else f"{self.W:.0f}x{self.H:.0f}"
+
+    def info(self) -> dict:
+        return dict(format=self.nazwa, wymiary_mm=[round(self.W, 1), round(self.H, 1)],
+                    pole_m2=round(self.W * self.H / 1e6, 4), standardowy=self.standard, tryb=self.tryb,
+                    koszt=round(self.koszt, 4), wypelnienie_szac=round(self.wypelnienie_szac, 3),
+                    uklad_widokow=self.roz.grupa.opis if self.roz.grupa else "", skladanie=self.skladanie,
+                    kandydaci=self.kandydaci[:6])
+
+
+def koszt(W: float, H: float, standard: bool, o: dict, tb_h: float | None = None) -> tuple[float, dict]:
+    k, oc = kara_skladania(W, H, o, tb_h)
+    return W * H / 1e6 * (1.0 + k) * (1.0 if standard else 1.0 + float(o["kara_niestandard"])), oc
+
+
+def wypelnienie_ukladu(R: Rozmieszczenie, res: float = 2.0) -> float:
+    """Szacunkowe wypełnienie: pole sumy prostokątów widoków, bloków i tabliczki / pole wewnątrz ramki."""
+    fx0, fy0, fx1, fy1 = rama(R.W, R.H)
+    nx, ny = int(math.ceil((fx1 - fx0) / res)), int(math.ceil((fy1 - fy0) / res))
+    occ = np.zeros((ny, nx), bool)
+    for _k, _n, r in R.prostokaty:
+        c0, c1 = int((r[0] - fx0) / res), int(math.ceil((r[2] - fx0) / res))
+        r0, r1 = int((r[1] - fy0) / res), int(math.ceil((r[3] - fy0) / res))
+        occ[max(0, r0):max(0, r1), max(0, c0):max(0, c1)] = True
+    return float(occ.sum()) / (nx * ny)
