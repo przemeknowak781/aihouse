@@ -648,12 +648,14 @@ def notes_box(sh: Sheet, x: float, y_top: float, w: float, lines: list[str], tit
 
 def table(sh, x: float, y_top: float, cols: list[tuple[str, float]], rows: list[list[str]], h: float = 2.5,
           row_h: float = 5.0, title: str | None = None, layer: str = "R-OPISY", align: list[str] | None = None,
-          header_h: float | None = None, zawijaj: bool = False) -> tuple:
+          header_h: float | None = None, zawijaj=False) -> tuple:
     """Prosta tabela (np. zestawienie pomieszczeń, stolarki). cols: [(nagłówek, szerokość), …].
 
     Tekst komórki jest zmniejszany (``fit``: szereg ISO 3098 do 1,8 mm). ``zawijaj=True`` — gdy nie mieści się
     nawet przy 1,8 mm, jest łamany na wiersze (najpierw w wysokości wiersza tabeli, potem wiersz rośnie), zamiast
-    wychodzić na sąsiednią kolumnę. Bez przepełnień tabela jest identyczna jak przy ``zawijaj=False``."""
+    wychodzić na sąsiednią kolumnę; ``zawijaj="wiersze"`` — tekst dłuższy niż kolumna łamany pismem ``h`` (bez
+    zmniejszania; jednolite pismo kolumny, np. tytuły w spisie rysunków). Bez przepełnień tabela jest identyczna
+    jak przy ``zawijaj=False``."""
     W = sum(w for _n, w in cols)
     y = y_top
     header_h = header_h or row_h
@@ -677,7 +679,12 @@ def table(sh, x: float, y_top: float, cols: list[tuple[str, float]], rows: list[
                 v = str(v)
                 hh = fit(v, w - 2.0, h)
                 ls = [v]
-                if zawijaj and T.width(v, hh) > w - 2.0 + 1e-6:
+                if zawijaj == "wiersze" and T.width(v, h) > w - 2.0 + 1e-6:
+                    ls = wrap(v, w - 2.0, h)
+                    hh = h if all(T.width(s_, h) <= w - 2.0 + 1e-6 for s_ in ls) else 1.8
+                    ls = wrap(v, w - 2.0, hh)
+                    rh = max(rh, (len(ls) - 1) * hh * 1.45 + hh + 2.2)
+                elif zawijaj and T.width(v, hh) > w - 2.0 + 1e-6:
                     hh, ls = _zawin_komorke(v, w - 2.0, h, row_h)
                     rh = max(rh, (len(ls) - 1) * hh * 1.45 + hh + 2.2)
                 cells.append((hh, ls))

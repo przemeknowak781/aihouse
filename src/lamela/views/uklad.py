@@ -861,8 +861,9 @@ def _uwagi_szukaj(wolne: Wolne, U, i0: int, prev, P: int, mp: int, budzet: list)
             rect = (x, f[3] - hh, x + w, f[3])
             if prev is not None and not _po(prev, rect):
                 continue
-            ciag = prev is not None and abs(x - prev[0]) < 0.5 and prev[1] - rect[3] < GAP_B + 5.0
-            key = (-(k - i0), not ciag, -round(f[2] / 5.0), -round(f[3] / 5.0), -f[2], -f[3], x)
+            wyr = prev is not None and abs(x - prev[0]) < 0.5               # wyrównana z poprzednią częścią
+            ciag = wyr and prev[1] - rect[3] < GAP_B + 5.0                   # tuż pod poprzednią częścią
+            key = (-(k - i0), not ciag, not wyr, -round(f[2] / 5.0), -round(f[3] / 5.0), -f[2], -f[3], x)
             cands.append((key, x, rect[1], k, rect))
     cands.sort(key=lambda c: c[0])
     tried = []                                     # próbowane miejsca: kolejne kandydatki w innych polach

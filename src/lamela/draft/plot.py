@@ -29,8 +29,9 @@ def volume(sheets, pdf_path, title: str = "Tom rysunków", toc: bool = True, toc
 def spis_rysunkow(sheets, title: str = "Tom rysunków", toc_tb: TitleBlock | None = None) -> Sheet:
     """Strona A4 ze spisem rysunków tomu. Pole spisu leży między znakami centrującymi (lewy i prawy: 10 mm za
     ramką na osi H/2, górny: 10 mm w dół na osi W/2) z odstępem 3 mm. Nagłówek (tytuł tomu) — pismo 5 mm
-    (≤ 2 wiersze), a gdy się nie mieści — 3,5 mm (≤ 3 wiersze), łamany do szerokości pola; tytuły rysunków w tabeli łamane w komórce
-    (``table(zawijaj=True)``); wysokość wiersza dopasowana do miejsca nad tabliczką."""
+    (≤ 2 wiersze), a gdy się nie mieści — 3,5 mm (≤ 3 wiersze), łamany do szerokości pola; tytuły rysunków
+    łamane w komórce jednolitym pismem 2,5 mm (``table(zawijaj="wiersze")``); wysokość wiersza dopasowana do
+    miejsca nad tabliczką."""
     tb = toc_tb or TitleBlock(tytul="SPIS RYSUNKÓW", nr_rysunku="00", skala="—")
     sh = Sheet("A4", title_block=tb)
     rows = []
@@ -57,7 +58,7 @@ def spis_rysunkow(sheets, title: str = "Tom rysunków", toc_tb: TitleBlock | Non
     cols = [(n, w * k) for n, w in cols]
     tb_top = (sh.tb_rect[3] if sh.tb_rect else y0) + 6.0
     row_h = max(4.5, min(6.0, (top - tb_top) / (len(rows) + 1)))
-    table(sh, tx, top, cols, rows, h=2.5, row_h=row_h, zawijaj=True)
+    table(sh, tx, top, cols, rows, h=2.5, row_h=row_h, zawijaj="wiersze")
     sh.przytnij_znaki_centrujace()
     return sh
 
