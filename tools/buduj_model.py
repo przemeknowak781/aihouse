@@ -645,6 +645,13 @@ WSP = [
                               (-2.40, y3 + EXT)),
      "wierzch": Z_OKAP_3[1], "grubosc": Z_OKAP_3[1] - Z_OKAP_3[0], "przegroda": "OK1", "lacznik_termiczny": True, "mat": "ZB_C30",
      "uwagi": "krawędź ST3 — stropodach bryły A: 1,00 m pd., 1,10 m zach., 0,30 m wsch.; attyka cofnięta w licu ściany"},
+    {"id": "IZ-ST2Z", "obrys": R(X2o, -EXT, -EXT, y3 + EXT), "wierzch": r(Z_ST2 - T_STR), "grubosc": 0.20, "mat": "WELNA_035", "lacznik_termiczny": False,
+     "uwagi": "docieplenie spodu stropu nad powietrzem (SUF-ZEW: wełna 20 cm + podsufitka na ruszcie) — ciągłość izolacji wspornika bryły A (brief §9.1)"},
+    {"id": "SW1", "obrys": R(6.00, 7.45, 8.40, 8.65), "wierzch": 9.75, "grubosc": 0.05, "mat": "SZKLO_VSG", "lacznik_termiczny": False,
+     "uwagi": "świetlik SW1 nad spocznikiem klatki (otwór 2,20 × 1,00 m) — kopuła/płaski świetlik 3-szybowy U ≤ 1,1 na cokole ocieplonym h 0,30, "
+              "nie wyżej niż attyka (+9,776)"},
+    {"id": "WYL1", "obrys": R(6.60, 0.80, 7.70, 1.90), "wierzch": 9.74, "grubosc": 0.06, "mat": "RAMA_C", "lacznik_termiczny": False,
+     "uwagi": "wyłaz dachowy 0,90 × 0,90 m w świetle (W-065), ocieplony U ≤ 1,1, na cokole h 0,30; drabina w pom. 2.07"},
 ]
 
 
@@ -1233,7 +1240,7 @@ WYP = [
     F("P0", "wyspa", (9.80, 2.70), 90, (2.20, 1.00), opis="wyspa z płytą indukcyjną i okapem"),
     {"kond": "P0", "typ": "blat", "linia": [[XE_i, 1.40], [XE_i, Y3_s]], "gl": 0.6, "strona": 1, "gorne": True},
     F("P0", "zlew", (XE_i, 2.60), 180, (0.80, 0.50)), F("P0", "zmywarka", (XE_i, 1.90), 180, (0.60, 0.58)),
-    F("P0", "plyta", (10.30, 2.70), 90, (0.80, 0.52), opis="płyta indukcyjna na wyspie"),
+    F("P0", "plyta", (9.80, 2.70), 90, (0.80, 0.52), opis="płyta indukcyjna na wyspie"),
     F("P0", "lodowka", (XE_i, 4.60), 180, (0.60, 0.65)), F("P0", "urzadzenie", (XE_i, 3.90), 180, (0.60, 0.60), opis="piekarnik + mikrofala w słupku"),
     F("P0", "szafa", (XD_w, 6.20), 180, (1.60, 0.40), opis="regały spiżarni"),
     F("P0", "szafa", (xE + INT, 2.00), 0, (1.40, 0.60), opis="szafa przedsionka (odzież, obuwie)"),

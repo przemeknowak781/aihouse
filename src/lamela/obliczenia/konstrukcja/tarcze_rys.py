@@ -426,9 +426,12 @@ def rys_ugiecia(an, path: Path) -> list:
     ax.set_xlabel("x [m]")
     ax.grid(color=GRID, lw=0.4)
     ax.legend(handles=[Line2D([], [], color=INK, lw=1.2, label=f"ULS ({an.k_gov})"),
-                       Line2D([], [], color=BLUE, lw=1, ls=(0, (3, 2)), label=f"SLS char. ({an.k_char_gov})")],
+                       Line2D([], [], color=BLUE, lw=1, ls=(0, (3, 2)), label=an.k_char_gov)],
               fontsize=6.5, frameon=False, loc="upper right")
     ax.set_title("Rozkład reakcji na ściany poniżej (przekazanie obciążeń — bilans ścieżki)", loc="left")
+    from matplotlib.cm import ScalarMappable
+    cb2 = plt.colorbar(ScalarMappable(cmap=SEQ_BLUE), ax=ax, fraction=0.025, pad=0.01)
+    cb2.ax.set_visible(False)
     fig.tight_layout()
     return [(_save(fig, path), f"Tarcza {an.d.id}: ugięcia SLS (zarysowanie, pełzanie) i rozkład reakcji podpór.")]
 

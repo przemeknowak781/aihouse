@@ -1,0 +1,402 @@
+{
+ "nazwa": "Dom LAMELA",
+ "kondygnacje": [
+  {
+   "id": "P0",
+   "nazwa": "Parter",
+   "rzedna": 0.0
+  },
+  {
+   "id": "P1",
+   "nazwa": "I piętro",
+   "rzedna": 3.15
+  },
+  {
+   "id": "P2",
+   "nazwa": "II piętro",
+   "rzedna": 6.3
+  }
+ ],
+ "pow_zabudowy_m2": 187.51,
+ "pow_zabudowy_z_plytami_m2": 212.99,
+ "pow_brutto_kondygnacji_m2": {
+  "P0": 181.78,
+  "P1": 117.81,
+  "P2": 96.81
+ },
+ "kubatura_brutto_m3": {
+  "razem": 1354.6,
+  "skladniki": {
+   "P0": 578.05,
+   "P1": 345.18,
+   "P2": 283.67,
+   "plyta ST1": 26.83,
+   "plyta ST2": 21.76,
+   "plyta ST2Z": 1.8,
+   "plyta D1": 44.15,
+   "plyta D2": 8.43,
+   "plyta D3": 7.69,
+   "plyta D4": 37.03
+  }
+ },
+ "zestawienie_powierzchni": {
+  "pomieszczenia": [
+   {
+    "id": "0.01",
+    "kond": "P0",
+    "nazwa": "Wiatrołap",
+    "kategoria": "ruchu",
+    "pow_netto": 3.89,
+    "wysokosc": 2.77,
+    "wsp": 1.0,
+    "pow_zaliczona": 3.89,
+    "obwod": 8.06,
+    "pobyt_ludzi": false
+   },
+   {
+    "id": "0.02",
+    "kond": "P0",
+    "nazwa": "Hol",
+    "kategoria": "ruchu",
+    "pow_netto": 4.44,
+    "wysokosc": 2.77,
+    "wsp": 1.0,
+    "pow_zaliczona": 4.44,
+    "obwod": 9.32,
+    "pobyt_ludzi": false
+   },
+   {
+    "id": "0.03",
+    "kond": "P0",
+    "nazwa": "WC gościnne",
+    "kategoria": "pomocnicza",
+    "pow_netto": 2.32,
+    "wysokosc": 2.77,
+    "wsp": 1.0,
+    "pow_zaliczona": 2.32,
+    "obwod": 6.28,
+    "pobyt_ludzi": false
+   },
+   {
+    "id": "0.04",
+    "kond": "P0",
+    "nazwa": "Klatka schodowa",
+    "kategoria": "ruchu",
+    "pow_netto": 2.82,
+    "wysokosc": 2.77,
+    "wsp": 1.0,
+    "pow_zaliczona": 2.82,
+    "obwod": 7.22,
+    "pobyt_ludzi": false
+   },
+   {
+    "id": "0.05",
+    "kond": "P0",
+    "nazwa": "Spiżarnia (pod schodami)",
+    "kategoria": "pomocnicza",
+    "pow_netto": 5.4,
+    "wysokosc": 1.9,
+    "wsp": 0.5,
+    "pow_zaliczona": 2.7,
+    "obwod": 11.66,
+    "pobyt_ludzi": false
+   },
+   {
+    "id": "0.06",
+    "kond": "P0",
+    "nazwa": "Salon + jadalnia + kuchnia",
+    "kategoria": "podstawowa",
+    "pow_netto": 54.44,
+    "wysokosc": 2.77,
+    "wsp": 1.0,
+    "pow_zaliczona": 54.44,
+    "obwod": 35.75,
+    "pobyt_ludzi": true
+   },
+   {
+    "id": "0.07",
+    "kond": "P0",
+    "nazwa": "Pas komunikacyjny przy schodach",
+    "kategoria": "ruchu",
+    "pow_netto": 3.51,
+    "wysokosc": 2.77,
+    "wsp": 1.0,
+    "pow_zaliczona": 3.51,
+    "obwod": 8.34,
+    "pobyt_ludzi": false
+   },
+   {
+    "id": "0.08",
+    "kond": "P0",
+    "nazwa": "Przedpokój gościnny",
+    "kategoria": "ruchu",
+    "pow_netto": 1.44,
+    "wysokosc": 2.77,
+    "wsp": 1.0,
+    "pow_zaliczona": 1.44,
+    "obwod": 4.82,
+    "pobyt_ludzi": false
+   },
+   {
+    "id": "0.09",
+    "kond": "P0",
+    "nazwa": "Łazienka gościnna (natrysk)",
+    "kategoria": "pomocnicza",
+    "pow_netto": 3.84,
+    "wysokosc": 2.77,
+    "wsp": 1.0,
+    "pow_zaliczona": 3.84,
+    "obwod": 7.87,
+    "pobyt_ludzi": false
+   },
+   {
+    "id": "0.10",
+    "kond": "P0",
+    "nazwa": "Pokój gościnny / gabinet",
+    "kategoria": "podstawowa",
+    "pow_netto": 12.52,
+    "wysokosc": 2.77,
+    "wsp": 1.0,
+    "pow_zaliczona": 12.52,
+    "obwod": 14.16,
+    "pobyt_ludzi": true
+   },
+   {
+    "id": "0.11",
+    "kond": "P0",
+    "nazwa": "Przedsionek gospodarczy",
+    "kategoria": "ruchu",
+    "pow_netto": 7.18,
+    "wysokosc": 2.76,
+    "wsp": 1.0,
+    "pow_zaliczona": 7.18,
+    "obwod": 10.75,
+    "pobyt_ludzi": false
+   },
+   {
+    "id": "0.12",
+    "kond": "P0",
+    "nazwa": "Pomieszczenie techniczne",
+    "kategoria": "techniczna",
+    "pow_netto": 8.85,
+    "wysokosc": 2.76,
+    "wsp": 1.0,
+    "pow_zaliczona": 8.85,
+    "obwod": 11.97,
+    "pobyt_ludzi": false
+   },
+   {
+    "id": "0.13",
+    "kond": "P0",
+    "nazwa": "Garaż 2-stanowiskowy",
+    "kategoria": "pomocnicza",
+    "pow_netto": 37.42,
+    "wysokosc": 2.76,
+    "wsp": 1.0,
+    "pow_zaliczona": 37.42,
+    "obwod": 24.68,
+    "pobyt_ludzi": false
+   },
+   {
+    "id": "1.01",
+    "kond": "P1",
+    "nazwa": "Hol",
+    "kategoria": "ruchu",
+    "pow_netto": 14.58,
+    "wysokosc": 2.77,
+    "wsp": 1.0,
+    "pow_zaliczona": 14.58,
+    "obwod": 26.6,
+    "pobyt_ludzi": false
+   },
+   {
+    "id": "1.02",
+    "kond": "P1",
+    "nazwa": "Pokój rodzinny / biblioteka (boks C)",
+    "kategoria": "podstawowa",
+    "pow_netto": 28.36,
+    "wysokosc": 2.77,
+    "wsp": 1.0,
+    "pow_zaliczona": 28.36,
+    "obwod": 23.03,
+    "pobyt_ludzi": true
+   },
+   {
+    "id": "1.03",
+    "kond": "P1",
+    "nazwa": "Pokój dziecka 1",
+    "kategoria": "podstawowa",
+    "pow_netto": 13.19,
+    "wysokosc": 2.77,
+    "wsp": 1.0,
+    "pow_zaliczona": 13.19,
+    "obwod": 14.53,
+    "pobyt_ludzi": true
+   },
+   {
+    "id": "1.04",
+    "kond": "P1",
+    "nazwa": "Pokój dziecka 2",
+    "kategoria": "podstawowa",
+    "pow_netto": 12.52,
+    "wysokosc": 2.77,
+    "wsp": 1.0,
+    "pow_zaliczona": 12.52,
+    "obwod": 14.16,
+    "pobyt_ludzi": true
+   },
+   {
+    "id": "1.05",
+    "kond": "P1",
+    "nazwa": "Łazienka dzieci (wanna)",
+    "kategoria": "pomocnicza",
+    "pow_netto": 5.5,
+    "wysokosc": 2.77,
+    "wsp": 1.0,
+    "pow_zaliczona": 5.5,
+    "obwod": 10.41,
+    "pobyt_ludzi": false
+   },
+   {
+    "id": "1.06",
+    "kond": "P1",
+    "nazwa": "Klatka schodowa",
+    "kategoria": "ruchu",
+    "pow_netto": 0.0,
+    "wysokosc": 2.77,
+    "wsp": 1.0,
+    "pow_zaliczona": 0.0,
+    "obwod": 16.14,
+    "pobyt_ludzi": false
+   },
+   {
+    "id": "1.07",
+    "kond": "P1",
+    "nazwa": "WC z natryskiem",
+    "kategoria": "pomocnicza",
+    "pow_netto": 4.08,
+    "wysokosc": 2.77,
+    "wsp": 1.0,
+    "pow_zaliczona": 4.08,
+    "obwod": 9.22,
+    "pobyt_ludzi": false
+   },
+   {
+    "id": "1.08",
+    "kond": "P1",
+    "nazwa": "Pralnia z suszarnią",
+    "kategoria": "pomocnicza",
+    "pow_netto": 6.64,
+    "wysokosc": 2.77,
+    "wsp": 1.0,
+    "pow_zaliczona": 6.64,
+    "obwod": 10.72,
+    "pobyt_ludzi": false
+   },
+   {
+    "id": "2.01",
+    "kond": "P2",
+    "nazwa": "Hol",
+    "kategoria": "ruchu",
+    "pow_netto": 5.74,
+    "wysokosc": 2.77,
+    "wsp": 1.0,
+    "pow_zaliczona": 5.74,
+    "obwod": 9.59,
+    "pobyt_ludzi": false
+   },
+   {
+    "id": "2.02",
+    "kond": "P2",
+    "nazwa": "Sypialnia rodziców",
+    "kategoria": "podstawowa",
+    "pow_netto": 21.78,
+    "wysokosc": 2.77,
+    "wsp": 1.0,
+    "pow_zaliczona": 21.78,
+    "obwod": 18.93,
+    "pobyt_ludzi": true
+   },
+   {
+    "id": "2.03",
+    "kond": "P2",
+    "nazwa": "Garderoba (przedpokój apartamentu)",
+    "kategoria": "pomocnicza",
+    "pow_netto": 10.57,
+    "wysokosc": 2.77,
+    "wsp": 1.0,
+    "pow_zaliczona": 10.57,
+    "obwod": 14.13,
+    "pobyt_ludzi": false
+   },
+   {
+    "id": "2.04",
+    "kond": "P2",
+    "nazwa": "Łazienka rodziców",
+    "kategoria": "pomocnicza",
+    "pow_netto": 5.51,
+    "wysokosc": 2.77,
+    "wsp": 1.0,
+    "pow_zaliczona": 5.51,
+    "obwod": 10.44,
+    "pobyt_ludzi": false
+   },
+   {
+    "id": "2.05",
+    "kond": "P2",
+    "nazwa": "Gabinet / pokój",
+    "kategoria": "podstawowa",
+    "pow_netto": 16.32,
+    "wysokosc": 2.77,
+    "wsp": 1.0,
+    "pow_zaliczona": 16.32,
+    "obwod": 16.68,
+    "pobyt_ludzi": true
+   },
+   {
+    "id": "2.06",
+    "kond": "P2",
+    "nazwa": "Klatka schodowa (wyjście z biegu 2, pustka)",
+    "kategoria": "ruchu",
+    "pow_netto": 0.24,
+    "wysokosc": 2.77,
+    "wsp": 1.0,
+    "pow_zaliczona": 0.24,
+    "obwod": 16.57,
+    "pobyt_ludzi": false
+   },
+   {
+    "id": "2.07",
+    "kond": "P2",
+    "nazwa": "Pom. techniczne (centrala rekuperacyjna, wyłaz na dach)",
+    "kategoria": "techniczna",
+    "pow_netto": 6.05,
+    "wysokosc": 2.77,
+    "wsp": 1.0,
+    "pow_zaliczona": 6.05,
+    "obwod": 9.84,
+    "pobyt_ludzi": false
+   }
+  ],
+  "sumy_kategorii": {
+   "podstawowa": 159.13,
+   "pomocnicza": 78.58,
+   "ruchu": 43.85,
+   "techniczna": 14.9
+  },
+  "pow_uzytkowa_PU": 237.71,
+  "pow_ruchu": 43.85,
+  "pow_techniczna": 14.9,
+  "pow_netto_razem": 296.46,
+  "per_kondygnacja": {
+   "P0": 145.37,
+   "P1": 84.88,
+   "P2": 66.21
+  }
+ },
+ "liczba": {
+  "sciany": 55,
+  "otwory": 47,
+  "pomieszczenia": 28
+ }
+}

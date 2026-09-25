@@ -1670,3 +1670,156 @@ def oblicz_tarcze(dane: DaneTarczy, p: Parametry | None = None, stal: StalZbroje
                   stm: bool = True, sls: bool = True) -> WynikTarczy:
     """Obliczenia tarczy (MES → STM → wymiarowanie → SLS → EQU). Zwraca :class:`WynikTarczy` (``.an`` — analiza)."""
     return AnalizaTarczy(dane, p, stal, siatka).uruchom(stm=stm, sls=sls).wynik()
+
+
+# ==================================================================================================
+# Pozycja „Obliczeń statycznych” i raport
+# ==================================================================================================
+METODA_TARCZ = [
+    "MES płaskiego stanu naprężenia: element prostokątny QM6 (biliniowy + 4 mody niekonforemne, kondensacja statyczna) na "
+    "siatce ortogonalnej dopasowanej do krawędzi otworów, podpór i punktów przyłożenia obciążeń; beton niezarysowany "
+    "E_cm, ν = 0,2; podpory sprężyste k = E·t/h ściany poniżej (lub sztywne). Walidacja: rozwiązanie ścisłe Timoshenki–"
+    "Goodiera (belka-tarcza, obciążenie równomierne), wspornik smukły (teoria belek z odkształceniem postaciowym), "
+    "zbieżność siatki, równowaga sił i przekrojów (tarcze_walidacja).",
+    "Siły w pasach: całkowanie naprężeń σ w przekrojach co element — wypadkowa strefy rozciąganej przylegającej do krawędzi "
+    "(pas górny/dolny, nadproża, podokienniki, ościeża).",
+    "Model kratownicowy (5.6.4, 6.5): węzły na liniach pasów (odsunięcie od krawędzi = środek bloku naprężeń z MES), pręty "
+    "kandydujące w obrębie betonu, siły z programowania liniowego (minimum Σ c·|F|·l, cięgna 1,0, krzyżulce 0,3, kara za "
+    "niezgodność z polem sprężystym), obciążenia i reakcje z MES (dokładna równowaga); obwiednia kombinacji STR.",
+    "Wymiarowanie: cięgna F_Ed = max(STM; MES), krzyżulce 0,6·ν'·f_cd, węzły CCC/CCT/CTT, zakotwienie (8.4), siatki 9.6/9.7, "
+    "zał. F (środnik), pręty przy otworach, rysy (7.3.4), ugięcia MES ze sztywnością zarysowaną (rysy rozmyte, ζ wg 7.19) "
+    "i pełzaniem, EQU wspornika (PN-EN 1990 tabl. A1.2(A)).",
+]
+
+ZRODLA_TARCZ = [
+    "PN-EN 1992-1-1:2008 + AC:2011 + NA — p. 5.6.4, 6.5, 7.3, 7.4, 8.4, 8.7, 9.6, 9.7, zał. F [wartości zalecane — NZW NA]",
+    "PN-EN 1990:2004 + NA — tabl. A1.2(A) (EQU), A1.2(B) (STR), 6.5.3 (SLS)",
+    "S. Timoshenko, J.N. Goodier, Theory of Elasticity, 3rd ed., McGraw-Hill 1970, §22 (belka obciążona równomiernie — "
+    "rozwiązanie wielomianowe) [P — wzory sprawdzane w teście: równania równowagi i warunki brzegowe]",
+    "E.L. Wilson, R.L. Taylor, W.P. Doherty, J. Ghaboussi, Incompatible displacement models, 1973; R.L. Taylor, P.J. Beresford, "
+    "E.L. Wilson, A non-conforming element for stress analysis, IJNME 10 (1976) 1211–1219 [P]",
+    "J. Schlaich, K. Schäfer, M. Jennewein, Toward a Consistent Design of Structural Concrete, PCI Journal 32(3), 1987 [P]",
+    "fib Bulletin 45 (2008) Practitioners' guide to finite element modelling of RC structures; fib Bulletin 61 (2011) Design "
+    "examples for strut-and-tie models; fib Model Code 2010 §7.3 [P]",
+    "F. Leonhardt, R. Walther, Wandartige Träger, DAfStb Heft 178 (1966); F. Leonhardt, E. Mönnig, Vorlesungen über Massivbau "
+    "T. 2 (1975); DAfStb Heft 240 (1991) — ramię sił wewnętrznych belek-ścian [P]",
+    "W.S. Dorn, R.E. Gomory, H.J. Greenberg, Automatic design of optimal structures, J. de Mécanique 3 (1964) [P]",
+    "A. Muttoni, J. Schwartz, B. Thürlimann, Design of Concrete Structures with Stress Fields, Birkhäuser 1997 [P]",
+]
+
+
+def _tabela_obciazen(d: DaneTarczy) -> str:
+    rows = []
+    for o in d.obciazenia:
+        if isinstance(o, ObcLiniowe):
+            q1 = o.q0 if o.q1 is None else o.q1
+            rows.append([o.przypadek, o.opis or "liniowe", f"{f(o.s0)}…{f(o.s1)}", f(o.z), f"{f(o.q0)}" + (f" → {f(q1)}" if q1 != o.q0 else ""),
+                         (o.wypadkowa, 1)])
+        elif isinstance(o, ObcProfil):
+            rows.append([o.przypadek, o.opis or "profil", f"{f(o.s0)}…{f(o.s1)}", f(o.z),
+                         f"śr. {f(o.wypadkowa / max(o.s1 - o.s0, 1e-9))} (maks. {f(float(o.q.max()))})", (o.wypadkowa, 1)])
+        else:
+            rows.append([o.przypadek, o.opis or "skupione", f(o.s), f(o.z), f"P = {f(o.P)} kN" + (f", P_x = {f(o.Px)}" if o.Px else ""),
+                         (o.P, 1)])
+    W = (d.gamma * d.t + d.g_dod) * d.polygon().area
+    rows.append([d.przypadek_cw, f"ciężar własny: {f(d.gamma, 0)}·{f(d.t)} + {f(d.g_dod)} = {f(d.gamma * d.t + d.g_dod)} kN/m² "
+                 f"× {f(d.polygon().area)} m²", "—", "—", "—", (W, 1)])
+    return tabela(["Przypadek", "Obciążenie", "x [m]", "z [m]", "q [kN/m] / P", "Wypadkowa [kN]"], rows)
+
+
+def _tabela_reakcji(an: AnalizaTarczy) -> str:
+    pods = [s.id for s in an.d.podpory]
+    rows = []
+    for c, rr in an.reakcje_przyp.items():
+        rows.append([c] + [f"{f(rr[s]['R'], 1)} (x_R = {f(rr[s]['xR'], 2)})" for s in pods] + [(sum(rr[s]["R"] for s in pods), 1)])
+    rg = an.mes.reakcje(an.r_uls[an.k_gov])
+    rows.append([f"**ULS {an.k_gov}**"] + [f"**{f(rg[s]['R'], 1)}**" for s in pods] + [(sum(rg[s]["R"] for s in pods), 1)])
+    return tabela(["Przypadek (charakt.)"] + [f"{s} — R [kN]" for s in pods] + ["Σ [kN]"], rows)
+
+
+def pozycja_tarczy(wt: WynikTarczy, rys_dir: str | Path | None = None, ident: str | None = None, tytul: str | None = None):
+    """Pozycja „Obliczeń statycznych” (:class:`.pozycje.Pozycja`) z wyniku tarczy; rysunki zapisywane w rys_dir."""
+    from .pozycje import Pozycja
+    an: AnalizaTarczy = wt.an
+    d = an.d
+    pz = Pozycja("", ident or d.id, tytul or f"Ściana-tarcza żelbetowa {d.id}", "tarcza")
+    otw = ", ".join(f"{o.id} {f(o.szer)}×{f(o.wys)} m (x = {f(o.s0)}…{f(o.s1)}, z = {f(o.z0)}…{f(o.z1)})" for o in d.otwory) or "brak"
+    pod = "; ".join(f"{s.id}: x = {f(s.s0)}…{f(s.s1)} m" + (f" ({s.opis})" if s.opis else "") +
+                    (", sztywna" if s.k is None else f", sprężysta k = {f(s.k / 1000, 0)} MN/m²") +
+                    (", tylko docisk" if s.tylko_docisk else "") for s in d.podpory)
+    wsp = [q for q in an.punkty_ugiec() if q["typ"] == "wspornik"]
+    pz.opis.append(f"{d.opis + ' ' if d.opis else ''}Tarcza żelbetowa gr. t = {f(d.t * 100, 0)} cm, długość L = {f(d.L)} m "
+                   f"(x = {f(d.x0)}…{f(d.x0 + d.L)}), wysokość H = {f(d.H)} m; beton {an.beton.klasa} ({d.ekspozycja}, c_nom = "
+                   f"{f(an.c_nom * 1000, 0)} mm), stal {an.stal.gatunek} (f_yd = {f(an.stal.f_yd, 1)} MPa). Otwory: {otw}. "
+                   f"Podpory (ściany/elementy poniżej): {pod}."
+                   + (" Wsporniki: " + "; ".join(f"{q['opis']} l_k = {f(q['l'])} m" for q in wsp) + "." if wsp else ""))
+    r = an.r_uls[an.k_gov]
+    pz.opis.append(f"Model MES: {an.mes.ne} elementów QM6 (bok ≤ {f(an.siatka * 100, 0)} cm), {len(an.k_uls)} kombinacji STR"
+                   + (f" + {len(an.k_wyj)} wyjątkowych" if an.k_wyj else "") + f", SLS: {len(an.k_char)} charakterystycznych, "
+                   f"{len(an.k_qp)} quasi-stałych. Kombinacja miarodajna (maks. ΣF): {an.k_gov}; ΣF_z = {f(-float(r.f[1::2].sum()), 1)} kN, "
+                   f"ΣR = {f(float(r.R[1::2].sum()), 1)} kN (błąd {an.blad_rownowagi:.1e}). Naprężenia (obwiednia STR): "
+                   f"σ₁,max = {f(wt.sigma1_max)} MPa, σ₂,min = {f(wt.sigma2_min)} MPa (f_ctm = {f(an.beton.f_ctm, 1)}, "
+                   f"f_cd = {f(an.beton.f_cd, 2)} MPa).")
+    pz.opis += [f"Metoda: {t}" for t in METODA_TARCZ]
+    pz.obciazenia.append("**Obciążenia charakterystyczne tarczy**\n\n" + _tabela_obciazen(d))
+    pz.obciazenia.append("**Kombinacje STR (PN-EN 1990 + NA)**\n\n" + tabela(["Kombinacja", "Współczynniki"],
+                                                                                 [[k.nazwa, k.opis()] for k in an.k_uls + an.k_wyj]))
+    pz.obciazenia.append("**Reakcje podpór — przekazanie na ściany/wieńce poniżej** (charakterystyczne wg przypadków, liniowo; "
+                         "rozkład wzdłuż podpory w danych pozycji i na rysunku)\n\n" + _tabela_reakcji(an))
+    pz.wyniki = list(an.sekcje)
+    pz.tabele = list(an.tabele)
+    if rys_dir is not None:
+        from .tarcze_rys import rysunki_tarczy
+        pz.rysunki += rysunki_tarczy(an, Path(rys_dir))
+    pz.przyjeto = list(an.przyjeto) + [f"Masa stali tarczy (orientacyjnie): {f(an.masa_stali, 0)} kg."]
+    pz.uwagi = [f"[UPR/ZAŁ] {u}" for u in OGRANICZENIA_TARCZ] + list(an.uwagi)
+    pz.prety = list(an.prety)
+    pz.dane = {**wt.dane(),
+               "reakcje_k": {c: {s: round(v["R"], 3) for s, v in rr.items()} for c, rr in an.reakcje_przyp.items()},
+               "ciegna": [{"opis": q.opis, "F_Ed": round(q.F_Ed, 2), "F_STM": round(q.F_stm, 2), "F_MES": round(q.F_mes, 2),
+                           "zbrojenie": f"{q.n}φ{q.fi}", "As_prov": round(q.As_prov, 1), "w_k": round(q.w_k, 3)} for q in an.pasy],
+               "ugiecia": [{k: (round(v, 4) if isinstance(v, float) else v) for k, v in u.items()} for u in getattr(an, "ugiecia", [])]}
+    return pz
+
+
+def raport_tarczy(wt: WynikTarczy, out_dir: str | Path, tytul: str | None = None, status: str | None = None,
+                  html: bool = True, dodatki: list[str] | None = None) -> Path:
+    """Samodzielny raport pozycji tarczowej (markdown + rysunki w ``rys/`` + opcjonalnie HTML) w stylu „Obliczeń statycznych”."""
+    import datetime as _dt
+    import json
+
+    from .raport import _HTML, _pozycja_md
+    out = Path(out_dir)
+    out.mkdir(parents=True, exist_ok=True)
+    an = wt.an
+    pz = pozycja_tarczy(wt, out / "rys")
+    pz.nr = "1"
+    tytul = tytul or f"Obliczenia statyczne — ściana-tarcza {an.d.id}"
+    L = [f"# {tytul}", "", f"Biblioteka `lamela.obliczenia.konstrukcja` (moduły `tarcze`, `tarcze_mes`) · wygenerowano "
+         f"{_dt.date.today().isoformat()}", ""]
+    if status:
+        L += [f"> **{status}**", ""]
+    L += ["> Obliczenia automatyczne. Oznaczenia: [NZW] — wartość zalecana/niezweryfikowana w NA, [UPR] — uproszczenie, "
+          "[ZAŁ] — założenie, [P] — źródło przytoczone z pamięci. Wymagana weryfikacja projektanta z uprawnieniami.", ""]
+    L += [f"**Wynik:** maks. wykorzystanie η = {f(pz.wykorzystanie * 100, 0)}% — "
+          f"{'wszystkie warunki spełnione' if pz.ok else '**warunki niespełnione**'}; T_max = {f(wt.T_max, 1)} kN, "
+          f"C_max = {f(wt.C_max, 1)} kN, ugięcie miarodajne {f(wt.w_max, 2)} mm (lim {f(wt.w_dop, 1)} mm), "
+          f"EQU η = {f(wt.eta_EQU * 100, 0)}%, stal ≈ {f(wt.masa_stali, 0)} kg.", ""]
+    L += _pozycja_md(pz, out, 2)
+    if pz.prety:
+        L += ["## Wykaz stali zbrojeniowej (PN-EN ISO 3766, orientacyjny)", "", zelbet.wykaz_stali(pz.prety), ""]
+    for t in dodatki or []:
+        L += [t, ""]
+    L += ["## Źródła", ""] + [f"- {z}" for z in ZRODLA_TARCZ] + [""]
+    md = "\n".join(L)
+    fmd = out / f"tarcza_{an.d.id}.md"
+    fmd.write_text(md, encoding="utf-8")
+    (out / f"tarcza_{an.d.id}.json").write_text(json.dumps(pz.dane, ensure_ascii=False, indent=1, default=float), encoding="utf-8")
+    if html:
+        try:
+            import markdown
+            body = markdown.markdown(md, extensions=["tables"])
+            fmd.with_suffix(".html").write_text(_HTML.replace("{{TITLE}}", tytul).replace("{{BODY}}", body), encoding="utf-8")
+        except ImportError:
+            pass
+    return fmd

@@ -1,0 +1,31 @@
+{
+ "budynek": "model/budynek.yaml",
+ "dzialka": "model/dzialka.yaml",
+ "etapy": {},
+ "walidacja": {
+  "bledy": 0,
+  "ostrzezenia": 0,
+  "problemy": []
+ },
+ "glb": {
+  "plik": "projekt/07_model_3D/wstepne/budynek.glb",
+  "bajty": 4959596,
+  "siatki": 515,
+  "trojkaty": 58662,
+  "wezly": 734,
+  "grupy": [
+   "budynek",
+   "fundamenty",
+   "P0",
+   "P1",
+   "P2",
+   "dach",
+   "teren",
+   "otoczenie"
+  ],
+  "materialy": 76
+ },
+ "obj": "projekt/07_model_3D/wstepne/obj/budynek.obj",
+ "czas_s": 11.4,
+ "status": "ok"
+}

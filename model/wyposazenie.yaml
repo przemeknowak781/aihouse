@@ -18,7 +18,7 @@ wyposazenie:
   - {kond: P0, typ: blat, linia: [[11.895, 1.4], [11.895, 5.02]], gl: 0.6, strona: 1, gorne: true}
   - {kond: P0, typ: zlew, xy: [11.895, 2.6], obrot: 180, wym: [0.8, 0.5]}
   - {kond: P0, typ: zmywarka, xy: [11.895, 1.9], obrot: 180, wym: [0.6, 0.58]}
-  - {kond: P0, typ: plyta, xy: [10.3, 2.7], obrot: 90, wym: [0.8, 0.52], opis: płyta indukcyjna na wyspie}
+  - {kond: P0, typ: plyta, xy: [9.8, 2.7], obrot: 90, wym: [0.8, 0.52], opis: płyta indukcyjna na wyspie}
   - {kond: P0, typ: lodowka, xy: [11.895, 4.6], obrot: 180, wym: [0.6, 0.65]}
   - {kond: P0, typ: urzadzenie, xy: [11.895, 3.9], obrot: 180, wym: [0.6, 0.6], opis: piekarnik + mikrofala w słupku}
   - {kond: P0, typ: szafa, xy: [8.395, 6.2], obrot: 180, wym: [1.6, 0.4], opis: regały spiżarni}
