@@ -1,4 +1,4 @@
-# Projekt techniczny — PT-4 IE (instalacje elektryczne) — tom 4 z 4
+# Projekt techniczny — PT-4 IE+BT (instalacje elektryczne i telekomunikacyjne) — tom 4 z 4
 
 *Źródło Markdown części opisowej — generowane przez `tools/dokumenty/tom_PT_IE.py`; wersja wiążąca: PDF. Pełne obliczenia (raporty bibliotek `lamela.obliczenia.elektryka`) i tabele wyników — w PDF.*
 
@@ -8,7 +8,7 @@
 
 ## Stan opracowania i sprawy otwarte — rejestr wymagań, sekcja E
 
-Tom opracowano automatycznie z modelu budynku (`model/*.yaml`, stan z 2026-09-25 07:28) i bibliotek obliczeniowych
+Tom opracowano automatycznie z modelu budynku (`model/*.yaml`, stan z 2026-09-25 07:55) i bibliotek obliczeniowych
 `lamela.obliczenia` (moduły `elektryka`, `energia`, `sanitarne`) uruchamianych przy każdym generowaniu tomu —
 każda liczba w tomie pochodzi z modelu albo z obliczeń. Działka, MPZP, warunki gruntowe i **warunki przyłączenia
 do sieci** są [DANE PRZYKŁADOWE – FIKCYJNE]; parametry urządzeń przyjęto z kart **wyrobów przykładowych** ([ZAŁ]) — dopuszcza się
@@ -18,33 +18,22 @@ wyroby równoważne spełniające parametry wymagane podane w rozdziale „Wyrob
 
 | Obszar obliczeń | Warunków | Spełnione | Niespełnione | Informacyjne |
 |---|---|---|---|---|
-| Bilans mocy, moc przyłączeniowa, podział na fazy | 8 | 7 | 0 | 1 |
-| WLZ, obwody, zabezpieczenia, ∆U, samoczynne wyłączenie, SPD, PWP | 117 | 113 | 1 | 1 |
-| Instalacja fotowoltaiczna (≤ 6,5 kWp) | 12 | 11 | 1 | 0 |
+| Bilans mocy, moc przyłączeniowa, podział na fazy | 9 | 8 | 0 | 1 |
+| WLZ, obwody, zabezpieczenia, ∆U, samoczynne wyłączenie, SPD, PWP | 117 | 114 | 0 | 1 |
+| Instalacja fotowoltaiczna (≤ 6,5 kWp) | 12 | 12 | 0 | 0 |
 | Ocena ryzyka piorunowego, uziom, połączenia wyrównawcze | 3 | 2 | 0 | 1 |
 
 Warunki informacyjne — wartości podawane bez kryterium (np. moc szczytowa bez zarządzania mocą).
 
 *Źródło: lamela.obliczenia.elektryka — uruchomienie przy generowaniu tomu*
 
-**Tabela 2. Warunki niespełnione i rozwiązania wyznaczone z wyników obliczeń**
-
-| Warunek niespełniony | Wynik | Wymaganie | Rozwiązanie | Wynik po zmianie |
-|---|---|---|---|---|
-| WLZ: spadek napięcia ZKP → RG | 0,61 % | ≤ 0,50 % | WLZ YKY 5×25 mm² | ≈ 0,39 % |
-| Spadek napięcia po stronie DC | 1,04 % | ≤ 1,00 % | przewody DC H1Z2Z2-K 10 mm² | ≈ 0,62 % |
-
-Spadek napięcia przeliczono proporcjonalnie do przekroju żył (∆U ∝ 1/s; reaktancja pominięta). Rozwiązanie wprowadzić w parametrach obliczeń (ParametryObwody.WLZ_przekroj, ParametryPV.s_DC) i przeliczyć tom — do tego czasu obowiązuje przekrój z kolumny „Rozwiązanie”.
-
 **Sprawy otwarte** (do zamknięcia przed wydaniem tomu do realizacji; po uzupełnieniu modelu status aktualizuje się przy ponownym generowaniu):
 
-1. Arkusze nieaktualne wobec bieżących obliczeń — przed wydaniem wygenerować ponownie (rozdz. „Braki danych i zgodność części rysunkowej”): PT-IE-04, PT-IE-06, PT-IE-14 (3 rozbieżności).
-2. Arkusze IE wygenerowano przed ostatnią zmianą modelu — przed wydaniem wygenerować ponownie (tools/generuj_widoki.py --arkusze model/arkusze_ie.yaml).
-3. Obliczenia (WLZ, obwody, zabezpieczenia, ∆U, samoczynne wyłączenie, SPD, PWP) — warunek niespełniony: WLZ: spadek napięcia ZKP → RG: 0,61 % (wymaganie ≤ 0,50 %; W-185: N SEP-E-002 [niezweryfikowane]) — rozwiązanie: WLZ YKY 5×25 mm² (∆U ≈ 0,39 % ≤ 0,50 %; przeliczenie proporcjonalne do przekroju); zmienić w parametrach obliczeń i przeliczyć.
-4. Obliczenia (Instalacja fotowoltaiczna (≤ 6,5 kWp)) — warunek niespełniony: Spadek napięcia po stronie DC: 1,04 % (wymaganie ≤ 1,00 %; [ZAŁ]) — rozwiązanie: przewody DC H1Z2Z2-K 10 mm² (∆U ≈ 0,62 % ≤ 1,00 %; przeliczenie proporcjonalne do przekroju); zmienić w parametrach obliczeń i przeliczyć.
-5. `instalacje.wyroby` w modelu puste — moduł PV, falownik, pompa ciepła i aparatura przyjęte z danych przykładowych bibliotek [DANE PRZYKŁADOWE – FIKCYJNE]; zastąpić danymi DTR/DWU wyrobów wybranych przez wykonawcę (wyroby równoważne spełniające parametry wymagane — rozdz. „Wyroby”).
-6. Dane osobowe (Inwestor, projektanci, nr uprawnień, pracownia) — brak sekcji `projekt:` w model/budynek.yaml; pola oznaczone jako do uzupełnienia (strona tytułowa, oświadczenie).
-7. Warunki przyłączenia OSD (E-05) — nieuzyskane; moc przyłączeniowa, typ zabezpieczenia przedlicznikowego, impedancja pętli zwarcia Z_Q i prąd zwarciowy w ZKP, rozdział PEN przyjęte jako [ZAŁ]; po otrzymaniu warunków przeliczyć obwody (D-12, W-192, E-05).
+1. Arkusze IE wygenerowano przed ostatnią zmianą modelu — przed wydaniem wygenerować ponownie (tools/generuj_widoki.py --arkusze model/arkusze_ie.yaml).
+2. Opis trasy WLZ w modelu działki (uzbrojenie projektowane „en”) podaje YKY 5×16, obliczenia — YKY 5×25; w tomie obowiązuje przekrój z obliczeń — poprawić opis w modelu i ponownie wygenerować rysunki PZT (tom I).
+3. `instalacje.wyroby` w modelu puste — moduł PV, falownik, pompa ciepła i aparatura przyjęte z danych przykładowych bibliotek [DANE PRZYKŁADOWE – FIKCYJNE]; zastąpić danymi DTR/DWU wyrobów wybranych przez wykonawcę (wyroby równoważne spełniające parametry wymagane — rozdz. „Wyroby”).
+4. Dane osobowe (Inwestor, projektanci, nr uprawnień, pracownia) — brak sekcji `projekt:` w model/budynek.yaml; pola oznaczone jako do uzupełnienia (strona tytułowa, oświadczenie).
+5. Warunki przyłączenia OSD (E-05) — nieuzyskane; moc przyłączeniowa, typ zabezpieczenia przedlicznikowego, impedancja pętli zwarcia Z_Q i prąd zwarciowy w ZKP, rozdział PEN przyjęte jako [ZAŁ]; po otrzymaniu warunków przeliczyć obwody (D-12, W-192, E-05).
 
 ## Przedmiot, zakres i podstawy opracowania — § 23 RPB
 
@@ -54,7 +43,16 @@ Spadek napięcia przeliczono proporcjonalnie do przekroju żył (∆U ∝ 1/s; r
 wtyczkowych i zasilania urządzeń (w tym pompy ciepła, centrali wentylacyjnej, punktu ładowania pojazdu
 elektrycznego), mikroinstalacja fotowoltaiczna, ochrona przeciwporażeniowa i przeciwprzepięciowa, uziemienia
 i połączenia wyrównawcze, ocena ryzyka piorunowego, instalacje telekomunikacyjne (przyłącze światłowodowe,
-okablowanie strukturalne), przeciwpożarowy wyłącznik prądu, bilans mocy.
+okablowanie strukturalne, RTV/SAT, SSWiN, wideodomofon), przeciwpożarowy wyłącznik prądu, bilans mocy.
+
+**Autorzy i specjalności.** Tom obejmuje dwie specjalności uprawnień budowlanych: instalacyjną w zakresie
+sieci, instalacji i urządzeń elektrycznych i elektroenergetycznych (PB art. 15a ust. 22) — wszystkie rozdziały
+i arkusze z wyjątkiem wymienionych dalej; instalacyjną
+w zakresie sieci, instalacji i urządzeń telekomunikacyjnych (PB art. 15a ust. 18 — telekomunikacja przewodowa
+wraz z infrastrukturą telekomunikacyjną) — rozdz. „Instalacje telekomunikacyjne” i arkusze
+PT-IE-07, PT-IE-08, PT-IE-09. Współautorów z zakresem opracowania wymieniono na stronie tytułowej
+i w oświadczeniu projektanta (PB art. 34 ust. 3e). Tom obejmujący więcej niż jedną specjalność ma w nazwie pliku
+symbol **WB** (zał. 1 RPB); oznaczenie tomu w odesłaniach innych tomów: PT-4.
 
 **Zakres wg RPB (rozporządzenie w sprawie szczegółowego zakresu i formy projektu budowlanego, Dz.U. 2020
 poz. 1609, t.j. Dz.U. 2022 poz. 1679 ze zm.):**
@@ -69,8 +67,11 @@ poz. 1609, t.j. Dz.U. 2022 poz. 1679 ze zm.):**
 * § 23 pkt 10 — dane dotyczące warunków ochrony przeciwpożarowej stosownie do zakresu tomu;
 * § 23 pkt 11 lit. a — bilans mocy urządzeń elektrycznych stanowiących stałe wyposażenie budynku (bez urządzeń
   technologicznych — budynek mieszkalny); lit. b–d — tom PT-3 IS (charakterystyka energetyczna);
-* § 23 pkt 1–6, 9 i 12 — nie dotyczy tomu (konstrukcja, geotechnika, przegrody — PT-1 AR / PT-2 BO; budynek
-  mieszkalny, nie liniowy); § 23 pkt 4a — nie dotyczy (W-231);
+* § 23 pkt 1–5 i 9 — nie dotyczy tomu (konstrukcja, geotechnika, przegrody, urządzenia instalacji sanitarnych —
+  PT-1 AR, PT-2 BO, PT-3 IS); § 23 pkt 4a — nie dotyczy (W-231); § 23 pkt 6 — nie dotyczy (budynek
+  mieszkalny, nie obiekt liniowy);
+* § 23 pkt 12 (dodany Dz.U. 2026 poz. 597 § 1 pkt 6) — nie dotyczy: PZT i PAB nie przewidują budowli
+  ochronnej ani miejsca doraźnego schronienia (PAB § 20 ust. 1 pkt 14 — n/d);
 * § 24 pkt 4 lit. b — rzuty instalacji elektroenergetycznych, telekomunikacyjnych i piorunochronnej, schemat
   rozdzielnicy głównej, uziom i połączenia wyrównawcze (część rysunkowa).
 
@@ -87,15 +88,20 @@ nietransponowana — stosowana dobrowolnie).
 
 **Normy (sekcja A.3 rejestru).** PN-HD 60364-1:2010; -4-41:2017-09; -4-42:2011; -4-43:2024-04; -4-443:2016-03;
 -5-52:2011; -5-53:2022-10; -5-54:2011; -6:2016-07; -7-701:2025-02; -7-712:2016-05; -7-714:2012; -7-722:2019-01;
-PN-EN 62305-1…-4 (wydania powołane w WT) i kontrolnie PN-EN IEC 62305-1…-4:2025-09; PN-EN IEC 61643-11:2026-04;
+PN-EN 62305-1…-4:2008/2011/2012 (wycofane; wydania powołane w zał. 1 WT — stosowane) i PN-EN IEC
+62305-1…-4:2025-09 (aktualne, wersja angielska — rozdz. „Ocena ryzyka piorunowego”); PN-EN 12464-1:2012
+(natężenie oświetlenia; wydanie powołane w zał. 1 WT lp. 41); PN-EN IEC 61643-11:2026-04;
 PN-EN 62446-1:2016-08; PN-EN 50549-1:2019-02; PN-EN 50618:2015-03; PN-EN 50173-4:2018-07; PN-EN 50174-2:2018-08;
-PN-EN 50310:2016-09; PN-EN 14604:2006; PN-EN IEC 61439-3:2025-09; PN-EN 61082-1:2015-03. Wartości tablicowe
+PN-EN 50310:2016-09; PN-EN 14604:2006; PN-EN IEC 61439-3:2025-09; PN-EN 61082-1:2015-03. Normy wycofane
+przywoływane wyłącznie z podaniem statusu: PN-HD 60364-5-534:2012/2016-04 (zastąpiona przez PN-HD
+60364-5-53:2022-10 — dobór SPD wg wydania aktualnego), PN-86/E-05003/01 (źródło historycznej mapy N_G —
+dane informacyjne). Wartości tablicowe
 z literatury (obciążalności wg PN-HD 60364-5-52 zał. B, spadki napięć wg N SEP-E-002) oznaczono w obliczeniach
 [NZW] — do potwierdzenia z tekstem norm przed wydaniem do realizacji (D-19).
 
 **Materiały wyjściowe:** PZT i PAB (tom I), PT-1 AR, PT-2 BO (zbrojenie i uziom), PT-3 IS (moc pompy ciepła,
 centrali, grzałki; charakterystyka energetyczna), model `model/budynek.yaml`, `dzialka.yaml`, `instalacje.yaml`,
-`wyposazenie.yaml`; dane PVGIS 5.3 (JRC) dla Poznania. Warunki przyłączenia OSD — [DANE PRZYKŁADOWE – FIKCYJNE]
+`wyposazenie.yaml` (stan z 2026-09-25 07:55); dane PVGIS 5.3 (JRC) dla Poznania. Warunki przyłączenia OSD — [DANE PRZYKŁADOWE – FIKCYJNE]
 (moc przyłączeniowa i parametry sieci jako [ZAŁ], E-05).
 
 ## Zasilanie i powiązanie z siecią elektroenergetyczną — § 23 pkt 8 RPB; W-192, W-193
@@ -111,12 +117,12 @@ Pole odczytowe licznika ≥ 0,48 m nad terenem (W-192).
 3-fazowy dwukierunkowy (mikroinstalacja PV — zgłoszenie do OSD, W-194); impedancja pętli zwarcia w ZKP
 Z_Q = 0,30 Ω, prąd zwarciowy w ZKP ≤ 6 kA.
 
-**Wewnętrzna linia zasilająca (WLZ)** ZKP → RG: kabel **YKY 5×16** 0,6/1 kV, długość obliczeniowa
+**Wewnętrzna linia zasilająca (WLZ)** ZKP → RG: kabel **YKY 5×25** 0,6/1 kV, długość obliczeniowa
 L = 28,3 m (trasa w terenie wg PZT 18,2 m + podejście w budynku i zapasy), obciążalność
-I_z = 64,0 A (metoda D1), spadek napięcia przy prądzie zabezpieczenia przedlicznikowego
-∆U = 0,61 % (temperatura robocza). Kabel w ziemi na głębokości ≥ 0,7 m w piasku z taśmą ostrzegawczą
+I_z = 82,0 A (metoda D1), spadek napięcia przy prądzie zabezpieczenia przedlicznikowego
+∆U = 0,37 % (temperatura robocza). Kabel w ziemi na głębokości ≥ 0,7 m w piasku z taśmą ostrzegawczą
 niebieską, pod utwardzeniami i przy wejściu do budynku w rurze osłonowej; przejście przez ścianę/płytę poniżej
-terenu gazoszczelne (W-214). Trasa w terenie: ZKP w linii ogrodzenia (pole odczytowe ≥ 0,48 m nad terenem) → WLZ YKY 5×16 do RG w pom. 0.12, rura osłonowa pod podjazdem/garażem.
+terenu gazoszczelne (W-214). Trasa w terenie: ZKP w linii ogrodzenia (pole odczytowe ≥ 0,48 m nad terenem) → WLZ YKY 5×25 do RG w pom. 0.12, rura osłonowa pod podjazdem/garażem.
 
 **Układ sieci w budynku: TN-S** — oddzielne przewody ochronny PE i neutralny N w obwodach rozdzielczych
 i odbiorczych (WT § 183 ust. 1 pkt 2). Rozdział PEN — preferowany w ZKP z WLZ 5-żyłowym (wymaga zgody OSD);
@@ -135,48 +141,48 @@ Instalację podzielono na **35 obwodów odbiorczych** wydzielonych zgodnie z WT 
 oświetlenie — 5, gniazda ogólnego przeznaczenia (w tym garaż i gniazda zewnętrzne) —
 7, gniazda kuchenne — 2, gniazda w łazienkach — 5,
 odbiorniki wymagające indywidualnego zabezpieczenia — 16. Przyporządkowanie obwodów do faz wyrównuje obciążenie
-(asymetria mocy szczytowej 0,1 %). Zestawienie obwodów — tabela poniżej; pełne
+(asymetria mocy szczytowej 0,4 %). Zestawienie obwodów — tabela poniżej; pełne
 obliczenia (I_B, I_z, ∆U, Z_s, I_k1) — rozdz. „Obliczenia”; schemat — arkusz PT-IE-14.
 
-**Tabela 3. Obwody odbiorcze rozdzielnicy głównej RG**
+**Tabela 2. Obwody odbiorcze rozdzielnicy głównej RG**
 
 | Obw. | Przeznaczenie | Faza | P [kW] | Zabezp. | Ochrona różnicowoprądowa | Przewód | L [m] | ∆U_c [%] |
 |---|---|---|---|---|---|---|---|---|
-| L1 | Oświetlenie P0 | L1 | 0,56 | B10 | RCBO typ A 30 mA | YDYp 3×1,5 | 15,82 | 1,03 |
-| L2 | Oświetlenie P1 | L2 | 0,43 | B10 | RCBO typ A 30 mA | YDYp 3×1,5 | 15,89 | 0,93 |
-| L3 | Oświetlenie P2 | L3 | 0,33 | B10 | RCBO typ A 30 mA | YDYp 3×1,5 | 27,77 | 1,05 |
-| L4 | Oświetlenie garażu i pom. technicznego | L1 | 0,26 | B10 | RCBO typ A 30 mA | YDYp 3×1,5 | 5,52 | 0,68 |
-| L5 | Oświetlenie zewnętrzne (wejście, elewacje, taras) | L2 | 0,20 | B10 | RCBO typ A 30 mA | YDYp 3×1,5 | 16,78 | 0,77 |
-| G1 | Gniazda P0: 0.10 Pokój gościnny / gabinet, 0.08 Przedpokój gościnny… | L1 | 2,00 | B16 | RCBO typ A 30 mA | YDYp 3×2,5 | 5,56 | 1,25 |
-| G2 | Gniazda P1: 1.04 Pokój dziecka 2, 1.03 Pokój dziecka 1, 1.09 Szacht i… | L3 | 2,00 | B16 | RCBO typ A 30 mA | YDYp 3×4 | 22,83 | 2,20 |
-| G3 | Gniazda P1: 1.02 Pokój rodzinny / biblioteka (boks C) | L2 | 2,00 | B16 | RCBO typ A 30 mA | YDYp 3×2,5 | 15,89 | 2,45 |
-| G4 | Gniazda P2: 2.02 Sypialnia rodziców, 2.03 Garderoba (przedpokój apart… | L1 | 2,00 | B16 | RCBO typ A 30 mA | YDYp 3×4 | 22,29 | 2,16 |
-| G5 | Gniazda P2: 2.05 Gabinet / pokój gościnny okazjonalny | L3 | 2,00 | B16 | RCBO typ A 30 mA | YDYp 3×2,5 | 17,07 | 2,59 |
-| G6 | Gniazda kuchenne 1 (0.06 Salon + jadalnia + kuchnia) | L1 | 2,00 | B16 | RCBO typ A 30 mA | YDYp 3×2,5 | 15,82 | 2,44 |
-| G7 | Gniazda kuchenne 2 (0.06 Salon + jadalnia + kuchnia) | L3 | 2,00 | B16 | RCBO typ A 30 mA | YDYp 3×2,5 | 15,82 | 2,44 |
-| G8 | Gniazda łazienki (0.03 WC gościnne) | L2 | 2,00 | B16 | RCBO typ A 30 mA | YDYp 3×2,5 | 18,14 | 2,71 |
-| G9 | Gniazda łazienki (0.09 Łazienka gościnna (natrysk)) | L1 | 2,00 | B16 | RCBO typ A 30 mA | YDYp 3×4 | 23,22 | 2,23 |
-| G10 | Gniazda łazienki (1.05 Łazienka dzieci (wanna)) | L3 | 2,00 | B16 | RCBO typ A 30 mA | YDYp 3×4 | 25,84 | 2,41 |
-| G11 | Gniazda łazienki (1.07 WC z natryskiem) | L2 | 2,00 | B16 | RCBO typ A 30 mA | YDYp 3×2,5 | 20,41 | 2,98 |
-| G12 | Gniazda łazienki (2.04 Łazienka rodziców) | L1 | 2,00 | B16 | RCBO typ A 30 mA | YDYp 3×4 | 28,99 | 2,63 |
-| G13 | Gniazda garażu / pom. technicznego (IP44) | L2 | 2,00 | B16 | RCBO typ A 30 mA | YDYp 3×2,5 | 5,52 | 1,25 |
-| G14 | Gniazda zewnętrzne (taras, ogród; IP44/IP54) | L3 | 2,00 | B16 | RCBO typ A 30 mA | YDYp 3×4 | 27,55 | 2,53 |
-| D1 | Płyta indukcyjna | L1L2L3 | 7,40 | 3P B16 | RCD 4P 40 A/30 mA typ A | YDYp 5×2,5 | 11,34 | 1,03 |
-| D2 | Piekarnik | L2 | 3,50 | B16 | RCBO typ A 30 mA | YDYp 3×2,5 | 15,82 | 2,34 |
-| D3 | Zmywarka | L3 | 2,20 | B16 | RCBO typ A 30 mA | YDYp 3×2,5 | 7,99 | 1,14 |
-| D4 | Pralka | L2 | 2,20 | B16 | RCBO typ A 30 mA | YDYp 3×2,5 | 21,03 | 2,00 |
-| D5 | Suszarka | L3 | 2,50 | B16 | RCBO typ A 30 mA | YDYp 3×2,5 | 20,25 | 2,15 |
-| D6 | Pompa ciepła — jednostka zewnętrzna (PC-R290-07 (przykład)) | L1 | 2,67 | C16 | RCD typ F/B 30 mA wg DTR (falownik sprężarki) | YDYp 3×2,5 | 9,44 | 1,38 |
-| D7 | Grzałka rezerwowa PC / zasobnika c.w.u. (6,0 kW) | L1L2L3 | 6,00 | 3P B10 | RCD 4P 40 A/30 mA typ A | YDYp 5×2,5 | 6,60 | 0,80 |
-| D8 | Sterowanie PC, pompy obiegowe, listwy ogrzewania podłogowego | L3 | 0,30 | B10 | RCBO typ A 30 mA | YDYp 3×1,5 | 6,60 | 0,70 |
-| D9 | Rekuperator (V ≈ 365 m³/h) | L3 | 0,18 | B10 | RCBO typ A 30 mA | YDYp 3×1,5 | 20,66 | 0,79 |
-| D10 | Falownik PV 3f (6,0 kW AC) | L1L2L3 | 6,00 | 3P B16 | RCD typ B 30 mA (lub wg 712.530.3.101 — DTR falownika) | YDYp 5×2,5 | 3,00 | 0,70 |
-| D11 | Ładowarka EV 11 kW (3f) — garaż; przewód na 22 kW | L1L2L3 | 11,00 | 3P C20 | własny RCD typ B 30 mA lub A-EV + RDC-DD 6 mA DC | YDY 5×6 | 9,57 | 0,83 |
-| D12 | Napęd bramy garażowej | L3 | 0,30 | B10 | RCBO typ A 30 mA | YDYp 3×1,5 | 13,41 | 0,80 |
-| D13 | Brama wjazdowa, furtka, wideodomofon (linia ogrodzenia) | L1 | 0,50 | B16 | RCBO typ A 30 mA | YKY 3×2,5 | 23,22 | 0,93 |
-| D14 | Teletechnika: ONT, router, szafka RACK, SSWiN | L2 | 0,20 | B16 | RCBO typ A 30 mA | YDYp 3×2,5 | 3,00 | 0,63 |
-| D15 | Pompa zbiornika wody deszczowej (podlewanie) | L1 | 0,80 | B16 | RCBO typ A 30 mA | YKY 3×2,5 | 25,74 | 1,19 |
-| D16 | Napędy osłon przeciwsłonecznych (19 szt.) | L2 | 1,90 | B10 | RCBO typ A 30 mA | YDYp 3×1,5 | 3,00 | 0,89 |
+| L1 | Oświetlenie P0 | L1 | 0,56 | B10 | RCBO typ A 30 mA | YDYp 3×1,5 | 15,82 | 0,79 |
+| L2 | Oświetlenie P1 | L2 | 0,43 | B10 | RCBO typ A 30 mA | YDYp 3×1,5 | 15,89 | 0,70 |
+| L3 | Oświetlenie P2 | L3 | 0,33 | B10 | RCBO typ A 30 mA | YDYp 3×1,5 | 27,77 | 0,81 |
+| L4 | Oświetlenie garażu i pom. technicznego | L1 | 0,26 | B10 | RCBO typ A 30 mA | YDYp 3×1,5 | 5,52 | 0,44 |
+| L5 | Oświetlenie zewnętrzne (wejście, elewacje, taras) | L1 | 0,20 | B10 | RCBO typ A 30 mA | YDYp 3×1,5 | 16,78 | 0,53 |
+| G1 | Gniazda P0: 0.10 Pokój gościnny / gabinet, 0.08 Przedpokój gościnny… | L1 | 2,00 | B16 | RCBO typ A 30 mA | YDYp 3×2,5 | 5,56 | 1,02 |
+| G2 | Gniazda P1: 1.04 Pokój dziecka 2, 1.03 Pokój dziecka 1, 1.09 Szacht i… | L3 | 2,00 | B16 | RCBO typ A 30 mA | YDYp 3×4 | 22,83 | 1,97 |
+| G3 | Gniazda P1: 1.02 Pokój rodzinny / biblioteka (boks C) | L2 | 2,00 | B16 | RCBO typ A 30 mA | YDYp 3×2,5 | 15,89 | 2,22 |
+| G4 | Gniazda P2: 2.02 Sypialnia rodziców, 2.03 Garderoba (przedpokój apart… | L1 | 2,00 | B16 | RCBO typ A 30 mA | YDYp 3×2,5 | 22,29 | 2,96 |
+| G5 | Gniazda P2: 2.05 Gabinet / pokój gościnny okazjonalny | L3 | 2,00 | B16 | RCBO typ A 30 mA | YDYp 3×2,5 | 17,07 | 2,35 |
+| G6 | Gniazda kuchenne 1 (0.06 Salon + jadalnia + kuchnia) | L1 | 2,00 | B16 | RCBO typ A 30 mA | YDYp 3×2,5 | 15,82 | 2,21 |
+| G7 | Gniazda kuchenne 2 (0.06 Salon + jadalnia + kuchnia) | L3 | 2,00 | B16 | RCBO typ A 30 mA | YDYp 3×2,5 | 15,82 | 2,21 |
+| G8 | Gniazda łazienki (0.03 WC gościnne) | L2 | 2,00 | B16 | RCBO typ A 30 mA | YDYp 3×2,5 | 18,14 | 2,48 |
+| G9 | Gniazda łazienki (0.09 Łazienka gościnna (natrysk)) | L1 | 2,00 | B16 | RCBO typ A 30 mA | YDYp 3×4 | 23,22 | 1,99 |
+| G10 | Gniazda łazienki (1.05 Łazienka dzieci (wanna)) | L3 | 2,00 | B16 | RCBO typ A 30 mA | YDYp 3×4 | 25,84 | 2,18 |
+| G11 | Gniazda łazienki (1.07 WC z natryskiem) | L2 | 2,00 | B16 | RCBO typ A 30 mA | YDYp 3×2,5 | 20,41 | 2,74 |
+| G12 | Gniazda łazienki (2.04 Łazienka rodziców) | L1 | 2,00 | B16 | RCBO typ A 30 mA | YDYp 3×4 | 28,99 | 2,40 |
+| G13 | Gniazda garażu / pom. technicznego (IP44) | L2 | 2,00 | B16 | RCBO typ A 30 mA | YDYp 3×2,5 | 5,52 | 1,01 |
+| G14 | Gniazda zewnętrzne (taras, ogród; IP44/IP54) | L3 | 2,00 | B16 | RCBO typ A 30 mA | YDYp 3×4 | 27,55 | 2,30 |
+| D1 | Płyta indukcyjna | L1L2L3 | 7,40 | 3P B16 | RCD 4P 40 A/30 mA typ A | YDYp 5×2,5 | 11,34 | 0,80 |
+| D2 | Piekarnik | L2 | 3,50 | B16 | RCBO typ A 30 mA | YDYp 3×2,5 | 15,82 | 2,11 |
+| D3 | Zmywarka | L3 | 2,20 | B16 | RCBO typ A 30 mA | YDYp 3×2,5 | 7,99 | 0,90 |
+| D4 | Pralka | L2 | 2,20 | B16 | RCBO typ A 30 mA | YDYp 3×2,5 | 21,03 | 1,77 |
+| D5 | Suszarka | L3 | 2,50 | B16 | RCBO typ A 30 mA | YDYp 3×2,5 | 20,25 | 1,92 |
+| D6 | Pompa ciepła — jednostka zewnętrzna (PC-R290-07 (przykład)) | L1 | 2,67 | C16 | RCD typ F/B 30 mA wg DTR (falownik sprężarki) | YDYp 3×2,5 | 9,44 | 1,15 |
+| D7 | Grzałka rezerwowa PC / zasobnika c.w.u. (6,0 kW) | L1L2L3 | 6,00 | 3P B10 | RCD 4P 40 A/30 mA typ A | YDYp 5×2,5 | 6,60 | 0,57 |
+| D8 | Sterowanie PC, pompy obiegowe, listwy ogrzewania podłogowego | L3 | 0,30 | B10 | RCBO typ A 30 mA | YDYp 3×1,5 | 6,60 | 0,47 |
+| D9 | Rekuperator (V ≈ 365 m³/h) | L2 | 0,10 | B10 | RCBO typ A 30 mA | YDYp 3×1,5 | 20,48 | 0,47 |
+| D10 | Falownik PV 3f (6,0 kW AC) | L1L2L3 | 6,00 | 3P B16 | RCD typ B 30 mA (lub wg 712.530.3.101 — DTR falownika) | YDYp 5×2,5 | 3,00 | 0,46 |
+| D11 | Ładowarka EV 11 kW (3f) — garaż; przewód na 22 kW | L1L2L3 | 11,00 | 3P C20 | własny RCD typ B 30 mA lub A-EV + RDC-DD 6 mA DC | YDY 5×6 | 9,57 | 0,59 |
+| D12 | Napęd bramy garażowej | L3 | 0,30 | B10 | RCBO typ A 30 mA | YDYp 3×1,5 | 13,41 | 0,57 |
+| D13 | Brama wjazdowa, furtka, wideodomofon (linia ogrodzenia) | L3 | 0,50 | B16 | RCBO typ A 30 mA | YKY 3×2,5 | 23,22 | 0,70 |
+| D14 | Teletechnika: ONT, router, szafka RACK, SSWiN | L2 | 0,20 | B16 | RCBO typ A 30 mA | YDYp 3×2,5 | 3,00 | 0,39 |
+| D15 | Pompa zbiornika wody deszczowej (podlewanie) | L1 | 0,80 | B16 | RCBO typ A 30 mA | YKY 3×2,5 | 25,74 | 0,95 |
+| D16 | Napędy osłon przeciwsłonecznych (19 szt.) | L2 | 1,90 | B10 | RCBO typ A 30 mA | YDYp 3×1,5 | 3,00 | 0,66 |
 
 ∆U_c — spadek napięcia od ZKP do najdalszego odbiornika obwodu (WLZ + obwód), temperatura robocza żył.
 
@@ -203,7 +209,7 @@ z tworzyw sztucznych zwykle niewymagane). Rozmieszczenie — arkusze PT-IE-04, P
 
 ### Zasilanie urządzeń — § 23 pkt 8 lit. b RPB; WT § 188 ust. 2
 
-**Tabela 4. Urządzenia zasilane z obwodów wydzielonych**
+**Tabela 3. Urządzenia zasilane z obwodów wydzielonych**
 
 | Obw. | Urządzenie | P [kW] | Fazy | I_B [A] | Zabezp. | Przewód | Ochrona różnicowoprądowa |
 |---|---|---|---|---|---|---|---|
@@ -215,7 +221,7 @@ z tworzyw sztucznych zwykle niewymagane). Rozmieszczenie — arkusze PT-IE-04, P
 | D6 | Pompa ciepła — jednostka zewnętrzna (PC-R290-07 (przykład)) | 2,67 | 1 | 12,22 | C16 | YDYp 3×2,5 | RCD typ F/B 30 mA wg DTR (falownik sprężarki) |
 | D7 | Grzałka rezerwowa PC / zasobnika c.w.u. (6,0 kW) | 6,00 | 3 | 8,66 | 3P B10 | YDYp 5×2,5 | RCD 4P 40 A/30 mA typ A |
 | D8 | Sterowanie PC, pompy obiegowe, listwy ogrzewania podłogowego | 0,30 | 1 | 1,37 | B10 | YDYp 3×1,5 | RCBO typ A 30 mA |
-| D9 | Rekuperator (V ≈ 365 m³/h) | 0,18 | 1 | 0,84 | B10 | YDYp 3×1,5 | RCBO typ A 30 mA |
+| D9 | Rekuperator (V ≈ 365 m³/h) | 0,10 | 1 | 0,47 | B10 | YDYp 3×1,5 | RCBO typ A 30 mA |
 | D10 | Falownik PV 3f (6,0 kW AC) | 6,00 | 3 | 8,66 | 3P B16 | YDYp 5×2,5 | RCD typ B 30 mA (lub wg 712.530.3.101 — DTR falownika) |
 | D11 | Ładowarka EV 11 kW (3f) — garaż; przewód na 22 kW | 11,00 | 3 | 16,04 | 3P C20 | YDY 5×6 | własny RCD typ B 30 mA lub A-EV + RDC-DD 6 mA DC |
 | D12 | Napęd bramy garażowej | 0,30 | 1 | 1,37 | B10 | YDYp 3×1,5 | RCBO typ A 30 mA |
@@ -259,8 +265,8 @@ zabezpieczenie przed wiatrem wg PN-EN 1991-1-4). Rozmieszczenie — arkusze PT-I
 U_oc,max = 350 V, zakres napięć MPP 196–298 V
 (mieści się w zakresie MPPT falownika 160–950 V);
 bez bezpieczników łańcuchowych (jeden łańcuch na MPPT).
-Przewody DC H1Z2Z2-K (PN-EN 50618) 6 mm², trasa dach → falownik L = 21,9 m,
-prowadzone parami (małe pętle indukcyjne), w osłonach odpornych na UV; spadek napięcia DC 1,04 %.
+Przewody DC H1Z2Z2-K (PN-EN 50618) 10 mm², trasa dach → falownik L = 21,9 m,
+prowadzone parami (małe pętle indukcyjne), w osłonach odpornych na UV; spadek napięcia DC 0,62 %.
 SPD DC typ 2, U_CPV ≥ 350 V (klasa 1000 V DC) przy falowniku — wbudowany w falownik (sprawdzić DTR); rozłącznik izolacyjny DC ≥ 350 V, ≥ 17,5 A (zwykle wbudowany w falownik). Długość krytyczna DC dla SPD L_crit = 63,9 m.
 
 **Strona AC.** Obwód D10 w RG: 3P B16, YDYp 5×2,5,
@@ -270,15 +276,18 @@ odcina stronę AC falownika; strona DC pozostaje pod napięciem — tabliczki os
 Konstrukcja PV uziemiona w jednym punkcie i połączona z GSU (712.444.5.5.101).
 
 **Produkcja energii** (PVGIS 5.3, Poznań): E = 5 610 kWh/rok; autokonsumpcja (bilans godzinowy)
-65,1 %, pokrycie zużycia 33,0 %; energia PV zużyta przez
-systemy techniczne (ogrzewanie, c.w.u., pomocnicze) 2 451
-kWh/rok — przekazana do charakterystyki energetycznej (PT-3 IS). Odbiór: PN-EN 62446-1 (rozdz. „Próby”).
+65,1 %, pokrycie zużycia 32,9 %; energia PV zużyta przez
+systemy techniczne (ogrzewanie, c.w.u., pomocnicze) 2 452
+kWh/rok — wartości informacyjne doboru instalacji. Charakterystyka energetyczna (PT-3 IS) przyjmuje wg
+metodologii świadectw produkcję E_PV = 4 985 kWh/rok i energię zużytą przez systemy techniczne
+E_PV,sys = 2 339 kWh/rok (inne dane klimatyczne i model autokonsumpcji); dla wskaźnika EP
+wiążące są wartości PT-3 IS. Odbiór: PN-EN 62446-1 (rozdz. „Próby”).
 
 ## Punkt ładowania pojazdu elektrycznego — PN-HD 60364-7-722:2019-01; W-195
 
 Obowiązek wyposażenia budynku jednorodzinnego w punkt ładowania nie wynika z ustawy o elektromobilności (W-195).
 Projektuje się **obwód wydzielony D11** — Ładowarka EV 11 kW (3f) — garaż; przewód na 22 kW: moc 11,0 kW, I_B = 16,0 A,
-zabezpieczenie 3P C20, przewód YDY 5×6 (L = 9,6 m, ∆U_c = 0,83 %), ochrona
+zabezpieczenie 3P C20, przewód YDY 5×6 (L = 9,6 m, ∆U_c = 0,59 %), ochrona
 różnicowoprądowa: własny RCD typ B 30 mA lub A-EV + RDC-DD 6 mA DC. Punkt ładowania (tryb 3, PN-EN IEC 61851-1) objęty dynamicznym zarządzaniem mocą
 (DLM) — ograniczenie prądu ładowania przy przekroczeniu mocy przyłączeniowej (rozdz. „Bilans mocy”). Obwód nie
 może pracować w układzie TN-C; osobny RCD dla każdego punktu przyłączenia (722.531.2).
@@ -287,6 +296,11 @@ Miejsca postojowe w PZT: 4 (MP1 — garaż, MP2 — garaż, MP3 — zewnętrzne,
 Przy liczbie miejsc > 3 dyrektywa EPBD (UE) 2024/1275 art. 14 ust. 4 — nietransponowana, stosowana dobrowolnie — przewiduje okablowanie wstępne ≥ 50 % miejsc (tu 2) i kanały kablowe dla pozostałych: projektuje się rurę osłonową do miejsc zewnętrznych i rezerwę w RG na drugi punkt ładowania.
 
 ## Instalacje telekomunikacyjne — § 23 pkt 7 lit. h RPB; rozp. (UE) 2024/1309 art. 10; W-196
+
+**Autor.** Rozdział i arkusze PT-IE-07, PT-IE-08, PT-IE-09 opracowuje współautor tomu ze specjalnością
+instalacyjną w zakresie sieci, instalacji i urządzeń telekomunikacyjnych bez ograniczeń (PB art. 15a ust. 18)
+— [DO UZUPEŁNIENIA: imię i nazwisko, nr uprawnień]; zasilanie urządzeń teletechnicznych z instalacji
+elektrycznej (obwód, zabezpieczenie) i połączenia wyrównawcze — projektant instalacji elektrycznych.
 
 **Przyłącze światłowodowe.** Budynek wyposaża się w infrastrukturę fizyczną przystosowaną do sieci światłowodowej
 i okablowanie światłowodowe do punktu zakończenia sieci (rozp. (UE) 2024/1309 art. 10 ust. 1 — wniosek o pozwolenie
@@ -309,17 +323,19 @@ PT-IE-07, PT-IE-08, PT-IE-09.
 
 ## Instalacja piorunochronna, uziom i połączenia wyrównawcze — § 23 pkt 7 lit. i RPB; WT § 53 ust. 2, § 184; W-187, W-188, W-191
 
-### Ocena ryzyka piorunowego — PN-EN 62305-2; W-191
+### Ocena ryzyka piorunowego — PN-EN 62305-2:2008 (zał. 1 WT); W-191
 
 Potrzebę instalacji piorunochronnej (WT § 53 ust. 2, § 184 ust. 3) oceniono metodą analizy ryzyka utraty życia
-R1 wg PN-EN 62305-2 (wydanie powołane w WT; kontrolnie PN-EN IEC 62305-2:2025-09): wysokość budynku
+R1 wg PN-EN 62305-2:2008 (norma wycofana; wydanie powołane w zał. 1 WT, stosowane na podstawie art. 102a PB;
+ryzyko tolerowane i klasy ryzyka pożaru — jak w wydaniu PN-EN 62305-2:2012, również wycofanym): wysokość budynku
 H = 10,23 m, powierzchnia zbierania wyładowań A_D = 4 281 m², gęstość wyładowań
-N_G = 1,8 1/(km²·rok) [NZW], liczba wyładowań w obiekt N_D = 0,0077 1/rok, w linię zasilającą
+N_G = 1,8 1/(km²·rok) [NZW] (dane SEP z mapy PN-86/E-05003/01 — norma wycofana, dane
+historyczne; aktualizacja z danych systemu detekcji wyładowań — do potwierdzenia), liczba wyładowań w obiekt N_D = 0,0077 1/rok, w linię zasilającą
 N_L = 0,0180 1/rok; ryzyko tolerowane R_T = 1,00·10⁻⁵ 1/rok. Klasę ryzyka pożaru przyjęto z gęstości
 obciążenia ogniowego (progi 400 / 800 MJ/m²)
 — rozstrzygające są oba warianty klasy.
 
-**Tabela 5. Ryzyko R1 w scenariuszach ochrony**
+**Tabela 4. Ryzyko R1 w scenariuszach ochrony**
 
 | Scenariusz | Klasa pożarowa | R1 [1/rok] | R1 ≤ R_T |
 |---|---|---|---|
@@ -338,6 +354,18 @@ obciążenia ogniowego (progi 400 / 800 MJ/m²)
 
 > Decyzja: LPS NIEWYMAGANY (R1 ≤ R_T przy SPD T1 dla obu klas obciążenia ogniowego). Uziom wykonuje się z wyprowadzeniami pod przewody odprowadzające (rezerwa na LPS klasy IV); w RG ochronniki przepięć typu 1+2 (warunek scenariusza).
 
+**Wydanie aktualne PN-EN IEC 62305-2:2025-09 — sprawdzenie kontrolne pominięto (uzasadnienie).** Rejestr
+wymagań (A.1 pkt 5) przewiduje stosowanie wydania powołanego w WT obok wydania aktualnego. Sprawdzenia
+kontrolnego wg wydania 2025 nie wykonano, ponieważ: (1) obowiązek wykonania instalacji piorunochronnej wynika
+z WT § 53 ust. 2 i § 184 ust. 3 w związku z normą powołaną w zał. 1 WT — rozstrzyga ocena wykonana powyżej;
+(2) PN-EN IEC 62305-2:2025-09 jest dostępna wyłącznie w języku angielskim, a jej metodyka nie jest ujęta
+w obliczeniach projektu (rejestr R7-A05, D-13) — obliczenie „kontrolne” bez tekstu normy nie byłoby
+sprawdzeniem; (3) rozwiązania tomu nie zależą od wyniku: uziom z wyprowadzeniami pod przewody odprowadzające,
+ochronniki typu 1+2 w RG oraz parametry LPS klasy IV (podrozdział „Parametry LPS (rezerwa)”)
+pozwalają wykonać LPS bez zmian konstrukcji i instalacji. Jeżeli ocena wg wydania 2025 wykaże R1 > R_T,
+LPS wykonuje się wg podrozdziału „Parametry LPS (rezerwa)” —
+[DO UZUPEŁNIENIA: decyzja projektanta o sprawdzeniu wg PN-EN IEC 62305-2:2025-09 przed realizacją].
+
 ### Uziom — WT § 184 ust. 1; PN-HD 60364-5-54 zał. C; W-187
 
 Typ: **otokowy w gruncie (fundament izolowany termicznie — PN-HD 60364-5-54 zał. C.2)**. Materiał: drut/płaskownik Cu 50 mm² lub StCu Ø10 mm lub StSt 30×3,5 mm, ≥ 0,5 m w gruncie, ≥ 1 m od ścian [ZAŁ]. Średnica zastępcza obrysu D = 17,89 m, rezystancja
@@ -349,7 +377,7 @@ Plan uziomu — arkusz PT-IE-12.
 
 ### Połączenia wyrównawcze — WT § 183 ust. 1 pkt 7, ust. 1a; PN-HD 60364-5-54; W-188
 
-**Tabela 6. Połączenia wyrównawcze główne i miejscowe**
+**Tabela 5. Połączenia wyrównawcze główne i miejscowe**
 
 | Element | Miejsce | Przekrój / uwagi |
 |---|---|---|
@@ -367,7 +395,7 @@ Przewód uziemiający ≥ 16 mm² Cu; przewody wyrównawcze główne ≥ 6 mm² 
 
 *Źródło: lamela.obliczenia.elektryka.odgromowa*
 
-### Parametry LPS (rezerwa) — PN-EN 62305-3
+### Parametry LPS (rezerwa) — PN-EN 62305-3:2011 (wycofana, powołana w WT)
 
 Gdyby Inwestor zdecydował o wykonaniu LPS (np. po zmianie wyposażenia lub klasy pożarowej): klasa
 IV, oczka zwodów 20 × 20 m (III: 15 × 15 m), promień kuli toczącej 60 m (III: 45 m), przewody odprowadzające:
@@ -381,9 +409,9 @@ uziomu i połączenia wyrównawcze na dachu.
 **Ochrona przy uszkodzeniu** — samoczynne wyłączenie zasilania w układzie TN-S: dla obwodów odbiorczych
 230 V czas wyłączenia ≤ 0,4 s (tabl. 41.1), sprawdzony
 warunkiem I_k1 ≥ I_a (I_a — prąd zadziałania członu zwarciowego wyłącznika: 5·I_n dla B, 10·I_n dla C).
-Najmniejszy zapas: obwód D11 — I_k1 = 496 A ≥ I_a = 200 A
-(I_k1/I_a = 2,48); największa impedancja pętli zwarcia: obwód L3 —
-Z_s = 1,161 Ω (temperatura żył 70 °C, c_min = 0,95). **Ochrona uzupełniająca** — urządzenia
+Najmniejszy zapas: obwód D11 — I_k1 = 528 A ≥ I_a = 200 A
+(I_k1/I_a = 2,64); największa impedancja pętli zwarcia: obwód L3 —
+Z_s = 1,132 Ω (temperatura żył 70 °C, c_min = 0,95). **Ochrona uzupełniająca** — urządzenia
 różnicowoprądowe I_∆n ≤ 30 mA w obwodach gniazd ≤ 32 A,
 oświetlenia, łazienek i urządzeń na zewnątrz (411.3.3–411.3.4, W-181); typ AC niedopuszczalny.
 Zastosowane rodzaje: RCBO typ A 30 mA — 30 obwodów; RCD 4P 40 A/30 mA typ A — 2 obwody; RCD typ F/B 30 mA wg DTR (falownik sprężarki) — 1 obwód; RCD typ B 30 mA (lub wg 712.530.3.101 — DTR falownika) — 1 obwód; własny RCD typ B 30 mA lub A-EV + RDC-DD 6 mA DC — 1 obwód.
@@ -393,9 +421,10 @@ Połączenia wyrównawcze — rozdz. „Instalacja piorunochronna, uziom i poł�
 obwodu ≥ 1,6); zwarciowa — częściowa, do granicy wynikającej z tabel producenta aparatów (zestawienie w obliczeniach
 obwodów); aparat główny RG — rozłącznik (nie wyzwala przy zwarciu).
 
-**Ochrona przed przepięciami** (WT § 183 ust. 1 pkt 10 — obowiązkowa; PN-HD 60364-4-443): krytyczna długość linii
-CRL = 315 < 1 000 (f_env = 170, N_g = 1,8) —
-ochrona wymagana także z warunku normy. W RG: SPD typ 1+2 (T1+T2), I_imp ≥ 12,5 kA/biegun, U_p ≤ 1,5 kV, U_c ≥ 275 V; układ 3+1 (TN-S) lub 4+0 przy rozdziale PEN w RG. Dalej: SPD typ 2 DC przy falowniku (U_CPV ≥ U_oc,max łańcucha) — jeśli nie wbudowany w falownik; SPD na wejściu linii miedzianych / antenowych (światłowód dielektryczny — bez SPD); ochrona lokalna T3 przy RACK i sterowniku PC (opcjonalnie).
+**Ochrona przed przepięciami** (WT § 183 ust. 1 pkt 10 — obowiązkowa; PN-HD 60364-4-443:2016-03 p. 443.5):
+obliczeniowy poziom ryzyka CRL = f_env/(L_P·N_g) = 315 < 1 000
+(f_env = 170, L_P = 0,30 km, N_g = 1,8) — ochrona wymagana także
+z warunku normy. W RG: SPD typ 1+2 (T1+T2), I_imp ≥ 12,5 kA/biegun, U_p ≤ 1,5 kV, U_c ≥ 275 V; układ 3+1 (TN-S) lub 4+0 przy rozdziale PEN w RG. Dalej: SPD typ 2 DC przy falowniku (U_CPV ≥ U_oc,max łańcucha) — jeśli nie wbudowany w falownik; SPD na wejściu linii miedzianych / antenowych (światłowód dielektryczny — bez SPD); ochrona lokalna T3 przy RACK i sterowniku PC (opcjonalnie).
 Kategorie wytrzymałości udarowej: złącze — IV (6 kV), RG i oprzewodowanie — III (4 kV), odbiorniki — II (2,5 kV),
 elektronika chroniona — I (1,5 kV); U_p ochronników w RG ≤ 2,5 kV (W-186).
 
@@ -405,7 +434,7 @@ Bilans obejmuje urządzenia elektryczne stanowiące stałe wyposażenie budowlan
 technologicznych nie ma (budynek mieszkalny jednorodzinny). Moc szczytową wyznaczono ze współczynników
 jednoczesności k_j [ZAŁ] dla grup odbiorników; mikroinstalacja PV (generacja) nie pomniejsza bilansu poboru.
 
-**Tabela 7. Bilans mocy — grupy odbiorników**
+**Tabela 6. Bilans mocy — grupy odbiorników**
 
 | Grupa odbiorników | Obwody | P_i [kW] | k_j | P_s [kW] | DLM |
 |---|---|---|---|---|---|
@@ -419,47 +448,53 @@ jednoczesności k_j [ZAŁ] dla grup odbiorników; mikroinstalacja PV (generacja)
 | pompa ciepła | D6 | 2,67 | 1,00 | 2,67 | — |
 | grzałka rezerwowa | D7 | 6,00 | 1,00 | 6,00 | tak |
 | sterowanie ogrzewania | D8 | 0,30 | 1,00 | 0,30 | — |
-| wentylacja mechaniczna | D9 | 0,18 | 1,00 | 0,18 | — |
+| wentylacja mechaniczna | D9 | 0,10 | 1,00 | 0,10 | — |
 | ładowanie EV | D11 | 11,00 | 1,00 | 11,00 | tak |
 | napędy (bramy, osłony) | D12, D13, D16 | 2,70 | 0,30 | 0,81 | — |
 | teletechnika | D14 | 0,20 | 1,00 | 0,20 | — |
 | pompa wody deszczowej | D15 | 0,80 | 0,30 | 0,24 | — |
-| Razem (bez zarządzania mocą) |  | 71,43 | — | 41,32 |  |
+| Razem (bez zarządzania mocą) |  | 71,34 | — | 41,24 |  |
 
 *Źródło: lamela.obliczenia.elektryka.bilans (odbiorniki z modelu i z doboru urządzeń PT-3 IS)*
 
-**Tabela 8. Moc elektryczna urządzeń ogrzewczych i wentylacyjnych (§ 23 pkt 8 lit. b)**
+**Tabela 7. Moc elektryczna urządzeń ogrzewczych i wentylacyjnych (§ 23 pkt 8 lit. b)**
 
 | Urządzenie | Obwód | P_el [kW] | Fazy |
 |---|---|---|---|
 | Pompa ciepła — jednostka zewnętrzna (PC-R290-07 (przykład)) | D6 | 2,67 | 1 |
 | Grzałka rezerwowa PC / zasobnika c.w.u. (6,0 kW) | D7 | 6,00 | 3 |
 | Sterowanie PC, pompy obiegowe, listwy ogrzewania podłogowego | D8 | 0,30 | 1 |
-| Rekuperator (V ≈ 365 m³/h) | D9 | 0,18 | 1 |
+| Rekuperator (V ≈ 365 m³/h) | D9 | 0,10 | 1 |
 
-*Źródło: dobór urządzeń — PT-3 IS; bilans — PT-4 IE*
+Centrala wentylacyjna: moc wentylatorów P = SFP·V przy strumieniu projektowym — ta sama wartość co w doborze centrali w PT-3 IS.
 
-**Moc szczytowa bez zarządzania mocą** P_s = 41,3 kW > moc przyłączeniowa 27 kW —
+*Źródło: dobór urządzeń — PT-3 IS; bilans — PT-4*
+
+**Moc szczytowa bez zarządzania mocą** P_s = 41,2 kW > moc przyłączeniowa 27 kW —
 **wymagane dynamiczne zarządzanie mocą (DLM)**: ograniczenie prądu ładowania EV i blokada grzałki rezerwowej
-przy przekroczeniu mocy (pomiar prądów faz za licznikiem, sterownik DLM w RG). **Moc szczytowa z DLM**
-P_s,DLM = 26,2 kW ≤ 27 kW; prąd szczytowy I_B = 39,8 A ≤
-40 A (zabezpieczenie przedlicznikowe). Kontrolnie wg N SEP-E-002 (30 kVA + ogrzewanie elektryczne):
+przy przekroczeniu mocy (pomiar prądów faz za licznikiem, sterownik DLM w RG). **Nastawa DLM** z zapasem
+regulacji z = 5 % [ZAŁ] (czas reakcji, histereza): moc P_lim = 25,01 kW,
+prąd fazowy I_nast = 38,0 A (przy zabezpieczeniu 40 A). **Moc szczytowa z DLM**
+P_s,DLM = P_nst + w·P_st = 24,24 + 0,036·17,00 = 24,85 kW ≤
+27 kW, gdzie w — współczynnik ograniczenia odbiorników sterowanych, ten sam w mocy całkowitej
+i w podziale na fazy (tabela niżej); prąd szczytowy I_B = 37,8 A ≤ 40 A
+(zabezpieczenie przedlicznikowe). Kontrolnie wg N SEP-E-002 (30 kVA + ogrzewanie elektryczne):
 37,2 kW [NZW]. Moc przyłączeniowa 27 kW ≤ 40 kW
 (grupa V) — do wniosku o warunki przyłączenia.
 
-**Tabela 9. Podział mocy szczytowej (z DLM) na fazy**
+**Tabela 8. Podział mocy szczytowej (z DLM) na fazy**
 
 | Faza | P_s [kW] | I [A] |
 |---|---|---|
-| L1 | 8,74 | 40,00 |
-| L2 | 8,74 | 39,99 |
-| L3 | 8,73 | 39,96 |
+| L1 | 8,30 | 38,00 |
+| L2 | 8,27 | 37,86 |
+| L3 | 8,27 | 37,86 |
 
-Asymetria (max − min)/średnia = 0,1 %; cos φ = 0,95.
+Moc faz z DLM (ten sam współczynnik w = 0,036); suma faz = P_s,DLM = 24,85 kW. Prąd najbardziej obciążonej fazy 38,0 A ≤ nastawa DLM 38,0 A < 40 A. Asymetria (max − min)/średnia = 0,4 %; cos φ = 0,95.
 
 ## Obliczenia — § 23 pkt 8 RPB — założenia, wyniki, dobór
 
-Obliczenia wykonano bibliotekami `lamela.obliczenia.elektryka` na bieżącym modelu (łącznie 140 warunków
+Obliczenia wykonano bibliotekami `lamela.obliczenia.elektryka` na bieżącym modelu (łącznie 141 warunków
 sprawdzających). Zestawienie wyników rozstrzygających — tabela poniżej; w obwodach odbiorczych pokazano obwód
 z najmniejszym zapasem dla każdego kryterium. Pełne obliczenia z wzorami, danymi i wszystkimi warunkami — kolejne podrozdziały.
 
@@ -477,7 +512,7 @@ z najmniejszym zapasem dla każdego kryterium. Pełne obliczenia z wzorami, dany
 
 *[Pełna treść obliczeń — w PDF; źródło: lamela.obliczenia.elektryka.pv]*
 
-### Obliczenia: ocena ryzyka piorunowego, uziom — PN-EN 62305-2
+### Obliczenia: ocena ryzyka piorunowego, uziom — PN-EN 62305-2:2008 (zał. 1 WT)
 
 *[Pełna treść obliczeń — w PDF; źródło: lamela.obliczenia.elektryka.odgromowa]*
 
@@ -519,14 +554,14 @@ wymagane z tabeli, wprowadzony do obrotu zgodnie z przepisami o wyrobach budowla
 (DWU, deklaracja zgodności UE). Po wyborze wyrobów dane DTR wprowadzić do `model/instalacje.yaml` (`wyroby`)
 i przeliczyć tom (E-13).
 
-**Tabela 10. Wyroby — parametry wymagane (wyroby przykładowe — lub równoważne)**
+**Tabela 9. Wyroby — parametry wymagane (wyroby przykładowe — lub równoważne)**
 
 | Wyrób | Parametry wymagane |
 |---|---|
 | Rozdzielnica główna RG | PN-EN IEC 61439-3; ≥ IP40; rezerwa miejsca ≥ 20 % modułów; szyna PE/N oddzielna (TN-S) |
 | Wyłączniki nadprądowe, RCBO, RCD | PN-EN 60898-1, PN-EN 61009-1, PN-EN 61008-1; zdolność łączeniowa I_cn ≥ 6 kA; charakterystyki i prądy znamionowe wg zestawienia obwodów; RCD typ A (min.), typ F/B dla urządzeń z przekształtnikami wg DTR |
 | Ochronniki przepięć (SPD) | PN-EN IEC 61643-11:2026-04; SPD typ 1+2 (T1+T2), I_imp ≥ 12,5 kA/biegun, U_p ≤ 1,5 kV, U_c ≥ 275 V; układ 3+1 (TN-S) lub 4+0 przy rozdziale PEN w RG |
-| Przewody i kable | YDYp / YDY 450/750 V (Cu); YKY 0,6/1 kV w ziemi; H1Z2Z2-K (PN-EN 50618) po stronie DC PV; przekroje wg zestawienia obwodów i rozdz. 1 |
+| Przewody i kable | YDYp / YDY 450/750 V (Cu); WLZ YKY 5×25 0,6/1 kV w ziemi; H1Z2Z2-K (PN-EN 50618:2015-03) 10 mm² po stronie DC PV; przekroje obwodów odbiorczych wg zestawienia obwodów |
 | Moduł fotowoltaiczny | P_max ≥ 430 Wp; U_oc ≤ 38,9 V; I_sc ≤ 14,0 A; wymiary ≤ 1,722 × 1,134 m; PN-EN IEC 61215, PN-EN IEC 61730 |
 | Falownik PV 3-fazowy | P_AC ≤ 6,0 kW; U_DC,max ≥ 1 000 V; zakres MPPT obejmujący 196–298 V; ≥ 2 wejścia MPPT; I_MPPT ≥ 16,0 A; certyfikat NC RfG (lista PTPiREE); PN-EN 50549-1; SPD DC i rozłącznik DC wbudowane lub zewnętrzne |
 | Punkt ładowania EV | tryb 3, PN-EN IEC 61851-1; 11 kW 3f; wejście DLM (ograniczenie prądu); detekcja prądu stałego RDC-DD 6 mA albo RCD typ B |
@@ -547,7 +582,7 @@ systemu). Tor światłowodowy — pomiar tłumienności (≤ 1,2 dB),
 okablowanie strukturalne — pomiary kat. 6A (PN-EN 50173-4). Protokoły badań instalacji dołącza się do
 zawiadomienia o zakończeniu budowy (PB art. 57 ust. 1 pkt 4 lit. a).
 
-**Tabela 11. Największa dopuszczalna impedancja pętli zwarcia (t ≤ 0,4 s)**
+**Tabela 10. Największa dopuszczalna impedancja pętli zwarcia (t ≤ 0,4 s)**
 
 | Zabezpieczenie | I_a [A] | Z_s,max = U₀/I_a [Ω] |
 |---|---|---|
@@ -560,10 +595,18 @@ Wartość zmierzoną w temperaturze otoczenia porównać z Z_s,max z uwzględnie
 
 ## Braki danych i zgodność części rysunkowej — rejestr wymagań E.1–E.2
 
-Generator rysunków IE nie wykazał braków danych modelu (`projekt/06_PT_instalacje_elektryczne/BRAKI_DANYCH.md` — tabela pusta).
+**Tabela 11. Braki danych modelu wykazane przy generowaniu rysunków (BRAKI_DANYCH.md)**
+
+| Lp. | Element | Brak / stan w modelu | Arkusze |
+|---|---|---|---|
+| 1 | PV — rozmieszczenie modułów | w polu użytkowym dachu D1 zmieszczono 10 z 15 modułów (odsunięcia od krawędzi, otworów, czerpni/wyrzutni) | PT-IE-10 |
+| 2 | PV — trasa DC | brak w modelu trasy przewodów DC i przepustu dachowego — przyjęto trasę po dachach (poza drogami ewakuacyjnymi) do pom. technicznego | PT-IE-10 |
+| 3 | Punkty instalacji elektrycznych i teletechnicznych | model nie zawiera położeń opraw, łączników, gniazd i punktów teletechnicznych — rozmieszczenie algorytmiczne (opis w uwagach arkuszy) | PT-IE-01, PT-IE-02, PT-IE-03, PT-IE-04, PT-IE-05, PT-IE-06, PT-IE-07, PT-IE-08, PT-IE-09, PT-IE-11, PT-IE-12 |
+| 4 | Trasy teletechniczne (pion, RACK) | brak w modelu pionu/tras teletechnicznych — przyjęto pion proponowany (wspólna lokalizacja z pionem wentylacyjnym) | PT-IE-07, PT-IE-08, PT-IE-09 |
 
 **Założenia projektowe do potwierdzenia [ZAŁ]** (z obliczeń):
 
+* DLM (dynamiczne zarządzanie mocą): ograniczenie mocy ładowarki EV i blokada grzałki PC przy przekroczeniu mocy przyłączeniowej; nastawa DLM 95 % granicy (moc przyłączeniowa, prąd zabezpieczenia przedlicznikowego) — zapas regulacji na czas reakcji i histerezę [ZAŁ].
 * Moduł: PV-430 TOPCon (dane przykładowe); falownik: FAL-6K-3P (dane przykładowe) [ZAŁ — zastąpić DTR wybranych wyrobów, E-13].
 * Obwody gniazd: moc umowna 2,0 kW/obwód; oświetlenie LED 5 W/m² [ZAŁ].
 * Temperatura otoczenia 30 °C (powietrze), 20 °C (grunt); grupowanie 2 obwodów (k = 0,80) [ZAŁ].
@@ -572,11 +615,7 @@ Generator rysunków IE nie wykazał braków danych modelu (`projekt/06_PT_instal
 
 ### Zgodność rysunków z bieżącymi obliczeniami
 
-Kontrola automatyczna porównała treść arkuszy (schemat RG, opisy urządzeń) z wynikami obliczeń tomu. Wiążące są wartości z obliczeń (część opisowa); arkusze wymagają ponownego wygenerowania:
-
-* PT-IE-04: model PC PC-R290-12 (obliczenia: PC-R290-07)
-* PT-IE-06, PT-IE-14: strumień centrali 437 m³/h (obliczenia: 365 m³/h)
-* PT-IE-14 (schemat RG) — 25 obwodów niezgodnych z bieżącymi obliczeniami (zabezpieczenie / przewód / faza): L1: rysunek B10 / YDYp 3×1,5 / L2, obliczenia B10 / YDYp 3×1,5 / L1; L2: rysunek B10 / YDYp 3×1,5 / L1, obliczenia B10 / YDYp 3×1,5 / L2; L3: rysunek B10 / YDYp 3×1,5 / L2, obliczenia B10 / YDYp 3×1,5 / L3; L4: rysunek B10 / YDYp 3×1,5 / L3, obliczenia B10 / YDYp 3×1,5 / L1; L5: rysunek B10 / YDYp 3×1,5 / L1, obliczenia B10 / YDYp 3×1,5 / L2; G1: rysunek B16 / YDYp 3×2,5 / L3, obliczenia B16 / YDYp 3×2,5 / L1; G3: rysunek B16 / YDYp 3×2,5 / L1, obliczenia B16 / YDYp 3×2,5 / L2; G4: rysunek B16 / YDYp 3×4 / L2, obliczenia B16 / YDYp 3×4 / L1; G6: rysunek B16 / YDYp 3×2,5 / L2, obliczenia B16 / YDYp 3×2,5 / L1; G7: rysunek B16 / YDYp 3×2,5 / L1, obliczenia B16 / YDYp 3×2,5 / L3; G9: rysunek B16 / YDYp 3×4 / L3, obliczenia B16 / YDYp 3×4 / L1; G10: rysunek B16 / YDYp 3×4 / L2, obliczenia B16 / YDYp 3×4 / L3; G11: rysunek B16 / YDYp 3×2,5 / L1, obliczenia B16 / YDYp 3×2,5 / L2; G12: rysunek B16 / YDYp 3×4 / L3, obliczenia B16 / YDYp 3×4 / L1; G13: rysunek B16 / YDYp 3×2,5 / L1, obliczenia B16 / YDYp 3×2,5 / L2; G14: rysunek B16 / YDYp 3×4 / L2, obliczenia B16 / YDYp 3×4 / L3; D2: rysunek B16 / YDYp 3×2,5 / L1, obliczenia B16 / YDYp 3×2,5 / L2; D4: rysunek B16 / YDYp 3×2,5 / L3, obliczenia B16 / YDYp 3×2,5 / L2; D5: rysunek B16 / YDYp 3×2,5 / L2, obliczenia B16 / YDYp 3×2,5 / L3; D6: rysunek 3P C16 / YDYp 5×2,5 / 3f, obliczenia C16 / YDYp 3×2,5 / L1; D12: rysunek B10 / YDYp 3×1,5 / L1, obliczenia B10 / YDYp 3×1,5 / L3; D13: rysunek B16 / YKY 3×2,5 / L2, obliczenia B16 / YKY 3×2,5 / L1; D14: rysunek B16 / YDYp 3×2,5 / L1, obliczenia B16 / YDYp 3×2,5 / L2; D15: rysunek B16 / YKY 3×2,5 / L2, obliczenia B16 / YKY 3×2,5 / L1; D16: rysunek B10 / YDYp 3×1,5 / L1, obliczenia B10 / YDYp 3×1,5 / L2
+Kontrola automatyczna nie wykazała rozbieżności między arkuszami a bieżącymi obliczeniami.
 
 Uwagi generatora arkuszy (raport_widokow.json):
 
@@ -586,17 +625,17 @@ Uwagi generatora arkuszy (raport_widokow.json):
 
 | Nr | Tytuł | Skala | Format | Uwagi |
 |---|---|---|---|---|
-| PT-IE-01 | INSTALACJA OŚWIETLENIA — RZUT PARTERU | 1:50 | A3×3 |  |
-| PT-IE-02 | INSTALACJA OŚWIETLENIA — RZUT I PIĘTRA | 1:50 | A3×3 |  |
-| PT-IE-03 | INSTALACJA OŚWIETLENIA — RZUT II PIĘTRA | 1:50 | A3×3 |  |
-| PT-IE-04 | GNIAZDA I ZASILANIE URZĄDZEŃ — RZUT PARTERU | 1:50 | A3×3 |  |
-| PT-IE-05 | GNIAZDA I ZASILANIE URZĄDZEŃ — RZUT I PIĘTRA | 1:50 | A3×3 |  |
-| PT-IE-06 | GNIAZDA I ZASILANIE URZĄDZEŃ — RZUT II PIĘTRA | 1:50 | A3×3 |  |
-| PT-IE-07 | TELETECHNIKA — RZUT PARTERU | 1:50 | A3×3 |  |
-| PT-IE-08 | TELETECHNIKA — RZUT I PIĘTRA | 1:50 | A3×3 |  |
-| PT-IE-09 | TELETECHNIKA — RZUT II PIĘTRA | 1:50 | A3×3 |  |
-| PT-IE-10 | INSTALACJA FOTOWOLTAICZNA — RZUT DACHU | 1:50 | A3×3 |  |
-| PT-IE-11 | INSTALACJA FOTOWOLTAICZNA — RZUT PARTERU (FALOWNIK, SPD) | 1:50 | A3×3 |  |
-| PT-IE-12 | UZIOM I POŁĄCZENIA WYRÓWNAWCZE — RZUT PARTERU | 1:50 | A3×3 |  |
-| PT-IE-13 | OCHRONA ODGROMOWA I WYRÓWNANIE POTENCJAŁÓW — RZUT DACHU | 1:50 | A3×3 |  |
-| PT-IE-14 | SCHEMAT ROZDZIELNICY GŁÓWNEJ RG | — | A3×3 |  |
+| PT-IE-01 | INSTALACJA OŚWIETLENIA — RZUT PARTERU | 1:50 | nst. 690×420 |  |
+| PT-IE-02 | INSTALACJA OŚWIETLENIA — RZUT I PIĘTRA | 1:50 | nst. 690×297 |  |
+| PT-IE-03 | INSTALACJA OŚWIETLENIA — RZUT II PIĘTRA | 1:50 | nst. 690×297 |  |
+| PT-IE-04 | GNIAZDA I ZASILANIE URZĄDZEŃ — RZUT PARTERU | 1:50 | nst. 570×594 |  |
+| PT-IE-05 | GNIAZDA I ZASILANIE URZĄDZEŃ — RZUT I PIĘTRA | 1:50 | A2 |  |
+| PT-IE-06 | GNIAZDA I ZASILANIE URZĄDZEŃ — RZUT II PIĘTRA | 1:50 | A2 |  |
+| PT-IE-07 | TELETECHNIKA — RZUT PARTERU | 1:50 | nst. 520×594 |  |
+| PT-IE-08 | TELETECHNIKA — RZUT I PIĘTRA | 1:50 | nst. 690×297 |  |
+| PT-IE-09 | TELETECHNIKA — RZUT II PIĘTRA | 1:50 | nst. 690×297 |  |
+| PT-IE-10 | INSTALACJA FOTOWOLTAICZNA — RZUT DACHU | 1:50 | nst. 690×420 |  |
+| PT-IE-11 | INSTALACJA FOTOWOLTAICZNA — RZUT PARTERU (FALOWNIK, SPD) | 1:50 | nst. 690×420 |  |
+| PT-IE-12 | UZIOM I POŁĄCZENIA WYRÓWNAWCZE — RZUT PARTERU | 1:50 | nst. 720×420 |  |
+| PT-IE-13 | OCHRONA ODGROMOWA I WYRÓWNANIE POTENCJAŁÓW — RZUT DACHU | 1:50 | nst. 690×420 |  |
+| PT-IE-14 | SCHEMAT ROZDZIELNICY GŁÓWNEJ RG | — | nst. 870×297 |  |

@@ -5,11 +5,11 @@
 uklad: {przesuniecie: [7.6, 32.7], obrot: 0.0}
 dzialka: {nr: 123/4, obreb: 0005 Przykładowo, gmina: Przykładowo (fikcyjna), adres: ul. Lipowa (fikcyjna), pow: 1600.0, obrys: [[0.0, 0.0], [32.0, 0.0], [32.0, 50.0], [0.0, 50.0]], mpzp: uchwała nr XII/123/2024 Rady Gminy Przykładowo z 21.03.2024 — teren 3MN (fikcyjny)}
 sasiedzi:
-  - {nr: 123/3, obrys: [[-32.0, 0.0], [0.0, 0.0], [0.0, 50.0], [-32.0, 50.0]], zabudowa: [[-20.0, 22.0], [-8.0, 22.0], [-8.0, 32.0], [-20.0, 32.0]], opis: 'dom jednorodzinny, 2 kondygnacje, dach dwuspadowy (≥ 8 m od granicy)', wys: 8.5}
-  - {nr: 123/5, obrys: [[32.0, 0.0], [64.0, 0.0], [64.0, 50.0], [32.0, 50.0]], zabudowa: [[40.0, 24.0], [52.0, 24.0], [52.0, 35.0], [40.0, 35.0]], opis: dom jednorodzinny parterowy z poddaszem (≥ 8 m od granicy), wys: 7.5}
+  - {nr: 123/3, obrys: [[-32.0, 0.0], [0.0, 0.0], [0.0, 50.0], [-32.0, 50.0]], zabudowa: [[-20.0, 22.0], [-8.0, 22.0], [-8.0, 32.0], [-20.0, 32.0]], opis: 'dom jednorodzinny, 2 kondygnacje, dach dwuspadowy (≥ 8 m od granicy)', wys: 8.5, kondygnacje: 2, funkcja: m}
+  - {nr: 123/5, obrys: [[32.0, 0.0], [64.0, 0.0], [64.0, 50.0], [32.0, 50.0]], zabudowa: [[40.0, 24.0], [52.0, 24.0], [52.0, 35.0], [40.0, 35.0]], opis: dom jednorodzinny parterowy z poddaszem (≥ 8 m od granicy), wys: 7.5, kondygnacje: 2, funkcja: m}
   - {nr: '130', obrys: [[-32.0, -40.0], [64.0, -40.0], [64.0, 0.0], [-32.0, 0.0]], zabudowa: [], opis: teren rolny (R IVb) — niezabudowany}
-  - {nr: 118/2, obrys: [[-10.0, 60.0], [22.0, 60.0], [22.0, 95.0], [-10.0, 95.0]], zabudowa: [[2.0, 70.0], [14.0, 70.0], [14.0, 80.0], [2.0, 80.0]], opis: 'dom jednorodzinny, dach płaski', wys: 6.8, dach: plaski}
-  - {nr: 118/3, obrys: [[22.0, 60.0], [54.0, 60.0], [54.0, 95.0], [22.0, 95.0]], zabudowa: [[30.0, 72.0], [42.0, 72.0], [42.0, 82.0], [30.0, 82.0]], opis: 'dom jednorodzinny, dach dwuspadowy', wys: 8.0}
+  - {nr: 118/2, obrys: [[-10.0, 60.0], [22.0, 60.0], [22.0, 95.0], [-10.0, 95.0]], zabudowa: [[2.0, 70.0], [14.0, 70.0], [14.0, 80.0], [2.0, 80.0]], opis: 'dom jednorodzinny, dach płaski', wys: 6.8, dach: plaski, kondygnacje: 2, funkcja: m}
+  - {nr: 118/3, obrys: [[22.0, 60.0], [54.0, 60.0], [54.0, 95.0], [22.0, 95.0]], zabudowa: [[30.0, 72.0], [42.0, 72.0], [42.0, 82.0], [30.0, 82.0]], opis: 'dom jednorodzinny, dach dwuspadowy', wys: 8.0, kondygnacje: 2, funkcja: m}
 droga: {symbol: 1KDD, nazwa: 'ul. Lipowa (fikcyjna), klasa D', linie_rozgraniczajace: [[-40.0, 50.0], [72.0, 50.0], [72.0, 60.0], [-40.0, 60.0]], jezdnia: [[-40.0, 52.25], [72.0, 52.25], [72.0, 57.75], [-40.0, 57.75]], nawierzchnia: asfalt}
 linia_zabudowy: [[0.0, 44.0], [32.0, 44.0]]
 teren:
@@ -1226,7 +1226,7 @@ ogrodzenie:
   - {linia: [[32.0, 50.0], [32.0, 0.0], [0.0, 0.0], [0.0, 50.0]], wys: 1.5, typ: panele siatkowe zgrzewane grafit z żywopłotem}
 bramy:
   - {xy: [23.1, 50.0], szer: 5.6, typ: przesuwna, kierunek: [1.0, 0.0], wys: 1.5}
-  - {xy: [18.1, 50.0], szer: 1.0, typ: furtka, wys: 1.5}
+  - {xy: [18.1, 50.0], szer: 1.0, typ: furtka, wys: 1.5, otwieranie: {zawiasy: lewa, do: wewnatrz}}
 miejsca_postojowe:
   - {id: MP1, obrys: [[20.12, 35.9], [22.62, 35.9], [22.62, 41.8], [20.12, 41.8]], typ: garaz}
   - {id: MP2, obrys: [[22.67, 35.9], [25.17, 35.9], [25.17, 41.8], [22.67, 41.8]], typ: garaz}

@@ -1103,9 +1103,9 @@ ELEM_ZEWN = [
      "pnacza": {"pas_gruntu": "Z7", "rodzaj": "pnącza wijące / owijające (bez przylg i korzeni czepnych), dobór gatunków — arch. krajobrazu "
                                                "[DO UZUPEŁNIENIA]", "prowadzenie": "pionowo po KR-1, dalej poziomo po KR-2"},
      "uwagi": "zielona ściana (K-13) — panel zach., pełna wysokość; płaszczyzna kratownicy 0,15 m przed licem ETICS, poniżej PL-D (+3,65)"},
-    {"id": "KR-2", "typ": "kratownica_pnacza", "elewacja": "S", "sciana": "S0-02", "linia": [[15.95, -EXT], [xF + EXT - 0.12, -EXT]],
+    {"id": "KR-2", "typ": "kratownica_pnacza", "elewacja": "S", "sciana": "S0-02", "linia": [[15.95, -EXT], [r(xF + EXT - 0.12), -EXT]],
      "z_od": 1.50, "z_do": 3.45, "odsuniecie": 0.15, "oczko": 0.30, "pret": 0.012, "rama": 0.04, "mat": "STAL_OCYNK",
-     "konsole": {"xz": [[x_, z_] for x_ in (17.25, xF + EXT - 0.22) for z_ in Z_KONS[1:]], "wezel": "WZ-17",
+     "konsole": {"xz": [[x_, z_] for x_ in (17.25, r(xF + EXT - 0.22)) for z_ in Z_KONS[1:]], "wezel": "WZ-17",
                  "opis": "jak KR-1; krawędź zach. przykręcona do ramy KR-1"},
      "pnacza": {"pas_gruntu": "Z7", "prowadzenie": "poziomo z KR-1"},
      "uwagi": "zielona ściana (K-13) — panel nad jednostką PC (od +1,50): przestrzeń zasysania za urządzeniem wolna"},

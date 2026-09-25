@@ -3,7 +3,7 @@
   "dzialka": "/home/user/aihouse/model/dzialka.yaml",
   "arkusze_cfg": "model/arkusze_ie.yaml",
   "wyposazenie": "/home/user/aihouse/model/wyposazenie.yaml",
-  "walidacja": "Walidacja: 0 błędów, 0 ostrzeżeń, 332 informacji\n  [INFO] budynek.yaml: stolarka: sekcja spoza schematu — ignorowana przez rdzeń modelu\n  [INFO] budynek.yaml: wezly: sekcja spoza schematu — ignorowana przez rdzeń modelu\n  [INFO] budynek.yaml: energia: sekcja spoza schematu — ignorowana przez rdzeń modelu\n  [INFO] budynek.yaml: konstrukcja: sekcja spoza schematu — ignorowana przez rdzeń modelu\n  [INFO] budynek.yaml: geotechnika: sekcja spoza schematu — ignorowana przez rdzeń modelu\n  [INFO] budynek.yaml: stropy[0] (ST1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: stropy[1] (ST2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: stropy[2] (ST2Z): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[0] (D1): pole 'przelewy_awaryjne' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[0] (D1): pole 'rury_spustowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[0] (D1): pole 'spadki' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[0] (D1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[1] (D2): pole 'przelewy_awaryjne' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[1] (D2): pole 'rury_spustowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[1] (D2): pole 'spadki' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[1] (D2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[2] (D3): pole 'przelewy_awaryjne' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[2] (D3): pole 'rury_spustowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[2] (D3): pole 'spadki' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[2] (D3): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[3] (D4): pole 'przelewy_awaryjne' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[3] (D4): pole 'rury_spustowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[3] (D4): pole 'spadki' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[3] (D4): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[0] (PL-E): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[1] (PL-DA): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[2] (PL-C1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[3] (PL-C2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[4] (PL-2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[5] (PL-3): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[6] (IZ-ST2Z): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[7] (PS-A): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[8] (OB-A): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[9] (OB-A2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[10] (SW1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[10] (SW1): pole 'otwierany' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[11] (WYL1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[12] (PL-D): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[0] (SL1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[1] (SL2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[2] (SL3): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[3] (SL4): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[4] (SL5): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[5] (SL6): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[6] (SL7): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[7] (SL8): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[0] (B1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[1] (B2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[2] (B3): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[3] (B4): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[4] (B5): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[5] (B6): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[6] (B7): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[7] (B8): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[8] (B9): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[9] (B10): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[10] (N1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[11] (N2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[12] (N3): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[13] (N4): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[14] (N5): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[15] (N6): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[16] (N7): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[17] (N8): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[18] (N9): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[19] (N10): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[20] (N11): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[21] (N12): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[22] (N13): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[23] (N14): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[24] (N15): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[25] (N16): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[26] (N17): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[27] (N18): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[28] (N19): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[29] (N20): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[30] (N21): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[31] (N22): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[32] (N23): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[33] (N24): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[34] (N25): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[35] (N26): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[36] (N27): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: schody[0] (SCH1): pole 'plyta' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: schody[0] (SCH1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: schody[1] (SCH2): pole 'plyta' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: schody[1] (SCH2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: lamele[0] (LAM-S): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: lamele[1] (LAM-W): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: lamele[2] (LAM-E): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: lamele[3] (LAM-P0): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: tarasy[0] (T1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: tarasy[1] (T2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: tarasy[2] (T3): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[0] (S0-01): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[1] (S0-02): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[2] (S0-03): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[3] (S0-04): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[4] (S0-05): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[5] (S0-06): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[6] (S0-07): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[7] (S0-08): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[8] (S0-09): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[9] (S0-10): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[10] (S0-11): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[11] (S0-12): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[12] (S0-13): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[13] (S0-14): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[14] (S0-15): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[15] (S0-16): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[16] (S0-17): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[17] (S0-18): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[18] (S0-19): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[19] (S0-20): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[20] (S0-21): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[21] (S0-22): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[22] (S0-23): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[23] (S1-01): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[24] (S1-02): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[25] (S1-03): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[26] (S1-04): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[27] (S1-05): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[28] (S1-06): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[29] (S1-07): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[30] (S1-08): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[31] (S1-09): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[32] (S1-10): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[33] (S1-11): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[34] (S1-12): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[35] (S1-13): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[36] (S1-14): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[37] (S1-15): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[38] (S2-01): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[39] (S2-02): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[40] (S2-03): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[41] (S2-04): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[42] (S2-05): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[43] (S2-06): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[44] (S2-07): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[45] (S2-08): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[46] (S2-09): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[47] (S2-10): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[48] (S2-11): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[49] (S2-12): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[50] (S2-13): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[51] (S2-18): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[52] (S2-14): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[53] (S2-19): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[54] (S2-15): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[55] (S2-16): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[56] (S2-17): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[0] (O0-01): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[0] (O0-01): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[0] (O0-01): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[0] (O0-01): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[1] (O0-02): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[1] (O0-02): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[1] (O0-02): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[1] (O0-02): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[2] (O0-03): pole 'bezprogowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[2] (O0-03): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[2] (O0-03): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[2] (O0-03): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[2] (O0-03): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[3] (O0-04): pole 'bezprogowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[3] (O0-04): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[3] (O0-04): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[3] (O0-04): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[3] (O0-04): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[4] (O0-05): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[4] (O0-05): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[4] (O0-05): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[4] (O0-05): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[5] (O0-06): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[5] (O0-06): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[5] (O0-06): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[5] (O0-06): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[6] (O0-07): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[7] (O0-08): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[7] (O0-08): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[7] (O0-08): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[8] (O0-09): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[8] (O0-09): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[8] (O0-09): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[9] (O0-10): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[9] (O0-10): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[9] (O0-10): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[10] (O0-11): pole 'bezprogowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[10] (O0-11): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[10] (O0-11): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[10] (O0-11): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[10] (O0-11): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[11] (O0-12): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[11] (O0-12): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[11] (O0-12): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[12] (O0-13): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[12] (O0-13): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[13] (O0-14): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[14] (O0-15): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[15] (O0-16): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[16] (O0-17): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[17] (O0-18): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[18] (O0-19): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[19] (O0-20): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[20] (O0-21): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[21] (O0-22): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[22] (O0-23): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[23] (O1-01): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[23] (O1-01): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[23] (O1-01): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[24] (O1-13): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[24] (O1-13): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[24] (O1-13): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[25] (O1-14): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[25] (O1-14): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[25] (O1-14): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[26] (O1-02): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[26] (O1-02): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[26] (O1-02): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[27] (O1-03): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[27] (O1-03): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[28] (O1-04): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[28] (O1-04): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[29] (O1-05): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[29] (O1-05): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[29] (O1-05): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[30] (O1-06): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[30] (O1-06): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[30] (O1-06): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[31] (O1-07): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[32] (O1-08): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[33] (O1-09): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[34] (O1-10): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[35] (O1-11): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[36] (O1-12): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[37] (O2-01): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[37] (O2-01): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[37] (O2-01): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[38] (O2-02): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[38] (O2-02): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[38] (O2-02): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[39] (O2-03): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[39] (O2-03): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[39] (O2-03): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[40] (O2-04): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[40] (O2-04): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[40] (O2-04): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[41] (O2-05): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[41] (O2-05): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[41] (O2-05): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[42] (O2-06): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[42] (O2-06): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[43] (O2-07): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[43] (O2-07): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[44] (O2-08): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[45] (O2-09): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[46] (O2-10): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[47] (O2-11): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[48] (O2-12): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[0] (0.01): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[0] (0.01): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[0] (0.01): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[1] (0.02): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[1] (0.02): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[1] (0.02): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[2] (0.03): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[2] (0.03): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[2] (0.03): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[3] (0.04): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[3] (0.04): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[4] (0.05): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[4] (0.05): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[4] (0.05): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[5] (0.15): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[5] (0.15): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[5] (0.15): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[6] (0.16): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[6] (0.16): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[6] (0.16): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[7] (0.06): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[7] (0.06): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[8] (0.07): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[8] (0.07): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[9] (0.08): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[10] (0.09): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[10] (0.09): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[11] (0.10): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[12] (0.11): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[12] (0.11): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[12] (0.11): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[13] (0.12): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[13] (0.12): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[13] (0.12): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[14] (0.13): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[14] (0.13): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[14] (0.13): pole 'ogrzewane' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[14] (0.13): pole 'rzedna' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[14] (0.13): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[15] (1.01): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[16] (1.02): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[17] (1.03): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[18] (1.04): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[19] (1.05): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[19] (1.05): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[20] (1.06): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[20] (1.06): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[21] (1.07): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[21] (1.07): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[21] (1.07): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[22] (1.08): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[22] (1.08): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[22] (1.08): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[23] (2.01): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[24] (2.02): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[24] (2.02): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[25] (2.03): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[26] (2.04): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[26] (2.04): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[26] (2.04): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[27] (2.05): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[28] (2.06): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[28] (2.06): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[29] (2.07): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[29] (2.07): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[29] (2.07): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[30] (0.14): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[30] (0.14): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[31] (1.09): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[31] (1.09): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[32] (2.08): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[32] (2.08): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] dzialka.yaml: odwodnienia: sekcja spoza schematu — ignorowana przez rdzeń modelu",
+  "walidacja": "Walidacja: 0 błędów, 0 ostrzeżeń, 380 informacji\n  [INFO] budynek.yaml: stolarka: sekcja spoza schematu — ignorowana przez rdzeń modelu\n  [INFO] budynek.yaml: wezly: sekcja spoza schematu — ignorowana przez rdzeń modelu\n  [INFO] budynek.yaml: energia: sekcja spoza schematu — ignorowana przez rdzeń modelu\n  [INFO] budynek.yaml: konstrukcja: sekcja spoza schematu — ignorowana przez rdzeń modelu\n  [INFO] budynek.yaml: geotechnika: sekcja spoza schematu — ignorowana przez rdzeń modelu\n  [INFO] budynek.yaml: stropy[0] (ST1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: stropy[1] (ST2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: stropy[2] (ST2Z): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[0] (D1): pole 'rzedna_pokrycia' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[0] (D1): pole 'przelewy_awaryjne' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[0] (D1): pole 'rury_spustowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[0] (D1): pole 'spadki' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[0] (D1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[1] (D2): pole 'rzedna_pokrycia' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[1] (D2): pole 'przelewy_awaryjne' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[1] (D2): pole 'rury_spustowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[1] (D2): pole 'spadki' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[1] (D2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[2] (D3): pole 'rzedna_pokrycia' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[2] (D3): pole 'przelewy_awaryjne' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[2] (D3): pole 'rury_spustowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[2] (D3): pole 'spadki' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[2] (D3): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[3] (D4): pole 'rzedna_pokrycia' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[3] (D4): pole 'przelewy_awaryjne' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[3] (D4): pole 'rury_spustowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[3] (D4): pole 'spadki' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: dachy[3] (D4): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[0] (PL-E): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[0] (PL-E): pole 'lacznik' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[0] (PL-E): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[0] (PL-E): pole 'wpusty' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[0] (PL-E): pole 'rury_spustowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[0] (PL-E): pole 'przelewy_awaryjne' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[0] (PL-E): pole 'spadek' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[1] (PL-DA): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[1] (PL-DA): pole 'lacznik' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[1] (PL-DA): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[1] (PL-DA): pole 'wpusty' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[1] (PL-DA): pole 'rury_spustowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[1] (PL-DA): pole 'przelewy_awaryjne' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[1] (PL-DA): pole 'spadek' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[2] (PL-C1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[2] (PL-C1): pole 'spadek' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[2] (PL-C1): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[3] (PL-C2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[3] (PL-C2): pole 'spadek' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[3] (PL-C2): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[4] (PL-2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[4] (PL-2): pole 'lacznik' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[4] (PL-2): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[4] (PL-2): pole 'wpusty' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[4] (PL-2): pole 'rury_spustowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[4] (PL-2): pole 'przelewy_awaryjne' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[4] (PL-2): pole 'spadek' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[5] (PL-3): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[5] (PL-3): pole 'lacznik' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[5] (PL-3): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[5] (PL-3): pole 'wpusty' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[5] (PL-3): pole 'rury_spustowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[5] (PL-3): pole 'przelewy_awaryjne' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[5] (PL-3): pole 'spadek' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[6] (IZ-ST2Z): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[6] (IZ-ST2Z): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[7] (PS-A): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[7] (PS-A): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[8] (OB-A): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[8] (OB-A): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[9] (OB-A2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[9] (OB-A2): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[10] (SW1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[10] (SW1): pole 'otwierany' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[10] (SW1): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[11] (WYL1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[11] (WYL1): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[12] (PL-D): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[12] (PL-D): pole 'odwodnienie' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[12] (PL-D): pole 'wpusty' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[12] (PL-D): pole 'rury_spustowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[12] (PL-D): pole 'przelewy_awaryjne' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: wsporniki_plyty[12] (PL-D): pole 'spadek' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[0] (SL1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[1] (SL2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[2] (SL3): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[3] (SL4): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[4] (SL5): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[5] (SL6): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[6] (SL7): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: slupy[7] (SL8): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[0] (B1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[1] (B2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[2] (B3): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[3] (B4): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[4] (B5): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[5] (B6): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[6] (B7): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[7] (B8): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[8] (B9): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[9] (B10): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[10] (N1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[11] (N2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[12] (N3): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[13] (N4): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[14] (N5): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[15] (N6): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[16] (N7): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[17] (N8): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[18] (N9): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[19] (N10): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[20] (N11): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[21] (N12): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[22] (N13): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[23] (N14): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[24] (N15): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[25] (N16): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[26] (N17): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[27] (N18): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[28] (N19): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[29] (N20): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[30] (N21): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[31] (N22): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[32] (N23): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[33] (N24): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[34] (N25): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[35] (N26): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[36] (N27): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: belki[37] (N28): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: schody[0] (SCH1): pole 'plyta' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: schody[0] (SCH1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: schody[1] (SCH2): pole 'plyta' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: schody[1] (SCH2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: lamele[0] (LAM-S): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: lamele[1] (LAM-W): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: lamele[2] (LAM-E): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: lamele[3] (LAM-P0): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: tarasy[0] (T1): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: tarasy[1] (T2): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: tarasy[2] (T3): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[0] (S0-01): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[1] (S0-02): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[2] (S0-03): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[3] (S0-04): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[4] (S0-05): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[5] (S0-06): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[6] (S0-07): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[7] (S0-08): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[8] (S0-09): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[9] (S0-10): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[10] (S0-11): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[11] (S0-12): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[12] (S0-13): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[13] (S0-14): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[14] (S0-15): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[15] (S0-16): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[16] (S0-17): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[17] (S0-18): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[18] (S0-19): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[19] (S0-20): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[20] (S0-21): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[21] (S0-22): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[22] (S0-23): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[23] (S1-01): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[24] (S1-02): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[25] (S1-03): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[26] (S1-04): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[27] (S1-05): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[28] (S1-06): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[29] (S1-07): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[30] (S1-08): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[31] (S1-09): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[32] (S1-10): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[33] (S1-11): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[34] (S1-12): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[35] (S1-13): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[36] (S1-14): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[37] (S1-15): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[38] (S2-01): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[39] (S2-02): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[40] (S2-03): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[41] (S2-04): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[42] (S2-05): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[43] (S2-06): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[44] (S2-07): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[45] (S2-08): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[46] (S2-09): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[47] (S2-10): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[48] (S2-11): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[49] (S2-12): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[50] (S2-13): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[51] (S2-18): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[52] (S2-14): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[53] (S2-19): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[54] (S2-15): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[55] (S2-16): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: sciany[56] (S2-17): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[0] (O0-01): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[0] (O0-01): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[0] (O0-01): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[0] (O0-01): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[1] (O0-02): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[1] (O0-02): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[1] (O0-02): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[1] (O0-02): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[2] (O0-03): pole 'bezprogowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[2] (O0-03): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[2] (O0-03): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[2] (O0-03): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[2] (O0-03): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[3] (O0-04): pole 'bezprogowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[3] (O0-04): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[3] (O0-04): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[3] (O0-04): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[3] (O0-04): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[4] (O0-05): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[4] (O0-05): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[4] (O0-05): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[4] (O0-05): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[5] (O0-06): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[5] (O0-06): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[5] (O0-06): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[5] (O0-06): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[6] (O0-07): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[6] (O0-07): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[7] (O0-08): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[7] (O0-08): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[7] (O0-08): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[8] (O0-09): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[8] (O0-09): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[8] (O0-09): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[9] (O0-10): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[9] (O0-10): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[9] (O0-10): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[10] (O0-11): pole 'bezprogowe' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[10] (O0-11): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[10] (O0-11): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[10] (O0-11): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[10] (O0-11): pole 'prog' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[11] (O0-12): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[11] (O0-12): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[11] (O0-12): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[12] (O0-13): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[12] (O0-13): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[13] (O0-14): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[14] (O0-15): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[15] (O0-16): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[16] (O0-17): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[17] (O0-18): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[18] (O0-19): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[19] (O0-20): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[20] (O0-21): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[21] (O0-22): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[22] (O0-24): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[23] (O0-23): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[24] (O1-01): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[24] (O1-01): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[24] (O1-01): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[25] (O1-13): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[25] (O1-13): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[25] (O1-13): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[26] (O1-14): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[26] (O1-14): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[26] (O1-14): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[27] (O1-02): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[27] (O1-02): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[27] (O1-02): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[28] (O1-03): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[28] (O1-03): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[29] (O1-04): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[29] (O1-04): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[30] (O1-05): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[30] (O1-05): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[30] (O1-05): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[31] (O1-06): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[31] (O1-06): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[31] (O1-06): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[32] (O1-07): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[33] (O1-08): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[34] (O1-09): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[35] (O1-10): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[36] (O1-11): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[37] (O1-12): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[38] (O2-01): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[38] (O2-01): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[38] (O2-01): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[39] (O2-02): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[39] (O2-02): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[39] (O2-02): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[40] (O2-03): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[40] (O2-03): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[40] (O2-03): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[41] (O2-04): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[41] (O2-04): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[41] (O2-04): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[42] (O2-05): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[42] (O2-05): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[42] (O2-05): pole 'oslona_montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[43] (O2-06): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[43] (O2-06): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[44] (O2-07): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[44] (O2-07): pole 'montaz' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[45] (O2-08): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[46] (O2-09): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[47] (O2-10): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[48] (O2-11): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: otwory[49] (O2-12): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[0] (0.01): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[0] (0.01): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[0] (0.01): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[1] (0.02): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[1] (0.02): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[1] (0.02): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[2] (0.03): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[2] (0.03): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[2] (0.03): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[3] (0.04): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[3] (0.04): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[4] (0.05): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[4] (0.05): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[4] (0.05): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[5] (0.15): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[5] (0.15): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[5] (0.15): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[6] (0.16): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[6] (0.16): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[6] (0.16): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[7] (0.06): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[7] (0.06): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[8] (0.07): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[8] (0.07): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[9] (0.08): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[10] (0.09): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[10] (0.09): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[11] (0.10): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[12] (0.11): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[12] (0.11): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[12] (0.11): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[13] (0.12): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[13] (0.12): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[13] (0.12): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[14] (0.13): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[14] (0.13): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[14] (0.13): pole 'ogrzewane' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[14] (0.13): pole 'rzedna' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[14] (0.13): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[15] (1.01): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[16] (1.02): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[17] (1.03): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[18] (1.04): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[19] (1.05): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[19] (1.05): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[20] (1.06): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[20] (1.06): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[21] (1.07): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[21] (1.07): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[21] (1.07): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[22] (1.08): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[22] (1.08): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[22] (1.08): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[23] (2.01): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[24] (2.02): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[24] (2.02): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[25] (2.03): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[26] (2.04): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[26] (2.04): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[26] (2.04): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[27] (2.05): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[27] (2.05): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[28] (2.06): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[28] (2.06): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[29] (2.07): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[29] (2.07): pole 'podloga' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[29] (2.07): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[30] (0.14): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[30] (0.14): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[31] (1.09): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[31] (1.09): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[32] (2.08): pole 'rodzaj' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] budynek.yaml: pomieszczenia[32] (2.08): pole 'uwagi' spoza schematu — ignorowane przez rdzeń modelu\n  [INFO] dzialka.yaml: odwodnienia: sekcja spoza schematu — ignorowana przez rdzeń modelu\n  [INFO] dzialka.yaml: zielen[6]: pole 'opis' spoza schematu — ignorowane przez rdzeń modelu",
   "przekroje": {
     "A": {
       "o": [
@@ -30,7 +30,7 @@
     {
       "nr": "PT-IE-01",
       "tytul": "INSTALACJA OŚWIETLENIA — RZUT PARTERU",
-      "format": "A3x3",
+      "format": "690×420",
       "typ": [
         "inst_rzut"
       ],
@@ -39,6 +39,180 @@
         "INSTALACJA OŚWIETLENIA — RZUT PARTERU"
       ],
       "qa_kind": null,
+      "wymiary_mm": [
+        690.0,
+        420.0
+      ],
+      "pole_m2": 0.2898,
+      "skladanie": {
+        "zgiecia_pionowe": [
+          140.0,
+          260.0,
+          380.0,
+          500.0
+        ],
+        "zgiecia_poziome": [
+          297.0
+        ],
+        "pasy": [
+          140.0,
+          120.0,
+          120.0,
+          120.0,
+          190.0
+        ],
+        "rzedy": [
+          297.0,
+          123.0
+        ],
+        "n_pasow": 5,
+        "n_rzedow": 2,
+        "warstwy": 10,
+        "ocena": "poprawne",
+        "ocena_pion": "poprawne",
+        "ocena_poziom": "poprawne",
+        "tabliczka_na_wierzchu": true,
+        "uwagi": [
+          "najwęższy pas pośredni 120 mm",
+          "górny rząd 123 mm (niepełny)"
+        ]
+      },
+      "uklad": {
+        "format": "690×420",
+        "wymiary_mm": [
+          690.0,
+          420.0
+        ],
+        "pole_m2": 0.2898,
+        "standardowy": false,
+        "tryb": "ekonomiczny",
+        "koszt": 0.3224,
+        "wypelnienie_szac": 0.693,
+        "uklad_widokow": "wiersz",
+        "skladanie": {
+          "zgiecia_pionowe": [
+            140.0,
+            260.0,
+            380.0,
+            500.0
+          ],
+          "zgiecia_poziome": [
+            297.0
+          ],
+          "pasy": [
+            140.0,
+            120.0,
+            120.0,
+            120.0,
+            190.0
+          ],
+          "rzedy": [
+            297.0,
+            123.0
+          ],
+          "n_pasow": 5,
+          "n_rzedow": 2,
+          "warstwy": 10,
+          "ocena": "poprawne",
+          "ocena_pion": "poprawne",
+          "ocena_poziom": "poprawne",
+          "tabliczka_na_wierzchu": true,
+          "uwagi": [
+            "najwęższy pas pośredni 120 mm",
+            "górny rząd 123 mm (niepełny)"
+          ]
+        },
+        "kandydaci": [
+          {
+            "format": "690×420",
+            "wymiary_mm": [
+              690,
+              420
+            ],
+            "koszt": 0.3224,
+            "pole_m2": 0.2898,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "570×594",
+            "wymiary_mm": [
+              570,
+              594
+            ],
+            "koszt": 0.3487,
+            "pole_m2": 0.3386,
+            "skladanie": "dobre"
+          },
+          {
+            "format": "570×841",
+            "wymiary_mm": [
+              570,
+              841
+            ],
+            "koszt": 0.5135,
+            "pole_m2": 0.4794,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "570×891",
+            "wymiary_mm": [
+              570,
+              891
+            ],
+            "koszt": 0.5231,
+            "pole_m2": 0.5079,
+            "skladanie": "dobre"
+          }
+        ],
+        "bloki": [
+          [
+            "tabliczka",
+            [
+              500.0,
+              10.0,
+              680.0,
+              113.0
+            ]
+          ],
+          [
+            "róża i podziałka",
+            [
+              500.0,
+              118.0,
+              680.0,
+              148.8
+            ]
+          ],
+          [
+            "legenda",
+            [
+              314.0,
+              48.8,
+              494.0,
+              97.0
+            ]
+          ],
+          [
+            "obw",
+            [
+              500.0,
+              211.9,
+              680.0,
+              237.0
+            ]
+          ],
+          [
+            "uwagi[1–6]",
+            [
+              128.0,
+              40.4,
+              308.0,
+              86.5
+            ]
+          ]
+        ],
+        "kolizje": []
+      },
       "pliki": {
         "pdf": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-01_instalacja_oswietlenia_rzut_parteru.pdf",
         "png": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-01_instalacja_oswietlenia_rzut_parteru.png",
@@ -48,18 +222,18 @@
         "ok": true,
         "errors": [],
         "warnings": [
-          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
+          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 1271,
-          "napisy": 251,
+          "prymitywy": 1343,
+          "napisy": 255,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 7.4,
+      "czas_s": 7.5,
       "png_kontrola": {
         "px": [
-          5262,
+          4075,
           2481
         ],
         "dpi_eff": [
@@ -71,12 +245,28 @@
           150.01239999999999
         ],
         "ok": true
+      },
+      "wypelnienie": {
+        "wypelnienie": 0.914,
+        "wypelnienie_rys": 0.908,
+        "wypelnienie_kontur": 0.605,
+        "pole_arkusza_m2": 0.2898,
+        "pole_ramki_m2": 0.264,
+        "pusty_prostokat_mm": [
+          480,
+          30
+        ],
+        "przyciety_mm": [
+          683,
+          412
+        ],
+        "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
       }
     },
     {
       "nr": "PT-IE-02",
       "tytul": "INSTALACJA OŚWIETLENIA — RZUT I PIĘTRA",
-      "format": "A3x3",
+      "format": "690×297",
       "typ": [
         "inst_rzut"
       ],
@@ -85,6 +275,182 @@
         "INSTALACJA OŚWIETLENIA — RZUT I PIĘTRA"
       ],
       "qa_kind": null,
+      "wymiary_mm": [
+        690.0,
+        297.0
+      ],
+      "pole_m2": 0.2049,
+      "skladanie": {
+        "zgiecia_pionowe": [
+          140.0,
+          260.0,
+          380.0,
+          500.0
+        ],
+        "zgiecia_poziome": [],
+        "pasy": [
+          140.0,
+          120.0,
+          120.0,
+          120.0,
+          190.0
+        ],
+        "rzedy": [
+          297.0
+        ],
+        "n_pasow": 5,
+        "n_rzedow": 1,
+        "warstwy": 5,
+        "ocena": "poprawne",
+        "ocena_pion": "poprawne",
+        "ocena_poziom": "dobre",
+        "tabliczka_na_wierzchu": true,
+        "uwagi": [
+          "najwęższy pas pośredni 120 mm"
+        ]
+      },
+      "uklad": {
+        "format": "690×297",
+        "wymiary_mm": [
+          690.0,
+          297.0
+        ],
+        "pole_m2": 0.2049,
+        "standardowy": false,
+        "tryb": "ekonomiczny",
+        "koszt": 0.2195,
+        "wypelnienie_szac": 0.86,
+        "uklad_widokow": "wiersz",
+        "skladanie": {
+          "zgiecia_pionowe": [
+            140.0,
+            260.0,
+            380.0,
+            500.0
+          ],
+          "zgiecia_poziome": [],
+          "pasy": [
+            140.0,
+            120.0,
+            120.0,
+            120.0,
+            190.0
+          ],
+          "rzedy": [
+            297.0
+          ],
+          "n_pasow": 5,
+          "n_rzedow": 1,
+          "warstwy": 5,
+          "ocena": "poprawne",
+          "ocena_pion": "poprawne",
+          "ocena_poziom": "dobre",
+          "tabliczka_na_wierzchu": true,
+          "uwagi": [
+            "najwęższy pas pośredni 120 mm"
+          ]
+        },
+        "kandydaci": [
+          {
+            "format": "690×297",
+            "wymiary_mm": [
+              690,
+              297
+            ],
+            "koszt": 0.2195,
+            "pole_m2": 0.2049,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "A2",
+            "wymiary_mm": [
+              594,
+              420
+            ],
+            "koszt": 0.2595,
+            "pole_m2": 0.2495,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "490×594",
+            "wymiary_mm": [
+              490,
+              594
+            ],
+            "koszt": 0.3118,
+            "pole_m2": 0.2911,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "490×841",
+            "wymiary_mm": [
+              490,
+              841
+            ],
+            "koszt": 0.4584,
+            "pole_m2": 0.4121,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "490×891",
+            "wymiary_mm": [
+              490,
+              891
+            ],
+            "koszt": 0.4677,
+            "pole_m2": 0.4366,
+            "skladanie": "poprawne"
+          }
+        ],
+        "bloki": [
+          [
+            "tabliczka",
+            [
+              500.0,
+              10.0,
+              680.0,
+              113.0
+            ]
+          ],
+          [
+            "róża i podziałka",
+            [
+              500.0,
+              118.0,
+              680.0,
+              148.8
+            ]
+          ],
+          [
+            "legenda",
+            [
+              500.0,
+              241.0,
+              680.0,
+              284.0
+            ]
+          ],
+          [
+            "obw",
+            [
+              500.0,
+              219.3,
+              680.0,
+              236.0
+            ]
+          ],
+          [
+            "uwagi[1–6]",
+            [
+              500.0,
+              168.2,
+              680.0,
+              214.3
+            ]
+          ]
+        ],
+        "kolizje": []
+      },
       "pliki": {
         "pdf": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-02_instalacja_oswietlenia_rzut_i_pietra.pdf",
         "png": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-02_instalacja_oswietlenia_rzut_i_pietra.png",
@@ -94,19 +460,19 @@
         "ok": true,
         "errors": [],
         "warnings": [
-          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
+          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 902,
-          "napisy": 202,
+          "prymitywy": 812,
+          "napisy": 162,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 4.7,
+      "czas_s": 5.4,
       "png_kontrola": {
         "px": [
-          5262,
-          2481
+          4075,
+          1754
         ],
         "dpi_eff": [
           150.0,
@@ -117,12 +483,28 @@
           150.01239999999999
         ],
         "ok": true
+      },
+      "wypelnienie": {
+        "wypelnienie": 0.88,
+        "wypelnienie_rys": 0.866,
+        "wypelnienie_kontur": 0.74,
+        "pole_arkusza_m2": 0.2049,
+        "pole_ramki_m2": 0.1828,
+        "pusty_prostokat_mm": [
+          22,
+          278
+        ],
+        "przyciety_mm": [
+          676,
+          297
+        ],
+        "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
       }
     },
     {
       "nr": "PT-IE-03",
       "tytul": "INSTALACJA OŚWIETLENIA — RZUT II PIĘTRA",
-      "format": "A3x3",
+      "format": "690×297",
       "typ": [
         "inst_rzut"
       ],
@@ -131,6 +513,182 @@
         "INSTALACJA OŚWIETLENIA — RZUT II PIĘTRA"
       ],
       "qa_kind": null,
+      "wymiary_mm": [
+        690.0,
+        297.0
+      ],
+      "pole_m2": 0.2049,
+      "skladanie": {
+        "zgiecia_pionowe": [
+          140.0,
+          260.0,
+          380.0,
+          500.0
+        ],
+        "zgiecia_poziome": [],
+        "pasy": [
+          140.0,
+          120.0,
+          120.0,
+          120.0,
+          190.0
+        ],
+        "rzedy": [
+          297.0
+        ],
+        "n_pasow": 5,
+        "n_rzedow": 1,
+        "warstwy": 5,
+        "ocena": "poprawne",
+        "ocena_pion": "poprawne",
+        "ocena_poziom": "dobre",
+        "tabliczka_na_wierzchu": true,
+        "uwagi": [
+          "najwęższy pas pośredni 120 mm"
+        ]
+      },
+      "uklad": {
+        "format": "690×297",
+        "wymiary_mm": [
+          690.0,
+          297.0
+        ],
+        "pole_m2": 0.2049,
+        "standardowy": false,
+        "tryb": "ekonomiczny",
+        "koszt": 0.2195,
+        "wypelnienie_szac": 0.802,
+        "uklad_widokow": "wiersz",
+        "skladanie": {
+          "zgiecia_pionowe": [
+            140.0,
+            260.0,
+            380.0,
+            500.0
+          ],
+          "zgiecia_poziome": [],
+          "pasy": [
+            140.0,
+            120.0,
+            120.0,
+            120.0,
+            190.0
+          ],
+          "rzedy": [
+            297.0
+          ],
+          "n_pasow": 5,
+          "n_rzedow": 1,
+          "warstwy": 5,
+          "ocena": "poprawne",
+          "ocena_pion": "poprawne",
+          "ocena_poziom": "dobre",
+          "tabliczka_na_wierzchu": true,
+          "uwagi": [
+            "najwęższy pas pośredni 120 mm"
+          ]
+        },
+        "kandydaci": [
+          {
+            "format": "690×297",
+            "wymiary_mm": [
+              690,
+              297
+            ],
+            "koszt": 0.2195,
+            "pole_m2": 0.2049,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "490×420",
+            "wymiary_mm": [
+              490,
+              420
+            ],
+            "koszt": 0.2289,
+            "pole_m2": 0.2058,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "490×594",
+            "wymiary_mm": [
+              490,
+              594
+            ],
+            "koszt": 0.3118,
+            "pole_m2": 0.2911,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "490×841",
+            "wymiary_mm": [
+              490,
+              841
+            ],
+            "koszt": 0.4584,
+            "pole_m2": 0.4121,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "490×891",
+            "wymiary_mm": [
+              490,
+              891
+            ],
+            "koszt": 0.4677,
+            "pole_m2": 0.4366,
+            "skladanie": "poprawne"
+          }
+        ],
+        "bloki": [
+          [
+            "tabliczka",
+            [
+              500.0,
+              10.0,
+              680.0,
+              113.0
+            ]
+          ],
+          [
+            "róża i podziałka",
+            [
+              500.0,
+              118.0,
+              680.0,
+              148.8
+            ]
+          ],
+          [
+            "legenda",
+            [
+              500.0,
+              241.0,
+              680.0,
+              284.0
+            ]
+          ],
+          [
+            "obw",
+            [
+              500.0,
+              219.3,
+              680.0,
+              236.0
+            ]
+          ],
+          [
+            "uwagi[1–6]",
+            [
+              500.0,
+              168.2,
+              680.0,
+              214.3
+            ]
+          ]
+        ],
+        "kolizje": []
+      },
       "pliki": {
         "pdf": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-03_instalacja_oswietlenia_rzut_ii_pietra.pdf",
         "png": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-03_instalacja_oswietlenia_rzut_ii_pietra.png",
@@ -140,19 +698,19 @@
         "ok": true,
         "errors": [],
         "warnings": [
-          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
+          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 1017,
-          "napisy": 199,
+          "prymitywy": 927,
+          "napisy": 159,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 4.0,
+      "czas_s": 4.8,
       "png_kontrola": {
         "px": [
-          5262,
-          2481
+          4075,
+          1754
         ],
         "dpi_eff": [
           150.0,
@@ -163,12 +721,28 @@
           150.01239999999999
         ],
         "ok": true
+      },
+      "wypelnienie": {
+        "wypelnienie": 0.701,
+        "wypelnienie_rys": 0.667,
+        "wypelnienie_kontur": 0.584,
+        "pole_arkusza_m2": 0.2049,
+        "pole_ramki_m2": 0.1828,
+        "pusty_prostokat_mm": [
+          60,
+          278
+        ],
+        "przyciety_mm": [
+          673,
+          297
+        ],
+        "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
       }
     },
     {
       "nr": "PT-IE-04",
       "tytul": "GNIAZDA I ZASILANIE URZĄDZEŃ — RZUT PARTERU",
-      "format": "A3x3",
+      "format": "570×594",
       "typ": [
         "inst_rzut"
       ],
@@ -177,6 +751,166 @@
         "INSTALACJA GNIAZD WTYCZKOWYCH I ZASILANIA URZĄDZEŃ — RZUT PARTERU"
       ],
       "qa_kind": null,
+      "wymiary_mm": [
+        570.0,
+        594.0
+      ],
+      "pole_m2": 0.3386,
+      "skladanie": {
+        "zgiecia_pionowe": [
+          200.0,
+          380.0
+        ],
+        "zgiecia_poziome": [
+          297.0
+        ],
+        "pasy": [
+          200.0,
+          180.0,
+          190.0
+        ],
+        "rzedy": [
+          297.0,
+          297.0
+        ],
+        "n_pasow": 3,
+        "n_rzedow": 2,
+        "warstwy": 6,
+        "ocena": "dobre",
+        "ocena_pion": "dobre",
+        "ocena_poziom": "dobre",
+        "tabliczka_na_wierzchu": true,
+        "uwagi": []
+      },
+      "uklad": {
+        "format": "570×594",
+        "wymiary_mm": [
+          570.0,
+          594.0
+        ],
+        "pole_m2": 0.3386,
+        "standardowy": false,
+        "tryb": "ekonomiczny",
+        "koszt": 0.3487,
+        "wypelnienie_szac": 0.666,
+        "uklad_widokow": "wiersz",
+        "skladanie": {
+          "zgiecia_pionowe": [
+            200.0,
+            380.0
+          ],
+          "zgiecia_poziome": [
+            297.0
+          ],
+          "pasy": [
+            200.0,
+            180.0,
+            190.0
+          ],
+          "rzedy": [
+            297.0,
+            297.0
+          ],
+          "n_pasow": 3,
+          "n_rzedow": 2,
+          "warstwy": 6,
+          "ocena": "dobre",
+          "ocena_pion": "dobre",
+          "ocena_poziom": "dobre",
+          "tabliczka_na_wierzchu": true,
+          "uwagi": []
+        },
+        "kandydaci": [
+          {
+            "format": "570×594",
+            "wymiary_mm": [
+              570,
+              594
+            ],
+            "koszt": 0.3487,
+            "pole_m2": 0.3386,
+            "skladanie": "dobre"
+          },
+          {
+            "format": "750×420",
+            "wymiary_mm": [
+              750,
+              420
+            ],
+            "koszt": 0.3504,
+            "pole_m2": 0.315,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "570×841",
+            "wymiary_mm": [
+              570,
+              841
+            ],
+            "koszt": 0.5135,
+            "pole_m2": 0.4794,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "570×891",
+            "wymiary_mm": [
+              570,
+              891
+            ],
+            "koszt": 0.5231,
+            "pole_m2": 0.5079,
+            "skladanie": "dobre"
+          }
+        ],
+        "bloki": [
+          [
+            "tabliczka",
+            [
+              380.0,
+              10.0,
+              560.0,
+              113.0
+            ]
+          ],
+          [
+            "róża i podziałka",
+            [
+              380.0,
+              550.2,
+              560.0,
+              581.0
+            ]
+          ],
+          [
+            "legenda",
+            [
+              380.0,
+              498.6,
+              560.0,
+              545.2
+            ]
+          ],
+          [
+            "obw",
+            [
+              194.0,
+              488.7,
+              374.0,
+              581.0
+            ]
+          ],
+          [
+            "uwagi[1–7]",
+            [
+              194.0,
+              66.8,
+              374.0,
+              122.1
+            ]
+          ]
+        ],
+        "kolizje": []
+      },
       "pliki": {
         "pdf": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-04_gniazda_i_zasilanie_urzadzen_rzut_parteru.pdf",
         "png": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-04_gniazda_i_zasilanie_urzadzen_rzut_parteru.png",
@@ -186,19 +920,19 @@
         "ok": true,
         "errors": [],
         "warnings": [
-          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
+          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 1425,
-          "napisy": 434,
+          "prymitywy": 1494,
+          "napisy": 437,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 5.2,
+      "czas_s": 6.6,
       "png_kontrola": {
         "px": [
-          5262,
-          2481
+          3367,
+          3508
         ],
         "dpi_eff": [
           150.0,
@@ -209,12 +943,28 @@
           150.01239999999999
         ],
         "ok": true
+      },
+      "wypelnienie": {
+        "wypelnienie": 0.793,
+        "wypelnienie_rys": 0.78,
+        "wypelnienie_kontur": 0.562,
+        "pole_arkusza_m2": 0.3386,
+        "pole_ramki_m2": 0.31,
+        "pusty_prostokat_mm": [
+          174,
+          128
+        ],
+        "przyciety_mm": [
+          556,
+          594
+        ],
+        "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
       }
     },
     {
       "nr": "PT-IE-05",
       "tytul": "GNIAZDA I ZASILANIE URZĄDZEŃ — RZUT I PIĘTRA",
-      "format": "A3x3",
+      "format": "A2",
       "typ": [
         "inst_rzut"
       ],
@@ -223,6 +973,180 @@
         "INSTALACJA GNIAZD WTYCZKOWYCH I ZASILANIA URZĄDZEŃ — RZUT I PIĘTRA"
       ],
       "qa_kind": null,
+      "wymiary_mm": [
+        594.0,
+        420.0
+      ],
+      "pole_m2": 0.2495,
+      "skladanie": {
+        "zgiecia_pionowe": [
+          210.0,
+          402.0
+        ],
+        "zgiecia_poziome": [
+          297.0
+        ],
+        "pasy": [
+          210.0,
+          192.0,
+          192.0
+        ],
+        "rzedy": [
+          297.0,
+          123.0
+        ],
+        "n_pasow": 3,
+        "n_rzedow": 2,
+        "warstwy": 6,
+        "ocena": "poprawne",
+        "ocena_pion": "dobre",
+        "ocena_poziom": "poprawne",
+        "tabliczka_na_wierzchu": true,
+        "uwagi": [
+          "górny rząd 123 mm (niepełny)"
+        ]
+      },
+      "uklad": {
+        "format": "A2",
+        "wymiary_mm": [
+          594.0,
+          420.0
+        ],
+        "pole_m2": 0.2495,
+        "standardowy": true,
+        "tryb": "ekonomiczny",
+        "koszt": 0.2595,
+        "wypelnienie_szac": 0.728,
+        "uklad_widokow": "wiersz",
+        "skladanie": {
+          "zgiecia_pionowe": [
+            210.0,
+            402.0
+          ],
+          "zgiecia_poziome": [
+            297.0
+          ],
+          "pasy": [
+            210.0,
+            192.0,
+            192.0
+          ],
+          "rzedy": [
+            297.0,
+            123.0
+          ],
+          "n_pasow": 3,
+          "n_rzedow": 2,
+          "warstwy": 6,
+          "ocena": "poprawne",
+          "ocena_pion": "dobre",
+          "ocena_poziom": "poprawne",
+          "tabliczka_na_wierzchu": true,
+          "uwagi": [
+            "górny rząd 123 mm (niepełny)"
+          ]
+        },
+        "kandydaci": [
+          {
+            "format": "A2",
+            "wymiary_mm": [
+              594,
+              420
+            ],
+            "koszt": 0.2595,
+            "pole_m2": 0.2495,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "860×297",
+            "wymiary_mm": [
+              860,
+              297
+            ],
+            "koszt": 0.2736,
+            "pole_m2": 0.2554,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "490×594",
+            "wymiary_mm": [
+              490,
+              594
+            ],
+            "koszt": 0.3118,
+            "pole_m2": 0.2911,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "490×841",
+            "wymiary_mm": [
+              490,
+              841
+            ],
+            "koszt": 0.4584,
+            "pole_m2": 0.4121,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "490×891",
+            "wymiary_mm": [
+              490,
+              891
+            ],
+            "koszt": 0.4677,
+            "pole_m2": 0.4366,
+            "skladanie": "poprawne"
+          }
+        ],
+        "bloki": [
+          [
+            "tabliczka",
+            [
+              404.0,
+              10.0,
+              584.0,
+              113.0
+            ]
+          ],
+          [
+            "róża i podziałka",
+            [
+              218.0,
+              95.3,
+              398.0,
+              126.1
+            ]
+          ],
+          [
+            "legenda",
+            [
+              218.0,
+              50.7,
+              398.0,
+              90.3
+            ]
+          ],
+          [
+            "obw",
+            [
+              32.0,
+              84.2,
+              212.0,
+              126.1
+            ]
+          ],
+          [
+            "uwagi[1–7]",
+            [
+              32.0,
+              23.9,
+              212.0,
+              79.2
+            ]
+          ]
+        ],
+        "kolizje": []
+      },
       "pliki": {
         "pdf": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-05_gniazda_i_zasilanie_urzadzen_rzut_i_pietra.pdf",
         "png": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-05_gniazda_i_zasilanie_urzadzen_rzut_i_pietra.png",
@@ -232,18 +1156,18 @@
         "ok": true,
         "errors": [],
         "warnings": [
-          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
+          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 994,
-          "napisy": 287,
+          "prymitywy": 977,
+          "napisy": 286,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.1,
+      "czas_s": 3.2,
       "png_kontrola": {
         "px": [
-          5262,
+          3508,
           2481
         ],
         "dpi_eff": [
@@ -255,12 +1179,28 @@
           150.01239999999999
         ],
         "ok": true
+      },
+      "wypelnienie": {
+        "wypelnienie": 0.796,
+        "wypelnienie_rys": 0.778,
+        "wypelnienie_kontur": 0.643,
+        "pole_arkusza_m2": 0.2495,
+        "pole_ramki_m2": 0.2256,
+        "pusty_prostokat_mm": [
+          110,
+          296
+        ],
+        "przyciety_mm": [
+          583,
+          412
+        ],
+        "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
       }
     },
     {
       "nr": "PT-IE-06",
       "tytul": "GNIAZDA I ZASILANIE URZĄDZEŃ — RZUT II PIĘTRA",
-      "format": "A3x3",
+      "format": "A2",
       "typ": [
         "inst_rzut"
       ],
@@ -269,6 +1209,180 @@
         "INSTALACJA GNIAZD WTYCZKOWYCH I ZASILANIA URZĄDZEŃ — RZUT II PIĘTRA"
       ],
       "qa_kind": null,
+      "wymiary_mm": [
+        594.0,
+        420.0
+      ],
+      "pole_m2": 0.2495,
+      "skladanie": {
+        "zgiecia_pionowe": [
+          210.0,
+          402.0
+        ],
+        "zgiecia_poziome": [
+          297.0
+        ],
+        "pasy": [
+          210.0,
+          192.0,
+          192.0
+        ],
+        "rzedy": [
+          297.0,
+          123.0
+        ],
+        "n_pasow": 3,
+        "n_rzedow": 2,
+        "warstwy": 6,
+        "ocena": "poprawne",
+        "ocena_pion": "dobre",
+        "ocena_poziom": "poprawne",
+        "tabliczka_na_wierzchu": true,
+        "uwagi": [
+          "górny rząd 123 mm (niepełny)"
+        ]
+      },
+      "uklad": {
+        "format": "A2",
+        "wymiary_mm": [
+          594.0,
+          420.0
+        ],
+        "pole_m2": 0.2495,
+        "standardowy": true,
+        "tryb": "ekonomiczny",
+        "koszt": 0.2595,
+        "wypelnienie_szac": 0.682,
+        "uklad_widokow": "wiersz",
+        "skladanie": {
+          "zgiecia_pionowe": [
+            210.0,
+            402.0
+          ],
+          "zgiecia_poziome": [
+            297.0
+          ],
+          "pasy": [
+            210.0,
+            192.0,
+            192.0
+          ],
+          "rzedy": [
+            297.0,
+            123.0
+          ],
+          "n_pasow": 3,
+          "n_rzedow": 2,
+          "warstwy": 6,
+          "ocena": "poprawne",
+          "ocena_pion": "dobre",
+          "ocena_poziom": "poprawne",
+          "tabliczka_na_wierzchu": true,
+          "uwagi": [
+            "górny rząd 123 mm (niepełny)"
+          ]
+        },
+        "kandydaci": [
+          {
+            "format": "A2",
+            "wymiary_mm": [
+              594,
+              420
+            ],
+            "koszt": 0.2595,
+            "pole_m2": 0.2495,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "860×297",
+            "wymiary_mm": [
+              860,
+              297
+            ],
+            "koszt": 0.2736,
+            "pole_m2": 0.2554,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "490×594",
+            "wymiary_mm": [
+              490,
+              594
+            ],
+            "koszt": 0.3118,
+            "pole_m2": 0.2911,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "490×841",
+            "wymiary_mm": [
+              490,
+              841
+            ],
+            "koszt": 0.4584,
+            "pole_m2": 0.4121,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "490×891",
+            "wymiary_mm": [
+              490,
+              891
+            ],
+            "koszt": 0.4677,
+            "pole_m2": 0.4366,
+            "skladanie": "poprawne"
+          }
+        ],
+        "bloki": [
+          [
+            "tabliczka",
+            [
+              404.0,
+              10.0,
+              584.0,
+              113.0
+            ]
+          ],
+          [
+            "róża i podziałka",
+            [
+              404.0,
+              118.0,
+              584.0,
+              148.8
+            ]
+          ],
+          [
+            "legenda",
+            [
+              218.0,
+              104.5,
+              398.0,
+              144.1
+            ]
+          ],
+          [
+            "obw",
+            [
+              218.0,
+              61.8,
+              398.0,
+              99.5
+            ]
+          ],
+          [
+            "uwagi[1–7]",
+            [
+              32.0,
+              88.8,
+              212.0,
+              144.1
+            ]
+          ]
+        ],
+        "kolizje": []
+      },
       "pliki": {
         "pdf": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-06_gniazda_i_zasilanie_urzadzen_rzut_ii_pietra.pdf",
         "png": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-06_gniazda_i_zasilanie_urzadzen_rzut_ii_pietra.png",
@@ -278,18 +1392,18 @@
         "ok": true,
         "errors": [],
         "warnings": [
-          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
+          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 1099,
-          "napisy": 268,
+          "prymitywy": 1082,
+          "napisy": 267,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.0,
+      "czas_s": 2.7,
       "png_kontrola": {
         "px": [
-          5262,
+          3508,
           2481
         ],
         "dpi_eff": [
@@ -301,12 +1415,28 @@
           150.01239999999999
         ],
         "ok": true
+      },
+      "wypelnienie": {
+        "wypelnienie": 0.651,
+        "wypelnienie_rys": 0.62,
+        "wypelnienie_kontur": 0.525,
+        "pole_arkusza_m2": 0.2495,
+        "pole_ramki_m2": 0.2256,
+        "pusty_prostokat_mm": [
+          114,
+          258
+        ],
+        "przyciety_mm": [
+          583,
+          412
+        ],
+        "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
       }
     },
     {
       "nr": "PT-IE-07",
       "tytul": "TELETECHNIKA — RZUT PARTERU",
-      "format": "A3x3",
+      "format": "520×594",
       "typ": [
         "inst_rzut"
       ],
@@ -315,6 +1445,161 @@
         "INSTALACJE TELETECHNICZNE — RZUT PARTERU"
       ],
       "qa_kind": null,
+      "wymiary_mm": [
+        520.0,
+        594.0
+      ],
+      "pole_m2": 0.3089,
+      "skladanie": {
+        "zgiecia_pionowe": [
+          175.0,
+          330.0
+        ],
+        "zgiecia_poziome": [
+          297.0
+        ],
+        "pasy": [
+          175.0,
+          155.0,
+          190.0
+        ],
+        "rzedy": [
+          297.0,
+          297.0
+        ],
+        "n_pasow": 3,
+        "n_rzedow": 2,
+        "warstwy": 6,
+        "ocena": "poprawne",
+        "ocena_pion": "poprawne",
+        "ocena_poziom": "dobre",
+        "tabliczka_na_wierzchu": true,
+        "uwagi": [
+          "najwęższy pas pośredni 155 mm"
+        ]
+      },
+      "uklad": {
+        "format": "520×594",
+        "wymiary_mm": [
+          520.0,
+          594.0
+        ],
+        "pole_m2": 0.3089,
+        "standardowy": false,
+        "tryb": "ekonomiczny",
+        "koszt": 0.3309,
+        "wypelnienie_szac": 0.681,
+        "uklad_widokow": "wiersz",
+        "skladanie": {
+          "zgiecia_pionowe": [
+            175.0,
+            330.0
+          ],
+          "zgiecia_poziome": [
+            297.0
+          ],
+          "pasy": [
+            175.0,
+            155.0,
+            190.0
+          ],
+          "rzedy": [
+            297.0,
+            297.0
+          ],
+          "n_pasow": 3,
+          "n_rzedow": 2,
+          "warstwy": 6,
+          "ocena": "poprawne",
+          "ocena_pion": "poprawne",
+          "ocena_poziom": "dobre",
+          "tabliczka_na_wierzchu": true,
+          "uwagi": [
+            "najwęższy pas pośredni 155 mm"
+          ]
+        },
+        "kandydaci": [
+          {
+            "format": "520×594",
+            "wymiary_mm": [
+              520,
+              594
+            ],
+            "koszt": 0.3309,
+            "pole_m2": 0.3089,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "710×420",
+            "wymiary_mm": [
+              710,
+              420
+            ],
+            "koszt": 0.3317,
+            "pole_m2": 0.2982,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "520×841",
+            "wymiary_mm": [
+              520,
+              841
+            ],
+            "koszt": 0.4865,
+            "pole_m2": 0.4373,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "520×891",
+            "wymiary_mm": [
+              520,
+              891
+            ],
+            "koszt": 0.4963,
+            "pole_m2": 0.4633,
+            "skladanie": "poprawne"
+          }
+        ],
+        "bloki": [
+          [
+            "tabliczka",
+            [
+              330.0,
+              10.0,
+              510.0,
+              113.0
+            ]
+          ],
+          [
+            "róża i podziałka",
+            [
+              330.0,
+              550.2,
+              510.0,
+              581.0
+            ]
+          ],
+          [
+            "legenda",
+            [
+              330.0,
+              500.4,
+              510.0,
+              545.2
+            ]
+          ],
+          [
+            "uwagi[1–6]",
+            [
+              144.0,
+              532.0,
+              324.0,
+              581.0
+            ]
+          ]
+        ],
+        "kolizje": []
+      },
       "pliki": {
         "pdf": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-07_teletechnika_rzut_parteru.pdf",
         "png": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-07_teletechnika_rzut_parteru.png",
@@ -324,19 +1609,19 @@
         "ok": true,
         "errors": [],
         "warnings": [
-          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
+          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 1017,
-          "napisy": 214,
+          "prymitywy": 1086,
+          "napisy": 217,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.8,
+      "czas_s": 5.1,
       "png_kontrola": {
         "px": [
-          5262,
-          2481
+          3071,
+          3508
         ],
         "dpi_eff": [
           150.0,
@@ -347,12 +1632,28 @@
           150.01239999999999
         ],
         "ok": true
+      },
+      "wypelnienie": {
+        "wypelnienie": 0.729,
+        "wypelnienie_rys": 0.71,
+        "wypelnienie_kontur": 0.537,
+        "pole_arkusza_m2": 0.3089,
+        "pole_ramki_m2": 0.2813,
+        "pusty_prostokat_mm": [
+          310,
+          120
+        ],
+        "przyciety_mm": [
+          513,
+          594
+        ],
+        "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
       }
     },
     {
       "nr": "PT-IE-08",
       "tytul": "TELETECHNIKA — RZUT I PIĘTRA",
-      "format": "A3x3",
+      "format": "690×297",
       "typ": [
         "inst_rzut"
       ],
@@ -361,6 +1662,173 @@
         "INSTALACJE TELETECHNICZNE — RZUT I PIĘTRA"
       ],
       "qa_kind": null,
+      "wymiary_mm": [
+        690.0,
+        297.0
+      ],
+      "pole_m2": 0.2049,
+      "skladanie": {
+        "zgiecia_pionowe": [
+          140.0,
+          260.0,
+          380.0,
+          500.0
+        ],
+        "zgiecia_poziome": [],
+        "pasy": [
+          140.0,
+          120.0,
+          120.0,
+          120.0,
+          190.0
+        ],
+        "rzedy": [
+          297.0
+        ],
+        "n_pasow": 5,
+        "n_rzedow": 1,
+        "warstwy": 5,
+        "ocena": "poprawne",
+        "ocena_pion": "poprawne",
+        "ocena_poziom": "dobre",
+        "tabliczka_na_wierzchu": true,
+        "uwagi": [
+          "najwęższy pas pośredni 120 mm"
+        ]
+      },
+      "uklad": {
+        "format": "690×297",
+        "wymiary_mm": [
+          690.0,
+          297.0
+        ],
+        "pole_m2": 0.2049,
+        "standardowy": false,
+        "tryb": "ekonomiczny",
+        "koszt": 0.2195,
+        "wypelnienie_szac": 0.836,
+        "uklad_widokow": "wiersz",
+        "skladanie": {
+          "zgiecia_pionowe": [
+            140.0,
+            260.0,
+            380.0,
+            500.0
+          ],
+          "zgiecia_poziome": [],
+          "pasy": [
+            140.0,
+            120.0,
+            120.0,
+            120.0,
+            190.0
+          ],
+          "rzedy": [
+            297.0
+          ],
+          "n_pasow": 5,
+          "n_rzedow": 1,
+          "warstwy": 5,
+          "ocena": "poprawne",
+          "ocena_pion": "poprawne",
+          "ocena_poziom": "dobre",
+          "tabliczka_na_wierzchu": true,
+          "uwagi": [
+            "najwęższy pas pośredni 120 mm"
+          ]
+        },
+        "kandydaci": [
+          {
+            "format": "690×297",
+            "wymiary_mm": [
+              690,
+              297
+            ],
+            "koszt": 0.2195,
+            "pole_m2": 0.2049,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "A2",
+            "wymiary_mm": [
+              594,
+              420
+            ],
+            "koszt": 0.2595,
+            "pole_m2": 0.2495,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "490×594",
+            "wymiary_mm": [
+              490,
+              594
+            ],
+            "koszt": 0.3118,
+            "pole_m2": 0.2911,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "490×841",
+            "wymiary_mm": [
+              490,
+              841
+            ],
+            "koszt": 0.4584,
+            "pole_m2": 0.4121,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "490×891",
+            "wymiary_mm": [
+              490,
+              891
+            ],
+            "koszt": 0.4677,
+            "pole_m2": 0.4366,
+            "skladanie": "poprawne"
+          }
+        ],
+        "bloki": [
+          [
+            "tabliczka",
+            [
+              500.0,
+              10.0,
+              680.0,
+              113.0
+            ]
+          ],
+          [
+            "róża i podziałka",
+            [
+              500.0,
+              118.0,
+              680.0,
+              148.8
+            ]
+          ],
+          [
+            "legenda",
+            [
+              500.0,
+              251.4,
+              680.0,
+              284.0
+            ]
+          ],
+          [
+            "uwagi[1–6]",
+            [
+              500.0,
+              197.4,
+              680.0,
+              246.4
+            ]
+          ]
+        ],
+        "kolizje": []
+      },
       "pliki": {
         "pdf": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-08_teletechnika_rzut_i_pietra.pdf",
         "png": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-08_teletechnika_rzut_i_pietra.png",
@@ -370,19 +1838,19 @@
         "ok": true,
         "errors": [],
         "warnings": [
-          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
+          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 774,
-          "napisy": 183,
+          "prymitywy": 684,
+          "napisy": 143,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.6,
+      "czas_s": 2.9,
       "png_kontrola": {
         "px": [
-          5262,
-          2481
+          4075,
+          1754
         ],
         "dpi_eff": [
           150.0,
@@ -393,12 +1861,28 @@
           150.01239999999999
         ],
         "ok": true
+      },
+      "wypelnienie": {
+        "wypelnienie": 0.851,
+        "wypelnienie_rys": 0.834,
+        "wypelnienie_kontur": 0.715,
+        "pole_arkusza_m2": 0.2049,
+        "pole_ramki_m2": 0.1828,
+        "pusty_prostokat_mm": [
+          182,
+          60
+        ],
+        "przyciety_mm": [
+          676,
+          297
+        ],
+        "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
       }
     },
     {
       "nr": "PT-IE-09",
       "tytul": "TELETECHNIKA — RZUT II PIĘTRA",
-      "format": "A3x3",
+      "format": "690×297",
       "typ": [
         "inst_rzut"
       ],
@@ -407,6 +1891,173 @@
         "INSTALACJE TELETECHNICZNE — RZUT II PIĘTRA"
       ],
       "qa_kind": null,
+      "wymiary_mm": [
+        690.0,
+        297.0
+      ],
+      "pole_m2": 0.2049,
+      "skladanie": {
+        "zgiecia_pionowe": [
+          140.0,
+          260.0,
+          380.0,
+          500.0
+        ],
+        "zgiecia_poziome": [],
+        "pasy": [
+          140.0,
+          120.0,
+          120.0,
+          120.0,
+          190.0
+        ],
+        "rzedy": [
+          297.0
+        ],
+        "n_pasow": 5,
+        "n_rzedow": 1,
+        "warstwy": 5,
+        "ocena": "poprawne",
+        "ocena_pion": "poprawne",
+        "ocena_poziom": "dobre",
+        "tabliczka_na_wierzchu": true,
+        "uwagi": [
+          "najwęższy pas pośredni 120 mm"
+        ]
+      },
+      "uklad": {
+        "format": "690×297",
+        "wymiary_mm": [
+          690.0,
+          297.0
+        ],
+        "pole_m2": 0.2049,
+        "standardowy": false,
+        "tryb": "ekonomiczny",
+        "koszt": 0.2195,
+        "wypelnienie_szac": 0.777,
+        "uklad_widokow": "wiersz",
+        "skladanie": {
+          "zgiecia_pionowe": [
+            140.0,
+            260.0,
+            380.0,
+            500.0
+          ],
+          "zgiecia_poziome": [],
+          "pasy": [
+            140.0,
+            120.0,
+            120.0,
+            120.0,
+            190.0
+          ],
+          "rzedy": [
+            297.0
+          ],
+          "n_pasow": 5,
+          "n_rzedow": 1,
+          "warstwy": 5,
+          "ocena": "poprawne",
+          "ocena_pion": "poprawne",
+          "ocena_poziom": "dobre",
+          "tabliczka_na_wierzchu": true,
+          "uwagi": [
+            "najwęższy pas pośredni 120 mm"
+          ]
+        },
+        "kandydaci": [
+          {
+            "format": "690×297",
+            "wymiary_mm": [
+              690,
+              297
+            ],
+            "koszt": 0.2195,
+            "pole_m2": 0.2049,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "490×420",
+            "wymiary_mm": [
+              490,
+              420
+            ],
+            "koszt": 0.2289,
+            "pole_m2": 0.2058,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "490×594",
+            "wymiary_mm": [
+              490,
+              594
+            ],
+            "koszt": 0.3118,
+            "pole_m2": 0.2911,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "490×841",
+            "wymiary_mm": [
+              490,
+              841
+            ],
+            "koszt": 0.4584,
+            "pole_m2": 0.4121,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "490×891",
+            "wymiary_mm": [
+              490,
+              891
+            ],
+            "koszt": 0.4677,
+            "pole_m2": 0.4366,
+            "skladanie": "poprawne"
+          }
+        ],
+        "bloki": [
+          [
+            "tabliczka",
+            [
+              500.0,
+              10.0,
+              680.0,
+              113.0
+            ]
+          ],
+          [
+            "róża i podziałka",
+            [
+              500.0,
+              118.0,
+              680.0,
+              148.8
+            ]
+          ],
+          [
+            "legenda",
+            [
+              500.0,
+              251.4,
+              680.0,
+              284.0
+            ]
+          ],
+          [
+            "uwagi[1–6]",
+            [
+              500.0,
+              197.4,
+              680.0,
+              246.4
+            ]
+          ]
+        ],
+        "kolizje": []
+      },
       "pliki": {
         "pdf": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-09_teletechnika_rzut_ii_pietra.pdf",
         "png": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-09_teletechnika_rzut_ii_pietra.png",
@@ -416,19 +2067,19 @@
         "ok": true,
         "errors": [],
         "warnings": [
-          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
+          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 912,
-          "napisy": 177,
+          "prymitywy": 823,
+          "napisy": 138,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 2.6,
+      "czas_s": 3.1,
       "png_kontrola": {
         "px": [
-          5262,
-          2481
+          4075,
+          1754
         ],
         "dpi_eff": [
           150.0,
@@ -439,12 +2090,28 @@
           150.01239999999999
         ],
         "ok": true
+      },
+      "wypelnienie": {
+        "wypelnienie": 0.673,
+        "wypelnienie_rys": 0.635,
+        "wypelnienie_kontur": 0.559,
+        "pole_arkusza_m2": 0.2049,
+        "pole_ramki_m2": 0.1828,
+        "pusty_prostokat_mm": [
+          60,
+          278
+        ],
+        "przyciety_mm": [
+          673,
+          297
+        ],
+        "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
       }
     },
     {
       "nr": "PT-IE-10",
       "tytul": "INSTALACJA FOTOWOLTAICZNA — RZUT DACHU",
-      "format": "A3x3",
+      "format": "690×420",
       "typ": [
         "inst_rzut"
       ],
@@ -453,6 +2120,189 @@
         "INSTALACJA FOTOWOLTAICZNA — RZUT DACHU"
       ],
       "qa_kind": null,
+      "wymiary_mm": [
+        690.0,
+        420.0
+      ],
+      "pole_m2": 0.2898,
+      "skladanie": {
+        "zgiecia_pionowe": [
+          140.0,
+          260.0,
+          380.0,
+          500.0
+        ],
+        "zgiecia_poziome": [
+          297.0
+        ],
+        "pasy": [
+          140.0,
+          120.0,
+          120.0,
+          120.0,
+          190.0
+        ],
+        "rzedy": [
+          297.0,
+          123.0
+        ],
+        "n_pasow": 5,
+        "n_rzedow": 2,
+        "warstwy": 10,
+        "ocena": "poprawne",
+        "ocena_pion": "poprawne",
+        "ocena_poziom": "poprawne",
+        "tabliczka_na_wierzchu": true,
+        "uwagi": [
+          "najwęższy pas pośredni 120 mm",
+          "górny rząd 123 mm (niepełny)"
+        ]
+      },
+      "uklad": {
+        "format": "690×420",
+        "wymiary_mm": [
+          690.0,
+          420.0
+        ],
+        "pole_m2": 0.2898,
+        "standardowy": false,
+        "tryb": "ekonomiczny",
+        "koszt": 0.3224,
+        "wypelnienie_szac": 0.698,
+        "uklad_widokow": "wiersz",
+        "skladanie": {
+          "zgiecia_pionowe": [
+            140.0,
+            260.0,
+            380.0,
+            500.0
+          ],
+          "zgiecia_poziome": [
+            297.0
+          ],
+          "pasy": [
+            140.0,
+            120.0,
+            120.0,
+            120.0,
+            190.0
+          ],
+          "rzedy": [
+            297.0,
+            123.0
+          ],
+          "n_pasow": 5,
+          "n_rzedow": 2,
+          "warstwy": 10,
+          "ocena": "poprawne",
+          "ocena_pion": "poprawne",
+          "ocena_poziom": "poprawne",
+          "tabliczka_na_wierzchu": true,
+          "uwagi": [
+            "najwęższy pas pośredni 120 mm",
+            "górny rząd 123 mm (niepełny)"
+          ]
+        },
+        "kandydaci": [
+          {
+            "format": "690×420",
+            "wymiary_mm": [
+              690,
+              420
+            ],
+            "koszt": 0.3224,
+            "pole_m2": 0.2898,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "570×594",
+            "wymiary_mm": [
+              570,
+              594
+            ],
+            "koszt": 0.3487,
+            "pole_m2": 0.3386,
+            "skladanie": "dobre"
+          },
+          {
+            "format": "570×841",
+            "wymiary_mm": [
+              570,
+              841
+            ],
+            "koszt": 0.5135,
+            "pole_m2": 0.4794,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "570×891",
+            "wymiary_mm": [
+              570,
+              891
+            ],
+            "koszt": 0.5231,
+            "pole_m2": 0.5079,
+            "skladanie": "dobre"
+          }
+        ],
+        "bloki": [
+          [
+            "tabliczka",
+            [
+              500.0,
+              10.0,
+              680.0,
+              113.0
+            ]
+          ],
+          [
+            "róża i podziałka",
+            [
+              500.0,
+              376.2,
+              680.0,
+              407.0
+            ]
+          ],
+          [
+            "legenda",
+            [
+              500.0,
+              285.4,
+              680.0,
+              315.2
+            ]
+          ],
+          [
+            "pv",
+            [
+              314.0,
+              373.5,
+              494.0,
+              407.0
+            ]
+          ],
+          [
+            "uwagi[1–4]",
+            [
+              314.0,
+              21.8,
+              494.0,
+              55.3
+            ]
+          ],
+          [
+            "uwagi[5–7]",
+            [
+              128.0,
+              376.9,
+              308.0,
+              407.0
+            ]
+          ]
+        ],
+        "kolizje": []
+      },
       "pliki": {
         "pdf": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-10_instalacja_fotowoltaiczna_rzut_dachu.pdf",
         "png": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-10_instalacja_fotowoltaiczna_rzut_dachu.png",
@@ -462,18 +2312,18 @@
         "ok": true,
         "errors": [],
         "warnings": [
-          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
+          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 433,
-          "napisy": 191,
+          "prymitywy": 513,
+          "napisy": 190,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 11.4,
+      "czas_s": 10.8,
       "png_kontrola": {
         "px": [
-          5262,
+          4075,
           2481
         ],
         "dpi_eff": [
@@ -485,12 +2335,28 @@
           150.01239999999999
         ],
         "ok": true
+      },
+      "wypelnienie": {
+        "wypelnienie": 0.908,
+        "wypelnienie_rys": 0.901,
+        "wypelnienie_kontur": 0.617,
+        "pole_arkusza_m2": 0.2898,
+        "pole_ramki_m2": 0.264,
+        "pusty_prostokat_mm": [
+          660,
+          12
+        ],
+        "przyciety_mm": [
+          683,
+          420
+        ],
+        "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
       }
     },
     {
       "nr": "PT-IE-11",
       "tytul": "INSTALACJA FOTOWOLTAICZNA — RZUT PARTERU (FALOWNIK, SPD)",
-      "format": "A3x3",
+      "format": "690×420",
       "typ": [
         "inst_rzut"
       ],
@@ -499,6 +2365,180 @@
         "INSTALACJA FOTOWOLTAICZNA — RZUT PARTERU"
       ],
       "qa_kind": null,
+      "wymiary_mm": [
+        690.0,
+        420.0
+      ],
+      "pole_m2": 0.2898,
+      "skladanie": {
+        "zgiecia_pionowe": [
+          140.0,
+          260.0,
+          380.0,
+          500.0
+        ],
+        "zgiecia_poziome": [
+          297.0
+        ],
+        "pasy": [
+          140.0,
+          120.0,
+          120.0,
+          120.0,
+          190.0
+        ],
+        "rzedy": [
+          297.0,
+          123.0
+        ],
+        "n_pasow": 5,
+        "n_rzedow": 2,
+        "warstwy": 10,
+        "ocena": "poprawne",
+        "ocena_pion": "poprawne",
+        "ocena_poziom": "poprawne",
+        "tabliczka_na_wierzchu": true,
+        "uwagi": [
+          "najwęższy pas pośredni 120 mm",
+          "górny rząd 123 mm (niepełny)"
+        ]
+      },
+      "uklad": {
+        "format": "690×420",
+        "wymiary_mm": [
+          690.0,
+          420.0
+        ],
+        "pole_m2": 0.2898,
+        "standardowy": false,
+        "tryb": "ekonomiczny",
+        "koszt": 0.3224,
+        "wypelnienie_szac": 0.683,
+        "uklad_widokow": "wiersz",
+        "skladanie": {
+          "zgiecia_pionowe": [
+            140.0,
+            260.0,
+            380.0,
+            500.0
+          ],
+          "zgiecia_poziome": [
+            297.0
+          ],
+          "pasy": [
+            140.0,
+            120.0,
+            120.0,
+            120.0,
+            190.0
+          ],
+          "rzedy": [
+            297.0,
+            123.0
+          ],
+          "n_pasow": 5,
+          "n_rzedow": 2,
+          "warstwy": 10,
+          "ocena": "poprawne",
+          "ocena_pion": "poprawne",
+          "ocena_poziom": "poprawne",
+          "tabliczka_na_wierzchu": true,
+          "uwagi": [
+            "najwęższy pas pośredni 120 mm",
+            "górny rząd 123 mm (niepełny)"
+          ]
+        },
+        "kandydaci": [
+          {
+            "format": "690×420",
+            "wymiary_mm": [
+              690,
+              420
+            ],
+            "koszt": 0.3224,
+            "pole_m2": 0.2898,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "570×594",
+            "wymiary_mm": [
+              570,
+              594
+            ],
+            "koszt": 0.3487,
+            "pole_m2": 0.3386,
+            "skladanie": "dobre"
+          },
+          {
+            "format": "570×841",
+            "wymiary_mm": [
+              570,
+              841
+            ],
+            "koszt": 0.5135,
+            "pole_m2": 0.4794,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "570×891",
+            "wymiary_mm": [
+              570,
+              891
+            ],
+            "koszt": 0.5231,
+            "pole_m2": 0.5079,
+            "skladanie": "dobre"
+          }
+        ],
+        "bloki": [
+          [
+            "tabliczka",
+            [
+              500.0,
+              10.0,
+              680.0,
+              113.0
+            ]
+          ],
+          [
+            "róża i podziałka",
+            [
+              500.0,
+              376.2,
+              680.0,
+              407.0
+            ]
+          ],
+          [
+            "legenda",
+            [
+              500.0,
+              167.2,
+              680.0,
+              195.3
+            ]
+          ],
+          [
+            "uwagi[1–5]",
+            [
+              314.0,
+              15.5,
+              494.0,
+              55.3
+            ]
+          ],
+          [
+            "uwagi[6–8]",
+            [
+              314.0,
+              376.9,
+              494.0,
+              407.0
+            ]
+          ]
+        ],
+        "kolizje": []
+      },
       "pliki": {
         "pdf": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-11_instalacja_fotowoltaiczna_rzut_parteru_falownik_.pdf",
         "png": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-11_instalacja_fotowoltaiczna_rzut_parteru_falownik_.png",
@@ -508,18 +2548,18 @@
         "ok": true,
         "errors": [],
         "warnings": [
-          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
+          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 966,
-          "napisy": 205,
+          "prymitywy": 1034,
+          "napisy": 204,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.1,
+      "czas_s": 4.7,
       "png_kontrola": {
         "px": [
-          5262,
+          4075,
           2481
         ],
         "dpi_eff": [
@@ -531,12 +2571,28 @@
           150.01239999999999
         ],
         "ok": true
+      },
+      "wypelnienie": {
+        "wypelnienie": 0.898,
+        "wypelnienie_rys": 0.89,
+        "wypelnienie_kontur": 0.604,
+        "pole_arkusza_m2": 0.2898,
+        "pole_ramki_m2": 0.264,
+        "pusty_prostokat_mm": [
+          292,
+          50
+        ],
+        "przyciety_mm": [
+          683,
+          420
+        ],
+        "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
       }
     },
     {
       "nr": "PT-IE-12",
       "tytul": "UZIOM I POŁĄCZENIA WYRÓWNAWCZE — RZUT PARTERU",
-      "format": "A3x3",
+      "format": "720×420",
       "typ": [
         "inst_rzut"
       ],
@@ -545,6 +2601,180 @@
         "UZIEMIENIA, POŁĄCZENIA WYRÓWNAWCZE, OCHRONA ODGROMOWA — RZUT PARTERU"
       ],
       "qa_kind": null,
+      "wymiary_mm": [
+        720.0,
+        420.0
+      ],
+      "pole_m2": 0.3024,
+      "skladanie": {
+        "zgiecia_pionowe": [
+          147.5,
+          275.0,
+          402.5,
+          530.0
+        ],
+        "zgiecia_poziome": [
+          297.0
+        ],
+        "pasy": [
+          147.5,
+          127.5,
+          127.5,
+          127.5,
+          190.0
+        ],
+        "rzedy": [
+          297.0,
+          123.0
+        ],
+        "n_pasow": 5,
+        "n_rzedow": 2,
+        "warstwy": 10,
+        "ocena": "poprawne",
+        "ocena_pion": "poprawne",
+        "ocena_poziom": "poprawne",
+        "tabliczka_na_wierzchu": true,
+        "uwagi": [
+          "najwęższy pas pośredni 128 mm",
+          "górny rząd 123 mm (niepełny)"
+        ]
+      },
+      "uklad": {
+        "format": "720×420",
+        "wymiary_mm": [
+          720.0,
+          420.0
+        ],
+        "pole_m2": 0.3024,
+        "standardowy": false,
+        "tryb": "ekonomiczny",
+        "koszt": 0.3364,
+        "wypelnienie_szac": 0.718,
+        "uklad_widokow": "wiersz",
+        "skladanie": {
+          "zgiecia_pionowe": [
+            147.5,
+            275.0,
+            402.5,
+            530.0
+          ],
+          "zgiecia_poziome": [
+            297.0
+          ],
+          "pasy": [
+            147.5,
+            127.5,
+            127.5,
+            127.5,
+            190.0
+          ],
+          "rzedy": [
+            297.0,
+            123.0
+          ],
+          "n_pasow": 5,
+          "n_rzedow": 2,
+          "warstwy": 10,
+          "ocena": "poprawne",
+          "ocena_pion": "poprawne",
+          "ocena_poziom": "poprawne",
+          "tabliczka_na_wierzchu": true,
+          "uwagi": [
+            "najwęższy pas pośredni 128 mm",
+            "górny rząd 123 mm (niepełny)"
+          ]
+        },
+        "kandydaci": [
+          {
+            "format": "720×420",
+            "wymiary_mm": [
+              720,
+              420
+            ],
+            "koszt": 0.3364,
+            "pole_m2": 0.3024,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "600×594",
+            "wymiary_mm": [
+              600,
+              594
+            ],
+            "koszt": 0.3671,
+            "pole_m2": 0.3564,
+            "skladanie": "dobre"
+          },
+          {
+            "format": "600×841",
+            "wymiary_mm": [
+              600,
+              841
+            ],
+            "koszt": 0.5405,
+            "pole_m2": 0.5046,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "600×891",
+            "wymiary_mm": [
+              600,
+              891
+            ],
+            "koszt": 0.5506,
+            "pole_m2": 0.5346,
+            "skladanie": "dobre"
+          }
+        ],
+        "bloki": [
+          [
+            "tabliczka",
+            [
+              530.0,
+              10.0,
+              710.0,
+              113.0
+            ]
+          ],
+          [
+            "róża i podziałka",
+            [
+              530.0,
+              118.0,
+              710.0,
+              148.8
+            ]
+          ],
+          [
+            "legenda",
+            [
+              530.0,
+              315.4,
+              710.0,
+              350.5
+            ]
+          ],
+          [
+            "wyr",
+            [
+              314.2,
+              29.7,
+              524.0,
+              80.0
+            ]
+          ],
+          [
+            "uwagi[1–7]",
+            [
+              128.2,
+              27.6,
+              308.2,
+              80.0
+            ]
+          ]
+        ],
+        "kolizje": []
+      },
       "pliki": {
         "pdf": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-12_uziom_i_polaczenia_wyrownawcze_rzut_parteru.pdf",
         "png": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-12_uziom_i_polaczenia_wyrownawcze_rzut_parteru.png",
@@ -554,18 +2784,18 @@
         "ok": true,
         "errors": [],
         "warnings": [
-          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
+          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 1031,
-          "napisy": 231,
+          "prymitywy": 1106,
+          "napisy": 236,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 3.4,
+      "czas_s": 4.7,
       "png_kontrola": {
         "px": [
-          5262,
+          4252,
           2481
         ],
         "dpi_eff": [
@@ -577,12 +2807,28 @@
           150.01239999999999
         ],
         "ok": true
+      },
+      "wypelnienie": {
+        "wypelnienie": 0.933,
+        "wypelnienie_rys": 0.928,
+        "wypelnienie_kontur": 0.636,
+        "pole_arkusza_m2": 0.3024,
+        "pole_ramki_m2": 0.276,
+        "pusty_prostokat_mm": [
+          510,
+          16
+        ],
+        "przyciety_mm": [
+          710,
+          412
+        ],
+        "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
       }
     },
     {
       "nr": "PT-IE-13",
       "tytul": "OCHRONA ODGROMOWA I WYRÓWNANIE POTENCJAŁÓW — RZUT DACHU",
-      "format": "A3x3",
+      "format": "690×420",
       "typ": [
         "inst_rzut"
       ],
@@ -591,6 +2837,171 @@
         "UZIEMIENIA, POŁĄCZENIA WYRÓWNAWCZE, OCHRONA ODGROMOWA — RZUT DACHU"
       ],
       "qa_kind": null,
+      "wymiary_mm": [
+        690.0,
+        420.0
+      ],
+      "pole_m2": 0.2898,
+      "skladanie": {
+        "zgiecia_pionowe": [
+          140.0,
+          260.0,
+          380.0,
+          500.0
+        ],
+        "zgiecia_poziome": [
+          297.0
+        ],
+        "pasy": [
+          140.0,
+          120.0,
+          120.0,
+          120.0,
+          190.0
+        ],
+        "rzedy": [
+          297.0,
+          123.0
+        ],
+        "n_pasow": 5,
+        "n_rzedow": 2,
+        "warstwy": 10,
+        "ocena": "poprawne",
+        "ocena_pion": "poprawne",
+        "ocena_poziom": "poprawne",
+        "tabliczka_na_wierzchu": true,
+        "uwagi": [
+          "najwęższy pas pośredni 120 mm",
+          "górny rząd 123 mm (niepełny)"
+        ]
+      },
+      "uklad": {
+        "format": "690×420",
+        "wymiary_mm": [
+          690.0,
+          420.0
+        ],
+        "pole_m2": 0.2898,
+        "standardowy": false,
+        "tryb": "ekonomiczny",
+        "koszt": 0.3224,
+        "wypelnienie_szac": 0.66,
+        "uklad_widokow": "wiersz",
+        "skladanie": {
+          "zgiecia_pionowe": [
+            140.0,
+            260.0,
+            380.0,
+            500.0
+          ],
+          "zgiecia_poziome": [
+            297.0
+          ],
+          "pasy": [
+            140.0,
+            120.0,
+            120.0,
+            120.0,
+            190.0
+          ],
+          "rzedy": [
+            297.0,
+            123.0
+          ],
+          "n_pasow": 5,
+          "n_rzedow": 2,
+          "warstwy": 10,
+          "ocena": "poprawne",
+          "ocena_pion": "poprawne",
+          "ocena_poziom": "poprawne",
+          "tabliczka_na_wierzchu": true,
+          "uwagi": [
+            "najwęższy pas pośredni 120 mm",
+            "górny rząd 123 mm (niepełny)"
+          ]
+        },
+        "kandydaci": [
+          {
+            "format": "690×420",
+            "wymiary_mm": [
+              690,
+              420
+            ],
+            "koszt": 0.3224,
+            "pole_m2": 0.2898,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "510×594",
+            "wymiary_mm": [
+              510,
+              594
+            ],
+            "koszt": 0.3245,
+            "pole_m2": 0.3029,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "510×841",
+            "wymiary_mm": [
+              510,
+              841
+            ],
+            "koszt": 0.4771,
+            "pole_m2": 0.4289,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "510×891",
+            "wymiary_mm": [
+              510,
+              891
+            ],
+            "koszt": 0.4868,
+            "pole_m2": 0.4544,
+            "skladanie": "poprawne"
+          }
+        ],
+        "bloki": [
+          [
+            "tabliczka",
+            [
+              500.0,
+              10.0,
+              680.0,
+              113.0
+            ]
+          ],
+          [
+            "róża i podziałka",
+            [
+              500.0,
+              118.0,
+              680.0,
+              148.8
+            ]
+          ],
+          [
+            "legenda",
+            [
+              500.0,
+              384.1,
+              680.0,
+              407.0
+            ]
+          ],
+          [
+            "uwagi[1–7]",
+            [
+              500.0,
+              326.7,
+              680.0,
+              379.1
+            ]
+          ]
+        ],
+        "kolizje": []
+      },
       "pliki": {
         "pdf": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-13_ochrona_odgromowa_i_wyrownanie_potencjalow_rzut_.pdf",
         "png": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-13_ochrona_odgromowa_i_wyrownanie_potencjalow_rzut_.png",
@@ -600,18 +3011,18 @@
         "ok": true,
         "errors": [],
         "warnings": [
-          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
+          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 377,
-          "napisy": 160,
+          "prymitywy": 460,
+          "napisy": 163,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 1.8,
+      "czas_s": 2.7,
       "png_kontrola": {
         "px": [
-          5262,
+          4075,
           2481
         ],
         "dpi_eff": [
@@ -623,12 +3034,28 @@
           150.01239999999999
         ],
         "ok": true
+      },
+      "wypelnienie": {
+        "wypelnienie": 0.664,
+        "wypelnienie_rys": 0.638,
+        "wypelnienie_kontur": 0.568,
+        "pole_arkusza_m2": 0.2898,
+        "pole_ramki_m2": 0.264,
+        "pusty_prostokat_mm": [
+          192,
+          174
+        ],
+        "przyciety_mm": [
+          683,
+          420
+        ],
+        "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
       }
     },
     {
       "nr": "PT-IE-14",
       "tytul": "SCHEMAT ROZDZIELNICY GŁÓWNEJ RG",
-      "format": "A3x3",
+      "format": "870×297",
       "typ": [
         "inst_schemat"
       ],
@@ -637,6 +3064,166 @@
         "SCHEMAT IDEOWY ROZDZIELNICY GŁÓWNEJ RG"
       ],
       "qa_kind": null,
+      "wymiary_mm": [
+        870.0,
+        297.0
+      ],
+      "pole_m2": 0.2584,
+      "skladanie": {
+        "zgiecia_pionowe": [
+          210.0,
+          350.0,
+          490.0,
+          680.0
+        ],
+        "zgiecia_poziome": [],
+        "pasy": [
+          210.0,
+          140.0,
+          140.0,
+          190.0,
+          190.0
+        ],
+        "rzedy": [
+          297.0
+        ],
+        "n_pasow": 5,
+        "n_rzedow": 1,
+        "warstwy": 5,
+        "ocena": "poprawne",
+        "ocena_pion": "poprawne",
+        "ocena_poziom": "dobre",
+        "tabliczka_na_wierzchu": true,
+        "uwagi": [
+          "najwęższy pas pośredni 140 mm",
+          "pasy nierówne (rozrzut 50 mm)"
+        ]
+      },
+      "uklad": {
+        "format": "870×297",
+        "wymiary_mm": [
+          870.0,
+          297.0
+        ],
+        "pole_m2": 0.2584,
+        "standardowy": false,
+        "tryb": "ekonomiczny",
+        "koszt": 0.2768,
+        "wypelnienie_szac": 0.733,
+        "uklad_widokow": "wiersz",
+        "skladanie": {
+          "zgiecia_pionowe": [
+            210.0,
+            350.0,
+            490.0,
+            680.0
+          ],
+          "zgiecia_poziome": [],
+          "pasy": [
+            210.0,
+            140.0,
+            140.0,
+            190.0,
+            190.0
+          ],
+          "rzedy": [
+            297.0
+          ],
+          "n_pasow": 5,
+          "n_rzedow": 1,
+          "warstwy": 5,
+          "ocena": "poprawne",
+          "ocena_pion": "poprawne",
+          "ocena_poziom": "dobre",
+          "tabliczka_na_wierzchu": true,
+          "uwagi": [
+            "najwęższy pas pośredni 140 mm",
+            "pasy nierówne (rozrzut 50 mm)"
+          ]
+        },
+        "kandydaci": [
+          {
+            "format": "870×297",
+            "wymiary_mm": [
+              870,
+              297
+            ],
+            "koszt": 0.2768,
+            "pole_m2": 0.2584,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "690×420",
+            "wymiary_mm": [
+              690,
+              420
+            ],
+            "koszt": 0.3224,
+            "pole_m2": 0.2898,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "690×594",
+            "wymiary_mm": [
+              690,
+              594
+            ],
+            "koszt": 0.439,
+            "pole_m2": 0.4099,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "690×841",
+            "wymiary_mm": [
+              690,
+              841
+            ],
+            "koszt": 0.6455,
+            "pole_m2": 0.5803,
+            "skladanie": "poprawne"
+          },
+          {
+            "format": "690×891",
+            "wymiary_mm": [
+              690,
+              891
+            ],
+            "koszt": 0.6586,
+            "pole_m2": 0.6148,
+            "skladanie": "poprawne"
+          }
+        ],
+        "bloki": [
+          [
+            "tabliczka",
+            [
+              680.0,
+              10.0,
+              860.0,
+              113.0
+            ]
+          ],
+          [
+            "legenda",
+            [
+              680.0,
+              265.6,
+              860.0,
+              284.0
+            ]
+          ],
+          [
+            "uwagi[1–7]",
+            [
+              680.0,
+              216.8,
+              860.0,
+              260.6
+            ]
+          ]
+        ],
+        "kolizje": []
+      },
       "pliki": {
         "pdf": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-14_schemat_rozdzielnicy_glownej_rg.pdf",
         "png": "projekt/06_PT_instalacje_elektryczne/rysunki/PT-IE-14_schemat_rozdzielnicy_glownej_rg.png",
@@ -646,19 +3233,19 @@
         "ok": true,
         "errors": [],
         "warnings": [
-          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — pole do uzupełnienia (§ 10 rozp.)"
+          "tabliczka: projektant (imię, nazwisko, nr uprawnień) — [DO UZUPEŁNIENIA] (§ 10 rozp.)"
         ],
         "stats": {
-          "prymitywy": 924,
-          "napisy": 397,
+          "prymitywy": 916,
+          "napisy": 401,
           "sprawdzone_lancuchy": 0
         }
       },
-      "czas_s": 4.5,
+      "czas_s": 5.9,
       "png_kontrola": {
         "px": [
-          5262,
-          2481
+          5138,
+          1754
         ],
         "dpi_eff": [
           150.0,
@@ -669,6 +3256,22 @@
           150.01239999999999
         ],
         "ok": true
+      },
+      "wypelnienie": {
+        "wypelnienie": 0.785,
+        "wypelnienie_rys": 0.766,
+        "wypelnienie_kontur": 0.703,
+        "pole_arkusza_m2": 0.2584,
+        "pole_ramki_m2": 0.2327,
+        "pusty_prostokat_mm": [
+          198,
+          102
+        ],
+        "przyciety_mm": [
+          860,
+          297
+        ],
+        "metoda": "tools/metryki_arkuszy.py (analyze_pdf)"
       }
     }
   ],
@@ -676,5 +3279,17 @@
     "instalacje (obliczenia): Piony deszczowe RS1, RS2, RS6 wyłączone z grupowania pionów wod.-kan. (w modelu `instalacje.piony` bez pola `rodzaj`)."
   ],
   "tom": "projekt/06_PT_instalacje_elektryczne/rysunki/tom_PT-IE.pdf",
-  "czas_s": 76.0
+  "papier": {
+    "arkuszy": 14,
+    "pole_m2": 3.686,
+    "a4_ekw": 59.1,
+    "warstwy_a4": 99,
+    "skladanie": {
+      "dobre": 1,
+      "poprawne": 13,
+      "słabe": 0
+    },
+    "wypelnienie_wazone": 0.802
+  },
+  "czas_s": 93.2
 }

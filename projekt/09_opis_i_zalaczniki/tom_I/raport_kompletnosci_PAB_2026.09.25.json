@@ -19,7 +19,7 @@
       "podstawa": "RPB § 2b ust. 3; W-300",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "1.50 MB (limit 150 MB)"
+      "szczegoly": "2.37 MB (limit 150 MB)"
     },
     {
       "id": "F-03",
@@ -28,7 +28,7 @@
       "podstawa": "RPB § 2b ust. 2; W-300",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "10 arkuszy wektorowych"
+      "szczegoly": "5 arkuszy wektorowych"
     },
     {
       "id": "F-04",
@@ -91,7 +91,7 @@
       "podstawa": "RPB § 6 ust. 1",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "21 stron numerowanych"
+      "szczegoly": "22 stron numerowanych"
     },
     {
       "id": "C1-2-06",
@@ -179,9 +179,9 @@
       "element": "PAB",
       "opis": "Opis pkt 11: analiza automatycznej regulacji temperatury",
       "podstawa": "RPB § 20 ust. 1 pkt 11; W-152",
-      "status": "OK",
+      "status": "DO UZUPEŁNIENIA",
       "obowiazkowa": true,
-      "szczegoly": ""
+      "szczegoly": "nakład K i oszczędność s — [DO UZUPEŁNIENIA] (dane z ofert / producenta)"
     },
     {
       "id": "C1-2-16",
@@ -215,9 +215,9 @@
       "element": "PAB",
       "opis": "Opinia geotechniczna (kat. II)",
       "podstawa": "rozp. Dz.U. 2012 poz. 463 § 7 ust. 1, § 8; D-08",
-      "status": "OK",
+      "status": "DO UZUPEŁNIENIA",
       "obowiazkowa": true,
-      "szczegoly": ""
+      "szczegoly": "opinia przykładowa [DANE PRZYKŁADOWE – FIKCYJNE]; autor i badania podłoża — [DO UZUPEŁNIENIA]"
     },
     {
       "id": "C1-2-20",
@@ -233,9 +233,9 @@
       "element": "PAB",
       "opis": "Rysunek: rzut (widok) dachu",
       "podstawa": "RPB § 21 pkt 1 lit. a, c",
-      "status": "DO UZUPEŁNIENIA",
+      "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "PB-AR-04 — RZUT DACHU (1:50); tylko arkusz zastępczy — rysunek niedołączony"
+      "szczegoly": "PB-AR-03 — RZUT II PIĘTRA I RZUT DACHU (1:50)"
     },
     {
       "id": "C1-2-22",
@@ -253,7 +253,7 @@
       "podstawa": "RPB § 21 pkt 1 lit. c",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "rysunków: 4 (wymagane ≥ 2)"
+      "szczegoly": "rysunków: 2 (wymagane ≥ 2)"
     },
     {
       "id": "C1-2-24",
@@ -262,21 +262,21 @@
       "podstawa": "RPB § 9 ust. 3; W-306",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "10 rysunków w skali nie mniejszej niż 1:100"
+      "szczegoly": "5 rysunków w skali nie mniejszej niż 1:100"
     }
   ],
   "znaczniki": {
-    "DO UZUPEŁNIENIA": 73,
-    "DOKUMENT ZEWNĘTRZNY": 0,
-    "DANE PRZYKŁADOWE": 56,
-    "ZAŁ": 8,
-    "NZW": 0,
-    "INT": 9,
+    "DO UZUPEŁNIENIA": 84,
+    "DOKUMENT ZEWNĘTRZNY": 1,
+    "DANE PRZYKŁADOWE": 51,
+    "ZAŁ": 16,
+    "NZW": 1,
+    "INT": 13,
     "PROG": 0,
     "lista": {
       "[DO UZUPEŁNIENIA: nazwa pracowni projektowej]": 1,
       "[DO UZUPEŁNIENIA: adres pracowni]": 1,
-      "[DANE PRZYKŁADOWE – FIKCYJNE]": 56,
+      "[DANE PRZYKŁADOWE – FIKCYJNE]": 51,
       "[DO UZUPEŁNIENIA: jednostka ewidencyjna — kod TERYT WWPPGG_R i nazwa]": 1,
       "[DO UZUPEŁNIENIA: kod TERYT jedn. ewid. WWPPGG_R]": 2,
       "[DO UZUPEŁNIENIA: imię i nazwisko lub nazwa inwestora]": 3,
@@ -288,44 +288,47 @@
       "[DO UZUPEŁNIENIA: potwierdzenie wpisu w e-CRUB albo dołączenie kopii]": 1,
       "[DO UZUPEŁNIENIA: data oświadczenia Inwestora (art. 102a ust. 1 PB)]": 1,
       "[DO UZUPEŁNIENIA: nr ewidencyjny PZGiK i data]": 1,
-      "[DO UZUPEŁNIENIA]": 1,
-      "[ZAŁ]": 8,
-      "[INT]": 9,
+      "[ZAŁ]": 16,
+      "[DO UZUPEŁNIENIA: …]": 1,
+      "[DOKUMENT ZEWNĘTRZNY – …]": 1,
+      "[NZW]": 1,
+      "[INT]": 13,
       "[DO UZUPEŁNIENIA: interpretacja zgodności z MPZP]": 1,
       "[DO UZUPEŁNIENIA: kolor pokrycia]": 1,
       "[DO UZUPEŁNIENIA: kolor ram (RAL)]": 1,
       "[DO UZUPEŁNIENIA: paleta MPZP]": 1,
       "[DO UZUPEŁNIENIA: karta kolorystyki elewacji]": 1,
-      "[DO UZUPEŁNIENIA: wskaźnik nagromadzenia odpadów z regulaminu gminy]": 1,
-      "[DO UZUPEŁNIENIA: imię, nazwisko, nr uprawnień]": 1,
-      "[DO UZUPEŁNIENIA: K — oferta (PT-IS)]": 1,
-      "[DO UZUPEŁNIENIA: s — dane producenta systemu regulacji / PT-IS]": 1,
+      "[DO UZUPEŁNIENIA: nr i data zezwolenia oraz uzgodnienia zarządcy drogi]": 1,
       "[DO UZUPEŁNIENIA: metryki otworów, protokoły sondowań, data badań]": 1,
       "[DO UZUPEŁNIENIA: imię i nazwisko, kwalifikacje zawodowe (świadectwo/uprawnienia), podpis]": 1,
       "[DO UZUPEŁNIENIA: data opinii]": 1,
       "[DO UZUPEŁNIENIA: osoba odbierająca podłoże]": 1,
-      "[DO UZUPEŁNIENIA: arkusz do wygenerowania z modelu]": 20
+      "[DO UZUPEŁNIENIA: wskaźnik nagromadzenia odpadów z regulaminu gminy]": 1,
+      "[DO UZUPEŁNIENIA: imię, nazwisko, nr uprawnień]": 1,
+      "[DO UZUPEŁNIENIA: K — oferta (PT-IS)]": 1,
+      "[DO UZUPEŁNIENIA: s — dane producenta systemu regulacji / PT-IS]": 1,
+      "[DO UZUPEŁNIENIA]": 30
     }
   },
   "elementy": {
     "PAB": {
       "od": 1,
-      "do": 32,
-      "strony_opisu": 22,
-      "arkusze": 10
+      "do": 28,
+      "strony_opisu": 23,
+      "arkusze": 5
     }
   },
-  "rozmiar_mb": 1.5031776428222656,
-  "strony": 32,
+  "rozmiar_mb": 2.37128,
+  "strony": 28,
   "podsumowanie": {
     "status": "PRZYKŁAD – NIE DO ZŁOŻENIA",
-    "OK": 26,
+    "OK": 25,
     "BRAK": 0,
-    "DO UZUPEŁNIENIA": 3,
+    "DO UZUPEŁNIENIA": 4,
     "N/D": 0,
     "OSTRZEŻENIE": 0,
-    "znaczniki_do_uzupelnienia": 73,
-    "znaczniki_dokument_zewnetrzny": 0,
-    "znaczniki_dane_przykladowe": 56
+    "znaczniki_do_uzupelnienia": 84,
+    "znaczniki_dokument_zewnetrzny": 1,
+    "znaczniki_dane_przykladowe": 51
   }
 }
