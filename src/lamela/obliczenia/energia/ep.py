@@ -198,8 +198,9 @@ def system_projektowy(cfg: dict, went, A_f: float, dobor: dict | None = None, za
                "η_H,d = 0,96 (tab. 6 lp. 3a), η_H,s = 1,00 (tab. 8 lp. 3)",
                "el", float(cw.get("COP", pc.get("COP_cwu", 3.2))), eta_W_s, eta_W_d,
                f"COP_cwu = {fmt(pc.get('COP_cwu', 3.2), 2)} (PN-EN 16147); η_W,s = {fmt(eta_W_s, 3)} "
-               f"(zasobnik {fmt(V_zb, 0)} dm³, strata postojowa {fmt(zb.get('strata_W'), 0) if zb.get('strata_W') else '—'} W); η_W,d = {fmt(eta_W_d, 2)} (tab. 12 lp. 6.1a — cyrkulacja "
-               "z ograniczeniem czasu pracy)", pom, dane_pv(pvc) if pvc is not False else None,
+               f"(zasobnik {fmt(V_zb, 0)} dm³, strata postojowa {fmt(zb.get('strata_W'), 0) if zb.get('strata_W') else '—'} W); η_W,d = {fmt(eta_W_d, 2)} "
+               + ("(tab. 12 lp. 6.1a — cyrkulacja z ograniczeniem czasu pracy)" if cyrk else
+                  "(bez cyrkulacji w EP — `energia.cwu.cyrkulacja` modelu; wartość zachowawcza)"), pom, dane_pv(pvc) if pvc is not False else None,
                (pvc or {}).get("autokonsumpcja", "symulacja") if isinstance(pvc, dict) else "symulacja",
                bool((pvc or {}).get("sterowanie_cwu_pv", True)) if isinstance(pvc, dict) else True,
                float((dobor or {}).get("udzial_grzalki", 0.0)), E_dez, capex_zl=None, status=PRZYKL)

@@ -423,28 +423,35 @@ def oblicz_deszczowa(dane: DaneBudynku, par: ParametryDeszcz | None = None, podl
         V, td = objetosc_bilansowa((A_red + A_n * 1.0) / 1e4, Qi)
         V_n = max(V - kredyt_zb, 0.0)
         return V_n, fb * V_n, td, Qi
-    if par.A_niecki:
-        A_n = par.A_niecki
-    else:
-        A_n = 2.0
-        while A_n < 500:
-            Va, Vma, td, Qi = niecka(A_n, 0.0)
-            if Vma <= A_n * par.h_niecki and Vma / (Qi / 1000.0) / 3600.0 <= t_opr_max:
-                break
-            A_n += 0.5
+    roz = ret.get("rozsaczanie") or {}
+    h_n = float(roz.get("glebokosc") or par.h_niecki) if not par.A_niecki else par.h_niecki
+    A_n_min = 2.0                         # dobór minimalnej powierzchni: V_min(a) ≤ A_n·h i opróżnianie ≤ 24 h
+    while A_n_min < 500:
+        Va, Vma, td, Qi = niecka(A_n_min, 0.0)
+        if Vma <= A_n_min * h_n and Vma / (Qi / 1000.0) / 3600.0 <= t_opr_max:
+            break
+        A_n_min += 0.5
+    # przyjęta niecka: parametr wywołania → obrys z modelu (dzialka.yaml: retencja.rozsaczanie) → dobór
+    from shapely.geometry import Polygon
+    A_mod = Polygon(roz["obrys"]).area if len(roz.get("obrys") or []) >= 3 else None
+    A_n = par.A_niecki or A_mod or A_n_min
+    zr_niecki = ("parametr obliczeń" if par.A_niecki else "model (dzialka.yaml: retencja.rozsaczanie)" if A_mod
+                 else "dobór (minimalna powierzchnia)")
     Va, Vma, tda, Qia = niecka(A_n, 0.0)
     Vb, Vmb, tdb, Qib = niecka(A_n, V_zb)
     t_opr = Vma / (Qia / 1000.0) / 3600.0 if Qia > 0 else float("inf")
-    V_n = A_n * par.h_niecki
+    V_n = A_n * h_n
     ZWG = par.ZWG_ppt if par.ZWG_ppt is not None else float(wym("geotechnika", "ZWG_ppt", 3.8) or 3.8)
     war.append(Warunek("Pojemność szczelnego zbiornika (bez zgłoszenia)", V_zb, "<=", V_zb_max, "m³",
                        wym_zrodlo("wodkan", "zbiornik_opadowy_bez_zgloszenia_max"), "W-145"))
     war.append(Warunek("Niecka: pojemność ≥ V_min (zbiornik pełny — bez zaliczenia)", V_n, ">=", Vma, "m³",
                        "Aquanet 2024 wzór (1), f_b", "W-143"))
-    war.append(Warunek("Niecka: głębokość", par.h_niecki, "<=", 0.30, "m", "W-145 (≤ 0,3 m)", "W-145"))
+    war.append(Warunek("Niecka: głębokość", h_n, "<=", 0.30, "m", "W-145 (≤ 0,3 m)", "W-145"))
+    war.append(Warunek("Niecka: powierzchnia przyjęta ≥ minimalna z doboru", A_n, ">=", A_n_min, "m²",
+                       f"dobór (V_min ≤ A_n·h, t_opr ≤ {f(t_opr_max, 0)} h); przyjęto: {zr_niecki}", "W-143", nd=1))
     war.append(Warunek("Niecka: czas opróżniania", t_opr, "<=", t_opr_max, "h", wym_zrodlo("wodkan", "retencja_oproznianie_max"),
                        "W-143", nd=1))
-    war.append(Warunek("Dno niecki nad maks. zwierciadłem wód gruntowych", ZWG - par.h_niecki, ">=",
+    war.append(Warunek("Dno niecki nad maks. zwierciadłem wód gruntowych", ZWG - h_n, ">=",
                        float(wym("wodkan", "rozsaczanie_dno_nad_ZWG_min", 1.0) or 1.0), "m", "Aquanet 2024; W-144", "W-144"))
     # lokalizacja urządzeń z dzialka.yaml
     lok = []
@@ -479,10 +486,14 @@ def oblicz_deszczowa(dane: DaneBudynku, par: ParametryDeszcz | None = None, podl
              Vma, "m³", "f_b wg W-143", 2),
         Krok("Wariant: zbiornik pusty na początku opadu (zaliczenie V_zb)", "V_min' = f_b·max(V_obl − V_zb; 0)",
              f"{f(fb, 1)}·max({f(Va, 2)} − {f(V_zb, 1)}; 0)", Vmb, "m³", "", 2),
-        Krok("Przyjęta niecka (ogród deszczowy)", "A_n × h", f"{f(A_n, 1)} × {f(par.h_niecki, 2)}", V_n, "m³", "W-145", 2),
+        Krok("Minimalna powierzchnia niecki (dobór)", "A_n,min: V_min ≤ A_n·h ∧ t_opr ≤ t_max", "iteracja co 0,5 m²",
+             A_n_min, "m²", "", 1),
+        Krok(f"Przyjęta niecka (ogród deszczowy) — {zr_niecki}", "A_n × h", f"{f(A_n, 1)} × {f(h_n, 2)}", V_n, "m³",
+             "W-145", 2),
         Krok("Czas opróżniania niecki", "t = V_min/Q_inf", f"{f(Vma, 2)}/{f(Qia / 1000, 5)}/3600", t_opr, "h", "", 1),
     ]
-    retencja = {"A_red": A_red, "skladniki": skl, "V_zb": V_zb, "A_n": A_n, "V_n": V_n, "V_obl_a": Va, "V_min_a": Vma,
+    retencja = {"A_red": A_red, "skladniki": skl, "V_zb": V_zb, "A_n": A_n, "A_n_min": A_n_min, "h_n": h_n,
+                "zrodlo_niecki": zr_niecki, "V_n": V_n, "V_obl_a": Va, "V_min_a": Vma,
                 "V_min_b": Vmb, "t_d": tda, "Q_inf": Qia, "t_opr": t_opr, "kf": par.k_f, "lokalizacje": lok}
     # ---- skrzynki rozsączające (wariant opcjonalny)
     if par.skrzynki:

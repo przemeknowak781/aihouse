@@ -29,7 +29,7 @@ from .fizyka.grunt import raport_grunt
 from .fizyka.okna import raport_okna
 from .fizyka.u_przegrody import raport_u, warstwy_przegrody
 from .fizyka.warstwy import uwagi_wezla
-from .wspolne import PRZYKL, Zalozenia, fmt, fmt_u, ok, tabela_md
+from .wspolne import PRZYKL, ZAL as ZAL_, Zalozenia, fmt, fmt_u, ok, tabela_md
 
 ROLE_GLASER = ("sciana_zewn", "dach", "strop_zewn", "sciana_nieogrz", "strop_nieogrz", "strop_nieogrz_gora")
 
@@ -138,6 +138,76 @@ def _ep_warianty(R: dict, m, ob, went, obc, wyniki_symulacji, *, cfg: dict | Non
     R["ep"] = wA
     R["ep_alt"] = [wA, wA0, wB, wC]
     R["ep_wrazliwosc"] = wrazl
+
+
+def cfg_z_instalacji(cfg: dict, W: dict) -> tuple[dict, dict | None, list[str]]:
+    """Dane urządzeń do EP z modułów instalacji — jedno źródło danych wyrobu (PT-3 IS, weryfikacja I-4):
+
+    * pompa ciepła — urządzenie dobrane w module ogrzewania (``W["ogrzewanie"].pc``: moc w punktach A−15/A−7/A2 W35,
+      SCOP₃₅, COP_cwu, η_s, L_WA); do η_H,g przyjęto ostrożnie min(SCOP deklarowany; SCOP z bilansu godzinowego TMY
+      Poznań), udział grzałki — z tego samego bilansu godzinowego;
+    * zasobnik c.w.u. — pojemność i energia dezynfekcji z modułu wody (``W["woda"].cwu``); strata postojowa
+      przeskalowana z zasobnika bibliotecznego proporcjonalnie do powierzchni (V^(2/3)) [ZAŁ] — wymaganie dla wyrobu.
+
+    Zwraca (cfg, dobór dla EP, uwagi). Brak modułu → sekcja `energia` modelu bez zmian."""
+    import copy
+    from .wspolne import wyrob
+    cfg = copy.deepcopy(cfg or {})
+    uw: list[str] = []
+    dobor = None
+    og_m, wd_m = W.get("ogrzewanie"), W.get("woda")
+    if og_m is not None and getattr(og_m, "pc", None):
+        pc, P = og_m.pc, dict(zip(og_m.pc["T"], og_m.pc["P"]))
+        scop_d, scop_t = float(pc["SCOP_35"]), float(og_m.bin["SCOP"])
+        scop = min(scop_d, scop_t)
+        og = dict(cfg.get("ogrzewanie") or {})
+        og["zrodlo"] = {"model": pc["model"], "P_Am15W35_kW": P.get(-15), "P_Am7W35_kW": P.get(-7),
+                        "P_A2W35_kW": P.get(2), "SCOP_35": scop_d, "COP_cwu": pc.get("COP_cwu"),
+                        "eta_s_35": pc.get("eta_s_35"), "L_WA_dB": pc.get("L_WA"),
+                        "moc_grzalki_kW": og_m.par.grzalka_kW, "status": PRZYKL,
+                        "zrodlo": f"{pc['model']} — dobór w module ogrzewania; do EP min(SCOP deklarowany "
+                                  f"{fmt(scop_d, 2)}; SCOP z bilansu godzinowego TMY {fmt(scop_t, 2)})"}
+        og["SCOP"] = scop
+        cfg["ogrzewanie"] = og
+        dobor = {"udzial_grzalki": float(og_m.bin["udzial_grzalki"]), "biwalentny_C": og_m.biwalentny.get("theta_biv"),
+                 "zrodlo": "lamela.obliczenia.sanitarne.ogrzewanie (bilans godzinowy TMY)"}
+        uw.append(f"PC do EP: {pc['model']} (moduł ogrzewania), SCOP = {fmt(scop, 2)}")
+    if wd_m is not None and (getattr(wd_m, "cwu", None) or {}).get("V_zas"):
+        cw = dict(cfg.get("cwu") or {})
+        zs = cw.get("zasobnik")
+        ref = dict(wyrob("zasobnik_cwu", zs if isinstance(zs, str) else "Z250"))
+        V = float(wd_m.cwu["V_zas"])
+        S = float(ref["strata_W"]) * (V / float(ref["V_dm3"])) ** (2.0 / 3.0)
+        cw["zasobnik"] = {"opis": f"zasobnik c.w.u. {fmt(V, 0)} dm³ z wężownicą pod PC (moduł wody)", "V_dm3": V,
+                          "strata_W": round(S, 0), "status": ZAL_,
+                          "zrodlo": f"strata postojowa ≤ {fmt(S, 0)} W — przeskalowana z danych przykładowych "
+                                    f"{fmt(ref['V_dm3'], 0)} dm³ / {fmt(ref['strata_W'], 0)} W wg V^(2/3) [ZAŁ]; "
+                                    "wymaganie dla wyrobu"}
+        cw["dezynfekcja_kWh_rok"] = float(wd_m.cwu["dez_E_rok"])
+        cw["dezynfekcja_opis"] = (f"moduł wody: co {wd_m.par.dezynfekcja_co_dni} dni, zasobnik {fmt(V, 0)} dm³ do "
+                                  f"{fmt(wd_m.par.theta_dez_zas, 0)} °C + pętla")
+        cfg["cwu"] = cw
+        uw.append(f"zasobnik do EP: {fmt(V, 0)} dm³, strata {fmt(S, 0)} W, dezynfekcja "
+                  f"{fmt(cw['dezynfekcja_kWh_rok'], 0)} kWh/rok (moduł wody)")
+    return cfg, dobor, uw
+
+
+def przelicz_ep_wyroby(R: dict, W: dict, m, wyniki_symulacji: dict | None = None) -> list[str]:
+    """Przelicza warianty EP (A, A0, alternatywy, wrażliwość) i dobór PC modułu obciążenia na urządzeniach
+    zaprojektowanych w modułach instalacji (``cfg_z_instalacji``). Aktualizuje ``R`` w miejscu; zwraca uwagi."""
+    from .energia.obciazenie_cieplne import dobor_pc
+    ob, went, obc = R["obudowa"], R["went"], R["obc"]
+    cfg, dobor, uw = cfg_z_instalacji(ob.cfg, W)
+    if not uw:
+        return uw
+    # dobór PC modułu obciążenia dla tego samego wyrobu; punkt biwalentny i udział grzałki — z bilansu godzinowego
+    # modułu ogrzewania (jedna wartość w tomie)
+    obc.dobor = dict(dobor_pc(obc, cfg), **{k: v for k, v in (dobor or {}).items() if k != "zrodlo"})
+    _ep_warianty(R, m, ob, went, obc, wyniki_symulacji, cfg=cfg, dobor=obc.dobor)
+    for u in uw:
+        R["zal"]["ep"].dodaj(u, PRZYKL, "lamela.obliczenia.fizyka_energia.cfg_z_instalacji")
+    R["ep_z_instalacji"] = uw
+    return uw
 
 
 def zapisz_raporty(R: dict, out, *, tytul: str = "", model_opis: str = "") -> list[str]:

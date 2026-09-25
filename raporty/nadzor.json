@@ -1,27 +1,27 @@
 {
- "czas": "2026-09-25 10:14",
+ "czas": "2026-09-25 10:17",
  "aktywni": [
   {
    "id": "af672122528919503",
    "opis": "wf_a8783476-2a1:model:domkniecie",
-   "idle_min": 3.7,
-   "bez_narzedzi_min": 3.7,
+   "idle_min": 6.7,
+   "bez_narzedzi_min": 6.7,
    "limity": 0,
    "powody": []
   },
   {
    "id": "aa91fab19d57ad831",
    "opis": "wf_dad224e5-cd8:zastosowanie:IE",
-   "idle_min": 0.0,
-   "bez_narzedzi_min": null,
+   "idle_min": 0.5,
+   "bez_narzedzi_min": 0.5,
    "limity": 0,
    "powody": []
   },
   {
    "id": "abd1c424d0164d558",
    "opis": "wf_c5f7e298-4b9:poprawki:BO",
-   "idle_min": 2.3,
-   "bez_narzedzi_min": 2.3,
+   "idle_min": 5.3,
+   "bez_narzedzi_min": 5.3,
    "limity": 0,
    "powody": []
   },
@@ -29,12 +29,12 @@
    "id": "ac29e899834d24a29",
    "opis": "wf_c5f7e298-4b9:poprawki:IS",
    "idle_min": 0.1,
-   "bez_narzedzi_min": 0.1,
+   "bez_narzedzi_min": 0.2,
    "limity": 0,
    "powody": []
   }
  ],
  "zakonczeni": 0,
  "zastoje": [],
- "repo_bez_zmian_min": 0.5
+ "repo_bez_zmian_min": 0.3
 }
