@@ -1152,17 +1152,29 @@ class AnalizaKonstrukcji:
             zn, fn, sn_, An = zelbet.wymiaruj_plyte(M_nar, h, dy, beton, self.stal, smax,
                                                     nazwa=f"Pole {c['id']} — zbrojenie narożne (góra i dół, strefy {f(a_n)} × {f(a_n)} m)")
         # ścinanie — maks. reakcja podpór przyległych
-        vmax = 0.0
+        vmax, v_sid = 0.0, None
         for s in g.podp_l:
             if s.linia.distance(c["rect"]) > 0.05:
                 continue
             both = sum(1 for cc in g.komorki if s.linia.distance(cc["rect"]) < 0.05 and cc is not c) > 0
-            vmax = max(vmax, g.env["rmax"].get(s.id, 0.0) * (0.6 if both else 1.0))
+            v_ = g.env["rmax"].get(s.id, 0.0) * (0.6 if both else 1.0)
+            if v_ > vmax:
+                vmax, v_sid = v_, s.id
         for s in g.podp_p:
             if c["rect"].buffer(0.05).contains(Point(*s.xy)):
                 self.log(f"{e.id}: podpora punktowa {s.id} w polu {c['id']} — sprawdzić przebicie (6.4) [WYMAGA ANALIZY]")
         sc = zelbet.scinanie_bez_zbrojenia(vmax, 1.0, dx, min(Ax, Agx if Agx > 0 else Ax), beton,
                                            nazwa=f"Pole {c['id']} — ścinanie (maks. reakcja podpory, [UPR] 0,6·r przy podporze pośredniej)")
+        sc_zbr = None
+        if not sc.ok and h >= 0.20 - 1e-9:
+            # zbrojenie na ścinanie płyty (PN-EN 1992-1-1 9.3.2(1): h ≥ 200 mm) — strzemiona φ8 w pasie przypodporowym,
+            # rozstaw poprzeczny ramion ≤ 1,5d (9.3.2(5)) → liczba ramion na 1 m szerokości
+            n_r = max(4, int(math.ceil(1.0 / (1.5 * dx))) + 1)
+            sc = zelbet.scinanie_strzemiona(vmax, 1.0, dx, min(Ax, Agx if Agx > 0 else Ax), beton, self.stal, 8, n_r,
+                                            nazwa=f"Pole {c['id']} — ścinanie: V_Ed > V_Rd,c — zbrojenie na ścinanie "
+                                                  f"płyty (9.3.2), strzemiona φ8, {n_r} ramion/m")
+            sc_zbr = {"opis": sc.strzemiona.replace("-cięte", " ramion/m"), "fi": 8, "s": float(sc.s), "ramiona": n_r,
+                      "podpora": v_sid, "V": vmax}
         # ugięcie
         wn = np.unique(fe.el_nodes[msk].ravel())
         EI = e.beton.E_cm * 1000 * h ** 3 / 12
@@ -1212,7 +1224,7 @@ class AnalizaKonstrukcji:
         wyniki_pelne = [r for r in (tab_wyn,) if r is not None] + wyniki
         return {"wiersz": wiersz, "M_max": max(MxD, MyD), "warunki": warunki, "wyniki": wyniki, "wyniki_pelne": wyniki_pelne,
                 "prety": pr, "dane": {"pole": c["id"], "Mx": Mx, "My": My, "Mx_tabl": Mx_t, "My_tabl": My_t, "Mgx": Mgx_d,
-                                      "M_naroze": M_nar,
+                                      "M_naroze": M_nar, "sc_zbr": sc_zbr,
                                       "Mgy": Mgy_d, "Ax": Ax, "Ay": Ay, "w": wobl, "eta": eta, "lx": c["lx"], "ly": c["ly"],
                                       "brzegi": br, "V": vmax}}
 
