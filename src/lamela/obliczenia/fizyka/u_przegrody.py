@@ -248,6 +248,11 @@ def oblicz_u(warstwy: Sequence[Any], materialy: Any = None, *, rola: str = "scia
                                grupa=str(w.get("grupa", f"g{i}")),
                                uwagi="λ'' = Σ f_q·λ_q (kres dolny)"))
             continue
+        if (mp.kreskowanie or "").startswith("MEMBRANA") and d <= 0.012:
+            # membrana wiatroizolacyjna: grubość w modelu jest rysunkowa — opór cieplny pominięty (zachowawczo)
+            WU.append(WarstwaU(i + 1, mp.kod, nm, d, lam, 0.0, "pominieta", fn,
+                               uwagi="membrana — opór cieplny pominięty (grubość rysunkowa)"))
+            continue
         if lam is None or lam <= 0:
             raise ValueError(f"warstwa {i + 1} ({mp.kod}): brak λ materiału")
         rodz = "klin" if w.get("klin") else "jednorodna"
@@ -255,6 +260,12 @@ def oblicz_u(warstwy: Sequence[Any], materialy: Any = None, *, rola: str = "scia
                            uwagi="grubość minimalna warstwy klinowej (zał. C)" if rodz == "klin" else ""))
 
     # --- R_T: jednorodna lub metoda kresów ---
+    # elewacja wentylowana: skrajna zewnętrzna warstwa modelu to membrana wiatroizolacyjna za szczeliną
+    # dobrze wentylowaną (okładzina poza przegrodą) — R_se := R_si (p. 6.9.4), jak przy jawnej pustce „dw”
+    if (strona == "zewn" and pominiete_od is None and WU and kierunek == "poziomo"
+            and (mat_props(materialy, ws[seq[-1]].get("mat")).kreskowanie or "").startswith("MEMBRANA")):
+        Rse = Rsi
+        uw.append("elewacja wentylowana za membraną — R_se = R_si (PN-EN ISO 6946:2017 p. 6.9.4)")
     niej = [x for x in WU if x.rodzaj == "niejednorodna"]
     R_hom = Rsi + sum(x.R for x in WU) + Rse
     Rg = Rd = e = None
@@ -449,19 +460,25 @@ def warstwy_stropu(m, strop: dict, kond_nad: str | None, *, mat_plyty: str | Non
 
 
 def poprawki_domyslne(rola: str, warstwy: list[dict], materialy: Any, zal: Zalozenia | None = None) -> PoprawkiU:
-    """Poprawki ΔU wg rejestru W-250: poziom pustek 1 (chyba że wykazano 0); łączniki ETICS dla ścian z izolacją
-    zewnętrzną z tynkiem (dane przykładowe ETA); dach odwrócony — p wg danych klimatycznych (założenie)."""
+    """Poprawki ΔU wg rejestru W-250: poziom pustek 1 (chyba że wykazano 0); łączniki dla izolacji mocowanej mechanicznie
+    po zimnej stronie warstwy konstrukcyjnej (ETICS, elewacja wentylowana, docieplenie spodu stropu; dane przykładowe ETA); dach odwrócony — p wg danych klimatycznych (założenie)."""
     fun = [funkcja_warstwy(mat_props(materialy, w.get("mat")), w) for w in warstwy]
     pop = PoprawkiU(poziom_pustek=1)
-    if rola in ("sciana_zewn", "sciana_nieogrz") and "izolacja" in fun:
+    i_k = next((i for i, w in enumerate(warstwy) if w.get("konstrukcyjna")), None)
+    if rola in ("sciana_zewn", "sciana_nieogrz", "strop_zewn") and "izolacja" in fun:
         i_iz = max(i for i, f in enumerate(fun) if f == "izolacja")
-        if any(f == "tynk" for f in fun[i_iz + 1:]):          # ETICS: tynk na izolacji
+        etics = any(f == "tynk" for f in fun[i_iz + 1:])      # ETICS: tynk na izolacji
+        # izolacja po zimnej stronie warstwy konstrukcyjnej (elewacja wentylowana, docieplenie spodu stropu) —
+        # mocowana łącznikami mechanicznymi (kołki talerzowe) → ΔU_f jak dla ETICS (zał. F.3)
+        mech = i_k is not None and any(f == "izolacja" for f in fun[i_k + 1:])
+        if etics or mech:
             L = wyrob("laczniki", "ETICS")
             if L:
                 pop.laczniki = {"n_f": L.get("n_f_m2", 6.0), "chi_p": L.get("chi_p", 0.002)}
                 pop.zrodlo_lacznikow = L.get("zrodlo", "")
                 if zal:
-                    zal.dodaj(f"Łączniki ETICS: n_f = {fmt(L.get('n_f_m2'), 1)} szt./m², χ_p = {fmt(L.get('chi_p'), 3)} W/K "
+                    zal.dodaj(f"Łączniki izolacji mocowanej mechanicznie (ETICS, elewacja wentylowana, docieplenie spodu "
+                              f"stropu): n_f = {fmt(L.get('n_f_m2'), 1)} szt./m², χ_p = {fmt(L.get('chi_p'), 3)} W/K "
                               "(ΔU_f = n_f·χ_p, PN-EN ISO 6946:2017 zał. F.3)", PRZYKL, L.get("zrodlo", ""))
     if rola == "dach" and "hydroizolacja" in fun and "izolacja" in fun:
         i_h = min(i for i, f in enumerate(fun) if f == "hydroizolacja")

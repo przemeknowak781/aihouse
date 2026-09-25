@@ -81,7 +81,10 @@ def rozdz_podstawy(o: Opis, D: DanePTIS, d: dict):
       wewnętrznego), obliczenia i dobór urządzeń (lit. b — moce cieplne i elektryczne);
     * § 23 pkt 9 — zasadnicze urządzenia (pompa ciepła, zasobnik c.w.u., bufor, centrala wentylacyjna, zbiornik
       retencyjny); § 23 pkt 10 — dane ppoż. stosownie do zakresu; § 23 pkt 11 lit. a–d — charakterystyka energetyczna;
-    * § 23 pkt 5, 6 i 12 — nie dotyczy (budynek mieszkalny, nie liniowy); § 23 pkt 4a — nie dotyczy (W-231);
+    * § 23 pkt 5 — nie dotyczy; § 23 pkt 6 — nie dotyczy (budynek mieszkalny, nie obiekt liniowy); § 23 pkt 4a —
+      nie dotyczy (W-231);
+    * § 23 pkt 12 (dodany Dz.U. 2026 poz. 597 § 1 pkt 6) — nie dotyczy: PZT i PAB nie przewidują budowli
+      ochronnej ani miejsca doraźnego schronienia (PAB § 20 ust. 1 pkt 14 — n/d);
     * § 24 pkt 3 i pkt 4 lit. a — rzuty i schematy instalacji (część rysunkowa).
 
     **Podstawy prawne i techniczne (rejestr wymagań `docs/10_podstawy_prawne/00_rejestr_wymagan.md`).**

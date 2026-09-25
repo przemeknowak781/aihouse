@@ -1,7 +1,7 @@
 {
   "plik": "PT_3_IS_2026.09.25.pdf",
   "lista": "PT-3 IS — projekt techniczny, instalacje sanitarne (rejestr C.2)",
-  "status": "PRZYKŁAD – NIE DO ZŁOŻENIA",
+  "status": "NIEKOMPLETNY",
   "pozycje": [
     {
       "id": "F-01",
@@ -19,7 +19,7 @@
       "podstawa": "RPB § 2b ust. 3",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "3.31 MB (limit 150 MB)"
+      "szczegoly": "3.04 MB (limit 150 MB)"
     },
     {
       "id": "F-03",
@@ -28,7 +28,7 @@
       "podstawa": "RPB § 2b ust. 2",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "17 arkuszy wektorowych"
+      "szczegoly": "11 arkuszy wektorowych"
     },
     {
       "id": "F-05",
@@ -82,7 +82,7 @@
       "podstawa": "RPB § 6 ust. 2",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "67 stron numerowanych"
+      "szczegoly": "70 stron numerowanych"
     },
     {
       "id": "C2-06",
@@ -109,7 +109,25 @@
       "podstawa": "RPB § 9 ust. 3",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "14 rysunków w skali nie mniejszej niż 1:100"
+      "szczegoly": "9 rysunków w skali nie mniejszej niż 1:100"
+    },
+    {
+      "id": "C2-09",
+      "element": "PT",
+      "opis": "Dane dotyczące warunków ochrony ludności (w PT — „nie dotyczy” z podstawą)",
+      "podstawa": "RPB § 23 pkt 12 (Dz.U. 2026 poz. 597 § 1 pkt 6)",
+      "status": "BRAK",
+      "obowiazkowa": true,
+      "szczegoly": ""
+    },
+    {
+      "id": "C2-10",
+      "element": "*",
+      "opis": "Metryki arkuszy: projektant (dane lub [DO UZUPEŁNIENIA]), sprawdzający (osoba lub „nie dotyczy (art. 20 ust. 3 pkt 2 PB)”)",
+      "podstawa": "RPB § 10 ust. 1 pkt 3; W-305, W-320",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "11 tabliczek z wypełnioną metryką"
     },
     {
       "id": "C2-IS-01",
@@ -163,15 +181,24 @@
       "podstawa": "RPB § 24 pkt 4 lit. a",
       "status": "OK",
       "obowiazkowa": true,
-      "szczegoly": "PT-IS-01 — INSTALACJA WODOCIĄGOWA — RZUT PARTERU (1:50); PT-IS-02 — INSTALACJA WODOCIĄGOWA — RZUT I PIĘTRA (1:50); PT-IS-03 — INSTALACJA WODOCIĄGOWA — RZUT II P"
+      "szczegoly": "PT-IS-01 — INSTALACJA WODOCIĄGOWA — RZUT PARTERU (1:50); PT-IS-02 — INSTALACJA WODOCIĄGOWA — RZUTY I PIĘTRA I II PIĘTRA (1:50); PT-IS-03 — KANALIZACJA SANITARNA"
+    },
+    {
+      "id": "C2-IS-07",
+      "element": "PT",
+      "opis": "Część rysunkowa zgodna z opisem i obliczeniami tomu (brak arkuszy nieaktualnych)",
+      "podstawa": "PB art. 34 ust. 3 pkt 3, art. 41 ust. 4a pkt 2; RPB § 24",
+      "status": "OK",
+      "obowiazkowa": true,
+      "szczegoly": "brak znaczników niedomkniętej analizy"
     }
   ],
   "znaczniki": {
-    "DO UZUPEŁNIENIA": 36,
+    "DO UZUPEŁNIENIA": 91,
     "DOKUMENT ZEWNĘTRZNY": 0,
     "DANE PRZYKŁADOWE": 99,
-    "ZAŁ": 83,
-    "NZW": 45,
+    "ZAŁ": 93,
+    "NZW": 55,
     "INT": 2,
     "PROG": 1,
     "lista": {
@@ -188,31 +215,31 @@
       "[DO UZUPEŁNIENIA: nr i data decyzji o pozwoleniu na budowę, organ]": 1,
       "[DO UZUPEŁNIENIA: data złożenia oświadczenia z art. 102a PB]": 1,
       "[DO UZUPEŁNIENIA: potwierdzenie wpisu w e-CRUB albo dołączenie kopii]": 1,
-      "[ZAŁ]": 83,
-      "[NZW]": 45,
+      "[ZAŁ]": 93,
+      "[NZW]": 55,
       "[PROG]": 1,
       "[INT]": 2,
-      "[DO UZUPEŁNIENIA]": 17
+      "[DO UZUPEŁNIENIA]": 72
     }
   },
   "elementy": {
     "PT": {
       "od": 1,
-      "do": 85,
-      "strony_opisu": 68,
-      "arkusze": 17
+      "do": 82,
+      "strony_opisu": 71,
+      "arkusze": 11
     }
   },
-  "rozmiar_mb": 3.3080339431762695,
-  "strony": 85,
+  "rozmiar_mb": 3.041235,
+  "strony": 82,
   "podsumowanie": {
-    "status": "PRZYKŁAD – NIE DO ZŁOŻENIA",
-    "OK": 16,
-    "BRAK": 0,
+    "status": "NIEKOMPLETNY",
+    "OK": 18,
+    "BRAK": 1,
     "DO UZUPEŁNIENIA": 2,
     "N/D": 0,
     "OSTRZEŻENIE": 0,
-    "znaczniki_do_uzupelnienia": 36,
+    "znaczniki_do_uzupelnienia": 91,
     "znaczniki_dokument_zewnetrzny": 0,
     "znaczniki_dane_przykladowe": 99
   }
