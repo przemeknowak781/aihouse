@@ -189,6 +189,11 @@ def view_plan(ctx, spec, scale, opts):
     # --- opisy i wymiary (kolejność = priorytet)
     c0 = _labels_building(lab, s, W)
     used.add("zero")
+    he, _src = s.teren_przy_wejsciu()          # rzędna terenu przy wejściu głównym (PN-B-01027 poz. 1.8)
+    if he is not None and s.wejscie_gl is not None:
+        D.spot(lab, s.wejscie_gl["pt"] + s.wejscie_gl["out"] * 0.6, he, projected=True,
+               dists=(1.0, 2.5, 4.0, 6.0, 9.0))
+        used.add("spot_proj")
     lab.area(s.footprint, 3.0)
     _dims_plan(lab, s, used)
     _labels_project(lab, s, W, used, detail=False)

@@ -1153,3 +1153,122 @@ def _garaz_dach_linie(det: Detal, g: dict) -> Detal:
                      "attykach i wpustach; paroizolacja i bariera przeciwkorzenna wywinięte na mur")
     det.uwagi.append(f"garaż nieogrzewany: ψ_iu węzła (strona garażu) × b_u = 0,8 → H_U (zestawienie H_TB)")
     return det
+
+
+@rodzaj("garaz_plyta", "WZ-09a")
+def detal_garaz_plyta(m, opts: dict) -> Detal:
+    """Ściana dom–garaż na ciągłej płycie fundamentowej (żebro wewn.): posadzka domu / garażu, wełna od strony
+    garażu, mostek przez płytę — wariant zalecany (XPS pod jastrychem garażu + bloczek izolacyjny) liniami kreskowymi."""
+    ids = wezly_garazu_id(m)
+    wid = ids.get("plyta") or "WZ-09a"
+    e = wpis(m, "WZ-09")
+    kody = e.get("przegrody") or []
+    sg = next((k for k in kody if m.przegroda(k) and m.przegroda(k).typ.startswith("sciana")
+               and m.przegroda(k).typ != "sciana_zewn"), "SWG")
+    pd = next((k for k in kody if m.przegroda(k) and m.przegroda(k).typ == "podloga_na_gruncie"), "POD-0")
+    pg = next((k for k, p in m.przegrody.items() if p.typ == "podloga_na_gruncie" and k != pd
+               and "gara" in (p.nazwa or "").lower()), pd)
+    det = Detal(m, "D-11", f"Ściana dom–garaż ({sg}) na płycie fundamentowej", (wid,), 10)
+    s_g = max((s for s in m.sciany() if s.przegroda_kod == sg), key=lambda s: s.L)
+    from shapely.geometry import LineString as _LS
+    zb = next((z for z in (m.fundamenty() or {}).get("elementy") or [] if "os" in z and
+               _LS([tuple(p) for p in z["os"]]).distance(_LS([tuple(s_g.p1), tuple(s_g.p2)])) < 0.05
+               and _LS([tuple(p) for p in z["os"]]).length > 1.0), {})
+    Wg = det.warstwy(sg)
+    kg = next(i for i, w in enumerate(Wg) if w["konstr"])
+    xs0 = sum(w["d"] for w in Wg[:kg])
+    xs1 = xs0 + Wg[kg]["d"]
+    xg = sum(w["d"] for w in Wg)
+    W, G = det.warstwy(pd), det.warstwy(pg)
+    ki = next(i for i, w in enumerate(W) if w["konstr"])
+    kj = next(i for i, w in enumerate(G) if w["konstr"])
+    y_pl = -sum(w["d"] for w in W[:ki])
+    t_pl = W[ki]["d"]
+    y_g = y_pl + sum(w["d"] for w in G[:kj])                       # posadzka garażu (płyta wspólna)
+    b_z, h_z = float(zb.get("b", 0.5)), float(zb.get("h", 0.25))
+    xps = next((w for w in W[ki + 1:] if w["d"] >= 0.05), None)
+    d_x, m_x = (xps["d"], xps["mat"]) if xps else (0.20, "XPS300")
+    pod = next((w for w in W[ki + 1:] if w["d"] >= 0.05 and w is not xps), None)
+    d_p = pod["d"] if pod else 0.0
+    xL, xR, yT, yB = -0.45, 1.05, 0.45, -1.05
+    det.okno = (xL, yB, xR, yT)
+    xc = (xs0 + xs1) / 2
+    y_sp = y_pl - t_pl
+    y_zb = y_sp - h_z
+    det.rect(xL - 0.5, yB - 0.1, xR + 0.1, y_sp - d_x, "GRUNT")
+    # płyta z żebrem (jeden obrys), XPS i podsypka pod płytą i żebrem
+    det.poly([(xL - 0.5, y_pl), (xR + 0.1, y_pl), (xR + 0.1, y_sp), (xc + b_z / 2, y_sp), (xc + b_z / 2, y_zb),
+              (xc - b_z / 2, y_zb), (xc - b_z / 2, y_sp), (xL - 0.5, y_sp)], W[ki]["mat"], konstr=True)
+    det._rejestr(pd, W[ki], t_pl)
+    det.poly([(xL - 0.5, y_sp), (xc - b_z / 2, y_sp), (xc - b_z / 2, y_zb), (xc + b_z / 2, y_zb), (xc + b_z / 2, y_sp),
+              (xR + 0.1, y_sp), (xR + 0.1, y_sp - d_x), (xc + b_z / 2 + d_x, y_sp - d_x),
+              (xc + b_z / 2 + d_x, y_zb - d_x), (xc - b_z / 2 - d_x, y_zb - d_x), (xc - b_z / 2 - d_x, y_sp - d_x),
+              (xL - 0.5, y_sp - d_x)], m_x)
+    if xps:
+        det._rejestr(pd, xps, d_x)
+    if pod:
+        det.rect(xc - b_z / 2 - d_x, y_zb - d_x - d_p, xc + b_z / 2 + d_x, y_zb - d_x, pod["mat"])
+    det.cienka([(xL - 0.5, y_sp - d_x), (xc - b_z / 2 - d_x, y_sp - d_x), (xc - b_z / 2 - d_x, y_zb - d_x),
+                (xc + b_z / 2 + d_x, y_zb - d_x), (xc + b_z / 2 + d_x, y_sp - d_x), (xR + 0.1, y_sp - d_x)],
+               "FOLIA_PE", "G")
+    # posadzki: dom (membrana SBS pod murem do lica konstrukcji), garaż od lica ściany
+    zak = {w["idx"]: (xL - 0.5, 0.0) for w in W[:ki]}
+    for w in W[:ki]:
+        if w["d"] < 0.006:
+            zak[w["idx"]] = (xL - 0.5, xs1)
+    st = det.stos_h(pd, xL - 0.5, 0.0, 0.0, zakres=zak, do=ki)
+    y = y_g
+    for w in G[:kj]:
+        if w["d"] < 0.006:
+            det.cienka([(xg, y - w["d"] / 2), (xR + 0.1, y - w["d"] / 2)], w["mat"])
+        else:
+            det.rect(xg, y - w["d"], xR + 0.1, y, w["mat"])
+        det._rejestr(pg, w, w["d"])
+        y -= w["d"]
+    zs = {w["idx"]: ((0.0, yT) if i < kg else (y_pl, yT) if i == kg else (y_pl, yT)) for i, w in enumerate(Wg)}
+    sc = det.stos_v(sg, 0.0, y_pl, yT, zakres=zs)
+    return _garaz_plyta_opisy(det, dict(sg=sg, pd=pd, pg=pg, sc=sc, st=st, ki=ki, kj=kj, xs0=xs0, xs1=xs1, xg=xg,
+                                        y_pl=y_pl, y_g=y_g, y_sp=y_sp, y_zb=y_zb, b_z=b_z, h_z=h_z, xc=xc, d_x=d_x,
+                                        m_x=m_x, d_p=d_p, pod=pod, xL=xL, xR=xR, yT=yT, yB=yB, zb=zb))
+
+
+def _garaz_plyta_opisy(det: Detal, g: dict) -> Detal:
+    xL, xR, yT, yB = g["xL"], g["xR"], g["yT"], g["yB"]
+    xs0, xs1, xg, y_pl, y_g = g["xs0"], g["xs1"], g["xg"], g["y_pl"], g["y_g"]
+    st = g["st"]
+    y_m = next(((a + b) / 2 for a, b, w in st if w["d"] < 0.006), y_pl + 0.0025)
+    det.linia("S", [(0.0015, yT), (0.0015, y_pl - 0.004), (xL, y_pl - 0.004)], "tynk wewn. do płyty ŻB")
+    det.linia("P", [(xL, y_m + 0.004), (xs1, y_m + 0.004)], "membrana SBS — bariera pary i radonu pod murem")
+    # wariant zalecany (REKOMENDACJE A): XPS pod jastrychem garażu pasem 1,0 m + bloczek izolacyjny w 1. warstwie
+    h_bl = 0.24
+    det.kontur([(xs0, y_pl), (xs0, y_pl + h_bl), (xs1, y_pl + h_bl), (xs1, y_pl)], zamkniety=False, pen=0.35,
+               lt="KRESKOWA")
+    det.kontur([(xg, y_g - 0.05), (xg, y_g - 0.05 - 0.10), (min(xg + 1.0, xR), y_g - 0.15)], zamkniety=False,
+               pen=0.35, lt="KRESKOWA")
+    for p1, p2 in (((0.0, yT), (xg, yT)), ((xL, yB), (xR, yB)), ((xL, 0.0), (xL, yB)), ((xR, y_g), (xR, yB))):
+        det.przerwa(p1, p2)
+    det.opis_stosu(g["sc"], "y", 0.30, odwroc=True, tytul=f"{g['sg']} — ściana dom–garaż (szczelna na spaliny)")
+    det.opis_stosu(st[:g["ki"] + 1], "x", -0.22, odwroc=True, wyjscie=(-0.22, yB - 0.03),
+                   tytul=f"{g['pd']} — podłoga domu")
+    Gs = det_stos_pod(det, g["pg"], y_g, 0.0)[:g["kj"]]
+    det.opis_stosu(Gs, "x", xR - 0.12, odwroc=False, tytul=f"{g['pg']} — posadzka garażu (bez izolacji termicznej, "
+                                                          "płyta wspólna z domem)")
+    det.opis([(xg + 0.45, y_g - 0.10)], ["WARIANT ZALECANY (linie kreskowe): XPS 300 100 mm pod jastrychem garażu "
+                                         "pasem 1,0 m od ściany (jastrych dociążony 50 mm na XPS — wg PT-K) "
+                                         "— REKOMENDACJE mostków, rozdz. A (WZ-09a)"])
+    det.opis([((xs0 + xs1) / 2, y_pl + 0.12)], ["WARIANT ZALECANY: 1. warstwa muru z bloczka izolacyjnego "
+                                                "(beton komórkowy 400, λ ≈ 0,10–0,24 — wg nośności PT-K)"])
+    det.opis([(g["xc"] + 0.12, (g["y_sp"] + g["y_zb"]) / 2)],
+             [f"żebro płyty {int(round(g['b_z'] * 100))}×{int(round(g['h_z'] * 100))} cm pod ścianą "
+              f"({g['zb'].get('id', 'wg PT-K')})"])
+    det.opis([(g["xc"] + g["b_z"] / 2 + 0.2, g["y_sp"] - g["d_x"] / 2)],
+             [f"pod płytą: {tekst(det, g['m_x'], g['d_x'])} ciągły (dom i garaż), folia PE, "
+              + (tekst(det, g["pod"]["mat"], g["d_p"]) if g["pod"] else "podsypka")])
+    det.rzedna((xL + 0.06, 0.0), 0.0, "zero", "right")
+    det.rzedna((xR - 0.30, y_g), y_g, "wyk", "right")
+    det.rzedna((xL + 0.06, y_pl), y_pl, "konstr", "right")
+    det.uwagi.append("płyta fundamentowa ciągła pod ścianą dom–garaż — mostek konstrukcyjny ψ_iu (strona garażu × "
+                     "b_u); stan wg modelu = linie ciągłe, wariant zalecany = linie kreskowe (decyzja PT-K/Inwestor)")
+    det.uwagi.append("posadzka garażu: jastrych spadkowy 0,8 % do bramy — grubość przy ścianie wg modelu "
+                     f"({mm(y_g - y_pl)} mm); garaż bez membrany na płycie (płyta wodoszczelna W8 wg PT-K)")
+    return det

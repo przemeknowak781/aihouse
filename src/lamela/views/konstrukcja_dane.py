@@ -1187,21 +1187,32 @@ def korzenie(el, lv) -> list:
     inne = _uu([e.poly for e in lv.elementy if e is not el])
     if inne.is_empty:
         return []
+    from shapely.geometry import LineString as _LS
     near = el.poly.boundary.intersection(inne.buffer(GAP_LT, join_style=2))
     out = []
     for sg in odcinki_proste(near):
         if sg.length <= 0.3:
             continue
-        a, b = _P(sg.coords[0]), _P(sg.coords[-1])
-        da, db = a.distance(inne), b.distance(inne)
-        if abs(da - db) > 0.02:
-            continue                      # krawędź prostopadła do styku
-        mid = sg.interpolate(0.5, normalized=True)
+        # podział na odcinki o stałej odległości od sąsiedniej płyty (styk / szczelina łącznika); odcinki o zmiennej
+        # odległości (krawędzie prostopadłe, naroża) pomijane
+        n = max(int(sg.length / 0.05), 2)
+        ts = np.linspace(0.0, sg.length, n + 1)
+        ds = np.array([sg.interpolate(t).distance(inne) for t in ts])
+        runs, st = [], 0
+        for i in range(1, len(ts)):
+            if abs(ds[i] - ds[i - 1]) > 0.005:
+                runs.append((st, i - 1))
+                st = i
+        runs.append((st, len(ts) - 1))
         (xa, ya), (xb, yb) = sg.coords[0], sg.coords[-1]
-        nrm = np.array([-(yb - ya), xb - xa]) / sg.length
-        if not el.poly.buffer(-0.005).contains(_P(mid.x + nrm[0] * 0.05, mid.y + nrm[1] * 0.05)):
-            nrm = -nrm
-        out.append((sg, float(mid.distance(inne)), nrm))
+        nrm0 = np.array([-(yb - ya), xb - xa]) / sg.length
+        for i0, i1 in runs:
+            if ts[i1] - ts[i0] <= 0.3:
+                continue
+            piece = _LS([sg.interpolate(ts[i0]).coords[0], sg.interpolate(ts[i1]).coords[0]])
+            mid = piece.interpolate(0.5, normalized=True)
+            nrm = nrm0 if el.poly.buffer(-0.005).contains(_P(mid.x + nrm0[0] * 0.05, mid.y + nrm0[1] * 0.05)) else -nrm0
+            out.append((piece, float(np.median(ds[i0:i1 + 1])), nrm))
     return out
 
 
@@ -1259,11 +1270,12 @@ def _gora_wsporniki(D, lv, zest, gora, Ping, h_lv, cmax):
             sk = skanuj(reg, kier, t0 + el.c_nom / 1000, t1 - el.c_nom / 1000, w.s / 1000.0)
             bnd = el.poly.buffer(-el.c_nom / 1000.0, join_style=2).boundary
 
-            def haki(a_, b_, ts, _k=kier):
+            def haki(a_, b_, ts, _k=kier, _r=r):
+                # odgięcie tylko na krawędzi swobodnej (daleko od linii zamocowania), nie przy łączniku
                 t = ts[len(ts) // 2]
                 pa = Point(t, a_) if _k == "y" else Point(a_, t)
                 pb = Point(t, b_) if _k == "y" else Point(b_, t)
-                return (pa.distance(bnd) < 0.02, pb.distance(bnd) < 0.02)
+                return (pa.distance(bnd) < 0.02 and abs(a_ - _r) > 0.3, pb.distance(bnd) < 0.02 and abs(b_ - _r) > 0.3)
             gora += _grupy_z_skanu(sk, kier, "gora", w.fi, w.s, el.id, pol.pole, w, zest, "wspornik", haki,
                                    el.h - 2 * el.c_nom / 1000.0)
 

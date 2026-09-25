@@ -412,24 +412,30 @@ def _wybor_wezla(D, lv, rodzaj: str, element: str | None, m):
                    default=None)
         return Q, u, wall, host, e, g
     kand = []
+    Pl = lv.poly.buffer(-0.05)
     for w in sc:
         if w.warstwa_konstr.polygon is None:
             continue
-        mid = w.pt(w.L / 2, 0.0)
-        if rodzaj == "wieniec" and w.ext_side is not None:
-            nn = w.n * w.ext_side
-            if any(x.typ == "wspornik" and x.poly.distance(Point(*(mid + nn * 0.6))) < 0.3 for x in lv.elementy):
-                continue
-            kand.append((w.L, w, nn))
-        elif rodzaj == "oparcie" and w.typ == "sciana_wewn_nosna" and w.ext_side is None:
-            if lv.poly.buffer(-0.05).contains(Point(*(mid + w.n * 0.8))) and lv.poly.buffer(-0.05).contains(Point(*(mid - w.n * 0.8))):
-                kand.append((w.L, w, w.n))
+        for fr in (0.5, 0.35, 0.65, 0.25, 0.75):
+            mid = w.pt(w.L * fr, 0.0)
+            if any(o.s0 - 0.3 <= w.L * fr <= o.s1 + 0.3 for o in w.otwory):
+                continue                              # przekrój poza otworem (nadprożem)
+            if rodzaj == "wieniec" and w.ext_side is not None:
+                nn = w.n * w.ext_side
+                if any(x.typ == "wspornik" and x.poly.distance(Point(*(mid + nn * 0.6))) < 0.4 for x in lv.elementy):
+                    continue
+                if Pl.contains(Point(*(mid - nn * 0.8))):
+                    kand.append((w.L, w, nn, mid))
+                    break
+            elif rodzaj == "oparcie" and w.typ == "sciana_wewn_nosna":
+                if Pl.contains(Point(*(mid + w.n * 0.8))) and Pl.contains(Point(*(mid - w.n * 0.8))):
+                    kand.append((w.L, w, w.n, mid))
+                    break
     if element:
         kand = [k_ for k_ in kand if k_[1].id == element] or kand
     if not kand:
         raise KeyError(f"k_przekroj/{rodzaj}: brak odpowiedniej ściany pod płytą {lv.nazwa}")
-    L_, w, nn = max(kand, key=lambda t: t[0])
-    Q = w.pt(w.L / 2, 0.0)
+    L_, w, nn, Q = max(kand, key=lambda t: t[0])
     host = next((x for x in lv.elementy if x.poly.buffer(0.01).contains(Point(*(Q - nn * 0.4)))), lv.elementy[0])
     return Q, nn, w, host, None, None
 
