@@ -1413,14 +1413,14 @@ def detal_wylaz(m, opts: dict) -> Detal:
     det.linia("S", [(xR + 0.05, -t - 0.012), (-0.014, -t - 0.012), (-0.014, y_cap - 0.02)])
     det.linia("T_in", [(-0.014, y_cap - 0.04), (-0.014, y_cap + 0.002), (0.02, y_cap + 0.002)])
     det.polaczenie("H", [(x_c1 + 0.012, y_cap - 0.01), (x_c1 + 0.03, y_cap + 0.10)])
-    for p1, p2 in (((xR, yB), (xR, y_top)), ((xL, y_cap + 0.07), (xL, y_cap + 0.13))):
+    for p1, p2 in (((xR, -t - 0.03), (xR, y_top + 0.02)), ((xL, y_cap + 0.07), (xL, y_cap + 0.13))):
         det.przerwa(p1, p2)
     det.opis_stosu([(a, b, w) for a, b, w in stos], "x", xR - 0.12, odwroc=False,
                    tytul=f"{kd} — stropodach (klin w przekroju {mm(d_kl or 0)} mm)")
     det.opis([(b_c / 2, y_top + 0.10)], [f"cokół systemowy ocieplony (kaseta PIR {mm(b_c)} mm + sklejka "
                                          f"wodoodporna 18 mm), wys. {mm(h_c)} mm ponad pokrycie (≥ 150 mm — DAFA)"])
     det.opis([(x_c1 + 0.03, y_cap + 0.03)], ["obróbka ramy (fartuch) z okapnikiem, zakład ≥ 50 mm na membranę"])
-    det.opis([(x_c1 * 0.5, y_cap + 0.035)], [f"rama {nazwa.lower()}a {el['id']} (wyrób systemowy, U ≤ 1,1), "
+    det.opis([(x_c1 * 0.5, y_cap + 0.035)], [f"rama {'wyłazu' if el['id'].startswith('WYL') else 'świetlika'} {el['id']} (wyrób systemowy, U ≤ 1,1), "
                                              "taśma paroszczelna rama–obudowa od wewnątrz"])
     det.opis([(-0.20, y_cap + 0.10)], ["klapa ocieplona (wyłaz 0,90 × 0,90 m w świetle, W-065)"
                                        if el["id"].startswith("WYL") else "przeszklenie świetlika (VSG) wg producenta"])
