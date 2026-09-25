@@ -272,7 +272,7 @@ def _room_table(rows):
             if r["kategoria"] in ("podstawowa", "pomocnicza"):
                 pu += r["pow"]
         data.append(["", "RAZEM powierzchnia netto", "", "", "", fmt.area(tot, unit=False)])
-        data.append(["", "w tym użytkowa (podst. + pomoc.)", "", "", "", fmt.area(pu, unit=False)])
+        data.append(["", "w tym podstawowa + pomocnicza", "", "", "", fmt.area(pu, unit=False)])
         r = table(sh, x, y - 7.0, cols, data, h=2.5, row_h=5.0, title="ZESTAWIENIE POMIESZCZEŃ",
                   align=["center", "left", "left", "center", "right", "right"])
         return r[1]

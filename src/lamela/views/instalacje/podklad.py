@@ -176,8 +176,10 @@ def _room_block(vp, placer, c, lines, bounds, last=False):
     return pos
 
 
-def osie(vp, ctx, ext=None, off_mm: float = 9.0, r_mm: float = 3.5):
-    """Osie konstrukcyjne z modelu (linia punktowa, kółka z oznaczeniem u dołu i z lewej strony rysunku)."""
+def osie(vp, ctx, ext=None, off_mm: float = 9.0, r_mm: float = 3.5, zakres: bool = False):
+    """Osie konstrukcyjne z modelu (linia punktowa, kółka z oznaczeniem u dołu i z lewej strony rysunku).
+    ``zakres`` — tylko osie przecinające narysowaną treść (± 0,35 m, jak na rzutach AR ``plan._axes``); bez tego
+    osie całego budynku (np. osie garażu na rzucie II piętra poszerzają rzutnię o pusty pas)."""
     m = ctx.model
     k = vp.k
     e = ext or vp.extents()
@@ -185,9 +187,17 @@ def osie(vp, ctx, ext=None, off_mm: float = 9.0, r_mm: float = 3.5):
         return
     x0, y0, x1, y1 = e
     ax = (getattr(m, "osie", None) or {})
+    tol = 0.35
+
+    def _w(v, a, b):
+        return not zakres or a - tol <= v <= b + tol
     for nm, x in (ax.get("x") or {}).items():
+        if not _w(x, x0, x1):
+            continue
         S.axis_line(vp, (x, y0 - off_mm * k), (x, y1 + 2.0 * k), str(nm), bubbles="start", r_mm=r_mm, h=H_M,
                     layer="I-OSIE")
     for nm, y in (ax.get("y") or {}).items():
+        if not _w(y, y0, y1):
+            continue
         S.axis_line(vp, (x0 - off_mm * k, y), (x1 + 2.0 * k, y), str(nm), bubbles="start", r_mm=r_mm, h=H_M,
                     layer="I-OSIE")

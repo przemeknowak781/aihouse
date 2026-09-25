@@ -19,6 +19,7 @@ wspolne:
                                # (H: 297/420/594/841/891; składanie do A4 w ocenie); klasyczny | A2 | [H, L] — patrz uklad.py
   numeracja_pomieszczen: iso
   wysokosc_ciecia: 1.10
+  osie_instalacji: zakres       # osie tylko w zasięgu treści rzutu (jak rzuty AR) — bez pustego pasa osi garażu na II p.
   plik_tomu: tom_PT-IE.pdf
   tytul_tomu: "Projekt techniczny — instalacje elektryczne (rysunki)"
   braki_danych: projekt/06_PT_instalacje_elektryczne/BRAKI_DANYCH.md
@@ -27,17 +28,17 @@ wspolne:
   uwagi:
     - "Rysunki instalacji na podkładzie rzutów architektury (PB-AR); podkład — linie cienkie szare (warstwy I-PODKLAD*)."
 arkusze:
-  - {nr: PT-IE-01, tytul: "INSTALACJA OŚWIETLENIA — RZUT PARTERU", typ: inst_rzut, branza: IE-O, kond: P0}
-  - {nr: PT-IE-02, tytul: "INSTALACJA OŚWIETLENIA — RZUT I PIĘTRA", typ: inst_rzut, branza: IE-O, kond: P1}
-  - {nr: PT-IE-03, tytul: "INSTALACJA OŚWIETLENIA — RZUT II PIĘTRA", typ: inst_rzut, branza: IE-O, kond: P2}
-  - {nr: PT-IE-04, tytul: "GNIAZDA I ZASILANIE URZĄDZEŃ — RZUT PARTERU", typ: inst_rzut, branza: IE-G, kond: P0}
-  - {nr: PT-IE-05, tytul: "GNIAZDA I ZASILANIE URZĄDZEŃ — RZUT I PIĘTRA", typ: inst_rzut, branza: IE-G, kond: P1}
-  - {nr: PT-IE-06, tytul: "GNIAZDA I ZASILANIE URZĄDZEŃ — RZUT II PIĘTRA", typ: inst_rzut, branza: IE-G, kond: P2}
-  - {nr: PT-IE-07, tytul: "TELETECHNIKA — RZUT PARTERU", typ: inst_rzut, branza: IE-T, kond: P0}
-  - {nr: PT-IE-08, tytul: "TELETECHNIKA — RZUT I PIĘTRA", typ: inst_rzut, branza: IE-T, kond: P1}
-  - {nr: PT-IE-09, tytul: "TELETECHNIKA — RZUT II PIĘTRA", typ: inst_rzut, branza: IE-T, kond: P2}
-  - {nr: PT-IE-10, tytul: "INSTALACJA FOTOWOLTAICZNA — RZUT DACHU", typ: inst_rzut, branza: IE-PV, kond: dach}
-  - {nr: PT-IE-11, tytul: "INSTALACJA FOTOWOLTAICZNA — RZUT PARTERU (FALOWNIK, SPD)", typ: inst_rzut, branza: IE-PV, kond: P0}
-  - {nr: PT-IE-12, tytul: "UZIOM I POŁĄCZENIA WYRÓWNAWCZE — RZUT PARTERU", typ: inst_rzut, branza: IE-U, kond: P0}
-  - {nr: PT-IE-13, tytul: "OCHRONA ODGROMOWA I WYRÓWNANIE POTENCJAŁÓW — RZUT DACHU", typ: inst_rzut, branza: IE-U, kond: dach}
+  - {nr: PT-IE-01, tytul: "INSTALACJA OŚWIETLENIA — RZUT PARTERU", typ: inst_rzut, branza: IE-O, kond: P0, tytul_widoku: "INSTALACJA OŚWIETLENIA — RZUT PARTERU"}
+  - {nr: PT-IE-02, tytul: "INSTALACJA OŚWIETLENIA — RZUT I PIĘTRA", typ: inst_rzut, branza: IE-O, kond: P1, tytul_widoku: "INSTALACJA OŚWIETLENIA — RZUT I PIĘTRA"}
+  - {nr: PT-IE-03, tytul: "INSTALACJA OŚWIETLENIA — RZUT II PIĘTRA", typ: inst_rzut, branza: IE-O, kond: P2, tytul_widoku: "INSTALACJA OŚWIETLENIA — RZUT II PIĘTRA"}
+  - {nr: PT-IE-04, tytul: "GNIAZDA I ZASILANIE URZĄDZEŃ — RZUT PARTERU", typ: inst_rzut, branza: IE-G, kond: P0, tytul_widoku: "GNIAZDA I ZASILANIE URZĄDZEŃ — RZUT PARTERU"}
+  - {nr: PT-IE-05, tytul: "GNIAZDA I ZASILANIE URZĄDZEŃ — RZUT I PIĘTRA", typ: inst_rzut, branza: IE-G, kond: P1, tytul_widoku: "GNIAZDA I ZASILANIE URZĄDZEŃ — RZUT I PIĘTRA"}
+  - {nr: PT-IE-06, tytul: "GNIAZDA I ZASILANIE URZĄDZEŃ — RZUT II PIĘTRA", typ: inst_rzut, branza: IE-G, kond: P2, tytul_widoku: "GNIAZDA I ZASILANIE URZĄDZEŃ — RZUT II PIĘTRA"}
+  - {nr: PT-IE-07, tytul: "TELETECHNIKA — RZUT PARTERU", typ: inst_rzut, branza: IE-T, kond: P0, tytul_widoku: "TELETECHNIKA — RZUT PARTERU"}
+  - {nr: PT-IE-08, tytul: "TELETECHNIKA — RZUT I PIĘTRA", typ: inst_rzut, branza: IE-T, kond: P1, tytul_widoku: "TELETECHNIKA — RZUT I PIĘTRA"}
+  - {nr: PT-IE-09, tytul: "TELETECHNIKA — RZUT II PIĘTRA", typ: inst_rzut, branza: IE-T, kond: P2, tytul_widoku: "TELETECHNIKA — RZUT II PIĘTRA"}
+  - {nr: PT-IE-10, tytul: "INSTALACJA FOTOWOLTAICZNA — RZUT DACHU", typ: inst_rzut, branza: IE-PV, kond: dach, tytul_widoku: "INSTALACJA FOTOWOLTAICZNA — RZUT DACHU"}
+  - {nr: PT-IE-11, tytul: "INSTALACJA FOTOWOLTAICZNA — RZUT PARTERU (FALOWNIK, SPD)", typ: inst_rzut, branza: IE-PV, kond: P0, tytul_widoku: "INSTALACJA FOTOWOLTAICZNA — RZUT PARTERU (FALOWNIK, SPD)"}
+  - {nr: PT-IE-12, tytul: "UZIOM I POŁĄCZENIA WYRÓWNAWCZE — RZUT PARTERU", typ: inst_rzut, branza: IE-U, kond: P0, tytul_widoku: "UZIOM I POŁĄCZENIA WYRÓWNAWCZE — RZUT PARTERU"}
+  - {nr: PT-IE-13, tytul: "OCHRONA ODGROMOWA I WYRÓWNANIE POTENCJAŁÓW — RZUT DACHU", typ: inst_rzut, branza: IE-U, kond: dach, tytul_widoku: "OCHRONA ODGROMOWA I WYRÓWNANIE POTENCJAŁÓW — RZUT DACHU"}
   - {nr: PT-IE-14, tytul: "SCHEMAT ROZDZIELNICY GŁÓWNEJ RG", typ: inst_schemat, schemat: rg}

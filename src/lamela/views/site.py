@@ -502,7 +502,7 @@ def _tab_wskazniki(s, W):
                      _ok(spr["ok"])])
         rows.append(["Elementy poza linią zabudowy", prz, str(L.get("wysuniecia") or "—"), ""])
     zr = {"model": "dzialka.yaml: dzialka.mpzp",
-          "konfiguracja": "konfiguracja arkuszy (brief § 3) — BRAK W MODELU [DO UZUPEŁNIENIA]",
+          "konfiguracja": "ustalenia MPZP przyjęte w projekcie (dane przykładowe) — wypis i wyrys z MPZP [DO UZUPEŁNIENIA]",
           "brak": "BRAK [DO UZUPEŁNIENIA]"}[s.mpzp_zrodlo]
     h = W["wys"]
     bz = h.get("bez_zalozen")

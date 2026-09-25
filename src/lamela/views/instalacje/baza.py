@@ -211,7 +211,7 @@ class Rysunek:
         rooms = rooms and bool(self.opts.get("opisy_pomieszczen", True))
         if rooms and not self.dach and self.pod is not None and self.pod.rooms:
             P.opisy_pomieszczen(self.vp, self.pl, self.ctx, self.pod, self.room_extra)
-        P.osie(self.vp, self.ctx)
+        P.osie(self.vp, self.ctx, zakres=str(self.opts.get("osie", self.ctx.cfg.get("osie_instalacji", ""))) == "zakres")
         self.res.column_blocks.insert(0, ("legenda", legenda_arkusza(self.ctx, self.leg)))   # wspólna dla widoków arkusza
         from ...draft import fmt
         self.res.units_note = (f"Średnice przewodów w mm (d_z×s — rury wielowarstwowe, Ø/DN — kanalizacja, kanały "

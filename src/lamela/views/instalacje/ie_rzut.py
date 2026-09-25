@@ -189,8 +189,8 @@ class RysE(Rysunek):
         for o in self.obw:
             if o.odb.id not in self.circuits_used:
                 continue
-            rows.append([o.odb.id, o.odb.nazwa[:52], o.zab, o.przewod, num(o.L, 1), num(o.dU_calk, 2),
-                         o.odb.faza.replace("L1L2L3", "3f"), o.odb.rcd.split(" (")[0][:26]])
+            rows.append([o.odb.id, o.odb.nazwa, o.zab, o.przewod, num(o.L, 1), num(o.dU_calk, 2),   # długie — łamane
+                         o.odb.faza.replace("L1L2L3", "3f"), o.odb.rcd.split(" (")[0]])
         if rows:
             self.res.column_blocks.append(("obw", table_block(
                 "OBWODY NA ARKUSZU (lamela.obliczenia.elektryka.obwody)",

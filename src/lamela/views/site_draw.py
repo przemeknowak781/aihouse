@@ -1342,7 +1342,7 @@ def legend_items():
         "pc": (_lg_rect("strefa"), "jednostka zewn. pompy ciepła (fundament) i strefa czynnika R290"),
         "oslona_pc": (_lg_line(0.35, layer="Z-OGRODZENIE"), "ażurowa osłona z lamel jednostki PC (bez dachu, prześwit przy terenie)"),
         "kratownica": (_lg_line(0.5, color=ZIELEN_KOL, layer="Z-ZIELEN"),
-                       "zielona ściana — pnącza na kratownicy stalowej odsuniętej od elewacji (decyzja Inwestora K-13)"),
+                       "zielona ściana — pnącza na kratownicy stalowej odsuniętej od elewacji"),
         "zbiornik": (_lg_rect("zbiornik"), "zbiornik retencyjny szczelny (ZB)"),
         "niecka_chlonna": (_lg_rect("niecka"), "niecka chłonna — ogród deszczowy (przelew zbiornika)"),
         "odw_liniowe": (_lg_sym("odw_liniowe"), "odwodnienie liniowe"),

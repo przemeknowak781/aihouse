@@ -115,8 +115,8 @@ def r04(pab, D, d):
                uwagi=["Numeracja wg PN-B-01025 (parter = 1.xx; identyfikator modelu K.NN → K+1.NN). Współczynnik: h ≥ 2,20 m — "
                       "1,00; 1,40 ≤ h < 2,20 m — 0,50; h < 1,40 m — 0 (RPB § 20 ust. 1 pkt 4 lit. b tiret 3). Pomieszczenia pod "
                       "biegiem schodów — powierzchnie stref wysokości z próbkowania geometrii modelu.",
-                      "Zestawienia pomieszczeń na arkuszach rzutów PB-AR podają powierzchnie netto; wiersz „w tym użytkowa "
-                      "(podst. + pomoc.)” na arkuszach jest sumą powierzchni netto pomieszczeń kategorii podstawowej "
+                      "Zestawienia pomieszczeń na arkuszach rzutów PB-AR podają powierzchnie netto; wiersz „w tym podstawowa "
+                      "+ pomocnicza” na arkuszach jest sumą powierzchni netto pomieszczeń kategorii podstawowej "
                       "i pomocniczej wg modelu — bez współczynników wysokości i bez komunikacji — i ma charakter "
                       "informacyjny. Powierzchnię użytkową lokalu wg RPB § 20 ust. 1 pkt 4 lit. b podaje wyłącznie "
                       "niniejsza tabela i tabela zestawienia powierzchni budynku."],
