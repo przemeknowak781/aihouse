@@ -37,8 +37,6 @@ Warunki informacyjne — wartości podawane bez kryterium (np. moc ścian grzewc
 3. `instalacje.wyroby` w modelu puste — obliczenia na danych przykładowych bibliotek (PC, centrala wentylacyjna, wodomierz Δp(Q3), zawór EA k_v, wpusty) [DANE PRZYKŁADOWE – FIKCYJNE]; zastąpić danymi DTR/DWU wyrobów wybranych przez wykonawcę (wyroby równoważne).
 4. Dane osobowe (Inwestor, projektanci, nr uprawnień, pracownia) — brak sekcji `projekt:` w model/budynek.yaml; pola oznaczone jako do uzupełnienia (strona tytułowa, oświadczenie).
 
-> PODGLĄD — obliczenia odczytane z pamięci podręcznej; wersja nie do wydania.
-
 ## Przedmiot, zakres i podstawy opracowania — § 23 RPB
 
 **Przedmiot.** Projekt techniczny instalacji sanitarnych budynku mieszkalnego jednorodzinnego
@@ -382,7 +380,7 @@ Moc przyłączeniowa 27 kW, zabezpieczenie przedlicznikowe 40 A — PT-4 IE. Bud
 
 ### Właściwości cieplne przegród zewnętrznych — § 23 pkt 11 lit. b RPB; W-243, W-244
 
-**Tabela 6. Współczynniki przenikania ciepła przegród obudowy (szczegóły — PT-1 AR)**
+**Tabela 6. Współczynniki przenikania ciepła przegród i stolarki obudowy (szczegóły — PT-1 AR)**
 
 | Przegroda | Rodzaj | U [W/(m²·K)] | U_max [W/(m²·K)] | Spełnia |
 |---|---|---|---|---|
@@ -395,8 +393,26 @@ Moc przyłączeniowa 27 kW, zabezpieczenie przedlicznikowe 40 A — PT-4 IE. Bud
 | SZ2 | sciana zewn | 0,17 | 0,20 | tak |
 | SZL | sciana zewn | 0,10 | 0,20 | tak |
 | ST2Z | strop zewn | 0,13 | 0,15 | tak |
+| BC1 | okno (okno) | 0,78 | 0,90 | tak |
+| DG1 | drzwi (drzwi) | 1,10 | 1,30 | tak |
+| DZ1 | drzwi (drzwi_zewn) | 0,90 | 1,30 | tak |
+| DZ3 | drzwi (drzwi_zewn) | 1,00 | 1,30 | tak |
+| FX1 | okno (fix) | 0,64 | 0,90 | tak |
+| FX2 | okno (fix) | 0,61 | 0,90 | tak |
+| FX3 | okno (fix) | 0,87 | 0,90 | tak |
+| HS1 | okno (drzwi_przesuwne_HS) | 0,84 | 0,90 | tak |
+| HS2 | okno (drzwi_przesuwne_HS) | 0,82 | 0,90 | tak |
+| OE1 | okno (okno) | 0,75 | 0,90 | tak |
+| ON1 | okno (okno) | 0,89 | 0,90 | tak |
+| ON2 | okno (okno) | 0,88 | 0,90 | tak |
+| ON3 | okno (okno) | 0,86 | 0,90 | tak |
+| ON4 | okno (okno) | 0,82 | 0,90 | tak |
+| OP1 | okno (okno) | 0,71 | 0,90 | tak |
+| OP2 | okno (okno) | 0,77 | 0,90 | tak |
+| OP3 | okno (okno) | 0,74 | 0,90 | tak |
+| OZ1 | okno (okno) | 0,81 | 0,90 | tak |
 
-Mostki cieplne: H_TB = 30,7 W/K (Ψ z symulacji PN-EN ISO 10211 — projekt/08_obliczenia/mostki); U podłogi na gruncie wg PN-EN ISO 13370.
+Stolarka — największe U_w/U_D danego symbolu (wymiary z modelu). Mostki cieplne: H_TB = 30,7 W/K (Ψ z symulacji PN-EN ISO 10211 — projekt/08_obliczenia/mostki); U podłogi na gruncie wg PN-EN ISO 13370.
 
 *Źródło: lamela.obliczenia.energia.obudowa; WT zał. 2 pkt 1.1–1.2*
 
@@ -471,7 +487,7 @@ ponownego przeliczenia EP, punktu biwalentnego i hałasu (generator tomu przelic
 
 | Urządzenie | Parametry wymagane | Podstawa |
 |---|---|---|
-| Pompa ciepła powietrze–woda, monoblok | czynnik naturalny R290 (GWP < 150); P(A−15/W35) ≥ 5,0 kW i pokrycie Φ_HL + Φ_W = 8,66 kW przy θ_e z grzałką ≤ 6 kW; SCOP₃₅ ≥ 4,7; η_s ≥ 125 %; L_WA ≤ 57 dB (tryb nocny niżej); regulacja pogodowa, sterowanie zależne od zapotrzebowania | W-155, W-156, W-024; (UE) 2024/573, 813/2013 |
+| Pompa ciepła powietrze–woda, monoblok | czynnik naturalny R290 (GWP < 150); P(A−15/W35) ≥ 5,0 kW (jak urządzenie przyjęte w obliczeniach) i pokrycie Φ_HL + Φ_W = 8,66 kW przy θ_e z grzałką ≤ 6 kW; SCOP₃₅ ≥ 4,7; η_s ≥ 125 %; L_WA ≤ 57 dB (tryb nocny niżej); regulacja pogodowa, sterowanie zależne od zapotrzebowania | W-155, W-156, W-024; (UE) 2024/573, 813/2013 |
 | Zasobnik c.w.u. z wężownicą | V ≥ 400 dm³, wężownica ≥ 1,8 m² (dla PC), grzałka do dezynfekcji, grupa bezpieczeństwa, izolacja fabryczna | W-133, W-134; PN-EN 16147+A1:2023-06 |
 | Bufor c.o. (szeregowy) | V ≥ 80 dm³, izolowany | obliczenia ogrzewania |
 | Naczynia wzbiorcze przeponowe | c.o. ≥ 18 dm³ (p₀ 0,83 bar); c.w.u. ≥ 50 dm³ (p₀ 3,8 bar), przepływowe | PN-B-02414:1999 (powołana w WT) [W-154] |
@@ -532,16 +548,16 @@ Uzgodnienia: PT-1 AR (przejścia przez przegrody, szachty, wyłaz), PT-2 BO (prz
 | 9 | Odwodnienie powierzchni PS-A | wspornik, A = 14,1 m² — brak wpustów/rzygaczy w modelu; w obliczeniach przyjęto wpust propozycyjny | PT-IS-07 |
 | 10 | Odwodnienie powierzchni SW1 | wspornik, A = 2,8 m² — brak wpustów/rzygaczy w modelu; w obliczeniach przyjęto wpust propozycyjny | PT-IS-07 |
 | 11 | Odwodnienie powierzchni WYL1 | wspornik, A = 1,2 m² — brak wpustów/rzygaczy w modelu; w obliczeniach przyjęto wpust propozycyjny | PT-IS-07 |
-| 12 | Ogrzewanie — pomieszczenia z niedoborem mocy podłogi | 0.03 WC gościnne: gęstość strumienia ≤ q_G (θ_F ≤ 29 °C); 0.03 WC gościnne: moc podłogi przy θ_V,des (T = 10 cm) ≥ Φ_HL; 0.06 Salon + jadalnia + kuchnia: moc podłogi przy θ_V,des (T = 10 cm) ≥ Φ_HL; 0.09 Łazienka gościnna (natrysk): gęstość strumienia ≤ q_G (θ_F ≤ 33 °C); 0.09 Łazienka gościnna (natrysk): moc podłogi przy θ_V,des (T = 10 cm) ≥ Φ_HL; 0.10 Pokój gościnny / gabinet: moc podłogi przy θ_V,des (T = 10 cm) ≥ Φ_HL; 0.11 Przedsionek gospodarczy: moc podłogi przy θ_V,des (T = 10 cm) ≥ Φ_HL; 0.12 Pomieszczenie techniczne: gęstość strumienia ≤ q_G (θ_F ≤ 25 °C) | PT-IS-09, PT-IS-10, PT-IS-11 |
-| 13 | Ogrzewanie — pompa ciepła | sprawdzenie niespełnione: Moc nominalna PC (zakaz F-gazów dotyczy ≤ 12 kW — czynnik R290, GWP₁₀₀ = 0,02) (rozp. (UE) 2024/573 zał. IV pkt 8 lit. b) | PT-IS-09, PT-IS-10, PT-IS-11 |
-| 14 | Pion/szacht wentylacyjny (SUP, ETA) | brak w modelu szachtu wentylacyjnego (szacht SI zajęty przez piony wod.-kan. i deszczowe) — przyjęto lokalizację proponowaną algorytmicznie | PT-IS-12, PT-IS-13, PT-IS-14 |
-| 15 | Piony c.o. (zasilanie rozdzielaczy P1, P2) | brak tras pionów c.o. w instalacje.yaml — przyjęto pion proponowany przy rozdzielaczu R-P1 | PT-IS-09, PT-IS-10, PT-IS-11 |
+| 12 | Ogrzewanie — pomieszczenia z niedoborem mocy podłogi | 0.03 WC gościnne: gęstość strumienia ≤ q_G (θ_F ≤ 29 °C); 0.03 WC gościnne: moc podłogi przy θ_V,des (T = 10 cm) ≥ Φ_HL; 0.06 Salon + jadalnia + kuchnia: moc podłogi przy θ_V,des (T = 10 cm) ≥ Φ_HL; 0.09 Łazienka gościnna (natrysk): gęstość strumienia ≤ q_G (θ_F ≤ 33 °C); 0.09 Łazienka gościnna (natrysk): moc podłogi przy θ_V,des (T = 10 cm) ≥ Φ_HL; 0.10 Pokój gościnny / gabinet: moc podłogi przy θ_V,des (T = 10 cm) ≥ Φ_HL; 0.11 Przedsionek gospodarczy: moc podłogi przy θ_V,des (T = 10 cm) ≥ Φ_HL; 0.12 Pomieszczenie techniczne: gęstość strumienia ≤ q_G (θ_F ≤ 25 °C) | PT-IS-09…11 |
+| 13 | Ogrzewanie — pompa ciepła | sprawdzenie niespełnione: Moc nominalna PC (zakaz F-gazów dotyczy ≤ 12 kW — czynnik R290, GWP₁₀₀ = 0,02) (rozp. (UE) 2024/573 zał. IV pkt 8 lit. b) | PT-IS-09…11 |
+| 14 | Pion/szacht wentylacyjny (SUP, ETA) | brak w modelu szachtu wentylacyjnego (szacht SI zajęty przez piony wod.-kan. i deszczowe) — przyjęto lokalizację proponowaną algorytmicznie | PT-IS-12…14 |
+| 15 | Piony c.o. (zasilanie rozdzielaczy P1, P2) | brak tras pionów c.o. w instalacje.yaml — przyjęto pion proponowany przy rozdzielaczu R-P1 | PT-IS-09…11 |
 | 16 | Przelewy awaryjne / wpusty | sprawdzenie niespełnione: Pole D1: dno przelewu nad pokryciem (odpływ normalny przez wpusty) | PT-IS-07, PT-IS-08 |
-| 17 | Strumienie powietrza pomieszczeń (went) | rozbieżność modelu z bilansem wentylacji (moduł energii, PN-83/B-03430/Az3), nawiew/wywiew [m³/h]: 0.15: model 0/0 → bilans 0/15; 0.16: model 0/0 → bilans 0/15; 0.10: model 40/0 → bilans 52/0; 1.02: model 40/0 → bilans 119/0; 1.03: model 40/0 → bilans 55/0; 1.04: model 40/0 → bilans 52/0; 2.02: model 50/0 → bilans 90/0; 2.05: model 40/0 → bilans 68/0; 2.07: model 0/0 → bilans 0/15 — na rysunku przyjęto wartości większe | PT-IS-12, PT-IS-13, PT-IS-14 |
-| 18 | Trasy przewodów (woda, kanalizacja, c.o., wentylacja) | model nie zawiera przebiegów przewodów — trasy wyznaczono algorytmicznie (ortogonalnie, przy ścianach, z pionów/rozdzielaczy do przyborów) | PT-IS-01, PT-IS-02, PT-IS-03, PT-IS-04, PT-IS-05, PT-IS-06, PT-IS-07, PT-IS-08, PT-IS-09, PT-IS-10, PT-IS-11, PT-IS-12, PT-IS-13, PT-IS-14 |
-| 19 | Zasobnik c.w.u. — pojemność | wyposazenie.yaml: 300 dm³, obliczenia (PN-EN 12831-3 / zapotrzebowanie): 400 dm³ — na rysunku wartość z obliczeń | PT-IS-01, PT-IS-02, PT-IS-03 |
-| 20 | instalacje.piony — rodzaj pionu | lista pionów zawiera rury spustowe (RS…) bez pola `rodzaj`; biblioteka grupowania pionów traktowała je jako piony wod.-kan. — w obliczeniach do rysunków odfiltrowane | PT-IS-01, PT-IS-02, PT-IS-03, PT-IS-04, PT-IS-05, PT-IS-06, PT-IS-07, PT-IS-08, PT-IS-09, PT-IS-10, PT-IS-11, PT-IS-12, PT-IS-13, PT-IS-14 |
-| 21 | instalacje.wyroby | brak danych wyrobów (DTR/DWU) — obliczenia na danych przykładowych bibliotek (PC, wodomierz ∆p(Q3), EA k_v, wpusty, centrala went., moduł PV, falownik) | PT-IS-01, PT-IS-02, PT-IS-03, PT-IS-04, PT-IS-05, PT-IS-06, PT-IS-07, PT-IS-08, PT-IS-09, PT-IS-10, PT-IS-11, PT-IS-12, PT-IS-13, PT-IS-14 |
+| 17 | Strumienie powietrza pomieszczeń (went) | rozbieżność modelu z bilansem wentylacji (moduł energii, PN-83/B-03430/Az3), nawiew/wywiew [m³/h]: 0.15: model 0/0 → bilans 0/15; 0.16: model 0/0 → bilans 0/15; 0.10: model 40/0 → bilans 52/0; 1.02: model 40/0 → bilans 119/0; 1.03: model 40/0 → bilans 55/0; 1.04: model 40/0 → bilans 52/0; 2.02: model 50/0 → bilans 90/0; 2.05: model 40/0 → bilans 68/0; 2.07: model 0/0 → bilans 0/15 — na rysunku przyjęto wartości większe | PT-IS-12…14 |
+| 18 | Trasy przewodów (woda, kanalizacja, c.o., wentylacja) | model nie zawiera przebiegów przewodów — trasy wyznaczono algorytmicznie (ortogonalnie, przy ścianach, z pionów/rozdzielaczy do przyborów) | PT-IS-01…14 |
+| 19 | Zasobnik c.w.u. — pojemność | wyposazenie.yaml: 300 dm³, obliczenia (PN-EN 12831-3 / zapotrzebowanie): 400 dm³ — na rysunku wartość z obliczeń | PT-IS-01…03 |
+| 20 | instalacje.piony — rodzaj pionu | lista pionów zawiera rury spustowe (RS…) bez pola rodzaj; biblioteka grupowania pionów traktowała je jako piony wod.-kan. — w obliczeniach do rysunków odfiltrowane | PT-IS-01…14 |
+| 21 | instalacje.wyroby | brak danych wyrobów (DTR/DWU) — obliczenia na danych przykładowych bibliotek (PC, wodomierz ∆p(Q3), EA k_v, wpusty, centrala went., moduł PV, falownik) | PT-IS-01…14 |
 
 Pozycje wyznaczone algorytmicznie są na rysunkach oznaczone znacznikiem braku danych (linia kreskowa purpurowa, warstwa I-BRAKI). Pozycje nieaktualne wobec bieżących obliczeń — patrz „Stan opracowania i sprawy otwarte”.
 
@@ -555,20 +571,20 @@ Uwagi kontroli arkuszy (raport_widokow.json):
 
 | Nr | Tytuł | Skala | Format | Uwagi |
 |---|---|---|---|---|
-| PT-IS-01 | INSTALACJA WODOCIĄGOWA — RZUT PARTERU | 1:50 | A3x3 | brak pliku — strona zastępcza |
-| PT-IS-02 | INSTALACJA WODOCIĄGOWA — RZUT I PIĘTRA | 1:50 | A3x3 | brak pliku — strona zastępcza |
-| PT-IS-03 | INSTALACJA WODOCIĄGOWA — RZUT II PIĘTRA | 1:50 | A3x3 | brak pliku — strona zastępcza |
-| PT-IS-04 | KANALIZACJA SANITARNA — RZUT PARTERU | 1:50 | A3x3 | brak pliku — strona zastępcza |
-| PT-IS-05 | KANALIZACJA SANITARNA — RZUT I PIĘTRA | 1:50 | A3x3 | brak pliku — strona zastępcza |
-| PT-IS-06 | KANALIZACJA SANITARNA — RZUT II PIĘTRA | 1:50 | A3x3 | brak pliku — strona zastępcza |
-| PT-IS-07 | ODWODNIENIE DACHÓW — RZUT DACHU | 1:50 | A3x3 | brak pliku — strona zastępcza |
-| PT-IS-08 | ODWODNIENIE DACHÓW — RZUT PARTERU (RURY SPUSTOWE) | 1:50 | A3x3 | brak pliku — strona zastępcza |
-| PT-IS-09 | OGRZEWANIE — RZUT PARTERU | 1:50 | A1 | brak pliku — strona zastępcza |
-| PT-IS-10 | OGRZEWANIE — RZUT I PIĘTRA | 1:50 | A3x3 | brak pliku — strona zastępcza |
-| PT-IS-11 | OGRZEWANIE — RZUT II PIĘTRA | 1:50 | A3x3 | brak pliku — strona zastępcza |
-| PT-IS-12 | WENTYLACJA MECHANICZNA — RZUT PARTERU | 1:50 | A3x3 | brak pliku — strona zastępcza |
-| PT-IS-13 | WENTYLACJA MECHANICZNA — RZUT I PIĘTRA | 1:50 | A3x3 | brak pliku — strona zastępcza |
-| PT-IS-14 | WENTYLACJA MECHANICZNA — RZUT II PIĘTRA | 1:50 | A3x3 | brak pliku — strona zastępcza |
-| PT-IS-15 | KANALIZACJA SANITARNA — ROZWINIĘCIE PIONÓW | — | A3x3 | brak pliku — strona zastępcza |
-| PT-IS-16 | INSTALACJA WODOCIĄGOWA — ROZWINIĘCIE (AKSONOMETRIA) | — | A3x3 | brak pliku — strona zastępcza |
-| PT-IS-17 | SCHEMAT POMPY CIEPŁA, C.O. I C.W.U. | — | A3x3 | brak pliku — strona zastępcza |
+| PT-IS-01 | INSTALACJA WODOCIĄGOWA — RZUT PARTERU | 1:50 | A3×3 |  |
+| PT-IS-02 | INSTALACJA WODOCIĄGOWA — RZUT I PIĘTRA | 1:50 | A3×3 |  |
+| PT-IS-03 | INSTALACJA WODOCIĄGOWA — RZUT II PIĘTRA | 1:50 | A3×3 |  |
+| PT-IS-04 | KANALIZACJA SANITARNA — RZUT PARTERU | 1:50 | A3×3 |  |
+| PT-IS-05 | KANALIZACJA SANITARNA — RZUT I PIĘTRA | 1:50 | A3×3 |  |
+| PT-IS-06 | KANALIZACJA SANITARNA — RZUT II PIĘTRA | 1:50 | A3×3 |  |
+| PT-IS-07 | ODWODNIENIE DACHÓW — RZUT DACHU | 1:50 | A3×3 |  |
+| PT-IS-08 | ODWODNIENIE DACHÓW — RZUT PARTERU (RURY SPUSTOWE) | 1:50 | A3×3 |  |
+| PT-IS-09 | OGRZEWANIE — RZUT PARTERU | 1:50 | A1 |  |
+| PT-IS-10 | OGRZEWANIE — RZUT I PIĘTRA | 1:50 | A3×3 |  |
+| PT-IS-11 | OGRZEWANIE — RZUT II PIĘTRA | 1:50 | A3×3 |  |
+| PT-IS-12 | WENTYLACJA MECHANICZNA — RZUT PARTERU | 1:50 | A3×3 |  |
+| PT-IS-13 | WENTYLACJA MECHANICZNA — RZUT I PIĘTRA | 1:50 | A3×3 |  |
+| PT-IS-14 | WENTYLACJA MECHANICZNA — RZUT II PIĘTRA | 1:50 | A3×3 |  |
+| PT-IS-15 | KANALIZACJA SANITARNA — ROZWINIĘCIE PIONÓW | — | A3×3 |  |
+| PT-IS-16 | INSTALACJA WODOCIĄGOWA — ROZWINIĘCIE (AKSONOMETRIA) | — | A3×3 |  |
+| PT-IS-17 | SCHEMAT POMPY CIEPŁA, C.O. I C.W.U. | — | A3×3 |  |

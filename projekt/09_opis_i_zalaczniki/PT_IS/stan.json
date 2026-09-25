@@ -1,6 +1,6 @@
 {
  "model": "2026-09-25 06:48",
- "podglad": true,
+ "podglad": false,
  "sprawy_otwarte": [
   "Arkusze IS wygenerowano przed ostatnią zmianą modelu — przed wydaniem wygenerować ponownie (tools/generuj_widoki.py --arkusze model/arkusze_is.yaml).",
   "Pompa ciepła — dwa różne zestawy danych przykładowych: moduł energii (dobór, EP) P(A−7/W35) = 8,0 kW, SCOP₃₅ = 4,50; moduł ogrzewania (PC-R290-07 (przykład)) P(A−7/W35) = 6,2 kW, SCOP₃₅ = 4,70, L_WA = 57 dB — ujednolicić w `instalacje.wyroby.PC` (DTR/DWU wybranego wyrobu) i przeliczyć EP, punkt biwalentny i hałas.",

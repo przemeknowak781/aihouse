@@ -114,3 +114,71 @@ def aktualnosc(kod: str, kat: Path | None) -> dict:
                         f"przed wydaniem wygenerować ponownie (tools/generuj_widoki.py)")
     return kontrola(f"K-{kod}-AKT", f"Aktualność rysunków {kod} względem modelu", pod, "OK",
                     f"rysunki z {fmt(t_rys)} — nowsze niż model/*.yaml")
+
+
+# ------------------------------------------------------------------------------------------ plik tomu
+def wektorowosc(pdf: Path, arkusze_tomu: list) -> tuple[dict, list[dict]]:
+    """Analiza każdego arkusza rysunkowego w tomie: ścieżki wektorowe, tekst (znaki), udział rastra w polu strony."""
+    doc = pymupdf.open(str(pdf))
+    wiersze = []
+    try:
+        for a, s in arkusze_tomu:
+            pg = doc[s - 1]
+            pole = pg.rect.width * pg.rect.height
+            rast = sum(abs(pymupdf.Rect(im["bbox"]).get_area()) for im in pg.get_image_info())
+            n_sc = len(pg.get_cdrawings())
+            n_zn = len(pg.get_text("text").strip())
+            zast = getattr(a, "plik", None) is None
+            udz = rast / pole if pole else 0.0
+            ok = zast or (udz <= PROG_RASTRA and n_sc > 0)
+            wiersze.append(dict(nr=str(a.nr), strona=s, format=a.format or "—", skala=a.skala or "—",
+                                wymiary_mm=[round(pg.rect.width / 72 * 25.4), round(pg.rect.height / 72 * 25.4)],
+                                sciezki=n_sc, znaki=n_zn, udzial_rastra=round(udz, 4), zastepczy=zast,
+                                status="OK" if ok else "BRAK"))
+    finally:
+        doc.close()
+    zle = [w["nr"] for w in wiersze if w["status"] != "OK"]
+    zast = [w["nr"] for w in wiersze if w["zastepczy"]]
+    pod = "RPB § 2b ust. 2; W-300"
+    if zle:
+        k = kontrola("K-WEKTOR", "Arkusze rysunkowe w postaci wektorowej", pod, "BRAK",
+                     f"arkusze rastrowe lub bez ścieżek wektorowych: {', '.join(zle)}")
+    else:
+        n = len(wiersze) - len(zast)
+        mx = max((w["udzial_rastra"] for w in wiersze), default=0.0)
+        k = kontrola("K-WEKTOR", "Arkusze rysunkowe w postaci wektorowej", pod, "OK",
+                     f"{n} arkuszy wektorowych (łącznie {sum(w['sciezki'] for w in wiersze)} ścieżek); "
+                     f"największy udział rastra {mx * 100:.1f} % (próg {PROG_RASTRA * 100:.0f} %)"
+                     + (f"; arkusze zastępcze: {', '.join(zast)}" if zast else ""))
+    return k, wiersze
+
+
+def rozmiar(pdf: Path, limit_mb: float = 150.0) -> dict:
+    mb = pdf.stat().st_size / 1048576
+    return kontrola("K-ROZMIAR", f"Rozmiar pliku ≤ {limit_mb:.0f} MB", "RPB § 2b ust. 3; W-300; D-26",
+                    "OK" if mb <= limit_mb else "BRAK", f"{mb:.2f} MB")
+
+
+def metadane(pdf: Path) -> dict:
+    doc = pymupdf.open(str(pdf))
+    m = doc.metadata or {}
+    toc = doc.get_toc()
+    doc.close()
+    brak = [k for k in ("title", "author", "subject", "keywords") if not m.get(k)]
+    return kontrola("K-META", "Metadane PDF i zakładki", "dobra praktyka; AUD-RYS",
+                    "OSTRZEŻENIE" if brak or not toc else "OK",
+                    f"Title: „{m.get('title', '')}”; zakładek: {len(toc)}" + (f"; brak: {', '.join(brak)}" if brak else ""))
+
+
+def spis_zalacznikow(pdf: Path, strony_frontu: int = 2) -> dict:
+    """Łączny spis treści (strony za stroną tytułową tomu) obejmuje załączniki elementu ZL."""
+    doc = pymupdf.open(str(pdf))
+    toc = doc.get_toc()
+    zl = [t for lvl, t, s in toc if "Załącznik nr" in t]
+    konc = next((s for lvl, t, s in toc if t.startswith("PZT")), strony_frontu + 1)
+    front = " ".join(doc[i].get_text() for i in range(0, max(1, konc - 1)))
+    doc.close()
+    w_spisie = [t for t in zl if t.split("—")[0].split(".")[0].strip() in front]
+    st = "OK" if zl and len(w_spisie) == len(zl) else "BRAK"
+    return kontrola("K-SPIS-ZL", "Łączny spis treści obejmuje spis załączników (ZL)", "RPB § 7 ust. 7 pkt 1, ust. 1a",
+                    st, f"załączników w zakładkach: {len(zl)}, w łącznym spisie: {len(w_spisie)}")

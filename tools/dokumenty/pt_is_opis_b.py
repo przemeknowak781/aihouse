@@ -19,7 +19,7 @@ def wstaw_raport(o: Opis, tekst: str, *, tytul: str, podstawa: str | None = None
     → poziom 3 (numeracja z nagłówków usunięta — numeruje dokument), obrazy → ilustracje numerowane."""
     tekst = re.sub(r"\A\s*#\s+[^\n]*\n", "", tekst)
     tekst = re.sub(r"^(#{2,4})\s+\d+(?:\.\d+)*\.?\s+", r"\1 ", tekst, flags=re.M)
-    tekst = re.sub(r"^(#{2,4})\s", lambda m: m.group(1)[1:] + " ", tekst, flags=re.M)   # ## → # (+przesunięcie 1)
+    tekst = re.sub(r"^(#{2,4})\s", lambda m: m.group(1)[1:] + " ", tekst, flags=re.M)   # ## → # (przesunięcie 2 → poziom 3)
     o.rozdzial(tytul, poziom=2, podstawa=podstawa, nowa_strona=True)
     poz = 0
     for m in RE_IMG.finditer(tekst):
@@ -172,9 +172,19 @@ def rozdz_ep(o: Opis, D: DanePTIS):
         seen.add(kod)
         rowsU.append({"Przegroda": kod.split("|")[0], "Rodzaj": rola.replace("_", " "), "U [W/(m²·K)]": wu.U,
                       "U_max [W/(m²·K)]": wu.U_max, "Spełnia": "tak" if wu.spelnia_WT else "NIE"})
-    o.tabela(rowsU, tytul="Współczynniki przenikania ciepła przegród obudowy (szczegóły — PT-1 AR)",
+    stol: dict = {}
+    for wo in D.R["obudowa"].okna.values():
+        if wo.U_max is None:
+            continue
+        r = stol.setdefault(wo.symbol, {"Przegroda": wo.symbol, "Rodzaj": f"{wo.rola} ({wo.typ})", "U [W/(m²·K)]": 0.0,
+                                         "U_max [W/(m²·K)]": wo.U_max, "Spełnia": "tak"})
+        r["U [W/(m²·K)]"] = max(r["U [W/(m²·K)]"], wo.U_w)
+        if wo.U_w > wo.U_max + 1e-9:
+            r["Spełnia"] = "NIE"
+    rowsU += sorted(stol.values(), key=lambda r: r["Przegroda"])
+    o.tabela(rowsU, tytul="Współczynniki przenikania ciepła przegród i stolarki obudowy (szczegóły — PT-1 AR)",
              formaty={"U [W/(m²·K)]": 3, "U_max [W/(m²·K)]": 2}, wyrownanie={"Rodzaj": "l"},
-             uwagi=f"Mostki cieplne: H_TB = {L(D.R['obudowa'].H_TB, 1)} W/K (Ψ z symulacji PN-EN ISO 10211 — "
+             uwagi=f"Stolarka — największe U_w/U_D danego symbolu (wymiary z modelu). Mostki cieplne: H_TB = {L(D.R['obudowa'].H_TB, 1)} W/K (Ψ z symulacji PN-EN ISO 10211 — "
                    "projekt/08_obliczenia/mostki); U podłogi na gruncie wg PN-EN ISO 13370.",
              zrodlo="lamela.obliczenia.energia.obudowa; WT zał. 2 pkt 1.1–1.2")
     o.rozdzial("Parametry sprawności energetycznej instalacji", poziom=2, podstawa="§ 23 pkt 11 lit. c RPB")
@@ -261,7 +271,8 @@ def rozdz_urzadzenia(o: Opis, D: DanePTIS):
     """)
     rows = [
         {"Urządzenie": "Pompa ciepła powietrze–woda, monoblok",
-         "Parametry wymagane": f"czynnik naturalny R290 (GWP < 150); P(A−15/W35) ≥ {L(Pm15, 1)} kW i pokrycie "
+         "Parametry wymagane": f"czynnik naturalny R290 (GWP < 150); P(A−15/W35) ≥ {L(Pm15, 1)} kW (jak urządzenie "
+                               "przyjęte w obliczeniach) i pokrycie "
                                f"Φ_HL + Φ_W = {L(wymP, 2)} kW przy θ_e z grzałką ≤ {L(og.par.grzalka_kW, 0)} kW; "
                                f"SCOP₃₅ ≥ {L(pc.get('SCOP_35'), 1)}; η_s ≥ 125 %; L_WA ≤ {L(pc.get('L_WA'), 0)} dB "
                                "(tryb nocny niżej); regulacja pogodowa, sterowanie zależne od zapotrzebowania",

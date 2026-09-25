@@ -201,8 +201,27 @@ class DanePTIS:
         for ln in self.braki_md.splitlines():
             c = [x.strip() for x in ln.strip().strip("|").split("|")]
             if len(c) >= 5 and c[0].isdigit():
-                wiersze.append({"Lp.": int(c[0]), "Element": c[1], "Brak / stan w modelu": c[2], "Arkusze": c[-1]})
+                wiersze.append({"Lp.": int(c[0]), "Element": c[1].replace("`", ""),
+                                "Brak / stan w modelu": c[2].replace("`", ""), "Arkusze": _zakresy(c[-1])})
         return wiersze
+
+
+def _zakresy(tekst: str) -> str:
+    """„PT-IS-01, PT-IS-02, PT-IS-03, PT-IS-05” → „PT-IS-01…03, 05”."""
+    m = re.findall(r"([A-Z]+-[A-Z]+-)(\d+)", tekst)
+    if len(m) < 3 or len({p for p, _ in m}) != 1:
+        return tekst
+    pre, nr = m[0][0], sorted(int(n) for _, n in m)
+    grupy, start, prev = [], nr[0], nr[0]
+    for n in nr[1:] + [None]:
+        if n is not None and n == prev + 1:
+            prev = n
+            continue
+        grupy.append(f"{start:02d}…{prev:02d}" if prev - start >= 2 else
+                     ", ".join(f"{k:02d}" for k in range(start, prev + 1)))
+        if n is not None:
+            start = prev = n
+    return pre + ", ".join(grupy)
 
 
 class Opis:

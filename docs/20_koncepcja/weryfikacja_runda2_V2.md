@@ -358,3 +358,11 @@ PYTHONPATH=src python3 -m lamela.obliczenia.instalacje --budynek model/budynek.y
     --wyposazenie model/wyposazenie.yaml --instalacje model/instalacje.yaml --phi-hl energia --wentylacja energia --out <tmp>/is
 # teren: TIN rzędnych projektowanych (lamela.wskazniki.Teren.projekt), obwód P0 co 0,10 m — skrypt teren_tin.py (scratchpad V2)
 ```
+
+### 5.1 Drugi przebieg `test_pipeline`
+
+* Wynik: 24 zaliczonych, 1 niezaliczony.
+* Niezaliczony: `test_podglad_www`, `playwright … Page.screenshot: Timeout 30000ms exceeded`. To limit czasu zrzutu
+  ekranu z przeglądarki przy obciążonej maszynie (kilka sesji liczyło równolegle). Nie jest to błąd modelu ani obliczeń.
+* Test zaliczał się w rundzie 2 (rejestr 14.2 D). Do powtórzenia bez obciążenia.
+* Wszystkie testy modelu, IR i obliczeń są zaliczone.
