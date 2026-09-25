@@ -8,3 +8,4 @@ node_modules/
 tools/__pycache__/
 src/lamela/**/__pycache__/
 **/__pycache__/
+build/
