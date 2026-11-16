@@ -167,7 +167,7 @@
 
 | ☐ | ID | Co sprawdzić | Kryterium | Źródło |
 |---|---|---|---|---|
-| ☐ | K1 [!] | Schemat „trasy dostępne” (aksonometria lub przekrój) | od przystanku/kiss&ride/garażu → hol → kancelaria → dźwigi → sala Sejmiku/galeria → WC/komfortka → MOE | Regulamin – część graficzna lit. i |
+| ☐ | K1 [!] | Schemat „trasy dostępne” (aksonometria lub przekrój) | od przystanku/kiss&ride/garażu → hol → kancelaria → dźwigi → sala Sejmiku/galeria → WC/komfortka → MOE | Regulamin – część graficzna lit. i (Rozdz. VII, s. 44) |
 | ☐ | K2 [!] | Legenda symboli na rzutach | WC-OzN, komfortka, pokój rodzinny/dla matki z dzieckiem, strefa wyciszenia, MOE + krzesło + interkom, pętla (piktogram z il. 18 M.13), tyflomapa, FON (A/B/C), dźwig 1,5 × 2,1 m, miejsca OzN, ładowarka dostępna, miejsca odpoczynku | M.13 s. 68 |
 | ☐ | K3 [M] | Paleta materiałów z wartościami **LRV** | ściany–posadzki Δ ≥ 30; drzwi, poręcze, wyposażenie Δ ≥ 50; krawędzie stopni i pola B Δ ≥ 70 | M.13 s. 57, 151, 154, 164, 178 |
 | ☐ | K4 [M] | Zasady SIW | piktogram + tekst; ≤ 5 piktogramów w jednym miejscu; HT = L/250 × 1,25; tablice nad ciągami ≥ 2,2 m, tabliczki 1,2–1,6 m, 5–10 cm od ościeżnicy po stronie klamki; Braille/wypukłe | M.13 s. 64–67 |

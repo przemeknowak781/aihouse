@@ -1,0 +1,63 @@
+{
+ "nr": 7,
+ "title": "Rules & programme team finished and verified (≈95 % exact vs sources); CONCEPT PANEL launched: 5 independent architects → 5 simulated jurors → synthesis",
+ "stages": [
+  [
+   "Organiser materials: download, unpack, text extraction (results files deliberately EXCLUDED)",
+   "done"
+  ],
+  [
+   "Rules register (184 requirements, 14 conflicts) + checklists ✔ verified",
+   "done"
+  ],
+  [
+   "Site: zoning plan ✔, heritage ✔, 1934 block overlay ✔; survey geometry, geotech, trees, neighbours ►",
+   "running"
+  ],
+  [
+   "Building law & WT ✔, sunlight/obstruction method ✔, fire safety ✔; accessibility & zero-emission ►",
+   "running"
+  ],
+  [
+   "Research: what wins (19 competitions ✔); visual craft, façade aesthetics, Wrocław context, costs ►",
+   "running"
+  ],
+  [
+   "Programme ✔: 193 rooms, 187 offices (24/32 m², 1.35 m module), PU ≈ 8,600 m², GFA ≈ 14,000 m² above ground",
+   "done"
+  ],
+  [
+   "Concept panel ►: K1 contextual block + Sejmik lantern · K2 Wrocław brick tectonics · K3 civic forum · K4 zero-emission hybrid · K5 dynamic 1930s modernism → jury J1–J5",
+   "running"
+  ],
+  [
+   "3D model + façades + renders: plan engine ✔ (1:200 SVG, poché, furniture, room labels), Blender lib ✔",
+   "running"
+  ],
+  [
+   "Stage I study (2 boards) + Stage II entry (≤8 boards 100×70 per clarif. 20), 5×A3 text, F.14.B/F.15 tables, white model 1:250",
+   "todo"
+  ],
+  [
+   "Jury simulation & compliance audit → iterate until no open issues",
+   "todo"
+  ]
+ ],
+ "notes": [
+  "Verifiers confirmed: 187 offices, 4,552 m² office area, 569 workstations; 403 staff; 8 boards; plans each floor separately; JPG/TIFF 300 dpi ≤100 MB per file; boards in Polish.",
+  "Jury personas mirror the real composition of the Court: SARP chair (overall quality), SARP referee (function & compliance), City Architect (urban fit & heritage), Marshal/Secretary (client: dignity, operation, budget), expert (zero-emission, accessibility, cost).",
+  "Scoring: 5 primary criteria equal weight + secondary cost at half weight, plus Borda count from rankings; the winner gets weaknesses removed and best ideas grafted from the others.",
+  "Drawing engine demo (right): double-loaded office wing, 1.35 m module, 3-workstation rooms, meeting room, core with stair & lifts — the same engine will produce every floor plan with room numbers/areas consistent with table F.15.B.",
+  "Fix queued: room clear depth 6.15 m so every office is ≥ 24.0 m² net (demo shows 23.2 m²)."
+ ],
+ "images": [
+  {
+   "path": "umwd/raporty/img/plan_engine_demo.png",
+   "caption": "Drawing engine test — office floor 1:200 (vector SVG → PDF)"
+  },
+  {
+   "path": "umwd/00_materialy/podglady/F17A_small.jpg",
+   "caption": "Context: site at the south bridgehead (F.17.A)"
+  }
+ ]
+}

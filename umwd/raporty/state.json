@@ -1,13 +1,13 @@
 {
- "title": "Programme quantified: 187 offices / 403 staff, ≈14,000 m² above-ground GFA; key conflict found — Sejmik floor (~1,400 m²) vs zone A (~1,180 m²); budget risk flagged",
+ "title": "Rules & programme team finished and verified (≈95 % exact vs sources); CONCEPT PANEL launched: 5 independent architects → 5 simulated jurors → synthesis",
  "stages": [
   [
    "Organiser materials: download, unpack, text extraction (results files deliberately EXCLUDED)",
    "done"
   ],
   [
-   "Rules register + Stage I/II checklists written ✔ → independent verification ►",
-   "running"
+   "Rules register (184 requirements, 14 conflicts) + checklists ✔ verified",
+   "done"
   ],
   [
    "Site: zoning plan ✔, heritage ✔, 1934 block overlay ✔; survey geometry, geotech, trees, neighbours ►",
@@ -26,12 +26,12 @@
    "done"
   ],
   [
-   "Concept: urban form, massing variants → judge panel → chosen concept",
-   "todo"
+   "Concept panel ►: K1 contextual block + Sejmik lantern · K2 Wrocław brick tectonics · K3 civic forum · K4 zero-emission hybrid · K5 dynamic 1930s modernism → jury J1–J5",
+   "running"
   ],
   [
-   "3D model + façade design (aesthetic principles) + photoreal renders (Blender Cycles)",
-   "todo"
+   "3D model + façades + renders: plan engine ✔ (1:200 SVG, poché, furniture, room labels), Blender lib ✔",
+   "running"
   ],
   [
    "Stage I study (2 boards) + Stage II entry (≤8 boards 100×70 per clarif. 20), 5×A3 text, F.14.B/F.15 tables, white model 1:250",
@@ -43,20 +43,20 @@
   ]
  ],
  "notes": [
-  "Sejmik storey must hold hall (≤100 seats, amphitheatre), lobby, media room, control room, catering, 2 committee + 4 club rooms → ~1,100 m² net ≈ 1,400 m² gross, but zone A gives only ≈1,180 m². Working solution: 7.5 m Sejmik storey with a mezzanine (antresola = part of the same storey per WT §3) carrying the public gallery with its own entrance — turning a constraint into the required civic separation.",
-  "Massing logic: tower P+8+Sejmik ≈ 42 m in zone A; perimeter wings P+5 ≈ 24 m (18–25 m band) along Mazowiecka to No. 19; cornice line ≈ 21 m to match neighbours (heritage).",
-  "Neighbour protection: gable windows of Słowackiego 5 face north → §13 obstruction rule governs (no obstacle within ½ obstruction height in a 60° sector; ≥17.5 m from the tower); §60: both equinoxes, 1.5 h, 7–17 official time.",
-  "Budget: first parametric check 142–183 M PLN vs 150 M cap → efficiency is a design driver (compact Sejmik floor, circulation ≤25–30 %, basement sized to MPZP minimum ≈103–110 cars + technical + civil shelter).",
-  "Office module 1.35 m → 24 m² room = 3 bays × 5.9 m; 32 m² = 4 bays — same depth, fully interchangeable."
+  "Verifiers confirmed: 187 offices, 4,552 m² office area, 569 workstations; 403 staff; 8 boards; plans each floor separately; JPG/TIFF 300 dpi ≤100 MB per file; boards in Polish.",
+  "Jury personas mirror the real composition of the Court: SARP chair (overall quality), SARP referee (function & compliance), City Architect (urban fit & heritage), Marshal/Secretary (client: dignity, operation, budget), expert (zero-emission, accessibility, cost).",
+  "Scoring: 5 primary criteria equal weight + secondary cost at half weight, plus Borda count from rankings; the winner gets weaknesses removed and best ideas grafted from the others.",
+  "Drawing engine demo (right): double-loaded office wing, 1.35 m module, 3-workstation rooms, meeting room, core with stair & lifts — the same engine will produce every floor plan with room numbers/areas consistent with table F.15.B.",
+  "Fix queued: room clear depth 6.15 m so every office is ≥ 24.0 m² net (demo shows 23.2 m²)."
  ],
  "images": [
   {
-   "path": "umwd/docs/30_lokalizacja/img/mpzp_08_schemat_ustalen_M04.png",
-   "caption": "Zone A (35–45 m) ≈ 40 × 30 m: the only place for the Sejmik tower"
+   "path": "umwd/raporty/img/plan_engine_demo.png",
+   "caption": "Drawing engine test — office floor 1:200 (vector SVG → PDF)"
   },
   {
-   "path": "umwd/docs/30_lokalizacja/img/foto_hist_2_most_naroznik_przystan.jpg",
-   "caption": "Historic corner at the bridge (M.11.E) — reference for the rounded corner"
+   "path": "umwd/00_materialy/podglady/F17A_small.jpg",
+   "caption": "Context: site at the south bridgehead (F.17.A)"
   }
  ]
 }
