@@ -9,7 +9,7 @@ Oznaczenia: **[Ź]** – odczyt ze źródła; **wniosek** – interpretacja/osza
 
 | Skrót | Plik | Zawartość |
 |---|---|---|
-| **M.07 s. N** | `00_materialy/_rozpak/5_Zalaczniki_Merytoryczne_M.01-M.14_pop.13.02.2026/M.07. INWENTARYZACJA MAZOWIECKA/M.07. INWENTARYZACJA MAZOWIECKA 19/M.07. INWENTARYZACJA MAZOWIECKA 19.pdf` | s. 1 – strona informacyjna Organizatora; s. 2 – piwnica; s. 3 – parter; s. 4–7 – I–IV p.; s. 8 – poddasze; s. 9 – rzut dachu z opisem „Budynek w liczbach” (DSW Projekt sp. z o.o., temat „Przebudowa, remont i ocieplenie budynku przy ul. Mazowieckiej 19”, inwestor ZZK, 03.2021, rys. I-09, 1:50); s. 10 – przekrój A-A; s. 11 – przekrój B-B; s. 12 – elewacja frontowa; s. 13–14 – elewacje/legenda |
+| **M.07 s. N** | `00_materialy/_rozpak/5_Zalaczniki_Merytoryczne_M.01-M.14_pop.13.02.2026/M.07. INWENTARYZACJA MAZOWIECKA/M.07. INWENTARYZACJA MAZOWIECKA 19/M.07. INWENTARYZACJA MAZOWIECKA 19.pdf` | s. 1 – strona informacyjna Organizatora; s. 2 – piwnica; s. 3 – parter; s. 4–7 – I–IV p.; s. 8 – poddasze; s. 9 – rzut dachu z opisem „Budynek w liczbach” (DSW Projekt sp. z o.o., temat „Przebudowa, remont i ocieplenie budynku przy ul. Mazowieckiej 19”, inwestor Zarząd Zasobu Komunalnego, 03.2021, rys. I-09, 1:50); s. 10 – przekrój A-A; s. 12 – elewacja frontowa; s. 11, 13–14 – dalsze rysunki (przekrój/elewacje – przejrzane pobieżnie, bez danych użytych w tym opracowaniu) |
 | **M.08 s. N** | `…/M.08. INWENTARYZACJA SŁOWACKIEGO/M.08. INWENTARYZACJA SŁOWACKIEGO/M.08. INWENTARYZACJA WYBRZEŻE SŁOWACKIEGO 5.pdf` | s. 1 – strona informacyjna („Inwentaryzacja 2001”); s. 2 – mapa sytuacyjna; s. 3 – piwnica; s. 4 – parter; s. 5 – I p.; s. 6 – II p.; s. 7 – III p.; s. 8 – poddasze (strych + mieszkanie nr 12). **Brak przekrojów i elewacji.** |
 | **L6-6A** | `00_materialy/_raw/Inwentaryzacja_Slowackiego_5_lok.6-6A.pdf` | rzut fragmentu I piętra, lokal 6-6A, mgr inż. arch. P. Gołub, 30.06.2023, 1:100 |
 | Reg. / Wyj. | `00_materialy/tekst/1089_Regulamin_Konkursu_tekst_jednolity_13.02.2026-sig.txt` R.III ust.1 pkt 7 (s. 19–20); Wyj. 3 odp. 13; Wyj. 6 odp. 27; Wyj. 8 odp. 37, 38, 41 (streszczenie: `docs/10_regulamin/wyjasnienia_streszczenie.md`) | okna w szczytach, lokal 6-6A, połączenie z Maz. 19, schemat zacieniania |
@@ -195,7 +195,7 @@ Podstawa: MPZP § 6 pkt 1 – obszar zabudowy śródmiejskiej, więc obowiązuje
 - (b) uskok elewacji ≥ 2,5 m od granicy w pasie ±5 m od osi okna, albo
 - (c) dziedziniec doświetlający przed szczytem.
 
-Rozwiązanie (a) „zszywa” pierzeję nad Oławą, o co prosi konserwator (`konserwator.md`), i jednocześnie spełnia § 13. Wymaga jednak sprawdzenia § 12 i statusu dz. 10/2 jako dojazdu – przejazd o wysokości ≥ 4,2 m dla dostaw (Rejestr R-214).
+Rozwiązanie (a) „zszywa” pierzeję nad Oławą, o co prosi konserwator (`konserwator.md`), i jednocześnie spełnia § 13. Wymaga jednak sprawdzenia § 12 i statusu dz. 10/2 jako dojazdu – dojazd do podwórza i drogi wewnętrznej wg Rejestru R-214; wniosek: prześwit bramy ≥ 4,2 m – do weryfikacji z wymaganiami dla pojazdów pożarniczych w `ppoz.md`.
 
 ### 3.3 § 60 – nasłonecznienie
 - **Lokal 6-6A:** pokoje 1 i 2 (wschód) wychodzą na Wybrzeże i Odrę, a po stronie wschodniej nie ma przesłon. W dniach równonocy, w godz. 7–17, azymut Słońca mieści się w przybliżeniu w zakresie **102°–258°** (szacunek własny dla φ = 51,11°). Nowa bryła leży na północ od WS 5, więc nie może przesłonić porannego słońca w pokojach wschodnich. **Wymóg 1,5 h dla „przynajmniej jednego pokoju” (§ 60 ust. 2–3) jest spełniony niezależnie od projektu.**

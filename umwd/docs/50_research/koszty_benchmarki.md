@@ -73,7 +73,7 @@ Nie wyszukiwano, nie otwierano i nie wykorzystano żadnych informacji o pracach 
 | Ceny produkcji b-m r/r | +6,2% (budowa budynków +5,7%) | VII 2026 | [O] GUS, *Price indices of construction and assembly production in July 2026* |
 | Ceny produkcji b-m r/r | **+6,9%** (budowa budynków +6,7%; inżynieria +6,5%; roboty specjalistyczne +7,7%); m/m +0,7% | IX 2026 (publ. 20.10.2026) | [O] GUS, *Wskaźniki cen produkcji budowlano-montażowej we wrześniu 2026 r.* |
 | Indeks cen obiektu „budynek administracyjno-biurowy” (PKOB 1220, reprezentant GUS) | 102,8 (IX 2025 / IX 2024); 103,5 (I–IX 2025 / I–IX 2024) | 2025 | [O] GUS, *Ceny robót budowlano-montażowych i obiektów budowlanych – wrzesień 2025*, tabl. 2. Reprezentantem jest stary, 6-kondygnacyjny biurowiec o PU 2 124 m², a publikacja podaje tylko indeks, bez ceny bezwzględnej |
-| Ceny produkcji b-m r/r w 2022–2023 | VII 2022 +13,4%; XII 2022 ok. +14,3%; I 2023 +13,1%; V 2023 +10,9%; VIII 2023 +9,8%; X 2023 +8,2%; XII 2023 +7,5% | 2022–2023 | [W] globenergia.pl, blog.ongeo.pl (cytują GUS) (s). Średniorocznych wartości dla 2022–2023 nie zweryfikowano |
+| Ceny produkcji b-m r/r w 2022–2023 | VII 2022 +13,4%; XII 2022 ok. +14,3%; I 2023 +13,1%; V 2023 +10,9%; VIII 2023 +9,8%; X 2023 +8,2%; XII 2023 +7,5% | 2022–2023 | [W] globenergia.pl, blog.ongeo.pl (cytują GUS) (s). **Średnioroczny 2023: +10,2%** [O] GUS, *Sytuacja społeczno-gospodarcza kraju w 2024 r.* (tam też wstępne 2024: +5,9%, później skorygowane do +6,0%). Średniorocznej wartości 2022 nie zweryfikowano <!-- poprawione przez weryfikatora --> |
 | Inflacja kosztów budowy, Warszawa | 2024: 4–5%; prognoza 2025: 5–6%; indeks kosztów Warszawy 99 (Amsterdam = 100) | ICC 2025 | [R] Arcadis, *International Construction Costs 2025* (PDF) |
 | j.w. | 4Q 2025: 2,5–3,5%; prognoza 4Q 2026: 2,5–3,5%; indeks Warszawy 100 | ICC 2026 | [R] Arcadis, *International Construction Costs 2026* (PDF) |
 | Inflacja kosztów budowy, Warszawa | 5,1% (2024) → prognoza 2,8% (2025) | 2025 | [R] Turner & Townsend, *Global Construction Market Intelligence 2025 – Europe* (s) |
@@ -81,11 +81,13 @@ Nie wyszukiwano, nie otwierano i nie wykorzystano żadnych informacji o pracach 
 
 **Wniosek (krytycznie):** w 2026 r. ceny robót rosną szybciej niż ceny materiałów (+6,9% wobec ok. +3,5%). Przyspieszenie napędzają robocizna i marże, czyli ożywienie popytu, a nie materiały. Prognozy konsultantów z przełomu 2025/2026 (2,5–3,5%) okazały się za niskie. Do planowania należy przyjmować **4–6% rocznie**, a w scenariuszu stresowym 7%.
 
+*Uwaga weryfikatora:* błąd prognoz działa w obie strony. Arcadis ICC 2025 przewidywał dla Warszawy w 2025 r. 5–6%, a GUS podał za 2025 r. +3,2% (przeszacowanie). Arcadis ICC 2026 przewidywał 2,5–3,5%, a GUS za IX 2026 podaje +6,9% r/r (niedoszacowanie). Miary nie są też identyczne: Arcadis mierzy ceny budynków w Warszawie (do IV kw.), a GUS ceny produkcji budowlano-montażowej w całym kraju, łącznie z inżynierią. Wniosek: pasmo 4–6% jest rozsądne, ale nie dlatego, że „konsultanci zaniżają”. Uzasadnia je niepewność ±2–3 p.p. <!-- poprawione przez weryfikatora -->
+
 ### 3.2 Współczynniki waloryzacji użyte do normalizacji benchmarków (do II kw. 2026)
 
 | Rok bazowy kontraktu | Współczynnik | Wyprowadzenie |
 |---|---|---|
-| 2021 | **≈ 1,42** (±0,05) | 1,125 (2022, przybliżenie z odczytów r/r) × 1,10 (2023, przybliżenie) × 1,060 (2024 [O]) × 1,032 (2025 [O]) × 1,05 (I poł. 2026 wobec średniej 2025: II kw./I kw. +2,1% i VII r/r +6,2% [O]). Wniosek |
+| 2021 | **≈ 1,42** (±0,05) | 1,125 (2022, przybliżenie z odczytów r/r) × 1,10 (2023; GUS: +10,2% [O], przybliżenie poprawne <!-- poprawione przez weryfikatora -->) × 1,060 (2024 [O]) × 1,032 (2025 [O]) × 1,05 (I poł. 2026 wobec średniej 2025: II kw./I kw. +2,1% i VII r/r +6,2% [O]). Wniosek |
 | 2022 | ≈ 1,26 | j.w. bez 2022 |
 | 2024 | ≈ 1,08 | 1,032 × 1,05 |
 | 2025 | ≈ 1,05 | j.w. |
@@ -150,9 +152,9 @@ Stawki „model” to wartości low / **mid** / high wpisane do `tools/koszty_mo
 | Dach płaski: izolacje termiczne i przeciwwodne | 350 / **450** / 600 zł/m² | brak | [Z] |
 | Dach zielony ekstensywny (z izolacjami) | 550 / **700** / 900 zł/m² (dopłata za zieleń ≈ 150–350) | 150–350 zł/m², z matami rozchodnikowymi >400 zł/m² [W muratordom.pl (s)]; tani wariant 100–160 zł/m² bez hydroizolacji [W prawo.pl (s)] | [W] |
 | Dach intensywny / taras użytkowy (z izolacjami) | 900 / **1 200** / 1 600 zł/m² | 400–1 000 zł/m², ogród dachowy 1 200–1 500 zł/m² [W muratordom.pl (s)]; sama robocizna 347 zł/m² (2026) [W cenauslug.pl (s)] | [W] |
-| PV dachowe (BIPV pokrycia dachu dominanty) | 3 500 / **4 000** / 5 000 zł/kWp | instalacja ok. 50 kWp: 145,9–183 tys. zł netto, średnio **3 333 zł/kWp netto** [W globenergia.pl (s)]; 2 000–4 000 zł/kWp netto dla firm [W enerad.pl (s)] | [W] + dopłata BIPV [Z] |
+| PV dachowe (BIPV pokrycia dachu dominanty) | 3 500 / **4 000** / 5 000 zł/kWp | instalacja ok. 50 kWp: 145,9–183 tys. zł netto, średnio **3 333 zł/kWp netto** [W globenergia.pl, artykuł z **10.09.2021**, czyli sprzed spadku cen modułów w latach 2023–2024; jako punkt odniesienia dla 2026 r. nieaktualny] <!-- poprawione przez weryfikatora: dopisano rok źródła -->; 2 000–4 000 zł/kWp netto dla firm [W enerad.pl (s)] | [W] + dopłata BIPV [Z] |
 | Magazyn energii elektrycznej | 1 600 / **2 200** / 3 000 zł/kWh | brak | [Z] |
-| GPC: odwierty pionowe z sondą | 190 / **240** / 300 zł/mb | duże miasta 190–230 zł/mb netto [W kb.pl (s)]; średnio 302 zł/mb (2026), zakres 263–380, Warszawa 380 [W cenauslug.pl (s)]; 165–274 zł/mb z sondą (brutto 8%) [W muratordom.pl 2026 (s)] | [W] |
+| GPC: odwierty pionowe z sondą | 190 / **240** / 300 zł/mb | woj. dolnośląskie: z sondą i materiałem średnio 178 zł/mb netto (192 brutto), bez sondy 90 zł/mb netto [W kb.pl, 29.04.2026]; średnio 302 zł/mb (16.06.2026), zakres 263–380, Warszawa 380, **bez materiałów** [W cenauslug.pl]; 165–274 zł/mb z sondą (brutto z VAT 8%) [W muratordom.pl 2026] <!-- poprawione przez weryfikatora: wartość „duże miasta 190–230 zł/mb netto” nie występuje na wskazanej stronie kb.pl --> | [W] |
 | GPC: pompy ciepła, maszynownia, hydraulika źródła (≈ 0,7–1,0 MW) | 1,8 / **2,5** / 3,5 mln zł | brak | [Z] |
 | Długość odwiertów (ilość) | **14 400 mb** (np. 120 × 120 m) | M.12 wymaga analizy liczby i głębokości [O] | [Z]: do analizy energetycznej |
 | Instalacje: woda+kanal.+CO+wentylacja z odzyskiem+chłód | ≈ 1 200 zł/m² PC nadz. (mid; poz. 7.1–7.7) | brak | [Z] |
@@ -346,7 +348,7 @@ Fazy wg § 10 ust. 6: koncepcja 7–15%, PB 30–45%, PW 40–60%.
 6. Rozporządzenie MRiT z 20.12.2021 w sprawie określenia metod i podstaw sporządzania kosztorysu inwestorskiego, obliczania planowanych kosztów prac projektowych…, Dz.U. 2021 poz. 2458: https://api.sejm.gov.pl/eli/acts/DU/2021/2458/text/O/D20212458.pdf
 7. Urząd Marszałkowski Województwa Mazowieckiego, „Nowe siedziby Sejmiku Województwa Mazowieckiego i Sądu Apelacyjnego w Warszawie” (9.04.2026): https://mazovia.pl/pl/dla_mediow/informacje_prasowe/nowe-siedziby-sejmiku-wojewodztwa-mazowieckiego-i-sadu-apelacyjnego-w-warszawie.html
 8. wroclaw.pl, „Na terenie byłego targowiska Zielińskiego powstanie gmach Sądu Apelacyjnego” (29.06.2021): https://www.wroclaw.pl/przedsiebiorczy-wroclaw/na-terenie-bylego-targowiska-zielinskiego-powstanie-gmach-sadu-apelacyjnego
-9. TED 328918-2022 (Sąd Rejonowy w Wieliczce; dane ze streszczenia wyszukiwarki, (s)): https://ted.europa.eu/en/notice/328918-2022/pdf
+9. TED 328918-2022 (zamawiający: Sąd Okręgowy w Krakowie; roboty budowlane w zakresie budynków sądowych, PL214; publ. 20.06.2022; wartość 73 784 488 zł; potwierdzone przez API TED: https://api.ted.europa.eu/v3/notices/search, zapytanie publication-number=328918-2022): https://ted.europa.eu/en/notice/328918-2022/pdf <!-- poprawione przez weryfikatora -->
 10. Warszawa 19115, „Parkingi podziemne”: https://warszawa19115.pl/-/parkingi-podziemne
 11. samorzad.gov.pl, powiat polkowicki, „Umowa na budowę komendy podpisana” ((s)): https://samorzad.gov.pl/web/powiat-polkowicki/umowa-na-budowe-komendy-podpisana
 12. Aluprof, pismo Dyrektora Handlowego (cennik od 1.02.2025): https://aluprof.com/files/documents/Pismo_Dyrektora_Handlowego.pdf
@@ -369,7 +371,7 @@ Fazy wg § 10 ust. 6: koncepcja 7–15%, PB 30–45%, PW 40–60%.
 25. mota-engil-ce.eu, „MECE will build the headquarters of the Masovian Voivodeship Archive”: https://mota-engil-ce.eu/news/mece-will-build-the-headquarters-of-the-masovian-voivodeship-archive,news,58,394
 26. forsal.pl, „Budimex ma umowę na budowę Centrum Administracyjnego w Ciechanowie” (2.07.2021): https://forsal.pl/biznes/aktualnosci/artykuly/8202443,budimex-ma-umowe-na-budowe-centrum-administracyjnego-w-ciechanowie.html
 27. inzynierbudownictwa.pl, „Urząd miasta w Lublinie będzie miał nową siedzibę” (2021): https://inzynierbudownictwa.pl/urzad-miasta-w-lublinie-bedzie-mial-nowa-siedzibe/
-28. Budimex, „Budimex will build a conference centre and the seat of the Marshal's Office in Lublin” (12.03.2014): https://bdm-stg.mda.pl/en/press/budimex-will-build-a-conference-centre-and-the-seat-of-the-marshals-office-in-lublin
+28. Budimex, „Budimex will build a conference centre and the seat of the Marshal's Office in Lublin” (12.03.2014): https://www.budimex.pl/en/press/budimex-will-build-a-conference-centre-and-the-seat-of-the-marshals-office-in-lublin <!-- poprawione przez weryfikatora: zamiast domeny testowej bdm-stg.mda.pl -->
 29. radiokrakow.pl: przetarg na budowę UM za 240 mln (2018) https://www.radiokrakow.pl/aktualnosci/krakow/przetarg-na-budowe-urzedu-marszalkowskiego-za-240-milionow-zlotych ; unieważnienie (2019) https://www.radiokrakow.pl/aktualnosci/krakow/przetarg-na-budowe-ratusza-marszalkowskiego-zostal-uniewazniony/ ; Wieliczka https://radiokrakow.pl/aktualnosci/krakow/w-wieliczce-powstanie-nowa-siedziba-sadu-rejonowego-i-prokuratury
 30. radio.lublin.pl, Starostwo w Białej Podlaskiej (15.03.2024): https://radio.lublin.pl/2024/03/starostwo-bedzie-miec-nowoczesny-budynek-stary-ma-pojsc-do-rozbiorki
 31. eurobuildcee.com, „Zaparkujemy pod placem Powstańców Warszawy” (3.08.2022): https://eurobuildcee.com/news/52827-zaparkujemy-pod-placem-powstancow-warszawy ; auto-swiat.pl (420 miejsc): https://www.auto-swiat.pl/wiadomosci/aktualnosci/duzy-parking-otwarty-w-samym-centrum-warszawy-znamy-cennik/zhq5fr8
