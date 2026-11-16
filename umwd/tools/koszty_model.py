@@ -34,6 +34,8 @@ REF = {
     "okna": 2400.0,        # m2 okna w elewacji otworowej
     "fas_sr": 800.0,       # m2 ściany słupowo-ryglowe (hol, sala Sejmiku)
     "fas_bipv": 400.0,     # m2 BIPV elewacyjne
+    # UWAGA (weryfikator 2026-11-16): kwp_dach 200 + 0,15 kWp/m2 x 400 m2 = 260 kWp < 400 kWp (minimum M.12 pkt B).
+    # Zgodność z M.12 wymaga ok. 1 333 m2 BIPV (zamiennie z fas_went): V1 mid 146,3 -> 147,3 mln zł.
     "przeslony": 1200.0,   # m2 lamele / przesłony stałe
     "drzwi_zew": 120.0, "swietliki": 60.0, "klapy": 12.0, "okna_wew": 80.0,
     "dach": 2700.0,        # m2 dachy płaskie łącznie

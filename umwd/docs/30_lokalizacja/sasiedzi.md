@@ -230,3 +230,13 @@ Rozwiązanie (a) „zszywa” pierzeję nad Oławą, o co prosi konserwator (`ko
 | K-06 | Lokal 6-6A: wysokość 364 cm (2023) vs 385 cm (2001); pokój 6,80 vs 7,02 m²; zamieniona numeracja WC/przedpokój w tabeli 2023 | L6-6A; M.08 s. 5 |
 | K-07 | M.07: EGiB podaje 5 kondygnacji, inwentaryzacja – 6 (z poddaszem) | e-mapa; M.07 s. 9 |
 | K-08 | Szczyt WS 5 był w dniu zdjęć zasłonięty siatką reklamową – stan okien niewidoczny na zdjęciach; przed PB wskazana inwentaryzacja aktualna (wizja) | M.10 |
+
+---
+
+## 6. Kadry pomocnicze (img/)
+- `img/inw_M07_s9_opis_budynek_w_liczbach.png` – opis i „Budynek w liczbach” (M.07 s. 9)
+- `img/inw_M07_parter_sciana_szczytowa.png` – parter Maz. 19, okno Ob1 łazienki 0.1.2 w szczycie (M.07 s. 3)
+- `img/inw_M08_sciana_szczytowa_wszystkie_kondygnacje.png` – pasy rzutów M.08 s. 2–8 przy ścianie szczytowej (szczyt = prawa krawędź pasów; dół = front od Wybrzeża)
+- `img/inw_M08_parter_IIp_IIIp_okna_szczyt.png` – parter (brak okien), łazienka 306 (II p.), łazienka 407 (III p.)
+- `img/inw_M08_poddasze_kuchnia_otwor.png` – poddasze, kuchnia 505 z otworem w szczycie i adnotacją odręczną
+- `img/kadr_0015_teren_WS5_Mazowiecka19.jpg`, `img/kadr_0033_teren_szczyty_WS5_Maz19.jpg` – szczyty sąsiadów na zdjęciach z drona

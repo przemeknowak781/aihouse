@@ -204,3 +204,11 @@ Założenia: ±0,00 parteru ≈ 119,10–119,25 (teren 118,7–119,4; `geometria
 | K-05 | Opis (Op. s. 6) mówi o nasypach do 2,80–3,80 m; w O-02 dodatkowo gleba do 3,40 m, a w O-09 ZWG nawiercone w nasypie (do 3,80 m) – spójne, ale oznacza **kontakt nasypów z wodą** (wymywanie, zanieczyszczenia) | Zał. 5.2, 5.9 | badania środowiskowe nasypów przed wywozem |
 | K-06 | Karty CPTu nie podają numeru sondowania w nagłówku wprost (oznaczenia odpowiadają otworom O-01, O-02, O-06, O-08), łączny metraż 36,4 mb – zgodny z zakresem | Zał. 6 | – |
 | K-07 | Kategoria geotechniczna „wstępnie II” – przy 2 kondygnacjach poniżej ZWG i zabytkowym sąsiedztwie możliwa III | Op. s. 4, 13 | decyzja projektanta; dokumentacja geologiczno-inżynierska |
+
+---
+
+## 8. Kadry pomocnicze (img/)
+- `img/geo_M05_zal2_mapa_dokumentacyjna.png` – mapa dokumentacyjna (lokalizacja otworów i linii przekrojów)
+- `img/geo_M05_zal7-1_przekroj.png` – przekrój 7.1 (O-01–O-02)
+- `img/geo_M05_zal8_tabela_parametrow.png` – tabela parametrów (Zał. 8)
+- `img/geo_ISOK_MZP_nakladka_teren.png` – granice obszarów zagrożenia powodziowego ISOK z obrysem terenu

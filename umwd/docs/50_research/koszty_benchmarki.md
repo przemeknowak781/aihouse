@@ -21,7 +21,7 @@
 Nie wyszukiwano, nie otwierano i nie wykorzystano żadnych informacji o pracach nagrodzonych, wyróżnionych ani konkurencyjnych w konkursie UMWD/Sejmik (Wrocław, Mazowiecka / Wybrzeże Słowackiego). W jednym wyszukiwaniu dotyczącym innych urzędów wyszukiwarka sama podała nagłówek o wynikach tego konkursu. Nie otwierano go i nic z niego nie zanotowano. Adres przekazano orkiestratorowi w polu `discarded_sources`, a w tym pliku go nie ma. Wykorzystano wyłącznie dane o innych inwestycjach, w tym o siedzibie Sejmiku Województwa Mazowieckiego i o wrocławskim Sądzie Apelacyjnym.
 
 ### 0.3 Ograniczenia, które trzeba znać przed wnioskami
-1. **Brak jawnych, autorytatywnych cen elementów.** Sekocenbud (BCO/BCE), Orgbud i Intercenbud są płatne. Darmowy dodatek Sekocenbud BCO cz. Ia (III kw. 2025) zawiera tylko opisy obiektów, bez cen. GUS publikuje dla obiektów **wyłącznie indeksy**, bez cen bezwzględnych. Stawki elementowe w rozdz. 5 to więc poradniki rynkowe [W] (głównie dla budownictwa mieszkaniowego) oraz założenia [Z].
+1. **Brak jawnych, autorytatywnych cen elementów.** Sekocenbud (BCO/BCE), Orgbud i Intercenbud są płatne. Darmowy dodatek Sekocenbud BCO cz. Ia (III kw. 2025) zawiera tylko opisy obiektów, bez cen. GUS publikuje dla obiektów **wyłącznie indeksy**, bez cen bezwzględnych. Stawki elementowe w rozdz. 5 to więc poradniki rynkowe [W] (głównie dla budownictwa mieszkaniowego) oraz założenia [Z]. Założenia [Z] stanowią ok. 80–85% wartości modelu. <!-- poprawione przez weryfikatora -->
 2. **Netto czy brutto w benchmarkach.** Część komunikatów prasowych nie podaje, czy kwota jest netto czy brutto. W tabeli B pokazano obie interpretacje.
 3. **Definicje powierzchni.** „Powierzchnia użytkowa” w komunikatach zamawiających bywa liczona różnie (z komunikacją lub bez, z garażem lub bez). Porównanie w zł/m² PU jest obarczone dużym błędem. Porównanie w zł/m² PC jest pewniejsze, ale PC podaje mniej źródeł.
 4. **Limit wyszukiwań.** Budżet wyszukiwań tej rundy się wyczerpał (limit narzędzia). Nie udało się dotrzeć do przetargów na systemy głosowania sejmików ani do jawnych cen ścian szczelinowych. Pozycje te mają status [Z]. Można je uzupełnić w kolejnej rundzie.
@@ -31,7 +31,7 @@ Nie wyszukiwano, nie otwierano i nie wykorzystano żadnych informacji o pracach 
 ## 1. Najważniejsze wnioski (streszczenie)
 
 1. **Limit 150 mln zł netto jest twardy i realnie wiążący.** Bottom-up model w układzie F.14.B (poziom „mid”, II kw. 2026) dla wariantu referencyjnego V1 daje **146,3 mln zł netto**, w tym rezerwę 5%. V1 to PC nadziemna 14 000 m² i podziemie 3 900 m² (1 kondygnacja + częściowa −2). Zapas względem limitu wynosi tylko 2,5%. Wariant z dwiema pełnymi kondygnacjami podziemnymi (V2, 5 800 m²) daje **152,4 mln**, czyli przekracza limit. Wariant z PC nadziemną 13 000 m² (V1b) daje **141,4 mln**, czyli zapas ok. 6%. *(Wniosek; model rozdz. 7.)*
-2. **Pasmo rynkowe dla porównywalnych budynków publicznych** po normalizacji do II kw. 2026 wynosi **ok. 7 400–9 300 zł/m² PC netto**, przy środku ok. 8 000–8 500. Model V1 mid daje 8 170 zł/m² PC, czyli mieści się w paśmie. Najbliższy analog to siedziba Sejmiku Województwa Mazowieckiego (umowa IV 2026): 124,3 mln zł za >6 800 m² PU. Przy interpretacji „brutto” daje to ok. 7 800–9 300 zł/m² PC netto. *(rozdz. 4)*
+2. **Pasmo rynkowe dla porównywalnych budynków publicznych** po normalizacji do II kw. 2026 wynosi **ok. 7 400–9 300 zł/m² PC netto**, przy środku ok. 8 000–8 500. Model V1 mid daje 8 170 zł/m² PC, czyli mieści się w paśmie. Najbliższy analog to siedziba Sejmiku Województwa Mazowieckiego (umowa IV 2026): 124,3 mln zł za >6 800 m² PU. Przy interpretacji „brutto” daje to ok. 7 800–9 300 zł/m² PC netto. *(rozdz. 4)* *Uwaga weryfikatora:* pasmo zależy od dwóch niezweryfikowanych założeń dla B1 (VAT i PC/PU) oraz od słabego analogu B3 (archiwum). Analogi z wyższej półki (B2, B6, B7 z ceną umowną) wskazują, że ryzyko jest asymetryczne w górę. <!-- poprawione przez weryfikatora -->
 3. **Ceny budowlane przyspieszyły w 2026 r.** Średnioroczny wzrost cen produkcji budowlano-montażowej wyniósł +6,0% w 2024 r. i +3,2% w 2025 r. We wrześniu 2026 r. było to już **+6,9% r/r**, w tym budowa budynków +6,7%, a roboty specjalistyczne +7,7% [O GUS]. Prognozy z początku 2026 r. zakładały 2,5–3,5% dla Warszawy [R Arcadis], więc **zaniżyły tempo**. Każdy rok opóźnienia oznacza +4–7% kosztu. *(rozdz. 3)*
 4. **Waloryzacja do 2027 r. „zjada” zapas.** V1 przy +5% daje 153,6 mln. W połowie budowy (ok. 2030) V1 kosztuje 163–189 mln przy 3–7% rocznie. *Wniosek:* w F.14.B podać koszt na **jawnie opisanym poziomie cen (II kw. 2026)**, a ryzyko waloryzacji opisać w części opisowej i pokazać rezerwę. Wpisanie wartości zwaloryzowanych do 2030 r. w sumę porównywaną z limitem formalnie wykluczyłoby pracę z limitu, którego Regulamin nie indeksuje (R.III ust. 3). Ten punkt jest interpretacją.
 5. **Największe dźwignie kosztu (mid, krańcowo):** +1 000 m² PC nadziemnej to ok. +4,9 mln zł. Druga pełna kondygnacja podziemna to ok. +6,1 mln zł w modelu, a realnie +6–9 mln (rozdz. 7.5). Zamiana 1 000 m² ceramiki na ścianę słupowo-ryglową to +1,5 mln zł. Zamiana 1 000 m² ceramiki na BIPV to +1,0 mln zł.
@@ -244,6 +244,8 @@ Po wykonaniu rzutów trzeba je zastąpić ilościami z rysunków. Spójność z 
 | **V2** – A_nad 14 000, A_pod 5 800 (2 pełne kondygnacje, M.01) | 112,0 | **152,4** | 211,3 | 7 696 | 160,0 |
 | **V1b** – A_nad 13 000 (fasada proporcjonalnie mniejsza), A_pod 3 900 | 103,4 | **141,4** | 196,7 | 8 364 | 148,4 |
 
+*Uwaga weryfikatora:* V1 i V2 odtworzono dokładnie. Dla V1b przy skalowaniu wszystkich typów elewacji ×13/14 wychodzi 103,2 / **141,0** / 196,3 mln (8 345 zł/m² PC). Różnica 0,3% wynika z nieopisanego sposobu skalowania. Pliki wejściowe JSON dla V2 i V1b nie zostały zapisane w repozytorium, więc trzeba je zapisać (np. `tools/koszty_V2.json`, `tools/koszty_V1b.json`). **Żaden wariant nie spełnia minimum PV z M.12 (260 kWp < 400 kWp).** Po korekcie (ok. 1 333 m² BIPV zamiast ceramiki) mid wynosi: V1 147,3; V1b ok. 142,0; V2 ok. 153,4 mln zł. <!-- poprawione przez weryfikatora -->
+
 Podział V1 mid na grupy F.14.B [mln zł]:
 
 | Gr. | Nazwa | mln zł | Gr. | Nazwa | mln zł |
@@ -285,7 +287,7 @@ Wiersze ze szczegółami (ilość, j.m., cena jednostkowa, wartość) dla F.14.B
 2. **Podziemie = minimum funkcjonalne** (103–110 miejsc + technika + MDS ≈ 3 800–4 000 m²). Drugą kondygnację ograniczyć do strefy technicznej i zbiorników, z uzasadnieniem w opisie (Reg. II.2). Oszczędność wobec M.01: 6–10 mln.
 3. **Fasada:** ceramika wentylowana jako tło (rytm segmentów 12–20 m wg DWKZ), przeszklenia ≤ 40% elewacji. Słupowo-ryglowa tylko w holu i sali Sejmiku. BIPV jako **zamiennik** okładziny w spandrelach dominanty, a nie dodatkowa warstwa.
 4. **Zero-emisyjność „systemowa, nie gadżetowa”:** GPC z odwiertami pod budynkiem (wykonanymi przed płytą), pole sond jako magazyn sezonowy (BTES) zamiast osobnego zbiornika, BESS o rozsądnej pojemności (ok. 250 kWh). Wniosek; zgodne z M.12 pkt C, D.
-5. **Rezerwa 5% pokazana jawnie w grupie 18.** Pozwala bronić tezy o realności (R2) bez „zaniżania”. Wariant docelowy: **V1b mid ≈ 141 mln zł netto** (zapas ok. 9 mln = 6%).
+5. **Rezerwa 5% pokazana jawnie w grupie 18.** Pozwala bronić tezy o realności (R2) bez „zaniżania”. Wariant docelowy: **V1b mid ≈ 141 mln zł netto** (zapas ok. 9 mln = 6%). Po uzupełnieniu PV do minimum M.12 jest to ok. **142 mln** (zapas ok. 8 mln = 5,3%). <!-- poprawione przez weryfikatora -->
 
 ---
 
@@ -381,3 +383,21 @@ Fazy wg § 10 ust. 6: koncepcja 7–15%, PB 30–45%, PW 40–60%.
 - Sekocenbud, *BCO cz. Ia – opisy obiektów* (III kw. 2025), https://sekocenbud.pl/public/BZ/2025/2025k3/BCO_cz1a_2025k3_dodatek_opisy.pdf: zawiera tylko opisy, bez cen. Użyto jedynie zasady, że wskaźniki BCO cz. I nie obejmują zagospodarowania, przyłączy ani kosztów dodatkowych.
 - trojmiasto.pl (biurowiec Urzędu Marszałkowskiego Woj. Pomorskiego ze schronem): HTTP 403, nie wykorzystano.
 - lublin.eu (przetarg ul. Leszczyńskiego): HTTP 503; dane wzięto ze źródła 27.
+
+---
+
+## 12. Weryfikacja źródeł (weryfikator, 2026-11-16) <!-- poprawione przez weryfikatora -->
+
+**Zakaz Inwestora:** w pliku i w `tools/koszty_model.py` nie znaleziono żadnych informacji o pracach, wynikach ani uczestnikach konkursu UMWD. Rozdz. 0.2 to tylko deklaracja proceduralna i nie zawiera treści o wynikach. Weryfikator nie otwierał żadnych materiałów o tym konkursie.
+
+**Potwierdzone bezpośrednio (strona lub PDF otwarte 2026-11-16):**
+- GUS: 2024 +6,0%, 2025 +3,2%, XII 2025 +3,6% (budynki +3,4%) (SSGK 2025, s. „Ceny produkcji budowlano-montażowej”); 2023 +10,2% (SSGK 2024); II kw./I kw. 2026 +2,1% (komunikat z 19.08.2026); VII 2026 +6,2% r/r, budynki +5,7% (publ. 20.08.2026); IX 2026 +6,9% r/r, m/m +0,7%, budynki +6,7%, inżynieria +6,5%, specjalistyczne +7,7% (publ. 20.10.2026); PKOB 1220: 102,8 i 103,5, reprezentant 6 kond., PU 2 124 m² (publ. 24.11.2025, tabl. 2).
+- Rozp. MRiT, Dz.U. 2021 poz. 2458: tabela 1 (100 000 tys.: 4,30 / 5,30 / 6,30; 200 000 tys.: 3,90 / 4,80 / 5,70), interpolacja liniowa (I.3), tabela 2 („siedziby władz wojewódzkich, ratusze”: IV, z możliwością V–VI; „prestiżowe siedziby”: VI; biurowe do 55 m z garażami: IV/V), § 10 ust. 5–6, § 1 pkt 1.
+- Materiały konkursowe: Reg. R.III ust. 1 pkt 10, ust. 3, ust. 4; R.VII ust. 2 pkt 3 lit. f; R.VIII (kryterium drugorzędowe; „kryteria mogą być rozpatrywane rozdzielnie”); Wyjaśnienia nr 20, odp. 74 (cytaty dosłowne); F.01 § 14 ust. 2 (12/30/10/40/1/7%); M.12 pkt B (0,4–1,0 MWp); M.05 (3,20–3,80 m p.p.t., 115,07–115,95 m n.p.m., strefa podtopień, nasypy do 3,80 m).
+- B1 (mazovia.pl, inzynierbudownictwa.pl, wnp.pl, propertydesign.pl, nowawarszawa.pl), B2 (biznesradar.pl, investmap.pl), B3 (eurobuildcee.com, mota-engil-ce.eu), B4 (forsal.pl), B5 (inzynierbudownictwa.pl, 01.07.2021), B6 (wroclaw.pl; uwaga: lead artykułu podaje 73,7 mln, a tekst 73 mln), B7 (API TED, radiokrakow.pl), B8 (eurobuildcee.com, auto-swiat.pl, warszawa19115.pl), B9 (budimex.pl), B10 (radiokrakow.pl 2018 i 2019).
+- Arcadis ICC 2025 (Warszawa: 4–5% w 2024, 5–6% w 2025, indeks 99) i ICC 2026 (2,5–3,5% / 2,5–3,5%, indeks 100); Turner & Townsend (5,1% → 2,8%); Cushman & Wakefield (Warszawa 1 313 €/m², edycja 2026).
+- Poradniki [W]: kb.pl (ścianki Larsena, okna alu, odwierty dolnośląskie), muratordom.pl (zielony dach 18.06.2026, odwierty 2026), oferteo.pl (elewacja wentylowana 2025), globenergia.pl (PV 50 kWp z 2021, okna 2025), cenauslug.pl (odwierty 2026).
+
+**Niepotwierdzone (serwer zwrócił błąd):** Aluprof, pismo dyrektora handlowego (HTTP 403); samorzad.gov.pl Polkowice, B12 (HTTP 503). Nadal (s): Spectis/PSB, money.pl, enerad.pl, prawo.pl, lexlege.pl. Informacja „13 ofert, ok. 239 mln brutto, założenia >300 mln” dla B1 pozostaje niezweryfikowana i nie występuje w sprawdzonych źródłach B1.
+
+**Poprawki:** stawki za miejsce postojowe (205 i 167 tys. zamiast 220 i 180 tys.); udział [Z] (80–85% zamiast 60%); niezgodność wariantów z minimum PV z M.12; B3 (PC 12 808,59 m²); B7 (cena umowna zamiast szacunku TED); suma kwot w B1; zakres oferteo.pl; daty i status VAT poradników; rok artykułu globenergia o PV (2021); kb.pl o odwiertach (178 zł/mb netto, a nie 190–230); adres Budimeksu; kontrola top-down jest kalibracją, a nie walidacją.
