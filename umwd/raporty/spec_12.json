@@ -1,0 +1,63 @@
+{
+ "nr": 12,
+ "title": "Neighbour, tree and soil data complete: the protected window in Wybrzeże Słowackiego 5 fixes the south-east edge of the scheme (§13 sector)",
+ "stages": [
+  [
+   "Organiser materials: download, unpack, text extraction (results files deliberately EXCLUDED)",
+   "done"
+  ],
+  [
+   "Rules register (184 requirements, 14 conflicts) + checklists ✔ verified",
+   "done"
+  ],
+  [
+   "Site ✔: zoning, heritage, 1934 overlay, DWG survey, geotech, dendrology (44 trees, keep-classes), neighbours (window positions & sills)",
+   "done"
+  ],
+  [
+   "Law ✔, sunlight ✔, fire ✔, accessibility ✔, zero-emission & energy strategy ✔ (verification ►)",
+   "running"
+  ],
+  [
+   "Research ✔: trends, visual craft, boards, façades, Wrocław context, cost benchmarks (verification ►)",
+   "running"
+  ],
+  [
+   "Programme ✔: 193 rooms, 187 offices (24/32 m², 1.35 m module), PU ≈ 8,600 m², GFA ≈ 14,000 m² above ground",
+   "done"
+  ],
+  [
+   "Concept panel ►: K1 contextual block + Sejmik lantern · K2 Wrocław brick tectonics · K3 civic forum · K4 zero-emission hybrid · K5 dynamic 1930s modernism → jury J1–J5",
+   "running"
+  ],
+  [
+   "3D/visuals: plan & site-plan engines ✔, Blender lib ✔; photomatch F.17.A/B solver ►; 3D context (neighbours LOD3, bridge pylons with helmets, terrain, trees) ►",
+   "running"
+  ],
+  [
+   "Stage I study (2 boards) + Stage II entry (≤8 boards 100×70 per clarif. 20), 5×A3 text, F.14.B/F.15 tables, white model 1:250",
+   "todo"
+  ],
+  [
+   "Jury simulation & compliance audit → iterate until no open issues",
+   "todo"
+  ]
+ ],
+ "notes": [
+  "§13 sector (right): window of room 207 in flat 6-6A (1st floor, sill ≈124.0 m a.s.l.) faces north. In its 60° sector: obstacle at the plot-10/2 line may rise only ≈13 m (below the MPZP 18 m minimum → must stay OPEN); a 22 m wing is allowed from ≥8.55 m; the tower (>35 m) from ≥17.5 m — zone A's south edge is ≈20 m away ✓.",
+  "Hence the south-east corner of the site becomes the service/garden court opening to Wybrzeże Słowackiego — light for No. 5, delivery & garage access from the boulevard (allowed street), bike entry from the courtyard as the programme requires.",
+  "Mazowiecka 19: bathroom windows in the gable to be bricked up (client's accompanying works) → our west wing can abut the gable, closing the street frontage as heritage requires.",
+  "Dendrology: 44 trees + 51 shrub groups, none protected species; keep-class map prepared (Z1 priority maples in the gardens) → garden court keeps the best group.",
+  "Geotech: groundwater 3.2–3.8 m below ground, rubble fill up to 3.8 m → one tight basement level (+ partial second) is the rational, budget-safe choice."
+ ],
+ "images": [
+  {
+   "path": "umwd/docs/30_lokalizacja/img/sasiedzi_okna_szczytowe_par13.png",
+   "caption": "§13 WT sector for the protected window of Wybrzeże Słowackiego 5 (flat 6-6A)"
+  },
+  {
+   "path": "umwd/render/studia/envelope_mpzp.png",
+   "caption": "MPZP envelope — the design subtracts courts & gaps from this volume"
+  }
+ ]
+}

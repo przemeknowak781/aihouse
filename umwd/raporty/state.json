@@ -1,5 +1,5 @@
 {
- "title": "Zoning envelope modelled in 3D (max. legal volume: 18–25 m band + 35–45 m zone A); concept architects K1–K5 still drafting full schemes",
+ "title": "Neighbour, tree and soil data complete: the protected window in Wybrzeże Słowackiego 5 fixes the south-east edge of the scheme (§13 sector)",
  "stages": [
   [
    "Organiser materials: download, unpack, text extraction (results files deliberately EXCLUDED)",
@@ -10,8 +10,8 @@
    "done"
   ],
   [
-   "Site: zoning ✔, heritage ✔, 1934 overlay ✔, DWG survey → site.json ✔ (terrain model, 56 trees, neighbours' heights); geotech & dendrology ►",
-   "running"
+   "Site ✔: zoning, heritage, 1934 overlay, DWG survey, geotech, dendrology (44 trees, keep-classes), neighbours (window positions & sills)",
+   "done"
   ],
   [
    "Law ✔, sunlight ✔, fire ✔, accessibility ✔, zero-emission & energy strategy ✔ (verification ►)",
@@ -43,20 +43,20 @@
   ]
  ],
  "notes": [
-  "Envelope study (right): investment area extruded to the MPZP limits — white lines mark the minimum roof heights (18 m outside A, 35 m in A). Any roof below these lines is illegal: no low pavilions, no low link blocks.",
-  "Maximum envelope ≈ 2,544 m² × 25 m + 1,184 m² × 45 m — far above the programme (≈13,500 m² GFA), so the design task is subtraction: where to open courtyards, gardens and the Słowackiego 5 light gap.",
-  "Shadow test (SW sun) already shows the tower's long shadow falling across the bridgehead square (north) — favourable: no residential windows there.",
-  "Concept agents are computing full area schedules and Sejmik-floor layouts; the jury (5 personas) starts as soon as all five dossiers are complete.",
-  "Background: photomatch solver (F.17.A/B) and 3D context builder (neighbours LOD3, bridge, terrain, trees) running."
+  "§13 sector (right): window of room 207 in flat 6-6A (1st floor, sill ≈124.0 m a.s.l.) faces north. In its 60° sector: obstacle at the plot-10/2 line may rise only ≈13 m (below the MPZP 18 m minimum → must stay OPEN); a 22 m wing is allowed from ≥8.55 m; the tower (>35 m) from ≥17.5 m — zone A's south edge is ≈20 m away ✓.",
+  "Hence the south-east corner of the site becomes the service/garden court opening to Wybrzeże Słowackiego — light for No. 5, delivery & garage access from the boulevard (allowed street), bike entry from the courtyard as the programme requires.",
+  "Mazowiecka 19: bathroom windows in the gable to be bricked up (client's accompanying works) → our west wing can abut the gable, closing the street frontage as heritage requires.",
+  "Dendrology: 44 trees + 51 shrub groups, none protected species; keep-class map prepared (Z1 priority maples in the gardens) → garden court keeps the best group.",
+  "Geotech: groundwater 3.2–3.8 m below ground, rubble fill up to 3.8 m → one tight basement level (+ partial second) is the rational, budget-safe choice."
  ],
  "images": [
   {
-   "path": "umwd/render/studia/envelope_mpzp.png",
-   "caption": "MPZP envelope over context: 18–25 m band (pale) + zone A 35–45 m (red), view from NE"
+   "path": "umwd/docs/30_lokalizacja/img/sasiedzi_okna_szczytowe_par13.png",
+   "caption": "§13 WT sector for the protected window of Wybrzeże Słowackiego 5 (flat 6-6A)"
   },
   {
-   "path": "umwd/docs/30_lokalizacja/img/mpzp_08_schemat_ustalen_M04.png",
-   "caption": "Plan view of the same constraints (M.04 + MPZP)"
+   "path": "umwd/render/studia/envelope_mpzp.png",
+   "caption": "MPZP envelope — the design subtracts courts & gaps from this volume"
   }
  ]
 }
