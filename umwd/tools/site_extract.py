@@ -84,7 +84,7 @@ LAYER_DICT = {
     "GSLTTK": ("BDOT500", "tory tramwajowe (osie)", "wniosek (przebieg na Most Grunwaldzki)"),
     "GSLKOG": ("BDOT500", "ogrodzenia (linie + slupki)", "wniosek"),
     "GSSKOG": ("BDOT500", "elementy ogrodzen (bramy/furtki)", "wniosek"),
-    "GSSUTR": ("BDOT500", "trawniki / tereny zieleni (obrys + symbole '||')", "wniosek (symbol trawnika)"),
+    "GSSUTR": ("BDOT500", "trawniki / tereny zieleni (obrys + symbole trawnika)", "wniosek (symbol trawnika)"),
     "GSSZSN": ("BDOT500", "skarpy (nieumocnione) - linia gorna + kreski", "wniosek"),
     "GSSZSU": ("BDOT500", "skarpy umocnione (nabrzeze)", "wniosek"),
     "GSSZMO": ("BDOT500", "mury oporowe / sciany przyczolka", "wniosek"),
@@ -1222,10 +1222,11 @@ def ground_level(T, poly, buf=2.0):
                 "metoda": "NMT (TIN) w pasie 2 m wokol obrysu"}
     # poza zasiegiem NMT: punkty wysokosciowe e-mapy (GSPWPS/GSPWPN) i rzedne 'txt' w promieniu 12 m od obrysu
     cand = [(p["e"], p["n"], p["h"]) for p in T["emapa_h"]] + [(p["e"], p["n"], p["h"]) for p in T["txt_h"]]
-    hs = [h for e, n, h in cand if poly.distance(Point(e, n)) < 12.0]
-    if hs:
-        return {"min": r2(min(hs)), "srednia": r2(float(np.median(hs))), "max": r2(max(hs)), "n": len(hs),
-                "metoda": "poza NMT - mediana punktow wysokosciowych e-mapy w promieniu 12 m (przyblizenie)"}
+    for rad in (12.0, 30.0):
+        hs = [h for e, n, h in cand if poly.distance(Point(e, n)) < rad]
+        if hs:
+            return {"min": r2(min(hs)), "srednia": r2(float(np.median(hs))), "max": r2(max(hs)), "n": len(hs),
+                    "metoda": "poza NMT - mediana punktow wysokosciowych e-mapy w promieniu %.0f m (przyblizenie)" % rad}
     return None
 
 
@@ -1375,8 +1376,7 @@ def build_json(P, S, extras):
                                         dzialki="10/3, 11/6, 19/11, 9/1", pole_wg_M01_m2=3729),
         "granica_opracowania_konkursowego": poly_entry(B["granica_opracowania_konkursowego"], zrodlo="M.04 DWG warstwa '__Obszar opracowania konkursowego'",
                                                        roznica_blok_vs_polilinia_m2=r3(B["_konkurs_blok_vs_polilinia_m"])),
-        "granica_opracowania_studialnego": poly_entry(B["granica_opracowania_studialnego"], zrodlo="M.04 DWG warstwa '__Obszar opracowania studialnego'",
-                                                      uwaga="poligon przyciety do ramki mapy M.04 (zasieg rysunku)"),
+        "granica_opracowania_studialnego": poly_entry(B["granica_opracowania_studialnego"], zrodlo="M.04 DWG warstwa '__Obszar opracowania studialnego'"),
         "wydzielenie_A_mpzp": poly_entry(B["wydzielenie_A_mpzp"], zrodlo="e-mapa / M.04 DWG 'Warstwa 61' (szrafura kolor 230); legenda M.04: 'Wydzielenie wewn. A zgodnie z MPZP'; legenda e-mapy opisuje te szrafure jako 'strefa oddzialywania linii zabudowy' (rozbieznosc nazewnicza)",
                                          pole_w_obszarze_inwestycji_m2=r2(B["wydzielenie_A_mpzp"].intersection(inv).area),
                                          dokladnosc="ok. +/-0,3 m (digitalizacja rastra planu 1:1000)"),
@@ -1582,7 +1582,7 @@ def bridge_info(S):
     if d[1] < 0:
         d = -d
     az = azimuth(d[0], d[1])
-    axis = LineString([m - 60 * d, m + 60 * d])
+    axis = LineString([m - 60 * d, m + 60 * d])     # do przeciecia z linia brzegu
     shore = [LineString(g["pts"]) for g in Sx["woda_linia_brzegu"]]
     ip = None
     for sl in shore:
@@ -1593,7 +1593,8 @@ def bridge_info(S):
     walls = [g for g in Sx["mury"] if g["layer"] == "GSSZMO"]
     return {
         "nazwa": "Most Grunwaldzki (przyczolek poludniowy - poza/na krawedzi ramki mapy, pln.-wsch. naroznik)",
-        "os_przyblizona": {"punkt": pts_r([m], 2)[0], "azymut_siatki_deg": r1(az), "pts": pts_r(axis.coords, 2),
+        "os_przyblizona": {"punkt": pts_r([m], 2)[0], "azymut_siatki_deg": r1(az),
+                           "pts": pts_r([np.array(ip.coords[0]) - 10 * d, np.array(ip.coords[0]) + 60 * d] if ip else axis.coords, 2),
                            "metoda": "glowny kierunek (PCA) osi torow tramwajowych GSLTTK w rejonie e>85, n>118 - przyblizenie osi mostu"},
         "przeciecie_osi_z_linia_brzegu": pts_r([ip.coords[0]], 2)[0] if ip else None,
         "mury_przyczolka_GSSZMO": [pts_r(g["pts"], 2) for g in walls],
@@ -1830,12 +1831,12 @@ def make_md(P, S, J, out_md):
     ct = T["kontrola"]["rzedne_txt_emapy_vs_pikiety"]
     w("| Rzędne pomiaru w e-mapie (warstwa `txt`) vs pikiety | %d | odl. XY maks. %.3f m, ΔH maks. %.3f m |" % (ct["n"], ct["odl_xy_max_m"] or 0, ct["dH_max_m"] or 0))
     for lay, v in T["kontrola"]["punkty_emapy_vs_TIN"].items():
-        w("| Urzędowe punkty wysokościowe e-mapy %s vs TIN z pikiet (niezależny pomiar) | %d | śr. %+.3f m, σ %.3f m, maks. |Δ| %.3f m |" % (lay, v["n"], v["srednia_m"], v["odch_std_m"], v["max_abs_m"]))
+        w("| Urzędowe punkty wysokościowe e-mapy %s vs TIN z pikiet (niezależny pomiar) | %d | śr. %+.3f m, σ %.3f m, maks. abs(ΔH) %.3f m |" % (lay, v["n"], v["srednia_m"], v["odch_std_m"], v["max_abs_m"]))
     pdf = kg["pdf_M04"]
     for nm in ("obszar_inwestycji", "granica_opracowania_konkursowego", "teren_uzyczony_9_2"):
         if nm in pdf:
             v = pdf[nm]
-            w("| PDF M.04 (wektory przeliczone przez ramkę 1:500) vs DWG: %s | %d odc. | odl. ze znakiem: mediana %+.3f m (p05 %+.3f, p95 %+.3f); |odl.| mediana %.3f m, maks. %.3f m |" %
+            w("| PDF M.04 (wektory przeliczone przez ramkę 1:500) vs DWG: %s | %d odc. | odl. ze znakiem: mediana %+.3f m (p05 %+.3f, p95 %+.3f); odl. bezwzgl.: mediana %.3f m, maks. %.3f m |" %
               (nm, v["n_odcinkow_pdf_przy_obrysie"], v["odl_ze_znakiem_m"]["mediana"], v["odl_ze_znakiem_m"]["p05"], v["odl_ze_znakiem_m"]["p95"],
                v["odl_bezwzgl_m"]["mediana"], v["odl_bezwzgl_m"]["max"]))
     w("| Skala PDF M.04 (ramka) | – | %.6f / %.6f m/pt vs teoret. 1:500 = %.6f m/pt |" % (pdf["skala_x_m_na_pt"], pdf["skala_y_m_na_pt"], pdf["skala_teoretyczna_1_500_m_na_pt"]))
@@ -1874,11 +1875,22 @@ def make_md(P, S, J, out_md):
     w("|---|---|---|---|")
     A = G["wydzielenie_A_mpzp"]
     w("| Obszar inwestycji (dz. 10/3, 11/6, 19/11, 9/1) | **%.1f** | %.1f | M.01: 3 729 m² (różnica %.1f m² = %.2f%%) |" % (inv["pole_m2"], inv["obwod_m"], inv["pole_m2"] - 3729, 100 * (inv["pole_m2"] - 3729) / 3729))
-    w("| Granica opracowania konkursowego | %.1f | %.1f | obejmuje obszar inwestycji + dz. 9/2 + 10/2 + pas wzdłuż Wybrzeża |" % (G["granica_opracowania_konkursowego"]["pole_m2"], G["granica_opracowania_konkursowego"]["obwod_m"]))
-    w("| Granica opracowania studialnego (w ramce M.04) | %.1f | %.1f | przycięta ramką mapy |" % (G["granica_opracowania_studialnego"]["pole_m2"], G["granica_opracowania_studialnego"]["obwod_m"]))
+    Bk = S["B"]
+    restg = Bk["granica_opracowania_konkursowego"].difference(Bk["obszar_inwestycji"]).difference(Bk["teren_uzyczony_9_2"]).difference(Bk["dojazd_10_2"])
+    rest = restg.area
+    comp = []
+    for q in S["parcels"]["items"]:
+        a_ = q["poly"].intersection(restg).area
+        if a_ > 2:
+            comp.append("%s %.1f" % ("+".join(q["ids"]) or "?", a_))
+    w("| Granica opracowania konkursowego | %.1f | %.1f | = obszar inwestycji + dz. 9/2 (%.1f) + dz. 10/2 (%.1f) + pozostałe %.1f m² na działkach: %s m² |" %
+      (G["granica_opracowania_konkursowego"]["pole_m2"], G["granica_opracowania_konkursowego"]["obwod_m"], G["teren_uzyczony_dz_9_2"]["pole_m2"], G["dojazd_dz_10_2"]["pole_m2"], rest, "; ".join(comp)))
+    w("| Granica opracowania studialnego | %.1f | %.1f | w całości w ramce mapy (min. 16 m od ramki); zawiera granicę konkursową |" % (G["granica_opracowania_studialnego"]["pole_m2"], G["granica_opracowania_studialnego"]["obwod_m"]))
     w("| Wydzielenie A (MPZP) | %.1f | %.1f | w obszarze inwestycji: **%.1f m²** (%.0f%% obszaru) |" % (A["pole_m2"], A["obwod_m"], A["pole_w_obszarze_inwestycji_m2"], 100 * A["pole_w_obszarze_inwestycji_m2"] / inv["pole_m2"]))
-    w("| Ogródki przydomowe | %.1f | %.1f | w całości w obszarze inwestycji: %s |" % (G["ogrodki_przydomowe"]["pole_m2"], G["ogrodki_przydomowe"]["obwod_m"],
-      "tak" if S["B"]["ogrodki_przydomowe"].difference(S["B"]["obszar_inwestycji"]).area < 1 else "nie (%.1f m² poza)" % S["B"]["ogrodki_przydomowe"].difference(S["B"]["obszar_inwestycji"]).area))
+    ogo = S["B"]["ogrodki_przydomowe"].difference(S["B"]["obszar_inwestycji"])
+    w("| Ogródki przydomowe | %.1f | %.1f | w obszarze inwestycji: %.1f m²; %s |" % (G["ogrodki_przydomowe"]["pole_m2"], G["ogrodki_przydomowe"]["obwod_m"],
+      G["ogrodki_przydomowe"]["pole_m2"] - ogo.area,
+      "w całości w obszarze inwestycji" if ogo.area < 1 else "**%.1f m² poza obszarem inwestycji** – na dz. 11/3 (podwórze Mazowieckiej 19, e %.1f–%.1f, n %.1f–%.1f)" % (ogo.area, ogo.bounds[0], ogo.bounds[2], ogo.bounds[1], ogo.bounds[3])))
     w("| Dojazd – dz. 10/2 | %.1f | %.1f | |" % (G["dojazd_dz_10_2"]["pole_m2"], G["dojazd_dz_10_2"]["obwod_m"]))
     w("| Teren użyczony – dz. 9/2 (skwer) | %.1f | %.1f | |" % (G["teren_uzyczony_dz_9_2"]["pole_m2"], G["teren_uzyczony_dz_9_2"]["obwod_m"]))
     for i, o in enumerate(G["obiekty_dziedzictwa_kulturowego"]):

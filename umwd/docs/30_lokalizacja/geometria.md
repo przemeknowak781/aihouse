@@ -43,11 +43,11 @@ Opisy z mapy M.02 (PDF, tabliczka i legenda; odczyt wizualny renderu 250 dpi): *
 | Drzewa: `drzewa.txt` vs symbole drzew e-mapy (GSPRD*), przykłady: D701, D702, D774, D775, I773 | 5 | odchyłki 0.04, 0.02, 0.06, 0.03, 0.01 m |
 | Pikiety: DWG modelu terenu vs `pikiety do nmt.txt` | 765 | 748 zgodnych w XY < 2 cm, maks. ΔH 0.040 m; punkty DWG bez odpowiednika w txt: 17 (pomijane) |
 | Rzędne pomiaru w e-mapie (warstwa `txt`) vs pikiety | 65 | odl. XY maks. 1.358 m, ΔH maks. 0.050 m |
-| Urzędowe punkty wysokościowe e-mapy GSPWPS vs TIN z pikiet (niezależny pomiar) | 5 | śr. +0.052 m, σ 0.055 m, maks. |Δ| 0.159 m |
-| Urzędowe punkty wysokościowe e-mapy GSPWPN vs TIN z pikiet (niezależny pomiar) | 11 | śr. +0.039 m, σ 0.358 m, maks. |Δ| 0.877 m |
-| PDF M.04 (wektory przeliczone przez ramkę 1:500) vs DWG: obszar_inwestycji | 82 odc. | odl. ze znakiem: mediana -0.006 m (p05 -0.212, p95 +0.196); |odl.| mediana 0.011 m, maks. 0.907 m |
-| PDF M.04 (wektory przeliczone przez ramkę 1:500) vs DWG: granica_opracowania_konkursowego | 350 odc. | odl. ze znakiem: mediana -0.006 m (p05 -0.258, p95 +0.246); |odl.| mediana 0.010 m, maks. 0.267 m |
-| PDF M.04 (wektory przeliczone przez ramkę 1:500) vs DWG: teren_uzyczony_9_2 | 7 odc. | odl. ze znakiem: mediana -0.007 m (p05 -0.725, p95 +0.001); |odl.| mediana 0.007 m, maks. 0.730 m |
+| Urzędowe punkty wysokościowe e-mapy GSPWPS vs TIN z pikiet (niezależny pomiar) | 5 | śr. +0.052 m, σ 0.055 m, maks. abs(ΔH) 0.159 m |
+| Urzędowe punkty wysokościowe e-mapy GSPWPN vs TIN z pikiet (niezależny pomiar) | 11 | śr. +0.039 m, σ 0.358 m, maks. abs(ΔH) 0.877 m |
+| PDF M.04 (wektory przeliczone przez ramkę 1:500) vs DWG: obszar_inwestycji | 82 odc. | odl. ze znakiem: mediana -0.006 m (p05 -0.212, p95 +0.196); odl. bezwzgl.: mediana 0.011 m, maks. 0.907 m |
+| PDF M.04 (wektory przeliczone przez ramkę 1:500) vs DWG: granica_opracowania_konkursowego | 350 odc. | odl. ze znakiem: mediana -0.006 m (p05 -0.258, p95 +0.246); odl. bezwzgl.: mediana 0.010 m, maks. 0.267 m |
+| PDF M.04 (wektory przeliczone przez ramkę 1:500) vs DWG: teren_uzyczony_9_2 | 7 odc. | odl. ze znakiem: mediana -0.007 m (p05 -0.725, p95 +0.001); odl. bezwzgl.: mediana 0.007 m, maks. 0.730 m |
 | Skala PDF M.04 (ramka) | – | 0.176370 / 0.176398 m/pt vs teoret. 1:500 = 0.176389 m/pt |
 | Blok vs polilinia granicy konkursowej w DWG M.04 | – | różnica symetryczna 0.000 m² |
 
@@ -101,7 +101,7 @@ Kody warstw e-mapy (ZGKiKM Wrocław): `G` + grupa (`ES/EP/EL` – EGiB, `SS/SL/S
 | `GSSOTW` | BDOT500 | inny obiekt liniowy (PRZER3-1) | wniosek - niepewny | 1 |
 | `GSSROW` | BDOT500 | rowek/sciek | wniosek - niepewny | 2 |
 | `GSSSCK` | BDOT500 | schody terenowe (szrafura) | wniosek | 42 |
-| `GSSUTR` | BDOT500 | trawniki / tereny zieleni (obrys + symbole '||') | wniosek (symbol trawnika) | 28 |
+| `GSSUTR` | BDOT500 | trawniki / tereny zieleni (obrys + symbole trawnika) | wniosek (symbol trawnika) | 28 |
 | `GSSWWP` | BDOT500 | linia brzegu wod plynacych (Odra, Olawa) | pewna (opisy rz. Odra / rz. Olawa) | 3 |
 | `GSSWWP_O` | BDOT500 | nazwy rzek | pewna | 3 |
 | `GSSZAD` | BDOT500 | symbole zadrzewien/zakrzewien (?) | wniosek - niepewny | 28 |
@@ -164,10 +164,10 @@ M.04 (DWG, po przesunięciu): `__Obszar możliwej zabudowy` (blok `2505_MDCP_Gra
 | Poligon | Pole [m²] | Obwód [m] | Uwagi |
 |---|---|---|---|
 | Obszar inwestycji (dz. 10/3, 11/6, 19/11, 9/1) | **3728.7** | 272.6 | M.01: 3 729 m² (różnica -0.3 m² = -0.01%) |
-| Granica opracowania konkursowego | 4870.9 | 303.4 | obejmuje obszar inwestycji + dz. 9/2 + 10/2 + pas wzdłuż Wybrzeża |
-| Granica opracowania studialnego (w ramce M.04) | 9246.2 | 454.0 | przycięta ramką mapy |
+| Granica opracowania konkursowego | 4870.9 | 303.4 | = obszar inwestycji + dz. 9/2 (355.0) + dz. 10/2 (128.9) + pozostałe 658.6 m² na działkach: 19/1 158.5; 8/7 68.2; 19/12 148.9; 8/8 198.1; 8/6 62.2; 10/1 22.3 m² |
+| Granica opracowania studialnego | 9246.2 | 454.0 | w całości w ramce mapy (min. 16 m od ramki); zawiera granicę konkursową |
 | Wydzielenie A (MPZP) | 1208.1 | 140.6 | w obszarze inwestycji: **1184.1 m²** (32% obszaru) |
-| Ogródki przydomowe | 490.6 | 97.7 | w całości w obszarze inwestycji: nie (21.0 m² poza) |
+| Ogródki przydomowe | 490.6 | 97.7 | w obszarze inwestycji: 469.5 m²; **21.0 m² poza obszarem inwestycji** – na dz. 11/3 (podwórze Mazowieckiej 19, e 65.7–69.6, n -1.8–5.6) |
 | Dojazd – dz. 10/2 | 128.9 | 55.0 | |
 | Teren użyczony – dz. 9/2 (skwer) | 355.0 | 94.0 | |
 | Obiekt dziedzictwa kulturowego 1 | 258.4 | 64.9 | obrys = budynek Mazowiecka 19 |
@@ -289,12 +289,12 @@ Wniosek: **pn. ściana szczytowa Wybrzeża Słowackiego 5** (normalna ok. 357°)
 | Budynek | Etykieta | Funkcja (kod EGiB) | Kondygn. | Pole zab. [m²] | Teren wokół H śr. | Wysokość [m] | Góra ≈ H | Metoda / uwagi |
 |---|---|---|---|---|---|---|---|---|
 | Mazowiecka 17 | k5 | oswiaty, nauki, kultury lub sportu | 5 | 315.4 | 118.54 | 21.0 | 139.5 | szacunek – do weryfikacji |
-| Mazowiecka 17 *(przycięty ramką)* | k5 | oswiaty, nauki, kultury lub sportu | 5 | 141.3 | poza NMT | 21.0 |  | szacunek – do weryfikacji |
+| Mazowiecka 17 *(przycięty ramką)* | k5 | oswiaty, nauki, kultury lub sportu | 5 | 141.3 | 118.47 | 21.0 | 139.5 | szacunek – do weryfikacji |
 | Mazowiecka 19 | m5 | mieszkalny | 6 | 258.4 | 118.53 | 21.7 | 140.2 | inwentaryzacja M.07 |
 | Wybrzeze J. Slowackiego 5 | m5 | mieszkalny | 5 | 293.6 | 118.99 | 21.0 | 140.0 | szacunek – do weryfikacji |
 | Wybrzeze J. Slowackiego 6 | m5 | mieszkalny | 5 | 271.8 | 118.85 | 21.0 | 139.8 | szacunek – do weryfikacji |
 | Wybrzeze J. Slowackiego 7 | m5 | mieszkalny | 5 | 177.3 | 118.62 | 21.0 | 139.6 | szacunek – do weryfikacji |
-| Wybrzeze J. Slowackiego 8 | m5 | mieszkalny | 5 | 191.2 | poza NMT | 21.0 |  | szacunek – do weryfikacji |
+| Wybrzeze J. Slowackiego 8 | m5 | mieszkalny | 5 | 191.2 | 118.62 | 21.0 | 139.6 | szacunek – do weryfikacji |
 | Wybrzeze J. Slowackiego 9 | b4 | biurowy | 4 | 408.6 | 118.53 | 17.2 | 135.7 | szacunek – do weryfikacji |
 | – (brak adresu) | i1 | inny niemieszkalny | 1 | 68.9 | 118.63 | 6.0 | 124.6 | szacunek – do weryfikacji |
 | – (brak adresu) | t1 | transportu i lacznosci | 1 | 27.8 | 118.53 | 6.0 | 124.5 | szacunek – do weryfikacji |
