@@ -386,12 +386,13 @@ class NodeBuilder:
         return m
 
     def mix(self, fac, a, b, blend='MIX', dtype='RGBA'):
+        """Węzeł Mix; zwraca GNIAZDO wyniku odpowiedniego typu (Result kolor/float/wektor)."""
         m = self.n('ShaderNodeMix', {'data_type': dtype, 'blend_type': blend} if dtype == 'RGBA' else {'data_type': dtype})
-        self.set(m, 'Factor', fac)
-        ia, ib = (6, 7) if dtype == 'RGBA' else ((2, 3) if dtype == 'FLOAT' else (4, 5))
+        self.set(m, 0, fac)
+        ia, ib, io = (6, 7, 2) if dtype == 'RGBA' else ((2, 3, 0) if dtype == 'FLOAT' else (4, 5, 1))
         self.set(m, ia, a)
         self.set(m, ib, b)
-        return m
+        return m.outputs[io]
 
     def output(self, shader, displacement=None):
         self.l(shader, self.out.inputs['Surface'])
