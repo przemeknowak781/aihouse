@@ -6,164 +6,863 @@ meta:
   wersja_obowiazujaca: Program użytkowy budynku administracyjnego UWMD zatwierdzony 11_2025.pdf (listopad 2025; md5 dad3bae4...); okładka M.01
     z dat 2025.11.04 / 2025.10.29 (katalog 5_..._pop.13.02.2026)
   wersja_nieaktualna: 'katalog ''M.01. PROGRAM UŻYTKOWY STARTY'' (29.10.2025) - wycofany: Wyj.3 odp.11, Sprostowanie nr 1 pkt 2'
-  skroty_zrodel: {PU: Program użytkowy ... zatwierdzony 11_2025 (M.01); s. = numer drukowany w stopce (PDF = s.+1), Reg: 'Regulamin Konkursu -
-      tekst jednolity 13.02.2026; Rozdział.ust.pkt, s. = strona drukowana', WyjN odp.M: 'Wyjaśnienia treści Regulaminu nr N, odpowiedź na pytanie
-      nr M', MPZP: 'M.03 - uchwała XLV/1366/10 RMW z 21.01.2010 (teren 2MW-U/5, par.26)', M.12: Wytyczne zero-emisyjności, M.13: Standardy dostępności
-      MSWiA (s. = strona drukowana), F.15.A/B/C: Tabele programowa / zestawienie pomieszczeń / dane bilansowe (xlsx), wniosek: ustalenie własne
-      - nie pochodzi z dokumentów Organizatora}
-  konwencje: {pow: 'm2 netto pomieszczenia wg PN-ISO 9836:2022-07 (Wyj.20 odp.73)', szacunek: 'true = powierzchnia nie podana w M.01 - wartość
-      docelowa z zakresem (wniosek; Wyj.8 odp.33,45: brak zestawienia Organizatora)', kategoria_pn_iso: PU = użytkowa; US = usługowa (techniczna);
-      RU = ruchu, id: 'skróty bloków wg Wyj.20 odp.73; pokoje biurowe: <BLOK>.<nr komórki z zał.1>.<typ> (Wyj.8 odp.46)', typy_pokoi: 'CZ, DYR,
-      ZDYR, SAM, SEK, PR (24 m2/3 st.), PR32 (GW 32 m2/4 st.), OCZ (miejsce oczekiwania)', scenariusz_kondygnacji: 'N_KOND=12 (2 podziemne + parter
-      + 9 pięter) - wpływa na liczbę PP.06, PHS.01, IT.02'}
-zalozenia_ogolne: {teren: 'dz. 10/3, 11/6, 19/11, 9/1, obr. 022 Południe; 3 729 m2 (PU s.2); do obliczeń - Obszar inwestycji z M.04 (Wyj.8 odp.59)',
+  skroty_zrodel:
+    PU: Program użytkowy ... zatwierdzony 11_2025 (M.01); s. = numer drukowany w stopce (PDF = s.+1)
+    Reg: Regulamin Konkursu - tekst jednolity 13.02.2026; Rozdział.ust.pkt, s. = strona drukowana
+    WyjN odp.M: Wyjaśnienia treści Regulaminu nr N, odpowiedź na pytanie nr M
+    MPZP: M.03 - uchwała XLV/1366/10 RMW z 21.01.2010 (teren 2MW-U/5, par.26)
+    M.12: Wytyczne zero-emisyjności
+    M.13: Standardy dostępności MSWiA (s. = strona drukowana)
+    F.15.A/B/C: Tabele programowa / zestawienie pomieszczeń / dane bilansowe (xlsx)
+    wniosek: ustalenie własne - nie pochodzi z dokumentów Organizatora
+  konwencje:
+    pow: m2 netto pomieszczenia wg PN-ISO 9836:2022-07 (Wyj.20 odp.73)
+    szacunek: 'true = powierzchnia nie podana w M.01 - wartość docelowa z zakresem (wniosek; Wyj.8 odp.33,45: brak zestawienia Organizatora)'
+    kategoria_pn_iso: PU = użytkowa; US = usługowa (techniczna); RU = ruchu; PG = stanowiska garażowe (liczone osobno - nie wchodzą do PU dla
+      wskaźnika MPZP; sposób ujęcia w F.15.C do rozstrzygnięcia)
+    id: 'skróty bloków wg Wyj.20 odp.73; pokoje biurowe: <BLOK>.<nr komórki z zał.1>.<typ> (Wyj.8 odp.46)'
+    typy_pokoi: CZ, DYR, ZDYR, SAM, SEK, PR (24 m2/3 st.), PR32 (GW 32 m2/4 st.), OCZ (miejsce oczekiwania)
+    scenariusz_kondygnacji: N_KOND=12 (2 podziemne + parter + 9 pięter) - wpływa na liczbę PP.06, PHS.01, IT.02
+zalozenia_ogolne:
+  teren: dz. 10/3, 11/6, 19/11, 9/1, obr. 022 Południe; 3 729 m2 (PU s.2); do obliczeń - Obszar inwestycji z M.04 (Wyj.8 odp.59)
   forma: 'trzy części: 2 skrzydła (Mazowiecka, Wybrzeże Słowackiego) + dominanta w narożniku; skrzydło przy Mazowieckiej przylega do kamienicy
-    nr 19 (zwarta pierzeja); brak połączenia z Wybrzeże Słowackiego 5 (PU s.2-3)', wysokosc_skrzydel: 'PU s.2: 5 kondygnacji, do 22 m; MPZP par.6
-    pkt 3: 18-25 m; Wyj.3 odp.10: obowiązuje MPZP, 22 m to sygnał dla styku z zabudową sąsiednią', wysokosc_dominanty: 'PU s.2: do 45 m; MPZP
-    par.26 ust.2 pkt 3 (obszar A): najwyższy punkt dachu <=45 m, najniższy >=35 m', podziemie: '2 kondygnacje podziemne: parking + infrastruktura
-    techniczna; parking = MDS (PU s.3, s.13)', standard: 'zeroemisyjny, OZE, woda szara i opadowa (PU s.3; M.12); projektowanie uniwersalne, ustawa
-    o dostępności, standardy MSWiA (PU s.3-4; Reg. III.1.8)', elastycznosc: jednolite pokoje 24 m2 dla 1-3 os.; trwałe technologie; rezerwy instalacyjne
-    (PU s.3-4; Reg. III.1.9), budzet: maks. 150 mln zł netto realizacji z zagospodarowaniem - nieprzekraczalny (Reg. III.3 s.21; Wyj.20 odp.74),
-  kryterium_pierwszorzedne: jakość rozwiązań funkcjonalnych i przestrzennych (Reg. III.1.11 s.21)}
-reguly_pokoi_biurowych: ['Każdy pokój biurowy 24 m2 z 3 stanowiskami i punktami el./teletech. dla 3 os., niezależnie od obsady (PU s.4); wartość
-    obligatoryjna (Wyj.3 odp.17).', 'GW (Wydział Geodezji i Kartografii): pokoje pracowników 32 m2 dla zespołów 4-os. (PU s.5).', 'Pokoje 1-os.:
-    Członek Zarządu, dyrektorzy, zastępcy, samodzielne stanowiska - z możliwością pracy 3 os. (PU s.5).', Pokoje obok dyrekcji łatwo zamienialne
-    i łączone drzwiami w sekretariaty (PU s.5)., Nie łączyć w jednym pokoju pracowników różnych wydziałów ani różnych działów (Wyj.3 odp.16; Wyj.16
-    odp.69; Wyj.17 odp.70)., 'Wiersz ''X - Dyrekcja'' z pracownikami (np. 3.4, 3.5): 1 gabinet dyrektora + pokoje dla pracowników (Wyj.8 odp.48-49).',
-  'Gabinety: pion 8 - CZ + dyrektorzy departamentów 8.1, 8.2 + dyrektorzy wydziałów obok siebie; piony 2-7, 9 - dyrektor departamentu + dyrektorzy
-    wydziałów obok siebie i w pobliżu swoich komórek (PU s.5; Wyj.10 odp.62).', Wydziały jednego departamentu mogą zajmować 2 sąsiednie kondygnacje
-    przy komunikacji pionowej (Wyj.17 odp.70)., 'Sekretariat: 1 pokój 24 m2 na komórkę (do 3 os.) - wniosek (zgodny z przykładem w pyt. 69, Wyj.16).',
-  'Liczba pokoi pracowników = ceil(n/3), GW ceil(n/4) dla każdej komórki z zał.1 osobno - wniosek wynikający z Wyj.16-17.']
+    nr 19 (zwarta pierzeja); brak połączenia z Wybrzeże Słowackiego 5 (PU s.2-3)'
+  wysokosc_skrzydel: 'PU s.2: 5 kondygnacji, do 22 m; MPZP par.6 pkt 3: 18-25 m; Wyj.3 odp.10: obowiązuje MPZP, 22 m to sygnał dla styku z zabudową
+    sąsiednią'
+  wysokosc_dominanty: 'PU s.2: do 45 m; MPZP par.26 ust.2 pkt 3 (obszar A): najwyższy punkt dachu <=45 m, najniższy >=35 m'
+  podziemie: '2 kondygnacje podziemne: parking + infrastruktura techniczna; parking = MDS (PU s.3, s.13)'
+  standard: zeroemisyjny, OZE, woda szara i opadowa (PU s.3; M.12); projektowanie uniwersalne, ustawa o dostępności, standardy MSWiA (PU s.3-4;
+    Reg. III.1.8)
+  elastycznosc: jednolite pokoje 24 m2 dla 1-3 os.; trwałe technologie; rezerwy instalacyjne (PU s.3-4; Reg. III.1.9)
+  budzet: maks. 150 mln zł netto realizacji z zagospodarowaniem - nieprzekraczalny (Reg. III.3 s.21; Wyj.20 odp.74)
+  kryterium_pierwszorzedne: jakość rozwiązań funkcjonalnych i przestrzennych (Reg. III.1.11 s.21)
+reguly_pokoi_biurowych:
+- Każdy pokój biurowy 24 m2 z 3 stanowiskami i punktami el./teletech. dla 3 os., niezależnie od obsady (PU s.4); wartość obligatoryjna (Wyj.3
+  odp.17).
+- 'GW (Wydział Geodezji i Kartografii): pokoje pracowników 32 m2 dla zespołów 4-os. (PU s.5).'
+- 'Pokoje 1-os.: Członek Zarządu, dyrektorzy, zastępcy, samodzielne stanowiska - z możliwością pracy 3 os. (PU s.5).'
+- Pokoje obok dyrekcji łatwo zamienialne i łączone drzwiami w sekretariaty (PU s.5).
+- Nie łączyć w jednym pokoju pracowników różnych wydziałów ani różnych działów (Wyj.3 odp.16; Wyj.16 odp.69; Wyj.17 odp.70).
+- 'Wiersz ''X - Dyrekcja'' z pracownikami (np. 3.4, 3.5): 1 gabinet dyrektora + pokoje dla pracowników (Wyj.8 odp.48-49).'
+- 'Gabinety: pion 8 - CZ + dyrektorzy departamentów 8.1, 8.2 + dyrektorzy wydziałów obok siebie; piony 2-7, 9 - dyrektor departamentu + dyrektorzy
+  wydziałów obok siebie i w pobliżu swoich komórek (PU s.5; Wyj.10 odp.62).'
+- Wydziały jednego departamentu mogą zajmować 2 sąsiednie kondygnacje przy komunikacji pionowej (Wyj.17 odp.70).
+- 'Sekretariat: 1 pokój 24 m2 na komórkę (do 3 os.) - wniosek (zgodny z przykładem w pyt. 69, Wyj.16).'
+- Liczba pokoi pracowników = ceil(n/3), GW ceil(n/4) dla każdej komórki z zał.1 osobno - wniosek wynikający z Wyj.16-17.
 kadra:
-  suma_zal1: {dyr: 29, zast: 16, samodz: 6, sekr: 12, prac: 340, razem: 403}
-  suma_kontrolna_obliczona: {dyr: 29, zast: 16, samodz: 6, sekr: 12, prac: 340, razem: 403}
+  suma_zal1:
+    dyr: 29
+    zast: 16
+    samodz: 6
+    sekr: 12
+    prac: 340
+    razem: 403
+  suma_kontrolna_obliczona:
+    dyr: 29
+    zast: 16
+    samodz: 6
+    sekr: 12
+    prac: 340
+    razem: 403
   zgodnosc: true
   osoby_spoza_403: Przewodniczący + 3 Wiceprzewodniczących (radni), asystent Przewodniczącego (niejasne, czy w 16 os. KS), 36 radnych, 5 członków
     Zarządu (poza CZ), Skarbnik, Sekretarz, przedstawiciel Wojewody, ochrona, sprzątanie, 3 techników (Wyj.6 odp.24) - PU s.6-7, s.15
   czas_pracy: średnio 8-godzinny dzień pracy (PU s.9); brak godzin otwarcia i częstotliwości sesji w M.01 (luka)
   komorki:
     KS:
-    - {nr: '1', nazwa: Kancelaria Sejmiku, dyr: 1, zast: 2, samodz: 0, sekr: 2, prac: 11, razem: 16, pokoje: 8, pow_biurowa: 192, stanowiska_max: 24}
+    - nr: '1'
+      nazwa: Kancelaria Sejmiku
+      dyr: 1
+      zast: 2
+      samodz: 0
+      sekr: 2
+      prac: 11
+      razem: 16
+      pokoje: 8
+      pow_biurowa: 192
+      stanowiska_max: 24
     DOS:
-    - {nr: '2', nazwa: Departament Ochrony Środowiska - dyrekcja, dyr: 1, zast: 0, samodz: 0, sekr: 1, prac: 0, razem: 2, pokoje: 2, pow_biurowa: 48,
-      stanowiska_max: 6}
-    - {nr: '2.1', nazwa: Wydział Opłat Środowiskowych - Dyrekcja, dyr: 1, zast: 1, samodz: 0, sekr: 0, prac: 0, razem: 2, pokoje: 2, pow_biurowa: 48,
-      stanowiska_max: 6}
-    - {nr: 2.1.1, nazwa: Dział Opłat Produktowych, dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 14, razem: 14, pokoje: 5, pow_biurowa: 120, stanowiska_max: 15}
-    - {nr: 2.1.2, nazwa: Dział Opłat za Korzystanie ze Środowiska i BDO, dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 18, razem: 18, pokoje: 6,
-      pow_biurowa: 144, stanowiska_max: 18}
-    - {nr: 2.1.3, nazwa: Dział Księgowości, dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 6, razem: 6, pokoje: 2, pow_biurowa: 48, stanowiska_max: 6}
-    - {nr: '2.2', nazwa: Wydział Instrumentów Środowiskowych - Dyrekcja, dyr: 1, zast: 1, samodz: 0, sekr: 0, prac: 0, razem: 2, pokoje: 2, pow_biurowa: 48,
-      stanowiska_max: 6}
-    - {nr: 2.2.1, nazwa: Dział Emisji do Powietrza, dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 9, razem: 9, pokoje: 3, pow_biurowa: 72, stanowiska_max: 9}
-    - {nr: 2.2.2, nazwa: Dział Gospodarki Wodno-Ściekowej, dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 6, razem: 6, pokoje: 2, pow_biurowa: 48,
-      stanowiska_max: 6}
-    - {nr: 2.2.3, nazwa: Dział Sprawozdawczości, dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 7, razem: 7, pokoje: 3, pow_biurowa: 72, stanowiska_max: 9}
-    - {nr: 2.2.4, nazwa: Dział Gospodarki Odpadami, dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 14, razem: 14, pokoje: 5, pow_biurowa: 120, stanowiska_max: 15}
-    - {nr: 2.2.5, nazwa: Dział Planowania i Koordynacji w Gospodarce Odpadami, dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 17, razem: 17, pokoje: 6,
-      pow_biurowa: 144, stanowiska_max: 18}
+    - nr: '2'
+      nazwa: Departament Ochrony Środowiska - dyrekcja
+      dyr: 1
+      zast: 0
+      samodz: 0
+      sekr: 1
+      prac: 0
+      razem: 2
+      pokoje: 2
+      pow_biurowa: 48
+      stanowiska_max: 6
+    - nr: '2.1'
+      nazwa: Wydział Opłat Środowiskowych - Dyrekcja
+      dyr: 1
+      zast: 1
+      samodz: 0
+      sekr: 0
+      prac: 0
+      razem: 2
+      pokoje: 2
+      pow_biurowa: 48
+      stanowiska_max: 6
+    - nr: 2.1.1
+      nazwa: Dział Opłat Produktowych
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 14
+      razem: 14
+      pokoje: 5
+      pow_biurowa: 120
+      stanowiska_max: 15
+    - nr: 2.1.2
+      nazwa: Dział Opłat za Korzystanie ze Środowiska i BDO
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 18
+      razem: 18
+      pokoje: 6
+      pow_biurowa: 144
+      stanowiska_max: 18
+    - nr: 2.1.3
+      nazwa: Dział Księgowości
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 6
+      razem: 6
+      pokoje: 2
+      pow_biurowa: 48
+      stanowiska_max: 6
+    - nr: '2.2'
+      nazwa: Wydział Instrumentów Środowiskowych - Dyrekcja
+      dyr: 1
+      zast: 1
+      samodz: 0
+      sekr: 0
+      prac: 0
+      razem: 2
+      pokoje: 2
+      pow_biurowa: 48
+      stanowiska_max: 6
+    - nr: 2.2.1
+      nazwa: Dział Emisji do Powietrza
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 9
+      razem: 9
+      pokoje: 3
+      pow_biurowa: 72
+      stanowiska_max: 9
+    - nr: 2.2.2
+      nazwa: Dział Gospodarki Wodno-Ściekowej
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 6
+      razem: 6
+      pokoje: 2
+      pow_biurowa: 48
+      stanowiska_max: 6
+    - nr: 2.2.3
+      nazwa: Dział Sprawozdawczości
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 7
+      razem: 7
+      pokoje: 3
+      pow_biurowa: 72
+      stanowiska_max: 9
+    - nr: 2.2.4
+      nazwa: Dział Gospodarki Odpadami
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 14
+      razem: 14
+      pokoje: 5
+      pow_biurowa: 120
+      stanowiska_max: 15
+    - nr: 2.2.5
+      nazwa: Dział Planowania i Koordynacji w Gospodarce Odpadami
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 17
+      razem: 17
+      pokoje: 6
+      pow_biurowa: 144
+      stanowiska_max: 18
     DSS:
-    - {nr: '3', nazwa: Departament Spraw Społecznych i Rynku Pracy - Dyrekcja, dyr: 1, zast: 1, samodz: 0, sekr: 0, prac: 0, razem: 2, pokoje: 2,
-      pow_biurowa: 48, stanowiska_max: 6}
-    - {nr: '3.1', nazwa: Dział ds. Wdrażania i Realizacji Projektów, dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 7, razem: 7, pokoje: 3, pow_biurowa: 72,
-      stanowiska_max: 9}
-    - {nr: '3.2', nazwa: Koordynator, dyr: 0, zast: 0, samodz: 1, sekr: 0, prac: 0, razem: 1, pokoje: 1, pow_biurowa: 24, stanowiska_max: 3}
-    - {nr: '3.3', nazwa: Wydział Edukacji - Dyrekcja, dyr: 1, zast: 0, samodz: 0, sekr: 0, prac: 0, razem: 1, pokoje: 1, pow_biurowa: 24, stanowiska_max: 3}
-    - {nr: 3.3.1, nazwa: Dział Rozwoju Szkolnictwa, dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 6, razem: 6, pokoje: 2, pow_biurowa: 48, stanowiska_max: 6}
-    - {nr: 3.3.2, nazwa: Dział Ekonomiczno-Finansowy, dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 4, razem: 4, pokoje: 2, pow_biurowa: 48, stanowiska_max: 6}
-    - {nr: '3.4', nazwa: Wydział Integracji Społecznej - Dyrekcja, dyr: 1, zast: 0, samodz: 0, sekr: 0, prac: 10, razem: 11, pokoje: 5, pow_biurowa: 120,
-      stanowiska_max: 15}
-    - {nr: '3.5', nazwa: Wydział Polityki Senioralnej i Projektów Społecznych - Dyrekcja, dyr: 1, zast: 0, samodz: 0, sekr: 0, prac: 6, razem: 7,
-      pokoje: 3, pow_biurowa: 72, stanowiska_max: 9}
+    - nr: '3'
+      nazwa: Departament Spraw Społecznych i Rynku Pracy - Dyrekcja
+      dyr: 1
+      zast: 1
+      samodz: 0
+      sekr: 0
+      prac: 0
+      razem: 2
+      pokoje: 2
+      pow_biurowa: 48
+      stanowiska_max: 6
+    - nr: '3.1'
+      nazwa: Dział ds. Wdrażania i Realizacji Projektów
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 7
+      razem: 7
+      pokoje: 3
+      pow_biurowa: 72
+      stanowiska_max: 9
+    - nr: '3.2'
+      nazwa: Koordynator
+      dyr: 0
+      zast: 0
+      samodz: 1
+      sekr: 0
+      prac: 0
+      razem: 1
+      pokoje: 1
+      pow_biurowa: 24
+      stanowiska_max: 3
+    - nr: '3.3'
+      nazwa: Wydział Edukacji - Dyrekcja
+      dyr: 1
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 0
+      razem: 1
+      pokoje: 1
+      pow_biurowa: 24
+      stanowiska_max: 3
+    - nr: 3.3.1
+      nazwa: Dział Rozwoju Szkolnictwa
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 6
+      razem: 6
+      pokoje: 2
+      pow_biurowa: 48
+      stanowiska_max: 6
+    - nr: 3.3.2
+      nazwa: Dział Ekonomiczno-Finansowy
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 4
+      razem: 4
+      pokoje: 2
+      pow_biurowa: 48
+      stanowiska_max: 6
+    - nr: '3.4'
+      nazwa: Wydział Integracji Społecznej - Dyrekcja
+      dyr: 1
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 10
+      razem: 11
+      pokoje: 5
+      pow_biurowa: 120
+      stanowiska_max: 15
+    - nr: '3.5'
+      nazwa: Wydział Polityki Senioralnej i Projektów Społecznych - Dyrekcja
+      dyr: 1
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 6
+      razem: 7
+      pokoje: 3
+      pow_biurowa: 72
+      stanowiska_max: 9
     DST:
-    - {nr: '4', nazwa: Departament Sportu i Turystyki, dyr: 1, zast: 0, samodz: 0, sekr: 1, prac: 0, razem: 2, pokoje: 2, pow_biurowa: 48, stanowiska_max: 6}
-    - {nr: '4.1', nazwa: Wydział Sportu - Dyrekcja, dyr: 1, zast: 1, samodz: 0, sekr: 0, prac: 0, razem: 2, pokoje: 2, pow_biurowa: 48, stanowiska_max: 6}
-    - {nr: 4.1.1, nazwa: Dział Sportu Powszechnego i Szkolenia Sportowego, dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 7, razem: 7, pokoje: 3,
-      pow_biurowa: 72, stanowiska_max: 9}
-    - {nr: 4.1.2, nazwa: Dział Inwestycji i Modernizacji Infrastruktury Sportowej, dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 3, razem: 3, pokoje: 1,
-      pow_biurowa: 24, stanowiska_max: 3}
-    - {nr: '4.2', nazwa: Wydział Turystyki - Dyrekcja, dyr: 1, zast: 0, samodz: 0, sekr: 0, prac: 0, razem: 1, pokoje: 1, pow_biurowa: 24, stanowiska_max: 3}
-    - {nr: 4.2.1, nazwa: Dział Usług Turystycznych, dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 4, razem: 4, pokoje: 2, pow_biurowa: 48, stanowiska_max: 6}
-    - {nr: 4.2.2, nazwa: Dział Rozwoju i Promocji Turystyki, dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 5, razem: 5, pokoje: 2, pow_biurowa: 48,
-      stanowiska_max: 6}
+    - nr: '4'
+      nazwa: Departament Sportu i Turystyki
+      dyr: 1
+      zast: 0
+      samodz: 0
+      sekr: 1
+      prac: 0
+      razem: 2
+      pokoje: 2
+      pow_biurowa: 48
+      stanowiska_max: 6
+    - nr: '4.1'
+      nazwa: Wydział Sportu - Dyrekcja
+      dyr: 1
+      zast: 1
+      samodz: 0
+      sekr: 0
+      prac: 0
+      razem: 2
+      pokoje: 2
+      pow_biurowa: 48
+      stanowiska_max: 6
+    - nr: 4.1.1
+      nazwa: Dział Sportu Powszechnego i Szkolenia Sportowego
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 7
+      razem: 7
+      pokoje: 3
+      pow_biurowa: 72
+      stanowiska_max: 9
+    - nr: 4.1.2
+      nazwa: Dział Inwestycji i Modernizacji Infrastruktury Sportowej
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 3
+      razem: 3
+      pokoje: 1
+      pow_biurowa: 24
+      stanowiska_max: 3
+    - nr: '4.2'
+      nazwa: Wydział Turystyki - Dyrekcja
+      dyr: 1
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 0
+      razem: 1
+      pokoje: 1
+      pow_biurowa: 24
+      stanowiska_max: 3
+    - nr: 4.2.1
+      nazwa: Dział Usług Turystycznych
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 4
+      razem: 4
+      pokoje: 2
+      pow_biurowa: 48
+      stanowiska_max: 6
+    - nr: 4.2.2
+      nazwa: Dział Rozwoju i Promocji Turystyki
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 5
+      razem: 5
+      pokoje: 2
+      pow_biurowa: 48
+      stanowiska_max: 6
     DRA:
-    - {nr: '5', nazwa: Departament Rozwoju Aglomeracji - Dyrekcja, dyr: 1, zast: 0, samodz: 2, sekr: 0, prac: 0, razem: 3, pokoje: 3, pow_biurowa: 72,
-      stanowiska_max: 9}
-    - {nr: '5.1', nazwa: Wydział ds. Aglomeracji, dyr: 1, zast: 0, samodz: 0, sekr: 0, prac: 2, razem: 3, pokoje: 2, pow_biurowa: 48, stanowiska_max: 6}
-    - {nr: '5.2', nazwa: Wydział Analiz i Rozwoju, dyr: 1, zast: 0, samodz: 0, sekr: 0, prac: 3, razem: 4, pokoje: 2, pow_biurowa: 48, stanowiska_max: 6}
-    - {nr: '5.3', nazwa: Planowany Wydział, dyr: 1, zast: 0, samodz: 0, sekr: 0, prac: 7, razem: 8, pokoje: 4, pow_biurowa: 96, stanowiska_max: 12}
+    - nr: '5'
+      nazwa: Departament Rozwoju Aglomeracji - Dyrekcja
+      dyr: 1
+      zast: 0
+      samodz: 2
+      sekr: 0
+      prac: 0
+      razem: 3
+      pokoje: 3
+      pow_biurowa: 72
+      stanowiska_max: 9
+    - nr: '5.1'
+      nazwa: Wydział ds. Aglomeracji
+      dyr: 1
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 2
+      razem: 3
+      pokoje: 2
+      pow_biurowa: 48
+      stanowiska_max: 6
+    - nr: '5.2'
+      nazwa: Wydział Analiz i Rozwoju
+      dyr: 1
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 3
+      razem: 4
+      pokoje: 2
+      pow_biurowa: 48
+      stanowiska_max: 6
+    - nr: '5.3'
+      nazwa: Planowany Wydział
+      dyr: 1
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 7
+      razem: 8
+      pokoje: 4
+      pow_biurowa: 96
+      stanowiska_max: 12
     DGP:
-    - {nr: '6', nazwa: Departament Gospodarki i Promocji - Dyrekcja, dyr: 1, zast: 1, samodz: 0, sekr: 2, prac: 0, razem: 4, pokoje: 3, pow_biurowa: 72,
-      stanowiska_max: 9}
-    - {nr: '6.1', nazwa: Stanowisko ds. Budżetu Departamentu, dyr: 0, zast: 0, samodz: 1, sekr: 0, prac: 0, razem: 1, pokoje: 1, pow_biurowa: 24,
-      stanowiska_max: 3}
-    - {nr: '6.2', nazwa: Wydział Rozwoju Regionalnego - Dyrekcja, dyr: 1, zast: 2, samodz: 0, sekr: 0, prac: 0, razem: 3, pokoje: 3, pow_biurowa: 72,
-      stanowiska_max: 9}
-    - {nr: 6.2.1, nazwa: Dział Planowania Strategicznego, dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 10, razem: 10, pokoje: 4, pow_biurowa: 96,
-      stanowiska_max: 12}
-    - {nr: 6.2.2, nazwa: Dział Rewitalizacji i Analiz, dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 5, razem: 5, pokoje: 2, pow_biurowa: 48, stanowiska_max: 6}
-    - {nr: 6.2.3, nazwa: Dział Programu Regionalnego, dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 8, razem: 8, pokoje: 3, pow_biurowa: 72, stanowiska_max: 9}
-    - {nr: 6.2.4, nazwa: Dział Programów Europejskiej Współpracy Terytorialnej, dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 6, razem: 6, pokoje: 2,
-      pow_biurowa: 48, stanowiska_max: 6}
-    - {nr: 6.2.5, nazwa: Dział Innowacji, dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 7, razem: 7, pokoje: 3, pow_biurowa: 72, stanowiska_max: 9}
-    - {nr: 6.2.6, nazwa: Dział Współpracy Gospodarczej i Przedsiębiorczości, dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 7, razem: 7, pokoje: 3,
-      pow_biurowa: 72, stanowiska_max: 9}
+    - nr: '6'
+      nazwa: Departament Gospodarki i Promocji - Dyrekcja
+      dyr: 1
+      zast: 1
+      samodz: 0
+      sekr: 2
+      prac: 0
+      razem: 4
+      pokoje: 3
+      pow_biurowa: 72
+      stanowiska_max: 9
+    - nr: '6.1'
+      nazwa: Stanowisko ds. Budżetu Departamentu
+      dyr: 0
+      zast: 0
+      samodz: 1
+      sekr: 0
+      prac: 0
+      razem: 1
+      pokoje: 1
+      pow_biurowa: 24
+      stanowiska_max: 3
+    - nr: '6.2'
+      nazwa: Wydział Rozwoju Regionalnego - Dyrekcja
+      dyr: 1
+      zast: 2
+      samodz: 0
+      sekr: 0
+      prac: 0
+      razem: 3
+      pokoje: 3
+      pow_biurowa: 72
+      stanowiska_max: 9
+    - nr: 6.2.1
+      nazwa: Dział Planowania Strategicznego
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 10
+      razem: 10
+      pokoje: 4
+      pow_biurowa: 96
+      stanowiska_max: 12
+    - nr: 6.2.2
+      nazwa: Dział Rewitalizacji i Analiz
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 5
+      razem: 5
+      pokoje: 2
+      pow_biurowa: 48
+      stanowiska_max: 6
+    - nr: 6.2.3
+      nazwa: Dział Programu Regionalnego
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 8
+      razem: 8
+      pokoje: 3
+      pow_biurowa: 72
+      stanowiska_max: 9
+    - nr: 6.2.4
+      nazwa: Dział Programów Europejskiej Współpracy Terytorialnej
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 6
+      razem: 6
+      pokoje: 2
+      pow_biurowa: 48
+      stanowiska_max: 6
+    - nr: 6.2.5
+      nazwa: Dział Innowacji
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 7
+      razem: 7
+      pokoje: 3
+      pow_biurowa: 72
+      stanowiska_max: 9
+    - nr: 6.2.6
+      nazwa: Dział Współpracy Gospodarczej i Przedsiębiorczości
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 7
+      razem: 7
+      pokoje: 3
+      pow_biurowa: 72
+      stanowiska_max: 9
     DI:
-    - {nr: '7', nazwa: Departament Infrastruktury - Dyrekcja, dyr: 1, zast: 1, samodz: 0, sekr: 1, prac: 0, razem: 3, pokoje: 3, pow_biurowa: 72,
-      stanowiska_max: 9}
-    - {nr: '7.1', nazwa: Wydział Transportu - Dyrekcja, dyr: 1, zast: 1, samodz: 0, sekr: 0, prac: 0, razem: 2, pokoje: 2, pow_biurowa: 48, stanowiska_max: 6}
-    - {nr: 7.1.1, nazwa: Dział Nadzoru Jednostek Certyfikujących, dyr: 0, zast: 0, samodz: 1, sekr: 0, prac: 7, razem: 8, pokoje: 4, pow_biurowa: 96,
-      stanowiska_max: 12}
-    - {nr: 7.1.2, nazwa: Dział Inżynierii Ruchu, dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 6, razem: 6, pokoje: 2, pow_biurowa: 48, stanowiska_max: 6}
-    - {nr: 7.1.3, nazwa: Dział Transportu Autobusowego, dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 10, razem: 10, pokoje: 4, pow_biurowa: 96,
-      stanowiska_max: 12}
-    - {nr: 7.1.4, nazwa: Dział Transportu Kolejowego, dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 9, razem: 9, pokoje: 3, pow_biurowa: 72, stanowiska_max: 9}
-    - {nr: 7.1.5, nazwa: Dział Rozwoju Ruchu Rowerowego, dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 3, razem: 3, pokoje: 1, pow_biurowa: 24, stanowiska_max: 3}
-    - {nr: '7.2', nazwa: Wydział Mienia Wojewódzkiego - Dyrekcja, dyr: 1, zast: 1, samodz: 0, sekr: 0, prac: 0, razem: 2, pokoje: 2, pow_biurowa: 48,
-      stanowiska_max: 6}
-    - {nr: 7.2.1, nazwa: Dział Zarządzania Nieruchomościami, dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 8, razem: 8, pokoje: 3, pow_biurowa: 72,
-      stanowiska_max: 9}
-    - {nr: 7.2.2, nazwa: Dział Sprzedaży Nieruchomości, dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 3, razem: 3, pokoje: 1, pow_biurowa: 24, stanowiska_max: 3}
+    - nr: '7'
+      nazwa: Departament Infrastruktury - Dyrekcja
+      dyr: 1
+      zast: 1
+      samodz: 0
+      sekr: 1
+      prac: 0
+      razem: 3
+      pokoje: 3
+      pow_biurowa: 72
+      stanowiska_max: 9
+    - nr: '7.1'
+      nazwa: Wydział Transportu - Dyrekcja
+      dyr: 1
+      zast: 1
+      samodz: 0
+      sekr: 0
+      prac: 0
+      razem: 2
+      pokoje: 2
+      pow_biurowa: 48
+      stanowiska_max: 6
+    - nr: 7.1.1
+      nazwa: Dział Nadzoru Jednostek Certyfikujących
+      dyr: 0
+      zast: 0
+      samodz: 1
+      sekr: 0
+      prac: 7
+      razem: 8
+      pokoje: 4
+      pow_biurowa: 96
+      stanowiska_max: 12
+    - nr: 7.1.2
+      nazwa: Dział Inżynierii Ruchu
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 6
+      razem: 6
+      pokoje: 2
+      pow_biurowa: 48
+      stanowiska_max: 6
+    - nr: 7.1.3
+      nazwa: Dział Transportu Autobusowego
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 10
+      razem: 10
+      pokoje: 4
+      pow_biurowa: 96
+      stanowiska_max: 12
+    - nr: 7.1.4
+      nazwa: Dział Transportu Kolejowego
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 9
+      razem: 9
+      pokoje: 3
+      pow_biurowa: 72
+      stanowiska_max: 9
+    - nr: 7.1.5
+      nazwa: Dział Rozwoju Ruchu Rowerowego
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 3
+      razem: 3
+      pokoje: 1
+      pow_biurowa: 24
+      stanowiska_max: 3
+    - nr: '7.2'
+      nazwa: Wydział Mienia Wojewódzkiego - Dyrekcja
+      dyr: 1
+      zast: 1
+      samodz: 0
+      sekr: 0
+      prac: 0
+      razem: 2
+      pokoje: 2
+      pow_biurowa: 48
+      stanowiska_max: 6
+    - nr: 7.2.1
+      nazwa: Dział Zarządzania Nieruchomościami
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 8
+      razem: 8
+      pokoje: 3
+      pow_biurowa: 72
+      stanowiska_max: 9
+    - nr: 7.2.2
+      nazwa: Dział Sprzedaży Nieruchomości
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 3
+      razem: 3
+      pokoje: 1
+      pow_biurowa: 24
+      stanowiska_max: 3
     CZ:
-    - {nr: '8', nazwa: Członek Zarządu, dyr: 1, zast: 0, samodz: 1, sekr: 1, prac: 0, razem: 3, pokoje: 3, pow_biurowa: 72, stanowiska_max: 9}
+    - nr: '8'
+      nazwa: Członek Zarządu
+      dyr: 1
+      zast: 0
+      samodz: 1
+      sekr: 1
+      prac: 0
+      razem: 3
+      pokoje: 3
+      pow_biurowa: 72
+      stanowiska_max: 9
     DKD:
-    - {nr: '8.1', nazwa: Departament Kultury i Dziedzictwa Kulturowego - Dyrekcja, dyr: 1, zast: 0, samodz: 0, sekr: 1, prac: 0, razem: 2, pokoje: 2,
-      pow_biurowa: 48, stanowiska_max: 6}
-    - {nr: 8.1.1, nazwa: Wydział Kultury - Dyrekcja, dyr: 1, zast: 1, samodz: 0, sekr: 0, prac: 0, razem: 2, pokoje: 2, pow_biurowa: 48, stanowiska_max: 6}
-    - {nr: 8.1.1.1, nazwa: 'Dział Instytucji Kultury, Finansów i Inwestycji', dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 6, razem: 6, pokoje: 2,
-      pow_biurowa: 48, stanowiska_max: 6}
-    - {nr: 8.1.1.2, nazwa: Dział Współpracy ze Środowiskiem Kultury, dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 7, razem: 7, pokoje: 3, pow_biurowa: 72,
-      stanowiska_max: 9}
-    - {nr: 8.1.2, nazwa: Wydział Dziedzictwa Kulturowego, dyr: 1, zast: 0, samodz: 0, sekr: 0, prac: 5, razem: 6, pokoje: 3, pow_biurowa: 72,
-      stanowiska_max: 9}
+    - nr: '8.1'
+      nazwa: Departament Kultury i Dziedzictwa Kulturowego - Dyrekcja
+      dyr: 1
+      zast: 0
+      samodz: 0
+      sekr: 1
+      prac: 0
+      razem: 2
+      pokoje: 2
+      pow_biurowa: 48
+      stanowiska_max: 6
+    - nr: 8.1.1
+      nazwa: Wydział Kultury - Dyrekcja
+      dyr: 1
+      zast: 1
+      samodz: 0
+      sekr: 0
+      prac: 0
+      razem: 2
+      pokoje: 2
+      pow_biurowa: 48
+      stanowiska_max: 6
+    - nr: 8.1.1.1
+      nazwa: Dział Instytucji Kultury, Finansów i Inwestycji
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 6
+      razem: 6
+      pokoje: 2
+      pow_biurowa: 48
+      stanowiska_max: 6
+    - nr: 8.1.1.2
+      nazwa: Dział Współpracy ze Środowiskiem Kultury
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 7
+      razem: 7
+      pokoje: 3
+      pow_biurowa: 72
+      stanowiska_max: 9
+    - nr: 8.1.2
+      nazwa: Wydział Dziedzictwa Kulturowego
+      dyr: 1
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 5
+      razem: 6
+      pokoje: 3
+      pow_biurowa: 72
+      stanowiska_max: 9
     DZ:
-    - {nr: '8.2', nazwa: Departament Zdrowia - Dyrekcja, dyr: 1, zast: 0, samodz: 0, sekr: 1, prac: 0, razem: 2, pokoje: 2, pow_biurowa: 48, stanowiska_max: 6}
-    - {nr: 8.2.1, nazwa: Wydział Nadzoru Finansowego i Restrukturyzacji - Dyrekcja, dyr: 1, zast: 1, samodz: 0, sekr: 0, prac: 0, razem: 2, pokoje: 2,
-      pow_biurowa: 48, stanowiska_max: 6}
-    - {nr: 8.2.1.1, nazwa: Dział Analiz Systemowych i e-zdrowia, dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 5, razem: 5, pokoje: 2, pow_biurowa: 48,
-      stanowiska_max: 6}
-    - {nr: 8.2.1.2, nazwa: Dział Kontrolingu Finansowego, dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 3, razem: 3, pokoje: 1, pow_biurowa: 24,
-      stanowiska_max: 3}
-    - {nr: 8.2.1.3, nazwa: Dział Organizacji i Budżetowania, dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 3, razem: 3, pokoje: 1, pow_biurowa: 24,
-      stanowiska_max: 3}
-    - {nr: 8.2.2, nazwa: Wydział Zdrowia - Dyrekcja, dyr: 1, zast: 1, samodz: 0, sekr: 0, prac: 0, razem: 2, pokoje: 2, pow_biurowa: 48, stanowiska_max: 6}
-    - {nr: 8.2.2.1, nazwa: Dział Zdrowia Publicznego, dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 6, razem: 6, pokoje: 2, pow_biurowa: 48, stanowiska_max: 6}
-    - {nr: 8.2.2.2, nazwa: Dział Organizacji i Nadzoru, dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 7, razem: 7, pokoje: 3, pow_biurowa: 72, stanowiska_max: 9}
-    - {nr: 8.2.3, nazwa: Wydział Inwestycji, dyr: 1, zast: 0, samodz: 0, sekr: 1, prac: 5, razem: 7, pokoje: 4, pow_biurowa: 96, stanowiska_max: 12}
+    - nr: '8.2'
+      nazwa: Departament Zdrowia - Dyrekcja
+      dyr: 1
+      zast: 0
+      samodz: 0
+      sekr: 1
+      prac: 0
+      razem: 2
+      pokoje: 2
+      pow_biurowa: 48
+      stanowiska_max: 6
+    - nr: 8.2.1
+      nazwa: Wydział Nadzoru Finansowego i Restrukturyzacji - Dyrekcja
+      dyr: 1
+      zast: 1
+      samodz: 0
+      sekr: 0
+      prac: 0
+      razem: 2
+      pokoje: 2
+      pow_biurowa: 48
+      stanowiska_max: 6
+    - nr: 8.2.1.1
+      nazwa: Dział Analiz Systemowych i e-zdrowia
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 5
+      razem: 5
+      pokoje: 2
+      pow_biurowa: 48
+      stanowiska_max: 6
+    - nr: 8.2.1.2
+      nazwa: Dział Kontrolingu Finansowego
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 3
+      razem: 3
+      pokoje: 1
+      pow_biurowa: 24
+      stanowiska_max: 3
+    - nr: 8.2.1.3
+      nazwa: Dział Organizacji i Budżetowania
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 3
+      razem: 3
+      pokoje: 1
+      pow_biurowa: 24
+      stanowiska_max: 3
+    - nr: 8.2.2
+      nazwa: Wydział Zdrowia - Dyrekcja
+      dyr: 1
+      zast: 1
+      samodz: 0
+      sekr: 0
+      prac: 0
+      razem: 2
+      pokoje: 2
+      pow_biurowa: 48
+      stanowiska_max: 6
+    - nr: 8.2.2.1
+      nazwa: Dział Zdrowia Publicznego
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 6
+      razem: 6
+      pokoje: 2
+      pow_biurowa: 48
+      stanowiska_max: 6
+    - nr: 8.2.2.2
+      nazwa: Dział Organizacji i Nadzoru
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 7
+      razem: 7
+      pokoje: 3
+      pow_biurowa: 72
+      stanowiska_max: 9
+    - nr: 8.2.3
+      nazwa: Wydział Inwestycji
+      dyr: 1
+      zast: 0
+      samodz: 0
+      sekr: 1
+      prac: 5
+      razem: 7
+      pokoje: 4
+      pow_biurowa: 96
+      stanowiska_max: 12
     GW:
-    - {nr: '9', nazwa: Geodeta Województwa - Wydział Geodezji i Kartografii - Dyrekcja, dyr: 1, zast: 1, samodz: 0, sekr: 1, prac: 0, razem: 3,
-      pokoje: 3, pow_biurowa: 72, stanowiska_max: 9}
-    - {nr: '9.1', nazwa: Wojewódzki Ośrodek Dokumentacji Geodezyjnej i Kartograficznej, dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 15, razem: 15,
-      pokoje: 4, pow_biurowa: 128, stanowiska_max: 16}
-    - {nr: 9.1.1, nazwa: Dział ds. Dolnośląskiej Infrastruktury Informacji Przestrzennej, dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 7, razem: 7,
-      pokoje: 2, pow_biurowa: 64, stanowiska_max: 8}
-    - {nr: 9.1.2, nazwa: Dział ds. Ochrony Gruntów Rolnych, dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 8, razem: 8, pokoje: 2, pow_biurowa: 64,
-      stanowiska_max: 8}
+    - nr: '9'
+      nazwa: Geodeta Województwa - Wydział Geodezji i Kartografii - Dyrekcja
+      dyr: 1
+      zast: 1
+      samodz: 0
+      sekr: 1
+      prac: 0
+      razem: 3
+      pokoje: 3
+      pow_biurowa: 72
+      stanowiska_max: 9
+    - nr: '9.1'
+      nazwa: Wojewódzki Ośrodek Dokumentacji Geodezyjnej i Kartograficznej
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 15
+      razem: 15
+      pokoje: 4
+      pow_biurowa: 128
+      stanowiska_max: 16
+    - nr: 9.1.1
+      nazwa: Dział ds. Dolnośląskiej Infrastruktury Informacji Przestrzennej
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 7
+      razem: 7
+      pokoje: 2
+      pow_biurowa: 64
+      stanowiska_max: 8
+    - nr: 9.1.2
+      nazwa: Dział ds. Ochrony Gruntów Rolnych
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 8
+      razem: 8
+      pokoje: 2
+      pow_biurowa: 64
+      stanowiska_max: 8
     DK:
-    - {nr: '10', nazwa: Dział Kancelaryjny II, dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 4, razem: 4, pokoje: 2, pow_biurowa: 48, stanowiska_max: 6}
+    - nr: '10'
+      nazwa: Dział Kancelaryjny II
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 4
+      razem: 4
+      pokoje: 2
+      pow_biurowa: 48
+      stanowiska_max: 6
     DW:
-    - {nr: '11', nazwa: Dział Wsparcia Informatycznego II, dyr: 0, zast: 0, samodz: 0, sekr: 0, prac: 4, razem: 4, pokoje: 2, pow_biurowa: 48,
-      stanowiska_max: 6}
+    - nr: '11'
+      nazwa: Dział Wsparcia Informatycznego II
+      dyr: 0
+      zast: 0
+      samodz: 0
+      sekr: 0
+      prac: 4
+      razem: 4
+      pokoje: 2
+      pow_biurowa: 48
+      stanowiska_max: 6
 bloki:
 - kod: SW
   nazwa: Strefa wejściowa
@@ -178,8 +877,11 @@ bloki:
     osoby: null
     szacunek: true
     kategoria_pn_iso: RU
-    wymagania: ['wejście główne widoczne w bryle, z poziomu terenu, bez barier', połączenie z parkingiem podziemnym, łatwa orientacja; ścieżki
-        naprowadzające i tyflomapa, wydzielone strefy funkcji]
+    wymagania:
+    - wejście główne widoczne w bryle, z poziomu terenu, bez barier
+    - połączenie z parkingiem podziemnym
+    - łatwa orientacja; ścieżki naprowadzające i tyflomapa
+    - wydzielone strefy funkcji
     zrodlo: PU s.8-9; Reg. III.1.8 s.20; Reg. VII.2.2.g s.44; Wyj.20 odp.73 (ruch w SW dopuszczalny w SW)
   - id: SW.02
     nazwa: Kancelaria ogólna (3 stanowiska)
@@ -190,7 +892,10 @@ bloki:
     osoby: 3
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: [w holu głównym, pętla indukcyjna, min. 1 stanowisko obsługi dostosowane (M.13)]
+    wymagania:
+    - w holu głównym
+    - pętla indukcyjna
+    - min. 1 stanowisko obsługi dostosowane (M.13)
     zrodlo: PU s.8, s.12; Reg. III.1.8 s.20
   - id: SW.03
     nazwa: Punkt informacyjny (1 stanowisko)
@@ -201,7 +906,9 @@ bloki:
     osoby: 1
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: ['w holu, widoczny od wejścia', lada dostępna]
+    wymagania:
+    - w holu, widoczny od wejścia
+    - lada dostępna
     zrodlo: PU s.8
   - id: SW.04
     nazwa: Pomieszczenie ochrony budynku / centrum monitoringu
@@ -212,7 +919,9 @@ bloki:
     osoby: 2
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: ['CCTV, kontrola dostępu; interkom z miejsc oczekiwania na ewakuację', przy holu]
+    wymagania:
+    - CCTV, kontrola dostępu; interkom z miejsc oczekiwania na ewakuację
+    - przy holu
     zrodlo: PU s.8, s.11, s.14; Reg. III.1.8 s.20
   - id: SW.05
     nazwa: Miejsce socjalne ochrony
@@ -223,7 +932,8 @@ bloki:
     osoby: null
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: [powiązane z SW.04]
+    wymagania:
+    - powiązane z SW.04
     zrodlo: PU s.8
   - id: SW.06
     nazwa: Strefa recepcyjna / poczekalnia
@@ -234,7 +944,8 @@ bloki:
     osoby: 15
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: [w holu]
+    wymagania:
+    - w holu
     zrodlo: PU s.8
   - id: SW.07
     nazwa: Bistro - sala konsumpcyjna (kilkanaście stolików)
@@ -245,7 +956,9 @@ bloki:
     osoby: 60
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: [bezpośrednie sąsiedztwo holu, 'obsługa centrum konferencyjnego, pracowników i gości']
+    wymagania:
+    - bezpośrednie sąsiedztwo holu
+    - obsługa centrum konferencyjnego, pracowników i gości
     zrodlo: PU s.9
   - id: SW.08
     nazwa: Bistro - zaplecze (tylko podgrzewanie, zmywanie, magazyn podręczny)
@@ -256,7 +969,9 @@ bloki:
     osoby: null
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: [bez przygotowywania posiłków, dostęp od strefy dostaw (wniosek)]
+    wymagania:
+    - bez przygotowywania posiłków
+    - dostęp od strefy dostaw (wniosek)
     zrodlo: PU s.9
 - kod: SK
   nazwa: Strefa konferencyjna
@@ -271,8 +986,12 @@ bloki:
     osoby: 200
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: ['parter, bezpośrednio przy holu', ściana mobilna - podział na 2 przestrzenie, 'zaplecze techniczne: prezentacje i transmisja',
-      pętla indukcyjna, ZL I (>50 os.) - wniosek]
+    wymagania:
+    - parter, bezpośrednio przy holu
+    - ściana mobilna - podział na 2 przestrzenie
+    - 'zaplecze techniczne: prezentacje i transmisja'
+    - pętla indukcyjna
+    - ZL I (>50 os.) - wniosek
     zrodlo: PU s.8, s.12; Wyj.8 odp.35
   - id: SK.02
     nazwa: Sala konferencyjna mniejsza 80 os.
@@ -283,7 +1002,10 @@ bloki:
     osoby: 80
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: ['parter, przy holu', zaplecze techniczne, pętla indukcyjna]
+    wymagania:
+    - parter, przy holu
+    - zaplecze techniczne
+    - pętla indukcyjna
     zrodlo: PU s.8, s.12
   - id: SK.03
     nazwa: Zaplecze techniczne / reżyserka AV sali 200 os.
@@ -294,7 +1016,8 @@ bloki:
     osoby: 1
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: [wgląd na salę]
+    wymagania:
+    - wgląd na salę
     zrodlo: PU s.8
   - id: SK.04
     nazwa: Zaplecze techniczne / reżyserka AV sali 80 os.
@@ -316,7 +1039,8 @@ bloki:
     osoby: null
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: [przy sali dzielonej (wniosek)]
+    wymagania:
+    - przy sali dzielonej (wniosek)
     zrodlo: wniosek (PU s.8 - elastyczny podział sali)
   - id: SK.06
     nazwa: Foyer / kuluary centrum konferencyjnego
@@ -327,7 +1051,8 @@ bloki:
     osoby: null
     szacunek: true
     kategoria_pn_iso: RU
-    wymagania: [może stanowić część holu głównego]
+    wymagania:
+    - może stanowić część holu głównego
     zrodlo: PU s.8 ('niewielkie centrum konferencyjne'); wniosek
   - id: SK.07
     nazwa: Szatnia centrum konferencyjnego
@@ -353,11 +1078,19 @@ bloki:
     osoby: 100
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: [najwyższe piętro dominanty, charakter reprezentacyjny, podwyższane rzędy, 'strefy: radni, prezydium, zarząd, goście, media, obsługa
-        techniczna i kancelaryjna, tłumacze PJM', 'stałe stanowiska z systemem głosowania, tabletami i mikrofonami', 'publiczność: oddzielne wejście,
-        może być wizualnie odseparowana / galeria-antresola dopuszczalna', poufność głosowania, 'dostęp bez barier do stanowisk, prezydium i mównicy',
-      min. 3 miejsca dla wózków na 100 miejsc widowni (M.13 s.218), pętla indukcyjna, 'kamery, mikrofony, głośniki - nagrywanie i transmisja',
-      wysokość dowolna (Wyj.8 odp.36)]
+    wymagania:
+    - najwyższe piętro dominanty
+    - charakter reprezentacyjny
+    - podwyższane rzędy
+    - 'strefy: radni, prezydium, zarząd, goście, media, obsługa techniczna i kancelaryjna, tłumacze PJM'
+    - stałe stanowiska z systemem głosowania, tabletami i mikrofonami
+    - 'publiczność: oddzielne wejście, może być wizualnie odseparowana / galeria-antresola dopuszczalna'
+    - poufność głosowania
+    - dostęp bez barier do stanowisk, prezydium i mównicy
+    - min. 3 miejsca dla wózków na 100 miejsc widowni (M.13 s.218)
+    - pętla indukcyjna
+    - kamery, mikrofony, głośniki - nagrywanie i transmisja
+    - wysokość dowolna (Wyj.8 odp.36)
     zrodlo: PU s.5-7, s.12; Wyj.4 odp.18; Wyj.8 odp.36, 52; Reg. III.1.5 s.19; M.13 s.218-219
   - id: SWD.02
     nazwa: Hol reprezentacyjny sali obrad (wiz. nr 7)
@@ -368,7 +1101,9 @@ bloki:
     osoby: null
     szacunek: true
     kategoria_pn_iso: RU
-    wymagania: [ta sama kondygnacja co sala obrad, szybki dostęp większej liczby osób z parkingu i strefy wejściowej]
+    wymagania:
+    - ta sama kondygnacja co sala obrad
+    - szybki dostęp większej liczby osób z parkingu i strefy wejściowej
     zrodlo: PU s.6; Reg. VII.2.2.g s.44; Wyj.21 odp.82, 85
   - id: SWD.03
     nazwa: Sala multimedialna / poczekalnia gości (ekran, głośniki)
@@ -379,7 +1114,9 @@ bloki:
     osoby: 20
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: [śledzenie obrad, ta sama kondygnacja]
+    wymagania:
+    - śledzenie obrad
+    - ta sama kondygnacja
     zrodlo: PU s.6; Wyj.21 odp.85
   - id: SWD.04
     nazwa: Pomieszczenie obsługi technicznej obrad (nagrywanie, transmisja)
@@ -390,7 +1127,9 @@ bloki:
     osoby: 3
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: [wgląd na salę (wniosek), ta sama kondygnacja]
+    wymagania:
+    - wgląd na salę (wniosek)
+    - ta sama kondygnacja
     zrodlo: PU s.6-7; Wyj.21 odp.85
   - id: SWD.05
     nazwa: Przestrzeń socjalno-gastronomiczna (z przyłączami)
@@ -401,7 +1140,8 @@ bloki:
     osoby: null
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: [ta sama kondygnacja]
+    wymagania:
+    - ta sama kondygnacja
     zrodlo: PU s.6; Wyj.21 odp.85
   - id: SWD.06
     nazwa: Szatnia strefy Sejmiku
@@ -412,7 +1152,8 @@ bloki:
     osoby: null
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: [ta sama kondygnacja]
+    wymagania:
+    - ta sama kondygnacja
     zrodlo: PU s.6
   - id: SWD.07
     nazwa: Pokój dla matki z dzieckiem (pokój rodzinny)
@@ -423,7 +1164,8 @@ bloki:
     osoby: null
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: ['nie w toalecie; fotel, przewijak, umywalka, podgrzewacz (M.13 s.203)']
+    wymagania:
+    - nie w toalecie; fotel, przewijak, umywalka, podgrzewacz (M.13 s.203)
     zrodlo: PU s.6; M.13 s.203
   - id: SWD.08
     nazwa: Sala komisji 50 os. (zaplecze do nagrywania)
@@ -434,7 +1176,10 @@ bloki:
     osoby: 50
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: ['AV: kamery, mikrofony, głośniki, nagrywanie, transmisja', ekran + punkty dostępowe, ta sama kondygnacja]
+    wymagania:
+    - 'AV: kamery, mikrofony, głośniki, nagrywanie, transmisja'
+    - ekran + punkty dostępowe
+    - ta sama kondygnacja
     zrodlo: PU s.7; Wyj.8 odp.53; Wyj.21 odp.85
   - id: SWD.09
     nazwa: Sala komisji 30 os. (zaplecze do nagrywania)
@@ -445,7 +1190,8 @@ bloki:
     osoby: 30
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: [jw.]
+    wymagania:
+    - jw.
     zrodlo: PU s.7; Wyj.8 odp.53; Wyj.21 odp.85
   - id: SWD.10
     nazwa: Zaplecze techniczne nagrywania posiedzeń komisji
@@ -456,7 +1202,8 @@ bloki:
     osoby: 1
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: [po jednym przy każdej sali komisji]
+    wymagania:
+    - po jednym przy każdej sali komisji
     zrodlo: PU s.7; Wyj.8 odp.53
   - id: SWD.11
     nazwa: Sala klubu radnych 30 os.
@@ -467,7 +1214,8 @@ bloki:
     osoby: 30
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: [ekran + punkty dostępowe]
+    wymagania:
+    - ekran + punkty dostępowe
     zrodlo: PU s.7; Wyj.21 odp.85
   - id: SWD.12
     nazwa: Sala klubu radnych 15 os.
@@ -478,7 +1226,8 @@ bloki:
     osoby: 15
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: [ekran + punkty dostępowe]
+    wymagania:
+    - ekran + punkty dostępowe
     zrodlo: PU s.7; Wyj.21 odp.85
   - id: SWD.13
     nazwa: Wspólna sala radnych (doraźna praca indywidualna)
@@ -489,7 +1238,8 @@ bloki:
     osoby: 12
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: [ekran + punkty dostępowe]
+    wymagania:
+    - ekran + punkty dostępowe
     zrodlo: PU s.7
   - id: SWD.14
     nazwa: Pokój socjalny radnych (podgrzanie i spożycie posiłku)
@@ -511,7 +1261,8 @@ bloki:
     osoby: null
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: [nie wymagany przez M.01]
+    wymagania:
+    - nie wymagany przez M.01
     zrodlo: wniosek
 - kod: KS
   nazwa: Kancelaria Sejmiku
@@ -582,7 +1333,9 @@ bloki:
     osoby: 1
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: [w pobliżu KS, miejsce oczekiwania gości (Wyj.4 odp.19)]
+    wymagania:
+    - w pobliżu KS
+    - miejsce oczekiwania gości (Wyj.4 odp.19)
     zrodlo: PU s.7; Wyj.4 odp.19
   - id: KS.02
     nazwa: Zaplecze sanitarno-socjalne gabinetu Przewodniczącego
@@ -604,7 +1357,8 @@ bloki:
     osoby: 1
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: [przy gabinecie Przewodniczącego; moduł 24 m2 (wniosek)]
+    wymagania:
+    - przy gabinecie Przewodniczącego; moduł 24 m2 (wniosek)
     zrodlo: PU s.7
   - id: KS.04
     nazwa: Gabinet Wiceprzewodniczącego Sejmiku (1 stanowisko + spotkania 5 os.)
@@ -626,7 +1380,8 @@ bloki:
     osoby: 20
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: [ekran + punkty dostępowe]
+    wymagania:
+    - ekran + punkty dostępowe
     zrodlo: PU s.7; Wyj.6 odp.23; Wyj.7 odp.31
   - id: KS.06
     nazwa: Miejsce oczekiwania gości (Przewodniczący, KS)
@@ -848,7 +1603,8 @@ bloki:
     osoby: 4
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: [wnęka przy korytarzu dopuszczalna (wniosek)]
+    wymagania:
+    - wnęka przy korytarzu dopuszczalna (wniosek)
     zrodlo: Wyj.4 odp.19
 - kod: DSS
   nazwa: Departament Spraw Społecznych i Rynku Pracy
@@ -1017,7 +1773,8 @@ bloki:
     osoby: 4
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: [wnęka przy korytarzu dopuszczalna (wniosek)]
+    wymagania:
+    - wnęka przy korytarzu dopuszczalna (wniosek)
     zrodlo: Wyj.4 odp.19
 - kod: DST
   nazwa: Departament Sportu i Turystyki
@@ -1158,7 +1915,8 @@ bloki:
     osoby: 4
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: [wnęka przy korytarzu dopuszczalna (wniosek)]
+    wymagania:
+    - wnęka przy korytarzu dopuszczalna (wniosek)
     zrodlo: Wyj.4 odp.19
 - kod: DRA
   nazwa: Departament Rozwoju Aglomeracji
@@ -1285,7 +2043,8 @@ bloki:
     osoby: 4
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: [wnęka przy korytarzu dopuszczalna (wniosek)]
+    wymagania:
+    - wnęka przy korytarzu dopuszczalna (wniosek)
     zrodlo: Wyj.4 odp.19
 - kod: DGP
   nazwa: Departament Gospodarki i Promocji
@@ -1468,7 +2227,8 @@ bloki:
     osoby: 4
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: [wnęka przy korytarzu dopuszczalna (wniosek)]
+    wymagania:
+    - wnęka przy korytarzu dopuszczalna (wniosek)
     zrodlo: Wyj.4 odp.19
 - kod: DI
   nazwa: Departament Infrastruktury
@@ -1693,7 +2453,8 @@ bloki:
     osoby: 4
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: [wnęka przy korytarzu dopuszczalna (wniosek)]
+    wymagania:
+    - wnęka przy korytarzu dopuszczalna (wniosek)
     zrodlo: Wyj.4 odp.19
 - kod: CZ
   nazwa: Członek Zarządu
@@ -1750,7 +2511,8 @@ bloki:
     osoby: 4
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: [wnęka przy korytarzu dopuszczalna (wniosek)]
+    wymagania:
+    - wnęka przy korytarzu dopuszczalna (wniosek)
     zrodlo: Wyj.4 odp.19
 - kod: DKD
   nazwa: Departament Kultury i Dziedzictwa Kulturowego
@@ -1877,7 +2639,8 @@ bloki:
     osoby: 4
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: [wnęka przy korytarzu dopuszczalna (wniosek)]
+    wymagania:
+    - wnęka przy korytarzu dopuszczalna (wniosek)
     zrodlo: Wyj.4 odp.19
 - kod: DZ
   nazwa: Departament Zdrowia
@@ -2088,7 +2851,8 @@ bloki:
     osoby: 4
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: [wnęka przy korytarzu dopuszczalna (wniosek)]
+    wymagania:
+    - wnęka przy korytarzu dopuszczalna (wniosek)
     zrodlo: Wyj.4 odp.19
 - kod: GW
   nazwa: Geodeta Województwa - Wydział Geodezji i Kartografii
@@ -2227,7 +2991,9 @@ bloki:
     osoby: 30
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: [rozmieszczone równomiernie w budynku, ekran + punkty dostępowe do komputerów]
+    wymagania:
+    - rozmieszczone równomiernie w budynku
+    - ekran + punkty dostępowe do komputerów
     zrodlo: PU s.8; Wyj.8 odp.54
 - kod: PS
   nazwa: Pomieszczenia socjalne
@@ -2242,7 +3008,9 @@ bloki:
     osoby: null
     szacunek: false
     kategoria_pn_iso: PU
-    wymagania: [równomiernie w strefie biurowej, 'napoje, podgrzewanie, spożycie posiłków']
+    wymagania:
+    - równomiernie w strefie biurowej
+    - napoje, podgrzewanie, spożycie posiłków
     zrodlo: PU s.9
 - kod: PP
   nazwa: Pomieszczenia pomocnicze
@@ -2257,7 +3025,8 @@ bloki:
     osoby: null
     szacunek: false
     kategoria_pn_iso: PU
-    wymagania: [3 punkty dostępowe el. i teletech. (zmiana na biuro)]
+    wymagania:
+    - 3 punkty dostępowe el. i teletech. (zmiana na biuro)
     zrodlo: PU s.9
   - id: PP.02
     nazwa: Archiwum Państwowego Zasobu Geodezyjnego i Kartograficznego (GW)
@@ -2268,7 +3037,10 @@ bloki:
     osoby: null
     szacunek: false
     kategoria_pn_iso: PU
-    wymagania: [szafy jezdne (obciążenie stropu - wniosek), kontrola temperatury i wilgotności, ta sama kondygnacja co GW]
+    wymagania:
+    - szafy jezdne (obciążenie stropu - wniosek)
+    - kontrola temperatury i wilgotności
+    - ta sama kondygnacja co GW
     zrodlo: PU s.9-10; Wyj.6 odp.26
   - id: PP.03
     nazwa: Archiwum operatów kartograficznych i dokumentacji technicznej (GW)
@@ -2279,7 +3051,8 @@ bloki:
     osoby: null
     szacunek: false
     kategoria_pn_iso: PU
-    wymagania: [jw.]
+    wymagania:
+    - jw.
     zrodlo: PU s.9-10; Wyj.6 odp.26
   - id: PP.04
     nazwa: Pomieszczenie urządzeń specjalistycznych GW (ploter, skaner wielkoformatowy, MFP, skanowanie)
@@ -2290,7 +3063,8 @@ bloki:
     osoby: 1
     szacunek: false
     kategoria_pn_iso: PU
-    wymagania: [przy GW (wniosek)]
+    wymagania:
+    - przy GW (wniosek)
     zrodlo: PU s.10
   - id: PP.05
     nazwa: Pomieszczenie / wnęka sieciowego urządzenia wielofunkcyjnego
@@ -2301,7 +3075,9 @@ bloki:
     osoby: null
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: ['wzdłuż ciągów komunikacyjnych, równomiernie', wentylacja]
+    wymagania:
+    - wzdłuż ciągów komunikacyjnych, równomiernie
+    - wentylacja
     zrodlo: PU s.10
   - id: PP.06
     nazwa: Pomieszczenie porządkowe (magazyn sprzętu i środków czystości, dostęp do wody)
@@ -2312,7 +3088,8 @@ bloki:
     osoby: null
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: ['na każdym piętrze (liczba = scenariusz 12 kondygnacji, w tym PP.07)']
+    wymagania:
+    - na każdym piętrze (liczba = scenariusz 12 kondygnacji, w tym PP.07)
     zrodlo: PU s.10
   - id: PP.07
     nazwa: Pomieszczenie porządkowe z pralnią i suszarnią
@@ -2338,7 +3115,9 @@ bloki:
     osoby: null
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: [równomiernie; min. 1 toaleta dostępna na każdej kondygnacji, 'w toaletach pochwyt poziomy na skrzydle drzwi, kontrast ścian/posadzki']
+    wymagania:
+    - równomiernie; min. 1 toaleta dostępna na każdej kondygnacji
+    - w toaletach pochwyt poziomy na skrzydle drzwi, kontrast ścian/posadzki
     zrodlo: PU s.10; Reg. III.1.8 s.20
   - id: PHS.02
     nazwa: Toalety ogólnodostępne przy holu głównym (K, M, dostępna, przewijak)
@@ -2360,7 +3139,8 @@ bloki:
     osoby: null
     szacunek: false
     kategoria_pn_iso: PU
-    wymagania: ['parter, max 20 m od wejścia, szer. min 3 m, pow. min 12 m2, leżanka, prysznic']
+    wymagania:
+    - parter, max 20 m od wejścia, szer. min 3 m, pow. min 12 m2, leżanka, prysznic
     zrodlo: PU s.10; Reg. III.1.8 s.20; M.13 s.202 (min 12 m2)
   - id: PHS.04
     nazwa: Toalety strefy konferencyjnej (wg pojemności 280 os.)
@@ -2371,7 +3151,8 @@ bloki:
     osoby: null
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: [liczba przyborów dostosowana do maks. liczby użytkowników]
+    wymagania:
+    - liczba przyborów dostosowana do maks. liczby użytkowników
     zrodlo: PU s.10
   - id: PHS.05
     nazwa: Toalety strefy Sejmiku (w tym dla OzN)
@@ -2382,7 +3163,8 @@ bloki:
     osoby: null
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: [ta sama kondygnacja co sala obrad]
+    wymagania:
+    - ta sama kondygnacja co sala obrad
     zrodlo: PU s.6, s.10; Wyj.21 odp.85
 - kod: PPT
   nazwa: Pomieszczenia pracowników technicznych
@@ -2467,8 +3249,10 @@ bloki:
     osoby: null
     szacunek: false
     kategoria_pn_iso: US
-    wymagania: [pow. do 50 m2, światłowód jednomodowy do serwerowni głównej (Wybrzeże Słowackiego 12-14), klimatyzacja precyzyjna; dwutorowe zasilanie;
-        SZR; UPS do startu agregatu; redundancja UPS/chłodzenia]
+    wymagania:
+    - pow. do 50 m2
+    - światłowód jednomodowy do serwerowni głównej (Wybrzeże Słowackiego 12-14)
+    - klimatyzacja precyzyjna; dwutorowe zasilanie; SZR; UPS do startu agregatu; redundancja UPS/chłodzenia
     zrodlo: PU s.15-16
   - id: IT.02
     nazwa: Punkt dystrybucyjny IT (PD) na każdej kondygnacji
@@ -2479,7 +3263,8 @@ bloki:
     osoby: null
     szacunek: true
     kategoria_pn_iso: US
-    wymagania: [telefonia IP / transmisja danych]
+    wymagania:
+    - telefonia IP / transmisja danych
     zrodlo: PU s.14
   - id: IT.03
     nazwa: Pomieszczenie UPS
@@ -2490,7 +3275,8 @@ bloki:
     osoby: null
     szacunek: true
     kategoria_pn_iso: US
-    wymagania: [IT i systemy bezpieczeństwa]
+    wymagania:
+    - IT i systemy bezpieczeństwa
     zrodlo: PU s.13, s.16
   - id: IT.04
     nazwa: Stacja transformatorowa SN/nn
@@ -2501,7 +3287,8 @@ bloki:
     osoby: null
     szacunek: true
     kategoria_pn_iso: US
-    wymagania: [w wydzielonych pomieszczeniach budynku lub na terenie]
+    wymagania:
+    - w wydzielonych pomieszczeniach budynku lub na terenie
     zrodlo: PU s.13
   - id: IT.05
     nazwa: Rozdzielnia główna nn z SZR
@@ -2523,7 +3310,8 @@ bloki:
     osoby: null
     szacunek: true
     kategoria_pn_iso: US
-    wymagania: ['wentylacja, dostęp serwisowy']
+    wymagania:
+    - wentylacja, dostęp serwisowy
     zrodlo: PU s.13, s.16
   - id: IT.07
     nazwa: Magazyn energii elektrycznej (PV)
@@ -2545,7 +3333,8 @@ bloki:
     osoby: null
     szacunek: true
     kategoria_pn_iso: US
-    wymagania: [odwierty możliwe pod budynkiem (M.12)]
+    wymagania:
+    - odwierty możliwe pod budynkiem (M.12)
     zrodlo: PU s.14; M.12 pkt 1.A
   - id: IT.09
     nazwa: Magazyn ciepła/chłodu krótkoterminowy (zbiorniki buforowe)
@@ -2556,7 +3345,8 @@ bloki:
     osoby: null
     szacunek: true
     kategoria_pn_iso: US
-    wymagania: [w wydzielonych pomieszczeniach technicznych]
+    wymagania:
+    - w wydzielonych pomieszczeniach technicznych
     zrodlo: M.12 pkt 1.C
   - id: IT.10
     nazwa: Węzeł cieplny (sieć ciepłownicza - funkcja rezerwowa/szczytowa)
@@ -2589,7 +3379,8 @@ bloki:
     osoby: null
     szacunek: true
     kategoria_pn_iso: US
-    wymagania: [rozdział ścieków czarnych/szarych; zakaz łączenia z wodą pitną]
+    wymagania:
+    - rozdział ścieków czarnych/szarych; zakaz łączenia z wodą pitną
     zrodlo: PU s.3, s.14; M.12 pkt 2.C-D
   - id: IT.13
     nazwa: Piętro techniczne - centrale wentylacyjne z rekuperacją, agregaty chłodnicze
@@ -2600,7 +3391,9 @@ bloki:
     osoby: null
     szacunek: true
     kategoria_pn_iso: US
-    wymagania: [urządzenia centralne na piętrze technicznym, na dachu tylko urządzenia niemożliwe do umieszczenia na piętrze technicznym]
+    wymagania:
+    - urządzenia centralne na piętrze technicznym
+    - na dachu tylko urządzenia niemożliwe do umieszczenia na piętrze technicznym
     zrodlo: PU s.13-14
   - id: IT.14
     nazwa: Pomieszczenie odpadów komunalnych
@@ -2611,7 +3404,9 @@ bloki:
     osoby: null
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: [łatwy dostęp dla firm odbierających, 'warunki sanitarne, wentylacja']
+    wymagania:
+    - łatwy dostęp dla firm odbierających
+    - warunki sanitarne, wentylacja
     zrodlo: PU s.15
   - id: IT.15
     nazwa: Strefa dostaw - przyjęcie towaru (od Wybrzeża Słowackiego, z poziomu terenu)
@@ -2622,7 +3417,9 @@ bloki:
     osoby: null
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: [winda osobowo-towarowa, bez miejsca postojowego na działce drogowej (Wyj.6 odp.25)]
+    wymagania:
+    - winda osobowo-towarowa
+    - bez miejsca postojowego na działce drogowej (Wyj.6 odp.25)
     zrodlo: PU s.15, s.17; Wyj.4 odp.20; Wyj.6 odp.25
 - kod: PR
   nazwa: Parking dla rowerów
@@ -2637,8 +3434,11 @@ bloki:
     osoby: null
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: ['parter, wjazd od strony podwórza', dobrze oświetlony, nie na poz. -1 (Wyj.7 odp.32), 'zalecenie własne: 10 miejsc dla hulajnóg/UTO
-        z ładowaniem w ramach PR.01 (M.01 nie wymaga)']
+    wymagania:
+    - parter, wjazd od strony podwórza
+    - dobrze oświetlony
+    - nie na poz. -1 (Wyj.7 odp.32)
+    - 'zalecenie własne: 10 miejsc dla hulajnóg/UTO z ładowaniem w ramach PR.01 (M.01 nie wymaga)'
     zrodlo: PU s.12; Wyj.7 odp.32
   - id: PR.02
     nazwa: Zaplecze sanitarne parkingu rowerowego
@@ -2649,11 +3449,12 @@ bloki:
     osoby: null
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: [bezpośrednie sąsiedztwo; dostępne dla wszystkich użytkowników parkingu rowerowego]
+    wymagania:
+    - bezpośrednie sąsiedztwo; dostępne dla wszystkich użytkowników parkingu rowerowego
     zrodlo: PU s.12
 - kod: PPM
   nazwa: Parking podziemny pełniący funkcję MDS
-  pow_suma: 2835.0
+  pow_suma: 2815.0
   pomieszczenia:
   - id: PPM.01
     nazwa: 'Garaż podziemny - stanowiska postojowe ogólne (2 kondygnacje: -1, -2)'
@@ -2663,9 +3464,13 @@ bloki:
     zakres_pow_jedn: [12.5, 12.5]
     osoby: null
     szacunek: true
-    kategoria_pn_iso: PU
-    wymagania: [lokalizacja bezpośrednio pod budynkiem (MPZP), dla pracowników; w dni sesji/wydarzeń - radni i goście, infrastruktura ładowania
-        EV, liczba = minimum MPZP przy PU z niniejszej ekstrakcji (parametr), 'stanowisko 2,5 x 5,0 m (wniosek)']
+    kategoria_pn_iso: PG
+    wymagania:
+    - lokalizacja bezpośrednio pod budynkiem (MPZP)
+    - dla pracowników; w dni sesji/wydarzeń - radni i goście
+    - infrastruktura ładowania EV
+    - liczba = minimum MPZP przy PU z niniejszej ekstrakcji (parametr)
+    - stanowisko 2,5 x 5,0 m (wniosek)
     zrodlo: PU s.3, s.12-13; MPZP par.13 pkt 1 lit. e i pkt 2-3 (M.03 s.15-16); Wyj.21 odp.83
   - id: PPM.02
     nazwa: Stanowiska dla osób z niepełnosprawnościami (łącznie z PPM.01 = minimum MPZP)
@@ -2675,19 +3480,22 @@ bloki:
     zakres_pow_jedn: [18.0, 18.0]
     osoby: null
     szacunek: false
-    kategoria_pn_iso: PU
-    wymagania: ['min. 4% przy >100 stanowisk; 3,6 x 5,0 m; najbliżej dostępnego wejścia/dźwigu']
+    kategoria_pn_iso: PG
+    wymagania:
+    - min. 4% przy >100 stanowisk; 3,6 x 5,0 m; najbliżej dostępnego wejścia/dźwigu
     zrodlo: PU s.13; M.13 s.80-81
   - id: PPM.03
     nazwa: Drogi manewrowe, rampa/zjazd, klatki garażowe (szac. brutto - netto stanowisk)
     liczba: 1
-    pow_jedn: 1490.0
-    pow_laczna: 1490.0
+    pow_jedn: 1470
+    pow_laczna: 1470
     zakres_pow_jedn: null
     osoby: null
     szacunek: true
     kategoria_pn_iso: RU
-    wymagania: [zjazd z drogi publicznej w obrębie inwestycji (Reg. III.1.2), dojazd do terenu wg MPZP par.26 ust.3]
+    wymagania:
+    - zjazd z drogi publicznej w obrębie inwestycji (Reg. III.1.2)
+    - dojazd do terenu wg MPZP par.26 ust.3
     zrodlo: Reg. III.1.2 s.18; MPZP par.26 ust.3 (M.03 s.25); wniosek
   - id: PPM.04
     nazwa: Funkcja MDS - zaplecze (magazyn wyposażenia, sanitariaty) - parametry wg rozp. MSWiA z 9.07.2025
@@ -2698,62 +3506,128 @@ bloki:
     osoby: null
     szacunek: true
     kategoria_pn_iso: PU
-    wymagania: [pojemność MDS nie podana w M.01 (luka), dla okolicznej ludności i pracowników]
+    wymagania:
+    - pojemność MDS nie podana w M.01 (luka)
+    - dla okolicznej ludności i pracowników
     zrodlo: PU s.3, s.13, s.18
 - kod: KW
   nazwa: Komunikacja wewnętrzna
-  pow_suma: 2570.0
+  pow_suma: 2570
   pomieszczenia:
   - id: KW.01
     nazwa: Komunikacja wewnętrzna nadziemna (korytarze, klatki ewakuacyjne z przedsionkami p.poż., szyby dźwigowe, pochylnie)
     liczba: 1
-    pow_jedn: 2570.0
-    pow_laczna: 2570.0
-    zakres_pow_jedn: [2150.0, 3000.0]
+    pow_jedn: 2570
+    pow_laczna: 2570
+    zakres_pow_jedn: [2150, 3000]
     osoby: null
     szacunek: true
     kategoria_pn_iso: RU
-    wymagania: [klatki poprzedzone przedsionkami p.poż. (budynek wysoki - wniosek), miejsca oczekiwania na ewakuację dla wózka na podestach +
-        interkom + miejsce na krzesło ewakuacyjne, ścieżki naprowadzające z holu i parkingu; kontrast ścian i posadzek, windy dostępne dla OzN;
-        min. 1 osobowo-towarowa w strefie dostaw, 'wszystkie powierzchnie ruchu wg PN-ISO 9836:2022-07 (Wyj.20 odp.73)']
+    wymagania:
+    - klatki poprzedzone przedsionkami p.poż. (budynek wysoki - wniosek)
+    - miejsca oczekiwania na ewakuację dla wózka na podestach + interkom + miejsce na krzesło ewakuacyjne
+    - ścieżki naprowadzające z holu i parkingu; kontrast ścian i posadzek
+    - windy dostępne dla OzN; min. 1 osobowo-towarowa w strefie dostaw
+    - wszystkie powierzchnie ruchu wg PN-ISO 9836:2022-07 (Wyj.20 odp.73)
     zrodlo: PU s.10-11, s.15; Reg. III.1.8 s.20; Wyj.20 odp.73; wniosek (udział 30% PU)
-lokalizacja_blokow: {SW: 'parter; wejście główne widoczne, od ulicy i przystanków, z poziomu terenu, połączone z parkingiem (PU s.8)', SK: 'parter,
-    bezpośrednio przy holu, dostęp od wnętrza i od wejścia głównego (PU s.8)', SWD: najwyższe kondygnacje dominanty (obszar A MPZP); sala obrad
-    na najwyższym piętrze; wszystkie pomieszczenia Sejmiku z PU s.5-7 na tej samej kondygnacji co sala obrad (PU s.5; Reg. III.1.5; Wyj.21 odp.84-85),
-  KS: przy gabinetach Przewodniczącego i Wiceprzewodniczących; dopuszczalnie kondygnacja sąsiednia do sali obrad (PU s.7; Wyj.21 odp.84-85), departamenty: strefa
-    biurowa; zwarte strefy pionów; wydziały na max 2 sąsiednich kondygnacjach (Wyj.17 odp.70), GW: archiwa PZGiK i operatów na tej samej kondygnacji
-    co GW (Wyj.6 odp.26), SN: rozmieszczone równomiernie (PU s.8), PS: równomiernie w strefie biurowej (PU s.9), PR: 'parter, wjazd od podwórza
-    (PU s.12; Wyj.7 odp.32)', PPM: '2 kondygnacje podziemne bezpośrednio pod budynkiem (PU s.3, s.12)', IT: piętro techniczne dla central i agregatów;
-    dach tylko dla urządzeń niemożliwych na piętrze technicznym (PU s.13-14), dostawy: 'od ul. Wybrzeże Słowackiego, z poziomu terenu, winda osobowo-towarowa
-    (PU s.17; Wyj.4 odp.20)'}
+lokalizacja_blokow:
+  SW: parter; wejście główne widoczne, od ulicy i przystanków, z poziomu terenu, połączone z parkingiem (PU s.8)
+  SK: parter, bezpośrednio przy holu, dostęp od wnętrza i od wejścia głównego (PU s.8)
+  SWD: najwyższe kondygnacje dominanty (obszar A MPZP); sala obrad na najwyższym piętrze; wszystkie pomieszczenia Sejmiku z PU s.5-7 na tej samej
+    kondygnacji co sala obrad (PU s.5; Reg. III.1.5; Wyj.21 odp.84-85)
+  KS: przy gabinetach Przewodniczącego i Wiceprzewodniczących; dopuszczalnie kondygnacja sąsiednia do sali obrad (PU s.7; Wyj.21 odp.84-85)
+  departamenty: strefa biurowa; zwarte strefy pionów; wydziały na max 2 sąsiednich kondygnacjach (Wyj.17 odp.70)
+  GW: archiwa PZGiK i operatów na tej samej kondygnacji co GW (Wyj.6 odp.26)
+  SN: rozmieszczone równomiernie (PU s.8)
+  PS: równomiernie w strefie biurowej (PU s.9)
+  PR: parter, wjazd od podwórza (PU s.12; Wyj.7 odp.32)
+  PPM: 2 kondygnacje podziemne bezpośrednio pod budynkiem (PU s.3, s.12)
+  IT: piętro techniczne dla central i agregatów; dach tylko dla urządzeń niemożliwych na piętrze technicznym (PU s.13-14)
+  dostawy: od ul. Wybrzeże Słowackiego, z poziomu terenu, winda osobowo-towarowa (PU s.17; Wyj.4 odp.20)
 relacje_funkcjonalne:
-- {od: Wejście główne, do: Hol główny, typ: bezpośrednia, zrodlo: PU s.8}
-- {od: Hol główny, do: 'Kancelaria ogólna, informacja, ochrona, poczekalnia, toalety, komfortka', typ: w holu, zrodlo: PU s.8-10}
-- {od: Hol główny, do: Strefa konferencyjna (SK), typ: bezpośrednie sąsiedztwo, zrodlo: PU s.8}
-- {od: Hol główny, do: Bistro, typ: bezpośrednie sąsiedztwo, zrodlo: PU s.9}
-- {od: Hol główny / parking podziemny, do: Strefa Sejmiku, typ: szybki przepływ większej liczby osób (dźwigi o dużej wydajności - wniosek), zrodlo: PU
-    s.6}
-- {od: Parking podziemny, do: Hol główny, typ: połączenie bezpośrednie + ścieżki naprowadzające, zrodlo: 'PU s.8, s.11'}
-- {od: Sala obrad, do: 'Hol Sejmiku, sala multimedialna, reżyserka, socjalno-gastr., szatnia, toalety, pokój matki, komisje, kluby, sala radnych,
-    pokój socjalny radnych', typ: ta sama kondygnacja, zrodlo: Wyj.21 odp.85}
-- {od: Publiczność, do: Sala obrad, typ: oddzielne wejście; separacja od radnych, zrodlo: PU s.6; Wyj.4 odp.18}
-- {od: Kancelaria Sejmiku, do: Gabinety Przewodniczącego i Wiceprzewodniczących, typ: bezpośrednia bliskość, zrodlo: PU s.7}
-- {od: Kancelaria Sejmiku, do: Sala obrad, typ: ta sama lub sąsiednia kondygnacja, zrodlo: Wyj.21 odp.84-85}
-- {od: Gabinety dyrekcji pionu, do: 'Sekretariat, sale narad, aneks socjalny, toalety, miejsce oczekiwania', typ: bliskość, zrodlo: PU s.5; Wyj.4
-    odp.19; Wyj.10 odp.62}
-- {od: GW, do: 'Archiwa PZGiK i operatów, pracownia urządzeń', typ: ta sama kondygnacja, zrodlo: PU s.9-10; Wyj.6 odp.26}
-- {od: Parking rowerowy, do: Podwórze; zaplecze sanitarne, typ: wjazd / bezpośrednie sąsiedztwo, zrodlo: PU s.12}
-- {od: Strefa dostaw, do: Winda osobowo-towarowa; bistro; magazyny; odpady, typ: bezpośrednia (wniosek dla bistro/odpady), zrodlo: 'PU s.15, s.17'}
-- {od: Serwerownia, do: Serwerownia główna (Wybrzeże Słowackiego 12-14), typ: światłowód jednomodowy, zrodlo: PU s.15-16}
-- {od: Budynek (skrzydło Mazowiecka), do: Kamienica Mazowiecka 19, typ: przyleganie; zalecany potencjał przyszłego połączenia funkcjonalnego,
-  zrodlo: PU s.3; Wyj.3 odp.13; Wyj.8 odp.37}
+- od: Wejście główne
+  do: Hol główny
+  typ: bezpośrednia
+  zrodlo: PU s.8
+- od: Hol główny
+  do: Kancelaria ogólna, informacja, ochrona, poczekalnia, toalety, komfortka
+  typ: w holu
+  zrodlo: PU s.8-10
+- od: Hol główny
+  do: Strefa konferencyjna (SK)
+  typ: bezpośrednie sąsiedztwo
+  zrodlo: PU s.8
+- od: Hol główny
+  do: Bistro
+  typ: bezpośrednie sąsiedztwo
+  zrodlo: PU s.9
+- od: Hol główny / parking podziemny
+  do: Strefa Sejmiku
+  typ: szybki przepływ większej liczby osób (dźwigi o dużej wydajności - wniosek)
+  zrodlo: PU s.6
+- od: Parking podziemny
+  do: Hol główny
+  typ: połączenie bezpośrednie + ścieżki naprowadzające
+  zrodlo: PU s.8, s.11
+- od: Sala obrad
+  do: Hol Sejmiku, sala multimedialna, reżyserka, socjalno-gastr., szatnia, toalety, pokój matki, komisje, kluby, sala radnych, pokój socjalny
+    radnych
+  typ: ta sama kondygnacja
+  zrodlo: Wyj.21 odp.85
+- od: Publiczność
+  do: Sala obrad
+  typ: oddzielne wejście; separacja od radnych
+  zrodlo: PU s.6; Wyj.4 odp.18
+- od: Kancelaria Sejmiku
+  do: Gabinety Przewodniczącego i Wiceprzewodniczących
+  typ: bezpośrednia bliskość
+  zrodlo: PU s.7
+- od: Kancelaria Sejmiku
+  do: Sala obrad
+  typ: ta sama lub sąsiednia kondygnacja
+  zrodlo: Wyj.21 odp.84-85
+- od: Gabinety dyrekcji pionu
+  do: Sekretariat, sale narad, aneks socjalny, toalety, miejsce oczekiwania
+  typ: bliskość
+  zrodlo: PU s.5; Wyj.4 odp.19; Wyj.10 odp.62
+- od: GW
+  do: Archiwa PZGiK i operatów, pracownia urządzeń
+  typ: ta sama kondygnacja
+  zrodlo: PU s.9-10; Wyj.6 odp.26
+- od: Parking rowerowy
+  do: Podwórze; zaplecze sanitarne
+  typ: wjazd / bezpośrednie sąsiedztwo
+  zrodlo: PU s.12
+- od: Strefa dostaw
+  do: Winda osobowo-towarowa; bistro; magazyny; odpady
+  typ: bezpośrednia (wniosek dla bistro/odpady)
+  zrodlo: PU s.15, s.17
+- od: Serwerownia
+  do: Serwerownia główna (Wybrzeże Słowackiego 12-14)
+  typ: światłowód jednomodowy
+  zrodlo: PU s.15-16
+- od: Budynek (skrzydło Mazowiecka)
+  do: Kamienica Mazowiecka 19
+  typ: przyleganie; zalecany potencjał przyszłego połączenia funkcjonalnego
+  zrodlo: PU s.3; Wyj.3 odp.13; Wyj.8 odp.37
 sejmik_sala_obrad:
   pojemnosc_max: 100
-  uczestnicy_standardowi: {radni: 36, zarzad_wojewodztwa: 5, skarbnik: 1, sekretarz: 1, przedstawiciel_wojewody: 1}
+  uczestnicy_standardowi:
+    radni: 36
+    zarzad_wojewodztwa: 5
+    skarbnik: 1
+    sekretarz: 1
+    przedstawiciel_wojewody: 1
   stanowiska_stale_min: 44
   pozostali: obsługa techniczna i kancelaryjna, tłumacze PJM, media, zaproszeni goście, publiczność (liczby nie podane - PU s.6)
-  propozycja_podzialu_100_miejsc_wniosek: {radni_w_tym_prezydium_4: 36, zarzad_skarbnik_sekretarz_wojewoda: 8, obsluga_kancelaryjna: 4, tlumacze_PJM: 2,
-    media: 10, goscie: 15, publicznosc: 25}
+  propozycja_podzialu_100_miejsc_wniosek:
+    radni_w_tym_prezydium_4: 36
+    zarzad_skarbnik_sekretarz_wojewoda: 8
+    obsluga_kancelaryjna: 4
+    tlumacze_PJM: 2
+    media: 10
+    goscie: 15
+    publicznosc: 25
   miejsca_dla_wozkow_min: 3 na 100 miejsc widowni (M.13 s.218) + dostępne stanowisko radnego, prezydium i mównica (PU s.6)
   kabiny_tlumaczy: 'M.01 NIE wymaga kabin tłumaczy symultanicznych; wymagane miejsce dla tłumaczy PJM (PU s.6); M.13 s.219: napisy / tłumaczenie
     PJM przy nagłośnieniu'
@@ -2761,44 +3635,73 @@ sejmik_sala_obrad:
   wysokosc: nie narzucona (Wyj.8 odp.36)
   technologia: zintegrowany system głosowania, wbudowane tablety i mikrofony (wyposażenie stałe), kamery, głośniki, nagrywanie i transmisja, pętla
     indukcyjna (PU s.6-7, s.12)
-parking: {samochody_min_MPZP: '12 msc / 1000 m2 PU biur i obiektów konferencyjnych (MPZP par.13 pkt 1 lit. e, M.03 s.15); minimum (Wyj.21 odp.83)',
-  samochody_min_przy_PU_ekstrakcji: 103, samochody_min_gdy_hol_foyer_liczone_do_PU: 110, PU_przyjete_do_obliczenia: 8582, OzN_min: 5, OzN_regula: '1
-    st. przy 6-15; 2 przy 16-40; 3 przy 41-100; 4% przy >100 (M.13 s.81); wymiary 3,6 x 5,0 m (M.13 s.80)', EV: infrastruktura ładowania wymagana
-    (PU s.13); liczba punktów wg przepisów (do weryfikacji w module prawnym), MDS: parking = miejsce doraźnego schronienia wg rozp. MSWiA z 9.07.2025
-    (PU s.13); pojemność nie podana, rowery: '50 stanowisk na parterze, stojaki U, wjazd od podwórza (PU s.12); nie na -1 (Wyj.7 odp.32)', hulajnogi: brak
-    wymogu w M.01 (luka) - zalecenie własne 10 miejsc z ładowaniem, rampy_zjazdy: 'zjazd/zjazdy z drogi publicznej do parkingu w obrębie Inwestycji
-    (Reg. III.1.2); dojazd do terenu tylko od 3KDL/1, 4KDPL/3, 6KDB/2 (MPZP par.26 ust.3)', garaz_brutto_szac_m2: 2780.0}
+parking:
+  samochody_min_MPZP: 12 msc / 1000 m2 PU biur i obiektów konferencyjnych (MPZP par.13 pkt 1 lit. e, M.03 s.15); minimum (Wyj.21 odp.83)
+  samochody_min_przy_PU_ekstrakcji: 103
+  samochody_min_gdy_hol_foyer_liczone_do_PU: 110
+  PU_przyjete_do_obliczenia: 8582
+  OzN_min: 5
+  OzN_regula: 1 st. przy 6-15; 2 przy 16-40; 3 przy 41-100; 4% przy >100 (M.13 s.81); wymiary 3,6 x 5,0 m (M.13 s.80)
+  EV: infrastruktura ładowania wymagana (PU s.13); liczba punktów wg przepisów (do weryfikacji w module prawnym)
+  MDS: parking = miejsce doraźnego schronienia wg rozp. MSWiA z 9.07.2025 (PU s.13); pojemność nie podana
+  rowery: 50 stanowisk na parterze, stojaki U, wjazd od podwórza (PU s.12); nie na -1 (Wyj.7 odp.32)
+  hulajnogi: brak wymogu w M.01 (luka) - zalecenie własne 10 miejsc z ładowaniem
+  rampy_zjazdy: zjazd/zjazdy z drogi publicznej do parkingu w obrębie Inwestycji (Reg. III.1.2); dojazd do terenu tylko od 3KDL/1, 4KDPL/3, 6KDB/2
+    (MPZP par.26 ust.3)
+  garaz_brutto_szac_m2: 2780
 strefy_dostepu:
-- {kod: Z0, nazwa: zewnętrzna publiczna, zakres: 'skwer dz. 9/2, dziedziniec/ogródek nieogrodzony dla pracowników i mieszkańców', zrodlo: Reg.
-    III.1.2; PU s.16; Wyj.20 odp.77}
-- {kod: Z1, nazwa: publiczna, zakres: 'hol, kancelaria ogólna, informacja, poczekalnia, bistro, toalety, komfortka; SK podczas wydarzeń', zrodlo: PU
-    s.8-9; wniosek}
-- {kod: Z2, nazwa: półpubliczna kontrolowana, zakres: 'galeria publiczności sali obrad (oddzielne wejście), hol Sejmiku w dni sesji, sale konferencyjne,
-    poczekalnie przy gabinetach', zrodlo: PU s.6; Wyj.4 odp.18-19; wniosek}
-- {kod: Z3, nazwa: biurowa, zakres: 'kondygnacje departamentów, sale narad, pokoje socjalne - kontrola dostępu', zrodlo: PU s.14; wniosek}
-- {kod: Z4, nazwa: Sejmik / VIP, zakres: 'strefa radnych i prezydium, gabinety Przewodniczącego i Wiceprzewodniczących, sale komisji i klubów,
-    sala multimedialna gości', zrodlo: PU s.5-7; wniosek}
-- {kod: Z5, nazwa: techniczna / chroniona, zakres: 'serwerownia, archiwa GW, centrum monitoringu, pomieszczenia techniczne, strefa dostaw, odpady',
-  zrodlo: 'PU s.8, s.10, s.13-17; wniosek'}
-- {kod: Z6, nazwa: parking / MDS, zakres: pracownicy; w dni sesji radni i goście; w sytuacji kryzysowej ludność (MDS), zrodlo: PU s.12-13; wniosek}
-technologia: {serwerownia: '<=50 m2, TIER II: dwutorowe zasilanie, SZR, UPS do startu agregatu, klimatyzacja z obu źródeł, redundancja UPS/agregat/chłodzenie;
-    światłowód jednomodowy do Wybrzeże Słowackiego 12-14 (PU s.15-16)', IT: 'telefonia IP i transmisja danych, punkty dystrybucyjne na każdej
-    kondygnacji; pokoje z punktami dla 3 (GW 4) stanowisk; magazynki z 3 punktami (PU s.4-5, s.9, s.14)', AV: 'sala obrad i sale komisji: kamery,
-    mikrofony zintegrowane, głośniki, nagrywanie, transmisja, system głosowania, tablety; sale konferencyjne: prezentacje i transmisja; sale narad/kluby/sala
-    radnych/sale spotkań: ekran + punkty dostępowe; sala multimedialna: ekran i głośniki (PU s.6-8)', bezpieczenstwo: 'kontrola dostępu z centralą;
-    SAP z sygnalizacją głosową i wizualną; CCTV wewn./zewn. z rejestratorem; centrum monitoringu przy holu; interkom z miejsc oczekiwania na ewakuację
-    (PU s.8, s.11, s.14)', dostepnosc: 'pętle indukcyjne (SK, Sejmik, kancelaria ogólna), tyflomapy, ścieżki naprowadzające, SIW zgodny ze standardami
-    MSWiA i identyfikacją UMWD (PU s.11-12)'}
-instalacje: {energia: 'stacje SN/nn, agregaty, UPS, PV 0,4-1,0 MWp (dach dominanty i elewacje) + magazyn energii (PU s.13; M.12 pkt 1.B, 1.D)',
-  HVAC: wentylacja mechaniczna z rekuperacją + klimatyzacja we wszystkich strefach; centrale i agregaty na piętrze technicznym (PU s.13-14), cieplo: 'gruntowe
-    pompy ciepła (rewersyjne, chłód), magazyny ciepła/chłodu krótkoterminowe i sezonowe; sieć ciepłownicza tylko rezerwowo/szczytowo; brak spalania
-    paliw kopalnych (PU s.14; M.12 pkt 1)', woda_kanalizacja: woda wyłącznie z sieci; rozdział ścieków czarnych/szarych; woda szara do spłukiwania
-    WC; analiza odzysku ciepła z wody szarej (PU s.14; M.12 pkt 2), deszczowka: 'retencja i infiltracja (zbiorniki na terenie zewnętrznym, studnie
-    chłonne, rozsączanie, PBC); wykorzystanie do podlewania, dachu zielonego, mycia nawierzchni, spłukiwania WC; przelew awaryjny (PU s.14; M.12
-    pkt 2.B)', teletechnika: 'IP, kontrola dostępu, SAP, CCTV; skalowalność i rezerwy (szachty, kanały) (PU s.14-15; Reg. III.1.9)', windy: 'liczba
-    wg układu, dostępne dla OzN; min. 1 osobowo-towarowa w strefie dostaw; dedykowana winda Sejmiku niewymagana (PU s.15; Wyj.18 odp.71)', BMS_EMS: pełna
-    integracja z BMS/EMS (M.12 pkt 1), dach: dopuszczalny zielony dach ekstensywny (PU s.17); dach - tylko urządzenia niemożliwe na piętrze technicznym
-    (PU s.13)}
+- kod: Z0
+  nazwa: zewnętrzna publiczna
+  zakres: skwer dz. 9/2, dziedziniec/ogródek nieogrodzony dla pracowników i mieszkańców
+  zrodlo: Reg. III.1.2; PU s.16; Wyj.20 odp.77
+- kod: Z1
+  nazwa: publiczna
+  zakres: hol, kancelaria ogólna, informacja, poczekalnia, bistro, toalety, komfortka; SK podczas wydarzeń
+  zrodlo: PU s.8-9; wniosek
+- kod: Z2
+  nazwa: półpubliczna kontrolowana
+  zakres: galeria publiczności sali obrad (oddzielne wejście), hol Sejmiku w dni sesji, sale konferencyjne, poczekalnie przy gabinetach
+  zrodlo: PU s.6; Wyj.4 odp.18-19; wniosek
+- kod: Z3
+  nazwa: biurowa
+  zakres: kondygnacje departamentów, sale narad, pokoje socjalne - kontrola dostępu
+  zrodlo: PU s.14; wniosek
+- kod: Z4
+  nazwa: Sejmik / VIP
+  zakres: strefa radnych i prezydium, gabinety Przewodniczącego i Wiceprzewodniczących, sale komisji i klubów, sala multimedialna gości
+  zrodlo: PU s.5-7; wniosek
+- kod: Z5
+  nazwa: techniczna / chroniona
+  zakres: serwerownia, archiwa GW, centrum monitoringu, pomieszczenia techniczne, strefa dostaw, odpady
+  zrodlo: PU s.8, s.10, s.13-17; wniosek
+- kod: Z6
+  nazwa: parking / MDS
+  zakres: pracownicy; w dni sesji radni i goście; w sytuacji kryzysowej ludność (MDS)
+  zrodlo: PU s.12-13; wniosek
+technologia:
+  serwerownia: '<=50 m2, TIER II: dwutorowe zasilanie, SZR, UPS do startu agregatu, klimatyzacja z obu źródeł, redundancja UPS/agregat/chłodzenie;
+    światłowód jednomodowy do Wybrzeże Słowackiego 12-14 (PU s.15-16)'
+  IT: telefonia IP i transmisja danych, punkty dystrybucyjne na każdej kondygnacji; pokoje z punktami dla 3 (GW 4) stanowisk; magazynki z 3 punktami
+    (PU s.4-5, s.9, s.14)
+  AV: 'sala obrad i sale komisji: kamery, mikrofony zintegrowane, głośniki, nagrywanie, transmisja, system głosowania, tablety; sale konferencyjne:
+    prezentacje i transmisja; sale narad/kluby/sala radnych/sale spotkań: ekran + punkty dostępowe; sala multimedialna: ekran i głośniki (PU s.6-8)'
+  bezpieczenstwo: kontrola dostępu z centralą; SAP z sygnalizacją głosową i wizualną; CCTV wewn./zewn. z rejestratorem; centrum monitoringu przy
+    holu; interkom z miejsc oczekiwania na ewakuację (PU s.8, s.11, s.14)
+  dostepnosc: pętle indukcyjne (SK, Sejmik, kancelaria ogólna), tyflomapy, ścieżki naprowadzające, SIW zgodny ze standardami MSWiA i identyfikacją
+    UMWD (PU s.11-12)
+instalacje:
+  energia: stacje SN/nn, agregaty, UPS, PV 0,4-1,0 MWp (dach dominanty i elewacje) + magazyn energii (PU s.13; M.12 pkt 1.B, 1.D)
+  HVAC: wentylacja mechaniczna z rekuperacją + klimatyzacja we wszystkich strefach; centrale i agregaty na piętrze technicznym (PU s.13-14)
+  cieplo: gruntowe pompy ciepła (rewersyjne, chłód), magazyny ciepła/chłodu krótkoterminowe i sezonowe; sieć ciepłownicza tylko rezerwowo/szczytowo;
+    brak spalania paliw kopalnych (PU s.14; M.12 pkt 1)
+  woda_kanalizacja: woda wyłącznie z sieci; rozdział ścieków czarnych/szarych; woda szara do spłukiwania WC; analiza odzysku ciepła z wody szarej
+    (PU s.14; M.12 pkt 2)
+  deszczowka: retencja i infiltracja (zbiorniki na terenie zewnętrznym, studnie chłonne, rozsączanie, PBC); wykorzystanie do podlewania, dachu
+    zielonego, mycia nawierzchni, spłukiwania WC; przelew awaryjny (PU s.14; M.12 pkt 2.B)
+  teletechnika: IP, kontrola dostępu, SAP, CCTV; skalowalność i rezerwy (szachty, kanały) (PU s.14-15; Reg. III.1.9)
+  windy: liczba wg układu, dostępne dla OzN; min. 1 osobowo-towarowa w strefie dostaw; dedykowana winda Sejmiku niewymagana (PU s.15; Wyj.18 odp.71)
+  BMS_EMS: pełna integracja z BMS/EMS (M.12 pkt 1)
+  dach: dopuszczalny zielony dach ekstensywny (PU s.17); dach - tylko urządzenia niemożliwe na piętrze technicznym (PU s.13)
 sumy:
   pokoje_biurowe_24m2: 179
   pokoje_biurowe_32m2_GW: 8
@@ -2807,9 +3710,33 @@ sumy:
   PU_programowa_szac: 8582
   US_techniczna_szac: 1217
   RU_w_blokach_SW_SK_SWD: 550
-  KW_szac_30proc_PU: 2570.0
-  netto_nadziemne_i_techniczne_szac: 12919.0
-  PC_szac_bez_garazu: 14680.0
+  KW_szac_30proc_PU: 2570
+  netto_nadziemne_i_techniczne_szac: 12919
+  PC_szac_bez_garazu: 14680
   wskaznik_PU_do_PC: 0.58
-  bloki: {SW: 533, SK: 517, SWD: 1049, KS: 488, DOS: 918, DSS: 462, DST: 318, DRA: 270, DGP: 582, DI: 606, CZ: 78, DKD: 294, DZ: 462, GW: 328,
-    DK: 48, DW: 48, SN: 360, PS: 360, PP: 707, PHS: 417, PPT: 127, IT: 1262, PR: 115, PPM: 2835.0, KW: 2570.0}
+  bloki:
+    SW: 533
+    SK: 517
+    SWD: 1049
+    KS: 488
+    DOS: 918
+    DSS: 462
+    DST: 318
+    DRA: 270
+    DGP: 582
+    DI: 606
+    CZ: 78
+    DKD: 294
+    DZ: 462
+    GW: 328
+    DK: 48
+    DW: 48
+    SN: 360
+    PS: 360
+    PP: 707
+    PHS: 417
+    PPT: 127
+    IT: 1262
+    PR: 115
+    PPM: 2815.0
+    KW: 2570

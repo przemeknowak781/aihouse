@@ -438,17 +438,17 @@ PU = s_kat("PU")
 US = s_kat("US")
 RU_SW = s_kat("RU")  # hol/foyer/hol Sejmiku przypisane do blokow (dopuszczenie Wyj.20)
 KW_UDZIAL = 0.30      # wniosek: komunikacja (korytarze, klatki, przedsionki, windy) / PU
-KW = round(KW_UDZIAL * PU, -1)
+KW = int(round(KW_UDZIAL * PU, -1))
 NETTO = PU + US + RU_SW + KW
 KONSTR = 0.12          # wniosek: udzial scian i konstrukcji w pow. calkowitej
-PC_NADZ = round(NETTO / (1 - KONSTR), -1)
+PC_NADZ = int(round(NETTO / (1 - KONSTR), -1))
 
 # parking wg MPZP par.13 pkt 1 lit. e: 12 msc / 1000 m2 PU biur i obiektow konferencyjnych
 msc_min = math.ceil(12 * PU / 1000.0)
 ozn_min = max(math.ceil(0.04 * msc_min), 4) if msc_min > 100 else (3 if msc_min > 40 else 2)
 
 bloki["KW"].append(mk(("KW.01", "Komunikacja wewnętrzna nadziemna (korytarze, klatki ewakuacyjne z przedsionkami p.poż., szyby dźwigowe, pochylnie)",
-                       1, KW, [round(0.25 * PU, -1), round(0.35 * PU, -1)], None, True, "RU",
+                       1, KW, [int(round(0.25 * PU, -1)), int(round(0.35 * PU, -1))], None, True, "RU",
                        ["klatki poprzedzone przedsionkami p.poż. (budynek wysoki - wniosek)",
                         "miejsca oczekiwania na ewakuację dla wózka na podestach + interkom + miejsce na krzesło ewakuacyjne",
                         "ścieżki naprowadzające z holu i parkingu; kontrast ścian i posadzek",
@@ -458,16 +458,16 @@ bloki["KW"].append(mk(("KW.01", "Komunikacja wewnętrzna nadziemna (korytarze, k
 
 GAR_M2_NA_MSC = 27.0  # wniosek: pow. brutto garazu na 1 stanowisko (z drogami, rampa)
 bloki["PPM"] = [
-    mk(("PPM.01", "Garaż podziemny - stanowiska postojowe ogólne (2 kondygnacje: -1, -2)", msc_min - ozn_min, 12.5, [12.5, 12.5], None, True, "PU",
+    mk(("PPM.01", "Garaż podziemny - stanowiska postojowe ogólne (2 kondygnacje: -1, -2)", msc_min - ozn_min, 12.5, [12.5, 12.5], None, True, "PG",
         ["lokalizacja bezpośrednio pod budynkiem (MPZP)", "dla pracowników; w dni sesji/wydarzeń - radni i goście",
          "infrastruktura ładowania EV", "liczba = minimum MPZP przy PU z niniejszej ekstrakcji (parametr)",
          "stanowisko 2,5 x 5,0 m (wniosek)"],
         "PU s.3, s.12-13; MPZP par.13 pkt 1 lit. e i pkt 2-3 (M.03 s.15-16); Wyj.21 odp.83"), "PPM"),
-    mk(("PPM.02", "Stanowiska dla osób z niepełnosprawnościami (łącznie z PPM.01 = minimum MPZP)", ozn_min, 18.0, [18.0, 18.0], None, False, "PU",
+    mk(("PPM.02", "Stanowiska dla osób z niepełnosprawnościami (łącznie z PPM.01 = minimum MPZP)", ozn_min, 18.0, [18.0, 18.0], None, False, "PG",
         ["min. 4% przy >100 stanowisk; 3,6 x 5,0 m; najbliżej dostępnego wejścia/dźwigu"],
         "PU s.13; M.13 s.80-81"), "PPM"),
     mk(("PPM.03", "Drogi manewrowe, rampa/zjazd, klatki garażowe (szac. brutto - netto stanowisk)", 1,
-        round(msc_min * GAR_M2_NA_MSC - msc_min * 12.5, -1), None, None, True, "RU",
+        int(round(msc_min * GAR_M2_NA_MSC - (msc_min - ozn_min) * 12.5 - ozn_min * 18.0, -1)), None, None, True, "RU",
         ["zjazd z drogi publicznej w obrębie inwestycji (Reg. III.1.2)", "dojazd do terenu wg MPZP par.26 ust.3"],
         "Reg. III.1.2 s.18; MPZP par.26 ust.3 (M.03 s.25); wniosek"), "PPM"),
     mk(("PPM.04", "Funkcja MDS - zaplecze (magazyn wyposażenia, sanitariaty) - parametry wg rozp. MSWiA z 9.07.2025", 1, 30, [20, 60], None, True, "PU",
@@ -500,7 +500,7 @@ wyj["meta"] = OrderedDict([
     ("konwencje", OrderedDict([
         ("pow", "m2 netto pomieszczenia wg PN-ISO 9836:2022-07 (Wyj.20 odp.73)"),
         ("szacunek", "true = powierzchnia nie podana w M.01 - wartość docelowa z zakresem (wniosek; Wyj.8 odp.33,45: brak zestawienia Organizatora)"),
-        ("kategoria_pn_iso", "PU = użytkowa; US = usługowa (techniczna); RU = ruchu"),
+        ("kategoria_pn_iso", "PU = użytkowa; US = usługowa (techniczna); RU = ruchu; PG = stanowiska garażowe (liczone osobno - nie wchodzą do PU dla wskaźnika MPZP; sposób ujęcia w F.15.C do rozstrzygnięcia)"),
         ("id", "skróty bloków wg Wyj.20 odp.73; pokoje biurowe: <BLOK>.<nr komórki z zał.1>.<typ> (Wyj.8 odp.46)"),
         ("typy_pokoi", "CZ, DYR, ZDYR, SAM, SEK, PR (24 m2/3 st.), PR32 (GW 32 m2/4 st.), OCZ (miejsce oczekiwania)"),
         ("scenariusz_kondygnacji", "N_KOND=%d (2 podziemne + parter + 9 pięter) - wpływa na liczbę PP.06, PHS.01, IT.02" % N_KOND),
@@ -603,7 +603,7 @@ wyj["parking"] = OrderedDict([
     ("rowery", "50 stanowisk na parterze, stojaki U, wjazd od podwórza (PU s.12); nie na -1 (Wyj.7 odp.32)"),
     ("hulajnogi", "brak wymogu w M.01 (luka) - zalecenie własne 10 miejsc z ładowaniem"),
     ("rampy_zjazdy", "zjazd/zjazdy z drogi publicznej do parkingu w obrębie Inwestycji (Reg. III.1.2); dojazd do terenu tylko od 3KDL/1, 4KDPL/3, 6KDB/2 (MPZP par.26 ust.3)"),
-    ("garaz_brutto_szac_m2", round(msc_min * GAR_M2_NA_MSC, -1)),
+    ("garaz_brutto_szac_m2", int(round(msc_min * GAR_M2_NA_MSC, -1))),
 ])
 wyj["strefy_dostepu"] = [
     OrderedDict([("kod", "Z0"), ("nazwa", "zewnętrzna publiczna"), ("zakres", "skwer dz. 9/2, dziedziniec/ogródek nieogrodzony dla pracowników i mieszkańców"), ("zrodlo", "Reg. III.1.2; PU s.16; Wyj.20 odp.77")]),
@@ -645,7 +645,11 @@ with open(f"{OUT}/program.yaml", "w", encoding="utf-8") as f:
     f.write("# Program użytkowy UMWD (M.01) - ekstrakcja maszynowa. Wygenerowano: _build_program.py\n")
     f.write("# Wartości 'szacunek: true' = wniosek własny (M.01 nie podaje powierzchni); źródła w polu 'zrodlo'.\n")
     yaml.add_representer(OrderedDict, lambda d, data: d.represent_mapping("tag:yaml.org,2002:map", data.items()))
-    yaml.dump(wyj, f, allow_unicode=True, sort_keys=False, width=140, default_flow_style=None)
+    def _lst(d, data):
+        flow = len(data) <= 2 and all(isinstance(x, (int, float)) for x in data)
+        return d.represent_sequence("tag:yaml.org,2002:seq", data, flow_style=flow)
+    yaml.add_representer(list, _lst)
+    yaml.dump(wyj, f, allow_unicode=True, sort_keys=False, width=140, default_flow_style=False)
 
 # ---------------------------------------------------------------------------
 # 6. CSV

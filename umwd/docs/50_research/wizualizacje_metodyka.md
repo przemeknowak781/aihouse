@@ -48,6 +48,8 @@ Zakres: jak zrobić 8+ wizualizacji (w tym 2 fotomatchingi na F.17.A/F.17.B) naj
 | 7 | hol sali Sejmiku | jw. |
 | 8 | sala Sejmiku | ≤100 osób, układ amfiteatralny z podwyższanymi rzędami, strefy: radni (36), prezydium, zarząd (5), goście, media, obsługa, **tłumacze języka migowego**; stałe stanowiska z tabletami i mikrofonami; dostępność dla OzN; publiczność z oddzielnym wejściem, może być wizualnie oddzielona; transmisja obrad (M.01, s. 5–6) |
 
+**Etap I (Opracowanie studialne, rozdz. V ust. 2 pkt 2 lit. e) [F]:** min. 3 perspektywy — nr 1 zbieżna z F.17.A „(lub wklejona na to zdjęcie)”, nr 2 zbieżna z F.17.B (w Regulaminie omyłkowo „od strony wschodniej”), **nr 3: dowolny widok z poziomu człowieka pokazujący sylwetę budynku w kontekście Mostu Grunwaldzkiego**; forma może być szkicowa. **[W]** Perspektywa nr 3 Etapu I = naturalny kandydat na hero Etapu II (np. z bulwaru po drugiej stronie Odry lub z przyczółka mostu, 28–35 mm, błękitna godzina lub jesienne popołudnie); ten sam model kamery fotomatchingu z Etapu I wykorzystać w Etapie II.
+
 Dodatkowo [F]:
 - „Dla wizualizacji … dopuszcza się dowolną technikę graficzną w tym wizualizacje komputerowe, rysunki perspektywiczne odręczne, kolaże itp., pod warunkiem zachowania czytelności i jednoznaczności dla potrzeb oceny przez Sąd”.
 - Wyjaśnienia nr 09, odp. 61: w obszarze poza „Granicą opracowania” (M.04) wizualizacje z lotu ptaka mają przedstawiać **stan obecny zgodny ze zdjęciami F.17.A i F.17.B**.
