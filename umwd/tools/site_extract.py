@@ -749,6 +749,9 @@ def buildings(em, frame):
                 if pol.contains(Point(t["pts"][0])):
                     addr = t["text"]
         street = ADDRESS_STREET.get(addr, (None, None)) if addr else (None, None)
+        if is_partial and addr:
+            street = (street[0], "niepewna: opis adresu lezy w obrysie czesciowym przy ramce (punkt adresowy poza ramka); "
+                                 "mozliwe, ze to ta sama nieruchomosc co obrys przylegly - do weryfikacji")
         res.append({"poly": pol, "label": lab, "func": func, "storeys": storeys, "addr_nr": addr,
                     "street": street[0], "addr_pewnosc": street[1], "partial": is_partial,
                     "przejscia_bramowe": [b for b in bpb if pol.buffer(0.3).contains(b)]})
@@ -1176,7 +1179,7 @@ def shared_walls(bpoly, inv, tol=0.35):
     return res
 
 
-def walls_facing(bpoly, inv, maxd=25.0):
+def walls_facing(bpoly, inv, maxd=25.0, others=()):
     """Sciany budynku zwrocone ku obszarowi inwestycji (promienie z 5 punktow sciany wzdluz normalnej zewn.,
     zasieg maxd). Zwraca odleglosc od lica sciany do granicy obszaru inwestycji (wejscie promienia)."""
     res = []
@@ -1194,7 +1197,11 @@ def walls_facing(bpoly, inv, maxd=25.0):
             ray = LineString([(m[0] + 0.05 * nx, m[1] + 0.05 * ny), (m[0] + maxd * nx, m[1] + maxd * ny)])
             x = ray.intersection(inv)
             if not x.is_empty:
-                ds.append(Point(m).distance(x))
+                dd = Point(m).distance(x)
+                seg = LineString([(m[0] + 0.05 * nx, m[1] + 0.05 * ny), (m[0] + dd * nx, m[1] + dd * ny)])
+                if any(seg.intersection(o).length > 0.3 for o in others):
+                    continue           # promien przechodzi przez inny budynek (sciana wewnetrzna / zaslonieta)
+                ds.append(dd)
         if ds:
             res.append({"od": pts_r([a], 2)[0], "do": pts_r([b], 2)[0], "dlugosc_m": r2(L),
                         "azymut_normalnej_zewn_deg": r1(azimuth(nx, ny)),
@@ -1428,7 +1435,8 @@ def build_json(P, S, extras):
                                  % (BASE_RAISE, STOREY_H, ROOF_ADD)) if st else None,
              "przejscia_bramowe_lub_nawisy": [pts_r(b.exterior.coords if b.geom_type == "Polygon" else b.coords, 2) for b in q["przejscia_bramowe"]],
              "sciany_na_granicy_obszaru_inwestycji": shared_walls(pol, inv),
-             "sciany_zwrocone_ku_obszarowi_inwestycji": walls_facing(pol, inv) if pol.distance(inv) < 25 else []}
+             "sciany_zwrocone_ku_obszarowi_inwestycji": walls_facing(pol, inv, others=[o["poly"] for o in S["buildings"] if o["poly"] is not pol])
+             if pol.distance(inv) < 25 else []}
         d["kondygnacje_nadziemne_EGiB"] = st
         if name and name in BUILDING_NOTES:
             d["inwentaryzacja"] = BUILDING_NOTES[name]
@@ -1916,6 +1924,9 @@ def make_md(P, S, J, out_md):
     w("| Sąsiad (działka) | Sąsiad (budynek) | Długość [m] | od → do | Interpretacja (wniosek) |")
     w("|---|---|---|---|---|")
     interp = {"8/8": "front ul. Mazowieckiej (dz. drogowa 8/8)", "8/6": "front ul. Mazowieckiej (dz. drogowa 8/6)",
+              "19/12": "front Wybrzeża J. Słowackiego – odcinek wsch. (dz. drogowa 19/12, użytek dr)",
+              "19/1": "naroże pn.-wsch. – Wybrzeże J. Słowackiego / przyczółek mostu (dz. drogowa 19/1, użytek dr)",
+              "16/10": "granica z dz. 16/10 – pn. ściana budynku b4 (Wybrzeże Słowackiego 9?) na granicy",
               "9/2": "granica ze skwerem dz. 9/2 → front Wybrzeża Słowackiego / przyczółek mostu",
               "10/2": "granica z dojazdem dz. 10/2", "11/3": "granica z dz. Mazowiecka 19", "12": "granica z dz. Wybrzeże Słowackiego 5",
               "20": "front Wybrzeża J. Słowackiego (wsch.)", "10/1": "granica z dz. 10/1 (pas wzdłuż Wybrzeża)",
@@ -2016,7 +2027,7 @@ def make_md(P, S, J, out_md):
     w("| Wierzchołek | e | n | H |")
     w("|---|---|---|---|")
     for i, (p, h) in enumerate(J["_extras_md"]["corner_H"]):
-        w("| %d | %.2f | %.2f | %s |" % (i, p[0], p[1], ("%.2f" % h) if h is not None else "poza NMT"))
+        w("| %d | %.2f | %.2f | %s |" % (i, p[0], p[1], (("%.2f" % h) + (" (IDW – poza TIN)" if len(p) > 2 else "")) if h is not None else "poza NMT"))
     w("")
     w("Wniosek do projektu: teren praktycznie płaski (deniwelacja w obszarze inwestycji ok. %.1f m); poziom ±0,00 parteru można przyjąć ok. %.2f–%.2f m n.p.m. (chodnik + 0,15…0,30 m) – do decyzji projektowej i weryfikacji z wymaganiami dostępności (wejścia bez schodów)." %
       (so["deniwelacja_m"] if so else float("nan"), (so["H_mediana"] + 0.15) if so else 0, (so["H_mediana"] + 0.30) if so else 0))
@@ -2142,9 +2153,17 @@ def main():
     extras["util_summary"] = {k: r1(v) for k, v in util_sum.items()}
     J = build_json(P, S, extras)
     corner_H = []
+    kg = cKDTree(T["pikiety_ground"][:, :2])
     for p in J["granice"]["obszar_inwestycji"]["pts"]:
-        h = T["f"](p[0], p[1])
-        corner_H.append((p, None if np.isnan(h) else float(h)))
+        h = float(T["f"](p[0], p[1]))
+        if np.isnan(h):   # poza TIN: IDW z 6 najblizszych pikiet terenowych (<= 10 m)
+            d, i = kg.query(p, k=6)
+            m = d < 10
+            if m.any():
+                wgt = 1 / np.maximum(d[m], 0.1) ** 2
+                h = float(np.sum(wgt * T["pikiety_ground"][i[m], 2]) / wgt.sum())
+                p = list(p) + ["IDW"]
+        corner_H.append((p, None if np.isnan(h) else h))
     shore = unary_union([LineString(g["pts"]) for g in S["situation"]["woda_linia_brzegu"]])
     J["_extras_md"] = {"corner_H": [[c[0], (r2(c[1]) if c[1] is not None else None)] for c in corner_H],
                        "maz19_front_H": extras.get("maz19_front_H"), "dist_shore": r1(inv.distance(shore))}

@@ -251,13 +251,13 @@ Kolejność CCW od wierzchołka 0; azymuty od północy siatki. Sąsiedztwo – 
 | 11/4 | – | 40.76 | (97.2, -6.6) → (95.7, 34.2) | granica z dz. 11/4 (podwórze) |
 | 10/2 | – | 21.40 | (95.7, 34.2) → (117.1, 35.4) | granica z dojazdem dz. 10/2 |
 | 10/1 | – | 12.23 | (117.1, 35.4) → (114.7, 47.4) | granica z dz. 10/1 (pas wzdłuż Wybrzeża) |
-| 19/12 | – | 27.37 | (114.7, 47.4) → (108.0, 73.9) |  |
-| 19/1 | – | 9.52 | (108.0, 73.9) → (100.6, 77.9) |  |
+| 19/12 | – | 27.37 | (114.7, 47.4) → (108.0, 73.9) | front Wybrzeża J. Słowackiego – odcinek wsch. (dz. drogowa 19/12, użytek dr) |
+| 19/1 | – | 9.52 | (108.0, 73.9) → (100.6, 77.9) | naroże pn.-wsch. – Wybrzeże J. Słowackiego / przyczółek mostu (dz. drogowa 19/1, użytek dr) |
 | 9/2 | – | 39.97 | (100.6, 77.9) → (61.8, 68.5) | granica ze skwerem dz. 9/2 → front Wybrzeża Słowackiego / przyczółek mostu |
 | 8/8 | – | 60.23 | (61.8, 68.5) → (48.8, 9.7) | front ul. Mazowieckiej (dz. drogowa 8/8) |
 | 11/3 | Mazowiecka 19 | 21.04 | (48.8, 9.7) → (69.4, 5.2) | granica z dz. Mazowiecka 19 |
 | 11/3 | – | 12.76 | (69.4, 5.2) → (69.9, -7.5) | granica z dz. Mazowiecka 19 |
-| 16/10 | Wybrzeze J. Slowackiego 9 | 27.36 | (69.9, -7.5) → (97.2, -6.6) |  |
+| 16/10 | Wybrzeze J. Slowackiego 9 | 27.36 | (69.9, -7.5) → (97.2, -6.6) | granica z dz. 16/10 – pn. ściana budynku b4 (Wybrzeże Słowackiego 9?) na granicy |
 
 ### 4.3 Ściany budynków sąsiednich na granicy obszaru inwestycji
 
@@ -278,12 +278,9 @@ Promienie z 5 punktów każdej ściany (długość ≥ 2 m) wzdłuż normalnej z
 | Wybrzeze J. Slowackiego 5 | 5 | (118.16, 29.46) → (101.93, 28.52) | 16.26 | 356.7 | 6.00–6.00 | 1.0 |
 | Mazowiecka 19 | 6 | (64.26, 6.32) → (48.84, 9.68) | 15.78 | 12.3 | 0.05–0.05 | 1.0 |
 | Mazowiecka 19 | 6 | (60.50, -7.93) → (64.09, 5.70) | 14.09 | 104.8 | 5.95–8.50 | 0.8 |
-| Mazowiecka 17 | 5 | (60.50, -7.93) → (44.64, -8.38) | 15.86 | 358.4 | 15.56–17.92 | 0.8 |
 | i1 | 1 | (98.29, -6.93) → (93.69, -7.11) | 4.61 | 357.8 | 0.42–0.42 | 0.8 |
-| t1 | 1 | (98.85, -22.49) → (94.40, -22.58) | 4.45 | 358.8 | 15.92–15.96 | 0.8 |
 | Wybrzeze J. Slowackiego 9 | 4 | (90.38, -6.78) → (75.85, -7.30) | 14.54 | 357.9 | 0.05–0.05 | 1.0 |
 | Wybrzeze J. Slowackiego 6 | 5 | (102.61, 10.72) → (103.20, -6.49) | 17.22 | 268.0 | 6.00–6.03 | 1.0 |
-| Wybrzeze J. Slowackiego 6 | 5 | (118.63, 10.92) → (102.61, 10.72) | 16.02 | 359.3 | 23.91–24.49 | 1.0 |
 
 Wniosek: **pn. ściana szczytowa Wybrzeża Słowackiego 5** (normalna ok. 357°) nie leży na granicy obszaru inwestycji – oddziela ją dz. 10/2 (dojazd, szer. ok. 5,5–6 m); okno na 1. piętrze tej ściany (M.08) wymaga sprawdzenia przesłaniania/odległości od projektowanej zabudowy na pn. od dz. 10/2. **Pn. ściana szczytowa Mazowieckiej 19** leży na granicy (zabudowa przyległa możliwa). Pn. ściana budynku b4 (Wybrzeże Słowackiego 9 – adres niepewny) również leży na pd. granicy obszaru inwestycji.
 
@@ -342,7 +339,7 @@ Obszar inwestycji: H min 118.33 m w punkcie (e, n) = (70.0, -3.0), H max 119.44 
 
 | Wierzchołek | e | n | H |
 |---|---|---|---|
-| 0 | 97.20 | -6.56 | poza NMT |
+| 0 | 97.20 | -6.56 | 118.69 (IDW – poza TIN) |
 | 1 | 95.72 | 34.17 | 118.98 |
 | 2 | 117.08 | 35.41 | 119.16 |
 | 3 | 114.74 | 47.41 | 119.13 |

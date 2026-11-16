@@ -1,5 +1,5 @@
 {
- "title": "Rules & programme team finished and verified (≈95 % exact vs sources); CONCEPT PANEL launched: 5 independent architects → 5 simulated jurors → synthesis",
+ "title": "Site geometry solved from the official DWG (libredwg-WASM, georeference error < 1 cm); façade rule-set E01–E22 derived from heritage, WT and perception research",
  "stages": [
   [
    "Organiser materials: download, unpack, text extraction (results files deliberately EXCLUDED)",
@@ -10,7 +10,7 @@
    "done"
   ],
   [
-   "Site: zoning plan ✔, heritage ✔, 1934 block overlay ✔; survey geometry, geotech, trees, neighbours ►",
+   "Site: zoning ✔, heritage ✔, 1934 overlay ✔, DWG survey → site.json ✔ (terrain model, 56 trees, neighbours' heights); geotech & dendrology ►",
    "running"
   ],
   [
@@ -18,7 +18,7 @@
    "running"
   ],
   [
-   "Research: what wins (19 competitions ✔); visual craft, façade aesthetics, Wrocław context, costs ►",
+   "Research: trends ✔, visual craft ✔, boards ✔, façade aesthetics ✔, Wrocław context & climate ✔; cost benchmarks ►",
    "running"
   ],
   [
@@ -43,20 +43,20 @@
   ]
  ],
  "notes": [
-  "Verifiers confirmed: 187 offices, 4,552 m² office area, 569 workstations; 403 staff; 8 boards; plans each floor separately; JPG/TIFF 300 dpi ≤100 MB per file; boards in Polish.",
-  "Jury personas mirror the real composition of the Court: SARP chair (overall quality), SARP referee (function & compliance), City Architect (urban fit & heritage), Marshal/Secretary (client: dignity, operation, budget), expert (zero-emission, accessibility, cost).",
-  "Scoring: 5 primary criteria equal weight + secondary cost at half weight, plus Borda count from rankings; the winner gets weaknesses removed and best ideas grafted from the others.",
-  "Drawing engine demo (right): double-loaded office wing, 1.35 m module, 3-workstation rooms, meeting room, core with stair & lifts — the same engine will produce every floor plan with room numbers/areas consistent with table F.15.B.",
-  "Fix queued: room clear depth 6.15 m so every office is ≥ 24.0 m² net (demo shows 23.2 m²)."
+  "site.json: investment area 3,728.7 m² (M.01: 3,729), zone A 1,208 m² (1,184 m² inside the plot), 800 survey points → terrain grid, Mazowiecka 19 attic +140.25 m a.s.l. (21.7 m above pavement), utilities clashing with the footprint listed.",
+  "Façade rules: segment the Mazowiecka front into 3 × 18–22 m 'plots' with one material family; main cornice +21.0 m to meet No. 19; plinth line +4.25 m; rounded corner at the bridge (R 3–8 m); vertical windows 1:1.8–2.2; reveals ≥ 0.30 m (0.40–0.60 m on the tower); WWR 35–42 %; max 2–3 materials + 1 metal; palette warm light neutrals NCS S 0505–2010 Y10–30R, granite plinth, dark matt bronze.",
+  "Module proposal 1.50 m: 24 m² room = 4.50 × 5.35 m; structural grid 7.50 m = 3 parking bays below; bay 4.50 m ≈ 2 window axes of the 19th-c. neighbours (2 × 2.23 m) — façade rhythm and plan logic in one system.",
+  "Site-plan engine renders the official survey (curbs, tram tracks, buildings with SW-45° shadows, trees, boundaries) at 1:500.",
+  "Concept panel (5 architects) still drafting — first run aborted by a schema bug (Polish letter in a field name), fixed and relaunched."
  ],
  "images": [
   {
-   "path": "umwd/raporty/img/plan_engine_demo.png",
-   "caption": "Drawing engine test — office floor 1:200 (vector SVG → PDF)"
+   "path": "umwd/raporty/img/site_kontrola.png",
+   "caption": "site.json control plot: layers, terrain model 0.25 m contours, zone A, trees"
   },
   {
-   "path": "umwd/00_materialy/podglady/F17A_small.jpg",
-   "caption": "Context: site at the south bridgehead (F.17.A)"
+   "path": "umwd/raporty/img/siteplan_engine_demo.png",
+   "caption": "Site-plan engine 1:500 — existing state with SW 45° shadows"
   }
  ]
 }
