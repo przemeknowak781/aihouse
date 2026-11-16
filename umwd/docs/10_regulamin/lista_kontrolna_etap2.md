@@ -9,7 +9,7 @@ Odnośniki [R-xxx] / [S-xx] – `rejestr_wymagan_regulamin.md`. „Wniosek” = 
 - [ ] **Ten sam numer identyfikacyjny** co w Etapie I [R-133].
 - [ ] Brak wariantów; oryginalność; anonimowość [R-099, R-127].
 - [ ] Teksty po polsku [R-005].
-- [ ] Uwzględnione wiążące wyjaśnienia (Wyj. 15–21), w szczególności: **maks. 8 plansz** [R-101, S-03], zakaz łączenia kondygnacji powtarzalnych na jednym rzucie [R-219], kody pomieszczeń [R-217], koszt nieprzekraczalny [R-222], opis A3 = 5 stron [S-04].
+- [ ] Uwzględnione wszystkie wiążące wyjaśnienia (Wyj. 1–21; wyjaśnienia z Etapu I nadal wiążą; Wyj. 15 pominięte zgodnie z zakazem Inwestora), w szczególności z Etapu II (Wyj. 16–21): **maks. 8 plansz** przy niezmienionej skali 1:200 [R-101, S-03], zakaz łączenia kondygnacji powtarzalnych na jednym rzucie [R-219], kody pomieszczeń [R-217, S-16], koszt nieprzekraczalny [R-222], opis A3 = 5 stron [S-04]. <!-- poprawione przez weryfikatora: było „Wyj. 15–21” (Wyj. 15 – zakaz; Wyj. 1–14 też wiążą) -->
 - [ ] Obowiązkowe elementy: część graficzna, część opisowa (z tabelami F.14.B, F.15.A–C), Karta F.13, makieta [R-115].
 
 ## 1. Część graficzna – plansze 100×70 cm, poziomo, białe tło, maks. 8 szt. [R-101]
@@ -58,7 +58,7 @@ Uwaga: liczba plansz na rzuty zależy od wymiarów rzutu w 1:200 i liczby kondyg
 | [ ] | Tekst: maks. 10 stron A4 lub **5 stron A3**, czcionka **min. 11 pkt** | R-116, S-04 |
 | [ ] | a) opis autorski – idea, elementy trudne do pokazania; podkreślenie ciągłości z Etapem I | R-117, R-099 |
 | [ ] | b) założenia szczegółowe: urbanistyczne i architektoniczne; funkcjonalno-użytkowe i technologiczne; dostępność; materiałowe, techniczne, technologiczne; **ochrona przeciwpożarowa**; **konstrukcja** (uwzględnić warunki gruntowe M.05); proekologia i energooszczędność (zeroemisyjność, woda szara); dostępność wewnętrzna/zewnętrzna; zagospodarowanie (powiązania z terenami publicznymi) i mała architektura; zieleń | R-117 |
-| [ ] | c) **F.15.A** Tabela programowa (z kodami grup; dopisane PHS, KW i inne potrzebne grupy) | R-118, R-217 |
+| [ ] | c) **F.15.A** Tabela programowa (z kodami grup; dopisane PHS, KW i inne potrzebne grupy; numery pomieszczeń = kod grupy + nr kolejny, identyczne z rzutami i F.15.B) | R-118, R-217, S-16 <!-- poprawione przez weryfikatora --> |
 | [ ] | d) **F.15.B** Zestawienie pomieszczeń (numery zgodne z rzutami; kondygnacje -1…n + dach) | R-118 |
 | [ ] | e) **F.15.C** Dane bilansowe – bilans terenu (Obszar inwestycji) i podstawowe parametry budynku | R-118, R-202, S-05 |
 | [ ] | **f) F.14.B – koszt realizacji i koszt usługi z danymi przedmiarowymi. BRAK = brak oceny.** Koszt realizacji ≤ 150 mln zł netto (nieprzekraczalny, wycena realna, bez zaniżania); koszt usługi ≤ 5,4% (≤ 8,1 mln zł netto) | R-119, R-049, R-051, R-222 |
@@ -83,7 +83,7 @@ Uwaga: liczba plansz na rzuty zależy od wymiarów rzutu w 1:200 i liczby kondyg
 
 | ✔ | Plik | Wymóg | Ref. |
 |---|---|---|---|
-| [ ] | Plansze P1…P8 | **TIFF lub JPG**, 100×70 cm, **300 dpi** (wniosek: 11 811 × 8 268 px, sRGB), każda w osobnym pliku. | R-129 |
+| [ ] | Plansze P1…P8 | **TIFF lub JPG**, 100×70 cm, **300 dpi** (wniosek: 11 811 × 8 268 px, sRGB), każda w osobnym pliku (Regulamin: „zaleca się”); nie PDF (por. Wyj. 14 odp. 67). <!-- poprawione przez weryfikatora --> | R-129 |
 | [ ] | Część opisowa | **Jeden PDF** ze wszystkimi elementami (tekst + tabele F.14.B, F.15.A–C). | R-130 |
 | [ ] | Tabele | **xlsx** na wzorach organizatora: F.14.B, F.15.A, F.15.B, F.15.C (wniosek: opcjonalnie F.14.A spójny z F.14.B – S-06). | R-130, S-06 |
 | [ ] | Plansze A3 | 300 dpi (wniosek: 4 961 × 3 508 px), w PDF lub osobno. | R-130 |
@@ -110,7 +110,10 @@ Uwaga: liczba plansz na rzuty zależy od wymiarów rzutu w 1:200 i liczby kondyg
 - [ ] Komplet: ≤ 8 plansz ✔; wszystkie elementy z pkt 1.1 ✔; opis ✔; F.14.B ✔ (rygor); F.15.A/B/C ✔; Karta F.13 z QES ✔; makieta ✔ [R-115, R-119].
 - [ ] Anonimowość: brak nazw, logotypów, podpisów, adresów www, kodów QR, charakterystycznych oznaczeń biura; numer tylko na pustej kartce, w Karcie i na opakowaniach [R-127, R-133, R-136].
 - [ ] Każde pomieszczenie na rzutach ma numer i powierzchnię (oraz nazwę lub legendę obok); kondygnacje powtarzalne rozrysowane osobno [R-104, R-219].
-- [ ] Program: 403 stanowiska w pokojach wg M.01 (24 m² p.u.), bez łączenia komórek; Sejmik z zapleczem na jednej kondygnacji; sale wg wyjaśnień [R-211, R-212].
+- [ ] Program: 403 stanowiska w pokojach wg M.01 (24 m² p.u.), bez łączenia komórek; Sejmik z zapleczem na jednej kondygnacji; sale wg wyjaśnień [R-211, R-212, R-225].
+- [ ] Parking podziemny przystosowany do funkcji **miejsca doraźnego schronienia (MDS)** – pokazany na rzucie i w opisie; sekcja PPM w F.15.A [R-226]. <!-- poprawione przez weryfikatora -->
+- [ ] Liczba miejsc postojowych zgodna z MPZP (i M.01); parking rowerowy **nie** na poziomie −1; główne dostawy od Wybrzeża Słowackiego [R-214]. <!-- poprawione przez weryfikatora -->
+- [ ] Części bryły w obszarze A – najniższy punkt dachu ≥ 35 m (wniosek, luka S-15) [R-207]. <!-- poprawione przez weryfikatora -->
 - [ ] MPZP i M.04: Obszar inwestycji, linie zabudowy, dominanta A 35–45 m, wysokości skrzydeł, brak nadwieszeń [R-024, R-203, R-206, R-207].
 - [ ] Sąsiedzi: nasłonecznienie i przesłanianie wykazane; okna Słowackiego 5 zachowane [R-033, R-208, R-210].
 - [ ] Koszt realny ≤ 150 mln zł netto, spójny z przedmiarem F.14.B i standardem pokazanym na wizualizacjach [R-222].

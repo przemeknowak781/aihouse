@@ -15,6 +15,7 @@ Pliki (`/home/user/aihouse/umwd/00_materialy/tekst/`):
 | 08.12.2025 (publ. TED 09.12.2025, OJ S 237/2025, nr 815277-2025) | Ogłoszenie + Regulamin pierwotny | wszyscy | — |
 | 16.12.2025 | Wyjaśnienia nr 1 (pyt. 1–3) | zainteresowani | Wnioski o dopuszczenie budynków kultury w warunkach doświadczenia |
 | 16.12.2025 | **Zmiana treści Regulaminu nr 1** | zainteresowani | art. 342 ust. 1 pkt 2 Pzp, w związku z odpowiedziami na pyt. 1–3 |
+| 29.12.2025 | Wyjaśnienia nr 2 (pyt. 4–9) | zainteresowani | Warunki udziału (doświadczenie, nadzór, kondygnacja podziemna „musi”); wnioski o zmiany odrzucone – brak zmian Regulaminu <!-- poprawione przez weryfikatora: brakujący wiersz --> |
 | 13.02.2026 | Wyjaśnienia nr 3 (pyt. 10–17) | Uczestnicy Etapu I | m.in. pyt. 11 (wersja M.01) i pyt. 14 (zakres rysunku zagospodarowania) |
 | 13.02.2026 | **Sprostowanie treści Regulaminu nr 1** | Uczestnicy Etapu I | „należyta staranność” + odpowiedzi na pyt. 11 i 14 |
 | 13.02.2026 | **Tekst jednolity Regulaminu** | Uczestnicy Etapu I | Konsolidacja Zmiany nr 1 i Sprostowania nr 1 (sprostowania oznaczone w PDF kolorem zielonym) |
@@ -82,6 +83,7 @@ Wyjaśnienia są wiążące bez zmiany Regulaminu (R.I ust.2 pkt10 lit.b, s.9; R
 | 13.02.2026 | 3 / 14 | Rysunek zagospodarowania Etapu I w granicy opracowania studialnego (→ Spr.1 pkt3) | I | R-201 |
 | 13.02.2026 | 3 / 15 | Okna dopuszczalne wzdłuż zachodniej granicy Obszaru inwestycji | I, II | R-204 |
 | 20.02.2026 | 4 / 20, 22 | Dostawy od Wybrzeża Słowackiego; dz. 10/2 – podwórko i małe dostawy; zbliżenie do granicy dz. 10/2 | I, II | R-205, R-214 |
+| 03.03.2026 | 6 / 23–27 | 2 sale spotkań po 20 os. (Przewodniczący, Wiceprzewodniczący, Kancelaria); 3 stanowiska techników; brak obowiązku miejsca postojowego dostaw na działce drogowej; archiwum Geodezji na kondygnacji działu; lokal 6-6A w Słowackiego 5 = jeden lokal | I, II | R-208, R-212–R-214 <!-- poprawione przez weryfikatora --> |
 | 06.03.2026 | 7 / 28 | Zakaz nadwieszeń poza Obszar inwestycji | I, II | R-203 |
 | 06.03.2026 | 7 / 29 | Perspektywa nr 3 „obligatoryjnie”, punkt widzenia dowolny | I | R-066 |
 | 06.03.2026 | 7 / 32 | Parking rowerowy nie na poziomie -1 | I, II | R-214 |
@@ -89,16 +91,21 @@ Wyjaśnienia są wiążące bez zmiany Regulaminu (R.I ust.2 pkt10 lit.b, s.9; R
 | 11.03.2026 | 8 / 42 | Postać fizyczna Etapu I obowiązkowa | I | R-085 |
 | 11.03.2026 | 8 / 43, 55 | Układ F.16 nieobligatoryjny | I | R-058 |
 | 11.03.2026 | 8 / 44 | Etap I: identyczne kondygnacje na jednym rzucie + schematy relacji | I | R-219 |
-| 11.03.2026 | 8 / 57, 59, 60 | Dominanta A: 35–45 m, nie musi wypełniać obszaru A; bilans na Obszarze inwestycji; nie uwzględniać dominanty B | I, II | R-202, R-207 |
+| 11.03.2026 | 8 / 57, 59, 60 | Dominanta A: 35–45 m (cyt. § 26 ust. 2 pkt 3 MPZP), „może znaleźć się we wskazanym obszarze” (wniosek: nie musi go wypełniać; kwestia niższych części w A nierozstrzygnięta – S-15); bilans na Obszarze inwestycji; nie uwzględniać dominanty B | I, II | R-202, R-207 <!-- poprawione przez weryfikatora --> |
+| 11.03.2026 | 8 / 48–51, 54 | Doprecyzowania programu (dyrekcje 3.4 i 3.5, numeracja 8.1/8.2, 6 sal narad × 30 os.) | I, II | R-212, R-225 <!-- poprawione przez weryfikatora --> |
 | 18.03.2026 | 9 / 61 | Perspektywy z lotu ptaka – stan obecny poza granicą opracowania studialnego | I, (II) | R-220 |
+| 19.03.2026 | 10 / 62 | Gabinety dyrekcji danego pionu obok siebie i w pobliżu jego komórek | I, II | R-212 <!-- poprawione przez weryfikatora --> |
 | 20.03.2026 | 11 / 63 | Nazwy i powierzchnie bloków w legendzie obok rzutu – dopuszczalne | I | R-061 |
 | 30.03.2026 | 14 / 66 | Limit 5 stron opisu nie obejmuje załączników | I | R-072 |
 | 30.03.2026 | 14 / 67 | Plansze wyłącznie TIFF/JPG (nie PDF) | I, (II) | R-086 |
-| 27.05.2026 | 20 / 73 | Kody grup pomieszczeń; KW wg PN-ISO 9836:2022-07; obliczenia wg tej normy | II | R-217 |
+| 28.04–04.05.2026 | 16 / 69; 17 / 70 | Liczba pokoi liczona per komórka; zakaz łączenia wydziałów i działów w pokoju; wydziały departamentu na 2 sąsiednich kondygnacjach przy komunikacji pionowej | II | R-211 <!-- poprawione przez weryfikatora --> |
+| 06.05.2026 | 18 / 71 | Dedykowana winda dla radnych niewymagana | II | R-212 <!-- poprawione przez weryfikatora --> |
+| 27.05.2026 | 20 / 73 | Kody grup pomieszczeń; KW wg PN-ISO 9836:2022-07; obliczenia wg tej normy | II | R-217, S-16 |
 | 27.05.2026 | 20 / 74 | Koszt 150 mln zł netto nieprzekraczalny; zakaz sztucznego zaniżania | II | R-222 |
-| 27.05.2026 | 20 / 76 | **Maks. 8 plansz** w Etapie II (zamiast 6) | II | R-101 |
+| 27.05.2026 | 20 / 76 | **Maks. 8 plansz** w Etapie II (zamiast 6); wniosek o skalę 1:250 zamiast 1:200 – odrzucony („pozostałe wymogi bez zmian”) | II | R-101 <!-- poprawione przez weryfikatora --> |
 | 27.05.2026 | 20 / 77 | Teren ogródków – nieogrodzony, dostępny, z zachowaniem drzew | II | R-215 |
 | 11.06.2026 | 21 / 79 | **Etap II: zakaz** łączenia kondygnacji powtarzalnych na jednym rzucie | II | R-219 |
+| 11.06.2026 | 21 / 83 | Minimalna liczba miejsc postojowych – zgodnie z MPZP (oraz M.01) | II | R-214 <!-- poprawione przez weryfikatora --> |
 | 11.06.2026 | 21 / 84, 85 | Wszystkie pomieszczenia Sejmiku na kondygnacji sali obrad; Kancelaria – dopuszczalnie sąsiednia kondygnacja | II | R-212 |
 | 11.06.2026 | 21 / 86 | Forma analizy przesłaniania (syntetyczna analiza graficzna) | II | R-210 |
 | 11.06.2026 | 21 / 88 | Opis Etapu II: 10 stron A4 = 5 stron A3 (zeszyt A3) | II | R-116 |

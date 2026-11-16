@@ -30,12 +30,12 @@ Sugerowany (nieobligatoryjny) układ F.16 [R-058] – poniżej. Elementy z gwiaz
 | [ ] | **Rzuty wszystkich kondygnacji** | 1:500 | Podział na bloki funkcjonalne (strefy pomieszczeń i komunikacji); nazwy bloków i ich powierzchnie (na rzucie lub w legendzie obok); identyczne kondygnacje mogą być na jednym rzucie + schemat relacji wydziałów; numeracja odnosząca się do tabeli nr 1 M.01 (zalecane). | R-061, R-218, R-219 |
 | [ ] | **Rozwinięcie elewacyjne – Wybrzeże J. Słowackiego** | 1:500 | Razem z budynkiem nr 5. | R-063 |
 | [ ] | **Rozwinięcie elewacyjne – ul. Mazowiecka** | 1:500 | Razem z budynkiem nr 19. | R-063 |
-| [ ] | **Perspektywa nr 3** | – | Dowolny widok z poziomu człowieka pokazujący sylwetę budynku w kontekście Mostu Grunwaldzkiego (punkt widzenia dowolny – np. drugi brzeg Odry, bulwar Joliot-Curie). | R-066, R-224 |
+| [ ] | **Perspektywa nr 3** | – | Dowolny widok z poziomu człowieka pokazujący sylwetę budynku w kontekście Mostu Grunwaldzkiego (punkt widzenia dowolny – np. drugi brzeg Odry, bulwar Joliot-Curie). Regulamin: „minimum 3 perspektywy” – kolejne dopuszczalne. <!-- poprawione przez weryfikatora --> | R-066, R-224 |
 | [ ] | **Schemat aksonometryczny układu funkcjonalnego** | dowolna | Strefy: wejściowa, konferencyjna, Sejmik + Kancelaria (najwyższe kondygnacje w obszarze A – zalecane), departamenty, parking podziemny. | R-068, R-030 |
 
 ### Kontrola treści plansz (merytoryczna)
 - [ ] Wejścia w poziomie chodnika, bez schodów i pochylni [R-036]; widoczne oznaczenia dostępności (np. komfortka przy wejściu głównym, toalety dostępne na każdej kondygnacji, miejsca oczekiwania na ewakuację) [R-038–R-042].
-- [ ] Dominanta w obszarze A: 35 m ≤ dach ≤ 45 m [R-029, R-207, S-10]; brak nadwieszeń poza Obszarem inwestycji [R-203].
+- [ ] Dominanta w obszarze A: 35 m ≤ dach ≤ 45 m [R-029, R-207, S-10]; części bryły w obszarze A – najniższy punkt dachu ≥ 35 m (wniosek, luka S-15); brak nadwieszeń poza Obszarem inwestycji [R-203]. <!-- poprawione przez weryfikatora -->
 - [ ] Relacja ze szczytem Wybrzeże Słowackiego 5 (okna nie do zamurowania, lokal 6-6A) [R-034, R-208].
 - [ ] Idea czytelna jako „manifest / credo projektowe” [R-070].
 - [ ] Technika dowolna, ale czytelna i jednoznaczna [R-067].
@@ -61,7 +61,7 @@ Sugerowany (nieobligatoryjny) układ F.16 [R-058] – poniżej. Elementy z gwiaz
 
 | ✔ | Plik | Wymóg | Ref. |
 |---|---|---|---|
-| [ ] | Plansza 1, Plansza 2 | **TIFF lub JPG**, 100×70 cm, **300 dpi** (wniosek: 11 811 × 8 268 px; profil sRGB), każda plansza osobno; **nie PDF**. | R-086 |
+| [ ] | Plansza 1, Plansza 2 | **TIFF lub JPG**, 100×70 cm, **300 dpi** (wniosek: 11 811 × 8 268 px; profil sRGB), każda plansza osobno (Regulamin: „zaleca się”); **nie PDF**. <!-- poprawione przez weryfikatora: osobne pliki to zalecenie, nie wymóg --> | R-086 |
 | [ ] | Część opisowa | **Jeden PDF** ze wszystkimi elementami (tekst, dane, F.14.A). | R-087 |
 | [ ] | Plansze A3 | 300 dpi (wniosek: 4 961 × 3 508 px), w PDF lub osobnymi plikami. | R-087 |
 | [ ] | Karta F.11 | PDF z QES. | R-088 |
