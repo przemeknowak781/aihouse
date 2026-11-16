@@ -80,7 +80,7 @@ Kontrole geometrii (shapely na `site.json`):
 | antresola | +28,55 | 147,85 | galeria i foyer publiczności, pomost techniczny | – |
 | dach | +35,15 / pokrycie +35,55 / attyka +36,35 | 155,65 | BIPV + zieleń ekstensywna | – |
 
-Wysokości kondygnacji: parter 4,65 m, biura 3,70 m. Strop sprężony 0,28 m z aktywacją termiczną (TABS) i podłoga podniesiona 0,25 m dają 3,15 m w świetle. Sejmik ma 12,00 m. Taka wysokość wynika z wymogu MPZP: najniższy punkt dachu w A ≥ 35 m. Przy P+5 dla dachu potrzeba ≥ 11,99 m nad poziomem +23,15. Zamiast dokładać szóste piętro biurowe (+1 146 m², ok. +10 mln zł) dajemy sali obrad 10,5 m wysokości w świetle i 10,2 m panoramy. Antresola mieści galerię publiczności, a pomost techniczny w górnej strefie korony mieści centrale wentylacyjne. Gzyms 140,15 m n.p.m. odpowiada attyce Mazowieckiej 19 (140,24) z dokładnością do 9 cm.
+Wysokości kondygnacji: parter 4,65 m, biura 3,70 m. Strop sprężony 0,28 m z aktywacją termiczną (TABS) i podłoga podniesiona 0,25 m dają 3,15 m w świetle. Sejmik ma 12,00 m. Taka wysokość wynika z wymogu MPZP: najniższy punkt pokrycia dachu w A ≥ 35 m nad terenem (teren w A do 119,42–119,44). Przy P+5 kondygnacja Sejmiku musi mieć co najmniej 11,6 m, a z zapasem 0,4 m przyjmujemy 12,0 m. Zamiast dokładać szóste piętro biurowe (+1 146 m², ok. +10 mln zł) dajemy sali obrad 10,5 m wysokości w świetle i 10,2 m panoramy. Antresola mieści galerię publiczności, a pomost techniczny w górnej strefie korony mieści centrale wentylacyjne. Gzyms 140,15 m n.p.m. odpowiada attyce Mazowieckiej 19 (140,24) z dokładnością do 9 cm.
 
 ```
 PRZEKRÓJ SCHEMATYCZNY PN.–PD. (wzdłuż osi v przy u ≈ 32, przez okno pokoju lok. 6/6A w Wybrzeżu Słowackiego 5)
@@ -534,8 +534,8 @@ Segment SE ma ścianę pd. w linii v = −9,5, wyznaczoną z warunku § 13 dla k
   * Jest jedna centrala techniczna i nie ma agregatów chłodniczych (free cooling gruntowy). BIPV jest pokryciem dachu, więc zastępuje część kosztu pokrycia.
   * Droższe części wyceniono osobno: parter 9 800 zł/m², Sejmik 12 000 zł/m².
 * **Podziemie: 5 800 zł/m², górna połowa przedziału**, bo roboty idą w wodzie gruntowej (−3,4 m): ściany szczelinowe, płyta przeciwwyporowa, archeologia, ukrycie. Koszt ogranicza zwarty kształt podziemia: tylko pod budynkiem i pasem 4 m dziedzińca, bez podziemia pod ogródkami. Odcięcie dopływu zapewnia warstwa glin zwałowych.
-* **Wielkości kontrolne:** PC nadziemna jest o 6,5 % mniejsza, a podziemna o 33 % mniejsza od założeń programu (14 000 / 5 800 m²). Każda kondygnacja biurowa wieży więcej to ok. +10 mln zł. Dlatego Sejmik leży nad P+5, a nie nad P+6.
-* **Optymalizacje rezerwowe** (łącznie ok. 2,5 mln zł):
+* **Wielkości kontrolne:** PC nadziemna jest o 6,5 % mniejsza, a podziemna o 32 % mniejsza od założeń programu (14 000 / 5 800 m²). Każda kondygnacja biurowa wieży więcej to ok. +10 mln zł. Dlatego Sejmik leży nad P+5, a nie nad P+6.
+* **Optymalizacje rezerwowe** (łącznie ok. 1,4 mln zł):
   * uproszczenie lamel panoramy (−0,4);
   * ceramika w 2 zamiast 3 odcieniach (−0,2);
   * mniejsze −2, jeśli WC nie zostaną wliczone do PU w § 13 MPZP (−5 m.p., −0,8);

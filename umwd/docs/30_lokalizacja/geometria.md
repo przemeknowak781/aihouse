@@ -3,6 +3,8 @@
 **Stan:** 2026-11-16 · **Generator:** `tools/site_extract.py` (deterministyczny; plik generowany – nie edytować ręcznie) · **Wynik:** `model/site.json`, `docs/30_lokalizacja/img/site_kontrola.png`  
 **Zasada wyłączenia:** opracowanie oparte wyłącznie na załącznikach Organizatora (M.02, M.04, M.07, M.08) – nie korzystano z żadnych informacji o pracach konkursowych.
 
+<!-- poprawione przez weryfikatora --> **Weryfikacja niezależna (2026-11-16):** sprawdzono ok. 30 pozycji wprost w źródłach – poligon obszaru inwestycji na wektorach PDF M.04 (końce 44 linii szrafury leżą ≤ 0,018 m od poligonu; środek obrysu w PDF daje 3 728,0 m²), granicę konkursową, dz. 9/2 i 10/2 na PDF M.04 (odchyłka Hausdorffa 0,02 / 0,02 / 0,14 m), położenie drzew D701, D707, D811, I888 i pikiet 449, 482, 783 na rastrze PDF M.02 400 dpi (symbole drzew i punkty z opisami rzędnych 118.85 / 118.93 / 118.43 w miejscu wskazanym przez współrzędne), M.01 s. 2 („łącznej powierzchni 3.729 m2”), M.07 s. 9–10, M.08, zbieżność i skalę (pyproj), powtarzalność generatora (wynik identyczny bajt w bajt). Geometria i georeferencja – **wiarygodne**. Poprawiono: położenie WGS84 (2.2), opis znaku przesunięcia M.04 (2.2, 10.4), liczbę drzew w ogródkach (7), opis cieku przy kwartale (9), kontrolę pikiet (2.3); dodano relację linii zabudowy z granicą obszaru inwestycji (4.5) i uwagi 10.10–10.13. Zmiany oznaczono `<!-- poprawione przez weryfikatora -->`.
+
 ![Kontrola warstw](img/site_kontrola.png)
 
 ## 1. Źródła
@@ -10,7 +12,7 @@
 | Skrót | Plik (względem `umwd/`) | Zawartość / uwagi |
 |---|---|---|
 | emapa_dwg | `00_materialy/_rozpak/5_Zalaczniki_Merytoryczne_M.01-M.14_pop.13.02.2026/M.02 MAPA DO CELÓW PROJEKTOWYCH/M.02 MAPA DO CELÓW PROJEKTOWYCH/mapa w formacie dgn dwg/mazowiecka_e-mapa.dwg` (sha256 7388854c20479ad6…) | mapa do celów projektowych 1:500 (AutoCAD 2000, 9 753 encje, ~150 warstw: EGiB, BDOT500, GESUT, nakładka MPZP); nr ZGKIKM.TM.6640.4638.2025 z 01.10.2025, protokół weryfikacji z 08.10.2025 |
-| nmt_dwg | `00_materialy/_rozpak/5_Zalaczniki_Merytoryczne_M.01-M.14_pop.13.02.2026/M.02 MAPA DO CELÓW PROJEKTOWYCH/M.02 MAPA DO CELÓW PROJEKTOWYCH/model terenu/mazowiecka_model terenu.dwg` (sha256 0e3ec6723fe09958…) | model terenu: 765 punktów + 3D polilinie (krawężniki, chodniki, jezdnie, ogrodzenia, słupki) z rzędnymi |
+| nmt_dwg | `00_materialy/_rozpak/5_Zalaczniki_Merytoryczne_M.01-M.14_pop.13.02.2026/M.02 MAPA DO CELÓW PROJEKTOWYCH/M.02 MAPA DO CELÓW PROJEKTOWYCH/model terenu/mazowiecka_model terenu.dwg` (sha256 0e3ec6723fe09958…) | model terenu: 825 encji POINT (warstwa 0: 765, zasuwy: 17, wlazy_duze_prostokatne: 14, kratki_sciekowe: 9, wlazy_okragle: 9, latarnie: 7, hydranty: 3, wlazy_male_kwadratowe: 1; poprawione przez weryfikatora – wcześniej „765 punktów”) + 3D polilinie (krawężniki, chodniki, jezdnie, ogrodzenia, słupki) z rzędnymi |
 | zielen_dwg | `00_materialy/_rozpak/5_Zalaczniki_Merytoryczne_M.01-M.14_pop.13.02.2026/M.02 MAPA DO CELÓW PROJEKTOWYCH/M.02 MAPA DO CELÓW PROJEKTOWYCH/zieleń/mazowiecka_zieleń.dwg` (sha256 3564b881d4fbae59…) | drzewa (41 liściastych, 15 iglastych) + zakrzaczenia (3D polilinie) |
 | pikiety_txt | `00_materialy/_rozpak/5_Zalaczniki_Merytoryczne_M.01-M.14_pop.13.02.2026/M.02 MAPA DO CELÓW PROJEKTOWYCH/M.02 MAPA DO CELÓW PROJEKTOWYCH/model terenu/mazowiecka_pikiety do nmt.txt` (sha256 a29e04edcd4a512e…) | 800 pikiet: nr X Y H (X=północ, Y=wschód) – podstawa NMT |
 | drzewa_txt | `00_materialy/_rozpak/5_Zalaczniki_Merytoryczne_M.01-M.14_pop.13.02.2026/M.02 MAPA DO CELÓW PROJEKTOWYCH/M.02 MAPA DO CELÓW PROJEKTOWYCH/zieleń/mazowiecka_drzewa.txt` (sha256 436bb2d73b3717bc…) | 56 punktów drzew: nr (D=liściaste, I=iglaste) X Y |
@@ -31,9 +33,9 @@ Opisy z mapy M.02 (PDF, tabliczka i legenda; odczyt wizualny renderu 250 dpi): *
 
 ### 2.2 Georeferencja
 - DWG e-mapy, modelu terenu i zieleni są zapisane **bezpośrednio w PL-2000/6** (x DWG = Y, y DWG = X); odczyt pliku txt pikiet i drzew (X, Y) daje identyczne położenia (tab. 2.3).
-- **DWG M.04 jest przesunięty** w osi Y o **ΔY = +165.149 m** (ΔX = 0.000 m) względem PL-2000/6 – ustalone z 286 wierzchołków granic działek (warstwa GESDZI, ta sama treść co e-mapa), odchyłka maks. po przesunięciu **0.000 m**. Narzędzie przelicza M.04 automatycznie. Kontrola: ramka M.04 po przesunięciu = narożniki opisane na mapie (SW Y 6433510,66 / X 5664064,48; NE Y 6433651,96 / X 5664248,09).
+- <!-- poprawione przez weryfikatora --> **DWG M.04 jest przesunięty** w osi Y: współrzędne x w DWG M.04 są o **165.149 m mniejsze** niż Y w PL-2000/6 (przeliczenie: **Y = x_DWG + 165.149 m**, X = y_DWG + 0.000 m) – ustalone z 286 wierzchołków granic działek (warstwa GESDZI, ta sama treść co e-mapa), odchyłka maks. po przesunięciu **0.000 m**. Narzędzie przelicza M.04 automatycznie. Kontrola: ramka M.04 po przesunięciu = narożniki opisane na mapie (SW Y 6433510,66 / X 5664064,48; NE Y 6433651,96 / X 5664248,09).
 - Układ lokalny: **e = Y − 6 433 500,00; n = X − 5 664 100,00** [m]; ramka mapy: e 10.66…151.96, n -35.52…148.09.
-- Położenie (środek działki, WGS84): φ = 51.10915°, λ = 17.05158°; **zbieżność południków γ = -0.738°** (pyproj, EPSG:2177) – oś *n* jest obrócona względem północy geograficznej; do analiz nasłonecznienia azymut geograficzny Słońca należy przeliczyć na azymut siatki (wniosek: różnica ok. 0,75° – istotna tylko dla precyzyjnych analiz cienia). Skala odwzorowania m = 0.999977 (zniekształcenie długości ok. 2 mm/100 m – pomijalne).
+- <!-- poprawione przez weryfikatora --> Położenie (centroid obszaru inwestycji, e = 81.96, n = 36.89; WGS84): φ = 51.10840°, λ = 17.05155° (wcześniej podano φ = 51.10915°, λ = 17.05158° – punkt e 85, n 120 przy przyczółku mostu, ok. 83 m na pn. od środka działki); **zbieżność południków γ = -0.738°** (pyproj, EPSG:2177; kontrola wzorem γ ≈ (λ − 18°)·sin φ = −0,738°) – oś *n* (północ siatki) jest obrócona względem północy geograficznej; azymut geograficzny = azymut siatki + γ (tj. azymut siatki = azymut geogr. + 0,738°). Do analiz nasłonecznienia azymut geograficzny Słońca należy przeliczyć na azymut siatki (wniosek: różnica ok. 0,75° – istotna tylko dla precyzyjnych analiz cienia). Skala odwzorowania m = 0.999977 (zniekształcenie długości ok. 2 mm/100 m – pomijalne).
 
 ### 2.3 Punkty kontrolne i błędy
 
@@ -41,7 +43,8 @@ Opisy z mapy M.02 (PDF, tabliczka i legenda; odczyt wizualny renderu 250 dpi): *
 |---|---|---|
 | Drzewa: `drzewa.txt` vs DWG zieleni (POINT) | 56 / 56 | odchyłka maks. 0.006 m |
 | Drzewa: `drzewa.txt` vs symbole drzew e-mapy (GSPRD*), przykłady: D701, D702, D774, D775, I773 | 5 | odchyłki 0.04, 0.02, 0.06, 0.03, 0.01 m |
-| Pikiety: DWG modelu terenu vs `pikiety do nmt.txt` | 765 | 748 zgodnych w XY < 2 cm, maks. ΔH 0.040 m; punkty DWG bez odpowiednika w txt: 17 (pomijane) |
+| Pikiety: DWG modelu terenu (warstwa 0) vs `pikiety do nmt.txt` | 765 | 748 zgodnych w XY < 2 cm, maks. ΔH 0.040 m; punkty DWG bez odpowiednika w txt: 17 (pomijane) |
+| <!-- poprawione przez weryfikatora --> Pikiety: DWG modelu terenu (wszystkie warstwy POINT) vs `pikiety do nmt.txt` | 825 | 800 zgodnych w XY < 2 cm, maks. ΔH 0.040 m; pikiet txt bez odpowiednika w DWG: **0** (wszystkie 800 pikiet potwierdzone; 52 z nich leży na warstwach uzbrojenia – włazy, zasuwy, kratki, hydranty – tj. rzędne pokryw, nie gruntu) |
 | Rzędne pomiaru w e-mapie (warstwa `txt`) vs pikiety | 65 | odl. XY maks. 1.358 m, ΔH maks. 0.050 m |
 | Urzędowe punkty wysokościowe e-mapy GSPWPS vs TIN z pikiet (niezależny pomiar) | 5 | śr. +0.052 m, σ 0.055 m, maks. abs(ΔH) 0.159 m |
 | Urzędowe punkty wysokościowe e-mapy GSPWPN vs TIN z pikiet (niezależny pomiar) | 11 | śr. +0.039 m, σ 0.358 m, maks. abs(ΔH) 0.877 m |
@@ -52,6 +55,8 @@ Opisy z mapy M.02 (PDF, tabliczka i legenda; odczyt wizualny renderu 250 dpi): *
 | Blok vs polilinia granicy konkursowej w DWG M.04 | – | różnica symetryczna 0.000 m² |
 
 Uwaga do kontroli PDF: granice obszaru inwestycji i opracowania konkursowego są w PDF narysowane jako polilinie o szerokości (dwa kontury po obu stronach osi, ±0,2–0,25 m) – o zgodności świadczy mediana odległości ze znakiem ≈ 0; teren użyczony (linia cienka) zgadza się z DWG na poziomie 1 cm. Punkty kontrolne georeferencji: ramka (4 narożniki z opisami współrzędnych), drzewa (txt ↔ DWG zieleni ↔ e-mapa), pikiety (txt ↔ DWG modelu terenu ↔ rzędne w e-mapie), niezależne punkty wysokościowe e-mapy ↔ TIN.
+
+<!-- poprawione przez weryfikatora --> Uwaga do punktów GSPWPN: duże σ i maks. |ΔH| nie wynikają z błędnego parowania opisów (najbliższy symbol 0,1–1,2 m, drugi ≥ 5,8 m), lecz z położenia: odchyłki +0,88 / +0,57 m – na skarpie dojazdu do mostu (e≈96, n≈104 i e≈77, n≈108), −0,52 m – poza obszarem konkursu (e≈18, n≈28); w obszarze inwestycji i na granicy konkursowej |ΔH| ≤ 0,10 m. Promień parowania 2,0 m pomija 2 opisy GSPWPN w zasięgu NMT („119.2” przy (77,1; 58,4) – opis 2,42 m od symbolu, ΔH = −0,10 m; „118.5” przy (30,5; 15,6) – 2,27 m, ΔH = −0,08 m) – bez wpływu na wnioski.
 
 **Ocena dokładności (wniosek):** treść EGiB/BDOT500/GESUT i pomiar uzupełniający – dokładność mapy zasadniczej 1:500 (rzędu ±0,1 m dla szczegółów I grupy); granice konkursowe M.04 – identyczne z DWG po przesunięciu (błąd < 1 cm); **linie MPZP (linie zabudowy, wydzielenie A, linie rozgraniczające) – wrysowane z rastra SIP 1:1000 – dokładność ok. ±0,3–0,5 m**; uzbrojenie – wg GESUT, bez gwarancji kompletności (zastrzeżenie na mapie). NMT – interpolacja liniowa TIN; w obrębie obszaru inwestycji gęstość ok. 1 pikieta / 10 m².
 
@@ -284,6 +289,30 @@ Promienie z 5 punktów każdej ściany (długość ≥ 2 m) wzdłuż normalnej z
 
 Wniosek: **pn. ściana szczytowa Wybrzeża Słowackiego 5** (normalna ok. 357°) nie leży na granicy obszaru inwestycji – oddziela ją dz. 10/2 (dojazd, szer. ok. 5,5–6 m); okno na 1. piętrze tej ściany (M.08) wymaga sprawdzenia przesłaniania/odległości od projektowanej zabudowy na pn. od dz. 10/2. **Pn. ściana szczytowa Mazowieckiej 19** leży na granicy (zabudowa przyległa możliwa). Pn. ściana budynku b4 (Wybrzeże Słowackiego 9 – adres niepewny) również leży na pd. granicy obszaru inwestycji.
 
+### 4.5 Nieprzekraczalne linie zabudowy MPZP a granica obszaru inwestycji <!-- poprawione przez weryfikatora (sekcja dodana) -->
+
+Odległość krawędzi obszaru inwestycji (numeracja jak w 4.2) od najbliższej nieprzekraczalnej linii zabudowy z nakładki MPZP (`Warstwa 61`), próbkowanie co 0,25 m; tolerancja „na linii” 0.10 m.
+
+| # | Długość [m] | Odl. do linii zabudowy min–max [m] | Relacja |
+|---|---|---|---|
+| 0 | 40.76 | 21.20–31.34 | brak linii zabudowy wzdłuż krawędzi (linia styka się co najwyżej w narożu) |
+| 1 | 21.40 | 0.05–21.20 | brak linii zabudowy wzdłuż krawędzi (linia styka się co najwyżej w narożu) |
+| 2 | 12.23 | 0.00–0.05 | na linii zabudowy |
+| 3 | 12.05 | 0.00–0.04 | na linii zabudowy |
+| 4 | 7.95 | 0.00–0.02 | na linii zabudowy |
+| 5 | 7.37 | 0.00–0.04 | na linii zabudowy |
+| 6 | 2.46 | 0.04–2.41 | odsunięta od linii zabudowy o ≤ 2.4 m (wcięcie w narożu) |
+| 7 | 7.06 | 0.00–3.65 | odsunięta od linii zabudowy o ≤ 3.6 m (wcięcie w narożu) |
+| 8 | 39.97 | 0.00–0.00 | na linii zabudowy |
+| 9 | 60.23 | 0.00–28.18 | brak linii zabudowy wzdłuż krawędzi (linia styka się co najwyżej w narożu) |
+| 10 | 21.04 | 0.00–21.04 | brak linii zabudowy wzdłuż krawędzi (linia styka się co najwyżej w narożu) |
+| 11 | 12.76 | 21.04–24.38 | brak linii zabudowy wzdłuż krawędzi (linia styka się co najwyżej w narożu) |
+| 12 | 27.36 | 24.38–40.00 | brak linii zabudowy wzdłuż krawędzi (linia styka się co najwyżej w narożu) |
+
+Wnioski (pomiar własny weryfikatora): (1) krawędzie pn. (ze skwerem dz. 9/2 / 1KDG) i wsch. (front Wybrzeża J. Słowackiego) – łącznie **79.6 m** obwodu – leżą **na** nieprzekraczalnej linii zabudowy (odchyłki ≤ 0,05 m, tj. znacznie poniżej nominalnej dokładności nakładki ±0,3–0,5 m – wniosek: granice działek wydzielono wzdłuż linii planu, więc na tych odcinkach granica działki = linia zabudowy; ewentualne wysunięcia elementów elewacji poza tę linię (dopuszczalne przekroczenia wg MPZP – patrz `mpzp.md`) oznaczałyby jednocześnie wyjście poza działkę, nad teren drogowy lub skwer – wniosek); (2) wcięcie granicy w narożu pn.-wsch. (przyczółek mostu, dz. 19/1): krawędzie 6–7 (dł. 9.52 m): granica odsunięta od linii o maks. **3.71 m** (w (103.80, 74.85)), wierzchołek linii zabudowy (106.34, 79.31) leży **4.97 m** poza obszarem inwestycji – zabudowę ogranicza tu granica działki, nie linia planu; (3) wzdłuż ul. Mazowieckiej (kraw. 9) oraz od dz. 10/2, 11/3, 11/4 i 16/10 **brak linii zabudowy** – granicą zabudowy jest granica obszaru inwestycji (zach. linia zabudowy biegnie po drugiej stronie obecnej jezdni Mazowieckiej, 19.8–37.3 m od granicy – „wypustka” terenu 2MW-U/5, `mpzp.md` K-01); (4) linia zabudowy przed frontem Mazowieckiej 19 (dł. 18.73 m) dochodzi do wierzchołka 10 i jest niemal współliniowa z kraw. 9 (różnica kierunków ok. 0,75°) – kontynuacja pierzei możliwa w linii frontu kamienicy.
+
+Punkt adresowy EGiB **„21-29”** (e 57.48, n 33.73) leży w obszarze inwestycji; orientacja opisu (78.3°) jak opisów „19” i „17” przy ul. Mazowieckiej – wniosek: adres nieruchomości to prawdopodobnie **ul. Mazowiecka 21-29** (do potwierdzenia w EGiB; nie wynika z Regulaminu).
+
 ## 5. Budynki istniejące (zasięg mapy)
 
 | Budynek | Etykieta | Funkcja (kod EGiB) | Kondygn. | Pole zab. [m²] | Teren wokół H śr. | Wysokość [m] | Góra ≈ H | Metoda / uwagi |
@@ -302,7 +331,9 @@ Wniosek: **pn. ściana szczytowa Wybrzeża Słowackiego 5** (normalna ok. 357°)
 
 **Mazowiecka 19** (M.07, s. 9–10): kamienica z 1880 r. na dz. 11/3; 6 kondygnacji nadziemnych (w tym poddasze użytkowe), 1 podziemna; pow. zabudowy wg inwentaryzacji **259,00 m²** (z mapy: 258.4 m² – zgodność 99.7%); wysokość „ok. 20 m” (opis). **Sprzeczność:** etykieta EGiB „m5” (5 kondygnacji) vs inwentaryzacja – 6 kondygnacji nadziemnych (różnica = poddasze użytkowe; przyjąć 6 w modelu). Przekrój A-A: ±0,00 = parter (wejście od Mazowieckiej), ul. Mazowiecka −0,73, podwórze −1,15, spoczniki −0,85 / +1,78 / +5,51 / +9,28 / +13,05 / +16,79, poddasze +18,30; dach płaski kryty papą (spadek ok. 5%), murek attykowy, attyka ok. **+21,0 m** wzgl. ±0,00 (odczyt graficzny z rysunku, ±0,3 m – wniosek). Przyjęto: chodnik przed frontem H = 118.51 → ±0,00 ≈ 119.24 m n.p.m., attyka ≈ **140.24 m n.p.m.** (do weryfikacji pomiarem). Okna w północnej ścianie szczytowej – do zamurowania w ramach inwestycji towarzyszącej (M.07).
 
-**Wybrzeże J. Słowackiego 5** (M.08): okno w ścianie szczytowej lokalu na kondygnacji 2 (1. piętro) **nie jest przeznaczone do zamurowania – należy uwzględnić jego istnienie w projekcie** (przesłanianie/nasłonecznienie, odległości wg WT). Wysokość budynku nie wynika z dostarczonych materiałów (rzuty – skany) – w `site.json` szacunek z liczby kondygnacji (5 → ok. 21.0 m), do weryfikacji na zdjęciach M.09/M.10.
+**Wybrzeże J. Słowackiego 5** (M.08): okno w ścianie szczytowej lokalu na kondygnacji 2 (1. piętro) **nie jest <!-- poprawione przez weryfikatora -->*aktualnie* przeznaczone do zamurowania – należy uwzględnić jego istnienie w projekcie** (M.08: „nie jest aktualnie przeznaczone do zamurowania. Należy uwzględnić jego istnienie w projekcie budynku UMWD”; przesłanianie/nasłonecznienie, odległości wg WT). Wysokość budynku nie wynika z dostarczonych materiałów (rzuty – skany) – w `site.json` szacunek z liczby kondygnacji (5 → ok. 21.0 m), do weryfikacji na zdjęciach M.09/M.10.
+
+<!-- poprawione przez weryfikatora --> **Spójność wysokości sąsiadów:** (a) M.07 s. 9 podaje „wysokość budynku: ok. 20 m”, a odczyt przekroju A-A (s. 10; weryfikator: murek attykowy od strony ulicy ok. +21,0 m, od podwórza ok. +20,4…20,7 m – dach spada ok. 5% ku podwórzu) daje ok. 21,7 m nad chodnikiem (−0,73) – opis „ok. 20 m” jest zaokrągleniem lub odnosi się do innej podstawy (niejasność źródła); (b) późniejsze szczegółowe opracowanie sąsiadów `model/sasiedzi.json` przyjmuje dla Mazowieckiej 19 górę attyki **139,9 m n.p.m.** (zakres 139,5–140,25; z elewacji M.07 s. 12 i przekroju), a dla Wybrzeża Słowackiego 5 ok. **139,5 m n.p.m.** (20,5 m; zakres 19,8–23,0 m) – wartości w tabeli powyżej (140,2 / 140,0) mieszczą się w tych zakresach, ale są o 0,3–0,5 m wyższe. Do analiz przesłaniania/nasłonecznienia stosować jedną, wspólną wartość (zalecenie: obwiednia górna zakresu dla cienia rzucanego przez sąsiadów, dolna – dla oceny przesłaniania ich okien; wniosek).
 
 ## 6. Teren (NMT) – rzędne i spadki
 
@@ -334,6 +365,7 @@ Pozostałe duże różnice lokalne (np. pikiety 721/722/221 przy schodach i skar
 | dz. 10/2 (dojazd) | 128.9 | 8 | 118.92 | 119.25 | 119.09 | 119.08 | 0.33 | 1.76% | 216 | 2.3 / 5.6 / 18.8 |
 
 Obszar inwestycji: H min 118.33 m w punkcie (e, n) = (70.0, -3.0), H max 119.44 m w (82.5, 70.5). Lokalne maksima spadków TIN wynikają z krawężników, obrzeży i nasypów ogródków (skoki rzędu 0,1–0,3 m na krótkich odcinkach) – nie są spadkiem terenu (wniosek).
+<!-- poprawione przez weryfikatora --> Uwaga: kolumny H min/max/śr./med. tabeli są liczone z siatki próbkowania TIN co 0,5 m (nie z pikiet). Skrajne pikiety terenowe w obszarze inwestycji: min **118.32** (nr 218, e 66.34, n 9.02 – przy murze podwórza Mazowieckiej 19), max **119.44** (nr 287, e 82.40, n 70.73).
 
 **Rzędne w narożnikach obszaru inwestycji** (TIN):
 
@@ -357,7 +389,7 @@ Wniosek do projektu: teren praktycznie płaski (deniwelacja w obszarze inwestycj
 
 ## 7. Zieleń
 
-Drzewa z pomiaru (`drzewa.txt`): 56 punktów, 52 unikalnych numerów (numery z dwoma punktami – drzewa wielopniowe lub podwójny pomiar: D702, D774, D775, I773); dodatkowo 21 drzew z e-mapy bez numeru (poza zasięgiem pomiaru szczegółowego). W obszarze inwestycji: **46** drzew, w tym w ogródkach przydomowych: **33**. Gatunki, obwody, stan i korony – w operacie dendrologicznym M.06 (inna numeracja: do sparowania po położeniu – etap późniejszy).
+Drzewa z pomiaru (`drzewa.txt`): 56 punktów, 52 unikalnych numerów (numery z dwoma punktami – drzewa wielopniowe lub podwójny pomiar: D702, D774, D775, I773); dodatkowo 21 drzew z e-mapy bez numeru (poza zasięgiem pomiaru szczegółowego). <!-- poprawione przez weryfikatora --> W obszarze inwestycji: **46 punktów drzew = 44 numerów** (dwupunktowe: D702, I773), w tym w ogródkach przydomowych w obszarze inwestycji: **29**; dalsze **4** drzewa (D865, D866, I863, I864) stoją w części ogródków leżącej **poza** obszarem inwestycji (dz. 11/3, podwórze Mazowieckiej 19) – łącznie w ogródkach 33 (wcześniej błędnie: „w tym w ogródkach przydomowych: 33”). Gatunki, obwody, stan i korony – w operacie dendrologicznym M.06 (inna numeracja: do sparowania po położeniu – etap późniejszy).
 
 ## 8. Uzbrojenie terenu – kolizje z obszarem inwestycji
 
@@ -383,19 +415,23 @@ Uwaga: etykiety przypisano do najbliższej linii w promieniu 3 m (możliwe pojed
 
 Oś mostu (przybliżenie – kierunek osi torów tramwajowych w pn.-wsch. narożniku mapy): azymut siatki **70.4°**, punkt (e, n) = (106.2, 141.3); przecięcie z linią brzegu: (100.4, 139.2). Mury przyczółka (GSSZMO): 2 polilinie. Most leży w większości poza ramką mapy – geometria orientacyjna.
 
-Linia brzegu (GSSWWP): Odra – od pn. ramki (e≈97) wzdłuż wsch. strony Wybrzeża; ujście Oławy na wsch. od kwartału. Odległość obszaru inwestycji od linii brzegu: **14.9 m** (minimum, wniosek z geometrii).
+<!-- poprawione przez weryfikatora --> Linia brzegu (GSSWWP): opisy e-mapy – „rz. Oława” (e 142, n -34); „rz. Oława” (e 131, n 66); „rz. Odra” (e 112, n 128). Woda wzdłuż wsch. strony Wybrzeża J. Słowackiego **na wysokości kwartału jest opisana jako „rz. Oława”** (dz. 20, 21 – Wp), „rz. Odra” – na pn., przy Moście Grunwaldzkim; ukośna linia brzegu od przyczółka mostu na pd.-wsch. wyznacza ujście Oławy do Odry na pn.-wsch. od kwartału (wcześniej: „Odra – wzdłuż wsch. strony Wybrzeża; ujście Oławy na wsch. od kwartału” – niezgodne z opisami mapy). Odległość obszaru inwestycji od linii brzegu: **14.9 m** (minimum, wniosek z geometrii).
 
 ## 10. Sprzeczności, niejasności, ograniczenia
 
 1. **Nazwa warstwy vs legenda M.04:** warstwa `__Obszar możliwej zabudowy` jest w legendzie PDF opisana jako „Obszar inwestycji”. Geometria = suma działek inwestycyjnych (pole 3728.7 m² vs M.01 3 729 m²) – przyjęto „obszar inwestycji”.
 2. **Wydzielenie A – nazewnictwo:** legenda e-mapy M.02 opisuje różową szrafurę jako „strefa oddziaływania linii zabudowy”, M.04 – jako „Wydzielenie wewn. A zgodnie z MPZP”; plan: „obszar podwyższonej zabudowy oznaczony symbolem A” (patrz `mpzp.md`). Geometria identyczna.
 3. **Dokładność linii MPZP**: wrysowane z rastra (opis na mapie) – nie należy ich traktować jako geodezyjnie wyznaczonych; zalecany zapas projektowy ≥0,3–0,5 m od linii zabudowy i granicy A (wniosek).
-4. **DWG M.04 przesunięty** o ΔY = 165.149 m – użycie DWG M.04 „wprost” (bez przeliczenia) w modelu dałoby błąd 165 m w osi wschód–zachód.
+4. <!-- poprawione przez weryfikatora --> **DWG M.04 przesunięty** o −165.149 m w osi Y (x_DWG = Y − 165.149 m; poprawka **+165.149 m**) – użycie DWG M.04 „wprost” (bez przeliczenia) w modelu dałoby błąd 165 m w osi wschód–zachód.
 5. **Pola działek** – pola geometryczne z mapy, nie z rejestru EGiB (różnice rzędu dziesiątych m² możliwe). Działki przy ramce są przycięte.
 6. **Wysokości budynków** (poza Mazowiecką 19) – szacunkowe, z liczby kondygnacji; dla analiz przesłaniania należy je zweryfikować (zdjęcia 360° M.09, drona M.10, wizja lokalna).
 7. **DGN V8** – nieodczytany (brak sterownika); treść zdublowana w DWG.
 8. **Atrybuty A/B w etykietach przewodów** – znaczenie nieustalone (prawdopodobnie źródło/dokładność położenia wg instrukcji ZGKiKM) – do weryfikacji u gestorów/ZGKiKM.
 9. **Most** – oś przybliżona (poza zasięgiem mapy); do wizualizacji należy uzupełnić geometrię mostu z innych źródeł (zdjęcia M.09/M.10, rysunki historyczne).
+10. <!-- poprawione przez weryfikatora --> **Tabliczka M.02** wymienia tylko „Działki: 9/1” i „Działki: 10/3” (obręb Południe 0022 AM2), choć obszar inwestycji obejmuje też dz. 11/6 i 19/11 (treść mapy pokrywa cały obszar – bez wpływu na geometrię; przy projekcie budowlanym potrzebna mapa do celów projektowych obejmująca wszystkie 4 działki – wniosek).
+11. <!-- poprawione przez weryfikatora --> **Służebności gruntowe:** M.02, pkt 4 opisu: „Informacje o służebnościach gruntowych mających wpływ na zagospodarowanie gruntów, zlokalizowanych w granicach projektowanej inwestycji: nie badano” – istotne dla dojazdu przez dz. 10/2 do wnętrza podwórzowego i dla sieci przecinających obszar (tab. 8); do wyjaśnienia w księgach wieczystych (ryzyko – wniosek).
+12. <!-- poprawione przez weryfikatora --> **Wysokości Mazowieckiej 19 i Wybrzeża Słowackiego 5** – rozbieżność 0,3–0,5 m między `site.json` (140,2 / 140,0 m n.p.m.) a `model/sasiedzi.json` (139,9 / 139,5 m n.p.m.); M.07: opis „ok. 20 m” vs przekrój ok. 21,7 m nad chodnikiem (rozdz. 5). Ujednolicić przed analizami przesłaniania.
+13. <!-- poprawione przez weryfikatora --> **Linie zabudowy vs granice działek** – nakładka MPZP ma nominalną dokładność ±0,3–0,5 m (pkt 3), lecz na pn. i wsch. krawędzi pokrywa się z granicą działek do ≤ 0,05 m (4.5); rozstrzygające dla projektu są granice działek (obszar inwestycji M.04), a zapas z pkt 3 dotyczy przede wszystkim granicy wydzielenia A (wniosek).
 
 ## 11. Struktura `model/site.json` (skrót)
 

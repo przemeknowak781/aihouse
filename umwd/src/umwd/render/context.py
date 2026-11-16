@@ -551,12 +551,13 @@ class Materialy:
         if jes:   # opadłe liście – rozproszone plamy
             n3 = nb.n('ShaderNodeTexNoise', Scale=0.9, Detail=6.0)
             nb.l(uv, n3.inputs['Vector'])
-            v = nb.n('ShaderNodeTexVoronoi', Scale=22.0)
+            v = nb.n('ShaderNodeTexVoronoi', Scale=55.0)
             nb.l(uv, v.inputs['Vector'])
-            f = nb.math('MULTIPLY', nb.math('GREATER_THAN', n3.outputs['Fac'], 0.6),
-                        nb.math('GREATER_THAN', v.outputs['Distance'], 0.35))
-            leaf = self._ramp(nb, v.outputs['Distance'], (0.30, 0.12, 0.02), (0.36, 0.25, 0.05))
-            col = nb.mix(nb.math('MULTIPLY', f, 0.6), col, leaf)
+            f = nb.math('MULTIPLY', nb.math('MULTIPLY', nb.math('SUBTRACT', n3.outputs['Fac'], 0.45), 3.0),
+                        nb.math('LESS_THAN', v.outputs['Distance'], 0.22))
+            f = nb.math('MINIMUM', nb.math('MAXIMUM', f, 0.0), 1.0)
+            leaf = self._ramp(nb, v.outputs['Distance'], (0.28, 0.10, 0.02), (0.33, 0.22, 0.05))
+            col = nb.mix(nb.math('MULTIPLY', f, 0.45), col, leaf)
         nf = nb.n('ShaderNodeTexNoise', Scale=220.0, Detail=2.0)
         nb.l(uv, nf.inputs['Vector'])
         nv = nb.n('ShaderNodeTexVoronoi', Scale=60.0)
@@ -2048,7 +2049,7 @@ def zbuduj_ulice(ctx):
         for d in np.arange(0.0, L.length + 0.01, 1.4):
             p = L.interpolate(d)
             z = ctx.teren.z1(p.x, p.y) + 0.06
-            g.belka((p.x, p.y, z - 0.2), (p.x, p.y, z + 0.9), 0.1, 0.1, 'stal_ciemna')
+            g.belka((p.x, p.y, z - 0.2), (p.x, p.y, z + 0.85), 0.08, 0.08, 'stal_ciemna')
             ns += 1
     # ogrodzenia (siatka na słupkach 1,5 m)
     for o in U['ogrodzenia']:

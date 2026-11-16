@@ -1401,6 +1401,9 @@ def building_line_relation(pts, lines, tol=0.10, near=10.0, max_run=30.0):
             i = j
         else:
             i += 1
+    for c in cuts:
+        for r in c["krawedzie"]:
+            edges[r]["status"] = "odsunieta od linii zabudowy o <= %.1f m (wciecie w narozu)" % edges[r]["odl_do_linii_max_m"]
     per_line = []
     for l in lines:
         dv = [invp.exterior.distance(Point(c)) for c in l.coords]
@@ -2125,8 +2128,13 @@ def make_md(P, S, J, out_md):
         w("")
         w("| # | Długość [m] | Odl. do linii zabudowy min–max [m] | Relacja |")
         w("|---|---|---|---|")
+        pl_ = [("wzdluz", "wzdłuż"), ("krawedzi", "krawędzi"), ("styka sie", "styka się"), ("co najwyzej", "co najwyżej"), ("narozu", "narożu"),
+               ("czesciowo", "częściowo"), ("odsunieta", "odsunięta"), ("wciecie", "wcięcie"), ("<=", "≤")]
         for x in rel["krawedzie"]:
-            w("| %d | %.2f | %.2f–%.2f | %s |" % (x["i"], x["dlugosc_m"], x["odl_do_linii_min_m"], x["odl_do_linii_max_m"], x["status"]))
+            st_ = x["status"]
+            for a_, b_ in pl_:
+                st_ = st_.replace(a_, b_)
+            w("| %d | %.2f | %.2f–%.2f | %s |" % (x["i"], x["dlugosc_m"], x["odl_do_linii_min_m"], x["odl_do_linii_max_m"], st_))
         w("")
         cuts = rel.get("wciecia_granicy") or []
         ctxt = "; ".join("krawędzie %s (dł. %.2f m): granica odsunięta od linii o maks. **%.2f m** (w (%.2f, %.2f)), wierzchołek linii zabudowy (%.2f, %.2f) leży **%.2f m** poza obszarem inwestycji" %
@@ -2140,12 +2148,14 @@ def make_md(P, S, J, out_md):
         g10_ = LineString([(p10_[0] - 10 * (p11_[0] - p10_[0]), p10_[1] - 10 * (p11_[1] - p10_[1])), p11_])
         wmin_, wmax_ = float("nan"), float("nan")
         for l_ in J["mpzp"]["nieprzekraczalne_linie_zabudowy"]:
-            wv_ = [e9_.distance(Point(c)) for c in l_["pts"] if g10_.distance(Point(c)) > 0.5]
+            rem_ = LineString(l_["pts"]).difference(g10_.buffer(0.5))
+            cs_ = [c for g_ in getattr(rem_, "geoms", [rem_]) for c in g_.coords] if not rem_.is_empty else []
+            wv_ = [e9_.distance(Point(c)) for c in cs_]
             if wv_ and min(wv_) > 5:
                 wmin_, wmax_ = min(wv_), max(wv_)
         w("Wnioski (pomiar własny weryfikatora): (1) krawędzie pn. (ze skwerem dz. 9/2 / 1KDG) i wsch. (front Wybrzeża J. Słowackiego) – łącznie **%.1f m** obwodu – leżą **na** nieprzekraczalnej linii zabudowy "
           "(odchyłki ≤ 0,05 m, tj. znacznie poniżej nominalnej dokładności nakładki ±0,3–0,5 m – wniosek: granice działek wydzielono wzdłuż linii planu, więc na tych odcinkach granica działki = linia zabudowy; "
-          "wykusze/wysunięcia elewacji poza tę linię nie są możliwe bez analizy §-ów MPZP o dopuszczalnych przekroczeniach – patrz `mpzp.md`); "
+          "ewentualne wysunięcia elementów elewacji poza tę linię (dopuszczalne przekroczenia wg MPZP – patrz `mpzp.md`) oznaczałyby jednocześnie wyjście poza działkę, nad teren drogowy lub skwer – wniosek); "
           "(2) wcięcie granicy w narożu pn.-wsch. (przyczółek mostu, dz. 19/1): %s – zabudowę ogranicza tu granica działki, nie linia planu; "
           "(3) wzdłuż ul. Mazowieckiej (kraw. 9) oraz od dz. 10/2, 11/3, 11/4 i 16/10 **brak linii zabudowy** – granicą zabudowy jest granica obszaru inwestycji (zach. linia zabudowy biegnie po drugiej stronie obecnej jezdni Mazowieckiej, %.1f–%.1f m od granicy – „wypustka” terenu 2MW-U/5, `mpzp.md` K-01); "
           "(4) linia zabudowy przed frontem Mazowieckiej 19 (dł. %.2f m) dochodzi do wierzchołka 10 i jest niemal współliniowa z kraw. 9 (różnica kierunków ok. 0,75°) – kontynuacja pierzei możliwa w linii frontu kamienicy." %
@@ -2192,8 +2202,15 @@ def make_md(P, S, J, out_md):
           "Przyjęto: chodnik przed frontem H = %s → ±0,00 ≈ %s m n.p.m., attyka ≈ **%s m n.p.m.** (do weryfikacji pomiarem). Okna w północnej ścianie szczytowej – do zamurowania w ramach inwestycji towarzyszącej (M.07)." %
           (b["pole_zabudowy_geom_m2"], 100 * b["pole_zabudowy_geom_m2"] / 259.0, J["_extras_md"].get("maz19_front_H"), b.get("poziom_0_00_szac_H"), b.get("attyka_szac_H")))
         w("")
-    w("**Wybrzeże J. Słowackiego 5** (M.08): okno w ścianie szczytowej lokalu na kondygnacji 2 (1. piętro) **nie jest przeznaczone do zamurowania – należy uwzględnić jego istnienie w projekcie** (przesłanianie/nasłonecznienie, odległości wg WT). "
+    w("**Wybrzeże J. Słowackiego 5** (M.08): okno w ścianie szczytowej lokalu na kondygnacji 2 (1. piętro) **nie jest <!-- poprawione przez weryfikatora -->*aktualnie* przeznaczone do zamurowania – należy uwzględnić jego istnienie w projekcie** (M.08: „nie jest aktualnie przeznaczone do zamurowania. Należy uwzględnić jego istnienie w projekcie budynku UMWD”; przesłanianie/nasłonecznienie, odległości wg WT). "
       "Wysokość budynku nie wynika z dostarczonych materiałów (rzuty – skany) – w `site.json` szacunek z liczby kondygnacji (5 → ok. %.1f m), do weryfikacji na zdjęciach M.09/M.10." % (BASE_RAISE + 5 * STOREY_H + ROOF_ADD))
+    w("")
+    # poprawione przez weryfikatora: spojnosc z model/sasiedzi.json i z opisem M.07
+    w("<!-- poprawione przez weryfikatora --> **Spójność wysokości sąsiadów:** (a) M.07 s. 9 podaje „wysokość budynku: ok. 20 m”, a odczyt przekroju A-A (s. 10; weryfikator: murek attykowy od strony ulicy ok. +21,0 m, od podwórza ok. +20,4…20,7 m – dach spada ok. 5% ku podwórzu) daje ok. 21,7 m nad chodnikiem (−0,73) – "
+      "opis „ok. 20 m” jest zaokrągleniem lub odnosi się do innej podstawy (niejasność źródła); "
+      "(b) późniejsze szczegółowe opracowanie sąsiadów `model/sasiedzi.json` przyjmuje dla Mazowieckiej 19 górę attyki **139,9 m n.p.m.** (zakres 139,5–140,25; z elewacji M.07 s. 12 i przekroju), "
+      "a dla Wybrzeża Słowackiego 5 ok. **139,5 m n.p.m.** (20,5 m; zakres 19,8–23,0 m) – wartości w tabeli powyżej (140,2 / 140,0) mieszczą się w tych zakresach, ale są o 0,3–0,5 m wyższe. "
+      "Do analiz przesłaniania/nasłonecznienia stosować jedną, wspólną wartość (zalecenie: obwiednia górna zakresu dla cienia rzucanego przez sąsiadów, dolna – dla oceny przesłaniania ich okien; wniosek).")
     w("")
     w("## 6. Teren (NMT) – rzędne i spadki")
     w("")
@@ -2229,6 +2246,14 @@ def make_md(P, S, J, out_md):
     if so:
         w("Obszar inwestycji: H min %.2f m w punkcie (e, n) = (%.1f, %.1f), H max %.2f m w (%.1f, %.1f). Lokalne maksima spadków TIN wynikają z krawężników, obrzeży i nasypów ogródków (skoki rzędu 0,1–0,3 m na krótkich odcinkach) – nie są spadkiem terenu (wniosek)." %
           (so["H_min"], so["H_min_e_n"][0], so["H_min_e_n"][1], so["H_max"], so["H_max_e_n"][0], so["H_max_e_n"][1]))
+        # poprawione przez weryfikatora: H min/max w tabeli pochodza z probkowania TIN co 0,5 m, nie z pikiet
+        invp6 = Polygon(inv["pts"])
+        gpi = [p for p in T["pikiety"] if p[4] == 1 and invp6.contains(Point(p[1], p[2]))]
+        if gpi:
+            lo, hi = min(gpi, key=lambda p: p[3]), max(gpi, key=lambda p: p[3])
+            w("<!-- poprawione przez weryfikatora --> Uwaga: kolumny H min/max/śr./med. tabeli są liczone z siatki próbkowania TIN co 0,5 m (nie z pikiet). "
+              "Skrajne pikiety terenowe w obszarze inwestycji: min **%.2f** (nr %s, e %.2f, n %.2f – przy murze podwórza Mazowieckiej 19), max **%.2f** (nr %s, e %.2f, n %.2f)." %
+              (lo[3], lo[0], lo[1], lo[2], hi[3], hi[0], hi[1], hi[2]))
     w("")
     w("**Rzędne w narożnikach obszaru inwestycji** (TIN):")
     w("")
@@ -2244,10 +2269,16 @@ def make_md(P, S, J, out_md):
     w("")
     tk = J["zielen"]["kontrola"]
     dr = J["zielen"]["drzewa"]
+    # poprawione przez weryfikatora: wczesniej "W obszarze inwestycji: 46 drzew, w tym w ogrodkach przydomowych: 33" - 33 obejmowalo
+    # 4 drzewa w czesci ogrodkow lezacej poza obszarem inwestycji (dz. 11/3), a 46 to punkty (44 numery)
     w("Drzewa z pomiaru (`drzewa.txt`): %d punktów, %d unikalnych numerów (numery z dwoma punktami – drzewa wielopniowe lub podwójny pomiar: %s); dodatkowo %d drzew z e-mapy bez numeru (poza zasięgiem pomiaru szczegółowego). "
-      "W obszarze inwestycji: **%d** drzew, w tym w ogródkach przydomowych: **%d**. Gatunki, obwody, stan i korony – w operacie dendrologicznym M.06 (inna numeracja: do sparowania po położeniu – etap późniejszy)." %
+      "<!-- poprawione przez weryfikatora --> W obszarze inwestycji: **%d punktów drzew = %d numerów** (dwupunktowe: %s), w tym w ogródkach przydomowych w obszarze inwestycji: **%d**; "
+      "dalsze **%d** drzewa (%s) stoją w części ogródków leżącej **poza** obszarem inwestycji (dz. 11/3, podwórze Mazowieckiej 19) – łącznie w ogródkach %d "
+      "(wcześniej błędnie: „w tym w ogródkach przydomowych: 33”). Gatunki, obwody, stan i korony – w operacie dendrologicznym M.06 (inna numeracja: do sparowania po położeniu – etap późniejszy)." %
       (tk["n_txt"], tk["n_numerow_unikalnych"], ", ".join(tk["numery_z_dwoma_punktami"]), sum(1 for t in dr if t["nr"].startswith("E")),
-       sum(1 for t in dr if t["w_obszarze_inwestycji"]), sum(1 for t in dr if t["w_ogrodkach"])))
+       tk["w_obszarze_inwestycji_punkty"], tk["w_obszarze_inwestycji_numery"], ", ".join(tk["numery_dwupunktowe_w_obszarze_inwestycji"]) or "brak",
+       tk["w_ogrodkach_i_w_obszarze_inwestycji_punkty"], len(tk["w_ogrodkach_poza_obszarem_inwestycji"]), ", ".join(tk["w_ogrodkach_poza_obszarem_inwestycji"]),
+       tk["w_ogrodkach_lacznie_punkty"]))
     w("")
     w("## 8. Uzbrojenie terenu – kolizje z obszarem inwestycji")
     w("")
@@ -2274,19 +2305,33 @@ def make_md(P, S, J, out_md):
           (br["os_przyblizona"]["azymut_siatki_deg"], br["os_przyblizona"]["punkt"][0], br["os_przyblizona"]["punkt"][1],
            ("(%.1f, %.1f)" % tuple(br["przeciecie_osi_z_linia_brzegu"])) if br["przeciecie_osi_z_linia_brzegu"] else "brak w ramce", len(br["mury_przyczolka_GSSZMO"])))
     w("")
-    w("Linia brzegu (GSSWWP): Odra – od pn. ramki (e≈97) wzdłuż wsch. strony Wybrzeża; ujście Oławy na wsch. od kwartału. Odległość obszaru inwestycji od linii brzegu: **%.1f m** (minimum, wniosek z geometrii)." % J["_extras_md"]["dist_shore"])
+    # poprawione przez weryfikatora: wg opisow e-mapy woda na wsch. od kwartalu to Olawa, Odra - przy moscie
+    wop_ = [o for o in J["woda"]["opisy"] if isinstance(o, dict)]
+    w("<!-- poprawione przez weryfikatora --> Linia brzegu (GSSWWP): opisy e-mapy – %s. Woda wzdłuż wsch. strony Wybrzeża J. Słowackiego **na wysokości kwartału jest opisana jako „rz. Oława”** (dz. 20, 21 – Wp), "
+      "„rz. Odra” – na pn., przy Moście Grunwaldzkim; ukośna linia brzegu od przyczółka mostu na pd.-wsch. wyznacza ujście Oławy do Odry na pn.-wsch. od kwartału "
+      "(wcześniej: „Odra – wzdłuż wsch. strony Wybrzeża; ujście Oławy na wsch. od kwartału” – niezgodne z opisami mapy). Odległość obszaru inwestycji od linii brzegu: **%.1f m** (minimum, wniosek z geometrii)." %
+      ("; ".join("„%s” (e %.0f, n %.0f)" % (o.get("tekst"), o.get("e"), o.get("n")) for o in wop_), J["_extras_md"]["dist_shore"]))
     w("")
     w("## 10. Sprzeczności, niejasności, ograniczenia")
     w("")
     w("1. **Nazwa warstwy vs legenda M.04:** warstwa `__Obszar możliwej zabudowy` jest w legendzie PDF opisana jako „Obszar inwestycji”. Geometria = suma działek inwestycyjnych (pole %.1f m² vs M.01 3 729 m²) – przyjęto „obszar inwestycji”." % inv["pole_m2"])
     w("2. **Wydzielenie A – nazewnictwo:** legenda e-mapy M.02 opisuje różową szrafurę jako „strefa oddziaływania linii zabudowy”, M.04 – jako „Wydzielenie wewn. A zgodnie z MPZP”; plan: „obszar podwyższonej zabudowy oznaczony symbolem A” (patrz `mpzp.md`). Geometria identyczna.")
     w("3. **Dokładność linii MPZP**: wrysowane z rastra (opis na mapie) – nie należy ich traktować jako geodezyjnie wyznaczonych; zalecany zapas projektowy ≥0,3–0,5 m od linii zabudowy i granicy A (wniosek).")
-    w("4. **DWG M.04 przesunięty** o ΔY = %.3f m – użycie DWG M.04 „wprost” (bez przeliczenia) w modelu dałoby błąd 165 m w osi wschód–zachód." % sh["dE_m"])
+    w("4. <!-- poprawione przez weryfikatora --> **DWG M.04 przesunięty** o −%.3f m w osi Y (x_DWG = Y − %.3f m; poprawka **+%.3f m**) – użycie DWG M.04 „wprost” (bez przeliczenia) w modelu dałoby błąd 165 m w osi wschód–zachód." % (sh["dE_m"], sh["dE_m"], sh["dE_m"]))
     w("5. **Pola działek** – pola geometryczne z mapy, nie z rejestru EGiB (różnice rzędu dziesiątych m² możliwe). Działki przy ramce są przycięte.")
     w("6. **Wysokości budynków** (poza Mazowiecką 19) – szacunkowe, z liczby kondygnacji; dla analiz przesłaniania należy je zweryfikować (zdjęcia 360° M.09, drona M.10, wizja lokalna).")
     w("7. **DGN V8** – nieodczytany (brak sterownika); treść zdublowana w DWG.")
     w("8. **Atrybuty A/B w etykietach przewodów** – znaczenie nieustalone (prawdopodobnie źródło/dokładność położenia wg instrukcji ZGKiKM) – do weryfikacji u gestorów/ZGKiKM.")
     w("9. **Most** – oś przybliżona (poza zasięgiem mapy); do wizualizacji należy uzupełnić geometrię mostu z innych źródeł (zdjęcia M.09/M.10, rysunki historyczne).")
+    # poprawione przez weryfikatora: dodatkowe niejasnosci
+    w("10. <!-- poprawione przez weryfikatora --> **Tabliczka M.02** wymienia tylko „Działki: 9/1” i „Działki: 10/3” (obręb Południe 0022 AM2), choć obszar inwestycji obejmuje też dz. 11/6 i 19/11 "
+      "(treść mapy pokrywa cały obszar – bez wpływu na geometrię; przy projekcie budowlanym potrzebna mapa do celów projektowych obejmująca wszystkie 4 działki – wniosek).")
+    w("11. <!-- poprawione przez weryfikatora --> **Służebności gruntowe:** M.02, pkt 4 opisu: „Informacje o służebnościach gruntowych mających wpływ na zagospodarowanie gruntów, zlokalizowanych w granicach projektowanej inwestycji: nie badano” – "
+      "istotne dla dojazdu przez dz. 10/2 do wnętrza podwórzowego i dla sieci przecinających obszar (tab. 8); do wyjaśnienia w księgach wieczystych (ryzyko – wniosek).")
+    w("12. <!-- poprawione przez weryfikatora --> **Wysokości Mazowieckiej 19 i Wybrzeża Słowackiego 5** – rozbieżność 0,3–0,5 m między `site.json` (140,2 / 140,0 m n.p.m.) a `model/sasiedzi.json` (139,9 / 139,5 m n.p.m.); "
+      "M.07: opis „ok. 20 m” vs przekrój ok. 21,7 m nad chodnikiem (rozdz. 5). Ujednolicić przed analizami przesłaniania.")
+    w("13. <!-- poprawione przez weryfikatora --> **Linie zabudowy vs granice działek** – nakładka MPZP ma nominalną dokładność ±0,3–0,5 m (pkt 3), lecz na pn. i wsch. krawędzi pokrywa się z granicą działek do ≤ 0,05 m (4.5); "
+      "rozstrzygające dla projektu są granice działek (obszar inwestycji M.04), a zapas z pkt 3 dotyczy przede wszystkim granicy wydzielenia A (wniosek).")
     w("")
     w("## 11. Struktura `model/site.json` (skrót)")
     w("")
