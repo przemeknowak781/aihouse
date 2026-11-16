@@ -1,0 +1,215 @@
+# Uwarunkowania konserwatorskie – budynek UMWD, Mazowiecka / Wybrzeże Słowackiego
+
+> Moduł: 30_lokalizacja · Opracowano: 16.11.2026 · Status: rozpoznanie (etap badań)
+> Zakres: wytyczne konserwatorskie (M.14), powiązane zapisy Regulaminu, MPZP, wyjaśnień i programu; obowiązki, zakazy i zalecenia; interpretacja projektowa.
+> Konwencja: **[Ź]** oznacza dosłowny lub wierny zapis źródła, **WNIOSEK** oznacza interpretację własną. Cytaty dosłowne podaję w cudzysłowie, z pisownią oryginału.
+> Zgodnie z decyzją Inwestora nie korzystano z żadnych informacji o pracach złożonych w tym konkursie ani o jego wynikach.
+
+---
+
+## 0. Synteza (najważniejsze ustalenia)
+
+1. **Właściwe wytyczne to „Pismo WOUZ.pdf”.** Plik `M.14. WYTYCZNE DWKZ.pdf` zawiera tylko stronę tytułową. Jest na niej informacja „Wytyczne Dolnośląskiego Wojewódzkiego Konserwatora Zabytków z dnia 20.10.2025”, bez treści. Treścią jest pismo DWKZ z 20.10.2025, znak WZN.5183.3728.2025.JM, w pliku `Pismo WOUZ.pdf`: 3 strony treści i 1 strona klauzuli RODO. Pismo jest skanem. Plik `tekst/Pismo_WOUZ.txt` jest pusty, więc kto korzysta wyłącznie z warstwy tekstowej, nie zobaczy wytycznych.
+2. **Status ochrony.** Teren leży w obszarze Przedmieścia Oławskiego, wpisanym do rejestru zabytków decyzją nr **538/A/05 z 20.06.2005** jako „zespół urbanistyczny o zachowanym historycznym układzie przestrzennym z końca XIX wieku” (Pismo WOUZ, s. 1; Regulamin, Rozdz. III ust. 1 pkt 6, s. 19; MPZP § 8 ust. 4 pkt 1). Cały obszar planu objęto też strefą ochrony konserwatorskiej oraz strefą ochrony konserwatorskiej zabytków archeologicznych (MPZP § 8 ust. 3 i 5). Projekt budowlany będzie więc wymagał **pozwolenia WKZ przed pozwoleniem na budowę** (Prawo budowlane, art. 39 ust. 1), a roboty ziemne **badań archeologiczno-architektonicznych** (MPZP § 8 ust. 7).
+3. **Obowiązek główny wg DWKZ:** „zachować i kontynuować historyczne linie zabudowy” wzdłuż Mazowieckiej i Wybrzeża (w piśmie omyłkowo „Wybrzeże Wyspiańskiego”, zob. § 5.1). Pierzeje mają być **ciągłe** i domykać kwartał (s. 2).
+4. **Skala:** bryła „może gabarytowo przewyższać” kamienice. Trzeba jednak wprowadzić **„optyczny podział bryły na mniejsze segmenty, odpowiadające skalą otoczeniu”**, np. kolorystyką, materiałem i artykulacją fasady (s. 2). Punktem odniesienia jest historyczna zabudowa o **4–6 kondygnacjach, ok. 18–22 m** (s. 1).
+5. **Postawa zachowawcza.** Według DWKZ parametry MPZP są graniczne i nie trzeba wykorzystywać maksimum. Projektant ma prawo, a niekiedy obowiązek, przyjąć rozwiązania bardziej zachowawcze (s. 2). **Uwaga:** MPZP ustala w obszarze A także **minimum 35 m** (najniższy punkt dachu). Strefy A nie można więc obniżyć poniżej 35 m (§ 5.2).
+6. **Materiały źródłowe jako podstawa projektu.** DWKZ wskazuje, że podstawą prac koncepcyjnych mają być materiały ikonograficzne i kartograficzne (s. 2). Ma to bezpośredni wpływ na narrację planszy: trzeba pokazać, że projekt wynika z analizy planu z 1934 r. i zdjęć (zob. `historia.md`).
+7. **Most Grunwaldzki** (rejestr A/1653/326/Wm z 15.10.1976) nie jest wymieniony w piśmie DWKZ. Regulamin wymaga jednak harmonizacji z mostem (Rozdz. III ust. 1 pkt 6, s. 19), a perspektywa nr 3 z mostem jest obowiązkowa (Wyjaśnienia nr 07, odp. 29). Most ma odzyskać hełmy pylonów, ok. 25 m nad terenem (M.11.F; zob. `historia.md` § 3).
+8. **Sąsiedzi chronieni planem:** kamienice **Mazowiecka 17 i 19**. Chronione są ich gabaryty, forma i pokrycie dachu oraz elewacje z detalem (MPZP § 8 ust. 1 pkt 3 i ust. 2). Do Mazowieckiej 19 trzeba dostawić się zwartą pierzeją (M.01, s. 2; Regulamin, s. 19).
+9. **Brak zapisów** w wytycznych DWKZ na temat: gzymsów, dachów, konkretnych materiałów i kolorów, podziałów okiennych, dominant i archeologii. Te tematy wynikają z MPZP, Regulaminu i kontekstu. Rozwiązania w tych obszarach są interpretacją (WNIOSEK) i trzeba je w opisie pracy uzasadniać historycznie.
+10. **Napięcie programowe:** DWKZ sugeruje przeniesienie części programu na sąsiednie tereny (rejon Mazowiecka/Walońska/Wybrzeże Słowackiego), aby uniknąć „przeskalowania” (s. 2–3). Konkurs wymaga jednak pełnego programu na działce. Praca musi więc **udowodnić**, że duży program da się zmieścić bez przytłoczenia skali.
+
+---
+
+## 1. Inwentarz dokumentów o znaczeniu konserwatorskim
+
+| # | Dokument | Lokalizacja | Charakter | Uwagi |
+|---|---|---|---|---|
+| D1 | M.14 „Wytyczne DWKZ” | `5_Zal…/M.14 WYTYCZNE KONSERWATORA/…/M.14. WYTYCZNE DWKZ.pdf` (1 s.) | strona tytułowa | brak treści, odsyła do wytycznych z 20.10.2025 |
+| D2 | Pismo DWKZ z 20.10.2025, WZN.5183.3728.2025.JM (RKP 46991/2025), do Inwestycje Dolnośląskie sp. z o.o. | `…/M.14 WYTYCZNE KONSERWATORA/…/Pismo WOUZ.pdf` (4 s.; s. 4 = RODO) | wytyczne, wiążące wg Regulaminu (Rozdz. III ust. 1 pkt 4–5) | skan 200 dpi, odczytany z obrazów |
+| D3 | Regulamin (tekst jednolity 13.02.2026), Rozdz. III ust. 1 pkt 3–7 | `tekst/1089_Regulamin…txt`, l. 798–870 (s. 18–20) | wymagania konkursu | pkt 4 odsyła do M.14, pkt 5 do M.11 i M.14 |
+| D4 | MPZP – uchwała XLV/1366/10 RMW z 21.01.2010 | `M.03. MPZP/…/M.03. plan miejscowy.pdf` | akt prawa miejscowego | § 2, § 6, § 8, § 26 (teren 2MW-U/5); warstwa tekstowa uszkodzona, strony odczytano z obrazów |
+| D5 | Rysunek MPZP | `M.03. plan miejscowy - załącznik graficzny.pdf` | akt prawa miejscowego | teren **2MW-U/5**, obszar **A** w narożniku NE |
+| D6 | Wyjaśnienia nr 03 (odp. 10, 13, 14, 15), nr 04 (odp. 22), nr 07 (odp. 29), nr 08 (odp. 37), nr 20 (odp. 77) | `tekst/1089_Wyjasnienia…` | wiążące wyjaśnienia | styk z sąsiadami, okna w szczytach, perspektywa z mostem |
+| D7 | Program użytkowy (zatwierdzony 11/2025), s. 2 | `tekst/Program_użytkowy…txt`, l. 64–100 | założenia | 2 skrzydła po 5 kondygnacji ≤22 m + dominanta ≤45 m w narożniku |
+| D8 | M.11 Kontekst historyczny (A–F) | `M.11. KONTEKST HISTORYCZNY/` | materiały ikonograficzne | analiza w `historia.md` |
+| D9 | Notatka z wizji lokalnej z 05.03.2026 (wizja 27.02.2026) | `tekst/1089_Notatka_z_wizji_lokalnej.txt` | informacyjna | punkty widokowe, osie widokowe |
+| D10 | Inwentaryzacje M.07 (Mazowiecka 19), M.08 (Wyb. Słowackiego 5) | `M.07…`, `M.08…` | dane o sąsiadach | wysokość i detal Mazowieckiej 19 |
+
+---
+
+## 2. Pismo DWKZ z 20.10.2025: streszczenie punkt po punkcie
+
+Źródło dla całej sekcji: `Pismo WOUZ.pdf`. Numery stron według pliku PDF. Podpis: Dolnośląski Wojewódzki Konserwator Zabytków Daniel Gibski (s. 3). Przedmiot pisma: „kształtowanie nowej zabudowy w rejonie skrzyżowania ulic Wybrzeże Słowackiego oraz Mazowieckiej, w granicach dz. nr ewid. 9/1, 10/3, 19/11 i 11/6 AR-2 obr. Południe we Wrocławiu” (s. 1).
+
+**P1. Status prawny obszaru (s. 1).** [Ź] Działka leży na obszarze Przedmieścia Oławskiego, wpisanego do rejestru zabytków decyzją WKZ nr 538/A/05 z 20 czerwca 2005 r. „jako zespół urbanistyczny o zachowanym historycznym układzie przestrzennym z końca XIX wieku”. Obszar to „cenny przykład zwartej zabudowy śródmiejskiej, opartej na regularnym układzie kwartałów kamienic czynszowych, z zachowanym rytmem pierzei, czytelnymi liniami zabudowy oraz utrwaloną, harmonijną skalą wysokościową”.
+
+**P2. Stan zachowania i cel: rekonstrukcja (s. 1).** [Ź] Północno-wschodnia część przedmieścia, „zwana obecnie Placem Społecznym”, „została w przeważającej części zniszczona podczas II wojny światowej”. Część ocalałych budynków rozebrano po wojnie. Stąd „konieczność rekonstrukcji tej części historycznego Przedmieścia Oławskiego, przy jednoczesnym obowiązku harmonijnego wpisania nowych założeń urbanistycznych w zachowaną, spójną strukturę przestrzenną pozostałej zabudowy”.
+
+**P3. Przedmiot wartości i skala odniesienia (s. 1).** [Ź] Wartość wynika z „autentyzmu całego układu urbanistycznego – jego proporcji, relacji przestrzennych, osi widokowych i charakterystycznego krajobrazu kulturowego”. „Historyczna zabudowa w tym obszarze liczy zazwyczaj od czterech do sześciu kondygnacji (około 18–22 m wysokości), co tworzy czytelny rytm i spójność kompozycyjną zespołu, stanowiące podstawową wartość chronioną wpisem do rejestru zabytków.”
+
+**P4. Relacja z MPZP (s. 1–2).** [Ź] MPZP (uchwała XLV/1366/10 z 21.01.2010) uchwalono „po uzgodnieniu z organem ochrony zabytków”. Rekonstrukcja utraconej tkanki jest „działaniem uzasadnionym”, „przywracającym czytelność dawnych struktur miejskich, skali oraz relacji przestrzennych”, spójnym z MPZP, „który przewiduje odtworzenie zwartej, śródmiejskiej zabudowy kwartałowej”.
+
+**P5. Kompetencje konserwatora ponad parametrami planu (s. 2).** [Ź] Choć parametry są „stosunkowo precyzyjnie określone” w planie, organ ochrony zabytków „posiada ustawowe kompetencje do rozstrzygania o dopuszczalności realizacji inwestycji oraz jej kształcie w kontekście zachowania wartości zabytkowych”.
+WNIOSEK: zgodność z MPZP jest warunkiem koniecznym, ale niewystarczającym. Decyduje ocena konserwatorska kształtu bryły i elewacji.
+
+**P6. Podstawa projektu: ikonografia i kartografia (s. 2).** [Ź] „kluczowe znaczenie ma wyjątkowe bogactwo materiałów ikonograficznych i kartograficznych, które powinny stanowić podstawę dla prac koncepcyjnych i projektowych”. Ich wykorzystanie „umożliwi odtworzenie utraconej […] spójnej, zwartej zabudowy śródmiejskiej”.
+
+**P7. Linie zabudowy i pierzeje: obowiązek (s. 2).** [Ź] „należy przede wszystkim zachować i kontynuować historyczne linie zabudowy wzdłuż ulic Wybrzeże Wyspiańskiego [sic] oraz Mazowieckiej. Nowe obiekty powinny tworzyć ciągłe pierzeje uliczne, stanowiąc domknięcie kwartałów historycznej zabudowy.”
+
+**P8. Gabaryt i podział bryły (s. 2).** [Ź] „Z uwagi na skalę terenu inwestycyjnego, projektowana bryła może gabarytowo przewyższać typowe dla Przedmieścia Oławskiego kamienice czynszowe. W celu uniknięcia efektu przytłoczenia sąsiedniej zabudowy należy wprowadzić optyczny podział bryły na mniejsze segmenty, odpowiadające skalą otoczeniu. Efekt ten można uzyskać m.in. poprzez zróżnicowanie kolorystyki, materiałów elewacyjnych oraz artykulacji fasady.”
+
+**P9. Parametry MPZP jako graniczne (s. 2).** [Ź] Parametry MPZP „mają charakter graniczny (maksymalny lub minimalny), a nie obligatoryjny”. Plan „nie nakłada na projektanta obowiązku osiągnięcia wartości maksymalnych”. Projektant ma „pełne prawo – a w określonych przypadkach wręcz obowiązek, wynikający z przesłanek konserwatorskich, krajobrazowych lub funkcjonalnych – przyjąć rozwiązania bardziej zachowawcze niż maksymalnie dopuszczone”.
+
+**P10. Rozproszenie programu (s. 2).** [Ź] Należy rozważyć zaspokojenie potrzeb UMWD „w sposób zrównoważony i respektujący historyczny charakter otoczenia”. Część funkcji „mogłaby zostać z powodzeniem zrealizowana na terenach położonych w bezpośrednim sąsiedztwie, w szczególności w rejonie skrzyżowania ulic Mazowieckiej, Walońskiej oraz Wybrzeża Słowackiego”. Rozwiązanie takie umożliwiłoby „uniknięcie nadmiernej koncentracji funkcji w jednym obiekcie”.
+
+**P11. Ryzyko przeskalowania (s. 2).** [Ź] Rozproszenie „odciążyłoby […] główną działkę inwestycyjną z presji uzyskania ściśle określonej, dużej powierzchni użytkowej, co w przeciwnym razie mogłoby prowadzić do nadmiernego przeskalowania nowego obiektu, nieadekwatnego do historycznej skali i charakteru otoczenia”.
+
+**P12. Konkluzja (s. 2–3).** [Ź] Podejście to „należy uznać za szczególnie zasadne”, bo umożliwia realizację potrzeb inwestora „przy jednoczesnym poszanowaniu wartości przestrzennych, krajobrazowych i kulturowych tej części Wrocławia, przywracając czytelność historycznych relacji urbanistycznych i zachowując charakter przedwojennego układu ulicznego”.
+
+**Czego pismo nie zawiera (stwierdzenie faktu):** brak zapisów o gzymsach i liniach gzymsów, formie dachu, konkretnych materiałach i kolorach, podziałach i proporcjach otworów, dominantach i akcentach wysokościowych, Moście Grunwaldzkim, rzece i bulwarze oraz o archeologii. Brak też rysunków i schematów.
+
+---
+
+## 3. Pozostałe źródła o znaczeniu konserwatorskim
+
+### 3.1 Regulamin, Rozdz. III ust. 1 (s. 18–20)
+- **Pkt 3 (s. 18):** [Ź] z powodu braku docelowego układu komunikacyjnego w obszarze Mostu Grunwaldzkiego zabudowę realizuje się „zgodnie z obecnym przebiegiem ulicy Mazowieckiej”.
+- **Pkt 4 (s. 18):** [Ź] „Uwarunkowania konserwatorskie i urbanistyczne przedstawia Załącznik nr M.14”.
+- **Pkt 5 (s. 19):** [Ź] „Nową zabudowę należy kształtować w sposób współczesny, z poszanowaniem wymagającego sąsiedztwa – walorów i form zabudowy istniejącej.” Należy uwzględnić MPZP oraz „kontekst urbanistyczny i historyczny opisany w wytycznych [DWKZ] oraz zobrazowany w Załączniku M.11 i M.14”. Zabudowa „powinna odtworzyć – w granicach dostępnych działek inwestycyjnych – układ kwartałowy zabudowy, od strony ulicy Mazowieckiej przylegający do budynku Mazowiecka 19”. W obszarze A MPZP dopuszcza wysokość „maksymalnie do 45 m”. Na najwyższych kondygnacjach tego obszaru wskazuje się pomieszczenia Sejmiku i Kancelarii Sejmiku. Ogródki należy zagospodarować jako zieleń, ograniczając wycinkę.
+- **Pkt 6 „Historia miejsca” (s. 19):** [Ź] powtarza wpis 538/A/05 i charakterystykę układu. Wnioskuje: projektowany budynek „powinien wpisywać się w istniejący kontekst urbanistyczny, harmonizując zarówno z sąsiadującymi kamienicami, jak i z Mostem Grunwaldzkim, który stanowi istotny element krajobrazu miejskiego. Forma, skala oraz charakter architektoniczny nowej zabudowy powinny respektować historyczne otoczenie i wzmacniać jego wartości kulturowe.”
+- **Pkt 7 (s. 19–20):** [Ź] nasłonecznienie i przesłanianie budynków mieszkalnych przy Mazowieckiej i Wybrzeżu Słowackiego. Okna w ścianach szczytowych: w Wybrzeżu Słowackiego 5 pokój (1 p.), łazienki (2–3 p.), kuchnie. W Mazowieckiej 19 okna łazienek, które przewiduje się usunąć.
+- **Kryteria oceny** (Rozdz. VI ust. 1 i Rozdz. VIII ust. 1): kryterium pierwszorzędne b) „Trafność wpisania pod względem urbanistycznym i architektonicznym nowego obiektu […] w obecny układ tkanki miejskiej”. WNIOSEK: jakość odpowiedzi konserwatorskiej jest bezpośrednio punktowana.
+
+### 3.2 MPZP (uchwała XLV/1366/10)
+- **§ 8 ust. 1 pkt 3 i ust. 2 (s. 14):** [Ź] ochroną konserwatorską obejmuje się „kamienice przy ulicy Mazowieckiej 17, 19”. Przedmiot ochrony: „a) gabaryty budynków, b) forma i pokrycie dachu budynków, c) elewacje oraz detale architektoniczne budynków”. Ochroną objęto też gmach przy pl. Powstańców Warszawy 1 (DUW) (ust. 1 pkt 1).
+- **§ 8 ust. 3–4 (s. 14):** [Ź] strefa ochrony konserwatorskiej Przedmieścia Oławskiego na całym obszarze planu. Przedmiot ochrony: „uliczno-kwartałowy układ urbanistyczny Przedmieścia Oławskiego […] wpisany do rejestru zabytków pod nr 538/A/05” oraz obiekty z ust. 1.
+- **§ 8 ust. 5–7 (s. 14):** [Ź] strefa ochrony konserwatorskiej zabytków archeologicznych na całym obszarze planu: „przy realizacji prac ziemnych należy przeprowadzić badania archeologiczno-architektoniczne za pozwoleniem właściwych służb ochrony zabytków”.
+- **§ 6 (s. 11–13):** [Ź] obszar zabudowy śródmiejskiej (pkt 1). Ogólna wysokość budynku od 18 m (najniższy punkt pokrycia dachu) do 25 m (najwyższy), o ile ustalenia dla terenów nie stanowią inaczej (pkt 3). Dopuszcza się cofnięcie lica do 2,5 m od obowiązującej i obowiązującej ciągłej linii zabudowy na obszarze, gdzie dopuszcza się zabudowę (pkt 9). Zakaz urządzeń technicznych na dachach i na elewacjach od placów, bulwarów i ulic (pkt 13; z wyjątkami dla telekomunikacji z pkt 11). Obowiązują **„szczególne wymagania architektoniczne”** (pkt 18) i **„szczególne zagospodarowanie stref wejściowych”** (pkt 19).
+- **§ 2 (s. 3–4), definicje:** **szczególne wymagania architektoniczne** to „wymóg wysokiego poziomu estetycznego obiektu, ukształtowania jego formy oraz zastosowanie w elewacjach wysokiej jakości materiałów budowlanych” (pkt 18). **Wyeksponowanie obiektu** to „wymóg takiego usytuowania obiektu, aby najbardziej reprezentacyjne jego części były dobrze widoczne z miejsca określonego w ustaleniach planu” (pkt 23). **Dominanta** to obiekt, który „koncentruje uwagę obserwatorów ze względu na swoją wysokość, wielkość lub wyróżniającą formę architektoniczną” (pkt 2). Nieprzekraczalna linia zabudowy nie dotyczy m.in. gzymsów, wykuszy, balkonów, loggii i elementów wystroju elewacji (pkt 4).
+- **§ 26 – teren 2MW-U/5 (s. 24–25):** [Ź] w obszarze A wymiar pionowy do najwyższego punktu dachu **≤45 m**, do najniższego **≥35 m** (ust. 2 pkt 3). W obszarze B odpowiednio ≤55 m i ≥45 m (pkt 4; położenie B wg rysunku poza działkami inwestycji, do potwierdzenia w module MPZP). Obowiązuje **wyeksponowanie zabudowy od strony terenów 1KDG, 3KDL/1, 4KDPL/3 i 6KDB/2** (pkt 5). 6KDB/2 to bulwar wzdłuż Wybrzeża Słowackiego.
+- **Rysunek (D5):** teren 2MW-U/5 ma w omawianej części **nieprzekraczalne** linie zabudowy (symbol △), nie obowiązujące. **Obszar A** leży w narożniku NE, przy łuku Wybrzeża Słowackiego, od strony mostu. Na bulwarze 6KDB/2 oznaczono szpaler drzew. Wycinek: `img/mpzp_2MWU5_fragment.jpg`.
+  WNIOSEK (pomiar porównawczy rysunku MPZP i ortofotomapy M.11.A, kontrolowany odległością od kiosku na dz. 19/1, ok. 38 m w obu źródłach): północna granica 2MW-U/5 przebiega w przybliżeniu po granicy dz. 9/1–9/2. Działka 9/2 (skwer) leży poza terenem zabudowy.
+
+### 3.3 Wyjaśnienia treści Regulaminu
+- **Nr 03, odp. 10:** [Ź] wysokość 22 m w M.01 wskazano „w celu zwrócenia uwagi na konieczność respektowania styku z zabudową sąsiednią, o której wspomina [DWKZ] w załączniku M.14”. Organizator „dopuszcza rozwiązania indywidualne styku z zabudową sąsiednią […] zarówno w zakresie wysokości, jak i ilości kondygnacji skrzydeł zabudowy wzdłuż ul. Wybrzeże Słowackiego i ul. Mazowieckiej”.
+- **Nr 03, odp. 13:** [Ź] niedopuszczalne jest zamurowanie okien w szczycie Wybrzeża Słowackiego 5 (szczególnie pokój w mieszkaniu nr 6 na 1 p.). Zamawiający zakłada likwidację okien w szczycie Mazowieckiej 19 i zaleca przewidzieć potencjał przyszłego połączenia funkcjonalnego z tą kamienicą.
+- **Nr 08, odp. 37:** [Ź] Mazowiecka 19 „nie jest przedmiotem konkursu”, zalecenie potencjału połączenia pozostaje.
+- **Nr 07, odp. 29:** [Ź] perspektywa nr 3 jest obowiązkowa: „dowolny jeden widok z poziomu człowieka pokazujący sylwetę projektowanego budynku w kontekście Mostu Grunwaldzkiego”. Może być wykonana z drugiej strony rzeki (np. z Wybrzeża Wyspiańskiego lub ul. Joliot-Curie). Ma określać relacje nowej zabudowy „w kontekście zabytkowego Mostu Grunwaldzkiego, jednego z symboli Wrocławia”.
+- **Nr 03, odp. 14:** zagospodarowanie w I etapie w „granicach opracowania studialnego” (M.04). Można proponować zmiany w najbliższym sąsiedztwie.
+- **Nr 20, odp. 77:** ogródki we wnętrzu: nieogrodzone, dostępne dla pracowników i mieszkańców, maksymalne zachowanie drzew.
+
+### 3.4 Program użytkowy (D7, s. 2)
+[Ź] „dwóch skrzydeł o pięciu kondygnacjach nadziemnych i maksymalnej wysokości do 22 metrów, usytuowanych wzdłuż ulicy Mazowieckiej oraz Wybrzeża Słowackiego, połączonych centralną dominantą zlokalizowaną przy zbiegu tych ulic o maksymalnej wysokości do 45m. Obiekt od strony ulicy Mazowieckiej ma przylegać do […] kamienicy nr 19 tworząc zwartą pierzeję.” Brak połączenia z Wybrzeżem Słowackiego 5, od którego oddziela dz. 10/2.
+
+### 3.5 Podstawy ustawowe (do weryfikacji przez moduł prawny)
+- Ustawa z 7.07.1994 r. – Prawo budowlane, **art. 39 ust. 1**: roboty budowlane przy obiekcie wpisanym do rejestru lub **na obszarze wpisanym do rejestru zabytków** wymagają, przed decyzją o pozwoleniu na budowę, pozwolenia wojewódzkiego konserwatora zabytków. Treść streszczona wg arslege.pl, dostęp 16.11.2026. Aktualny tekst jednolity według wyników wyszukiwania (lexlege.pl) to Dz.U. 2026 poz. 524, do potwierdzenia w ISAP.
+- Ustawa z 23.07.2003 r. o ochronie zabytków i opiece nad zabytkami: pozwolenie WKZ na roboty przy zabytku rejestrowym i na badania archeologiczne (art. 36 ust. 1). Koszty badań archeologicznych przy robotach mogących naruszyć zabytki archeologiczne ponosi inwestor (art. 31). Brzmienie i numerację ustępów należy zweryfikować w aktualnym t.j.
+- Regulamin, Rozdz. XI ust. 2 „Negocjacje w trybie zamówienia z wolnej ręki”, pkt 3 (l. 2737–2744): zwycięzca w umowie „będzie także zobowiązany uwzględniać wszelkie uwagi Konserwatora zabytków”.
+
+---
+
+## 4. Macierz: obowiązki, zakazy, zalecenia
+
+Legenda statusu: **OB** = obowiązek (wiążący zapis), **ZK** = zakaz, **ZL** = zalecenie lub wskazanie, **—** = brak zapisu w źródłach (decyzja projektowa wymaga uzasadnienia). WNIOSEK = rekomendacja własna.
+
+| Temat | Status i źródło | Zapis | WNIOSEK projektowy |
+|---|---|---|---|
+| **Linie zabudowy, Mazowiecka** | OB – DWKZ s. 2 (P7); Regulamin pkt 5; M.01 s. 2 | kontynuować historyczną linię; ciągła pierzeja; przylegać do Mazowieckiej 19 | Lico w linii fasady Mazowieckiej 19. Według nakładki planu z 1934 r. historyczna pierzeja pokrywa się z obecną granicą działek 9/1 i 10/3 z drogami 8/6 i 8/8 (`historia.md` § 4). Bez cofnięć parteru na całej długości. Wejścia i podcienie ewentualnie lokalnie, w granicy 2,5 m z § 6 pkt 9, tylko jeśli wspierają rytm. |
+| **Linie zabudowy, Wybrzeże Słowackiego** | OB – DWKZ s. 2 („Wyspiańskiego” = lapsus) | jw. | Lico w linii fasady Wybrzeża Słowackiego 5 i historycznej pierzei nad Oławą (łuk). Ciągłość pierzei przerywa tylko dz. 10/2 (dojazd), którą trzeba czytelnie „zszyć” (brama lub przewiązka?). Do weryfikacji z wymaganiami przesłaniania szczytu Wybrzeża Słowackiego 5. |
+| **Pierzeja północna (przedmoście)** | — w DWKZ; MPZP: nieprzekraczalna linia ≈ granica 9/1–9/2; Regulamin: 9/2 = skwer | DWKZ nie wymienia | Historyczna pierzeja stała ok. 11–18 m dalej na północ, na dz. 9/2 (`historia.md` § 4). Nie da się jej odtworzyć. Zamiast tego: **nowa fasada frontowa na skwer przedmościa**, z czytelnym śladem dawnej linii w posadzce lub zieleni skweru (np. pas kamienia lub szpaler). Taki zabieg przywołuje rekomendowaną przez DWKZ „czytelność dawnych struktur”. |
+| **Narożnik przy moście** | ZL – M.01 (dominanta przy zbiegu ulic); MPZP obszar A 35–45 m | — | Historycznie stał tu **zaokrąglony narożnik** pierzei (zdjęcia M.11.E). Rekomendacja: narożnik o łagodnej, zaokrąglonej lub fazowanej geometrii, kontynuujący łuk Wybrzeża. Dominanta „wyrasta” z cokołu w skali kamienic, nie stoi wolno. |
+| **Wysokość pierzei** | OB/ZL – DWKZ s. 1 (4–6 kond., 18–22 m); MPZP § 6 pkt 3 (18–25 m); M.01 (≤22 m, 5 kond.); Wyjaśnienia 03/10 (styk indywidualnie) | — | Główny gzyms lub krawędź cokołu na ok. **21 m**: Mazowiecka 19 ma wymiar elewacji 2098,21 cm (M.07, s. 12; zakres wymiaru do weryfikacji). Ewentualne kondygnacje powyżej wyraźnie cofnięte lub odmiennie traktowane (lżejsze, ciemniejsze). Przy stykach stopniowanie do wysokości sąsiada. |
+| **Wysokość dominanty (A)** | OB – MPZP § 26 ust. 2 pkt 3: najwyższy punkt ≤45 m, najniższy ≥35 m; ZL – DWKZ P9 (zachowawczość) | — | Przyjąć dolny zakres A, ok. **36–40 m**: zgodnie z MPZP, „zachowawczo” wg DWKZ. Zostawić margines do 45 m tylko na lekkie zwieńczenie (np. pawilon Sejmiku). Wysokość uzasadnić w widokach z mostu i z Joliot-Curie. |
+| **Podział bryły** | OB – DWKZ s. 2 (P8) | „optyczny podział bryły na mniejsze segmenty, odpowiadające skalą otoczeniu” | Segmenty o szerokości historycznych posesji: front ok. **12–20 m** wg planu z 1934 r. (oszacowanie). Rozróżnienie kolorem, materiałem i artykulacją przy wspólnym gzymsie lub cokole, czyli rytm „kamienic” w jednej konstrukcji. Dominanta jako odrębny, spokojny segment. |
+| **Gzymsy** | — w DWKZ; MPZP: gzymsy mogą przekraczać linię nieprzekraczalną (§ 2 pkt 4); ochrona elewacji Mazowieckiej 19 (§ 8) | — | Kontynuacja linii gzymsu koronującego Mazowieckiej 19 (gzyms na konsolkach + murek attykowy, M.07) oraz linii kordonowej nad parterem. Współczesna interpretacja: wyraźna pozioma krawędź, cień, pas. |
+| **Dachy** | — w DWKZ; MPZP § 6 pkt 13 (zakaz urządzeń technicznych na dachach) | — | Historycznie: dachy o małym spadku, kryte papą, za attyką (M.07 przekrój; zdjęcia M.11.E). Rekomendacja: dachy płaskie lub o niskim spadku za attyką, zielone i z PV ukrytymi za attyką. Instalacje w obrysie kondygnacji technicznej, niewidoczne z mostu (piąta elewacja). |
+| **Materiały** | ZL – DWKZ P8 (zróżnicowanie materiałów); MPZP § 6 pkt 18 (wysoka jakość materiałów) | — | Materiały mineralne, trwałe: tynk szlachetny lub ceramika w odcieniach jasnych piaskowców kamienic, kamień (granit nawiązujący do okładziny pylonów mostu) w cokole i na nabrzeżu. Unikać dominacji szkła kurtynowego w pierzejach. |
+| **Kolorystyka** | ZL – DWKZ P8 | „zróżnicowanie kolorystyki” | Paleta ciepłych beży, piaskowców i jasnych szarości kamienic eklektycznych. Różnicowanie w wąskim zakresie (ton, faktura), bez kontrastów. Dominanta w odcieniu jasnym, spójnym z granitem mostu. |
+| **Podziały i otwory** | — | — | Pionowe proporcje otworów i stosunek muru do okna zbliżone do kamienic: osie co ok. 1,6–1,8 m według elewacji Mazowieckiej 19 (8 osi), do weryfikacji wymiarem. Trójdzielny układ elewacji: cokół / trzon / zwieńczenie. |
+| **Dominanta** | ZL – M.01; MPZP obszar A | — | Jedna dominanta w narożniku. Nie konkuruje z hełmami pylonów, a w widokach z osi mostu ich nie zasłania (patrz niżej). |
+| **Relacja z mostem** | OB – Regulamin pkt 6 (harmonizacja); OB – perspektywa 3 (Wyj. 07/29) | — | Hełmy pylonów mają ok. 25,5 m (M.11.F, pomiar). Dominanta 36–40 m stoi ok. 60 m od portalu południowego (oszacowanie z ortofotomapy). Rekomendacja: spokojne, poziome zakończenie dominanty, bez iglic i „korony”, aby nie rywalizować z sylwetą portalu. Linia cokołu ok. 21 m pozostaje poniżej hełmów. Materiał cokołu w rodzinie granitu. Widok osiowy z pl. Grunwaldzkiego i kadr z esplanady „Manhattanu” wskazano na wizji lokalnej (D9, pkt 6). |
+| **Relacja z rzeką i bulwarem** | OB – MPZP § 26 ust. 2 pkt 5 (wyeksponowanie od 6KDB/2); MPZP: szpaler drzew | — | Reprezentacyjna elewacja od Oławy i Odry. Aktywny parter od bulwaru. Odtworzenie charakteru dawnego Ohlau-Ufer: aleja drzew, kamienna balustrada nabrzeża, przystań parowców jako motyw (zdjęcia M.11.E). |
+| **Archeologia** | OB – MPZP § 8 ust. 5–7; u.o.z. | badania archeologiczno-architektoniczne przy pracach ziemnych | Przy 2 kondygnacjach podziemnych spodziewane są relikty piwnic i fundamentów kamienic sprzed 1945 r. Nasypy z gruzem ceglanym mają 2,8–3,8 m (M.05, s. 6). Ulica istnieje co najmniej od 1350 r. (Krötengasse). Uwzględnić w harmonogramie i koszcie (F.14). Ewentualnie eksponować fragmenty reliktów (WNIOSEK). |
+| **Styk z Mazowiecką 19** | OB – Regulamin pkt 5; ochrona MPZP § 8 | gabaryt, dach, elewacje Mazowieckiej 19 chronione | Dostawić się do ściany szczytowej bez naruszania gzymsu i dachu sąsiada. Pierwsze 1–2 osie nowej pierzei w wysokości i podziałach sąsiada, potem przejście do skali nowej. Okna łazienek w szczycie Mazowieckiej 19 mają zostać usunięte przez Zamawiającego (Wyj. 03/13). Możliwość przyszłego połączenia: wyrównanie poziomów stropów (rzędne M.07: +7,46 / +9,28 / +11,27 / +13,05 / +14,97 / +16,79). |
+| **Styk z Wybrzeżem Słowackiego 5** | ZK – zakaz zamurowania okien szczytu (Wyj. 03/13) | — | Odsunięcie lub stopniowanie bryły przy szczycie zgodnie z WT (przesłanianie, nasłonecznienie pokoju na 1 p.). Konserwatorsko: zachować czytelność pierzei mimo przerwy na dz. 10/2. |
+| **Zieleń i ogródki** | OB – Regulamin pkt 5; Wyj. 20/77 | ograniczyć wycinkę, wnętrze dostępne | Wnętrze kwartału jako zielony dziedziniec, zgodny z historyczną typologią podwórza kamienicznego, ale otwarty. |
+| **Reklamy** | ZK/OB – MPZP § 6 pkt 6–8 | nośniki tylko w określonych formach, na elewacji ≤4,5 m² | Szyld UMWD i Sejmiku zintegrowany z architekturą (litery na cokole), nie jako nośnik. |
+
+---
+
+## 5. Sprzeczności, niejasności, ryzyka (ocena krytyczna)
+
+**5.1 „Wybrzeże Wyspiańskiego” zamiast „Wybrzeże Słowackiego” (Pismo, s. 2).** W przedmiocie pisma (s. 1) poprawnie wskazano Wybrzeże Słowackiego. Wybrzeże Wyspiańskiego leży po drugiej stronie Odry: Organizator sam podaje je jako punkt widokowy „z drugiej strony rzeki” (Wyjaśnienia nr 07, odp. 29). WNIOSEK: to oczywista omyłka pisarska. Obowiązek dotyczy pierzei przy Wybrzeżu Słowackiego. Warto to zaznaczyć w opisie, cytując intencję.
+
+**5.2 Parametry „graniczne, nie obligatoryjne” a minima MPZP.** DWKZ akcentuje brak obowiązku osiągania maksimów (P9). MPZP ustala jednak również **minima**: ≥18 m najniższego punktu dachu ogólnie (§ 6 pkt 3) i **≥35 m w obszarze A** (§ 26 ust. 2 pkt 3 lit. b). WNIOSEK: „zachowawczość” może się realizować tylko w przedziale 35–45 m dla A i 18–25 m dla pozostałej części. Projekt poniżej 35 m w A byłby niezgodny z MPZP. Zarazem Regulamin (pkt 5) i M.01 mówią o wysokości „maksymalnie do 45 m”, więc nie wymagają maksimum.
+
+**5.3 Rozproszenie programu (P10–P11) a warunki konkursu.** Konkurs wymaga zmieszczenia programu M.01 na działkach 10/3, 11/6, 19/11, 9/1. Sugestia DWKZ wykracza poza zakres konkursu i nie zmienia go. WNIOSEK: ryzyko oceny „przeskalowania” jest realne. Odpowiedź: podział bryły, obniżona skala pierzei, ograniczenie gabarytu dominanty do potrzeb Sejmiku oraz maksymalne wykorzystanie kondygnacji podziemnych na funkcje bez światła (archiwa, magazyny). Warto pokazać na planszy porównanie skali z kwartałem z 1934 r.
+
+**5.4 Pierzeja północna.** DWKZ nakazuje kontynuację historycznych linii. Historyczna pierzeja od strony mostu leżała jednak na dz. 9/2, którą Regulamin przeznacza na skwer, a MPZP wyłącza z zabudowy. WNIOSEK: pełne odtworzenie obrysu kwartału jest niemożliwe w granicach działek. Regulamin sam to przyznaje: „w granicach dostępnych działek”. Należy to opisać wprost i zaproponować ślad dawnej linii w zagospodarowaniu skweru.
+
+**5.5 Ochrona elewacji Mazowieckiej 19 a likwidacja okien w jej szczycie.** MPZP chroni „elewacje oraz detale” Mazowieckiej 19 (§ 8 ust. 2). Zamawiający planuje usunięcie okien w ścianie szczytowej (Regulamin pkt 7; Wyj. 03/13). WNIOSEK: ściana szczytowa jest najpewniej elewacją wtórną, odsłoniętą po wyburzeniu sąsiedniej kamienicy, więc konflikt jest raczej formalny. Wymaga jednak uzgodnienia z konserwatorem (inwestor). Na ścianie szczytowej istniał mural (polska-org.pl, zdjęcie z 10.11.2013). Jego przysłonięcie to potencjalny temat społeczny, nie konserwatorski.
+
+**5.6 Brak treści w M.14 i pusty plik tekstowy.** Zob. § 0 pkt 1. Ryzyko pominięcia wytycznych przez narzędzia lub osoby korzystające z `tekst/*.txt`.
+
+**5.7 Hełmy mostu: harmonogram niepewny.** Projekt remontu z odtworzeniem zwieńczeń pylonów uzgodniono z konserwatorem. Data rozpoczęcia nie jest znana, „może to być rok 2027” (wroclaw.pl, 3.07.2025). WNIOSEK: wizualizacje należy wykonać z hełmami. Organizator załączył M.11.F jako stan docelowy. W opisie trzeba to zaznaczyć.
+
+**5.8 Brak legendy na mapie zabytków (M.11.D).** Kolory nie są objaśnione (`img/zabytki_otoczenie_fragment.jpg`), więc interpretacja jest ograniczona.
+
+**5.9 Nazwy i daty w M.11.** Spis M.11 podaje „plan miasta Wrocławia (1924)”, a plik i podpis na arkuszu mówią 1934. Nazwy ulic z okresu nazistowskiego (Welkisch-Str., Helmuth-Brückner-Str.) potwierdzają datowanie na lata 30. (`historia.md` § 1). Ortofotomapy M.11.A są współczesne (SIP), nie archiwalne.
+
+**5.10 Strefa B w 2MW-U/5.** MPZP przewiduje w tym terenie także obszar B (45–55 m). Na rysunku nie leży on na działkach inwestycji. Do potwierdzenia w module MPZP, bo jest ważny dla zrozumienia docelowej sylwety rejonu.
+
+---
+
+## 6. Interpretacja: wnioski projektowe (WNIOSEK, do decyzji zespołu)
+
+- **W1. Strategia nadrzędna: „odtworzyć kwartał, nie kamienice”.** Bryła UMWD to współczesne domknięcie kwartału, który przed 1945 r. stał dokładnie w tym miejscu. Linie pierzei, zaokrąglony narożnik przy moście, wysokość gzymsu ok. 21 m i rytm posesji wynikają z planu z 1934 r. i zdjęć, zgodnie z wymaganiem DWKZ (P6).
+- **W2. Trójstopniowa skala.** (a) cokół-pierzeja ok. 21 m, ciągły, z wyraźnym gzymsem; (b) ewentualna cofnięta kondygnacja (lżejsza); (c) jedna dominanta w obszarze A, w dolnym zakresie 35–45 m, ze spokojnym zwieńczeniem. Sejmik na górze (Regulamin pkt 5), wyeksponowany od bulwaru 6KDB/2 i mostu.
+- **W3. Segmentacja „posesjami”.** Pierzeje podzielone na segmenty szerokości 12–20 m, zróżnicowane fakturą i odcieniem przy wspólnym gzymsie. To bezpośrednia odpowiedź na P8 i najczęstsze kryterium oceny konserwatorskiej.
+- **W4. Narożnik przy moście = narracja.** Zaokrąglony narożnik kontynuuje łuk Wybrzeża Słowackiego, nawiązując do historycznego narożnika z zdjęć M.11.E. Hełmy pylonów (ok. 25,5 m) pozostają czytelne na tle nieba w widoku z mostu.
+- **W5. Skwer przedmościa (9/2) jako „pamięć linii”.** Ślad historycznej pierzei w posadzce lub szpalerze. Nawiązanie do dawnego zielonego pasa z okrągłym elementem przy przyczółku. Obecny kiosk na 19/1 leży praktycznie w tym samym miejscu (nakładka). Widok na portal mostu otwarty.
+- **W6. Elewacja od wody.** Wyeksponowanie od 6KDB/2 (MPZP). Reprezentacyjny parter. Kamienne nabrzeże i aleja drzew jako kontynuacja Ohlau-Ufer.
+- **W7. Materiały.** Jasna ceramika lub tynk szlachetny w pierzejach, kamień (granit) w cokole i detalach, jako dialog z okładziną pylonów. Dachy płaskie za attyką, bez widocznych instalacji (MPZP § 6 pkt 13).
+- **W8. Archeologia i koszty.** Zaplanować badania archeologiczno-architektoniczne. W opisie wskazać możliwość ekspozycji reliktów piwnic historycznych kamienic (np. w holu lub na skwerze), co ma silną wartość narracyjną.
+- **W9. Dokumentacja na planszach.** (i) schemat „plan 1934 / stan obecny / projekt” (nakładka, `img/plan1934_nakladka_ortofoto_annot.jpg`); (ii) rozwinięcia pierzei z sąsiadami i linią gzymsu ok. 21 m; (iii) obowiązkowa perspektywa 3 z mostem z hełmami; (iv) cytat z wytycznych DWKZ i punkt po punkcie „jak spełniono”.
+
+---
+
+## 7. Lista kontrolna zgodności konserwatorskiej (do audytu projektu)
+
+- [ ] Lico pierzei przy Mazowieckiej w linii Mazowieckiej 19, ciągłe, przylegające do szczytu (P7; Regulamin pkt 5).
+- [ ] Lico pierzei przy Wybrzeżu Słowackiego w linii Wybrzeża Słowackiego 5 i łuku ulicy (P7).
+- [ ] Brak zabudowy kubaturowej na dz. 9/2 (skwer). Północne lico nie przekracza linii MPZP.
+- [ ] Wysokość pierzei przy stykach skorelowana z sąsiadami: gzyms ok. 21 m. Udokumentowano wysokości sąsiadów (M.07, M.08).
+- [ ] Obszar A: najniższy punkt dachu ≥35 m, najwyższy ≤45 m (MPZP § 26). Poza A: 18–25 m (§ 6 pkt 3).
+- [ ] Widoczny podział bryły na segmenty w skali otoczenia: kolor, materiał, artykulacja (P8).
+- [ ] Brak urządzeń technicznych na dachach i elewacjach od ulic, placów i bulwaru (MPZP § 6 pkt 13).
+- [ ] Wyeksponowanie od 6KDB/2 (bulwar) i od strony dróg wskazanych w § 26 ust. 2 pkt 5.
+- [ ] Perspektywa nr 3 z Mostem Grunwaldzkim, z odtworzonymi hełmami (Wyj. 07/29; M.11.F).
+- [ ] Brak zamurowania okien w szczycie Wybrzeża Słowackiego 5 (Wyj. 03/13). Analiza przesłaniania.
+- [ ] Opis: wpis 538/A/05, ochrona Mazowieckiej 17/19, strefa archeologiczna, pozwolenie WKZ (art. 39 ust. 1 Pb).
+- [ ] Opis: odwołanie do materiałów ikonograficznych (P6), plan 1934 i zdjęcia (M.11.B, M.11.E).
+
+---
+
+## 8. Źródła
+
+**Materiały konkursowe** (ścieżki względem `/home/user/aihouse/umwd/00_materialy/`):
+- `_rozpak/5_Zalaczniki_Merytoryczne_M.01-M.14_pop.13.02.2026/M.14 WYTYCZNE KONSERWATORA/M.14 WYTYCZNE KONSERWATORA/M.14. WYTYCZNE DWKZ.pdf` (1 s.) oraz `…/Pismo WOUZ.pdf` (4 s.), odczyt obrazów stron 200 dpi.
+- `tekst/1089_Regulamin_Konkursu_tekst_jednolity_13.02.2026-sig.txt`: Rozdz. III ust. 1 pkt 3–7 (l. 798–870, s. 18–20); Rozdz. VI ust. 1; Rozdz. VIII ust. 1; Rozdz. XI ust. 2 pkt 3 (l. 2737–2744); Rozdz. XII pkt 14 (l. 2986–2988).
+- `_rozpak/…/M.03. MPZP/M.03. MPZP/M.03. plan miejscowy.pdf`: § 2 (s. 3–4), § 6 (s. 11–13), § 8 (s. 14), § 26 (s. 24–25); rysunek: `M.03. plan miejscowy - załącznik graficzny.pdf`.
+- `tekst/1089_Wyjasnienia_tresci_Regulaminu_nr_03-sig.txt` (odp. 10, 13, 14, 15), `…nr_04` (odp. 20, 22), `…nr_07` (odp. 29), `…nr_08` (odp. 36, 37), `…nr_20` (odp. 76, 77).
+- `tekst/Program_użytkowy_budynku_administracyjnego_UWMD_zatwierdzony_11_2025.txt`, s. 2 i 16.
+- `tekst/1089_Notatka_z_wizji_lokalnej.txt` (05.03.2026).
+- `_rozpak/…/M.07. INWENTARYZACJA MAZOWIECKA/…/M.07. INWENTARYZACJA MAZOWIECKA 19.pdf`, s. 10 (przekrój), s. 12 (elewacja frontowa).
+- `_rozpak/…/M.08. INWENTARYZACJA SŁOWACKIEGO/…/M.08. INWENTARYZACJA WYBRZEŻE SŁOWACKIEGO 5.pdf`, s. 3–8 (rzuty: piwnica, parter, I–IV piętro).
+- `tekst/M.05._Opinia_geotechniczna.txt`, s. 6 (nasypy 2,8–3,8 m z gruzem ceglanym).
+- `_rozpak/…/M.11. KONTEKST HISTORYCZNY/…`: wszystkie pliki (analiza w `historia.md`).
+
+**Źródła zewnętrzne** (dostęp 16.11.2026):
+- wroclaw.pl, B. Chochołowski, „Remont mostu Grunwaldzkiego. Odzyska kopuły, na razie tylko na projekcie”, 3.07.2025: https://www.wroclaw.pl/komunikacja/remont-mostu-grunwaldzkiego-odzyska-kopuly-na-razie-tylko-na-projekcie
+- arslege.pl, Prawo budowlane, art. 39: https://arslege.pl/roboty-budowlane-przy-obiekcie-wpisanym-do-rejestru-zabytkow-lub-na-obszarze-wpisanym-do-rejestru-zabytkow/k36/a7969/ (informacja o t.j. Dz.U. 2026 poz. 524 wg wyniku wyszukiwania lexlege.pl, niezweryfikowana w ISAP).
+- polska-org.pl, „Kamienica nr 19, ul. Mazowiecka”: https://polska-org.pl/536862,Wroclaw,Kamienica_nr_19.html (mural na ścianie szczytowej, zdjęcie 2013).
+- Dalsze źródła historyczne: zob. `historia.md` § 8.
