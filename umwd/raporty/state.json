@@ -1,5 +1,5 @@
 {
- "title": "Site geometry solved from the official DWG (libredwg-WASM, georeference error < 1 cm); façade rule-set E01–E22 derived from heritage, WT and perception research",
+ "title": "Concept panel drafting (2 concurrent architects); photomatch solver and 3D context builder launched in parallel to shorten the render phase",
  "stages": [
   [
    "Organiser materials: download, unpack, text extraction (results files deliberately EXCLUDED)",
@@ -30,7 +30,7 @@
    "running"
   ],
   [
-   "3D model + façades + renders: plan engine ✔ (1:200 SVG, poché, furniture, room labels), Blender lib ✔",
+   "3D/visuals: plan & site-plan engines ✔, Blender lib ✔; photomatch F.17.A/B solver ►; 3D context (neighbours LOD3, bridge pylons with helmets, terrain, trees) ►",
    "running"
   ],
   [
@@ -43,20 +43,20 @@
   ]
  ],
  "notes": [
-  "site.json: investment area 3,728.7 m² (M.01: 3,729), zone A 1,208 m² (1,184 m² inside the plot), 800 survey points → terrain grid, Mazowiecka 19 attic +140.25 m a.s.l. (21.7 m above pavement), utilities clashing with the footprint listed.",
-  "Façade rules: segment the Mazowiecka front into 3 × 18–22 m 'plots' with one material family; main cornice +21.0 m to meet No. 19; plinth line +4.25 m; rounded corner at the bridge (R 3–8 m); vertical windows 1:1.8–2.2; reveals ≥ 0.30 m (0.40–0.60 m on the tower); WWR 35–42 %; max 2–3 materials + 1 metal; palette warm light neutrals NCS S 0505–2010 Y10–30R, granite plinth, dark matt bronze.",
-  "Module proposal 1.50 m: 24 m² room = 4.50 × 5.35 m; structural grid 7.50 m = 3 parking bays below; bay 4.50 m ≈ 2 window axes of the 19th-c. neighbours (2 × 2.23 m) — façade rhythm and plan logic in one system.",
-  "Site-plan engine renders the official survey (curbs, tram tracks, buildings with SW-45° shadows, trees, boundaries) at 1:500.",
-  "Concept panel (5 architects) still drafting — first run aborted by a schema bug (Polish letter in a field name), fixed and relaunched."
+  "Photomatch agent: PnP camera solve on ≥12 ground control points from the official survey (curbs, building corners, embankment), DJI EXIF as prior, verification overlays — target error < 0.3 % of frame width.",
+  "Context agent: terrain from the survey DTM, street surfaces & granite curbs, Mazowiecka 19 and Wybrzeże Słowackiego 5 at LOD3 from the official inventories, other blocks LOD2, south bridge pylons with the planned restored helmets, existing trees (autumn/summer), lamps, tram rails.",
+  "Wrocław-context study adds: Sejmik window to NNW (Ostrów Tumski & bridge; north light, no overheating), calm horizontal crown without spires (do not compete with the 25.5 m helmets), wind shelter at the tower entrance, heat protection (vertical fins ENE/WSW, horizontal SSE), roof as 5th façade visible in both photomontages.",
+  "Visual plan: F.17 montages in autumn noon light (as photographed); bridge view on a summer evening or blue hour with the Sejmik hall lit.",
+  "Bottleneck noted: workflow concurrency cap (2 agents) slows the panel; jury stage will be parallelised with background agents."
  ],
  "images": [
   {
-   "path": "umwd/raporty/img/site_kontrola.png",
-   "caption": "site.json control plot: layers, terrain model 0.25 m contours, zone A, trees"
+   "path": "umwd/docs/30_lokalizacja/img/most_grunwaldzki_przekroj_DD_helmy.jpg",
+   "caption": "Bridge pylons with restored helmets (M.11.F) — modelled for view no. 3"
   },
   {
-   "path": "umwd/raporty/img/siteplan_engine_demo.png",
-   "caption": "Site-plan engine 1:500 — existing state with SW 45° shadows"
+   "path": "umwd/raporty/img/drone_0009.jpg",
+   "caption": "Drone frame behind F.17.A — camera to be solved by PnP"
   }
  ]
 }

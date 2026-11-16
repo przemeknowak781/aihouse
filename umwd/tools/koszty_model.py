@@ -24,6 +24,8 @@ REF = {
     "h_sz": 15.0,          # m głębokość ścian szczelinowych (z zagłębieniem w gliny)
     "h_pod": 4.0,          # m wysokość ścian podziemia (do izolacji)
     "t_plyty": 1.1,        # m grubość płyty fundamentowej (wypór wody, dominanta)
+    "fp_nad": 2500.0,      # m2 obrys parteru (powierzchnia zabudowy)
+    "fp_wypor": 400.0,     # m2 część podziemia poza obrysem nadziemia (wymaga kotwienia/pali)
     "n_klatek": 3, "n_kond_klatki": 8,           # klatki ewakuacyjne i średnia liczba kondygnacji na klatkę
     "windy_os": 6, "windy_tow": 1,
     "fas_went": 3800.0,    # m2 elewacja wentylowana ceramika/klinkier (bez otworów)
@@ -58,7 +60,7 @@ def Q(p):
         ("1.3", "Odwodnienie wykopu (wewnątrz obudowy)", "kpl", 1, (0.4e6, 0.8e6, 1.5e6)),
         ("1.4", "Wykop pod budynek z wywozem i utylizacją nasypów", "m3", fp * p["h_wyk"], (60, 80, 110)),
         ("1.5", "Wymiana gruntów", "m3", 500, (80, 100, 130)),
-        ("1.6*", "Ściany szczelinowe (obudowa wykopu = ściany zewn. garażu)", "m2", p["obw_pod"] * p["h_sz"], (1000, 1300, 1700)),
+        ("1.6*", "Ściany szczelinowe (obudowa wykopu = ściany zewn. garażu)", "m2", p["obw_pod"] * p["h_sz"], (1100, 1400, 1800)),
         ("1.7*", "Badania i nadzór archeologiczny (relikty piwnic kamienic)", "kpl", 1, (0.3e6, 0.6e6, 1.2e6)),
         ("1.8*", "Zabezpieczenie i monitoring budynków WS 5 i Mazowiecka 19", "kpl", 1, (0.6e6, 1.2e6, 2.5e6)),
         ("2.1", "Przyłącze ciepłownicze (źródło rezerwowe/szczytowe)", "kpl", 1, (0.3e6, 0.5e6, 0.8e6)),
@@ -75,12 +77,13 @@ def Q(p):
         ("2.12a", "GPC: pole odwiertów pionowych z sondami", "mb", p["mb_odw"], (190, 240, 300)),
         ("2.12b", "GPC: pompy ciepła, maszynownia, hydraulika źródła", "kpl", 1, (1.8e6, 2.5e6, 3.5e6)),
         ("2.13", "PV dachowe (BIPV dachu dominanty)", "kWp", p["kwp_dach"], (3500, 4000, 5000)),
-        ("3.1", "Płyta fundamentowa", "m3", fp * p["t_plyty"], (1100, 1300, 1550)),
+        ("3.1", "Płyta fundamentowa", "m3", fp * p["t_plyty"], (1200, 1400, 1650)),
         ("3.2", "Izolacja termiczna i przeciwwodna garażu (detale białej wanny)", "m2", fp + p["obw_pod"] * p["h_pod"], (120, 180, 260)),
         ("3.3", "Ściany żelbetowe (rdzenie, ściany wewn., okładzinowe)", "m2", 0.30 * (A + Ap), (450, 550, 700)),
         ("3.4", "Słupy żelbetowe", "m3", 0.022 * (A + Ap), (2600, 3100, 3800)),
         ("3.5", "Ściany murowane", "m2", 0.15 * A, (180, 230, 300)),
-        ("3.6", "Stropy żelbetowe", "m2", A + Ap - fp, (380, 450, 560)),
+        ("3.6", "Stropy żelbetowe nadziemia", "m2", A - p["fp_nad"], (380, 450, 560)),
+        ("3.6b", "Stropy podziemia (w tym strop nad garażem z obciążeniem terenu)", "m2", Ap, (520, 620, 760)),
         ("3.7", "Stropodach (konstrukcja)", "m2", p["dach"], (380, 450, 560)),
         ("3.8", "Schody prefabrykowane + spoczniki", "kpl", stair + p["A_pod"] / fp, (25e3, 35e3, 50e3)),
         ("3.9", "Konstrukcje stalowe", "kg", p["stal_kg"], (12, 15, 20)),
@@ -88,6 +91,8 @@ def Q(p):
         ("3.11", "Izolacje termiczne i przeciwwodne dachu", "m2", p["dach"] - p["dach_ext"] - p["dach_int"], (350, 450, 600)),
         ("3.12", "Dach zielony ekstensywny (z izolacjami)", "m2", p["dach_ext"], (550, 700, 900)),
         ("3.13*", "Dach intensywny / taras użytkowy (z izolacjami)", "m2", p["dach_int"], (900, 1200, 1600)),
+        ("3.14*", "Rampa zjazdowa i konstrukcje dodatkowe podziemia", "kpl", 1, (0.5e6, 0.8e6, 1.2e6)),
+        ("3.15*", "Zabezpieczenie przed wyporem (pale/kotwy) poza obrysem nadziemia", "m2", p["fp_wypor"], (400, 600, 900)),
         ("4.1", "Stolarka okienna zewn. (alu, 3-szybowa)", "m2", p["okna"], (1500, 1800, 2200)),
         ("4.2", "Stolarka drzwiowa zewn. (wejścia automatyczne)", "m2", p["drzwi_zew"], (2500, 3500, 5000)),
         ("4.3", "Świetliki dachowe", "m2", p["swietliki"], (2500, 3500, 4500)),
@@ -107,7 +112,7 @@ def Q(p):
         ("7.4", "Instalacje CO (wodne niskotemperaturowe)", "m2PC", A, (210, 260, 330)),
         ("7.5", "Węzeł cieplny (rezerwa z sieci)", "kpl", 1, (0.25e6, 0.4e6, 0.6e6)),
         ("7.6", "Wentylacja mechaniczna z centralami (odzysk ciepła)", "m2PC", A, (330, 400, 500)),
-        ("7.6b", "Wentylacja garażu i oddymianie podziemia", "m2PC", Ap, (170, 220, 290)),
+        ("7.6b", "Wentylacja garażu i oddymianie podziemia", "m2PC", Ap, (200, 260, 340)),
         ("7.7", "Instalacja chłodnicza (TABS / klimakonwektory)", "m2PC", A, (230, 280, 360)),
         ("7.8", "Rozdział ciepła i chłodu z pomp ciepła", "kpl", 1, (0.6e6, 0.9e6, 1.3e6)),
         ("7.9", "Magazyny energii cieplnej (bufory)", "kpl", 1, (0.3e6, 0.5e6, 0.8e6)),
@@ -203,7 +208,8 @@ def main(argv):
         print("| L.p. | Opis | Ilość | J.m. | Cena jedn. netto | Wartość netto |")
         print("|---|---|---:|---|---:|---:|")
         for lp, op, jm, q, c, v in res["rows"]:
-            print(f"| {lp} | {op} | {q:,.0f} | {jm} | {c:,.0f} | {v:,.0f} |".replace(",", " "))
+            n = lambda x: f"{x:,.0f}".replace(",", " ")
+            print(f"| {lp} | {op} | {n(q)} | {jm} | {n(c)} | {n(v)} |")
         return
     for lvl in LEVELS:
         r = compute(p, lvl)
