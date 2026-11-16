@@ -489,7 +489,7 @@ class Materialy:
         nb.output(self._bsdf(nb, col, r, normal=bmp.outputs['Normal']))
 
     def m_kostka_granit(self, m):   # jezdnia z kostki granitowej (Mazowiecka, Wybrzeże Słowackiego)
-        self._uklad_cegiel(m, 0.17, 0.115, 0.012, (0.16, 0.155, 0.15), (0.11, 0.105, 0.10), (0.06, 0.058, 0.055),
+        self._uklad_cegiel(m, 0.17, 0.115, 0.012, (0.21, 0.20, 0.17), (0.15, 0.145, 0.125), (0.08, 0.075, 0.065),
                            rough=0.72, bump=0.45, var=0.4, scale_noise=7.0)
 
     def m_kostka_bet(self, m):
@@ -525,7 +525,7 @@ class Materialy:
         if jes:   # opadłe liście – plamy
             n3 = nb.n('ShaderNodeTexNoise', Scale=1.1, Detail=6.0)
             nb.l(uv, n3.inputs['Vector'])
-            f = nb.math('GREATER_THAN', n3.outputs['Fac'], 0.6)
+            f = nb.math('MULTIPLY', nb.math('GREATER_THAN', n3.outputs['Fac'], 0.64), 0.5)
             v = nb.n('ShaderNodeTexVoronoi', Scale=18.0)
             nb.l(uv, v.inputs['Vector'])
             leaf = self._ramp(nb, v.outputs['Distance'], (0.42, 0.18, 0.03), (0.30, 0.22, 0.05))
@@ -569,7 +569,7 @@ class Materialy:
         nb.l(h, bmp.inputs['Height'])
         n3 = nb.n('ShaderNodeTexNoise', Scale=0.02, Detail=2.0)
         nb.l(geo.outputs['Position'], n3.inputs['Vector'])
-        col = self._ramp(nb, n3.outputs['Fac'], (0.022, 0.03, 0.018), (0.04, 0.045, 0.025), 0.3, 0.7)
+        col = self._ramp(nb, n3.outputs['Fac'], (0.03, 0.045, 0.038), (0.05, 0.065, 0.05), 0.3, 0.7)
         b = self._bsdf(nb, col, 0.035, spec=0.5, normal=bmp.outputs['Normal'])
         nb.set(b, 'IOR', 1.33)
         nb.output(b)
@@ -658,11 +658,11 @@ class Materialy:
 
     # ---------------------------------------------------------------- most
     def m_granit_pylon(self, m):
-        self._uklad_cegiel(m, 1.05, 0.52, 0.012, (0.25, 0.235, 0.205), (0.20, 0.19, 0.17), (0.30, 0.29, 0.27),
+        self._uklad_cegiel(m, 1.05, 0.52, 0.012, (0.40, 0.34, 0.27), (0.32, 0.28, 0.23), (0.42, 0.39, 0.34),
                            rough=0.78, bump=0.55, var=0.4, scale_noise=1.8)
 
     def m_granit_jasny(self, m):
-        self._uklad_cegiel(m, 0.7, 0.9, 0.01, (0.32, 0.30, 0.27), (0.28, 0.265, 0.24), (0.34, 0.33, 0.31),
+        self._uklad_cegiel(m, 0.7, 0.9, 0.01, (0.46, 0.40, 0.32), (0.40, 0.355, 0.29), (0.44, 0.41, 0.36),
                            rough=0.75, bump=0.4, var=0.3, offset=0.0)
 
     def m_nisza(self, m):
@@ -1261,8 +1261,8 @@ def kamienica_maz19(ctx, g):
     P = [tuple(p) for p in b['pts']]   # 0 NE (tył/szczyt), 1 NW (front/szczyt), 2 SW (front), 3 SE (tył), 4 E
     zr = 118.51 - Z0
     vb = -0.9
-    T_M = 'tynk:beb6a8:0.35:0'          # tynk jasnoszarobeżowy, zabrudzony (zdjęcie F.17.B)
-    T_B = 'tynk:b4ab9b:0.35:0.6'        # boniowanie pasowe
+    T_M = 'tynk:b1a998:0.5:0'           # tynk szarobeżowy, zabrudzony, z ubytkami (zdjęcie F.17.B)
+    T_B = 'tynk:a89f8e:0.5:0.6'         # boniowanie pasowe
     T_C = 'kamien_cokol'
     TOP = 21.8                          # korona murka attykowego (≈140,31 m n.p.m.)
     # ---- front (zach.) u od narożnika pn. (szczyt) – rysunek s. 12, skala pozioma 1,80 cm/px
@@ -2355,8 +2355,8 @@ def export_preview(out_dir=None, opts=None, kamery=None, samples=28, data_godzin
     dt = datetime.datetime.strptime(data_godzina, '%Y-%m-%d %H:%M').replace(tzinfo=TZ)
     az, el = sun_position(dt)
     az_siatki = az - (-0.738)        # zbieżność południków γ = −0,738° (oś n obrócona względem pn. geogr.)
-    blib.render_settings(sc, 960, 640, samples=samples, adaptive=0.02, exposure=-0.35, look='AgX - Base Contrast')
-    blib.sky_and_sun(sc, az_siatki, el, sun_strength=3.6, sky_strength=0.8)
+    blib.render_settings(sc, 960, 640, samples=samples, adaptive=0.02, exposure=-0.25, look='AgX - Base Contrast')
+    blib.sky_and_sun(sc, az_siatki, el, sun_strength=6.0, sky_strength=0.18)
     wyniki = {}
     for nm in (kamery or list(KAMERY)):
         ustaw_kamere(ctx, sc, nm)

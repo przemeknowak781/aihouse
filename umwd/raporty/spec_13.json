@@ -1,0 +1,63 @@
+{
+ "nr": 13,
+ "title": "First two concepts delivered: K1 'Block with the Sejmik Lantern' (tower +38.2 m, rounded corner R 13 m) and K2 'Arcade & Campanile' (brick tectonics, 44 m campanile); legal & design research fully verified",
+ "stages": [
+  [
+   "Organiser materials: download, unpack, text extraction (results files deliberately EXCLUDED)",
+   "done"
+  ],
+  [
+   "Rules register (184 requirements, 14 conflicts) + checklists ✔ verified",
+   "done"
+  ],
+  [
+   "Site ✔: zoning, heritage, 1934 overlay, DWG survey, geotech, dendrology (44 trees, keep-classes), neighbours (window positions & sills)",
+   "done"
+  ],
+  [
+   "Law ✔ (verified): WT 2002 expired 20.09.2026 → art. 102a Building Law bridge; fire ✔; accessibility ✔; zero-emission ✔",
+   "done"
+  ],
+  [
+   "Design research ✔ (verified): trends, visual craft, boards, façades, Wrocław context, cost model",
+   "done"
+  ],
+  [
+   "Programme ✔: 193 rooms, 187 offices (24/32 m², 1.35 m module), PU ≈ 8,600 m², GFA ≈ 14,000 m² above ground",
+   "done"
+  ],
+  [
+   "Concept panel ►: K1 ✔, K2 ✔, K3–K5 drafting (parallel agents) → 5 jurors → synthesis",
+   "running"
+  ],
+  [
+   "3D/visuals: plan & site-plan engines ✔, Blender lib ✔; photomatch F.17.A/B solver ►; 3D context (neighbours LOD3, bridge pylons with helmets, terrain, trees) ►",
+   "running"
+  ],
+  [
+   "Stage I study (2 boards) + Stage II entry (≤8 boards 100×70 per clarif. 20), 5×A3 text, F.14.B/F.15 tables, white model 1:250",
+   "todo"
+  ],
+  [
+   "Jury simulation & compliance audit → iterate until no open issues",
+   "todo"
+  ]
+ ],
+ "notes": [
+  "K1: perimeter along Mazowiecka (4 'plots', cornice +21.00 = attic of No. 19, set-back storey to +23.6), tower in zone A to +38.2 m with rounded NE corner R 13 m; Sejmik storey 10 m high + mezzanine 416 m² (public gallery, clubs); 'Hall of the Voivodeship' crossing from the bridge square to the garden court; 13,906 m² GFA; 147.0 M PLN.",
+  "K2: two-storey brick citizens' arcade (54.6 m) along the bridgehead, 'campanile' 9.45 × 9.45 × 44 m hinging the two street grids, tower attic +37.0, wings +20.3; 14,161 m² GFA; 148.6 M PLN (0.9 % headroom — tight).",
+  "Critical legal finding (verified against ISAP): the 2002 technical regulation (WT) expired on 20 Sep 2026 and no new one has been published; designs may follow the old WT for 18 months under art. 102a of the Building Law — our entry states this explicitly and checks against the 2026 draft.",
+  "Also new: civil-protection act (from 29 May 2026) requires shelter capacity → the garage doubles as an emergency shelter; above 25 m non-combustible façades, no balconies.",
+  "Next: K3 (civic forum), K4 (zero-emission hybrid), K5 (dynamic modernism) → 5 jurors in parallel → synthesis."
+ ],
+ "images": [
+  {
+   "path": "umwd/render/studia/massing_K1_K2.jpg",
+   "caption": "Approximate clay massing of K1 (left) and K2 (right), view from north-west"
+  },
+  {
+   "path": "umwd/render/studia/envelope_mpzp.png",
+   "caption": "Legal envelope (MPZP) for comparison"
+  }
+ ]
+}

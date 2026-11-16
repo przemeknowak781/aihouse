@@ -1,5 +1,5 @@
 {
- "title": "Neighbour, tree and soil data complete: the protected window in Wybrzeże Słowackiego 5 fixes the south-east edge of the scheme (§13 sector)",
+ "title": "First two concepts delivered: K1 'Block with the Sejmik Lantern' (tower +38.2 m, rounded corner R 13 m) and K2 'Arcade & Campanile' (brick tectonics, 44 m campanile); legal & design research fully verified",
  "stages": [
   [
    "Organiser materials: download, unpack, text extraction (results files deliberately EXCLUDED)",
@@ -14,19 +14,19 @@
    "done"
   ],
   [
-   "Law ✔, sunlight ✔, fire ✔, accessibility ✔, zero-emission & energy strategy ✔ (verification ►)",
-   "running"
+   "Law ✔ (verified): WT 2002 expired 20.09.2026 → art. 102a Building Law bridge; fire ✔; accessibility ✔; zero-emission ✔",
+   "done"
   ],
   [
-   "Research ✔: trends, visual craft, boards, façades, Wrocław context, cost benchmarks (verification ►)",
-   "running"
+   "Design research ✔ (verified): trends, visual craft, boards, façades, Wrocław context, cost model",
+   "done"
   ],
   [
    "Programme ✔: 193 rooms, 187 offices (24/32 m², 1.35 m module), PU ≈ 8,600 m², GFA ≈ 14,000 m² above ground",
    "done"
   ],
   [
-   "Concept panel ►: K1 contextual block + Sejmik lantern · K2 Wrocław brick tectonics · K3 civic forum · K4 zero-emission hybrid · K5 dynamic 1930s modernism → jury J1–J5",
+   "Concept panel ►: K1 ✔, K2 ✔, K3–K5 drafting (parallel agents) → 5 jurors → synthesis",
    "running"
   ],
   [
@@ -43,20 +43,20 @@
   ]
  ],
  "notes": [
-  "§13 sector (right): window of room 207 in flat 6-6A (1st floor, sill ≈124.0 m a.s.l.) faces north. In its 60° sector: obstacle at the plot-10/2 line may rise only ≈13 m (below the MPZP 18 m minimum → must stay OPEN); a 22 m wing is allowed from ≥8.55 m; the tower (>35 m) from ≥17.5 m — zone A's south edge is ≈20 m away ✓.",
-  "Hence the south-east corner of the site becomes the service/garden court opening to Wybrzeże Słowackiego — light for No. 5, delivery & garage access from the boulevard (allowed street), bike entry from the courtyard as the programme requires.",
-  "Mazowiecka 19: bathroom windows in the gable to be bricked up (client's accompanying works) → our west wing can abut the gable, closing the street frontage as heritage requires.",
-  "Dendrology: 44 trees + 51 shrub groups, none protected species; keep-class map prepared (Z1 priority maples in the gardens) → garden court keeps the best group.",
-  "Geotech: groundwater 3.2–3.8 m below ground, rubble fill up to 3.8 m → one tight basement level (+ partial second) is the rational, budget-safe choice."
+  "K1: perimeter along Mazowiecka (4 'plots', cornice +21.00 = attic of No. 19, set-back storey to +23.6), tower in zone A to +38.2 m with rounded NE corner R 13 m; Sejmik storey 10 m high + mezzanine 416 m² (public gallery, clubs); 'Hall of the Voivodeship' crossing from the bridge square to the garden court; 13,906 m² GFA; 147.0 M PLN.",
+  "K2: two-storey brick citizens' arcade (54.6 m) along the bridgehead, 'campanile' 9.45 × 9.45 × 44 m hinging the two street grids, tower attic +37.0, wings +20.3; 14,161 m² GFA; 148.6 M PLN (0.9 % headroom — tight).",
+  "Critical legal finding (verified against ISAP): the 2002 technical regulation (WT) expired on 20 Sep 2026 and no new one has been published; designs may follow the old WT for 18 months under art. 102a of the Building Law — our entry states this explicitly and checks against the 2026 draft.",
+  "Also new: civil-protection act (from 29 May 2026) requires shelter capacity → the garage doubles as an emergency shelter; above 25 m non-combustible façades, no balconies.",
+  "Next: K3 (civic forum), K4 (zero-emission hybrid), K5 (dynamic modernism) → 5 jurors in parallel → synthesis."
  ],
  "images": [
   {
-   "path": "umwd/docs/30_lokalizacja/img/sasiedzi_okna_szczytowe_par13.png",
-   "caption": "§13 WT sector for the protected window of Wybrzeże Słowackiego 5 (flat 6-6A)"
+   "path": "umwd/render/studia/massing_K1_K2.jpg",
+   "caption": "Approximate clay massing of K1 (left) and K2 (right), view from north-west"
   },
   {
    "path": "umwd/render/studia/envelope_mpzp.png",
-   "caption": "MPZP envelope — the design subtracts courts & gaps from this volume"
+   "caption": "Legal envelope (MPZP) for comparison"
   }
  ]
 }
