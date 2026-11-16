@@ -1,0 +1,63 @@
+{
+ "nr": 14,
+ "title": "Four of five concepts in (K1, K2, K3 'Civic Forum', K5 'Bands & Lantern'); 3D context scene of the bridgehead renders in Blender (bridge pylons, river, autumn trees, neighbours)",
+ "stages": [
+  [
+   "Organiser materials: download, unpack, text extraction (results files deliberately EXCLUDED)",
+   "done"
+  ],
+  [
+   "Rules register (184 requirements, 14 conflicts) + checklists ✔ verified",
+   "done"
+  ],
+  [
+   "Site ✔: zoning, heritage, 1934 overlay, DWG survey, geotech, dendrology (44 trees, keep-classes), neighbours (window positions & sills)",
+   "done"
+  ],
+  [
+   "Law ✔ (verified): WT 2002 expired 20.09.2026 → art. 102a Building Law bridge; fire ✔; accessibility ✔; zero-emission ✔",
+   "done"
+  ],
+  [
+   "Design research ✔ (verified): trends, visual craft, boards, façades, Wrocław context, cost model",
+   "done"
+  ],
+  [
+   "Programme ✔: 193 rooms, 187 offices (24/32 m², 1.35 m module), PU ≈ 8,600 m², GFA ≈ 14,000 m² above ground",
+   "done"
+  ],
+  [
+   "Concept panel ►: K1 ✔ K2 ✔ K3 ✔ K5 ✔, K4 finishing → 5 jurors in parallel → synthesis",
+   "running"
+  ],
+  [
+   "3D/visuals: engines ✔; 3D context scene ✔ (first test renders, refining); photomatch F.17.A/B solve ►",
+   "running"
+  ],
+  [
+   "Stage I study (2 boards) + Stage II entry (≤8 boards 100×70 per clarif. 20), 5×A3 text, F.14.B/F.15 tables, white model 1:250",
+   "todo"
+  ],
+  [
+   "Jury simulation & compliance audit → iterate until no open issues",
+   "todo"
+  ]
+ ],
+ "notes": [
+  "K3 'Civic Forum': open forum court (≈620 m² + 120 m² arcade) crossed by two public axes (bridge → garden, Mazowiecka → Oława boulevard); separate Citizens' Entrance with 2 lifts straight to the public gallery; 'Sejmik Window' in a granite frame facing the forum; 13,683 m² GFA, 146.6 M PLN; 38 of 44 trees kept.",
+  "K5 'Bands & Lantern': one rounded corner (R 14 m, as on the 1934 plan) is both the arched entrance portico and, at the top, the Sejmik hall panorama over the Odra & Ostrów Tumski; horizontal bands on wings vs granite pilasters on the tower; 13,090 m² GFA, 146.5 M PLN; 40 of 46 trees kept (all garden trees).",
+  "All four comply on paper with MPZP height bands, §13 for Słowackiego 5 (tower 18–22 m away vs 16.7–17.5 m required) and the budget (146.5–148.6 M PLN) — the jury will test the numbers independently.",
+  "Common risk flagged by every author: the mezzanine on the Sejmik storey (must be argued as part of the same storey under WT §3); zone-A line digitised ±0.3 m.",
+  "Context scene (right): official survey DTM, bridge with restored pylon helmets, river, existing trees in autumn colour, neighbouring blocks — ready to receive the chosen design."
+ ],
+ "images": [
+  {
+   "path": "umwd/docs/60_wizualizacje/img/context_test_lot_ptaka_pnwsch.jpg",
+   "caption": "3D context test render — bridgehead from NE (site = lawn in the centre)"
+  },
+  {
+   "path": "umwd/render/studia/massing_K1_K2.jpg",
+   "caption": "K1 / K2 approximate massing"
+  }
+ ]
+}

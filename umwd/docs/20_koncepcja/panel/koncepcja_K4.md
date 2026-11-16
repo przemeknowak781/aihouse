@@ -295,10 +295,12 @@ Publiczność ma **oddzielne wejście**: śluza w narożniku-łuku na P0 → win
 - **Pokój GW 32 m²** = 4 moduły: 5,275 × 6,17 = **32,5 m²**, 4 stanowiska.
 - Każdy moduł ma okno, więc ściany działowe mogą stać co 1,35 m. Pokoje, magazynki, sekretariaty i sale są wymienne bez zmian elewacji i instalacji.
 
-**Skrzydła W i E – trakt dwustronny 15,35 m:**
+**Skrzydło W – trakt dwustronny 15,35 m:**
 - 2 × 6,17 m pokoi + korytarz 1,80 m + ściany;
 - konstrukcja dwuprzęsłowa 7,68 + 7,68 m: słupy prefabrykowane w elewacji (ramy co 2,70 m) i w osi;
 - **ściany korytarza są nienośne**, korytarz można przesunąć, a kondygnację zamienić na open space.
+
+**Segment E – trakt jednostronny** (głębokość 7,5–11,3 m): pokoje od pd. (na szczelinę dz. 10/2) i od wsch. (na Oławę), korytarz przy ścianie wieży. W zach. części E (głębokość < 8,5 m) są strefa wspólna i aneks. Na P1 dojście kładką z K2, na P2–P4 z korytarza obiegowego wieży.
 
 **Wieża – „pierścień” 1 162 m²:**
 - pokoje przy elewacjach (strefa 6,35 m);

@@ -748,16 +748,16 @@ class Materialy:
         sn = nb.n('ShaderNodeSeparateXYZ')
         nb.l(geo.outputs['True Normal'], sn.inputs[0])
         vert = nb.math('LESS_THAN', nb.math('ABSOLUTE', sn.outputs[2]), 0.7)
-        fu = nb.math('FRACT', nb.math('DIVIDE', sp.outputs[0], 3.2))
-        fv = nb.math('FRACT', nb.math('DIVIDE', nb.math('ADD', sp.outputs[1], 0.0), 3.4))
-        wu = nb.math('MULTIPLY', nb.math('GREATER_THAN', fu, 0.28), nb.math('LESS_THAN', fu, 0.72))
-        wv = nb.math('MULTIPLY', nb.math('GREATER_THAN', fv, 0.30), nb.math('LESS_THAN', fv, 0.78))
+        fu = nb.math('FRACT', nb.math('DIVIDE', sp.outputs[0], 3.6))
+        fv = nb.math('FRACT', nb.math('DIVIDE', nb.math('ADD', sp.outputs[1], 0.0), 3.5))
+        wu = nb.math('MULTIPLY', nb.math('GREATER_THAN', fu, 0.33), nb.math('LESS_THAN', fu, 0.67))
+        wv = nb.math('MULTIPLY', nb.math('GREATER_THAN', fv, 0.32), nb.math('LESS_THAN', fv, 0.80))
         win = nb.math('MULTIPLY', nb.math('MULTIPLY', wu, wv), vert)
         gl = nb.math('GREATER_THAN', sp.outputs[1], 1.2)    # parter bez okien poniżej 1,2 m wzgl. Z=0
         win = nb.math('MULTIPLY', win, gl)
         n1 = nb.n('ShaderNodeTexNoise', Scale=0.2, Detail=3.0)
         nb.l(uv, n1.inputs['Vector'])
-        wall = self._ramp(nb, n1.outputs['Fac'], tuple(x * 0.85 for x in c), c, 0.3, 0.7)
+        wall = self._ramp(nb, n1.outputs['Fac'], tuple(x * 0.62 for x in c), tuple(x * 0.78 for x in c), 0.3, 0.7)
         roof = (0.11, 0.11, 0.11)
         base = nb.mix(vert, roof, wall)
         col = nb.mix(win, base, (0.02, 0.025, 0.03))
@@ -2223,6 +2223,10 @@ def zbuduj_dalsze(ctx):
     rk = ctx.ramka
     woda_d = woda_d.difference(rk).union(ctx.woda_poly if ctx.woda_poly is not None else Polygon())
     lad = ex.difference(woda_d).difference(rk)
+    # usunięcie wąskich pasm i drobnych „wysp” (artefakty maski wody: barki, cienie, styk z ramką)
+    lad = lad.buffer(-1.6, join_style='mitre').buffer(1.6, join_style='mitre').intersection(ex).difference(rk)
+    lad = unary_union([p for p in _poly_parts(lad) if p.area > 400.0])
+    woda_d = ex.difference(lad).difference(rk).union(ctx.woda_poly if ctx.woda_poly is not None else Polygon())
     ctx.woda_dalsza = woda_d
     if ctx.opts['ortofoto']:
         V2, F = triangulacja(lad, 12.0)
@@ -2414,6 +2418,68 @@ KAMERY = {
 }
 
 
+def dodaj_chmury(sc, pokrycie=0.42, skala=1.1, seed=3.0):
+    """Proceduralne chmury kłębiaste na niebie fizycznym (świat): szum rzutowany na płaszczyznę nieba,
+    wygaszony przy horyzoncie; jasność chmur proporcjonalna do luminancji nieba (spójna ekspozycja)."""
+    w = sc.world
+    nt = w.node_tree
+    sky = next((n for n in nt.nodes if n.bl_idname == 'ShaderNodeTexSky'), None)
+    bg = next(n for n in nt.nodes if n.bl_idname == 'ShaderNodeBackground')
+    if sky is None:
+        return
+    N, L = nt.nodes, nt.links
+    tc = N.new('ShaderNodeTexCoord')
+    sp = N.new('ShaderNodeSeparateXYZ')
+    L.new(tc.outputs['Generated'], sp.inputs[0])
+
+    def M(op, a, b=None):
+        m = N.new('ShaderNodeMath')
+        m.operation = op
+        for i, x in enumerate((a, b)):
+            if x is None:
+                continue
+            if isinstance(x, (int, float)):
+                m.inputs[i].default_value = x
+            else:
+                L.new(x, m.inputs[i])
+        return m.outputs[0]
+    zz = M('ADD', sp.outputs[2], 0.09)
+    u = M('DIVIDE', sp.outputs[0], zz)
+    v = M('DIVIDE', sp.outputs[1], zz)
+    cb = N.new('ShaderNodeCombineXYZ')
+    L.new(u, cb.inputs[0])
+    L.new(v, cb.inputs[1])
+    cb.inputs[2].default_value = seed
+    nz = N.new('ShaderNodeTexNoise')
+    nz.inputs['Scale'].default_value = skala
+    nz.inputs['Detail'].default_value = 9.0
+    nz.inputs['Roughness'].default_value = 0.58
+    L.new(cb.outputs[0], nz.inputs['Vector'])
+    rp = N.new('ShaderNodeValToRGB')
+    rp.color_ramp.elements[0].position = 1.0 - pokrycie
+    rp.color_ramp.elements[1].position = min(0.99, 1.0 - pokrycie + 0.16)
+    L.new(nz.outputs['Fac'], rp.inputs['Fac'])
+    fade = M('MULTIPLY', M('MINIMUM', M('MAXIMUM', M('DIVIDE', M('SUBTRACT', sp.outputs[2], 0.02), 0.22), 0.0), 1.0),
+             rp.outputs['Color'])
+    nz2 = N.new('ShaderNodeTexNoise')
+    nz2.inputs['Scale'].default_value = skala * 2.3
+    nz2.inputs['Detail'].default_value = 5.0
+    L.new(cb.outputs[0], nz2.inputs['Vector'])
+    lum = N.new('ShaderNodeRGBToBW')
+    L.new(sky.outputs['Color'], lum.inputs[0])
+    jas = M('MULTIPLY', M('MULTIPLY', lum.outputs[0], 2.3), M('ADD', M('MULTIPLY', nz2.outputs['Fac'], 0.45), 0.62))
+    cc = N.new('ShaderNodeCombineColor')
+    L.new(jas, cc.inputs[0])
+    L.new(jas, cc.inputs[1])
+    L.new(M('MULTIPLY', jas, 1.03), cc.inputs[2])
+    mx = N.new('ShaderNodeMix')
+    mx.data_type = 'RGBA'
+    L.new(fade, mx.inputs[0])
+    L.new(sky.outputs['Color'], mx.inputs[6])
+    L.new(cc.outputs[0], mx.inputs[7])
+    L.new(mx.outputs[2], bg.inputs['Color'])
+
+
 def ustaw_kamere(ctx_or_teren, sc, nazwa):
     k = KAMERY[nazwa]
     ter = ctx_or_teren.teren if hasattr(ctx_or_teren, 'teren') else ctx_or_teren
@@ -2429,7 +2495,7 @@ def ustaw_kamere(ctx_or_teren, sc, nazwa):
 
 
 def export_preview(out_dir=None, opts=None, kamery=None, samples=28, data_godzina='2025-10-29 11:40', jpg_q=88,
-                   prefix='context_test_'):
+                   prefix='context_test_', chmury=True):
     """Render testowy kontekstu z kamer KAMERY do ``docs/60_wizualizacje/img/context_test_<kamera>.jpg``
     (≤ 1 MB). Zwraca {kamera: (ścieżka, czas_s)} oraz info z budowy."""
     import datetime
@@ -2451,6 +2517,8 @@ def export_preview(out_dir=None, opts=None, kamery=None, samples=28, data_godzin
         dt = datetime.datetime.strptime(KAMERY[nm].get('czas', data_godzina), '%Y-%m-%d %H:%M').replace(tzinfo=TZ)
         az, el = sun_position(dt)
         blib.sky_and_sun(sc, az + 0.738, el, sun_strength=6.0, sky_strength=0.18)
+        if chmury:
+            dodaj_chmury(sc)
         ustaw_kamere(ctx, sc, nm)
         png = out_dir / ('_tmp_%s.png' % nm)
         sc.render.filepath = str(png)

@@ -1,5 +1,5 @@
 {
- "title": "First two concepts delivered: K1 'Block with the Sejmik Lantern' (tower +38.2 m, rounded corner R 13 m) and K2 'Arcade & Campanile' (brick tectonics, 44 m campanile); legal & design research fully verified",
+ "title": "Four of five concepts in (K1, K2, K3 'Civic Forum', K5 'Bands & Lantern'); 3D context scene of the bridgehead renders in Blender (bridge pylons, river, autumn trees, neighbours)",
  "stages": [
   [
    "Organiser materials: download, unpack, text extraction (results files deliberately EXCLUDED)",
@@ -26,11 +26,11 @@
    "done"
   ],
   [
-   "Concept panel ►: K1 ✔, K2 ✔, K3–K5 drafting (parallel agents) → 5 jurors → synthesis",
+   "Concept panel ►: K1 ✔ K2 ✔ K3 ✔ K5 ✔, K4 finishing → 5 jurors in parallel → synthesis",
    "running"
   ],
   [
-   "3D/visuals: plan & site-plan engines ✔, Blender lib ✔; photomatch F.17.A/B solver ►; 3D context (neighbours LOD3, bridge pylons with helmets, terrain, trees) ►",
+   "3D/visuals: engines ✔; 3D context scene ✔ (first test renders, refining); photomatch F.17.A/B solve ►",
    "running"
   ],
   [
@@ -43,20 +43,20 @@
   ]
  ],
  "notes": [
-  "K1: perimeter along Mazowiecka (4 'plots', cornice +21.00 = attic of No. 19, set-back storey to +23.6), tower in zone A to +38.2 m with rounded NE corner R 13 m; Sejmik storey 10 m high + mezzanine 416 m² (public gallery, clubs); 'Hall of the Voivodeship' crossing from the bridge square to the garden court; 13,906 m² GFA; 147.0 M PLN.",
-  "K2: two-storey brick citizens' arcade (54.6 m) along the bridgehead, 'campanile' 9.45 × 9.45 × 44 m hinging the two street grids, tower attic +37.0, wings +20.3; 14,161 m² GFA; 148.6 M PLN (0.9 % headroom — tight).",
-  "Critical legal finding (verified against ISAP): the 2002 technical regulation (WT) expired on 20 Sep 2026 and no new one has been published; designs may follow the old WT for 18 months under art. 102a of the Building Law — our entry states this explicitly and checks against the 2026 draft.",
-  "Also new: civil-protection act (from 29 May 2026) requires shelter capacity → the garage doubles as an emergency shelter; above 25 m non-combustible façades, no balconies.",
-  "Next: K3 (civic forum), K4 (zero-emission hybrid), K5 (dynamic modernism) → 5 jurors in parallel → synthesis."
+  "K3 'Civic Forum': open forum court (≈620 m² + 120 m² arcade) crossed by two public axes (bridge → garden, Mazowiecka → Oława boulevard); separate Citizens' Entrance with 2 lifts straight to the public gallery; 'Sejmik Window' in a granite frame facing the forum; 13,683 m² GFA, 146.6 M PLN; 38 of 44 trees kept.",
+  "K5 'Bands & Lantern': one rounded corner (R 14 m, as on the 1934 plan) is both the arched entrance portico and, at the top, the Sejmik hall panorama over the Odra & Ostrów Tumski; horizontal bands on wings vs granite pilasters on the tower; 13,090 m² GFA, 146.5 M PLN; 40 of 46 trees kept (all garden trees).",
+  "All four comply on paper with MPZP height bands, §13 for Słowackiego 5 (tower 18–22 m away vs 16.7–17.5 m required) and the budget (146.5–148.6 M PLN) — the jury will test the numbers independently.",
+  "Common risk flagged by every author: the mezzanine on the Sejmik storey (must be argued as part of the same storey under WT §3); zone-A line digitised ±0.3 m.",
+  "Context scene (right): official survey DTM, bridge with restored pylon helmets, river, existing trees in autumn colour, neighbouring blocks — ready to receive the chosen design."
  ],
  "images": [
   {
-   "path": "umwd/render/studia/massing_K1_K2.jpg",
-   "caption": "Approximate clay massing of K1 (left) and K2 (right), view from north-west"
+   "path": "umwd/docs/60_wizualizacje/img/context_test_lot_ptaka_pnwsch.jpg",
+   "caption": "3D context test render — bridgehead from NE (site = lawn in the centre)"
   },
   {
-   "path": "umwd/render/studia/envelope_mpzp.png",
-   "caption": "Legal envelope (MPZP) for comparison"
+   "path": "umwd/render/studia/massing_K1_K2.jpg",
+   "caption": "K1 / K2 approximate massing"
   }
  ]
 }

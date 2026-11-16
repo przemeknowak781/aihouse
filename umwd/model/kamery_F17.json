@@ -45,9 +45,9 @@
     "uwaga": "F.17 = panorama 8000x5632 powiekszona x1,25 i przycieta (M.10 = panorama x0,5, stad s = 2,5)"
    },
    "pinhole": {
-    "f_px_M10": 1466.9,
-    "f_px_F17": 3667.23,
-    "f_px_panorama8000": 2933.8,
+    "f_px_M10": 1623.25,
+    "f_px_F17": 4058.11,
+    "f_px_panorama8000": 3246.5,
     "cx_cy_px_M10": [
      2000.0,
      1408.0
@@ -61,77 +61,81 @@
      8470,
      4475
     ],
-    "hfov_panorama8000_deg": 107.48,
-    "vfov_panorama8000_deg": 87.65,
-    "hfov_F17_deg": 98.219,
-    "ogniskowa_ekw_35mm_pozioma": 13.2
+    "hfov_panorama8000_deg": 101.87,
+    "vfov_panorama8000_deg": 81.88,
+    "hfov_F17_deg": 92.444,
+    "ogniskowa_ekw_35mm_pozioma": 14.61
    },
    "poza": {
     "C_e_n_H": [
-     332.564,
-     35.14,
-     204.633
+     356.815,
+     20.455,
+     203.922
     ],
     "C_PL2000": [
-     6433832.564,
-     5664135.14
+     6433856.815,
+     5664120.455
     ],
-    "yaw_deg": 285.796,
-    "pitch_deg": -13.4658,
-    "roll_deg": -1.4748,
+    "yaw_deg": 287.808,
+    "pitch_deg": -12.0531,
+    "roll_deg": -0.6524,
     "R_swiat_do_kamery": [
      [
-      0.2663559,
-      0.9635497,
-      0.0250301
+      0.3035446,
+      0.9527521,
+      0.0111361
      ],
      [
-      0.2310027,
-      -0.038602,
-      -0.972187
+      0.2022833,
+      -0.0530171,
+      -0.9778909
      ],
      [
-      -0.9357843,
-      0.2647298,
-      -0.2328645
+      -0.9310973,
+      0.2990862,
+      -0.2088189
      ]
     ],
     "odchylenia_std": {
-     "e": 6.308,
-     "n": 1.11,
-     "H": 1.534,
-     "yaw": 0.444,
-     "pitch": 0.266,
-     "roll": 0.412,
-     "f": 35.614
+     "e": 4.405,
+     "n": 0.784,
+     "H": 0.757,
+     "yaw": 0.263,
+     "pitch": 0.155,
+     "roll": 0.168,
+     "f": 23.71
     },
-    "wysokosc_nad_startem_wg_EXIF": 116.83,
-    "roznica_DJI_abs_alt_m": 15.11,
+    "wysokosc_nad_startem_wg_EXIF": 116.12,
+    "roznica_DJI_abs_alt_m": 15.82,
     "roznica_od_GPS_m": [
-     -23.83,
-     11.04
+     0.42,
+     -3.65
     ]
    },
    "bledy": {
-    "rms_punkty_reczne_px_F17": 8.3,
-    "rms_linie_px_F17": 4.32,
-    "rms_punkty_wiazace_px_F17": 12.7,
-    "rms_wszystkie_punkty_px_F17": 12.51,
+    "rms_punkty_reczne_px_F17": 6.32,
+    "rms_linie_px_F17": 3.25,
+    "rms_punkty_wiazace_px_F17": 2.7,
+    "rms_wszystkie_punkty_px_F17": 2.89,
     "loo_punkty_reczne_px_F17": [
      {
       "id": "WS5_naroze_NE_dach",
-      "blad_px": 26.1
+      "blad_px": 12.2
      },
      {
       "id": "WS5_naroze_NE_pion",
-      "blad_px": 7.1
+      "blad_px": 5.2
      },
      {
       "id": "WS5_naroze_SE_dach",
-      "blad_px": 9.1
+      "blad_px": 6.5
+     },
+     {
+      "id": "kraweznik_Mazowiecka_wsch",
+      "blad_px": 2.5
      }
     ],
-    "rms_loo_px_F17": 16.48,
+    "rms_loo_px_F17": 7.49,
     "prog_wymagany_px": 25.4
    },
    "obserwacje": [
@@ -152,9 +156,9 @@
      "uzyj": true,
      "uzyty": true,
      "sigma_px": 6.0,
-     "dx": -3.6,
-     "dy": -9.5,
-     "blad_px": 10.2
+     "dx": -3.8,
+     "dy": -7.1,
+     "blad_px": 8.0
     },
     {
      "id": "WS5_naroze_NE_pion",
@@ -187,10 +191,10 @@
      "uzyty": true,
      "sigma_px": 4.0,
      "residua_px": [
-      1.4,
-      -5.9
+      2.1,
+      -5.3
      ],
-     "rms_px": 4.3
+     "rms_px": 4.0
     },
     {
      "id": "WS5_naroze_SE_dach",
@@ -209,9 +213,9 @@
      "uzyj": true,
      "uzyty": true,
      "sigma_px": 8.0,
-     "dx": -5.0,
-     "dy": -3.0,
-     "blad_px": 5.8
+     "dx": -0.1,
+     "dy": 4.0,
+     "blad_px": 4.0
     },
     {
      "id": "kraweznik_Mazowiecka_wsch",
@@ -229,15 +233,14 @@
      ],
      "sigma": 4.0,
      "zr": "kraweznik wsch. ul. Mazowieckiej (granica trawnika), M.02 model terenu (3D)",
-     "uzyj": false,
-     "odrzucony": "residuum 5.3 sigma",
-     "uzyty": false,
+     "uzyj": true,
+     "uzyty": true,
      "sigma_px": 4.0,
      "residua_px": [
-      -24.8,
-      -22.8
+      -0.8,
+      -3.0
      ],
-     "rms_px": 23.8
+     "rms_px": 2.2
     },
     {
      "id": "horyzont",
@@ -266,12 +269,12 @@
      "uzyty": true,
      "sigma_px": 14.999939999999999,
      "residua_px": [
-      -54.7,
-      -30.7,
-      0.1,
-      54.6
+      -9.5,
+      -2.4,
+      -3.8,
+      27.4
      ],
-     "rms_px": 41.6
+     "rms_px": 14.7
     },
     {
      "id": "wiaz_48.5_100.5",
@@ -288,13 +291,11 @@
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.59)",
      "wiazacy": true,
-     "uzyj": false,
-     "odrzucony": "residuum 4.3 sigma",
-     "uzyty": false,
+     "uzyty": true,
      "sigma_px": 8.0,
-     "dx": 48.5,
-     "dy": -21.9,
-     "blad_px": 53.2
+     "dx": 2.2,
+     "dy": -2.3,
+     "blad_px": 3.2
     },
     {
      "id": "wiaz_50.5_100.5",
@@ -311,13 +312,11 @@
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.45)",
      "wiazacy": true,
-     "uzyj": false,
-     "odrzucony": "residuum 4.0 sigma",
-     "uzyty": false,
+     "uzyty": true,
      "sigma_px": 8.0,
-     "dx": 46.1,
-     "dy": -21.8,
-     "blad_px": 51.0
+     "dx": 0.7,
+     "dy": -2.7,
+     "blad_px": 2.8
     },
     {
      "id": "wiaz_46.5_98.5",
@@ -325,22 +324,20 @@
      "X": [
       46.5,
       98.5,
-      120.188
+      120.265
      ],
      "uvF": [
-      4085.81,
-      2329.3
+      4080.81,
+      2325.9
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.57)",
      "wiazacy": true,
-     "uzyj": false,
-     "odrzucony": "residuum 4.1 sigma",
-     "uzyty": false,
+     "uzyty": true,
      "sigma_px": 8.0,
-     "dx": 46.1,
-     "dy": -25.7,
-     "blad_px": 52.8
+     "dx": 3.6,
+     "dy": -2.6,
+     "blad_px": 4.4
     },
     {
      "id": "wiaz_48.5_98.5",
@@ -348,22 +345,20 @@
      "X": [
       48.5,
       98.5,
-      120.078
+      120.133
      ],
      "uvF": [
-      4092.27,
-      2333.51
+      4087.35,
+      2333.31
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.59)",
      "wiazacy": true,
-     "uzyj": false,
-     "odrzucony": "residuum 3.9 sigma",
-     "uzyty": false,
+     "uzyty": true,
      "sigma_px": 8.0,
-     "dx": 44.7,
-     "dy": -22.1,
-     "blad_px": 49.9
+     "dx": 3.1,
+     "dy": -2.4,
+     "blad_px": 3.9
     },
     {
      "id": "wiaz_50.5_98.5",
@@ -371,22 +366,20 @@
      "X": [
       50.5,
       98.5,
-      119.904
+      119.987
      ],
      "uvF": [
-      4099.74,
-      2338.63
+      4096.02,
+      2342.08
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.55)",
      "wiazacy": true,
-     "uzyj": false,
-     "odrzucony": "residuum 3.6 sigma",
-     "uzyty": false,
+     "uzyty": true,
      "sigma_px": 8.0,
-     "dx": 42.5,
-     "dy": -18.4,
-     "blad_px": 46.3
+     "dx": 0.5,
+     "dy": -3.3,
+     "blad_px": 3.3
     },
     {
      "id": "wiaz_46.5_96.5",
@@ -394,22 +387,20 @@
      "X": [
       46.5,
       96.5,
-      120.075
+      120.163
      ],
      "uvF": [
-      4066.8,
-      2329.84
+      4057.51,
+      2328.33
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.46)",
      "wiazacy": true,
-     "uzyj": false,
-     "odrzucony": "residuum 3.6 sigma",
-     "uzyty": false,
+     "uzyty": true,
      "sigma_px": 8.0,
-     "dx": 41.4,
-     "dy": -23.8,
-     "blad_px": 47.7
+     "dx": 2.9,
+     "dy": -2.2,
+     "blad_px": 3.6
     },
     {
      "id": "wiaz_48.5_96.5",
@@ -417,22 +408,20 @@
      "X": [
       48.5,
       96.5,
-      119.989
+      120.06
      ],
      "uvF": [
-      4074.08,
-      2334.06
+      4064.75,
+      2335.93
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.51)",
      "wiazacy": true,
-     "uzyj": false,
-     "odrzucony": "residuum 4.2 sigma",
-     "uzyty": false,
+     "uzyty": true,
      "sigma_px": 8.0,
-     "dx": 39.2,
-     "dy": -20.3,
-     "blad_px": 44.1
+     "dx": 1.6,
+     "dy": -2.5,
+     "blad_px": 2.9
     },
     {
      "id": "wiaz_50.5_96.5",
@@ -440,22 +429,20 @@
      "X": [
       50.5,
       96.5,
-      119.877
+      119.972
      ],
      "uvF": [
-      4080.47,
-      2339.08
+      4072.8,
+      2342.91
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.53)",
      "wiazacy": true,
-     "uzyj": false,
-     "odrzucony": "residuum 4.0 sigma",
-     "uzyty": false,
+     "uzyty": true,
      "sigma_px": 8.0,
-     "dx": 37.8,
-     "dy": -17.3,
-     "blad_px": 41.6
+     "dx": -0.4,
+     "dy": -2.2,
+     "blad_px": 2.3
     },
     {
      "id": "wiaz_50.5_94.5",
@@ -463,22 +450,20 @@
      "X": [
       50.5,
       94.5,
-      119.885
+      119.957
      ],
      "uvF": [
-      4061.55,
-      2339.1
+      4048.09,
+      2345.67
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.47)",
      "wiazacy": true,
-     "uzyj": false,
-     "odrzucony": "residuum 3.9 sigma",
-     "uzyty": false,
+     "uzyty": true,
      "sigma_px": 8.0,
-     "dx": 32.8,
-     "dy": -16.1,
-     "blad_px": 36.5
+     "dx": -0.0,
+     "dy": -3.1,
+     "blad_px": 3.1
     },
     {
      "id": "wiaz_58.5_90.5",
@@ -486,20 +471,20 @@
      "X": [
       58.5,
       90.5,
-      119.592
+      119.635
      ],
      "uvF": [
-      4048.92,
-      2365.75
+      4022.94,
+      2376.16
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.67)",
      "wiazacy": true,
      "uzyty": true,
      "sigma_px": 8.0,
-     "dx": 16.4,
-     "dy": -8.6,
-     "blad_px": 18.6
+     "dx": -0.6,
+     "dy": -0.6,
+     "blad_px": 0.8
     },
     {
      "id": "wiaz_60.5_90.5",
@@ -507,20 +492,20 @@
      "X": [
       60.5,
       90.5,
-      119.554
+      119.585
      ],
      "uvF": [
-      4054.92,
-      2371.48
+      4029.11,
+      2383.44
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.64)",
      "wiazacy": true,
      "uzyty": true,
      "sigma_px": 8.0,
-     "dx": 15.4,
-     "dy": -6.6,
-     "blad_px": 16.8
+     "dx": -0.8,
+     "dy": -0.6,
+     "blad_px": 1.0
     },
     {
      "id": "wiaz_62.5_90.5",
@@ -528,20 +513,20 @@
      "X": [
       62.5,
       90.5,
-      119.53
+      119.503
      ],
      "uvF": [
-      4060.13,
-      2377.33
+      4034.98,
+      2391.35
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.49)",
      "wiazacy": true,
      "uzyty": true,
      "sigma_px": 8.0,
-     "dx": 15.2,
-     "dy": -4.8,
-     "blad_px": 16.0
+     "dx": -0.6,
+     "dy": -0.8,
+     "blad_px": 1.0
     },
     {
      "id": "wiaz_86.5_88.5",
@@ -549,20 +534,20 @@
      "X": [
       86.5,
       88.5,
-      119.315
+      119.258
      ],
      "uvF": [
-      4111.49,
-      2463.04
+      4090.98,
+      2481.83
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.47)",
      "wiazacy": true,
      "uzyty": true,
      "sigma_px": 8.0,
-     "dx": 2.8,
-     "dy": 10.6,
-     "blad_px": 10.9
+     "dx": -5.5,
+     "dy": 1.3,
+     "blad_px": 5.6
     },
     {
      "id": "wiaz_86.5_86.5",
@@ -570,20 +555,20 @@
      "X": [
       86.5,
       86.5,
-      119.311
+      119.23
      ],
      "uvF": [
-      4087.68,
-      2463.41
+      4068.65,
+      2484.6
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.65)",
      "wiazacy": true,
      "uzyty": true,
      "sigma_px": 8.0,
-     "dx": -0.6,
-     "dy": 12.0,
-     "blad_px": 12.0
+     "dx": -10.4,
+     "dy": 1.1,
+     "blad_px": 10.5
     },
     {
      "id": "wiaz_52.5_82.5",
@@ -591,20 +576,20 @@
      "X": [
       52.5,
       82.5,
-      119.565
+      119.483
      ],
      "uvF": [
-      3957.1,
-      2357.95
+      3906.83,
+      2366.82
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.49)",
      "wiazacy": true,
      "uzyty": true,
      "sigma_px": 8.0,
-     "dx": -4.4,
-     "dy": -16.5,
-     "blad_px": 17.1
+     "dx": -1.2,
+     "dy": -1.8,
+     "blad_px": 2.1
     },
     {
      "id": "wiaz_44.5_80.5",
@@ -612,20 +597,20 @@
      "X": [
       44.5,
       80.5,
-      119.787
+      119.53
      ],
      "uvF": [
-      3913.09,
-      2337.08
+      3860.32,
+      2341.8
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.48)",
      "wiazacy": true,
      "uzyty": true,
      "sigma_px": 8.0,
-     "dx": -0.8,
-     "dy": -24.4,
-     "blad_px": 24.4
+     "dx": 0.5,
+     "dy": -0.8,
+     "blad_px": 1.0
     },
     {
      "id": "wiaz_52.5_80.5",
@@ -633,20 +618,20 @@
      "X": [
       52.5,
       80.5,
-      119.538
+      119.46
      ],
      "uvF": [
-      3934.44,
-      2358.53
+      3881.31,
+      2368.0
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.49)",
      "wiazacy": true,
      "uzyty": true,
      "sigma_px": 8.0,
-     "dx": -6.5,
-     "dy": -15.4,
-     "blad_px": 16.7
+     "dx": -0.7,
+     "dy": -0.9,
+     "blad_px": 1.2
     },
     {
      "id": "wiaz_52.5_78.5",
@@ -654,20 +639,20 @@
      "X": [
       52.5,
       78.5,
-      119.504
+      119.415
      ],
      "uvF": [
-      3912.42,
-      2358.53
+      3856.46,
+      2370.21
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.56)",
      "wiazacy": true,
      "uzyty": true,
      "sigma_px": 8.0,
-     "dx": -9.3,
-     "dy": -13.7,
-     "blad_px": 16.6
+     "dx": -1.0,
+     "dy": -0.8,
+     "blad_px": 1.3
     },
     {
      "id": "wiaz_54.5_78.5",
@@ -675,20 +660,20 @@
      "X": [
       54.5,
       78.5,
-      119.441
+      119.408
      ],
      "uvF": [
-      3917.57,
-      2364.44
+      3860.92,
+      2376.2
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.45)",
      "wiazacy": true,
      "uzyty": true,
      "sigma_px": 8.0,
-     "dx": -10.6,
-     "dy": -11.7,
-     "blad_px": 15.8
+     "dx": -0.6,
+     "dy": -0.1,
+     "blad_px": 0.6
     },
     {
      "id": "wiaz_52.5_76.5",
@@ -696,20 +681,20 @@
      "X": [
       52.5,
       76.5,
-      119.462
+      119.37
      ],
      "uvF": [
-      3890.66,
-      2359.04
+      3831.08,
+      2372.26
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.55)",
      "wiazacy": true,
      "uzyty": true,
      "sigma_px": 8.0,
-     "dx": -12.5,
-     "dy": -12.4,
-     "blad_px": 17.6
+     "dx": -0.9,
+     "dy": -0.5,
+     "blad_px": 1.0
     },
     {
      "id": "wiaz_54.5_76.5",
@@ -717,20 +702,20 @@
      "X": [
       54.5,
       76.5,
-      119.384
+      119.35
      ],
      "uvF": [
-      3896.28,
-      2364.64
+      3835.52,
+      2378.36
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.65)",
      "wiazacy": true,
      "uzyty": true,
      "sigma_px": 8.0,
-     "dx": -14.3,
-     "dy": -9.9,
-     "blad_px": 17.4
+     "dx": -0.5,
+     "dy": 0.2,
+     "blad_px": 0.6
     },
     {
      "id": "wiaz_56.5_76.5",
@@ -738,20 +723,20 @@
      "X": [
       56.5,
       76.5,
-      119.379
+      119.26
      ],
      "uvF": [
-      3902.54,
-      2370.38
+      3840.46,
+      2386.0
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.51)",
      "wiazacy": true,
      "uzyty": true,
      "sigma_px": 8.0,
-     "dx": -16.8,
-     "dy": -8.3,
-     "blad_px": 18.7
+     "dx": -0.6,
+     "dy": 0.3,
+     "blad_px": 0.7
     },
     {
      "id": "wiaz_76.5_72.5",
@@ -759,22 +744,20 @@
      "X": [
       76.5,
       72.5,
-      119.34
+      119.375
      ],
      "uvF": [
-      3903.17,
-      2430.46
+      3836.06,
+      2454.09
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.46)",
      "wiazacy": true,
-     "uzyj": false,
-     "odrzucony": "residuum 4.7 sigma",
-     "uzyty": false,
+     "uzyty": true,
      "sigma_px": 8.0,
-     "dx": -30.7,
-     "dy": 13.4,
-     "blad_px": 33.5
+     "dx": 1.2,
+     "dy": 6.1,
+     "blad_px": 6.2
     },
     {
      "id": "wiaz_78.5_72.5",
@@ -782,22 +765,20 @@
      "X": [
       78.5,
       72.5,
-      119.325
+      119.395
      ],
      "uvF": [
-      3910.7,
-      2436.42
+      3842.95,
+      2461.66
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.47)",
      "wiazacy": true,
-     "uzyj": false,
-     "odrzucony": "residuum 5.1 sigma",
-     "uzyty": false,
+     "uzyty": true,
      "sigma_px": 8.0,
-     "dx": -34.2,
-     "dy": 16.1,
-     "blad_px": 37.8
+     "dx": -0.4,
+     "dy": 5.9,
+     "blad_px": 5.9
     },
     {
      "id": "wiaz_62.5_70.5",
@@ -805,22 +786,20 @@
      "X": [
       62.5,
       70.5,
-      119.325
+      119.33
      ],
      "uvF": [
-      3843.89,
-      2389.75
+      3775.45,
+      2410.41
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.51)",
      "wiazacy": true,
-     "uzyj": false,
-     "odrzucony": "residuum 3.7 sigma",
-     "uzyty": false,
+     "uzyty": true,
      "sigma_px": 8.0,
-     "dx": -24.2,
-     "dy": -0.3,
-     "blad_px": 24.2
+     "dx": 0.8,
+     "dy": 1.2,
+     "blad_px": 1.5
     },
     {
      "id": "wiaz_64.5_70.5",
@@ -828,22 +807,20 @@
      "X": [
       64.5,
       70.5,
-      119.336
+      119.428
      ],
      "uvF": [
-      3849.74,
-      2395.64
+      3779.99,
+      2415.18
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.46)",
      "wiazacy": true,
-     "uzyj": false,
-     "odrzucony": "residuum 4.0 sigma",
-     "uzyty": false,
+     "uzyty": true,
      "sigma_px": 8.0,
-     "dx": -26.5,
-     "dy": 1.4,
-     "blad_px": 26.6
+     "dx": 0.9,
+     "dy": 2.3,
+     "blad_px": 2.4
     },
     {
      "id": "wiaz_62.5_68.5",
@@ -851,22 +828,20 @@
      "X": [
       62.5,
       68.5,
-      119.293
+      119.35
      ],
      "uvF": [
-      3822.52,
-      2390.42
+      3749.14,
+      2412.17
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.55)",
      "wiazacy": true,
-     "uzyj": false,
-     "odrzucony": "residuum 4.2 sigma",
-     "uzyty": false,
+     "uzyty": true,
      "sigma_px": 8.0,
-     "dx": -28.9,
-     "dy": 0.9,
-     "blad_px": 28.9
+     "dx": 0.7,
+     "dy": 1.2,
+     "blad_px": 1.4
     },
     {
      "id": "wiaz_64.5_68.5",
@@ -874,22 +849,20 @@
      "X": [
       64.5,
       68.5,
-      119.297
+      119.403
      ],
      "uvF": [
-      3828.62,
-      2396.23
+      3753.69,
+      2417.44
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.50)",
      "wiazacy": true,
-     "uzyj": false,
-     "odrzucony": "residuum 4.6 sigma",
-     "uzyty": false,
+     "uzyty": true,
      "sigma_px": 8.0,
-     "dx": -31.7,
-     "dy": 2.8,
-     "blad_px": 31.8
+     "dx": 0.7,
+     "dy": 2.3,
+     "blad_px": 2.4
     },
     {
      "id": "wiaz_36.5_46.5",
@@ -897,20 +870,20 @@
      "X": [
       36.5,
       46.5,
-      118.824
+      118.848
      ],
      "uvF": [
-      3475.72,
-      2316.82
+      3420.73,
+      2352.23
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.57)",
      "wiazacy": true,
      "uzyty": true,
      "sigma_px": 8.0,
-     "dx": 7.9,
-     "dy": 1.5,
-     "blad_px": 8.1
+     "dx": -0.2,
+     "dy": 1.0,
+     "blad_px": 1.0
     },
     {
      "id": "wiaz_38.5_46.5",
@@ -918,20 +891,20 @@
      "X": [
       38.5,
       46.5,
-      118.857
+      118.825
      ],
      "uvF": [
-      3479.99,
-      2322.39
+      3422.82,
+      2358.63
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.56)",
      "wiazacy": true,
      "uzyty": true,
      "sigma_px": 8.0,
-     "dx": 4.8,
-     "dy": 2.3,
-     "blad_px": 5.4
+     "dx": 0.0,
+     "dy": 1.2,
+     "blad_px": 1.2
     },
     {
      "id": "wiaz_40.5_46.5",
@@ -939,20 +912,20 @@
      "X": [
       40.5,
       46.5,
-      118.843
+      118.768
      ],
      "uvF": [
-      3486.69,
-      2328.04
+      3425.12,
+      2365.6
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.58)",
      "wiazacy": true,
      "uzyty": true,
      "sigma_px": 8.0,
-     "dx": -0.7,
-     "dy": 3.7,
-     "blad_px": 3.8
+     "dx": 0.1,
+     "dy": 1.3,
+     "blad_px": 1.3
     },
     {
      "id": "wiaz_42.5_46.5",
@@ -960,20 +933,20 @@
      "X": [
       42.5,
       46.5,
-      118.768
+      118.69
      ],
      "uvF": [
-      3492.68,
-      2333.65
+      3427.51,
+      2372.69
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.47)",
      "wiazacy": true,
      "uzyty": true,
      "sigma_px": 8.0,
-     "dx": -5.4,
-     "dy": 6.0,
-     "blad_px": 8.1
+     "dx": 0.2,
+     "dy": 1.7,
+     "blad_px": 1.7
     },
     {
      "id": "wiaz_30.5_44.5",
@@ -981,20 +954,20 @@
      "X": [
       30.5,
       44.5,
-      118.778
+      118.953
      ],
      "uvF": [
-      3437.6,
-      2299.79
+      3387.96,
+      2334.59
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.45)",
      "wiazacy": true,
      "uzyty": true,
      "sigma_px": 8.0,
-     "dx": 18.0,
-     "dy": 0.3,
-     "blad_px": 18.0
+     "dx": 0.5,
+     "dy": 0.5,
+     "blad_px": 0.7
     },
     {
      "id": "wiaz_32.5_44.5",
@@ -1002,20 +975,20 @@
      "X": [
       32.5,
       44.5,
-      118.744
+      118.903
      ],
      "uvF": [
-      3443.49,
-      2305.33
+      3390.54,
+      2341.3
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.56)",
      "wiazacy": true,
      "uzyty": true,
      "sigma_px": 8.0,
-     "dx": 13.1,
-     "dy": 1.8,
-     "blad_px": 13.2
+     "dx": 0.0,
+     "dy": 0.5,
+     "blad_px": 0.5
     },
     {
      "id": "wiaz_34.5_44.5",
@@ -1023,20 +996,20 @@
      "X": [
       34.5,
       44.5,
-      118.836
+      118.878
      ],
      "uvF": [
-      3449.6,
-      2310.89
+      3393.16,
+      2347.89
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.64)",
      "wiazacy": true,
      "uzyty": true,
      "sigma_px": 8.0,
-     "dx": 7.9,
-     "dy": 1.8,
-     "blad_px": 8.1
+     "dx": -0.4,
+     "dy": 0.4,
+     "blad_px": 0.6
     },
     {
      "id": "wiaz_36.5_44.5",
@@ -1044,20 +1017,20 @@
      "X": [
       36.5,
       44.5,
-      118.812
+      118.842
      ],
      "uvF": [
-      3454.18,
-      2316.68
+      3395.19,
+      2354.16
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.62)",
      "wiazacy": true,
      "uzyty": true,
      "sigma_px": 8.0,
-     "dx": 4.4,
-     "dy": 3.0,
-     "blad_px": 5.3
+     "dx": -0.3,
+     "dy": 0.9,
+     "blad_px": 0.9
     },
     {
      "id": "wiaz_38.5_44.5",
@@ -1065,20 +1038,20 @@
      "X": [
       38.5,
       44.5,
-      118.841
+      118.8
      ],
      "uvF": [
-      3458.76,
-      2322.52
+      3397.23,
+      2360.55
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.59)",
      "wiazacy": true,
      "uzyty": true,
      "sigma_px": 8.0,
-     "dx": 0.8,
-     "dy": 3.7,
-     "blad_px": 3.7
+     "dx": -0.1,
+     "dy": 1.3,
+     "blad_px": 1.3
     },
     {
      "id": "wiaz_40.5_44.5",
@@ -1086,20 +1059,20 @@
      "X": [
       40.5,
       44.5,
-      118.864
+      118.72
      ],
      "uvF": [
-      3465.31,
-      2328.13
+      3398.85,
+      2367.96
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.60)",
      "wiazacy": true,
      "uzyty": true,
      "sigma_px": 8.0,
-     "dx": -4.7,
-     "dy": 4.7,
-     "blad_px": 6.6
+     "dx": 0.5,
+     "dy": 1.3,
+     "blad_px": 1.4
     },
     {
      "id": "wiaz_42.5_44.5",
@@ -1107,20 +1080,20 @@
      "X": [
       42.5,
       44.5,
-      118.758
+      118.655
      ],
      "uvF": [
-      3470.33,
-      2333.75
+      3401.0,
+      2375.3
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.50)",
      "wiazacy": true,
      "uzyty": true,
      "sigma_px": 8.0,
-     "dx": -8.7,
-     "dy": 7.3,
-     "blad_px": 11.3
+     "dx": 0.6,
+     "dy": 1.3,
+     "blad_px": 1.5
     },
     {
      "id": "wiaz_30.5_42.5",
@@ -1128,20 +1101,20 @@
      "X": [
       30.5,
       42.5,
-      118.759
+      118.923
      ],
      "uvF": [
-      3416.54,
-      2299.86
+      3362.99,
+      2336.74
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.57)",
      "wiazacy": true,
      "uzyty": true,
      "sigma_px": 8.0,
-     "dx": 14.3,
-     "dy": 1.7,
-     "blad_px": 14.4
+     "dx": 0.1,
+     "dy": 0.3,
+     "blad_px": 0.4
     },
     {
      "id": "wiaz_32.5_42.5",
@@ -1149,20 +1122,20 @@
      "X": [
       32.5,
       42.5,
-      118.756
+      118.895
      ],
      "uvF": [
-      3422.26,
-      2305.42
+      3365.28,
+      2343.38
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.65)",
      "wiazacy": true,
      "uzyty": true,
      "sigma_px": 8.0,
-     "dx": 9.4,
-     "dy": 2.8,
-     "blad_px": 9.8
+     "dx": -0.2,
+     "dy": 0.2,
+     "blad_px": 0.2
     },
     {
      "id": "wiaz_34.5_42.5",
@@ -1170,20 +1143,20 @@
      "X": [
       34.5,
       42.5,
-      118.808
+      118.873
      ],
      "uvF": [
-      3427.86,
-      2311.03
+      3367.52,
+      2349.86
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.67)",
      "wiazacy": true,
      "uzyty": true,
      "sigma_px": 8.0,
-     "dx": 4.6,
-     "dy": 3.2,
-     "blad_px": 5.6
+     "dx": -0.4,
+     "dy": 0.2,
+     "blad_px": 0.4
     },
     {
      "id": "wiaz_36.5_42.5",
@@ -1191,20 +1164,20 @@
      "X": [
       36.5,
       42.5,
-      118.786
+      118.843
      ],
      "uvF": [
-      3432.79,
-      2316.79
+      3369.23,
+      2356.2
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.59)",
      "wiazacy": true,
      "uzyty": true,
      "sigma_px": 8.0,
-     "dx": 0.6,
-     "dy": 4.5,
-     "blad_px": 4.5
+     "dx": -0.1,
+     "dy": 0.5,
+     "blad_px": 0.5
     },
     {
      "id": "wiaz_38.5_42.5",
@@ -1212,20 +1185,20 @@
      "X": [
       38.5,
       42.5,
-      118.809
+      118.788
      ],
      "uvF": [
-      3436.61,
-      2322.68
+      3370.83,
+      2362.41
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.54)",
      "wiazacy": true,
      "uzyty": true,
      "sigma_px": 8.0,
-     "dx": -2.4,
-     "dy": 5.2,
-     "blad_px": 5.7
+     "dx": 0.4,
+     "dy": 1.4,
+     "blad_px": 1.4
     },
     {
      "id": "wiaz_40.5_42.5",
@@ -1233,20 +1206,20 @@
      "X": [
       40.5,
       42.5,
-      118.811
+      118.715
      ],
      "uvF": [
-      3442.72,
-      2328.34
+      3372.49,
+      2369.72
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.56)",
      "wiazacy": true,
      "uzyty": true,
      "sigma_px": 8.0,
-     "dx": -7.6,
-     "dy": 6.4,
-     "blad_px": 10.0
+     "dx": 0.9,
+     "dy": 1.4,
+     "blad_px": 1.7
     },
     {
      "id": "wiaz_42.5_42.5",
@@ -1254,20 +1227,20 @@
      "X": [
       42.5,
       42.5,
-      118.734
+      118.643
      ],
      "uvF": [
-      3448.02,
-      2333.97
+      3374.71,
+      2377.22
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.46)",
      "wiazacy": true,
      "uzyty": true,
      "sigma_px": 8.0,
-     "dx": -12.0,
-     "dy": 8.7,
-     "blad_px": 14.8
+     "dx": 0.8,
+     "dy": 1.3,
+     "blad_px": 1.6
     },
     {
      "id": "wiaz_50.5_42.5",
@@ -1275,22 +1248,20 @@
      "X": [
       50.5,
       42.5,
-      118.632
+      118.68
      ],
      "uvF": [
-      3471.65,
-      2356.43
+      3384.01,
+      2403.55
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.57)",
      "wiazacy": true,
-     "uzyj": false,
-     "odrzucony": "residuum 3.7 sigma",
-     "uzyty": false,
+     "uzyty": true,
      "sigma_px": 8.0,
-     "dx": -31.9,
-     "dy": 16.5,
-     "blad_px": 36.0
+     "dx": 0.1,
+     "dy": 1.5,
+     "blad_px": 1.5
     },
     {
      "id": "wiaz_56.5_42.5",
@@ -1298,22 +1269,20 @@
      "X": [
       56.5,
       42.5,
-      118.776
+      118.883
      ],
      "uvF": [
-      3482.0,
-      2373.81
+      3389.54,
+      2421.46
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.64)",
      "wiazacy": true,
-     "uzyj": false,
-     "odrzucony": "residuum 4.6 sigma",
-     "uzyty": false,
+     "uzyty": true,
      "sigma_px": 8.0,
-     "dx": -39.5,
-     "dy": 20.1,
-     "blad_px": 44.3
+     "dx": 1.2,
+     "dy": 2.1,
+     "blad_px": 2.4
     },
     {
      "id": "wiaz_30.5_40.5",
@@ -1321,20 +1290,20 @@
      "X": [
       30.5,
       40.5,
-      118.734
+      118.888
      ],
      "uvF": [
-      3395.18,
-      2299.94
+      3337.71,
+      2338.84
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.50)",
      "wiazacy": true,
      "uzyty": true,
      "sigma_px": 8.0,
-     "dx": 10.8,
-     "dy": 3.1,
-     "blad_px": 11.3
+     "dx": 0.1,
+     "dy": 0.3,
+     "blad_px": 0.3
     },
     {
      "id": "wiaz_32.5_40.5",
@@ -1342,20 +1311,20 @@
      "X": [
       32.5,
       40.5,
-      118.735
+      118.868
      ],
      "uvF": [
-      3401.37,
-      2305.49
+      3339.78,
+      2345.5
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.54)",
      "wiazacy": true,
      "uzyty": true,
      "sigma_px": 8.0,
-     "dx": 5.3,
-     "dy": 4.2,
-     "blad_px": 6.8
+     "dx": -0.2,
+     "dy": 0.1,
+     "blad_px": 0.2
     },
     {
      "id": "wiaz_34.5_40.5",
@@ -1363,20 +1332,20 @@
      "X": [
       34.5,
       40.5,
-      118.796
+      118.85
      ],
      "uvF": [
-      3407.22,
-      2311.13
+      3341.54,
+      2352.07
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.52)",
      "wiazacy": true,
      "uzyty": true,
      "sigma_px": 8.0,
-     "dx": 0.2,
-     "dy": 4.5,
-     "blad_px": 4.5
+     "dx": -0.1,
+     "dy": -0.0,
+     "blad_px": 0.1
     },
     {
      "id": "wiaz_36.5_40.5",
@@ -1384,20 +1353,20 @@
      "X": [
       36.5,
       40.5,
-      118.749
+      118.82
      ],
      "uvF": [
-      3411.8,
-      2316.88
+      3343.34,
+      2358.21
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.46)",
      "wiazacy": true,
      "uzyty": true,
      "sigma_px": 8.0,
-     "dx": -3.7,
-     "dy": 6.1,
-     "blad_px": 7.1
+     "dx": 0.0,
+     "dy": 0.5,
+     "blad_px": 0.5
     },
     {
      "id": "wiaz_38.5_40.5",
@@ -1405,20 +1374,20 @@
      "X": [
       38.5,
       40.5,
-      118.787
+      118.778
      ],
      "uvF": [
-      3415.38,
-      2322.77
+      3344.94,
+      2364.52
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.48)",
      "wiazacy": true,
      "uzyty": true,
      "sigma_px": 8.0,
-     "dx": -6.6,
-     "dy": 6.6,
-     "blad_px": 9.3
+     "dx": 0.3,
+     "dy": 1.2,
+     "blad_px": 1.2
     },
     {
      "id": "wiaz_40.5_40.5",
@@ -1426,20 +1395,20 @@
      "X": [
       40.5,
       40.5,
-      118.796
+      118.678
      ],
      "uvF": [
-      3420.34,
-      2328.48
+      3346.56,
+      2371.56
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.52)",
      "wiazacy": true,
      "uzyty": true,
      "sigma_px": 8.0,
-     "dx": -10.8,
-     "dy": 7.8,
-     "blad_px": 13.3
+     "dx": 0.7,
+     "dy": 1.8,
+     "blad_px": 2.0
     },
     {
      "id": "wiaz_54.5_40.5",
@@ -1447,22 +1416,20 @@
      "X": [
       54.5,
       40.5,
-      118.706
+      118.77
      ],
      "uvF": [
-      3458.68,
-      2367.98
+      3360.32,
+      2418.29
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.72)",
      "wiazacy": true,
-     "uzyj": false,
-     "odrzucony": "residuum 5.1 sigma",
-     "uzyty": false,
+     "uzyty": true,
      "sigma_px": 8.0,
-     "dx": -43.9,
-     "dy": 20.6,
-     "blad_px": 48.5
+     "dx": 1.0,
+     "dy": 1.5,
+     "blad_px": 1.8
     },
     {
      "id": "wiaz_56.5_40.5",
@@ -1470,22 +1437,20 @@
      "X": [
       56.5,
       40.5,
-      118.744
+      118.833
      ],
      "uvF": [
-      3463.37,
-      2373.65
+      3362.75,
+      2423.97
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.60)",
      "wiazacy": true,
-     "uzyj": false,
-     "odrzucony": "residuum 5.6 sigma",
-     "uzyty": false,
+     "uzyty": true,
      "sigma_px": 8.0,
-     "dx": -47.8,
-     "dy": 22.2,
-     "blad_px": 52.7
+     "dx": 0.6,
+     "dy": 2.2,
+     "blad_px": 2.3
     },
     {
      "id": "wiaz_52.5_38.5",
@@ -1493,22 +1458,20 @@
      "X": [
       52.5,
       38.5,
-      118.666
+      118.7
      ],
      "uvF": [
-      3442.06,
-      2362.37
+      3336.83,
+      2413.97
      ],
      "sigma": 8.0,
      "zr": "punkt wiazacy z korelacji ortofotoplanow A/B (NCC 0.54)",
      "wiazacy": true,
-     "uzyj": false,
-     "odrzucony": "residuum 6.4 sigma",
-     "uzyty": false,
+     "uzyty": true,
      "sigma_px": 8.0,
-     "dx": -54.7,
-     "dy": 20.6,
-     "blad_px": 58.5
+     "dx": -4.7,
+     "dy": 1.6,
+     "blad_px": 5.0
     }
    ],
    "blender": {
@@ -1519,8 +1482,8 @@
     "pixel_aspect": 1.0,
     "sensor_fit": "HORIZONTAL",
     "sensor_width_mm": 36.0,
-    "lens_mm": 15.5868,
-    "f_px_F17": 3667.23,
+    "lens_mm": 17.2482,
+    "f_px_F17": 4058.11,
     "shift_x": -0.012392,
     "shift_y": -0.011519,
     "punkt_glowny_px_F17": [
@@ -1528,45 +1491,45 @@
      2139.94
     ],
     "location_z_wzgl_0": [
-     332.564,
-     35.14,
-     85.383
+     356.815,
+     20.455,
+     84.672
     ],
     "location_H_bezwzgl": [
-     332.564,
-     35.14,
-     204.633
+     356.815,
+     20.455,
+     203.922
     ],
     "rotation_euler_XYZ_rad": [
-     1.335699,
-     -0.025033,
-     1.301099
+     1.360416,
+     -0.011136,
+     1.262366
     ],
     "rotation_euler_XYZ_deg": [
-     76.5299,
-     -1.4343,
-     74.5475
+     77.9461,
+     -0.6381,
+     72.3282
     ],
     "rotation_matrix_world": [
      [
-      0.2663559,
-      -0.2310027,
-      0.9357843
+      0.3035446,
+      -0.2022833,
+      0.9310973
      ],
      [
-      0.9635497,
-      0.038602,
-      -0.2647298
+      0.9527521,
+      0.0530171,
+      -0.2990862
      ],
      [
-      0.0250301,
-      0.972187,
-      0.2328645
+      0.0111361,
+      0.9778909,
+      0.2088189
      ]
     ],
     "clip_start": 1.0,
     "clip_end": 5000.0,
-    "hfov_deg": 98.219,
+    "hfov_deg": 92.444,
     "uwagi": "Kamera PERSP, bez dystorsji. Uklad sceny: X = e, Y = n (uklad lokalny PL-2000/6 - 6433500 / 5664100), Z = H - 119,25 (wariant location_z_wzgl_0) albo Z = H (location_H_bezwzgl). Render w mniejszej rozdzielczosci: ta sama proporcja (resolution_percentage) - lens/shift bez zmian. Kadr F.17 jest asymetryczny wzgledem osi optycznej, dlatego shift_x/shift_y != 0."
    }
   },
@@ -1604,9 +1567,9 @@
     "uwaga": "F.17 = panorama 8000x5632 powiekszona x1,25 i przycieta (M.10 = panorama x0,5, stad s = 2,5)"
    },
    "pinhole": {
-    "f_px_M10": 1567.22,
-    "f_px_F17": 3918.3,
-    "f_px_panorama8000": 3134.44,
+    "f_px_M10": 1541.1,
+    "f_px_F17": 3852.99,
+    "f_px_panorama8000": 3082.2,
     "cx_cy_px_M10": [
      2000.0,
      1408.0
@@ -1620,109 +1583,121 @@
      7962,
      4505
     ],
-    "hfov_panorama8000_deg": 103.83,
-    "vfov_panorama8000_deg": 83.87,
-    "hfov_F17_deg": 90.91,
-    "ogniskowa_ekw_35mm_pozioma": 14.1
+    "hfov_panorama8000_deg": 104.77,
+    "vfov_panorama8000_deg": 84.83,
+    "hfov_F17_deg": 91.872,
+    "ogniskowa_ekw_35mm_pozioma": 13.87
    },
    "poza": {
     "C_e_n_H": [
-     -43.778,
-     -27.005,
-     166.219
+     -42.526,
+     -26.015,
+     166.306
     ],
     "C_PL2000": [
-     6433456.222,
-     5664072.995
+     6433457.474,
+     5664073.985
     ],
-    "yaw_deg": 56.4666,
-    "pitch_deg": -12.0114,
-    "roll_deg": -0.1351,
+    "yaw_deg": 56.6335,
+    "pitch_deg": -12.1752,
+    "roll_deg": 0.0007,
     "R_swiat_do_kamery": [
      [
-      0.5528302,
-      -0.8332907,
-      0.0023059
+      0.5499905,
+      -0.8351709,
+      -1.17e-05
      ],
      [
-      -0.1721671,
-      -0.1169275,
-      -0.9781035
+      -0.1761456,
+      -0.1159846,
+      -0.9775072
      ],
      [
-      0.8153142,
-      0.5403282,
-      -0.2081063
+      0.8163842,
+      0.5376217,
+      -0.2109021
      ]
     ],
     "odchylenia_std": {
-     "e": 0.968,
-     "n": 0.776,
-     "H": 0.291,
-     "yaw": 0.22,
-     "pitch": 0.141,
-     "roll": 0.145,
-     "f": 17.456
+     "e": 1.294,
+     "n": 1.211,
+     "H": 0.409,
+     "yaw": 0.354,
+     "pitch": 0.208,
+     "roll": 0.208,
+     "f": 24.662
     },
-    "wysokosc_nad_startem_wg_EXIF": 115.52,
-    "roznica_DJI_abs_alt_m": 16.42,
+    "wysokosc_nad_startem_wg_EXIF": 115.61,
+    "roznica_DJI_abs_alt_m": 16.33,
     "roznica_od_GPS_m": [
-     0.77,
-     0.06
+     2.02,
+     1.04
     ]
    },
    "bledy": {
-    "rms_punkty_reczne_px_F17": 7.45,
-    "rms_linie_px_F17": 4.02,
+    "rms_punkty_reczne_px_F17": 9.9,
+    "rms_linie_px_F17": 6.73,
     "rms_punkty_wiazace_px_F17": null,
-    "rms_wszystkie_punkty_px_F17": 7.44,
+    "rms_wszystkie_punkty_px_F17": 9.9,
     "loo_punkty_reczne_px_F17": [
      {
       "id": "latarnia_63.3_72.5",
-      "blad_px": 5.1
+      "blad_px": 3.1
+     },
+     {
+      "id": "latarnia_58.2_48.8",
+      "blad_px": 10.7
      },
      {
       "id": "latarnia_48.2_23.8",
-      "blad_px": 6.8
+      "blad_px": 9.3
      },
      {
       "id": "latarnia_78.6_83.5",
-      "blad_px": 9.1
+      "blad_px": 11.7
      },
      {
       "id": "latarnia_46.0_87.7",
-      "blad_px": 2.4
+      "blad_px": 4.2
      },
      {
       "id": "latarnia_27.1_87.1",
-      "blad_px": 9.1
+      "blad_px": 13.8
      },
      {
       "id": "latarnia_61.8_135.0",
-      "blad_px": 12.5
+      "blad_px": 9.7
+     },
+     {
+      "id": "Maz19_naroze_NW_pion",
+      "blad_px": 12.4
      },
      {
       "id": "Maz19_naroze_SW_pion",
-      "blad_px": 3.2
+      "blad_px": 10.3
+     },
+     {
+      "id": "Maz19_attyka_NW",
+      "blad_px": 24.3
      },
      {
       "id": "Maz19_attyka_SW",
-      "blad_px": 3.2
+      "blad_px": 9.1
      },
      {
       "id": "Maz19_podstawa_NW",
-      "blad_px": 15.3
+      "blad_px": 11.1
      },
      {
       "id": "Maz17_UMWD_lico_podstawa",
-      "blad_px": 10.8
+      "blad_px": 18.0
      },
      {
       "id": "kraweznik_wewn_Mazowiecka",
-      "blad_px": 5.8
+      "blad_px": 5.2
      }
     ],
-    "rms_loo_px_F17": 8.55,
+    "rms_loo_px_F17": 12.12,
     "prog_wymagany_px": 23.9
    },
    "obserwacje": [
@@ -1738,14 +1713,14 @@
       3810,
       2472
      ],
-     "sigma": 2.0,
+     "sigma": 4.0,
      "zr": "podstawa slupa; M.02 warstwa latarnie (pomiar), H z NMT",
      "uzyj": true,
      "uzyty": true,
-     "sigma_px": 2.0,
-     "dx": 0.2,
-     "dy": 2.3,
-     "blad_px": 2.3
+     "sigma_px": 4.0,
+     "dx": -2.1,
+     "dy": 1.2,
+     "blad_px": 2.5
     },
     {
      "id": "latarnia_58.2_48.8",
@@ -1759,15 +1734,14 @@
       4226,
       2632
      ],
-     "sigma": 2.0,
+     "sigma": 4.0,
      "zr": "podstawa slupa; M.02 latarnie (pomiar), H z NMT",
-     "uzyj": false,
-     "odrzucony": "residuum 3.8 sigma",
-     "uzyty": false,
-     "sigma_px": 2.0,
-     "dx": 2.4,
-     "dy": 10.7,
-     "blad_px": 10.9
+     "uzyj": true,
+     "uzyty": true,
+     "sigma_px": 4.0,
+     "dx": -1.8,
+     "dy": 9.2,
+     "blad_px": 9.3
     },
     {
      "id": "latarnia_48.2_23.8",
@@ -1786,9 +1760,9 @@
      "uzyj": true,
      "uzyty": true,
      "sigma_px": 6.0,
-     "dx": 0.9,
-     "dy": -6.3,
-     "blad_px": 6.3
+     "dx": -4.0,
+     "dy": -7.0,
+     "blad_px": 8.1
     },
     {
      "id": "latarnia_78.6_83.5",
@@ -1802,14 +1776,14 @@
       3860,
       2347
      ],
-     "sigma": 4.0,
+     "sigma": 5.0,
      "zr": "podstawa slupa; e-mapa GUPELA (GESUT), H z NMT",
      "uzyj": true,
      "uzyty": true,
-     "sigma_px": 4.0,
-     "dx": 1.8,
-     "dy": -7.4,
-     "blad_px": 7.6
+     "sigma_px": 5.0,
+     "dx": -1.1,
+     "dy": -9.3,
+     "blad_px": 9.3
     },
     {
      "id": "latarnia_46.0_87.7",
@@ -1823,14 +1797,14 @@
       3183,
       2512
      ],
-     "sigma": 3.0,
+     "sigma": 5.0,
      "zr": "podstawa slupa; e-mapa GUPELA, H z NMT",
      "uzyj": true,
      "uzyty": true,
-     "sigma_px": 3.0,
-     "dx": 1.3,
-     "dy": 0.7,
-     "blad_px": 1.5
+     "sigma_px": 5.0,
+     "dx": 2.1,
+     "dy": 2.1,
+     "blad_px": 3.0
     },
     {
      "id": "latarnia_27.1_87.1",
@@ -1844,14 +1818,14 @@
       2733,
       2657
      ],
-     "sigma": 4.0,
+     "sigma": 5.0,
      "zr": "podstawa slupa; e-mapa GUPELA, H z NMT",
      "uzyj": true,
      "uzyty": true,
-     "sigma_px": 4.0,
-     "dx": -4.2,
-     "dy": 4.3,
-     "blad_px": 6.0
+     "sigma_px": 5.0,
+     "dx": -2.5,
+     "dy": 8.5,
+     "blad_px": 8.9
     },
     {
      "id": "latarnia_61.8_135.0",
@@ -1865,14 +1839,14 @@
       2791,
       2222
      ],
-     "sigma": 5.0,
+     "sigma": 6.0,
      "zr": "podstawa slupa; e-mapa GUPELA, H z NMPT GUGiK (poza NMT)",
      "uzyj": true,
      "uzyty": true,
-     "sigma_px": 5.0,
-     "dx": -3.5,
-     "dy": -9.3,
-     "blad_px": 10.0
+     "sigma_px": 6.0,
+     "dx": 0.8,
+     "dy": -7.7,
+     "blad_px": 7.8
     },
     {
      "id": "Maz19_naroze_NW_pion",
@@ -1899,17 +1873,16 @@
        2950
       ]
      ],
-     "sigma": 3.0,
+     "sigma": 5.0,
      "zr": "krawedz pionowa naroza obrysu EGiB",
-     "uzyj": false,
-     "odrzucony": "residuum 3.7 sigma",
-     "uzyty": false,
-     "sigma_px": 3.0,
+     "uzyj": true,
+     "uzyty": true,
+     "sigma_px": 5.0,
      "residua_px": [
-      -14.6,
-      -15.8
+      -8.4,
+      -9.9
      ],
-     "rms_px": 15.2
+     "rms_px": 9.1
     },
     {
      "id": "Maz19_naroze_SW_pion",
@@ -1936,16 +1909,16 @@
        3280
       ]
      ],
-     "sigma": 3.0,
+     "sigma": 5.0,
      "zr": "krawedz pionowa (styk z Mazowiecka 17), obrys EGiB",
      "uzyj": true,
      "uzyty": true,
-     "sigma_px": 3.0,
+     "sigma_px": 5.0,
      "residua_px": [
-      0.0,
-      2.3
+      4.4,
+      6.6
      ],
-     "rms_px": 1.6
+     "rms_px": 5.6
     },
     {
      "id": "Maz19_attyka_NW",
@@ -1959,15 +1932,14 @@
       5208,
       2283
      ],
-     "sigma": 4.0,
+     "sigma": 6.0,
      "zr": "naroze attyki, H = 140,25 (M.07)",
-     "uzyj": false,
-     "odrzucony": "residuum 4.3 sigma",
-     "uzyty": false,
-     "sigma_px": 4.0,
-     "dx": 22.5,
-     "dy": -17.2,
-     "blad_px": 28.3
+     "uzyj": true,
+     "uzyty": true,
+     "sigma_px": 6.0,
+     "dx": 15.5,
+     "dy": -14.9,
+     "blad_px": 21.5
     },
     {
      "id": "Maz19_attyka_SW",
@@ -1981,14 +1953,14 @@
       5920,
       2422
      ],
-     "sigma": 4.0,
+     "sigma": 6.0,
      "zr": "naroze attyki, H = 140,25 (M.07)",
      "uzyj": true,
      "uzyty": true,
-     "sigma_px": 4.0,
-     "dx": 0.5,
-     "dy": 0.9,
-     "blad_px": 1.0
+     "sigma_px": 6.0,
+     "dx": -4.2,
+     "dy": 3.9,
+     "blad_px": 5.7
     },
     {
      "id": "Maz19_podstawa_NW",
@@ -2007,9 +1979,9 @@
      "uzyj": true,
      "uzyty": true,
      "sigma_px": 5.0,
-     "dx": 13.4,
-     "dy": -4.5,
-     "blad_px": 14.2
+     "dx": 7.7,
+     "dy": -5.6,
+     "blad_px": 9.6
     },
     {
      "id": "Maz17_UMWD_lico_podstawa",
@@ -2042,10 +2014,10 @@
      "uzyty": true,
      "sigma_px": 6.0,
      "residua_px": [
-      -4.1,
-      -4.9
+      -6.3,
+      -7.7
      ],
-     "rms_px": 4.5
+     "rms_px": 7.0
     },
     {
      "id": "kraweznik_wewn_Mazowiecka",
@@ -2067,10 +2039,10 @@
      "uzyty": true,
      "sigma_px": 5.0,
      "residua_px": [
-      2.9,
-      6.5
+      2.3,
+      5.2
      ],
-     "rms_px": 5.0
+     "rms_px": 4.0
     },
     {
      "id": "horyzont",
@@ -2099,12 +2071,12 @@
      "uzyty": true,
      "sigma_px": 15.000960000000001,
      "residua_px": [
-      16.3,
-      14.8,
-      1.9,
-      7.1
+      24.0,
+      19.4,
+      1.2,
+      2.2
      ],
-     "rms_px": 11.6
+     "rms_px": 15.5
     },
     {
      "id": "UW_naroze_E_gzyms",
@@ -2123,9 +2095,9 @@
      "uzyj": false,
      "uzyty": false,
      "sigma_px": 15.0,
-     "dx": 33.8,
-     "dy": -29.2,
-     "blad_px": 44.7
+     "dx": 41.6,
+     "dy": -23.1,
+     "blad_px": 47.5
     }
    ],
    "blender": {
@@ -2136,8 +2108,8 @@
     "pixel_aspect": 1.0,
     "sensor_fit": "HORIZONTAL",
     "sensor_width_mm": 36.0,
-    "lens_mm": 17.7165,
-    "f_px_F17": 3918.3,
+    "lens_mm": 17.4212,
+    "f_px_F17": 3852.99,
     "shift_x": -0.056433,
     "shift_y": -0.023557,
     "punkt_glowny_px_F17": [
@@ -2145,59 +2117,59 @@
      2064.94
     ],
     "location_z_wzgl_0": [
-     -43.778,
-     -27.005,
-     46.969
+     -42.526,
+     -26.015,
+     47.056
     ],
     "location_H_bezwzgl": [
-     -43.778,
-     -27.005,
-     166.219
+     -42.526,
+     -26.015,
+     166.306
     ],
     "rotation_euler_XYZ_rad": [
-     1.361157,
-     -0.002306,
-     -0.985038
+     1.358299,
+     1.2e-05,
+     -0.988443
     ],
     "rotation_euler_XYZ_deg": [
-     77.9886,
-     -0.1321,
-     -56.4385
+     77.8248,
+     0.0007,
+     -56.6336
     ],
     "rotation_matrix_world": [
      [
-      0.5528302,
-      0.1721671,
-      -0.8153142
+      0.5499905,
+      0.1761456,
+      -0.8163842
      ],
      [
-      -0.8332907,
-      0.1169275,
-      -0.5403282
+      -0.8351709,
+      0.1159846,
+      -0.5376217
      ],
      [
-      0.0023059,
-      0.9781035,
-      0.2081063
+      -1.17e-05,
+      0.9775072,
+      0.2109021
      ]
     ],
     "clip_start": 1.0,
     "clip_end": 5000.0,
-    "hfov_deg": 90.91,
+    "hfov_deg": 91.872,
     "uwagi": "Kamera PERSP, bez dystorsji. Uklad sceny: X = e, Y = n (uklad lokalny PL-2000/6 - 6433500 / 5664100), Z = H - 119,25 (wariant location_z_wzgl_0) albo Z = H (location_H_bezwzgl). Render w mniejszej rozdzielczosci: ta sama proporcja (resolution_percentage) - lens/shift bez zmian. Kadr F.17 jest asymetryczny wzgledem osi optycznej, dlatego shift_x/shift_y != 0."
    }
   }
  },
  "kontrola_spojnosci": {
-  "roznica_wysokosci_kamer_m": 38.41,
+  "roznica_wysokosci_kamer_m": 37.62,
   "roznica_wysokosci_wg_EXIF_rel_alt_m": 37.1,
   "wysokosc_startu_drona_A_B_m": [
-   116.83,
-   115.52
+   116.12,
+   115.61
   ],
   "przesuniecie_DJI_abs_alt_A_B_m": [
-   15.11,
-   16.42
+   15.82,
+   16.33
   ]
  }
 }
