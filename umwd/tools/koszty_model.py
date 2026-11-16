@@ -3,7 +3,7 @@
 
 Poziom cen: II kw. 2026 (data złożenia pracy Etapu II: 10.07.2026), Wrocław, ceny NETTO
 z narzutami (koszty pośrednie + zysk w cenach jednostkowych). Metoda i źródła stawek:
-docs/50_research/koszty_benchmarki.md (rozdz. 4-6). Stawki oznaczone tam jako "Z" to
+docs/50_research/koszty_benchmarki.md (rozdz. 4-7). Stawki oznaczone tam jako "Z" to
 założenia zespołu skalibrowane do benchmarków przetargowych, NIE ceny ze źródła.
 
 Użycie:
