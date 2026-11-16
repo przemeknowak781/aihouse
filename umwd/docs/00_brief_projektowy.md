@@ -72,6 +72,14 @@ gdzie znajdują się pełne cytaty i odwołania (strona / § / nr wyjaśnienia).
 * Zero-emisyjność (M.12; EPBD 2024/1275 — do weryfikacji daty 2027 vs 2028), woda szara i deszczowa, OZE, trwałość i niskie koszty eksploatacji,
   elastyczność (rezerwy w szachtach, tarasy techniczne). (`zero_emisja.md` — w toku)
 
+* **Stan prawny WT (16.11.2026, `40_prawo/wt_kluczowe.md`):** WT 2002 utraciły moc 20.09.2026 (art. 66 ustawy o dostępności); nowych WT nie ogłoszono
+  (projekt MFiG 13.05.2026, notyfikacja KE 6.08.2026). Most przejściowy: art. 102a Pb (Dz.U. 2026 poz. 1161) — przez 18 mies. projekt można sporządzić
+  wg WT obowiązujących do 19.09.2026 (oświadczenie inwestora). Przyjmujemy: zgodność z WT 2002 + kontrola z projektem nowych WT.
+* Powyżej 25 m: okładzina, mocowania i izolacja niepalne, brak balkonów (loggie z pełną balustradą), podokienniki ≥ 1,1 m lub szkło bezpieczne stałe.
+  Biura dla ≤ 4 osób: wysokość ≥ 2,5 m w świetle (zalecamy ≥ 2,8–3,0 m). Kategoria obiektu XII (administracja publiczna).
+* Ustawa o ochronie ludności i obronie cywilnej (art. 93, od 29.05.2026): obowiązek budowli ochronnej/miejsca schronienia — garaż jako MDS.
+* Pozwolenie WKZ przed PnB (obszar wpisany do rejestru), badania archeologiczne; obowiązki EV (ustawa o elektromobilności art. 12, 12a).
+
 ## 7. Budżet
 
 * Koszt realizacji (z terenem) **≤ 150 mln zł netto — nieprzekraczalny** (Wyj. 20 odp. 74), wycena realna, bez zaniżania; koszt dokumentacji ≤ 5,4 %.

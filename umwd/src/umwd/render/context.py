@@ -923,6 +923,9 @@ def klasyfikacja_nawierzchni(ctx):
                 k = korekta
         if k is None:
             lab = [t for p, t in labels if f.contains(p)]
+            jl = [t for t in lab if t.startswith('j.')]
+            if jl:                      # jezdnia ma pierwszeństwo (pole może obejmować przyległy chodnik)
+                lab = [max(set(jl), key=jl.count)]
             if lab and not (f.area > 900 and not lab[0].startswith('j')):
                 t = lab[0]
                 if t.startswith('j.'):
