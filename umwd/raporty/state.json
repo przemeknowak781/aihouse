@@ -1,12 +1,12 @@
 {
- "title": "Research running: 4 parallel teams (16 agents, every output cross-checked by an independent verifier); rendering & board toolchains tested",
+ "title": "First deliverables in: rules register (347 lines) + Stage I/II checklists; clarifications raise board limit to 8; drone EXIF decoded for exact photomatch",
  "stages": [
   [
    "Organiser materials: download, unpack, text extraction (results files deliberately EXCLUDED)",
    "done"
   ],
   [
-   "Rules (Regulamin + 21 clarifications + amendments): full compliance register",
+   "Rules register + Stage I/II checklists written ✔ → independent verification ►",
    "running"
   ],
   [
@@ -43,24 +43,19 @@
   ]
  ],
  "notes": [
-  "Programme M.01 already prescribes the massing: two 5-storey wings (≤22 m) along Mazowiecka and Wybrzeże Słowackiego joined by a corner dominant ≤45 m; 2 basement levels (parking + civil shelter); 403 staff; 24 m² cellular offices.",
-  "Site: 3,729 m² triangle at the south bridgehead of Grunwaldzki Bridge (1910, stone pylons; planned reconstruction of historic pylon helmets) — the tower must converse with the pylons.",
-  "Teams: W1 rules register + clarifications + programme; W2 zoning plan, heritage, survey geometry (PL-2000 → local grid), geotech, trees, neighbours; W3 building law/WT, fire (high-rise W), accessibility, zero-emission (EPBD); W4 competition trends, visualisation craft, façade aesthetics, Wrocław context, cost benchmarks.",
-  "Toolchain: Blender 5.2 Cycles + OIDN denoise verified; 100×70 cm board pipeline (HTML/SVG → Chromium PDF, Inter typeface) verified at exact print size.",
-  "Exclusion rule enforced in every agent brief: no information about entries/results of THIS competition."
+  "Binding clarifications (nos. 15–21) change the brief: max 8 boards (not 6); repeated floors may NOT be merged on one plan; room codes required; cost cap 150 M PLN net is non-exceedable; text may be 5 × A3 pages.",
+  "F.17.A/B drone metadata decoded: DJI Air 3, 24 mm, GPS + altitude + gimbal yaw/pitch; photos taken 29.10.2025 at 11:38 and 11:57 CET → sun az ≈ 181–186°, el ≈ 25° (shadows north). Camera will be solved by PnP from survey points.",
+  "Blender lighting calibrated (physical sky + sun lamp balance, AgX view transform); procedural brick/stone/glass materials working.",
+  "Still running: programme extraction, zoning plan, heritage, site geometry, geotech/trees/neighbours, building law, fire, accessibility, zero-emission, competition trends, visual craft, façade aesthetics, Wrocław context, cost benchmarks."
  ],
  "images": [
   {
-   "path": "umwd/raporty/img/drone_0009.jpg",
-   "caption": "M.10 drone photo — site = green triangle south of the bridgehead (left of pylon)"
+   "path": "umwd/00_materialy/podglady/F17A_small.jpg",
+   "caption": "F.17.A: drone at 88 m, yaw −89° (looking west), 29.10.2025 11:38"
   },
   {
-   "path": "umwd/raporty/img/sip3d_01.jpg",
-   "caption": "M.11.C city 3D model — site between Mazowiecka and the Odra embankment"
-  },
-  {
-   "path": "umwd/raporty/img/bridge_helmets.jpg",
-   "caption": "M.11.F planned bridge pylons with restored helmets"
+   "path": "umwd/00_materialy/podglady/F17B_small.jpg",
+   "caption": "F.17.B: drone at 51 m, yaw +39° (looking NE), 29.10.2025 11:57"
   }
  ]
 }

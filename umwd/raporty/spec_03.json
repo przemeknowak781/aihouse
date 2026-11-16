@@ -1,0 +1,62 @@
+{
+ "nr": 3,
+ "title": "First deliverables in: rules register (347 lines) + Stage I/II checklists; clarifications raise board limit to 8; drone EXIF decoded for exact photomatch",
+ "stages": [
+  [
+   "Organiser materials: download, unpack, text extraction (results files deliberately EXCLUDED)",
+   "done"
+  ],
+  [
+   "Rules register + Stage I/II checklists written ✔ → independent verification ►",
+   "running"
+  ],
+  [
+   "Site analysis: zoning plan (MPZP), heritage guidelines, survey map, geotech, trees",
+   "running"
+  ],
+  [
+   "Polish building law & technical conditions (WT 2025/2026), fire, accessibility",
+   "running"
+  ],
+  [
+   "Research: what wins architecture competitions now; how to make competition visuals",
+   "running"
+  ],
+  [
+   "Functional programme (M.01) → area schedule & massing study",
+   "todo"
+  ],
+  [
+   "Concept: urban form, massing variants → judge panel → chosen concept",
+   "todo"
+  ],
+  [
+   "3D model + façade design (aesthetic principles) + photoreal renders (Blender Cycles)",
+   "todo"
+  ],
+  [
+   "Stage I study (2 boards) and Stage II entry (6 boards 100×70, 10-page text, tables, model 1:250)",
+   "todo"
+  ],
+  [
+   "Jury simulation & compliance audit → iterate until no open issues",
+   "todo"
+  ]
+ ],
+ "notes": [
+  "Binding clarifications (nos. 15–21) change the brief: max 8 boards (not 6); repeated floors may NOT be merged on one plan; room codes required; cost cap 150 M PLN net is non-exceedable; text may be 5 × A3 pages.",
+  "F.17.A/B drone metadata decoded: DJI Air 3, 24 mm, GPS + altitude + gimbal yaw/pitch; photos taken 29.10.2025 at 11:38 and 11:57 CET → sun az ≈ 181–186°, el ≈ 25° (shadows north). Camera will be solved by PnP from survey points.",
+  "Blender lighting calibrated (physical sky + sun lamp balance, AgX view transform); procedural brick/stone/glass materials working.",
+  "Still running: programme extraction, zoning plan, heritage, site geometry, geotech/trees/neighbours, building law, fire, accessibility, zero-emission, competition trends, visual craft, façade aesthetics, Wrocław context, cost benchmarks."
+ ],
+ "images": [
+  {
+   "path": "umwd/00_materialy/podglady/F17A_small.jpg",
+   "caption": "F.17.A: drone at 88 m, yaw −89° (looking west), 29.10.2025 11:38"
+  },
+  {
+   "path": "umwd/00_materialy/podglady/F17B_small.jpg",
+   "caption": "F.17.B: drone at 51 m, yaw +39° (looking NE), 29.10.2025 11:57"
+  }
+ ]
+}
