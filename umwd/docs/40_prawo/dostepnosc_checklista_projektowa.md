@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Stan na | 16.11.2026 |
+| Stan na | 16.11.2026 (zweryfikowano z tekstami aktów w ELI/ISAP 16.11.2026; poprawki oznaczone „poprawione przez weryfikatora”) <!-- poprawione przez weryfikatora --> |
 | Podstawa | `dostepnosc.md` (szczegóły, statusy prawne, źródła); Regulamin t.j. 13.02.2026 Rozdz. III ust. 1 pkt 8 (s. 20); Program użytkowy 11/2025; zał. M.13 „Standardy Dostępności w Samorządzie” (MSWiA) |
 | Cytowanie M.13 | „s. X” = strona w stopce publikacji (w pliku PDF zał. M.13: strona X + 1) |
 | Waga | dostępność i inkluzywność = **kryterium pierwszorzędowe 1 e** (jedno z pięciu równorzędnych) w Etapie I i II |
@@ -26,7 +26,7 @@
 | ☐ | A8 [M] | Strefa zieleni (ogród dostępny dla pracowników i mieszkańców) | ścieżki ≤ 5 %, ławki co ≤ 50–100 m, **≥ 30 % z oparciem i podłokietnikami + miejsce na wózek 1,4(1,8) × 1,0 m obok**, ≥ 30 % w cieniu, stolik 0,75–0,8 m z przestrzenią na kolana | Program s. 16; M.13 s. 96–98 | PZT |
 | ☐ | A9 [+] | Poidełko z misą dla psów; miejsce dla psów asystujących (relief area) | blisko wejścia, utwardzone, łatwe w utrzymaniu | M.13 s. 100; ustawa o rehabilitacji art. 20a | PZT |
 | ☐ | A10 [M] | Kiss&ride / postój taksówek / bus dla OzN | ≤ 50 m od wejścia (zatoczka lub zadaszony podjazd); miejsce 3,6 × 9 m dla busa, jeśli przewidywany dowóz | M.13 s. 80, 82, 128–129 | PZT |
-| ☐ | A11 [P] | Daszki/podcień nad chodnikiem | ≥ 2,4 m (WT § 293 ust. 2) / ≥ 2,5 m (projekt WT § 319 ust. 2; M.13 s. 99) | WT; M.13 | E, P |
+| ☐ | A11 [P] | Daszki/podcień nad chodnikiem | ≥ 2,4 m (WT § 293 ust. 2) / ≥ 2,5 m (projekt WT § 319 ust. 2; M.13 s. 99) → przyjąć **≥ 2,5 m** i nieosłonięte pasmo ≥ 1 m od jezdni (§ 293 ust. 2 / § 319 ust. 2) <!-- poprawione przez weryfikatora --> | WT; M.13 | E, P |
 | ☐ | A12 [M] | Strefa konserwatorska | na działce pełny standard FON i kontrastu; ewentualne „łagodne” FON tylko w przestrzeni publicznej poza działką | M.13 s. 61, 80 | PZT, O |
 
 ## B. Wejścia, hol główny, kancelaria, recepcja (R0, W6)
@@ -58,7 +58,7 @@
 | ☐ | ID | Co sprawdzić | Kryterium | Źródło | Gdzie |
 |---|---|---|---|---|---|
 | ☐ | C1 [M] | Kabiny wszystkich dźwigów ogólnodostępnych | **≥ 1,5 × 2,1 m** (lub ≥ 1,1 × 2,1 m przelotowe na wprost); **nie wystarczy 1,1 × 1,4 m** (minimum z WT) | M.13 s. 172; WT § 193 ust. 2a; projekt WT § 204 | Rn (wymiar w szybie) |
-| ☐ | C2 [P] | Dźwig do przewozu noszy (w każdym segmencie / trzonie) | kabina ≥ 1,1 × 2,1 m | WT § 193 ust. 2; projekt WT § 204 ust. 4 | Rn |
+| ☐ | C2 [P] | Dźwig do przewozu noszy (w każdym segmencie / trzonie) | kabina ≥ 1,1 × 2,1 m (wymiar z projektu WT; WT 2002 § 193 ust. 2 wymaga przystosowania do noszy bez podania wymiaru <!-- poprawione przez weryfikatora -->) | WT § 193 ust. 2; projekt WT § 204 ust. 4 | Rn |
 | ☐ | C3 [M] | Hol windowy | **3,6 m** od drzwi dźwigu do przeciwległej ściany (lub wnęka ≥ 2 m szer. z polem 1,6 × 1,6 m); pole C1 0,9 × 0,9 m lub wycieraczka przed drzwiami | M.13 s. 170; WT § 195 (≥ 1,6 m) | wszystkie rzuty |
 | ☐ | C4 [M] | Drzwi dźwigów | ≥ 0,9 m (cel **1,0–1,1 m**), kontrast ≥ 50 % LRV, otwarte ≥ 8 s, sygnał dźwiękowy i świetlny kierunku jazdy | M.13 s. 170–172 | Rn, W7 |
 | ☐ | C5 [M] | Lokalizacja | ≥ 1 dźwig blisko wejścia głównego; panele przyzywowe w tym samym miejscu na każdej kondygnacji; tyflomapa przy dźwigu na każdej kondygnacji w tej samej lokalizacji | M.13 s. 50, 170–171 | Rn |
@@ -121,7 +121,7 @@
 | ☐ | F12 [M] | Drzwi do sali | dwuskrzydłowe ≥ 1,2 m (skrzydło ≥ 1,0 m) lub rozsuwane; nie zawężają holu | M.13 s. 153–155 | RS |
 | ☐ | F13 [M] | Hol Sejmiku | siedziska z podłokietnikami i miejsca na wózki; szatnia z dostępną ladą; bufet (lada ≤ 0,9 m); toalety dostępne; pokój dla matki z dzieckiem; [+] pokój wyciszenia | Program s. 6; M.13 s. 179, 185, 204, 207, 215–216 | RS, W7 |
 | ☐ | F14 [M] | Sale komisji (50 i 30 os.), kluby (2 × 30, 2 × 15), sala radnych, pokój socjalny radnych | przejścia między meblami ≥ 1,2 m; stoły głęb. ≥ 1 m z przestrzenią na kolana; **pętla**; aneks: blat 0,75–0,8 m, bez kuchenki dotykowej | Program s. 7; M.13 s. 174, 179, 214–215 | RS |
-| ☐ | F15 [M] | Balustrady na galeriach / antresolach | ≥ 1,1 m, prześwity ≤ 0,12 m (lub rozwiązanie z F8) | M.13 s. 166; WT § 298 | P |
+| ☐ | F15 [M] | Balustrady na galeriach / antresolach | ≥ 1,1 m, prześwity ≤ 0,12 m (lub rozwiązanie z F8) | M.13 s. 166; WT § 298 ust. 2 (0,2 m) i ust. 7; projekt WT § 324 ust. 2 lp. 2 (budynek użyteczności publicznej: **0,12 m**) i ust. 7 <!-- poprawione przez weryfikatora --> | P |
 | ☐ | F16 [+] | System głosowania dostępny | konsola z przyciskami wyczuwalnymi dotykiem i potwierdzeniem głosowym/wibracyjnym (radni niewidomi) – wniosek | M.13 s. 106 (analogia), s. 178 | O |
 
 ## G. Strefa biurowa (Rn)
@@ -154,7 +154,7 @@
 
 | ☐ | ID | Co sprawdzić | Kryterium | Źródło | Gdzie |
 |---|---|---|---|---|---|
-| ☐ | J1 [!] | MOE na **podestach kondygnacyjnych** każdej klatki ewakuacyjnej | pole **1,5 × 1,5 m** (wniosek; min. 0,9 × 1,4 m na wózek) **poza** szerokością spocznika i polem otwierania drzwi – **nie zawęża drogi ewakuacyjnej**; obrys na posadzce | Regulamin s. 20; Program s. 11; poradnik s. 27–30; `ppoz.md` 5.7 | Rn (każdy rzut), detal |
+| ☐ | J1 [!] | MOE na **podestach kondygnacyjnych** każdej klatki ewakuacyjnej | pole **1,5 × 1,5 m** (wniosek; min. 0,9 × 1,4 m na wózek) **poza** szerokością spocznika i polem otwierania drzwi – **nie zawęża drogi ewakuacyjnej**; obrys na posadzce; dojście ≤ 20 m od pomieszczeń, dostęp ratowników ≤ 10 m; dla porównania projekt WT: osobne pomieszczenie MOE ≥ 1,5 × 3 m, punkt w przedsionku dźwigu ewakuacyjnego 1,5 × 0,9 m <!-- poprawione przez weryfikatora --> | Regulamin s. 20; Program s. 11; poradnik s. 27–30; projekt WT § 252 ust. 1, 6, 8; § 253 ust. 4; § 258 ust. 1, 4; `ppoz.md` 5.7 | Rn (każdy rzut), detal |
 | ☐ | J2 [!] | Miejsce na krzesło ewakuacyjne | wnęka/uchwyt przy MOE, oznakowanie PN-EN ISO 7010 | Regulamin s. 20; poradnik s. 35 | Rn |
 | ☐ | J3 [!] | Interkom dwustronny (EVCS) | z ochroną (centrum monitoringu) **i** stanowiskiem strażaka KDR; 0,8–1,1 m; [+] obraz + tekst dla osób głuchych | Regulamin s. 20; Program s. 11; poradnik s. 30 | Rn (symbol), O |
 | ☐ | J4 [M] | Oznakowanie świetlne MOE aktywowane alarmem; Braille | – | poradnik s. 29 | O |
@@ -211,6 +211,7 @@
 | ☐ | M8 | Dostępność dla pracowników (stanowiska regulowane, pokoje cichej pracy, psy asystujące) | Program s. 3; M.13 s. 331–334 |
 | ☐ | M9 | Proces: audyt eksperta ds. dostępności na etapie PB, konsultacje z Wojewódzką Społeczną Radą ds. Osób Niepełnosprawnych przy Marszałku (ustawa o rehabilitacji art. 44a), testy makiet 1:1 (WC, mównica, lada); gotowość do certyfikacji dostępności (ustawa art. 19) | M.13 s. 42; ustawa o dostępności art. 19; ustawa o rehabilitacji art. 44a |
 | ☐ | M10 | Etap I: „ogólne założenia i kierunki co do dostępności” (5 stron A4) – skrót M1–M7 | Regulamin s. 34 |
+| ☐ | M11 | <!-- dopisane przez weryfikatora --> Układ akapitu o dostępności zgodny z przyszłym „opisem dostępności” w PAB: (a) dojście i wejście, (b) kondygnacje – komunikacja pionowa i pozioma, (c) pomieszczenia i przestrzenie ogólnodostępne, (d) stanowiska postojowe, (e) rekreacja i miejsca gromadzenia odpadów; plus dane o MDS (pojemność, 2 m² na osobę na wózku) | rozp. w sprawie szczegółowego zakresu i formy projektu budowlanego, § 20 ust. 1 pkt 8 i 14 w brzmieniu Dz.U. 2026 poz. 597 (w/ż 4.11.2026); Pb art. 34 ust. 3 pkt 2 lit. h |
 
 ---
 

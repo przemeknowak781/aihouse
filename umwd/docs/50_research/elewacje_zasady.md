@@ -7,6 +7,17 @@
 
 > **Zakaz Inwestora został zachowany.** Nie wyszukiwano, nie otwierano i nie wykorzystano żadnych informacji o pracach nagrodzonych ani konkurencyjnych w tym konkursie. Jeden wynik wyszukiwania prowadził do takich treści. Nie otwarto go i wpisano na listę źródeł odrzuconych (§ 14).
 
+> **Weryfikacja źródeł (2026-11-16).** W pliku nie znaleziono informacji o pracach ani wynikach tego konkursu. Jedyny ślad to URL na liście źródeł odrzuconych, którego nie otwarto. Wszystkie 48 DOI rozwiązano w Crossref i metadane się zgadzają. Jedyna różnica to nazwisko Waliduda (było „Walidua”), poprawione. Cytaty z Karty Waszyngtońskiej, Zasad z La Valetty, Memorandum Wiedeńskiego, HEAN4, tabeli BNB, WT 2022 (§ 57, § 292, § 293, zał. 2), MPZP (§ 6 pkt 9 i 13, § 26 ust. 2 pkt 3) i Witruwiusza sprawdzono w tekstach źródłowych. Poprawki merytoryczne oznaczono `<!-- poprawione przez weryfikatora -->`:
+> - złoty podział: Green 1995 przypisano odwrotny wniosek; siła dowodu obniżona z A do B;
+> - WT g ≤ 0,35 nie wymaga osłon zewnętrznych;
+> - dominanta a minimum 35 m w całym obszarze A;
+> - Lindal i Hartig dotyczy tylko zabudowy 1–3 kondygnacji;
+> - niespójność okno/nadproże w E12 i YAML;
+> - niespójność siatki 7,5 m z przęsłem 4,5 m;
+> - BNB 335.522.
+>
+> Bez dostępu do streszczeń pozostały: Akalin 2009, Asgarzadeh 2012, Goia 2016, Wastiels 2012, Le 2017 (streszczenia usunięte przez wydawcę). <!-- poprawione przez weryfikatora -->
+
 **Oznaczenia używane w tekście:**
 - **[F]**: fakt ze źródła.
 - **[W]**: wniosek autora.
@@ -33,9 +44,9 @@
 6. **Głębokość lica to rdzeń jakości elewacji.** Wyprowadzone reguły:
    - ościeża ≥ 0,30 m;
    - w dominancie i na elewacjach WNW/SSE 0,40–0,60 m;
-   - wejścia z podcieniem ≥ 1,5 m (wymóg WT § 292);
+   - wejścia chronione daszkiem lub podcieniem o wysięgu lub głębokości ≥ 1,5 m i szerokości ≥ drzwi + 1 m (wymóg WT § 292; podcień to nasz wybór, WT dopuszcza też daszek) <!-- poprawione przez weryfikatora -->;
    - gzyms koronujący z wysięgiem 0,5–0,9 m;
-   - hierarchia skal o krokach ok. 3 (Salingaros i West 1999; siła C/D jako heurystyka).
+   - hierarchia skal o krokach ok. 3: rozkład potęgowy wg Salingaros i West 1999, krok ≈ e wg Salingaros 2006, źródło wtórne; siła C/D jako heurystyka. <!-- poprawione przez weryfikatora: krok ~2,7 nie pochodzi z pracy z 1999 r. -->
 7. **WWR.** Badania symulacyjne dla Europy wskazują minimum zużycia energii biur przy 30–45% przeszkleń (Goia i in. 2013; Goia 2016 wg źródła wtórnego; siła B). Kamienica ma ok. 30–33%. **Cel dla naszych elewacji: 35–42%.** Od strony rzeki (orientacja NNW) dopuszczalne jest do 45–50%. Na elewacjach WNW, WSW, SSE i ENE WT zał. 2 pkt 2.1 wymaga g ≤ 0,35 (okna poza kierunkiem N ± 45°). Wymóg ten można spełnić szybą przeciwsłoneczną o niskim g_n albo osłoną wewnętrzną (tabela f_C ma kolumnę „osłona wewnętrzna”). **Osłony zewnętrzne nie są więc wymogiem prawnym**, tylko rekomendacją energetyczną i komfortową (przegrzewanie, olśnienie; Grynning i in. 2014). <!-- poprawione przez weryfikatora: było „wymagają osłon zewnętrznych, bo WT…” – WT dopuszcza osłonę wewnętrzną lub szybę o niskim g -->.
 8. **Materiały.** Proponujemy 2–3 materiały mineralne o trwałości ≥ 50 lat wg tabeli BBSR/BNB 2017: kamień, ceramika, klinkier, beton architektoniczny, miedź. Tynk na ociepleniu (ETICS) ma trwałość 30 lat i nie powinien trafić na elewacje frontowe. Paleta ma być ciepła, jasna i neutralna, nawiązująca do piaskowca i tynków kamienic oraz do granitu pylonów mostu, z ciemnym brązem w stolarce.
 9. **Dominanta (35–45 m).** Proponowana trójdzielność:
@@ -97,7 +108,7 @@ Cytaty [F] ze skanu pisma:
 - § 292 ust. 1: wejście do budynku wyższego niż dwie kondygnacje chroni daszek lub podcień ochronny „o szerokości większej co najmniej o 1 m od szerokości drzwi oraz o wysięgu lub głębokości nie mniejszej niż (…) 1,5 m w budynkach wyższych”. Nasz budynek ma ok. 45 m, a więc jest wysoki (W: 25–55 m).
 - § 293 ust. 2: daszki, balkony i osłony przeciwsłoneczne nad chodnikiem mogą być umieszczane na wysokości ≥ 2,4 m, z pasem wolnym ≥ 1 m od strony jezdni.
 - § 293 ust. 3: obudowy urządzeń i gabloty mogą wystawać ≤ 0,5 m.
-- § 293 ust. 6: przy świetle skierowanym na elewację z oknami natężenie oświetlenia na elewacji ≤ **5 lx** dla światła białego (3 lx dla barwnego). **[W]** To realnie ogranicza „iluminację” dominanty. Nocny obraz powinien powstawać ze światła z wnętrza.
+- § 293 ust. 6: przy świetle skierowanym na elewację z oknami natężenie oświetlenia na elewacji ≤ **5 lx** dla światła białego (3 lx dla światła kolorowego, o zmiennym natężeniu, błyskowego lub pulsującego; brzmienie potwierdzone w t.j. Dz.U. 2022 poz. 1225 <!-- poprawione przez weryfikatora -->). **[W]** To realnie ogranicza „iluminację” dominanty. Nocny obraz powinien powstawać ze światła z wnętrza.
 - Zał. 2 pkt 2.1.1 i 2.1.4: g = f_C · g_n ≤ 0,35 w okresie letnim. Wymóg nie dotyczy okien skierowanych na północ ±45° i okien zacienionych elementem spełniającym ten wymóg. Tabela f_C: zewnętrzne żaluzje z białymi lamelami nastawnymi 0,10–0,35, wewnętrzne 0,25–0,45.
 - Istnieje projekt nowych WT z 13.05.2026 (plik w scratchpad `dl/draft`). Moduł 40_prawo musi zweryfikować jego status. Treść § 57 (1:8) wydaje się w projekcie zachowana [F, wstępny przegląd OCR].
 
@@ -156,7 +167,7 @@ Cytaty [F] ze skanu pisma:
 - **Alberti, *concinnitas*** (*De re aedificatoria*, IX): harmonia liczby, proporcji i rozmieszczenia, w której niczego nie można dodać ani ująć. Przywołane z literatury kanonicznej, bez weryfikacji online.
 - **Trójdzielność: cokół, trzon, zwieńczenie.** Wywodzi się z porządku kolumnowego (baza, trzon, głowica). Dla budynku wysokiego sformułował ją Sullivan: dolne kondygnacje, powtarzalny trzon biur, zwieńczenie (L.H. Sullivan, „The Tall Office Building Artistically Considered”, *Lippincott's Magazine* 57, marzec 1896; skan: archive.org/stream/tallofficebuildi00sull). Kamienice Przedmieścia Oławskiego realizują ten schemat wprost: boniowany parter, piętra o malejącej dekoracji, gzyms i attyka (M.07, M.11.E).
 - **Rytm, metrum, hierarchia.** Rytm to powtarzanie z regularnymi odstępami, metrum to układ akcentów, hierarchia to wyróżnienie elementu nadrzędnego (Rasmussen 1959, rozdz. „Rhythm in Architecture”; Ching 2015). Pierzeja historyczna ma rytm podwójny: działkowy (kamienica, ok. 15–25 m) i okienny (oś ok. 2,2 m).
-- **Symetria i asymetria.** Symetria lokalna, np. w obrębie segmentu, przęsła czy wejścia, buduje spójność. Globalna symetria dużego gmachu przy przyczółku nie jest konieczna. W kontekście sąsiedniego monumentalnego gmachu z lat 30. (DUW, pl. Powstańców Warszawy 1) silna, osiowa, globalna symetria może przywoływać skojarzenia z architekturą władzy tamtego okresu [W, ryzyko]. Alexander (2002, *The Nature of Order*, t. 1) wymienia „local symmetries” obok „levels of scale”, „strong centers”, „boundaries”, „alternating repetition” i „gradients” jako własności żywych struktur (D).
+- **Symetria i asymetria.** Symetria lokalna, np. w obrębie segmentu, przęsła czy wejścia, buduje spójność. Globalna symetria dużego gmachu przy przyczółku nie jest konieczna. W kontekście sąsiedniego monumentalnego gmachu z okresu III Rzeszy (DUW, pl. Powstańców Warszawy 1; budowa ok. 1939–1945, daty do weryfikacji, „lata 30.” to uproszczenie) <!-- poprawione przez weryfikatora --> silna, osiowa, globalna symetria może przywoływać skojarzenia z architekturą władzy tamtego okresu [W, ryzyko]. Alexander (2002, *The Nature of Order*, t. 1) wymienia „local symmetries” obok „levels of scale”, „strong centers”, „boundaries”, „alternating repetition” i „gradients” jako własności żywych struktur (D).
 
 ### 2.2. Systemy proporcji nowoczesnej architektury (D)
 
@@ -188,10 +199,10 @@ Cytaty [F] ze skanu pisma:
 |---|---|---|---|
 | Berlyne D.E. (1971), *Aesthetics and Psychobiology*, Appleton-Century-Crofts | teoria „pobudzenia”: hedoniczna wartość bodźca ma kształt odwróconego U względem złożoności i nowości | D (teoria, wiele testów) | Celem jest umiarkowana złożoność. |
 | Imamoglu Ç. (2000), *J Environ Psychol* 20(1):5–16, doi:10.1006/jevp.1999.0155 | 72 studentów; rysunki fasad o 3 poziomach złożoności: **odwrócone U**, preferowany poziom pośredni, który jest zarazem najbardziej złożony w zakresie znajomości | B | Bogactwo tak, ale w granicach rozpoznawalnego „języka”. |
-| Akalin A. i in. (2009), *J Environ Psychol* 29(1):124–132, doi:10.1016/j.jenvp.2008.05.005 | 100 studentów: preferowana średnia złożoność; **najbardziej złożone fasady najbardziej „imponujące”, ale nie najbardziej lubiane**; architekci krytyczniejsi | B | Gmach reprezentacyjny może być nieco bardziej „imponujący” w zwieńczeniu, przy spokojniejszym trzonie. |
-| Stamps A.E. (1999), *Environment and Behavior* 31(6):723–751, doi:10.1177/00139169921972326 | Najważniejsza dla preferencji jest **złożoność powierzchni** (β = 0,72), mniej złożoność sylwetki (β = 0,26), a rozczłonkowanie fasady najmniej (β = −0,11) | B | Detal, faktura i ościeża dają więcej niż „rzeźbienie” bryły. |
+| Akalin A. i in. (2009), *J Environ Psychol* 29(1):124–132, doi:10.1016/j.jenvp.2008.05.005 | 100 studentów: preferowana średnia złożoność; **najbardziej złożone fasady najbardziej „imponujące”, ale nie najbardziej lubiane**; architekci krytyczniejsi. [Metadane potwierdzone w Crossref; streszczenie usunięte przez wydawcę z Crossref, OpenAlex i S2, więc szczegóły (n, wynik „imponujące”) **niezweryfikowane** przez weryfikatora] <!-- poprawione przez weryfikatora --> | B | Gmach reprezentacyjny może być nieco bardziej „imponujący” w zwieńczeniu, przy spokojniejszym trzonie. |
+| Stamps A.E. (1999), *Environment and Behavior* 31(6):723–751, doi:10.1177/00139169921972326 | Najważniejsza dla preferencji jest **złożoność powierzchni** (β = 0,72), mniej złożoność sylwetki (β = 0,26), a rozczłonkowanie fasady najmniej (β = −0,11) | B | Detal, faktura i ościeża dają więcej niż „rzeźbienie” bryły. Badanie dotyczyło fasad domów mieszkalnych (bodźce symulowane), a „articulation” zdefiniowano tam wąsko. Wynik nie znosi wymogu DWKZ dotyczącego artykulacji. <!-- poprawione przez weryfikatora: β potwierdzone w streszczeniu; dodano zakres ważności --> |
 | Nasar J.L. (1994), *Environment and Behavior* 26(3):377–401, doi:10.1177/001391659402600305 | Kluczowe zmienne formalne to **zamknięcie, złożoność, porządek**. Ważny jest styl jako zmienna symboliczna i umiarkowana atypowość względem schematu | B (przegląd) | Porządek i ciągłość pierzei plus jedna atypowa figura (dominanta). |
-| Coburn A. i in. (2020), *Cortex* 126:217–241, doi:10.1016/j.cortex.2020.01.009 | n = 798 i 614: trzy wymiary odbioru wnętrz, **spójność** (coherence), **fascynacja** i „domowość” (hominess), wyjaśniają 90% wariancji ocen | B | Zasada dotyczy też holi i sali Sejmiku. Elewację projektować jako „spójną i fascynującą”. |
+| Coburn A. i in. (2020), *Cortex* 126:217–241, doi:10.1016/j.cortex.2020.01.009 | n = 798 i 614: trzy wymiary odbioru wnętrz, **spójność** (coherence), **fascynacja** i „domowość” (hominess), wyjaśniają 90% wariancji ocen | B | Zasada dotyczy też holi i sali Sejmiku. Badanie dotyczy wnętrz, więc przeniesienie na elewację to wniosek, nie wynik: elewację projektować jako „spójną i fascynującą”. <!-- poprawione przez weryfikatora --> |
 | Lindal P.J., Hartig T. (2013), *J Environ Psychol* 33:26–36, doi:10.1016/j.jenvp.2012.09.003 | Symulowane ulice z szeregową zabudową mieszkaniową o wysokości **1–3 kondygnacji**, badani z Islandii: **zróżnicowanie architektury** (linia dachów, ornament) zwiększa ocenę regeneracyjności, ale **nie zwiększa preferencji**; **wysokość** obniża regeneracyjność. W bodźcach ≥ 50% budynków było identycznych [wtórne: BPS Research Digest; streszczenie oryginału niedostępne] <!-- poprawione przez weryfikatora: dodano zakres wysokości i brak efektu na preferencję --> | B | Kontrolowana różnorodność segmentów (DWKZ) ma oparcie empiryczne. Efekt wysokości dotyczy zabudowy 1–3 kondygnacji i **nie przenosi się wprost** na dominantę 35–45 m. Smukłość dominanty uzasadniać raczej kompozycją i kontekstem (DWKZ, HEAN4) niż tym badaniem. <!-- poprawione przez weryfikatora: ekstrapolacja --> |
 | Ewing R., Handy S. (2009), *J Urban Design* 14(1):65–84, doi:10.1080/13574800802451155 | Mierzalne jakości ulicy: wyobrażalność, zamknięcie, skala ludzka, przejrzystość, złożoność | B | Parter przejrzysty i o ludzkiej skali. |
 
@@ -211,8 +222,8 @@ Cytaty [F] ze skanu pisma:
 
 - **Simpson J. i in. (2019)**, *J Urbanism* 12(3):259–278, doi:10.1080/17549175.2018.1552884. Mobilny eye-tracking, n = 24, chodzenie po realnych ulicach: **krawędzie ulicy (elewacje) to najczęściej oglądany komponent ulicy**, zależny od ich materialności (B/C, mała próba, ale warunki realne).
 - **Hollander J.B. i in. (2020)**, *Planning Practice & Research* 35(5):485–509, doi:10.1080/02697459.2020.1768332. 63 studentów, zdjęcia budynków publicznych w Nowym Jorku: w scenach „tradycyjnych” (złożone fasady, symetria bilateralna) **więcej fiksacji na oknach** (B/C).
-- **Salingaros N.A., Sussman A. (2020)**, *Urban Science* 4(2):26, doi:10.3390/urbansci4020026, oraz **Lavdas A.A., Salingaros N.A., Sussman A. (2021)**, *Applied Sciences* 11(13):6197, doi:10.3390/app11136197. Oprogramowanie 3M-VAS przewiduje, że tradycyjny układ i kształt okien przyciągają uwagę, a fasady współczesne są „niezauważane”. **Krytycznie (C):** to *predykcja algorytmu* wytrenowanego na danych o reklamach i stronach WWW, testowana na uproszczonych rysunkach. Nie jest to pomiar ludzi. **Lavdas i Salingaros (2022)**, *Challenges* 13(2):56, doi:10.3390/challe13020056, proponują „mierzalną skalę piękna” w fazie pilotażu (C).
-- **[W]** Wspólny wniosek o umiarkowanej sile: **okna jako czytelne, powtarzalne „figury” w masywnej ścianie** oraz wyraźne wejście i narożnik przyciągają uwagę. Ściana kurtynowa bez skali działa odwrotnie. Wniosek jest zgodny z analizą werdyktów konkursowych w `trendy_konkursowe.md`: ściany kurtynowe były karane.
+- **Salingaros N.A., Sussman A. (2020)**, *Urban Science* 4(2):26, doi:10.3390/urbansci4020026, oraz **Lavdas A.A., Salingaros N.A., Sussman A. (2021)**, *Applied Sciences* 11(13):6197, doi:10.3390/app11136197. Oprogramowanie 3M-VAS przewiduje, że tradycyjny układ i kształt okien przyciągają uwagę, a fasady współczesne są „niezauważane”. **Krytycznie (C):** to *predykcja algorytmu* zbudowanego na zagregowanych danych eye-trackingowych (ok. 30 lat), stosowanego głównie do projektowania stron WWW i oznakowania, testowana na uproszczonych rysunkach elewacji (badanie pilotażowe). <!-- poprawione przez weryfikatora: wg streszczeń Urban Sci 4(2):26 i Appl Sci 11:6197 --> Nie jest to pomiar ludzi. **Lavdas i Salingaros (2022)**, *Challenges* 13(2):56, doi:10.3390/challe13020056, proponują „mierzalną skalę piękna” w fazie pilotażu (C).
+- **[W]** Wspólny wniosek o umiarkowanej sile: **okna jako czytelne, powtarzalne „figury” w masywnej ścianie** oraz wyraźne wejście i narożnik przyciągają uwagę. Ściana kurtynowa bez skali działa prawdopodobnie odwrotnie. Analiza werdyktów w `trendy_konkursowe.md` pokazuje, że sądy zgłaszały zastrzeżenia do dużych przeszkleń: odbicie lustrzane, efekt soczewki, nieprzejrzystość w dzień (Kraków), przegrzewanie (Berlin). Nie oznacza to, że ściany kurtynowe były systematycznie „karane”: I nagroda w Krakowie miała elewację półtransparentną, a uwagi sądu były zaleceniami do dalszego opracowania. <!-- poprawione przez weryfikatora: złagodzono uogólnienie -->
 
 ### 3.4. Neuroarchitektura: co wiemy, a czego nie
 
@@ -273,7 +284,7 @@ Cytaty [F] ze skanu pisma:
 ### 4.2. Tektonika i materialność (D)
 
 - Frampton K. (1995), *Studies in Tectonic Culture*, MIT Press (D): sens budowli wyrasta z poetyki konstrukcji i złożenia, a nie wyłącznie z obrazu.
-- **[W]** Wniosek dla elewacji: czytelny ład ram (filary, nadproża, gzymsy) zgodny z konstrukcją 7,5 m oraz uczciwe złożenie okładzin. Fugi, łączenia i kotwy mają być widoczne i uporządkowane, a nie ukryte za „gładką płytą bez skali”. Zgadza się to z ilustracją z werdyktu krakowskiego w `trendy_konkursowe.md`: sąd zalecał zwiększenie „pionowej tektoniki (głębokości elementów, pionowego ryflowania fasady)”.
+- **[W]** Wniosek dla elewacji: czytelny ład ram (filary, nadproża, gzymsy) zgodny z konstrukcją 7,5 m oraz uczciwe złożenie okładzin. Fugi, łączenia i kotwy mają być widoczne i uporządkowane, a nie ukryte za „gładką płytą bez skali”. Pokrewna jest uwaga z werdyktu konkursu na Filharmonię w Krakowie (SARP Kraków, 23.03.2026, zalecenie nr 2 dla I nagrody; cytat potwierdzony w PDF): „Zwiększenie pionowej tektoniki (głębokości elementów, pionowego ryflowania fasady) celem ograniczenia efektu odbicia lustrzanego”. Kontekst to ograniczenie odbić szklanej elewacji, a nie widoczność fug i kotew, więc jest to analogia pośrednia. <!-- poprawione przez weryfikatora: doprecyzowano kontekst cytatu; źródło https://sarp.krakow.pl/wp-content/uploads/2026/03/Informacja_wyniki_rozstrzygniecia_Konkurs_Filharmonia_.pdf -->
 
 ### 4.3. „Godność” budynku publicznego (D)
 
@@ -343,11 +354,11 @@ Cytaty [F] ze skanu pisma:
 
 ### 6.1. Badania
 
-- **Goia F., Haase M., Perino M. (2013)**, *Applied Energy* 108:515–527, doi:10.1016/j.apenergy.2013.02.063. Moduł fasady biurowej, klimat umiarkowany, symulacja zintegrowana (ogrzewanie, chłodzenie, oświetlenie): **optymalny WWR 35–45% niezależnie od orientacji**. Treść wg streszczenia cytowanego w wynikach wyszukiwania (B).
+- **Goia F., Haase M., Perino M. (2013)**, *Applied Energy* 108:515–527, doi:10.1016/j.apenergy.2013.02.063. Moduł fasady biurowej, klimat umiarkowany morski (*temperate oceanic*), symulacja zintegrowana (ogrzewanie, chłodzenie, oświetlenie): **optymalny udział przeszklenia modułu 35–45% niezależnie od orientacji** i wielkości fasady. Streszczenie potwierdził weryfikator w repozytorium PoliTo (https://iris.polito.it/handle/11583/2592605, dostęp 2026-11-16) (B, symulacja). Wrocław leży w klimacie przejściowym Cfb/Dfb, więc przeniesienie wyniku jest przybliżone. <!-- poprawione przez weryfikatora -->
 - **Goia F. (2016)**, *Solar Energy* 132:467–492, doi:10.1016/j.solener.2016.03.031. Cztery klimaty europejskie (Cfa, Csb, Dfa, Dfb); minimum zużycia energii całkowitej przy **WWR ok. 30–45%** [wtórne streszczenie; pełny tekst zamknięty, liczby niezweryfikowane] (B).
 - **Troup L. i in. (2019)**, *Energy and Buildings* 203:109434, doi:10.1016/j.enbuild.2019.109434. Dane z ok. 1000 rzeczywistych biurowców w USA (CBECS 2012): **mediana zużycia energii rośnie z udziałem przeszkleń**, głównie przez chłodzenie. Sam WWR wyjaśnia jednak niewiele wariancji (R² ≤ 0,04), więcej klimat (B, dane z eksploatacji).
 - **Grynning S., Time B., Matusiak B. (2014)**, *Solar Energy* 107:182–194, doi:10.1016/j.solener.2014.06.007. Nawet w „zimnym” klimacie (Norwegia) w biurach **dominuje zapotrzebowanie na chłodzenie**. Osłony przeciwsłoneczne są kluczowe, a strategia sterowania decyduje, czy zużycie energii rośnie, czy maleje (B, symulacja).
-- **Walidua M., Nowak Ł., Schabowicz K. (2025)**, *Architecture, Civil Engineering, Environment* 18(4):95–104, doi:10.2478/acee-2025-0050. Pokój biurowy we Wrocławiu, WWR 30/50/70%, szyby PV. Wyniki dotyczą głównie szkła fotowoltaicznego, a próba to jeden pokój (C). Przytaczane jako przykład danych dla Wrocławia, nie jako podstawa.
+- **Waliduda M., Nowak Ł., Schabowicz K. (2025)** <!-- poprawione przez weryfikatora: nazwisko wg Crossref -->, *Architecture, Civil Engineering, Environment* 18(4):95–104, doi:10.2478/acee-2025-0050. Pokój biurowy we Wrocławiu, WWR 30/50/70%, szyby PV. Wyniki dotyczą głównie szkła fotowoltaicznego, a próba to jeden pokój (C). Przytaczane jako przykład danych dla Wrocławia, nie jako podstawa.
 - **Regulacje:** WT § 57 (1:8); zał. 2 pkt 2.1 (g ≤ 0,35 poza N ± 45°) (ofic.). Norma EN 17037:2018 „Daylight in buildings” wyznacza poziomy natężenia światła dziennego na płaszczyźnie odniesienia; treść normy nie była weryfikowana online. Reguła BRE dla głębokości doświetlenia: ok. 2–2,5 × wysokość nadproża (wiedza ogólna, do weryfikacji w BR 209 lub CIBSE LG10).
 
 ### 6.2. Zacienienie stałe a ruchome [W]
@@ -414,7 +425,7 @@ Cytaty [F] ze skanu pisma:
 - **Teoria kompozycji.** Dominanta skupia uwagę wysokością, wielkością lub formą (definicja MPZP § 2 pkt 2). Zarazem organizuje wnętrze urbanistyczne i osie widokowe: Wejchert K., *Elementy kompozycji urbanistycznej*, Arkady, wyd. 1 1974 (data niezweryfikowana online), wyd. 2 1984 (D). Lynch K. (1960), *The Image of the City*, MIT Press: punkt orientacyjny (landmark) jest czytelny, gdy ma wyrazistą sylwetkę i kontrast z tłem (D).
 - **Badania:**
   - Heath T. i in. (2000), *Environment and Behavior* 32(4):541–556, doi:10.1177/00139160021972658: najsilniejszy wpływ na preferencję panoramy ma **złożoność sylwetki**. Większa złożoność wiąże się z większą przyjemnością i preferencją (B).
-  - Asgarzadeh M. i in. (2012), *Landscape and Urban Planning* 107(1):1–11, doi:10.1016/j.landurbplan.2012.04.001: **odczucie opresyjności rośnie z wysokością budynku, a drzewa przy ulicy je łagodzą** [streszczenie wtórne] (B).
+  - Asgarzadeh M. i in. (2012), *Landscape and Urban Planning* 107(1):1–11, doi:10.1016/j.landurbplan.2012.04.001: **odczucie opresyjności rośnie z wysokością budynku, a drzewa przy ulicy je łagodzą** [streszczenie wtórne; tytuł i metadane potwierdzone w Crossref, treść wyniku **niezweryfikowana**, bo streszczenie usunięto z baz] <!-- poprawione przez weryfikatora --> (B).
   - Lindal i Hartig (2013): wysokość obniża regeneracyjność ulicy (B; ale tylko w zakresie 1–3 kondygnacji, więc dla dominanty to słaba analogia). <!-- poprawione przez weryfikatora -->
 - **Kontekst wysokościowy:** kamienice 18–22 m; pylony mostu ok. 20 m (mur), a z odtwarzanymi hełmami ok. 25 m nad terenem (M.11.F wg `docs/30_lokalizacja/konserwator.md`) <!-- poprawione przez weryfikatora: uzupełniono wysokość hełmów -->; wieże miasta 72–97 m (daleko, w panoramie).
 
@@ -461,8 +472,10 @@ Reguły mają postać parametrów do modelu (§ 9.9). Oznaczenie [obl.] = reguł
   - (d) wysokość gzymsu lub attyki ±0,6–1,2 m.
 
   Uzasadnienie: kontrolowana różnorodność (Lindal i Hartig 2013) przy wysokiej spójności (Coburn 2020).
+
+  **Uwaga weryfikatora [W]:** obowiązkowy (DWKZ: „należy wprowadzić”) jest sam optyczny podział bryły. Liczby segmentów, ΔL* i limit „najwyżej dwa narzędzia naraz” to heurystyki autora bez źródła. Przy ΔL* ≈ 6–12 i elewacji N w cieniu rozproszonym (§ 4.1) podział może być słabo czytelny. Konserwator może uznać go za niewystarczający, więc trzeba go sprawdzić na wizualizacji w świetle pochmurnym. <!-- poprawione przez weryfikatora -->
 - **E03 [zal.]** **Narożnik przy przyczółku mostu zaokrąglony lub fazowany** (R ≈ 3–8 m albo faza ≥ 2 m). Nawiązuje do historycznego narożnika kwartału (M.11.E) i preferencji krzywizny (Ruta 2019).
-- **E04 [obl. R-208]** Styk z kamienicami realizuje **przęsło przejściowe** o szerokości 1 osi (2,25 m): cofnięte o 0,3–0,6 m albo jako szczelina w innym materiale. Okna w szczycie Słowackiego 5 pozostają czynne, z wymaganym prześwitem lub dziedzińcem przy szczycie.
+- **E04 [zal.; obligatoryjne jest tylko zachowanie okien w szczycie Słowackiego 5 wg R-208]** <!-- poprawione przez weryfikatora: przęsło przejściowe to zalecenie, nie wymóg --> Styk z kamienicami realizuje **przęsło przejściowe** o szerokości 1 osi (2,25 m): cofnięte o 0,3–0,6 m albo jako szczelina w innym materiale. Okna w szczycie Słowackiego 5 pozostają czynne, z wymaganym prześwitem lub dziedzińcem przy szczycie.
 
 ### 9.2. Wysokości i linie odniesienia
 
@@ -485,6 +498,7 @@ Reguły mają postać parametrów do modelu (§ 9.9). Oznaczenie [obl.] = reguł
   - przy osi 1,50 m: **0,95–1,05 × 2,50 m** z filarkiem 0,45–0,55 m.
 
   Nadproże ok. 2,9–3,0 m nad podłogą, na tyle wysoko, żeby doświetlić pokój głębokości 5,35 m (≤ 2–2,5 × wysokość nadproża). Podokiennik 0,6–0,85 m, przy niższym bariera szklana.
+  **Uwaga weryfikatora [O]:** zakresy są wewnętrznie sprzeczne. Okno 2,45–2,55 m z podokiennikiem 0,6–0,85 m daje nadproże 3,05–3,40 m, a nie 2,9–3,0 m. Przy kondygnacji 3,75 m (strop i warstwy ok. 0,35–0,50 m) nadproże 3,05–3,40 m wypada przy suficie lub nad nim. Należy wybrać jedną parę: np. nadproże 2,95 m + okno 2,45 m → podokiennik 0,50 m z barierą szklaną, albo okno 2,20–2,30 m + podokiennik 0,65–0,75 m (WWR spada wtedy o ok. 3–4 p.p.). <!-- poprawione przez weryfikatora -->
 - **E13 [obl. WT § 57]** Okna ≥ 1/8 powierzchni podłogi: w pokoju 24 m² ≥ 3,0 m² w świetle ościeżnic. Spełnione z zapasem: 2 × 1,25 × 2,45 brutto ≈ 6,1 m²; 3 × 1,0 × 2,5 ≈ 7,5 m².
 - **E14 [zal.]** **WWR na kondygnacjach biurowych: 35–42%.** Obliczenia [O] dla kondygnacji 3,75 m:
   - oś 2,25 m z oknem 1,25 × 2,45: WWR ≈ 36%;
@@ -557,6 +571,7 @@ facade_rules:
              shaft_top_m: 36.0, max_visible_width_m: [18, 24]}
   window: {ratio_w_h: [1.8, 2.2], w_2_25_axis_m: 1.25, w_1_50_axis_m: [0.95, 1.05],
            h_m: [2.45, 2.55], head_above_floor_m: [2.9, 3.0], sill_m: [0.6, 0.85]}
+           # WERYFIKATOR: sill + h musi = head; obecne zakresy niespójne (0.6+2.45=3.05 > 3.0) – wybrać jedną parę (patrz E12)
   reveal_depth_m: {standard: 0.30, dominant_and_WNW_WSW_SSE: [0.40, 0.60],
                    entrance_recess: [1.5, 2.5]}
   cornice_projection_m: [0.5, 0.9]
@@ -709,11 +724,13 @@ Ocena wstępna autora, skala 1–5, do weryfikacji przez panel.
 3. **Wysokość gzymsu Słowackiego 5 jest nieznana** (M.08 nie zawiera elewacji), więc E05 jest niekompletne po stronie wschodniej.
 4. **Rzędne Mazowiecka 19** zmierzono przy granicy z nr 17. Teren opada (rzędne ok. 118,5–119,4 m n.p.m. w pobliżu), więc trzeba je przeliczyć na rzędne bezwzględne z NMT.
 5. **Barwy kontekstu:** pomiar z dronowych zdjęć HDR jest niewiarygodny. Palety NCS/RAL są przybliżone.
-6. **Goia 2016:** liczby (30–45%) pochodzą ze źródła wtórnego. Pełny tekst jest zamknięty (403/paywall). Goia i in. 2013 (35–45%) potwierdzono tylko przez streszczenie.
+6. **Goia 2016:** liczby (30–45%) pochodzą ze źródła wtórnego. Pełny tekst jest zamknięty (403/paywall). Goia i in. 2013 (35–45%) potwierdzono w streszczeniu w repozytorium PoliTo; wynik dotyczy klimatu umiarkowanego morskiego. <!-- poprawione przez weryfikatora -->
 7. **Neuroarchitektura i 3M-VAS:** słaba siła dowodów (C). Nie eksponować na planszach jako argumentu naukowego.
 8. **Pylony mostu (ok. 20 m) i harmonogram odtworzenia hełmów:** tylko źródła wtórne (WhiteMad, Wikipedia). Rysunek M.11.F od organizatora potwierdza zamiar odtworzenia hełmów.
 9. **Skojarzenie z gmachem DUW** (architektura z lat 30., okresu nazistowskiego, wg wroclaw.pl/WhiteMad): monumentalna osiowość W1 może zostać źle odczytana. Środki zaradcze opisano w § 10.
 10. **Moduł:** pokoje 32 m² nie mieszczą się w osi 2,25 m (§ 9.3). Wymagana koordynacja z rzutami.
+10a. **Niespójność tektoniki [weryfikator]:** przęsło elewacyjne 4,50 m (3M) nie pokrywa się z siatką konstrukcyjną 7,50 m (5M); wspólna wielokrotność to dopiero 22,5 m. Filary elewacji nie będą więc odpowiadać słupom, co osłabia argument „czytelnego ładu ram zgodnego z konstrukcją 7,5 m” (§ 4.2) i może zostać wytknięte przez sędziów-architektów. Opcje: siatka 9,0 m (2 przęsła) albo 6,0 m, ewentualnie zmienić narrację na niezależną „ramę elewacyjną”. <!-- poprawione przez weryfikatora -->
+10b. **BNB 335.522 [weryfikator]:** „twarde okładziny na ociepleniu” (np. płytki ceramiczne lub klinkierowe na ETICS) mają trwałość tylko 30 lat, tak jak tynk na ETICS. Trwałość ≥ 50 lat dotyczy okładzin wentylowanych lub murowanych (335.411, 335.511), nie płytek klejonych na izolację. Ma to znaczenie dla W2. <!-- poprawione przez weryfikatora -->
 11. **Wąska dominanta a program sali Sejmiku** (100 osób, amfiteatr, foyer, Kancelaria): możliwy konflikt z regułą szerokości ≤ 18–24 m. Do sprawdzenia w studium bryły.
 12. **Kondygnacja cofnięta od strony rzeki** będzie widoczna z daleka. E08 traktuje ją jako lekkie zwieńczenie. To decyzja projektowa.
 13. **Projekt nowych WT (13.05.2026):** jeśli wejdą w życie, część paragrafów może zmienić numerację lub treść (§ 57, § 292, § 293, zał. 2).
@@ -795,7 +812,7 @@ Metadane zweryfikowano w Crossref, a streszczenia w Semantic Scholar lub OpenAle
 - Troup L., Phillips R., Eckelman M.J., Fannon D. (2019). Effect of window-to-wall ratio on measured energy consumption in US office buildings. *Energy and Buildings* 203:109434. doi:10.1016/j.enbuild.2019.109434
 - Ulrich R.S. (1984). View through a window may influence recovery from surgery. *Science* 224(4647):420–421. doi:10.1126/science.6143402
 - Vartanian O., Navarrete G., Chatterjee A., Fich L.B., Leder H., Modroño C., Nadal M., Rostrup N., Skov M. (2013). Impact of contour on aesthetic judgments and approach-avoidance decisions in architecture. *PNAS* 110(Suppl. 2):10446–10453. doi:10.1073/pnas.1301227110
-- Walidua M., Nowak Ł., Schabowicz K. (2025). Evaluation of the effects of transparent PV glazing application on energy use and thermal comfort in an office room through annual energy simulations. *Architecture, Civil Engineering, Environment* 18(4):95–104. doi:10.2478/acee-2025-0050
+- Waliduda M., Nowak Ł., Schabowicz K. (2025). <!-- poprawione przez weryfikatora --> Evaluation of the effects of transparent PV glazing application on energy use and thermal comfort in an office room through annual energy simulations. *Architecture, Civil Engineering, Environment* 18(4):95–104. doi:10.2478/acee-2025-0050
 - Wang S., Sanches de Oliveira G., Djebbara Z., Gramann K. (2022). The embodiment of architectural experience: A methodological perspective on neuro-architecture. *Frontiers in Human Neuroscience* 16:833528. doi:10.3389/fnhum.2022.833528
 - Wastiels L., Schifferstein H.N.J., Heylighen A., Wouters I. (2012a). Red or rough, what makes materials warmer? *Materials & Design* 42:441–449. doi:10.1016/j.matdes.2012.06.028
 - Wastiels L., Schifferstein H.N.J., Heylighen A., Wouters I. (2012b). Relating material experience to technical parameters: A case study on visual and tactile warmth perception of indoor wall materials. *Building and Environment* 49:359–367. doi:10.1016/j.buildenv.2011.08.009
