@@ -1,0 +1,67 @@
+{
+ "nr": 2,
+ "title": "Research running: 4 parallel teams (16 agents, every output cross-checked by an independent verifier); rendering & board toolchains tested",
+ "stages": [
+  [
+   "Organiser materials: download, unpack, text extraction (results files deliberately EXCLUDED)",
+   "done"
+  ],
+  [
+   "Rules (Regulamin + 21 clarifications + amendments): full compliance register",
+   "running"
+  ],
+  [
+   "Site analysis: zoning plan (MPZP), heritage guidelines, survey map, geotech, trees",
+   "running"
+  ],
+  [
+   "Polish building law & technical conditions (WT 2025/2026), fire, accessibility",
+   "running"
+  ],
+  [
+   "Research: what wins architecture competitions now; how to make competition visuals",
+   "running"
+  ],
+  [
+   "Functional programme (M.01) → area schedule & massing study",
+   "todo"
+  ],
+  [
+   "Concept: urban form, massing variants → judge panel → chosen concept",
+   "todo"
+  ],
+  [
+   "3D model + façade design (aesthetic principles) + photoreal renders (Blender Cycles)",
+   "todo"
+  ],
+  [
+   "Stage I study (2 boards) and Stage II entry (6 boards 100×70, 10-page text, tables, model 1:250)",
+   "todo"
+  ],
+  [
+   "Jury simulation & compliance audit → iterate until no open issues",
+   "todo"
+  ]
+ ],
+ "notes": [
+  "Programme M.01 already prescribes the massing: two 5-storey wings (≤22 m) along Mazowiecka and Wybrzeże Słowackiego joined by a corner dominant ≤45 m; 2 basement levels (parking + civil shelter); 403 staff; 24 m² cellular offices.",
+  "Site: 3,729 m² triangle at the south bridgehead of Grunwaldzki Bridge (1910, stone pylons; planned reconstruction of historic pylon helmets) — the tower must converse with the pylons.",
+  "Teams: W1 rules register + clarifications + programme; W2 zoning plan, heritage, survey geometry (PL-2000 → local grid), geotech, trees, neighbours; W3 building law/WT, fire (high-rise W), accessibility, zero-emission (EPBD); W4 competition trends, visualisation craft, façade aesthetics, Wrocław context, cost benchmarks.",
+  "Toolchain: Blender 5.2 Cycles + OIDN denoise verified; 100×70 cm board pipeline (HTML/SVG → Chromium PDF, Inter typeface) verified at exact print size.",
+  "Exclusion rule enforced in every agent brief: no information about entries/results of THIS competition."
+ ],
+ "images": [
+  {
+   "path": "umwd/raporty/img/drone_0009.jpg",
+   "caption": "M.10 drone photo — site = green triangle south of the bridgehead (left of pylon)"
+  },
+  {
+   "path": "umwd/raporty/img/sip3d_01.jpg",
+   "caption": "M.11.C city 3D model — site between Mazowiecka and the Odra embankment"
+  },
+  {
+   "path": "umwd/raporty/img/bridge_helmets.jpg",
+   "caption": "M.11.F planned bridge pylons with restored helmets"
+  }
+ ]
+}
