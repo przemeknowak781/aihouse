@@ -621,6 +621,31 @@ def bridge_gaps(lines, tol=2.3, ang_tol=12.0):
     return [LineString(s) for s in segs if len(s) >= 2]
 
 
+def extend_to_frame(lines, frame, tol=0.6, ext=1.5):
+    """Tresc e-mapy jest przycieta prostokatem nieco mniejszym od ramki (np. n=-35.44 vs -35.52).
+    Konce linii lezace < tol od ramki przedluzamy wzdluz kierunku ostatniego odcinka, aby przeciely ramke
+    (polygonize wymaga wezlow)."""
+    fb = frame.exterior
+    out = []
+    for l in lines:
+        c = list(l.coords)
+        if len(c) >= 2:
+            for end in (0, -1):
+                p = c[end]
+                q = c[1] if end == 0 else c[-2]
+                if fb.distance(Point(p)) < tol and l.length > 1e-6:
+                    v = np.subtract(p, q)
+                    nv = np.linalg.norm(v)
+                    if nv > 1e-9:
+                        p2 = tuple(np.add(p, v / nv * ext))
+                        if end == 0:
+                            c = [p2] + c
+                        else:
+                            c = c + [p2]
+        out.append(LineString(c))
+    return out
+
+
 def label_refpoints(em, layer_o):
     """Etykiety + punkt odniesienia (koniec odnosnika jesli istnieje)."""
     texts = [g for g in em.shapes(layer_o, kinds=("text",))]
@@ -639,10 +664,14 @@ def label_refpoints(em, layer_o):
     return out
 
 
+def clip_polys(lines, frame):
+    polys = list(polygonize(unary_union(extend_to_frame(lines, frame) + [frame.exterior])))
+    return [p for p in polys if frame.buffer(0.01).contains(p)]
+
+
 def parcels(em, frame):
     lines = [LineString(g["pts"] + ([g["pts"][0]] if g["closed"] else [])) for g in em.shapes("GESDZI")]
-    lines.append(frame.exterior)
-    polys = list(polygonize(unary_union(lines)))
+    polys = clip_polys(lines, frame)
     labs = label_refpoints(em, "GESDZI_O")
     res = []
     used = set()
@@ -659,8 +688,7 @@ def parcels(em, frame):
 def landuse(em, frame):
     lines = [LineString(g["pts"] + ([g["pts"][0]] if g["closed"] else [])) for g in em.shapes("GESUZY")]
     lines += [LineString(g["pts"] + ([g["pts"][0]] if g["closed"] else [])) for g in em.shapes("GESDZI")]
-    lines.append(frame.exterior)
-    polys = list(polygonize(unary_union(lines)))
+    polys = clip_polys(lines, frame)
     labs = label_refpoints(em, "GESUZY_O")
     res = []
     for pol in polys:
@@ -670,8 +698,8 @@ def landuse(em, frame):
 
 
 def obreby(em, frame):
-    lines = [LineString(g["pts"]) for g in em.shapes("GESJOB")] + [frame.exterior]
-    polys = list(polygonize(unary_union(lines)))
+    lines = [LineString(g["pts"]) for g in em.shapes("GESJOB")]
+    polys = clip_polys(lines, frame)
     labs = [g for g in em.shapes("GESJOB_O", kinds=("text",))]
     out = []
     for pol in polys:
@@ -687,6 +715,7 @@ def buildings(em, frame):
     # obiekty przy ramce: zamkniecie krawedzia ramki
     partial = []
     if openl:
+        openl = extend_to_frame(openl, frame)
         cand = list(polygonize(unary_union(openl + [frame.exterior] + [p.exterior for p in closed])))
         for c in cand:
             if c.area > 5 and all(c.intersection(p).area < 0.5 for p in closed) and \
@@ -701,6 +730,7 @@ def buildings(em, frame):
     res = []
     for pol, is_partial in [(p, False) for p in closed] + [(p, True) for p in partial]:
         labs = [l["text"] for l in labels if pol.buffer(0.3).contains(Point(text_center(l)))]
+        labs = sorted(labs, key=lambda s: (not s[:1].isalpha(), s))
         lab = "".join(labs) if is_partial else (labs[0] if labs else "")
         m = re.match(r"^([a-z])(\d*)$", lab)
         func = BUILDING_FUNC.get(m.group(1)) if m else None
@@ -720,6 +750,14 @@ def buildings(em, frame):
         res.append({"poly": pol, "label": lab, "func": func, "storeys": storeys, "addr_nr": addr,
                     "street": street[0], "addr_pewnosc": street[1], "partial": is_partial,
                     "przejscia_bramowe": [b for b in bpb if pol.buffer(0.3).contains(b)]})
+    # Mazowiecka 17: punkt adresowy poza ramka (opis '17' przy ramce); M.07 (rzut dachu) wskazuje
+    # 'Mazowiecka 17 - budynek sasiedni' przylegajacy od pd. do Mazowieckiej 19 -> budynek k5 (wniosek)
+    m19 = [r for r in res if r["addr_nr"] == "19"]
+    if m19:
+        for r in res:
+            if r["addr_nr"] is None and not r["partial"] and r["poly"].distance(m19[0]["poly"]) < 0.3 and r["label"].startswith("k"):
+                r["addr_nr"], r["street"] = "17", "Mazowiecka"
+                r["addr_pewnosc"] = "wniosek (opis adresu '17' przy ramce bez punktu adresowego; M.07 s.2-9: 'Mazowiecka 17 - budynek sasiedni' przylega od pd. do nr 19)"
     return res
 
 
@@ -806,8 +844,30 @@ def trees(P, em, zl):
 
 def terrain(P, em, nmt, step=1.0):
     pk = read_xyz(P["pikiety_txt"])
-    pts = np.array([[e, n, h] for _, e, n, h in pk])
+    pts_all = np.array([[e, n, h] for _, e, n, h in pk])
     ids = [i for i, *_ in pk]
+    # wykluczenie punktow nie-terenowych: korony murow/ogrodzen, stopnie schodow przy budynkach
+    # kryterium: H wyzej o > 0.45 m od mediany sasiadow (r = 6 m) ORAZ punkt <= 0.5 m od linii ogrodzenia
+    # (NMT: ogrodzenie/furtka, e-mapa: GSLKOG) lub schodow/tarasow budynku (GESSCH/GESBTO)
+    fence = [LineString(g["pts"]) for lay in ("ogrodzenie", "furtka") for g in nmt.shapes(lay) if len(g["pts"]) > 1]
+    fence += [LineString(g["pts"]) for g in em.shapes("GSLKOG") if len(g["pts"]) > 1]
+    stairs = [Polygon(g["pts"]) for lay in ("GESSCH", "GESBTO") for g in em.shapes(lay) if g["closed"] and len(g["pts"]) >= 3]
+    fu, su = unary_union(fence), unary_union(stairs)
+    kd0 = cKDTree(pts_all[:, :2])
+    ground = np.ones(len(pts_all), bool)
+    excl = []
+    for i, p in enumerate(pts_all):
+        idx = [j for j in kd0.query_ball_point(p[:2], 6.0) if j != i and math.dist(pts_all[j, :2], p[:2]) > 0.3]
+        if len(idx) < 3:
+            continue
+        dH = p[2] - float(np.median(pts_all[idx, 2]))
+        if dH > 0.45:
+            dfe, dst = fu.distance(Point(p[:2])), su.distance(Point(p[:2]))
+            if dfe < 0.5 or dst < 0.5:
+                ground[i] = False
+                excl.append({"nr": ids[i], "e": r3(p[0]), "n": r3(p[1]), "H": r2(p[2]), "dH_od_mediany_sasiadow": r2(dH),
+                             "powod": "korona muru/ogrodzenia" if dfe < 0.5 else "stopien schodow/podest przy budynku"})
+    pts = pts_all[ground]
     # linie nieciaglosci z modelu terenu (3D polilinie z rzedna > 100 m)
     brk = []
     blines = []
@@ -821,7 +881,7 @@ def terrain(P, em, nmt, step=1.0):
                     for p, z in zip(g["pts"], zz):
                         brk.append([p[0], p[1], z])
     brk = np.array(brk)
-    kd = cKDTree(pts[:, :2])
+    kd = kd0
     d, _ = kd.query(brk[:, :2])
     extra = brk[d > 0.05]
     # dedupe extra
@@ -842,7 +902,7 @@ def terrain(P, em, nmt, step=1.0):
     longtri = np.zeros(len(tri.simplices), bool)
     for k, s in enumerate(tri.simplices):
         q = allp[s, :2]
-        if max(math.dist(q[0], q[1]), math.dist(q[1], q[2]), math.dist(q[0], q[2])) > 15:
+        if max(math.dist(q[0], q[1]), math.dist(q[1], q[2]), math.dist(q[0], q[2])) > 40:
             longtri[k] = True
     bad = (simp < 0) | longtri[np.clip(simp, 0, None)]
     GH = GH.ravel()
@@ -882,9 +942,10 @@ def terrain(P, em, nmt, step=1.0):
     dd, ii = kd.query(dwgp[:, :2])
     ok = dd < 0.02
     ctrl_dwg = {"n_dwg": int(len(dwgp)), "n_zgodnych_xy<2cm": int(ok.sum()),
-                "max_dH_zgodnych_m": r3(np.max(np.abs(pts[ii[ok], 2] - dwgp[ok, 2]))) if ok.any() else None,
+                "max_dH_zgodnych_m": r3(np.max(np.abs(pts_all[ii[ok], 2] - dwgp[ok, 2]))) if ok.any() else None,
                 "uwaga": "punkty DWG bez odpowiednika w txt: %d (pomijane)" % int((~ok).sum())}
-    return {"pikiety": pts, "ids": ids, "extra": extra, "breaklines": blines, "tri": tri, "allp": allp, "f": f,
+    return {"pikiety": pts_all, "ground": ground, "pikiety_ground": pts, "wykluczone": excl,
+            "ids": ids, "extra": extra, "breaklines": blines, "tri": tri, "allp": allp, "f": f,
             "grid": {"e0": float(ge[0]), "n0": float(gn[0]), "step": step, "nx": len(ge), "ny": len(gn), "H": GH},
             "emapa_h": emh, "txt_h": txh, "kontrola_dwg": ctrl_dwg}
 
@@ -1010,7 +1071,7 @@ def terrain_stats(T, poly, name):
     gx, gy = coef[0], coef[1]
     g = math.hypot(gx, gy)
     resid = H - A @ coef
-    pk = T["pikiety"]
+    pk = T["pikiety_ground"]
     from shapely import contains_xy
     inside = contains_xy(poly, pk[:, 0], pk[:, 1])
     # spadki lokalne z TIN (trojkaty, ktorych srodek w poligonie)
@@ -1380,8 +1441,9 @@ def build_json(P, S, extras):
     Hg = [[(None if np.isnan(v) else round(float(v), 2)) for v in row] for row in G["H"]]
     J["teren"] = {
         "uklad_H": "PL-EVRF2007-NH",
-        "pikiety": [[T["ids"][i], r3(p[0]), r3(p[1]), r2(p[2])] for i, p in enumerate(T["pikiety"])],
-        "pikiety_opis": "[nr, e, n, H] - M.02 'model terenu/mazowiecka_pikiety do nmt.txt' (800 pkt, pomiar wykonawcy mapy)",
+        "pikiety": [[T["ids"][i], r3(p[0]), r3(p[1]), r2(p[2]), int(T["ground"][i])] for i, p in enumerate(T["pikiety"])],
+        "pikiety_opis": "[nr, e, n, H, teren(1)/nie-teren(0)] - M.02 'model terenu/mazowiecka_pikiety do nmt.txt' (800 pkt, pomiar wykonawcy mapy); 0 = wykluczona z NMT",
+        "pikiety_wykluczone_z_NMT": T["wykluczone"],
         "punkty_dodatkowe_z_linii_nieciaglosci": [[r3(p[0]), r3(p[1]), r2(p[2])] for p in T["extra"]],
         "linie_nieciaglosci": [{"warstwa": b["layer"], "pts": pts_r(b["pts"]), "z": [r2(z) for z in b["z"]]} for b in T["breaklines"]],
         "punkty_wysokosciowe_emapy": [{"e": r2(p["e"]), "n": r2(p["n"]), "H": p["h"], "warstwa": p["layer"]} for p in T["emapa_h"]],
