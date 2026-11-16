@@ -4,6 +4,8 @@
 
 Oznaczenia: **[Ź]** – treść źródła; **wniosek** – interpretacja własna, do weryfikacji przez geotechnika/konstruktora; **[K-nn]** – sprzeczność lub luka w danych.
 
+<!-- poprawione przez weryfikatora --> **Weryfikacja niezależna (2026-11-16):** porównano ze źródłami ok. 70 pozycji – współrzędne i rzędne 9 otworów (karty zał. 5.1–5.9), granice warstw i stropy pospółek/glin we wszystkich otworach, tabelę 1 zwierciadła (9 otworów), 13 wierszy zał. 8, nagłówki i odmowy 4 kart CPTu, cytaty i numery stron opinii (s. 4–13), wzory korelacyjne, obliczenia wyporu i ilości. Dane źródłowe – **zgodne**. Poprawiono: miąższość pospółek/żwirów (7,4–10,4 m), K-06 (karty CPTu mają numer sondowania), kategorię geotechniczną i wymóg DGI (zweryfikowane brzmienie Dz.U. 2012 poz. 463 § 4 ust. 3 pkt 3 lit. e i § 7 ust. 3), dodano K-08 (niepewna interpretacja kierunku przepływu wód) i doprecyzowanie położenia otworów względem A; ustalenie ISOK potwierdzono niezależnym zapytaniem.
+
 ---
 
 ## 0. Źródła
@@ -54,6 +56,7 @@ Współrzędne PL-2000 z kart otworów przeliczone na układ lokalny `e = Y − 
 | O-09 | 10/3 | 63,64 / 11,01 | 118,82 | 15,0 | 3,80 | 6,50 / 112,32 | nie osiągnięto (dno 103,82) | 3,40 / 115,42 (w nasypie) |
 
 Źródła: Zał. 5.1–5.9 (karty), Op. s. 7 tab. 1. Wniosek z położenia: otwory 30 m leżą w północnej i środkowej części (pas obszaru A i pierzei), otwory 15 m – w części południowej i przy Mazowieckiej 19; **dla południowej połowy terenu nie znamy stropu glin** (dno otworów ok. 103,7–104,2 m) – [K-01].
+<!-- poprawione przez weryfikatora --> Doprecyzowanie (pomiar weryfikatora na poligonach `model/site.json`): w obszarze A leży tylko **O-04**; O-02 i O-03 leżą na granicy A (0,0–0,1 m), O-01 – 4,4 m od A. Otwory 15 m: O-05, O-06, O-07 – w paśmie środkowym (n ≈ 35–41: przy dz. 10/2, w środku, przy Mazowieckiej), O-08 i O-09 – na południu (n ≈ 11–13, przy Maz. 19 i ogródkach). Najdalej na południe wysunięty otwór 30 m to O-03 (n = 40,75) – na południe od niego strop glin jest nieznany.
 
 ---
 
@@ -106,13 +109,14 @@ Karta 6.1 zastrzega: parametry w nasypie „należy traktować wyłącznie orien
 - „Poziom wody podziemnej pomierzony w dniu badań należy uznać za średni. Możliwe są jego wahania w amplitudzie około +/- 0,50 m.” (Op. s. 7).
 - Wg PIG – teren w **strefie narażonej na podtopienia od wód gruntowych**; wg Hydroportalu – „na obszarze narażonym na niebezpieczeństwo powodzi (rzeczne)” (Op. s. 7).
 
-**Wniosek (spadek zwierciadła):** najwyższe zwierciadło przy Wybrzeżu (O-04: 115,95), najniższe przy Mazowieckiej 19 (O-08: 115,07) – spadek ok. 0,9 m na ~70 m w kierunku pd.-zach., czyli od Odry/Oławy w głąb terenu. Sugeruje to bezpośrednią więź hydrauliczną z rzeką (piaski i żwiry o dużej przepuszczalności): **przy wysokich stanach Odry zwierciadło w terenie będzie się podnosić**, a pomiar z września 2025 r. nie obejmuje takich sytuacji.
+**Wniosek (spadek zwierciadła):** najwyższe zwierciadło przy Wybrzeżu (O-04: 115,95), najniższe przy Mazowieckiej 19 (O-08: 115,07) – spadek ok. 0,9 m na ~70 m w kierunku pd.-zach., czyli od Odry/Oławy w głąb terenu (<!-- poprawione przez weryfikatora --> interpretacja niepewna – patrz [K-08]). Sugeruje to bezpośrednią więź hydrauliczną z rzeką (piaski i żwiry o dużej przepuszczalności): **przy wysokich stanach Odry zwierciadło w terenie będzie się podnosić**, a pomiar z września 2025 r. nie obejmuje takich sytuacji.
 
 ### 3.2 Weryfikacja zagrożenia powodziowego (ISOK, dostęp 2026-11-16)
 
 - Zapytania GetFeatureInfo w 8 punktach obszaru inwestycji (narożniki, obszar A, pas przy Wybrzeżu) dla warstw **NZ.Fluvial** (scenariusze Q10%, Q1%, Q0,2%), **NZ.RiskZone** i **NZ.ArtificialWaterBearingInfrastructure**: **„no features were found”** – teren **leży poza** obszarami zagrożenia powodziowego map MZP.
 - Na mapie (GetMap NZ.Fluvial) granice Q10%/Q1%/Q0,2% biegną wzdłuż murów nabrzeży Odry i Oławy, ok. 10–20 m od wsch./pn.-wsch. krawędzi obszaru inwestycji: `img/geo_ISOK_MZP_nakladka_teren.png`.
 - Dane obiektów warstwy NZ.Fluvial: `validityperiod_end = 2025-12-21` (II cykl planistyczny). **Wniosek:** aktualność map III cyklu wymaga sprawdzenia w Hydroportalu przed PB.
+- <!-- poprawione przez weryfikatora --> **Kontrola niezależna weryfikatora (2026-11-16):** GetFeatureInfo (WMS 1.3.0, CRS:84, warstwy NZ.Fluvial i NZ.RiskZone) w 7 punktach obszaru inwestycji i skweru dz. 9/2 (przeliczenie EPSG:2177→WGS84 pyproj) – wszędzie „no features were found”; punkty kontrolne w korycie Odry (e/n 145/40 i 120/150) zwracają obiekty NZ.Fluvial „scenariusz Q 10%”, `validityperiod_end = 2025-12-21` – zapytania działają poprawnie. Ustalenie dokumentu potwierdzone.
 
 ![ISOK](img/geo_ISOK_MZP_nakladka_teren.png)
 
@@ -169,7 +173,7 @@ Założenia: ±0,00 parteru ≈ 119,10–119,25 (teren 118,7–119,4; `geometria
 
   Ściany szczelinowe mogą przenosić część obciążeń pionowych (baretty obwodowe).
 - **Strefa A leży w północnej części terenu.** Otwory O-01, O-02, O-03 i O-04 do 30 m dają tu najlepsze rozpoznanie (strop glin na 101,8–102,4 m). To korzystne dla dominanty.
-- **Kategoria geotechniczna:** opinia zalicza obiekt wstępnie do II kategorii w złożonych warunkach. **Wniosek – możliwa kwalifikacja do III kategorii.** Przemawiają za tym:
+- **Kategoria geotechniczna:** opinia zalicza obiekt wstępnie do II kategorii w złożonych warunkach. **Wniosek – kwalifikacja do III kategorii** (<!-- poprawione przez weryfikatora: było „możliwa” --> wynika wprost z § 4 ust. 3 pkt 3 lit. e Dz.U. 2012 poz. 463 – niżej). Przemawiają za tym:
   - dwie kondygnacje poniżej ZWG w gruntach przepuszczalnych;
   - wykop przy zabytkowej kamienicy na granicy;
   - budynek ~45 m.
@@ -207,8 +211,9 @@ Założenia: ±0,00 parteru ≈ 119,10–119,25 (teren 118,7–119,4; `geometria
 | K-03 | Pojedynczy pomiar ZWG (wrzesień 2025) uznany za „średni”, amplituda ±0,5 m bez uzasadnienia obserwacjami; brak odniesienia do stanów Odry | Op. s. 7 | przyjąć zapas (≥ 117,0); piezometry |
 | K-04 | Brak badań laboratoryjnych gruntów i wody (agresywność), brak współczynników filtracji | Op. s. 7–9 | dobór betonu i projekt odwodnienia wymagają badań |
 | K-05 | Opis (Op. s. 6) mówi o nasypach do 2,80–3,80 m; w O-02 dodatkowo gleba do 3,40 m, a w O-09 ZWG nawiercone w nasypie (do 3,80 m) – spójne, ale oznacza **kontakt nasypów z wodą** (wymywanie, zanieczyszczenia) | Zał. 5.2, 5.9 | badania środowiskowe nasypów przed wywozem |
-| K-06 | Karty CPTu nie podają numeru sondowania w nagłówku wprost (oznaczenia odpowiadają otworom O-01, O-02, O-06, O-08), łączny metraż 36,4 mb – zgodny z zakresem | Zał. 6 | – |
-| K-07 | Kategoria geotechniczna „wstępnie II” – przy 2 kondygnacjach poniżej ZWG i zabytkowym sąsiedztwie możliwa III | Op. s. 4, 13 | decyzja projektanta; dokumentacja geologiczno-inżynierska |
+| K-06 | <!-- poprawione przez weryfikatora: było „karty nie podają numeru sondowania” --> Karty CPTu mają pole „Nr sondowania” z oznaczeniami O-01, O-02, O-06, O-08 (tożsamymi z numerami otworów – sondowania wykonano przy otworach); poziomy terenu na kartach (119,40 / 119,30 / 119,00 / 118,65) różnią się od rzędnych otworów o 0,01–0,04 m; łączny metraż 36,4 mb – zgodny z zakresem | Zał. 6.1–6.4 | – |
+| K-07 | Kategoria geotechniczna „wstępnie II” – <!-- poprawione przez weryfikatora --> wg § 4 ust. 3 pkt 3 lit. e Dz.U. 2012 poz. 463 obiekt wysoki z więcej niż jedną kondygnacją podziemną należy do **III kategorii** (rozdz. 5) | Op. s. 4, 13; Dz.U. 2012 poz. 463 | przyjąć III kategorię w koncepcji; DGI wymagana także przy II kat. w warunkach złożonych (§ 7 ust. 3) |
+| K-08 | <!-- poprawione przez weryfikatora --> Interpretacja „spadku zwierciadła od rzeki” (rozdz. 3.1) jest niepewna: pomiary wykonano w 3 różnych dniach (01–03.09.2025), a otwór O-02 – najbliżej Odry (pn.) – ma zwierciadło 115,50, niższe niż O-04 (115,95) i O-01 (115,74); rozrzut 0,9 m może wynikać z czasu pomiaru i dokładności niwelacji GNSS | Op. tab. 1; Zał. 5 | nie opierać projektu na kierunku przepływu; piezometry z obserwacją stanów Odry |
 
 ---
 

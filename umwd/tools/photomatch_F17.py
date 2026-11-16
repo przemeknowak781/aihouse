@@ -549,12 +549,10 @@ def blender_test(key, cam, bp, pct=50):
     from mathutils import Vector, Euler
     bpy.ops.wm.read_factory_settings(use_empty=True)
     sc = bpy.context.scene
-    try:
-        sc.render.engine = 'BLENDER_WORKBENCH'
-        sh = sc.display.shading
-        sh.light = 'FLAT'; sh.color_type = 'OBJECT'; sh.show_object_outline = True; sh.object_outline_color = (0, 0, 0)
-    except Exception:
-        sc.render.engine = 'CYCLES'; sc.cycles.samples = 8
+    # Cycles CPU, 8 probek, materialy emisyjne (Workbench/EEVEE wymagaja OpenGL/EGL - brak w kontenerze)
+    sc.render.engine = 'CYCLES'; sc.cycles.device = 'CPU'; sc.cycles.samples = 8
+    sc.cycles.max_bounces = 0; sc.cycles.use_denoising = False
+    sc.view_settings.view_transform = 'Standard'
     sc.render.film_transparent = True
     sc.render.resolution_x, sc.render.resolution_y = bp['rozdzielczosc']
     sc.render.resolution_percentage = pct
@@ -565,8 +563,21 @@ def blender_test(key, cam, bp, pct=50):
     co.location = Vector(bp['location_z_wzgl_0']); co.rotation_mode = 'XYZ'; co.rotation_euler = Euler(bp['rotation_euler_XYZ_rad'], 'XYZ')
     sc.camera = co
 
+    mats = {}
+
+    def material(color):
+        key_ = tuple(round(c, 3) for c in color)
+        if key_ not in mats:
+            m = bpy.data.materials.new('m%d' % len(mats)); m.use_nodes = True
+            nt = m.node_tree; nt.nodes.clear()
+            em = nt.nodes.new('ShaderNodeEmission'); em.inputs['Color'].default_value = color; em.inputs['Strength'].default_value = 1.0
+            ou = nt.nodes.new('ShaderNodeOutputMaterial'); nt.links.new(em.outputs['Emission'], ou.inputs['Surface'])
+            mats[key_] = m
+        return mats[key_]
+
     def mesh_obj(name, verts, faces, color):
         me = bpy.data.meshes.new(name); me.from_pydata([tuple(v) for v in verts], [], faces); me.update()
+        me.materials.append(material(color))
         ob = bpy.data.objects.new(name, me); sc.collection.objects.link(ob); ob.color = color
         return ob
 
@@ -581,6 +592,7 @@ def blender_test(key, cam, bp, pct=50):
         sp = cu.splines.new('POLY'); sp.points.add(len(P) - 1)
         for i, p in enumerate(P):
             sp.points[i].co = (p[0], p[1], p[2] - Z0 + r, 1.0)
+        cu.materials.append(material(color))
         ob = bpy.data.objects.new(name, cu); sc.collection.objects.link(ob); ob.color = color
         return ob
 
@@ -628,7 +640,7 @@ def blender_test(key, cam, bp, pct=50):
     comp = p * (1 - al) + a[..., :3] * al
     out = Image.fromarray((np.clip(comp, 0, 1) * 255).astype(np.uint8))
     full = out.resize((2400, int(out.size[1] * 2400 / out.size[0])), Image.LANCZOS)
-    legend(full, [('Render testowy Blender (bpy, Workbench) kamera F.17.%s: bryly Maz. 19 i Wybrz. Slowackiego 5-8,' % key, (255, 255, 255)),
+    legend(full, [('Render testowy Blender (bpy 5.2, Cycles 8 probek) kamera F.17.%s: bryly Maz. 19 i Wybrz. Slowackiego 5-8,' % key, (255, 255, 255)),
                   ('teren NMT, krawezniki pomiarowe (pomaranczowe), obszar inwestycji (czerwony), wydzielenie A (magenta); alfa 50%', (255, 255, 255))])
     p1 = IMG_DIR / ('photomatch_F17%s_render_test.jpg' % key); save_jpg(full, p1)
     crop = {'A': (2700, 1900, 4700, 2900), 'B': (3300, 1950, 6300, 3450)}[key]
