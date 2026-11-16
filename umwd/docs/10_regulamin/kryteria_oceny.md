@@ -26,6 +26,8 @@
 | Prace niespełniające wymagań obligatoryjnych nie powinny przejść / otrzymać I–III Nagrody, chyba że można je skorygować bez zasadniczych zmian. | R.II pkt7, s.16–17 [R-017] | Niezgodność z MPZP, nasłonecznieniem czy dostępnością może wykluczyć z podium. |
 | Opracowanie studialne – „manifest i credo projektowe” (planowanie, użytkowanie, wyzwania środowiskowe i cywilizacyjne, eksploatacja). | R.V ust.2 pkt2 Uwaga, s.34 [R-070] | W Etapie I liczy się siła i jasność idei. |
 | Praca konkursowa musi być „kontynuacją twórczą” Opracowania. | R.VII ust.1 pkt1 lit.g, s.42 [R-099] | Etap II = pogłębienie, nie zmiana koncepcji. |
+| „Decyzja sądu konkursowego jest wiążąca dla nabywcy: tak”. | Ogłoszenie o konkursie OJ S 237/2025, 815277-2025, pkt 5.1.12, s.2–3 | Werdykt Sądu nie podlega korekcie przez Zamawiającego (poza zatwierdzeniem przez Osobę upoważnioną wg R.I ust.5 pkt6). <!-- poprawione przez weryfikatora --> |
+| Notatkę z wizji lokalnej sporządził Asystent Sędziego referenta; trasa: Mazowiecka 17 → 19 → podwórka i Słowackiego 5 → widok na Pl. Społeczny (Poczta Główna, gmach DUW, estakady do wyburzenia) → Most Grunwaldzki → drugi brzeg Odry → oś widokowa z esplanady zespołu przy pl. Grunwaldzkim „pomiędzy koronami drzew, a Mostem Grunwaldzkim” → bulwar Joliot-Curie. | Notatka z wizji lokalnej (05.03.2026), s.1 [R-224] | Wniosek: punkty trasy wskazują widoki, na które zwrócono uwagę uczestników (sylweta od mostu i z drugiego brzegu, relacja z Pocztą Główną i DUW) – sprawdzić bryłę w tych widokach. <!-- poprawione przez weryfikatora --> |
 
 ## 2. Tryb oceny
 

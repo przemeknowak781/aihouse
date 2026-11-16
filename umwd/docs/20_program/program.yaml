@@ -10,7 +10,7 @@ meta:
     PU: Program użytkowy ... zatwierdzony 11_2025 (M.01); s. = numer drukowany w stopce (PDF = s.+1)
     Reg: Regulamin Konkursu - tekst jednolity 13.02.2026; Rozdział.ust.pkt, s. = strona drukowana
     WyjN odp.M: Wyjaśnienia treści Regulaminu nr N, odpowiedź na pytanie nr M
-    MPZP: M.03 - uchwała XLV/1366/10 RMW z 21.01.2010 (teren 2MW-U/5, par.26)
+    MPZP: M.03 - uchwała XLV/1366/10 RMW z 21.01.2010 (teren 2MW-U/5, par.26); s. = strona PDF
     M.12: Wytyczne zero-emisyjności
     M.13: Standardy dostępności MSWiA (s. = strona drukowana)
     F.15.A/B/C: Tabele programowa / zestawienie pomieszczeń / dane bilansowe (xlsx)
@@ -1088,10 +1088,11 @@ bloki:
     - poufność głosowania
     - dostęp bez barier do stanowisk, prezydium i mównicy
     - min. 3 miejsca dla wózków na 100 miejsc widowni (M.13 s.218)
+    - 'mównica dostępna: blat 0,75-0,8 m (M.13 s.220)'
     - pętla indukcyjna
     - kamery, mikrofony, głośniki - nagrywanie i transmisja
     - wysokość dowolna (Wyj.8 odp.36)
-    zrodlo: PU s.5-7, s.12; Wyj.4 odp.18; Wyj.8 odp.36, 52; Reg. III.1.5 s.19; M.13 s.218-219
+    zrodlo: PU s.5-7, s.12; Wyj.4 odp.18; Wyj.8 odp.36, 52; Reg. III.1.5 s.19; M.13 s.218-220
   - id: SWD.02
     nazwa: Hol reprezentacyjny sali obrad (wiz. nr 7)
     liczba: 1
@@ -1165,8 +1166,8 @@ bloki:
     szacunek: true
     kategoria_pn_iso: PU
     wymagania:
-    - nie w toalecie; fotel, przewijak, umywalka, podgrzewacz (M.13 s.203)
-    zrodlo: PU s.6; M.13 s.203
+    - nie w toalecie; fotel, przewijak, umywalka, podgrzewacz (M.13 s.204)
+    zrodlo: PU s.6; M.13 s.204
   - id: SWD.08
     nazwa: Sala komisji 50 os. (zaplecze do nagrywania)
     liczba: 1
