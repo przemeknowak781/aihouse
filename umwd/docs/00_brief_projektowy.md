@@ -75,5 +75,12 @@ gdzie znajdują się pełne cytaty i odwołania (strona / § / nr wyjaśnienia).
 ## 7. Budżet
 
 * Koszt realizacji (z terenem) **≤ 150 mln zł netto — nieprzekraczalny** (Wyj. 20 odp. 74), wycena realna, bez zaniżania; koszt dokumentacji ≤ 5,4 %.
-* Wstępnie (wniosek, do weryfikacji wskaźnikami): 142–183 mln zł przy PC nadziemnej 14 000 m² + 2 pełnych kondygnacjach podziemnych →
-  efektywność powierzchni i rozmiar podziemia są parametrami projektowymi. (`50_research/koszty_benchmarki.md` — w toku)
+* Model kosztów w układzie F.14.B (ceny II kw. 2026, `50_research/koszty_benchmarki.md`): PC nadziemna 14 000 m² + podziemie 3 900 m²
+  (1 pełna + częściowa −2) = **146,3 mln zł** z rezerwą 5 % (zapas 2,5 %); dwie pełne kondygnacje podziemne = 152,4 mln → **przekroczenie**;
+  PC nadziemna 13 000 m² = 141,4 mln. Pasmo rynkowe 7 400–9 300 zł/m² PC. Dźwignie: +1 000 m² PC ≈ +4,9 mln; 2. pełne podziemie +6–9 mln.
+  → **Cel projektowy: PC nadziemna ≤ 13 500 m²; podziemie = minimum MPZP (~103–110 m.p.) + technika + MDS**, z uzasadnieniem odstępstwa od
+  „dwóch kondygnacji podziemnych” (Reg. II.2). Koszt dokumentacji: deklarować ok. 7,5–7,9 mln zł (≤ 8,1 mln).
+* Grunt: woda gruntowa 3,2–3,8 m p.p.t., strefa zagrożenia powodzią/podtopień, nasypy do 3,8 m → ściany szczelinowe, biała wanna, technika krytyczna nad poziomem zalewu.
+* Zero-emisyjność: dyrektywa (UE) 2024/1275 — nowe budynki instytucji publicznych od **1.01.2028** (data „2027” w Regulaminie pochodzi z wniosku KE z 2021 r.);
+  projektujemy jako ZEB: gruntowe pompy ciepła, brak spalania na miejscu, sieć ciepłownicza tylko rezerwowo, PV 0,4–1,0 MWp (dach dominanty ≈ 0,2 MWp + BIPV ≈ 1 300 m²
+  zamiast okładziny), woda szara i deszczowa. (`40_prawo/zero_emisja.md`, `strategia_energetyczna.md`)

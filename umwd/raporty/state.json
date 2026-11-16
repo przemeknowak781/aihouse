@@ -1,5 +1,5 @@
 {
- "title": "Concept panel drafting (2 concurrent architects); photomatch solver and 3D context builder launched in parallel to shorten the render phase",
+ "title": "Budget model done: reference scheme 146.3 M PLN net (2.5 % headroom) — second full basement would break the 150 M cap; EPBD date in the brief corrected (2028, not 2027)",
  "stages": [
   [
    "Organiser materials: download, unpack, text extraction (results files deliberately EXCLUDED)",
@@ -14,11 +14,11 @@
    "running"
   ],
   [
-   "Building law & WT ✔, sunlight/obstruction method ✔, fire safety ✔; accessibility & zero-emission ►",
+   "Law ✔, sunlight ✔, fire ✔, accessibility ✔, zero-emission & energy strategy ✔ (verification ►)",
    "running"
   ],
   [
-   "Research: trends ✔, visual craft ✔, boards ✔, façade aesthetics ✔, Wrocław context & climate ✔; cost benchmarks ►",
+   "Research ✔: trends, visual craft, boards, façades, Wrocław context, cost benchmarks (verification ►)",
    "running"
   ],
   [
@@ -43,11 +43,11 @@
   ]
  ],
  "notes": [
-  "Photomatch agent: PnP camera solve on ≥12 ground control points from the official survey (curbs, building corners, embankment), DJI EXIF as prior, verification overlays — target error < 0.3 % of frame width.",
-  "Context agent: terrain from the survey DTM, street surfaces & granite curbs, Mazowiecka 19 and Wybrzeże Słowackiego 5 at LOD3 from the official inventories, other blocks LOD2, south bridge pylons with the planned restored helmets, existing trees (autumn/summer), lamps, tram rails.",
-  "Wrocław-context study adds: Sejmik window to NNW (Ostrów Tumski & bridge; north light, no overheating), calm horizontal crown without spires (do not compete with the 25.5 m helmets), wind shelter at the tower entrance, heat protection (vertical fins ENE/WSW, horizontal SSE), roof as 5th façade visible in both photomontages.",
-  "Visual plan: F.17 montages in autumn noon light (as photographed); bridge view on a summer evening or blue hour with the Sejmik hall lit.",
-  "Bottleneck noted: workflow concurrency cap (2 agents) slows the panel; jury stage will be parallelised with background agents."
+  "Cost model (F.14.B structure, Q2-2026 prices): 14,000 m² above ground + 3,900 m² below (1 full + partial 2nd basement) = 146.3 M PLN incl. 5 % reserve; two full basements = 152.4 M → over the non-exceedable cap. Market band for comparable public buildings ≈ 7,400–9,300 PLN/m² GFA; nearest analogue: Masovian Regional Assembly seat (2026).",
+  "Design consequences: above-ground GFA target ≤ 13,500 m²; basement = parking per MPZP minimum (~103–110 cars) + plant + civil shelter, justified deviation from '2 full basements' (Rules ch. II.2 allows reasoned deviations).",
+  "Ground: water table 3.2–3.8 m below ground, flood-hazard zone, up to 3.8 m of rubble fill → diaphragm walls + 'white tank'; critical plant above flood level.",
+  "Zero-emission: Directive (EU) 2024/1275 applies to new public buildings from 1 Jan 2028 (the brief's '2027' comes from the 2021 Commission proposal) — we design to ZEB anyway: ground-source heat pumps, no on-site combustion, district heating only as back-up, PV 0.4–1.0 MWp (roof + BIPV façade ≈ 1,300 m²).",
+  "Concepts: K3–K5 now running as parallel background agents to bypass the workflow cap; K1–K2 finishing."
  ],
  "images": [
   {
