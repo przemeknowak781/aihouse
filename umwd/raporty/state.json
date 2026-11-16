@@ -1,5 +1,5 @@
 {
- "title": "First deliverables in: rules register (347 lines) + Stage I/II checklists; clarifications raise board limit to 8; drone EXIF decoded for exact photomatch",
+ "title": "Competition-trend study done (19 juried competitions 2021–26): juries reward right scale, a public ground floor and one clear civic gesture — not icons",
  "stages": [
   [
    "Organiser materials: download, unpack, text extraction (results files deliberately EXCLUDED)",
@@ -18,7 +18,7 @@
    "running"
   ],
   [
-   "Research: what wins architecture competitions now; how to make competition visuals",
+   "Research: what wins (19 competitions ✔); visual craft, façade aesthetics, Wrocław context, costs ►",
    "running"
   ],
   [
@@ -43,10 +43,11 @@
   ]
  ],
  "notes": [
-  "Binding clarifications (nos. 15–21) change the brief: max 8 boards (not 6); repeated floors may NOT be merged on one plan; room codes required; cost cap 150 M PLN net is non-exceedable; text may be 5 × A3 pages.",
-  "F.17.A/B drone metadata decoded: DJI Air 3, 24 mm, GPS + altitude + gimbal yaw/pitch; photos taken 29.10.2025 at 11:38 and 11:57 CET → sun az ≈ 181–186°, el ≈ 25° (shadows north). Camera will be solved by PnP from survey points.",
-  "Blender lighting calibrated (physical sky + sun lamp balance, AgX view transform); procedural brick/stone/glass materials working.",
-  "Still running: programme extraction, zoning plan, heritage, site geometry, geotech/trees/neighbours, building law, fire, accessibility, zero-emission, competition trends, visual craft, façade aesthetics, Wrocław context, cost benchmarks."
+  "Strategy derived from jury verdicts: ZERO weak points across all criteria + ONE strong, legible civic idea.",
+  "Rewarded: permeable public ground floor / forum (≥12 of 19 verdicts), restraint & timeless proportion, economy, respectful dialogue with heritage, council hall as a visible symbol with flawless access, flexible grid, timber-concrete hybrid, re-use.",
+  "Penalised: scale jumps, rootless iconic forms, alien or too many materials, glass curtain walls (overheating, mirror effect), poor access to the council hall, gimmicky eco claims, costs at the upper limit.",
+  "Presentation: credibility beats spectacle — calm daylight realism with neighbours in frame; white-model photos; text consistent with drawings.",
+  "Clarifications fully summarised (21 answers); form tables F.14.B / F.15.A–C structure extracted for automatic filling from the model."
  ],
  "images": [
   {
