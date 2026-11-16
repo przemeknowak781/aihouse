@@ -95,7 +95,12 @@ def render(spec, out):
     d.line([gx0-16, hb+10, gx0-16, H-90], fill=(200, 200, 200), width=2)
     ims = [i for i in spec.get("images", []) if resolve(i["path"]).exists()][:6]
     for it, (x0, y0, bw, bh) in zip(ims, boxes_for(len(ims), gx0, gy0, gx1, gy1)):
-        im = ImageOps.contain(Image.open(resolve(it["path"])).convert("RGB"), (bw, bh-46), Image.LANCZOS)
+        src = Image.open(resolve(it["path"])).convert("RGB")
+        bbox = ImageOps.invert(src.convert("L")).point(lambda v: 255 if v > 12 else 0).getbbox()
+        if bbox:
+            pad = 10
+            src = src.crop((max(0, bbox[0]-pad), max(0, bbox[1]-pad), min(src.width, bbox[2]+pad), min(src.height, bbox[3]+pad)))
+        im = ImageOps.contain(src, (bw, bh-46), Image.LANCZOS)
         img.paste(im, (x0 + (bw-im.width)//2, y0 + (bh-46-im.height)//2))
         d.rectangle([x0, y0, x0+bw, y0+bh-46], outline=(210, 210, 210), width=2)
         cap, cf = it.get("caption", ""), font(22)
