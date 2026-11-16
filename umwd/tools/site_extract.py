@@ -1174,6 +1174,33 @@ def shared_walls(bpoly, inv, tol=0.35):
     return res
 
 
+def walls_facing(bpoly, inv, maxd=25.0):
+    """Sciany budynku zwrocone ku obszarowi inwestycji (promienie z 5 punktow sciany wzdluz normalnej zewn.,
+    zasieg maxd). Zwraca odleglosc od lica sciany do granicy obszaru inwestycji (wejscie promienia)."""
+    res = []
+    c = list(ccw(bpoly).exterior.coords)
+    for i in range(len(c) - 1):
+        a, b = c[i], c[i + 1]
+        L = math.dist(a, b)
+        if L < 2.0:
+            continue
+        dx, dy = b[0] - a[0], b[1] - a[1]
+        nx, ny = dy / L, -dx / L
+        ds = []
+        for t in (0.1, 0.3, 0.5, 0.7, 0.9):
+            m = (a[0] + t * dx, a[1] + t * dy)
+            ray = LineString([(m[0] + 0.05 * nx, m[1] + 0.05 * ny), (m[0] + maxd * nx, m[1] + maxd * ny)])
+            x = ray.intersection(inv)
+            if not x.is_empty:
+                ds.append(Point(m).distance(x))
+        if ds:
+            res.append({"od": pts_r([a], 2)[0], "do": pts_r([b], 2)[0], "dlugosc_m": r2(L),
+                        "azymut_normalnej_zewn_deg": r1(azimuth(nx, ny)),
+                        "odl_do_obszaru_inwestycji_m": [r2(min(ds)), r2(max(ds))],
+                        "udzial_promieni_trafiajacych": round(len(ds) / 5, 1)})
+    return res
+
+
 def ground_level(T, poly, buf=2.0):
     ring = poly.buffer(buf).difference(poly)
     P = sample_poly(ring, 0.5)
@@ -1181,9 +1208,16 @@ def ground_level(T, poly, buf=2.0):
         return None
     H = T["f"](P[:, 0], P[:, 1])
     H = H[~np.isnan(H)]
-    if len(H) == 0:
-        return None
-    return {"min": r2(H.min()), "srednia": r2(H.mean()), "max": r2(H.max()), "n": int(len(H))}
+    if len(H) >= max(5, 0.3 * len(P)):
+        return {"min": r2(H.min()), "srednia": r2(H.mean()), "max": r2(H.max()), "n": int(len(H)),
+                "metoda": "NMT (TIN) w pasie 2 m wokol obrysu"}
+    # poza zasiegiem NMT: punkty wysokosciowe e-mapy (GSPWPS/GSPWPN) i rzedne 'txt' w promieniu 12 m od obrysu
+    cand = [(p["e"], p["n"], p["h"]) for p in T["emapa_h"]] + [(p["e"], p["n"], p["h"]) for p in T["txt_h"]]
+    hs = [h for e, n, h in cand if poly.distance(Point(e, n)) < 12.0]
+    if hs:
+        return {"min": r2(min(hs)), "srednia": r2(float(np.median(hs))), "max": r2(max(hs)), "n": len(hs),
+                "metoda": "poza NMT - mediana punktow wysokosciowych e-mapy w promieniu 12 m (przyblizenie)"}
+    return None
 
 
 def check_pdf_georef(P, S):
@@ -1384,7 +1418,8 @@ def build_json(P, S, extras):
              "wysokosc_metoda": ("szacunek: %.2f m (parter nad terenem) + n x %.2f m + %.2f m (attyka/gzyms) - DO WERYFIKACJI (zdjecia M.09/M.10, wizja)"
                                  % (BASE_RAISE, STOREY_H, ROOF_ADD)) if st else None,
              "przejscia_bramowe_lub_nawisy": [pts_r(b.exterior.coords if b.geom_type == "Polygon" else b.coords, 2) for b in q["przejscia_bramowe"]],
-             "sciany_na_granicy_obszaru_inwestycji": shared_walls(pol, inv)}
+             "sciany_na_granicy_obszaru_inwestycji": shared_walls(pol, inv),
+             "sciany_zwrocone_ku_obszarowi_inwestycji": walls_facing(pol, inv) if pol.distance(inv) < 25 else []}
         if name and name in BUILDING_NOTES:
             d["inwentaryzacja"] = BUILDING_NOTES[name]
         if name == "Mazowiecka 19" and gl:
@@ -1461,11 +1496,11 @@ def build_json(P, S, extras):
     for u in U["lines"]:
         ls = LineString(u["pts"])
         inside = ls.intersection(inv)
-        inA = ls.intersection(B["wydzielenie_A_mpzp"])
+        inA = ls.intersection(B["wydzielenie_A_mpzp"].intersection(inv))
         ul.append({"typ": u["typ"], "warstwa": u["layer"], "etykiety": u["etykiety"], "atrybuty": u["atrybuty"],
                    "nieczynny": u["nieczynny"], "projektowany": u["projektowany"], "pts": pts_r(u["pts"], 3),
                    "dlugosc_m": r2(ls.length),
-                   "dl_w_obszarze_inwestycji_m": r2(inside.length), "dl_w_wydzieleniu_A_m": r2(inA.length),
+                   "dl_w_obszarze_inwestycji_m": r2(inside.length), "dl_w_wydzieleniu_A_w_obszarze_inw_m": r2(inA.length),
                    "kolizja_z_obszarem_inwestycji": bool(inside.length > 0.05)})
     J["uzbrojenie"] = {"uwaga": ("przewody wg e-mapy (GESUT); etykieta: [proj.][liczba]kod[atrybut][DN][-ref|-niecz.]; kody: w-woda, "
                                  "k-kanal. (ks sanit., kd deszcz., ko ogolnospl.), g-gaz, e-elektro (eN nn, eS SN), t-telekom, c-cieplo; "
@@ -1954,7 +1989,7 @@ def make_md(P, S, J, out_md):
     for u in sorted(J["uzbrojenie"]["przewody"], key=lambda u: (u["typ"], -u["dl_w_obszarze_inwestycji_m"])):
         if not u["kolizja_z_obszarem_inwestycji"]:
             continue
-        w("| %s (`%s`) | %s | %.1f | %.1f | %s |" % (u["typ"], u["warstwa"], ", ".join(u["etykiety"]) or "–", u["dl_w_obszarze_inwestycji_m"], u["dl_w_wydzieleniu_A_m"],
+        w("| %s (`%s`) | %s | %.1f | %.1f | %s |" % (u["typ"], u["warstwa"], ", ".join(u["etykiety"]) or "–", u["dl_w_obszarze_inwestycji_m"], u["dl_w_wydzieleniu_A_w_obszarze_inw_m"],
                                                     "nieczynny" if u["nieczynny"] else ("projektowany" if u["projektowany"] else "czynny/brak opisu")))
     w("")
     us = J["uzbrojenie"]["zestawienie_kolizji"]
