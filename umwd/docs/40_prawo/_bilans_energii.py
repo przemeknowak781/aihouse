@@ -112,6 +112,11 @@ def main():
     ep_PV = (epb * AF / 1000 - pv_to_epb_high) * 1000 / AF * W_EL
     print(f"\n== EP [kWh/(m2 rok)]: bez PV {ep_noPV:.0f}; z PV (60 % autokonsumpcji przypisane EPB) {ep_PV:.0f}")
     print("   EPmax WT2002 (100 % chlodzone, t0 < 2500 h): 45 + 25 + 25 = 95; prog ZEB (projekt WT od 2028 dla JSFP): 40 + 22 + 23 = 85")
+    # poprawione przez weryfikatora: przy t0 >= 2500 h (prawdopodobna wartosc domyslna dla biur wg PN-EN 15193: 2250 + 250 h
+    # - NIEPEWNE) dELP = 50 (WT 2002 par. 329) / 45 (projekt WT par. 355) -> EPmax 120, EPZEB 107.
+    # WT 2002 nie obowiazuja od 20.09.2026 - stosowane fakultatywnie na podstawie art. 102a Pb (Dz.U. 2026 poz. 1161).
+    print("   wariant t0 >= 2500 h: EPmax WT2002 = 45 + 25 + 50 = 120; EPZEB = 40 + 22 + 45 = 107; "
+          f"ECO2,ZEB = {(0.000274 * 107 + 0.0081) * 1000:.1f} kg/(m2 rok)")
     eco2_zeb = 0.000274 * 85 + 0.0081
     grid_epb = epb * AF / 1000 - pv_to_epb_high
     grid_all = total * AF / 1000 - self_c
@@ -126,6 +131,8 @@ def main():
     q_c_cap = p_inj / (1 + 1 / EER_ACT)
     print(f"\n== Dolne zrodlo: {N_BHE} BHE x {L_BHE:.0f} m (czynne {l_tot:.0f} m), siatka 6x6 m -> {N_BHE*36:.0f} m2")
     print(f"   pobor {p_ext:.0f} kW -> moc grzewcza PC ok. {q_h_peak_cap:.0f} kW; oddawanie {p_inj:.0f} kW -> chlod aktywny ok. {q_c_cap:.0f} kW")
+    # poprawione przez weryfikatora (uwaga metodyczna): pobor z gruntu nie obejmuje c.w.u. (Q_W) ani odzysku ciepla
+    # z serwerowni - oba efekty dzialaja w przeciwnych kierunkach; do symulacji EED/EWS.
     ext_year = Q_H * AF / 1000 * (1 - 1 / SCOP_H)
     inj_year = (Q_C * FC_SHARE + Q_C * (1 - FC_SHARE) * (1 + 1 / EER_ACT)) * AF / 1000
     print(f"   bilans roczny gruntu: pobor {ext_year:.0f} MWh, oddanie {inj_year:.0f} MWh -> nadwyzka ciepla {inj_year-ext_year:.0f} MWh "
@@ -140,6 +147,8 @@ def main():
     subst = min(flush, grey + rain * 0.75) + min(irr, rain * 0.25)
     print(f"\n== Woda [m3/rok]: splukiwanie {flush:.0f}; woda szara {grey:.0f}; deszczowa {rain:.0f}; podlewanie {irr:.0f}")
     print(f"   zuzycie bazowe wody wodociagowej ok. {potable_base:.0f}; zastapione {subst:.0f} -> redukcja {subst/potable_base:.0%}")
+    # poprawione przez weryfikatora: pokrycie splukiwania nie wynosi 100 %, lecz min(flush, grey + 0,75 rain) / flush
+    print(f"   pokrycie splukiwania woda szara i deszczowa: {min(flush, grey + rain * 0.75) / flush:.0%}")
 
     # Retencja
     a = sum(s[1] for s in SURF)

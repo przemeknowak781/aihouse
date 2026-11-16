@@ -16,7 +16,7 @@
 | KPI | Cel koncepcji | Odniesienie | Status |
 |---|---|---|---|
 | Spalanie paliw kopalnych na miejscu | **0** (bez przyłącza gazu; agregat na HVO100 tylko awaryjnie) | EPBD art. 11 ust. 1; M.12 pkt 1 lit. c | wymóg |
-| EP (energia pierwotna nieodnawialna, usługi EPB) | **≈ 30 kWh/(m²·rok)** z PV (≈ 60 bez PV) | EPmax WT 2002 = 95; EPZEB (projekt WT, od 2028) = 85 | szacunek |
+| EP (energia pierwotna nieodnawialna, usługi EPB) | **≈ 30 kWh/(m²·rok)** z PV (≈ 60 bez PV) | EPmax WT 2002 = 95; EPZEB (projekt WT, od 2028) = 85 – obie wartości dla t₀ < 2500 h (zachowawczo); przy t₀ ≥ 2500 h: 120 / 107 <!-- poprawione przez weryfikatora --> | szacunek |
 | Energia końcowa – całość (z IT i serwerownią) | **≈ 52 kWh/(m² Af·rok)** ≈ 650 MWh/rok (≈ 32 kWh/(m² PC·rok)) | RIBA 2030: biura < 55 (cel 2030) | szacunek |
 | Energia końcowa – usługi EPB | **≈ 24 kWh/(m² Af·rok)** ≈ 300 MWh/rok | – | szacunek |
 | PV na działce | **0,40 MWp ≈ 333 MWh/rok** (wariant warunkowy 0,50 MWp ≈ 393 MWh/rok) | M.12: 0,4–1,0 MWp | szacunek |
@@ -149,7 +149,7 @@ Metryki różnią się zakresem (EPB a całość, Af a GIA, energia pierwotna a 
   To jest właśnie „magazyn sezonowy” z M.12: lato ładuje grunt ciepłem z chłodzenia, zima je odbiera.
 - **Uzupełnienia (opcje):**
   - **ściany szczelinowe i pale energetyczne** (konstrukcje termoaktywne) – jeżeli konstrukcja garażu w wodzie gruntowej przewiduje ściany szczelinowe lub pale kotwiące (Brandl 2006) [Z31];
-  - **układ otwarty (dublet studni)** w czwartorzędowych żwirach – po próbnym pompowaniu, wymaga pozwolenia wodnoprawnego (art. 76 ust. 1 pkt 5 Pw).
+  - **układ otwarty (dublet studni)** w czwartorzędowych żwirach – po próbnym pompowaniu. Wymaga pozwolenia wodnoprawnego (art. 389 pkt 1 w zw. z art. 35 ust. 3 pkt 1 Pw); zatłaczanie wód z pomp ciepła do wód podziemnych dopuszcza art. 76 ust. 1 pkt 5 Pw. <!-- poprawione przez weryfikatora -->
   - **Odra i Oława – nie** jako źródło podstawowe: zimą woda ok. 0°C (zjawiska lodowe), latem ciepła; ujęcie i formalności nieproporcjonalne (`zero_emisja.md` 7.3).
 - **Magazyny krótkoterminowe:** zbiorniki buforowe ciepła ≈ 10–15 m³ i chłodu ≈ 20 m³ w maszynowni. Stabilizują sprężarki, przesuwają pracę na godziny produkcji PV i umożliwiają nocne schładzanie TABS.
 - **c.w.u.:** głównie lokalna (umywalki w biurach bez c.w.u. lub z małymi podgrzewaczami tylko tam, gdzie potrzebne). Centralnie: prysznice przy rowerowni, zaplecza, pralnia – stopień dogrzewu na PC (COP ≈ 3) zasilany ciepłem z serwerowni i chłodzenia. Legionella: dezynfekcja termiczna.
@@ -215,7 +215,7 @@ Metryki różnią się zakresem (EPB a całość, Af a GIA, energia pierwotna a 
 - Pobór z sieci ≈ 380 MWh/rok. Dla raportowania „100% OZE” – kontrakt ze społeczności energetycznej lub klastra Województwa albo gwarancje pochodzenia (ujęcie rynkowe; wniosek).
 
 ### 6.3. Energia pierwotna i emisje
-- **EP ≈ 60 kWh/(m²·rok) bez PV** (23,9 × w_el 2,5). **EP ≈ 28–32 z PV**, zależnie od przypisania autokonsumpcji usługom EPB w metodologii [Z9]. Porównanie: EPmax 95 (WT 2002), EPZEB 85 (projekt WT). **Margines −35% bez PV i ok. −65% z PV.**
+- **EP ≈ 60 kWh/(m²·rok) bez PV** (23,9 × w_el 2,5). **EP ≈ 28–32 z PV**, zależnie od przypisania autokonsumpcji usługom EPB w metodologii [Z9]. Porównanie: EPmax 95 (WT 2002), EPZEB 85 (projekt WT) – obie przy t₀ < 2500 h. **Margines wobec 95: ok. −37% bez PV i ok. −66–71% z PV.** Przy t₀ ≥ 2500 h (EPmax 120) margines jest jeszcze większy. <!-- poprawione przez weryfikatora -->
 - Emisje operacyjne (lokalizacyjne, EF ≈ 0,6 kg CO₂/kWh – rząd wielkości, nie zweryfikowano w KOBiZE):
   - EPB ≈ **6,6 kg CO₂/(m²·rok)**;
   - całość ≈ **18 kg CO₂/(m²·rok)** (≈ 230 t/rok).
@@ -232,7 +232,7 @@ Metryki różnią się zakresem (EPB a całość, Af a GIA, energia pierwotna a 
 | Woda deszczowa (dachy) | ≈ 665 | opad ≈ 570 mm/rok (założenie – do weryfikacji IMGW); 1 100 m² dachów twardych × 0,8 + 1 200 m² zielonych × 0,35; 90% sprawności zbierania |
 | Podlewanie | ≈ 135 | 900 m² zieleni × 0,15 m³/m² sezon |
 | **Zużycie bazowe wody z sieci** | **≈ 3 400** | 30 l/os.·d pracownika, 10 l/gościa + podlewanie |
-| **Zastąpione wodą szarą i deszczową** | **≈ 1 440 (−42%)** | spłukiwanie ≈ 100% z wody szarej i deszczowej; podlewanie z deszczowej |
+| **Zastąpione wodą szarą i deszczową** | **≈ 1 440 (−42%)** | spłukiwanie ≈ 91% (≈ 1 304 z 1 435 m³) z wody szarej i deszczowej, reszta z wodociągu przez zabezpieczone dopuszczenie (PN-EN 1717); podlewanie w 100% z deszczowej <!-- poprawione przez weryfikatora: wynik _bilans_energii.py, min(1435; 804 + 0,75·667) --> |
 
 Urządzenia:
 - dwa systemy kanalizacji (czarna i szara) z odrębną instalacją „wody szarej oczyszczonej”, oznakowaną i **niepołączoną z wodociągiem** (M.12 pkt 2C; WT § 126 ust. 3 analogicznie);
@@ -356,7 +356,7 @@ Urządzenia:
 >
 > Zwarta, kwartałowa bryła, przegrody o izolacyjności lepszej od wymagań warunków technicznych, zewnętrzne osłony przeciwsłoneczne, światło dzienne i masa termiczna stropów ograniczają potrzeby energetyczne. Ciepło i chłód zapewniają gruntowe pompy ciepła współpracujące z polem 75 sond o głębokości 99 m pod budynkiem. Pole pracuje jako sezonowy magazyn: latem przyjmuje ciepło z chłodzenia, zimą je oddaje. Niskotemperaturowe ogrzewanie i wysokotemperaturowe chłodzenie pozwalają na długie okresy free-coolingu. Ciepło serwerowni i chłodzenia przygotowuje ciepłą wodę. Miejska sieć ciepłownicza pełni wyłącznie rolę rezerwy. W budynku nie ma żadnych źródeł spalania paliw kopalnych.
 >
-> Fotowoltaika o mocy ok. 0,40 MWp, zintegrowana z dachami biosolarnymi i przegrodami od dziedzińca, wytwarza ok. 330 MWh rocznie. To więcej niż roczne zapotrzebowanie budynku na ogrzewanie, chłodzenie, wentylację, ciepłą wodę i oświetlenie. Szacowany wskaźnik EP wynosi ok. 30 kWh/(m²·rok), wobec 95 wymaganych przepisami. Magazyn energii elektrycznej i automatyka klasy A umożliwiają pracę wyspową odbiorów krytycznych i elastyczność wobec sieci.
+> Fotowoltaika o mocy ok. 0,40 MWp, zintegrowana z dachami biosolarnymi i przegrodami od dziedzińca, wytwarza ok. 330 MWh rocznie. To więcej niż roczne zapotrzebowanie budynku na ogrzewanie, chłodzenie, wentylację, ciepłą wodę i oświetlenie. Szacowany wskaźnik EP wynosi ok. 30 kWh/(m²·rok), wobec 95 dopuszczalnych według warunków technicznych z 2002 r. i 85 przewidzianych w projekcie nowych warunków technicznych dla budynków bezemisyjnych. <!-- poprawione przez weryfikatora: WT 2002 nie obowiązują od 20.09.2026, stosowane fakultatywnie (art. 102a Pb) --> Magazyn energii elektrycznej i automatyka klasy A umożliwiają pracę wyspową odbiorów krytycznych i elastyczność wobec sieci.
 >
 > Rozdział kanalizacji na ścieki szare i czarne, oczyszczanie wody szarej oraz zbiornik wody deszczowej pokrywają spłukiwanie toalet i podlewanie zieleni, ograniczając pobór wody z sieci o ok. 40%. Zielone dachy, ogród deszczowy i zbiornik retencyjny zatrzymują opad w miejscu. Konstrukcję optymalizowano pod kątem śladu węglowego w cyklu życia (cel ≤ 600 kg CO₂e/m² w etapach A1–A5, obliczenie wg EN 15978 i Level(s)).
 
@@ -375,3 +375,5 @@ Urządzenia:
 | 7 | LCA (EN 15978, Level(s) 1.2, rozp. 2026/52) dla 2–3 wariantów konstrukcji (żelbet niskoemisyjny / hybryda TCC lub CLT) | cel ≤ 600 kg CO₂e/m² |
 | 8 | Weryfikacja kosztów (kosztorysant) dla pozycji F.14.B | kryterium drugorzędowe |
 | 9 | Śledzenie transpozycji EPBD (UC82, nowe WT, UC121) przed PnB | zgodność prawna |
+| 10 | <!-- poprawione przez weryfikatora --> Decyzja o podstawie WT: wniosek o PnB z oświadczeniem z art. 102a Pb (WT 2002) tylko do ok. 19.03.2028; później – nowe WT (jeśli zostaną wydane). Projektować tak, by spełnić **oba** zestawy wymagań (ZEB z projektu WT § 354–355) | ryzyko zmiany podstawy prawnej między konkursem a PnB |
+| 11 | <!-- poprawione przez weryfikatora --> Ustalić t₀ oświetlenia (PN-EN 15193-1) dla stref biurowych i sali obrad: wpływa na EPmax (95 albo 120) i na próg ZEB | poprawny benchmark EP na planszy |

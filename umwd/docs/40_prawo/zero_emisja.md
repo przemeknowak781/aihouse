@@ -22,7 +22,7 @@ Numery [Z..] odsyłają do wykazu źródeł w rozdz. 13.
 
 ## 0. Najważniejsze wnioski (TL;DR)
 
-1. **Data „1 stycznia 2027 r.” z Regulaminu (rozdz. III ust. 1 pkt 10) i z M.12 nie wynika z obowiązującego prawa.** Pochodzi z **wniosku Komisji COM(2021) 802** (art. 7 ust. 1 lit. a: „od dnia 1 stycznia 2027 r. – nowe budynki zajmowane lub będące własnością organów publicznych”) [Z2]. Przyjęta **dyrektywa (UE) 2024/1275** mówi w art. 7 ust. 1 lit. a: **od 1 stycznia 2028 r.** dla nowych budynków **będących własnością instytucji publicznych**, a od 1 stycznia 2030 r. dla wszystkich nowych budynków [Z1]. Z wniosku Komisji pochodzi też formuła M.12 o „bilansowaniu rocznym” produkcji OZE i zużycia (wniosek mówił o pokrywaniu zużycia „w ujęciu rocznym netto”, zał. III wniosku). Dyrektywa takiego bilansu nie wymaga.
+1. **Data „1 stycznia 2027 r.” z Regulaminu (rozdz. III ust. 1 pkt 10) i z M.12 nie wynika z obowiązującego prawa.** Pochodzi z **wniosku Komisji COM(2021) 802** (art. 7 ust. 1 lit. a: „od dnia 1 stycznia 2027 r. – nowe budynki zajmowane lub będące własnością organów publicznych”) [Z2]. Przyjęta **dyrektywa (UE) 2024/1275** mówi w art. 7 ust. 1 lit. a: **od 1 stycznia 2028 r.** dla nowych budynków **będących własnością instytucji publicznych**, a od 1 stycznia 2030 r. dla wszystkich nowych budynków [Z1]. Z wniosku Komisji pochodzi też formuła M.12 o „bilansowaniu rocznym” produkcji OZE i zużycia (wniosek mówił o pokrywaniu zużycia „on a net annual basis” – „w ujęciu rocznym netto”, zał. III wniosku). <!-- poprawione przez weryfikatora --> **Dyrektywa zachowuje wymóg pokrycia *całkowitego rocznego* zużycia energii pierwotnej ZEB** (art. 11 ust. 7), ale ze źródeł na miejscu, w pobliżu, ze społeczności energetycznej OZE, z efektywnego systemu ciepłowniczego lub ze źródeł bezemisyjnych, a gdy to niewykonalne – z sieci. **Nie wymaga, by produkcja OZE na działce równoważyła roczne zużycie** – to wymóg M.12, ostrzejszy od dyrektywy. Data 2027 występuje w dyrektywie tylko przy innych obowiązkach: plan działania GWP do 1.01.2027 (art. 7 ust. 5) i punkty ładowania w istniejących budynkach niemieszkalnych > 20 miejsc do 1.01.2027 (art. 14 ust. 2).
 2. **Budynek UMWD najpewniej i tak podlegałby standardowi bezemisyjnemu (ZEB).** Województwo jest „instytucją publiczną” w rozumieniu art. 2 pkt 12 dyrektywy (UE) 2023/1791 („władze … regionalne”) [Z4]. Obowiązek dotyczy nowych budynków od 1.01.2028. Państwo może wyłączyć budynki, dla których wniosek o pozwolenie na budowę (PnB) złożono przed tą datą (art. 7 ust. 4). Polski projekt nowych WT przewiduje ZEB dla „budynku będącego własnością jednostki sektora finansów publicznych od 1 stycznia 2028 r.” i przepisy przejściowe dla wniosków złożonych przed wejściem w życie rozporządzenia (§ 392) [Z11]. Wniosek o PnB dla tej inwestycji zostanie złożony realnie w latach 2027–2028, więc objęcie obowiązkiem jest prawdopodobne. JST są jednostkami sektora finansów publicznych (art. 9 pkt 2 ustawy o finansach publicznych) [Z19]. → **wniosek:** projektować jako ZEB w rozumieniu art. 11 dyrektywy. W opisie pracy podać poprawną podstawę, bez polemiki z Zamawiającym.
 3. **Definicja ZEB w dyrektywie (art. 2 pkt 2, art. 11)** obejmuje cztery elementy:
    - **zero emisji CO₂ z paliw kopalnych na miejscu** (żadnego spalania gazu ani oleju w budynku i na działce);
@@ -35,19 +35,19 @@ Numery [Z..] odsyłają do wykazu źródeł w rozdz. 13.
    - Ustawa o charakterystyce energetycznej budynków ma t.j. Dz.U. 2024 poz. 101. Ostatnia nowelizacja weszła w życie 1.10.2023 (wg metryki ELI) [Z8].
    - W Dz.U. 2025–2026 nie ma aktu z tytułem o charakterystyce energetycznej ani nowych WT dla budynków.
    - 15.07.2026 Komisja wysłała **wezwania do usunięcia uchybienia wszystkim 27 państwom** za brak pełnej notyfikacji transpozycji dyrektywy 2024/1275 [Z7].
-   - Projekty: ustawa UC82, obejmująca m.in. EPBD (*źródło wtórne*, status niepotwierdzony, bo RCL był niedostępny) [Z15]; nowe WT (projekt 13.05.2026; wersja 6.08.2026 notyfikowana KE) [Z11]; nowelizacja Prawa energetycznego UC121 – nowe kryteria efektywnego systemu ciepłowniczego wg art. 26 EED (projekt OSR z 15.05.2026) [Z14].
-5. **Obowiązujące w Polsce wymagania energetyczne** to WT 2002 w brzmieniu z 19.09.2026. Można je stosować przejściowo (art. 102a Pb) do 20.03.2028 – szczegóły w `wt_kluczowe.md`. Limity:
-   - **EPmax** budynku użyteczności publicznej: **45 + ΔEPC 25 + ΔEPL 25/50** kWh/(m²·rok), np. 95 przy pełnym chłodzeniu i t₀ < 2500 h;
+   - Projekty: ustawa UC82, obejmująca m.in. EPBD (*źródło wtórne*, status niepotwierdzony, bo RCL był niedostępny) [Z15]; nowe WT (projekt 13.05.2026; wersja 6.08.2026 notyfikowana KE wg `wt_kluczowe.md`; planowane wejście w życie 20.09.2026 nie nastąpiło) [Z11]; <!-- poprawione przez weryfikatora --> nowelizacja Prawa energetycznego UC121 – nowe kryteria efektywnego systemu ciepłowniczego wg art. 26 EED (projekt OSR z 15.05.2026) [Z14].
+5. <!-- poprawione przez weryfikatora --> **Na 16.11.2026 w Polsce nie obowiązują żadne warunki techniczne dla budynków.** WT 2002 utraciły moc z upływem 84 miesięcy od wejścia w życie ustawy o dostępności (art. 66 ustawy z 19.07.2019, t.j. Dz.U. 2024 poz. 1411). Art. 102a Pb mówi o przepisach „obowiązujących do dnia 19 września 2026 r.”, a ISAP/ELI podaje datę 21.09.2026. Nowe WT nie zostały ogłoszone: projekt przewidywał wejście w życie 20.09.2026 (§ 394 projektu), a w Dz.U. 2026 nie ma takiego aktu (sprawdzono w ELI). **Pomost: art. 102a Pb** (dodany przez art. 2 pkt 4 ustawy Dz.U. 2026 poz. 1161, w życie 2.09.2026). W okresie 18 miesięcy od 20.09.2026 (koniec ok. 19–20.03.2028; bezpiecznie przyjąć 19.03.2028) PZT i PAB do wniosku o PnB **może** zostać sporządzony według WT 2002. Wymaga to **oświadczenia inwestora**, a wtedy projekt techniczny i decyzje dla całego zamierzenia także opierają się na WT 2002 (ust. 2 i 4). Szczegóły w `wt_kluczowe.md`. Limity WT 2002 (stosowane fakultatywnie):
+   - **EPmax** budynku użyteczności publicznej: **45 + ΔEPC 25 + ΔEPL 25/50** kWh/(m²·rok): **95** przy pełnym chłodzeniu i t₀ < 2500 h; **120**, gdy t₀ ≥ 2500 h. **Uwaga (NIEPEWNE):** domyślny czas działania oświetlenia w biurach wg PN-EN 15193 to prawdopodobnie 2250 + 250 = 2500 h, a wtedy ΔEPL = 50. Wartość 95 jest więc **zachowawcza**. Normy nie zweryfikowano w PKN;
    - **Uc,max**: ściany 0,20; dach 0,15; okna i fasady 0,9 W/(m²K);
    - **g ≤ 0,35**.
 
    Projekt nowych WT od 1.01.2028 dla JSFP: **EPH+W 40, ΔEPC 22, ΔEPL 23/45**, zakaz emisji CO₂ z paliw kopalnych na miejscu, próg emisji operacyjnych **ECO2,ZEB = 0,000274·EPZEB + 0,0081 t CO₂/(m²·rok)**, obowiązek instalacji słonecznej dla budynku niemieszkalnego > 250 m² [Z11].
 6. **Ciepło sieciowe Wrocławia (Fortum) jest dziś formalnie „efektywnym systemem ciepłowniczym”**. Sprawozdanie za 2025 r. [Z20]: **85,11% ciepła z kogeneracji**, OZE 1,22%, ciepło odpadowe 0,35%, w = 0,620. Polskie kryterium to art. 7b ust. 4 pkt 3 Prawa energetycznego (≥ 75% kogeneracji), zgodne z art. 26 ust. 1 lit. a EED (do 31.12.2027). Ocena według okresów:
-   - **od 2028 r.** status będzie zależał od tego, czy ≥ 80% ciepła pochodzi z **wysokosprawnej** kogeneracji (warunek alternatywny: OZE ≥ 5% przy ≥ 50% łącznie OZE, ciepła odpadowego i kogeneracji);
+   - **od 2028 r.** status będzie zależał od tego, czy ≥ 80% ciepła pochodzi z **wysokosprawnej** kogeneracji (warunek alternatywny: OZE ≥ 5% przy ≥ 50% łącznie OZE, ciepła odpadowego i **wysokosprawnej** kogeneracji – art. 26 ust. 1 lit. b EED); <!-- poprawione przez weryfikatora -->
    - **od 2035 r.** obecny miks nie spełni kryteriów (wymagane ≥ 35% OZE lub ciepła odpadowego).
 
    **Wniosek:** decyzja M.12, by sieć była **tylko źródłem rezerwowym i szczytowym**, jest trafna. ZEB oparty na sieci byłby formalnie możliwy dziś, ale nietrwały w cyklu życia budynku.
-7. **Obowiązek przyłączenia do sieci ciepłowniczej (art. 7b ust. 1 Prawa energetycznego) nie koliduje z gruntowymi pompami ciepła.** Wyłączenie z ust. 3 obejmuje indywidualne źródło o **wskaźniku w ≤ 0,8** i **≥ 60% ciepła z OZE**. Spełnienie stwierdza audyt (ust. 3c) [Z13]. Przy w_el = 2,5 (Dz.U. 2023 poz. 697) [Z9] gruntowa PC spełnia oba warunki, gdy SCOP ≥ 3,2 (wniosek).
+7. **Obowiązek przyłączenia do sieci ciepłowniczej (art. 7b ust. 1 Prawa energetycznego) nie koliduje z gruntowymi pompami ciepła.** Wyłączenie z ust. 3 obejmuje indywidualne źródło o **wskaźniku w ≤ 0,8** i **≥ 60% ciepła z OZE**. Spełnienie stwierdza audyt (ust. 3c) [Z13]. Przy w_el = 2,5 (Dz.U. 2023 poz. 697) [Z9] gruntowa PC spełnia oba warunki, gdy SCOP ≥ 3,125, a z zapasem ≥ 3,2 (wniosek: w = 2,5/SCOP ≤ 0,8; udział OZE = 1 − 1/SCOP ≥ 60% już od SCOP 2,5). <!-- poprawione przez weryfikatora -->
 8. **Odwierty pomp ciepła:**
    - do 30 m są poza ustawą PGiG (art. 3 pkt 2);
    - powyżej 30 m – projekt robót geologicznych **zgłasza się staroście**, czyli Prezydentowi Wrocławia (art. 85 ust. 1–3; art. 161 ust. 2 pkt 5); sprzeciw może wpłynąć w 30 dni;
@@ -144,7 +144,7 @@ Akt: dyrektywa Parlamentu Europejskiego i Rady (UE) 2024/1275 z 24.04.2024 w spr
 - **ust. 3** – akt delegowany o unijnych ramach obliczania GWP do 31.12.2025. Przyjęty jako **rozporządzenie delegowane (UE) 2026/52** (rozdz. 2.8).
 - **ust. 4** – państwo **może** nie stosować ust. 1–2 do budynków, dla których **wniosek o PnB złożono przed terminami**.
 - **ust. 5** – do **1.01.2027** państwa publikują plan działania z wartościami granicznymi GWP dla nowych budynków od 2030 r. (stan dla Polski: nie ustalono).
-- **ust. 6** – przy nowych budynkach państwa uwzględniają jakość środowiska wewnętrznego, adaptację do zmian klimatu, bezpieczeństwo pożarowe i dostępność.
+- **ust. 6** – przy nowych budynkach państwa uwzględniają jakość środowiska wewnętrznego, adaptację do zmian klimatu, bezpieczeństwo pożarowe, ryzyko sejsmiczne i dostępność dla osób z niepełnosprawnościami, a także pochłanianie dwutlenku węgla związane z jego magazynowaniem w budynkach lub na nich (np. w drewnie konstrukcyjnym). <!-- poprawione przez weryfikatora -->
 
 ### 2.3. Art. 11 – wymagania dla budynku bezemisyjnego
 - **ust. 1** – budynek ZEB **„nie może powodować na miejscu żadnych emisji dwutlenku węgla z paliw kopalnych”**. Jeśli jest to wykonalne, musi reagować na sygnały zewnętrzne (elastyczność zużycia, wytwarzania i magazynowania).
@@ -157,6 +157,8 @@ Akt: dyrektywa Parlamentu Europejskiego i Rady (UE) 2024/1275 z 24.04.2024 w spr
   - d) **źródeł bezemisyjnych**.
 
   Jeśli to niewykonalne technicznie lub ekonomicznie – także „inną energią pochodzącą z sieci, która spełnia kryteria ustanowione na poziomie krajowym”.
+
+  <!-- poprawione przez weryfikatora --> **Wniosek:** ust. 7 to wymóg **rocznego pokrycia** całego zużycia energii pierwotnej (bilans roczny w sensie źródeł). Nie wymaga natomiast, by produkcja na działce równoważyła zużycie. Formuła M.12 „produkcja OZE równoważy roczne zużycie” jest więc ostrzejsza od dyrektywy wtedy, gdy rozumie się ją jako produkcję na miejscu.
 
 ### 2.4. Art. 10 – energia słoneczna
 - **ust. 1** – każdy nowy budynek projektuje się tak, by **zoptymalizować potencjał energii słonecznej** („solar-ready”).
@@ -218,13 +220,13 @@ Akt: dyrektywa Parlamentu Europejskiego i Rady (UE) 2024/1275 z 24.04.2024 w spr
 | Zakres podmiotowy | budynki „**zajmowane lub będące własnością** organów publicznych” | budynki „**będące własnością** instytucji publicznych”. Dla zajmowanych tylko „dążą do tego” (art. 7 ust. 1 akapit 2) | „zajmowanych przez władze publiczne lub będących ich własnością” |
 | Termin ZEB dla wszystkich | od 1.01.2030 | od 1.01.2030 | – |
 | GWP w cyklu życia | od 1.01.2027 dla > 2000 m² | **od 1.01.2028 dla > 1000 m²**; od 2030 wszystkie | brak |
-| Definicja ZEB i progi | **zał. III**: tabela progów (biura, strefa kontynentalna: < 85 kWh/(m²·rok) całkowitej energii pierwotnej); pokrycie zużycia „**w ujęciu rocznym netto**” z OZE na miejscu, ze społeczności OZE lub z efektywnego systemu ciepłowniczego | **art. 11**: próg krajowy ≥ 10% poniżej nZEB; emisje operacyjne poniżej progu krajowego; cztery źródła pokrycia (lit. a–d); w razie niewykonalności – energia z sieci; zał. III dotyczy już tylko GWP | „bilansowanie energii – ilość energii wyprodukowanej z OZE równoważy roczne zużycie” |
+| Definicja ZEB i progi | **zał. III**: tabela progów (biura, strefa kontynentalna: < 85 kWh/(m²·rok) całkowitej energii pierwotnej); pokrycie zużycia „**w ujęciu rocznym netto**” z OZE na miejscu, ze społeczności OZE lub z efektywnego systemu ciepłowniczego | **art. 11**: próg krajowy ≥ 10% poniżej nZEB; emisje operacyjne poniżej progu krajowego; **całkowite roczne** zużycie energii pierwotnej pokryte z czterech źródeł (ust. 7 lit. a–d, także spoza działki); w razie niewykonalności – energia z sieci; zał. III dotyczy już tylko GWP <!-- poprawione przez weryfikatora --> | „bilansowanie energii – ilość energii wyprodukowanej z OZE równoważy roczne zużycie” |
 | Brak spalania paliw kopalnych na miejscu | tak | tak (art. 11 ust. 1) | tak |
 
 **Wyjaśnienie (wniosek):** M.12 (data na okładce 29.10.2025) powiela brzmienie **wniosku Komisji z 2021 r.**, a nie tekst przyjęty w 2024 r.:
 - data 2027;
 - formuła „zajmowanych lub będących własnością”;
-- idea rocznego bilansu netto.
+- idea rocznego bilansu netto. <!-- poprawione przez weryfikatora --> Dyrektywa zachowała roczne pokrycie zużycia (art. 11 ust. 7), ale bez sformułowania „netto” i z dopuszczeniem źródeł spoza działki oraz – awaryjnie – sieci.
 
 Prawdopodobnie autor korzystał z opracowań wtórnych sprzed końca procesu legislacyjnego. **Skutki:**
 1. **Nie ma kolizji projektowej.** Wymóg Zamawiającego obowiązuje uczestników jako wytyczna konkursowa, niezależnie od stanu prawa. Ocenia się „efektywność i zasadność” rozwiązań.
@@ -239,12 +241,12 @@ Prawdopodobnie autor korzystał z opracowań wtórnych sprzed końca procesu leg
 |---|---|---|---|
 | Ustawa z 29.08.2014 o charakterystyce energetycznej budynków, **t.j. Dz.U. 2024 poz. 101** | [O]; ostatnia nowelizacja Dz.U. 2023 poz. 1762 (w życie 1.10.2023) wg metryki ELI. **Brak nowelizacji 2025–2026**, więc EPBD 2024 nie została przetransponowana | świadectwa charakterystyki energetycznej, metodologia (art. 15) | [Z8] |
 | Rozp. MIiR z 27.02.2015 w sprawie metodologii (Dz.U. 2015 poz. 376), zm. 2017 poz. 22, 2019 poz. 1829, **2023 poz. 697** | [O] | w_el = 2,50; ciepło z kogeneracji 0,80 | [Z9] |
-| Rozp. MI z 12.04.2002 (WT 2002), t.j. Dz.U. 2022 poz. 1225 z późn. zm. | **[P]** – uznane za uchylone (ISAP: 21.09.2026); stosowane przejściowo na podstawie art. 102a Pb (Dz.U. 2026 poz. 1161) | EPmax, Uc,max, g (zob. `wt_kluczowe.md` 12.1) | [Z10][Z12] |
-| **Projekt rozporządzenia w sprawie WT** (wersja 13.05.2026; wg `wt_kluczowe.md` wersja 6.08.2026 notyfikowana KE pod nr 2026/0422/PL) | [PR] | § 354 ust. 1 pkt 3 (ZEB od 1.01.2028 dla JSFP), § 355 (EP 2030/2028), § 356 (instalacja słoneczna > 250 m², zwrot ≤ 15 lat), § 22 ust. 4–5 (priorytet zagospodarowania wód opadowych na działce), § 310–314 (BESS), § 15 (EV – odesłanie do art. 12a ustawy o elektromobilności). Numeracja może się różnić w kolejnych wersjach | [Z11] |
+| Rozp. MI z 12.04.2002 (WT 2002), t.j. Dz.U. 2022 poz. 1225, zm. Dz.U. 2023 poz. 2442 oraz 2024 poz. 474 i 726 <!-- poprawione przez weryfikatora --> | **[P]** – utraciły moc na podstawie art. 66 ustawy o dostępności (84 miesiące od 20.09.2019; art. 102a Pb: „obowiązujące do dnia 19 września 2026 r.”; ISAP: uznane za uchylone 21.09.2026). **Fakultatywnie** stosowane na podstawie art. 102a Pb (Dz.U. 2026 poz. 1161): wymaga oświadczenia inwestora i wniosku o PnB złożonego w okresie 18 miesięcy od 20.09.2026. Nowelizacje 2023–2024 nie zmieniły § 3 pkt 22, § 126, § 216 ust. 8, § 328–329 ani zał. 2 | EPmax, Uc,max, g (zob. `wt_kluczowe.md` 12.1) | [Z10][Z12][Z41] |
+| **Projekt rozporządzenia w sprawie WT** (wersja 13.05.2026; wg `wt_kluczowe.md` wersja 6.08.2026 notyfikowana KE pod nr 2026/0422/PL – numeru notyfikacji weryfikator nie potwierdził w TRIS) | [PR]; **planowane wejście w życie 20.09.2026 (§ 394 projektu) nie nastąpiło** – brak aktu w Dz.U. do 16.11.2026 (ELI) <!-- poprawione przez weryfikatora --> | § 354 ust. 1 pkt 3 (ZEB od 1.01.2028 dla JSFP), § 355 (EP 2030/2028), § 356 (instalacja słoneczna > 250 m², zwrot ≤ 15 lat; ust. 2 i 4 miały wejść w życie 31.12.2026), § 22 ust. 4–5 (priorytet zagospodarowania wód opadowych na działce), § 310–314 (BESS), § 15 (EV – odesłanie do art. 12a ustawy o elektromobilności). Numeracja może się różnić w kolejnych wersjach | [Z11] |
 | **Projekt ustawy o zmianie ustawy o charakterystyce energetycznej budynków oraz niektórych innych ustaw (UC82)** | [PR]; etap niepotwierdzony (RCL legislacja.gov.pl i gov.pl niedostępne 16.11.2026; *źródło wtórne* z 5.11.2026 opisuje projekt UC82, projekt RCL 12347353) | m.in. świadectwa dla nowych budynków, klasy energetyczne (wg *źródła wtórnego*) | [Z15] |
 | **Projekt ustawy o zmianie ustawy – Prawo energetyczne (UC121)**, OSR z 15.05.2026 (Ministerstwo Energii) | [PR]; wdraża EED 2023/1791 i RED III (ciepłownictwo) | „nowe kryteria dla efektywnego systemu ciepłowniczego lub chłodniczego” wg okresów art. 26 ust. 1 EED i kryteria emisyjne z art. 26 ust. 2; lokalne plany ogrzewania i chłodzenia dla gmin > 45 000 mieszkańców | [Z14] |
 | Komisja Europejska – wezwania do usunięcia uchybienia (15.07.2026) | fakt | wezwania do **wszystkich 27 państw** za brak pełnej notyfikacji transpozycji dyrektywy 2024/1275; 2 miesiące na odpowiedź | [Z7] |
-| Ustawa – Prawo energetyczne, **t.j. Dz.U. 2026 poz. 43**, zm. 2026 poz. 516, 607, 900, 1348 | [O] | art. 7b (obowiązek przyłączenia do sieci ciepłowniczej, wyłączenie dla źródła z w ≤ 0,8 i ≥ 60% OZE, definicja efektywnego systemu: 50% OZE / 50% ciepła odpadowego / **75% kogeneracji** / 50% kombinacji); nowy ust. 4a (kotły elektryczne zasilane OZE – Dz.U. 2026 poz. 900, art. 1 pkt 6) | [Z13] |
+| Ustawa – Prawo energetyczne, **t.j. Dz.U. 2026 poz. 43**, zm. 2026 poz. 516, 607, 900, 1348 oraz 1347 (w części dot. Pe w życie 1.12.2026; nie zmienia art. 7b) <!-- poprawione przez weryfikatora --> | [O] | art. 7b (obowiązek przyłączenia do sieci ciepłowniczej, wyłączenie dla źródła z w ≤ 0,8 i ≥ 60% OZE, definicja efektywnego systemu: 50% OZE / 50% ciepła odpadowego / **75% kogeneracji** / 50% kombinacji); nowy ust. 4a (kotły elektryczne zasilane OZE – Dz.U. 2026 poz. 900, art. 1 pkt 6) | [Z13] |
 | Ustawa o elektromobilności i paliwach alternatywnych, **t.j. Dz.U. 2026 poz. 1243** | [O] | art. 12 ust. 1 (moc przyłączeniowa dla wszystkich stanowisk – punkty ≥ 3,7 kW; gminy z art. 60 ust. 1, w tym Wrocław); art. 12a ust. 1 (> 10 stanowisk: ≥ 1 punkt ładowania i kanały na 1 punkt / 5 stanowisk) | [Z16] |
 
 **Wniosek:** na 16.11.2026 polski inwestor nie ma jeszcze ustawowego obowiązku ZEB, GWP ani 1 punktu ładowania na 2 miejsca. Te obowiązki pojawią się wraz z transpozycją, której spodziewamy się przed PnB tej inwestycji. Projekt konkursowy powinien je spełniać z wyprzedzeniem („future-proof”). To argument ekonomiczny: unika się przeprojektowania i ryzyka nieważności założeń.
@@ -254,7 +256,7 @@ Prawdopodobnie autor korzystał z opracowań wtórnych sprzed końca procesu leg
 ## 5. Wymagania energetyczne WT (obowiązujące i projektowane) – liczby dla budynku UMWD
 
 ### 5.1. WT 2002 w brzmieniu z 19.09.2026 [P] (szczegóły i paragrafy w `wt_kluczowe.md` 12.1)
-- **§ 329 – EPmax** dla budynku użyteczności publicznej „pozostałego” (budynek organu administracji publicznej od 1.01.2019 = nZEB, § 328 ust. 1b): **EPH+W = 45**, **ΔEPC = 25·Af,C/Af**, **ΔEPL = 25** (t₀ < 2500 h/rok) lub **50** (t₀ ≥ 2500 h). Przy 100% powierzchni chłodzonej i t₀ < 2500 h: **EPmax = 95 kWh/(m²·rok)**.
+- **§ 329 – EPmax** dla budynku użyteczności publicznej „pozostałego”. Budynek **zajmowany przez organ administracji publicznej i będący jego własnością** musi spełniać wymagania 2021 już od 1.01.2019 (§ 328 ust. 1b, przypisy do tabel § 329). Składniki: **EPH+W = 45**, **ΔEPC = 25·Af,C/Af**, **ΔEPL = 25** (t₀ < 2500 h/rok) lub **50** (t₀ ≥ 2500 h). Przy 100% powierzchni chłodzonej i t₀ < 2500 h: **EPmax = 95 kWh/(m²·rok)**. Przy t₀ ≥ 2500 h (prawdopodobna wartość domyślna dla biur – NIEPEWNE, zob. rozdz. 0 pkt 5): **120**. Dla budynku o różnych funkcjach EPmax liczy się jako średnią ważoną powierzchnią Af (§ 329 ust. 3). <!-- poprawione przez weryfikatora -->
 - **Zał. 2 – izolacyjność:**
   - Uc,max: ściany 0,20; dach i stropodach 0,15; podłoga na gruncie 0,30; strop nad garażem 0,25;
   - okna i fasady przezroczyste 0,9; drzwi zewnętrzne 1,3 W/(m²K);
@@ -270,7 +272,8 @@ Prawdopodobnie autor korzystał z opracowań wtórnych sprzed końca procesu leg
   - b) zapotrzebowanie na energię nieodnawialną pokrywane z: OZE, obywatelskich społeczności energetycznych, spółdzielni energetycznych, klastrów energii, prosumentów (w tym wirtualnych i zbiorowych), źródeł bezemisyjnych albo efektywnego systemu ciepłowniczego (art. 7b ust. 4 Prawa energetycznego). Warunek: istnieją techniczne i ekonomiczne warunki.
 
   **ust. 2** – w razie braku tych warunków dopuszcza się inną energię z sieci. **ust. 5** – budynek spełniający ust. 1 i 2 jest bezemisyjny. **ust. 7** – nie dotyczy budynku **wpisanego** do rejestru zabytków. Nasz nowy budynek nim nie jest; położenie w obszarze wpisanym nie zwalnia (wniosek).
-- **§ 355** – od 1.01.2030, a dla JSFP od 1.01.2028: **EPH+W 40; ΔEPC 22·Af,C/Af; ΔEPL 23 (t₀ < 2500) / 45**. Przy pełnym chłodzeniu i t₀ < 2500 h: **EPZEB = 85 kWh/(m²·rok)**, a więc **ECO2,ZEB ≈ 0,000274·85 + 0,0081 = 0,0314 t = 31,4 kg CO₂/(m²·rok)** (wniosek – arytmetyka).
+- **§ 355** – od 1.01.2030, a dla JSFP od 1.01.2028: **EPH+W 40; ΔEPC 22·Af,C/Af; ΔEPL 23 (t₀ < 2500) / 45**. Przy pełnym chłodzeniu i t₀ < 2500 h: **EPZEB = 85 kWh/(m²·rok)**, a więc **ECO2,ZEB ≈ 0,000274·85 + 0,0081 = 0,0314 t = 31,4 kg CO₂/(m²·rok)** (wniosek – arytmetyka). Przy t₀ ≥ 2500 h: EPZEB = 107 i ECO2,ZEB ≈ 37,4 kg CO₂/(m²·rok) (wniosek). Projekt objaśnia 0,000274 t CO₂/kWh jako „średnią emisję CO₂ nośników energii odniesioną do energii pierwotnej (nieodnawialnej)”. <!-- poprawione przez weryfikatora -->
+- **§ 394 projektu** – planowane wejście w życie 20.09.2026, a § 356 ust. 2 i 4 – 31.12.2026. **Nie nastąpiło** (stan 16.11.2026). Data stosowania ZEB dla JSFP (1.01.2028) pozostaje więc tylko propozycją. <!-- poprawione przez weryfikatora -->
 - **§ 356 ust. 2 i 5** – budynek inny niż mieszkalny > 250 m² wyposaża się w instalacje wykorzystujące promieniowanie słoneczne, gdy jest to odpowiednie technicznie, funkcjonalnie i ekonomicznie (zwrot ≤ 15 lat). **ust. 6:** „należy rozważyć wykorzystanie magazynu energii”.
 - **§ 310–314 (BESS)**:
   - maks. **600 kWh w jednej strefie pożarowej**;
@@ -359,7 +362,7 @@ Od 1.01.2018 dla dwukierunkowych central niemieszkalnych (SWNM): **sprawność t
 - Po robotach – dokumentacja geologiczna (art. 88).
 
 ### 7.3. Prawo wodne, **t.j. Dz.U. 2026 poz. 1335** [O] [Z18]
-- **Układ otwarty** (studnie: pobór i zatłaczanie wód podziemnych) to **usługa wodna lub szczególne korzystanie z wód**, więc wymaga **pozwolenia wodnoprawnego** (ponad zwykłe korzystanie do 5 m³/d). **art. 76 ust. 1 pkt 5**: dopuszcza się wprowadzanie **wód wykorzystanych pochodzących z pomp ciepła** do wód podziemnych. Dokumentacja hydrogeologiczna z próbnym pompowaniem; ujęcia ≤ 50 m³/h należą do właściwości starosty (PGiG art. 161 ust. 2 pkt 2).
+- **Układ otwarty** (studnie: pobór i zatłaczanie wód podziemnych) to **usługa wodna** (pobór wód podziemnych – art. 35 ust. 3 pkt 1), więc wymaga **pozwolenia wodnoprawnego** (art. 389 pkt 1–2) – ponad zwykłe korzystanie do 5 m³/d. <!-- poprawione przez weryfikatora --> **art. 76 ust. 1 pkt 5**: dopuszcza się wprowadzanie **wód wykorzystanych pochodzących z pomp ciepła** do wód podziemnych. Dokumentacja hydrogeologiczna z próbnym pompowaniem; ujęcia ≤ 50 m³/h należą do właściwości starosty (PGiG art. 161 ust. 2 pkt 2).
 - **Woda rzeczna (Odra, Oława – ok. 30–80 m od działki):** pobór wód powierzchniowych i zrzut wód o zmienionej temperaturze wymagają pozwolenia wodnoprawnego. Potrzebne byłyby budowle w strefie nabrzeża i obwałowań (uzgodnienia z Wodami Polskimi; ochrona przeciwpowodziowa; strefa konserwatorska nabrzeża Ohlau-Ufer).
 - **Ocena (wniosek):**
   - temperatura wody rzecznej zimą spada w okolice 0°C – we Wrocławiu notowano zjawiska lodowe na skanalizowanym odcinku Odry (*źródło wtórne*: komunikaty RZGW Wody Polskie z II 2021, niepobrane) [Z37];
@@ -370,6 +373,8 @@ Od 1.01.2018 dla dwukierunkowych central niemieszkalnych (SWNM): **sprawność t
   → **Odra i Oława nie jako źródło podstawowe.** Można je wskazać w opisie jako perspektywę miejskiej sieci niskotemperaturowej („anergii”) z udziałem Miasta, MPWiK i Fortum.
 - **art. 34 pkt 4** – szczególne korzystanie z wód przy wyłączeniu > 70% nieruchomości > 3500 m² z powierzchni biologicznie czynnej **na obszarach nieujętych w systemy kanalizacji otwartej lub zamkniętej**. Działka w śródmieściu jest skanalizowana, więc przepis najpewniej nie ma zastosowania (wniosek). Opłaty za wody opadowe pobiera MPWiK (rozdz. 8).
 - Zmiana Prawa wodnego **Dz.U. 2026 poz. 1156** (w życie 1.01.2027) dotyczy wody odzyskanej ze ścieków w chłodzeniu elektrowni i elektrociepłowni – nie dotyczy budynku (fakt).
+- <!-- poprawione przez weryfikatora --> **art. 390 ust. 1 pkt 1 lit. b** – pozwolenie wodnoprawne wymagane jest też na lokalizowanie **nowych obiektów budowlanych na obszarach szczególnego zagrożenia powodzią** (Q1% i Q10%, art. 169 ust. 2 pkt 2). Według ISOK teren leży poza scenariuszami Q10/Q1/Q0,2%, ale opinia M.05 mówi o „obszarze narażonym na niebezpieczeństwo powodzi” (`../30_lokalizacja/geotechnika.md` K-02). **Wniosek:** przepis prawdopodobnie nie ma zastosowania. Trzeba to potwierdzić na aktualnych mapach zagrożenia powodziowego przed PnB.
+- Odwodnienie wykopu dla 2 kondygnacji podziemnych w wodzie gruntowej to osobny temat formalny: usługa wodna z art. 35 ust. 3 pkt 8 Pw oraz projekt robót geologicznych (PGiG art. 161 ust. 2 pkt 4 – właściwość starosty do 50 m³/h). Poza zakresem tego opracowania (wniosek).
 
 ### 7.4. MPZP a układ otwarty (wniosek)
 MPZP § 14 pkt 2: „zaopatrzenie w wodę dopuszcza się wyłącznie z sieci wodociągowej” [Z26]. Studnie pomp ciepła nie służą zaopatrzeniu w wodę, ale dla bezpieczeństwa interpretacyjnego **układ zamknięty (BHE)** jest wariantem bezspornym. Układ otwarty to opcja do analizy w fazie projektu.
@@ -449,8 +454,8 @@ Dwie kondygnacje podziemne w wodzie gruntowej oznaczają prawdopodobnie **ścian
 
 | Wskaźnik | Wartość | Źródło / status |
 |---|---|---|
-| EPmax (PL, WT 2002) – budynek użyteczności publicznej, chłodzony, t₀ < 2500 h | 95 kWh/(m²·rok) energii pierwotnej nieodnawialnej (tylko usługi EPB) | [P] [Z10] |
-| EPZEB (PL, projekt WT, JSFP od 2028) | 85 kWh/(m²·rok); ECO2,ZEB ≈ 31,4 kg CO₂/(m²·rok) | [PR] [Z11] |
+| EPmax (PL, WT 2002) – budynek użyteczności publicznej, chłodzony, t₀ < 2500 h | 95 kWh/(m²·rok) energii pierwotnej nieodnawialnej (tylko usługi EPB); przy t₀ ≥ 2500 h – 120 <!-- poprawione przez weryfikatora --> | [P] [Z10] |
+| EPZEB (PL, projekt WT, JSFP od 2028) | 85 kWh/(m²·rok); ECO2,ZEB ≈ 31,4 kg CO₂/(m²·rok); przy t₀ ≥ 2500 h – 107 i ≈ 37,4 <!-- poprawione przez weryfikatora --> | [PR] [Z11] |
 | Próg ZEB biura, strefa kontynentalna (tylko **wniosek** Komisji 2021) | < 85 kWh/(m²·rok) energii pierwotnej całkowitej | [Z2] – nie obowiązuje |
 | RIBA 2030 Climate Challenge v2 (UK, biura nowe): energia operacyjna (całe zużycie) | BAU ok. 130; cel 2025 < 75; cel 2030 < 55 kWh/(m²·rok) | *źródło wtórne* [Z28] |
 | RIBA v2 – węgiel wbudowany biur (A1–A5, B1–B5, C1–C4) | cel 2030 < 750 kg CO₂e/m² | *źródło wtórne* [Z28] |
@@ -473,9 +478,9 @@ Dwie kondygnacje podziemne w wodzie gruntowej oznaczają prawdopodobnie **ścian
 - [Z7] Komisja Europejska / Transition Pathways – „Commission urges EU countries to implement reinforced building energy rules” (procedury z 15.07.2026; strona z 4.08.2026): https://transition-pathways.europa.eu/construction/news/commission-urges-eu-countries-implement-reinforced-building-energy-rules
 - [Z8] Ustawa z 29.08.2014 o charakterystyce energetycznej budynków, **t.j. Dz.U. 2024 poz. 101**: https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20240000101 ; metryka ELI (akty zmieniające, ostatni Dz.U. 2023 poz. 1762): https://api.sejm.gov.pl/eli/acts/DU/2014/1200
 - [Z9] Rozp. MIiR z 27.02.2015 w sprawie metodologii wyznaczania charakterystyki energetycznej budynku lub części budynku oraz świadectw charakterystyki energetycznej (**Dz.U. 2015 poz. 376**): https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20150000376 ; zmiana **Dz.U. 2023 poz. 697** (w_el = 2,50; w życie 28.04.2023): https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20230000697
-- [Z10] Rozp. MI z 12.04.2002 w sprawie warunków technicznych … (WT 2002), **t.j. Dz.U. 2022 poz. 1225** (§ 3 pkt 22, § 126, § 328–329, zał. 2): https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20220001225 ; status „uznany za uchylony” (2026-09-21): https://api.sejm.gov.pl/eli/acts/DU/2002/690
+- [Z10] Rozp. MI z 12.04.2002 w sprawie warunków technicznych … (WT 2002), **t.j. Dz.U. 2022 poz. 1225**, zm. Dz.U. 2023 poz. 2442, 2024 poz. 474 i 726 (§ 3 pkt 22, § 8, § 126, § 216 ust. 8, § 328–329, zał. 2 – brzmienie sprawdzone przez weryfikatora): https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20220001225 ; status „uznany za uchylony” (2026-09-21; podstawa: art. 66 ustawy o dostępności [Z41]): https://api.sejm.gov.pl/eli/acts/DU/2002/690 <!-- poprawione przez weryfikatora -->
 - [Z11] **Projekt** rozporządzenia w sprawie warunków technicznych, jakim powinny odpowiadać budynki i ich usytuowanie (wersja z 13.05.2026; § 15, § 22, § 310–314, § 354–356, § 392). Kopia dokumentu rządowego w serwisie ZPP: https://www.zpp.pl/storage/library/2026-05/630f87410f0e537f673f75461f8dde4d.pdf (RCL niedostępny 16.11.2026)
-- [Z12] Ustawa z 31.07.2026 zmieniająca m.in. Prawo budowlane – art. 102a–102c Pb (**Dz.U. 2026 poz. 1161**): https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20260001161 (analiza: `wt_kluczowe.md`)
+- [Z12] Ustawa z 31.07.2026 o zmianie ustawy o samorządach zawodowych architektów oraz inżynierów budownictwa oraz ustawy – Prawo budowlane, **Dz.U. 2026 poz. 1161** (ogł. 1.09.2026). Art. 2 pkt 4 dodaje rozdz. 10a „Przepisy epizodyczne” – art. 102a–102c Pb – i wchodzi w życie dzień po ogłoszeniu, tj. 2.09.2026; reszta ustawy – 2.10.2026 (art. 5): https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20260001161 ; tekst: https://api.sejm.gov.pl/eli/acts/DU/2026/1161/text.pdf (analiza: `wt_kluczowe.md`) <!-- poprawione przez weryfikatora -->
 - [Z13] Ustawa – Prawo energetyczne, **t.j. Dz.U. 2026 poz. 43** (art. 7b): https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20260000043 ; zmiana **Dz.U. 2026 poz. 900** (art. 1 pkt 6 – art. 7b ust. 4a, 9): https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20260000900
 - [Z14] **Projekt** ustawy o zmianie ustawy – Prawo energetyczne (UC121), OSR z 15.05.2026, Ministerstwo Energii (wdrożenie EED i RED III w ciepłownictwie). Kopia w serwisie ZPP: https://www.zpp.pl/storage/library/2026-05/290adc768518e2293fc00222f4696958.pdf
 - [Z16] Ustawa o elektromobilności i paliwach alternatywnych, **t.j. Dz.U. 2026 poz. 1243** (art. 12, 12a): https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20260001243
@@ -490,6 +495,9 @@ Dwie kondygnacje podziemne w wodzie gruntowej oznaczają prawdopodobnie **ścian
 - [Z25] Materiały Organizatora: M.12, Regulamin (t.j. 13.02.2026), Program użytkowy (11.2025), F.14.B, F.15.C, M.05 – `/home/user/aihouse/umwd/00_materialy/tekst/`
 - [Z26] MPZP – uchwała nr XLV/1366/10 Rady Miejskiej Wrocławia z 21.01.2010 (§ 6 pkt 13, § 14) – `../30_lokalizacja/mpzp_uchwala_XLV-1366-10_OCR.txt`, `../30_lokalizacja/mpzp.md`
 - [Z27] Greater London Authority – „Towards a new London Plan. Evidence base for embodied and whole life carbon policies” (IX 2025): https://data.london.gov.uk/download/2yoq5/127/LPNZ%20Evidence-Embodied%20carbon.pdf
+- [Z41] <!-- poprawione przez weryfikatora --> Ustawa z 19.07.2019 o zapewnianiu dostępności osobom ze szczególnymi potrzebami, **t.j. Dz.U. 2024 poz. 1411** – art. 66: dotychczasowe przepisy wykonawcze z art. 7 ust. 2 i 3 Pb zachowują moc „nie dłużej jednak niż przez 84 miesiące od dnia wejścia w życie niniejszej ustawy” (podstawa utraty mocy WT 2002): https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20240001411 ; metryka WT 2002 w ELI („Uchylenia wynikające z: DU/2019/1696”): https://api.sejm.gov.pl/eli/acts/DU/2002/690
+- [Z42] <!-- poprawione przez weryfikatora --> Ustawa – Prawo budowlane, **t.j. Dz.U. 2026 poz. 524** z późn. zm. – art. 33 ust. 2 pkt 10 (oświadczenie projektanta o możliwości podłączenia do sieci ciepłowniczej wg art. 7b Pe): https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20260000524
+- [Z43] <!-- poprawione przez weryfikatora --> Ustawa – Prawo wodne, t.j. Dz.U. 2026 poz. 1335 – art. 35 ust. 3, art. 169, art. 389, art. 390 ust. 1 pkt 1 lit. b: https://api.sejm.gov.pl/eli/acts/DU/2026/1335/text.pdf
 
 **Źródła wtórne i literatura (pomocniczo)**
 - [Z15] Inżynier Budownictwa (5.11.2026), „Transpozycja dyrektywy EPBD 2024/1275 do polskiego prawa budowlanego” – *źródło wtórne*: https://inzynierbudownictwa.pl/transpozycja-dyrektywy-epbd-2024-1275-do-polskiego-prawa-budowlanego/ ; RCL (niedostępne): https://legislacja.gov.pl/projekt/12347353
@@ -509,5 +517,24 @@ Dwie kondygnacje podziemne w wodzie gruntowej oznaczają prawdopodobnie **ścian
 - etapu prac nad UC82 – RCL i gov.pl niedostępne;
 - stawek opłaty za wody opadowe MPWiK;
 - normy wieloletniej sumy opadów dla Wrocławia (IMGW 1991–2020).
+- <!-- poprawione przez weryfikatora --> domyślnego czasu działania oświetlenia t₀ dla biur wg PN-EN 15193-1 (rozstrzyga, czy EPmax = 95 czy 120);
+- numeru notyfikacji TRIS projektu WT (2026/0422/PL) i publikacji wytycznych KE dla bezpieczeństwa pożarowego parkingów (art. 14 ust. 10 EPBD). Limit wyszukiwań weryfikatora również został wyczerpany.
 
 Limit wyszukiwań w tej sesji został wyczerpany.
+
+### Weryfikacja adwersaryjna (16.11.2026) <!-- poprawione przez weryfikatora -->
+Ponad 40 twierdzeń sprawdzono w tekstach źródłowych:
+- EUR-Lex: dyrektywa 2024/1275 (EN/PL), COM(2021) 802, rozp. 2026/52, EED 2023/1791, taksonomia 2021/2139, rozp. 1253/2014;
+- ELI/ISAP: metryki i teksty Dz.U. 2026 poz. 43, 69, 524, 900, 1161, 1243, 1335, 1447, Dz.U. 2024 poz. 1411, Dz.U. 2023 poz. 697, Dz.U. 2022 poz. 1225 wraz ze zmianami;
+- projekt WT z 13.05.2026, M.12 i Regulamin.
+
+Poprawiono:
+- „dyrektywa nie wymaga bilansu rocznego” – wymaga rocznego pokrycia (art. 11 ust. 7);
+- status WT 2002 – od 20.09.2026 nie obowiązują; art. 102a Pb jest opcją inwestora, a podstawą utraty mocy jest art. 66 ustawy o dostępności;
+- nieurzeczywistnione wejście w życie projektu WT (§ 394);
+- przypadek t₀ ≥ 2500 h (EPmax 120 / EPZEB 107);
+- „wysokosprawna” kogeneracja w art. 26 EED;
+- próg SCOP;
+- podstawa pozwolenia wodnoprawnego (art. 389 Pw).
+
+Dodano art. 390 ust. 1 pkt 1 lit. b Pw (warunkowo), uzupełniono art. 7 ust. 6 EPBD i listę zmian Pe.
