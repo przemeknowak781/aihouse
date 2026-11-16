@@ -34,11 +34,15 @@ E_LIFT = 2.0
 E_OTHER = 1.0  # bistro (bez kuchni), pralnia, drobne
 
 # --- 4. PV (PVGIS 5.3, SARAH3, Wroclaw 51,112 N 17,045 E, straty 14 %) ---------------------
-PV = [  # (opis, kWp, kWh/kWp*rok po zacienieniu - wniosek)
-    ("dachy - BIPV/biosolar E-W 10 st. i dach dominanty", 240, 900),   # PVGIS: 893 (E/W 10), 983 (S 10)
-    ("dominanta - BIPV elewacje S/E/W powyzej ok. 25 m", 150, 600),    # PVGIS: 787 S, 532 E, 536 W (pion)
-    ("skrzydla - BIPV parapety/pasy od dziedzinca", 50, 450),          # zacienienie zabudowa
+PV_BASE = [  # (opis, kWp, kWh/kWp*rok po zacienieniu - wniosek)
+    ("dachy - BIPV jako pokrycie / biosolar E-W 10 st. (ok. 1700 m2 = ok. 74 % dachow)", 340, 900),  # PVGIS: 893 (E/W 10), 983 (S 10)
+    ("elewacje od dziedzinca <= 25 m - BIPV w pasach podokiennych (ok. 400 m2)", 60, 450),     # zacienienie wlasne i sasiadow
 ]
+PV_OPTION = [  # wariant warunkowy: wymaga potwierdzenia klasyfikacji ogniowej (WT par. 216 ust. 8) i interpretacji MPZP
+    ("dominanta > 25 m - BIPV w przeszkleniach/pasach szklanych S/E/W", 100, 600),  # PVGIS: 787 S, 532 E, 536 W (pion)
+]
+PV = PV_BASE + PV_OPTION
+INCLUDE_OPTION = False
 SELF_CONS = 0.80   # autokonsumpcja (profil dzienny biura + BESS + EV + magazyny ciepla/chlodu)
 
 W_EL = 2.5         # wsp. nakladu nieodnawialnej energii pierwotnej - energia elektryczna (Dz.U. 2023 poz. 697)
@@ -89,11 +93,15 @@ def main():
     print(f"  nieregulowane  {non_epb:6.1f}  (w tym serwerownia {server:.1f}) -> {non_epb*AF/1000:7.0f} MWh/rok")
     print(f"  RAZEM          {total:6.1f}  -> {total*AF/1000:7.0f} MWh/rok  | na PC: {total*AF/PC_TOTAL:5.1f} kWh/(m2 PC rok)")
 
-    pv_kwp = sum(p[1] for p in PV)
-    pv_mwh = sum(p[1] * p[2] for p in PV) / 1000
-    print(f"\n== PV: {pv_kwp} kWp = {pv_kwp/1000:.2f} MWp, produkcja {pv_mwh:.0f} MWh/rok")
-    for d, kwp, y in PV:
-        print(f"  {d:60s} {kwp:4d} kWp x {y:4d} = {kwp*y/1000:5.0f} MWh")
+    pv_set = PV if INCLUDE_OPTION else PV_BASE
+    for label, s in (("WARIANT PODSTAWOWY", PV_BASE), ("WARIANT Z OPCJA", PV)):
+        k = sum(p[1] for p in s); m = sum(p[1] * p[2] for p in s) / 1000
+        print(f"\n== PV {label}: {k} kWp = {k/1000:.2f} MWp, produkcja {m:.0f} MWh/rok")
+        for d, kwp, y in s:
+            print(f"  {d:66s} {kwp:4d} kWp x {y:4d} = {kwp*y/1000:5.0f} MWh")
+    pv_kwp = sum(p[1] for p in pv_set)
+    pv_mwh = sum(p[1] * p[2] for p in pv_set) / 1000
+    print(f"\n-- dalsze obliczenia dla: {'wariant z opcja' if INCLUDE_OPTION else 'wariant podstawowy'} ({pv_kwp} kWp)")
     self_c = pv_mwh * SELF_CONS
     print(f"  autokonsumpcja {SELF_CONS:.0%}: {self_c:.0f} MWh; eksport {pv_mwh-self_c:.0f} MWh")
     print(f"  PV / zapotrzebowanie EPB = {pv_mwh/(epb*AF/1000):.0%};  PV / calosc = {pv_mwh/(total*AF/1000):.0%}")
