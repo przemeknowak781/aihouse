@@ -155,7 +155,7 @@ Stawki „model” to wartości low / **mid** / high wpisane do `tools/koszty_mo
 | Długość odwiertów (ilość) | **14 400 mb** (np. 120 × 120 m) | M.12 wymaga analizy liczby i głębokości [O] | [Z]: do analizy energetycznej |
 | Instalacje: woda+kanal.+CO+wentylacja z odzyskiem+chłód | ≈ 1 200 zł/m² PC nadz. (mid; poz. 7.1–7.7) | brak | [Z] |
 | Instalacje elektryczne podstawowe / teletechnika | 520 / 345 zł/m² PC (mid) + pozycje kpl | brak | [Z] |
-| AV: sala Sejmiku (głosowanie imienne, transmisja, PJM, pętle indukcyjne) + centrum konferencyjne | 2,5 / **4,0** / 6,0 mln zł | przetargów nie znaleziono (limit wyszukiwań). Imienne głosowanie przez urządzenia jest obowiązkowe (ustawa o samorządzie województwa, art. 19 ust. 2 i 2a) | [Z] |
+| AV: sala Sejmiku (głosowanie imienne, transmisja, PJM, pętle indukcyjne) + centrum konferencyjne | 2,5 / **4,0** / 6,0 mln zł | przetargów nie znaleziono (limit wyszukiwań). Głosowania jawne na sesjach sejmiku odbywają się za pomocą urządzeń utrwalających imienny wykaz głosowań (ustawa o samorządzie województwa, rozdz. 3; lexlege.pl (s), numeru artykułu nie weryfikowano) | [Z] |
 | Sala Sejmiku: amfiteatr, stanowiska stałe, akustyka | 1,2 / **2,0** / 3,0 mln zł | brak | [Z] |
 | Dźwigi osobowe (budynek 35–45 m, w tym dla ekip ratowniczych) | 0,45 / **0,60** / 0,80 mln zł/szt. | brak | [Z] |
 | Nawierzchnie z kamienia naturalnego (płyty / kostka granitowa z podbudową) | 700 / **900** / 1 200 zł/m² | sama robocizna układania kostki granitowej śr. **171,32 zł/m² brutto** [W kb.pl / cenauslug.pl (s)]; płyty granitowe (materiał) 90–1 100 zł/m² [W kb.pl (s)] | [W] + [Z] |
