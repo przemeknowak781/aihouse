@@ -1,0 +1,146 @@
+Konkurs dwuetapowy, realizacyjny na opracowanie
+koncepcji architektoniczno – urbanistycznej
+budynku administracyjnego Urzędu
+Marszałkowskiego Województwa Dolnośląskiego
+we Wrocławiu
+
+
+
+
+M.12. Wytyczne dotyczące zero emisyjności budynku i proponowane
+systemowe rozwiązania proekologiczne
+
+
+
+
+informacja:
+Standard dostępności opracowane przez MSWIA dla jednostek samorządu terytorialnergo.
+https://www.gov.pl/web/mswia/standardy-dostepnosci-w-samorzadzie
+
+
+
+
+2025.10.29
+Załącznik M.09 - Wytyczne dotyczące zero emisyjności budynku i proponowane
+systemowe rozwiązania proekologiczne
+
+
+1. Zero emisyjność
+
+Budynek nowej siedziby Urzędu Marszałkowskiego Województwa Dolnośląskiego (UMWD) powinien
+być zaprojektowany jako budynek zeroemisyjny wykorzystujący odnawialne źródła energii. Niniejsza
+wytyczna jest wynikiem wymogu zero emisyjności budynków w państwach Unii Europejskiej, który
+będzie obowiązywał od 1 stycznia 2027 roku w przypadku wszystkich nowych budynków
+zajmowanych przez władze publiczne lub będących ich własnością.
+Przez zero emisyjność należy rozumieć stan, w którym budynek w całym cyklu użytkowania nie
+generuje emisji dwutlenku węgla związanych z eksploatacją. Oznacza to, że w obiekcie nie występują
+źródła spalania paliw kopalnych, a energia niezbędna do ogrzewania, chłodzenia, oświetlenia i
+funkcjonowania systemów technicznych pochodzi z odnawialnych źródeł energii (OZE) wytwarzanych
+lokalnie lub w pobliżu. Podstawowe zasady zero emisyjności obejmują:
+         bardzo niskie zapotrzebowanie na energię dzięki wysokiej efektywności energetycznej
+          budynku,
+         wykorzystanie OZE (fotowoltaika, pompy ciepła, magazyny energii),
+         brak lokalnych emisji CO₂ – żadnych kotłów gazowych czy olejowych,
+         bilansowanie energii – ilość energii wyprodukowanej z OZE równoważy roczne zużycie
+          energii w budynku,
+         pełną integrację z systemami zarządzania energią (BMS/EMS) oraz możliwością pracy w
+          trybie samowystarczalnym.
+
+Zero emisyjność wpisuje się w cele dyrektywy EPBD Recast i pakietu Fit for 55, a także w unijną
+Taksonomię działań zrównoważonych, która definiuje budynki o zerowej emisji jako kluczowy
+element transformacji energetycznej.
+
+W ramach projektu należy zaprojektować:
+
+   A. Gruntowe pompy ciepła – główne źródło ciepła i chłodu dla budynku. Wykorzystują energię
+      geotermalną zgromadzoną w gruncie. Charakteryzują się wysoką sprawnością i możliwością
+      pracy w trybie rewersyjnym, zapewniając zarówno ogrzewanie, jak i chłodzenie. Należy
+      wykonać analizę określającą ilość koniecznych do wykonania odwiertów, ich głębokość oraz
+      łączną długość aktywną wymienników.
+      Uwaga – możliwe jest zlokalizowanie odwiertów pod projektowanym budynkiem.
+
+   B. Instalacja fotowoltaiczna (PV) – system paneli o mocy 0,4–1,0 MWp, montowanych na
+      dachu dominanty i elewacjach
+
+   C. Magazyny ciepła i chłodu – system buforowania energii cieplnej, który stabilizuje pracę
+      pomp ciepła i zwiększa efektywność całego układu. Umożliwia sezonowe gromadzenie energii.
+      Funkcja: stabilizacja pracy sprężarek, redukcja liczby startów, ograniczenie mocy szczytowej.
+
+         Magazyn krótkoterminowy - zbiorniki buforowe (woda) zlokalizowane w wydzielonych
+          pomieszczeniach technicznych projektowanego budynku,
+         Magazyn sezonowy - magazyn długoterminowy, ładowany nadmiarem energii latem
+          (chłód) i oddający ciepło zimą.
+
+   D. Magazyn energii elektrycznej – należy przewidzieć możliwość magazynowania energii
+      elektrycznej wytwarzanej w instalacji fotowoltaicznej
+
+
+
+                                                                                                 1
+Załącznik M.09 - Wytyczne dotyczące zero emisyjności budynku i proponowane
+systemowe rozwiązania proekologiczne
+
+
+   E. Sieć ciepłownicza – może pełnić jedynie funkcję rezerwową i szczytową, aktywowaną w
+      przypadku ekstremalnych warunków lub awarii systemu gruntowych pomp ciepła. Ogranicza
+      ryzyko przerw w dostawie ciepła przy zachowaniu zeroemisyjnego charakteru obiektu.
+
+  Należy uwzględnić kwestie akumulacji cieplnej konstrukcji i zysków cieplnych pomieszczeń oraz
+  rozważyć dobór optymalnych technicznie i ekonomicznie technologii, z preferencją dla rozwiązań
+  pasywnych.
+  Proponowane rozwiązania powinny być sprawdzone i optymalne technicznie oraz pod względem
+  kosztów użytkowania.
+
+2. Systemowe rozwiązania proekologiczne
+
+  A. Zaopatrzenie w wodę
+
+  Budynek będzie zasilany wyłącznie z sieci miejskiej – nie przewiduje się własnego ujęcia
+  wody. Projekt powinien uwzględniać maksymalną redukcję poboru wody wodociągowej poprzez
+  zastosowanie systemów retencji i ponownego wykorzystania wody opadowej oraz szarej.
+
+  B. Retencjonowanie wód opadowych
+
+  W ramach projektu należy:
+         zaprojektować system retencjonowania i podczyszczania wód opadowych pochodzących z
+          dachów oraz terenów utwardzonych.
+         przewidzieć zbiorniki retencyjne, zlokalizowane na terenie zewnętrznym.
+         wykorzystać wody opadowe do:
+             o   podlewania terenów zielonych wokół budynku,
+             o   nawadniania dachu zielonego, o ile zostanie przewidziany w projekcie
+             o   mycia nawierzchni utwardzonych.
+             o   spłukiwania toalet po ich uprzednim podczyszczeniu
+         zaprojektować system przelewu awaryjnego do sieci miejskiej w przypadku przepełnienia
+          zbiorników.
+
+  C. Wykorzystanie wody szarej
+
+  Należy zaprojektować rozdział kanalizacji sanitarnej na:
+         ścieki czarne (miski ustępowe, pisuary) – odprowadzane bezpośrednio do kanalizacji
+          miejskiej,
+         ścieki szare (umywalki, prysznice, zmywarki, itp.) – kierowane do układu podczyszczania.
+          Po podczyszczeniu woda szara ma być wykorzystywana do spłukiwania WC.
+
+  Zabronione jest łączenie instalacji wody pitnej i szarej.
+
+  D. Odzysk energii cieplnej z wody szarej
+
+  W ramach projektu należy:
+         przeprowadzić analizę możliwości odzysku ciepła z wody szarej,
+         rozważyć zastosowanie wymiennikowni ciepła i integrację z:
+             o   systemem podgrzewu CWU,
+             o   instalacją wentylacji,
+             o   pompami ciepła.
+                                                                                                 2
+Załącznik M.09 - Wytyczne dotyczące zero emisyjności budynku i proponowane
+systemowe rozwiązania proekologiczne
+
+
+     Analiza powinna uwzględniać aspekt ekonomiczny i potencjalne oszczędności kosztów
+     eksploatacyjnych.
+
+
+
+
+                                                                                     3
+

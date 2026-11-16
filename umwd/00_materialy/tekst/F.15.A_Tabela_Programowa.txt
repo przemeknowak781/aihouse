@@ -1,0 +1,221 @@
+               KONKURS DWUETAPOWY, REALIZACYJNY NA OPRACOWANIE KONCEPCJI ARCHITEKTONICZNO - URBANISTYCZNEJ
+             BUDYNKU ADMINISTRACYJNEGO URZĘDU MARSZAŁKOWSKIEGO WOJEWÓDZTWA DOLNOŚLĄSKIEGO WE WROCŁAWIU
+
+
+                                                     TABELA PROGRAMOWA
+                                                                            Załącznik nr F.15.A do Regulaminu Konkursu
+
+        nr                                           opis                             kond.           pow. [m2]
+
+Strefa Wejściowa - hol
+SW.01
+SW.02
+SW.03
+SW….
+       …*     Inne np. komunikacja, sanitariaty (wymienić)
+Razem - Strefa wejściowa (SW)
+
+Strefa konferencyjna
+SK.01
+SK.02
+SK.03
+SK….
+       …*     Inne np. komunikacja, sanitariaty (wymienić)
+Razem - Strefa konferencyjna (SK)
+
+Sejmik Województwa Dolnośląskiego
+SWD.01
+SWD.02
+SWD.03
+SWD….
+       …*     Inne np. komunikacja, sanitariaty (wymienić)
+Razem - Sejmik Województwa Dolnośląskiego (SWD)
+
+Kancelaria Sejmiku
+KS.01
+KS.02
+KS.03
+KS….
+       …*     Inne np. komunikacja, sanitariaty (wymienić)
+Razem - Kancelaria Sejmiku (KS)
+
+Departament Ochrony Środowiska (wraz z komórkami organizacyjnymi oznaczonymi w załączniku programu użytkowego cyfrą
+2)
+DOS.01
+DOS.02
+DOS.03
+DOS….
+       …*     Inne np. komunikacja, sanitariaty (wymienić)
+Razem - Departament Ochrony Środowiska (DOS)
+
+Departament Spraw Społecznych i Rynku Pracy (wraz z komórkami organizacyjnymi oznaczonymi w załączniku programu
+użytkowego cyfrą 3)
+DSS.01
+DSS.02
+DSS.03
+DSS….
+            KONKURS DWUETAPOWY, REALIZACYJNY NA OPRACOWANIE KONCEPCJI ARCHITEKTONICZNO - URBANISTYCZNEJ
+          BUDYNKU ADMINISTRACYJNEGO URZĘDU MARSZAŁKOWSKIEGO WOJEWÓDZTWA DOLNOŚLĄSKIEGO WE WROCŁAWIU
+
+
+                                                   TABELA PROGRAMOWA
+                                                                              Załącznik nr F.15.A do Regulaminu Konkursu
+
+    nr                                             opis                                 kond.           pow. [m2]
+    …*      Inne np. komunikacja, sanitariaty (wymienić)
+Razem - Departament Spraw Społecznych i Rynku Pracy (DSS)
+
+
+Departament Sportu i Turystyki (wraz z komórkami organizacyjnymi oznaczonymi w załączniku programu użytkowego cyfrą 4)
+DST.01
+DST.02
+DST.03
+DST….
+    …*      Inne np. komunikacja, sanitariaty (wymienić)
+Razem - Departament Sportu i Turystyki (DST)
+
+Departament Rozwoju Aglomeracji (wraz z komórkami organizacyjnymi oznaczonymi w załączniku programu użytkowego cyfrą
+5)
+DRA.01
+DRA.02
+DRA.03
+DRA….
+    …*      Inne np. komunikacja, sanitariaty (wymienić)
+Razem - Departament Rozwoju Aglomeracji (DRA)
+
+Departament Gospodarki i Promocji (wraz z komórkami organizacyjnymi oznaczonymi w załączniku do programu użytkowego
+cyfrą 6)
+DGP.01
+DGP.02
+DGP.03
+DGP….
+    …*      Inne np. komunikacja, sanitariaty (wymienić)
+Razem - Departament Gospodarki i Promocji (DGP)
+
+
+Departament Infrastruktury (wraz z komórkami organizacyjnymi oznaczonymi w załączniku programu użytkowego cyfrą 7)
+DI.01
+DI.02
+DI.03
+DI….
+    …*      Inne np. komunikacja, sanitariaty (wymienić)
+Razem - Departament Infrastruktury (DI)
+
+
+Członek Zarzadu (oznaczony w załącziku programu użytkowego cyfrą 8)
+CZ.01
+CZ.02
+CZ.03
+CZ….
+    …*      Inne np. komunikacja, sanitariaty (wymienić)
+Razem - Członek Zarzadu (CZ)
+               KONKURS DWUETAPOWY, REALIZACYJNY NA OPRACOWANIE KONCEPCJI ARCHITEKTONICZNO - URBANISTYCZNEJ
+             BUDYNKU ADMINISTRACYJNEGO URZĘDU MARSZAŁKOWSKIEGO WOJEWÓDZTWA DOLNOŚLĄSKIEGO WE WROCŁAWIU
+
+
+                                                     TABELA PROGRAMOWA
+                                                                              Załącznik nr F.15.A do Regulaminu Konkursu
+
+     nr                                       opis                                     kond.            pow. [m2]
+Departament Kultury i Dziedzictwa Kulturowego (wraz z komórkami organizacyjnymi oznaczonymi w załączniku programu
+użytkowego cyfrą 8.1)
+DKD.01
+DKD.02
+DKD.03
+DKD….
+    …*        Inne np. komunikacja, sanitariaty (wymienić)
+Razem - Departament Kultury i Dziedzictwa Kulturowego
+
+
+Department Zdrowia (wraz z komórkami organizacyjnymi oznaczonymi w załączniku programu użytkowego cyfrą 8.2)
+DZ.01
+DZ.02
+DZ.03
+DZ….
+    …*        Inne np. komunikacja, sanitariaty (wymienić)
+Razem - Department Zdrowia (DZ)
+
+Geodeta Województwa - Wydział Geodezji i Kartografii (wraz z komórkami organizacyjnymi oznaczonymi w załączniku
+programu użytkowego cyfrą 9)
+GW.01
+GW.02
+GW.03
+GW….
+    …*        Inne np. komunikacja, sanitariaty (wymienić)
+Razem - Geodeta Województwa - Wydział Geodezji i Kartografii (GW)
+
+
+Dział Kancelaryjny II
+DK.01
+DK.02
+DK.03
+DK….
+    …*        Inne np. komunikacja, sanitariaty (wymienić)
+Razem - Dział Kancelaryjny II (DK)
+
+
+Dział Wsparcia Informatycznego II
+DW.01
+DW.02
+DW.03
+DW….
+    …*        Inne np. komunikacja, sanitariaty (wymienić)
+Razem - Dział Wsparcia Informatycznego II (DW)
+
+Sale narad
+SN.01
+SN.02
+SN.03
+SN….
+             KONKURS DWUETAPOWY, REALIZACYJNY NA OPRACOWANIE KONCEPCJI ARCHITEKTONICZNO - URBANISTYCZNEJ
+           BUDYNKU ADMINISTRACYJNEGO URZĘDU MARSZAŁKOWSKIEGO WOJEWÓDZTWA DOLNOŚLĄSKIEGO WE WROCŁAWIU
+
+
+                                                TABELA PROGRAMOWA
+                                                                           Załącznik nr F.15.A do Regulaminu Konkursu
+
+    nr                                          opis                                kond.            pow. [m2]
+Razem - Sale narad (SN)
+
+Pomieszczenia socjalne
+PS.01
+PS.02
+PS.03
+PS….
+Razem - Pomieszczenia socjalne (PS)
+
+Pomieszczenia pomocnicze
+PP.01
+PP.02
+PP.03
+PP….
+Razem - Pomieszczenia pomocnicze (PP)
+
+Pomieszczenia dla pracowników technicznych
+PPT.01
+PPT.02
+PPT.03
+PPT….
+Razem - Pomieszczenia dla pracowników technicznych (PPT)
+
+Infrastruktura techniczna (w tym serwerownia)
+IT.01
+IT.02
+IT.03
+IT….
+Razem - Infrastruktura techniczna (IT)
+
+Parking dla rowerów
+PR.01
+PR.02
+PR.03
+PR….
+Razem - Parking dla rowerów
+
+Parking podziemny pełniący funkcję miejsca doraźnego schronienia
+PPM.01
+PPM.02
+PPM.03
+PPM….
+Razem - Parking podziemny pełniący funkcję miejsca doraźnego schronienia
+

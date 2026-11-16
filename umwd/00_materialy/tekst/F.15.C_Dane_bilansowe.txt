@@ -1,0 +1,46 @@
+            KONKURS DWUETAPOWY, REALIZACYJNY NA OPRACOWANIE KONCEPCJI ARCHITEKTONICZNO - URBANISTYCZNEJ
+          BUDYNKU ADMINISTRACYJNEGO URZĘDU MARSZAŁKOWSKIEGO WOJEWÓDZTWA DOLNOŚLĄSKIEGO WE WROCŁAWIU
+
+
+                                                        DANE BILANSOWE
+                                                                                     Załącznik nr F.15.C do Regulaminu Konkursu
+
+    nr                                                          opis                                                pow. [m2]
+BILANS TERENU
+    1       powierzchnia zabudowy
+   1.1       - w tym powierzchnia zabudowy projektowana
+   1.2       - w tym powierzchnia zabudowy istniejąca
+    2       powierzchnia utwardzona
+   2.1       - w tym drogi istniejące bez zmian
+   2.2       - w tym drogi wewnętrzne
+   2.3       - w tym miejsca parkingowe
+   2.4       - w tym place
+   2.5       - w tym chodniki
+   2.6      - w tym inne powierzchnie utwardzone (określić)
+    3       powierzchnia biologicznie czynna
+   3.1       - w tym powierzchnia biologicznie czynna istniejąca bez zmian
+   3.2       - w tym powierzchnia biologicznie czynna istniejąca do rekompozycji / zmiany
+   3.3       - w tym powierzchnia biologicznie czynna projektowana na dachach / tarasach
+   …*       inne (określić)
+RAZEM TEREN OPRACOWANIA                                                                                               XXXX
+
+   nr                                                    opis                                           jednostka      ilość
+PODSTAWOWE PARAMETRY
+    I.1     powierzchnia zabudowy budynku administracyjnego UMWD                                          [m2]
+    I.2     powierzchnia całkowita wszystkich kondygnacji (nadziemnych i podziemnych)                     [m2]
+    I.3     powierzchnia całkowita kondygnacji nadziemnych                                                [m2]
+    I.4     powierzchnia całkowita kondygnacji podziemnych                                                [m2]
+    I.5     liczba kondygnacji podziemnych
+    I.6     liczba kondygnacji nadziemnych
+    I.7     wysokość                                                                                       [m]
+    I.8     kubatura brutto                                                                               [m3]
+    I.9     kubatura nadziemna brutto
+   I.10     kubatura podziemna brutto                                                                     [m3]
+   I.11     liczba dźwigów osobowych w budynku
+   I.12     powierzchnia użytkowa                                                                         [m2]
+   I.13     powierzchnia dachów zielonych                                                                 [m2]
+
+
+* W przypadku zaproponowania pomieszczeń lub elementów zagospodarowania wynikających z przedstawionej koncepcji Uczestnik
+konkursu powinien dodać do tabeli te pozycje.
+

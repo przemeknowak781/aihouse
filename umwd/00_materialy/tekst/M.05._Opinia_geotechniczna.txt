@@ -1,0 +1,632 @@
+Konkurs dwuetapowy, realizacyjny na opracowanie
+koncepcji architektoniczno – urbanistycznej
+budynku administracyjnego Urzędu
+Marszałkowskiego Województwa Dolnośląskiego
+we Wrocławiu
+
+
+
+
+M.05. Opinia geotechniczna wraz z dokumentacją badań podłoża
+gruntowego
+
+
+
+
+załączniki:
+Zał. nr 1 Mapa lokalizacyjna w skali 1:50 000
+Zał. nr 2 Mapa dokumentacyjna w skali 1:500
+Zał. nr 3.1-3.2 Wycinek Szczegółowej Mapy Geologicznej Polski w skali 1:50 000 z objaśnieniami
+(ark. 764 – Wrocław)
+Zał. nr 4.1.1 – 4.2.2 Wycinek Mapy Hydrogeologicznej Polski (GUPW i PPW WiH) w skali 1:50 000 z
+objaśnieniami (ark. 764 – Wrocław)
+Zał. nr 5.1-5.9 Karty otworów geotechnicznych
+Zał. nr 6.1-6.4 Karty sondowań statycznych CPTu
+Zał. nr 7.1-7.7 Przekroje geotechniczne
+Zał. nr 8 Tabela parametrów fizyko-mechanicznych
+Zał. nr 9 Objaśnienia znaków i symboli
+
+
+2025.10.29
+                                                                                                                                                            Członek rzeczywisty
+                                                                                                                                                           Klubu POLLAB nr 1095
+
+
+
+
+                            OPINIA                                  GEOTECHNICZNA
+                                                                                 wraz z
+
+               DOKUMENTACJĄ BADAŃ PODŁOŻA GRUNTOWEGO
+                   dla zadania pn. „Wykonanie wstępnych badań geotechnicznych na potrzeby
+                   ustalenia warunków technicznych posadowienia dla obiektu nowej siedziby
+                                              Urzędu Marszałkowskiego we Wrocławiu”
+
+
+
+
+              opracował:
+
+              inż. Adrian Mordal
+
+              upr. geol. nr XIII-399DOL
+
+
+
+
+              sprawdził:
+
+              mgr inż. Jarosław Borowiec
+              upr. geol. nr VII-1462
+
+
+
+
+                                                                    Wrocław, wrzesień 2025 r.
+
+
+
+INŻ-GEO Badania i Roboty Geotechniczne    Dział Geologiczno-Dokumentacyjny       Laboratorium Budowlane    Dział Sprzedaży, Marketingu i Obsługi Klienta
+Sp. z o.o. Sp.k.                          +48 785 555 258 | geologia@inzgeo.pl   +48 609 233 083 |         +48 667 890 700 | oferty@inzgeo.pl,                    www.inzgeo.pl
+ul. Kwidzyńska 71, 51-415 Wrocław                                                laboratoriuma@inzgeo.pl   umowy@inzgeo.pl
+                        Opinia Geotechniczna wraz z Dokumentacją Badań Podłoża Gruntowego
+      dla zadania pn. „Wykonanie wstępnych badań geotechnicznych na potrzeby ustalenia warunków technicznych
+                   posadowienia dla obiektu nowej siedziby Urzędu Marszałkowskiego we Wrocławiu”
+_____________________________________________________________________________________________________
+
+
+
+
+                                                        Spis Treści
+
+
+1.   Wstęp.............................................................................................................................................. 3
+2.   Cel prac badawczych....................................................................................................................... 4
+3.   Lokalizacja i opis terenu prac badawczych ..................................................................................... 4
+4.   Zakres wykonywanych prac geologicznych .................................................................................... 4
+5.   Budowa geologiczna ....................................................................................................................... 6
+6.   Warunki hydrogeologiczne ............................................................................................................. 6
+7.   Geotechniczna charakterystyka gruntów ....................................................................................... 7
+8.   Wnioski ......................................................................................................................................... 11
+
+
+
+
+                                             Spis Załączników
+
+
+Zał. nr 1                                    Mapa lokalizacyjna w skali 1:50 000
+Zał. nr 2                                    Mapa dokumentacyjna w skali 1:500
+Zał. nr 3.1-3.2                              Wycinek Szczegółowej Mapy Geologicznej Polski
+                                             w skali 1:50 000 z objaśnieniami (ark. 764 –
+                                             Wrocław)
+Zał. nr 4.1.1 – 4.2.2                        Wycinek Mapy Hydrogeologicznej Polski (GUPW
+                                             i PPW WiH) w skali 1:50 000 z objaśnieniami (ark.
+                                             764 – Wrocław)
+Zał. nr 5.1-5.9                              Karty otworów geotechnicznych
+Zał. nr 6.1-6.4                              Karty sondowań statycznych CPTu
+Zał. nr 7.1-7.7                              Przekroje geotechniczne
+Zał. nr 8                                    Tabela parametrów fizyko-mechanicznych
+Zał. nr 9                                    Objaśnienia znaków i symboli
+
+
+
+
+                                                                                                                                         Strona 2 z 13
+                        Opinia Geotechniczna wraz z Dokumentacją Badań Podłoża Gruntowego
+      dla zadania pn. „Wykonanie wstępnych badań geotechnicznych na potrzeby ustalenia warunków technicznych
+                   posadowienia dla obiektu nowej siedziby Urzędu Marszałkowskiego we Wrocławiu”
+_____________________________________________________________________________________________________
+    1. Wstęp
+
+          Niniejsza      Opinia      Geotechniczna         została     sporządzona         przez     firmę
+INŻ-GEO Badania i Roboty Geotechniczne Sp. z o.o. Sp. K. (ul. Zatorska 46,
+52-215 Wrocław) na zlecenie firmy Inwestycje Dolnośląskie Sp. z o.o. (ul. Igielna
+13, 50-117 Wrocław).
+
+
+W opracowaniu wykorzystano:
+    ✓ Rozporządzenie Ministra Transportu, Budownictwa i Gospodarki Morskiej
+        z dn.    25-04-2012,         w    sprawie      ustalenia      geotechnicznych         warunków
+        posadowienia obiektów budowlanych (Dz.U. z 2012 r. Nr 243, poz.463),
+    ✓ Normy:
+    -   PN-B-20480:1986 Grunty budowlane - określenia, symbol, podział i opis
+        gruntów;
+    -   PN-B-03020:         1981     Grunty      budowlane        -   Posadowienie        bezpośrednie
+        budynków;
+    -   PN-B-04452: Grunty budowlane – badania polowe;
+    -   PN-B-02481: 1998 Geotechnika – Terminologia podstawowa, symbole
+        i literowe jednostki;
+    -   PN-EN 1997-1: Eurokod 7: Projektowanie geotechniczne – część 1: zasady
+        ogólne;
+    -   PN-EN 1997-2: Eurokod 7: Projektowanie geotechniczne – część 2:
+        rozpoznanie i badanie warunków podłoża gruntowego;
+    -   PN-EN ISO 14688-1:2018-05: Rozpoznanie i badania geotechniczne –
+        Oznaczanie i klasyfikacja gruntów – Część 1: Oznaczanie i opis;
+    -   PN-EN ISO 22476-2:2005/A1:2012: Rozpoznanie i badania geotechniczne.
+        Badania Polowe. Część 2: Sondowanie dynamiczne,
+    ✓ Kondracki J., 2000, Geografia regionalna Polski, PWN, Warszawa,
+    ✓ Mapy tematyczne:
+    -   Winnicka G., Badura J., Ciszek D., 2013, Szczegółowa Mapa Geologiczna
+        Polski, Arkusz: Wrocław (764), PIG-PIB, Warszawa,
+    -   Żuk U., 2000, Mapa Hydrogeologiczna Polski, Arkusz: Wrocław (764), PIG,
+        Warszawa
+    -   Chudzik L., Wojtkowiak A., 2006, Mapa Hydrogeologiczna Polski, Pierwszy
+        Poziom Wodonośny, Występowanie i Hydrodynamika, Arkusz Wrocław
+        (764), PIG-PIB, Warszawa.
+
+
+
+                                                                                                Strona 3 z 13
+                        Opinia Geotechniczna wraz z Dokumentacją Badań Podłoża Gruntowego
+      dla zadania pn. „Wykonanie wstępnych badań geotechnicznych na potrzeby ustalenia warunków technicznych
+                   posadowienia dla obiektu nowej siedziby Urzędu Marszałkowskiego we Wrocławiu”
+_____________________________________________________________________________________________________
+    2. Cel prac badawczych
+        Celem prac badawczych było rozpoznania warunków gruntowo-wodnych
+podłoża działek nr 9/1, 10/3, 11/6 oraz 19/11 (AR_2, obręb Południe),
+ograniczonych ulicą Mazowiecką oraz Wyrzeże Słowackiego we Wrocławiu.
+Planowana inwestycja na przedmiotowych działkach zakłada budowę zespołu
+budynków administracji publicznej (siedziba Urzędu Marszałkowskiego). Zgodnie
+z Rozporządzeniem Ministra Transportu, Budownictwa i Gospodarki Morskiej z dn.
+25-04-2012, w sprawie ustalenia geotechnicznych warunków posadowienia
+obiektów budowlanych, inwestycje wstępnie zalicza się do drugiej kategorii
+geotechnicznej. Rozpoznana budowa geologiczna stanowi wstępne rozpoznanie
+warunków gruntowo-wodnych panujących w rejonie projektowanej inwestycji na
+potrzeby ustalenia warunków technicznych posadowienia obiektu budowlanego.
+Ostatecznej kategoryzacji obiektu dokona projektant.
+
+
+    3. Lokalizacja i opis terenu prac badawczych
+
+        Obszar badań zlokalizowany jest na działkach o numerach ewidencyjnych
+9/1, 10/3, 11/6 oraz 19/11 (AR_2, obręb Południe), ograniczonych ulicą
+Mazowiecką oraz Wybrzeże Słowackiego na terenie miasta Wrocław (gmina
+Wrocław, powiat wrocławski). Pod względem fizycznogeograficznym obszar
+badań znajduje się na terenie:
+    •   Megaregion: Pozaalpejska Europa Środkowa,
+    •   Prowincja: Niż Środkowoeuropejski,
+    •   Podprowincja: Niziny Środkowopolskie,
+    •   Makroregion: Nizina Śląska,
+    •   Mezoregion: Pradolina Wrocławska.
+        Obszar badań nie jest zróżnicowany pod względem morfologicznym. Teren
+jest przeważnie płaski. Różnica rzędnych wykonanych otworów geotechnicznych
+wynosi 0,77 m (118,67 – 119,44 m n.p.m.).
+
+
+    4. Zakres wykonywanych prac geologicznych
+
+        Prace geodezyjne
+        Prace geodezyjne obejmowały m. in. wytyczenie w terenie lokalizacji
+otworów/sondowań            (zgodnie       z    ich    lokalizacją      na     planach      sytuacyjno-
+wysokościowych)          oraz     określenie       rzędnych       wysokościowych           wytyczonych
+
+
+
+
+                                                                                                Strona 4 z 13
+                        Opinia Geotechniczna wraz z Dokumentacją Badań Podłoża Gruntowego
+      dla zadania pn. „Wykonanie wstępnych badań geotechnicznych na potrzeby ustalenia warunków technicznych
+                   posadowienia dla obiektu nowej siedziby Urzędu Marszałkowskiego we Wrocławiu”
+_____________________________________________________________________________________________________
+otworów/sondowań,              przy      wykorzystaniu           nawigacji         satelitarnej        GPS
+z odbiornikiem Trimble HD-GNSS.
+
+
+        Prace terenowe
+        Prace     terenowe       obejmowały         oznaczenie      miejsc      wykonania       otworów
+geotechnicznych          wskazanych         przez     Zamawiającego.           Lokalizację       otworów
+geotechnicznych wraz z przebiegiem przekrojów geotechnicznych zaznaczono na
+mapie dokumentacyjnej (załącznik nr 2).
+
+
+        Roboty geotechniczne obejmowały wykonanie:
+- 4 otworów geotechnicznych do głębokości 30,0                       m p.p.t. o łącznym metrażu
+120,0 mb; wiercenia przeprowadzono urządzeniem typu WGB-B Staltechnika,
+systemem mechaniczno-obrotowym w dniach 01-03.09.2025 r.;
+- 5 otworów geotechnicznych do głębokości 15,0 m p.p.t. o łącznym metrażu
+75,0     mb; wiercenia przeprowadzono urządzeniem typu WGB-B Staltechnika,
+systemem mechaniczno-obrotowym w dniach 01.09.2025 oraz 03.09.2025 r.;
+- 4 sondowań statycznych CPTu do głębokości 3,4 – 15,0 m p.p.t., o łącznym
+metrażu      36,4     mb.      Sondowania         wykonano        sondą      Geotech-220         w    dniu
+25.08.2025 r.
+
+
+        Badania polowe
+        Badania polowe obejmowały obserwację urobku w miarę postępu wierceń
+oraz obserwację i pomiar poziomu zwierciadła wód podziemnych. Badania
+makroskopowe (odnośnie składu, genezy oraz stanu gruntu) prowadzono przy
+każdej zmianie rodzaju i stanu gruntu lub co 1,0 m w wypadku jednorodności.
+Pobrane próbki gruntu o naturalnym uziarnieniu i naturalnej wilgotności
+sklasyfikowano zgodnie z normami PN-EN ISO 14688-1,2, PN-86/B-02480:1986
+i PN-B-02481:1998. Po zakończeniu prac wiertniczych otwory geotechniczne
+zlikwidowano poprzez zasypanie urobkiem z zachowaniem następstwa warstw.
+
+
+        Prace kameralne
+        Na    podstawie       przeprowadzonych            prac    opracowano         niniejszą       Opinię
+Geotechniczną wraz z Dokumentacją Badań Podłoża Gruntowego składającą się
+z części opisowej oraz graficznej obejmującej wykonanie opisu rozpoznanych
+warunków gruntowo-wodnych podłoża inwestycji wraz z wnioskami dotyczącymi
+
+
+
+
+                                                                                                Strona 5 z 13
+                        Opinia Geotechniczna wraz z Dokumentacją Badań Podłoża Gruntowego
+      dla zadania pn. „Wykonanie wstępnych badań geotechnicznych na potrzeby ustalenia warunków technicznych
+                   posadowienia dla obiektu nowej siedziby Urzędu Marszałkowskiego we Wrocławiu”
+_____________________________________________________________________________________________________
+posadowienia        przedmiotowego           obiektu      budowlanego,           mapy     lokalizacyjnej
+(załącznik nr 1), mapy dokumentacyjnej (załącznik nr 2), mapy geologicznej
+wraz z objaśnieniami (załączniki nr 3.1-3.2), map hydrogeologicznych wraz
+z objaśnieniami (załączniki 4.1.1 – 4.2.2) kart otworów geotechnicznych
+(załączniki nr 5.1-5.9), kart sondowań statycznych CPTu (załączniki nr 6.1-6.4),
+przekrojów geotechnicznych (załączniki nr 7.1 – 7.7) oraz tabeli parametrów
+fizyko-mechanicznych gruntów (załącznik nr 8).
+
+
+    5. Budowa geologiczna
+
+        Budowa geologiczna omawianego obszaru została rozpoznana punktowo
+9 otworami geotechnicznymi do głębokości 15,0 – 30,0 m p.p.t. (wykonanymi
+w dniach 01.09.2025 – 03.09.2025 r. przez firmę INŻ-GEO Badania i Roboty
+Geotechniczne Sp. z o.o. Sp. K.).
+        W stropie profilu do głębokości 2,80 – 3,80 m p.p.t. stwierdzono
+występowanie warstwy nasypów (niebudowlanych) o zróżnicowanym składzie,
+zbudowanych z mieszaniny gruntów naturalnych (piasek średni, piasek drobny,
+piasek gliniasty),        materiałów pochodzenia antropogenicznego (gruz ceglany)
+oraz humusu i namułów gliniastych.
+        Zalegające        poniżej      nasypów        rodzime       podłoże       mineralne        budują
+czwartorzędowe, holoceńskie osady rzeczne tarasów zalewowych w postaci
+piasków drobnoziarnistych i średnioziarnistych, występujące do głębokości 6,50 –
+8,60 m p.p.t. Poniżej osadów holoceńskich rozpoznano utwory plejstoceńskie –
+piaski i żwiry rzeczne tarasów nadzalewowych (pospółki, żwiry, piaski średnie),
+zalegające na glinach zwałowych (gliny piaszczyste z domieszkami żwiru). Do
+głębokości       rozpoznania        (30,0     m     p.p.t.)    osadów       czwartorzędowych            nie
+przewiercono.
+        Profil    nawierconych          utworów        zilustrowano         na     kartach      otworów
+geotechnicznych (załączniki nr 5.1-5.9) oraz na przekrojach geotechnicznych
+(załączniki nr 7.1-7.7).
+
+
+    6. Warunki hydrogeologiczne
+
+        Warunki hydrogeologiczne powiązane są bezpośrednio z litologią utworów
+geologicznych         tworzących         podłoże       gruntowe        oraz      ich     usytuowaniem
+geomorfologicznym. Na przedmiotowym obszarze badań zaobserwowano poziom
+zwierciadła wód podziemnych o charakterze swobodnym oraz incydentalnie
+
+
+
+
+                                                                                                Strona 6 z 13
+                        Opinia Geotechniczna wraz z Dokumentacją Badań Podłoża Gruntowego
+      dla zadania pn. „Wykonanie wstępnych badań geotechnicznych na potrzeby ustalenia warunków technicznych
+                   posadowienia dla obiektu nowej siedziby Urzędu Marszałkowskiego we Wrocławiu”
+_____________________________________________________________________________________________________
+(otwór O-01) naporowym. W poniższej tabeli zestawiono głębokości i rzędne
+występowania wody podziemnej oraz rzędne i głębokości jej stabilizacji.
+Tabela 1. Wyniki pomiaru zwierciadła wód podziemnych (stan na 01-03.09.2025 r.)
+
+              Głębokości i rzędne zwierciadła wody podziemnej (stan na 01 - 03.09.2025 r.)
+                  Rzędna
+   Nr                              Nawiercony Ustabilizowany Nawiercony Ustabilizowany                    warstwa
+                  otworu
+ otworu                                                                                                  wodonośna
+                [m n.p.m.]                   [m p.p.t.]                           [m n.p.m.]
+                                      3,70                              115,74                                Ps
+   O-01             119,44                             3,70                               115,74
+                                     16,50                              102,94                                Po
+   O-02             119,30            3,80             3,80             115,50            115,50            Pd/Ps
+   O-03             118,93            3,60             3,60             115,33            115,33              Ps
+   O-04             119,15            3,20             3,20             115,95            115,95              Ps
+   O-05             119,22            3,70             3,70             115,52            115,52              Ps
+   O-06             118,98            3,70             3,70             115,28            115,28              Ps
+   O-07             118,84            3,40             3,40             115,44            115,44              Ps
+   O-08             118,67            3,60             3,60             115,07            115,07              Ps
+   O-09             118,82            3,40             3,40             115,42            115,42         N(Ps, Ceg.,H)
+
+
+
+          Poziom wody podziemnej pomierzony w dniu badań należy uznać za
+średni. Możliwe są jego wahania w amplitudzie około +/- 0,50 m.
+
+
+          Zgodnie z danymi udostępnionymi przez Państwowy Instytut Geologiczny
+(PIG), obszar badań znajduje się w granicach strefy narażonej na podtopienia od
+wód gruntowych. Na podstawie danych udostępnionych przez Hydroportal
+(wody.isok.gov.pl) przedmiotowe działki znajdują się na obszarze narażonym na
+niebezpieczeństwo powodzi (rzeczne).
+
+      7. Geotechniczna charakterystyka gruntów
+
+          Podłoże gruntowe rozpoznano do głębokości maksymalnej 30,0 m p.p.t.
+Grunty rodzime oraz nasypowe (korelacja z gruntem rodzimym) sklasyfikowano
+zgodnie         z       normą          PN-EN          ISO        14688-1,2,             PN-86/B-02480:1986
+i PN-B-02481:1998.
+
+          Za cechę wiodącą dla gruntów niespoistych przyjęto stopień zagęszczenia
+ID,    natomiast        dla       gruntów     spoistych,        stopień        plastyczności       IL.    Wartości
+parametrów wiodących przedstawiono dla każdej warstwy przyjmując wynik
+uśredniony.          Parametry          fizyko-mechaniczne               dla       poszczególnych           warstw
+geotechnicznych              są     wartościami           charakterystycznymi             wyznaczonymi              na
+podstawie badań terenowych. Powyższe parametry wyznaczono zgodnie z normą
+PN-EN       1997-1:2008,            PN-EN       1997-2:2009.            Wartości        parametrów           fizyko-
+
+
+
+                                                                                                          Strona 7 z 13
+                        Opinia Geotechniczna wraz z Dokumentacją Badań Podłoża Gruntowego
+      dla zadania pn. „Wykonanie wstępnych badań geotechnicznych na potrzeby ustalenia warunków technicznych
+                   posadowienia dla obiektu nowej siedziby Urzędu Marszałkowskiego we Wrocławiu”
+_____________________________________________________________________________________________________
+mechanicznych przedstawiono dla każdej warstwy geotechnicznej przyjmując
+wyniki uśrednione.
+
+      Sondowanie         statyczne       CPTU      –   metoda       wyprowadzania           parametrów
+geotechnicznych:
+      Podczas        wykonywania           sondowań         statycznych        CPTU        rejestrowano
+bezpośrednio z pomiaru in-situ parametry: qc – opór wciskania stożka (MPa), fs –
+opór tarcia na tulei ciernej (MPa); u2 – ciśnienie wody w porach gruntu (MPa)
+mierzony filtrem umieszonym za tipem stożka. Jego wskazania stanowią sumę
+rzeczywistego ciśnienia u0 oraz przyrostu u związanego z wpędem stożka sondy
+w    grunt.     Na     podstawie        powyższych         oznaczeń        wyznaczono         parametry
+znormalizowane będące wielkościami pochodnymi wielkości rejestrowanych
+bezpośrednio podczas pomiaru, są to: Rf – współczynnik tarcia określony
+                                                                                      𝐟𝐭
+stosunkiem tarcia do oporu wyrażony w procentach; Rf =                                𝐪𝐭
+                                                                                           100%, ft –
+
+znormalizowany opór tarcia na tulei ciernej poprawiony o wpływ ciśnienia wody w
+porach gruntu – lecz w przypadku stałej grubości tulei ciernej i pomiaru ciśnienia
+jedynie pod tuleją cierną (u2) wartości ft przyjmuje się równe pomierzonym fs;
+
+Parametry wiodące obliczono z następujących formuł:
+
+Stopień zagęszczenia dla gruntów niespoistych (PN-04452-2002):
+
+ID = 0,709logqc– 0,165
+
+Stopień plastyczności dla gruntów od mało do zwięzło spoistych (Geoteko):
+
+IL = 0,4 – 0,5log(qc*σV0), gdzie σV0 – całkowite naprężenie pionowe.
+
+Stopień plastyczności dla gruntów bardzo spoistych (PN-04452-2002):
+
+IL = 0,242 – 0,427logqc - gruntu spoiste o fi>30%
+
+Moduł ściśliwości pierwotnej (MPa) (Lunne, Robertson, Powell, 1997):
+
+M0 = 8,25(qt-v0) gdzie σV0 – całkowite naprężenie pionowe (dla gruntów
+spoistych);
+
+M0 = 2qc+20 (dla piasków normalnie konsolidowanych przy qc>10);
+
+M0 = 4qc (dla piasków normalnie konsolidowanych przy qc<10);
+
+Wytrzymałość na ścinanie w warunkach bez odpływu (kPa):
+
+
+
+
+                                                                                                Strona 8 z 13
+                        Opinia Geotechniczna wraz z Dokumentacją Badań Podłoża Gruntowego
+      dla zadania pn. „Wykonanie wstępnych badań geotechnicznych na potrzeby ustalenia warunków technicznych
+                   posadowienia dla obiektu nowej siedziby Urzędu Marszałkowskiego we Wrocławiu”
+_____________________________________________________________________________________________________
+Su = (qC*v0)/Nkt gdzie Nkt – współczynnik empiryczny zależny od wskaźnika
+plastyczności Ip. Typowe wartości przyjmuje się z przedziału 11-19, a średnia
+wartość Nkt = 15; dla gruntów organicznych przyjęto wartość Nkt = 19;
+
+Efektywny kąt tarcia wewnętrznego dla gruntów niespoistych (DIN4094):
+
+Ø’ = 23+13,5logqc
+
+Efektywny kąt tarcia wewnętrznego oraz efektywna spójność dla gruntów
+spoistych wyznaczana jest na podstawie kalkulatora obliczeniowego (Politechnika
+Wrocławska) bazującego na rodzaju gruntu, parametrach sondowania, oporu na
+stożku qc oraz całkowitym naprężeniu pionowym.
+
+
+
+
+                                    Grunty antropogeniczne
+                                              (nasypowe)
+Warstwa geotechniczna N – warstwa nasypów niebudowlanych składająca
+z   gruntów      organicznych,        mineralnych        oraz     materiałów       antropogenicznych
+(humus, namuł gliniasty, piasek średni, piasek drobny, piasek gliniasty, gruz
+ceglany) – z uwagi na niejednorodny charakter gruntów nasypowych parametrów
+fizyko-mechanicznych nie wyznaczono;
+
+Warstwa geotechniczna O – warstwa gleby zalegająca bezpośrednio pod
+warstwą nasypową – z uwagi na organiczny charakter gruntów parametrów
+fizyko-mechanicznych nie wyznaczono.
+
+
+
+                        Grunty rodzime – mineralne - niespoiste
+
+            (Czwartorzęd – Holocen - Piaski rzeczne tarasów zalewowych)
+Warstwa geotechniczna QhIIa1 – zagęszczone piaski średnioziarniste, dla
+których     wyznaczono          parametry        fizyko-mechaniczne           przyjmując        parametr
+wiodący – stopień zagęszczenia ID=0,90;
+
+Warstwa geotechniczna QhIIa2 – zagęszczone piaski średnioziarniste, dla
+których     wyznaczono          parametry        fizyko-mechaniczne           przyjmując        parametr
+wiodący – stopień zagęszczenia ID=0,70;
+
+
+
+
+                                                                                                Strona 9 z 13
+                        Opinia Geotechniczna wraz z Dokumentacją Badań Podłoża Gruntowego
+      dla zadania pn. „Wykonanie wstępnych badań geotechnicznych na potrzeby ustalenia warunków technicznych
+                   posadowienia dla obiektu nowej siedziby Urzędu Marszałkowskiego we Wrocławiu”
+_____________________________________________________________________________________________________
+Warstwa          geotechniczna             QhIIb1         –      średnio       zagęszczone            piaski
+średnioziarniste,        dla    których      wyznaczono          parametry        fizyko-mechaniczne
+przyjmując parametr wiodący – stopień zagęszczenia ID=0,60;
+
+Warstwa          geotechniczna             QhIIb2         –      średnio       zagęszczone            piaski
+średnioziarniste,        dla    których      wyznaczono          parametry        fizyko-mechaniczne
+przyjmując parametr wiodący – stopień zagęszczenia ID=0,40;
+
+Warstwa geotechniczna QhIIIa2 – zagęszczone piaski drobnoziarniste, dla
+których     wyznaczono          parametry        fizyko-mechaniczne           przyjmując         parametr
+wiodący – stopień zagęszczenia ID=0,70;
+
+Warstwa          geotechniczna             QhIIIb1         –     średnio       zagęszczone            piaski
+drobnoziarniste,        dla     których      wyznaczono         parametry         fizyko-mechaniczne
+przyjmując parametr wiodący – stopień zagęszczenia ID=0,60.
+
+
+
+                        Grunty rodzime – mineralne - niespoiste
+    (Czwartorzęd – Plejstocen - Piaski i żwiry rzeczne tarasów nadzalewowych)
+Warstwa geotechniczna QpIa1 – zagęszczone pospółki i żwiry, dla których
+wyznaczono parametry fizyko-mechaniczne przyjmując parametr wiodący –
+stopień zagęszczenia ID=0,90;
+
+Warstwa         geotechniczna           QpIa2       –    zagęszczone        pospółki,      dla     których
+wyznaczono parametry fizyko-mechaniczne przyjmując parametr wiodący –
+stopień zagęszczenia ID=0,75;
+
+Warstwa geotechniczna QpIIa1 – zagęszczone piaski średnioziarniste, dla
+których     wyznaczono          parametry        fizyko-mechaniczne           przyjmując         parametr
+wiodący – stopień zagęszczenia ID=0,90;
+
+
+
+                          Grunty rodzime – mineralne - spoiste
+ (Czwartorzęd – Plejstocen – Osady lodowcowe (gliny zwałowe) – symbol konsolidacji B)
+
+Warstwa geotechniczna QpB1 – półzwarte gliny piaszczyste, dla których
+wyznaczono parametry fizyko-mechaniczne przyjmując parametr wiodący –
+stopień plastyczności IL≤0,00;
+
+Warstwa geotechniczna QpB2a – twardoplastyczne gliny piaszczyste, dla
+których     wyznaczono          parametry        fizyko-mechaniczne           przyjmując         parametr
+wiodący – stopień plastyczności IL=0,10;
+
+
+
+                                                                                                 Strona 10 z 13
+                        Opinia Geotechniczna wraz z Dokumentacją Badań Podłoża Gruntowego
+      dla zadania pn. „Wykonanie wstępnych badań geotechnicznych na potrzeby ustalenia warunków technicznych
+                   posadowienia dla obiektu nowej siedziby Urzędu Marszałkowskiego we Wrocławiu”
+_____________________________________________________________________________________________________
+Warstwa geotechniczna QpB2b – twardoplastyczne gliny piaszczyste, dla
+których     wyznaczono          parametry        fizyko-mechaniczne           przyjmując        parametr
+wiodący – stopień plastyczności IL=0,20;
+
+Warstwa geotechniczna QpB3a – plastyczne gliny piaszczyste, dla których
+wyznaczono parametry fizyko-mechaniczne przyjmując parametr wiodący –
+stopień plastyczności IL=0,30.
+
+        Powyższe grunty mogą zawierać domieszki oraz mogą być przewarstwione
+innymi     gruntami,       które     zasadniczo      nie wpływają          na   parametry        gruntów
+głównych. Właściwości fizyko-mechaniczne gruntów sklasyfikowanych w wyżej
+wymienionych warstwach geotechnicznych zestawiono w formie tabelarycznej
+(załącznik nr 8).
+
+
+    8. Wnioski
+
+    •   Na podstawie wykonanych wierceń stwierdza się, że mineralne podłoże
+        gruntowe        analizowanego          terenu      pod       warstwą     nasypów        stanowią
+        holoceńskie        osady       rzeczne      tarasów          zalewowych,       zalegające        na
+        plejstoceńskich piaskach i żwirach tarasów nadzalewowych oraz glinach
+        zwałowych;
+        W ramach przedmiotowego zadania wykonano:
+        - 4 otwory geotechniczne do głębokości maksymalnej 30,0 m p.p.t.,
+        - 5 otworów geotechnicznych do głębokości maksymalnej 15,0 m p.p.t.,
+        - 4 sondowania statyczne CPTu do głębokości maksymalnej 15,0 m p.p.t.;
+    •   Grunty antropogeniczne (nasypy) zgrupowane w warstwie geotechnicznej
+        N zbudowane z mieszaniny gruntów organicznych, mineralnych oraz
+        antropogenicznych stanowią warstwę niejednorodną, nie nadającą się do
+        bezpośredniego posadowienia obiektu budowlanego – zaleca się ich
+        wymianę;
+    •   Grunty niespoiste (osady rzeczne) charakteryzują się stanem średnio
+        zagęszczonym             i      zagęszczonym             o      stopniach           zagęszczenia
+        ID=0,40        –    0,90,      grunty      te    zostały      zgrupowane        w     warstwach
+        geotechnicznych QhIIa1 (ID=0,90), QhIIa2 (ID=0,70), QhIIb1 (ID=0,60),
+        QhIIb2 (ID=0,40), QhIIIa2 (ID=0,70), QhIIIb1 (ID=0,60), QpIa1 (ID=0,90),
+        QpIa2 (ID=0,75), QpIIa1 (ID=0,90), i cechują się korzystnymi parametrami
+        wytrzymałościowymi;
+
+
+
+
+                                                                                               Strona 11 z 13
+                        Opinia Geotechniczna wraz z Dokumentacją Badań Podłoża Gruntowego
+      dla zadania pn. „Wykonanie wstępnych badań geotechnicznych na potrzeby ustalenia warunków technicznych
+                   posadowienia dla obiektu nowej siedziby Urzędu Marszałkowskiego we Wrocławiu”
+_____________________________________________________________________________________________________
+    •   Grunty spoiste (gliny zwałowe) o symbolu konsolidacji B charakteryzują
+        się stanem od półzwartego do plastycznego o stopniu plastyczności
+        IL=0,00        -   0,30,      grunty      te    zostały      zgrupowane         w     warstwach
+        geotechnicznych QpB1 (IL≤0,00), QpB2a (IL=0,10), QpB2b (IL=0,20) QpB3a
+        (IL=0,30) i cechują się dostatecznymi               oraz obniżonymi (warstwa gruntów
+        plastycznych QpB3a) parametrami wytrzymałościowymi;
+    •   Na obszarze badanej części działek 9/1, 10/3, 11/6, 19/11 (AR_2, obręb
+        Południe)       stwierdzono       występowanie          zwierciadła       wód       podziemnych
+        o charakterze swobodnym (incydentalnie naporowym), które stabilizuje się
+        na głębokościach 3,20 – 3,80 m p.p.t.;
+    •   Pod względem grup nośności stwierdzone grunty klasyfikuje się jako:
+        -G1 – grunty niewysadzinowe – grunty warstw geotechnicznych QhIIa1,
+        QhIIa2, QhIIb1, QhIIb2, QhIIIa2, QhIIIb1, QpIa1, QpIa2, QpIIa1;
+        -G3/G4 – grunty wysadzinowe – grunty warstw geotechnicznych QpB1,
+        QpB2a, QpB2b, QpB3a;
+    •   Pod względem kategorii urabialności opisane grunty klasyfikuje się jako:
+        kategoria 3 - grunty łatwo urabialne: grunty warstw geotechnicznych
+        QhIIa1, QhIIa2, QhIIb1, QhIIb2, QhIIIa2, QhIIIb1, QpIa1, QpIa2, QpIIa1;
+        kategoria 4 – grunty średnio urabialne: grunty warstw geotechnicznych
+        QpB1, QpB2a, QpB2b, QpB3a;
+    •   Grunty piaszczyste pozyskane z wykopu nadają się do ponownego
+        wykorzystania          budowlanego           (nasypy,        zasypy),       pod      warunkiem
+        doprowadzenia ich wilgotności naturalnej do wartości optymalnych oraz
+        doziarnienie (np. piaskiem gruboziarnistym, pospółką) umożliwiających
+        skuteczne zagęszczenie;
+    •   Odsłonięte grunty piaszczyste chronić przed rozluźnieniem; grunty spoiste
+        chronić przed niekorzystnym wpływem warunków atmosferycznych (wody
+        opadowe, niskie temperatury, gwałtowne zmiany temperatur), mogącym
+        pogorszyć       ich parametry wytrzymałościowe                   poprzez uplastycznienie;
+        odsłonięte podłoże gruntowe możliwie szybko zabezpieczyć np. betonem
+        podkładowym;
+    •   Głębokość przemarzania gruntów na przedmiotowym terenie wynosi
+        HZ=0.8 m p.p.t.;
+    •   Opisane warunki gruntowe uznaje się za złożone – grunty rodzime
+        zróżnicowane pod względem litologicznym i genetycznym, cechujące się
+
+
+
+
+                                                                                               Strona 12 z 13
+                        Opinia Geotechniczna wraz z Dokumentacją Badań Podłoża Gruntowego
+      dla zadania pn. „Wykonanie wstępnych badań geotechnicznych na potrzeby ustalenia warunków technicznych
+                   posadowienia dla obiektu nowej siedziby Urzędu Marszałkowskiego we Wrocławiu”
+_____________________________________________________________________________________________________
+        korzystnymi,        dostatecznymi oraz incydentalnie                  obniżonymi (warstwa
+        QpB3a) parametrami wytrzymałościowymi, występująca warstwa nasypów
+        niebudowlanych o miąższości do 3,80 m oraz stwierdzone zwierciadło
+        wody podziemnej stabilizujące się powyżej przypuszczalnego poziomu
+        posadowienia obiektu budowlanego;
+
+    •   Projektowaną inwestycję wstępnie zalicza się do drugiej kategorii
+        geotechnicznej w złożonych warunkach gruntowych.                                     Ostateczna
+        ocena      warunków        gruntowo-wodnych            i   zaklasyfikowanie         obiektu      do
+        kategorii geotechnicznej zgodnie z obowiązującymi przepisami należy do
+        Projektanta, w odniesieniu do rozpoznania geotechnicznego oraz w oparciu
+        o wybrany sposób i głębokość posadowienia projektowanego obiektu.
+        Projektant zadecyduje również o wartościach przyjmowanych obciążeń
+        dopuszczalnych na grunty podłoża i wielkościach dopuszczalnych osiadań
+        oraz o ewentualnym rozszerzeniu zakresu wykonanych badań.
+
+                                                                                              Koniec opisu
+
+
+
+
+                                                                                               Strona 13 z 13
+

@@ -1,0 +1,62 @@
+OBJAŚNIENIA SYMBOLI I ZNAKÓW UŻYTYCH NA PRZEKROJACH I KARTACH OTWORÓW                                  Zał. 9
+
+SYMBOLE GRUNTÓW WG NORMY                                 OZNACZENIA STANU GRUNTU
+PN-EN ISO   PN-86                                        ID      stopień zagęszczenia
+14688-1,2   /B-02480
+                                                         IL      stopień plastyczności
+GRUNTY NASYPOWE
+                                                         OZNACZENIA ZWIERCIADŁA WODY PODZIEMNEJ
+Mg             N            nasyp
+Mg             nB           nasyp budowlany                                     nawiercony poziom zwierciadła
+Mg             nN           nasyp niekontrolowany
+                                                                                ustabilizowany poziom zwierciadła
+GRUNTY ORGANICZNE RODZIME                                                       sączenia
+
+h(Or)          H            humus                        OZNACZENIA WILGOTNOŚCI GRUNTU
+wa(Or)         Nm           namuł
+pt(Or)         T             torf
+gy(Or)         Gy           gytia                                mw         grunty mało wilgotne
+                                                                 w          grunty wilgotne
+GRUNTY MINERALNE RODZIME                                         m          grunty mokre
+        nieskaliste                                              nw         grunty nawodnione
+W             KW             zwietrzelina
+clW           KWg            zwietrzelina gliniasta      SYMBOLE GENETYCZNE
+W             KR             rumosz
+clW           KRg            rumosz gliniasty            g       osady lodowcowe
+Co            KO             kamienie, otoczaki          gl      osady lodowcowo-jeziorne (zastoiskowe)
+Gr            Ż              żwir                        fg      osady wodnolodowcowe (ﬂuwioglacjalne)
+clGr          Żg             żwir gliniasty              pg      osady peryglacjalne
+grSa          Po             pospółka                    f       osady rzeczne
+grclSa        Pog            pospółka gliniasta          li      osady jeziorne (limniczne)
+CSa           Pr              piasek gruby               d       osady deluwialne (zboczowe)
+MSa           Ps             piasek średni               e       osady eluwialne (zwietrzelinowe)
+FSa           Pd             piasek drobny
+siSa          Pπ             piasek pylasty              SYMBOLE STRATYGRAFICZNE
+clSa          Pg             piasek gliniasty
+                                                         Q        Czwartorzęd              P       Perm
+Si            π              pył
+                                                         Qh       Holocen                  C       Karbon
+saSi          πp             pył piaszczysty             Qp       Plejstocen               D       Dewon
+clSa/saCl     Gp             glina piaszczysta           Tr       Trzeciorzęd              S       Sylur
+saclSi/sasiCl G              glina                       Cr       Kreda                    O       Ordowik
+clSi          Gπ              glina pylasta              J        Jura                     K       Kambr
+saCl          Gpz            glina piaszczysta zwięzła   T        Trias                    Pr      Proterozoik
+sasiCl        Gz             glina zwięzła
+siCl          Gπz            glina pylasta zwięzła       STANY GRUNTÓW
+Cl            I               ił
+saCl          Ip              ił piaszczysty             grunty niespoiste:
+siCl          Iπ             ił pylasty
+            skaliste                                           ln          luźny
+                                                               szg         średnio zagęszczony
+ST             ST            skała twarda                      zg          zagęszczony
+SM             SM            skała miękka                      bzg         bardzo zagęszczony
+
+ZNAKI DODATKOWE DOT. OPISU GRUNTU                        grunty spoiste:
+
+      +                domieszki                               zw          zwarty
+      //               przewarstwienia                         pzw         półzwarty
+      /                grunty na granicy                       tpl         twardoplastyczny
+      ()               dodatkowe określenia                    pl          plastyczny
+O-1; 137+500           numer otworu                            mpl         miękkoplastyczny
+   150.10              rzędna otworu [m n.p.m.]                pł          płynny
+

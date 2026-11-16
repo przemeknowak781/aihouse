@@ -1,0 +1,2215 @@
+                                                       Załącznik nr F.01 do Regulaminu Konkursu
+
+
+                                        UMOWA
+                         O PRACE PROJEKTOWE I NADZÓR AUTORSKI
+
+
+zawarta w dniu ……………….. we Wrocławiu pomiędzy:
+
+
+Województwem Dolnośląskim, Urzędem Marszałkowskim Województwa Dolnośląskiego
+z siedzibą przy Wybrzeżu       Słowackiego    12-14,    50-411   Wrocław,   Regon:   9319344644,
+NIP: 8992803047,
+zwanym dalej „Zamawiającym”
+reprezentowanym przez Pełnomocnika:
+Inwestycje Dolnośląskie Spółka z ograniczoną odpowiedzialnością
+z siedzibą: ul. Igielna 13, 50-117 Wrocław, wpisaną do rejestru przedsiębiorców prowadzonego
+przez Sąd Rejonowy dla Wrocławia Fabrycznej we Wrocławiu, VI Wydział Gospodarczy Krajowego
+Rejestru Sądowego pod numerem KRS: 0000353252; wysokość kapitału zakładowego:
+325 379 000 zł, REGON: 021173201, NIP: 8971759068,
+reprezentowaną przez:
+Rafała Guzowskiego – Prezesa Zarządu,
+zwaną dalej „Inwestor Zastępczy”
+a
+………………………………………………………
+z siedzibą: …………………………………………, zarejestrowanym w ……………...........................
+pod numerem …………………………………….., Regon: ………………., NIP: ……………………..
+reprezentowaną przez:
+………………………………………………………..
+………………………………………………………..
+zwanym dalej „Wykonawcą”,
+zwanymi łącznie „Stronami” lub każda oddzielnie „Stroną”.
+
+
+Niniejsza Umowa została zawarta w wyniku udzielenia zamówienia z wolnej ręki Wykonawcy, który
+na podstawie art. 214 ust. 1 pkt 4) Ustawy z dnia 11 września 2019 r. Prawo zamówień publicznych
+(t.j. Dz. U. z 2024 r. poz.1320 ze zm.), po konkursie został zaproszony do negocjacji w trybie
+zamówienia z wolnej ręki po uzyskaniu I nagrody w konkursie dwuetapowym realizacyjnym na
+opracowanie koncepcji architektoniczno-urbanistycznej budynku administracyjnego Urzędu
+Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+o następującej treści:
+
+
+
+                                           DEFINICJE
+                                               §1
+Użyte w niniejszej Umowie wyrażenia mają następujące znaczenie:
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                  1
+    1)   „Budynek” – należy przez to rozumieć budynek administracyjny Urzędu Marszałkowskiego
+         Województwa Dolnośląskiego we Wrocławiu stanowiący przedmiot opracowywanej przez
+         Wykonawcę Dokumentacji Projektowej;
+    2)   „Dokumentacja Projektowa”– należy przez to rozumieć w szczególności: Wielobranżowy
+         Projekt Koncepcyjny, Projekt Budowlany, Projekt Wykonawczy, Projekt Aranżacji Wnętrz,
+         Przedmiar Robót;
+    3)   „Dni robocze” – dni tygodnia od poniedziałku do piątku, z wyłączeniem dni ustawowo
+         wolnych od pracy;
+    4)   „Generalny Wykonawca” – podmiot, z którym Zamawiający zawarł umowę na realizację
+         Robót Budowlanych;
+    5)   „Konkurs” – należy przez to rozumieć przyrzeczenie publiczne, w którym Zamawiający,
+         przez publiczne ogłoszenie, przyrzeka nagrodę za wykonanie i przeniesienie prawa
+         do pracy konkursowej wybranej przez Sąd Konkursowy w konkursie na koncepcję
+         architektoniczno-urbanistyczną budynku administracyjnego Urzędu Marszałkowskiego
+         Województwa Dolnośląskiego we Wrocławiu prowadzonym na podstawie Ustawy oraz
+         na podstawie Regulaminu;
+    6)   „Kosztorys Inwestorski” – należy przez to rozumieć opracowanie wykonane zgodnie
+         przepisami Rozporządzenia Ministra Rozwoju i Technologii z dnia 20 grudnia 2021 r.
+         w sprawie określenia metod i podstaw sporządzania kosztorysu inwestorskiego, obliczania
+         planowanych kosztów prac projektowych oraz planowanych kosztów robót budowlanych
+         określonych w programie funkcjonalno-użytkowym (Dz.U. z 2021 poz. 2458) oraz zgodnie
+         z niniejszą Umową;
+    7)   „Nadzór Autorski”– pełnienie nadzoru autorskiego nad wykonaniem Robót Budowlanych
+         realizowanych na podstawie opracowanej przez Wykonawcę Dokumentacji Projektowej;
+    8)   „Wykonawca” – podmiot lub podmioty działające wspólnie, którym zostało udzielone
+         zamówienie na opracowanie Dokumentacji Projektowej wraz z pełnieniem Nadzoru
+         Autorskiego nad wykonaniem Robót Budowlanych realizowanych na podstawie
+         Dokumentacji Projektowej;
+    9)   „Projekt Aranżacji Wnętrz” – należy przez to rozumieć projekt wnętrz obejmujący
+         wykonanie dokumentacji projektowej dla aranżacji wnętrz ogólnodostępnych, wraz
+         z projektami mebli wbudowanych oraz zabudów meblarskich oraz projektem systemu
+         informacji wizualnej.
+    10) „Projekt Budowlany”– należy przez to rozumieć projekt budowlany wykonany zgodnie
+        z przepisami obowiązującym na dzień składania wniosku o wydanie pozwolenia na budowę
+        oraz zgodnie z niniejszą Umową, stanowiący podstawę dla opracowania Projektu
+        Wykonawczego, w szczególności obejmujący projekt zagospodarowania terenu, projekt
+        architektoniczno-budowlany oraz projekt techniczny;
+    11) „Projekt Wykonawczy” – należy przez to rozumieć opracowanie wykonane zgodnie
+        z przepisami Rozporządzenia Ministra Rozwoju i Technologii z dnia 29 grudnia 2021 r.
+        w sprawie szczegółowego zakresu i formy dokumentacji projektowej, specyfikacji
+        technicznych wykonania i odbioru robót budowlanych oraz programu funkcjonalno-
+        użytkowego (Dz. U. z 2021 r. poz. 2454), określającymi zakres i formę projektu
+        wykonawczego oraz zgodnie z niniejszą Umową, wraz z projektem aranżacji wnętrz,
+        zawierającym rysunki i wyjaśnienia opisowe, które dotyczą szczegółowych rozwiązań
+        wnętrz Budynku, w tym jego wyposażenia w elementy stałe;
+    12) „Przedmiar Robót” – należy przez to rozumieć opracowanie wykonane zgodnie
+        z przepisami Rozporządzenia Ministra Rozwoju i Technologii z dnia 29 grudnia 2021 r.
+        w sprawie szczegółowego zakresu i formy dokumentacji projektowej, specyfikacji
+        technicznych wykonania i odbioru robót budowlanych oraz programu funkcjonalno-
+        użytkowego (Dz. U. z 2021 r. poz. 2454) oraz zgodnie z niniejszą Umową;
+
+
+
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                  2
+    13) „Regulamin Konkursu” – należy przez to rozumieć Regulamin Konkursu dwuetapowego,
+        realizacyjnego na koncepcję architektoniczno-urbanistyczną budynku administracyjnego
+        Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu;
+    14) „Roboty Budowlane” – należy przez to rozumieć roboty budowlane, mające na celu
+        zrealizowanie Budynku, w tym prace wiążące się z przygotowaniem terenu budowy,
+        prowadzeniem i zakończeniem budowy wraz z oddaniem do użytkowania, które będą
+        wykonywane przez Generalnego Wykonawcę, Zamawiającego lub innych wykonawców
+        i każdorazowo ich podwykonawców;
+    15) „Specyfikacja Warunków Zamówienia” lub „SWZ” – należy przez to rozumieć komplet
+        dokumentów przygotowanych i ogłoszonych przez Zamawiającego, niezbędnych
+        do przygotowania i złożenia oferty w postępowaniu na wybór wykonawcy Robót
+        Budowlanych;
+    16) „Specyfikacja Techniczna Wykonania i Odbioru Robót Budowlanych” lub „STWiORB” –
+        należy przez to rozumieć opracowanie wykonane zgodnie z Rozporządzeniem Ministra
+        Rozwoju i Technologii z dnia 29 grudnia 2021 r. w sprawie szczegółowego zakresu i formy
+        dokumentacji projektowej, specyfikacji technicznych wykonania i odbioru robót
+        budowlanych oraz programu funkcjonalno-użytkowego (Dz. U. z 2021 r. poz. 2454),
+        określającymi zakres i formę specyfikacji technicznej wykonania i odbioru robót
+        budowlanych;
+    17) „Umowa” – niniejsza umowa, wraz z załącznikami i wszelkimi ewentualnymi zmianami;
+    18) „Ustawa” lub „Ustawa Pzp” – należy przez to rozumieć ustawę z dnia 11 września 2019 r.
+        – Prawo zamówień publicznych (t.j. Dz. U. z 2024 r. poz. 1320 ze zm.);
+    19) „wada” – przez wadę Przedmiotu Umowy należy rozumieć w szczególności:
+        a)   wadę w rozumieniu przepisów Kodeksu cywilnego,
+        b)   powstanie wzajemnej kolizji elementów Dokumentacji Projektowej na skutek błędu
+             w koordynacji projektu, a także wystąpieniu braków, nieprawidłowości, nieścisłości,
+             sprzeczności w zakresie elementów Dokumentacji Projektowej,
+        c)   nieuwzględnienie warunków lokalizacji określonych w dokumentach formalno-
+             prawnych a także warunków technicznych oraz zasad wiedzy i techniki budowlanej,
+        d)   nieprawidłowości w Przedmiocie Umowy będące rezultatem naruszenia lub
+             nieuwzględnienia przez Projektanta przepisów prawa miejscowego oraz powszechnie
+             obowiązującego w dniu przekazania projektu lub jego określonej części, naruszenia lub
+             nieuwzględnienia Wytycznych Projektowych innych niż Zalecenia Inwestora
+             Zastępczego,
+        e)   nieprawidłowości w Przedmiocie Umowy będące rezultatem naruszenia lub
+             nieuwzględnienia przez Projektanta Zaleceń Inwestora Zastępczego, z zastrzeżeniem
+             § 8 ust. 7 Umowy.
+    20) „Wielobranżowy Projekt Koncepcyjny” – należy przez to rozumieć opracowanie
+        stanowiące uszczegółowienie koncepcji architektoniczno-urbanistycznej wyłonionej
+        w Konkursie mające na celu określenie architektonicznych, branżowych i technicznych
+        zasad rozwiązania i standardów, które winny być podstawą dla opracowania Projektu
+        Budowlanego;
+    21) „Wytyczne Projektowe” – należy przez to rozumieć zapisy Umowy wraz z załącznikami
+        odnoszącymi się do opisu Dokumentacji Projektowej oraz Zalecenia Inwestora
+        Zastępczego;
+    22) „Zalecenia Inwestora Zastępczego” – zostały zdefiniowane w § 8 ust. 6 Umowy.
+
+
+
+
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                  3
+                                       PRZEDMIOT UMOWY
+                                                 §2
+1.   Zamawiający zleca a Wykonawca przyjmuje do wykonania zamówienie obejmujące
+     opracowanie Dokumentacji Projektowej budynku administracyjnego Urzędu
+     Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu wraz z pełnieniem
+     Nadzoru Autorskiego.
+2.   Zakres rzeczowy Przedmiotu Umowy obejmuje w szczególności:
+     1)   wykonanie, na podstawie wybranej w Konkursie koncepcji architektoniczno-urbanistycznej,
+          kompletnej Dokumentacji Projektowej obejmującej:
+          a)   Wielobranżowy Projekt Koncepcyjny,
+          b)   Projekt Budowlany,
+          c)   Projekt Wykonawczy,
+          d)   Projekt Aranżacji Wnętrz,
+          e)   Przedmiary Robót;
+     2)   wykonanie Specyfikacji Technicznej Wykonania i Odbioru Robót Budowlanych;
+     3)   wykonanie Kosztorysu Inwestorskiego;
+     4)   uzyskanie w imieniu Zamawiającego prawomocnej decyzji pozwolenia na budowę
+          Budynku, zgodnie z obowiązującymi przepisami prawa, w tym ustawy Prawo budowlane
+          oraz ustawy Pzp, i z uwzględnieniem postanowień Umowy;
+     5)   sprawowanie usług doradczych w zakresie niniejszej Umowy na etapie postępowania
+          o udzielenie zamówienia publicznego na Roboty Budowlane, w tym w szczególności
+          przygotowanie opisu przedmiotu zamówienia w zakresie merytorycznym, wraz
+          z załącznikami, opracowanie odpowiedzi na pytania wykonawców, udział wraz
+          z Zamawiającym i/lub Inwestorem Zastępczym w posiedzeniach Krajowej Izby
+          Odwoławczej i przed sądami powszechnymi, w tym przygotowanie odpowiedzi do KIO
+          w zakresie merytorycznym lub pism procesowych,
+     6)   pełnienie Nadzoru Autorskiego.
+3.   Wykonawca zobowiązany jest zrealizować Przedmiot Umowy z uwzględnieniem:
+     1)   postanowień Regulaminu Konkursu i dokumentacji konkursowej;
+     2)   zaleceń pokonkursowych Sądu Konkursowego, stanowiących załącznik nr 1;
+     3)   wytycznych pokonkursowych Zamawiającego, stanowiące załącznik nr 2;
+     4)   Zaleceń Inwestora Zastępczego.
+4.   Ilekroć w niniejszej Umowie jest mowa o inwestycji, rozumie się przez to budowę budynku
+     administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu
+     zlokalizowaną na działkach oznaczonych geodezyjnie jako dz. 10/3, 11/6, 19/11, 9/1, obręb 022
+     Południe, jednostka ewidencyjna Miasta Wrocław 026401_1 wraz z towarzyszącą infrastrukturą.
+
+                                             ETAPY
+                                                 §3
+1.   Przedmiot Umowy będzie realizowany z podziałem na następujące etapy i zakresy:
+     1)   Etap 1 - „Dokumentacja Projektowa - Wielobranżowy Projekt Koncepcyjny” – w ramach
+          którego Wykonawca:
+
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                  4
+          a)   wykona Wielobranżowy Projekt Koncepcyjny, w tym koncepcję etapowej realizacji
+               inwestycji,
+          b)   oszacuje wartość kosztorysową inwestycji w oparciu o wartość inwestycji określoną
+               w Regulaminie Konkursu;
+     2)   Etap 2 - „Dokumentacja Projektowa - Projekt Budowlany” – w ramach którego Wykonawca:
+          a)   opracuje wielobranżowy Projekt Budowlany, wraz z towarzyszącą infrastrukturą,
+               umożliwiający etapowanie realizacji inwestycji, obejmujący:
+               −   projekt zagospodarowania terenu,
+               −   projekt architektoniczno-budowlany,
+               −   projekt techniczny, w zakresie niezbędnym do złożenia wniosku o pozwoleniu
+                   na budowę,
+               −   wszelkie konieczne opinie, uzgodnienia, pozwolenia i inne dokumenty wymagane
+                   przepisami szczególnymi niezbędne do uzyskania ostatecznej decyzji
+                   o pozwoleniu na budowę;
+          b)   uzyska w imieniu Zamawiającego ostateczną decyzję środowiskową (o ile będzie
+               wymagana);
+          c)   złoży w imieniu i na rzecz Zamawiającego kompletny wniosek o wydanie decyzji
+               o pozwoleniu na budowę – Zamawiający dopuszcza złożenie Projektu Budowlanego
+               w formie elektronicznej;
+     3)   Etap 3 - „Pozwolenie na budowę” – w ramach którego Wykonawca uzyska w imieniu
+          i na rzecz Zamawiającego prawomocną decyzję o pozwoleniu na budowę;
+     4)   Etap 4 - „Dokumentacja Projektowa - Projekt Wykonawczy” – w ramach którego
+          Wykonawca wykona:
+          a)   wielobranżowy Projekt Wykonawczy,
+          b)   projekt techniczny, w pozostałym zakresie,
+          c)   Projekt Aranżacji Wnętrz,
+          d)   Przedmiar Robót,
+          e)   STWiORB,
+          f)   Kosztorys Inwestorski,
+          w zakresie umożliwiającym etapowanie realizacji inwestycji, niezbędnych Zamawiającemu
+          do przygotowania i przeprowadzenia postępowania o udzielenie zamówienia publicznego
+          na wykonanie Robót Budowlanych;
+     5)   Etap 5 - „usługi doradcze” – w ramach którego Wykonawca będzie doradzał
+          Zamawiającemu na etapie postępowania o udzielenie zamówienia publicznego na Roboty
+          Budowlane, aż do podpisania umowy przez Zamawiającego z Generalnym Wykonawcą;
+     6)   Etap 6 - „Nadzór Autorski” – w ramach którego Wykonawca będzie sprawować nadzór
+          autorski podczas wykonania i odbioru Robót Budowlanych prowadzonych w oparciu
+          o Dokumentację Projektową, do czasu uzyskania ostatecznego pozwolenia
+          na użytkowanie, z zastrzeżeniem postanowień § 13 ust. 2 pkt 6 Umowy.
+2.   Szczegółowy zakres i podział prac w ramach poszczególnych Etapów stanowi załącznik nr 3
+     do Umowy.
+
+
+
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                  5
+                                      USŁUGI DORADCZE
+                                               §4
+1.   W ramach sprawowania usług doradczych, o których mowa w § 2 ust. 2 pkt 5 Umowy
+     Wykonawca będzie zobowiązany do:
+     1)   opisania przedmiotu zamówienia, w tym w szczególności: technologii robót, materiałów
+          i urządzeń, a także parametrów technicznych i funkcjonalnych przyjętych rozwiązań
+          materiałowych, wybranej technologii, urządzeń i wyposażenia w sposób nie utrudniający
+          uczciwej konkurencji, zgodnie z Ustawą;
+     2)   sporządzenia tabeli elementów scalonych oraz opisów wyposażenia;
+     3)   konsultacji w zakresie przygotowywania postępowania o udzielenie zamówienia na Roboty
+          Budowlane;
+     4)   konsultacji w zakresie zgodności ofert złożonych przez wykonawców uczestniczących
+          w postępowaniu o udzielenie zamówienia na Roboty Budowlane z dokumentacją
+          sporządzoną przez Wykonawcę w wyniku realizacji Przedmiotu Umowy;
+     5)   wsparcia przy prowadzeniu postępowania o udzielenie zamówienia publicznego na Roboty
+          Budowlane, w tym konsultacji wzorów dokumentów lub projektów odpowiedzi na zapytania
+          wykonawców dotyczące dokumentacji; wsparcia w zakresie weryfikacji zgodności
+          przedłożonych przez danego wykonawcę dokumentów z wymaganiami projektowymi oraz
+          wymogami wyspecyfikowanymi w SWZ, a dotyczącymi dokumentacji;
+     6)   wsparcia merytorycznego Zamawiającego i/lub Inwestora Zastępczego w razie wniesienia
+          odwołania lub skargi do sądu w zakresie dotyczącym Dokumentacji Projektowej,
+          nie wyłączając udziału wraz z Zamawiającym i/lub Inwestorem Zastępczym
+          w postępowaniu przed KIO lub sądem;
+     7)   udzielania Zamawiającemu i/lub Inwestorowi Zastępczemu odpowiedzi na wszelkie
+          zapytania i żądania w zakresie wskazanym w niniejszym ustępie w terminie uzgodnionym
+          z Wykonawcą, przy czym termin będzie odpowiedni i adekwatny do zakresu zapytań,
+          nie dłuższy niż 3 Dni robocze.
+2.   Wszystkie formy świadczonych usług doradczych, w tym konsultacje, wsparcie merytoryczne,
+     świadczone będą w formie pisemnej lub w innej formie uzgodnionej z Inwestorem Zastępczym.
+3.   W przypadku unieważnienia postępowania o udzielenie zamówienia publicznego na wykonanie
+     Robót Budowlanych, które mają być realizowane na podstawie Dokumentacji Projektowej,
+     wynagrodzenie umowne wskazane w § 14 ust. 1 Umowy obejmuje jednokrotne powtórzenie
+     wykonania Przedmiotu Umowy w zakresie wskazanym w ust. 1 niniejszego paragrafu Umowy.
+
+                                      NADZÓR AUTORSKI
+                                               §5
+1.   Nadzór Autorski, o którym mowa w § 2 ust. 2 pkt 6 Umowy obejmuje w szczególności:
+     1)   wizyty na budowie – wyłącznie na wezwanie Inwestora Zastępczego;
+     2)   udział właściwych projektantów branżowych w regularnych komisjach i naradach
+          technicznych, z uwzględnieniem zapisów harmonogramu ustalonego z Generalnym
+          Wykonawcą – na każdorazowe na wezwanie Inwestora Zastępczego. Udział projektantów
+          odbywać się będzie za pośrednictwem środków porozumiewania się na odległość, chyba
+          że Inwestor Zastępczy zażąda osobistego stawiennictwa, w takim przypadku stosuje się
+          postanowienia ust. 4 poniżej;
+     3)   udział właściwych projektantów branżowych w odbiorach i zatwierdzanie protokołów pod
+          kątem zgodności z projektem przy odbiorach częściowych, odbiorach robót zanikających
+
+
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                  6
+          oraz odbiorze końcowym - na każdorazowe wezwanie Inwestora Zastępczego, w takim
+          przypadku stosuje się postanowienia ust. 4 poniżej;
+     4)   udział właściwych projektantów branżowych w odbiorach i zatwierdzanie protokołów pod
+          kątem zgodności z projektem dotyczących prób instalacji i rozruchów – na każdorazowe
+          wezwanie Inwestora Zastępczego, w takim przypadku stosuje się postanowienia ust. 4
+          poniżej;
+     5)   kontrolę w toku realizacji Robót Budowlanych nad zgodnością rozwiązań technicznych,
+          materiałowych i użytkowych z Dokumentacją Projektową;
+     6)   niezbędne uzupełnianie Dokumentacji Projektowej, STWiORB oraz wyjaśnianie
+          Generalnemu Wykonawcy wątpliwości powstałych w toku realizacji Robót Budowlanych;
+     7)   wyjaśnianie powstałych w toku realizacji Robót Budowlanych wątpliwości dotyczących
+          dokumentacji i zawartych w niej rozwiązań, poprzez udzielanie dodatkowych informacji oraz
+          opracowań i uzupełnianie szczegółów Dokumentacji Projektowej, STWiORB;
+     8)   zatwierdzanie sporządzonej przez Generalnego Wykonawcę dokumentacji powykonawczej
+          uwzględniającej wszystkie zmiany wprowadzone do Dokumentacji Projektowej w trakcie
+          realizacji;
+     9)   weryfikowanie i zatwierdzanie rozwiązań projektowych zaproponowanych przez
+          Generalnego Wykonawcę w stosunku do parametrów określonych w Dokumentacji
+          Projektowej, w terminie do 4 dni od daty otrzymania karty;
+     10) weryfikowanie i zatwierdzanie karty zatwierdzenia materiałów pod kątem zgodności
+         zaproponowanych przez Generalnego Wykonawcę parametrów materiałów i/lub
+         wyposażenia w stosunku do parametrów określonych w Dokumentacji Projektowej,
+         w terminie do 4 dni od daty otrzymania karty;
+     11) wprowadzanie uzgodnionych z Generalnym Wykonawcą i dokonanych zmian nieistotnych
+         na kopię Projektu Budowlanego zatwierdzonego przez organ administracji
+         architektoniczno-budowlanej (wszystkie zmiany nieistotne przed wprowadzeniem ich do
+         projektu oraz do realizacji wymagają zatwierdzenia przez Zamawiającego i/lub Inwestora
+         Zastępczego);
+     12) w razie dokonania zmiany w Dokumentacji Projektowej, wynikającej z rozwiązań
+         zamiennych koniecznych do wprowadzenia na etapie realizacji Robót Budowlanych,
+         Wykonawca będzie zobowiązany do jej aktualizacji.
+2.   Wykonawca, na każde wezwanie Inwestora Zastępczego, zobowiązany jest do zapewnienia
+     na naradach obecności osób wyznaczonych do wykonania Nadzoru Autorskiego,
+     w szczególności wyznaczonego projektanta branżowego.
+3.   Za pełnienie czynności Nadzoru Autorskiego nie będą uznane działania Wykonawcy polegające
+     na poprawianiu błędów Dokumentacji Projektowej, STWiORB powstałych z winy Wykonawcy,
+     stwierdzonych przy realizacji Robót Budowlanych.
+4.   Wynagrodzenie ryczałtowe za pełnienie Nadzoru Autorskiego, o którym mowa w § 14 ust. 2
+     pkt 6 Umowy zostało ustalone przy założeniu, iż:
+     1)   szacunkowa liczba osobistych pobytów wyniesie: 160 oraz
+     2)   za jednorazowy pobyt uważa się uzasadnioną wezwaniem Inwestora Zastępczego
+          (mailowo) obecność zespołu projektowego w składzie niezbędnym do podjęcia czynności
+          Nadzoru Autorskiego.
+5.   W celu kontroli ilości wykorzystanych pobytów ustala się, iż pobyty dokumentowane będą
+     poprzez karty nadzoru autorskiego.
+6.   Wykonawca zobowiązany jest przedstawić Inwestorowi Zastępczemu wszystkie karty nadzoru
+     autorskiego za dane trzy miesiące niezwłocznie po zakończeniu danego okresu. Inwestorowi
+     Zastępczemu przysługuje prawo do weryfikacji przedłożonych kart nadzoru autorskiego
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                  7
+     w terminie do siedmiu Dni roboczych od dnia ich otrzymania i ich zatwierdzenia bądź odmowy
+     zatwierdzenia. W przypadku braku zgłoszenia odmowy zatwierdzenia kart nadzoru autorskiego
+     w tym terminie przez Inwestora Zastępczego uznaje się, iż karty nadzoru autorskiego
+     zatwierdził. Inwestor Zastępczy może odmówić zatwierdzenia karty nadzoru autorskiego
+     w szczególności w przypadku:
+     1)   nienależytego wykonania usługi pełnienia Nadzoru Autorskiego – do czasu usunięcia wady;
+     2)   gdy stwierdzi, iż pobyt dotyczy działania Wykonawcy polegającego na:
+          a)   poprawianiu błędów Dokumentacji Projektowej, STWiORB powstałych z winy
+               Wykonawcy,
+          b)   weryfikacji wniosku   o   zmianę   materiałów   inicjowanego   przez   Generalnego
+               Wykonawcę.
+7.   Wykonawca zobowiązany jest każdorazowo zawiadomić Inwestora Zastępczego
+     o dostrzeżonych na budowie istotnych odstępstwach od Dokumentacji Projektowej,
+     obowiązujących norm i sztuki budowlanej.
+8.   Inwestor Zastępczy wzywając Wykonawcę na naradę lub budowę każdorazowo będzie
+     informował o terminie wizyty, zakresie tematów oraz zaznaczał, czy wizyta będzie traktowana
+     jako Nadzór Autorski, czy jako naprawa błędów w opracowanej Dokumentacji Projektowej,
+     STWiORB.
+9.   Wykonawca, w ramach Nadzoru Autorskiego, będzie zobowiązany do udzielania niezwłocznie
+     (nie później niż do 5 dni, licząc od dnia otrzymania pytania) odpowiedzi na wszelkie pytania
+     Zamawiającego, Generalnego Wykonawcy, Inwestora Zastępczego oraz wskazanych przez
+     nich osób (wystosowane w formie elektronicznej lub pisemnej na adres kontaktowy podany
+     przez Wykonawcę). Korespondencja będzie prowadzona w języku polskim. Lista osób
+     upoważnionych do kontaktów z Wykonawcą wyszczególniona została w załączniku nr 5
+     do Umowy.
+
+                                 HARMONOGRAM RZECZOWY
+                                                  §6
+1.   Szczegółowy zakres rzeczowy (wskazany w załączniku nr 3) stanowi podstawę
+     do przygotowania przez Wykonawcę harmonogramu realizacji Przedmiotu Umowy – dalej
+     „Harmonogram rzeczowy”.
+2.   W terminie 14 dni od daty zawarcia Umowy Wykonawca przedstawi Zamawiającemu i/lub
+     Inwestorowi Zastępczemu Harmonogram rzeczowy, w układzie graficznym, określający
+     w szczególności:
+     1)   terminy przygotowywania Dokumentacji Projektowej;
+     2)   pozostałe elementy, które Strony uznają za konieczne do uwzględnienia w treści
+          Harmonogramu rzeczowego.
+3.   Harmonogram rzeczowy, o którym mowa w ust. 1, zostanie przekazany Inwestorowi
+     Zastępczemu pocztą elektroniczną na adresy e-mail wskazane w § 22 ust. 2 Umowy.
+4.   Inwestor Zastępczy w terminie do 7 Dni roboczych przedstawi Wykonawcy uwagi do
+     Harmonogramu rzeczowego lub dokona jego akceptacji. Wykonawca zobowiązany jest
+     uwzględnić uwagi Inwestora Zastępczego w terminie do 5 Dni roboczych i przedstawić
+     Harmonogram rzeczowy do ponownej akceptacji.
+
+
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                  8
+5.   Pisemne potwierdzenie przez Inwestora Zastępczego uwzględnienia jego uwag lub brak
+     zgłoszenia uwag w terminie określonym w ust. 4 będzie uważane przez Strony za zatwierdzenie
+     Harmonogramu rzeczowego.
+6.   W przypadku niezłożenia Harmonogramu rzeczowego w terminie, o którym mowa w ust. 2,
+     nieuwzględnienia w całości lub w części uwag Inwestora Zastępczego w terminie określonym w
+     ust. 4, lub gdy przedłożony Harmonogram rzeczowy będzie w ocenie Inwestora Zastępczego
+     niezgodny z Umową, a Inwestor Zastępczy uzna, że złożenie takiego Harmonogramu
+     rzeczowego jest możliwe, Wykonawca zapłaci Zamawiającemu karę umowną za każdy dzień
+     zwłoki w przygotowaniu dokumentu.
+7.   Strony mogą dokonywać bieżących aktualizacji/zmian Harmonogramu rzeczowego, w trakcie
+     obowiązywania Umowy, po uprzednim złożeniu pisemnego wniosku o jego zmianę oraz
+     zaakceptowaniu wprowadzanych zmian przez obydwie Strony, za pośrednictwem osób
+     wskazanych do koordynacji nad pracami w zakresie realizacji Przedmiotu Umowy, określonych
+     w § 22 ust. 2 i 3 Umowy.
+8.   Wprowadzenie aktualizacji/zmian do Harmonogramu rzeczowego powodujących zmianę
+     terminu zakończenia realizacji Etapów, o których mowa § 3 Umowy, wymaga zmiany
+     do Umowy.
+9.   Jeżeli Inwestor Zastępczy zgłosi uwagi do projektu zaktualizowanego Harmonogramu
+     rzeczowego, uzasadnione odniesieniem do wymagań realizacyjnych opisanych w Umowie, w
+     szczególności dotyczące jego niezgodności z postanowieniami Umowy lub tempa wykonywania
+     prac, Wykonawca jest zobowiązany do niezwłocznego, nie później niż w terminie 7 Dni
+     roboczych od ich otrzymania, przedłożenia poprawionego Harmonogramu rzeczowego
+     uwzględniającego uwagi Inwestora Zastępczego oraz postanowienia Umowy.
+10. Jeżeli faktyczny postęp realizacji Przedmiotu Umowy, z przyczyn leżących po stronie
+    Wykonawcy, będzie obiektywnie zagrażał terminowi zakończenia realizacji Umowy lub
+    określonemu terminowi zakończenia Etapu, lub Wykonawca z przyczyn leżących po jego stronie
+    nie dotrzyma terminu określonego w Harmonogramie rzeczowym lub zajdą inne istotne
+    odstępstwa od Harmonogramu rzeczowego, Wykonawca na żądanie Inwestora Zastępczego
+    niezwłocznie, nie później niż w terminie do 7 Dni roboczych, przedstawi Inwestorowi
+    Zastępczemu do zatwierdzenia projekt programu naprawczego, o którym mowa w ust. 11
+    poniżej.
+11. Program naprawczy powinien przewidywać reorganizację sposobu realizacji Przedmiotu
+    Umowy poprzez zwiększenie zaangażowania personelu, podwykonawców lub zasobów
+    finansowych Wykonawcy w celu wykonania niezrealizowanych dotychczas Etapów w terminach
+    określonych w zaktualizowanym Harmonogramie rzeczowym. Wykonawcy nie przysługuje
+    z tego tytułu dodatkowe wynagrodzenie.
+
+                   NAKŁADY INWESTYCYJNE NA ROBOTY BUDOWLANE
+                                               §7
+1.   Ustala się, iż nakłady inwestycyjne na wykonanie Robót Budowlanych nie mogą przekroczyć
+     łącznie kwoty w wysokości netto: …………….. zł (słownie: ……………………………… złotych).
+2.   Nakłady inwestycyjne wskazane w ust. 1 niniejszego paragrafu Umowy rozumiane są jako górna
+     granica wartości Kosztorysu Inwestorskiego sporządzonego przez Wykonawcę na podstawie
+     i zgodnie z postanowieniami niniejszej Umowy.
+
+
+
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                  9
+3.   Wykonawca zobowiązany jest niezwłocznie poinformować Zamawiającego i/lub Inwestora
+     Zastępczego o możliwości przekroczenia kwoty nakładów inwestycyjnych wskazanej w ust. 1
+     niniejszego paragrafu Umowy oraz podać szacowaną wysokość kwoty netto przekroczenia
+     budżetu. W takiej sytuacji Zamawiającemu będzie przysługiwało prawo do podjęcia decyzji o:
+     1)   zwiększeniu kwoty przeznaczonej na nakłady inwestycyjne;
+     2)   wprowadzeniu ograniczeń w zakresie planowanych prac (w tym rezygnacji z części z nich)
+          i/lub zastosowaniu (przy rekomendacji Wykonawcy) innych, niż pierwotnie zakładane,
+          rozwiązań (w tym rozwiązań technicznych lub technologicznych), które pozwolą
+          na obniżenie nakładów inwestycyjnych.
+4.   Decyzje wskazane w ust. 4 powyżej Zamawiający i/lub Inwestor Zastępczy przekaże w formie
+     pisemnej.
+5.   Zwiększenie kwoty przeznaczonej na nakłady inwestycyjne będzie wymagało sporządzenia
+     aneksu do Umowy.
+6.   Przedłożenie Zamawiającemu do odbioru Dokumentacji Projektowej lub jej części, której
+     realizacja będzie wiązała się z poniesieniem nakładów inwestycyjnych przekraczających kwotę
+     wskazaną w ust. 1 niniejszego paragrafu Umowy z pominięciem przez Wykonawcę obowiązku
+     wskazanego w ust. 3 będzie stanowiło podstawę do odstąpienia przez Zamawiającego od
+     Umowy z przyczyn leżących po stronie Wykonawcy.
+
+                                   OBOWIĄZKI WYKONAWCY
+                                               §8
+1.   Wykonawca oświadcza, że posiada (lub dysponuje osobą posiadającą) wymagane prawem
+     uprawnienia i kwalifikacje do wykonywania zawodu architekta bez ograniczeń
+     w Rzeczypospolitej Polskiej, a także zapewni udział innych osób, posiadających odpowiednie
+     uprawnienia i kompetencje stosownie do potrzeb, zgodnie z wymaganiami opisanymi
+     w Regulaminie Konkursu.
+2.   Wykonawca zobowiązany jest do realizacji przedmiotu Umowy zgodnie z treścią art. 355 § 2
+     Kodeksu cywilnego, postanowieniami niniejszej Umowy, obowiązującymi przepisami prawa
+     oraz zasadami wiedzy technicznej i sztuki budowlanej, z dołożeniem najwyższej staranności,
+     zgodnie z najlepszymi standardami zawodowymi i zasadami etyki zawodowej, na zasadach
+     i w sposób umożliwiający przeprowadzenie na podstawie opracowanej Dokumentacji
+     Projektowej, Kosztorysu Inwestorskiego i STWiORB postępowania o udzielenie zamówienia
+     publicznego na Roboty Budowlane.
+3.   Ponadto Wykonawca zobowiązany jest do:
+     1)   konsultowania z Inwestorem Zastępczym rozwiązań projektowych w istotny sposób
+          wpływających na realizację Przedmiotu Umowy, a także na nakłady inwestycyjne, o których
+          mowa w § 7 Umowy;
+     2)   uczestnictwa w spotkaniach oraz naradach koordynacyjnych z przedstawicielami
+          Zamawiającego i/lub Inwestora Zastępczego w trakcie całego procesu opracowywania
+          dokumentacji. Terminy i miejsca spotkań zostaną ustalone przez koordynatorów umowy
+          wskazanych w § 22 ust. 2 i 3 Umowy za pośrednictwem poczty elektronicznej;
+     3)   stosować i proponować najkorzystniejsze dla Zamawiającego i dostępne na rynku
+          w momencie sporządzania Dokumentacji Projektowej rozwiązania z punktu widzenia
+          ekonomicznego, technologicznego i technicznego;
+     4)   wyjaśniania wątpliwości Zamawiającego i/lub Inwestora Zastępczego odnośnie
+          do sporządzanej Dokumentacji Projektowej w terminach uzgodnionych między Stronami;
+
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                 10
+     5)   stosowania w przyjętych rozwiązaniach projektowych wyrobów, materiałów i urządzeń
+          dopuszczonych do obrotu i powszechnego stosowania w budownictwie, posiadających
+          odpowiednie wymagane prawem obowiązującym na terenie Rzeczypospolitej Polskiej
+          atesty i certyfikaty;
+     6)   informowania Inwestora Zastępczego o wszelkich okolicznościach mogących mieć wpływ
+          na terminy wykonania Umowy lub koszty jej wykonania;
+     7)   uzyskania koniecznych opinii i uzgodnień wynikających z przepisów prawa i związanych
+          z realizacją Przedmiotu Umowy, oprócz wynikających bezpośrednio z obowiązków
+          Zamawiającego;
+     8)   uzyskania mapy sytuacyjno-wysokościowej do celów projektowych;
+     9)   uzyskania warunków technicznych zaopatrzenia w infrastrukturę techniczną oraz dostępu
+          do drogi publicznej;
+     10) przekazania Inwestorowi Zastępczemu oryginałów pism dokumentów uzyskanych
+         i składanych w związku z wykonywaniem niniejszej Umowy, oraz do bieżącego
+         przekazywania ich kopii w terminie 3 dni od daty otrzymania.
+4.   Wykonawca umożliwi Zamawiającemu i/lub Inwestorowi Zastępczemu wgląd w opracowywaną
+     dokumentację będącą Przedmiotem Umowy, w szczególności w Dokumentację Projektową,
+     na każdym etapie jej wykonania, w sposób nie utrudniający realizację Umowy, poprzez
+     udostępnienie jej w swojej siedzibie lub poprzez dostęp w postaci elektronicznej umieszczając
+     wszystkie materiały na dysku zewnętrznym - w tzw. chmurze.
+5.   Do obowiązków Wykonawcy, należy także reprezentacja Zamawiającego, w szczególności:
+     1)   uzyskanie koniecznych pozwoleń wynikających z przepisów prawa i związanych
+          z realizacją Przedmiotu Umowy, a w szczególności takich jak pozwolenie konserwatorskie,
+          pozwolenie wodnoprawne, itd.;
+     2)   przygotowanie i złożenie wniosku o zatwierdzenie Dokumentacji Projektowej i wydanie
+          pozwoleń na budowę lub/i zgłoszeń robót budowlanych niewymagających pozwolenia
+          na budowę, w tym przygotowanie lub uzyskanie wymaganych załączników formalnych
+          wymienionych we wzorze wniosku oraz uzyskanie niezbędnych dokumentów, zgodnie
+          z zapisami ustawy Prawo budowlane;
+     3)   współdziałanie z organem administracji architektoniczno-budowlanej zatwierdzającym
+          Projekt Budowlany i udzielającym pozwolenia na budowę przez zachowanie wyznaczonych
+          terminów, składanie wyjaśnień dotyczących wniosku o pozwolenie na budowę
+          lub/i zgłoszenia robót budowlanych niewymagających pozwolenia na budowę, a także
+          uzupełnienie ewentualnych braków we wniosku, w tym dot. załączników formalnych,
+          wymienionych we wzorze wniosku.
+6.   Wykonawca zobowiązany jest w toku realizacji Przedmiotu Umowy uwzględnić
+     w przygotowywanej dokumentacji, a w szczególności w Dokumentacji Projektowej, Zalecenia
+     Inwestora Zastępczego ich dotyczące (z zastrzeżeniem ust. 7), mające na celu doprecyzowanie
+     lub modyfikację Wytycznych Projektowych, w szczególności w formie rozstrzygnięć
+     potwierdzonych w protokołach sporządzonych podczas narad koordynacyjnych („Zalecenia
+     Inwestora Zastępczego”). Po otrzymaniu Zaleceń Inwestora Zastępczego Wykonawca
+     niezwłocznie zapozna się z ich treścią i dokona ich oceny, a także koniecznej poprawy lub
+     zmiany dokumentacji i/lub Dokumentacji Projektowej, o czym zawiadomi Inwestora
+     Zastępczego w terminie 7 dni od otrzymania Zaleceń Inwestora Zastępczego, chyba, że Strony
+     uzgodnią inny termin – z zastrzeżeniem ust. 7 poniżej.
+7.   Wykonawca uprawniony będzie do odmowy uwzględnienia Zaleceń Inwestora Zastępczego
+     jeżeli dotyczą one elementów Dokumentacji Projektowej lub pozostałej dokumentacji, co do
+     których istotne parametry poszczególnych elementów zostały zatwierdzone przez Inwestora
+
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                 11
+     Zastępczego na wcześniejszym etapie realizacji Dokumentacji Projektowej lub pozostałej
+     dokumentacji, z zastrzeżeniem ust. 8, albo gdy ich uwzględnienie byłoby niezgodne z
+     obowiązującymi przepisami prawa, zasadami wiedzy technicznej, normami bądź prowadziłoby
+     do naruszenia integralności utworu ucieleśnionego w treści Projektu Budowlanego. W takich
+     przypadkach Wykonawca przekaże Inwestorowi Zastępczemu uzasadnienie odmowy
+     uwzględnienia Zaleceń Inwestora Zastępczego, z podaniem uzasadnienia, w terminie 7 dni od
+     otrzymania Zaleceń Inwestora Zastępczego.
+8.   Wykonawca uwzględni modyfikacje Wytycznych Projektowych skutkujące koniecznością
+     zmiany już wykonanej Dokumentacji Projektowej, pozostałej dokumentacji lub ich części pod
+     warunkiem, że możliwe jest dokonanie przez Strony zmiany Umowy w zakresie terminów oraz
+     wynagrodzenia, w przypadkach i w sposób określony w § 17 Umowy.
+
+              OBOWIĄZKI ZAMAWIAJĄCEGO I/LUB INWESTORA ZASTĘPCZEGO
+                                               §9
+1.   Przed przystąpieniem do opracowania Dokumentacji Projektowej, Inwestor Zastępczy przekaże
+     Wykonawcy materiały wyjściowe, a w szczególności:
+     1)   zalecenia pokonkursowe Sądu Konkursowego, stanowiące załącznik nr 1;
+     2)   wytyczne pokonkursowe Zamawiającego, stanowiące załącznik nr 2.
+2.   Inwestor Zastępczy doręczy Wykonawcy pisemne pełnomocnictwa obejmujące w szczególności
+     umocowanie do reprezentowania Zamawiającego przed organami administracji państwowej,
+     samorządowej oraz instytucjami opiniującymi we wszystkich sprawach związanych z
+     wykonaniem Przedmiotu Umowy. Projekt pełnomocnictwa/pełnomocnictw opracuje
+     Wykonawca i przedłoży Inwestorowi Zastępczemu do zatwierdzenia Zamawiającemu. Inwestor
+     Zastępczy opiniuje projekt dokumentu w terminie 10 Dni roboczych. W przypadku braku
+     zatwierdzenia projektu pełnomocnictwa przez Zamawiającego, Wykonawca w terminie 3 Dni
+     roboczych uwzględnienia uwagi lub przesyła pisemne zastrzeżenia. Inwestor Zastępczy
+     przekaże Wykonawcy pełnomocnictwo/pełnomocnictwa w terminie do 2 Dni roboczych od
+     zatwierdzenia przez Zamawiającego ostatecznej treści i formy pełnomocnictwa.
+3.   Do obowiązków Zamawiającego należy uzyskanie prawa do dysponowania nieruchomością
+     na cele budowlane dla całego obszaru inwestycji wraz z dokumentami uwierzytelniającymi.
+4.   W przypadku, jeżeli zakres opracowania projektowego oraz Robót Budowlanych ze względów
+     funkcjonalnych,    technicznych,   urbanistycznych,    architektonicznych,    uwarunkowań
+     zewnętrznych lub przepisów prawa przekroczy granice terenu będącego w dyspozycji
+     Zamawiającego, pozyska on odpowiednie zgody lub zwiąże się odpowiednimi umowami,
+     a w szczególności w zakresie infrastruktury technicznej (przyłączenia) i dojazdu do terenu
+     inwestycji. Zamawiający sporządza oświadczenia o prawie do dysponowania nieruchomością
+     na cele budowlane dla całego obszaru objętego Przedmiotem Umowy (dla całego obszaru
+     objętego inwestycją).
+5.   Do obowiązków Zamawiającego i/lub Inwestora Zastępczego należy ponadto:
+     1)   zapewnienie Wykonawcy bezpiecznego dostępu do nieruchomości, na której realizowany
+          będzie Przedmiot Umowy;
+     2)   terminowy odbiór przekazywanej przez Wykonawcę               Dokumentacji    Projektowej
+          i pozostałych elementów Przedmiotu Umowy;
+
+
+
+
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                 12
+     3)   udostępnienie Wykonawcy po zawarciu Umowy oraz każdorazowo na uzasadniony
+          wniosek Wykonawcy, wszelkich dokumentów lub danych, jeżeli w ocenie Zamawiającego
+          i/lub Inwestora Zastępczego i Wykonawcy będą miały znaczenie dla realizacji Umowy.
+
+                                      ZESPÓŁ PROJEKTOWY
+                                                § 10
+1.   Wykonawca winien zapewnić wykonanie Przedmiotu Umowy przez osoby wskazane
+     w załączniku nr 4 do Umowy.
+2.   Wykonawca może rozszerzyć skład Zespołu projektowego w stosunku do składu podanego
+     w załączniku nr 4 do Umowy o dodatkowe osoby w zakresie jaki jest niezbędny dla wykonania
+     Przedmiotu Umowy, z zastrzeżeniem posiadania przez dodatkowe osoby odpowiednich
+     kwalifikacji, wiedzy, doświadczenia i uprawnień zgodnie z obowiązującymi przepisami prawa
+     oraz jakie będą niezbędne dla realizacji powierzonego przez Wykonawcę tej osobie zakresu
+     prac do wykonania.
+3.   Rozszerzenie składu Zespołu projektowego nie wymaga sporządzenia aneksu do Umowy, lecz
+     Wykonawca zobowiązany jest każdorazowo do pisemnego zawiadomienia Inwestora
+     Zastępczego o tym fakcie podając jednocześnie następujące informacje dotyczące dodatkowej
+     osoby:
+     1)   imię i nazwisko;
+     2)   zakres prac powierzonych tej osobie do realizacji;
+     3)   wskazanie kwalifikacji, wiedzy, doświadczenia i uprawnień zgodnie z obowiązującymi
+          przepisami prawa jakimi legitymuje się ta osoba.
+4.   Wykonawca może zaproponować wymianę każdej z osób będących twórcami Dokumentacji
+     Projektowej, przy czym:
+     1)   nowa zaproponowana przez Wykonawcę osoba powinna posiadać odpowiednie
+          kwalifikacje, wiedzę, doświadczenie i uprawnienia zgodnie z obowiązującymi przepisami
+          prawa oraz jakie będą niezbędne dla realizacji powierzonego przez Wykonawcę tej osobie
+          zakresu prac do wykonania;
+     2)   w przypadku wymiany osoby wskazanej w załączniku nr 4 do Umowy nowa zaproponowana
+          przez Wykonawcę osoba musi spełniać wymagania określone dla danej osoby w Rozdziale
+          XI ust. 1 pkt 3 Regulaminu Konkursu. Wykonawca będzie zobowiązany udokumentować
+          Inwestorowi Zastępczemu spełnienie powyższych wymagań, w szczególności
+          przedkładając Inwestorowi Zastępczemu dokumenty wskazane w XI ust. 1 pkt 4 lit. f)
+          Regulaminu Konkursu.
+     3)   Wykonawca winien przedłożyć Inwestorowi Zastępczemu oświadczenia osoby wymienianej
+          potwierdzające, że:
+          a)   przenosi na Zamawiającego autorskie prawa majątkowe do Dokumentacji Projektowej
+               na wszystkich polach eksploatacji wskazanych w § 16 Umowy,
+          b)   zezwala zarówno Wykonawcy, jak i Zamawiającemu na wykonywanie zależnych praw
+               autorskich, w tym w szczególności na dokonywanie bez konieczności uzyskania
+               jakichkolwiek dalszych zgód wszelkich zmian w Dokumentacji Projektowej wraz
+               z upoważnieniem do udzielania dalszej zgody na wykonywanie tych praw.
+     4)   Wykonawca winien przedłożyć dokumenty, o których mowa jest w ust. 4 pkt 2 i pkt 3
+          niniejszego paragrafu Umowy na co najmniej 7 (siedem) Dni przed planowaną zmianą.
+          Jeżeli zachowanie terminu wskazanego w zdaniu pierwszym nie jest możliwe z uwagi na
+          wystąpienie okoliczności o charakterze nagłym i nieprzewidzianym, Wykonawca winien
+          przedłożyć dokumenty, o których mowa jest w ust. 4 pkt 2 i pkt 3 niniejszego paragrafu
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                 13
+          Umowy w terminie nie późniejszym niż 3 (trzy) Dni robocze od zaistnienia zdarzenia
+          determinującego konieczność wymiany.
+5.   Wymiana osoby wskazanej w załączniku nr 4 do Umowy wymaga zawarcia pisemnego aneksu
+     do niniejszej Umowy.
+6.   Zamawiający i/lub Inwestor Zastępczy może odmówić wyrażenia zgody na realizację
+     Przedmiotu Umowy przez inną zaproponowaną przez Wykonawcę osobę wskazaną
+     w załączniku nr 4 do Umowy w sytuacji, gdy nie spełnia ona wymagań określonych w Rozdziale
+     XI ust. 1 pkt 3 Regulaminu Konkursu lub Wykonawca nie jest w stanie przedłożyć kompletu
+     dokumentów je potwierdzających. Wówczas w takiej sytuacji Wykonawca winien zaproponować
+     kolejną nową osobę.
+7.   Rozszerzenie lub zmiana składu Zespołu projektowego pozostaje bez wpływu na wysokość
+     wynagrodzenia określonego w Umowie, tj. Wykonawcy z tego tytułu nie przysługuje dodatkowe
+     wynagrodzenie.
+
+                                        UBEZPIECZENIE
+                                               § 11
+1.   Wykonawca w terminie 7 dni od dnia podpisania niniejszej Umowy, przedstawi Inwestorowi
+     Zastępczemu do akceptacji projekt umowy ubezpieczeniowej odpowiedzialności cywilnej z
+     tytułu szkód, jakie wyrządzić może Wykonawca Zamawiającemu (ubezpieczenie Wykonawcy
+     od szkód związanych z wykonywaniem Przedmiotu Umowy), na sumę nie mniejszą niż
+     5 000 000,00 zł (słownie: pięć milionów 00/100 złotych). Inwestor Zastępczy po przedłożeniu
+     mu projektu umowy ubezpieczeniowej odpowiedzialności cywilnej w terminie 7 dni od daty jej
+     otrzymania zaakceptuje wzór umowy ubezpieczeniowej odpowiedzialności cywilnej, bądź
+     wskaże te jej postanowienia, które w jego ocenie wymagają jeszcze zmian bądź dodatkowych
+     negocjacji. Wszelkie wskazane w tym trybie przez Inwestora Zastępczego zmiany lub
+     uzupełnienia umowy ubezpieczeniowej odpowiedzialności cywilnej powinny być przez
+     Wykonawcę uzupełnione i przedłożone w formie podpisanej już umowy ubezpieczeniowej
+     odpowiedzialności cywilnej w terminie kolejnych 7 dni. Niedostarczenie Inwestorowi
+     Zastępczemu ww. umowy we wskazanym terminie uprawniać będzie Zamawiającego wg jego
+     wyboru:
+     1)   do zawarcia w imieniu Wykonawcy stosownej umowy ubezpieczenia na koszt Wykonawcy,
+          który to koszt Zamawiający będzie uprawniony potrącić z wynagrodzenia Wykonawcy
+          należnego z tytułu realizacji Przedmiotu niniejszej Umowy albo
+     2)   będzie stanowiło podstawę do odstąpienia przez Zamawiającego od Umowy z przyczyn
+          leżących po stronie Wykonawcy.
+2.   Przedmiotowe ubezpieczenie winno zostać utrzymane przez Wykonawcę (na nie mniejszą
+     kwotę) przez cały okres obowiązywania Umowy, w tym przez cały okres gwarancji i rękojmi
+     zgodnie z postanowieniami niniejszej Umowy.
+3.   W przypadku wygaśnięcia ważności polisy ubezpieczeniowej przed upływem okresu, na jaki
+     została zawarta Umowa, Wykonawca ma obowiązek przedłużenia okresu ważności
+     ubezpieczenia. Wykonawca ma obowiązek przedstawić dokument potwierdzający przedłużenie
+     okresu ważności polisy ubezpieczeniowej nie później niż w terminie do 5-ciu (pięciu) Dni
+     roboczych przed upływem terminu ważności aktualnej polisy – w formie oryginału lub kopii
+     poświadczonej „za zgodność z oryginałem” przez Wykonawcę.
+4.   Niezależnie od postanowień ust. 3 niniejszego paragrafu Umowy, Wykonawca jest zobowiązany
+     do przedłożenia na każde żądanie Zamawiającego i/lub Inwestora Zastępczego dokumentów
+
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                 14
+     potwierdzających opłacenie polisy ubezpieczeniowej (dotyczy potwierdzenia opłacenia składek
+     wymaganych na dzień wystosowania żądania przez Inwestora Zastępczego) – w terminie do 5-
+     ciu (pięciu) Dni roboczych od otrzymania wezwania Inwestora Zastępczego w tym zakresie.
+     Dokumenty należy przedłożyć w formie oryginału lub kopii poświadczonej „za zgodność z
+     oryginałem” przez Wykonawcę.
+5.   Niewywiązanie się przez Wykonawcę z obowiązków wskazanych w ust. 3 i ust. 4 niniejszego
+     paragrafu Umowy będzie stanowiło podstawę do odstąpienia przez Zamawiającego od Umowy
+     z przyczyn leżących po stronie Wykonawcy.
+
+                                       PODWYKONAWCY
+                                               § 12
+1.   Wykonawca może powierzyć podwykonawcom wykonanie części Przedmiotu Umowy.
+2.   W przypadku powierzenia wykonania części Przedmiotu Umowy podwykonawcom, Wykonawca
+     ponosi odpowiedzialność za działania i zaniechania podwykonawców i wszelkich osób, którymi
+     posługuje się przy wykonaniu Umowy, jak za własne działania i zaniechania.
+3.   Wykonawca zobowiązany jest poinformować pisemnie Inwestora Zastępczego w terminie do 7
+     dni od dnia zawarcia umowy o podwykonawstwo, o powierzeniu wykonania części Przedmiotu
+     Umowy podwykonawcy oraz o zapisach wiążących strony z podaniem wszelkich informacji
+     mających wpływ na realizację Umowy, w tym w szczególności Wykonawca zobowiązany jest
+     wskazać nazwę podwykonawcy oraz zakres powierzonych mu zadań, z zastrzeżeniem, że w
+     przypadku jeśli dotyczy to prac dla których w Regulaminie Konkursu lub zaproszeniu do
+     negocjacji określono wymagania związane z posiadaniem określonych kwalifikacji lub
+     doświadczenia, Wykonawca zobowiązany jest wykazać Inwestorowi Zastępczemu, że
+     podwykonawca posiada co najmniej wymagane kwalifikacje lub doświadczenie przed
+     powierzeniem mu wykonywania prac.
+4.   Wykonawca zobowiązany jest:
+     1)   nabyć od podwykonawców autorskie prawa majątkowe i przekazać je Zamawiającemu,
+          w ramach wynagrodzenia umownego, jeżeli takie prawa autorskie miałyby powstać
+          w trakcie realizacji niniejszej Umowy;
+     2)   do koordynacji opracowań projektowych wykonywanych przez podwykonawców oraz
+          zapewnienia sprawowania przez nich Nadzoru Autorskiego w zakresie realizowanych
+          opracowań projektowych.
+5.   Podwykonawca nie może zawierać umowy z dalszymi podwykonawcami bez pisemnej zgody
+     Wykonawcy i Inwestora Zastępczego.
+6.   Inwestor Zastępczy ma prawo żądać zmiany podwykonawcy, w szczególności w razie
+     podejmowania przez niego rażących działań uniemożliwiających lub utrudniających prawidłową
+     realizację Przedmiotu Umowy.
+
+                                            TERMINY
+                                               § 13
+1.   Umowa będzie realizowana Etapami, określonymi w § 3 ust. 1 Umowy.
+2.   Wykonawca zobowiązany jest do realizacji Przedmiotu Umowy w terminie do 60 miesięcy
+     od zawarcia niniejszej Umowy, przy czym:
+     1)   Etap 1 - „Dokumentacja Projektowa - Wielobranżowy Projekt Koncepcyjny”
+
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                 15
+          - w terminie do ….. miesięcy od zawarcia Umowy,
+     2)   Etap 2 - „Dokumentacja Projektowa - Projekt Budowlany”
+          - w terminie do 12 miesięcy od zawarcia Umowy;
+     3)   Etap 3 - „Pozwolenie na budowę”
+          - w terminie do czasu uzyskania prawomocnego pozwolenia na budowę;
+     4)   Etap 4 - „Dokumentacja Projektowa - Projekt Wykonawczy”
+          - w terminie do 18 miesięcy od zawarcia Umowy;
+     5)   Etap 5 - „usługi doradcze”
+          - przez cały okres trwania postępowania o udzielenie zamówienia publicznego na
+          wykonanie Robót Budowlanych, z zastrzeżeniem § 4 ust. 3 Umowy;
+     6)   Etap 6 - „Nadzór Autorski”
+          - sprawowany będzie od dnia złożenia przez Zamawiającego i/lub Inwestora Zastępczego
+          oświadczenia o rozpoczęciu Robót Budowlanych do dnia uzyskania ostatecznego
+          pozwolenia na użytkowanie, ale nie dłużej niż do 36 miesięcy.
+3.   Terminy, o których mowa w ust. 2 obejmują czynności odbioru, o których mowa w § 15 niniejszej
+     Umowy, co oznacza, iż Przedmiot Umowy winien być zgłoszony do odbioru z odpowiednim
+     wyprzedzeniem gwarantującym dochowanie przez Wykonawcę terminów, o których mowa w
+     ust. 2.
+4.   W uzasadnionych przypadkach Inwestor Zastępczy dopuszcza                   realizację   Etapów
+     równocześnie, po uprzednim pisemnym wniosku Wykonawcy.
+
+                                       WYNAGRODZENIE
+                                               § 14
+1.   Za wykonanie Przedmiotu Umowy, w tym wykonanie zobowiązań wynikających z § 16 Umowy,
+     Strony uzgadniają wynagrodzenie ryczałtowe w kwocie:
+     brutto: ………… złotych (słownie: ……………………… złotych …/100),
+     w tym netto: ………… złotych (słownie: ……………………… złotych …/100),
+     plus podatek VAT wg obowiązujących przepisów – zgodnie ze stanem prawnym na dzień
+     zawarcia Umowy podatek VAT wynosi …. %, czyli ………… złotych (słownie:
+     ……………………… złotych …/100).
+2.   Wynagrodzenie     ryczałtowe      wskazane       w   ust.   1    powyżej      płatne    będzie
+     w następujących częściach:
+     1)   wynagrodzenie za wykonanie Przedmiotu Umowy w zakresie Etapu 1 w wysokości 12 %
+          wynagrodzenia wskazanego w ust. 1 powyżej, tj. …….………zł brutto, w tym netto:
+          ………… złotych (słownie: ……………………… złotych …/100), plus podatek VAT wg
+          obowiązujących przepisów – zgodnie ze stanem prawnym na dzień zawarcia Umowy
+          podatek VAT wynosi ….. %, czyli ………… złotych (słownie: ……………………… złotych
+          …/100), płatne po odbiorze Etapu 1;
+     2)   wynagrodzenie za wykonanie Przedmiotu Umowy w zakresie Etapu 2 w wysokości 30 %
+          wynagrodzenia wskazanego w ust. 1 powyżej, tj. …….………………zł brutto, w tym netto:
+          ………… złotych (słownie: ……………………… złotych …/100), plus podatek VAT wg
+          obowiązujących przepisów – zgodnie ze stanem prawnym na dzień zawarcia Umowy
+          podatek VAT wynosi …. %, czyli ………… złotych (słownie: ……………………… złotych
+          …/100), płatne po odbiorze Etapu 2;
+
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                 16
+     3)   wynagrodzenie za wykonanie Przedmiotu Umowy w zakresie Etapu 3 w wysokości 10 %
+          wynagrodzenia wskazanego w ust. 1 powyżej, tj. …….………………zł brutto, w tym netto:
+          ………… złotych (słownie: ……………………… złotych …/100), plus podatek VAT wg
+          obowiązujących przepisów – zgodnie ze stanem prawnym na dzień zawarcia Umowy
+          podatek VAT wynosi …. %, czyli ………… złotych (słownie: ……………………… złotych
+          …/100), płatne po uzyskaniu prawomocnej decyzji o pozwoleniu na budowę;
+     4)   wynagrodzenie za wykonanie Przedmiotu Umowy w zakresie Etapu 4 w wysokości 40 %
+          wynagrodzenia wskazanego w ust. 1 powyżej, tj. …….………………zł brutto, w tym netto:
+          ………… złotych (słownie: ……………………… złotych …/100), plus podatek VAT wg
+          obowiązujących przepisów – zgodnie ze stanem prawnym na dzień zawarcia Umowy
+          podatek VAT wynosi …. %, czyli ………… złotych (słownie: ……………………… złotych
+          …/100), płatne po odbiorze Etapu 4;
+     5)   wynagrodzenie za wykonanie Przedmiotu Umowy w zakresie Etapu 5 w wysokości 1 %
+          wynagrodzenia wskazanego w ust. 1 powyżej, tj. …….………………zł brutto, w tym netto:
+          ………… złotych (słownie: ……………………… złotych …/100), plus podatek VAT wg
+          obowiązujących przepisów – zgodnie ze stanem prawnym na dzień zawarcia Umowy
+          podatek VAT wynosi ….. %, czyli ………… złotych (słownie: ……………………… złotych
+          …/100), płatne po podpisaniu umowy z Generalnym Wykonawcą;
+     6)   wynagrodzenie za wykonanie Przedmiotu Umowy w zakresie Etapu 6 w wysokości 7 %
+          wynagrodzenia wskazanego w ust. 1 powyżej, tj. …….………………zł brutto, w tym netto:
+          ………… złotych (słownie: ……………………… złotych …/100), plus podatek VAT wg
+          obowiązujących przepisów – zgodnie ze stanem prawnym na dzień zawarcia Umowy
+          podatek VAT wynosi ….. %, czyli ………… złotych (słownie: ……………………… złotych
+          …/100).
+          Wynagrodzenie za Etap 6 będzie płatne w równych trzymiesięcznych ratach w wysokości:
+          ………zł brutto, w tym netto: ………… złotych (słownie: ……………………… złotych
+          …/100), plus podatek VAT wg obowiązujących przepisów – zgodnie ze stanem prawnym
+          na dzień zawarcia Umowy podatek VAT wynosi ……. %, czyli ………… złotych (słownie:
+          ……………………… złotych …/100), do kwoty nie przekraczającej 90% wynagrodzenia za
+          Etap 6.
+          Pozostała część wynagrodzenia za wykonanie Etapu 6 będzie płatna po podpisaniu
+          protokołu końcowego odbioru, o którym mowa w § 15 ust. 15 Umowy.
+3.   Wynagrodzenie umowne Strony ustalają jako ryczałtowe, a zatem stałe, niezmienne
+     i obejmujące wszystkie koszty Wykonawcy związane z realizacją Przedmiotu Umowy (w tym
+     wszystkie podatki m.in. podatek VAT, koszty ubezpieczenia, koszty uzgodnień, pozwoleń, opłat
+     oraz koszty związane z wykonaniem wszystkich zobowiązań Wykonawcy określonych w
+     Umowie), w tym w szczególności z tytułu przeniesienia na Zamawiającego wszelkich
+     majątkowych praw autorskich do Przedmiotu Umowy, na wszystkich polach eksploatacji w niej
+     wymienionych, z tytułu zezwolenia na wykonywanie praw zależnych i udzielonych zgód.
+4.   Wykonawca każdorazowo wystawia fakturę na:
+     Województwo Dolnośląskie - Urząd Marszałkowski Województwa Dolnośląskiego
+     Wybrzeże Słowackiego 12-14
+     50-411 Wrocław
+     NIP: 899-28-03-047, REGON 931934644
+     Z uwagi na ciążący na Inwestorze Zastępczym obowiązek sprawdzenia dokumentów
+     rozliczeniowych (faktur) przed ich przekazaniem Zamawiającemu w celu dokonania płatności,
+     Wykonawca winien każdorazowo doręczyć fakturę do siedziby Inwestora Zastępczego przy ul.
+     Igielnej 13, 50-117 Wrocław lub na adres mailowy ……………………..
+
+
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                 17
+5.   Podstawę do wystawienia faktur VAT stanowić będą podpisane przez Strony protokoły odbioru,
+     o których mowa w § 15 ust. 11, § 15 ust. 14 oraz § 15 ust. 15 Umowy.
+6.   Za termin dokonania płatności uważa się datę obciążenia rachunku bankowego
+     Zamawiającego. Zamawiający dokona płatności wynagrodzenia, o którym mowa w ust. 1, z
+     zastosowaniem mechanizmu podzielonej płatności.
+7.   Zamawiający oświadcza, że jest czynnym podatnikiem podatku VAT – NIP 899-28-03-047.
+8.   Wykonawca oświadcza, że jest czynnym podatnikiem podatku VAT / korzysta ze zwolnienia
+     w zakresie podatku VAT / nie jest czynnym podatnikiem podatku VAT (niepotrzebne skreślić).
+9.   Zapłata wynagrodzenia następować będzie w formie przelewów na rachunek bankowy
+     Wykonawcy wskazany na fakturze w terminie do 30 dni od daty przedłożenia prawidłowo
+     wystawionej faktury.
+10. Za dzień zapłaty Strony przyjmują dzień obciążenia rachunku bankowego Zamawiającego.
+
+                                              ODBIÓR
+                                                  § 15
+1.   Wykonawca w ramach Etapu 1 przekaże Inwestorowi Zastępczemu:
+     1)   Wielobranżowy Projekt Koncepcyjny w trzech egzemplarzach w wersji papierowej oraz
+          w wersji elektronicznej (w wersji edytowalnej oraz w wersji nieedytowalnej w formacie *pdf);
+     2)   oszacowaną wartość kosztorysową inwestycji w dwóch egzemplarzach w wersji papierowej
+          oraz w wersji elektronicznej na nośniku typu pendrive (w wersji edytowalnej oraz w wersji
+          nieedytowalnej w formacie *pdf).
+     przy czym wersja elektroniczna oraz papierowa nie będą się od siebie w żaden sposób różniły
+     – w przypadku rozbieżności między wersją elektroniczną a papierową, wersja papierowa
+     (wydrukowana) jest obowiązująca.
+2.   Wykonawca w ramach Etapu 2 przekaże Inwestorowi Zastępczemu:
+     1)   „Dokumentację Projektową - Projekt Budowlany” w tym:
+          a)   projekt zagospodarowania terenu,
+          b)   projekt architektoniczno-budowlany,
+          c)   projekt techniczny, w zakresie wymaganym do złożenia wniosku o pozwolenie na
+               budowę,
+          d)   wszelkie konieczne opinie, uzgodnienia, pozwolenia i inne dokumenty wymagane
+               przepisami szczególnymi niezbędne do uzyskania ostatecznej decyzji o pozwoleniu na
+               budowę,
+          w trzech egzemplarzach w wersji papierowej oraz w wersji elektronicznej na nośniku typu
+          pendrive (w wersji edytowalnej oraz w wersji nieedytowalnej w formacie *pdf);
+     2)   kompletny wniosek o wydanie decyzji o pozwoleniu na budowę zatwierdzony
+          i opieczętowany przez odpowiedni organ administracji architektoniczno-budowlanej
+          w wersji papierowej lub jego wersję elektroniczną.
+     przy czym wersja elektroniczna oraz papierowa nie będą się od siebie w żaden sposób różniły
+     – w przypadku rozbieżności między wersją elektroniczną a papierową, wersja papierowa
+     (wydrukowana) jest obowiązująca.
+
+
+
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                 18
+3.   Potwierdzeniem zakończenia Etapu 3 jest złożenie przez Wykonawcę Inwestorowi
+     Zastępczemu oryginału prawomocnej decyzji pozwolenia na budowę w rozumieniu art. 16 § 3
+     ustawy z dnia 14 czerwca 1960 r. Kodeks postępowania administracyjnego.
+4.   Wykonawca w ramach Etapu 4 przekaże Inwestorowi Zastępczemu:
+     1)   „Dokumentację Projektową - Projekt Wykonawczy” w tym:
+          a)   wielobranżowy Projekt Wykonawczy,
+          b)   projekt techniczny, w pozostałym zakresie,
+          c)   Projekt Aranżacji Wnętrz,
+          d)   Przedmiar Robót,
+          w trzech egzemplarzach w wersji papierowej oraz w wersji elektronicznej na nośniku typu
+          pendrive (w wersji edytowalnej oraz w wersji nieedytowalnej w formacie *pdf);
+     2)   STWiORB, w trzech egzemplarzach w wersji papierowej oraz w wersji elektronicznej
+          na nośniku typu pendrive (w wersji edytowalnej oraz w wersji nieedytowalnej w formacie
+          *pdf);
+     3)   Kosztorys Inwestorski, w formacie w trzech egzemplarzach w wersji papierowej oraz
+          w wersji elektronicznej na nośniku typu pendrive (w wersji edytowalnej oraz w wersji
+          nieedytowalnej w formacie *pdf).
+     przy czym wersja elektroniczna oraz papierowa nie będą się od siebie w żaden sposób różniły
+     – w przypadku rozbieżności między wersją elektroniczną a papierową, wersja papierowa
+     (wydrukowana) jest obowiązująca.
+5.   Potwierdzeniem zakończenia Etapu 5 jest zawarcie umowy z Generalnym Wykonawcą lub
+     drugie unieważnienie postępowania o zamówienie publiczne na wykonanie Robót
+     Budowlanych.
+6.   Etap 6 podlegał będzie odbiorom:
+     1)   częściowym na podstawie kart nadzoru autorskiego przedkładanych przez Wykonawcę
+          co trzy miesiące;
+     2)   końcowemu na podstawie kart nadzoru autorskiego przedłożonych przez Wykonawcę
+          po uzyskaniu ostatecznego pozwolenia na użytkowanie.
+7.   Po upływie okresu gwarancji, o którym mowa w § 17 ust. 2 Umowy, Strony w terminie do 7 Dni
+     dokonają odbioru pogwarancyjnego Przedmiotu Umowy. Potwierdzeniem odbioru
+     pogwarancyjnego będzie podpisany przez obie Strony protokół odbioru pogwarancyjnego.
+8.   Miejscem odbioru Przedmiotu Umowy będzie siedziba Inwestora Zastępczego, z zastrzeżeniem
+     ust. 7 powyżej.
+9.   Wykonawca przekaże Dokumentację Projektową oraz pozostałe opracowania zgodnie
+     z Umową i Załącznikami, wraz z wykazem przekazywanych elementów. Każdy element
+     Dokumentacji Projektowej oraz pozostałe opracowania będą odbierane przez Inwestora
+     Zastępczego za potwierdzeniem przekazania przez osobę upoważnioną przez Inwestora
+     Zastępczego do kontaktów z Wykonawcą, która potwierdzi na protokole fakt dostarczenia
+     Inwestorowi Zastępczemu dokumentacji w zakresie objętym danym Etapem. Wykonawca
+     sporządzi na piśmie protokół przekazania dokumentacji.
+10. W terminie do 30 dni od dnia przekazania przez Wykonawcę Dokumentacji Projektowej i/lub
+    STWIORB i/lub Kosztorysu Inwestorskiego i/lub pozostałych opracowań na podstawie
+    protokołu, o którym mowa w ust. 9, Inwestor Zastępczy:
+
+
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                 19
+    1)   dokona odbioru ilościowego elementów Dokumentacji Projektowej i/lub STWIORB i/lub
+         Kosztorysu Inwestorskiego i/lub innych przekazywanych opracowań, po wcześniejszym ich
+         sprawdzeniu;
+    2)   sformułuje uwagi i wezwie Wykonawcę do wyjaśnień lub dokonania uzupełnień, zmian lub
+         poprawek w przekazywanej Dokumentacji Projektowej i/lub STWIORB i/lub Kosztorysie
+         Inwestorskim i/lub opracowaniach w powyższym zakresie.
+11. Potwierdzeniem odbioru Dokumentacji Projektowej i/lub STWIORB i/lub Kosztorysu
+    Inwestorskiego i/lub pozostałych opracowań oraz zrealizowania innych usług wchodzących
+    w zakres Przedmiotu Umowy, a jednocześnie podstawą do wystawienia faktur częściowych, jest
+    wyłącznie odpowiedni protokół odbioru, potwierdzający odbiór prac w danym Etapie, podpisany
+    przez Zamawiającego i Wykonawcę.
+12. W przypadku określonym w ust. 10 pkt 2 powyżej, Wykonawca w terminie uzgodnionym
+    pomiędzy Stronami Umowy sformułuje na piśmie wyjaśnienia lub wprowadzi uzupełnienia i
+    poprawki, zmiany (z zastrzeżeniem ust. 13), wraz z informacją o ich ewentualnym wpływie na
+    rozwiązania projektowe, a następnie dokona przekazania Dokumentacji Projektowej w trybie
+    określonym w ust. 9, a Zamawiający dokona ponownego odbioru w trybie określonym w ust. 10.
+13. Wykonawca ma prawo odmówić wprowadzenia wnioskowanych przez Zamawiającego zmian,
+    uzupełnień i poprawek do Dokumentacji Projektowej i/lub pozostałych opracowań w przypadku,
+    gdy ich uwzględnienie byłoby niezgodne z obowiązującymi przepisami prawa, zasadami wiedzy
+    technicznej, sztuki budowlanej, normami, popartych pisemnym uzasadnieniem, przy
+    uwzględnieniu postanowień § 8 ust. 7 niniejszej Umowy.
+14. Odbiór Przedmiotu Umowy w odniesieniu do:
+    1)   Etapu 3;
+    2)   Etapu 5;
+    - niewymagających przekazania i odbioru według zasad określonych w ust. 9-13 powyżej,
+    nastąpi na podstawie podpisanego przez Wykonawcę i Inwestora Zastępczego protokołu
+    odbioru danego Etapu.
+15. Odbiór Przedmiotu Umowy w zakresie Nadzoru Autorskiego następować będzie na podstawie
+    kart z pełnienia nadzoru, o których mowa w ust. 6 powyżej. Protokół, wraz z zestawieniem
+    czynności Nadzoru Autorskiego będzie wystawiany przez Wykonawcę co trzy miesiące, do
+    momentu uzyskania ostatecznego pozwolenia na użytkowanie, za wyjątkiem ostatniego, który
+    będzie protokołem odbioru końcowego tego Etapu, jak również całego Przedmiotu Umowy.
+16. Strony zgodnie oświadczają, że przy odbiorze Dokumentacji Projektowej lub pozostałych
+    opracowań, Zamawiający i/lub Inwestor Zastępczy nie są zobowiązani dokonywać sprawdzenia
+    jakości przekazanej dokumentacji. W przypadku ujawnienia ewentualnych wad Dokumentacji
+    Projektowej lub pozostałych opracowań w trakcie realizacji Przedmiotu Umowy w stosunku do
+    uprzednio odebranego Etapu, Wykonawca (w ramach uzgodnionego wynagrodzenia, tj. bez
+    dodatkowego wynagrodzenia) jest zobowiązany do ich usunięcia w terminie uzgodnionym z
+    Inwestorem Zastępczym, na własny koszt, w szczególności poprzez sporządzenie właściwych
+    opracowań, wraz z kompletem wymaganych opinii, uzgodnień i/lub innych wymaganych
+    prawem stanowisk.
+17. Strony zgodnie oświadczają, że odbiór Przedmiotu Umowy przez Zamawiającego i/lub
+    Inwestora Zastępczego nie stanowi dorozumianego zrzeczenia się ewentualnych roszczeń w
+    jakimkolwiek zakresie, w tym w szczególności odszkodowawczych z tytułu jej wadliwości,
+    niekompletności, niezgodności z prawem lub nieprzydatności dla celów Zamawiającego. W
+    szczególności odbiór Przedmiotu Umowy (elementu Przedmiotu Umowy) nie wyłącza
+
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                 20
+     możliwości żądania wprowadzania do niej uzasadnionych zmian wskazanych przez
+     Generalnego Wykonawcę i zweryfikowanych pod względem ich celowości, na etapie
+     wykonywania umowy o Roboty Budowlane. Jeżeli dana wada ujawni się lub zostanie
+     stwierdzona dopiero w trakcie realizacji Robót Budowlanych, taki fakt należy odnotować w
+     dzienniku budowy.
+18. Jeżeli w trakcie realizacji Robót Budowlanych, wykonywanych na podstawie Dokumentacji
+    Projektowej, okaże się, że wskutek wad, błędów lub braków projektowych konieczne stało się
+    wykonanie dodatkowych robót, Wykonawca zapłaci Zamawiającemu odszkodowanie
+    pokrywające wysokość kosztów związanych z tymi robotami.
+19. Zamawiający zatrzyma 10% wynagrodzenia, o którym mowa w § 14 ust. 2 pkt 6 Umowy do
+    momentu uzyskania ostatecznego pozwolenia na użytkowanie inwestycji. Pozostałe
+    wynagrodzenie należne za Etap 6 (tj. 90%) zostanie podzielone proporcjonalnie do czasu
+    trwania planowanego Nadzoru Autorskiego, wynikającego z zakresu realizacji inwestycji przez
+    Generalnego Wykonawcę.
+20. Wypłata zatrzymanego wynagrodzenia nastąpi na podstawie podpisanego przez Strony Umowy
+    protokołu odbioru końcowego, o którym mowa w ust. 15, po uzyskaniu ostatecznego pozwolenia
+    na użytkowanie inwestycji.
+21. Za dzień wykonania danego Etapu Umowy uważa się dzień podpisania przez obie Strony
+    odpowiedniego dla danego Etapu protokołu odbioru lub protokołu odbioru końcowego, o którym
+    mowa w ust. 15.
+
+                                        PRAWA AUTORSKIE
+                                                 § 16
+1.   Wykonawca oświadcza, że utwory powstałe lub udostępnione w wyniku wykonywania lub w
+     związku z wykonywaniem niniejszej Umowy, w szczególności Dokumentacja Projektowa oraz
+     inne dokumenty powstałe/dostarczone, w toku realizacji Przedmiotu Umowy, zwane dalej
+     „Utworami” nie będą naruszać praw własności intelektualnej innych osób, w szczególności
+     autorskich praw majątkowych i osobistych oraz nie będą obciążone żadnymi wadami prawnymi,
+     szczególnie prawami osób trzecich oraz że przysługuje mu całość majątkowych praw autorskich
+     do Utworów.
+2.   W ramach wynagrodzenia, o którym mowa w § 14 ust. 1 Umowy, z chwilą podpisania przez
+     Zamawiającego protokołów odbioru lub odpowiednio protokołu odbioru końcowego, o którym
+     mowa w § 15 ust. 15 Umowy – Wykonawca przenosi na Zamawiającego autorskie prawa
+     majątkowe do Utworów powstałych lub udostępnionych w wyniku wykonywania lub w związku
+     z wykonywaniem odebranego Etapu oraz uzupełnień, poprawek i korekt, dodatkowych
+     wyjaśnień, weryfikacji wykonanych odpowiednio w ramach odebranego Etapu, zgodnie z
+     przepisami ustawy z dnia 4 lutego 1994 r. o prawie autorskim i prawach pokrewnych (t.j. Dz. U.
+     z 2025 r., poz. 24, ze zm.; dalej jako „pr. aut.”). Przeniesienie praw, o których mowa w niniejszym
+     paragrafie, odnosi się zarówno do projektów Utworów, jak i do ich postaci ukończonej oraz
+     następuje z chwilą przyjęcia Utworu przez Zamawiającego tj. podpisania protokołu odbioru lub
+     protokołu odbioru końcowego, o którym mowa w § 15 ust. 15 Umowy.
+3.   Przeniesienie, o którym mowa w ust. 2 niniejszego paragrafu, następuje bez ograniczenia co do
+     terytorium, czasu i ilości egzemplarzy na polach eksploatacji określonych w art. 50 pr. aut., w
+     tym w szczególności na następujących polach:
+     1)   wykorzystywanie w jakichkolwiek celach Zamawiającego związanych z inwestycją, w
+          szczególności w celu budowy, użytkowania, a także sprzedaży inwestycji;
+
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                 21
+     2)   utrwalanie i zwielokrotnianie dowolną techniką na jakimkolwiek nośniku, w dowolnej skali,
+          na potrzeby jakichkolwiek mediów, a w szczególności w postaci publikacji drukowanych,
+          plansz, taśmy światłoczułej, magnetycznej, dyskach komputerowych oraz wszystkich
+          typach nośników przeznaczonych do zapisu cyfrowego,
+     3)   umieszczenie i wykorzystywanie we wszelkich materiałach publikowanych dla celów
+          informacyjnych oraz promocyjnych Zamawiającego, Inwestora Zastępczego lub podmiotu
+          wskazanego przez Województwo Dolnośląskie,
+     4)   wprowadzanie Utworów do obrotu, użyczenie lub najem oryginału albo egzemplarzy,
+          wystawianie, wyświetlanie, odtwarzanie, a także publiczne udostępnianie Przedmiotu
+          niniejszej Umowy w taki sposób, aby każdy mógł mieć do niego dostęp w miejscu i w czasie
+          przez siebie wybranym,
+     5)   wprowadzanie treści do własnych baz danych, bądź w postaci oryginalnej, bądź w postaci
+          fragmentów, opracowań (abstraktów),
+     6)   w zakresie wprowadzania w całości lub części do sieci komputerowej w sposób
+          umożliwiający dostęp przez zainteresowanego użytkownika,
+     7)   w zakresie rozpowszechniania w sieci Internet, w zakresie wprowadzania do pamięci
+          komputera,
+     8)   sporządzenie wersji obcojęzycznych,
+     9)   wykorzystanie w utworach multimedialnych,
+     10) marketing w kraju i za granicą,
+     11) nadawanie za pomocą video poprzez łącze kablowe lub bezprzewodową stację, nadawanie
+         poprzez satelitę.
+4.   Wraz z prawami, o których mowa w ust. 2 niniejszego paragrafu, w ramach wynagrodzenia,
+     o którym mowa w § 14 Umowy, Wykonawca przenosi na Zamawiającego własność nośników,
+     na jakich Przedmiot niniejszej Umowy utrwalono oraz własność wymaganej Umową liczby
+     egzemplarzy.
+5.   Wykonawca w ramach wynagrodzenia, o którym mowa w § 14 Umowy, z chwilą podpisania
+     protokołu odbioru końcowego, o którym mowa w § 15 ust. 15 lub z chwilą odstąpienia od Umowy
+     z przyczyn nie leżących po stronie Zamawiającego, zezwala Zamawiającemu na korzystanie z
+     zależnych praw autorskich do Przedmiotu Umowy w postaci dokonywania zmian, przeróbek,
+     modyfikacji, aktualizacji, opracowań oraz adaptacji Dokumentacji Projektowej oraz innych
+     dokumentów powstałych/dostarczonych w toku realizacji Umowy oraz zezwala Zamawiającemu
+     na rozporządzanie tymi prawami m.in. poprzez udzielanie zgody innym podmiotom na
+     wykonywanie ww. zależnych praw autorskich do Przedmiotu niniejszej Umowy na polach
+     eksploatacji określonych w ust. 3 niniejszego paragrafu.
+6.   Równocześnie z przekazaniem Zamawiającemu Przedmiotu Umowy lub jego części,
+     Wykonawca wyraża zgodę na jego pierwsze udostępnienie publiczności.
+7.   Wykorzystanie Utworów na wszystkich wymienionych powyżej polach eksploatacji może
+     nastąpić w szczególności w następujących formach:
+     1)   wydanie w postaci: książkowej, w ramach dokumentacji postępowania o udzielenie
+          zamówienia publicznego, w tym także w wersji elektronicznej, dokumentacji do
+          prowadzenia na jej podstawie robót budowlanych, multimedialnej, samodzielnie lub w
+          wydaniach z utworami innych podmiotów;
+     2)   rozpowszechnianie w całości lub częściach, samodzielnie lub w dziełach innych podmiotów,
+          a także w połączeniu z działami innych podmiotów;
+     3)   rozpowszechnienie po opracowaniu przy zastosowaniu wszelkich technik plastycznych i
+          graficznych zmiany kolorystyki i nasycenia barw, skal i proporcji, czcionek, kadrowania;
+
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                 22
+     4)   rozpowszechnianie po dokonaniu opracowania redakcyjnego, polegającego m. in. na
+          wprowadzeniu śródtytułów, podtytułów, opisów.
+8.   Wykonawca zachowuje osobiste prawa autorskie, które chronią nieograniczoną w czasie i nie
+     podlegającą zrzeczeniu się więź twórcy z utworem, w zakresie określonym w ustawie o prawie
+     autorskim i prawach pokrewnych, z zastrzeżeniem postanowień niniejszej regulacji, w ramach
+     otrzymanego wynagrodzenia i bez uszczerbku dla praw przeniesionych przez Wykonawcę tą
+     drogą, w szczególności Wykonawca zapewnia, że nie będzie sprzeciwiał się następującym
+     czynnościom:
+     1)   decydowania o pierwszym publicznym udostępnieniu,
+     2)   decydowania o nienaruszalności formy i treści Utworu oraz do ich rzetelnego wykorzystania
+          (integralność);
+     3)   decydowania o nadzorze nad sposobem korzystania z Utworu.
+9.   Wykonawca oświadcza, iż zgody wyrażone w treści niniejszego paragrafu nie zostaną przez
+     niego cofnięte ani odwołane, natomiast dokonanie przez niego cofnięcia lub odwołania
+     któregokolwiek uprawnienia Zamawiającego albo innej czynności i o podobnym w skutku
+     charakterze, powodować będzie odpowiedzialność odszkodowawczą Wykonawcy z tego tytułu,
+     a nadto Wykonawca zobowiązany będzie do zapłaty kary umownej na rzecz Zamawiającego w
+     wysokości określonej w § 21 ust. 1 pkt 11 Umowy.
+10. Wykonawca może pozostawić u siebie egzemplarze każdego z wykonanych Utworów do celów
+    własnej dokumentacji oraz prezentacji własnych dokonań.
+11. Wykonawca jest odpowiedzialny względem Zamawiającego za wszelkie wady prawne
+    wykonanego Przedmiotu Umowy, a w szczególności za ewentualne roszczenia osób trzecich
+    wynikające z naruszenia praw własności intelektualnej, w tym za nieprzestrzeganie przepisów
+    pr. aut.
+12. W przypadku, gdy osoba trzecia wystąpi przeciwko Zamawiającemu z roszczeniem z tytułu
+    naruszenia praw autorskich poprzez wykorzystanie dokumentacji będącej Przedmiotem
+    niniejszej Umowy, Wykonawca zobowiązany będzie pokryć wszelkie koszty zastępstwa
+    procesowego, koszty sądowe oraz zapłacić wszelkie należności uzgodnione lub zasądzone od
+    Zamawiającego lub a także koszty polubownego załatwienia sprawy.
+13. W razie pojawienia się roszczeń lub innych okoliczności uzasadniających obawę, że
+    Zamawiający nie będzie mógł korzystać z Przedmiotu Umowy (lub jego części) Wykonawca
+    niezwłocznie na swój koszt i ryzyko zmodyfikuje Przedmiot Umowy tak, aby nie naruszał praw
+    osób trzecich.
+14. Powyższe postanowienia nie wyłączają możliwości dochodzenia przez Zamawiającego
+    odszkodowania na zasadach ogólnych Kodeksu cywilnego lub wykonania uprawnień
+    wynikających z innych ustaw.
+15. Odstąpienie od Umowy wskutek okoliczności, które leżą po stronie Wykonawcy jest
+    równoznaczne z wyrażeniem zgody przez Wykonawcę na zlecenie przez Zamawiającego
+    kontynuowania prac projektowych z wykorzystaniem należycie wykonanych i rozliczonych
+    części Utworów, a w tym zakresie – na wykonywanie i rozporządzanie autorskimi majątkowymi
+    prawami zależnymi do Utworów – innemu podmiotowi. W takim przypadku postanowienia
+    ustępów powyższych stosuje się odpowiednio.
+
+
+
+
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                 23
+                                    RĘKOJMIA I GWARANCJA
+                                                § 17
+1.   Wykonawca udziela Zamawiającemu gwarancji z tytułu wad Przedmiotu Umowy. Niniejsza
+     Umowa, a w szczególności zapis niniejszego paragrafu, stanowi jednocześnie oświadczenie
+     gwarancyjne Wykonawcy w rozumieniu art. 577 Kodeksu cywilnego.
+2.   Okres gwarancji wynosi 5 lat i jest liczony od dnia uzyskania ostatecznego pozwolenia na
+     użytkowanie obiektu wybudowanego na podstawie opracowanej Dokumentacji Projektowej,
+     jednak nie dłużej niż 10 lat od dnia podpisania przez Strony protokołu odbioru Etapu 4. W
+     sytuacji wykrycia wady w ostatnim roku obowiązywania gwarancji uprawnienia i roszczenia
+     Zamawiającego z tytułu gwarancji w stosunku do tych wad wygasają po upływie roku od daty
+     usunięcia wady.
+3.   W ramach udzielonej gwarancji Wykonawca zobowiązuje się do:
+     1)   usunięcia wady lub braku w Dokumentacji Projektowej lub,
+     2)   wykonania Dokumentacji Projektowej lub dotkniętej wadą lub brakiem jej części od nowa.
+4.   Wykonawca jest odpowiedzialny z tytułu rękojmi za usunięcie wad fizycznych Dokumentacji
+     Projektowej, istniejących w czasie dokonywania czynności odbioru oraz wad powstałych
+     po odbiorze, lecz z przyczyn tkwiących w Dokumentacji Projektowej w chwili odbioru.
+5.   Rękojmia zostaje umownie rozszerzona w następujący sposób:
+     1)   okres rękojmi jest równy okresowi gwarancji,
+     2)   w przypadku wad wykrytych w ostatnim roku rękojmi uprawnienia i roszczenia
+          Zamawiającego z tytułu rękojmi w stosunku do tych wad wygasają po upływie roku od daty
+          usunięcia wady.
+6.   Okres rękojmi zaczyna swój bieg od dnia, o którym mowa w ust. 2 powyżej, z wyjątkiem wad
+     prawnych, dla których okres rękojmi rozpoczyna bieg na zasadach określonych w Kodeksie
+     cywilnym. Uprawnienia z tytułu rękojmi przysługują Zamawiającemu niezależnie od uprawnień
+     płynących z udzielonej gwarancji.
+7.   Wykonawca zobowiązuje się wobec Zamawiającego do spełnienia wszelkich roszczeń
+     wynikłych z tytułu nienależytego wykonania Przedmiotu Umowy na podstawie obowiązujących
+     przepisów Kodeksu cywilnego o rękojmi za wady fizyczne i gwarancji.
+8.   Wykonawca zobowiązany jest do usuwania wad stwierdzonych w okresie gwarancji i rękojmi na
+     każde wezwanie Zamawiającego. Stwierdzone wady zgłaszane będą Wykonawcy zgodnie z
+     zapisami oświadczenia gwarancyjnego.
+9.   Ewentualne zastrzeżenia co do Dokumentacji Projektowej ujawnione w okresie gwarancji
+     i rękojmi, które wynikać będą w szczególności z wad projektów, niedopracowania lub
+     niejednoznaczności, Wykonawca usunie w terminie:
+     1)   do 3 Dni roboczych przy problemach jednobranżowych,
+     2)   do 6 Dni roboczych przy problemach wymagających koordynacji międzybranżowej, chyba,
+          że Strony dokonają innych ustaleń w formie pisemnej lub w formie elektronicznej.
+10. W przypadku, gdy w terminie o którym mowa w ust. 9 pkt 1 lub 2 powyżej, Wykonawca nie
+    usunie bezpłatnie wad, lub nie wniesie o wydłużenie wyznaczonego terminu o wskazany przez
+    siebie okres, z podaniem przyczyny takiego wydłużenia, na co Zamawiający wyrazi zgodę,
+    Zamawiający może powierzyć usunięcie wad osobie trzeciej na koszt i ryzyko Wykonawcy, na
+    co Wykonawca wyraża nieodwołalną zgodę oraz naliczy kary umowne, stosownie do
+    postanowień Umowy.
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                 24
+11. W razie wykrycia wad Dokumentacji Projektowej w okresie gwarancji lub rękojmi, których
+    usuwanie trwać będzie po zakończeniu okresu rękojmi bądź gwarancji, okres rękojmi i gwarancji
+    ulega przedłużeniu, aż do usunięcia wykrytych wad.
+
+                    ZABEZPIECZENIE NALEŻYTEGO WYKONANIA UMOWY
+                                               § 18
+1.   Wykonawca wniósł zabezpieczenie należytego wykonania Umowy w wysokości 5 %
+     wynagrodzenia ryczałtowego (brutto) wskazanego w § 14 ust. 1 Umowy, co stanowi kwotę:
+     ……………………. zł (słownie: ………………………………………………………………).przed
+     podpisaniem Umowy w formie: ………………..
+2.   Strony postanawiają, że zabezpieczenie na okres rękojmi za wady lub gwarancji stanowić
+     będzie 30% kwoty zabezpieczenia należytego wykonania Umowy.
+3.   Zamawiający zwróci Wykonawcy wniesione przez niego zabezpieczenie należytego wykonania
+     Umowy według następujących zasad:
+     1)   70% zabezpieczenia – w ciągu 30 dni od podpisania protokołu odbioru końcowego, o
+          którym mowa w § 15 ust. 15 Umowy;
+     2)   30% zabezpieczenia przeznaczone zostanie na pokrycie roszczeń z tytułu rękojmi za wady
+          lub gwarancji Dokumentacji Projektowej – w ciągu 15 dni od upływu okresu rękojmi za wady
+          i gwarancji, o którym mowa w § 17 ust. 2 Umowy. Jeżeli część zabezpieczenia zostanie
+          wykorzystana na pokrycie kosztów związanych z usuwaniem wad ujawnionych w okresie
+          rękojmi, to zwrotowi podlega pozostała po potrąceniu część zabezpieczenia.
+4.   W przypadku wniesienia zabezpieczenia należytego wykonania Umowy w pieniądzu,
+     Zamawiający zwróci je wraz z odsetkami wynikającymi z umowy rachunku bankowego,
+     na którym będzie ono przechowywane, pomniejszonymi o koszty prowadzenia rachunku oraz
+     prowizji bankowej za przelew pieniędzy na rachunek Wykonawcy.
+5.   W razie złożenia przez Wykonawcę wniosku o zamianę formy zabezpieczenia na jedną z form
+     przewidzianych w art. 450 ust. 1 ustawy Pzp strony zawrą aneks do Umowy zmieniający treść
+     ust. 1 niniejszego paragrafu celem potwierdzenia dokonanej zmiany. Zmiana formy
+     zabezpieczenia jest dokonywana z zachowaniem ciągłości zabezpieczenia i bez zmniejszenia
+     jego wysokości.
+6.   W razie ustanowienia przez Wykonawcę zabezpieczenia należytego wykonania Umowy
+     w formie gwarancji bankowej lub ubezpieczeniowej lub złożenia przez Wykonawcę wniosku o
+     zmianę zabezpieczenia na tą formę, gwarancja ta winna być gwarancją płatną na pierwsze
+     żądanie i bezwarunkową. Sądem właściwym dla rozstrzygania sporów na gruncie gwarancji
+     winien być sąd polski właściwy miejscowo dla siedziby Zamawiającego (Beneficjenta
+     gwarancji). Gwarancja winna być sporządzona w języku polskim. Jeśli gwarancja poza językiem
+     polskim sporządzona będzie również w innym języku w razie rozbieżności między wersjami
+     językowymi decydująca będzie wersja językowa polska. Prawem właściwym dla rozstrzygania
+     sporów na gruncie gwarancji będzie prawo polskie.
+7.   W razie ustanowienia przez Wykonawcę zabezpieczenia należytego wykonania Umowy
+     w formie poręczenia banku, spółdzielczej kasy oszczędnościowo – kredytowej lub podmiotów,
+     o których mowa w art. 6b ust. 5 pkt 2 ustawy z dnia 9 listopada 2000 r. o utworzeniu Polskiej
+     Agencji Rozwoju Przedsiębiorczości lub złożenia przez Wykonawcę wniosku o zmianę
+     zabezpieczenia na tą formę, poręczenie winno wprost określać, iż poręczyciel odpowiada jak
+     współdłużnik solidarny. Sądem właściwym dla rozstrzygania sporów na gruncie stosunku
+     poręczenia winien być sąd polski właściwy miejscowo dla siedziby Zamawiającego. Dokument
+
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                 25
+     zawierający oświadczenie poręczyciela winien być sporządzony w języku polskim. Jeśli
+     dokument zawierający oświadczenie poręczyciela poza językiem polskim sporządzony będzie
+     również w innym języku w razie rozbieżności między wersjami językowymi decydująca będzie
+     wersja językowa polska. Prawem właściwym dla rozstrzygania sporów na gruncie stosunku
+     poręczenia będzie prawo polskie.
+8.   W razie ustanowienia zabezpieczenia w formie innej niż pieniężna ustanawia się je na okres
+     nie krótszy niż 5 lat. Wykonawca nie później niż na 30 dni przed upływem okresu obowiązywania
+     poprzedniego zabezpieczenia zobowiązany jest do przedłużenia zabezpieczenia lub wniesienia
+     nowego zabezpieczenia. Jeśli Wykonawca nie wypełni tego obowiązku Zamawiający zrealizuje
+     dotychczasowe zabezpieczenie i ustanowi nowe zabezpieczenie pieniężne z uzyskanych kwot.
+     Powyższe uprawnienie Zamawiającego wynikać będzie z treści każdego zabezpieczenia
+     ustanowionego w formie innej niż pieniężna.
+9.   W razie ustanowienia przez Wykonawcę zabezpieczenia należytego wykonania umowy
+     w formie gwarancji bankowej wystawionej przez bank spółdzielczy lub złożenia przez
+     Wykonawcę wniosku o zmianę zabezpieczenia na tą formę, poza spełnieniem warunków
+     określonych w ust. poprzedzającym Wykonawca winien wykazać, iż bank spółdzielczy
+     (gwarant) posiada niezbędną zgodnie z art. 6 ust. 1 i 2 ustawy o funkcjonowaniu banków
+     spółdzielczych, ich zrzeszaniu się i bankach zrzeszających zgodę Komisji Nadzoru
+     Finansowego na wykonywanie czynności bankowych polegających na udzielaniu gwarancji
+     oraz, iż gwarancja udzielona została w zakresie i trybie uzgodnionym z bankiem zrzeszającym.
+10. Wykonawca zobowiązany jest do utrzymywania zabezpieczenia przez całe okresy, o których
+    mowa w ust. 3 pkt 1 i 2 niniejszego paragrafu. Jeżeli na skutek jakichkolwiek okoliczności,
+    w szczególności ogłoszenia upadłości gwaranta lub innych zdarzeń zależnych lub niezależnych
+    od Stron, z wyłączeniem wyłącznej winy Zamawiającego, Zamawiający utraci w trakcie realizacji
+    niniejszej Umowy zabezpieczenie należytego wykonania Umowy Wykonawca niezwłocznie,
+    lecz nie później niż w terminie 14 dni, ustanowi nowe zabezpieczenie w wysokości nie niższej
+    niż wynikające z Umowy. W razie braku ustanowienia przez Wykonawcę zabezpieczenia
+    należytego wykonania Umowy zgodnie z postanowieniami Umowy Zamawiający może, aż do
+    ustanowienia zabezpieczenia należytego wykonania Umowy, wstrzymać wszelkie płatności na
+    rzecz Wykonawcy. Wstrzymanie płatności nie zwalnia Wykonawcy z jakichkolwiek obowiązków
+    Wykonawcy określonych w Umowie.
+11. W razie przedłużenia terminu wykonania Przedmiotu Umowy, Wykonawca w terminie 7 dni od
+    dnia zawarcia aneksu przedłużającego termin realizacji dokona przedłożenia odpowiedniego
+    dokumentu potwierdzającego obowiązywanie zabezpieczeń należytego wykonania Umowy,
+    pod rygorem zapłaty kary umownej, o której mowa w § 21 ust.1 pkt 10 Umowy.
+
+                                   ODSTĄPIENIE OD UMOWY
+                                               § 19
+1.   Strony zgodnie uznają, iż Przedmiot Umowy ma charakter podzielny, co oznacza, że
+     odstąpienie od niniejszej Umowy może zostać dokonane zarówno w odniesieniu do całości
+     Przedmiotu Umowy, jak i w odniesieniu do jego części.
+2.   Zamawiający ma prawo odstąpić od Umowy w razie zaistnienia istotnej zmiany okoliczności
+     powodującej, że wykonanie Umowy nie leży w interesie publicznym, czego nie można było
+     przewidzieć w chwili zawarcia Umowy, lub dalsze wykonywanie Umowy może zagrozić
+     istotnemu interesowi bezpieczeństwa państwa lub bezpieczeństwu publicznemu albo wystąpiły
+     istotne zmiany legislacyjne dotyczące zakresu działań i funkcjonowania organizacji
+     Zamawiającego.
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                 26
+3.   Zamawiający będzie uprawniony do odstąpienia od Umowy w całości lub w części w
+     następujących przypadkach:
+     1)   gdy Dokumentacja Projektowa jest niekompletna, bądź zawiera istotne wady
+          uniemożliwiające jej wykorzystanie z punktu widzenia celu, któremu ma służyć, a
+          Wykonawca uchyla się, bądź nie zdoła uzupełnić braków lub usunąć wad w terminie
+          wyznaczonym przez Inwestora Zastępczego;
+     2)   gdy Wykonawca nie rozpoczyna lub nie kontynuuje wykonania Umowy przez okres dłuższy
+          niż 35 dni lub gdy Wykonawca jest w zwłoce w stosunku do terminów określonych w
+          niniejszej Umowie o co najmniej 35 dni;
+     3)   trzykrotnego nieuzasadnionego niestawiennictwa Wykonawcy na spotkaniach
+          koordynacyjnych organizowanych przez Zamawiającego i/lub Inwestora Zastępczego, o
+          których mowa w § 8 ust. 3 pkt 2 Umowy;
+     4)   gdy zaistniała niewypłacalność Wykonawcy albo została rozpoczęta likwidacja Wykonawcy.
+          O fakcie tym Wykonawca niezwłocznie pisemnie zawiadomi Inwestora Zastępczego;
+     5)   Wykonawca nie wywiązuje się z obowiązku realizacji Przedmiotu Umowy przez osoby
+          posiadające wymagane kwalifikacje i doświadczenie;
+     6)   w przypadku, gdy Wykonawca realizuje Umowę niezgodnie z jej postanowieniami pomimo
+          dwukrotnego, pisemnego upomnienia Inwestora Zastępczego;
+     7)   w przypadku dostarczenia Inwestorowi Zastępczemu po raz trzeci poprawianego
+          dokumentu, do którego Zamawiający wnosi zastrzeżenia, zgodnie z § 15 ust. 10 pkt 2
+          Umowy;
+     8)   kary umowne, o których mowa w § 21 Umowy przekroczą łącznie 5% wartości
+          wynagrodzenia ryczałtowego brutto, ustalonego w § 14 ust. 1 Umowy;
+     9)   o którym mowa w § 7 ust. 6 Umowy;
+     10) o których mowa w § 11 Umowy;
+     11) w innych przypadkach przewidzianych w obowiązujących przepisach prawa.
+4.   Wykonawca będzie uprawniony do odstąpienia od Umowy w całości lub w części w
+     następujących przypadkach:
+     1) gdy Zamawiający i/lub Inwestor Zastępczy odmawia, bez wskazania przyczyny, odbioru
+        Dokumentacji Projektowej wykonanej należycie na podstawie niniejszej Umowy lub
+        podpisania protokołu odbioru końcowego;
+     2) w przypadku, gdy Zamawiający opóźnia się z wypłatą wynagrodzenia należnego i
+        wymagalnego powyżej 35 dni od upływu terminu płatności faktury.
+5.   W przypadku odstąpienia od umowy przez Zamawiającego lub Wykonawcę strony obciążają
+     następujące obowiązki szczegółowe:
+          1) w terminie do 7 Dni roboczych od daty odstąpienia od Umowy Wykonawca sporządzi
+             przy udziale Inwestora Zastępczego i w jego siedzibie szczegółową inwentaryzację
+             wykonanych prac projektowych i stanu ich zaawansowania według stanu w dniu
+             odstąpienia od Umowy wraz z oznaczeniem ich szczegółowego procentowego
+             zaawansowania. Inwestor Zastępczy w razie braku sporządzenia inwentaryzacji w ww.
+             terminie może zlecić jej sporządzenie na koszt Wykonawcy, bez odrębnego wezwania,
+          2) Wykonawca zgłosi do odbioru przerwane prace projektowe niezwłocznie, a najpóźniej w
+             terminie do 7 dni od daty odstąpienia od Umowy;
+          3) Wykonawca wyda Inwestorowi Zastępczemu posiadaną dokumentację dotyczącą prac
+             stanowiących Przedmiot Umowy.
+
+
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                 27
+6.   Odstąpienie od Umowy nastąpi w formie pisemnej pod rygorem nieważności, ze wskazaniem
+     przesłanki odstąpienia i uzasadnienia. Złożenie oświadczenia o odstąpieniu poprzedzone
+     zostanie wezwaniem Wykonawcy lub Zamawiającego do prawidłowego wykonywania Umowy
+     w wyznaczonym w wezwaniu terminie – zastrzeżeniem postanowień § 19 ust. 2 Umowy.
+7.   Z prawa odstąpienia od Umowy Zamawiający i Wykonawca mogą skorzystać w terminie
+     do 90 dni od powzięcia informacji o przyczynie uprawniającej do odstąpienia od Umowy lub
+     w terminie do 90 dni od upływu dodatkowego wyznaczonego terminu, o którym mowa w ust. 6
+     powyżej, z zastrzeżeniem przypadku wskazanego w ust. 2 powyżej dla którego termin wynosi
+     30 dni.
+8.   Skorzystanie z prawa kształtującego do odstąpienia od Umowy nie uchybia dopuszczalności
+     żądania zapłaty kar umownych, ani też dopuszczalności żądania odszkodowania
+     uzupełniającego za niewykonanie lub nienależyte wykonanie Umowy.
+9.   W przypadku odstąpienia od Umowy wskutek okoliczności nieleżących wyłącznie po stronie
+     Zamawiającego, rozliczenie za wykonane prace nastąpi na podstawie protokołu odbioru
+     przerwanych prac projektowych po złożeniu przez Wykonawcę dokumentów, o których mowa
+     w ust. 4 Umowy i ich weryfikacji przez Inwestora Zastępczego w zakresie kompletności (w
+     odniesieniu do Przedmiotu Umowy) oraz przydatności z punktu widzenia celu, któremu miała
+     służyć dokumentacja i wartości gospodarczej dla Zamawiającego.
+10. W przypadku nie zawarcia umowy o Roboty Budowlane przez Zamawiającego do dnia
+    /…………../ każda ze Stron jest uprawniona złożyć oświadczenie o odstąpieniu od Umowy w
+    zakresie Etapu 6, o którym mowa w § 3 ust. 1 pkt 6 Umowy, w terminie do 12 miesięcy od
+    upływu w/w daty. W takim przypadku Wykonawca otrzyma wynagrodzenie za każdy
+    zrealizowany i odebrany Etap lub jego część, bez prawa Wykonawcy do otrzymania
+    wynagrodzenia za niezrealizowany Etap, jak również w takim przypadku Wykonawcy nie
+    przysługują żadne roszczenia, kary umowne (w tym odszkodowawcze) z tytułu odstąpienia od
+    wykonywania tej części Umowy.
+
+                                 ZMIANA POSTANOWIEŃ UMOWY
+                                                § 20
+1.   Zmiana postanowień Umowy może nastąpić wyłącznie za zgodą obu Stron w formie pisemnego
+     aneksu pod rygorem nieważności, z zastrzeżeniem ust. 14.
+2.   Przewiduje się możliwość zmian Umowy, o których mowa w art. 455 ust. 1 pkt 1 ustawy Pzp,
+     które mogą dotyczyć następujących przypadków:
+     1)   zmiana, w tym wydłużenie terminów realizacji Umowy w przypadku wystąpienia siły wyższej
+          (siła wyższa - zdarzenie lub połączenie zdarzeń obiektywnie niezależnych od Stron, które
+          zasadniczo i istotnie utrudniają wykonywanie części lub całości zobowiązań wynikających
+          z Umowy, których Strony nie mogły przewidzieć i którym nie mogły zapobiec ani ich
+          przezwyciężyć i im przeciwdziałać poprzez działanie z należytą starannością ogólnie
+          przewidzianą dla cywilnoprawnych stosunków zobowiązaniowych) – o okres trwania siły
+          wyższej;
+     2)   zmiana wysokości wynagrodzenia Wykonawcy w przypadku zmiany:
+          a)   stawki podatku od towarów i usług;
+          b)   zmiany wysokości minimalnego wynagrodzenia za pracę albo wysokości minimalnej
+               stawki godzinowej, ustalonych na podstawie przepisów ustawy z dnia 10 października
+               2002 r. o minimalnym wynagrodzeniu za pracę (t.j. Dz.U. 2024, poz. 1773);
+
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                 28
+         c)   zasad podlegania ubezpieczeniom społecznym lub ubezpieczeniu zdrowotnemu lub
+              wysokości stawki składki na ubezpieczenia społeczne lub zdrowotne;
+         d)   zasad gromadzenia i wysokości wpłat do pracowniczych planów kapitałowych,
+              o których mowa w ustawie z dnia 4 października 2018 r. o pracowniczych planach
+              kapitałowych (Dz.U.2024.427 t.j.)
+         – jeżeli zmiany te będą miały wpływ na koszty wykonania Umowy przez Wykonawcę na
+         zasadach i w sposób określony w ust. 3-5 oraz ust. 7-12 niniejszego paragrafu Umowy;
+    3)   w przypadku przedłużenia, z przyczyn niezależnych od Wykonawcy, czasu wydania decyzji
+         administracyjnych przez właściwe organy – w szczególności pozwolenia na budowę – jeżeli
+         okres ten będzie dłuższy w stosunku do terminów wynikających z obowiązujących
+         przepisów prawa, zmianie mogą ulec odpowiednie terminy wykonywania Umowy określone
+         w § 13 ust. 2 Umowy, odpowiednio do okresu trwania przedłużenia,
+    4)   w przypadku dokonania określonych czynności lub ich zaniechania przez organy
+         administracji publicznej, w tym organy administracji rządowej, samorządowej, jak również
+         organy i podmioty, których działalność wymaga wydania jakiejkolwiek decyzji o charakterze
+         administracyjnym oraz przez sądy lub sądy administracyjne, w trakcie wykonywania
+         Umowy, w szczególności:
+         a)   przewlekłości postępowania w sprawie wydania przez ww. organy decyzji, opinii,
+              uzgodnień itp., do wydania których są zobowiązane na mocy przepisów prawa lub
+              regulaminów, lub
+         b)   odmowy wydania przez ww. organy decyzji, opinii, uzgodnień itp. lub
+         c)   wyeliminowania z obrotu prawnego lub zmiany decyzji, opinii, uzgodnień itp., w tym
+              poprzez stwierdzenie ich nieważności lub uchylenie,
+         – w przypadku wystąpienia którejkolwiek z okoliczności wymienionych powyżej w lit. a) - c)
+         niniejszego punktu, jeżeli utrudnia należyte wykonywanie Umowy zgodnie z jej
+         dotychczasową treścią oraz o ile Wykonawca nie ponosi odpowiedzialności za jej
+         powstanie, zmianie mogą ulec odpowiednie terminy wykonywania Umowy określone w § 13
+         Umowy, odpowiednio do okresu trwania i w zakresie wpływu na te terminy
+         przeszkody/okoliczności, o której mowa powyżej;
+    5)   w przypadku wystąpienia następujących przyczyn niezależnych od Wykonawcy:
+         a)   konieczności zmiany założeń dla inwestycji w trakcie realizacji Umowy, z powodów
+              obiektywnych, w szczególności w wyniku uzyskanej przez Zamawiającego lub
+              Inwestora Zastępczego ekspertyzy prawnej, technicznej, technologicznej,
+              ekonomicznej, środowiskowej lub przyrodniczej,
+         b)   w związku z podjęciem decyzji przez organy Zamawiającego dotyczących realizacji
+              inwestycji, a które mają wpływ na wykonanie Umowy;
+         – zmianie mogą ulec postanowienia Umowy w zakresie koniecznym i wynikającym
+         z okoliczności wskazanych w lit. a – b niniejszego punktu, w tym zakres przedmiotowy
+         Umowy, zakres obowiązków Stron lub sposób wykonania (w tym terminy wykonania)
+         Umowy lub wynagrodzenie Wykonawcy w zakresie, w jakim zmiana wynagrodzenia
+         odpowiada wprowadzonym zmianom;
+    6)   w przypadku zaistnienia innych okoliczności prawnych, ekonomicznych, technicznych,
+         technologicznych, funkcjonalnych, operacyjnych, przyrodniczych, środowiskowych lub
+         podobnych, mających wpływ na wykonanie Umowy, w szczególności wprowadzenia
+
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                 29
+         nowych regulacji prawnych mających wpływ na wykonanie Umowy, wprowadzenia stanów
+         wyjątkowych,    wystąpienia    wyjątkowych    zdarzeń    gospodarczych,    napotkania
+         niezinwentaryzowanych kolizji technicznych, konieczności zastosowania specjalistycznej
+         technologii prowadzenia prac, ustanowienia obszarów ochrony przyrody, wykrycia
+         gatunków chronionych, skażeń środowiska naturalnego, itp. – trudnych do przewidzenia
+         w momencie zawarcia Umowy, za które Wykonawca nie ponosi odpowiedzialności,
+         a skutkujących niemożliwością wykonania lub należytego wykonania Umowy zgodnie z jej
+         dotychczasową treścią – zmianie może ulec zakres przedmiotowy Umowy, zakres
+         obowiązków Stron, sposób wykonania (w tym terminy wykonania) Umowy lub
+         wynagrodzenie Wykonawcy, jednakże tylko w takim zakresie, w jakim będzie to konieczne
+         dla zapewnienia należytego wykonania Umowy;
+    7)   w przypadku wydania decyzji administracyjnych, uzgodnień, opinii lub innych aktów
+         prawnych w związku z inwestycją, które będą mieć wpływ na wykonywanie Umowy –
+         zmianie mogą ulec postanowienia Umowy, w tym wynagrodzenie Wykonawcy oraz terminy
+         w zakresie, w jakim będzie to konieczne do dostosowania świadczeń Stron do zmienionych
+         okoliczności lub zakresu inwestycji;
+    8)   w przypadku, gdy Zamawiający i/lub Inwestor Zastępczy nie wykona lub nienależycie
+         wykona obowiązki wynikające z Umowy lub z powszechnie obowiązującego prawa lub gdy
+         Zamawiający uzna, że wykonanie tych obowiązków może się wiązać z utrudnieniami –
+         zmianie może ulec zakres przedmiotowy Umowy, zakres obowiązków Stron, sposób
+         wykonania (w tym terminy wykonania) Umowy lub wynagrodzenie Wykonawcy, jednakże
+         tylko w takim zakresie, w jakim będzie to konieczne dla zapewnienia należytego wykonania
+         Umowy;
+    9)   w przypadku:
+         a)   zwłoki Zamawiającego i/lub Inwestora Zastępczego w przekazaniu Wykonawcy
+              zatwierdzonych lub zaakceptowanych dokumentów, uwag i innych wskazanych
+              w Umowie dokumentów;
+         b)   wystąpienia osób trzecich z roszczeniami lub ujawnienia się roszczeń osób trzecich,
+              które uniemożliwiają dalsze wykonywanie Umowy, w szczególności uzyskanie
+              odpowiednich decyzji administracyjnych, uzgodnień, zezwoleń i innych aktów
+              administracyjnych niezbędnych do wykonania przedmiotu Umowy;
+         c)   wszczęcia, prowadzenia lub zakończenia postępowania sądowego lub
+              administracyjnego, w tym odwoławczego lub w ramach nadzwyczajnych środków
+              zaskarżenia, jeżeli w związku z takim postępowaniem przepis prawa lub orzeczenie
+              sądu lub organu administracji publicznej utrudnia, choćby tymczasowo, wykonanie
+              Przedmiotu Umowy przez Wykonawcę, w szczególności wstrzymuje możliwość
+              uzyskania odpowiednich decyzji administracyjnych, uzgodnień, zezwoleń lub innych
+              aktów administracyjnych niezbędnych do wykonania Przedmiotu Umowy;
+         d)   konieczności uzyskania jakiegokolwiek orzeczenia sądu lub organu administracji
+              publicznej, którego konieczności uzyskania nie można było przewidzieć, a jest
+              niezbędne celem wykonania obowiązków Wykonawcy wynikających z Umowy;
+         e)   opóźnienia w wydaniu lub inne nieprawidłowości wymaganych uzgodnień, opinii lub
+              innych stanowisk osób trzecich, za których działania lub zaniechania Wykonawca nie
+              ponosi odpowiedzialności, w szczególności:
+              −   gestorów sieci – w zakresie wydawania warunków przyłączeniowych lub
+
+
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                 30
+              −   zarządcy dróg – w zakresie przekazywania niezbędnych dokumentów lub
+                  informacji;
+          – w przypadku wystąpienia którejkolwiek z okoliczności wymienionych w niniejszym punkcie,
+          jeżeli utrudnia należyte wykonywanie Umowy zgodnie z jej dotychczasową treścią oraz o ile
+          Wykonawca nie ponosi odpowiedzialności za jej powstanie, zmianie mogą ulec odpowiednie
+          terminy wykonywania Umowy, w takim zakresie, w jakim będzie to konieczne dla
+          zapewnienia należytego wykonania Umowy;
+     10) zwiększenia wynagrodzenia Wykonawcy z tytułu sprawowania Nadzoru Autorskiego, w
+         przypadku przedłużenia okresu realizacji Robót Budowlanych ponad 36 miesięcy, jeśli
+         przedłużenie to nie będzie spowodowane wadami lub nieścisłościami w Dokumentacji
+         Projektowej lub innymi działaniami Wykonawcy, w tym w szczególności zwłoką w realizacji
+         obowiązków w zakresie Nadzoru Autorskiego i usuwania wad dokumentacji; zwiększone
+         wynagrodzenie będzie proporcjonalne do czasu sprawowania tego Nadzoru i
+         wynagrodzenia przewidzianego w niniejszej Umowie stanowiącego równowartość 1/36
+         wynagrodzenia brutto określonego w § 14 ust. 2 pkt 6 Umowy, za każdy dodatkowy miesiąc
+         świadczenia usługi.
+3.   Zmiana wysokości wynagrodzenia należnego Wykonawcy w przypadku zaistnienia przesłanki,
+     o której mowa w ust. 2 pkt 2 lit. a powyżej, nie będzie odnosić się do wypłaconej części
+     wynagrodzenia, a dotyczyć będzie wyłącznie pozostałej części wynagrodzenia, do której
+     zastosowanie znajdzie zmiana stawki podatku od towarów i usług.
+4.   W przypadku zmiany, o której mowa w ust. 2 pkt 2 lit. a powyżej, wysokość wynagrodzenia netto
+     nie zmieni się, a wysokość wynagrodzenia brutto zostanie wyliczona na podstawie nowych
+     przepisów.
+5.   Zmiana wysokości wynagrodzenia w przypadku zaistnienia przesłanek, o których mowa w ust. 2
+     pkt 2 lit. b, lit. c i lit. d powyżej będzie obejmować wyłącznie część wynagrodzenia należnego
+     Wykonawcy, w odniesieniu do której nastąpiła zmiana wysokości kosztów wykonania Umowy
+     przez Wykonawcę w związku z wejściem w życie przepisów odpowiednio dokonujących zmian
+     w zakresie wzrostu minimalnej stawki wynagrodzenia lub zasad podlegania ubezpieczeniom
+     społecznym lub ubezpieczeniu zdrowotnemu lub w zakresie wysokości stawki składki na
+     ubezpieczenia społeczne lub zdrowotne lub zasad gromadzenia i wysokości wpłat do
+     pracowniczych planów kapitałowych.
+6.   Zamawiający dopuszcza możliwość zmiany wysokości wynagrodzenia w przypadku zmiany
+     ceny materiałów lub kosztów związanych z realizacją Umowy według następujących zasad:
+     1)   zmiana cen materiałów lub kosztów związanych z realizacją przedmiotu Umowy będzie
+          ustalana w oparciu o zmianę kwartalnego wskaźnika cen towarów i usług konsumpcyjnych
+          ogółem (zwanego dalej „wskaźnikiem”), ogłaszanego w komunikacie Prezesa Głównego
+          Urzędu Statystycznego;
+     2)   zmiana wynagrodzenia może nastąpić, jeżeli kwartalny wskaźnik ulegnie zmianie
+          (tj. wzrośnie lub obniży się) o co najmniej 2,5 % w stosunku do kwartalnego wskaźnika
+          aktualnego (ostatniego z ogłoszonych) na dzień zawarcia Umowy lub na dzień ostatniej
+          zmiany;
+     3)   sposób ustalenia zmiany wynagrodzenia: punktem odniesienia dla ustalenia zmiany będzie
+          wysokość kwartalnego wskaźnika; w celu określenia wpływu zmiany kwartalnego
+          wskaźnika na ceny materiałów lub koszty związane z realizacją Umowy należy ustalić, czy
+          nastąpił wzrost albo spadek wysokości kwartalnego wskaźnika w porównaniu do
+
+
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                 31
+         kwartalnego wskaźnika stanowiącego punkt odniesienia do zmiany, o którym mowa w pkt
+         2 powyżej;
+    4)   w celu obliczenia zmiany wskaźnika należy zastosować kwartalne wskaźniki wg wzoru:
+                                𝐖𝐊𝐔 𝐖𝐊(𝐔+𝟏) 𝐖𝐊(𝐔+𝟐) 𝐖𝐊(𝐔+𝟑)         𝐖𝐊
+                  𝐖𝐊𝐙 = 𝐖𝐊𝐎 ×       ×      ×       ×        ×. .. ×
+                                100   100    100     100            100
+         gdzie:
+         WKZ – wskaźnik zmian, o którym mowa w pkt 2,
+         WKO – wskaźnik aktualny (ostatni z ogłoszonych) na dzień zawarcia Umowy lub na dzień
+              ostatniej zmiany,
+         WKU – wskaźnik z kwartału, w którym zawarto Umowę lub z kwartału, w którym dokonano
+              ostatniej zmiany (wskaźnik cen towarów i usług konsumpcyjnych ogółem
+              publikowany przez GUS, w układzie kwartał poprzedni = 100),
+         WK(U+1) – wskaźnik z kwartału następnego po kwartale, w którym zawarto Umowę lub po
+                  kwartale, w którym dokonano ostatniej zmiany (wskaźnik cen towarów i usług
+                  konsumpcyjnych ogółem publikowany przez GUS, w układzie kwartał poprzedni =
+                  100),
+         WK(U+2), WK(U+3), … – wskaźniki „2”, „3”, … z kolejnych kwartałów po kwartale, w którym
+                  zawarto Umowę lub po kwartale, w którym dokonano ostatniej zmiany (wskaźnik
+                  cen towarów i usług konsumpcyjnych ogółem publikowany przez GUS, w układzie
+                  kwartał poprzedni = 100),
+         WK – wskaźnik aktualny na dzień weryfikacji czy zaistniały przesłanki zastosowania
+             niniejszej klauzuli waloryzacyjnej (wskaźnik cen towarów i usług konsumpcyjnych
+             ogółem publikowany przez GUS, w układzie kwartał poprzedni = 100),
+         Następnie, od tak obliczonego wskaźnika zmiany należy odjąć 100, aby uzyskać informację
+         czy nastąpił wzrost lub spadek cen materiałów lub kosztów związanych z realizacją
+         przedmiotu Umowy.
+                                        𝐙𝐊𝐂 = 𝐖𝐊𝐙 − 100
+         gdzie:
+         ZKC – zmiana cen lub kosztów, o której mowa w pkt 2 (liczba dodatnia oznacza wzrost,
+              liczba ujemna oznacza spadek),
+         WKZ – wskaźnik zmian, o którym mowa w pkt 2;
+    5)   pierwsza zmiana wynagrodzenia może nastąpić nie wcześniej niż po upływie 6 miesięcy
+         od dnia zawarcia Umowy; każda kolejna zmiana wynagrodzenia Wykonawcy, o której
+         mowa w niniejszym ustępie, może następować nie wcześniej niż po upływie każdych
+         kolejnych 3 miesięcy licząc od dnia ostatniej zmiany;
+    6)   zmiana wynagrodzenia może dotyczyć wyłącznie tej części przedmiotu Umowy, która
+         na dzień składania wniosku o dokonanie waloryzacji wynagrodzenia, nie została
+         zafakturowana;
+    7)   wprowadzenie zmiany wynagrodzenia wymaga przedstawienia uzasadnienia, którego
+         głównym celem jest wykazanie w jaki sposób zmiana wskaźnika, o którym mowa w pkt 1),
+         wpłynęła na zmianę cen materiałów lub kosztów związanych z realizacją Umowy;
+         uzasadnienie musi opierać się na rzetelnych obliczeniach popartych dowodami
+         pozwalającymi Stronom na merytoryczne odniesienie się do przedstawionych dokumentów;
+
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                 32
+          w ramach ustalania wspólnego stanowiska w sprawie zmiany wynagrodzenia Strony mogą
+          żądać dodatkowych wyjaśnień i dokumentów;
+     8)   maksymalna wartość zmiany wynagrodzenia, jaką dopuszcza Zamawiający w efekcie
+          zastosowania postanowień niniejszego ustępu, wynosi 20% wynagrodzenia wskazanego
+          pierwotnie w Umowie;
+     9)   w przypadku, gdy kwartalny wskaźnik przestanie być ogłaszany, lub zmieni się podmiot,
+          który urzędowo wskaźnik ten ustala, mechanizm opisany w niniejszym ustępie stosuje się
+          odpowiednio do wskaźnika i podmiotu, który zgodnie z odpowiednimi przepisami prawa
+          zastąpi dotychczasowy wskaźnik lub podmiot.
+7.   W celu zawarcia aneksu, na podstawie ust. 2 pkt 2 niniejszego paragrafu Umowy, każda ze
+     Stron może wystąpić do drugiej Strony z wnioskiem o dokonanie zmiany wysokości
+     wynagrodzenia należnego Wykonawcy, wraz z uzasadnieniem zawierającym w szczególności
+     wyliczenie całkowitej kwoty, o jaką wynagrodzenie Wykonawcy powinno ulec zmianie, oraz
+     wskazaniem daty, od której nastąpiła bądź nastąpi zmiana wysokości kosztów wykonania
+     Przedmiotu umowy uzasadniająca zmianę wysokości wynagrodzenia należnego Wykonawcy.
+8.   W przypadku zmian, o których mowa w ust. 2 pkt 2 lit. b, lit. c lub lit. d niniejszego paragrafu
+     Umowy, jeżeli z wnioskiem występuje Wykonawca, jest on zobowiązany dołączyć do wniosku
+     kalkulacje oraz dokumenty, z których będzie wynikać w jakim zakresie zmiany te mają wpływ na
+     koszty wykonania Przedmiotu Umowy, w szczególności:
+     1)   pisemne zestawienie wynagrodzeń (zarówno przed jak i po zmianie) pracowników
+          świadczących usługi, z określeniem zakresu (części etatu), w jakim wykonują oni prace
+          bezpośrednio związane z realizacją Umowy oraz części wynagrodzenia odpowiadającej
+          temu zakresowi – w przypadku zmiany, o której mowa w ust. 2 pkt 2 lit. b powyżej;
+     2)   pisemne zestawienie wynagrodzeń (zarówno przed jak i po zmianie) pracowników
+          świadczących usługi, wraz z kwotami składek uiszczanych do Zakładu Ubezpieczeń
+          Społecznych/Kasy Rolniczego Ubezpieczenia Społecznego w części finansowanej przez
+          Wykonawcę, z określeniem zakresu (części etatu), w jakim wykonują oni prace
+          bezpośrednio związane z realizacją Umowy oraz części wynagrodzenia odpowiadającej
+          temu zakresowi – w przypadku zmiany, o której mowa w ust. 2 pkt 2 lit. c powyżej;
+     3)   pisemne zestawienie wynagrodzeń (zarówno przed jak i po zmianie) pracowników
+          świadczących usługi, wraz z określeniem kwot wpłat do pracowniczych planów
+          kapitałowych w części finansowanej przez Wykonawcę, z określeniem zakresu (części
+          etatu), w jakim wykonują oni prace bezpośrednio związane z realizacją Przedmiotu Umowy
+          oraz części wynagrodzenia odpowiadającej temu zakresowi – w przypadku zmiany, o której
+          mowa w ust. 2 pkt. 2 lit. d powyżej.
+9.   W przypadku zmiany, o której mowa w ust. 2 pkt 2 lit. a, lit. b, lit. c lub lit. d powyżej, jeżeli
+     z wnioskiem występuje Zamawiający jest on uprawniony do zobowiązania Wykonawcy
+     do przedstawienia w wyznaczonym terminie, nie krótszym niż 10 dni, kalkulacji, z której będzie
+     wynikać, w jakim zakresie zmiana ta ma wpływ na koszty wykonania Przedmiotu Umowy, w tym
+     pisemnego zestawienia wynagrodzeń, o którym mowa w ust. 8 pkt 1 - 3 powyżej.
+10. W terminie do 30 dni od dnia przekazania wniosku, o którym mowa w ust. 8 powyżej, Strona,
+    która otrzymała wniosek, przekaże drugiej Stronie informację o zakresie, w jakim zatwierdza
+    wniosek oraz wskaże kwotę, o którą wynagrodzenie należne Wykonawcy powinno ulec zmianie,
+    albo informację o niezatwierdzeniu wniosku wraz z uzasadnieniem.
+11. W przypadku otrzymania przez Stronę informacji o niezatwierdzeniu wniosku lub częściowym
+    zatwierdzeniu wniosku, Strona ta może ponownie wystąpić z wnioskiem, o którym mowa
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                 33
+     w ust. 7 powyżej. W takim przypadku ust. 8 - ust. 10 oraz ust. 12 niniejszego paragrafu Umowy
+     stosuje się odpowiednio.
+12. Zawarcie aneksu nastąpi niezwłocznie po zatwierdzeniu wniosku przez Strony o dokonanie
+    zmiany wysokości wynagrodzenia należnego Wykonawcy - pod warunkiem zabezpieczenia
+    środków w budżecie i/lub Wieloletniej Prognozie Finansowej.
+13. Wykonawca, którego wynagrodzenie zostało zmienione zgodnie z ust. 6, zobowiązany jest do
+    zmiany wynagrodzenia przysługującego podwykonawcy, z którym zawarł umowę, w zakresie
+    odpowiadającym zmianom cen materiałów lub kosztów dotyczących zobowiązania
+    podwykonawcy, jeżeli łącznie spełnione są następujące przesłanki:
+     1)   przedmiotem umowy są roboty budowlane, dostawy lub usługi;
+     2)   okres obowiązywania umowy przekracza 6 miesięcy.
+14. Ustala się, iż nie stanowi zmiany Umowy:
+     1)   zmiana koordynatorów Umowy wskazanych w § 22 Umowy,
+     2)   zmiana danych adresowych Stron Umowy zawartych w komparycji.
+     Powyższe wymaga jedynie niezwłocznego pisemnego zawiadomienia drugiej Strony.
+15. Z wyjątkiem postanowień dotyczących zmian Umowy, dotyczących przesłanek określonych
+    w art. 436 pkt 4 lit. b) oraz 439 ustawy Pzp, postanowienia określone w niniejszym paragrafie
+    stanowią jedynie uprawnienie stron do zgodnej zmiany Umowy. Nie stanowią natomiast
+    zobowiązania stron do ich wprowadzenia.
+
+                                        KARY UMOWNE
+                                               § 21
+1.   W razie niewykonania lub nienależytego wykonania Umowy Wykonawca                      zapłaci
+     Zamawiającemu kary umowne. Kary naliczane będą z następujących tytułów:
+     1)   za zwłokę w wykonaniu odpowiednio Etapu 1, 2 lub 4 - w stosunku do terminów wskazanych
+          odpowiednio w § 13 ust. 2 pkt 1, 2 lub 4 Umowy – w wysokości 0,1% wynagrodzenia brutto
+          określonego odpowiednio dla danego etapu w § 14 ust. 2 pkt 1, 2 lub 4 Umowy za każdy
+          dzień zwłoki;
+     2)   za zwłokę w wykonaniu ustaleń podjętych w protokołach odbioru Dokumentacji Projektowej,
+          Kosztorysu Inwestorskiego lub STWiORB, oraz usunięciu wad lub braków stwierdzonych
+          przy odbiorze - w wysokości 3.000,00 zł za każdy dzień zwłoki liczony od upływu
+          wyznaczonego przez Inwestora Zastępczego terminu;
+     3)   za zwłokę w wykonaniu ustaleń dotyczących usunięcia wad lub braków Dokumentacji
+          Projektowej lub pozostałych opracowań w trakcie realizacji Przedmiotu Umowy w stosunku
+          do uprzednio odebranego Etapu – w wysokości 3.000,00 zł za każdy dzień zwłoki liczony
+          od upływu wyznaczonego przez Inwestora Zastępczego terminu, o którym mowa w § 15 ust.
+          16 Umowy;
+     4)   za zwłokę w wykonaniu ustaleń dotyczących usunięcia wad lub braków ujawnionych w
+          okresie rękojmi lub gwarancji - w wysokości 3.000,00 zł za każdy dzień zwłoki liczony od
+          upływu wyznaczonego przez Inwestora Zastępczego terminu;
+     5)   za zwłokę w przekazaniu prawidłowego Harmonogramu rzeczowego w przypadkach
+          określonych w § 6 ust. 6 Umowy – w wysokości 1.000,00 zł za każdy dzień zwłoki liczony
+          od upływu odpowiedniego terminu, o którym mowa w § 6 ust. 6 Umowy;
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                 34
+     6)   za zwłokę w udzieleniu odpowiedzi w stosunku do terminu wskazanego w § 4 ust. 1 pkt 7 –
+          w wysokości 500,00 zł za każdy dzień zwłoki (dotyczy każdego pytania oddzielnie);
+     7)   za zwłokę w wykonaniu przez Wykonawcę obowiązków Nadzoru Autorskiego, dla których
+          Zamawiający i/lub Inwestor Zastępczy przewidział lub ustalił w ramach swoich uprawnień
+          wynikających z Umowy termin wykonania - w wysokości 3.000,00 zł za każdy dzień zwłoki;
+     8)   za nieuzasadnioną nieobecności Wykonawcy na budowie lub w siedzibie Zamawiającego
+          i/lub Inwestora Zastępczego w ramach pełnienia Nadzoru Autorskiego zgodnie z
+          postanowieniami § 5 Umowy – w wysokości 3.000,00 zł za każdy dzień nieobecności w
+          stosunku do terminów określonych w § 5 Umowy;
+     9)    za brak obecności na spotkaniach i naradach organizowanych w trakcie realizacji Umowy
+          – w wysokości 3.000,00 zł za każdy dzień nieobecności;
+     10) za zwłokę w przedłożeniu odpowiedniego dokumentu potwierdzającego wydłużenie
+         obowiązywania zabezpieczeń należytego wykonania Umowy w terminie, o którym mowa w
+         § 18 ust. 11 Umowy – w wysokości 0,02% wynagrodzenia brutto określonego w § 14 ust. 1
+         Umowy, liczonego za każdy dzień zwłoki;
+     11) za naruszenie obowiązku określonego w § 16 ust. 9 Umowy w wysokości 0,5 %
+         wynagrodzenia netto określonego w § 14 ust. 1 Umowy;
+     12) za każdy przypadek stwierdzenia przez Inwestora Zastępczego braku zapłaty lub
+         nieterminową zapłatę przez Wykonawcę zwaloryzowanego zgodnie z § 20 ust. 13 niniejszej
+         Umowy wynagrodzenia podwykonawcy w wysokości 1.500,00 zł;
+     13) za odstąpienie od Umowy przez którąkolwiek ze Stron z przyczyn zależnych od Wykonawcy
+         w wysokości 10% kwoty netto wskazanej w § 14 ust. 1 Umowy, niniejsza kara podlega
+         sumowaniu z karami naliczonymi z innych tytułów.
+2.   Zamawiający zapłaci Wykonawcy karę umowną za odstąpienie od Umowy przez którąkolwiek
+     ze Stron z przyczyn zależnych wyłącznie od Zamawiającego w wysokości 10% wynagrodzenia
+     netto określonego w § 14 ust. 1 Umowy, z wyłączeniem przypadków określonych w § 19 ust. 2
+     Umowy.
+3.   Łączna wysokość kar umownych naliczonych przez Zamawiającego nie może przekroczyć 30%
+     wynagrodzenia netto określonego w § 14 ust. 1 Umowy.
+
+                     ZASADY POROZUMIEWANIA SIĘ MIĘDZY STRONAMI
+                                               § 22
+1.   Każde polecenie, zawiadomienie, zgoda, decyzja, zatwierdzenie lub zaświadczenie Stron
+     niniejszej Umowy będzie dokonywane w formie pisemnej lub w formie elektronicznej (dokument
+     w postaci elektronicznej opatrzony kwalifikowanym podpisem elektronicznym).
+2.   Inwestor Zastępczy wyznacza na koordynatora Umowy następujące osoby:
+
+
+
+
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                 35
+      Imię i nazwisko
+      Telefon
+      e-mail
+
+
+      Imię i nazwisko
+      Telefon
+      e-mail
+
+3.   Wykonawca wyznacza na koordynatora Umowy następujące osoby:
+      Imię i nazwisko
+      Telefon
+      e-mail
+
+
+      Imię i nazwisko
+      Telefon
+      e-mail
+
+
+                                              RODO
+                                               § 23
+Wykonawca oświadcza, że zobowiązuje się wypełnić obowiązki informacyjne Zamawiającego
+przewidziane w art. 14 Rozporządzenia Parlamentu Europejskiego i Rady (UE) 2016/679 z dnia
+27 kwietnia 2016 r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych
+osobowych i w sprawie swobodnego przepływu takich danych oraz uchylenia dyrektywy 95/46/WE
+wobec osoby fizycznej, której dane Zamawiający pozyskał i przetwarza w związku z wykonywaniem
+Umowy. Informacja dotycząca przetwarzania danych osobowych znajduje się w załączniku nr 7
+do Umowy.
+
+                                 POSTANOWIENIA KOŃCOWE
+                                               § 24
+1.   Strony niniejszej Umowy zobowiązują się do nieujawniania ani niewykorzystywania informacji
+     poufnych uzyskanych od drugiej Strony w związku z realizacją Umowy, chyba że będzie to
+     konieczne do wykonania zobowiązań wynikających z niniejszej Umowy lub informacje te
+     w momencie ujawnienia są publicznie dostępne w inny sposób, albo też obowiązujące przepisy
+     prawa nakładają na stronę obowiązek ich wyjawienia.
+2.   W zakresie niezbędnym do realizacji niniejszej Umowy, każda ze Stron może ujawniać
+     informacje poufne swoim pracownikom lub osobom, którymi posługuje się przy wykonywaniu
+     Umowy, pod warunkiem, że przed jakimkolwiek takim ujawnieniem zobowiąże te osoby
+     do zachowania poufności. Za działania lub zaniechania takich osób każda ze Stron ponosi
+     odpowiedzialność, jak za działania i zaniechania własne.
+
+
+
+
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                 36
+                                               § 25
+Wykonawca nie może bez pisemnej zgody Zamawiającego przenieść swych wierzytelności
+wynikających z niniejszej Umowy na osobę trzecią (tj. dokonać przelewu wierzytelności).
+                                               § 26
+1.   Spory mogące wyniknąć w związku z wykonaniem Umowy, Strony będą się starały rozstrzygnąć
+     w drodze negocjacji. W przypadku nie osiągnięcia porozumienia, Strony poddadzą spór
+     rozstrzygnięciu sądu właściwego miejscowo dla siedziby Zamawiającego.
+2.   Prawem właściwym dla Umowy jest prawo polskie. W sprawach nieuregulowanych niniejszą
+     Umową mają zastosowanie powszechnie obowiązujące przepisy prawa, a w szczególności
+     ustawy
+     1)   ustawa z dnia 23 kwietnia 1964 r. Kodeks cywilny (tekst jednolity: Dz. U. z 2025 r.,
+          poz. 1071 ze zm.);
+     2)   ustawa z dnia 11 września 2019 r. Prawo zamówień publicznych (tekst jednolity: Dz.U.
+          2024 r., poz. 1320 ze zm.);
+3.   Wymienione w treści Umowy załączniki stanowią jej integralną część.
+4.   Umowę sporządzono w 2-ch (dwóch) jednobrzmiących egzemplarzach, po jednym dla każdej
+     ze Stron.
+5.   Załączniki:
+     1)   Zalecenia pokonkursowe Sądu Konkursowego;
+     2)   Wytyczne pokonkursowe Zamawiającego;
+     3)   Szczegółowy zakres i podział prac w ramach poszczególnych Etapów Dokumentacji
+          Projektowej;
+     4)   Zespół Projektowy;
+     5)   Lista osób upoważnionych do kontaktów na Etapie Nadzoru Autorskiego;
+     6)   Lista Podwykonawców;
+     7)   Klauzula informacyjna.
+
+
+
+
+                   ZAMAWIAJĄCY:                                    WYKONAWCA:
+
+
+
+
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                 37
+                                                                      Załącznik nr 3 do Umowy
+                                                           o prace projektowe i nadzór autorski
+
+
+     SZCZEGÓŁOWY ZAKRES I PODZIAŁ PRAC W RAMACH POSZCZEGÓLNYCH ETAPÓW
+                        DOKUMENTACJI PROJEKTOWEJ
+
+
+
+
+1.   Przedmiot Umowy będzie realizowany z podziałem na następujące etapy i zakresy:
+     7)   Etap 1 - „Dokumentacja Projektowa - Wielobranżowy Projekt Koncepcyjny”;
+     8)   Etap 2 - „Dokumentacja Projektowa - Projekt Budowlany”;
+     9)   Etap 3 - „Pozwolenie na budowę”;
+     10) Etap 4 - „Dokumentacja Projektowa - Projekt Wykonawczy”;
+     11) Etap 5 - „usługi doradcze”;
+     12) Etap 6 - „Nadzór Autorski”.
+2.   Etap 1 - „Dokumentacja Projektowa - Wielobranżowy Projekt Koncepcyjny” – w ramach
+     którego Wykonawca wykona w szczególności Wielobranżowy Projekt Koncepcyjny, w tym
+     koncepcję etapowej realizacji inwestycji, w tym:
+     1)   Architektura:
+          a) ostateczny program użytkowy;
+          b) bilans powierzchni projektowanych budynków;
+          c) standardy estetyczne i techniczne;
+          d) wnioski dotyczące danych niezbędnych do wystąpienia o techniczne warunki
+              przyłączenia
+          e) zasady obsługi przedsięwzięcia pod względem dojazdów, dostaw urządzeń,
+              serwisowania itp.
+          f) projekt składający się z:
+              - opisu ogólnego całości inwestycji i analizy przyjętych rozwiązań pod kątem
+                   zgodności z obowiązującym MPZP;
+              - zestawienie powierzchni użytkowych, powierzchni zabudowy, dróg, zieleni,
+                   powierzchni biologicznie czynnej itp.;
+              - część rysunkowej, zawierającej między innymi:
+                   • rysunek zagospodarowania terenu całości inwestycji z zaznaczeniem
+                        dojazdów, dróg ppoż., ciągów pieszych, zieleni;
+                   • schematy prowadzenia infrastruktury technicznej;
+                   • rzuty, przekroje i elewacje w skalach potrzebnych do jednoznacznego
+                        określenia funkcji, powierzchni, ze schematycznym przedstawieniem
+                        możliwości aranżacji typowych powierzchni publicznych;
+                   • wybrane charakterystyczne uproszczone widoki perspektywiczne
+                        projektowanej inwestycji.
+              - określenie zasad ochrony przeciwpożarowej, w tym wytyczne bezpieczeństwa
+                   pożarowego dla materiałów;
+              - określenie wymogów SANEPID oraz BHP
+          g) definicja podstawowych parametrów budynku, w tym między innymi:
+              - transport i komunikacja pionowa w budynku z analizą przepustowości dźwigów
+                   osobowych;
+              - lokalizacje i wymiary szachtów instalacyjnych;
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                 38
+              -   grubości ścian;
+              -   wysokości sufitów podwieszanych i nad sufitowe przestrzenie instalacyjne;
+              -   grubości warstw posadzkowych;
+              -   schemat pożarowy i drogi ewakuacyjne;
+     2)   Konstrukcja:
+          a) opis ogólny konstrukcji projektowanej inwestycji;
+          b) analiza warunków posadowienia i założenia budowy parkingu podziemnego z funkcją
+             Miejsca Doraźnego Schronienia
+          c) przyjęte dane wyjściowe do projektowania;
+          d) opis zastosowanych rozwiązań budowlanych, materiałów i wyrobów;
+     3)   Instalacje sanitarne i mechaniczne:
+          a) opis ogólny projektowanej instalacji w tym zdefiniowania podstawowych instalacji
+               budynkowych jak np. instalacji ogrzewania i chłodu, wod-kan z uwzględnieniem
+               wykorzystania szarej wody, etc.;
+          b) analiza i wybór technologii produkcji ciepła i wody lodowej ze źródeł odnawialnych
+          c) obliczenia zapotrzebowania na media;
+          d) opis zastosowanych rozwiązań instalacyjnych, materiałów i wyrobów;
+          e) określenie zasad ochrony przeciwpożarowej (wentylacja wyciągowa, automatyka,
+               hydranty);
+          f) określenie wymogów SANEPID oraz BHP;
+     4)   Instalacje elektryczne:
+          a) opis ogólny projektowanej instalacji z uwzględnieniem instalacji pozyskiwania energii
+               elektrycznej ze źródeł odnawialnych;
+          b) bilans mocy (wspólny dla wszelkich projektowanych instalacji budynków);
+          c) opis zastosowanych rozwiązań instalacyjnych, materiałów i wyrobów;
+          d) określenie zasad ochrony przeciwpożarowej (zasilanie awaryjne, automatyka);
+     5)   Instalacje teletechniczne:
+          a) opis ogólny projektowanych instalacji
+          b) opis zastosowanych rozwiązań instalacyjnych, materiałów i wyrobów;
+          c) określenie zasad ochrony przeciwpożarowej (monitoring, automatyka działania
+               urządzeń ochrony pożarowej);
+     6)   Zieleń wewnętrzna i zewnętrzna:
+          a) opis projektowanej zieleni;
+     7)   Projekty zagospodarowania terenu:
+          a) ogólny opis rozwiązań;
+          b) opis rozwiązań w zakresie retencjonowania wód opadowych
+     8)   Oszacuje wartość kosztorysową inwestycji w oparciu o wartość inwestycji określoną
+          w Regulaminie Konkursu.
+3.   Etap 2 - „Dokumentacja Projektowa - Projekt Budowlany”
+     Projekt wielobranżowy umożliwiający uzyskanie pozwolenia na budowę, czyli kompletne
+     opracowanie oparte na dotychczas zdefiniowanych rozwiązaniach, dodatkowo poddane
+     uzgodnieniom i akceptacjom organów zewnętrznych, niezbędnych do zatwierdzenia ustalonych
+     rozwiązań decyzją o pozwoleniu na budowę spełniający wymagania Rozporządzenia Ministra
+     Rozwoju w sprawie szczegółowego zakresu i formy projektu budowlanego.
+     W ramach Etapu 2 Wykonawca w szczególności:
+     1)   opracuje wielobranżowy Projekt Budowlany, wraz z towarzyszącą infrastrukturą,
+          umożliwiający etapowanie realizacji inwestycji, obejmujący:
+
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                 39
+          d)   projekt zagospodarowania terenu,
+          e)   projekt architektoniczno-budowlany,
+     1)   wszelkie konieczne opinie, uzgodnienia, pozwolenia i inne dokumenty wymagane
+          przepisami szczególnymi niezbędne do uzyskania ostatecznej decyzji o pozwoleniu
+          na budowę;
+     2)   przeprowadzenie analizy i w razie potrzeby opracowanie analizy wpływu planowanej
+          inwestycji na środowisko wraz z uzyskaniem w imieniu Zamawiającego decyzji
+          o środowiskowych uwarunkowaniach, o ile dotyczy;
+     3)   uzyskanie w imieniu Zamawiającego warunków przyłączenia poszczególnych mediów oraz
+          włączenia do dróg publicznych, uzyskanie wymaganych uzgodnień i projektów
+          wykonawczych w zakresie realizacji przyłączenia mediów, przekładek kolidujących
+          elementów uzbrojenia podziemnego oraz włączenia do dróg publicznych;
+     4)   ekspertyzy techniczne budynków – ocena wpływu projektowanego budynku na zabudowę
+          sąsiednią (ul. Wybrzeże Słowackiego 5 oraz ul. Mazowiecka 19) oraz wykonanie
+          dokumentacji projektowej na zabezpieczenie konstrukcji tych budynków – o ile ekspertyza
+          wykaże taką konieczność;
+     5)   opracowanie projektowe zamurowania okien znajdujących się na ścianie szczytowej –
+          północnej – ściany budynku ul. Mazowiecka 19 wraz z niezbędną wentylacją;
+     6)   analizy techniczne, wybór technologii oraz wykonanie opracowania projektowego
+          w zakresie źródeł produkcji ciepła i chłodu dla potrzeb zasilania budynku w ciepło i chłód
+          ze źródeł odnawialnych, zgodnie z wymogami w zakresie zeroemisyjnosci budynku;
+     7)   analizy techniczne oraz opracowania projektowe w zakresie wykorzystania tzw. szarej wody
+          do instalacji w budynku;
+     8)   analizy techniczne oraz opracowania projektowe w zakresie retencjonowania wód
+          opadowych;
+     9)   badania geologiczne podłoża gruntowego, w tym wykonanie dokumentacji geologiczno-
+          inżynierskiej, o ile będzie niezbędna;
+     10) uwzględnienie w rozwiązaniach projektowych lokalizacji Miejsca Doraźnego Schronienia
+         w parkingu podziemnym;
+     11) złoży w imieniu i na rzecz Zamawiającego kompletny wniosek o wydanie decyzji
+         o pozwoleniu na budowę.
+4.   Etap 3 - „Pozwolenie na budowę” – w ramach którego Wykonawca uzyska w imieniu
+     i na rzecz Zamawiającego prawomocną decyzję o pozwoleniu na budowę;
+5.   Etap 4 - „Dokumentacja Projektowa - Projekt Wykonawczy”
+     Dokumentacja skoordynowana międzybranżowo obejmująca uszczegółowienie przyjętych
+     rozwiązań projektowych ze szczególnym uwzględnieniem rozwiązań materiałowych
+     umożliwiająca bezkolizyjną realizację prac budowlano – montażowych we wszystkich branżach.
+     W przypadku wysoce specjalistycznych prac rzemieślniczych, zawierająca informacje
+     umożliwiające przygotowanie dokumentacji warsztatowej. Projekt musi zostać zatwierdzony
+     przez rzeczoznawcę ppoż, sanepid i BHP.
+     W ramach Etapu 4 wykona w szczególności:
+     2)   Zakres projektu wykonawczego:
+          a)   projekt zagospodarowania terenu, sieci i przyłącza:
+               -   drogi wewnętrzne - uzgodnienie wjazdów, wraz z projektami odwodnienia
+                   i oświetlenia;
+               -   mała architektura, projekty np. pergol, murków, innych urządzeń terenowych wraz
+                   z doborem ławek, koszy na śmieci itp.;
+
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                 40
+             -   zieleń zewnętrzna;
+             -   oświetlenie terenu w tym latarnie uliczne;
+             -   przyłącze c.o.;
+             -   przyłącze wody;
+             -   przyłącze kanalizacji sanitarnej;
+             -   przyłącze kanalizacji deszczowej;
+             -   przyłącze energetyczne;
+             -   przyłącze teletechniczne (w tym światłowodu);
+             -   przyłącze dla straży pożarnej
+             -   retencja wód opadowych
+             -   wytwarzanie i przesył ciepła i chłodu ze źródeł odnawialnych
+             -   wytwarzanie i przesył energii elektrycznej ze źródeł odnawialnych
+             -   konieczne przekładki sieci kolidujących z Inwestycją i zbiorcza plansza
+                 koordynacyjna;
+             -   projekt zieleni i nasadzeń rekompensacyjnych konieczny do złożenia wniosku
+                 o wycinkę drzew i krzewów, uzyskanie decyzji zgody na wycięcie drzew i krzewów;
+             -   uzgodnienie koordynacyjne sieci (ZUDP);
+        b)   projekt architektoniczny, w tym architektury wnętrz:
+             -   szczegółowy opis przyjętych rozwiązań;
+             -   rzuty wszystkich kondygnacji i dachu;
+             -   charakterystyczne przekroje;
+             -   elewacje, w tym zestawienie elementów fasad;
+             -   rysunki detali i szczegółów w liczbie i skali umożliwiającej realizację obiektu;
+             -   wykazy i zestawienia m.in. stolarki, ślusarki, wykończenia, wyposażenia stałego
+                 pomieszczeń;
+             -   rzuty posadzek, sufitów i rozwinięcia ścian na podstawie projektu wnętrz;
+             -   projekt organizacji ruchu w garażu;
+             -   plan ewakuacji budynku, rozmieszczenia oznaczenia ewakuacyjnego
+                 i rozmieszczenia podręcznego sprzętu gaśniczego;
+        c)   projekt wnętrz:
+             obejmuje wykonanie przez Wykonawcę dokumentacji projektowej dla aranżacji wnętrz
+             ogólnodostępnych, wraz z projektami mebli wbudowanych oraz zabudów meblarskich
+             oraz projektem systemu informacji wizualnej. Dokumentacja będzie skoordynowana
+             międzybranżowo i pod względem rozwiązań techniczno-materiałowych.
+        d)   projekt konstrukcji wraz z opisem:
+             -   z uwzględnieniem szczegółowych rysunków zbrojeniowych, w tym projekt
+                 zabezpieczenia wykopu i analiza oddziaływania inwestycji na budynki sąsiednie;
+             -   z uwzględnieniem miejsca doraźnego schronienia w obszarze parkingu
+                 podziemnego;
+        e)   projekt instalacji sanitarnych i mechanicznych obejmujący między innymi:
+             -   szczegółowy opis przyjętych rozwiązań;
+             -   projekt instalacji wodno – kanalizacyjnej z uwzględnieniem rozdziału instalacji
+                 dla potrzeb wykorzystania szarej wody;
+
+
+
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                 41
+              -   projekt instalacji grzewczo – chłodzącej z uwzględnieniem produkcji ciepła i chłodu
+                  ze źródeł odnawialnych wraz z magazynami ciepła;
+              -   projekt instalacji wentylacji i klimatyzacji, w tym oddymianie garażu, klatek
+                  schodowych i poziomych dróg ewakuacji, symulacje CFD;
+              -   projekt instalacji hydrantowej;
+              -   projekt gaszenia gazem;
+              -   projekt automatyki;
+              -   scenariusz pożarowy wraz z matrycą sterowań uzgodnioną z rzeczoznawcą
+                  ds. p.poż.;
+         f)   projekt instalacji elektrycznej obejmujący między innymi:
+              -   część budowlaną trafostacji wbudowanej (o ile wynika z warunków przyłączenia);
+              -   rozdzielnię główną z modułem zasilania rezerwowego;
+              -   rozdzielnie obiektowe i wewnętrzne linie zasilające na terenie obiektu
+              -   (WLZ);
+              -   projekt instalacji do produkcji energii elektrycznej ze źródeł odnawialnych wraz
+                  z magazynami energii elektrycznej;
+              -   projekt instalacji oświetlenia i gniazd, w tym instalacja umożliwiająca ściemnianie
+                  obwodów;
+              -   projekt instalacji zasilania urządzeń technologicznych;
+              -   projekt oświetlenia przeszkodowego (jeśli będzie wymagany);
+              -   projekt generatorów prądotwórczych lub rozwiązań równoważnych;
+              -   wewnętrzne instalacje elektryczne.
+         g)   projekt instalacji teletechnicznej obejmujący; o instalacje wykrywania i sygnalizacji
+              pożaru SAP wraz z monitorowaniem i sterowaniem zamknięć pożarowych(tj.
+              min. czujki p.poż, oświetlenie ewakuacyjne, DSO);
+              -   system detekcji gazów dla garażu podziemnego;
+              -   system telewizji dozorowej CCTV (po sieci IP);
+              -   system sygnalizacji włamania i napadu SSWIN (po sieci IP);
+              -   system kontroli dostępu KD online;
+              -   system teleinformatyczny (sieć strukturalna);
+              -   instalacja Wi-Fi;
+              -   instalacja wzmocnienia sygnału GSM,
+              -   instalacja sygnału na potrzeby PSP;
+              -   telefony alarmowe na klatkach schodowych;
+              -   instalacja AV, w tym nagłośnienia;
+              -   integrator systemów bezpieczeństwa;
+              -   system BMS - jako platforma integrująca wszystkie systemy;
+              -   system parkingowy;
+              -   strażnik mocy.
+    3)   Wykonanie aktualizacji operatu dendrologicznego wraz z przygotowaniem wniosków
+         do właściwych organów o wydanie zezwolenia na wycinki drzew i uzyskanie stosownych
+         zezwoleń w imieniu Zamawiającego.
+    4)   Uwzględnienie w rozwiązaniach projektowych lokalizacji Miejsca Doraźnego Schronienia
+         w parkingu podziemnym.
+    5)   Projekt techniczny:
+
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                 42
+          Spełniający wymagania rozporządzenia Ministra Rozwoju w sprawie szczegółowego
+          zakresu i formy projektu budowlanego i uwzględniający rozwiązania zawarte w Projekcie
+          Wykonawczym.
+     6)   Wizualizacje elewacji budynku; minimum 5 wizualizacji fotorealistycznych (rozdzielczość
+          druk A3).
+     7)   Przedmiar Robót,
+     8)   STWiORB,
+     9)   Kosztorys Inwestorski:
+          w zakresie umożliwiającym etapowanie realizacji inwestycji, niezbędnych Zamawiającemu
+          do przygotowania i przeprowadzenia postępowania o udzielenie zamówienia publicznego
+          na wykonanie Robót Budowlanych;
+6.   Etap 5 - „usługi doradcze” – w ramach którego Wykonawca będzie doradzał Zamawiającemu
+     na etapie postępowania o udzielenie zamówienia publicznego na Roboty Budowlane, aż
+     do podpisania umowy przez Zamawiającego z Generalnym Wykonawcą;
+7.   Etap 6 - „Nadzór Autorski” – w ramach którego Wykonawca będzie sprawować nadzór
+     autorski podczas wykonania i odbioru Robót Budowlanych prowadzonych w oparciu
+     o Dokumentację Projektową, do czasu uzyskania ostatecznego pozwolenia na użytkowanie,
+     z zastrzeżeniem postanowień § 13 ust. 2 pkt 6 Umowy.
+     Szczegółowy opis Nadzoru Autorskiego znajduje się w § 5 Umowy.
+8.   Formaty dokumentacji:
+     1)   Projekt koncepcyjny wielobranżowy zostanie przygotowany przez Wykonawcę w formacie
+          dokumentacji A3 lub A2, z wyjątkiem tych części projektu, które z uwagi na zachowania
+          czytelności powinny być wykonane w formacie większym.
+     2)   Projekty budowlany i wykonawczy zostaną przygotowane w formatach A; w formie
+          elektronicznej w postaci plików edytowalnych: dwg, docx, xlsx etc. oraz w formacie
+          nieedytowalnym pdf, jak również w formie w papierowej i złożony do formatu A4
+          z marginesem do wpięcia i podzielony na oddzielne opracowania. W celu ułatwienia
+          korzystania z dokumentacji przez wykonawcę robót budowlanych nie przewiduje się
+          trwałego zszycia projektu wykonawczego. Projekt musi uwzględniać opisy techniczne,
+          specyfikacje oraz inne opracowania niezbędne do prawidłowej realizacji Inwestycji.
+     3)   Wykonawca uzgodni ze Zleceniodawcą sposób kodyfikacji Projektu przed przystąpieniem
+          do prac i będzie zobowiązany do jego stosowania w trakcie realizacji Projektu.
+     4)   Wraz z dokumentacją projektową przekazywaną dla Zamawiającego, Wykonawca
+          zobowiązany jest przedłożyć wykaz przekazywanej dokumentacji i szczegółowy spis jej
+          zawartości, oświadczenie o kompletności i prawidłowości wykonania dostarczonej
+          dokumentacji, tabelę koordynacji międzybranżowej potwierdzonej za koordynację przez
+          projektantów branżowych.
+     5)   Każdy rysunek przekazywany do realizacji będzie posiadał tabele koordynacji
+          międzybranżowej. Fakt wykonania koordynacji będzie potwierdzony podpisem projektanta
+          stosownej branży.
+     6)   Dokumentacja, jaka powstanie w trakcie nadzoru autorskiego, będzie posiadała niezależną
+          numerację, określaną jako „rewizja”.
+     7)   Dokumentacja wydana jako rewizja będzie miała wypunktowane i opisane wszystkie
+          zmiany oraz zmiany będą oznaczone w czytelny sposób, np. w formie tzw. chmurki
+          w kolorze kontrastującym z resztą rysunku.
+     8)   Każdorazowo, do wydanej rewizji Projektu, Wykonawca zobowiązany jest przedłożyć
+          wykaz przekazywanej dokumentacji i szczegółowy spis jej zawartości, czytelną informację
+          w zakresie zmian wprowadzonych do dokumentacji, tabelę koordynacji międzybranżowej
+          potwierdzonej za koordynację przez projektantów branżowych.
+
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                 43
+                                                                      Załącznik nr 7 do Umowy
+                                                           o prace projektowe i nadzór autorski
+
+
+                                  KLAUZULA INFORMACYJNA
+
+
+1.   Strony zobowiązane      są   do   przestrzegania   oraz   spełnienia   prawnych   obowiązków
+     określonych w:
+     1)   Rozporządzeniu Parlamentu Europejskiego i Rady (UE) 2016/679 z dnia 27 kwietnia
+          2016 r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych
+          osobowych i w sprawie swobodnego przepływu takich danych oraz uchylenia dyrektywy
+          95/46/WE (ogólne rozporządzenie o ochronie danych) (Dz. Urz. UE L 119, s.1) (dalej
+          Rozporządzenie);
+     2)   Ustawie z dnia 10 maja 2018 r. o ochronie danych osobowych (Dz. U. z 2019 r. poz. 1781)
+          wraz z aktami wykonawczymi.
+2.   Wykonawca zobowiązany jest do:
+     1)   zachowania w tajemnicy danych osobowych uzyskanych w związku z wykonywaniem
+          niniejszej Umowy;
+     2)   przetwarzania danych osobowych zgodnie z obowiązującymi przepisami prawa;
+     3)   przekazywania, ujawniania oraz wykorzystywania informacji/danych wzajemnie
+          otrzymanych, związanych z wykonywaniem przedmiotu niniejszej Umowy tylko wobec
+          podmiotów uprawnionych na podstawie przepisów obowiązującego prawa i w zakresie
+          określonym Umową;
+     4)   nieujawniania stronom trzecim, źródła pozyskanych informacji/danych, zarówno w całości,
+          jak i w części, niesporządzania kopii, ani w jakikolwiek inny sposób ich powielania;
+     5)   podejmowania wszelkich kroków i działań w celu zapewnienia, że w sytuacji gdy podczas
+          wykonywania przedmiotu Umowy, wejdzie w posiadanie informacji/danych
+          (w szczególności danych osobowych), dokumentów bądź innych nośników
+          z informacjami/danymi w odpowiedni sposób je zabezpieczy i niezwłocznie przekaże
+          zabezpieczone informacje/dane, dokumenty Zamawiającemu za pośrednictwem Inwestora
+          Zastępczego.
+3.   W związku z realizacją niniejszej Umowy dochodzi do przekazywania - udostępniania sobie
+     przez Strony danych osobowych:
+     1)   Osób reprezentujących Strony przy podpisaniu niniejszej Umowy;
+     2)   osób upoważnionych przez Wykonawcę do wystawiania dokumentów księgowych;
+     3)   Osób uprawnionych przez Strony do wykonywania, koordynowania i nadzoru prac objętych
+          niniejszą Umową.
+4.   Administratorem danych
+         Zamawiającego jest Marszałek Województwa Dolnośląskiego z siedziba we Wrocławiu,
+          Słowackiego 12-14, 50-411 Wrocław;
+          Wyznaczono osobę do kontaktu w sprawie przetwarzania danych osobowych (inspektor
+          danych osobowych) adres e-mail: inspektor@dolnyslask.pl;
+         Inwestycji Dolnośląskich Spółka z ograniczoną odpowiedzialnością z siedzibą przy
+          ul. Igielnej 13, 50-117 Wrocław – jest Prezes Zarządu, z którym można się skontaktować
+          poprzez e-mail: biuro@inwdo.pl;
+     I.   Administrator przetwarza dane osobowe zawarte w niniejszej umowie w następujących
+          celach:
+
+
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                 44
+             realizacji Umowy w zakresie niezbędnym do jej wykonania (podstawa z art. 6 ust. 1
+              lit. b. RODO), przez okres współpracy;
+             dokonywania rozliczeń realizacji Umowy pomiędzy stronami, w tym realizacji płatności
+              w zakresie niezbędnym do wykonania Umowy (podstawa z art. 6 ust. 1 lit. b. RODO),
+              przez okres współpracy;
+             realizacji obowiązków w zakresie egzekucji roszczeń, w celu realizacji obowiązków
+              w zakresie egzekucji z wierzytelności wynikających z Kodeksu postępowania
+              cywilnego (podstawa art. 6 ust. 1 lit. c RODO), przez 3 lata od ostatniego potrącenia;
+             realizacji obowiązków w zakresie rachunkowości w celu realizacji obowiązków
+              wynikających z ustawy o rachunkowości (podstawa z art. 6 ust. 1 lit. c RODO), przez
+              5 lat od końca roku, w którym nastąpiło zdarzenie;
+             realizacji obowiązków wynikających z przepisów podatkowych, w szczególności
+              Ordynacji podatkowej, ustawy o podatku dochodowym od osób prawnych, ustawy
+              o podatku od towarów i usług (podstawa z art. 6 ust. 1 lit c RODO), przez 5 lat od końca
+              roku podatkowego;
+             udzielenia odpowiedzi na pisma, skargi i wnioski (podstawa z art. 6 ust. 1 lit c RODO),
+             wykonania obowiązków wynikających z ustawy z dnia 6 września 2001r. o dostępie
+              do informacji publicznej (podstawa z art. 6 ust. 1 lit c RODO);
+    II.   Administrator udostępnia dane osobowe:
+             gdy taki obowiązek wynika z przepisów obowiązującego prawa, m.in. do Krajowej
+              Administracji Skarbowej, komornikom sądowym i innym organom państwowym;
+             operatorom pocztowym, firmom kurierskim;
+             podmiotom przetwarzającym na zlecenie i w imieniu administratora, na podstawie
+              zawartej Umowy powierzenia przetwarzania danych osobowych, w celu świadczenia
+              określonych w umowie usług, np.: usług teleinformatycznych takich jak hosting,
+              dostarczanie lub utrzymanie systemów informatycznych, usług prawnych i doradczych.
+    III. Administrator nie przekazuje danych poza teren Polski/UE/Europejskiego Obszaru
+         Gospodarczego.
+    IV. Przysługujące prawa:
+             Prawo dostępu do danych oraz otrzymania ich kopii;
+             Prawo do sprostowania (poprawiania) danych;
+             Prawo do ograniczenia przetwarzania danych;
+             Prawo do przenoszenia danych;
+             Prawo wniesienia skargi do Prezesa Urzędu Ochrony Danych Osobowych
+
+
+
+
+Konkurs dwuetapowy, realizacyjny na opracowanie koncepcji architektoniczno – urbanistycznej budynku
+administracyjnego Urzędu Marszałkowskiego Województwa Dolnośląskiego we Wrocławiu.
+                                                                                                 45
+

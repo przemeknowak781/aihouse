@@ -9,3 +9,7 @@ tools/__pycache__/
 src/lamela/**/__pycache__/
 **/__pycache__/
 build/
+.venv-render/
+umwd/00_materialy/_raw/
+umwd/00_materialy/_rozpak/
+umwd/build/

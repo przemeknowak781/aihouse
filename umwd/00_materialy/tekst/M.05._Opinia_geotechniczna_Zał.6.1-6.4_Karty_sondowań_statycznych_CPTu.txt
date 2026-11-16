@@ -1,0 +1,348 @@
+                                                                                                                                                                            qc [MPa]              fs [MPa]              u2 [MPa]             Rf [%]                    ID []
+                                                                                                                                                                            0    5    10   15   200   0.1 0.2 0.3      -0.1    0     0.1    0     2   4   6    8 100 0.2 0.4 0.6 0.8 1.0
+wyznaczone parametry wytrzymałościowe należy traktować wyłącznie orientacyjnie ze względu na nasypowy charakter gruntów                                                0
+
+
+
+
+                                                                                                                          Nasyp                                                        24.873 >
+                                                                                                                          (piasek średni, humus, gruz ceglany)
+                                                                                                                          qc=13,0MPa; ID=0,62;                        0.5
+                                                                                                                          f’=38,0 O; M=46,0MPa;
+
+
+
+
+                                                                                                                          Nasyp
+                                                                                                                          (humus, gruz ceglany, piasek średni) 1.0
+                                                                                                                          qc=2,0MPa;
+
+
+
+
+                                                                                                                          Nasyp
+                                                                                                                          (piasek średni, humus, gruz ceglany)
+                                                                                                                          qc=4,0MPa; ID=0,26;                         1.5
+                                                                                                                          f’=31,1 O; M=16,0MPa;
+
+
+
+
+                                                                                                                          Nasyp                                    2.0
+                                                                                                                          (piasek gliniasty - piasek średni, gr. ceg.)
+                                                                                                                          qc=1,7MPa;
+                                                                                                                          stan: pl-tpl/ln
+
+
+
+
+                                                                                                                          Nasyp                                       2.5
+                                                                                                                          (piasek gliniasty, gruz ceglany)
+                                                                                                                          qc=0,5MPa;
+                                                                                                                          stan: pl
+
+
+
+
+                                                                                                                          Nasyp                                       3.0
+                                                                                                                          (piasek średni zagliniony, gruz ceglany)
+                                                                                                                          qc=15,0MPa; ID=0,67;
+                                                                                                                          f’=38,9 O; M=50,0MPa;
+                                                                                                                                                                                                             0.654 >
+                                                                                                                                                                                                             0.624 >
+                                                                                                                                                                                       39.571 >
+                                                                                                                          qc=39,0MPa; ID=0,96;
+                                                                                                                                                                      3.5
+                                                                                                                                     brak postępu, przekroczone krytyczne wartości qc
+
+
+
+
+                                                                                                                                                                      4.0
+
+
+
+
+                                                                                                                                                                      4.5
+
+
+
+
+                                                                                                                                                                      5.0
+
+
+
+
+                                                                                                                                                                            0   5 10       15   200 0.1 0.2 0.3        -0.1    0     0.1    0 2 4         6    8 100 0.2 0.4 0.6 0.8 1.0
+                                                                                                                                                                            qc [MPa]              fs [MPa]               u2 [MPa]           Rf [%]                 ID []
+                                                                                                                                                                                Zadanie:                                                              Poziom terenu:
+                                                                                                                                                           U2                   Wykonanie wstępnych badań geotechnicznych na potrzeby ustalenia                        119,40 m n.p.m.
+                                                                                                                                                                                warunków technicznych posadowienia dla obiektu nowej siedziby         Data:                Skala:
+                                                                                                                                                                                Urzędu Marszałkowskiego we Wrocławiu                                      2025-08-25                1:20
+                                                                                                                                                                                Lokalizacja:                                                          Nr zał.: 6.1
+                                                                                                                                                 Cone No: 8165
+                                                                                                                                                 Tip area [cm2]: 10                                                                                   Nr sondowania:
+                                                                                                                                                 Sleeve area [cm2]: 150         WROCŁAW, Dz. nr 9/1, obr. Południe                                                   O-01
+                                                  qc [MPa]            fs [MPa]             u2 [MPa]              Rf [%]                    ID []
+                                                  0 10 20 30 40 500                    -0.1
+                                                                          0.1 0.2 0.3 0.4          0     0.1    0     2   4    6   8 100 0.2 0.4 0.6 0.8 1.0
+                                             0
+Nasyp
+(piasek średni, humus, gruz ceglany)
+qc=19,0MPa; ID=0,74;
+f’=40,3 O; M=58,0MPa;
+
+
+                                            1.0
+
+
+
+
+Nasyp
+(piasek gliniasty, piasek średni,
+humus, gruz ceglany)
+qc=1,2-3,5MPa;                              2.0
+stan: tpl-pl/ln
+
+
+
+
+                                            3.0
+Nasyp
+(humus, piasek drobny)
+qc=1,2MPa;
+
+
+
+                                            4.0
+
+
+Piasek drobny / Piasek średni
+qc=17,0MPa; ID=0,71;
+f’=39,6 O; M=54,0MPa;
+
+
+                                            5.0
+
+
+
+
+                                            6.0
+Piasek drobny / Piasek średni
+qc=12,0MPa; ID=0,60;
+f’=37,6 O; M=44,0MPa;
+
+
+
+
+                                            7.0
+
+Pospółka
+qc=19,0MPa; ID=0,74;
+f’=40,3 O; M=58,0MPa;
+
+
+                                            8.0
+
+
+Pospółka
+qc=43,0MPa; ID=0,99;
+f’=45,1 O; M=106,0MPa;
+
+                                                                                                                                                       1.028 >
+                                            9.0                                                                                                        1.028 >
+
+         brak postępu, przekroczone krytyczne wartości qc
+
+
+
+
+                                           10.0
+
+
+                                                  0 10 20 30 40 500 0.1 0.2 0.3          -0.1    0       0.1    0 2 4          6   8 100 0.2 0.4 0.6 0.8 1.0
+                                                  qc [MPa]        fs [MPa]                 u2 [MPa]             Rf [%]                 ID []
+                                                    Zadanie:                                                              Poziom terenu:
+                                U2                  Wykonanie wstępnych badań geotechnicznych na potrzeby ustalenia
+                                                                                                                                           119,30 m n.p.m.
+                                                    warunków technicznych posadowienia dla obiektu nowej siedziby         Data:               Skala:
+                                                    Urzędu Marszałkowskiego we Wrocławiu                                      2025-08-25               1:45
+                                                    Lokalizacja:                                                          Nr zał.: 6.2
+                      Cone No: 8165
+                      Tip area [cm2]: 10                                                                                  Nr sondowania:
+                      Sleeve area [cm2]: 150        WROCŁAW, Dz. nr 9/1, obr. Południe                                                   O-02
+                                                 qc [MPa]            fs [MPa]             u2 [MPa]             Rf [%]                    ID []
+                                                 0 10 20 30 40 500      0.1 0.2 0.3     -0.1     0      0.1    0    2   4    6   8 100 0.2 0.4 0.6 0.8 1.0
+                                            0
+
+
+
+Nasyp
+(piasek średni, humus, gruz ceglany)
+qc=4,0MPa; ID=0,26;
+f’=31,1 O; M=16,0MPa;
+                                           1.5
+
+
+
+ Nasyp
+ (piasek gliniasty, humus, gruz ceglany)
+qc=1,3MPa;
+stan: pl                                   3.0
+
+
+Piasek średni / Piasek drobny
+qc=17,0MPa; ID=0,71;
+f’=39,6 O; M=54,0MPa;
+
+                                           4.5
+
+
+Piasek średni / Piasek drobny
+qc=7,0MPa; ID=0,43;
+f’=34,4 O; M=28,0MPa;
+
+
+                                           6.0
+
+
+Piasek średni
+qc=15,0MPa; ID=0,67;
+f’=38,9 O; M=50,0MPa;
+
+
+                                           7.5
+Piasek średni
+qc=27,0MPa; ID=0,85;
+f’=42,3 O; M=74,0MPa;
+
+
+
+                                           9.0
+
+                                                                                                                                                     1.043   >
+                                                                                                                                                     1.034   >
+                                                                                                                                                     1.034   >
+Pospółka                                                                                                                                             1.041   >
+qc=43,0MPa; ID=0,99;
+f’=45,1 O; M=106,0MPa;
+                                          10.5
+
+
+
+
+                                          12.0
+Pospółka
+qc=30,0MPa; ID=0,88;
+f’=42,9 O; M=80,0MPa;
+
+
+
+Pospółka
+qc=22,0MPa; ID=0,79;                      13.5
+f’=41,1 O; M=64,0MPa;
+
+Pospółka
+qc=34,0MPa; ID=0,92;
+f’=43,7 O; M=88,0MPa;
+
+                                          15.0
+
+                                                 0 10 20 30 40 500 0.1 0.2 0.3          -0.1    0       0.1    0 2 4         6   8 100 0.2 0.4 0.6 0.8 1.0
+                                                 qc [MPa]        fs [MPa]                 u2 [MPa]             Rf [%]                ID []
+                                                   Zadanie:                                                             Poziom terenu:
+                               U2                 Wykonanie wstępnych badań geotechnicznych na potrzeby ustalenia
+                                                                                                                                         119,00 m n.p.m.
+                                                  warunków technicznych posadowienia dla obiektu nowej siedziby         Data:               Skala:
+                                                  Urzędu Marszałkowskiego we Wrocławiu                                      2025-08-25               1:65
+                                                   Lokalizacja:                                                         Nr zał.: 6.3
+                     Cone No: 8165
+                     Tip area [cm2]: 10                                                                                 Nr sondowania:
+                     Sleeve area [cm2]: 150        WROCŁAW, Dz. nr 10/3, obr. Południe                                                 O-06
+                                                  qc [MPa]               fs [MPa]             u2 [MPa]             Rf [%]                    ID []
+                                                  0    10   20   30   400     0.1   0.2     -0.1     0      0.1   0     2   4   6    8 100 0.2 0.4 0.6 0.8 1.0
+Nasyp                                        0
+(piasek średni zagl., gruz ceglany)
+qc=7,5MPa; ID=0,46;
+f’=34,8 O; M=30,0MPa;
+
+
+
+Nasyp
+(piasek gliniasty, piasek średni,           1.0
+humus, gruz ceglany)
+qc=1,5-3,5MPa;
+stan: tpl-pl/ln
+
+
+
+                                            2.0
+Nasyp
+(humus, namuł gliniasty, piasek drobny)
+qc=0,7MPa;
+
+
+
+
+                                            3.0
+
+
+
+
+Piasek średni
+qc=15,0MPa; ID=0,67;
+f’=38,9 O; M=50,0MPa;
+                                            4.0
+
+
+
+
+                                            5.0
+
+
+
+
+Piasek średni
+qc=12,5MPa; ID=0,61;
+f’=37,8 O; M=45,0MPa;
+                                            6.0
+
+
+
+
+                                            7.0
+
+
+
+
+Pospółka
+qc=25,0MPa; ID=0,83;                        8.0
+f’=41,9 O; M=70,0MPa;
+
+
+
+
+Pospółka
+                                            9.0
+qc=38,0MPa; ID=0,96;
+f’=44,3 O; M=96,0MPa;
+
+        brak postępu, przekroczone krytyczne wartości qc
+
+
+
+
+                                           10.0
+
+
+                                                  0 10 20        30   400    0.1    0.2     -0.1    0       0.1   0 2 4         6    8 100 0.2 0.4 0.6 0.8 1.0
+                                                  qc [MPa]              fs [MPa]              u2 [MPa]            Rf [%]                 ID []
+                                                      Zadanie:                                                              Poziom terenu:
+                                U2                    Wykonanie wstępnych badań geotechnicznych na potrzeby ustalenia                        118,65 m n.p.m.
+                                                      warunków technicznych posadowienia dla obiektu nowej siedziby         Data:                Skala:
+                                                      Urzędu Marszałkowskiego we Wrocławiu                                      2025-08-25                1:45
+                                                      Lokalizacja:                                                          Nr zał.: 6.4
+                      Cone No: 8165
+                      Tip area [cm2]: 10                                                                                    Nr sondowania:
+                      Sleeve area [cm2]: 150           WROCŁAW, Dz. nr 10/3, obr. Południe                                                 O-08
+

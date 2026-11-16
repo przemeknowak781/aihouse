@@ -1,0 +1,877 @@
+    Program użytkowy
+budynku administracyjnego
+ Urzędu Marszałkowskiego
+Województwa Dolnośląskiego
+
+
+
+
+       Wrocław listopad 2025
+                                                              Plan użytkowy budynku administracyjnego UMWD
+
+
+
+Spis treści
+
+
+Ogólne założenia i lokalizacja inwestycji .................................................................... 2
+   Założenia ogólnobudowlane .................................................................................. 2
+Założenia funkcjonalne obszaru biurowego ................................................................ 4
+   Powierzchnie biurowe ........................................................................................... 4
+   Sejmik Województwa Dolnośląskiego i Kancelaria Sejmiku ...................................... 5
+   Sale narad i sale konferencyjne .............................................................................. 7
+Strefa ogólnodostępna ............................................................................................. 8
+Strefa administracyjno-gospodarcza.......................................................................... 9
+   Pomieszczenia socjalne ........................................................................................ 9
+   Pomieszczenia pomocnicze ................................................................................... 9
+   Pomieszczenia sanitarne ..................................................................................... 10
+Komunikacja wewnętrzna ....................................................................................... 10
+System informacji wizualnej i dźwiękowej ................................................................ 11
+Parkingi ................................................................................................................. 12
+   Parking dla rowerów ............................................................................................ 12
+   Parking podziemny .............................................................................................. 12
+Infrastruktura techniczna ........................................................................................ 13
+   Serwerownia ...................................................................................................... 15
+Zagospodarowanie terenu....................................................................................... 16
+Przepisy i standardy ................................................................................................ 18
+Załącznik nr 1 ......................................................................................................... 19
+
+
+
+
+                                                                                                                           1
+                                     Plan użytkowy budynku administracyjnego UMWD
+
+
+
+Ogólne założenia i lokalizacja inwestycji
+
+
+Budynek    administracyjny    Urzędu    Marszałkowskiego    Województwa
+Dolnośląskiego (zwanym dalej UMWD) będzie biurowcem dedykowanym
+w całości na potrzeby jednej jednostki organizacyjnej samorządu
+województwa, jaka jest UMWD. Do nowego obiektu przeniesione zostaną
+Sejmik Województwa Dolnośląskiego, wydziały oraz biura urzędu
+marszałkowskiego zlokalizowane obecnie w obiektach przy ulicy Walońskiej,
+Dobrzyńskiej, Matejki oraz pl. Powstańców Warszawy. Integracja
+rozproszonych komórek organizacyjnych i stworzenie przestrzeni
+dedykowanej Sejmikowi Województwa Dolnośląskiego usprawni działanie
+urzędu i pozwoli obniżyć koszty jego funkcjonowania.
+Nie zakłada się przeniesienia do nowego budynku innej jednostki
+organizacyjnej należącej do samorządu województwa, ze względu na ich
+specyfikę i konieczność utworzenia wydzielonej przestrzeni na potrzeby
+takiego podmiotu i oddzielania od UMWD.
+Nowy budynek administracyjny Urzędu Marszałkowskiego Województwa
+Dolnośląskiego będzie zlokalizowany we Wrocławiu na nieruchomości
+niezabudowanej o łącznej powierzchni 3.729 m2 oznaczonej geodezyjnie
+jako dz. 10/3, 11/6, 19/11, 9/1, obręb 022 Południe, jednostka ewidencyjna
+Miasta Wrocław 026401_1 u zbiegu ulic Mazowieckiej i Wybrzeże
+Słowackiego. Nowy budynek znajdzie się w sąsiedztwie głównych budynków
+Urzędu Marszałkowskiego, mostu Grunwaldzkiego oraz w pobliżu Urzędu
+Wojewódzkiego. Takie umiejscowienie pozwoli na stworzenie spójnego
+obszaru dedykowanego samorządowi województwa dolnośląskiego
+rozrzuconych obecnie w różnych lokalizacjach na terenie Wrocławia.
+Lokalizacja nowego budynku urzędu jest zgodna z obowiązującym w rejonie
+placu Społecznego miejscowym planem zagospodarowania przestrzennego
+(MPZP) z dnia 21 stycznia 2010 Uchwała Rady Miejskiej Wrocławia nr
+XLV/1366/10. Budynek urzędu w zakresie urbanistyki i architektury
+powinien spełniać wymogi MPZP.
+
+
+Założenia ogólnobudowlane
+Nowy budynek biurowy UMWD zostanie zaprojektowany jako obiekt
+składający się z trzech części: dwóch skrzydeł o pięciu kondygnacjach
+nadziemnych i maksymalnej wysokości do 22 metrów, usytuowanych
+wzdłuż ulicy Mazowieckiej oraz Wybrzeża Słowackiego, połączonych
+centralną dominantą zlokalizowaną przy zbiegu tych ulic o maksymalnej
+
+
+
+                                                                               2
+                                     Plan użytkowy budynku administracyjnego UMWD
+
+
+
+wysokości do 45m. Obiekt od strony ulicy Mazowieckiej ma przylegać do
+znajdującej się przy tej ulicy kamienicy nr 19 tworząc zwartą pierzeję.
+Natomiast od strony wybrzeża Odry nie przewiduje się połączenia budynku
+biurowego UMWD z kamienicą przy ulicy Wybrzeże Słowackiego 5, którą od
+terenu inwestycji oddziela działka nr 10/2.
+Zakłada się dwie kondygnacje podziemne przeznaczone, zgodnie
+z miejscowym planem zagospodarowania przestrzennego (MPZP), na
+parking oraz elementy infrastruktury technicznej budynku. Planuje się, iż
+parking będzie pełnił też funkcję miejsca doraźnego schronienia (MDS) dla
+okolicznej ludności oraz pracowników. Na pozostałej powierzchni
+nieruchomości znajdą się obszary zieleni urządzonej oraz komunikacji
+kołowej i pieszej.
+Budynek ma spełniać wymogi obiektu zeroemisyjnego, którego gospodarka
+energetyczna będzie oparta na źródłach odnawialnych. Przewiduje się także
+zastosowanie rozwiązań proekologicznych, obejmujących wykorzystanie
+tzw. wody szarej i wód opadowych.
+Projektowane rozwiązania i powiązania architektoniczne powinny umożliwić
+sprawne funkcjonowanie Urzędu Marszałkowskiego oraz Sejmiku
+Województwa Dolnośląskiego (Sejmik) przy jednoczesnym zabezpieczaniu
+niezbędnych funkcji pomocniczych. Projekt budynku biurowego powinien
+być przede wszystkim spójny funkcjonalnie i zaprojektowany w sposób
+umożliwiający elastyczne dostosowanie się do zmian organizacyjnych czy
+prawnych, przy czym powinien uwzględniać trwałe i sprawdzone
+technologie,   które   pozwolą   zoptymalizować      koszty  utrzymania
+i bezusterkowe funkcjonowanie urzędu.
+Budynek powinien zostać zaprojektowany zgodnie z ideą projektowania
+uniwersalnego, które ma na celu stworzenie rozwiązań użytecznych dla
+wszystkich ludzi, w możliwie najszerszym zakresie, bez potrzeby specjalnej
+adaptacji lub dostosowań. Zapisy ratyfikowanej przez Polskę w 2012 roku
+Konwencji ONZ o prawach osób niepełnosprawnych definiują uniwersalne
+projektowanie jako kluczowy instrument realizacji idei dostępności.
+Przyjęte rozwiązania powinny brać pod uwagę potrzeby obecnych
+i przyszłych użytkowników budynku, uwzględniając przy tym rosnącą grupę
+osób ze szczególnymi potrzebami. Dotyczy to zarówno odbiorców
+zewnętrznych jak również osób zatrudnionych przez podmiot publiczny.
+Projektowane rozwiązania mają zapewniać dostępność budynku
+z wyłączeniem pomieszczeń technicznych dla osób z niepełnosprawnościami
+zgodnie z ustawą o zapewnieniu dostępności osobom ze szczególnymi
+
+
+
+
+                                                                               3
+                                     Plan użytkowy budynku administracyjnego UMWD
+
+
+
+potrzebami oraz ze standardami dostępności dla samorządów terytorialnych
+opracowanymi przez MSWiA.
+
+
+Założenia funkcjonalne obszaru biurowego
+Zakłada się, że do nowego budynku administracyjnego UMWD zostaną
+przeniesione:
+  •   Sejmik i Kancelaria Sejmiku,
+  •   Departament Ochrony Środowiska,
+  •   Departament Spraw Społecznych i Rynku Pracy,
+  •   Departament Sportu i Turystyki,
+  •   Departament Infrastruktury,
+  •   Departament Gospodarki i Promocji
+  •   Członek Zarządu,
+  •   Departament Kultury i Dziedzictwa Kulturowego,
+  •   Departament Zdrowia,
+  •   Geodeta Województwa - Wydział Geodezji i Kartografii,
+  •   Departament Rozwoju i Aglomeracji,
+  •   Dział Kancelaryjny II,
+  •   Dział Wsparcia Informatycznego II.
+Łącznie w powyższych komórkach organizacyjnych pracuje obecnie 403
+osoby na stanowiskach urzędniczych. Szczegółowa informacja o liczbie osób
+w poszczególnych komórkach organizacyjnych została umieszczona w tabeli
+w załączniku nr 1.
+
+
+Powierzchnie biurowe
+Aby zapewnić uniwersalność i elastyczność projektu budynku koniecznym
+jest przyjęcie założeń funkcjonalnych uwzględniających zarówno obecne jak
+i przyszłe, nieznane jeszcze potrzeby UMWD. Uwzględniając wady i zalety
+klasycznych rozwiązań biurowych i przestrzeni open space, w tym
+programie przyjęto rozwiązanie klasyczne, z pokojami biurowymi dla
+maksymalnie trzech osób. W celu zapewnienia elastyczności i łatwości
+wprowadzania zmian organizacyjnych przyjmuje się, iż pokoje biurowe
+mają taką samą powierzchnię 24m2, niezależnie od tego jakie ostatecznie
+będzie przeznaczenie pomieszczenia i ile osób będzie go użytkowało (jedna,
+dwie czy trzy). Przy czym każdy pokój powinien umożliwiać pracę trzech
+osób, poprzez zapewnienie trzech stanowisk pracy i dostępu do
+odpowiedniej liczby punktów dostępowych do instalacji elektrycznej
+
+
+                                                                               4
+                                     Plan użytkowy budynku administracyjnego UMWD
+
+
+
+i teletechnicznej. Takie rozwiązanie pozwoli na szybkie wprowadzania zmian
+przeznaczenia pokoi biurowych, bez konieczności przebudowy pomieszczeń,
+przy zachowaniu komfortu pracy zarówno dla dyrekcji, jak i pracowników.
+Ze względu na odmienną organizacje pracy w Wydziale Geodezji
+i Kartografii, pokoje biurowe dla pracowników powinny mieć powierzchnię
+32m2 i być dostosowane do pracy zespołów czteroosobowych, poprzez
+zapewnienie czterech stanowisk pracy i dostępu do odpowiedniej liczby
+punktów dostępowych do instalacji elektrycznej i teletechnicznej.
+Zakłada się, że pokoje jednoosobowe powinny być projektowane dla
+Członka Zarządu, dyrektorów, ich zastępców oraz osób zajmujących
+samodzielne stanowiska. Jednocześnie należy przewidzieć możliwość pracy
+w tych pomieszczeniach maksymalnie trzech pracowników. Pokoje biurowe
+przeznaczone dla Członka Zarządu oraz podlegających mu dyrektora
+departamentu i dyrektorów poszczególnych wydziałów powinny być
+zlokalizowane w bezpośrednim sąsiedztwie, w ramach jednej, spójnej strefy
+funkcjonalnej. Analogiczne rozwiązanie należy zastosować w przypadku
+dyrektora departamentu i podlegających mu dyrektorów wydziałów. Takie
+rozwiązanie sprzyja efektywnej komunikacji, usprawnia procesy decyzyjne
+oraz umożliwia sprawne zarządzanie strukturą organizacyjną. Lokalizacja
+pomieszczeń powinna zapewniać odpowiedni poziom komfortu pracy,
+prywatności oraz dostęp do wspólnych przestrzeni, takich jak sale narad czy
+sekretariat, aneks socjalny, toalety.
+W ramach obecnej organizacji pracy wydziałów i biur ograniczona została
+znacznie liczba sekretariatów. Jednakże ze względu na możliwe zamiany
+organizacyjne w okresie realizacji inwestycji, należy przyjąć, iż pokoje
+znajdujące się obok pokoi dyrekcji powinny w prosty sposób umożliwiać
+zmianę przeznaczenia i połączenie ich ze sobą drzwiami, co umożliwi
+utworzenie w nich sekretariatów.
+
+
+Sejmik Województwa Dolnośląskiego i Kancelaria Sejmiku
+Pomieszczenia Sejmiku oraz Kancelarii Sejmiku planuje się zlokalizować na
+najwyższych kondygnacjach w dominancie budynku (w obszarze
+podwyższenia zabudowy określonym w mpzp), przy czym sala obrad
+powinna znajdować się na jego najwyższym piętrze. Układ funkcjonalny
+pomieszczeń oraz ich rozmieszczenie na poszczególnych kondygnacjach
+powinny umożliwiać sprawną współpracę pomiędzy radnymi a Kancelarią
+Sejmiku, a także efektywną organizację i obsługę posiedzeń Sejmiku.
+
+
+
+
+                                                                               5
+                                      Plan użytkowy budynku administracyjnego UMWD
+
+
+
+Dostęp do strefy dedykowanej Sejmikowi powinien zapewniać możliwość
+szybkiego przemieszczania się większej liczby osób, zarówno z poziomu
+parkingu podziemnego, jak i ze strefy wejściowej budynku.
+Sala obrad Sejmiku powinna mieć charakter reprezentacyjny i być
+przeznaczona dla maksymalnie 100 osób. Zakłada się, iż będzie miała
+amfiteatralny układ z podwyższanymi rzędami oraz funkcjonalnym
+podziałem przestrzeni na strefy dla radnych, prezydium, zarządu
+województwa, zaproszonych gości, przedstawicieli mediów oraz obsługi
+technicznej i kancelaryjnej, w tym tłumaczy języka migowego. Ze względu
+na konieczność zastosowania zintegrowanego systemu głosowania,
+wbudowanych tabletów oraz mikrofonów, wyposażenie stanowisk dla
+radnych, członków zarządu i prezydium powinno mieć charakter stały.
+Dostęp do stanowisk radnych, prezydium czy mównicy powinien być
+zaprojektowany w sposób umożliwiający łatwe poruszanie się po sali obrad
+osobom z niepełnosprawnościami.
+W posiedzeniach Sejmiku standardowo uczestniczy 36 radnych, 5 członków
+Zarządu Województwa, Skarbnik Województwa, Sekretarz Województwa,
+przedstawiciel Wojewody oraz obsługa techniczna i kancelaryjna, a także
+media, zaproszeni goście i przedstawiciele publiczności.
+Zgodnie z obowiązującymi przepisami, posiedzenia Sejmiku są dostępne dla
+publiczności oraz są transmitowane. W związku z tym sala posiedzeń
+powinna być zaprojektowana w sposób umożliwiający obywatelom
+obserwację i przysłuchiwanie się obradom, przy jednoczesnym zachowaniu
+porządku przebiegu posiedzenia oraz poufności głosowania. Część
+przeznaczona dla publiczności powinna posiadać oddzielne wejście i może
+być wizualnie odseparowana od pozostałej przestrzeni sali obrad.
+Strefa sali obrad Sejmiku to układ kilku pomieszczeń:
+  •   hol o charakterze reprezentacyjnym,
+  •   sala multimedialna/poczekalnia dla zaproszonych przez radnych lub
+      zarząd gości, których ciągła obecność na sali obrad nie jest konieczna,
+      wyposażona w ekran i głośniki pozwalające na śledzenie obrad,
+  •   pomieszczenie dla obsługi technicznej obsługującej obrady oraz
+      nagrywającej przebieg posiedzenia,
+  •   przestrzeń socjalno-gastronomiczna       z   niezbędnymi      przyłączami
+      technicznymi,
+  •   szatnia,
+  •   toalety (w tym dla osób z niepełnosprawnościami), pokój dla matki z
+      dzieckiem.
+
+
+
+                                                                                6
+                                      Plan użytkowy budynku administracyjnego UMWD
+
+
+
+Poza salą sesyjną na potrzeby sejmiku województwa należy przewidzieć
+następujące pomieszczenia:
+  •   2 sale konferencyjne na potrzeby komisji - 1 sala dla 50 osób i 1 sala
+      dla 30 osób z zapleczem technicznym umożliwiającym nagrywanie
+      posiedzeń komisji,
+  •   4 sale na potrzeby klubów radnych - 2 sale na 30 osób, 2 sale na
+      15 osób,
+  •   wspólna sala radnych umożliwiająca doraźną prace indywidualną,
+  •   pokój socjalny dla radnych przeznaczony na potrzeby podgrzania
+      i zjedzenia posiłku,
+Każda sala musi być wyposażona w ekran oraz zapewniać wystarczającą
+liczbę punktów dostępowych do podłączenia komputerów. Sala obrad oraz
+sala przeznaczona dla komisji powinny zostać wyposażone w system
+audiowizualny obejmujący kamery, mikrofony zintegrowane z infrastrukturą
+sali oraz głośniki, zapewniający możliwość nagrywania i transmisji
+przebiegu obrad.
+Kancelaria Sejmiku pełni funkcje wspierające, administracyjne i pomocnicze
+dla radnych województwa, odpowiada za sprawną organizację posiedzeń
+Sejmiku. Ze względu na swoje zadania, kluczowe jest umiejscowienie
+Kancelarii   Sejmiku     w    pobliżu    pomieszczeń      Przewodniczącego
+i Wiceprzewodniczących Sejmiku. Przy czym pokoje biurowe Kancelarii
+Sejmiku muszą spełniać te same parametry, co w przypadku pozostałych
+komórek organizacyjnych UMWD (opisanych w poprzednim rozdziale).
+Oprócz pokoi biurowych na potrzeby dyrekcji i pracowników Kancelarii
+Sejmiku (w liczbie określonej w zał.1) w tej strefie należy zaprojektować:
+  •   gabinet Przewodniczącego Sejmiku o charakterze reprezentacyjnym
+      z jednym stanowiskiem pracy i strefą spotkań dla 5 osób wraz
+      z zapleczem sanitarno-socjalnym,
+  •   pokój asystenta Przewodniczącego z jednym stanowiskiem pracy,
+  •   3 gabinety Wiceprzewodniczących Sejmiku z jednym stanowiskiem
+      pracy i strefą spotkań dla 5 osób,
+  •   sale spotkań dla 20 osób dedykowaną na potrzeby spotkań
+      Przewodniczącego, Wiceprzewodniczących i Kancelarii Sejmiku.
+
+
+
+Sale narad i sale konferencyjne
+W budynku planowane jest utworzenie sal narad oraz sal konferencyjnych
+o zróżnicowanej powierzchni, przeznaczonych zarówno do bieżących zebrań
+
+
+
+
+                                                                                7
+                                        Plan użytkowy budynku administracyjnego UMWD
+
+
+
+pracowników, jak i do organizacji konferencji oraz spotkań realizowanych
+przez Urząd Marszałkowski.
+Sale narad służące do bieżących spotkań i zebrań pracowników powinny być
+rozmieszczone równomiernie w obrębie budynku. Sale konferencyjne
+powinny zostać zlokalizowane na parterze w bezpośrednim sąsiedztwie holu
+wejściowego, z zapewnieniem dogodnej komunikacji zarówno od strony
+wnętrza budynku, jak i głównego wejścia. Ich rozmieszczenie może tworzyć
+niewielkie centrum konferencyjne, sprzyjające organizacji wydarzeń
+zewnętrznych i wewnętrznych.
+Każda sala konferencyjna powinna być wyposażona w zaplecze techniczne
+umożliwiające kompleksową obsługę spotkań, w tym prezentacji
+multimedialnych i transmisji. Większa sala konferencyjna powinna mieć
+możliwość elastycznego podziału na dwie mniejsze przestrzenie,
+dostosowane do potrzeb organizacyjnych. Sale narad powinny być
+wyposażone w ekran oraz odpowiednią liczbę punktów dostępowych
+umożliwiających podłączenie komputerów, zapewniając komfort pracy
+i efektywną komunikację.
+Podstawowe założenia:
+   •       6 sal narad na 30 osób,
+   •       1 sala konferencyjna mniejsza na 80 osób,
+   •       1 sala konferencyjna na 200 osób.
+
+
+
+Strefa ogólnodostępna
+Hol główny stanowi strefę przejściową, istotny węzeł komunikacyjny i pełni
+również funkcję reprezentacyjną. Do holu głównego prowadzi główne
+wejście do obiektu, które powinno być widoczne w bryle budynku
+i zaprojektowane w sposób umożliwiający łatwy dojazd i dojście od ulicy,
+przystanków komunikacji publicznej oraz połączone z parkingiem
+podziemnym. Wejście główne powinno prowadzić do holu z poziomu gruntu,
+aby zapewnić swobodny dostęp do budynku bez barier architektonicznych.
+W przestrzeni holu głównego należy wyodrębnić strefy, w których będą
+realizowane poszczególne funkcje, z których kluczowe to:
+       •    kancelaria ogólna na 3 stanowiska;
+       •    punkt informacyjny na 1 stanowisko;
+       •    pomieszczenie na potrzeby ochrony budynku będące również
+            centrum monitoringu wraz z miejscem socjalnym,
+       •    strefa recepcyjna/poczekalnia
+
+
+                                                                                  8
+                                     Plan użytkowy budynku administracyjnego UMWD
+
+
+
+     •   toalety
+W bezpośrednim sąsiedztwie holu należy zlokalizować przestrzeń
+gastronomiczną /bistro z kilkunastoma stolikami na potrzeby centrum
+konferencyjnego, pracowników Urzędu Marszałkowskiego oraz gości.
+W bistro nie planuje się przygotowania posiłków, a jedynie ich
+podgrzewanie.
+Układ holu głównego powinien pozwalać na łatwą orientację w przestrzeni
+oraz odnalezienie przez użytkownika właściwej drogi.
+
+
+
+Strefa administracyjno-gospodarcza
+Pomieszczenia socjalne
+W strefie biurowej budynku planuje się równomierne rozmieszczenie
+pomieszczeń socjalnych przeznaczonych dla pracowników urzędu. Zakłada
+się, że pokoje socjalne będą miały powierzchnię około 24 m² i będą
+dostosowane do obsługi grupy liczącej do 30 osób (szacuje się 15
+pomieszczeń dla stałych pracowników). Pomieszczenia te powinny
+umożliwiać przygotowanie napojów, podgrzanie oraz spożycie posiłków
+w trakcie średnio ośmiogodzinnego dnia pracy, przy czym korzystanie z nich
+nie będzie odbywać się jednocześnie przez wszystkich użytkowników.
+
+
+Pomieszczenia pomocnicze
+W strefie biurowej na potrzeby poszczególnych komórek organizacyjnych
+planowane jest 20 pomieszczeń podręcznych magazynków na
+dokumentacje o standardowej powierzchni 24m2. Celem łatwego
+dostosowania podręcznych magazynów w pokoje biurowe należy zapewnić
+w nich dostęp do trzech punktów dostępowych instalacji elektrycznej
+i teletechnicznej.
+Ze względu na specyfikę funkcjonowania Wydziału Geodezji i Kartografii,
+konieczne jest zaprojektowanie dwóch pomieszczeń archiwalnych,
+dostosowanych do jego potrzeb.
+Pierwsze pomieszczenie, o powierzchni 48 m², przeznaczone będzie do
+przechowywania      materiałów   Państwowego      Zasobu    Geodezyjnego
+i Kartograficznego. Drugie, o powierzchni 24 m², służyć ma jako archiwum
+operatów związanych z pracami kartograficznymi, w tym dokumentacji
+technicznej Wydziału.
+
+
+
+
+                                                                               9
+                                     Plan użytkowy budynku administracyjnego UMWD
+
+
+
+Oba archiwa zostaną wyposażone w szafy jezdne i muszą spełniać
+wymagania dotyczące bezpiecznego przechowywania akt, w szczególności
+zapewniając odpowiednie warunki temperaturowe oraz wilgotnościowe.
+W strefie biurowej, wzdłuż ciągów komunikacyjnych, planuje się
+równomierne rozmieszczenie dziesięciu pomieszczeń przeznaczonych dla
+sieciowych urządzeń wielofunkcyjnych, z których korzystać będą
+pracownicy urzędu. Pomieszczenia te mogą mieć formę wnęk dostępnych
+bezpośrednio z korytarza i powinny być wyposażone w odpowiednią
+wentylację, zapewniającą bezpieczne i efektywne użytkowanie urządzeń.
+Dodatkowo, na potrzeby Wydziału Geodezji i Kartografii należy
+zaprojektować pomieszczenie o powierzchni 24 m², przeznaczone do pracy
+z   urządzeniami   specjalistycznymi,   takimi   jak   ploter,  skaner
+wielkoformatowy, urządzenie wielofunkcyjne oraz stanowisko do
+skanowania archiwalnej dokumentacji technicznej.
+Na każdym piętrze budynku należy umieścić pomieszczenia magazynowe
+z dostępem do wody na potrzeby obsługi sprzątającej do składowania
+urządzeń i środków czystości, w tym jedno pomieszczenie będzie pełnić
+także funkcje pralni i suszarni.
+
+
+Pomieszczenia sanitarne
+W obrębie całego budynku należy równomiernie rozplanować toalety
+przeznaczone dla pracowników, z uwzględnieniem zasad dostępności dla
+osób    z   niepełnosprawnościami.      W   szczególności,   w    strefach
+konferencyjnych oraz w pobliżu sali sesyjnej, liczba toalet powinna być
+dostosowana     do   maksymalnej     liczby  użytkowników     wynikającej
+z pojemności tych pomieszczeń. W każdej z tych stref oraz na każdym
+piętrze budynku należy przewidzieć co najmniej jedną toaletę dostosowaną
+do potrzeb osób z ograniczeniami ruchowymi, zgodnie z obowiązującymi
+przepisami prawa budowlanego i normami dostępności. Na parterze przy
+wejściu głównym wymagana jest tzw. „komfortka”, toaleta dla osób
+niepełnosprawnych z możliwością przebierania osób dorosłych.
+
+
+
+Komunikacja wewnętrzna
+Ciągi komunikacyjne
+
+  • Należy uwzględnić przewidywaną liczbę użytkowników, funkcję
+  budynku oraz możliwość czasowego zwiększenia ruchu, np. podczas sesji
+  Sejmiku lub konferencji.
+
+
+                                                                              10
+                                     Plan użytkowy budynku administracyjnego UMWD
+
+
+
+  • Powierzchnie ścian powinny kontrastować z posadzką, aby ułatwić
+  orientację.
+  • Należy zaprojektować system ścieżek naprowadzających dla osób
+  niewidomych i niedowidzących, prowadzących z holu i parkingu do
+  głównych funkcji budynku.
+Klatki ewakuacyjne
+
+  • Zgodnie z wymaganiami dla wysokości budynku, klatki schodowe
+  powinny być poprzedzone przedsionkami przeciwpożarowymi.
+  • Na podestach należy przewidzieć miejsce oczekiwania na ewakuację
+  dla osoby na wózku inwalidzkim, z zachowaniem wymaganych
+  wymiarów.
+  • Miejsce to powinno być wyposażone w interkom umożliwiający
+  dwustronną komunikację z ochroną oraz ze stanowiskiem kierującym
+  akcją ratowniczą.
+
+
+
+System informacji wizualnej i dźwiękowej
+Budynek powinien zostać wyposażony w czytelny i spójny system informacji
+wizualnej, który zapewni łatwą orientację i sprawną komunikację zarówno
+dla pracowników, jak i odwiedzających. System ten musi spełniać
+następujące wymagania:
+  •   Zgodność z zasadami stosowania logotypów, kolorystyki typografii
+      oraz oznaczeń przestrzeni i elementów graficznych;
+  •   Zgodność     ze     „Standardami    Dostępności    w   Samorządzie”
+      opracowanymi        przez    Ministerstwo    Spraw     Wewnętrznych
+      i Administracji, które zawierają wytyczne i dobre praktyki w zakresie
+      dostępności przestrzeni publicznych dla osób z różnymi potrzebami,
+      w tym osób z niepełnosprawnościami.
+System informacji wizualnej powinien:
+  •   obejmować wszystkie strefy funkcjonalne budynku (wejścia, wyjścia,
+      recepcje, ciągi komunikacyjne, windy, toalety, sale konferencyjne,
+      strefy specjalne),
+  •   wykorzystywać      czytelne   piktogramy,       kontrastowe        kolory
+      i odpowiednią wielkość czcionek,
+  •   być dostosowany do potrzeb osób z niepełnosprawnościami, w tym
+      osób niewidomych i słabowidzących m.in. poprzez zastosowanie
+      tyflomap w obrębie holu głównego i w ciągach komunikacyjnych
+
+
+                                                                              11
+                                    Plan użytkowy budynku administracyjnego UMWD
+
+
+
+      budynku, a także osób niedosłyszących poprzez zastosowanie pętli
+      indukcyjnych dla osób niedosłyszących zwłaszcza w obrębie sal
+      konferencyjnych, strefy Sejmiku oraz kancelarii ogólnej.
+  •   umożliwiać łatwą aktualizację i rozbudowę w przypadku zmian
+      funkcjonalnych w budynku.
+
+
+
+Parkingi
+Parking dla rowerów
+Na poziomie parteru w budynku planuje się zlokalizowanie parkingu
+rowerowego na 50 stanowisk, z wjazdem od strony podwórza.
+Parking powinien być dobrze oświetlony oraz wyposażony w stojaki
+umożliwiające bezpieczne przypięcie rowerów. Zaleca się zastosowanie
+stojaków typu „U” zgodnych z wytycznymi Ministerstwa Infrastruktury,
+które zapewniają stabilność i ochronę przed uszkodzeniami.
+W bezpośrednim sąsiedztwie parkingu dla rowerów należy zaprojektować
+zaplecze sanitarne, dostępne dla wszystkich użytkowników parkingu dla
+rowerów. Całość powinna być zaprojektowana z uwzględnieniem zasad
+ergonomii, higieny oraz komfortu użytkowników, a także spełniać
+wymagania     dotyczące   efektywnego    gospodarowania   przestrzenią
+i energooszczędności. Pomieszczenia te mają na celu wspieranie
+zrównoważonego transportu oraz promowanie aktywnego trybu życia wśród
+pracowników i odwiedzających.
+
+
+Parking podziemny
+Zgodnie    z    ustaleniami   miejscowego    planu   zagospodarowania
+przestrzennego, dla budynku biurowego Urzędu Marszałkowskiego
+Województwa Dolnośląskiego (UMWD) wymagane jest zaprojektowanie
+parkingu jako podziemnego, zlokalizowanego bezpośrednio pod budynkiem.
+Parking ten będzie pełnił funkcję podstawowej infrastruktury obsługującej
+codzienne potrzeby pracowników urzędu. Dodatkowo, w dniach obrad
+Sejmiku Województwa oraz podczas organizacji większych wydarzeń, takich
+jak konferencje czy spotkania z udziałem gości zewnętrznych, parking
+będzie udostępniany również radnym oraz zaproszonym uczestnikom.
+Zgodnie z obowiązującym Rozporządzeniem Ministra Infrastruktury
+w sprawie warunków technicznych, jakim powinny odpowiadać budynki i ich
+usytuowanie, liczba oraz sposób urządzenia miejsc postojowych musi
+zapewniać odpowiednią liczbę miejsc dla użytkowników stałych
+
+
+                                                                             12
+                                     Plan użytkowy budynku administracyjnego UMWD
+
+
+
+i okresowych, w tym osób z niepełnosprawnościami. Parking powinien
+zostać wyposażony w infrastrukturę ładowania pojazdów elektrycznych.
+Dodatkowo, zgodnie z Rozporządzeniem Ministra Spraw Wewnętrznych
+i Administracji z dnia 9 lipca 2025 r., parking podziemny musi być
+przystosowany do pełnienia funkcji miejsca doraźnego schronienia (MDS)
+dla mieszkańców oraz pracowników budynku.
+W związku z powyższym, projekt parkingu podziemnego musi uwzględniać
+nie tylko standardowe wymagania techniczne i użytkowe, ale również
+funkcję ochronną, zgodną z przepisami dotyczącymi obrony cywilnej.
+
+
+
+Infrastruktura techniczna
+Infrastruktura techniczna niezbędna do zabezpieczenia działalności
+budynku biurowego, której elementy należy zlokalizować w przestrzeni
+obiektu lub na jego terenie. Dla urządzeń technicznych przewiduje się
+utworzenie piętra technicznego.
+Na dachu dopuszcza się jedynie instalację tych urządzeń, których ze
+względu na technologię nie można umieścić na piętrze technicznym.
+1. Zasilanie w energię elektryczną
+System zasilania powinien obejmować zarówno źródła podstawowe, jak
+i rezerwowe:
+  •   stacje średniego napięcia (SN) oraz stacje niskiego napięcia (NN) –
+      zlokalizowane w wydzielonych pomieszczeniach technicznych
+      budynku lub na jego terenie;
+  •   agregaty prądotwórcze – umieszczone w specjalnie przystosowanych
+      pomieszczeniach z zapewnieniem odpowiedniej wentylacji i dostępu
+      serwisowego;
+  •   systemy   UPS     (zasilania   bezprzerwowego) –     rozmieszczone
+      w kluczowych punktach infrastruktury IT i systemów bezpieczeństwa,
+      zapewniające ciągłość działania w przypadku awarii zasilania;
+  •   system   zasilania   z    paneli     fotowoltaicznych  powiązanych
+      z magazynami energii i instalacją elektryczną budynku.
+2. Wentylacja i klimatyzacja
+  •   system wentylacji mechanicznej z rekuperacją oraz klimatyzacja
+      powinny obejmować wszystkie strefy budynku, w tym biura,
+      pomieszczenia techniczne, socjalne i komunikacyjne;
+
+
+
+                                                                              13
+                                       Plan użytkowy budynku administracyjnego UMWD
+
+
+
+  •   urządzenia centralne (centrale wentylacyjne, agregaty chłodnicze)
+      należy zlokalizować w pomieszczeniach technicznych na piętrze
+      technicznym budynku.
+3. Ogrzewanie pomieszczeń
+  •   budynek powinien być zasilany w ciepło z odnawialnych źródeł
+      energii, np. pomp gruntowych ciepła;
+  •   elementy systemu grzewczego (kotłownia, rozdzielacze, zasobniki)
+      powinny być zlokalizowane w pomieszczeniach technicznych.
+4. Zaopatrzenie w wodę i kanalizacja
+  •   podstawowe źródło wody: przyłącze do sieci miejskiej, zlokalizowane
+      w pomieszczeniu technicznym;
+  •   kanalizacja sanitarna i deszczowa: system              rur   i   zbiorników
+      odprowadzających ścieki do sieci miejskiej;
+  •   rozdział kanalizacji wodno-sanitarnej na dwie oddzielne instalacje
+      umożliwiające zastosowanie szarej wody.
+5. Odprowadzenie wód opadowych i roztopowych
+  •   Należy zastosować rozwiązania retencyjne i infiltracyjne, takie jak:
+         ▪   zbiorniki retencyjne,
+         ▪   studnie chłonne,
+         ▪   systemy rozsączające,
+         ▪   powierzchnie biologicznie czynne.
+  •   Celem jest maksymalne zagospodarowanie wód w miejscu opadu.
+6. Systemy teletechniczne
+W budynku należy przewidzieć kompleksową infrastrukturę teletechniczną,
+obejmującą:
+  •   system telefonii IP i transmisji danych - z serwerownią i punktami
+      dystrybucyjnymi na każdej kondygnacji;
+  •   system kontroli dostępu do stref i pomieszczeń budynku z centralą
+      zarządzającą;
+  •   system     sygnalizacji  alarmowej      (głosowej    i    wizualnej)
+      i przeciwpożarowej (SAP) - z czujkami, sygnalizatorami i centralą;
+  •   system monitoringu wizyjnego (CCTV) - z kamerami wewnętrznymi
+      i zewnętrznymi oraz rejestratorem.
+Wszystkie systemy powinny:
+
+
+                                                                                14
+                                       Plan użytkowy budynku administracyjnego UMWD
+
+
+
+•   obejmować całą przestrzeń budynku,
+•   być elastyczne i skalowalne,
+•   mieć   zapewnioną     przestrzeń      instalacyjną      (kanały,     szachty,
+    pomieszczenia techniczne).
+7. Windy
+    •   liczba, rodzaj i lokalizacja wind powinny wynikać z układu
+        funkcjonalnego   budynku    i  być  dostosowane  dla  osób
+        z niepełnosprawnościami
+    •   należy przewidzieć co najmniej jedną windę osobowo-towarową
+        w strefie dostaw do obsługi eksploatacyjnej (np. transport
+        materiałów, sprzętu).
+8. Utylizacja odpadów komunalnych
+    •   wydzielona przestrzeń na składowanie odpadów komunalnych
+        powinna być zlokalizowana w łatwo dostępnym miejscu na terenie
+        budynku, umożliwiającym odbiór przez firmy zewnętrzne,
+    •   należy zapewnić odpowiednie warunki sanitarne i wentylację.
+9. Pomieszczenia dla pracowników technicznych
+
+W celu zapewnienia sprawnej obsługi technicznej oraz eksploatacji
+budynku, należy przewidzieć odpowiednie pomieszczenia przeznaczone dla
+personelu technicznego. Pomieszczenia te powinny być zaprojektowane
+z uwzględnieniem funkcjonalności, ergonomii oraz bezpieczeństwa pracy.
+W skład zaplecza technicznego mogą wchodzić m.in.:
+    • stanowiska pracy dla techników,
+    • pomieszczenia magazynowe na narzędzia i materiały eksploatacyjne,
+    • strefy serwisowe i konserwacyjne,
+    • 2 osobne pomieszczenia socjalne wraz z szatniami dla personelu
+      technicznego oraz personelu sprzątającego,
+    • pomieszczenie sanitarne z prysznicami.
+Szczegółowe wytyczne odnośnie gospodarki energetycznej                    i   zero
+emisyjności budynku znajdą się w osobnym dokumencie.
+
+
+
+Serwerownia
+Pomieszczenie serwerowni, przeznaczone do obsługi infrastruktury
+informatycznej nowego budynku biurowego Urzędu Marszałkowskiego
+Województwa Dolnośląskiego, powinno mieć powierzchnię do 50 m².
+Serwerownia powinna zostać wyposażona w połączenie światłowodowe
+
+
+                                                                                15
+                                      Plan użytkowy budynku administracyjnego UMWD
+
+
+
+jednomodowe z serwerownią główną urzędu znajdująca się w budynku przy
+ul. Wybrzeże Słowackiego 12-14.
+
+Serwerownia musi być wyposażona w system klimatyzacji zapewniający
+stabilne warunki temperaturowe i wilgotnościowe, niezbędne do bezpiecznej
+pracy urządzeń IT. Obiekt powinien spełniać standardy niezawodności
+odpowiadające klasie TIER II, co oznacza m.in.:
+  •   dwutorowe zasilanie – zapewniające ciągłość pracy w przypadku
+      awarii jednego z torów,
+  •   główna rozdzielnia elektryczna wyposażona w układ samoczynnego
+      załączania rezerwy (SZR),
+  •   zasilanie awaryjne dla kluczowych odbiorników IT, realizowane za
+      pomocą urządzeń UPS, które podtrzymują pracę do momentu
+      uruchomienia agregatu prądotwórczego,
+  •   instalacje klimatyzacyjne i wentylacyjne zasilane zarówno z rozdzielni
+      głównej, jak i z rezerwowego źródła energii – agregatu
+      prądotwórczego.
+Dodatkowo, serwerownia powinna być wyposażona w redundantne
+komponenty, takie jak zapasowe zasilacze UPS, agregat prądotwórczy oraz
+systemy chłodzenia. Celem ich zastosowania jest minimalizacja ryzyka
+wystąpienia awarii oraz zapewnienie ciągłości działania infrastruktury IT
+w sytuacjach kryzysowych.
+
+
+
+
+Zagospodarowanie terenu
+W     obrębie   wewnętrznego     podwórka  przewidziano  kompleksowe
+zagospodarowanie przestrzeni, uwzględniające zarówno funkcje użytkowe,
+jak i estetyczne. Projekt musi obejmować:
+
+  •   utworzenie strefy zieleni o charakterze reprezentacyjnym, której
+      celem będzie podkreślenie walorów przestrzennych oraz poprawa
+      jakości środowiska miejskiego. Zieleń zostanie zaprojektowana
+      z uwzględnieniem kompozycji roślin ozdobnych, trawników oraz
+      elementów małej architektury i rekreacji. W ramach tej strefy należy
+      zagospodarować teren istniejącego ogródka przydomowego,
+      ograniczając wycinkę rosnących tam drzew do niezbędnego minimum.
+      Przestrzeń ta powinna być dostępna dla pracowników oraz
+      mieszkańców sąsiadujących z terenem podwórka kamienic;
+  •   wewnętrzną drogę dojazdową, przeznaczoną wyłącznie na potrzeby
+      obsługi obiektu - w tym odbioru osób oraz niewielkich dostaw
+
+
+
+                                                                               16
+                                    Plan użytkowy budynku administracyjnego UMWD
+
+
+
+      materiałów. Droga ta nie będzie dostępna dla ruchu publicznego, co
+      zapewni bezpieczeństwo i komfort użytkowników przestrzeni;
+  •   drogę    przeciwpożarową,   spełniającą   wymagania     techniczne
+      i przeciwpożarowe, umożliwiającą dojazd służb ratowniczych do
+      obiektu zgodnie z obowiązującymi przepisami;
+  •   główną strefę dostaw materiałów należy zaprojektować od strony
+      ul. Wybrzeże Słowackiego. Strefa dostaw powinna być dostępna
+      z poziomu gruntu i wyposażona w windą osobowo-towarową;
+  •   dopuszcza się utworzenie na części dachu budynku zielonego dachu
+      ekstensywnego.
+Całość zagospodarowania należy dostosować do istniejących warunków
+terenowych oraz infrastruktury technicznej, z uwzględnieniem zasad
+zrównoważonego rozwoju i estetyki urbanistycznej.
+
+
+
+
+                                                                             17
+                                      Plan użytkowy budynku administracyjnego UMWD
+
+
+
+Przepisy i standardy
+  •   Uchwała Rady Miejskiej Wrocławia nr XLV/1366/10 z dnia 21 stycznia
+      2010    roku   w    sprawie    uchwalenia    miejscowego     planu
+      zagospodarowania     przestrzennego    dla   fragmentu    zespołu
+      urbanistycznego Centrum w rejonie Placu Społecznego we Wrocławiu.
+  •   Ustawa o 19 lipca 2019 r. o zapewnianiu dostępności osobom ze
+      szczególnymi potrzebami.
+  •   Ustawa z dnia 5 grudnia 2024 r. o ochronie ludności i obronie cywilnej.
+  •   Rozporządzenie Ministra Spraw Wewnętrznych i Administracji z dnia
+      9 lipca 2025 r. w sprawie warunków organizowania oraz wymagań,
+      jakie powinny spełniać miejsca doraźnego schronienia.
+  •   „Standardy dostępności” opracowane przez Ministerstwo Spraw
+      Wewnętrznych i Administracji
+      https://www.gov.pl/web/mswia/standardy-dostepnosci-w-
+      samorzadzie.
+
+
+
+
+                                                                               18
+                                                                                                                   Plan użytkowy budynku administracyjnego UMWD
+
+
+
+
+Załącznik nr 1
+Tabela obejmująca liczbę osób w przenoszonych do nowego budynku komórek organizacyjnych – 403 osoby
+
+                                                                                             Stanowiska                                 Stanowiska Łączna liczba osób
+                                                                            Stanowiska                  Samodzielne Stanowiska
+                           Komórka organizacyjna                                             Zastępców                                 kierowników/    w komórce
+                                                                            dyrektorów                   stanowiska sekretariatu
+                                                                                             Dyrektorów                                pracowników   organizacyjnej
+1. Kancelaria Sejmiku                                                                    1            2                            2            11                 16
+2. Departament Ochrony Środowiska - dyrekcja                                             1                                         1             0                  2
+ 2.1.Wydział Opłat Środowiskowych - Dyrekcja                                             1            1                                          0                  2
+    2.1.1. Dział Opłat Produktowych                                                                                                             14                 14
+    2.1.2.Dział Opłat za Korzystanie ze Środowiska i BDO                                                                                        18                 18
+    2.1.3.Dział Księgowości                                                                                                                      6                  6
+ 2.2.Wydział Instrumentów Środowiskowych - Dyrekcja                                      1            1                                          0                  2
+    2.2.1.Dział Emisji do Powietrza                                                                                                              9                  9
+    2.2.2.Dział Gospodarki Wodno-Ściekowej                                                                                                       6                  6
+    2.2.3. Dział Sprawozdawczości                                                                                                                7                  7
+    2.2.4. Dział Gospodarki Odpadami                                                                                                            14                 14
+    2.2.5. Dział Planowania i Koordynacji w Gospodarce Odpadami                                                                                 17                 17
+3. Departament Spraw Społecznych i Rynku Pracy - Dyrekcja                                1            1                                          0                  2
+ 3.1.Dział ds. Wdrażania i Realizacji Projektów                                                                                                  7                  7
+ 3.2. Koordynator                                                                                                 1                              0                  1
+ 3.3.Wydział Edukacji - Dyrekcja                                                         1                                                       0                  1
+    3.3.1.Dział Rozwoju Szkolnictwa                                                                                                              6                  6
+    3.3.2.Dział Ekonomiczno-Finansowy                                                                                                            4                  4
+ 3.4.Wydział Integracji Społecznej - Dyrekcja                                            1                                                      10                 11
+ 3.5.Wydział Polityki Senioralnej i Projektów Społecznych - Dyrekcja                     1                                                       6                  7
+ 4. Departament Sportu i Turystyki                                                       1                                         1             0                  2
+ 4.1. Wydział Sportu - Dyrekcja                                                          1            1                                          0                  2
+    4.1.1.Dział Sportu Powszechnego i Szkolenia Sportowego                                                                                       7                  7
+    4.1.2.Dział Inwestycji i Modernizacji Infrastruktury Sportowej                                                                               3                  3
+ 4.2.Wydział Turystyki - Dyrekcja                                                        1                                                       0                  1
+    4.2.1.Dział Usług Turystycznych                                                                                                              4                  4
+    4.2.2.Dział Rozwoju i Promocji Turystyki                                                                                                     5                  5
+5. Departament Rozwoju Aglomeracji - Dyrekcja                                            1                        2                              0                  3
+ 5.1.Wydział ds. Aglomeracji                                                             1                                                       2                  3
+ 5.2.Wydział Analiz i Rozwoju                                                            1                                                       3                  4
+ 5.3.Planowany Wydział                                                                   1                                                       7                  8
+6. Departament Gospodarki i Promocji - Dyrekcja                                          1            1                            2             0                  4
+ 6.1.Stanowisko ds. Budżetu Departamentu                                                                          1                              0                  1
+ 6.2. Wydział Rozwoju Regionalnego - Dyrekcja                                            1            2                                          0                  3
+    6.2.1.Dział Planowania Strategicznego                                                                                                       10                 10
+    6.2.2. Dział Rewitalizacji i Analiz                                                                                                          5                  5
+    6.2.3.Dział Programu Regionalnego                                                                                                            8                  8
+    6.2.4.Dział Programów Europejskiej Współpracy Terytorialnej                                                                                  6                  6
+    6.2.5.Dział Innowacji                                                                                                                        7                  7
+    6.2.6.Dział Współpracy Gospodarczej i Przedsiębiorczości                                                                                     7                  7
+7. Departament Infrastruktury - Dyrekcja                                                 1            1                            1             0                  3
+ 7.1.Wydział Transportu - Dyrekcja                                                       1            1                                          0                  2
+    7.1.1.Dział Nadzoru Jednostek Certyfikujących                                                                 1                              7                  8
+    7.1.2.Dział Inżynierii Ruchu                                                                                                                 6                  6
+    7.1.3.Dział Transportu Autobusowego                                                                                                         10                 10
+    7.1.4.Dział Transportu Kolejowego                                                                                                            9                  9
+    7.1.5.Dział Rozwoju Ruchu Rowerowego                                                                                                         3                  3
+ 7.2.Wydział Mienia Wojewódzkiego - Dyrekcja                                             1            1                                          0                  2
+    7.2.1.Dział Zarządzania Nieruchomościami                                                                                                     8                  8
+    7.2.2.Dział Sprzedaży Nieruchomości                                                                                                          3                  3
+8. Członek Zarzadu                                                                       1                        1                1             0                  3
+8.1. Departament Kultury i Dziedzictwa Kulturowego - Dyrekcja                            1                                         1             0                  2
+ 8.1.1.Wydział Kultury - Dyrekcja                                                        1            1                                          0                  2
+    8.1.1.1.Dział Instytucji Kultury, Finansów i Inwestycji                                                                                      6                  6
+    8.1.1.2.Dział Współpracy ze Środowiskiem Kultury                                                                                             7                  7
+ 8.1.2.Wydział Dziedzictwa Kulturowego                                                   1                                                       5                  6
+8.2. Department Zdrowia - Dyrekcja                                                       1                                         1             0                  2
+ 8.2.1.Wydział Nadzoru Finansowego i Restrukturyzacji - Dyrekcja                         1            1                                          0                  2
+    8.2.1.1.Dział Analiz Systemowych i e-zdrowia                                                                                                 5                  5
+    8.2.1.2.Dział Kontrolingu Finansowego                                                                                                        3                  3
+    8.2.1.3.Dział Organizacji i Budżetowania                                                                                                     3                  3
+ 8.2.2.Wydział Zdrowia - Dyrekcja                                                        1            1                                          0                  2
+    8.2.2.1.Dział Zdrowia Publicznego                                                                                                            6                  6
+    8.2.2.2.Dział Organizacji i Nadzoru                                                                                                          7                  7
+ 8.2.3.Wydział Inwestycji                                                                1                                         1             5                  7
+ 9. Geodeta Województwa - Wydział Geodezji i Kartografii - Dyrekcja                      1            1                            1             0                  3
+ 9.1.Województwi Ośrodek Dokumentacji Geodezyjnej i Kartograficznej                                                                             15                 15
+    9.1.1.Dział ds. Dolnośląskiej Infrastruktury Informacji Przestrzennej                                                                        7                  7
+    9.1.2.Dział ds. Ochrony Gruntów Rolnych                                                                                                      8                  8
+10. Dział Kancelaryjny II                                                                                                                        4                  4
+11. Dział Wsparcia Informatycznego II                                                                                                            4                  4
+Suma                                                                                29               16           6            12              340                403
+
+
+
+
+                                                                                                                                                                        19
+

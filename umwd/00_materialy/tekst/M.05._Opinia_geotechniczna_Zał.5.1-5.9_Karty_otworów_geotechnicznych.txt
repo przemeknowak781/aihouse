@@ -1,0 +1,1416 @@
+                                                                                                                                                                                                                      Zał.Nr: 5.1
+                                                                                                           KARTA OTWORU GEOTECHNICZNEGO
+                                                                                                                                                                                                           Wiertnica: WGB-B Staltechnika
+                                                                                                                                                  O-01                                                       X: 5664168.75 Układ geodez.
+                                                                                                                                                                                                             Y: 6433563.25   PL-2000
+  Rejon: Dz. nr 9/1 (obr. Południe)                                                               Obiekt: Budynek Urzędu Marszałkowskiego                                 System wiercenia: Mechaniczno-obrotowy
+  Miejscowość: Wrocław                                                                            Zleceniodawca: Inwestycje Dolnośląskie Sp. z o.o.
+                                                                                                                                                                          Rzędna: 119.44 m n.p.m. Głębokość: 30.00 m
+  Gmina: Wrocław (gmina miejska)                                                                  Wiercenie: INŻ-GEO BIRG Sp. z o.o. Sp. K.
+  Powiat: Wrocław                                                                                 Dozór geol.: mgr T. Pytlos                                              Skala 1 : 150            Data wiercenia: 2025-09-02
+  Województwo: dolnośląskie
+
+
+
+
+                                                                                                                                                                   Przewarstwienie
+                                                                                                                                                    EN ISO 14688
+
+
+
+
+                                                                                                                                                                                                                                      geotechniczna
+                                                                                                              Opis Lit. PN-B
+
+
+
+
+                                                                                                                                    Symbol PN-B
+
+
+
+
+                                                                                                                                                                                     wałeczkowań
+             Gł. zw. wody
+
+
+
+
+                                                                                                                                                                     PN- EN ISO
+                                                                                                                                                     Symbol PN-
+
+
+
+
+                                                                                                                                                                                                                       Stan gruntu
+                                      Stratygrafia
+
+
+
+
+                                                                                                                                                                                                         Wilgotność
+                                                                                    Przelot [m]
+Wiercenie
+
+
+
+
+                                                                                                                                                                      14688-1,2
+                                                             Skala [m]
+
+
+
+
+                                                                                                                                                                                                                                        Warstwa
+               [m p.p.t]
+
+
+
+
+                                                                         Profil
+
+
+
+
+                                                                                                                                                                                         Ilość
+                                                                                                                                                         -1,2
+1               2                     3                      4           5          6                          7                   8           9                    10                11                12             13              14
+                                                                                                  Nasyp (humus, gruz
+                                                                                                  ceglany, piasek średni),   N(H, Ceg., Ps)msabrorMg                                                    mw            szg               N
+                                                                                                  ciemnobrunatny
+                                                                                   1.20           Nasyp (piasek średni, gruz
+                                                            2.0                                   ceglany), ciemnobrązowy N(Ps, Ceg.) brmsaMg                                                           mw            szg               N
+
+                                                                                   3.00           Nasyp (piasek gliniasty,     N(Pg, Ceg.)         brclsaMg                                              w             pl               N
+                                                                                                  gruz ceglany),
+                                               Holocen
+
+
+
+
+             3.70
+              3.70                                          4.0                    3.70           ciemnobrązowy                    Ps                                                                   nw             zg            QhIIa2
+                                                                                   4.50           Piasek średni, żółty
+                                                                                                  Piasek średni, żółty
+
+                                                            6.0                                                                                      mSa
+                                                                                                                                   Ps                                                                   nw            szg            QhIIb1
+
+
+                                                            8.0
+
+                                                                                   8.60           Pospółka, szara
+
+                                                            10.0
+
+
+
+                                                            12.0
+                                                                                                                                   Po                grSa                                               nw             zg            QpIa1
+
+
+
+                                                            14.0
+                            Czwartorzęd
+
+
+
+
+                                                            16.0                                  Glina piaszczysta, szara
+                                                                                  16.00                                            Gp                saCl                            0/0                mw            pzw            QpB1
+            16.5                                                                  16.50           Pospółka, szara                  Po                grSa                                               nw             zg            QpIa1
+                                                                                  17.00           Glina piaszczysta, szara z
+                                                                                                  domieszką żwiru
+                                                            18.0
+                                               Plejstocen
+
+
+
+
+                                                                                                                                 Gp+Ż                                                0/0                mw            pzw            QpB1
+
+
+                                                            20.0
+                                                                                  20.50           Glina piaszczysta, szara z
+                                                                                                  domieszką żwiru               Gp+Ż//Pd                           fsa               3/4                 w             pl            QpB3a
+                                                                                  21.50           przewarstwiona piaskiem
+                                                            22.0                                  drobnym
+                                                                                                  Glina piaszczysta, szara z
+                                                                                                  domieszką żwiru                Gp+Ż                                                0/1                mw             tpl           QpB2a
+                                                                                                                                                    grsaCl
+                                                            24.0
+                                                                                  24.00           Glina piaszczysta, szara z
+                                                                                                  domieszką żwiru
+
+
+                                                            26.0
+
+                                                                                                                                 Gp+Ż                                                0/0                mw            pzw            QpB1
+
+                                                            28.0
+
+
+
+                                                            30.0
+                                                                                  30.00
+
+
+
+    Rysunek wykonano programem "GeoStar" zgodnie z PN-B-02480:1986
+                                                                                                                                                                                                                        Zał.Nr: 5.2
+                                                                                                          KARTA OTWORU GEOTECHNICZNEGO
+                                                                                                                                                                                                             Wiertnica: WGB-B Staltechnika
+                                                                                                                                                    O-02                                                       X: 5664177.67 Układ geodez.
+                                                                                                                                                                                                               Y: 6433599.49   PL-2000
+  Rejon: Dz. nr 9/1 (obr. Południe)                                                              Obiekt: Budynek Urzędu Marszałkowskiego                                    System wiercenia: Mechaniczno-obrotowy
+  Miejscowość: Wrocław                                                                           Zleceniodawca: Inwestycje Dolnośląskie Sp. z o.o.
+                                                                                                                                                                            Rzędna: 119.30 m n.p.m. Głębokość: 30.00 m
+  Gmina: Wrocław (gmina miejska)                                                                 Wiercenie: INŻ-GEO BIRG Sp. z o.o. Sp. K.
+  Powiat: Wrocław                                                                                Dozór geol.: mgr T. Pytlos                                                 Skala 1 : 150            Data wiercenia: 2025-09-02
+  Województwo: dolnośląskie
+
+
+
+
+                                                                                                                                                                     Przewarstwienie
+                                                                                                                                                      EN ISO 14688
+
+
+
+
+                                                                                                                                                                                                                                        geotechniczna
+                                                                                                               Opis Lit. PN-B
+
+
+
+
+                                                                                                                                      Symbol PN-B
+
+
+
+
+                                                                                                                                                                                       wałeczkowań
+            Gł. zw. wody
+
+
+
+
+                                                                                                                                                                       PN- EN ISO
+                                                                                                                                                       Symbol PN-
+
+
+
+
+                                                                                                                                                                                                                         Stan gruntu
+                                     Stratygrafia
+
+
+
+
+                                                                                                                                                                                                           Wilgotność
+                                                                                   Przelot [m]
+Wiercenie
+
+
+
+
+                                                                                                                                                                        14688-1,2
+                                                            Skala [m]
+
+
+
+
+                                                                                                                                                                                                                                          Warstwa
+              [m p.p.t]
+
+
+
+
+                                                                        Profil
+
+
+
+
+                                                                                                                                                                                           Ilość
+                                                                                                                                                           -1,2
+1              2                     3                      4           5          6                        7                         8                   9           10                11                12             13              14
+                                                                                                 Nasyp (gruz ceglany,
+                                                                                                 humus, piasek średni),
+                                                                                                 ciemnobrunatny
+                                                                                                                                N(Ceg., H, Ps)msaorbrMg                                                   mw            szg               N
+                                                           2.0
+                                              Holocen
+
+
+
+
+                                                                                  3.00           Gleba, ciemnobrązowa               Gb                 (h)Or                                              mw              -              O
+                                                                                  3.40           Piasek drobny na granicy          Pd/Ps                                                                  w              zg            QhIIIa2
+            3.80                                           4.0                    3.80           piasku średniego,
+                                                                                                 jasnożółty
+                                                                                                 Piasek drobny na granicy                               fSa
+                                                                                                 piasku średniego,                 Pd/Ps                                                                  nw            szg            QhIIIb1
+                                                           6.0                                   jasnożółty
+
+
+                                                                                  7.00           Pospółka, szara
+                                                                                                                                     Po                                                                   nw             zg            QpIa2
+                                                           8.0
+                                                                                  8.00           Pospółka, szara
+
+
+                                                                                                                                                       grSa
+                                                           10.0                                                                      Po                                                                   nw             zg            QpIa1
+
+
+
+                                                           12.0
+                                                                                 12.00           Żwir, szary
+
+
+
+                                                           14.0
+                           Czwartorzęd
+
+
+
+
+                                                                                                                                     Ż                   Gr                                               nw             zg            QpIa1
+
+
+                                                           16.0
+
+
+                                                                                 17.20           Glina piaszczysta, szara z
+                                              Plejstocen
+
+
+
+
+                                                           18.0                                  domieszką żwiru
+
+
+
+
+                                                           20.0
+
+
+
+                                                           22.0
+
+
+                                                                                                                                    Gp+Ż              grsaCl                           0/0                mw            pzw            QpB1
+                                                           24.0
+
+
+
+                                                           26.0
+
+
+
+                                                           28.0
+
+
+
+                                                           30.0
+                                                                                 30.00
+
+
+
+    Rysunek wykonano programem "GeoStar" zgodnie z PN-B-02480:1986
+                                                                                                                                                                                                                     Zał.Nr: 5.3
+                                                                                                          KARTA OTWORU GEOTECHNICZNEGO
+                                                                                                                                                                                                          Wiertnica: WGB-B Staltechnika
+                                                                                                                                                 O-03                                                       X: 5664140.75 Układ geodez.
+                                                                                                                                                                                                            Y: 6433574.51   PL-2000
+  Rejon: Dz. nr 10/3 (obr. Południe)                                                             Obiekt: Budynek Urzędu Marszałkowskiego                                 System wiercenia: Mechaniczno-obrotowy
+  Miejscowość: Wrocław                                                                           Zleceniodawca: Inwestycje Dolnośląskie Sp. z o.o.
+                                                                                                                                                                         Rzędna: 118.93 m n.p.m. Głębokość: 30.00 m
+  Gmina: Wrocław (gmina miejska)                                                                 Wiercenie: INŻ-GEO BIRG Sp. z o.o. Sp. K.
+  Powiat: Wrocław                                                                                Dozór geol.: mgr T. Pytlos                                              Skala 1 : 150            Data wiercenia: 2025-09-01
+  Województwo: dolnośląskie
+
+
+
+
+                                                                                                                                                                  Przewarstwienie
+                                                                                                                                                   EN ISO 14688
+
+
+
+
+                                                                                                                                                                                                                                     geotechniczna
+                                                                                                             Opis Lit. PN-B
+
+
+
+
+                                                                                                                                   Symbol PN-B
+
+
+
+
+                                                                                                                                                                                    wałeczkowań
+            Gł. zw. wody
+
+
+
+
+                                                                                                                                                                    PN- EN ISO
+                                                                                                                                                    Symbol PN-
+
+
+
+
+                                                                                                                                                                                                                      Stan gruntu
+                                     Stratygrafia
+
+
+
+
+                                                                                                                                                                                                        Wilgotność
+                                                                                   Przelot [m]
+Wiercenie
+
+
+
+
+                                                                                                                                                                     14688-1,2
+                                                            Skala [m]
+
+
+
+
+                                                                                                                                                                                                                                       Warstwa
+              [m p.p.t]
+
+
+
+
+                                                                        Profil
+
+
+
+
+                                                                                                                                                                                        Ilość
+                                                                                                                                                        -1,2
+1              2                     3                      4           5          6                         7                    8           9                    10                11                12             13              14
+                                                                                                 Nasyp (gruz ceglany,        N(Ceg., H)    orbrMg                                                      mw            szg               N
+                                                                                                 humus), czerwonawy
+                                                                                  0.80           Nasyp (humus, gruz         N(H, Ceg. Ps) msabrorMg                                                    mw            szg               N
+                                                                                                 ceglany, piasek średni),
+                                                           2.0                    1.70           szary
+                                                                                                 Nasyp (piasek gliniasty,     N(Pg, Pd) fsaclsaMg                                   0/1                mw             tpl              N
+                                              Holocen
+
+
+
+
+                                                                                  2.90           piasek drobny),
+                                                                                                 ciemnobrązowy                   Ps                                                                    w              zg            QhIIa2
+            3.60
+                                                           4.0                    3.60           Piasek średni, żółty            Ps                                                                    nw             zg            QhIIa2
+                                                                                  4.00           Piasek średni, żółty
+                                                                                                 Piasek średni, żółto-szary                 mSa
+                                                                                                                                  Ps                                                                   nw            szg            QhIIb1
+                                                           6.0
+
+                                                                                  6.70           Pospółka, szara
+
+                                                           8.0
+
+
+
+                                                           10.0
+
+
+
+                                                           12.0                                                                   Po                grSa                                               nw             zg            QpIa1
+
+
+
+
+                                                           14.0
+                           Czwartorzęd
+
+
+
+
+                                                           16.0
+
+
+                                                                                 17.10           Glina piaszczysta, szara
+                                              Plejstocen
+
+
+
+
+                                                           18.0
+
+                                                                                                                                  Gp                                                1/1                mw             tpl           QpB2a
+
+                                                           20.0                                                                                     saCl
+
+                                                                                 21.00           Glina piaszczysta
+                                                                                                 przewarstwiona piaskiem
+                                                           22.0                                  drobnym, szara                 Gp//Pd                            fsa               1/2                mw             tpl           QpB2b
+
+                                                                                 23.00           Glina piaszczysta, szara z
+                                                                                                 domieszką żwiru
+                                                           24.0
+
+
+
+                                                           26.0
+                                                                                                                                Gp+Ż               grsaCl                           0/1                mw             tpl           QpB2a
+
+
+                                                           28.0
+
+
+
+                                                           30.0
+                                                                                 30.00
+
+
+
+    Rysunek wykonano programem "GeoStar" zgodnie z PN-B-02480:1986
+                                                                                                                                                                                                                       Zał.Nr: 5.4
+                                                                                                          KARTA OTWORU GEOTECHNICZNEGO
+                                                                                                                                                                                                            Wiertnica: WGB-B Staltechnika
+                                                                                                                                                   O-04                                                       X: 5664150.42 Układ geodez.
+                                                                                                                                                                                                              Y: 6433613.85   PL-2000
+  Rejon: Dz. nr 10/3 (obr. Południe)                                                             Obiekt: Budynek Urzędu Marszałkowskiego                                   System wiercenia: Mechaniczno-obrotowy
+  Miejscowość: Wrocław                                                                           Zleceniodawca: Inwestycje Dolnośląskie Sp. z o.o.
+                                                                                                                                                                           Rzędna: 119.15 m n.p.m. Głębokość: 30.00 m
+  Gmina: Wrocław (gmina miejska)                                                                 Wiercenie: INŻ-GEO BIRG Sp. z o.o. Sp. K.
+  Powiat: Wrocław                                                                                Dozór geol.: mgr T. Pytlos                                                Skala 1 : 150            Data wiercenia: 2025-09-03
+  Województwo: dolnośląskie
+
+
+
+
+                                                                                                                                                                    Przewarstwienie
+                                                                                                                                                     EN ISO 14688
+
+
+
+
+                                                                                                                                                                                                                                       geotechniczna
+                                                                                                               Opis Lit. PN-B
+
+
+
+
+                                                                                                                                     Symbol PN-B
+
+
+
+
+                                                                                                                                                                                      wałeczkowań
+            Gł. zw. wody
+
+
+
+
+                                                                                                                                                                      PN- EN ISO
+                                                                                                                                                      Symbol PN-
+
+
+
+
+                                                                                                                                                                                                                        Stan gruntu
+                                     Stratygrafia
+
+
+
+
+                                                                                                                                                                                                          Wilgotność
+                                                                                   Przelot [m]
+Wiercenie
+
+
+
+
+                                                                                                                                                                       14688-1,2
+                                                            Skala [m]
+
+
+
+
+                                                                                                                                                                                                                                         Warstwa
+              [m p.p.t]
+
+
+
+
+                                                                        Profil
+
+
+
+
+                                                                                                                                                                                          Ilość
+                                                                                                                                                          -1,2
+1              2                     3                      4           5          6                        7                        8                   9           10                11                12             13              14
+                                                                                                 Nasyp (gruz ceglany,
+                                                                                                 humus), czerwonawy
+                                                                                                                                 N(Ceg., H)         orbrMg                                               mw            szg               N
+
+                                                           2.0
+                                                                                  2.20           Nasyp (piasek gliniasty,
+                                                                                                 humus, piasek drobny),         N(Pg, H, Pd) fsaorclsaMg                                                 mw             pl               N
+                                              Holocen
+
+
+
+
+            3.20                                                                  3.20           czarny
+                                                                                                 Piasek średni, żółty               Ps                                                                   nw             zg            QhIIa2
+                                                           4.0
+                                                                                  4.00           Piasek średni, żółty
+
+                                                                                                                                                      mSa
+                                                                                                                                    Ps                                                                   nw            szg            QhIIb1
+                                                           6.0
+
+
+                                                                                  7.40           Pospółka, szara
+                                                           8.0
+
+
+
+                                                           10.0                                                                     Po                grSa                                               nw             zg            QpIa1
+
+
+
+                                                           12.0
+
+
+                                                                                 13.00           Żwir, szary
+                                                           14.0
+                           Czwartorzęd
+
+
+
+
+                                                                                                                                     Ż                  Gr                                               nw             zg            QpIa1
+
+                                                           16.0
+
+                                                                                 17.00           Glina piaszczysta ze
+                                                                                                 żwirem, szara
+                                                           18.0
+                                              Plejstocen
+
+
+
+
+                                                           20.0
+
+
+
+                                                           22.0
+
+
+                                                                                                                                   Gp+Ż              grsaCl                           0/0                mw            pzw            QpB1
+                                                           24.0
+
+
+
+                                                           26.0
+
+
+
+                                                           28.0
+
+
+
+                                                           30.0
+                                                                                 30.00
+
+
+
+    Rysunek wykonano programem "GeoStar" zgodnie z PN-B-02480:1986
+                                                                                                                                                                                                                      Zał.Nr: 5.5
+                                                                                                          KARTA OTWORU GEOTECHNICZNEGO
+                                                                                                                                                                                                           Wiertnica: WGB-B Staltechnika
+                                                                                                                                                  O-05                                                       X: 5664135.39 Układ geodez.
+                                                                                                                                                                                                             Y: 6433617.11   PL-2000
+  Rejon: Dz. nr 10/3 (obr. Południe)                                                             Obiekt: Budynek Urzędu Marszałkowskiego                                  System wiercenia: Mechaniczno-obrotowy
+  Miejscowość: Wrocław                                                                           Zleceniodawca: Inwestycje Dolnośląskie Sp. z o.o.
+                                                                                                                                                                          Rzędna: 119.22 m n.p.m. Głębokość: 15.00 m
+  Gmina: Wrocław (gmina miejska)                                                                 Wiercenie: INŻ-GEO BIRG Sp. z o.o. Sp. K.
+  Powiat: Wrocław                                                                                Dozór geol.: mgr T. Pytlos                                               Skala 1 : 75             Data wiercenia: 2025-09-03
+  Województwo: dolnośląskie
+
+
+
+
+                                                                                                                                                                   Przewarstwienie
+                                                                                                                                                    EN ISO 14688
+
+
+
+
+                                                                                                                                                                                                                                      geotechniczna
+                                                                                                             Opis Lit. PN-B
+
+
+
+
+                                                                                                                                    Symbol PN-B
+
+
+
+
+                                                                                                                                                                                     wałeczkowań
+            Gł. zw. wody
+
+
+
+
+                                                                                                                                                                     PN- EN ISO
+                                                                                                                                                     Symbol PN-
+
+
+
+
+                                                                                                                                                                                                                       Stan gruntu
+                                     Stratygrafia
+
+
+
+
+                                                                                                                                                                                                         Wilgotność
+                                                                                   Przelot [m]
+Wiercenie
+
+
+
+
+                                                                                                                                                                      14688-1,2
+                                                            Skala [m]
+
+
+
+
+                                                                                                                                                                                                                                        Warstwa
+              [m p.p.t]
+
+
+
+
+                                                                        Profil
+
+
+
+
+                                                                                                                                                                                         Ilość
+                                                                                                                                                         -1,2
+1              2                     3                      4           5          6                        7                       8                  9            10                11                12            13               14
+                                                                                                 Nasyp (gruz ceglany),           N(Ceg.)             brMg                                               mw            szg              N
+                                                                                  0.10           czerwonawy
+                                                                                                 Nasyp (gruz ceglany,
+                                                                                                 piasek średni, humus),
+                                                           1.0                                   czerwonawy                   N(Ceg., Ps, H)ormsabrMg                                                   mw            szg               N
+
+
+
+                                                           2.0                                   Nasyp (piasek gliniasty,
+                                                                                  2.00
+                                                                                                 humus, piasek drobny),       N(Pg, H, Pd) fsaorclsaMg                                                   w             tpl              N
+                                                                                                 czarny
+
+                                                           3.0                    2.80           Piasek średni, żółty
+                                              Holocen
+
+
+
+
+                                                                                                                                   Ps                                                                    w             zg            QhIIa2
+
+            3.70                                                                  3.70           Piasek średni, żółty
+                                                           4.0
+
+
+
+                                                                                                                                                     mSa
+                                                           5.0
+                                                                                                                                   Ps                                                                   nw            szg            QhIIb1
+
+
+                                                           6.0
+
+
+
+                                                           7.0                    6.90           Pospółka, szara
+                           Czwartorzęd
+
+
+
+
+                                                           8.0
+
+
+
+                                                           9.0
+
+
+
+                                                           10.0
+                                              Plejstocen
+
+
+
+
+                                                           11.0                                                                    Po                grSa                                               nw             zg            QpIa1
+
+
+
+
+                                                           12.0
+
+
+
+                                                           13.0
+
+
+
+                                                           14.0
+
+
+
+                                                           15.0
+                                                                                 15.00
+
+
+
+    Rysunek wykonano programem "GeoStar" zgodnie z PN-B-02480:1986
+                                                                                                                                                                                                                      Zał.Nr: 5.6
+                                                                                                          KARTA OTWORU GEOTECHNICZNEGO
+                                                                                                                                                                                                           Wiertnica: WGB-B Staltechnika
+                                                                                                                                                  O-06                                                       X: 5664134.70 Układ geodez.
+                                                                                                                                                                                                             Y: 6433594.85   PL-2000
+  Rejon: Dz. nr 10/3 (obr. Południe)                                                             Obiekt: Budynek Urzędu Marszałkowskiego                                  System wiercenia: Mechaniczno-obrotowy
+  Miejscowość: Wrocław                                                                           Zleceniodawca: Inwestycje Dolnośląskie Sp. z o.o.
+                                                                                                                                                                          Rzędna: 118.98 m n.p.m. Głębokość: 15.00 m
+  Gmina: Wrocław (gmina miejska)                                                                 Wiercenie: INŻ-GEO BIRG Sp. z o.o. Sp. K.
+  Powiat: Wrocław                                                                                Dozór geol.: mgr T. Pytlos                                               Skala 1 : 75             Data wiercenia: 2025-09-03
+  Województwo: dolnośląskie
+
+
+
+
+                                                                                                                                                                   Przewarstwienie
+                                                                                                                                                    EN ISO 14688
+
+
+
+
+                                                                                                                                                                                                                                       geotechniczna
+                                                                                                             Opis Lit. PN-B
+
+
+
+
+                                                                                                                                    Symbol PN-B
+
+
+
+
+                                                                                                                                                                                     wałeczkowań
+            Gł. zw. wody
+
+
+
+
+                                                                                                                                                                     PN- EN ISO
+                                                                                                                                                     Symbol PN-
+
+
+
+
+                                                                                                                                                                                                                        Stan gruntu
+                                     Stratygrafia
+
+
+
+
+                                                                                                                                                                                                         Wilgotność
+                                                                                   Przelot [m]
+Wiercenie
+
+
+
+
+                                                                                                                                                                      14688-1,2
+                                                            Skala [m]
+
+
+
+
+                                                                                                                                                                                                                                         Warstwa
+              [m p.p.t]
+
+
+
+
+                                                                        Profil
+
+
+
+
+                                                                                                                                                                                         Ilość
+                                                                                                                                                         -1,2
+1              2                     3                      4           5          6                        7                       8                   9           10                11                12             13               14
+                                                                                                 Nasyp (gruz ceglany),
+                                                                                                 czerwonawy
+                                                                                                                                 N(Ceg.)             brMg                                               mw             szg               N
+
+                                                           1.0
+                                                                                  1.10           Nasyp (piasek średni,
+                                                                                                 piasek gliniasty, gruz       N(Ps, Pg, Ceg.)
+                                                                                                                                           brclsamsaMg                                                  mw            ln/szg             N
+                                                                                                 ceglany), brązowy
+                                                           2.0                    1.90           Nasyp (piasek drobny,
+                                                                                                 piasek średni), żółty          N(Pd, Ps)         msafsaMg                                              mw            ln/szg             N
+                                                                                  2.40           Nasyp (piasek gliniasty,
+                                                                                                 piasek średni),
+                                                           3.0                                   ciemnobrązowy                  N(Pg, Ps)         msaclsaMg                                             mw             tpl               N
+
+
+                                                                                  3.50           Piasek średni, żółty              Ps                                                                    w             zg             QhIIa2
+            3.70                                                                  3.70           Piasek średni, żółty
+                                              Holocen
+
+
+
+
+                                                           4.0
+                                                                                                                                   Ps                                                                   nw             zg             QhIIa2
+
+                                                                                  4.50           Piasek średni, żółty
+                                                           5.0
+                                                                                                                                   Ps                                                                   nw             szg            QhIIb2
+
+
+                                                           6.0                                                                                       mSa
+                                                                                  6.00           Piasek średni, żółty
+
+
+                                                                                                                                   Ps                                                                   nw             zg             QhIIa2
+                                                           7.0
+                           Czwartorzęd
+
+
+
+
+                                                                                  7.50           Piasek średni, żółty
+                                                           8.0                                                                     Ps                                                                   nw             zg             QhIIa1
+
+                                                                                  8.40           Pospółka, szara
+
+                                                           9.0
+
+
+
+                                                           10.0
+
+
+
+                                                           11.0
+                                              Plejstocen
+
+
+
+
+                                                                                                                                   Po                grSa                                               nw             zg             QpIa1
+                                                           12.0
+
+
+
+                                                           13.0
+
+
+
+                                                           14.0
+
+
+
+                                                           15.0
+                                                                                 15.00
+
+
+
+    Rysunek wykonano programem "GeoStar" zgodnie z PN-B-02480:1986
+                                                                                                                                                                                                                      Zał.Nr: 5.7
+                                                                                                          KARTA OTWORU GEOTECHNICZNEGO
+                                                                                                                                                                                                           Wiertnica: WGB-B Staltechnika
+                                                                                                                                                  O-07                                                       X: 5664140.86 Układ geodez.
+                                                                                                                                                                                                             Y: 6433555.82   PL-2000
+  Rejon: Dz. nr 10/3 (obr. Południe)                                                             Obiekt: Budynek Urzędu Marszałkowskiego                                  System wiercenia: Mechaniczno-obrotowy
+  Miejscowość: Wrocław                                                                           Zleceniodawca: Inwestycje Dolnośląskie Sp. z o.o.
+                                                                                                                                                                          Rzędna: 118.84 m n.p.m. Głębokość: 15.00 m
+  Gmina: Wrocław (gmina miejska)                                                                 Wiercenie: INŻ-GEO BIRG Sp. z o.o. Sp. K.
+  Powiat: Wrocław                                                                                Dozór geol.: mgr T. Pytlos                                               Skala 1 : 75             Data wiercenia: 2025-09-01
+  Województwo: dolnośląskie
+
+
+
+
+                                                                                                                                                                   Przewarstwienie
+                                                                                                                                                    EN ISO 14688
+
+
+
+
+                                                                                                                                                                                                                                      geotechniczna
+                                                                                                             Opis Lit. PN-B
+
+
+
+
+                                                                                                                                    Symbol PN-B
+
+
+
+
+                                                                                                                                                                                     wałeczkowań
+            Gł. zw. wody
+
+
+
+
+                                                                                                                                                                     PN- EN ISO
+                                                                                                                                                     Symbol PN-
+
+
+
+
+                                                                                                                                                                                                                       Stan gruntu
+                                     Stratygrafia
+
+
+
+
+                                                                                                                                                                                                         Wilgotność
+                                                                                   Przelot [m]
+Wiercenie
+
+
+
+
+                                                                                                                                                                      14688-1,2
+                                                            Skala [m]
+
+
+
+
+                                                                                                                                                                                                                                        Warstwa
+              [m p.p.t]
+
+
+
+
+                                                                        Profil
+
+
+
+
+                                                                                                                                                                                         Ilość
+                                                                                                                                                         -1,2
+1              2                     3                      4           5          6                        7                       8                   9           10                11                12             13              14
+                                                                                                 Nasyp (piasek średni,
+                                                                                                 humus, gruz ceglany),
+                                                                                                 czarny
+
+                                                           1.0
+
+                                                                                                                              N(Ps, H, Ceg.)brormsaMg                                                   mw            szg               N
+
+                                                           2.0
+
+
+
+                                                           3.0
+                                                                                  3.00           Piasek średni, żółty              Ps                                                                    w             zg            QhIIa2
+            3.40                                                                  3.40           Piasek średni, żółty
+                                                                                                                                   Ps                                                                   nw             zg            QhIIa2
+                                                           4.0
+                                                                                  4.20           Piasek średni, żółty
+
+
+                                                           5.0                                                                     Ps                                                                   nw            szg            QhIIb1
+                                              Holocen
+
+
+
+
+                                                                                                                                                     mSa
+                                                           6.0
+                                                                                  6.00           Piasek średni na granicy
+                                                                                                 piasku grubego, żółty
+
+
+                                                           7.0
+                                                                                                                                  Ps/Pr                                                                 nw            szg            QhIIb1
+
+
+                                                           8.0
+                           Czwartorzęd
+
+
+
+
+                                                                                  8.50           Pospółka, szaro-żółta
+                                                           9.0
+
+
+
+                                                           10.0
+
+
+
+                                                           11.0
+                                              Plejstocen
+
+
+
+
+                                                                                                                                   Po                grSa                                               nw             zg            QpIa1
+                                                           12.0
+
+
+
+                                                           13.0
+
+
+
+                                                           14.0
+
+
+
+                                                           15.0
+                                                                                 15.00
+
+
+
+    Rysunek wykonano programem "GeoStar" zgodnie z PN-B-02480:1986
+                                                                                                                                                                                                                      Zał.Nr: 5.8
+                                                                                                          KARTA OTWORU GEOTECHNICZNEGO
+                                                                                                                                                                                                           Wiertnica: WGB-B Staltechnika
+                                                                                                                                                  O-08                                                       X: 5664113.31 Układ geodez.
+                                                                                                                                                                                                             Y: 6433552.48   PL-2000
+  Rejon: Dz. nr 10/3 (obr. Południe)                                                             Obiekt: Budynek Urzędu Marszałkowskiego                                  System wiercenia: Mechaniczno-obrotowy
+  Miejscowość: Wrocław                                                                           Zleceniodawca: Inwestycje Dolnośląskie Sp. z o.o.
+                                                                                                                                                                          Rzędna: 118.67 m n.p.m. Głębokość: 15.00 m
+  Gmina: Wrocław (gmina miejska)                                                                 Wiercenie: INŻ-GEO BIRG Sp. z o.o. Sp. K.
+  Powiat: Wrocław                                                                                Dozór geol.: mgr T. Pytlos                                               Skala 1 : 75             Data wiercenia: 2025-09-01
+  Województwo: dolnośląskie
+
+
+
+
+                                                                                                                                                                   Przewarstwienie
+                                                                                                                                                    EN ISO 14688
+
+
+
+
+                                                                                                                                                                                                                                      geotechniczna
+                                                                                                             Opis Lit. PN-B
+
+
+
+
+                                                                                                                                    Symbol PN-B
+
+
+
+
+                                                                                                                                                                                     wałeczkowań
+            Gł. zw. wody
+
+
+
+
+                                                                                                                                                                     PN- EN ISO
+                                                                                                                                                     Symbol PN-
+
+
+
+
+                                                                                                                                                                                                                       Stan gruntu
+                                     Stratygrafia
+
+
+
+
+                                                                                                                                                                                                         Wilgotność
+                                                                                   Przelot [m]
+Wiercenie
+
+
+
+
+                                                                                                                                                                      14688-1,2
+                                                            Skala [m]
+
+
+
+
+                                                                                                                                                                                                                                        Warstwa
+              [m p.p.t]
+
+
+
+
+                                                                        Profil
+
+
+
+
+                                                                                                                                                                                         Ilość
+                                                                                                                                                         -1,2
+1              2                     3                      4           5          6                          7                     8                   9           10                11                12             13              14
+                                                                                                 Nasyp (gruz, piasek średni
+                                                                                                 zagliniony), czarny
+
+
+                                                           1.0                                                                N(gr., Ps(g)) clmsabrMg                                                   mw            szg               N
+
+
+
+                                                           2.0
+                                                                                  2.10           Nasyp (Namuł gliniasty,
+                                                                                                 humus, piasek drobny,
+                                                                                                                              N(Nmg, H, Pd) fsaptorMg                                                    w             pl               N
+                                                                                                 czarny)
+                                                           3.0
+                                                                                  3.00           Piasek średni, żółty
+                                              Holocen
+
+
+
+
+                                                                                                                                   Ps                                                                    w             zg            QhIIa2
+            3.60                                                                  3.60           Piasek średni, żółty
+                                                           4.0                                                                     Ps                                                                   nw             zg            QhIIa2
+
+                                                                                  4.40           Piasek średni, żółty
+
+                                                           5.0                                                                                       mSa
+
+
+                                                                                                                                   Ps                                                                   nw            szg            QhIIb1
+                                                           6.0
+
+
+
+                                                           7.0
+                           Czwartorzęd
+
+
+
+
+                                                                                  7.00           Pospółka, szaro-żółta
+
+
+
+                                                           8.0
+                                                                                                                                   Po                                                                   nw             zg            QpIa1
+
+                                                           9.0
+
+
+
+                                                           10.0                   9.80           Pospółka, szara
+
+                                                                                                                                                     grSa
+                                              Plejstocen
+
+
+
+
+                                                           11.0
+
+
+
+                                                           12.0                                                                    Po                                                                   nw             zg            QpIa1
+
+
+
+
+                                                           13.0
+
+
+
+                                                           14.0
+                                                                                 14.00           Piasek średni na granicy
+                                                                                                 piasku drobnego, szary
+                                                                                                                                 Ps/Pd               mSa                                                nw             zg            QpIIa1
+
+                                                           15.0
+                                                                                 15.00
+
+
+
+    Rysunek wykonano programem "GeoStar" zgodnie z PN-B-02480:1986
+                                                                                                                                                                                                                      Zał.Nr: 5.9
+                                                                                                          KARTA OTWORU GEOTECHNICZNEGO
+                                                                                                                                                                                                           Wiertnica: WGB-B Staltechnika
+                                                                                                                                                  O-09                                                       X: 5664111.01 Układ geodez.
+                                                                                                                                                                                                             Y: 6433563.64   PL-2000
+  Rejon: Dz. nr 10/3 (obr. Południe)                                                             Obiekt: Budynek Urzędu Marszałkowskiego                                  System wiercenia: Mechaniczno-obrotowy
+  Miejscowość: Wrocław                                                                           Zleceniodawca: Inwestycje Dolnośląskie Sp. z o.o.
+                                                                                                                                                                          Rzędna: 118.82 m n.p.m. Głębokość: 15.00 m
+  Gmina: Wrocław (gmina miejska)                                                                 Wiercenie: INŻ-GEO BIRG Sp. z o.o. Sp. K.
+  Powiat: Wrocław                                                                                Dozór geol.: mgr T. Pytlos                                               Skala 1 : 75             Data wiercenia: 2025-09-01
+  Województwo: dolnośląskie
+
+
+
+
+                                                                                                                                                                   Przewarstwienie
+                                                                                                                                                    EN ISO 14688
+
+
+
+
+                                                                                                                                                                                                                                      geotechniczna
+                                                                                                             Opis Lit. PN-B
+
+
+
+
+                                                                                                                                    Symbol PN-B
+
+
+
+
+                                                                                                                                                                                     wałeczkowań
+            Gł. zw. wody
+
+
+
+
+                                                                                                                                                                     PN- EN ISO
+                                                                                                                                                     Symbol PN-
+
+
+
+
+                                                                                                                                                                                                                       Stan gruntu
+                                     Stratygrafia
+
+
+
+
+                                                                                                                                                                                                         Wilgotność
+                                                                                   Przelot [m]
+Wiercenie
+
+
+
+
+                                                                                                                                                                      14688-1,2
+                                                            Skala [m]
+
+
+
+
+                                                                                                                                                                                                                                        Warstwa
+              [m p.p.t]
+
+
+
+
+                                                                        Profil
+
+
+
+
+                                                                                                                                                                                         Ilość
+                                                                                                                                                         -1,2
+1              2                     3                      4           5          6                         7                      8                   9           10                11                12             13              14
+                                                                                                 Nasyp (humus, piasek
+                                                                                                 średni, gruz ceglany),
+                                                                                                 ciemnobrunatny
+
+                                                           1.0                                                                N(H,Ps,Ceg.) brmsaorMg                                                    mw            szg               N
+
+
+
+
+                                                           2.0                    1.80           Nasyp (gruz ceglany),
+                                                                                                 czerwonawy                      N(Ceg.)             brMg                                               mw             zg               N
+                                                                                  2.30           Nasyp (piasek średni, gruz
+                                                                                                 ceglany, humus), czarny
+                                                                                                                              N(Ps, Ceg., H)                                                             w             zg               N
+                                                           3.0
+                                              Holocen
+
+
+
+
+                                                                                                                                            orbrmsaMg
+
+            3.40                                                                  3.40           Nasyp (piasek średni, gruz N(Ps, Ceg., H)                                                              nw             zg               N
+                                                                                                 ceglany, humus), czarny
+                                                           4.0                    3.80           Piasek średni na granicy
+                                                                                                 piasku drobnego,              Ps/Pd                                                                    nw             zg            QhIIa2
+                                                                                                 jasnożółty
+                                                                                  4.50           Piasek średni, żółto-szary
+                                                           5.0
+                                                                                                                                                     mSa
+                                                                                                                                   Ps                                                                   nw            szg            QhIIb1
+
+                                                           6.0
+
+
+                                                                                  6.50           Pospółka, jasnoszara
+                                                           7.0
+                           Czwartorzęd
+
+
+
+
+                                                           8.0
+                                                                                                                                   Po                                                                   nw             zg            QpIa1
+
+
+                                                           9.0
+
+
+
+                                                           10.0
+                                                                                 10.00           Pospółka, szara
+                                              Plejstocen
+
+
+
+
+                                                                                                                                                     grSa
+                                                           11.0
+
+
+
+                                                           12.0
+
+                                                                                                                                   Po                                                                   nw             zg            QpIa1
+
+                                                           13.0
+
+
+
+                                                           14.0
+
+
+
+                                                           15.0
+                                                                                 15.00
+
+
+
+    Rysunek wykonano programem "GeoStar" zgodnie z PN-B-02480:1986
+

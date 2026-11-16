@@ -1,0 +1,212 @@
+                                                                                                                                                                                                                                                                                                                                                                    Zał. 8
+
+                                                                                                                                          TABELA PARAMETRÓW FIZYKO-MECHANICZNYCH GRUNTÓW
+                                                                                      "Wykonanie wstępnych badań geotechnicznych na potrzeby ustalenia warunków technicznych posadowienia dla obiektu nowej siedziby Urzędu Marszałkowskiego we Wrocławiu"
+
+                                       OBJAŚNIENIA                                                                                                                                                    Parametry geotechniczne
+                                       GEOLOGICZNE                                                                                                                                         wg PN-EN 1997-1, PN-EN 1997-2 oraz PN-81/B-03020
+                                                                                          wg PN-86/B-02480              wg PN-EN ISO 14688-1,2                             PN-EN 1997-2                                                                                            PN-81/B-03020/PN-B-04452
+ Profil stratygraficzny
+
+
+
+
+                                                                                                                                                 Symbol geologicznej
+                                                                                                                                                  konsolidacji gruntu
+
+
+
+
+                                                                                                                                                                                                                                                                                                              / moduł ściśliwości
+                                           Profil genetyczny
+
+
+
+
+                                                                                                                                                                                                                                                                                                               moduł ściśliwości
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                   obciążenia gruntu
+                                                                 Symbol warstwy
+                                                                 geotechnicznej
+
+
+
+
+                                                                                                                                                                                                           opór na stożku
+
+
+
+
+                                                                                                                                                                                                                                                                 / efektywny kąt
+                                                                                                                                                                                                                                                                 wewnętrznego
+                                                                                                                                                                                       plastyczności
+
+
+
+
+                                                                                                                                                                                                                                                                                                                 edometryczny
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                     Dopuszczalne
+                                                                                                                                                                                                                                                                                                                                    odkształcenia
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                    wytrzymałość
+                                                                                                                                                                        zagęszczenia
+
+
+
+
+                                                                                                                                                                                                                                                  objętościowa
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                     na ścinanie
+                                                                                                                                                                                                                                 wilgotność
+
+
+
+
+                                                                                                                                                                                                                                                                                                                  pierwotnej
+                                                                                                                                                                                                                                                                                          / spójność
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                      wg Wiłuna
+                                                                                                                                                                                                                                                                                          efektywna
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                      pierwotny
+                                                                                                                                                                                                                                 naturalna
+
+
+
+
+                                                                                                                                                                                                                                                                                           spójność
+                                                                                                                                                                                                                                                                     kąt tarcia
+                                                                                                                                                                                                                                                    gęstość
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                        moduł
+                                                                                                                                                                          Stopień
+
+
+                                                                                                                                                                                          Stopień
+
+
+
+
+                                                                                                                                                                                                                                                                       tarcia
+                                                                                   Opis gruntu                      Symbol gruntu
+
+
+                                                                                                                                                                                                            qc                   wn(n)              p(n)          φΥ(n) / φ'              cu(n) / c'            Mο(n) / M              E0(n)           Su             k2/ks
+                                                                                                                                                                            ID              IL               [-]                  %               [t/m3]              [st]                  [kPa]                  [MPa]              [MPa]         [kPa]             [kPa]
+  NASYPY
+
+
+
+
+                                Grunty antropogeniczne                N              Nasyp (...)             N(…)              (…)Mg                                                                                          Ze względu na niejednorodny skład - parametrów fizyko-mechanicznych nie wyznaczono
+
+
+
+
+                          Przypowierzchniowe grunty organiczne        O                Gleba                 Gb                 (h)Or                                                                                       Z uwagi na organiczny charakter gruntów - parametrów fizyko-mechanicznych nie wyznaczono
+
+
+
+
+                                                                                                                                                                                                                                                                     35,5                                        178,73
+                                                                 QhIIa1            Piasek średni              Ps                mSa                                       0,90                            27,0                  18,0 ***         2,05 ***                                                                           149,13                         459 - 550
+                                                                                                                                                                                                                                                                     42,3                                         74,0
+
+
+
+                                                                                                                                                                                                                                12,0 **          1,90 **            34,2                                        132,19
+                                                                 QhIIa2            Piasek średni              Ps                mSa                                       0,70                         15,0 - 17,0                                                                                                                  111,06                             414
+                                                                                                                                                                                                                                18,0 ***         2,05 ***        38,9 - 39,6                                  50,0 - 54,0
+
+
+
+                                                                                                                                                                                                                                                                     33,6                                        112,31
+Qh
+
+
+
+
+                                                                 QhIIb1            Piasek średni              Ps                mSa                                       0,60                            12,5                  22,0 ***         2,00 ***                                                                             94,61                            375
+                                                                                                                                                                                                                                                                     37,8                                         45,0
+
+                           Piaski rzeczne tarasów zalewowych                                                                                              -                                  -                                                                                                -                                                          -
+
+                                                                                                                                                                                                                                                                     32,4                                         79,33
+                                                                 QhIIb2            Piasek średni              Ps                mSa                                       0,40                            7,0                   22,0 ***         2,00 ***                                                                             66,92                            305
+                                                                                                                                                                                                                                                                     34,4                                          28,0
+
+
+
+                                                                                                                                                                                                                                                                     31,4                                         88,64
+                                                                 QhIIIa2           Piasek drobny             Pd                  fSa                                      0,70                            17,0                   14,0 **         1,85 **                                                                              65,82                            259
+                                                                                                                                                                                                                                                                     39,6                                          54,0
+
+
+
+                                                                                                                                                                                                                                                                     30,9                                         74,37
+                                                                 QhIIIb1           Piasek drobny             Pd                  fSa                                      0,60                            12,0                  24,0 ***         1,90 ***                                                                             55,38                            236
+                                                                                                                                                                                                                                                                     37,6                                          44,0
+
+
+
+                                                                                     Pospółka,               Po,                grSa,                                                                                                                               41,4                                        244,61
+                                                                 QpIa1                                                                                                    0,90                         22,0 - 43,0              14,0 ***         2,10 ***                                                                           219,47                         750 - 900
+                                                                                       Żwir                   Ż                  Gr                                                                                                                              41,1 - 45,1                                  64,0 - 106,0
+
+
+                              Piaski i żwiry rzeczne tarasów                                                                                                                                                                                                         40,3                                        207,71
+                                                                 QpIa2               Pospółka                Po                 grSa                      -               0,75               -            19,0                  14,0 ***         2,10 ***                                     -                                     186,41                             714
+                                      nadzalewowych                                                                                                                                                                                                                  40,3                                         58,0
+
+
+                                                                                                                                                                                                                                                                     35,5                                        178,73
+                                                                 QpIIa1            Piasek średni             Ps                 mSa                                       0,90                            38,0                  18,0 ***         2,05 ***                                                                           149,13                         459 - 550
+                                                                                                                                                                                                                                                                     44,3                                         96,0
+Qp
+
+
+
+
+                                                                 QpB1             Glina piaszczysta          Gp                 saCl                                                   ≤ 0,00                                     12,0            2,20               22,0                   40,00                 65,77              49,98               -             370
+
+
+
+                                                                 QpB2a            Glina piaszczysta          Gp                 saCl                                                     0,10                                     12,0            2,20               20,1                   35,48                 48,09              36,55                             302
+
+                           Osady lodowcowe (gliny zwałowe)                                                                                               B                   -                                   -
+
+                                                                 QpB2b            Glina piaszczysta          Gp                 saCl                                                     0,20                                     12,0            2,20               18,3                   31,54                 36,93              28,07                             234
+
+
+
+                                                                 QpB3a            Glina piaszczysta          Gp                 saCl                                                     0,30                                     17,0            2,10               16,4                   28,00                 29,25              22,23                             182
+
+
+- wartości ID są parametrami wiodącymi wyznaczonymi na podstawie wyników sondowań CPTu
+- wartości parametrów geotechnicznych są wartościami uśrednionymi
+- Q - osady czwartorzędowe (h - holocen, p - plejstocen)
+- wartości wilgotności naturalnej i gęstości objętościowe dla gruntów spoistych wyznaczono zgodnie ze stwierdzonym rodzajem wilgotności: *mało wilgotny, ** wilgotny, ***nawodniony
+- w opisie gruntów umieszczono jedynie grunty podstawowe, bez udziału domieszek i przewarstwień
+
