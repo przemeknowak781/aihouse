@@ -73,7 +73,7 @@ for d, c, lab in [((2027, 6, 21), '#c0392b', '21 VI'), ((2027, 3, 20), '#7f8c8d'
         az, el = sun_position(t, LAT, LON)
         if el > 0: pts.append((math.radians(az), el))
     ax.plot([p[0] for p in pts], [p[1] for p in pts], color=c, lw=1.4, label=lab)
-for nm, a in [('N (most) 346°', 346), ('E (Oława) 76°', 76), ('W (Mazowiecka) 256°', 256)]:
+for nm, a in [('N (most) 346°', 346), ('E (Oława) 76°', 76), ('W (Mazowiecka) 282°', 282)]:  # poprawione przez weryfikatora: było 256° (normalna krawędzi obszaru A, nie frontu ulicy; geometria.md § 4.2)
     ax.plot([math.radians(a)]*2, [90, 0], color='#999', lw=0.6, ls='--'); ax.text(math.radians(a), 8, nm, fontsize=6, color='#555')
 ax.set_title('Ścieżki Słońca – teren UMWD (51,108°N 17,052°E)\nwysokość [°] od środka, azymut od N', fontsize=8)
 ax.legend(fontsize=6, loc='lower left', bbox_to_anchor=(-0.1, -0.12)); ax.tick_params(labelsize=6)

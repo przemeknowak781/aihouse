@@ -18,6 +18,7 @@
 > - `docs/50_research/data/roza_wiatrow_wroclaw_1991_2020.csv`;
 > - `docs/50_research/img/roza_wiatrow_1991_2020.png`, `img/sciezki_slonca_teren.png`, `img/isok_mzp_teren.jpg`;
 > - skrypty do odtworzenia wyników: `docs/50_research/data/skrypty/` (uruchamiać `python3 -I`; dane wejściowe pobierać z danepubliczne.imgw.pl do osobnego katalogu).
+> - dodane przez weryfikatora: `data/roza_wiatrow_wroclaw_1991_2020_korekta.csv`, `img/roza_wiatrow_1991_2020_korekta.png`, `data/skrypty/windrose_fix.py` (korekta binowania kierunków wiatru, § 5.3). Zestawienie weryfikacji jest w § 10. <!-- poprawione przez weryfikatora -->
 
 ---
 
@@ -167,7 +168,7 @@ Historia urbanistyczna (XIX-wieczne przedmieście czynszowe, wpis 538/A/05, znis
 | **Mazowiecka 15**, 50-529 | Wejście od ulicy zamknięte na stałe (tylko droga ewakuacyjna). Połączenie z Wybrzeżem Słowackiego łącznikiem na II i IV piętrze, dalej z Mazowiecką 17. Łącznik 15/17 to „szklane drzwi i trzy stopnie” | [Ź] Deklaracja 2021 |
 | **Mazowiecka 17**, 50-412 | Wejście od frontu z dzwonkiem do ochrony. Osoba ze szczególnymi potrzebami jest kierowana na tył budynku, do windy uruchamianej przez ochronę. Na elewacji napisy „URZĄD MARSZAŁKOWSKI WOJEWÓDZTWA DOLNOŚLĄSKIEGO” i „DOLNY ŚLĄSK”. Historycznie dawny etablissement z 1873 r. (F. Barchewitz), przebudowany w 1913 r.; w zespole jest też Centrum Sztuki Impart | [Ź] Deklaracja 2021; [O] M.10 DJI_…0036; `historia.md` § 5 |
 | **Walońska 3–5**, 50-413 | Trzy windy. Kancelaria Ogólna na parterze. Jedno z dwóch wejść zamknięte na stałe | [Ź] Deklaracja 2021 |
-| Wspólne | „skomplikowana trasa dotarcia do budynków” | [Ź] Deklaracja 2021 |
+| Wspólne | „skomplikowana trasa dotarcia do budynków” (w deklaracji w odniesieniu do ciągów od przystanków do budynków przy Wybrzeżu Słowackiego 12–14 i Walońskiej 3–5) <!-- poprawione przez weryfikatora: doprecyzowano zakres cytatu --> | [Ź] Deklaracja 2021 |
 | Dobrzyńska, Matejki | **Nie potwierdzono** w znalezionych źródłach, że UMWD ma tam siedziby (deklaracja z 2021 r. ich nie wymienia; mogą to być jednostki podległe). Do weryfikacji w BIP UMWD | – |
 | Sala obrad Sejmiku | Obecnej lokalizacji nie ustalono w źródłach publicznych przeczytanych w tym module | – |
 
@@ -277,7 +278,7 @@ Historia urbanistyczna (XIX-wieczne przedmieście czynszowe, wpis 538/A/05, znis
 WNIOSEK:
 - Dominanta do 45 m (MPZP, obszar A) mieści się w filozofii Studium. Plac Społeczny był przewidziany na kompozycję wysokościową, a przedmoście Mostu Grunwaldzkiego to „brama” Śródmieścia na osi pl. Grunwaldzki – Most Grunwaldzki – pl. Społeczny.
 - Uzasadnienie dominanty w opisie i na schemacie: (1) zamknięcie osi widokowej z esplanady pl. Grunwaldzkiego (wskazanej na wizji lokalnej, pkt 6); (2) brama przedmościa; (3) „makroelement” w zespole z DUW, Pocztą Główną (pierwszy wrocławski wieżowiec, 1926–1929) i portalem mostu.
-- Reguła „2 kondygnacji” wspiera podejście, w którym skrzydła mają wysokość kamienic (ok. 21–22 m wobec gzymsu Mazowieckiej 19). Dominanta jest wycofana i jako jedyna przekracza skalę.
+- Reguła „2 kondygnacji” wspiera podejście, w którym skrzydła mają wysokość kamienic (ok. 21–22 m wobec gzymsu Mazowieckiej 19). Dominanta jest wycofana i jako jedyna przekracza skalę. Uwaga weryfikatora: dominanta 45 m formalnie łamie regułę 2 kondygnacji względem zabudowy po drugiej stronie ulic. Obronić ją można wyjątkami z tej samej listy: zabudowa odległa lub izolowana zielenią (otwarty pl. Społeczny) oraz nadwyżka wysokości „dyktowana względami kompozycyjnymi” (zasada 9). Studium zastąpił plan ogólny (26.08.2026), więc argument jest historyczno-kompozycyjny, a nie formalny. <!-- poprawione przez weryfikatora -->
 
 ---
 
@@ -503,7 +504,7 @@ WNIOSEK projektowy:
 | **Pylony mostu** | Granit ciepło szarobrązowy, z ciemnymi zaciekami i fugami | #978B7E (L54), #776D61 (L42), #BFBCB3 (L73) | Odniesienie dla cokołu i posadzek |
 | **Stal mostu** | Jasny, nasycony błękit (kratownice, wieszaki, balustrady) | w zdjęciach od #BDC7C9 do intensywnego błękitu (DJI_…0032) | Kolor „obcy”, nie powtarzać; może zmienić się po remoncie |
 | **Mury nabrzeży** | Kamień szarobrązowy | #746B5E (L41), #948C82 (L55) | jw. |
-| **Poczta Główna** (1926–1929, proj. Lothar Neumann) | Wieża w ciemnoczerwonej cegle w tle kadru F.17.A | – (za mały fragment) | [Ź-wt] autor i daty: archiweb, wroclaw.pl (wg wyników wyszukiwania) |
+| **Poczta Główna** (1926–1929, proj. Lothar Neumann) | Wieża w ciemnoczerwonej cegle w tle kadru F.17.A | – (za mały fragment) | [Ź-wt] archiweb: Neumann, 1926–1929. [Ź] wroclaw.pl (26.03.2019): Neumann, budowa trwała 4 lata, oddanie w 1929 r., więc start ok. 1925. Daty niejednoznaczne. Azymut i odległość w tabeli § 5.5 niezweryfikowane. <!-- poprawione przez weryfikatora --> |
 | **Ostrów Tumski** | Ceglany gotyk, czerwone dachówki, zielona miedź | #9D5F52 (L47), #B6968D (L63) | Akcent ciepłej czerwieni w panoramie |
 | **„Manhattan” pl. Grunwaldzki** | Białe wieże z prefabrykatów | #F5F5F5 (L96), #D3D3D4 (L83) | Biel chłodna |
 | **Odra / Oława** | Woda oliwkowo-brązowa, przy niebie stalowoniebieska | #4E4E37 (L26), #7A92A6 (L56) | – |
@@ -534,15 +535,15 @@ Tony podano w przybliżeniu, do kalibracji na próbkach:
 | 1 | Uzasadnić dominantę kompozycyjnie: brama przedmościa, zamknięcie osi z pl. Grunwaldzkiego, „kompozycja wysokościowa pl. Społecznego” (Studium 2018) | trafność wpisania w tkankę | § 4.4 |
 | 2 | Poziome, spokojne zakończenie dominanty, bez iglic, niekonkurujące z odtworzonymi hełmami mostu (ok. 25,5 m). Na przekroju urbanistycznym pokazać stan docelowy mostu | tkanka, atrakcyjność | § 1.2 |
 | 3 | Sala Sejmiku z głównym oknem na NNW, z kadrem na Ostrów Tumski i Most Grunwaldzki (światło północne, brak przegrzewania). Opcjonalny kadr SW na Ślężę po weryfikacji widoczności | atrakcyjność i oryginalność, funkcja, eko | § 5.5 |
-| 4 | Materiały jasne, ciepłe, matowe, mineralne. Granitowy cokół. Jeden ciepły akcent metaliczny. Bez ciemnego szkła w pierzejach od Oławy i mostu (te elewacje są w cieniu na F.17) | atrakcyjność, tkanka | § 5.5, § 6 |
+| 4 | Materiały jasne, ciepłe, matowe, mineralne. Granitowy cokół. Jeden ciepły akcent metaliczny. Bez ciemnego szkła w pierzejach od Oławy, mostu i Mazowieckiej (wszystkie trzy elewacje są w cieniu na F.17) <!-- poprawione przez weryfikatora: dodano Mazowiecką --> | atrakcyjność, tkanka | § 5.5, § 6 |
 | 5 | Segmentacja skrzydeł tonem i fakturą w wąskim zakresie, precedens Nowego Targu (moduły rozdzielone patiami lub uskokami) | tkanka (DWKZ) | § 4.2, § 6.3 |
 | 6 | Parter i przedmoście jako zawias bulwaru Odry (Dunikowskiego – DUW) i nabrzeża Oławy (6KDB/2 – 4KDPL/3); punkt widokowy w miejscu dawnej przystani | dostępność, tkanka | § 2.3 |
 | 7 | Jeden czytelny adres i dostęp bez barier dla rozproszonego dziś urzędu (deklaracja dostępności wymienia bariery); powiązanie z Mazowiecką 17/19 | dostępność i inkluzywność, funkcja | § 3 |
 | 8 | Ochrona przed wiatrem przy wejściu u stóp dominanty (podcień lub zadaszenie). Tarasy po stronie E–SE. W opisie wzmianka o analizie komfortu wiatrowego | funkcja, dostępność | § 5.3 |
-| 9 | Ochrona przed upałem: osłony pionowe na ENE i WSW, poziome na SSE, masa termiczna, nocne przewietrzanie, zieleń dziedzińca i dachów (wyspa ciepła latem +2,4 K) | eko (zeroemisyjność) | § 5.2, 5.4, 5.5 |
+| 9 | Ochrona przed upałem: osłony pionowe na ENE i W/WNW (Mazowiecka, 282°), poziome na S/SSE, masa termiczna, nocne przewietrzanie, zieleń dziedzińca i dachów (wyspa ciepła latem +2,4 K) <!-- poprawione przez weryfikatora: było „ENE i WSW” --> | eko (zeroemisyjność) | § 5.2, 5.4, 5.5 |
 | 10 | Woda: retencja (dachy zielone, ogród deszczowy, zbiornik), „biała wanna”, krytyczne instalacje nad terenem, próg rampy | eko, realność | § 5.6 |
 | 11 | Dach jako piąta elewacja (zielony, z BIPV w rysunku elewacji), bo jest widoczny na obu fotomontażach | atrakcyjność, eko | § 6.3 pkt 7 |
-| 12 | Wizualizacje: F.17 – jesień, południe, cienie na N, elewacje ENE i NNW w cieniu. Ujęcie od mostu – letni wieczór (21 VI ok. 20:00 CEST, az 297°, wys. 8°) albo niebieska godzina z rozświetloną salą Sejmiku | jakość graficzna | § 5.5 |
+| 12 | Wizualizacje: F.17 – jesień, południe, cienie na N; **wszystkie trzy elewacje uliczne (NNW, ENE, W/WNW od Mazowieckiej) w cieniu** <!-- poprawione przez weryfikatora: było „elewacje ENE i NNW w cieniu” -->. Ujęcie od mostu – letni wieczór (21 VI ok. 20:00 CEST, az 297°, wys. 8°) albo niebieska godzina z rozświetloną salą Sejmiku | jakość graficzna | § 5.5 |
 | 13 | Narracja w języku planisty (osie, ciągi, linie zabudowy, kompozycja wysokościowa), bo Architekt Miasta i sędzia referent zasiadają w Zespole Architekta Miasta | wszystkie | § 4.3 |
 
 ---
@@ -560,6 +561,9 @@ Tony podano w przybliżeniu, do kalibracji na próbkach:
 9. **Strefy obciążeń śniegiem i wiatrem** nie są zweryfikowane w załącznikach krajowych PN-EN.
 10. **Wypowiedzi Architekta Miasta** o pierzejach i wysokościowcach nie znaleziono. Wnioski z § 4.3 to interpretacja ról i składu Zespołu, a nie deklaracji programowych.
 11. **Ślęża z sali Sejmiku:** widoczność niezweryfikowana. Nie wolno jej pokazać na wizualizacji wnętrza bez sprawdzenia (ryzyko zarzutu manipulacji).
+12. **Orientacja frontu Mazowieckiej** (dodane przez weryfikatora): front ma normalną ok. 282° (W/WNW), a nie 256°. Wszystkie analizy i rendery zakładające 256° (cienie, osłony, oświetlenie F.17.B) trzeba przeliczyć. <!-- poprawione przez weryfikatora -->
+13. **Róża wiatrów** (dodane przez weryfikatora): pierwotne pliki `roza_wiatrow_*` mają artefakt binowania. Na planszach używać plików `*_korekta`. <!-- poprawione przez weryfikatora -->
+14. **Dane ISOK** (dodane przez weryfikatora): okres ważności obiektów w usłudze kończy się 21.12.2025. Przed oddaniem pracy sprawdzić, czy opublikowano nowszy cykl MZP/MRP. <!-- poprawione przez weryfikatora -->
 
 ---
 
@@ -603,7 +607,7 @@ Tony podano w przybliżeniu, do kalibracji na próbkach:
 ### 9.3 Publikacje naukowe
 
 - Zakrzewska-Półtorak A. (2017). *Location of high-rise buildings in Wrocław / Lokalizacja budynków wysokościowych we Wrocławiu*. Biblioteka Regionalisty 17, s. 111–118. DOI: 10.15611/br.2017.1.10. Pełny tekst: https://dbc.wroc.pl/Content/45461/Zakrzewska-Poltorak_Location_Of_High_Rise_Buildings_In_Wroclaw.pdf
-- Szymanowski M., Drzeniecka-Osiadacz A., Sawiński T., Kryza M. (2019). *Historia i współczesność badań nad klimatem Wrocławia – pomiary i badania modelowe*. Acta Geographica Lodziensia 108, s. 109–126. DOI: 10.26485/AGL/2019/108/8. https://journals.ltn.lodz.pl/Acta-Geographica-Lodziensia/article/view/555 (cytowane za nim: Szymanowski M. 2004, *Miejska wyspa ciepła we Wrocławiu*; Suder A., Szymanowski M. 2014, korytarze przewietrzania Wrocławia).
+- Szymanowski M., Drzeniecka-Osiadacz A., Sawiński T., Kryza M. (2019). *Historia i współczesność badań nad klimatem Wrocławia – pomiary i badania modelowe*. Acta Geographica Lodziensia 108, s. 109–126. DOI: 10.26485/AGL/2019/108/8. https://czasopisma.ltn.lodz.pl/Acta-Geographica-Lodziensia/article/view/555 <!-- poprawione przez weryfikatora: DOI kieruje na domenę czasopisma.ltn.lodz.pl (było journals.ltn.lodz.pl); dane bibliograficzne i liczby UHI zweryfikowane w PDF, s. 113–114 --> (cytowane za nim: Szymanowski M. 2004, *Miejska wyspa ciepła we Wrocławiu*; Suder A., Szymanowski M. 2014, korytarze przewietrzania Wrocławia).
 - Świtlińska-Robutka J. (2002). *Analiza kompozycji przestrzennej Przedmieścia Oławskiego we Wrocławiu*. Architectus 1, s. 145–149 (za `historia.md`).
 
 ### 9.4 Źródła wtórne (portale i serwisy; oznaczone [Ź-wt])
@@ -612,7 +616,7 @@ Tony podano w przybliżeniu, do kalibracji na próbkach:
 - polska-org.pl, obiekt 547250 „Urząd Marszałkowski Województwa Dolnośląskiego (Wybrzeże Słowackiego)” (istniejąca siedziba nr 12–14) i podstrony zdjęć 747449, 9822298: https://polska-org.pl/547250,Wroclaw,Urzad_Marszalkowski_Wojewodztwa_Dolnoslaskiego_Wybrzeze_Slowackiego.html. **Metoda bezpieczeństwa:** stronę pobrano curl-em i przepuszczono przez filtr słów zakazanych (konkurs, nagrod*, zwyci*, wyróżn*, wizualiz*, koncepc*, pracowni*, nowa siedziba, SARP, 2025, 2026, sejmik). Wynik: **0 trafień**. Dopiero potem odczytano podpisy zdjęć (lata 1950–2020).
 - fotopolska.eu, Most Grunwaldzki (opis rejestrowy; tylko fragment w wynikach wyszukiwania): https://fotopolska.eu/1446371,foto.html
 - pl.wikipedia, „Most Grunwaldzki we Wrocławiu” (za `historia.md`); en.wikipedia, „1997 Central European flood in Wrocław”: https://en.wikipedia.org/wiki/1997_Central_European_flood_in_Wroc%C5%82aw
-- Polskie Radio, English Section (2024; kulminacja 19.09.2024, Trestno 631 cm; wg wyników wyszukiwania): https://polskieradio.pl/395/7784/artykul/3428648,oder-river-falls-below-alarm-level-in-wroclaw-flood-situation-under-control oraz https://polskieradio.pl/395/7784/Artykul/3427451,polands-flood-situation-stabilizes
+- Polskie Radio, English Section (25.09.2024 i 21.09.2024; kulminacja 19.09.2024, 644 cm bez nazwy wodowskazu; „Trestno 631 cm” **nie występuje** w żadnym z artykułów – poprawione przez weryfikatora <!-- poprawione przez weryfikatora -->): https://polskieradio.pl/395/7784/artykul/3428648,oder-river-falls-below-alarm-level-in-wroclaw-flood-situation-under-control oraz https://polskieradio.pl/395/7784/Artykul/3427451,polands-flood-situation-stabilizes
 - klinkier.pl (The Bridge, elewacja klinkierowa; wg wyników wyszukiwania): https://klinkier.pl/en/the-bridge-hotel-wroclaw/ ; Accor MGallery: https://mgallery.accor.com/en/hotels/B1Z1/story.html
 - Concordia Design (MVRDV, Q2/QStudio, 2018–2020; wg wyników wyszukiwania): https://architizer.com/projects/concordia-design-wroclaw ; https://aluprof.com/gb/company/news/concordia-design-on-wroclaw-s-slodowa-island-opens-its-doors
 - In Your Pocket, DUW (F. Bräuler): https://www.inyourpocket.com/wroclaw/lower-silesian-voivodship-office_156086v
@@ -633,3 +637,21 @@ Tony podano w przybliżeniu, do kalibracji na próbkach:
   - link.springer.com 10.1007/s00024-013-0659-9 (wymaga logowania);
   - wroclawskiefakty.pl „Nowa odsłona nabrzeży rzeki Oławy” (404);
   - yadda.icm.edu.pl, Łukaszewicz „Kolor i plastyka…” (zwrócono HTML zamiast PDF).
+
+---
+
+## 10. Weryfikacja źródeł (weryfikator, 16.11.2026) <!-- poprawione przez weryfikatora -->
+
+**Zakaz Inwestora.** W plikach modułu (md, CSV, skrypty, 3 obrazy) nie znaleziono informacji o pracach nagrodzonych, wyróżnionych ani konkurencyjnych w tym konkursie. Jedyny ślad to URL odrzuconego artykułu w § 9.5, wpisany bez treści. Weryfikator go nie otwierał. Informacje o składzie Sądu pochodzą z Regulaminu (materiał konkursowy, nie wyniki); zgodność sprawdzono z tekstem Regulaminu.
+
+**Potwierdzone w źródle pierwotnym (otwarte i przeczytane 16.11.2026):**
+- Zakrzewska-Półtorak 2017: DOI działa, Biblioteka Regionalisty 17, s. 111–118. Pl. Społeczny jest wśród 4 obszarów kompozycji wysokościowych. Zgadzają się strefy W0–W5, definicja > 55 m, ponad 190 budynków ≥ 10 kondygnacji, zasada 2 kondygnacji i zasada 9.
+- Szymanowski i in. 2019: DOI działa, AGL 108, s. 109–126. Zgadzają się liczby UHI (1,0 / 2,4 / 2,2 / 1,2 / 9,0 / > 10 K; 5×; 2–3× i 4–5×; 12% godzin) oraz korytarze z LiDAR dla 8 kierunków.
+- wroclaw.pl: Architekt Miasta (25.10.2024), skład ZAM (11.05.2026), estakada (22.01.2026), remont mostu (3.07.2025), plan ogólny (26.08.2026), „Piękny Wrocław” XXX, XXXI, XXXII i XXXIII, nominacja „Polityki” (8.04.2020), wywiad NFM (3.07.2015, sam cytat), klimat (20.11.2024), powódź 1997 (12.07.2024), DUW (22.09.2014), bulwary (20.10.2014).
+- Deklaracja dostępności UMWD z 13.12.2021 (wszystkie bariery); M.05 s. 6 (cytaty i tabela 1); Regulamin (Barski, Zybura, Goncerzewicz).
+- Dane IMGW: normy, wskaźniki, ekstrema temperatury i róża (wersja pierwotna) odtworzone skryptami autora co do liczby. Położenia Słońca i godziny nasłonecznienia elewacji odtworzone. Azymuty do katedry, Ślęży, Rynku, Hali Stulecia i Sky Tower potwierdzone niezależnie (pyproj/Geod).
+- ISOK: brak zagrożenia w punkcie terenu potwierdzony, także dla warstwy awarii budowli piętrzących.
+
+**Poprawione:** front Mazowieckiej 282°, a nie 256° (§ 0, 5.3, 5.5, 7); róża wiatrów (artefakt binowania i kod 999); maks. opad dobowy 77,1 mm (2024); fałszywy wniosek „wielokrotnie więcej dni ≥ 35 °C w centrum”; „bez olśnienia” przy oknie NNW; NFM „elewacja imitująca drewno” (niepotwierdzona); powódź 2024 (644 cm, nie „Trestno 631 cm”); bulwar Dunikowskiego zrealizowany; Oława – plan, nie realizacja; brzmienie cytatu ZAM; autorzy cytatów o Parku Krzyckim; domena URL AGL; cytaty ze Studium to tłumaczenia.
+
+**Niezweryfikowane (pozostawione z oznaczeniem):** uchwała L/1177/18 (BIP 503); Most Pokoju 2027; NFM jako Grand Prix XXVI (brak URL); pozycja Poczty Głównej; strefy obciążeń PN-EN (wg wiedzy weryfikatora Wrocław leży w 1. strefie śniegowej i 1. wiatrowej, ale załączników krajowych nie sprawdzono); polska-org.pl (świadomie nieotwierane ponownie).

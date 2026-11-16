@@ -1,3 +1,4 @@
+# UWAGA (weryfikator, 16.11.2026): binowanie kierunkow co 10 st. (1991-2010) zawyza sektory N/E/S/W, a kod 999 trafia do W; wersja skorygowana: windrose_fix.py
 import csv, sys, glob, os, collections
 d = sys.argv[1]
 sect8 = ['N','NE','E','SE','S','SW','W','NW']
