@@ -23,7 +23,7 @@ Data opracowania: 2026-11-16. Pliki w katalogu `docs/20_program/`:
 
 | Wyj./odp. | ustalenie |
 |---|---|
-| 3/10 | wysokość skrzydeł wyznacza MPZP (≤25 m). Wartość 22 m z PU s.2 sygnalizuje tylko styk z zabudową sąsiednią. Liczba kondygnacji skrzydeł jest swobodna |
+| 3/10 | wysokość skrzydeł wyznacza MPZP (18–25 m) oraz wymagania nasłonecznienia i przesłaniania zabudowy sąsiedniej. Wartość 22 m z PU s.2 sygnalizuje styk z zabudową sąsiednią (M.14). Organizator dopuszcza indywidualne rozwiązania styku z zabudową sąsiednią co do wysokości i liczby kondygnacji skrzydeł – w granicach MPZP, a nie „swobodnie” <!-- poprawione przez weryfikatora --> |
 | 3/12 | biura dla **403** osób |
 | 3/13; 8/37 | okna w szczycie Mazowieckiej 19 zostaną zlikwidowane, a okien w szczycie Wybrzeża Słowackiego 5 zamurować nie wolno (lok. 6 to pokój). Zalecany potencjał przyszłego połączenia z Mazowiecką 19; sama kamienica nie jest przedmiotem konkursu |
 | 3/16; 16/69; 17/70 | w jednym pokoju nie wolno łączyć pracowników różnych wydziałów ani działów. Wydziały jednego departamentu mogą zajmować 2 sąsiednie kondygnacje przy komunikacji pionowej |
@@ -50,6 +50,10 @@ Data opracowania: 2026-11-16. Pliki w katalogu `docs/20_program/`:
 | 20/78 | ewakuacja klatki przez hol jest dopuszczalna z warunkami WT (m.in. §256 ust. 6) |
 | 21/83 | minimalna liczba miejsc postojowych wg MPZP |
 | 21/84–85 | **wszystkie pomieszczenia Sejmiku z PU s.5–7 muszą być na tej samej kondygnacji co sala obrad**. Tylko Kancelarię Sejmiku (strefa z PU s.7) można umieścić na kondygnacji sąsiedniej |
+| 8/57 | dominanta nie musi wypełniać całego obszaru A; w obszarze A obowiązuje dach 35–45 m (MPZP §26 ust. 2 pkt 3) <!-- dodane przez weryfikatora --> |
+| 8/51 | departamenty 8.1 (DKD) i 8.2 (DZ) mają oddzielną numerację; numer 8 oznacza tylko powiązanie organizacyjne z CZ <!-- dodane przez weryfikatora --> |
+| 8/44 → 21/79 | w Etapie I dopuszczono jeden rzut dla kondygnacji powtarzalnych; **w Etapie II nie wolno** – każdy rzut osobno (stąd zgoda na 8 plansz, Wyj.20/76). F.15.B trzeba wypełnić dla każdej kondygnacji osobno <!-- dodane przez weryfikatora --> |
+| 11/63; 21/80 | na rzutach: numer, nazwa i powierzchnia każdego pomieszczenia albo numer i powierzchnia z legendą obok rzutu; nazwy bloków funkcjonalnych na rzutach (Reg. VII.2.2.b s.43) <!-- dodane przez weryfikatora --> |
 
 ---
 
@@ -62,6 +66,7 @@ Data opracowania: 2026-11-16. Pliki w katalogu `docs/20_program/`:
 - **Elastyczność**: jednolite pokoje 24 m², trwałe technologie, rezerwy w szachtach i na tarasach technicznych (PU s.3–4; Reg. III.1.9).
 - **Budżet**: 150 mln zł netto (Reg. III.3 s.21). Racjonalne dysponowanie przestrzenią względem budżetu jest wprost zadaniem konkursowym (Reg. II.4 s.16).
 - Główne kryterium oceny to jakość rozwiązań funkcjonalnych i przestrzennych (Reg. III.1.11 s.21). Odstępstwa od wytycznych są dopuszczalne, jeśli zostaną racjonalnie uzasadnione (Reg. II.2 s.16).
+- Kryteria Etapu II (Reg. VIII.1 s.49): pierwszorzędne, równoważne – (a) efektywność i zasadność rozwiązań przestrzenno‑funkcjonalnych **i programowych** budynku i zagospodarowania, (b) wpisanie w tkankę miejską, (c) atrakcyjność i oryginalność, (d) rozwiązania proekologiczne, (e) dostępność i inkluzywność; drugorzędne – realność i optymalizacja kosztów realizacji i utrzymania. <!-- dodane przez weryfikatora -->
 
 ---
 
@@ -128,11 +133,13 @@ Wymagania AV i dostępności sal (SK, sala obrad, komisje, kluby, sale narad) s�
 
 ## 5. Sejmik – sala obrad i kondygnacja Sejmiku
 
-- **Uczestnicy standardowi** (PU s.6): 36 radnych (w tym 4‑osobowe prezydium), 5 członków Zarządu, Skarbnik, Sekretarz i przedstawiciel Wojewody, czyli **44 stałe stanowiska** z systemem głosowania, tabletami i mikrofonami. Do tego obsługa techniczna i kancelaryjna, tłumacze PJM, media, goście i publiczność. Pojemność maksymalna to **100 os.**
+- **Uczestnicy standardowi** (PU s.6): 36 radnych (w tym 4‑osobowe prezydium – wniosek z PU s.7), 5 członków Zarządu, Skarbnik, Sekretarz i przedstawiciel Wojewody, czyli **44 uczestników standardowych**. PU wymaga stałego wyposażenia (system głosowania, wbudowane tablety, mikrofony) dla radnych, członków Zarządu i prezydium, czyli **min. 41 stałych stanowisk**; stałe stanowiska dla Skarbnika, Sekretarza i przedstawiciela Wojewody (razem 44) to zalecenie (wniosek). Głosują tylko radni. <!-- poprawione przez weryfikatora: było „44 stałe stanowiska z systemem głosowania” --> Do tego obsługa techniczna i kancelaryjna, tłumacze PJM, media, goście i publiczność. Pojemność maksymalna to **100 os.**
+- **Niejasność** <!-- dodane przez weryfikatora -->: PU s.6 („przeznaczona dla maksymalnie 100 osób”) wylicza strefy radnych, prezydium, zarządu, gości, mediów i obsługi, a część dla publiczności opisuje osobnym zdaniem. Nie wiadomo, czy publiczność mieści się w 100. Ekstrakcja przyjmuje 100 łącznie z publicznością. Bezpieczniejszy wariant: 100 miejsc na płycie sali plus galeria publiczności (Wyj.4/18), jeśli rzut kondygnacji Sejmiku na to pozwala.
 - **Proponowany podział 100 miejsc** (wniosek): 36 radnych, 8 miejsc Zarząd i urzędnicy, 4 obsługa kancelaryjna, 2 tłumacze PJM, 10 media, 15 goście, 25 publiczność. W części publicznej trzeba zapewnić ≥3 miejsca dla wózków (M.13 s.218), a do tego dostępne stanowisko radnego, prezydium i mównicę (PU s.6; M.13 s.220 – mównica z blatem 0,75–0,80 m).
 - **Publiczność** ma mieć oddzielne wejście i może być wizualnie odseparowana. Wymagane są porządek obrad i poufność głosowania (PU s.6). Galeria (antresola) jest dopuszczalna (Wyj.4/18).
 - **Kabiny tłumaczy symultanicznych: M.01 ich NIE wymaga.** Wymagane jest miejsce dla tłumaczy PJM – w kadrze transmisji (wniosek). M.13 s.219 zaleca napisy lub tłumaczenie PJM tam, gdzie jest nagłośnienie.
 - **Kondygnacja Sejmiku** (Wyj.21/85): sala obrad, hol, sala multimedialna, reżyserka, przestrzeń socjalno‑gastronomiczna, szatnia, toalety, pokój matki, 2 sale komisji z zapleczami, 4 sale klubów, sala radnych i pokój socjalny radnych – **razem około 1 094 m² netto**. Doliczając rdzenie, ściany i konstrukcję, **kondygnacja Sejmiku potrzebuje ok. 1 400 m² powierzchni całkowitej (zakres 1 200–1 750 m²)** (wniosek). Kancelaria Sejmiku (ok. 490 m² netto, ok. 850 m² PC) może zająć kondygnację niższą.
+- **Interpretacja Wyj.21/85** <!-- dodane przez weryfikatora -->: Organizator zwalnia z wymogu jednej kondygnacji tylko „Kancelarię Sejmiku, opisaną na str. 7”. Na s.7 opisane są jednak także komisje, kluby, sala radnych i pokój socjalny radnych – te muszą zostać przy sali obrad. Gabinety Przewodniczącego i Wiceprzewodniczących oraz 2 sale po 20 os. PU wymienia „w tej strefie” (strefie KS), więc przeniesienie ich z KS na kondygnację sąsiednią jest **interpretacją (wniosek)**, nie rozstrzygnięciem Organizatora. Kondygnacja KS musi leżeć w dominancie (PU s.5: „najwyższe kondygnacje w dominancie”; Reg. III.1.5 s.19).
 
 ---
 
@@ -157,7 +164,7 @@ Wymagania AV i dostępności sal (SK, sala obrad, komisje, kluby, sale narad) s�
 5. **F.15.A nie ma bloków PHS i KW** wprowadzonych w Wyj.20/73. Trzeba je dopisać, podobnie jak ewentualne bloki dodatkowe (np. GA – bistro). W tej ekstrakcji bistro jest w SW.
 6. **F.15.B przewiduje tylko jedną kondygnację podziemną (−1)** i piętra do 6. PU zakłada 2 kondygnacje podziemne, a dominanta 35–45 m oznacza 9–10 kondygnacji nadziemnych. Szablon trzeba rozszerzyć o −2 i piętra 7–9.
 7. **F.15.A ma kolumny nr/opis/kond./pow.** – bez liczby osób i stanowisk. Dane do uzupełnienia są w YAML.
-8. **Kondygnacja Sejmiku a obszar dominanty**: Wyj.21/85 wymaga ok. 1 400 m² PC na jednej kondygnacji (rozdz. 5) na najwyższym piętrze w obszarze A (35–45 m). Jeżeli część wspólna obszaru A i Obszaru inwestycji jest mniejsza, wymogu nie da się spełnić bez odstępstwa (Reg. II.2). **Krytyczne do sprawdzenia na geometrii M.03/M.04 (moduł lokalizacja).**
+8. **Kondygnacja Sejmiku a obszar dominanty**: Wyj.21/85 wymaga, by wszystkie pomieszczenia Sejmiku były na kondygnacji sali obrad, a PU s.5 – by sala obrad była na najwyższym piętrze dominanty w obszarze A (35–45 m). Według szacunku z rozdz. 5 (wniosek, nie liczba Organizatora) taka kondygnacja to ok. 1 400 m² PC <!-- poprawione przez weryfikatora: Wyj.21/85 nie podaje powierzchni -->. Jeżeli część wspólna obszaru A i Obszaru inwestycji jest mniejsza, wymogu nie da się spełnić bez odstępstwa (Reg. II.2). **Krytyczne do sprawdzenia na geometrii M.03/M.04 (moduł lokalizacja).**
 9. **Piętro techniczne** (PU s.13) a „sala obrad na najwyższym piętrze” (PU s.5) i zakaz urządzeń na dachu. Program nie mówi, gdzie ma być piętro techniczne. Rekomendacja (wniosek): ostatnia kondygnacja skrzydła (≤25 m), antresola techniczna lub kondygnacja −2, a nie nad salą obrad.
 10. **Kancelaria ogólna 3 st.** (PU s.8) a **Dział Kancelaryjny II** (4 os., zał. 1) – relacja nieokreślona. Przyjąłem kancelarię w holu i 2 pokoje DK II bezpośrednio za nią (wniosek).
 11. **Asystent Przewodniczącego** – nie wiadomo, czy jest w 16 os. KS. Przyjąłem dodatkowo (wniosek).
@@ -165,9 +172,12 @@ Wymagania AV i dostępności sal (SK, sala obrad, komisje, kluby, sale narad) s�
 13. **MDS bez pojemności i parametrów** (PU s.3 „okoliczna ludność i pracownicy”; s.13 „mieszkańcy i pracownicy”). Parametry wymaga rozp. MSWiA z 9.07.2025 – do analizy w module prawnym.
 14. **Hulajnogi/UTO** – brak wymogu (luka). Zalecam 10 miejsc z ładowaniem w PR.01 (wniosek).
 15. **Garaż w PU**: MPZP liczy miejsca od „PU biur i obiektów konferencyjnych” (§13 pkt 1 lit. e), ale nie definiuje PU. Przyjąłem PU bez garażu, bez KW i bez technicznych. Jeśli hol i foyer liczyć do PU, wynik rośnie ze 103 do 110 msc. Sposób ujęcia garażu w F.15.C (I.12) trzeba ustalić.
-16. **M.12**: nagłówek „Załącznik M.09” i dopisek o standardzie dostępności to błędy redakcyjne. **F.14.B** poz. 2.11 „Rezerwowe źródło wody” stoi w sprzeczności z M.12 pkt 2.A („nie przewiduje się własnego ujęcia wody”). **PU s.14** wymienia „kotłownię” w budynku bez spalania – terminologiczna niespójność, w praktyce chodzi o maszynownię pomp ciepła lub węzeł.
+16. **M.12**: nagłówek „Załącznik M.09” i dopisek o standardzie dostępności to błędy redakcyjne. **F.14.B** poz. 2.11 „Rezerwowe źródło wody” stoi w sprzeczności z M.12 pkt 2.A („nie przewiduje się własnego ujęcia wody”), o ile „źródło” oznacza ujęcie; zbiornik zapasowy lub drugie przyłącze sprzeczności nie tworzą (uwaga weryfikatora) <!-- poprawione przez weryfikatora -->. **PU s.14** wymienia „kotłownię” w budynku bez spalania – terminologiczna niespójność, w praktyce chodzi o maszynownię pomp ciepła lub węzeł.
 17. **Reg. III.1.1** wymienia Walońską, Dobrzyńską i Matejki, a **PU s.2** dodaje pl. Powstańców Warszawy. Drobne literówki w zał. 1 („Województwi Ośrodek”, „Department Zdrowia”). PU s.4 pisze „Departament Rozwoju i Aglomeracji”, zał. 1 „Departament Rozwoju Aglomeracji”. Stopka PU brzmi „Plan użytkowy”.
 18. **Gabinety Wiceprzewodniczących** ze strefą spotkań dla 5 os.: obowiązek 24 m² (Wyj.3/17) dotyczy pokoi biurowych. Przyjąłem 36 m² (zakres 24–40). Przy ostrożnej interpretacji można zejść do 24 m².
+19. **Pojemność sali obrad 100 os. a publiczność** – nie wiadomo, czy publiczność mieści się w 100 (PU s.6); patrz rozdz. 5. <!-- dodane przez weryfikatora -->
+20. **Kategoria PN‑ISO toalet** – ekstrakcja liczy PHS (417 m²) do PU, co podnosi minimum parkingowe o ok. 5 msc. Przypisanie toalet do powierzchni użytkowej albo usługowej trzeba sprawdzić w tekście PN‑ISO 9836:2022‑07 (norma nie jest w materiałach). <!-- dodane przez weryfikatora -->
+21. **MPZP §26 ust. 2 pkt 2** zakazuje na parterze od strony 4KDPL/3 biur „związanych z doradztwem, finansami i ubezpieczeniami”. Urzędu wniosek ten nie dotyczy (wniosek), ale funkcje parteru od 4KDPL/3 warto opisać jako publiczne (hol, SK, bistro). <!-- dodane przez weryfikatora -->
 
 ---
 
@@ -184,7 +194,9 @@ Wymagania AV i dostępności sal (SK, sala obrad, komisje, kluby, sale narad) s�
 | Z6 parking / MDS | pracownicy; w dni sesji radni i goście; w sytuacji kryzysowej ludność | szlabany i KD; w trybie MDS dostęp publiczny |
 
 **Dostępność (wymogi wprost)**:
-- wejścia z poziomu chodnika (Reg. III.1.8);
+- wejścia z poziomu chodnika, **bez schodów i bez podjazdów (pochylni)** (Reg. III.1.8 s.20) <!-- uzupełnione przez weryfikatora -->;
+- miejsce oczekiwania na ewakuację **nie może zawężać** wymaganej szerokości drogi ewakuacyjnej (Reg. III.1.8 s.20) <!-- dodane przez weryfikatora -->;
+- dostępność całego budynku z wyłączeniem pomieszczeń technicznych (PU s.3; Reg. III.1.8) <!-- dodane przez weryfikatora -->;
 - toaleta dostępna na każdej kondygnacji z pochwytem poziomym na drzwiach i kontrastem (Reg. III.1.8);
 - komfortka ≥12 m², szer. ≥3 m, ≤20 m od wejścia (M.13 s.202);
 - miejsca oczekiwania na ewakuację na podestach z interkomem do ochrony i stanowiska KDR oraz miejsce na krzesło ewakuacyjne (PU s.11; Reg. III.1.8);
@@ -239,6 +251,22 @@ flowchart TB
 
 ---
 
+## 8a. Zagospodarowanie terenu (PU s.16–17; Reg. III.1.2) <!-- dodane przez weryfikatora: rozdziału PU „Zagospodarowanie terenu” brakowało w ekstrakcji -->
+
+Pełna lista ze źródłami: `program.yaml → zagospodarowanie_terenu`.
+
+- **Zieleń reprezentacyjna** w obrębie wewnętrznego podwórka: rośliny ozdobne, trawniki, mała architektura i rekreacja (PU s.16).
+- **Ogródek przydomowy**: zagospodarować z wycinką ograniczoną do niezbędnego minimum, nieogrodzony, dostępny dla pracowników i mieszkańców sąsiednich kamienic (PU s.16; Reg. III.1.5 s.19; Wyj.20/77). Położenie drzew przyjmować wg M.06, nie wg mapy (Wyj.13/65).
+- **Droga wewnętrzna** tylko do obsługi obiektu (odbiór osób, drobne dostawy), bez ruchu publicznego (PU s.16–17). Dz. 10/2 to dojazd do podwórka kamienic i łącznik z tą drogą (Wyj.4/20).
+- **Droga pożarowa** zgodna z przepisami (PU s.17).
+- **Strefa dostaw** od Wybrzeża Słowackiego, z poziomu gruntu, z windą osobowo‑towarową (PU s.17), bez miejsca postojowego na działce drogowej (Wyj.6/25).
+- **Zjazd lub zjazdy do garażu** z drogi publicznej w obrębie Inwestycji (Reg. III.1.2 s.18); dojazd do terenu tylko od 3KDL/1, 4KDPL/3, 6KDB/2 (MPZP §26 ust. 3).
+- **Skwer na dz. 9/2** z ciągiem pieszym, ewentualnie zielenią i małą architekturą powiązanymi z budynkiem (Reg. III.1.2 s.18).
+- **Dach zielony ekstensywny** dopuszczony na części dachu (PU s.17).
+- **Wody opadowe** zagospodarować maksymalnie w miejscu opadu: zbiorniki retencyjne na terenie zewnętrznym, studnie chłonne, rozsączanie, PBC (PU s.14; M.12 pkt 2.B).
+
+---
+
 ## 9. Wymagania ilościowe (do ewakuacji i bilansów)
 
 ### 9.1 Osoby
@@ -261,6 +289,7 @@ Wskaźnik 49% (powierzchnia pokoi biurowych do PC kondygnacji biurowej) wynika z
 - **ZL**: sale >50 os. niebędących stałymi użytkownikami (sala obrad, SK 200 i 80) kwalifikuje się jako ZL I, biura jako ZL III (WT §209 ust. 2).
 - **Grupa wysokościowa**: dominanta 35–45 m oznacza **budynek wysoki (W, 25–55 m; WT §8)**. Stąd klatki obudowane z przedsionkami p.poż. (zgodnie z PU s.11) i dźwig dla ekip ratowniczych (do weryfikacji w module prawnym, W3).
 - **Szerokości dróg ewakuacyjnych**: 0,6 m na 100 os., min. 1,4 m dla dróg poziomych i 1,2 m dla biegów schodów (WT §242 i §256 – do weryfikacji w W3). Dla kondygnacji Sejmiku (315 os.) daje to łącznie ≥1,9 m biegów, rozłożone na ≥2 klatki (wniosek).
+  - **Uwaga weryfikatora** <!-- dodane przez weryfikatora -->: w budynku użyteczności publicznej WT §68 ust. 1 wymaga szerokości użytkowej biegu min. **1,4 m** i spocznika 1,5 m (z pamięci; potwierdzić w module W3). Minimum 1,2 m z §256 nie wystarcza. Przy 2 klatkach daje to ≥2,8 m biegów, więcej niż 1,9 m z obliczenia proporcjonalnego.
 
 ### 9.3 Przybory sanitarne (orientacyjnie)
 
@@ -276,10 +305,11 @@ Przy podziale 60% K / 40% M (założenie) i normatywie 1 miska/20 K oraz 1 miska
 |---|---|---|
 | wskaźnik MPZP (minimum) | 12 msc / 1000 m² PU biur i obiektów konferencyjnych | MPZP §13 pkt 1 lit. e (M.03 s.15); Wyj.21/83 |
 | lokalizacja | na terenie obiektu; parking samodzielny wyłącznie podziemny; garaż pod budynkiem | MPZP §13 pkt 2–3 (M.03 s.16); PU s.12 |
-| **minimum przy PU = 8 582 m²** | **103 msc** (110 przy PU z holem i foyer 9 132 m²) | wniosek |
-| w tym OzN | ≥4% przy >100 → **≥5**, 3,6×5,0 m, najbliżej dźwigu | M.13 s.80–81 |
+| **minimum przy PU = 8 582 m²** | **103 msc** (110 przy PU z holem, foyer i holem Sejmiku 9 132 m²) <!-- poprawione przez weryfikatora: 550 m² RU obejmuje też hol Sejmiku --> | wniosek |
+| brzmienie MPZP | „co najmniej” 12 msc na 1000 m² PU „dla biur oraz obiektów kongresowych i konferencyjnych” <!-- dodane przez weryfikatora --> | M.03 s.15 |
+| w tym OzN | ≥4% przy >100 → **≥5** przy 103 msc; **liczone od faktycznej liczby stanowisk**: 150 msc → ≥6, 200 msc → ≥8 <!-- uzupełnione przez weryfikatora -->; 3,6×5,0 m, najbliżej dostępnego wejścia lub dźwigu | M.13 s.80–81 |
 | EV | infrastruktura ładowania wymagana; liczba punktów wg przepisów (W3) | PU s.13 |
-| MDS | garaż jako miejsce doraźnego schronienia (rozp. MSWiA 9.07.2025); pojemność nieokreślona | PU s.3, s.13 |
+| MDS | garaż jako miejsce doraźnego schronienia (rozp. MSWiA 9.07.2025; ustawa z 5.12.2024 o ochronie ludności i obronie cywilnej <!-- dodane przez weryfikatora -->); pojemność nieokreślona | PU s.3, s.13, s.18 |
 | użytkownicy | pracownicy codziennie; radni i goście w dni sesji i wydarzeń | PU s.12 |
 | zjazd | z drogi publicznej w obrębie Inwestycji; dojazd do terenu tylko od 3KDL/1, 4KDPL/3, 6KDB/2 | Reg. III.1.2; MPZP §26 ust. 3 |
 | rowery | **50** stanowisk na parterze, stojaki U, wjazd od podwórza, z zapleczem sanitarnym; nie na −1 | PU s.12; Wyj.7/32 |
@@ -302,6 +332,7 @@ Przy podziale 60% K / 40% M (założenie) i normatywie 1 miska/20 K oraz 1 miska
   - gruntowe pompy ciepła (odwierty możliwe pod budynkiem), magazyny ciepła i chłodu;
   - sieć ciepłownicza tylko rezerwowo;
   - PV 0,4–1,0 MWp na dachu dominanty i elewacjach, magazyn energii;
+  - **bilans energii**: energia z OZE ma równoważyć roczne zużycie budynku; wymagane bardzo niskie zapotrzebowanie na energię, możliwość pracy w trybie samowystarczalnym i preferencja rozwiązań pasywnych (M.12 pkt 1, s.1–2). Wniosek: 0,4–1,0 MWp to ok. 2 000–5 000 m² modułów (ok. 200 W/m²), więc dach dominanty nie wystarczy i PV musi wejść w elewacje. To przesądza o charakterze elewacji <!-- dodane przez weryfikatora -->;
   - wentylacja z rekuperacją i klimatyzacja we wszystkich strefach, centrale na piętrze technicznym;
   - BMS/EMS (PU s.13–14; M.12).
 - **Woda**:
@@ -339,7 +370,8 @@ Przy podziale 60% K / 40% M (założenie) i normatywie 1 miska/20 K oraz 1 miska
 - warstwy dachu i attyka ok. 1,0–1,2 m.
 
 **Liczba kondygnacji wynikająca z wysokości**:
-- **Dominanta**: P+7+Sejmik ≈ 38 m, P+8+Sejmik ≈ 42 m (MPZP wymaga 35–45 m). Daje to **9–10 kondygnacji nadziemnych**; Sejmik jest najwyższy.
+- **Dominanta**: P+7+Sejmik ≈ 39 m (38,7–39,4), P+8+Sejmik ≈ 42–43 m (42,4–43,1) <!-- poprawione przez weryfikatora: przeliczone z podanych wysokości kondygnacji; było ≈38 i ≈42 --> (MPZP wymaga 35–45 m). Daje to **9–10 kondygnacji nadziemnych**; Sejmik jest najwyższy.
+- **Uwaga weryfikatora** <!-- dodane przez weryfikatora -->: 0,7 m na strop i instalacje przy pełnej wentylacji mechanicznej i klimatyzacji (PU s.13) to mało. Realnie potrzeba 3,8–3,9 m na kondygnację biurową. Przy 3,9 m: P+7+Sejmik ≈ 40,5 m, P+8+Sejmik ≈ 44,4 m – nadal ≤ 45 m, ale zapas dla P+8 spada do ok. 0,6 m.
 - **Skrzydła**: P+4 ≈ 20,6 m (≥18 i ≤22 m wg PU), P+5 ≈ 24,3 m (≤25 m wg MPZP; powyżej 22 m z PU, ale dopuszczalne wg Wyj.3/10). Daje to **5–6 kondygnacji**.
 
 **Liczba kondygnacji przy PC nadziemnej ≈ 14 000 m² i jednolitej kondygnacji typowej**:
@@ -362,11 +394,13 @@ Przy podziale 60% K / 40% M (założenie) i normatywie 1 miska/20 K oraz 1 miska
 
 ### 12.3 Moduł i elastyczność
 
-Moduł elewacyjny **1,35 m** z głębokością pokoju netto ok. 5,9 m daje dokładnie:
-- **24 m²** z 3 modułów (4,05 m);
-- **32 m²** z 4 modułów (5,40 m) przy **tej samej głębokości traktu**.
+~~Moduł elewacyjny **1,35 m** z głębokością pokoju netto ok. 5,9 m daje dokładnie 24 m² z 3 modułów (4,05 m) i 32 m² z 4 modułów (5,40 m).~~
 
-Pozwala to swobodnie przesuwać GW i zamieniać magazynki na biura. Trakt dwustronny ma ok. 15 m głębokości (2×5,9 m + korytarz 1,8–2,0 m + ściany). Sekretariaty i gabinety można łączyć drzwiami w obrębie modułu.
+**Poprawka weryfikatora** <!-- poprawione przez weryfikatora -->: 4,05 m i 5,40 m to wymiary **osiowe**. Po odjęciu ścianki działowej (ok. 0,125 m) szerokość netto wynosi ok. 3,93 m i 5,28 m, a przy głębokości netto 5,9 m pokój ma tylko **ok. 23,2 m² i 31,1 m²**, czyli mniej niż obligatoryjne 24 m² powierzchni użytkowej (Wyj.3/17). Wersje poprawne (wniosek):
+- moduł **1,35 m** i głębokość pokoju netto **≥ 6,15 m**: 3,925 × 6,15 ≈ **24,1 m²**; 5,275 × 6,15 ≈ **32,4 m²**;
+- albo moduł **1,40 m** i głębokość netto **5,9 m**: 4,075 × 5,9 ≈ **24,0 m²**; 5,475 × 5,9 ≈ **32,3 m²**.
+
+W obu wersjach GW (4 moduły) i pokoje 24 m² (3 moduły) mają tę samą głębokość traktu. Pozwala to swobodnie przesuwać GW i zamieniać magazynki na biura. Trakt dwustronny ma w świetle ok. 14,0–14,5 m (2 × 5,9–6,15 m + korytarz 1,8–2,0 m + ściany korytarza); z elewacjami ok. 15 m. Sekretariaty i gabinety można łączyć drzwiami w obrębie modułu.
 
 ### 12.4 Budżet (orientacyjnie, do weryfikacji w module kosztowym F.14.B)
 
@@ -396,3 +430,15 @@ Przy PC nadziemnej 14 000 m² i podziemnej ok. 5 800 m² wychodzi **ok. 142–18
 2. Pojemność i parametry MDS (rozp. MSWiA z 9.07.2025), wymagana liczba punktów ładowania EV, dźwig dla ekip ratowniczych i szerokości ewakuacyjne (moduł prawny W3).
 3. Lokalizacja piętra technicznego bez kolizji z wymogiem „sala obrad na najwyższym piętrze”.
 4. Realne wskaźniki kosztowe 2026 dla budynku zeroemisyjnego (moduł kosztowy).
+5. Minimalna szerokość biegów i spoczników (WT §68 ust. 1), parametry dźwigu dla ekip ratowniczych (moduł prawny W3). <!-- dodane przez weryfikatora -->
+6. Czy publiczność mieści się w 100 miejscach sali obrad (PU s.6) – przyjąć wariant odporny na obie interpretacje (moduł koncepcja). <!-- dodane przez weryfikatora -->
+7. Powierzchnia i orientacja elewacji pod PV 0,4–1,0 MWp przy bilansie energii z M.12 (moduł energia i elewacje). <!-- dodane przez weryfikatora -->
+
+---
+
+## 14. Weryfikacja (2026-11-16) <!-- dodane przez weryfikatora -->
+
+- Zał. 1 (71 wierszy i wiersz „Suma”) porównany z obrazem strony PU s.19 (PDF s.20): **zgodny co do wartości**. Liczby pokoi przeliczone ręcznie dla wszystkich 13 bloków: 187 pokoi (179 × 24 m² i 8 × 32 m²), 4 552 m², 569 stanowisk – **zgodne**.
+- Skrypt `_build_program.py` odtwarza YAML i CSV bajt w bajt; sumy bloków, PU 8 582, US 1 217, RU 550, KW 2 570, PC 14 680 i zakresy 9 282–11 938 m² przeliczone ponownie – **zgodne**.
+- Cytaty sprawdzone dosłownie: Wyj. 3, 4, 6, 7, 8, 10, 16, 17, 18, 20, 21; Reg. II, III.1–3, VII.2, VIII.1; MPZP §6 pkt 3, §13, §26; M.12; M.13 s.80–81, 202, 204, 218–220; F.15.A/B/C; F.14.B; wersja STARTY (450 os., kolumny 36/304).
+- Poprawki oznaczono w tekście komentarzem „poprawione / dodane przez weryfikatora”. Lista zmian w YAML jest w `meta.weryfikacja.poprawki`.

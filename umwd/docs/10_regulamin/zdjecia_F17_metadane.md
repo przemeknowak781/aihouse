@@ -78,7 +78,7 @@ Specyfikacja kamery szerokokątnej DJI Air 3 (https://www.dji.com/air-3/specs, d
 
 ## 3. Relacja F.17 ↔ oryginały M.10 (ustalone pomiarem)
 
-W `M.10. ZDJĘCIA OTOCZENIA` są pliki o tych samych nazwach co źródła F.17: `DJI_20251029113800_0009_D.jpg` i `DJI_20251029115736_0025_D.jpg`. Mają po 4000 × 2816 px i usunięte metadane. Dopasowanie SIFT i RANSAC (podobieństwo, 3377 i 3510 punktów zgodnych) dało:
+W `M.10. ZDJĘCIA OTOCZENIA` są pliki o tych samych nazwach co źródła F.17: `DJI_20251029113800_0009_D.jpg` i `DJI_20251029115736_0025_D.jpg`. Mają po 4000 × 2816 px i okrojone metadane: zostały tylko daty (DateTimeOriginal/Digitized, SubsecTime) i Orientation, brak GPS i danych DJI w XMP. <!-- poprawione przez weryfikatora: było „usunięte metadane”; sprawdzono PIL --> Weryfikator potwierdził relację niezależnie: F.17 pomniejszone ÷2,5 i porównane z oknem M.10 (264,552) / (228,582) daje korelację 0,995 (A) i 0,990 (B) przy przesunięciu 0 px. <!-- poprawione przez weryfikatora: kontrola niezależna --> Dopasowanie SIFT i RANSAC (podobieństwo, 3377 i 3510 punktów zgodnych) dało:
 
 | | F.17.A | F.17.B |
 |---|---|---|
@@ -114,6 +114,11 @@ Korzyść: M.10 pokazuje szerszy kontekst poza kadrem F.17. Można z niego doczy
    - Treść obrazu odpowiada kierunkowi osi ≈ **FlightYaw**: A ≈ 286°, B ≈ 54,4°.
    - Dla modelu f = 3750 px, kierunku 286°, pitch −12,9° i pozycji GPS rzut krawędzi terenu w F.17.A wypada w odległości ok. 100–250 px od położenia widocznego na zdjęciu (§5). Wynik jest spójny.
    - *Hipoteza:* EXIF opisuje jedną klatkę składową panoramy, prawdopodobnie skrajną kolumnę siatki 3×3, a nie wirtualną kamerę całego obrazu.
+
+**Kontrola weryfikatora** <!-- poprawione przez weryfikatora: nowa uwaga -->:
+- Azymut z kamery A (51,108317 N; 17,055470 E) na katedrę (51,1142 N; 17,0464 E) wynosi ≈ 315,9°, a na środek terenu ≈ 274,5°. Różnica to ≈ 41,4°. Przy osi w x = 4340 i f = 3800 px rzut daje 29,2° + 12,5° = 41,6°. Dla pojedynczej klatki (f ≈ 6940 px) byłoby to tylko ≈ 24°. Obs. 3 jest więc spójna.
+- Kierunek osi wyliczony z położenia terenu i katedry w kadrze wynosi ≈ 285–286° (A) i ≈ 53° (B). To zgadza się z FlightYaw (286,0° / 54,4°), a nie z GimbalYaw (270,8° / 39,2°).
+- **Zastrzeżenie:** obs. 2 (horyzont) używa pitch z EXIF. Jeśli zgodnie z hipotezą EXIF opisuje jedną klatkę składową, pitch nie musi dotyczyć osi wirtualnej kamery. Obs. 2 nie jest więc w pełni niezależna od hipotezy, a f z horyzontu (3530/3980 px) trzeba traktować jako orientacyjne. Najmocniejszą przesłanką pozostaje obs. 3.
 
 **Wniosek, wysokie prawdopodobieństwo:** podkłady F.17 to panoramy szerokokątne zszyte w dronie. Dlatego:
 - **nie wolno ustawiać kamery wizualizacji na 24 mm z EXIF**;
@@ -158,10 +163,10 @@ Współrzędne px odnoszą się do **oryginalnej rozdzielczości** pliku: x od l
 
 | Obiekt | px (x0–x1, y0–y1) | Uwagi |
 |---|---|---|
-| **Teren inwestycji – część widoczna** (trawnik z drzewami między szczytem WS 5 a łukiem ul. Wybrzeże Słowackiego) | wielobok **(3264,2400) – (4030,2420) – (4045,2585) – (3264,2705)** | Ok. 780 × 300 px. Dolna krawędź to ulica nadbrzeżna (Wybrzeże Słowackiego, odcinek wzdłuż rzeki). Górna krawędź to ul. Mazowiecka przechodząca w łuk Wybrzeża Słowackiego. Teren jest **mały w kadrze, ok. 9% szerokości**. |
+| **Teren inwestycji – część widoczna** (trawnik z drzewami między szczytem WS 5 a łukiem ul. Wybrzeże Słowackiego) | wielobok **(3264,2400) – (4030,2420) – (4045,2585) – (3264,2705)** | Ok. 780 × 300 px. Dolna krawędź to ulica nadbrzeżna (Wybrzeże Słowackiego, odcinek wzdłuż rzeki). Górna krawędź to ul. Mazowiecka przechodząca w łuk Wybrzeża Słowackiego. Teren jest **mały w kadrze, ok. 9% szerokości**. **Uwaga weryfikatora:** na kadrze trawnik kończy się po prawej ok. x ≈ 3890. Pas x ≈ 3890–4010 to jezdnia łuku Wybrzeża Słowackiego z autobusami. Prawe wierzchołki (4030; 2420) i (4045; 2585) leżą więc prawdopodobnie poza Obszarem inwestycji, ok. 140 px poza deklarowaną tolerancją. Przed photomatchingiem trzeba to sprawdzić z M.04. <!-- poprawione przez weryfikatora --> |
 | Teren – część zasłonięta przez WS 5 (podwórze, ogródki) | ok. x 2900–3264, y 2330–2400 | Niewidoczny. Projektowana bryła wyższa niż WS 5 będzie częściowo widoczna nad dachem kamienicy. |
 | Wybrzeże Słowackiego 5 (kamienica przy rzece, szczyt północny zwrócony do terenu) | 2904–3253, 2331–2725 | Ściana szczytowa na x ≈ 3253. Kalibrator skali: elewacja ma ok. 290–330 px wysokości. |
-| Mazowiecka 19 (biała, mural na szczycie zwróconym do terenu) | 2600–2915, 2140–2325 | Okna w szczycie przewidziano do likwidacji (W-004). |
+| Mazowiecka 19 (szara kamienica, kolorowy mural na szczycie zwróconym do terenu; biały budynek z czerwonym dachem tuż na lewo, x ≈ 2400–2610, to już Mazowiecka 17) <!-- poprawione przez weryfikatora: było „biała”; na kadrze kamienica jest szara, spójnie z opisem F.17.B --> | 2600–2915, 2140–2325 | Okna w szczycie przewidziano do likwidacji (W-004). |
 | Mazowiecka 17 (UMWD, czerwony dach) i dalsza pierzeja | ok. 1800–2625, 2137–2381 | |
 | Duży biały budynek przy rzece po lewej | ok. 100–1700, 2100–2800 | Prawdopodobnie zabudowa Wybrzeża Słowackiego dalej na południe (*niezweryfikowane*). |
 | Most Grunwaldzki – pylon zachodni (przy terenie) | 4537–4800, 2166–2456 | |
