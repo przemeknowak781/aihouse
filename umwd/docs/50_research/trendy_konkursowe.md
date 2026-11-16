@@ -10,7 +10,8 @@
 ## 0. Metryka, metoda, zasady
 
 ### 0.1 Zakres
-- 18 rozstrzygniętych postępowań z lat 2021–2026 oraz 1 pomocnicze (XI 2020). 10 z Polski, 9 z Europy (DE, CH, CZ, BE/UE).
+- 17 rozstrzygniętych postępowań z lat 2021–2026 oraz 1 pomocnicze (XI 2020), razem 18. 9 z Polski (P1–P9), 9 z Europy (E1–E9: DE, CH, CZ, BE/UE). <!-- poprawione przez weryfikatora: wcześniej „18 + 1 = 19, w tym 10 z Polski”, a plik zawiera 9 kart PL i 9 kart EU -->
+- Uwaga o typie procedur: Kreuzlingen (Studienauftrag) i Zehlendorf (Gutachterverfahren) były procedurami **nieanonimowymi** z prezentacjami zespołów przed jury. Dynamika oceny różni się od anonimowego konkursu SARP. <!-- poprawione przez weryfikatora -->
 - Typy: ratusze, siedziby administracji samorządowej (w tym siedziba urzędu marszałkowskiego innego województwa), parlament (UE), landratsamt i budynki kultury w historycznych śródmieściach, które organizował samorząd wojewódzki albo które oceniali sędziowie SARP.
 - Do każdego postępowania zebrano zwycięzcę, dosłowne cytaty z werdyktu, cechy formy, to, co sąd skrytykował, oraz (o ile źródło na to pozwala) cechy prezentacji.
 
@@ -30,14 +31,16 @@
 1. **Błąd selekcji.** Do próby trafiły postępowania z opublikowanym werdyktem. Polskie zawiadomienia o wynikach bywają lakoniczne, bo zawierają 3–10 zdań na pracę. Niemieckie i szwajcarskie protokoły są pełniejsze.
 2. **Werdykt racjonalizuje decyzję po fakcie.** Rönn (2012) pokazuje, że oświadczenie jury jest pisemną krytyką, która uzasadnia decyzję i ma ją zakomunikować. Nie jest zapisem całego procesu [N]. Cytaty mówią więc, *jak jury chce, by decyzję rozumiano*.
 3. **Część „trendów” to wymogi regulaminów, a nie preferencje jury.** Dotyczy to zwłaszcza drewna i certyfikacji (np. BNB Gold w Berlinie).
-4. Próba jest mała (19). Liczebności w rozdz. 4 są orientacyjne i nie mają wartości statystycznej.
+4. Próba jest mała (18). Liczebności w rozdz. 4 są orientacyjne, nie mają wartości statystycznej i wynikają z własnego kodowania autora (bez tabeli kodowania nie da się ich odtworzyć). <!-- poprawione przez weryfikatora -->
+5. **Stronniczość źródła dla drewna:** dane o Karlsruhe pochodzą z publikacji promocyjnej Holzbau-Offensive BW („Holzbau in Wettbewerben”), która z założenia zbiera przykłady drewniane. <!-- poprawione przez weryfikatora -->
+6. **Procedury nieanonimowe** (Kreuzlingen, Zehlendorf) obejmowały prezentacje ustne zespołów. Wnioski o „przekonywaniu jury” przenoszą się na anonimowy konkurs SARP tylko częściowo. <!-- poprawione przez weryfikatora -->
 
 ---
 
 ## 1. Streszczenie dla zespołu (10 wniosków)
 
 1. **Sądy nagradzają „właściwą skalę + czytelność publiczną + sprawność”, a nie ikonę.** Najczęstsze słowa pochwały to: *ponadczasowy, powściągliwy, elegancki, właściwa skala, otwartość, transparentność*. Formy „progresywne”, „organiczne” i „dominujące” dostają wyróżnienia albo niższe nagrody (Oświęcim 2025, Zehlendorf 2021, Piaseczno 2024, Kraków 2026). [pewność: wysoka]
-2. **Budynek ma być rozpoznawalny jako dom publiczny.** Zwycięzcy w Kreuzlingen i Bonn są chwaleni za to, że są „als öffentliches Haus erkennbar” i „als öffentliches Gebäude ablesbar”. W Berlinie brak tej cechy był jednym z zarzutów wobec zwycięzcy (wg relacji Bauwelt [W], pełnego tekstu nie odczytano). Zwykle wystarcza jeden silny znak, np. łuki lub podcienie przy wejściu, albo sala rady widoczna nad wejściem. [wysoka]
+2. **Budynek ma być rozpoznawalny jako dom publiczny.** Zwycięzcy w Kreuzlingen i Bonn są chwaleni za to, że są „als öffentliches Haus erkennbar” i „als öffentliches Gebäude ablesbar”. W Berlinie brak tej cechy miał być jednym z zarzutów wobec zwycięzcy, ale to tylko relacja Bauwelt [W]: weryfikator nie znalazł tego zarzutu w tekście jury na berlin.de, więc **traktować jako niepotwierdzone**. <!-- poprawione przez weryfikatora --> Zwykle wystarcza jeden silny znak, np. łuki lub podcienie przy wejściu, albo sala rady widoczna nad wejściem. [wysoka]
 3. **Parter należy do obywateli.** W ≥12 z 19 postępowań sąd wprost docenia publiczny parter, pasaż lub plac wejściowy (forum, hala obsługi, biblioteka, kawiarnia, przejście przez kwartał). [wysoka]
 4. **Sala obrad jest symbolem, ale ocenia się ją także funkcjonalnie.** Dostęp tylko klatką drugorzędną albo wątpliwa dostępność to wytknięte błędy (Berlin 2. nagroda, Oświęcim 2. nagroda). Nagradzane są sala jako „Blickfang” nad wejściem (Bonn), sala z foyer i tarasem (Berlin) oraz sala z wizualnym połączeniem z miastem (Parlament UE). [wysoka]
 5. **Kontekst w historycznym otoczeniu to twórcza interpretacja, a nie kopia.** Werdykt z Wadowic (2025) mówi o odniesieniu do pierwotnej formy, czyli jej gabarytów, proporcji i detalu, które jury chwali tak: „nie odtwarza jej, lecz twórczo interpretuje”. Karane są: przeskok skali („erdrückend”), materiał „zu fremd” i fasada „zu wuchtig” (Kreuzlingen 2024). [wysoka]
@@ -45,7 +48,7 @@
 7. **Szkło: ostrożnie.** Jury zwracają uwagę na przegrzewanie i koszty eksploatacji pełnych przeszkleń (Berlin), na „lustro” i soczewkę wklęsłej szklanej fasady oraz na to, że szkło w dzień przestaje być przejrzyste (Kraków). Przejrzystość władzy lepiej pokazać przestrzenią (hol, pasaż, widok na salę) niż ścianą kurtynową. [wysoka]
 8. **Ekologia oceniana jest za spójność, nie za gadżety.** Nagradzane są: hybryda drewno–beton na masywnym cokole, prefabrykacja, elastyczny raster, ponowne użycie i design for disassembly, retencja i odpieczętowanie terenu. Karane są: sprzeczność między narracją low-tech a podwójną fasadą (Bonn), mnogość rozwiązań eko o wątpliwej trwałości finansowej (Piaseczno) i nierealne deklaracje typu „stal bez CO2” (Berlin). [wysoka]
 9. **Koszt i racjonalność konstrukcji pojawiają się w ≥7 werdyktach**, także zwycięskich: „racjonalne i ekonomicznie uzasadnione”, „einer der Wirtschaftlichsten”. Projekt na górnej granicy kosztów przegrywa przy porównywalnej jakości. [wysoka]
-10. **Prezentacja: wiarygodność wygrywa z efekciarstwem.** Sąd w Krakowie wprost zastrzegł, że wieczorne wizualizacje z ciepłym foyer nie mogą ukrywać dziennej nieprzejrzystości szkła. Badania wskazują, że jury „przenosi” projekt na realne miejsce (Svensson 2012), że wizualizacje budują mit „atrakcyjnego miasta” (Bern 2022) i że zgodność tekstu z rysunkiem przekonuje (Menon & Vanderburgh 2014). Zwycięskie prace w DE i CH pokazują spokojny, dzienny realizm z sąsiadami w kadrze i zdjęcia białej makiety. [średnia–wysoka]
+10. **Prezentacja: wiarygodność wygrywa z efekciarstwem.** Sąd w Krakowie wprost zastrzegł, że wieczorne wizualizacje z ciepłym foyer nie mogą ukrywać dziennej nieprzejrzystości szkła. Badania wskazują, że jury „przenosi” projekt na realne miejsce (Svensson 2012), że wizualizacje budują mit „atrakcyjnego miasta” (Bern 2022) i że ścisła zgodność wypowiedzi ustnej zespołu z planszami pomogła wygrać w jednym nieanonimowym konkursie belgijskim (Menon & Vanderburgh 2014; przeniesienie na zgodność „opis–plansza” w anonimowym konkursie to wniosek, nie wynik badania). <!-- poprawione przez weryfikatora --> Uwaga: zwycięska praca w Krakowie miała wieczorne wizualizacje foyer i mimo to wygrała 12/16 głosów. Uwaga sądu to zalecenie do dalszych prac, a nie kara. <!-- poprawione przez weryfikatora --> Zwycięskie prace w DE i CH pokazują spokojny, dzienny realizm z sąsiadami w kadrze i zdjęcia białej makiety. [średnia–wysoka]
 
 ---
 
@@ -62,7 +65,7 @@
 | P7 | Wadowickie Centrum Kultury, SARP Kraków (2025) | kultura, rozbudowa historycznego budynku | Kozień Architekci | „nie odtwarza jej, lecz twórczo interpretuje” gabaryty, proporcje i detal | nowa kubatura sprzężona z historyczną formą | [O] |
 | P8 | Teatr Polskiej Opery Królewskiej, Warszawa (IX 2023) | kultura, Oś Stanisławowska / Łazienki | Stelmach i Partnerzy (Lublin) | zwarta bryła wpisana w działkę; „indywidualny charakter”; „nowa tożsamość miejsca zharmonizowana z historyczną przestrzenią” | trapez, wielowarstwowe grube elewacje, „metaforyczny las” | [W] (PAP) |
 | P9 | Odbudowa Pałacu Saskiego, Pałacu Brühla i kamienic przy Królewskiej (X 2023) | rekonstrukcja pierzei, Senat i Mazowiecki UW | WXCA | brak opublikowanego uzasadnienia; regulamin narzucał rekonstrukcję elewacji wg stanu z 31.08.1939 | kontrprzykład: rekonstrukcja z woli zamawiającego | [O] |
-| E1 | Rathaus der Zukunft, Berlin-Mitte (IV 2025) | ratusz dzielnicy, Alexanderplatz | Atelier Schmelzer Weber (Drezno) | „zurückhaltend-elegante städtebauliche Setzung”; „klare städtebauliche Ordnung”; „markante Fassadengestaltung”; publiczny parter; foyer i taras przy sali BVV; jednomyślnie | cokół + blok + wieża 18 kond., 68,7 m; elewacja z wapienia muszlowego (Berliner Muschelkalk) wg jury | [O] |
+| E1 | Rathaus der Zukunft, Berlin-Mitte (IV 2025) | ratusz dzielnicy, Alexanderplatz | Atelier Schmelzer Weber (Drezno) | „zurückhaltend-elegante städtebauliche Setzung”; „klare städtebauliche Ordnung”; „markante Fassadengestaltung”; publiczny parter; foyer i taras przy sali BVV; (jednomyślność niepotwierdzona w źródle oficjalnym) <!-- poprawione przez weryfikatora --> | cokół + blok + wieża 18 kond., 68,7 m; elewacja z wapienia muszlowego (Berliner Muschelkalk) wg jury | [O] |
 | E2 | Erweiterung Rathaus Zehlendorf, Berlin (IX 2021) | rozbudowa zabytkowego ratusza | MLA+ z Lohrengel Landschaft | ratusz „respektvoll” obramowany; „ausgewogene Höhenentwicklung”; centralny plac; usługi publiczne w parterach | zespół pojedynczych brył wokół placu | [O] |
 | E3 | Zukunft des Stadthaus-Areals, Bonn (V 2026) | przebudowa ratusza z 1978 r. w centrum | SCOPE Architekten (Stuttgart) + ORplan + Pfrommer + Roeder | Stadthaus „als öffentliches Gebäude ablesbar”; nowa sala rady „Blickfang” nad wejściem; foyer i forum; przepuszczalność | adaptacja wież, nowa elewacja, publiczny cokół | [O] |
 | E4 | Stadthaus Kreuzlingen (CH, IV 2024) | administracja miasta między zabytkami | Romero Schaefle Partner | dom publiczny rozpoznawalny; „vier elegante Bögen”; zabytki „respektiert”; konstrukcja logiczna; „einer der Wirtschaftlichsten” | dziedziniec z halą obsługi, cokół betonowy + prefabrykowana konstrukcja drewniana, 4 łuki | [O] |
@@ -89,7 +92,7 @@
   - „dobór materiałów są racjonalne i ekonomicznie uzasadnione. Zwraca uwagę konsekwentnie zaprojektowany system prefabrykowanych fasad.”
   - „ponadczasowy wyraz architektoniczny nowego Ratusza, dobre proporcje bryły i fasad nadają mu uniwersalną wartość i dają szansę na długie trwanie.”
 - **Co przegrało:** II nagroda (Artur Jasiński i Wspólnicy) za „czytelnej i indywidualnie ukształtowanej formy Ratusza, stanowiącej istotną dominantę urbanistyczną”, ale „Wątpliwości… wzbudziły rozwiązania komunikacyjne wewnątrz budynku, w tym dostępność strefy Sali Rady Miasta.” Wyróżnienia przyznano za symboliczny akcent „wieży Ratuszowej” (ARE Stiasny/Wacławek) oraz za „podcień okalający całą bryłę” (M.O.C.).
-- **Wniosek:** dominanta i symbolika same nie wygrywają. Wygrywa skala, otwartość, sprawność i ekonomia, a symbolika daje co najwyżej wyróżnienie.
+- **Wniosek:** dominanta i symbolika same nie wygrywają. Wygrywa skala, otwartość, sprawność i ekonomia, a symbolika daje co najwyżej wyróżnienie. **Zastrzeżenie weryfikatora:** sąd nie krytykował II nagrody za dominantę. Wątpliwości dotyczyły „rozwiązań komunikacyjnych wewnątrz budynku, w tym dostępności strefy Sali Rady”. Wynika z tego lekcja o funkcji, a nie dowód przeciw dominancie. <!-- poprawione przez weryfikatora -->
 - **Źródło:** https://sarp.krakow.pl/wp-content/uploads/2025/09/ZAWIADOMIENIE-O-WYNIKACH-KONKURSU-Z-DNIA-11-WRZESNIA-2025r.-.pdf [O]
 
 ### P2. Rozbudowa siedziby Urzędu Marszałkowskiego Województwa Świętokrzyskiego, Kielce (SARP Kielce, dwuetapowy, ograniczony, realizacyjny)
@@ -99,7 +102,7 @@
   - „Podział brył uznano za najbardziej trafny z uwagi na relację i brak konkurencji z istniejącym skrzydłem.”
   - „Sąd konkursowy docenił również rozwiązania przestrzenne lobby i jego powiązanie z istniejącą przestrzenią publiczną.”
   - „najlepszą relację zastosowanych materiałów i kolorystyki pomiędzy budynkiem istniejącym a projektowanym”
-- **Pozostałe nagrody:** II nagroda za „oryginalną propozycję bryły obiektu przy jednoczesnej próbie zachowania spójności z obiektem istniejącym” i „arkadowe przejście”. III nagroda za „zastosowanie naturalnych materiałów”.
+- **Pozostałe nagrody:** II nagroda za „oryginalną propozycję bryły obiektu przy jednoczesnej próbie zachowania spójności z obiektem istniejącym” i „arkadowe przejście”. III nagroda za czytelny układ funkcjonalny i wnętrza, „w których zastosowanie naturalnych materiałów wpływa na wysoką jakość i estetykę przestrzeni” (czyli chodzi o wnętrza, nie elewację). <!-- poprawione przez weryfikatora -->
 - **Forma wg prasy [W]:** dwie bryły połączone przeszklonym łącznikiem, który ma być „otwartym zaproszeniem” dla mieszkańców. Projekt daje nową pierzeję ul. Targowej.
 - **Wniosek:** to najbliższy analog naszej pracy (siedziba województwa w zastanym kontekście). Sąd nagrodził skromność wobec istniejącego budynku, relację materiałową i publiczne lobby, a nie efektowność.
 - **Źródła:** https://kielce.sarp.org.pl/rozstrzygniecie-konkursu-na-opracowanie-koncepcji-rozbudowy-budynku-urzedu-marszalkowskiego-wojewodztwa-swietokrzyskiego/ [O]; https://kielce.eska.pl/120-mln-zl-na-nowa-siedzibe-urzedu-marszalkowskiego-zobacz-jak-sie-zmieni-aa-AGkF-C6YG-fQef.html [W]; https://sztuka-architektury.pl/article/18683/rozbudowa-budynku-urzedu-marszalkowskiego-wojewodztwa-swietokrzyskiego-w-kielcach-konkurs-architektoniczny [W]
@@ -131,10 +134,10 @@
 
 ### P5. Urząd Miasta i Gminy Piaseczno + Centrum Kultury (SARP Warszawa, dwuetapowy, realizacyjny)
 - **Fakty:** wyniki 21.05.2024, 5 prac w II etapie, limit kosztów 318 081 000 zł brutto. I nagroda: JSK Architekci + HPP Architekten. II nagroda: JEMS. III nagroda: P2PA + LAN. [W, archikonkurs.pl, cytaty z werdyktu]
-- **Pochwały:** spójny kwartał, który „odpowiada specyfice miejsca”, „zszywanie miasta”, foyer otwarte na park i miasto oraz ratusz rozwiązany „przemyślanie i bardzo efektywnie” (wg wyników wyszukiwania).
+- **Pochwały (I nagroda):** spójny kwartał, który „odpowiada specyfice miejsca”, „zszywanie miasta”, foyer otwarte „zarówno w stronę parku jak i miasta” oraz „poszukiwania współczesnego wyrazu architektonicznego przy jednoczesnym poszanowaniu historycznej parcelacji”. <!-- poprawione przez weryfikatora: zdanie o ratuszu rozwiązanym „przemyślanie i bardzo efektywnie” dotyczyło III nagrody (P2PA/LAN), nie zwycięzcy -->
 - **Kary (cenne):**
   - JEMS: „zbyt rozbudowaną komunikację wewnętrzną obiektu”, słabsza jakość fasad ratusza i wątpliwość, czy mnogość rozwiązań eko i materiałów da się utrzymać finansowo.
-  - P2PA/LAN: centrum kultury „zbyt dominująca” w drobnej tkance, fasady „zbyt schematyczne”.
+  - P2PA/LAN: centrum kultury „zbyt dominująca” w drobnej tkance. Ważne: sąd docenił tu „przemyślane i bardzo efektywne rozwiązanie budynku Ratusza” i „powściągliwą formę”, a zarazem napisał, że „Powściągliwe elewacje… mogą zostać uznane za zbyt schematyczne i nie odpowiadające skali miasta”. **Powściągliwość nie chroni przed zarzutem schematyzmu.** <!-- poprawione przez weryfikatora -->
   - Wyróżnienia: architektura „zbyt schematyczne”, forma zbyt dominująca od strony parku, niespójne fasady.
 - **Wniosek:** w drobnej tkance karane są dominacja, schematyzm i nadmiar materiałów i technologii.
 - **Źródło:** https://archikonkurs.pl/konkurs/271/ [W]
@@ -145,7 +148,7 @@
   - I nagroda za „trafne wpisanie projektu w misję, plany i potrzeby Muzeum”, materiały z odzysku dla redukcji śladu węglowego, nowe elementy w logice „design for disassembly” i zróżnicowane przestrzenie publiczne.
   - II nagroda za poszukiwanie „odwracalnych i wstrzemięźliwych ingerencji” oraz próbę „uchronienia cisu w dziedzińcu zachodnim”.
   - III nagroda za wpisanie w układ ul. Bernardyńskiej, dialog z formą szczytową, „odsłonięcie zespołu klasztornego” i próbę „ponownego użycia materiałów”.
-- **Wniosek (lokalny sygnał, średnia pewność):** wrocławscy sędziowie SARP i urzędnicy miasta od zrównoważonego rozwoju nagrodzili w historycznym kontekście cyrkularność, odwracalność i powściągliwość. Nie oznacza to, że ten sam skład oceni UMWD tak samo, ale pokazuje lokalny klimat ocen.
+- **Wniosek (lokalny sygnał, średnia pewność):** wrocławscy sędziowie SARP i urzędnicy miasta od zrównoważonego rozwoju nagrodzili w historycznym kontekście cyrkularność i odwracalność. **Korekta weryfikatora:** „wstrzemięźliwe ingerencje” i „powściągliwy charakter” chwalono przy II nagrodzie. I nagrodę opisano jako „wyraźny sygnał w przestrzeni miasta” z odważnym gestem kuratorskim (detale nieistniejących budynków na elewacji i pnącza). Lokalne jury nagrodziło więc wyrazistą, konceptualną ideę, a nie samą powściągliwość. <!-- poprawione przez weryfikatora --> Nie oznacza to, że ten sam skład oceni UMWD tak samo, ale pokazuje lokalny klimat ocen.
 - **Źródła:** https://ma.wroc.pl/workspace/bip/241220_wyniki-konkursu-sarp-nr-1060-ma.pdf [O]; https://wroclaw.sarp.pl/pokaz/wyniki-konkursu-sarp-nr-1060,766/ [O]
 
 ### P7. Wadowickie Centrum Kultury (SARP Kraków)
@@ -166,8 +169,8 @@
 - **Wniosek:** to kontrprzykład. W Polsce istnieje nurt rekonstrukcji pierzei, ale tylko wtedy, gdy narzuca ją regulamin. Nasz regulamin żąda odtworzenia pierzei „współcześnie”, więc rekonstrukcja historyzująca byłaby ryzykowna. [pewność: średnia]
 - **Źródło:** https://palacsaski.pl/en/aktualnosci/saski-palace-rebuilding-contest-results [O]
 
-### E1. Rathaus der Zukunft, Berlin-Mitte (otwarty, dwufazowy, realizacyjny; 157 prac w fazie 1, 20 w fazie 2)
-- **Fakty:** sąd obradował 9–10.04.2025. I nagroda: Atelier Schmelzer Weber (Drezno) ze Storch Landschaftsarchitektur, rekomendowana jednomyślnie do realizacji. Cel BNB „Gold”, ok. 19 412 m² powierzchni użytkowej, koszt 114,08 mln € brutto. [O]
+### E1. Rathaus der Zukunft, Berlin-Mitte (otwarty, dwufazowy, realizacyjny; 20 prac w fazie 2; liczba 157 w fazie 1 niepotwierdzona na berlin.de) <!-- poprawione przez weryfikatora -->
+- **Fakty:** sąd obradował w fazie 1 5–6.12.2024 i w fazie 2 9–10.04.2025. I nagroda: Atelier Schmelzer Weber (Drezno) ze Storch Landschaftsarchitektur (jednomyślności nie potwierdzono w źródle oficjalnym). <!-- poprawione przez weryfikatora --> Cel BNB „Gold”, ok. 19 412 m² powierzchni użytkowej, koszt 114,08 mln € brutto. [O]
 - **Cytaty z oceny jury [O]:** „klare städtebauliche Ordnung” (cokół, punkt wysokościowy, przesunięty blok); „einem 18-geschossigen Hochpunkt mit 68,70 m Höhe”; „mit einem Naturstein (Berliner Muschelkalk) bekleidete Fassade”; „Die Haupterschließung von Rathausplatz ist städtebaulich richtig gesetzt”; „Dem BVV-Saal sind ein großzügiges Foyer und eine Außenterrasse zugeordnet.” W komunikacie dzielnicy: „zurückhaltend-eleganten städtebaulichen Setzung” i „markanten Fassadengestaltung”.
 - **Krytyka:** u zwycięzcy zbyt ciasna strefa między wejściem a schodami. Bauwelt [W] przytacza zarzut braku „Erkennbarkeit des Rathauses als Rathaus”.
   - **2. nagroda (cruu):** „Der BVV-Saal… ist leider nur über ein Nebentreppenhaus zugänglich.”, „Die Betriebskosten infolge der großen Fensterfläche… sind zu überprüfen.”, kwestionowany sens donic i PV w fasadzie.
@@ -206,7 +209,7 @@
   - Konstrukcja: masywna baza betonowa, nad nią „eine vorfabrizierte Holzstruktur” ze stropami hybrydowymi drewno–beton.
   - „Der Haupteingang erfolgt richtigerweise über den Stadthausplatz. Dessen Eingangskote ist leicht angehoben. Diese feine, kaum spürbare Massnahme stärkt die Bedeutung dieses… Gebäudes.”
   - „Die gut proportionierten Fassaden folgen der Gesetzmässigkeit des Holzsystembaus. Vier elegante Bögen zeichnen die Hauptfassade… aus und betonen deren öffentliche Bedeutung.”
-  - „Die Architektur übersetzt die Anforderungen… in ein gut funktionierendes, als öffentliches Haus erkennbares Gebäude.”
+  - „Die Architektur übersetzt die Anforderungen… in ein gut funktionierendes, als öffentliche [sic] Haus erkennbares Gebäude.” <!-- poprawione przez weryfikatora: brzmienie zgodne z oryginałem -->
   - „Im Vergleich mit den anderen Projektbeiträgen ist dieser einer der Wirtschaftlichsten.”
 - **Kary dla konkurentów [O]:**
   - „der Massstabssprung gegenüber dem Schutzobjekt wirkt immer noch erdrückend”
@@ -231,8 +234,8 @@
 - **Wniosek:** budynek administracji o regularnym rastrze, hybrydzie drewno–beton i ceramicznej lub mineralnej okładzinie to dziś kanon w DE.
 - **Źródło:** https://mlr.baden-wuerttemberg.de/fileadmin/redaktion/m-mlr/intern/dateien/publikationen/Wald/Holzbau_in_Wettbewerben_2026.pdf [O, s. 160–165]
 
-### E7. Nowy magistrat miasta Brna, CZ (międzynarodowy; wg portali 63 zgłoszenia i 11 zespołów zaproszonych)
-- **Fakty:** rada miasta zatwierdziła wyniki 15.07.2026. Zwycięzca: Tempo architekti. Projekt to otwarta budowla na planie kwadratu między Koliště a Benešovą, z atrium, pasażem publicznym, zielenią i wodą, obsługą mieszkańców na parterze, elastycznymi biurami i wentylacją naturalną (klapy na parterze i świetlik dachowy). Materiały: żelbet, metal, materiały naturalne i zieleń. Ok. 800 urzędników. [W]
+### E7. Nowy magistrat miasta Brna, CZ (międzynarodowy; 11 zespołów z 8 krajów wg Archiweb; liczba 63 zgłoszeń niepotwierdzona) <!-- poprawione przez weryfikatora -->
+- **Fakty:** rada miasta zatwierdziła wyniki 15.07.2026. Zwycięzca: Tempo architekti (wg ČTK/Archiweb wraz z Atelier 99). <!-- poprawione przez weryfikatora --> Projekt to otwarta budowla na planie kwadratu między Koliště a Benešovą, z atrium, pasażem publicznym, zielenią i wodą, obsługą mieszkańców na parterze, elastycznymi biurami i wentylacją naturalną (klapy na parterze i świetlik dachowy). Materiały: żelbet, metal, materiały naturalne i zieleń. Ok. 800 urzędników. [W]
 - **Cytat (prezydentka miasta, nie jury):** projekt „jednoznačně odpovídá na otázku, čím má být magistrát pro 21. století”. [W]
 - **Ograniczenie:** werdyktu nie analizowano. Z tego przypadku biorę tylko typologię.
 - **Źródła:** https://www.archiweb.cz/en/n/home/soutez-urcila-podobu-nove-budovy-magistratu-brna-bude-prehlednejsi-a-uspornejsi [W]; https://cc.cz/podivejte-se-na-novy-supermagistrat-v-brne-bude-to-ctverec-plny-zelezobetonu-skla-i-zelene/ [W]
@@ -253,7 +256,7 @@
 ## 4. Wzorce: co jury nagradzają, a co karzą
 
 ### 4.1 Nagradzane (orientacyjna liczba postępowań, w których sąd mówi o tym wprost)
-| Cecha | n/19 | Przykładowe sformułowania |
+| Cecha | n/18 <!-- poprawione przez weryfikatora --> | Przykładowe sformułowania |
 |---|---|---|
 | Publiczny, przepuszczalny parter / pasaż / plac / forum | ≥12 | „plac wejściowy… dostępny dla wszystkich” (Oświęcim), „lobby… powiązanie z istniejącą przestrzenią publiczną” (Kielce), „Schalterhalle… öffentliche Mitte” (Kreuzlingen), „Durchlässigkeit des Quartiers” (Bonn) |
 | Właściwa skala / powściągliwość / proporcja / ponadczasowość | ~8 | „ponadczasowy wyraz”, „zurückhaltend-elegant”, „powściągliwość i elegancja proporcji”, „skromna, jednoznaczna i spójna forma” |
@@ -276,12 +279,12 @@
 | Sala rady źle dostępna | Berlin (2. nagr.), Oświęcim (2. nagr.) | „nur über ein Nebentreppenhaus”, „dostępność strefy Sali Rady” |
 | Zbyt rozbudowana komunikacja wewnętrzna | Piaseczno, Oświęcim (2. nagr.) | „zbyt rozbudowaną komunikację wewnętrzną” |
 | Sprzeczna lub nierealna narracja eko, gadżety | Bonn, Berlin, Piaseczno | „erhebliche Widersprüche”, „CO2 freiem Stahl… nicht möglich” |
-| Dachy-tarasy rodzące problemy eksploatacyjne | Kraków (gmp); w Kreuzlingen jury ostrzega: „Dachterrasse würde Projekt nicht vertragen” | |
+| Dachy-tarasy rodzące problemy eksploatacyjne | Kraków (gmp: liczne dachy „mogą być… źródłem problemów technicznych i eksploatacyjnych”). W Kreuzlingen uwaga „Dachterrasse würde Projekt nicht vertragen” to zalecenie dla zwycięzcy i dotyczy formy, nie eksploatacji. <!-- poprawione przez weryfikatora --> | |
 | Uszczelnienie terenu, brak retencji, wycinka drzew | Bonn | „starke Versiegelung” |
 | Koszt na górnej granicy | Kreuzlingen, Bonn | „Kosten am obersten Ende” |
 | Wnętrza bez rangi publicznej | Kreuzlingen, Kraków | „erinnern… an eine Arztpraxis”, sanitariaty bardziej reprezentacyjne |
 
-**Wniosek ogólny:** współczesny sąd nie szuka zwycięzcy pod kątem „najbardziej spektakularnej” pracy. Szuka pracy, której nie da się zarzucić błędu w żadnym z kryteriów, a która ma przy tym jeden wyraźny, zrozumiały gest tożsamości. Zgadza się to z obserwacją Stenslund (2023) [N], że kryteria jakości w konkursach sprzyjają przewidywalności, a uczestnicy bywają najbardziej innowacyjni poza konkursami. Dla nas to strategia: **zero słabych punktów plus jedna mocna idea**.
+**Wniosek ogólny:** współczesny sąd nie szuka zwycięzcy pod kątem „najbardziej spektakularnej” pracy. Szuka pracy, której nie da się zarzucić błędu w żadnym z kryteriów, a która ma przy tym jeden wyraźny, zrozumiały gest tożsamości. Zgadza się to z obserwacją Stenslund (2023) [N], że kryteria jakości w konkursach sprzyjają przewidywalności, a uczestnicy bywają najbardziej innowacyjni poza konkursami. Dowód jest jednak słaby: to referat konferencyjny oparty na etnografii wśród projektantów, który opisuje ich percepcję, a nie decyzje jury. <!-- poprawione przez weryfikatora --> Dla nas to strategia: **zero słabych punktów plus jedna mocna idea**.
 
 ---
 
@@ -345,7 +348,7 @@
 
 ### 8.1 Co wiemy z badań [N]
 - **Svensson (2012):** dyskusja jury przebiega na trzech poziomach: wizje autorów, rzeczywiste miejsce i problem oraz to, jak projekt **wyglądałby w realnym otoczeniu**. Plany, rysunki, teksty i ilustracje działają jak retoryka wizualna. → Fotomontaże w zdjęcia z drona i widoki z poziomu człowieka przy kamienicach są dla jury kluczowe.
-- **Menon & Vanderburgh (2014):** zwycięski zespół przekonał jury m.in. ścisłą zgodnością słów z rysunkami: każdemu argumentowi odpowiadał element na planszy. → Każde twierdzenie z części opisowej powinno mieć na planszy swój rysunek lub diagram.
+- **Menon & Vanderburgh (2014):** w nieanonimowym konkursie na ośrodek dla nieletnich we Fraipont (Belgia, 2011) sukces zwycięzcy „may be at least in part attributed to the tight correspondence between their oral discourse and their documents”. → Wniosek dla anonimowego konkursu SARP (ekstrapolacja): każde twierdzenie z części opisowej powinno mieć na planszy swój rysunek lub diagram. <!-- poprawione przez weryfikatora: w oryginale chodzi o wypowiedź ustną, nie tekst opisu -->
 - **Bern (2022):** wizualizacje konkursowe promują „mit atrakcyjnego miasta”. Doświadczone jury to wie. → Nadmierna idealizacja (nierealna zieleń, tłumy, zachody słońca) obniża wiarygodność.
 - **Rönn (2012); Rönn, Braide & Koch (2024):** jury pracuje krytyką i porównaniem. Decyzja zależy od kontekstu i polityki, prac i miejsca, procesu i programu oraz zapisu w werdykcie. → Plansze muszą ułatwiać porównanie: czytelne kryteria, liczby i jednoznaczne odpowiedzi na wymagania.
 - **Kazemian & Rönn (2009):** analiza struktury, kryteriów i procesu oceny w konkursach fińskich. Ważna rola briefu i materiału wizualnego (cytowane wtórnie; pełnego tekstu nie analizowano).
@@ -368,7 +371,7 @@
 6. **Wnętrza:** hol główny i hol Sejmiku w świetle dziennym, z prawdziwymi materiałami (drewno, kamień, tynk) i widokiem na miasto. Sala Sejmiku z widokiem na Odrę i z czytelną galerią publiczności.
 7. **Makieta:** biała makieta 1:250 jest wymagana, a na planszach warto użyć renderów „białego modelu” w konwencji zdjęć makiet, bo jury jest do nich przyzwyczajone.
 8. **Diagramy:** monochromatyczne z jednym akcentem kolorystycznym. Jeden diagram na jedno kryterium sądu: (1) funkcja i program, (2) wpisanie w tkankę (pierzeja, gzyms, rytm, wysokości z liczbami), (3) idea i tożsamość, (4) zero-emisyjność (energia, woda, materiały, CO2), (5) dostępność (trasy bez barier, galeria Sejmiku), (6) koszt (tabela i kompaktowość).
-9. **Spójność tekst–rysunek:** każde zdanie opisu ma odpowiednik graficzny (Menon & Vanderburgh 2014).
+9. **Spójność tekst–rysunek:** każde zdanie opisu ma odpowiednik graficzny (inspiracja: Menon & Vanderburgh 2014, gdzie chodziło o zgodność wypowiedzi ustnej z planszami; tu to ekstrapolacja). <!-- poprawione przez weryfikatora -->
 10. **Białe tło** (wymóg), stała siatka, jedna wiodąca wizualizacja na planszę i duże marginesy. Typografia bezszeryfowa w 2 stopniach.
 
 ---
@@ -462,3 +465,17 @@
 34. CC.cz. *Nový „supermagistrát“ v Brně*, 16.07.2026. https://cc.cz/podivejte-se-na-novy-supermagistrat-v-brne-bude-to-ctverec-plny-zelezobetonu-skla-i-zelene/
 35. JDS Architects. *1st Prize European Parliament Building*. https://jdsa.eu/?p=19826
 36. TU Dresden. *Symbiose von Gegenwart und Zukunft*, 27.11.2020. https://tu-dresden.de/bu/architektur-landschaft/die-fakultaet/news/symbiose-von-gegenwart-und-zukunft
+
+---
+
+## 12. Weryfikacja źródeł (niezależny weryfikator, 2026-11-16) <!-- poprawione przez weryfikatora -->
+
+**Zakaz Inwestora:** w pliku nie ma żadnych informacji o pracach ani wynikach konkursu UMWD/Sejmik (Wrocław 2025–2026). Wszystkie wzmianki o UMWD i Sejmiku dotyczą wyłącznie naszej pracy.
+
+**Sprawdzone dosłownie w źródłach pierwotnych (PDF lub HTML, dostęp 2026-11-16):** Oświęcim 1070 (wszystkie cytaty, daty, nagrody); Kielce (cytaty I–III nagrody, data 28.07.2026; ESKA: 17 prac, 6 w finale, 120 mln zł, łącznik, ul. Targowa, 2028–2029); Kraków Filharmonia (skład sądu, cytaty, głosowania 12/16 i 3/16, zalecenia o wizualizacjach i ryflowaniu, zarzuty wobec gmp, MPVIS); praca 003 (25 m, ok. 33 m, 15–20 m); Wadowice (cytaty I i II nagrody); MA Wrocław 1060 (skład sądu, uzasadnienia I–III); Pałac Saski (12.10.2023, WXCA, 12-osobowy sąd, stan z 31.08.1939); Zehlendorf (wszystkie cytaty i przypisania, 22.09.2021, głosowanie 4:0); Kreuzlingen (wszystkie cytaty, 6 zespołów, 02.04.2024, jednomyślnie); Bonn (cytaty jury, krytyka, 120 zgłoszeń i 18 biur, 29.05.2026); Berlin (cytaty jury dla nagród 1–3, BNB Gold, 19 412 m² NUF, 114,08 mln €, zdjęcie makiety C4C, komunikat nr 156/2025 z 09.07.2025); Solothurn (tytuł, cytat, 12 z 64, 800 osób, Lichthof); Karlsruhe (MLR s. 160–165, raster 1,35 m, „zukunftsweisend”, cytat o ceramice przy 3. nagrodzie); UIA/Spaak (132/15, skład jury, brief); JDS (cytat jury, VII 2022); Europan 18 (804 prace, 47 lokalizacji, 12 krajów); Teatr POK (cytaty przez PAP); Łódź (relacja Muratora); Piaseczno (cytaty z archikonkurs); Brno (Archiweb, CC.cz: cytat prezydentki, 800 urzędników); Landtag NRW (TU Dresden).
+
+**Publikacje naukowe:** wszystkie istnieją i mają poprawne metadane. Rönn 2012 i Svensson 2012 (NA 24(1)); Kazemian & Rönn 2009 (DOI poprawny, BRI 37(2) 176–186); Bern (DOI poprawny, JUD 28(1) 114–135, online 2022, druk 2023); Menon & Vanderburgh (FORMakademisk 7(1) Art. 2); Cucuzzella (Footprint, Spring/Summer 2020, 39–62, kontekst kanadyjski); Stenslund (referat ISA 2023); Rönn, Braide & Koch 2024 (Chalmers).
+
+**Poprawione:** liczba postępowań (18, nie 19; 9 PL, nie 10); przypisanie cytatu „przemyślane i bardzo efektywne” (III nagroda w Piasecznie, nie I); wniosek z MA Wrocław (I nagroda za „wyraźny sygnał”, powściągliwość chwalona przy II); wniosek z Oświęcimia (II nagroda krytykowana za komunikację, nie za dominantę); kontekst uwagi o tarasie w Kreuzlingen; zakres badania Menon & Vanderburgh (wypowiedź ustna); III nagroda w Kielcach (materiały we wnętrzach).
+
+**Niepotwierdzone (nie znaczy fałszywe):** Berlin: 157 prac w fazie 1, jednomyślność, zarzut z Bauwelt o „Erkennbarkeit”; Brno: 63 zgłoszenia; Europan 18: trzy nurty tematu; strona MKiDN (gov.pl) była niedostępna.
