@@ -295,3 +295,105 @@ def collection(name):
     if c.name not in bpy.context.scene.collection.children:
         bpy.context.scene.collection.children.link(c)
     return c
+
+
+# ----------------------------------------------------------------------------- dodatki (kontekst 3D, 2026-11)
+def mesh_from_arrays(name, verts, faces, mat_index=None, mats=None, coll=None, smooth=False, face_attrs=None,
+                     point_attrs=None, validate=False):
+    """Szybkie tworzenie siatki (foreach_set) z tablic.
+
+    verts: (n,3) float; faces: lista list indeksów (dowolna liczba wierzchołków) albo tablica (m,k);
+    mat_index: (m,) int – indeks slotu materiału; mats: lista materiałów (sloty);
+    face_attrs / point_attrs: {nazwa: (m,) float} – atrybuty FLOAT na ścianach / wierzchołkach (do shaderów).
+    Obiekt dostaje transformację jednostkową (współrzędne obiektu = świata).
+    """
+    import numpy as np
+    V = np.asarray(verts, dtype=np.float32).reshape(-1, 3)
+    if isinstance(faces, np.ndarray) and faces.ndim == 2:
+        tot = np.full(len(faces), faces.shape[1], np.int32)
+        flat = faces.astype(np.int32).ravel()
+    else:
+        tot = np.fromiter((len(f) for f in faces), np.int32, len(faces))
+        flat = np.fromiter((i for f in faces for i in f), np.int32, int(tot.sum()))
+    start = np.zeros(len(tot), np.int32)
+    if len(tot) > 1:
+        start[1:] = np.cumsum(tot)[:-1]
+    me = bpy.data.meshes.new(name)
+    me.vertices.add(len(V))
+    me.vertices.foreach_set('co', V.ravel())
+    me.loops.add(len(flat))
+    me.loops.foreach_set('vertex_index', flat)
+    me.polygons.add(len(tot))
+    me.polygons.foreach_set('loop_start', start)
+    if mat_index is not None and len(tot):
+        me.polygons.foreach_set('material_index', np.asarray(mat_index, np.int32))
+    if smooth:
+        me.polygons.foreach_set('use_smooth', np.ones(len(tot), bool))
+    for nm, arr in (face_attrs or {}).items():
+        a = me.attributes.new(nm, 'FLOAT', 'FACE')
+        a.data.foreach_set('value', np.asarray(arr, np.float32))
+    for nm, arr in (point_attrs or {}).items():
+        a = me.attributes.new(nm, 'FLOAT', 'POINT')
+        a.data.foreach_set('value', np.asarray(arr, np.float32))
+    me.update(calc_edges=True)
+    if validate:
+        me.validate()
+    ob = bpy.data.objects.new(name, me)
+    if coll is not None:
+        coll.objects.link(ob)
+    for m in (mats or []):
+        me.materials.append(m)
+    return ob
+
+
+class NodeBuilder:
+    """Zwięzłe budowanie drzew węzłów materiału: nb = NodeBuilder(mat); n = nb.n('ShaderNodeTexNoise', Scale=4)."""
+
+    def __init__(self, mat, clear=True):
+        mat.use_nodes = True
+        self.nt = mat.node_tree
+        if clear:
+            self.nt.nodes.clear()
+        self.out = self.nt.nodes.new('ShaderNodeOutputMaterial')
+
+    def n(self, typ, props=None, **inputs):
+        node = self.nt.nodes.new(typ)
+        for k, v in (props or {}).items():
+            setattr(node, k, v)
+        for k, v in inputs.items():
+            self.set(node, k, v)
+        return node
+
+    def set(self, node, key, val):
+        sock = node.inputs[key] if not isinstance(key, int) else node.inputs[key]
+        if hasattr(val, 'bl_idname') or hasattr(val, 'links'):  # socket lub węzeł
+            src = val if hasattr(val, 'links') else val.outputs[0]
+            self.nt.links.new(src, sock)
+        else:
+            if isinstance(val, (tuple, list)) and len(val) == 3 and getattr(sock, 'type', '') == 'RGBA':
+                val = (*val, 1.0)
+            sock.default_value = val
+
+    def l(self, a, b):
+        a = a if hasattr(a, 'links') else a.outputs[0]
+        self.nt.links.new(a, b)
+
+    def math(self, op, a, b=None, clamp=False):
+        m = self.n('ShaderNodeMath', {'operation': op, 'use_clamp': clamp})
+        self.set(m, 0, a)
+        if b is not None:
+            self.set(m, 1, b)
+        return m
+
+    def mix(self, fac, a, b, blend='MIX', dtype='RGBA'):
+        m = self.n('ShaderNodeMix', {'data_type': dtype, 'blend_type': blend} if dtype == 'RGBA' else {'data_type': dtype})
+        self.set(m, 'Factor', fac)
+        ia, ib = (6, 7) if dtype == 'RGBA' else ((2, 3) if dtype == 'FLOAT' else (4, 5))
+        self.set(m, ia, a)
+        self.set(m, ib, b)
+        return m
+
+    def output(self, shader, displacement=None):
+        self.l(shader, self.out.inputs['Surface'])
+        if displacement is not None:
+            self.l(displacement, self.out.inputs['Displacement'])

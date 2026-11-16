@@ -1,5 +1,5 @@
 {
- "title": "Budget model done: reference scheme 146.3 M PLN net (2.5 % headroom) — second full basement would break the 150 M cap; EPBD date in the brief corrected (2028, not 2027)",
+ "title": "Zoning envelope modelled in 3D (max. legal volume: 18–25 m band + 35–45 m zone A); concept architects K1–K5 still drafting full schemes",
  "stages": [
   [
    "Organiser materials: download, unpack, text extraction (results files deliberately EXCLUDED)",
@@ -43,20 +43,20 @@
   ]
  ],
  "notes": [
-  "Cost model (F.14.B structure, Q2-2026 prices): 14,000 m² above ground + 3,900 m² below (1 full + partial 2nd basement) = 146.3 M PLN incl. 5 % reserve; two full basements = 152.4 M → over the non-exceedable cap. Market band for comparable public buildings ≈ 7,400–9,300 PLN/m² GFA; nearest analogue: Masovian Regional Assembly seat (2026).",
-  "Design consequences: above-ground GFA target ≤ 13,500 m²; basement = parking per MPZP minimum (~103–110 cars) + plant + civil shelter, justified deviation from '2 full basements' (Rules ch. II.2 allows reasoned deviations).",
-  "Ground: water table 3.2–3.8 m below ground, flood-hazard zone, up to 3.8 m of rubble fill → diaphragm walls + 'white tank'; critical plant above flood level.",
-  "Zero-emission: Directive (EU) 2024/1275 applies to new public buildings from 1 Jan 2028 (the brief's '2027' comes from the 2021 Commission proposal) — we design to ZEB anyway: ground-source heat pumps, no on-site combustion, district heating only as back-up, PV 0.4–1.0 MWp (roof + BIPV façade ≈ 1,300 m²).",
-  "Concepts: K3–K5 now running as parallel background agents to bypass the workflow cap; K1–K2 finishing."
+  "Envelope study (right): investment area extruded to the MPZP limits — white lines mark the minimum roof heights (18 m outside A, 35 m in A). Any roof below these lines is illegal: no low pavilions, no low link blocks.",
+  "Maximum envelope ≈ 2,544 m² × 25 m + 1,184 m² × 45 m — far above the programme (≈13,500 m² GFA), so the design task is subtraction: where to open courtyards, gardens and the Słowackiego 5 light gap.",
+  "Shadow test (SW sun) already shows the tower's long shadow falling across the bridgehead square (north) — favourable: no residential windows there.",
+  "Concept agents are computing full area schedules and Sejmik-floor layouts; the jury (5 personas) starts as soon as all five dossiers are complete.",
+  "Background: photomatch solver (F.17.A/B) and 3D context builder (neighbours LOD3, bridge, terrain, trees) running."
  ],
  "images": [
   {
-   "path": "umwd/docs/30_lokalizacja/img/most_grunwaldzki_przekroj_DD_helmy.jpg",
-   "caption": "Bridge pylons with restored helmets (M.11.F) — modelled for view no. 3"
+   "path": "umwd/render/studia/envelope_mpzp.png",
+   "caption": "MPZP envelope over context: 18–25 m band (pale) + zone A 35–45 m (red), view from NE"
   },
   {
-   "path": "umwd/raporty/img/drone_0009.jpg",
-   "caption": "Drone frame behind F.17.A — camera to be solved by PnP"
+   "path": "umwd/docs/30_lokalizacja/img/mpzp_08_schemat_ustalen_M04.png",
+   "caption": "Plan view of the same constraints (M.04 + MPZP)"
   }
  ]
 }

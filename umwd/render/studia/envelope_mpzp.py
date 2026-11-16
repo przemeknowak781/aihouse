@@ -13,7 +13,7 @@ clay = blib.mat_basic('clay', (0.82, 0.80, 0.77), rough=0.8)
 ctx = blib.mat_basic('ctx', (0.62, 0.61, 0.60), rough=0.85)
 env25 = blib.mat_basic('env25', (0.90, 0.62, 0.45), rough=0.6, alpha=1.0)
 envA = blib.mat_basic('envA', (0.70, 0.22, 0.16), rough=0.6)
-ground = blib.extrude_polygon('ground', [(-40, -80), (200, -80), (200, 200), (-40, 200)], -0.3, 0.0, blib.mat_basic('g', (0.9, 0.9, 0.88), rough=0.9))
+ground = blib.extrude_polygon('ground', [(-400, -400), (600, -400), (600, 600), (-400, 600)], -0.3, 0.0, blib.mat_basic('g', (0.9, 0.9, 0.88), rough=0.9))
 for b in S['budynki']['items']:
     pts = [tuple(p) for p in b['pts']]
     pg = Polygon(pts).buffer(0)
@@ -35,10 +35,10 @@ for g in geoms:
 blib.extrude_polygon('min35', list(inA.buffer(0.15).exterior.coords)[:-1], 34.95, 35.05, blib.mat_basic('l2', (1, 1, 1), emission=(1, 1, 1), emission_strength=2))
 # trees as simple spheres
 for t in S['zielen']['drzewa']:
-    bpy.ops.mesh.primitive_uv_sphere_add(radius=2.6 if t['typ'] == 'lisciaste' else 1.8, location=(t['e'], t['n'], 6.5), segments=16, ring_count=8)
+    bpy.ops.mesh.primitive_uv_sphere_add(radius=3.6 if t['typ'] == 'lisciaste' else 2.4, location=(t['e'], t['n'], 6.0), scale=(1,1,1.15), segments=16, ring_count=8)
     o = bpy.context.object; o.data.materials.append(blib.mat_basic('tree', (0.55, 0.62, 0.45), rough=0.9))
     bpy.ops.mesh.primitive_cylinder_add(radius=0.2, depth=5, location=(t['e'], t['n'], 2.5))
-blib.camera(sc, (205, 175, 120), (88, 40, 12), lens_mm=40, level=False)
+blib.camera(sc, (300, 250, 175), (85, 35, 10), lens_mm=55, level=False)
 sc.render.filepath = '/home/user/aihouse/umwd/render/studia/envelope_mpzp.png'
 bpy.ops.render.render(write_still=True)
 print('ok')

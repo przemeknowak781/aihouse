@@ -1,0 +1,485 @@
+{
+ "meta": {
+  "opis": "Dane liczbowe budynków sąsiednich (Mazowiecka 19, Wybrzeże J. Słowackiego 5) dla modelu 3D i analiz § 12/§ 13/§ 60 WT",
+  "data": "2026-11-16",
+  "uklad_wspolrzednych": "lokalny e/n jak model/site.json: e = Y − 6 433 500,00; n = X − 5 664 100,00 (PL-2000 strefa 6, EPSG:2177); rzędne m n.p.m. PL-EVRF2007-NH",
+  "zrodla": {
+   "M07": "00_materialy/_rozpak/5_Zalaczniki_Merytoryczne_M.01-M.14_pop.13.02.2026/M.07. INWENTARYZACJA MAZOWIECKA/M.07. INWENTARYZACJA MAZOWIECKA 19/M.07. INWENTARYZACJA MAZOWIECKA 19.pdf (DSW Projekt, 03.2021; s.3–8 rzuty, s.9 rzut dachu + opis, s.10 przekrój A-A, s.12 elewacja frontowa)",
+   "M08": "00_materialy/_rozpak/5_Zalaczniki_Merytoryczne_M.01-M.14_pop.13.02.2026/M.08. INWENTARYZACJA SŁOWACKIEGO/M.08. INWENTARYZACJA SŁOWACKIEGO/M.08. INWENTARYZACJA WYBRZEŻE SŁOWACKIEGO 5.pdf (2001; s.2 sytuacja, s.3 piwnica, s.4 parter, s.5 I p., s.6 II p., s.7 III p., s.8 poddasze/strych)",
+   "L66A": "00_materialy/_raw/Inwentaryzacja_Slowackiego_5_lok.6-6A.pdf (P. Gołub, 30.06.2023, rzut fragmentu I piętra 1:100)",
+   "EGiB_NMT": "model/site.json (obrysy EGiB z e-mapy M.02, NMT z pikiet M.02)",
+   "zdjecia": "M.10 DJI_..._0029, _0033, _0036; M.09 360°"
+  },
+  "pewnosc": "wartości oznaczone 'szac' są wnioskami (oszacowania); pozostałe – odczyt z dokumentów (± dokładność odczytu podana przy polu)"
+ },
+ "budynki": [
+  {
+   "id": "mazowiecka_19",
+   "adres": "ul. Mazowiecka 19, Wrocław",
+   "dzialka": "11/3 (obręb Południe)",
+   "rok_budowy": 1880,
+   "funkcja": "mieszkalny wielorodzinny (13 lokali mieszkalnych, 0 użytkowych)",
+   "ochrona": "MPZP § 8 ust. 1 pkt 3 i ust. 2: gabaryty, forma i pokrycie dachu, elewacje i detale; obszar wpisany do rejestru zabytków 538/A/05",
+   "obrys_egib_en": [
+    [
+     64.26,
+     6.32
+    ],
+    [
+     48.842,
+     9.683
+    ],
+    [
+     44.644,
+     -8.377
+    ],
+    [
+     60.5,
+     -7.928
+    ],
+    [
+     64.09,
+     5.7
+    ]
+   ],
+   "pole_zabudowy_m2": {
+    "M07": 259.0,
+    "EGiB_geom": 258.4
+   },
+   "pow_uzytkowa_m2": 861.55,
+   "kondygnacje": {
+    "nadziemne": 6,
+    "opis": "parter + I–IV piętro + częściowo nieużytkowe poddasze (M.07 s.9)",
+    "podziemne": 1,
+    "EGiB": 5
+   },
+   "poziom_0_00_m_npm": {
+    "wartosc": 119.24,
+    "metoda": "chodnik przed frontem 118.51 (NMT) + 0.73 (M.07 s.10: ul. Mazowiecka −0.73)",
+    "dokladnosc_m": 0.1
+   },
+   "rzedne_wzgl_0_00_m": {
+    "ul_Mazowiecka": -0.73,
+    "wejscie_zewn": -0.68,
+    "podworze": -1.15,
+    "piwnica_posadzka_szac": -2.56,
+    "parter": 0.0,
+    "I_p": 3.69,
+    "II_p": 7.46,
+    "III_p": 11.27,
+    "IV_p": 14.97,
+    "poddasze": 18.3,
+    "spoczniki": [
+     -0.85,
+     1.78,
+     5.51,
+     9.28,
+     13.05,
+     16.79
+    ],
+    "zrodlo": "M.07 s.10 przekrój A-A (piwnica: szac. z biegu 9×29×19 cm od −0,85)"
+   },
+   "wysokosci_w_swietle_m": {
+    "parter_hol": 4.03,
+    "parter_lokale": [
+     3.15,
+     3.35
+    ],
+    "I_p": 3.52,
+    "II_p": 3.54,
+    "III_p": 3.5,
+    "IV_p": [
+     3.36,
+     3.41
+    ],
+    "poddasze": [
+     1.7,
+     2.95
+    ]
+   },
+   "wysokosc": {
+    "opis_M07": "ok. 20 m (s.9)",
+    "elewacja_frontowa_wymiar_m": 20.98,
+    "elewacja_zrodlo": "M.07 s.12 wymiar 2098,21 cm (odczyt; podstawa wymiaru – prawdopodobnie teren przy fasadzie)",
+    "attyka_wzgl_0_00_m": {
+     "z_elewacji_szac": 20.25,
+     "z_przekroju_odczyt_graficzny": 21.0
+    },
+    "gora_attyki_m_npm": {
+     "zakres": [
+      139.5,
+      140.25
+     ],
+     "przyjeta_do_modelu": 139.9,
+     "dokladnosc_m": 0.4
+    },
+    "kominy_nad_attyke_m": 0.9,
+    "dach": "płaski/pulpitowy kryty papą, spadek ok. 5% w stronę podwórza (rynna od strony podwórzowej), murki attykowe z obróbką blacharską; mur ogniowy na styku z Mazowiecka 17 (M.07 s.9)"
+   },
+   "elewacja_frontowa": {
+    "ulica": "Mazowiecka (zachód)",
+    "dlugosc_m": {
+     "M07_s9_linia_fasady_odczyt": 17.15,
+     "skalowanie_elewacji_s12": 17.8,
+     "EGiB": 18.54
+    },
+    "osie_okienne": 8,
+    "okna_front_cm": "102×200 (szer.×wys. w świetle, M.07 s.3–7, oś O6)",
+    "filarki_cm": [
+     100,
+     121
+    ],
+    "pasy_poziome_nad_terenem_m_szac": {
+     "cokol": [
+      0.3,
+      1.5
+     ],
+     "pas_nad_parterem": [
+      3.6,
+      4.25
+     ],
+     "pasy_miedzykondygnacyjne": [
+      [
+       7.3,
+       8.9
+      ],
+      [
+       11.6,
+       12.7
+      ],
+      [
+       15.1,
+       16.3
+      ]
+     ],
+     "gzyms_pod_attyka": [
+      18.2,
+      18.7
+     ],
+     "attyka": [
+      20.8,
+      21.5
+     ]
+    },
+    "pasy_metoda": "WNIOSEK: wysokości poziomych linii wektorowych rysunku elewacji M.07 s.12 przeskalowane wymiarem 2098,21 cm (±0,3 m)",
+    "material": "tynk z bogatym detalem eklektycznym (obramienia okien, naczółki, gzymsy), kolor szary (zdjęcia M.10 0025, 0036)"
+   },
+   "sciana_szczytowa_pn": {
+    "od_en": [
+     48.84,
+     9.68
+    ],
+    "do_en": [
+     64.26,
+     6.32
+    ],
+    "dlugosc_m": {
+     "EGiB": 15.78,
+     "M07_wewn": 15.61
+    },
+    "azymut_normalnej_deg": 12.3,
+    "sasiednia_dzialka": "10/3 (M.07 rzuty; potwierdzone przecięciem z poligonem działki w site.json)",
+    "na_granicy_obszaru_inwestycji": true,
+    "material": "tynk na murze ceglanym; mural reklamowy (Przegląd Piosenki Aktorskiej) – zdjęcia M.10 0015/0033",
+    "okna": [
+     {
+      "kondygnacja": "parter",
+      "pomieszczenie": "0.1.2 łazienka",
+      "wym_cm": "38×60",
+      "stolarka": "drewniana biała",
+      "zrodlo": "M.07 s.3"
+     },
+     {
+      "kondygnacja": "I p.",
+      "pomieszczenie": "łazienka (wanna + kabina)",
+      "wym_cm": "38×60",
+      "stolarka": "PVC biała",
+      "zrodlo": "M.07 s.4"
+     },
+     {
+      "kondygnacja": "II p.",
+      "pomieszczenie": "łazienki/WC (dwa pomieszczenia sanitarne)",
+      "wym_cm": "38×50",
+      "stolarka": "PVC biała",
+      "zrodlo": "M.07 s.5"
+     },
+     {
+      "kondygnacja": "III p.",
+      "pomieszczenie": "łazienka (kabina, bojler)",
+      "wym_cm": "57×70",
+      "stolarka": "PVC biała",
+      "zrodlo": "M.07 s.6"
+     },
+     {
+      "kondygnacja": "IV p.",
+      "pomieszczenie": "pomieszczenie sanitarne przy kuchni (do weryfikacji)",
+      "wym_cm": "57×41",
+      "stolarka": "PVC biała",
+      "zrodlo": "M.07 s.7"
+     }
+    ],
+    "okna_polozenie_en_szac": [
+     54.9,
+     8.36
+    ],
+    "okna_polozenie_opis": "jedna oś pionowa ok. 6,2 m od narożnika frontowego (odczyt z rzutu parteru, ±0,5 m)",
+    "parapety": "brak wymiaru hp w inwentaryzacji dla okien szczytowych",
+    "status": "przeznaczone do zamurowania w ramach inwestycji towarzyszącej (M.07 strona informacyjna; Wyj. 3 odp. 13)"
+   },
+   "elewacja_podworzowa": {
+    "od_en": [
+     60.5,
+     -7.93
+    ],
+    "do_en": [
+     64.09,
+     5.7
+    ],
+    "odl_do_obszaru_inwestycji_m": [
+     5.95,
+     8.5
+    ],
+    "okna_cm": "98×205 (oś O4)",
+    "uwaga": "okna mieszkań – chronione § 13 i § 60 przy zabudowie ogródków (wniosek)"
+   }
+  },
+  {
+   "id": "wybrzeze_slowackiego_5",
+   "adres": "ul. Wybrzeże J. Słowackiego 5, Wrocław",
+   "dzialka": "12 (EGiB, obręb Stare Miasto wg e-mapy / Południe)",
+   "funkcja": "mieszkalny wielorodzinny",
+   "obrys_egib_en": [
+    [
+     101.93,
+     28.52
+    ],
+    [
+     102.0,
+     27.98
+    ],
+    [
+     102.023,
+     27.603
+    ],
+    [
+     102.071,
+     25.598
+    ],
+    [
+     102.61,
+     10.72
+    ],
+    [
+     118.626,
+     10.917
+    ],
+    [
+     118.308,
+     26.123
+    ],
+    [
+     118.3,
+     26.5
+    ],
+    [
+     118.274,
+     28.21
+    ],
+    [
+     118.27,
+     28.48
+    ],
+    [
+     118.26,
+     28.9
+    ],
+    [
+     118.0,
+     28.9
+    ],
+    [
+     117.97,
+     29.11
+    ],
+    [
+     118.17,
+     29.11
+    ],
+    [
+     118.16,
+     29.46
+    ]
+   ],
+   "przejazd_bramowy_en": [
+    [
+     [
+      102.02,
+      27.6
+     ],
+     [
+      110.16,
+      27.97
+     ],
+     [
+      118.27,
+      28.21
+     ],
+     [
+      118.31,
+      26.12
+     ],
+     [
+      105.7,
+      25.77
+     ],
+     [
+      102.07,
+      25.6
+     ],
+     [
+      102.02,
+      27.6
+     ]
+    ]
+   ],
+   "pole_zabudowy_m2_EGiB": 293.6,
+   "kondygnacje": {
+    "nadziemne": 5,
+    "opis": "parter + I–III piętro + poddasze/strych z mieszkaniem nr 12 (M.08 s.4–8)",
+    "podziemne": 1,
+    "EGiB": 5
+   },
+   "teren_przy_budynku_m_npm": {
+    "srednia": 118.99,
+    "zakres": [
+     118.62,
+     119.25
+    ]
+   },
+   "wysokosci_pomieszczen_cm_M08": {
+    "piwnica": 190,
+    "parter_pokoj103": 280,
+    "garaz118": 210,
+    "I_p": 385,
+    "I_p_lokal_6_6A_2023": 364,
+    "II_p": [
+     360,
+     380
+    ],
+    "III_p": 340,
+    "poddasze": 250
+   },
+   "poziomy_szac_m_npm": {
+    "parter": 119.75,
+    "I_p": 123.5,
+    "II_p": 127.7,
+    "III_p": 131.75,
+    "poddasze": 135.5,
+    "metoda": "WNIOSEK: teren 119,0 + 0,75 (cokół) + wysokości w świetle M.08 + stropy 0,35 m; dokładność ±0,5 m"
+   },
+   "wysokosc": {
+    "gora_szac_m_npm": 139.5,
+    "wysokosc_nad_terenem_szac_m": 20.5,
+    "zakres_m": [
+     19.8,
+     23.0
+    ],
+    "metoda": "suma kondygnacji (19,8–21,2 m) oraz pomiar proporcji na zdjęciu M.10 0029 (~22,9 m ±1,5); brak przekroju/elewacji w M.08"
+   },
+   "elewacja_frontowa": {
+    "ulica": "Wybrzeże J. Słowackiego (wschód, Odra/Oława)",
+    "dlugosc_m_EGiB": 18.55,
+    "osie_okienne_szac": 7,
+    "kondygnacja_attykowa": "rząd mniejszych okien poddasza (fryz)",
+    "material": "tynk jasny (beż/szarość) z detalem eklektycznym, parter boniowany/ciemniejszy (zdjęcie M.10 0029) – WNIOSEK z fotografii"
+   },
+   "sciana_szczytowa_pn": {
+    "od_en": [
+     101.93,
+     28.52
+    ],
+    "do_en": [
+     118.16,
+     29.46
+    ],
+    "dlugosc_m": 16.26,
+    "azymut_normalnej_deg": 356.7,
+    "sasiedztwo": "dz. 10/2 (dojazd do wnętrza podwórzowego), szer. ok. 6,0 m do granicy obszaru inwestycji",
+    "odl_lica_do_granicy_obszaru_inwestycji_m": 6.0,
+    "grubosc_sciany_przyjeta_m": 0.55,
+    "material": "tynk; obecnie wielkoformatowa siatka reklamowa (koncert J. Straussa, 18.01.2026) – zdjęcia M.10 (stan 29.10.2025)",
+    "okna": [
+     {
+      "kondygnacja": "I p. (kondygnacja 2)",
+      "lokal": "6-6A (jeden lokal dwustronny, Wyj. 6 odp. 27)",
+      "pomieszczenie": "pokój 207 – 7,02 m², H 385 (M.08 s.5); w inw. 2023: '3. pokój' 6,80 m², 2,68×2,54 m",
+      "wym_cm": "90×116",
+      "parapet_nad_podloga_m": 0.7,
+      "parapet_m_npm_szac": 124.0,
+      "parapet_dokladnosc_m": 0.5,
+      "chroniony_par13": true,
+      "zamurowanie": "NIEDOPUSZCZALNE (Wyj. 3 odp. 13; M.08 strona informacyjna)"
+     },
+     {
+      "kondygnacja": "II p.",
+      "pomieszczenie": "łazienka 306 – 7,05 m², H 360 (M.08 s.6)",
+      "wym_cm": "60×85",
+      "parapet_nad_podloga_m": 0.7,
+      "parapet_m_npm_szac": 128.4,
+      "chroniony_par13": false
+     },
+     {
+      "kondygnacja": "III p.",
+      "pomieszczenie": "łazienka 407 – 7,99 m², H 340 (M.08 s.7)",
+      "wym_cm": "80×80",
+      "parapet_nad_podloga_m": 1.5,
+      "parapet_m_npm_szac": 133.25,
+      "chroniony_par13": false
+     },
+     {
+      "kondygnacja": "poddasze (IV kondygnacja nadziemna)",
+      "pomieszczenie": "kuchnia z aneksem kuch. 505 – 12,20 m², H 250, lokal nr 12 (M.08 s.8)",
+      "wym_cm": "45×10 (odczyt niepewny; odręczna adnotacja o wentylacji kuchni)",
+      "parapet_nad_podloga_m": 1.0,
+      "parapet_m_npm_szac": 136.5,
+      "chroniony_par13": "sporny (kuchnia – pomieszczenie pomocnicze; otwór prawdopodobnie wentylacyjny)"
+     }
+    ],
+    "okna_polozenie_en_szac": [
+     110.53,
+     29.02
+    ],
+    "okna_polozenie_opis": "okna w jednej osi pionowej ok. 0,53 długości szczytu od narożnika podwórzowego (±1,0 m)",
+    "wierzcholek_par13_en": [
+     110.56,
+     28.47
+    ]
+   },
+   "lokal_6_6A": {
+    "powierzchnia_m2": 102.37,
+    "pomieszczenia": {
+     "1_pokoj_wsch": 24.99,
+     "2_pokoj_wsch": 15.01,
+     "3_pokoj_pn_szczyt": 6.8,
+     "4_pokoj_zach": 26.74,
+     "5_kuchnia_zach": 10.86,
+     "WC": 0.91,
+     "przedpokoj": 17.06
+    },
+    "h_cm": 364,
+    "zrodlo": "_raw/Inwentaryzacja_Slowackiego_5_lok.6-6A.pdf (30.06.2023)",
+    "uwaga": "w tabeli 2023 numeracja WC/przedpokój zamieniona względem rzutu"
+   }
+  }
+ ],
+ "wnioski_par13": {
+  "WS5_okno_pokoju_Ip": {
+   "h_max_nad_parapetem_przy_granicy_10_2_m": 13.1,
+   "H_max_m_npm_przy_granicy": 137.1,
+   "odl_dla_skrzydla_22m_m": 8.55,
+   "odl_dla_dominanty_m": 17.5,
+   "min_odl_wydzielenia_A_w_sektorze_m": 20.44,
+   "uwaga": "WNIOSEK: zabudowa śródmiejska (MPZP § 6 pkt 1) – § 13 ust. 4 WT; sektor ±30° od normalnej 356,7°; wierzchołek w wewnętrznym licu"
+  }
+ }
+}
