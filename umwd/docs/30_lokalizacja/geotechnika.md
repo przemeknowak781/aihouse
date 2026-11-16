@@ -61,7 +61,7 @@ Współrzędne PL-2000 z kart otworów przeliczone na układ lokalny `e = Y − 
 
 1. **Nasypy niebudowlane (warstwa N)** – do 2,80–3,80 m p.p.t.: piaski średnie, drobne i gliniaste z gruzem ceglanym, humusem i namułami gliniastymi; parametrów nie wyznaczono, „nie nadają się do bezpośredniego posadowienia – zaleca się ich wymianę” (Op. s. 11). W O-02 pod nasypem gleba (warstwa O, 3,0–3,4 m).
 2. **Holocen – piaski rzeczne tarasów zalewowych** (do 6,50–8,60 m): piaski średnie i drobne, średnio zagęszczone i zagęszczone (QhIIa1, QhIIa2, QhIIb1, QhIIb2, QhIIIa2, QhIIIb1). Lokalnie **soczewka piasku średnio zagęszczonego ID = 0,40 (QhIIb2)** w O-06 na 4,5–6,0 m (CPTu O-06: qc ≈ 7 MPa, ID 0,43).
-3. **Plejstocen – piaski i żwiry tarasów nadzalewowych** (pospółki, żwiry, piaski średnie: QpIa1 ID 0,90; QpIa2 ID 0,75; QpIIa1 ID 0,90) – miąższość ok. 8,5–10 m, bardzo zagęszczone (CPTu: qc 19–43 MPa, odmowa wciskania w O-02 i O-08 ok. 9–9,5 m).
+3. **Plejstocen – piaski i żwiry tarasów nadzalewowych** (pospółki, żwiry, piaski średnie: QpIa1 ID 0,90; QpIa2 ID 0,75; QpIIa1 ID 0,90) – miąższość ok. 7,4–10,4 m w otworach 30 m (O-01: 8,60–16,00 m = 7,4 m do soczewki gliny; O-02: 10,2 m; O-03: 10,4 m; O-04: 9,6 m – zał. 5.1–5.4) <!-- poprawione przez weryfikatora: było „ok. 8,5–10 m” -->, bardzo zagęszczone (CPTu: qc 19–43 MPa, odmowa wciskania w O-02 i O-08 ok. 9–9,5 m).
 4. **Plejstocen – gliny zwałowe (symbol konsolidacji B)** od ok. 16–17,2 m (101,8–103,4 m n.p.m.) do dna otworów 30 m: gliny piaszczyste półzwarte (QpB1, IL ≤ 0,00), twardoplastyczne (QpB2a IL 0,10; QpB2b IL 0,20), lokalnie plastyczne (QpB3a IL 0,30 – O-01, 20,5–21,5 m). Czwartorzędu nie przewiercono do 30 m.
 
 ### 2.1 Parametry charakterystyczne (Zał. 8 – wartości uśrednione)
@@ -174,7 +174,12 @@ Założenia: ±0,00 parteru ≈ 119,10–119,25 (teren 118,7–119,4; `geometria
   - wykop przy zabytkowej kamienicy na granicy;
   - budynek ~45 m.
 
-  Ostateczną kategorię określa projektant (Op. s. 13). Przy III kategorii wymagana jest **dokumentacja geologiczno-inżynierska** i projekt geotechniczny. Przed PB trzeba zaplanować rozszerzone badania: piezometry z obserwacją sezonową, badania laboratoryjne, próbne pompowania, wodę, otwory w pd. części. Uwaga: przepis kwalifikujący do III kategorii przytaczamy z pamięci, bez weryfikacji w ISAP (wyczerpany limit wyszukiwań).
+  Ostateczną kategorię określa projektant (Op. s. 13). Przy III kategorii wymagana jest **dokumentacja geologiczno-inżynierska** i projekt geotechniczny. Przed PB trzeba zaplanować rozszerzone badania: piezometry z obserwacją sezonową, badania laboratoryjne, próbne pompowania, wodę, otwory w pd. części.
+
+  <!-- poprawione przez weryfikatora --> **Weryfikacja przepisu (zastępuje wcześniejszą uwagę „przytaczamy z pamięci”):** rozporządzenie MTBiGM z 25.04.2012 w sprawie ustalania geotechnicznych warunków posadawiania obiektów budowlanych (Dz.U. 2012 poz. 463; status „obowiązujący” wg https://api.sejm.gov.pl/eli/acts/DU/2012/463, tekst: …/text.pdf, dostęp 2026-11-16):
+  - **§ 4 ust. 3 pkt 3 lit. e** – do **III kategorii** należą „obiekty wysokie, których głębokość posadawiania bezpośredniego przekracza 5,0 m lub które zawierają więcej niż jedną kondygnację zagłębioną w gruncie”. Budynek ~45 m z **2 kondygnacjami podziemnymi** (spód płyty ok. 7,5 m p.p.t.) spełnia oba warunki → **wniosek: III kategoria jest praktycznie przesądzona** (pojęcie „obiekt wysoki” nie jest w rozporządzeniu zdefiniowane – wniosek: budynek 45 m mieści się w nim w każdej rozsądnej wykładni; por. „budynek wysoki” 25–55 m w § 8 WT);
+  - § 4 ust. 2 pkt 2 – warunki „złożone” m.in. przy „nasypach niekontrolowanych” i „zwierciadle wód gruntowych w poziomie projektowanego posadawiania i powyżej tego poziomu” – oba kryteria występują (zgodnie z opinią);
+  - **§ 7 ust. 3** – dokumentację geologiczno-inżynierską wykonuje się dla III kategorii **„oraz w złożonych warunkach gruntowych drugiej kategorii”** → **DGI jest wymagana niezależnie od kategorii**, już przy kwalifikacji przyjętej w opinii (II kategoria, warunki złożone). § 7 ust. 2 – dla II i III kategorii także dokumentacja badań podłoża i projekt geotechniczny.
 
 ---
 
