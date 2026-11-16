@@ -22,13 +22,14 @@ GOLD = math.radians(137.508)
 
 TYPY = {
     # H – wysokość, cb – podstawa korony, R – promień korony, rt – promień pnia u podstawy,
-    # n1 – liczba konarów, ksztalt – obwiednia, liscie – liczba liści, ls – rozmiar liścia (m)
-    'lisc_duze': dict(H=19.0, cb=3.6, R=7.2, rt=0.36, n1=9, ksztalt='owal', liscie=19000, ls=0.21, n2=6, n3=4),
-    'lisc_srednie': dict(H=13.0, cb=2.8, R=4.8, rt=0.22, n1=7, ksztalt='owal', liscie=12000, ls=0.18, n2=5, n3=4),
-    'lisc_male': dict(H=7.0, cb=2.2, R=1.9, rt=0.09, n1=6, ksztalt='jajo', liscie=4200, ls=0.13, n2=4, n3=3),
-    'topola': dict(H=24.0, cb=2.2, R=3.0, rt=0.38, n1=26, ksztalt='kolumna', liscie=17000, ls=0.16, n2=4, n3=3),
-    'iglaste': dict(H=14.0, cb=0.8, R=3.1, rt=0.25, ksztalt='stozek', liscie=9000, ls=0.30),
-    'krzew': dict(H=2.4, cb=0.0, R=1.5, rt=0.03, n1=8, ksztalt='polkula', liscie=3800, ls=0.12, n2=4, n3=2),
+    # n1 – liczba konarów, ksztalt – obwiednia, liscie – liczba liści, ls – rozmiar liścia (m; „kępka” liści),
+    # sp – rozrzut liści wokół gałązek (m)
+    'lisc_duze': dict(H=19.0, cb=3.6, R=7.2, rt=0.36, n1=11, ksztalt='owal', liscie=52000, ls=0.27, n2=8, n3=6, sp=0.42),
+    'lisc_srednie': dict(H=13.0, cb=2.8, R=4.8, rt=0.22, n1=9, ksztalt='owal', liscie=32000, ls=0.23, n2=7, n3=5, sp=0.34),
+    'lisc_male': dict(H=7.0, cb=2.2, R=1.9, rt=0.09, n1=7, ksztalt='jajo', liscie=9000, ls=0.15, n2=5, n3=4, sp=0.2),
+    'topola': dict(H=24.0, cb=2.2, R=3.0, rt=0.38, n1=30, ksztalt='kolumna', liscie=42000, ls=0.2, n2=5, n3=4, sp=0.32),
+    'iglaste': dict(H=14.0, cb=0.8, R=3.1, rt=0.25, ksztalt='stozek', liscie=26000, ls=0.34, sp=0.2),
+    'krzew': dict(H=2.4, cb=0.0, R=1.5, rt=0.03, n1=9, ksztalt='polkula', liscie=9000, ls=0.14, n2=5, n3=3, sp=0.22),
 }
 
 
@@ -279,7 +280,7 @@ class _Gen:
         nl = int(P['liscie'] * self.g)
         idx = rng.choice(len(S), size=nl, p=Wt / Wt.sum())
         igl = self.typ == 'iglaste'
-        spread = 0.16 if igl else 0.30
+        spread = P.get('sp', 0.3)
         C = S[idx] + rng.normal(0, spread, (nl, 3))
         Dd = D[idx]
         size = P['ls'] * rng.uniform(0.7, 1.3, nl)
@@ -336,8 +337,8 @@ def mat_kora(name='kora'):
     nz = nb.n('ShaderNodeTexNoise', Scale=9.0, Detail=8.0, Roughness=0.65)
     nb.l(tc.outputs['Object'], nz.inputs['Vector'])
     ramp = nb.n('ShaderNodeValToRGB')
-    ramp.color_ramp.elements[0].color = (0.035, 0.030, 0.026, 1)
-    ramp.color_ramp.elements[1].color = (0.13, 0.115, 0.10, 1)
+    ramp.color_ramp.elements[0].color = (0.016, 0.014, 0.012, 1)
+    ramp.color_ramp.elements[1].color = (0.06, 0.052, 0.045, 1)
     nb.l(nz.outputs['Fac'], ramp.inputs['Fac'])
     bsdf = nb.n('ShaderNodeBsdfPrincipled', Roughness=0.9)
     nb.l(ramp.outputs['Color'], bsdf.inputs['Base Color'])
