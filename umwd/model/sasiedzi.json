@@ -246,7 +246,7 @@
   {
    "id": "wybrzeze_slowackiego_5",
    "adres": "ul. Wybrzeże J. Słowackiego 5, Wrocław",
-   "dzialka": "12 (EGiB, obręb Stare Miasto wg e-mapy / Południe)",
+   "dzialka": "12 (EGiB – obrys budynku w poligonie dz. 12 wg model/site.json)",
    "funkcja": "mieszkalny wielorodzinny",
    "obrys_egib_en": [
     [
