@@ -59,7 +59,7 @@ from shapely.strtree import STRtree  # noqa: E402
 from scipy.interpolate import LinearNDInterpolator  # noqa: E402
 from scipy.spatial import cKDTree  # noqa: E402
 
-from umwd.render import blib, drzewa  # noqa: E402
+from umwd.render import blib, drzewa, trawa  # noqa: E402
 from umwd.render.blib import NodeBuilder  # noqa: E402
 
 # ============================================================================================== stałe i ścieżki
@@ -90,6 +90,9 @@ DOMYSLNE = dict(
     ortofoto=True, dalsze_bryly=True, dalsze_drzewa=True,
     okna_szczytu_maz19=True,       # okna w ścianie szczytowej Mazowieckiej 19 (do zamurowania wg M.07)
     gestosc_lisci=1.0,
+    trawa_3d=True,                 # źdźbła 3D na trawnikach w pobliżu kamery (Geometry Nodes)
+    trawa_gestosc=420.0,           # kępek / m² w strefie pełnej gęstości
+    trawa_r0=9.0, trawa_r1=32.0,   # strefa pełnej gęstości / zanik do zera [m od kamery]
     seed=7,
 )
 
@@ -1028,7 +1031,9 @@ def zbuduj_teren(ctx):
         else:
             V, F = siatka_drapowana(g, lambda e, n, dz=dz: ctx.teren.z(e, n) + dz, cell=1.5, skirt=0.25)
         if len(F):
-            blib.mesh_from_arrays('teren_' + k, V, F, mats=[ctx.mat(mat)], coll=coll)
+            ob = blib.mesh_from_arrays('teren_' + k, V, F, mats=[ctx.mat(mat)], coll=coll)
+            if ctx.opts['trawa_3d'] and k in ('trawnik', 'teren'):
+                _trawa_3d(ctx, ob, k)
     # krawężniki: suma buforów linii krawężników (bez dublowania warstw BDOT500 i pomiaru)
     W = ctx.site['warstwy_emapy_surowe']['warstwy']
     kl_lines = []
@@ -1071,6 +1076,21 @@ def zbuduj_teren(ctx):
         _pryzma_drapowana(ctx, g, P, -0.3, 2.0, 'cegla')
     g.obiekt('mury_terenowe', ctx, coll)
     ctx.czas('teren', t0)
+
+
+def _trawa_3d(ctx, ob, klasa):
+    """Modyfikator trawy 3D: trawnik strzyżony (7–13 cm) lub trawa nieskoszona na terenach otwartych (10–28 cm)."""
+    if not hasattr(ctx, 'trawa_proto'):
+        m = trawa.mat_trawa_3d('K_trawa_3d_' + ctx.opts['pora_roku'], ctx.opts['pora_roku'])
+        ctx.trawa_proto = {
+            'trawnik': trawa.prototyp('kepka_trawnik', 3, m, n=14, h=(0.06, 0.12), w=0.006, lean=(0.15, 0.7)),
+            'teren': trawa.prototyp('kepka_teren', 5, m, n=12, h=(0.10, 0.28), w=0.007, lean=(0.3, 1.1)),
+        }
+        ctx.trawa_obiekty = []
+    g = ctx.opts['trawa_gestosc'] * (1.0 if klasa == 'trawnik' else 0.7)
+    trawa.dodaj(ob, ctx.trawa_proto[klasa], g, ctx.opts['trawa_r0'], ctx.opts['trawa_r1'], 1.0,
+                seed=11 if klasa == 'trawnik' else 12)
+    ctx.trawa_obiekty.append(ob)
 
 
 def _pryzma_drapowana(ctx, g, P, dz0, dz1, m, top_flat=False):
@@ -2491,7 +2511,16 @@ def ustaw_kamere(ctx_or_teren, sc, nazwa):
     cam = blib.camera(sc, (x, y, z), (tx, ty, tz), lens_mm=k['lens'], level=k['level'], shift_y=k['shift_y'],
                       name='K_' + nazwa)
     sc.render.resolution_x, sc.render.resolution_y = k['res']
+    if hasattr(ctx_or_teren, 'trawa_obiekty'):
+        trawa.ustaw_kamere(ctx_or_teren.trawa_obiekty, cam)
     return cam
+
+
+def ustaw_kamere_trawy(wynik, kamera):
+    """Po ustawieniu własnej kamery: przenosi strefę gęstej trawy 3D do tej kamery.
+    wynik – słownik zwrócony przez build_context (lub obiekt Kontekst)."""
+    ctx = wynik['ctx'] if isinstance(wynik, dict) else wynik
+    trawa.ustaw_kamere(getattr(ctx, 'trawa_obiekty', []), kamera)
 
 
 def export_preview(out_dir=None, opts=None, kamery=None, samples=28, data_godzina='2025-10-29 11:40', jpg_q=88,

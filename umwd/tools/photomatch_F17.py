@@ -19,11 +19,15 @@ Metoda (szczegoly: docs/60_wizualizacje/photomatch_F17.md):
      odrzucanie odstajacych (|r|/sigma > 3,5), walidacja krzyzowa leave-one-out dla punktow recznych.
   5. Parametry Blendera (sensor_fit HORIZONTAL, 36 mm, shift_x/shift_y z polozenia punktu glownego w kadrze F.17),
      z = H - 119,25 (+-0,00 = 119,25 m n.p.m.).
-  6. --render: test w bpy (Workbench): bryly Mazowiecka 19 i Wybrzeze Slowackiego 5-8, teren NMT, krawezniki,
+  6. --render: test w bpy (Cycles CPU, 8 probek): bryly Mazowiecka 19 i Wybrzeze Slowackiego 5-8, teren NMT, krawezniki,
      granice; nalozenie na zdjecie + kontrola numeryczna world_to_camera_view vs model otworkowy.
 
 Uzycie (pliki organizatora traktowane jako niezaufane - uruchamiac z -I):
-  /home/user/aihouse/.venv-render/bin/python -I tools/photomatch_F17.py [--kadr] [--render] [--no-img]
+  /home/user/aihouse/.venv-render/bin/python -I tools/photomatch_F17.py [--kadr] [--render] [--no-img] [--wiazace]
+  --kadr     przelicza transformacje M.10 -> F.17 z obrazow (ok. 10 s)
+  --render   test w Blenderze (bpy, Cycles CPU, ok. 1 min) + obrazy renderu testowego
+  --wiazace  przelicza punkty wiazace A/B (pobiera NMPT GUGiK ~54 MB do --cache, ok. 3-5 min);
+             bez tej opcji uzywane sa punkty zapisane w TIES_A (wynik tej procedury)
 """
 import argparse
 import json
@@ -40,7 +44,7 @@ from scipy.optimize import least_squares
 Image.MAX_IMAGE_PIXELS = None
 ROOT = Path(__file__).resolve().parents[1]
 SITE_P = ROOT / 'model' / 'site.json'
-OUT_JSON = ROOT / 'model' / 'kamery_F17.json'
+OUT_JSON = Path(os.environ.get('PHOTOMATCH_OUT', str(ROOT / 'model' / 'kamery_F17.json')))
 IMG_DIR = ROOT / 'docs' / '60_wizualizacje' / 'img'
 M10_DIR = ROOT / '00_materialy/_rozpak/5_Zalaczniki_Merytoryczne_M.01-M.14_pop.13.02.2026/M.10. ZDJĘCIA OTOCZENIA/M.10. ZDJĘCIA OTOCZENIA'
 F17_DIR = ROOT / '00_materialy/_rozpak/3.Zalaczniki_Formalne_F.01-F.17_PDF'
@@ -565,19 +569,26 @@ def blender_test(key, cam, bp, pct=50):
 
     mats = {}
 
-    def material(color):
-        key_ = tuple(round(c, 3) for c in color)
+    def material(color, opacity=1.0):
+        key_ = tuple(round(c, 3) for c in color) + (opacity,)
         if key_ not in mats:
             m = bpy.data.materials.new('m%d' % len(mats)); m.use_nodes = True
             nt = m.node_tree; nt.nodes.clear()
             em = nt.nodes.new('ShaderNodeEmission'); em.inputs['Color'].default_value = color; em.inputs['Strength'].default_value = 1.0
-            ou = nt.nodes.new('ShaderNodeOutputMaterial'); nt.links.new(em.outputs['Emission'], ou.inputs['Surface'])
+            ou = nt.nodes.new('ShaderNodeOutputMaterial')
+            if opacity < 1.0:
+                tr = nt.nodes.new('ShaderNodeBsdfTransparent'); mx = nt.nodes.new('ShaderNodeMixShader')
+                mx.inputs['Fac'].default_value = opacity
+                nt.links.new(tr.outputs['BSDF'], mx.inputs[1]); nt.links.new(em.outputs['Emission'], mx.inputs[2])
+                nt.links.new(mx.outputs['Shader'], ou.inputs['Surface'])
+            else:
+                nt.links.new(em.outputs['Emission'], ou.inputs['Surface'])
             mats[key_] = m
         return mats[key_]
 
-    def mesh_obj(name, verts, faces, color):
+    def mesh_obj(name, verts, faces, color, opacity=1.0):
         me = bpy.data.meshes.new(name); me.from_pydata([tuple(v) for v in verts], [], faces); me.update()
-        me.materials.append(material(color))
+        me.materials.append(material(color, opacity))
         ob = bpy.data.objects.new(name, me); sc.collection.objects.link(ob); ob.color = color
         return ob
 
@@ -613,7 +624,7 @@ def blender_test(key, cam, bp, pct=50):
             q = [(iy, ix), (iy, ix + 1), (iy + 1, ix + 1), (iy + 1, ix)]
             if all(k in idx for k in q):
                 Fc.append([idx[k] for k in q])
-    mesh_obj('teren_NMT', V, Fc, (0.55, 0.55, 0.5, 1))
+    mesh_obj('teren_NMT', V, Fc, (0.85, 0.85, 0.85, 1), opacity=0.35)
     for i, o in enumerate(SITE['ulice_i_sytuacja']['krawezniki_pomiar_NMT']):
         tube('kraweznik_%d' % i, np.c_[np.array(o['pts']), np.array(o['z'])], 0.12, (1.0, 0.55, 0.0, 1))
     for nm, c in (('obszar_inwestycji', (1, 0, 0, 1)), ('wydzielenie_A_mpzp', (1, 0, 1, 1))):
@@ -636,12 +647,12 @@ def blender_test(key, cam, bp, pct=50):
     R = Image.open(tmp).convert('RGBA'); os.remove(tmp)
     ph = Image.open(FILES[key][1]).convert('RGB').resize(R.size, Image.LANCZOS)
     a = np.asarray(R).astype(float) / 255.0; p = np.asarray(ph).astype(float) / 255.0
-    al = a[..., 3:4] * 0.5
+    al = a[..., 3:4] * 0.55
     comp = p * (1 - al) + a[..., :3] * al
     out = Image.fromarray((np.clip(comp, 0, 1) * 255).astype(np.uint8))
     full = out.resize((2400, int(out.size[1] * 2400 / out.size[0])), Image.LANCZOS)
     legend(full, [('Render testowy Blender (bpy 5.2, Cycles 8 probek) kamera F.17.%s: bryly Maz. 19 i Wybrz. Slowackiego 5-8,' % key, (255, 255, 255)),
-                  ('teren NMT, krawezniki pomiarowe (pomaranczowe), obszar inwestycji (czerwony), wydzielenie A (magenta); alfa 50%', (255, 255, 255))])
+                  ('teren NMT (jasny welon), krawezniki pomiarowe 3D (pomaranczowe), obszar inwestycji (czerwony), wydzielenie A (magenta); krycie 55%', (255, 255, 255))])
     p1 = IMG_DIR / ('photomatch_F17%s_render_test.jpg' % key); save_jpg(full, p1)
     crop = {'A': (2700, 1900, 4700, 2900), 'B': (3300, 1950, 6300, 3450)}[key]
     f = pct / 100.0
@@ -653,12 +664,109 @@ def blender_test(key, cam, bp, pct=50):
                 max_roznica_blender_vs_model_px=round(dmax, 3), obrazy=[str(p1.relative_to(ROOT)), str(p2.relative_to(ROOT))])
 
 
+# ------------------------------------------------------------------------------------------------ punkty wiazace (opcjonalnie)
+NMPT_WCS = ('https://mapy.geoportal.gov.pl/wss/service/PZGIK/NMPT/GRID1/WCS/DigitalSurfaceModel?SERVICE=WCS&VERSION=2.0.1'
+            '&REQUEST=GetCoverage&COVERAGEID=DSM_PL-EVRF2007-NH&FORMAT=image/x-aaigrid'
+            '&SUBSET=x(363200,364120)&SUBSET=y(361740,362460)')
+
+
+def nmpt_local(cache):
+    """NMPT GUGiK (0,5 m, PL-EVRF2007-NH) przepróbkowany do ukladu lokalnego e -340..540, n -190..490 (krok 0,5 m)"""
+    cache = Path(cache); cache.mkdir(parents=True, exist_ok=True)
+    npz = cache / 'nmpt_lokalny.npz'
+    if npz.exists():
+        d = np.load(npz); return d['Z'], float(d['e0']), float(d['n0']), float(d['step'])
+    import urllib.request
+    from pyproj import Transformer
+    raw = urllib.request.urlopen(NMPT_WCS, timeout=600).read().decode('latin1')
+    body = raw[raw.index('ncols'):].split('--wcs')[0].strip().split('\n')
+    hdr = {l.split()[0]: float(l.split()[1]) for l in body[:6] if l.split()[0] in ('ncols', 'nrows', 'xllcorner', 'yllcorner', 'cellsize')}
+    k = len(hdr)
+    Z2180 = np.array(' '.join(body[k:]).split(), float).reshape(int(hdr['nrows']), int(hdr['ncols']))
+    t = Transformer.from_crs(2177, 2180, always_xy=True)
+    E, N = np.meshgrid(np.arange(-340, 540.01, 0.5), np.arange(-190, 490.01, 0.5))
+    X, Y = t.transform(E + 6433500, N + 5664100)
+    col = (X - hdr['xllcorner']) / hdr['cellsize'] - 0.5
+    row = (hdr['yllcorner'] + Z2180.shape[0] * hdr['cellsize'] - Y) / hdr['cellsize'] - 0.5
+    Z = ndimage.map_coordinates(Z2180, [row, col], order=1, mode='nearest')
+    np.savez_compressed(npz, Z=Z.astype(np.float32), e0=-340.0, n0=-190.0, step=0.5)
+    return Z, -340.0, -190.0, 0.5
+
+
+def wyznacz_wiazace(camA, camB, cache, cmin=0.45, margin=0.08, half=30, srch=25, step=20):
+    """ortofotoplany terenu (0,1 m, na NMT) z F.17.A i F.17.B, maski widocznosci z NMPT, NCC latek (filtr gornoprzepustowy);
+    punkt wiazacy: X = (e, n, H) srodka latki w ortho B (kamera B), u_A = rzut przesunietego punktu kamera camA"""
+    DSM, DE0, DN0, DST = nmpt_local(cache)
+    e = np.arange(25.0, 136.0, 0.1); n = np.arange(110.0, -12.0, -0.1)
+    EE, NN = np.meshgrid(e, n)
+    fx, fy = (EE - NE0) / NK, (NN - NN0) / NK
+    Hn = ndimage.map_coordinates(np.nan_to_num(NMT, nan=-999), [fy, fx], order=1)
+    valid = ndimage.map_coordinates((~np.isnan(NMT)).astype(float), [fy, fx], order=1) > 0.999
+    Hd = ndimage.map_coordinates(DSM, [(NN - DN0) / DST, (EE - DE0) / DST], order=1)
+    H = np.where(valid, Hn, Hd - 0.1)
+    ground = valid & (Hd - H < 0.4)
+
+    def ortho(key, cam):
+        img = np.asarray(Image.open(FILES[key][1]).convert('L'), dtype=np.float32)
+        uv, _ = project_F(np.c_[EE.ravel(), NN.ravel(), H.ravel()], cam, key)
+        o = ndimage.map_coordinates(img, [uv[:, 1], uv[:, 0]], order=1, cval=0).reshape(EE.shape)
+        s4 = (slice(None, None, 4), slice(None, None, 4))
+        ee, nn, hh = EE[s4].ravel(), NN[s4].ravel(), H[s4].ravel()
+        C = np.array(cam['C']); d = np.c_[C[0] - ee, C[1] - nn, C[2] - hh]; L = np.hypot(d[:, 0], d[:, 1])
+        vis = np.ones(ee.size, bool)
+        for tt in np.arange(0.6, 80, 0.5):
+            f = tt / L
+            z = ndimage.map_coordinates(DSM, [(nn + d[:, 1] * f - DN0) / DST, (ee + d[:, 0] * f - DE0) / DST], order=1)
+            vis &= ~((z > hh + d[:, 2] * f + 0.25) & (f < 1))
+        vis = ndimage.zoom(vis.reshape(EE[s4].shape).astype(float), 4, order=0)[:EE.shape[0], :EE.shape[1]] > 0.5
+        return o, vis & ground & (o > 0)
+
+    def hpf(o, m):
+        o = np.where(m, o, np.nan); mu = ndimage.gaussian_filter(np.nan_to_num(o, nan=np.nanmean(o)), 12)
+        r = o - mu; sd = np.sqrt(ndimage.gaussian_filter(np.nan_to_num(r, nan=0) ** 2, 12)) + 1
+        return np.nan_to_num(r / sd, nan=0.0)
+    oa, ma = ortho('A', camA); ob, mb = ortho('B', camB)
+    ha, hb = hpf(oa, ma), hpf(ob, mb)
+    ties = []
+    for cy in range(half + srch, ha.shape[0] - half - srch, step):
+        for cx in range(half + srch, ha.shape[1] - half - srch, step):
+            mB = mb[cy - half:cy + half + 1, cx - half:cx + half + 1]
+            pB = hb[cy - half:cy + half + 1, cx - half:cx + half + 1]
+            if mB.mean() < 0.85 or pB.std() < 0.3:
+                continue
+            surf = np.full((2 * srch + 1, 2 * srch + 1), -2.0)
+            for dy in range(-srch, srch + 1):
+                for dx in range(-srch, srch + 1):
+                    mA = ma[cy + dy - half:cy + dy + half + 1, cx + dx - half:cx + dx + half + 1]
+                    if mA.mean() < 0.85:
+                        continue
+                    m = mA & mB
+                    a_ = ha[cy + dy - half:cy + dy + half + 1, cx + dx - half:cx + dx + half + 1][m]; b_ = pB[m]
+                    a_ = a_ - a_.mean(); b_ = b_ - b_.mean()
+                    surf[dy + srch, dx + srch] = (a_ * b_).sum() / math.sqrt((a_ * a_).sum() * (b_ * b_).sum() + 1e-9)
+            iy, ix = np.unravel_index(np.argmax(surf), surf.shape); c = surf[iy, ix]
+            s2 = surf.copy(); s2[max(0, iy - 4):iy + 5, max(0, ix - 4):ix + 5] = -2
+            if c < cmin or c - s2.max() < margin or not (0 < ix < 2 * srch and 0 < iy < 2 * srch):
+                continue
+            l_, r_, u_, d_ = surf[iy, ix - 1], surf[iy, ix + 1], surf[iy - 1, ix], surf[iy + 1, ix]
+            sx = 0.5 * (l_ - r_) / (l_ - 2 * c + r_ - 1e-9) if min(l_, r_) > -1 else 0.0
+            sy = 0.5 * (u_ - d_) / (u_ - 2 * c + d_ - 1e-9) if min(u_, d_) > -1 else 0.0
+            y2, x2 = cy + iy - srch + sy, cx + ix - srch + sx
+            P2 = [float(ndimage.map_coordinates(A_, [[y2], [x2]], order=1)[0]) for A_ in (EE, NN, H)]
+            uv, _ = project_F([P2], camA, 'A')
+            ties.append((round(float(EE[cy, cx]), 2), round(float(NN[cy, cx]), 2), round(float(H[cy, cx]), 3),
+                         round(float(uv[0, 0]), 2), round(float(uv[0, 1]), 2), round(float(c), 2)))
+    return ties
+
+
 # ------------------------------------------------------------------------------------------------ main
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--kadr', action='store_true', help='przelicz transformacje M.10 -> F.17 z obrazow')
     ap.add_argument('--render', action='store_true', help='test w Blenderze (bpy) + obrazy kontrolne renderu')
     ap.add_argument('--no-img', action='store_true', help='bez obrazow kontrolnych')
+    ap.add_argument('--wiazace', action='store_true', help='przelicz punkty wiazace A/B (pobiera NMPT GUGiK do --cache)')
+    ap.add_argument('--cache', default=os.path.expanduser('~/.cache/umwd_photomatch'), help='katalog cache NMPT')
     a = ap.parse_args()
     IMG_DIR.mkdir(parents=True, exist_ok=True)
     if a.kadr:
@@ -677,7 +785,17 @@ def main():
             rzut='[x, y, z]_kam = R (P - C); u = cx + f x/z; v = cy + f y/z (R: wiersze = prawo, dol, przod)',
             z_blender='z = H - 119,25 (+-0,00 = 119,25 m n.p.m.)'),
         kamery={})
-    for key in 'AB':
+    for key in 'BA':
+        if key == 'A' and a.wiazace:
+            camB = dict(out['kamery']['B']['_cam'])
+            camA0 = dict(START['A']); camA0['cx'], camA0['cy'] = PP_M
+            ties = wyznacz_wiazace(camA0, camB, a.cache)
+            print('punkty wiazace (przeliczone):', len(ties))
+            for t_ in ties:
+                print('    %s,' % (t_,))
+            OBS['A'] = [o for o in OBS['A'] if not o.get('wiazacy')] + [
+                dict(id='wiaz_%.1f_%.1f' % t_[:2], typ='pt', X=list(t_[:3]), uvF=list(t_[3:5]), sigma=TIE_SIGMA,
+                     zr='punkt wiazacy z korelacji ortofotoplanow A/B (NCC %.2f)' % t_[5], wiazacy=True) for t_ in ties]
         cam, std, cov, loo = solve_robust(key)
         rows, rp, rl = stats(key, cam, OBS[key])
         man = [r for r in rows if not r['id'].startswith('wiaz_')]
@@ -716,7 +834,7 @@ def main():
                        rms_loo_px_F17=round(float(np.sqrt(np.mean(np.square([l['blad_px'] for l in loo])))), 2) if loo else None,
                        prog_wymagany_px=round(0.003 * k['W'], 1)),
             obserwacje=[dict(o, **{kk: v for kk, v in r.items() if kk not in ('id', 'typ')}) for o, r in zip(OBS[key], rows)],
-            blender=bp)
+            blender=bp, _cam=cam)
         if not a.no_img:
             entry['obrazy_kontrolne'] = control_images(key, cam)
         if a.render:
@@ -728,6 +846,9 @@ def main():
             entry['bledy']['rms_punkty_reczne_px_F17'] or -1, entry['bledy']['rms_linie_px_F17'],
             entry['bledy']['rms_punkty_wiazace_px_F17'], entry['bledy']['rms_loo_px_F17']))
         print('   blender', {kk: bp[kk] for kk in ('lens_mm', 'shift_x', 'shift_y', 'location_z_wzgl_0', 'rotation_euler_XYZ_deg')})
+    out['kamery'] = {k: out['kamery'][k] for k in 'AB'}
+    for k in 'AB':
+        out['kamery'][k].pop('_cam', None)
     a_, b_ = out['kamery']['A']['poza'], out['kamery']['B']['poza']
     out['kontrola_spojnosci'] = dict(
         roznica_wysokosci_kamer_m=round(a_['C_e_n_H'][2] - b_['C_e_n_H'][2], 2),
