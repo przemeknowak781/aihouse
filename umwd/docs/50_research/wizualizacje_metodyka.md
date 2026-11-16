@@ -1,6 +1,9 @@
 # Metodyka wizualizacji konkursowych — UMWD Wrocław, Etap II
 
 Data opracowania i dostępu do źródeł internetowych: **2026-11-16**. Język roboczy: polski.
+
+> **Weryfikacja źródeł (2026-11-16):** sprawdzono Regulamin, wyjaśnienia nr 08/09/14/20/21, M.01, EXIF/XMP F.17, F.16, tabelę słońca (niezależny algorytm, ±0,2°), konwencję `sun_rotation` i kalibrację słońce/niebo (powtórzone w bpy 5.2: 116,7 W/m², 4,45:1), dokumentację Blendera 5.3, Legge & Bigelow 2011, Merikoski 2020 (pełny tekst), Svensson 2012, Kazemian & Rönn 2009 (Crossref), Vishwanath 2005, Lavdas 2021, Rosas 2023, Hogrefe, Rode, Poly Haven, physicallybased, timeanddate, fSpy, Designboom, Gizmodo, Iconeye, MakeHuman. Nie znaleziono informacji o pracach/wynikach tego konkursu. Poprawki oznaczono `poprawione przez weryfikatora`. <!-- poprawione przez weryfikatora -->
+
 Zakres: jak zrobić 8+ wizualizacji (w tym 2 fotomatchingi na F.17.A/F.17.B) najwyższej jakości, w naszych warunkach: Blender 5.2.4 LTS (bpy w `/home/user/aihouse/.venv-render`), Cycles CPU 4 rdzenie, 15 GB RAM, Python/PIL/OpenCV (systemowy `python3`, cv2 5.0).
 
 **Zakaz Inwestora przestrzegany:** nie wyszukiwano i nie otwierano żadnych materiałów o wynikach ani pracach z tego konkursu. Wszystkie wnioski wynikają z Regulaminu, materiałów Organizatora, ogólnej wiedzy o wizualizacji/fotografii i badań naukowych.

@@ -1,6 +1,9 @@
 # Metodyka plansz konkursowych 100×70 cm — UMWD Wrocław (Etap I i II)
 
 Data opracowania i dostępu do źródeł: **2026-11-16**. Uzupełnienie: `wizualizacje_metodyka.md` (ten sam katalog).
+
+> **Weryfikacja źródeł (2026-11-16):** potwierdzono Regulamin (rozdz. V, VII, VIII), wyjaśnienia nr 08 (odp. 43, 55), 14 (odp. 67), 20 (odp. 76 — max 8 plansz), 21 (odp. 79–80), pomiar F.16 (59,5×47,6 / 40,4×32,4 / 40,4×37 / 2×29,7×21,8 cm), obliczenia typografii i siatki, Legge & Bigelow 2011 (zakres płynny 0,2°–2°), Merikoski 2020, Svensson 2012, Kazemian & Rönn 2009. Nie znaleziono informacji o pracach/wynikach tego konkursu. <!-- poprawione przez weryfikatora -->
+
 Zakaz Inwestora przestrzegany: bez jakichkolwiek informacji o pracach/wynikach tego konkursu.
 
 **Legenda:** **[F]** fakt ze źródła · **[P]** pomiar/obliczenie własne (reprodukowalne) · **[S]** źródło wtórne (portal/praktyk) · **[W]** wniosek/rekomendacja.
