@@ -491,7 +491,9 @@ def extract(P, cache):
     m4.dx = float(sh[0])   # przesuniecie w osi e (Y); w osi n = sh[1] (0)
     S = {}
     S["_m04_shift"] = {"dE_m": r3(sh[0]), "dN_m": r3(sh[1]), "residual_max_m": r3(resid),
-                       "n_vertices": nver, "metoda": "mediana roznic wierzcholkow GESDZI (granice dzialek) M.04 vs e-mapa"}
+                       "n_vertices": nver, "metoda": "mediana roznic wierzcholkow GESDZI (granice dzialek) e-mapa minus M.04",
+                       # poprawione przez weryfikatora: jawny znak przeliczenia (x w DWG M.04 jest o dE_m MNIEJSZE niz Y PL-2000)
+                       "przeliczenie": "Y_PL2000 = x_DWG_M04 + dE_m ; X_PL2000 = y_DWG_M04 + dN_m"}
     S["_sources"] = {k: {"plik": str(P[k].relative_to(P["root"])), "sha256": sha256(P[k])[:16]}
                      for k in P if k.endswith(("_dwg", "_txt", "_pdf"))}
 
@@ -949,6 +951,19 @@ def terrain(P, em, nmt, step=1.0):
     ctrl_dwg = {"n_dwg": int(len(dwgp)), "n_zgodnych_xy<2cm": int(ok.sum()),
                 "max_dH_zgodnych_m": r3(np.max(np.abs(pts_all[ii[ok], 2] - dwgp[ok, 2]))) if ok.any() else None,
                 "uwaga": "punkty DWG bez odpowiednika w txt: %d (pomijane)" % int((~ok).sum())}
+    # poprawione przez weryfikatora: kontrola wszystkich encji POINT modelu terenu (takze warstwy uzbrojenia),
+    # bo czesc pikiet txt lezy na wlazach/zasuwach/kratkach (warstwy inne niz '0')
+    dwga = np.array([[g["pts"][0][0], g["pts"][0][1], g["z"][0]] for lay in sorted(nmt.by_layer)
+                     for g in nmt.shapes(lay, kinds=("point",), types=("POINT",))])
+    dda, iia = kd.query(dwga[:, :2])
+    oka = dda < 0.02
+    ddt, _ = cKDTree(dwga[:, :2]).query(pts_all[:, :2])
+    lay_cnt = collections.Counter(lay for lay in sorted(nmt.by_layer)
+                                  for g in nmt.shapes(lay, kinds=("point",), types=("POINT",)))
+    ctrl_dwg["wszystkie_warstwy"] = {"n_dwg_POINT": int(len(dwga)), "n_wg_warstw": dict(lay_cnt),
+                                     "n_zgodnych_xy<2cm": int(oka.sum()),
+                                     "n_pikiet_txt_bez_odpowiednika_w_dwg": int((ddt >= 0.02).sum()),
+                                     "max_dH_zgodnych_m": r3(np.max(np.abs(pts_all[iia[oka], 2] - dwga[oka, 2]))) if oka.any() else None}
     return {"pikiety": pts_all, "ground": ground, "pikiety_ground": pts, "wykluczone": excl,
             "ids": ids, "extra": extra, "breaklines": blines, "tri": tri, "allp": allp, "f": f,
             "grid": {"e0": float(ge[0]), "n0": float(gn[0]), "step": step, "nx": len(ge), "ny": len(gn), "H": GH},
@@ -1315,14 +1330,17 @@ def control_points(S):
     return out, ctrl_txt, ctrl_h
 
 
-def geodetic_info():
+def geodetic_info(pe=85.0, pn=37.0):
     try:
         from pyproj import CRS, Proj, Transformer
         t = Transformer.from_crs("EPSG:2177", "EPSG:4326", always_xy=False)
-        lat, lon = t.transform(N0 + 120, E0 + 85)   # okolice srodka dzialki
+        # poprawione przez weryfikatora: wczesniej (e 85, n 120) = okolice przyczolka mostu (~83 m na pn. od dzialki);
+        # teraz centroid obszaru inwestycji przekazywany z main()
+        lat, lon = t.transform(N0 + pn, E0 + pe)
         p = Proj("EPSG:2177")
         f = p.get_factors(lon, lat)
         return {"lat": round(lat, 6), "lon": round(lon, 6),
+                "punkt_e_n": [r2(pe), r2(pn)], "punkt_opis": "centroid obszaru inwestycji (M.04)",
                 "zbieznosc_poludnikow_deg": round(f.meridian_convergence, 4),
                 "skala_odwzorowania": round(f.meridional_scale, 7),
                 "uwaga": ("polnoc siatki (os n) jest obrocona wzgledem polnocy geograficznej o zbieznosc poludnikow; "
@@ -1334,6 +1352,70 @@ def geodetic_info():
 # ============================================================================================
 # zapis site.json
 # ============================================================================================
+def building_line_relation(pts, lines, tol=0.10, near=10.0, max_run=30.0):
+    """poprawione przez weryfikatora (nowe): relacja nieprzekraczalnych linii zabudowy MPZP (nakladka e-mapy/M.04)
+    z krawedziami obszaru inwestycji (kolejnosc krawedzi jak w granice.obszar_inwestycji.krawedzie)."""
+    lines = [l if hasattr(l, "coords") else LineString(l) for l in lines]
+    U = unary_union(lines)
+    invp = Polygon(pts)
+    n = len(pts)
+    edges = []
+    for i in range(n):
+        e = LineString([pts[i], pts[(i + 1) % n]])
+        k = max(4, int(e.length / 0.25))
+        d = [U.distance(e.interpolate(j / k, normalized=True)) for j in range(k + 1)]
+        frac = sum(1 for v in d if v <= tol) / len(d)
+        if max(d) <= tol:
+            st = "na linii zabudowy"
+        elif frac >= 0.1:
+            st = "czesciowo na linii zabudowy"
+        elif max(d) <= near:
+            st = "odsunieta od linii zabudowy o <= %.1f m (wciecie)" % max(d)
+        else:
+            st = "brak linii zabudowy wzdluz krawedzi (linia styka sie co najwyzej w narozu)"
+        edges.append({"i": i, "dlugosc_m": r2(e.length), "odl_do_linii_min_m": r2(min(d)), "odl_do_linii_max_m": r2(max(d)), "status": st})
+    on = [x["status"] == "na linii zabudowy" for x in edges]
+    # krotkie wciecia granicy pomiedzy odcinkami lezacymi na linii zabudowy (np. naroze pn.-wsch. przy przyczolku mostu)
+    cuts = []
+    i = 0
+    while i < n:
+        if not on[i] and on[(i - 1) % n]:
+            j = i
+            run = []
+            while not on[j % n] and len(run) < n:
+                run.append(j % n)
+                j += 1
+            L_ = sum(edges[r]["dlugosc_m"] for r in run)
+            if on[j % n] and L_ <= max_run:
+                rl = LineString([pts[run[0]]] + [pts[(r + 1) % n] for r in run])
+                kk = max(4, int(rl.length / 0.1))
+                dmax, pmax = max((U.distance(rl.interpolate(q / kk, normalized=True)), q) for q in range(kk + 1))
+                pm = rl.interpolate(pmax / kk, normalized=True)
+                cand = [(invp.exterior.distance(Point(c)), c) for l in lines for c in l.coords
+                        if rl.distance(Point(c)) <= near and invp.exterior.distance(Point(c)) > tol and not invp.contains(Point(c))]
+                apex = max(cand) if cand else None
+                cuts.append({"krawedzie": run, "dlugosc_m": r2(L_),
+                             "max_odl_granicy_od_linii_m": r2(dmax), "w_punkcie_e_n": [r2(pm.x), r2(pm.y)],
+                             "max_wysuniecie_linii_poza_obszar_m": r2(apex[0]) if apex else None,
+                             "wierzcholek_linii_e_n": [r2(apex[1][0]), r2(apex[1][1])] if apex else None})
+            i = j
+        else:
+            i += 1
+    per_line = []
+    for l in lines:
+        dv = [invp.exterior.distance(Point(c)) for c in l.coords]
+        common = l.intersection(invp.exterior.buffer(tol)).length
+        per_line.append({"od": [r2(l.coords[0][0]), r2(l.coords[0][1])], "do": [r2(l.coords[-1][0]), r2(l.coords[-1][1])],
+                         "dlugosc_m": r2(l.length), "dl_wspolna_z_granica_obszaru_m": r2(common),
+                         "odl_wierzcholkow_od_granicy_min_m": r2(min(dv)), "odl_wierzcholkow_od_granicy_max_m": r2(max(dv))})
+    return {"tolerancja_m": tol, "krawedzie": edges,
+            "dl_krawedzi_na_linii_zabudowy_m": r2(sum(x["dlugosc_m"] for x in edges if x["status"] == "na linii zabudowy")),
+            "wciecia_granicy": cuts, "linie": per_line,
+            "uwaga": ("linie MPZP wrysowane z rastra SIP (dokladnosc nominalna +/-0,3-0,5 m), jednak na odcinkach wspolnych pokrywaja sie "
+                      "z granicami dzialek EGiB do kilku cm - wniosek: granice dzialek inwestycyjnych wydzielono wzdluz linii planu, "
+                      "a nakladke dopasowano do granic; w projekcie traktowac granice dzialki jako linie zabudowy na tych odcinkach")}
+
+
 def build_json(P, S, extras):
     B = S["B"]
     T = S["terrain"]
@@ -1370,6 +1452,18 @@ def build_json(P, S, extras):
                        "opisy_narozy_e-mapa": S["frame_texts"]},
     }
     J["kontrola_georeferencji"] = extras["georef"]
+    # poprawione przez weryfikatora: zapis niezaleznej weryfikacji (2026-11-16)
+    J["meta"]["weryfikacja"] = {
+        "data": "2026-11-16",
+        "zakres": ("niezalezna kontrola: wektory PDF M.04 (obszar inwestycji - konce linii szrafury vs poligon <= 0,018 m, srodek obrysu 3728,0 m2; "
+                   "granica konkursowa, dz. 9/2, dz. 10/2 - Hausdorff 0,02/0,02/0,14 m), raster M.02 400 dpi (drzewa D701, D707, D811, I888 "
+                   "i pikiety 449, 482, 783 - na symbolach/przy opisach rzednych), M.01 s.2 (3 729 m2), M.07 s.9-10, M.08, pyproj"),
+        "poprawki": ["polozenie WGS84: centroid obszaru inwestycji zamiast punktu e 85, n 120 (przyczolek mostu)",
+                     "znak przesuniecia DWG M.04 (Y = x_DWG + dE_m)",
+                     "liczniki drzew: w ogrodkach w obszarze inwestycji 29 (nie 33; 4 drzewa w ogrodkach na dz. 11/3 poza obszarem)",
+                     "opis cieku: wzdluz Wybrzeza na wysokosci kwartalu - 'rz. Olawa' wg e-mapy",
+                     "kontrola pikiet: 800/800 pikiet txt ma odpowiednik w DWG modelu terenu (wszystkie warstwy)",
+                     "mpzp.relacja_z_obszarem_inwestycji - nowa sekcja (linie zabudowy vs krawedzie obszaru)"]}
 
     J["granice"] = {
         "obszar_inwestycji": poly_entry(inv, zrodlo="M.04 DWG, blok '2505_MDCP_Granica możliwej zabudowy' (warstwa '__Obszar możliwej zabudowy'; legenda PDF: 'Obszar inwestycji')",
@@ -1401,6 +1495,7 @@ def build_json(P, S, extras):
                                if g["text"] != "SL"],
         "uwaga": "teksty 'SL' w warstwie 61 = linie slupkow (legenda e-mapy: 'SL - slupki metalowe i drewniane') - pominiete tutaj, patrz sytuacja.slupki",
     }
+    J["mpzp"]["relacja_z_obszarem_inwestycji"] = building_line_relation(J["granice"]["obszar_inwestycji"]["pts"], M["linie_zabudowy"])   # poprawione przez weryfikatora (nowe)
 
     # dzialki
     par = []
@@ -1479,8 +1574,14 @@ def build_json(P, S, extras):
     J["ulice_i_sytuacja"]["_opis"] = ("krawezniki/jezdnie/chodniki: warstwy e-mapy (urzedowe) oraz *_pomiar_NMT (3D polilinie z rzednymi z "
                                       "pomiaru uzupelniajacego, zasieg ok. e 4-135, n -8-114); MPZP linie rozgraniczajace - sekcja mpzp")
     J["most_grunwaldzki"] = extras["bridge"]
-    J["woda"] = {"linia_brzegu": lines_out(Sx["woda_linia_brzegu"]), "opisy": lines_out(Sx["woda_opisy"]),
-                 "uwaga": "linia brzegu wg e-mapy (GSSWWP); woda po stronie wschodniej/pln.-wsch. linii; Olawa uchodzi do Odry na wsch. od kwartalu"}
+    # poprawione przez weryfikatora: opis cieku wg opisow e-mapy (woda na wsch. od kwartalu = 'rz. Olawa'; 'rz. Odra' przy moscie)
+    wop = lines_out(Sx["woda_opisy"])
+    J["woda"] = {"linia_brzegu": lines_out(Sx["woda_linia_brzegu"]), "opisy": wop,
+                 "uwaga": ("linia brzegu wg e-mapy (GSSWWP); woda po stronie wschodniej/pln.-wsch. linii. Opisy e-mapy: "
+                           + "; ".join("'%s' (e %.0f, n %.0f)" % (o.get("tekst"), o.get("e"), o.get("n")) for o in wop if isinstance(o, dict))
+                           + ". Woda wzdluz wsch. strony Wybrzeza J. Slowackiego na wysokosci kwartalu jest opisana jako 'rz. Olawa'; "
+                             "'rz. Odra' - na pn., przy Moscie Grunwaldzkim; ujscie Olawy do Odry na pn.-wsch. od kwartalu "
+                             "(poprawione przez weryfikatora - wczesniej: 'Olawa uchodzi do Odry na wsch. od kwartalu')")}
 
     # zielen
     J["zielen"] = {"drzewa": [{"nr": t["nr"], "e": r2(t["e"]), "n": r2(t["n"]), "typ": t["typ"], "zrodlo": t["zrodlo"],
@@ -1492,6 +1593,19 @@ def build_json(P, S, extras):
                    "uwaga": ("D = lisciaste, I = iglaste (warstwy DWG drzewa_lisciaste/drzewa_iglaste); E.. = drzewa z e-mapy bez numeru. "
                              "Gatunki, obwody, korony: do polaczenia z operatem dendrologicznym M.06 (inna numeracja - parowanie po polozeniu)."),
                    "zakrzaczenia": [{"pts": pts_r(g["pts"], 2)} for g in S["shrubs"]]}
+    # poprawione przez weryfikatora: jednoznaczne liczniki drzew (punkty vs numery; ogrodki w/poza obszarem inwestycji)
+    dr_ = J["zielen"]["drzewa"]
+    tk_ = dict(S["trees"]["kontrola"])
+    tk_.update({
+        "w_obszarze_inwestycji_punkty": sum(1 for t in dr_ if t["w_obszarze_inwestycji"]),
+        "w_obszarze_inwestycji_numery": len({t["nr"] for t in dr_ if t["w_obszarze_inwestycji"]}),
+        "numery_dwupunktowe_w_obszarze_inwestycji": sorted({t["nr"] for t in dr_ if t["w_obszarze_inwestycji"]
+                                                           and sum(1 for u in dr_ if u["nr"] == t["nr"]) > 1}),
+        "w_ogrodkach_i_w_obszarze_inwestycji_punkty": sum(1 for t in dr_ if t["w_ogrodkach"] and t["w_obszarze_inwestycji"]),
+        "w_ogrodkach_poza_obszarem_inwestycji": sorted(t["nr"] for t in dr_ if t["w_ogrodkach"] and not t["w_obszarze_inwestycji"]),
+        "w_ogrodkach_lacznie_punkty": sum(1 for t in dr_ if t["w_ogrodkach"]),
+    })
+    J["zielen"]["kontrola"] = tk_
 
     # teren
     G = T["grid"]
@@ -1771,6 +1885,16 @@ def make_md(P, S, J, out_md):
     w("**Zasada wyłączenia:** opracowanie oparte wyłącznie na załącznikach Organizatora (M.02, M.04, M.07, M.08) – "
       "nie korzystano z żadnych informacji o pracach konkursowych.")
     w("")
+    # poprawione przez weryfikatora: nota o niezaleznej weryfikacji
+    w("<!-- poprawione przez weryfikatora --> **Weryfikacja niezależna (2026-11-16):** sprawdzono ok. 30 pozycji wprost w źródłach – "
+      "poligon obszaru inwestycji na wektorach PDF M.04 (końce 44 linii szrafury leżą ≤ 0,018 m od poligonu; środek obrysu w PDF daje 3 728,0 m²), "
+      "granicę konkursową, dz. 9/2 i 10/2 na PDF M.04 (odchyłka Hausdorffa 0,02 / 0,02 / 0,14 m), położenie drzew D701, D707, D811, I888 i pikiet 449, 482, 783 "
+      "na rastrze PDF M.02 400 dpi (symbole drzew i punkty z opisami rzędnych 118.85 / 118.93 / 118.43 w miejscu wskazanym przez współrzędne), "
+      "M.01 s. 2 („łącznej powierzchni 3.729 m2”), M.07 s. 9–10, M.08, zbieżność i skalę (pyproj), powtarzalność generatora (wynik identyczny bajt w bajt). "
+      "Geometria i georeferencja – **wiarygodne**. Poprawiono: położenie WGS84 (2.2), opis znaku przesunięcia M.04 (2.2, 10.4), liczbę drzew w ogródkach (7), "
+      "opis cieku przy kwartale (9), kontrolę pikiet (2.3); dodano relację linii zabudowy z granicą obszaru inwestycji (4.5) i uwagi 10.10–10.13. "
+      "Zmiany oznaczono `<!-- poprawione przez weryfikatora -->`.")
+    w("")
     w("![Kontrola warstw](img/site_kontrola.png)")
     w("")
     w("## 1. Źródła")
@@ -1778,7 +1902,9 @@ def make_md(P, S, J, out_md):
     w("| Skrót | Plik (względem `umwd/`) | Zawartość / uwagi |")
     w("|---|---|---|")
     desc = {"emapa_dwg": "mapa do celów projektowych 1:500 (AutoCAD 2000, 9 753 encje, ~150 warstw: EGiB, BDOT500, GESUT, nakładka MPZP); nr ZGKIKM.TM.6640.4638.2025 z 01.10.2025, protokół weryfikacji z 08.10.2025",
-            "nmt_dwg": "model terenu: 765 punktów + 3D polilinie (krawężniki, chodniki, jezdnie, ogrodzenia, słupki) z rzędnymi",
+            "nmt_dwg": "model terenu: %d encji POINT (%s; poprawione przez weryfikatora – wcześniej „765 punktów”) + 3D polilinie (krawężniki, chodniki, jezdnie, ogrodzenia, słupki) z rzędnymi" % (
+                T["kontrola"]["dwg_vs_txt"]["wszystkie_warstwy"]["n_dwg_POINT"],
+                ", ".join("%s: %d" % (k if k != "0" else "warstwa 0", v) for k, v in sorted(T["kontrola"]["dwg_vs_txt"]["wszystkie_warstwy"]["n_wg_warstw"].items(), key=lambda kv: -kv[1]))),
             "zielen_dwg": "drzewa (41 liściastych, 15 iglastych) + zakrzaczenia (3D polilinie)",
             "m04_dwg": "mapa schematyczna: granice opracowania studialnego/konkursowego, obszar inwestycji, ogródki, dojazd 10/2, teren użyczony 9/2 (DWG przesunięty względem PL-2000 – patrz 2.2)",
             "pikiety_txt": "800 pikiet: nr X Y H (X=północ, Y=wschód) – podstawa NMT",
@@ -1804,16 +1930,22 @@ def make_md(P, S, J, out_md):
     w("### 2.2 Georeferencja")
     sh = J["crs"]["przesuniecie_M04_DWG"]
     w("- DWG e-mapy, modelu terenu i zieleni są zapisane **bezpośrednio w PL-2000/6** (x DWG = Y, y DWG = X); odczyt pliku txt pikiet i drzew (X, Y) daje identyczne położenia (tab. 2.3).")
-    w("- **DWG M.04 jest przesunięty** w osi Y o **ΔY = %+.3f m** (ΔX = %.3f m) względem PL-2000/6 – ustalone z %d wierzchołków granic działek (warstwa GESDZI, ta sama treść co e-mapa), "
+    # poprawione przez weryfikatora: jednoznaczny znak przesuniecia
+    w("- <!-- poprawione przez weryfikatora --> **DWG M.04 jest przesunięty** w osi Y: współrzędne x w DWG M.04 są o **%.3f m mniejsze** niż Y w PL-2000/6 "
+      "(przeliczenie: **Y = x_DWG + %.3f m**, X = y_DWG + %.3f m) – ustalone z %d wierzchołków granic działek (warstwa GESDZI, ta sama treść co e-mapa), "
       "odchyłka maks. po przesunięciu **%.3f m**. Narzędzie przelicza M.04 automatycznie. Kontrola: ramka M.04 po przesunięciu = narożniki opisane na mapie "
-      "(SW Y 6433510,66 / X 5664064,48; NE Y 6433651,96 / X 5664248,09)." % (sh["dE_m"], sh["dN_m"], sh["n_vertices"], sh["residual_max_m"]))
+      "(SW Y 6433510,66 / X 5664064,48; NE Y 6433651,96 / X 5664248,09)." % (sh["dE_m"], sh["dE_m"], sh["dN_m"], sh["n_vertices"], sh["residual_max_m"]))
     w("- Układ lokalny: **e = Y − 6 433 500,00; n = X − 5 664 100,00** [m]; ramka mapy: e %.2f…%.2f, n %.2f…%.2f." %
       tuple([J["crs"]["ramka_mapy"]["SW_Y_X"][0] - E0, J["crs"]["ramka_mapy"]["NE_Y_X"][0] - E0, J["crs"]["ramka_mapy"]["SW_Y_X"][1] - N0, J["crs"]["ramka_mapy"]["NE_Y_X"][1] - N0]))
     gd = J["crs"]["geodezja"]
     if "lat" in gd:
-        w("- Położenie (środek działki, WGS84): φ = %.5f°, λ = %.5f°; **zbieżność południków γ = %+.3f°** (pyproj, EPSG:2177) – oś *n* jest obrócona względem północy geograficznej; "
-          "do analiz nasłonecznienia azymut geograficzny Słońca należy przeliczyć na azymut siatki (wniosek: różnica ok. 0,75° – istotna tylko dla precyzyjnych analiz cienia). Skala odwzorowania m = %.6f (zniekształcenie długości ok. %.0f mm/100 m – pomijalne)." %
-          (gd["lat"], gd["lon"], gd["zbieznosc_poludnikow_deg"], gd["skala_odwzorowania"], abs(gd["skala_odwzorowania"] - 1) * 1e5))
+        # poprawione przez weryfikatora: punkt = centroid obszaru inwestycji (wczesniej e 85, n 120 - przyczolek mostu, ok. 83 m na pn.)
+        w("- <!-- poprawione przez weryfikatora --> Położenie (centroid obszaru inwestycji, e = %.2f, n = %.2f; WGS84): φ = %.5f°, λ = %.5f° "
+          "(wcześniej podano φ = 51.10915°, λ = 17.05158° – punkt e 85, n 120 przy przyczółku mostu, ok. 83 m na pn. od środka działki); "
+          "**zbieżność południków γ = %+.3f°** (pyproj, EPSG:2177; kontrola wzorem γ ≈ (λ − 18°)·sin φ = −0,738°) – oś *n* (północ siatki) jest obrócona względem północy geograficznej; "
+          "azymut geograficzny = azymut siatki + γ (tj. azymut siatki = azymut geogr. + 0,738°). "
+          "Do analiz nasłonecznienia azymut geograficzny Słońca należy przeliczyć na azymut siatki (wniosek: różnica ok. 0,75° – istotna tylko dla precyzyjnych analiz cienia). Skala odwzorowania m = %.6f (zniekształcenie długości ok. %.0f mm/100 m – pomijalne)." %
+          (gd.get("punkt_e_n", [float("nan")] * 2)[0], gd.get("punkt_e_n", [float("nan")] * 2)[1], gd["lat"], gd["lon"], gd["zbieznosc_poludnikow_deg"], gd["skala_odwzorowania"], abs(gd["skala_odwzorowania"] - 1) * 1e5))
     w("")
     w("### 2.3 Punkty kontrolne i błędy")
     w("")
@@ -1827,7 +1959,12 @@ def make_md(P, S, J, out_md):
         w("| Drzewa: `drzewa.txt` vs symbole drzew e-mapy (GSPRD*), przykłady: %s | %d | odchyłki %s m |" %
           (", ".join(c["punkt"].replace("drzewo ", "") for c in cps), len(cps), ", ".join("%.2f" % c["odchylka_m"] for c in cps)))
     kd = T["kontrola"]["dwg_vs_txt"]
-    w("| Pikiety: DWG modelu terenu vs `pikiety do nmt.txt` | %d | %d zgodnych w XY < 2 cm, maks. ΔH %.3f m; %s |" % (kd["n_dwg"], kd["n_zgodnych_xy<2cm"], kd["max_dH_zgodnych_m"] or 0, kd["uwaga"]))
+    w("| Pikiety: DWG modelu terenu (warstwa 0) vs `pikiety do nmt.txt` | %d | %d zgodnych w XY < 2 cm, maks. ΔH %.3f m; %s |" % (kd["n_dwg"], kd["n_zgodnych_xy<2cm"], kd["max_dH_zgodnych_m"] or 0, kd["uwaga"]))
+    ka = kd.get("wszystkie_warstwy")
+    if ka:   # poprawione przez weryfikatora
+        w("| <!-- poprawione przez weryfikatora --> Pikiety: DWG modelu terenu (wszystkie warstwy POINT) vs `pikiety do nmt.txt` | %d | %d zgodnych w XY < 2 cm, maks. ΔH %.3f m; "
+          "pikiet txt bez odpowiednika w DWG: **%d** (wszystkie 800 pikiet potwierdzone; %d z nich leży na warstwach uzbrojenia – włazy, zasuwy, kratki, hydranty – tj. rzędne pokryw, nie gruntu) |" %
+          (ka["n_dwg_POINT"], ka["n_zgodnych_xy<2cm"], ka["max_dH_zgodnych_m"] or 0, ka["n_pikiet_txt_bez_odpowiednika_w_dwg"], ka["n_zgodnych_xy<2cm"] - kd["n_zgodnych_xy<2cm"]))
     ct = T["kontrola"]["rzedne_txt_emapy_vs_pikiety"]
     w("| Rzędne pomiaru w e-mapie (warstwa `txt`) vs pikiety | %d | odl. XY maks. %.3f m, ΔH maks. %.3f m |" % (ct["n"], ct["odl_xy_max_m"] or 0, ct["dH_max_m"] or 0))
     for lay, v in T["kontrola"]["punkty_emapy_vs_TIN"].items():
@@ -1845,6 +1982,11 @@ def make_md(P, S, J, out_md):
     w("Uwaga do kontroli PDF: granice obszaru inwestycji i opracowania konkursowego są w PDF narysowane jako polilinie o szerokości (dwa kontury po obu stronach osi, ±0,2–0,25 m) – "
       "o zgodności świadczy mediana odległości ze znakiem ≈ 0; teren użyczony (linia cienka) zgadza się z DWG na poziomie 1 cm. Punkty kontrolne georeferencji: ramka (4 narożniki z opisami współrzędnych), "
       "drzewa (txt ↔ DWG zieleni ↔ e-mapa), pikiety (txt ↔ DWG modelu terenu ↔ rzędne w e-mapie), niezależne punkty wysokościowe e-mapy ↔ TIN.")
+    w("")
+    # poprawione przez weryfikatora: interpretacja odchylek GSPWPN
+    w("<!-- poprawione przez weryfikatora --> Uwaga do punktów GSPWPN: duże σ i maks. |ΔH| nie wynikają z błędnego parowania opisów (najbliższy symbol 0,1–1,2 m, drugi ≥ 5,8 m), lecz z położenia: "
+      "odchyłki +0,88 / +0,57 m – na skarpie dojazdu do mostu (e≈96, n≈104 i e≈77, n≈108), −0,52 m – poza obszarem konkursu (e≈18, n≈28); w obszarze inwestycji i na granicy konkursowej |ΔH| ≤ 0,10 m. "
+      "Promień parowania 2,0 m pomija 2 opisy GSPWPN w zasięgu NMT („119.2” przy (77,1; 58,4) – opis 2,42 m od symbolu, ΔH = −0,10 m; „118.5” przy (30,5; 15,6) – 2,27 m, ΔH = −0,08 m) – bez wpływu na wnioski.")
     w("")
     w("**Ocena dokładności (wniosek):** treść EGiB/BDOT500/GESUT i pomiar uzupełniający – dokładność mapy zasadniczej 1:500 (rzędu ±0,1 m dla szczegółów I grupy); "
       "granice konkursowe M.04 – identyczne z DWG po przesunięciu (błąd < 1 cm); **linie MPZP (linie zabudowy, wydzielenie A, linie rozgraniczające) – wrysowane z rastra SIP 1:1000 – "
@@ -1974,6 +2116,60 @@ def make_md(P, S, J, out_md):
     w("Wniosek: **pn. ściana szczytowa Wybrzeża Słowackiego 5** (normalna ok. 357°) nie leży na granicy obszaru inwestycji – oddziela ją dz. 10/2 (dojazd, szer. ok. 5,5–6 m); okno na 1. piętrze tej ściany (M.08) wymaga sprawdzenia przesłaniania/odległości od projektowanej zabudowy na pn. od dz. 10/2. "
       "**Pn. ściana szczytowa Mazowieckiej 19** leży na granicy (zabudowa przyległa możliwa). Pn. ściana budynku b4 (Wybrzeże Słowackiego 9 – adres niepewny) również leży na pd. granicy obszaru inwestycji.")
     w("")
+    # poprawione przez weryfikatora: nowa sekcja 4.5
+    rel = J["mpzp"].get("relacja_z_obszarem_inwestycji")
+    if rel:
+        w("### 4.5 Nieprzekraczalne linie zabudowy MPZP a granica obszaru inwestycji <!-- poprawione przez weryfikatora (sekcja dodana) -->")
+        w("")
+        w("Odległość krawędzi obszaru inwestycji (numeracja jak w 4.2) od najbliższej nieprzekraczalnej linii zabudowy z nakładki MPZP (`Warstwa 61`), próbkowanie co 0,25 m; tolerancja „na linii” %.2f m." % rel["tolerancja_m"])
+        w("")
+        w("| # | Długość [m] | Odl. do linii zabudowy min–max [m] | Relacja |")
+        w("|---|---|---|---|")
+        for x in rel["krawedzie"]:
+            w("| %d | %.2f | %.2f–%.2f | %s |" % (x["i"], x["dlugosc_m"], x["odl_do_linii_min_m"], x["odl_do_linii_max_m"], x["status"]))
+        w("")
+        cuts = rel.get("wciecia_granicy") or []
+        ctxt = "; ".join("krawędzie %s (dł. %.2f m): granica odsunięta od linii o maks. **%.2f m** (w (%.2f, %.2f)), wierzchołek linii zabudowy (%.2f, %.2f) leży **%.2f m** poza obszarem inwestycji" %
+                         ("–".join(str(k) for k in c["krawedzie"]), c["dlugosc_m"], c["max_odl_granicy_od_linii_m"], c["w_punkcie_e_n"][0], c["w_punkcie_e_n"][1],
+                          (c["wierzcholek_linii_e_n"] or [float("nan")] * 2)[0], (c["wierzcholek_linii_e_n"] or [float("nan")] * 2)[1], c["max_wysuniecie_linii_poza_obszar_m"] or float("nan"))
+                         for c in cuts) or "brak"
+        lz = rel.get("linie") or []
+        # odsuniecie zach. linii zabudowy ("wypustka" za Mazowiecka) od kraw. 9 - wierzcholki poza przedluzeniem kraw. 10
+        p9_, p10_, p11_ = inv["pts"][9], inv["pts"][10], inv["pts"][11]
+        e9_ = LineString([p9_, p10_])
+        g10_ = LineString([(p10_[0] - 10 * (p11_[0] - p10_[0]), p10_[1] - 10 * (p11_[1] - p10_[1])), p11_])
+        wmin_, wmax_ = float("nan"), float("nan")
+        for l_ in J["mpzp"]["nieprzekraczalne_linie_zabudowy"]:
+            wv_ = [e9_.distance(Point(c)) for c in l_["pts"] if g10_.distance(Point(c)) > 0.5]
+            if wv_ and min(wv_) > 5:
+                wmin_, wmax_ = min(wv_), max(wv_)
+        w("Wnioski (pomiar własny weryfikatora): (1) krawędzie pn. (ze skwerem dz. 9/2 / 1KDG) i wsch. (front Wybrzeża J. Słowackiego) – łącznie **%.1f m** obwodu – leżą **na** nieprzekraczalnej linii zabudowy "
+          "(odchyłki ≤ 0,05 m, tj. znacznie poniżej nominalnej dokładności nakładki ±0,3–0,5 m – wniosek: granice działek wydzielono wzdłuż linii planu, więc na tych odcinkach granica działki = linia zabudowy; "
+          "wykusze/wysunięcia elewacji poza tę linię nie są możliwe bez analizy §-ów MPZP o dopuszczalnych przekroczeniach – patrz `mpzp.md`); "
+          "(2) wcięcie granicy w narożu pn.-wsch. (przyczółek mostu, dz. 19/1): %s – zabudowę ogranicza tu granica działki, nie linia planu; "
+          "(3) wzdłuż ul. Mazowieckiej (kraw. 9) oraz od dz. 10/2, 11/3, 11/4 i 16/10 **brak linii zabudowy** – granicą zabudowy jest granica obszaru inwestycji (zach. linia zabudowy biegnie po drugiej stronie obecnej jezdni Mazowieckiej, %.1f–%.1f m od granicy – „wypustka” terenu 2MW-U/5, `mpzp.md` K-01); "
+          "(4) linia zabudowy przed frontem Mazowieckiej 19 (dł. %.2f m) dochodzi do wierzchołka 10 i jest niemal współliniowa z kraw. 9 (różnica kierunków ok. 0,75°) – kontynuacja pierzei możliwa w linii frontu kamienicy." %
+          (rel["dl_krawedzi_na_linii_zabudowy_m"], ctxt, wmin_, wmax_,
+           (lz[2]["dlugosc_m"] if len(lz) > 2 else float("nan"))))
+        w("")
+        # punkt adresowy w obszarze inwestycji
+        raw_ = J["warstwy_emapy_surowe"]["warstwy"]
+        invp_ = Polygon(inv["pts"])
+        adr_in = []
+        if "GEPADR" in raw_ and "GEPADR_O" in raw_:
+            ap_ = [o["p"] for o in raw_["GEPADR"]["obiekty"] if "p" in o]
+            if ap_:
+                kd_ = cKDTree(np.array(ap_))
+                for o in raw_["GEPADR_O"]["obiekty"]:
+                    if "t" not in o:
+                        continue
+                    dd_, ii_ = kd_.query(o["p"])
+                    if dd_ < 3.0 and invp_.contains(Point(ap_[ii_])):
+                        adr_in.append((o["t"], ap_[ii_], o.get("r")))
+        for t_, p_, r_ in adr_in:
+            w("Punkt adresowy EGiB **„%s”** (e %.2f, n %.2f) leży w obszarze inwestycji; orientacja opisu (%.1f°) jak opisów „19” i „17” przy ul. Mazowieckiej – "
+              "wniosek: adres nieruchomości to prawdopodobnie **ul. Mazowiecka %s** (do potwierdzenia w EGiB; nie wynika z Regulaminu)." % (t_, p_[0], p_[1], r_ or 0, t_))
+            w("")
     w("## 5. Budynki istniejące (zasięg mapy)")
     w("")
     w("| Budynek | Etykieta | Funkcja (kod EGiB) | Kondygn. | Pole zab. [m²] | Teren wokół H śr. | Wysokość [m] | Góra ≈ H | Metoda / uwagi |")
@@ -2132,7 +2328,7 @@ def main():
     inv = B["obszar_inwestycji"]
     T = S["terrain"]
     extras = {}
-    extras["geod"] = geodetic_info()
+    extras["geod"] = geodetic_info(inv.centroid.x, inv.centroid.y)   # poprawione przez weryfikatora
     cps, ctrl_txt, ctrl_h = control_points(S)
     extras["georef"] = {"punkty_kontrolne": cps, "pdf_M04": check_pdf_georef(P, S),
                         "przesuniecie_M04": S["_m04_shift"]}

@@ -419,6 +419,26 @@ class Materialy:
         nb.l(fac, r.inputs['Fac'])
         return r.outputs['Color']
 
+    @staticmethod
+    def mgla_fac(nb, D=2600.0):
+        cd = nb.n('ShaderNodeCameraData')
+        return nb.math('SUBTRACT', 1.0, nb.math('EXPONENT', nb.math('DIVIDE', cd.outputs['View Distance'], -D)))
+
+    @staticmethod
+    def mgla(nb, col, D=2600.0, kolor=(0.42, 0.50, 0.62)):
+        """(zgodność) – zwraca kolor bez zmian; mgłę dodaje mgla_shader()."""
+        return col
+
+    def mgla_shader(self, nb, shader, D=3200.0, kolor=(0.50, 0.60, 0.76), moc=0.2):
+        """Perspektywa powietrzna: mieszanie shadera z emisją w barwie nieba przy horyzoncie wg odległości."""
+        em = nb.n('ShaderNodeEmission', Strength=moc)
+        nb.set(em, 'Color', kolor)
+        mx = nb.n('ShaderNodeMixShader')
+        nb.l(self.mgla_fac(nb, D), mx.inputs['Fac'])
+        nb.l(shader.outputs[0] if hasattr(shader, 'outputs') else shader, mx.inputs[1])
+        nb.l(em.outputs[0], mx.inputs[2])
+        return mx
+
     def _bsdf(self, nb, color, rough=0.6, metal=0.0, spec=0.5, normal=None):
         b = nb.n('ShaderNodeBsdfPrincipled')
         nb.set(b, 'Base Color', color)
@@ -510,31 +530,42 @@ class Materialy:
         self._noise_mat(m, (0.30, 0.26, 0.18), (0.42, 0.37, 0.27), scale=3.0, rough=0.95, fine=150.0, finebump=0.3)
 
     def m_trawa(self, m):
+        """Trawnik: zmienność barwy w 3 skalach (kępy, płaty, prześwity ziemi), mikrorelief; jesienią opadłe liście."""
         jes = self.ctx.opts['pora_roku'] == 'jesien'
         nb = NodeBuilder(m)
         uv = self.uv_sciana(nb)
-        n1 = nb.n('ShaderNodeTexNoise', Scale=0.25, Detail=5.0, Roughness=0.6)
+        n1 = nb.n('ShaderNodeTexNoise', Scale=0.18, Detail=5.0, Roughness=0.6)
         nb.l(uv, n1.inputs['Vector'])
         if jes:
-            col = self._ramp(nb, n1.outputs['Fac'], (0.06, 0.10, 0.018), (0.13, 0.15, 0.03), 0.3, 0.75)
+            col = self._ramp(nb, n1.outputs['Fac'], (0.045, 0.075, 0.012), (0.12, 0.13, 0.02), 0.32, 0.72)
         else:
-            col = self._ramp(nb, n1.outputs['Fac'], (0.04, 0.09, 0.015), (0.08, 0.15, 0.025), 0.3, 0.75)
-        n2 = nb.n('ShaderNodeTexNoise', Scale=2.5, Detail=8.0)
+            col = self._ramp(nb, n1.outputs['Fac'], (0.03, 0.07, 0.01), (0.07, 0.13, 0.02), 0.32, 0.72)
+        n2 = nb.n('ShaderNodeTexNoise', Scale=1.6, Detail=8.0, Roughness=0.7)
         nb.l(uv, n2.inputs['Vector'])
-        col = nb.mix(0.35, col, n2.outputs['Color'], blend='OVERLAY')
-        if jes:   # opadłe liście – plamy
-            n3 = nb.n('ShaderNodeTexNoise', Scale=1.1, Detail=6.0)
+        col = nb.mix(0.55, col, n2.outputs['Color'], blend='OVERLAY')
+        # prześwity ziemi / wydeptane płaty
+        n4 = nb.n('ShaderNodeTexNoise', Scale=0.6, Detail=6.0)
+        nb.l(uv, n4.inputs['Vector'])
+        ziem = nb.math('MULTIPLY', nb.math('GREATER_THAN', n4.outputs['Fac'], 0.66), 0.55)
+        col = nb.mix(ziem, col, (0.07, 0.055, 0.035))
+        if jes:   # opadłe liście – rozproszone plamy
+            n3 = nb.n('ShaderNodeTexNoise', Scale=0.9, Detail=6.0)
             nb.l(uv, n3.inputs['Vector'])
-            f = nb.math('MULTIPLY', nb.math('GREATER_THAN', n3.outputs['Fac'], 0.64), 0.5)
-            v = nb.n('ShaderNodeTexVoronoi', Scale=18.0)
+            v = nb.n('ShaderNodeTexVoronoi', Scale=22.0)
             nb.l(uv, v.inputs['Vector'])
-            leaf = self._ramp(nb, v.outputs['Distance'], (0.42, 0.18, 0.03), (0.30, 0.22, 0.05))
-            col = nb.mix(nb.math('MULTIPLY', f, 0.7), col, leaf)
-        nf = nb.n('ShaderNodeTexNoise', Scale=160.0, Detail=2.0)
+            f = nb.math('MULTIPLY', nb.math('GREATER_THAN', n3.outputs['Fac'], 0.6),
+                        nb.math('GREATER_THAN', v.outputs['Distance'], 0.35))
+            leaf = self._ramp(nb, v.outputs['Distance'], (0.30, 0.12, 0.02), (0.36, 0.25, 0.05))
+            col = nb.mix(nb.math('MULTIPLY', f, 0.6), col, leaf)
+        nf = nb.n('ShaderNodeTexNoise', Scale=220.0, Detail=2.0)
         nb.l(uv, nf.inputs['Vector'])
-        bmp = nb.n('ShaderNodeBump', Strength=0.6, Distance=0.01)
-        nb.l(nf.outputs['Fac'], bmp.inputs['Height'])
-        nb.output(self._bsdf(nb, col, 0.92, spec=0.3, normal=bmp.outputs['Normal']))
+        nv = nb.n('ShaderNodeTexVoronoi', Scale=60.0)
+        nb.l(uv, nv.inputs['Vector'])
+        h = nb.math('ADD', nf.outputs['Fac'], nb.math('MULTIPLY', nv.outputs['Distance'], 0.8))
+        bmp = nb.n('ShaderNodeBump', Strength=0.9, Distance=0.015)
+        nb.l(h, bmp.inputs['Height'])
+        rr = nb.math('ADD', nb.math('MULTIPLY', n2.outputs['Fac'], 0.15), 0.82)
+        nb.output(self._bsdf(nb, col, rr, spec=0.25, normal=bmp.outputs['Normal']))
 
     def m_granit(self, m):          # krawężniki, cokoły
         self._noise_mat(m, (0.17, 0.165, 0.16), (0.28, 0.27, 0.26), scale=6.0, rough=0.6, fine=60.0, finebump=0.15)
@@ -572,7 +603,7 @@ class Materialy:
         col = self._ramp(nb, n3.outputs['Fac'], (0.03, 0.045, 0.038), (0.05, 0.065, 0.05), 0.3, 0.7)
         b = self._bsdf(nb, col, 0.035, spec=0.5, normal=bmp.outputs['Normal'])
         nb.set(b, 'IOR', 1.33)
-        nb.output(b)
+        nb.output(self.mgla_shader(nb, b, D=4500.0, moc=0.15))
 
     # ---------------------------------------------------------------- elewacje
     def m_tynk(self, m, hexcol='a0a0a0', brud='0.25', bonio='0'):
@@ -730,7 +761,7 @@ class Materialy:
         base = nb.mix(vert, roof, wall)
         col = nb.mix(win, base, (0.02, 0.025, 0.03))
         rgh = nb.mix(win, 0.85, 0.08, dtype='FLOAT')
-        nb.output(self._bsdf(nb, col, rgh, spec=0.6))
+        nb.output(self.mgla_shader(nb, self._bsdf(nb, col, rgh, spec=0.6)))
 
     def m_ortofoto(self, m):
         nb = NodeBuilder(m)
@@ -741,13 +772,23 @@ class Materialy:
         nb.l(uvn.outputs[0], tex.inputs['Vector'])
         hs = nb.n('ShaderNodeHueSaturation')
         if self.ctx.opts['pora_roku'] == 'jesien':
-            nb.set(hs, 'Hue', 0.47)
-            nb.set(hs, 'Saturation', 0.8)
+            nb.set(hs, 'Hue', 0.475)
+            nb.set(hs, 'Saturation', 1.1)
         else:
-            nb.set(hs, 'Saturation', 0.9)
-        nb.set(hs, 'Value', 0.85)
-        nb.l(tex.outputs['Color'], hs.inputs['Color'])
-        nb.output(self._bsdf(nb, hs.outputs[0], 0.9, spec=0.3))
+            nb.set(hs, 'Saturation', 1.1)
+        nb.set(hs, 'Value', 0.5)
+        bc = nb.n('ShaderNodeBrightContrast', Bright=0.0, Contrast=0.18)
+        nb.l(tex.outputs['Color'], bc.inputs['Color'])
+        nb.l(bc.outputs[0], hs.inputs['Color'])
+        nb.output(self.mgla_shader(nb, self._bsdf(nb, hs.outputs[0], 0.92, spec=0.2)))
+
+    def m_teren_daleki(self, m):
+        nb = NodeBuilder(m)
+        geo = nb.n('ShaderNodeNewGeometry')
+        nz = nb.n('ShaderNodeTexNoise', Scale=0.012, Detail=6.0)
+        nb.l(geo.outputs['Position'], nz.inputs['Vector'])
+        col = self._ramp(nb, nz.outputs['Fac'], (0.05, 0.055, 0.04), (0.11, 0.105, 0.09), 0.35, 0.7)
+        nb.output(self.mgla_shader(nb, self._bsdf(nb, col, 0.95, spec=0.2)))
 
 
 # ============================================================================================== kontekst budowy
@@ -1059,7 +1100,7 @@ def zbuduj_wode(ctx):
     coll = ctx.coll('K_woda')
     zw = ctx.z_woda
     # płaszczyzna wody: obejmuje obszar ortofotomapy (rzeki poza ramką) – pod lądem jest niewidoczna
-    E0, E1, N0, N1 = -650.0, 900.0, -650.0, 700.0
+    E0, E1, N0, N1 = -1100.0, 1200.0, -900.0, 900.0
     blib.mesh_from_arrays('woda', [(E0, N0, zw), (E1, N0, zw), (E1, N1, zw), (E0, N1, zw)], [(0, 1, 2, 3)],
                           mats=[ctx.mat('woda')], coll=coll)
     mur, ws, gs = _brzeg(ctx.site)
@@ -2146,7 +2187,7 @@ def przygotuj_ortofoto(ctx):
     exg = 2 * G - R - B
     std = ndimage.generic_filter(lum, np.std, size=5) if False else np.sqrt(np.maximum(
         ndimage.uniform_filter(lum ** 2, 5) - ndimage.uniform_filter(lum, 5) ** 2, 0))
-    drz = (exg > 14) & (lum < 125) & (std > 7.5) & ~woda
+    drz = (exg > 18) & (lum < 112) & (std > 9.0) & ~woda
     drz = ndimage.binary_opening(drz, iterations=1)
     np.save(mw, woda)
     np.save(md, drz)
@@ -2174,7 +2215,8 @@ def zbuduj_dalsze(ctx):
             polys.append(P.simplify(0.8))
     woda_d = unary_union(polys) if polys else Polygon()
     # zasięg dalszego terenu (prostokąt w obrębie ortofotomapy)
-    ex = sbox(-560.0, -520.0, 780.0, 600.0)
+    cx, cy = _orto_local(np.array([2.0, Wd - 2.0, Wd - 2.0, 2.0]), np.array([2.0, 2.0, H - 2.0, H - 2.0]))
+    ex = Polygon(np.c_[cx, cy])
     woda_d = woda_d.intersection(ex)
     # w ramce obowiązuje geometria z e-mapy
     rk = ctx.ramka
@@ -2214,10 +2256,15 @@ def zbuduj_dalsze(ctx):
                     g.polyn([(a[0], a[1], ctx.z_woda - 2.0), (b[0], b[1], ctx.z_woda - 2.0), (b[0], b[1], zz[i + 1]),
                              (a[0], a[1], zz[i])], nrm, 'mur_nabrzeza')
         g.obiekt('brzegi_dalsze', ctx, coll)
+        # teren poza ortofotomapą (do horyzontu, z perspektywą powietrzną)
+        outer = sbox(-6000, -6000, 6000, 6000).difference(ex)
+        V2, F = triangulacja(outer, None)
+        blib.mesh_from_arrays('teren_poza_ortofoto', np.c_[V2, np.full(len(V2), 0.0)], F,
+                              mats=[ctx.mat('teren_daleki')], coll=coll)
     if ctx.opts['dalsze_bryly']:
         g = Geo()
         nb = 0
-        for (nm, pts, h, kol) in BRYLY_DALSZE:
+        for (nm, pts, h, kol, m_dach) in BRYLY_DALSZE:
             P = Polygon(pts).buffer(0)
             if P.intersects(rk.buffer(-0.5)):
                 P = P.difference(rk)
@@ -2233,7 +2280,7 @@ def zbuduj_dalsze(ctx):
                     j = (i + 1) % k
                     g.add([(e[i], n[i], zb), (e[j], n[j], zb), (e[j], n[j], zt), (e[i], n[i], zt)], [(0, 1, 2, 3)], m)
                 V2, F = triangulacja(part, None)
-                g.add([(V2[i, 0], V2[i, 1], zt) for i in range(len(V2))], [tuple(f) for f in F], 'papa')
+                g.add([(V2[i, 0], V2[i, 1], zt) for i in range(len(V2))], [tuple(f) for f in F], m_dach)
                 nb += 1
         g.obiekt('bryly_dalsze', ctx, coll)
         ctx.info['bryly_dalsze'] = nb
@@ -2241,7 +2288,7 @@ def zbuduj_dalsze(ctx):
         P = _prototypy(ctx)
         rng = np.random.default_rng(ctx.opts['seed'] + 5)
         # próbkowanie maski koron w siatce ~6,5 m, w promieniu 430 m od działki
-        E, N = np.meshgrid(np.arange(-380.0, 520.0, 6.5), np.arange(-380.0, 480.0, 6.5))
+        E, N = np.meshgrid(np.arange(-380.0, 520.0, 7.5), np.arange(-380.0, 480.0, 7.5))
         E = E.ravel() + rng.uniform(-2.5, 2.5, E.size)
         N = N.ravel() + rng.uniform(-2.5, 2.5, N.size)
         ok = np.hypot(E - 85, N - 40) < 430
@@ -2273,7 +2320,49 @@ def zbuduj_dalsze(ctx):
 # Bryły dalszego otoczenia (poza ramką mapy): obrysy przybliżone z ortofotomapy M.11.A (01 B, po georeferencji),
 # dokładność ok. ±2–3 m; wysokości [m] szacowane z liczby kondygnacji na zdjęciach F.17/M.09/M.10 i modelu SIP
 # (M.11.C). Kolor tynku – orientacyjny. (nazwa, obrys [(e, n)], wysokość nad terenem, kolor hex sRGB)
-BRYLY_DALSZE = []
+BRYLY_DALSZE = [
+    # --- na pd. od ramki (kwartał Mazowiecka – Wybrzeże Słowackiego)
+    ('Mazowiecka 17 – skrzydło frontowe (cd.)', [(34.05, -35.5), (47.5, -35.5), (31.0, -80.0), (17.8, -80.0)], 19.0,
+     'dddbd3', 'dachowka'),
+    ('Mazowiecka 17 – oficyny', [(50.0, -36.5), (76.0, -37.0), (72.0, -60.0), (46.0, -58.0)], 15.0, 'c9c4ba', 'papa'),
+    ('oficyna pd.', [(40.0, -60.0), (70.0, -62.0), (66.0, -80.0), (36.0, -78.0)], 14.0, 'c2bcb0', 'papa'),
+    ('pawilon', [(52.0, -86.0), (77.0, -86.0), (77.0, -97.0), (52.0, -97.0)], 6.5, 'd8d6d0', 'papa'),
+    ('Wybrzeże Słowackiego 10–11', [(104.5, -26.6), (120.5, -26.1), (121.3, -55.0), (103.0, -55.0)], 19.6, 'a69a88',
+     'dach_szary'),
+    ('kwartał pd. – budynek', [(88.0, -56.0), (102.0, -56.0), (103.0, -92.0), (88.0, -92.0)], 17.0, 'b0aaa0', 'papa'),
+    ('Wybrzeże Słowackiego 12–14 (UMWD)', [(104.0, -57.0), (122.0, -57.0), (124.5, -150.0), (100.0, -150.0)], 22.0,
+     'dedcd6', 'dach_szary'),
+    ('kwartał pd. – budynek 2', [(86.0, -97.0), (99.0, -97.0), (99.0, -150.0), (86.0, -150.0)], 18.0, 'bdb7ad', 'papa'),
+    # --- na pn.-zach. (pl. Powstańców Warszawy)
+    ('DUW – skrzydło nadrzeczne i pierzeje', [(-110.0, 293.0), (-60.0, 288.0), (-25.0, 273.0), (0.0, 256.0),
+                                               (20.0, 236.0), (35.0, 213.0), (45.0, 190.0), (52.0, 165.0), (55.0, 143.0),
+                                               (36.0, 142.0), (34.0, 160.0), (27.0, 185.0), (16.0, 208.0), (0.0, 228.0),
+                                               (-20.0, 245.0), (-50.0, 260.0), (-93.0, 266.0), (-93.0, 215.0),
+                                               (-110.0, 212.0)], 24.0, 'c8c4ba', 'dach_szary'),
+    ('DUW – skrzydło pd.-zach.', [(-93.0, 215.0), (-60.0, 182.0), (-28.0, 150.0), (36.0, 142.0), (34.0, 160.0),
+                                  (-18.0, 166.0), (-48.0, 196.0), (-80.0, 228.0), (-93.0, 228.0)], 24.0, 'c8c4ba',
+     'dach_szary'),
+    ('DUW – skrzydło środkowe', [(-62.0, 218.0), (-30.0, 225.0), (-25.0, 252.0), (-58.0, 258.0)], 18.0, 'c8c4ba',
+     'dach_szary'),
+    ('Muzeum Narodowe', [(-239.0, 310.0), (-191.0, 361.0), (-137.0, 316.0), (-182.0, 265.0)], 22.0, '9a5a44',
+     'dachowka'),
+    # --- pn. brzeg Odry (pl. Grunwaldzki)
+    ('pn. brzeg – budynek A', [(226.0, 265.0), (280.0, 265.0), (282.0, 302.0), (228.0, 302.0)], 20.0, 'b9b5ab', 'papa'),
+    ('pn. brzeg – zespół B', [(170.0, 297.0), (228.0, 297.0), (228.0, 347.0), (170.0, 347.0)], 16.0, 'd0ccc2', 'papa'),
+    ('pn. brzeg – budynek C', [(244.0, 350.0), (298.0, 350.0), (298.0, 398.0), (244.0, 398.0)], 20.0, 'aaa59b', 'papa'),
+    ('pn. brzeg – budynek D', [(160.0, 380.0), (220.0, 380.0), (220.0, 422.0), (160.0, 422.0)], 22.0, 'c4c0b6', 'papa'),
+    ('pn. brzeg – budynek E', [(298.0, 272.0), (352.0, 272.0), (352.0, 314.0), (298.0, 314.0)], 18.0, 'b3aea4', 'papa'),
+    ('pn. brzeg – budynek F', [(358.0, 290.0), (412.0, 290.0), (412.0, 332.0), (358.0, 332.0)], 18.0, 'bcb7ad', 'papa'),
+    ('pn. brzeg – budynek G', [(100.0, 375.0), (150.0, 375.0), (150.0, 445.0), (100.0, 445.0)], 25.0, '9f9b93', 'papa'),
+    # --- wsch. brzeg (Wybrzeże Wyspiańskiego)
+    ('wsch. brzeg – 1', [(302.0, 78.0), (338.0, 78.0), (338.0, 114.0), (302.0, 114.0)], 18.0, 'c6c0b4', 'papa'),
+    ('wsch. brzeg – 2', [(314.0, 24.0), (350.0, 24.0), (350.0, 60.0), (314.0, 60.0)], 18.0, 'bfb9ad', 'papa'),
+    ('wsch. brzeg – 3', [(320.0, -24.0), (368.0, -24.0), (368.0, 12.0), (320.0, 12.0)], 16.0, 'c9c3b8', 'papa'),
+    ('wsch. brzeg – 4', [(344.0, -66.0), (392.0, -66.0), (392.0, -30.0), (344.0, -30.0)], 15.0, 'b8b2a6', 'papa'),
+    ('wsch. brzeg – 5', [(374.0, -102.0), (422.0, -102.0), (422.0, -66.0), (374.0, -66.0)], 15.0, 'c2bcb0', 'papa'),
+    ('wsch. brzeg – 6', [(404.0, 6.0), (464.0, 6.0), (464.0, 78.0), (404.0, 78.0)], 20.0, 'd6d3cc', 'papa'),
+    ('wsch. brzeg – 7', [(326.0, 120.0), (380.0, 120.0), (380.0, 150.0), (326.0, 150.0)], 20.0, 'b5b0a6', 'papa'),
+]
 
 
 # ============================================================================================== główna funkcja
@@ -2315,12 +2404,12 @@ def build_context(scene, opts=None):
 # ============================================================================================== podgląd (render testowy)
 KAMERY = {
     # nazwa: (pozycja [e, n, wysokość nad terenem lub Z bezwzględne], cel, ogniskowa mm, poziomowanie, shift_y, rozdz.)
-    'lot_ptaka_pnwsch': dict(loc=(262.0, 214.0, 108.0), abs_z=True, target=(80.0, 36.0, 6.0), lens=26.0, level=False,
-                             shift_y=0.0, res=(1000, 625)),
+    'lot_ptaka_pnwsch': dict(loc=(185.0, 245.0, 135.0), abs_z=True, target=(82.0, 35.0, 0.0), lens=26.0, level=False,
+                             shift_y=0.0, res=(1000, 625), czas='2025-10-29 11:40'),
     'skwer_pd': dict(loc=(80.5, 74.5, 1.65), abs_z=False, target=(82.0, 10.0, 8.0), lens=22.0, level=True,
-                     shift_y=0.13, res=(960, 640)),
+                     shift_y=0.13, res=(960, 640), czas='2025-10-29 14:00'),
     'mazowiecka_pn': dict(loc=(27.5, -31.0, 1.65), abs_z=False, target=(52.0, 60.0, 8.0), lens=24.0, level=True,
-                          shift_y=0.10, res=(960, 640)),
+                          shift_y=0.10, res=(960, 640), czas='2025-10-29 14:00'),
 }
 
 
@@ -2352,13 +2441,15 @@ def export_preview(out_dir=None, opts=None, kamery=None, samples=28, data_godzin
     res = build_context(sc, opts)
     t_build = time.time() - t0
     ctx = res['ctx']
-    dt = datetime.datetime.strptime(data_godzina, '%Y-%m-%d %H:%M').replace(tzinfo=TZ)
-    az, el = sun_position(dt)
-    az_siatki = az - (-0.738)        # zbieżność południków γ = −0,738° (oś n obrócona względem pn. geogr.)
+    # azymut Słońca w układzie siatki: az + 0,738° (zbieżność południków γ = −0,738°, geometria.md § 2.2)
     blib.render_settings(sc, 960, 640, samples=samples, adaptive=0.02, exposure=-0.25, look='AgX - Base Contrast')
-    blib.sky_and_sun(sc, az_siatki, el, sun_strength=6.0, sky_strength=0.18)
     wyniki = {}
     for nm in (kamery or list(KAMERY)):
+        for o in [o for o in sc.objects if o.type == 'LIGHT']:
+            bpy.data.objects.remove(o)
+        dt = datetime.datetime.strptime(KAMERY[nm].get('czas', data_godzina), '%Y-%m-%d %H:%M').replace(tzinfo=TZ)
+        az, el = sun_position(dt)
+        blib.sky_and_sun(sc, az + 0.738, el, sun_strength=6.0, sky_strength=0.18)
         ustaw_kamere(ctx, sc, nm)
         png = out_dir / ('_tmp_%s.png' % nm)
         sc.render.filepath = str(png)
@@ -2376,7 +2467,7 @@ def export_preview(out_dir=None, opts=None, kamery=None, samples=28, data_godzin
         png.unlink()
         wyniki[nm] = (str(jpg), round(dtr, 1))
         print('[kontekst] %s: %.1f s → %s' % (nm, dtr, jpg))
-    print('[kontekst] budowa sceny %.1f s; słońce az %.1f° el %.1f°' % (t_build, az, el))
+    print('[kontekst] budowa sceny %.1f s' % t_build)
     return wyniki, res['info'], round(t_build, 1)
 
 
