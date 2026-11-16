@@ -45,11 +45,13 @@ Opisy z mapy M.02 (PDF, tabliczka i legenda; odczyt wizualny renderu 250 dpi): *
 | Rzędne pomiaru w e-mapie (warstwa `txt`) vs pikiety | 65 | odl. XY maks. 1.358 m, ΔH maks. 0.050 m |
 | Urzędowe punkty wysokościowe e-mapy GSPWPS vs TIN z pikiet (niezależny pomiar) | 5 | śr. +0.052 m, σ 0.055 m, maks. |Δ| 0.159 m |
 | Urzędowe punkty wysokościowe e-mapy GSPWPN vs TIN z pikiet (niezależny pomiar) | 11 | śr. +0.039 m, σ 0.358 m, maks. |Δ| 0.877 m |
-| PDF M.04 (wektory, przeliczone przez ramkę 1:500) vs DWG: obszar_inwestycji | 244 wierzch. | odl. do obrysu DWG: mediana 0.187 m, p95 0.291 m, maks. 0.299 m |
-| PDF M.04 (wektory, przeliczone przez ramkę 1:500) vs DWG: granica_opracowania_konkursowego | 700 wierzch. | odl. do obrysu DWG: mediana 0.248 m, p95 0.318 m, maks. 0.379 m |
-| PDF M.04 (wektory, przeliczone przez ramkę 1:500) vs DWG: teren_uzyczony_9_2 | 32 wierzch. | odl. do obrysu DWG: mediana 0.006 m, p95 0.013 m, maks. 0.014 m |
+| PDF M.04 (wektory przeliczone przez ramkę 1:500) vs DWG: obszar_inwestycji | 82 odc. | odl. ze znakiem: mediana -0.006 m (p05 -0.212, p95 +0.196); |odl.| mediana 0.011 m, maks. 0.907 m |
+| PDF M.04 (wektory przeliczone przez ramkę 1:500) vs DWG: granica_opracowania_konkursowego | 350 odc. | odl. ze znakiem: mediana -0.006 m (p05 -0.258, p95 +0.246); |odl.| mediana 0.010 m, maks. 0.267 m |
+| PDF M.04 (wektory przeliczone przez ramkę 1:500) vs DWG: teren_uzyczony_9_2 | 7 odc. | odl. ze znakiem: mediana -0.007 m (p05 -0.725, p95 +0.001); |odl.| mediana 0.007 m, maks. 0.730 m |
 | Skala PDF M.04 (ramka) | – | 0.176370 / 0.176398 m/pt vs teoret. 1:500 = 0.176389 m/pt |
 | Blok vs polilinia granicy konkursowej w DWG M.04 | – | różnica symetryczna 0.000 m² |
+
+Uwaga do kontroli PDF: granice obszaru inwestycji i opracowania konkursowego są w PDF narysowane jako polilinie o szerokości (dwa kontury po obu stronach osi, ±0,2–0,25 m) – o zgodności świadczy mediana odległości ze znakiem ≈ 0; teren użyczony (linia cienka) zgadza się z DWG na poziomie 1 cm. Punkty kontrolne georeferencji: ramka (4 narożniki z opisami współrzędnych), drzewa (txt ↔ DWG zieleni ↔ e-mapa), pikiety (txt ↔ DWG modelu terenu ↔ rzędne w e-mapie), niezależne punkty wysokościowe e-mapy ↔ TIN.
 
 **Ocena dokładności (wniosek):** treść EGiB/BDOT500/GESUT i pomiar uzupełniający – dokładność mapy zasadniczej 1:500 (rzędu ±0,1 m dla szczegółów I grupy); granice konkursowe M.04 – identyczne z DWG po przesunięciu (błąd < 1 cm); **linie MPZP (linie zabudowy, wydzielenie A, linie rozgraniczające) – wrysowane z rastra SIP 1:1000 – dokładność ok. ±0,3–0,5 m**; uzbrojenie – wg GESUT, bez gwarancji kompletności (zastrzeżenie na mapie). NMT – interpolacja liniowa TIN; w obrębie obszaru inwestycji gęstość ok. 1 pikieta / 10 m².
 
@@ -178,30 +180,47 @@ Boki A: 29.95, 39.99, 29.98, 40.64 m.
 
 | Działka | Obręb | Użytki | Pole geom. [m²] | W obszarze inwestycji [m²] | Uwagi |
 |---|---|---|---|---|---|
-| 10/3 | 0001 Stare Miasto | Bz | 2231.0 | 2230.8 |  |
-| 11/6 | 0001 Stare Miasto | B | 1050.8 | 1050.8 |  |
-| 19/11 | 0001 Stare Miasto | dr | 12.4 | 12.4 |  |
-| 9/1 | 0001 Stare Miasto | dr | 434.0 | 433.9 |  |
-| 9/2 | 0001 Stare Miasto | dr | 355.0 | 0.0 |  |
-| 10/2 | 0001 Stare Miasto | Bz | 128.9 | 0.0 |  |
-| 8/6 | 0001 Stare Miasto | dr | 320.6 | 0.0 |  |
-| 8/8 | 0001 Stare Miasto | dr | 729.2 | 0.0 |  |
-| 8/7 | 0001 Stare Miasto | dr | 411.6 | 0.0 |  |
-| 11/3 | 0001 Stare Miasto | B | 356.9 | 0.0 |  |
-| 12 | 0001 Stare Miasto | B | 295.3 | 0.0 |  |
-| 10/1 | 0001 Stare Miasto | Tp | 22.3 | 0.0 |  |
-| 11/4 | 0001 Stare Miasto | B | 108.9 | 0.0 |  |
-| 11/5 | 0001 Stare Miasto | B | 103.1 | 0.0 |  |
-| 13 | 0001 Stare Miasto | B | 275.3 | 0.0 |  |
-| 12/3+12/2+20+14/1+21/1+1+3/2+4+16/6+21+1+16/9+16/10+19/1+19/12+8/9+16/4 | 0001 Stare Miasto | Bi, Bz, Tp, Wp, dr | 18141.2 | 0.6 | przycięta ramką |
-| 16/3 | 0001 Stare Miasto | Bi | 265.2 | 0.0 |  |
-| 11/1 | 0001 Stare Miasto | B | 207.8 | 0.0 |  |
-| 14 | 0001 Stare Miasto | B | 194.3 | 0.0 |  |
-| 3/1 | 0001 Stare Miasto | Bp | 111.2 | 0.0 |  |
-| 16/8 | 0001 Stare Miasto | Bi | 94.0 | 0.0 |  |
-| 2/2 | 0001 Stare Miasto | Bp | 57.8 | 0.0 |  |
-| 15 | 0001 Stare Miasto | B | 30.3 | 0.0 |  |
-| 2/1 | 0001 Stare Miasto | Tp | 5.7 | 0.0 |  |
+| 10/3 | 0022 Południe | Bz | 2231.0 | 2230.8 |  |
+| 11/6 | 0022 Południe | B | 1050.8 | 1050.8 |  |
+| 19/11 | 0022 Południe | dr | 12.4 | 12.4 |  |
+| 9/1 | 0022 Południe | dr | 434.0 | 433.9 |  |
+| 9/2 | 0022 Południe | dr | 355.0 | 0.0 |  |
+| 10/2 | 0022 Południe | Bz | 128.9 | 0.0 |  |
+| 8/6 | 0022 Południe | dr | 320.6 | 0.0 |  |
+| 8/8 | 0022 Południe | dr | 729.2 | 0.0 |  |
+| 8/7 | 0022 Południe | dr | 411.6 | 0.0 |  |
+| 11/3 | 0022 Południe | B | 356.9 | 0.0 |  |
+| 12 | 0022 Południe | B | 295.3 | 0.0 |  |
+| 10/1 | 0022 Południe | Tp | 22.3 | 0.0 |  |
+| 11/4 | 0022 Południe | B | 108.9 | 0.0 |  |
+| 11/5 | 0022 Południe | B | 103.1 | 0.0 |  |
+| 13 | 0022 Południe | B | 275.3 | 0.0 |  |
+| 20+21 | 0022 Południe | Wp | 4885.2 | 0.0 | przycięta ramką |
+| 19/1 | 0022 Południe | dr | 3949.5 | 0.0 | przycięta ramką |
+| 19/12 | 0022 Południe | dr | 1943.8 | 0.0 | przycięta ramką |
+| 1 | 0022 Południe | dr | 1535.5 | 0.0 | przycięta ramką |
+| 14/1 | 0001 Stare Miasto | dr | 1186.1 | 0.0 | przycięta ramką |
+| 8/9 | 0022 Południe | dr | 951.2 | 0.0 | przycięta ramką |
+| 16/10 | 0022 Południe | Bi | 810.5 | 0.6 | przycięta ramką |
+| 3/2 | 0022 Południe | Tp | 791.7 | 0.0 | przycięta ramką |
+| 12/2 | 0001 Stare Miasto | dr | 711.9 | 0.0 | przycięta ramką |
+| 16/4 | 0022 Południe | Bi | 456.6 | 0.0 | przycięta ramką |
+| 12/3 | 0001 Stare Miasto | dr | 277.6 | 0.0 | przycięta ramką |
+| 16/3 | 0022 Południe | Bi | 265.2 | 0.0 |  |
+| 4 | 0022 Południe | Bz | 226.4 | 0.0 | przycięta ramką |
+| 11/1 | 0022 Południe | B | 207.8 | 0.0 |  |
+| 14 | 0022 Południe | B | 194.3 | 0.0 |  |
+| 1 | 0001 Stare Miasto | Wp | 143.8 | 0.0 | przycięta ramką |
+| ? | 0022 Południe |  | 120.7 | 0.0 | przycięta ramką |
+| 3/1 | 0022 Południe | Bp | 111.2 | 0.0 |  |
+| 16/8 | 0022 Południe | Bi | 94.0 | 0.0 |  |
+| 16/9 | 0022 Południe | Bi | 81.5 | 0.0 | przycięta ramką |
+| 2/2 | 0022 Południe | Bp | 57.8 | 0.0 |  |
+| 21/1 | 0001 Stare Miasto | dr | 55.2 | 0.0 | przycięta ramką |
+| 15 | 0022 Południe | B | 30.3 | 0.0 |  |
+| 16/6 | 0022 Południe | Tp | 10.4 | 0.0 | przycięta ramką |
+| 2/1 | 0022 Południe | Tp | 5.7 | 0.0 |  |
+| ? | 0001 Stare Miasto |  | 3.6 | 0.0 | przycięta ramką |
 
 Suma pól geometrycznych dz. 10/3 + 11/6 + 19/11 + 9/1 = **3728.2 m²** (obszar inwestycji M.04: 3728.7 m²; M.01: 3 729 m²). Etykiety nieprzypisane do zamkniętych poligonów (działki przecięte ramką bez pełnego obrysu lub numery z odnośnikami poza ramką): brak.
 
@@ -214,16 +233,16 @@ Kolejność CCW od wierzchołka 0; azymuty od północy siatki. Sąsiedztwo – 
 | 0 | 97.20, -6.56 | 95.72, 34.17 | 40.76 | 357.9 | 87.9 | 11/4 | – |
 | 1 | 95.72, 34.17 | 117.08, 35.41 | 21.40 | 86.7 | 176.7 | 10/2 | – |
 | 2 | 117.08, 35.41 | 114.74, 47.41 | 12.23 | 349.0 | 79.0 | 10/1 | – |
-| 3 | 114.74, 47.41 | 112.01, 59.15 | 12.05 | 346.9 | 76.9 | 12/3, 12/2, 20, 14/1, 21/1, 1, 3/2, 4, 16/6, 21, 1, 16/9, 16/10, 19/1, 19/12, 8/9, 16/4 | – |
-| 4 | 112.01, 59.15 | 110.00, 66.84 | 7.95 | 345.4 | 75.4 | 12/3, 12/2, 20, 14/1, 21/1, 1, 3/2, 4, 16/6, 21, 1, 16/9, 16/10, 19/1, 19/12, 8/9, 16/4 | – |
-| 5 | 110.00, 66.84 | 107.98, 73.93 | 7.37 | 344.1 | 74.1 | 12/3, 12/2, 20, 14/1, 21/1, 1, 3/2, 4, 16/6, 21, 1, 16/9, 16/10, 19/1, 19/12, 8/9, 16/4 | – |
-| 6 | 107.98, 73.93 | 105.70, 73.00 | 2.46 | 247.9 | 337.9 | 12/3, 12/2, 20, 14/1, 21/1, 1, 3/2, 4, 16/6, 21, 1, 16/9, 16/10, 19/1, 19/12, 8/9, 16/4 | – |
-| 7 | 105.70, 73.00 | 100.63, 77.92 | 7.06 | 314.2 | 44.2 | 12/3, 12/2, 20, 14/1, 21/1, 1, 3/2, 4, 16/6, 21, 1, 16/9, 16/10, 19/1, 19/12, 8/9, 16/4 | – |
+| 3 | 114.74, 47.41 | 112.01, 59.15 | 12.05 | 346.9 | 76.9 | 19/12 | – |
+| 4 | 112.01, 59.15 | 110.00, 66.84 | 7.95 | 345.4 | 75.4 | 19/12 | – |
+| 5 | 110.00, 66.84 | 107.98, 73.93 | 7.37 | 344.1 | 74.1 | 19/12 | – |
+| 6 | 107.98, 73.93 | 105.70, 73.00 | 2.46 | 247.9 | 337.9 | 19/1 | – |
+| 7 | 105.70, 73.00 | 100.63, 77.92 | 7.06 | 314.2 | 44.2 | 19/1 | – |
 | 8 | 100.63, 77.92 | 61.79, 68.50 | 39.97 | 256.4 | 346.4 | 9/2 | – |
 | 9 | 61.79, 68.50 | 48.84, 9.68 | 60.23 | 192.4 | 282.4 | 8/8 | – |
 | 10 | 48.84, 9.68 | 69.40, 5.20 | 21.04 | 102.3 | 192.3 | 11/3 | Mazowiecka 19 |
 | 11 | 69.40, 5.20 | 69.86, -7.55 | 12.76 | 178.0 | 268.0 | 11/3 | – |
-| 12 | 69.86, -7.55 | 97.20, -6.56 | 27.36 | 87.9 | 177.9 | 12/3, 12/2, 20, 14/1, 21/1, 1, 3/2, 4, 16/6, 21, 1, 16/9, 16/10, 19/1, 19/12, 8/9, 16/4 | Wybrzeze J. Slowackiego 9 |
+| 12 | 69.86, -7.55 | 97.20, -6.56 | 27.36 | 87.9 | 177.9 | 16/10 | Wybrzeze J. Slowackiego 9 |
 
 **Fronty (grupy krawędzi o tym samym sąsiedztwie):**
 
@@ -232,54 +251,92 @@ Kolejność CCW od wierzchołka 0; azymuty od północy siatki. Sąsiedztwo – 
 | 11/4 | – | 40.76 | (97.2, -6.6) → (95.7, 34.2) | granica z dz. 11/4 (podwórze) |
 | 10/2 | – | 21.40 | (95.7, 34.2) → (117.1, 35.4) | granica z dojazdem dz. 10/2 |
 | 10/1 | – | 12.23 | (117.1, 35.4) → (114.7, 47.4) | granica z dz. 10/1 (pas wzdłuż Wybrzeża) |
-| 12/3, 12/2, 20, 14/1, 21/1, 1, 3/2, 4, 16/6, 21, 1, 16/9, 16/10, 19/1, 19/12, 8/9, 16/4 | – | 36.89 | (114.7, 47.4) → (100.6, 77.9) |  |
+| 19/12 | – | 27.37 | (114.7, 47.4) → (108.0, 73.9) |  |
+| 19/1 | – | 9.52 | (108.0, 73.9) → (100.6, 77.9) |  |
 | 9/2 | – | 39.97 | (100.6, 77.9) → (61.8, 68.5) | granica ze skwerem dz. 9/2 → front Wybrzeża Słowackiego / przyczółek mostu |
 | 8/8 | – | 60.23 | (61.8, 68.5) → (48.8, 9.7) | front ul. Mazowieckiej (dz. drogowa 8/8) |
 | 11/3 | Mazowiecka 19 | 21.04 | (48.8, 9.7) → (69.4, 5.2) | granica z dz. Mazowiecka 19 |
 | 11/3 | – | 12.76 | (69.4, 5.2) → (69.9, -7.5) | granica z dz. Mazowiecka 19 |
-| 12/3, 12/2, 20, 14/1, 21/1, 1, 3/2, 4, 16/6, 21, 1, 16/9, 16/10, 19/1, 19/12, 8/9, 16/4 | Wybrzeze J. Slowackiego 9 | 27.36 | (69.9, -7.5) → (97.2, -6.6) |  |
+| 16/10 | Wybrzeze J. Slowackiego 9 | 27.36 | (69.9, -7.5) → (97.2, -6.6) |  |
 
 ### 4.3 Ściany budynków sąsiednich na granicy obszaru inwestycji
 
 | Budynek | Kondygn. | Ściana od → do (e, n) | Długość [m] | Normalna zewn. [°] | Uwagi |
 |---|---|---|---|---|---|
-| Mazowiecka 19 | 5 | (64.26, 6.32) → (48.84, 9.68) | 15.78 | 12.3 | pln. sciana szczytowa przy granicy z dz. 11/6 (obszar inwestycji); okna w scianie szczytowej przeznaczone do zamurowania w ramach inwestycji towarzyszacej (M.07, strona tytulowa) |
-| Mazowiecka 19 | 5 | (64.09, 5.70) → (64.26, 6.32) | 0.64 | 105.3 | pln. sciana szczytowa przy granicy z dz. 11/6 (obszar inwestycji); okna w scianie szczytowej przeznaczone do zamurowania w ramach inwestycji towarzyszacej (M.07, strona tytulowa) |
+| Mazowiecka 19 | 6 | (64.26, 6.32) → (48.84, 9.68) | 15.78 | 12.3 | pln. sciana szczytowa przy granicy z dz. 11/6 (obszar inwestycji); okna w scianie szczytowej przeznaczone do zamurowania w ramach inwestycji towarzyszacej (M.07, strona tytulowa) |
+| Mazowiecka 19 | 6 | (64.09, 5.70) → (64.26, 6.32) | 0.64 | 105.3 | pln. sciana szczytowa przy granicy z dz. 11/6 (obszar inwestycji); okna w scianie szczytowej przeznaczone do zamurowania w ramach inwestycji towarzyszacej (M.07, strona tytulowa) |
 | Wybrzeze J. Slowackiego 9 | 4 | (90.38, -6.78) → (75.85, -7.30) | 14.54 | 357.9 |  |
+
+### 4.4 Ściany budynków zwrócone ku obszarowi inwestycji (do analiz przesłaniania i odległości)
+
+Promienie z 5 punktów każdej ściany (długość ≥ 2 m) wzdłuż normalnej zewnętrznej, zasięg 25 m; odległość = od lica ściany do granicy obszaru inwestycji.
+
+| Budynek | Kondygn. | Ściana od → do (e, n) | Dł. [m] | Normalna zewn. [°] | Odl. do obszaru inw. [m] (min–max) | Udział promieni |
+|---|---|---|---|---|---|---|
+| Wybrzeze J. Slowackiego 5 | 5 | (102.02, 27.60) → (102.07, 25.60) | 2.01 | 268.6 | 6.04–6.06 | 1.0 |
+| Wybrzeze J. Slowackiego 5 | 5 | (102.07, 25.60) → (102.61, 10.72) | 14.89 | 267.9 | 6.03–6.04 | 1.0 |
+| Wybrzeze J. Slowackiego 5 | 5 | (118.16, 29.46) → (101.93, 28.52) | 16.26 | 356.7 | 6.00–6.00 | 1.0 |
+| Mazowiecka 19 | 6 | (64.26, 6.32) → (48.84, 9.68) | 15.78 | 12.3 | 0.05–0.05 | 1.0 |
+| Mazowiecka 19 | 6 | (60.50, -7.93) → (64.09, 5.70) | 14.09 | 104.8 | 5.95–8.50 | 0.8 |
+| Mazowiecka 17 | 5 | (60.50, -7.93) → (44.64, -8.38) | 15.86 | 358.4 | 15.56–17.92 | 0.8 |
+| i1 | 1 | (98.29, -6.93) → (93.69, -7.11) | 4.61 | 357.8 | 0.42–0.42 | 0.8 |
+| t1 | 1 | (98.85, -22.49) → (94.40, -22.58) | 4.45 | 358.8 | 15.92–15.96 | 0.8 |
+| Wybrzeze J. Slowackiego 9 | 4 | (90.38, -6.78) → (75.85, -7.30) | 14.54 | 357.9 | 0.05–0.05 | 1.0 |
+| Wybrzeze J. Slowackiego 6 | 5 | (102.61, 10.72) → (103.20, -6.49) | 17.22 | 268.0 | 6.00–6.03 | 1.0 |
+| Wybrzeze J. Slowackiego 6 | 5 | (118.63, 10.92) → (102.61, 10.72) | 16.02 | 359.3 | 23.91–24.49 | 1.0 |
+
+Wniosek: **pn. ściana szczytowa Wybrzeża Słowackiego 5** (normalna ok. 357°) nie leży na granicy obszaru inwestycji – oddziela ją dz. 10/2 (dojazd, szer. ok. 5,5–6 m); okno na 1. piętrze tej ściany (M.08) wymaga sprawdzenia przesłaniania/odległości od projektowanej zabudowy na pn. od dz. 10/2. **Pn. ściana szczytowa Mazowieckiej 19** leży na granicy (zabudowa przyległa możliwa). Pn. ściana budynku b4 (Wybrzeże Słowackiego 9 – adres niepewny) również leży na pd. granicy obszaru inwestycji.
 
 ## 5. Budynki istniejące (zasięg mapy)
 
 | Budynek | Etykieta | Funkcja (kod EGiB) | Kondygn. | Pole zab. [m²] | Teren wokół H śr. | Wysokość [m] | Góra ≈ H | Metoda / uwagi |
 |---|---|---|---|---|---|---|---|---|
-| Mazowiecka 19 | m5 | mieszkalny | 5 | 258.4 | 118.59 | 21.7 | 140.3 | inwentaryzacja M.07 |
-| Wybrzeze J. Slowackiego 5 | m5 | mieszkalny | 5 | 293.6 | 119.03 | 21.0 | 140.0 | szacunek – do weryfikacji |
-| Wybrzeze J. Slowackiego 6 | m5 | mieszkalny | 5 | 271.8 | 118.94 | 21.0 | 139.9 | szacunek – do weryfikacji |
-| Wybrzeze J. Slowackiego 7 | m5 | mieszkalny | 5 | 177.3 | poza NMT | 21.0 |  | szacunek – do weryfikacji |
+| Mazowiecka 17 | k5 | oswiaty, nauki, kultury lub sportu | 5 | 315.4 | 118.54 | 21.0 | 139.5 | szacunek – do weryfikacji |
+| Mazowiecka 17 *(przycięty ramką)* | k5 | oswiaty, nauki, kultury lub sportu | 5 | 141.3 | poza NMT | 21.0 |  | szacunek – do weryfikacji |
+| Mazowiecka 19 | m5 | mieszkalny | 6 | 258.4 | 118.53 | 21.7 | 140.2 | inwentaryzacja M.07 |
+| Wybrzeze J. Slowackiego 5 | m5 | mieszkalny | 5 | 293.6 | 118.99 | 21.0 | 140.0 | szacunek – do weryfikacji |
+| Wybrzeze J. Slowackiego 6 | m5 | mieszkalny | 5 | 271.8 | 118.85 | 21.0 | 139.8 | szacunek – do weryfikacji |
+| Wybrzeze J. Slowackiego 7 | m5 | mieszkalny | 5 | 177.3 | 118.62 | 21.0 | 139.6 | szacunek – do weryfikacji |
 | Wybrzeze J. Slowackiego 8 | m5 | mieszkalny | 5 | 191.2 | poza NMT | 21.0 |  | szacunek – do weryfikacji |
-| Wybrzeze J. Slowackiego 9 | b4 | biurowy | 4 | 408.6 | 119.03 | 17.2 | 136.2 | szacunek – do weryfikacji |
-| – (brak adresu) | k5 | oswiaty, nauki, kultury lub sportu | 5 | 315.4 | 119.68 | 21.0 | 140.7 | szacunek – do weryfikacji |
-| – (brak adresu) | i1 | inny niemieszkalny | 1 | 68.9 | 118.68 | 6.0 | 124.7 | szacunek – do weryfikacji |
-| – (brak adresu) | t1 | transportu i lacznosci | 1 | 27.8 | poza NMT | 6.0 |  | szacunek – do weryfikacji |
-| – (brak adresu) | i1 | inny niemieszkalny | 1 | 7.5 | 118.75 | 6.0 | 124.8 | szacunek – do weryfikacji |
+| Wybrzeze J. Slowackiego 9 | b4 | biurowy | 4 | 408.6 | 118.53 | 17.2 | 135.7 | szacunek – do weryfikacji |
+| – (brak adresu) | i1 | inny niemieszkalny | 1 | 68.9 | 118.63 | 6.0 | 124.6 | szacunek – do weryfikacji |
+| – (brak adresu) | t1 | transportu i lacznosci | 1 | 27.8 | 118.53 | 6.0 | 124.5 | szacunek – do weryfikacji |
+| – (brak adresu) | i1 | inny niemieszkalny | 1 | 7.5 | 118.63 | 6.0 | 124.6 | szacunek – do weryfikacji |
 
-**Mazowiecka 19** (M.07, s. 9–10): kamienica z 1880 r. na dz. 11/3; 6 kondygnacji nadziemnych (w tym poddasze użytkowe), 1 podziemna; pow. zabudowy wg inwentaryzacji **259,00 m²** (z mapy: 258.4 m² – zgodność 99.7%); wysokość „ok. 20 m” (opis). Przekrój A-A: ±0,00 = parter (wejście od Mazowieckiej), ul. Mazowiecka −0,73, podwórze −1,15, spoczniki −0,85 / +1,78 / +5,51 / +9,28 / +13,05 / +16,79, poddasze +18,30; dach płaski kryty papą (spadek ok. 5%), murek attykowy, attyka ok. **+21,0 m** wzgl. ±0,00 (odczyt graficzny z rysunku, ±0,3 m – wniosek). Przyjęto: chodnik przed frontem H = 118.52 → ±0,00 ≈ 119.25 m n.p.m., attyka ≈ **140.25 m n.p.m.** (do weryfikacji pomiarem). Okna w północnej ścianie szczytowej – do zamurowania w ramach inwestycji towarzyszącej (M.07).
+**Mazowiecka 19** (M.07, s. 9–10): kamienica z 1880 r. na dz. 11/3; 6 kondygnacji nadziemnych (w tym poddasze użytkowe), 1 podziemna; pow. zabudowy wg inwentaryzacji **259,00 m²** (z mapy: 258.4 m² – zgodność 99.7%); wysokość „ok. 20 m” (opis). **Sprzeczność:** etykieta EGiB „m5” (5 kondygnacji) vs inwentaryzacja – 6 kondygnacji nadziemnych (różnica = poddasze użytkowe; przyjąć 6 w modelu). Przekrój A-A: ±0,00 = parter (wejście od Mazowieckiej), ul. Mazowiecka −0,73, podwórze −1,15, spoczniki −0,85 / +1,78 / +5,51 / +9,28 / +13,05 / +16,79, poddasze +18,30; dach płaski kryty papą (spadek ok. 5%), murek attykowy, attyka ok. **+21,0 m** wzgl. ±0,00 (odczyt graficzny z rysunku, ±0,3 m – wniosek). Przyjęto: chodnik przed frontem H = 118.51 → ±0,00 ≈ 119.24 m n.p.m., attyka ≈ **140.24 m n.p.m.** (do weryfikacji pomiarem). Okna w północnej ścianie szczytowej – do zamurowania w ramach inwestycji towarzyszącej (M.07).
 
 **Wybrzeże J. Słowackiego 5** (M.08): okno w ścianie szczytowej lokalu na kondygnacji 2 (1. piętro) **nie jest przeznaczone do zamurowania – należy uwzględnić jego istnienie w projekcie** (przesłanianie/nasłonecznienie, odległości wg WT). Wysokość budynku nie wynika z dostarczonych materiałów (rzuty – skany) – w `site.json` szacunek z liczby kondygnacji (5 → ok. 21.0 m), do weryfikacji na zdjęciach M.09/M.10.
 
 ## 6. Teren (NMT) – rzędne i spadki
 
-NMT: 800 pikiet + 0 punktów z wierzchołków linii nieciągłości (3D polilinie modelu terenu) → TIN → siatka 1.0 m (133 × 125 węzłów, `teren.siatka_NMT`). Zakres pikiet H 117.92…121.72 m.
+NMT: 791 pikiet (z 800; 9 wykluczono jako punkty nie-terenowe) + 0 punktów dodatkowych z wierzchołków linii nieciągłości (3D polilinie modelu terenu są zbudowane z tych samych pikiet, więc nie wnoszą nowych punktów; TIN nie jest wymuszany liniami – wniosek: przy siatce 1 m bez znaczenia) → TIN → siatka 1.0 m (133 × 124 węzłów, `teren.siatka_NMT`). Zakres H pikiet terenowych 117.92…121.72 m.
+
+**Pikiety wykluczone z NMT** (kryterium: H > mediana sąsiadów w promieniu 6 m o ponad 0,45 m **i** położenie ≤ 0,5 m od linii ogrodzenia/muru lub schodów budynku):
+
+| Nr | e | n | H | ΔH od mediany sąsiadów | Powód (wniosek) |
+|---|---|---|---|---|---|
+| 213 | 64.82 | 9.85 | 119.50 | +0.93 | korona muru/ogrodzenia |
+| 215 | 67.52 | 6.41 | 119.66 | +1.14 | korona muru/ogrodzenia |
+| 533 | 66.36 | 8.55 | 119.53 | +1.01 | korona muru/ogrodzenia |
+| 534 | 67.06 | 8.12 | 119.53 | +1.01 | korona muru/ogrodzenia |
+| 535 | 75.87 | -7.33 | 120.65 | +2.24 | korona muru/ogrodzenia |
+| 536 | 67.71 | -7.68 | 119.70 | +1.30 | korona muru/ogrodzenia |
+| 537 | 60.50 | -8.05 | 120.08 | +1.78 | korona muru/ogrodzenia |
+| 723 | 102.85 | 1.86 | 119.15 | +0.50 | stopien schodow/podest przy budynku |
+| 724 | 102.79 | 3.00 | 119.15 | +0.50 | stopien schodow/podest przy budynku |
+
+Pozostałe duże różnice lokalne (np. pikiety 721/722/221 przy schodach i skarpie na dz. 1KDG, n≈104–109, ok. +1,1 m) są rzeczywistą rzeźbą (skarpa przy dojeździe do mostu) i pozostały w NMT.
 
 | Obszar | Pole [m²] | Pikiet | H min | H max | H śr. | H med. | Deniwelacja | Spadek płaszczyzny regresji | Kierunek spadku [°] | Spadki lokalne TIN: med./p90/max [%] |
 |---|---|---|---|---|---|---|---|---|---|---|
-| obszar inwestycji | 3728.7 | 179 | 118.33 | 120.47 | 118.99 | 118.95 | 2.14 | 1.01% | 185 | 2.8 / 12.0 / 1283.6 |
+| obszar inwestycji | 3728.7 | 174 | 118.33 | 119.44 | 118.98 | 118.94 | 1.11 | 1.07% | 185 | 2.6 / 7.5 / 89.1 |
 | wydzielenie A ∩ obszar inwestycji | 1184.1 | 17 | 118.88 | 119.44 | 119.24 | 119.26 | 0.56 | 1.37% | 172 | 1.2 / 4.6 / 5.5 |
-| granica opracowania konkursowego | 4870.9 | 310 | 118.33 | 120.47 | 119.03 | 119.03 | 2.14 | 0.96% | 193 | 3.6 / 60.7 / 1283.6 |
-| ogródki przydomowe | 490.6 | 26 | 118.16 | 119.49 | 118.71 | 118.75 | 1.33 | 1.51% | 200 | 3.5 / 75.6 / 414.2 |
+| granica opracowania konkursowego | 4870.9 | 305 | 118.33 | 119.49 | 119.02 | 119.02 | 1.16 | 1.00% | 193 | 3.5 / 45.2 / 485.5 |
+| ogródki przydomowe | 490.6 | 26 | 118.16 | 119.00 | 118.70 | 118.74 | 0.84 | 1.67% | 208 | 3.4 / 22.0 / 184.2 |
 | dz. 9/2 (skwer) | 355.0 | 7 | 119.30 | 119.49 | 119.38 | 119.37 | 0.19 | 0.34% | 61 | 1.6 / 10.3 / 34.3 |
 | dz. 10/2 (dojazd) | 128.9 | 8 | 118.92 | 119.25 | 119.09 | 119.08 | 0.33 | 1.76% | 216 | 2.3 / 5.6 / 18.8 |
 
-Obszar inwestycji: H min 118.33 m w punkcie (e, n) = (70.0, -3.0), H max 120.47 m w (76.0, -7.0). Lokalne maksima spadków TIN wynikają z krawężników, obrzeży i nasypów ogródków (skoki rzędu 0,1–0,3 m na krótkich odcinkach) – nie są spadkiem terenu (wniosek).
+Obszar inwestycji: H min 118.33 m w punkcie (e, n) = (70.0, -3.0), H max 119.44 m w (82.5, 70.5). Lokalne maksima spadków TIN wynikają z krawężników, obrzeży i nasypów ogródków (skoki rzędu 0,1–0,3 m na krótkich odcinkach) – nie są spadkiem terenu (wniosek).
 
 **Rzędne w narożnikach obszaru inwestycji** (TIN):
 
@@ -296,10 +353,10 @@ Obszar inwestycji: H min 118.33 m w punkcie (e, n) = (70.0, -3.0), H max 120.47 
 | 8 | 100.63 | 77.92 | 119.31 |
 | 9 | 61.79 | 68.50 | 119.28 |
 | 10 | 48.84 | 9.68 | 118.65 |
-| 11 | 69.40 | 5.20 | 118.73 |
-| 12 | 69.86 | -7.55 | 119.73 |
+| 11 | 69.40 | 5.20 | 118.48 |
+| 12 | 69.86 | -7.55 | 118.56 |
 
-Wniosek do projektu: teren praktycznie płaski (deniwelacja w obszarze inwestycji ok. 2.1 m); poziom ±0,00 parteru można przyjąć ok. 119.10–119.25 m n.p.m. (chodnik + 0,15…0,30 m) – do decyzji projektowej i weryfikacji z wymaganiami dostępności (wejścia bez schodów).
+Wniosek do projektu: teren praktycznie płaski (deniwelacja w obszarze inwestycji ok. 1.1 m); poziom ±0,00 parteru można przyjąć ok. 119.09–119.24 m n.p.m. (chodnik + 0,15…0,30 m) – do decyzji projektowej i weryfikacji z wymaganiami dostępności (wejścia bez schodów).
 
 ## 7. Zieleń
 
@@ -309,14 +366,14 @@ Drzewa z pomiaru (`drzewa.txt`): 56 punktów, 52 unikalnych numerów (numery z d
 
 | Sieć | Etykiety | Długość w obszarze inwestycji [m] | w tym w wydzieleniu A [m] | Status |
 |---|---|---|---|---|
-| elektroenergetyka (`GULEPR`) | eNA, eNA, eNA | 22.6 | 22.6 | czynny/brak opisu |
-| elektroenergetyka (`GULEPR`) | eNA | 14.2 | 17.3 | czynny/brak opisu |
+| elektroenergetyka (`GULEPR`) | eNA, eNA, eNA | 22.6 | 20.0 | czynny/brak opisu |
+| elektroenergetyka (`GULEPR`) | eNA | 14.2 | 10.7 | czynny/brak opisu |
 | elektroenergetyka (`GULEPR`) | eS, eN | 0.7 | 0.0 | czynny/brak opisu |
 | kanalizacja (`GULKPR`) | k100 | 0.2 | 0.0 | czynny/brak opisu |
 | telekomunikacja (`GULTPR`) | t | 56.3 | 0.0 | czynny/brak opisu |
 | telekomunikacja (`GULTPR`) | t2-2200/17, t, t | 45.9 | 0.0 | czynny/brak opisu |
 | telekomunikacja (`GULTPR`) | – | 20.0 | 0.0 | czynny/brak opisu |
-| telekomunikacja (`GULTPR`) | t, t, t, t | 10.3 | 15.1 | czynny/brak opisu |
+| telekomunikacja (`GULTPR`) | t, t, t, t | 10.3 | 7.5 | czynny/brak opisu |
 | telekomunikacja (`GULTPR`) | – | 7.6 | 0.0 | czynny/brak opisu |
 | telekomunikacja (`GULTPR`) | – | 5.4 | 0.0 | czynny/brak opisu |
 | telekomunikacja (`GULTPR`) | t | 0.9 | 0.0 | czynny/brak opisu |

@@ -704,6 +704,8 @@ def obreby(em, frame):
     out = []
     for pol in polys:
         nm = [l["text"] for l in labs if pol.contains(Point(text_center(l)))]
+        if not nm:   # opis tuz poza ramka (np. '0022 Poludnie' przy e=10.40 < 10.66)
+            nm = [l["text"] for l in labs if pol.distance(Point(text_center(l))) < 2.0]
         out.append({"poly": pol, "name": nm[0] if nm else None})
     return out
 
@@ -1245,24 +1247,31 @@ def check_pdf_georef(P, S):
              "granica_opracowania_konkursowego": ((0.0, 0.75, 1.0), S["B"]["granica_opracowania_konkursowego"]),
              "teren_uzyczony_9_2": ((0.43, 0.87, 0.0), S["B"]["teren_uzyczony_9_2"])}
     for nm, (col, poly) in tests.items():
-        vv = []
+        sd = []
         for d in dr:
             c = d.get("color")
             if c is None or max(abs(c[i] - col[i]) for i in range(3)) > 0.02:
                 continue
             for it in d["items"]:
-                if it[0] == "l":
-                    vv += [tr(it[1].x, it[1].y), tr(it[2].x, it[2].y)]
-                elif it[0] == "re":
-                    r = it[1]
-                    vv += [tr(r.x0, r.y0), tr(r.x1, r.y1)]
-        # wierzcholki z legendy (poza ramka) pomijamy
-        vv = [v for v in vv if frame.contains(Point(v))]
-        if not vv:
+                if it[0] != "l":
+                    continue
+                a, b = tr(it[1].x, it[1].y), tr(it[2].x, it[2].y)
+                m = Point((a[0] + b[0]) / 2, (a[1] + b[1]) / 2)
+                if not frame.contains(m):      # legenda poza ramka
+                    continue
+                dist = poly.exterior.distance(m)
+                if dist > 1.0:                 # linie szrafury wewnatrz poligonu
+                    continue
+                sd.append(-dist if poly.contains(m) else dist)
+        if not sd:
             continue
-        dd = np.array([poly.exterior.distance(Point(v)) for v in vv])
-        res[nm] = {"n_wierzcholkow_pdf": len(vv), "odl_do_obrysu_DWG_m": {"mediana": r3(np.median(dd)),
-                   "p95": r3(np.percentile(dd, 95)), "max": r3(dd.max())}}
+        sd = np.array(sd)
+        ad = np.abs(sd)
+        res[nm] = {"n_odcinkow_pdf_przy_obrysie": int(len(sd)),
+                   "odl_ze_znakiem_m": {"mediana": r3(np.median(sd)), "p05": r3(np.percentile(sd, 5)), "p95": r3(np.percentile(sd, 95))},
+                   "odl_bezwzgl_m": {"mediana": r3(np.median(ad)), "max": r3(ad.max())},
+                   "interpretacja": ("PDF rysuje polilinie o szerokosci > 0 jako dwa kontury po obu stronach osi: |odl| ~ polowa szerokosci; "
+                                     "mediana odleglosci ze znakiem ~ 0 oznacza zgodnosc osi z geometria DWG")}
     return res
 
 
@@ -1420,8 +1429,13 @@ def build_json(P, S, extras):
              "przejscia_bramowe_lub_nawisy": [pts_r(b.exterior.coords if b.geom_type == "Polygon" else b.coords, 2) for b in q["przejscia_bramowe"]],
              "sciany_na_granicy_obszaru_inwestycji": shared_walls(pol, inv),
              "sciany_zwrocone_ku_obszarowi_inwestycji": walls_facing(pol, inv) if pol.distance(inv) < 25 else []}
+        d["kondygnacje_nadziemne_EGiB"] = st
         if name and name in BUILDING_NOTES:
             d["inwentaryzacja"] = BUILDING_NOTES[name]
+            ki = BUILDING_NOTES[name].get("kondygnacje_nadziemne_inwentaryzacja")
+            if ki:
+                d["kondygnacje_nadziemne"] = ki
+                d["kondygnacje_uwaga"] = "EGiB: %s, inwentaryzacja: %s (w tym poddasze uzytkowe) - przyjeto inwentaryzacje" % (st, ki)
         if name == "Mazowiecka 19" and gl:
             # poziom 0.00 = ul. Mazowiecka + 0.73 (M.07); chodnik przed frontem z NMT
             fr = extras.get("maz19_front_H")
@@ -1813,10 +1827,15 @@ def make_md(P, S, J, out_md):
     for nm in ("obszar_inwestycji", "granica_opracowania_konkursowego", "teren_uzyczony_9_2"):
         if nm in pdf:
             v = pdf[nm]
-            w("| PDF M.04 (wektory, przeliczone przez ramkę 1:500) vs DWG: %s | %d wierzch. | odl. do obrysu DWG: mediana %.3f m, p95 %.3f m, maks. %.3f m |" %
-              (nm, v["n_wierzcholkow_pdf"], v["odl_do_obrysu_DWG_m"]["mediana"], v["odl_do_obrysu_DWG_m"]["p95"], v["odl_do_obrysu_DWG_m"]["max"]))
+            w("| PDF M.04 (wektory przeliczone przez ramkę 1:500) vs DWG: %s | %d odc. | odl. ze znakiem: mediana %+.3f m (p05 %+.3f, p95 %+.3f); |odl.| mediana %.3f m, maks. %.3f m |" %
+              (nm, v["n_odcinkow_pdf_przy_obrysie"], v["odl_ze_znakiem_m"]["mediana"], v["odl_ze_znakiem_m"]["p05"], v["odl_ze_znakiem_m"]["p95"],
+               v["odl_bezwzgl_m"]["mediana"], v["odl_bezwzgl_m"]["max"]))
     w("| Skala PDF M.04 (ramka) | – | %.6f / %.6f m/pt vs teoret. 1:500 = %.6f m/pt |" % (pdf["skala_x_m_na_pt"], pdf["skala_y_m_na_pt"], pdf["skala_teoretyczna_1_500_m_na_pt"]))
     w("| Blok vs polilinia granicy konkursowej w DWG M.04 | – | różnica symetryczna %.3f m² |" % G["granica_opracowania_konkursowego"]["roznica_blok_vs_polilinia_m2"])
+    w("")
+    w("Uwaga do kontroli PDF: granice obszaru inwestycji i opracowania konkursowego są w PDF narysowane jako polilinie o szerokości (dwa kontury po obu stronach osi, ±0,2–0,25 m) – "
+      "o zgodności świadczy mediana odległości ze znakiem ≈ 0; teren użyczony (linia cienka) zgadza się z DWG na poziomie 1 cm. Punkty kontrolne georeferencji: ramka (4 narożniki z opisami współrzędnych), "
+      "drzewa (txt ↔ DWG zieleni ↔ e-mapa), pikiety (txt ↔ DWG modelu terenu ↔ rzędne w e-mapie), niezależne punkty wysokościowe e-mapy ↔ TIN.")
     w("")
     w("**Ocena dokładności (wniosek):** treść EGiB/BDOT500/GESUT i pomiar uzupełniający – dokładność mapy zasadniczej 1:500 (rzędu ±0,1 m dla szczegółów I grupy); "
       "granice konkursowe M.04 – identyczne z DWG po przesunięciu (błąd < 1 cm); **linie MPZP (linie zabudowy, wydzielenie A, linie rozgraniczające) – wrysowane z rastra SIP 1:1000 – "
@@ -1917,6 +1936,21 @@ def make_md(P, S, J, out_md):
                 nt = BUILDING_NOTES[b["nazwa"]]["sciana_szczytowa"]
             w("| %s | %s | (%.2f, %.2f) → (%.2f, %.2f) | %.2f | %.1f | %s |" % (b["nazwa"] or b["etykieta"], b["kondygnacje_nadziemne"], s["od"][0], s["od"][1], s["do"][0], s["do"][1], s["dlugosc_m"], s["azymut_normalnej_zewn_deg"], nt))
     w("")
+    w("### 4.4 Ściany budynków zwrócone ku obszarowi inwestycji (do analiz przesłaniania i odległości)")
+    w("")
+    w("Promienie z 5 punktów każdej ściany (długość ≥ 2 m) wzdłuż normalnej zewnętrznej, zasięg 25 m; odległość = od lica ściany do granicy obszaru inwestycji.")
+    w("")
+    w("| Budynek | Kondygn. | Ściana od → do (e, n) | Dł. [m] | Normalna zewn. [°] | Odl. do obszaru inw. [m] (min–max) | Udział promieni |")
+    w("|---|---|---|---|---|---|---|")
+    for b in J["budynki"]["items"]:
+        for s_ in b["sciany_zwrocone_ku_obszarowi_inwestycji"]:
+            w("| %s | %s | (%.2f, %.2f) → (%.2f, %.2f) | %.2f | %.1f | %.2f–%.2f | %.1f |" % (b["nazwa"] or b["etykieta"], b["kondygnacje_nadziemne"] or "",
+              s_["od"][0], s_["od"][1], s_["do"][0], s_["do"][1], s_["dlugosc_m"], s_["azymut_normalnej_zewn_deg"],
+              s_["odl_do_obszaru_inwestycji_m"][0], s_["odl_do_obszaru_inwestycji_m"][1], s_["udzial_promieni_trafiajacych"]))
+    w("")
+    w("Wniosek: **pn. ściana szczytowa Wybrzeża Słowackiego 5** (normalna ok. 357°) nie leży na granicy obszaru inwestycji – oddziela ją dz. 10/2 (dojazd, szer. ok. 5,5–6 m); okno na 1. piętrze tej ściany (M.08) wymaga sprawdzenia przesłaniania/odległości od projektowanej zabudowy na pn. od dz. 10/2. "
+      "**Pn. ściana szczytowa Mazowieckiej 19** leży na granicy (zabudowa przyległa możliwa). Pn. ściana budynku b4 (Wybrzeże Słowackiego 9 – adres niepewny) również leży na pd. granicy obszaru inwestycji.")
+    w("")
     w("## 5. Budynki istniejące (zasięg mapy)")
     w("")
     w("| Budynek | Etykieta | Funkcja (kod EGiB) | Kondygn. | Pole zab. [m²] | Teren wokół H śr. | Wysokość [m] | Góra ≈ H | Metoda / uwagi |")
@@ -1934,7 +1968,7 @@ def make_md(P, S, J, out_md):
     if m19:
         b = m19[0]
         w("**Mazowiecka 19** (M.07, s. 9–10): kamienica z 1880 r. na dz. 11/3; 6 kondygnacji nadziemnych (w tym poddasze użytkowe), 1 podziemna; pow. zabudowy wg inwentaryzacji **259,00 m²** "
-          "(z mapy: %.1f m² – zgodność %.1f%%); wysokość „ok. 20 m” (opis). Przekrój A-A: ±0,00 = parter (wejście od Mazowieckiej), ul. Mazowiecka −0,73, podwórze −1,15, spoczniki −0,85 / +1,78 / +5,51 / +9,28 / +13,05 / +16,79, poddasze +18,30; "
+          "(z mapy: %.1f m² – zgodność %.1f%%); wysokość „ok. 20 m” (opis). **Sprzeczność:** etykieta EGiB „m5” (5 kondygnacji) vs inwentaryzacja – 6 kondygnacji nadziemnych (różnica = poddasze użytkowe; przyjąć 6 w modelu). Przekrój A-A: ±0,00 = parter (wejście od Mazowieckiej), ul. Mazowiecka −0,73, podwórze −1,15, spoczniki −0,85 / +1,78 / +5,51 / +9,28 / +13,05 / +16,79, poddasze +18,30; "
           "dach płaski kryty papą (spadek ok. 5%%), murek attykowy, attyka ok. **+21,0 m** wzgl. ±0,00 (odczyt graficzny z rysunku, ±0,3 m – wniosek). "
           "Przyjęto: chodnik przed frontem H = %s → ±0,00 ≈ %s m n.p.m., attyka ≈ **%s m n.p.m.** (do weryfikacji pomiarem). Okna w północnej ścianie szczytowej – do zamurowania w ramach inwestycji towarzyszącej (M.07)." %
           (b["pole_zabudowy_geom_m2"], 100 * b["pole_zabudowy_geom_m2"] / 259.0, J["_extras_md"].get("maz19_front_H"), b.get("poziom_0_00_szac_H"), b.get("attyka_szac_H")))
@@ -1944,10 +1978,24 @@ def make_md(P, S, J, out_md):
     w("")
     w("## 6. Teren (NMT) – rzędne i spadki")
     w("")
-    w("NMT: %d pikiet + %d punktów z wierzchołków linii nieciągłości (3D polilinie modelu terenu) → TIN → siatka %.1f m (%d × %d węzłów, `teren.siatka_NMT`). Zakres pikiet H %.2f…%.2f m." %
-      (len(T["pikiety"]), len(T["punkty_dodatkowe_z_linii_nieciaglosci"]), T["siatka_NMT"]["krok_m"], T["siatka_NMT"]["nx"], T["siatka_NMT"]["ny"],
-       min(p[3] for p in T["pikiety"]), max(p[3] for p in T["pikiety"])))
+    nexc = len(T["pikiety_wykluczone_z_NMT"])
+    gp = [p for p in T["pikiety"] if p[4] == 1]
+    w("NMT: %d pikiet (z %d; %d wykluczono jako punkty nie-terenowe) + %d punktów dodatkowych z wierzchołków linii nieciągłości (3D polilinie modelu terenu są zbudowane z tych samych pikiet, "
+      "więc nie wnoszą nowych punktów; TIN nie jest wymuszany liniami – wniosek: przy siatce 1 m bez znaczenia) → TIN → siatka %.1f m (%d × %d węzłów, `teren.siatka_NMT`). "
+      "Zakres H pikiet terenowych %.2f…%.2f m." %
+      (len(gp), len(T["pikiety"]), nexc, len(T["punkty_dodatkowe_z_linii_nieciaglosci"]), T["siatka_NMT"]["krok_m"], T["siatka_NMT"]["nx"], T["siatka_NMT"]["ny"],
+       min(p[3] for p in gp), max(p[3] for p in gp)))
     w("")
+    if nexc:
+        w("**Pikiety wykluczone z NMT** (kryterium: H > mediana sąsiadów w promieniu 6 m o ponad 0,45 m **i** położenie ≤ 0,5 m od linii ogrodzenia/muru lub schodów budynku):")
+        w("")
+        w("| Nr | e | n | H | ΔH od mediany sąsiadów | Powód (wniosek) |")
+        w("|---|---|---|---|---|---|")
+        for x in T["pikiety_wykluczone_z_NMT"]:
+            w("| %s | %.2f | %.2f | %.2f | %+.2f | %s |" % (x["nr"], x["e"], x["n"], x["H"], x["dH_od_mediany_sasiadow"], x["powod"]))
+        w("")
+        w("Pozostałe duże różnice lokalne (np. pikiety 721/722/221 przy schodach i skarpie na dz. 1KDG, n≈104–109, ok. +1,1 m) są rzeczywistą rzeźbą (skarpa przy dojeździe do mostu) i pozostały w NMT.")
+        w("")
     w("| Obszar | Pole [m²] | Pikiet | H min | H max | H śr. | H med. | Deniwelacja | Spadek płaszczyzny regresji | Kierunek spadku [°] | Spadki lokalne TIN: med./p90/max [%] |")
     w("|---|---|---|---|---|---|---|---|---|---|---|")
     for s in T["statystyki"]:
