@@ -155,7 +155,7 @@ Legenda statusu: **OB** = obowiązek (wiążący zapis), **ZK** = zakaz, **ZL** 
 
 **5.3 Rozproszenie programu (P10–P11) a warunki konkursu.** Konkurs wymaga zmieszczenia programu M.01 na działkach 10/3, 11/6, 19/11, 9/1. Sugestia DWKZ wykracza poza zakres konkursu i nie zmienia go. WNIOSEK: ryzyko oceny „przeskalowania” jest realne. Odpowiedź: podział bryły, obniżona skala pierzei, ograniczenie gabarytu dominanty do potrzeb Sejmiku oraz maksymalne wykorzystanie kondygnacji podziemnych na funkcje bez światła (archiwa, magazyny). Warto pokazać na planszy porównanie skali z kwartałem z 1934 r.
 
-**5.4 Pierzeja północna.** DWKZ nakazuje kontynuację historycznych linii. Historyczna pierzeja od strony mostu leżała jednak na dz. 9/2, którą Regulamin przeznacza na skwer, a MPZP wyłącza z zabudowy. WNIOSEK: pełne odtworzenie obrysu kwartału jest niemożliwe w granicach działek. Regulamin sam to przyznaje: „w granicach dostępnych działek”. Należy to opisać wprost i zaproponować ślad dawnej linii w zagospodarowaniu skweru.
+**5.4 Pierzeja północna.** DWKZ nakazuje kontynuację historycznych linii. Historyczna pierzeja od strony mostu leżała jednak na dz. 9/2, którą Regulamin przeznacza na skwer, a MPZP wyłącza z zabudowy. WNIOSEK: pełne odtworzenie obrysu kwartału jest niemożliwe w granicach działek. Regulamin sam to przyznaje: „w granicach dostępnych działek”. Należy to opisać wprost i zaproponować ślad dawnej linii w zagospodarowaniu skweru. <!-- poprawione przez weryfikatora --> Uwaga geometryczna: dz. 9/2 jest klinem (ok. 17,9 m głębokości przy Mazowieckiej, <1 m na wschodzie). Ślad linii da się więc poprowadzić na 9/2 tylko w części zachodniej. Na wschodzie przebiegałby po działce drogowej 19/1 (zakres ideowy, Wyj. 03/14).
 
 **5.5 Ochrona elewacji Mazowieckiej 19 a likwidacja okien w jej szczycie.** MPZP chroni „elewacje oraz detale” Mazowieckiej 19 (§ 8 ust. 2). Zamawiający planuje usunięcie okien w ścianie szczytowej (Regulamin pkt 7; Wyj. 03/13). WNIOSEK: ściana szczytowa jest najpewniej elewacją wtórną, odsłoniętą po wyburzeniu sąsiedniej kamienicy, więc konflikt jest raczej formalny. Wymaga jednak uzgodnienia z konserwatorem (inwestor). Na ścianie szczytowej istniał mural (polska-org.pl, zdjęcie z 10.11.2013). Jego przysłonięcie to potencjalny temat społeczny, nie konserwatorski.
 
@@ -224,3 +224,19 @@ Legenda statusu: **OB** = obowiązek (wiążący zapis), **ZK** = zakaz, **ZL** 
 - arslege.pl, Prawo budowlane, art. 39: https://arslege.pl/roboty-budowlane-przy-obiekcie-wpisanym-do-rejestru-zabytkow-lub-na-obszarze-wpisanym-do-rejestru-zabytkow/k36/a7969/ (informacja o t.j. Dz.U. 2026 poz. 524 wg wyniku wyszukiwania lexlege.pl, niezweryfikowana w ISAP).
 - polska-org.pl, „Kamienica nr 19, ul. Mazowiecka”: https://polska-org.pl/536862,Wroclaw,Kamienica_nr_19.html (mural na ścianie szczytowej, zdjęcie 2013).
 - Dalsze źródła historyczne: zob. `historia.md` § 8.
+
+**Weryfikacja (16.11.2026)** <!-- dodane przez weryfikatora -->: niezależnie sprawdzono z oryginałami:
+- Pismo WOUZ s. 1–3 (obrazy 130 dpi), M.14;
+- MPZP s. 3–4, 11–14, 24–25 (obrazy stron);
+- Regulamin l. 735–870, 1690–1712, 2115–2135, 2725–2748, 2980–2992;
+- Wyjaśnienia nr 03, 04, 07, 08, 20;
+- Program s. 2–3;
+- M.07 s. 10 i 12 (kadry 200–400 dpi);
+- M.05 s. 6;
+- Notatka z wizji;
+- M.11.B, M.11.E, M.11.F (pomiar pikselowy);
+- `model/site.json` (geometria M.04, pikiety M.02).
+
+Źródła zewnętrzne (dostęp 16.11.2026):
+- pl.wikipedia „Most Grunwaldzki we Wrocławiu” (25,54 m; A/1653/326/Wm z 15.10.1976; 10.10.1910; 6.09.1947);
+- wroclaw.pl z 3.07.2025 (pozwolenie konserwatorskie, start „może to być rok 2027”, obniżenie pylonów o ok. 5 m).

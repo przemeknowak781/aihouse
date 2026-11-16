@@ -22,10 +22,10 @@ Ilustracje (katalog `img/`):
 3. Według nakładki planu z 1934 r. na ortofotomapę (WNIOSEK, dokładność ±5–10 m):
    - historyczna pierzeja przy Mazowieckiej pokrywa się z obecną granicą działek i fasadą Mazowieckiej 19;
    - pierzeja nad Oławą pokrywa się z fasadą Wybrzeża Słowackiego 5;
-   - pierzeja północna (od mostu) leżała ok. **11–18 m dalej na północ niż północna granica terenu zabudowy w MPZP**, czyli na dzisiejszej dz. 9/2 (skwer).
+   - pierzeja północna (od mostu) leżała ok. **11–18 m dalej na północ niż północna granica terenu zabudowy w MPZP**, czyli na dzisiejszej dz. 9/2 (skwer). <!-- poprawione przez weryfikatora --> W części wschodniej leżała także na działce drogowej 19/1, bo dz. 9/2 jest klinem: ok. 17,9 m głębokości przy Mazowieckiej, <1 m na wschodzie (M.04, `model/site.json`).
 4. **Zniszczenia:** wojna 1945 (Festung Breslau), powojenna rozbiórka i odgruzowanie (fotografia z 1951 r.). Z zabudowy ul. Mazowieckiej przetrwały tylko nr 17 (dawny etablissement „Concordia”, dziś Impart) i 19 oraz nr 30–34 po stronie zachodniej, wyburzone pod koniec lat 90. Plac Społeczny pozostał niezabudowany, z estakadami z lat 1984–1990.
 5. **Most Grunwaldzki** (rejestr A/1653/326/Wm, 15.10.1976) stracił w 1945 r. górne partie pylonów, które po wojnie obniżono o ok. 5 m. Projekt remontu z **odtworzeniem zwieńczeń (hełmów)** uzyskał akceptację konserwatora (2025). Na rysunku M.11.F wierzchołek hełmu leży ok. 25,5 m nad chodnikiem, co zgadza się z pierwotną wysokością pylonów 25,54 m.
-6. **Warto odtworzyć** (WNIOSEK): linie obu pierzei, zaokrąglony narożnik od mostu, linię gzymsu ok. 21 m, rytm posesji szerokości 12–20 m, charakter nabrzeża (aleja drzew, kamienny mur i balustrada, motyw przystani) oraz zielone przedmoście z czytelnym śladem dawnej pierzei północnej.
+6. **Warto odtworzyć** (WNIOSEK): linie obu pierzei, zaokrąglony narożnik od mostu, linię gzymsu ok. 21 m, rytm posesji szerokości 12–20 m, charakter nabrzeża (kamienny mur i balustrada, motyw przystani) oraz zielone przedmoście z czytelnym śladem dawnej pierzei północnej. <!-- poprawione przez weryfikatora: usunięto „aleja drzew” z charakteru nabrzeża --> Nabrzeże przy kwartale nie miało szpaleru (M.11.E s. 2–3, plan 1934). Aleja drzew biegła wzdłuż ulicy na północ od kwartału (zob. § 4.2).
 
 ---
 
@@ -81,7 +81,13 @@ Ilustracje (katalog `img/`):
 - **Autorstwo** (różnie podawane): architekt miejski radca budowlany **Richard Plüddemann**; inżynierowie **Alfred von Scholtz** i Ernst Günthl (pl.wikipedia); koncepcja konkursowa Mayer i Weyrauch (pl.wikipedia, wroclaw.pl 2023). WNIOSEK: na planszach bezpiecznie pisać „Kaiserbrücke, 1908–1910, arch. R. Plüddemann”, a w opisie wspomnieć o zespole inżynierów.
 - **Długość i rozpiętość:** 112,5 m (wroclaw.pl 2023, pl.wikipedia: długość) wobec 114 m rozpiętości i 126,6 m między osiami pylonów (pl.wikipedia) oraz 114,40 m × 19,70 m (Pierścionek 2022, wg fragmentu w wynikach wyszukiwania). Szerokość 18 m (pl.wikipedia; w 1910 r. 20 m).
 - **Pylony:** rdzeń z cegły klinkierowej, okładzina z granitu, łącznie ok. 2400 t granitu śląskiego (pl.wikipedia). Pierwotna wysokość **25,54 m** nad terenem (pl.wikipedia). Obecnie ok. 20 m (wg wyników wyszukiwania: opis NID „ok. 20 m”; wroclaw.pl 2025: obniżone o ok. 5 m). Po remoncie „potężne 25-metrowe pylony” (wroclaw.pl 2025).
-- **Pomiar rysunku M.11.F (WNIOSEK):** przyjęto, że 16,50 m (chodnik 2,20 + jezdnia z torowiskiem 12,10 + chodnik 2,20) to odległość między wewnętrznymi licami pylonów. Daje to ok. 28,3 px/m. Gzyms pod hełmem leży ok. 24,7 m nad chodnikiem, wierzchołek hełmu ok. 25,5 m, koniec iglicy ok. 26,3 m. Wynik zgadza się z wysokością 25,54 m.
+- **Pomiar rysunku M.11.F (WNIOSEK):** przyjęto, że 16,50 m (chodnik 2,20 + jezdnia z torowiskiem 12,10 + chodnik 2,20) to odległość między wewnętrznymi licami pylonów. Daje to ok. 28,3 px/m. Gzyms pod hełmem leży ok. 24,7 m nad chodnikiem, wierzchołek hełmu ok. 25,5 m, koniec iglicy ok. 26,3 m. Wynik zgadza się z wysokością 25,54 m. <!-- poprawione przez weryfikatora --> Pomiar kontrolny weryfikatora na oryginale (1306 × 804 px; lica pylonów x = 359 i 826 px, czyli 28,30 px/m; chodnik y ≈ 752 px):
+  - wierzchołek hełmu (y ≈ 30 px): ok. 25,5 m – potwierdzone;
+  - iglica (y ≈ 6 px): ok. 26,4 m;
+  - **górna krawędź gzymsu pod hełmem, czyli podstawa hełmu (y ≈ 90 px): ok. 23,4 m**, a dolna krawędź pasa gzymsu ok. 22,9 m;
+  - pod gzymsem latarnia z żaluzjami, ok. 21,4–22,9 m.
+
+  Wartość „24,7 m” odpowiada linii załamania połaci w obrębie hełmu, a nie gzymsowi. Wysokości liczone są od chodnika mostu. Teren przy wjeździe na most ma wg pikiet M.02 ok. 121,5–121,7 m n.p.m., a obszar inwestycji 118,3–119,4 m. Względem terenu działki hełm sięga więc ok. 28 m lub więcej (oszacowanie).
 - **Otwarcie** (rozbieżność): en.wikipedia i visitwroclaw podają otwarcie „w obecności cesarza Wilhelma II”. Według pl.wikipedia cesarz nie był obecny 10.10.1910 i odwiedził most krótko w listopadzie 1910 r. Kwestia nie ma znaczenia projektowego.
 
 ### 3.3 Znaczenie dla projektu (WNIOSEK)
@@ -100,7 +106,7 @@ Opis wycinka (`img/plan1934_fragment_kwartal_most.jpg`):
 - **Otoczenie 1934:** na północ od ulicy „…Ufer” leżał teren **„Städt. Betriebswerke”** (zakłady miejskie) z okrągłą budowlą (prawdopodobnie zbiornik) i zielonym pasem kwater wzdłuż ulicy. Według nakładki to obszar dzisiejszego gmachu DUW. Przy przyczółku: zielony pas z okrągłym elementem oraz **„Dampfer-Anlegest.”** (przystań parowców) w nurcie Odry tuż na południe od mostu. Na drugim brzegu: Kaiser-Str. (dziś pl. Grunwaldzki) i Helmuth-Brückner-Str.
 
 ### 4.2 Zdjęcia historyczne (M.11.E)
-- **S. 1, zdjęcie lotnicze** (kolaż dwóch ujęć; `img/foto_hist_1_lotnicze_kwartal.jpg`): pylon Kaiserbrücke z pierwotnym zwieńczeniem; aleja drzew wzdłuż Ohlau-Ufer; na pierwszym planie niska zabudowa zakładów miejskich. Kwartał inwestycji z **zaokrąglonym narożnikiem**, pierzeja północna i zakrzywiona pierzeja nad Oławą. Kamienice o 4–5 kondygnacjach, dachy o małym spadku z licznymi kominami, jasne tynkowane elewacje od strony wody.
+- **S. 1, zdjęcie lotnicze** (kolaż dwóch ujęć; `img/foto_hist_1_lotnicze_kwartal.jpg`): pylon Kaiserbrücke z pierwotnym zwieńczeniem; aleja drzew wzdłuż Ohlau-Ufer; na pierwszym planie niska zabudowa zakładów miejskich. <!-- poprawione przez weryfikatora --> Doprecyzowanie: aleja biegnie wzdłuż **północnego odcinka** Am Ohlauufer (na planie 1934 „…Ufer”), między kwartałem a Städt. Betriebswerke, czyli w rejonie dzisiejszego 1KDG i pl. Powstańców Warszawy. Odpowiadają jej zielone kwatery z drzewami na planie 1934. Wzdłuż nabrzeża nad Oławą, przy łukowej pierzei, szpaleru nie widać. Kwartał inwestycji z **zaokrąglonym narożnikiem**, pierzeja północna i zakrzywiona pierzeja nad Oławą. Kamienice o 4–5 kondygnacjach, dachy o małym spadku z licznymi kominami, jasne tynkowane elewacje od strony wody.
 - **S. 2** (`img/foto_hist_2_most_naroznik_przystan.jpg`): portal pylonu Kaiserbrücke z **kamiennym zwieńczeniem (hełmem)** i łukiem bramnym; przystań z dwoma parowcami; nabrzeże z murem kamiennym, schodami i balustradą; po lewej **narożna kamienica kwartału**: 5 kondygnacji, zaokrąglony narożnik z balkonami, bogata elewacja. W tle Ostrów Tumski z wieżami katedry. Ujęcie z południowego wschodu. WNIOSEK z podpisów w polska-org.pl: prawdopodobnie z wieży ciśnień Na Grobli, lata 30. XX w.
 - **S. 3, zbliżenie** (`img/foto_hist_3_naroznik_kamienice.jpg`): pierzeja od Ohlau-Ufer: **parter boniowany** z portalem zamkniętym łukiem; piętra I–IV z obramieniami okien, naczółkami trójkątnymi i odcinkowymi oraz pilastrami; **gzyms koronujący** z balustradą attykową na narożniku; elewacje jasne, w narożu jaśniejsze. Ulica łukiem okrąża narożnik ku mostowi. Wzdłuż muru nabrzeża słupki i balustrada. W tle wysoki budynek ceglany z neorenesansowymi szczytami i zadrzewione wzniesienie (identyfikacji nie przesądzam).
 - **Wysokość (WNIOSEK):** 5 kondygnacji nadziemnych o wysokości 3,5–4,0 m i wyższy parter dają ok. 20–22 m do gzymsu. Zgadza się to z DWKZ (18–22 m) i z zachowaną Mazowiecką 19: wymiar elewacji 2098,21 cm, parter + 4 piętra + strych, dach kryty papą o spadku ok. 5% za murkiem attykowym (M.07, s. 10 i 12).
@@ -112,17 +118,17 @@ Opis wycinka (`img/plan1934_fragment_kwartal_most.jpg`):
   |---|---|
   | Pierzeja zachodnia (Mazowiecka) | pokrywa się z granicą dz. 9/1 i 10/3 z drogami 8/6 i 8/8 oraz z licem Mazowieckiej 19 (±2–3 m) |
   | Pierzeja wschodnia (Ohlau-Ufer) | pokrywa się z licem Wybrzeża Słowackiego 5 (dz. 12) i przebiega łukiem wzdłuż dz. 19/11 (±2–3 m) |
-  | Pierzeja północna (od mostu) | w przybliżeniu na północnej krawędzi dz. 9/2 (krawężnik łuku jezdni); ok. **17–18 m** na północ od granicy 9/1–9/2 przy Mazowieckiej i ok. **11 m** przy łuku |
+  | Pierzeja północna (od mostu) | w przybliżeniu na północnej krawędzi dz. 9/2 (krawężnik łuku jezdni); ok. **17–18 m** na północ od granicy 9/1–9/2 przy Mazowieckiej i ok. **11 m** przy łuku. <!-- poprawione przez weryfikatora --> Dz. 9/2 to klin (M.04: pole 355 m², bok pd. 39,97 m, głębokość ok. 17,9 m przy Mazowieckiej, malejąca do <1 m na wschodzie). Pokrywanie się z jej pn. krawędzią dotyczy więc tylko części zachodniej. Przy łuku (ok. 11 m od granicy) linia leżała na działce drogowej 19/1. |
   | Granica 9/1–9/2 | według porównania z rysunkiem MPZP w przybliżeniu północna (nieprzekraczalna) linia zabudowy terenu 2MW-U/5 (kontrola: ok. 38 m od kiosku 19/1 w obu źródłach) |
   | Narożnik NE | łuk o promieniu zbliżonym do obecnego łuku Wybrzeża Słowackiego |
-- **Konsekwencja:** historyczny pierwszy trakt od strony mostu stał w większości na dzisiejszej dz. 9/2. Projekt „w granicach dostępnych działek” (Regulamin, s. 19) odtworzy więc linie zachodnią i wschodnią. Front północny powstanie jako **nowa pierzeja cofnięta o ok. 11–18 m**, otwarta na powiększone przedmoście.
+- **Konsekwencja:** historyczny pierwszy trakt od strony mostu stał w większości na dzisiejszej dz. 9/2, a w części wschodniej na działce drogowej 19/1 <!-- poprawione przez weryfikatora -->. Projekt „w granicach dostępnych działek” (Regulamin, s. 19) odtworzy więc linie zachodnią i wschodnią. Front północny powstanie jako **nowa pierzeja cofnięta o ok. 11–18 m**, otwarta na powiększone przedmoście.
 
 ---
 
 ## 5. Zabytki i dominanty w otoczeniu (stan obecny)
 
 - **Most Grunwaldzki**: rejestr A/1653/326/Wm (zob. § 3).
-- **Kamienice Mazowiecka 17 i 19**: ochrona w MPZP (§ 8 ust. 1 pkt 3). Nr 17 to dawny etablissement z 1873 r. projektu Friedricha Barchewitza („Concordia”, „Deutsches Theater”, „Gewerkschaftshaus”), przebudowany w 1913 r., dziś Centrum Sztuki Impart. Nr 19 to kamienica eklektyczna o 8 osiach (polska-org.pl; M.07).
+- **Kamienice Mazowiecka 17 i 19**: ochrona w MPZP (§ 8 ust. 1 pkt 3). Nr 17 to dawny etablissement z 1873 r. projektu Friedricha Barchewitza („Concordia”, „Deutsches Theater”, „Gewerkschaftshaus”), przebudowany w 1913 r., dziś Centrum Sztuki Impart. Nr 19 to kamienica eklektyczna o 8 osiach (polska-org.pl; M.07). <!-- poprawione przez weryfikatora --> Według M.07 (s. 12): wzniesiona w 1880 r., 6 kondygnacji nadziemnych z częściowym nieużytkowym poddaszem, front 17,81 m, „wysokość budynku ok. 20 m”. Od chodnika do górnej krawędzi gzymsu koronującego 20,98 m, z murkiem attykowym ok. 21,8 m.
 - **Kamienice przy Wybrzeżu Słowackiego** (m.in. nr 5): na mapie M.11.D oznaczone jak kamienice przy Mazowieckiej (zielony szraf). Legendy brak, więc ich status ochrony trzeba potwierdzić w GEZ.
 - **Gmach DUW**, pl. Powstańców Warszawy 1 (1939–1945, dawne Regierungspräsidium): ochrona w MPZP (§ 8 ust. 1 pkt 1). Na M.11.D niebieski.
 - **Poczta Główna** (1926–1929, ekspresjonizm, jeden z pierwszych wieżowców we Wrocławiu) i **„Wrocławski Manhattan”** (1970–1978, J. Grabowska-Hawrylak): dominanty i punkty widokowe wskazane na wizji lokalnej (Notatka, pkt 3 i 6).
@@ -154,7 +160,7 @@ Opis wycinka (`img/plan1934_fragment_kwartal_most.jpg`):
 3. **Linia gzymsu ok. 21 m** i trójdzielność elewacji (cokół z boniowaniem lub kamieniem, trzon, zwieńczenie z attyką), wspólna dla segmentów.
 4. **Rytm posesji**: segmenty szerokości 12–20 m. Odpowiada to wymogowi DWKZ podziału bryły „na mniejsze segmenty”.
 5. **Dach o małym spadku za attyką** zamiast stromych dachów. Zgodne z historycznym obrazem (zdjęcia, przekrój Mazowieckiej 19) i z MPZP (brak instalacji na dachach).
-6. **Nabrzeże Ohlau-Ufer**: aleja drzew (szpaler w MPZP na 6KDB/2), kamienny mur i balustrada, ewentualnie przywołanie przystani (np. pomost lub punkt widokowy na skwerze). Do uzgodnienia z zarządcą wód, poza zakresem kubaturowym.
+6. **Nabrzeże Ohlau-Ufer**: aleja drzew (szpaler w MPZP na 6KDB/2), kamienny mur i balustrada, ewentualnie przywołanie przystani (np. pomost lub punkt widokowy na skwerze). Do uzgodnienia z zarządcą wód, poza zakresem kubaturowym. <!-- poprawione przez weryfikatora --> Szpaler na 6KDB/2 wynika z MPZP (§ 46), a nie z historii. Historycznie nabrzeże przy kwartale miało mur, słupki i balustradę bez drzew (M.11.E s. 2–3). Aleja drzew stała przy ulicy na północ od kwartału, czyli dziś na przedmościu (1KDG), gdzie może być przywołana na skwerze lub w szpalerze przedmościa.
 7. **Przedmoście (dz. 9/2)**: zielony pas z okrągłym akcentem przy przyczółku, nawiązujący do historycznego układu. Ślad dawnej pierzei północnej w posadzce lub zieleni. Odsłonięty widok na portal z hełmami.
 8. **Relikty**: w wykopie spodziewane piwnice kamienic. Warto przewidzieć możliwość ich dokumentacji i ewentualnej ekspozycji, co daje silną narrację na planszy.
 9. **Nie odtwarzać**: historycznej pierzei północnej na 9/2 (sprzeczne z Regulaminem i MPZP), kopii detalu eklektycznego (Regulamin wymaga zabudowy „współczesnej”, pkt 5) ani wysokiej dominanty o „historyzującym” zwieńczeniu konkurującym z hełmami mostu.
@@ -203,6 +209,16 @@ Pomocniczo:
 - pl.wikipedia, „Most Grunwaldzki we Wrocławiu” (bibliografia: Biliszczuk J. i in., *Most Grunwaldzki Kaiserbrücke 1910–2010*, 2010; Łagiewski M., *Mosty Wrocławia*, 1989; Günther T., *Die Kaiserbrücke in Breslau*, 1910): https://pl.wikipedia.org/wiki/Most_Grunwaldzki_we_Wrocławiu
 - en.wikipedia, „Grunwald Bridge”: https://en.wikipedia.org/wiki/Grunwald_Bridge
 - pl.wikipedia, „Przedmieście Oławskie”: https://pl.wikipedia.org/wiki/Przedmieście_Oławskie
+
+**Weryfikacja (16.11.2026)** <!-- dodane przez weryfikatora -->: potwierdzono z oryginałami:
+- Świtlińska-Robutka 2002: plan 1856 i granica pn. = Oława (s. 145); kościół św. Łazarza 1260, układ „wachlarzowaty”, czytelność „bardzo wysoko” (s. 146);
+- pl.wikipedia (25,54 m; A/1653/326/Wm z 15.10.1976; 10.10.1910 bez cesarza; 6.09.1947; 112,5 / 114 / 126,6 m);
+- wroclaw.pl z 3.07.2025;
+- M.11.B (podpis arkusza, numery 29/27, zaokrąglony narożnik NE, „Dampfer-Anlegest.”; „Lobe-Theater” na sąsiednim kwartale nie dotyczy działki);
+- M.11.A (skala 200 m = 236 px);
+- M.11.F (skala 28,3 px/m).
+
+Nie weryfikowano treści polska-org.pl, bo istnieje ryzyko natrafienia na informacje o tym konkursie.
 
 **Rekomendacja do dalszej kwerendy:** monografia Biliszczuk i in. (2010). Arkusz „Grundriss 1:2500” z 1940 r. dla pl. Społecznego (wzmiankowany w polska-org.pl) pozwoliłby zastąpić oszacowanie z planu 1:10 000 dokładnym obrysem kamienic i szerokościami posesji. Warto też sprawdzić decyzję 538/A/05 (granice wpisu) oraz GEZ Wrocławia (status kamienic przy Wybrzeżu Słowackiego).
 

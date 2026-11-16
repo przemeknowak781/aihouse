@@ -53,14 +53,14 @@
    - Liczba dni upalnych (Tmax ≥ 30 °C) wzrosła z 9,0/rok (1991–2005) do **19,0/rok (2016–2025)**.
    - Dni z przymrozkiem spadły ze 104 do 73.
    - Miejska wyspa ciepła w centrum: średnio +1,0 K, latem +2,4 K, maksymalnie do 9–10 K (Szymanowski i in. 2019).
-7. **Wiatr.** [D] Przeważają kierunki **zachodnie**: W–WNW to łącznie 27,6% obserwacji, a NW 6,6%. Drugim ośrodkiem są kierunki ESE–SE (15,3%), co jest typowe dla przedpola Sudetów i Bramy Morawskiej. Wiatry silne (≥ 8 m/s) w **52%** wieją z sektora W.
+7. **Wiatr.** [D] Przeważają kierunki **zachodnie**: W–WNW to łącznie 26,1% obserwacji (WNW 15,4%, W 10,7%), a NW 7,3%. Drugim ośrodkiem są kierunki ESE–SE (16,2%); powiązanie z przedpolem Sudetów i Bramą Morawską to interpretacja bez źródła. Wiatry silne (≥ 8 m/s) w **ok. 49%** wieją z sektora W (8 sektorów). <!-- poprawione przez weryfikatora: wartości po korekcie binowania kierunków 10° (lata 1991–2010) i wyłączeniu kodu 999; pierwotnie 27,6% / 6,6% / 15,3% / 52%; zob. § 5.3 -->
    - WNIOSEK: elewacja od Mazowieckiej i otwartego pl. Społecznego jest najbardziej wystawiona na wiatr. Wejścia, tarasy i loggie dominanty lepiej sytuować od E/SE lub osłaniać.
 8. **Słońce i orientacja elewacji (obliczenie NOAA [D]).**
-   - Pierzeja od mostu jest zwrócona na **NNW (346°)**, od Oławy na **ENE (76°)**, od Mazowieckiej na **WSW (256°)**.
-   - W dniu zdjęć F.17 (29.10, ok. 11:40–12:00, Słońce az 181–186°, wys. 25°) elewacje od mostu i od Oławy są **w cieniu**. Elewacja od Mazowieckiej dostaje światło skośne, ślizgowe.
+   - Pierzeja od mostu jest zwrócona na **NNW (346°)**, od Oławy na **ENE (74–79°)**, od Mazowieckiej na **W/WNW (ok. 282°)**. <!-- poprawione przez weryfikatora: działka jest klinem, nie prostokątem; front Mazowieckiej (krawędź 9 obszaru inwestycji, azymut 192,4°) ma normalną zewnętrzną 282,4° wg docs/30_lokalizacja/geometria.md § 4.2, a nie 256° (256° to normalna zach. krawędzi obszaru A, która leży 5,8–18,5 m od ulicy) -->
+   - W dniu zdjęć F.17 (29.10, ok. 11:40–12:00, Słońce az 181–186°, wys. 25°) **wszystkie trzy elewacje uliczne są w cieniu**: od mostu, od Oławy i od Mazowieckiej (dla 282° kąt padania wynosi 95–100°, czyli Słońce jest tuż za płaszczyzną elewacji). Słońce dostają tylko elewacje podwórzowe. <!-- poprawione przez weryfikatora: było „Elewacja od Mazowieckiej dostaje światło skośne, ślizgowe” (wynik dla błędnej normalnej 256°) -->
    - Elewacja NNW dostaje bezpośrednie słońce tylko latem, rano i wieczorem: 21 czerwca ok. 20:00 CEST Słońce stoi na az 297°, wys. 8°.
    - Katedra na Ostrowie Tumskim leży na azymucie **332°** (0,75 km), czyli prawie na osi elewacji od mostu. Ślęża jest na azymucie 222° (36 km).
-   - WNIOSEK: sala Sejmiku z dużym oknem na NNW miałaby widok na Ostrów Tumski i Odrę, równe światło północne, bez olśnienia i przegrzewania. To bardzo mocna narracja dla Sądu.
+   - WNIOSEK: sala Sejmiku z dużym oknem na NNW miałaby widok na Ostrów Tumski i Odrę, równe światło północne, bez przegrzewania. To bardzo mocna narracja dla Sądu. Zastrzeżenie: od maja do sierpnia niskie Słońce wieczorne (ok. 18:00–20:45 CEST, az 275–311°) świeci w elewację NNW, więc olśnienie w czasie wieczornych sesji jest możliwe. Potrzebne są osłony wewnętrzne, a duże przeszklenie od N zwiększa straty ciepła zimą (bilans dla zeroemisyjności). <!-- poprawione przez weryfikatora: usunięto „bez olśnienia” (sprzeczne z tabelą § 5.5: 5,6 h słońca na NNW 21 VI) -->
 9. **Powódź.**
    - [D] Według usługi ISOK (MZP/MRP, stan na 16.11.2026) teren **nie leży** w obszarach zagrożenia Q10%, Q1% ani Q0,2%. Obszar Q0,2% dochodzi jednak do krawędzi nabrzeża Wybrzeża Słowackiego, kilka metrów od granicy działki.
    - [Ź] Opinia geotechniczna (M.05) stwierdza natomiast, że działki leżą „na obszarze narażonym na niebezpieczeństwo powodzi (rzeczne)” i w strefie podtopień od wód gruntowych (PIG).
@@ -139,9 +139,9 @@ Historia urbanistyczna (XIX-wieczne przedmieście czynszowe, wpis 538/A/05, znis
 
 ### 2.3 Bulwary nad Odrą i Oławą
 
-- [Ź] Projekt rewitalizacji bulwarów **Xawerego Dunikowskiego** i **Marii i Lecha Kaczyńskich** obejmuje „obszar między mostem Grunwaldzkim a Piaskowym”, czyli prawie kilometr nabrzeża. Za gmachem urzędu wojewódzkiego przewidziano przystań statków wycieczkowych. Projekt jest „dość surowy” ze względu na wymogi przeciwpowodziowe (wroclaw.pl, 20.10.2014, artykuł archiwalny; stan realizacji niezweryfikowany).
+- [Ź] Projekt rewitalizacji bulwarów **Xawerego Dunikowskiego** i **Marii i Lecha Kaczyńskich** obejmuje „obszar między mostem Grunwaldzkim a Piaskowym”, czyli prawie kilometr nabrzeża. Za gmachem urzędu wojewódzkiego przewidziano przystań statków wycieczkowych. Projekt jest „dość surowy” ze względu na wymogi przeciwpowodziowe (wroclaw.pl, 20.10.2014, artykuł archiwalny). Bulwar Dunikowskiego został zrealizowany: w 2017 r. dostał Grand Prix „Pięknego Wrocławia” (wroclaw.pl, 17.04.2026). <!-- poprawione przez weryfikatora: było „stan realizacji niezweryfikowany” -->
 - [Ź] MPZP: teren **6KDB/2** (Wybrzeże Słowackiego wzdłuż Oławy) przewiduje ciągi piesze i pieszo-rowerowe, przystanie i szpalery drzew. Teren **4KDPL/3** ma być powiązany z bulwarem nad Odrą w kierunku Wieży Ciśnień kładką (`mpzp.md` § 4).
-- [Ź] Rewitalizacja nabrzeży Oławy (etap I) obejmowała odcinek między mostami Oławskim i Rakowieckim, powyżej działki (wroclaw.pl, 5.10.2015, archiwalne).
+- [Ź] Rewitalizacja nabrzeży Oławy (etap I) miała objąć odcinek między mostami Oławskim i Rakowieckim, powyżej działki. Budowę planowano na ok. 2017/2018; stan realizacji niezweryfikowany (wroclaw.pl, 5.10.2015, archiwalne). <!-- poprawione przez weryfikatora: artykuł opisuje plan („obejmie”), a nie wykonane prace -->
 - WNIOSEK: działka jest **zawiasem** łączącym dwa systemy nabrzeży:
   - bulwar odrzański (Dunikowskiego – DUW – przyczółek Mostu Grunwaldzkiego);
   - nabrzeże Oławy (Wybrzeże Słowackiego – 4KDPL/3 – kładka do Wieży Ciśnień).
@@ -196,14 +196,14 @@ Historia urbanistyczna (XIX-wieczne przedmieście czynszowe, wpis 538/A/05, znis
 
 | Edycja (ogłoszenie) | Obiekt | Autorzy | Co doceniono / cecha | Źródło |
 |---|---|---|---|---|
-| XXVI | **Narodowe Forum Muzyki** (pl. Wolności), Grand Prix | Kuryłowicz & Associates (otwarcie 4.09.2015) | Elewacja z materiału imitującego drewno. Foyer czarno-białe, z czarną ścianą z Corianu. E. Kuryłowicz: „Zależało nam na czymś podniosłym, co dotrze do każdego, a nie chcieliśmy robić żadnych ornamentów” | [Ź] wroclaw.pl (lista Grand Prix; wywiad 3.07.2015); [Ź-wt] wyniki wyszukiwania (elewacja) |
+| XXVI | **Narodowe Forum Muzyki** (pl. Wolności), Grand Prix | Kuryłowicz & Associates (otwarcie 4.09.2015 – data niepotwierdzona w wywiadzie) | Foyer czarno-białe, z czarną ścianą z Corianu i białymi balkonami. Wykończenia z Prodemy (warstwy forniru drewnianego) i złotej blachy, kojarzące się z materiałami instrumentów. Elewacja „z materiału imitującego drewno” **niepotwierdzona**: wywiad mówi o drewnie we wnętrzach, nie o elewacji. E. Kuryłowicz: „Zależało nam na czymś podniosłym, co dotrze do każdego, a nie chcieliśmy robić żadnych ornamentów” <!-- poprawione przez weryfikatora --> | [Ź] wroclaw.pl (wywiad 3.07.2015, cytat zweryfikowany); miejsce w Grand Prix XXVI – brak URL listy, niezweryfikowane |
 | XXX (1.12.2021, za 2019) | **Hotel The Bridge**, pl. Katedralny 8, nad Odrą, Grand Prix | FORUM architekci (M. Goncerzewicz, M. Lose i zespół); wnętrza Medusa Group | Ponad 2000 m² elewacji klinkierowej. Według operatora fasada z klasycznej cegły nawiązuje do architektonicznej przeszłości miasta | [Ź] wroclaw.pl 1.12.2021; [Ź-wt] klinkier.pl, mgallery.accor.com |
 | XXX | **Nowy Targ** (biurowiec, pl. Nowy Targ 28), II nagroda w kat. użyteczności publicznej; finał Nagrody Architektonicznej „Polityki” 2020 | Maćków Pracownia Projektowa | „Na szczęście bryła nie wydaje się ciężka i dominująca nad otoczeniem”, bo moduły rozdzielają przeszklone patia. „może stanowić wzór, jak bez arogancji można stawiać biurowce” (uzasadnienie nominacji „Polityki”) | [Ź] wroclaw.pl 1.12.2021 i 8.04.2020 |
 | XXXI (1.12.2021, za 2020) | **Pixel House** (Legnicka/Niedźwiedzia), Grand Prix | Bzdęga-Wiśniewski | Budynek mieszkalno-usługowy w pierzei | [Ź] wroclaw.pl 1.12.2021 |
 | XXXI | **Centrum Południe** (I nagroda, użyteczność publiczna) | APA Wojciechowski | Kompleks biurowy z wieżą, w strefie wysokościowej | [Ź] wroclaw.pl 1.12.2021 |
 | XXXI | **Concordia Design**, Wyspa Słodowa 7 (II nagroda) | MVRDV i Q2Studio | Remont i przebudowa kamienicy z 1845 r. z oficyną; współczesna reinterpretacja bryły historycznej | [Ź] wroclaw.pl 1.12.2021; [Ź-wt] architizer, aluprof (2018–2020) |
 | XXXII (XII 2023) | **Swoja Olimpia**, Grand Prix | PAG (dawniej Pracownia Architektury Głowacki) | Jury: „wygrała realizacja elegancka w formie, o interesującej, ale czytelnej bryle, wykończona bardzo dobrymi materiałami”. Autorzy: zasada „powściągliwość i elegancja” | [Ź] wroclaw.pl 24.12.2023 |
-| XXXIII (17.04.2026) | **Park Krzycki**, Grand Prix | ZZM i MPWiK | „odpowiada na wyzwania, które wynikają ze zmian klimatu”; „Otwarta retencja jest najtańszym i najbardziej efektywnym sposobem” | [Ź] wroclaw.pl 17.04.2026 |
+| XXXIII (17.04.2026) | **Park Krzycki**, Grand Prix | ZZM i MPWiK | M. Wankowska (przewodnicząca Kapituły): „Park Krzycki odpowiada na wyzwania, które wynikają ze zmian klimatu”; K. Szymczak-Pomianowska (strona inwestora, nie jury): „Otwarta retencja jest najtańszym i najbardziej efektywnym sposobem radzenia sobie z tym zadaniem” <!-- poprawione przez weryfikatora: przypisano autorów cytatów --> | [Ź] wroclaw.pl 17.04.2026 |
 | XXXIII | **WUWA Point**, Al. Architektów 7 (I nagroda, użyteczność publiczna) | Maćków Pracownia Projektowa | „architektury funkcjonalnej (otwarty, elastyczny plan)”, dbałość o jakość wykończenia | [Ź] wroclaw.pl 17.04.2026 |
 | XXXIII | **Nowodworska 43** (I nagroda, wielorodzinne) | b.d. | „Uzupełnił bardzo spójną kompozycję zabudowy przedwojennego osiedla” | [Ź] wroclaw.pl 17.04.2026 |
 | XXXIII | Rewitalizacja kamienic **Szczytnicka 29, 29a, 31** (I nagroda, modernizacja) | b.d. | Rewitalizacja historycznej pierzei | [Ź] wroclaw.pl 17.04.2026 |
@@ -226,7 +226,7 @@ Historia urbanistyczna (XIX-wieczne przedmieście czynszowe, wpis 538/A/05, znis
   - rekomendacje dla polityki inwestycyjnej;
   - konsultowanie koncepcji o istotnym znaczeniu dla miasta;
   - „opiniowanie oraz udział w konkursach architektonicznych”;
-  - wspieranie rozwiązań „wysokiej jakości”, odpowiadających na wyzwania społeczne, kulturowe i środowiskowe, „z poszanowaniem ciągłości kulturowej i tożsamości przestrzennej miasta”.
+  - wspieranie rozwiązań „wysokiej jakości”, odpowiadających na wyzwania społeczne, kulturowe i środowiskowe, „w poszanowaniu dla ciągłości kulturowej i tożsamości przestrzennej miasta”. <!-- poprawione przez weryfikatora: brzmienie cytatu wg źródła -->
 - [Ź] Skład Zespołu (2024), m.in.:
   - Magdalena Wankowska, Miejski Konserwator Zabytków (wiceprzewodnicząca);
   - Piotr Zybura (SARP O/Wrocław), który według Regulaminu jest też sędzią referentem w tym konkursie;
@@ -249,7 +249,9 @@ Historia urbanistyczna (XIX-wieczne przedmieście czynszowe, wpis 538/A/05, znis
 
 ### 4.4 Polityka wysokościowa Wrocławia
 
-[Ź] Zakrzewska-Półtorak A. (2017), na podstawie Studium 2010 i projektu Studium 2017 (uchwalone 11.01.2018, uchwała L/1177/18):
+[Ź] Zakrzewska-Półtorak A. (2017), na podstawie Studium 2010 i projektu Studium 2017 (uchwalone 11.01.2018, uchwała L/1177/18; numeru i daty uchwały nie potwierdzono online, bo BIP zwracał 503):
+
+> Uwaga weryfikatora: artykuł jest po angielsku. Fragmenty w cudzysłowie poniżej to tłumaczenia zwrotne z angielskiego streszczenia Studium, a nie dosłowne cytaty z tekstu Studium. Treść merytoryczna (strefy W0–W5, lokalizacje dominant, cztery obszary kompozycji wysokościowych z pl. Społecznym, zasada 2 kondygnacji) jest zgodna z artykułem (s. 115–116). <!-- poprawione przez weryfikatora -->
 - **Obiekt wysokościowy** to obiekt ponad 55 m. W 2017 r. było we Wrocławiu ponad 190 budynków o co najmniej 10 kondygnacjach. Najwyższe: Sky Tower 212 m, katedra 97,5 m, św. Elżbieta 92 m.
 - **Strefy wysokości (Studium 2017, s. 123–124):**
   - W1: obszar śródmiejski 25 m n.p.t., z możliwością podwyższenia do 55 m;
@@ -315,9 +317,9 @@ Metoda: średnie miesięczne z lat 1991–2020 z danych publicznych IMGW-PIB (sy
 | Stopniodni chłodzenia (baza 18 °C, uproszczone) | 190 | 151 | 228 | **272** |
 
 - Maksimum absolutne: **37,9 °C** (8.08.2015). Minimum absolutne: **−22,5 °C** (23.01.2006). Percentyle dobowe 1991–2020: Tmin 1% = −14,2 °C, Tmax 99% = 32,7 °C.
-- Maksymalny opad dobowy 1991–2024: **74,4 mm** (VII 2001); dalej 69,4 mm (VI 2020) i 62,5 mm (VIII 2006).
+- Maksymalny opad dobowy 1991–2025: **77,1 mm** (2.08.2024); dalej 74,4 mm (20.07.2001), 69,4 mm (7.06.2020) i 62,5 mm (7.08.2006). <!-- poprawione przez weryfikatora: pominięto rekord z 2.08.2024 (77,1 mm, rekord bez flagi braku w s_d_424_2024.csv) -->
 - Dni upalne w ostatnich latach: 2015 – 32, 2018 – 27, 2019 – 26, 2022 – 25, 2024 – 27, 2025 – 13.
-- [Ź] Obserwatorium UWr w centrum zanotowało w 2015 r. 31 dni upalnych, w tym 8 dni ≥ 35 °C. Średnia 1946–1985 wynosiła 7–10 dni upalnych, a w ostatnich dwóch dekadach ok. 18 (wroclaw.pl, 20.11.2024). Liczba dni ≥ 35 °C w centrum jest wielokrotnie wyższa niż na lotnisku, co jest zgodne z efektem wyspy ciepła.
+- [Ź] Obserwatorium UWr w centrum zanotowało w 2015 r. 31 dni upalnych, w tym 8 dni ≥ 35 °C. Średnia 1946–1985 wynosiła 7–10 dni upalnych, a w ostatnich dwóch dekadach ok. 18 (wroclaw.pl, 20.11.2024). Tego samego roku (2015) stacja Strachowice zanotowała 32 dni upalne i **6 dni ≥ 35 °C** [D]. Różnica centrum–lotnisko w tym roku jest więc niewielka (8 wobec 6 dni ≥ 35 °C; 31 wobec 32 dni upalnych). Dane z jednego roku nie dowodzą wpływu wyspy ciepła na maksima dzienne; UHI działa głównie nocą (§ 5.4). <!-- poprawione przez weryfikatora: było „Liczba dni ≥ 35 °C w centrum jest wielokrotnie wyższa niż na lotnisku” – porównywano rok 2015 w centrum ze średnią 30-letnią z lotniska (0,9) -->
 - Usłonecznienie rośnie: średnio ok. 1870 h w latach 2001–2010 (bez roku 2004 z brakiem) i **ok. 2040 h** w latach 2011–2020 [D].
 - Uwaga krytyczna: wskaźniki z jednej stacji podmiejskiej nie oddają warunków nad rzeką w śródmieściu (inna wilgotność, nocne wychłodzenie od wody, wyspa ciepła). Trend ocieplenia jest wyraźny i spójny ze źródłem miejskim. Wartości bezwzględne dla centrum są jednak wyższe.
 
@@ -333,10 +335,23 @@ Metoda: średnie miesięczne z lat 1991–2020 z danych publicznych IMGW-PIB (sy
 
 Rozkład w 16 sektorach jest w `data/roza_wiatrow_wroclaw_1991_2020.csv`, a róża w `img/roza_wiatrow_1991_2020.png`. Najczęstsze sektory to WNW (14,3%) i W (13,3%).
 
+> **Korekta weryfikatora (16.11.2026).** Tabelę i pliki powyżej (wynik `export_climate.py` / `windrose.py`) odtworzono co do liczby. Mają one jednak dwa błędy metody:
+> 1. W latach 1991–2010 IMGW podaje kierunek co 10°, a od 2011 r. głównie co 1°. Przy binowaniu wartości co 10° sektory główne (N, E, S, W) obejmują 3 wartości (w 8 sektorach: 5), a pozostałe 2 (w 8 sektorach: 4). To sztucznie zawyża N, E, S i W.
+> 2. Kod 999 (kierunek zmienny, 0,2% obserwacji) trafiał do sektora W.
+>
+> Po korekcie (wartość co 10° rozłożona na przedział ±5°; skrypt `data/skrypty/windrose_fix.py`; pliki `data/roza_wiatrow_wroclaw_1991_2020_korekta.csv` i `img/roza_wiatrow_1991_2020_korekta.png`):
+>
+> | Sektor (8) | N | NE | E | SE | S | SW | W | NW |
+> |---|---|---|---|---|---|---|---|---|
+> | Częstość [%] | 5,7 | 4,7 | 9,9 | **15,9** | 7,8 | 11,8 | **21,3** | **17,7** |
+> | Udział w wiatrach ≥ 8 m/s [%] | 0,2 | 0,1 | 3,8 | 10,2 | 9,7 | 15,3 | **49,4** | 11,2 |
+>
+> W 16 sektorach: **WNW 15,4%**, W 10,7%, ESE 8,1%, SE 8,1%. Cisza 5,0%, kierunek zmienny 0,2%. Wnioski jakościowe (dwubiegunowa róża W–WNW i ESE–SE, dominacja W wśród wiatrów silnych) pozostają w mocy. Kierunek przeważający to jednak wyraźnie **WNW**, a nie W. Wartości sezonowe w tabeli powyżej nie są skorygowane (błąd rzędu ±1–2 pp). Na planszach używać róży z korektą. <!-- poprawione przez weryfikatora -->
+
 - Interpretacja: róża jest dwubiegunowa. Główny biegun to W–WNW (cyrkulacja zachodnia), drugi to ESE–SE. Latem rośnie udział NW, zimą udział SW i SE.
 - [Ź] Badania UWr wyznaczyły korytarze przewietrzania Wrocławia na podstawie parametrów aerodynamicznych zabudowy z LiDAR dla 8 kierunków wiatru (Suder i Szymanowski 2014, za Szymanowski i in. 2019). Układ zabudowy w takich korytarzach „powinien być szczególnie uważnie rozpatrywany w procesach planistycznych”. Dolina Odry o przebiegu W–E przy przeważających wiatrach W jest naturalnym kanałem. Szczegółowej mapy korytarzy w rejonie działki nie weryfikowano.
 - WNIOSEK projektowy:
-  1. Elewacja WSW (Mazowiecka) jest otwarta na rozległy pl. Społeczny i przyjmuje najsilniejsze wiatry. Elewacja NNW i narożnik przy moście są otwarte na dolinę Odry.
+  1. Elewacja od Mazowieckiej (normalna ok. 282°, W/WNW) jest otwarta na rozległy pl. Społeczny i zwrócona wprost na przeważające wiatry W–WNW, w tym najsilniejsze. Elewacja NNW i narożnik przy moście są otwarte na dolinę Odry. <!-- poprawione przez weryfikatora: było „Elewacja WSW”; orientacja wg geometria.md § 4.2 -->
   2. Dominanta o wysokości 45 m wytworzy przy podstawie zjawisko „downwash”, czyli spływ wiatru po elewacji do poziomu chodnika. Wejście główne przy narożniku NE wymaga zadaszenia lub podcienia. Analizę komfortu wiatrowego (np. CFD, kryteria Lawsona) warto wspomnieć w opisie jako element etapu projektowego.
   3. Tarasy i loggie dominanty oraz taras przy holu Sejmiku najlepiej sytuować po stronie E–SE (zawietrznej przy wiatrach W) albo osłaniać szklanymi parapetami.
   4. Nie blokować przewietrzania doliny Odry. Wycofane piętra i przerwy między segmentami poprawiają cyrkulację na dziedzińcu.
@@ -382,10 +397,14 @@ Wykres ścieżek: `img/sciezki_slonca_teren.png`.
 |---|---|---|---|---|
 | **NNW – od mostu i Odry (346°)** | 0,6 h (17:15–17:45) | 5,6 h (rano do ok. 7:00 i wieczór od ok. 18:00) | 0 | 0 |
 | **ENE – od Oławy (76°)** | 4,8 h (06:15–10:55) | 7,2 h (05:00–12:10) | 3,4 h (do ok. 11:20) | 2,2 h (08:15–10:25) |
-| **WSW – od Mazowieckiej (256°)** | 6,2 h (11:35–17:45) | 8,2 h (12:40–20:45) | 5,2 h (od ok. 12:05) | 4,2 h (11:15–15:25) |
+| **W/WNW – od Mazowieckiej (282°)** <!-- poprawione przez weryfikatora: było WSW 256° z godzinami 6,2 / 8,2 / 5,2 / 4,2 h --> | 4,9 h (12:55–17:45) | 7,3 h (13:30–20:45) | 3,6 h (13:40–17:10) | 2,4 h (13:05–15:25) |
 | **SSE – dziedziniec (166°)** | 10,2 h | 8,6 h | 9,2 h | 7,2 h |
 
 Godziny dla 29.10.2027 podano w czasie letnim; w 2025 r. ten dzień był już w CET, czyli godzinę wcześniej.
+
+> Uwagi weryfikatora: <!-- poprawione przez weryfikatora -->
+> - **Orientacja.** Front Mazowieckiej ma normalną 282,4°, a nie 256°. Działka jest klinem: krawędź 9 w `docs/30_lokalizacja/geometria.md` § 4.2 ma azymut 192,4°. Wartość 256° to normalna zach. krawędzi obszaru A, która leży 5,8–18,5 m od ulicy. Południowe granice obszaru inwestycji mają normalne 177–192°, więc elewacje podwórzowe od strony sąsiadów są zwrócone raczej na S niż na SSE. 166° to wariant projektowy, nie dana.
+> - **Metoda.** Skrypt `facadesun.py` sprawdza różnicę **azymutów** (< 85°), a nie przestrzenny kąt padania. To godziny, w których Słońce jest „przed” elewacją. Azymuty liczono od północy siatki PL-2000; zbieżność południków (−0,74°) jest pomijalna.
 
 **Azymuty do punktów orientacyjnych** (WGS84, współrzędne punktów przybliżone ±100 m):
 
@@ -402,7 +421,7 @@ Godziny dla 29.10.2027 podano w czasie letnim; w 2025 r. ten dzień był już w 
 [O] Ślęża jest widoczna nad horyzontem na zdjęciu z drona M.10 (DJI_…0015, ok. 88 m n.t.).
 
 **WNIOSKI** (dla projektu i wizualizacji):
-1. **Fotomontaże F.17 (29.10, południe).** Elewacje ENE (widoczna na F.17.A) i NNW są **w cieniu**: kąt między Słońcem a normalną przekracza 90°. Elewacja WSW (F.17.B) dostaje światło skośne, ok. 70–75° od normalnej, które wydobywa fakturę. Na F.17.A cieniste elewacje kamienic są wyraźnie niebieskawe (np. Wybrzeże Słowackiego 5, L ≈ 40%). Materiał elewacji od Oławy i od mostu musi więc „bronić się w cieniu”:
+1. **Fotomontaże F.17 (29.10, południe).** Elewacje ENE (widoczna na F.17.A) i NNW są **w cieniu**: kąt między Słońcem a normalną przekracza 90°. Elewacja od Mazowieckiej (282°, F.17.B) też jest **w cieniu albo na granicy cienia**: kąt padania wynosi 100° o 11:38 i 95° o 12:00 CET. Nie dostaje światła skośnego, które wydobywałoby fakturę. Na F.17.A cieniste elewacje kamienic są wyraźnie niebieskawe (np. Wybrzeże Słowackiego 5, L ≈ 40%). Materiał **wszystkich trzech elewacji ulicznych** musi więc „bronić się w cieniu”, a na renderach kierunek słońca dobrać tak, by front Mazowieckiej nie był sztucznie oświetlony (ryzyko niespójności z fotografią). <!-- poprawione przez weryfikatora: było „Elewacja WSW (F.17.B) dostaje światło skośne, ok. 70–75° od normalnej” – wynik dla błędnej normalnej 256° -->
    - jasny i ciepły;
    - matowy;
    - z głębokimi ościeżami i reliefem, który czyta się przy świetle rozproszonym.
@@ -411,7 +430,7 @@ Godziny dla 29.10.2027 podano w czasie letnim; w 2025 r. ten dzień był już w 
 2. **Ujęcie „emocjonalne” od mostu.** Wieczór letni jest fizycznie poprawny: 21 VI, 19:30–20:30 CEST, Słońce na az 292–303° i wys. 13–4° oświetla ciepło elewację NNW i pylony. Alternatywa (wg `wizualizacje_metodyka.md`): niebieska godzina z rozświetloną salą Sejmiku jako „latarnią” nad Odrą.
 3. **Sala Sejmiku.** Okno na NNW:
    - otwiera się prawie dokładnie na Ostrów Tumski (az 332°) i Most Grunwaldzki;
-   - daje stałe światło rozproszone, bez olśnienia i zysków słonecznych, czyli bez ciężkich osłon;
+   - daje światło rozproszone, z małymi zyskami słonecznymi, więc nie wymaga ciężkich osłon zewnętrznych. Latem wieczorem (ok. 18:00–20:45 CEST) Słońce świeci jednak nisko w tę elewację, więc trzeba przewidzieć zasłony lub rolety wewnętrzne przeciw olśnieniu; <!-- poprawione przez weryfikatora: usunięto „bez olśnienia” -->
    - ewentualne okno lub loggia na SW kadruje Sky Tower i, przy dobrej przejrzystości powietrza, Ślężę (święta góra Śląska).
 
    To czytelna symbolika dla sejmiku województwa: z sali widać kolebkę miasta i najważniejszy szczyt regionu. Widoczność Ślęży z wysokości ok. 35–45 m trzeba **zweryfikować** (panorama 360° z M.09 lub model terenu). Na odległości 36 km zamglenie jest częste (ok. 50 dni z mgłą w roku, maksimum w X–XI).
@@ -419,7 +438,7 @@ Godziny dla 29.10.2027 podano w czasie letnim; w 2025 r. ten dzień był już w 
    - Dziedziniec i elewacje podwórzowe kamienic zacienia głównie wysokość skrzydeł (do 22 m).
    - Nasłonecznienie mieszkań w Wybrzeżu Słowackiego 5 i Mazowieckiej 19 (WT § 13: 3 h w dniach 21.03 i 21.09) wymaga sprawdzenia w modelu (zadanie dla modułu prawnego i modelowania).
 5. **Osłony przeciwsłoneczne:**
-   - ENE (poranek) i WSW (popołudnie, niskie Słońce): osłony pionowe lub skośne, ewentualnie głębokie ościeża;
+   - ENE (poranek) i W/WNW od Mazowieckiej (popołudnie i wieczór, niskie Słońce z az 230–311°): osłony pionowe lub skośne, ewentualnie głębokie ościeża; <!-- poprawione przez weryfikatora: było „WSW” -->
    - SSE (dziedziniec): poziome okapy lub lamele;
    - NNW: bez osłon, z największym udziałem przeszkleń.
 
@@ -432,7 +451,11 @@ Godziny dla 29.10.2027 podano w czasie letnim; w 2025 r. ten dzień był już w 
 | Wody gruntowe | Rzędna terenu 118,67–119,44 m n.p.m. Zwierciadło ustabilizowane 3,2–3,8 m p.p.t., czyli 115,07–115,95 m n.p.m. (IX 2025), wahania ±0,5 m. W O-01 woda naporowa na 16,5 m p.p.t. | [Ź] M.05, tab. 1 |
 | Powódź 1997 | Wrocławski Węzeł Wodny musiał przyjąć do 3650 m³/s (mierzone na wysokości Trestna). Prawie 40% miasta pod wodą. „Jedna z estakad na placu Społecznym pod wodą” (podpis zdjęcia) | [Ź] wroclaw.pl 12.07.2024 |
 | Po 1997 | Węzeł zmodernizowano do przepustowości ok. 3100 m³/s (wcześniej 2200–2400 m³/s): nowe i wzmocnione wały, poszerzone koryta, nowy kanał Odra–Widawa | [Ź-wt] en.wikipedia (zdanie bez przypisu; do weryfikacji w źródłach Wód Polskich) |
-| Powódź 2024 | Kulminacja na Odrze we Wrocławiu 19.09.2024. Stan w Trestnie 631 cm, niższy niż w najgorszym scenariuszu. Miasto nie zostało zalane; na Ostrowie Tumskim zabezpieczano obiekty workami z piaskiem. Alarm odwołano 25.09.2024 | [Ź-wt] Polskie Radio (wg wyników wyszukiwania); [Ź] wroclaw.pl (prognozy, wg wyników wyszukiwania) |
+| Powódź 2024 | Fala przeszła przez Wrocław 19.09.2024, z kulminacją 644 cm (artykuł nie podaje wodowskazu), bez szkód. Miasto nie zostało zalane; na Ostrowie Tumskim zabezpieczano obiekty workami z piaskiem. Stan spadł poniżej alarmowego 24.09.2024 ok. 22:50 (449 cm) <!-- poprawione przez weryfikatora: w cytowanych artykułach PR nie ma „Trestno 631 cm” ani „odwołania alarmu 25.09”; artykuł z 25.09.2024 podaje 644 cm i spadek poniżej stanu alarmowego 24.09 --> | [Ź-wt] Polskie Radio, 25.09.2024 (otwarty, zweryfikowany); [Ź] wroclaw.pl (prognozy, wg wyników wyszukiwania) |
+
+> Weryfikacja niezależna (16.11.2026): <!-- poprawione przez weryfikatora -->
+> - GetFeatureInfo (WMS 1.1.1, EPSG:2180, środek terenu E 363 646,6 / N 361 974,0) zwraca 0 obiektów dla warstw NZ.Fluvial, **NZ.ArtificialWaterBearingInfrastructure** (obszar zagrożenia przy awarii budowli piętrzących) i NZ.RiskZone. Próba kontrolna w korycie Oławy, ok. 75 m na wschód, zwraca obiekty Q10% i Q1%, więc zapytanie działa.
+> - Obiekty warstwy mają atrybut `validityperiod_end = 2025-12-21` (cykl MZP/MRP opublikowany 6.09.2022). Na dzień 16.11.2026 usługa może więc nie zawierać kolejnej aktualizacji map. Opinia M.05 powstała we wrześniu 2025 r., czyli w okresie ważności tych samych map, więc różnica cyklu jej nie tłumaczy.
 
 **Krytycznie.** Między usługą ISOK a opinią geotechniczną jest rozbieżność. Możliwe wyjaśnienia: inna wersja danych, inny zakres warstw (np. obszary narażone w scenariuszu awarii budowli piętrzących lub zniszczenia wału, publikowane osobno w iMap), albo uproszczenie w opinii. Rozstrzygnięcie wymaga sprawdzenia w przeglądarce Hydroportalu (`wody.isok.gov.pl/imap_kzgw/?gpmap=gpMZP`) lub wystąpienia do Wód Polskich. Do tego czasu przyjąć **wariant ostrożny**.
 
@@ -446,7 +469,7 @@ WNIOSEK projektowy:
   - jeśli muszą być pod ziemią, to z zabezpieczeniem przeciwzalewowym.
 - Rampa garażu (od Mazowieckiej lub Wybrzeża) z **progiem** powyżej poziomu ulicy i odwodnieniem liniowym. Zawory przeciwzwrotne na kanalizacji.
 - Woda opadowa:
-  - roczny opad 541 mm, letnie nawalnice do 74 mm/dobę;
+  - roczny opad 541 mm, letnie nawalnice do 77 mm/dobę (2.08.2024); <!-- poprawione przez weryfikatora: było 74 mm -->
   - **retencja** na dachach zielonych, w ogrodzie deszczowym na dziedzińcu i w zbiorniku retencyjno-użytkowym (podlewanie, spłukiwanie);
   - spójne z lokalnie nagradzaną „otwartą retencją” (Park Krzycki).
 - Cokół z kamienia (granit) jest odporny na zawilgocenie i rozbryzg. Ma też uzasadnienie kontekstowe (pylony, mury nabrzeży).
