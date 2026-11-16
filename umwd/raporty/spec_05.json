@@ -1,0 +1,63 @@
+{
+ "nr": 5,
+ "title": "Zoning plan decoded: hard height bands (18–25 m outside zone A; 35–45 m inside the 40 × 30 m zone A at the bridgehead); heritage & 1934 block reconstructed",
+ "stages": [
+  [
+   "Organiser materials: download, unpack, text extraction (results files deliberately EXCLUDED)",
+   "done"
+  ],
+  [
+   "Rules register + Stage I/II checklists written ✔ → independent verification ►",
+   "running"
+  ],
+  [
+   "Site: zoning plan ✔, heritage ✔, 1934 block overlay ✔; survey geometry, geotech, trees, neighbours ►",
+   "running"
+  ],
+  [
+   "Polish building law & technical conditions (WT 2025/2026), fire, accessibility",
+   "running"
+  ],
+  [
+   "Research: what wins (19 competitions ✔); visual craft, façade aesthetics, Wrocław context, costs ►",
+   "running"
+  ],
+  [
+   "Functional programme M.01 → programme.yaml + room table ✔ (verification ►) → area schedule & massing",
+   "running"
+  ],
+  [
+   "Concept: urban form, massing variants → judge panel → chosen concept",
+   "todo"
+  ],
+  [
+   "3D model + façade design (aesthetic principles) + photoreal renders (Blender Cycles)",
+   "todo"
+  ],
+  [
+   "Stage I study (2 boards) and Stage II entry (6 boards 100×70, 10-page text, tables, model 1:250)",
+   "todo"
+  ],
+  [
+   "Jury simulation & compliance audit → iterate until no open issues",
+   "todo"
+  ]
+ ],
+ "notes": [
+  "MPZP §6/§26: outside zone A every roof must lie between 18 m and 25 m above ground (no low pavilions!); inside zone A (≈1,180 m² within the plot) 35–45 m → the Sejmik tower must sit in the NE quadrant at the bridgehead, not on the Mazowiecka corner.",
+  "No vehicle access from the bridgehead street (1KDG): garage ramp & deliveries from Wybrzeże Słowackiego (6KDB/2) or Mazowiecka south; parking ≥12 spaces / 1000 m² of usable office area, all on our plot (underground).",
+  "No technical equipment on roofs or on street/boulevard façades → integrated technical floor + BIPV as roofing; 'special architectural requirements' and 'exposure' toward bridge, Mazowiecka and boulevard are binding.",
+  "1934 city plan overlay: the historic block had a curved frontage following the bridge ramp; today's plot line is set back — the public square on plot 9/2 becomes the civic forecourt.",
+  "Fire strategy (high-rise 'W', ZL III offices, ZL I Sejmik hall) drafted; visual-craft & board-layout methodologies written."
+ ],
+ "images": [
+  {
+   "path": "umwd/docs/30_lokalizacja/img/mpzp_08_schemat_ustalen_M04.png",
+   "caption": "MPZP on M.04: investment area (red), zone A 35–45 m (hatched), building lines"
+  },
+  {
+   "path": "umwd/docs/30_lokalizacja/img/plan1934_nakladka_ortofoto_annot.jpg",
+   "caption": "1934 plan over orthophoto: historic curved block frontage at the bridgehead"
+  }
+ ]
+}
