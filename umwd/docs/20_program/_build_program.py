@@ -290,7 +290,8 @@ R["SN"] = [
 ]
 R["PS"] = [
     ("PS.01", "Pokój socjalny pracowników (do 30 os.)", 15, 24, [24, 24], None, False, "PU",
-     ["równomiernie w strefie biurowej", "napoje, podgrzewanie, spożycie posiłków"], "PU s.9"),
+     ["równomiernie w strefie biurowej", "napoje, podgrzewanie, spożycie posiłków",
+      "PU podaje 'około 24 m2' i 'szacuje się 15 pomieszczeń' - wartości orientacyjne, nie sztywne [uwaga weryfikatora]"], "PU s.9"),
 ]
 R["PP"] = [
     ("PP.01", "Podręczny magazyn dokumentacji (konwertowalny na biuro)", 20, 24, [24, 24], None, False, "PU",
@@ -505,6 +506,21 @@ wyj["meta"] = OrderedDict([
         ("typy_pokoi", "CZ, DYR, ZDYR, SAM, SEK, PR (24 m2/3 st.), PR32 (GW 32 m2/4 st.), OCZ (miejsce oczekiwania)"),
         ("scenariusz_kondygnacji", "N_KOND=%d (2 podziemne + parter + 9 pięter) - wpływa na liczbę PP.06, PHS.01, IT.02" % N_KOND),
     ])),
+    # dodane przez weryfikatora
+    ("weryfikacja", OrderedDict([
+        ("data", "2026-11-16"),
+        ("wynik", "zał.1 (71 wierszy + suma) zgodny z obrazem PU s.19 (PDF s.20); liczby pokoi 187/4552 m2/569 st. potwierdzone ręcznie; sumy bloków i zakresy przeliczone"),
+        ("poprawki", [
+            "sejmik_sala_obrad.stanowiska_stale_min 44 -> 41 (PU s.6); dodano uczestnicy_standardowi_razem = 44",
+            "dodano sejmik_sala_obrad.czy_100_obejmuje_publicznosc (niejasność PU s.6)",
+            "kadra.osoby_spoza_403: Przewodniczący/Wice należą do 36 radnych; poza 403 jest 4, a nie 5 członków Zarządu",
+            "parking.samochody_min_MPZP: dosłowne brzmienie MPZP par.13 pkt 1 lit. e ('biur oraz obiektów kongresowych i konferencyjnych', 'co najmniej')",
+            "parking: dodano OzN_przy_wiekszym_garazu; MDS: dodano ustawę z 5.12.2024",
+            "instalacje: dodano bilans_energii_OZE i tryb samowystarczalny (M.12 pkt 1)",
+            "dodano sekcję zagospodarowanie_terenu (PU s.16-17; Reg. III.1.2) i uwagi_weryfikatora_lokalizacja (Wyj.21 odp.84-85, Wyj.8 odp.57)",
+            "PS.01: uwaga o orientacyjnym charakterze 'około 24 m2' i 'szacuje się 15'",
+        ]),
+    ])),
 ])
 wyj["zalozenia_ogolne"] = OrderedDict([
     ("teren", "dz. 10/3, 11/6, 19/11, 9/1, obr. 022 Południe; 3 729 m2 (PU s.2); do obliczeń - Obszar inwestycji z M.04 (Wyj.8 odp.59)"),
@@ -532,7 +548,10 @@ wyj["reguly_pokoi_biurowych"] = [
 wyj["kadra"] = OrderedDict([
     ("suma_zal1", Z1_SUMA_PU), ("suma_kontrolna_obliczona", tot),
     ("zgodnosc", tot == Z1_SUMA_PU),
-    ("osoby_spoza_403", "Przewodniczący + 3 Wiceprzewodniczących (radni), asystent Przewodniczącego (niejasne, czy w 16 os. KS), 36 radnych, 5 członków Zarządu (poza CZ), Skarbnik, Sekretarz, przedstawiciel Wojewody, ochrona, sprzątanie, 3 techników (Wyj.6 odp.24) - PU s.6-7, s.15"),
+    # poprawione przez weryfikatora: Przewodniczący i Wice są w liczbie 36 radnych; CZ (zał.1 poz. 8) jest jednym z 5 członków Zarządu
+    ("osoby_spoza_403", "36 radnych (w tym Przewodniczący i 3 Wiceprzewodniczących), asystent Przewodniczącego (niejasne, czy w 16 os. KS), "
+                        "pozostali 4 członkowie Zarządu (Zarząd = 5 os., w tym Członek Zarządu ujęty w zał.1 poz. 8 - wniosek), Skarbnik, Sekretarz, "
+                        "przedstawiciel Wojewody, ochrona, sprzątanie, 3 techników (Wyj.6 odp.24) - PU s.6-7, s.15 [poprawione przez weryfikatora]"),
     ("czas_pracy", "średnio 8-godzinny dzień pracy (PU s.9); brak godzin otwarcia i częstotliwości sesji w M.01 (luka)"),
     ("komorki", komorki),
 ])
@@ -558,6 +577,32 @@ LOK = OrderedDict([
     ("dostawy", "od ul. Wybrzeże Słowackiego, z poziomu terenu, winda osobowo-towarowa (PU s.17; Wyj.4 odp.20)"),
 ])
 wyj["lokalizacja_blokow"] = LOK
+# dodane przez weryfikatora: interpretacja Wyj.21 odp.84-85 i Wyj.8 odp.57
+wyj["uwagi_weryfikatora_lokalizacja"] = [
+    "Wyj.21 odp.85: 'Wszystkie wymienione pomieszczenia [PU s.5-7] muszą znajdować się na tej samej kondygnacji'; wyjątek: 'Kancelaria Sejmiku, opisana na str. 7' "
+    "może być na kondygnacji sąsiedniej. Na s.7 opisane są też komisje, kluby, sala radnych i pokój socjalny radnych - te zostają na kondygnacji sali obrad. "
+    "Gabinety Przewodniczącego i Wiceprzewodniczących oraz 2 sale 20 os. PU wymienia 'w tej strefie' [KS], więc mogą iść z KS na kondygnację sąsiednią - "
+    "to interpretacja (wniosek), nie rozstrzygnięcie Organizatora.",
+    "PU s.5 i Reg. III.1.5 s.19: Sejmik i KS na 'najwyższych kondygnacjach' w dominancie (obszar A MPZP) - KS na kondygnacji sąsiedniej musi też leżeć w dominancie.",
+    "Wyj.8 odp.57: dominanta nie musi wypełniać całego obszaru A (w obszarze A obowiązuje dach 35-45 m, MPZP par.26 ust.2 pkt 3).",
+]
+# dodane przez weryfikatora: pominięty rozdział PU 'Zagospodarowanie terenu' (s.16-17) i ustalenia Reg. III.1.2
+wyj["zagospodarowanie_terenu"] = OrderedDict([
+    ("zielen_reprezentacyjna", "strefa zieleni o charakterze reprezentacyjnym w obrębie wewnętrznego podwórka: rośliny ozdobne, trawniki, mała architektura i rekreacja (PU s.16)"),
+    ("ogrodek", "teren istniejącego ogródka przydomowego: wycinka do niezbędnego minimum, maks. liczba zachowanych drzew, mała architektura i rekreacja, "
+                "nieogrodzony, dostępny dla pracowników i mieszkańców sąsiednich kamienic (PU s.16; Reg. III.1.5 s.19; Wyj.20 odp.77); "
+                "lokalizacja drzew wg M.06, nie wg mapy (Wyj.13 odp.65)"),
+    ("droga_wewnetrzna", "wyłącznie obsługa obiektu: odbiór osób i niewielkie dostawy; niedostępna dla ruchu publicznego (PU s.16-17); "
+                         "dz. 10/2 = dojazd do podwórka kamienic i łącznik z drogą wewnętrzną (Wyj.4 odp.20)"),
+    ("droga_pozarowa", "wymagana, zgodna z przepisami (PU s.17); budynek wysoki - parametry do modułu ppoż. (wniosek)"),
+    ("strefa_dostaw", "od ul. Wybrzeże Słowackiego, z poziomu gruntu, z windą osobowo-towarową (PU s.17); bez miejsca postojowego na działce drogowej (Wyj.6 odp.25)"),
+    ("zjazd_garaz", "zjazd / zjazdy z drogi publicznej do parkingu podziemnego w obrębie Inwestycji (Reg. III.1.2 s.18); dojazd do terenu tylko od 3KDL/1, 4KDPL/3, 6KDB/2 (MPZP par.26 ust.3)"),
+    ("skwer_dz_9_2", "skwer z ciągiem pieszym, ewentualnie zieleń i mała architektura powiązane z budynkiem (Reg. III.1.2 s.18)"),
+    ("dach_zielony", "dopuszczony na części dachu - ekstensywny (PU s.17)"),
+    ("wody_opadowe", "maksymalne zagospodarowanie w miejscu opadu: zbiorniki retencyjne (na terenie zewnętrznym), studnie chłonne, rozsączanie, PBC (PU s.14; M.12 pkt 2.B)"),
+    ("pozostala_powierzchnia", "zieleń urządzona oraz komunikacja kołowa i piesza (PU s.3)"),
+    ("zasada", "dostosowanie do istniejących warunków terenowych i infrastruktury, zrównoważony rozwój, estetyka urbanistyczna (PU s.17)"),
+])
 wyj["relacje_funkcjonalne"] = [
     OrderedDict([("od", "Wejście główne"), ("do", "Hol główny"), ("typ", "bezpośrednia"), ("zrodlo", "PU s.8")]),
     OrderedDict([("od", "Hol główny"), ("do", "Kancelaria ogólna, informacja, ochrona, poczekalnia, toalety, komfortka"), ("typ", "w holu"), ("zrodlo", "PU s.8-10")]),
@@ -580,7 +625,16 @@ wyj["sejmik_sala_obrad"] = OrderedDict([
     ("pojemnosc_max", 100),
     ("uczestnicy_standardowi", OrderedDict([("radni", 36), ("zarzad_wojewodztwa", 5), ("skarbnik", 1), ("sekretarz", 1),
                                             ("przedstawiciel_wojewody", 1)])),
-    ("stanowiska_stale_min", 44),
+    # poprawione przez weryfikatora: PU s.6 wymaga stałego wyposażenia tylko dla radnych, członków Zarządu i prezydium (=41);
+    # 44 to liczba uczestników standardowych (z Skarbnikiem, Sekretarzem i przedstawicielem Wojewody)
+    ("uczestnicy_standardowi_razem", 44),
+    ("stanowiska_stale_min", 41),
+    ("stanowiska_stale_uwaga", "PU s.6: wyposażenie stałe (głosowanie, tablety, mikrofony) dla radnych (36, w tym prezydium) i członków Zarządu (5) = 41; "
+                               "stałe stanowiska także dla Skarbnika, Sekretarza i przedstawiciela Wojewody (razem 44) - zalecenie (wniosek). "
+                               "System głosowania dotyczy radnych [poprawione przez weryfikatora]"),
+    ("czy_100_obejmuje_publicznosc", "NIEJASNE: PU s.6 'przeznaczona dla maksymalnie 100 osób' wymienia strefy radnych, prezydium, zarządu, gości, mediów i obsługi; "
+                                     "część dla publiczności opisana osobnym zdaniem (oddzielne wejście). Ekstrakcja przyjmuje 100 łącznie z publicznością (wniosek); "
+                                     "wariant bezpieczniejszy: 100 + galeria publiczności (Wyj.4 odp.18) [dodane przez weryfikatora]"),
     ("pozostali", "obsługa techniczna i kancelaryjna, tłumacze PJM, media, zaproszeni goście, publiczność (liczby nie podane - PU s.6)"),
     ("propozycja_podzialu_100_miejsc_wniosek", OrderedDict([
         ("radni_w_tym_prezydium_4", 36), ("zarzad_skarbnik_sekretarz_wojewoda", 8), ("obsluga_kancelaryjna", 4),
@@ -592,14 +646,18 @@ wyj["sejmik_sala_obrad"] = OrderedDict([
     ("technologia", "zintegrowany system głosowania, wbudowane tablety i mikrofony (wyposażenie stałe), kamery, głośniki, nagrywanie i transmisja, pętla indukcyjna (PU s.6-7, s.12)"),
 ])
 wyj["parking"] = OrderedDict([
-    ("samochody_min_MPZP", "12 msc / 1000 m2 PU biur i obiektów konferencyjnych (MPZP par.13 pkt 1 lit. e, M.03 s.15); minimum (Wyj.21 odp.83)"),
+    # poprawione przez weryfikatora: dosłowne brzmienie MPZP par.13 pkt 1 lit. e
+    ("samochody_min_MPZP", "'co najmniej' 12 miejsc postojowych na 1000 m2 powierzchni użytkowej - 'dla biur oraz obiektów kongresowych i konferencyjnych' "
+                           "(MPZP par.13 pkt 1 lit. e, M.03 s.15); minimum (Wyj.21 odp.83) [brzmienie poprawione przez weryfikatora]"),
     ("samochody_min_przy_PU_ekstrakcji", msc_min),
-    ("samochody_min_gdy_hol_foyer_liczone_do_PU", math.ceil(12 * (PU + RU_SW) / 1000.0)),
+    ("samochody_min_gdy_hol_foyer_hol_Sejmiku_liczone_do_PU", math.ceil(12 * (PU + RU_SW) / 1000.0)),
     ("PU_przyjete_do_obliczenia", PU),
     ("OzN_min", ozn_min),
+    # dodane przez weryfikatora: liczba OzN zależy od faktycznej liczby stanowisk, nie od minimum MPZP
+    ("OzN_przy_wiekszym_garazu", "liczba OzN liczona od faktycznej liczby stanowisk: 150 msc -> min. 6; 200 msc -> min. 8 (4%, M.13 s.81) [dodane przez weryfikatora]"),
     ("OzN_regula", "1 st. przy 6-15; 2 przy 16-40; 3 przy 41-100; 4% przy >100 (M.13 s.81); wymiary 3,6 x 5,0 m (M.13 s.80)"),
     ("EV", "infrastruktura ładowania wymagana (PU s.13); liczba punktów wg przepisów (do weryfikacji w module prawnym)"),
-    ("MDS", "parking = miejsce doraźnego schronienia wg rozp. MSWiA z 9.07.2025 (PU s.13); pojemność nie podana"),
+    ("MDS", "parking = miejsce doraźnego schronienia wg rozp. MSWiA z 9.07.2025 (PU s.13) oraz ustawy z 5.12.2024 o ochronie ludności i obronie cywilnej (PU s.18) [podstawa ustawowa dodana przez weryfikatora]; pojemność nie podana"),
     ("rowery", "50 stanowisk na parterze, stojaki U, wjazd od podwórza (PU s.12); nie na -1 (Wyj.7 odp.32)"),
     ("hulajnogi", "brak wymogu w M.01 (luka) - zalecenie własne 10 miejsc z ładowaniem"),
     ("rampy_zjazdy", "zjazd/zjazdy z drogi publicznej do parkingu w obrębie Inwestycji (Reg. III.1.2); dojazd do terenu tylko od 3KDL/1, 4KDPL/3, 6KDB/2 (MPZP par.26 ust.3)"),
@@ -629,7 +687,12 @@ wyj["instalacje"] = OrderedDict([
     ("deszczowka", "retencja i infiltracja (zbiorniki na terenie zewnętrznym, studnie chłonne, rozsączanie, PBC); wykorzystanie do podlewania, dachu zielonego, mycia nawierzchni, spłukiwania WC; przelew awaryjny (PU s.14; M.12 pkt 2.B)"),
     ("teletechnika", "IP, kontrola dostępu, SAP, CCTV; skalowalność i rezerwy (szachty, kanały) (PU s.14-15; Reg. III.1.9)"),
     ("windy", "liczba wg układu, dostępne dla OzN; min. 1 osobowo-towarowa w strefie dostaw; dedykowana winda Sejmiku niewymagana (PU s.15; Wyj.18 odp.71)"),
-    ("BMS_EMS", "pełna integracja z BMS/EMS (M.12 pkt 1)"),
+    ("BMS_EMS", "pełna integracja z BMS/EMS oraz możliwość pracy w trybie samowystarczalnym (M.12 pkt 1) [uzupełnione przez weryfikatora]"),
+    # dodane przez weryfikatora (M.12 pkt 1, s.1-2): pominięte zasady zeroemisyjności
+    ("bilans_energii_OZE", "M.12 pkt 1: ilość energii z OZE ma równoważyć roczne zużycie energii budynku (bilansowanie); bardzo niskie zapotrzebowanie na energię; "
+                           "brak lokalnych emisji CO2; preferencja rozwiązań pasywnych, uwzględnić akumulację cieplną konstrukcji i zyski cieplne (M.12 pkt 1, s.1-2). "
+                           "Wniosek: PV 0,4-1,0 MWp to rząd 2 000-5 000 m2 modułów (ok. 200 W/m2) - dach dominanty nie wystarczy, PV musi wejść w elewacje "
+                           "(M.12 pkt 1.B dopuszcza elewacje) [dodane przez weryfikatora]"),
     ("dach", "dopuszczalny zielony dach ekstensywny (PU s.17); dach - tylko urządzenia niemożliwe na piętrze technicznym (PU s.13)"),
 ])
 wyj["sumy"] = OrderedDict([
@@ -644,6 +707,7 @@ wyj["sumy"] = OrderedDict([
 with open(f"{OUT}/program.yaml", "w", encoding="utf-8") as f:
     f.write("# Program użytkowy UMWD (M.01) - ekstrakcja maszynowa. Wygenerowano: _build_program.py\n")
     f.write("# Wartości 'szacunek: true' = wniosek własny (M.01 nie podaje powierzchni); źródła w polu 'zrodlo'.\n")
+    f.write("# poprawione przez weryfikatora (2026-11-16): lista zmian w meta.weryfikacja.poprawki; zmienione wartości oznaczone '[... weryfikatora]'.\n")
     yaml.add_representer(OrderedDict, lambda d, data: d.represent_mapping("tag:yaml.org,2002:map", data.items()))
     def _lst(d, data):
         flow = len(data) <= 2 and all(isinstance(x, (int, float)) for x in data)

@@ -151,7 +151,7 @@ GW;GW.9.1.2.PR32;Pokój zespołu GW (4 stanowiska, 32 m2);2;32;64;8;kat. PU | st
 DK;DK.10.PR;Pokój pracowników (do 3 stanowisk);2;24;48;4;kat. PU | stanowiska max 6 | komórka zał.1 nr 10;"PU s.19 (zał.1, wiersz 10); PU s.4-5 (24 m2/3 st.; GW 32 m2/4 st.; pokoje 1-os.); Wyj.3 odp.16-17; Wyj.16 odp.69; Wyj.17 odp.70; Wyj.8 odp.48-50"
 DW;DW.11.PR;Pokój pracowników (do 3 stanowisk);2;24;48;4;kat. PU | stanowiska max 6 | komórka zał.1 nr 11;"PU s.19 (zał.1, wiersz 11); PU s.4-5 (24 m2/3 st.; GW 32 m2/4 st.; pokoje 1-os.); Wyj.3 odp.16-17; Wyj.16 odp.69; Wyj.17 odp.70; Wyj.8 odp.48-50"
 SN;SN.01;Sala narad 30 os.;6;60;360;30;SZACUNEK (wniosek) zakres 54-72 m2 | kat. PU | rozmieszczone równomiernie w budynku | ekran + punkty dostępowe do komputerów;"PU s.8; Wyj.8 odp.54"
-PS;PS.01;Pokój socjalny pracowników (do 30 os.);15;24;360;;kat. PU | równomiernie w strefie biurowej | napoje, podgrzewanie, spożycie posiłków;PU s.9
+PS;PS.01;Pokój socjalny pracowników (do 30 os.);15;24;360;;kat. PU | równomiernie w strefie biurowej | napoje, podgrzewanie, spożycie posiłków | PU podaje 'około 24 m2' i 'szacuje się 15 pomieszczeń' - wartości orientacyjne, nie sztywne [uwaga weryfikatora];PU s.9
 PP;PP.01;Podręczny magazyn dokumentacji (konwertowalny na biuro);20;24;480;;kat. PU | 3 punkty dostępowe el. i teletech. (zmiana na biuro);PU s.9
 PP;PP.02;Archiwum Państwowego Zasobu Geodezyjnego i Kartograficznego (GW);1;48;48;;kat. PU | szafy jezdne (obciążenie stropu - wniosek) | kontrola temperatury i wilgotności | ta sama kondygnacja co GW;"PU s.9-10; Wyj.6 odp.26"
 PP;PP.03;Archiwum operatów kartograficznych i dokumentacji technicznej (GW);1;24;24;;kat. PU | jw.;"PU s.9-10; Wyj.6 odp.26"

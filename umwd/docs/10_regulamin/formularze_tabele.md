@@ -222,7 +222,7 @@ W wersji PDF wzoru (`tekst/F.14.B_…txt`) pozycje są identyczne. Pozycje 5.2, 
 ### 2.3. Błędy i pułapki wzoru F.14.B (krytyczne)
 
 1. **BŁĄD WZORU.** Komórki kosztu prac projektowych (H163 netto, H164 brutto) mają formuły `=F159` i `=H159`. Pokazują więc **koszt realizacji Inwestycji, a nie koszt Dokumentacji**. Ten sam błąd jest w F.14.A (H32 `=F28`, H33 `=H28`). Zostawienie formuł oznaczałoby deklarację wynagrodzenia projektowego równego kosztowi budowy. Na wydruku PDF wzoru widać „0,00 zł”.
-   - *Wniosek:* nadpisać obie komórki wartościami, czyli kosztem Dokumentacji wg F.01. Limit wynosi ≤ 5,4% z 150 mln = **8,1 mln zł netto** (Reg. R.III ust.4, s.20–21). W opisie (PDF) pokazać kalkulację.
+   - *Wniosek:* nadpisać obie komórki wartościami, czyli kosztem Dokumentacji wg F.01. Limit wynosi ≤ 5,4% z 150 mln = **8,1 mln zł** (Reg. R.III ust.4, s.21–22). <!-- poprawione przez weryfikatora: było s.20–21 --> Regulamin nie mówi wprost, czy 8,1 mln zł to kwota netto czy brutto („5,4 % planowanego łącznego kosztu realizacji Inwestycji netto”). Jeśli brutto, limit netto wynosi ok. 6,59 mln zł. <!-- poprawione przez weryfikatora: dodano niejasność --> W opisie (PDF) pokazać kalkulację.
 2. **Brak formuł brutto w wierszach szczegółowych.** Kolumna H jest pusta, a sumy grup brutto (H7, H14, …) liczą puste komórki, więc wyjdzie 0 zł.
    - *Wniosek:* wpisać w H każdego wiersza szczegółowego `=F*(1+G)`.
 3. **Pozycje bez j.m. lub bez stawki VAT:**
@@ -332,7 +332,7 @@ W wersji PDF wzoru (`tekst/F.14.B_…txt`) pozycje są identyczne. Pozycje 5.2, 
   - „RAZEM ” (B56, zielone wypełnienie FF92D050).
 - Przypis B58: „*uzupełnić o numer pomieszczenia zgodnie z częścią rysunkową pracy konkursowej”.
 - **We wzorze nie ma formuł.**
-- **Liczba kondygnacji we wzorze** (−1, P, 1–6, dach) odpowiada budynkowi P+6 z jedną kondygnacją podziemną. Przy dominancie 35–45 m (strefa A, W-027) potrzeba więcej pięter. *Wniosek:* wzór nie ogranicza liczby kondygnacji; sekcje trzeba dodać, co uprawnia przypis „*” z F.15.C. W PDF wzoru pod „RAZEM DACH” powtarza się nagłówek „KONDYGNACJA / -1”. To artefakt wydruku.
+- **Liczba kondygnacji we wzorze** (−1, P, 1–6, dach) odpowiada budynkowi P+6 z jedną kondygnacją podziemną. Przy dominancie 35–45 m (strefa A, W-027) potrzeba więcej pięter. *Wniosek:* wzór nie ogranicza liczby kondygnacji; sekcje trzeba dodać. Podstawą jest wymóg przedstawienia rzutów wszystkich kondygnacji (Reg. R.VII ust.2 pkt2 lit.b, s.43; Wyj. 21 odp. 79) oraz zgodności numerów z rzutami (przypis B58 w F.15.B). Przypis „*” z F.15.C dotyczy tylko tabeli F.15.C. <!-- poprawione przez weryfikatora: było „co uprawnia przypis * z F.15.C” – ten przypis dotyczy innej tabeli --> W PDF wzoru pod „RAZEM DACH” powtarza się nagłówek „KONDYGNACJA / -1”. To artefakt wydruku.
 - **Sposób wypełnienia:** każde pomieszczenie (także KW, PHS, IT) z numerem identycznym jak na rzucie (W-059) i z powierzchnią wg PN-ISO 9836:2022-07 (W-052). Suma = suma F.15.A.
 
 ## 5. F.15.C – Dane bilansowe (Etap II)
