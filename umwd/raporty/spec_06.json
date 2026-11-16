@@ -1,0 +1,63 @@
+{
+ "nr": 6,
+ "title": "Programme quantified: 187 offices / 403 staff, ≈14,000 m² above-ground GFA; key conflict found — Sejmik floor (~1,400 m²) vs zone A (~1,180 m²); budget risk flagged",
+ "stages": [
+  [
+   "Organiser materials: download, unpack, text extraction (results files deliberately EXCLUDED)",
+   "done"
+  ],
+  [
+   "Rules register + Stage I/II checklists written ✔ → independent verification ►",
+   "running"
+  ],
+  [
+   "Site: zoning plan ✔, heritage ✔, 1934 block overlay ✔; survey geometry, geotech, trees, neighbours ►",
+   "running"
+  ],
+  [
+   "Building law & WT ✔, sunlight/obstruction method ✔, fire safety ✔; accessibility & zero-emission ►",
+   "running"
+  ],
+  [
+   "Research: what wins (19 competitions ✔); visual craft, façade aesthetics, Wrocław context, costs ►",
+   "running"
+  ],
+  [
+   "Programme ✔: 193 rooms, 187 offices (24/32 m², 1.35 m module), PU ≈ 8,600 m², GFA ≈ 14,000 m² above ground",
+   "done"
+  ],
+  [
+   "Concept: urban form, massing variants → judge panel → chosen concept",
+   "todo"
+  ],
+  [
+   "3D model + façade design (aesthetic principles) + photoreal renders (Blender Cycles)",
+   "todo"
+  ],
+  [
+   "Stage I study (2 boards) and Stage II entry (6 boards 100×70, 10-page text, tables, model 1:250)",
+   "todo"
+  ],
+  [
+   "Jury simulation & compliance audit → iterate until no open issues",
+   "todo"
+  ]
+ ],
+ "notes": [
+  "Sejmik storey must hold hall (≤100 seats, amphitheatre), lobby, media room, control room, catering, 2 committee + 4 club rooms → ~1,100 m² net ≈ 1,400 m² gross, but zone A gives only ≈1,180 m². Working solution: 7.5 m Sejmik storey with a mezzanine (antresola = part of the same storey per WT §3) carrying the public gallery with its own entrance — turning a constraint into the required civic separation.",
+  "Massing logic: tower P+8+Sejmik ≈ 42 m in zone A; perimeter wings P+5 ≈ 24 m (18–25 m band) along Mazowiecka to No. 19; cornice line ≈ 21 m to match neighbours (heritage).",
+  "Neighbour protection: gable windows of Słowackiego 5 face north → §13 obstruction rule governs (no obstacle within ½ obstruction height in a 60° sector; ≥17.5 m from the tower); §60: both equinoxes, 1.5 h, 7–17 official time.",
+  "Budget: first parametric check 142–183 M PLN vs 150 M cap → efficiency is a design driver (compact Sejmik floor, circulation ≤25–30 %, basement sized to MPZP minimum ≈103–110 cars + technical + civil shelter).",
+  "Office module 1.35 m → 24 m² room = 3 bays × 5.9 m; 32 m² = 4 bays — same depth, fully interchangeable."
+ ],
+ "images": [
+  {
+   "path": "umwd/docs/30_lokalizacja/img/mpzp_08_schemat_ustalen_M04.png",
+   "caption": "Zone A (35–45 m) ≈ 40 × 30 m: the only place for the Sejmik tower"
+  },
+  {
+   "path": "umwd/docs/30_lokalizacja/img/foto_hist_2_most_naroznik_przystan.jpg",
+   "caption": "Historic corner at the bridge (M.11.E) — reference for the rounded corner"
+  }
+ ]
+}
