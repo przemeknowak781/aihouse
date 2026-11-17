@@ -185,18 +185,28 @@ def node_group(name='K_trawa_GN'):
     return ng
 
 
+def _ustaw_wejscie(md, nazwa, wartosc):
+    """Ustawia wartość wejścia modyfikatora GN (bpy 5.x: md.properties.inputs.<id>.value; starsze: md[id])."""
+    ident = next(sk.identifier for sk in md.node_group.interface.items_tree
+                 if getattr(sk, 'in_out', '') == 'INPUT' and sk.name == nazwa)
+    props = getattr(md, 'properties', None)
+    if props is not None and hasattr(props, 'inputs'):
+        getattr(props.inputs, ident).value = wartosc
+    else:
+        md[ident] = wartosc
+
+
 def dodaj(ob, kepka_ob, gestosc=400.0, r0=10.0, r1=35.0, skala=1.0, seed=0):
     """Dodaje modyfikator trawy do obiektu (siatki trawnika)."""
     ng = node_group()
     md = ob.modifiers.new('trawa_3d', 'NODES')
     md.node_group = ng
-    ids = {s.name: s.identifier for s in ng.interface.items_tree if getattr(s, 'in_out', '') == 'INPUT'}
-    md[ids['Kepka']] = kepka_ob
-    md[ids['Gestosc']] = float(gestosc)
-    md[ids['R0']] = float(r0)
-    md[ids['R1']] = float(r1)
-    md[ids['Skala']] = float(skala)
-    md[ids['Seed']] = int(seed)
+    _ustaw_wejscie(md, 'Kepka', kepka_ob)
+    _ustaw_wejscie(md, 'Gestosc', float(gestosc))
+    _ustaw_wejscie(md, 'R0', float(r0))
+    _ustaw_wejscie(md, 'R1', float(r1))
+    _ustaw_wejscie(md, 'Skala', float(skala))
+    _ustaw_wejscie(md, 'Seed', int(seed))
     return md
 
 
@@ -205,7 +215,5 @@ def ustaw_kamere(obiekty, kamera):
     for ob in obiekty:
         for md in ob.modifiers:
             if md.type == 'NODES' and md.node_group and md.node_group.name.startswith('K_trawa_GN'):
-                ids = {s.name: s.identifier for s in md.node_group.interface.items_tree
-                       if getattr(s, 'in_out', '') == 'INPUT'}
-                md[ids['Kamera']] = kamera
+                _ustaw_wejscie(md, 'Kamera', kamera)
                 ob.update_tag()

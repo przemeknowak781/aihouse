@@ -1287,21 +1287,78 @@ def obramienie(g, R, o, b=0.12, t=0.04, m='rama'):
     R.box(g, o.u0, o.u1, o.v1, o.v1 + b, 0, t, m)
 
 
-def naczolek(g, R, o, typ, m, wys=0.6, wysieg=0.14, nad=0.12):
-    """Naczółek nad oknem: 'tr' – trójkątny, 'luk' – odcinkowy, 'prosty' – gzyms nadokienny."""
-    a, b = o.u0 - 0.22, o.u1 + 0.22
+def _pasmo(g, R, u0, v0, u1, v1, grub, gleb, m):
+    """Listwa w płaszczyźnie ściany od (u0, v0) do (u1, v1): grubość w płaszczyźnie, głębokość (wysięg)."""
+    nrm = (R.nx, R.ny, 0.0)
+    g.belka(R.P(u0, v0, gleb / 2), R.P(u1, v1, gleb / 2), grub, gleb, m, up=nrm)
+
+
+def konsola(g, R, u, v_gora, m, h=0.32, w=0.11, gl=0.14):
+    """Konsolka (wspornik) pod gzymsem/parapetem: zwężający się ku dołowi klocek."""
+    R.box(g, u - w / 2, u + w / 2, v_gora - h * 0.45, v_gora, 0, gl, m)
+    R.box(g, u - w * 0.4, u + w * 0.4, v_gora - h, v_gora - h * 0.45, 0, gl * 0.6, m)
+
+
+def naczolek(g, R, o, typ, m, wys=0.6, wysieg=0.14, nad=0.12, konsole=True, plycina=True):
+    """Naczółek nad oknem (M.07 s. 12): gzyms poziomy na konsolkach + 'tr' – trójkątny lub 'luk' – odcinkowy
+    (listwa obwiedniowa i płaskie tympanon), 'prosty' – sam gzyms nadokienny. Płycina fryzu między oknem
+    a naczółkiem."""
+    a, b = o.u0 - 0.20, o.u1 + 0.20
     vb = o.v1 + nad
-    R.box(g, a, b, vb, vb + 0.12, 0, wysieg, m)
-    R.box(g, a + 0.04, b - 0.04, vb - 0.06, vb, 0, wysieg * 0.7, m)
+    if plycina and nad > 0.25:
+        R.box(g, o.u0 + 0.02, o.u1 - 0.02, o.v1 + 0.10, vb - 0.06, 0, 0.022, m)
+    R.profil(g, a, b, vb, [(0.0, 0.0), (wysieg * 0.45, 0.0), (wysieg * 0.45, 0.04), (wysieg, 0.08), (wysieg, 0.14),
+                           (0.0, 0.14)], m)
+    if konsole:
+        konsola(g, R, a + 0.07, vb, m, h=0.34, w=0.10, gl=wysieg * 0.85)
+        konsola(g, R, b - 0.07, vb, m, h=0.34, w=0.10, gl=wysieg * 0.85)
+    v0 = vb + 0.14
+    mid = (a + b) / 2
     if typ == 'tr':
-        R.pryzma(g, [(a, vb + 0.12), (b, vb + 0.12), ((a + b) / 2, vb + 0.12 + wys)], 0, wysieg, m)
+        R.pryzma(g, [(a + 0.12, v0), (b - 0.12, v0), (mid, v0 + wys - 0.10)], 0, 0.03, m)
+        _pasmo(g, R, a - 0.02, v0 - 0.02, mid, v0 + wys, 0.11, wysieg, m)
+        _pasmo(g, R, mid, v0 + wys, b + 0.02, v0 - 0.02, 0.11, wysieg, m)
     elif typ == 'luk':
-        pts = [(a, vb + 0.12)]
-        for k in range(1, 8):
-            th = math.pi * (1 - k / 8)
-            pts.append(((a + b) / 2 + (b - a) / 2 * math.cos(th), vb + 0.12 + wys * 0.75 * math.sin(th)))
-        pts.append((b, vb + 0.12))
-        R.pryzma(g, pts, 0, wysieg, m)
+        pts = []
+        for k in range(0, 11):
+            th = math.pi * (1 - k / 10)
+            pts.append((mid + (b - a) / 2 * math.cos(th), v0 + wys * 0.62 * math.sin(th)))
+        R.pryzma(g, [(x, y - (0.06 if 0 < i < 10 else 0)) for i, (x, y) in enumerate(pts)], 0, 0.03, m)
+        for (x0, y0), (x1, y1) in zip(pts[:-1], pts[1:]):
+            _pasmo(g, R, x0, y0, x1, y1, 0.10, wysieg, m)
+
+
+def pilaster(g, R, u, v0, v1, m, w=0.20, gl=0.07):
+    """Pilaster z bazą i kapitelem (I p. Mazowieckiej 19)."""
+    R.box(g, u - w / 2, u + w / 2, v0, v1, 0, gl, m)
+    R.box(g, u - w / 2 - 0.04, u + w / 2 + 0.04, v0, v0 + 0.14, 0, gl + 0.03, m)
+    R.box(g, u - w / 2 - 0.05, u + w / 2 + 0.05, v1 - 0.22, v1 - 0.06, 0, gl + 0.04, m)
+    R.box(g, u - w / 2 - 0.07, u + w / 2 + 0.07, v1 - 0.06, v1, 0, gl + 0.06, m)
+
+
+def tralki(g, R, u0, u1, v0, v1, m, rozst=0.13):
+    """Tralki (balustrada pozorna) pod oknem."""
+    R.box(g, u0, u1, v1 - 0.08, v1, 0, 0.10, m)
+    R.box(g, u0, u1, v0, v0 + 0.06, 0, 0.08, m)
+    n = max(2, int((u1 - u0) / rozst))
+    for i in range(n):
+        u = u0 + (i + 0.5) * (u1 - u0) / n
+        R.box(g, u - 0.028, u + 0.028, v0 + 0.06, v1 - 0.08, 0.0, 0.07, m)
+
+
+def plycina(g, R, u0, u1, v0, v1, m, b=0.05, gl=0.035):
+    """Płycina: prostokątna ramka (listwy) na licu ściany."""
+    R.box(g, u0, u1, v0, v0 + b, 0, gl, m)
+    R.box(g, u0, u1, v1 - b, v1, 0, gl, m)
+    R.box(g, u0, u0 + b, v0 + b, v1 - b, 0, gl, m)
+    R.box(g, u1 - b, u1, v0 + b, v1 - b, 0, gl, m)
+
+
+def parapet(g, R, o, m, wys=0.10, konsole=True):
+    R.box(g, o.u0 - 0.12, o.u1 + 0.12, o.v0 - wys, o.v0, 0, 0.12, m)
+    if konsole:
+        konsola(g, R, o.u0 + 0.02, o.v0 - wys, m, h=0.22, w=0.09, gl=0.10)
+        konsola(g, R, o.u1 - 0.02, o.v0 - wys, m, h=0.22, w=0.09, gl=0.10)
 
 
 def _gz(over, h):
@@ -1341,24 +1398,32 @@ def kamienica_maz19(ctx, g):
             ot.append(Otwor(u, w, a, c, szpr=s, d=0.25))
     strefy = [(vb, 0.86, T_C), (0.86, 4.50, T_B), (4.50, 8.78, T_M), (8.78, 15.50, T_B), (15.50, TOP + 1, T_M)]
     sciana(g, R, 0, R.L, vb, TOP, ot, strefy, rng)
-    # dekoracja
+    # dekoracja (wg rysunku elewacji M.07 s. 12)
     R.profil(g, 0, R.L, 4.50, _gz(0.28, 0.62), T_M)                     # gzyms nad parterem
-    for u in ax:                                                            # I p.: edikule z kolumienkami
+    for u in par:                                                           # parter: opaski okien boniowanych
+        obramienie(g, R, Otwor(u, 1.02, 1.48, 3.57), 0.10, 0.05, T_M)
+        R.box(g, u - 0.20, u + 0.20, 3.57, 3.95, 0, 0.07, T_M)             # zwornik
+    for u in ax:                                                            # I p.: pilastry, belkowanie, tralki
         o = Otwor(u, 1.06, 5.20, 7.05)
-        R.box(g, o.u0 - 0.22, o.u0 - 0.05, 5.12, 7.27, 0, 0.12, T_M)
-        R.box(g, o.u1 + 0.05, o.u1 + 0.22, 5.12, 7.27, 0, 0.12, T_M)
-        R.box(g, o.u0 - 0.32, o.u1 + 0.32, 7.27, 7.80, 0, 0.16, T_M)
-        R.box(g, o.u0 - 0.12, o.u1 + 0.12, 7.95, 8.62, 0, 0.04, T_M)      # płycina pod oknem II p.
+        pilaster(g, R, o.u0 - 0.17, 5.12, 7.30, T_M)
+        pilaster(g, R, o.u1 + 0.17, 5.12, 7.30, T_M)
+        R.box(g, o.u0 - 0.32, o.u1 + 0.32, 7.30, 7.40, 0, 0.08, T_M)      # architraw
+        R.box(g, o.u0 + 0.05, o.u1 - 0.05, 7.47, 7.70, 0, 0.025, T_M)     # płycina fryzu
+        R.profil(g, o.u0 - 0.40, o.u1 + 0.40, 7.76, _gz(0.20, 0.22), T_M)  # gzyms nadokienny
+        tralki(g, R, o.u0 - 0.05, o.u1 + 0.05, 4.62, 5.15, T_M)
+        plycina(g, R, o.u0 - 0.05, o.u1 + 0.05, 8.02, 8.58, T_M)          # płycina pod oknem II p.
     R.profil(g, 0, R.L, 8.70, _pas(0.07, 0.10), T_M)
-    for u in ax:                                                            # II p.: opaski + naczółki łukowe
+    for u in ax:                                                            # II p.: opaski, naczółki odcinkowe
         o = Otwor(u, 1.08, 8.80, 10.85)
         obramienie(g, R, o, 0.11, 0.05, T_M)
-        naczolek(g, R, o, 'luk', T_M, wys=0.55)
-    R.profil(g, 0, R.L, 11.86, _gz(0.16, 0.58), T_M)                     # gzyms podokienny III p.
+        parapet(g, R, o, T_M)
+        naczolek(g, R, o, 'luk', T_M, wys=0.52, nad=0.42)
+    R.profil(g, 0, R.L, 11.86, _gz(0.16, 0.30), T_M)                     # gzyms podokienny III p.
     for u in ax:                                                            # III p.: naczółki trójkątne
         o = Otwor(u, 1.04, 12.47, 14.22)
         obramienie(g, R, o, 0.11, 0.05, T_M)
-        naczolek(g, R, o, 'tr', T_M, wys=0.75)
+        plycina(g, R, o.u0 - 0.05, o.u1 + 0.05, 11.70 - 0.0 + 0.5, 12.30, T_M, b=0.04)
+        naczolek(g, R, o, 'tr', T_M, wys=0.62, nad=0.36)
     R.profil(g, 0, R.L, 15.40, _pas(0.08, 0.20), T_M)
     for u in ax:                                                            # IV p.: opaski
         obramienie(g, R, Otwor(u, 0.94, 15.94, 17.43), 0.09, 0.04, T_M)
@@ -1367,9 +1432,13 @@ def kamienica_maz19(ctx, g):
         R.box(g, u - 0.17, u + 0.17, 15.60, 17.83, 0, 0.06, T_M)
     R.profil(g, 0, R.L, 17.83, _pas(0.09, 0.46), T_M)                     # belkowanie
     for i in range(len(ax) - 1):                                            # płyciny fryzu attykowego
-        R.box(g, ax[i] + 0.55, ax[i + 1] - 0.55, 18.75, 20.05, 0, 0.025, T_M)
+        plycina(g, R, ax[i] + 0.55, ax[i + 1] - 0.55, 18.80, 20.0, T_M, b=0.05, gl=0.03)
+    for u in ax:                                                            # okienka fryzu: opaski
+        obramienie(g, R, Otwor(u, 0.76, 19.50, 19.92), 0.07, 0.03, T_M)
     R.profil(g, 0, R.L, 20.33, [(0, 0), (0.12, 0), (0.12, 0.12), (0.30, 0.18), (0.30, 0.30), (0.62, 0.40),
                                 (0.62, 0.58), (0.66, 0.62), (0.66, 0.65), (0, 0.65)], T_M)
+    for u in np.arange(0.35, R.L - 0.2, 0.62):                             # konsolki gzymsu koronującego
+        R.box(g, u - 0.06, u + 0.06, 20.46, 20.73, 0.10, 0.56, T_M)
     R.box(g, -0.05, R.L, TOP, TOP + 0.06, -0.05, 0.05, 'blacha')
     # ---- szczyt (pn.) – s. 13; u od narożnika tylnego (wsch.) do frontu
     R = Ramka(P[0], P[1], zr)

@@ -24,3 +24,7 @@ Wnioski (wniosek własny):
    pylony Mostu Grunwaldzkiego, krawędzie nabrzeża), a EXIF służy jako przybliżenie startowe (pozycja, yaw, pitch, 24 mm).
 2. Wizualizacje 1 i 2 wklejane w zdjęcia muszą mieć Słońce z azymutu ≈ 181–186° na wysokości ≈ 25° (cienie na północ),
    jesienną kolorystykę zieleni i ekspozycję/balans bieli dopasowane do zdjęcia (WB ≈ 5500 K wg XMP).
+
+**Wynik kalibracji (2026-11-16):** kamery wyznaczone z punktów kontrolnych – `photomatch_F17.md`, `model/kamery_F17.json`
+(generator `tools/photomatch_F17.py`). Potwierdzono, że F.17 to kadr panoramy 8000×5632 (×1,25), a nie pojedyncza klatka 24 mm;
+ogniskowa F.17.A = 4058 px (Blender 17,25 mm przy sensorze 36 mm), F.17.B = 3876 px (17,52 mm), wysokość kamer 203,9 / 166,2 m n.p.m.
