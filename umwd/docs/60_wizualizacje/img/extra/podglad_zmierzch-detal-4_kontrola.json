@@ -13,64 +13,62 @@
  },
  "kamera": {
   "loc": [
-   119.77,
-   81.1,
-   2.011
+   119.2,
+   82.19,
+   1.997
   ],
   "cel": [
-   108.84,
-   68.08,
-   5.55
+   108.27,
+   69.17,
+   5.35
   ],
-  "z_wzgl_kamery": 1.961,
-  "lens_mm": 70.0,
+  "z_wzgl_kamery": 1.947,
+  "lens_mm": 60.0,
   "shift_x": 0.0,
-  "shift_y": 0.4048,
+  "shift_y": 0.3288,
   "poziom": true,
   "rozdzielczosc": [
    480,
-   600
+   320
   ],
   "sensor_fit": "AUTO (36 mm na dłuższym boku)"
  },
  "ludzie": false,
  "probki": 16,
  "czasy_s": {
-  "wczytanie_blend_s": 0.4,
+  "wczytanie_blend_s": 0.5,
   "zrodlo_sceny": "/tmp/claude-0/-home-user-aihouse/3267b8b5-f709-5d54-b008-7221ccbc0b4f/scratchpad/zmierzch_detal/scena_zd.blend",
-  "scena_s": 0.4,
-  "kontrola_s": 0.8,
-  "render_s": 34.2,
-  "postprodukcja_s": 0.4
+  "scena_s": 0.5,
+  "kontrola_s": 0.6
  },
  "uwagi": [],
  "info": [
   "attyka wieży (narożnik bliższy kamerze) wychodzi poza górną krawędź kadru"
  ],
  "promienie": [
-  "oś: wieza_elewacje 17.4 m",
-  "L-dół: wieza_elewacje 18.9 m",
-  "P-dół: wieza_szklo 19.4 m",
-  "L-góra: wieza_elewacje 20.0 m",
+  "oś: wieza_elewacje 17.3 m",
+  "L-dół: wieza_elewacje 19.7 m",
+  "P-dół: wieza_elewacje 16.8 m",
+  "L-góra: wieza_elewacje 20.6 m",
   "P-góra: wieza_szklo 18.0 m",
-  "dół: wieza_szklo 20.4 m"
+  "dół: wieza_elewacje 17.2 m"
  ],
  "udzialy_kadru": {
   "budynek": 1.0
  },
  "zaslona_pierwszego_planu": 0.0,
  "najblizsza_przeszkoda": {
-  "obiekt": "teren_chodnik_kb",
-  "odl_m": 1.65
+  "obiekt": "nabrzeze",
+  "odl_m": 1.47
  },
  "oko_nad_podlozem_m": 1.65,
  "podloze": "teren_chodnik_kb",
  "budynek_w_kadrze": {
   "wieża": {
-   "x0": -0.818,
-   "x1": 2.455,
-   "y0": -0.148,
-   "y1": 4.462,
+   "x0": -0.456,
+   "x1": 1.724,
+   "y0": -0.294,
+   "y1": 5.461,
    "rzut_w_kadrze": true,
    "uciete": [
     "lewo",
@@ -80,48 +78,50 @@
    ]
   },
   "skrzydło": {
-   "x0": 0.373,
-   "x1": 2.37,
-   "y0": 0.005,
-   "y1": 0.961,
+   "x0": 0.393,
+   "x1": 1.724,
+   "y0": -0.107,
+   "y1": 1.109,
    "rzut_w_kadrze": true,
    "uciete": [
-    "prawo"
+    "prawo",
+    "dół"
    ]
   },
   "segment": {
-   "x0": -1.186,
-   "x1": 0.284,
-   "y0": -0.042,
-   "y1": 1.42,
+   "x0": -0.696,
+   "x1": 0.31,
+   "y0": -0.166,
+   "y1": 1.683,
    "rzut_w_kadrze": true,
    "uciete": [
     "lewo",
-    "dół"
+    "dół",
+    "góra"
    ]
   }
  },
  "punkty_kluczowe": {
   "Brama Mostowa – napis (+5,2)": {
    "w_kadrze": false,
-   "x": 1.769,
-   "y": 0.501,
-   "widoczny": false,
-   "zaslania": "latarnia_14",
-   "odl_m": 17.8
+   "x": 1.226,
+   "y": 0.516,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 17.7
   },
   "korona – lamele łuku (+31,7)": {
    "w_kadrze": false,
-   "x": 1.769,
-   "y": 3.825,
+   "x": 1.226,
+   "y": 4.664,
    "widoczny": true,
    "zaslania": null,
    "odl_m": 34.5
   },
   "attyka wieży (+37,2)": {
    "w_kadrze": false,
-   "x": 1.769,
-   "y": 4.515,
+   "x": 1.226,
+   "y": 5.525,
    "widoczny": true,
    "zaslania": null,
    "odl_m": 39.3
@@ -132,11 +132,9 @@
    "y": 0.5,
    "widoczny": true,
    "zaslania": null,
-   "odl_m": 17.4
+   "odl_m": 17.3
   }
  },
- "horyzont_y": 0.095,
- "pochylenie_deg": 0.0,
- "png": "/home/user/aihouse/umwd/build/ujecia_dodatkowe/podglad_zmierzch-detal-4.png",
- "jpg": "/home/user/aihouse/umwd/docs/60_wizualizacje/img/extra/podglad_zmierzch-detal-4.jpg"
+ "horyzont_y": 0.007,
+ "pochylenie_deg": 0.0
 }
