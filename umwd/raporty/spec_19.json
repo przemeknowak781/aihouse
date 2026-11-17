@@ -1,0 +1,63 @@
+{
+ "nr": 19,
+ "title": "Drawing toolchain complete for all mandatory views: site plan 1:500, plans 1:200, elevations (new: orthographic generator incl. curved corner), boards; lead designer still writing the winning-concept spec",
+ "stages": [
+  [
+   "Organiser materials: download, unpack, text extraction (results files deliberately EXCLUDED)",
+   "done"
+  ],
+  [
+   "Rules register (184 requirements, 14 conflicts) + checklists ✔ verified",
+   "done"
+  ],
+  [
+   "Site ✔: zoning, heritage, 1934 overlay, DWG survey, geotech, dendrology (44 trees, keep-classes), neighbours (window positions & sills)",
+   "done"
+  ],
+  [
+   "Law ✔ (verified): WT 2002 expired 20.09.2026 → art. 102a Building Law bridge; fire ✔; accessibility ✔; zero-emission ✔",
+   "done"
+  ],
+  [
+   "Design research ✔ (verified): trends, visual craft, boards, façades, Wrocław context, cost model",
+   "done"
+  ],
+  [
+   "Programme ✔: 193 rooms, 187 offices (24/32 m², 1.35 m module), PU ≈ 8,600 m², GFA ≈ 14,000 m² above ground",
+   "done"
+  ],
+  [
+   "Concept panel ✔: K5 wins unanimously (5/5); synthesis K5 + grafts ► → 3 verifiers (geometry/MPZP/§13, programme/Sejmik, cost/eco) → revision",
+   "running"
+  ],
+  [
+   "3D/visuals ✔ engines: plans, site plan, elevations (new), façades v2, context, photomatch; waiting for the final spec",
+   "running"
+  ],
+  [
+   "Stage I study (2 boards) + Stage II entry (≤8 boards 100×70 per clarif. 20), 5×A3 text, F.14.B/F.15 tables, white model 1:250",
+   "todo"
+  ],
+  [
+   "Jury simulation & compliance audit → iterate until no open issues",
+   "todo"
+  ]
+ ],
+ "notes": [
+  "Elevation generator (right): projects every façade run (straight or curved) onto the drawing plane with a painter's algorithm — piers, glazing per storey, floor lines, cornices; the R-14 m corner shows the correct foreshortening of its bays. Same façade parameters drive the 3D renders, so drawings and visualisations cannot drift apart.",
+  "Synthesis agent is cross-checking the full programme (all 193 rooms, Sejmik and Kancelaria groups) against the K5 floor plates before fixing coordinates — slow but this is where the competition is won (jury criterion a).",
+  "Critical design decision under evaluation: 12 m Sejmik storey (K5) vs. one more office floor — weighed against MPZP 35 m minimum roof in zone A and the 150 M PLN cap.",
+  "Production plan after the spec: (1) parametric model & room layout → table F.15.B; (2) drawings; (3) 3D building + 10 renders incl. F.17 montages; (4) F.14.B cost & F.15 tables; (5) 5 × A3 text; (6) 8 + 2 boards; (7) jury simulation & compliance audit loop.",
+  "Graphic style of drawings will be lightened for the boards (pale glazing, hierarchy of line weights) — the test uses dark glass for legibility of the projection only."
+ ],
+ "images": [
+  {
+   "path": "umwd/raporty/img/elev_test.png",
+   "caption": "Elevation generator test on the K5 base massing: north (top) and east (bottom) elevations"
+  },
+  {
+   "path": "umwd/raporty/img/k5_ctx.jpg",
+   "caption": "K5 base massing in 3D context"
+  }
+ ]
+}

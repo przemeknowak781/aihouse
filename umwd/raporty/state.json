@@ -1,5 +1,5 @@
 {
- "title": "Pipeline integration test passed: the winning K5 massing (tower with R-14 m corner, Mazowiecka wing, SE segment) placed into the 3D context and rendered; synthesis spec still being written",
+ "title": "Drawing toolchain complete for all mandatory views: site plan 1:500, plans 1:200, elevations (new: orthographic generator incl. curved corner), boards; lead designer still writing the winning-concept spec",
  "stages": [
   [
    "Organiser materials: download, unpack, text extraction (results files deliberately EXCLUDED)",
@@ -30,7 +30,7 @@
    "running"
   ],
   [
-   "3D/visuals: engines ✔; photomatch ✔; 3D context ✔ (street-level detail); curved façade generator ✔ → awaiting concept spec",
+   "3D/visuals ✔ engines: plans, site plan, elevations (new), façades v2, context, photomatch; waiting for the final spec",
    "running"
   ],
   [
@@ -43,20 +43,20 @@
   ]
  ],
  "notes": [
-  "Integration test (right): K5 dossier coordinates → façade generator v2 (granite piers 2.70 m on the tower, ceramic bands on the wing) → full 3D context (survey terrain, river, bridge with helmets, autumn trees) → Cycles render in ~30 s at preview resolution.",
-  "First read of the massing: the tower stands back from the bridge portal, the wing closes the Mazowiecka frontage to No. 19, and the garden court opens south — consistent with the heritage brief ('rebuild the block, not the tenements').",
-  "Known issues to be resolved by the synthesis: the 12 m Sejmik storey (driven by the 35 m minimum roof height in zone A at only P+5) vs. an extra office floor (+1,146 m², ≈ +5 M PLN); presidium orientation; technical platform; façade language (vertical rhythm & lamellas).",
-  "Board design system ready (1000 × 700 mm, 12-column grid, Inter typography, terracotta accent, numbered header, anonymous).",
-  "Next steps once the spec lands: parametric model → floor plans 1:200 with room numbers/areas → sections/elevations → photoreal renders (incl. F.17 montages) → boards."
+  "Elevation generator (right): projects every façade run (straight or curved) onto the drawing plane with a painter's algorithm — piers, glazing per storey, floor lines, cornices; the R-14 m corner shows the correct foreshortening of its bays. Same façade parameters drive the 3D renders, so drawings and visualisations cannot drift apart.",
+  "Synthesis agent is cross-checking the full programme (all 193 rooms, Sejmik and Kancelaria groups) against the K5 floor plates before fixing coordinates — slow but this is where the competition is won (jury criterion a).",
+  "Critical design decision under evaluation: 12 m Sejmik storey (K5) vs. one more office floor — weighed against MPZP 35 m minimum roof in zone A and the 150 M PLN cap.",
+  "Production plan after the spec: (1) parametric model & room layout → table F.15.B; (2) drawings; (3) 3D building + 10 renders incl. F.17 montages; (4) F.14.B cost & F.15 tables; (5) 5 × A3 text; (6) 8 + 2 boards; (7) jury simulation & compliance audit loop.",
+  "Graphic style of drawings will be lightened for the boards (pale glazing, hierarchy of line weights) — the test uses dark glass for legibility of the projection only."
  ],
  "images": [
   {
-   "path": "umwd/raporty/img/k5_ctx.jpg",
-   "caption": "Integration test: K5 base massing in the 3D context (aerial from NE) — not final architecture"
+   "path": "umwd/raporty/img/elev_test.png",
+   "caption": "Elevation generator test on the K5 base massing: north (top) and east (bottom) elevations"
   },
   {
-   "path": "umwd/raporty/img/jury_scores.png",
-   "caption": "Why K5: unanimous jury ranking"
+   "path": "umwd/raporty/img/k5_ctx.jpg",
+   "caption": "K5 base massing in 3D context"
   }
  ]
 }
