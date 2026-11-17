@@ -138,12 +138,18 @@ def segment_faces():
     E.rect(0, m, 4.8, 20.15, fill=C["SEG"]); E.rect(L - m, L, 4.8, 20.15, fill=C["SEG"])
     zg = -0.25
     E.rect(0, L, zg, 4.45, fill=G)
-    E.rect(0.55, 6.55, zg, zg + 4.20, fill=ME, stroke=INK, sw=0.08)          # brama garażowa 6,0 m
-    for q in range(1, 14):
-        E.hline(0.6, 6.5, zg + q * 0.3, stroke="#6b645e", sw=0.03)
-    E.rect(7.25, 8.45, zg, zg + 2.4, fill=ME, stroke=INK, sw=0.07)          # trafo
-    E.rect(9.0, 10.0, zg, zg + 2.4, fill=ME, stroke=INK, sw=0.07)           # odpady
-    for a in (0.55, 6.55, 7.25, 8.45, 9.0, 10.0):
+    # weryfikacja K-2 / I-1: rampa jednopasowa 3,5 m przy ścianie pn. segmentu → brama 4,0 m na v −0,4…−4,4 (s = L−4,4 … L−0,4),
+    # próg w poziomie chodnika 119,10 + zapora samoczynna; drzwi trafo / rozdzielni / odpadów w części pd. (pełna ściana pd.)
+    g0, g1 = L - 4.4, L - 0.4
+    E.rect(g0, g1, zg, zg + 4.0, fill=ME, stroke=INK, sw=0.08)
+    for q in range(1, 13):
+        E.hline(g0 + 0.05, g1 - 0.05, zg + q * 0.3, stroke="#6b645e", sw=0.03)
+    doors = [(0.75, 1.95), (2.55, 3.55), (4.15, 5.15)]          # trafo (1,2) · rozdzielnia nn (1,0) · odpady (1,0)
+    for a, b in doors:
+        E.rect(a, b, zg, zg + 2.4, fill=ME, stroke=INK, sw=0.07)
+        for q in range(1, 8):
+            E.hline(a + 0.05, b - 0.05, zg + q * 0.3, stroke="#6b645e", sw=0.03)
+    for a in [0.75, 1.95, 2.55, 3.55, 4.15, 5.15, g0, g1]:
         E.vline(a, zg, 4.45, stroke=INK, sw=0.08)
     E.rect(0, L, 4.45, 4.80, fill=G, stroke=INK, sw=0.09)
     gzyms(E, 0, L)
@@ -249,7 +255,7 @@ def tower_faces():
     # East (Wybrzeże): s from south (113.47,50.23) to arc start
     E = Face([p[1], p[2]], -1.0, 37.2, "W-E", fill=G)
     piersE = pier_grid(E.L, [0.525] + [0.525 + 2.7 * j for j in range(1, 5)], massive=[(E.L - 2.2, E.L)])
-    tower_bays(E, piersE, "hall", entries=[(E.L - 6.8 + 1.0, E.L - 1.4 + 0.0, "Wejście Obywatelskie")], zg=-0.15)
+    tower_bays(E, piersE, "hall", entries=[(1.40, 6.80, "Wejście Obywatelskie")], zg=-0.15)   # v 1,40–6,80 (wnęka 1,5 m przy trzonie B)
     # Arc R14
     A = Face(p[i_arc0:i_arc1 + 1], -1.0, 37.2, "W-luk", fill=G)
     A.rect(0, A.L, -0.15, 4.8, fill=REC, op=0.95)
@@ -259,7 +265,7 @@ def tower_faces():
         A.rect(s - 0.3, s + 0.3, -0.15, 4.8, fill=G, stroke=INK, sw=0.08)
     for f in ("1", "2", "3", "4", "5"):
         zf = LEV[f]
-        A.rect(0, A.L, zf, zf + 1.30, fill=C["LUK"], stroke=INK, sw=0.08)
+        A.rect(0, A.L, zf, zf + 1.30, fill=(G if f == "1" else C["LUK"]), stroke=INK, sw=0.08)   # nad podcieniem: granitowe nadproże z napisem
         A.rect(0, A.L, zf + 1.30, zf + 3.75, fill=GL, stroke=INK, sw=0.06)
         A.rect(0, A.L, zf + 3.25, zf + 3.75, fill=INK, op=0.25)
         q = 1.35
@@ -286,7 +292,7 @@ def tower_faces():
     tower_bays(Wf, piersW, "komisje", zg=-0.1)
     # South (garden): s = u from SW (74.61,40.76) to SE (113.47,50.23)
     Sf = Face([p[0], p[1]], -1.0, 37.2, "W-S", fill=G)
-    piersS = pier_grid(Sf.L, [0.525 + 2.7 * j for j in range(0, 14)] + [Sf.L - 0.525])
+    piersS = pier_grid(Sf.L, [0.525 + 2.7 * j for j in range(0, 15)], massive=[(37.8, 40.0)])   # filar narożny SE 2,2 m
     tower_bays(Sf, piersS, "komisje_lamele", entries=[(8.6, 11.4, "wejście ogrodowe"), (3.0, 4.6, "rowerownia")],
                louvres=(2.0, 12.0), zg=-0.35)
     return [E, A, N, Wf, Sf]
