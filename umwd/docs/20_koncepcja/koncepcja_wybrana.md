@@ -25,9 +25,9 @@ Spis: 1 idea · 2 słabości i ich usunięcie · 3 przeszczepy i sprzeczności �
 | # | Słabość K5 (sędziowie) | Rozwiązanie w syntezie (liczby) |
 |---|---|---|
 | 1 | Prezydium przed panoramą 33 × 10,2 m, przeciwświatło (J1, J2, J4) | Sala odwrócona (przeszczep K3). **Prezydium i mównica przy pełnej ścianie pd.**, godło z brązu na balustradzie galerii nad prezydium. Panorama jest **za plecami radnych** i oświetla prezydium od przodu światłem z pn./pn.-wsch. Kamery na prezydium mają tło pełne. Ujęcia radnych pod okno łagodzą lamele 0,60 m, rolety screen 5 % i światło TV ≥ 800 lx w pionie. |
-| 2 | Bilans poziomu Sejmiku się nie zamyka; brak korytarza (J1, J2, J4) | Rzut rozpisany w shapely (rozdz. 7). Wnętrze 1 080,1 m² = pomieszczenia 875,3 + trzony 119,2 + galeria kuluarowa 87,8 + ściany wewn. 36,9 (+ ściany zewn. 65,7 do PC 1 145,8). **Kuluar 2,25 × 39,0 m** (przeszczep K4) łączy obie klatki, salę (wejście prezydium) i wszystkie komisje i kluby. Sala zmniejszona do 287,4 m² (zakres 280–380), hol 79,9 m² + kuluar 87,8 m² = 167,7 m² (program 150). |
+| 2 | Bilans poziomu Sejmiku się nie zamyka; brak korytarza (J1, J2, J4) | Rzut rozpisany w shapely (rozdz. 7). Wnętrze 1 080,1 m² = pomieszczenia (z salą i holem) 836,3 + trzony 119,2 + galeria kuluarowa 87,8 + ściany wewn. 36,9 (+ ściany zewn. 65,7 do PC 1 145,8). **Kuluar 2,25 × 39,0 m** (przeszczep K4) łączy obie klatki, salę (wejście prezydium) i wszystkie komisje i kluby. Sala zmniejszona do 287,4 m² (zakres 280–380), hol 79,9 m² + kuluar 87,8 m² = 167,7 m² (program 150). |
 | 3 | Pomost techniczny 6,6 m z 4 centralami = kondygnacja techniczna (J1, J2, J5) | Pomost usunięty. Centrale piętrowe 25 m² w strefie środkowej wieży (kond. 1–5; kond. 5 obsługuje także 6). Centrale parteru i Sejmiku na −1. Nad komisjami jest tylko przestrzeń sufitowa ≤ 1,95 m bez podłogi i bez urządzeń, czyli nie jest to kondygnacja (WT § 3 pkt 16). |
-| 4 | Kondygnacja Sejmiku 12 m – nadmiar kubatury (J2, J3, J4, J5) | **P+6+S** w tej samej bryle zewnętrznej. Sejmik ma **8,90 m** (sala 6,85 m w świetle, antresola +3,60 m). Dodatkowa kondygnacja biurowa (+1 145,8 m² PC) mieści w całości sale narad i magazynki przy elewacji (poz. 8, 18). Wysokość wieży 37,6 m bez zmian (K5: 36,8 m), dach podniesiony o 0,65 m dla zapasu MPZP. |
+| 4 | Kondygnacja Sejmiku 12 m – nadmiar kubatury (J2, J3, J4, J5) | **P+6+S** w tej samej bryle zewnętrznej. Sejmik ma **8,90 m** (sala 6,85 m w świetle, antresola +3,60 m). Dodatkowa kondygnacja biurowa (+1 145,8 m² PC) mieści w całości sale narad i magazynki przy elewacji (poz. 8, 18). Wieża ma 37,6 m (K5: 36,8 m). Dach podniesiono o 0,65 m wyłącznie dla zapasu MPZP 1,06 m. |
 | 5 | ≈ 650 m² pełnego szkła w koronie (J1, J3, J4, J5) | Przeszklenia korony **262 m²** (−60 %). Na łuku pionowe lamele ceramiczne 0,25 × 0,60 m co 0,90 m (przesłonięcie ≈ 28 % w osi, do 100 % pod kątem > 34°). Okno holu pn. podzielone filarami 1,05 m (kwatery 1,65 × 5,0 m). Szkło g = 0,27, R ≤ 12 %. Nocą korona świeci tylko światłem wnętrza podczas sesji (≤ 5 lx na elewacji, WT § 293). |
 | 6 | Wstęgi w pierzei Mazowieckiej, słabe „posesje” (J1, J2, J3, J4) | Porządek pionowy (przeszczep K1). Oś okien **2,025 m** (kamienica: ≈ 2,2 m), okna **1,20 × 2,40 m (1 : 2)**, WWR 38 %. Cztery „posesje” 12,15 / 16,20 / 16,20 / 12,15 m różnią się odcieniem ceramiki i reliefem filarów 0 / 0,08 / 0,15 / 0,08 m. Pasma poziome zostały tylko na łuku narożnika. |
 | 7 | Ślepa ściana pd. segmentu SE (J1, J3, J4, J5) | Relief ceramiczny w osiach 2,025 m (pilastry płytkie 0,12 m, fugi z ciemnego metalu) w rysunku elewacji frontowej + pnącza na linkach (7 sadzonek winobluszczu w pasie 4,6 m od granicy dz. 10/2). Nad nią **taras nad Oławą** (167 m², +19,80) z balustradą cofniętą 1,5 m. |
@@ -38,10 +38,10 @@ Spis: 1 idea · 2 słabości i ich usunięcie · 3 przeszczepy i sprzeczności �
 | 12 | Podnośnik na rzędy (J2, J4, J5) | Rzędy +0,15 / +0,30 / +0,45 m z **pochylniami bocznymi ≤ 5 %** (3,0 m na uskok). **Stanowisko dla wózka w każdym rzędzie** (przeszczep K4). |
 | 13 | Dostawy po dz. 10/2, rampa 20 % (J2) | **Jeden punkt obsługi w segmencie SE** od Wybrzeża (przeszczep K4). Dostawy samochodami ≤ 2,20 m rampą na −1 do zatoki przy dźwigu T 2 t. Dz. 10/2 nie jest używana przez nasz ruch. Rampa **≤ 18 %** z przejściami 9 %, w całości pod dachem segmentu. |
 | 14 | Brama garażu 9–11 m od WS 5, hałas (J3) | Brama 6,0 m w elewacji wsch. segmentu, **15,0 m od okna lok. 6/6A**, zwrócona na wsch. (okno patrzy na pn.). Zasłania ją bryła segmentu. Rampa obudowana, ściany chłonne, cicha brama rolowana. |
-| 15 | Pasaż w kształcie L (J3) | **Prosta oś przekątna** (azymut 211,7°, 33,4 m + podcień 3 m) od drzwi w łuku (101,86; 71,57) do drzwi ogrodowych (84,32; 43,12). Z progu widać drzewa ogródków (D795, D797). W najwęższym miejscu, między trzonem A a trzonem B, ma 6,0 m (przeszczep K3). |
+| 15 | Pasaż w kształcie L (J3) | **Prosta oś przekątna** (azymut 211,7°, 33,4 m + podcień 3 m) od drzwi w łuku (101,86; 71,57) do drzwi ogrodowych (84,32; 43,12). Z progu widać drzewa ogródków (D795, D797). W najwęższym miejscu (między blokiem WC a trzonem B) ma 6,3 m (przeszczep K3). |
 | 16 | Ażurowa brama 2,5 m na dz. 10/2 (J3) | Usunięta. Nic nie stoi na dz. 10/2. Pas 4,6 m w obszarze inwestycji między segmentem a dz. 10/2 to otwarte wejście do ogrodu od bulwaru (ława granitowa, 2 drzewa, bez furty). |
 | 17 | Rezerwa budżetowa 2,3 % (J3) | Koszt **146,2 mln zł netto** z **rezerwą 5 % (6,9 mln) w środku** i zapasem 3,8 mln do limitu. Łączny bufor 10,7 mln (7,1 %). Dwie metody (rozdz. 12). |
-| 18 | Magazynki „zamienne na biura” w środku (J4) | **20/20 magazynków przy elewacji** (12 standardowych 4,05 × 6,10 i 8 głębokich 2,70 × 8,90 m w wieży). Każdy ma okno ≥ 3,0 m² i 3 punkty. |
+| 18 | Magazynki „zamienne na biura” w środku (J4) | **20/20 magazynków przy elewacji** (13 standardowych 4,05 × 6,10 m i 7 głębokich 2,70 × 9,25 m w wieży). Każdy ma okno ≥ 3,0 m² i 3 punkty. |
 | 19 | Naroże segmentu 2,96 m od dz. 10/2 (J4) | Ściana pd. segmentu **4,58 m** od granicy dz. 10/2 (≥ 3,0 m wg WT § 12 ust. 1). |
 | 20 | PV zawyżone (biosolar + zieleń na tych samych m²) (J5) | **Wyłącznie BIPV jako pokrycie** za attyką: wieża 1 040 m² = 208 kWp, skrzydło 780 m² = 156 kWp. Do tego pasy podokienne od dziedzińca ≤ 25 m: 318 m² = 48 kWp. **Razem 412 kWp** (≥ 0,4 MWp M.12). Dachy zielone liczone osobno (tylko taras segmentu). Bez stelaży. |
 | 21 | Brak celu GWP (J5) | **GWP ≤ 500 kg CO₂e/m² PC (A1–A5)**, LCA wg PN-EN 15978 i Level(s) od koncepcji, raport A–C wg EPBD art. 7 ust. 2 (przeszczep K1). |
@@ -174,7 +174,7 @@ Odległość klatek A–B: **20,0 m**. Dojście z drogi pożarowej (dalszy pas W
 
 **Trakty.** Wieża: pokoje 6,10 | korytarz pierścieniowy 1,80 | strefa środkowa ≈ 12,2 m (trzon A, WC, socjalne, centrala 25 m², MFP, PD, porządkowe, miejsca oczekiwania, budki do rozmów) | 1,80 | 6,10. Skrzydło: trakt dwustronny 15,0 m (0,50 + 6,10 + 1,80 + 6,10 + 0,50). Segment: pokoje od Wybrzeża + korytarz w osi korytarza wsch. wieży + pas usług od zach.
 
-**Pojemność elewacyjna** (jednostki 4,05 m przy głębokości 6,10 m): kondygnacje 1–4 po **43** (skrzydło: ulica 13 + dziób 1 + dziedziniec 6; wieża: pn. 6 + łuk 4 + pd. 6; elewacja wsch. wieży i segmentu 6; segment zach. 1); kondygnacje 5 i 6 po **24**; parter 4. Razem 224. Zajęte 218,9, rezerwa 5,1 jedn.
+**Pojemność elewacyjna** (jednostki 4,05 m przy głębokości 6,10 m): kondygnacje 1–4 po **43** (skrzydło: ulica 13 + dziób 1 + dziedziniec 6; wieża: pn. 6 + łuk 4 + pd. 6; elewacja wsch. wieży i segmentu 6; segment zach. 1); kondygnacje 5 i 6 po **24**; parter 4. Razem 224. Zajęte 220,8, rezerwa 3,2 jedn.
 
 ### Rozmieszczenie (187 pokoi wg zał. 1 M.01; departamenty niedzielone)
 
@@ -188,7 +188,7 @@ Odległość klatek A–B: **20,0 m**. Dojście z drogi pożarowej (dalszy pas W
 | 3 | **DGP (24) + GW (11 = 8 × 32 m² w wieży + 3 × 24)** | 35 | 2 | 4 | 3 | archiwa GW 48 + 24 m², pracownia/urządzenia GW 24 m² (Wyj. 6 odp. 26) |
 | 4 | **pion 8: CZ (3) + DKD (12) + DZ (19)**, gabinety CZ, dyrektorów departamentów i wydziałów obok siebie przy trzonie A (Wyj. 10 odp. 62) | 34 | 1 | 6 | 3 | – |
 | 5 | **DSS (19)** | 19 | 1 | 4 (głębokie) | 2 | wyjście na taras nad Oławą (167 m²) |
-| 6 | **Kancelaria Sejmiku (8)** + gabinet Przewodniczącego 40 m² i asystent 14,5 m² (łuk NE, widok na most) + zaplecze 8 m² + 3 gabinety Wiceprzewodniczących po 30 m² + 2 sale spotkań 20 os. po 44 m² (wnętrze, przeszklone) + miejsce oczekiwania 12 m²; **DRA (11)** | 19 | – | – | 1 | schody reprezentacyjne nie; połączenie z Sejmikiem dźwigami A1/A2 |
+| 6 | **Kancelaria Sejmiku (8)** + gabinet Przewodniczącego 40 m² i asystent 14,5 m² (łuk NE, widok na most) + zaplecze 8 m² + 3 gabinety Wiceprzewodniczących po 30 m² + 2 sale spotkań 20 os. po 44 m² (wnętrze, przeszklone) + miejsce oczekiwania 12 m²; **DRA (11)** | 19 | – | – | 1 | połączenie z kondygnacją Sejmiku dźwigami A1/A2 i klatką A |
 | S | Sejmik (rozdz. 7) | – | – | – | – | – |
 | **Σ** | | **187** (179 × 24 + 8 × 32) | **6** | **20** | **15** | MFP 10, porządkowe 12, PD na każdej kondygnacji |
 
@@ -202,7 +202,7 @@ Na każdej kondygnacji 1–6 jest zespół WC w strefie środkowej wieży (K, M,
   * WC ogólnodostępne 19 m² + **komfortka 12 m²** (3,0 × 4,0 m, 14 m od wejścia głównego; u 15,65–21,0 × v 15,0–20,85);
   * centrum monitoringu 24 m² + socjal ochrony 10 m² + szatnie i WC personelu (u 0,5–8,15 × v 12,45–20,85);
   * **rowerownia 50 stanowisk** 90 m² (u 0,5–8,15 × v 0,5–12,3) z wjazdem od dziedzińca, zaplecze na −1 przy trzonie A;
-  * łącznik do foyer skrzydła i wejście od skweru (u 0,5–13,35 × v 21,0–29,2).
+  * łącznik do foyer skrzydła z oknami na skwer (u 0,5–13,35 × v 21,0–29,2); drugie wejście od skweru w podcieniu pn. (u 21–24).
 * **Skrzydło (786,2 m²):**
   * M1 (s 0–12,15): DW (2 pokoje od ulicy), trzon C, pokój techników 20 m², socjal personelu technicznego 20 m²;
   * brama ogrodowa (s 12,15–16,20);
@@ -350,7 +350,7 @@ Powyżej 25 m wszystkie okładziny, mocowania i izolacje są niepalne. Podokienn
 * **Budynek bezemisyjny** (EPBD 2024/1275, od 1.01.2028 dla budynków publicznych), bez spalania na działce. Agregat tylko awaryjny, na HVO.
 * **Forma:** A/V ≈ 0,18 m⁻¹; elewacje 6 880 m² (0,49 m²/m² PC nadziemnej); WWR 38–40 %, szkło pełne tylko w koronie (262 m²); osłony ZIP na elewacjach E, S, W; ościeża 0,60 m w wieży. Przegrody: ściana U ≤ 0,15, dach ≤ 0,12, okna ≤ 0,80.
 * **Ciepło i chłód:** gruntowe pompy ciepła, **75 sond × 99 m** (poza reżimem art. 86 PGiG), moc grzewcza ok. **430 kW**, chłód aktywny ok. 330 kW + free cooling. TABS, wentylacja wyporowa w salach, odzysk ciepła z serwerowni do c.w.u. Sieć ciepłownicza tylko jako rezerwa. Pole sond ma nadwyżkę ciepła 165 MWh/rok, którą bilansuje odzysk do c.w.u. i dry-cooler w okresach przejściowych (symulacja 25-letnia EED/EWS i TRT w projekcie – przeszczep K4).
-* **Wentylacja:** 5 central piętrowych + 2 na −1, rekuperacja ≥ 80 %, sterowanie CO₂.
+* **Wentylacja:** 5 central piętrowych (25 m², strefa środkowa wieży, kond. 1–5; kond. 5 obsługuje też 6) + centrale parteru i Sejmiku na −1, rekuperacja ≥ 80 %, sterowanie CO₂. Czerpnia zbiorcza: żaluzje w płycinach elewacji pd. wieży na kond. 1 (u 2–12, od dziedzińca). Wyrzutnia zbiorcza: lamele w pasie nad komisjami w koronie od pd. (≈ 29 m wyżej). Wentylatory oddymiania korytarzy w szachtach trzonów A i B, wyrzut jw. Nic na dachu ani na elewacjach od ulic i bulwaru.
 * **PV 412 kWp, 347 MWh/rok:** dach wieży 208 kWp (183 MWh), dach skrzydła 156 kWp (137 MWh), elewacje od dziedzińca 48 kWp (27 MWh). Magazyn energii 250 kWh.
 * **Bilans:** zużycie EPB ≈ 297 MWh/rok (23,9 kWh/(m²·rok)), całkowite ≈ 646 MWh/rok; **PV pokrywa 117 % EPB i 54 % całości**. Resztę daje społeczność energetyczna OZE Województwa (EPBD art. 11 ust. 7).
 * **EP ≈ 26 kWh/(m²·rok)** (bez PV 60) wobec EPmax 95 (WT 2002) i progu ZEB 85 (projekt WT). Emisje operacyjne EPB 6,3 kg CO₂/(m²·rok) (próg ZEB 31,4).
@@ -532,7 +532,7 @@ z = wysokość względem ±0,00 (119,30). Kamery ludzkie są poziome (perspektyw
 
 1. **Linia A z rastra 1:1000 (±0,3 m).** Lica wieży leżą na liniach A, a skrzydła i segmentu 5–8 cm poza nimi. Potrzebny pomiar geodezyjny, korekta lic bez zmiany układu.
 2. **Wykładnia antresoli** jest bezpieczna: brak pomieszczeń zamkniętych, 6 % rzutu.
-3. **§ 13 dla własnych pokoi w narożach wklęsłych** opiera się na sektorze obróconym (praktyka WT 2002, projekt WT § 12). Do potwierdzenia przy uzgodnieniach. Alternatywnie zamiana 3 pokoi na pomieszczenia pomocnicze (rezerwa elewacyjna 5,1 jedn.).
+3. **§ 13 dla własnych pokoi w narożach wklęsłych** opiera się na sektorze obróconym (praktyka WT 2002, projekt WT § 12). Do potwierdzenia przy uzgodnieniach. Alternatywnie zamiana 3 pokoi na pomieszczenia pomocnicze (rezerwa elewacyjna 3,2 jedn.).
 4. **BIPV jako pokrycie** wobec MPZP § 6 pkt 13 (K-05) wymaga zgodnej interpretacji organu.
 5. **Budżet:** bufor 7,1 %, waloryzacja do 2027 r. +5 % (opis w części opisowej). Dźwignie rezerwowe ≈ 1,6 mln.
 6. **Woda gruntowa i archeologia** (relikty piwnic) wpływają na harmonogram podziemia.
