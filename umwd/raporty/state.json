@@ -26,11 +26,11 @@
    "done"
   ],
   [
-   "Concept ✔ 'BRAMA I LATARNIA' specified (MD + machine JSON) → 3 verifiers ► → revision",
+   "Concept ✔ specified → verifiers: geometry ✔, programme ✔ (3 critical + 2 critical found), cost/eco ► → revision ►",
    "running"
   ],
   [
-   "Production ►: site plan 1:500 ✔, elevations 1:200 ✔ (5, with neighbours & MPZP lines), room model + 1:200 plans (agent ►), 3D building + renders (agent ►)",
+   "Production ►: site plan ✔, 5 elevations ✔, sections A-A/B-B ✔, façade section 1:50 ✔, functional axo ✔, equinox shading ✔; plans + 3D (agents ►)",
    "running"
   ],
   [
@@ -43,11 +43,11 @@
   ]
  ],
  "notes": [
-  "Site plan 1:500 built from the survey + spec: roof plan with levels (tower attic 156.50 m a.s.l., min. roofing +36.20 vs MPZP 35–45 m), SW-45° shadows, 8 entrances, garage only from Wybrzeże, fire lanes on both street carriageways, 39 existing trees kept in the plot, 6 removed, 12 new inside the boundary.",
-  "Correction found while drawing: the spec's '6 new trees on the river side' fell on the Wybrzeże carriageway; moved to the river-side pavement 1.4 m behind the kerb and shown honestly as a proposal OUTSIDE the competition boundary.",
-  "Elevations engine: orthographic projection of façade strips incl. the R-14 m arc, window-reveal shadows, painter's order, section plane for the courtyard view; façade orders exactly per spec (wing axis 2.025 m, 4 ceramic 'plots', granite cornice in line with Maz. 19 attic 140.15/140.24; tower piers 2.70 m, shadow storey, lamella crown).",
-  "Compliance flag (new): green roof terrace of the segment at +19.80 with attic +20.85 gives a 1.05 m barrier < 1.10 m required (WT §298) → add a set-back glass balustrade; logged for the audit loop.",
-  "Running: concept verification (geometry/programme/cost) → revision; plans agent; 3D agent. Next: 2 sections 1:200, façade section 1:50, axonometric schemes."
+  "Sections are generated live from the agents' room model: slabs, walls, cores, windows, rooms; diaphragm walls 0.8 m to ≈ −18 m, CFA piles under the tower, groundwater levels 115.5/116.45/117.0; Sejmik hall with tiers, gallery and 1.6 m roof trusses; A-A also cuts WS 5 with its protected gable window.",
+  "Façade section 1:50 of the crown: kordon in line with the wing cornice, recessed 'shadow storey', 1.65 × 5.0 m hall window with bird-safe frit, BIPV roof whose surface stays within +36.20…+36.45 (MPZP min 35 m).",
+  "Equinox shading: the proposal shades only the square, street and river to the north; every protected window of WS 5 and Maz. 19 keeps 2.2–5.7 h of sun on both equinoxes (requirement ≥ 1.5 h); effect of the project ≤ 0.3 h.",
+  "Verification found real defects that are now being revised: garage ramp threshold 0.5 m above the public pavement (→ single 3.5 m lane, gate 4.0 m, threshold at pavement level), 0.30 m cornice projecting over the plot line on street faces (→ no projection, recessed frieze), Sejmik storey programme does not close (→ 'S-2' re-plan with 180 m² mezzanine, 4 seat rows), −1 too close to protected tree roots (→ courtyard strip 7 → 5 m), honest tree balance 36–37/44 instead of 38.",
+  "Drawings already follow the corrections where unambiguous (gate, citizen entrance position, granite lintel with inscription, SE corner pier — aligned with the 3D agent)."
  ],
  "images": [
   {

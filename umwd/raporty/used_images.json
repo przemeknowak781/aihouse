@@ -122,5 +122,21 @@
  "7fe746298e77ec87d873": {
   "path": "umwd/raporty/img/elewacja_W_1-200.png",
   "board": "spec_22"
+ },
+ "cb2978659c499ab4f9f4": {
+  "path": "umwd/raporty/img/przekroj_AA_1-200.png",
+  "board": "spec_23"
+ },
+ "b49d670713b4128b3e26": {
+  "path": "umwd/raporty/img/przekroj_elewacyjny_1-50.png",
+  "board": "spec_23"
+ },
+ "4555a344c7cc4c730e07": {
+  "path": "umwd/raporty/img/aksonometria_funkcjonalna.png",
+  "board": "spec_23"
+ },
+ "c88c7826a38b47170ead": {
+  "path": "umwd/raporty/img/naslonecznienie_rownonoc.png",
+  "board": "spec_23"
  }
 }

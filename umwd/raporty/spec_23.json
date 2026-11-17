@@ -1,0 +1,71 @@
+{
+ "nr": 23,
+ "title": "Sections, 1:50 façade section, functional axonometry and equinox shading — plus verification findings under revision",
+ "stages": [
+  [
+   "Organiser materials: download, unpack, text extraction (results files deliberately EXCLUDED)",
+   "done"
+  ],
+  [
+   "Rules register (184 requirements, 14 conflicts) + checklists ✔ verified",
+   "done"
+  ],
+  [
+   "Site ✔: zoning, heritage, 1934 overlay, DWG survey, geotech, dendrology (44 trees, keep-classes), neighbours (window positions & sills)",
+   "done"
+  ],
+  [
+   "Law ✔ (verified): WT 2002 expired 20.09.2026 → art. 102a Building Law bridge; fire ✔; accessibility ✔; zero-emission ✔",
+   "done"
+  ],
+  [
+   "Design research ✔ (verified): trends, visual craft, boards, façades, Wrocław context, cost model",
+   "done"
+  ],
+  [
+   "Programme ✔: 193 rooms, 187 offices (24/32 m², 1.35 m module), PU ≈ 8,600 m², GFA ≈ 14,000 m² above ground",
+   "done"
+  ],
+  [
+   "Concept ✔ specified → verifiers: geometry ✔, programme ✔ (3 critical + 2 critical found), cost/eco ► → revision ►",
+   "running"
+  ],
+  [
+   "Production ►: site plan ✔, 5 elevations ✔, sections A-A/B-B ✔, façade section 1:50 ✔, functional axo ✔, equinox shading ✔; plans + 3D (agents ►)",
+   "running"
+  ],
+  [
+   "Stage I study (2 boards) + Stage II entry (≤8 boards 100×70 per clarif. 20), 5×A3 text, F.14.B/F.15 tables, white model 1:250",
+   "todo"
+  ],
+  [
+   "Jury simulation & compliance audit → iterate until no open issues",
+   "todo"
+  ]
+ ],
+ "notes": [
+  "Sections are generated live from the agents' room model: slabs, walls, cores, windows, rooms; diaphragm walls 0.8 m to ≈ −18 m, CFA piles under the tower, groundwater levels 115.5/116.45/117.0; Sejmik hall with tiers, gallery and 1.6 m roof trusses; A-A also cuts WS 5 with its protected gable window.",
+  "Façade section 1:50 of the crown: kordon in line with the wing cornice, recessed 'shadow storey', 1.65 × 5.0 m hall window with bird-safe frit, BIPV roof whose surface stays within +36.20…+36.45 (MPZP min 35 m).",
+  "Equinox shading: the proposal shades only the square, street and river to the north; every protected window of WS 5 and Maz. 19 keeps 2.2–5.7 h of sun on both equinoxes (requirement ≥ 1.5 h); effect of the project ≤ 0.3 h.",
+  "Verification found real defects that are now being revised: garage ramp threshold 0.5 m above the public pavement (→ single 3.5 m lane, gate 4.0 m, threshold at pavement level), 0.30 m cornice projecting over the plot line on street faces (→ no projection, recessed frieze), Sejmik storey programme does not close (→ 'S-2' re-plan with 180 m² mezzanine, 4 seat rows), −1 too close to protected tree roots (→ courtyard strip 7 → 5 m), honest tree balance 36–37/44 instead of 38.",
+  "Drawings already follow the corrections where unambiguous (gate, citizen entrance position, granite lintel with inscription, SE corner pier — aligned with the 3D agent)."
+ ],
+ "images": [
+  {
+   "path": "umwd/raporty/img/przekroj_AA_1-200.png",
+   "caption": "Section A-A 1:200 — WS 5, segment, Sejmik hall, piles, groundwater"
+  },
+  {
+   "path": "umwd/raporty/img/przekroj_elewacyjny_1-50.png",
+   "caption": "Façade section + elevation fragment 1:50 (tower crown)"
+  },
+  {
+   "path": "umwd/raporty/img/aksonometria_funkcjonalna.png",
+   "caption": "Functional axonometry: garage → civic ground floor → offices → Presidium → Sejmik"
+  },
+  {
+   "path": "umwd/raporty/img/naslonecznienie_rownonoc.png",
+   "caption": "Equinox shading map — all protected windows ≥ 2.2 h (req. 1.5 h)"
+  }
+ ]
+}
