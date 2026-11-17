@@ -8,7 +8,7 @@ state.json: {"title": "...", "stages": [["Stage", "done|running|todo"], ...], "n
              "images": [{"path": "...", "caption": "..."}]}
 Output: umwd/raporty/report_NN_YYYYMMDD_HHMM.png (Europe/Warsaw time) + spec_NN.json
 """
-import argparse, datetime, json, sys
+import argparse, datetime, hashlib, json, sys
 from pathlib import Path
 from zoneinfo import ZoneInfo
 from PIL import Image, ImageDraw, ImageFont, ImageOps
@@ -114,9 +114,31 @@ def render(spec, out):
     d.text((W-M-430, H-70), "A4 landscape · 297 × 210 mm", font=font(22), fill=(90, 90, 90))
     img.save(out, dpi=(200, 200))
 
+USED = RAP / "used_images.json"   # registry of image content hashes already shown on boards
+
+
+def img_hash(path):
+    return hashlib.sha256(resolve(path).read_bytes()).hexdigest()[:20]
+
+
+def load_used():
+    if USED.exists():
+        return json.loads(USED.read_text(encoding="utf-8"))
+    # backfill from previous specs
+    used = {}
+    for sp in sorted(RAP.glob("spec_*.json")):
+        for im in json.loads(sp.read_text(encoding="utf-8")).get("images", []):
+            if resolve(im["path"]).exists():
+                used[img_hash(im["path"])] = {"path": im["path"], "board": sp.stem}
+    return used
+
+
 def main():
+    """RULE (client, 17.11.2026): no image may repeat across boards; if there is no NEW image, no board is made
+    (exit code 3). Boards are produced at most every 20 minutes."""
     ap = argparse.ArgumentParser()
     ap.add_argument("--title"); ap.add_argument("--img", nargs="*"); ap.add_argument("--cap", nargs="*")
+    ap.add_argument("--force", action="store_true", help="ignore the no-new-image rule (not for routine use)")
     a = ap.parse_args()
     st = json.loads((RAP / "state.json").read_text(encoding="utf-8"))
     nr = max([int(p.name.split("_")[1]) for p in RAP.glob("report_*.png")] + [0]) + 1
@@ -124,11 +146,29 @@ def main():
     if a.img:
         caps = a.cap or [Path(p).stem for p in a.img]
         images = [{"path": p, "caption": c} for p, c in zip(a.img, caps)]
+    used = load_used()
+    fresh, seen = [], set()
+    for im in images:
+        if not resolve(im["path"]).exists():
+            continue
+        h = img_hash(im["path"])
+        if h in used or h in seen:
+            print(f"skip (already shown on {used.get(h, {}).get('board', 'this board')}): {im['path']}")
+            continue
+        seen.add(h); fresh.append(im)
+    if not fresh and not a.force:
+        print("NO NEW IMAGES — board not generated (rule: no repeated images)")
+        USED.write_text(json.dumps(used, ensure_ascii=False, indent=1), encoding="utf-8")
+        sys.exit(3)
+    images = fresh
     spec = {"nr": nr, "title": a.title or st.get("title", "Progress"), "stages": st["stages"], "notes": st.get("notes", []), "images": images}
     (RAP / f"spec_{nr:02d}.json").write_text(json.dumps(spec, ensure_ascii=False, indent=1), encoding="utf-8")
     now = datetime.datetime.now(ZoneInfo("Europe/Warsaw"))
     out = RAP / f"report_{nr:02d}_{now.strftime('%Y%m%d_%H%M')}.png"
     render(spec, out); print(out)
+    for im in images:
+        used[img_hash(im["path"])] = {"path": im["path"], "board": f"spec_{nr:02d}"}
+    USED.write_text(json.dumps(used, ensure_ascii=False, indent=1), encoding="utf-8")
 
 if __name__ == "__main__":
     main()

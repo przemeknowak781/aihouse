@@ -1,0 +1,106 @@
+{
+ "6b448946e9eeb53ab9c6": {
+  "path": "umwd/00_materialy/podglady/F17A_small.jpg",
+  "board": "spec_07"
+ },
+ "3699ff7a3bb62a78d802": {
+  "path": "umwd/00_materialy/podglady/M04-1.png",
+  "board": "spec_01"
+ },
+ "89f0bc0900a595a23bd5": {
+  "path": "umwd/00_materialy/podglady/F16-1.png",
+  "board": "spec_01"
+ },
+ "9a41425d48a13eb4619c": {
+  "path": "umwd/raporty/img/drone_0009.jpg",
+  "board": "spec_10"
+ },
+ "da8c59bf27be7e74d713": {
+  "path": "umwd/raporty/img/sip3d_01.jpg",
+  "board": "spec_02"
+ },
+ "5f115cd6db52988d3782": {
+  "path": "umwd/raporty/img/bridge_helmets.jpg",
+  "board": "spec_02"
+ },
+ "2d9c002ed40ae7fff678": {
+  "path": "umwd/00_materialy/podglady/F17B_small.jpg",
+  "board": "spec_04"
+ },
+ "fffb745f6e41e5d1f250": {
+  "path": "umwd/docs/30_lokalizacja/img/mpzp_08_schemat_ustalen_M04.png",
+  "board": "spec_11"
+ },
+ "0c6566769ce5dd1b344f": {
+  "path": "umwd/docs/30_lokalizacja/img/plan1934_nakladka_ortofoto_annot.jpg",
+  "board": "spec_05"
+ },
+ "c1a4f0a74c124143bbc3": {
+  "path": "umwd/docs/30_lokalizacja/img/foto_hist_2_most_naroznik_przystan.jpg",
+  "board": "spec_06"
+ },
+ "55599623a741c9facff2": {
+  "path": "umwd/raporty/img/plan_engine_demo.png",
+  "board": "spec_07"
+ },
+ "0825682e2ccdb0f9320f": {
+  "path": "umwd/raporty/img/site_kontrola.png",
+  "board": "spec_08"
+ },
+ "d0d27994f21ddf70edb5": {
+  "path": "umwd/raporty/img/siteplan_engine_demo.png",
+  "board": "spec_08"
+ },
+ "71d8e6ca5e625856b3d3": {
+  "path": "umwd/docs/30_lokalizacja/img/most_grunwaldzki_przekroj_DD_helmy.jpg",
+  "board": "spec_10"
+ },
+ "d6cdb252db183d631432": {
+  "path": "umwd/render/studia/envelope_mpzp.png",
+  "board": "spec_13"
+ },
+ "9c237bf171066455669b": {
+  "path": "umwd/docs/30_lokalizacja/img/sasiedzi_okna_szczytowe_par13.png",
+  "board": "spec_12"
+ },
+ "acded26e91f5bdb66a20": {
+  "path": "umwd/render/studia/massing_K1_K2.jpg",
+  "board": "spec_14"
+ },
+ "90d38de5b505871a477d": {
+  "path": "umwd/docs/60_wizualizacje/img/context_test_lot_ptaka_pnwsch.jpg",
+  "board": "spec_14"
+ },
+ "c43b6a67ddd5f4cbedaa": {
+  "path": "umwd/raporty/img/pm_A.jpg",
+  "board": "spec_16"
+ },
+ "739f5f4e1e8081460ac9": {
+  "path": "umwd/raporty/img/pm_B.jpg",
+  "board": "spec_15"
+ },
+ "05556e7e74caed15e557": {
+  "path": "umwd/raporty/img/jury_scores.png",
+  "board": "spec_18"
+ },
+ "d0121a0c231b1933283f": {
+  "path": "umwd/raporty/img/ctx_maz.jpg",
+  "board": "spec_17"
+ },
+ "03b9e3962a2eb6ac07d8": {
+  "path": "umwd/raporty/img/facade2_test.png",
+  "board": "spec_17"
+ },
+ "1f53014fbd53b591d32e": {
+  "path": "umwd/raporty/img/k5_ctx.jpg",
+  "board": "spec_20"
+ },
+ "1e00dd3eed6d715e3f9e": {
+  "path": "umwd/raporty/img/elev_test.png",
+  "board": "spec_19"
+ },
+ "23ffd6eee2e2e7f6c739": {
+  "path": "umwd/raporty/img/shadow_demo.png",
+  "board": "spec_20"
+ }
+}
