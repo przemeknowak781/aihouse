@@ -16,6 +16,7 @@ Segment Wybrzeża) w układzie współrzędnych kontekstu (`context.py`). Wszyst
 ![Relacja z Mazowiecką 19 (W5)](img/budynek_test_W5.jpg)
 ![Latarnia z Mostu Grunwaldzkiego – błękitna godzina (W9)](img/budynek_test_W9.jpg)
 ![Plac Mostowy od pn.-zach.](img/budynek_test_plac_mostowy.jpg)
+![Detal podcienia Bramy Mostowej](img/budynek_test_detal_podcien.jpg)
 ![Kontrola bryły z lotu ptaka](img/budynek_test_lot_ptaka.jpg)
 
 ## 1. API
@@ -35,7 +36,7 @@ context.ustaw_kamere_trawy(kon, cam)
 | Funkcja | Opis |
 |---|---|
 | `build_building(scene, opts)` | buduje kolekcję `BUDYNEK` z podkolekcjami `wieza`, `skrzydlo`, `segment`, `dachy`, `wnetrza`, `zagospodarowanie_bliskie`. Zwraca `kolekcje`, `info` (czasy etapów, liczby obiektów, pola posadzek, drzewa, liczba ludzi) i obiekt `budynek` (`Budynek`: `spec`, `poly`, `foot`, `DZ`, biegi elewacji) |
-| `swiatlo_dzienne(sc, czas, ekspozycja=None, …)` | świat Multiple Scattering (`sun_rotation` = azymut kompasowy w siatce, +0,738°), lampa Sun wg kalibracji z metodyki §5.2 (25° → 117 W/m², barwa (1; 0,80; 0,55)), chmury `context.dodaj_chmury`, ekspozycja domyślna −4,3 EV w dzień, jaśniej o zmierzchu. Zwraca `az`, `el`, `ekspozycja` |
+| `swiatlo_dzienne(sc, czas, ekspozycja=None, …)` | świat Multiple Scattering (`sun_rotation` = azymut kompasowy w siatce, +0,738°), lampa Sun wg kalibracji z metodyki §5.2 (25° → 117 W/m², barwa (1; 0,80; 0,55)), chmury `context.dodaj_chmury`, ekspozycja domyślna −4,3 EV w dzień, jaśniej o zmierzchu; przy słońcu < 3° zapala tylko ok. 35 % opraw biurowych (węzeł `udzial` materiału `B_wn_lampa`). Zwraca `az`, `el`, `ekspozycja` |
 | `Spec(path)` | parser `koncepcja.json`: układy (u, v) wieży i (s, d) skrzydła (z wzorów tekstowych w `meta`), kondygnacje dla bryły (oba formaty JSON: `zakres` tekst/lista, `strop_nad.spod_*` lub `strop_wierzch_wzgl`), linie skrzydła, kordon wieży, łuk, lamele, cofnięcia, barwy NCS → sRGB |
 | `ncs_srgb('S 1505-Y20R')` | przybliżona konwersja NCS → sRGB (algorytm w3color.js, ±5 jednostek) |
 | `biegi_obrysu(obrys, luki_json)` | podział obrysu na biegi elewacji (proste / łuki – dopasowanie okręgu albo łuk z JSON i teselacja co 0,5°) z wektorami ukośnymi w narożach |
@@ -50,6 +51,7 @@ Uruchomienie testów (każdy obraz zapisywany od razu po renderze):
 ```
 /home/user/aihouse/.venv-render/bin/python -I umwd/render/testy_budynek.py [--kamery W3 W4 W5 W9 plac_mostowy lot_ptaka]
       [--probki 24] [--szer 1000] [--bez-ludzi] [--tylko-kontrola] [--blend scena.blend]
+# kamery: W3, W4, W5, W9 (z JSON, z korektami w KOREKTY), plac_mostowy, detal_podcien, lot_ptaka (dodatkowe)
 ```
 
 Raport (czasy, kontrola kamer, położenie słońca) – `build/budynek_test_raport.json`.
@@ -150,29 +152,36 @@ Skrypt przed renderem sprawdza położenie kamery (w obrysie budynku? przy pniu 
 | W3 Brama Mostowa | JSON, **korekta osi** | 23.10 09:40 CEST (az 135°, el 17°) | w JSON oś na az 324° stawia łuk na krawędzi kadru; ta sama pozycja, oś az 312°, shift 0,25 – łuk z podcieniem i napisem po lewej, pylon z hełmem po prawej. **Korony (+27 m) z odległości ~18 m nie da się objąć obiektywem ≥ 24 mm** |
 | W4 Wybrzeże Słowackiego 5 | JSON | 23.10 11:15 CEST (158°/25°) | bez uwag; ściana pd. segmentu z reliefem i pnączami w słońcu, WS 5 w cieniu. Okien szczytu WS 5 z tej pozycji nie widać (kamera na pd. od szczytu) |
 | W5 Mazowiecka 19 | JSON | 22.10 15:30 CEST (225°/17°) | bez uwag; gzyms i kordon w liniach nr 19, M1, brama ogrodowa |
-| W9 Latarnia z mostu | JSON, **korekta pozycji** | 29.10 17:05 CET (el −5,8°, błękitna godzina) | punkt z JSON leży na jezdni mostu i patrzy przez kratownicę (krzyżulce w kadrze). Pozycja na chodniku pd.-wsch. dobrana przeszukaniem promieni; shift 0,385 – korona w kadrze (por. §7) |
-| plac_mostowy | dodatkowa | 23.10 14:30 CEST | elewacja pn. w cieniu, łuk, lipy |
+| W9 Latarnia z mostu | JSON, **korekta pozycji** | 29.10 17:05 CET (el −5,8°, błękitna godzina, ekspozycja +0,6 EV) | punkt z JSON (126; 152) leży na jezdni mostu, 3,8 m od osi; z chodnika widok przecinają krzyżulce kratownicy (płaszczyzny ±9,6 m). Pozycja (132,82; 140,57; +4,05) – 38 m od portalu pd., 0,3 m od kratownicy – dobrana przeszukaniem 117 promieni kadru na drzewie BVH mostu (oś przez górny trójkąt krzyżulców); kamera pozioma, shift 0,351 – korona w środku kadru. Biura: zapalone ~35 % opraw („reszta budynku milknie”), korona i hol w pełni |
+| plac_mostowy | dodatkowa | 23.10 14:30 CEST | elewacja pn. w cieniu (światło rozproszone), łuk, młode lipy |
+| detal_podcien | dodatkowa (kontrola materiałów) | 23.10 09:40 CEST | podcień z napisem, kolumny, okładziny granitowe i ceramiczne z bliska (35 mm) |
 | lot_ptaka | dodatkowa (kontrola) | 29.10.2025 11:40 CET | bryła, dachy BIPV, relacja z mostem |
 | W10 Ogród | JSON – **odrzucona w testach** | – | punkt (78; 17) stoi w ogródkach pod koronami zachowanych drzew – kadr zasłonięty w ~90 %; wariant z pasa od bulwaru był ciasny i zdominowany przez ścianę z pnączami. Do ponownego wyboru kadru |
 
-## 6. Czasy (CPU 4 rdzenie, 1000 × 667 px, 24 próbki adaptacyjnie, OIDN)
+## 6. Czasy (CPU 4 rdzenie, 1000 × 667 px, adaptacyjnie, OIDN)
 
-| Etap | Czas |
-|---|---|
-| budowa kontekstu | ok. 10 s |
-| budowa budynku (z wnętrzami, dachami, otoczeniem, ludźmi) | ok. 5 s |
-| render ujęcia dziennego z poziomu człowieka | 31–42 s |
-| render W9 (zmierzch, emisja wnętrz) | ok. 53 s |
-| render z lotu ptaka | ok. 36 s |
+| Etap / obraz | Próbki | Czas |
+|---|---|---|
+| budowa kontekstu | – | 9–10 s |
+| budowa budynku (wnętrza, dachy, otoczenie, pnącza, 34 sylwetki) | – | 4,5–5 s |
+| W3 Brama Mostowa | 32 | 40,6 s |
+| W4 Wybrzeże Słowackiego 5 | 32 | 56,9 s |
+| W5 Mazowiecka 19 | 24 | 39,5 s |
+| W9 latarnia (zmierzch, emisja wnętrz) | 32 | 48,7 s |
+| detal_podcien | 32 | 54,0 s |
+| plac_mostowy | 32 | 54,6 s |
+| lot_ptaka | 24 | 36,6 s |
 
-Scena: ok. 1,0 mln ścian geometrii budynku (elewacje ~0,6 mln, wnętrza ~0,35 mln) + kontekst.
-Szacunek finalny (metodyka §11.3): 3150 px / 256 próbek ≈ 25–45 min na ujęcie dzienne.
+Każdy obraz to osobny proces (`kontekst + budynek + render` ≈ 55–70 s); obrazy są zapisywane od razu, raport
+kumuluje się w `build/budynek_test_raport.json`. Scena: ok. 1 mln ścian geometrii budynku + kontekst; pamięć
+procesu ok. 1,3 GB. Szacunek finalny (metodyka §11.3): 3150 px / 256 próbek ≈ 25–45 min na ujęcie dzienne.
 
 ## 7. Czego brakuje / do poprawy
 
-1. **Kadry W3, W9, W10 wymagają decyzji**: W3 z pozycji z JSON nie obejmie korony (potrzebne odsunięcie
-   kamery na bulwar ≥ 30 m od lica łuku albo kadr pionowy); W9 – kamera przy kratownicy mostu (tylko
-   wąskie „okna” między krzyżulcami); W10 – nowy punkt widoku ogrodu.
+1. **Kadry W3, W9, W10 wymagają decyzji**: W3 z pozycji z JSON nie obejmie korony – kompozycja „Brama + pylon
+   mostu” i „korona w kadrze” wykluczają się przy ≥ 24 mm z dostępnych stanowisk (potrzebne ≥ 30 m od lica
+   łuku); W9 – korekta pozycji na chodnik przy kratownicy (do wpisania w JSON lub przyjęcia innego punktu);
+   W10 – nowy punkt widoku ogrodu (ogródki z 29 drzewami zasłaniają widok).
 2. **Szkło z daleka/ukośnie wciąż ciemne** (W5): wnętrza widać wyraźnie tylko w ujęciach bliskich i na zmierzchu.
    Do zrobienia: odbicia z panoram M.09 (tylko promienie glossy), rozjaśnienie wnętrz od strony słońca.
 3. **Ludzie** – sylwetki „makietowe”: dobre w średnim planie, na pierwszym planie do zastąpienia modelami

@@ -626,7 +626,8 @@ def symbols_block(lid):
             elif kind == "fon":
                 svg.line((x0, y + 0.4), (x0 + 3.2, y + 0.4), stroke=INK, sw=0.5, extra='stroke-dasharray="0.6,0.4"')
             elif kind == "ent":
-                svg.poly([(x0 + 0.2, y - 0.8), (x0 + 3.0, y + 0.4), (x0 + 0.2, y + 1.6)], fill=ACC, stroke="none")
+                svg.circle((x0 + 1.6, y + 0.4), 1.5, fill=ACC, stroke="none")
+                svg.text((x0 + 1.6, y + 1.0), "1", size=1.7, anchor="middle", weight=700, fill="#ffffff")
             elif kind == "lvl":
                 level_mark(svg, (x0 + 1.4, y + 0.4), "")
             elif kind == "sec":
@@ -939,82 +940,69 @@ def site_context(svg, v, lab):
             svg.text(p, t["tekst"].upper(), size=2.6, anchor="middle", weight=600, fill=GREY, rot=ang, ls=0.4, extra=halo_extra(0.8))
 
 
+# Geometria elementów zagospodarowania – spójna z tools/zagospodarowanie.py (rysunek 1:500).
+Z_PATHS = [[(84.32, 43.12), (83.0, 34.0), (80.6, 20.0), (77.5, 6.0), (76.0, -4.0)],
+           [(59.4, 23.6), (70.0, 22.5), (80.6, 20.0), (95.0, 27.0), (99.0, 36.0)],
+           [(83.0, 34.0), (97.5, 37.0)]]
+Z_RAIN = [(84.5, 2.0), (94.0, 2.4), (93.4, 16.6), (84.6, 16.0)]
+Z_PLAY = [(87.5, -5.5), (95.5, -5.2), (95.5, 0.8), (87.5, 0.6)]
+Z_PERGOLA = [((95.2, 5 + k * 3.2), (95.2, 7.2 + k * 3.2)) for k in range(8)]
+Z_BENCH_BUL = [(98.5, 38.0), (104.0, 38.3), (104.0, 38.9), (98.5, 38.6)]
+Z_TRACE = [(63.4, 79.6), (75.0, 81.0), (86.0, 81.9), (93.5, 81.6), (98.6, 79.6)]
+Z_ROUND_BENCH = (104.0, 73.5)
+Z_NEW_TREES = [(66.0, 79.4), (71.5, 80.3), (77.0, 81.0), (82.5, 81.6), (99.8, 37.2), (103.8, 37.6),
+               (64.5, 30.0), (70.5, 33.5), (89.0, 25.0), (93.0, 31.0), (73.0, 11.0), (90.5, 9.0)]
+Z_ENTR = [((103.2, 73.5), "1", "Brama Mostowa – wejście główne"), ((91.0, 76.6), "2", "wejście od skweru (podcień)"),
+          ((114.6, 46.2), "3", "Wejście Obywatelskie"), ((62.6, 69.8), "4", "wejście konferencyjne / bistro"),
+          ((84.3, 42.6), "5", "wejście ogrodowe"), ((77.6, 41.5), "6", "rowerownia"),
+          ((51.8, 23.6), "7", "brama ogrodowa"), ((114.6, 47.9), "8", "garaż, dostawy")]
+
+
 def site_design(svg, v, lab):
-    """Projekt otoczenia: nawierzchnie, mała architektura, oświetlenie, zieleń, ślad pierzei 1934, ogród."""
+    """Projekt otoczenia (R-105): nawierzchnie z materiałem, mała architektura, oświetlenie, zieleń, ślad pierzei 1934, ogród."""
     g_ = SITE["granice"]
     oi = Polygon(g_["obszar_inwestycji"]["pts"]).buffer(0)
+    comp = Polygon(g_["granica_opracowania_konkursowego"]["pts"]).buffer(0)
     skwer = Polygon(g_["teren_uzyczony_dz_9_2"]["pts"]).buffer(0)
     ogrodki = Polygon(g_["ogrodki_przydomowe"]["pts"]).buffer(0)
-    bld = unary_union([Polygon(b["obrys_ccw"]).buffer(0) for b in SPEC["bryly"]]).buffer(0.05)
+    bld = unary_union([Polygon(b["obrys_ccw"]).buffer(0) for b in SPEC["bryly"]])
+    garden = oi.difference(bld.buffer(0.05))
     podc = Polygon(SPEC["cofniecia_wneki"]["podcien_Brama_Mostowa"]["obrys_ccw"]).buffer(0)
     brama = Polygon(SPEC["cofniecia_wneki"]["brama_ogrodowa"]["obrys_ccw"]).buffer(0)
-    court = oi.difference(bld).difference(skwer)
-    # granit: skwer, podcień, brama ogrodowa, pas przed wejściami
-    granit = unary_union([skwer.difference(bld), podc, brama])
+    # granit strzegomski: skwer + przedpola w obszarze inwestycji (jak w zagospodarowanie.py), podcień, brama
+    granit = unary_union([skwer.union(oi.difference(bld)).intersection(comp), podc, brama])
     model_rings(svg, v, granit, fill=svg.hatch("granit", 1.5, 0, "#d8d4ce", 0.06, bg="#f6f5f2"), stroke="none")
-    # ogród: trawnik + ogródki istniejące
-    lawn = court.difference(ogrodki.buffer(0.3))
-    model_rings(svg, v, lawn, fill=svg.hatch("lawn", 0.9, 30, "#d9ddd2", 0.05, bg="#fbfbf9"), stroke="none")
+    gard = garden.intersection(Polygon([(60, -10), (100, -10), (100, 40), (60, 40)]))
+    model_rings(svg, v, gard, fill=svg.hatch("lawn", 0.9, 30, "#d9ddd2", 0.05, bg="#fbfbf9"), stroke="none")
     model_rings(svg, v, ogrodki.intersection(oi), fill=svg.hatch("ogr", 1.1, -30, "#cfd3c8", 0.06, bg="#f6f7f3"), stroke="#8d8a83", sw=0.12,
                 extra='stroke-dasharray="1.2,0.8"')
-    # ścieżki (cegła z wykopu): od wejścia ogrodowego do bramy ogrodowej i do pasa od bulwaru
-    def door_uv(spec_txt):
-        m = re.search(r"u\s*([\d,]+)\s*[–-]\s*([\d,]+)", spec_txt)
-        return (float(m.group(1).replace(",", ".")) + float(m.group(2).replace(",", "."))) / 2 if m else 10.0
-    ud = door_uv(SPEC["cofniecia_wneki"]["wneka_wejscia_ogrodowego"]["elewacja"])
-    p_door = T.en(ud, -1.0)
-    p_brama = ((brama.centroid.x * 0.5 + Polygon(SPEC["cofniecia_wneki"]["brama_ogrodowa"]["obrys_ccw"]).exterior.coords[3][0] * 0.5),
-               (brama.centroid.y * 0.5 + Polygon(SPEC["cofniecia_wneki"]["brama_ogrodowa"]["obrys_ccw"]).exterior.coords[3][1] * 0.5))
-    p_brama = WF.en(14.2, 17.0)
-    seg = SPEC["bryly"][2]["obrys_ccw"]
-    p_bul = ((seg[0][0] + seg[1][0]) / 2 + 0.0, (seg[0][1] + seg[1][1]) / 2 - 2.6)
-    mid = T.en(ud - 2.0, -9.0)
-    paths = unary_union([LineString([p_door, mid, p_brama]).buffer(1.1, cap_style=2, join_style=2),
-                         LineString([mid, T.en(16.0, -10.5), p_bul, (p_bul[0] + 10.0, p_bul[1] - 0.6)]).buffer(1.0, cap_style=2, join_style=2)])
-    paths = paths.intersection(oi.difference(bld)).difference(ogrodki)
+    rain = Polygon(Z_RAIN).intersection(gard)
+    model_rings(svg, v, rain, fill=svg.hatch("rain", 0.7, 0, "#b9c4c6", 0.06, bg="#f1f4f4"), stroke="#7d98a3", sw=0.15)
+    paths = unary_union([LineString(pp).buffer(1.1, cap_style=2) for pp in Z_PATHS]).intersection(garden)
     model_rings(svg, v, paths, fill=svg.hatch("brick", 0.8, 90, "#c9bfb4", 0.07, bg="#f3efea"), stroke="#a69c91", sw=0.1)
-    # ogród deszczowy 140 m² (przy elewacji pd. wieży, poza ogródkami)
-    rg = T.rect(-1.0, 7.5, -10.0, -2.5).intersection(court).difference(paths.buffer(0.3)).difference(ogrodki.buffer(1.0))
-    rg = max(polys(rg), key=lambda p: p.area) if polys(rg) else Polygon()
-    if not rg.is_empty:
-        model_rings(svg, v, rg, fill=svg.hatch("rain", 0.7, 0, "#b9c4c6", 0.06, bg="#f1f4f4"), stroke="#7d98a3", sw=0.12, extra='stroke-dasharray="0.8,0.5"')
-        c = v.p(rg.centroid.x, rg.centroid.y)
-        svg.text(c, f"ogród deszczowy {fnum(rg.area, 0)} m²", size=1.7, anchor="middle", fill=GREY, extra=halo_extra(0.6))
-    # plac zabaw (nawierzchnia bezpieczna)
-    pz = T.rect(13.0, 19.0, -16.0, -11.5).intersection(court).difference(paths.buffer(0.3)).difference(ogrodki.buffer(0.5))
-    for p in polys(pz)[:1]:
-        model_rings(svg, v, p, fill="#efefec", stroke=GREY, sw=0.1)
-        svg.text(v.p(p.centroid.x, p.centroid.y), "plac zabaw – EPDM", size=1.6, anchor="middle", fill=GREY, extra=halo_extra(0.5))
-    # ślad pierzei 1934 – pas granitu z listwą z brązu (wg nakładki planu 1934, ±5 m)
-    off = 12.0
-    trace = LineString([T.en(-30.0, TOWER_V_() + off - 2.5), T.en(10.0, TOWER_V_() + off), T.en(30.0, TOWER_V_() + off - 1.5)])
-    tr = trace.intersection(skwer.buffer(-0.5))
-    for g in ([tr] if tr.geom_type == "LineString" else list(getattr(tr, "geoms", []))):
-        if g.geom_type == "LineString" and g.length > 2:
-            svg.poly([v.p(*c) for c in g.coords], fill="none", stroke=ACC, sw=v.mm(0.5), close=False)
-            svg.poly([v.p(*c) for c in g.coords], fill="none", stroke="#ffffff", sw=0.12, close=False)
-            mpnt = g.interpolate(0.5, normalized=True)
-            p = v.p(mpnt.x, mpnt.y)
-            svg.text((p[0], p[1] + 3.2), "ślad pierzei 1934 r. – pas granitu z listwą z brązu", size=1.7, anchor="middle", fill=ACC, extra=halo_extra(0.7))
-            # 4 lipy drobnolistne wzdłuż śladu w zach. części skweru
-            for k in range(4):
-                q = g.interpolate(min(g.length, 2.0 + 6.5 * k))
-                q2 = (q.x + T.ey[0] * 2.2, q.y + T.ey[1] * 2.2)
-                NEW_TREES.append((q2, "lipa drobnolistna"))
-    # okrągła ława przy łuku
-    cc = BUD["luk"]["srodek_uv"]
-    R = BUD["luk"]["R"]
-    bench_c = T.en(cc[0] + (R + 5.0) * math.cos(math.radians(55)), cc[1] + (R + 5.0) * math.sin(math.radians(55)))
-    svg.circle(v.p(*bench_c), v.mm(2.0), fill="none", stroke=INK, sw=0.2)
-    svg.circle(v.p(*bench_c), v.mm(1.45), fill="none", stroke=INK, sw=0.12)
-    svg.text((v.p(*bench_c)[0], v.p(*bench_c)[1] + v.mm(2.0) + 2.2), "okrągła ława (granit)", size=1.6, anchor="middle", fill=GREY, extra=halo_extra(0.5))
-    # taras bistro (stoliki) w zach. części skweru
-    for i in range(3):
-        for j in range(2):
-            q = WF.en(57.0 - i * 2.4, -1.8 - j * 2.4) if False else T.en(-6.5 + i * 2.4, 32.0 + j * 2.4)
-            if skwer.contains(Point(q)):
-                svg.circle(v.p(*q), v.mm(0.45), fill="none", stroke=HAIR, sw=0.1)
-    # stojaki rowerowe: 20 na skwerze, 10 przy bramie ogrodowej
+    play = Polygon(Z_PLAY)
+    model_rings(svg, v, play, fill="#efefec", stroke=GREY, sw=0.12)
+    for a, b in Z_PERGOLA:
+        svg.line(v.p(*a), v.p(*b), stroke=INK, sw=0.35)
+    svg.poly([v.p(*q) for q in Z_BENCH_BUL], fill="#ffffff", stroke=INK, sw=0.12)
+    # ślad pierzei 1934 + okrągła ława
+    tr = [v.p(*q) for q in Z_TRACE]
+    svg.poly(tr, fill="none", stroke=ACC, sw=v.mm(0.5), close=False)
+    svg.poly(tr, fill="none", stroke="#ffffff", sw=0.12, close=False)
+    svg.circle(v.p(*Z_ROUND_BENCH), v.mm(2.2), fill="none", stroke=INK, sw=0.22)
+    svg.circle(v.p(*Z_ROUND_BENCH), v.mm(1.6), fill="none", stroke=INK, sw=0.12)
+    # opisy elementów (z odnośnikami)
+    notes = [(Polygon(Z_RAIN).centroid.coords[0], "ogród deszczowy (retencja)"), (play.centroid.coords[0], "plac zabaw – EPDM"),
+             (LineString(Z_TRACE).interpolate(0.55, normalized=True).coords[0], "ślad pierzei 1934 r. – granit z listwą z brązu"),
+             (Z_ROUND_BENCH, "okrągła ława granitowa"), ((96.0, 12.0), "pergola przy murze"), ((101.2, 38.4), "ława granitowa")]
+    for (e, n), t in notes:
+        p = v.p(e, n)
+        w = Labels.tw(t, 1.7)
+        bx = (p[0] - w / 2, p[1] - 3.6, p[0] + w / 2, p[1] - 1.2)
+        if lab.free(bx):
+            lab.add(bx)
+            svg.text((p[0], p[1] - 1.6), t, size=1.7, anchor="middle", fill=ACC if "1934" in t else GREY, extra=halo_extra(0.6))
+    # stojaki rowerowe: 20 na skwerze (zach. część), 10 przy bramie ogrodowej
     def racks(p0, dirv, n):
         for i in range(n):
             q = (p0[0] + dirv[0] * 0.8 * i, p0[1] + dirv[1] * 0.8 * i)
@@ -1023,39 +1011,34 @@ def site_design(svg, v, lab):
             svg.line(v.p(*a), v.p(*b), stroke=INK, sw=0.14)
     racks(T.en(4.0, 31.6), T.ex, 10)
     racks(T.en(4.0, 33.6), T.ex, 10)
-    racks(WF.en(12.6, -2.2), WF.ex, 10) if False else racks(WF.en(17.0, 17.3), WF.ex, 10)
-    # ławki przy ścieżkach i pergola przy murze kamienic
-    for q, d in ((T.en(ud - 6.0, -6.0), T.ex), (T.en(16.5, -13.5), T.ey), (WF.en(22.0, 18.5), WF.ex)):
-        a = (q[0] - d[0] * 0.9, q[1] - d[1] * 0.9)
-        b = (q[0] + d[0] * 0.9, q[1] + d[1] * 0.9)
-        svg.poly([v.p(a[0], a[1]), v.p(b[0], b[1]), v.p(b[0] + d[1] * 0.5, b[1] - d[0] * 0.5), v.p(a[0] + d[1] * 0.5, a[1] - d[0] * 0.5)], fill="#ffffff", stroke=INK, sw=0.12)
-    # latarnie (słupki oświetleniowe h 4 m, w ogrodzie bollardy 0,9 m)
+    racks(WF.en(17.0, 17.3), WF.ex, 10)
+    # latarnie: słupki ogrodowe wzdłuż ścieżek co ~9 m, latarnie parkowe h 4 m na skwerze i przy bulwarze
     lamps = []
-    for ln, step in ((LineString([p_door, mid, p_brama]), 9.0), (LineString([mid, T.en(16.0, -10.5), p_bul]), 9.0)):
-        k = 0.0
+    for pp in Z_PATHS:
+        ln = LineString(pp)
+        k = 1.5
         while k <= ln.length:
             q = ln.interpolate(k)
-            lamps.append((q.x + 1.6 * T.ex[0], q.y + 1.6 * T.ex[1], "b"))
-            k += step
-    for k in range(5):
-        q = T.en(-14.0 + k * 9.0, 30.6 + (1.0 if k % 2 else 0.0))
-        if skwer.buffer(0.5).contains(Point(q)):
-            lamps.append((q[0], q[1], "l"))
+            if garden.contains(q):
+                lamps.append((q.x + 1.6, q.y, "b"))
+            k += 9.0
+    for q in LineString(Z_TRACE).parallel_offset(3.5, "right").coords[::1]:
+        lamps.append((q[0], q[1], "l"))
     for (x, y, kind) in lamps:
+        if not comp.contains(Point(x, y)):
+            continue
         p = v.p(x, y)
         r = 0.9 if kind == "l" else 0.6
         svg.circle(p, r, fill="#ffffff", stroke=INK, sw=0.15)
         svg.line((p[0] - r, p[1]), (p[0] + r, p[1]), stroke=INK, sw=0.1)
         svg.line((p[0], p[1] - r), (p[0], p[1] + r), stroke=INK, sw=0.1)
-    # nowe drzewa: 2 przy pasie od bulwaru, 6 w ogrodzie (klon polny, grab), 6 po stronie rzeki na Wybrzeżu
-    NEW_TREES.extend([((p_bul[0] + 3.0, p_bul[1] - 2.0), "klon polny"), ((p_bul[0] + 8.0, p_bul[1] - 2.6), "klon polny")])
-    for k, (uu, vv) in enumerate([(-2.0, -14.0), (6.0, -17.5), (12.0, -20.0), (24.0, -14.0), (-6.0, -19.0), (19.0, -21.0)]):
-        q = T.en(uu, vv)
-        if court.contains(Point(q)):
-            NEW_TREES.append((q, "grab / klon polny"))
-    for k in range(6):
-        q = T.en(TOWER_U_() + 14.5, -8.0 + k * 9.5)
-        NEW_TREES.append((q, "lipa"))
+    NEW_TREES.extend([(q, "") for q in Z_NEW_TREES])
+    # drzewa od strony rzeki (jak w zagospodarowanie.py: 1,4 m od krawężnika wsch.)
+    kerbs = unary_union([LineString(it["pts"]) for it in SITE["ulice_i_sytuacja"]["krawezniki"] if len(it["pts"]) > 1])
+    for nn in (16.0, 24.0, 32.0, 40.0, 48.0, 56.0):
+        x = kerbs.intersection(LineString([(123.5, nn), (131.6, nn)]))
+        if not x.is_empty:
+            NEW_TREES.append(((x.bounds[2] + 1.4, nn), "river"))
 
 
 NEW_TREES = []
@@ -1096,38 +1079,11 @@ def draw_trees(svg, v, win):
 
 
 def entrances(svg, v):
-    """Wejścia 1–8 (spec. rozdz. 9) – trójkąty w kolorze akcentu."""
-    cw = SPEC["cofniecia_wneki"]
-    cc = BUD["luk"]["srodek_uv"]
-    R = BUD["luk"]["R"]
-    def num(t):
-        return float(t.replace(",", "."))
-    pts = []
-    pts.append((1, T.pu if False else (cc[0] + R * math.cos(math.radians(45)), cc[1] + R * math.sin(math.radians(45))), (-1, -1), "Brama Mostowa"))
-    pts.append((2, (22.5, TOWER_V_() + 0.2), (0, -1), "od skweru"))
-    m = re.search(r"v\s*([\d,]+)\s*[–-]\s*([\d,]+)", cw["wneka_wejscia_obywatelskiego"]["elewacja"])
-    pts.append((3, (TOWER_U_() + 0.2, (num(m.group(1)) + num(m.group(2))) / 2), (-1, 0), "Wejście Obywatelskie"))
-    pts.append((4, T.loc(*WF.en(56.4, -0.2)), None, "konferencyjne"))
-    m = re.search(r"u\s*([\d,]+)\s*[–-]\s*([\d,]+)", cw["wneka_wejscia_ogrodowego"]["elewacja"])
-    pts.append((5, ((num(m.group(1)) + num(m.group(2))) / 2, -0.2), (0, 1), "ogrodowe"))
-    pts.append((6, (4.3, -0.2), (0, 1), "rowerownia"))
-    pts.append((7, T.loc(*WF.en(14.2, -0.3)), None, "brama ogrodowa"))
-    seg = [T.loc(*p) for p in SPEC["bryly"][2]["obrys_ccw"]]
-    rs = SPEC["podziemie"]["rampa"]["wjazd"]
-    mm_ = re.search(r"v\s*([−-]?[\d,]+)\s*…\s*([−-]?[\d,]+)", rs)
-    vg = (num(mm_.group(1).replace("−", "-")) + num(mm_.group(2).replace("−", "-"))) / 2 if mm_ else -7.0
-    pts.append((8, (TOWER_U_() + 0.2, vg), (-1, 0), "garaż, dostawy"))
-    for n, (u, vv), d, nm in pts:
-        p = v.pu(u, vv)
-        if d is None:
-            dd = v.dir((WF.ey[0], WF.ey[1]))
-        else:
-            L = math.hypot(*d)
-            dd = (d[0] / L, -d[1] / L)
-        a = (p[0] - dd[0] * 4.2, p[1] - dd[1] * 4.2)
-        nx, ny = -dd[1], dd[0]
-        svg.poly([(p[0] - dd[0] * 0.8, p[1] - dd[1] * 0.8), (a[0] + nx * 1.6, a[1] + ny * 1.6), (a[0] - nx * 1.6, a[1] - ny * 1.6)], fill=ACC, stroke="none")
-        svg.text((a[0] - dd[0] * 2.4, a[1] - dd[1] * 2.4 + 1.0), str(n), size=2.6, anchor="middle", weight=700, fill=ACC, extra=halo_extra(0.6))
+    """Wejścia 1–8 (spec. rozdz. 9), położenie jak w tools/zagospodarowanie.py; wszystkie w poziomie chodnika."""
+    for (e, n), k, _ in Z_ENTR:
+        x, y = v.p(e, n)
+        svg.circle((x, y), 2.1, fill=ACC, stroke="#ffffff", sw=0.25)
+        svg.text((x, y + 0.75), k, size=2.1, anchor="middle", weight=700, fill="#ffffff")
 
 
 def fon_paths(svg, v):
@@ -1143,7 +1099,7 @@ def fon_paths(svg, v):
     lines = [[d_arc, info, kanc], [info, (18.0, 12.5), lifts_A], [ent_ob, pp], [garden, (12.0, 6.5), lifts_A]]
     for ln in lines:
         pts = [v.pu(*p) for p in ln]
-        svg.poly(pts, fill="none", stroke="#6f6a63", sw=v.mm(0.30), close=False, extra='stroke-dasharray="0.35,0.35"')
+        svg.poly(pts, fill="none", stroke="#8f8981", sw=0.55, close=False, extra='stroke-dasharray="0.35,0.3"')
     # informacja i tyflomapy
     p = v.pu(*info)
     svg.poly([(p[0] - 3.5, p[1] - 1.2), (p[0] + 3.5, p[1] - 1.2), (p[0] + 3.5, p[1] + 1.2), (p[0] - 3.5, p[1] + 1.2)], fill="#ffffff", stroke=INK, sw=0.15)
@@ -1237,38 +1193,28 @@ WINDOWS = {
 }
 
 
-def page(lid):
+def draw_drawing(svg, v, lid, lab, clip_rect, site_clip=None, sec_ext=None):
+    """Treść rysunku (bez legendy i ramki): otoczenie (P), rzut / dach, osie, wymiary, przekroje, etykiety."""
     lv = LV[lid]
-    plate = mp(lv["plyta"])
-    if lid == "P":
-        u0, u1, v0, v1 = WINDOWS["P"]
-    elif lid in ("1", "2", "3", "4", "-1", "D"):
-        u0, u1, v0, v1 = WINDOWS["full"]
-    else:
-        u0, u1, v0, v1 = WINDOWS["tower"]
-    M = 10.0
-    TITLE_H = 22.0
-    LEG_W = 168.0
-    plan_w = (u1 - u0) * K
-    plan_h = (v1 - v0) * K
-    W = M + plan_w + 8 + LEG_W + M
-    H = M + TITLE_H + plan_h + M
-    svg = Svg(W, H)
-    svg.add(f'<rect x="0" y="0" width="{W:.2f}" height="{H:.2f}" fill="#ffffff"/>')
-    v = UVView(u0, u1, v0, v1, M, M + TITLE_H)
-    lab = Labels()
+    u0, u1, v0, v1 = v.u0, v.u1, v.v0, v.v1
     win = Polygon([T.en(u0, v0), T.en(u1, v0), T.en(u1, v1), T.en(u0, v1)])
-    # clip planu
     clip_id = svg.uid("clip")
-    svg.defs.append(f'<clipPath id="{clip_id}"><rect x="{v.ox:.2f}" y="{v.oy:.2f}" width="{plan_w:.2f}" height="{plan_h:.2f}"/></clipPath>')
+    x, y, w, h = clip_rect
+    svg.defs.append(f'<clipPath id="{clip_id}"><rect x="{x:.2f}" y="{y:.2f}" width="{w:.2f}" height="{h:.2f}"/></clipPath>')
     svg.add(f'<g clip-path="url(#{clip_id})">')
+    if lid == "P" and site_clip is not None:
+        cid2 = svg.uid("clip")
+        pts = " ".join(f"{a:.2f},{b:.2f}" for a, b in [v.p(*c) for c in site_clip.exterior.coords])
+        svg.defs.append(f'<clipPath id="{cid2}"><polygon points="{pts}"/></clipPath>')
+        svg.add(f'<g clip-path="url(#{cid2})">')
     if lid == "P":
         NEW_TREES.clear()
         site_context(svg, v, lab)
         site_design(svg, v, lab)
         draw_trees(svg, v, win)
-    elif lid in ("-1", "-2"):
-        pass
+        if site_clip is not None:
+            svg.add("</g>")
+            model_rings(svg, v, site_clip, fill="none", stroke="#2f6f8f", sw=0.3, extra='stroke-dasharray="3,1.2"')
     if lid == "D":
         note = roof_plan(svg, v, lab)
     else:
@@ -1281,7 +1227,10 @@ def page(lid):
     bbox = T.to_local_geom(W_poly()).bounds
     draw_axes(svg, v, lid, (bbox[0], bbox[1], bbox[2], bbox[3]))
     draw_dims(svg, v, lid)
-    draw_sections(svg, v, lab)
+    if sec_ext is None:
+        draw_sections(svg, v, lab)
+    else:
+        draw_sections_crop(svg, v, sec_ext)
     svg.add("</g>")
     # etykiety
     if lid != "D":
@@ -1306,6 +1255,30 @@ def page(lid):
     if lid == "P":
         terrain_marks(svg, v, lab)
         material_labels(svg, v, lab)
+    return note
+
+
+def page(lid):
+    lv = LV[lid]
+    plate = mp(lv["plyta"])
+    if lid == "P":
+        u0, u1, v0, v1 = WINDOWS["P"]
+    elif lid in ("1", "2", "3", "4", "-1", "D"):
+        u0, u1, v0, v1 = WINDOWS["full"]
+    else:
+        u0, u1, v0, v1 = WINDOWS["tower"]
+    M = 10.0
+    TITLE_H = 22.0
+    LEG_W = 168.0
+    plan_w = (u1 - u0) * K
+    plan_h = (v1 - v0) * K
+    W = M + plan_w + 8 + LEG_W + M
+    H = M + TITLE_H + plan_h + M
+    svg = Svg(W, H)
+    svg.add(f'<rect x="0" y="0" width="{W:.2f}" height="{H:.2f}" fill="#ffffff"/>')
+    v = UVView(u0, u1, v0, v1, M, M + TITLE_H)
+    lab = Labels()
+    note = draw_drawing(svg, v, lid, lab, (v.ox, v.oy, plan_w, plan_h))
     # rama planu
     svg.poly([(v.ox, v.oy), (v.ox + plan_w, v.oy), (v.ox + plan_w, v.oy + plan_h), (v.ox, v.oy + plan_h)], fill="none", stroke="#d0ccc5", sw=0.2)
     # tytuł
@@ -1423,6 +1396,398 @@ def material_labels(svg, v, lab):
 
 
 # ----------------------------------------------------------------------------------------------------------------
+# ================================================================================================================
+# EKSPORT POD PLANSZE (rysunki przycięte 1:1 w 1:200 + wspólne legendy P3/P4/P5)
+# ================================================================================================================
+PLANSZA = OUT / "plansza"
+GROUP = {"1": "low", "2": "low", "3": "low", "4": "low", "D": "low", "5": "tower", "6": "tower", "S": "tower", "ANT": "tower",
+         "-1": "m1", "-2": "m2", "P": "P"}
+BOARDS = {"P3": ("P", "-1", "-2"), "P4": ("1", "2", "3", "4"), "P5": ("5", "6", "S", "ANT", "D")}
+CROP_M = 6.0        # margines [mm]
+CROP_T = 9.0        # pas na etykietę kondygnacji [mm]
+SEC_PAD = 3.0       # wysunięcie oznaczeń przekrojów poza treść [m]
+
+
+def draw_sections_crop(svg, v, ext):
+    """Przekroje A-A / B-B przycięte do zakresu rysunku (ext = u0, v0, u1, v1 w metrach)."""
+    u0, v0, u1, v1 = ext
+    for s_ in SECTIONS:
+        if s_["a"][0] == s_["b"][0]:            # linia stałego u
+            a, b = v.pu(s_["a"][0], v0), v.pu(s_["a"][0], v1)
+        else:
+            a, b = v.pu(u0, s_["a"][1]), v.pu(u1, s_["a"][1])
+        svg.line(a, b, stroke=INK, sw=0.15, extra='stroke-dasharray="6,1.2,1,1.2"')
+        dx, dy = b[0] - a[0], b[1] - a[1]
+        L = math.hypot(dx, dy)
+        ux, uy = dx / L, dy / L
+        vw = (s_["view"][0], -s_["view"][1])
+        for p_, sg in ((a, 1), (b, -1)):
+            q = (p_[0] + ux * sg * 6.0, p_[1] + uy * sg * 6.0)
+            svg.line(p_, q, stroke=INK, sw=0.7)
+            arrow(svg, p_, (p_[0] + vw[0] * 4.5, p_[1] + vw[1] * 4.5), sw=0.35, head=1.6)
+            tp = (p_[0] + vw[0] * 6.8 + ux * sg * 2.0, p_[1] + vw[1] * 6.8 + uy * sg * 2.0 + 1.4)
+            svg.text(tp, s_["id"], size=3.6, weight=700, anchor="middle", fill=INK, extra=halo_extra(0.8))
+
+
+def content_bbox_uv(lids):
+    """Zakres treści (rzut + osie z bąblami + łańcuchy wymiarowe + skrzydło) w (u, v) dla grupy kondygnacji."""
+    pts = []
+    for lid in lids:
+        g = mp(LV[lid]["plyta"])
+        if lid == "D":
+            g = unary_union([mp(d["poligon"]) for d in LV["D"].get("dachy", [])])
+        b = T.to_local_geom(g).bounds
+        pts += [(b[0], b[1]), (b[2], b[3])]
+    ua, va = SIATKA["wieza"]["osie_u"], SIATKA["wieza"]["osie_v"]
+    U, V = ua[-1], va[-1]
+    r = 2.6 / K
+    pts += [(ua[0] - 5.5 - r, va[0]), (U + 12.0 + 0.9, va[0]), (ua[0], V + 12.0 + 0.8), (ua[0], -5.5 - r)]
+    seg = [T.loc(*p_) for p_ in SPEC["bryly"][2]["obrys_ccw"]]
+    pts.append((U, min(vv for u, vv in seg)))
+    wing = any(l in ("P", "1", "2", "3", "4", "-1", "D") for l in lids)
+    if wing:
+        for s_ in (0.0, 57.72):
+            for d in (-12.4, 15.6):
+                pts.append(T.loc(*WF.en(s_, d)))
+        pts += [T.loc(*WF.en(-3.9, 0.0)), T.loc(*WF.en(-3.9, 15.0)), T.loc(*WF.en(0.0, -7.2)), T.loc(*WF.en(57.0, -7.2))]
+    us, vs = [p_[0] for p_ in pts], [p_[1] for p_ in pts]
+    return (min(us) - SEC_PAD, min(vs) - SEC_PAD, max(us) + SEC_PAD, max(vs) + SEC_PAD)
+
+
+def group_extent(grp):
+    lids = [k for k, g in GROUP.items() if g == grp and k in LV]
+    if grp == "P":
+        comp = Polygon(SITE["granice"]["granica_opracowania_konkursowego"]["pts"]).buffer(0)
+        b = T.to_local_geom(comp).bounds
+        c = content_bbox_uv(["P"])
+        return (min(b[0], c[0]), min(b[1], c[1]), max(b[2], c[2]), max(b[3], c[3]))
+    return content_bbox_uv(lids)
+
+
+def short_title(lid):
+    if lid == "D":
+        return "DACH · attyka wieży " + fz(SPEC["bryly"][0]["dach"]["attyka"]["wzgl"]) + " · skrzydła " + fz(SPEC["bryly"][1]["dach"]["gzyms_attyka"]["wzgl"])
+    if lid == "ANT":
+        z = SPEC["kondygnacja_sejmiku"]["antresola"]["wzgl"]
+        return f"ANTRESOLA KONDYGNACJI SEJMIKU · {fz(z)}"
+    z = KOND[lid]["posadzka_wzgl"]
+    nm = {"-2": "KONDYGNACJA −2", "-1": "KONDYGNACJA −1", "P": "PARTER Z OTOCZENIEM", "S": "KONDYGNACJA SEJMIKU (S)"}.get(lid, f"KONDYGNACJA {lid}")
+    return f"{nm} · {fz(z)} ({fnum(Z0 + z, 2)} m n.p.m.)"
+
+
+def crop_sheet(lid):
+    u0, v0, u1, v1 = group_extent(GROUP[lid])
+    W = (u1 - u0) * K + 2 * CROP_M
+    H = (v1 - v0) * K + 2 * CROP_M + CROP_T
+    svg = Svg(W, H)
+    svg.add(f'<rect x="0" y="0" width="{W:.2f}" height="{H:.2f}" fill="#ffffff"/>')
+    v = UVView(u0, u1, v0, v1, CROP_M, CROP_M + CROP_T)
+    lab = Labels()
+    site_clip = Polygon(SITE["granice"]["granica_opracowania_konkursowego"]["pts"]).buffer(0) if lid == "P" else None
+    draw_drawing(svg, v, lid, lab, (0, CROP_T, W, H - CROP_T), site_clip=site_clip,
+                 sec_ext=(u0 + SEC_PAD * 0.35, v0 + SEC_PAD * 0.35, u1 - SEC_PAD * 0.35, v1 - SEC_PAD * 0.35))
+    svg.text((CROP_M, CROP_M + 4.0), short_title(lid), size=4.0, weight=700, fill=INK, ls=0.15)
+    north_arrow(svg, (W - CROP_M - 6.0, CROP_M + 6.5), size=9, rot_deg=north_rot())
+    return svg
+
+
+# ---- legendy wspólne ------------------------------------------------------------------------------------------
+LG_W = 290.0
+LG_T = 2.0          # wysokość pisma [mm]
+
+
+def compress_numbers(nums):
+    """['DOS.01','DOS.02','DOS.03','DOS.07'] → 'DOS.01–03, 07'."""
+    def key(n):
+        m = re.match(r"^(.*?)(\d+)([a-z]?)$", n)
+        return (m.group(1), int(m.group(2)), m.group(3)) if m else (n, 0, "")
+    items = sorted(set(nums), key=lambda n: natural(n))
+    out = []
+    run = []
+
+    def flush():
+        if not run:
+            return
+        a, b = run[0], run[-1]
+        out.append(a if a == b else f"{a}–{re.sub(r'^.*?([0-9]+[a-z]?)$', lambda m: m.group(1), b) if key(a)[0] == key(b)[0] else b}")
+    for n in items:
+        if run:
+            pa, pb = key(run[-1]), key(n)
+            cont = False
+            if pa[0] == pb[0] and pa[2] == "" and pb[2] == "" and pb[1] == pa[1] + 1:
+                cont = True
+            if pa[0] == pb[0] and pa[1] == pb[1] and pa[2] and pb[2] and ord(pb[2]) == ord(pa[2]) + 1:
+                cont = True
+            if not cont:
+                flush()
+                run = []
+        run.append(n)
+    flush()
+    return ", ".join(out)
+
+
+def norm_name(nm):
+    nm = re.sub(r"\s+–\s+(DOS|DSS|DST|DRA|DGP|DI|CZ|DKD|DZ|GW|KS|DK|DW)$", "", nm)
+    nm = re.sub(r"\s+\((skrzydło|głęboki)\)", "", nm)
+    nm = re.sub(r"^Podręczny magazyn dokumentacji.*$", "Podręczny magazyn dokumentacji przy elewacji (konwertowalny na pokój)", nm)
+    nm = re.sub(r"^WC (damskie|męskie) z kabiną dostępną.*$", "Zespół WC (damskie / męskie) z kabiną dostępną dla OzN", nm)
+    nm = re.sub(r"^Dźwig .*$", "Szyb dźwigu (A1, A2 – 1 600 kg; R – ratowniczy/ewakuacyjny; P1, P2 – publiczne; T – os.-tow.; C1)", nm)
+    nm = re.sub(r"^Klatka schodowa.*$", "Klatka schodowa obudowana (A, B, C)", nm)
+    nm = re.sub(r"^Przedsionek ppoż.*$", "Przedsionek ppoż. z MOE (krzesło ewakuacyjne, interkom EVCS)", nm)
+    nm = re.sub(r"^Korytarz.*$", "Korytarz / hol windowy", nm)
+    nm = re.sub(r"^Strefa pracy wspólnej.*$", "Strefa pracy wspólnej / budki do rozmów", nm)
+    nm = re.sub(r"^Miejsce oczekiwania gości \((\w+)\)$", "Miejsce oczekiwania gości przy gabinetach", nm)
+    return nm
+
+
+def board_entries(lids):
+    """Wiersze legendy: (kod, nagłówek bloku, [(numery, opis, m²)])."""
+    rooms = [(lid, r) for lid in lids for r in LV[lid]["pomieszczenia"] if r["numer"] and (r["kind"] != "roof" or lid == "D")]
+    blocks = {}
+    for lid, r in rooms:
+        k = r["kod_grupy"]
+        blocks.setdefault(k, []).append((lid, r))
+    order = ["SWD", "SW", "SK", "KS", "DK", "DW", "DOS", "DI", "DST", "DGP", "GW", "CZ", "DKD", "DZ", "DSS", "DRA",
+             "SN", "PS", "PP", "PHS", "PR", "PPT", "IT", "PPM", "KW", "DACH"]
+    out = []
+    for k in sorted(blocks, key=lambda c: order.index(c) if c in order else 99):
+        lst = blocks[k]
+        head = DEPT_NAMES.get(k, {"KW": "Komunikacja wewnętrzna", "DACH": "Dach"}.get(k, k))
+        rows = {}
+        if k in ("DOS", "DI", "DST", "DGP", "GW", "CZ", "DKD", "DZ", "DSS", "DRA", "DK", "DW", "KS"):
+            for lid, r in lst:
+                if r["kind"] == "office" and r.get("komorka"):
+                    key = ("office", r["komorka"])
+                    kom = re.sub(r"^[^–]*–\s*", "", r["nazwa"])
+                    rows.setdefault(key, [kom, [], [], []])
+                    typ = r["nazwa"].split(" – ")[0].replace(" (3 st.)", " 3-os.").replace(" (4 st.)", " 4-os.")
+                    if typ not in rows[key][3]:
+                        rows[key][3].append(typ)
+                else:
+                    key = ("x", norm_name(r["nazwa"]))
+                    rows.setdefault(key, [norm_name(r["nazwa"]), [], [], []])
+                rows[key][1].append(r["numer"])
+                rows[key][2].append(r["powierzchnia"])
+        else:
+            for lid, r in lst:
+                nm = norm_name(r["nazwa"])
+                key = ("x", nm)
+                rows.setdefault(key, [nm, [], [], []])
+                rows[key][1].append(r["numer"])
+                rows[key][2].append(r["powierzchnia"])
+        ent = []
+        for key, (nm, nums, ars, typs) in rows.items():
+            if k == "KW":
+                nums_s = compress_numbers(nums) if len(nums) < 6 else f"KW.<kond.>.nn ({len(nums)} poz.)"
+            else:
+                nums_s = compress_numbers(nums)
+            if key[0] == "office":
+                tt = ", ".join(t_[0].lower() + t_[1:] for t_ in typs if t_)
+                desc = f"{nm}: {tt}" if tt else nm
+            else:
+                desc = nm
+            if len(ars) == 1:
+                ar = fnum(ars[0])
+            elif max(ars) - min(ars) < 0.6:
+                ar = f"{len(ars)} × {fnum(sum(ars) / len(ars))}"
+            else:
+                ar = f"Σ {fnum(sum(ars))}"
+            ent.append((nums_s, desc, ar))
+        ent.sort(key=lambda e: natural(e[0]))
+        out.append((k, head, ent))
+    return out
+
+
+def legend_board(name, lids):
+    entries = board_entries(lids)
+    t = LG_T
+    lh = t * 1.32
+    col_gap = 6.0
+    ncol = 2
+    cw = (LG_W - (ncol - 1) * col_gap) / ncol
+    num_w = 30.0
+    ar_w = 17.0
+    nchar = int((cw - num_w - ar_w) / (t * 0.53))
+    # wysokość bloków
+    blocks = []
+    for k, head, ent in entries:
+        lines = [("head", f"{k} – {head}")]
+        for nums, desc, ar in ent:
+            dl = wrap(desc, nchar)
+            nl = wrap(nums, int(num_w / (t * 0.56)))
+            for i in range(max(len(dl), len(nl))):
+                lines.append(("row", nl[i] if i < len(nl) else "", dl[i] if i < len(dl) else "", ar if i == 0 else ""))
+        blocks.append(lines)
+    total_lines = sum(len(b) + 0.6 for b in blocks)
+    per_col = total_lines / ncol
+    svg = Svg(LG_W, 2000)
+    svg.add('<rect x="0" y="0" width="100%" height="100%" fill="#ffffff"/>')
+    y0 = 6.0
+    titles = {"P3": "PLANSZA P3 · PARTER Z OTOCZENIEM, KONDYGNACJE −1 I −2", "P4": "PLANSZA P4 · KONDYGNACJE 1–4",
+              "P5": "PLANSZA P5 · KONDYGNACJE 5, 6, SEJMIKU, ANTRESOLA, DACH"}
+    svg.text((0, y0), "LEGENDA – " + titles.get(name, name), size=3.2, weight=700, fill=INK, ls=0.15)
+    svg.text((0, y0 + 4.6), "numer pomieszczenia = kod grupy (Wyj. 20 odp. 73) + nr kolejny; na rzutach numer i pow. netto [m²] wg PN-ISO 9836; "
+             "przy pokojach biurowych nr komórki z tabeli 1 M.01", size=t, fill=GREY)
+    y = y0 + 9.5
+    col, cy = 0, y
+    used = 0
+    ymax = y
+    for lines in blocks:
+        if used + len(lines) * 0.5 > per_col and col < ncol - 1:
+            col += 1
+            cy = y
+            used = 0
+        x = col * (cw + col_gap)
+        for ln in lines:
+            if ln[0] == "head":
+                cy += 1.0
+                svg.text((x, cy + t), ln[1].upper(), size=t, weight=700, fill=ACC if ln[1].split()[0] in PUBLIC else INK, ls=0.08)
+                cy += lh + 0.3
+            else:
+                _, nums, desc, ar = ln
+                svg.text((x, cy + t), nums, size=t, weight=600, fill=INK)
+                svg.text((x + num_w, cy + t), desc, size=t, fill=INK)
+                svg.text((x + cw, cy + t), ar, size=t, anchor="end", fill=GREY)
+                cy += lh
+        used += len(lines) + 0.6
+        ymax = max(ymax, cy)
+    y = ymax + 5.0
+    # oznaczenia
+    svg.text((0, y + t), "OZNACZENIA", size=2.4, weight=700, fill=INK)
+    y += 5.0
+    sym = [("wc", "WC z kabiną / toaletą dostępną dla OzN; komfortka (parter)"), ("moe", "miejsce oczekiwania na ewakuację w przedsionku ppoż."),
+           ("loop", "pętla indukcyjna"), ("lvl", f"rzędna posadzki (±0,00 = {fnum(Z0, 2)} m n.p.m.)"), ("sec", "przekrój i kierunek widoku")]
+    if "P" in lids:
+        sym += [("tyflo", "tyflomapa"), ("fon", "ścieżka dotykowa (FON)"), ("ent", "wejście (w poziomie chodnika)"),
+                ("tree_n", "drzewo projektowane"), ("tree_e", "drzewo istniejące / usuwane (×)"), ("lamp", "latarnia / słupek oświetleniowy"),
+                ("rack", "stojaki rowerowe"), ("bound", "granica opracowania konkursowego")]
+    if "-1" in lids or "-2" in lids:
+        sym += [("ozn", "stanowisko OzN 3,6 × 5,0 m"), ("stall", "stanowisko 2,5 × 5,0 m (nr), droga manewrowa 6,0 m"), ("ramp", "rampa (spadek ≤ 18 %)")]
+    if "D" in lids:
+        sym += [("bipv", "BIPV szkło-szkło jako pokrycie"), ("green", "taras – dach zielony"), ("drain", "wpust dachowy, spadek 1,5 %")]
+    if "P" in lids:
+        sym += [("granit", "granit strzegomski płomieniowany"), ("brick", "ścieżki z cegły i gruzu z wykopu"), ("lawn", "trawnik"),
+                ("rain", "ogród deszczowy (retencja)"), ("acc", "ślad pierzei 1934 r. (granit + brąz)")]
+    per = 3
+    cwid = LG_W / per
+    for i, (kind, txt) in enumerate(sym):
+        cx, cyy = (i % per) * cwid, y + (i // per) * 4.4
+        c = (cx + 1.8, cyy + 0.6)
+        if kind == "wc":
+            icon_wheelchair(svg, c, 2.6)
+        elif kind == "moe":
+            icon_moe(svg, c, 2.8)
+        elif kind == "loop":
+            icon_loop(svg, c, 2.6)
+        elif kind == "tyflo":
+            icon_tyflo(svg, c, 2.6)
+        elif kind == "ozn":
+            icon_wheelchair(svg, c, 2.6, color="#2b5b84")
+        elif kind == "lvl":
+            level_mark(svg, c, "")
+        elif kind == "sec":
+            svg.text((c[0], c[1] + 1.2), "A", size=3.2, weight=700, anchor="middle")
+        elif kind == "fon":
+            svg.line((cx, c[1]), (cx + 3.6, c[1]), stroke="#6f6a63", sw=0.6, extra='stroke-dasharray="0.35,0.35"')
+        elif kind == "ent":
+            svg.circle(c, 1.6, fill=ACC, stroke="none")
+        elif kind == "tree_n":
+            svg.circle(c, 1.5, fill="none", stroke=INK, sw=0.18)
+        elif kind == "tree_e":
+            svg.circle(c, 1.5, fill="#ffffff", stroke="#6f6a63", sw=0.13)
+        elif kind == "lamp":
+            svg.circle(c, 0.9, fill="#ffffff", stroke=INK, sw=0.15)
+            svg.line((c[0] - 0.9, c[1]), (c[0] + 0.9, c[1]), stroke=INK, sw=0.1)
+        elif kind == "rack":
+            for j in range(3):
+                svg.line((cx + 0.6 + j, c[1] - 1.0), (cx + 0.6 + j, c[1] + 1.0), stroke=INK, sw=0.14)
+        elif kind == "bound":
+            svg.line((cx, c[1]), (cx + 3.6, c[1]), stroke="#2f6f8f", sw=0.3, extra='stroke-dasharray="1.6,0.6"')
+        elif kind == "stall":
+            svg.poly([(cx + 0.4, c[1] - 1.2), (cx + 3.0, c[1] - 1.2), (cx + 3.0, c[1] + 1.2), (cx + 0.4, c[1] + 1.2)], fill="#ffffff", stroke=GREY, sw=0.1)
+        elif kind in ("ramp", "granit", "brick", "lawn", "rain", "bipv", "green"):
+            pat = {"ramp": svg.hatch("ramp", 1.2, 45, HAIR, 0.08), "granit": svg.hatch("granit", 1.5, 0, "#d8d4ce", 0.06, bg="#f6f5f2"),
+                   "brick": svg.hatch("brick", 0.8, 90, "#c9bfb4", 0.07, bg="#f3efea"), "lawn": svg.hatch("lawn", 0.9, 30, "#d9ddd2", 0.05, bg="#fbfbf9"),
+                   "rain": svg.hatch("rain", 0.7, 0, "#b9c4c6", 0.06, bg="#f1f4f4"), "bipv": "#f4f3f1",
+                   "green": svg.hatch("green", 0.8, 60, "#9aa58e", 0.08, bg="#f2f4ef")}[kind]
+            svg.poly([(cx, c[1] - 1.2), (cx + 3.6, c[1] - 1.2), (cx + 3.6, c[1] + 1.2), (cx, c[1] + 1.2)], fill=pat, stroke=GREY, sw=0.1)
+        elif kind == "acc":
+            svg.line((cx, c[1]), (cx + 3.6, c[1]), stroke=ACC, sw=1.0)
+        elif kind == "drain":
+            svg.circle(c, 0.9, fill="#ffffff", stroke=INK, sw=0.15)
+            svg.circle(c, 0.35, fill=INK, stroke="none")
+        svg.text((cx + 5.2, cyy + 1.3), txt, size=t, fill=INK)
+    y += ((len(sym) + per - 1) // per) * 4.4 + 4.0
+    # bilans powierzchni per kondygnacja wg kodów
+    svg.text((0, y + t), "BILANS POWIERZCHNI NETTO WG KODÓW GRUP [m²]", size=2.4, weight=700, fill=INK)
+    y += 5.0
+    codes = {}
+    for lid in lids:
+        for r in LV[lid]["pomieszczenia"]:
+            if r["kind"] == "roof" and lid != "D":
+                continue
+            codes.setdefault(r["kod_grupy"], {}).setdefault(lid, 0.0)
+            codes[r["kod_grupy"]][lid] += r["powierzchnia"]
+    order = ["SWD", "SW", "SK", "KS", "DK", "DW", "DOS", "DI", "DST", "DGP", "GW", "CZ", "DKD", "DZ", "DSS", "DRA",
+             "SN", "PS", "PP", "PHS", "PR", "PPT", "IT", "PPM", "KW", "DACH"]
+    cl = sorted(codes, key=lambda c: order.index(c) if c in order else 99)
+    hdr = {"-2": "−2", "-1": "−1", "P": "P", "ANT": "antr.", "D": "dach"}
+    colw = min(28.0, (LG_W - 24) / (len(lids) + 1))
+    svg.text((0, y + t), "kod", size=t, weight=700, fill=INK)
+    for j, lid in enumerate(lids):
+        svg.text((24 + (j + 1) * colw, y + t), hdr.get(lid, lid), size=t, weight=700, anchor="end", fill=INK)
+    svg.text((24 + (len(lids) + 1) * colw, y + t), "razem", size=t, weight=700, anchor="end", fill=INK)
+    y += lh + 0.4
+    svg.line((0, y), (24 + (len(lids) + 1) * colw, y), stroke=GREY, sw=0.12)
+    y += 0.6
+    tots = {lid: 0.0 for lid in lids}
+    for c in cl:
+        svg.text((0, y + t), c, size=t, weight=600, fill=ACC if c in PUBLIC else INK)
+        rs = 0.0
+        for j, lid in enumerate(lids):
+            a = codes[c].get(lid, 0.0)
+            tots[lid] += a
+            rs += a
+            if a:
+                svg.text((24 + (j + 1) * colw, y + t), fnum(a), size=t, anchor="end", fill=INK)
+        svg.text((24 + (len(lids) + 1) * colw, y + t), fnum(rs), size=t, anchor="end", fill=GREY)
+        y += lh
+    svg.line((0, y + 0.2), (24 + (len(lids) + 1) * colw, y + 0.2), stroke=GREY, sw=0.12)
+    y += 0.8
+    svg.text((0, y + t), "razem", size=t, weight=700, fill=INK)
+    for j, lid in enumerate(lids):
+        svg.text((24 + (j + 1) * colw, y + t), fnum(tots[lid]), size=t, weight=700, anchor="end", fill=INK)
+    svg.text((24 + (len(lids) + 1) * colw, y + t), fnum(sum(tots.values())), size=t, weight=700, anchor="end", fill=INK)
+    y += lh + 3.0
+    svg.h_mm = y
+    return svg
+
+
+def export_boards(ids=None):
+    PLANSZA.mkdir(parents=True, exist_ok=True)
+    order = ["-2", "-1", "P", "1", "2", "3", "4", "5", "6", "S", "ANT", "D"]
+    sizes = []
+    for lid in (ids or order):
+        if lid not in LV:
+            continue
+        svg = crop_sheet(lid)
+        fn = PLANSZA / f"rzut_{FILE_ID[lid]}_1-200_crop.svg"
+        fn.write_text(svg.render(), encoding="utf-8")
+        sizes.append((fn.name, svg.w_mm, svg.h_mm))
+        print(f"{fn.relative_to(ROOT)}  {svg.w_mm:.1f} × {svg.h_mm:.1f} mm", flush=True)
+    for name, lids in BOARDS.items():
+        if ids and not any(l in ids for l in lids):
+            continue
+        svg = legend_board(name, [l for l in lids if l in LV])
+        fn = PLANSZA / f"legenda_{name}.svg"
+        fn.write_text(svg.render(), encoding="utf-8")
+        sizes.append((fn.name, svg.w_mm, svg.h_mm))
+        print(f"{fn.relative_to(ROOT)}  {svg.w_mm:.1f} × {svg.h_mm:.1f} mm", flush=True)
+    (PLANSZA / "rozmiary.json").write_text(json.dumps([dict(plik=a, szer_mm=round(b, 1), wys_mm=round(c, 1)) for a, b, c in sizes],
+                                                     ensure_ascii=False, indent=1), encoding="utf-8")
+    return sizes
+
+
 def to_png(svg_path: Path, w_mm, h_mm):
     html = svg_path.with_suffix(".html")
     body = svg_path.read_text(encoding="utf-8")
@@ -1469,4 +1834,11 @@ def main(ids=None):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1:] or None)
+    args = sys.argv[1:]
+    if args and args[0] == "--plansza":
+        export_boards(args[1:] or None)
+    elif args and args[0] == "--wszystko":
+        main(None)
+        export_boards(None)
+    else:
+        main(args or None)
