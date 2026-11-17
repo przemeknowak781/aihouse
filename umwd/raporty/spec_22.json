@@ -1,0 +1,71 @@
+{
+ "nr": 22,
+ "title": "Drawings: site plan 1:500 and five 1:200 elevations with neighbours and MPZP height limits",
+ "stages": [
+  [
+   "Organiser materials: download, unpack, text extraction (results files deliberately EXCLUDED)",
+   "done"
+  ],
+  [
+   "Rules register (184 requirements, 14 conflicts) + checklists ✔ verified",
+   "done"
+  ],
+  [
+   "Site ✔: zoning, heritage, 1934 overlay, DWG survey, geotech, dendrology (44 trees, keep-classes), neighbours (window positions & sills)",
+   "done"
+  ],
+  [
+   "Law ✔ (verified): WT 2002 expired 20.09.2026 → art. 102a Building Law bridge; fire ✔; accessibility ✔; zero-emission ✔",
+   "done"
+  ],
+  [
+   "Design research ✔ (verified): trends, visual craft, boards, façades, Wrocław context, cost model",
+   "done"
+  ],
+  [
+   "Programme ✔: 193 rooms, 187 offices (24/32 m², 1.35 m module), PU ≈ 8,600 m², GFA ≈ 14,000 m² above ground",
+   "done"
+  ],
+  [
+   "Concept ✔ 'BRAMA I LATARNIA' specified (MD + machine JSON) → 3 verifiers ► → revision",
+   "running"
+  ],
+  [
+   "Production ►: site plan 1:500 ✔, elevations 1:200 ✔ (5, with neighbours & MPZP lines), room model + 1:200 plans (agent ►), 3D building + renders (agent ►)",
+   "running"
+  ],
+  [
+   "Stage I study (2 boards) + Stage II entry (≤8 boards 100×70 per clarif. 20), 5×A3 text, F.14.B/F.15 tables, white model 1:250",
+   "todo"
+  ],
+  [
+   "Jury simulation & compliance audit → iterate until no open issues",
+   "todo"
+  ]
+ ],
+ "notes": [
+  "Site plan 1:500 built from the survey + spec: roof plan with levels (tower attic 156.50 m a.s.l., min. roofing +36.20 vs MPZP 35–45 m), SW-45° shadows, 8 entrances, garage only from Wybrzeże, fire lanes on both street carriageways, 39 existing trees kept in the plot, 6 removed, 12 new inside the boundary.",
+  "Correction found while drawing: the spec's '6 new trees on the river side' fell on the Wybrzeże carriageway; moved to the river-side pavement 1.4 m behind the kerb and shown honestly as a proposal OUTSIDE the competition boundary.",
+  "Elevations engine: orthographic projection of façade strips incl. the R-14 m arc, window-reveal shadows, painter's order, section plane for the courtyard view; façade orders exactly per spec (wing axis 2.025 m, 4 ceramic 'plots', granite cornice in line with Maz. 19 attic 140.15/140.24; tower piers 2.70 m, shadow storey, lamella crown).",
+  "Compliance flag (new): green roof terrace of the segment at +19.80 with attic +20.85 gives a 1.05 m barrier < 1.10 m required (WT §298) → add a set-back glass balustrade; logged for the audit loop.",
+  "Running: concept verification (geometry/programme/cost) → revision; plans agent; 3D agent. Next: 2 sections 1:200, façade section 1:50, axonometric schemes."
+ ],
+ "images": [
+  {
+   "path": "umwd/raporty/img/zagospodarowanie_1-500.png",
+   "caption": "Site plan 1:500 — roofs, SW 45° shadows, trees kept/removed/new, entrances 1–8, fire lanes"
+  },
+  {
+   "path": "umwd/raporty/img/elewacja_E_1-200.png",
+   "caption": "East elevation (Wybrzeże) with WS 5/6 — tower order, R-14 arc bands, segment service portal"
+  },
+  {
+   "path": "umwd/raporty/img/elewacja_N_1-200.png",
+   "caption": "North elevation (Bridge Square) — great order of granite piers, shadow storey, lamella crown"
+  },
+  {
+   "path": "umwd/raporty/img/elewacja_W_1-200.png",
+   "caption": "West elevation (Mazowiecka) — 4 tenement 'plots', cornice in line with Maz. 19"
+  }
+ ]
+}

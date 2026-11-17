@@ -106,5 +106,21 @@
  "c01be4cde5ce1676212b": {
   "path": "umwd/raporty/img/sejmik_plan_spec.png",
   "board": "spec_21"
+ },
+ "5ccdb07beba0c25c8026": {
+  "path": "umwd/raporty/img/zagospodarowanie_1-500.png",
+  "board": "spec_22"
+ },
+ "91a036b143e2490cc902": {
+  "path": "umwd/raporty/img/elewacja_E_1-200.png",
+  "board": "spec_22"
+ },
+ "0bff45f287c6d624c9a3": {
+  "path": "umwd/raporty/img/elewacja_N_1-200.png",
+  "board": "spec_22"
+ },
+ "7fe746298e77ec87d873": {
+  "path": "umwd/raporty/img/elewacja_W_1-200.png",
+  "board": "spec_22"
  }
 }

@@ -30,7 +30,7 @@
    "running"
   ],
   [
-   "Production ►: room model + 1:200 plans (agent), 3D building + test renders (agent); engines ✔",
+   "Production ►: site plan 1:500 ✔, elevations 1:200 ✔ (5, with neighbours & MPZP lines), room model + 1:200 plans (agent ►), 3D building + renders (agent ►)",
    "running"
   ],
   [
@@ -43,11 +43,11 @@
   ]
  ],
  "notes": [
-  "Key changes vs K5: tower P+6+S with a 8.90 m Sejmik storey (extra office floor in the same envelope instead of a 12 m void); hall turned — presidium at the solid south wall, councillors' backs to the Odra/cathedral panorama, citizens on the gallery see their Sejmik against the city.",
-  "Sejmik level (right) balances: rooms 875 m² + cores 119 m² + 2.25 × 39 m lobby corridor linking both stair cores, hall, 2 committee and 4 club rooms; mezzanine only an open public gallery reached by 2 public lifts from the Citizens' Entrance on the boulevard.",
-  "Façades: vertical order on the Mazowiecka frontage (window axis 2.025 m ≈ tenement rhythm, 1.20 × 2.40 windows, 4 'plots' in 4 ceramic tones), granite piers 2.70 m on the tower, horizontal ceramic bands only on the R-14 m corner; crown glazing cut by 60 % (262 m²) behind vertical ceramic lamellas.",
-  "Bridge Gate: 3 m arcade along the whole arc and 12.5 m of the north façade; straight diagonal axis (33 m) through the Citizens' Hall from the bridge to the public garden keeping all 29 garden trees.",
-  "Numbers: 187 offices, 6/6 meeting rooms and 20/20 stores on façades, 109 parking (55 EV), PV 412 kWp as roofing only, retention 151 m³ (zero runoff), GWP target ≤ 500 kgCO₂e/m²; §13 margins: segment 1.05 m (worst case), tower 1.49 m."
+  "Site plan 1:500 built from the survey + spec: roof plan with levels (tower attic 156.50 m a.s.l., min. roofing +36.20 vs MPZP 35–45 m), SW-45° shadows, 8 entrances, garage only from Wybrzeże, fire lanes on both street carriageways, 39 existing trees kept in the plot, 6 removed, 12 new inside the boundary.",
+  "Correction found while drawing: the spec's '6 new trees on the river side' fell on the Wybrzeże carriageway; moved to the river-side pavement 1.4 m behind the kerb and shown honestly as a proposal OUTSIDE the competition boundary.",
+  "Elevations engine: orthographic projection of façade strips incl. the R-14 m arc, window-reveal shadows, painter's order, section plane for the courtyard view; façade orders exactly per spec (wing axis 2.025 m, 4 ceramic 'plots', granite cornice in line with Maz. 19 attic 140.15/140.24; tower piers 2.70 m, shadow storey, lamella crown).",
+  "Compliance flag (new): green roof terrace of the segment at +19.80 with attic +20.85 gives a 1.05 m barrier < 1.10 m required (WT §298) → add a set-back glass balustrade; logged for the audit loop.",
+  "Running: concept verification (geometry/programme/cost) → revision; plans agent; 3D agent. Next: 2 sections 1:200, façade section 1:50, axonometric schemes."
  ],
  "images": [
   {
