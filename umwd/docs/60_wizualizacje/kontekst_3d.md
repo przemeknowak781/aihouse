@@ -157,8 +157,8 @@ parterowe. Wysokości – szacunek z liczby kondygnacji i zdjęć (do weryfikacj
   0,0 px, p90 0,1 px**. Linie ewidencyjne usunięte z tekstury (wypełnienie sąsiednimi pikselami); jesienią korekta
   barwy. Wynik w `build/kontekst_cache/` (generowany przy pierwszym uruchomieniu).
 * Maska wody (ciemne, mało nasycone duże obszary) → linia brzegu Odry i Oławy poza ramką, z murem/skarpą do wody.
-* Maska koron drzew (indeks zieleni + tekstura) → ok. 700 instancji drzew poza ramką (co ok. 7,5 m, r ≤ 430 m).
-* 31 prostych brył (`BRYLY_DALSZE`): obrysy digitalizowane z georeferencjonowanej ortofotomapy (±2–3 m),
+* Maska koron drzew (indeks zieleni + tekstura) → ok. 890 instancji drzew poza ramką (co ok. 7,5 m, r ≤ 430 m).
+* 26 prostych brył (`BRYLY_DALSZE`): obrysy digitalizowane z georeferencjonowanej ortofotomapy (±2–3 m),
   wysokości z liczby kondygnacji na zdjęciach F.17/M.09/M.10 i modelu SIP M.11.C – m.in. **gmach DUW** (pierzeja
   łukowa nad Odrą, 24 m), Muzeum Narodowe, kwartał na pd. od działki (Mazowiecka 17 cd., Wybrzeże Słowackiego 10–14),
   zabudowa pn. i wsch. brzegu (pl. Grunwaldzki, Wybrzeże Wyspiańskiego). Materiał: tynk + proceduralna siatka okien
@@ -214,12 +214,14 @@ parterowe. Wysokości – szacunek z liczby kondygnacji i zdjęć (do weryfikacj
 
 | Kamera | Położenie (e, n, h) | Cel | Ogniskowa | Godzina (29.10) | Czas renderu* |
 |---|---|---|---|---|---|
-| `lot_ptaka_pnwsch` | (185, 245, Z 135) | (82, 35, 0) | 26 mm | 11:40 (jak F.17.A) | CZAS_PTAK |
-| `skwer_pd` | (80,5; 74,5; 1,65 m nad terenem) | ku pd. (82, 10) | 22 mm, poziomowana | 14:00 | CZAS_SKWER |
-| `mazowiecka_pn` | (27,5; −31; 1,65 m) | ku pn. wzdłuż pierzei | 24 mm, poziomowana | 14:00 | CZAS_MAZ |
+| `lot_ptaka_pnwsch` | (185, 245, Z 135) | (82, 35, 0) | 26 mm | 11:40 (jak F.17.A) | 33 s |
+| `skwer_pd` | (80,5; 74,5; 1,65 m nad terenem) | ku pd. (82, 10) | 22 mm, poziomowana | 14:00 | 41 s (trawa 3D) |
+| `mazowiecka_pn` | (27,5; −31; 1,65 m) | ku pn. wzdłuż pierzei | 24 mm, poziomowana | 14:00 | 33 s |
 
-\* CPU 4 rdzenie, 1000 × 625 / 960 × 640 px, 28 próbek (adaptacyjnie), OIDN; budowa sceny CZAS_BUDOWA s
-(pierwsze uruchomienie dodatkowo ok. 15 s – przygotowanie ortofotomapy do cache). Pliki JPG ≤ 1 MB.
+\* CPU 4 rdzenie, 1000 × 625 / 960 × 640 px, 28 próbek (adaptacyjnie), OIDN; budowa sceny 11 s
+(pierwsze uruchomienie dodatkowo ok. 15 s – przygotowanie ortofotomapy do cache); cały eksport 3 kamer ok. 2 min.
+Pliki JPG 0,1–0,2 MB (limit 1 MB). Scena: ok. 0,45 mln ścian geometrii własnej + instancje (drzewa ok. 1050,
+kępki trawy w widokach z poziomu człowieka – kilkaset tysięcy).
 Kamery „poziomowane” zachowują piony (perspektywa dwupunktowa, kadrowanie przesunięciem obiektywu).
 
 ## 10. Ograniczenia i braki
