@@ -1,0 +1,63 @@
+{
+ "nr": 17,
+ "title": "Synthesis of the winning concept K5 in progress; 3D context finished at street level (LOD3 neighbour from the official inventory, granite curbs, 3D grass, bridge helmets); curved-façade generator ready",
+ "stages": [
+  [
+   "Organiser materials: download, unpack, text extraction (results files deliberately EXCLUDED)",
+   "done"
+  ],
+  [
+   "Rules register (184 requirements, 14 conflicts) + checklists ✔ verified",
+   "done"
+  ],
+  [
+   "Site ✔: zoning, heritage, 1934 overlay, DWG survey, geotech, dendrology (44 trees, keep-classes), neighbours (window positions & sills)",
+   "done"
+  ],
+  [
+   "Law ✔ (verified): WT 2002 expired 20.09.2026 → art. 102a Building Law bridge; fire ✔; accessibility ✔; zero-emission ✔",
+   "done"
+  ],
+  [
+   "Design research ✔ (verified): trends, visual craft, boards, façades, Wrocław context, cost model",
+   "done"
+  ],
+  [
+   "Programme ✔: 193 rooms, 187 offices (24/32 m², 1.35 m module), PU ≈ 8,600 m², GFA ≈ 14,000 m² above ground",
+   "done"
+  ],
+  [
+   "Concept panel ✔: K5 wins unanimously (5/5); synthesis K5 + grafts ► → 3 verifiers (geometry/MPZP/§13, programme/Sejmik, cost/eco) → revision",
+   "running"
+  ],
+  [
+   "3D/visuals: engines ✔; photomatch ✔; 3D context ✔ (street-level detail); curved façade generator ✔ → awaiting concept spec",
+   "running"
+  ],
+  [
+   "Stage I study (2 boards) + Stage II entry (≤8 boards 100×70 per clarif. 20), 5×A3 text, F.14.B/F.15 tables, white model 1:250",
+   "todo"
+  ],
+  [
+   "Jury simulation & compliance audit → iterate until no open issues",
+   "todo"
+  ]
+ ],
+ "notes": [
+  "3D context (right, top): Mazowiecka 19 modelled from the official inventory drawing (pilasters with capitals, balusters, pediments on consoles, crowning cornice), weathered plaster, per-stone paving tones, granite curbs, 3D grass near camera, bridge pylon with the restored helmet in the distance.",
+  "Façade generator v2 (right, bottom): outline split into straight and curved 'runs'; bays distributed by arc length, so the piers follow the R-14 m bridgehead corner exactly — the signature element of the winning concept.",
+  "Synthesis brief to the lead designer: keep K5's single gesture; fix every juror objection (Sejmik level area & lobby corridor, presidium not against the light, no 'technical storey' above the hall, vertical rhythm with ceramic lamellas instead of horizontal bands, 3 m wall distance at plot 10/2, honest PV count); graft only ideas that strengthen the gesture.",
+  "Output will be machine-readable (model/koncepcja.json: volumes with coordinates & levels, cores, grid, façade parameters, camera list) so drawings, tables F.15/F.14.B and renders are generated from one source of truth.",
+  "Three independent verifiers (geometry/MPZP/§13; programme & Sejmik floor; cost/ecology/façades) will try to break the spec before revision."
+ ],
+ "images": [
+  {
+   "path": "umwd/raporty/img/ctx_maz.jpg",
+   "caption": "3D context test — Mazowiecka looking north (Mazowiecka 19 LOD3, bridge pylon behind)"
+  },
+  {
+   "path": "umwd/raporty/img/facade2_test.png",
+   "caption": "Curved-run façade generator test (piers follow the fillet)"
+  }
+ ]
+}
