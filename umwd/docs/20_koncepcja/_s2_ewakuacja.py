@@ -406,7 +406,7 @@ for nm, (room, din, dout) in M.przedsionki().items():
     if r:
         mb = r["moe"].bounds
         print(f"  przedsionek {nm}: {b[2] - b[0]:.2f} × {b[3] - b[1]:.2f} m = {room.area:.2f} m²; drzwi wejściowe {dd}; do klatki"
-              f" ({dout[0][0]:.2f}; {dout[0][1]:.2f}) {dout[1]:.1f} m → MOE u {mb[0]:.2f}–{mb[2]:.2f} × v {mb[1]:.2f}–{mb[3]:.2f} ✔"
+              f" ({dout[0][0]:.3f}; {dout[0][1]:.3f}) {dout[1]:.2f} m → MOE u {mb[0]:.2f}–{mb[2]:.2f} × v {mb[1]:.2f}–{mb[3]:.2f} ✔"
               f" (zawiasy {''.join('L' if h < 0 else 'P' for h in r['hinges'])})")
     else:
         print(f"  przedsionek {nm}: {b[2] - b[0]:.2f} × {b[3] - b[1]:.2f} m; drzwi {dd} → BRAK ułożenia MOE ✗")
