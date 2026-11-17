@@ -16,7 +16,7 @@ Spis: 1 idea · 2 słabości i ich usunięcie · 3 przeszczepy i sprzeczności �
 
 **Hasło:** *Z mostu przez bramę do ogrodu kwartału – a nad bramą Sejmik obraduje pod okiem obywateli, na tle Odry i Ostrowa Tumskiego.*
 
-**Idea (148 słów).** Kwartał przy Kaiserbrücke kończył się w 1934 r. zaokrąglonym narożnikiem. Przywracamy go w języku wrocławskiego modernizmu (Mendelsohn, Poelzig, Scharoun). Ten jeden narożnik pełni dwie role obywatelskie. W parterze jest **Bramą Mostową**: łukowym podcieniem, z którego prosta, przekątna oś Hali Obywatelskiej prowadzi wzrok i krok z mostu do publicznego, nieogrodzonego ogrodu kwartału z zachowanymi drzewami ogródków. Na szczycie jest **Latarnią Sejmiku**. Prezydium obraduje przy pełnej ścianie z godłem. Radni siedzą przed panoramą Odry, mostu i katedry, a obywatel z galerii widzi swój Sejmik na tle miasta. Wieczorem miasto widzi salę przez kamienne lamele. Reszta budynku milknie. Pierzeja Mazowieckiej to cztery „posesje” w skali kamienic z gzymsem w linii Mazowieckiej 19. Wieża ma wielki porządek granitowych filarów. Materiały są trzy: jasny granit, kremowa ceramika i ciemny metal.
+**Idea (125 słów).** Kwartał przy Kaiserbrücke kończył się w 1934 r. zaokrąglonym narożnikiem. Przywracamy go w języku wrocławskiego modernizmu (Mendelsohn, Poelzig, Scharoun). Ten jeden narożnik pełni dwie role obywatelskie. W parterze jest **Bramą Mostową**: łukowym podcieniem, z którego prosta, przekątna oś Hali Obywatelskiej prowadzi wzrok i krok z mostu do publicznego, nieogrodzonego ogrodu kwartału z zachowanymi drzewami ogródków. Na szczycie jest **Latarnią Sejmiku**. Prezydium obraduje przy pełnej ścianie z godłem. Radni siedzą przed panoramą Odry, mostu i katedry, a obywatel z galerii widzi swój Sejmik na tle miasta. Wieczorem miasto widzi salę przez kamienne lamele. Reszta budynku milknie. Pierzeja Mazowieckiej to cztery „posesje” w skali kamienic z gzymsem w linii Mazowieckiej 19. Wieża ma wielki porządek granitowych filarów. Materiały są trzy: jasny granit, kremowa ceramika i ciemny metal.
 
 ---
 
@@ -278,7 +278,7 @@ Na każdej kondygnacji 1–6 jest zespół WC w strefie środkowej wieży (K, M,
   * oś okien **2,025 m** (1,5 modułu), filar 0,825 m, okno **1,20 × 2,40 m** (1 : 2, parapet 0,90 m), ościeże 0,35 m, WWR 38 %;
   * **cokół** (P, 4,80 m): granitowe filary co 4,05 m, witryny na pełną wysokość z naświetlem na **122,77** (linia pasa nad parterem Maz. 19); kordon granitowy 0,35 m na **124,10**; w części pd. (chodnik 118,60–118,72) cokół pełny 0,70 m jak boniowany parter Maz. 19;
   * **trzon** (1–4): ceramika w reliefie posesji;
-  * **zwieńczenie:** gzyms-attyka granitowy 1,40 m (spód **139,45**, wierzch **140,15**, wysięg 0,30 m w obrysie).
+  * **zwieńczenie:** gzyms-attyka granitowy 0,70 m (spód **139,45**, wierzch **140,15**, wysięg 0,30 m w obrysie).
 * **Wieża – wielki porządek:**
   * filary granitowe 1,05 m co **2,70 m**, ciągłe od +4,80 do +37,20 (32,4 m, smukłość 1 : 31);
   * okna **1,65 × 2,45 m** (dwuskrzydłowe, słupek w osi modułu, partycje w filarach lub słupkach), ościeże 0,60 m, płyciny z ciemnego metalu, WWR trzonu 40 %;
@@ -321,7 +321,7 @@ Powyżej 25 m wszystkie okładziny, mocowania i izolacje są niepalne. Podokienn
   * taras bistro w zach. części (17,9 m głębokości), 20 stojaków rowerowych dla gości.
 * **Ogród Województwa (dziedziniec, 1 568 m² niezabudowanego obszaru):**
   * **nieogrodzony**, dostępny z trzech stron: Hala (oś z mostu), brama ogrodowa (Mazowiecka), pas 4,6 m od bulwaru;
-  * zachowane ogródki (490,6 m²) i **wszystkie 29 drzew ogródków**;
+  * zachowane ogródki (490,6 m², w obszarze inwestycji ≈ 470 m²) i **wszystkie 29 drzew ogródków**;
   * trawnik, **ogród deszczowy 140 m²**, ławki i pergola przy murze kamienic, mały plac zabaw dla dzieci z sąsiednich kamienic, meble z drewna lokalnego;
   * ścieżki z cegły i gruzu z wykopu oraz z płyt na podbudowie przepuszczalnej.
 * **Drzewa:**

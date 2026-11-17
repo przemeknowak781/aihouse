@@ -1,5 +1,5 @@
 {
- "title": "Sunlight engine built: equinox shadow diagram + ray-traced window sun-hours — neighbours keep 160–340 min of continuous sun (required: 90 min) with the K5 massing",
+ "title": "Winning concept specified: 'GATE AND LANTERN' (K5 + grafts) — all 26 juror objections resolved; Sejmik storey now fits with a lobby corridor; 14,151 m² GFA, 146.2 M PLN incl. 5 % reserve",
  "stages": [
   [
    "Organiser materials: download, unpack, text extraction (results files deliberately EXCLUDED)",
@@ -26,11 +26,11 @@
    "done"
   ],
   [
-   "Concept panel ✔: K5 wins unanimously (5/5); synthesis K5 + grafts ► → 3 verifiers (geometry/MPZP/§13, programme/Sejmik, cost/eco) → revision",
+   "Concept ✔ 'BRAMA I LATARNIA' specified (MD + machine JSON) → 3 verifiers ► → revision",
    "running"
   ],
   [
-   "3D/visuals ✔ engines: plans, site plan, elevations (new), façades v2, context, photomatch; waiting for the final spec",
+   "Production ►: room model + 1:200 plans (agent), 3D building + test renders (agent); engines ✔",
    "running"
   ],
   [
@@ -43,20 +43,16 @@
   ]
  ],
  "notes": [
-  "Shadow diagram (right): 20 March 2027, shadows at 09/11/13/15/17 h CET (sun from umwd.sun NOAA, grid convergence −0.738° applied). The tower's shadow sweeps the bridgehead square and the river — no residential façades in its path before 15 h.",
-  "§60 check (2.5D ray casting, 5-min steps, both equinoxes separately per NSA II OSK 942/16): Wybrzeże Słowackiego 5 street rooms 290–340 min, courtyard rooms 225–230 min; Mazowiecka 19 courtyard 160–165 min — all continuous, all ≥ 90 min (downtown requirement 1.5 h).",
-  "§13 sector for the protected gable window (flat 6-6A) to be re-checked on the final geometry (segment SE margin ≥ 1 m required by our verifiers).",
-  "This engine will produce the mandatory 'zacienianie' diagram (Stage I) and the synthetic obstruction analysis (Stage II, clarification 21/86).",
-  "Synthesis spec still in progress — the lead-designer agent is reconciling the full room programme with the floor plates."
+  "Key changes vs K5: tower P+6+S with a 8.90 m Sejmik storey (extra office floor in the same envelope instead of a 12 m void); hall turned — presidium at the solid south wall, councillors' backs to the Odra/cathedral panorama, citizens on the gallery see their Sejmik against the city.",
+  "Sejmik level (right) balances: rooms 875 m² + cores 119 m² + 2.25 × 39 m lobby corridor linking both stair cores, hall, 2 committee and 4 club rooms; mezzanine only an open public gallery reached by 2 public lifts from the Citizens' Entrance on the boulevard.",
+  "Façades: vertical order on the Mazowiecka frontage (window axis 2.025 m ≈ tenement rhythm, 1.20 × 2.40 windows, 4 'plots' in 4 ceramic tones), granite piers 2.70 m on the tower, horizontal ceramic bands only on the R-14 m corner; crown glazing cut by 60 % (262 m²) behind vertical ceramic lamellas.",
+  "Bridge Gate: 3 m arcade along the whole arc and 12.5 m of the north façade; straight diagonal axis (33 m) through the Citizens' Hall from the bridge to the public garden keeping all 29 garden trees.",
+  "Numbers: 187 offices, 6/6 meeting rooms and 20/20 stores on façades, 109 parking (55 EV), PV 412 kWp as roofing only, retention 151 m³ (zero runoff), GWP target ≤ 500 kgCO₂e/m²; §13 margins: segment 1.05 m (worst case), tower 1.49 m."
  ],
  "images": [
   {
-   "path": "umwd/raporty/img/shadow_demo.png",
-   "caption": "Equinox shadow diagram (20.03, 9–17 h) for the K5 base massing — site plan 1:500 engine"
-  },
-  {
-   "path": "umwd/raporty/img/k5_ctx.jpg",
-   "caption": "K5 base massing in context"
+   "path": "umwd/raporty/img/sejmik_plan_spec.png",
+   "caption": "Sejmik storey +27.30 from the spec polygons (draft render 1:200 engine)"
   }
  ]
 }
