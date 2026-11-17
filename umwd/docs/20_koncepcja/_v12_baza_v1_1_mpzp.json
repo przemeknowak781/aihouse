@@ -1,0 +1,475 @@
+{
+ "zrodlo": "git 7acc69a:umwd/model/koncepcja.json (meta.wersja 1.1 (po weryfikacji)) – zamrożone wejście v1.1 do [W6] _v12_scalenie.py",
+ "bryly": [
+  {
+   "nazwa": "Wieża Sejmiku (obszar A)",
+   "dach": {
+    "najnizszy_pkt_pokrycia": {
+     "wzgl": 36.2,
+     "npm": 155.5,
+     "nad_najwyzszym_terenem_A": 36.06,
+     "wymagane_min": 35.0,
+     "zapas": 1.06
+    },
+    "najwyzszy_pkt_pokrycia": {
+     "wzgl": 36.45,
+     "npm": 155.75
+    },
+    "attyka": {
+     "wzgl": 37.2,
+     "npm": 156.5,
+     "nad_najnizszym_terenem_A": 37.62,
+     "nad_118_33": 38.17,
+     "wymagane_max": 45.0,
+     "wysiegi_m": 0.0
+    },
+    "zwody": "niskie, ≤ korony attyki; wyłaz płaski przy trzonie B"
+   },
+   "obrys_ccw": [
+    [
+     74.606,
+     40.756
+    ],
+    [
+     113.468,
+     50.23
+    ],
+    [
+     109.75,
+     65.483
+    ],
+    [
+     109.504,
+     66.365
+    ],
+    [
+     109.2,
+     67.23
+    ],
+    [
+     108.841,
+     68.073
+    ],
+    [
+     108.428,
+     68.89
+    ],
+    [
+     107.962,
+     69.679
+    ],
+    [
+     107.445,
+     70.436
+    ],
+    [
+     106.88,
+     71.157
+    ],
+    [
+     106.269,
+     71.839
+    ],
+    [
+     105.615,
+     72.481
+    ],
+    [
+     104.92,
+     73.078
+    ],
+    [
+     104.188,
+     73.628
+    ],
+    [
+     103.421,
+     74.13
+    ],
+    [
+     102.623,
+     74.58
+    ],
+    [
+     101.798,
+     74.977
+    ],
+    [
+     100.948,
+     75.319
+    ],
+    [
+     100.077,
+     75.604
+    ],
+    [
+     99.19,
+     75.833
+    ],
+    [
+     98.29,
+     76.002
+    ],
+    [
+     97.38,
+     76.113
+    ],
+    [
+     96.466,
+     76.164
+    ],
+    [
+     95.549,
+     76.154
+    ],
+    [
+     94.636,
+     76.085
+    ],
+    [
+     93.729,
+     75.957
+    ],
+    [
+     92.832,
+     75.769
+    ],
+    [
+     67.572,
+     69.611
+    ]
+   ]
+  },
+  {
+   "nazwa": "Skrzydło Mazowieckie",
+   "dach": {
+    "strop_wierzch": 19.8,
+    "najnizszy_pkt_pokrycia": {
+     "wzgl": 20.2,
+     "npm": 139.5,
+     "nad_najwyzszym_terenem": 20.07,
+     "wymagane_min": 18.0,
+     "zapas": 2.07
+    },
+    "najwyzszy_pkt_pokrycia": {
+     "wzgl": 20.4,
+     "npm": 139.7
+    },
+    "gzyms_attyka": {
+     "wzgl": 20.85,
+     "npm": 140.15,
+     "nad_najnizszym_terenem": 21.79,
+     "wymagane_max": 25.0,
+     "attyka_Maz19_npm": 140.24,
+     "wysiegi_m": {
+      "lica_przy_granicy_(zach., pd., dziób pn.)": 0.0,
+      "lico_dziedzincowe": 0.3
+     },
+     "fryz_wklesly_m": 0.15
+    }
+   },
+   "obrys_ccw": [
+    [
+     48.842,
+     9.683
+    ],
+    [
+     63.498,
+     6.487
+    ],
+    [
+     70.839,
+     39.838
+    ],
+    [
+     74.557,
+     40.744
+    ],
+    [
+     67.494,
+     69.592
+    ],
+    [
+     63.84,
+     68.701
+    ],
+    [
+     63.683,
+     68.659
+    ],
+    [
+     63.528,
+     68.61
+    ],
+    [
+     63.376,
+     68.553
+    ],
+    [
+     63.226,
+     68.49
+    ],
+    [
+     63.079,
+     68.419
+    ],
+    [
+     62.936,
+     68.342
+    ],
+    [
+     62.797,
+     68.258
+    ],
+    [
+     62.662,
+     68.168
+    ],
+    [
+     62.531,
+     68.072
+    ],
+    [
+     62.404,
+     67.969
+    ],
+    [
+     62.283,
+     67.861
+    ],
+    [
+     62.166,
+     67.748
+    ],
+    [
+     62.055,
+     67.629
+    ],
+    [
+     61.95,
+     67.505
+    ],
+    [
+     61.851,
+     67.376
+    ],
+    [
+     61.757,
+     67.243
+    ],
+    [
+     61.67,
+     67.106
+    ],
+    [
+     61.59,
+     66.965
+    ],
+    [
+     61.516,
+     66.82
+    ],
+    [
+     61.449,
+     66.672
+    ],
+    [
+     61.388,
+     66.521
+    ],
+    [
+     61.335,
+     66.367
+    ],
+    [
+     61.289,
+     66.211
+    ],
+    [
+     61.251,
+     66.053
+    ]
+   ]
+  },
+  {
+   "nazwa": "Segment Wybrzeża (SE)",
+   "dach": {
+    "strop_wierzch": 19.1,
+    "taras_wykonczenie": {
+     "wzgl": 19.8,
+     "npm": 139.1,
+     "nad_najwyzszym_terenem": 19.92,
+     "wymagane_min": 18.0
+    },
+    "attyka": {
+     "wzgl": 20.85,
+     "npm": 140.15,
+     "nad_najnizszym_terenem": 21.24,
+     "sciana_pd_npm": 139.1,
+     "balustrada_szklana": "1,10 m, cofnięta 1,5 m od lica pd. (140,20)",
+     "wysiegi_m": {
+      "lico_wsch_(Wybrzeze)": 0.0,
+      "lico_zach_(dziedziniec)": 0.3
+     }
+    },
+    "taras_pow_m2": 135.3
+   },
+   "obrys_ccw": [
+    [
+     96.694,
+     38.813
+    ],
+    [
+     115.979,
+     39.93
+    ],
+    [
+     113.48,
+     50.181
+    ],
+    [
+     95.02,
+     45.681
+    ]
+   ]
+  }
+ ],
+ "kondygnacje": [
+  {
+   "kondygnacja": "-2",
+   "posadzka_wzgl": -7.2,
+   "posadzka_npm": 112.1,
+   "wysokosc_kondygnacji": 3.0,
+   "strop_nad": {
+    "wierzch": -4.2,
+    "spod_wieza": -4.55
+   },
+   "dach": null,
+   "plyta_denna": {
+    "wierzch": -7.3,
+    "spod": -8.4,
+    "spod_npm": 110.9,
+    "grubosc_wieza_m": 1.1,
+    "grubosc_poza_wieza_m": 0.9
+   }
+  },
+  {
+   "kondygnacja": "-1",
+   "posadzka_wzgl": -4.2,
+   "posadzka_npm": 115.1,
+   "wysokosc_kondygnacji": 4.2,
+   "strop_nad": {
+    "wierzch": -0.15,
+    "spod_wieza": -0.55
+   },
+   "dach": null,
+   "plyta_denna": null
+  },
+  {
+   "kondygnacja": "P",
+   "posadzka_wzgl": 0.0,
+   "posadzka_npm": 119.3,
+   "wysokosc_kondygnacji": 4.8,
+   "strop_nad": {
+    "wierzch": 4.65,
+    "spod_wieza": 4.37,
+    "spod_skrzydlo": 4.25
+   },
+   "dach": null,
+   "plyta_denna": null
+  },
+  {
+   "kondygnacja": "1",
+   "posadzka_wzgl": 4.8,
+   "posadzka_npm": 124.1,
+   "wysokosc_kondygnacji": 3.75,
+   "strop_nad": {
+    "wierzch": 8.4,
+    "spod_wieza": 8.12,
+    "spod_skrzydlo": 8.0
+   },
+   "dach": null,
+   "plyta_denna": null
+  },
+  {
+   "kondygnacja": "2",
+   "posadzka_wzgl": 8.55,
+   "posadzka_npm": 127.85,
+   "wysokosc_kondygnacji": 3.75,
+   "strop_nad": {
+    "wierzch": 12.15,
+    "spod_wieza": 11.87,
+    "spod_skrzydlo": 11.75
+   },
+   "dach": null,
+   "plyta_denna": null
+  },
+  {
+   "kondygnacja": "3",
+   "posadzka_wzgl": 12.3,
+   "posadzka_npm": 131.6,
+   "wysokosc_kondygnacji": 3.75,
+   "strop_nad": {
+    "wierzch": 15.9,
+    "spod_wieza": 15.62,
+    "spod_skrzydlo": 15.5
+   },
+   "dach": null,
+   "plyta_denna": null
+  },
+  {
+   "kondygnacja": "4",
+   "posadzka_wzgl": 16.05,
+   "posadzka_npm": 135.35,
+   "wysokosc_kondygnacji": 3.75,
+   "strop_nad": {
+    "wieza_wierzch": 19.65,
+    "wieza_spod": 19.37,
+    "dach_skrzydla_wierzch": 19.8,
+    "dach_skrzydla_spod": 19.4,
+    "dach_segmentu_wierzch": 19.1,
+    "dach_segmentu_spod": 18.82
+   },
+   "dach": null,
+   "plyta_denna": null
+  },
+  {
+   "kondygnacja": "5",
+   "posadzka_wzgl": 19.8,
+   "posadzka_npm": 139.1,
+   "wysokosc_kondygnacji": 3.75,
+   "strop_nad": {
+    "wierzch": 23.4,
+    "spod_wieza": 23.12
+   },
+   "dach": null,
+   "plyta_denna": null
+  },
+  {
+   "kondygnacja": "6",
+   "posadzka_wzgl": 23.55,
+   "posadzka_npm": 142.85,
+   "wysokosc_kondygnacji": 3.75,
+   "strop_nad": {
+    "wierzch": 27.15,
+    "spod_wieza": 26.87
+   },
+   "dach": null,
+   "plyta_denna": null
+  },
+  {
+   "kondygnacja": "S",
+   "posadzka_wzgl": 27.3,
+   "posadzka_npm": 146.6,
+   "wysokosc_kondygnacji": 8.9,
+   "strop_nad": null,
+   "dach": {
+    "rusz_spod": 34.15,
+    "pokrycie_min": 36.2,
+    "pokrycie_max": 36.45,
+    "attyka": 37.2
+   },
+   "plyta_denna": null
+  }
+ ]
+}

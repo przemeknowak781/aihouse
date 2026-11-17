@@ -1,0 +1,69 @@
+{
+ "nr": 33,
+ "title": "Sejmik storey merged into v1.2 (plan, gallery sightlines); exterior frames approved, finals started",
+ "stages": [
+  [
+   "Organiser materials ✔ (results files deliberately EXCLUDED)",
+   "done"
+  ],
+  [
+   "Rules register ✔ (184 requirements) + checklists",
+   "done"
+  ],
+  [
+   "Site ✔ (zoning, heritage, survey, geotech, trees, neighbours)",
+   "done"
+  ],
+  [
+   "Law ✔ (WT bridge, fire, accessibility, zero-emission)",
+   "done"
+  ],
+  [
+   "Design research ✔ (trends, visuals, boards, façades, costs)",
+   "done"
+  ],
+  [
+   "Programme ✔ (187 offices, PU ≈ 8,600 m²)",
+   "done"
+  ],
+  [
+   "Concept v1.1 ✔ + Sejmik storey S-3 ✔ → merge into v1.2 with stair-A fix and cost check (workflow ►)",
+   "running"
+  ],
+  [
+   "Production ►: drawings v1.1 ✔ (verified); plans + tables re-run after v1.2; photomatch W1/W2 tests ✔; extra showcase renders (workflow ►)",
+   "running"
+  ],
+  [
+   "Boards & texts ►: Stage II 8/8 skeletons (vis pending, P7/P8 re-layout); Stage II text 5 × A3 + Stage I text + F.14.A (workflow ►); 300-dpi export ✔",
+   "running"
+  ],
+  [
+   "Audit ►: completeness 25/44; structural & functional audit ►; jury later",
+   "running"
+  ]
+ ],
+ "notes": [
+  "Sejmik storey S-3 merged into spec v1.2 (verification in progress): chamber 232 m² with 47 desks in 4 curved rows (43 + 4 wheelchair, 5 % ramps), presidium against the full wall; councillors' upper hall and public gallery on the +30.90 mezzanine with separate routes; stair A now 21 risers with a 1.50 m landing.",
+  "Gallery sightlines checked in section: both gallery rows see the presidium, the speaker and the chair over the 1.10 m glass.",
+  "Exterior frames W1–W5 approved; finals running in order W5 → W4 → W3 → W1/W2 (≈ 4.5–6 h at 4 000–8 000 px). Hall W6 on hold: the 3D agent found the diagonal hall axis narrows to 3.9 m in the plan (claimed 6.3 m); fix routed to the plans re-run."
+ ],
+ "images": [
+  {
+   "path": "umwd/raporty/img/s3_plan_v12.png",
+   "caption": "Sejmik storey +27.30 and mezzanine +30.90 (v1.2)"
+  },
+  {
+   "path": "umwd/raporty/img/s3_sightline_v12.png",
+   "caption": "Gallery sightlines to presidium, speaker and chair"
+  },
+  {
+   "path": "umwd/raporty/img/W3_test_approved.jpg",
+   "caption": "Vis 3 entrance: frame approved for final"
+  },
+  {
+   "path": "umwd/raporty/img/W5_test_approved.jpg",
+   "caption": "Vis 5 relation to Mazowiecka 19: approved"
+  }
+ ]
+}

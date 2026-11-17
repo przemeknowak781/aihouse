@@ -1125,6 +1125,54 @@ class Materialy:
         nb.l(bm.outputs[0], b.inputs['Normal'])
         nb.output(b)
 
+    def m_auto(self, m):
+        """Lakier samochodu (metalik z warstwą bezbarwną); barwa losowana per obiekt: grafit, czerń, biel, srebro,
+        granat, szary, rzadko czerwień."""
+        nb = NodeBuilder(m)
+        rnd = nb.n('ShaderNodeObjectInfo').outputs['Random']
+        r1 = nb.n('ShaderNodeValToRGB')
+        r1.color_ramp.interpolation = 'CONSTANT'
+        pal = [(0.0, (0.035, 0.036, 0.040)), (0.22, (0.012, 0.012, 0.014)), (0.40, (0.62, 0.62, 0.60)),
+               (0.55, (0.30, 0.31, 0.32)), (0.70, (0.025, 0.035, 0.075)), (0.84, (0.12, 0.12, 0.125)),
+               (0.94, (0.30, 0.025, 0.02))]
+        els = r1.color_ramp.elements
+        els[0].position, els[0].color = pal[0][0], (*pal[0][1], 1)
+        els[1].position, els[1].color = pal[-1][0], (*pal[-1][1], 1)
+        for pp, c in pal[1:-1]:
+            e = els.new(pp)
+            e.color = (*c, 1)
+        nb.l(rnd, r1.inputs['Fac'])
+        b = nb.n('ShaderNodeBsdfPrincipled', Roughness=0.32, Metallic=0.55)
+        nb.l(r1.outputs['Color'], b.inputs['Base Color'])
+        b.inputs['Coat Weight'].default_value = 1.0
+        b.inputs['Coat Roughness'].default_value = 0.04
+        nb.output(b)
+
+    def m_auto_szyba(self, m):
+        """Szyby samochodu – ciemne, odbijające."""
+        self._proste(m, (0.012, 0.014, 0.016), 0.04, spec=0.8)
+
+    def m_guma(self, m):
+        self._proste(m, (0.018, 0.018, 0.018), 0.75)
+
+    def m_bipv_szklo(self, m):
+        """Moduł BIPV szkło-szkło zadaszenia: ogniwa 0,156 m (ciemnogranatowe, półpołysk) z prześwitami 0,02 m
+        (szkło przezroczyste – cień ażurowy); fu/fv w metrach."""
+        nb = NodeBuilder(m)
+        fu, fv = self._attr(nb, 'fu'), self._attr(nb, 'fv')
+        def pas(x):
+            return nb.math('LESS_THAN', nb.math('FRACT', nb.math('DIVIDE', x, 0.176)), 0.886)
+        ogn = nb.math('MULTIPLY', pas(fu), pas(fv))
+        b = nb.n('ShaderNodeBsdfPrincipled', Roughness=0.12)
+        nb.set(b, 'Base Color', (0.012, 0.016, 0.03))
+        b.inputs['Specular IOR Level'].default_value = 0.7
+        tr = nb.n('ShaderNodeBsdfTransparent')
+        mx = nb.n('ShaderNodeMixShader')
+        nb.l(ogn, mx.inputs['Fac'])
+        nb.l(tr.outputs[0], mx.inputs[1])
+        nb.l(b.outputs[0], mx.inputs[2])
+        nb.output(mx)
+
     def m_mosiadz(self, m):
         """Mosiądz szczotkowany – litery systemu informacji, listwy."""
         self._proste(m, (0.62, 0.43, 0.19), 0.32, metal=1.0)
@@ -2641,11 +2689,96 @@ def czas_kamery(txt):
     return datetime.datetime.strptime(m.group(1) + ' ' + m.group(2), '%Y-%m-%d %H:%M').replace(tzinfo=TZ)
 
 
+def dodaj_kumulusy(sc, az_siatki, el, pokrycie=0.42, skala=1.3, seed=7.0, jasnosc=2.8):
+    """Kumulusy jesienne (jak na zdjęciach F.17): pole chmur rzutowane na płaszczyznę na wysokości podstawy chmur
+    (perspektywa – chmury gęstnieją i maleją ku horyzontowi, widoczne także nisko nad horyzontem, inaczej niż
+    w ``context.dodaj_chmury``), kształt z szumu z dystorsją, oświetlenie od strony słońca (różnica gęstości w stronę
+    słońca → jasna krawędź, szare podstawy), mgiełka ku horyzontowi. Barwa skalowana luminancją nieba fizycznego
+    (spójna ekspozycja z resztą sceny)."""
+    nt = sc.world.node_tree
+    sky = next((n for n in nt.nodes if n.bl_idname == 'ShaderNodeTexSky'), None)
+    bg = next(n for n in nt.nodes if n.bl_idname == 'ShaderNodeBackground')
+    if sky is None:
+        return
+    N, L = nt.nodes, nt.links
+
+    def M(op, a, b=None, clamp=False):
+        m = N.new('ShaderNodeMath')
+        m.operation = op
+        m.use_clamp = clamp
+        for i, x in enumerate((a, b)):
+            if x is None:
+                continue
+            if isinstance(x, (int, float)):
+                m.inputs[i].default_value = x
+            else:
+                L.new(x, m.inputs[i])
+        return m.outputs[0]
+    tc = N.new('ShaderNodeTexCoord')
+    sp = N.new('ShaderNodeSeparateXYZ')
+    L.new(tc.outputs['Generated'], sp.inputs[0])
+    zc = M('ADD', M('MAXIMUM', sp.outputs[2], 0.0), 0.10)          # warstwa lekko „zakrzywiona” – bez smug przy horyzoncie
+    u = M('DIVIDE', sp.outputs[0], zc)
+    v = M('DIVIDE', sp.outputs[1], zc)
+    sa, ca = math.sin(math.radians(az_siatki)), math.cos(math.radians(az_siatki))
+
+    def gestosc(du, dv):
+        cb = N.new('ShaderNodeCombineXYZ')
+        L.new(M('ADD', u, du), cb.inputs[0])
+        L.new(M('ADD', v, dv), cb.inputs[1])
+        cb.inputs[2].default_value = seed
+        nz = N.new('ShaderNodeTexNoise')
+        nz.inputs['Scale'].default_value = skala * 1.6
+        nz.inputs['Detail'].default_value = 7.0
+        nz.inputs['Roughness'].default_value = 0.58
+        nz.inputs['Distortion'].default_value = 0.25
+        L.new(cb.outputs[0], nz.inputs['Vector'])
+        # skupiska (kłęby): gładka komórka Voronoi – zaokrąglone, odrębne chmury zamiast smug
+        vo = N.new('ShaderNodeTexVoronoi')
+        vo.feature = 'SMOOTH_F1'
+        vo.inputs['Scale'].default_value = skala
+        vo.inputs['Smoothness'].default_value = 0.6
+        L.new(cb.outputs[0], vo.inputs['Vector'])
+        return M('ADD', M('MULTIPLY', nz.outputs['Fac'], 0.75), M('MULTIPLY', M('SUBTRACT', 0.62, vo.outputs['Distance']), 0.55))
+    d0 = gestosc(0.0, 0.0)
+    d1 = gestosc(sa * 0.05, ca * 0.05)
+    lit = M('ADD', 0.5, M('MULTIPLY', M('SUBTRACT', d0, d1), 7.0), clamp=True)
+    prog = 0.5 + (0.5 - pokrycie) * 0.35
+    maska = M('DIVIDE', M('SUBTRACT', d0, prog), 0.11)
+    maska = M('MINIMUM', M('MAXIMUM', maska, 0.0), 1.0)
+    # zanik tuż przy horyzoncie i mgiełka atmosferyczna w dolnej części nieba
+    zan = M('MINIMUM', M('DIVIDE', M('MAXIMUM', M('SUBTRACT', sp.outputs[2], 0.004), 0.0), 0.05), 1.0)
+    maska = M('MULTIPLY', maska, zan)
+    mg = M('SUBTRACT', 1.0, M('MINIMUM', M('DIVIDE', M('MAXIMUM', M('SUBTRACT', sp.outputs[2], 0.02), 0.0), 0.23), 1.0))
+    lum = N.new('ShaderNodeRGBToBW')
+    L.new(sky.outputs['Color'], lum.inputs[0])
+    baza = M('MULTIPLY', lum.outputs[0], jasnosc)
+    swiatlo = M('MULTIPLY', baza, M('ADD', 0.60, M('MULTIPLY', lit, 0.62)))
+    cc = N.new('ShaderNodeCombineColor')
+    # cień chmur chłodniejszy, strona słoneczna lekko ciepła
+    L.new(M('MULTIPLY', swiatlo, M('ADD', 0.93, M('MULTIPLY', lit, 0.08))), cc.inputs[0])
+    L.new(M('MULTIPLY', swiatlo, 0.985), cc.inputs[1])
+    L.new(M('MULTIPLY', swiatlo, M('ADD', 1.03, M('MULTIPLY', lit, -0.07))), cc.inputs[2])
+    mx = N.new('ShaderNodeMix')
+    mx.data_type = 'RGBA'
+    L.new(maska, mx.inputs[0])
+    L.new(sky.outputs['Color'], mx.inputs[6])
+    L.new(cc.outputs[0], mx.inputs[7])
+    mx2 = N.new('ShaderNodeMix')
+    mx2.data_type = 'RGBA'
+    L.new(M('MULTIPLY', mg, 0.5), mx2.inputs[0])
+    L.new(mx.outputs[2], mx2.inputs[6])
+    L.new(sky.outputs['Color'], mx2.inputs[7])
+    L.new(mx2.outputs[2], bg.inputs['Color'])
+
+
 def swiatlo_dzienne(sc, czas, ekspozycja=None, sila_slonca=1.0, sila_nieba=1.0, aerozole=1.6, chmury=0.35,
-                    wb=None, odbicia=None, odbicia_sila=12.0):
+                    wb=None, odbicia=None, odbicia_sila=12.0, niebo='proc'):
     """Niebo fizyczne (Multiple Scattering, ``sun_rotation`` = azymut kompasowy w siatce) + lampa Sun wg kalibracji
     (bez tarczy na niebie – cienie kontrolowane lampą). Azymut siatki = azymut geograficzny + 0,738°.
     ``odbicia``: 'm09_30' | 'm09_40' | 'm09_45' | ścieżka panoramy – środowisko tylko dla promieni odbitych.
+    ``niebo``: 'proc' (chmury ``context.dodaj_chmury``) | 'kumulusy' (``dodaj_kumulusy`` – pole kumulusów widoczne
+    nisko nad horyzontem, oświetlone od słońca; ``chmury`` = pokrycie).
     Zwraca dict(az, el, ekspozycja). ``czas``: datetime lub tekst z koncepcja.json."""
     from mathutils import Vector
     from umwd.sun import sun_position
@@ -2683,7 +2816,9 @@ def swiatlo_dzienne(sc, czas, ekspozycja=None, sila_slonca=1.0, sila_nieba=1.0, 
         a, e = math.radians(azs), math.radians(el)
         so.rotation_euler = Vector((math.sin(a) * math.cos(e), math.cos(a) * math.cos(e),
                                     math.sin(e))).to_track_quat('Z', 'Y').to_euler()
-    if chmury:
+    if chmury and niebo == 'kumulusy':
+        dodaj_kumulusy(sc, azs, el, pokrycie=chmury)
+    elif chmury:
         from umwd.render import context
         context.dodaj_chmury(sc, pokrycie=chmury)
     if odbicia:

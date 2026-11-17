@@ -77,6 +77,9 @@ for k, g in S.items():
         continue
     nm = {"KUL": "KUL – kuluar 2,2 m (przy trzonie A 1,75 m; EI 30)", "KW.S.01": "pasaż", "KW.S.03": "łącznik", "KW.S.02": "doj.",
           "KW.S.04": "schody", "SWD.02": "SWD.02 hol\n(2 kond. NW)"}.get(k, k)
+    if k == "SWD.02":
+        ax.text(8.2, 28.2, f"{nm}\n{g.area:.1f}", fontsize=5.2, ha="center", va="center", zorder=10)
+        continue
     label(ax, g, f"{nm}\n{g.area:.1f}")
 # sala
 for a in ("east", "west_ramp"):
@@ -118,7 +121,7 @@ ax.text(0.6, -1.3, "■ drzwi  → wyjście z dźwigu  ♿ stanowisko dla wózka
 ax = axs[1]
 base(ax, "Antresola +30,90 – zach.: górny hol radnych (bar, strefa multimedialna); wsch./środek: galeria i dojście publiczności z P1/P2")
 draw(ax, M.VOID_HALL, "#eef3ff", ec="#88a", lw=0.4, z=4, hatch="////")
-label(ax, M.VOID_HALL, "pustka holu", fs=5)
+ax.text(6.4, 28.45, "pustka holu (2 kond.)", fontsize=5, ha="center", va="center", zorder=10)
 draw(ax, S["SWD.01"], "#fbf6ec", ec="#bbb", lw=0.4, z=4)
 label(ax, S["SWD.01"], "pustka sali (h 6,85 m)", fs=6)
 for k, g in A.items():
@@ -170,15 +173,16 @@ def s_of(u, v):   # odległość pozioma od rzędu 1 wzdłuż linii (rozwinięci
     return math.hypot(u - seats[0][0], v - v0) * (1 if u >= seats[0][0] else -1)
 
 
-ax.add_patch(plt.Rectangle((-6.5, 0), 6.5 + 0.55, -0.35, fc="#bbb"))
-ax.add_patch(plt.Rectangle((-6.0, H - 0.3), 6.55, 0.3, fc="#999"))                        # strop antresoli
-ax.add_patch(plt.Rectangle((0.45, H), 0.10, M.GAL_CURB_H, fc="#555"))                      # cokół
-ax.add_patch(plt.Rectangle((0.45, H + M.GAL_CURB_H), 0.04, M.GAL_GLASS_H - M.GAL_CURB_H, fc="#9ecae1", alpha=0.7))  # szkło
+xg = M.GAL_PARAPET_U[0] - M.GAL_ROWS[0][1]                                                # lico wewn. balustrady względem oka rzędu 1
+ax.add_patch(plt.Rectangle((-6.5, 0), 6.5 + xg + 0.10, -0.35, fc="#bbb"))
+ax.add_patch(plt.Rectangle((-6.0, H - 0.3), 6.0 + xg + 0.10, 0.3, fc="#999"))             # strop antresoli
+ax.add_patch(plt.Rectangle((xg, H), 0.10, M.GAL_CURB_H, fc="#555"))                       # cokół
+ax.add_patch(plt.Rectangle((xg, H + M.GAL_CURB_H), 0.04, M.GAL_GLASS_H - M.GAL_CURB_H, fc="#9ecae1", alpha=0.7))  # szkło
 xp0, xp1 = M.GAL_PODEST.bounds[0] - M.GAL_ROWS[0][1], M.GAL_PODEST.bounds[2] - M.GAL_ROWS[0][1]
 ax.add_patch(plt.Rectangle((xp0, H), xp1 - xp0, M.GAL_PODEST_DZ, fc="#d9c7a6"))          # podest rzędu 2 (+0,90) z przejściem tylnym
 ax.add_patch(plt.Rectangle((xp1 - 0.03, H + M.GAL_PODEST_DZ), 0.03, M.GAL_PODEST_BAR_H, fc="#9ecae1", alpha=0.8))   # balustrada 0,70
 ax.text(xp0 + 0.05, H + M.GAL_PODEST_DZ + 0.08, "przejście tylne", fontsize=4.5)
-ax.add_patch(plt.Rectangle((0.25, 0), 0.30, H - 0.3, fc="#999"))                          # ściana sali pod galerią
+ax.add_patch(plt.Rectangle((xg - 0.20, 0), 0.30, H - 0.3, fc="#999"))                     # ściana sali pod galerią
 ax.text(-3.0, 1.6, "WC PHS.05 (pod galerią, h 3,30)", fontsize=6, ha="center")
 ax.plot([-6.5, 14], [M.H_SALA, M.H_SALA], "--", color="#777", lw=0.6)
 ax.text(10.5, M.H_SALA + 0.08, "spód kratownic +6,85", fontsize=6)

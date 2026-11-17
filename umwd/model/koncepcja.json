@@ -883,8 +883,8 @@
    "antresola": {
     "posadzka_wzgl": 30.9,
     "posadzka_npm": 150.2,
-    "pow_m2": 297.88,
-    "udzial_rzutu_proc": 26.0,
+    "pow_m2": 293.01,
+    "udzial_rzutu_proc": 25.6,
     "wys_w_swietle_pod_m": 3.3,
     "wys_w_swietle_nad_m": 3.25,
     "zakres": "wieża – antresola radnych (hol górny, bar, strefa multimedialna) i publiczności (galeria, hol P1/P2, korytarz EI 30)"
@@ -932,8 +932,8 @@
    "zakres": "−2…S + antresola +30,90",
    "sklad": [
     "klatka A obudowana REI 60, 3,40 × 5,80 m w świetle: 2 biegi 1,60 m (M.13), stopnie ≤ 17,5 × 28 cm, spoczniki ≥ 1,50 m; kond. −1/P i P/1 – 3 biegi (spocznik kondygnacyjny parteru na końcu pn.); do antresoli +30,90",
-    "przedsionek ppoż. A 3,10 × 5,80 m z MOE 1,5 × 1,5 m, krzesłem ewakuacyjnym i interkomem, nadciśnienie; drzwi pd. (kuluar S, hol strefy środkowej 1–6, Hala P), wsch. (łącznik S, garaż), na +30,90 wsch. na galerię; przedsionek A' (antresola radnych) przy ścianie zach. klatki",
-    "dźwigi A1, A2 1 600 kg, kabiny 1,5 × 2,1 m, szyby 2,25 × 2,55 m, drzwi pn. na wszystkich kondygnacjach (S-3): hol S/ANT 5,95 m, łącznik pn. P, korytarz pn. kond. 1–6 2,15 m, przedsionek dźwigów −1/−2 (pas 7,20 × 1,75 m)",
+    "przedsionek ppoż. A 3,10 × 5,80 m z MOE 1,5 × 1,5 m (poza torem 1,2 m i polem otwierania skrzydeł – _s2_ewakuacja.py [E6]), krzesłem ewakuacyjnym i interkomem, nadciśnienie; drzwi pd. (kuluar S, korytarz publiczny +30,90, hol strefy środkowej 1–6, Hala P), wsch. (łącznik S, galeria +30,90, garaż); przedsionek A' 2,50 × 3,00 m (antresola radnych) przy ścianie zach. klatki, drzwi do klatki 1,0 m przy spoczniku",
+    "dźwigi A1, A2 1 600 kg, kabiny 1,5 × 2,1 m, szyby 2,25 × 2,55 m, drzwi pn. na wszystkich kondygnacjach (S-3): hol S i +30,90 – wolna głębokość od lica trzonu min. 3,75 m (A1, do biegu schodów / otworu nad biegiem; M.13 3,6 m, zapas 0,15 m), łącznik pn. P, korytarz pn. kond. 1–6 2,15 m, przedsionek dźwigów −1/−2 (pas 7,20 × 1,75 m)",
     "dźwig R dla ekip ratowniczych PN-EN 81-72 i ewakuacyjny PN-EN 81-76, 1 000 kg, kabina 1,1 × 2,1 m, szyb 1,80 × 2,55 m REI 60, drzwi pd. do przedsionka A",
     "v1.2 (I5): trzon wydłużony o 0,60 m na pd. (v 12,45 → 11,85; ściana pd. 0,20 m) – kosztem holu strefy środkowej (kond. 1–6), Hali (P) i kuluaru S (2,20 → 1,75 m przy trzonie)"
    ],
@@ -1042,9 +1042,19 @@
       1
      ],
      "przystanki": [
+      "-2",
+      "-1",
+      "P",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
       "S",
       "ANT"
-     ]
+     ],
+     "uwaga": "drzwi pn. na wszystkich kondygnacjach"
     },
     {
      "dzwig": "A2",
@@ -1057,9 +1067,19 @@
       1
      ],
      "przystanki": [
+      "-2",
+      "-1",
+      "P",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
       "S",
       "ANT"
-     ]
+     ],
+     "uwaga": "drzwi pn. na wszystkich kondygnacjach"
     },
     {
      "dzwig": "R",
@@ -1071,7 +1091,20 @@
       0,
       -1
      ],
-     "przystanki": "−2…S, ANT (do przedsionka A)"
+     "przystanki": [
+      "-2",
+      "-1",
+      "P",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "S",
+      "ANT"
+     ],
+     "uwaga": "drzwi pd. do przedsionka A (dźwig dla ekip ratowniczych i ewakuacyjny)"
     }
    ],
    "klatka": {
@@ -1314,7 +1347,7 @@
    "zakres": "−2…S + antresola +30,90",
    "sklad": [
     "klatka B obudowana REI 60, 3,40 × 6,64 m w świetle: 2 biegi 1,60 m na każdej kondygnacji (P: 2 × 14 stopni 17,14 × 28 cm), spoczniki ≥ 1,50 m; do antresoli +30,90",
-    "przedsionek ppoż. B 3,40 × 2,06 m z MOE 1,5 × 1,5 m i interkomem, nadciśnienie (v1.2: ściana klatka/przedsionek przesunięta o 0,29 m)",
+    "przedsionek ppoż. B 3,40 × 2,06 m z MOE 1,5 × 1,5 m w narożu SW (poza torem 1,2 m i polem otwierania skrzydła; drzwi N w u 27,80 – _s2_ewakuacja.py [E6]) i interkomem, nadciśnienie (v1.2: ściana klatka/przedsionek przesunięta o 0,29 m)",
     "dźwigi publiczne P1, P2 1 600 kg, kabiny 1,5 × 2,1 m, szyby 2,15 × 2,65 m, drzwi wsch.; P1 – przystanki P, 1–6, ANT; P2 przelotowy – −2, −1 (drzwi zach. do przedsionka B), P, 1–6, S (służbowy, na klucz), ANT",
     "szacht 2,15 × 3,20 m (po dźwigu T): przewód spalin agregatu, wyrzut wentylacji i oddymiania garażu, piony centrali S → lamele korony od pd."
    ],
@@ -1423,8 +1456,16 @@
       0
      ],
      "przystanki": [
+      "P",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
       "ANT"
-     ]
+     ],
+     "uwaga": "drzwi wsch.; na S bez przystanku (strefa radnych)"
     },
     {
      "dzwig": "P2",
@@ -1437,9 +1478,33 @@
       0
      ],
      "przystanki": [
+      "P",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
       "S*",
       "ANT"
-     ]
+     ],
+     "uwaga": "drzwi wsch.; S* – przystanek służbowy (klucz)"
+    },
+    {
+     "dzwig": "P2",
+     "uv": [
+      28.7,
+      8.325
+     ],
+     "kierunek": [
+      -1,
+      0
+     ],
+     "przystanki": [
+      "-2",
+      "-1"
+     ],
+     "uwaga": "P2 przelotowy – drzwi zach. do przedsionka B na −2/−1"
     }
    ],
    "klatka": {
@@ -1995,7 +2060,7 @@
   }
  },
  "kondygnacja_sejmiku": {
-  "wersja": "S-3 / wariant „hol z galerią” – v1.2 (scalona z koncepcja.json; trzony wg I5: _v12_trzony.py) – 17.11.2026",
+  "wersja": "S-3 / wariant „hol z galerią” – v1.2 (scalona z koncepcja.json; trzony wg I5: _v12_trzony.py; poprawki po weryfikacji scalenia: schody w pustce, galeria z zatoką, dojścia bez zwiększeń, MOE) – 17.11.2026",
   "zrodlo": "docs/20_koncepcja/kondygnacja_S2.json (_s2_model.py → _s2_geometria.py); sala: _s2_sala.py; ewakuacja: _s2_ewakuacja.py; trzony: _v12_trzony.py",
   "posadzka": {
    "wzgl": 27.3,
@@ -2005,10 +2070,21 @@
   "antresola": {
    "wzgl": 30.9,
    "npm": 150.2,
-   "pow_m2": 297.88,
-   "udzial_rzutu_proc": 26.0,
-   "czesc_radnych_m2": 161.39,
-   "czesc_publiczna_m2": 136.5,
+   "pow_m2": 293.01,
+   "udzial_rzutu_proc": 25.6,
+   "czesc_radnych_m2": 150.87,
+   "czesc_publiczna_m2": 142.14,
+   "zamkniete_m2": 84.31,
+   "zamkniete_proc": 28.8,
+   "zamkniete_sklad": {
+    "KW.A.01": 21.96,
+    "KW.A.02": 49.35,
+    "PHS.05c": 5.5,
+    "KW.A.03": 7.5
+   },
+   "krawedz_otwarta_na_hol_m": 21.77,
+   "krawedz_galerii_na_sale_m": 10.15,
+   "balustrady_podestu_galerii_mb": 12.2,
    "wycofanie_od_elewacji_m": 1.35,
    "wys_w_swietle_pod_m": 3.3,
    "wys_w_swietle_nad_m": 3.25
@@ -3657,11 +3733,13 @@
    "stale_stanowiska": 47,
    "wymagane_stanowiska": 44,
    "modul_stanowiska_m": 1.0,
-   "plyta_razem": 70,
-   "galeria": 31,
+   "plyta_razem": 77,
+   "plyta_wymagane": 70,
+   "galeria": 20,
    "galeria_wozki": 3,
-   "wozki": "w każdym rzędzie stanowisko dla wózka 1,5 m na końcu zach. przy pochylni (4) + 3 na galerii",
-   "pochylnie": "przejście wsch. promieniowe i zach. wzdłuż ściany sali – nachylenie ≤ 5,0 % (0,09 m na 1,80 m), poręcze 0,75/0,90",
+   "razem_z_galeria": 100,
+   "wozki": "w każdym rzędzie stanowisko dla wózka 1,5 m na końcu zach. przy pochylni (4) + 3 w zatoce +0,00 galerii (bez stopni z foyer)",
+   "pochylnie": "przejście wsch. promieniowe i zach. wzdłuż ściany sali – nachylenie ≤ 5,0 % (0,09 m na 1,80 m); przejście 1,30 m: płaszczyzna ruchu 1,20 m między krawężnikami 0,07 m, poręcze 0,75/0,90 w rozstawie 1.05 m w świetle (WT § 71 ust. 1)",
    "prezydium": "stół 6,0 m (4 os.) przy pełnej ścianie pd., posadzka +0,00; za nim drzwi z kuluaru",
    "mownica": "przed prezydium w ognisku F, blat regulowany 0,75–1,20 m (D6), pętla indukcyjna",
    "galeria_publicznosci": {
@@ -3686,29 +3764,167 @@
       ]
      ]
     ],
+    "polozenie": "nad WC K/M (PHS.05a/b) i łącznikiem wsch. KW.S.03, między trzonem A a salą (u 15,5–22,0)",
     "rzedy": [
      {
       "nr": 1,
-      "u_oka": 21.45,
+      "u_oka": 21.2,
       "podest_m": 0.0,
       "v": [
-       12.85,
-       22.45
+       13.5,
+       22.65
       ],
-      "uklad": "3 miejsca dla wózków 0,90 × 1,40 + 3 opiekunów + 10 miejsc; kolano przy balustradzie"
+      "uklad": "+0,00: 8 miejsc (dostęp przejściem 0,90 od pd. i przejściem 0,45 przed kolanami) + zatoka pn.: 3 miejsca dla wózków 0,90 × 1,40 z 3 miejscami opiekunów"
      },
      {
       "nr": 2,
-      "u_oka": 20.6,
+      "u_oka": 20.4,
       "podest_m": 0.9,
       "v": [
-       12.85,
-       22.45
+       13.5,
+       18.3
       ],
-      "uklad": "18 miejsc × 0,52 m na podeście +0,90 (głęb. rzędu 0,85; 6 stopni 0,15 × 0,30 przy końcach)"
+      "uklad": "podest +0,90: 9 miejsc × 0,52 m z przejściem tylnym 1,00 m; 6 stopni 0,15 × 0,30 z foyer; krawędzie podestu – balustrady (przód szkło 0,70 m)"
      }
     ],
-    "balustrada": "część pionowa 0,70 m + pozioma 0,50 m (WT § 298 ust. 7)"
+    "miejsca": {
+     "rzad1": 8,
+     "rzad2": 9,
+     "opiekunowie": 3,
+     "wozki": 3,
+     "siedzace_razem": 20
+    },
+    "podest_uv": [
+     [
+      20.9,
+      13.5
+     ],
+     [
+      20.9,
+      18.3
+     ],
+     [
+      19.1,
+      18.3
+     ],
+     [
+      19.1,
+      13.5
+     ]
+    ],
+    "stopnie_uv": [
+     [
+      19.1,
+      13.6
+     ],
+     [
+      19.1,
+      14.6
+     ],
+     [
+      17.3,
+      14.6
+     ],
+     [
+      17.3,
+      13.6
+     ]
+    ],
+    "zatoka_wozki_uv": [
+     [
+      21.9,
+      18.3
+     ],
+     [
+      21.9,
+      22.65
+     ],
+     [
+      19.1,
+      22.65
+     ],
+     [
+      19.1,
+      18.3
+     ]
+    ],
+    "przejscie_pd_uv": [
+     [
+      21.9,
+      12.6
+     ],
+     [
+      21.9,
+      13.5
+     ],
+     [
+      19.1,
+      13.5
+     ],
+     [
+      19.1,
+      12.6
+     ]
+    ],
+    "miejsca_wozki_uv": [
+     [
+      [
+       21.9,
+       18.87
+      ],
+      [
+       21.9,
+       19.77
+      ],
+      [
+       20.5,
+       19.77
+      ],
+      [
+       20.5,
+       18.87
+      ]
+     ],
+     [
+      [
+       21.9,
+       20.29
+      ],
+      [
+       21.9,
+       21.19
+      ],
+      [
+       20.5,
+       21.19
+      ],
+      [
+       20.5,
+       20.29
+      ]
+     ],
+     [
+      [
+       21.9,
+       21.71
+      ],
+      [
+       21.9,
+       22.61
+      ],
+      [
+       20.5,
+       22.61
+      ],
+      [
+       20.5,
+       21.71
+      ]
+     ]
+    ],
+    "balustrada": "szklana 1.10 m (prześwit ≤ 0,12 m) na cokole pełnym 0.20 m, lico u 22,00 (WT § 298 ust. 2); linie wzroku [S3] liczone dla tego wariantu",
+    "krawedz_podestu": "balustrada szklana 0.70 m na krawędzi podestu +0,90 przed miejscami rzędu 2 (WT § 298 ust. 7); boki i tył podestu – balustrady 1,10 m",
+    "kontrola_G2": true
    },
    "miejsca_poza_rzedami": {
     "gosc": 12,
@@ -4268,24 +4484,24 @@
      ]
     ]
    },
-   "SWD.07": {
-    "nazwa": "Pokój matki z dzieckiem",
+   "PP.06": {
+    "nazwa": "Pomieszczenie porządkowe (woda, zlew)",
     "kategoria": "zamk",
     "poziom": "S",
-    "pow_m2": 11.18,
-    "program_m2": 10,
+    "pow_m2": 4.16,
+    "program_m2": 6,
     "zakres_m2": [
-     8,
-     12
+     4,
+     8
     ],
     "obrys_uv": [
      [
       [
-       37.2,
+       34.5,
        7.3
       ],
       [
-       37.2,
+       34.5,
        9.9
       ],
       [
@@ -4301,12 +4517,12 @@
     "obrys_en": [
      [
       [
-       109.019,
-       56.659
+       106.396,
+       56.019
       ],
       [
-       108.403,
-       59.185
+       105.78,
+       58.545
       ],
       [
        104.225,
@@ -4319,53 +4535,53 @@
      ]
     ]
    },
-   "PP.06": {
-    "nazwa": "Pomieszczenie porządkowe (woda, zlew)",
+   "SWD.07": {
+    "nazwa": "Pokój matki z dzieckiem",
     "kategoria": "zamk",
     "poziom": "S",
-    "pow_m2": 5.46,
-    "program_m2": 6,
+    "pow_m2": 11.76,
+    "program_m2": 10,
     "zakres_m2": [
-     4,
-     8
+     8,
+     12
     ],
     "obrys_uv": [
      [
       [
        39.5,
-       7.3
+       7.45
       ],
       [
        39.5,
        9.9
       ],
       [
-       37.4,
+       34.7,
        9.9
       ],
       [
-       37.4,
-       7.3
+       34.7,
+       7.45
       ]
      ]
     ],
     "obrys_en": [
      [
       [
-       111.253,
-       57.203
+       111.218,
+       57.349
       ],
       [
        110.638,
        59.73
       ],
       [
-       108.597,
-       59.232
+       105.974,
+       58.593
       ],
       [
-       109.213,
-       56.706
+       106.554,
+       56.212
       ]
      ]
     ]
@@ -4930,7 +5146,7 @@
     ]
    },
    "SWD.15": {
-    "nazwa": "Magazyn podręczny strefy Sejmiku (pod biegiem schodów)",
+    "nazwa": "Magazyn podręczny strefy Sejmiku (pod spocznikiem i górnym biegiem schodów, h 1,7–2,6 m)",
     "kategoria": "zamk",
     "poziom": "S",
     "pow_m2": 6.0,
@@ -4981,20 +5197,20 @@
     ]
    },
    "KW.S.04": {
-    "nazwa": "Schody reprezentacyjne S → antresola (niższa część biegu)",
+    "nazwa": "Schody reprezentacyjne S → antresola (dolny bieg; cały bieg w pustce holu)",
     "kategoria": "kom",
     "poziom": "S",
-    "pow_m2": 8.4,
+    "pow_m2": 5.64,
     "program_m2": null,
     "zakres_m2": null,
     "obrys_uv": [
      [
       [
-       12.3,
+       10.92,
        24.6
       ],
       [
-       12.3,
+       10.92,
        26.6
       ],
       [
@@ -5010,12 +5226,12 @@
     "obrys_en": [
      [
       [
-       80.73,
-       67.569
+       79.389,
+       67.242
       ],
       [
-       80.256,
-       69.512
+       78.915,
+       69.186
       ],
       [
        76.176,
@@ -5032,7 +5248,7 @@
     "nazwa": "Hol reprezentacyjny – poziom dolny (pustka 2-kond. NW, okna pn. i zach., hol dźwigów A1/A2)",
     "kategoria": "hol",
     "poziom": "S",
-    "pow_m2": 74.83,
+    "pow_m2": 77.59,
     "program_m2": 150,
     "zakres_m2": [
      120,
@@ -5073,11 +5289,11 @@
        29.2
       ],
       [
-       8.7,
+       8.01,
        29.2
       ],
       [
-       8.7,
+       8.01,
        26.6
       ],
       [
@@ -5089,17 +5305,17 @@
        24.6
       ],
       [
-       8.7,
+       8.01,
        24.6
       ],
       [
-       8.7,
+       8.01,
        20.85
       ]
      ],
      [
       [
-       8.7,
+       8.01,
        29.2
       ],
       [
@@ -5119,23 +5335,23 @@
        20.85
       ],
       [
-       8.7,
+       8.01,
        20.85
       ],
       [
-       8.7,
+       8.01,
        24.6
       ],
       [
-       12.3,
+       10.92,
        24.6
       ],
       [
-       12.3,
+       10.92,
        26.6
       ],
       [
-       8.7,
+       8.01,
        26.6
       ]
      ]
@@ -5175,12 +5391,12 @@
        69.244
       ],
       [
-       76.143,
-       71.186
+       75.472,
+       71.022
       ],
       [
-       76.759,
-       68.66
+       76.088,
+       68.496
       ],
       [
        73.261,
@@ -5191,18 +5407,18 @@
        65.864
       ],
       [
-       77.232,
-       66.717
+       76.562,
+       66.553
       ],
       [
-       78.12,
-       63.073
+       77.45,
+       62.91
       ]
      ],
      [
       [
-       76.143,
-       71.186
+       75.472,
+       71.022
       ],
       [
        79.786,
@@ -5221,24 +5437,24 @@
        66.152
       ],
       [
-       78.12,
-       63.073
+       77.45,
+       62.91
       ],
       [
-       77.232,
-       66.717
+       76.562,
+       66.553
       ],
       [
-       80.73,
-       67.569
+       79.389,
+       67.242
       ],
       [
-       80.256,
-       69.512
+       78.915,
+       69.186
       ],
       [
-       76.759,
-       68.66
+       76.088,
+       68.496
       ]
      ]
     ]
@@ -5295,7 +5511,7 @@
     ]
    },
    "SWD.01": {
-    "nazwa": "Sala obrad – płyta (44 stałe stanowiska + prezydium + mównica, media, goście, obsługa, PJM)",
+    "nazwa": "Sala obrad – płyta (47 stałych stanowisk = 43 + 4 dla wózków; wymagane 44; prezydium, mównica, media, goście, obsługa, PJM)",
     "kategoria": "sala",
     "poziom": "S",
     "pow_m2": 232.01,
@@ -6428,58 +6644,58 @@
     ]
    },
    "PHS.05c": {
-    "nazwa": "Toaleta dostępna publiczności galerii (antresola, przy dźwigach P1/P2)",
+    "nazwa": "Toaleta dostępna publiczności galerii (antresola, wsch. koniec korytarza publicznego, przy holu P1/P2)",
     "kategoria": "zamk",
     "poziom": "ANT",
-    "pow_m2": 5.72,
+    "pow_m2": 5.5,
     "program_m2": null,
     "zakres_m2": null,
     "obrys_uv": [
      [
       [
-       37.1,
-       4.0
+       37.4,
+       10.1
       ],
       [
-       37.1,
-       6.6
-      ],
-      [
-       34.9,
-       6.6
+       37.4,
+       12.3
       ],
       [
        34.9,
-       4.0
+       12.3
+      ],
+      [
+       34.9,
+       10.1
       ]
      ]
     ],
     "obrys_en": [
      [
       [
-       109.703,
-       53.429
+       108.55,
+       59.426
       ],
       [
-       109.087,
-       55.955
+       108.029,
+       61.564
       ],
       [
-       106.95,
-       55.434
+       105.6,
+       60.972
       ],
       [
-       107.566,
-       52.908
+       106.121,
+       58.834
       ]
      ]
     ]
    },
    "KW.A.02": {
-    "nazwa": "Korytarz publiczny nad kuluarem (EI 30) – dojście z P1/P2 na galerię, do klatek A i B",
+    "nazwa": "Korytarz publiczny nad kuluarem (EI 30) – dojście z P1/P2 na galerię, do przedsionków A i B",
     "kategoria": "kom",
     "poziom": "ANT",
-    "pow_m2": 43.49,
+    "pow_m2": 49.35,
     "program_m2": null,
     "zakres_m2": null,
     "obrys_uv": [
@@ -6497,8 +6713,16 @@
        10.1
       ],
       [
-       15.5,
+       12.15,
        10.1
+      ],
+      [
+       12.15,
+       11.85
+      ],
+      [
+       15.5,
+       11.85
       ],
       [
        15.5,
@@ -6533,8 +6757,16 @@
        56.454
       ],
       [
-       87.273,
-       54.24
+       84.018,
+       53.446
+      ],
+      [
+       83.604,
+       55.146
+      ],
+      [
+       86.858,
+       55.94
       ],
       [
        86.752,
@@ -6556,7 +6788,7 @@
     ]
    },
    "SWD.01g": {
-    "nazwa": "Galeria publiczności (część SWD.01): 2 rzędy (+0,00 / +0,90), 31 miejsc + 3 dla wózków",
+    "nazwa": "Galeria publiczności (część SWD.01): rząd 1 +0,00 – 8 miejsc, rząd 2 +0,90 – 9 miejsc, zatoka +0,00 – 3 miejsca dla wózków + 3 opiekunów (20 + 3)",
     "kategoria": "sala",
     "poziom": "ANT",
     "pow_m2": 65.32,
@@ -6654,62 +6886,11 @@
      ]
     ]
    },
-   "SWD.03": {
-    "nazwa": "Sala multimedialna / poczekalnia gości – strefa otwarta na antresoli holu (ekran, głośniki kierunkowe, pętla)",
-    "kategoria": "antresola",
-    "poziom": "ANT",
-    "pow_m2": 33.82,
-    "program_m2": 40,
-    "zakres_m2": [
-     30,
-     60
-    ],
-    "obrys_uv": [
-     [
-      [
-       6.3,
-       12.5
-      ],
-      [
-       6.3,
-       20.1
-      ],
-      [
-       1.85,
-       20.1
-      ],
-      [
-       1.85,
-       12.5
-      ]
-     ]
-    ],
-    "obrys_en": [
-     [
-      [
-       77.766,
-       54.392
-      ],
-      [
-       75.966,
-       61.776
-      ],
-      [
-       71.643,
-       60.722
-      ],
-      [
-       73.443,
-       53.339
-      ]
-     ]
-    ]
-   },
    "KW.A.03": {
-    "nazwa": "Przedsionek ppoż. A' klatki A (antresola zach.) z MOE 1,5 × 1,5",
+    "nazwa": "Przedsionek ppoż. A' klatki A (antresola zach.) 2,50 × 3,00 z MOE 1,5 × 1,5",
     "kategoria": "kom",
     "poziom": "ANT",
-    "pow_m2": 6.0,
+    "pow_m2": 7.5,
     "program_m2": null,
     "zakres_m2": null,
     "obrys_uv": [
@@ -6723,11 +6904,11 @@
        15.5
       ],
       [
-       6.3,
+       5.8,
        15.5
       ],
       [
-       6.3,
+       5.8,
        12.5
       ]
      ]
@@ -6743,12 +6924,79 @@
        57.781
       ],
       [
+       76.57,
+       57.189
+      ],
+      [
+       77.28,
+       54.274
+      ]
+     ]
+    ]
+   },
+   "SWD.03": {
+    "nazwa": "Sala multimedialna / poczekalnia gości – strefa otwarta na antresoli holu (ekran, głośniki kierunkowe, pętla)",
+    "kategoria": "antresola",
+    "poziom": "ANT",
+    "pow_m2": 32.32,
+    "program_m2": 40,
+    "zakres_m2": [
+     30,
+     60
+    ],
+    "obrys_uv": [
+     [
+      [
+       1.85,
+       12.5
+      ],
+      [
+       1.85,
+       20.1
+      ],
+      [
+       6.3,
+       20.1
+      ],
+      [
+       6.3,
+       15.5
+      ],
+      [
+       5.8,
+       15.5
+      ],
+      [
+       5.8,
+       12.5
+      ]
+     ]
+    ],
+    "obrys_en": [
+     [
+      [
+       73.443,
+       53.339
+      ],
+      [
+       71.643,
+       60.722
+      ],
+      [
+       75.966,
+       61.776
+      ],
+      [
        77.056,
        57.307
       ],
       [
-       77.766,
-       54.392
+       76.57,
+       57.189
+      ],
+      [
+       77.28,
+       54.274
       ]
      ]
     ]
@@ -6757,63 +7005,83 @@
     "nazwa": "Hol reprezentacyjny – poziom górny (antresola holu nad klubami i pasem pn.)",
     "kategoria": "hol",
     "poziom": "ANT",
-    "pow_m2": 89.56,
+    "pow_m2": 79.05,
     "program_m2": null,
     "zakres_m2": null,
     "obrys_uv": [
      [
       [
        5.1,
-       23.3
-      ],
-      [
-       8.3,
-       23.3
-      ],
-      [
-       8.3,
-       27.85
-      ],
-      [
-       15.3,
-       27.85
-      ],
-      [
-       15.3,
-       20.85
-      ],
-      [
-       8.3,
-       20.85
-      ],
-      [
-       8.3,
-       15.5
-      ],
-      [
-       6.3,
-       15.5
-      ],
-      [
-       6.3,
-       20.1
-      ],
-      [
-       1.85,
-       20.1
-      ],
-      [
-       1.85,
-       26.6
+       24.6
       ],
       [
        5.1,
+       23.3
+      ],
+      [
+       8.3,
+       23.3
+      ],
+      [
+       8.3,
+       24.6
+      ],
+      [
+       10.92,
+       24.6
+      ],
+      [
+       10.92,
+       27.85
+      ],
+      [
+       15.3,
+       27.85
+      ],
+      [
+       15.3,
+       20.85
+      ],
+      [
+       8.3,
+       20.85
+      ],
+      [
+       8.3,
+       15.5
+      ],
+      [
+       6.3,
+       15.5
+      ],
+      [
+       6.3,
+       20.1
+      ],
+      [
+       1.85,
+       20.1
+      ],
+      [
+       1.85,
        26.6
+      ],
+      [
+       4.1,
+       26.6
+      ],
+      [
+       4.1,
+       24.6
       ]
      ]
     ],
     "obrys_en": [
      [
+      [
+       73.735,
+       65.864
+      ],
       [
        74.043,
        64.601
@@ -6823,8 +7091,16 @@
        65.359
       ],
       [
-       76.074,
-       69.779
+       76.844,
+       66.622
+      ],
+      [
+       79.389,
+       67.242
+      ],
+      [
+       78.619,
+       70.4
       ],
       [
        82.875,
@@ -6859,38 +7135,22 @@
        67.037
       ],
       [
-       73.261,
-       67.807
+       72.289,
+       67.57
+      ],
+      [
+       72.763,
+       65.627
       ]
      ]
     ]
    }
   },
   "pustka_holu": {
-   "pow_m2": 40.9,
+   "pow_m2": 51.41,
    "obrys_uv": [
     [
      [
-      5.1,
-      23.3
-     ],
-     [
-      5.1,
-      26.6
-     ],
-     [
-      1.85,
-      26.6
-     ],
-     [
-      1.85,
-      23.3
-     ],
-     [
-      0.5,
-      23.3
-     ],
-     [
       0.5,
       29.2
      ],
@@ -6903,15 +7163,82 @@
       27.85
      ],
      [
-      8.3,
+      10.92,
       27.85
      ],
      [
+      10.92,
+      24.6
+     ],
+     [
       8.3,
+      24.6
+     ],
+     [
+      8.3,
+      23.3
+     ],
+     [
+      5.1,
+      23.3
+     ],
+     [
+      5.1,
+      24.6
+     ],
+     [
+      4.1,
+      24.6
+     ],
+     [
+      4.1,
+      26.6
+     ],
+     [
+      1.85,
+      26.6
+     ],
+     [
+      1.85,
+      23.3
+     ],
+     [
+      0.5,
       23.3
      ]
     ]
    ]
+  },
+  "schody_reprezentacyjne": {
+   "stopnie": "21 × 17.14 cm (11 + 10), stopnica 28 cm",
+   "spocznik_m": 1.5,
+   "dl_rzutu_m": 6.82,
+   "szer_biegu_m": 2.0,
+   "stopa_u": 10.92,
+   "wierzch_u": 4.1,
+   "obrys_uv": [
+    [
+     10.92,
+     24.6
+    ],
+    [
+     10.92,
+     26.6
+    ],
+    [
+     4.1,
+     26.6
+    ],
+    [
+     4.1,
+     24.6
+    ]
+   ],
+   "pod_antresola_m2": 0.0,
+   "w_pustce_m2": 13.64,
+   "przeswit_min_m": 3.26,
+   "pole_przed_stopa_m": 1.53,
+   "kontrola_G2": true
   },
   "trzony_uklad": {
    "zalozenie": "v1.2 – poprawka I5 (_v12_trzony.py): trzon A u 8,30–15,50 × v 11,85–20,85 (wydłużony o 0,60 m na pd.), klatka A 3,40 × 5,80 m; trzon B bez zmiany obrysu, klatka B 3,40 × 6,64 m, przedsionek B 3,40 × 2,06 m",
@@ -7254,19 +7581,19 @@
      "szer_m": 1.2
     },
     {
-     "z": "SWD.07",
+     "z": "PP.06",
      "do": "KUL",
      "uv": [
-      35.0,
+      33.7,
       10.0
      ],
      "szer_m": 0.9
     },
     {
-     "z": "PP.06",
+     "z": "SWD.07",
      "do": "KUL",
      "uv": [
-      38.4,
+      35.2,
       10.0
      ],
      "szer_m": 0.9
@@ -7275,7 +7602,7 @@
      "z": "SWD.12a",
      "do": "KUL",
      "uv": [
-      3.4,
+      5.7,
       12.4
      ],
      "szer_m": 1.0
@@ -7437,7 +7764,7 @@
      "z": "przedsionek_B",
      "do": "KUL",
      "uv": [
-      27.0,
+      27.8,
       9.9
      ],
      "szer_m": 1.2
@@ -7455,12 +7782,12 @@
     },
     {
      "z": "PHS.05c",
-     "do": "KW.A.01",
+     "do": "KW.A.02",
      "uv": [
       34.8,
-      5.3
+      11.2
      ],
-     "szer_m": 1.0
+     "szer_m": 0.9
     },
     {
      "z": "SWD.01g",
@@ -7481,10 +7808,19 @@
      "szer_m": 1.2
     },
     {
+     "z": "przedsionek_A",
+     "do": "KW.A.02",
+     "uv": [
+      13.7,
+      11.85
+     ],
+     "szer_m": 1.2
+    },
+    {
      "z": "przedsionek_B",
      "do": "KW.A.02",
      "uv": [
-      27.0,
+      27.8,
       9.9
      ],
      "szer_m": 1.2
@@ -7493,7 +7829,7 @@
      "z": "KW.A.03",
      "do": "SWD.02g",
      "uv": [
-      7.3,
+      7.7,
       15.5
      ],
      "szer_m": 1.2
@@ -7503,29 +7839,32 @@
      "do": "KW.A.03",
      "uv": [
       8.43,
-      12.8
+      13.05
      ],
-     "szer_m": 1.2
+     "szer_m": 1.0
     }
    ]
   },
   "bilans": {
    "wnetrze_S_m2": 1080.19,
-   "pomieszczenia_S_m2": 789.81,
-   "komunikacja_S_m2": 123.73,
+   "pomieszczenia_S_m2": 791.85,
+   "komunikacja_S_m2": 120.97,
    "trzony_m2": 123.55,
-   "sciany_wewn_m2": 43.1,
-   "antresola_m2": 297.88,
+   "sciany_wewn_m2": 43.82,
+   "antresola_m2": 293.01,
    "program_suma_m2": 1106,
-   "projekt_suma_m2": 1016.24,
-   "hol_razem_m2": 164.39,
-   "PHS05_razem_m2": 42.46
+   "projekt_suma_m2": 1006.04,
+   "hol_razem_m2": 156.64,
+   "PHS05_razem_m2": 42.24
   },
   "uklad_uv": "uv wieży: e = 74,606 + 0,97155·u − 0,23684·v; n = 40,756 + 0,23684·u + 0,97155·v",
   "ewakuacja": {
-   "osoby_maks": 354,
-   "strefa_ZL_I_m2": 1443.7,
+   "osoby_maks": 350,
+   "osoby_plyta": 77,
+   "osoby_galeria": 23,
+   "strefa_ZL_I_m2": 1438.8,
    "kuluar_szer_m": 2.2,
+   "kuluar_wymagane_m": 2.1,
    "kuluar_przy_trzonie_A_m": 1.75,
    "klatki_do_antresoli": [
     "A",
@@ -7536,12 +7875,77 @@
     "A'",
     "B"
    ],
-   "limity": "ZL I bez tryskaczy: przejście 40 m (+25 % h > 5 m), dojście 10 / 40 m; kuluar i korytarz publiczny z samoczynnym oddymianiem (SSP) → +50 % (15 / 60 m, § 256 ust. 3 – do potwierdzenia z rzeczoznawcą)",
-   "dojscia_jednokierunkowe_ponad_10m": {
-    "PHS.05c→B": 14.1,
-    "SWD.11b→B": 10.2,
-    "PP.06→B": 13.9
-   }
+   "limity": "ZL I bez tryskaczy, BEZ zwiększeń: przejście 40 m (+25 % w sali i holu h > 5 m), dojście 1 kierunek 10 m, 2 kierunki (do różnych klatek, odcinek wspólny ≤ 10 m) 40 m; zwiększenie +50 % za samoczynne oddymianie (§ 256 ust. 4 pkt 2) niewykorzystywane",
+   "metoda": "_s2_ewakuacja.py [E2]: wszystkie drzwi z DOORS_S i DOORS_ANT, sieć osi dróg (kuluar, pasaż, łącznik, dojście SWD.11b, hol SWD.02 jako komunikacja ogólna, korytarz publiczny i hol P1/P2), najkrótsze drogi do klatek A i B",
+   "dojscia_jednokierunkowe_ponad_10m": {},
+   "dojscia_jednokierunkowe_9_10m": {
+    "SWD.04": 9.75,
+    "SWD.07": 9.9,
+    "SWD.11a": 9.15,
+    "SWD.11b": 9.4,
+    "SWD.12a": 9.85
+   },
+   "dojscia_2_kierunki": {
+    "PHS.05b": {
+     "B": 28.75,
+     "A": 31.6,
+     "wspolny": 5.3
+    },
+    "SWD.06": {
+     "A": 19.3,
+     "B": 36.9,
+     "wspolny": 4.65
+    },
+    "SWD.12b": {
+     "B": 31.8,
+     "A": 17.1,
+     "wspolny": 1.0
+    },
+    "SWD.15": {
+     "A": 18.3,
+     "B": 35.9,
+     "wspolny": 3.65
+    }
+   },
+   "antresola_radnych_przejscie_maks_m": 35.3,
+   "zgodnosc_bez_zwiekszen": true,
+   "holy_A1A2_min_m": {
+    "S": 3.75,
+    "ANT": 3.75
+   },
+   "MOE_przedsionki": {
+    "A (S)": [
+     12.15,
+     15.6,
+     13.65,
+     17.1
+    ],
+    "A (+30,90)": [
+     12.15,
+     15.0,
+     13.65,
+     16.5
+    ],
+    "A' (+30,90)": [
+     5.8,
+     12.5,
+     7.3,
+     14.0
+    ],
+    "B (S)": [
+     25.1,
+     7.59,
+     26.6,
+     9.09
+    ],
+    "B (+30,90)": [
+     25.1,
+     7.59,
+     26.6,
+     9.09
+    ]
+   },
+   "strefy_dymowe": "(1) sala + galeria; (2) hol SWD.02 + antresola radnych + schody – samoczynne oddymianie (SSP); (3) kuluar + korytarz publiczny + hol P1/P2 – samoczynne oddymianie (SSP, § 247 ust. 1); przedsionki – nadciśnienie"
   }
  },
  "podziemie": {
@@ -8020,11 +8424,11 @@
    }
   },
   "wymagane_MPZP": {
-   "PU_m2": 8871.47,
+   "PU_m2": 8869.03,
    "PU_gastronomia_m2": 88.47,
    "wymagane": 106,
    "odczyt_ostrozny": 108,
-   "wzor": "12/1000 × (PU − PU_gastr,) + 6/1000 × PU_gastr, = 105,93 → 106"
+   "wzor": "12/1000 × (PU − PU_gastr.) + 6/1000 × PU_gastr. = 105,90 → 106"
   },
   "stackery": {
    "typ": "zależne 2-poziomowe bez zagłębienia, jednostki podwójne 5,0 m",
@@ -8223,20 +8627,20 @@
  },
  "bilans": {
   "PZ_m2": 2165.8,
-  "PC_nadziemna_m2": 14392.7,
+  "PC_nadziemna_m2": 14387.8,
   "PC_podziemna_m2": 4365.2,
-  "PU_m2": 8871.47,
-  "PU_definicja": "PN-ISO 9836 – pomieszczenia kategorii PU (model pomieszczeń, F.15.A: 8 850,37 m²) skorygowane o kondygnację S-3 (+21.10 m²: _v12_koszt.py [K0]); bez RU, US, PG",
+  "PU_m2": 8869.03,
+  "PU_definicja": "PN-ISO 9836 – pomieszczenia kategorii PU (model pomieszczeń, F.15.A: 8 850,37 m²) skorygowane o kondygnację S-3 (+18,66 m² wobec bazy zamrożonej S + ANT modelu v1.1: _v12_koszt.py [K0]); bez RU, US, PG",
   "KW_m3": 81408,
   "PBC_m2": 1185,
-  "koszt_mln_netto": 148.98,
+  "koszt_mln_netto": 148.99,
   "koszt_model_F14B_mid_mln": 143.3,
   "koszt_roboty_KS_mln": 141.89,
   "rezerwa_proc": 5,
   "rezerwa_mln": 7.09,
-  "zapas_do_limitu_mln": 1.02,
-  "zl_m2_PC": 7942,
-  "zl_m2_PU": 16793,
+  "zapas_do_limitu_mln": 1.01,
+  "zl_m2_PC": 7945,
+  "zl_m2_PU": 16799,
   "EP_kWh_m2": 28.0,
   "EPB_kWh_m2": 23.9,
   "koszt_wejscie_modelu": "docs/20_koncepcja/_rewizja_koszt_wejscie_v1_2.json",
@@ -8423,7 +8827,7 @@
    "lens_mm": 20,
    "shift_y": 0.08,
    "czas": "2026-10-22 10:30 CEST, sesja",
-   "nastroj": "światło dzienne z łuku za kamerą (za 4. rzędem, R ≈ 11 m od mównicy), prezydium przy pełnej ścianie pd.; 47 stanowisk w 4 rzędach (4 dla wózków), galeria zach. z balustradą szklaną i publicznością"
+   "nastroj": "światło dzienne z łuku za kamerą (za 4. rzędem, R ≈ 11 m od mównicy), prezydium przy pełnej ścianie pd.; 47 stanowisk w 4 rzędach (4 dla wózków), galeria zach. (nad WC i łącznikiem, między trzonem A a salą) z balustradą szklaną, 2 rzędami i zatoką dla wózków (20 + 3)"
   },
   {
    "id": "W9",

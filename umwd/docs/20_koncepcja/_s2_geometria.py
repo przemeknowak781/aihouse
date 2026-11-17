@@ -364,7 +364,8 @@ for r in rows:
                     "sektor_deg": [round(r["a0"], 1), round(r["a1"], 1)], "linia_siedzisk_R": round(r["rc"], 2),
                     "obrys_uv": M.poly_list_uv(r["band"])})
 J = {
-    "wersja": "S-3 / wariant „hol z galerią” – v1.2 (scalona z koncepcja.json; trzony wg I5: _v12_trzony.py) – 17.11.2026",
+    "wersja": "S-3 / wariant „hol z galerią” – v1.2 (scalona z koncepcja.json; trzony wg I5: _v12_trzony.py; poprawki po weryfikacji"
+              " scalenia: schody w pustce, galeria z zatoką, dojścia bez zwiększeń, MOE) – 17.11.2026",
     "zrodlo": "docs/20_koncepcja/_s2_model.py (geometria), _s2_geometria.py (kontrole i eksport), _s2_sala.py, _s2_ewakuacja.py",
     "uklad": "uv wieży: e = 74,606 + 0,97155·u − 0,23684·v; n = 40,756 + 0,23684·u + 0,97155·v",
     "posadzka": {"wzgl": M.Z_S, "npm": 146.6},

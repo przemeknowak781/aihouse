@@ -23,8 +23,15 @@ sys.path.insert(0, __import__("os").path.dirname(__file__))
 from _rewizja_wspolne import (uv2en, sd2en, rect_uv, rect_sd, poly_uv, level_m1, level_m2, W, SEG, M, DW, fmt)
 
 # --------------------------------------------------------------------------- wymagana liczba miejsc (MPZP § 13)
-PU = 8850.37        # m² PU wg PN-ISO 9836 = suma pomieszczeń kategorii PU modelu pomieszczeń (F.15.A / F.15.C I.12;
+PU_V11 = 8850.37    # m² PU v1.1 wg PN-ISO 9836 = suma pomieszczeń kategorii PU modelu pomieszczeń (F.15.A / F.15.C I.12;
                      # bez powierzchni ruchu RU 4 342, usługowej US 590 i garażowej PG 2 334 m²) – build/tabele/kontrola.md
+try:                 # v1.2: PU z bilansu koncepcji (liczone przez _v12_koszt.py [K0]: PU v1.1 + S-3; zapis _v12_scalenie.py)
+    import json as _json, os as _os
+    _K = _json.load(open(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "model", "koncepcja.json"), encoding="utf-8"))
+    PU = float(_K["bilans"]["PU_m2"])
+    PU_SRC = f"model/koncepcja.json bilans.PU_m2 (meta.wersja {_K['meta']['wersja']}; _v12_koszt.py [K0])"
+except (OSError, KeyError, ValueError):
+    PU, PU_SRC = PU_V11, "PU v1.1 (model pomieszczeń)"
 PU_GASTRO = 88.47    # m² PU bistro (SW.07 68,05 + SW.08 20,42) – 6 m.p./1000 m²
 PU_PROGRAM = 8582.0  # m² PU programu M.01 (kontrola)
 REQ = math.ceil(12 / 1000 * (PU - PU_GASTRO) + 6 / 1000 * PU_GASTRO)
@@ -273,6 +280,7 @@ def plot(lvl, r):
 def main():
     res = run("--png" in sys.argv)
     print(f"rampa uliczna {L_STREET:.2f} m (stopa u {40 - L_STREET:.2f}); rampa wewn. {L_INT:.2f} m")
+    print(f"PU: {PU:.2f} m² – {PU_SRC}")
     print(f"wymagane MPZP § 13: 12/1000 × (PU {PU:.0f} − {PU_GASTRO:.0f}) + 6/1000 × {PU_GASTRO:.0f} = "
           f"{12 / 1000 * (PU - PU_GASTRO) + 6 / 1000 * PU_GASTRO:.2f} → {REQ} m.p.; PU programu {PU_PROGRAM:.0f} → {REQ_PROG} m.p.")
     tot = 0

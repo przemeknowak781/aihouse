@@ -25,19 +25,34 @@ from umwd.render.budynek3d import Geo, SITE_JSON
 # ============================================================================================== plan zagospodarowania
 # Położenia elementów jak na planszy zagospodarowania (tools/zagospodarowanie.py) – 3D zgodne z rysunkiem.
 PLAN = dict(
+    # wg tools/zagospodarowanie.py (v1.1, 17.11) – geometria planszy zagospodarowania
     slad_1934=[(63.4, 79.6), (75.0, 81.0), (86.0, 81.9), (93.5, 81.6), (98.6, 79.6)],   # ślad pierzei z 1934 r.
     lawa_okragla=((105.54, 75.73), 2.2),          # R 16,5 m od środka łuku – poza podcieniem (korekta 17.11)
     lipy=[(66.0, 79.4), (71.5, 80.3), (77.0, 81.0), (82.5, 81.6)],                       # szpaler 4 lip
-    drzewa_pas=[(99.8, 37.2), (103.8, 37.6)],                                            # pas wejścia od bulwaru
-    drzewa_ogrod=[(64.5, 30.0), (70.5, 33.5), (89.0, 25.0), (93.0, 31.0), (73.0, 11.0), (90.5, 9.0)],
+    drzewa_pas=[(95.9, 35.6), (88.75, 35.5)],                                            # u wylotu pasa od bulwaru
+    drzewa_ogrod=[(87.25, 31.25), (94.75, 29.75), (87.5, 26.75), (86.5, 19.25), (95.25, 17.25), (91.25, 15.0),
+                  (94.75, 7.75), (90.0, 3.75), (94.75, -0.25), (88.75, -5.75), (75.75, -6.25), (71.1, -6.2),
+                  (80.75, 35.25), (71.5, 33.0)],                                         # 14 w ogrodzie (v1.1)
     lawa_pas=[(98.5, 38.0), (104.0, 38.3), (104.0, 38.9), (98.5, 38.6)],
-    ogrod_deszczowy=[(84.5, 2.0), (94.0, 2.4), (93.4, 16.6), (84.6, 16.0)],
-    plac_zabaw=[(87.5, -5.5), (95.5, -5.2), (95.5, 0.8), (87.5, 0.6)],
-    pergola=(95.2, 5.0, 3.2, 8),                       # x, y0, krok, liczba słupów (przy murze kamienic)
-    sciezki=[[(84.32, 43.12), (83.0, 34.0), (80.6, 20.0), (77.5, 6.0), (76.0, -4.0)],
-             [(59.4, 23.6), (70.0, 22.5), (80.6, 20.0), (95.0, 27.0), (99.0, 36.0)],
-             [(83.0, 34.0), (97.5, 37.0)]],
-    sciezki_szer=2.2,
+    ogrod_deszczowy=[[(87.14, 17.46), (87.26, 17.98), (87.71, 18.26), (89.6, 17.93), (91.16, 18.24), (92.2, 18.85),
+                      (93.18, 19.95), (94.38, 20.8), (94.92, 20.86), (95.36, 20.49), (96.14, 0.63), (95.85, 0.04),
+                      (90.93, 0.01), (90.59, 0.28), (90.4, 2.12), (89.97, 3.81), (91.56, 5.43), (92.48, 6.97),
+                      (92.93, 8.76), (92.84, 10.57), (92.22, 12.28), (91.13, 13.75), (89.67, 14.82), (87.47, 15.68)],
+                     [(89.0, 32.75), (89.21, 31.47), (89.58, 30.57), (90.12, 29.98), (90.98, 29.52), (91.77, 29.4),
+                      (92.73, 29.59), (94.22, 30.68), (94.94, 30.4), (95.29, 24.04), (94.98, 23.44), (94.21, 23.43),
+                      (93.18, 24.11), (92.2, 25.21), (91.16, 25.82), (89.99, 26.11), (88.05, 26.03), (87.21, 27.13),
+                      (87.1, 28.24), (87.36, 29.73), (87.12, 31.2), (87.23, 32.54), (87.67, 32.96), (88.55, 32.99)]],
+    plac_zabaw=[(90.6, -6.0), (96.3, -5.8), (96.3, -0.6), (90.6, -0.6)],
+    pergola=None,                                      # brak w v1.1
+    sciezki=[[(86.4, 38.6), (85.9, 31.0), (85.9, 24.0), (84.2, 19.5), (83.9, 14.0), (83.7, 9.0), (86.2, 4.0),
+              (86.9, -1.0), (85.8, -4.7), (79.7, -4.75), (75.9, -4.2), (70.4, -3.4)],
+             [(86.9, -1.0), (90.6, -2.6)],
+             [(66.95, 20.3), (70.15, 34.6)],
+             [(97.6, 36.9), (95.6, 37.6), (95.2, 40.6)]],
+    sciezki_szer=1.8,
+    # taras ogrodowy na stropie pasa −1 i zadaszenie BIPV wzdłuż elewacji pd. wieży (układ wieży u, v; v < 0 – ogród)
+    taras_uv=(-3.90, -5.0, 21.0, 0.0),
+    zadaszenie_uv=(0.5, -4.0, 20.5, 0.0), zadaszenie_h=4.0,
     drzewa_rzeka_n=(16.0, 24.0, 32.0, 40.0, 48.0, 56.0),   # 6 drzew na chodniku od rzeki (1,4 m od krawężnika)
 )
 
@@ -99,6 +114,12 @@ def zagospodarowanie(B):
     plac = unary_union([plac, strefa0])
     if ctx is not None and getattr(ctx, 'jezdnie_poly', None) is not None:
         plac = plac.difference(ctx.jezdnie_poly.buffer(0.3))
+    # taras ogrodowy (strop pasa −1) – posadzka granitowa jak plac
+    sp_ = B.spec
+    u0, v0, u1, v1 = PLAN['taras_uv']
+    taras = Polygon([sp_.z_uv(u0, v0), sp_.z_uv(u1, v0), sp_.z_uv(u1, v1), sp_.z_uv(u0, v1)]).buffer(0)
+    taras = taras.intersection(inw).difference(foot)
+    plac = unary_union([plac, taras])
     # ścieżki ogrodu (cegła z wykopu) wg planszy zagospodarowania
     ogrod_poly = inw.difference(foot)
     sciezki = unary_union([LineString(l).buffer(PLAN['sciezki_szer'] / 2, cap_style=2) for l in PLAN['sciezki']])
@@ -123,7 +144,7 @@ def zagospodarowanie(B):
     B.info['posadzki_m2'] = {'plac_i_opaski': round(plac.area, 1), 'sciezki': round(sciezki.area, 1)}
     # --- przebudowa trawnika kontekstu (bez trawy pod posadzkami i budynkiem)
     if ctx is not None:
-        deszcz = Polygon(PLAN['ogrod_deszczowy']).intersection(inw).difference(foot)
+        deszcz = unary_union([Polygon(r) for r in PLAN['ogrod_deszczowy']]).intersection(inw).difference(foot)
         zabawa = Polygon(PLAN['plac_zabaw']).intersection(inw).difference(foot)
         _przebuduj_trawnik(B, ctx, kon, unary_union([plac, sciezki, foot, brama, deszcz, zabawa]), plac)
         _ogrod(B, ctx, coll, deszcz, zabawa, zf)
@@ -143,6 +164,7 @@ def zagospodarowanie(B):
     G.pryzma(q, zq - 0.3, zq + 0.45, 'granit')
     _slad_1934(B, G, zf)
     _stojaki(B, G, zf)
+    _zadaszenie_bipv(B, coll, zf)
     if B.o.get('ludzie'):
         wozek(B, coll, zf)
     G.obiekt('lawy_slad1934_stojaki', coll, B.mat, B.DZ)
@@ -264,6 +286,40 @@ def _stojaki(B, G, zf, n=10, rozstaw=1.0, h=0.85, szer=0.70, rura=0.05):
         G.pryzma(lin, z0 + h - rura, z0 + h, 'metal')
 
 
+def _zadaszenie_bipv(B, coll, zf):
+    """Zadaszenie BIPV tarasu ogrodowego wzdłuż elewacji pd. wieży (u 0,5–20,5, głęb. 4,0 m, h ≈ 4,0 m; 80 m², 13 kWp):
+    słupy stalowe Ø 0,16 m co 4 m przy krawędzi ogrodowej, belka krawędziowa i belki poprzeczne do elewacji (grafit),
+    moduły szkło-szkło z ogniwami (prześwit między ogniwami – cień ażurowy na tarasie)."""
+    sp = B.spec
+    u0, v0, u1, v1 = PLAN['zadaszenie_uv']
+    h = PLAN['zadaszenie_h']
+    G = Geo()
+    Gs = Geo()
+    z0 = float(zf([sp.z_uv((u0 + u1) / 2, v0)[0]], [sp.z_uv((u0 + u1) / 2, v0)[1]])[0])
+    n = int(round((u1 - u0) / 4.0))
+    for i in range(n + 1):
+        u = u0 + (u1 - u0) * i / n
+        e, nn = sp.z_uv(u, v0 + 0.15)
+        G.pryzma(Point(e, nn).buffer(0.08, 12), z0, z0 + h - 0.22, 'metal')
+        # belka poprzeczna (do elewacji)
+        a, b = sp.z_uv(u, v0 + 0.05), sp.z_uv(u, v1 - 0.02)
+        G.pryzma(LineString([a, b]).buffer(0.06, cap_style=2), z0 + h - 0.22, z0 + h - 0.04, 'metal')
+    # belka krawędziowa
+    a, b = sp.z_uv(u0 - 0.1, v0 + 0.15), sp.z_uv(u1 + 0.1, v0 + 0.15)
+    G.pryzma(LineString([a, b]).buffer(0.09, cap_style=2), z0 + h - 0.26, z0 + h - 0.02, 'metal')
+    # moduły (1,0 × 1,6 m) – szkło z ogniwami
+    nu = int((u1 - u0) / 1.0)
+    for i in range(nu):
+        for j in range(2):
+            ua, ub = u0 + i * 1.0 + 0.01, u0 + (i + 1) * 1.0 - 0.01
+            va, vb = v0 + 0.25 + j * 1.85, v0 + 0.25 + (j + 1) * 1.85 - 0.02
+            pts = [(*sp.z_uv(ua, va), z0 + h), (*sp.z_uv(ub, va), z0 + h), (*sp.z_uv(ub, vb), z0 + h), (*sp.z_uv(ua, vb), z0 + h)]
+            Gs.face(pts, [(ua, va), (ub, va), (ub, vb), (ua, vb)], 'bipv_szklo')
+    G.obiekt('zadaszenie_bipv_konstrukcja', coll, B.mat, B.DZ)
+    Gs.obiekt('zadaszenie_bipv_moduly', coll, B.mat, B.DZ)
+    B.info['zadaszenie_bipv'] = dict(u=(u0, u1), glebokosc=round(v1 - v0, 2), h=h, moduly=nu * 2)
+
+
 def _ogrod(B, ctx, coll, deszcz, zabawa, zf):
     """Ogród deszczowy (niecka −0,25 m z roślinnością wilgociolubną i kamieniami na brzegu), plac zabaw (piasek,
     drewniana konstrukcja), pergola przy murze kamienic."""
@@ -302,6 +358,9 @@ def _ogrod(B, ctx, coll, deszcz, zabawa, zf):
             G.pryzma(Point(*(c + [dx, dy])).buffer(0.07, 6), z0, z0 + 2.4, 'wn_drewno:jasne')
         G.pryzma(Point(*c).buffer(1.15, 4), z0 + 1.0, z0 + 1.08, 'wn_drewno:jasne')
         G.pryzma(Point(*c).buffer(1.25, 4), z0 + 2.4, z0 + 2.48, 'wn_drewno:jasne')
+    if not PLAN.get('pergola'):
+        G.obiekt('ogrod_deszczowy_plac_zabaw', coll, B.mat, B.DZ)
+        return
     x, y0, krok, n = PLAN['pergola']
     zp = float(ctx.teren.z1(x, y0 + krok * n / 2) - B.DZ)
     for k in range(n):
@@ -578,6 +637,170 @@ def _torus(R, r, n=40, m=8):
             a, b2 = i * m + j, ((i + 1) % n) * m + j
             F.append((a, b2, ((i + 1) % n) * m + (j + 1) % m, i * m + (j + 1) % m))
     return V, F
+
+
+def _rura(G, a, b, r, mat, n=6):
+    """Rura (graniastosłup n-kątny) między punktami 3D a i b."""
+    a, b = np.asarray(a, float), np.asarray(b, float)
+    d = b - a
+    L = np.linalg.norm(d)
+    if L < 1e-6:
+        return
+    d /= L
+    t = np.cross(d, [0, 0, 1.0]) if abs(d[2]) < 0.95 else np.cross(d, [1.0, 0, 0])
+    t /= np.linalg.norm(t)
+    w = np.cross(d, t)
+    ring = [t * math.cos(2 * math.pi * i / n) * r + w * math.sin(2 * math.pi * i / n) * r for i in range(n)]
+    for i in range(n):
+        j = (i + 1) % n
+        G.face([tuple(a + ring[i]), tuple(a + ring[j]), tuple(b + ring[j]), tuple(b + ring[i])], [(0, 0)] * 4, mat)
+
+
+def _petla(G, pierscienie, mat):
+    """Powierzchnia z pierścieni o tej samej liczbie punktów (zamknięta w obwodzie) + wieka."""
+    for r0, r1 in zip(pierscienie[:-1], pierscienie[1:]):
+        n = len(r0)
+        for i in range(n):
+            j = (i + 1) % n
+            G.face([r0[i], r0[j], r1[j], r1[i]], [(0, 0)] * 4, mat)
+    G.face(pierscienie[0][::-1], [(0, 0)] * len(pierscienie[0]), mat)
+    G.face(pierscienie[-1], [(0, 0)] * len(pierscienie[-1]), mat)
+
+
+def _pierscien(dl, sz, z, r, dx=0.0, n_luk=4):
+    """Zaokrąglony prostokąt (długość wzdłuż x, szerokość wzdłuż y) na wysokości z, środek w (dx, 0)."""
+    pts = []
+    r = min(r, dl / 2 - 1e-3, sz / 2 - 1e-3)
+    for cx, cy, a0 in ((dl / 2 - r, sz / 2 - r, 0), (-dl / 2 + r, sz / 2 - r, 90), (-dl / 2 + r, -sz / 2 + r, 180),
+                       (dl / 2 - r, -sz / 2 + r, 270)):
+        for k in range(n_luk + 1):
+            a = math.radians(a0 + 90 * k / n_luk)
+            pts.append((dx + cx + r * math.cos(a), cy + r * math.sin(a), z))
+    return pts
+
+
+def samochod(B, coll, poz, kier, z, nazwa='auto', seed=0):
+    """Samochód osobowy (kompakt/sedan ~4,4 × 1,8 × 1,47 m): nadwozie i kabina z pierścieni zaokrąglonych
+    prostokątów (lakier, szyby), koła z oponami i felgami, światła. Lokalnie przód +x."""
+    rng = np.random.default_rng(seed)
+    G = Geo()
+    dl, sz = 4.35 + rng.uniform(-0.25, 0.25), 1.80
+    # nadwozie: pierścienie od progu do linii okien (lekko zwężane, zaokrąglone narożniki)
+    nad = [_pierscien(dl - 0.10, sz - 0.06, 0.30, 0.30), _pierscien(dl, sz, 0.42, 0.34),
+           _pierscien(dl, sz, 0.78, 0.36), _pierscien(dl - 0.18, sz - 0.08, 0.96, 0.38)]
+    _petla(G, nad, 'auto')
+    # kabina (szyby) – zbieżna ku górze, przesunięta ku tyłowi, dach lakierowany
+    kab = [_pierscien(dl * 0.62, sz - 0.14, 0.96, 0.30, dx=-0.18), _pierscien(dl * 0.44, sz - 0.36, 1.38, 0.24, dx=-0.30)]
+    _petla(G, kab, 'auto_szyba')
+    dach = [_pierscien(dl * 0.44, sz - 0.36, 1.375, 0.24, dx=-0.30), _pierscien(dl * 0.42, sz - 0.40, 1.44, 0.22, dx=-0.30)]
+    _petla(G, dach, 'auto')
+    # koła
+    for xk in (dl / 2 - 0.80, -dl / 2 + 0.75):
+        for yk in (sz / 2 - 0.12, -sz / 2 + 0.12):
+            rg = [[(xk + 0.33 * math.cos(2 * math.pi * i / 20), yk + dy, 0.33 + 0.33 * math.sin(2 * math.pi * i / 20))
+                   for i in range(20)] for dy in (-0.11, 0.11)]
+            _petla(G, rg, 'guma')
+            fe = [[(xk + 0.20 * math.cos(2 * math.pi * i / 16), yk + (0.115 if yk > 0 else -0.115),
+                    0.33 + 0.20 * math.sin(2 * math.pi * i / 16)) for i in range(16)]]
+            G.face(fe[0] if yk > 0 else fe[0][::-1], [(0, 0)] * 16, 'metal')
+    # światła: przód (jasne), tył (czerwone – materiał „litery” przyciemniony zastąpiony ciemnym lakierem)
+    for yy in (sz / 2 - 0.30, -sz / 2 + 0.30):
+        G.pryzma(Polygon([(dl / 2 - 0.02, yy - 0.18), (dl / 2 + 0.005, yy - 0.18), (dl / 2 + 0.005, yy + 0.18),
+                          (dl / 2 - 0.02, yy + 0.18)]), 0.70, 0.80, 'metal')
+        G.pryzma(Polygon([(-dl / 2 - 0.005, yy - 0.20), (-dl / 2 + 0.02, yy - 0.20), (-dl / 2 + 0.02, yy + 0.20),
+                          (-dl / 2 - 0.005, yy + 0.20)]), 0.78, 0.88, 'ludzie:okrycie_jasne')
+    ob = G.obiekt(nazwa, coll, B.mat, 0.0)
+    ob.location = (float(poz[0]), float(poz[1]), float(z))
+    ob.rotation_euler = (0, 0, math.atan2(kier[1], kier[0]))
+    return ob
+
+
+def rowerzysta(B, coll, poz, kier, z, nazwa='rowerzysta', seed=0):
+    """Rowerzysta: rower miejski (koła 28\", rama, kierownica, siodełko) i jadąca postać z metaballi
+    (tułów pochylony, ręce na kierownicy, nogi na pedałach). Lokalnie jazda wzdłuż +y."""
+    from mathutils import Vector
+    G = Geo()
+    Vt, Ft = _torus(0.34, 0.018, 32, 6)
+    for oy in (-0.53, 0.53):
+        Vs = [(vy, vx + oy, vz + 0.36) for vx, vy, vz in Vt]
+        for f in Ft:
+            G.face([Vs[i] for i in f], [(0, 0)] * len(f), 'guma')
+    tyl, przod = np.array([0, -0.53, 0.36]), np.array([0, 0.53, 0.36])
+    supp = np.array([0, -0.12, 0.30])           # suport
+    sio = np.array([0, -0.24, 0.88])            # pod siodełkiem
+    ster = np.array([0, 0.40, 0.92])            # główka ramy
+    for a, b in ((supp, sio), (supp, ster), (sio + [0, 0.02, -0.06], ster + [0, -0.02, -0.06]), (sio, tyl),
+                 (supp, tyl), (ster, przod), (ster, ster + [0, -0.06, 0.16])):
+        _rura(G, a, b, 0.016, 'metal')
+    _rura(G, ster + [-0.28, -0.06, 0.16], ster + [0.28, -0.06, 0.16], 0.013, 'metal')        # kierownica
+    G.pryzma(Polygon([(-0.08, -0.33), (0.08, -0.33), (0.05, -0.12), (-0.05, -0.12)]), 0.90, 0.95, 'guma')  # siodło
+    ob = G.obiekt(nazwa + '_rower', coll, B.mat, 0.0)
+    # postać
+    mb = bpy.data.metaballs.new(nazwa + '_mb')
+    mb.resolution = mb.render_resolution = 0.018
+    mb.threshold = 0.6
+
+    def el(typ, co, r, sx=None, sy=None, sz=None, rot=None):
+        e = mb.elements.new(type=typ)
+        e.co = co
+        e.radius = r
+        e.stiffness = 4.0
+        if sx:
+            e.size_x = sx
+        if sy:
+            e.size_y = sy
+        if sz:
+            e.size_z = sz
+        if rot is not None:
+            e.rotation = rot
+        return e
+
+    def kaps(a, b, r):
+        a, b = Vector(a), Vector(b)
+        q = Vector((1, 0, 0)).rotation_difference((b - a).normalized())
+        el('CAPSULE', ((a + b) / 2)[:], r / 0.78, sx=(b - a).length / 2, rot=q)
+    biodro = Vector((0, -0.22, 1.00))
+    bark = Vector((0, 0.10, 1.48))
+    for sx, (kol, sto) in ((-0.11, ((-0.11, 0.05, 0.78), (-0.11, -0.02, 0.24))), (0.11, ((0.11, 0.0, 1.02), (0.11, 0.0, 0.52)))):
+        kaps((sx, biodro.y, biodro.z), kol, 0.075)
+        kaps(kol, sto, 0.055)
+        el('ELLIPSOID', (sto[0], sto[1] + 0.05, sto[2] - 0.03), 0.06 / 0.78, sx=0.6, sy=1.5, sz=0.6)
+    for t in np.linspace(0, 1, 5):
+        c = biodro.lerp(bark, t)
+        el('ELLIPSOID', c[:], (0.17 + 0.03 * t) / 0.78, sy=0.65, sz=0.75)
+    el('BALL', (0, 0.16, 1.58), 0.05 / 0.78)
+    el('ELLIPSOID', (0, 0.22, 1.69), 0.10 / 0.78, sx=0.8, sy=0.95, sz=1.1)
+    el('ELLIPSOID', (0, 0.20, 1.73), 0.10 / 0.78, sx=0.86, sy=0.92, sz=0.8)
+    for sx in (-1, 1):
+        dl_ = (sx * 0.25, 0.34, 1.08)
+        kaps((sx * 0.20, 0.10, 1.44), (sx * 0.24, 0.24, 1.22), 0.05)
+        kaps((sx * 0.24, 0.24, 1.22), dl_, 0.044)
+    tmp = bpy.data.objects.new(nazwa + '_tmp', mb)
+    bpy.context.scene.collection.objects.link(tmp)
+    me = bpy.data.meshes.new_from_object(tmp.evaluated_get(bpy.context.evaluated_depsgraph_get()))
+    bpy.data.objects.remove(tmp)
+    bpy.data.metaballs.remove(mb)
+    V = np.array([v.co[:] for v in me.vertices])
+    H = 1.80
+    a_ = me.attributes.new('fv', 'FLOAT', 'POINT')
+    a_.data.foreach_set('value', (V[:, 2] / H).astype(np.float32))
+    b_ = me.attributes.new('fu', 'FLOAT', 'POINT')
+    b_.data.foreach_set('value', np.full(len(V), 0.55, np.float32))
+    sk = np.zeros(len(V), np.float32)
+    for sx in (-1, 1):
+        sk = np.maximum(sk, (np.linalg.norm(V - np.array([sx * 0.25, 0.34, 1.08]), axis=1) < 0.07).astype(np.float32))
+    c_ = me.attributes.new('sk', 'FLOAT', 'POINT')
+    c_.data.foreach_set('value', sk)
+    for pl in me.polygons:
+        pl.use_smooth = True
+    me.materials.append(B.mat('ludzie'))
+    os_ = bpy.data.objects.new(nazwa, me)
+    coll.objects.link(os_)
+    rot = math.atan2(kier[1], kier[0]) - math.pi / 2
+    for o in (ob, os_):
+        o.location = (float(poz[0]), float(poz[1]), float(z))
+        o.rotation_euler = (0, 0, rot)
+    return os_
 
 
 def wozek(B, coll, zf, poz=None, kier=None, nazwa=''):

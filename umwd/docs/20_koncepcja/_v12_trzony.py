@@ -146,9 +146,13 @@ for k, g in cB.items():
 ov = [(a, b) for a in cB for b in cB if a < b and cB[a].intersection(cB[b]).area > 1e-6]
 print(f"  nakładania komórek: {ov if ov else 'brak'}; wszystkie w obrysie: {all(g.within(S2.CORE_B) for g in cB.values())}")
 pB = cB["przedsionek_B"].bounds
-print(f"  przedsionek B {pB[2] - pB[0]:.2f} × {pB[3] - pB[1]:.2f} m = {cB['przedsionek_B'].area:.2f} m²: MOE 1,5 × 1,5 przy ścianie zach."
-      f" + przejście {pB[2] - pB[0] - 1.5:.2f} m ≥ 1,20 ✔; ≥ 2,0 × 2,4 (ppoz.md D6) ✔. Drzwi P2 (przelotowy) od zach. na −2/−1:"
-      f" otwór v {8.325 - 0.55:.3f}–{8.325 + 0.55:.3f} w zakresie przedsionka v {pB[1]:.2f}–{pB[3]:.2f} ✔")
+_rB = S2.moe_search(cB["przedsionek_B"], [(p, w) for a_, b_, p, w in S2.DOORS_S if a_ == "przedsionek_B"], S2.DOORS_KLATKA["przedsionek_B"])
+_mB = _rB["moe"].bounds if _rB else None
+print(f"  przedsionek B {pB[2] - pB[0]:.2f} × {pB[3] - pB[1]:.2f} m = {cB['przedsionek_B'].area:.2f} m²: MOE 1,5 × 1,5 poza torem 1,2 m i polem"
+      f" otwierania skrzydła (test geometryczny, drzwi N w u {[p for a_, b_, p, w in S2.DOORS_S if a_ == 'przedsionek_B'][0][0]:.2f}):"
+      + (f" u {_mB[0]:.2f}–{_mB[2]:.2f} × v {_mB[1]:.2f}–{_mB[3]:.2f} ✔" if _rB else " BRAK ✗")
+      + f"; ≥ 2,0 × 2,4 (ppoz.md D6) ✔. Drzwi P2 (przelotowy) od zach. na −2/−1:"
+      f" otwór v {8.325 - 0.55:.3f}–{8.325 + 0.55:.3f} w zakresie przedsionka v {pB[1]:.2f}–{pB[3]:.2f} ✔ (_s2_ewakuacja.py [E6])")
 print("  v1.1 (klatka 6,35 m) – kondygnacja P (4,80) wymagałaby 4 biegów:")
 _, triedB = stair(4.80, 6.35, flip_ok=False)
 for t in triedB:
@@ -239,7 +243,7 @@ for lv in B["kondygnacje"]:
         ue = min([p.bounds[0] for p in north if p.bounds[0] >= 31.15 and p.intersection(box(31.15, 4.15, 39.5, 9.65)).area > 0.5] or [39.5])
         print(f"  kond. {lv['id']}: przed A1/A2 (pn.) korytarz {vn - 0.10 - 20.85:.2f} m; przed P1/P2 (wsch.) korytarz {ue - 0.10 - 31.10:.2f} m"
               " (WT § 195 ≥ 1,6 ✔; M.13 3,6 – świadome odstępstwo)")
-print("  P: A1/A2 → łącznik pn. SW.01b (v 21,0–29,2) ≥ 3,6 ✔; S i +30,90: 5,95 m ✔ (_s2_ewakuacja.py [E5]);"
+print("  P: A1/A2 → łącznik pn. SW.01b (v 21,0–29,2) ≥ 3,6 ✔; S i +30,90: ≥ 3,75 m od lica trzonu ✔ (_s2_ewakuacja.py [E5]);"
       " −1/−2: pas v 20,85–22,60 (ślepy koniec drogi A2) wydzielony jako przedsionek ppoż. dźwigów (EI 60, nadciśnienie) – patrz [T6]")
 
 # ------------------------------------------------------------------------------------------------ [T6] garaż

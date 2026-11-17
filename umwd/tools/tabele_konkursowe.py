@@ -23,7 +23,7 @@ Wyniki (build/tabele/):
     docs/20_koncepcja/koncepcja_wybrana.md – korekty kosztu poza modelem, koszt Dokumentacji, rozbicie PU i grup kosztów
     build/rzuty/rzut_*_1-200.svg       – numery i sumy na rzutach (kontrola zgodności numeracji)
 
-Kontrakt skryptu rewizji kosztów (docs/20_koncepcja/_rewizja_*.py, gdy powstanie): generator użyje go zamiast
+Kontrakt skryptu rewizji kosztów (docs/20_koncepcja/_v1N_*koszt*.py – pierwszeństwo – albo _rewizja_*.py): generator użyje go zamiast
 koszty_model.py, jeśli moduł udostępnia (w kolejności): funkcję f14b_rows(level) lub stałą F14B_ROWS – listę krotek
 (lp, opis, jm, ilosc, cena_jedn, wartosc) w konwencji koszty_model.compute()["rows"]; albo słownik PARAMS
 (+ opcjonalnie POZA_MODELEM {opis: zł}) dla koszty_model.compute(); albo obsługuje wywołanie `--rows mid` z wydrukiem
@@ -850,7 +850,9 @@ def find_revision():
     """Skrypty rewizji kosztów: nazwa z „koszt”/„f14” albo jawny kontrakt (f14b_rows / F14B_ROWS) w treści.
     Inne _rewizja_*.py (np. PV/EP) nie są uruchamiane."""
     d = ROOT / "docs" / "20_koncepcja"
-    c = sorted(d.glob("_rewizja_*.py"))
+    # najnowsza rewizja kosztów ma pierwszeństwo: _v1N_*koszt*.py (malejąco po numerze wersji), potem _rewizja_*.py
+    v = sorted(d.glob("_v1*_*koszt*.py"), key=lambda p: [int(x) for x in re.findall(r"^_v(\d+)", p.name)] or [0], reverse=True)
+    c = v + sorted(d.glob("_rewizja_*.py"))
     cost = [p for p in c if re.search(r"koszt|f14", p.name, re.I)]
     cost += [p for p in c if p not in cost
              and re.search(r"def\s+f14b_rows|^F14B_ROWS\s*=", p.read_text(encoding="utf-8", errors="ignore"), re.M)]
@@ -1752,11 +1754,14 @@ def kontrola(D, res, plans, lo, pdfs, pdfchk, log):
     try:
         wt = P["wermd"].read_text(encoding="utf-8")
         m = re.search(r"Wynik:\s*\*\*([\d,]+)\s*mln", wt)
-        if m:
+        if m and F["draft"]:
             L.append(f"\nWeryfikacja kosztów (`weryfikacja_koszt_eko.md`) po korektach ilości i pakiecie poprawek wskazuje **{m.group(1)} mln zł**; "
                      "do czasu rewizji F.14.B pozostaje na poziomie specyfikacji 1.0.")
-            issue("KRYT" if F["draft"] else "INFO", f"F.14.B w wersji roboczej ({pl(tot / 1e6, 2)} mln) – weryfikacja wskazuje {m.group(1)} mln (ościeża, pale, "
-                                                    "dry-cooler, PV wg M.12); zapas do limitu po korektach ≈ 1 mln. Wymagana rewizja (rejestr v1.1, E-K-1).")
+            issue("KRYT", f"F.14.B w wersji roboczej ({pl(tot / 1e6, 2)} mln) – weryfikacja wskazuje {m.group(1)} mln (ościeża, pale, "
+                          "dry-cooler, PV wg M.12); zapas do limitu po korektach ≈ 1 mln. Wymagana rewizja (rejestr v1.1, E-K-1).")
+        elif m:
+            L.append(f"\nF.14.B wg skryptu rewizji kosztów ({F['rev']}): **{pl(tot / 1e6, 2)} mln zł** netto (z rezerwą); weryfikacja kosztów "
+                     f"v1.0 (`weryfikacja_koszt_eko.md`) po korektach ilości wskazywała {m.group(1)} mln zł – punkt wyjścia rewizji v1.1/v1.2.")
     except OSError:
         pass
     # zgodność F.14.B ↔ F.15.C

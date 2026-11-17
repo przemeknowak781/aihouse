@@ -278,5 +278,21 @@
  "2de85340be8bebe054d1": {
   "path": "umwd/raporty/img/scout_zmierzch5.jpg",
   "board": "spec_32"
+ },
+ "d8959dc41978d9098b0d": {
+  "path": "umwd/raporty/img/s3_plan_v12.png",
+  "board": "spec_33"
+ },
+ "def4c86e9e7b1c8ec790": {
+  "path": "umwd/raporty/img/s3_sightline_v12.png",
+  "board": "spec_33"
+ },
+ "331269a8973de8942615": {
+  "path": "umwd/raporty/img/W3_test_approved.jpg",
+  "board": "spec_33"
+ },
+ "8274b33f7a78307e73df": {
+  "path": "umwd/raporty/img/W5_test_approved.jpg",
+  "board": "spec_33"
  }
 }

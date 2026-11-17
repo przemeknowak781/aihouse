@@ -6,7 +6,10 @@ Uruchomienie (z katalogu umwd/; po _s2_geometria.py, który zapisuje kondygnacja
 Bez --zapisz tylko buduje i waliduje. Przekształcenie jest idempotentne (wejście v1.1 lub v1.2 → ten sam wynik).
 Źródła liczb: kondygnacja_S2.json (_s2_*.py), _v12_trzony.py (I5), _v12_koszt.py (koszt, PU, parking).
 Walidacja [W1]–[W7]: JSON, poprawność wielokątów, położenie w obrysie wieży i w strefie A (site.json), brak nakładania
-pomieszczeń S-3, sumy powierzchni, MPZP (rzędne dachów i kondygnacji bez zmian), spójność uv ↔ en.
+pomieszczeń S-3, sumy powierzchni, MPZP (rzędne dachów i kondygnacji bez zmian wobec ZAMROŻONEGO wejścia v1.1:
+_v12_baza_v1_1_mpzp.json = git 7acc69a), spójność uv ↔ en.
+v1.2-fix: drzwi dźwigów w rdzenie.* – pełne listy przystanków −2…ANT (lokalna lista S-3 tylko w kondygnacja_sejmiku.trzony_uklad),
+blok ewakuacji z _s2_ewakuacja.py, wzór MPZP z przecinkiem tylko w liczbie.
 NIE zmienia model/budynek.json (model pomieszczeń przelicza inny agent).
 """
 import copy
@@ -27,9 +30,11 @@ OUT = os.path.join(ROOT, "model", "koncepcja.json")
 K0 = json.load(open(OUT, encoding="utf-8"))
 S3 = json.load(open(os.path.join(HERE, "kondygnacja_S2.json"), encoding="utf-8"))
 SITE = json.load(open(os.path.join(ROOT, "model", "site.json"), encoding="utf-8"))
+V11 = json.load(open(os.path.join(HERE, "_v12_baza_v1_1_mpzp.json"), encoding="utf-8"))   # zamrożone wejście v1.1 do [W6]
 with redirect_stdout(io.StringIO()):
     import _v12_trzony as T                     # noqa: E402  (I5 – klatki, układ trzonów)
     import _v12_koszt as C                      # noqa: E402  (koszt, PU, parking)
+    import _s2_ewakuacja as E                   # noqa: E402  (ewakuacja, holy windowe, MOE)
 import _s2_model as S2                          # noqa: E402
 
 CU, SU, E0, N0 = 0.97155, 0.23684, 74.606, 40.756
@@ -49,6 +54,13 @@ def ring_en(g, f=uv2en):
     if not Polygon(pts).exterior.is_ccw:
         pts = pts[::-1]
     return pts
+
+
+SEQ_ALL = ["-2", "-1", "P", "1", "2", "3", "4", "5", "6", "S", "ANT"]
+
+
+def pl(x, nd=2):
+    return f"{x:.{nd}f}".replace(".", ",")
 
 
 def klatka_json(res, end_note):
@@ -79,13 +91,29 @@ def build():
                     "_s2_ewakuacja.py; trzony: _v12_trzony.py")
     ks["uklad_uv"] = "uv wieży: e = 74,606 + 0,97155·u − 0,23684·v; n = 40,756 + 0,23684·u + 0,97155·v"
     W_area = Polygon(d["bryly"][0]["obrys_ccw"]).area
+    one_dir = {r: round(min(x["near"].values()), 2) for r, v in E.RES.items() if "doors" in v
+               for x in v["doors"] if x["st"][0] == 0 and min(x["near"].values()) > 9.0}
+    two_dir = {r: {k: round(L, 2) for k, L in v["doors"][0]["best"]["L"].items()} | {"wspolny": round(v["doors"][0]["best"]["Ls"], 2)}
+               for r, v in E.RES.items() if v["cat"] == 1 and "doors" in v and v["doors"][0]["best"]}
     ks["ewakuacja"] = {
-        "osoby_maks": 354, "strefa_ZL_I_m2": round(W_area + S3["antresola"]["pow_m2"], 1),
-        "kuluar_szer_m": 2.20, "kuluar_przy_trzonie_A_m": round(S2.CORE_A.bounds[1] - 10.10, 2),
+        "osoby_maks": E.N, "osoby_plyta": E.N_PLYTA, "osoby_galeria": E.N_GAL,
+        "strefa_ZL_I_m2": round(W_area + S3["antresola"]["pow_m2"], 1),
+        "kuluar_szer_m": 2.20, "kuluar_wymagane_m": round(0.6 * E.N / 100, 2), "kuluar_przy_trzonie_A_m": round(S2.CORE_A.bounds[1] - 10.10, 2),
         "klatki_do_antresoli": ["A", "B"], "przedsionki": ["A", "A'", "B"],
-        "limity": "ZL I bez tryskaczy: przejście 40 m (+25 % h > 5 m), dojście 10 / 40 m; kuluar i korytarz publiczny z samoczynnym "
-                  "oddymianiem (SSP) → +50 % (15 / 60 m, § 256 ust. 3 – do potwierdzenia z rzeczoznawcą)",
-        "dojscia_jednokierunkowe_ponad_10m": {"PHS.05c→B": 14.1, "SWD.11b→B": 10.2, "PP.06→B": 13.9},
+        "limity": "ZL I bez tryskaczy, BEZ zwiększeń: przejście 40 m (+25 % w sali i holu h > 5 m), dojście 1 kierunek 10 m, 2 kierunki"
+                  " (do różnych klatek, odcinek wspólny ≤ 10 m) 40 m; zwiększenie +50 % za samoczynne oddymianie (§ 256 ust. 4 pkt 2)"
+                  " niewykorzystywane",
+        "metoda": "_s2_ewakuacja.py [E2]: wszystkie drzwi z DOORS_S i DOORS_ANT, sieć osi dróg (kuluar, pasaż, łącznik, dojście SWD.11b,"
+                  " hol SWD.02 jako komunikacja ogólna, korytarz publiczny i hol P1/P2), najkrótsze drogi do klatek A i B",
+        "dojscia_jednokierunkowe_ponad_10m": {},
+        "dojscia_jednokierunkowe_9_10m": one_dir,
+        "dojscia_2_kierunki": two_dir,
+        "antresola_radnych_przejscie_maks_m": round(E.RES["SWD.02g"]["przejscie"], 1),
+        "zgodnosc_bez_zwiekszen": not any(v["cat"] >= 2 for v in E.RES.values()),
+        "holy_A1A2_min_m": {"S": round(E.dA_min["S"], 2), "ANT": round(E.dA_min["ANT"], 2)},
+        "MOE_przedsionki": {k: [round(x, 2) for x in v["moe"].bounds] for k, v in E.MOE.items() if v},
+        "strefy_dymowe": "(1) sala + galeria; (2) hol SWD.02 + antresola radnych + schody – samoczynne oddymianie (SSP); (3) kuluar +"
+                         " korytarz publiczny + hol P1/P2 – samoczynne oddymianie (SSP, § 247 ust. 1); przedsionki – nadciśnienie",
     }
     d["kondygnacja_sejmiku"] = ks
 
@@ -111,29 +139,45 @@ def build():
     r["A"]["sklad"] = [
         "klatka A obudowana REI 60, 3,40 × 5,80 m w świetle: 2 biegi 1,60 m (M.13), stopnie ≤ 17,5 × 28 cm, spoczniki ≥ 1,50 m; "
         "kond. −1/P i P/1 – 3 biegi (spocznik kondygnacyjny parteru na końcu pn.); do antresoli +30,90",
-        "przedsionek ppoż. A 3,10 × 5,80 m z MOE 1,5 × 1,5 m, krzesłem ewakuacyjnym i interkomem, nadciśnienie; drzwi pd. (kuluar S, hol strefy "
-        "środkowej 1–6, Hala P), wsch. (łącznik S, garaż), na +30,90 wsch. na galerię; przedsionek A' (antresola radnych) przy ścianie zach. klatki",
-        "dźwigi A1, A2 1 600 kg, kabiny 1,5 × 2,1 m, szyby 2,25 × 2,55 m, drzwi pn. na wszystkich kondygnacjach (S-3): hol S/ANT 5,95 m, "
-        "łącznik pn. P, korytarz pn. kond. 1–6 2,15 m, przedsionek dźwigów −1/−2 (pas 7,20 × 1,75 m)",
+        "przedsionek ppoż. A 3,10 × 5,80 m z MOE 1,5 × 1,5 m (poza torem 1,2 m i polem otwierania skrzydeł – _s2_ewakuacja.py [E6]),"
+        " krzesłem ewakuacyjnym i interkomem, nadciśnienie; drzwi pd. (kuluar S, korytarz publiczny +30,90, hol strefy środkowej 1–6,"
+        " Hala P), wsch. (łącznik S, galeria +30,90, garaż); przedsionek A' 2,50 × 3,00 m (antresola radnych) przy ścianie zach. klatki,"
+        " drzwi do klatki 1,0 m przy spoczniku",
+        f"dźwigi A1, A2 1 600 kg, kabiny 1,5 × 2,1 m, szyby 2,25 × 2,55 m, drzwi pn. na wszystkich kondygnacjach (S-3): hol S i +30,90"
+        f" – wolna głębokość od lica trzonu min. {pl(min(E.dA_min.values()))} m (A1, do biegu schodów / otworu nad biegiem; M.13 3,6 m,"
+        f" zapas {pl(min(E.dA_min.values()) - 3.6)} m), łącznik pn. P, korytarz pn. kond. 1–6 2,15 m, przedsionek dźwigów −1/−2 (pas 7,20 × 1,75 m)",
         "dźwig R dla ekip ratowniczych PN-EN 81-72 i ewakuacyjny PN-EN 81-76, 1 000 kg, kabina 1,1 × 2,1 m, szyb 1,80 × 2,55 m REI 60, drzwi pd. do przedsionka A",
         "v1.2 (I5): trzon wydłużony o 0,60 m na pd. (v 12,45 → 11,85; ściana pd. 0,20 m) – kosztem holu strefy środkowej (kond. 1–6), Hali (P) i kuluaru S (2,20 → 1,75 m przy trzonie)",
     ]
     r["A"]["uklad_uv"] = {k: ring_uv(g) for k, g in cA.items()}
-    r["A"]["drzwi_dzwigow"] = [x for x in S3["trzony_uklad"]["drzwi_dzwigow"] if x["dzwig"].startswith("A")] + \
-        [{"dzwig": "R", "uv": [14.35, 18.05], "kierunek": [0, -1], "przystanki": "−2…S, ANT (do przedsionka A)"}]
+    # v1.2-fix: pełne listy przystanków (zgodnie z „sklad”); lokalna lista S-3 (S/ANT) zostaje w kondygnacja_sejmiku.trzony_uklad
+    r["A"]["drzwi_dzwigow"] = [
+        {"dzwig": "A1", "uv": [9.60, 20.85], "kierunek": [0, 1], "przystanki": list(SEQ_ALL), "uwaga": "drzwi pn. na wszystkich kondygnacjach"},
+        {"dzwig": "A2", "uv": [11.85, 20.85], "kierunek": [0, 1], "przystanki": list(SEQ_ALL), "uwaga": "drzwi pn. na wszystkich kondygnacjach"},
+        {"dzwig": "R", "uv": [14.35, 18.05], "kierunek": [0, -1], "przystanki": list(SEQ_ALL),
+         "uwaga": "drzwi pd. do przedsionka A (dźwig dla ekip ratowniczych i ewakuacyjny)"},
+    ]
     r["A"]["klatka"] = klatka_json(T.resA, "spocznik kondygnacyjny na końcu pd. (v 12,05–13,55) na wszystkich kondygnacjach poza P (koniec pn.)")
     cB = S2.CORE_B_CELLS
     r["B"]["pow_m2"] = round(S2.CORE_B.area, 2)
     r["B"]["zakres"] = "−2…S + antresola +30,90"
     r["B"]["sklad"] = [
         "klatka B obudowana REI 60, 3,40 × 6,64 m w świetle: 2 biegi 1,60 m na każdej kondygnacji (P: 2 × 14 stopni 17,14 × 28 cm), spoczniki ≥ 1,50 m; do antresoli +30,90",
-        "przedsionek ppoż. B 3,40 × 2,06 m z MOE 1,5 × 1,5 m i interkomem, nadciśnienie (v1.2: ściana klatka/przedsionek przesunięta o 0,29 m)",
+        "przedsionek ppoż. B 3,40 × 2,06 m z MOE 1,5 × 1,5 m w narożu SW (poza torem 1,2 m i polem otwierania skrzydła; drzwi N w u 27,80"
+        " – _s2_ewakuacja.py [E6]) i interkomem, nadciśnienie (v1.2: ściana klatka/przedsionek przesunięta o 0,29 m)",
         "dźwigi publiczne P1, P2 1 600 kg, kabiny 1,5 × 2,1 m, szyby 2,15 × 2,65 m, drzwi wsch.; P1 – przystanki P, 1–6, ANT; P2 przelotowy – −2, −1 "
         "(drzwi zach. do przedsionka B), P, 1–6, S (służbowy, na klucz), ANT",
         "szacht 2,15 × 3,20 m (po dźwigu T): przewód spalin agregatu, wyrzut wentylacji i oddymiania garażu, piony centrali S → lamele korony od pd.",
     ]
     r["B"]["uklad_uv"] = {k: ring_uv(g) for k, g in cB.items()}
-    r["B"]["drzwi_dzwigow"] = [x for x in S3["trzony_uklad"]["drzwi_dzwigow"] if x["dzwig"].startswith("P")]
+    r["B"]["drzwi_dzwigow"] = [
+        {"dzwig": "P1", "uv": [31.10, 5.475], "kierunek": [1, 0], "przystanki": ["P", "1", "2", "3", "4", "5", "6", "ANT"],
+         "uwaga": "drzwi wsch.; na S bez przystanku (strefa radnych)"},
+        {"dzwig": "P2", "uv": [31.10, 8.325], "kierunek": [1, 0], "przystanki": ["P", "1", "2", "3", "4", "5", "6", "S*", "ANT"],
+         "uwaga": "drzwi wsch.; S* – przystanek służbowy (klucz)"},
+        {"dzwig": "P2", "uv": [28.70, 8.325], "kierunek": [-1, 0], "przystanki": ["-2", "-1"],
+         "uwaga": "P2 przelotowy – drzwi zach. do przedsionka B na −2/−1"},
+    ]
     r["B"]["klatka"] = klatka_json(T.resB, "spocznik kondygnacyjny zawsze na końcu pn. (przy przedsionku B)")
     r["C"]["sklad"] = [
         "klatka C obudowana REI 60, 5,80 × 3,40 m w świetle (biegi wzdłuż s): 2 biegi 1,60 m (M.13; MDS 260 os. → 1,56 m), kond. −1/P i P/1 – 3 biegi",
@@ -158,7 +202,7 @@ def build():
             z["strefa"] = z["strefa"].replace("BESS 150 kWh 11", "BESS 100 kWh 11")
     d["podziemie"]["wymagane_MPZP"] = {
         "PU_m2": round(C.PU12, 2), "PU_gastronomia_m2": 88.47, "wymagane": C.REQ, "odczyt_ostrozny": C.REQ_CONS,
-        "wzor": f"12/1000 × (PU − PU_gastr.) + 6/1000 × PU_gastr. = {12 / 1000 * (C.PU12 - 88.47) + 6 / 1000 * 88.47:.2f} → {C.REQ}".replace(".", ","),
+        "wzor": f"12/1000 × (PU − PU_gastr.) + 6/1000 × PU_gastr. = {pl(12 / 1000 * (C.PU12 - 88.47) + 6 / 1000 * 88.47)} → {C.REQ}",
     }
     d["podziemie"]["MDS"]["wyjscia"] = ("−2: klatki A, B (środki klatek 19,8 m; obudowy 13,95 m – pomiar do potwierdzenia); −1: klatka C (bieg 1,60 m), "
                                         "rampa, szyb wyjścia zapasowego (91,75; 32,00) + tunel 7,6 m")
@@ -166,7 +210,7 @@ def build():
     b["PC_nadziemna_m2"] = C.PC_nad12
     b["PU_m2"] = round(C.PU12, 2)
     b["PU_definicja"] = ("PN-ISO 9836 – pomieszczenia kategorii PU (model pomieszczeń, F.15.A: 8 850,37 m²) skorygowane o kondygnację S-3 "
-                         f"({C.dPU:+.2f} m²: _v12_koszt.py [K0]); bez RU, US, PG")
+                         f"({'+' if C.dPU >= 0 else '−'}{pl(abs(C.dPU))} m² wobec bazy zamrożonej S + ANT modelu v1.1: _v12_koszt.py [K0]); bez RU, US, PG")
     b["koszt_mln_netto"] = round(C.RESULT["total"], 2)
     q = dict(C.km.REF)
     q.update(C.RESULT["P"])
@@ -188,7 +232,8 @@ def build():
                               "i oknom na pl. Społeczny i wieże katedry")
         if cam["id"] == "W8":
             cam["nastroj"] = ("światło dzienne z łuku za kamerą (za 4. rzędem, R ≈ 11 m od mównicy), prezydium przy pełnej ścianie pd.; "
-                              "47 stanowisk w 4 rzędach (4 dla wózków), galeria zach. z balustradą szklaną i publicznością")
+                              f"47 stanowisk w 4 rzędach (4 dla wózków), galeria zach. (nad WC i łącznikiem, między trzonem A a salą)"
+                              f" z balustradą szklaną, 2 rzędami i zatoką dla wózków ({S3['sala']['galeria']} + {S3['sala']['galeria_wozki']})")
     return d
 
 
@@ -287,12 +332,14 @@ def validate(d):
                if k.startswith(("SWD", "PHS", "PP", "IT")))
     print(f"     program S-3 (SWD + PHS.05 + PP.06 + IT.02): {prog:.2f} ≟ bilans.projekt_suma_m2 {bl['projekt_suma_m2']}")
     ok &= abs(prog - bl["projekt_suma_m2"]) < 0.05
-    print("[W6] MPZP i rzędne – bez zmian wobec wejścia")
-    same_b = json.dumps([x["dach"] for x in d["bryly"]], sort_keys=True) == json.dumps([x["dach"] for x in K0["bryly"]], sort_keys=True)
+    print(f"[W6] MPZP i rzędne – bez zmian wobec zamrożonego wejścia v1.1 ({V11['zrodlo'].split(' – ')[0]})")
+    same_b = json.dumps([x["dach"] for x in d["bryly"]], sort_keys=True) == json.dumps([x["dach"] for x in V11["bryly"]], sort_keys=True)
     keys = ("posadzka_wzgl", "posadzka_npm", "wysokosc_kondygnacji", "strop_nad", "dach", "plyta_denna")
-    same_k = all(json.dumps({kk: a.get(kk) for kk in keys}, sort_keys=True) == json.dumps({kk: b_.get(kk) for kk in keys}, sort_keys=True)
-                 for a, b_ in zip(d["kondygnacje"], K0["kondygnacje"]))
-    same_o = json.dumps([x["obrys_ccw"] for x in d["bryly"]]) == json.dumps([x["obrys_ccw"] for x in K0["bryly"]])
+    same_k = len(d["kondygnacje"]) == len(V11["kondygnacje"]) and all(
+        a["kondygnacja"] == b_["kondygnacja"] and
+        json.dumps({kk: a.get(kk) for kk in keys}, sort_keys=True) == json.dumps({kk: b_.get(kk) for kk in keys}, sort_keys=True)
+        for a, b_ in zip(d["kondygnacje"], V11["kondygnacje"]))
+    same_o = json.dumps([x["obrys_ccw"] for x in d["bryly"]]) == json.dumps([x["obrys_ccw"] for x in V11["bryly"]])
     dach = d["bryly"][0]["dach"]
     print(f"     dachy brył bez zmian: {same_b}; rzędne kondygnacji bez zmian: {same_k}; obrysy brył bez zmian: {same_o}")
     print(f"     wieża: najniższy pkt pokrycia {dach['najnizszy_pkt_pokrycia']['npm']} m n.p.m. = {dach['najnizszy_pkt_pokrycia']['nad_najwyzszym_terenem_A']} m"
