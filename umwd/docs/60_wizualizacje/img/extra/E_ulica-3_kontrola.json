@@ -51,13 +51,13 @@
  "ludzie": true,
  "probki": 64,
  "czasy_s": {
-  "kontekst_s": 10.6,
-  "budynek_s": 11.0,
+  "kontekst_s": 10.5,
+  "budynek_s": 11.4,
   "zrodlo_sceny": "budowa od zera",
-  "scena_s": 22.2,
-  "kontrola_s": 0.7,
+  "scena_s": 22.4,
+  "kontrola_s": 1.2,
   "render_s": 777.7,
-  "postprodukcja_s": 6.6
+  "postprodukcja_s": 8.5
  },
  "uwagi": [],
  "info": [
@@ -176,6 +176,7 @@
    "surowy_z_renderu": "/home/user/aihouse/umwd/build/ujecia_dodatkowe/E_ulica-3_surowy64.png",
    "mgla_woda": {
     "zrodlo_odleglosci": "Depth (pierwsza powierzchnia o alfie ≥ 0,5)",
+    "piksele_za_szyba_przyciete_do_lica": 185166,
     "Hs_m": 2.5,
     "rho0_1_m": 0.0065,
     "rampa_m": [
@@ -195,13 +196,13 @@
     "kadr_mgla_powyzej_5proc": 0.023,
     "kadr_mgla_powyzej_15proc": 0.012,
     "srodek_kadru_pass_vs_promien_m": [
-     73.56,
+     72.39,
      73.51
     ],
     "srodek_kadru_punkt": [
-     107.27,
-     69.58,
-     15.74
+     107.64,
+     70.68,
+     15.58
     ]
    },
    "cfg": {
@@ -226,7 +227,7 @@
    }
   },
   "wycinek": null,
-  "czas_calkowity_s": 48.6,
+  "czas_calkowity_s": 61.5,
   "kontrola_ulica3": {
    "az_osi_deg": 198.45,
    "pol_kat_lewo_deg": 29.36,
@@ -312,8 +313,8 @@
  "post_z_surowego": {
   "surowy_png": "/home/user/aihouse/umwd/build/ujecia_dodatkowe/E_ulica-3_surowy64.png",
   "probki_passow": 1,
-  "render_passow_s": 41.2,
-  "postprodukcja_s": 6.6,
+  "render_passow_s": 51.7,
+  "postprodukcja_s": 8.5,
   "opis": "passy (Depth, Mist, Object Index) z renderu 1 próbki tego samego kadru i sceny; obraz – surowy PNG renderu finalnego (próbki i czas niżej)"
  }
 }

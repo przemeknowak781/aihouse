@@ -132,6 +132,30 @@ def latarnie_w_kadrze(sc):
     return out
 
 
+def ludzie_foto_w_kadrze(sc):
+    """Sylwetki w scenie: metaballe ``czlowiek_*`` i wycinki fotograficzne ``foto_czlowiek_*`` (budynek3d_ludzie_foto,
+    od 17.11 domyślne – ``ujecia_dodatkowe.render_ujecia`` ich nie widzi i raportuje „ludzie: false”, choć się renderują).
+    Rzut obwiedni każdej widocznej w renderze sylwetki na kadr."""
+    from bpy_extras.object_utils import world_to_camera_view
+    cam = sc.camera
+    out = dict(metaballe=0, foto=0, w_kadrze=[])
+    for ob in sc.objects:
+        n = ob.name
+        if n.startswith('czlowiek_'):
+            out['metaballe'] += 1
+        elif n.startswith('foto_czlowiek'):
+            out['foto'] += 1
+        else:
+            continue
+        if ob.hide_render or ob.type not in ('MESH', 'META', 'EMPTY', 'CURVE'):
+            continue
+        bb = [ob.matrix_world @ Vector(c) for c in ob.bound_box]
+        vs = [world_to_camera_view(sc, cam, p) for p in bb]
+        if any(v.z > 0 and 0.0 <= v.x <= 1.0 and 0.0 <= v.y <= 1.0 for v in vs):
+            out['w_kadrze'].append(dict(obiekt=n, y_max=round(max(v.y for v in vs if v.z > 0), 3)))
+    return out
+
+
 def pomiar_zd3(jpg, pl):
     from PIL import Image
     out = {}
@@ -195,6 +219,11 @@ def _render_ujecia_p(sc, k, a, DZ, kat, czasy, out_jpg):
             ', '.join(x['obiekt'] for x in wk) or 'brak',
             '; '.join('%(obiekt)s %(odl_poz_m).1f m y_max %(y_max).3f x %(x0).2f…%(x1).2f' % x
                       for x in r['latarnie_w_kadrze'][:4])))
+    try:
+        r['ludzie_scena'] = ludzie_foto_w_kadrze(sc)
+        print('[zd3] sylwetki w scenie: metaballe %(metaballe)d, foto %(foto)d; w kadrze: %(w_kadrze)s' % r['ludzie_scena'])
+    except Exception as e:
+        r['ludzie_scena'] = repr(e)
     r['winieta'] = dict(SHIM3.raport)
     if r.get('jpg') and Path(r['jpg']).exists() and not FK.ARGS_EXTRA.wycinek:
         try:

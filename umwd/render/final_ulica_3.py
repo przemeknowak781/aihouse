@@ -168,7 +168,8 @@ def _smooth(x, a, b):
 
 def przytnij_do_obrysu(D, kier, loc, niebo, zapas=0.3):
     """Piksele, których punkt (z passu Depth) leży w obrysie brył projektowanych poniżej attyki: D := odległość, przy
-    której promień wchodzi w obrys (przecięcie odcinków w rzucie, wektorowo). Zmienia D w miejscu; zwraca liczbę pikseli."""
+    której promień wchodzi w obrys (przecięcie odcinków w rzucie, wektorowo). Zmienia D w miejscu; zwraca liczbę pikseli
+    z punktem > 1,5 m za licem (widok przez szkło; pozostałe – lico z reliefem w buforze obrysu, zmiana < 1,5 m)."""
     import shapely
     from shapely.ops import unary_union
     bryly, _ = U.obrysy_bryl()
@@ -204,8 +205,9 @@ def przytnij_do_obrysu(D, kier, loc, niebo, zapas=0.3):
         ok = (np.abs(den) > 1e-9) & (t > 0) & (sg >= 0) & (sg <= 1)
         t_min[sl] = np.where(ok, t, np.inf).min(axis=1)
     fin = np.isfinite(t_min) & (t_min < D[jj, ii])
+    za_szyba = int((fin & (D[jj, ii] - t_min > 1.5)).sum())     # punkt > 1,5 m za licem – widok przez szkło
     D[jj[fin], ii[fin]] = t_min[fin]
-    return int(fin.sum())
+    return za_szyba
 
 
 def _post_przed_p(png, passy, cfg, raport):
@@ -272,7 +274,7 @@ def _post_przed_p(png, passy, cfg, raport):
     Image.fromarray(out).save(png)
     woda = np.abs(idx - FK.IDX_WODY) < 0.5
     f = 1 - T
-    info = {'mgla_woda': dict(zrodlo_odleglosci=zrodlo, piksele_przyciete_do_lica=n_szyby, Hs_m=Hs, rho0_1_m=rho0, rampa_m=[d0, d1], dmax_m=dmax,
+    info = {'mgla_woda': dict(zrodlo_odleglosci=zrodlo, piksele_za_szyba_przyciete_do_lica=n_szyby, Hs_m=Hs, rho0_1_m=rho0, rampa_m=[d0, d1], dmax_m=dmax,
                               barwa_lin=[round(float(x), 4) for x in fog],
                               luminancja_nieba_przy_horyzoncie=round(Lh, 4),
                               udzial_mgly_max=round(float(f.max()), 3),
