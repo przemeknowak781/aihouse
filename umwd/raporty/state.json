@@ -30,11 +30,11 @@
    "running"
   ],
   [
-   "Production ►: drawings → v1.1 (workflow ►); plans re-run after S-2; photomatch tests ✔; extra showcase renders (workflow ►)",
+   "Production ►: drawings v1.1 ✔ (verified); plans + tables re-run after v1.2; photomatch W1/W2 tests ✔; extra showcase renders (workflow ►)",
    "running"
   ],
   [
-   "Boards ►: Stage II 8/8 skeletons with true-scale drawings (vis pending); Stage I 2/2; tables F.15/F.14.B ✔ (draft)",
+   "Boards & texts ►: Stage II 8/8 skeletons (vis pending, P7/P8 re-layout); Stage II text 5 × A3 + Stage I text + F.14.A (workflow ►); 300-dpi export ✔",
    "running"
   ],
   [
@@ -43,10 +43,9 @@
   ]
  ],
  "notes": [
-  "Extra showcase renders (your request): ~9 camera stations scouted at low resolution: golden hour from the Oder, Most Grunwaldzki, low corner view of the lantern. The best are going to full-quality renders.",
-  "Vis 6 hall pass 2: axis to the garden, slat ceiling, lapidarium. Still too dark, with schematic figures → another pass.",
-  "300-dpi export ready (11 811 × 8 268 px, ≈ 9 MB). Final renders must be ≥ 4 000–5 800 px wide.",
-  "Texts (Stage II 5 × A3, Stage I + F.14.A): being drafted, then 4 independent checks."
+  "Drawings v1.1 done (6 agents, verified): new courtyard elevation of the segment, groundwater and clay on sections, 1:50 wing façade section; mirrored idea axonometries caught and fixed.",
+  "Stage II text drafted with numbers bound to the model: 6 A3 pages now, being cut to the 5-page limit after 4 independent checks.",
+  "Night test of the lantern: warm crown over cool office floors. Needs more blue-hour sky light."
  ],
  "images": [
   {

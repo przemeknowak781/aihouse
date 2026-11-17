@@ -622,6 +622,10 @@ def literal_numbers(lines, first_ln, ledger):
         s = re.sub(r"^\s*\d+[.)]\s", " ", s)                               # numeracja listy
         s = re.sub(r"\b\d+(?:\.\d+)+\b", " ", s)                          # 7.1, 17.11.2026 – identyfikatory/daty
         s = re.sub(r"\b(?:Tabela|Tab\.|Rys\.|rys\.|Plansza|plansza|Wyj\.|odp\.|Etap|etap)\s*[A-Z]?\d+", " ", s)  # numeracja
+        s = re.sub(r"(?:§|\bart\.|\bust\.|\bpkt|\blit\.|\bpoz\.|\bdz\.|\bnr|\bISO|\bEN|\bPN|\bWT|\bDz\.\s?U\.)"
+                   r"[\s\u00a0]*\d+(?:/\d+)?(?:[\s\u00a0]*(?:i|oraz|,)[\s\u00a0]*\d+)*", " ", s)      # § 13, PN-ISO 9836, dz. 9/2
+        s = re.sub(r"\b(?:1[89]\d\d|20\d\d)(?=[\s\u00a0]*(?:r\.|roku\b|rok\b))", " ", s)                    # 1934 r., 2026 roku
+        s = re.sub(r"\b(?:19|20)\d\d/\d+\b", " ", s)                                                     # (UE) 2024/1275
         for m in LIT_RE.finditer(s):
             tok = m.group(0)
             if norm_num(tok) not in known:
@@ -1012,7 +1016,7 @@ def part_l(part):
 def summary(rep, st, L):
     t = rep["czesci"]["tekst"]
     log(f"── {st['label']}: {rep['zrodlo']} → {rep['pdf']}")
-    log(f"   modele: " + ", ".join(f"{m['plik']} [{m['wersja']}, sha1 {m['sha1']}]" for m in rep["modele"].values()))
+    log("   modele: " + ", ".join(f"{m['plik']} [{m['wersja']}, sha1 {m['sha1']}]" for m in rep["modele"].values()))
     log(f"   placeholdery: {rep['placeholdery']} rozwiązanych · LEDGER: {rep['ledger_pozycje']} poz. · "
         f"liczby dosłowne spoza LEDGER: {len(rep['liczby_spoza_ledger'])}")
     flag = "OK" if t["strony"] <= st["limit"] else "PRZEKROCZONY LIMIT"
@@ -1129,7 +1133,9 @@ def build_zeszyt(stage, allow_missing, png=True, src=None, outdir=OUT):
         raise OpisError(f"brak {src} – zeszyt wymaga tekstu (fixture'y: --test)")
     rep = render_stage(stage, src, outdir, png=png)
     if rep["kod"] == 2:
-        raise OpisError("tekst przekracza limit stron – zeszyt nie zostanie złożony")
+        e = OpisError("tekst przekracza limit stron – zeszyt nie zostanie złożony")
+        e.code = 2
+        raise e
     if rep["kod"]:
         raise OpisError(f"kontrola tekstu nie przeszła (kod {rep['kod']}) – zeszyt nie zostanie złożony")
     comps = [(f"Część opisowa – tekst ({st['label']})", outdir / f"{st['name']}.pdf")]

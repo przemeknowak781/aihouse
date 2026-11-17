@@ -246,5 +246,21 @@
  "0d433023b495c2683a50": {
   "path": "umwd/raporty/img/W6_hol_test_v2.jpg",
   "board": "spec_30"
+ },
+ "c694ffde41ed49dd07f5": {
+  "path": "umwd/raporty/img/przekroje_v11b.png",
+  "board": "spec_31"
+ },
+ "5ede743b181b224f370d": {
+  "path": "umwd/raporty/img/skrzydlo_1-50.png",
+  "board": "spec_31"
+ },
+ "267f113339a6d59c5929": {
+  "path": "umwd/raporty/img/opis_etap2_s1.png",
+  "board": "spec_31"
+ },
+ "7077d2cf7ccc36159492": {
+  "path": "umwd/raporty/img/W9_noc_test.jpg",
+  "board": "spec_31"
  }
 }

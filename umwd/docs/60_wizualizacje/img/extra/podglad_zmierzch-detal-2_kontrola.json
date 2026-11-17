@@ -1,0 +1,144 @@
+{
+ "id": "zmierzch-detal-2",
+ "opis": "",
+ "preset": "zmierzch",
+ "czas": "2026-11-05 17:40 CET",
+ "slonce": {
+  "az": 260.79,
+  "el": -12.95,
+  "ekspozycja": -0.4,
+  "czas": "2026-11-05T17:40:00+01:00",
+  "udzial_opraw": 0.35,
+  "latarnie": 22
+ },
+ "kamera": {
+  "loc": [
+   116.25,
+   86.05,
+   1.915
+  ],
+  "cel": [
+   103.15,
+   73.71,
+   1.9
+  ],
+  "z_wzgl_kamery": 1.865,
+  "lens_mm": 50.0,
+  "shift_x": 0.0,
+  "shift_y": 0.105,
+  "poziom": true,
+  "rozdzielczosc": [
+   480,
+   320
+  ],
+  "sensor_fit": "AUTO (36 mm na dłuższym boku)"
+ },
+ "ludzie": false,
+ "probki": 16,
+ "czasy_s": {
+  "wczytanie_blend_s": 0.4,
+  "zrodlo_sceny": "/tmp/claude-0/-home-user-aihouse/3267b8b5-f709-5d54-b008-7221ccbc0b4f/scratchpad/zmierzch_detal/scena_zd.blend",
+  "scena_s": 0.4,
+  "kontrola_s": 0.7,
+  "render_s": 24.6,
+  "postprodukcja_s": 0.3
+ },
+ "uwagi": [],
+ "info": [
+  "attyka wieży (narożnik bliższy kamerze) wychodzi poza górną krawędź kadru"
+ ],
+ "promienie": [
+  "oś: latarnia_14 16.6 m",
+  "L-dół: wieza_szklo 20.8 m",
+  "P-dół: wieza_elewacje 27.9 m",
+  "L-góra: wieza_elewacje 18.0 m",
+  "P-góra: wieza_szklo 22.1 m",
+  "dół: mala_architektura 13.8 m"
+ ],
+ "udzialy_kadru": {
+  "budynek": 0.841,
+  "teren": 0.107,
+  "zagospodarowanie": 0.042,
+  "ulica": 0.01
+ },
+ "zaslona_pierwszego_planu": 0.0,
+ "najblizsza_przeszkoda": {
+  "obiekt": "teren_chodnik_kb",
+  "odl_m": 1.65
+ },
+ "oko_nad_podlozem_m": 1.65,
+ "podloze": "teren_chodnik_kb",
+ "budynek_w_kadrze": {
+  "wieża": {
+   "x0": -0.762,
+   "x1": 1.137,
+   "y0": 0.114,
+   "y1": 4.67,
+   "rzut_w_kadrze": true,
+   "uciete": [
+    "lewo",
+    "prawo",
+    "góra"
+   ]
+  },
+  "skrzydło": {
+   "x0": 0.175,
+   "x1": 1.147,
+   "y0": 0.259,
+   "y1": 1.188,
+   "rzut_w_kadrze": true,
+   "uciete": [
+    "prawo"
+   ]
+  },
+  "segment": {
+   "x0": -0.957,
+   "x1": 0.023,
+   "y0": 0.196,
+   "y1": 1.829,
+   "rzut_w_kadrze": true,
+   "uciete": [
+    "lewo",
+    "góra"
+   ]
+  }
+ },
+ "punkty_kluczowe": {
+  "Brama Mostowa – napis (+5,2)": {
+   "w_kadrze": true,
+   "x": 0.517,
+   "y": 0.747,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 17.5
+  },
+  "korona – lamele łuku (+31,7)": {
+   "w_kadrze": false,
+   "x": 0.517,
+   "y": 3.962,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 34.4
+  },
+  "attyka wieży (+37,2)": {
+   "w_kadrze": false,
+   "x": 0.517,
+   "y": 4.629,
+   "widoczny": true,
+   "zaslania": null,
+   "odl_m": 39.3
+  },
+  "cel kamery": {
+   "w_kadrze": true,
+   "x": 0.5,
+   "y": 0.341,
+   "widoczny": false,
+   "zaslania": "latarnia_14",
+   "odl_m": 18.0
+  }
+ },
+ "horyzont_y": 0.342,
+ "pochylenie_deg": 0.0,
+ "png": "/home/user/aihouse/umwd/build/ujecia_dodatkowe/podglad_zmierzch-detal-2.png",
+ "jpg": "/home/user/aihouse/umwd/docs/60_wizualizacje/img/extra/podglad_zmierzch-detal-2.jpg"
+}

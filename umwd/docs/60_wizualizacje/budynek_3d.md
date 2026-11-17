@@ -237,23 +237,22 @@ w odbiciach, oświetlenie nadal z nieba fizycznego i słońca). Obrót panoramy 
 zdjęciu. Siła 12: odbicia czytelne w koronie i oknach wstęgowych łuku, szkło nie staje się lustrem (22 – korona
 jak lustro, 9 – efekt niewidoczny). Domyślnie `m09_30` w `testy_budynek.py` (`--odbicia brak` wyłącza).
 
-## 6. Czasy (CPU 4 rdzenie, 1000 × 667 px, adaptacyjnie, OIDN)
+## 6. Czasy testów (CPU 4 rdzenie współdzielone, obciążenie innymi procesami 4–6, `nice -n 5`, adaptacyjnie, OIDN)
 
-| Etap / obraz | Próbki | Czas |
-|---|---|---|
-| budowa kontekstu | – | 9–10 s |
-| budowa budynku (wnętrza, dachy, otoczenie, pnącza, 34 sylwetki) | – | 4,5–5 s |
-| W3 Brama Mostowa | 32 | 40,6 s |
-| W4 Wybrzeże Słowackiego 5 | 32 | 56,9 s |
-| W5 Mazowiecka 19 | 24 | 39,5 s |
-| W9 latarnia (zmierzch, emisja wnętrz) | 32 | 48,7 s |
-| detal_podcien | 32 | 54,0 s |
-| plac_mostowy | 32 | 54,6 s |
-| lot_ptaka | 24 | 36,6 s |
+| Etap / obraz | Rozdzielczość | Próbki | Czas |
+|---|---|---|---|
+| budowa kontekstu | – | – | 9–10 s |
+| budowa budynku (z napisem wykutym, otoczeniem, 34 sylwetkami) | – | – | 12–13 s (wieża 5 s – triangulacja lica z literami) |
+| W3 Brama Mostowa | 1200 × 830 | 32 | 131 s |
+| W4 WS 5 | 1200 × 640 | 32 | 107 s |
+| W5 Maz. 19 | 1200 × 876 | 32 | 125 s |
+| W10 ogród | 1200 × 800 | 32 | 217 s |
+| W6 Hala Obywatelska (wnętrze, 63 lampy) | 1500 × 508 | 48 | 163 s |
+| W1 fotomatch F.17.A (1/3, ramka 8 % klatki) | 2821 × 1490 | 64 | 66 s + maski 6 s |
+| W2 fotomatch F.17.B (1/3, ramka 18 % klatki) | 2651 × 1500 | 64 | 157 s + maski 6 s |
 
-Każdy obraz to osobny proces (`kontekst + budynek + render` ≈ 55–70 s); obrazy są zapisywane od razu, raport
-kumuluje się w `build/budynek_test_raport.json`. Scena: ok. 1 mln ścian geometrii budynku + kontekst; pamięć
-procesu ok. 1,3 GB. Szacunek finalny (metodyka §11.3): 3150 px / 256 próbek ≈ 25–45 min na ujęcie dzienne.
+Każdy obraz to osobny proces; raport kumuluje się w `build/budynek_test_raport.json` (fotomatch:
+`build/fotomatch/F17?_raport.json`). Pamięć procesu testowego ok. 1,5–2 GB.
 
 ## 7. Czego brakuje / do poprawy
 
@@ -285,15 +284,17 @@ Próbkowanie adaptacyjne (próg 0,02) + OIDN w pełnej rozdzielczości, `nice -n
 
 | Ujęcie | Pole [mm] | Proporcja | Rozdzielczość finalna | Próbki | Czas (szac.) |
 |---|---|---|---|---|---|
-| W1 F.17.A (fotomatch) | 578 × 340 | 1,70 | 7608 × 4475 (zdjęcie 8470 × 4475, przycięte) | 96 | 20–30 min (render tylko ramki budynku ~8 % klatki + maski) |
-| W2 F.17.B (fotomatch) | 366 × 206 | 1,78 | 7962 × 4481 | 96 | 30–40 min (ramka ~20 % klatki) |
-| W3 Brama Mostowa | 578 × 400 | 1,445 | 5800 × 4014 | 64 | 75–100 min |
-| W6 Hala Obywatelska | 578 × 196 | 2,95 | 5000 × 1695 | 96 | 60–80 min |
-| W4 WS 5 | 480 × 256 | 1,875 | 4000 × 2133 | 64 | 30–40 min |
-| W5 Maz. 19 | 464 × 339 | 1,37 | 4000 × 2920 | 64 | 35–50 min |
+| W1 F.17.A (fotomatch) | 578 × 340 | 1,70 | 7608 × 4475 (zdjęcie 8470 × 4475, przycięte) | 96 | 15–25 min (render tylko ramki budynku ~8 % klatki + maski) |
+| W2 F.17.B (fotomatch) | 366 × 206 | 1,78 | 7962 × 4481 | 96 | 35–45 min (ramka ~18 % klatki) |
+| W3 Brama Mostowa | 578 × 400 | 1,445 | 5800 × 4014 | 64 | 80–110 min |
+| W6 Hala Obywatelska | 578 × 196 | 2,95 | 5000 × 1695 | 96 | 55–75 min |
+| W4 WS 5 | 480 × 256 | 1,875 | 4000 × 2133 | 64 | 35–45 min |
+| W5 Maz. 19 | 464 × 339 | 1,37 | 4000 × 2920 | 64 | 40–50 min |
 
-Razem ok. 4,5–6 h CPU (sekwencyjnie, jedna klatka naraz). Budowa sceny 20–25 s na klatkę; pamięć ~1,5–3 GB
-(EXR fotomatchu w pełnej rozdzielczości ~600 MB na pass – katalog `build/fotomatch/`).
+Razem ok. 4,5–6 h (sekwencyjnie, jedna klatka naraz; przy wolnym CPU o ~30 % krócej). Budowa sceny 20–25 s na
+klatkę; pamięć renderów kamer 2–3 GB. **Fotomatch w pełnej rozdzielczości**: EXR ~600 MB na pass (4 passy) + tablice
+numpy kompozycji – szczyt ok. 7–9 GB RAM (maszyna 15 GB, bez swap) – uruchamiać, gdy inne procesy nie zajmują
+pamięci, albo po jednym zdjęciu.
 
 ## 8. Pliki
 

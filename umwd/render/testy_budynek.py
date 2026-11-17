@@ -57,7 +57,14 @@ KOREKTY = {
     # 33,1 m od lica łuku. Kadr w proporcji pola planszy 578 × 400 mm (1,445 : 1): ogniskowa 20 mm z przesunięciem
     # 0,276 (piony zachowane, posadzka podcienia z zapasem, ~2,5 m nieba nad attyką).
     # Wariant 24 mm z 37 m (107,5; 112,3; shift 0,26) – krzewy zasłaniają prawą część podcienia (patrz budynek_3d.md).
-    'W3': dict(kamera_e_n_z=(109.0, 107.5, 2.67), cel_e_n_z=(103.4, 74.1, 16.0), lens_mm=20, shift_y=0.276),
+    # Krzew istniejący 5 m na pd.-wsch. od stanowiska (poza osią widzenia, prawy dolny róg) – niewidoczny dla kamery
+    # (cień zostaje): fotograf stoi tuż przed nim; z 1 m dalej na zach. ten sam krzew zasłaniałby podcień.
+    'W3': dict(kamera_e_n_z=(109.0, 107.5, 2.67), cel_e_n_z=(103.4, 74.1, 16.0), lens_mm=20, shift_y=0.276,
+               ukryj_krzewy_m=7.0),
+    # W4, W5: kadr w proporcji pól planszy (1,875 / 1,37) – przy ogniskowej z JSON gzyms-attyka segmentu (W4)
+    # i styk gzymsu skrzydła z gzymsem Mazowieckiej 19 (W5) wypadały poza górną krawędź; szerszy obiektyw i shift.
+    'W4': dict(lens_mm=21, shift_y=0.18),
+    'W5': dict(lens_mm=24, shift_y=0.24),
     # W9: punkt (126; 152) leży na jezdni mostu, 3,8 m od osi; z chodnika widok przecinają krzyżulce kratownicy
     # (płaszczyzny ±9,6 m). Pozycja dobrana przeszukaniem promieni na drzewie BVH mostu (117 promieni kadru bez trafień w kratownicę,
     # łańcuchy i wieszaki): 38 m od portalu pd. (JSON: 35 m), 9,3 m od osi – tuż przy płaszczyźnie kratownicy
@@ -204,6 +211,14 @@ def main():
         cam = blib.camera(sc, (x, y, z + DZ), (tx, ty, tz + DZ), lens_mm=k['lens_mm'], level=k.get('poziom', True),
                           shift_y=k.get('shift_y', 0.0), name='K_' + kid)
         cam.data.clip_start = 0.2
+        ukryte = []
+        if k.get('ukryj_krzewy_m'):
+            for ob in bpy.data.objects:
+                if ob.instance_type == 'COLLECTION' and ob.instance_collection is not None and \
+                        'krzew' in ob.instance_collection.name and ob.visible_camera and \
+                        math.hypot(ob.location.x - x, ob.location.y - y) < k['ukryj_krzewy_m']:
+                    ob.visible_camera = False
+                    ukryte.append(ob)
         prop = k.get('proporcje', PROPORCJE_PLANSZ.get(kid, 1.5))
         sc.render.resolution_x = a.szer
         sc.render.resolution_y = int(round(a.szer / prop))
@@ -233,6 +248,10 @@ def main():
             zapisz_jpg(png, jpg, preset=preset)
             wpis.update(render_s=round(dt, 1), plik=str(jpg), postprodukcja=preset)
             print('[testy] %s: %.1f s → %s' % (kid, dt, jpg))
+        for ob in ukryte:
+            ob.visible_camera = True
+        if ukryte:
+            wpis['ukryte_krzewy'] = [o.name for o in ukryte]
         raport['kamery'][kid] = wpis
     # raport kumulowany (przebiegi po jednej kamerze dopisują swoje wpisy)
     plik_r = UMWD / 'build' / 'budynek_test_raport.json'

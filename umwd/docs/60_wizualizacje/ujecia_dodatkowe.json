@@ -237,6 +237,72 @@
    "ludzie": false,
    "preset": "dzien",
    "uwaga_render": "Podgląd renderowany przez render/ujecia_poprawki_kontekstu.py (te same argumenty co ujecia_dodatkowe.py): usuwa artefakty context.py widoczne z wody – ścianę 3,8 m w nurcie wzdłuż granicy ramki (e 152,5 / n 148,6) i fałszywą groblę z ortofotomapy pod Mostem Grunwaldzkim. Po poprawce context.zbuduj_dalsze można renderować wprost."
+  },
+  {
+   "id": "zmierzch-detal-1",
+   "cam": {
+    "e": 64.0,
+    "n": 120.0,
+    "z": 1.65,
+    "z_od": "teren"
+   },
+   "target": {
+    "e": 104.59,
+    "n": 75.15,
+    "z": 0.0
+   },
+   "lens_mm": 50,
+   "shift_x": 0,
+   "shift_y": 0.5,
+   "aspect": "4:5",
+   "czas": "2026-11-05 16:55 CET",
+   "ludzie": false,
+   "preset": "zmierzch"
+  },
+  {
+   "id": "zmierzch-detal-2",
+   "cam": {
+    "e": 116.25,
+    "n": 86.05,
+    "z": 1.65,
+    "z_od": "teren"
+   },
+   "target": {
+    "e": 103.15,
+    "n": 73.71,
+    "z": 1.85
+   },
+   "lens_mm": 50,
+   "shift_x": 0,
+   "shift_y": 0.105,
+   "aspect": "3:2",
+   "czas": "2026-11-05 17:40 CET",
+   "ludzie": false,
+   "preset": "zmierzch",
+   "ekspozycja": -0.4
+  },
+  {
+   "id": "zmierzch-detal-3",
+   "cam": {
+    "e": 111.98,
+    "n": 88.24,
+    "z": 1.6,
+    "z_od": "teren"
+   },
+   "target": {
+    "e": 103.42,
+    "n": 74.13,
+    "z": 21.98
+   },
+   "lens_mm": 40,
+   "shift_x": 0,
+   "shift_y": 0.0,
+   "aspect": "4:5",
+   "poziom": false,
+   "czas": "2026-11-05 16:45 CET",
+   "ekspozycja": 0.6,
+   "ludzie": false,
+   "preset": "zmierzch"
   }
  ]
 }
