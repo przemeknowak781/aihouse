@@ -2394,7 +2394,7 @@ def _obrot_panoramy(u_slonca, az_slonca=AZ_SLONCA_M09):
     return math.radians(az_slonca - az_p)
 
 
-def dodaj_odbicia_panoramy(sc, klucz='m09_30', sila=22.0):
+def dodaj_odbicia_panoramy(sc, klucz='m09_30', sila=12.0):
     """Panorama M.09 jako środowisko widoczne TYLKO w promieniach odbitych (Light Path → Is Glossy Ray):
     szkło, metal, woda odbijają prawdziwe miasto; oświetlenie i tło kadru zostają z nieba fizycznego.
     Zwraca węzeł obrazu lub None (brak pliku)."""
@@ -2436,7 +2436,7 @@ def czas_kamery(txt):
 
 
 def swiatlo_dzienne(sc, czas, ekspozycja=None, sila_slonca=1.0, sila_nieba=1.0, aerozole=1.6, chmury=0.35,
-                    wb=None, odbicia=None, odbicia_sila=22.0):
+                    wb=None, odbicia=None, odbicia_sila=12.0):
     """Niebo fizyczne (Multiple Scattering, ``sun_rotation`` = azymut kompasowy w siatce) + lampa Sun wg kalibracji
     (bez tarczy na niebie – cienie kontrolowane lampą). Azymut siatki = azymut geograficzny + 0,738°.
     ``odbicia``: 'm09_30' | 'm09_40' | 'm09_45' | ścieżka panoramy – środowisko tylko dla promieni odbitych.

@@ -4,6 +4,7 @@
 Uruchomienie (z katalogu umwd/):
     /home/user/aihouse/.venv-render/bin/python -I -W ignore docs/20_koncepcja/_rewizja_json.py [--zapisz]
 Bez --zapisz tylko sprawdza (diff kluczy, poprawność wielokątów). Liczby z `_rewizja_*.py`.
+Przekształcenie jest idempotentne (ponowne uruchomienie na pliku v1.1 daje ten sam wynik).
 """
 import copy
 import json
@@ -57,10 +58,13 @@ def build():
     b["S"]["dach"]["attyka"]["balustrada_szklana"] = "1,10 m, cofnięta 1,5 m od lica pd. (140,20)"
     b["S"]["dach"]["attyka"]["wysiegi_m"] = {"lico_wsch_(Wybrzeze)": 0.0, "lico_zach_(dziedziniec)": 0.30}
     b["S"]["dach"]["taras_pow_m2"] = 135.3
+    b["S"]["dach"]["strop_wierzch"] = 19.1      # P-D10: 0,70 m na izolację, spadki, retencję 10 m³ i donice; kond. 4 segmentu 2,87 m w świetle
     d["zabudowa"] = {"pow_zabudowy_m2": 2165.8, "udzial_w_OI_proc": 58.1}
 
     # ---------------------------------------------------------------- kondygnacje i siatka
     for k in d["kondygnacje"]:
+        if k["kondygnacja"] == "4":
+            k["strop_nad"].update({"dach_segmentu_wierzch": 19.1, "dach_segmentu_spod": 18.82})
         if k["kondygnacja"] == "-2":
             k.update({"posadzka_wzgl": -7.2, "posadzka_npm": 112.1, "wysokosc_kondygnacji": 3.0,
                       "zakres": ["wieza", "segment", "pas dziedzinca 5 m", "skrzydlo od s = 12,15 (bez M1 przy Maz. 19)"],

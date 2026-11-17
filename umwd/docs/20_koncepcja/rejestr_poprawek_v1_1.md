@@ -1,6 +1,6 @@
 # Rejestr poprawek – specyfikacja „BRAMA I LATARNIA” v1.0 → v1.1 (po weryfikacji)
 
-**Stan:** 17.11.2026 · w toku (plik aktualizowany etapami) · Przedmiot: `koncepcja_wybrana.md`, `model/koncepcja.json`.
+**Stan:** 17.11.2026 · **zakończona** (wszystkie pozycje KRYTYCZNE i ISTOTNE z zakresu rozstrzygnięte; P-I8 częściowo – opis w wierszu) · Przedmiot: `koncepcja_wybrana.md`, `model/koncepcja.json`.
 **Źródła zadań:** `weryfikacja_geometria.md` (G-), `weryfikacja_koszt_eko.md` (E-), `weryfikacja_program.md` (P-).
 **Wyłączone:** kondygnacja Sejmiku (P-K1, P-K2, P-K3, P-I1, P-I4) – osobne opracowanie `kondygnacja_S2.md` + `kondygnacja_S2.json`; klucz `kondygnacja_sejmiku` w JSON i rozdz. 7 MD bez zmian (tylko odsyłacz).
 **Zasada wyłączenia:** nie korzystano z informacji o rzeczywistych pracach ani wynikach konkursu.
@@ -37,3 +37,76 @@
 | KOORD-2 | IST. | Rezerwa (contingency) 5 % w koszcie bazowym, wymóg ≥ 4 % spełniony; wariant 4 % pokazany kontrolnie | `_rewizja_koszt.py` | tabela 12 | ✅ |
 | KOORD-3 | IST. | Ścieżki ogrodu (101 m² na zachowanych ogródkach) – **przeprowadzone poza poligonem ogródków** (obrzeżem, wzdłuż granicy ogródków, na podbudowie przepuszczalnej poza strefami korzeni); w ogródkach wyłącznie istniejące ścieżki i trawnik (bez korytowania, M.06 rozdz. 6). Zachowane ogródki w bilansie: 469,5 m² jako teren biologicznie czynny | `_rewizja_drzewa.py` (strefy), rozdz. 9 | plan zagospodarowania 1:500 (`tools/zagospodarowanie.py` – do przerysowania ścieżek) | ✅ (opis); rysunek do aktualizacji |
 | KOORD-4 | DROBNY | Dach zielony / taras segmentu: **135,3 m²** (wnętrze attyki, model pomieszczeń D.*) w F.14.B (`dach_int`), F.15.C i PBC (50 % × 135,3 = 67,6 m²) | `_rewizja_koszt.py` | tabela 12, JSON `bilans.PBC_m2` | ✅ |
+
+## Uwagi modelu pomieszczeń (koordynator, 17.11) – rozstrzygnięcia
+
+| Uwaga | Decyzja v1.1 | Dowód | Status |
+|---|---|---|---|
+| (1) garaż 41/109 m.p. | patrz **PARK** – 110 m.p. (78 na posadzce + 32 w stackerach), siatka garażu w trójkach 3 × 2,50 m, bez transferu | `_rewizja_parking.py` | ✅ |
+| (2) słupy v 8,10 / 21,60 w korytarzach | osie v = 0 / **8,70 / 16,00 / 23,15** / 29,70; słupy 0,60 × 0,35 m w licach ścian korytarzy (od strony pokoi pn. słup wchodzi ≤ 0,25 × 0,23 m w narożnik pokoju – pokój ≥ 24,0 m²); rozpiętości ≤ 8,70 m (płyta sprężona 0,28 m, L/d 31) | `_rewizja_parking.py` (V_COLS) | ✅ (do przerysowania w modelu) |
+| (3) trakt skrzydła 15,0 m | 0,47 + 6,08 + 0,10 + 1,70 + 0,10 + 6,08 + 0,47 = 15,00; pokój 24,02 m², korytarz 1,70 m; ściana z wełną 240 mm λ 0,031 (U 0,144) | `_rewizja_elewacje.py` | ✅ |
+| (4) kond. 5–6 przepełnione | patrz P-I2 / P-I8 (21/22 i 20/20 j.; KS.05 i DRA.OCZ wracają na kond. 6; KS.05 bez okna – częściowo) | – | ⚠ |
+| (5) hol przed P1/P2 2,2 m | WT § 195 ≥ 1,6 m ✔; M.13 3,6 m – świadome odstępstwo opisane (rozdz. 5) | – | ✅ |
+
+## Pozycje DROBNE poprawione (tanio)
+
+| ID | Decyzja |
+|---|---|
+| G-D-1 | attyka ściany pd. segmentu 139,10 + balustrada cofnięta 1,5 m → § 13 zapas 1,58 m (H 120,0) / 1,18 m (H 119,2); 3,58 m dla okna lok. 6/6A |
+| G-D-2 | wykładnia § 13 ust. 1 pkt 1 lit. b (analiza schodkowa) zapisana w rozdz. 13 |
+| G-D-3 | styk skrzydło/wieża – pionowa listwa na licu wieży; pokrycia skrzydła i tarasu do u ≤ −0,05 / v ≤ −0,05 |
+| G-D-4 | zakaz jakiegokolwiek wysięgu na licach wieży (rozdz. 4.1, 8) |
+| G-D-5 | szkło korony R 13,40, lamele 13,40–14,00 (rzut sali – `kondygnacja_S2.md`) |
+| G-D-6 | § 60: azymuty 245–321° i 309–355°, godziny 15:45–15:55 / 16:30–16:40, ≈ 3,8 h (rozdz. 13) |
+| G-D-7 | brama 17,4 m od okna lok. 6/6A (do krawędzi) |
+| G-D-8 | rampa „częściowo pod segmentem, ogon pod dziedzińcem” |
+| G-D-9 | jednostki w narożu wklęsłym segment/wieża – pomieszczenia pomocnicze (korekta (g)) |
+| G-D-10 | teren skrzydła 118,36 / 119,43 → 20,07 / 21,79 m; ogród niezabudowany 1 563 m²; lico wsch. wieży 0,585–0,625 m |
+| G-D-11 | wyrzutnie garażu – szacht w trzonie B do lameli korony od pd. |
+| G-D-12 | fuga/uskok 0,30 m przy Maz. 19, rzędna attyki nr 19 „do potwierdzenia pomiarem” |
+| E-D-1 | wejście modelu kosztów zapisane: `_rewizja_koszt_wejscie_v1_1.json` (wszystkie klucze) |
+| E-D-2 | korekty spoza modelu objęte KS i rezerwą |
+| E-D-3 | ogródki – pielęgnacja zamiast nowej zieleni (−0,20 mln) |
+| E-D-4 | M3 → S 2005-Y20R; faktura tylko M2 i M4 |
+| E-D-5 | cokół granit S 3502-Y; M4 S 1510-Y30R; gzyms bez wysięgu opisany jako świadome odstępstwo od E17. Ościeże skrzydła pozostaje 0,35 m (nie 0,40) – koszt i trakt |
+| E-D-6 | BIPV ≥ B-s1,d0, NRO, tylko ≤ 25 m; ZIP > 25 m – tkanina szklano-silikonowa A2-s1,d0 |
+| E-D-7 | proporcja wieży – bez zmian (decyzja panelu); do sprawdzenia na W3/W9 – **nierozstrzygnięte w tej rewizji** |
+| E-D-8 | M1: gzyms w linii attyki nr 19, naświetle w linii pasa 122,77 (ujednolicone) |
+| E-D-9 | taras segmentu 135,3 m² w attyce, ≈ 92 m² użytkowych |
+| E-D-10 | uzysk płycin 450 kWh/kWp, gęstość 0,13 kWp/m² (grafitowy brąz) |
+| E-D-11 | woda „≈ 100 %” spłukiwania |
+| E-D-12 | GWP ≤ 500 jako cel, szacunek ≈ 490 ± 120; CEM III/B w ścianach szczelinowych i płytach |
+| E-D-13 | nad komisjami wyłącznie kanały i plenum |
+| E-D-14 | zwody niskie ≤ korony attyki, wyłaz płaski przy trzonie B |
+| E-D-15 | falowniki i rozdzielnice DC – kond. 2 segmentu (12 m²) |
+| E-D-16 | JSON: PV 351 + 52 + 13 = 415; koszt 149,18; model 142,8; poligon skrzydła poprawny |
+| P-D2 | wymagane miejsca liczone wzorem z PU (106 / 108) |
+| P-D3 | 4. pokój socjalny na kond. 1, drugi na kond. 6 |
+| P-D4 | zaplecze sanitarne rowerowni na parterze obok rowerowni |
+| P-D9 | MOE 1,5 × 1,5 m poza biegiem (do potwierdzenia w rzutach trzonów A i C) |
+| P-D10 | strop segmentu +19,10 (0,70 m na warstwy tarasu); kond. 4 segmentu 2,87 m w świetle |
+| P-D15 | archiwum PZGiK – strefa płyty 0,40 m z belkami, gaszenie gazem; monitoring w łączniku od skweru (okna pn.) |
+| P-D16 | dojście do dźwigu R ≈ 43 m (≤ 50 m) |
+| nierozstrzygnięte | P-D5 (sala 200 os. netto 205 m² < 220 – wymaga przesunięcia reżyserek kosztem foyer, do modelu pomieszczeń); P-D11 (pomieszczenia głębokie a korytarz – model pomieszczeń); P-D6, D7, D13, D14 – kondygnacja S (`kondygnacja_S2.md`) |
+
+## Interfejsy z kondygnacją S (`kondygnacja_S2.md`)
+
+* Trzon B bez dźwigu T (T w segmencie, przystanki −2…4); P1/P2 1 600 kg, kabiny 1,5 × 2,1 m; szacht ≈ 4 m² w trzonie B do lameli korony.
+* Tryskacze nieprojektowane – dojścia i przejścia na S bez zwiększeń za tryskacze (ZL I: 10 / 40 m).
+* Szkło korony R 13,40, lamele R 13,40–14,00 (0,35 × 0,60 m, rozstawy 1,35 / 0,675 m).
+* Centrala S na −1 przy trzonie B (piony w szachcie trzonu B).
+* Koszt v1.1 zawiera rezerwę na antresolę S do ≈ 180 m² PC (A_nad +110 m²); większa zmiana S wymaga ponownego `_rewizja_koszt.py`.
+
+## Skrypty i uruchomienie
+
+```
+cd umwd
+PY=/home/user/aihouse/.venv-render/bin/python
+$PY -I docs/20_koncepcja/_rewizja_parking.py [--png]      # garaż: 110 m.p., wymagane 106/108
+$PY -I -W ignore docs/20_koncepcja/_rewizja_drzewa.py     # drzewa M.06
+$PY -I docs/20_koncepcja/_rewizja_pv_ep.py                # PV 415 kWp, EP 28,0 (_bilans_energii.py)
+$PY -I docs/20_koncepcja/_rewizja_koszt.py                # koszt 149,18 mln
+$PY -I docs/20_koncepcja/_rewizja_geometria.py            # MPZP, rampa, obudowa, otwory, szyb MDS, retencja
+$PY -I docs/20_koncepcja/_rewizja_elewacje.py             # okna/ZIP, U, lamele, trakt
+$PY -I -W ignore docs/20_koncepcja/_rewizja_json.py [--zapisz]   # koncepcja.json v1.1 + walidacja
+```

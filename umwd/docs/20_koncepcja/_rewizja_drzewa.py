@@ -93,7 +93,7 @@ def main():
     tunnel = Polygon([uv2en(13.9, -4.4), uv2en(15.3, -4.4), uv2en(15.3, -12.6), uv2en(13.9, -12.6)])
     crates = rect_uv(23.0, -14.3, 38.0, -11.4)                 # skrzynki rozsączające pod nawierzchnią pasa 4,6 m (E-I-9)
     extra = unary_union([shaft, tunnel])
-    rows, stat = [], {"kolizja": [], "sanitarnie": [], "ochrona": [], "zachowane": []}
+    rows, stat = [], {"kolizja": [], "przesadzane": [], "sanitarnie": [], "ochrona": [], "zachowane": []}
     for nr in sorted(TREES_M06):
         sp, rec, zone = TREES_M06[nr]
         if nr not in pos:
@@ -113,6 +113,8 @@ def main():
             cat = "ochrona"
         else:
             cat = "zachowane"
+        if cat == "kolizja" and rec == "P":       # kandydat do przesadzenia (młode drzewo) – przesadzane w obrębie ogrodu
+            cat = "przesadzane"
         stat[cat].append(nr)
         near = min(((k, Point(c).distance(p)) for k, cs in m02.items() for c in cs), key=lambda x: x[1])
         rows.append((nr, sp, rec, zone, d_ug, d_b, intr, cat, near, OGR.contains(p), OI.contains(p)))
@@ -124,11 +126,14 @@ def main():
               f"{near[0]} ({near[1]:.1f} m) | {cat} |")
     n = len(rows)
     kept = len(stat["zachowane"]) + len(stat["ochrona"])
+    keep_all = kept + len(stat["przesadzane"]) + len(stat["sanitarnie"])
     print(f"\nDrzewa M.06 (gatunki drzewiaste): {n}")
     for k, v in stat.items():
         print(f"  {k}: {len(v)} → nr {v}")
-    print(f"  zachowane łącznie: {kept} z {n} ({kept / n:.0%}); usuwane łącznie: {n - kept} "
-          f"(kolizja {len(stat['kolizja'])}, sanitarnie {len(stat['sanitarnie'])})")
+    print(f"  zachowane w miejscu: {kept}; + przesadzane {len(stat['przesadzane'])}; usuwane kolizyjnie {len(stat['kolizja'])}; "
+          f"sanitarnie (U) {len(stat['sanitarnie'])}")
+    print(f"  bilans: zachowane {keep_all} z {n} ({keep_all / n:.0%}) bez usunięć sanitarnych; "
+          f"{keep_all - len(stat['sanitarnie'])} z {n} ({(keep_all - len(stat['sanitarnie'])) / n:.0%}) po usunięciach sanitarnych")
     z12 = [r for r in rows if r[2] in ("Z1", "Z2")]
     z12k = [r for r in z12 if r[7] in ("zachowane", "ochrona")]
     print(f"  Z1+Z2: {len(z12)}, zachowane {len(z12k)}; usunięte Z1/Z2: {[r[0] for r in z12 if r not in z12k]}")

@@ -423,7 +423,7 @@
    "sciana_pd": "pełna (relief ceramiczny + pnącza), równoległa do szczytu WS 5, 10,58 m od lica szczytu, 4,58 m od granicy dz. 10/2",
    "kondygnacje": "P+4",
    "dach": {
-    "strop_wierzch": 19.5,
+    "strop_wierzch": 19.1,
     "taras_wykonczenie": {
      "wzgl": 19.8,
      "npm": 139.1,
@@ -833,8 +833,8 @@
     "wieza_spod": 19.37,
     "dach_skrzydla_wierzch": 19.8,
     "dach_skrzydla_spod": 19.4,
-    "dach_segmentu_wierzch": 19.5,
-    "dach_segmentu_spod": 19.22
+    "dach_segmentu_wierzch": 19.1,
+    "dach_segmentu_spod": 18.82
    }
   },
   {

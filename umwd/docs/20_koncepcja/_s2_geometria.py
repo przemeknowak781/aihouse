@@ -28,6 +28,7 @@ rows, aisles = M.build_rows()
 CORES = {"C-A": M.CORE_A, "C-B": M.CORE_B}
 CIRC_S = {"KUL", "KW.S.01", "KW.S.02", "KW.S.03", "KW.S.04", "SWD.02"}
 CIRC_A = {"KW.A.01", "KW.A.02", "KW.A.03", "SWD.02g", "SWD.01g"}
+OPEN_ZONES = {"SWD.06", "SWD.05", "SWD.03"}
 
 # -------------------------------------------------------------------------------------------------
 hr("[G1] Poprawność poligonów, położenie w obrysie wieży (strefa A) i w licu wewnętrznym")
@@ -96,7 +97,12 @@ for lvl, D, doors, circ in (("S", S, M.DOORS_S, CIRC_S), ("ANT", A, M.DOORS_ANT,
         if a_ in reach and (b_ in circ or b_ in cellsA) and okd:
             reach[a_] = True
     for k, r in reach.items():
-        if not r:
+        if not r and k in OPEN_ZONES:      # strefy otwarte (lada szatni, bar, strefa multimedialna) – styk z holem ≥ 2 m
+            hall = S["SWD.02"] if lvl == "S" else A["SWD.02g"]
+            if D[k].boundary.intersection(hall.buffer(0.01)).length >= 2.0:
+                reach[k] = True
+                print(f"  {lvl} {k}: strefa otwarta, styk z holem {D[k].boundary.intersection(hall.buffer(0.01)).length:.1f} m")
+        if not reach[k]:
             miss.append((lvl, k))
 print("Pomieszczenia bez drzwi na komunikację:", miss if miss else "brak (K1 usunięte)")
 print("Uwaga: SWD.01 (sala) – 4 drzwi: NW do holu 1,6 m, SW 1,6 m i SE 1,6 m do kuluaru, drzwi prezydium 1,0 m;"
@@ -134,8 +140,11 @@ print(f"Suma programu SWD + PHS.05 + PP.06 + IT.02 = {prog_sum} m²; w projekcie
       f"(Δ {proj_sum - prog_sum:+.1f})")
 lo_sum = sum((M.PROG[k][3][0] if M.PROG[k][3] else 0) for k in order) + M.PHS05_PROG[1][0]
 print(f"Suma dolnych granic zakresów = {lo_sum} m² → zapas projektu nad minimum {proj_sum - lo_sum:+.1f} m²")
-below = [k for k, a, pr, rg, d, l in tab if rg and a < rg[0] - 1e-6]
-print("Pozycje poniżej dolnej granicy zakresu:", below if below else "brak")
+TOT = {"SWD.01": sala_tot, "SWD.02": hol_tot}
+below = [k for k, a, pr, rg, d, l in tab if rg and TOT.get(k, a) < rg[0] - 1e-6]
+above = [k for k, a, pr, rg, d, l in tab if rg and TOT.get(k, a) > rg[1] + 1e-6]
+print("Pozycje poniżej / powyżej zakresu (SWD.01 i SWD.02 liczone łącznie z częścią na antresoli):",
+      below if below else "brak", "/", above if above else "brak")
 
 # -------------------------------------------------------------------------------------------------
 hr("[G5] Bilans poziomu S (od lica wewnętrznego) i ściany wewnętrzne (D1)")
@@ -147,10 +156,19 @@ cores = M.CORE_A.area + M.CORE_B.area
 print(f"Wnętrze {M.INNER.area:.1f} = pomieszczenia (z salą, holem, szatnią) {rooms_net:.1f} + komunikacja KW/KUL {circ:.1f} "
       f"+ trzony {cores:.1f} + ściany wewn. {walls.area:.1f}  (kontrola: {rooms_net + circ + cores + walls.area:.1f})")
 # długość ścian ≈ (suma obwodów pomieszczeń + trzonów − obwód wnętrza)/2
-per = sum(v.length for v in S.values()) + M.CORE_A.length + M.CORE_B.length
-wall_len = (per - M.INNER.length) / 2
-print(f"Długość osi ścian wewn. ≈ {wall_len:.0f} m → średnia grubość {walls.area / wall_len:.3f} m "
-      f"(koncepcja v1.0: 0,151 m; wymagane ≈ 0,20 / 0,30 m)")
+touch = 0.0
+wb = walls.buffer(0.02)
+ext = M.INNER.boundary.buffer(0.02)
+for g in list(S.values()) + list(CORES.values()):
+    touch += g.boundary.intersection(wb).difference(ext).length
+wall_len = touch / 2
+print(f"Długość ścian wewn. (styk pomieszczeń ze ścianą, /2) ≈ {wall_len:.0f} m → średnia grubość {walls.area / wall_len:.3f} m "
+      f"(koncepcja v1.0: 0,151 m; D1: ≈ 0,20 / 0,30 m)")
+thick = {}
+for t in (0.20, 0.30):
+    thick[t] = walls.buffer(-t / 2 + 0.01).area
+print(f"Kontrola grubości: część ścian grubszych niż 0,18 m: {walls.buffer(-0.09).buffer(0.09).area / walls.area * 100:.0f} % pola ścian;"
+      f" grubszych niż 0,28 m: {walls.buffer(-0.14).buffer(0.14).area / walls.area * 100:.0f} %")
 print(f"Ściany zewn. (pas 0,50 m): {M.W_UV.area - M.INNER.area:.1f} m²; PC poziomu S = {M.W_UV.area:.1f} m²")
 print(f"Udział ścian wewn. + zewn. w PC: {(walls.area + M.W_UV.area - M.INNER.area) / M.W_UV.area * 100:.1f} %")
 

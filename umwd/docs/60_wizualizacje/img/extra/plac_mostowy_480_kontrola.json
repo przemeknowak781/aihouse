@@ -36,15 +36,15 @@
  "ludzie": false,
  "probki": 16,
  "czasy_s": {
-  "kontekst_s": 9.7,
-  "budynek_s": 4.1,
+  "kontekst_s": 9.4,
+  "budynek_s": 4.2,
   "zrodlo_sceny": "budowa od zera",
-  "scena_s": 13.8,
-  "kontrola_s": 24.6
+  "scena_s": 13.6,
+  "kontrola_s": 0.7
  },
  "uwagi": [],
  "info": [
-  "bryła ucięta u góry kadru (attyka poza kadrem) – zamierzone?"
+  "attyka wieży (narożnik bliższy kamerze) wychodzi poza górną krawędź kadru"
  ],
  "promienie": [
   "oś: wieza_elewacje 33.5 m",
@@ -70,15 +70,35 @@
  "oko_nad_podlozem_m": 1.43,
  "podloze": "teren_chodnik_bt",
  "budynek_w_kadrze": {
-  "x0": 0.278,
-  "x1": 1.257,
-  "y0": 0.005,
-  "y1": 1.603,
-  "uciete": [
-   "prawo",
-   "góra"
-  ],
-  "naroza_za_kamera": 0
+  "wieża": {
+   "x0": 0.278,
+   "x1": 1.009,
+   "y0": 0.011,
+   "y1": 1.603,
+   "w_kadrze": true,
+   "uciete": [
+    "prawo",
+    "góra"
+   ]
+  },
+  "skrzydło": {
+   "x0": 0.887,
+   "x1": 1.257,
+   "y0": 0.005,
+   "y1": 0.97,
+   "w_kadrze": true,
+   "uciete": [
+    "prawo"
+   ]
+  },
+  "segment": {
+   "x0": 0.425,
+   "x1": 0.63,
+   "y0": 0.053,
+   "y1": 0.406,
+   "w_kadrze": true,
+   "uciete": []
+  }
  },
  "punkty_kluczowe": {
   "Brama Mostowa – napis (+5,2)": {

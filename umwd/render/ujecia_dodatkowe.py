@@ -407,10 +407,11 @@ def kontrola(sc, cam, k, DZ, kat, cel):
     if udzialy.get('ortofoto_plaskie', 0) > 0.10:
         info.append('płaska ortofotomapa (bez zabudowy 3D) zajmuje %.0f %% kadru – tło poza ramką mapy'
                     % (100 * udzialy['ortofoto_plaskie']))
-    # 7) budynek w kadrze (rzut naroży obrysów na ±0,00 i na attyce)
-    W, H = sc.render.resolution_x, sc.render.resolution_y
-    xs, ys, za = [], [], 0
+    # 7) bryły w kadrze (rzut naroży obrysów na ±0,00 i na attyce; x, y ∈ [0, 1] = kadr, y od dołu)
+    nazwy = {'W': 'wieża', 'M': 'skrzydło', 'S': 'segment'}
+    bk = {}
     for bid, (P, ztop) in bryly.items():
+        xs, ys, za, ys_top = [], [], 0, []
         for (x, y) in list(P.exterior.coords)[:-1]:
             for z in (0.0, ztop):
                 v = world_to_camera_view(sc, cam, Vector((x, y, z + DZ)))
@@ -419,15 +420,21 @@ def kontrola(sc, cam, k, DZ, kat, cel):
                     continue
                 xs.append(v.x)
                 ys.append(v.y)
-    bk = None
-    if xs:
-        bk = dict(x0=round(min(xs), 3), x1=round(max(xs), 3), y0=round(min(ys), 3), y1=round(max(ys), 3))
-        uc = [s for s, c in (('lewo', bk['x0'] < 0), ('prawo', bk['x1'] > 1), ('dół', bk['y0'] < 0),
-                             ('góra', bk['y1'] > 1)) if c]
-        bk['uciete'] = uc
-        bk['naroza_za_kamera'] = za
-        if 'góra' in uc and k['preset'] != 'wnetrze':
-            info.append('bryła ucięta u góry kadru (attyka poza kadrem) – zamierzone?')
+                if z > 0 and 0 <= v.x <= 1:
+                    ys_top.append(v.y)
+        if not xs:
+            bk[nazwy.get(bid, bid)] = None
+            continue
+        b = dict(x0=round(min(xs), 3), x1=round(max(xs), 3), y0=round(min(ys), 3), y1=round(max(ys), 3))
+        b['rzut_w_kadrze'] = not (b['x1'] < 0 or b['x0'] > 1 or b['y1'] < 0 or b['y0'] > 1)
+        b['uciete'] = [s_ for s_, c in (('lewo', b['x0'] < 0), ('prawo', b['x1'] > 1), ('dół', b['y0'] < 0),
+                                        ('góra', bool(ys_top) and max(ys_top) > 1)) if c]
+        if za:
+            b['naroza_za_kamera'] = za
+        bk[nazwy.get(bid, bid)] = b
+    w = bk.get('wieża')
+    if w and 'góra' in w['uciete'] and k['preset'] not in ('wnetrze',):
+        info.append('attyka wieży (narożnik bliższy kamerze) wychodzi poza górną krawędź kadru')
     # 8) punkty kluczowe na łuku (Brama Mostowa, korona, attyka) i cel: w kadrze? widoczne?
     kl = {}
     if luk:
@@ -499,6 +506,11 @@ def render_ujecia(sc, k, a, DZ, kat, czasy, out_jpg):
     if trawa:
         from umwd.render import trawa as tr
         tr.ustaw_kamere(trawa, cam)
+        # promienie kontroli idą przez depsgraf podglądu: bez setek tysięcy instancji kępek (render – show_render)
+        for ob in trawa:
+            for md in ob.modifiers:
+                if md.type == 'NODES' and md.node_group and md.node_group.name.startswith('K_trawa_GN'):
+                    md.show_viewport = False
     sw = ustaw_swiatlo(sc, k)
     bpy.context.view_layer.update()
     t0 = time.time()

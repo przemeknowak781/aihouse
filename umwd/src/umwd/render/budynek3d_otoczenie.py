@@ -26,7 +26,7 @@ from umwd.render.budynek3d import Geo, SITE_JSON
 # Położenia elementów jak na planszy zagospodarowania (tools/zagospodarowanie.py) – 3D zgodne z rysunkiem.
 PLAN = dict(
     slad_1934=[(63.4, 79.6), (75.0, 81.0), (86.0, 81.9), (93.5, 81.6), (98.6, 79.6)],   # ślad pierzei z 1934 r.
-    lawa_okragla=((104.0, 73.5), 2.2),
+    lawa_okragla=((105.54, 75.73), 2.2),          # R 16,5 m od środka łuku – poza podcieniem (korekta 17.11)
     lipy=[(66.0, 79.4), (71.5, 80.3), (77.0, 81.0), (82.5, 81.6)],                       # szpaler 4 lip
     drzewa_pas=[(99.8, 37.2), (103.8, 37.6)],                                            # pas wejścia od bulwaru
     drzewa_ogrod=[(64.5, 30.0), (70.5, 33.5), (89.0, 25.0), (93.0, 31.0), (73.0, 11.0), (90.5, 9.0)],

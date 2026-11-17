@@ -45,11 +45,11 @@ KAMERY_DODATKOWE = {
 }
 # korekty kadrów (z uzasadnieniem) – stosowane, gdy kamera ze specyfikacji nie pokazuje wymaganej treści
 KOREKTY = {
-    # W3: kamera ze specyfikacji (cel az. 324°) stawia łuk na lewej krawędzi kadru, a podcień z wejściem jest ucięty.
-    # Ta sama pozycja, oś obrócona o 12° w lewo (az. 312°) i większe przesunięcie obiektywu: łuk z podcieniem
-    # i napisem w lewej części kadru, pylon mostu z hełmem po prawej. Korony (+27 m) z odległości ~18 m nie da się
-    # objąć obiektywem ≥ 24 mm – do decyzji: odsunięcie kamery albo kadr pionowy (patrz budynek_3d.md).
-    'W3': dict(cel_e_n_z=(102.7, 80.6, 10.0), shift_y=0.25),
+    # W3 (decyzja koordynatora 17.11): stanowisko z poziomu człowieka ≥ 30 m od lica łuku, z którego widać Bramę
+    # Mostową (podcień z napisem w nadprożu) i koronę. Wybór przeszukaniem promieni: skarpa przyczółka mostu
+    # (105,5; 115,3), ok. 40 m od lica łuku (z 33 m przy 24 mm nie mieści się posadzka podcienia razem z attyką),
+    # oś na środek łuku (az. 183°), bez przesłonięć; 24 mm, shift 0,25 (dół kadru −5,5°, góra +41°).
+    'W3': dict(kamera_e_n_z=(105.5, 115.3, 3.86), cel_e_n_z=(103.4, 74.1, 16.0), lens_mm=24, shift_y=0.25),
     # W9: punkt (126; 152) leży na jezdni mostu, 3,8 m od osi; z chodnika widok przecinają krzyżulce kratownicy
     # (płaszczyzny ±9,6 m). Pozycja dobrana przeszukaniem promieni na drzewie BVH mostu (117 promieni kadru bez trafień w kratownicę,
     # łańcuchy i wieszaki): 38 m od portalu pd. (JSON: 35 m), 9,3 m od osi – tuż przy płaszczyźnie kratownicy

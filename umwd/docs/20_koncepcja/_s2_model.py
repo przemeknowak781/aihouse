@@ -129,10 +129,10 @@ def level_S():
     hall = unary_union([box(6.50, 20.85, 21.70, 22.65),
                         box(6.50, 22.65, 12.45, 23.30),
                         box(0.50, 23.30, 12.45, 29.20)])
-    R["SWD.06"] = box(1.85, 23.30, 6.65, 25.85)               # szatnia: lada 4,8 m + wieszaki, 1,35 m od okna zach.
-    STAIR = box(1.10, 26.05, 8.30, 27.85)                     # schody reprezentacyjne S → ANT (bieg 1,80 × 7,20)
-    R["SWD.15"] = box(4.90, 26.05, 8.30, 27.85)               # magazyn podręczny pod wyższą częścią biegu (h ≥ 1,9 m)
-    R["KW.S.04"] = box(1.10, 26.05, 4.90, 27.85)              # niższa część biegu (otwarta)
+    R["SWD.06"] = box(1.85, 23.30, 4.90, 27.40)               # szatnia: lada 4,1 m + wieszaki, 1,35 m od okna zach.
+    STAIR = box(5.10, 24.60, 12.30, 26.60)                    # schody reprezentacyjne S → ANT: bieg 2,0 m, 2 × (10+11 st.) + spocznik
+    R["SWD.15"] = box(5.10, 24.60, 8.10, 26.60)               # magazyn podręczny pod wyższą częścią biegu (h 1,8–3,3 m)
+    R["KW.S.04"] = box(8.10, 24.60, 12.30, 26.60)             # niższa część biegu (otwarta, stopa schodów od holu dźwigów)
     R["SWD.02"] = hall.difference(R["SWD.06"]).difference(STAIR)
     # sala obrad + reżyserka
     R["SWD.04"] = box(34.00, 12.60, 39.50, 15.80)
@@ -153,20 +153,21 @@ def level_ANT():
     gal = box(15.50, 12.60, 22.00, 22.65)
     A["SWD.01g"] = gal                                                 # galeria publiczności (część SWD.01)
     # strefa radnych – górny hol (antresola holu), wycofana 1,35 m od elewacji zach. i pn.
-    west = box(1.85, 12.50, 8.30, 23.30)
+    west = unary_union([box(1.85, 12.50, 8.30, 23.30), box(1.85, 23.30, 5.10, 26.60)])   # + podest górny schodów
     lobby = box(8.30, 20.85, 12.45, 27.85)
     north = box(12.45, 22.65, 21.70, 27.85)
     band = box(12.45, 20.85, 15.30, 22.65)
     antw = unary_union([west, lobby, north, band])
     A["SWD.05"] = box(15.30, 22.85, 21.70, 27.85)                      # bar / przestrzeń socjalno-gastronomiczna
     A["SWD.03"] = box(1.85, 12.50, 6.30, 20.10)                        # strefa multimedialna / poczekalnia gości
-    A["KW.A.03"] = box(6.30, 13.00, 8.30, 16.00)                       # przedsionek ppoż. A' (wejście do klatki A od zach.)
+    A["KW.A.03"] = box(6.30, 12.50, 8.30, 15.50)                       # przedsionek ppoż. A' (wejście do klatki A od zach.)
     A["SWD.02g"] = antw.difference(A["SWD.05"]).difference(A["SWD.03"]).difference(A["KW.A.03"]) \
         .difference(box(15.30, 22.65, 21.70, 22.85))                   # pas ściany galeria/bar
     return A
 
 
-VOID_HALL = box(0.50, 23.30, 8.30, 29.20).union(box(8.30, 27.85, 12.45, 29.20))   # pustka holu (2 kond.)
+VOID_HALL = (box(0.50, 23.30, 8.30, 29.20).union(box(8.30, 27.85, 12.45, 29.20))
+             .difference(box(1.85, 23.30, 5.10, 26.60)))      # pustka holu (2 kond.) z otworem biegu schodów
 
 # ------------------------------------------------------------------------------------------------
 # Drzwi (u, v, szerokość, pomieszczenie → komunikacja). Punkt = środek otworu na osi ściany.
@@ -185,10 +186,10 @@ DOORS_S = [
     ("SWD.14", "SWD.02", (14.2, 22.75), 1.0), ("SWD.13", "SWD.02", (17.2, 22.75), 1.0),
     ("SWD.04", "KUL", (35.0, 12.45), 1.0),
     ("SWD.01", "SWD.02", (21.85, 21.75), 1.6),     # wejście główne radnych i gości z holu (NW)
-    ("SWD.01", "KUL", (24.2, 12.45), 1.6),         # wyjście SW (pod galerią) – do klatki A
+    ("SWD.01", "KUL", (22.70, 12.45), 1.2),        # wyjście SW (przy przejściu zach.) – do klatki A
     ("SWD.01", "KUL", (32.6, 12.45), 1.6),         # wyjście SE – do klatki B
     ("SWD.01", "KUL", (28.0, 12.45), 1.0),         # drzwi prezydium (za stołem prezydialnym)
-    ("SWD.15", "SWD.02", (6.6, 25.95), 0.9),
+    ("SWD.15", "SWD.02", (6.6, 24.6), 0.9),
     ("przedsionek_A", "KUL", (13.7, 12.45), 1.2), ("przedsionek_A", "KW.S.03", (15.5, 16.6), 1.2),
     ("przedsionek_B", "KUL", (27.0, 9.9), 1.2),
 ]
@@ -198,8 +199,8 @@ DOORS_ANT = [
     ("SWD.01g", "KW.A.02", (17.5, 12.45), 1.6),    # wejście na galerię (drzwi EI 30 S, otwarte przy sesji)
     ("przedsionek_A", "SWD.01g", (15.5, 15.6), 1.2),   # 2. droga z galerii → klatka A
     ("przedsionek_B", "KW.A.02", (27.0, 9.9), 1.2),    # 1. droga z galerii → klatka B
-    ("KW.A.03", "SWD.02g", (6.3, 14.5), 1.2),          # przedsionek A' – 2. droga z górnego holu
-    ("klatka_A", "KW.A.03", (8.43, 14.5), 1.2),
+    ("KW.A.03", "SWD.02g", (7.3, 15.5), 1.2),          # przedsionek A' – 2. droga z górnego holu
+    ("klatka_A", "KW.A.03", (8.43, 13.6), 1.2),
 ]
 
 # ------------------------------------------------------------------------------------------------
@@ -244,7 +245,8 @@ def radial_strip(F_, phi, r0, r1, w):
 
 def sala_zone():
     z = INNER.intersection(SALA_BOX).difference(SWD04_BOX.buffer(0.20, join_style=2))
-    z = z.difference(box(F[0] - 3.6, 12.6, F[0] + 3.6, F[1] + 0.6))     # prezydium + mównica + PJM
+    z = z.difference(box(F[0] - 4.6, 12.6, F[0] + 4.6, 14.85))          # prezydium + obsługa
+    z = z.difference(box(F[0] - 3.6, 12.6, F[0] + 3.6, F[1] + 0.6))     # mównica + PJM
     z = z.difference(INNER.difference(INNER.buffer(-GLASS_OFF)))
     return z
 
@@ -405,8 +407,8 @@ def floor_seats():
     for i in range(8):
         a = math.radians(58.0 + (i + 0.5) * (22.0 / 8))
         out.append((F[0] + rb * math.cos(a), F[1] + rb * math.sin(a), "media"))
-    for i in range(4):
-        out.append((F[0] + 3.55 + i * 0.75, 13.55, "obsluga"))
+    for du in (-4.15, -3.40, 3.40, 4.15):           # obsługa kancelaryjna przy końcach stołu prezydialnego
+        out.append((F[0] + du, 13.30, "obsluga"))
     out += [(F[0] - 2.20, 15.20, "PJM"), (F[0] - 1.50, 15.20, "PJM")]
     for i in range(4):
         out.append((F[0] - 2.25 + i * 1.50, 13.25, "prezydium"))
@@ -416,7 +418,7 @@ def floor_seats():
 def floor_zones():
     return {
         "goście (12)": box(23.30, 26.70, 27.30, 28.55),
-        "obsługa kancelaryjna (4)": box(F[0] + 3.20, 13.10, F[0] + 6.20, 14.20),
+        "obsługa kancelaryjna (2+2)": box(F[0] - 4.50, 12.70, F[0] - 3.05, 14.25).union(box(F[0] + 3.05, 12.70, F[0] + 4.50, 14.25)),
         "PJM (2)": box(F[0] - 2.60, 14.80, F[0] - 1.10, 15.60),
     }
 
