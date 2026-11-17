@@ -20,7 +20,8 @@ uzgodnień koordynatora albo z dopiskiem „dobór”). Można je nadpisać opcj
 ![Hala Obywatelska (W6)](img/W6_hol_test.jpg)
 ![Relacja z Wybrzeżem Słowackiego 5 (W4)](img/budynek_test_W4.jpg)
 ![Relacja z Mazowiecką 19 (W5)](img/budynek_test_W5.jpg)
-![Ogród (W10)](img/budynek_test_W10.jpg)
+![Hol sali Sejmiku (W7 – test)](img/W7_hol_sejmiku_test.jpg)
+![Sala obrad z galerią (W8 – test)](img/W8_sala_sejmiku_test.jpg)
 ![Latarnia z Mostu Grunwaldzkiego – błękitna godzina (W9)](img/budynek_test_W9.jpg)
 ![Plac Mostowy od pn.-zach.](img/budynek_test_plac_mostowy.jpg)
 ![Detal podcienia Bramy Mostowej](img/budynek_test_detal_podcien.jpg)
@@ -243,6 +244,33 @@ krawężnika, ruch prawostronny). **W10** – druga próba (pn.-wsch. część o
 ogrodowa, południe) nieudana: zachowane drzewo 3 m przed obiektywem, ogród w cieniu koron – **W10 odrzucona**
 (nie jest wymagana regulaminem). **W6** – wstrzymana do korekty rzutu (oś przekątna ≥ 6,3 m na całej długości).
 
+## 5d. Ludzie fotograficzni – Skalgubbar (licencja i użycie)
+
+**Źródło:** Skalgubbar – https://skalgubbar.se (Teodor Javanaud Emdén). **Warunki licencji** (strona
+https://skalgubbar.se/read-me/, odczyt 17.11.2026, cytat skrócony): „Skalgubbar is free to use for anyone who wants to
+bring their visualizations of unbuilt architecture to life. For students as well as for commercial use. Main
+guideline: your architecture project should be in focus. Skalgubbar is not to be used as free standing pictures or
+for product advertisements. (…) If Skalgubbar is part of your architectural academic publication or other
+publication where sources are being mentioned, you should also credit Skalgubbar with a link to www.skalgubbar.se.
+If you intend to use Skalgubbar for anything else than populating visualizations of architecture projects – please
+do not, since this is not part of the free license.”
+
+**Wniosek:** użycie w wizualizacjach konkursowych (architektura w centrum, postaci jako sztafaż) mieści się w licencji.
+Licencja nie obejmuje innego użycia, w tym udostępniania samych wycinków – pliki są pobierane **wyłącznie do
+`build/skalgubbar/`** (katalog w `.gitignore`), nie trafiają do repozytorium i nie są commitowane; w repozytorium są
+tylko gotowe wizualizacje. Przy publikacji ze spisem źródeł – podać „Skalgubbar, www.skalgubbar.se”.
+Skalgubbar nie ma wycinka osoby na wózku – osoba na wózku pozostaje modelem 3D (`wozek`).
+
+**Technika** (`budynek3d_ludzie_foto.py`): postać = płaszczyzna RGBA (wycinek przycięty do alfy, wysokość
+1,62–1,85 m wg katalogu, losowe lustrzane odbicie) obracana do kamery wokół osi Z, bez rzucania cienia + duplikat
+tylko-cieniowy obrócony prostopadle do kierunku słońca (cień z sylwetki zdjęcia) + miękki cień kontaktowy (elipsa
+z gradientem) pod stopami. Katalog (18 wycinków, odzież jesienno-zimowa): przechodnie, urzędnicy (garnitur, płaszcz),
+pary, rodzice z dzieckiem / wózkiem (ogród), rowerzyści (rower elektryczny zimą, prowadzący rower). Obrót do kamery:
+`zwroc_do_kamery(kamera, az_słońca)` wywoływane w `testy_budynek.py` po ustawieniu kamery. Liczba: 22 postaci
+w otoczeniu (zamiast 34 proceduralnych), w W4/W5 dodatkowo 4 piesi w planie średnim (≥ 9 m) i rowerzysta;
+sylwetki bliżej niż 9 m od obiektywu ukryte. Samochody proceduralne usunięte z W5 (Poly Haven nie ma modelu
+samochodu CC0 poza autem pod plandeką).
+
 ## 5c. Rewizja v1.3 – przełączniki (audyt `docs/90_audyt/audyt_konstrukcja_funkcja.md`)
 
 Zmiany z audytu przygotowane jako przełączniki w `ZALOZENIA` z wartościami domyślnymi wg tekstu audytu
@@ -355,9 +383,12 @@ Próbkowanie adaptacyjne (próg 0,02) + OIDN w pełnej rozdzielczości, `nice -n
 | W3 Brama Mostowa | 578 × 400 | 1,445 | 5800 × 4014 | 64 | 80–110 min |
 | W6 Hala Obywatelska | 578 × 196 | 2,95 | 5000 × 1695 | 96 | 55–75 min |
 | W4 WS 5 | 480 × 256 | 1,875 | 4000 × 2133 | 64 | 35–45 min |
-| W5 Maz. 19 | 464 × 339 | 1,37 | 4000 × 2920 | 64 | 40–50 min |
+| W5 Maz. 19 | 464 × 339 | 1,37 | 4000 × 2920 | 64 | **zmierzono: 86 min** (5172 s renderu, równolegle drugi render innego toru – CPU dzielone) |
 
-Razem ok. 4,5–6 h (sekwencyjnie, jedna klatka naraz; przy wolnym CPU o ~30 % krócej). Budowa sceny 20–25 s na
+Razem ok. 4,5–6 h przy wolnym CPU; przy CPU dzielonym z innym torem (jak przy W5) ok. 1,6–1,9 × dłużej – ok. 8–10 h.
+Uruchamiać z `timeout` tła ≥ 2 h na klatkę (pierwsze uruchomienie W5 przerwał limit 30 min powłoki).
+Stan 17.11: W5 final wykonany (`img/W5_Maz19_final.jpg`, v1.2, ludzie proceduralni, samochody) – do powtórzenia po v1.3
+z ludźmi fotograficznymi; W4, W3, W1, W2, W6, W7, W8 – wstrzymane do v1.3 / zamrożenia spec. Budowa sceny 20–25 s na
 klatkę; pamięć renderów kamer 2–3 GB. **Fotomatch w pełnej rozdzielczości**: EXR ~600 MB na pass (4 passy) + tablice
 numpy kompozycji – szczyt ok. 7–9 GB RAM (maszyna 15 GB, bez swap) – uruchamiać, gdy inne procesy nie zajmują
 pamięci, albo po jednym zdjęciu.

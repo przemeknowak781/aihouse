@@ -129,6 +129,36 @@ def kierunki_pikseli(sc, cam, W, H):
 
 
 _pp = FK.post_przed
+_komp = FK._kompozytor
+
+
+def _kompozytor_p(sc, prefix):
+    """Jak FK._kompozytor (Mist, Object Index) + pass Depth: Cycles zapisuje go (próbka 0) dla pierwszej powierzchni
+    o alfie ≥ 0,5 – szkło (Transparent ~90 %) i puste pola kart liści są pomijane, więc odległość jest wiarygodna także
+    za szybami i w koronach drzew (pass Mist uśrednia się przez przezroczystości – za szkłem daje „daleko”)."""
+    passy = _komp(sc, prefix)
+    vl = sc.view_layers[0]
+    vl.use_pass_z = True
+    ng = sc.compositing_node_group
+    rl = next(n for n in ng.nodes if n.bl_idname == 'CompositorNodeRLayers')
+    fo = next(n for n in ng.nodes if n.bl_idname == 'CompositorNodeOutputFile')
+    wyj = {o.name: o for o in rl.outputs}
+    g = next((wyj[x] for x in ('Depth', 'Z') if x in wyj), None)
+    if g is None:
+        raise RuntimeError('RLayers bez passu Depth (wyjścia: %s)' % list(wyj))
+    fo.file_output_items.new('FLOAT', 'glebia')
+    ng.links.new(g, fo.inputs['glebia'])
+    passy['glebia'] = U.PNG_DIR / ('%sglebia.exr' % prefix)
+    return passy
+
+
+FK._kompozytor = _kompozytor_p
+SUROWY = {'png': None}          # --surowy PNG: post z zachowanego surowego renderu (ten sam kadr i scena)
+
+
+def _smooth(x, a, b):
+    t = np.clip((x - a) / (b - a), 0.0, 1.0)
+    return t * t * (3 - 2 * t)
 
 
 def _post_przed_p(png, passy, cfg, raport):
@@ -139,22 +169,34 @@ def _post_przed_p(png, passy, cfg, raport):
     from PIL import Image
     from scipy import ndimage
     png = Path(png)
+    if SUROWY['png']:
+        shutil.copyfile(SUROWY['png'], png)
+        raport['surowy_z_renderu'] = str(SUROWY['png'])
     shutil.copyfile(png, png.with_name(png.stem + '_surowy.png'))
     a = np.asarray(Image.open(png).convert('RGB'), dtype=np.float32) / 255.0
     H, W = a.shape[:2]
     lin = FK._s2l(a)
-    mist = FK._wczytaj_exr(passy['mgla'])
     idx = FK._wczytaj_exr(passy['idx'])
-    if mist.shape != a.shape[:2]:
-        raise RuntimeError('passy %s ≠ obraz %s' % (mist.shape, a.shape[:2]))
+    if idx.shape != a.shape[:2]:
+        raise RuntimeError('passy %s ≠ obraz %s' % (idx.shape, a.shape[:2]))
     sc = bpy.context.scene
     cam = sc.camera
     loc = np.array(cam.matrix_world.translation)
-    start, gleb = float(mg.get('start', 0.0)), float(mg.get('glebokosc', 1500.0))
-    dmax = float(mg.get('dmax', 800.0))
-    niebo = (mist > 0.9999) & (idx < 0.5)
-    D = np.where(niebo, dmax, np.minimum(start + mist * gleb, dmax))
+    fwd = np.array(cam.matrix_world.to_3x3() @ Vector((0, 0, -1)))
     kier = kierunki_pikseli(sc, cam, W, H)
+    dmax = float(mg.get('dmax', 800.0))
+    if 'glebia' in passy and Path(passy['glebia']).exists():
+        zg = FK._wczytaj_exr(passy['glebia'])                   # głębia wzdłuż osi kamery
+        niebo = zg > 1e5
+        D = np.minimum(zg / np.maximum(kier @ fwd, 1e-3), dmax)
+        zrodlo = 'Depth (pierwsza powierzchnia o alfie ≥ 0,5)'
+    else:                                                       # zgodność wstecz – pass Mist
+        mist = FK._wczytaj_exr(passy['mgla'])
+        start, gleb = float(mg.get('start', 0.0)), float(mg.get('glebokosc', 1500.0))
+        niebo = (mist > 0.9999) & (idx < 0.5)
+        D = np.minimum(start + mist * gleb, dmax)
+        zrodlo = 'Mist'
+    D = np.where(niebo, dmax, D)
     zp = loc[2] + D * kier[..., 2]
     Hs, rho0 = float(mg.get('Hs', 3.0)), float(mg.get('rho0', 0.0045))
     hc = max(loc[2] - Z_WODA, 0.0)
@@ -163,10 +205,12 @@ def _post_przed_p(png, passy, cfg, raport):
     dz = hc - hp
     with np.errstate(divide='ignore', invalid='ignore'):
         tau = np.where(np.abs(dz) > 1e-3, Hs * D / dz * (ep - ec), D * ec) * rho0
-    tau = np.maximum(tau, 0.0)
-    T = ndimage.gaussian_filter(np.exp(-tau), 0.7)
+    tau = np.maximum(np.nan_to_num(tau), 0.0)
+    # mgła „w głębi”: pierwszy plan (woda pod obiektywem, barka, nabrzeże) bez zmian – rampa odległości
+    d0, d1 = (float(x) for x in mg.get('rampa_m', (55.0, 130.0)))
+    tau = tau * _smooth(D, d0, d1)
+    T = ndimage.gaussian_filter(np.exp(-tau), 1.0)
     # barwa mgły: luminancja nieba tuż nad horyzontem (mediana), ciepła biel
-    fwd = np.array(cam.matrix_world.to_3x3() @ Vector((0, 0, -1)))
     pas = niebo & (kier[..., 2] > 0.005) & (kier[..., 2] < 0.06)
     if pas.sum() < 50:
         pas = niebo
@@ -177,17 +221,23 @@ def _post_przed_p(png, passy, cfg, raport):
     out = (FK._l2s(lin) * 255 + 0.5).astype(np.uint8)
     Image.fromarray(out).save(png)
     woda = np.abs(idx - FK.IDX_WODY) < 0.5
-    info = {'mgla_woda': dict(Hs_m=Hs, rho0_1_m=rho0, dmax_m=dmax, barwa_lin=[round(float(x), 4) for x in fog],
+    f = 1 - T
+    info = {'mgla_woda': dict(zrodlo_odleglosci=zrodlo, Hs_m=Hs, rho0_1_m=rho0, rampa_m=[d0, d1], dmax_m=dmax,
+                              barwa_lin=[round(float(x), 4) for x in fog],
                               luminancja_nieba_przy_horyzoncie=round(Lh, 4),
-                              udzial_mgly_max=round(float(1 - T.min()), 3),
-                              udzial_mgly_p50_woda=round(float(np.median(1 - T[woda])), 3) if woda.any() else None,
-                              udzial_mgly_p95_woda=round(float(np.percentile(1 - T[woda], 95)), 3) if woda.any() else None,
-                              kadr_mgla_powyzej_10proc=round(float((T < 0.9).mean()), 3),
-                              os_kamery_z=round(float(fwd[2]), 3))}
-    # kontrola odtworzenia położenia: piksel w osi kadru
+                              udzial_mgly_max=round(float(f.max()), 3),
+                              udzial_mgly_p50_woda=round(float(np.median(f[woda])), 3) if woda.any() else None,
+                              udzial_mgly_p95_woda=round(float(np.percentile(f[woda], 95)), 3) if woda.any() else None,
+                              kadr_mgla_powyzej_5proc=round(float((f > 0.05).mean()), 3),
+                              kadr_mgla_powyzej_15proc=round(float((f > 0.15).mean()), 3))}
+    # kontrola odtworzenia położenia: piksel w środku kadru (promień ray_cast ↔ głębia z passu)
     jc, ic = H // 2, W // 2
     P = loc + D[jc, ic] * kier[jc, ic]
-    info['mgla_woda']['punkt_osi_kadru'] = [round(float(x), 2) for x in P] + [round(float(D[jc, ic]), 2)]
+    dg = bpy.context.evaluated_depsgraph_get()
+    hit, pos, *_ = sc.ray_cast(dg, Vector(loc), Vector(kier[jc, ic]))
+    info['mgla_woda']['srodek_kadru_pass_vs_promien_m'] = [round(float(D[jc, ic]), 2),
+                                                            round(float((pos - Vector(loc)).length), 2) if hit else None]
+    info['mgla_woda']['srodek_kadru_punkt'] = [round(float(x), 2) for x in P]
     raport.update(info)
     print('[ulica-3] mgła nad wodą: %s' % json.dumps(info, ensure_ascii=False))
 
@@ -252,7 +302,10 @@ def kontrola_ulica3(sc):
         xs, ys, n_in, n = [], [], 0, 0
         from bpy_extras.object_utils import world_to_camera_view
         for i in range(0, len(ob.data.vertices), max(1, len(ob.data.vertices) // 3000)):
-            v = world_to_camera_view(sc, cam, ob.matrix_world @ ob.data.vertices[i].co)
+            pw = ob.matrix_world @ ob.data.vertices[i].co
+            if pw.z < Z_WODA + 0.01:          # część podwodna kadłuba – niewidoczna
+                continue
+            v = world_to_camera_view(sc, cam, pw)
             n += 1
             if v.z > 0:
                 xs.append(v.x)
@@ -303,8 +356,12 @@ _ru = U.render_ujecia
 
 
 def _render_ujecia_p(sc, k, a, DZ, kat, czasy, out_jpg):
-    r = _ru(sc, k, a, DZ, kat, czasy, out_jpg)
     out_jpg = Path(out_jpg)
+    plik_r = out_jpg.with_name(out_jpg.stem + '_kontrola.json')
+    prev = None
+    if SUROWY['png'] and plik_r.exists():          # raport renderu, z którego pochodzi surowy PNG
+        prev = json.loads(plik_r.read_text(encoding='utf-8'))
+    r = _ru(sc, k, a, DZ, kat, czasy, out_jpg)
     kor = r.setdefault('korekty', {})
     try:
         kor['kontrola_ulica3'] = kontrola_ulica3(sc)
@@ -312,12 +369,33 @@ def _render_ujecia_p(sc, k, a, DZ, kat, czasy, out_jpg):
     except Exception as e:          # kontrola pomocnicza – nie przerywa
         kor['kontrola_ulica3'] = dict(blad=repr(e))
         print('[ulica-3] kontrola – błąd: %r' % (e,))
-    plik_r = out_jpg.with_name(out_jpg.stem + '_kontrola.json')
+    if SUROWY['png'] and not a.kontrola_tylko:
+        cz = r.setdefault('czasy_s', {})
+        r['post_z_surowego'] = dict(surowy_png=str(SUROWY['png']), probki_passow=a.probki,
+                                    render_passow_s=cz.get('render_s'), postprodukcja_s=cz.get('postprodukcja_s'),
+                                    opis='passy (Depth, Mist, Object Index) z renderu 1 próbki tego samego kadru i sceny; '
+                                         'obraz – surowy PNG renderu finalnego (próbki i czas niżej)')
+        if prev:
+            r['probki'] = prev.get('probki', r.get('probki'))
+            cz['render_s'] = prev.get('czasy_s', {}).get('render_s')
+            kor['czas_calkowity_renderu_s'] = prev.get('korekty', {}).get('czas_calkowity_renderu_s',
+                                                                           prev.get('korekty', {}).get('czas_calkowity_s'))
     plik_r.write_text(json.dumps(r, ensure_ascii=False, indent=1), encoding='utf-8')
     return r
 
 
 U.render_ujecia = _render_ujecia_p
 
-if __name__ == '__main__':
+
+def main():
+    if '--surowy' in sys.argv:
+        i = sys.argv.index('--surowy')
+        SUROWY['png'] = Path(sys.argv[i + 1]).resolve()
+        if not SUROWY['png'].exists():
+            raise SystemExit('brak pliku %s' % SUROWY['png'])
+        del sys.argv[i:i + 2]
     FK.main()
+
+
+if __name__ == '__main__':
+    main()

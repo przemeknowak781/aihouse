@@ -81,11 +81,11 @@
   },
   {
    "id": "ulica-3",
-   "opis": "Wybrzeże i wieża nad rzeką – z zewnętrznej krawędzi pomostu Mostu Grunwaldzkiego, 25 m od pylonu pd., poza płaszczyzną kratownicy (oko 1,65 m nad chodnikiem mostu = 4,88 m nad ±0; kratownica, łańcuchy i pylon poza kadrem). Odra i barka w pierwszym planie, nabrzeże z drzewami, WS 5 i segment zbiegające się w lewo, wieża z łukiem i koroną na prawej linii trójpodziału, jesienne krzewy skweru po prawej. 1.10 08:10 (az 110°, 11°) – boczne poranne słońce na elewacji wsch. i lewej połowie łuku.",
+   "opis": "Wybrzeże i wieża nad Odrą – z zewnętrznej krawędzi pomostu Mostu Grunwaldzkiego, 35 m od pylonu pd., poza płaszczyzną kratownicy (x −10,3 m od osi mostu; oko 1,65 m nad chodnikiem mostu, Z 5,10 = 5,05 nad ±0; pylon pd. 45–56°, a łańcuch i kratownica 53° w prawo od osi – poza kadrem). W pierwszym planie barka-restauracja z detalem przy nabrzeżu (cała w kadrze) i Odra z lekką poranną mgłą nad wodą w głębi. Szereg WS 6, WS 5 i segmentu z drzewami bulwaru zbiega się w lewo, wieża z łukiem, napisem Bramy Mostowej i koroną za lamelami na prawej linii trójpodziału (x 0,38–0,89), dziób skrzydła i jesienne krzewy skweru po prawej. 1.10 08:10 (az 110°, wys. 11°) – boczne poranne słońce na elewacji wsch. i lewej połowie łuku. 32 mm, kadr 3:2, kamera pozioma, shift 0,13.",
    "cam": {
-    "e": 120.91,
-    "n": 135.26,
-    "z": 4.93,
+    "e": 130.327,
+    "n": 138.613,
+    "z": 5.1,
     "z_od": "scena"
    },
    "target": {
@@ -93,13 +93,71 @@
     "n": 66.79,
     "z": 10.0
    },
-   "lens_mm": 28,
+   "lens_mm": 32,
    "shift_x": 0.0,
    "shift_y": 0.13,
    "aspect": "3:2",
    "czas": "2026-10-01 08:10 CEST",
    "ludzie": true,
-   "preset": "dzien"
+   "preset": "dzien",
+   "tytul": "Wybrzeże i wieża nad Odrą – z Mostu Grunwaldzkiego",
+   "podpis": "Wieża Sejmiku i Segment Wybrzeża nad Odrą; widok z Mostu Grunwaldzkiego (krawędź pomostu, 35 m od pylonu pd.), poranek 1 października",
+   "woda": {
+    "szorstkosc": 0.02,
+    "fale": 0.12,
+    "barwa": [
+     [
+      0.032,
+      0.046,
+      0.052
+     ],
+     [
+      0.05,
+      0.066,
+      0.072
+     ]
+    ]
+   },
+   "barka_pd": "usun",
+   "os_zmarszczki": 198.0,
+   "post_przed": {
+    "mgla": {
+     "tryb": "woda",
+     "start": 0,
+     "glebokosc": 1500,
+     "Hs": 2.5,
+     "rho0": 0.0065,
+     "dmax": 800,
+     "barwa": [
+      1.0,
+      0.965,
+      0.92
+     ],
+     "jasnosc": 0.95
+    }
+   },
+   "uwaga_render": "Render finalny: render/final_ulica_3.py (nakładka na wspólną nakładkę finałową render/ujecia_finalne_korekty.py → ujecia_poprawki_kontekstu.py → ujecia_dodatkowe.py; te same argumenty). Warunki wspólne zestawu: lamele korony łuku v1.1 (21 szt. 0,35 × 0,60 m, rozstawy 1,35/0,675 m w ciągu Fibonacciego), sitodruk 30 % na szkle korony, ciepłe oprawy ×0,12 za dnia, klucz woda. Klucze barka_pd, os_zmarszczki i post_przed.mgla.tryb = 'woda' obsługuje tylko ta nakładka: barka-restauracja z detalem, zmarszczka wody, wyrównany uskok muru i 3 pieszych na bulwarze – funkcje z render/final_zlota_godzina_3.py (bez jej łańcucha); druga barka (pd.) usunięta; mgła nad wodą – warstwa wykładnicza (Hs 2,5 m nad zwierciadłem, ρ0 0,0065 1/m) liczona z passu Mist i kierunków promieni kamery.",
+   "poprawki": "v0 (podgląd): s 25 m od pylonu pd., 28 mm, shift 0,13, oś 192° – niebo 37 %, mur nabrzeża 11 %, wieża 30 % kadru, barka „białe pudło”. v1 (final, korekty jury): s 35 m (J1), 32 mm (J2), shift 0,13 (środek 0,16 J1 i 0,10 J2), cel bez zmian (oś 198,45°), barka z detalem i bez drugiej barki (J2), lekka mgła nad wodą (J2), lamele korony v1.1.",
+   "korekty_jury": {
+    "wdrozone": [
+     "stanowisko 10 m dalej na pn. wzdłuż zewnętrznej krawędzi pomostu (J1): s 25 → 35 m od pylonu pd., x −10,3 m od osi mostu bez zmian → (130,33; 138,61); oko 1,65 m nad chodnikiem mostu: nawierzchnia zpom(35) = 3,30 + chodnik 0,15 + 1,65 = Z 5,10; cel (106,36; 66,79; z 10,0) bez zmian, oś 198,45° (J1: ok. 198°)",
+     "obiektyw 32 mm (J2; J1 – 30 mm): z dalszego stanowiska wieża jest ok. 6 % większa niż w podglądzie (J1 chciał tę samą wielkość, J2 +15 %) i zajmuje x 0,381–0,893 (J2: ok. 0,36–0,92), napis Bramy Mostowej x 0,565 / y 0,308, lamele korony y 0,817, attyka y 0,923; wieża 32 % kadru (było 30 %)",
+     "shift_y 0,13 – środek propozycji 0,16 (J1) i 0,10 (J2): attyka 7,7 % pod górną krawędzią, horyzont y 0,305; niebo 37 → 34 % kadru (siatka 48 × 32, J2 chciał ok. 28 %), mur nabrzeża 10,9 → 10,4 % – jego korona biegnie od prawej krawędzi ku łukowi jako linia prowadząca",
+     "kontrola J1: pylon pd. (noga po stronie kamery) 45,5–55,6° w prawo od osi, płaszczyzna łańcucha i kratownicy najbliżej 53,1° – przy połowie kąta poziomego 29,4° poza kadrem; żaden wierzchołek siatek mostu nie rzutuje się w kadr; dziób skrzydła x1 0,923 – nie ucięty",
+     "kontrola J2 (4): najbliższy element pomostu / kratownicy 0,71 m od obiektywu (obok, w płaszczyźnie kratownicy) – w kadrze 32 mm go nie ma (0 wierzchołków mostu w kadrze, promienie dół / narożniki trafiają nabrzeże, barkę, krzewy skweru)",
+     "barka w lewym dole (J2): uproszczone „białe pudło” zastąpione barką-restauracją z detalem (ta sama co w zlota-godzina-3: ciemny kadłub z odbojnicą, przeszklony salon z wnętrzem i lampami, zielona markiza z girlandą żarówek, relingi, górny taras z kioskiem, parasolami i donicami, koła ratunkowe, cumy, kładka); cała w kadrze (J1): x 0,045–0,518, linia wodna y ≥ 0,025. Druga, dalsza barka (pd., 110 m) – też „pudło” przy lewej krawędzi (x 0,03–0,11) – usunięta",
+     "lekka mgła nad wodą dla głębi (J2): warstwa przy wodzie o gęstości ρ0·exp(−h / 2,5 m), ρ0 = 0,0065 1/m, całkowana wzdłuż promienia kamery (odległość z passu Mist, położenie z kierunku promienia); barwa ciepłej bieli o luminancji nieba przy horyzoncie. Woda 40 m przed obiektywem ok. 6 % mgły, cokół wieży ok. 4 %, Odra i drugi brzeg w głębi (100–200 m) 15–30 %",
+     "woda jak w zlota-godzina-2 (chropowatość 0,02, fale 0,12, barwa mniej brunatna) i zmarszczka ~2 mm w skali 0,5 m (z zlota-godzina-3) – odbicie barki i nabrzeża lekko rwie się, bez lustra",
+     "pora 2026-10-01 08:10 CEST bez zmian (J1, J2): słońce az 109,5°, wys. 11,2° – elewacja wsch. wieży i lewa połowa łuku w słońcu",
+     "korona po poprawie lamel (J1): 21 lamel 0,35 × 0,60 m w rytmie Fibonacciego 1,35 / 0,675 m, sitodruk 30 % na szkle korony, ciepłe oprawy za dnia ×0,12 (warunek wspólny zestawu)",
+     "ludzie włączeni: sylwetki przy wieży i na bulwarze (60–125 m od obiektywu) – drobne, w planie dalszym; 3 pieszych na koronie nabrzeża przy barce"
+    ],
+    "nie_wdrozone": [
+     "shift_y 0,16 i 30 mm (J1) dosłownie: kontrola – niebo 43 % kadru (zamiast mniej), woda 2,8 %, linia wodna barki na dolnej krawędzi (y −0,002), wieża 28 % – przesunięcie w górę zmniejsza mur, ale też pas wody, wbrew celowi J1 „pas wody rośnie”; przyjęto shift 0,13 i 32 mm",
+     "shift_y 0,10 (J2) dosłownie: ze starego stanowiska przy 32 mm attyka wychodzi poza kadr (y 1,03), a barka jest ucięta lewą krawędzią (x −0,03); z nowego stanowiska attyka y 0,968 (3 % zapasu), mur nabrzeża rośnie do 11,7 % – wbrew celowi obu jurorów; niebo przy shift 0,13 – 34 % (ok. 28 % tylko kosztem ściśniętej attyki)",
+     "oś 194° (J2): ze stanowiska J1 ten sam cel daje oś 198,45° – wieża stoi w kadrze tam, gdzie chciał J2 (x 0,38–0,89); obrót o kolejne stopnie w prawo ucina barkę lewą krawędzią (199,5°: x0 0,025), w lewo zbliża dziób skrzydła do prawej krawędzi"
+    ]
+   }
   },
   {
    "id": "ulica-4",
@@ -410,7 +468,23 @@
      "desat": 0.2
     }
    },
-   "poprawki": "v0 (podgląd): 70 mm, oś 302°, shift 0,05 – attyka y 0,88 (narożnik 0,93, 7 % nieba nad wieżą), woda 41 %, barki – białe pudła, gmach DUW za mostem – płaski blok, bez pieszych. v1 (final, korekty jury, głosowanie 2 : 1 jak w zlota-godzina-3): stanowisko (301; −40; oko 1,65 m) i 70 mm bez zmian (jurorzy 2 i 3; 80 mm jurora 1 odrzucone – wycinałby DUW, ale dwa głosy za 70 mm), oś 302° bez zmian (2 i 3; topola bulwaru poza kadrem), shift_y 0,05 → 0,09 (jurorzy 1 i 3; wartość jurora 3 – 0,11 jurora 1 była liczona dla 80 mm): wieża x 0,07–0,43, attyka łuku y 0,82, narożnik y 0,87 (13 % nieba nad wieżą), horyzont 0,365, woda 32 %, niebo 33 %; portal z hełmami x 0,72–0,85 – mieści się; kadr 3 : 2 (bez 16 : 9) i pora 20.10 08:07 bez zmian (wszyscy). Wdrożone: perspektywa powietrzna od ~270 m (1 i 3; wieża 230 m i portal 265–280 m ostre), DUW w LOD2 z dachem, gzymsem i siatką okien, tynk ciemniejszy od granitu wieży (2 i 3), barki z detalem jak w zlota-godzina-3 (2), 3 pieszych na bulwarze przy lewej krawędzi (2), render po poprawce lamel (2)."
+   "poprawki": "v0 (podgląd): 70 mm, oś 302°, shift 0,05 – attyka y 0,88 (narożnik 0,93, 7 % nieba nad wieżą), woda 41 %, barki – białe pudła, gmach DUW za mostem – płaski blok, bez pieszych. v1 (final, korekty jury, głosowanie 2 : 1 jak w zlota-godzina-3): stanowisko (301; −40; oko 1,65 m) i 70 mm bez zmian (jurorzy 2 i 3; 80 mm jurora 1 odrzucone – wycinałby DUW, ale dwa głosy za 70 mm), oś 302° bez zmian (2 i 3; topola bulwaru poza kadrem), shift_y 0,05 → 0,09 (jurorzy 1 i 3; wartość jurora 3 – 0,11 jurora 1 była liczona dla 80 mm): wieża x 0,07–0,43, attyka łuku y 0,82, narożnik y 0,87 (13 % nieba nad wieżą), horyzont 0,365, woda 32 %, niebo 33 %; portal z hełmami x 0,72–0,85 – mieści się; kadr 3 : 2 (bez 16 : 9) i pora 20.10 08:07 bez zmian (wszyscy). Wdrożone: perspektywa powietrzna od ~270 m (1 i 3; wieża 230 m i portal 265–280 m ostre), DUW w LOD2 z dachem, gzymsem i siatką okien, tynk ciemniejszy od granitu wieży (2 i 3), barki z detalem jak w zlota-godzina-3 (2), 3 pieszych na bulwarze przy lewej krawędzi (2), render po poprawce lamel (2).",
+   "final": {
+    "plik": "docs/60_wizualizacje/img/extra/E_zlota-godzina-5.jpg",
+    "rozdzielczosc": [
+     2000,
+     1333
+    ],
+    "probki": 64,
+    "odszumianie": "OIDN",
+    "ludzie": true,
+    "postprodukcja": "dzien (przed nią: zamglenie_poranne wg passu Mist)",
+    "skrypt": "render/final_zlota_godzina_5.py",
+    "czas_renderu_s": 842.2,
+    "czas_calkowity_s": 848.2,
+    "data": "2026-11-17",
+    "kontrola": "uwagi: brak; woda 33 %, niebo 33 %, budynek 12 %, drzewa 8 %, most 4 %, barki 3 %, DUW 3 %; wieża x 0,07–0,43, attyka łuku y 0,82, narożnik y 0,87 (13 % nieba nad wieżą), horyzont 0,365; napis Bramy Mostowej y 0,41, korona y 0,75 – widoczne; portal z hełmami x ≈ 0,72–0,85, hełmy y ≈ 0,66 – w kadrze; topola bulwaru poza kadrem; lamele łuku 21 szt.; DUW w LOD2 (2184 okna, gzyms, dach tytan-cynk) za portalem, zamglenie od 270 m (max udział 0,60, w > 0,3 na 3 % kadru) – wieża i portal ostre; 3 pieszych na bulwarze x 0,03–0,09 widocznych za siatką ogrodzenia (głowy ponad ogrodzeniem, długie poranne cienie na elewacji WS 5); barka PV i barka-restauracja z detalem. Uwaga do context.py: pod pomostem mostu (x ≈ 0,87–0,91) widać przez prześwit daleki brzeg – po zamgleniu jasny prostokąt."
+   }
   },
   {
    "id": "zmierzch-detal-1",

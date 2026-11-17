@@ -20,11 +20,16 @@ podwieszanego” z podziałem na bryły, ścianki pokoi od korytarza – pełna 
 v1.2b (decyzje po scaleniu, _v12b_decyzje.py): pozycje POZA12B – MDS 592 os. na −1 z szybem podwójnym wyjść zapasowych poza strefą
 prognozowanego zagruzowania (zamiast szybu P-I6), wnęki pochwytów klatek (M.13 pkt 6), drzewa w pasie od bulwaru w systemie komór;
 zapas docelowy ≥ 0,5 mln (ZAPAS_MIN; limit 150 mln z rezerwą 5 % – twardy).
+v1.2b-fix (po weryfikacji v1.2b): [K0] PU z pomieszczeniami MDS/ukrycia podziemia ze specyfikacji (ΔPU wobec modelu v1.1); MDS
+projektowo 600 os. (≥ ⌈PU/15⌉); szyb SZ-MDS jako jedna pozycja pełnej kwoty (bez szybu P-I6 i wiersza różnicowego); nowe pozycje: podpory
+tymczasowe stropu nad −1 (zał. 1 rozp. 932), punkt przygotowania posiłków MDS (§ 8 ust. 2 pkt 3), korytarz ewakuacyjny klatki B i drzwi
+zewnętrzne klatki C (WT § 256 ust. 6), konstrukcja Hali i łuku ([D3]); opisy F.14.B bez kodów wersji, liczby w zapisie polskim.
 """
 import io
 import json
 import math
 import os
+import re
 import sys
 from contextlib import redirect_stdout
 
@@ -40,6 +45,11 @@ K = json.load(open(os.path.join(ROOT, "model", "koncepcja.json"), encoding="utf-
 S3 = json.load(open(os.path.join(HERE, "kondygnacja_S2.json"), encoding="utf-8"))
 B = json.load(open(os.path.join(ROOT, "model", "budynek.json"), encoding="utf-8"))
 KS_REZ = (1 + km.KS[1]) * (1 + km.REZ[1])
+
+
+def pl(x, nd=2):
+    """Liczba w zapisie polskim (spacja tysięcy, przecinek dziesiętny) – opisy F.14.B."""
+    return f"{x:,.{nd}f}".replace(",", " ").replace(".", ",")
 
 
 def hr(t):
@@ -76,14 +86,29 @@ new_rooms = {**S3["pomieszczenia"], **S3["antresola_pomieszczenia"]}
 new = {"S": sum(v["pow_m2"] for k, v in S3["pomieszczenia"].items() if kat(k) == "PU"),
        "ANT": sum(v["pow_m2"] for k, v in S3["antresola_pomieszczenia"].items() if kat(k) == "PU")}
 dPU = sum(new.values()) - sum(old.values())
-PU12 = PU11 + dPU
+# v1.2b-fix: pomieszczenia MDS i ukrycia podziemia ze specyfikacji (podziemie.MDS, _rewizja_parking.py) – kategoria PU jak w F.15
+# (PPM.04 „funkcja MDS – zaplecze”, PHS, PP – program.yaml) minus odpowiedniki w modelu pomieszczeń v1.1 (budynek.json)
+POD_SPEC = {"-1": {"sanitariaty MDS z WC dostępnym (PHS)": 30.0, "punkt przygotowania posiłków MDS (PPM.04)": 6.0,
+                   "magazyn MDS (PPM.04)": 20.0, "pralnia MDS (PP)": 10.0, "porządkowe (PP)": 8.0},
+            "-2": {"WC ukrycia (PHS)": 15.0, "filtrowentylacja ukrycia (PPM.04)": 30.0}}
+POD_MODEL = {"-1": ("PPM.04b", "PP.07", "PHS.01b"), "-2": ("PHS.01a", "PPM.04a")}
+POD_FROZEN = {"-1": 26.17, "-2": 34.48}     # model v1.1: PPM.04b 10,91 + PP.07 8,99 + PHS.01b 6,27; PHS.01a 6,27 + PPM.04a 28,21
+pod_live = {lv["id"]: sum(r["powierzchnia"] for r in lv["pomieszczenia"] if r["numer"] in POD_MODEL[lv["id"]])
+            for lv in B["kondygnacje"] if lv["id"] in POD_MODEL}
+POD_IN_MODEL = any(abs(pod_live.get(k, 0) - POD_FROZEN[k]) > 0.01 for k in POD_FROZEN)
+dPU_pod = {k: round(sum(POD_SPEC[k].values()) - POD_FROZEN[k], 2) for k in POD_SPEC}
+PU12 = PU11 + dPU + sum(dPU_pod.values())
 assert PU12 > PU11 - 1e-6, "PU v1.2 nie może spaść poniżej bazy v1.1 (S-3 ma więcej PU niż S v1.0)"
 print(f"  PU kondygnacji S + antresoli w modelu pomieszczeń v1.1 (baza zamrożona): S {old['S']:.2f} + ANT {old['ANT']:.2f} = {sum(old.values()):.2f} m²"
       + (f"; model pomieszczeń PRZELICZONY z S-3 (S {old_live['S']:.2f} + ANT {old_live['ANT']:.2f}) – PU v1.2 nadal od bazy zamrożonej,"
          " kontrola z F.15.A po przeliczeniu" if S3_IN_MODEL else "; model pomieszczeń bez S-3 – zgodny z bazą ✔"))
 print(f"  PU S-3: S {new['S']:.2f} + ANT {new['ANT']:.2f} = {sum(new.values()):.2f} m² (SWD bez SWD.02/02g – RU; PHS.05a–c, PP.06;"
       f" IT.02 – US; kuluar, KW – RU)")
-print(f"  ΔPU = {dPU:+.2f} m² → PU v1.2 = {PU11:.2f} {dPU:+.2f} = {PU12:.2f} m² (antresola wnosi PU: galeria {S3['antresola_pomieszczenia']['SWD.01g']['pow_m2']},"
+print(f"  v1.2b-fix – PU podziemia (MDS, ukrycie) wg specyfikacji minus model v1.1: −1 {sum(POD_SPEC['-1'].values()):.2f} − {POD_FROZEN['-1']:.2f}"
+      f" = {dPU_pod['-1']:+.2f}; −2 {sum(POD_SPEC['-2'].values()):.2f} − {POD_FROZEN['-2']:.2f} = {dPU_pod['-2']:+.2f} m²"
+      + (" (model pomieszczeń zmieniony – Δ od bazy zamrożonej; kontrola z F.15.A po przebiegu rzutów)" if POD_IN_MODEL else " (model v1.1 zgodny z bazą ✔)"))
+print(f"  ΔPU = {dPU:+.2f} (S-3) {sum(dPU_pod.values()):+.2f} (podziemie) m² → PU v1.2 = {PU11:.2f} {dPU:+.2f} {sum(dPU_pod.values()):+.2f}"
+      f" = {PU12:.2f} m² (antresola wnosi PU: galeria {S3['antresola_pomieszczenia']['SWD.01g']['pow_m2']},"
       f" SWD.03 {S3['antresola_pomieszczenia']['SWD.03']['pow_m2']}, SWD.05 {S3['antresola_pomieszczenia']['SWD.05']['pow_m2']},"
       f" PHS.05c {S3['antresola_pomieszczenia']['PHS.05c']['pow_m2']})")
 req = 12 / 1000 * (PU12 - GASTRO) + 6 / 1000 * GASTRO
@@ -129,39 +154,60 @@ print(f"  klatki: n_kond_klatki {P11['n_kond_klatki']} → {P['n_kond_klatki']} 
       f" {P11['bal_wew']} → {P['bal_wew']} mb (S-3 +5; v1.2-fix: podest galerii +{BAL_PODEST:.1f}, krawędź otworu nad schodami {D_EDGE:+.1f})")
 H_TRZON = 34.15 - (-7.30)
 POZA12 = {
-    f"trzon A (I5): wydłużenie o 0,60 m na pd. – ściany żelbetowe 2 × 0,60 m × {H_TRZON:.2f} m (−7,30…+34,15) × 550 zł/m²":
+    f"trzon A: wydłużenie o 0,60 m na pd. – ściany żelbetowe 2 × 0,60 m × {pl(H_TRZON)} m (−7,30…+34,15) × 550 zł/m²":
         (2 * 0.60 * H_TRZON * 550, "_v12_trzony.py [T2]; stawka 3.3 mid"),
     "klatki A i C trójbiegowe na kond. −1/P i P/1: 4 biegi + 4 spoczniki ≈ 2 × (35 000 + 30 m² × 230 + 14 mb × 900 + 11 mb × 200)":
         (2 * (35000 + 30 * 230 + 14 * 900 + 11 * 200), "_v12_trzony.py [T2], [T4]; stawki 3.8, 13.2, 14.1, 14.2"),
-    "trzon C (I5): bez szybu C1 – ściany szybu −2,55 m × 24,0 m (−4,20…+19,80) × 550 zł/m²":
+    "trzon C: bez szybu C1 – ściany szybu −2,55 m × 24,0 m (−4,20…+19,80) × 550 zł/m²":
         (-2.55 * 24.0 * 550, "_v12_trzony.py [T4]"),
 }
 for k, (v, why) in POZA12.items():
     print(f"     + {k}: {v * KS_REZ / 1e6:+.3f} mln (z KS i rezerwą; {why})")
-# ---- v1.2b: decyzje po scaleniu (_v12b_decyzje.py [D1], [D2], [D8]) – ilości z geometrii, stawki [Z]
+# ---- v1.2b / v1.2b-fix: decyzje po scaleniu (_v12b_decyzje.py [D1], [D2], [D3], [D8]) – ilości z geometrii, stawki [Z]
 from _rewizja_wspolne import uv2en as _uv2en  # noqa: E402
 from shapely.geometry import LineString as _LS  # noqa: E402
 MDS_SZYB_UV = (11.50, -17.90)            # szyb podwójny SZ-MDS (środek), uv wieży – ≥ 12,84 m od ścian budynku ([D2])
 MDS_SZYB_WYM = (2.80, 1.55)              # obrys zewn. szybu podwójnego: 2 × (1,00 × 1,05) w świetle + ściany 0,25 (u × v)
 MDS_PORTAL_UV = (13.10, -5.00)           # wylot tuneli w ścianie szczelinowej −1 (droga u stopy rampy, bez stanowisk)
 MDS_TUNEL_M = round(_LS([_uv2en(*MDS_PORTAL_UV), _uv2en(*MDS_SZYB_UV)]).length - MDS_SZYB_WYM[1] / 2, 2)
-MDS_N = math.ceil(PU12 / 15 - 1e-9)      # art. 94 ust. 1 pkt 1: PU / 15 m² na osobę
+MDS_N_MIN = math.ceil(PU12 / 15 - 1e-9)  # art. 94 ust. 1 pkt 1: PU / 15 m² na osobę
+MDS_N = 600                              # v1.2b-fix: pojemność projektowa z zapasem na PU po przebiegu rzutów (≤ 9 000 m²); ≤ 641 ([D2])
+assert MDS_N >= MDS_N_MIN, f"MDS {MDS_N} < ⌈PU/15⌉ = {MDS_N_MIN}"
+N_PODP = 156                             # podpory tymczasowe stropu nad −1: ⌈972 m² MDS / 2,5²⌉ (rozstaw ≥ 2,5 m – zał. 1 pkt 3) – assert w [D2]
 L_WNEK = round(2 * 1.1 * (10 * 5.80 + 10 * 6.64 + 5 * 5.80), 1)   # wnęki pochwytów: 2 ściany × długość klatki × 1,1 (pochylenie) × przejścia
+L_KEB = 13.0                             # ściany EI 60 korytarza KE-B na P (12,8 m lica wewn. + naroża; bez ściany trzonu B i elewacji) – assert w [D3]
 POZA12B = {
-    f"MDS (v1.2b): szyb podwójny wyjść zapasowych SZ-MDS (2 × 1,00 × 1,05 m, żelbet 0,25, 2 włazy 0,8 × 0,8, drabiny) 0,14 mln + tunel"
-    f" podwójny z −1 {MDS_TUNEL_M:.1f} m × 25 000 zł – poza strefą prognozowanego zagruzowania (≥ H/3 od wszystkich ścian), w miejsce szybu"
-    f" P-I6 z tunelem 7,6 m (0,25 mln w pozycjach v1.1)": (0.14e6 + MDS_TUNEL_M * 25000 - 0.25e6, "_v12b_decyzje.py [D2]; [Z]"),
-    f"MDS (v1.2b): pojemność {MDS_N} os. (art. 94: PU {PU12:,.2f} / 15) zamiast 560 – adaptacja 18.1* 1,5 mln × {MDS_N - 560}/560"
-    f" (wyposażenie, sanitariaty 8 + 8, podpory tymczasowe stropu)": (1.5e6 * (MDS_N - 560) / 560, "_v12b_decyzje.py [D2]"),
-    f"klatki A, B, C (v1.2b, M.13 pkt 6): wnęki pochwytów 0,10 × 0,30 m w ścianach żelbetowych {L_WNEK:.0f} mb × 150 zł + ściana klatka/przedsionek A"
-    f" 0,20 → 0,25 m (0,05 × 5,80 × 41,45 m × 1 600 zł/m³)": (L_WNEK * 150 + 0.05 * 5.80 * 41.45 * 1600, "_v12_trzony.py [T7]; [Z]"),
-    "pas od bulwaru (v1.2b): 2 drzewa w pasie – strefy korzeniowe w systemie komór (2 × 9 m² × 1,0 m × 1 300 zł/m³) + kosz i kratownica":
+    f"MDS: szyb podwójny wyjść zapasowych SZ-MDS (2 × 1,00 × 1,05 m, żelbet 0,25 m, 2 włazy 0,8 × 0,8 m, drabiny) 140 000 zł + tunel"
+    f" podwójny z −1 {pl(MDS_TUNEL_M, 1)} m × 25 000 zł/m – poza strefą prognozowanego zagruzowania (≥ H/3 od wszystkich ścian budynku)":
+        (0.14e6 + MDS_TUNEL_M * 25000, "_v12b_decyzje.py [D2]; [Z]; zastępuje szyb z tunelem 8 m (0,25 mln) z pozycji v1.1"),
+    f"MDS: pojemność projektowa {MDS_N} os. (art. 94 ustawy o ochronie ludności: ≥ PU {pl(PU12)} m² / 15 = {MDS_N_MIN} os.) zamiast 560 os."
+    f" – adaptacja garażu 1 500 000 zł × {MDS_N - 560}/560 (wyposażenie, sanitariaty)": (1.5e6 * (MDS_N - 560) / 560, "_v12b_decyzje.py [D2]"),
+    f"MDS: system podpór tymczasowych stropu nad −1 (zał. 1 pkt 3 rozp. MSWiA, Dz.U. 2025 poz. 932; Ad = 25 kN/m²): {N_PODP} podpór"
+    f" aluminiowych ≤ 50 kg × 700 zł + {2 * N_PODP} punktów mocowania (płytki kotwione w stropie i posadzce, oznakowanie) × 80 zł + regały 6 000 zł":
+        (N_PODP * 700 + 2 * N_PODP * 80 + 6000, "_v12b_decyzje.py [D2]; [Z] 500–1 000 zł/szt."),
+    "MDS: punkt przygotowania posiłków 6 m² (§ 8 ust. 2 pkt 3 rozp. MSWiA, Dz.U. 2025 poz. 932): zlewozmywak, 2 płyty indukcyjne,"
+    " warnik, chłodziarka, przyłącza wody, kanalizacji i szyny odbiorów krytycznych": (18000, "_v12b_decyzje.py [D2]; [Z]"),
+    f"klatki A, B, C (M.13 pkt 6): wnęki pochwytów 0,09 × 0,30 m w ścianach żelbetowych {pl(L_WNEK, 0)} mb × 150 zł + ściana klatka/przedsionek A"
+    f" 0,20 → 0,25 m (0,05 × 5,80 × {pl(H_TRZON)} m × 1 600 zł/m³)": (L_WNEK * 150 + 0.05 * 5.80 * H_TRZON * 1600, "_v12_trzony.py [T7]; [Z]"),
+    f"klatka B: korytarz ewakuacyjny EI 60 na parterze do drzwi w elewacji ogrodowej (WT § 256 ust. 6): ściany {pl(L_KEB, 1)} m × 4,80 m"
+    f" × 260 zł/m², drzwi 1,50 m z klatki 6 000 zł, drzwi zewnętrzne dwuskrzydłowe 1,60 m z zamknięciem panicznym 14 000 zł,"
+    f" nawiew nadciśnienia 5 000 zł": (L_KEB * 4.80 * 260 + 6000 + 14000 + 5000, "_v12b_decyzje.py [D2], [D3]; [Z]"),
+    "klatka C: drzwi zewnętrzne dwuskrzydłowe 1,80 m w ścianie od dziedzińca na parterze (otwór w żelbecie z nadprożem, ETICS,"
+    " zamknięcie paniczne)": (18000, "_v12b_decyzje.py [D2]; _v12_trzony.py [T7]; [Z]"),
+    "Hala Obywatelska i łuk: pasma sprężone nad osią Hali (8 stropów × 6 000 zł), belka nadproża Bramy Mostowej 7,0 m (10 000 zł),"
+    " belki krawędziowe łuku w osi 45° na kond. 1–6 i S (7 × 7,0 m × 0,18 m³/m × 3 500 zł/m³), słupy hali Ø 0,45 m z betonu C50/60"
+    " i zbrojeniem 4 % (15 000 zł) minus 4 słupy łuku × 9 kondygnacji × 0,6 m³ × 3 000 zł/m³":
+        (8 * 6000 + 10000 + 7 * 7.0 * 0.18 * 3500 + 15000 - 4 * 9 * 0.6 * 3000, "_v12b_decyzje.py [D3]; [Z]"),
+    "pas od bulwaru: 2 drzewa w pasie – strefy korzeniowe w systemie komór (2 × 9 m² × 1,0 m × 1 300 zł/m³) + kosz i krata":
         (2 * 9 * 1.0 * 1300 + 2 * 3500, "_v12b_decyzje.py [D8]; [Z]"),
 }
 for k, (v, why) in POZA12B.items():
     print(f"     + {k[:140]}: {v * KS_REZ / 1e6:+.3f} mln (z KS i rezerwą; {why})")
 POZA12 = {**POZA12, **POZA12B}
-POZA = {**POZA11, **POZA12}
+P_I6 = [k for k in POZA11 if "P-I6" in k]
+assert len(P_I6) == 1 and abs(POZA11[P_I6[0]][0] - 0.25e6) < 1, "pozycja szybu P-I6 w kosztach v1.1"
+POZA11F = {k: v for k, v in POZA11.items() if k not in P_I6}      # v1.2b-fix: szyb P-I6 zastąpiony pełną pozycją SZ-MDS (POZA12B)
+POZA = {**POZA11F, **POZA12}
 ex = sum(v[0] for v in POZA.values())
 t0, wk0, r0 = RK.total(P, ex)
 print(f"  v1.2 przed dźwigniami: roboty + KS {wk0:.2f}, razem {t0:.2f} mln (Δ wobec v1.1 {t0 - t11:+.2f}), zapas {LIMIT - t0:.2f} mln")
@@ -169,7 +215,9 @@ eff_ant = RK.total(dict(P11, A_nad=PC_nad12), ex11)[0] - t11
 print(f"     w tym antresola ponad rezerwę (sama zmiana A_nad): {eff_ant:+.2f} mln; klatka A i balustrady:"
       f" {RK.total(dict(P11, A_nad=PC_nad12, n_kond_klatki=P['n_kond_klatki'], bal_wew=P['bal_wew']), ex11)[0] - t11 - eff_ant:+.2f};"
       f" trzony I5: {sum(v[0] for k_, v in POZA12.items() if k_ not in POZA12B) * KS_REZ / 1e6:+.2f};"
-      f" decyzje v1.2b: {sum(v[0] for v in POZA12B.values()) * KS_REZ / 1e6:+.2f}")
+      f" decyzje v1.2b i v1.2b-fix: {sum(v[0] for v in POZA12B.values()) * KS_REZ / 1e6:+.2f} (w tym szyb SZ-MDS pełną kwotą"
+      f" w miejsce szybu P-I6 z v1.1 {-POZA11[P_I6[0]][0] * KS_REZ / 1e6:+.2f} → netto"
+      f" {(sum(v[0] for v in POZA12B.values()) - POZA11[P_I6[0]][0]) * KS_REZ / 1e6:+.2f})")
 
 # ------------------------------------------------------------------------------------------------ [K3] dźwignie
 hr("[K3] Dźwignie v1.2 (efekt pojedynczy, mln zł z KS i rezerwą 5 %)")
@@ -195,8 +243,8 @@ NASW = 0.0                               # v1.2-fix: ściany GK pełne, bez naś
 LEV = [
     # (klucz, opis, widoczność na planszach, zmiana P, kwota spoza modelu)
     ("TABS", "pokoje bez sufitu podwieszanego – strop odsłonięty z wyspami akustycznymi 0,35 m²/m² × 260 zł zamiast sufitu modułowego"
-             f" 180 zł/m² (poz. 12.1): wieża (TABS, baffle) {POK.get('wieża', 0):,.0f} m², skrzydło {POK.get('skrzydło', 0):,.0f} m²,"
-             f" segment {POK.get('segment', 0):,.0f} m² (rozdz. 4.2; instalacje w korytarzach i w warstwie podłogi)",
+             f" 180 zł/m² (poz. 12.1): wieża (TABS, baffle) {pl(POK.get('wieża', 0), 0)} m², skrzydło {pl(POK.get('skrzydło', 0), 0)} m²,"
+             f" segment {pl(POK.get('segment', 0), 0)} m² (instalacje w korytarzach i w warstwie podłogi)",
      "niewidoczne (wnętrza biur poza kadrami W6–W8)", {}, -pokoje * (180 - 0.35 * 260)),
     ("SZKLO", "ścianki szklane wewn. 10 % → 8 % A (poz. 11.5): pokoje biurowe od korytarza – pełna ściana GK (bez naświetli;"
               " korytarze oświetlone sztucznie); szkło w salach narad, sekretariatach, holach i strefie Sejmiku bez zmian",
@@ -264,8 +312,8 @@ RISK = {
            "NIEPOTRZEBNE po v1.2-fix: dojścia ZL I bez zwiększeń +50 % (_s2_ewakuacja.py [E2]) – wariant tylko informacyjnie"),
     "R2": ("szyb awaryjny z −2 do budowli ochronnej (ukrycie) – gdyby postanowienie organu (art. 95a) / rozp. 2025 poz. 1548 wymagało"
            " dla −2 wyjścia niezależnego od rampy wewnętrznej (jak szyb P-I6)", (0.25e6, 0.25e6),
-           "warunkowe – v1.2b: MDS 592 os. na −1 z wyjściami zapasowymi poza strefą zagruzowania (w bazie); „2 klatki ≥ 15 m” bez znaczenia"),
-    "R3": ("MDS 592 zamiast 560 os.", (0.0, 0.0), "v1.2b: ujęte w kosztach bazowych (POZA12B)"),
+           f"warunkowe – v1.2b: MDS {MDS_N} os. na −1 z wyjściami zapasowymi poza strefą zagruzowania (w bazie); „2 klatki ≥ 15 m” bez znaczenia"),
+    "R3": (f"MDS {MDS_N} zamiast 560 os.", (0.0, 0.0), "v1.2b: ujęte w kosztach bazowych (POZA12B)"),
 }
 for k, (nm, (lo, hi), st) in RISK.items():
     rng = f"{lo * KS_REZ / 1e6:.2f}" + (f"–{hi * KS_REZ / 1e6:.2f}" if hi != lo else "")
@@ -275,7 +323,9 @@ z_r = LIMIT - tF - R_OPEN
 z_rf = z_r - eff["FILARY"] if "FILARY" not in chosen else z_r
 t4r = t4 + R_OPEN * (1 + km.KS[1]) * 1.04 / KS_REZ
 print(f"     R2 (warunkowe): +{R_OPEN:.2f} mln → zapas {z_r:.2f} mln {'≥' if z_r >= ZAPAS_MIN else '<'} {ZAPAS_MIN:.1f};"
-      f" pokrycie: dźwignia FILARY ({eff['FILARY']:+.2f}) → zapas {z_rf:.2f}; rezerwa 4 % (≥ 4 % – wymóg) → razem {t4r:.2f} mln,"
+      + (f" pokrycie: dźwignia FILARY ({eff['FILARY']:+.2f}) → zapas {z_rf:.2f};" if "FILARY" not in chosen else
+         " (dźwignia FILARY już w bazie v1.2b-fix);")
+      + f" rezerwa 4 % (≥ 4 % – wymóg) → razem {t4r:.2f} mln,"
       f" zapas {LIMIT - t4r:.2f} mln {'≥' if LIMIT - t4r >= ZAPAS_MIN else '<'} {ZAPAS_MIN:.1f}")
 r1lo, r1hi = (x * KS_REZ / 1e6 for x in RISK["R1"][1])
 print(f"     gdyby mimo to wymagano tryskaczy (R1): zapas przy rezerwie 4 % i R2: {LIMIT - t4r - r1hi * 1.04 / 1.05:.2f}…"
@@ -291,6 +341,19 @@ RESULT = dict(total=tF, works_ks=wkF, rez=wkF * rez, zapas=LIMIT - tF, t4=t4, P=
 KOSZT_DOKUMENTACJI = 7.6e6          # koszt Dokumentacji [zł netto] (rozdz. 12; ≤ 5,4 % × 150 mln = 8,1 mln)
 
 
+def f14b_opis(nm):
+    """Opis pozycji spoza modelu w F.14.B: bez kodów wersji/dźwigni i numerów uwag, liczby w zapisie polskim."""
+    t = re.sub(r"^dźwignia v1\.\d+b? [A-Z]+: ", "", nm)
+    t = re.sub(r"\s*\(dźwignia[^)]*\)", "", t)
+    t = t.replace(" v1.0)", " w koncepcji wyjściowej)")
+    t = re.sub(r"\s*\((?:v1\.\d+b?(?:-fix)?|I\d+|P-I\d+)\)", "", t)
+    t = re.sub(r"(\d),(\d{3})(?!\d)", r"\1 \2", t)          # 2,611 → 2 611
+    t = re.sub(r"(\d)\.(\d)", r"\1,\2", t)                   # 12.2 → 12,2 (numery pozycji, np. „poz. 3.14”, zostają: patrz niżej)
+    t = re.sub(r"poz\. (\d+),(\d+)", r"poz. \1.\2", t)
+    assert not re.search(r"v1\.\d|dźwignia|\(I\d\)|P-I\d", t), t
+    return t[0].upper() + t[1:]
+
+
 def f14b_rows(level="mid"):
     """Pozycje F.14.B v1.2 (konwencja koszty_model.compute()["rows"]): pozycje modelu bez 16.1 i 18.3*, pozycje spoza modelu
     (18.10*…; wartość robót, low × 0,8 / high × 1,3 jak w scenariuszach), 16.1 = KS × (roboty + spoza modelu),
@@ -304,7 +367,7 @@ def f14b_rows(level="mid"):
     ex_rows = []
     for k, (nm, (v, why)) in enumerate([(n, x) for n, x in POZA_F.items() if abs(x[0]) > 1e-6], start=10):
         val = v * fac
-        ex_rows.append((f"18.{k}*", nm[0].upper() + nm[1:], "kpl", 1, val, val))
+        ex_rows.append((f"18.{k}*", f14b_opis(nm), "kpl", 1, val, val))
     works = sum(x[5] for x in rows) + sum(x[5] for x in ex_rows)
     ks = works * km.KS[i]
     rz = (works + ks) * km.REZ[i]

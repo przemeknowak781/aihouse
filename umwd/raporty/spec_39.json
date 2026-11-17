@@ -1,0 +1,68 @@
+{
+ "nr": 39,
+ "title": "Photographic people replace mannequins; two more extra renders from the river",
+ "stages": [
+  [
+   "Organiser materials ✔ (results files deliberately EXCLUDED)",
+   "done"
+  ],
+  [
+   "Rules register ✔ (184 requirements) + checklists",
+   "done"
+  ],
+  [
+   "Site ✔ (zoning, heritage, survey, geotech, trees, neighbours)",
+   "done"
+  ],
+  [
+   "Law ✔ (WT bridge, fire, accessibility, zero-emission)",
+   "done"
+  ],
+  [
+   "Design research ✔ (trends, visuals, boards, façades, costs)",
+   "done"
+  ],
+  [
+   "Programme ✔ (187 offices, PU ≈ 8,600 m²)",
+   "done"
+  ],
+  [
+   "Concept v1.2 ✔ (Sejmik storey merged, cost 148.99 mln) → open decisions v1.2b (workflow ►)",
+   "running"
+  ],
+  [
+   "Production ►: drawings v1.1 ✔ (verified); plans + tables re-run after v1.2; photomatch W1/W2 tests ✔; extra showcase renders (workflow ►)",
+   "running"
+  ],
+  [
+   "Boards & texts ►: Stage II 8/8 skeletons (vis pending, P7/P8 re-layout); Stage II text 5 × A3 + Stage I text + F.14.A (workflow ►); 300-dpi export ✔",
+   "running"
+  ],
+  [
+   "Audit ►: structural & functional audit ✔ (41 confirmed findings, 8 critical: evacuation, garage ramps, step-free M1) → spec v1.3 queued; texts verified ✔",
+   "running"
+  ]
+ ],
+ "notes": [
+  "People fixed: mannequins replaced by photographic cut-out figures (autumn clothing, cast shadows, contact shadow). Real people, scale and season now read correctly (W5 test).",
+  "Extra renders E-6 (river panorama with Most Grunwaldzki) and E-7 (from the boulevard by the barge) finished."
+ ],
+ "images": [
+  {
+   "path": "umwd/raporty/img/W5_test_photopeople.jpg",
+   "caption": "Vis 5 test with photographic people"
+  },
+  {
+   "path": "umwd/raporty/img/W5_people_crop.jpg",
+   "caption": "Detail: people, shadows, autumn clothing"
+  },
+  {
+   "path": "umwd/raporty/img/E_zlota-godzina-5.jpg",
+   "caption": "Extra E-6: river panorama with the bridge"
+  },
+  {
+   "path": "umwd/raporty/img/E_ulica-3.jpg",
+   "caption": "Extra E-7: from the boulevard by the barge"
+  }
+ ]
+}

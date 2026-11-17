@@ -142,16 +142,21 @@ def build():
     bpA = cA["przedsionek_A"].bounds
     r["A"]["sklad"] = [
         "klatka A obudowana REI 60, 3,40 × 5,80 m w świetle: 2 biegi 1,60 m, stopnie ≤ 17,5 × 28 cm, spoczniki ≥ 1,50 m; "
-        "kond. −1/P i P/1 – 3 biegi (spocznik kondygnacyjny parteru na końcu pn.); do antresoli +30,90; v1.2b: pochwyty Ø 40 przyścienne we wnękach"
-        f" 0,10 × 0,30 m ścian 0,25 m i obustronne na balustradzie środkowej duszy 0,20 m – w świetle poręczy {pl(T.RES_T7['A']['swiatlo'])} m"
-        " ≥ 1,60 (M.13 pkt 6; _v12_trzony.py [T7])",
+        "kond. −1/P i P/1 – 3 biegi (spocznik kondygnacyjny parteru na końcu pn.); do antresoli +30,90; v1.2b: pochwyty przyścienne we wnękach"
+        f" ścian 0,25 m i obustronne na balustradzie środkowej duszy 0,20 m – w świetle poręczy {pl(T.RES_T7['A']['swiatlo'])} m ≥ 1,60"
+        f" (M.13 pkt 6); v1.2b-fix: pochwyty Ø {T.POCH_D * 1000:.0f} mm, wnęki {pl(T.WNEKA_D)} × {pl(T.WNEKA_H)} m – w pasie wnęki"
+        f" {pl(min(T.RES_T7['A']['zelbet_we_wnece']))} m żelbetu (REI 120 – EN 1992-1-2 tab. 5.4, μfi = 0,7); biegi przychodzące na S i 1–6 i +30,90"
+        " w pasie wsch., drzwi z przedsionka A w ścianie wsch. przy ścianie czołowej spocznika (otwór v 12,05–13,20; −1: 12,05–13,45;"
+        " P: 16,45–17,85) – bez kolizji z przedłużeniami pochwytów 0,30 m (_v12_trzony.py [T7])",
         f"przedsionek ppoż. A {pl(bpA[2] - bpA[0])} × {pl(bpA[3] - bpA[1])} m" + " z MOE 1,5 × 1,5 m (poza torem 1,2 m i polem otwierania skrzydeł – _s2_ewakuacja.py [E6]),"
         " krzesłem ewakuacyjnym i interkomem, nadciśnienie; drzwi pd. (kuluar S, korytarz publiczny +30,90, hol strefy środkowej 1–6,"
-        " Hala P), wsch. (łącznik S, galeria +30,90, garaż); przedsionek A' 2,50 × 3,00 m (antresola radnych) przy ścianie zach. klatki,"
-        " drzwi do klatki 1,0 m przy spoczniku",
+        " Hala P – klatka A jest jedyną klatką z drogą ewakuacyjną przez hol, WT § 256 ust. 6), wsch. (łącznik S, galeria +30,90, garaż);"
+        " przedsionek A' 2,50 × 3,00 m (antresola radnych) przy ścianie zach. klatki, drzwi do klatki 1,0 m przy spoczniku (v 12,55–13,55;"
+        " na +30,90 w pasie zach. bez biegu – bez przedłużenia pochwytu)",
         f"dźwigi A1, A2 1 600 kg, kabiny 1,5 × 2,1 m, szyby 2,25 × 2,55 m, drzwi pn. na wszystkich kondygnacjach (S-3): hol S i +30,90"
         f" – wolna głębokość od lica trzonu min. {pl(min(E.dA_min.values()))} m (A1, do biegu schodów / otworu nad biegiem; M.13 3,6 m,"
-        f" zapas {pl(min(E.dA_min.values()) - 3.6)} m), łącznik pn. P, korytarz pn. kond. 1–6 2,15 m, przedsionek dźwigów −1/−2 (pas 7,20 × 1,75 m)",
+        f" zapas {pl(min(E.dA_min.values()) - 3.6)} m), łącznik pn. P, korytarz pn. kond. 1–6 2,15 m, przedsionek dźwigów na −1 7,20 × 3,60 m"
+        " (MDS – M.13; v1.2b) i na −2 7,20 × 1,75 m",
         "dźwig R dla ekip ratowniczych PN-EN 81-72 i ewakuacyjny PN-EN 81-76, 1 000 kg, kabina 1,1 × 2,1 m, szyb 1,80 × 2,55 m REI 60, drzwi pd. do przedsionka A",
         "v1.2 (I5): trzon wydłużony o 0,60 m na pd. (v 12,45 → 11,85; ściana pd. 0,20 m) – kosztem holu strefy środkowej (kond. 1–6), Hali (P) i kuluaru S"
         " (przy trzonie 1,80 m po v1.2b – ściana kuluaru od pd. 0,15 m)",
@@ -171,7 +176,12 @@ def build():
     r["B"]["sklad"] = [
         "klatka B obudowana REI 60, 3,40 × 6,64 m w świetle: 2 biegi 1,60 m na każdej kondygnacji (P: 2 × 14 stopni 17,14 × 28 cm), spoczniki ≥ 1,50 m; do antresoli +30,90;"
         f" v1.2b: pochwyty we wnękach ścian 0,25 m (szyby P1/P2 i szacht przesunięte o 0,05 m na wsch., ściana wsch. trzonu 0,20 m) i na balustradzie"
-        f" środkowej – w świetle poręczy {pl(T.RES_T7['B']['swiatlo'])} m",
+        f" środkowej – w świetle poręczy {pl(T.RES_T7['B']['swiatlo'])} m (v1.2b-fix: pochwyty Ø {T.POCH_D * 1000:.0f} mm, wnęki {pl(T.WNEKA_D)} m,"
+        f" żelbet {pl(min(T.RES_T7['B']['zelbet_we_wnece']))} m – REI 120)",
+        "v1.2b-fix – wyjście na zewnątrz na parterze (WT § 256 ust. 6: przez Halę prowadzi droga tylko z klatki A): bieg przychodzący z −1 w pasie"
+        " zach. (spocznik P w tym pasie 2,06 m), drzwi 1,50 m w ścianie zach. trzonu (otwór v 5,75–7,35) do korytarza ewakuacyjnego KE-B EI 60"
+        " (1,80 m: wzdłuż trzonu u 23,05–24,85 i wzdłuż elewacji ogrodowej v 0,50–2,30) → drzwi zewnętrzne 1,60 m (2 skrzydła) u 19,25–20,85;"
+        " korytarz w strefie nadciśnienia klatki, bez innych drzwi (parter.wieza[Hala].korytarz_ewakuacyjny_B)",
         "przedsionek ppoż. B 3,40 × 2,06 m z MOE 1,5 × 1,5 m w narożu SW (poza torem 1,2 m i polem otwierania skrzydła; drzwi N w u 27,80"
         " – _s2_ewakuacja.py [E6]) i interkomem, nadciśnienie (v1.2: ściana klatka/przedsionek przesunięta o 0,29 m)",
         "dźwigi publiczne P1, P2 1 600 kg, kabiny 1,5 × 2,1 m, szyby 2,15 × 2,65 m, drzwi wsch.; P1 – przystanki P, 1–6, ANT; P2 przelotowy – −2, −1 "
@@ -189,13 +199,21 @@ def build():
     ]
     r["B"]["klatka"] = klatka_json(T.resB, "spocznik kondygnacyjny zawsze na końcu pn. (przy przedsionku B)")
     r["C"]["sklad"] = [
-        "klatka C obudowana REI 60, 5,80 × 3,40 m w świetle (biegi wzdłuż s): 2 biegi 1,60 m (M.13; MDS 260 os. → 1,56 m), kond. −1/P i P/1 – 3 biegi",
-        "przedsionek ppoż. C 5,80 × 2,00 m z MOE 1,5 × 1,5 m (koniec przeciwny do drzwi klatki) i interkomem, nadciśnienie; drzwi z korytarza (lico d 8,40;"
-        " ściana od korytarza 0,20 m, ściana klatki 0,25 m z wnęką pochwytu – v1.2b)",
+        "klatka C obudowana REI 60, 5,80 × 3,40 m w świetle (biegi wzdłuż s): 2 biegi 1,60 m (M.13), kond. −1/P i P/1 – 3 biegi; jedno z 3 wyjść"
+        " ewakuacyjnych MDS na −1 (klatki A, B, C)",
+        "przedsionek ppoż. C 5,80 × 2,00 m z MOE 1,5 × 1,5 m (koniec przeciwny do drzwi klatki) i interkomem, nadciśnienie; drzwi z korytarza (lico d 8,45;"
+        " ściana od korytarza 0,20 m, ściana klatki 0,25 m z wnęką pochwytu – v1.2b); v1.2b-fix: trzon C przesunięty o +0,05 m (d 8,45–14,55) –"
+        " korytarz skrzydła 1,825 m także przy trzonie; drzwi przedsionek → klatka w ścianie podłużnej przy spoczniku: −1 s 0,75–2,05, P s 5,15–6,55,"
+        " 1 s 0,75–2,45, 2–4 s 0,75–1,90 (bez kolizji z przedłużeniami pochwytów – _v12_trzony.py [T7])",
+        "v1.2b-fix – wyjście na zewnątrz na parterze: bieg przychodzący z −1 w pasie od dziedzińca (spocznik P w tym pasie 2,34 m), drzwi zewnętrzne"
+        " 1,80 m (2 skrzydła, w świetle ≥ 1,60) w ścianie od dziedzińca s 4,70–6,50 (poza pasem s < 2,0 przy Maz. 19) → dziedziniec → brama"
+        " ogrodowa (s 12,15–16,20) → Mazowiecka (rozp. 2025 poz. 932 § 6 ust. 3 pkt 1; WT § 256 ust. 6)",
         f"v1.2b: pochwyty we wnękach i na balustradzie środkowej – w świetle poręczy {pl(T.RES_T7['C']['swiatlo'])} m (M.13 pkt 6)",
         "szachty 1,60 × 5,65 m (nadciśnienie, piony)",
         "v1.2 (I5): rezygnacja z szybu rezerwowego C1 (nie mieścił się obok klatki 3,40 m; ściana przy Maz. 19 REI 120 bez otworów) – skrzydło obsługują A1/A2 przez ciągłe korytarze kond. 1–4",
     ]
+    r["C"]["obrys_wing_sd"] = ring_uv(T.CORE_C)                      # v1.2b-fix: d 8,45–14,55
+    r["C"]["obrys_en"] = ring_en(T.CORE_C, sd2en)
     r["C"]["uklad_sd"] = {k: ring_uv(g) for k, g in T.C_CELLS.items()}
     r["C"]["uklad_en"] = {k: ring_en(g, sd2en) for k, g in T.C_CELLS.items()}
     r["C"]["klatka"] = klatka_json(T.resC, "spocznik kondygnacyjny parteru na końcu przeciwnym niż na −1 i 1–4 (przedsionek wzdłuż całej klatki)")
@@ -221,7 +239,10 @@ def build():
     b["PC_nadziemna_m2"] = C.PC_nad12
     b["PU_m2"] = round(C.PU12, 2)
     b["PU_definicja"] = ("PN-ISO 9836 – pomieszczenia kategorii PU (model pomieszczeń, F.15.A: 8 850,37 m²) skorygowane o kondygnację S-3 "
-                         f"({'+' if C.dPU >= 0 else '−'}{pl(abs(C.dPU))} m² wobec bazy zamrożonej S + ANT modelu v1.1: _v12_koszt.py [K0]); bez RU, US, PG")
+                         f"({'+' if C.dPU >= 0 else '−'}{pl(abs(C.dPU))} m² wobec bazy zamrożonej S + ANT modelu v1.1) i o pomieszczenia MDS/ukrycia"
+                         f" podziemia ze specyfikacji (−1 {'+' if C.dPU_pod['-1'] >= 0 else '−'}{pl(abs(C.dPU_pod['-1']))}, −2"
+                         f" {'+' if C.dPU_pod['-2'] >= 0 else '−'}{pl(abs(C.dPU_pod['-2']))} m² – v1.2b-fix; _v12_koszt.py [K0]); bez RU, US, PG;"
+                         " kryterium odbioru przebiegu rzutów: F.15.C I.12 = bilans.PU_m2 (± 0,5 %)")
     b["koszt_mln_netto"] = round(C.RESULT["total"], 2)
     q = dict(C.km.REF)
     q.update(C.RESULT["P"])

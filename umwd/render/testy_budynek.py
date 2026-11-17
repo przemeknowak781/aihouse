@@ -70,9 +70,9 @@ KOREKTY = {
     # W4, W5: kadr w proporcji pól planszy (1,875 / 1,37) – przy ogniskowej z JSON gzyms-attyka segmentu (W4)
     # i styk gzymsu skrzydła z gzymsem Mazowieckiej 19 (W5) wypadały poza górną krawędź; szerszy obiektyw i shift.
     'W4': dict(lens_mm=21, shift_y=0.18, **NIEBO_W3_W5,
-               zycie=dict(piesi=6, rower=((125.5, 33.0), (0.08, 1.0)))),
+               zycie=dict(piesi=4, rower=((125.5, 33.0), (0.08, 1.0)))),
     'W5': dict(lens_mm=24, shift_y=0.29, **NIEBO_W3_W5,
-               zycie=dict(piesi=7, auta=[(37.6, 24.0), (39.6, 31.0)], rower=((39.0, 16.5), (-0.29, -0.96)))),
+               zycie=dict(piesi=4, auta=[], rower=((39.0, 16.5), (-0.29, -0.96)))),
     # W9: punkt (126; 152) leży na jezdni mostu, 3,8 m od osi; z chodnika widok przecinają krzyżulce kratownicy
     # (płaszczyzny ±9,6 m). Pozycja dobrana przeszukaniem promieni na drzewie BVH mostu (117 promieni kadru bez trafień w kratownicę,
     # łańcuchy i wieszaki): 38 m od portalu pd. (JSON: 35 m), 9,3 m od osi – tuż przy płaszczyźnie kratownicy
@@ -131,12 +131,12 @@ def zycie_kadru(B, kon, k, x, y, tx, ty, lens):
     # ukrycie sylwetek zbyt bliskich obiektywowi
     istn = []
     for ob in list(coll.objects):
-        if ob.name.startswith('czlowiek_') and ob.type == 'MESH':
+        if (ob.name.startswith('czlowiek_') or ob.name.startswith('foto_czlowiek_')) and ob.type == 'MESH':
             d = math.hypot(ob.location.x - x, ob.location.y - y)
-            if d < 6.0 and not ob.hide_render:
+            if d < Z.get('min_odl', 9.0) and not ob.hide_render:
                 ob.hide_render = True
                 ukryte.append(ob)
-            else:
+            elif not ob.name.endswith(('_cien', '_ao')):
                 istn.append((ob.location.x, ob.location.y))
     przeszk = [(o.location.x, o.location.y) for o in bpy.data.objects
                if (o.instance_type == 'COLLECTION' and o.name.startswith('drzewo')) or o.name.startswith('latarnia')]
@@ -145,9 +145,11 @@ def zycie_kadru(B, kon, k, x, y, tx, ty, lens):
     # piesi
     proto = [o.data for o in coll.objects if o.name.startswith('czlowiek_') and o.type == 'MESH']
     proto = list({m.name: m for m in proto}.values())
+    from umwd.render import budynek3d_ludzie_foto as lf
+    foto = B.o.get('ludzie_foto', True) and bool(lf.dostepne())
     poz = []
     proby = 0
-    while len(poz) < Z.get('piesi', 0) and proby < 4000 and proto:
+    while len(poz) < Z.get('piesi', 0) and proby < 4000 and (proto or foto):
         proby += 1
         d = rng.uniform(9.0, 35.0)
         a = az0 + rng.uniform(-pol, pol)
@@ -160,6 +162,12 @@ def zycie_kadru(B, kon, k, x, y, tx, ty, lens):
         poz.append(p)
     kraw = jezdnia.boundary
     for i, p in enumerate(poz):
+        if foto:
+            zt = float(ctx.teren.z1(p[0], p[1])) + 0.03
+            ob = lf.postac(coll, lf.wybierz(rng, ('pieszy', 'urzednik', 'stoi', 'para')), p, zt, 'kadr_pieszy_%02d' % i,
+                           rng=rng)
+            nowe += [ob, bpy.data.objects.get(ob.name + '_cien'), bpy.data.objects.get(ob.name + '_ao')]
+            continue
         me = proto[i % len(proto)]
         ob = bpy.data.objects.new('kadr_pieszy_%02d' % i, me)
         coll.objects.link(ob)
@@ -201,8 +209,13 @@ def zycie_kadru(B, kon, k, x, y, tx, ty, lens):
     # rowerzysta
     if Z.get('rower'):
         (px, py), kier = Z['rower']
-        os_ = oto.rowerzysta(B, coll, (px, py), kier, float(ctx.teren.z1(px, py)) + 0.02, nazwa='kadr_rowerzysta')
-        nowe += [os_, bpy.data.objects.get('kadr_rowerzysta_rower')]
+        if foto:
+            ob = lf.postac(coll, lf.wybierz(rng, ('rower',)), (px, py), float(ctx.teren.z1(px, py)) + 0.02,
+                           'kadr_rowerzysta', rng=rng)
+            nowe += [ob, bpy.data.objects.get(ob.name + '_cien'), bpy.data.objects.get(ob.name + '_ao')]
+        else:
+            os_ = oto.rowerzysta(B, coll, (px, py), kier, float(ctx.teren.z1(px, py)) + 0.02, nazwa='kadr_rowerzysta')
+            nowe += [os_, bpy.data.objects.get('kadr_rowerzysta_rower')]
     return nowe, ukryte, dict(piesi=len(poz), auta=n_aut, rower=bool(Z.get('rower')), ukryte_bliskie=len(ukryte))
 
 
@@ -352,6 +365,8 @@ def main():
                                        niebo=k.get('niebo', 'proc'),
                                        odbicia=None if a.odbicia == 'brak' else a.odbicia)
         nowe_zycie, ukryci, opis_zycia = zycie_kadru(B, kon, k, x, y, tx, ty, k['lens_mm'])
+        from umwd.render import budynek3d_ludzie_foto as lf
+        lf.zwroc_do_kamery(cam.location, sw['az'] + 0.738)
         uwagi, traf = kontrola_kamery(sc, B, cam, k, kon['ctx'])
         print('[testy] %s  %s  słońce az %.1f° el %.1f°  ekspozycja %.2f' % (kid, k['czas'], sw['az'], sw['el'],
                                                                              sw['ekspozycja']))

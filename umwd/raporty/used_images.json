@@ -326,5 +326,21 @@
  "f9c9f1472110f7721ec8": {
   "path": "umwd/raporty/img/E_zmierzch-detal-1.jpg",
   "board": "spec_38"
+ },
+ "9ec6834c92f4c2093001": {
+  "path": "umwd/raporty/img/W5_test_photopeople.jpg",
+  "board": "spec_39"
+ },
+ "2641170a6ecaf16e8299": {
+  "path": "umwd/raporty/img/W5_people_crop.jpg",
+  "board": "spec_39"
+ },
+ "35cc35d840c9a770626a": {
+  "path": "umwd/raporty/img/E_zlota-godzina-5.jpg",
+  "board": "spec_39"
+ },
+ "3fb2c65302acd440af38": {
+  "path": "umwd/raporty/img/E_ulica-3.jpg",
+  "board": "spec_39"
  }
 }

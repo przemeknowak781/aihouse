@@ -1069,6 +1069,22 @@ def ludzie(B, ctx, coll, plac, zf):
                 poz.append(q)
     import shapely
     kraw = B.foot.boundary
+    # ludzie fotograficzni (Skalgubbar, billboardy) – gdy wycinki są w build/skalgubbar (uwagi 17.11)
+    from umwd.render import budynek3d_ludzie_foto as lf
+    if B.o.get('ludzie_foto', True) and lf.dostepne():
+        n_f = B.o.get('ludzie_foto_liczba', 22)
+        poz_f = poz[:n_f]
+        ogrod = Polygon([(55, -10), (100, -10), (100, 38), (55, 38)])
+        for i, p in enumerate(poz_f):
+            z = float(zf([p[0]], [p[1]])[0]) if plac.contains(Point(p)) else (
+                float(ctx.teren.z1(p[0], p[1]) - B.DZ + 0.03) if ctx is not None else 0.0)
+            rodzaje = ('rodzina', 'para', 'pieszy', 'stoi') if ogrod.contains(Point(p)) else \
+                ('pieszy', 'urzednik', 'stoi', 'para')
+            lf.postac(coll, lf.wybierz(rng, rodzaje), p, z + B.DZ, 'foto_czlowiek_%02d' % i, rng=rng)
+        B.info['ludzie'] = len(poz_f)
+        B.info['ludzie_foto'] = True
+        B.info['czasy_s']['ludzie'] = round(time.time() - t0, 1)
+        return
     for i, p in enumerate(poz):
         me, idzie = proto[rng.integers(len(proto))]
         ob = bpy.data.objects.new('czlowiek_%02d' % i, me)

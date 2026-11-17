@@ -1733,7 +1733,8 @@ def kontrola(D, res, plans, lo, pdfs, pdfchk, log):
             ("wskaźnik zł/m² PC", pl(tot / (K["PC_nad"] + K["PC_pod"]), 0), "", ""),
             ("wskaźnik zł/m² PU (I.12)", pl(tot / K["kat_PU"], 0), "", "")]
     L.append(md_table(["pozycja", "wartość [zł]", "Δ (F.14.B − odniesienie)", ""], rows, ["l", "r", "r", "l"]))
-    rez = sum(r["F"] for r in F["rows"] if r["opis"] and re.search(r"rezerw", r["opis"], re.I))
+    # v1.2b-fix: tylko wiersz rezerwy na nieprzewidziane (wcześniej regex „rezerw” łapał też „Rezerwowe źródło wody” i „oświetlenie rezerwowe”)
+    rez = sum(r["F"] for r in F["rows"] if r["opis"] and r["opis"].strip().lower().startswith("rezerwa na nieprzewidziane"))
     L.append(f"\nZapas do limitu: {pl(LIMIT_KOSZTU - tot)} zł ({pl(100 * (LIMIT_KOSZTU - tot) / LIMIT_KOSZTU, 1)} %); rezerwa na nieprzewidziane w gr. 18: "
              f"{pl(rez)} zł. Korekty poza modelem (koncepcja, rozdz. 12) dodane jako pozycje gr. 18: "
              + (", ".join(f"{n} {pl(v)} zł" for n, v in F["extras_md"]) if F["extras_md"] else "brak") + ".")
@@ -1766,8 +1767,10 @@ def kontrola(D, res, plans, lo, pdfs, pdfchk, log):
         pass
     # zgodność F.14.B ↔ F.15.C
     p = F["params"]
-    green_cost = (p.get("dach_ext") or 0) + (p.get("dach_int") or 0)
-    rows = [("dachy zielone: I.13 vs 3.12 + 3.13* (dach_ext + dach_int)", pl(S["green_roof"]), pl(green_cost), dpl(S["green_roof"] - green_cost)),
+    # v1.2b-fix: dach zielony z wierszy formularza 3.12 i 3.13* (ilości), nie z parametrów specyfikacji
+    green_rows = [r for r in F["rows"] if str(r.get("lp") or "").rstrip("*") in ("3.12", "3.13") and r.get("D") is not None]
+    green_cost = sum(r["D"] for r in green_rows) if green_rows else (p.get("dach_ext") or 0) + (p.get("dach_int") or 0)
+    rows = [("dachy zielone: I.13 vs wiersze F.14.B 3.12 + 3.13*", pl(S["green_roof"]), pl(green_cost), dpl(S["green_roof"] - green_cost)),
             ("PC nadziemna: I.3 vs A_nad", pl(K["PC_nad"]), pl(p["A_nad"]), dpl(K["PC_nad"] - p["A_nad"])),
             ("PC podziemna: I.4 vs A_pod", pl(K["PC_pod"]), pl(p["A_pod"]), dpl(K["PC_pod"] - p["A_pod"])),
             ("dźwigi: I.11 + I.11.1 vs 10.1 + 10.2", K["lifts_os"] + K["lifts_tow"], int(p["windy_os"] + p["windy_tow"]), dpl(K["lifts_os"] + K["lifts_tow"] - p["windy_os"] - p["windy_tow"], 0)),
@@ -1775,7 +1778,7 @@ def kontrola(D, res, plans, lo, pdfs, pdfchk, log):
     L.append("\nSpójność F.14.B ↔ F.15.C (ilości):\n")
     L.append(md_table(["wielkość", "F.15.C", "F.14.B (parametr)", "Δ"], rows))
     if abs(S["green_roof"] - green_cost) > 1:
-        issue("ISTOTNE", f"Dach zielony: F.15.C I.13 = {pl(S['green_roof'])} m² (D.* w budynek.json), F.14.B 3.12+3.13* = {pl(green_cost)} m² (parametr kosztów).")
+        issue("ISTOTNE", f"Dach zielony: F.15.C I.13 = {pl(S['green_roof'])} m² (D.* w budynek.json), F.14.B 3.12+3.13* = {pl(green_cost)} m² (wiersze formularza).")
     L.append("\nPoprawki błędów wzoru F.14.B: H163/H164 (wzór: `=F159`/`=H159`, czyli koszt budowy zamiast kosztu usługi) nadpisane kosztem "
              "Dokumentacji; brutto w każdym wierszu `=ROUND(F*(1+G),2)`; sumy grup i suma całkowita jako formuły po wstawieniu wierszy; "
              f"uzupełniono VAT 23 % w poz.: {', '.join(F['vat_fill']) or '–'}; uzupełniono j.m. w poz.: {', '.join(F['jm_fill']) or '–'}. "

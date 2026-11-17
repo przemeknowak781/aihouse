@@ -56,7 +56,7 @@ def columns():
 CORES = {
     "A": rect_uv(8.30, 12.45, 15.50, 20.85),
     "B": rect_uv(24.85, 0.50, 31.10, 9.90),
-    "C": rect_sd(0.5, 8.4, 8.6, 14.5),
+    "C": rect_sd(0.5, 8.45, 8.6, 14.55),       # v1.2b-fix: trzon C +0,05 m ku dziedzińcowi (korytarz skrzydła 1,825 m – _v12_trzony.py [T4])
     # szyb dźwigu T 2 000 kg przeniesiony z trzonu B do narożnika SE segmentu (P-I5), przystanki −2…4,
     # na parterze przy drzwiach od Wybrzeża (punkt odpadów, dostawy ręczne)
     "T": rect_uv(36.90, -9.70, 39.20, -6.45),
@@ -134,8 +134,9 @@ LEVELS = {
         "plant": {
             "warsztat PPT 40 + odpady 24 + magazyn MDS 20 + porządkowe 8 (M1, przy trzonie C; v1.2b: + porządkowe)":
                 (rect_sd(1.25, 0.75, 12.0, 14.4), 92),
-            "sanitariaty MDS / WC dostępne garażu 30 (pn. od trzonu A, za przedsionkiem dźwigów A1/A2 3,60 m – v1.2b)":
-                (rect_uv(8.30, 21.0, 16.0, 29.1), 30),
+            "sanitariaty MDS / WC dostępne garażu 30 + punkt przygotowania posiłków MDS 6 (rozp. 2025 poz. 932 § 8 ust. 2 pkt 3 – v1.2b-fix)"
+            " (pn. od trzonu A, za przedsionkiem dźwigów A1/A2 3,60 m – v1.2b)":
+                (rect_uv(8.30, 21.0, 16.0, 29.1), 36),
             "centrala wentylacyjna S 40 + pralnia MDS 10 (wsch. od trzonu B, piony w szachcie po dźwigu T; v1.2b: + pralnia); centrala P"
             " – kond. 1, pas zach.": (rect_uv(31.1, 0.6, 34.6, 16.6), 50),
             "woda szara – kompaktowa stacja podczyszczania (MBR) 27 (łuk NE, pn. od A2)": (rect_uv(30.0, 22.6, 39.4, 29.1), 27),

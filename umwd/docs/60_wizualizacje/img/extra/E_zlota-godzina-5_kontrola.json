@@ -55,7 +55,9 @@
   "budynek_s": 11.2,
   "zrodlo_sceny": "budowa od zera",
   "scena_s": 23.3,
-  "kontrola_s": 0.6
+  "kontrola_s": 0.6,
+  "render_s": 842.2,
+  "postprodukcja_s": 5.2
  },
  "uwagi": [],
  "info": [
@@ -151,5 +153,211 @@
   }
  },
  "horyzont_y": 0.365,
- "pochylenie_deg": 0.0
+ "pochylenie_deg": 0.0,
+ "png": "/home/user/aihouse/umwd/build/ujecia_dodatkowe/E_zlota-godzina-5.png",
+ "jpg": "umwd/docs/60_wizualizacje/img/extra/E_zlota-godzina-5.jpg",
+ "dodatki_w_kadrze": {},
+ "korekty": {
+  "lamele_korony": {
+   "luk_L_m": 21.991,
+   "lamele_szt": 21,
+   "szer_m": 0.35,
+   "glab_m": 0.6,
+   "rozstawy": "LkLLkLkLLkLLkLkLLkLk",
+   "zapas_krawedzi_m": 0.021,
+   "przechwycone_ze_Spec": 16,
+   "spec_pierwotna": [
+    0.35,
+    0.6,
+    13.4
+   ]
+  },
+  "oprawy_cieple_moc": 3.5999999046325684,
+  "post_przed": {
+   "zamglenie_udzial_kadru_w>0.3": 0.031,
+   "zamglenie_barwa_lin": [
+    0.3231,
+    0.3712,
+    0.3515
+   ],
+   "zamglenie_max_udzial": 0.596,
+   "zamglenie_pas_nieba_px": 49200,
+   "cfg": {
+    "mgla": {
+     "tryb": "zamglenie_poranne",
+     "start": 270,
+     "glebokosc": 260,
+     "sila": 0.6,
+     "wykladnik": 0.8,
+     "desat": 0.2
+    }
+   }
+  },
+  "wycinek": null,
+  "czas_calkowity_s": 848.2,
+  "zg5": {
+   "barka_pv": {
+    "srodek": [
+     145.0,
+     27.0
+    ],
+    "obrot_deg": -12.0,
+    "L": 20.0,
+    "B": 7.0,
+    "scian": 1380,
+    "usunieto_scian_uproszczonej": 24
+   },
+   "duw": {
+    "scian": 38195,
+    "okien": 2184,
+    "teren_z": 0.54,
+    "gzyms_z": 23.04,
+    "kalenica_z": 26.44,
+    "usunieto_scian_bloku": 62,
+    "obwod_m": 992.8,
+    "pole_m2": 9658.2,
+    "parametry": {
+     "rytm": 2.5,
+     "szer_okna": 1.2,
+     "rzedy": [
+      [
+       2.0,
+       4.3
+      ],
+      [
+       5.4,
+       7.4
+      ],
+      [
+       8.7,
+       10.7
+      ],
+      [
+       12.0,
+       14.0
+      ],
+      [
+       15.3,
+       17.3
+      ],
+      [
+       18.6,
+       20.4
+      ]
+     ],
+     "piwnica": [
+      0.55,
+      1.05,
+      0.85
+     ],
+     "cokol": 1.5,
+     "fryz": [
+      21.0,
+      21.8
+     ],
+     "gzyms": [
+      21.8,
+      22.5
+     ],
+     "wysieg_fryzu": 0.1,
+     "wysieg_gzymsu": 0.55,
+     "dach_h": 3.4,
+     "dach_spadek": 28.0,
+     "gl_okna": 0.25,
+     "tynk": [
+      0.43,
+      0.405,
+      0.35
+     ],
+     "cokol_kol": [
+      0.27,
+      0.26,
+      0.245
+     ],
+     "gzyms_kol": [
+      0.46,
+      0.435,
+      0.38
+     ],
+     "dach_kol": [
+      0.22,
+      0.245,
+      0.265
+     ]
+    }
+   },
+   "kontrola": {
+    "ZG5_DUW": {
+     "x0": 0.429,
+     "x1": 0.934,
+     "y0": 0.345,
+     "y1": 0.593
+    },
+    "ZG5_barka_pv": {
+     "x0": 0.043,
+     "x1": 0.318,
+     "y0": 0.254,
+     "y1": 0.357
+    },
+    "ZG3_barka": {
+     "x0": 0.436,
+     "x1": 0.729,
+     "y0": 0.273,
+     "y1": 0.377
+    },
+    "piesi_bulwar": {
+     "czlowiek_bulwar5_0": {
+      "kadr": {
+       "x0": 0.034,
+       "x1": 0.034,
+       "y0": 0.337,
+       "y1": 0.367
+      },
+      "trafienie_promienia": {
+       "glowa": "czlowiek_bulwar5_0",
+       "piers": "mala_architektura",
+       "pas": "mala_architektura",
+       "kolana": "mala_architektura"
+      },
+      "odl_m": 174.3
+     },
+     "czlowiek_bulwar5_1": {
+      "kadr": {
+       "x0": 0.08,
+       "x1": 0.08,
+       "y0": 0.338,
+       "y1": 0.366
+      },
+      "trafienie_promienia": {
+       "glowa": "czlowiek_bulwar5_1",
+       "piers": "mala_architektura",
+       "pas": "mala_architektura",
+       "kolana": "mala_architektura"
+      },
+      "odl_m": 176.1
+     },
+     "czlowiek_bulwar5_2": {
+      "kadr": {
+       "x0": 0.088,
+       "x1": 0.088,
+       "y0": 0.338,
+       "y1": 0.366
+      },
+      "trafienie_promienia": {
+       "glowa": "czlowiek_bulwar5_2",
+       "piers": "mala_architektura",
+       "pas": "mala_architektura",
+       "kolana": "mala_architektura"
+      },
+      "odl_m": 175.7
+     }
+    },
+    "udzial_kadru": {
+     "ZG5_barka_pv": 0.015,
+     "ZG3_barka": 0.0143,
+     "ZG5_DUW": 0.0332
+    }
+   }
+  }
+ }
 }
