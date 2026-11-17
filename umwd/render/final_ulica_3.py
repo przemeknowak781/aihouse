@@ -21,7 +21,8 @@ Poprawki tego ujęcia wg uwag jurorów (po zbudowaniu / wczytaniu sceny, idempot
    ciemny kadłub, przeszklony salon z wnętrzem, markiza, relingi, taras z parasolami i donicami, cumy, kładka).
    Funkcje są importowane bez łańcucha nakładek tamtego ujęcia (łańcuch ``U.zbuduj_scene`` przywracany po imporcie).
    Z tamtej nakładki także: zmarszczka wody (oś widzenia tego ujęcia) i wyrównanie uskoku lica muru nabrzeża
-   (pionowa smuga cienia), trzech pieszych na bulwarze przy nabrzeżu.
+   (pionowa smuga cienia), trzech pieszych na bulwarze przy nabrzeżu (wycinki fotograficzne ``budynek3d_ludzie_foto``,
+   gdy scena ich używa; billboardy obracane frontem do kamery po ustawieniu światła, cienie – do słońca).
 2. **Druga barka (pd., (145; 27), 20 × 7 m)** – jeśli wchodzi w kadr, też byłaby „pudłem”: ``"barka_pd": "usun"``
    w JSON usuwa jej ściany z obiektu ``barki`` (przystań w głębi, 110 m od kamery).
 3. **Lekka mgła nad wodą** (``post_przed.mgla.tryb = 'woda'``) – krok przed wspólną postprodukcją: z passu Depth
@@ -91,12 +92,37 @@ def usun_barke_pd():
     return len(fs)
 
 
+def piesi_bulwar():
+    """Trzech pieszych na koronie nabrzeża przy barce (pozycje z zlota-godzina-3): wycinki fotograficzne
+    (budynek3d_ludzie_foto – jak reszta sylwetek sceny, gdy są dostępne), inaczej metaballe z ZG3.piesi_bulwar."""
+    from umwd.render import budynek3d_ludzie_foto as lf
+    if not lf.dostepne() or not any(o.name.startswith('foto_czlowiek') for o in bpy.data.objects):
+        return ZG3.piesi_bulwar()
+    if bpy.data.objects.get('foto_czlowiek_bulwar_0') is not None:
+        return 0
+    sc = bpy.context.scene
+    dg = bpy.context.evaluated_depsgraph_get()
+    kat = U.mapa_kategorii()
+    coll = bpy.data.collections.get('ZG3_barka') or sc.collection
+    rng = np.random.default_rng(23)
+    n = 0
+    for i, (e, nn, kier, ip) in enumerate(ZG3.PIESI_BULWAR):
+        zt, _ = U.podloze(sc, dg, e, nn, kat=kat)
+        if zt is None:
+            continue
+        wpis = lf.wybierz(rng, ('pieszy', 'para') if i < 2 else ('stoi',))
+        lf.postac(coll, wpis, (e, nn), zt + 0.01, 'foto_czlowiek_bulwar_%d' % i, rng=rng)
+        n += 1
+    print('[ulica-3] piesi na bulwarze (wycinki fotograficzne): %d' % n)
+    return n
+
+
 def popraw_scene():
     k = _wpis()
     ZG3.wyrownaj_uskok_muru()
     ZG3.barka_restauracja()
     ZG3.zmarszczka_wody(az_osi=float(k.get('os_zmarszczki', 197.0)))
-    ZG3.piesi_bulwar()
+    piesi_bulwar()
     if k.get('barka_pd') == 'usun':
         usun_barke_pd()
 
@@ -117,6 +143,19 @@ def wczytaj_blend(*a, **k):
 
 
 U.zbuduj_scene, U.wczytaj_blend = zbuduj_scene, wczytaj_blend
+
+_us = U.ustaw_swiatlo
+
+
+def ustaw_swiatlo(sc, k):
+    """Po świetle (kamera już ustawiona): billboardy ludzi fotograficznych frontem do kamery, cienie – do słońca."""
+    sw = _us(sc, k)
+    from umwd.render import budynek3d_ludzie_foto as lf
+    sw['billboardy_obrocone'] = lf.zwroc_do_kamery(sc.camera.matrix_world.translation, sw['az'] + 0.738)
+    return sw
+
+
+U.ustaw_swiatlo = ustaw_swiatlo
 
 
 # ============================================================================================== mgła nad wodą
@@ -373,7 +412,8 @@ def kontrola_ulica3(sc):
                                 naroza_w_kadrze=sum(int(wk) for _, wk in vs))
     # ludzie w kadrze (głowa widoczna)
     ludzie = []
-    for ob in [o for o in sc.objects if o.name.startswith('czlowiek') and not o.hide_render]:
+    for ob in [o for o in sc.objects if (o.name.startswith('czlowiek') or o.get('billboard') == 'kamera')
+               and not o.hide_render]:
         bb = [ob.matrix_world @ Vector(cc) for cc in ob.bound_box]
         top = max(bb, key=lambda q: q.z)
         glowa = Vector((sum(q.x for q in bb) / 8, sum(q.y for q in bb) / 8, top.z - 0.12))
