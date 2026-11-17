@@ -326,6 +326,11 @@ for rin in (None, 12.0, 11.0, 10.2):
     n, par = max_rows_seats(rin)
     lab = "bez galerii w łuku" if rin is None else f"galeria w łuku, krawędź R {rin:.1f} m (głęb. {13.5 - rin:.1f} m)"
     print(f"  {lab:45s} → maks. {n:2d} stanowisk {'✔' if n >= 44 else '✗ < 44'}  (F_u, R1) = {par}")
+need = 31 * M.GAL_SEAT_W + 3 * M.GAL_WC_W + 2 * 1.2
+arc_len = math.radians(90 - 10) * (13.5 - 0.6)
+print(f"  Galeria 1-rzędowa w łuku (głęb. 1,5 m): front {arc_len:.1f} m < potrzebne {need:.1f} m (31 miejsc + 3 wózki + 2 wejścia);"
+      " miejsce dla wózka 1,40 m + przejście za rzędem 1,20 m wymaga głęb. ≥ 2,6 m → ≤ 38 stanowisk; dojście z P1/P2"
+      " prowadziłoby nad końcami rzędów (poufność) ✗")
 print("Galeria pd. (v1.0) przykrywa prezydium – wykluczona (I1). Galeria zach. nad holem dźwigów – przyjęta.")
 
 # -------------------------------------------------------------------------------------------------

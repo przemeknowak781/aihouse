@@ -105,7 +105,7 @@ for lvl, D, doors, circ in (("S", S, M.DOORS_S, CIRC_S), ("ANT", A, M.DOORS_ANT,
         if not reach[k]:
             miss.append((lvl, k))
 print("Pomieszczenia bez drzwi na komunikację:", miss if miss else "brak (K1 usunięte)")
-print("Uwaga: SWD.01 (sala) – 4 drzwi: NW do holu 1,6 m, SW 1,6 m i SE 1,6 m do kuluaru, drzwi prezydium 1,0 m;"
+print("Uwaga: SWD.01 (sala) – 4 drzwi: NW do holu 1,6 m, SW 1,2 m i SE 1,6 m do kuluaru, drzwi prezydium 1,0 m;"
       " galeria – drzwi z korytarza publicznego i drzwi przedsionka A.")
 
 # -------------------------------------------------------------------------------------------------
@@ -123,7 +123,8 @@ for k in order:
     d = (a - pr) if pr else None
     flag = ""
     if rg:
-        flag = "✔" if rg[0] - 1e-6 <= a <= rg[1] + 1e-6 else "✗"
+        aa = a + (area.get(k + "g", 0.0) if k in ("SWD.01", "SWD.02") else 0.0)
+        flag = ("✔" if rg[0] - 1e-6 <= aa <= rg[1] + 1e-6 else "✗") + ("Σ" if k in ("SWD.01", "SWD.02") else "")
     print(f"{k:9s} {a:9.2f} {pr if pr else '':>8} {str(rg) if rg else '':>11s} {('%+.1f' % d) if d is not None else '':>7s}  {lvl:5s} {flag} {nm[:60]}")
     tab.append((k, a, pr, rg, d, lvl))
 sala_tot = area["SWD.01"] + area["SWD.01g"]

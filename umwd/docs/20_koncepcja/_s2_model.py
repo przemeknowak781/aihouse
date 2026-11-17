@@ -307,13 +307,13 @@ def build_rows():
 # ------------------------------------------------------------------------------------------------
 PROG = {   # kod: (nazwa, kategoria, program_m2, zakres)
     "SWD.01": ("Sala obrad – płyta (44 stałe stanowiska + prezydium + mównica, media, goście, obsługa, PJM)", "sala", 320, (280, 380)),
-    "SWD.01g": ("Galeria publiczności (część SWD.01): 3 rzędy, 31 miejsc + 3 dla wózków", "sala", None, None),
+    "SWD.01g": ("Galeria publiczności (część SWD.01): 2 rzędy (+0,00 / +0,90), 31 miejsc + 3 dla wózków", "sala", None, None),
     "SWD.02": ("Hol reprezentacyjny – poziom dolny (pustka 2-kond. NW, okna pn. i zach., hol dźwigów A1/A2)", "hol", 150, (120, 220)),
     "SWD.02g": ("Hol reprezentacyjny – poziom górny (antresola holu nad klubami i pasem pn.)", "hol", None, None),
     "SWD.03": ("Sala multimedialna / poczekalnia gości – strefa otwarta na antresoli holu (ekran, głośniki kierunkowe, pętla)", "antresola", 40, (30, 60)),
     "SWD.04": ("Reżyserka – nagrywanie i transmisja (przeszklenie na prezydium i rzędy)", "zamk", 20, (15, 30)),
     "SWD.05": ("Przestrzeń socjalno-gastronomiczna (bar z przyłączami) na antresoli holu", "antresola", 40, (30, 60)),
-    "SWD.06": ("Szatnia strefy Sejmiku – lada 4,8 m + wieszaki", "hol", 15, (12, 20)),
+    "SWD.06": ("Szatnia strefy Sejmiku – lada 4,1 m + wieszaki (otwarta na hol)", "hol", 15, (12, 20)),
     "SWD.07": ("Pokój matki z dzieckiem", "zamk", 10, (8, 12)),
     "SWD.08": ("Sala komisji 50 os.", "zamk", 100, (90, 120)),
     "SWD.09": ("Sala komisji 30 os.", "zamk", 60, (54, 72)),

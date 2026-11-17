@@ -566,14 +566,15 @@ def wozek(B, coll, zf):
     sp = B.spec
     cx, cy = sp.luk['srodek']
     R11 = sp.podcien_R
-    # pozycja: wsch. część podcienia (kąt łuku 26° od elewacji wsch.), jazda wzdłuż podcienia ku drzwiom (45°)
-    kat = B.o.get('wozek_kat_luku', 26.0)
+    # pozycja: w podcieniu między kolumnami 45° i 60° (kąt łuku liczony od elewacji wsch.), jazda wzdłuż podcienia
+    # ku drzwiom w osi 45° – z placu (W3) widoczna z boku, między kolumnami
+    kat = B.o.get('wozek_kat_luku', 52.0)
     pk = np.subtract(sp.z_uv(26.0 + 14.0 * math.cos(math.radians(kat)), 15.7 + 14.0 * math.sin(math.radians(kat))),
                      (cx, cy))
     a_r = math.atan2(pk[1], pk[0])
     kier_n = np.array([math.cos(a_r), math.sin(a_r)])
     p = np.array([cx, cy]) + kier_n * (R11 + 1.4)
-    kier_ruchu = np.array([-kier_n[1], kier_n[0]])                   # stycznie, przeciwnie do zegara → ku osi 45°
+    kier_ruchu = np.array([-kier_n[1], kier_n[0]]) * (1.0 if kat < 45.0 else -1.0)   # stycznie, ku osi 45°
     z = float(zf([p[0]], [p[1]])[0])
     mat = B.mat('ludzie')
     mm = B.mat('metal')
@@ -703,7 +704,7 @@ def ludzie(B, ctx, coll, plac, zf):
     poz = []
     # postaci „scenariuszowe”: piesi z mostu ku Bramie Mostowej i wzdłuż podcienia (skala wejścia głównego)
     cx, cy = B.spec.luk['srodek']
-    for kat, rr in ((12.0, 16.5), (20.0, 15.2), (21.0, 15.8), (38.0, 17.5), (55.0, 15.6), (64.0, 19.0), (80.0, 16.2)):
+    for kat, rr in ((12.0, 16.5), (20.0, 15.2), (21.0, 15.8), (38.0, 17.5), (67.0, 16.4), (63.0, 19.5), (80.0, 16.2)):
         pk = np.subtract(B.spec.z_uv(26.0 + 14.0 * math.cos(math.radians(kat)), 15.7 + 14.0 * math.sin(math.radians(kat))),
                          (cx, cy))
         q = (cx + pk[0] / 14.0 * rr, cy + pk[1] / 14.0 * rr)

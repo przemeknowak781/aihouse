@@ -1694,33 +1694,23 @@
    "rzedy": [
     {
      "nr": 1,
-     "u_oka": 20.95,
+     "u_oka": 21.45,
      "podest_m": 0.0,
      "v": [
-      16.1,
+      12.85,
       22.45
      ],
-     "uklad": "3 miejsca dla wózków 0,90 × 1,40 + 3 opiekunów + 4 miejsca"
+     "uklad": "3 miejsca dla wózków 0,90 × 1,40 + 3 opiekunów + 10 miejsc; kolano przy balustradzie"
     },
     {
      "nr": 2,
-     "u_oka": 20.05,
-     "podest_m": 0.45,
-     "v": [
-      16.1,
-      22.45
-     ],
-     "uklad": "12 miejsc × 0,52 m"
-    },
-    {
-     "nr": 3,
-     "u_oka": 19.15,
+     "u_oka": 20.6,
      "podest_m": 0.9,
      "v": [
-      16.1,
+      12.85,
       22.45
      ],
-     "uklad": "12 miejsc × 0,52 m"
+     "uklad": "18 miejsc × 0,52 m na podeście +0,90 (głęb. rzędu 0,85; 6 stopni 0,15 × 0,30 przy końcach)"
     }
    ],
    "balustrada": "część pionowa 0,70 m + pozioma 0,50 m (WT § 298 ust. 7)"
@@ -2894,7 +2884,7 @@
    ]
   },
   "SWD.06": {
-   "nazwa": "Szatnia strefy Sejmiku – lada 4,8 m + wieszaki",
+   "nazwa": "Szatnia strefy Sejmiku – lada 4,1 m + wieszaki (otwarta na hol)",
    "kategoria": "hol",
    "poziom": "S",
    "pow_m2": 12.5,
@@ -4471,7 +4461,7 @@
    ]
   },
   "SWD.01g": {
-   "nazwa": "Galeria publiczności (część SWD.01): 3 rzędy, 31 miejsc + 3 dla wózków",
+   "nazwa": "Galeria publiczności (część SWD.01): 2 rzędy (+0,00 / +0,90), 31 miejsc + 3 dla wózków",
    "kategoria": "sala",
    "poziom": "ANT",
    "pow_m2": 65.32,

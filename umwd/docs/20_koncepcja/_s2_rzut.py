@@ -94,7 +94,7 @@ draw(ax, M.LECTERN, "#c0392b", z=6)
 for (u, v, t) in M.floor_seats():
     if t in ("gosc", "media", "obsluga", "PJM"):
         ax.plot(u, v, "o", ms=2.0, color={"gosc": "#1f77b4", "media": "#9467bd", "obsluga": "#555", "PJM": "#d62728"}[t], zorder=12)
-label(ax, S["SWD.01"], f"SWD.01 sala obrad\npłyta {S['SWD.01'].area:.1f} m²\n47 stanowisk (43 + 4 ♿)", fs=6, dy=2.0)
+ax.text(28.6, 17.7, f"SWD.01 sala obrad – płyta {S['SWD.01'].area:.1f} m²\n47 stanowisk (43 + 4 ♿)", fontsize=5.6, ha="center", zorder=12)
 ax.text(31.0, 23.5, "pochylnie 5 %", fontsize=4.6, color="#a0007a", zorder=12)
 ax.text(24.4, 27.7, "goście 12", fontsize=4.6, color="#1f77b4", zorder=12)
 ax.text(30.3, 27.2, "media 8", fontsize=4.6, color="#9467bd", zorder=12)
@@ -156,7 +156,10 @@ ax.add_patch(plt.Rectangle((-6.5, 0), 6.5 + 0.55, -0.35, fc="#bbb"))
 ax.add_patch(plt.Rectangle((-6.0, H - 0.3), 6.55, 0.3, fc="#999"))                        # strop antresoli
 ax.add_patch(plt.Rectangle((0.45, H), 0.10, M.GAL_CURB_H, fc="#555"))                      # cokół
 ax.add_patch(plt.Rectangle((0.45, H + M.GAL_CURB_H), 0.04, M.GAL_GLASS_H - M.GAL_CURB_H, fc="#9ecae1", alpha=0.7))  # szkło
-ax.add_patch(plt.Rectangle((-0.95 - 0.85, H), 0.85 + 0.0, M.GAL_ROWS[1][2], fc="#d9c7a6"))  # podest rzędu 2
+x_r2 = M.GAL_ROWS[1][1] - M.GAL_ROWS[0][1]
+ax.add_patch(plt.Rectangle((x_r2 - 0.45, H), 0.85, M.GAL_ROWS[1][2], fc="#d9c7a6"))    # podest rzędu 2 (+0,90)
+ax.add_patch(plt.Rectangle((0.25, 0), 0.30, H - 0.3, fc="#999"))                          # ściana sali pod galerią
+ax.text(-3.0, 1.6, "hol dźwigów A1/A2\n(pod galerią, h 3,30)", fontsize=6, ha="center")
 ax.plot([-6.5, 14], [M.H_SALA, M.H_SALA], "--", color="#777", lw=0.6)
 ax.text(10.5, M.H_SALA + 0.08, "spód kratownic +6,85", fontsize=6)
 for (su, sz), nm in zip(seats, ("rząd 1", "rząd 2")):
@@ -168,7 +171,8 @@ for (su, sz), nm in zip(seats, ("rząd 1", "rząd 2")):
         ax.plot([x, s_of(*T)], [sz, zt], "-", color=c, lw=0.7)
 for (T, zt, tn, c) in targets:
     ax.plot(s_of(*T), zt, "o", color=c, ms=3)
-    ax.text(s_of(*T), zt - 0.35, tn, fontsize=6, color=c, ha="center")
+    ax.text(s_of(*T), zt - (0.35 if "mówca" in tn else 0.6 if "skrajne" in tn else 0.35), tn, fontsize=6, color=c,
+            ha="right" if "skrajne" in tn else "left")
 for r in rows:
     # głowy radnych na drodze linii (rzut) – poglądowo na promieniu do prezydium
     pass

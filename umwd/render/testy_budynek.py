@@ -46,10 +46,13 @@ KAMERY_DODATKOWE = {
 # korekty kadrów (z uzasadnieniem) – stosowane, gdy kamera ze specyfikacji nie pokazuje wymaganej treści
 KOREKTY = {
     # W3 (decyzja koordynatora 17.11): stanowisko z poziomu człowieka ≥ 30 m od lica łuku, z którego widać Bramę
-    # Mostową (podcień z napisem w nadprożu) i całą koronę. Wybór przeszukaniem: skarpa przyczółka mostu
-    # (107,5; 112,3), ok. 37 m od lica (z 33 m przy 24 mm nie mieści się posadzka podcienia razem z attyką),
-    # najmniej kolizji osi z istniejącymi zakrzewieniami przyczółka; oś na środek łuku, 24 mm, shift 0,26.
-    'W3': dict(kamera_e_n_z=(107.5, 112.3, 3.38), cel_e_n_z=(103.4, 74.1, 16.0), lens_mm=24, shift_y=0.26),
+    # Mostową (podcień z napisem w nadprożu) i całą koronę z attyką. Przy 24 mm i kadrze 3:2 rozpiętość
+    # posadzka podcienia → attyka (+37,2) mieści się dopiero z ≥ 38 m – tam oś przecinają istniejące krzewy
+    # przyczółka mostu (krzew_61/62, poza granicą opracowania, zostają). Przeszukanie promieni (drzwi, kolumny, napis
+    # w 9 kierunkach łuku + attyka) dało czyste stanowisko na skraju chodnika przy schodach przyczółka (109,0; 107,5),
+    # 33,1 m od lica łuku; ogniskowa 19 mm z przesunięciem 0,267 (piony zachowane, ~3 m nieba nad attyką).
+    # Wariant 24 mm z 37 m (107,5; 112,3; shift 0,26) – krzewy zasłaniają prawą część podcienia (patrz budynek_3d.md).
+    'W3': dict(kamera_e_n_z=(109.0, 107.5, 2.67), cel_e_n_z=(103.4, 74.1, 16.0), lens_mm=19, shift_y=0.267),
     # W9: punkt (126; 152) leży na jezdni mostu, 3,8 m od osi; z chodnika widok przecinają krzyżulce kratownicy
     # (płaszczyzny ±9,6 m). Pozycja dobrana przeszukaniem promieni na drzewie BVH mostu (117 promieni kadru bez trafień w kratownicę,
     # łańcuchy i wieszaki): 38 m od portalu pd. (JSON: 35 m), 9,3 m od osi – tuż przy płaszczyźnie kratownicy
@@ -114,9 +117,23 @@ def kontrola_kamery(sc, B, kam, k, ctx):
     return uwagi, trafienia
 
 
-def zapisz_jpg(png, jpg, q=93):
+def preset_postprodukcji(k, sw):
+    """Preset ``tools/postprodukcja.py``: jawny w kamerze (``preset``) albo z wysokości słońca i kamery."""
+    if k.get('preset'):
+        return k['preset']
+    if sw['el'] < 6.0:
+        return 'zmierzch'
+    return 'lot' if k['kamera_e_n_z'][2] > 25.0 else 'dzien'
+
+
+def zapisz_jpg(png, jpg, q=93, preset=None):
+    """PNG → JPG ≤ 1 MB; ostatni krok: wspólna postprodukcja kompletu (``tools/postprodukcja.py``, preset)."""
     from PIL import Image
     im = Image.open(png).convert('RGB')
+    if preset:
+        sys.path.insert(0, str(UMWD / 'tools'))
+        import postprodukcja
+        im = postprodukcja.process(im, postprodukcja.PRESETS[preset])
     while True:
         im.save(jpg, quality=q, optimize=True)
         if Path(jpg).stat().st_size <= 1_000_000 or q < 50:
@@ -138,6 +155,9 @@ def main():
     ap.add_argument('--out', default=str(OUT))
     ap.add_argument('--tylko-kontrola', action='store_true', help='bez renderu – tylko kontrola kamer')
     ap.add_argument('--odbicia', default='m09_30', help="środowisko odbić: m09_30|m09_40|m09_45|brak")
+    ap.add_argument('--bez-postprodukcji', action='store_true', help='bez kroku tools/postprodukcja.py')
+    ap.add_argument('--wycinek', nargs=4, type=float, default=None, metavar=('X0', 'X1', 'Y0', 'Y1'),
+                    help='render tylko wycinka kadru (ułamki szerokości/wysokości, y od dołu) – kontrola detalu')
     a = ap.parse_args()
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
@@ -176,12 +196,17 @@ def main():
         if not a.tylko_kontrola:
             png = out / ('_tmp_%s.png' % kid)
             sc.render.filepath = str(png)
+            if a.wycinek:
+                sc.render.use_border = sc.render.use_crop_to_border = True
+                (sc.render.border_min_x, sc.render.border_max_x,
+                 sc.render.border_min_y, sc.render.border_max_y) = a.wycinek
             t2 = time.time()
             bpy.ops.render.render(write_still=True)
             dt = time.time() - t2
-            jpg = out / ('%s%s.jpg' % (a.prefix, kid))
-            zapisz_jpg(png, jpg)
-            wpis.update(render_s=round(dt, 1), plik=str(jpg))
+            jpg = out / ('%s%s%s.jpg' % (a.prefix, kid, '_wycinek' if a.wycinek else ''))
+            preset = None if a.bez_postprodukcji else preset_postprodukcji(k, sw)
+            zapisz_jpg(png, jpg, preset=preset)
+            wpis.update(render_s=round(dt, 1), plik=str(jpg), postprodukcja=preset)
             print('[testy] %s: %.1f s → %s' % (kid, dt, jpg))
         raport['kamery'][kid] = wpis
     # raport kumulowany (przebiegi po jednej kamerze dopisują swoje wpisy)

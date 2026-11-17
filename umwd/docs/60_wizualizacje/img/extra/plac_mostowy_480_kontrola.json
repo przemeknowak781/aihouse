@@ -37,10 +37,12 @@
  "probki": 16,
  "czasy_s": {
   "kontekst_s": 9.4,
-  "budynek_s": 4.2,
+  "budynek_s": 4.3,
   "zrodlo_sceny": "budowa od zera",
-  "scena_s": 13.6,
-  "kontrola_s": 0.7
+  "scena_s": 13.7,
+  "kontrola_s": 0.6,
+  "render_s": 10.3,
+  "postprodukcja_s": 0.2
  },
  "uwagi": [],
  "info": [
@@ -75,7 +77,7 @@
    "x1": 1.009,
    "y0": 0.011,
    "y1": 1.603,
-   "w_kadrze": true,
+   "rzut_w_kadrze": true,
    "uciete": [
     "prawo",
     "góra"
@@ -86,7 +88,7 @@
    "x1": 1.257,
    "y0": 0.005,
    "y1": 0.97,
-   "w_kadrze": true,
+   "rzut_w_kadrze": true,
    "uciete": [
     "prawo"
    ]
@@ -96,7 +98,7 @@
    "x1": 0.63,
    "y0": 0.053,
    "y1": 0.406,
-   "w_kadrze": true,
+   "rzut_w_kadrze": true,
    "uciete": []
   }
  },
@@ -135,5 +137,7 @@
   }
  },
  "horyzont_y": 0.08,
- "pochylenie_deg": 0.0
+ "pochylenie_deg": 0.0,
+ "png": "/home/user/aihouse/umwd/build/ujecia_dodatkowe/plac_mostowy_480.png",
+ "jpg": "/home/user/aihouse/umwd/docs/60_wizualizacje/img/extra/plac_mostowy_480.jpg"
 }
